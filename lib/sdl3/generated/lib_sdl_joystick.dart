@@ -1168,6 +1168,9 @@ int sdlGetJoystickButton(Pointer<SdlJoystick> joystick, int button) {
 /// Each call to this function cancels any previous rumble effect, and calling
 /// it with 0 intensity stops any rumbling.
 ///
+/// This function requires you to process SDL events or call
+/// SDL_UpdateJoysticks() to update rumble state.
+///
 /// \param joystick The joystick to vibrate
 /// \param low_frequency_rumble The intensity of the low frequency (left)
 /// rumble motor, from 0 to 0xFFFF
@@ -1202,6 +1205,9 @@ int sdlRumbleJoystick(Pointer<SdlJoystick> joystick, int lowFrequencyRumble,
 /// a whole. This is currently only supported on Xbox One controllers. If you
 /// want the (more common) whole-controller rumble, use SDL_RumbleJoystick()
 /// instead.
+///
+/// This function requires you to process SDL events or call
+/// SDL_UpdateJoysticks() to update rumble state.
 ///
 /// \param joystick The joystick to vibrate
 /// \param left_rumble The intensity of the left trigger rumble motor, from 0

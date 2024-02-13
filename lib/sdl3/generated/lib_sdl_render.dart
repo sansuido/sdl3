@@ -166,12 +166,12 @@ Pointer<SdlRenderer> sdlCreateRenderer(
 ///
 /// These are the supported properties:
 ///
-/// - `SDL_PROP_RENDERER_CREATE_WINDOW_POINTER`: the window where rendering is
-/// displayed
-/// - `SDL_PROP_RENDERER_CREATE_SURFACE_POINTER`: the surface where rendering
-/// is displayed, if you want a software renderer without a window
 /// - `SDL_PROP_RENDERER_CREATE_NAME_STRING`: the name of the rendering driver
 /// to use, if a specific one is desired
+/// - `SDL_PROP_RENDERER_CREATE_WINDOW_POINTER`: the window where rendering is
+/// displayed, required if this isn't a software renderer using a surface
+/// - `SDL_PROP_RENDERER_CREATE_SURFACE_POINTER`: the surface where rendering
+/// is displayed, if you want a software renderer without a window
 /// - `SDL_PROP_RENDERER_CREATE_OUTPUT_COLORSPACE_NUMBER`: an SDL_ColorSpace
 /// value describing the colorspace for output to the display, defaults to
 /// SDL_COLORSPACE_SRGB. The direct3d11 and direct3d12 renderers support
@@ -307,6 +307,14 @@ int sdlGetRendererInfo(
 ///
 /// The following read-only properties are provided by SDL:
 ///
+/// - `SDL_PROP_RENDERER_NAME_STRING`: the name of the rendering driver
+/// - `SDL_PROP_RENDERER_WINDOW_POINTER`: the window where rendering is
+/// displayed, if any
+/// - `SDL_PROP_RENDERER_SURFACE_POINTER`: the surface where rendering is
+/// displayed, if this is a software renderer without a window
+/// - `SDL_PROP_RENDERER_OUTPUT_COLORSPACE_NUMBER`: an SDL_ColorSpace value
+/// describing the colorspace for output to the display, defaults to
+/// SDL_COLORSPACE_SRGB.
 /// - `SDL_PROP_RENDERER_D3D9_DEVICE_POINTER`: the IDirect3DDevice9 associated
 /// with the renderer
 /// - `SDL_PROP_RENDERER_D3D11_DEVICE_POINTER`: the ID3D11Device associated
@@ -478,8 +486,8 @@ Pointer<SdlTexture> sdlCreateTextureFromSurface(
 /// - `SDL_PROP_TEXTURE_CREATE_COLORSPACE_NUMBER`: an SDL_ColorSpace value
 /// describing the texture colorspace, defaults to SDL_COLORSPACE_SCRGB for
 /// floating point textures, SDL_COLORSPACE_HDR10 for 10-bit textures,
-/// SDL_COLORSPACE_SRGB for other RGB textures and
-/// SDL_COLORSPACE_BT601_LIMITED for YUV textures.
+/// SDL_COLORSPACE_SRGB for other RGB textures and SDL_COLORSPACE_JPEG for
+/// YUV textures.
 /// - `SDL_PROP_TEXTURE_CREATE_FORMAT_NUMBER`: one of the enumerated values in
 /// SDL_PixelFormatEnum, defaults to the best RGBA format for the renderer
 /// - `SDL_PROP_TEXTURE_CREATE_ACCESS_NUMBER`: one of the enumerated values in
@@ -510,6 +518,12 @@ Pointer<SdlTexture> sdlCreateTextureFromSurface(
 /// - `SDL_PROP_TEXTURE_CREATE_D3D12_TEXTURE_V_POINTER`: the ID3D12Resource
 /// associated with the V plane of a YUV texture, if you want to wrap an
 /// existing texture.
+///
+/// With the metal renderer:
+///
+/// - `SDL_PROP_TEXTURE_CREATE_METAL_PIXELBUFFER_POINTER`: the CVPixelBufferRef
+/// associated with the texture, if you want to create a texture from an
+/// existing pixel buffer.
 ///
 /// With the opengl renderer:
 ///
@@ -1568,6 +1582,7 @@ int sdlConvertEventToRenderCoordinates(
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetRenderViewport
+/// \sa SDL_RenderViewportSet
 ///
 /// ```c
 /// extern DECLSPEC int SDLCALL SDL_SetRenderViewport(SDL_Renderer *renderer, const SDL_Rect *rect)
@@ -1590,6 +1605,7 @@ int sdlSetRenderViewport(Pointer<SdlRenderer> renderer, Pointer<SdlRect> rect) {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
+/// \sa SDL_RenderViewportSet
 /// \sa SDL_SetRenderViewport
 ///
 /// ```c
@@ -1601,6 +1617,32 @@ int sdlGetRenderViewport(Pointer<SdlRenderer> renderer, Pointer<SdlRect> rect) {
       int Function(Pointer<SdlRenderer> renderer,
           Pointer<SdlRect> rect)>('SDL_GetRenderViewport');
   return sdlGetRenderViewportLookupFunction(renderer, rect);
+}
+
+///
+/// Return whether an explicit rectangle was set as the viewport.
+///
+/// This is useful if you're saving and restoring the viewport and want to know
+/// whether you should restore a specific rectangle or NULL. Note that the
+/// viewport is always reset when changing rendering targets.
+///
+/// \param renderer the rendering context
+/// \returns SDL_TRUE if the viewport was set to a specific rectangle, or
+/// SDL_FALSE if it was set to NULL (the entire target)
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_GetRenderViewport
+/// \sa SDL_SetRenderViewport
+///
+/// ```c
+/// extern DECLSPEC SDL_bool SDLCALL SDL_RenderViewportSet(SDL_Renderer *renderer)
+/// ```
+bool sdlRenderViewportSet(Pointer<SdlRenderer> renderer) {
+  final sdlRenderViewportSetLookupFunction = libSdl3.lookupFunction<
+      Int32 Function(Pointer<SdlRenderer> renderer),
+      int Function(Pointer<SdlRenderer> renderer)>('SDL_RenderViewportSet');
+  return sdlRenderViewportSetLookupFunction(renderer) == 1;
 }
 
 ///
@@ -1892,6 +1934,61 @@ int sdlGetRenderDrawColorFloat(Pointer<SdlRenderer> renderer, Pointer<Float> r,
           Pointer<Float> b,
           Pointer<Float> a)>('SDL_GetRenderDrawColorFloat');
   return sdlGetRenderDrawColorFloatLookupFunction(renderer, r, g, b, a);
+}
+
+///
+/// Set the color scale used for render operations.
+///
+/// The color scale is an additional scale multiplied into the pixel color
+/// value while rendering. This can be used to adjust the brightness of colors
+/// during HDR rendering, or changing HDR video brightness when playing on an
+/// SDR display.
+///
+/// The color scale does not affect the alpha channel, only the color
+/// brightness.
+///
+/// \param renderer the rendering context
+/// \param scale the color scale value
+/// \returns 0 on success or a negative error code on failure; call
+/// SDL_GetError() for more information.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_GetRenderColorScale
+///
+/// ```c
+/// extern DECLSPEC int SDLCALL SDL_SetRenderColorScale(SDL_Renderer *renderer, float scale)
+/// ```
+int sdlSetRenderColorScale(Pointer<SdlRenderer> renderer, double scale) {
+  final sdlSetRenderColorScaleLookupFunction = libSdl3.lookupFunction<
+      Int32 Function(Pointer<SdlRenderer> renderer, Float scale),
+      int Function(Pointer<SdlRenderer> renderer,
+          double scale)>('SDL_SetRenderColorScale');
+  return sdlSetRenderColorScaleLookupFunction(renderer, scale);
+}
+
+///
+/// Get the color scale used for render operations.
+///
+/// \param renderer the rendering context
+/// \param scale a pointer filled in with the current color scale value
+/// \returns 0 on success or a negative error code on failure; call
+/// SDL_GetError() for more information.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_SetRenderColorScale
+///
+/// ```c
+/// extern DECLSPEC int SDLCALL SDL_GetRenderColorScale(SDL_Renderer *renderer, float *scale)
+/// ```
+int sdlGetRenderColorScale(
+    Pointer<SdlRenderer> renderer, Pointer<Float> scale) {
+  final sdlGetRenderColorScaleLookupFunction = libSdl3.lookupFunction<
+      Int32 Function(Pointer<SdlRenderer> renderer, Pointer<Float> scale),
+      int Function(Pointer<SdlRenderer> renderer,
+          Pointer<Float> scale)>('SDL_GetRenderColorScale');
+  return sdlGetRenderColorScaleLookupFunction(renderer, scale);
 }
 
 ///
@@ -2305,6 +2402,90 @@ int sdlRenderGeometry(
 /// \param texture (optional) The SDL texture to use.
 /// \param xy Vertex positions
 /// \param xy_stride Byte size to move from one element to the next element
+/// \param color Vertex colors (as SDL_Color)
+/// \param color_stride Byte size to move from one element to the next element
+/// \param uv Vertex normalized texture coordinates
+/// \param uv_stride Byte size to move from one element to the next element
+/// \param num_vertices Number of vertices.
+/// \param indices (optional) An array of indices into the 'vertices' arrays,
+/// if NULL all vertices will be rendered in sequential order.
+/// \param num_indices Number of indices.
+/// \param size_indices Index size: 1 (byte), 2 (short), 4 (int)
+/// \returns 0 on success or a negative error code on failure; call
+/// SDL_GetError() for more information.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_RenderGeometry
+/// \sa SDL_Vertex
+///
+/// ```c
+/// extern DECLSPEC int SDLCALL SDL_RenderGeometryRaw(SDL_Renderer *renderer, SDL_Texture *texture, const float *xy, int xy_stride, const SDL_Color *color, int color_stride, const float *uv, int uv_stride, int num_vertices, const void *indices, int num_indices, int size_indices)
+/// ```
+int sdlRenderGeometryRaw(
+    Pointer<SdlRenderer> renderer,
+    Pointer<SdlTexture> texture,
+    Pointer<Float> xy,
+    int xyStride,
+    Pointer<SdlColor> color,
+    int colorStride,
+    Pointer<Float> uv,
+    int uvStride,
+    int numVertices,
+    Pointer<NativeType> indices,
+    int numIndices,
+    int sizeIndices) {
+  final sdlRenderGeometryRawLookupFunction = libSdl3.lookupFunction<
+      Int32 Function(
+          Pointer<SdlRenderer> renderer,
+          Pointer<SdlTexture> texture,
+          Pointer<Float> xy,
+          Int32 xyStride,
+          Pointer<SdlColor> color,
+          Int32 colorStride,
+          Pointer<Float> uv,
+          Int32 uvStride,
+          Int32 numVertices,
+          Pointer<NativeType> indices,
+          Int32 numIndices,
+          Int32 sizeIndices),
+      int Function(
+          Pointer<SdlRenderer> renderer,
+          Pointer<SdlTexture> texture,
+          Pointer<Float> xy,
+          int xyStride,
+          Pointer<SdlColor> color,
+          int colorStride,
+          Pointer<Float> uv,
+          int uvStride,
+          int numVertices,
+          Pointer<NativeType> indices,
+          int numIndices,
+          int sizeIndices)>('SDL_RenderGeometryRaw');
+  return sdlRenderGeometryRawLookupFunction(
+      renderer,
+      texture,
+      xy,
+      xyStride,
+      color,
+      colorStride,
+      uv,
+      uvStride,
+      numVertices,
+      indices,
+      numIndices,
+      sizeIndices);
+}
+
+///
+/// Render a list of triangles, optionally using a texture and indices into the
+/// vertex arrays Color and alpha modulation is done per vertex
+/// (SDL_SetTextureColorMod and SDL_SetTextureAlphaMod are ignored).
+///
+/// \param renderer The rendering context.
+/// \param texture (optional) The SDL texture to use.
+/// \param xy Vertex positions
+/// \param xy_stride Byte size to move from one element to the next element
 /// \param color Vertex colors (as SDL_FColor)
 /// \param color_stride Byte size to move from one element to the next element
 /// \param uv Vertex normalized texture coordinates
@@ -2323,9 +2504,9 @@ int sdlRenderGeometry(
 /// \sa SDL_Vertex
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_RenderGeometryRaw(SDL_Renderer *renderer, SDL_Texture *texture, const float *xy, int xy_stride, const SDL_FColor *color, int color_stride, const float *uv, int uv_stride, int num_vertices, const void *indices, int num_indices, int size_indices)
+/// extern DECLSPEC int SDLCALL SDL_RenderGeometryRawFloat(SDL_Renderer *renderer, SDL_Texture *texture, const float *xy, int xy_stride, const SDL_FColor *color, int color_stride, const float *uv, int uv_stride, int num_vertices, const void *indices, int num_indices, int size_indices)
 /// ```
-int sdlRenderGeometryRaw(
+int sdlRenderGeometryRawFloat(
     Pointer<SdlRenderer> renderer,
     Pointer<SdlTexture> texture,
     Pointer<Float> xy,
@@ -2338,7 +2519,7 @@ int sdlRenderGeometryRaw(
     Pointer<NativeType> indices,
     int numIndices,
     int sizeIndices) {
-  final sdlRenderGeometryRawLookupFunction = libSdl3.lookupFunction<
+  final sdlRenderGeometryRawFloatLookupFunction = libSdl3.lookupFunction<
       Int32 Function(
           Pointer<SdlRenderer> renderer,
           Pointer<SdlTexture> texture,
@@ -2364,8 +2545,8 @@ int sdlRenderGeometryRaw(
           int numVertices,
           Pointer<NativeType> indices,
           int numIndices,
-          int sizeIndices)>('SDL_RenderGeometryRaw');
-  return sdlRenderGeometryRawLookupFunction(
+          int sizeIndices)>('SDL_RenderGeometryRawFloat');
+  return sdlRenderGeometryRawFloatLookupFunction(
       renderer,
       texture,
       xy,

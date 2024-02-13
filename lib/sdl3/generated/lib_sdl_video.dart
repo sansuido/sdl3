@@ -135,6 +135,14 @@ int sdlGetPrimaryDisplay() {
 ///
 /// Get the properties associated with a display.
 ///
+/// The following read-only properties are provided by SDL:
+///
+/// - `SDL_PROP_DISPLAY_HDR_ENABLED_BOOLEAN`: true if the display has High
+/// Dynamic Range enabled
+/// - `SDL_PROP_DISPLAY_SDR_WHITE_LEVEL_FLOAT`: the luminance, in nits, that
+/// SDR white is rendered on this display. If this value is not set or is
+/// zero, the value 200 is a reasonable default when HDR is enabled.
+///
 /// \param displayID the instance ID of the display to query
 /// \returns a valid property ID on success or 0 on failure; call
 /// SDL_GetError() for more information.
@@ -1007,6 +1015,9 @@ Pointer<SdlWindow> sdlGetWindowParent(Pointer<SdlWindow> window) {
 /// Get the properties associated with a window.
 ///
 /// The following read-only properties are provided by SDL:
+///
+/// - `SDL_PROP_WINDOW_SHAPE_POINTER`: the surface associated with a shaped
+/// window
 ///
 /// On Android:
 ///
@@ -1897,13 +1908,13 @@ int sdlSyncWindow(Pointer<SdlWindow> window) {
 /// \sa SDL_GetWindowSurface
 ///
 /// ```c
-/// extern DECLSPEC SDL_bool SDLCALL SDL_HasWindowSurface(SDL_Window *window)
+/// extern DECLSPEC SDL_bool SDLCALL SDL_WindowHasSurface(SDL_Window *window)
 /// ```
-bool sdlHasWindowSurface(Pointer<SdlWindow> window) {
-  final sdlHasWindowSurfaceLookupFunction = libSdl3.lookupFunction<
+bool sdlWindowHasSurface(Pointer<SdlWindow> window) {
+  final sdlWindowHasSurfaceLookupFunction = libSdl3.lookupFunction<
       Int32 Function(Pointer<SdlWindow> window),
-      int Function(Pointer<SdlWindow> window)>('SDL_HasWindowSurface');
-  return sdlHasWindowSurfaceLookupFunction(window) == 1;
+      int Function(Pointer<SdlWindow> window)>('SDL_WindowHasSurface');
+  return sdlWindowHasSurfaceLookupFunction(window) == 1;
 }
 
 ///
@@ -1927,7 +1938,7 @@ bool sdlHasWindowSurface(Pointer<SdlWindow> window) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_DestroyWindowSurface
-/// \sa SDL_HasWindowSurface
+/// \sa SDL_WindowHasSurface
 /// \sa SDL_UpdateWindowSurface
 /// \sa SDL_UpdateWindowSurfaceRects
 ///
@@ -2017,7 +2028,7 @@ int sdlUpdateWindowSurfaceRects(
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetWindowSurface
-/// \sa SDL_HasWindowSurface
+/// \sa SDL_WindowHasSurface
 ///
 /// ```c
 /// extern DECLSPEC int SDLCALL SDL_DestroyWindowSurface(SDL_Window *window)
@@ -2477,6 +2488,39 @@ int sdlSetWindowHitTest(
           Pointer<NativeFunction<SdlHitTest>> callback,
           Pointer<NativeType> callbackData)>('SDL_SetWindowHitTest');
   return sdlSetWindowHitTestLookupFunction(window, callback, callbackData);
+}
+
+///
+/// Set the shape of a transparent window.
+///
+/// This sets the alpha channel of a transparent window and any fully
+/// transparent areas are also transparent to mouse clicks. If you are using
+/// something besides the SDL render API, then you are responsible for setting
+/// the alpha channel of the window yourself.
+///
+/// The shape is copied inside this function, so you can free it afterwards. If
+/// your shape surface changes, you should call SDL_SetWindowShape() again to
+/// update the window.
+///
+/// The window must have been created with the SDL_WINDOW_TRANSPARENT flag.
+///
+/// \param window the window
+/// \param shape the surface representing the shape of the window, or NULL to
+/// remove any current shape
+/// \returns 0 on success or a negative error code on failure; call
+/// SDL_GetError() for more information.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// ```c
+/// extern DECLSPEC int SDLCALL SDL_SetWindowShape(SDL_Window *window, SDL_Surface *shape)
+/// ```
+int sdlSetWindowShape(Pointer<SdlWindow> window, Pointer<SdlSurface> shape) {
+  final sdlSetWindowShapeLookupFunction = libSdl3.lookupFunction<
+      Int32 Function(Pointer<SdlWindow> window, Pointer<SdlSurface> shape),
+      int Function(Pointer<SdlWindow> window,
+          Pointer<SdlSurface> shape)>('SDL_SetWindowShape');
+  return sdlSetWindowShapeLookupFunction(window, shape);
 }
 
 ///
