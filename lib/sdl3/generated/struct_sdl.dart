@@ -63,9 +63,9 @@ final class SdlCommonEvent extends Struct {
   // [0]+(4)
   @Uint32()
   external int type;
-  // [] +(4)
+  // [4]+(4)
   @Uint32()
-  external int blank_1;
+  external int reserved;
   // [8]+(8)
   @Uint64()
   external int timestamp;
@@ -76,9 +76,9 @@ final class SdlDisplayEvent extends Struct {
   // [0]+(4)
   @Uint32()
   external int type;
-  // [] +(4)
+  // [4]+(4)
   @Uint32()
-  external int blank_1;
+  external int reserved;
   // [8]+(8)
   @Uint64()
   external int timestamp;
@@ -95,9 +95,9 @@ final class SdlWindowEvent extends Struct {
   // [0]+(4)
   @Uint32()
   external int type;
-  // [] +(4)
+  // [4]+(4)
   @Uint32()
-  external int blank_1;
+  external int reserved;
   // [8]+(8)
   @Uint64()
   external int timestamp;
@@ -112,7 +112,7 @@ final class SdlWindowEvent extends Struct {
   external int data2;
   // [] +(4)
   @Uint32()
-  external int blank_2;
+  external int blank_1;
 }
 
 // SDL_KeyboardEvent
@@ -120,9 +120,9 @@ final class SdlKeyboardEvent extends Struct {
   // [0]+(4)
   @Uint32()
   external int type;
-  // [] +(4)
+  // [4]+(4)
   @Uint32()
-  external int blank_1;
+  external int reserved;
   // [8]+(8)
   @Uint64()
   external int timestamp;
@@ -149,8 +149,7 @@ final class SdlKeyboardEvent extends Struct {
 }
 
 extension SdlKeyboardEventExtension on Pointer<SdlKeyboardEvent> {
-  Pointer<SdlKeysym> get keysym =>
-      cast<Uint8>().elementAt(24).cast<SdlKeysym>();
+  Pointer<SdlKeysym> get keysym => (cast<Uint8>() + 24).cast<SdlKeysym>();
 }
 
 // SDL_TextEditingEvent
@@ -158,9 +157,9 @@ final class SdlTextEditingEvent extends Struct {
   // [0]+(4)
   @Uint32()
   external int type;
-  // [] +(4)
+  // [4]+(4)
   @Uint32()
-  external int blank_1;
+  external int reserved;
   // [8]+(8)
   @Uint64()
   external int timestamp;
@@ -169,7 +168,7 @@ final class SdlTextEditingEvent extends Struct {
   external int windowId;
   // [] +(4)
   @Uint32()
-  external int blank_2;
+  external int blank_1;
   // [24]+(8)
   external Pointer<Int8> text;
   // [32]+(4)
@@ -185,9 +184,9 @@ final class SdlTextInputEvent extends Struct {
   // [0]+(4)
   @Uint32()
   external int type;
-  // [] +(4)
+  // [4]+(4)
   @Uint32()
-  external int blank_1;
+  external int reserved;
   // [8]+(8)
   @Uint64()
   external int timestamp;
@@ -196,7 +195,7 @@ final class SdlTextInputEvent extends Struct {
   external int windowId;
   // [] +(4)
   @Uint32()
-  external int blank_2;
+  external int blank_1;
   // [24]+(8)
   external Pointer<Int8> text;
 }
@@ -206,9 +205,9 @@ final class SdlMouseMotionEvent extends Struct {
   // [0]+(4)
   @Uint32()
   external int type;
-  // [] +(4)
+  // [4]+(4)
   @Uint32()
-  external int blank_1;
+  external int reserved;
   // [8]+(8)
   @Uint64()
   external int timestamp;
@@ -235,7 +234,7 @@ final class SdlMouseMotionEvent extends Struct {
   external double yrel;
   // [] +(4)
   @Uint32()
-  external int blank_2;
+  external int blank_1;
 }
 
 // SDL_MouseButtonEvent
@@ -243,9 +242,9 @@ final class SdlMouseButtonEvent extends Struct {
   // [0]+(4)
   @Uint32()
   external int type;
-  // [] +(4)
+  // [4]+(4)
   @Uint32()
-  external int blank_1;
+  external int reserved;
   // [8]+(8)
   @Uint64()
   external int timestamp;
@@ -275,7 +274,7 @@ final class SdlMouseButtonEvent extends Struct {
   external double y;
   // [] +(4)
   @Uint32()
-  external int blank_2;
+  external int blank_1;
 }
 
 // SDL_MouseWheelEvent
@@ -283,9 +282,9 @@ final class SdlMouseWheelEvent extends Struct {
   // [0]+(4)
   @Uint32()
   external int type;
-  // [] +(4)
+  // [4]+(4)
   @Uint32()
-  external int blank_1;
+  external int reserved;
   // [8]+(8)
   @Uint64()
   external int timestamp;
@@ -312,7 +311,7 @@ final class SdlMouseWheelEvent extends Struct {
   external double mouseY;
   // [] +(4)
   @Uint32()
-  external int blank_2;
+  external int blank_1;
 }
 
 // SDL_JoyAxisEvent
@@ -320,9 +319,9 @@ final class SdlJoyAxisEvent extends Struct {
   // [0]+(4)
   @Uint32()
   external int type;
-  // [] +(4)
+  // [4]+(4)
   @Uint32()
-  external int blank_1;
+  external int reserved;
   // [8]+(8)
   @Uint64()
   external int timestamp;
@@ -349,7 +348,7 @@ final class SdlJoyAxisEvent extends Struct {
   external int padding4;
   // [] +(4)
   @Uint32()
-  external int blank_2;
+  external int blank_1;
 }
 
 // SDL_JoyHatEvent
@@ -357,9 +356,9 @@ final class SdlJoyHatEvent extends Struct {
   // [0]+(4)
   @Uint32()
   external int type;
-  // [] +(4)
+  // [4]+(4)
   @Uint32()
-  external int blank_1;
+  external int reserved;
   // [8]+(8)
   @Uint64()
   external int timestamp;
@@ -385,9 +384,9 @@ final class SdlJoyButtonEvent extends Struct {
   // [0]+(4)
   @Uint32()
   external int type;
-  // [] +(4)
+  // [4]+(4)
   @Uint32()
-  external int blank_1;
+  external int reserved;
   // [8]+(8)
   @Uint64()
   external int timestamp;
@@ -413,9 +412,9 @@ final class SdlJoyDeviceEvent extends Struct {
   // [0]+(4)
   @Uint32()
   external int type;
-  // [] +(4)
+  // [4]+(4)
   @Uint32()
-  external int blank_1;
+  external int reserved;
   // [8]+(8)
   @Uint64()
   external int timestamp;
@@ -424,7 +423,7 @@ final class SdlJoyDeviceEvent extends Struct {
   external int which;
   // [] +(4)
   @Uint32()
-  external int blank_2;
+  external int blank_1;
 }
 
 // SDL_JoyBatteryEvent
@@ -432,9 +431,9 @@ final class SdlJoyBatteryEvent extends Struct {
   // [0]+(4)
   @Uint32()
   external int type;
-  // [] +(4)
+  // [4]+(4)
   @Uint32()
-  external int blank_1;
+  external int reserved;
   // [8]+(8)
   @Uint64()
   external int timestamp;
@@ -451,9 +450,9 @@ final class SdlGamepadAxisEvent extends Struct {
   // [0]+(4)
   @Uint32()
   external int type;
-  // [] +(4)
+  // [4]+(4)
   @Uint32()
-  external int blank_1;
+  external int reserved;
   // [8]+(8)
   @Uint64()
   external int timestamp;
@@ -480,7 +479,7 @@ final class SdlGamepadAxisEvent extends Struct {
   external int padding4;
   // [] +(4)
   @Uint32()
-  external int blank_2;
+  external int blank_1;
 }
 
 // SDL_GamepadButtonEvent
@@ -488,9 +487,9 @@ final class SdlGamepadButtonEvent extends Struct {
   // [0]+(4)
   @Uint32()
   external int type;
-  // [] +(4)
+  // [4]+(4)
   @Uint32()
-  external int blank_1;
+  external int reserved;
   // [8]+(8)
   @Uint64()
   external int timestamp;
@@ -516,9 +515,9 @@ final class SdlGamepadDeviceEvent extends Struct {
   // [0]+(4)
   @Uint32()
   external int type;
-  // [] +(4)
+  // [4]+(4)
   @Uint32()
-  external int blank_1;
+  external int reserved;
   // [8]+(8)
   @Uint64()
   external int timestamp;
@@ -527,7 +526,7 @@ final class SdlGamepadDeviceEvent extends Struct {
   external int which;
   // [] +(4)
   @Uint32()
-  external int blank_2;
+  external int blank_1;
 }
 
 // SDL_GamepadTouchpadEvent
@@ -535,9 +534,9 @@ final class SdlGamepadTouchpadEvent extends Struct {
   // [0]+(4)
   @Uint32()
   external int type;
-  // [] +(4)
+  // [4]+(4)
   @Uint32()
-  external int blank_1;
+  external int reserved;
   // [8]+(8)
   @Uint64()
   external int timestamp;
@@ -566,9 +565,9 @@ final class SdlGamepadSensorEvent extends Struct {
   // [0]+(4)
   @Uint32()
   external int type;
-  // [] +(4)
+  // [4]+(4)
   @Uint32()
-  external int blank_1;
+  external int reserved;
   // [8]+(8)
   @Uint64()
   external int timestamp;
@@ -587,7 +586,7 @@ final class SdlGamepadSensorEvent extends Struct {
   external double data_3;
   // [] +(4)
   @Uint32()
-  external int blank_2;
+  external int blank_1;
   // [40]+(8)
   @Uint64()
   external int sensorTimestamp;
@@ -598,9 +597,9 @@ final class SdlAudioDeviceEvent extends Struct {
   // [0]+(4)
   @Uint32()
   external int type;
-  // [] +(4)
+  // [4]+(4)
   @Uint32()
-  external int blank_1;
+  external int reserved;
   // [8]+(8)
   @Uint64()
   external int timestamp;
@@ -626,9 +625,9 @@ final class SdlTouchFingerEvent extends Struct {
   // [0]+(4)
   @Uint32()
   external int type;
-  // [] +(4)
+  // [4]+(4)
   @Uint32()
-  external int blank_1;
+  external int reserved;
   // [8]+(8)
   @Uint64()
   external int timestamp;
@@ -663,9 +662,9 @@ final class SdlPenTipEvent extends Struct {
   // [0]+(4)
   @Uint32()
   external int type;
-  // [] +(4)
+  // [4]+(4)
   @Uint32()
-  external int blank_1;
+  external int reserved;
   // [8]+(8)
   @Uint64()
   external int timestamp;
@@ -705,7 +704,7 @@ final class SdlPenTipEvent extends Struct {
   external double axes_6;
   // [] +(4)
   @Uint32()
-  external int blank_2;
+  external int blank_1;
 }
 
 // SDL_PenMotionEvent
@@ -713,9 +712,9 @@ final class SdlPenMotionEvent extends Struct {
   // [0]+(4)
   @Uint32()
   external int type;
-  // [] +(4)
+  // [4]+(4)
   @Uint32()
-  external int blank_1;
+  external int reserved;
   // [8]+(8)
   @Uint64()
   external int timestamp;
@@ -755,7 +754,7 @@ final class SdlPenMotionEvent extends Struct {
   external double axes_6;
   // [] +(4)
   @Uint32()
-  external int blank_2;
+  external int blank_1;
 }
 
 // SDL_PenButtonEvent
@@ -763,9 +762,9 @@ final class SdlPenButtonEvent extends Struct {
   // [0]+(4)
   @Uint32()
   external int type;
-  // [] +(4)
+  // [4]+(4)
   @Uint32()
-  external int blank_1;
+  external int reserved;
   // [8]+(8)
   @Uint64()
   external int timestamp;
@@ -805,7 +804,7 @@ final class SdlPenButtonEvent extends Struct {
   external double axes_6;
   // [] +(4)
   @Uint32()
-  external int blank_2;
+  external int blank_1;
 }
 
 // SDL_DropEvent
@@ -813,9 +812,9 @@ final class SdlDropEvent extends Struct {
   // [0]+(4)
   @Uint32()
   external int type;
-  // [] +(4)
+  // [4]+(4)
   @Uint32()
-  external int blank_1;
+  external int reserved;
   // [8]+(8)
   @Uint64()
   external int timestamp;
@@ -830,7 +829,7 @@ final class SdlDropEvent extends Struct {
   external double y;
   // [] +(4)
   @Uint32()
-  external int blank_2;
+  external int blank_1;
   // [32]+(8)
   external Pointer<Int8> source;
   // [40]+(8)
@@ -842,9 +841,9 @@ final class SdlClipboardEvent extends Struct {
   // [0]+(4)
   @Uint32()
   external int type;
-  // [] +(4)
+  // [4]+(4)
   @Uint32()
-  external int blank_1;
+  external int reserved;
   // [8]+(8)
   @Uint64()
   external int timestamp;
@@ -855,9 +854,9 @@ final class SdlSensorEvent extends Struct {
   // [0]+(4)
   @Uint32()
   external int type;
-  // [] +(4)
+  // [4]+(4)
   @Uint32()
-  external int blank_1;
+  external int reserved;
   // [8]+(8)
   @Uint64()
   external int timestamp;
@@ -879,7 +878,7 @@ final class SdlSensorEvent extends Struct {
   external double data_6;
   // [] +(4)
   @Uint32()
-  external int blank_2;
+  external int blank_1;
   // [48]+(8)
   @Uint64()
   external int sensorTimestamp;
@@ -890,9 +889,9 @@ final class SdlQuitEvent extends Struct {
   // [0]+(4)
   @Uint32()
   external int type;
-  // [] +(4)
+  // [4]+(4)
   @Uint32()
-  external int blank_1;
+  external int reserved;
   // [8]+(8)
   @Uint64()
   external int timestamp;
@@ -903,9 +902,9 @@ final class SdlUserEvent extends Struct {
   // [0]+(4)
   @Uint32()
   external int type;
-  // [] +(4)
+  // [4]+(4)
   @Uint32()
-  external int blank_1;
+  external int reserved;
   // [8]+(8)
   @Uint64()
   external int timestamp;
@@ -959,66 +958,63 @@ final class SdlEvent extends Struct {
 }
 
 extension SdlEventExtension on Pointer<SdlEvent> {
-  int get type => cast<Uint8>().elementAt(0).cast<Uint32>().value;
+  int get type => (cast<Uint8>() + 0).cast<Uint32>().value;
   Pointer<SdlCommonEvent> get common =>
-      cast<Uint8>().elementAt(0).cast<SdlCommonEvent>();
+      (cast<Uint8>() + 0).cast<SdlCommonEvent>();
   Pointer<SdlDisplayEvent> get display =>
-      cast<Uint8>().elementAt(0).cast<SdlDisplayEvent>();
+      (cast<Uint8>() + 0).cast<SdlDisplayEvent>();
   Pointer<SdlWindowEvent> get window =>
-      cast<Uint8>().elementAt(0).cast<SdlWindowEvent>();
+      (cast<Uint8>() + 0).cast<SdlWindowEvent>();
   Pointer<SdlKeyboardEvent> get key =>
-      cast<Uint8>().elementAt(0).cast<SdlKeyboardEvent>();
+      (cast<Uint8>() + 0).cast<SdlKeyboardEvent>();
   Pointer<SdlTextEditingEvent> get edit =>
-      cast<Uint8>().elementAt(0).cast<SdlTextEditingEvent>();
+      (cast<Uint8>() + 0).cast<SdlTextEditingEvent>();
   Pointer<SdlTextInputEvent> get text =>
-      cast<Uint8>().elementAt(0).cast<SdlTextInputEvent>();
+      (cast<Uint8>() + 0).cast<SdlTextInputEvent>();
   Pointer<SdlMouseMotionEvent> get motion =>
-      cast<Uint8>().elementAt(0).cast<SdlMouseMotionEvent>();
+      (cast<Uint8>() + 0).cast<SdlMouseMotionEvent>();
   Pointer<SdlMouseButtonEvent> get button =>
-      cast<Uint8>().elementAt(0).cast<SdlMouseButtonEvent>();
+      (cast<Uint8>() + 0).cast<SdlMouseButtonEvent>();
   Pointer<SdlMouseWheelEvent> get wheel =>
-      cast<Uint8>().elementAt(0).cast<SdlMouseWheelEvent>();
+      (cast<Uint8>() + 0).cast<SdlMouseWheelEvent>();
   Pointer<SdlJoyAxisEvent> get jaxis =>
-      cast<Uint8>().elementAt(0).cast<SdlJoyAxisEvent>();
+      (cast<Uint8>() + 0).cast<SdlJoyAxisEvent>();
   Pointer<SdlJoyHatEvent> get jhat =>
-      cast<Uint8>().elementAt(0).cast<SdlJoyHatEvent>();
+      (cast<Uint8>() + 0).cast<SdlJoyHatEvent>();
   Pointer<SdlJoyButtonEvent> get jbutton =>
-      cast<Uint8>().elementAt(0).cast<SdlJoyButtonEvent>();
+      (cast<Uint8>() + 0).cast<SdlJoyButtonEvent>();
   Pointer<SdlJoyDeviceEvent> get jdevice =>
-      cast<Uint8>().elementAt(0).cast<SdlJoyDeviceEvent>();
+      (cast<Uint8>() + 0).cast<SdlJoyDeviceEvent>();
   Pointer<SdlJoyBatteryEvent> get jbattery =>
-      cast<Uint8>().elementAt(0).cast<SdlJoyBatteryEvent>();
+      (cast<Uint8>() + 0).cast<SdlJoyBatteryEvent>();
   Pointer<SdlGamepadAxisEvent> get gaxis =>
-      cast<Uint8>().elementAt(0).cast<SdlGamepadAxisEvent>();
+      (cast<Uint8>() + 0).cast<SdlGamepadAxisEvent>();
   Pointer<SdlGamepadButtonEvent> get gbutton =>
-      cast<Uint8>().elementAt(0).cast<SdlGamepadButtonEvent>();
+      (cast<Uint8>() + 0).cast<SdlGamepadButtonEvent>();
   Pointer<SdlGamepadDeviceEvent> get gdevice =>
-      cast<Uint8>().elementAt(0).cast<SdlGamepadDeviceEvent>();
+      (cast<Uint8>() + 0).cast<SdlGamepadDeviceEvent>();
   Pointer<SdlGamepadTouchpadEvent> get gtouchpad =>
-      cast<Uint8>().elementAt(0).cast<SdlGamepadTouchpadEvent>();
+      (cast<Uint8>() + 0).cast<SdlGamepadTouchpadEvent>();
   Pointer<SdlGamepadSensorEvent> get gsensor =>
-      cast<Uint8>().elementAt(0).cast<SdlGamepadSensorEvent>();
+      (cast<Uint8>() + 0).cast<SdlGamepadSensorEvent>();
   Pointer<SdlAudioDeviceEvent> get adevice =>
-      cast<Uint8>().elementAt(0).cast<SdlAudioDeviceEvent>();
+      (cast<Uint8>() + 0).cast<SdlAudioDeviceEvent>();
   Pointer<SdlSensorEvent> get sensor =>
-      cast<Uint8>().elementAt(0).cast<SdlSensorEvent>();
-  Pointer<SdlQuitEvent> get quit =>
-      cast<Uint8>().elementAt(0).cast<SdlQuitEvent>();
-  Pointer<SdlUserEvent> get user =>
-      cast<Uint8>().elementAt(0).cast<SdlUserEvent>();
+      (cast<Uint8>() + 0).cast<SdlSensorEvent>();
+  Pointer<SdlQuitEvent> get quit => (cast<Uint8>() + 0).cast<SdlQuitEvent>();
+  Pointer<SdlUserEvent> get user => (cast<Uint8>() + 0).cast<SdlUserEvent>();
   Pointer<SdlTouchFingerEvent> get tfinger =>
-      cast<Uint8>().elementAt(0).cast<SdlTouchFingerEvent>();
+      (cast<Uint8>() + 0).cast<SdlTouchFingerEvent>();
   Pointer<SdlPenTipEvent> get ptip =>
-      cast<Uint8>().elementAt(0).cast<SdlPenTipEvent>();
+      (cast<Uint8>() + 0).cast<SdlPenTipEvent>();
   Pointer<SdlPenMotionEvent> get pmotion =>
-      cast<Uint8>().elementAt(0).cast<SdlPenMotionEvent>();
+      (cast<Uint8>() + 0).cast<SdlPenMotionEvent>();
   Pointer<SdlPenButtonEvent> get pbutton =>
-      cast<Uint8>().elementAt(0).cast<SdlPenButtonEvent>();
-  Pointer<SdlDropEvent> get drop =>
-      cast<Uint8>().elementAt(0).cast<SdlDropEvent>();
+      (cast<Uint8>() + 0).cast<SdlPenButtonEvent>();
+  Pointer<SdlDropEvent> get drop => (cast<Uint8>() + 0).cast<SdlDropEvent>();
   Pointer<SdlClipboardEvent> get clipboard =>
-      cast<Uint8>().elementAt(0).cast<SdlClipboardEvent>();
-  int get padding => cast<Uint8>().elementAt(0).cast<Uint8>().value;
+      (cast<Uint8>() + 0).cast<SdlClipboardEvent>();
+  int get padding => (cast<Uint8>() + 0).cast<Uint8>().value;
 }
 
 // SDL_Gamepad
@@ -1152,7 +1148,7 @@ final class SdlHapticConstant extends Struct {
 
 extension SdlHapticConstantExtension on Pointer<SdlHapticConstant> {
   Pointer<SdlHapticDirection> get direction =>
-      cast<Uint8>().elementAt(8).cast<SdlHapticDirection>();
+      (cast<Uint8>() + 8).cast<SdlHapticDirection>();
 }
 
 // SDL_HapticPeriodic
@@ -1215,7 +1211,7 @@ final class SdlHapticPeriodic extends Struct {
 
 extension SdlHapticPeriodicExtension on Pointer<SdlHapticPeriodic> {
   Pointer<SdlHapticDirection> get direction =>
-      cast<Uint8>().elementAt(8).cast<SdlHapticDirection>();
+      (cast<Uint8>() + 8).cast<SdlHapticDirection>();
 }
 
 // SDL_HapticCondition
@@ -1294,7 +1290,7 @@ final class SdlHapticCondition extends Struct {
 
 extension SdlHapticConditionExtension on Pointer<SdlHapticCondition> {
   Pointer<SdlHapticDirection> get direction =>
-      cast<Uint8>().elementAt(8).cast<SdlHapticDirection>();
+      (cast<Uint8>() + 8).cast<SdlHapticDirection>();
 }
 
 // SDL_HapticRamp
@@ -1349,7 +1345,7 @@ final class SdlHapticRamp extends Struct {
 
 extension SdlHapticRampExtension on Pointer<SdlHapticRamp> {
   Pointer<SdlHapticDirection> get direction =>
-      cast<Uint8>().elementAt(8).cast<SdlHapticDirection>();
+      (cast<Uint8>() + 8).cast<SdlHapticDirection>();
 }
 
 // SDL_HapticLeftRight
@@ -1431,7 +1427,7 @@ final class SdlHapticCustom extends Struct {
 
 extension SdlHapticCustomExtension on Pointer<SdlHapticCustom> {
   Pointer<SdlHapticDirection> get direction =>
-      cast<Uint8>().elementAt(8).cast<SdlHapticDirection>();
+      (cast<Uint8>() + 8).cast<SdlHapticDirection>();
 }
 
 // SDL_HapticEffect
@@ -1458,19 +1454,18 @@ final class SdlHapticEffect extends Struct {
 }
 
 extension SdlHapticEffectExtension on Pointer<SdlHapticEffect> {
-  int get type => cast<Uint8>().elementAt(0).cast<Uint16>().value;
+  int get type => (cast<Uint8>() + 0).cast<Uint16>().value;
   Pointer<SdlHapticConstant> get ant =>
-      cast<Uint8>().elementAt(0).cast<SdlHapticConstant>();
+      (cast<Uint8>() + 0).cast<SdlHapticConstant>();
   Pointer<SdlHapticPeriodic> get periodic =>
-      cast<Uint8>().elementAt(0).cast<SdlHapticPeriodic>();
+      (cast<Uint8>() + 0).cast<SdlHapticPeriodic>();
   Pointer<SdlHapticCondition> get condition =>
-      cast<Uint8>().elementAt(0).cast<SdlHapticCondition>();
-  Pointer<SdlHapticRamp> get ramp =>
-      cast<Uint8>().elementAt(0).cast<SdlHapticRamp>();
+      (cast<Uint8>() + 0).cast<SdlHapticCondition>();
+  Pointer<SdlHapticRamp> get ramp => (cast<Uint8>() + 0).cast<SdlHapticRamp>();
   Pointer<SdlHapticLeftRight> get leftright =>
-      cast<Uint8>().elementAt(0).cast<SdlHapticLeftRight>();
+      (cast<Uint8>() + 0).cast<SdlHapticLeftRight>();
   Pointer<SdlHapticCustom> get custom =>
-      cast<Uint8>().elementAt(0).cast<SdlHapticCustom>();
+      (cast<Uint8>() + 0).cast<SdlHapticCustom>();
 }
 
 // SDL_hid_device
@@ -1618,7 +1613,7 @@ final class SdlMessageBoxButtonData extends Struct {
   external int flags;
   // [4]+(4)
   @Int32()
-  external int buttonid;
+  external int buttonId;
   // [8]+(8)
   external Pointer<Utf8> text;
 }
@@ -1661,8 +1656,7 @@ extension SdlMessageBoxColorSchemeExtension
   List<SdlMessageBoxColor> get colors {
     var list = <SdlMessageBoxColor>[];
     for (var i = 0; i < 5; i++) {
-      list.add(
-          cast<Uint8>().elementAt(0 + i * 8).cast<SdlMessageBoxColor>().ref);
+      list.add((cast<Uint8>() + 0 + i * 8).cast<SdlMessageBoxColor>().ref);
     }
     return list;
   }
@@ -1965,11 +1959,9 @@ final class SdlVertex extends Struct {
 }
 
 extension SdlVertexExtension on Pointer<SdlVertex> {
-  Pointer<SdlFPoint> get position =>
-      cast<Uint8>().elementAt(0).cast<SdlFPoint>();
-  Pointer<SdlFColor> get color => cast<Uint8>().elementAt(8).cast<SdlFColor>();
-  Pointer<SdlFPoint> get texCoord =>
-      cast<Uint8>().elementAt(24).cast<SdlFPoint>();
+  Pointer<SdlFPoint> get position => (cast<Uint8>() + 0).cast<SdlFPoint>();
+  Pointer<SdlFColor> get color => (cast<Uint8>() + 8).cast<SdlFColor>();
+  Pointer<SdlFPoint> get texCoord => (cast<Uint8>() + 24).cast<SdlFPoint>();
 }
 
 // SDL_Renderer
@@ -2065,7 +2057,7 @@ final class SdlSurface extends Struct {
 }
 
 extension SdlSurfaceExtension on Pointer<SdlSurface> {
-  Pointer<SdlRect> get clipRect => cast<Uint8>().elementAt(64).cast<SdlRect>();
+  Pointer<SdlRect> get clipRect => (cast<Uint8>() + 64).cast<SdlRect>();
 }
 
 // MSG
@@ -2102,7 +2094,7 @@ final class SdlFinger extends Struct {
   external int blank_1;
 }
 
-// SDL_version
+// SDL_Version
 final class SdlVersion extends Struct {
   // [0]+(1)
   @Uint8()

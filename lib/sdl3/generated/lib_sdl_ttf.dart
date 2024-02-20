@@ -21,7 +21,7 @@ final libSdl3Ttf = dylib.dylibOpen('SDL3_ttf');
 /// \since This function is available since SDL_ttf 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC const SDL_version * SDLCALL TTF_Linked_Version(void)
+/// extern DECLSPEC const SDL_Version * SDLCALL TTF_Linked_Version(void)
 /// ```
 Pointer<SdlVersion> ttfLinkedVersion() {
   final ttfLinkedVersionLookupFunction = libSdl3Ttf.lookupFunction<

@@ -23,7 +23,7 @@ final libSdl3Net = dylib.dylibOpen('SDL3_net');
 /// \since This function is available since SDL_Net 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC const SDL_version * SDLCALL SDLNet_LinkedVersion(void)
+/// extern DECLSPEC const SDL_Version * SDLCALL SDLNet_LinkedVersion(void)
 /// ```
 Pointer<SdlVersion> sdlNetLinkedVersion() {
   final sdlNetLinkedVersionLookupFunction = libSdl3Net.lookupFunction<

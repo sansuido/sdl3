@@ -31,7 +31,7 @@ typedef MixEffectDoneT = Void Function(Int32, Pointer<NativeType>);
 /// \since This function is available since SDL_mixer 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC const SDL_version * SDLCALL Mix_Linked_Version(void)
+/// extern DECLSPEC const SDL_Version * SDLCALL Mix_Linked_Version(void)
 /// ```
 Pointer<SdlVersion> mixLinkedVersion() {
   final mixLinkedVersionLookupFunction = libSdl3Mixer.lookupFunction<

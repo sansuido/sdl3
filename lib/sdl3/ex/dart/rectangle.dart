@@ -93,7 +93,7 @@ extension RectanglesEx on List<math.Rectangle<double>> {
   Pointer<SdlFRect> calloc() {
     var rectsPointer = ffi.calloc<SdlFRect>(length);
     for (var n = 0; n < length; n++) {
-      var rectPointer = rectsPointer.elementAt(n);
+      var rectPointer = rectsPointer + n;
       rectPointer.ref.x = this[n].left;
       rectPointer.ref.y = this[n].top;
       rectPointer.ref.w = this[n].width;
@@ -105,7 +105,7 @@ extension RectanglesEx on List<math.Rectangle<double>> {
   Pointer<SdlRect> callocInt() {
     var rectsPointer = ffi.calloc<SdlRect>(length);
     for (var n = 0; n < length; n++) {
-      var rectPointer = rectsPointer.elementAt(n);
+      var rectPointer = rectsPointer + n;
       rectPointer.ref.x = this[n].left.toInt();
       rectPointer.ref.y = this[n].top.toInt();
       rectPointer.ref.w = this[n].width.toInt();

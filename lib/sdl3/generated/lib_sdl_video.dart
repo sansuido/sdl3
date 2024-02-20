@@ -142,6 +142,9 @@ int sdlGetPrimaryDisplay() {
 /// - `SDL_PROP_DISPLAY_SDR_WHITE_LEVEL_FLOAT`: the luminance, in nits, that
 /// SDR white is rendered on this display. If this value is not set or is
 /// zero, the value 200 is a reasonable default when HDR is enabled.
+/// - `SDL_PROP_DISPLAY_HDR_WHITE_LEVEL_FLOAT`: the maximum luminance, in nits,
+/// of HDR content on this display. If this value is not set or is zero, the
+/// value 400 is a reasonable default when HDR is enabled.
 ///
 /// \param displayID the instance ID of the display to query
 /// \returns a valid property ID on success or 0 on failure; call
@@ -830,6 +833,8 @@ Pointer<SdlWindow> sdlCreatePopupWindow(Pointer<SdlWindow> parent, int offsetX,
 /// be always on top
 /// - `SDL_PROP_WINDOW_CREATE_BORDERLESS_BOOLEAN`: true if the window has no
 /// window decoration
+/// - `SDL_PROP_WINDOW_CREATE_EXTERNAL_GRAPHICS_CONTEXT_BOOLEAN`: true if the
+/// window will be used with an externally managed graphics context.
 /// - `SDL_PROP_WINDOW_CREATE_FOCUSABLE_BOOLEAN`: true if the window should
 /// accept keyboard input (defaults true)
 /// - `SDL_PROP_WINDOW_CREATE_FULLSCREEN_BOOLEAN`: true if the window should
@@ -882,18 +887,18 @@ Pointer<SdlWindow> sdlCreatePopupWindow(Pointer<SdlWindow> parent, int offsetX,
 ///
 /// These are additional supported properties on Wayland:
 ///
-/// - `SDL_PROP_WINDOW_CREATE_WAYLAND_SCALE_TO_DISPLAY` - true if the window
-/// should use forced scaling designed to produce 1:1 pixel mapping if not
-/// flagged as being DPI-aware. This is intended to allow legacy applications
-/// to be displayed without desktop scaling being applied, and has issues
-/// with certain display configurations, as this forces the window to behave
-/// in a way that Wayland desktops were not designed to accommodate.
-/// Potential issues include, but are not limited to: rounding errors can
-/// result when odd window sizes/scales are used, the window may be unusably
-/// small, the window may jump in visible size at times, the window may
-/// appear to be larger than the desktop space, and possible loss of cursor
-/// precision can occur. New applications should be designed with proper DPI
-/// awareness and handling instead of enabling this.
+/// - `SDL_PROP_WINDOW_CREATE_WAYLAND_SCALE_TO_DISPLAY_BOOLEAN` - true if the
+/// window should use forced scaling designed to produce 1:1 pixel mapping if
+/// not flagged as being DPI-aware. This is intended to allow legacy
+/// applications to be displayed without desktop scaling being applied, and
+/// has issues with certain display configurations, as this forces the window
+/// to behave in a way that Wayland desktops were not designed to
+/// accommodate. Potential issues include, but are not limited to: rounding
+/// errors can result when odd window sizes/scales are used, the window may
+/// be unusably small, the window may jump in visible size at times, the
+/// window may appear to be larger than the desktop space, and possible loss
+/// of cursor precision can occur. New applications should be designed with
+/// proper DPI awareness and handling instead of enabling this.
 /// - `SDL_PROP_WINDOW_CREATE_WAYLAND_SURFACE_ROLE_CUSTOM_BOOLEAN` - true if
 /// the application wants to use the Wayland surface for a custom role and
 /// does not want it attached to an XDG toplevel window. See

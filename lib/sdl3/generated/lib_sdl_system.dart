@@ -482,26 +482,53 @@ String? sdlAndroidGetExternalStoragePath() {
 }
 
 ///
-/// Request permissions at runtime.
+/// Request permissions at runtime, asynchronously.
 ///
-/// This blocks the calling thread until the permission is granted or denied.
+/// You do not need to call this for built-in functionality of SDL; recording
+/// from a microphone or reading images from a camera, using standard SDL APIs,
+/// will manage permission requests for you.
+///
+/// This function never blocks. Instead, the app-supplied callback will be
+/// called when a decision has been made. This callback may happen on a
+/// different thread, and possibly much later, as it might wait on a user to
+/// respond to a system dialog. If permission has already been granted for a
+/// specific entitlement, the callback will still fire, probably on the current
+/// thread and before this function returns.
+///
+/// If the request submission fails, this function returns -1 and the callback
+/// will NOT be called, but this should only happen in catastrophic conditions,
+/// like memory running out. Normally there will be a yes or no to the request
+/// through the callback.
 ///
 /// \param permission The permission to request.
-/// \returns SDL_TRUE if the permission was granted, SDL_FALSE otherwise.
+/// \param cb The callback to trigger when the request has a response.
+/// \param userdata An app-controlled pointer that is passed to the callback.
+/// \returns zero if the request was submitted, -1 if there was an error
+/// submitting. The result of the request is only ever reported
+/// through the callback, not this return value.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC SDL_bool SDLCALL SDL_AndroidRequestPermission(const char *permission)
+/// extern DECLSPEC int SDLCALL SDL_AndroidRequestPermission(const char *permission, SDL_AndroidRequestPermissionCallback cb, void *userdata)
 /// ```
-bool sdlAndroidRequestPermission(String? permission) {
+int sdlAndroidRequestPermission(
+    String? permission,
+    Pointer<NativeFunction<SdlAndroidRequestPermissionCallback>> cb,
+    Pointer<NativeType> userdata) {
   final sdlAndroidRequestPermissionLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<Utf8> permission),
-      int Function(Pointer<Utf8> permission)>('SDL_AndroidRequestPermission');
+      Int32 Function(
+          Pointer<Utf8> permission,
+          Pointer<NativeFunction<SdlAndroidRequestPermissionCallback>> cb,
+          Pointer<NativeType> userdata),
+      int Function(
+          Pointer<Utf8> permission,
+          Pointer<NativeFunction<SdlAndroidRequestPermissionCallback>> cb,
+          Pointer<NativeType> userdata)>('SDL_AndroidRequestPermission');
   final permissionPointer =
       permission != null ? permission.toNativeUtf8() : nullptr;
-  final result =
-      sdlAndroidRequestPermissionLookupFunction(permissionPointer) == 1;
+  final result = sdlAndroidRequestPermissionLookupFunction(
+      permissionPointer, cb, userdata);
   calloc.free(permissionPointer);
   return result;
 }

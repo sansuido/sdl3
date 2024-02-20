@@ -16,7 +16,7 @@ final libSdl3Image = dylib.dylibOpen('SDL3_image');
 /// \returns SDL_image version
 ///
 /// ```c
-/// extern DECLSPEC const SDL_version * SDLCALL IMG_Linked_Version(void)
+/// extern DECLSPEC const SDL_Version * SDLCALL IMG_Linked_Version(void)
 /// ```
 Pointer<SdlVersion> imgLinkedVersion() {
   final imgLinkedVersionLookupFunction = libSdl3Image.lookupFunction<

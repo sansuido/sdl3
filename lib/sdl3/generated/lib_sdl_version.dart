@@ -14,7 +14,7 @@ import 'struct_sdl.dart';
 ///
 /// This function may be called safely at any time, even before SDL_Init().
 ///
-/// \param ver the SDL_version structure that contains the version information
+/// \param ver the SDL_Version structure that contains the version information
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -23,7 +23,7 @@ import 'struct_sdl.dart';
 /// \sa SDL_GetRevision
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_GetVersion(SDL_version * ver)
+/// extern DECLSPEC int SDLCALL SDL_GetVersion(SDL_Version * ver)
 /// ```
 int sdlGetVersion(Pointer<SdlVersion> ver) {
   final sdlGetVersionLookupFunction = libSdl3.lookupFunction<

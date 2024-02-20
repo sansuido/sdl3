@@ -120,6 +120,12 @@ typedef SdlX11EventHookDart = int Function(
     Pointer<NativeType>, Pointer<XEvent>);
 typedef SdlX11EventHook = Int32 Function(Pointer<NativeType>, Pointer<XEvent>);
 
+// typedef void (SDLCALL *SDL_AndroidRequestPermissionCallback)(void *userdata, const char *permission, SDL_bool granted)
+typedef SdlAndroidRequestPermissionCallbackDart = void Function(
+    Pointer<NativeType>, Pointer<Utf8>, int);
+typedef SdlAndroidRequestPermissionCallback = Void Function(
+    Pointer<NativeType>, Pointer<Utf8>, Int32);
+
 // typedef int (SDLCALL * SDL_ThreadFunction) (void *data)
 typedef SdlThreadFunctionDart = int Function(Pointer<NativeType>);
 typedef SdlThreadFunction = Int32 Function(Pointer<NativeType>);

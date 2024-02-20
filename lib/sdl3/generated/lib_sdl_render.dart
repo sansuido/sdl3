@@ -617,8 +617,8 @@ Pointer<SdlTexture> sdlCreateTextureWithProperties(
 /// with the U plane of a YUV texture
 /// - `SDL_PROP_TEXTURE_OPENGL_TEXTURE_V_NUMBER`: the GLuint texture associated
 /// with the V plane of a YUV texture
-/// - `SDL_PROP_TEXTURE_OPENGL_TEXTURE_TARGET`: the GLenum for the texture
-/// target (`GL_TEXTURE_2D`, `GL_TEXTURE_RECTANGLE_ARB`, etc)
+/// - `SDL_PROP_TEXTURE_OPENGL_TEXTURE_TARGET_NUMBER`: the GLenum for the
+/// texture target (`GL_TEXTURE_2D`, `GL_TEXTURE_RECTANGLE_ARB`, etc)
 /// - `SDL_PROP_TEXTURE_OPENGL_TEX_W_FLOAT`: the texture coordinate width of
 /// the texture (0.0 - 1.0)
 /// - `SDL_PROP_TEXTURE_OPENGL_TEX_H_FLOAT`: the texture coordinate height of
@@ -634,8 +634,8 @@ Pointer<SdlTexture> sdlCreateTextureWithProperties(
 /// associated with the U plane of a YUV texture
 /// - `SDL_PROP_TEXTURE_OPENGLES2_TEXTURE_V_NUMBER`: the GLuint texture
 /// associated with the V plane of a YUV texture
-/// - `SDL_PROP_TEXTURE_OPENGLES2_TEXTURE_TARGET`: the GLenum for the texture
-/// target (`GL_TEXTURE_2D`, `GL_TEXTURE_EXTERNAL_OES`, etc)
+/// - `SDL_PROP_TEXTURE_OPENGLES2_TEXTURE_TARGET_NUMBER`: the GLenum for the
+/// texture target (`GL_TEXTURE_2D`, `GL_TEXTURE_EXTERNAL_OES`, etc)
 ///
 /// \param texture the texture to query
 /// \returns a valid property ID on success or 0 on failure; call
@@ -1022,6 +1022,8 @@ int sdlGetTextureBlendMode(
 
 ///
 /// Set the scale mode used for texture scale operations.
+///
+/// The default texture scale mode is SDL_SCALEMODE_LINEAR.
 ///
 /// If the scale mode is not supported, the closest supported mode is chosen.
 ///

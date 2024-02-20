@@ -332,6 +332,32 @@ int sdlSetBooleanProperty(int props, String? name, bool value) {
 }
 
 ///
+/// Return whether a property exists in a set of properties.
+///
+/// \param props the properties to query
+/// \param name the name of the property to query
+/// \returns SDL_TRUE if the property exists, or SDL_FALSE if it doesn't.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_GetPropertyType
+///
+/// ```c
+/// extern DECLSPEC SDL_bool SDLCALL SDL_HasProperty(SDL_PropertiesID props, const char *name)
+/// ```
+bool sdlHasProperty(int props, String? name) {
+  final sdlHasPropertyLookupFunction = libSdl3.lookupFunction<
+      Int32 Function(Uint32 props, Pointer<Utf8> name),
+      int Function(int props, Pointer<Utf8> name)>('SDL_HasProperty');
+  final namePointer = name != null ? name.toNativeUtf8() : nullptr;
+  final result = sdlHasPropertyLookupFunction(props, namePointer) == 1;
+  calloc.free(namePointer);
+  return result;
+}
+
+///
 /// Get the type of a property on a set of properties
 ///
 /// \param props the properties to query
@@ -342,6 +368,8 @@ int sdlSetBooleanProperty(int props, String? name, bool value) {
 /// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_HasProperty
 ///
 /// ```c
 /// extern DECLSPEC SDL_PropertyType SDLCALL SDL_GetPropertyType(SDL_PropertiesID props, const char *name)
@@ -379,6 +407,7 @@ int sdlGetPropertyType(int props, String? name) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetPropertyType
+/// \sa SDL_HasProperty
 /// \sa SDL_SetProperty
 ///
 /// ```c
@@ -411,6 +440,7 @@ Pointer<NativeType> sdlGetProperty(
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetPropertyType
+/// \sa SDL_HasProperty
 /// \sa SDL_SetStringProperty
 ///
 /// ```c
@@ -452,6 +482,7 @@ String? sdlGetStringProperty(int props, String? name, String? defaultValue) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetPropertyType
+/// \sa SDL_HasProperty
 /// \sa SDL_SetNumberProperty
 ///
 /// ```c
@@ -486,6 +517,7 @@ int sdlGetNumberProperty(int props, String? name, int defaultValue) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetPropertyType
+/// \sa SDL_HasProperty
 /// \sa SDL_SetFloatProperty
 ///
 /// ```c
@@ -520,6 +552,7 @@ double sdlGetFloatProperty(int props, String? name, double defaultValue) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetPropertyType
+/// \sa SDL_HasProperty
 /// \sa SDL_SetBooleanProperty
 ///
 /// ```c
@@ -549,8 +582,6 @@ bool sdlGetBooleanProperty(int props, String? name, bool defaultValue) {
 /// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.0.0.
-///
-/// \sa SDL_GetProperty
 ///
 /// ```c
 /// extern DECLSPEC int SDLCALL SDL_ClearProperty(SDL_PropertiesID props, const char *name)
