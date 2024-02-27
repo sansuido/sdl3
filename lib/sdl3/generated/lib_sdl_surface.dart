@@ -99,14 +99,37 @@ void sdlDestroySurface(Pointer<SdlSurface> surface) {
 /// The following properties are understood by SDL:
 ///
 /// - `SDL_PROP_SURFACE_COLORSPACE_NUMBER`: an SDL_ColorSpace value describing
-/// the surface colorspace, defaults to SDL_COLORSPACE_SCRGB for floating
-/// point formats, SDL_COLORSPACE_HDR10 for 10-bit formats,
+/// the surface colorspace, defaults to SDL_COLORSPACE_SRGB_LINEAR for
+/// floating point formats, SDL_COLORSPACE_HDR10 for 10-bit formats,
 /// SDL_COLORSPACE_SRGB for other RGB surfaces and SDL_COLORSPACE_BT709_FULL
-/// for YUV textures.
+/// for YUV surfaces.
+/// - `SDL_PROP_SURFACE_MAXCLL_NUMBER`: MaxCLL (Maximum Content Light Level)
+/// indicates the maximum light level of any single pixel (in cd/m2 or nits)
+/// of the content. MaxCLL is usually measured off the final delivered
+/// content after mastering. If one uses the full light level of the HDR
+/// mastering display and adds a hard clip at its maximum value, MaxCLL would
+/// be equal to the peak luminance of the mastering monitor. This defaults to
+/// 400 for HDR10 surfaces.
+/// - `SDL_PROP_SURFACE_MAXFALL_NUMBER`: MaxFALL (Maximum Frame Average Light
+/// Level) indicates the maximum value of the frame average light level (in
+/// cd/m2 or nits) of the content. MaxFALL is calculated by averaging the
+/// decoded luminance values of all the pixels within a frame. MaxFALL is
+/// usually much lower than MaxCLL.
+/// - `SDL_PROP_SURFACE_SDR_WHITE_POINT_FLOAT`: for HDR10 and floating point
+/// surfaces, this defines the value of 100% diffuse white, with higher
+/// values being displayed in the High Dynamic Range headroom. This defaults
+/// to 100 for HDR10 surfaces and 1.0 for other surfaces.
+/// - `SDL_PROP_SURFACE_HDR_HEADROOM_FLOAT`: for HDR10 and floating point
+/// surfaces, this defines the maximum dynamic range used by the content, in
+/// terms of the SDR white point. This defaults to
+/// SDL_PROP_SURFACE_MAXCLL_NUMBER / SDL_PROP_SURFACE_SDR_WHITE_POINT_FLOAT,
+/// or 4.0, for HDR10 surfaces.
 /// - `SDL_PROP_SURFACE_TONEMAP_OPERATOR_STRING`: the tone mapping operator
-/// used when converting between different colorspaces. Currently this
-/// supports the form "*=N", where N is a floating point scale factor applied
-/// in linear space.
+/// used when compressing from a surface with high dynamic range to another
+/// with lower dynamic range. Currently this supports "chrome", which uses
+/// the same tone mapping that Chrome uses for HDR content, the form "*=N",
+/// where N is a floating point scale factor applied in linear space, and
+/// "none", which disables tone mapping. This defaults to "chrome".
 ///
 /// \param surface the SDL_Surface structure to query
 /// \returns a valid property ID on success or 0 on failure; call
@@ -154,9 +177,9 @@ int sdlSetSurfaceColorspace(Pointer<SdlSurface> surface, int colorspace) {
 ///
 /// Get the colorspace used by a surface.
 ///
-/// The colorspace defaults to SDL_COLORSPACE_SCRGB for floating point formats,
-/// SDL_COLORSPACE_HDR10 for 10-bit formats, SDL_COLORSPACE_SRGB for other RGB
-/// surfaces and SDL_COLORSPACE_BT709_FULL for YUV textures.
+/// The colorspace defaults to SDL_COLORSPACE_SRGB_LINEAR for floating point
+/// formats, SDL_COLORSPACE_HDR10 for 10-bit formats, SDL_COLORSPACE_SRGB for
+/// other RGB surfaces and SDL_COLORSPACE_BT709_FULL for YUV textures.
 ///
 /// \param surface the SDL_Surface structure to query
 /// \param colorspace a pointer filled in with an SDL_ColorSpace value
@@ -865,20 +888,21 @@ Pointer<SdlSurface> sdlConvertSurfaceFormat(
 /// \sa SDL_CreateSurface
 ///
 /// ```c
-/// extern DECLSPEC SDL_Surface *SDLCALL SDL_ConvertSurfaceFormatAndColorspace(SDL_Surface *surface, Uint32 pixel_format, SDL_Colorspace colorspace)
+/// extern DECLSPEC SDL_Surface *SDLCALL SDL_ConvertSurfaceFormatAndColorspace(SDL_Surface *surface, Uint32 pixel_format, SDL_Colorspace colorspace, SDL_PropertiesID props)
 /// ```
 Pointer<SdlSurface> sdlConvertSurfaceFormatAndColorspace(
-    Pointer<SdlSurface> surface, int pixelFormat, int colorspace) {
+    Pointer<SdlSurface> surface, int pixelFormat, int colorspace, int props) {
   final sdlConvertSurfaceFormatAndColorspaceLookupFunction =
       libSdl3.lookupFunction<
           Pointer<SdlSurface> Function(Pointer<SdlSurface> surface,
-              Uint32 pixelFormat, Int32 colorspace),
+              Uint32 pixelFormat, Int32 colorspace, Uint32 props),
           Pointer<SdlSurface> Function(
               Pointer<SdlSurface> surface,
               int pixelFormat,
-              int colorspace)>('SDL_ConvertSurfaceFormatAndColorspace');
+              int colorspace,
+              int props)>('SDL_ConvertSurfaceFormatAndColorspace');
   return sdlConvertSurfaceFormatAndColorspaceLookupFunction(
-      surface, pixelFormat, colorspace);
+      surface, pixelFormat, colorspace, props);
 }
 
 ///
@@ -954,17 +978,19 @@ int sdlConvertPixels(
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_ConvertPixelsAndColorspace(int width, int height, Uint32 src_format, SDL_Colorspace src_colorspace, const void *src, int src_pitch, Uint32 dst_format, SDL_Colorspace dst_colorspace, void *dst, int dst_pitch)
+/// extern DECLSPEC int SDLCALL SDL_ConvertPixelsAndColorspace(int width, int height, Uint32 src_format, SDL_Colorspace src_colorspace, SDL_PropertiesID src_properties, const void *src, int src_pitch, Uint32 dst_format, SDL_Colorspace dst_colorspace, SDL_PropertiesID dst_properties, void *dst, int dst_pitch)
 /// ```
 int sdlConvertPixelsAndColorspace(
     int width,
     int height,
     int srcFormat,
     int srcColorspace,
+    int srcProperties,
     Pointer<NativeType> src,
     int srcPitch,
     int dstFormat,
     int dstColorspace,
+    int dstProperties,
     Pointer<NativeType> dst,
     int dstPitch) {
   final sdlConvertPixelsAndColorspaceLookupFunction = libSdl3.lookupFunction<
@@ -973,10 +999,12 @@ int sdlConvertPixelsAndColorspace(
           Int32 height,
           Uint32 srcFormat,
           Int32 srcColorspace,
+          Uint32 srcProperties,
           Pointer<NativeType> src,
           Int32 srcPitch,
           Uint32 dstFormat,
           Int32 dstColorspace,
+          Uint32 dstProperties,
           Pointer<NativeType> dst,
           Int32 dstPitch),
       int Function(
@@ -984,14 +1012,27 @@ int sdlConvertPixelsAndColorspace(
           int height,
           int srcFormat,
           int srcColorspace,
+          int srcProperties,
           Pointer<NativeType> src,
           int srcPitch,
           int dstFormat,
           int dstColorspace,
+          int dstProperties,
           Pointer<NativeType> dst,
           int dstPitch)>('SDL_ConvertPixelsAndColorspace');
-  return sdlConvertPixelsAndColorspaceLookupFunction(width, height, srcFormat,
-      srcColorspace, src, srcPitch, dstFormat, dstColorspace, dst, dstPitch);
+  return sdlConvertPixelsAndColorspaceLookupFunction(
+      width,
+      height,
+      srcFormat,
+      srcColorspace,
+      srcProperties,
+      src,
+      srcPitch,
+      dstFormat,
+      dstColorspace,
+      dstProperties,
+      dst,
+      dstPitch);
 }
 
 ///

@@ -1,3 +1,8 @@
+## 0.1.4
+- SDL3-2024-02-25
+- [update] Removed generated/lib_sdl_video_capture.dart
+- [update] Added generated/lib_sdl_camera.dart
+
 ## 0.1.3
 - SDL3-2024-02-18
 - [update] Removed deprecated `elementAt`. (Require Dart 3.3.0)

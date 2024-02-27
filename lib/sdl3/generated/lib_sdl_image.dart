@@ -1429,20 +1429,6 @@ int imgIsWebp(Pointer<SdlRWops> src) {
 /// better to use the abstract interfaces; also, there is only an SDL_RWops
 /// interface available here.
 ///
-/// For HDR images, the returned surface may have light information properties:
-///
-/// - `SDL_PROP_SURFACE_MAXCLL_NUMBER`: MaxCLL (Maximum Content Light Level)
-/// indicates the maximum light level of any single pixel (in cd/m2 or nits)
-/// of the entire playback sequence. MaxCLL is usually measured off the final
-/// delivered content after mastering. If one uses the full light level of
-/// the HDR mastering display and adds a hard clip at its maximum value,
-/// MaxCLL would be equal to the peak luminance of the mastering monitor.
-/// - `SDL_PROP_SURFACE_MAXFALL_NUMBER`: MaxFALL (Maximum Frame Average Light
-/// Level) indicates the maximum value of the frame average light level (in
-/// cd/m2 or nits) of the entire playback sequence. MaxFALL is calculated by
-/// averaging the decoded luminance values of all the pixels within a frame.
-/// MaxFALL is usually much lower than MaxCLL.
-///
 /// \param src an SDL_RWops to load image data from.
 /// \returns SDL surface, or NULL on error
 ///
@@ -2477,12 +2463,12 @@ int imgSaveJpg(Pointer<SdlSurface> surface, String? file, int quality) {
 ///
 /// If you just want to save to a filename, you can use IMG_SaveJPG() instead.
 ///
-/// \param freedst SDL_TRUE to close/free the SDL_RWops before returning,
-/// SDL_FALSE to leave it open.
 /// \param surface the SDL surface to save
 /// \param dst the SDL_RWops to save the image data to.
 /// \param freedst SDL_TRUE to close/free the SDL_RWops before returning,
 /// SDL_FALSE to leave it open.
+/// \param quality [0; 33] is Lowest quality, [34; 66] is Middle quality, [67;
+/// 100] is Highest quality
 /// \returns 0 if successful, -1 on error.
 ///
 /// \since This function is available since SDL_image 3.0.0.

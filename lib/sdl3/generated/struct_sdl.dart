@@ -58,6 +58,31 @@ final class SdlAudioSpec extends Struct {
 // SDL_AudioStream
 final class SdlAudioStream extends Opaque {}
 
+// SDL_Camera
+final class SdlCamera extends Opaque {}
+
+// SDL_CameraSpec
+final class SdlCameraSpec extends Struct {
+  // [0]+(4)
+  @Uint32()
+  external int format;
+  // [4]+(4)
+  @Int32()
+  external int width;
+  // [8]+(4)
+  @Int32()
+  external int height;
+  // [12]+(4)
+  @Int32()
+  external int intervalNumerator;
+  // [16]+(4)
+  @Int32()
+  external int intervalDenominator;
+  // [] +(4)
+  @Uint32()
+  external int blank_1;
+}
+
 // SDL_CommonEvent
 final class SdlCommonEvent extends Struct {
   // [0]+(4)
@@ -620,6 +645,34 @@ final class SdlAudioDeviceEvent extends Struct {
   external int padding3;
 }
 
+// SDL_CameraDeviceEvent
+final class SdlCameraDeviceEvent extends Struct {
+  // [0]+(4)
+  @Uint32()
+  external int type;
+  // [] +(4)
+  @Uint32()
+  external int blank_1;
+  // [8]+(8)
+  @Uint64()
+  external int timestamp;
+  // [16]+(4)
+  @Uint32()
+  external int which;
+  // [20]+(1)
+  @Uint8()
+  external int padding1;
+  // [21]+(1)
+  @Uint8()
+  external int padding2;
+  // [22]+(1)
+  @Uint8()
+  external int padding3;
+  // [] +(1)
+  @Uint8()
+  external int blank_2;
+}
+
 // SDL_TouchFingerEvent
 final class SdlTouchFingerEvent extends Struct {
   // [0]+(4)
@@ -999,6 +1052,8 @@ extension SdlEventExtension on Pointer<SdlEvent> {
       (cast<Uint8>() + 0).cast<SdlGamepadSensorEvent>();
   Pointer<SdlAudioDeviceEvent> get adevice =>
       (cast<Uint8>() + 0).cast<SdlAudioDeviceEvent>();
+  Pointer<SdlCameraDeviceEvent> get cdevice =>
+      (cast<Uint8>() + 0).cast<SdlCameraDeviceEvent>();
   Pointer<SdlSensorEvent> get sensor =>
       (cast<Uint8>() + 0).cast<SdlSensorEvent>();
   Pointer<SdlQuitEvent> get quit => (cast<Uint8>() + 0).cast<SdlQuitEvent>();
@@ -2138,51 +2193,3 @@ final class SdlDisplayMode extends Struct {
 
 // SDL_Window
 final class SdlWindow extends Opaque {}
-
-// SDL_VideoCaptureDevice
-final class SdlVideoCaptureDevice extends Opaque {}
-
-// SDL_VideoCaptureSpec
-final class SdlVideoCaptureSpec extends Struct {
-  // [0]+(4)
-  @Uint32()
-  external int format;
-  // [4]+(4)
-  @Int32()
-  external int width;
-  // [8]+(4)
-  @Int32()
-  external int height;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
-}
-
-// SDL_VideoCaptureFrame
-final class SdlVideoCaptureFrame extends Struct {
-  // [0]+(8)
-  @Uint64()
-  external int timestampNs;
-  // [8]+(4)
-  @Int32()
-  external int numPlanes;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
-  // [16]+(8*3)
-  external Pointer<Uint8> data_1;
-  external Pointer<Uint8> data_2;
-  external Pointer<Uint8> data_3;
-  // [40]+(4*3)
-  @Int32()
-  external int pitch_1;
-  @Int32()
-  external int pitch_2;
-  @Int32()
-  external int pitch_3;
-  // [] +(4)
-  @Uint32()
-  external int blank_2;
-  // [56]+(8)
-  external Pointer<NativeType> internal;
-}

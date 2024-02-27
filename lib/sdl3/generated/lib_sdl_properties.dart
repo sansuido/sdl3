@@ -214,6 +214,9 @@ int sdlSetProperty(int props, String? name, Pointer<NativeType> value) {
 ///
 /// Set a string property on a set of properties
 ///
+/// This function makes a copy of the string; the caller does not have to
+/// preserve the data after this call completes.
+///
 /// \param props the properties to modify
 /// \param name the name of the property to modify
 /// \param value the new value of the property, or NULL to delete the property
