@@ -1,3 +1,6 @@
+## 0.1.5
+- [update] Added the renderer extension library.
+
 ## 0.1.4
 - SDL3-2024-02-25
 - [update] Removed generated/lib_sdl_video_capture.dart
