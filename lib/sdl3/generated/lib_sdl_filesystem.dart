@@ -126,8 +126,8 @@ Pointer<Int8> sdlGetPrefPath(String? org, String? app) {
 }
 
 ///
-/// Finds the most suitable user folder for @p purpose, and returns its path in
-/// OS-specific notation.
+/// Finds the most suitable user folder for the specified purpose, and returns
+/// its path in OS-specific notation.
 ///
 /// Many OSes provide certain standard folders for certain purposes, such as
 /// storing pictures, music or videos for a certain user. This function gives

@@ -182,6 +182,21 @@ Pointer<SdlRenderer> sdlCreateRenderer(
 /// - `SDL_PROP_RENDERER_CREATE_PRESENT_VSYNC_BOOLEAN`: true if you want
 /// present synchronized with the refresh rate
 ///
+/// With the vulkan renderer:
+///
+/// - `SDL_PROP_RENDERER_CREATE_VULKAN_INSTANCE_POINTER`: the VkInstance to use
+/// with the renderer, optional.
+/// - `SDL_PROP_RENDERER_CREATE_VULKAN_SURFACE_NUMBER`: the VkSurfaceKHR to use
+/// with the renderer, optional.
+/// - `SDL_PROP_RENDERER_CREATE_VULKAN_PHYSICAL_DEVICE_POINTER`: the
+/// VkPhysicalDevice to use with the renderer, optional.
+/// - `SDL_PROP_RENDERER_CREATE_VULKAN_DEVICE_POINTER`: the VkDevice to use
+/// with the renderer, optional.
+/// - `SDL_PROP_RENDERER_CREATE_VULKAN_GRAPHICS_QUEUE_FAMILY_INDEX_NUMBER`: the
+/// queue family index used for rendering.
+/// - `SDL_PROP_RENDERER_CREATE_VULKAN_PRESENT_QUEUE_FAMILY_INDEX_NUMBER`: the
+/// queue family index used for presentation.
+///
 /// \param props the properties to use
 /// \returns a valid rendering context or NULL if there was an error; call
 /// SDL_GetError() for more information.
@@ -317,21 +332,48 @@ int sdlGetRendererInfo(
 /// SDL_COLORSPACE_SRGB.
 /// - `SDL_PROP_RENDERER_HDR_ENABLED_BOOLEAN`: true if the output colorspace is
 /// SDL_COLORSPACE_SRGB_LINEAR and the renderer is showing on a display with
-/// HDR enabled.
+/// HDR enabled. This property can change dynamically when
+/// SDL_EVENT_DISPLAY_HDR_STATE_CHANGED is sent.
 /// - `SDL_PROP_RENDERER_SDR_WHITE_POINT_FLOAT`: the value of SDR white in the
 /// SDL_COLORSPACE_SRGB_LINEAR colorspace. When HDR is enabled, this value is
-/// automatically multiplied into the color scale.
+/// automatically multiplied into the color scale. This property can change
+/// dynamically when SDL_EVENT_DISPLAY_HDR_STATE_CHANGED is sent.
 /// - `SDL_PROP_RENDERER_HDR_HEADROOM_FLOAT`: the additional high dynamic range
 /// that can be displayed, in terms of the SDR white point. When HDR is not
-/// enabled, this will be 1.0.
+/// enabled, this will be 1.0. This property can change dynamically when
+/// SDL_EVENT_DISPLAY_HDR_STATE_CHANGED is sent.
+///
+/// With the direct3d renderer:
+///
 /// - `SDL_PROP_RENDERER_D3D9_DEVICE_POINTER`: the IDirect3DDevice9 associated
 /// with the renderer
+///
+/// With the direct3d11 renderer:
+///
 /// - `SDL_PROP_RENDERER_D3D11_DEVICE_POINTER`: the ID3D11Device associated
 /// with the renderer
+///
+/// With the direct3d12 renderer:
+///
 /// - `SDL_PROP_RENDERER_D3D12_DEVICE_POINTER`: the ID3D12Device associated
 /// with the renderer
 /// - `SDL_PROP_RENDERER_D3D12_COMMAND_QUEUE_POINTER`: the ID3D12CommandQueue
 /// associated with the renderer
+///
+/// With the vulkan renderer:
+///
+/// - `SDL_PROP_RENDERER_VULKAN_INSTANCE_POINTER`: the VkInstance associated
+/// with the renderer
+/// - `SDL_PROP_RENDERER_VULKAN_SURFACE_NUMBER`: the VkSurfaceKHR associated
+/// with the renderer
+/// - `SDL_PROP_RENDERER_VULKAN_PHYSICAL_DEVICE_POINTER`: the VkPhysicalDevice
+/// associated with the renderer
+/// - `SDL_PROP_RENDERER_VULKAN_DEVICE_POINTER`: the VkDevice associated with
+/// the renderer
+/// - `SDL_PROP_RENDERER_VULKAN_GRAPHICS_QUEUE_FAMILY_INDEX_NUMBER`: the queue
+/// family index used for rendering
+/// - `SDL_PROP_RENDERER_VULKAN_PRESENT_QUEUE_FAMILY_INDEX_NUMBER`: the queue
+/// family index used for presentation
 ///
 /// \param renderer the rendering context
 /// \returns a valid property ID on success or 0 on failure; call
@@ -575,6 +617,12 @@ Pointer<SdlTexture> sdlCreateTextureFromSurface(
 /// associated with the V plane of a YUV texture, if you want to wrap an
 /// existing texture.
 ///
+/// With the vulkan renderer:
+///
+/// - `SDL_PROP_TEXTURE_CREATE_VULKAN_TEXTURE_NUMBER`: the VkImage with layout
+/// VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL associated with the texture, if
+/// you want to wrap an existing texture.
+///
 /// \param renderer the rendering context
 /// \param props the properties to use
 /// \returns a pointer to the created texture or NULL if no rendering context
@@ -678,6 +726,11 @@ Pointer<SdlTexture> sdlCreateTextureWithProperties(
 /// associated with the V plane of a YUV texture
 /// - `SDL_PROP_TEXTURE_OPENGLES2_TEXTURE_TARGET_NUMBER`: the GLenum for the
 /// texture target (`GL_TEXTURE_2D`, `GL_TEXTURE_EXTERNAL_OES`, etc)
+///
+/// With the vulkan renderer:
+///
+/// - `SDL_PROP_TEXTURE_VULKAN_TEXTURE_NUMBER`: the VkImage associated with the
+/// texture
 ///
 /// \param texture the texture to query
 /// \returns a valid property ID on success or 0 on failure; call

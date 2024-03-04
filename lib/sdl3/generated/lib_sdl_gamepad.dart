@@ -145,7 +145,7 @@ int sdlReloadGamepadMappings() {
 }
 
 ///
-/// Get the mapping at a particular index.
+/// Get the current gamepad mappings.
 ///
 /// You must free the returned pointer with SDL_free() when you are done with
 /// it, but you do _not_ free each string in the array.

@@ -1,3 +1,6 @@
+## 0.1.6
+- SDL3-2024-03-03
+
 ## 0.1.5
 - [update] Added the renderer extension library.
 

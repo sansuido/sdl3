@@ -244,26 +244,3 @@ void sdlDelHintCallback(
   calloc.free(namePointer);
   return result;
 }
-
-///
-/// Clear all hints.
-///
-/// This function is automatically called during SDL_Quit(), and deletes all
-/// callbacks without calling them and frees all memory associated with hints.
-/// If you're calling this from application code you probably want to call
-/// SDL_ResetHints() instead.
-///
-/// This function will be removed from the API the next time we rev the ABI.
-///
-/// \since This function is available since SDL 3.0.0.
-///
-/// \sa SDL_ResetHints
-///
-/// ```c
-/// extern DECLSPEC void SDLCALL SDL_ClearHints(void)
-/// ```
-void sdlClearHints() {
-  final sdlClearHintsLookupFunction = libSdl3
-      .lookupFunction<Void Function(), void Function()>('SDL_ClearHints');
-  return sdlClearHintsLookupFunction();
-}

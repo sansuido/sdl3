@@ -12,7 +12,7 @@ import 'sdl_rect.dart';
 extension SdlWindowEx on SdlWindow {
   // lib_sdl_video.dart
   static Pointer<SdlWindow> create(
-      {required String title, required int w, required int h, flags = 0}) {
+      {required String title, required int w, required int h, int flags = 0}) {
     // 709
     return sdlCreateWindow(title, w, h, flags);
   }

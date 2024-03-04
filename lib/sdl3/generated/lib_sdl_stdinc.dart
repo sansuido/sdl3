@@ -260,6 +260,51 @@ Pointer<NativeType> sdlBsearch(
 }
 
 /// ```c
+/// extern DECLSPEC void SDLCALL SDL_qsort_r(void *base, size_t nmemb, size_t size, int (SDLCALL *compare) (void *, const void *, const void *), void *userdata)
+/// ```
+void sdlQsortR(Pointer<NativeType> base, int nmemb, int size,
+    Pointer<NativeType> compare, Pointer<NativeType> userdata) {
+  final sdlQsortRLookupFunction = libSdl3.lookupFunction<
+      Void Function(Pointer<NativeType> base, Uint32 nmemb, Uint32 size,
+          Pointer<NativeType> compare, Pointer<NativeType> userdata),
+      void Function(
+          Pointer<NativeType> base,
+          int nmemb,
+          int size,
+          Pointer<NativeType> compare,
+          Pointer<NativeType> userdata)>('SDL_qsort_r');
+  return sdlQsortRLookupFunction(base, nmemb, size, compare, userdata);
+}
+
+/// ```c
+/// extern DECLSPEC void * SDLCALL SDL_bsearch_r(const void *key, const void *base, size_t nmemb, size_t size, int (SDLCALL *compare) (void *, const void *, const void *), void *userdata)
+/// ```
+Pointer<NativeType> sdlBsearchR(
+    Pointer<NativeType> key,
+    Pointer<NativeType> base,
+    int nmemb,
+    int size,
+    Pointer<NativeType> compare,
+    Pointer<NativeType> userdata) {
+  final sdlBsearchRLookupFunction = libSdl3.lookupFunction<
+      Pointer<NativeType> Function(
+          Pointer<NativeType> key,
+          Pointer<NativeType> base,
+          Uint32 nmemb,
+          Uint32 size,
+          Pointer<NativeType> compare,
+          Pointer<NativeType> userdata),
+      Pointer<NativeType> Function(
+          Pointer<NativeType> key,
+          Pointer<NativeType> base,
+          int nmemb,
+          int size,
+          Pointer<NativeType> compare,
+          Pointer<NativeType> userdata)>('SDL_bsearch_r');
+  return sdlBsearchRLookupFunction(key, base, nmemb, size, compare, userdata);
+}
+
+/// ```c
 /// extern DECLSPEC int SDLCALL SDL_abs(int x)
 /// ```
 int sdlAbs(int x) {

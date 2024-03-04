@@ -103,27 +103,14 @@ void sdlDestroySurface(Pointer<SdlSurface> surface) {
 /// floating point formats, SDL_COLORSPACE_HDR10 for 10-bit formats,
 /// SDL_COLORSPACE_SRGB for other RGB surfaces and SDL_COLORSPACE_BT709_FULL
 /// for YUV surfaces.
-/// - `SDL_PROP_SURFACE_MAXCLL_NUMBER`: MaxCLL (Maximum Content Light Level)
-/// indicates the maximum light level of any single pixel (in cd/m2 or nits)
-/// of the content. MaxCLL is usually measured off the final delivered
-/// content after mastering. If one uses the full light level of the HDR
-/// mastering display and adds a hard clip at its maximum value, MaxCLL would
-/// be equal to the peak luminance of the mastering monitor. This defaults to
-/// 400 for HDR10 surfaces.
-/// - `SDL_PROP_SURFACE_MAXFALL_NUMBER`: MaxFALL (Maximum Frame Average Light
-/// Level) indicates the maximum value of the frame average light level (in
-/// cd/m2 or nits) of the content. MaxFALL is calculated by averaging the
-/// decoded luminance values of all the pixels within a frame. MaxFALL is
-/// usually much lower than MaxCLL.
 /// - `SDL_PROP_SURFACE_SDR_WHITE_POINT_FLOAT`: for HDR10 and floating point
 /// surfaces, this defines the value of 100% diffuse white, with higher
 /// values being displayed in the High Dynamic Range headroom. This defaults
-/// to 100 for HDR10 surfaces and 1.0 for other surfaces.
+/// to 203 for HDR10 surfaces and 1.0 for floating point surfaces.
 /// - `SDL_PROP_SURFACE_HDR_HEADROOM_FLOAT`: for HDR10 and floating point
 /// surfaces, this defines the maximum dynamic range used by the content, in
-/// terms of the SDR white point. This defaults to
-/// SDL_PROP_SURFACE_MAXCLL_NUMBER / SDL_PROP_SURFACE_SDR_WHITE_POINT_FLOAT,
-/// or 4.0, for HDR10 surfaces.
+/// terms of the SDR white point. This defaults to 0.0, which disables tone
+/// mapping.
 /// - `SDL_PROP_SURFACE_TONEMAP_OPERATOR_STRING`: the tone mapping operator
 /// used when compressing from a surface with high dynamic range to another
 /// with lower dynamic range. Currently this supports "chrome", which uses
@@ -878,6 +865,7 @@ Pointer<SdlSurface> sdlConvertSurfaceFormat(
 /// \param surface the existing SDL_Surface structure to convert
 /// \param pixel_format the new pixel format
 /// \param colorspace the new colorspace
+/// \param props an SDL_PropertiesID with additional color properties, or 0
 /// \returns the new SDL_Surface structure that is created or NULL if it fails;
 /// call SDL_GetError() for more information.
 ///
@@ -965,11 +953,15 @@ int sdlConvertPixels(
 /// \param src_format an SDL_PixelFormatEnum value of the `src` pixels format
 /// \param src_colorspace an SDL_ColorSpace value describing the colorspace of
 /// the `src` pixels
+/// \param src_properties an SDL_PropertiesID with additional source color
+/// properties, or 0
 /// \param src a pointer to the source pixels
 /// \param src_pitch the pitch of the source pixels, in bytes
 /// \param dst_format an SDL_PixelFormatEnum value of the `dst` pixels format
 /// \param dst_colorspace an SDL_ColorSpace value describing the colorspace of
 /// the `dst` pixels
+/// \param dst_properties an SDL_PropertiesID with additional destination color
+/// properties, or 0
 /// \param dst a pointer to be filled in with new pixel data
 /// \param dst_pitch the pitch of the destination pixels, in bytes
 /// \returns 0 on success or a negative error code on failure; call
