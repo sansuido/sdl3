@@ -64,7 +64,7 @@ final class SdlCamera extends Opaque {}
 // SDL_CameraSpec
 final class SdlCameraSpec extends Struct {
   // [0]+(4)
-  @Uint32()
+  @Int32()
   external int format;
   // [4]+(4)
   @Int32()
@@ -99,7 +99,7 @@ final class SdlCommonEvent extends Struct {
 // SDL_DisplayEvent
 final class SdlDisplayEvent extends Struct {
   // [0]+(4)
-  @Uint32()
+  @Int32()
   external int type;
   // [4]+(4)
   @Uint32()
@@ -118,7 +118,7 @@ final class SdlDisplayEvent extends Struct {
 // SDL_WindowEvent
 final class SdlWindowEvent extends Struct {
   // [0]+(4)
-  @Uint32()
+  @Int32()
   external int type;
   // [4]+(4)
   @Uint32()
@@ -143,7 +143,7 @@ final class SdlWindowEvent extends Struct {
 // SDL_KeyboardEvent
 final class SdlKeyboardEvent extends Struct {
   // [0]+(4)
-  @Uint32()
+  @Int32()
   external int type;
   // [4]+(4)
   @Uint32()
@@ -180,7 +180,7 @@ extension SdlKeyboardEventExtension on Pointer<SdlKeyboardEvent> {
 // SDL_TextEditingEvent
 final class SdlTextEditingEvent extends Struct {
   // [0]+(4)
-  @Uint32()
+  @Int32()
   external int type;
   // [4]+(4)
   @Uint32()
@@ -207,7 +207,7 @@ final class SdlTextEditingEvent extends Struct {
 // SDL_TextInputEvent
 final class SdlTextInputEvent extends Struct {
   // [0]+(4)
-  @Uint32()
+  @Int32()
   external int type;
   // [4]+(4)
   @Uint32()
@@ -228,7 +228,7 @@ final class SdlTextInputEvent extends Struct {
 // SDL_MouseMotionEvent
 final class SdlMouseMotionEvent extends Struct {
   // [0]+(4)
-  @Uint32()
+  @Int32()
   external int type;
   // [4]+(4)
   @Uint32()
@@ -265,7 +265,7 @@ final class SdlMouseMotionEvent extends Struct {
 // SDL_MouseButtonEvent
 final class SdlMouseButtonEvent extends Struct {
   // [0]+(4)
-  @Uint32()
+  @Int32()
   external int type;
   // [4]+(4)
   @Uint32()
@@ -305,7 +305,7 @@ final class SdlMouseButtonEvent extends Struct {
 // SDL_MouseWheelEvent
 final class SdlMouseWheelEvent extends Struct {
   // [0]+(4)
-  @Uint32()
+  @Int32()
   external int type;
   // [4]+(4)
   @Uint32()
@@ -326,7 +326,7 @@ final class SdlMouseWheelEvent extends Struct {
   @Float()
   external double y;
   // [32]+(4)
-  @Uint32()
+  @Int32()
   external int direction;
   // [36]+(4)
   @Float()
@@ -342,7 +342,7 @@ final class SdlMouseWheelEvent extends Struct {
 // SDL_JoyAxisEvent
 final class SdlJoyAxisEvent extends Struct {
   // [0]+(4)
-  @Uint32()
+  @Int32()
   external int type;
   // [4]+(4)
   @Uint32()
@@ -379,7 +379,7 @@ final class SdlJoyAxisEvent extends Struct {
 // SDL_JoyHatEvent
 final class SdlJoyHatEvent extends Struct {
   // [0]+(4)
-  @Uint32()
+  @Int32()
   external int type;
   // [4]+(4)
   @Uint32()
@@ -407,7 +407,7 @@ final class SdlJoyHatEvent extends Struct {
 // SDL_JoyButtonEvent
 final class SdlJoyButtonEvent extends Struct {
   // [0]+(4)
-  @Uint32()
+  @Int32()
   external int type;
   // [4]+(4)
   @Uint32()
@@ -435,7 +435,7 @@ final class SdlJoyButtonEvent extends Struct {
 // SDL_JoyDeviceEvent
 final class SdlJoyDeviceEvent extends Struct {
   // [0]+(4)
-  @Uint32()
+  @Int32()
   external int type;
   // [4]+(4)
   @Uint32()
@@ -454,7 +454,7 @@ final class SdlJoyDeviceEvent extends Struct {
 // SDL_JoyBatteryEvent
 final class SdlJoyBatteryEvent extends Struct {
   // [0]+(4)
-  @Uint32()
+  @Int32()
   external int type;
   // [4]+(4)
   @Uint32()
@@ -473,7 +473,7 @@ final class SdlJoyBatteryEvent extends Struct {
 // SDL_GamepadAxisEvent
 final class SdlGamepadAxisEvent extends Struct {
   // [0]+(4)
-  @Uint32()
+  @Int32()
   external int type;
   // [4]+(4)
   @Uint32()
@@ -510,7 +510,7 @@ final class SdlGamepadAxisEvent extends Struct {
 // SDL_GamepadButtonEvent
 final class SdlGamepadButtonEvent extends Struct {
   // [0]+(4)
-  @Uint32()
+  @Int32()
   external int type;
   // [4]+(4)
   @Uint32()
@@ -538,7 +538,7 @@ final class SdlGamepadButtonEvent extends Struct {
 // SDL_GamepadDeviceEvent
 final class SdlGamepadDeviceEvent extends Struct {
   // [0]+(4)
-  @Uint32()
+  @Int32()
   external int type;
   // [4]+(4)
   @Uint32()
@@ -557,7 +557,7 @@ final class SdlGamepadDeviceEvent extends Struct {
 // SDL_GamepadTouchpadEvent
 final class SdlGamepadTouchpadEvent extends Struct {
   // [0]+(4)
-  @Uint32()
+  @Int32()
   external int type;
   // [4]+(4)
   @Uint32()
@@ -588,7 +588,7 @@ final class SdlGamepadTouchpadEvent extends Struct {
 // SDL_GamepadSensorEvent
 final class SdlGamepadSensorEvent extends Struct {
   // [0]+(4)
-  @Uint32()
+  @Int32()
   external int type;
   // [4]+(4)
   @Uint32()
@@ -620,7 +620,7 @@ final class SdlGamepadSensorEvent extends Struct {
 // SDL_AudioDeviceEvent
 final class SdlAudioDeviceEvent extends Struct {
   // [0]+(4)
-  @Uint32()
+  @Int32()
   external int type;
   // [4]+(4)
   @Uint32()
@@ -648,7 +648,7 @@ final class SdlAudioDeviceEvent extends Struct {
 // SDL_CameraDeviceEvent
 final class SdlCameraDeviceEvent extends Struct {
   // [0]+(4)
-  @Uint32()
+  @Int32()
   external int type;
   // [] +(4)
   @Uint32()
@@ -676,7 +676,7 @@ final class SdlCameraDeviceEvent extends Struct {
 // SDL_TouchFingerEvent
 final class SdlTouchFingerEvent extends Struct {
   // [0]+(4)
-  @Uint32()
+  @Int32()
   external int type;
   // [4]+(4)
   @Uint32()
@@ -713,7 +713,7 @@ final class SdlTouchFingerEvent extends Struct {
 // SDL_PenTipEvent
 final class SdlPenTipEvent extends Struct {
   // [0]+(4)
-  @Uint32()
+  @Int32()
   external int type;
   // [4]+(4)
   @Uint32()
@@ -763,7 +763,7 @@ final class SdlPenTipEvent extends Struct {
 // SDL_PenMotionEvent
 final class SdlPenMotionEvent extends Struct {
   // [0]+(4)
-  @Uint32()
+  @Int32()
   external int type;
   // [4]+(4)
   @Uint32()
@@ -813,7 +813,7 @@ final class SdlPenMotionEvent extends Struct {
 // SDL_PenButtonEvent
 final class SdlPenButtonEvent extends Struct {
   // [0]+(4)
-  @Uint32()
+  @Int32()
   external int type;
   // [4]+(4)
   @Uint32()
@@ -863,7 +863,7 @@ final class SdlPenButtonEvent extends Struct {
 // SDL_DropEvent
 final class SdlDropEvent extends Struct {
   // [0]+(4)
-  @Uint32()
+  @Int32()
   external int type;
   // [4]+(4)
   @Uint32()
@@ -892,7 +892,7 @@ final class SdlDropEvent extends Struct {
 // SDL_ClipboardEvent
 final class SdlClipboardEvent extends Struct {
   // [0]+(4)
-  @Uint32()
+  @Int32()
   external int type;
   // [4]+(4)
   @Uint32()
@@ -905,7 +905,7 @@ final class SdlClipboardEvent extends Struct {
 // SDL_SensorEvent
 final class SdlSensorEvent extends Struct {
   // [0]+(4)
-  @Uint32()
+  @Int32()
   external int type;
   // [4]+(4)
   @Uint32()
@@ -940,7 +940,7 @@ final class SdlSensorEvent extends Struct {
 // SDL_QuitEvent
 final class SdlQuitEvent extends Struct {
   // [0]+(4)
-  @Uint32()
+  @Int32()
   external int type;
   // [4]+(4)
   @Uint32()
@@ -1834,7 +1834,7 @@ final class SdlPalette extends Struct {
 // SDL_PixelFormat
 final class SdlPixelFormat extends Struct {
   // [0]+(4)
-  @Uint32()
+  @Int32()
   external int format;
   // [] +(4)
   @Uint32()
@@ -1955,40 +1955,40 @@ final class SdlRendererInfo extends Struct {
   @Uint32()
   external int flags;
   // [12]+(4)
-  @Uint32()
+  @Int32()
   external int numTextureFormats;
   // [16]+(4*16)
-  @Uint32()
+  @Int32()
   external int textureFormats_1;
-  @Uint32()
+  @Int32()
   external int textureFormats_2;
-  @Uint32()
+  @Int32()
   external int textureFormats_3;
-  @Uint32()
+  @Int32()
   external int textureFormats_4;
-  @Uint32()
+  @Int32()
   external int textureFormats_5;
-  @Uint32()
+  @Int32()
   external int textureFormats_6;
-  @Uint32()
+  @Int32()
   external int textureFormats_7;
-  @Uint32()
+  @Int32()
   external int textureFormats_8;
-  @Uint32()
+  @Int32()
   external int textureFormats_9;
-  @Uint32()
+  @Int32()
   external int textureFormats_10;
-  @Uint32()
+  @Int32()
   external int textureFormats_11;
-  @Uint32()
+  @Int32()
   external int textureFormats_12;
-  @Uint32()
+  @Int32()
   external int textureFormats_13;
-  @Uint32()
+  @Int32()
   external int textureFormats_14;
-  @Uint32()
+  @Int32()
   external int textureFormats_15;
-  @Uint32()
+  @Int32()
   external int textureFormats_16;
   // [80]+(4)
   @Int32()
@@ -2173,7 +2173,7 @@ final class SdlDisplayMode extends Struct {
   @Uint32()
   external int displayId;
   // [4]+(4)
-  @Uint32()
+  @Int32()
   external int format;
   // [8]+(4)
   @Int32()

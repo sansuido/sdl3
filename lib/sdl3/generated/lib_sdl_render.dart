@@ -86,7 +86,7 @@ String? sdlGetRenderDriver(int index) {
 /// \sa SDL_CreateWindow
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_CreateWindowAndRenderer(int width, int height, Uint32 window_flags, SDL_Window **window, SDL_Renderer **renderer)
+/// extern DECLSPEC int SDLCALL SDL_CreateWindowAndRenderer(int width, int height, SDL_WindowFlags window_flags, SDL_Window **window, SDL_Renderer **renderer)
 /// ```
 int sdlCreateWindowAndRenderer(
     int width,
@@ -374,6 +374,9 @@ int sdlGetRendererInfo(
 /// family index used for rendering
 /// - `SDL_PROP_RENDERER_VULKAN_PRESENT_QUEUE_FAMILY_INDEX_NUMBER`: the queue
 /// family index used for presentation
+/// - `SDL_PROP_RENDERER_VULKAN_SWAPCHAIN_IMAGE_COUNT_NUMBER`: the number of
+/// swapchain images, or potential frames in flight, used by the Vulkan
+/// renderer
 ///
 /// \param renderer the rendering context
 /// \returns a valid property ID on success or 0 on failure; call
@@ -2875,6 +2878,48 @@ Pointer<NativeType> sdlGetRenderMetalCommandEncoder(
       Pointer<NativeType> Function(
           Pointer<SdlRenderer> renderer)>('SDL_GetRenderMetalCommandEncoder');
   return sdlGetRenderMetalCommandEncoderLookupFunction(renderer);
+}
+
+///
+/// Add a set of synchronization semaphores for the current frame.
+///
+/// The Vulkan renderer will wait for `wait_semaphore` before submitting
+/// rendering commands and signal `signal_semaphore` after rendering commands
+/// are complete for this frame.
+///
+/// This should be called each frame that you want semaphore synchronization.
+/// The Vulkan renderer may have multiple frames in flight on the GPU, so you
+/// should have multiple semaphores that are used for synchronization. Querying
+/// SDL_PROP_RENDERER_VULKAN_SWAPCHAIN_IMAGE_COUNT_NUMBER will give you the
+/// maximum number of semaphores you'll need.
+///
+/// \param renderer the rendering context
+/// \param wait_stage_mask the VkPipelineStageFlags for the wait
+/// \param wait_semaphore a VkSempahore to wait on before rendering the current
+/// frame, or 0 if not needed
+/// \param signal_semaphore a VkSempahore that SDL will signal when rendering
+/// for the current frame is complete, or 0 if not
+/// needed
+/// \returns 0 on success or a negative error code on failure; call
+/// SDL_GetError() for more information.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// ```c
+/// extern DECLSPEC int SDLCALL SDL_AddVulkanRenderSemaphores(SDL_Renderer *renderer, Uint32 wait_stage_mask, Sint64 wait_semaphore, Sint64 signal_semaphore)
+/// ```
+int sdlAddVulkanRenderSemaphores(Pointer<SdlRenderer> renderer,
+    int waitStageMask, int waitSemaphore, int signalSemaphore) {
+  final sdlAddVulkanRenderSemaphoresLookupFunction = libSdl3.lookupFunction<
+      Int32 Function(Pointer<SdlRenderer> renderer, Uint32 waitStageMask,
+          Int64 waitSemaphore, Int64 signalSemaphore),
+      int Function(
+          Pointer<SdlRenderer> renderer,
+          int waitStageMask,
+          int waitSemaphore,
+          int signalSemaphore)>('SDL_AddVulkanRenderSemaphores');
+  return sdlAddVulkanRenderSemaphoresLookupFunction(
+      renderer, waitStageMask, waitSemaphore, signalSemaphore);
 }
 
 ///

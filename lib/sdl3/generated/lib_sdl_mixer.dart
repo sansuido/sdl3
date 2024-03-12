@@ -2262,7 +2262,7 @@ int mixGetMusicVolume(Pointer<MixMusic> music) {
 /// this function returns the previous (in this case, still-current) value.
 ///
 /// Note that the master volume does not affect any playing music; it is only
-/// applied when mixing chunks. Use Mix_MusicVolume() for that.\
+/// applied when mixing chunks. Use Mix_VolumeMusic() for that.\
 ///
 /// \param volume the new volume, between 0 and MIX_MAX_VOLUME, or -1 to query.
 /// \returns the previous volume. If the specified volume is -1, this returns

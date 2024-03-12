@@ -5,6 +5,16 @@ import '../sdl/sdl_rect.dart';
 import '../../generated/struct_sdl.dart';
 
 extension RectangleEx on math.Rectangle<double> {
+  double get widthIn => width - 1;
+  double get heightIn => height - 1;
+  math.Point<double> get topLeftIn => math.Point<double>(left, top);
+  math.Point<double> get topRightIn =>
+      math.Point<double>((left + widthIn), top);
+  math.Point<double> get bottomRightIn =>
+      math.Point<double>((left + widthIn), (top + heightIn));
+  math.Point<double> get bottomLeftIn =>
+      math.Point<double>(left, (top + heightIn));
+
   // dependence package:ffi
   Pointer<SdlFRect> calloc() {
     var result = ffi.calloc<SdlFRect>()

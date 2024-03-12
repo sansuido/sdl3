@@ -747,7 +747,7 @@ int sdlGetWindowPixelFormat(Pointer<SdlWindow> window) {
 /// \sa SDL_DestroyWindow
 ///
 /// ```c
-/// extern DECLSPEC SDL_Window *SDLCALL SDL_CreateWindow(const char *title, int w, int h, Uint32 flags)
+/// extern DECLSPEC SDL_Window *SDLCALL SDL_CreateWindow(const char *title, int w, int h, SDL_WindowFlags flags)
 /// ```
 Pointer<SdlWindow> sdlCreateWindow(String? title, int w, int h, int flags) {
   final sdlCreateWindowLookupFunction = libSdl3.lookupFunction<
@@ -815,7 +815,7 @@ Pointer<SdlWindow> sdlCreateWindow(String? title, int w, int h, int flags) {
 /// \sa SDL_GetWindowParent
 ///
 /// ```c
-/// extern DECLSPEC SDL_Window *SDLCALL SDL_CreatePopupWindow(SDL_Window *parent, int offset_x, int offset_y, int w, int h, Uint32 flags)
+/// extern DECLSPEC SDL_Window *SDLCALL SDL_CreatePopupWindow(SDL_Window *parent, int offset_x, int offset_y, int w, int h, SDL_WindowFlags flags)
 /// ```
 Pointer<SdlWindow> sdlCreatePopupWindow(Pointer<SdlWindow> parent, int offsetX,
     int offsetY, int w, int h, int flags) {
@@ -1145,7 +1145,7 @@ int sdlGetWindowProperties(Pointer<SdlWindow> window) {
 /// \sa SDL_ShowWindow
 ///
 /// ```c
-/// extern DECLSPEC Uint32 SDLCALL SDL_GetWindowFlags(SDL_Window *window)
+/// extern DECLSPEC SDL_WindowFlags SDLCALL SDL_GetWindowFlags(SDL_Window *window)
 /// ```
 int sdlGetWindowFlags(Pointer<SdlWindow> window) {
   final sdlGetWindowFlagsLookupFunction = libSdl3.lookupFunction<

@@ -14,11 +14,11 @@ import 'struct_sdl.dart';
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC const char* SDLCALL SDL_GetPixelFormatName(Uint32 format)
+/// extern DECLSPEC const char* SDLCALL SDL_GetPixelFormatName(SDL_PixelFormatEnum format)
 /// ```
 String? sdlGetPixelFormatName(int format) {
   final sdlGetPixelFormatNameLookupFunction = libSdl3.lookupFunction<
-      Pointer<Utf8> Function(Uint32 format),
+      Pointer<Utf8> Function(Int32 format),
       Pointer<Utf8> Function(int format)>('SDL_GetPixelFormatName');
   final result = sdlGetPixelFormatNameLookupFunction(format);
   if (result == nullptr) {
@@ -44,7 +44,7 @@ String? sdlGetPixelFormatName(int format) {
 /// \sa SDL_GetPixelFormatEnumForMasks
 ///
 /// ```c
-/// extern DECLSPEC SDL_bool SDLCALL SDL_GetMasksForPixelFormatEnum(Uint32 format, int *bpp, Uint32 * Rmask, Uint32 * Gmask, Uint32 * Bmask, Uint32 * Amask)
+/// extern DECLSPEC SDL_bool SDLCALL SDL_GetMasksForPixelFormatEnum(SDL_PixelFormatEnum format, int *bpp, Uint32 * Rmask, Uint32 * Gmask, Uint32 * Bmask, Uint32 * Amask)
 /// ```
 bool sdlGetMasksForPixelFormatEnum(
     int format,
@@ -54,7 +54,7 @@ bool sdlGetMasksForPixelFormatEnum(
     Pointer<Uint32> bmask,
     Pointer<Uint32> amask) {
   final sdlGetMasksForPixelFormatEnumLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Uint32 format, Pointer<Int32> bpp, Pointer<Uint32> rmask,
+      Int32 Function(Int32 format, Pointer<Int32> bpp, Pointer<Uint32> rmask,
           Pointer<Uint32> gmask, Pointer<Uint32> bmask, Pointer<Uint32> amask),
       int Function(
           int format,
@@ -79,19 +79,20 @@ bool sdlGetMasksForPixelFormatEnum(
 /// \param Gmask the green mask for the format
 /// \param Bmask the blue mask for the format
 /// \param Amask the alpha mask for the format
-/// \returns one of the SDL_PixelFormatEnum values
+/// \returns the SDL_PixelFormatEnum value corresponding to the format masks,
+/// or SDL_PIXELFORMAT_UNKNOWN if there isn't a match.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetMasksForPixelFormatEnum
 ///
 /// ```c
-/// extern DECLSPEC Uint32 SDLCALL SDL_GetPixelFormatEnumForMasks(int bpp, Uint32 Rmask, Uint32 Gmask, Uint32 Bmask, Uint32 Amask)
+/// extern DECLSPEC SDL_PixelFormatEnum SDLCALL SDL_GetPixelFormatEnumForMasks(int bpp, Uint32 Rmask, Uint32 Gmask, Uint32 Bmask, Uint32 Amask)
 /// ```
 int sdlGetPixelFormatEnumForMasks(
     int bpp, int rmask, int gmask, int bmask, int amask) {
   final sdlGetPixelFormatEnumForMasksLookupFunction = libSdl3.lookupFunction<
-      Uint32 Function(
+      Int32 Function(
           Int32 bpp, Uint32 rmask, Uint32 gmask, Uint32 bmask, Uint32 amask),
       int Function(int bpp, int rmask, int gmask, int bmask,
           int amask)>('SDL_GetPixelFormatEnumForMasks');
@@ -115,11 +116,11 @@ int sdlGetPixelFormatEnumForMasks(
 /// \sa SDL_DestroyPixelFormat
 ///
 /// ```c
-/// extern DECLSPEC SDL_PixelFormat * SDLCALL SDL_CreatePixelFormat(Uint32 pixel_format)
+/// extern DECLSPEC SDL_PixelFormat * SDLCALL SDL_CreatePixelFormat(SDL_PixelFormatEnum pixel_format)
 /// ```
 Pointer<SdlPixelFormat> sdlCreatePixelFormat(int pixelFormat) {
   final sdlCreatePixelFormatLookupFunction = libSdl3.lookupFunction<
-      Pointer<SdlPixelFormat> Function(Uint32 pixelFormat),
+      Pointer<SdlPixelFormat> Function(Int32 pixelFormat),
       Pointer<SdlPixelFormat> Function(
           int pixelFormat)>('SDL_CreatePixelFormat');
   return sdlCreatePixelFormatLookupFunction(pixelFormat);

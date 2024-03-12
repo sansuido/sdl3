@@ -19,11 +19,11 @@ import 'struct_sdl.dart';
 /// \sa SDL_DestroySurface
 ///
 /// ```c
-/// extern DECLSPEC SDL_Surface *SDLCALL SDL_CreateSurface (int width, int height, Uint32 format)
+/// extern DECLSPEC SDL_Surface *SDLCALL SDL_CreateSurface (int width, int height, SDL_PixelFormatEnum format)
 /// ```
 Pointer<SdlSurface> sdlCreateSurface(int width, int height, int format) {
   final sdlCreateSurfaceLookupFunction = libSdl3.lookupFunction<
-      Pointer<SdlSurface> Function(Int32 width, Int32 height, Uint32 format),
+      Pointer<SdlSurface> Function(Int32 width, Int32 height, Int32 format),
       Pointer<SdlSurface> Function(
           int width, int height, int format)>('SDL_CreateSurface');
   return sdlCreateSurfaceLookupFunction(width, height, format);
@@ -56,13 +56,13 @@ Pointer<SdlSurface> sdlCreateSurface(int width, int height, int format) {
 /// \sa SDL_DestroySurface
 ///
 /// ```c
-/// extern DECLSPEC SDL_Surface *SDLCALL SDL_CreateSurfaceFrom (void *pixels, int width, int height, int pitch, Uint32 format)
+/// extern DECLSPEC SDL_Surface *SDLCALL SDL_CreateSurfaceFrom (void *pixels, int width, int height, int pitch, SDL_PixelFormatEnum format)
 /// ```
 Pointer<SdlSurface> sdlCreateSurfaceFrom(
     Pointer<NativeType> pixels, int width, int height, int pitch, int format) {
   final sdlCreateSurfaceFromLookupFunction = libSdl3.lookupFunction<
       Pointer<SdlSurface> Function(Pointer<NativeType> pixels, Int32 width,
-          Int32 height, Int32 pitch, Uint32 format),
+          Int32 height, Int32 pitch, Int32 format),
       Pointer<SdlSurface> Function(Pointer<NativeType> pixels, int width,
           int height, int pitch, int format)>('SDL_CreateSurfaceFrom');
   return sdlCreateSurfaceFromLookupFunction(
@@ -842,13 +842,13 @@ Pointer<SdlSurface> sdlConvertSurface(
 /// \sa SDL_CreateSurface
 ///
 /// ```c
-/// extern DECLSPEC SDL_Surface *SDLCALL SDL_ConvertSurfaceFormat(SDL_Surface *surface, Uint32 pixel_format)
+/// extern DECLSPEC SDL_Surface *SDLCALL SDL_ConvertSurfaceFormat(SDL_Surface *surface, SDL_PixelFormatEnum pixel_format)
 /// ```
 Pointer<SdlSurface> sdlConvertSurfaceFormat(
     Pointer<SdlSurface> surface, int pixelFormat) {
   final sdlConvertSurfaceFormatLookupFunction = libSdl3.lookupFunction<
       Pointer<SdlSurface> Function(
-          Pointer<SdlSurface> surface, Uint32 pixelFormat),
+          Pointer<SdlSurface> surface, Int32 pixelFormat),
       Pointer<SdlSurface> Function(Pointer<SdlSurface> surface,
           int pixelFormat)>('SDL_ConvertSurfaceFormat');
   return sdlConvertSurfaceFormatLookupFunction(surface, pixelFormat);
@@ -876,14 +876,14 @@ Pointer<SdlSurface> sdlConvertSurfaceFormat(
 /// \sa SDL_CreateSurface
 ///
 /// ```c
-/// extern DECLSPEC SDL_Surface *SDLCALL SDL_ConvertSurfaceFormatAndColorspace(SDL_Surface *surface, Uint32 pixel_format, SDL_Colorspace colorspace, SDL_PropertiesID props)
+/// extern DECLSPEC SDL_Surface *SDLCALL SDL_ConvertSurfaceFormatAndColorspace(SDL_Surface *surface, SDL_PixelFormatEnum pixel_format, SDL_Colorspace colorspace, SDL_PropertiesID props)
 /// ```
 Pointer<SdlSurface> sdlConvertSurfaceFormatAndColorspace(
     Pointer<SdlSurface> surface, int pixelFormat, int colorspace, int props) {
   final sdlConvertSurfaceFormatAndColorspaceLookupFunction =
       libSdl3.lookupFunction<
           Pointer<SdlSurface> Function(Pointer<SdlSurface> surface,
-              Uint32 pixelFormat, Int32 colorspace, Uint32 props),
+              Int32 pixelFormat, Int32 colorspace, Uint32 props),
           Pointer<SdlSurface> Function(
               Pointer<SdlSurface> surface,
               int pixelFormat,
@@ -910,7 +910,7 @@ Pointer<SdlSurface> sdlConvertSurfaceFormatAndColorspace(
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_ConvertPixels(int width, int height, Uint32 src_format, const void *src, int src_pitch, Uint32 dst_format, void *dst, int dst_pitch)
+/// extern DECLSPEC int SDLCALL SDL_ConvertPixels(int width, int height, SDL_PixelFormatEnum src_format, const void *src, int src_pitch, SDL_PixelFormatEnum dst_format, void *dst, int dst_pitch)
 /// ```
 int sdlConvertPixels(
     int width,
@@ -925,10 +925,10 @@ int sdlConvertPixels(
       Int32 Function(
           Int32 width,
           Int32 height,
-          Uint32 srcFormat,
+          Int32 srcFormat,
           Pointer<NativeType> src,
           Int32 srcPitch,
-          Uint32 dstFormat,
+          Int32 dstFormat,
           Pointer<NativeType> dst,
           Int32 dstPitch),
       int Function(
@@ -970,7 +970,7 @@ int sdlConvertPixels(
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_ConvertPixelsAndColorspace(int width, int height, Uint32 src_format, SDL_Colorspace src_colorspace, SDL_PropertiesID src_properties, const void *src, int src_pitch, Uint32 dst_format, SDL_Colorspace dst_colorspace, SDL_PropertiesID dst_properties, void *dst, int dst_pitch)
+/// extern DECLSPEC int SDLCALL SDL_ConvertPixelsAndColorspace(int width, int height, SDL_PixelFormatEnum src_format, SDL_Colorspace src_colorspace, SDL_PropertiesID src_properties, const void *src, int src_pitch, SDL_PixelFormatEnum dst_format, SDL_Colorspace dst_colorspace, SDL_PropertiesID dst_properties, void *dst, int dst_pitch)
 /// ```
 int sdlConvertPixelsAndColorspace(
     int width,
@@ -989,12 +989,12 @@ int sdlConvertPixelsAndColorspace(
       Int32 Function(
           Int32 width,
           Int32 height,
-          Uint32 srcFormat,
+          Int32 srcFormat,
           Int32 srcColorspace,
           Uint32 srcProperties,
           Pointer<NativeType> src,
           Int32 srcPitch,
-          Uint32 dstFormat,
+          Int32 dstFormat,
           Int32 dstColorspace,
           Uint32 dstProperties,
           Pointer<NativeType> dst,
@@ -1048,7 +1048,7 @@ int sdlConvertPixelsAndColorspace(
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_PremultiplyAlpha(int width, int height, Uint32 src_format, const void *src, int src_pitch, Uint32 dst_format, void *dst, int dst_pitch)
+/// extern DECLSPEC int SDLCALL SDL_PremultiplyAlpha(int width, int height, SDL_PixelFormatEnum src_format, const void *src, int src_pitch, SDL_PixelFormatEnum dst_format, void *dst, int dst_pitch)
 /// ```
 int sdlPremultiplyAlpha(
     int width,
@@ -1063,10 +1063,10 @@ int sdlPremultiplyAlpha(
       Int32 Function(
           Int32 width,
           Int32 height,
-          Uint32 srcFormat,
+          Int32 srcFormat,
           Pointer<NativeType> src,
           Int32 srcPitch,
-          Uint32 dstFormat,
+          Int32 dstFormat,
           Pointer<NativeType> dst,
           Int32 dstPitch),
       int Function(

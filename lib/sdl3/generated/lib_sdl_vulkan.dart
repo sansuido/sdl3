@@ -111,7 +111,7 @@ void sdlVulkanUnloadLibrary() {
 /// This should be called after either calling SDL_Vulkan_LoadLibrary() or
 /// creating an SDL_Window with the `SDL_WINDOW_VULKAN` flag.
 ///
-/// On return, the variable pointed to by `pCount` will be set to the number of
+/// On return, the variable pointed to by `count` will be set to the number of
 /// elements returned, suitable for using with
 /// VkInstanceCreateInfo::enabledExtensionCount, and the returned array can be
 /// used with VkInstanceCreateInfo::ppEnabledExtensionNames, for calling
@@ -119,8 +119,7 @@ void sdlVulkanUnloadLibrary() {
 ///
 /// You should not free the returned array; it is owned by SDL.
 ///
-/// \param pCount A pointer to Uint32 that will be filled with the number of
-/// extensions returned.
+/// \param count a pointer filled in with the number of extensions returned.
 /// \returns An array of extension name strings on success, NULL on error.
 ///
 /// \since This function is available since SDL 3.0.0.
@@ -128,14 +127,14 @@ void sdlVulkanUnloadLibrary() {
 /// \sa SDL_Vulkan_CreateSurface
 ///
 /// ```c
-/// extern DECLSPEC char const* const* SDLCALL SDL_Vulkan_GetInstanceExtensions(Uint32 *pCount)
+/// extern DECLSPEC char const* const* SDLCALL SDL_Vulkan_GetInstanceExtensions(Uint32 *count)
 /// ```
-Pointer<Pointer<Int8>> sdlVulkanGetInstanceExtensions(Pointer<Uint32> pCount) {
+Pointer<Pointer<Int8>> sdlVulkanGetInstanceExtensions(Pointer<Uint32> count) {
   final sdlVulkanGetInstanceExtensionsLookupFunction = libSdl3.lookupFunction<
-      Pointer<Pointer<Int8>> Function(Pointer<Uint32> pCount),
+      Pointer<Pointer<Int8>> Function(Pointer<Uint32> count),
       Pointer<Pointer<Int8>> Function(
-          Pointer<Uint32> pCount)>('SDL_Vulkan_GetInstanceExtensions');
-  return sdlVulkanGetInstanceExtensionsLookupFunction(pCount);
+          Pointer<Uint32> count)>('SDL_Vulkan_GetInstanceExtensions');
+  return sdlVulkanGetInstanceExtensionsLookupFunction(count);
 }
 
 ///
