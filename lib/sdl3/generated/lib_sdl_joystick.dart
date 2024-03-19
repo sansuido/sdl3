@@ -72,7 +72,7 @@ Pointer<Uint32> sdlGetJoysticks(Pointer<Int32> count) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetJoystickName
-/// \sa SDL_OpenJoystick
+/// \sa SDL_GetJoysticks
 ///
 /// ```c
 /// extern DECLSPEC const char *SDLCALL SDL_GetJoystickInstanceName(SDL_JoystickID instance_id)
@@ -100,7 +100,7 @@ String? sdlGetJoystickInstanceName(int instanceId) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetJoystickPath
-/// \sa SDL_OpenJoystick
+/// \sa SDL_GetJoysticks
 ///
 /// ```c
 /// extern DECLSPEC const char *SDLCALL SDL_GetJoystickInstancePath(SDL_JoystickID instance_id)
@@ -127,7 +127,7 @@ String? sdlGetJoystickInstancePath(int instanceId) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetJoystickPlayerIndex
-/// \sa SDL_OpenJoystick
+/// \sa SDL_GetJoysticks
 ///
 /// ```c
 /// extern DECLSPEC int SDLCALL SDL_GetJoystickInstancePlayerIndex(SDL_JoystickID instance_id)
@@ -175,6 +175,9 @@ SdlGuid sdlGetJoystickInstanceGuid(int instanceId) {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
+/// \sa SDL_GetJoystickVendor
+/// \sa SDL_GetJoysticks
+///
 /// ```c
 /// extern DECLSPEC Uint16 SDLCALL SDL_GetJoystickInstanceVendor(SDL_JoystickID instance_id)
 /// ```
@@ -196,6 +199,9 @@ int sdlGetJoystickInstanceVendor(int instanceId) {
 /// invalid index, this function returns zero
 ///
 /// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_GetJoystickProduct
+/// \sa SDL_GetJoysticks
 ///
 /// ```c
 /// extern DECLSPEC Uint16 SDLCALL SDL_GetJoystickInstanceProduct(SDL_JoystickID instance_id)
@@ -219,6 +225,9 @@ int sdlGetJoystickInstanceProduct(int instanceId) {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
+/// \sa SDL_GetJoystickProductVersion
+/// \sa SDL_GetJoysticks
+///
 /// ```c
 /// extern DECLSPEC Uint16 SDLCALL SDL_GetJoystickInstanceProductVersion(SDL_JoystickID instance_id)
 /// ```
@@ -241,6 +250,9 @@ int sdlGetJoystickInstanceProductVersion(int instanceId) {
 /// invalid index, this function returns `SDL_JOYSTICK_TYPE_UNKNOWN`
 ///
 /// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_GetJoystickType
+/// \sa SDL_GetJoysticks
 ///
 /// ```c
 /// extern DECLSPEC SDL_JoystickType SDLCALL SDL_GetJoystickInstanceType(SDL_JoystickID instance_id)
@@ -305,6 +317,9 @@ Pointer<SdlJoystick> sdlGetJoystickFromInstanceId(int instanceId) {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
+/// \sa SDL_GetJoystickPlayerIndex
+/// \sa SDL_SetJoystickPlayerIndex
+///
 /// ```c
 /// extern DECLSPEC SDL_Joystick *SDLCALL SDL_GetJoystickFromPlayerIndex(int player_index)
 /// ```
@@ -328,6 +343,9 @@ Pointer<SdlJoystick> sdlGetJoystickFromPlayerIndex(int playerIndex) {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
+/// \sa SDL_AttachVirtualJoystickEx
+/// \sa SDL_DetachVirtualJoystick
+///
 /// ```c
 /// extern DECLSPEC SDL_JoystickID SDLCALL SDL_AttachVirtualJoystick(SDL_JoystickType type, int naxes, int nbuttons, int nhats)
 /// ```
@@ -347,6 +365,9 @@ int sdlAttachVirtualJoystick(int type, int naxes, int nbuttons, int nhats) {
 /// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_AttachVirtualJoystick
+/// \sa SDL_DetachVirtualJoystick
 ///
 /// ```c
 /// extern DECLSPEC SDL_JoystickID SDLCALL SDL_AttachVirtualJoystickEx(const SDL_VirtualJoystickDesc *desc)
@@ -368,6 +389,9 @@ int sdlAttachVirtualJoystickEx(Pointer<SdlVirtualJoystickDesc> desc) {
 /// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_AttachVirtualJoystick
+/// \sa SDL_AttachVirtualJoystickEx
 ///
 /// ```c
 /// extern DECLSPEC int SDLCALL SDL_DetachVirtualJoystick(SDL_JoystickID instance_id)
@@ -533,7 +557,6 @@ int sdlGetJoystickProperties(Pointer<SdlJoystick> joystick) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetJoystickInstanceName
-/// \sa SDL_OpenJoystick
 ///
 /// ```c
 /// extern DECLSPEC const char *SDLCALL SDL_GetJoystickName(SDL_Joystick *joystick)
@@ -587,6 +610,8 @@ String? sdlGetJoystickPath(Pointer<SdlJoystick> joystick) {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
+/// \sa SDL_SetJoystickPlayerIndex
+///
 /// ```c
 /// extern DECLSPEC int SDLCALL SDL_GetJoystickPlayerIndex(SDL_Joystick *joystick)
 /// ```
@@ -608,6 +633,8 @@ int sdlGetJoystickPlayerIndex(Pointer<SdlJoystick> joystick) {
 /// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_GetJoystickPlayerIndex
 ///
 /// ```c
 /// extern DECLSPEC int SDLCALL SDL_SetJoystickPlayerIndex(SDL_Joystick *joystick, int player_index)
@@ -655,6 +682,8 @@ SdlGuid sdlGetJoystickGuid(Pointer<SdlJoystick> joystick) {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
+/// \sa SDL_GetJoystickInstanceVendor
+///
 /// ```c
 /// extern DECLSPEC Uint16 SDLCALL SDL_GetJoystickVendor(SDL_Joystick *joystick)
 /// ```
@@ -675,6 +704,8 @@ int sdlGetJoystickVendor(Pointer<SdlJoystick> joystick) {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
+/// \sa SDL_GetJoystickInstanceProduct
+///
 /// ```c
 /// extern DECLSPEC Uint16 SDLCALL SDL_GetJoystickProduct(SDL_Joystick *joystick)
 /// ```
@@ -694,6 +725,8 @@ int sdlGetJoystickProduct(Pointer<SdlJoystick> joystick) {
 /// \returns the product version of the selected joystick, or 0 if unavailable.
 ///
 /// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_GetJoystickInstanceProductVersion
 ///
 /// ```c
 /// extern DECLSPEC Uint16 SDLCALL SDL_GetJoystickProductVersion(SDL_Joystick *joystick)
@@ -761,6 +794,8 @@ String? sdlGetJoystickSerial(Pointer<SdlJoystick> joystick) {
 /// \returns the SDL_JoystickType of the selected joystick.
 ///
 /// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_GetJoystickInstanceType
 ///
 /// ```c
 /// extern DECLSPEC SDL_JoystickType SDLCALL SDL_GetJoystickType(SDL_Joystick *joystick)
@@ -875,9 +910,6 @@ void sdlGetJoystickGuidInfo(SdlGuid guid, Pointer<Uint16> vendor,
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_CloseJoystick
-/// \sa SDL_OpenJoystick
-///
 /// ```c
 /// extern DECLSPEC SDL_bool SDLCALL SDL_JoystickConnected(SDL_Joystick *joystick)
 /// ```
@@ -896,8 +928,6 @@ bool sdlJoystickConnected(Pointer<SdlJoystick> joystick) {
 /// failure; call SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
-///
-/// \sa SDL_OpenJoystick
 ///
 /// ```c
 /// extern DECLSPEC SDL_JoystickID SDLCALL SDL_GetJoystickInstanceID(SDL_Joystick *joystick)
@@ -924,7 +954,9 @@ int sdlGetJoystickInstanceId(Pointer<SdlJoystick> joystick) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetJoystickAxis
-/// \sa SDL_OpenJoystick
+/// \sa SDL_GetNumJoystickBalls
+/// \sa SDL_GetNumJoystickButtons
+/// \sa SDL_GetNumJoystickHats
 ///
 /// ```c
 /// extern DECLSPEC int SDLCALL SDL_GetNumJoystickAxes(SDL_Joystick *joystick)
@@ -937,6 +969,35 @@ int sdlGetNumJoystickAxes(Pointer<SdlJoystick> joystick) {
 }
 
 ///
+/// Get the number of trackballs on a joystick.
+///
+/// Joystick trackballs have only relative motion events associated with them
+/// and their state cannot be polled.
+///
+/// Most joysticks do not have trackballs.
+///
+/// \param joystick an SDL_Joystick structure containing joystick information
+/// \returns the number of trackballs on success or a negative error code on
+/// failure; call SDL_GetError() for more information.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_GetJoystickBall
+/// \sa SDL_GetNumJoystickAxes
+/// \sa SDL_GetNumJoystickButtons
+/// \sa SDL_GetNumJoystickHats
+///
+/// ```c
+/// extern DECLSPEC int SDLCALL SDL_GetNumJoystickBalls(SDL_Joystick *joystick)
+/// ```
+int sdlGetNumJoystickBalls(Pointer<SdlJoystick> joystick) {
+  final sdlGetNumJoystickBallsLookupFunction = libSdl3.lookupFunction<
+      Int32 Function(Pointer<SdlJoystick> joystick),
+      int Function(Pointer<SdlJoystick> joystick)>('SDL_GetNumJoystickBalls');
+  return sdlGetNumJoystickBallsLookupFunction(joystick);
+}
+
+///
 /// Get the number of POV hats on a joystick.
 ///
 /// \param joystick an SDL_Joystick structure containing joystick information
@@ -946,7 +1007,9 @@ int sdlGetNumJoystickAxes(Pointer<SdlJoystick> joystick) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetJoystickHat
-/// \sa SDL_OpenJoystick
+/// \sa SDL_GetNumJoystickAxes
+/// \sa SDL_GetNumJoystickBalls
+/// \sa SDL_GetNumJoystickButtons
 ///
 /// ```c
 /// extern DECLSPEC int SDLCALL SDL_GetNumJoystickHats(SDL_Joystick *joystick)
@@ -968,7 +1031,9 @@ int sdlGetNumJoystickHats(Pointer<SdlJoystick> joystick) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetJoystickButton
-/// \sa SDL_OpenJoystick
+/// \sa SDL_GetNumJoystickAxes
+/// \sa SDL_GetNumJoystickBalls
+/// \sa SDL_GetNumJoystickHats
 ///
 /// ```c
 /// extern DECLSPEC int SDLCALL SDL_GetNumJoystickButtons(SDL_Joystick *joystick)
@@ -992,6 +1057,7 @@ int sdlGetNumJoystickButtons(Pointer<SdlJoystick> joystick) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_JoystickEventsEnabled
+/// \sa SDL_UpdateJoysticks
 ///
 /// ```c
 /// extern DECLSPEC void SDLCALL SDL_SetJoystickEventsEnabled(SDL_bool enabled)
@@ -1103,6 +1169,38 @@ bool sdlGetJoystickAxisInitialState(
           Pointer<Int16> state)>('SDL_GetJoystickAxisInitialState');
   return sdlGetJoystickAxisInitialStateLookupFunction(joystick, axis, state) ==
       1;
+}
+
+///
+/// Get the ball axis change since the last poll.
+///
+/// Trackballs can only return relative motion since the last call to
+/// SDL_GetJoystickBall(), these motion deltas are placed into `dx` and `dy`.
+///
+/// Most joysticks do not have trackballs.
+///
+/// \param joystick the SDL_Joystick to query
+/// \param ball the ball index to query; ball indices start at index 0
+/// \param dx stores the difference in the x axis position since the last poll
+/// \param dy stores the difference in the y axis position since the last poll
+/// \returns 0 on success or a negative error code on failure; call
+/// SDL_GetError() for more information.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_GetNumJoystickBalls
+///
+/// ```c
+/// extern DECLSPEC int SDLCALL SDL_GetJoystickBall(SDL_Joystick *joystick, int ball, int *dx, int *dy)
+/// ```
+int sdlGetJoystickBall(Pointer<SdlJoystick> joystick, int ball,
+    Pointer<Int32> dx, Pointer<Int32> dy) {
+  final sdlGetJoystickBallLookupFunction = libSdl3.lookupFunction<
+      Int32 Function(Pointer<SdlJoystick> joystick, Int32 ball,
+          Pointer<Int32> dx, Pointer<Int32> dy),
+      int Function(Pointer<SdlJoystick> joystick, int ball, Pointer<Int32> dx,
+          Pointer<Int32> dy)>('SDL_GetJoystickBall');
+  return sdlGetJoystickBallLookupFunction(joystick, ball, dx, dy);
 }
 
 ///
@@ -1219,6 +1317,8 @@ int sdlRumbleJoystick(Pointer<SdlJoystick> joystick, int lowFrequencyRumble,
 /// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_RumbleJoystick
 ///
 /// ```c
 /// extern DECLSPEC int SDLCALL SDL_RumbleJoystickTriggers(SDL_Joystick *joystick, Uint16 left_rumble, Uint16 right_rumble, Uint32 duration_ms)

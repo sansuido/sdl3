@@ -45,12 +45,12 @@ class WavExample {
 
   bool load(String filename) {
     int stat = 0;
-    var rwops = sdlRwFromFile(filename, 'rb');
+    var rwops = sdlIoFromFile(filename, 'rb');
     if (rwops != nullptr) {
       var wavSpec = calloc<SdlAudioSpec>();
       var wavLength = calloc<Uint32>();
       var wavBuffer = calloc<Pointer<Uint8>>();
-      stat = sdlLoadWavRw(rwops, true, wavSpec, wavBuffer, wavLength);
+      stat = sdlLoadWavIo(rwops, true, wavSpec, wavBuffer, wavLength);
       if (stat == 0) {
         stream = sdlOpenAudioDeviceStream(
             SDL_AUDIO_DEVICE_DEFAULT_OUTPUT, wavSpec, nullptr, nullptr);
@@ -143,10 +143,10 @@ int main() {
     while (running) {
       while (event.poll()) {
         switch (event.type) {
-          case SDL_QUIT:
+          case SDL_EVENT_QUIT:
             running = false;
             break;
-          case SDL_KEYDOWN:
+          case SDL_EVENT_KEY_DOWN:
             if (event.key.keysym.ref.sym == SDLK_ESCAPE) {
               running = false;
             } else if (event.key.keysym.ref.sym == SDLK_SPACE) {

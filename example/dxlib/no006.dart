@@ -100,10 +100,10 @@ class Game {
     var event = calloc<SdlEvent>();
     while (event.poll()) {
       switch (event.type) {
-        case SDL_QUIT:
+        case SDL_EVENT_QUIT:
           running = false;
           break;
-        case SDL_KEYDOWN:
+        case SDL_EVENT_KEY_DOWN:
           if (buttonWait) {
             buttonWait = false;
           }

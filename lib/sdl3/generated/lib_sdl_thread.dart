@@ -106,8 +106,6 @@ Pointer<SdlThread> sdlCreateThreadWithStackSize(
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_CreateThread
-///
 /// ```c
 /// extern DECLSPEC const char *SDLCALL SDL_GetThreadName(SDL_Thread *thread)
 /// ```
@@ -315,7 +313,6 @@ int sdlCreateTls() {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_CreateTLS
 /// \sa SDL_SetTLS
 ///
 /// ```c
@@ -348,7 +345,6 @@ Pointer<NativeType> sdlGetTls(int id) {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_CreateTLS
 /// \sa SDL_GetTLS
 ///
 /// ```c

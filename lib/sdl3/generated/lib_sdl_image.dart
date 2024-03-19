@@ -149,9 +149,9 @@ void imgQuit() {
 /// by calling: SDL_SetSurfaceColorKey(image, SDL_RLEACCEL,
 /// image->format->colorkey);
 ///
-/// If `freesrc` is SDL_TRUE, the RWops will be closed before returning,
-/// whether this function succeeds or not. SDL_image reads everything it needs
-/// from the RWops during this call in any case.
+/// If `closeio` is SDL_TRUE, `src` will be closed before returning, whether
+/// this function succeeds or not. SDL_image reads everything it needs from
+/// `src` during this call in any case.
 ///
 /// Even though this function accepts a file type, SDL_image may still try
 /// other decoders that are capable of detecting file type from the contents of
@@ -160,23 +160,23 @@ void imgQuit() {
 /// its ability to guess the format.
 ///
 /// There is a separate function to read files from disk without having to deal
-/// with SDL_RWops: `IMG_Load("filename.jpg")` will call this function and
+/// with SDL_IOStream: `IMG_Load("filename.jpg")` will call this function and
 /// manage those details for you, determining the file type from the filename's
 /// extension.
 ///
-/// There is also IMG_Load_RW(), which is equivalent to this function except
+/// There is also IMG_Load_IO(), which is equivalent to this function except
 /// that it will rely on SDL_image to determine what type of data it is
 /// loading, much like passing a NULL for type.
 ///
 /// If you are using SDL's 2D rendering API, there is an equivalent call to
 /// load images directly into an SDL_Texture for use by the GPU without using a
-/// software surface: call IMG_LoadTextureTyped_RW() instead.
+/// software surface: call IMG_LoadTextureTyped_IO() instead.
 ///
 /// When done with the returned surface, the app should dispose of it with a
 /// call to SDL_DestroySurface().
 ///
-/// \param src an SDL_RWops that data will be read from.
-/// \param freesrc SDL_TRUE to close/free the SDL_RWops before returning,
+/// \param src an SDL_IOStream that data will be read from.
+/// \param closeio SDL_TRUE to close/free the SDL_IOStream before returning,
 /// SDL_FALSE to leave it open.
 /// \param type a filename extension that represent this data ("BMP", "GIF",
 /// "PNG", etc).
@@ -185,22 +185,22 @@ void imgQuit() {
 /// \since This function is available since SDL_image 3.0.0.
 ///
 /// \sa IMG_Load
-/// \sa IMG_Load_RW
+/// \sa IMG_Load_IO
 /// \sa SDL_DestroySurface
 ///
 /// ```c
-/// extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadTyped_RW(SDL_RWops *src, SDL_bool freesrc, const char *type)
+/// extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadTyped_IO(SDL_IOStream *src, SDL_bool closeio, const char *type)
 /// ```
-Pointer<SdlSurface> imgLoadTypedRw(
-    Pointer<SdlRWops> src, bool freesrc, String? type) {
-  final imgLoadTypedRwLookupFunction = libSdl3Image.lookupFunction<
+Pointer<SdlSurface> imgLoadTypedIo(
+    Pointer<SdlIoStream> src, bool closeio, String? type) {
+  final imgLoadTypedIoLookupFunction = libSdl3Image.lookupFunction<
       Pointer<SdlSurface> Function(
-          Pointer<SdlRWops> src, Int32 freesrc, Pointer<Utf8> type),
-      Pointer<SdlSurface> Function(Pointer<SdlRWops> src, int freesrc,
-          Pointer<Utf8> type)>('IMG_LoadTyped_RW');
+          Pointer<SdlIoStream> src, Int32 closeio, Pointer<Utf8> type),
+      Pointer<SdlSurface> Function(Pointer<SdlIoStream> src, int closeio,
+          Pointer<Utf8> type)>('IMG_LoadTyped_IO');
   final typePointer = type != null ? type.toNativeUtf8() : nullptr;
   final result =
-      imgLoadTypedRwLookupFunction(src, freesrc ? 1 : 0, typePointer);
+      imgLoadTypedIoLookupFunction(src, closeio ? 1 : 0, typePointer);
   calloc.free(typePointer);
   return result;
 }
@@ -226,9 +226,9 @@ Pointer<SdlSurface> imgLoadTypedRw(
 /// by calling: SDL_SetSurfaceColorKey(image, SDL_RLEACCEL,
 /// image->format->colorkey);
 ///
-/// There is a separate function to read files from an SDL_RWops, if you need
-/// an i/o abstraction to provide data from anywhere instead of a simple
-/// filesystem read; that function is IMG_Load_RW().
+/// There is a separate function to read files from an SDL_IOStream, if you
+/// need an i/o abstraction to provide data from anywhere instead of a simple
+/// filesystem read; that function is IMG_Load_IO().
 ///
 /// If you are using SDL's 2D rendering API, there is an equivalent call to
 /// load images directly into an SDL_Texture for use by the GPU without using a
@@ -242,8 +242,8 @@ Pointer<SdlSurface> imgLoadTypedRw(
 ///
 /// \since This function is available since SDL_image 3.0.0.
 ///
-/// \sa IMG_LoadTyped_RW
-/// \sa IMG_Load_RW
+/// \sa IMG_LoadTyped_IO
+/// \sa IMG_Load_IO
 /// \sa SDL_DestroySurface
 ///
 /// ```c
@@ -280,46 +280,46 @@ Pointer<SdlSurface> imgLoad(String? file) {
 /// by calling: SDL_SetSurfaceColorKey(image, SDL_RLEACCEL,
 /// image->format->colorkey);
 ///
-/// If `freesrc` is SDL_TRUE, the RWops will be closed before returning,
-/// whether this function succeeds or not. SDL_image reads everything it needs
-/// from the RWops during this call in any case.
+/// If `closeio` is SDL_TRUE, `src` will be closed before returning, whether
+/// this function succeeds or not. SDL_image reads everything it needs from
+/// `src` during this call in any case.
 ///
 /// There is a separate function to read files from disk without having to deal
-/// with SDL_RWops: `IMG_Load("filename.jpg")` will call this function and
+/// with SDL_IOStream: `IMG_Load("filename.jpg")` will call this function and
 /// manage those details for you, determining the file type from the filename's
 /// extension.
 ///
-/// There is also IMG_LoadTyped_RW(), which is equivalent to this function
+/// There is also IMG_LoadTyped_IO(), which is equivalent to this function
 /// except a file extension (like "BMP", "JPG", etc) can be specified, in case
 /// SDL_image cannot autodetect the file format.
 ///
 /// If you are using SDL's 2D rendering API, there is an equivalent call to
 /// load images directly into an SDL_Texture for use by the GPU without using a
-/// software surface: call IMG_LoadTexture_RW() instead.
+/// software surface: call IMG_LoadTexture_IO() instead.
 ///
 /// When done with the returned surface, the app should dispose of it with a
 /// call to SDL_DestroySurface().
 ///
-/// \param src an SDL_RWops that data will be read from.
-/// \param freesrc SDL_TRUE to close/free the SDL_RWops before returning,
+/// \param src an SDL_IOStream that data will be read from.
+/// \param closeio SDL_TRUE to close/free the SDL_IOStream before returning,
 /// SDL_FALSE to leave it open.
 /// \returns a new SDL surface, or NULL on error.
 ///
 /// \since This function is available since SDL_image 3.0.0.
 ///
 /// \sa IMG_Load
-/// \sa IMG_LoadTyped_RW
+/// \sa IMG_LoadTyped_IO
 /// \sa SDL_DestroySurface
 ///
 /// ```c
-/// extern DECLSPEC SDL_Surface * SDLCALL IMG_Load_RW(SDL_RWops *src, SDL_bool freesrc)
+/// extern DECLSPEC SDL_Surface * SDLCALL IMG_Load_IO(SDL_IOStream *src, SDL_bool closeio)
 /// ```
-Pointer<SdlSurface> imgLoadRw(Pointer<SdlRWops> src, bool freesrc) {
-  final imgLoadRwLookupFunction = libSdl3Image.lookupFunction<
-      Pointer<SdlSurface> Function(Pointer<SdlRWops> src, Int32 freesrc),
+Pointer<SdlSurface> imgLoadIo(Pointer<SdlIoStream> src, bool closeio) {
+  final imgLoadIoLookupFunction = libSdl3Image.lookupFunction<
+      Pointer<SdlSurface> Function(Pointer<SdlIoStream> src, Int32 closeio),
       Pointer<SdlSurface> Function(
-          Pointer<SdlRWops> src, int freesrc)>('IMG_Load_RW');
-  return imgLoadRwLookupFunction(src, freesrc ? 1 : 0);
+          Pointer<SdlIoStream> src, int closeio)>('IMG_Load_IO');
+  return imgLoadIoLookupFunction(src, closeio ? 1 : 0);
 }
 
 ///
@@ -336,9 +336,9 @@ Pointer<SdlSurface> imgLoadRw(Pointer<SdlRWops> src, bool freesrc) {
 /// data (but in many cases, this will just end up being 32-bit RGB or 32-bit
 /// RGBA).
 ///
-/// There is a separate function to read files from an SDL_RWops, if you need
-/// an i/o abstraction to provide data from anywhere instead of a simple
-/// filesystem read; that function is IMG_LoadTexture_RW().
+/// There is a separate function to read files from an SDL_IOStream, if you
+/// need an i/o abstraction to provide data from anywhere instead of a simple
+/// filesystem read; that function is IMG_LoadTexture_IO().
 ///
 /// If you would rather decode an image to an SDL_Surface (a buffer of pixels
 /// in CPU memory), call IMG_Load() instead.
@@ -352,8 +352,8 @@ Pointer<SdlSurface> imgLoadRw(Pointer<SdlRWops> src, bool freesrc) {
 ///
 /// \since This function is available since SDL_image 3.0.0.
 ///
-/// \sa IMG_LoadTextureTyped_RW
-/// \sa IMG_LoadTexture_RW
+/// \sa IMG_LoadTextureTyped_IO
+/// \sa IMG_LoadTexture_IO
 ///
 /// ```c
 /// extern DECLSPEC SDL_Texture * SDLCALL IMG_LoadTexture(SDL_Renderer *renderer, const char *file)
@@ -385,16 +385,16 @@ Pointer<SdlTexture> imgLoadTexture(
 /// data (but in many cases, this will just end up being 32-bit RGB or 32-bit
 /// RGBA).
 ///
-/// If `freesrc` is SDL_TRUE, the RWops will be closed before returning,
-/// whether this function succeeds or not. SDL_image reads everything it needs
-/// from the RWops during this call in any case.
+/// If `closeio` is SDL_TRUE, `src` will be closed before returning, whether
+/// this function succeeds or not. SDL_image reads everything it needs from
+/// `src` during this call in any case.
 ///
 /// There is a separate function to read files from disk without having to deal
-/// with SDL_RWops: `IMG_LoadTexture(renderer, "filename.jpg")` will call this
-/// function and manage those details for you, determining the file type from
-/// the filename's extension.
+/// with SDL_IOStream: `IMG_LoadTexture(renderer, "filename.jpg")` will call
+/// this function and manage those details for you, determining the file type
+/// from the filename's extension.
 ///
-/// There is also IMG_LoadTextureTyped_RW(), which is equivalent to this
+/// There is also IMG_LoadTextureTyped_IO(), which is equivalent to this
 /// function except a file extension (like "BMP", "JPG", etc) can be specified,
 /// in case SDL_image cannot autodetect the file format.
 ///
@@ -405,28 +405,28 @@ Pointer<SdlTexture> imgLoadTexture(
 /// call to SDL_DestroyTexture().
 ///
 /// \param renderer the SDL_Renderer to use to create the GPU texture.
-/// \param src an SDL_RWops that data will be read from.
-/// \param freesrc SDL_TRUE to close/free the SDL_RWops before returning,
+/// \param src an SDL_IOStream that data will be read from.
+/// \param closeio SDL_TRUE to close/free the SDL_IOStream before returning,
 /// SDL_FALSE to leave it open.
 /// \returns a new texture, or NULL on error.
 ///
 /// \since This function is available since SDL_image 3.0.0.
 ///
 /// \sa IMG_LoadTexture
-/// \sa IMG_LoadTextureTyped_RW
+/// \sa IMG_LoadTextureTyped_IO
 /// \sa SDL_DestroyTexture
 ///
 /// ```c
-/// extern DECLSPEC SDL_Texture * SDLCALL IMG_LoadTexture_RW(SDL_Renderer *renderer, SDL_RWops *src, SDL_bool freesrc)
+/// extern DECLSPEC SDL_Texture * SDLCALL IMG_LoadTexture_IO(SDL_Renderer *renderer, SDL_IOStream *src, SDL_bool closeio)
 /// ```
-Pointer<SdlTexture> imgLoadTextureRw(
-    Pointer<SdlRenderer> renderer, Pointer<SdlRWops> src, bool freesrc) {
-  final imgLoadTextureRwLookupFunction = libSdl3Image.lookupFunction<
-      Pointer<SdlTexture> Function(
-          Pointer<SdlRenderer> renderer, Pointer<SdlRWops> src, Int32 freesrc),
+Pointer<SdlTexture> imgLoadTextureIo(
+    Pointer<SdlRenderer> renderer, Pointer<SdlIoStream> src, bool closeio) {
+  final imgLoadTextureIoLookupFunction = libSdl3Image.lookupFunction<
       Pointer<SdlTexture> Function(Pointer<SdlRenderer> renderer,
-          Pointer<SdlRWops> src, int freesrc)>('IMG_LoadTexture_RW');
-  return imgLoadTextureRwLookupFunction(renderer, src, freesrc ? 1 : 0);
+          Pointer<SdlIoStream> src, Int32 closeio),
+      Pointer<SdlTexture> Function(Pointer<SdlRenderer> renderer,
+          Pointer<SdlIoStream> src, int closeio)>('IMG_LoadTexture_IO');
+  return imgLoadTextureIoLookupFunction(renderer, src, closeio ? 1 : 0);
 }
 
 ///
@@ -443,9 +443,9 @@ Pointer<SdlTexture> imgLoadTextureRw(
 /// data (but in many cases, this will just end up being 32-bit RGB or 32-bit
 /// RGBA).
 ///
-/// If `freesrc` is SDL_TRUE, the RWops will be closed before returning,
-/// whether this function succeeds or not. SDL_image reads everything it needs
-/// from the RWops during this call in any case.
+/// If `closeio` is SDL_TRUE, `src` will be closed before returning, whether
+/// this function succeeds or not. SDL_image reads everything it needs from
+/// `src` during this call in any case.
 ///
 /// Even though this function accepts a file type, SDL_image may still try
 /// other decoders that are capable of detecting file type from the contents of
@@ -454,23 +454,23 @@ Pointer<SdlTexture> imgLoadTextureRw(
 /// its ability to guess the format.
 ///
 /// There is a separate function to read files from disk without having to deal
-/// with SDL_RWops: `IMG_LoadTexture("filename.jpg")` will call this function
-/// and manage those details for you, determining the file type from the
-/// filename's extension.
+/// with SDL_IOStream: `IMG_LoadTexture("filename.jpg")` will call this
+/// function and manage those details for you, determining the file type from
+/// the filename's extension.
 ///
-/// There is also IMG_LoadTexture_RW(), which is equivalent to this function
+/// There is also IMG_LoadTexture_IO(), which is equivalent to this function
 /// except that it will rely on SDL_image to determine what type of data it is
 /// loading, much like passing a NULL for type.
 ///
 /// If you would rather decode an image to an SDL_Surface (a buffer of pixels
-/// in CPU memory), call IMG_LoadTyped_RW() instead.
+/// in CPU memory), call IMG_LoadTyped_IO() instead.
 ///
 /// When done with the returned texture, the app should dispose of it with a
 /// call to SDL_DestroyTexture().
 ///
 /// \param renderer the SDL_Renderer to use to create the GPU texture.
-/// \param src an SDL_RWops that data will be read from.
-/// \param freesrc SDL_TRUE to close/free the SDL_RWops before returning,
+/// \param src an SDL_IOStream that data will be read from.
+/// \param closeio SDL_TRUE to close/free the SDL_IOStream before returning,
 /// SDL_FALSE to leave it open.
 /// \param type a filename extension that represent this data ("BMP", "GIF",
 /// "PNG", etc).
@@ -479,48 +479,48 @@ Pointer<SdlTexture> imgLoadTextureRw(
 /// \since This function is available since SDL_image 3.0.0.
 ///
 /// \sa IMG_LoadTexture
-/// \sa IMG_LoadTexture_RW
+/// \sa IMG_LoadTexture_IO
 /// \sa SDL_DestroyTexture
 ///
 /// ```c
-/// extern DECLSPEC SDL_Texture * SDLCALL IMG_LoadTextureTyped_RW(SDL_Renderer *renderer, SDL_RWops *src, SDL_bool freesrc, const char *type)
+/// extern DECLSPEC SDL_Texture * SDLCALL IMG_LoadTextureTyped_IO(SDL_Renderer *renderer, SDL_IOStream *src, SDL_bool closeio, const char *type)
 /// ```
-Pointer<SdlTexture> imgLoadTextureTypedRw(Pointer<SdlRenderer> renderer,
-    Pointer<SdlRWops> src, bool freesrc, String? type) {
-  final imgLoadTextureTypedRwLookupFunction = libSdl3Image.lookupFunction<
+Pointer<SdlTexture> imgLoadTextureTypedIo(Pointer<SdlRenderer> renderer,
+    Pointer<SdlIoStream> src, bool closeio, String? type) {
+  final imgLoadTextureTypedIoLookupFunction = libSdl3Image.lookupFunction<
       Pointer<SdlTexture> Function(Pointer<SdlRenderer> renderer,
-          Pointer<SdlRWops> src, Int32 freesrc, Pointer<Utf8> type),
+          Pointer<SdlIoStream> src, Int32 closeio, Pointer<Utf8> type),
       Pointer<SdlTexture> Function(
           Pointer<SdlRenderer> renderer,
-          Pointer<SdlRWops> src,
-          int freesrc,
-          Pointer<Utf8> type)>('IMG_LoadTextureTyped_RW');
+          Pointer<SdlIoStream> src,
+          int closeio,
+          Pointer<Utf8> type)>('IMG_LoadTextureTyped_IO');
   final typePointer = type != null ? type.toNativeUtf8() : nullptr;
-  final result = imgLoadTextureTypedRwLookupFunction(
-      renderer, src, freesrc ? 1 : 0, typePointer);
+  final result = imgLoadTextureTypedIoLookupFunction(
+      renderer, src, closeio ? 1 : 0, typePointer);
   calloc.free(typePointer);
   return result;
 }
 
 ///
-/// Detect AVIF image data on a readable/seekable SDL_RWops.
+/// Detect AVIF image data on a readable/seekable SDL_IOStream.
 ///
 /// This function attempts to determine if a file is a given filetype, reading
-/// the least amount possible from the SDL_RWops (usually a few bytes).
+/// the least amount possible from the SDL_IOStream (usually a few bytes).
 ///
 /// There is no distinction made between "not the filetype in question" and
 /// basic i/o errors.
 ///
-/// This function will always attempt to seek the RWops back to where it
-/// started when this function was called, but it will not report any errors in
-/// doing so, but assuming seeking works, this means you can immediately use
-/// this with a different IMG_isTYPE function, or load the image without
-/// further seeking.
+/// This function will always attempt to seek `src` back to where it started
+/// when this function was called, but it will not report any errors in doing
+/// so, but assuming seeking works, this means you can immediately use this
+/// with a different IMG_isTYPE function, or load the image without further
+/// seeking.
 ///
 /// You do not need to call this function to load data; SDL_image can work to
 /// determine file type in many cases in its standard load functions.
 ///
-/// \param src a seekable/readable SDL_RWops to provide image data.
+/// \param src a seekable/readable SDL_IOStream to provide image data.
 /// \returns non-zero if this is AVIF data, zero otherwise.
 ///
 /// \since This function is available since SDL_image 3.0.0.
@@ -545,34 +545,34 @@ Pointer<SdlTexture> imgLoadTextureTypedRw(Pointer<SdlRenderer> renderer,
 /// \sa IMG_isWEBP
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL IMG_isAVIF(SDL_RWops *src)
+/// extern DECLSPEC int SDLCALL IMG_isAVIF(SDL_IOStream *src)
 /// ```
-int imgIsAvif(Pointer<SdlRWops> src) {
+int imgIsAvif(Pointer<SdlIoStream> src) {
   final imgIsAvifLookupFunction = libSdl3Image.lookupFunction<
-      Int32 Function(Pointer<SdlRWops> src),
-      int Function(Pointer<SdlRWops> src)>('IMG_isAVIF');
+      Int32 Function(Pointer<SdlIoStream> src),
+      int Function(Pointer<SdlIoStream> src)>('IMG_isAVIF');
   return imgIsAvifLookupFunction(src);
 }
 
 ///
-/// Detect ICO image data on a readable/seekable SDL_RWops.
+/// Detect ICO image data on a readable/seekable SDL_IOStream.
 ///
 /// This function attempts to determine if a file is a given filetype, reading
-/// the least amount possible from the SDL_RWops (usually a few bytes).
+/// the least amount possible from the SDL_IOStream (usually a few bytes).
 ///
 /// There is no distinction made between "not the filetype in question" and
 /// basic i/o errors.
 ///
-/// This function will always attempt to seek the RWops back to where it
-/// started when this function was called, but it will not report any errors in
-/// doing so, but assuming seeking works, this means you can immediately use
-/// this with a different IMG_isTYPE function, or load the image without
-/// further seeking.
+/// This function will always attempt to seek `src` back to where it started
+/// when this function was called, but it will not report any errors in doing
+/// so, but assuming seeking works, this means you can immediately use this
+/// with a different IMG_isTYPE function, or load the image without further
+/// seeking.
 ///
 /// You do not need to call this function to load data; SDL_image can work to
 /// determine file type in many cases in its standard load functions.
 ///
-/// \param src a seekable/readable SDL_RWops to provide image data.
+/// \param src a seekable/readable SDL_IOStream to provide image data.
 /// \returns non-zero if this is ICO data, zero otherwise.
 ///
 /// \since This function is available since SDL_image 3.0.0.
@@ -596,34 +596,34 @@ int imgIsAvif(Pointer<SdlRWops> src) {
 /// \sa IMG_isWEBP
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL IMG_isICO(SDL_RWops *src)
+/// extern DECLSPEC int SDLCALL IMG_isICO(SDL_IOStream *src)
 /// ```
-int imgIsIco(Pointer<SdlRWops> src) {
+int imgIsIco(Pointer<SdlIoStream> src) {
   final imgIsIcoLookupFunction = libSdl3Image.lookupFunction<
-      Int32 Function(Pointer<SdlRWops> src),
-      int Function(Pointer<SdlRWops> src)>('IMG_isICO');
+      Int32 Function(Pointer<SdlIoStream> src),
+      int Function(Pointer<SdlIoStream> src)>('IMG_isICO');
   return imgIsIcoLookupFunction(src);
 }
 
 ///
-/// Detect CUR image data on a readable/seekable SDL_RWops.
+/// Detect CUR image data on a readable/seekable SDL_IOStream.
 ///
 /// This function attempts to determine if a file is a given filetype, reading
-/// the least amount possible from the SDL_RWops (usually a few bytes).
+/// the least amount possible from the SDL_IOStream (usually a few bytes).
 ///
 /// There is no distinction made between "not the filetype in question" and
 /// basic i/o errors.
 ///
-/// This function will always attempt to seek the RWops back to where it
-/// started when this function was called, but it will not report any errors in
-/// doing so, but assuming seeking works, this means you can immediately use
-/// this with a different IMG_isTYPE function, or load the image without
-/// further seeking.
+/// This function will always attempt to seek `src` back to where it started
+/// when this function was called, but it will not report any errors in doing
+/// so, but assuming seeking works, this means you can immediately use this
+/// with a different IMG_isTYPE function, or load the image without further
+/// seeking.
 ///
 /// You do not need to call this function to load data; SDL_image can work to
 /// determine file type in many cases in its standard load functions.
 ///
-/// \param src a seekable/readable SDL_RWops to provide image data.
+/// \param src a seekable/readable SDL_IOStream to provide image data.
 /// \returns non-zero if this is CUR data, zero otherwise.
 ///
 /// \since This function is available since SDL_image 3.0.0.
@@ -647,34 +647,34 @@ int imgIsIco(Pointer<SdlRWops> src) {
 /// \sa IMG_isWEBP
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL IMG_isCUR(SDL_RWops *src)
+/// extern DECLSPEC int SDLCALL IMG_isCUR(SDL_IOStream *src)
 /// ```
-int imgIsCur(Pointer<SdlRWops> src) {
+int imgIsCur(Pointer<SdlIoStream> src) {
   final imgIsCurLookupFunction = libSdl3Image.lookupFunction<
-      Int32 Function(Pointer<SdlRWops> src),
-      int Function(Pointer<SdlRWops> src)>('IMG_isCUR');
+      Int32 Function(Pointer<SdlIoStream> src),
+      int Function(Pointer<SdlIoStream> src)>('IMG_isCUR');
   return imgIsCurLookupFunction(src);
 }
 
 ///
-/// Detect BMP image data on a readable/seekable SDL_RWops.
+/// Detect BMP image data on a readable/seekable SDL_IOStream.
 ///
 /// This function attempts to determine if a file is a given filetype, reading
-/// the least amount possible from the SDL_RWops (usually a few bytes).
+/// the least amount possible from the SDL_IOStream (usually a few bytes).
 ///
 /// There is no distinction made between "not the filetype in question" and
 /// basic i/o errors.
 ///
-/// This function will always attempt to seek the RWops back to where it
-/// started when this function was called, but it will not report any errors in
-/// doing so, but assuming seeking works, this means you can immediately use
-/// this with a different IMG_isTYPE function, or load the image without
-/// further seeking.
+/// This function will always attempt to seek `src` back to where it started
+/// when this function was called, but it will not report any errors in doing
+/// so, but assuming seeking works, this means you can immediately use this
+/// with a different IMG_isTYPE function, or load the image without further
+/// seeking.
 ///
 /// You do not need to call this function to load data; SDL_image can work to
 /// determine file type in many cases in its standard load functions.
 ///
-/// \param src a seekable/readable SDL_RWops to provide image data.
+/// \param src a seekable/readable SDL_IOStream to provide image data.
 /// \returns non-zero if this is BMP data, zero otherwise.
 ///
 /// \since This function is available since SDL_image 3.0.0.
@@ -698,34 +698,34 @@ int imgIsCur(Pointer<SdlRWops> src) {
 /// \sa IMG_isWEBP
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL IMG_isBMP(SDL_RWops *src)
+/// extern DECLSPEC int SDLCALL IMG_isBMP(SDL_IOStream *src)
 /// ```
-int imgIsBmp(Pointer<SdlRWops> src) {
+int imgIsBmp(Pointer<SdlIoStream> src) {
   final imgIsBmpLookupFunction = libSdl3Image.lookupFunction<
-      Int32 Function(Pointer<SdlRWops> src),
-      int Function(Pointer<SdlRWops> src)>('IMG_isBMP');
+      Int32 Function(Pointer<SdlIoStream> src),
+      int Function(Pointer<SdlIoStream> src)>('IMG_isBMP');
   return imgIsBmpLookupFunction(src);
 }
 
 ///
-/// Detect GIF image data on a readable/seekable SDL_RWops.
+/// Detect GIF image data on a readable/seekable SDL_IOStream.
 ///
 /// This function attempts to determine if a file is a given filetype, reading
-/// the least amount possible from the SDL_RWops (usually a few bytes).
+/// the least amount possible from the SDL_IOStream (usually a few bytes).
 ///
 /// There is no distinction made between "not the filetype in question" and
 /// basic i/o errors.
 ///
-/// This function will always attempt to seek the RWops back to where it
-/// started when this function was called, but it will not report any errors in
-/// doing so, but assuming seeking works, this means you can immediately use
-/// this with a different IMG_isTYPE function, or load the image without
-/// further seeking.
+/// This function will always attempt to seek `src` back to where it started
+/// when this function was called, but it will not report any errors in doing
+/// so, but assuming seeking works, this means you can immediately use this
+/// with a different IMG_isTYPE function, or load the image without further
+/// seeking.
 ///
 /// You do not need to call this function to load data; SDL_image can work to
 /// determine file type in many cases in its standard load functions.
 ///
-/// \param src a seekable/readable SDL_RWops to provide image data.
+/// \param src a seekable/readable SDL_IOStream to provide image data.
 /// \returns non-zero if this is GIF data, zero otherwise.
 ///
 /// \since This function is available since SDL_image 3.0.0.
@@ -749,34 +749,34 @@ int imgIsBmp(Pointer<SdlRWops> src) {
 /// \sa IMG_isWEBP
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL IMG_isGIF(SDL_RWops *src)
+/// extern DECLSPEC int SDLCALL IMG_isGIF(SDL_IOStream *src)
 /// ```
-int imgIsGif(Pointer<SdlRWops> src) {
+int imgIsGif(Pointer<SdlIoStream> src) {
   final imgIsGifLookupFunction = libSdl3Image.lookupFunction<
-      Int32 Function(Pointer<SdlRWops> src),
-      int Function(Pointer<SdlRWops> src)>('IMG_isGIF');
+      Int32 Function(Pointer<SdlIoStream> src),
+      int Function(Pointer<SdlIoStream> src)>('IMG_isGIF');
   return imgIsGifLookupFunction(src);
 }
 
 ///
-/// Detect JPG image data on a readable/seekable SDL_RWops.
+/// Detect JPG image data on a readable/seekable SDL_IOStream.
 ///
 /// This function attempts to determine if a file is a given filetype, reading
-/// the least amount possible from the SDL_RWops (usually a few bytes).
+/// the least amount possible from the SDL_IOStream (usually a few bytes).
 ///
 /// There is no distinction made between "not the filetype in question" and
 /// basic i/o errors.
 ///
-/// This function will always attempt to seek the RWops back to where it
-/// started when this function was called, but it will not report any errors in
-/// doing so, but assuming seeking works, this means you can immediately use
-/// this with a different IMG_isTYPE function, or load the image without
-/// further seeking.
+/// This function will always attempt to seek `src` back to where it started
+/// when this function was called, but it will not report any errors in doing
+/// so, but assuming seeking works, this means you can immediately use this
+/// with a different IMG_isTYPE function, or load the image without further
+/// seeking.
 ///
 /// You do not need to call this function to load data; SDL_image can work to
 /// determine file type in many cases in its standard load functions.
 ///
-/// \param src a seekable/readable SDL_RWops to provide image data.
+/// \param src a seekable/readable SDL_IOStream to provide image data.
 /// \returns non-zero if this is JPG data, zero otherwise.
 ///
 /// \since This function is available since SDL_image 3.0.0.
@@ -800,34 +800,34 @@ int imgIsGif(Pointer<SdlRWops> src) {
 /// \sa IMG_isWEBP
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL IMG_isJPG(SDL_RWops *src)
+/// extern DECLSPEC int SDLCALL IMG_isJPG(SDL_IOStream *src)
 /// ```
-int imgIsJpg(Pointer<SdlRWops> src) {
+int imgIsJpg(Pointer<SdlIoStream> src) {
   final imgIsJpgLookupFunction = libSdl3Image.lookupFunction<
-      Int32 Function(Pointer<SdlRWops> src),
-      int Function(Pointer<SdlRWops> src)>('IMG_isJPG');
+      Int32 Function(Pointer<SdlIoStream> src),
+      int Function(Pointer<SdlIoStream> src)>('IMG_isJPG');
   return imgIsJpgLookupFunction(src);
 }
 
 ///
-/// Detect JXL image data on a readable/seekable SDL_RWops.
+/// Detect JXL image data on a readable/seekable SDL_IOStream.
 ///
 /// This function attempts to determine if a file is a given filetype, reading
-/// the least amount possible from the SDL_RWops (usually a few bytes).
+/// the least amount possible from the SDL_IOStream (usually a few bytes).
 ///
 /// There is no distinction made between "not the filetype in question" and
 /// basic i/o errors.
 ///
-/// This function will always attempt to seek the RWops back to where it
-/// started when this function was called, but it will not report any errors in
-/// doing so, but assuming seeking works, this means you can immediately use
-/// this with a different IMG_isTYPE function, or load the image without
-/// further seeking.
+/// This function will always attempt to seek `src` back to where it started
+/// when this function was called, but it will not report any errors in doing
+/// so, but assuming seeking works, this means you can immediately use this
+/// with a different IMG_isTYPE function, or load the image without further
+/// seeking.
 ///
 /// You do not need to call this function to load data; SDL_image can work to
 /// determine file type in many cases in its standard load functions.
 ///
-/// \param src a seekable/readable SDL_RWops to provide image data.
+/// \param src a seekable/readable SDL_IOStream to provide image data.
 /// \returns non-zero if this is JXL data, zero otherwise.
 ///
 /// \since This function is available since SDL_image 3.0.0.
@@ -851,34 +851,34 @@ int imgIsJpg(Pointer<SdlRWops> src) {
 /// \sa IMG_isWEBP
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL IMG_isJXL(SDL_RWops *src)
+/// extern DECLSPEC int SDLCALL IMG_isJXL(SDL_IOStream *src)
 /// ```
-int imgIsJxl(Pointer<SdlRWops> src) {
+int imgIsJxl(Pointer<SdlIoStream> src) {
   final imgIsJxlLookupFunction = libSdl3Image.lookupFunction<
-      Int32 Function(Pointer<SdlRWops> src),
-      int Function(Pointer<SdlRWops> src)>('IMG_isJXL');
+      Int32 Function(Pointer<SdlIoStream> src),
+      int Function(Pointer<SdlIoStream> src)>('IMG_isJXL');
   return imgIsJxlLookupFunction(src);
 }
 
 ///
-/// Detect LBM image data on a readable/seekable SDL_RWops.
+/// Detect LBM image data on a readable/seekable SDL_IOStream.
 ///
 /// This function attempts to determine if a file is a given filetype, reading
-/// the least amount possible from the SDL_RWops (usually a few bytes).
+/// the least amount possible from the SDL_IOStream (usually a few bytes).
 ///
 /// There is no distinction made between "not the filetype in question" and
 /// basic i/o errors.
 ///
-/// This function will always attempt to seek the RWops back to where it
-/// started when this function was called, but it will not report any errors in
-/// doing so, but assuming seeking works, this means you can immediately use
-/// this with a different IMG_isTYPE function, or load the image without
-/// further seeking.
+/// This function will always attempt to seek `src` back to where it started
+/// when this function was called, but it will not report any errors in doing
+/// so, but assuming seeking works, this means you can immediately use this
+/// with a different IMG_isTYPE function, or load the image without further
+/// seeking.
 ///
 /// You do not need to call this function to load data; SDL_image can work to
 /// determine file type in many cases in its standard load functions.
 ///
-/// \param src a seekable/readable SDL_RWops to provide image data.
+/// \param src a seekable/readable SDL_IOStream to provide image data.
 /// \returns non-zero if this is LBM data, zero otherwise.
 ///
 /// \since This function is available since SDL_image 3.0.0.
@@ -902,34 +902,34 @@ int imgIsJxl(Pointer<SdlRWops> src) {
 /// \sa IMG_isWEBP
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL IMG_isLBM(SDL_RWops *src)
+/// extern DECLSPEC int SDLCALL IMG_isLBM(SDL_IOStream *src)
 /// ```
-int imgIsLbm(Pointer<SdlRWops> src) {
+int imgIsLbm(Pointer<SdlIoStream> src) {
   final imgIsLbmLookupFunction = libSdl3Image.lookupFunction<
-      Int32 Function(Pointer<SdlRWops> src),
-      int Function(Pointer<SdlRWops> src)>('IMG_isLBM');
+      Int32 Function(Pointer<SdlIoStream> src),
+      int Function(Pointer<SdlIoStream> src)>('IMG_isLBM');
   return imgIsLbmLookupFunction(src);
 }
 
 ///
-/// Detect PCX image data on a readable/seekable SDL_RWops.
+/// Detect PCX image data on a readable/seekable SDL_IOStream.
 ///
 /// This function attempts to determine if a file is a given filetype, reading
-/// the least amount possible from the SDL_RWops (usually a few bytes).
+/// the least amount possible from the SDL_IOStream (usually a few bytes).
 ///
 /// There is no distinction made between "not the filetype in question" and
 /// basic i/o errors.
 ///
-/// This function will always attempt to seek the RWops back to where it
-/// started when this function was called, but it will not report any errors in
-/// doing so, but assuming seeking works, this means you can immediately use
-/// this with a different IMG_isTYPE function, or load the image without
-/// further seeking.
+/// This function will always attempt to seek `src` back to where it started
+/// when this function was called, but it will not report any errors in doing
+/// so, but assuming seeking works, this means you can immediately use this
+/// with a different IMG_isTYPE function, or load the image without further
+/// seeking.
 ///
 /// You do not need to call this function to load data; SDL_image can work to
 /// determine file type in many cases in its standard load functions.
 ///
-/// \param src a seekable/readable SDL_RWops to provide image data.
+/// \param src a seekable/readable SDL_IOStream to provide image data.
 /// \returns non-zero if this is PCX data, zero otherwise.
 ///
 /// \since This function is available since SDL_image 3.0.0.
@@ -953,34 +953,34 @@ int imgIsLbm(Pointer<SdlRWops> src) {
 /// \sa IMG_isWEBP
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL IMG_isPCX(SDL_RWops *src)
+/// extern DECLSPEC int SDLCALL IMG_isPCX(SDL_IOStream *src)
 /// ```
-int imgIsPcx(Pointer<SdlRWops> src) {
+int imgIsPcx(Pointer<SdlIoStream> src) {
   final imgIsPcxLookupFunction = libSdl3Image.lookupFunction<
-      Int32 Function(Pointer<SdlRWops> src),
-      int Function(Pointer<SdlRWops> src)>('IMG_isPCX');
+      Int32 Function(Pointer<SdlIoStream> src),
+      int Function(Pointer<SdlIoStream> src)>('IMG_isPCX');
   return imgIsPcxLookupFunction(src);
 }
 
 ///
-/// Detect PNG image data on a readable/seekable SDL_RWops.
+/// Detect PNG image data on a readable/seekable SDL_IOStream.
 ///
 /// This function attempts to determine if a file is a given filetype, reading
-/// the least amount possible from the SDL_RWops (usually a few bytes).
+/// the least amount possible from the SDL_IOStream (usually a few bytes).
 ///
 /// There is no distinction made between "not the filetype in question" and
 /// basic i/o errors.
 ///
-/// This function will always attempt to seek the RWops back to where it
-/// started when this function was called, but it will not report any errors in
-/// doing so, but assuming seeking works, this means you can immediately use
-/// this with a different IMG_isTYPE function, or load the image without
-/// further seeking.
+/// This function will always attempt to seek `src` back to where it started
+/// when this function was called, but it will not report any errors in doing
+/// so, but assuming seeking works, this means you can immediately use this
+/// with a different IMG_isTYPE function, or load the image without further
+/// seeking.
 ///
 /// You do not need to call this function to load data; SDL_image can work to
 /// determine file type in many cases in its standard load functions.
 ///
-/// \param src a seekable/readable SDL_RWops to provide image data.
+/// \param src a seekable/readable SDL_IOStream to provide image data.
 /// \returns non-zero if this is PNG data, zero otherwise.
 ///
 /// \since This function is available since SDL_image 3.0.0.
@@ -1004,34 +1004,34 @@ int imgIsPcx(Pointer<SdlRWops> src) {
 /// \sa IMG_isWEBP
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL IMG_isPNG(SDL_RWops *src)
+/// extern DECLSPEC int SDLCALL IMG_isPNG(SDL_IOStream *src)
 /// ```
-int imgIsPng(Pointer<SdlRWops> src) {
+int imgIsPng(Pointer<SdlIoStream> src) {
   final imgIsPngLookupFunction = libSdl3Image.lookupFunction<
-      Int32 Function(Pointer<SdlRWops> src),
-      int Function(Pointer<SdlRWops> src)>('IMG_isPNG');
+      Int32 Function(Pointer<SdlIoStream> src),
+      int Function(Pointer<SdlIoStream> src)>('IMG_isPNG');
   return imgIsPngLookupFunction(src);
 }
 
 ///
-/// Detect PNM image data on a readable/seekable SDL_RWops.
+/// Detect PNM image data on a readable/seekable SDL_IOStream.
 ///
 /// This function attempts to determine if a file is a given filetype, reading
-/// the least amount possible from the SDL_RWops (usually a few bytes).
+/// the least amount possible from the SDL_IOStream (usually a few bytes).
 ///
 /// There is no distinction made between "not the filetype in question" and
 /// basic i/o errors.
 ///
-/// This function will always attempt to seek the RWops back to where it
-/// started when this function was called, but it will not report any errors in
-/// doing so, but assuming seeking works, this means you can immediately use
-/// this with a different IMG_isTYPE function, or load the image without
-/// further seeking.
+/// This function will always attempt to seek `src` back to where it started
+/// when this function was called, but it will not report any errors in doing
+/// so, but assuming seeking works, this means you can immediately use this
+/// with a different IMG_isTYPE function, or load the image without further
+/// seeking.
 ///
 /// You do not need to call this function to load data; SDL_image can work to
 /// determine file type in many cases in its standard load functions.
 ///
-/// \param src a seekable/readable SDL_RWops to provide image data.
+/// \param src a seekable/readable SDL_IOStream to provide image data.
 /// \returns non-zero if this is PNM data, zero otherwise.
 ///
 /// \since This function is available since SDL_image 3.0.0.
@@ -1055,34 +1055,34 @@ int imgIsPng(Pointer<SdlRWops> src) {
 /// \sa IMG_isWEBP
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL IMG_isPNM(SDL_RWops *src)
+/// extern DECLSPEC int SDLCALL IMG_isPNM(SDL_IOStream *src)
 /// ```
-int imgIsPnm(Pointer<SdlRWops> src) {
+int imgIsPnm(Pointer<SdlIoStream> src) {
   final imgIsPnmLookupFunction = libSdl3Image.lookupFunction<
-      Int32 Function(Pointer<SdlRWops> src),
-      int Function(Pointer<SdlRWops> src)>('IMG_isPNM');
+      Int32 Function(Pointer<SdlIoStream> src),
+      int Function(Pointer<SdlIoStream> src)>('IMG_isPNM');
   return imgIsPnmLookupFunction(src);
 }
 
 ///
-/// Detect SVG image data on a readable/seekable SDL_RWops.
+/// Detect SVG image data on a readable/seekable SDL_IOStream.
 ///
 /// This function attempts to determine if a file is a given filetype, reading
-/// the least amount possible from the SDL_RWops (usually a few bytes).
+/// the least amount possible from the SDL_IOStream (usually a few bytes).
 ///
 /// There is no distinction made between "not the filetype in question" and
 /// basic i/o errors.
 ///
-/// This function will always attempt to seek the RWops back to where it
-/// started when this function was called, but it will not report any errors in
-/// doing so, but assuming seeking works, this means you can immediately use
-/// this with a different IMG_isTYPE function, or load the image without
-/// further seeking.
+/// This function will always attempt to seek `src` back to where it started
+/// when this function was called, but it will not report any errors in doing
+/// so, but assuming seeking works, this means you can immediately use this
+/// with a different IMG_isTYPE function, or load the image without further
+/// seeking.
 ///
 /// You do not need to call this function to load data; SDL_image can work to
 /// determine file type in many cases in its standard load functions.
 ///
-/// \param src a seekable/readable SDL_RWops to provide image data.
+/// \param src a seekable/readable SDL_IOStream to provide image data.
 /// \returns non-zero if this is SVG data, zero otherwise.
 ///
 /// \since This function is available since SDL_image 3.0.0.
@@ -1106,34 +1106,34 @@ int imgIsPnm(Pointer<SdlRWops> src) {
 /// \sa IMG_isWEBP
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL IMG_isSVG(SDL_RWops *src)
+/// extern DECLSPEC int SDLCALL IMG_isSVG(SDL_IOStream *src)
 /// ```
-int imgIsSvg(Pointer<SdlRWops> src) {
+int imgIsSvg(Pointer<SdlIoStream> src) {
   final imgIsSvgLookupFunction = libSdl3Image.lookupFunction<
-      Int32 Function(Pointer<SdlRWops> src),
-      int Function(Pointer<SdlRWops> src)>('IMG_isSVG');
+      Int32 Function(Pointer<SdlIoStream> src),
+      int Function(Pointer<SdlIoStream> src)>('IMG_isSVG');
   return imgIsSvgLookupFunction(src);
 }
 
 ///
-/// Detect QOI image data on a readable/seekable SDL_RWops.
+/// Detect QOI image data on a readable/seekable SDL_IOStream.
 ///
 /// This function attempts to determine if a file is a given filetype, reading
-/// the least amount possible from the SDL_RWops (usually a few bytes).
+/// the least amount possible from the SDL_IOStream (usually a few bytes).
 ///
 /// There is no distinction made between "not the filetype in question" and
 /// basic i/o errors.
 ///
-/// This function will always attempt to seek the RWops back to where it
-/// started when this function was called, but it will not report any errors in
-/// doing so, but assuming seeking works, this means you can immediately use
-/// this with a different IMG_isTYPE function, or load the image without
-/// further seeking.
+/// This function will always attempt to seek `src` back to where it started
+/// when this function was called, but it will not report any errors in doing
+/// so, but assuming seeking works, this means you can immediately use this
+/// with a different IMG_isTYPE function, or load the image without further
+/// seeking.
 ///
 /// You do not need to call this function to load data; SDL_image can work to
 /// determine file type in many cases in its standard load functions.
 ///
-/// \param src a seekable/readable SDL_RWops to provide image data.
+/// \param src a seekable/readable SDL_IOStream to provide image data.
 /// \returns non-zero if this is QOI data, zero otherwise.
 ///
 /// \since This function is available since SDL_image 3.0.0.
@@ -1157,34 +1157,34 @@ int imgIsSvg(Pointer<SdlRWops> src) {
 /// \sa IMG_isWEBP
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL IMG_isQOI(SDL_RWops *src)
+/// extern DECLSPEC int SDLCALL IMG_isQOI(SDL_IOStream *src)
 /// ```
-int imgIsQoi(Pointer<SdlRWops> src) {
+int imgIsQoi(Pointer<SdlIoStream> src) {
   final imgIsQoiLookupFunction = libSdl3Image.lookupFunction<
-      Int32 Function(Pointer<SdlRWops> src),
-      int Function(Pointer<SdlRWops> src)>('IMG_isQOI');
+      Int32 Function(Pointer<SdlIoStream> src),
+      int Function(Pointer<SdlIoStream> src)>('IMG_isQOI');
   return imgIsQoiLookupFunction(src);
 }
 
 ///
-/// Detect TIFF image data on a readable/seekable SDL_RWops.
+/// Detect TIFF image data on a readable/seekable SDL_IOStream.
 ///
 /// This function attempts to determine if a file is a given filetype, reading
-/// the least amount possible from the SDL_RWops (usually a few bytes).
+/// the least amount possible from the SDL_IOStream (usually a few bytes).
 ///
 /// There is no distinction made between "not the filetype in question" and
 /// basic i/o errors.
 ///
-/// This function will always attempt to seek the RWops back to where it
-/// started when this function was called, but it will not report any errors in
-/// doing so, but assuming seeking works, this means you can immediately use
-/// this with a different IMG_isTYPE function, or load the image without
-/// further seeking.
+/// This function will always attempt to seek `src` back to where it started
+/// when this function was called, but it will not report any errors in doing
+/// so, but assuming seeking works, this means you can immediately use this
+/// with a different IMG_isTYPE function, or load the image without further
+/// seeking.
 ///
 /// You do not need to call this function to load data; SDL_image can work to
 /// determine file type in many cases in its standard load functions.
 ///
-/// \param src a seekable/readable SDL_RWops to provide image data.
+/// \param src a seekable/readable SDL_IOStream to provide image data.
 /// \returns non-zero if this is TIFF data, zero otherwise.
 ///
 /// \since This function is available since SDL_image 3.0.0.
@@ -1208,34 +1208,34 @@ int imgIsQoi(Pointer<SdlRWops> src) {
 /// \sa IMG_isWEBP
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL IMG_isTIF(SDL_RWops *src)
+/// extern DECLSPEC int SDLCALL IMG_isTIF(SDL_IOStream *src)
 /// ```
-int imgIsTif(Pointer<SdlRWops> src) {
+int imgIsTif(Pointer<SdlIoStream> src) {
   final imgIsTifLookupFunction = libSdl3Image.lookupFunction<
-      Int32 Function(Pointer<SdlRWops> src),
-      int Function(Pointer<SdlRWops> src)>('IMG_isTIF');
+      Int32 Function(Pointer<SdlIoStream> src),
+      int Function(Pointer<SdlIoStream> src)>('IMG_isTIF');
   return imgIsTifLookupFunction(src);
 }
 
 ///
-/// Detect XCF image data on a readable/seekable SDL_RWops.
+/// Detect XCF image data on a readable/seekable SDL_IOStream.
 ///
 /// This function attempts to determine if a file is a given filetype, reading
-/// the least amount possible from the SDL_RWops (usually a few bytes).
+/// the least amount possible from the SDL_IOStream (usually a few bytes).
 ///
 /// There is no distinction made between "not the filetype in question" and
 /// basic i/o errors.
 ///
-/// This function will always attempt to seek the RWops back to where it
-/// started when this function was called, but it will not report any errors in
-/// doing so, but assuming seeking works, this means you can immediately use
-/// this with a different IMG_isTYPE function, or load the image without
-/// further seeking.
+/// This function will always attempt to seek `src` back to where it started
+/// when this function was called, but it will not report any errors in doing
+/// so, but assuming seeking works, this means you can immediately use this
+/// with a different IMG_isTYPE function, or load the image without further
+/// seeking.
 ///
 /// You do not need to call this function to load data; SDL_image can work to
 /// determine file type in many cases in its standard load functions.
 ///
-/// \param src a seekable/readable SDL_RWops to provide image data.
+/// \param src a seekable/readable SDL_IOStream to provide image data.
 /// \returns non-zero if this is XCF data, zero otherwise.
 ///
 /// \since This function is available since SDL_image 3.0.0.
@@ -1259,34 +1259,34 @@ int imgIsTif(Pointer<SdlRWops> src) {
 /// \sa IMG_isWEBP
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL IMG_isXCF(SDL_RWops *src)
+/// extern DECLSPEC int SDLCALL IMG_isXCF(SDL_IOStream *src)
 /// ```
-int imgIsXcf(Pointer<SdlRWops> src) {
+int imgIsXcf(Pointer<SdlIoStream> src) {
   final imgIsXcfLookupFunction = libSdl3Image.lookupFunction<
-      Int32 Function(Pointer<SdlRWops> src),
-      int Function(Pointer<SdlRWops> src)>('IMG_isXCF');
+      Int32 Function(Pointer<SdlIoStream> src),
+      int Function(Pointer<SdlIoStream> src)>('IMG_isXCF');
   return imgIsXcfLookupFunction(src);
 }
 
 ///
-/// Detect XPM image data on a readable/seekable SDL_RWops.
+/// Detect XPM image data on a readable/seekable SDL_IOStream.
 ///
 /// This function attempts to determine if a file is a given filetype, reading
-/// the least amount possible from the SDL_RWops (usually a few bytes).
+/// the least amount possible from the SDL_IOStream (usually a few bytes).
 ///
 /// There is no distinction made between "not the filetype in question" and
 /// basic i/o errors.
 ///
-/// This function will always attempt to seek the RWops back to where it
-/// started when this function was called, but it will not report any errors in
-/// doing so, but assuming seeking works, this means you can immediately use
-/// this with a different IMG_isTYPE function, or load the image without
-/// further seeking.
+/// This function will always attempt to seek `src` back to where it started
+/// when this function was called, but it will not report any errors in doing
+/// so, but assuming seeking works, this means you can immediately use this
+/// with a different IMG_isTYPE function, or load the image without further
+/// seeking.
 ///
 /// You do not need to call this function to load data; SDL_image can work to
 /// determine file type in many cases in its standard load functions.
 ///
-/// \param src a seekable/readable SDL_RWops to provide image data.
+/// \param src a seekable/readable SDL_IOStream to provide image data.
 /// \returns non-zero if this is XPM data, zero otherwise.
 ///
 /// \since This function is available since SDL_image 3.0.0.
@@ -1310,34 +1310,34 @@ int imgIsXcf(Pointer<SdlRWops> src) {
 /// \sa IMG_isWEBP
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL IMG_isXPM(SDL_RWops *src)
+/// extern DECLSPEC int SDLCALL IMG_isXPM(SDL_IOStream *src)
 /// ```
-int imgIsXpm(Pointer<SdlRWops> src) {
+int imgIsXpm(Pointer<SdlIoStream> src) {
   final imgIsXpmLookupFunction = libSdl3Image.lookupFunction<
-      Int32 Function(Pointer<SdlRWops> src),
-      int Function(Pointer<SdlRWops> src)>('IMG_isXPM');
+      Int32 Function(Pointer<SdlIoStream> src),
+      int Function(Pointer<SdlIoStream> src)>('IMG_isXPM');
   return imgIsXpmLookupFunction(src);
 }
 
 ///
-/// Detect XV image data on a readable/seekable SDL_RWops.
+/// Detect XV image data on a readable/seekable SDL_IOStream.
 ///
 /// This function attempts to determine if a file is a given filetype, reading
-/// the least amount possible from the SDL_RWops (usually a few bytes).
+/// the least amount possible from the SDL_IOStream (usually a few bytes).
 ///
 /// There is no distinction made between "not the filetype in question" and
 /// basic i/o errors.
 ///
-/// This function will always attempt to seek the RWops back to where it
-/// started when this function was called, but it will not report any errors in
-/// doing so, but assuming seeking works, this means you can immediately use
-/// this with a different IMG_isTYPE function, or load the image without
-/// further seeking.
+/// This function will always attempt to seek `src` back to where it started
+/// when this function was called, but it will not report any errors in doing
+/// so, but assuming seeking works, this means you can immediately use this
+/// with a different IMG_isTYPE function, or load the image without further
+/// seeking.
 ///
 /// You do not need to call this function to load data; SDL_image can work to
 /// determine file type in many cases in its standard load functions.
 ///
-/// \param src a seekable/readable SDL_RWops to provide image data.
+/// \param src a seekable/readable SDL_IOStream to provide image data.
 /// \returns non-zero if this is XV data, zero otherwise.
 ///
 /// \since This function is available since SDL_image 3.0.0.
@@ -1361,34 +1361,34 @@ int imgIsXpm(Pointer<SdlRWops> src) {
 /// \sa IMG_isWEBP
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL IMG_isXV(SDL_RWops *src)
+/// extern DECLSPEC int SDLCALL IMG_isXV(SDL_IOStream *src)
 /// ```
-int imgIsXv(Pointer<SdlRWops> src) {
+int imgIsXv(Pointer<SdlIoStream> src) {
   final imgIsXvLookupFunction = libSdl3Image.lookupFunction<
-      Int32 Function(Pointer<SdlRWops> src),
-      int Function(Pointer<SdlRWops> src)>('IMG_isXV');
+      Int32 Function(Pointer<SdlIoStream> src),
+      int Function(Pointer<SdlIoStream> src)>('IMG_isXV');
   return imgIsXvLookupFunction(src);
 }
 
 ///
-/// Detect WEBP image data on a readable/seekable SDL_RWops.
+/// Detect WEBP image data on a readable/seekable SDL_IOStream.
 ///
 /// This function attempts to determine if a file is a given filetype, reading
-/// the least amount possible from the SDL_RWops (usually a few bytes).
+/// the least amount possible from the SDL_IOStream (usually a few bytes).
 ///
 /// There is no distinction made between "not the filetype in question" and
 /// basic i/o errors.
 ///
-/// This function will always attempt to seek the RWops back to where it
-/// started when this function was called, but it will not report any errors in
-/// doing so, but assuming seeking works, this means you can immediately use
-/// this with a different IMG_isTYPE function, or load the image without
-/// further seeking.
+/// This function will always attempt to seek `src` back to where it started
+/// when this function was called, but it will not report any errors in doing
+/// so, but assuming seeking works, this means you can immediately use this
+/// with a different IMG_isTYPE function, or load the image without further
+/// seeking.
 ///
 /// You do not need to call this function to load data; SDL_image can work to
 /// determine file type in many cases in its standard load functions.
 ///
-/// \param src a seekable/readable SDL_RWops to provide image data.
+/// \param src a seekable/readable SDL_IOStream to provide image data.
 /// \returns non-zero if this is WEBP data, zero otherwise.
 ///
 /// \since This function is available since SDL_image 3.0.0.
@@ -1412,12 +1412,12 @@ int imgIsXv(Pointer<SdlRWops> src) {
 /// \sa IMG_isXV
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL IMG_isWEBP(SDL_RWops *src)
+/// extern DECLSPEC int SDLCALL IMG_isWEBP(SDL_IOStream *src)
 /// ```
-int imgIsWebp(Pointer<SdlRWops> src) {
+int imgIsWebp(Pointer<SdlIoStream> src) {
   final imgIsWebpLookupFunction = libSdl3Image.lookupFunction<
-      Int32 Function(Pointer<SdlRWops> src),
-      int Function(Pointer<SdlRWops> src)>('IMG_isWEBP');
+      Int32 Function(Pointer<SdlIoStream> src),
+      int Function(Pointer<SdlIoStream> src)>('IMG_isWEBP');
   return imgIsWebpLookupFunction(src);
 }
 
@@ -1426,41 +1426,42 @@ int imgIsWebp(Pointer<SdlRWops> src) {
 ///
 /// If you know you definitely have a AVIF image, you can call this function,
 /// which will skip SDL_image's file format detection routines. Generally it's
-/// better to use the abstract interfaces; also, there is only an SDL_RWops
+/// better to use the abstract interfaces; also, there is only an SDL_IOStream
 /// interface available here.
 ///
-/// \param src an SDL_RWops to load image data from.
+/// \param src an SDL_IOStream to load image data from.
 /// \returns SDL surface, or NULL on error
 ///
 /// \since This function is available since SDL_image 3.0.0.
 ///
-/// \sa IMG_LoadICO_RW
-/// \sa IMG_LoadCUR_RW
-/// \sa IMG_LoadBMP_RW
-/// \sa IMG_LoadGIF_RW
-/// \sa IMG_LoadJPG_RW
-/// \sa IMG_LoadJXL_RW
-/// \sa IMG_LoadLBM_RW
-/// \sa IMG_LoadPCX_RW
-/// \sa IMG_LoadPNG_RW
-/// \sa IMG_LoadPNM_RW
-/// \sa IMG_LoadSVG_RW
-/// \sa IMG_LoadQOI_RW
-/// \sa IMG_LoadTGA_RW
-/// \sa IMG_LoadTIF_RW
-/// \sa IMG_LoadXCF_RW
-/// \sa IMG_LoadXPM_RW
-/// \sa IMG_LoadXV_RW
-/// \sa IMG_LoadWEBP_RW
+/// \sa IMG_LoadICO_IO
+/// \sa IMG_LoadCUR_IO
+/// \sa IMG_LoadBMP_IO
+/// \sa IMG_LoadGIF_IO
+/// \sa IMG_LoadJPG_IO
+/// \sa IMG_LoadJXL_IO
+/// \sa IMG_LoadLBM_IO
+/// \sa IMG_LoadPCX_IO
+/// \sa IMG_LoadPNG_IO
+/// \sa IMG_LoadPNM_IO
+/// \sa IMG_LoadSVG_IO
+/// \sa IMG_LoadQOI_IO
+/// \sa IMG_LoadTGA_IO
+/// \sa IMG_LoadTIF_IO
+/// \sa IMG_LoadXCF_IO
+/// \sa IMG_LoadXPM_IO
+/// \sa IMG_LoadXV_IO
+/// \sa IMG_LoadWEBP_IO
 ///
 /// ```c
-/// extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadAVIF_RW(SDL_RWops *src)
+/// extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadAVIF_IO(SDL_IOStream *src)
 /// ```
-Pointer<SdlSurface> imgLoadAvifRw(Pointer<SdlRWops> src) {
-  final imgLoadAvifRwLookupFunction = libSdl3Image.lookupFunction<
-      Pointer<SdlSurface> Function(Pointer<SdlRWops> src),
-      Pointer<SdlSurface> Function(Pointer<SdlRWops> src)>('IMG_LoadAVIF_RW');
-  return imgLoadAvifRwLookupFunction(src);
+Pointer<SdlSurface> imgLoadAvifIo(Pointer<SdlIoStream> src) {
+  final imgLoadAvifIoLookupFunction = libSdl3Image.lookupFunction<
+      Pointer<SdlSurface> Function(Pointer<SdlIoStream> src),
+      Pointer<SdlSurface> Function(
+          Pointer<SdlIoStream> src)>('IMG_LoadAVIF_IO');
+  return imgLoadAvifIoLookupFunction(src);
 }
 
 ///
@@ -1468,41 +1469,41 @@ Pointer<SdlSurface> imgLoadAvifRw(Pointer<SdlRWops> src) {
 ///
 /// If you know you definitely have a ICO image, you can call this function,
 /// which will skip SDL_image's file format detection routines. Generally it's
-/// better to use the abstract interfaces; also, there is only an SDL_RWops
+/// better to use the abstract interfaces; also, there is only an SDL_IOStream
 /// interface available here.
 ///
-/// \param src an SDL_RWops to load image data from.
+/// \param src an SDL_IOStream to load image data from.
 /// \returns SDL surface, or NULL on error
 ///
 /// \since This function is available since SDL_image 3.0.0.
 ///
-/// \sa IMG_LoadAVIF_RW
-/// \sa IMG_LoadCUR_RW
-/// \sa IMG_LoadBMP_RW
-/// \sa IMG_LoadGIF_RW
-/// \sa IMG_LoadJPG_RW
-/// \sa IMG_LoadJXL_RW
-/// \sa IMG_LoadLBM_RW
-/// \sa IMG_LoadPCX_RW
-/// \sa IMG_LoadPNG_RW
-/// \sa IMG_LoadPNM_RW
-/// \sa IMG_LoadSVG_RW
-/// \sa IMG_LoadQOI_RW
-/// \sa IMG_LoadTGA_RW
-/// \sa IMG_LoadTIF_RW
-/// \sa IMG_LoadXCF_RW
-/// \sa IMG_LoadXPM_RW
-/// \sa IMG_LoadXV_RW
-/// \sa IMG_LoadWEBP_RW
+/// \sa IMG_LoadAVIF_IO
+/// \sa IMG_LoadCUR_IO
+/// \sa IMG_LoadBMP_IO
+/// \sa IMG_LoadGIF_IO
+/// \sa IMG_LoadJPG_IO
+/// \sa IMG_LoadJXL_IO
+/// \sa IMG_LoadLBM_IO
+/// \sa IMG_LoadPCX_IO
+/// \sa IMG_LoadPNG_IO
+/// \sa IMG_LoadPNM_IO
+/// \sa IMG_LoadSVG_IO
+/// \sa IMG_LoadQOI_IO
+/// \sa IMG_LoadTGA_IO
+/// \sa IMG_LoadTIF_IO
+/// \sa IMG_LoadXCF_IO
+/// \sa IMG_LoadXPM_IO
+/// \sa IMG_LoadXV_IO
+/// \sa IMG_LoadWEBP_IO
 ///
 /// ```c
-/// extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadICO_RW(SDL_RWops *src)
+/// extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadICO_IO(SDL_IOStream *src)
 /// ```
-Pointer<SdlSurface> imgLoadIcoRw(Pointer<SdlRWops> src) {
-  final imgLoadIcoRwLookupFunction = libSdl3Image.lookupFunction<
-      Pointer<SdlSurface> Function(Pointer<SdlRWops> src),
-      Pointer<SdlSurface> Function(Pointer<SdlRWops> src)>('IMG_LoadICO_RW');
-  return imgLoadIcoRwLookupFunction(src);
+Pointer<SdlSurface> imgLoadIcoIo(Pointer<SdlIoStream> src) {
+  final imgLoadIcoIoLookupFunction = libSdl3Image.lookupFunction<
+      Pointer<SdlSurface> Function(Pointer<SdlIoStream> src),
+      Pointer<SdlSurface> Function(Pointer<SdlIoStream> src)>('IMG_LoadICO_IO');
+  return imgLoadIcoIoLookupFunction(src);
 }
 
 ///
@@ -1510,41 +1511,41 @@ Pointer<SdlSurface> imgLoadIcoRw(Pointer<SdlRWops> src) {
 ///
 /// If you know you definitely have a CUR image, you can call this function,
 /// which will skip SDL_image's file format detection routines. Generally it's
-/// better to use the abstract interfaces; also, there is only an SDL_RWops
+/// better to use the abstract interfaces; also, there is only an SDL_IOStream
 /// interface available here.
 ///
-/// \param src an SDL_RWops to load image data from.
+/// \param src an SDL_IOStream to load image data from.
 /// \returns SDL surface, or NULL on error
 ///
 /// \since This function is available since SDL_image 3.0.0.
 ///
-/// \sa IMG_LoadAVIF_RW
-/// \sa IMG_LoadICO_RW
-/// \sa IMG_LoadBMP_RW
-/// \sa IMG_LoadGIF_RW
-/// \sa IMG_LoadJPG_RW
-/// \sa IMG_LoadJXL_RW
-/// \sa IMG_LoadLBM_RW
-/// \sa IMG_LoadPCX_RW
-/// \sa IMG_LoadPNG_RW
-/// \sa IMG_LoadPNM_RW
-/// \sa IMG_LoadSVG_RW
-/// \sa IMG_LoadQOI_RW
-/// \sa IMG_LoadTGA_RW
-/// \sa IMG_LoadTIF_RW
-/// \sa IMG_LoadXCF_RW
-/// \sa IMG_LoadXPM_RW
-/// \sa IMG_LoadXV_RW
-/// \sa IMG_LoadWEBP_RW
+/// \sa IMG_LoadAVIF_IO
+/// \sa IMG_LoadICO_IO
+/// \sa IMG_LoadBMP_IO
+/// \sa IMG_LoadGIF_IO
+/// \sa IMG_LoadJPG_IO
+/// \sa IMG_LoadJXL_IO
+/// \sa IMG_LoadLBM_IO
+/// \sa IMG_LoadPCX_IO
+/// \sa IMG_LoadPNG_IO
+/// \sa IMG_LoadPNM_IO
+/// \sa IMG_LoadSVG_IO
+/// \sa IMG_LoadQOI_IO
+/// \sa IMG_LoadTGA_IO
+/// \sa IMG_LoadTIF_IO
+/// \sa IMG_LoadXCF_IO
+/// \sa IMG_LoadXPM_IO
+/// \sa IMG_LoadXV_IO
+/// \sa IMG_LoadWEBP_IO
 ///
 /// ```c
-/// extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadCUR_RW(SDL_RWops *src)
+/// extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadCUR_IO(SDL_IOStream *src)
 /// ```
-Pointer<SdlSurface> imgLoadCurRw(Pointer<SdlRWops> src) {
-  final imgLoadCurRwLookupFunction = libSdl3Image.lookupFunction<
-      Pointer<SdlSurface> Function(Pointer<SdlRWops> src),
-      Pointer<SdlSurface> Function(Pointer<SdlRWops> src)>('IMG_LoadCUR_RW');
-  return imgLoadCurRwLookupFunction(src);
+Pointer<SdlSurface> imgLoadCurIo(Pointer<SdlIoStream> src) {
+  final imgLoadCurIoLookupFunction = libSdl3Image.lookupFunction<
+      Pointer<SdlSurface> Function(Pointer<SdlIoStream> src),
+      Pointer<SdlSurface> Function(Pointer<SdlIoStream> src)>('IMG_LoadCUR_IO');
+  return imgLoadCurIoLookupFunction(src);
 }
 
 ///
@@ -1552,41 +1553,41 @@ Pointer<SdlSurface> imgLoadCurRw(Pointer<SdlRWops> src) {
 ///
 /// If you know you definitely have a BMP image, you can call this function,
 /// which will skip SDL_image's file format detection routines. Generally it's
-/// better to use the abstract interfaces; also, there is only an SDL_RWops
+/// better to use the abstract interfaces; also, there is only an SDL_IOStream
 /// interface available here.
 ///
-/// \param src an SDL_RWops to load image data from.
+/// \param src an SDL_IOStream to load image data from.
 /// \returns SDL surface, or NULL on error
 ///
 /// \since This function is available since SDL_image 3.0.0.
 ///
-/// \sa IMG_LoadAVIF_RW
-/// \sa IMG_LoadICO_RW
-/// \sa IMG_LoadCUR_RW
-/// \sa IMG_LoadGIF_RW
-/// \sa IMG_LoadJPG_RW
-/// \sa IMG_LoadJXL_RW
-/// \sa IMG_LoadLBM_RW
-/// \sa IMG_LoadPCX_RW
-/// \sa IMG_LoadPNG_RW
-/// \sa IMG_LoadPNM_RW
-/// \sa IMG_LoadSVG_RW
-/// \sa IMG_LoadQOI_RW
-/// \sa IMG_LoadTGA_RW
-/// \sa IMG_LoadTIF_RW
-/// \sa IMG_LoadXCF_RW
-/// \sa IMG_LoadXPM_RW
-/// \sa IMG_LoadXV_RW
-/// \sa IMG_LoadWEBP_RW
+/// \sa IMG_LoadAVIF_IO
+/// \sa IMG_LoadICO_IO
+/// \sa IMG_LoadCUR_IO
+/// \sa IMG_LoadGIF_IO
+/// \sa IMG_LoadJPG_IO
+/// \sa IMG_LoadJXL_IO
+/// \sa IMG_LoadLBM_IO
+/// \sa IMG_LoadPCX_IO
+/// \sa IMG_LoadPNG_IO
+/// \sa IMG_LoadPNM_IO
+/// \sa IMG_LoadSVG_IO
+/// \sa IMG_LoadQOI_IO
+/// \sa IMG_LoadTGA_IO
+/// \sa IMG_LoadTIF_IO
+/// \sa IMG_LoadXCF_IO
+/// \sa IMG_LoadXPM_IO
+/// \sa IMG_LoadXV_IO
+/// \sa IMG_LoadWEBP_IO
 ///
 /// ```c
-/// extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadBMP_RW(SDL_RWops *src)
+/// extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadBMP_IO(SDL_IOStream *src)
 /// ```
-Pointer<SdlSurface> imgLoadBmpRw(Pointer<SdlRWops> src) {
-  final imgLoadBmpRwLookupFunction = libSdl3Image.lookupFunction<
-      Pointer<SdlSurface> Function(Pointer<SdlRWops> src),
-      Pointer<SdlSurface> Function(Pointer<SdlRWops> src)>('IMG_LoadBMP_RW');
-  return imgLoadBmpRwLookupFunction(src);
+Pointer<SdlSurface> imgLoadBmpIo(Pointer<SdlIoStream> src) {
+  final imgLoadBmpIoLookupFunction = libSdl3Image.lookupFunction<
+      Pointer<SdlSurface> Function(Pointer<SdlIoStream> src),
+      Pointer<SdlSurface> Function(Pointer<SdlIoStream> src)>('IMG_LoadBMP_IO');
+  return imgLoadBmpIoLookupFunction(src);
 }
 
 ///
@@ -1594,41 +1595,41 @@ Pointer<SdlSurface> imgLoadBmpRw(Pointer<SdlRWops> src) {
 ///
 /// If you know you definitely have a GIF image, you can call this function,
 /// which will skip SDL_image's file format detection routines. Generally it's
-/// better to use the abstract interfaces; also, there is only an SDL_RWops
+/// better to use the abstract interfaces; also, there is only an SDL_IOStream
 /// interface available here.
 ///
-/// \param src an SDL_RWops to load image data from.
+/// \param src an SDL_IOStream to load image data from.
 /// \returns SDL surface, or NULL on error
 ///
 /// \since This function is available since SDL_image 3.0.0.
 ///
-/// \sa IMG_LoadAVIF_RW
-/// \sa IMG_LoadICO_RW
-/// \sa IMG_LoadCUR_RW
-/// \sa IMG_LoadBMP_RW
-/// \sa IMG_LoadJPG_RW
-/// \sa IMG_LoadJXL_RW
-/// \sa IMG_LoadLBM_RW
-/// \sa IMG_LoadPCX_RW
-/// \sa IMG_LoadPNG_RW
-/// \sa IMG_LoadPNM_RW
-/// \sa IMG_LoadSVG_RW
-/// \sa IMG_LoadQOI_RW
-/// \sa IMG_LoadTGA_RW
-/// \sa IMG_LoadTIF_RW
-/// \sa IMG_LoadXCF_RW
-/// \sa IMG_LoadXPM_RW
-/// \sa IMG_LoadXV_RW
-/// \sa IMG_LoadWEBP_RW
+/// \sa IMG_LoadAVIF_IO
+/// \sa IMG_LoadICO_IO
+/// \sa IMG_LoadCUR_IO
+/// \sa IMG_LoadBMP_IO
+/// \sa IMG_LoadJPG_IO
+/// \sa IMG_LoadJXL_IO
+/// \sa IMG_LoadLBM_IO
+/// \sa IMG_LoadPCX_IO
+/// \sa IMG_LoadPNG_IO
+/// \sa IMG_LoadPNM_IO
+/// \sa IMG_LoadSVG_IO
+/// \sa IMG_LoadQOI_IO
+/// \sa IMG_LoadTGA_IO
+/// \sa IMG_LoadTIF_IO
+/// \sa IMG_LoadXCF_IO
+/// \sa IMG_LoadXPM_IO
+/// \sa IMG_LoadXV_IO
+/// \sa IMG_LoadWEBP_IO
 ///
 /// ```c
-/// extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadGIF_RW(SDL_RWops *src)
+/// extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadGIF_IO(SDL_IOStream *src)
 /// ```
-Pointer<SdlSurface> imgLoadGifRw(Pointer<SdlRWops> src) {
-  final imgLoadGifRwLookupFunction = libSdl3Image.lookupFunction<
-      Pointer<SdlSurface> Function(Pointer<SdlRWops> src),
-      Pointer<SdlSurface> Function(Pointer<SdlRWops> src)>('IMG_LoadGIF_RW');
-  return imgLoadGifRwLookupFunction(src);
+Pointer<SdlSurface> imgLoadGifIo(Pointer<SdlIoStream> src) {
+  final imgLoadGifIoLookupFunction = libSdl3Image.lookupFunction<
+      Pointer<SdlSurface> Function(Pointer<SdlIoStream> src),
+      Pointer<SdlSurface> Function(Pointer<SdlIoStream> src)>('IMG_LoadGIF_IO');
+  return imgLoadGifIoLookupFunction(src);
 }
 
 ///
@@ -1636,41 +1637,41 @@ Pointer<SdlSurface> imgLoadGifRw(Pointer<SdlRWops> src) {
 ///
 /// If you know you definitely have a JPG image, you can call this function,
 /// which will skip SDL_image's file format detection routines. Generally it's
-/// better to use the abstract interfaces; also, there is only an SDL_RWops
+/// better to use the abstract interfaces; also, there is only an SDL_IOStream
 /// interface available here.
 ///
-/// \param src an SDL_RWops to load image data from.
+/// \param src an SDL_IOStream to load image data from.
 /// \returns SDL surface, or NULL on error
 ///
 /// \since This function is available since SDL_image 3.0.0.
 ///
-/// \sa IMG_LoadAVIF_RW
-/// \sa IMG_LoadICO_RW
-/// \sa IMG_LoadCUR_RW
-/// \sa IMG_LoadBMP_RW
-/// \sa IMG_LoadGIF_RW
-/// \sa IMG_LoadJXL_RW
-/// \sa IMG_LoadLBM_RW
-/// \sa IMG_LoadPCX_RW
-/// \sa IMG_LoadPNG_RW
-/// \sa IMG_LoadPNM_RW
-/// \sa IMG_LoadSVG_RW
-/// \sa IMG_LoadQOI_RW
-/// \sa IMG_LoadTGA_RW
-/// \sa IMG_LoadTIF_RW
-/// \sa IMG_LoadXCF_RW
-/// \sa IMG_LoadXPM_RW
-/// \sa IMG_LoadXV_RW
-/// \sa IMG_LoadWEBP_RW
+/// \sa IMG_LoadAVIF_IO
+/// \sa IMG_LoadICO_IO
+/// \sa IMG_LoadCUR_IO
+/// \sa IMG_LoadBMP_IO
+/// \sa IMG_LoadGIF_IO
+/// \sa IMG_LoadJXL_IO
+/// \sa IMG_LoadLBM_IO
+/// \sa IMG_LoadPCX_IO
+/// \sa IMG_LoadPNG_IO
+/// \sa IMG_LoadPNM_IO
+/// \sa IMG_LoadSVG_IO
+/// \sa IMG_LoadQOI_IO
+/// \sa IMG_LoadTGA_IO
+/// \sa IMG_LoadTIF_IO
+/// \sa IMG_LoadXCF_IO
+/// \sa IMG_LoadXPM_IO
+/// \sa IMG_LoadXV_IO
+/// \sa IMG_LoadWEBP_IO
 ///
 /// ```c
-/// extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadJPG_RW(SDL_RWops *src)
+/// extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadJPG_IO(SDL_IOStream *src)
 /// ```
-Pointer<SdlSurface> imgLoadJpgRw(Pointer<SdlRWops> src) {
-  final imgLoadJpgRwLookupFunction = libSdl3Image.lookupFunction<
-      Pointer<SdlSurface> Function(Pointer<SdlRWops> src),
-      Pointer<SdlSurface> Function(Pointer<SdlRWops> src)>('IMG_LoadJPG_RW');
-  return imgLoadJpgRwLookupFunction(src);
+Pointer<SdlSurface> imgLoadJpgIo(Pointer<SdlIoStream> src) {
+  final imgLoadJpgIoLookupFunction = libSdl3Image.lookupFunction<
+      Pointer<SdlSurface> Function(Pointer<SdlIoStream> src),
+      Pointer<SdlSurface> Function(Pointer<SdlIoStream> src)>('IMG_LoadJPG_IO');
+  return imgLoadJpgIoLookupFunction(src);
 }
 
 ///
@@ -1678,41 +1679,41 @@ Pointer<SdlSurface> imgLoadJpgRw(Pointer<SdlRWops> src) {
 ///
 /// If you know you definitely have a JXL image, you can call this function,
 /// which will skip SDL_image's file format detection routines. Generally it's
-/// better to use the abstract interfaces; also, there is only an SDL_RWops
+/// better to use the abstract interfaces; also, there is only an SDL_IOStream
 /// interface available here.
 ///
-/// \param src an SDL_RWops to load image data from.
+/// \param src an SDL_IOStream to load image data from.
 /// \returns SDL surface, or NULL on error
 ///
 /// \since This function is available since SDL_image 3.0.0.
 ///
-/// \sa IMG_LoadAVIF_RW
-/// \sa IMG_LoadICO_RW
-/// \sa IMG_LoadCUR_RW
-/// \sa IMG_LoadBMP_RW
-/// \sa IMG_LoadGIF_RW
-/// \sa IMG_LoadJPG_RW
-/// \sa IMG_LoadLBM_RW
-/// \sa IMG_LoadPCX_RW
-/// \sa IMG_LoadPNG_RW
-/// \sa IMG_LoadPNM_RW
-/// \sa IMG_LoadSVG_RW
-/// \sa IMG_LoadQOI_RW
-/// \sa IMG_LoadTGA_RW
-/// \sa IMG_LoadTIF_RW
-/// \sa IMG_LoadXCF_RW
-/// \sa IMG_LoadXPM_RW
-/// \sa IMG_LoadXV_RW
-/// \sa IMG_LoadWEBP_RW
+/// \sa IMG_LoadAVIF_IO
+/// \sa IMG_LoadICO_IO
+/// \sa IMG_LoadCUR_IO
+/// \sa IMG_LoadBMP_IO
+/// \sa IMG_LoadGIF_IO
+/// \sa IMG_LoadJPG_IO
+/// \sa IMG_LoadLBM_IO
+/// \sa IMG_LoadPCX_IO
+/// \sa IMG_LoadPNG_IO
+/// \sa IMG_LoadPNM_IO
+/// \sa IMG_LoadSVG_IO
+/// \sa IMG_LoadQOI_IO
+/// \sa IMG_LoadTGA_IO
+/// \sa IMG_LoadTIF_IO
+/// \sa IMG_LoadXCF_IO
+/// \sa IMG_LoadXPM_IO
+/// \sa IMG_LoadXV_IO
+/// \sa IMG_LoadWEBP_IO
 ///
 /// ```c
-/// extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadJXL_RW(SDL_RWops *src)
+/// extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadJXL_IO(SDL_IOStream *src)
 /// ```
-Pointer<SdlSurface> imgLoadJxlRw(Pointer<SdlRWops> src) {
-  final imgLoadJxlRwLookupFunction = libSdl3Image.lookupFunction<
-      Pointer<SdlSurface> Function(Pointer<SdlRWops> src),
-      Pointer<SdlSurface> Function(Pointer<SdlRWops> src)>('IMG_LoadJXL_RW');
-  return imgLoadJxlRwLookupFunction(src);
+Pointer<SdlSurface> imgLoadJxlIo(Pointer<SdlIoStream> src) {
+  final imgLoadJxlIoLookupFunction = libSdl3Image.lookupFunction<
+      Pointer<SdlSurface> Function(Pointer<SdlIoStream> src),
+      Pointer<SdlSurface> Function(Pointer<SdlIoStream> src)>('IMG_LoadJXL_IO');
+  return imgLoadJxlIoLookupFunction(src);
 }
 
 ///
@@ -1720,41 +1721,41 @@ Pointer<SdlSurface> imgLoadJxlRw(Pointer<SdlRWops> src) {
 ///
 /// If you know you definitely have a LBM image, you can call this function,
 /// which will skip SDL_image's file format detection routines. Generally it's
-/// better to use the abstract interfaces; also, there is only an SDL_RWops
+/// better to use the abstract interfaces; also, there is only an SDL_IOStream
 /// interface available here.
 ///
-/// \param src an SDL_RWops to load image data from.
+/// \param src an SDL_IOStream to load image data from.
 /// \returns SDL surface, or NULL on error
 ///
 /// \since This function is available since SDL_image 3.0.0.
 ///
-/// \sa IMG_LoadAVIF_RW
-/// \sa IMG_LoadICO_RW
-/// \sa IMG_LoadCUR_RW
-/// \sa IMG_LoadBMP_RW
-/// \sa IMG_LoadGIF_RW
-/// \sa IMG_LoadJPG_RW
-/// \sa IMG_LoadJXL_RW
-/// \sa IMG_LoadPCX_RW
-/// \sa IMG_LoadPNG_RW
-/// \sa IMG_LoadPNM_RW
-/// \sa IMG_LoadSVG_RW
-/// \sa IMG_LoadQOI_RW
-/// \sa IMG_LoadTGA_RW
-/// \sa IMG_LoadTIF_RW
-/// \sa IMG_LoadXCF_RW
-/// \sa IMG_LoadXPM_RW
-/// \sa IMG_LoadXV_RW
-/// \sa IMG_LoadWEBP_RW
+/// \sa IMG_LoadAVIF_IO
+/// \sa IMG_LoadICO_IO
+/// \sa IMG_LoadCUR_IO
+/// \sa IMG_LoadBMP_IO
+/// \sa IMG_LoadGIF_IO
+/// \sa IMG_LoadJPG_IO
+/// \sa IMG_LoadJXL_IO
+/// \sa IMG_LoadPCX_IO
+/// \sa IMG_LoadPNG_IO
+/// \sa IMG_LoadPNM_IO
+/// \sa IMG_LoadSVG_IO
+/// \sa IMG_LoadQOI_IO
+/// \sa IMG_LoadTGA_IO
+/// \sa IMG_LoadTIF_IO
+/// \sa IMG_LoadXCF_IO
+/// \sa IMG_LoadXPM_IO
+/// \sa IMG_LoadXV_IO
+/// \sa IMG_LoadWEBP_IO
 ///
 /// ```c
-/// extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadLBM_RW(SDL_RWops *src)
+/// extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadLBM_IO(SDL_IOStream *src)
 /// ```
-Pointer<SdlSurface> imgLoadLbmRw(Pointer<SdlRWops> src) {
-  final imgLoadLbmRwLookupFunction = libSdl3Image.lookupFunction<
-      Pointer<SdlSurface> Function(Pointer<SdlRWops> src),
-      Pointer<SdlSurface> Function(Pointer<SdlRWops> src)>('IMG_LoadLBM_RW');
-  return imgLoadLbmRwLookupFunction(src);
+Pointer<SdlSurface> imgLoadLbmIo(Pointer<SdlIoStream> src) {
+  final imgLoadLbmIoLookupFunction = libSdl3Image.lookupFunction<
+      Pointer<SdlSurface> Function(Pointer<SdlIoStream> src),
+      Pointer<SdlSurface> Function(Pointer<SdlIoStream> src)>('IMG_LoadLBM_IO');
+  return imgLoadLbmIoLookupFunction(src);
 }
 
 ///
@@ -1762,41 +1763,41 @@ Pointer<SdlSurface> imgLoadLbmRw(Pointer<SdlRWops> src) {
 ///
 /// If you know you definitely have a PCX image, you can call this function,
 /// which will skip SDL_image's file format detection routines. Generally it's
-/// better to use the abstract interfaces; also, there is only an SDL_RWops
+/// better to use the abstract interfaces; also, there is only an SDL_IOStream
 /// interface available here.
 ///
-/// \param src an SDL_RWops to load image data from.
+/// \param src an SDL_IOStream to load image data from.
 /// \returns SDL surface, or NULL on error
 ///
 /// \since This function is available since SDL_image 3.0.0.
 ///
-/// \sa IMG_LoadAVIF_RW
-/// \sa IMG_LoadICO_RW
-/// \sa IMG_LoadCUR_RW
-/// \sa IMG_LoadBMP_RW
-/// \sa IMG_LoadGIF_RW
-/// \sa IMG_LoadJPG_RW
-/// \sa IMG_LoadJXL_RW
-/// \sa IMG_LoadLBM_RW
-/// \sa IMG_LoadPNG_RW
-/// \sa IMG_LoadPNM_RW
-/// \sa IMG_LoadSVG_RW
-/// \sa IMG_LoadQOI_RW
-/// \sa IMG_LoadTGA_RW
-/// \sa IMG_LoadTIF_RW
-/// \sa IMG_LoadXCF_RW
-/// \sa IMG_LoadXPM_RW
-/// \sa IMG_LoadXV_RW
-/// \sa IMG_LoadWEBP_RW
+/// \sa IMG_LoadAVIF_IO
+/// \sa IMG_LoadICO_IO
+/// \sa IMG_LoadCUR_IO
+/// \sa IMG_LoadBMP_IO
+/// \sa IMG_LoadGIF_IO
+/// \sa IMG_LoadJPG_IO
+/// \sa IMG_LoadJXL_IO
+/// \sa IMG_LoadLBM_IO
+/// \sa IMG_LoadPNG_IO
+/// \sa IMG_LoadPNM_IO
+/// \sa IMG_LoadSVG_IO
+/// \sa IMG_LoadQOI_IO
+/// \sa IMG_LoadTGA_IO
+/// \sa IMG_LoadTIF_IO
+/// \sa IMG_LoadXCF_IO
+/// \sa IMG_LoadXPM_IO
+/// \sa IMG_LoadXV_IO
+/// \sa IMG_LoadWEBP_IO
 ///
 /// ```c
-/// extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadPCX_RW(SDL_RWops *src)
+/// extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadPCX_IO(SDL_IOStream *src)
 /// ```
-Pointer<SdlSurface> imgLoadPcxRw(Pointer<SdlRWops> src) {
-  final imgLoadPcxRwLookupFunction = libSdl3Image.lookupFunction<
-      Pointer<SdlSurface> Function(Pointer<SdlRWops> src),
-      Pointer<SdlSurface> Function(Pointer<SdlRWops> src)>('IMG_LoadPCX_RW');
-  return imgLoadPcxRwLookupFunction(src);
+Pointer<SdlSurface> imgLoadPcxIo(Pointer<SdlIoStream> src) {
+  final imgLoadPcxIoLookupFunction = libSdl3Image.lookupFunction<
+      Pointer<SdlSurface> Function(Pointer<SdlIoStream> src),
+      Pointer<SdlSurface> Function(Pointer<SdlIoStream> src)>('IMG_LoadPCX_IO');
+  return imgLoadPcxIoLookupFunction(src);
 }
 
 ///
@@ -1804,41 +1805,41 @@ Pointer<SdlSurface> imgLoadPcxRw(Pointer<SdlRWops> src) {
 ///
 /// If you know you definitely have a PNG image, you can call this function,
 /// which will skip SDL_image's file format detection routines. Generally it's
-/// better to use the abstract interfaces; also, there is only an SDL_RWops
+/// better to use the abstract interfaces; also, there is only an SDL_IOStream
 /// interface available here.
 ///
-/// \param src an SDL_RWops to load image data from.
+/// \param src an SDL_IOStream to load image data from.
 /// \returns SDL surface, or NULL on error
 ///
 /// \since This function is available since SDL_image 3.0.0.
 ///
-/// \sa IMG_LoadAVIF_RW
-/// \sa IMG_LoadICO_RW
-/// \sa IMG_LoadCUR_RW
-/// \sa IMG_LoadBMP_RW
-/// \sa IMG_LoadGIF_RW
-/// \sa IMG_LoadJPG_RW
-/// \sa IMG_LoadJXL_RW
-/// \sa IMG_LoadLBM_RW
-/// \sa IMG_LoadPCX_RW
-/// \sa IMG_LoadPNM_RW
-/// \sa IMG_LoadSVG_RW
-/// \sa IMG_LoadQOI_RW
-/// \sa IMG_LoadTGA_RW
-/// \sa IMG_LoadTIF_RW
-/// \sa IMG_LoadXCF_RW
-/// \sa IMG_LoadXPM_RW
-/// \sa IMG_LoadXV_RW
-/// \sa IMG_LoadWEBP_RW
+/// \sa IMG_LoadAVIF_IO
+/// \sa IMG_LoadICO_IO
+/// \sa IMG_LoadCUR_IO
+/// \sa IMG_LoadBMP_IO
+/// \sa IMG_LoadGIF_IO
+/// \sa IMG_LoadJPG_IO
+/// \sa IMG_LoadJXL_IO
+/// \sa IMG_LoadLBM_IO
+/// \sa IMG_LoadPCX_IO
+/// \sa IMG_LoadPNM_IO
+/// \sa IMG_LoadSVG_IO
+/// \sa IMG_LoadQOI_IO
+/// \sa IMG_LoadTGA_IO
+/// \sa IMG_LoadTIF_IO
+/// \sa IMG_LoadXCF_IO
+/// \sa IMG_LoadXPM_IO
+/// \sa IMG_LoadXV_IO
+/// \sa IMG_LoadWEBP_IO
 ///
 /// ```c
-/// extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadPNG_RW(SDL_RWops *src)
+/// extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadPNG_IO(SDL_IOStream *src)
 /// ```
-Pointer<SdlSurface> imgLoadPngRw(Pointer<SdlRWops> src) {
-  final imgLoadPngRwLookupFunction = libSdl3Image.lookupFunction<
-      Pointer<SdlSurface> Function(Pointer<SdlRWops> src),
-      Pointer<SdlSurface> Function(Pointer<SdlRWops> src)>('IMG_LoadPNG_RW');
-  return imgLoadPngRwLookupFunction(src);
+Pointer<SdlSurface> imgLoadPngIo(Pointer<SdlIoStream> src) {
+  final imgLoadPngIoLookupFunction = libSdl3Image.lookupFunction<
+      Pointer<SdlSurface> Function(Pointer<SdlIoStream> src),
+      Pointer<SdlSurface> Function(Pointer<SdlIoStream> src)>('IMG_LoadPNG_IO');
+  return imgLoadPngIoLookupFunction(src);
 }
 
 ///
@@ -1846,41 +1847,41 @@ Pointer<SdlSurface> imgLoadPngRw(Pointer<SdlRWops> src) {
 ///
 /// If you know you definitely have a PNM image, you can call this function,
 /// which will skip SDL_image's file format detection routines. Generally it's
-/// better to use the abstract interfaces; also, there is only an SDL_RWops
+/// better to use the abstract interfaces; also, there is only an SDL_IOStream
 /// interface available here.
 ///
-/// \param src an SDL_RWops to load image data from.
+/// \param src an SDL_IOStream to load image data from.
 /// \returns SDL surface, or NULL on error
 ///
 /// \since This function is available since SDL_image 3.0.0.
 ///
-/// \sa IMG_LoadAVIF_RW
-/// \sa IMG_LoadICO_RW
-/// \sa IMG_LoadCUR_RW
-/// \sa IMG_LoadBMP_RW
-/// \sa IMG_LoadGIF_RW
-/// \sa IMG_LoadJPG_RW
-/// \sa IMG_LoadJXL_RW
-/// \sa IMG_LoadLBM_RW
-/// \sa IMG_LoadPCX_RW
-/// \sa IMG_LoadPNG_RW
-/// \sa IMG_LoadSVG_RW
-/// \sa IMG_LoadQOI_RW
-/// \sa IMG_LoadTGA_RW
-/// \sa IMG_LoadTIF_RW
-/// \sa IMG_LoadXCF_RW
-/// \sa IMG_LoadXPM_RW
-/// \sa IMG_LoadXV_RW
-/// \sa IMG_LoadWEBP_RW
+/// \sa IMG_LoadAVIF_IO
+/// \sa IMG_LoadICO_IO
+/// \sa IMG_LoadCUR_IO
+/// \sa IMG_LoadBMP_IO
+/// \sa IMG_LoadGIF_IO
+/// \sa IMG_LoadJPG_IO
+/// \sa IMG_LoadJXL_IO
+/// \sa IMG_LoadLBM_IO
+/// \sa IMG_LoadPCX_IO
+/// \sa IMG_LoadPNG_IO
+/// \sa IMG_LoadSVG_IO
+/// \sa IMG_LoadQOI_IO
+/// \sa IMG_LoadTGA_IO
+/// \sa IMG_LoadTIF_IO
+/// \sa IMG_LoadXCF_IO
+/// \sa IMG_LoadXPM_IO
+/// \sa IMG_LoadXV_IO
+/// \sa IMG_LoadWEBP_IO
 ///
 /// ```c
-/// extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadPNM_RW(SDL_RWops *src)
+/// extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadPNM_IO(SDL_IOStream *src)
 /// ```
-Pointer<SdlSurface> imgLoadPnmRw(Pointer<SdlRWops> src) {
-  final imgLoadPnmRwLookupFunction = libSdl3Image.lookupFunction<
-      Pointer<SdlSurface> Function(Pointer<SdlRWops> src),
-      Pointer<SdlSurface> Function(Pointer<SdlRWops> src)>('IMG_LoadPNM_RW');
-  return imgLoadPnmRwLookupFunction(src);
+Pointer<SdlSurface> imgLoadPnmIo(Pointer<SdlIoStream> src) {
+  final imgLoadPnmIoLookupFunction = libSdl3Image.lookupFunction<
+      Pointer<SdlSurface> Function(Pointer<SdlIoStream> src),
+      Pointer<SdlSurface> Function(Pointer<SdlIoStream> src)>('IMG_LoadPNM_IO');
+  return imgLoadPnmIoLookupFunction(src);
 }
 
 ///
@@ -1888,41 +1889,41 @@ Pointer<SdlSurface> imgLoadPnmRw(Pointer<SdlRWops> src) {
 ///
 /// If you know you definitely have a SVG image, you can call this function,
 /// which will skip SDL_image's file format detection routines. Generally it's
-/// better to use the abstract interfaces; also, there is only an SDL_RWops
+/// better to use the abstract interfaces; also, there is only an SDL_IOStream
 /// interface available here.
 ///
-/// \param src an SDL_RWops to load image data from.
+/// \param src an SDL_IOStream to load image data from.
 /// \returns SDL surface, or NULL on error
 ///
 /// \since This function is available since SDL_image 3.0.0.
 ///
-/// \sa IMG_LoadAVIF_RW
-/// \sa IMG_LoadICO_RW
-/// \sa IMG_LoadCUR_RW
-/// \sa IMG_LoadBMP_RW
-/// \sa IMG_LoadGIF_RW
-/// \sa IMG_LoadJPG_RW
-/// \sa IMG_LoadJXL_RW
-/// \sa IMG_LoadLBM_RW
-/// \sa IMG_LoadPCX_RW
-/// \sa IMG_LoadPNG_RW
-/// \sa IMG_LoadPNM_RW
-/// \sa IMG_LoadQOI_RW
-/// \sa IMG_LoadTGA_RW
-/// \sa IMG_LoadTIF_RW
-/// \sa IMG_LoadXCF_RW
-/// \sa IMG_LoadXPM_RW
-/// \sa IMG_LoadXV_RW
-/// \sa IMG_LoadWEBP_RW
+/// \sa IMG_LoadAVIF_IO
+/// \sa IMG_LoadICO_IO
+/// \sa IMG_LoadCUR_IO
+/// \sa IMG_LoadBMP_IO
+/// \sa IMG_LoadGIF_IO
+/// \sa IMG_LoadJPG_IO
+/// \sa IMG_LoadJXL_IO
+/// \sa IMG_LoadLBM_IO
+/// \sa IMG_LoadPCX_IO
+/// \sa IMG_LoadPNG_IO
+/// \sa IMG_LoadPNM_IO
+/// \sa IMG_LoadQOI_IO
+/// \sa IMG_LoadTGA_IO
+/// \sa IMG_LoadTIF_IO
+/// \sa IMG_LoadXCF_IO
+/// \sa IMG_LoadXPM_IO
+/// \sa IMG_LoadXV_IO
+/// \sa IMG_LoadWEBP_IO
 ///
 /// ```c
-/// extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadSVG_RW(SDL_RWops *src)
+/// extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadSVG_IO(SDL_IOStream *src)
 /// ```
-Pointer<SdlSurface> imgLoadSvgRw(Pointer<SdlRWops> src) {
-  final imgLoadSvgRwLookupFunction = libSdl3Image.lookupFunction<
-      Pointer<SdlSurface> Function(Pointer<SdlRWops> src),
-      Pointer<SdlSurface> Function(Pointer<SdlRWops> src)>('IMG_LoadSVG_RW');
-  return imgLoadSvgRwLookupFunction(src);
+Pointer<SdlSurface> imgLoadSvgIo(Pointer<SdlIoStream> src) {
+  final imgLoadSvgIoLookupFunction = libSdl3Image.lookupFunction<
+      Pointer<SdlSurface> Function(Pointer<SdlIoStream> src),
+      Pointer<SdlSurface> Function(Pointer<SdlIoStream> src)>('IMG_LoadSVG_IO');
+  return imgLoadSvgIoLookupFunction(src);
 }
 
 ///
@@ -1930,41 +1931,41 @@ Pointer<SdlSurface> imgLoadSvgRw(Pointer<SdlRWops> src) {
 ///
 /// If you know you definitely have a QOI image, you can call this function,
 /// which will skip SDL_image's file format detection routines. Generally it's
-/// better to use the abstract interfaces; also, there is only an SDL_RWops
+/// better to use the abstract interfaces; also, there is only an SDL_IOStream
 /// interface available here.
 ///
-/// \param src an SDL_RWops to load image data from.
+/// \param src an SDL_IOStream to load image data from.
 /// \returns SDL surface, or NULL on error
 ///
 /// \since This function is available since SDL_image 3.0.0.
 ///
-/// \sa IMG_LoadAVIF_RW
-/// \sa IMG_LoadICO_RW
-/// \sa IMG_LoadCUR_RW
-/// \sa IMG_LoadBMP_RW
-/// \sa IMG_LoadGIF_RW
-/// \sa IMG_LoadJPG_RW
-/// \sa IMG_LoadJXL_RW
-/// \sa IMG_LoadLBM_RW
-/// \sa IMG_LoadPCX_RW
-/// \sa IMG_LoadPNG_RW
-/// \sa IMG_LoadPNM_RW
-/// \sa IMG_LoadSVG_RW
-/// \sa IMG_LoadTGA_RW
-/// \sa IMG_LoadTIF_RW
-/// \sa IMG_LoadXCF_RW
-/// \sa IMG_LoadXPM_RW
-/// \sa IMG_LoadXV_RW
-/// \sa IMG_LoadWEBP_RW
+/// \sa IMG_LoadAVIF_IO
+/// \sa IMG_LoadICO_IO
+/// \sa IMG_LoadCUR_IO
+/// \sa IMG_LoadBMP_IO
+/// \sa IMG_LoadGIF_IO
+/// \sa IMG_LoadJPG_IO
+/// \sa IMG_LoadJXL_IO
+/// \sa IMG_LoadLBM_IO
+/// \sa IMG_LoadPCX_IO
+/// \sa IMG_LoadPNG_IO
+/// \sa IMG_LoadPNM_IO
+/// \sa IMG_LoadSVG_IO
+/// \sa IMG_LoadTGA_IO
+/// \sa IMG_LoadTIF_IO
+/// \sa IMG_LoadXCF_IO
+/// \sa IMG_LoadXPM_IO
+/// \sa IMG_LoadXV_IO
+/// \sa IMG_LoadWEBP_IO
 ///
 /// ```c
-/// extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadQOI_RW(SDL_RWops *src)
+/// extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadQOI_IO(SDL_IOStream *src)
 /// ```
-Pointer<SdlSurface> imgLoadQoiRw(Pointer<SdlRWops> src) {
-  final imgLoadQoiRwLookupFunction = libSdl3Image.lookupFunction<
-      Pointer<SdlSurface> Function(Pointer<SdlRWops> src),
-      Pointer<SdlSurface> Function(Pointer<SdlRWops> src)>('IMG_LoadQOI_RW');
-  return imgLoadQoiRwLookupFunction(src);
+Pointer<SdlSurface> imgLoadQoiIo(Pointer<SdlIoStream> src) {
+  final imgLoadQoiIoLookupFunction = libSdl3Image.lookupFunction<
+      Pointer<SdlSurface> Function(Pointer<SdlIoStream> src),
+      Pointer<SdlSurface> Function(Pointer<SdlIoStream> src)>('IMG_LoadQOI_IO');
+  return imgLoadQoiIoLookupFunction(src);
 }
 
 ///
@@ -1972,41 +1973,41 @@ Pointer<SdlSurface> imgLoadQoiRw(Pointer<SdlRWops> src) {
 ///
 /// If you know you definitely have a TGA image, you can call this function,
 /// which will skip SDL_image's file format detection routines. Generally it's
-/// better to use the abstract interfaces; also, there is only an SDL_RWops
+/// better to use the abstract interfaces; also, there is only an SDL_IOStream
 /// interface available here.
 ///
-/// \param src an SDL_RWops to load image data from.
+/// \param src an SDL_IOStream to load image data from.
 /// \returns SDL surface, or NULL on error
 ///
 /// \since This function is available since SDL_image 3.0.0.
 ///
-/// \sa IMG_LoadAVIF_RW
-/// \sa IMG_LoadICO_RW
-/// \sa IMG_LoadCUR_RW
-/// \sa IMG_LoadBMP_RW
-/// \sa IMG_LoadGIF_RW
-/// \sa IMG_LoadJPG_RW
-/// \sa IMG_LoadJXL_RW
-/// \sa IMG_LoadLBM_RW
-/// \sa IMG_LoadPCX_RW
-/// \sa IMG_LoadPNG_RW
-/// \sa IMG_LoadPNM_RW
-/// \sa IMG_LoadSVG_RW
-/// \sa IMG_LoadQOI_RW
-/// \sa IMG_LoadTIF_RW
-/// \sa IMG_LoadXCF_RW
-/// \sa IMG_LoadXPM_RW
-/// \sa IMG_LoadXV_RW
-/// \sa IMG_LoadWEBP_RW
+/// \sa IMG_LoadAVIF_IO
+/// \sa IMG_LoadICO_IO
+/// \sa IMG_LoadCUR_IO
+/// \sa IMG_LoadBMP_IO
+/// \sa IMG_LoadGIF_IO
+/// \sa IMG_LoadJPG_IO
+/// \sa IMG_LoadJXL_IO
+/// \sa IMG_LoadLBM_IO
+/// \sa IMG_LoadPCX_IO
+/// \sa IMG_LoadPNG_IO
+/// \sa IMG_LoadPNM_IO
+/// \sa IMG_LoadSVG_IO
+/// \sa IMG_LoadQOI_IO
+/// \sa IMG_LoadTIF_IO
+/// \sa IMG_LoadXCF_IO
+/// \sa IMG_LoadXPM_IO
+/// \sa IMG_LoadXV_IO
+/// \sa IMG_LoadWEBP_IO
 ///
 /// ```c
-/// extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadTGA_RW(SDL_RWops *src)
+/// extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadTGA_IO(SDL_IOStream *src)
 /// ```
-Pointer<SdlSurface> imgLoadTgaRw(Pointer<SdlRWops> src) {
-  final imgLoadTgaRwLookupFunction = libSdl3Image.lookupFunction<
-      Pointer<SdlSurface> Function(Pointer<SdlRWops> src),
-      Pointer<SdlSurface> Function(Pointer<SdlRWops> src)>('IMG_LoadTGA_RW');
-  return imgLoadTgaRwLookupFunction(src);
+Pointer<SdlSurface> imgLoadTgaIo(Pointer<SdlIoStream> src) {
+  final imgLoadTgaIoLookupFunction = libSdl3Image.lookupFunction<
+      Pointer<SdlSurface> Function(Pointer<SdlIoStream> src),
+      Pointer<SdlSurface> Function(Pointer<SdlIoStream> src)>('IMG_LoadTGA_IO');
+  return imgLoadTgaIoLookupFunction(src);
 }
 
 ///
@@ -2014,41 +2015,41 @@ Pointer<SdlSurface> imgLoadTgaRw(Pointer<SdlRWops> src) {
 ///
 /// If you know you definitely have a TIFF image, you can call this function,
 /// which will skip SDL_image's file format detection routines. Generally it's
-/// better to use the abstract interfaces; also, there is only an SDL_RWops
+/// better to use the abstract interfaces; also, there is only an SDL_IOStream
 /// interface available here.
 ///
-/// \param src an SDL_RWops to load image data from.
+/// \param src an SDL_IOStream to load image data from.
 /// \returns SDL surface, or NULL on error
 ///
 /// \since This function is available since SDL_image 3.0.0.
 ///
-/// \sa IMG_LoadAVIF_RW
-/// \sa IMG_LoadICO_RW
-/// \sa IMG_LoadCUR_RW
-/// \sa IMG_LoadBMP_RW
-/// \sa IMG_LoadGIF_RW
-/// \sa IMG_LoadJPG_RW
-/// \sa IMG_LoadJXL_RW
-/// \sa IMG_LoadLBM_RW
-/// \sa IMG_LoadPCX_RW
-/// \sa IMG_LoadPNG_RW
-/// \sa IMG_LoadPNM_RW
-/// \sa IMG_LoadSVG_RW
-/// \sa IMG_LoadQOI_RW
-/// \sa IMG_LoadTGA_RW
-/// \sa IMG_LoadXCF_RW
-/// \sa IMG_LoadXPM_RW
-/// \sa IMG_LoadXV_RW
-/// \sa IMG_LoadWEBP_RW
+/// \sa IMG_LoadAVIF_IO
+/// \sa IMG_LoadICO_IO
+/// \sa IMG_LoadCUR_IO
+/// \sa IMG_LoadBMP_IO
+/// \sa IMG_LoadGIF_IO
+/// \sa IMG_LoadJPG_IO
+/// \sa IMG_LoadJXL_IO
+/// \sa IMG_LoadLBM_IO
+/// \sa IMG_LoadPCX_IO
+/// \sa IMG_LoadPNG_IO
+/// \sa IMG_LoadPNM_IO
+/// \sa IMG_LoadSVG_IO
+/// \sa IMG_LoadQOI_IO
+/// \sa IMG_LoadTGA_IO
+/// \sa IMG_LoadXCF_IO
+/// \sa IMG_LoadXPM_IO
+/// \sa IMG_LoadXV_IO
+/// \sa IMG_LoadWEBP_IO
 ///
 /// ```c
-/// extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadTIF_RW(SDL_RWops *src)
+/// extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadTIF_IO(SDL_IOStream *src)
 /// ```
-Pointer<SdlSurface> imgLoadTifRw(Pointer<SdlRWops> src) {
-  final imgLoadTifRwLookupFunction = libSdl3Image.lookupFunction<
-      Pointer<SdlSurface> Function(Pointer<SdlRWops> src),
-      Pointer<SdlSurface> Function(Pointer<SdlRWops> src)>('IMG_LoadTIF_RW');
-  return imgLoadTifRwLookupFunction(src);
+Pointer<SdlSurface> imgLoadTifIo(Pointer<SdlIoStream> src) {
+  final imgLoadTifIoLookupFunction = libSdl3Image.lookupFunction<
+      Pointer<SdlSurface> Function(Pointer<SdlIoStream> src),
+      Pointer<SdlSurface> Function(Pointer<SdlIoStream> src)>('IMG_LoadTIF_IO');
+  return imgLoadTifIoLookupFunction(src);
 }
 
 ///
@@ -2056,41 +2057,41 @@ Pointer<SdlSurface> imgLoadTifRw(Pointer<SdlRWops> src) {
 ///
 /// If you know you definitely have a XCF image, you can call this function,
 /// which will skip SDL_image's file format detection routines. Generally it's
-/// better to use the abstract interfaces; also, there is only an SDL_RWops
+/// better to use the abstract interfaces; also, there is only an SDL_IOStream
 /// interface available here.
 ///
-/// \param src an SDL_RWops to load image data from.
+/// \param src an SDL_IOStream to load image data from.
 /// \returns SDL surface, or NULL on error
 ///
 /// \since This function is available since SDL_image 3.0.0.
 ///
-/// \sa IMG_LoadAVIF_RW
-/// \sa IMG_LoadICO_RW
-/// \sa IMG_LoadCUR_RW
-/// \sa IMG_LoadBMP_RW
-/// \sa IMG_LoadGIF_RW
-/// \sa IMG_LoadJPG_RW
-/// \sa IMG_LoadJXL_RW
-/// \sa IMG_LoadLBM_RW
-/// \sa IMG_LoadPCX_RW
-/// \sa IMG_LoadPNG_RW
-/// \sa IMG_LoadPNM_RW
-/// \sa IMG_LoadSVG_RW
-/// \sa IMG_LoadQOI_RW
-/// \sa IMG_LoadTGA_RW
-/// \sa IMG_LoadTIF_RW
-/// \sa IMG_LoadXPM_RW
-/// \sa IMG_LoadXV_RW
-/// \sa IMG_LoadWEBP_RW
+/// \sa IMG_LoadAVIF_IO
+/// \sa IMG_LoadICO_IO
+/// \sa IMG_LoadCUR_IO
+/// \sa IMG_LoadBMP_IO
+/// \sa IMG_LoadGIF_IO
+/// \sa IMG_LoadJPG_IO
+/// \sa IMG_LoadJXL_IO
+/// \sa IMG_LoadLBM_IO
+/// \sa IMG_LoadPCX_IO
+/// \sa IMG_LoadPNG_IO
+/// \sa IMG_LoadPNM_IO
+/// \sa IMG_LoadSVG_IO
+/// \sa IMG_LoadQOI_IO
+/// \sa IMG_LoadTGA_IO
+/// \sa IMG_LoadTIF_IO
+/// \sa IMG_LoadXPM_IO
+/// \sa IMG_LoadXV_IO
+/// \sa IMG_LoadWEBP_IO
 ///
 /// ```c
-/// extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadXCF_RW(SDL_RWops *src)
+/// extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadXCF_IO(SDL_IOStream *src)
 /// ```
-Pointer<SdlSurface> imgLoadXcfRw(Pointer<SdlRWops> src) {
-  final imgLoadXcfRwLookupFunction = libSdl3Image.lookupFunction<
-      Pointer<SdlSurface> Function(Pointer<SdlRWops> src),
-      Pointer<SdlSurface> Function(Pointer<SdlRWops> src)>('IMG_LoadXCF_RW');
-  return imgLoadXcfRwLookupFunction(src);
+Pointer<SdlSurface> imgLoadXcfIo(Pointer<SdlIoStream> src) {
+  final imgLoadXcfIoLookupFunction = libSdl3Image.lookupFunction<
+      Pointer<SdlSurface> Function(Pointer<SdlIoStream> src),
+      Pointer<SdlSurface> Function(Pointer<SdlIoStream> src)>('IMG_LoadXCF_IO');
+  return imgLoadXcfIoLookupFunction(src);
 }
 
 ///
@@ -2098,41 +2099,41 @@ Pointer<SdlSurface> imgLoadXcfRw(Pointer<SdlRWops> src) {
 ///
 /// If you know you definitely have a XPM image, you can call this function,
 /// which will skip SDL_image's file format detection routines. Generally it's
-/// better to use the abstract interfaces; also, there is only an SDL_RWops
+/// better to use the abstract interfaces; also, there is only an SDL_IOStream
 /// interface available here.
 ///
-/// \param src an SDL_RWops to load image data from.
+/// \param src an SDL_IOStream to load image data from.
 /// \returns SDL surface, or NULL on error
 ///
 /// \since This function is available since SDL_image 3.0.0.
 ///
-/// \sa IMG_LoadAVIF_RW
-/// \sa IMG_LoadICO_RW
-/// \sa IMG_LoadCUR_RW
-/// \sa IMG_LoadBMP_RW
-/// \sa IMG_LoadGIF_RW
-/// \sa IMG_LoadJPG_RW
-/// \sa IMG_LoadJXL_RW
-/// \sa IMG_LoadLBM_RW
-/// \sa IMG_LoadPCX_RW
-/// \sa IMG_LoadPNG_RW
-/// \sa IMG_LoadPNM_RW
-/// \sa IMG_LoadSVG_RW
-/// \sa IMG_LoadQOI_RW
-/// \sa IMG_LoadTGA_RW
-/// \sa IMG_LoadTIF_RW
-/// \sa IMG_LoadXCF_RW
-/// \sa IMG_LoadXV_RW
-/// \sa IMG_LoadWEBP_RW
+/// \sa IMG_LoadAVIF_IO
+/// \sa IMG_LoadICO_IO
+/// \sa IMG_LoadCUR_IO
+/// \sa IMG_LoadBMP_IO
+/// \sa IMG_LoadGIF_IO
+/// \sa IMG_LoadJPG_IO
+/// \sa IMG_LoadJXL_IO
+/// \sa IMG_LoadLBM_IO
+/// \sa IMG_LoadPCX_IO
+/// \sa IMG_LoadPNG_IO
+/// \sa IMG_LoadPNM_IO
+/// \sa IMG_LoadSVG_IO
+/// \sa IMG_LoadQOI_IO
+/// \sa IMG_LoadTGA_IO
+/// \sa IMG_LoadTIF_IO
+/// \sa IMG_LoadXCF_IO
+/// \sa IMG_LoadXV_IO
+/// \sa IMG_LoadWEBP_IO
 ///
 /// ```c
-/// extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadXPM_RW(SDL_RWops *src)
+/// extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadXPM_IO(SDL_IOStream *src)
 /// ```
-Pointer<SdlSurface> imgLoadXpmRw(Pointer<SdlRWops> src) {
-  final imgLoadXpmRwLookupFunction = libSdl3Image.lookupFunction<
-      Pointer<SdlSurface> Function(Pointer<SdlRWops> src),
-      Pointer<SdlSurface> Function(Pointer<SdlRWops> src)>('IMG_LoadXPM_RW');
-  return imgLoadXpmRwLookupFunction(src);
+Pointer<SdlSurface> imgLoadXpmIo(Pointer<SdlIoStream> src) {
+  final imgLoadXpmIoLookupFunction = libSdl3Image.lookupFunction<
+      Pointer<SdlSurface> Function(Pointer<SdlIoStream> src),
+      Pointer<SdlSurface> Function(Pointer<SdlIoStream> src)>('IMG_LoadXPM_IO');
+  return imgLoadXpmIoLookupFunction(src);
 }
 
 ///
@@ -2140,41 +2141,41 @@ Pointer<SdlSurface> imgLoadXpmRw(Pointer<SdlRWops> src) {
 ///
 /// If you know you definitely have a XV image, you can call this function,
 /// which will skip SDL_image's file format detection routines. Generally it's
-/// better to use the abstract interfaces; also, there is only an SDL_RWops
+/// better to use the abstract interfaces; also, there is only an SDL_IOStream
 /// interface available here.
 ///
-/// \param src an SDL_RWops to load image data from.
+/// \param src an SDL_IOStream to load image data from.
 /// \returns SDL surface, or NULL on error
 ///
 /// \since This function is available since SDL_image 3.0.0.
 ///
-/// \sa IMG_LoadAVIF_RW
-/// \sa IMG_LoadICO_RW
-/// \sa IMG_LoadCUR_RW
-/// \sa IMG_LoadBMP_RW
-/// \sa IMG_LoadGIF_RW
-/// \sa IMG_LoadJPG_RW
-/// \sa IMG_LoadJXL_RW
-/// \sa IMG_LoadLBM_RW
-/// \sa IMG_LoadPCX_RW
-/// \sa IMG_LoadPNG_RW
-/// \sa IMG_LoadPNM_RW
-/// \sa IMG_LoadSVG_RW
-/// \sa IMG_LoadQOI_RW
-/// \sa IMG_LoadTGA_RW
-/// \sa IMG_LoadTIF_RW
-/// \sa IMG_LoadXCF_RW
-/// \sa IMG_LoadXPM_RW
-/// \sa IMG_LoadWEBP_RW
+/// \sa IMG_LoadAVIF_IO
+/// \sa IMG_LoadICO_IO
+/// \sa IMG_LoadCUR_IO
+/// \sa IMG_LoadBMP_IO
+/// \sa IMG_LoadGIF_IO
+/// \sa IMG_LoadJPG_IO
+/// \sa IMG_LoadJXL_IO
+/// \sa IMG_LoadLBM_IO
+/// \sa IMG_LoadPCX_IO
+/// \sa IMG_LoadPNG_IO
+/// \sa IMG_LoadPNM_IO
+/// \sa IMG_LoadSVG_IO
+/// \sa IMG_LoadQOI_IO
+/// \sa IMG_LoadTGA_IO
+/// \sa IMG_LoadTIF_IO
+/// \sa IMG_LoadXCF_IO
+/// \sa IMG_LoadXPM_IO
+/// \sa IMG_LoadWEBP_IO
 ///
 /// ```c
-/// extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadXV_RW(SDL_RWops *src)
+/// extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadXV_IO(SDL_IOStream *src)
 /// ```
-Pointer<SdlSurface> imgLoadXvRw(Pointer<SdlRWops> src) {
-  final imgLoadXvRwLookupFunction = libSdl3Image.lookupFunction<
-      Pointer<SdlSurface> Function(Pointer<SdlRWops> src),
-      Pointer<SdlSurface> Function(Pointer<SdlRWops> src)>('IMG_LoadXV_RW');
-  return imgLoadXvRwLookupFunction(src);
+Pointer<SdlSurface> imgLoadXvIo(Pointer<SdlIoStream> src) {
+  final imgLoadXvIoLookupFunction = libSdl3Image.lookupFunction<
+      Pointer<SdlSurface> Function(Pointer<SdlIoStream> src),
+      Pointer<SdlSurface> Function(Pointer<SdlIoStream> src)>('IMG_LoadXV_IO');
+  return imgLoadXvIoLookupFunction(src);
 }
 
 ///
@@ -2182,41 +2183,42 @@ Pointer<SdlSurface> imgLoadXvRw(Pointer<SdlRWops> src) {
 ///
 /// If you know you definitely have a WEBP image, you can call this function,
 /// which will skip SDL_image's file format detection routines. Generally it's
-/// better to use the abstract interfaces; also, there is only an SDL_RWops
+/// better to use the abstract interfaces; also, there is only an SDL_IOStream
 /// interface available here.
 ///
-/// \param src an SDL_RWops to load image data from.
+/// \param src an SDL_IOStream to load image data from.
 /// \returns SDL surface, or NULL on error
 ///
 /// \since This function is available since SDL_image 3.0.0.
 ///
-/// \sa IMG_LoadAVIF_RW
-/// \sa IMG_LoadICO_RW
-/// \sa IMG_LoadCUR_RW
-/// \sa IMG_LoadBMP_RW
-/// \sa IMG_LoadGIF_RW
-/// \sa IMG_LoadJPG_RW
-/// \sa IMG_LoadJXL_RW
-/// \sa IMG_LoadLBM_RW
-/// \sa IMG_LoadPCX_RW
-/// \sa IMG_LoadPNG_RW
-/// \sa IMG_LoadPNM_RW
-/// \sa IMG_LoadSVG_RW
-/// \sa IMG_LoadQOI_RW
-/// \sa IMG_LoadTGA_RW
-/// \sa IMG_LoadTIF_RW
-/// \sa IMG_LoadXCF_RW
-/// \sa IMG_LoadXPM_RW
-/// \sa IMG_LoadXV_RW
+/// \sa IMG_LoadAVIF_IO
+/// \sa IMG_LoadICO_IO
+/// \sa IMG_LoadCUR_IO
+/// \sa IMG_LoadBMP_IO
+/// \sa IMG_LoadGIF_IO
+/// \sa IMG_LoadJPG_IO
+/// \sa IMG_LoadJXL_IO
+/// \sa IMG_LoadLBM_IO
+/// \sa IMG_LoadPCX_IO
+/// \sa IMG_LoadPNG_IO
+/// \sa IMG_LoadPNM_IO
+/// \sa IMG_LoadSVG_IO
+/// \sa IMG_LoadQOI_IO
+/// \sa IMG_LoadTGA_IO
+/// \sa IMG_LoadTIF_IO
+/// \sa IMG_LoadXCF_IO
+/// \sa IMG_LoadXPM_IO
+/// \sa IMG_LoadXV_IO
 ///
 /// ```c
-/// extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadWEBP_RW(SDL_RWops *src)
+/// extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadWEBP_IO(SDL_IOStream *src)
 /// ```
-Pointer<SdlSurface> imgLoadWebpRw(Pointer<SdlRWops> src) {
-  final imgLoadWebpRwLookupFunction = libSdl3Image.lookupFunction<
-      Pointer<SdlSurface> Function(Pointer<SdlRWops> src),
-      Pointer<SdlSurface> Function(Pointer<SdlRWops> src)>('IMG_LoadWEBP_RW');
-  return imgLoadWebpRwLookupFunction(src);
+Pointer<SdlSurface> imgLoadWebpIo(Pointer<SdlIoStream> src) {
+  final imgLoadWebpIoLookupFunction = libSdl3Image.lookupFunction<
+      Pointer<SdlSurface> Function(Pointer<SdlIoStream> src),
+      Pointer<SdlSurface> Function(
+          Pointer<SdlIoStream> src)>('IMG_LoadWEBP_IO');
+  return imgLoadWebpIoLookupFunction(src);
 }
 
 ///
@@ -2231,7 +2233,7 @@ Pointer<SdlSurface> imgLoadWebpRw(Pointer<SdlRWops> src) {
 /// When done with the returned surface, the app should dispose of it with a
 /// call to SDL_DestroySurface().
 ///
-/// \param src an SDL_RWops to load SVG data from.
+/// \param src an SDL_IOStream to load SVG data from.
 /// \param width desired width of the generated surface, in pixels.
 /// \param height desired height of the generated surface, in pixels.
 /// \returns a new SDL surface, or NULL on error.
@@ -2239,16 +2241,16 @@ Pointer<SdlSurface> imgLoadWebpRw(Pointer<SdlRWops> src) {
 /// \since This function is available since SDL_image 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadSizedSVG_RW(SDL_RWops *src, int width, int height)
+/// extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadSizedSVG_IO(SDL_IOStream *src, int width, int height)
 /// ```
-Pointer<SdlSurface> imgLoadSizedSvgRw(
-    Pointer<SdlRWops> src, int width, int height) {
-  final imgLoadSizedSvgRwLookupFunction = libSdl3Image.lookupFunction<
+Pointer<SdlSurface> imgLoadSizedSvgIo(
+    Pointer<SdlIoStream> src, int width, int height) {
+  final imgLoadSizedSvgIoLookupFunction = libSdl3Image.lookupFunction<
       Pointer<SdlSurface> Function(
-          Pointer<SdlRWops> src, Int32 width, Int32 height),
-      Pointer<SdlSurface> Function(
-          Pointer<SdlRWops> src, int width, int height)>('IMG_LoadSizedSVG_RW');
-  return imgLoadSizedSvgRwLookupFunction(src, width, height);
+          Pointer<SdlIoStream> src, Int32 width, Int32 height),
+      Pointer<SdlSurface> Function(Pointer<SdlIoStream> src, int width,
+          int height)>('IMG_LoadSizedSVG_IO');
+  return imgLoadSizedSvgIoLookupFunction(src, width, height);
 }
 
 ///
@@ -2320,7 +2322,7 @@ Pointer<SdlSurface> imgReadXpmFromArrayToRgb888(Pointer<Pointer<Int8>> xpm) {
 ///
 /// \since This function is available since SDL_image 3.0.0.
 ///
-/// \sa IMG_SaveAVIF_RW
+/// \sa IMG_SaveAVIF_IO
 ///
 /// ```c
 /// extern DECLSPEC int SDLCALL IMG_SaveAVIF(SDL_Surface *surface, const char *file, int quality)
@@ -2338,16 +2340,16 @@ int imgSaveAvif(Pointer<SdlSurface> surface, String? file, int quality) {
 }
 
 ///
-/// Save an SDL_Surface into AVIF image data, via an SDL_RWops.
+/// Save an SDL_Surface into AVIF image data, via an SDL_IOStream.
 ///
 /// If you just want to save to a filename, you can use IMG_SaveAVIF() instead.
 ///
-/// If `freedst` is SDL_TRUE, the RWops will be closed before returning,
-/// whether this function succeeds or not.
+/// If `closeio` is SDL_TRUE, `dst` will be closed before returning, whether
+/// this function succeeds or not.
 ///
 /// \param surface the SDL surface to save
-/// \param dst the SDL_RWops to save the image data to.
-/// \param freedst SDL_TRUE to close/free the SDL_RWops before returning,
+/// \param dst the SDL_IOStream to save the image data to.
+/// \param closeio SDL_TRUE to close/free the SDL_IOStream before returning,
 /// SDL_FALSE to leave it open.
 /// \param quality the desired quality, ranging between 0 (lowest) and 100
 /// (highest)
@@ -2358,16 +2360,16 @@ int imgSaveAvif(Pointer<SdlSurface> surface, String? file, int quality) {
 /// \sa IMG_SaveAVIF
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL IMG_SaveAVIF_RW(SDL_Surface *surface, SDL_RWops *dst, int freedst, int quality)
+/// extern DECLSPEC int SDLCALL IMG_SaveAVIF_IO(SDL_Surface *surface, SDL_IOStream *dst, int closeio, int quality)
 /// ```
-int imgSaveAvifRw(Pointer<SdlSurface> surface, Pointer<SdlRWops> dst,
-    int freedst, int quality) {
-  final imgSaveAvifRwLookupFunction = libSdl3Image.lookupFunction<
-      Int32 Function(Pointer<SdlSurface> surface, Pointer<SdlRWops> dst,
-          Int32 freedst, Int32 quality),
-      int Function(Pointer<SdlSurface> surface, Pointer<SdlRWops> dst,
-          int freedst, int quality)>('IMG_SaveAVIF_RW');
-  return imgSaveAvifRwLookupFunction(surface, dst, freedst, quality);
+int imgSaveAvifIo(Pointer<SdlSurface> surface, Pointer<SdlIoStream> dst,
+    int closeio, int quality) {
+  final imgSaveAvifIoLookupFunction = libSdl3Image.lookupFunction<
+      Int32 Function(Pointer<SdlSurface> surface, Pointer<SdlIoStream> dst,
+          Int32 closeio, Int32 quality),
+      int Function(Pointer<SdlSurface> surface, Pointer<SdlIoStream> dst,
+          int closeio, int quality)>('IMG_SaveAVIF_IO');
+  return imgSaveAvifIoLookupFunction(surface, dst, closeio, quality);
 }
 
 ///
@@ -2381,7 +2383,7 @@ int imgSaveAvifRw(Pointer<SdlSurface> surface, Pointer<SdlRWops> dst,
 ///
 /// \since This function is available since SDL_image 3.0.0.
 ///
-/// \sa IMG_SavePNG_RW
+/// \sa IMG_SavePNG_IO
 ///
 /// ```c
 /// extern DECLSPEC int SDLCALL IMG_SavePNG(SDL_Surface *surface, const char *file)
@@ -2398,16 +2400,16 @@ int imgSavePng(Pointer<SdlSurface> surface, String? file) {
 }
 
 ///
-/// Save an SDL_Surface into PNG image data, via an SDL_RWops.
+/// Save an SDL_Surface into PNG image data, via an SDL_IOStream.
 ///
 /// If you just want to save to a filename, you can use IMG_SavePNG() instead.
 ///
-/// If `freedst` is SDL_TRUE, the RWops will be closed before returning,
-/// whether this function succeeds or not.
+/// If `closeio` is SDL_TRUE, `dst` will be closed before returning, whether
+/// this function succeeds or not.
 ///
 /// \param surface the SDL surface to save
-/// \param dst the SDL_RWops to save the image data to.
-/// \param freedst SDL_TRUE to close/free the SDL_RWops before returning,
+/// \param dst the SDL_IOStream to save the image data to.
+/// \param closeio SDL_TRUE to close/free the SDL_IOStream before returning,
 /// SDL_FALSE to leave it open.
 /// \returns 0 if successful, -1 on error.
 ///
@@ -2416,16 +2418,16 @@ int imgSavePng(Pointer<SdlSurface> surface, String? file) {
 /// \sa IMG_SavePNG
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL IMG_SavePNG_RW(SDL_Surface *surface, SDL_RWops *dst, int freedst)
+/// extern DECLSPEC int SDLCALL IMG_SavePNG_IO(SDL_Surface *surface, SDL_IOStream *dst, int closeio)
 /// ```
-int imgSavePngRw(
-    Pointer<SdlSurface> surface, Pointer<SdlRWops> dst, int freedst) {
-  final imgSavePngRwLookupFunction = libSdl3Image.lookupFunction<
+int imgSavePngIo(
+    Pointer<SdlSurface> surface, Pointer<SdlIoStream> dst, int closeio) {
+  final imgSavePngIoLookupFunction = libSdl3Image.lookupFunction<
       Int32 Function(
-          Pointer<SdlSurface> surface, Pointer<SdlRWops> dst, Int32 freedst),
-      int Function(Pointer<SdlSurface> surface, Pointer<SdlRWops> dst,
-          int freedst)>('IMG_SavePNG_RW');
-  return imgSavePngRwLookupFunction(surface, dst, freedst);
+          Pointer<SdlSurface> surface, Pointer<SdlIoStream> dst, Int32 closeio),
+      int Function(Pointer<SdlSurface> surface, Pointer<SdlIoStream> dst,
+          int closeio)>('IMG_SavePNG_IO');
+  return imgSavePngIoLookupFunction(surface, dst, closeio);
 }
 
 ///
@@ -2441,7 +2443,7 @@ int imgSavePngRw(
 ///
 /// \since This function is available since SDL_image 3.0.0.
 ///
-/// \sa IMG_SaveJPG_RW
+/// \sa IMG_SaveJPG_IO
 ///
 /// ```c
 /// extern DECLSPEC int SDLCALL IMG_SaveJPG(SDL_Surface *surface, const char *file, int quality)
@@ -2459,13 +2461,16 @@ int imgSaveJpg(Pointer<SdlSurface> surface, String? file, int quality) {
 }
 
 ///
-/// Save an SDL_Surface into JPEG image data, via an SDL_RWops.
+/// Save an SDL_Surface into JPEG image data, via an SDL_IOStream.
 ///
 /// If you just want to save to a filename, you can use IMG_SaveJPG() instead.
 ///
+/// If `closeio` is SDL_TRUE, `dst` will be closed before returning, whether
+/// this function succeeds or not.
+///
 /// \param surface the SDL surface to save
-/// \param dst the SDL_RWops to save the image data to.
-/// \param freedst SDL_TRUE to close/free the SDL_RWops before returning,
+/// \param dst the SDL_IOStream to save the image data to.
+/// \param closeio SDL_TRUE to close/free the SDL_IOStream before returning,
 /// SDL_FALSE to leave it open.
 /// \param quality [0; 33] is Lowest quality, [34; 66] is Middle quality, [67;
 /// 100] is Highest quality
@@ -2476,16 +2481,16 @@ int imgSaveJpg(Pointer<SdlSurface> surface, String? file, int quality) {
 /// \sa IMG_SaveJPG
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL IMG_SaveJPG_RW(SDL_Surface *surface, SDL_RWops *dst, int freedst, int quality)
+/// extern DECLSPEC int SDLCALL IMG_SaveJPG_IO(SDL_Surface *surface, SDL_IOStream *dst, int closeio, int quality)
 /// ```
-int imgSaveJpgRw(Pointer<SdlSurface> surface, Pointer<SdlRWops> dst,
-    int freedst, int quality) {
-  final imgSaveJpgRwLookupFunction = libSdl3Image.lookupFunction<
-      Int32 Function(Pointer<SdlSurface> surface, Pointer<SdlRWops> dst,
-          Int32 freedst, Int32 quality),
-      int Function(Pointer<SdlSurface> surface, Pointer<SdlRWops> dst,
-          int freedst, int quality)>('IMG_SaveJPG_RW');
-  return imgSaveJpgRwLookupFunction(surface, dst, freedst, quality);
+int imgSaveJpgIo(Pointer<SdlSurface> surface, Pointer<SdlIoStream> dst,
+    int closeio, int quality) {
+  final imgSaveJpgIoLookupFunction = libSdl3Image.lookupFunction<
+      Int32 Function(Pointer<SdlSurface> surface, Pointer<SdlIoStream> dst,
+          Int32 closeio, Int32 quality),
+      int Function(Pointer<SdlSurface> surface, Pointer<SdlIoStream> dst,
+          int closeio, int quality)>('IMG_SaveJPG_IO');
+  return imgSaveJpgIoLookupFunction(surface, dst, closeio, quality);
 }
 
 ///
@@ -2515,17 +2520,17 @@ Pointer<ImgAnimation> imgLoadAnimation(String? file) {
 }
 
 ///
-/// Load an animation from an SDL_RWops.
+/// Load an animation from an SDL_IOStream.
 ///
-/// If `freesrc` is SDL_TRUE, the RWops will be closed before returning,
-/// whether this function succeeds or not. SDL_image reads everything it needs
-/// from the RWops during this call in any case.
+/// If `closeio` is SDL_TRUE, `src` will be closed before returning, whether
+/// this function succeeds or not. SDL_image reads everything it needs from
+/// `src` during this call in any case.
 ///
 /// When done with the returned animation, the app should dispose of it with a
 /// call to IMG_FreeAnimation().
 ///
-/// \param src an SDL_RWops that data will be read from.
-/// \param freesrc SDL_TRUE to close/free the SDL_RWops before returning,
+/// \param src an SDL_IOStream that data will be read from.
+/// \param closeio SDL_TRUE to close/free the SDL_IOStream before returning,
 /// SDL_FALSE to leave it open.
 /// \returns a new IMG_Animation, or NULL on error.
 ///
@@ -2534,14 +2539,15 @@ Pointer<ImgAnimation> imgLoadAnimation(String? file) {
 /// \sa IMG_FreeAnimation
 ///
 /// ```c
-/// extern DECLSPEC IMG_Animation * SDLCALL IMG_LoadAnimation_RW(SDL_RWops *src, SDL_bool freesrc)
+/// extern DECLSPEC IMG_Animation * SDLCALL IMG_LoadAnimation_IO(SDL_IOStream *src, SDL_bool closeio)
 /// ```
-Pointer<ImgAnimation> imgLoadAnimationRw(Pointer<SdlRWops> src, bool freesrc) {
-  final imgLoadAnimationRwLookupFunction = libSdl3Image.lookupFunction<
-      Pointer<ImgAnimation> Function(Pointer<SdlRWops> src, Int32 freesrc),
+Pointer<ImgAnimation> imgLoadAnimationIo(
+    Pointer<SdlIoStream> src, bool closeio) {
+  final imgLoadAnimationIoLookupFunction = libSdl3Image.lookupFunction<
+      Pointer<ImgAnimation> Function(Pointer<SdlIoStream> src, Int32 closeio),
       Pointer<ImgAnimation> Function(
-          Pointer<SdlRWops> src, int freesrc)>('IMG_LoadAnimation_RW');
-  return imgLoadAnimationRwLookupFunction(src, freesrc ? 1 : 0);
+          Pointer<SdlIoStream> src, int closeio)>('IMG_LoadAnimation_IO');
+  return imgLoadAnimationIoLookupFunction(src, closeio ? 1 : 0);
 }
 
 ///
@@ -2553,15 +2559,15 @@ Pointer<ImgAnimation> imgLoadAnimationRw(Pointer<SdlRWops> src, bool freesrc) {
 /// that it cannot autodetect. If `type` is NULL, SDL_image will rely solely on
 /// its ability to guess the format.
 ///
-/// If `freesrc` is SDL_TRUE, the RWops will be closed before returning,
-/// whether this function succeeds or not. SDL_image reads everything it needs
-/// from the RWops during this call in any case.
+/// If `closeio` is SDL_TRUE, `src` will be closed before returning, whether
+/// this function succeeds or not. SDL_image reads everything it needs from
+/// `src` during this call in any case.
 ///
 /// When done with the returned animation, the app should dispose of it with a
 /// call to IMG_FreeAnimation().
 ///
-/// \param src an SDL_RWops that data will be read from.
-/// \param freesrc SDL_TRUE to close/free the SDL_RWops before returning,
+/// \param src an SDL_IOStream that data will be read from.
+/// \param closeio SDL_TRUE to close/free the SDL_IOStream before returning,
 /// SDL_FALSE to leave it open.
 /// \param type a filename extension that represent this data ("GIF", etc).
 /// \returns a new IMG_Animation, or NULL on error.
@@ -2569,22 +2575,22 @@ Pointer<ImgAnimation> imgLoadAnimationRw(Pointer<SdlRWops> src, bool freesrc) {
 /// \since This function is available since SDL_image 3.0.0.
 ///
 /// \sa IMG_LoadAnimation
-/// \sa IMG_LoadAnimation_RW
+/// \sa IMG_LoadAnimation_IO
 /// \sa IMG_FreeAnimation
 ///
 /// ```c
-/// extern DECLSPEC IMG_Animation * SDLCALL IMG_LoadAnimationTyped_RW(SDL_RWops *src, SDL_bool freesrc, const char *type)
+/// extern DECLSPEC IMG_Animation * SDLCALL IMG_LoadAnimationTyped_IO(SDL_IOStream *src, SDL_bool closeio, const char *type)
 /// ```
-Pointer<ImgAnimation> imgLoadAnimationTypedRw(
-    Pointer<SdlRWops> src, bool freesrc, String? type) {
-  final imgLoadAnimationTypedRwLookupFunction = libSdl3Image.lookupFunction<
+Pointer<ImgAnimation> imgLoadAnimationTypedIo(
+    Pointer<SdlIoStream> src, bool closeio, String? type) {
+  final imgLoadAnimationTypedIoLookupFunction = libSdl3Image.lookupFunction<
       Pointer<ImgAnimation> Function(
-          Pointer<SdlRWops> src, Int32 freesrc, Pointer<Utf8> type),
-      Pointer<ImgAnimation> Function(Pointer<SdlRWops> src, int freesrc,
-          Pointer<Utf8> type)>('IMG_LoadAnimationTyped_RW');
+          Pointer<SdlIoStream> src, Int32 closeio, Pointer<Utf8> type),
+      Pointer<ImgAnimation> Function(Pointer<SdlIoStream> src, int closeio,
+          Pointer<Utf8> type)>('IMG_LoadAnimationTyped_IO');
   final typePointer = type != null ? type.toNativeUtf8() : nullptr;
   final result =
-      imgLoadAnimationTypedRwLookupFunction(src, freesrc ? 1 : 0, typePointer);
+      imgLoadAnimationTypedIoLookupFunction(src, closeio ? 1 : 0, typePointer);
   calloc.free(typePointer);
   return result;
 }
@@ -2599,8 +2605,8 @@ Pointer<ImgAnimation> imgLoadAnimationTypedRw(
 /// \since This function is available since SDL_image 3.0.0.
 ///
 /// \sa IMG_LoadAnimation
-/// \sa IMG_LoadAnimation_RW
-/// \sa IMG_LoadAnimationTyped_RW
+/// \sa IMG_LoadAnimation_IO
+/// \sa IMG_LoadAnimationTyped_IO
 ///
 /// ```c
 /// extern DECLSPEC void SDLCALL IMG_FreeAnimation(IMG_Animation *anim)
@@ -2617,28 +2623,28 @@ void imgFreeAnimation(Pointer<ImgAnimation> anim) {
 ///
 /// If you know you definitely have a GIF image, you can call this function,
 /// which will skip SDL_image's file format detection routines. Generally it's
-/// better to use the abstract interfaces; also, there is only an SDL_RWops
+/// better to use the abstract interfaces; also, there is only an SDL_IOStream
 /// interface available here.
 ///
-/// \param src an SDL_RWops that data will be read from.
+/// \param src an SDL_IOStream that data will be read from.
 /// \returns a new IMG_Animation, or NULL on error.
 ///
 /// \since This function is available since SDL_image 3.0.0.
 ///
 /// \sa IMG_LoadAnimation
-/// \sa IMG_LoadAnimation_RW
-/// \sa IMG_LoadAnimationTyped_RW
+/// \sa IMG_LoadAnimation_IO
+/// \sa IMG_LoadAnimationTyped_IO
 /// \sa IMG_FreeAnimation
 ///
 /// ```c
-/// extern DECLSPEC IMG_Animation * SDLCALL IMG_LoadGIFAnimation_RW(SDL_RWops *src)
+/// extern DECLSPEC IMG_Animation * SDLCALL IMG_LoadGIFAnimation_IO(SDL_IOStream *src)
 /// ```
-Pointer<ImgAnimation> imgLoadGifAnimationRw(Pointer<SdlRWops> src) {
-  final imgLoadGifAnimationRwLookupFunction = libSdl3Image.lookupFunction<
-      Pointer<ImgAnimation> Function(Pointer<SdlRWops> src),
+Pointer<ImgAnimation> imgLoadGifAnimationIo(Pointer<SdlIoStream> src) {
+  final imgLoadGifAnimationIoLookupFunction = libSdl3Image.lookupFunction<
+      Pointer<ImgAnimation> Function(Pointer<SdlIoStream> src),
       Pointer<ImgAnimation> Function(
-          Pointer<SdlRWops> src)>('IMG_LoadGIFAnimation_RW');
-  return imgLoadGifAnimationRwLookupFunction(src);
+          Pointer<SdlIoStream> src)>('IMG_LoadGIFAnimation_IO');
+  return imgLoadGifAnimationIoLookupFunction(src);
 }
 
 ///
@@ -2646,26 +2652,26 @@ Pointer<ImgAnimation> imgLoadGifAnimationRw(Pointer<SdlRWops> src) {
 ///
 /// If you know you definitely have a WEBP image, you can call this function,
 /// which will skip SDL_image's file format detection routines. Generally it's
-/// better to use the abstract interfaces; also, there is only an SDL_RWops
+/// better to use the abstract interfaces; also, there is only an SDL_IOStream
 /// interface available here.
 ///
-/// \param src an SDL_RWops that data will be read from.
+/// \param src an SDL_IOStream that data will be read from.
 /// \returns a new IMG_Animation, or NULL on error.
 ///
 /// \since This function is available since SDL_image 3.0.0.
 ///
 /// \sa IMG_LoadAnimation
-/// \sa IMG_LoadAnimation_RW
-/// \sa IMG_LoadAnimationTyped_RW
+/// \sa IMG_LoadAnimation_IO
+/// \sa IMG_LoadAnimationTyped_IO
 /// \sa IMG_FreeAnimation
 ///
 /// ```c
-/// extern DECLSPEC IMG_Animation * SDLCALL IMG_LoadWEBPAnimation_RW(SDL_RWops *src)
+/// extern DECLSPEC IMG_Animation * SDLCALL IMG_LoadWEBPAnimation_IO(SDL_IOStream *src)
 /// ```
-Pointer<ImgAnimation> imgLoadWebpAnimationRw(Pointer<SdlRWops> src) {
-  final imgLoadWebpAnimationRwLookupFunction = libSdl3Image.lookupFunction<
-      Pointer<ImgAnimation> Function(Pointer<SdlRWops> src),
+Pointer<ImgAnimation> imgLoadWebpAnimationIo(Pointer<SdlIoStream> src) {
+  final imgLoadWebpAnimationIoLookupFunction = libSdl3Image.lookupFunction<
+      Pointer<ImgAnimation> Function(Pointer<SdlIoStream> src),
       Pointer<ImgAnimation> Function(
-          Pointer<SdlRWops> src)>('IMG_LoadWEBPAnimation_RW');
-  return imgLoadWebpAnimationRwLookupFunction(src);
+          Pointer<SdlIoStream> src)>('IMG_LoadWEBPAnimation_IO');
+  return imgLoadWebpAnimationIoLookupFunction(src);
 }

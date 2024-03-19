@@ -18,7 +18,7 @@ import 'package:sdl3/sdl3.dart';
 
 int myEventFilter(Pointer<Uint8> blue, Pointer<SdlEvent> event) {
   switch (event.type) {
-    case SDL_KEYDOWN:
+    case SDL_EVENT_KEY_DOWN:
       switch (event.key.keysym.ref.sym) {
         case SDLK_SPACE:
           if (blue.value == 0) {
@@ -62,7 +62,7 @@ int main() {
   while (!quit) {
     while (event.poll()) {
       switch (event.type) {
-        case SDL_QUIT:
+        case SDL_EVENT_QUIT:
           quit = true;
           break;
         default:

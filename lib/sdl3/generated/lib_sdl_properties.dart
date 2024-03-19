@@ -194,7 +194,12 @@ int sdlSetPropertyWithCleanup(
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetProperty
+/// \sa SDL_HasProperty
+/// \sa SDL_SetBooleanProperty
+/// \sa SDL_SetFloatProperty
+/// \sa SDL_SetNumberProperty
 /// \sa SDL_SetPropertyWithCleanup
+/// \sa SDL_SetStringProperty
 ///
 /// ```c
 /// extern DECLSPEC int SDLCALL SDL_SetProperty(SDL_PropertiesID props, const char *name, void *value)
@@ -409,7 +414,11 @@ int sdlGetPropertyType(int props, String? name) {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
+/// \sa SDL_GetBooleanProperty
+/// \sa SDL_GetFloatProperty
+/// \sa SDL_GetNumberProperty
 /// \sa SDL_GetPropertyType
+/// \sa SDL_GetStringProperty
 /// \sa SDL_HasProperty
 /// \sa SDL_SetProperty
 ///

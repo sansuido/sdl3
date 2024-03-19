@@ -50,16 +50,6 @@ int sdlGetCpuCacheLineSize() {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_HasAVX
-/// \sa SDL_HasAVX2
-/// \sa SDL_HasAVX512F
-/// \sa SDL_HasMMX
-/// \sa SDL_HasSSE
-/// \sa SDL_HasSSE2
-/// \sa SDL_HasSSE3
-/// \sa SDL_HasSSE41
-/// \sa SDL_HasSSE42
-///
 /// ```c
 /// extern DECLSPEC SDL_bool SDLCALL SDL_HasAltiVec(void)
 /// ```
@@ -77,16 +67,6 @@ bool sdlHasAltiVec() {
 /// \returns SDL_TRUE if the CPU has MMX features or SDL_FALSE if not.
 ///
 /// \since This function is available since SDL 3.0.0.
-///
-/// \sa SDL_HasAltiVec
-/// \sa SDL_HasAVX
-/// \sa SDL_HasAVX2
-/// \sa SDL_HasAVX512F
-/// \sa SDL_HasSSE
-/// \sa SDL_HasSSE2
-/// \sa SDL_HasSSE3
-/// \sa SDL_HasSSE41
-/// \sa SDL_HasSSE42
 ///
 /// ```c
 /// extern DECLSPEC SDL_bool SDLCALL SDL_HasMMX(void)
@@ -106,11 +86,6 @@ bool sdlHasMmx() {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_HasAltiVec
-/// \sa SDL_HasAVX
-/// \sa SDL_HasAVX2
-/// \sa SDL_HasAVX512F
-/// \sa SDL_HasMMX
 /// \sa SDL_HasSSE2
 /// \sa SDL_HasSSE3
 /// \sa SDL_HasSSE41
@@ -134,11 +109,6 @@ bool sdlHasSse() {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_HasAltiVec
-/// \sa SDL_HasAVX
-/// \sa SDL_HasAVX2
-/// \sa SDL_HasAVX512F
-/// \sa SDL_HasMMX
 /// \sa SDL_HasSSE
 /// \sa SDL_HasSSE3
 /// \sa SDL_HasSSE41
@@ -162,11 +132,6 @@ bool sdlHasSse2() {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_HasAltiVec
-/// \sa SDL_HasAVX
-/// \sa SDL_HasAVX2
-/// \sa SDL_HasAVX512F
-/// \sa SDL_HasMMX
 /// \sa SDL_HasSSE
 /// \sa SDL_HasSSE2
 /// \sa SDL_HasSSE41
@@ -190,11 +155,6 @@ bool sdlHasSse3() {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_HasAltiVec
-/// \sa SDL_HasAVX
-/// \sa SDL_HasAVX2
-/// \sa SDL_HasAVX512F
-/// \sa SDL_HasMMX
 /// \sa SDL_HasSSE
 /// \sa SDL_HasSSE2
 /// \sa SDL_HasSSE3
@@ -218,11 +178,6 @@ bool sdlHasSse41() {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_HasAltiVec
-/// \sa SDL_HasAVX
-/// \sa SDL_HasAVX2
-/// \sa SDL_HasAVX512F
-/// \sa SDL_HasMMX
 /// \sa SDL_HasSSE
 /// \sa SDL_HasSSE2
 /// \sa SDL_HasSSE3
@@ -246,15 +201,8 @@ bool sdlHasSse42() {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_HasAltiVec
 /// \sa SDL_HasAVX2
 /// \sa SDL_HasAVX512F
-/// \sa SDL_HasMMX
-/// \sa SDL_HasSSE
-/// \sa SDL_HasSSE2
-/// \sa SDL_HasSSE3
-/// \sa SDL_HasSSE41
-/// \sa SDL_HasSSE42
 ///
 /// ```c
 /// extern DECLSPEC SDL_bool SDLCALL SDL_HasAVX(void)
@@ -274,15 +222,8 @@ bool sdlHasAvx() {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_HasAltiVec
 /// \sa SDL_HasAVX
 /// \sa SDL_HasAVX512F
-/// \sa SDL_HasMMX
-/// \sa SDL_HasSSE
-/// \sa SDL_HasSSE2
-/// \sa SDL_HasSSE3
-/// \sa SDL_HasSSE41
-/// \sa SDL_HasSSE42
 ///
 /// ```c
 /// extern DECLSPEC SDL_bool SDLCALL SDL_HasAVX2(void)
@@ -302,15 +243,8 @@ bool sdlHasAvx2() {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_HasAltiVec
 /// \sa SDL_HasAVX
 /// \sa SDL_HasAVX2
-/// \sa SDL_HasMMX
-/// \sa SDL_HasSSE
-/// \sa SDL_HasSSE2
-/// \sa SDL_HasSSE3
-/// \sa SDL_HasSSE41
-/// \sa SDL_HasSSE42
 ///
 /// ```c
 /// extern DECLSPEC SDL_bool SDLCALL SDL_HasAVX512F(void)

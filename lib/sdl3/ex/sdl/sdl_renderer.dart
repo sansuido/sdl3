@@ -396,15 +396,15 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
     return imgLoadTexture(this, file);
   }
 
-  Pointer<SdlTexture> loadTextureRw(Pointer<SdlRWops> src, bool freesrc) {
+  Pointer<SdlTexture> loadTextureIo(Pointer<SdlIoStream> src, bool freesrc) {
     // 418
-    return imgLoadTextureRw(this, src, freesrc);
+    return imgLoadTextureIo(this, src, freesrc);
   }
 
-  Pointer<SdlTexture> loadTextureTypedRw(
-      Pointer<SdlRWops> src, bool freesrc, String type) {
+  Pointer<SdlTexture> loadTextureTypedIo(
+      Pointer<SdlIoStream> src, bool freesrc, String type) {
     // 484
-    return imgLoadTextureTypedRw(this, src, freesrc, type);
+    return imgLoadTextureTypedIo(this, src, freesrc, type);
   }
 
   // lib_sdl_renderer.dart

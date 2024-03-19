@@ -108,6 +108,8 @@ int sdlGetNumTouchFingers(int touchId) {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
+/// \sa SDL_GetNumTouchFingers
+///
 /// ```c
 /// extern DECLSPEC SDL_Finger * SDLCALL SDL_GetTouchFinger(SDL_TouchID touchID, int index)
 /// ```

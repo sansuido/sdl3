@@ -7,8 +7,7 @@ const gScreenWidth = 800;
 const gScreenHeight = 600;
 
 int main() {
-  if (sdlInit(SDL_INIT_VIDEO | SDL_INIT_GAMECONTROLLER | SDL_INIT_JOYSTICK) <
-      0) {
+  if (sdlInit(SDL_INIT_VIDEO | SDL_INIT_GAMEPAD | SDL_INIT_JOYSTICK) < 0) {
     print(sdlGetError());
     return -1;
   }
@@ -63,7 +62,7 @@ int main() {
     'TOUCHPAD',
   ];
   var buttonEnables = <bool>[];
-  for (var n = 0; n < SDL_CONTROLLER_BUTTON_MAX; n++) {
+  for (var n = 0; n < SDL_GAMEPAD_BUTTON_MAX; n++) {
     buttonEnables.add(false);
   }
   var event = calloc<SdlEvent>();
@@ -71,19 +70,19 @@ int main() {
   while (running) {
     while (event.poll()) {
       switch (event.type) {
-        case SDL_QUIT:
+        case SDL_EVENT_QUIT:
           running = false;
           break;
-        case SDL_KEYDOWN:
+        case SDL_EVENT_KEY_DOWN:
           if (event.key.keysym.ref.sym == SDLK_ESCAPE) {
             running = false;
             break;
           }
           break;
-        case SDL_CONTROLLERBUTTONDOWN:
+        case SDL_EVENT_GAMEPAD_BUTTON_DOWN:
           buttonEnables[event.gbutton.ref.button] = true;
           break;
-        case SDL_CONTROLLERBUTTONUP:
+        case SDL_EVENT_GAMEPAD_BUTTON_UP:
           buttonEnables[event.gbutton.ref.button] = false;
           break;
         default:

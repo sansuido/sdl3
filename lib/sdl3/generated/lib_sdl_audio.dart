@@ -492,7 +492,6 @@ void sdlCloseAudioDevice(int devid) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_BindAudioStreams
-/// \sa SDL_UnbindAudioStreams
 /// \sa SDL_UnbindAudioStream
 /// \sa SDL_GetAudioStreamDevice
 ///
@@ -525,7 +524,6 @@ int sdlBindAudioStreams(
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_BindAudioStreams
-/// \sa SDL_UnbindAudioStreams
 /// \sa SDL_UnbindAudioStream
 /// \sa SDL_GetAudioStreamDevice
 ///
@@ -558,9 +556,6 @@ int sdlBindAudioStream(int devid, Pointer<SdlAudioStream> stream) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_BindAudioStreams
-/// \sa SDL_BindAudioStream
-/// \sa SDL_UnbindAudioStream
-/// \sa SDL_GetAudioStreamDevice
 ///
 /// ```c
 /// extern DECLSPEC void SDLCALL SDL_UnbindAudioStreams(SDL_AudioStream **streams, int num_streams)
@@ -587,9 +582,6 @@ void sdlUnbindAudioStreams(
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_BindAudioStream
-/// \sa SDL_BindAudioStreams
-/// \sa SDL_UnbindAudioStreams
-/// \sa SDL_GetAudioStreamDevice
 ///
 /// ```c
 /// extern DECLSPEC void SDLCALL SDL_UnbindAudioStream(SDL_AudioStream *stream)
@@ -618,8 +610,6 @@ void sdlUnbindAudioStream(Pointer<SdlAudioStream> stream) {
 ///
 /// \sa SDL_BindAudioStream
 /// \sa SDL_BindAudioStreams
-/// \sa SDL_UnbindAudioStream
-/// \sa SDL_UnbindAudioStreams
 ///
 /// ```c
 /// extern DECLSPEC SDL_AudioDeviceID SDLCALL SDL_GetAudioStreamDevice(SDL_AudioStream *stream)
@@ -734,9 +724,6 @@ int sdlGetAudioStreamFormat(Pointer<SdlAudioStream> stream,
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetAudioStreamFormat
-/// \sa SDL_PutAudioStreamData
-/// \sa SDL_GetAudioStreamData
-/// \sa SDL_GetAudioStreamAvailable
 /// \sa SDL_SetAudioStreamFrequencyRatio
 ///
 /// ```c
@@ -838,12 +825,10 @@ int sdlSetAudioStreamFrequencyRatio(
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_CreateAudioStream
-/// \sa SDL_GetAudioStreamData
-/// \sa SDL_GetAudioStreamAvailable
-/// \sa SDL_FlushAudioStream
 /// \sa SDL_ClearAudioStream
-/// \sa SDL_DestroyAudioStream
+/// \sa SDL_FlushAudioStream
+/// \sa SDL_GetAudioStreamData
+/// \sa SDL_GetAudioStreamQueued
 ///
 /// ```c
 /// extern DECLSPEC int SDLCALL SDL_PutAudioStreamData(SDL_AudioStream *stream, const void *buf, int len)
@@ -881,13 +866,9 @@ int sdlPutAudioStreamData(
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_CreateAudioStream
-/// \sa SDL_PutAudioStreamData
-/// \sa SDL_GetAudioStreamAvailable
-/// \sa SDL_SetAudioStreamFormat
-/// \sa SDL_FlushAudioStream
 /// \sa SDL_ClearAudioStream
-/// \sa SDL_DestroyAudioStream
+/// \sa SDL_GetAudioStreamAvailable
+/// \sa SDL_PutAudioStreamData
 ///
 /// ```c
 /// extern DECLSPEC int SDLCALL SDL_GetAudioStreamData(SDL_AudioStream *stream, void *buf, int len)
@@ -922,12 +903,8 @@ int sdlGetAudioStreamData(
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_CreateAudioStream
-/// \sa SDL_PutAudioStreamData
 /// \sa SDL_GetAudioStreamData
-/// \sa SDL_FlushAudioStream
-/// \sa SDL_ClearAudioStream
-/// \sa SDL_DestroyAudioStream
+/// \sa SDL_PutAudioStreamData
 ///
 /// ```c
 /// extern DECLSPEC int SDLCALL SDL_GetAudioStreamAvailable(SDL_AudioStream *stream)
@@ -967,7 +944,6 @@ int sdlGetAudioStreamAvailable(Pointer<SdlAudioStream> stream) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_PutAudioStreamData
-/// \sa SDL_GetAudioStreamData
 /// \sa SDL_ClearAudioStream
 ///
 /// ```c
@@ -996,12 +972,7 @@ int sdlGetAudioStreamQueued(Pointer<SdlAudioStream> stream) {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_CreateAudioStream
 /// \sa SDL_PutAudioStreamData
-/// \sa SDL_GetAudioStreamData
-/// \sa SDL_GetAudioStreamAvailable
-/// \sa SDL_ClearAudioStream
-/// \sa SDL_DestroyAudioStream
 ///
 /// ```c
 /// extern DECLSPEC int SDLCALL SDL_FlushAudioStream(SDL_AudioStream *stream)
@@ -1024,12 +995,10 @@ int sdlFlushAudioStream(Pointer<SdlAudioStream> stream) {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_CreateAudioStream
-/// \sa SDL_PutAudioStreamData
-/// \sa SDL_GetAudioStreamData
 /// \sa SDL_GetAudioStreamAvailable
-/// \sa SDL_FlushAudioStream
-/// \sa SDL_DestroyAudioStream
+/// \sa SDL_GetAudioStreamData
+/// \sa SDL_GetAudioStreamQueued
+/// \sa SDL_PutAudioStreamData
 ///
 /// ```c
 /// extern DECLSPEC int SDLCALL SDL_ClearAudioStream(SDL_AudioStream *stream)
@@ -1066,8 +1035,6 @@ int sdlClearAudioStream(Pointer<SdlAudioStream> stream) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_UnlockAudioStream
-/// \sa SDL_SetAudioStreamPutCallback
-/// \sa SDL_SetAudioStreamGetCallback
 ///
 /// ```c
 /// extern DECLSPEC int SDLCALL SDL_LockAudioStream(SDL_AudioStream *stream)
@@ -1094,8 +1061,6 @@ int sdlLockAudioStream(Pointer<SdlAudioStream> stream) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_LockAudioStream
-/// \sa SDL_SetAudioStreamPutCallback
-/// \sa SDL_SetAudioStreamGetCallback
 ///
 /// ```c
 /// extern DECLSPEC int SDLCALL SDL_UnlockAudioStream(SDL_AudioStream *stream)
@@ -1244,11 +1209,6 @@ int sdlSetAudioStreamPutCallback(
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_CreateAudioStream
-/// \sa SDL_PutAudioStreamData
-/// \sa SDL_GetAudioStreamData
-/// \sa SDL_GetAudioStreamAvailable
-/// \sa SDL_FlushAudioStream
-/// \sa SDL_ClearAudioStream
 ///
 /// ```c
 /// extern DECLSPEC void SDLCALL SDL_DestroyAudioStream(SDL_AudioStream *stream)
@@ -1449,7 +1409,7 @@ int sdlSetAudioPostmixCallback(
 /// Example:
 ///
 /// ```c
-/// SDL_LoadWAV_RW(SDL_RWFromFile("sample.wav", "rb"), 1, &spec, &buf, &len);
+/// SDL_LoadWAV_IO(SDL_IOFromFile("sample.wav", "rb"), 1, &spec, &buf, &len);
 /// ```
 ///
 /// Note that the SDL_LoadWAV function does this same thing for you, but in a
@@ -1460,7 +1420,7 @@ int sdlSetAudioPostmixCallback(
 /// ```
 ///
 /// \param src The data source for the WAVE data
-/// \param freesrc If SDL_TRUE, calls SDL_RWclose() on `src` before returning,
+/// \param closeio If SDL_TRUE, calls SDL_CloseIO() on `src` before returning,
 /// even in the case of an error
 /// \param spec A pointer to an SDL_AudioSpec that will be set to the WAVE
 /// data's format details on successful return
@@ -1488,29 +1448,29 @@ int sdlSetAudioPostmixCallback(
 /// \sa SDL_LoadWAV
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_LoadWAV_RW(SDL_RWops * src, SDL_bool freesrc, SDL_AudioSpec * spec, Uint8 ** audio_buf, Uint32 * audio_len)
+/// extern DECLSPEC int SDLCALL SDL_LoadWAV_IO(SDL_IOStream * src, SDL_bool closeio, SDL_AudioSpec * spec, Uint8 ** audio_buf, Uint32 * audio_len)
 /// ```
-int sdlLoadWavRw(
-    Pointer<SdlRWops> src,
-    bool freesrc,
+int sdlLoadWavIo(
+    Pointer<SdlIoStream> src,
+    bool closeio,
     Pointer<SdlAudioSpec> spec,
     Pointer<Pointer<Uint8>> audioBuf,
     Pointer<Uint32> audioLen) {
-  final sdlLoadWavRwLookupFunction = libSdl3.lookupFunction<
+  final sdlLoadWavIoLookupFunction = libSdl3.lookupFunction<
       Int32 Function(
-          Pointer<SdlRWops> src,
-          Int32 freesrc,
+          Pointer<SdlIoStream> src,
+          Int32 closeio,
           Pointer<SdlAudioSpec> spec,
           Pointer<Pointer<Uint8>> audioBuf,
           Pointer<Uint32> audioLen),
       int Function(
-          Pointer<SdlRWops> src,
-          int freesrc,
+          Pointer<SdlIoStream> src,
+          int closeio,
           Pointer<SdlAudioSpec> spec,
           Pointer<Pointer<Uint8>> audioBuf,
-          Pointer<Uint32> audioLen)>('SDL_LoadWAV_RW');
-  return sdlLoadWavRwLookupFunction(
-      src, freesrc ? 1 : 0, spec, audioBuf, audioLen);
+          Pointer<Uint32> audioLen)>('SDL_LoadWAV_IO');
+  return sdlLoadWavIoLookupFunction(
+      src, closeio ? 1 : 0, spec, audioBuf, audioLen);
 }
 
 ///
@@ -1519,7 +1479,7 @@ int sdlLoadWavRw(
 /// This is a convenience function that is effectively the same as:
 ///
 /// ```c
-/// SDL_LoadWAV_RW(SDL_RWFromFile(path, "rb"), 1, spec, audio_buf, audio_len);
+/// SDL_LoadWAV_IO(SDL_IOFromFile(path, "rb"), 1, spec, audio_buf, audio_len);
 /// ```
 ///
 /// Note that in SDL2, this was a preprocessor macro and not a real function.
@@ -1548,7 +1508,7 @@ int sdlLoadWavRw(
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_free
-/// \sa SDL_LoadWAV_RW
+/// \sa SDL_LoadWAV_IO
 ///
 /// ```c
 /// extern DECLSPEC int SDLCALL SDL_LoadWAV(const char *path, SDL_AudioSpec * spec, Uint8 ** audio_buf, Uint32 * audio_len)
@@ -1644,8 +1604,6 @@ int sdlMixAudioFormat(
 /// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.0.0.
-///
-/// \sa SDL_CreateAudioStream
 ///
 /// ```c
 /// extern DECLSPEC int SDLCALL SDL_ConvertAudioSamples(const SDL_AudioSpec *src_spec, const Uint8 *src_data, int src_len, const SDL_AudioSpec *dst_spec, Uint8 **dst_data, int *dst_len)

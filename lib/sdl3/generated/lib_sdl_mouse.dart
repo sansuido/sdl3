@@ -39,7 +39,6 @@ Pointer<SdlWindow> sdlGetMouseFocus() {
 ///
 /// \sa SDL_GetGlobalMouseState
 /// \sa SDL_GetRelativeMouseState
-/// \sa SDL_PumpEvents
 ///
 /// ```c
 /// extern DECLSPEC Uint32 SDLCALL SDL_GetMouseState(float *x, float *y)
@@ -77,6 +76,7 @@ int sdlGetMouseState(Pointer<Float> x, Pointer<Float> y) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_CaptureMouse
+/// \sa SDL_GetMouseState
 ///
 /// ```c
 /// extern DECLSPEC Uint32 SDLCALL SDL_GetGlobalMouseState(float *x, float *y)
@@ -314,6 +314,8 @@ bool sdlGetRelativeMouseMode() {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
+/// \sa SDL_CreateColorCursor
+/// \sa SDL_CreateSystemCursor
 /// \sa SDL_DestroyCursor
 /// \sa SDL_SetCursor
 ///
@@ -342,7 +344,9 @@ Pointer<SdlCursor> sdlCreateCursor(Pointer<Uint8> data, Pointer<Uint8> mask,
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_CreateCursor
+/// \sa SDL_CreateSystemCursor
 /// \sa SDL_DestroyCursor
+/// \sa SDL_SetCursor
 ///
 /// ```c
 /// extern DECLSPEC SDL_Cursor *SDLCALL SDL_CreateColorCursor(SDL_Surface *surface, int hot_x, int hot_y)
@@ -392,7 +396,6 @@ Pointer<SdlCursor> sdlCreateSystemCursor(int id) {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_CreateCursor
 /// \sa SDL_GetCursor
 ///
 /// ```c
@@ -436,8 +439,6 @@ Pointer<SdlCursor> sdlGetCursor() {
 /// \returns the default cursor on success or NULL on failure.
 ///
 /// \since This function is available since SDL 3.0.0.
-///
-/// \sa SDL_CreateSystemCursor
 ///
 /// ```c
 /// extern DECLSPEC SDL_Cursor *SDLCALL SDL_GetDefaultCursor(void)

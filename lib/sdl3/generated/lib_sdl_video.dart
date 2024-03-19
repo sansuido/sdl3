@@ -937,6 +937,7 @@ Pointer<SdlWindow> sdlCreatePopupWindow(Pointer<SdlWindow> parent, int offsetX,
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
+/// \sa SDL_CreateProperties
 /// \sa SDL_CreateWindow
 /// \sa SDL_DestroyWindow
 ///
@@ -1095,6 +1096,8 @@ Pointer<SdlWindow> sdlGetWindowParent(Pointer<SdlWindow> window) {
 /// with the window
 /// - `SDL_PROP_WINDOW_WAYLAND_XDG_TOPLEVEL_POINTER`: the xdg_toplevel role
 /// associated with the window
+/// - 'SDL_PROP_WINDOW_WAYLAND_XDG_TOPLEVEL_EXPORT_HANDLE_STRING': the export
+/// handle associated with the window
 /// - `SDL_PROP_WINDOW_WAYLAND_XDG_POPUP_POINTER`: the xdg_popup role
 /// associated with the window
 /// - `SDL_PROP_WINDOW_WAYLAND_XDG_POSITIONER_POINTER`: the xdg_positioner

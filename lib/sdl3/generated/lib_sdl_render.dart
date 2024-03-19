@@ -203,6 +203,7 @@ Pointer<SdlRenderer> sdlCreateRenderer(
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
+/// \sa SDL_CreateProperties
 /// \sa SDL_CreateRenderer
 /// \sa SDL_CreateSoftwareRenderer
 /// \sa SDL_DestroyRenderer
@@ -234,8 +235,6 @@ Pointer<SdlRenderer> sdlCreateRendererWithProperties(int props) {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_CreateRenderer
-/// \sa SDL_CreateWindowRenderer
 /// \sa SDL_DestroyRenderer
 ///
 /// ```c
@@ -257,8 +256,6 @@ Pointer<SdlRenderer> sdlCreateSoftwareRenderer(Pointer<SdlSurface> surface) {
 /// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
-///
-/// \sa SDL_CreateRenderer
 ///
 /// ```c
 /// extern DECLSPEC SDL_Renderer *SDLCALL SDL_GetRenderer(SDL_Window *window)
@@ -303,6 +300,7 @@ Pointer<SdlWindow> sdlGetRenderWindow(Pointer<SdlRenderer> renderer) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_CreateRenderer
+/// \sa SDL_CreateRendererWithProperties
 ///
 /// ```c
 /// extern DECLSPEC int SDLCALL SDL_GetRendererInfo(SDL_Renderer *renderer, SDL_RendererInfo *info)
@@ -411,7 +409,7 @@ int sdlGetRendererProperties(Pointer<SdlRenderer> renderer) {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_GetRenderer
+/// \sa SDL_GetCurrentRenderOutputSize
 ///
 /// ```c
 /// extern DECLSPEC int SDLCALL SDL_GetRenderOutputSize(SDL_Renderer *renderer, int *w, int *h)
@@ -443,7 +441,6 @@ int sdlGetRenderOutputSize(
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetRenderOutputSize
-/// \sa SDL_GetRenderer
 ///
 /// ```c
 /// extern DECLSPEC int SDLCALL SDL_GetCurrentRenderOutputSize(SDL_Renderer *renderer, int *w, int *h)
@@ -634,8 +631,9 @@ Pointer<SdlTexture> sdlCreateTextureFromSurface(
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_CreateTextureFromSurface
+/// \sa SDL_CreateProperties
 /// \sa SDL_CreateTexture
+/// \sa SDL_CreateTextureFromSurface
 /// \sa SDL_DestroyTexture
 /// \sa SDL_QueryTexture
 /// \sa SDL_UpdateTexture
@@ -765,10 +763,6 @@ int sdlGetTextureProperties(Pointer<SdlTexture> texture) {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_CreateTexture
-/// \sa SDL_CreateTextureFromSurface
-/// \sa SDL_CreateTextureWithProperties
-///
 /// ```c
 /// extern DECLSPEC SDL_Renderer *SDLCALL SDL_GetRendererFromTexture(SDL_Texture *texture)
 /// ```
@@ -799,8 +793,6 @@ Pointer<SdlRenderer> sdlGetRendererFromTexture(Pointer<SdlTexture> texture) {
 /// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
-///
-/// \sa SDL_CreateTexture
 ///
 /// ```c
 /// extern DECLSPEC int SDLCALL SDL_QueryTexture(SDL_Texture *texture, Uint32 *format, int *access, int *w, int *h)
@@ -1081,7 +1073,6 @@ int sdlGetTextureAlphaModFloat(
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetTextureBlendMode
-/// \sa SDL_RenderTexture
 ///
 /// ```c
 /// extern DECLSPEC int SDLCALL SDL_SetTextureBlendMode(SDL_Texture *texture, SDL_BlendMode blendMode)
@@ -1194,9 +1185,10 @@ int sdlGetTextureScaleMode(
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_CreateTexture
 /// \sa SDL_LockTexture
 /// \sa SDL_UnlockTexture
+/// \sa SDL_UpdateNVTexture
+/// \sa SDL_UpdateYUVTexture
 ///
 /// ```c
 /// extern DECLSPEC int SDLCALL SDL_UpdateTexture(SDL_Texture *texture, const SDL_Rect *rect, const void *pixels, int pitch)
@@ -1236,6 +1228,7 @@ int sdlUpdateTexture(Pointer<SdlTexture> texture, Pointer<SdlRect> rect,
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
+/// \sa SDL_UpdateNVTexture
 /// \sa SDL_UpdateTexture
 ///
 /// ```c
@@ -1294,6 +1287,9 @@ int sdlUpdateYuvTexture(
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
+/// \sa SDL_UpdateTexture
+/// \sa SDL_UpdateYUVTexture
+///
 /// ```c
 /// extern DECLSPEC int SDLCALL SDL_UpdateNVTexture(SDL_Texture *texture, const SDL_Rect *rect, const Uint8 *Yplane, int Ypitch, const Uint8 *UVplane, int UVpitch)
 /// ```
@@ -1343,6 +1339,7 @@ int sdlUpdateNvTexture(Pointer<SdlTexture> texture, Pointer<SdlRect> rect,
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
+/// \sa SDL_LockTextureToSurface
 /// \sa SDL_UnlockTexture
 ///
 /// ```c
@@ -1895,15 +1892,6 @@ int sdlGetRenderScale(Pointer<SdlRenderer> renderer, Pointer<Float> scaleX,
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetRenderDrawColor
-/// \sa SDL_RenderClear
-/// \sa SDL_RenderFillRect
-/// \sa SDL_RenderFillRects
-/// \sa SDL_RenderLine
-/// \sa SDL_RenderLines
-/// \sa SDL_RenderPoint
-/// \sa SDL_RenderPoints
-/// \sa SDL_RenderRect
-/// \sa SDL_RenderRects
 /// \sa SDL_SetRenderDrawColorFloat
 ///
 /// ```c
@@ -1938,15 +1926,6 @@ int sdlSetRenderDrawColor(
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetRenderDrawColorFloat
-/// \sa SDL_RenderClear
-/// \sa SDL_RenderFillRect
-/// \sa SDL_RenderFillRects
-/// \sa SDL_RenderLine
-/// \sa SDL_RenderLines
-/// \sa SDL_RenderPoint
-/// \sa SDL_RenderPoints
-/// \sa SDL_RenderRect
-/// \sa SDL_RenderRects
 /// \sa SDL_SetRenderDrawColor
 ///
 /// ```c
@@ -2104,14 +2083,6 @@ int sdlGetRenderColorScale(
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetRenderDrawBlendMode
-/// \sa SDL_RenderLine
-/// \sa SDL_RenderLines
-/// \sa SDL_RenderPoint
-/// \sa SDL_RenderPoints
-/// \sa SDL_RenderRect
-/// \sa SDL_RenderRects
-/// \sa SDL_RenderFillRect
-/// \sa SDL_RenderFillRects
 ///
 /// ```c
 /// extern DECLSPEC int SDLCALL SDL_SetRenderDrawBlendMode(SDL_Renderer *renderer, SDL_BlendMode blendMode)
@@ -2182,6 +2153,8 @@ int sdlRenderClear(Pointer<SdlRenderer> renderer) {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
+/// \sa SDL_RenderPoints
+///
 /// ```c
 /// extern DECLSPEC int SDLCALL SDL_RenderPoint(SDL_Renderer *renderer, float x, float y)
 /// ```
@@ -2203,6 +2176,8 @@ int sdlRenderPoint(Pointer<SdlRenderer> renderer, double x, double y) {
 /// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_RenderPoint
 ///
 /// ```c
 /// extern DECLSPEC int SDLCALL SDL_RenderPoints(SDL_Renderer *renderer, const SDL_FPoint *points, int count)
@@ -2229,6 +2204,8 @@ int sdlRenderPoints(
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
+/// \sa SDL_RenderLines
+///
 /// ```c
 /// extern DECLSPEC int SDLCALL SDL_RenderLine(SDL_Renderer *renderer, float x1, float y1, float x2, float y2)
 /// ```
@@ -2254,6 +2231,8 @@ int sdlRenderLine(
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
+/// \sa SDL_RenderLine
+///
 /// ```c
 /// extern DECLSPEC int SDLCALL SDL_RenderLines(SDL_Renderer *renderer, const SDL_FPoint *points, int count)
 /// ```
@@ -2277,6 +2256,8 @@ int sdlRenderLines(
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
+/// \sa SDL_RenderRects
+///
 /// ```c
 /// extern DECLSPEC int SDLCALL SDL_RenderRect(SDL_Renderer *renderer, const SDL_FRect *rect)
 /// ```
@@ -2299,6 +2280,8 @@ int sdlRenderRect(Pointer<SdlRenderer> renderer, Pointer<SdlFRect> rect) {
 /// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_RenderRect
 ///
 /// ```c
 /// extern DECLSPEC int SDLCALL SDL_RenderRects(SDL_Renderer *renderer, const SDL_FRect *rects, int count)
@@ -2324,6 +2307,8 @@ int sdlRenderRects(
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
+/// \sa SDL_RenderFillRects
+///
 /// ```c
 /// extern DECLSPEC int SDLCALL SDL_RenderFillRect(SDL_Renderer *renderer, const SDL_FRect *rect)
 /// ```
@@ -2346,6 +2331,8 @@ int sdlRenderFillRect(Pointer<SdlRenderer> renderer, Pointer<SdlFRect> rect) {
 /// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_RenderFillRect
 ///
 /// ```c
 /// extern DECLSPEC int SDLCALL SDL_RenderFillRects(SDL_Renderer *renderer, const SDL_FRect *rects, int count)
@@ -2373,6 +2360,8 @@ int sdlRenderFillRects(
 /// \returns 0 on success, or -1 on error
 ///
 /// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_RenderTextureRotated
 ///
 /// ```c
 /// extern DECLSPEC int SDLCALL SDL_RenderTexture(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_FRect *srcrect, const SDL_FRect *dstrect)
@@ -2411,6 +2400,8 @@ int sdlRenderTexture(Pointer<SdlRenderer> renderer, Pointer<SdlTexture> texture,
 /// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_RenderTexture
 ///
 /// ```c
 /// extern DECLSPEC int SDLCALL SDL_RenderTextureRotated(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_FRect *srcrect, const SDL_FRect *dstrect, const double angle, const SDL_FPoint *center, const SDL_FlipMode flip)
@@ -2462,7 +2453,6 @@ int sdlRenderTextureRotated(
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_RenderGeometryRaw
-/// \sa SDL_Vertex
 ///
 /// ```c
 /// extern DECLSPEC int SDLCALL SDL_RenderGeometry(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_Vertex *vertices, int num_vertices, const int *indices, int num_indices)
@@ -2517,7 +2507,6 @@ int sdlRenderGeometry(
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_RenderGeometry
-/// \sa SDL_Vertex
 ///
 /// ```c
 /// extern DECLSPEC int SDLCALL SDL_RenderGeometryRaw(SDL_Renderer *renderer, SDL_Texture *texture, const float *xy, int xy_stride, const SDL_Color *color, int color_stride, const float *uv, int uv_stride, int num_vertices, const void *indices, int num_indices, int size_indices)
@@ -2601,7 +2590,7 @@ int sdlRenderGeometryRaw(
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_RenderGeometry
-/// \sa SDL_Vertex
+/// \sa SDL_RenderGeometryRaw
 ///
 /// ```c
 /// extern DECLSPEC int SDLCALL SDL_RenderGeometryRawFloat(SDL_Renderer *renderer, SDL_Texture *texture, const float *xy, int xy_stride, const SDL_FColor *color, int color_stride, const float *uv, int uv_stride, int num_vertices, const void *indices, int num_indices, int size_indices)
@@ -2932,6 +2921,8 @@ int sdlAddVulkanRenderSemaphores(Pointer<SdlRenderer> renderer,
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
+/// \sa SDL_GetRenderVSync
+///
 /// ```c
 /// extern DECLSPEC int SDLCALL SDL_SetRenderVSync(SDL_Renderer *renderer, int vsync)
 /// ```
@@ -2953,6 +2944,8 @@ int sdlSetRenderVSync(Pointer<SdlRenderer> renderer, int vsync) {
 /// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_SetRenderVSync
 ///
 /// ```c
 /// extern DECLSPEC int SDLCALL SDL_GetRenderVSync(SDL_Renderer *renderer, int *vsync)

@@ -41,10 +41,10 @@ int main() {
   while (running) {
     while (event.poll()) {
       switch (event.type) {
-        case SDL_QUIT:
+        case SDL_EVENT_QUIT:
           running = false;
           break;
-        case SDL_KEYDOWN:
+        case SDL_EVENT_KEY_DOWN:
           switch (event.key.keysym.ref.sym) {
             case SDLK_UP:
               fpsManager.setFramerate(fpsManager.getFramerate() + 1);

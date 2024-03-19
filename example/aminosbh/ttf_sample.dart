@@ -113,7 +113,7 @@ int main() {
         // Wait indefinitely for the next available event
         event.wait();
         // User requests quit
-        if (event.type == SDL_QUIT) {
+        if (event.type == SDL_EVENT_QUIT) {
           quit = true;
         }
         // Initialize renderer color white for the background

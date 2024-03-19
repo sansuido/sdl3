@@ -50,14 +50,14 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
     sdlUnlockSurface(this);
   }
 
-  Pointer<SdlSurface> loadBmpRw(Pointer<SdlRWops> src, bool freesrc) {
+  Pointer<SdlSurface> loadBmpIo(Pointer<SdlIoStream> src, bool freesrc) {
     // 334
-    return sdlLoadBmpRw(src, freesrc);
+    return sdlLoadBmpIo(src, freesrc);
   }
 
-  int saveBmpRw(Pointer<SdlRWops> dst, bool freedst) {
+  int saveBmpIo(Pointer<SdlIoStream> dst, bool freedst) {
     // 365
-    return sdlSaveBmpRw(this, dst, freedst);
+    return sdlSaveBmpIo(this, dst, freedst);
   }
 
   int setRre(int flag) {

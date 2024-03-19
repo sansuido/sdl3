@@ -134,8 +134,6 @@ void sdlMemoryBarrierAcquireFunction() {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_AtomicCompareAndSwapPointer
-/// \sa SDL_AtomicGet
-/// \sa SDL_AtomicSet
 ///
 /// ```c
 /// extern DECLSPEC SDL_bool SDLCALL SDL_AtomicCompareAndSwap(SDL_AtomicInt *a, int oldval, int newval)

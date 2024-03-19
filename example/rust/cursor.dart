@@ -24,7 +24,7 @@ int main() {
     sdlQuit();
     return -1;
   }
-  sdlSetEventEnabled(SDL_DROPFILE, true);
+  sdlSetEventEnabled(SDL_EVENT_DROP_FILE, true);
   var renderer = window
       .createRenderer(SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
   if (renderer == nullptr) {
@@ -45,10 +45,10 @@ int main() {
   while (running) {
     while (event.poll()) {
       switch (event.type) {
-        case SDL_QUIT:
+        case SDL_EVENT_QUIT:
           running = false;
           break;
-        case SDL_DROPFILE:
+        case SDL_EVENT_DROP_FILE:
           var data = event.drop.ref.data.cast<Utf8>().toDartString();
           var surface = imgLoad(data);
           if (surface != nullptr) {

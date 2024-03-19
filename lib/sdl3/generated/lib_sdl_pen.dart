@@ -70,8 +70,6 @@ int sdlGetPenStatus(int instanceId, Pointer<Float> x, Pointer<Float> y,
 ///
 /// \since This function is available since SDL 3.0.0
 ///
-/// \sa SDL_GUID
-///
 /// ```c
 /// extern DECLSPEC SDL_PenID SDLCALL SDL_GetPenFromGUID(SDL_GUID guid)
 /// ```
@@ -90,8 +88,6 @@ int sdlGetPenFromGuid(SdlGuid guid) {
 /// If "instance_id" is ::SDL_PEN_INVALID, returns an all-zeroes GUID.
 ///
 /// \since This function is available since SDL 3.0.0
-///
-/// \sa SDL_PenForID
 ///
 /// ```c
 /// extern DECLSPEC SDL_GUID SDLCALL SDL_GetPenGUID(SDL_PenID instance_id)

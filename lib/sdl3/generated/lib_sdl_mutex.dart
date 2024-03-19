@@ -52,6 +52,9 @@ Pointer<SdlMutex> sdlCreateMutex() {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
+/// \sa SDL_TryLockMutex
+/// \sa SDL_UnlockMutex
+///
 /// ```c
 /// extern DECLSPEC void SDLCALL SDL_LockMutex(SDL_Mutex *mutex) SDL_ACQUIRE(mutex)
 /// ```
@@ -81,8 +84,6 @@ void sdlLockMutex(Pointer<NativeType> arg0) {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_CreateMutex
-/// \sa SDL_DestroyMutex
 /// \sa SDL_LockMutex
 /// \sa SDL_UnlockMutex
 ///
@@ -111,6 +112,9 @@ int sdlTryLockMutex(Pointer<NativeType> arg0, Pointer<NativeType> arg1) {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
+/// \sa SDL_LockMutex
+/// \sa SDL_TryLockMutex
+///
 /// ```c
 /// extern DECLSPEC void SDLCALL SDL_UnlockMutex(SDL_Mutex *mutex) SDL_RELEASE(mutex)
 /// ```
@@ -135,9 +139,6 @@ void sdlUnlockMutex(Pointer<NativeType> arg0) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_CreateMutex
-/// \sa SDL_LockMutex
-/// \sa SDL_TryLockMutex
-/// \sa SDL_UnlockMutex
 ///
 /// ```c
 /// extern DECLSPEC void SDLCALL SDL_DestroyMutex(SDL_Mutex *mutex)
@@ -184,8 +185,8 @@ void sdlDestroyMutex(Pointer<SdlMutex> mutex) {
 ///
 /// \sa SDL_DestroyRWLock
 /// \sa SDL_LockRWLockForReading
-/// \sa SDL_TryLockRWLockForReading
 /// \sa SDL_LockRWLockForWriting
+/// \sa SDL_TryLockRWLockForReading
 /// \sa SDL_TryLockRWLockForWriting
 /// \sa SDL_UnlockRWLock
 ///
@@ -230,6 +231,8 @@ Pointer<SdlRwLock> sdlCreateRwLock() {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
+/// \sa SDL_LockRWLockForWriting
+/// \sa SDL_TryLockRWLockForReading
 /// \sa SDL_UnlockRWLock
 ///
 /// ```c
@@ -267,6 +270,8 @@ void sdlLockRwLockForReading(Pointer<NativeType> arg0) {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
+/// \sa SDL_LockRWLockForReading
+/// \sa SDL_TryLockRWLockForWriting
 /// \sa SDL_UnlockRWLock
 ///
 /// ```c
@@ -301,9 +306,8 @@ void sdlLockRwLockForWriting(Pointer<NativeType> arg0) {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_CreateRWLock
-/// \sa SDL_DestroyRWLock
-/// \sa SDL_TryLockRWLockForReading
+/// \sa SDL_LockRWLockForReading
+/// \sa SDL_TryLockRWLockForWriting
 /// \sa SDL_UnlockRWLock
 ///
 /// ```c
@@ -345,9 +349,8 @@ int sdlTryLockRwLockForReading(
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_CreateRWLock
-/// \sa SDL_DestroyRWLock
-/// \sa SDL_TryLockRWLockForWriting
+/// \sa SDL_LockRWLockForWriting
+/// \sa SDL_TryLockRWLockForReading
 /// \sa SDL_UnlockRWLock
 ///
 /// ```c
@@ -380,6 +383,11 @@ int sdlTryLockRwLockForWriting(
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
+/// \sa SDL_LockRWLockForReading
+/// \sa SDL_LockRWLockForWriting
+/// \sa SDL_TryLockRWLockForReading
+/// \sa SDL_TryLockRWLockForWriting
+///
 /// ```c
 /// extern DECLSPEC void SDLCALL SDL_UnlockRWLock(SDL_RWLock *rwlock) SDL_RELEASE_GENERIC(rwlock)
 /// ```
@@ -404,11 +412,6 @@ void sdlUnlockRwLock(Pointer<NativeType> arg0) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_CreateRWLock
-/// \sa SDL_LockRWLockForReading
-/// \sa SDL_LockRWLockForWriting
-/// \sa SDL_TryLockRWLockForReading
-/// \sa SDL_TryLockRWLockForWriting
-/// \sa SDL_UnlockRWLock
 ///
 /// ```c
 /// extern DECLSPEC void SDLCALL SDL_DestroyRWLock(SDL_RWLock *rwlock)
@@ -463,11 +466,6 @@ Pointer<SdlSemaphore> sdlCreateSemaphore(int initialValue) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_CreateSemaphore
-/// \sa SDL_PostSemaphore
-/// \sa SDL_TryWaitSemaphore
-/// \sa SDL_GetSemaphoreValue
-/// \sa SDL_WaitSemaphore
-/// \sa SDL_WaitSemaphoreTimeout
 ///
 /// ```c
 /// extern DECLSPEC void SDLCALL SDL_DestroySemaphore(SDL_Semaphore *sem)
@@ -496,12 +494,8 @@ void sdlDestroySemaphore(Pointer<SdlSemaphore> sem) {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_CreateSemaphore
-/// \sa SDL_DestroySemaphore
 /// \sa SDL_PostSemaphore
 /// \sa SDL_TryWaitSemaphore
-/// \sa SDL_GetSemaphoreValue
-/// \sa SDL_WaitSemaphore
 /// \sa SDL_WaitSemaphoreTimeout
 ///
 /// ```c
@@ -529,10 +523,7 @@ int sdlWaitSemaphore(Pointer<SdlSemaphore> sem) {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_CreateSemaphore
-/// \sa SDL_DestroySemaphore
 /// \sa SDL_PostSemaphore
-/// \sa SDL_GetSemaphoreValue
 /// \sa SDL_WaitSemaphore
 /// \sa SDL_WaitSemaphoreTimeout
 ///
@@ -562,11 +553,8 @@ int sdlTryWaitSemaphore(Pointer<SdlSemaphore> sem) {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_CreateSemaphore
-/// \sa SDL_DestroySemaphore
 /// \sa SDL_PostSemaphore
 /// \sa SDL_TryWaitSemaphore
-/// \sa SDL_GetSemaphoreValue
 /// \sa SDL_WaitSemaphore
 ///
 /// ```c
@@ -589,10 +577,7 @@ int sdlWaitSemaphoreTimeout(Pointer<SdlSemaphore> sem, int timeoutMs) {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_CreateSemaphore
-/// \sa SDL_DestroySemaphore
 /// \sa SDL_TryWaitSemaphore
-/// \sa SDL_GetSemaphoreValue
 /// \sa SDL_WaitSemaphore
 /// \sa SDL_WaitSemaphoreTimeout
 ///
@@ -613,8 +598,6 @@ int sdlPostSemaphore(Pointer<SdlSemaphore> sem) {
 /// \returns the current value of the semaphore.
 ///
 /// \since This function is available since SDL 3.0.0.
-///
-/// \sa SDL_CreateSemaphore
 ///
 /// ```c
 /// extern DECLSPEC Uint32 SDLCALL SDL_GetSemaphoreValue(SDL_Semaphore *sem)
@@ -657,10 +640,6 @@ Pointer<SdlCondition> sdlCreateCondition() {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_BroadcastCondition
-/// \sa SDL_SignalCondition
-/// \sa SDL_WaitCondition
-/// \sa SDL_WaitConditionTimeout
 /// \sa SDL_CreateCondition
 ///
 /// ```c
@@ -685,8 +664,6 @@ void sdlDestroyCondition(Pointer<SdlCondition> cond) {
 /// \sa SDL_BroadcastCondition
 /// \sa SDL_WaitCondition
 /// \sa SDL_WaitConditionTimeout
-/// \sa SDL_CreateCondition
-/// \sa SDL_DestroyCondition
 ///
 /// ```c
 /// extern DECLSPEC int SDLCALL SDL_SignalCondition(SDL_Condition *cond)
@@ -710,8 +687,6 @@ int sdlSignalCondition(Pointer<SdlCondition> cond) {
 /// \sa SDL_SignalCondition
 /// \sa SDL_WaitCondition
 /// \sa SDL_WaitConditionTimeout
-/// \sa SDL_CreateCondition
-/// \sa SDL_DestroyCondition
 ///
 /// ```c
 /// extern DECLSPEC int SDLCALL SDL_BroadcastCondition(SDL_Condition *cond)
@@ -748,8 +723,6 @@ int sdlBroadcastCondition(Pointer<SdlCondition> cond) {
 /// \sa SDL_BroadcastCondition
 /// \sa SDL_SignalCondition
 /// \sa SDL_WaitConditionTimeout
-/// \sa SDL_CreateCondition
-/// \sa SDL_DestroyCondition
 ///
 /// ```c
 /// extern DECLSPEC int SDLCALL SDL_WaitCondition(SDL_Condition *cond, SDL_Mutex *mutex)
@@ -788,8 +761,6 @@ int sdlWaitCondition(Pointer<SdlCondition> cond, Pointer<SdlMutex> mutex) {
 /// \sa SDL_BroadcastCondition
 /// \sa SDL_SignalCondition
 /// \sa SDL_WaitCondition
-/// \sa SDL_CreateCondition
-/// \sa SDL_DestroyCondition
 ///
 /// ```c
 /// extern DECLSPEC int SDLCALL SDL_WaitConditionTimeout(SDL_Condition *cond, SDL_Mutex *mutex, Sint32 timeoutMS)

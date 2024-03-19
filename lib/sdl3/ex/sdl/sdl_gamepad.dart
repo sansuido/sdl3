@@ -74,10 +74,10 @@ extension SdlGamepadEx on SdlGamepad {
   /// \sa SDL_GetGamepadMappingForGUID
   ///
   /// ```c
-  /// extern DECLSPEC int SDLCALL SDL_AddGamepadMappingsFromRW(SDL_RWops *src, SDL_bool freesrc)
+  /// extern DECLSPEC int SDLCALL SDL_AddGamepadMappingsFromIO(SDL_RWops *src, SDL_bool freesrc)
   /// ```
-  static int addMappingsFromRw(Pointer<SdlRWops> rw, bool freerw) {
-    return sdlAddGamepadMappingsFromRw(rw, freerw);
+  static int addMappingsFromIo(Pointer<SdlIoStream> src, bool freerw) {
+    return sdlAddGamepadMappingsFromIo(src, freerw);
   }
 
   ///

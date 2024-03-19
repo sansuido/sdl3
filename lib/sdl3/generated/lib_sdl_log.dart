@@ -10,6 +10,7 @@ import 'lib_sdl.dart';
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
+/// \sa SDL_LogResetPriorities
 /// \sa SDL_LogSetPriority
 ///
 /// ```c
@@ -31,6 +32,7 @@ void sdlLogSetAllPriority(int priority) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_LogGetPriority
+/// \sa SDL_LogResetPriorities
 /// \sa SDL_LogSetAllPriority
 ///
 /// ```c
@@ -401,22 +403,22 @@ void sdlLogMessageV(
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_LogSetOutputFunction
+/// \sa SDL_SetLogOutputFunction
 ///
 /// ```c
-/// extern DECLSPEC void SDLCALL SDL_LogGetOutputFunction(SDL_LogOutputFunction *callback, void **userdata)
+/// extern DECLSPEC void SDLCALL SDL_GetLogOutputFunction(SDL_LogOutputFunction *callback, void **userdata)
 /// ```
-void sdlLogGetOutputFunction(
+void sdlGetLogOutputFunction(
     Pointer<Pointer<NativeFunction<SdlLogOutputFunction>>> callback,
     Pointer<Pointer<NativeType>> userdata) {
-  final sdlLogGetOutputFunctionLookupFunction = libSdl3.lookupFunction<
+  final sdlGetLogOutputFunctionLookupFunction = libSdl3.lookupFunction<
       Void Function(
           Pointer<Pointer<NativeFunction<SdlLogOutputFunction>>> callback,
           Pointer<Pointer<NativeType>> userdata),
       void Function(
           Pointer<Pointer<NativeFunction<SdlLogOutputFunction>>> callback,
-          Pointer<Pointer<NativeType>> userdata)>('SDL_LogGetOutputFunction');
-  return sdlLogGetOutputFunctionLookupFunction(callback, userdata);
+          Pointer<Pointer<NativeType>> userdata)>('SDL_GetLogOutputFunction');
+  return sdlGetLogOutputFunctionLookupFunction(callback, userdata);
 }
 
 ///
@@ -427,18 +429,18 @@ void sdlLogGetOutputFunction(
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_LogGetOutputFunction
+/// \sa SDL_GetLogOutputFunction
 ///
 /// ```c
-/// extern DECLSPEC void SDLCALL SDL_LogSetOutputFunction(SDL_LogOutputFunction callback, void *userdata)
+/// extern DECLSPEC void SDLCALL SDL_SetLogOutputFunction(SDL_LogOutputFunction callback, void *userdata)
 /// ```
-void sdlLogSetOutputFunction(
+void sdlSetLogOutputFunction(
     Pointer<NativeFunction<SdlLogOutputFunction>> callback,
     Pointer<NativeType> userdata) {
-  final sdlLogSetOutputFunctionLookupFunction = libSdl3.lookupFunction<
+  final sdlSetLogOutputFunctionLookupFunction = libSdl3.lookupFunction<
       Void Function(Pointer<NativeFunction<SdlLogOutputFunction>> callback,
           Pointer<NativeType> userdata),
       void Function(Pointer<NativeFunction<SdlLogOutputFunction>> callback,
-          Pointer<NativeType> userdata)>('SDL_LogSetOutputFunction');
-  return sdlLogSetOutputFunctionLookupFunction(callback, userdata);
+          Pointer<NativeType> userdata)>('SDL_SetLogOutputFunction');
+  return sdlSetLogOutputFunctionLookupFunction(callback, userdata);
 }

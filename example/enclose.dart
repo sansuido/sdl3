@@ -37,17 +37,17 @@ int main() {
   while (running) {
     while (event.poll()) {
       switch (event.type) {
-        case SDL_QUIT:
+        case SDL_EVENT_QUIT:
           running = false;
           break;
-        case SDL_KEYDOWN:
+        case SDL_EVENT_KEY_DOWN:
           switch (event.key.keysym.ref.sym) {
             case SDLK_ESCAPE:
               running = false;
               break;
           }
           break;
-        case SDL_MOUSEBUTTONDOWN:
+        case SDL_EVENT_MOUSE_BUTTON_DOWN:
           switch (event.button.ref.button) {
             case SDL_BUTTON_LEFT:
               clickPoints.add(PointEx.getMousePosition());

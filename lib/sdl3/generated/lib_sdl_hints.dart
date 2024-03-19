@@ -18,6 +18,7 @@ import 'lib_sdl.dart';
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetHint
+/// \sa SDL_ResetHint
 /// \sa SDL_SetHint
 ///
 /// ```c
@@ -52,6 +53,7 @@ bool sdlSetHintWithPriority(String? name, String? value, int priority) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetHint
+/// \sa SDL_ResetHint
 /// \sa SDL_SetHintWithPriority
 ///
 /// ```c
@@ -81,8 +83,8 @@ bool sdlSetHint(String? name, String? value) {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_GetHint
 /// \sa SDL_SetHint
+/// \sa SDL_ResetHints
 ///
 /// ```c
 /// extern DECLSPEC SDL_bool SDLCALL SDL_ResetHint(const char *name)
@@ -106,8 +108,6 @@ bool sdlResetHint(String? name) {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_GetHint
-/// \sa SDL_SetHint
 /// \sa SDL_ResetHint
 ///
 /// ```c

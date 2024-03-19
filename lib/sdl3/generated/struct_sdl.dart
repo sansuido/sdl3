@@ -83,6 +83,14 @@ final class SdlCameraSpec extends Struct {
   external int blank_1;
 }
 
+// SDL_DialogFileFilter
+final class SdlDialogFileFilter extends Struct {
+  // [0]+(8)
+  external Pointer<Utf8> name;
+  // [8]+(8)
+  external Pointer<Utf8> pattern;
+}
+
 // SDL_CommonEvent
 final class SdlCommonEvent extends Struct {
   // [0]+(4)
@@ -260,6 +268,43 @@ final class SdlMouseMotionEvent extends Struct {
   // [] +(4)
   @Uint32()
   external int blank_1;
+}
+
+// SDL_JoyBallEvent
+final class SdlJoyBallEvent extends Struct {
+  // [0]+(4)
+  @Uint32()
+  external int type;
+  // [] +(4)
+  @Uint32()
+  external int blank_1;
+  // [8]+(8)
+  @Uint64()
+  external int timestamp;
+  // [16]+(4)
+  @Uint32()
+  external int which;
+  // [20]+(1)
+  @Uint8()
+  external int ball;
+  // [21]+(1)
+  @Uint8()
+  external int padding1;
+  // [22]+(1)
+  @Uint8()
+  external int padding2;
+  // [23]+(1)
+  @Uint8()
+  external int padding3;
+  // [24]+(2)
+  @Int16()
+  external int xrel;
+  // [26]+(2)
+  @Int16()
+  external int yrel;
+  // [] +(4)
+  @Uint32()
+  external int blank_2;
 }
 
 // SDL_MouseButtonEvent
@@ -650,9 +695,9 @@ final class SdlCameraDeviceEvent extends Struct {
   // [0]+(4)
   @Int32()
   external int type;
-  // [] +(4)
+  // [4]+(4)
   @Uint32()
-  external int blank_1;
+  external int reserved;
   // [8]+(8)
   @Uint64()
   external int timestamp;
@@ -670,7 +715,7 @@ final class SdlCameraDeviceEvent extends Struct {
   external int padding3;
   // [] +(1)
   @Uint8()
-  external int blank_2;
+  external int blank_1;
 }
 
 // SDL_TouchFingerEvent
@@ -1032,6 +1077,8 @@ extension SdlEventExtension on Pointer<SdlEvent> {
       (cast<Uint8>() + 0).cast<SdlMouseWheelEvent>();
   Pointer<SdlJoyAxisEvent> get jaxis =>
       (cast<Uint8>() + 0).cast<SdlJoyAxisEvent>();
+  Pointer<SdlJoyBallEvent> get jball =>
+      (cast<Uint8>() + 0).cast<SdlJoyBallEvent>();
   Pointer<SdlJoyHatEvent> get jhat =>
       (cast<Uint8>() + 0).cast<SdlJoyHatEvent>();
   Pointer<SdlJoyButtonEvent> get jbutton =>
@@ -1070,6 +1117,28 @@ extension SdlEventExtension on Pointer<SdlEvent> {
   Pointer<SdlClipboardEvent> get clipboard =>
       (cast<Uint8>() + 0).cast<SdlClipboardEvent>();
   int get padding => (cast<Uint8>() + 0).cast<Uint8>().value;
+}
+
+// SDL_PathInfo
+final class SdlPathInfo extends Struct {
+  // [0]+(4)
+  @Int32()
+  external int type;
+  // [] +(4)
+  @Uint32()
+  external int blank_1;
+  // [8]+(8)
+  @Uint64()
+  external int size;
+  // [16]+(8)
+  @Int64()
+  external int createTime;
+  // [24]+(8)
+  @Int64()
+  external int modifyTime;
+  // [32]+(8)
+  @Int64()
+  external int accessTime;
 }
 
 // SDL_Gamepad
@@ -1578,6 +1647,23 @@ final class SdlHidDeviceInfo extends Struct {
   external Pointer<SdlHidDeviceInfo> next;
 }
 
+// SDL_IOStreamInterface
+final class SdlIoStreamInterface extends Struct {
+  // [0]+(8)
+  external Pointer<NativeType> size;
+  // [8]+(8)
+  external Pointer<NativeType> seek;
+  // [16]+(8)
+  external Pointer<NativeType> read;
+  // [24]+(8)
+  external Pointer<NativeType> write;
+  // [32]+(8)
+  external Pointer<NativeType> close;
+}
+
+// SDL_IOStream
+final class SdlIoStream extends Opaque {}
+
 // SDL_Joystick
 final class SdlJoystick extends Opaque {}
 
@@ -2025,39 +2111,38 @@ final class SdlRenderer extends Opaque {}
 // SDL_Texture
 final class SdlTexture extends Opaque {}
 
-// SDL_RWops
-final class SdlRWops extends Struct {
-  // [0]+(8)
-  external Pointer<NativeType> size;
-  // [8]+(8)
-  external Pointer<NativeType> seek;
-  // [16]+(8)
-  external Pointer<NativeType> read;
-  // [24]+(8)
-  external Pointer<NativeType> write;
-  // [32]+(8)
-  external Pointer<NativeType> close;
-  // [40]+(4)
-  @Uint32()
-  external int type;
-  // [44]+(4)
-  @Uint32()
-  external int status;
-  // [48]+(4)
-  @Uint32()
-  external int props;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
-  // [56]+(8)
-  external Pointer<NativeType> hidden;
-}
-
 // SDL_Sensor
 final class SdlSensor extends Opaque {}
 
 // SDL_iconv_t
 final class SdlIconvT extends Opaque {}
+
+// SDL_StorageInterface
+final class SdlStorageInterface extends Struct {
+  // [0]+(8)
+  external Pointer<NativeType> close;
+  // [8]+(8)
+  external Pointer<NativeType> ready;
+  // [16]+(8)
+  external Pointer<NativeType> enumerate;
+  // [24]+(8)
+  external Pointer<NativeType> info;
+  // [32]+(8)
+  external Pointer<NativeType> readFile;
+  // [40]+(8)
+  external Pointer<NativeType> writeFile;
+  // [48]+(8)
+  external Pointer<NativeType> mkdir;
+  // [56]+(8)
+  external Pointer<NativeType> remove;
+  // [64]+(8)
+  external Pointer<NativeType> rename;
+  // [72]+(8)
+  external Pointer<NativeType> spaceRemaining;
+}
+
+// SDL_Storage
+final class SdlStorage extends Opaque {}
 
 // SDL_BlitMap
 final class SdlBlitMap extends Opaque {}

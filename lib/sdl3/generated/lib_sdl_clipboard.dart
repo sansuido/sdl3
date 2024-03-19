@@ -171,8 +171,7 @@ bool sdlHasPrimarySelectionText() {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_ClipboardDataCallback
-/// \sa SDL_SetClipboardData
+/// \sa SDL_ClearClipboardData
 /// \sa SDL_GetClipboardData
 /// \sa SDL_HasClipboardData
 ///

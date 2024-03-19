@@ -51,7 +51,6 @@ Pointer<NativeType> sdlLoadObject(String? sofile) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_LoadObject
-/// \sa SDL_UnloadObject
 ///
 /// ```c
 /// extern DECLSPEC SDL_FunctionPointer SDLCALL SDL_LoadFunction(void *handle, const char *name)
@@ -75,7 +74,6 @@ Pointer<NativeType> sdlLoadFunction(Pointer<NativeType> handle, String? name) {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_LoadFunction
 /// \sa SDL_LoadObject
 ///
 /// ```c

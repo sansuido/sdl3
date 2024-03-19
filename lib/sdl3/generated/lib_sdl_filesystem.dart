@@ -2,6 +2,7 @@
 import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'lib_sdl.dart';
+import 'struct_sdl.dart';
 
 ///
 /// Get the directory where the application was run from.
@@ -152,8 +153,6 @@ Pointer<Int8> sdlGetPrefPath(String? org, String? app) {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_Folder
-///
 /// ```c
 /// extern DECLSPEC char *SDLCALL SDL_GetUserFolder(SDL_Folder folder)
 /// ```
@@ -162,4 +161,178 @@ Pointer<Int8> sdlGetUserFolder(int folder) {
       Pointer<Int8> Function(Int32 folder),
       Pointer<Int8> Function(int folder)>('SDL_GetUserFolder');
   return sdlGetUserFolderLookupFunction(folder);
+}
+
+///
+/// Create a directory.
+///
+/// \param path the path of the directory to create
+/// \returns 0 on success or a negative error code on failure; call
+/// SDL_GetError() for more information.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// ```c
+/// extern DECLSPEC int SDLCALL SDL_CreateDirectory(const char *path)
+/// ```
+int sdlCreateDirectory(String? path) {
+  final sdlCreateDirectoryLookupFunction = libSdl3.lookupFunction<
+      Int32 Function(Pointer<Utf8> path),
+      int Function(Pointer<Utf8> path)>('SDL_CreateDirectory');
+  final pathPointer = path != null ? path.toNativeUtf8() : nullptr;
+  final result = sdlCreateDirectoryLookupFunction(pathPointer);
+  calloc.free(pathPointer);
+  return result;
+}
+
+///
+/// Enumerate a directory.
+///
+/// \param path the path of the directory to enumerate
+/// \param callback a function that is called for each entry in the directory
+/// \param userdata a pointer that is passed to `callback`
+/// \returns 0 on success or a negative error code on failure; call
+/// SDL_GetError() for more information.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// ```c
+/// extern DECLSPEC int SDLCALL SDL_EnumerateDirectory(const char *path, SDL_EnumerateDirectoryCallback callback, void *userdata)
+/// ```
+int sdlEnumerateDirectory(
+    String? path,
+    Pointer<NativeFunction<SdlEnumerateDirectoryCallback>> callback,
+    Pointer<NativeType> userdata) {
+  final sdlEnumerateDirectoryLookupFunction = libSdl3.lookupFunction<
+      Int32 Function(
+          Pointer<Utf8> path,
+          Pointer<NativeFunction<SdlEnumerateDirectoryCallback>> callback,
+          Pointer<NativeType> userdata),
+      int Function(
+          Pointer<Utf8> path,
+          Pointer<NativeFunction<SdlEnumerateDirectoryCallback>> callback,
+          Pointer<NativeType> userdata)>('SDL_EnumerateDirectory');
+  final pathPointer = path != null ? path.toNativeUtf8() : nullptr;
+  final result =
+      sdlEnumerateDirectoryLookupFunction(pathPointer, callback, userdata);
+  calloc.free(pathPointer);
+  return result;
+}
+
+///
+/// Remove a file or an empty directory.
+///
+/// \param path the path of the directory to enumerate
+/// \returns 0 on success or a negative error code on failure; call
+/// SDL_GetError() for more information.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// ```c
+/// extern DECLSPEC int SDLCALL SDL_RemovePath(const char *path)
+/// ```
+int sdlRemovePath(String? path) {
+  final sdlRemovePathLookupFunction = libSdl3.lookupFunction<
+      Int32 Function(Pointer<Utf8> path),
+      int Function(Pointer<Utf8> path)>('SDL_RemovePath');
+  final pathPointer = path != null ? path.toNativeUtf8() : nullptr;
+  final result = sdlRemovePathLookupFunction(pathPointer);
+  calloc.free(pathPointer);
+  return result;
+}
+
+///
+/// Rename a file or directory.
+///
+/// \param oldpath the old path
+/// \param newpath the new path
+/// \returns 0 on success or a negative error code on failure; call
+/// SDL_GetError() for more information.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// ```c
+/// extern DECLSPEC int SDLCALL SDL_RenamePath(const char *oldpath, const char *newpath)
+/// ```
+int sdlRenamePath(String? oldpath, String? newpath) {
+  final sdlRenamePathLookupFunction = libSdl3.lookupFunction<
+      Int32 Function(Pointer<Utf8> oldpath, Pointer<Utf8> newpath),
+      int Function(
+          Pointer<Utf8> oldpath, Pointer<Utf8> newpath)>('SDL_RenamePath');
+  final oldpathPointer = oldpath != null ? oldpath.toNativeUtf8() : nullptr;
+  final newpathPointer = newpath != null ? newpath.toNativeUtf8() : nullptr;
+  final result = sdlRenamePathLookupFunction(oldpathPointer, newpathPointer);
+  calloc.free(oldpathPointer);
+  calloc.free(newpathPointer);
+  return result;
+}
+
+///
+/// Get information about a filesystem path.
+///
+/// \param path the path to query
+/// \param info a pointer filled in with information about the path, or NULL to
+/// check for the existence of a file
+/// \returns 0 on success or a negative error code if the file doesn't exist,
+/// or another failure; call SDL_GetError() for more information.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// ```c
+/// extern DECLSPEC int SDLCALL SDL_GetPathInfo(const char *path, SDL_PathInfo *info)
+/// ```
+int sdlGetPathInfo(String? path, Pointer<SdlPathInfo> info) {
+  final sdlGetPathInfoLookupFunction = libSdl3.lookupFunction<
+      Int32 Function(Pointer<Utf8> path, Pointer<SdlPathInfo> info),
+      int Function(
+          Pointer<Utf8> path, Pointer<SdlPathInfo> info)>('SDL_GetPathInfo');
+  final pathPointer = path != null ? path.toNativeUtf8() : nullptr;
+  final result = sdlGetPathInfoLookupFunction(pathPointer, info);
+  calloc.free(pathPointer);
+  return result;
+}
+
+/// Converts an SDL file time into a Windows FILETIME (100-nanosecond intervals since January 1, 1601).
+///
+/// This function fills in the two 32-bit values of the FILETIME structure.
+///
+/// \param ftime the time to convert
+/// \param dwLowDateTime a pointer filled in with the low portion of the Windows FILETIME value
+/// \param dwHighDateTime a pointer filled in with the high portion of the Windows FILETIME value
+///
+/// \since This function is available since SDL 3.0.0.
+/// /
+/// ```c
+/// extern DECLSPEC void SDLCALL SDL_FileTimeToWindows(SDL_FileTime ftime, Uint32 *dwLowDateTime, Uint32 *dwHighDateTime)
+/// ```
+void sdlFileTimeToWindows(
+    int ftime, Pointer<Uint32> dwLowDateTime, Pointer<Uint32> dwHighDateTime) {
+  final sdlFileTimeToWindowsLookupFunction = libSdl3.lookupFunction<
+      Void Function(Int64 ftime, Pointer<Uint32> dwLowDateTime,
+          Pointer<Uint32> dwHighDateTime),
+      void Function(int ftime, Pointer<Uint32> dwLowDateTime,
+          Pointer<Uint32> dwHighDateTime)>('SDL_FileTimeToWindows');
+  return sdlFileTimeToWindowsLookupFunction(
+      ftime, dwLowDateTime, dwHighDateTime);
+}
+
+/// Converts a Windows FILETIME (100-nanosecond intervals since January 1, 1601) to an SDL file time
+///
+/// This function takes the two 32-bit values of the FILETIME structure as parameters.
+///
+/// \param dwLowDateTime the low portion of the Windows FILETIME value
+/// \param dwHighDateTime the high portion of the Windows FILETIME value
+/// \returns the converted file time
+///
+/// \since This function is available since SDL 3.0.0.
+/// /
+/// ```c
+/// extern DECLSPEC SDL_FileTime SDLCALL SDL_FileTimeFromWindows(Uint32 dwLowDateTime, Uint32 dwHighDateTime)
+/// ```
+int sdlFileTimeFromWindows(int dwLowDateTime, int dwHighDateTime) {
+  final sdlFileTimeFromWindowsLookupFunction = libSdl3.lookupFunction<
+      Int64 Function(Uint32 dwLowDateTime, Uint32 dwHighDateTime),
+      int Function(
+          int dwLowDateTime, int dwHighDateTime)>('SDL_FileTimeFromWindows');
+  return sdlFileTimeFromWindowsLookupFunction(dwLowDateTime, dwHighDateTime);
 }

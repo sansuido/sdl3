@@ -62,8 +62,6 @@ void sdlMetalDestroyView(Pointer<NativeType> view) {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_Metal_CreateView
-///
 /// ```c
 /// extern DECLSPEC void *SDLCALL SDL_Metal_GetLayer(SDL_MetalView view)
 /// ```

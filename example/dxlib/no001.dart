@@ -53,10 +53,10 @@ int main() {
     while (!quit) {
       while (event.poll()) {
         switch (event.type) {
-          case SDL_QUIT:
+          case SDL_EVENT_QUIT:
             quit = true;
             break;
-          case SDL_KEYDOWN:
+          case SDL_EVENT_KEY_DOWN:
             var keys = sdlGetKeyboardState(nullptr);
             if (keys[SDL_SCANCODE_UP] != 0) {
               gPlayerY -= gPlayerHeight ~/ 2;

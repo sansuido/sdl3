@@ -78,7 +78,7 @@ bool handleEvents() {
   var event = calloc<SdlEvent>();
   while (event.poll()) {
     switch (event.type) {
-      case SDL_QUIT:
+      case SDL_EVENT_QUIT:
         quit = true;
         break;
       default:
