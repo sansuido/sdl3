@@ -757,11 +757,8 @@ int boxRgba(Pointer<SdlRenderer> renderer, double x1, double y1, double x2,
   var rect = calloc<SdlFRect>();
   rect.ref.x = x1;
   rect.ref.y = y1;
-  rect.ref.w = x2 - x1;
-  rect.ref.h = y2 - y1;
-  // changed 1.5.3
-  //rect.ref.w = x2 - x1 + 1;
-  //rect.ref.h = y2 - y1 + 1;
+  rect.ref.w = x2 - x1 + 1;
+  rect.ref.h = y2 - y1 + 1;
 
   /*
 	* Draw

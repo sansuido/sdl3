@@ -2215,6 +2215,40 @@ final class XUserHandle extends Opaque {}
 // SDL_Thread
 final class SdlThread extends Opaque {}
 
+// SDL_DateTime
+final class SdlDateTime extends Struct {
+  // [0]+(4)
+  @Int32()
+  external int year;
+  // [4]+(4)
+  @Int32()
+  external int month;
+  // [8]+(4)
+  @Int32()
+  external int day;
+  // [12]+(4)
+  @Int32()
+  external int hour;
+  // [16]+(4)
+  @Int32()
+  external int minute;
+  // [20]+(4)
+  @Int32()
+  external int second;
+  // [24]+(4)
+  @Int32()
+  external int nanosecond;
+  // [28]+(4)
+  @Int32()
+  external int dayOfWeek;
+  // [32]+(4)
+  @Int32()
+  external int utcOffset;
+  // [] +(4)
+  @Uint32()
+  external int blank_1;
+}
+
 // SDL_Finger
 final class SdlFinger extends Struct {
   // [0]+(8)

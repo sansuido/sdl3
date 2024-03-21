@@ -75,10 +75,22 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
         this, rect.left, rect.top, rect.right, rect.bottom, color);
   }
 
+  int boxInColor(math.Rectangle<double> rect, int color) {
+    // 201
+    return gfx.boxColor(
+        this, rect.left, rect.top, rect.right - 1, rect.bottom - 1, color);
+  }
+
   int boxRgba(math.Rectangle<double> rect, int r, int g, int b, int a) {
     // 214
     return gfx.boxRgba(
         this, rect.left, rect.top, rect.right, rect.bottom, r, g, b, a);
+  }
+
+  int boxInRgba(math.Rectangle<double> rect, int r, int g, int b, int a) {
+    // 214
+    return gfx.boxRgba(
+        this, rect.left, rect.top, rect.right - 1, rect.bottom - 1, r, g, b, a);
   }
 
   int roundedBoxColor(math.Rectangle<double> rect, double rad, int color) {
@@ -87,11 +99,24 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
         this, rect.left, rect.top, rect.right, rect.bottom, rad, color);
   }
 
+  int roundedBoxInColor(math.Rectangle<double> rect, double rad, int color) {
+    // 228
+    return gfx.roundedBoxColor(
+        this, rect.left, rect.top, rect.right - 1, rect.bottom - 1, rad, color);
+  }
+
   int roundedBoxRgba(
       math.Rectangle<double> rect, double rad, int r, int g, int b, int a) {
     // 241
     return gfx.roundedBoxRgba(
         this, rect.left, rect.top, rect.right, rect.bottom, rad, r, g, b, a);
+  }
+
+  int roundedBoxInRgba(
+      math.Rectangle<double> rect, double rad, int r, int g, int b, int a) {
+    // 241
+    return gfx.roundedBoxRgba(this, rect.left, rect.top, rect.right - 1,
+        rect.bottom - 1, rad, r, g, b, a);
   }
 
   int lineColor(math.Point<double> p1, math.Point<double> p2, int color) {

@@ -1,3 +1,7 @@
+## 0.1.9
+- SDL3-2024-03-21
+- [fixed] Fixed gfx functions.
+
 ## 0.1.8
 - SDL3-2024-03-19
 

@@ -66,6 +66,7 @@ export 'sdl3/generated/lib_sdl_storage.dart';
 export 'sdl3/generated/lib_sdl_surface.dart';
 export 'sdl3/generated/lib_sdl_system.dart';
 export 'sdl3/generated/lib_sdl_thread.dart';
+export 'sdl3/generated/lib_sdl_time.dart';
 export 'sdl3/generated/lib_sdl_timer.dart';
 export 'sdl3/generated/lib_sdl_touch.dart';
 export 'sdl3/generated/lib_sdl_ttf.dart';
