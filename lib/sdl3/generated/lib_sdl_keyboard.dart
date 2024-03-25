@@ -5,6 +5,79 @@ import 'lib_sdl.dart';
 import 'struct_sdl.dart';
 
 ///
+/// Return whether a keyboard is currently connected.
+///
+/// \returns SDL_TRUE if a keyboard is connected, SDL_FALSE otherwise.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_GetKeyboards
+///
+/// ```c
+/// extern DECLSPEC SDL_bool SDLCALL SDL_HasKeyboard(void)
+/// ```
+bool sdlHasKeyboard() {
+  final sdlHasKeyboardLookupFunction = libSdl3
+      .lookupFunction<Int32 Function(), int Function()>('SDL_HasKeyboard');
+  return sdlHasKeyboardLookupFunction() == 1;
+}
+
+///
+/// Get a list of currently connected keyboards.
+///
+/// Note that this will include any device or virtual driver that includes
+/// keyboard functionality, including some mice, KVM switches, motherboard
+/// power buttons, etc. You should wait for input from a device before you
+/// consider it actively in use.
+///
+/// \param count a pointer filled in with the number of keyboards returned
+/// \returns a 0 terminated array of keyboards instance IDs which should be
+/// freed with SDL_free(), or NULL on error; call SDL_GetError() for
+/// more details.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_GetKeyboardInstanceName
+/// \sa SDL_HasKeyboard
+///
+/// ```c
+/// extern DECLSPEC SDL_KeyboardID *SDLCALL SDL_GetKeyboards(int *count)
+/// ```
+Pointer<Uint32> sdlGetKeyboards(Pointer<Int32> count) {
+  final sdlGetKeyboardsLookupFunction = libSdl3.lookupFunction<
+      Pointer<Uint32> Function(Pointer<Int32> count),
+      Pointer<Uint32> Function(Pointer<Int32> count)>('SDL_GetKeyboards');
+  return sdlGetKeyboardsLookupFunction(count);
+}
+
+///
+/// Get the name of a keyboard.
+///
+/// This function returns "" if the keyboard doesn't have a name.
+///
+/// \param instance_id the keyboard instance ID
+/// \returns the name of the selected keyboard, or NULL on failure; call
+/// SDL_GetError() for more information.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_GetKeyboards
+///
+/// ```c
+/// extern DECLSPEC const char *SDLCALL SDL_GetKeyboardInstanceName(SDL_KeyboardID instance_id)
+/// ```
+String? sdlGetKeyboardInstanceName(int instanceId) {
+  final sdlGetKeyboardInstanceNameLookupFunction = libSdl3.lookupFunction<
+      Pointer<Utf8> Function(Uint32 instanceId),
+      Pointer<Utf8> Function(int instanceId)>('SDL_GetKeyboardInstanceName');
+  final result = sdlGetKeyboardInstanceNameLookupFunction(instanceId);
+  if (result == nullptr) {
+    return null;
+  }
+  return result.toDartString();
+}
+
+///
 /// Query the window which currently has keyboard focus.
 ///
 /// \returns the window with keyboard focus.

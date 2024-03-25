@@ -148,6 +148,25 @@ final class SdlWindowEvent extends Struct {
   external int blank_1;
 }
 
+// SDL_KeyboardDeviceEvent
+final class SdlKeyboardDeviceEvent extends Struct {
+  // [0]+(4)
+  @Int32()
+  external int type;
+  // [4]+(4)
+  @Uint32()
+  external int reserved;
+  // [8]+(8)
+  @Uint64()
+  external int timestamp;
+  // [16]+(4)
+  @Uint32()
+  external int which;
+  // [] +(4)
+  @Uint32()
+  external int blank_1;
+}
+
 // SDL_KeyboardEvent
 final class SdlKeyboardEvent extends Struct {
   // [0]+(4)
@@ -162,19 +181,25 @@ final class SdlKeyboardEvent extends Struct {
   // [16]+(4)
   @Uint32()
   external int windowId;
-  // [20]+(1)
+  // [20]+(4)
+  @Uint32()
+  external int which;
+  // [24]+(1)
   @Uint8()
   external int state;
-  // [21]+(1)
+  // [25]+(1)
   @Uint8()
   external int repeat;
-  // [22]+(1)
+  // [26]+(1)
   @Uint8()
   external int padding2;
-  // [23]+(1)
+  // [27]+(1)
   @Uint8()
   external int padding3;
-  // [24]+(16)
+  // [] +(4)
+  @Uint32()
+  external int blank_1;
+  // [32]+(16)
   @Uint64()
   external int keysym_1;
   @Uint64()
@@ -182,7 +207,7 @@ final class SdlKeyboardEvent extends Struct {
 }
 
 extension SdlKeyboardEventExtension on Pointer<SdlKeyboardEvent> {
-  Pointer<SdlKeysym> get keysym => (cast<Uint8>() + 24).cast<SdlKeysym>();
+  Pointer<SdlKeysym> get keysym => (cast<Uint8>() + 32).cast<SdlKeysym>();
 }
 
 // SDL_TextEditingEvent
@@ -233,6 +258,25 @@ final class SdlTextInputEvent extends Struct {
   external Pointer<Int8> text;
 }
 
+// SDL_MouseDeviceEvent
+final class SdlMouseDeviceEvent extends Struct {
+  // [0]+(4)
+  @Int32()
+  external int type;
+  // [4]+(4)
+  @Uint32()
+  external int reserved;
+  // [8]+(8)
+  @Uint64()
+  external int timestamp;
+  // [16]+(4)
+  @Uint32()
+  external int which;
+  // [] +(4)
+  @Uint32()
+  external int blank_1;
+}
+
 // SDL_MouseMotionEvent
 final class SdlMouseMotionEvent extends Struct {
   // [0]+(4)
@@ -268,43 +312,6 @@ final class SdlMouseMotionEvent extends Struct {
   // [] +(4)
   @Uint32()
   external int blank_1;
-}
-
-// SDL_JoyBallEvent
-final class SdlJoyBallEvent extends Struct {
-  // [0]+(4)
-  @Uint32()
-  external int type;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
-  // [8]+(8)
-  @Uint64()
-  external int timestamp;
-  // [16]+(4)
-  @Uint32()
-  external int which;
-  // [20]+(1)
-  @Uint8()
-  external int ball;
-  // [21]+(1)
-  @Uint8()
-  external int padding1;
-  // [22]+(1)
-  @Uint8()
-  external int padding2;
-  // [23]+(1)
-  @Uint8()
-  external int padding3;
-  // [24]+(2)
-  @Int16()
-  external int xrel;
-  // [26]+(2)
-  @Int16()
-  external int yrel;
-  // [] +(4)
-  @Uint32()
-  external int blank_2;
 }
 
 // SDL_MouseButtonEvent
@@ -416,6 +423,43 @@ final class SdlJoyAxisEvent extends Struct {
   // [26]+(2)
   @Uint16()
   external int padding4;
+  // [] +(4)
+  @Uint32()
+  external int blank_1;
+}
+
+// SDL_JoyBallEvent
+final class SdlJoyBallEvent extends Struct {
+  // [0]+(4)
+  @Uint32()
+  external int type;
+  // [4]+(4)
+  @Uint32()
+  external int reserved;
+  // [8]+(8)
+  @Uint64()
+  external int timestamp;
+  // [16]+(4)
+  @Uint32()
+  external int which;
+  // [20]+(1)
+  @Uint8()
+  external int ball;
+  // [21]+(1)
+  @Uint8()
+  external int padding1;
+  // [22]+(1)
+  @Uint8()
+  external int padding2;
+  // [23]+(1)
+  @Uint8()
+  external int padding3;
+  // [24]+(2)
+  @Int16()
+  external int xrel;
+  // [26]+(2)
+  @Int16()
+  external int yrel;
   // [] +(4)
   @Uint32()
   external int blank_1;
@@ -1063,18 +1107,24 @@ extension SdlEventExtension on Pointer<SdlEvent> {
       (cast<Uint8>() + 0).cast<SdlDisplayEvent>();
   Pointer<SdlWindowEvent> get window =>
       (cast<Uint8>() + 0).cast<SdlWindowEvent>();
+  Pointer<SdlKeyboardDeviceEvent> get kdevice =>
+      (cast<Uint8>() + 0).cast<SdlKeyboardDeviceEvent>();
   Pointer<SdlKeyboardEvent> get key =>
       (cast<Uint8>() + 0).cast<SdlKeyboardEvent>();
   Pointer<SdlTextEditingEvent> get edit =>
       (cast<Uint8>() + 0).cast<SdlTextEditingEvent>();
   Pointer<SdlTextInputEvent> get text =>
       (cast<Uint8>() + 0).cast<SdlTextInputEvent>();
+  Pointer<SdlMouseDeviceEvent> get mdevice =>
+      (cast<Uint8>() + 0).cast<SdlMouseDeviceEvent>();
   Pointer<SdlMouseMotionEvent> get motion =>
       (cast<Uint8>() + 0).cast<SdlMouseMotionEvent>();
   Pointer<SdlMouseButtonEvent> get button =>
       (cast<Uint8>() + 0).cast<SdlMouseButtonEvent>();
   Pointer<SdlMouseWheelEvent> get wheel =>
       (cast<Uint8>() + 0).cast<SdlMouseWheelEvent>();
+  Pointer<SdlJoyDeviceEvent> get jdevice =>
+      (cast<Uint8>() + 0).cast<SdlJoyDeviceEvent>();
   Pointer<SdlJoyAxisEvent> get jaxis =>
       (cast<Uint8>() + 0).cast<SdlJoyAxisEvent>();
   Pointer<SdlJoyBallEvent> get jball =>
@@ -1083,16 +1133,14 @@ extension SdlEventExtension on Pointer<SdlEvent> {
       (cast<Uint8>() + 0).cast<SdlJoyHatEvent>();
   Pointer<SdlJoyButtonEvent> get jbutton =>
       (cast<Uint8>() + 0).cast<SdlJoyButtonEvent>();
-  Pointer<SdlJoyDeviceEvent> get jdevice =>
-      (cast<Uint8>() + 0).cast<SdlJoyDeviceEvent>();
   Pointer<SdlJoyBatteryEvent> get jbattery =>
       (cast<Uint8>() + 0).cast<SdlJoyBatteryEvent>();
+  Pointer<SdlGamepadDeviceEvent> get gdevice =>
+      (cast<Uint8>() + 0).cast<SdlGamepadDeviceEvent>();
   Pointer<SdlGamepadAxisEvent> get gaxis =>
       (cast<Uint8>() + 0).cast<SdlGamepadAxisEvent>();
   Pointer<SdlGamepadButtonEvent> get gbutton =>
       (cast<Uint8>() + 0).cast<SdlGamepadButtonEvent>();
-  Pointer<SdlGamepadDeviceEvent> get gdevice =>
-      (cast<Uint8>() + 0).cast<SdlGamepadDeviceEvent>();
   Pointer<SdlGamepadTouchpadEvent> get gtouchpad =>
       (cast<Uint8>() + 0).cast<SdlGamepadTouchpadEvent>();
   Pointer<SdlGamepadSensorEvent> get gsensor =>

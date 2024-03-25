@@ -1,7 +1,81 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 import 'dart:ffi';
+import 'package:ffi/ffi.dart';
 import 'lib_sdl.dart';
 import 'struct_sdl.dart';
+
+///
+/// Return whether a mouse is currently connected.
+///
+/// \returns SDL_TRUE if a mouse is connected, SDL_FALSE otherwise.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_GetMice
+///
+/// ```c
+/// extern DECLSPEC SDL_bool SDLCALL SDL_HasMouse(void)
+/// ```
+bool sdlHasMouse() {
+  final sdlHasMouseLookupFunction =
+      libSdl3.lookupFunction<Int32 Function(), int Function()>('SDL_HasMouse');
+  return sdlHasMouseLookupFunction() == 1;
+}
+
+///
+/// Get a list of currently connected mice.
+///
+/// Note that this will include any device or virtual driver that includes
+/// mouse functionality, including some game controllers, KVM switches, etc.
+/// You should wait for input from a device before you consider it actively in
+/// use.
+///
+/// \param count a pointer filled in with the number of mice returned
+/// \returns a 0 terminated array of mouse instance IDs which should be freed
+/// with SDL_free(), or NULL on error; call SDL_GetError() for more
+/// details.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_GetMouseInstanceName
+/// \sa SDL_HasMouse
+///
+/// ```c
+/// extern DECLSPEC SDL_MouseID *SDLCALL SDL_GetMice(int *count)
+/// ```
+Pointer<Uint32> sdlGetMice(Pointer<Int32> count) {
+  final sdlGetMiceLookupFunction = libSdl3.lookupFunction<
+      Pointer<Uint32> Function(Pointer<Int32> count),
+      Pointer<Uint32> Function(Pointer<Int32> count)>('SDL_GetMice');
+  return sdlGetMiceLookupFunction(count);
+}
+
+///
+/// Get the name of a mouse.
+///
+/// This function returns "" if the mouse doesn't have a name.
+///
+/// \param instance_id the mouse instance ID
+/// \returns the name of the selected mouse, or NULL on failure; call
+/// SDL_GetError() for more information.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_GetMice
+///
+/// ```c
+/// extern DECLSPEC const char *SDLCALL SDL_GetMouseInstanceName(SDL_MouseID instance_id)
+/// ```
+String? sdlGetMouseInstanceName(int instanceId) {
+  final sdlGetMouseInstanceNameLookupFunction = libSdl3.lookupFunction<
+      Pointer<Utf8> Function(Uint32 instanceId),
+      Pointer<Utf8> Function(int instanceId)>('SDL_GetMouseInstanceName');
+  final result = sdlGetMouseInstanceNameLookupFunction(instanceId);
+  if (result == nullptr) {
+    return null;
+  }
+  return result.toDartString();
+}
 
 ///
 /// Get the window which currently has mouse focus.

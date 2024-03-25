@@ -39,6 +39,24 @@ void sdlUnlockJoysticks(Pointer<NativeType> arg0) {
 }
 
 ///
+/// Return whether a joystick is currently connected.
+///
+/// \returns SDL_TRUE if a joystick is connected, SDL_FALSE otherwise.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_GetJoysticks
+///
+/// ```c
+/// extern DECLSPEC SDL_bool SDLCALL SDL_HasJoystick(void)
+/// ```
+bool sdlHasJoystick() {
+  final sdlHasJoystickLookupFunction = libSdl3
+      .lookupFunction<Int32 Function(), int Function()>('SDL_HasJoystick');
+  return sdlHasJoystickLookupFunction() == 1;
+}
+
+///
 /// Get a list of currently connected joysticks.
 ///
 /// \param count a pointer filled in with the number of joysticks returned
@@ -48,6 +66,7 @@ void sdlUnlockJoysticks(Pointer<NativeType> arg0) {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
+/// \sa SDL_HasJoystick
 /// \sa SDL_OpenJoystick
 ///
 /// ```c
@@ -145,8 +164,8 @@ int sdlGetJoystickInstancePlayerIndex(int instanceId) {
 /// This can be called before any joysticks are opened.
 ///
 /// \param instance_id the joystick instance ID
-/// \returns the GUID of the selected joystick. If called on an invalid index,
-/// this function returns a zero GUID
+/// \returns the GUID of the selected joystick. If called with an invalid
+/// instance_id, this function returns a zero GUID.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -170,8 +189,8 @@ SdlGuid sdlGetJoystickInstanceGuid(int instanceId) {
 /// available this function returns 0.
 ///
 /// \param instance_id the joystick instance ID
-/// \returns the USB vendor ID of the selected joystick. If called on an
-/// invalid index, this function returns zero
+/// \returns the USB vendor ID of the selected joystick. If called with an
+/// invalid instance_id, this function returns 0.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -195,8 +214,8 @@ int sdlGetJoystickInstanceVendor(int instanceId) {
 /// available this function returns 0.
 ///
 /// \param instance_id the joystick instance ID
-/// \returns the USB product ID of the selected joystick. If called on an
-/// invalid index, this function returns zero
+/// \returns the USB product ID of the selected joystick. If called with an
+/// invalid instance_id, this function returns 0.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -220,8 +239,8 @@ int sdlGetJoystickInstanceProduct(int instanceId) {
 /// isn't available this function returns 0.
 ///
 /// \param instance_id the joystick instance ID
-/// \returns the product version of the selected joystick. If called on an
-/// invalid index, this function returns zero
+/// \returns the product version of the selected joystick. If called with an
+/// invalid instance_id, this function returns 0.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -246,8 +265,9 @@ int sdlGetJoystickInstanceProductVersion(int instanceId) {
 /// This can be called before any joysticks are opened.
 ///
 /// \param instance_id the joystick instance ID
-/// \returns the SDL_JoystickType of the selected joystick. If called on an
-/// invalid index, this function returns `SDL_JOYSTICK_TYPE_UNKNOWN`
+/// \returns the SDL_JoystickType of the selected joystick. If called with an
+/// invalid instance_id, this function returns
+/// `SDL_JOYSTICK_TYPE_UNKNOWN`.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///

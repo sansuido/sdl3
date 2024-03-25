@@ -254,6 +254,24 @@ int sdlSetGamepadMapping(int instanceId, String? mapping) {
 }
 
 ///
+/// Return whether a gamepad is currently connected.
+///
+/// \returns SDL_TRUE if a gamepad is connected, SDL_FALSE otherwise.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_GetGamepads
+///
+/// ```c
+/// extern DECLSPEC SDL_bool SDLCALL SDL_HasGamepad(void)
+/// ```
+bool sdlHasGamepad() {
+  final sdlHasGamepadLookupFunction = libSdl3
+      .lookupFunction<Int32 Function(), int Function()>('SDL_HasGamepad');
+  return sdlHasGamepadLookupFunction() == 1;
+}
+
+///
 /// Get a list of currently connected gamepads.
 ///
 /// \param count a pointer filled in with the number of gamepads returned
@@ -263,6 +281,7 @@ int sdlSetGamepadMapping(int instanceId, String? mapping) {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
+/// \sa SDL_HasGamepad
 /// \sa SDL_OpenGamepad
 ///
 /// ```c
