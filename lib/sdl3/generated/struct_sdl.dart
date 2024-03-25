@@ -196,18 +196,18 @@ final class SdlKeyboardEvent extends Struct {
   // [27]+(1)
   @Uint8()
   external int padding3;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
-  // [32]+(16)
+  // [28]+(16)
   @Uint64()
   external int keysym_1;
   @Uint64()
   external int keysym_2;
+  // [] +(4)
+  @Uint32()
+  external int blank_1;
 }
 
 extension SdlKeyboardEventExtension on Pointer<SdlKeyboardEvent> {
-  Pointer<SdlKeysym> get keysym => (cast<Uint8>() + 32).cast<SdlKeysym>();
+  Pointer<SdlKeysym> get keysym => (cast<Uint8>() + 28).cast<SdlKeysym>();
 }
 
 // SDL_TextEditingEvent
@@ -1276,51 +1276,46 @@ final class SdlHapticConstant extends Struct {
   // [0]+(2)
   @Uint16()
   external int type;
-  // [] +(6)
-  @Uint32()
-  external int blank_1;
-  @Uint16()
-  external int blank_2;
-  // [8]+(16)
+  // [2]+(16)
   @Uint64()
   external int direction_1;
   @Uint64()
   external int direction_2;
-  // [24]+(4)
+  // [] +(2)
+  @Uint16()
+  external int blank_1;
+  // [20]+(4)
   @Uint32()
   external int length;
-  // [28]+(2)
+  // [24]+(2)
   @Uint16()
   external int delay;
-  // [30]+(2)
+  // [26]+(2)
   @Uint16()
   external int button;
-  // [32]+(2)
+  // [28]+(2)
   @Uint16()
   external int interval;
-  // [34]+(2)
+  // [30]+(2)
   @Int16()
   external int level;
-  // [36]+(2)
+  // [32]+(2)
   @Uint16()
   external int attackLength;
-  // [38]+(2)
+  // [34]+(2)
   @Uint16()
   external int attackLevel;
-  // [40]+(2)
+  // [36]+(2)
   @Uint16()
   external int fadeLength;
-  // [42]+(2)
+  // [38]+(2)
   @Uint16()
   external int fadeLevel;
-  // [] +(4)
-  @Uint32()
-  external int blank_3;
 }
 
 extension SdlHapticConstantExtension on Pointer<SdlHapticConstant> {
   Pointer<SdlHapticDirection> get direction =>
-      (cast<Uint8>() + 8).cast<SdlHapticDirection>();
+      (cast<Uint8>() + 2).cast<SdlHapticDirection>();
 }
 
 // SDL_HapticPeriodic
@@ -1328,62 +1323,58 @@ final class SdlHapticPeriodic extends Struct {
   // [0]+(2)
   @Uint16()
   external int type;
-  // [] +(6)
-  @Uint32()
-  external int blank_1;
-  @Uint16()
-  external int blank_2;
-  // [8]+(16)
+  // [2]+(16)
   @Uint64()
   external int direction_1;
   @Uint64()
   external int direction_2;
-  // [24]+(4)
+  // [] +(2)
+  @Uint16()
+  external int blank_1;
+  // [20]+(4)
   @Uint32()
   external int length;
-  // [28]+(2)
+  // [24]+(2)
   @Uint16()
   external int delay;
-  // [30]+(2)
+  // [26]+(2)
   @Uint16()
   external int button;
-  // [32]+(2)
+  // [28]+(2)
   @Uint16()
   external int interval;
-  // [34]+(2)
+  // [30]+(2)
   @Uint16()
   external int period;
-  // [36]+(2)
+  // [32]+(2)
   @Int16()
   external int magnitude;
-  // [38]+(2)
+  // [34]+(2)
   @Int16()
   external int offset;
-  // [40]+(2)
+  // [36]+(2)
   @Uint16()
   external int phase;
-  // [42]+(2)
+  // [38]+(2)
   @Uint16()
   external int attackLength;
-  // [44]+(2)
+  // [40]+(2)
   @Uint16()
   external int attackLevel;
-  // [46]+(2)
+  // [42]+(2)
   @Uint16()
   external int fadeLength;
-  // [48]+(2)
+  // [44]+(2)
   @Uint16()
   external int fadeLevel;
-  // [] +(6)
-  @Uint32()
-  external int blank_3;
+  // [] +(2)
   @Uint16()
-  external int blank_4;
+  external int blank_2;
 }
 
 extension SdlHapticPeriodicExtension on Pointer<SdlHapticPeriodic> {
   Pointer<SdlHapticDirection> get direction =>
-      (cast<Uint8>() + 8).cast<SdlHapticDirection>();
+      (cast<Uint8>() + 2).cast<SdlHapticDirection>();
 }
 
 // SDL_HapticCondition
@@ -1391,78 +1382,78 @@ final class SdlHapticCondition extends Struct {
   // [0]+(2)
   @Uint16()
   external int type;
-  // [] +(6)
-  @Uint32()
-  external int blank_1;
-  @Uint16()
-  external int blank_2;
-  // [8]+(16)
+  // [2]+(16)
   @Uint64()
   external int direction_1;
   @Uint64()
   external int direction_2;
-  // [24]+(4)
+  // [] +(2)
+  @Uint16()
+  external int blank_1;
+  // [20]+(4)
   @Uint32()
   external int length;
-  // [28]+(2)
+  // [24]+(2)
   @Uint16()
   external int delay;
-  // [30]+(2)
+  // [26]+(2)
   @Uint16()
   external int button;
-  // [32]+(2)
+  // [28]+(2)
   @Uint16()
   external int interval;
-  // [34]+(2*3)
+  // [30]+(2*3)
   @Uint16()
   external int rightSat_1;
   @Uint16()
   external int rightSat_2;
   @Uint16()
   external int rightSat_3;
-  // [40]+(2*3)
+  // [36]+(2*3)
   @Uint16()
   external int leftSat_1;
   @Uint16()
   external int leftSat_2;
   @Uint16()
   external int leftSat_3;
-  // [46]+(2*3)
+  // [42]+(2*3)
   @Int16()
   external int rightCoeff_1;
   @Int16()
   external int rightCoeff_2;
   @Int16()
   external int rightCoeff_3;
-  // [52]+(2*3)
+  // [48]+(2*3)
   @Int16()
   external int leftCoeff_1;
   @Int16()
   external int leftCoeff_2;
   @Int16()
   external int leftCoeff_3;
-  // [58]+(2*3)
+  // [54]+(2*3)
   @Uint16()
   external int deadband_1;
   @Uint16()
   external int deadband_2;
   @Uint16()
   external int deadband_3;
-  // [64]+(2*3)
+  // [60]+(2*3)
   @Int16()
   external int center_1;
   @Int16()
   external int center_2;
   @Int16()
   external int center_3;
-  // [] +(2)
+  // [] +(6)
+  @Uint32()
+  external int blank_2;
   @Uint16()
   external int blank_3;
 }
 
 extension SdlHapticConditionExtension on Pointer<SdlHapticCondition> {
   Pointer<SdlHapticDirection> get direction =>
-      (cast<Uint8>() + 8).cast<SdlHapticDirection>();
+      (cast<Uint8>() + 2).cast<SdlHapticDirection>();
 }
 
 // SDL_HapticRamp
@@ -1470,54 +1461,54 @@ final class SdlHapticRamp extends Struct {
   // [0]+(2)
   @Uint16()
   external int type;
-  // [] +(6)
-  @Uint32()
-  external int blank_1;
-  @Uint16()
-  external int blank_2;
-  // [8]+(16)
+  // [2]+(16)
   @Uint64()
   external int direction_1;
   @Uint64()
   external int direction_2;
-  // [24]+(4)
+  // [] +(2)
+  @Uint16()
+  external int blank_1;
+  // [20]+(4)
   @Uint32()
   external int length;
-  // [28]+(2)
+  // [24]+(2)
   @Uint16()
   external int delay;
-  // [30]+(2)
+  // [26]+(2)
   @Uint16()
   external int button;
-  // [32]+(2)
+  // [28]+(2)
   @Uint16()
   external int interval;
-  // [34]+(2)
+  // [30]+(2)
   @Int16()
   external int start;
-  // [36]+(2)
+  // [32]+(2)
   @Int16()
   external int end;
-  // [38]+(2)
+  // [34]+(2)
   @Uint16()
   external int attackLength;
-  // [40]+(2)
+  // [36]+(2)
   @Uint16()
   external int attackLevel;
-  // [42]+(2)
+  // [38]+(2)
   @Uint16()
   external int fadeLength;
-  // [44]+(2)
+  // [40]+(2)
   @Uint16()
   external int fadeLevel;
-  // [] +(2)
+  // [] +(6)
+  @Uint32()
+  external int blank_2;
   @Uint16()
   external int blank_3;
 }
 
 extension SdlHapticRampExtension on Pointer<SdlHapticRamp> {
   Pointer<SdlHapticDirection> get direction =>
-      (cast<Uint8>() + 8).cast<SdlHapticDirection>();
+      (cast<Uint8>() + 2).cast<SdlHapticDirection>();
 }
 
 // SDL_HapticLeftRight
@@ -1547,40 +1538,41 @@ final class SdlHapticCustom extends Struct {
   // [0]+(2)
   @Uint16()
   external int type;
-  // [] +(6)
-  @Uint32()
-  external int blank_1;
-  @Uint16()
-  external int blank_2;
-  // [8]+(16)
+  // [2]+(16)
   @Uint64()
   external int direction_1;
   @Uint64()
   external int direction_2;
-  // [24]+(4)
+  // [] +(2)
+  @Uint16()
+  external int blank_1;
+  // [20]+(4)
   @Uint32()
   external int length;
-  // [28]+(2)
+  // [24]+(2)
   @Uint16()
   external int delay;
-  // [30]+(2)
+  // [26]+(2)
   @Uint16()
   external int button;
-  // [32]+(2)
+  // [28]+(2)
   @Uint16()
   external int interval;
-  // [34]+(1)
+  // [30]+(1)
   @Uint8()
   external int channels;
   // [] +(1)
   @Uint8()
-  external int blank_3;
-  // [36]+(2)
+  external int blank_2;
+  // [32]+(2)
   @Uint16()
   external int period;
-  // [38]+(2)
+  // [34]+(2)
   @Uint16()
   external int samples;
+  // [] +(4)
+  @Uint32()
+  external int blank_3;
   // [40]+(8)
   external Pointer<Uint16> data;
   // [48]+(2)
@@ -1599,7 +1591,7 @@ final class SdlHapticCustom extends Struct {
 
 extension SdlHapticCustomExtension on Pointer<SdlHapticCustom> {
   Pointer<SdlHapticDirection> get direction =>
-      (cast<Uint8>() + 8).cast<SdlHapticDirection>();
+      (cast<Uint8>() + 2).cast<SdlHapticDirection>();
 }
 
 // SDL_HapticEffect
