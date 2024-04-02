@@ -1,3 +1,6 @@
+## 0.1.12
+- SDL3-2024-03-31
+
 ## 0.1.11
 - [fixed] Fixed padding of structures inside structures.(SDL_Keysym and SDL_HapticDirection use case).
 

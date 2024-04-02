@@ -479,12 +479,12 @@ int sdlGetCurrentRenderOutputSize(
 /// \sa SDL_UpdateTexture
 ///
 /// ```c
-/// extern DECLSPEC SDL_Texture *SDLCALL SDL_CreateTexture(SDL_Renderer *renderer, Uint32 format, int access, int w, int h)
+/// extern DECLSPEC SDL_Texture *SDLCALL SDL_CreateTexture(SDL_Renderer *renderer, SDL_PixelFormatEnum format, int access, int w, int h)
 /// ```
 Pointer<SdlTexture> sdlCreateTexture(
     Pointer<SdlRenderer> renderer, int format, int access, int w, int h) {
   final sdlCreateTextureLookupFunction = libSdl3.lookupFunction<
-      Pointer<SdlTexture> Function(Pointer<SdlRenderer> renderer, Uint32 format,
+      Pointer<SdlTexture> Function(Pointer<SdlRenderer> renderer, Int32 format,
           Int32 access, Int32 w, Int32 h),
       Pointer<SdlTexture> Function(Pointer<SdlRenderer> renderer, int format,
           int access, int w, int h)>('SDL_CreateTexture');
@@ -2757,6 +2757,10 @@ void sdlDestroyTexture(Pointer<SdlTexture> texture) {
 ///
 /// If `renderer` is NULL, this function will return immediately after setting
 /// the SDL error message to "Invalid renderer". See SDL_GetError().
+///
+/// Note that destroying a window implicitly destroys the associated renderer,
+/// so this should not be called if the window associated with the renderer has
+/// already been destroyed.
 ///
 /// \param renderer the rendering context
 ///

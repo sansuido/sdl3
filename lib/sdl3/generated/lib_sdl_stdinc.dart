@@ -313,7 +313,19 @@ int sdlAbs(int x) {
   return sdlAbsLookupFunction(x);
 }
 
-/// NOTE: these double-evaluate their arguments, so you should never have side effects in the parameters
+///
+/// Query if a character is alphabetic (a letter).
+///
+/// **WARNING**: Regardless of system locale, this will only treat ASCII values
+/// for English 'a-z' and 'A-Z' as true.
+///
+/// \param x character value to check.
+/// \returns non-zero if x falls within the character class, zero otherwise.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.0.0.
+///
 /// ```c
 /// extern DECLSPEC int SDLCALL SDL_isalpha(int x)
 /// ```
@@ -324,6 +336,19 @@ int sdlIsalpha(int x) {
   return sdlIsalphaLookupFunction(x);
 }
 
+///
+/// Query if a character is alphabetic (a letter) or a number.
+///
+/// **WARNING**: Regardless of system locale, this will only treat ASCII values
+/// for English 'a-z', 'A-Z', and '0-9' as true.
+///
+/// \param x character value to check.
+/// \returns non-zero if x falls within the character class, zero otherwise.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.0.0.
+///
 /// ```c
 /// extern DECLSPEC int SDLCALL SDL_isalnum(int x)
 /// ```
@@ -334,6 +359,19 @@ int sdlIsalnum(int x) {
   return sdlIsalnumLookupFunction(x);
 }
 
+///
+/// Report if a character is blank (a space or tab).
+///
+/// **WARNING**: Regardless of system locale, this will only treat ASCII values
+/// 0x20 (space) or 0x9 (tab) as true.
+///
+/// \param x character value to check.
+/// \returns non-zero if x falls within the character class, zero otherwise.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.0.0.
+///
 /// ```c
 /// extern DECLSPEC int SDLCALL SDL_isblank(int x)
 /// ```
@@ -344,6 +382,19 @@ int sdlIsblank(int x) {
   return sdlIsblankLookupFunction(x);
 }
 
+///
+/// Report if a character is a control character.
+///
+/// **WARNING**: Regardless of system locale, this will only treat ASCII values
+/// 0 through 0x1F, and 0x7F, as true.
+///
+/// \param x character value to check.
+/// \returns non-zero if x falls within the character class, zero otherwise.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.0.0.
+///
 /// ```c
 /// extern DECLSPEC int SDLCALL SDL_iscntrl(int x)
 /// ```
@@ -354,6 +405,19 @@ int sdlIscntrl(int x) {
   return sdlIscntrlLookupFunction(x);
 }
 
+///
+/// Report if a character is a numeric digit.
+///
+/// **WARNING**: Regardless of system locale, this will only treat ASCII values
+/// '0' (0x30) through '9' (0x39), as true.
+///
+/// \param x character value to check.
+/// \returns non-zero if x falls within the character class, zero otherwise.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.0.0.
+///
 /// ```c
 /// extern DECLSPEC int SDLCALL SDL_isdigit(int x)
 /// ```
@@ -364,6 +428,19 @@ int sdlIsdigit(int x) {
   return sdlIsdigitLookupFunction(x);
 }
 
+///
+/// Report if a character is a hexadecimal digit.
+///
+/// **WARNING**: Regardless of system locale, this will only treat ASCII values
+/// 'A' through 'F', 'a' through 'f', and '0' through '9', as true.
+///
+/// \param x character value to check.
+/// \returns non-zero if x falls within the character class, zero otherwise.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.0.0.
+///
 /// ```c
 /// extern DECLSPEC int SDLCALL SDL_isxdigit(int x)
 /// ```
@@ -374,6 +451,22 @@ int sdlIsxdigit(int x) {
   return sdlIsxdigitLookupFunction(x);
 }
 
+///
+/// Report if a character is a punctuation mark.
+///
+/// **WARNING**: Regardless of system locale, this is equivalent to
+/// `((SDL_isgraph(x)) && (!SDL_isalnum(x)))`.
+///
+/// \param x character value to check.
+/// \returns non-zero if x falls within the character class, zero otherwise.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_isgraph
+/// \sa SDL_isalnum
+///
 /// ```c
 /// extern DECLSPEC int SDLCALL SDL_ispunct(int x)
 /// ```
@@ -384,6 +477,26 @@ int sdlIspunct(int x) {
   return sdlIspunctLookupFunction(x);
 }
 
+///
+/// Report if a character is whitespace.
+///
+/// **WARNING**: Regardless of system locale, this will only treat the
+/// following ASCII values as true:
+///
+/// - space (0x20)
+/// - tab (0x09)
+/// - newline (0x0A)
+/// - vertical tab (0x0B)
+/// - form feed (0x0C)
+/// - return (0x0D)
+///
+/// \param x character value to check.
+/// \returns non-zero if x falls within the character class, zero otherwise.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.0.0.
+///
 /// ```c
 /// extern DECLSPEC int SDLCALL SDL_isspace(int x)
 /// ```
@@ -394,6 +507,19 @@ int sdlIsspace(int x) {
   return sdlIsspaceLookupFunction(x);
 }
 
+///
+/// Report if a character is upper case.
+///
+/// **WARNING**: Regardless of system locale, this will only treat ASCII values
+/// 'A' through 'Z' as true.
+///
+/// \param x character value to check.
+/// \returns non-zero if x falls within the character class, zero otherwise.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.0.0.
+///
 /// ```c
 /// extern DECLSPEC int SDLCALL SDL_isupper(int x)
 /// ```
@@ -404,6 +530,19 @@ int sdlIsupper(int x) {
   return sdlIsupperLookupFunction(x);
 }
 
+///
+/// Report if a character is lower case.
+///
+/// **WARNING**: Regardless of system locale, this will only treat ASCII values
+/// 'a' through 'z' as true.
+///
+/// \param x character value to check.
+/// \returns non-zero if x falls within the character class, zero otherwise.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.0.0.
+///
 /// ```c
 /// extern DECLSPEC int SDLCALL SDL_islower(int x)
 /// ```
@@ -414,6 +553,23 @@ int sdlIslower(int x) {
   return sdlIslowerLookupFunction(x);
 }
 
+///
+/// Report if a character is "printable".
+///
+/// Be advised that "printable" has a definition that goes back to text
+/// terminals from the dawn of computing, making this a sort of special case
+/// function that is not suitable for Unicode (or most any) text management.
+///
+/// **WARNING**: Regardless of system locale, this will only treat ASCII values
+/// ' ' (0x20) through '~' (0x7E) as true.
+///
+/// \param x character value to check.
+/// \returns non-zero if x falls within the character class, zero otherwise.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.0.0.
+///
 /// ```c
 /// extern DECLSPEC int SDLCALL SDL_isprint(int x)
 /// ```
@@ -424,6 +580,25 @@ int sdlIsprint(int x) {
   return sdlIsprintLookupFunction(x);
 }
 
+///
+/// Report if a character is any "printable" except space.
+///
+/// Be advised that "printable" has a definition that goes back to text
+/// terminals from the dawn of computing, making this a sort of special case
+/// function that is not suitable for Unicode (or most any) text management.
+///
+/// **WARNING**: Regardless of system locale, this is equivalent to
+/// `(SDL_isprint(x)) && ((x) != ' ')`.
+///
+/// \param x character value to check.
+/// \returns non-zero if x falls within the character class, zero otherwise.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_isprint
+///
 /// ```c
 /// extern DECLSPEC int SDLCALL SDL_isgraph(int x)
 /// ```
@@ -434,6 +609,22 @@ int sdlIsgraph(int x) {
   return sdlIsgraphLookupFunction(x);
 }
 
+///
+/// Convert low-ASCII English letters to uppercase.
+///
+/// **WARNING**: Regardless of system locale, this will only convert ASCII
+/// values 'a' through 'z' to uppercase.
+///
+/// This function returns the uppercase equivalent of `x`. If a character
+/// cannot be converted, or is already uppercase, this function returns `x`.
+///
+/// \param x character value to check.
+/// \returns Capitalized version of x, or x if no conversion available.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.0.0.
+///
 /// ```c
 /// extern DECLSPEC int SDLCALL SDL_toupper(int x)
 /// ```
@@ -444,6 +635,22 @@ int sdlToupper(int x) {
   return sdlToupperLookupFunction(x);
 }
 
+///
+/// Convert low-ASCII English letters to lowercase.
+///
+/// **WARNING**: Regardless of system locale, this will only convert ASCII
+/// values 'A' through 'Z' to lowercase.
+///
+/// This function returns the lowercase equivalent of `x`. If a character
+/// cannot be converted, or is already lowercase, this function returns `x`.
+///
+/// \param x character value to check.
+/// \returns Lowercase version of x, or x if no conversion available.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.0.0.
+///
 /// ```c
 /// extern DECLSPEC int SDLCALL SDL_tolower(int x)
 /// ```
@@ -617,6 +824,23 @@ Pointer<Int16> sdlWcsnstr(
   return sdlWcsnstrLookupFunction(haystack, needle, maxlen);
 }
 
+///
+/// Compare two null-terminated wide strings.
+///
+/// This only compares wchar_t values until it hits a null-terminating
+/// character; it does not care if the string is well-formed UTF-16 (or UTF-32,
+/// depending on your platform's wchar_t size), or uses valid Unicode values.
+///
+/// \param str1 The first string to compare. NULL is not permitted!
+/// \param str2 The second string to compare. NULL is not permitted!
+/// \returns less than zero if str1 is "less than" str2, greater than zero if
+/// str1 is "greater than" str2, and zero if the strings match
+/// exactly.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.0.0.
+///
 /// ```c
 /// extern DECLSPEC int SDLCALL SDL_wcscmp(const wchar_t *str1, const wchar_t *str2)
 /// ```
@@ -627,6 +851,35 @@ int sdlWcscmp(Pointer<Int16> str1, Pointer<Int16> str2) {
   return sdlWcscmpLookupFunction(str1, str2);
 }
 
+///
+/// Compare two wide strings up to a number of wchar_t values.
+///
+/// This only compares wchar_t values; it does not care if the string is
+/// well-formed UTF-16 (or UTF-32, depending on your platform's wchar_t size),
+/// or uses valid Unicode values.
+///
+/// Note that while this function is intended to be used with UTF-16 (or
+/// UTF-32, depending on your platform's definition of wchar_t), it is
+/// comparing raw wchar_t values and not Unicode codepoints: `maxlen` specifies
+/// a wchar_t limit! If the limit lands in the middle of a multi-wchar UTF-16
+/// sequence, it will only compare a portion of the final character.
+///
+/// `maxlen` specifies a maximum number of wchar_t to compare; if the strings
+/// match to this number of wide chars (or both have matched to a
+/// null-terminator character before this count), they will be considered
+/// equal.
+///
+/// \param str1 The first string to compare. NULL is not permitted!
+/// \param str2 The second string to compare. NULL is not permitted!
+/// \param maxlen The maximum number of wchar_t to compare.
+/// \returns less than zero if str1 is "less than" str2, greater than zero if
+/// str1 is "greater than" str2, and zero if the strings match
+/// exactly.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.0.0.
+///
 /// ```c
 /// extern DECLSPEC int SDLCALL SDL_wcsncmp(const wchar_t *str1, const wchar_t *str2, size_t maxlen)
 /// ```
@@ -638,6 +891,34 @@ int sdlWcsncmp(Pointer<Int16> str1, Pointer<Int16> str2, int maxlen) {
   return sdlWcsncmpLookupFunction(str1, str2, maxlen);
 }
 
+///
+/// Compare two null-terminated wide strings, case-insensitively.
+///
+/// This will work with Unicode strings, using a technique called
+/// "case-folding" to handle the vast majority of case-sensitive human
+/// languages regardless of system locale. It can deal with expanding values: a
+/// German Eszett character can compare against two ASCII 's' chars and be
+/// considered a match, for example. A notable exception: it does not handle
+/// the Turkish 'i' character; human language is complicated!
+///
+/// Depending on your platform, "wchar_t" might be 2 bytes, and expected to be
+/// UTF-16 encoded (like Windows), or 4 bytes in UTF-32 format. Since this
+/// handles Unicode, it expects the string to be well-formed and not a
+/// null-terminated string of arbitrary bytes. Characters that are not valid
+/// UTF-16 (or UTF-32) are treated as Unicode character U+FFFD (REPLACEMENT
+/// CHARACTER), which is to say two strings of random bits may turn out to
+/// match if they convert to the same amount of replacement characters.
+///
+/// \param str1 The first string to compare. NULL is not permitted!
+/// \param str2 The second string to compare. NULL is not permitted!
+/// \returns less than zero if str1 is "less than" str2, greater than zero if
+/// str1 is "greater than" str2, and zero if the strings match
+/// exactly.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.0.0.
+///
 /// ```c
 /// extern DECLSPEC int SDLCALL SDL_wcscasecmp(const wchar_t *str1, const wchar_t *str2)
 /// ```
@@ -648,15 +929,55 @@ int sdlWcscasecmp(Pointer<Int16> str1, Pointer<Int16> str2) {
   return sdlWcscasecmpLookupFunction(str1, str2);
 }
 
+///
+/// Compare two wide strings, case-insensitively, up to a number of wchar_t.
+///
+/// This will work with Unicode strings, using a technique called
+/// "case-folding" to handle the vast majority of case-sensitive human
+/// languages regardless of system locale. It can deal with expanding values: a
+/// German Eszett character can compare against two ASCII 's' chars and be
+/// considered a match, for example. A notable exception: it does not handle
+/// the Turkish 'i' character; human language is complicated!
+///
+/// Depending on your platform, "wchar_t" might be 2 bytes, and expected to be
+/// UTF-16 encoded (like Windows), or 4 bytes in UTF-32 format. Since this
+/// handles Unicode, it expects the string to be well-formed and not a
+/// null-terminated string of arbitrary bytes. Characters that are not valid
+/// UTF-16 (or UTF-32) are treated as Unicode character U+FFFD (REPLACEMENT
+/// CHARACTER), which is to say two strings of random bits may turn out to
+/// match if they convert to the same amount of replacement characters.
+///
+/// Note that while this function might deal with variable-sized characters,
+/// `maxlen` specifies a _wchar_ limit! If the limit lands in the middle of a
+/// multi-byte UTF-16 sequence, it may convert a portion of the final character
+/// to one or more Unicode character U+FFFD (REPLACEMENT CHARACTER) so as not
+/// to overflow a buffer.
+///
+/// `maxlen` specifies a maximum number of wchar_t values to compare; if the
+/// strings match to this number of wchar_t (or both have matched to a
+/// null-terminator character before this number of bytes), they will be
+/// considered equal.
+///
+/// \param str1 The first string to compare. NULL is not permitted!
+/// \param str2 The second string to compare. NULL is not permitted!
+/// \param maxlen The maximum number of wchar_t values to compare.
+/// \returns less than zero if str1 is "less than" str2, greater than zero if
+/// str1 is "greater than" str2, and zero if the strings match
+/// exactly.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.0.0.
+///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_wcsncasecmp(const wchar_t *str1, const wchar_t *str2, size_t len)
+/// extern DECLSPEC int SDLCALL SDL_wcsncasecmp(const wchar_t *str1, const wchar_t *str2, size_t maxlen)
 /// ```
-int sdlWcsncasecmp(Pointer<Int16> str1, Pointer<Int16> str2, int len) {
+int sdlWcsncasecmp(Pointer<Int16> str1, Pointer<Int16> str2, int maxlen) {
   final sdlWcsncasecmpLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<Int16> str1, Pointer<Int16> str2, Uint32 len),
+      Int32 Function(Pointer<Int16> str1, Pointer<Int16> str2, Uint32 maxlen),
       int Function(Pointer<Int16> str1, Pointer<Int16> str2,
-          int len)>('SDL_wcsncasecmp');
-  return sdlWcsncasecmpLookupFunction(str1, str2, len);
+          int maxlen)>('SDL_wcsncasecmp');
+  return sdlWcsncasecmpLookupFunction(str1, str2, maxlen);
 }
 
 /// ```c
@@ -778,6 +1099,22 @@ Pointer<Int8> sdlStrrev(Pointer<Int8> str) {
   return sdlStrrevLookupFunction(str);
 }
 
+///
+/// Convert a string to uppercase.
+///
+/// **WARNING**: Regardless of system locale, this will only convert ASCII
+/// values 'A' through 'Z' to uppercase.
+///
+/// This function operates on a null-terminated string of bytes--even if it is
+/// malformed UTF-8!--and converts ASCII characters 'a' through 'z' to their
+/// uppercase equivalents in-place, returning the original `str` pointer.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_strlwr
+///
 /// ```c
 /// extern DECLSPEC char *SDLCALL SDL_strupr(char *str)
 /// ```
@@ -788,6 +1125,25 @@ Pointer<Int8> sdlStrupr(Pointer<Int8> str) {
   return sdlStruprLookupFunction(str);
 }
 
+///
+/// Convert a string to lowercase.
+///
+/// **WARNING**: Regardless of system locale, this will only convert ASCII
+/// values 'A' through 'Z' to lowercase.
+///
+/// This function operates on a null-terminated string of bytes--even if it is
+/// malformed UTF-8!--and converts ASCII characters 'A' through 'Z' to their
+/// lowercase equivalents in-place, returning the original `str` pointer.
+///
+/// \param str The string to convert in-place.
+/// \returns The `str` pointer passed into this function.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_strupr
+///
 /// ```c
 /// extern DECLSPEC char *SDLCALL SDL_strlwr(char *str)
 /// ```
@@ -1082,6 +1438,24 @@ double sdlStrtod(String? str, Pointer<Pointer<Int8>> endp) {
   return result;
 }
 
+///
+/// Compare two null-terminated UTF-8 strings.
+///
+/// Due to the nature of UTF-8 encoding, this will work with Unicode strings,
+/// since effectively this function just compares bytes until it hits a
+/// null-terminating character. Also due to the nature of UTF-8, this can be
+/// used with SDL_qsort() to put strings in (roughly) alphabetical order.
+///
+/// \param str1 The first string to compare. NULL is not permitted!
+/// \param str2 The second string to compare. NULL is not permitted!
+/// \returns less than zero if str1 is "less than" str2, greater than zero if
+/// str1 is "greater than" str2, and zero if the strings match
+/// exactly.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.0.0.
+///
 /// ```c
 /// extern DECLSPEC int SDLCALL SDL_strcmp(const char *str1, const char *str2)
 /// ```
@@ -1097,6 +1471,34 @@ int sdlStrcmp(String? str1, String? str2) {
   return result;
 }
 
+///
+/// Compare two UTF-8 strings up to a number of bytes.
+///
+/// Due to the nature of UTF-8 encoding, this will work with Unicode strings,
+/// since effectively this function just compares bytes until it hits a
+/// null-terminating character. Also due to the nature of UTF-8, this can be
+/// used with SDL_qsort() to put strings in (roughly) alphabetical order.
+///
+/// Note that while this function is intended to be used with UTF-8, it is
+/// doing a bytewise comparison, and `maxlen` specifies a _byte_ limit! If the
+/// limit lands in the middle of a multi-byte UTF-8 sequence, it will only
+/// compare a portion of the final character.
+///
+/// `maxlen` specifies a maximum number of bytes to compare; if the strings
+/// match to this number of bytes (or both have matched to a null-terminator
+/// character before this number of bytes), they will be considered equal.
+///
+/// \param str1 The first string to compare. NULL is not permitted!
+/// \param str2 The second string to compare. NULL is not permitted!
+/// \param maxlen The maximum number of _bytes_ to compare.
+/// \returns less than zero if str1 is "less than" str2, greater than zero if
+/// str1 is "greater than" str2, and zero if the strings match
+/// exactly.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.0.0.
+///
 /// ```c
 /// extern DECLSPEC int SDLCALL SDL_strncmp(const char *str1, const char *str2, size_t maxlen)
 /// ```
@@ -1113,6 +1515,32 @@ int sdlStrncmp(String? str1, String? str2, int maxlen) {
   return result;
 }
 
+///
+/// Compare two null-terminated UTF-8 strings, case-insensitively.
+///
+/// This will work with Unicode strings, using a technique called
+/// "case-folding" to handle the vast majority of case-sensitive human
+/// languages regardless of system locale. It can deal with expanding values: a
+/// German Eszett character can compare against two ASCII 's' chars and be
+/// considered a match, for example. A notable exception: it does not handle
+/// the Turkish 'i' character; human language is complicated!
+///
+/// Since this handles Unicode, it expects the string to be well-formed UTF-8
+/// and not a null-terminated string of arbitrary bytes. Bytes that are not
+/// valid UTF-8 are treated as Unicode character U+FFFD (REPLACEMENT
+/// CHARACTER), which is to say two strings of random bits may turn out to
+/// match if they convert to the same amount of replacement characters.
+///
+/// \param str1 The first string to compare. NULL is not permitted!
+/// \param str2 The second string to compare. NULL is not permitted!
+/// \returns less than zero if str1 is "less than" str2, greater than zero if
+/// str1 is "greater than" str2, and zero if the strings match
+/// exactly.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.0.0.
+///
 /// ```c
 /// extern DECLSPEC int SDLCALL SDL_strcasecmp(const char *str1, const char *str2)
 /// ```
@@ -1128,17 +1556,54 @@ int sdlStrcasecmp(String? str1, String? str2) {
   return result;
 }
 
+///
+/// Compare two UTF-8 strings, case-insensitively, up to a number of bytes.
+///
+/// This will work with Unicode strings, using a technique called
+/// "case-folding" to handle the vast majority of case-sensitive human
+/// languages regardless of system locale. It can deal with expanding values: a
+/// German Eszett character can compare against two ASCII 's' chars and be
+/// considered a match, for example. A notable exception: it does not handle
+/// the Turkish 'i' character; human language is complicated!
+///
+/// Since this handles Unicode, it expects the string to be well-formed UTF-8
+/// and not a null-terminated string of arbitrary bytes. Bytes that are not
+/// valid UTF-8 are treated as Unicode character U+FFFD (REPLACEMENT
+/// CHARACTER), which is to say two strings of random bits may turn out to
+/// match if they convert to the same amount of replacement characters.
+///
+/// Note that while this function is intended to be used with UTF-8, `maxlen`
+/// specifies a _byte_ limit! If the limit lands in the middle of a multi-byte
+/// UTF-8 sequence, it may convert a portion of the final character to one or
+/// more Unicode character U+FFFD (REPLACEMENT CHARACTER) so as not to overflow
+/// a buffer.
+///
+/// `maxlen` specifies a maximum number of bytes to compare; if the strings
+/// match to this number of bytes (or both have matched to a null-terminator
+/// character before this number of bytes), they will be considered equal.
+///
+/// \param str1 The first string to compare. NULL is not permitted!
+/// \param str2 The second string to compare. NULL is not permitted!
+/// \param maxlen The maximum number of bytes to compare.
+/// \returns less than zero if str1 is "less than" str2, greater than zero if
+/// str1 is "greater than" str2, and zero if the strings match
+/// exactly.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.0.0.
+///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_strncasecmp(const char *str1, const char *str2, size_t len)
+/// extern DECLSPEC int SDLCALL SDL_strncasecmp(const char *str1, const char *str2, size_t maxlen)
 /// ```
-int sdlStrncasecmp(String? str1, String? str2, int len) {
+int sdlStrncasecmp(String? str1, String? str2, int maxlen) {
   final sdlStrncasecmpLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<Utf8> str1, Pointer<Utf8> str2, Uint32 len),
-      int Function(
-          Pointer<Utf8> str1, Pointer<Utf8> str2, int len)>('SDL_strncasecmp');
+      Int32 Function(Pointer<Utf8> str1, Pointer<Utf8> str2, Uint32 maxlen),
+      int Function(Pointer<Utf8> str1, Pointer<Utf8> str2,
+          int maxlen)>('SDL_strncasecmp');
   final str1Pointer = str1 != null ? str1.toNativeUtf8() : nullptr;
   final str2Pointer = str2 != null ? str2.toNativeUtf8() : nullptr;
-  final result = sdlStrncasecmpLookupFunction(str1Pointer, str2Pointer, len);
+  final result = sdlStrncasecmpLookupFunction(str1Pointer, str2Pointer, maxlen);
   calloc.free(str1Pointer);
   calloc.free(str2Pointer);
   return result;
@@ -1279,6 +1744,8 @@ int sdlVasprintf(
 ///
 /// \param x floating point value, in radians.
 /// \returns arc cosine of `x`.
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///

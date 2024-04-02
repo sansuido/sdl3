@@ -73,23 +73,25 @@ typedef SdlLogOutputFunctionDart = void Function(Pointer<NativeType> userdata,
 typedef SdlLogOutputFunction = Void Function(Pointer<NativeType> userdata,
     Int32 category, Int32 priority, Pointer<Utf8> message);
 
-// typedef int (SDLCALL *SDL_AppInit_func)(int argc, char *argv[])
-typedef SdlAppInitFuncDart = int Function(
+// typedef int (SDLCALL *SDL_AppInit_func)(void **appstate, int argc, char *argv[])
+typedef SdlAppInitFuncDart = int Function(Pointer<Pointer<NativeType>> appstate,
     int argc, Pointer<Pointer<Int8>> argv);
-typedef SdlAppInitFunc = Int32 Function(
+typedef SdlAppInitFunc = Int32 Function(Pointer<Pointer<NativeType>> appstate,
     Int32 argc, Pointer<Pointer<Int8>> argv);
 
-// typedef int (SDLCALL *SDL_AppIterate_func)(void)
-typedef SdlAppIterateFuncDart = int Function();
-typedef SdlAppIterateFunc = Int32 Function();
+// typedef int (SDLCALL *SDL_AppIterate_func)(void *appstate)
+typedef SdlAppIterateFuncDart = int Function(Pointer<NativeType> appstate);
+typedef SdlAppIterateFunc = Int32 Function(Pointer<NativeType> appstate);
 
-// typedef int (SDLCALL *SDL_AppEvent_func)(const SDL_Event *event)
-typedef SdlAppEventFuncDart = int Function(Pointer<SdlEvent> event);
-typedef SdlAppEventFunc = Int32 Function(Pointer<SdlEvent> event);
+// typedef int (SDLCALL *SDL_AppEvent_func)(void *appstate, const SDL_Event *event)
+typedef SdlAppEventFuncDart = int Function(
+    Pointer<NativeType> appstate, Pointer<SdlEvent> event);
+typedef SdlAppEventFunc = Int32 Function(
+    Pointer<NativeType> appstate, Pointer<SdlEvent> event);
 
-// typedef void (SDLCALL *SDL_AppQuit_func)(void)
-typedef SdlAppQuitFuncDart = void Function();
-typedef SdlAppQuitFunc = Void Function();
+// typedef void (SDLCALL *SDL_AppQuit_func)(void *appstate)
+typedef SdlAppQuitFuncDart = void Function(Pointer<NativeType> appstate);
+typedef SdlAppQuitFunc = Void Function(Pointer<NativeType> appstate);
 
 // typedef int (SDLCALL *SDL_main_func)(int argc, char *argv[])
 typedef SdlMainFuncDart = int Function(int argc, Pointer<Pointer<Int8>> argv);

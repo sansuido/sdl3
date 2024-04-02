@@ -203,11 +203,6 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
     return result;
   }
 
-  void setGrab(bool grabbed) {
-    // 1557
-    sdlSetWindowGrab(this, grabbed);
-  }
-
   void setKeyboardGrab(bool grabbed) {
     // 1596
     sdlSetWindowKeyboardGrab(this, grabbed);
@@ -216,11 +211,6 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   void setMouseGrab(bool grabbed) {
     // 1621
     sdlSetWindowMouseGrab(this, grabbed);
-  }
-
-  bool getGrab() {
-    // 1642
-    return sdlGetWindowGrab(this);
   }
 
   bool getKeyboardGrab() {
