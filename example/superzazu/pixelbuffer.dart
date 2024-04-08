@@ -25,8 +25,7 @@ int main() {
     return 1;
   }
   // create renderer
-  var renderer = window
-      .createRenderer(SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+  var renderer = window.createRenderer(SDL_RENDERER_PRESENTVSYNC);
   if (renderer == nullptr) {
     print("Unable to create renderer: ${sdlGetError()}");
     window.destroy();

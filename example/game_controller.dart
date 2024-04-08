@@ -21,8 +21,7 @@ int main() {
     sdlQuit();
     return -1;
   }
-  var renderer = window
-      .createRenderer(SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+  var renderer = window.createRenderer(SDL_RENDERER_PRESENTVSYNC);
   if (renderer == nullptr) {
     print(sdlGetError());
     window.destroy();

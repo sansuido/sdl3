@@ -32,8 +32,7 @@ bool init() {
     print(sdlGetError());
     return false;
   }
-  gRenderer = gWindow
-      .createRenderer(SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+  gRenderer = gWindow.createRenderer(SDL_RENDERER_PRESENTVSYNC);
   if (gRenderer == nullptr) {
     print(sdlGetError());
     return false;

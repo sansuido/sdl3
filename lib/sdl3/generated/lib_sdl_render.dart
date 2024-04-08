@@ -121,10 +121,6 @@ int sdlCreateWindowAndRenderer(
 /// need a specific renderer, specify NULL and SDL will attempt to choose the
 /// best option for you, based on what is available on the user's system.
 ///
-/// If you pass SDL_RENDERER_SOFTWARE in the flags, you will get a software
-/// renderer, otherwise you will get a hardware accelerated renderer if
-/// available.
-///
 /// By default the rendering size matches the window size in pixels, but you
 /// can call SDL_SetRenderLogicalPresentation() to change the content size and
 /// scaling options.
@@ -795,16 +791,16 @@ Pointer<SdlRenderer> sdlGetRendererFromTexture(Pointer<SdlTexture> texture) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_QueryTexture(SDL_Texture *texture, Uint32 *format, int *access, int *w, int *h)
+/// extern DECLSPEC int SDLCALL SDL_QueryTexture(SDL_Texture *texture, SDL_PixelFormatEnum *format, int *access, int *w, int *h)
 /// ```
-int sdlQueryTexture(Pointer<SdlTexture> texture, Pointer<Uint32> format,
+int sdlQueryTexture(Pointer<SdlTexture> texture, Pointer<Int32> format,
     Pointer<Int32> access, Pointer<Int32> w, Pointer<Int32> h) {
   final sdlQueryTextureLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlTexture> texture, Pointer<Uint32> format,
+      Int32 Function(Pointer<SdlTexture> texture, Pointer<Int32> format,
           Pointer<Int32> access, Pointer<Int32> w, Pointer<Int32> h),
       int Function(
           Pointer<SdlTexture> texture,
-          Pointer<Uint32> format,
+          Pointer<Int32> format,
           Pointer<Int32> access,
           Pointer<Int32> w,
           Pointer<Int32> h)>('SDL_QueryTexture');

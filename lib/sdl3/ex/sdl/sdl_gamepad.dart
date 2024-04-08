@@ -979,20 +979,45 @@ extension SdlGamepadPointerEx on Pointer<SdlGamepad> {
   }
 
   ///
-  /// Get the battery level of a gamepad, if available.
+  /// Get the connection state of a gamepad.
   ///
-  /// \param gamepad a gamepad identifier previously returned by
-  /// SDL_OpenGamepad()
-  /// \returns the current battery level as SDL_JoystickPowerLevel on success or
-  /// `SDL_JOYSTICK_POWER_UNKNOWN` if it is unknown
+  /// \param gamepad the gamepad object to query.
+  /// \returns the connection state on success or
+  /// `SDL_JOYSTICK_CONNECTION_INVALID` on failure; call SDL_GetError()
+  /// for more information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
   /// ```c
-  /// extern DECLSPEC SDL_JoystickPowerLevel SDLCALL SDL_GetGamepadPowerLevel(SDL_Gamepad *gamepad)
+  /// extern DECLSPEC SDL_JoystickConnectionState SDLCALL SDL_GetGamepadConnectionState(SDL_Gamepad *gamepad)
   /// ```
-  int getPowerLevel() {
-    return sdlGetGamepadPowerLevel(this);
+  int sdlGetConnectionState() {
+    return sdlGetGamepadConnectionState(this);
+  }
+
+  ///
+  /// Get the battery state of a gamepad.
+  ///
+  /// You should never take a battery status as absolute truth. Batteries
+  /// (especially failing batteries) are delicate hardware, and the values
+  /// reported here are best estimates based on what that hardware reports. It's
+  /// not uncommon for older batteries to lose stored power much faster than it
+  /// reports, or completely drain when reporting it has 20 percent left, etc.
+  ///
+  /// \param gamepad the gamepad object to query.
+  /// \param percent a pointer filled in with the percentage of battery life
+  /// left, between 0 and 100, or NULL to ignore. This will be
+  /// filled in with -1 we can't determine a value or there is no
+  /// battery.
+  /// \returns the current battery state.
+  ///
+  /// \since This function is available since SDL 3.0.0.
+  ///
+  /// ```c
+  /// extern DECLSPEC SDL_PowerState SDLCALL SDL_GetGamepadPowerInfo(SDL_Gamepad *gamepad, int *percent)
+  /// ```
+  int getPowerInfo(Pointer<Int32> percent) {
+    return sdlGetGamepadPowerInfo(this, percent);
   }
 
   ///

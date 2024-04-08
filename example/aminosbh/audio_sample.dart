@@ -113,8 +113,7 @@ int main() {
     return 0;
   }
   // Create renderer
-  var renderer = window
-      .createRenderer(SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+  var renderer = window.createRenderer(SDL_RENDERER_PRESENTVSYNC);
   if (renderer == nullptr) {
     print('Renderer could not be created!\n'
         'SDL_Error: ${sdlGetError()}\n');

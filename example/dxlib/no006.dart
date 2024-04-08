@@ -53,8 +53,7 @@ class Game {
     if (window == nullptr) {
       return false;
     }
-    renderer = window
-        .createRenderer(SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+    renderer = window.createRenderer(SDL_RENDERER_PRESENTVSYNC);
     if (renderer == nullptr) {
       return false;
     }

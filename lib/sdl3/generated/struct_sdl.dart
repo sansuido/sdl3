@@ -431,7 +431,7 @@ final class SdlJoyAxisEvent extends Struct {
 // SDL_JoyBallEvent
 final class SdlJoyBallEvent extends Struct {
   // [0]+(4)
-  @Uint32()
+  @Int32()
   external int type;
   // [4]+(4)
   @Uint32()
@@ -556,7 +556,13 @@ final class SdlJoyBatteryEvent extends Struct {
   external int which;
   // [20]+(4)
   @Int32()
-  external int level;
+  external int state;
+  // [24]+(4)
+  @Int32()
+  external int percent;
+  // [] +(4)
+  @Uint32()
+  external int blank_1;
 }
 
 // SDL_GamepadAxisEvent

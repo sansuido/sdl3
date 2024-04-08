@@ -29,8 +29,7 @@ bool init() {
       print(sdlGetError());
       success = false;
     } else {
-      gRenderer = gWindow
-          .createRenderer(SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+      gRenderer = gWindow.createRenderer(SDL_RENDERER_PRESENTVSYNC);
       if (gRenderer == nullptr) {
         success = false;
       }

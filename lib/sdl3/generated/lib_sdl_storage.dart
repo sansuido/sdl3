@@ -318,7 +318,11 @@ int sdlCreateStorageDirectory(Pointer<SdlStorage> storage, String? path) {
 }
 
 ///
-/// Enumerate a directory in a storage container.
+/// Enumerate a directory in a storage container through a callback function.
+///
+/// This function provides every directory entry through an app-provided
+/// callback, called once for each directory entry, until all results have been
+/// provided or the callback returns <= 0.
 ///
 /// \param storage a storage container
 /// \param path the path of the directory to enumerate
@@ -466,4 +470,66 @@ int sdlGetStorageSpaceRemaining(Pointer<SdlStorage> storage) {
       int Function(
           Pointer<SdlStorage> storage)>('SDL_GetStorageSpaceRemaining');
   return sdlGetStorageSpaceRemainingLookupFunction(storage);
+}
+
+///
+/// Enumerate a directory tree, filtered by pattern, and return a list.
+///
+/// Files are filtered out if they don't match the string in `pattern`, which
+/// may contain wildcard characters '*' (match everything) and '?' (match one
+/// character). If pattern is NULL, no filtering is done and all results are
+/// returned. Subdirectories are permitted, and are specified with a path
+/// separator of '/'. Wildcard characters '*' and '?' never match a path
+/// separator.
+///
+/// `flags` may be set to SDL_GLOB_CASEINSENSITIVE to make the pattern matching
+/// case-insensitive.
+///
+/// The returned array is always NULL-terminated, for your iterating
+/// convenience, but if `count` is non-NULL, on return it will contain the
+/// number of items in the array, not counting the NULL terminator.
+///
+/// You must free the returned pointer with SDL_free() when done with it.
+///
+/// \param storage a storage container
+/// \param path the path of the directory to enumerate
+/// \param pattern the pattern that files in the directory must match. Can be
+/// NULL.
+/// \param flags `SDL_GLOB_*` bitflags that affect this search.
+/// \param count on return, will be set to the number of items in the returned
+/// array. Can be NULL.
+/// \returns an array of strings on success or NULL on failure; call
+/// SDL_GetError() for more information. The caller should pass the
+/// returned pointer to SDL_free when done with it.
+///
+/// \threadsafety It is safe to call this function from any thread, assuming
+/// the `storage` object is thread-safe.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// ```c
+/// extern DECLSPEC char **SDLCALL SDL_GlobStorageDirectory(SDL_Storage *storage, const char *path, const char *pattern, Uint32 flags, int *count)
+/// ```
+Pointer<Pointer<Int8>> sdlGlobStorageDirectory(Pointer<SdlStorage> storage,
+    String? path, String? pattern, int flags, Pointer<Int32> count) {
+  final sdlGlobStorageDirectoryLookupFunction = libSdl3.lookupFunction<
+      Pointer<Pointer<Int8>> Function(
+          Pointer<SdlStorage> storage,
+          Pointer<Utf8> path,
+          Pointer<Utf8> pattern,
+          Uint32 flags,
+          Pointer<Int32> count),
+      Pointer<Pointer<Int8>> Function(
+          Pointer<SdlStorage> storage,
+          Pointer<Utf8> path,
+          Pointer<Utf8> pattern,
+          int flags,
+          Pointer<Int32> count)>('SDL_GlobStorageDirectory');
+  final pathPointer = path != null ? path.toNativeUtf8() : nullptr;
+  final patternPointer = pattern != null ? pattern.toNativeUtf8() : nullptr;
+  final result = sdlGlobStorageDirectoryLookupFunction(
+      storage, pathPointer, patternPointer, flags, count);
+  calloc.free(pathPointer);
+  calloc.free(patternPointer);
+  return result;
 }

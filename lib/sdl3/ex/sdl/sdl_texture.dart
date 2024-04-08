@@ -7,7 +7,30 @@ import '../../generated/lib_sdl_render.dart';
 extension SdlTexturePointerEx on Pointer<SdlTexture> {
   // lib_sdl_renderer.dart
 
-  int query(Pointer<Uint32> format, Pointer<Int32> access, Pointer<Int32> w,
+  ///
+  /// Query the attributes of a texture.
+  ///
+  /// \param texture the texture to query
+  /// \param format a pointer filled in with the raw format of the texture; the
+  /// actual format may differ, but pixel transfers will use this
+  /// format (one of the SDL_PixelFormatEnum values). This argument
+  /// can be NULL if you don't need this information.
+  /// \param access a pointer filled in with the actual access to the texture
+  /// (one of the SDL_TextureAccess values). This argument can be
+  /// NULL if you don't need this information.
+  /// \param w a pointer filled in with the width of the texture in pixels. This
+  /// argument can be NULL if you don't need this information.
+  /// \param h a pointer filled in with the height of the texture in pixels. This
+  /// argument can be NULL if you don't need this information.
+  /// \returns 0 on success or a negative error code on failure; call
+  /// SDL_GetError() for more information.
+  ///
+  /// \since This function is available since SDL 3.0.0.
+  ///
+  /// ```c
+  /// extern DECLSPEC int SDLCALL SDL_QueryTexture(SDL_Texture *texture, SDL_PixelFormatEnum *format, int *access, int *w, int *h)
+  /// ```
+  int query(Pointer<Int32> format, Pointer<Int32> access, Pointer<Int32> w,
       Pointer<Int32> h) {
     // 357
     return sdlQueryTexture(this, format, access, w, h);
@@ -15,7 +38,7 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
 
   int? getAccess() {
     int? result;
-    var accessPointer = calloc<Uint32>();
+    var accessPointer = calloc<Int32>();
     if (query(accessPointer, nullptr, nullptr, nullptr) == 0) {
       result = accessPointer.value;
     }

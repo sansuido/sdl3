@@ -1429,20 +1429,53 @@ void sdlCloseJoystick(Pointer<SdlJoystick> joystick) {
 }
 
 ///
-/// Get the battery level of a joystick as SDL_JoystickPowerLevel.
+/// Get the connection state of a joystick.
 ///
-/// \param joystick the SDL_Joystick to query
-/// \returns the current battery level as SDL_JoystickPowerLevel on success or
-/// `SDL_JOYSTICK_POWER_UNKNOWN` if it is unknown
+/// \param joystick The joystick to query
+/// \returns the connection state on success or
+/// `SDL_JOYSTICK_CONNECTION_INVALID` on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC SDL_JoystickPowerLevel SDLCALL SDL_GetJoystickPowerLevel(SDL_Joystick *joystick)
+/// extern DECLSPEC SDL_JoystickConnectionState SDLCALL SDL_GetJoystickConnectionState(SDL_Joystick *joystick)
 /// ```
-int sdlGetJoystickPowerLevel(Pointer<SdlJoystick> joystick) {
-  final sdlGetJoystickPowerLevelLookupFunction = libSdl3.lookupFunction<
+int sdlGetJoystickConnectionState(Pointer<SdlJoystick> joystick) {
+  final sdlGetJoystickConnectionStateLookupFunction = libSdl3.lookupFunction<
       Int32 Function(Pointer<SdlJoystick> joystick),
-      int Function(Pointer<SdlJoystick> joystick)>('SDL_GetJoystickPowerLevel');
-  return sdlGetJoystickPowerLevelLookupFunction(joystick);
+      int Function(
+          Pointer<SdlJoystick> joystick)>('SDL_GetJoystickConnectionState');
+  return sdlGetJoystickConnectionStateLookupFunction(joystick);
+}
+
+///
+/// Get the battery state of a joystick.
+///
+/// You should never take a battery status as absolute truth. Batteries
+/// (especially failing batteries) are delicate hardware, and the values
+/// reported here are best estimates based on what that hardware reports. It's
+/// not uncommon for older batteries to lose stored power much faster than it
+/// reports, or completely drain when reporting it has 20 percent left, etc.
+///
+/// \param joystick The joystick to query
+/// \param percent a pointer filled in with the percentage of battery life
+/// left, between 0 and 100, or NULL to ignore. This will be
+/// filled in with -1 we can't determine a value or there is no
+/// battery.
+/// \returns the current battery state or `SDL_POWERSTATE_ERROR` on failure;
+/// call SDL_GetError() for more information.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// ```c
+/// extern DECLSPEC SDL_PowerState SDLCALL SDL_GetJoystickPowerInfo(SDL_Joystick *joystick, int *percent)
+/// ```
+int sdlGetJoystickPowerInfo(
+    Pointer<SdlJoystick> joystick, Pointer<Int32> percent) {
+  final sdlGetJoystickPowerInfoLookupFunction = libSdl3.lookupFunction<
+      Int32 Function(Pointer<SdlJoystick> joystick, Pointer<Int32> percent),
+      int Function(Pointer<SdlJoystick> joystick,
+          Pointer<Int32> percent)>('SDL_GetJoystickPowerInfo');
+  return sdlGetJoystickPowerInfoLookupFunction(joystick, percent);
 }
