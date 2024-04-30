@@ -77,7 +77,7 @@ String? sdlGetCurrentVideoDriver() {
 }
 
 ///
-/// Get the current system theme
+/// Get the current system theme.
 ///
 /// \returns the current system theme, light, dark, or unknown
 ///
@@ -334,7 +334,7 @@ double sdlGetDisplayContentScale(int displayId) {
 /// - pixel density -> lowest to highest
 ///
 /// \param displayID the instance ID of the display to query
-/// \param count a pointer filled in with the number of displays returned
+/// \param count a pointer filled in with the number of display modes returned
 /// \returns a NULL terminated array of display mode pointers which should be
 /// freed with SDL_free(), or NULL on error; call SDL_GetError() for
 /// more details.
@@ -802,7 +802,7 @@ Pointer<SdlWindow> sdlCreateWindow(String? title, int w, int h, int flags) {
 /// of the parent window
 /// \param w the width of the window
 /// \param h the height of the window
-/// \param flags SDL_WINDOW_TOOLTIP or SDL_WINDOW_POPUP MENU, and zero or more
+/// \param flags SDL_WINDOW_TOOLTIP or SDL_WINDOW_POPUP_MENU, and zero or more
 /// additional SDL_WindowFlags OR'd together.
 /// \returns the window that was created or NULL on failure; call
 /// SDL_GetError() for more information.
@@ -906,13 +906,14 @@ Pointer<SdlWindow> sdlCreatePopupWindow(Pointer<SdlWindow> parent, int offsetX,
 /// - `SDL_PROP_WINDOW_CREATE_WAYLAND_SURFACE_ROLE_CUSTOM_BOOLEAN` - true if
 /// the application wants to use the Wayland surface for a custom role and
 /// does not want it attached to an XDG toplevel window. See
-/// docs/README-wayland.md for more information on using custom surfaces.
-/// - `SDL_PROP_WINDOW_CREATE_WAYLAND_CREATE_EGL_WINDOW_BOOLEAN - true if the
+/// [README/wayland](README/wayland) for more information on using custom
+/// surfaces.
+/// - `SDL_PROP_WINDOW_CREATE_WAYLAND_CREATE_EGL_WINDOW_BOOLEAN` - true if the
 /// application wants an associated `wl_egl_window` object to be created,
 /// even if the window does not have the OpenGL property or flag set.
 /// - `SDL_PROP_WINDOW_CREATE_WAYLAND_WL_SURFACE_POINTER` - the wl_surface
 /// associated with the window, if you want to wrap an existing window. See
-/// docs/README-wayland.md for more information.
+/// [README/wayland](README/wayland) for more information.
 ///
 /// These are additional supported properties on Windows:
 ///
@@ -929,7 +930,7 @@ Pointer<SdlWindow> sdlCreatePopupWindow(Pointer<SdlWindow> parent, int offsetX,
 /// The window is implicitly shown if the "hidden" property is not set.
 ///
 /// Windows with the "tooltip" and "menu" properties are popup windows and have
-/// the behaviors and guidelines outlined in `SDL_CreatePopupWindow()`.
+/// the behaviors and guidelines outlined in SDL_CreatePopupWindow().
 ///
 /// \param props the properties to use
 /// \returns the window that was created or NULL on failure; call
@@ -1119,7 +1120,7 @@ Pointer<SdlWindow> sdlGetWindowParent(Pointer<SdlWindow> window) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetProperty
-/// \sa SDL_SetProperty
+/// \sa SDL_GetNumberProperty
 ///
 /// ```c
 /// extern DECLSPEC SDL_PropertiesID SDLCALL SDL_GetWindowProperties(SDL_Window *window)
@@ -2504,9 +2505,6 @@ int sdlFlashWindow(Pointer<SdlWindow> window, int operation) {
 ///
 /// Destroy a window.
 ///
-/// If the window has an associated SDL_Renderer, it will be implicitly
-/// destroyed as well.
-///
 /// If `window` is NULL, this function will return immediately after setting
 /// the SDL error message to "Invalid window". See SDL_GetError().
 ///
@@ -2531,8 +2529,7 @@ void sdlDestroyWindow(Pointer<SdlWindow> window) {
 ///
 /// Check whether the screensaver is currently enabled.
 ///
-/// The screensaver is disabled by default since SDL 2.0.2. Before SDL 2.0.2
-/// the screensaver was enabled by default.
+/// The screensaver is disabled by default.
 ///
 /// The default can also be changed using `SDL_HINT_VIDEO_ALLOW_SCREENSAVER`.
 ///
@@ -2581,8 +2578,7 @@ int sdlEnableScreenSaver() {
 /// If you disable the screensaver, it is automatically re-enabled when SDL
 /// quits.
 ///
-/// The screensaver is disabled by default since SDL 2.0.2. Before SDL 2.0.2
-/// the screensaver was enabled by default.
+/// The screensaver is disabled by default.
 ///
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.

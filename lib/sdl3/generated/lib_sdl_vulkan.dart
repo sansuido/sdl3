@@ -89,7 +89,7 @@ Pointer<NativeType> sdlVulkanGetVkGetInstanceProcAddr() {
 }
 
 ///
-/// Unload the Vulkan library previously loaded by SDL_Vulkan_LoadLibrary()
+/// Unload the Vulkan library previously loaded by SDL_Vulkan_LoadLibrary().
 ///
 /// \since This function is available since SDL 3.0.0.
 ///

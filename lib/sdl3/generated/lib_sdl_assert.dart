@@ -7,7 +7,7 @@ import 'struct_sdl.dart';
 ///
 /// Never call this directly.
 ///
-/// Use the SDL_assert* macros.
+/// Use the SDL_assert* macros instead.
 ///
 /// \param data assert data structure
 /// \param func function name

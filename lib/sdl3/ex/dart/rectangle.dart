@@ -64,13 +64,14 @@ extension RectangleEx on math.Rectangle<double> {
     return fromCenter(center_, size);
   }
 
-  math.Rectangle<double> expansion(num value) {
+  math.Rectangle<double> expansion(math.Point<double> value) {
     return fromCenter(
-        center, math.Point<double>(width + value, height + value));
+        center, math.Point<double>(width + value.x, height + value.y));
   }
 
-  math.Rectangle<double> expansionLT(num value) {
-    return fromLTWH(topLeft, math.Point<double>(width + value, height + value));
+  math.Rectangle<double> expansionLT(math.Point<double> value) {
+    return fromLTWH(
+        topLeft, math.Point<double>(width + value.x, height + value.y));
   }
 
   math.Rectangle<double> union(math.Rectangle<double> b) {

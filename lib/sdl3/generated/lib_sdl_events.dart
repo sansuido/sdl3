@@ -73,7 +73,7 @@ void sdlPumpEvents() {
 /// \sa SDL_PushEvent
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_PeepEvents(SDL_Event *events, int numevents, SDL_eventaction action, Uint32 minType, Uint32 maxType)
+/// extern DECLSPEC int SDLCALL SDL_PeepEvents(SDL_Event *events, int numevents, SDL_EventAction action, Uint32 minType, Uint32 maxType)
 /// ```
 int sdlPeepEvents(Pointer<SdlEvent> events, int numevents, int action,
     int minType, int maxType) {
@@ -397,6 +397,10 @@ int sdlPushEvent(Pointer<SdlEvent> event) {
 /// \param filter An SDL_EventFilter function to call when an event happens
 /// \param userdata a pointer that is passed to `filter`
 ///
+/// \threadsafety SDL may call the filter callback at any time from any thread;
+/// the application is responsible for locking resources the
+/// callback touches that need to be protected.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_AddEventWatch
@@ -550,7 +554,7 @@ void sdlFilterEvents(Pointer<NativeFunction<SdlEventFilter>> filter,
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_IsEventEnabled
+/// \sa SDL_EventEnabled
 ///
 /// ```c
 /// extern DECLSPEC void SDLCALL SDL_SetEventEnabled(Uint32 type, SDL_bool enabled)
@@ -604,7 +608,7 @@ int sdlRegisterEvents(int numevents) {
 }
 
 ///
-/// Allocate dynamic memory for an SDL event
+/// Allocate dynamic memory for an SDL event.
 ///
 /// You can use this to allocate memory for user events that will be
 /// automatically freed after the event is processed.

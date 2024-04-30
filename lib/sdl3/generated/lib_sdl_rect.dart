@@ -12,6 +12,8 @@ import 'struct_sdl.dart';
 /// \param B an SDL_Rect structure representing the second rectangle
 /// \returns SDL_TRUE if there is an intersection, SDL_FALSE otherwise.
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetRectIntersection

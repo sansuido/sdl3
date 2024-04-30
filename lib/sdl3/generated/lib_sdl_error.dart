@@ -107,7 +107,7 @@ void sdlClearError() {
 }
 
 ///
-/// SDL_Error()
+/// Set an SDL error from a list of error codes.
 ///
 /// \param code Error code
 /// \returns unconditionally -1.

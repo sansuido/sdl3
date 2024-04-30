@@ -4,7 +4,7 @@ import 'package:ffi/ffi.dart';
 import 'lib_sdl.dart';
 
 ///
-/// Get the global SDL properties
+/// Get the global SDL properties.
 ///
 /// \returns a valid property ID on success or 0 on failure; call
 /// SDL_GetError() for more information.
@@ -25,7 +25,7 @@ int sdlGetGlobalProperties() {
 }
 
 ///
-/// Create a set of properties
+/// Create a set of properties.
 ///
 /// All properties are automatically destroyed when SDL_Quit() is called.
 ///
@@ -49,7 +49,7 @@ int sdlCreateProperties() {
 }
 
 ///
-/// Copy a set of properties
+/// Copy a set of properties.
 ///
 /// Copy all the properties from one set of properties to another, with the
 /// exception of properties requiring cleanup (set using
@@ -76,7 +76,7 @@ int sdlCopyProperties(int src, int dst) {
 }
 
 ///
-/// Lock a set of properties
+/// Lock a set of properties.
 ///
 /// Obtain a multi-threaded lock for these properties. Other threads will wait
 /// while trying to lock these properties until they are unlocked. Properties
@@ -108,7 +108,7 @@ int sdlLockProperties(int props) {
 }
 
 ///
-/// Unlock a set of properties
+/// Unlock a set of properties.
 ///
 /// \param props the properties to unlock
 ///
@@ -130,7 +130,7 @@ void sdlUnlockProperties(int props) {
 
 ///
 /// Set a property on a set of properties with a cleanup function that is
-/// called when the property is deleted
+/// called when the property is deleted.
 ///
 /// The cleanup function is also called if setting the property fails for any
 /// reason.
@@ -181,7 +181,7 @@ int sdlSetPropertyWithCleanup(
 }
 
 ///
-/// Set a property on a set of properties
+/// Set a property on a set of properties.
 ///
 /// \param props the properties to modify
 /// \param name the name of the property to modify
@@ -217,7 +217,7 @@ int sdlSetProperty(int props, String? name, Pointer<NativeType> value) {
 }
 
 ///
-/// Set a string property on a set of properties
+/// Set a string property on a set of properties.
 ///
 /// This function makes a copy of the string; the caller does not have to
 /// preserve the data after this call completes.
@@ -252,7 +252,7 @@ int sdlSetStringProperty(int props, String? name, String? value) {
 }
 
 ///
-/// Set an integer property on a set of properties
+/// Set an integer property on a set of properties.
 ///
 /// \param props the properties to modify
 /// \param name the name of the property to modify
@@ -281,7 +281,7 @@ int sdlSetNumberProperty(int props, String? name, int value) {
 }
 
 ///
-/// Set a floating point property on a set of properties
+/// Set a floating point property on a set of properties.
 ///
 /// \param props the properties to modify
 /// \param name the name of the property to modify
@@ -310,7 +310,7 @@ int sdlSetFloatProperty(int props, String? name, double value) {
 }
 
 ///
-/// Set a boolean property on a set of properties
+/// Set a boolean property on a set of properties.
 ///
 /// \param props the properties to modify
 /// \param name the name of the property to modify
@@ -366,7 +366,7 @@ bool sdlHasProperty(int props, String? name) {
 }
 
 ///
-/// Get the type of a property on a set of properties
+/// Get the type of a property on a set of properties.
 ///
 /// \param props the properties to query
 /// \param name the name of the property to query
@@ -393,7 +393,7 @@ int sdlGetPropertyType(int props, String? name) {
 }
 
 ///
-/// Get a property on a set of properties
+/// Get a property on a set of properties.
 ///
 /// By convention, the names of properties that SDL exposes on objects will
 /// start with "SDL.", and properties that SDL uses internally will start with
@@ -439,7 +439,7 @@ Pointer<NativeType> sdlGetProperty(
 }
 
 ///
-/// Get a string property on a set of properties
+/// Get a string property on a set of properties.
 ///
 /// \param props the properties to query
 /// \param name the name of the property to query
@@ -478,7 +478,7 @@ String? sdlGetStringProperty(int props, String? name, String? defaultValue) {
 }
 
 ///
-/// Get a number property on a set of properties
+/// Get a number property on a set of properties.
 ///
 /// You can use SDL_GetPropertyType() to query whether the property exists and
 /// is a number property.
@@ -513,7 +513,7 @@ int sdlGetNumberProperty(int props, String? name, int defaultValue) {
 }
 
 ///
-/// Get a floating point property on a set of properties
+/// Get a floating point property on a set of properties.
 ///
 /// You can use SDL_GetPropertyType() to query whether the property exists and
 /// is a floating point property.
@@ -548,7 +548,7 @@ double sdlGetFloatProperty(int props, String? name, double defaultValue) {
 }
 
 ///
-/// Get a boolean property on a set of properties
+/// Get a boolean property on a set of properties.
 ///
 /// You can use SDL_GetPropertyType() to query whether the property exists and
 /// is a boolean property.
@@ -584,7 +584,7 @@ bool sdlGetBooleanProperty(int props, String? name, bool defaultValue) {
 }
 
 ///
-/// Clear a property on a set of properties
+/// Clear a property on a set of properties.
 ///
 /// \param props the properties to modify
 /// \param name the name of the property to clear
@@ -609,7 +609,7 @@ int sdlClearProperty(int props, String? name) {
 }
 
 ///
-/// Enumerate the properties on a set of properties
+/// Enumerate the properties on a set of properties.
 ///
 /// The callback function is called for each property on the set of properties.
 /// The properties are locked during enumeration.
@@ -644,7 +644,7 @@ int sdlEnumerateProperties(
 }
 
 ///
-/// Destroy a set of properties
+/// Destroy a set of properties.
 ///
 /// All properties are deleted and their cleanup functions will be called, if
 /// any.

@@ -1544,12 +1544,12 @@ int _drawQuadrants(Pointer<SdlRenderer> renderer, double x, double y, double dx,
 int _ellipseRgba(Pointer<SdlRenderer> renderer, double x, double y, double rx,
     double ry, int r, int g, int b, int a, int f) {
   int result;
-  double rxi, ryi;
-  double rx2, ry2, rx22, ry22;
-  double error;
-  double curX, curY, curXp1, curYm1;
-  double scrX, scrY, oldX, oldY;
-  double deltaX, deltaY;
+  int rxi, ryi;
+  int rx2, ry2, rx22, ry22;
+  int error;
+  int curX, curY, curXp1, curYm1;
+  int scrX, scrY, oldX, oldY;
+  int deltaX, deltaY;
   int ellipseOverscan;
 
   /*
@@ -1585,8 +1585,8 @@ int _ellipseRgba(Pointer<SdlRenderer> renderer, double x, double y, double rx,
   /*
  	 * Adjust overscan 
 	 */
-  rxi = rx;
-  ryi = ry;
+  rxi = rx.toInt();
+  ryi = ry.toInt();
   if (rxi >= 512 || ryi >= 512) {
     ellipseOverscan = defaultEllipseOverscan ~/ 4;
   } else if (rxi >= 256 || ryi >= 256) {
@@ -1603,8 +1603,8 @@ int _ellipseRgba(Pointer<SdlRenderer> renderer, double x, double y, double rx,
   result |= _drawQuadrants(renderer, x, y, 0, ry, f);
 
   /* Midpoint ellipse algorithm with overdraw */
-  rxi *= ellipseOverscan.toDouble();
-  ryi *= ellipseOverscan.toDouble();
+  rxi *= ellipseOverscan;
+  ryi *= ellipseOverscan;
   rx2 = rxi * rxi;
   rx22 = rx2 + rx2;
   ry2 = ryi * ryi;
@@ -1627,10 +1627,11 @@ int _ellipseRgba(Pointer<SdlRenderer> renderer, double x, double y, double rx,
       error -= deltaY;
     }
 
-    scrX = curX / ellipseOverscan;
-    scrY = curY / ellipseOverscan;
+    scrX = curX ~/ ellipseOverscan;
+    scrY = curY ~/ ellipseOverscan;
     if ((scrX != oldX && scrY == oldY) || (scrX != oldX && scrY != oldY)) {
-      result |= _drawQuadrants(renderer, x, y, scrX, scrY, f);
+      result |=
+          _drawQuadrants(renderer, x, y, scrX.toDouble(), scrY.toDouble(), f);
       oldX = scrX;
       oldY = scrY;
     }
@@ -1657,12 +1658,13 @@ int _ellipseRgba(Pointer<SdlRenderer> renderer, double x, double y, double rx,
         error += deltaX;
       }
 
-      scrX = curX / ellipseOverscan;
-      scrY = curY / ellipseOverscan;
+      scrX = curX ~/ ellipseOverscan;
+      scrY = curY ~/ ellipseOverscan;
       if ((scrX != oldX && scrY == oldY) || (scrX != oldX && scrY != oldY)) {
         oldY--;
         for (; oldY >= scrY; oldY--) {
-          result |= _drawQuadrants(renderer, x, y, scrX, oldY, f);
+          result |= _drawQuadrants(
+              renderer, x, y, scrX.toDouble(), oldY.toDouble(), f);
           /* prevent overdraw */
           if (f != 0) {
             oldY = scrY - 1;
@@ -1677,7 +1679,8 @@ int _ellipseRgba(Pointer<SdlRenderer> renderer, double x, double y, double rx,
     if (f == 0) {
       oldY--;
       for (; oldY >= 0; oldY--) {
-        result |= _drawQuadrants(renderer, x, y, scrX, oldY, f);
+        result |=
+            _drawQuadrants(renderer, x, y, scrX.toDouble(), oldY.toDouble(), f);
       }
     }
   }
@@ -3155,6 +3158,49 @@ void gfxPrimitivesSetFontRotation(int rotation) {
       }
     }
   }
+}
+
+Pointer<SdlSurface> createCharacterSurface(int c, int rotation) {
+  Pointer<SdlSurface> rotatedCharacter;
+  Pointer<SdlSurface> character;
+  Pointer<Uint32> pixels;
+  int ix, iy;
+  int patt;
+  int linepos;
+  /*
+  * Redraw character into surface
+  */
+  character = sdlCreateSurface(charWidth, charHeight, SDL_PIXELFORMAT_RGBA32);
+  if (character == nullptr) {
+    return nullptr;
+  }
+  var charpos = c * charSize;
+  pixels = character.ref.pixels.cast<Uint32>();
+  /*
+  * Drawing loop 
+  */
+  patt = 0;
+  linepos = 0;
+  for (iy = 0; iy < charHeight; iy++) {
+    patt = currentFontdata[charpos + iy];
+    for (ix = 0; ix < charWidth; ix++) {
+      var pixel = pixels + linepos;
+      if (patt & 0x80 != 0) {
+        pixel.value = 0xffffffff;
+      } else {
+        pixel.value = 0;
+      }
+      linepos++;
+      patt = patt << 1;
+    }
+  }
+  /* Maybe rotate and replace cached image */
+  if (rotation > 0) {
+    rotatedCharacter = rotateSurface90Degrees(character, rotation);
+    sdlDestroySurface(character);
+    character = rotatedCharacter;
+  }
+  return character;
 }
 
 /*!

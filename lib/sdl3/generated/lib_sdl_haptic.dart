@@ -481,8 +481,6 @@ int sdlRunHapticEffect(Pointer<SdlHaptic> haptic, int effect, int iterations) {
 ///
 /// Stop the haptic effect on its associated haptic device.
 ///
-/// *
-///
 /// \param haptic the SDL_Haptic device to stop the effect on
 /// \param effect the ID of the haptic effect to stop
 /// \returns 0 on success or a negative error code on failure; call

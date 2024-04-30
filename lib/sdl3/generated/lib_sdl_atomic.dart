@@ -77,6 +77,8 @@ void sdlUnlockSpinlock(Pointer<Int32> lock) {
 }
 
 ///
+/// Insert a memory release barrier.
+///
 /// Memory barriers are designed to prevent reads and writes from being
 /// reordered by the compiler and being seen out of order on multi-core CPUs.
 ///
@@ -95,6 +97,10 @@ void sdlUnlockSpinlock(Pointer<Int32> lock) {
 /// For more information on these semantics, take a look at the blog post:
 /// http://preshing.com/20120913/acquire-and-release-semantics
 ///
+/// \threadsafety Obviously this macro is safe to use from any thread at any
+/// time, but if you find yourself needing this, you are probably
+/// dealing with some very sensitive code; be careful!
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
@@ -108,8 +114,18 @@ void sdlMemoryBarrierReleaseFunction() {
 }
 
 ///
+/// Insert a memory acquire barrier.
+///
+/// Please refer to SDL_MemoryBarrierReleaseFunction for the details!
+///
+/// \threadsafety Obviously this function is safe to use from any thread at any
+/// time, but if you find yourself needing this, you are probably
+/// dealing with some very sensitive code; be careful!
+///
 /// \since This function is available since SDL 3.0.0.
-/// /
+///
+/// \sa SDL_MemoryBarrierReleaseFunction
+///
 /// ```c
 /// extern DECLSPEC void SDLCALL SDL_MemoryBarrierAcquireFunction(void)
 /// ```

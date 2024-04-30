@@ -144,7 +144,7 @@ int sdlGetSensorProperties(Pointer<SdlSensor> sensor) {
 }
 
 ///
-/// Get the implementation dependent name of a sensor
+/// Get the implementation dependent name of a sensor.
 ///
 /// \param sensor The SDL_Sensor object
 /// \returns the sensor name, or NULL if `sensor` is NULL.

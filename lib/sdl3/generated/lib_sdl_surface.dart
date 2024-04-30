@@ -413,7 +413,7 @@ int sdlSetSurfaceRle(Pointer<SdlSurface> surface, int flag) {
 }
 
 ///
-/// Returns whether the surface is RLE enabled
+/// Returns whether the surface is RLE enabled.
 ///
 /// It is safe to pass a NULL `surface` here; it will return SDL_FALSE.
 ///
@@ -470,7 +470,7 @@ int sdlSetSurfaceColorKey(Pointer<SdlSurface> surface, int flag, int key) {
 }
 
 ///
-/// Returns whether the surface has a color key
+/// Returns whether the surface has a color key.
 ///
 /// It is safe to pass a NULL `surface` here; it will return SDL_FALSE.
 ///
@@ -752,7 +752,7 @@ int sdlGetSurfaceClipRect(Pointer<SdlSurface> surface, Pointer<SdlRect> rect) {
 /// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
-/// /
+///
 /// ```c
 /// extern DECLSPEC int SDLCALL SDL_FlipSurface(SDL_Surface *surface, SDL_FlipMode flip)
 /// ```
@@ -775,7 +775,7 @@ int sdlFlipSurface(Pointer<SdlSurface> surface, int flip) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_DestroySurface
-/// /
+///
 /// ```c
 /// extern DECLSPEC SDL_Surface *SDLCALL SDL_DuplicateSurface(SDL_Surface *surface)
 /// ```
@@ -1324,7 +1324,7 @@ int sdlSoftStretch(Pointer<SdlSurface> src, Pointer<SdlRect> srcrect,
 /// \param dstrect the SDL_Rect structure representing the target rectangle in
 /// the destination surface, filled with the actual rectangle
 /// used after clipping
-/// \param scaleMode scale algorithm to be used
+/// \param scaleMode the SDL_ScaleMode to be used
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///

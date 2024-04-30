@@ -25,7 +25,7 @@ void sdlFree(Pointer<NativeType> mem) {
 }
 
 ///
-/// Get the original set of SDL memory functions
+/// Get the original set of SDL memory functions.
 ///
 /// \param malloc_func filled with malloc function
 /// \param calloc_func filled with calloc function
@@ -59,7 +59,7 @@ void sdlGetOriginalMemoryFunctions(
 }
 
 ///
-/// Get the current set of SDL memory functions
+/// Get the current set of SDL memory functions.
 ///
 /// \param malloc_func filled with malloc function
 /// \param calloc_func filled with calloc function
@@ -93,7 +93,7 @@ void sdlGetMemoryFunctions(
 }
 
 ///
-/// Replace SDL's memory allocation functions with a custom set
+/// Replace SDL's memory allocation functions with a custom set.
 ///
 /// \param malloc_func custom malloc function
 /// \param calloc_func custom calloc function
@@ -129,7 +129,7 @@ int sdlSetMemoryFunctions(
 }
 
 ///
-/// Allocate memory aligned to a specific value
+/// Allocate memory aligned to a specific value.
 ///
 /// If `alignment` is less than the size of `void *`, then it will be increased
 /// to match that.
@@ -159,7 +159,7 @@ Pointer<NativeType> sdlAlignedAlloc(int alignment, int size) {
 }
 
 ///
-/// Free memory allocated by SDL_aligned_alloc()
+/// Free memory allocated by SDL_aligned_alloc().
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -176,7 +176,7 @@ void sdlAlignedFree(Pointer<NativeType> mem) {
 }
 
 ///
-/// Get the number of outstanding (unfreed) allocations
+/// Get the number of outstanding (unfreed) allocations.
 ///
 /// \returns the number of allocations
 ///
@@ -1734,7 +1734,7 @@ int sdlVasprintf(
 }
 
 ///
-/// Use this function to compute arc cosine of `x`.
+/// Compute the arc cosine of `x`.
 ///
 /// The definition of `y = acos(x)` is `x = cos(y)`.
 ///
@@ -1742,12 +1742,24 @@ int sdlVasprintf(
 ///
 /// Range: `0 <= y <= Pi`
 ///
-/// \param x floating point value, in radians.
-/// \returns arc cosine of `x`.
+/// This function operates on double-precision floating point values, use
+/// SDL_acosf for single-precision floats.
+///
+/// This function may use a different approximation across different versions,
+/// platforms and configurations. i.e, it can return a different value given
+/// the same input on different machines or operating systems, or if SDL is
+/// updated.
+///
+/// \param x floating point value
+/// \returns arc cosine of `x`, in radians
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_acosf
+/// \sa SDL_asin
+/// \sa SDL_cos
 ///
 /// ```c
 /// extern DECLSPEC double SDLCALL SDL_acos(double x)
@@ -1758,6 +1770,32 @@ double sdlAcos(double x) {
   return sdlAcosLookupFunction(x);
 }
 
+///
+/// Compute the arc cosine of `x`.
+///
+/// The definition of `y = acos(x)` is `x = cos(y)`.
+///
+/// Domain: `-1 <= x <= 1`
+///
+/// Range: `0 <= y <= Pi`
+///
+/// This function operates on single-precision floating point values, use
+/// SDL_acos for double-precision floats.
+///
+/// This function may use a different approximation across different versions,
+/// platforms and configurations. i.e, it can return a different value given
+/// the same input on different machines or operating systems, or if SDL is
+/// updated.
+///
+/// \param x floating point value.
+/// \returns arc cosine of `x`, in radians
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_acos
+/// \sa SDL_asinf
+/// \sa SDL_cosf
+///
 /// ```c
 /// extern DECLSPEC float SDLCALL SDL_acosf(float x)
 /// ```
@@ -1767,6 +1805,32 @@ double sdlAcosf(double x) {
   return sdlAcosfLookupFunction(x);
 }
 
+///
+/// Compute the arc sine of `x`.
+///
+/// The definition of `y = asin(x)` is `x = sin(y)`.
+///
+/// Domain: `-1 <= x <= 1`
+///
+/// Range: `-Pi/2 <= y <= Pi/2`
+///
+/// This function operates on double-precision floating point values, use
+/// SDL_asinf for single-precision floats.
+///
+/// This function may use a different approximation across different versions,
+/// platforms and configurations. i.e, it can return a different value given
+/// the same input on different machines or operating systems, or if SDL is
+/// updated.
+///
+/// \param x floating point value.
+/// \returns arc sine of `x`, in radians.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_asinf
+/// \sa SDL_acos
+/// \sa SDL_sin
+///
 /// ```c
 /// extern DECLSPEC double SDLCALL SDL_asin(double x)
 /// ```
@@ -1776,6 +1840,32 @@ double sdlAsin(double x) {
   return sdlAsinLookupFunction(x);
 }
 
+///
+/// Compute the arc sine of `x`.
+///
+/// The definition of `y = asin(x)` is `x = sin(y)`.
+///
+/// Domain: `-1 <= x <= 1`
+///
+/// Range: `-Pi/2 <= y <= Pi/2`
+///
+/// This function operates on single-precision floating point values, use
+/// SDL_asin for double-precision floats.
+///
+/// This function may use a different approximation across different versions,
+/// platforms and configurations. i.e, it can return a different value given
+/// the same input on different machines or operating systems, or if SDL is
+/// updated.
+///
+/// \param x floating point value.
+/// \returns arc sine of `x`, in radians.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_asin
+/// \sa SDL_acosf
+/// \sa SDL_sinf
+///
 /// ```c
 /// extern DECLSPEC float SDLCALL SDL_asinf(float x)
 /// ```
@@ -1785,6 +1875,34 @@ double sdlAsinf(double x) {
   return sdlAsinfLookupFunction(x);
 }
 
+///
+/// Compute the arc tangent of `x`.
+///
+/// The definition of `y = atan(x)` is `x = tan(y)`.
+///
+/// Domain: `-INF <= x <= INF`
+///
+/// Range: `-Pi/2 <= y <= Pi/2`
+///
+/// This function operates on double-precision floating point values, use
+/// SDL_atanf for single-precision floats.
+///
+/// To calculate the arc tangent of y / x, use SDL_atan2.
+///
+/// This function may use a different approximation across different versions,
+/// platforms and configurations. i.e, it can return a different value given
+/// the same input on different machines or operating systems, or if SDL is
+/// updated.
+///
+/// \param x floating point value.
+/// \returns arc tangent of of `x` in radians, or 0 if `x = 0`.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_atanf
+/// \sa SDL_atan2
+/// \sa SDL_tan
+///
 /// ```c
 /// extern DECLSPEC double SDLCALL SDL_atan(double x)
 /// ```
@@ -1794,6 +1912,34 @@ double sdlAtan(double x) {
   return sdlAtanLookupFunction(x);
 }
 
+///
+/// Compute the arc tangent of `x`.
+///
+/// The definition of `y = atan(x)` is `x = tan(y)`.
+///
+/// Domain: `-INF <= x <= INF`
+///
+/// Range: `-Pi/2 <= y <= Pi/2`
+///
+/// This function operates on single-precision floating point values, use
+/// SDL_atan for dboule-precision floats.
+///
+/// To calculate the arc tangent of y / x, use SDL_atan2f.
+///
+/// This function may use a different approximation across different versions,
+/// platforms and configurations. i.e, it can return a different value given
+/// the same input on different machines or operating systems, or if SDL is
+/// updated.
+///
+/// \param x floating point value.
+/// \returns arc tangent of of `x` in radians, or 0 if `x = 0`
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_atan
+/// \sa SDL_atan2f
+/// \sa SDL_tanf
+///
 /// ```c
 /// extern DECLSPEC float SDLCALL SDL_atanf(float x)
 /// ```
@@ -1803,6 +1949,38 @@ double sdlAtanf(double x) {
   return sdlAtanfLookupFunction(x);
 }
 
+///
+/// Compute the arc tangent of `y / x`, using the signs of x and y to adjust
+/// the result's quadrant.
+///
+/// The definition of `z = atan2(x, y)` is `y = x tan(z)`, where the quadrant
+/// of z is determined based on the signs of x and y.
+///
+/// Domain: `-INF <= x <= INF`, `-INF <= y <= INF`
+///
+/// Range: `-Pi/2 <= y <= Pi/2`
+///
+/// This function operates on double-precision floating point values, use
+/// SDL_atan2f for single-precision floats.
+///
+/// To calculate the arc tangent of a single value, use SDL_atan.
+///
+/// This function may use a different approximation across different versions,
+/// platforms and configurations. i.e, it can return a different value given
+/// the same input on different machines or operating systems, or if SDL is
+/// updated.
+///
+/// \param x floating point value of the denominator (x coordinate).
+/// \param y floating point value of the numerator (y coordinate)
+/// \returns arc tangent of of `y / x` in radians, or, if `x = 0`, either
+/// `-Pi/2`, `0`, or `Pi/2`, depending on the value of `y`.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_atan2f
+/// \sa SDL_atan
+/// \sa SDL_tan
+///
 /// ```c
 /// extern DECLSPEC double SDLCALL SDL_atan2(double y, double x)
 /// ```
@@ -1813,6 +1991,38 @@ double sdlAtan2(double y, double x) {
   return sdlAtan2LookupFunction(y, x);
 }
 
+///
+/// Compute the arc tangent of `y / x`, using the signs of x and y to adjust
+/// the result's quadrant.
+///
+/// The definition of `z = atan2(x, y)` is `y = x tan(z)`, where the quadrant
+/// of z is determined based on the signs of x and y.
+///
+/// Domain: `-INF <= x <= INF`, `-INF <= y <= INF`
+///
+/// Range: `-Pi/2 <= y <= Pi/2`
+///
+/// This function operates on single-precision floating point values, use
+/// SDL_atan2 for double-precision floats.
+///
+/// To calculate the arc tangent of a single value, use SDL_atanf.
+///
+/// This function may use a different approximation across different versions,
+/// platforms and configurations. i.e, it can return a different value given
+/// the same input on different machines or operating systems, or if SDL is
+/// updated.
+///
+/// \param x floating point value of the denominator (x coordinate).
+/// \param y floating point value of the numerator (y coordinate)
+/// \returns arc tangent of of `y / x` in radians, or, if `x = 0`, either
+/// `-Pi/2`, `0`, or `Pi/2`, depending on the value of `y`.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_atan2f
+/// \sa SDL_atan
+/// \sa SDL_tan
+///
 /// ```c
 /// extern DECLSPEC float SDLCALL SDL_atan2f(float y, float x)
 /// ```
@@ -1823,6 +2033,30 @@ double sdlAtan2f(double y, double x) {
   return sdlAtan2fLookupFunction(y, x);
 }
 
+///
+/// Compute the ceiling of `x`.
+///
+/// The ceiling of `x` is the smallest integer `y` such that `y > x`, i.e `x`
+/// rounded up to the nearest integer.
+///
+/// Domain: `-INF <= x <= INF`
+///
+/// Range: `-INF <= y <= INF`, y integer
+///
+/// This function operates on double-precision floating point values, use
+/// SDL_ceilf for single-precision floats.
+///
+/// \param x floating point value
+/// \returns the ceiling of `x`
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_ceilf
+/// \sa SDL_floor
+/// \sa SDL_trunc
+/// \sa SDL_round
+/// \sa SDL_lround
+///
 /// ```c
 /// extern DECLSPEC double SDLCALL SDL_ceil(double x)
 /// ```
@@ -1832,6 +2066,30 @@ double sdlCeil(double x) {
   return sdlCeilLookupFunction(x);
 }
 
+///
+/// Compute the ceiling of `x`.
+///
+/// The ceiling of `x` is the smallest integer `y` such that `y > x`, i.e `x`
+/// rounded up to the nearest integer.
+///
+/// Domain: `-INF <= x <= INF`
+///
+/// Range: `-INF <= y <= INF`, y integer
+///
+/// This function operates on single-precision floating point values, use
+/// SDL_ceil for double-precision floats.
+///
+/// \param x floating point value
+/// \returns the ceiling of `x`
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_ceil
+/// \sa SDL_floorf
+/// \sa SDL_truncf
+/// \sa SDL_roundf
+/// \sa SDL_lroundf
+///
 /// ```c
 /// extern DECLSPEC float SDLCALL SDL_ceilf(float x)
 /// ```
@@ -1841,6 +2099,27 @@ double sdlCeilf(double x) {
   return sdlCeilfLookupFunction(x);
 }
 
+///
+/// Copy the sign of one floating-point value to another.
+///
+/// The definition of copysign is that ``copysign(x, y) = abs(x) * sign(y)``.
+///
+/// Domain: `-INF <= x <= INF`, ``-INF <= y <= f``
+///
+/// Range: `-INF <= z <= INF`
+///
+/// This function operates on double-precision floating point values, use
+/// SDL_copysignf for single-precision floats.
+///
+/// \param x floating point value to use as the magnitude
+/// \param y floating point value to use as the sign
+/// \returns the floating point value with the sign of y and the magnitude of x
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_copysignf
+/// \sa SDL_fabs
+///
 /// ```c
 /// extern DECLSPEC double SDLCALL SDL_copysign(double x, double y)
 /// ```
@@ -1851,6 +2130,27 @@ double sdlCopysign(double x, double y) {
   return sdlCopysignLookupFunction(x, y);
 }
 
+///
+/// Copy the sign of one floating-point value to another.
+///
+/// The definition of copysign is that ``copysign(x, y) = abs(x) * sign(y)``.
+///
+/// Domain: `-INF <= x <= INF`, ``-INF <= y <= f``
+///
+/// Range: `-INF <= z <= INF`
+///
+/// This function operates on single-precision floating point values, use
+/// SDL_copysign for double-precision floats.
+///
+/// \param x floating point value to use as the magnitude
+/// \param y floating point value to use as the sign
+/// \returns the floating point value with the sign of y and the magnitude of x
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_copysignf
+/// \sa SDL_fabsf
+///
 /// ```c
 /// extern DECLSPEC float SDLCALL SDL_copysignf(float x, float y)
 /// ```
@@ -1861,6 +2161,30 @@ double sdlCopysignf(double x, double y) {
   return sdlCopysignfLookupFunction(x, y);
 }
 
+///
+/// Compute the cosine of `x`.
+///
+/// Domain: `-INF <= x <= INF`
+///
+/// Range: `-1 <= y <= 1`
+///
+/// This function operates on double-precision floating point values, use
+/// SDL_cosf for single-precision floats.
+///
+/// This function may use a different approximation across different versions,
+/// platforms and configurations. i.e, it can return a different value given
+/// the same input on different machines or operating systems, or if SDL is
+/// updated.
+///
+/// \param x floating point value, in radians
+/// \returns cosine of `x`
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_cosf
+/// \sa SDL_acos
+/// \sa SDL_sin
+///
 /// ```c
 /// extern DECLSPEC double SDLCALL SDL_cos(double x)
 /// ```
@@ -1870,6 +2194,30 @@ double sdlCos(double x) {
   return sdlCosLookupFunction(x);
 }
 
+///
+/// Compute the cosine of `x`.
+///
+/// Domain: `-INF <= x <= INF`
+///
+/// Range: `-1 <= y <= 1`
+///
+/// This function operates on single-precision floating point values, use
+/// SDL_cos for double-precision floats.
+///
+/// This function may use a different approximation across different versions,
+/// platforms and configurations. i.e, it can return a different value given
+/// the same input on different machines or operating systems, or if SDL is
+/// updated.
+///
+/// \param x floating point value, in radians
+/// \returns cosine of `x`
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_cos
+/// \sa SDL_acosf
+/// \sa SDL_sinf
+///
 /// ```c
 /// extern DECLSPEC float SDLCALL SDL_cosf(float x)
 /// ```
@@ -1879,6 +2227,34 @@ double sdlCosf(double x) {
   return sdlCosfLookupFunction(x);
 }
 
+///
+/// Compute the exponential of `x`.
+///
+/// The definition of `y = exp(x)` is `y = e^x`, where `e` is the base of the
+/// natural logarithm. The inverse is the natural logarithm, SDL_log.
+///
+/// Domain: `-INF <= x <= INF`
+///
+/// Range: `0 <= y <= INF`
+///
+/// The output will overflow if `exp(x)` is too large to be represented.
+///
+/// This function operates on double-precision floating point values, use
+/// SDL_expf for single-precision floats.
+///
+/// This function may use a different approximation across different versions,
+/// platforms and configurations. i.e, it can return a different value given
+/// the same input on different machines or operating systems, or if SDL is
+/// updated.
+///
+/// \param x floating point value
+/// \returns value of `e^x`
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_expf
+/// \sa SDL_log
+///
 /// ```c
 /// extern DECLSPEC double SDLCALL SDL_exp(double x)
 /// ```
@@ -1888,6 +2264,34 @@ double sdlExp(double x) {
   return sdlExpLookupFunction(x);
 }
 
+///
+/// Compute the exponential of `x`.
+///
+/// The definition of `y = exp(x)` is `y = e^x`, where `e` is the base of the
+/// natural logarithm. The inverse is the natural logarithm, SDL_logf.
+///
+/// Domain: `-INF <= x <= INF`
+///
+/// Range: `0 <= y <= INF`
+///
+/// The output will overflow if `exp(x)` is too large to be represented.
+///
+/// This function operates on single-precision floating point values, use
+/// SDL_exp for double-precision floats.
+///
+/// This function may use a different approximation across different versions,
+/// platforms and configurations. i.e, it can return a different value given
+/// the same input on different machines or operating systems, or if SDL is
+/// updated.
+///
+/// \param x floating point value
+/// \returns value of `e^x`
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_exp
+/// \sa SDL_logf
+///
 /// ```c
 /// extern DECLSPEC float SDLCALL SDL_expf(float x)
 /// ```
@@ -1897,6 +2301,23 @@ double sdlExpf(double x) {
   return sdlExpfLookupFunction(x);
 }
 
+///
+/// Compute the absolute value of `x`
+///
+/// Domain: `-INF <= x <= INF`
+///
+/// Range: `0 <= y <= INF`
+///
+/// This function operates on double-precision floating point values, use
+/// SDL_copysignf for single-precision floats.
+///
+/// \param x floating point value to use as the magnitude
+/// \returns the absolute value of `x`
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_fabsf
+///
 /// ```c
 /// extern DECLSPEC double SDLCALL SDL_fabs(double x)
 /// ```
@@ -1906,6 +2327,23 @@ double sdlFabs(double x) {
   return sdlFabsLookupFunction(x);
 }
 
+///
+/// Compute the absolute value of `x`
+///
+/// Domain: `-INF <= x <= INF`
+///
+/// Range: `0 <= y <= INF`
+///
+/// This function operates on single-precision floating point values, use
+/// SDL_copysignf for double-precision floats.
+///
+/// \param x floating point value to use as the magnitude
+/// \returns the absolute value of `x`
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_fabs
+///
 /// ```c
 /// extern DECLSPEC float SDLCALL SDL_fabsf(float x)
 /// ```
@@ -1915,6 +2353,30 @@ double sdlFabsf(double x) {
   return sdlFabsfLookupFunction(x);
 }
 
+///
+/// Compute the floor of `x`.
+///
+/// The floor of `x` is the largest integer `y` such that `y > x`, i.e `x`
+/// rounded down to the nearest integer.
+///
+/// Domain: `-INF <= x <= INF`
+///
+/// Range: `-INF <= y <= INF`, y integer
+///
+/// This function operates on double-precision floating point values, use
+/// SDL_floorf for single-precision floats.
+///
+/// \param x floating point value
+/// \returns the floor of `x`
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_floorf
+/// \sa SDL_ceil
+/// \sa SDL_trunc
+/// \sa SDL_round
+/// \sa SDL_lround
+///
 /// ```c
 /// extern DECLSPEC double SDLCALL SDL_floor(double x)
 /// ```
@@ -1924,6 +2386,30 @@ double sdlFloor(double x) {
   return sdlFloorLookupFunction(x);
 }
 
+///
+/// Compute the floor of `x`.
+///
+/// The floor of `x` is the largest integer `y` such that `y > x`, i.e `x`
+/// rounded down to the nearest integer.
+///
+/// Domain: `-INF <= x <= INF`
+///
+/// Range: `-INF <= y <= INF`, y integer
+///
+/// This function operates on single-precision floating point values, use
+/// SDL_floorf for double-precision floats.
+///
+/// \param x floating point value
+/// \returns the floor of `x`
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_floor
+/// \sa SDL_ceilf
+/// \sa SDL_truncf
+/// \sa SDL_roundf
+/// \sa SDL_lroundf
+///
 /// ```c
 /// extern DECLSPEC float SDLCALL SDL_floorf(float x)
 /// ```
@@ -1933,6 +2419,31 @@ double sdlFloorf(double x) {
   return sdlFloorfLookupFunction(x);
 }
 
+///
+/// Truncate `x` to an integer.
+///
+/// Rounds `x` to the next closest integer to 0. This is equivalent to removing
+/// the fractional part of `x`, leaving only the integer part.
+///
+/// Domain: `-INF <= x <= INF`
+///
+/// Range: `-INF <= y <= INF`, y integer
+///
+/// This function operates on double-precision floating point values, use
+/// SDL_truncf for single-precision floats.
+///
+/// \param x floating point value
+/// \returns `x` truncated to an integer
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_truncf
+/// \sa SDL_fmod
+/// \sa SDL_ceil
+/// \sa SDL_floor
+/// \sa SDL_round
+/// \sa SDL_lround
+///
 /// ```c
 /// extern DECLSPEC double SDLCALL SDL_trunc(double x)
 /// ```
@@ -1942,6 +2453,31 @@ double sdlTrunc(double x) {
   return sdlTruncLookupFunction(x);
 }
 
+///
+/// Truncate `x` to an integer.
+///
+/// Rounds `x` to the next closest integer to 0. This is equivalent to removing
+/// the fractional part of `x`, leaving only the integer part.
+///
+/// Domain: `-INF <= x <= INF`
+///
+/// Range: `-INF <= y <= INF`, y integer
+///
+/// This function operates on single-precision floating point values, use
+/// SDL_truncf for double-precision floats.
+///
+/// \param x floating point value
+/// \returns `x` truncated to an integer
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_trunc
+/// \sa SDL_fmodf
+/// \sa SDL_ceilf
+/// \sa SDL_floorf
+/// \sa SDL_roundf
+/// \sa SDL_lroundf
+///
 /// ```c
 /// extern DECLSPEC float SDLCALL SDL_truncf(float x)
 /// ```
@@ -1951,6 +2487,32 @@ double sdlTruncf(double x) {
   return sdlTruncfLookupFunction(x);
 }
 
+///
+/// Return the floating-point remainder of `x / y`
+///
+/// Divides `x` by `y`, and returns the remainder.
+///
+/// Domain: `-INF <= x <= INF`, `-INF <= y <= INF`, `y != 0`
+///
+/// Range: `-y <= z <= y`
+///
+/// This function operates on double-precision floating point values, use
+/// SDL_fmodf for single-precision floats.
+///
+/// \param x the numerator
+/// \param y the denominator. Must not be 0.
+/// \returns the remainder of `x / y`
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_fmodf
+/// \sa SDL_modf
+/// \sa SDL_trunc
+/// \sa SDL_ceil
+/// \sa SDL_floor
+/// \sa SDL_round
+/// \sa SDL_lround
+///
 /// ```c
 /// extern DECLSPEC double SDLCALL SDL_fmod(double x, double y)
 /// ```
@@ -1961,6 +2523,32 @@ double sdlFmod(double x, double y) {
   return sdlFmodLookupFunction(x, y);
 }
 
+///
+/// Return the floating-point remainder of `x / y`
+///
+/// Divides `x` by `y`, and returns the remainder.
+///
+/// Domain: `-INF <= x <= INF`, `-INF <= y <= INF`, `y != 0`
+///
+/// Range: `-y <= z <= y`
+///
+/// This function operates on single-precision floating point values, use
+/// SDL_fmod for single-precision floats.
+///
+/// \param x the numerator
+/// \param y the denominator. Must not be 0.
+/// \returns the remainder of `x / y`
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_fmod
+/// \sa SDL_truncf
+/// \sa SDL_modff
+/// \sa SDL_ceilf
+/// \sa SDL_floorf
+/// \sa SDL_roundf
+/// \sa SDL_lroundf
+///
 /// ```c
 /// extern DECLSPEC float SDLCALL SDL_fmodf(float x, float y)
 /// ```
@@ -1971,6 +2559,31 @@ double sdlFmodf(double x, double y) {
   return sdlFmodfLookupFunction(x, y);
 }
 
+///
+/// Compute the natural logarithm of `x`.
+///
+/// Domain: `0 < x <= INF`
+///
+/// Range: `-INF <= y <= INF`
+///
+/// It is an error for `x` to be less than or equal to 0.
+///
+/// This function operates on single-precision floating point values, use
+/// SDL_log for double-precision floats.
+///
+/// This function may use a different approximation across different versions,
+/// platforms and configurations. i.e, it can return a different value given
+/// the same input on different machines or operating systems, or if SDL is
+/// updated.
+///
+/// \param x floating point value. Must be greater than 0.
+/// \returns the natural logarithm of `x`
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_log
+/// \sa SDL_expf
+///
 /// ```c
 /// extern DECLSPEC float SDLCALL SDL_logf(float x)
 /// ```
@@ -1980,6 +2593,32 @@ double sdlLogf(double x) {
   return sdlLogfLookupFunction(x);
 }
 
+///
+/// Compute the base-10 logarithm of `x`.
+///
+/// Domain: `0 < x <= INF`
+///
+/// Range: `-INF <= y <= INF`
+///
+/// It is an error for `x` to be less than or equal to 0.
+///
+/// This function operates on double-precision floating point values, use
+/// SDL_log10f for single-precision floats.
+///
+/// This function may use a different approximation across different versions,
+/// platforms and configurations. i.e, it can return a different value given
+/// the same input on different machines or operating systems, or if SDL is
+/// updated.
+///
+/// \param x floating point value. Must be greater than 0.
+/// \returns the logarithm of `x`
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_log10f
+/// \sa SDL_log
+/// \sa SDL_pow
+///
 /// ```c
 /// extern DECLSPEC double SDLCALL SDL_log10(double x)
 /// ```
@@ -1989,6 +2628,32 @@ double sdlLog10(double x) {
   return sdlLog10LookupFunction(x);
 }
 
+///
+/// Compute the base-10 logarithm of `x`.
+///
+/// Domain: `0 < x <= INF`
+///
+/// Range: `-INF <= y <= INF`
+///
+/// It is an error for `x` to be less than or equal to 0.
+///
+/// This function operates on single-precision floating point values, use
+/// SDL_log10 for double-precision floats.
+///
+/// This function may use a different approximation across different versions,
+/// platforms and configurations. i.e, it can return a different value given
+/// the same input on different machines or operating systems, or if SDL is
+/// updated.
+///
+/// \param x floating point value. Must be greater than 0.
+/// \returns the logarithm of `x`
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_log10
+/// \sa SDL_logf
+/// \sa SDL_powf
+///
 /// ```c
 /// extern DECLSPEC float SDLCALL SDL_log10f(float x)
 /// ```
@@ -1998,6 +2663,22 @@ double sdlLog10f(double x) {
   return sdlLog10fLookupFunction(x);
 }
 
+///
+/// Split `x` into integer and fractional parts
+///
+/// This function operates on double-precision floating point values, use
+/// SDL_modff for single-precision floats.
+///
+/// \param x floating point value
+/// \param y output pointer to store the integer part of `x`
+/// \returns the fractional part of `x`
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_modff
+/// \sa SDL_trunc
+/// \sa SDL_fmod
+///
 /// ```c
 /// extern DECLSPEC double SDLCALL SDL_modf(double x, double *y)
 /// ```
@@ -2008,6 +2689,22 @@ double sdlModf(double x, Pointer<Double> y) {
   return sdlModfLookupFunction(x, y);
 }
 
+///
+/// Split `x` into integer and fractional parts
+///
+/// This function operates on single-precision floating point values, use
+/// SDL_modf for double-precision floats.
+///
+/// \param x floating point value
+/// \param y output pointer to store the integer part of `x`
+/// \returns the fractional part of `x`
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_modf
+/// \sa SDL_truncf
+/// \sa SDL_fmodf
+///
 /// ```c
 /// extern DECLSPEC float SDLCALL SDL_modff(float x, float *y)
 /// ```
@@ -2018,6 +2715,34 @@ double sdlModff(double x, Pointer<Float> y) {
   return sdlModffLookupFunction(x, y);
 }
 
+///
+/// Raise `x` to the power `y`
+///
+/// Domain: `-INF <= x <= INF`, `-INF <= y <= INF`
+///
+/// Range: `-INF <= z <= INF`
+///
+/// If `y` is the base of the natural logarithm (e), consider using SDL_exp
+/// instead.
+///
+/// This function operates on double-precision floating point values, use
+/// SDL_powf for single-precision floats.
+///
+/// This function may use a different approximation across different versions,
+/// platforms and configurations. i.e, it can return a different value given
+/// the same input on different machines or operating systems, or if SDL is
+/// updated.
+///
+/// \param x the base
+/// \param y the exponent
+/// \returns `x` raised to the power `y`
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_powf
+/// \sa SDL_exp
+/// \sa SDL_log
+///
 /// ```c
 /// extern DECLSPEC double SDLCALL SDL_pow(double x, double y)
 /// ```
@@ -2028,6 +2753,34 @@ double sdlPow(double x, double y) {
   return sdlPowLookupFunction(x, y);
 }
 
+///
+/// Raise `x` to the power `y`
+///
+/// Domain: `-INF <= x <= INF`, `-INF <= y <= INF`
+///
+/// Range: `-INF <= z <= INF`
+///
+/// If `y` is the base of the natural logarithm (e), consider using SDL_exp
+/// instead.
+///
+/// This function operates on single-precision floating point values, use
+/// SDL_powf for double-precision floats.
+///
+/// This function may use a different approximation across different versions,
+/// platforms and configurations. i.e, it can return a different value given
+/// the same input on different machines or operating systems, or if SDL is
+/// updated.
+///
+/// \param x the base
+/// \param y the exponent
+/// \returns `x` raised to the power `y`
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_pow
+/// \sa SDL_expf
+/// \sa SDL_logf
+///
 /// ```c
 /// extern DECLSPEC float SDLCALL SDL_powf(float x, float y)
 /// ```
@@ -2038,6 +2791,31 @@ double sdlPowf(double x, double y) {
   return sdlPowfLookupFunction(x, y);
 }
 
+///
+/// Round `x` to the nearest integer.
+///
+/// Rounds `x` to the nearest integer. Values halfway between integers will be
+/// rounded away from zero.
+///
+/// Domain: `-INF <= x <= INF`
+///
+/// Range: `-INF <= y <= INF`, y integer
+///
+/// This function operates on double-precision floating point values, use
+/// SDL_roundf for single-precision floats. To get the result as an integer
+/// type, use SDL_lround.
+///
+/// \param x floating point value
+/// \returns the nearest integer to `x`
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_roundf
+/// \sa SDL_lround
+/// \sa SDL_floor
+/// \sa SDL_ceil
+/// \sa SDL_trunc
+///
 /// ```c
 /// extern DECLSPEC double SDLCALL SDL_round(double x)
 /// ```
@@ -2047,6 +2825,31 @@ double sdlRound(double x) {
   return sdlRoundLookupFunction(x);
 }
 
+///
+/// Round `x` to the nearest integer.
+///
+/// Rounds `x` to the nearest integer. Values halfway between integers will be
+/// rounded away from zero.
+///
+/// Domain: `-INF <= x <= INF`
+///
+/// Range: `-INF <= y <= INF`, y integer
+///
+/// This function operates on double-precision floating point values, use
+/// SDL_roundf for single-precision floats. To get the result as an integer
+/// type, use SDL_lroundf.
+///
+/// \param x floating point value
+/// \returns the nearest integer to `x`
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_round
+/// \sa SDL_lroundf
+/// \sa SDL_floorf
+/// \sa SDL_ceilf
+/// \sa SDL_truncf
+///
 /// ```c
 /// extern DECLSPEC float SDLCALL SDL_roundf(float x)
 /// ```
@@ -2056,6 +2859,31 @@ double sdlRoundf(double x) {
   return sdlRoundfLookupFunction(x);
 }
 
+///
+/// Round `x` to the nearest integer representable as a long
+///
+/// Rounds `x` to the nearest integer. Values halfway between integers will be
+/// rounded away from zero.
+///
+/// Domain: `-INF <= x <= INF`
+///
+/// Range: `MIN_LONG <= y <= MAX_LONG`
+///
+/// This function operates on double-precision floating point values, use
+/// SDL_lround for single-precision floats. To get the result as a
+/// floating-point type, use SDL_round.
+///
+/// \param x floating point value
+/// \returns the nearest integer to `x`
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_lroundf
+/// \sa SDL_round
+/// \sa SDL_floor
+/// \sa SDL_ceil
+/// \sa SDL_trunc
+///
 /// ```c
 /// extern DECLSPEC long SDLCALL SDL_lround(double x)
 /// ```
@@ -2066,6 +2894,31 @@ int sdlLround(double x) {
   return sdlLroundLookupFunction(x);
 }
 
+///
+/// Round `x` to the nearest integer representable as a long
+///
+/// Rounds `x` to the nearest integer. Values halfway between integers will be
+/// rounded away from zero.
+///
+/// Domain: `-INF <= x <= INF`
+///
+/// Range: `MIN_LONG <= y <= MAX_LONG`
+///
+/// This function operates on single-precision floating point values, use
+/// SDL_lroundf for double-precision floats. To get the result as a
+/// floating-point type, use SDL_roundf,
+///
+/// \param x floating point value
+/// \returns the nearest integer to `x`
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_lround
+/// \sa SDL_roundf
+/// \sa SDL_floorf
+/// \sa SDL_ceilf
+/// \sa SDL_truncf
+///
 /// ```c
 /// extern DECLSPEC long SDLCALL SDL_lroundf(float x)
 /// ```
@@ -2076,6 +2929,27 @@ int sdlLroundf(double x) {
   return sdlLroundfLookupFunction(x);
 }
 
+///
+/// Scale `x` by an integer power of two.
+///
+/// Multiplies `x` by the `n`th power of the floating point radix (always 2).
+///
+/// Domain: `-INF <= x <= INF`, `n` integer
+///
+/// Range: `-INF <= y <= INF`
+///
+/// This function operates on double-precision floating point values, use
+/// SDL_scalbnf for single-precision floats.
+///
+/// \param x floating point value to be scaled
+/// \param n integer exponent
+/// \returns `x * 2^n`
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_scalbnf
+/// \sa SDL_pow
+///
 /// ```c
 /// extern DECLSPEC double SDLCALL SDL_scalbn(double x, int n)
 /// ```
@@ -2086,6 +2960,27 @@ double sdlScalbn(double x, int n) {
   return sdlScalbnLookupFunction(x, n);
 }
 
+///
+/// Scale `x` by an integer power of two.
+///
+/// Multiplies `x` by the `n`th power of the floating point radix (always 2).
+///
+/// Domain: `-INF <= x <= INF`, `n` integer
+///
+/// Range: `-INF <= y <= INF`
+///
+/// This function operates on single-precision floating point values, use
+/// SDL_scalbn for double-precision floats.
+///
+/// \param x floating point value to be scaled
+/// \param n integer exponent
+/// \returns `x * 2^n`
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_scalbn
+/// \sa SDL_powf
+///
 /// ```c
 /// extern DECLSPEC float SDLCALL SDL_scalbnf(float x, int n)
 /// ```
@@ -2096,6 +2991,30 @@ double sdlScalbnf(double x, int n) {
   return sdlScalbnfLookupFunction(x, n);
 }
 
+///
+/// Compute the sine of `x`.
+///
+/// Domain: `-INF <= x <= INF`
+///
+/// Range: `-1 <= y <= 1`
+///
+/// This function operates on double-precision floating point values, use
+/// SDL_sinf for single-precision floats.
+///
+/// This function may use a different approximation across different versions,
+/// platforms and configurations. i.e, it can return a different value given
+/// the same input on different machines or operating systems, or if SDL is
+/// updated.
+///
+/// \param x floating point value, in radians
+/// \returns sine of `x`
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_sinf
+/// \sa SDL_asin
+/// \sa SDL_cos
+///
 /// ```c
 /// extern DECLSPEC double SDLCALL SDL_sin(double x)
 /// ```
@@ -2105,6 +3024,30 @@ double sdlSin(double x) {
   return sdlSinLookupFunction(x);
 }
 
+///
+/// Compute the sine of `x`.
+///
+/// Domain: `-INF <= x <= INF`
+///
+/// Range: `-1 <= y <= 1`
+///
+/// This function operates on single-precision floating point values, use
+/// SDL_sinf for double-precision floats.
+///
+/// This function may use a different approximation across different versions,
+/// platforms and configurations. i.e, it can return a different value given
+/// the same input on different machines or operating systems, or if SDL is
+/// updated.
+///
+/// \param x floating point value, in radians
+/// \returns sine of `x`
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_sin
+/// \sa SDL_asinf
+/// \sa SDL_cosf
+///
 /// ```c
 /// extern DECLSPEC float SDLCALL SDL_sinf(float x)
 /// ```
@@ -2114,6 +3057,28 @@ double sdlSinf(double x) {
   return sdlSinfLookupFunction(x);
 }
 
+///
+/// Compute the square root of `x`.
+///
+/// Domain: `0 <= x <= INF`
+///
+/// Range: `0 <= y <= INF`
+///
+/// This function operates on double-precision floating point values, use
+/// SDL_sqrtf for single-precision floats.
+///
+/// This function may use a different approximation across different versions,
+/// platforms and configurations. i.e, it can return a different value given
+/// the same input on different machines or operating systems, or if SDL is
+/// updated.
+///
+/// \param x floating point value. Must be greater than or equal to 0.
+/// \returns square root of `x`
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_sqrtf
+///
 /// ```c
 /// extern DECLSPEC double SDLCALL SDL_sqrt(double x)
 /// ```
@@ -2123,6 +3088,28 @@ double sdlSqrt(double x) {
   return sdlSqrtLookupFunction(x);
 }
 
+///
+/// Compute the square root of `x`.
+///
+/// Domain: `0 <= x <= INF`
+///
+/// Range: `0 <= y <= INF`
+///
+/// This function operates on single-precision floating point values, use
+/// SDL_sqrt for double-precision floats.
+///
+/// This function may use a different approximation across different versions,
+/// platforms and configurations. i.e, it can return a different value given
+/// the same input on different machines or operating systems, or if SDL is
+/// updated.
+///
+/// \param x floating point value. Must be greater than or equal to 0.
+/// \returns square root of `x`
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_sqrt
+///
 /// ```c
 /// extern DECLSPEC float SDLCALL SDL_sqrtf(float x)
 /// ```
@@ -2132,6 +3119,32 @@ double sdlSqrtf(double x) {
   return sdlSqrtfLookupFunction(x);
 }
 
+///
+/// Compute the tangent of `x`.
+///
+/// Domain: `-INF <= x <= INF`
+///
+/// Range: `-INF <= y <= INF`
+///
+/// This function operates on double-precision floating point values, use
+/// SDL_tanf for single-precision floats.
+///
+/// This function may use a different approximation across different versions,
+/// platforms and configurations. i.e, it can return a different value given
+/// the same input on different machines or operating systems, or if SDL is
+/// updated.
+///
+/// \param x floating point value, in radians
+/// \returns tangent of `x`
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_tanf
+/// \sa SDL_sin
+/// \sa SDL_cos
+/// \sa SDL_atan
+/// \sa SDL_atan2
+///
 /// ```c
 /// extern DECLSPEC double SDLCALL SDL_tan(double x)
 /// ```
@@ -2141,6 +3154,32 @@ double sdlTan(double x) {
   return sdlTanLookupFunction(x);
 }
 
+///
+/// Compute the tangent of `x`.
+///
+/// Domain: `-INF <= x <= INF`
+///
+/// Range: `-INF <= y <= INF`
+///
+/// This function operates on single-precision floating point values, use
+/// SDL_tanf for double-precision floats.
+///
+/// This function may use a different approximation across different versions,
+/// platforms and configurations. i.e, it can return a different value given
+/// the same input on different machines or operating systems, or if SDL is
+/// updated.
+///
+/// \param x floating point value, in radians
+/// \returns tangent of `x`
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_tan
+/// \sa SDL_sinf
+/// \sa SDL_cosf
+/// \sa SDL_atanf
+/// \sa SDL_atan2f
+///
 /// ```c
 /// extern DECLSPEC float SDLCALL SDL_tanf(float x)
 /// ```

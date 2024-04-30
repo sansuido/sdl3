@@ -11,8 +11,6 @@ import 'struct_sdl.dart';
 /// Therefore the returned list might be empty, although devices are available.
 /// After using all devices at least once the number will be correct.
 ///
-/// This was fixed for Android in SDL 2.0.1.
-///
 /// \param count a pointer filled in with the number of devices returned, can
 /// be NULL.
 /// \returns a 0 terminated array of touch device IDs which should be freed
@@ -75,48 +73,26 @@ int sdlGetTouchDeviceType(int touchId) {
 }
 
 ///
-/// Get the number of active fingers for a given touch device.
+/// Get a list of active fingers for a given touch device.
 ///
 /// \param touchID the ID of a touch device
-/// \returns the number of active fingers for a given touch device on success
-/// or a negative error code on failure; call SDL_GetError() for more
-/// information.
+/// \param count a pointer filled in with the number of fingers returned, can
+/// be NULL.
+/// \returns a NULL terminated array of SDL_Finger pointers which should be
+/// freed with SDL_free(), or NULL on error; call SDL_GetError() for
+/// more details.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_GetTouchFinger
-///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_GetNumTouchFingers(SDL_TouchID touchID)
+/// extern DECLSPEC SDL_Finger **SDLCALL SDL_GetTouchFingers(SDL_TouchID touchID, int *count)
 /// ```
-int sdlGetNumTouchFingers(int touchId) {
-  final sdlGetNumTouchFingersLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Uint64 touchId),
-      int Function(int touchId)>('SDL_GetNumTouchFingers');
-  return sdlGetNumTouchFingersLookupFunction(touchId);
-}
-
-///
-/// Get the finger object for specified touch device ID and finger index.
-///
-/// The returned resource is owned by SDL and should not be deallocated.
-///
-/// \param touchID the ID of the requested touch device
-/// \param index the index of the requested finger
-/// \returns a pointer to the SDL_Finger object or NULL if no object at the
-/// given ID and index could be found.
-///
-/// \since This function is available since SDL 3.0.0.
-///
-/// \sa SDL_GetNumTouchFingers
-///
-/// ```c
-/// extern DECLSPEC SDL_Finger * SDLCALL SDL_GetTouchFinger(SDL_TouchID touchID, int index)
-/// ```
-Pointer<SdlFinger> sdlGetTouchFinger(int touchId, int index) {
-  final sdlGetTouchFingerLookupFunction = libSdl3.lookupFunction<
-      Pointer<SdlFinger> Function(Uint64 touchId, Int32 index),
-      Pointer<SdlFinger> Function(
-          int touchId, int index)>('SDL_GetTouchFinger');
-  return sdlGetTouchFingerLookupFunction(touchId, index);
+Pointer<Pointer<SdlFinger>> sdlGetTouchFingers(
+    int touchId, Pointer<Int32> count) {
+  final sdlGetTouchFingersLookupFunction = libSdl3.lookupFunction<
+      Pointer<Pointer<SdlFinger>> Function(
+          Uint64 touchId, Pointer<Int32> count),
+      Pointer<Pointer<SdlFinger>> Function(
+          int touchId, Pointer<Int32> count)>('SDL_GetTouchFingers');
+  return sdlGetTouchFingersLookupFunction(touchId, count);
 }

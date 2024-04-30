@@ -754,17 +754,8 @@ final class SdlCameraDeviceEvent extends Struct {
   // [16]+(4)
   @Uint32()
   external int which;
-  // [20]+(1)
-  @Uint8()
-  external int padding1;
-  // [21]+(1)
-  @Uint8()
-  external int padding2;
-  // [22]+(1)
-  @Uint8()
-  external int padding3;
-  // [] +(1)
-  @Uint8()
+  // [] +(4)
+  @Uint32()
   external int blank_1;
 }
 
@@ -1717,28 +1708,28 @@ final class SdlJoystick extends Opaque {}
 final class SdlVirtualJoystickDesc extends Struct {
   // [0]+(2)
   @Uint16()
-  external int version;
+  external int type;
   // [2]+(2)
   @Uint16()
-  external int type;
+  external int naxes;
   // [4]+(2)
   @Uint16()
-  external int naxes;
+  external int nbuttons;
   // [6]+(2)
   @Uint16()
-  external int nbuttons;
+  external int nhats;
   // [8]+(2)
   @Uint16()
-  external int nhats;
+  external int vendorId;
   // [10]+(2)
   @Uint16()
-  external int vendorId;
+  external int productId;
   // [12]+(2)
   @Uint16()
-  external int productId;
-  // [14]+(2)
-  @Uint16()
   external int padding;
+  // [] +(2)
+  @Uint16()
+  external int blank_1;
   // [16]+(4)
   @Uint32()
   external int buttonMask;

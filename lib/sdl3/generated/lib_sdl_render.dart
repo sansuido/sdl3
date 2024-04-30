@@ -71,6 +71,7 @@ String? sdlGetRenderDriver(int index) {
 ///
 /// Create a window and default renderer.
 ///
+/// \param title the title of the window, in UTF-8 encoding
 /// \param width the width of the window
 /// \param height the height of the window
 /// \param window_flags the flags used to create the window (see
@@ -86,9 +87,10 @@ String? sdlGetRenderDriver(int index) {
 /// \sa SDL_CreateWindow
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_CreateWindowAndRenderer(int width, int height, SDL_WindowFlags window_flags, SDL_Window **window, SDL_Renderer **renderer)
+/// extern DECLSPEC int SDLCALL SDL_CreateWindowAndRenderer(const char *title, int width, int height, SDL_WindowFlags window_flags, SDL_Window **window, SDL_Renderer **renderer)
 /// ```
 int sdlCreateWindowAndRenderer(
+    String? title,
     int width,
     int height,
     int windowFlags,
@@ -96,20 +98,25 @@ int sdlCreateWindowAndRenderer(
     Pointer<Pointer<SdlRenderer>> renderer) {
   final sdlCreateWindowAndRendererLookupFunction = libSdl3.lookupFunction<
           Int32 Function(
+              Pointer<Utf8> title,
               Int32 width,
               Int32 height,
               Uint32 windowFlags,
               Pointer<Pointer<SdlWindow>> window,
               Pointer<Pointer<SdlRenderer>> renderer),
           int Function(
+              Pointer<Utf8> title,
               int width,
               int height,
               int windowFlags,
               Pointer<Pointer<SdlWindow>> window,
               Pointer<Pointer<SdlRenderer>> renderer)>(
       'SDL_CreateWindowAndRenderer');
-  return sdlCreateWindowAndRendererLookupFunction(
-      width, height, windowFlags, window, renderer);
+  final titlePointer = title != null ? title.toNativeUtf8() : nullptr;
+  final result = sdlCreateWindowAndRendererLookupFunction(
+      titlePointer, width, height, windowFlags, window, renderer);
+  calloc.free(titlePointer);
+  return result;
 }
 
 ///
@@ -453,9 +460,6 @@ int sdlGetCurrentRenderOutputSize(
 
 ///
 /// Create a texture for a rendering context.
-///
-/// You can set the texture scaling method by setting
-/// `SDL_HINT_RENDER_SCALE_QUALITY` before creating the texture.
 ///
 /// \param renderer the rendering context
 /// \param format one of the enumerated values in SDL_PixelFormatEnum
@@ -2754,10 +2758,6 @@ void sdlDestroyTexture(Pointer<SdlTexture> texture) {
 /// If `renderer` is NULL, this function will return immediately after setting
 /// the SDL error message to "Invalid renderer". See SDL_GetError().
 ///
-/// Note that destroying a window implicitly destroys the associated renderer,
-/// so this should not be called if the window associated with the renderer has
-/// already been destroyed.
-///
 /// \param renderer the rendering context
 ///
 /// \since This function is available since SDL 3.0.0.
@@ -2839,15 +2839,15 @@ Pointer<NativeType> sdlGetRenderMetalLayer(Pointer<SdlRenderer> renderer) {
 }
 
 ///
-/// Get the Metal command encoder for the current frame
+/// Get the Metal command encoder for the current frame.
 ///
 /// This function returns `void *`, so SDL doesn't have to include Metal's
 /// headers, but it can be safely cast to an `id<MTLRenderCommandEncoder>`.
 ///
-/// Note that as of SDL 2.0.18, this will return NULL if Metal refuses to give
-/// SDL a drawable to render to, which might happen if the window is
-/// hidden/minimized/offscreen. This doesn't apply to command encoders for
-/// render targets, just the window's backbuffer. Check your return values!
+/// This will return NULL if Metal refuses to give SDL a drawable to render to,
+/// which might happen if the window is hidden/minimized/offscreen. This
+/// doesn't apply to command encoders for render targets, just the window's
+/// backbuffer. Check your return values!
 ///
 /// \param renderer The renderer to query
 /// \returns an `id<MTLRenderCommandEncoder>` on success, or NULL if the

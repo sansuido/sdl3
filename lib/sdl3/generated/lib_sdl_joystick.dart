@@ -5,7 +5,7 @@ import 'lib_sdl.dart';
 import 'struct_sdl.dart';
 
 ///
-/// Locking for atomic access to the joystick API
+/// Locking for atomic access to the joystick API.
 ///
 /// The SDL joystick functions are thread-safe, however you can lock the
 /// joysticks while processing to guarantee that the joystick list won't change
@@ -24,7 +24,7 @@ void sdlLockJoysticks(Pointer<NativeType> arg0) {
 }
 
 ///
-/// Unlocking for atomic access to the joystick API
+/// Unlocking for atomic access to the joystick API.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -883,7 +883,7 @@ SdlGuid sdlGetJoystickGuidFromString(String? pchGuid) {
 }
 
 ///
-/// Get the device information encoded in a SDL_JoystickGUID structure
+/// Get the device information encoded in a SDL_JoystickGUID structure.
 ///
 /// \param guid the SDL_JoystickGUID you wish to get info about
 /// \param vendor A pointer filled in with the device VID, or 0 if not
@@ -1314,7 +1314,7 @@ int sdlRumbleJoystick(Pointer<SdlJoystick> joystick, int lowFrequencyRumble,
 }
 
 ///
-/// Start a rumble effect in the joystick's triggers
+/// Start a rumble effect in the joystick's triggers.
 ///
 /// Each call to this function cancels any previous trigger rumble effect, and
 /// calling it with 0 intensity stops any rumbling.
@@ -1386,7 +1386,7 @@ int sdlSetJoystickLed(
 }
 
 ///
-/// Send a joystick specific effect packet
+/// Send a joystick specific effect packet.
 ///
 /// \param joystick The joystick to affect
 /// \param data The data to send to the joystick

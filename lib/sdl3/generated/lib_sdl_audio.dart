@@ -543,8 +543,7 @@ int sdlBindAudioStream(int devid, Pointer<SdlAudioStream> stream) {
 ///
 /// The streams being unbound do not all have to be on the same device. All
 /// streams on the same device will be unbound atomically (data will stop
-/// flowing through them all unbound streams on the same device at the same
-/// time).
+/// flowing through all unbound streams on the same device at the same time).
 ///
 /// Unbinding a stream that isn't bound to a device is a legal no-op.
 ///
@@ -711,6 +710,12 @@ int sdlGetAudioStreamFormat(Pointer<SdlAudioStream> stream,
 /// will reflect the new format, and future calls to SDL_PutAudioStreamData
 /// must provide data in the new input formats.
 ///
+/// Data that was previously queued in the stream will still be operated on in
+/// the format that was current when it was added, which is to say you can put
+/// the end of a sound file in one format to a stream, change formats for the
+/// next sound file, and start putting that new data while the previous sound
+/// file is still queued, and everything will still play back correctly.
+///
 /// \param stream The stream the format is being changed
 /// \param src_spec The new format of the audio input; if NULL, it is not
 /// changed.
@@ -803,13 +808,13 @@ int sdlSetAudioStreamFrequencyRatio(
 }
 
 ///
-/// Add data to be converted/resampled to the stream.
+/// Add data to the stream.
 ///
 /// This data must match the format/channels/samplerate specified in the latest
 /// call to SDL_SetAudioStreamFormat, or the format specified when creating the
 /// stream if it hasn't been changed.
 ///
-/// Note that this call simply queues unconverted data for later. This is
+/// Note that this call simply copies the unconverted data for later. This is
 /// different than SDL2, where data was converted during the Put call and the
 /// Get call would just dequeue the previously-converted data.
 ///
@@ -960,7 +965,7 @@ int sdlGetAudioStreamQueued(Pointer<SdlAudioStream> stream) {
 /// Tell the stream that you're done sending data, and anything being buffered
 /// should be converted/resampled and made available immediately.
 ///
-/// It is legal to add more data to a stream after flushing, but there will be
+/// It is legal to add more data to a stream after flushing, but there may be
 /// audio gaps in the output. Generally this is intended to signal the end of
 /// input, so the complete output becomes available.
 ///
@@ -985,7 +990,10 @@ int sdlFlushAudioStream(Pointer<SdlAudioStream> stream) {
 }
 
 ///
-/// Clear any pending data in the stream without converting it
+/// Clear any pending data in the stream.
+///
+/// This drops any queued data, so there will be nothing to read from the
+/// stream until more is added.
 ///
 /// \param stream The audio stream to clear
 /// \returns 0 on success or a negative error code on failure; call
@@ -1023,7 +1031,7 @@ int sdlClearAudioStream(Pointer<SdlAudioStream> stream) {
 /// protect shared data during those callbacks, locking the stream guarantees
 /// that the callback is not running while the lock is held.
 ///
-/// As this is just a wrapper over SDL_LockMutex for an internal lock, it has
+/// As this is just a wrapper over SDL_LockMutex for an internal lock; it has
 /// all the same attributes (recursive locks are allowed, etc).
 ///
 /// \param stream The audio stream to lock.
@@ -1200,9 +1208,17 @@ int sdlSetAudioStreamPutCallback(
 }
 
 ///
-/// Free an audio stream
+/// Free an audio stream.
 ///
-/// \param stream The audio stream to free
+/// This will release all allocated data, including any audio that is still
+/// queued. You do not need to manually clear the stream first.
+///
+/// If this stream was bound to an audio device, it is unbound during this
+/// call. If this stream was created with SDL_OpenAudioDeviceStream, the audio
+/// device that was opened alongside this stream's creation will be closed,
+/// too.
+///
+/// \param stream The audio stream to destroy.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -1226,7 +1242,7 @@ void sdlDestroyAudioStream(Pointer<SdlAudioStream> stream) {
 /// If all your app intends to do is provide a single source of PCM audio, this
 /// function allows you to do all your audio setup in a single call.
 ///
-/// This is intended to be a clean means to migrate apps from SDL2.
+/// This is also intended to be a clean means to migrate apps from SDL2.
 ///
 /// This function will open an audio device, create a stream and bind it.
 /// Unlike other methods of setup, the audio device will be closed when this
@@ -1234,9 +1250,9 @@ void sdlDestroyAudioStream(Pointer<SdlAudioStream> stream) {
 /// the only object needed to manage audio playback.
 ///
 /// Also unlike other functions, the audio device begins paused. This is to map
-/// more closely to SDL2-style behavior, and since there is no extra step here
-/// to bind a stream to begin audio flowing. The audio device should be resumed
-/// with SDL_ResumeAudioDevice(SDL_GetAudioStreamDevice(stream));
+/// more closely to SDL2-style behavior, since there is no extra step here to
+/// bind a stream to begin audio flowing. The audio device should be resumed
+/// with `SDL_ResumeAudioDevice(SDL_GetAudioStreamDevice(stream));`
 ///
 /// This function works with both playback and capture devices.
 ///
@@ -1428,10 +1444,9 @@ int sdlSetAudioPostmixCallback(
 /// function
 /// \param audio_len A pointer filled with the length of the audio data buffer
 /// in bytes
-/// \returns This function, if successfully called, returns 0. `audio_buf` will
-/// be filled with a pointer to an allocated buffer containing the
-/// audio data, and `audio_len` is filled with the length of that
-/// audio buffer in bytes.
+/// \returns 0 on success. `audio_buf` will be filled with a pointer to an
+/// allocated buffer containing the audio data, and `audio_len` is
+/// filled with the length of that audio buffer in bytes.
 ///
 /// This function returns -1 if the .WAV file cannot be opened, uses
 /// an unknown data format, or is corrupt; call SDL_GetError() for
@@ -1482,8 +1497,6 @@ int sdlLoadWavIo(
 /// SDL_LoadWAV_IO(SDL_IOFromFile(path, "rb"), 1, spec, audio_buf, audio_len);
 /// ```
 ///
-/// Note that in SDL2, this was a preprocessor macro and not a real function.
-///
 /// \param path The file path of the WAV file to open.
 /// \param spec A pointer to an SDL_AudioSpec that will be set to the WAVE
 /// data's format details on successful return.
@@ -1491,10 +1504,9 @@ int sdlLoadWavIo(
 /// function.
 /// \param audio_len A pointer filled with the length of the audio data buffer
 /// in bytes
-/// \returns This function, if successfully called, returns 0. `audio_buf` will
-/// be filled with a pointer to an allocated buffer containing the
-/// audio data, and `audio_len` is filled with the length of that
-/// audio buffer in bytes.
+/// \returns 0 on success. `audio_buf` will be filled with a pointer to an
+/// allocated buffer containing the audio data, and `audio_len` is
+/// filled with the length of that audio buffer in bytes.
 ///
 /// This function returns -1 if the .WAV file cannot be opened, uses
 /// an unknown data format, or is corrupt; call SDL_GetError() for

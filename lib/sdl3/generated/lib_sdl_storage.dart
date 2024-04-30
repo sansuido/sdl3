@@ -275,7 +275,7 @@ int sdlReadStorageFile(Pointer<SdlStorage> storage, String? path,
 /// \sa SDL_StorageReady
 ///
 /// ```c
-/// extern DECLSPEC int SDL_WriteStorageFile(SDL_Storage *storage, const char *path, const void *source, Uint64 length)
+/// extern DECLSPEC int SDLCALL SDL_WriteStorageFile(SDL_Storage *storage, const char *path, const void *source, Uint64 length)
 /// ```
 int sdlWriteStorageFile(Pointer<SdlStorage> storage, String? path,
     Pointer<NativeType> source, int length) {

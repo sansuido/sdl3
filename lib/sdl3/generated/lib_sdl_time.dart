@@ -11,7 +11,7 @@ import 'struct_sdl.dart';
 /// \returns 0 on success or -1 on error; call SDL_GetError() for more
 /// information.
 ///
-/// \since This function is available since SDL 3.0.0
+/// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
 /// extern DECLSPEC int SDLCALL SDL_GetCurrentTime(SDL_Time *ticks)
@@ -35,7 +35,7 @@ int sdlGetCurrentTime(Pointer<Int64> ticks) {
 /// \returns 0 on success or -1 on error; call SDL_GetError() for more
 /// information.
 ///
-/// \since This function is available since SDL 3.0.0
+/// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
 /// extern DECLSPEC int SDLCALL SDL_TimeToDateTime(SDL_Time ticks, SDL_DateTime *dt, SDL_bool localTime)
@@ -59,7 +59,7 @@ int sdlTimeToDateTime(int ticks, Pointer<SdlDateTime> dt, bool localTime) {
 /// \returns 0 on success or -1 on error; call SDL_GetError() for more
 /// information.
 ///
-/// \since This function is available since SDL 3.0.0
+/// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
 /// extern DECLSPEC int SDLCALL SDL_DateTimeToTime(const SDL_DateTime *dt, SDL_Time *ticks)
@@ -101,7 +101,7 @@ void sdlTimeToWindows(
 
 ///
 /// Converts a Windows FILETIME (100-nanosecond intervals since January 1,
-/// 1601) to an SDL time
+/// 1601) to an SDL time.
 ///
 /// This function takes the two 32-bit values of the FILETIME structure as
 /// parameters.
@@ -131,7 +131,7 @@ int sdlTimeFromWindows(int dwLowDateTime, int dwHighDateTime) {
 /// \returns the number of days in the requested month, otherwise -1; call
 /// SDL_GetError() for more information.
 ///
-/// \since This function is available since SDL 3.0.0
+/// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
 /// extern DECLSPEC int SDLCALL SDL_GetDaysInMonth(int year, int month)
@@ -152,7 +152,7 @@ int sdlGetDaysInMonth(int year, int month) {
 /// \returns the day of year [0-365] if the date is valid, otherwise -1; call
 /// SDL_GetError() for more information.
 ///
-/// \since This function is available since SDL 3.0.0
+/// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
 /// extern DECLSPEC int SDLCALL SDL_GetDayOfYear(int year, int month, int day)
@@ -173,7 +173,7 @@ int sdlGetDayOfYear(int year, int month, int day) {
 /// \returns a value between 0 and 6 (0 being Sunday) if the date is valid,
 /// otherwise -1; call SDL_GetError() for more information.
 ///
-/// \since This function is available since SDL 3.0.0
+/// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
 /// extern DECLSPEC int SDLCALL SDL_GetDayOfWeek(int year, int month, int day)

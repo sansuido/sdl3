@@ -83,7 +83,7 @@ bool sdlDxgiGetOutputInfo(
 }
 
 ///
-/// Set a callback for every X11 event
+/// Set a callback for every X11 event.
 ///
 /// The callback may modify the event, and should return SDL_TRUE if the event
 /// should continue to be processed, or SDL_FALSE to prevent further
@@ -166,15 +166,20 @@ int sdlLinuxSetThreadPriorityAndPolicy(
 /// ```
 ///
 /// Where its parameter, `callbackParam`, is what was passed as `callbackParam`
-/// to SDL_iPhoneSetAnimationCallback().
+/// to SDL_iOSSetAnimationCallback().
 ///
 /// This function is only available on Apple iOS.
 ///
 /// For more information see:
-/// https://github.com/libsdl-org/SDL/blob/main/docs/README-ios.md
 ///
-/// This functions is also accessible using the macro
-/// SDL_iOSSetAnimationCallback() since SDL 2.0.4.
+/// https://wiki.libsdl.org/SDL3/README/ios
+///
+/// Note that if you use the "main callbacks" instead of a standard C `main`
+/// function, you don't have to use this API, as SDL will manage this for you.
+///
+/// Details on main callbacks are here:
+///
+/// https://wiki.libsdl.org/SDL3/README/main-functions
 ///
 /// \param window the window for which the animation callback should be set
 /// \param interval the number of frames after which **callback** will be
@@ -186,22 +191,22 @@ int sdlLinuxSetThreadPriorityAndPolicy(
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_iPhoneSetEventPump
+/// \sa SDL_iOSSetEventPump
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_iPhoneSetAnimationCallback(SDL_Window * window, int interval, void (SDLCALL *callback)(void*), void *callbackParam)
+/// extern DECLSPEC int SDLCALL SDL_iOSSetAnimationCallback(SDL_Window * window, int interval, void (SDLCALL *callback)(void*), void *callbackParam)
 /// ```
-int sdlIPhoneSetAnimationCallback(Pointer<SdlWindow> window, int interval,
+int sdlIOsSetAnimationCallback(Pointer<SdlWindow> window, int interval,
     Pointer<NativeType> callback, Pointer<NativeType> callbackParam) {
-  final sdlIPhoneSetAnimationCallbackLookupFunction = libSdl3.lookupFunction<
+  final sdlIOsSetAnimationCallbackLookupFunction = libSdl3.lookupFunction<
       Int32 Function(Pointer<SdlWindow> window, Int32 interval,
           Pointer<NativeType> callback, Pointer<NativeType> callbackParam),
       int Function(
           Pointer<SdlWindow> window,
           int interval,
           Pointer<NativeType> callback,
-          Pointer<NativeType> callbackParam)>('SDL_iPhoneSetAnimationCallback');
-  return sdlIPhoneSetAnimationCallbackLookupFunction(
+          Pointer<NativeType> callbackParam)>('SDL_iOSSetAnimationCallback');
+  return sdlIOsSetAnimationCallbackLookupFunction(
       window, interval, callback, callbackParam);
 }
 
@@ -210,23 +215,20 @@ int sdlIPhoneSetAnimationCallback(Pointer<SdlWindow> window, int interval,
 ///
 /// This function is only available on Apple iOS.
 ///
-/// This functions is also accessible using the macro SDL_iOSSetEventPump()
-/// since SDL 2.0.4.
-///
 /// \param enabled SDL_TRUE to enable the event pump, SDL_FALSE to disable it
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_iPhoneSetAnimationCallback
+/// \sa SDL_iOSSetAnimationCallback
 ///
 /// ```c
-/// extern DECLSPEC void SDLCALL SDL_iPhoneSetEventPump(SDL_bool enabled)
+/// extern DECLSPEC void SDLCALL SDL_iOSSetEventPump(SDL_bool enabled)
 /// ```
-void sdlIPhoneSetEventPump(bool enabled) {
-  final sdlIPhoneSetEventPumpLookupFunction = libSdl3.lookupFunction<
+void sdlIOsSetEventPump(bool enabled) {
+  final sdlIOsSetEventPumpLookupFunction = libSdl3.lookupFunction<
       Void Function(Int32 enabled),
-      void Function(int enabled)>('SDL_iPhoneSetEventPump');
-  return sdlIPhoneSetEventPumpLookupFunction(enabled ? 1 : 0);
+      void Function(int enabled)>('SDL_iOSSetEventPump');
+  return sdlIOsSetEventPumpLookupFunction(enabled ? 1 : 0);
 }
 
 ///
@@ -609,53 +611,20 @@ int sdlAndroidSendMessage(int command, int param) {
 /// https://msdn.microsoft.com/en-us/library/windows/apps/hh464917.aspx
 ///
 /// \param pathType the type of path to retrieve, one of SDL_WinRT_Path
-/// \returns a UCS-2 string (16-bit, wide-char) containing the path, or NULL if
-/// the path is not available for any reason; call SDL_GetError() for
-/// more information.
-///
-/// \since This function is available since SDL 2.0.3.
-///
-/// \sa SDL_WinRTGetFSPathUTF8
-///
-/// ```c
-/// extern DECLSPEC const wchar_t * SDLCALL SDL_WinRTGetFSPathUNICODE(SDL_WinRT_Path pathType)
-/// ```
-Pointer<Int16> sdlWinRtGetFsPathUnicode(int pathType) {
-  final sdlWinRtGetFsPathUnicodeLookupFunction = libSdl3.lookupFunction<
-      Pointer<Int16> Function(Int32 pathType),
-      Pointer<Int16> Function(int pathType)>('SDL_WinRTGetFSPathUNICODE');
-  return sdlWinRtGetFsPathUnicodeLookupFunction(pathType);
-}
-
-///
-/// Retrieve a WinRT defined path on the local file system.
-///
-/// Not all paths are available on all versions of Windows. This is especially
-/// true on Windows Phone. Check the documentation for the given SDL_WinRT_Path
-/// for more information on which path types are supported where.
-///
-/// Documentation on most app-specific path types on WinRT can be found on
-/// MSDN, at the URL:
-///
-/// https://msdn.microsoft.com/en-us/library/windows/apps/hh464917.aspx
-///
-/// \param pathType the type of path to retrieve, one of SDL_WinRT_Path
 /// \returns a UTF-8 string (8-bit, multi-byte) containing the path, or NULL if
 /// the path is not available for any reason; call SDL_GetError() for
 /// more information.
 ///
-/// \since This function is available since SDL 2.0.3.
-///
-/// \sa SDL_WinRTGetFSPathUNICODE
+/// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC const char * SDLCALL SDL_WinRTGetFSPathUTF8(SDL_WinRT_Path pathType)
+/// extern DECLSPEC const char * SDLCALL SDL_WinRTGetFSPath(SDL_WinRT_Path pathType)
 /// ```
-String? sdlWinRtGetFsPathUtf8(int pathType) {
-  final sdlWinRtGetFsPathUtf8LookupFunction = libSdl3.lookupFunction<
+String? sdlWinRtGetFsPath(int pathType) {
+  final sdlWinRtGetFsPathLookupFunction = libSdl3.lookupFunction<
       Pointer<Utf8> Function(Int32 pathType),
-      Pointer<Utf8> Function(int pathType)>('SDL_WinRTGetFSPathUTF8');
-  final result = sdlWinRtGetFsPathUtf8LookupFunction(pathType);
+      Pointer<Utf8> Function(int pathType)>('SDL_WinRTGetFSPath');
+  final result = sdlWinRtGetFsPathLookupFunction(pathType);
   if (result == nullptr) {
     return null;
   }
@@ -823,7 +792,7 @@ int sdlGdkGetTaskQueue(Pointer<XTaskQueueHandle> outTaskQueue) {
 /// handle.
 /// \returns 0 if success, -1 if any error occurs.
 ///
-/// \since This function is available since SDL 2.28.0.
+/// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
 /// extern DECLSPEC int SDLCALL SDL_GDKGetDefaultUser(XUserHandle * outUserHandle)

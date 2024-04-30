@@ -7,7 +7,9 @@ int main() {
   if (sdlInit(SDL_INIT_VIDEO) == 0) {
     var window = calloc<Pointer<SdlWindow>>();
     var renderer = calloc<Pointer<SdlRenderer>>();
-    if (sdlCreateWindowAndRenderer(640, 480, 0, window, renderer) == 0) {
+    if (sdlCreateWindowAndRenderer(
+            'Draw Line', 640, 480, 0, window, renderer) ==
+        0) {
       var done = SDL_FALSE;
       while (done == SDL_FALSE) {
         var event = calloc<SdlEvent>();

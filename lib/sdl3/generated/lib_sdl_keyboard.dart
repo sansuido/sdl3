@@ -134,7 +134,7 @@ Pointer<Uint8> sdlGetKeyboardState(Pointer<Int32> numkeys) {
 }
 
 ///
-/// Clear the state of the keyboard
+/// Clear the state of the keyboard.
 ///
 /// This function will generate key up events for all pressed keys.
 ///

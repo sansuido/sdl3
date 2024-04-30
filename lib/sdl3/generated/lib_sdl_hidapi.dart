@@ -120,7 +120,7 @@ Pointer<SdlHidDeviceInfo> sdlHidEnumerate(int vendorId, int productId) {
 }
 
 ///
-/// Free an enumeration Linked List
+/// Free an enumeration linked list.
 ///
 /// This function frees a linked list created by SDL_hid_enumerate().
 ///
@@ -587,7 +587,7 @@ int sdlHidGetReportDescriptor(
 }
 
 ///
-/// Start or stop a BLE scan on iOS and tvOS to pair Steam Controllers
+/// Start or stop a BLE scan on iOS and tvOS to pair Steam Controllers.
 ///
 /// \param active SDL_TRUE to start the scan, SDL_FALSE to stop the scan
 ///

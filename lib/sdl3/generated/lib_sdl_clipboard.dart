@@ -148,7 +148,7 @@ bool sdlHasPrimarySelectionText() {
 }
 
 ///
-/// Offer clipboard data to the OS
+/// Offer clipboard data to the OS.
 ///
 /// Tell the operating system that the application is offering clipboard data
 /// for each of the proivded mime-types. Once another application requests the
@@ -202,7 +202,7 @@ int sdlSetClipboardData(
 }
 
 ///
-/// Clear the clipboard data
+/// Clear the clipboard data.
 ///
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
@@ -222,7 +222,7 @@ int sdlClearClipboardData() {
 }
 
 ///
-/// Get the data from clipboard for a given mime type
+/// Get the data from clipboard for a given mime type.
 ///
 /// The size of text data does not include the terminator, but the text is
 /// guaranteed to be null terminated.
@@ -235,6 +235,7 @@ int sdlClearClipboardData() {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
+/// \sa SDL_HasClipboardData
 /// \sa SDL_SetClipboardData
 ///
 /// ```c
@@ -254,7 +255,7 @@ Pointer<NativeType> sdlGetClipboardData(
 }
 
 ///
-/// Query whether there is data in the clipboard for the provided mime type
+/// Query whether there is data in the clipboard for the provided mime type.
 ///
 /// \param mime_type The mime type to check for data for
 /// \returns SDL_TRUE if there exists data in clipboard for the provided mime

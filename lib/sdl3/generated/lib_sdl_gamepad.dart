@@ -1038,7 +1038,7 @@ bool sdlGamepadConnected(Pointer<SdlGamepad> gamepad) {
 }
 
 ///
-/// Get the underlying joystick from a gamepad
+/// Get the underlying joystick from a gamepad.
 ///
 /// This function will give you a SDL_Joystick object, which allows you to use
 /// the SDL_Joystick functions with a SDL_Gamepad object. This would be useful
@@ -1112,7 +1112,7 @@ bool sdlGamepadEventsEnabled() {
 }
 
 ///
-/// Get the SDL joystick layer bindings for a gamepad
+/// Get the SDL joystick layer bindings for a gamepad.
 ///
 /// \param gamepad a gamepad
 /// \param count a pointer filled in with the number of bindings returned
@@ -1798,7 +1798,7 @@ int sdlSetGamepadLed(
 }
 
 ///
-/// Send a gamepad specific effect packet
+/// Send a gamepad specific effect packet.
 ///
 /// \param gamepad The gamepad to affect
 /// \param data The data to send to the gamepad
