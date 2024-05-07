@@ -125,18 +125,6 @@ typedef SdlFreeFunc = Void Function(Pointer<NativeType> mem);
 typedef SdlFunctionPointerDart = void Function();
 typedef SdlFunctionPointer = Void Function();
 
-// typedef int (SDLCALL *SDL_blit) (struct SDL_Surface *src, const SDL_Rect *srcrect, struct SDL_Surface *dst, const SDL_Rect *dstrect)
-typedef SdlBlitDart = int Function(
-    Pointer<SdlSurface> src,
-    Pointer<SdlRect> srcrect,
-    Pointer<SdlSurface> dst,
-    Pointer<SdlRect> dstrect);
-typedef SdlBlit = Int32 Function(
-    Pointer<SdlSurface> src,
-    Pointer<SdlRect> srcrect,
-    Pointer<SdlSurface> dst,
-    Pointer<SdlRect> dstrect);
-
 // typedef SDL_bool (SDLCALL *SDL_WindowsMessageHook)(void *userdata, MSG *msg)
 typedef SdlWindowsMessageHookDart = int Function(
     Pointer<NativeType> userdata, Pointer<MSG> msg);

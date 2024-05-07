@@ -1226,17 +1226,7 @@ int sdlGetJoystickBall(Pointer<SdlJoystick> joystick, int ball,
 ///
 /// Get the current state of a POV hat on a joystick.
 ///
-/// The returned value will be one of the following positions:
-///
-/// - `SDL_HAT_CENTERED`
-/// - `SDL_HAT_UP`
-/// - `SDL_HAT_RIGHT`
-/// - `SDL_HAT_DOWN`
-/// - `SDL_HAT_LEFT`
-/// - `SDL_HAT_RIGHTUP`
-/// - `SDL_HAT_RIGHTDOWN`
-/// - `SDL_HAT_LEFTUP`
-/// - `SDL_HAT_LEFTDOWN`
+/// The returned value will be one of the `SDL_HAT_*` values.
 ///
 /// \param joystick an SDL_Joystick structure containing joystick information
 /// \param hat the hat index to get the state from; indices start at index 0

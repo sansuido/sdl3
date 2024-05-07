@@ -16,6 +16,9 @@ import 'struct_sdl.dart';
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
+/// \sa SDL_WindowsMessageHook
+/// \sa SDL_HINT_WINDOWS_ENABLE_MESSAGELOOP
+///
 /// ```c
 /// extern DECLSPEC void SDLCALL SDL_SetWindowsMessageHook(SDL_WindowsMessageHook callback, void *userdata)
 /// ```
@@ -667,8 +670,20 @@ bool sdlIsTablet() {
 }
 
 ///
+/// Let iOS apps with external event handling report
+/// onApplicationWillTerminate.
+///
+/// This functions allows iOS apps that have their own event handling to hook
+/// into SDL to generate SDL events. This maps directly to an iOS-specific
+/// event, but since it doesn't do anything iOS-specific internally, it is
+/// available on all platforms, in case it might be useful for some specific
+/// paradigm. Most apps do not need to use this directly; SDL's internal event
+/// code will handle all this for windows created by SDL_CreateWindow!
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.0.0.
-/// /
+///
 /// ```c
 /// extern DECLSPEC void SDLCALL SDL_OnApplicationWillTerminate(void)
 /// ```
@@ -680,8 +695,20 @@ void sdlOnApplicationWillTerminate() {
 }
 
 ///
+/// Let iOS apps with external event handling report
+/// onApplicationDidReceiveMemoryWarning.
+///
+/// This functions allows iOS apps that have their own event handling to hook
+/// into SDL to generate SDL events. This maps directly to an iOS-specific
+/// event, but since it doesn't do anything iOS-specific internally, it is
+/// available on all platforms, in case it might be useful for some specific
+/// paradigm. Most apps do not need to use this directly; SDL's internal event
+/// code will handle all this for windows created by SDL_CreateWindow!
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.0.0.
-/// /
+///
 /// ```c
 /// extern DECLSPEC void SDLCALL SDL_OnApplicationDidReceiveMemoryWarning(void)
 /// ```
@@ -693,8 +720,20 @@ void sdlOnApplicationDidReceiveMemoryWarning() {
 }
 
 ///
+/// Let iOS apps with external event handling report
+/// onApplicationWillResignActive.
+///
+/// This functions allows iOS apps that have their own event handling to hook
+/// into SDL to generate SDL events. This maps directly to an iOS-specific
+/// event, but since it doesn't do anything iOS-specific internally, it is
+/// available on all platforms, in case it might be useful for some specific
+/// paradigm. Most apps do not need to use this directly; SDL's internal event
+/// code will handle all this for windows created by SDL_CreateWindow!
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.0.0.
-/// /
+///
 /// ```c
 /// extern DECLSPEC void SDLCALL SDL_OnApplicationWillResignActive(void)
 /// ```
@@ -706,8 +745,20 @@ void sdlOnApplicationWillResignActive() {
 }
 
 ///
+/// Let iOS apps with external event handling report
+/// onApplicationDidEnterBackground.
+///
+/// This functions allows iOS apps that have their own event handling to hook
+/// into SDL to generate SDL events. This maps directly to an iOS-specific
+/// event, but since it doesn't do anything iOS-specific internally, it is
+/// available on all platforms, in case it might be useful for some specific
+/// paradigm. Most apps do not need to use this directly; SDL's internal event
+/// code will handle all this for windows created by SDL_CreateWindow!
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.0.0.
-/// /
+///
 /// ```c
 /// extern DECLSPEC void SDLCALL SDL_OnApplicationDidEnterBackground(void)
 /// ```
@@ -719,8 +770,20 @@ void sdlOnApplicationDidEnterBackground() {
 }
 
 ///
+/// Let iOS apps with external event handling report
+/// onApplicationWillEnterForeground.
+///
+/// This functions allows iOS apps that have their own event handling to hook
+/// into SDL to generate SDL events. This maps directly to an iOS-specific
+/// event, but since it doesn't do anything iOS-specific internally, it is
+/// available on all platforms, in case it might be useful for some specific
+/// paradigm. Most apps do not need to use this directly; SDL's internal event
+/// code will handle all this for windows created by SDL_CreateWindow!
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.0.0.
-/// /
+///
 /// ```c
 /// extern DECLSPEC void SDLCALL SDL_OnApplicationWillEnterForeground(void)
 /// ```
@@ -732,8 +795,20 @@ void sdlOnApplicationWillEnterForeground() {
 }
 
 ///
+/// Let iOS apps with external event handling report
+/// onApplicationDidBecomeActive.
+///
+/// This functions allows iOS apps that have their own event handling to hook
+/// into SDL to generate SDL events. This maps directly to an iOS-specific
+/// event, but since it doesn't do anything iOS-specific internally, it is
+/// available on all platforms, in case it might be useful for some specific
+/// paradigm. Most apps do not need to use this directly; SDL's internal event
+/// code will handle all this for windows created by SDL_CreateWindow!
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.0.0.
-/// /
+///
 /// ```c
 /// extern DECLSPEC void SDLCALL SDL_OnApplicationDidBecomeActive(void)
 /// ```
@@ -745,8 +820,20 @@ void sdlOnApplicationDidBecomeActive() {
 }
 
 ///
+/// Let iOS apps with external event handling report
+/// onApplicationDidChangeStatusBarOrientation.
+///
+/// This functions allows iOS apps that have their own event handling to hook
+/// into SDL to generate SDL events. This maps directly to an iOS-specific
+/// event, but since it doesn't do anything iOS-specific internally, it is
+/// available on all platforms, in case it might be useful for some specific
+/// paradigm. Most apps do not need to use this directly; SDL's internal event
+/// code will handle all this for windows created by SDL_CreateWindow!
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.0.0.
-/// /
+///
 /// ```c
 /// extern DECLSPEC void SDLCALL SDL_OnApplicationDidChangeStatusBarOrientation(void)
 /// ```

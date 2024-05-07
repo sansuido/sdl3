@@ -142,6 +142,9 @@ Pointer<Int8> sdlGetPrefPath(String? org, String? app) {
 /// Note that the function is expensive, and should be called once at the
 /// beginning of the execution and kept for as long as needed.
 ///
+/// The returned path is guaranteed to end with a path separator ('\\' on
+/// Windows, '/' on most other platforms).
+///
 /// The returned value is owned by the caller and should be freed with
 /// SDL_free().
 ///
@@ -152,6 +155,8 @@ Pointer<Int8> sdlGetPrefPath(String? org, String? app) {
 /// folder, or NULL if an error happened.
 ///
 /// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_Folder
 ///
 /// ```c
 /// extern DECLSPEC char *SDLCALL SDL_GetUserFolder(SDL_Folder folder)
