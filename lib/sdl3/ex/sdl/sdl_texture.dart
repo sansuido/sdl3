@@ -114,7 +114,7 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
 
   int? getBlendMode() {
     int? result;
-    var blendModePointer = calloc<Int32>();
+    var blendModePointer = calloc<Uint32>();
     // 532
     if (sdlGetTextureBlendMode(this, blendModePointer) == 0) {
       result = blendModePointer.value;

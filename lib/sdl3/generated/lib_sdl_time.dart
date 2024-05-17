@@ -4,6 +4,35 @@ import 'lib_sdl.dart';
 import 'struct_sdl.dart';
 
 ///
+/// Gets the current preferred date and time format for the system locale.
+///
+/// This might be a "slow" call that has to query the operating system. It's
+/// best to ask for this once and save the results. However, the preferred
+/// formats can change, usually because the user has changed a system
+/// preference outside of your program.
+///
+/// \param dateFormat a pointer to the SDL_DateFormat to hold the returned date
+/// format, may be NULL
+/// \param timeFormat a pointer to the SDL_TimeFormat to hold the returned time
+/// format, may be NULL
+/// \returns 0 on success or -1 on error; call SDL_GetError() for more
+/// information.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// ```c
+/// extern DECLSPEC int SDLCALL SDL_GetDateTimeLocalePreferences(SDL_DateFormat *dateFormat, SDL_TimeFormat *timeFormat)
+/// ```
+int sdlGetDateTimeLocalePreferences(
+    Pointer<Int32> dateFormat, Pointer<Int32> timeFormat) {
+  final sdlGetDateTimeLocalePreferencesLookupFunction = libSdl3.lookupFunction<
+      Int32 Function(Pointer<Int32> dateFormat, Pointer<Int32> timeFormat),
+      int Function(Pointer<Int32> dateFormat,
+          Pointer<Int32> timeFormat)>('SDL_GetDateTimeLocalePreferences');
+  return sdlGetDateTimeLocalePreferencesLookupFunction(dateFormat, timeFormat);
+}
+
+///
 /// Gets the current value of the system realtime clock in nanoseconds since
 /// Jan 1, 1970 in Universal Coordinated Time (UTC).
 ///

@@ -21,7 +21,8 @@ import 'lib_sdl.dart';
 /// `flags` may be any of the following OR'd together:
 ///
 /// - `SDL_INIT_TIMER`: timer subsystem
-/// - `SDL_INIT_AUDIO`: audio subsystem
+/// - `SDL_INIT_AUDIO`: audio subsystem; automatically initializes the events
+/// subsystem
 /// - `SDL_INIT_VIDEO`: video subsystem; automatically initializes the events
 /// subsystem
 /// - `SDL_INIT_JOYSTICK`: joystick subsystem; automatically initializes the
@@ -30,7 +31,10 @@ import 'lib_sdl.dart';
 /// - `SDL_INIT_GAMEPAD`: gamepad subsystem; automatically initializes the
 /// joystick subsystem
 /// - `SDL_INIT_EVENTS`: events subsystem
-/// - `SDL_INIT_SENSOR`: sensor subsystem
+/// - `SDL_INIT_SENSOR`: sensor subsystem; automatically initializes the events
+/// subsystem
+/// - `SDL_INIT_CAMERA`: camera subsystem; automatically initializes the events
+/// subsystem
 ///
 /// Subsystem initialization is ref-counted, you must call SDL_QuitSubSystem()
 /// for each SDL_InitSubSystem() to correctly shutdown a subsystem manually (or
@@ -49,7 +53,7 @@ import 'lib_sdl.dart';
 /// \sa SDL_WasInit
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_Init(Uint32 flags)
+/// extern DECLSPEC int SDLCALL SDL_Init(SDL_InitFlags flags)
 /// ```
 int sdlInit(int flags) {
   final sdlInitLookupFunction = libSdl3.lookupFunction<
@@ -73,7 +77,7 @@ int sdlInit(int flags) {
 /// \sa SDL_QuitSubSystem
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_InitSubSystem(Uint32 flags)
+/// extern DECLSPEC int SDLCALL SDL_InitSubSystem(SDL_InitFlags flags)
 /// ```
 int sdlInitSubSystem(int flags) {
   final sdlInitSubSystemLookupFunction = libSdl3.lookupFunction<
@@ -96,7 +100,7 @@ int sdlInitSubSystem(int flags) {
 /// \sa SDL_Quit
 ///
 /// ```c
-/// extern DECLSPEC void SDLCALL SDL_QuitSubSystem(Uint32 flags)
+/// extern DECLSPEC void SDLCALL SDL_QuitSubSystem(SDL_InitFlags flags)
 /// ```
 void sdlQuitSubSystem(int flags) {
   final sdlQuitSubSystemLookupFunction = libSdl3.lookupFunction<
@@ -118,7 +122,7 @@ void sdlQuitSubSystem(int flags) {
 /// \sa SDL_InitSubSystem
 ///
 /// ```c
-/// extern DECLSPEC Uint32 SDLCALL SDL_WasInit(Uint32 flags)
+/// extern DECLSPEC SDL_InitFlags SDLCALL SDL_WasInit(SDL_InitFlags flags)
 /// ```
 int sdlWasInit(int flags) {
   final sdlWasInitLookupFunction = libSdl3.lookupFunction<

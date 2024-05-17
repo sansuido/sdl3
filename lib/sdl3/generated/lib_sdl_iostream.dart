@@ -43,8 +43,9 @@ import 'struct_sdl.dart';
 /// This function supports Unicode filenames, but they must be encoded in UTF-8
 /// format, regardless of the underlying operating system.
 ///
-/// As a fallback, SDL_IOFromFile() will transparently open a matching filename
-/// in an Android app's `assets`.
+/// In Android, SDL_IOFromFile() can be used to open content:// URIs. As a
+/// fallback, SDL_IOFromFile() will transparently open a matching filename in
+/// the app's `assets`.
 ///
 /// Closing the SDL_IOStream will close SDL's internal file handle.
 ///

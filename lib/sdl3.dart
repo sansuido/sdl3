@@ -3,7 +3,7 @@ export 'sdl3/ex/dart/point.dart';
 export 'sdl3/ex/dart/rectangle.dart';
 export 'sdl3/ex/image/img_animation.dart';
 export 'sdl3/ex/mixer/mix_music.dart';
-export 'sdl3/ex/mixer/mx_chunk.dart';
+export 'sdl3/ex/mixer/mix_chunk.dart';
 export 'sdl3/ex/sdl/sdl_color.dart';
 export 'sdl3/ex/sdl/sdl_cursor.dart';
 export 'sdl3/ex/sdl/sdl_event.dart';

@@ -41,17 +41,17 @@ const gFontPath = 'assets/SourceHanCodeJP.ttc';
 //const gFontPath = 'C:/Windows/Fonts/msgothic.ttc';
 
 int main() {
-  // Initialize SDL2
+  // Initialize SDL3
   if (sdlInit(SDL_INIT_VIDEO) < 0) {
-    print('SDL2 could not be initialized!\n'
-        'SDL2 s: ${sdlGetError()}\n');
+    print('SDL3 could not be initialized!\n'
+        'SDL3 s: ${sdlGetError()}\n');
     return 0;
   }
-  // Initialize SDL2_ttf
+  // Initialize SDL3_ttf
   ttfInit();
   // Create window
   Pointer<SdlWindow> window = SdlWindowEx.create(
-      title: 'SDL2_ttf sample', w: gScreenWidth, h: gScreenHeight);
+      title: 'SDL3_ttf sample', w: gScreenWidth, h: gScreenHeight);
   if (window == nullptr) {
     print('Window could not be created!\n'
         'SDL_Error: ${sdlGetError()}\n');
@@ -75,7 +75,7 @@ int main() {
       //var font = ttfOpenFont(gFontPath, 40);
       if (font == nullptr) {
         print('Unable to load font: \'$gFontPath\'!\n'
-            'SDL2_ttf Error: ${ttfGetError()}\n');
+            'SDL3_ttf Error: ${ttfGetError()}\n');
         return 0;
       }
       Pointer<SdlTexture> text = nullptr;
@@ -87,13 +87,13 @@ int main() {
       font.close();
       if (textSurface == nullptr) {
         print('Unable to render text surface!\n'
-            'SDL2_ttf Error: ${ttfGetError()}\n');
+            'SDL3_ttf Error: ${ttfGetError()}\n');
       } else {
         // Create texture from surface pixels
         text = renderer.createTextureFromSurface(textSurface);
         if (text == nullptr) {
           print('Unable to create texture from rendered text!\n'
-              'SDL2 Error: ${sdlGetError()}\n');
+              'SDL3 Error: ${sdlGetError()}\n');
           return 0;
         }
         // Get text dimensions
@@ -135,7 +135,7 @@ int main() {
     // Destroy window
     window.destroy();
   }
-  // Quit SDL2_ttf
+  // Quit SDL3_ttf
   ttfQuit();
   // Quit SDL
   sdlQuit();

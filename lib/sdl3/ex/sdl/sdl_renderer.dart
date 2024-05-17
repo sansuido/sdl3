@@ -1440,7 +1440,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// extern DECLSPEC int SDLCALL SDL_GetRenderDrawBlendMode(SDL_Renderer *renderer, SDL_BlendMode *blendMode)
   /// ```
   int getDrawBlendMode() {
-    var blendModePointer = calloc<Int32>();
+    var blendModePointer = calloc<Uint32>();
     sdlGetRenderDrawBlendMode(this, blendModePointer);
     var result = blendModePointer.value;
     calloc.free(blendModePointer);

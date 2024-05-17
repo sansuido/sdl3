@@ -62,6 +62,6 @@ String? mixGetError() {
 /// ```c
 /// const Mix_ClearError = SDL_ClearError;
 /// ```
-void mixClearError() {
+int mixClearError() {
   return sdlClearError();
 }

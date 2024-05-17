@@ -101,7 +101,7 @@ int sdlCreateWindowAndRenderer(
               Pointer<Utf8> title,
               Int32 width,
               Int32 height,
-              Uint32 windowFlags,
+              Uint64 windowFlags,
               Pointer<Pointer<SdlWindow>> window,
               Pointer<Pointer<SdlRenderer>> renderer),
           int Function(
@@ -149,7 +149,7 @@ int sdlCreateWindowAndRenderer(
 /// \sa SDL_GetRendererInfo
 ///
 /// ```c
-/// extern DECLSPEC SDL_Renderer * SDLCALL SDL_CreateRenderer(SDL_Window *window, const char *name, Uint32 flags)
+/// extern DECLSPEC SDL_Renderer * SDLCALL SDL_CreateRenderer(SDL_Window *window, const char *name, SDL_RendererFlags flags)
 /// ```
 Pointer<SdlRenderer> sdlCreateRenderer(
     Pointer<SdlWindow> window, String? name, int flags) {
@@ -1079,7 +1079,7 @@ int sdlGetTextureAlphaModFloat(
 /// ```
 int sdlSetTextureBlendMode(Pointer<SdlTexture> texture, int blendMode) {
   final sdlSetTextureBlendModeLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlTexture> texture, Int32 blendMode),
+      Int32 Function(Pointer<SdlTexture> texture, Uint32 blendMode),
       int Function(Pointer<SdlTexture> texture,
           int blendMode)>('SDL_SetTextureBlendMode');
   return sdlSetTextureBlendModeLookupFunction(texture, blendMode);
@@ -1101,11 +1101,11 @@ int sdlSetTextureBlendMode(Pointer<SdlTexture> texture, int blendMode) {
 /// extern DECLSPEC int SDLCALL SDL_GetTextureBlendMode(SDL_Texture *texture, SDL_BlendMode *blendMode)
 /// ```
 int sdlGetTextureBlendMode(
-    Pointer<SdlTexture> texture, Pointer<Int32> blendMode) {
+    Pointer<SdlTexture> texture, Pointer<Uint32> blendMode) {
   final sdlGetTextureBlendModeLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlTexture> texture, Pointer<Int32> blendMode),
+      Int32 Function(Pointer<SdlTexture> texture, Pointer<Uint32> blendMode),
       int Function(Pointer<SdlTexture> texture,
-          Pointer<Int32> blendMode)>('SDL_GetTextureBlendMode');
+          Pointer<Uint32> blendMode)>('SDL_GetTextureBlendMode');
   return sdlGetTextureBlendModeLookupFunction(texture, blendMode);
 }
 
@@ -2089,7 +2089,7 @@ int sdlGetRenderColorScale(
 /// ```
 int sdlSetRenderDrawBlendMode(Pointer<SdlRenderer> renderer, int blendMode) {
   final sdlSetRenderDrawBlendModeLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlRenderer> renderer, Int32 blendMode),
+      Int32 Function(Pointer<SdlRenderer> renderer, Uint32 blendMode),
       int Function(Pointer<SdlRenderer> renderer,
           int blendMode)>('SDL_SetRenderDrawBlendMode');
   return sdlSetRenderDrawBlendModeLookupFunction(renderer, blendMode);
@@ -2111,11 +2111,11 @@ int sdlSetRenderDrawBlendMode(Pointer<SdlRenderer> renderer, int blendMode) {
 /// extern DECLSPEC int SDLCALL SDL_GetRenderDrawBlendMode(SDL_Renderer *renderer, SDL_BlendMode *blendMode)
 /// ```
 int sdlGetRenderDrawBlendMode(
-    Pointer<SdlRenderer> renderer, Pointer<Int32> blendMode) {
+    Pointer<SdlRenderer> renderer, Pointer<Uint32> blendMode) {
   final sdlGetRenderDrawBlendModeLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlRenderer> renderer, Pointer<Int32> blendMode),
+      Int32 Function(Pointer<SdlRenderer> renderer, Pointer<Uint32> blendMode),
       int Function(Pointer<SdlRenderer> renderer,
-          Pointer<Int32> blendMode)>('SDL_GetRenderDrawBlendMode');
+          Pointer<Uint32> blendMode)>('SDL_GetRenderDrawBlendMode');
   return sdlGetRenderDrawBlendModeLookupFunction(renderer, blendMode);
 }
 

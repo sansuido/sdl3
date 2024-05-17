@@ -1704,6 +1704,30 @@ final class SdlIoStream extends Opaque {}
 // SDL_Joystick
 final class SdlJoystick extends Opaque {}
 
+// SDL_VirtualJoystickTouchpadDesc
+final class SdlVirtualJoystickTouchpadDesc extends Struct {
+  // [0]+(2)
+  @Uint16()
+  external int nfingers;
+  // [2]+(2*3)
+  @Uint16()
+  external int padding_1;
+  @Uint16()
+  external int padding_2;
+  @Uint16()
+  external int padding_3;
+}
+
+// SDL_VirtualJoystickSensorDesc
+final class SdlVirtualJoystickSensorDesc extends Struct {
+  // [0]+(4)
+  @Int32()
+  external int type;
+  // [4]+(4)
+  @Float()
+  external double rate;
+}
+
 // SDL_VirtualJoystickDesc
 final class SdlVirtualJoystickDesc extends Struct {
   // [0]+(2)
@@ -1711,47 +1735,64 @@ final class SdlVirtualJoystickDesc extends Struct {
   external int type;
   // [2]+(2)
   @Uint16()
-  external int naxes;
+  external int padding;
   // [4]+(2)
   @Uint16()
-  external int nbuttons;
+  external int vendorId;
   // [6]+(2)
   @Uint16()
-  external int nhats;
+  external int productId;
   // [8]+(2)
   @Uint16()
-  external int vendorId;
+  external int naxes;
   // [10]+(2)
   @Uint16()
-  external int productId;
+  external int nbuttons;
   // [12]+(2)
   @Uint16()
-  external int padding;
-  // [] +(2)
+  external int nballs;
+  // [14]+(2)
   @Uint16()
-  external int blank_1;
-  // [16]+(4)
+  external int nhats;
+  // [16]+(2)
+  @Uint16()
+  external int ntouchpads;
+  // [18]+(2)
+  @Uint16()
+  external int nsensors;
+  // [20]+(2*2)
+  @Uint16()
+  external int padding2_1;
+  @Uint16()
+  external int padding2_2;
+  // [24]+(4)
   @Uint32()
   external int buttonMask;
-  // [20]+(4)
+  // [28]+(4)
   @Uint32()
   external int axisMask;
-  // [24]+(8)
-  external Pointer<Utf8> name;
   // [32]+(8)
-  external Pointer<NativeType> userdata;
+  external Pointer<Utf8> name;
   // [40]+(8)
-  external Pointer<NativeType> update;
+  external Pointer<SdlVirtualJoystickTouchpadDesc> touchpads;
   // [48]+(8)
-  external Pointer<NativeType> setPlayerIndex;
+  external Pointer<SdlVirtualJoystickSensorDesc> sensors;
   // [56]+(8)
-  external Pointer<NativeType> rumble;
+  external Pointer<NativeType> userdata;
   // [64]+(8)
-  external Pointer<NativeType> rumbleTriggers;
+  external Pointer<NativeType> update;
   // [72]+(8)
-  external Pointer<NativeType> setLed;
+  external Pointer<NativeType> setPlayerIndex;
   // [80]+(8)
+  external Pointer<NativeType> rumble;
+  // [88]+(8)
+  external Pointer<NativeType> rumbleTriggers;
+  // [96]+(8)
+  external Pointer<NativeType> setLed;
+  // [104]+(8)
   external Pointer<NativeType> sendEffect;
+  // [112]+(8)
+  external Pointer<NativeType> setSensorsEnabled;
 }
 
 // SDL_Keysym
@@ -1760,17 +1801,17 @@ final class SdlKeysym extends Struct {
   @Int32()
   external int scancode;
   // [4]+(4)
-  @Int32()
+  @Uint32()
   external int sym;
   // [8]+(2)
   @Uint16()
   external int mod;
-  // [] +(2)
+  // [10]+(2)
   @Uint16()
-  external int blank_1;
-  // [12]+(4)
-  @Uint32()
   external int unused;
+  // [] +(4)
+  @Uint32()
+  external int blank_1;
 }
 
 // SDL_Locale
@@ -2080,43 +2121,12 @@ final class SdlRendererInfo extends Struct {
   // [12]+(4)
   @Int32()
   external int numTextureFormats;
-  // [16]+(4*16)
-  @Int32()
-  external int textureFormats_1;
-  @Int32()
-  external int textureFormats_2;
-  @Int32()
-  external int textureFormats_3;
-  @Int32()
-  external int textureFormats_4;
-  @Int32()
-  external int textureFormats_5;
-  @Int32()
-  external int textureFormats_6;
-  @Int32()
-  external int textureFormats_7;
-  @Int32()
-  external int textureFormats_8;
-  @Int32()
-  external int textureFormats_9;
-  @Int32()
-  external int textureFormats_10;
-  @Int32()
-  external int textureFormats_11;
-  @Int32()
-  external int textureFormats_12;
-  @Int32()
-  external int textureFormats_13;
-  @Int32()
-  external int textureFormats_14;
-  @Int32()
-  external int textureFormats_15;
-  @Int32()
-  external int textureFormats_16;
-  // [80]+(4)
+  // [16]+(8)
+  external Pointer<Int32> textureFormats;
+  // [24]+(4)
   @Int32()
   external int maxTextureWidth;
-  // [84]+(4)
+  // [28]+(4)
   @Int32()
   external int maxTextureHeight;
 }

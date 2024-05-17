@@ -527,7 +527,7 @@ void sdlNetFreeLocalAddresses(Pointer<Pointer<SdlNetAddress>> addresses) {
 /// handle that for you.
 ///
 /// \param address the address of the remote server to connect to
-/// \param the port on the remote server to connect to
+/// \param port the port on the remote server to connect to
 /// \returns a new SDLNet_StreamSocket, pending connection, or NULL on error;
 /// call SDL_GetError() for details.
 ///
@@ -579,7 +579,7 @@ Pointer<SdlNetStreamSocket> sdlNetCreateClient(
 /// SDLNet_GetConnectionStatus() from time to time until you get a non-zero
 /// result.
 ///
-/// \param address The SDLNet_Address object to wait on.
+/// \param sock The SDLNet_StreamSocket object to wait on.
 /// \param timeout Number of milliseconds to wait for resolution to complete.
 /// -1 to wait indefinitely, 0 to check once without waiting.
 /// \returns 1 if successfully connected, -1 if connection failed, 0 if still
@@ -639,8 +639,8 @@ int sdlNetWaitUntilConnected(Pointer<SdlNetStreamSocket> sock, int timeout) {
 /// you do not have to byteswap it into "network order," as the library will
 /// handle that for you.
 ///
-/// \param address the _local_ address to listen for connections on, or NULL.
-/// \param the port on the local address to listen for connections on
+/// \param addr the _local_ address to listen for connections on, or NULL.
+/// \param port the port on the local address to listen for connections on
 /// \returns a new SDLNet_StreamSocket, pending connection, or NULL on error;
 /// call SDL_GetError() for details.
 ///
@@ -1169,8 +1169,8 @@ void sdlNetDestroyStreamSocket(Pointer<SdlNetStreamSocket> sock) {
 /// handle that for you.
 ///
 /// \param address the _local_ address to listen for connections on, or NULL.
-/// \param the port on the local address to listen for connections on, or zero
-/// for the system to decide.
+/// \param port the port on the local address to listen for connections on, or
+/// zero for the system to decide.
 /// \returns a new SDLNet_DatagramSocket, or NULL on error; call SDL_GetError()
 /// for details.
 ///
@@ -1228,6 +1228,8 @@ Pointer<SdlNetDatagramSocket> sdlNetCreateDatagramSocket(
 /// SDL_DestroyDatagramSocket().
 ///
 /// \param sock the datagram socket to send data through
+/// \param address the SDLNet_Address object address.
+/// \param port the address port.
 /// \param buf a pointer to the data to send as a single packet.
 /// \param buflen the size of the data to send, in bytes.
 /// \returns 0 if data sent or queued for transmission, -1 on failure; call
@@ -1299,8 +1301,7 @@ int sdlNetSendDatagram(
 /// SDL_DestroyDatagramSocket().
 ///
 /// \param sock the datagram socket to send data through
-/// \param buf a pointer to the data to send as a single packet.
-/// \param buflen the size of the data to send, in bytes.
+/// \param dgram a pointer to the datagram packet pointer.
 /// \returns 0 if data sent or queued for transmission, -1 on failure; call
 /// SDL_GetError() for details.
 ///

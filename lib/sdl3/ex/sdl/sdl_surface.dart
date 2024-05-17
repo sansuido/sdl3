@@ -137,7 +137,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
 
   int? getBlendMode() {
     int? result;
-    var blendModePointer = calloc<Int32>();
+    var blendModePointer = calloc<Uint32>();
     // 666
     if (sdlGetSurfaceBlendMode(this, blendModePointer) == 0) {
       result = blendModePointer.value;

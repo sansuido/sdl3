@@ -91,7 +91,7 @@ int sdlShowMessageBox(
 /// \sa SDL_ShowMessageBox
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_ShowSimpleMessageBox(Uint32 flags, const char *title, const char *message, SDL_Window *window)
+/// extern DECLSPEC int SDLCALL SDL_ShowSimpleMessageBox(SDL_MessageBoxFlags flags, const char *title, const char *message, SDL_Window *window)
 /// ```
 int sdlShowSimpleMessageBox(
     int flags, String? title, String? message, Pointer<SdlWindow> window) {

@@ -103,7 +103,7 @@ int main() {
   }
   // Create window
   var window = SdlWindowEx.create(
-      title: 'SDL2 audio sample (Press SPACE to pause/play)',
+      title: 'SDL3 audio sample (Press SPACE to pause/play)',
       w: gScreenWidth,
       h: gScreenHeight);
   if (window == nullptr) {

@@ -42,6 +42,24 @@ int sdlSetError(String? fmt, Pointer<NativeType> arg1) {
 }
 
 ///
+/// Set an error indicating that memory allocation failed.
+///
+/// This function does not do any memory allocation.
+///
+/// \returns -1
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// ```c
+/// extern DECLSPEC int SDLCALL SDL_OutOfMemory(void)
+/// ```
+int sdlOutOfMemory() {
+  final sdlOutOfMemoryLookupFunction = libSdl3
+      .lookupFunction<Int32 Function(), int Function()>('SDL_OutOfMemory');
+  return sdlOutOfMemoryLookupFunction();
+}
+
+///
 /// Retrieve a message about the last error that occurred on the current
 /// thread.
 ///
@@ -92,33 +110,18 @@ String? sdlGetError() {
 ///
 /// Clear any previous error message for this thread.
 ///
+/// \returns 0
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetError
 /// \sa SDL_SetError
 ///
 /// ```c
-/// extern DECLSPEC void SDLCALL SDL_ClearError(void)
+/// extern DECLSPEC int SDLCALL SDL_ClearError(void)
 /// ```
-void sdlClearError() {
+int sdlClearError() {
   final sdlClearErrorLookupFunction = libSdl3
-      .lookupFunction<Void Function(), void Function()>('SDL_ClearError');
+      .lookupFunction<Int32 Function(), int Function()>('SDL_ClearError');
   return sdlClearErrorLookupFunction();
-}
-
-///
-/// Set an SDL error from a list of error codes.
-///
-/// \param code Error code
-/// \returns unconditionally -1.
-///
-/// \since This function is available since SDL 3.0.0.
-///
-/// ```c
-/// extern DECLSPEC int SDLCALL SDL_Error(SDL_errorcode code)
-/// ```
-int sdlError(int code) {
-  final sdlErrorLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Int32 code), int Function(int code)>('SDL_Error');
-  return sdlErrorLookupFunction(code);
 }

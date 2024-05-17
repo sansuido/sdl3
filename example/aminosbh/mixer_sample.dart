@@ -51,16 +51,16 @@ int main() {
         'SDL_Error: ${sdlGetError()}\n');
     return 0;
   }
-  //Initialize SDL2_mixer
+  //Initialize SDL3_mixer
   if (mixOpenAudio(SDL_AUDIO_DEVICE_DEFAULT_OUTPUT, nullptr) != 0) {
-    print('SDL2_mixer could not be initialized!\n'
+    print('SDL3_mixer could not be initialized!\n'
         'SDL_Error: ${sdlGetError()}%s\n');
     sdlQuit();
     return 0;
   }
   // Create window
   var window = SdlWindowEx.create(
-      title: 'SDL2 audio sample (Press SPACE to pause/play)',
+      title: 'SDL3 audio sample (Press SPACE to pause/play)',
       w: gScreenWidth,
       h: gScreenHeight);
   if (window == nullptr) {
@@ -81,12 +81,13 @@ int main() {
     sdlQuit();
     return 0;
   }
-  var sounds = <Pointer<MixMusic>>[];
-  sounds.add(mixLoadMus(gWavesSound));
-  sounds.add(mixLoadMus(gClapSound));
-  sounds.add(mixLoadMus(gSnareSound));
-  sounds.add(mixLoadMus(gTechnoClapSnareSound));
-  sounds.add(mixLoadMus(gReverbSnareSound));
+
+  var sounds = <Pointer<MixChunk>>[];
+  sounds.add(mixLoadWav(gWavesSound));
+  sounds.add(mixLoadWav(gClapSound));
+  sounds.add(mixLoadWav(gSnareSound));
+  sounds.add(mixLoadWav(gTechnoClapSnareSound));
+  sounds.add(mixLoadWav(gReverbSnareSound));
   // Declare rect of square
   var bar = min(gScreenWidth, gScreenHeight) / 2;
   var squareRect = Rectangle(
@@ -109,16 +110,16 @@ int main() {
         case SDL_EVENT_KEY_DOWN:
           switch (event.key.keysym.ref.sym) {
             case SDLK_RIGHT:
-              sounds[1].play(1);
+              sounds[1].playChannel(-1, 0);
               break;
             case SDLK_LEFT:
-              sounds[2].play(1);
+              sounds[2].playChannel(-1, 0);
               break;
             case SDLK_UP:
-              sounds[3].play(1);
+              sounds[3].playChannel(-1, 0);
               break;
             case SDLK_DOWN:
-              sounds[4].play(1);
+              sounds[4].playChannel(-1, 0);
               break;
           }
           break;

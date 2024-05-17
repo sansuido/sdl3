@@ -150,6 +150,14 @@ int sdlGetPrimaryDisplay() {
 /// enabled, this will be 1.0. This property can change dynamically when
 /// SDL_EVENT_DISPLAY_HDR_STATE_CHANGED is sent.
 ///
+/// On KMS/DRM:
+///
+/// - `SDL_PROP_DISPLAY_KMSDRM_ORIENTATION_NUMBER`: the "panel orientation"
+/// property for the display in degrees of clockwise rotation. Note that this
+/// is provided only as a hint, and the application is responsible for any
+/// coordinate transformations needed to conform to the requested display
+/// orientation.
+///
 /// \param displayID the instance ID of the display to query
 /// \returns a valid property ID on success or 0 on failure; call
 /// SDL_GetError() for more information.
@@ -752,7 +760,7 @@ int sdlGetWindowPixelFormat(Pointer<SdlWindow> window) {
 Pointer<SdlWindow> sdlCreateWindow(String? title, int w, int h, int flags) {
   final sdlCreateWindowLookupFunction = libSdl3.lookupFunction<
       Pointer<SdlWindow> Function(
-          Pointer<Utf8> title, Int32 w, Int32 h, Uint32 flags),
+          Pointer<Utf8> title, Int32 w, Int32 h, Uint64 flags),
       Pointer<SdlWindow> Function(
           Pointer<Utf8> title, int w, int h, int flags)>('SDL_CreateWindow');
   final titlePointer = title != null ? title.toNativeUtf8() : nullptr;
@@ -821,7 +829,7 @@ Pointer<SdlWindow> sdlCreatePopupWindow(Pointer<SdlWindow> parent, int offsetX,
     int offsetY, int w, int h, int flags) {
   final sdlCreatePopupWindowLookupFunction = libSdl3.lookupFunction<
       Pointer<SdlWindow> Function(Pointer<SdlWindow> parent, Int32 offsetX,
-          Int32 offsetY, Int32 w, Int32 h, Uint32 flags),
+          Int32 offsetY, Int32 w, Int32 h, Uint64 flags),
       Pointer<SdlWindow> Function(Pointer<SdlWindow> parent, int offsetX,
           int offsetY, int w, int h, int flags)>('SDL_CreatePopupWindow');
   return sdlCreatePopupWindowLookupFunction(
@@ -1155,7 +1163,7 @@ int sdlGetWindowProperties(Pointer<SdlWindow> window) {
 /// ```
 int sdlGetWindowFlags(Pointer<SdlWindow> window) {
   final sdlGetWindowFlagsLookupFunction = libSdl3.lookupFunction<
-      Uint32 Function(Pointer<SdlWindow> window),
+      Uint64 Function(Pointer<SdlWindow> window),
       int Function(Pointer<SdlWindow> window)>('SDL_GetWindowFlags');
   return sdlGetWindowFlagsLookupFunction(window);
 }

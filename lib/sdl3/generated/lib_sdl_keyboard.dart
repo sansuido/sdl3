@@ -167,7 +167,7 @@ void sdlResetKeyboard() {
 /// ```
 int sdlGetModState() {
   final sdlGetModStateLookupFunction = libSdl3
-      .lookupFunction<Int32 Function(), int Function()>('SDL_GetModState');
+      .lookupFunction<Uint16 Function(), int Function()>('SDL_GetModState');
   return sdlGetModStateLookupFunction();
 }
 
@@ -193,7 +193,7 @@ int sdlGetModState() {
 /// ```
 void sdlSetModState(int modstate) {
   final sdlSetModStateLookupFunction = libSdl3.lookupFunction<
-      Void Function(Int32 modstate),
+      Void Function(Uint16 modstate),
       void Function(int modstate)>('SDL_SetModState');
   return sdlSetModStateLookupFunction(modstate);
 }
@@ -217,7 +217,7 @@ void sdlSetModState(int modstate) {
 /// ```
 int sdlGetKeyFromScancode(int scancode) {
   final sdlGetKeyFromScancodeLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Int32 scancode),
+      Uint32 Function(Int32 scancode),
       int Function(int scancode)>('SDL_GetKeyFromScancode');
   return sdlGetKeyFromScancodeLookupFunction(scancode);
 }
@@ -241,7 +241,7 @@ int sdlGetKeyFromScancode(int scancode) {
 /// ```
 int sdlGetScancodeFromKey(int key) {
   final sdlGetScancodeFromKeyLookupFunction =
-      libSdl3.lookupFunction<Int32 Function(Int32 key), int Function(int key)>(
+      libSdl3.lookupFunction<Int32 Function(Uint32 key), int Function(int key)>(
           'SDL_GetScancodeFromKey');
   return sdlGetScancodeFromKeyLookupFunction(key);
 }
@@ -331,7 +331,7 @@ int sdlGetScancodeFromName(String? name) {
 /// ```
 String? sdlGetKeyName(int key) {
   final sdlGetKeyNameLookupFunction = libSdl3.lookupFunction<
-      Pointer<Utf8> Function(Int32 key),
+      Pointer<Utf8> Function(Uint32 key),
       Pointer<Utf8> Function(int key)>('SDL_GetKeyName');
   final result = sdlGetKeyNameLookupFunction(key);
   if (result == nullptr) {
@@ -358,7 +358,7 @@ String? sdlGetKeyName(int key) {
 /// ```
 int sdlGetKeyFromName(String? name) {
   final sdlGetKeyFromNameLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<Utf8> name),
+      Uint32 Function(Pointer<Utf8> name),
       int Function(Pointer<Utf8> name)>('SDL_GetKeyFromName');
   final namePointer = name != null ? name.toNativeUtf8() : nullptr;
   final result = sdlGetKeyFromNameLookupFunction(namePointer);

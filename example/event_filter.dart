@@ -16,7 +16,8 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'package:sdl3/sdl3.dart';
 
-int myEventFilter(Pointer<Uint8> blue, Pointer<SdlEvent> event) {
+int myEventFilter(Pointer<NativeType> bluePrev, Pointer<SdlEvent> event) {
+  var blue = bluePrev.cast<Uint8>();
   switch (event.type) {
     case SDL_EVENT_KEY_DOWN:
       switch (event.key.keysym.ref.sym) {

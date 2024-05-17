@@ -42,7 +42,7 @@ import 'struct_sdl.dart';
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_Vulkan_GetVkInstanceProcAddr
+/// \sa SDL_Vulkan_GetVkGetInstanceProcAddr
 /// \sa SDL_Vulkan_UnloadLibrary
 ///
 /// ```c

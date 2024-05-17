@@ -655,7 +655,7 @@ int sdlGetSurfaceAlphaMod(Pointer<SdlSurface> surface, Pointer<Uint8> alpha) {
 /// ```
 int sdlSetSurfaceBlendMode(Pointer<SdlSurface> surface, int blendMode) {
   final sdlSetSurfaceBlendModeLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlSurface> surface, Int32 blendMode),
+      Int32 Function(Pointer<SdlSurface> surface, Uint32 blendMode),
       int Function(Pointer<SdlSurface> surface,
           int blendMode)>('SDL_SetSurfaceBlendMode');
   return sdlSetSurfaceBlendModeLookupFunction(surface, blendMode);
@@ -677,11 +677,11 @@ int sdlSetSurfaceBlendMode(Pointer<SdlSurface> surface, int blendMode) {
 /// extern DECLSPEC int SDLCALL SDL_GetSurfaceBlendMode(SDL_Surface *surface, SDL_BlendMode *blendMode)
 /// ```
 int sdlGetSurfaceBlendMode(
-    Pointer<SdlSurface> surface, Pointer<Int32> blendMode) {
+    Pointer<SdlSurface> surface, Pointer<Uint32> blendMode) {
   final sdlGetSurfaceBlendModeLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlSurface> surface, Pointer<Int32> blendMode),
+      Int32 Function(Pointer<SdlSurface> surface, Pointer<Uint32> blendMode),
       int Function(Pointer<SdlSurface> surface,
-          Pointer<Int32> blendMode)>('SDL_GetSurfaceBlendMode');
+          Pointer<Uint32> blendMode)>('SDL_GetSurfaceBlendMode');
   return sdlGetSurfaceBlendModeLookupFunction(surface, blendMode);
 }
 
@@ -1170,7 +1170,7 @@ int sdlFillSurfaceRects(
 /// The blit semantics for surfaces with and without blending and colorkey are
 /// defined as follows:
 ///
-/// ```c
+/// ```
 /// RGBA->RGB:
 /// Source surface blend mode set to SDL_BLENDMODE_BLEND:
 /// alpha-blend (using the source alpha-channel and per-surface alpha)

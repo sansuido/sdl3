@@ -18,7 +18,7 @@ int main() {
     print(sdlGetError());
     return -1;
   }
-  var window = SdlWindowEx.create(title: 'SDL2', w: 640, h: 480);
+  var window = SdlWindowEx.create(title: 'SDL3', w: 640, h: 480);
   if (window == nullptr) {
     print(sdlGetError());
     sdlQuit();
