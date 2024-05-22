@@ -14,7 +14,7 @@ import 'struct_sdl.dart';
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC const char* SDLCALL SDL_GetPixelFormatName(SDL_PixelFormatEnum format)
+/// extern SDL_DECLSPEC const char* SDLCALL SDL_GetPixelFormatName(SDL_PixelFormatEnum format)
 /// ```
 String? sdlGetPixelFormatName(int format) {
   final sdlGetPixelFormatNameLookupFunction = libSdl3.lookupFunction<
@@ -44,7 +44,7 @@ String? sdlGetPixelFormatName(int format) {
 /// \sa SDL_GetPixelFormatEnumForMasks
 ///
 /// ```c
-/// extern DECLSPEC SDL_bool SDLCALL SDL_GetMasksForPixelFormatEnum(SDL_PixelFormatEnum format, int *bpp, Uint32 * Rmask, Uint32 * Gmask, Uint32 * Bmask, Uint32 * Amask)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetMasksForPixelFormatEnum(SDL_PixelFormatEnum format, int *bpp, Uint32 * Rmask, Uint32 * Gmask, Uint32 * Bmask, Uint32 * Amask)
 /// ```
 bool sdlGetMasksForPixelFormatEnum(
     int format,
@@ -87,7 +87,7 @@ bool sdlGetMasksForPixelFormatEnum(
 /// \sa SDL_GetMasksForPixelFormatEnum
 ///
 /// ```c
-/// extern DECLSPEC SDL_PixelFormatEnum SDLCALL SDL_GetPixelFormatEnumForMasks(int bpp, Uint32 Rmask, Uint32 Gmask, Uint32 Bmask, Uint32 Amask)
+/// extern SDL_DECLSPEC SDL_PixelFormatEnum SDLCALL SDL_GetPixelFormatEnumForMasks(int bpp, Uint32 Rmask, Uint32 Gmask, Uint32 Bmask, Uint32 Amask)
 /// ```
 int sdlGetPixelFormatEnumForMasks(
     int bpp, int rmask, int gmask, int bmask, int amask) {
@@ -117,7 +117,7 @@ int sdlGetPixelFormatEnumForMasks(
 /// \sa SDL_SetPixelFormatPalette
 ///
 /// ```c
-/// extern DECLSPEC SDL_PixelFormat * SDLCALL SDL_CreatePixelFormat(SDL_PixelFormatEnum pixel_format)
+/// extern SDL_DECLSPEC SDL_PixelFormat * SDLCALL SDL_CreatePixelFormat(SDL_PixelFormatEnum pixel_format)
 /// ```
 Pointer<SdlPixelFormat> sdlCreatePixelFormat(int pixelFormat) {
   final sdlCreatePixelFormatLookupFunction = libSdl3.lookupFunction<
@@ -137,7 +137,7 @@ Pointer<SdlPixelFormat> sdlCreatePixelFormat(int pixelFormat) {
 /// \sa SDL_CreatePixelFormat
 ///
 /// ```c
-/// extern DECLSPEC void SDLCALL SDL_DestroyPixelFormat(SDL_PixelFormat *format)
+/// extern SDL_DECLSPEC void SDLCALL SDL_DestroyPixelFormat(SDL_PixelFormat *format)
 /// ```
 void sdlDestroyPixelFormat(Pointer<SdlPixelFormat> format) {
   final sdlDestroyPixelFormatLookupFunction = libSdl3.lookupFunction<
@@ -163,7 +163,7 @@ void sdlDestroyPixelFormat(Pointer<SdlPixelFormat> format) {
 /// \sa SDL_SetPixelFormatPalette
 ///
 /// ```c
-/// extern DECLSPEC SDL_Palette *SDLCALL SDL_CreatePalette(int ncolors)
+/// extern SDL_DECLSPEC SDL_Palette *SDLCALL SDL_CreatePalette(int ncolors)
 /// ```
 Pointer<SdlPalette> sdlCreatePalette(int ncolors) {
   final sdlCreatePaletteLookupFunction = libSdl3.lookupFunction<
@@ -183,7 +183,7 @@ Pointer<SdlPalette> sdlCreatePalette(int ncolors) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_SetPixelFormatPalette(SDL_PixelFormat * format, SDL_Palette *palette)
+/// extern SDL_DECLSPEC int SDLCALL SDL_SetPixelFormatPalette(SDL_PixelFormat * format, SDL_Palette *palette)
 /// ```
 int sdlSetPixelFormatPalette(
     Pointer<SdlPixelFormat> format, Pointer<SdlPalette> palette) {
@@ -208,7 +208,7 @@ int sdlSetPixelFormatPalette(
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_SetPaletteColors(SDL_Palette * palette, const SDL_Color * colors, int firstcolor, int ncolors)
+/// extern SDL_DECLSPEC int SDLCALL SDL_SetPaletteColors(SDL_Palette * palette, const SDL_Color * colors, int firstcolor, int ncolors)
 /// ```
 int sdlSetPaletteColors(Pointer<SdlPalette> palette, Pointer<SdlColor> colors,
     int firstcolor, int ncolors) {
@@ -231,7 +231,7 @@ int sdlSetPaletteColors(Pointer<SdlPalette> palette, Pointer<SdlColor> colors,
 /// \sa SDL_CreatePalette
 ///
 /// ```c
-/// extern DECLSPEC void SDLCALL SDL_DestroyPalette(SDL_Palette * palette)
+/// extern SDL_DECLSPEC void SDLCALL SDL_DestroyPalette(SDL_Palette * palette)
 /// ```
 void sdlDestroyPalette(Pointer<SdlPalette> palette) {
   final sdlDestroyPaletteLookupFunction = libSdl3.lookupFunction<
@@ -271,7 +271,7 @@ void sdlDestroyPalette(Pointer<SdlPalette> palette) {
 /// \sa SDL_MapRGBA
 ///
 /// ```c
-/// extern DECLSPEC Uint32 SDLCALL SDL_MapRGB(const SDL_PixelFormat * format, Uint8 r, Uint8 g, Uint8 b)
+/// extern SDL_DECLSPEC Uint32 SDLCALL SDL_MapRGB(const SDL_PixelFormat * format, Uint8 r, Uint8 g, Uint8 b)
 /// ```
 int sdlMapRgb(Pointer<SdlPixelFormat> format, int r, int g, int b) {
   final sdlMapRgbLookupFunction = libSdl3.lookupFunction<
@@ -315,7 +315,7 @@ int sdlMapRgb(Pointer<SdlPixelFormat> format, int r, int g, int b) {
 /// \sa SDL_MapRGB
 ///
 /// ```c
-/// extern DECLSPEC Uint32 SDLCALL SDL_MapRGBA(const SDL_PixelFormat * format, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
+/// extern SDL_DECLSPEC Uint32 SDLCALL SDL_MapRGBA(const SDL_PixelFormat * format, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 /// ```
 int sdlMapRgba(Pointer<SdlPixelFormat> format, int r, int g, int b, int a) {
   final sdlMapRgbaLookupFunction = libSdl3.lookupFunction<
@@ -348,7 +348,7 @@ int sdlMapRgba(Pointer<SdlPixelFormat> format, int r, int g, int b, int a) {
 /// \sa SDL_MapRGBA
 ///
 /// ```c
-/// extern DECLSPEC void SDLCALL SDL_GetRGB(Uint32 pixel, const SDL_PixelFormat * format, Uint8 * r, Uint8 * g, Uint8 * b)
+/// extern SDL_DECLSPEC void SDLCALL SDL_GetRGB(Uint32 pixel, const SDL_PixelFormat * format, Uint8 * r, Uint8 * g, Uint8 * b)
 /// ```
 void sdlGetRgb(int pixel, Pointer<SdlPixelFormat> format, Pointer<Uint8> r,
     Pointer<Uint8> g, Pointer<Uint8> b) {
@@ -386,7 +386,7 @@ void sdlGetRgb(int pixel, Pointer<SdlPixelFormat> format, Pointer<Uint8> r,
 /// \sa SDL_MapRGBA
 ///
 /// ```c
-/// extern DECLSPEC void SDLCALL SDL_GetRGBA(Uint32 pixel, const SDL_PixelFormat * format, Uint8 * r, Uint8 * g, Uint8 * b, Uint8 * a)
+/// extern SDL_DECLSPEC void SDLCALL SDL_GetRGBA(Uint32 pixel, const SDL_PixelFormat * format, Uint8 * r, Uint8 * g, Uint8 * b, Uint8 * a)
 /// ```
 void sdlGetRgba(int pixel, Pointer<SdlPixelFormat> format, Pointer<Uint8> r,
     Pointer<Uint8> g, Pointer<Uint8> b, Pointer<Uint8> a) {

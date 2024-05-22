@@ -18,7 +18,7 @@ import 'struct_sdl.dart';
 /// \since This function is available since SDL 3.0.0.
 /// /
 /// ```c
-/// extern DECLSPEC SDL_Thread *SDLCALL SDL_CreateThread(SDL_ThreadFunction fn, const char *name, void *data, pfnSDL_CurrentBeginThread pfnBeginThread, pfnSDL_CurrentEndThread pfnEndThread)
+/// extern SDL_DECLSPEC SDL_Thread *SDLCALL SDL_CreateThread(SDL_ThreadFunction fn, const char *name, void *data, pfnSDL_CurrentBeginThread pfnBeginThread, pfnSDL_CurrentEndThread pfnEndThread)
 /// ```
 Pointer<SdlThread> sdlCreateThread(
     Pointer<NativeFunction<SdlThreadFunction>> fn,
@@ -62,7 +62,7 @@ Pointer<SdlThread> sdlCreateThread(
 /// \since This function is available since SDL 3.0.0.
 /// /
 /// ```c
-/// extern DECLSPEC SDL_Thread *SDLCALL SDL_CreateThreadWithStackSize(SDL_ThreadFunction fn, const char *name, const size_t stacksize, void *data, pfnSDL_CurrentBeginThread pfnBeginThread, pfnSDL_CurrentEndThread pfnEndThread)
+/// extern SDL_DECLSPEC SDL_Thread *SDLCALL SDL_CreateThreadWithStackSize(SDL_ThreadFunction fn, const char *name, const size_t stacksize, void *data, pfnSDL_CurrentBeginThread pfnBeginThread, pfnSDL_CurrentEndThread pfnEndThread)
 /// ```
 Pointer<SdlThread> sdlCreateThreadWithStackSize(
     Pointer<NativeFunction<SdlThreadFunction>> fn,
@@ -107,7 +107,7 @@ Pointer<SdlThread> sdlCreateThreadWithStackSize(
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC const char *SDLCALL SDL_GetThreadName(SDL_Thread *thread)
+/// extern SDL_DECLSPEC const char *SDLCALL SDL_GetThreadName(SDL_Thread *thread)
 /// ```
 String? sdlGetThreadName(Pointer<SdlThread> thread) {
   final sdlGetThreadNameLookupFunction = libSdl3.lookupFunction<
@@ -137,7 +137,7 @@ String? sdlGetThreadName(Pointer<SdlThread> thread) {
 /// \sa SDL_GetThreadID
 ///
 /// ```c
-/// extern DECLSPEC SDL_ThreadID SDLCALL SDL_GetCurrentThreadID(void)
+/// extern SDL_DECLSPEC SDL_ThreadID SDLCALL SDL_GetCurrentThreadID(void)
 /// ```
 int sdlGetCurrentThreadId() {
   final sdlGetCurrentThreadIdLookupFunction =
@@ -162,7 +162,7 @@ int sdlGetCurrentThreadId() {
 /// \sa SDL_GetCurrentThreadID
 ///
 /// ```c
-/// extern DECLSPEC SDL_ThreadID SDLCALL SDL_GetThreadID(SDL_Thread * thread)
+/// extern SDL_DECLSPEC SDL_ThreadID SDLCALL SDL_GetThreadID(SDL_Thread * thread)
 /// ```
 int sdlGetThreadId(Pointer<SdlThread> thread) {
   final sdlGetThreadIdLookupFunction = libSdl3.lookupFunction<
@@ -185,7 +185,7 @@ int sdlGetThreadId(Pointer<SdlThread> thread) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_SetThreadPriority(SDL_ThreadPriority priority)
+/// extern SDL_DECLSPEC int SDLCALL SDL_SetThreadPriority(SDL_ThreadPriority priority)
 /// ```
 int sdlSetThreadPriority(int priority) {
   final sdlSetThreadPriorityLookupFunction = libSdl3.lookupFunction<
@@ -228,7 +228,7 @@ int sdlSetThreadPriority(int priority) {
 /// \sa SDL_DetachThread
 ///
 /// ```c
-/// extern DECLSPEC void SDLCALL SDL_WaitThread(SDL_Thread * thread, int *status)
+/// extern SDL_DECLSPEC void SDLCALL SDL_WaitThread(SDL_Thread * thread, int *status)
 /// ```
 void sdlWaitThread(Pointer<SdlThread> thread, Pointer<Int32> status) {
   final sdlWaitThreadLookupFunction = libSdl3.lookupFunction<
@@ -273,7 +273,7 @@ void sdlWaitThread(Pointer<SdlThread> thread, Pointer<Int32> status) {
 /// \sa SDL_WaitThread
 ///
 /// ```c
-/// extern DECLSPEC void SDLCALL SDL_DetachThread(SDL_Thread * thread)
+/// extern SDL_DECLSPEC void SDLCALL SDL_DetachThread(SDL_Thread * thread)
 /// ```
 void sdlDetachThread(Pointer<SdlThread> thread) {
   final sdlDetachThreadLookupFunction = libSdl3.lookupFunction<
@@ -296,7 +296,7 @@ void sdlDetachThread(Pointer<SdlThread> thread) {
 /// \sa SDL_SetTLS
 ///
 /// ```c
-/// extern DECLSPEC SDL_TLSID SDLCALL SDL_CreateTLS(void)
+/// extern SDL_DECLSPEC SDL_TLSID SDLCALL SDL_CreateTLS(void)
 /// ```
 int sdlCreateTls() {
   final sdlCreateTlsLookupFunction = libSdl3
@@ -316,7 +316,7 @@ int sdlCreateTls() {
 /// \sa SDL_SetTLS
 ///
 /// ```c
-/// extern DECLSPEC void * SDLCALL SDL_GetTLS(SDL_TLSID id)
+/// extern SDL_DECLSPEC void * SDLCALL SDL_GetTLS(SDL_TLSID id)
 /// ```
 Pointer<NativeType> sdlGetTls(int id) {
   final sdlGetTlsLookupFunction = libSdl3.lookupFunction<
@@ -348,7 +348,7 @@ Pointer<NativeType> sdlGetTls(int id) {
 /// \sa SDL_GetTLS
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_SetTLS(SDL_TLSID id, const void *value, void (SDLCALL *destructor)(void*))
+/// extern SDL_DECLSPEC int SDLCALL SDL_SetTLS(SDL_TLSID id, const void *value, void (SDLCALL *destructor)(void*))
 /// ```
 int sdlSetTls(int id, Pointer<NativeType> value, Pointer<NativeType> deor) {
   final sdlSetTlsLookupFunction = libSdl3.lookupFunction<
@@ -365,7 +365,7 @@ int sdlSetTls(int id, Pointer<NativeType> value, Pointer<NativeType> deor) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC void SDLCALL SDL_CleanupTLS(void)
+/// extern SDL_DECLSPEC void SDLCALL SDL_CleanupTLS(void)
 /// ```
 void sdlCleanupTls() {
   final sdlCleanupTlsLookupFunction = libSdl3

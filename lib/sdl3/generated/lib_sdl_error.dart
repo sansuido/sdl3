@@ -28,7 +28,7 @@ import 'lib_sdl.dart';
 /// \sa SDL_GetError
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_SetError(SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(1)
+/// extern SDL_DECLSPEC int SDLCALL SDL_SetError(SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(1)
 /// ```
 int sdlSetError(String? fmt, Pointer<NativeType> arg1) {
   final sdlSetErrorLookupFunction = libSdl3.lookupFunction<
@@ -51,7 +51,7 @@ int sdlSetError(String? fmt, Pointer<NativeType> arg1) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_OutOfMemory(void)
+/// extern SDL_DECLSPEC int SDLCALL SDL_OutOfMemory(void)
 /// ```
 int sdlOutOfMemory() {
   final sdlOutOfMemoryLookupFunction = libSdl3
@@ -95,7 +95,7 @@ int sdlOutOfMemory() {
 /// \sa SDL_SetError
 ///
 /// ```c
-/// extern DECLSPEC const char *SDLCALL SDL_GetError(void)
+/// extern SDL_DECLSPEC const char *SDLCALL SDL_GetError(void)
 /// ```
 String? sdlGetError() {
   final sdlGetErrorLookupFunction = libSdl3.lookupFunction<
@@ -118,7 +118,7 @@ String? sdlGetError() {
 /// \sa SDL_SetError
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_ClearError(void)
+/// extern SDL_DECLSPEC int SDLCALL SDL_ClearError(void)
 /// ```
 int sdlClearError() {
   final sdlClearErrorLookupFunction = libSdl3

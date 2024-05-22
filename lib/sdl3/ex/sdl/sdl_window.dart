@@ -303,9 +303,9 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   }
 
   // lib_sdl_renderer.dart
-  Pointer<SdlRenderer> createRenderer(int flags, {String? name}) {
+  Pointer<SdlRenderer> createRenderer({String? name}) {
     // 122
-    return sdlCreateRenderer(this, name, flags);
+    return sdlCreateRenderer(this, name);
   }
 
   Pointer<SdlRenderer> getRenderer() {

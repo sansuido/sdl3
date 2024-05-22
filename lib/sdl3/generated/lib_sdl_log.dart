@@ -10,17 +10,17 @@ import 'lib_sdl.dart';
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_LogResetPriorities
-/// \sa SDL_LogSetPriority
+/// \sa SDL_ResetLogPriorities
+/// \sa SDL_SetLogPriority
 ///
 /// ```c
-/// extern DECLSPEC void SDLCALL SDL_LogSetAllPriority(SDL_LogPriority priority)
+/// extern SDL_DECLSPEC void SDLCALL SDL_SetLogPriorities(SDL_LogPriority priority)
 /// ```
-void sdlLogSetAllPriority(int priority) {
-  final sdlLogSetAllPriorityLookupFunction = libSdl3.lookupFunction<
+void sdlSetLogPriorities(int priority) {
+  final sdlSetLogPrioritiesLookupFunction = libSdl3.lookupFunction<
       Void Function(Int32 priority),
-      void Function(int priority)>('SDL_LogSetAllPriority');
-  return sdlLogSetAllPriorityLookupFunction(priority);
+      void Function(int priority)>('SDL_SetLogPriorities');
+  return sdlSetLogPrioritiesLookupFunction(priority);
 }
 
 ///
@@ -31,18 +31,18 @@ void sdlLogSetAllPriority(int priority) {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_LogGetPriority
-/// \sa SDL_LogResetPriorities
-/// \sa SDL_LogSetAllPriority
+/// \sa SDL_GetLogPriority
+/// \sa SDL_ResetLogPriorities
+/// \sa SDL_SetLogPriorities
 ///
 /// ```c
-/// extern DECLSPEC void SDLCALL SDL_LogSetPriority(int category, SDL_LogPriority priority)
+/// extern SDL_DECLSPEC void SDLCALL SDL_SetLogPriority(int category, SDL_LogPriority priority)
 /// ```
-void sdlLogSetPriority(int category, int priority) {
-  final sdlLogSetPriorityLookupFunction = libSdl3.lookupFunction<
+void sdlSetLogPriority(int category, int priority) {
+  final sdlSetLogPriorityLookupFunction = libSdl3.lookupFunction<
       Void Function(Int32 category, Int32 priority),
-      void Function(int category, int priority)>('SDL_LogSetPriority');
-  return sdlLogSetPriorityLookupFunction(category, priority);
+      void Function(int category, int priority)>('SDL_SetLogPriority');
+  return sdlSetLogPriorityLookupFunction(category, priority);
 }
 
 ///
@@ -53,16 +53,16 @@ void sdlLogSetPriority(int category, int priority) {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_LogSetPriority
+/// \sa SDL_SetLogPriority
 ///
 /// ```c
-/// extern DECLSPEC SDL_LogPriority SDLCALL SDL_LogGetPriority(int category)
+/// extern SDL_DECLSPEC SDL_LogPriority SDLCALL SDL_GetLogPriority(int category)
 /// ```
-int sdlLogGetPriority(int category) {
-  final sdlLogGetPriorityLookupFunction = libSdl3.lookupFunction<
+int sdlGetLogPriority(int category) {
+  final sdlGetLogPriorityLookupFunction = libSdl3.lookupFunction<
       Int32 Function(Int32 category),
-      int Function(int category)>('SDL_LogGetPriority');
-  return sdlLogGetPriorityLookupFunction(category);
+      int Function(int category)>('SDL_GetLogPriority');
+  return sdlGetLogPriorityLookupFunction(category);
 }
 
 ///
@@ -72,17 +72,17 @@ int sdlLogGetPriority(int category) {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_LogSetAllPriority
-/// \sa SDL_LogSetPriority
+/// \sa SDL_SetLogPriorities
+/// \sa SDL_SetLogPriority
 ///
 /// ```c
-/// extern DECLSPEC void SDLCALL SDL_LogResetPriorities(void)
+/// extern SDL_DECLSPEC void SDLCALL SDL_ResetLogPriorities(void)
 /// ```
-void sdlLogResetPriorities() {
-  final sdlLogResetPrioritiesLookupFunction =
+void sdlResetLogPriorities() {
+  final sdlResetLogPrioritiesLookupFunction =
       libSdl3.lookupFunction<Void Function(), void Function()>(
-          'SDL_LogResetPriorities');
-  return sdlLogResetPrioritiesLookupFunction();
+          'SDL_ResetLogPriorities');
+  return sdlResetLogPrioritiesLookupFunction();
 }
 
 ///
@@ -104,7 +104,7 @@ void sdlLogResetPriorities() {
 /// \sa SDL_LogWarn
 ///
 /// ```c
-/// extern DECLSPEC void SDLCALL SDL_Log(SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(1)
+/// extern SDL_DECLSPEC void SDLCALL SDL_Log(SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(1)
 /// ```
 void sdlLog(String? fmt, Pointer<NativeType> arg1) {
   final sdlLogLookupFunction = libSdl3.lookupFunction<
@@ -136,7 +136,7 @@ void sdlLog(String? fmt, Pointer<NativeType> arg1) {
 /// \sa SDL_LogWarn
 ///
 /// ```c
-/// extern DECLSPEC void SDLCALL SDL_LogVerbose(int category, SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(2)
+/// extern SDL_DECLSPEC void SDLCALL SDL_LogVerbose(int category, SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(2)
 /// ```
 void sdlLogVerbose(int category, String? fmt, Pointer<NativeType> arg2) {
   final sdlLogVerboseLookupFunction = libSdl3.lookupFunction<
@@ -170,7 +170,7 @@ void sdlLogVerbose(int category, String? fmt, Pointer<NativeType> arg2) {
 /// \sa SDL_LogWarn
 ///
 /// ```c
-/// extern DECLSPEC void SDLCALL SDL_LogDebug(int category, SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(2)
+/// extern SDL_DECLSPEC void SDLCALL SDL_LogDebug(int category, SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(2)
 /// ```
 void sdlLogDebug(int category, String? fmt, Pointer<NativeType> arg2) {
   final sdlLogDebugLookupFunction = libSdl3.lookupFunction<
@@ -204,7 +204,7 @@ void sdlLogDebug(int category, String? fmt, Pointer<NativeType> arg2) {
 /// \sa SDL_LogWarn
 ///
 /// ```c
-/// extern DECLSPEC void SDLCALL SDL_LogInfo(int category, SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(2)
+/// extern SDL_DECLSPEC void SDLCALL SDL_LogInfo(int category, SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(2)
 /// ```
 void sdlLogInfo(int category, String? fmt, Pointer<NativeType> arg2) {
   final sdlLogInfoLookupFunction = libSdl3.lookupFunction<
@@ -238,7 +238,7 @@ void sdlLogInfo(int category, String? fmt, Pointer<NativeType> arg2) {
 /// \sa SDL_LogVerbose
 ///
 /// ```c
-/// extern DECLSPEC void SDLCALL SDL_LogWarn(int category, SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(2)
+/// extern SDL_DECLSPEC void SDLCALL SDL_LogWarn(int category, SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(2)
 /// ```
 void sdlLogWarn(int category, String? fmt, Pointer<NativeType> arg2) {
   final sdlLogWarnLookupFunction = libSdl3.lookupFunction<
@@ -272,7 +272,7 @@ void sdlLogWarn(int category, String? fmt, Pointer<NativeType> arg2) {
 /// \sa SDL_LogWarn
 ///
 /// ```c
-/// extern DECLSPEC void SDLCALL SDL_LogError(int category, SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(2)
+/// extern SDL_DECLSPEC void SDLCALL SDL_LogError(int category, SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(2)
 /// ```
 void sdlLogError(int category, String? fmt, Pointer<NativeType> arg2) {
   final sdlLogErrorLookupFunction = libSdl3.lookupFunction<
@@ -306,7 +306,7 @@ void sdlLogError(int category, String? fmt, Pointer<NativeType> arg2) {
 /// \sa SDL_LogWarn
 ///
 /// ```c
-/// extern DECLSPEC void SDLCALL SDL_LogCritical(int category, SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(2)
+/// extern SDL_DECLSPEC void SDLCALL SDL_LogCritical(int category, SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(2)
 /// ```
 void sdlLogCritical(int category, String? fmt, Pointer<NativeType> arg2) {
   final sdlLogCriticalLookupFunction = libSdl3.lookupFunction<
@@ -341,7 +341,7 @@ void sdlLogCritical(int category, String? fmt, Pointer<NativeType> arg2) {
 /// \sa SDL_LogWarn
 ///
 /// ```c
-/// extern DECLSPEC void SDLCALL SDL_LogMessage(int category, SDL_LogPriority priority, SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(3)
+/// extern SDL_DECLSPEC void SDLCALL SDL_LogMessage(int category, SDL_LogPriority priority, SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(3)
 /// ```
 void sdlLogMessage(
     int category, int priority, String? fmt, Pointer<NativeType> arg3) {
@@ -377,7 +377,7 @@ void sdlLogMessage(
 /// \sa SDL_LogWarn
 ///
 /// ```c
-/// extern DECLSPEC void SDLCALL SDL_LogMessageV(int category, SDL_LogPriority priority, SDL_PRINTF_FORMAT_STRING const char *fmt, va_list ap) SDL_PRINTF_VARARG_FUNCV(3)
+/// extern SDL_DECLSPEC void SDLCALL SDL_LogMessageV(int category, SDL_LogPriority priority, SDL_PRINTF_FORMAT_STRING const char *fmt, va_list ap) SDL_PRINTF_VARARG_FUNCV(3)
 /// ```
 void sdlLogMessageV(
     int category, int priority, String? fmt, Pointer<NativeType> arg3) {
@@ -406,7 +406,7 @@ void sdlLogMessageV(
 /// \sa SDL_SetLogOutputFunction
 ///
 /// ```c
-/// extern DECLSPEC void SDLCALL SDL_GetLogOutputFunction(SDL_LogOutputFunction *callback, void **userdata)
+/// extern SDL_DECLSPEC void SDLCALL SDL_GetLogOutputFunction(SDL_LogOutputFunction *callback, void **userdata)
 /// ```
 void sdlGetLogOutputFunction(
     Pointer<Pointer<NativeFunction<SdlLogOutputFunction>>> callback,
@@ -432,7 +432,7 @@ void sdlGetLogOutputFunction(
 /// \sa SDL_GetLogOutputFunction
 ///
 /// ```c
-/// extern DECLSPEC void SDLCALL SDL_SetLogOutputFunction(SDL_LogOutputFunction callback, void *userdata)
+/// extern SDL_DECLSPEC void SDLCALL SDL_SetLogOutputFunction(SDL_LogOutputFunction callback, void *userdata)
 /// ```
 void sdlSetLogOutputFunction(
     Pointer<NativeFunction<SdlLogOutputFunction>> callback,

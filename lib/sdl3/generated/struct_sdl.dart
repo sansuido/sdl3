@@ -2116,19 +2116,13 @@ final class SdlRendererInfo extends Struct {
   // [0]+(8)
   external Pointer<Utf8> name;
   // [8]+(4)
-  @Uint32()
-  external int flags;
-  // [12]+(4)
   @Int32()
   external int numTextureFormats;
+  // [] +(4)
+  @Uint32()
+  external int blank_1;
   // [16]+(8)
   external Pointer<Int32> textureFormats;
-  // [24]+(4)
-  @Int32()
-  external int maxTextureWidth;
-  // [28]+(4)
-  @Int32()
-  external int maxTextureHeight;
 }
 
 // SDL_Vertex
@@ -2313,24 +2307,6 @@ final class SdlFinger extends Struct {
   // [] +(4)
   @Uint32()
   external int blank_1;
-}
-
-// SDL_Version
-final class SdlVersion extends Struct {
-  // [0]+(1)
-  @Uint8()
-  external int major;
-  // [1]+(1)
-  @Uint8()
-  external int minor;
-  // [2]+(1)
-  @Uint8()
-  external int patch;
-  // [] +(5)
-  @Uint32()
-  external int blank_1;
-  @Uint8()
-  external int blank_2;
 }
 
 // SDL_DisplayMode

@@ -2,34 +2,30 @@
 import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'lib_sdl.dart';
-import 'struct_sdl.dart';
 
 ///
 /// Get the version of SDL that is linked against your program.
 ///
 /// If you are linking to SDL dynamically, then it is possible that the current
 /// version will be different than the version you compiled against. This
-/// function returns the current version, while SDL_VERSION() is a macro that
-/// tells you what version you compiled with.
+/// function returns the current version, while SDL_VERSION is the version you
+/// compiled with.
 ///
 /// This function may be called safely at any time, even before SDL_Init().
 ///
-/// \param ver the SDL_Version structure that contains the version information
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns the version of the linked library.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetRevision
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_GetVersion(SDL_Version * ver)
+/// extern SDL_DECLSPEC int SDLCALL SDL_GetVersion(void)
 /// ```
-int sdlGetVersion(Pointer<SdlVersion> ver) {
-  final sdlGetVersionLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlVersion> ver),
-      int Function(Pointer<SdlVersion> ver)>('SDL_GetVersion');
-  return sdlGetVersionLookupFunction(ver);
+int sdlGetVersion() {
+  final sdlGetVersionLookupFunction = libSdl3
+      .lookupFunction<Int32 Function(), int Function()>('SDL_GetVersion');
+  return sdlGetVersionLookupFunction();
 }
 
 ///
@@ -57,7 +53,7 @@ int sdlGetVersion(Pointer<SdlVersion> ver) {
 /// \sa SDL_GetVersion
 ///
 /// ```c
-/// extern DECLSPEC const char *SDLCALL SDL_GetRevision(void)
+/// extern SDL_DECLSPEC const char *SDLCALL SDL_GetRevision(void)
 /// ```
 String? sdlGetRevision() {
   final sdlGetRevisionLookupFunction = libSdl3.lookupFunction<

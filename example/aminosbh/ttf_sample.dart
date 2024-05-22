@@ -47,6 +47,7 @@ int main() {
         'SDL3 s: ${sdlGetError()}\n');
     return 0;
   }
+  sdlSetHint(SDL_HINT_RENDER_VSYNC, '1');
   // Initialize SDL3_ttf
   ttfInit();
   // Create window
@@ -57,7 +58,7 @@ int main() {
         'SDL_Error: ${sdlGetError()}\n');
   } else {
     // Create renderer
-    var renderer = window.createRenderer(SDL_RENDERER_PRESENTVSYNC);
+    var renderer = window.createRenderer();
     if (renderer == nullptr) {
       print('Renderer could not be created!\n'
           'SDL_Error: ${sdlGetError()}\n');

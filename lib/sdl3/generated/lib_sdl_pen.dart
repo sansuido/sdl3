@@ -20,7 +20,7 @@ import 'struct_sdl.dart';
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC SDL_PenID *SDLCALL SDL_GetPens(int *count)
+/// extern SDL_DECLSPEC SDL_PenID *SDLCALL SDL_GetPens(int *count)
 /// ```
 Pointer<Uint32> sdlGetPens(Pointer<Int32> count) {
   final sdlGetPensLookupFunction = libSdl3.lookupFunction<
@@ -49,7 +49,7 @@ Pointer<Uint32> sdlGetPens(Pointer<Int32> count) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC Uint32 SDLCALL SDL_GetPenStatus(SDL_PenID instance_id, float *x, float *y, float *axes, size_t num_axes)
+/// extern SDL_DECLSPEC Uint32 SDLCALL SDL_GetPenStatus(SDL_PenID instance_id, float *x, float *y, float *axes, size_t num_axes)
 /// ```
 int sdlGetPenStatus(int instanceId, Pointer<Float> x, Pointer<Float> y,
     Pointer<Float> axes, int numAxes) {
@@ -71,7 +71,7 @@ int sdlGetPenStatus(int instanceId, Pointer<Float> x, Pointer<Float> y,
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC SDL_PenID SDLCALL SDL_GetPenFromGUID(SDL_GUID guid)
+/// extern SDL_DECLSPEC SDL_PenID SDLCALL SDL_GetPenFromGUID(SDL_GUID guid)
 /// ```
 int sdlGetPenFromGuid(SdlGuid guid) {
   final sdlGetPenFromGuidLookupFunction = libSdl3.lookupFunction<
@@ -90,7 +90,7 @@ int sdlGetPenFromGuid(SdlGuid guid) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC SDL_GUID SDLCALL SDL_GetPenGUID(SDL_PenID instance_id)
+/// extern SDL_DECLSPEC SDL_GUID SDLCALL SDL_GetPenGUID(SDL_PenID instance_id)
 /// ```
 SdlGuid sdlGetPenGuid(int instanceId) {
   final sdlGetPenGuidLookupFunction = libSdl3.lookupFunction<
@@ -112,7 +112,7 @@ SdlGuid sdlGetPenGuid(int instanceId) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC SDL_bool SDLCALL SDL_PenConnected(SDL_PenID instance_id)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_PenConnected(SDL_PenID instance_id)
 /// ```
 bool sdlPenConnected(int instanceId) {
   final sdlPenConnectedLookupFunction = libSdl3.lookupFunction<
@@ -136,7 +136,7 @@ bool sdlPenConnected(int instanceId) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC const char *SDLCALL SDL_GetPenName(SDL_PenID instance_id)
+/// extern SDL_DECLSPEC const char *SDLCALL SDL_GetPenName(SDL_PenID instance_id)
 /// ```
 String? sdlGetPenName(int instanceId) {
   final sdlGetPenNameLookupFunction = libSdl3.lookupFunction<
@@ -160,7 +160,7 @@ String? sdlGetPenName(int instanceId) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC Uint32 SDLCALL SDL_GetPenCapabilities(SDL_PenID instance_id, SDL_PenCapabilityInfo *capabilities)
+/// extern SDL_DECLSPEC Uint32 SDLCALL SDL_GetPenCapabilities(SDL_PenID instance_id, SDL_PenCapabilityInfo *capabilities)
 /// ```
 int sdlGetPenCapabilities(
     int instanceId, Pointer<SdlPenCapabilityInfo> capabilities) {
@@ -187,7 +187,7 @@ int sdlGetPenCapabilities(
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC SDL_PenSubtype SDLCALL SDL_GetPenType(SDL_PenID instance_id)
+/// extern SDL_DECLSPEC SDL_PenSubtype SDLCALL SDL_GetPenType(SDL_PenID instance_id)
 /// ```
 int sdlGetPenType(int instanceId) {
   final sdlGetPenTypeLookupFunction = libSdl3.lookupFunction<

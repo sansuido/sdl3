@@ -55,7 +55,7 @@ import 'struct_sdl.dart';
 /// \sa SDL_ShowOpenFolderDialog
 ///
 /// ```c
-/// extern DECLSPEC void SDLCALL SDL_ShowOpenFileDialog(SDL_DialogFileCallback callback, void *userdata, SDL_Window *window, const SDL_DialogFileFilter *filters, const char *default_location, SDL_bool allow_many)
+/// extern SDL_DECLSPEC void SDLCALL SDL_ShowOpenFileDialog(SDL_DialogFileCallback callback, void *userdata, SDL_Window *window, const SDL_DialogFileFilter *filters, const char *default_location, SDL_bool allow_many)
 /// ```
 void sdlShowOpenFileDialog(
     Pointer<NativeFunction<SdlDialogFileCallback>> callback,
@@ -136,7 +136,7 @@ void sdlShowOpenFileDialog(
 /// \sa SDL_ShowOpenFolderDialog
 ///
 /// ```c
-/// extern DECLSPEC void SDLCALL SDL_ShowSaveFileDialog(SDL_DialogFileCallback callback, void *userdata, SDL_Window *window, const SDL_DialogFileFilter *filters, const char *default_location)
+/// extern SDL_DECLSPEC void SDLCALL SDL_ShowSaveFileDialog(SDL_DialogFileCallback callback, void *userdata, SDL_Window *window, const SDL_DialogFileFilter *filters, const char *default_location)
 /// ```
 void sdlShowSaveFileDialog(
     Pointer<NativeFunction<SdlDialogFileCallback>> callback,
@@ -208,7 +208,7 @@ void sdlShowSaveFileDialog(
 /// \sa SDL_ShowSaveFileDialog
 ///
 /// ```c
-/// extern DECLSPEC void SDLCALL SDL_ShowOpenFolderDialog(SDL_DialogFileCallback callback, void *userdata, SDL_Window *window, const char *default_location, SDL_bool allow_many)
+/// extern SDL_DECLSPEC void SDLCALL SDL_ShowOpenFolderDialog(SDL_DialogFileCallback callback, void *userdata, SDL_Window *window, const char *default_location, SDL_bool allow_many)
 /// ```
 void sdlShowOpenFolderDialog(
     Pointer<NativeFunction<SdlDialogFileCallback>> callback,

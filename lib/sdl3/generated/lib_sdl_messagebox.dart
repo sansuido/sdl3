@@ -38,7 +38,7 @@ import 'struct_sdl.dart';
 /// \sa SDL_ShowSimpleMessageBox
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_ShowMessageBox(const SDL_MessageBoxData *messageboxdata, int *buttonid)
+/// extern SDL_DECLSPEC int SDLCALL SDL_ShowMessageBox(const SDL_MessageBoxData *messageboxdata, int *buttonid)
 /// ```
 int sdlShowMessageBox(
     Pointer<SdlMessageBoxData> messageboxdata, Pointer<Int32> buttonid) {
@@ -91,7 +91,7 @@ int sdlShowMessageBox(
 /// \sa SDL_ShowMessageBox
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_ShowSimpleMessageBox(SDL_MessageBoxFlags flags, const char *title, const char *message, SDL_Window *window)
+/// extern SDL_DECLSPEC int SDLCALL SDL_ShowSimpleMessageBox(SDL_MessageBoxFlags flags, const char *title, const char *message, SDL_Window *window)
 /// ```
 int sdlShowSimpleMessageBox(
     int flags, String? title, String? message, Pointer<SdlWindow> window) {

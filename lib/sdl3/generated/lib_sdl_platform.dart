@@ -20,7 +20,7 @@ import 'lib_sdl.dart';
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC const char * SDLCALL SDL_GetPlatform (void)
+/// extern SDL_DECLSPEC const char * SDLCALL SDL_GetPlatform (void)
 /// ```
 String? sdlGetPlatform() {
   final sdlGetPlatformLookupFunction = libSdl3.lookupFunction<

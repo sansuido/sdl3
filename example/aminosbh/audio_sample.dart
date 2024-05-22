@@ -101,6 +101,7 @@ int main() {
         'SDL_Error: ${sdlGetError()}%s\n');
     return 0;
   }
+  sdlSetHint(SDL_HINT_RENDER_VSYNC, '1');
   // Create window
   var window = SdlWindowEx.create(
       title: 'SDL3 audio sample (Press SPACE to pause/play)',
@@ -113,7 +114,7 @@ int main() {
     return 0;
   }
   // Create renderer
-  var renderer = window.createRenderer(SDL_RENDERER_PRESENTVSYNC);
+  var renderer = window.createRenderer();
   if (renderer == nullptr) {
     print('Renderer could not be created!\n'
         'SDL_Error: ${sdlGetError()}\n');

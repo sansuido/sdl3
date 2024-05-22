@@ -47,7 +47,7 @@ import 'struct_sdl.dart';
 /// \sa SDL_GetPrefPath
 ///
 /// ```c
-/// extern DECLSPEC char *SDLCALL SDL_GetBasePath(void)
+/// extern SDL_DECLSPEC char *SDLCALL SDL_GetBasePath(void)
 /// ```
 Pointer<Int8> sdlGetBasePath() {
   final sdlGetBasePathLookupFunction = libSdl3.lookupFunction<
@@ -111,7 +111,7 @@ Pointer<Int8> sdlGetBasePath() {
 /// \sa SDL_GetBasePath
 ///
 /// ```c
-/// extern DECLSPEC char *SDLCALL SDL_GetPrefPath(const char *org, const char *app)
+/// extern SDL_DECLSPEC char *SDLCALL SDL_GetPrefPath(const char *org, const char *app)
 /// ```
 Pointer<Int8> sdlGetPrefPath(String? org, String? app) {
   final sdlGetPrefPathLookupFunction = libSdl3.lookupFunction<
@@ -159,7 +159,7 @@ Pointer<Int8> sdlGetPrefPath(String? org, String? app) {
 /// \sa SDL_Folder
 ///
 /// ```c
-/// extern DECLSPEC char *SDLCALL SDL_GetUserFolder(SDL_Folder folder)
+/// extern SDL_DECLSPEC char *SDLCALL SDL_GetUserFolder(SDL_Folder folder)
 /// ```
 Pointer<Int8> sdlGetUserFolder(int folder) {
   final sdlGetUserFolderLookupFunction = libSdl3.lookupFunction<
@@ -178,7 +178,7 @@ Pointer<Int8> sdlGetUserFolder(int folder) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_CreateDirectory(const char *path)
+/// extern SDL_DECLSPEC int SDLCALL SDL_CreateDirectory(const char *path)
 /// ```
 int sdlCreateDirectory(String? path) {
   final sdlCreateDirectoryLookupFunction = libSdl3.lookupFunction<
@@ -206,7 +206,7 @@ int sdlCreateDirectory(String? path) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_EnumerateDirectory(const char *path, SDL_EnumerateDirectoryCallback callback, void *userdata)
+/// extern SDL_DECLSPEC int SDLCALL SDL_EnumerateDirectory(const char *path, SDL_EnumerateDirectoryCallback callback, void *userdata)
 /// ```
 int sdlEnumerateDirectory(
     String? path,
@@ -238,7 +238,7 @@ int sdlEnumerateDirectory(
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_RemovePath(const char *path)
+/// extern SDL_DECLSPEC int SDLCALL SDL_RemovePath(const char *path)
 /// ```
 int sdlRemovePath(String? path) {
   final sdlRemovePathLookupFunction = libSdl3.lookupFunction<
@@ -261,7 +261,7 @@ int sdlRemovePath(String? path) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_RenamePath(const char *oldpath, const char *newpath)
+/// extern SDL_DECLSPEC int SDLCALL SDL_RenamePath(const char *oldpath, const char *newpath)
 /// ```
 int sdlRenamePath(String? oldpath, String? newpath) {
   final sdlRenamePathLookupFunction = libSdl3.lookupFunction<
@@ -288,7 +288,7 @@ int sdlRenamePath(String? oldpath, String? newpath) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_GetPathInfo(const char *path, SDL_PathInfo *info)
+/// extern SDL_DECLSPEC int SDLCALL SDL_GetPathInfo(const char *path, SDL_PathInfo *info)
 /// ```
 int sdlGetPathInfo(String? path, Pointer<SdlPathInfo> info) {
   final sdlGetPathInfoLookupFunction = libSdl3.lookupFunction<
@@ -335,7 +335,7 @@ int sdlGetPathInfo(String? path, Pointer<SdlPathInfo> info) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC char **SDLCALL SDL_GlobDirectory(const char *path, const char *pattern, Uint32 flags, int *count)
+/// extern SDL_DECLSPEC char **SDLCALL SDL_GlobDirectory(const char *path, const char *pattern, SDL_GlobFlags flags, int *count)
 /// ```
 Pointer<Pointer<Int8>> sdlGlobDirectory(
     String? path, String? pattern, int flags, Pointer<Int32> count) {

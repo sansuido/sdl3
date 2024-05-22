@@ -2,34 +2,24 @@
 import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import '../dylib.dart' as dylib;
-import 'struct_sdl.dart';
 import 'struct_sdl_net.dart';
 
 final libSdl3Net = dylib.dylibOpen('SDL3_net');
 
 ///
-/// Query the verion of the SDL_net library in use at runtime.
+/// This function gets the version of the dynamically linked SDL_net library.
 ///
-/// The returned value points to static, internal, read-only memory. Do not
-/// modify or free it. The pointer remains valid as long as the library is
-/// loaded by the system.
+/// \returns SDL_net version
 ///
-/// This function can be safely called before SDLNet_Init().
-///
-/// \returns An object with the runtime library version. Never returns NULL.
-///
-/// \threadsafety It is safe to call this function from any thread.
-///
-/// \since This function is available since SDL_Net 3.0.0.
+/// \since This function is available since SDL_net 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC const SDL_Version * SDLCALL SDLNet_LinkedVersion(void)
+/// extern SDL_DECLSPEC int SDLCALL SDLNet_Version(void)
 /// ```
-Pointer<SdlVersion> sdlNetLinkedVersion() {
-  final sdlNetLinkedVersionLookupFunction = libSdl3Net.lookupFunction<
-      Pointer<SdlVersion> Function(),
-      Pointer<SdlVersion> Function()>('SDLNet_LinkedVersion');
-  return sdlNetLinkedVersionLookupFunction();
+int sdlNetVersion() {
+  final sdlNetVersionLookupFunction = libSdl3Net
+      .lookupFunction<Int32 Function(), int Function()>('SDLNet_Version');
+  return sdlNetVersionLookupFunction();
 }
 
 ///
@@ -51,7 +41,7 @@ Pointer<SdlVersion> sdlNetLinkedVersion() {
 /// \sa SDLNet_Quit
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDLNet_Init(void)
+/// extern SDL_DECLSPEC int SDLCALL SDLNet_Init(void)
 /// ```
 int sdlNetInit() {
   final sdlNetInitLookupFunction = libSdl3Net
@@ -79,7 +69,7 @@ int sdlNetInit() {
 /// \sa SDLNet_Quit
 ///
 /// ```c
-/// extern DECLSPEC void SDLCALL SDLNet_Quit(void)
+/// extern SDL_DECLSPEC void SDLCALL SDLNet_Quit(void)
 /// ```
 void sdlNetQuit() {
   final sdlNetQuitLookupFunction = libSdl3Net
@@ -125,7 +115,7 @@ void sdlNetQuit() {
 /// \sa SDLNet_UnrefAddress
 ///
 /// ```c
-/// extern DECLSPEC SDLNet_Address * SDLCALL SDLNet_ResolveHostname(const char *host)
+/// extern SDL_DECLSPEC SDLNet_Address * SDLCALL SDLNet_ResolveHostname(const char *host)
 /// ```
 Pointer<SdlNetAddress> sdlNetResolveHostname(String? host) {
   final sdlNetResolveHostnameLookupFunction = libSdl3Net.lookupFunction<
@@ -179,7 +169,7 @@ Pointer<SdlNetAddress> sdlNetResolveHostname(String? host) {
 /// \sa SDLNet_GetAddressStatus
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDLNet_WaitUntilResolved(SDLNet_Address *address, Sint32 timeout)
+/// extern SDL_DECLSPEC int SDLCALL SDLNet_WaitUntilResolved(SDLNet_Address *address, Sint32 timeout)
 /// ```
 int sdlNetWaitUntilResolved(Pointer<SdlNetAddress> address, int timeout) {
   final sdlNetWaitUntilResolvedLookupFunction = libSdl3Net.lookupFunction<
@@ -217,7 +207,7 @@ int sdlNetWaitUntilResolved(Pointer<SdlNetAddress> address, int timeout) {
 /// \sa SDLNet_WaitUntilResolved
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDLNet_GetAddressStatus(SDLNet_Address *address)
+/// extern SDL_DECLSPEC int SDLCALL SDLNet_GetAddressStatus(SDLNet_Address *address)
 /// ```
 int sdlNetGetAddressStatus(Pointer<SdlNetAddress> address) {
   final sdlNetGetAddressStatusLookupFunction = libSdl3Net.lookupFunction<
@@ -254,7 +244,7 @@ int sdlNetGetAddressStatus(Pointer<SdlNetAddress> address) {
 /// \sa SDLNet_WaitUntilResolved
 ///
 /// ```c
-/// extern DECLSPEC const char * SDLCALL SDLNet_GetAddressString(SDLNet_Address *address)
+/// extern SDL_DECLSPEC const char * SDLCALL SDLNet_GetAddressString(SDLNet_Address *address)
 /// ```
 String? sdlNetGetAddressString(Pointer<SdlNetAddress> address) {
   final sdlNetGetAddressStringLookupFunction = libSdl3Net.lookupFunction<
@@ -305,7 +295,7 @@ String? sdlNetGetAddressString(Pointer<SdlNetAddress> address) {
 /// \since This function is available since SDL_Net 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC SDLNet_Address *SDLCALL SDLNet_RefAddress(SDLNet_Address *address)
+/// extern SDL_DECLSPEC SDLNet_Address *SDLCALL SDLNet_RefAddress(SDLNet_Address *address)
 /// ```
 Pointer<SdlNetAddress> sdlNetRefAddress(Pointer<SdlNetAddress> address) {
   final sdlNetRefAddressLookupFunction = libSdl3Net.lookupFunction<
@@ -339,7 +329,7 @@ Pointer<SdlNetAddress> sdlNetRefAddress(Pointer<SdlNetAddress> address) {
 /// \since This function is available since SDL_Net 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC void SDLCALL SDLNet_UnrefAddress(SDLNet_Address *address)
+/// extern SDL_DECLSPEC void SDLCALL SDLNet_UnrefAddress(SDLNet_Address *address)
 /// ```
 void sdlNetUnrefAddress(Pointer<SdlNetAddress> address) {
   final sdlNetUnrefAddressLookupFunction = libSdl3Net.lookupFunction<
@@ -378,7 +368,7 @@ void sdlNetUnrefAddress(Pointer<SdlNetAddress> address) {
 /// \since This function is available since SDL_Net 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC void SDLCALL SDLNet_SimulateAddressResolutionLoss(int percent_loss)
+/// extern SDL_DECLSPEC void SDLCALL SDLNet_SimulateAddressResolutionLoss(int percent_loss)
 /// ```
 void sdlNetSimulateAddressResolutionLoss(int percentLoss) {
   final sdlNetSimulateAddressResolutionLossLookupFunction =
@@ -404,7 +394,7 @@ void sdlNetSimulateAddressResolutionLoss(int percentLoss) {
 /// \since This function is available since SDL_Net 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDLNet_CompareAddresses(const SDLNet_Address *a, const SDLNet_Address *b)
+/// extern SDL_DECLSPEC int SDLCALL SDLNet_CompareAddresses(const SDLNet_Address *a, const SDLNet_Address *b)
 /// ```
 int sdlNetCompareAddresses(Pointer<SdlNetAddress> a, Pointer<SdlNetAddress> b) {
   final sdlNetCompareAddressesLookupFunction = libSdl3Net.lookupFunction<
@@ -449,7 +439,7 @@ int sdlNetCompareAddresses(Pointer<SdlNetAddress> a, Pointer<SdlNetAddress> b) {
 /// \since This function is available since SDL_Net 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC SDLNet_Address **SDLCALL SDLNet_GetLocalAddresses(int *num_addresses)
+/// extern SDL_DECLSPEC SDLNet_Address **SDLCALL SDLNet_GetLocalAddresses(int *num_addresses)
 /// ```
 Pointer<Pointer<SdlNetAddress>> sdlNetGetLocalAddresses(
     Pointer<Int32> numAddresses) {
@@ -478,7 +468,7 @@ Pointer<Pointer<SdlNetAddress>> sdlNetGetLocalAddresses(
 /// \since This function is available since SDL_Net 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC void SDLCALL SDLNet_FreeLocalAddresses(SDLNet_Address **addresses)
+/// extern SDL_DECLSPEC void SDLCALL SDLNet_FreeLocalAddresses(SDLNet_Address **addresses)
 /// ```
 void sdlNetFreeLocalAddresses(Pointer<Pointer<SdlNetAddress>> addresses) {
   final sdlNetFreeLocalAddressesLookupFunction = libSdl3Net.lookupFunction<
@@ -540,7 +530,7 @@ void sdlNetFreeLocalAddresses(Pointer<Pointer<SdlNetAddress>> addresses) {
 /// \sa SDLNet_DestroyStreamSocket
 ///
 /// ```c
-/// extern DECLSPEC SDLNet_StreamSocket * SDLCALL SDLNet_CreateClient(SDLNet_Address *address, Uint16 port)
+/// extern SDL_DECLSPEC SDLNet_StreamSocket * SDLCALL SDLNet_CreateClient(SDLNet_Address *address, Uint16 port)
 /// ```
 Pointer<SdlNetStreamSocket> sdlNetCreateClient(
     Pointer<SdlNetAddress> address, int port) {
@@ -596,7 +586,7 @@ Pointer<SdlNetStreamSocket> sdlNetCreateClient(
 /// \sa SDLNet_GetConnectionStatus
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDLNet_WaitUntilConnected(SDLNet_StreamSocket *sock, Sint32 timeout)
+/// extern SDL_DECLSPEC int SDLCALL SDLNet_WaitUntilConnected(SDLNet_StreamSocket *sock, Sint32 timeout)
 /// ```
 int sdlNetWaitUntilConnected(Pointer<SdlNetStreamSocket> sock, int timeout) {
   final sdlNetWaitUntilConnectedLookupFunction = libSdl3Net.lookupFunction<
@@ -653,7 +643,7 @@ int sdlNetWaitUntilConnected(Pointer<SdlNetStreamSocket> sock, int timeout) {
 /// \sa SDLNet_DestroyServer
 ///
 /// ```c
-/// extern DECLSPEC SDLNet_Server * SDLCALL SDLNet_CreateServer(SDLNet_Address *addr, Uint16 port)
+/// extern SDL_DECLSPEC SDLNet_Server * SDLCALL SDLNet_CreateServer(SDLNet_Address *addr, Uint16 port)
 /// ```
 Pointer<SdlNetServer> sdlNetCreateServer(
     Pointer<SdlNetAddress> addr, int port) {
@@ -705,7 +695,7 @@ Pointer<SdlNetServer> sdlNetCreateServer(
 /// \sa SDLNet_DestroyStreamSocket
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDLNet_AcceptClient(SDLNet_Server *server, SDLNet_StreamSocket **client_stream)
+/// extern SDL_DECLSPEC int SDLCALL SDLNet_AcceptClient(SDLNet_Server *server, SDLNet_StreamSocket **client_stream)
 /// ```
 int sdlNetAcceptClient(Pointer<SdlNetServer> server,
     Pointer<Pointer<SdlNetStreamSocket>> clientStream) {
@@ -739,7 +729,7 @@ int sdlNetAcceptClient(Pointer<SdlNetServer> server,
 /// \sa SDLNet_CreateServer
 ///
 /// ```c
-/// extern DECLSPEC void SDLCALL SDLNet_DestroyServer(SDLNet_Server *server)
+/// extern SDL_DECLSPEC void SDLCALL SDLNet_DestroyServer(SDLNet_Server *server)
 /// ```
 void sdlNetDestroyServer(Pointer<SdlNetServer> server) {
   final sdlNetDestroyServerLookupFunction = libSdl3Net.lookupFunction<
@@ -766,7 +756,7 @@ void sdlNetDestroyServer(Pointer<SdlNetServer> server) {
 /// \since This function is available since SDL_Net 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC SDLNet_Address * SDLCALL SDLNet_GetStreamSocketAddress(SDLNet_StreamSocket *sock)
+/// extern SDL_DECLSPEC SDLNet_Address * SDLCALL SDLNet_GetStreamSocketAddress(SDLNet_StreamSocket *sock)
 /// ```
 Pointer<SdlNetAddress> sdlNetGetStreamSocketAddress(
     Pointer<SdlNetStreamSocket> sock) {
@@ -813,7 +803,7 @@ Pointer<SdlNetAddress> sdlNetGetStreamSocketAddress(
 /// \sa SDLNet_WaitUntilConnected
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDLNet_GetConnectionStatus(SDLNet_StreamSocket *sock)
+/// extern SDL_DECLSPEC int SDLCALL SDLNet_GetConnectionStatus(SDLNet_StreamSocket *sock)
 /// ```
 int sdlNetGetConnectionStatus(Pointer<SdlNetStreamSocket> sock) {
   final sdlNetGetConnectionStatusLookupFunction = libSdl3Net.lookupFunction<
@@ -869,7 +859,7 @@ int sdlNetGetConnectionStatus(Pointer<SdlNetStreamSocket> sock) {
 /// \sa SDLNet_ReadFromStreamSocket
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDLNet_WriteToStreamSocket(SDLNet_StreamSocket *sock, const void *buf, int buflen)
+/// extern SDL_DECLSPEC int SDLCALL SDLNet_WriteToStreamSocket(SDLNet_StreamSocket *sock, const void *buf, int buflen)
 /// ```
 int sdlNetWriteToStreamSocket(
     Pointer<SdlNetStreamSocket> sock, Pointer<NativeType> buf, int buflen) {
@@ -912,7 +902,7 @@ int sdlNetWriteToStreamSocket(
 /// \sa SDLNet_WaitUntilStreamSocketDrained
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDLNet_GetStreamSocketPendingWrites(SDLNet_StreamSocket *sock)
+/// extern SDL_DECLSPEC int SDLCALL SDLNet_GetStreamSocketPendingWrites(SDLNet_StreamSocket *sock)
 /// ```
 int sdlNetGetStreamSocketPendingWrites(Pointer<SdlNetStreamSocket> sock) {
   final sdlNetGetStreamSocketPendingWritesLookupFunction =
@@ -963,7 +953,7 @@ int sdlNetGetStreamSocketPendingWrites(Pointer<SdlNetStreamSocket> sock) {
 /// \sa SDLNet_GetStreamSocketPendingWrites
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDLNet_WaitUntilStreamSocketDrained(SDLNet_StreamSocket *sock, Sint32 timeout)
+/// extern SDL_DECLSPEC int SDLCALL SDLNet_WaitUntilStreamSocketDrained(SDLNet_StreamSocket *sock, Sint32 timeout)
 /// ```
 int sdlNetWaitUntilStreamSocketDrained(
     Pointer<SdlNetStreamSocket> sock, int timeout) {
@@ -1024,7 +1014,7 @@ int sdlNetWaitUntilStreamSocketDrained(
 /// \sa SDLNet_WriteToStreamSocket
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDLNet_ReadFromStreamSocket(SDLNet_StreamSocket *sock, void *buf, int buflen)
+/// extern SDL_DECLSPEC int SDLCALL SDLNet_ReadFromStreamSocket(SDLNet_StreamSocket *sock, void *buf, int buflen)
 /// ```
 int sdlNetReadFromStreamSocket(
     Pointer<SdlNetStreamSocket> sock, Pointer<NativeType> buf, int buflen) {
@@ -1074,7 +1064,7 @@ int sdlNetReadFromStreamSocket(
 /// \since This function is available since SDL_Net 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC void SDLCALL SDLNet_SimulateStreamPacketLoss(SDLNet_StreamSocket *sock, int percent_loss)
+/// extern SDL_DECLSPEC void SDLCALL SDLNet_SimulateStreamPacketLoss(SDLNet_StreamSocket *sock, int percent_loss)
 /// ```
 void sdlNetSimulateStreamPacketLoss(
     Pointer<SdlNetStreamSocket> sock, int percentLoss) {
@@ -1114,7 +1104,7 @@ void sdlNetSimulateStreamPacketLoss(
 /// \sa SDLNet_WaitUntilStreamSocketDrained
 ///
 /// ```c
-/// extern DECLSPEC void SDLCALL SDLNet_DestroyStreamSocket(SDLNet_StreamSocket *sock)
+/// extern SDL_DECLSPEC void SDLCALL SDLNet_DestroyStreamSocket(SDLNet_StreamSocket *sock)
 /// ```
 void sdlNetDestroyStreamSocket(Pointer<SdlNetStreamSocket> sock) {
   final sdlNetDestroyStreamSocketLookupFunction = libSdl3Net.lookupFunction<
@@ -1182,7 +1172,7 @@ void sdlNetDestroyStreamSocket(Pointer<SdlNetStreamSocket> sock) {
 /// \sa SDLNet_DestroyDatagramSocket
 ///
 /// ```c
-/// extern DECLSPEC SDLNet_DatagramSocket * SDLCALL SDLNet_CreateDatagramSocket(SDLNet_Address *addr, Uint16 port)
+/// extern SDL_DECLSPEC SDLNet_DatagramSocket * SDLCALL SDLNet_CreateDatagramSocket(SDLNet_Address *addr, Uint16 port)
 /// ```
 Pointer<SdlNetDatagramSocket> sdlNetCreateDatagramSocket(
     Pointer<SdlNetAddress> addr, int port) {
@@ -1245,7 +1235,7 @@ Pointer<SdlNetDatagramSocket> sdlNetCreateDatagramSocket(
 /// \sa SDLNet_ReceiveDatagram
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDLNet_SendDatagram(SDLNet_DatagramSocket *sock, SDLNet_Address *address, Uint16 port, const void *buf, int buflen)
+/// extern SDL_DECLSPEC int SDLCALL SDLNet_SendDatagram(SDLNet_DatagramSocket *sock, SDLNet_Address *address, Uint16 port, const void *buf, int buflen)
 /// ```
 int sdlNetSendDatagram(
     Pointer<SdlNetDatagramSocket> sock,
@@ -1316,7 +1306,7 @@ int sdlNetSendDatagram(
 /// \sa SDLNet_DestroyDatagram
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDLNet_ReceiveDatagram(SDLNet_DatagramSocket *sock, SDLNet_Datagram **dgram)
+/// extern SDL_DECLSPEC int SDLCALL SDLNet_ReceiveDatagram(SDLNet_DatagramSocket *sock, SDLNet_Datagram **dgram)
 /// ```
 int sdlNetReceiveDatagram(Pointer<SdlNetDatagramSocket> sock,
     Pointer<Pointer<SdlNetDatagram>> dgram) {
@@ -1350,7 +1340,7 @@ int sdlNetReceiveDatagram(Pointer<SdlNetDatagramSocket> sock,
 /// \since This function is available since SDL_Net 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC void SDLCALL SDLNet_DestroyDatagram(SDLNet_Datagram *dgram)
+/// extern SDL_DECLSPEC void SDLCALL SDLNet_DestroyDatagram(SDLNet_Datagram *dgram)
 /// ```
 void sdlNetDestroyDatagram(Pointer<SdlNetDatagram> dgram) {
   final sdlNetDestroyDatagramLookupFunction = libSdl3Net.lookupFunction<
@@ -1390,7 +1380,7 @@ void sdlNetDestroyDatagram(Pointer<SdlNetDatagram> dgram) {
 /// \since This function is available since SDL_Net 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC void SDLCALL SDLNet_SimulateDatagramPacketLoss(SDLNet_DatagramSocket *sock, int percent_loss)
+/// extern SDL_DECLSPEC void SDLCALL SDLNet_SimulateDatagramPacketLoss(SDLNet_DatagramSocket *sock, int percent_loss)
 /// ```
 void sdlNetSimulateDatagramPacketLoss(
     Pointer<SdlNetDatagramSocket> sock, int percentLoss) {
@@ -1428,7 +1418,7 @@ void sdlNetSimulateDatagramPacketLoss(
 /// \sa SDLNet_ReceiveDatagram
 ///
 /// ```c
-/// extern DECLSPEC void SDLCALL SDLNet_DestroyDatagramSocket(SDLNet_DatagramSocket *sock)
+/// extern SDL_DECLSPEC void SDLCALL SDLNet_DestroyDatagramSocket(SDLNet_DatagramSocket *sock)
 /// ```
 void sdlNetDestroyDatagramSocket(Pointer<SdlNetDatagramSocket> sock) {
   final sdlNetDestroyDatagramSocketLookupFunction = libSdl3Net.lookupFunction<
@@ -1487,7 +1477,7 @@ void sdlNetDestroyDatagramSocket(Pointer<SdlNetDatagramSocket> sock) {
 /// \sa SDLNet_ReceiveDatagram
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDLNet_WaitUntilInputAvailable(void **vsockets, int numsockets, Sint32 timeout)
+/// extern SDL_DECLSPEC int SDLCALL SDLNet_WaitUntilInputAvailable(void **vsockets, int numsockets, Sint32 timeout)
 /// ```
 int sdlNetWaitUntilInputAvailable(
     Pointer<Pointer<NativeType>> vsockets, int numsockets, int timeout) {

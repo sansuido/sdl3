@@ -12,7 +12,7 @@ import 'lib_sdl.dart';
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_GetCPUCount(void)
+/// extern SDL_DECLSPEC int SDLCALL SDL_GetCPUCount(void)
 /// ```
 int sdlGetCpuCount() {
   final sdlGetCpuCountLookupFunction = libSdl3
@@ -31,7 +31,7 @@ int sdlGetCpuCount() {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_GetCPUCacheLineSize(void)
+/// extern SDL_DECLSPEC int SDLCALL SDL_GetCPUCacheLineSize(void)
 /// ```
 int sdlGetCpuCacheLineSize() {
   final sdlGetCpuCacheLineSizeLookupFunction =
@@ -51,7 +51,7 @@ int sdlGetCpuCacheLineSize() {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC SDL_bool SDLCALL SDL_HasAltiVec(void)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_HasAltiVec(void)
 /// ```
 bool sdlHasAltiVec() {
   final sdlHasAltiVecLookupFunction = libSdl3
@@ -69,7 +69,7 @@ bool sdlHasAltiVec() {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC SDL_bool SDLCALL SDL_HasMMX(void)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_HasMMX(void)
 /// ```
 bool sdlHasMmx() {
   final sdlHasMmxLookupFunction =
@@ -92,7 +92,7 @@ bool sdlHasMmx() {
 /// \sa SDL_HasSSE42
 ///
 /// ```c
-/// extern DECLSPEC SDL_bool SDLCALL SDL_HasSSE(void)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_HasSSE(void)
 /// ```
 bool sdlHasSse() {
   final sdlHasSseLookupFunction =
@@ -115,7 +115,7 @@ bool sdlHasSse() {
 /// \sa SDL_HasSSE42
 ///
 /// ```c
-/// extern DECLSPEC SDL_bool SDLCALL SDL_HasSSE2(void)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_HasSSE2(void)
 /// ```
 bool sdlHasSse2() {
   final sdlHasSse2LookupFunction =
@@ -138,7 +138,7 @@ bool sdlHasSse2() {
 /// \sa SDL_HasSSE42
 ///
 /// ```c
-/// extern DECLSPEC SDL_bool SDLCALL SDL_HasSSE3(void)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_HasSSE3(void)
 /// ```
 bool sdlHasSse3() {
   final sdlHasSse3LookupFunction =
@@ -161,7 +161,7 @@ bool sdlHasSse3() {
 /// \sa SDL_HasSSE42
 ///
 /// ```c
-/// extern DECLSPEC SDL_bool SDLCALL SDL_HasSSE41(void)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_HasSSE41(void)
 /// ```
 bool sdlHasSse41() {
   final sdlHasSse41LookupFunction =
@@ -184,7 +184,7 @@ bool sdlHasSse41() {
 /// \sa SDL_HasSSE41
 ///
 /// ```c
-/// extern DECLSPEC SDL_bool SDLCALL SDL_HasSSE42(void)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_HasSSE42(void)
 /// ```
 bool sdlHasSse42() {
   final sdlHasSse42LookupFunction =
@@ -205,7 +205,7 @@ bool sdlHasSse42() {
 /// \sa SDL_HasAVX512F
 ///
 /// ```c
-/// extern DECLSPEC SDL_bool SDLCALL SDL_HasAVX(void)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_HasAVX(void)
 /// ```
 bool sdlHasAvx() {
   final sdlHasAvxLookupFunction =
@@ -226,7 +226,7 @@ bool sdlHasAvx() {
 /// \sa SDL_HasAVX512F
 ///
 /// ```c
-/// extern DECLSPEC SDL_bool SDLCALL SDL_HasAVX2(void)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_HasAVX2(void)
 /// ```
 bool sdlHasAvx2() {
   final sdlHasAvx2LookupFunction =
@@ -247,7 +247,7 @@ bool sdlHasAvx2() {
 /// \sa SDL_HasAVX2
 ///
 /// ```c
-/// extern DECLSPEC SDL_bool SDLCALL SDL_HasAVX512F(void)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_HasAVX512F(void)
 /// ```
 bool sdlHasAvx512F() {
   final sdlHasAvx512FLookupFunction = libSdl3
@@ -269,7 +269,7 @@ bool sdlHasAvx512F() {
 /// \sa SDL_HasNEON
 ///
 /// ```c
-/// extern DECLSPEC SDL_bool SDLCALL SDL_HasARMSIMD(void)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_HasARMSIMD(void)
 /// ```
 bool sdlHasArmsimd() {
   final sdlHasArmsimdLookupFunction = libSdl3
@@ -287,7 +287,7 @@ bool sdlHasArmsimd() {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC SDL_bool SDLCALL SDL_HasNEON(void)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_HasNEON(void)
 /// ```
 bool sdlHasNeon() {
   final sdlHasNeonLookupFunction =
@@ -307,7 +307,7 @@ bool sdlHasNeon() {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC SDL_bool SDLCALL SDL_HasLSX(void)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_HasLSX(void)
 /// ```
 bool sdlHasLsx() {
   final sdlHasLsxLookupFunction =
@@ -327,7 +327,7 @@ bool sdlHasLsx() {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC SDL_bool SDLCALL SDL_HasLASX(void)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_HasLASX(void)
 /// ```
 bool sdlHasLasx() {
   final sdlHasLasxLookupFunction =
@@ -343,7 +343,7 @@ bool sdlHasLasx() {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_GetSystemRAM(void)
+/// extern SDL_DECLSPEC int SDLCALL SDL_GetSystemRAM(void)
 /// ```
 int sdlGetSystemRam() {
   final sdlGetSystemRamLookupFunction = libSdl3
@@ -372,11 +372,11 @@ int sdlGetSystemRam() {
 /// \sa SDL_aligned_free
 ///
 /// ```c
-/// extern DECLSPEC size_t SDLCALL SDL_SIMDGetAlignment(void)
+/// extern SDL_DECLSPEC size_t SDLCALL SDL_GetSIMDAlignment(void)
 /// ```
-int sdlSimdGetAlignment() {
-  final sdlSimdGetAlignmentLookupFunction =
+int sdlGetSimdAlignment() {
+  final sdlGetSimdAlignmentLookupFunction =
       libSdl3.lookupFunction<Uint32 Function(), int Function()>(
-          'SDL_SIMDGetAlignment');
-  return sdlSimdGetAlignmentLookupFunction();
+          'SDL_GetSIMDAlignment');
+  return sdlGetSimdAlignmentLookupFunction();
 }

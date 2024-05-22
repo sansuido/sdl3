@@ -2,7 +2,6 @@
 import 'dart:ffi';
 import './generated/const_sdl.dart';
 import './generated/lib_sdl_stdinc.dart';
-import './generated/struct_sdl.dart';
 
 //const SDL_INIT_EVERYTHING = ( \ SDL_INIT_TIMER | SDL_INIT_AUDIO | SDL_INIT_VIDEO | SDL_INIT_EVENTS | \ SDL_INIT_JOYSTICK | SDL_INIT_HAPTIC | SDL_INIT_GAMECONTROLLER \ );
 //const SDL_ASSERT_LEVEL = SDL_DEFAULT_ASSERT_LEVEL;
@@ -425,11 +424,11 @@ Pointer<Uint32> sdlIconvUtf8Ucs4(String s) {
 /// ```c
 /// const SDL_VERSION = (x) \{ \ (x)->major = SDL_MAJOR_VERSION; \ (x)->minor = SDL_MINOR_VERSION; \ (x)->patch = SDL_PATCHLEVEL; \};
 /// ```
-void sdlVersion(Pointer<SdlVersion> x) {
-  x.ref.major = SDL_MAJOR_VERSION;
-  x.ref.minor = SDL_MINOR_VERSION;
-  x.ref.patch = SDL_PATCHLEVEL;
-}
+//void sdlVersion(Pointer<SdlVersion> x) {
+//  x.ref.major = SDL_MAJOR_VERSION;
+//  x.ref.minor = SDL_MINOR_VERSION;
+//  x.ref.patch = SDL_MICRO_VERSION;
+//}
 
 /// ```c
 /// const SDL_VERSIONNUM = (X, Y, Z) \ ((X)*1000 + (Y)*100 + (Z));
@@ -442,7 +441,7 @@ int sdlVersionnum(int x, int y, int z) {
 /// const SDL_COMPILEDVERSION = \ SDL_VERSIONNUM(SDL_MAJOR_VERSION, SDL_MINOR_VERSION, SDL_PATCHLEVEL);
 /// ```
 final SDL_COMPILEDVERSION =
-    sdlVersionnum(SDL_MAJOR_VERSION, SDL_MINOR_VERSION, SDL_PATCHLEVEL);
+    sdlVersionnum(SDL_MAJOR_VERSION, SDL_MINOR_VERSION, SDL_MICRO_VERSION);
 
 /// ```c
 /// const SDL_VERSION_ATLEAST = (X, Y, Z) \ (SDL_COMPILEDVERSION >= SDL_VERSIONNUM(X, Y, Z));

@@ -53,7 +53,7 @@ import 'lib_sdl.dart';
 /// \sa SDL_WasInit
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_Init(SDL_InitFlags flags)
+/// extern SDL_DECLSPEC int SDLCALL SDL_Init(SDL_InitFlags flags)
 /// ```
 int sdlInit(int flags) {
   final sdlInitLookupFunction = libSdl3.lookupFunction<
@@ -77,7 +77,7 @@ int sdlInit(int flags) {
 /// \sa SDL_QuitSubSystem
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_InitSubSystem(SDL_InitFlags flags)
+/// extern SDL_DECLSPEC int SDLCALL SDL_InitSubSystem(SDL_InitFlags flags)
 /// ```
 int sdlInitSubSystem(int flags) {
   final sdlInitSubSystemLookupFunction = libSdl3.lookupFunction<
@@ -100,7 +100,7 @@ int sdlInitSubSystem(int flags) {
 /// \sa SDL_Quit
 ///
 /// ```c
-/// extern DECLSPEC void SDLCALL SDL_QuitSubSystem(SDL_InitFlags flags)
+/// extern SDL_DECLSPEC void SDLCALL SDL_QuitSubSystem(SDL_InitFlags flags)
 /// ```
 void sdlQuitSubSystem(int flags) {
   final sdlQuitSubSystemLookupFunction = libSdl3.lookupFunction<
@@ -122,7 +122,7 @@ void sdlQuitSubSystem(int flags) {
 /// \sa SDL_InitSubSystem
 ///
 /// ```c
-/// extern DECLSPEC SDL_InitFlags SDLCALL SDL_WasInit(SDL_InitFlags flags)
+/// extern SDL_DECLSPEC SDL_InitFlags SDLCALL SDL_WasInit(SDL_InitFlags flags)
 /// ```
 int sdlWasInit(int flags) {
   final sdlWasInitLookupFunction = libSdl3.lookupFunction<
@@ -147,7 +147,7 @@ int sdlWasInit(int flags) {
 /// \sa SDL_QuitSubSystem
 ///
 /// ```c
-/// extern DECLSPEC void SDLCALL SDL_Quit(void)
+/// extern SDL_DECLSPEC void SDLCALL SDL_Quit(void)
 /// ```
 void sdlQuit() {
   final sdlQuitLookupFunction =

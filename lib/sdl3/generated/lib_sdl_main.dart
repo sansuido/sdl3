@@ -17,7 +17,7 @@ import 'lib_sdl.dart';
 /// \sa SDL_Init
 ///
 /// ```c
-/// extern DECLSPEC void SDLCALL SDL_SetMainReady(void)
+/// extern SDL_DECLSPEC void SDLCALL SDL_SetMainReady(void)
 /// ```
 void sdlSetMainReady() {
   final sdlSetMainReadyLookupFunction = libSdl3
@@ -51,7 +51,7 @@ void sdlSetMainReady() {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_RunApp(int argc, char* argv[], SDL_main_func mainFunction, void * reserved)
+/// extern SDL_DECLSPEC int SDLCALL SDL_RunApp(int argc, char* argv[], SDL_main_func mainFunction, void * reserved)
 /// ```
 int sdlRunApp(
     int argc,
@@ -98,7 +98,7 @@ int sdlRunApp(
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_EnterAppMainCallbacks(int argc, char* argv[], SDL_AppInit_func appinit, SDL_AppIterate_func appiter, SDL_AppEvent_func appevent, SDL_AppQuit_func appquit)
+/// extern SDL_DECLSPEC int SDLCALL SDL_EnterAppMainCallbacks(int argc, char* argv[], SDL_AppInit_func appinit, SDL_AppIterate_func appiter, SDL_AppEvent_func appevent, SDL_AppQuit_func appquit)
 /// ```
 int sdlEnterAppMainCallbacks(
     int argc,
@@ -152,7 +152,7 @@ int sdlEnterAppMainCallbacks(
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_RegisterApp(const char *name, Uint32 style, void *hInst)
+/// extern SDL_DECLSPEC int SDLCALL SDL_RegisterApp(const char *name, Uint32 style, void *hInst)
 /// ```
 int sdlRegisterApp(String? name, int style, Pointer<NativeType> hInst) {
   final sdlRegisterAppLookupFunction = libSdl3.lookupFunction<
@@ -182,7 +182,7 @@ int sdlRegisterApp(String? name, int style, Pointer<NativeType> hInst) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC void SDLCALL SDL_UnregisterApp(void)
+/// extern SDL_DECLSPEC void SDLCALL SDL_UnregisterApp(void)
 /// ```
 void sdlUnregisterApp() {
   final sdlUnregisterAppLookupFunction = libSdl3
@@ -196,7 +196,7 @@ void sdlUnregisterApp() {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC void SDLCALL SDL_GDKSuspendComplete(void)
+/// extern SDL_DECLSPEC void SDLCALL SDL_GDKSuspendComplete(void)
 /// ```
 void sdlGdkSuspendComplete() {
   final sdlGdkSuspendCompleteLookupFunction =

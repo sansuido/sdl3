@@ -1,9 +1,6 @@
-import 'dart:ffi';
+// ignore_for_file: constant_identifier_names, non_constant_identifier_names
 import 'gfx/const.dart' as gfx;
-import 'generated/struct_sdl.dart';
+import 'lib_sdl_ex.dart';
 
-void sdlGfxVersion(Pointer<SdlVersion> x) {
-  x.ref.major = gfx.SDL3_GFXPRIMITIVES_MAJOR;
-  x.ref.minor = gfx.SDL3_GFXPRIMITIVES_MINOR;
-  x.ref.patch = gfx.SDL3_GFXPRIMITIVES_MICRO;
-}
+final SDL_GFX_COMPILEDVERSION = sdlVersionnum(gfx.SDL3_GFXPRIMITIVES_MAJOR,
+    gfx.SDL3_GFXPRIMITIVES_MINOR, gfx.SDL3_GFXPRIMITIVES_MICRO);

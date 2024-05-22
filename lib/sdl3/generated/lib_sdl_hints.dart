@@ -22,7 +22,7 @@ import 'lib_sdl.dart';
 /// \sa SDL_SetHint
 ///
 /// ```c
-/// extern DECLSPEC SDL_bool SDLCALL SDL_SetHintWithPriority(const char *name, const char *value, SDL_HintPriority priority)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetHintWithPriority(const char *name, const char *value, SDL_HintPriority priority)
 /// ```
 bool sdlSetHintWithPriority(String? name, String? value, int priority) {
   final sdlSetHintWithPriorityLookupFunction = libSdl3.lookupFunction<
@@ -57,7 +57,7 @@ bool sdlSetHintWithPriority(String? name, String? value, int priority) {
 /// \sa SDL_SetHintWithPriority
 ///
 /// ```c
-/// extern DECLSPEC SDL_bool SDLCALL SDL_SetHint(const char *name, const char *value)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetHint(const char *name, const char *value)
 /// ```
 bool sdlSetHint(String? name, String? value) {
   final sdlSetHintLookupFunction = libSdl3.lookupFunction<
@@ -87,7 +87,7 @@ bool sdlSetHint(String? name, String? value) {
 /// \sa SDL_ResetHints
 ///
 /// ```c
-/// extern DECLSPEC SDL_bool SDLCALL SDL_ResetHint(const char *name)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_ResetHint(const char *name)
 /// ```
 bool sdlResetHint(String? name) {
   final sdlResetHintLookupFunction = libSdl3.lookupFunction<
@@ -111,7 +111,7 @@ bool sdlResetHint(String? name) {
 /// \sa SDL_ResetHint
 ///
 /// ```c
-/// extern DECLSPEC void SDLCALL SDL_ResetHints(void)
+/// extern SDL_DECLSPEC void SDLCALL SDL_ResetHints(void)
 /// ```
 void sdlResetHints() {
   final sdlResetHintsLookupFunction = libSdl3
@@ -131,7 +131,7 @@ void sdlResetHints() {
 /// \sa SDL_SetHintWithPriority
 ///
 /// ```c
-/// extern DECLSPEC const char * SDLCALL SDL_GetHint(const char *name)
+/// extern SDL_DECLSPEC const char * SDLCALL SDL_GetHint(const char *name)
 /// ```
 String? sdlGetHint(String? name) {
   final sdlGetHintLookupFunction = libSdl3.lookupFunction<
@@ -160,7 +160,7 @@ String? sdlGetHint(String? name) {
 /// \sa SDL_SetHint
 ///
 /// ```c
-/// extern DECLSPEC SDL_bool SDLCALL SDL_GetHintBoolean(const char *name, SDL_bool default_value)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetHintBoolean(const char *name, SDL_bool default_value)
 /// ```
 bool sdlGetHintBoolean(String? name, bool defaultValue) {
   final sdlGetHintBooleanLookupFunction = libSdl3.lookupFunction<
@@ -188,7 +188,7 @@ bool sdlGetHintBoolean(String? name, bool defaultValue) {
 /// \sa SDL_DelHintCallback
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_AddHintCallback(const char *name, SDL_HintCallback callback, void *userdata)
+/// extern SDL_DECLSPEC int SDLCALL SDL_AddHintCallback(const char *name, SDL_HintCallback callback, void *userdata)
 /// ```
 int sdlAddHintCallback(
     String? name,
@@ -223,7 +223,7 @@ int sdlAddHintCallback(
 /// \sa SDL_AddHintCallback
 ///
 /// ```c
-/// extern DECLSPEC void SDLCALL SDL_DelHintCallback(const char *name, SDL_HintCallback callback, void *userdata)
+/// extern SDL_DECLSPEC void SDLCALL SDL_DelHintCallback(const char *name, SDL_HintCallback callback, void *userdata)
 /// ```
 void sdlDelHintCallback(
     String? name,

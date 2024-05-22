@@ -44,13 +44,14 @@ bool init() {
     print(sdlGetError());
     return false;
   }
+  sdlSetHint(SDL_HINT_RENDER_VSYNC, '1');
   gWindow =
       SdlWindowEx.create(title: gTitle, w: gScreenWidth, h: gScreenHeight);
   if (gWindow == nullptr) {
     print(sdlGetError());
     return false;
   }
-  gRenderer = gWindow.createRenderer(SDL_RENDERER_PRESENTVSYNC);
+  gRenderer = gWindow.createRenderer();
   if (gRenderer == nullptr) {
     print(sdlGetError());
     return false;

@@ -31,7 +31,7 @@ import 'lib_sdl.dart';
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC SDL_PowerState SDLCALL SDL_GetPowerInfo(int *seconds, int *percent)
+/// extern SDL_DECLSPEC SDL_PowerState SDLCALL SDL_GetPowerInfo(int *seconds, int *percent)
 /// ```
 int sdlGetPowerInfo(Pointer<Int32> seconds, Pointer<Int32> percent) {
   final sdlGetPowerInfoLookupFunction = libSdl3.lookupFunction<

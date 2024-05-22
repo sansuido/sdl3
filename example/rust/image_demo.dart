@@ -8,6 +8,7 @@ int main() {
     print(sdlGetError());
     return -1;
   }
+  sdlSetHint(SDL_HINT_RENDER_VSYNC, '1');
   var imgFlags = IMG_INIT_PNG | IMG_INIT_JPG;
   if (imgInit(imgFlags) != imgFlags) {
     print(sdlGetError());
@@ -26,7 +27,7 @@ int main() {
     return -1;
   }
   sdlSetEventEnabled(SDL_EVENT_DROP_FILE, true);
-  var renderer = window.createRenderer(SDL_RENDERER_PRESENTVSYNC);
+  var renderer = window.createRenderer();
   if (renderer == nullptr) {
     print(sdlGetError());
     window.destroy();

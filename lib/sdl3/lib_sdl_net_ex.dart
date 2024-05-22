@@ -1,15 +1,9 @@
-import 'dart:ffi';
+// ignore_for_file: constant_identifier_names, non_constant_identifier_names
 import './generated/const_sdl_net.dart';
-import './generated/struct_sdl.dart';
+import 'lib_sdl_ex.dart';
 
-/// ```c
-/// const SDL_NET_VERSION = (X) \{ \ (X)->major = SDL_NET_MAJOR_VERSION; \ (X)->minor = SDL_NET_MINOR_VERSION; \ (X)->patch = SDL_NET_PATCHLEVEL; \};
-/// ```
-void sdlNetVersion(Pointer<SdlVersion> x) {
-  x.ref.major = SDL_NET_MAJOR_VERSION;
-  x.ref.minor = SDL_NET_MINOR_VERSION;
-  x.ref.patch = SDL_NET_PATCHLEVEL;
-}
+final SDL_NET_COMPILEDVERSION = sdlVersionnum(
+    SDL_NET_MAJOR_VERSION, SDL_NET_MINOR_VERSION, SDL_NET_MICRO_VERSION);
 
 //const SDLNet_SocketReady = (sock) _SDLNet_SocketReady((SDLNet_GenericSocket)(sock));
 //const SDLNet_Write16 = (value, areap) _SDLNet_Write16(value, areap);

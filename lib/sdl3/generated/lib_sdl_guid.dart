@@ -5,11 +5,11 @@ import 'lib_sdl.dart';
 import 'struct_sdl.dart';
 
 ///
-/// Get an ASCII string representation for a given ::SDL_GUID.
+/// Get an ASCII string representation for a given SDL_GUID.
 ///
 /// You should supply at least 33 bytes for pszGUID.
 ///
-/// \param guid the ::SDL_GUID you wish to convert to string
+/// \param guid the SDL_GUID you wish to convert to string
 /// \param pszGUID buffer in which to write the ASCII string
 /// \param cbGUID the size of pszGUID
 /// \returns 0 on success or a negative error code on failure; call
@@ -20,7 +20,7 @@ import 'struct_sdl.dart';
 /// \sa SDL_GUIDFromString
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_GUIDToString(SDL_GUID guid, char *pszGUID, int cbGUID)
+/// extern SDL_DECLSPEC int SDLCALL SDL_GUIDToString(SDL_GUID guid, char *pszGUID, int cbGUID)
 /// ```
 int sdlGuidToString(SdlGuid guid, Pointer<Int8> pszGuid, int cbGuid) {
   final sdlGuidToStringLookupFunction = libSdl3.lookupFunction<
@@ -31,21 +31,21 @@ int sdlGuidToString(SdlGuid guid, Pointer<Int8> pszGuid, int cbGuid) {
 }
 
 ///
-/// Convert a GUID string into a ::SDL_GUID structure.
+/// Convert a GUID string into a SDL_GUID structure.
 ///
 /// Performs no error checking. If this function is given a string containing
 /// an invalid GUID, the function will silently succeed, but the GUID generated
 /// will not be useful.
 ///
 /// \param pchGUID string containing an ASCII representation of a GUID
-/// \returns a ::SDL_GUID structure.
+/// \returns a SDL_GUID structure.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GUIDToString
 ///
 /// ```c
-/// extern DECLSPEC SDL_GUID SDLCALL SDL_GUIDFromString(const char *pchGUID)
+/// extern SDL_DECLSPEC SDL_GUID SDLCALL SDL_GUIDFromString(const char *pchGUID)
 /// ```
 SdlGuid sdlGuidFromString(String? pchGuid) {
   final sdlGuidFromStringLookupFunction = libSdl3.lookupFunction<

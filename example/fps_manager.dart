@@ -16,6 +16,7 @@ int main() {
     print(sdlGetError());
     return -1;
   }
+  sdlSetHint(SDL_HINT_RENDER_VSYNC, '1');
   var window = SdlWindowEx.create(
       title: '', w: gWindowWidth, h: gWindowHeight, flags: SDL_WINDOW_OPENGL);
   if (window == nullptr) {
@@ -23,7 +24,7 @@ int main() {
     sdlQuit();
     return -1;
   }
-  var renderer = window.createRenderer(SDL_RENDERER_PRESENTVSYNC);
+  var renderer = window.createRenderer();
   if (renderer == nullptr) {
     print(sdlGetError());
     window.destroy();

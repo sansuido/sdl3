@@ -18,7 +18,7 @@ import 'struct_sdl.dart';
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC SDL_AssertState SDLCALL SDL_ReportAssertion(SDL_AssertData *data, const char *func, const char *file, int line) __attribute__((analyzer_noreturn))
+/// extern SDL_DECLSPEC SDL_AssertState SDLCALL SDL_ReportAssertion(SDL_AssertData *data, const char *func, const char *file, int line) __attribute__((analyzer_noreturn))
 /// ```
 int sdlReportAssertion(Pointer<SdlAssertData> data, String? func, String? file,
     Pointer<NativeType> arg3) {
@@ -58,7 +58,7 @@ int sdlReportAssertion(Pointer<SdlAssertData> data, String? func, String? file,
 /// \sa SDL_GetAssertionHandler
 ///
 /// ```c
-/// extern DECLSPEC void SDLCALL SDL_SetAssertionHandler( SDL_AssertionHandler handler, void *userdata)
+/// extern SDL_DECLSPEC void SDLCALL SDL_SetAssertionHandler( SDL_AssertionHandler handler, void *userdata)
 /// ```
 void sdlSetAssertionHandler(
     Pointer<NativeFunction<SdlAssertionHandler>> handler,
@@ -87,7 +87,7 @@ void sdlSetAssertionHandler(
 /// \sa SDL_GetAssertionHandler
 ///
 /// ```c
-/// extern DECLSPEC SDL_AssertionHandler SDLCALL SDL_GetDefaultAssertionHandler(void)
+/// extern SDL_DECLSPEC SDL_AssertionHandler SDLCALL SDL_GetDefaultAssertionHandler(void)
 /// ```
 Pointer<NativeFunction<SdlAssertionHandler>> sdlGetDefaultAssertionHandler() {
   final sdlGetDefaultAssertionHandlerLookupFunction = libSdl3.lookupFunction<
@@ -119,7 +119,7 @@ Pointer<NativeFunction<SdlAssertionHandler>> sdlGetDefaultAssertionHandler() {
 /// \sa SDL_SetAssertionHandler
 ///
 /// ```c
-/// extern DECLSPEC SDL_AssertionHandler SDLCALL SDL_GetAssertionHandler(void **puserdata)
+/// extern SDL_DECLSPEC SDL_AssertionHandler SDLCALL SDL_GetAssertionHandler(void **puserdata)
 /// ```
 Pointer<NativeFunction<SdlAssertionHandler>> sdlGetAssertionHandler(
     Pointer<Pointer<NativeType>> puserdata) {
@@ -158,7 +158,7 @@ Pointer<NativeFunction<SdlAssertionHandler>> sdlGetAssertionHandler(
 /// \sa SDL_ResetAssertionReport
 ///
 /// ```c
-/// extern DECLSPEC const SDL_AssertData * SDLCALL SDL_GetAssertionReport(void)
+/// extern SDL_DECLSPEC const SDL_AssertData * SDLCALL SDL_GetAssertionReport(void)
 /// ```
 Pointer<SdlAssertData> sdlGetAssertionReport() {
   final sdlGetAssertionReportLookupFunction = libSdl3.lookupFunction<
@@ -180,7 +180,7 @@ Pointer<SdlAssertData> sdlGetAssertionReport() {
 /// \sa SDL_GetAssertionReport
 ///
 /// ```c
-/// extern DECLSPEC void SDLCALL SDL_ResetAssertionReport(void)
+/// extern SDL_DECLSPEC void SDLCALL SDL_ResetAssertionReport(void)
 /// ```
 void sdlResetAssertionReport() {
   final sdlResetAssertionReportLookupFunction =

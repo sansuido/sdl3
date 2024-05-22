@@ -8,26 +8,10 @@ import './generated/struct_sdl_ttf.dart';
 import 'lib_sdl_ex.dart';
 
 /// ```c
-/// const SDL_TTF_VERSION = (X) \{ \ (X)->major = SDL_TTF_MAJOR_VERSION; \ (X)->minor = SDL_TTF_MINOR_VERSION; \ (X)->patch = SDL_TTF_PATCHLEVEL; \};
-/// ```
-void sdlTtfVersion(Pointer<SdlVersion> x) {
-  x.ref.major = SDL_TTF_MAJOR_VERSION;
-  x.ref.minor = SDL_TTF_MINOR_VERSION;
-  x.ref.patch = SDL_TTF_PATCHLEVEL;
-}
-
-/// ```c
-/// const TTF_VERSION = (X) SDL_TTF_VERSION(X);
-/// ```
-void ttfVersion(Pointer<SdlVersion> x) {
-  return sdlTtfVersion(x);
-}
-
-/// ```c
 /// const SDL_TTF_COMPILEDVERSION = \ SDL_VERSIONNUM(SDL_TTF_MAJOR_VERSION, SDL_TTF_MINOR_VERSION, SDL_TTF_PATCHLEVEL);
 /// ```
 final SDL_TTF_COMPILEDVERSION = sdlVersionnum(
-    SDL_TTF_MAJOR_VERSION, SDL_TTF_MINOR_VERSION, SDL_TTF_PATCHLEVEL);
+    SDL_TTF_MAJOR_VERSION, SDL_TTF_MINOR_VERSION, SDL_TTF_MICRO_VERSION);
 
 /// ```c
 /// const SDL_TTF_VERSION_ATLEAST = (X, Y, Z) \ (SDL_TTF_COMPILEDVERSION >= SDL_VERSIONNUM(X, Y, Z));

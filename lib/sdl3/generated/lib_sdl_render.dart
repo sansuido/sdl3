@@ -22,7 +22,7 @@ import 'struct_sdl.dart';
 /// \sa SDL_GetRenderDriver
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_GetNumRenderDrivers(void)
+/// extern SDL_DECLSPEC int SDLCALL SDL_GetNumRenderDrivers(void)
 /// ```
 int sdlGetNumRenderDrivers() {
   final sdlGetNumRenderDriversLookupFunction =
@@ -55,7 +55,7 @@ int sdlGetNumRenderDrivers() {
 /// \sa SDL_GetNumRenderDrivers
 ///
 /// ```c
-/// extern DECLSPEC const char *SDLCALL SDL_GetRenderDriver(int index)
+/// extern SDL_DECLSPEC const char *SDLCALL SDL_GetRenderDriver(int index)
 /// ```
 String? sdlGetRenderDriver(int index) {
   final sdlGetRenderDriverLookupFunction = libSdl3.lookupFunction<
@@ -87,7 +87,7 @@ String? sdlGetRenderDriver(int index) {
 /// \sa SDL_CreateWindow
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_CreateWindowAndRenderer(const char *title, int width, int height, SDL_WindowFlags window_flags, SDL_Window **window, SDL_Renderer **renderer)
+/// extern SDL_DECLSPEC int SDLCALL SDL_CreateWindowAndRenderer(const char *title, int width, int height, SDL_WindowFlags window_flags, SDL_Window **window, SDL_Renderer **renderer)
 /// ```
 int sdlCreateWindowAndRenderer(
     String? title,
@@ -135,7 +135,6 @@ int sdlCreateWindowAndRenderer(
 /// \param window the window where rendering is displayed
 /// \param name the name of the rendering driver to initialize, or NULL to
 /// initialize the first one supporting the requested flags
-/// \param flags 0, or one or more SDL_RendererFlags OR'd together
 /// \returns a valid rendering context or NULL if there was an error; call
 /// SDL_GetError() for more information.
 ///
@@ -149,17 +148,17 @@ int sdlCreateWindowAndRenderer(
 /// \sa SDL_GetRendererInfo
 ///
 /// ```c
-/// extern DECLSPEC SDL_Renderer * SDLCALL SDL_CreateRenderer(SDL_Window *window, const char *name, SDL_RendererFlags flags)
+/// extern SDL_DECLSPEC SDL_Renderer * SDLCALL SDL_CreateRenderer(SDL_Window *window, const char *name)
 /// ```
 Pointer<SdlRenderer> sdlCreateRenderer(
-    Pointer<SdlWindow> window, String? name, int flags) {
+    Pointer<SdlWindow> window, String? name) {
   final sdlCreateRendererLookupFunction = libSdl3.lookupFunction<
       Pointer<SdlRenderer> Function(
-          Pointer<SdlWindow> window, Pointer<Utf8> name, Uint32 flags),
-      Pointer<SdlRenderer> Function(Pointer<SdlWindow> window,
-          Pointer<Utf8> name, int flags)>('SDL_CreateRenderer');
+          Pointer<SdlWindow> window, Pointer<Utf8> name),
+      Pointer<SdlRenderer> Function(
+          Pointer<SdlWindow> window, Pointer<Utf8> name)>('SDL_CreateRenderer');
   final namePointer = name != null ? name.toNativeUtf8() : nullptr;
-  final result = sdlCreateRendererLookupFunction(window, namePointer, flags);
+  final result = sdlCreateRendererLookupFunction(window, namePointer);
   calloc.free(namePointer);
   return result;
 }
@@ -182,8 +181,9 @@ Pointer<SdlRenderer> sdlCreateRenderer(
 /// supports HDR output. If you select SDL_COLORSPACE_SRGB_LINEAR, drawing
 /// still uses the sRGB colorspace, but values can go beyond 1.0 and float
 /// (linear) format textures can be used for HDR content.
-/// - `SDL_PROP_RENDERER_CREATE_PRESENT_VSYNC_BOOLEAN`: true if you want
-/// present synchronized with the refresh rate
+/// - `SDL_PROP_RENDERER_CREATE_PRESENT_VSYNC_NUMBER`: non-zero if you want
+/// present synchronized with the refresh rate. This property can take any
+/// value that is supported by SDL_SetRenderVSync() for the renderer.
 ///
 /// With the vulkan renderer:
 ///
@@ -213,7 +213,7 @@ Pointer<SdlRenderer> sdlCreateRenderer(
 /// \sa SDL_GetRendererInfo
 ///
 /// ```c
-/// extern DECLSPEC SDL_Renderer * SDLCALL SDL_CreateRendererWithProperties(SDL_PropertiesID props)
+/// extern SDL_DECLSPEC SDL_Renderer * SDLCALL SDL_CreateRendererWithProperties(SDL_PropertiesID props)
 /// ```
 Pointer<SdlRenderer> sdlCreateRendererWithProperties(int props) {
   final sdlCreateRendererWithPropertiesLookupFunction = libSdl3.lookupFunction<
@@ -241,7 +241,7 @@ Pointer<SdlRenderer> sdlCreateRendererWithProperties(int props) {
 /// \sa SDL_DestroyRenderer
 ///
 /// ```c
-/// extern DECLSPEC SDL_Renderer *SDLCALL SDL_CreateSoftwareRenderer(SDL_Surface *surface)
+/// extern SDL_DECLSPEC SDL_Renderer *SDLCALL SDL_CreateSoftwareRenderer(SDL_Surface *surface)
 /// ```
 Pointer<SdlRenderer> sdlCreateSoftwareRenderer(Pointer<SdlSurface> surface) {
   final sdlCreateSoftwareRendererLookupFunction = libSdl3.lookupFunction<
@@ -261,7 +261,7 @@ Pointer<SdlRenderer> sdlCreateSoftwareRenderer(Pointer<SdlSurface> surface) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC SDL_Renderer *SDLCALL SDL_GetRenderer(SDL_Window *window)
+/// extern SDL_DECLSPEC SDL_Renderer *SDLCALL SDL_GetRenderer(SDL_Window *window)
 /// ```
 Pointer<SdlRenderer> sdlGetRenderer(Pointer<SdlWindow> window) {
   final sdlGetRendererLookupFunction = libSdl3.lookupFunction<
@@ -281,7 +281,7 @@ Pointer<SdlRenderer> sdlGetRenderer(Pointer<SdlWindow> window) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC SDL_Window *SDLCALL SDL_GetRenderWindow(SDL_Renderer *renderer)
+/// extern SDL_DECLSPEC SDL_Window *SDLCALL SDL_GetRenderWindow(SDL_Renderer *renderer)
 /// ```
 Pointer<SdlWindow> sdlGetRenderWindow(Pointer<SdlRenderer> renderer) {
   final sdlGetRenderWindowLookupFunction = libSdl3.lookupFunction<
@@ -306,7 +306,7 @@ Pointer<SdlWindow> sdlGetRenderWindow(Pointer<SdlRenderer> renderer) {
 /// \sa SDL_CreateRendererWithProperties
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_GetRendererInfo(SDL_Renderer *renderer, SDL_RendererInfo *info)
+/// extern SDL_DECLSPEC int SDLCALL SDL_GetRendererInfo(SDL_Renderer *renderer, SDL_RendererInfo *info)
 /// ```
 int sdlGetRendererInfo(
     Pointer<SdlRenderer> renderer, Pointer<SdlRendererInfo> info) {
@@ -328,6 +328,9 @@ int sdlGetRendererInfo(
 /// displayed, if any
 /// - `SDL_PROP_RENDERER_SURFACE_POINTER`: the surface where rendering is
 /// displayed, if this is a software renderer without a window
+/// - `SDL_PROP_RENDERER_VSYNC_NUMBER`: the current vsync setting
+/// - `SDL_PROP_RENDERER_MAX_TEXTURE_SIZE_NUMBER`: the maximum texture width
+/// and height
 /// - `SDL_PROP_RENDERER_OUTPUT_COLORSPACE_NUMBER`: an SDL_ColorSpace value
 /// describing the colorspace for output to the display, defaults to
 /// SDL_COLORSPACE_SRGB.
@@ -353,11 +356,15 @@ int sdlGetRendererInfo(
 ///
 /// - `SDL_PROP_RENDERER_D3D11_DEVICE_POINTER`: the ID3D11Device associated
 /// with the renderer
+/// - `SDL_PROP_RENDERER_D3D11_SWAPCHAIN_POINTER`: the IDXGISwapChain1
+/// associated with the renderer. This may change when the window is resized.
 ///
 /// With the direct3d12 renderer:
 ///
 /// - `SDL_PROP_RENDERER_D3D12_DEVICE_POINTER`: the ID3D12Device associated
 /// with the renderer
+/// - `SDL_PROP_RENDERER_D3D12_SWAPCHAIN_POINTER`: the IDXGISwapChain4
+/// associated with the renderer.
 /// - `SDL_PROP_RENDERER_D3D12_COMMAND_QUEUE_POINTER`: the ID3D12CommandQueue
 /// associated with the renderer
 ///
@@ -389,7 +396,7 @@ int sdlGetRendererInfo(
 /// \sa SDL_SetProperty
 ///
 /// ```c
-/// extern DECLSPEC SDL_PropertiesID SDLCALL SDL_GetRendererProperties(SDL_Renderer *renderer)
+/// extern SDL_DECLSPEC SDL_PropertiesID SDLCALL SDL_GetRendererProperties(SDL_Renderer *renderer)
 /// ```
 int sdlGetRendererProperties(Pointer<SdlRenderer> renderer) {
   final sdlGetRendererPropertiesLookupFunction = libSdl3.lookupFunction<
@@ -415,7 +422,7 @@ int sdlGetRendererProperties(Pointer<SdlRenderer> renderer) {
 /// \sa SDL_GetCurrentRenderOutputSize
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_GetRenderOutputSize(SDL_Renderer *renderer, int *w, int *h)
+/// extern SDL_DECLSPEC int SDLCALL SDL_GetRenderOutputSize(SDL_Renderer *renderer, int *w, int *h)
 /// ```
 int sdlGetRenderOutputSize(
     Pointer<SdlRenderer> renderer, Pointer<Int32> w, Pointer<Int32> h) {
@@ -446,7 +453,7 @@ int sdlGetRenderOutputSize(
 /// \sa SDL_GetRenderOutputSize
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_GetCurrentRenderOutputSize(SDL_Renderer *renderer, int *w, int *h)
+/// extern SDL_DECLSPEC int SDLCALL SDL_GetCurrentRenderOutputSize(SDL_Renderer *renderer, int *w, int *h)
 /// ```
 int sdlGetCurrentRenderOutputSize(
     Pointer<SdlRenderer> renderer, Pointer<Int32> w, Pointer<Int32> h) {
@@ -479,7 +486,7 @@ int sdlGetCurrentRenderOutputSize(
 /// \sa SDL_UpdateTexture
 ///
 /// ```c
-/// extern DECLSPEC SDL_Texture *SDLCALL SDL_CreateTexture(SDL_Renderer *renderer, SDL_PixelFormatEnum format, int access, int w, int h)
+/// extern SDL_DECLSPEC SDL_Texture *SDLCALL SDL_CreateTexture(SDL_Renderer *renderer, SDL_PixelFormatEnum format, int access, int w, int h)
 /// ```
 Pointer<SdlTexture> sdlCreateTexture(
     Pointer<SdlRenderer> renderer, int format, int access, int w, int h) {
@@ -517,7 +524,7 @@ Pointer<SdlTexture> sdlCreateTexture(
 /// \sa SDL_QueryTexture
 ///
 /// ```c
-/// extern DECLSPEC SDL_Texture *SDLCALL SDL_CreateTextureFromSurface(SDL_Renderer *renderer, SDL_Surface *surface)
+/// extern SDL_DECLSPEC SDL_Texture *SDLCALL SDL_CreateTextureFromSurface(SDL_Renderer *renderer, SDL_Surface *surface)
 /// ```
 Pointer<SdlTexture> sdlCreateTextureFromSurface(
     Pointer<SdlRenderer> renderer, Pointer<SdlSurface> surface) {
@@ -639,7 +646,7 @@ Pointer<SdlTexture> sdlCreateTextureFromSurface(
 /// \sa SDL_UpdateTexture
 ///
 /// ```c
-/// extern DECLSPEC SDL_Texture *SDLCALL SDL_CreateTextureWithProperties(SDL_Renderer *renderer, SDL_PropertiesID props)
+/// extern SDL_DECLSPEC SDL_Texture *SDLCALL SDL_CreateTextureWithProperties(SDL_Renderer *renderer, SDL_PropertiesID props)
 /// ```
 Pointer<SdlTexture> sdlCreateTextureWithProperties(
     Pointer<SdlRenderer> renderer, int props) {
@@ -743,7 +750,7 @@ Pointer<SdlTexture> sdlCreateTextureWithProperties(
 /// \sa SDL_SetProperty
 ///
 /// ```c
-/// extern DECLSPEC SDL_PropertiesID SDLCALL SDL_GetTextureProperties(SDL_Texture *texture)
+/// extern SDL_DECLSPEC SDL_PropertiesID SDLCALL SDL_GetTextureProperties(SDL_Texture *texture)
 /// ```
 int sdlGetTextureProperties(Pointer<SdlTexture> texture) {
   final sdlGetTexturePropertiesLookupFunction = libSdl3.lookupFunction<
@@ -764,7 +771,7 @@ int sdlGetTextureProperties(Pointer<SdlTexture> texture) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC SDL_Renderer *SDLCALL SDL_GetRendererFromTexture(SDL_Texture *texture)
+/// extern SDL_DECLSPEC SDL_Renderer *SDLCALL SDL_GetRendererFromTexture(SDL_Texture *texture)
 /// ```
 Pointer<SdlRenderer> sdlGetRendererFromTexture(Pointer<SdlTexture> texture) {
   final sdlGetRendererFromTextureLookupFunction = libSdl3.lookupFunction<
@@ -795,7 +802,7 @@ Pointer<SdlRenderer> sdlGetRendererFromTexture(Pointer<SdlTexture> texture) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_QueryTexture(SDL_Texture *texture, SDL_PixelFormatEnum *format, int *access, int *w, int *h)
+/// extern SDL_DECLSPEC int SDLCALL SDL_QueryTexture(SDL_Texture *texture, SDL_PixelFormatEnum *format, int *access, int *w, int *h)
 /// ```
 int sdlQueryTexture(Pointer<SdlTexture> texture, Pointer<Int32> format,
     Pointer<Int32> access, Pointer<Int32> w, Pointer<Int32> h) {
@@ -837,7 +844,7 @@ int sdlQueryTexture(Pointer<SdlTexture> texture, Pointer<Int32> format,
 /// \sa SDL_SetTextureColorModFloat
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_SetTextureColorMod(SDL_Texture *texture, Uint8 r, Uint8 g, Uint8 b)
+/// extern SDL_DECLSPEC int SDLCALL SDL_SetTextureColorMod(SDL_Texture *texture, Uint8 r, Uint8 g, Uint8 b)
 /// ```
 int sdlSetTextureColorMod(Pointer<SdlTexture> texture, int r, int g, int b) {
   final sdlSetTextureColorModLookupFunction = libSdl3.lookupFunction<
@@ -873,7 +880,7 @@ int sdlSetTextureColorMod(Pointer<SdlTexture> texture, int r, int g, int b) {
 /// \sa SDL_SetTextureColorMod
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_SetTextureColorModFloat(SDL_Texture *texture, float r, float g, float b)
+/// extern SDL_DECLSPEC int SDLCALL SDL_SetTextureColorModFloat(SDL_Texture *texture, float r, float g, float b)
 /// ```
 int sdlSetTextureColorModFloat(
     Pointer<SdlTexture> texture, double r, double g, double b) {
@@ -901,7 +908,7 @@ int sdlSetTextureColorModFloat(
 /// \sa SDL_SetTextureColorMod
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_GetTextureColorMod(SDL_Texture *texture, Uint8 *r, Uint8 *g, Uint8 *b)
+/// extern SDL_DECLSPEC int SDLCALL SDL_GetTextureColorMod(SDL_Texture *texture, Uint8 *r, Uint8 *g, Uint8 *b)
 /// ```
 int sdlGetTextureColorMod(Pointer<SdlTexture> texture, Pointer<Uint8> r,
     Pointer<Uint8> g, Pointer<Uint8> b) {
@@ -930,7 +937,7 @@ int sdlGetTextureColorMod(Pointer<SdlTexture> texture, Pointer<Uint8> r,
 /// \sa SDL_SetTextureColorModFloat
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_GetTextureColorModFloat(SDL_Texture *texture, float *r, float *g, float *b)
+/// extern SDL_DECLSPEC int SDLCALL SDL_GetTextureColorModFloat(SDL_Texture *texture, float *r, float *g, float *b)
 /// ```
 int sdlGetTextureColorModFloat(Pointer<SdlTexture> texture, Pointer<Float> r,
     Pointer<Float> g, Pointer<Float> b) {
@@ -965,7 +972,7 @@ int sdlGetTextureColorModFloat(Pointer<SdlTexture> texture, Pointer<Float> r,
 /// \sa SDL_SetTextureColorMod
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_SetTextureAlphaMod(SDL_Texture *texture, Uint8 alpha)
+/// extern SDL_DECLSPEC int SDLCALL SDL_SetTextureAlphaMod(SDL_Texture *texture, Uint8 alpha)
 /// ```
 int sdlSetTextureAlphaMod(Pointer<SdlTexture> texture, int alpha) {
   final sdlSetTextureAlphaModLookupFunction = libSdl3.lookupFunction<
@@ -998,7 +1005,7 @@ int sdlSetTextureAlphaMod(Pointer<SdlTexture> texture, int alpha) {
 /// \sa SDL_SetTextureColorModFloat
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_SetTextureAlphaModFloat(SDL_Texture *texture, float alpha)
+/// extern SDL_DECLSPEC int SDLCALL SDL_SetTextureAlphaModFloat(SDL_Texture *texture, float alpha)
 /// ```
 int sdlSetTextureAlphaModFloat(Pointer<SdlTexture> texture, double alpha) {
   final sdlSetTextureAlphaModFloatLookupFunction = libSdl3.lookupFunction<
@@ -1023,7 +1030,7 @@ int sdlSetTextureAlphaModFloat(Pointer<SdlTexture> texture, double alpha) {
 /// \sa SDL_SetTextureAlphaMod
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_GetTextureAlphaMod(SDL_Texture *texture, Uint8 *alpha)
+/// extern SDL_DECLSPEC int SDLCALL SDL_GetTextureAlphaMod(SDL_Texture *texture, Uint8 *alpha)
 /// ```
 int sdlGetTextureAlphaMod(Pointer<SdlTexture> texture, Pointer<Uint8> alpha) {
   final sdlGetTextureAlphaModLookupFunction = libSdl3.lookupFunction<
@@ -1048,7 +1055,7 @@ int sdlGetTextureAlphaMod(Pointer<SdlTexture> texture, Pointer<Uint8> alpha) {
 /// \sa SDL_SetTextureAlphaModFloat
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_GetTextureAlphaModFloat(SDL_Texture *texture, float *alpha)
+/// extern SDL_DECLSPEC int SDLCALL SDL_GetTextureAlphaModFloat(SDL_Texture *texture, float *alpha)
 /// ```
 int sdlGetTextureAlphaModFloat(
     Pointer<SdlTexture> texture, Pointer<Float> alpha) {
@@ -1075,7 +1082,7 @@ int sdlGetTextureAlphaModFloat(
 /// \sa SDL_GetTextureBlendMode
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_SetTextureBlendMode(SDL_Texture *texture, SDL_BlendMode blendMode)
+/// extern SDL_DECLSPEC int SDLCALL SDL_SetTextureBlendMode(SDL_Texture *texture, SDL_BlendMode blendMode)
 /// ```
 int sdlSetTextureBlendMode(Pointer<SdlTexture> texture, int blendMode) {
   final sdlSetTextureBlendModeLookupFunction = libSdl3.lookupFunction<
@@ -1098,7 +1105,7 @@ int sdlSetTextureBlendMode(Pointer<SdlTexture> texture, int blendMode) {
 /// \sa SDL_SetTextureBlendMode
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_GetTextureBlendMode(SDL_Texture *texture, SDL_BlendMode *blendMode)
+/// extern SDL_DECLSPEC int SDLCALL SDL_GetTextureBlendMode(SDL_Texture *texture, SDL_BlendMode *blendMode)
 /// ```
 int sdlGetTextureBlendMode(
     Pointer<SdlTexture> texture, Pointer<Uint32> blendMode) {
@@ -1126,7 +1133,7 @@ int sdlGetTextureBlendMode(
 /// \sa SDL_GetTextureScaleMode
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_SetTextureScaleMode(SDL_Texture *texture, SDL_ScaleMode scaleMode)
+/// extern SDL_DECLSPEC int SDLCALL SDL_SetTextureScaleMode(SDL_Texture *texture, SDL_ScaleMode scaleMode)
 /// ```
 int sdlSetTextureScaleMode(Pointer<SdlTexture> texture, int scaleMode) {
   final sdlSetTextureScaleModeLookupFunction = libSdl3.lookupFunction<
@@ -1149,7 +1156,7 @@ int sdlSetTextureScaleMode(Pointer<SdlTexture> texture, int scaleMode) {
 /// \sa SDL_SetTextureScaleMode
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_GetTextureScaleMode(SDL_Texture *texture, SDL_ScaleMode *scaleMode)
+/// extern SDL_DECLSPEC int SDLCALL SDL_GetTextureScaleMode(SDL_Texture *texture, SDL_ScaleMode *scaleMode)
 /// ```
 int sdlGetTextureScaleMode(
     Pointer<SdlTexture> texture, Pointer<Int32> scaleMode) {
@@ -1191,7 +1198,7 @@ int sdlGetTextureScaleMode(
 /// \sa SDL_UpdateYUVTexture
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_UpdateTexture(SDL_Texture *texture, const SDL_Rect *rect, const void *pixels, int pitch)
+/// extern SDL_DECLSPEC int SDLCALL SDL_UpdateTexture(SDL_Texture *texture, const SDL_Rect *rect, const void *pixels, int pitch)
 /// ```
 int sdlUpdateTexture(Pointer<SdlTexture> texture, Pointer<SdlRect> rect,
     Pointer<NativeType> pixels, int pitch) {
@@ -1232,7 +1239,7 @@ int sdlUpdateTexture(Pointer<SdlTexture> texture, Pointer<SdlRect> rect,
 /// \sa SDL_UpdateTexture
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_UpdateYUVTexture(SDL_Texture *texture, const SDL_Rect *rect, const Uint8 *Yplane, int Ypitch, const Uint8 *Uplane, int Upitch, const Uint8 *Vplane, int Vpitch)
+/// extern SDL_DECLSPEC int SDLCALL SDL_UpdateYUVTexture(SDL_Texture *texture, const SDL_Rect *rect, const Uint8 *Yplane, int Ypitch, const Uint8 *Uplane, int Upitch, const Uint8 *Vplane, int Vpitch)
 /// ```
 int sdlUpdateYuvTexture(
     Pointer<SdlTexture> texture,
@@ -1291,7 +1298,7 @@ int sdlUpdateYuvTexture(
 /// \sa SDL_UpdateYUVTexture
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_UpdateNVTexture(SDL_Texture *texture, const SDL_Rect *rect, const Uint8 *Yplane, int Ypitch, const Uint8 *UVplane, int UVpitch)
+/// extern SDL_DECLSPEC int SDLCALL SDL_UpdateNVTexture(SDL_Texture *texture, const SDL_Rect *rect, const Uint8 *Yplane, int Ypitch, const Uint8 *UVplane, int UVpitch)
 /// ```
 int sdlUpdateNvTexture(Pointer<SdlTexture> texture, Pointer<SdlRect> rect,
     Pointer<Uint8> yplane, int ypitch, Pointer<Uint8> uVplane, int uVpitch) {
@@ -1343,7 +1350,7 @@ int sdlUpdateNvTexture(Pointer<SdlTexture> texture, Pointer<SdlRect> rect,
 /// \sa SDL_UnlockTexture
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_LockTexture(SDL_Texture *texture, const SDL_Rect *rect, void **pixels, int *pitch)
+/// extern SDL_DECLSPEC int SDLCALL SDL_LockTexture(SDL_Texture *texture, const SDL_Rect *rect, void **pixels, int *pitch)
 /// ```
 int sdlLockTexture(Pointer<SdlTexture> texture, Pointer<SdlRect> rect,
     Pointer<Pointer<NativeType>> pixels, Pointer<Int32> pitch) {
@@ -1391,7 +1398,7 @@ int sdlLockTexture(Pointer<SdlTexture> texture, Pointer<SdlRect> rect,
 /// \sa SDL_UnlockTexture
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_LockTextureToSurface(SDL_Texture *texture, const SDL_Rect *rect, SDL_Surface **surface)
+/// extern SDL_DECLSPEC int SDLCALL SDL_LockTextureToSurface(SDL_Texture *texture, const SDL_Rect *rect, SDL_Surface **surface)
 /// ```
 int sdlLockTextureToSurface(Pointer<SdlTexture> texture, Pointer<SdlRect> rect,
     Pointer<Pointer<SdlSurface>> surface) {
@@ -1421,7 +1428,7 @@ int sdlLockTextureToSurface(Pointer<SdlTexture> texture, Pointer<SdlRect> rect,
 /// \sa SDL_LockTexture
 ///
 /// ```c
-/// extern DECLSPEC void SDLCALL SDL_UnlockTexture(SDL_Texture *texture)
+/// extern SDL_DECLSPEC void SDLCALL SDL_UnlockTexture(SDL_Texture *texture)
 /// ```
 void sdlUnlockTexture(Pointer<SdlTexture> texture) {
   final sdlUnlockTextureLookupFunction = libSdl3.lookupFunction<
@@ -1449,7 +1456,7 @@ void sdlUnlockTexture(Pointer<SdlTexture> texture) {
 /// \sa SDL_GetRenderTarget
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_SetRenderTarget(SDL_Renderer *renderer, SDL_Texture *texture)
+/// extern SDL_DECLSPEC int SDLCALL SDL_SetRenderTarget(SDL_Renderer *renderer, SDL_Texture *texture)
 /// ```
 int sdlSetRenderTarget(
     Pointer<SdlRenderer> renderer, Pointer<SdlTexture> texture) {
@@ -1475,7 +1482,7 @@ int sdlSetRenderTarget(
 /// \sa SDL_SetRenderTarget
 ///
 /// ```c
-/// extern DECLSPEC SDL_Texture *SDLCALL SDL_GetRenderTarget(SDL_Renderer *renderer)
+/// extern SDL_DECLSPEC SDL_Texture *SDLCALL SDL_GetRenderTarget(SDL_Renderer *renderer)
 /// ```
 Pointer<SdlTexture> sdlGetRenderTarget(Pointer<SdlRenderer> renderer) {
   final sdlGetRenderTargetLookupFunction = libSdl3.lookupFunction<
@@ -1513,7 +1520,7 @@ Pointer<SdlTexture> sdlGetRenderTarget(Pointer<SdlRenderer> renderer) {
 /// \sa SDL_GetRenderLogicalPresentation
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_SetRenderLogicalPresentation(SDL_Renderer *renderer, int w, int h, SDL_RendererLogicalPresentation mode, SDL_ScaleMode scale_mode)
+/// extern SDL_DECLSPEC int SDLCALL SDL_SetRenderLogicalPresentation(SDL_Renderer *renderer, int w, int h, SDL_RendererLogicalPresentation mode, SDL_ScaleMode scale_mode)
 /// ```
 int sdlSetRenderLogicalPresentation(
     Pointer<SdlRenderer> renderer, int w, int h, int mode, int scaleMode) {
@@ -1545,7 +1552,7 @@ int sdlSetRenderLogicalPresentation(
 /// \sa SDL_SetRenderLogicalPresentation
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_GetRenderLogicalPresentation(SDL_Renderer *renderer, int *w, int *h, SDL_RendererLogicalPresentation *mode, SDL_ScaleMode *scale_mode)
+/// extern SDL_DECLSPEC int SDLCALL SDL_GetRenderLogicalPresentation(SDL_Renderer *renderer, int *w, int *h, SDL_RendererLogicalPresentation *mode, SDL_ScaleMode *scale_mode)
 /// ```
 int sdlGetRenderLogicalPresentation(
     Pointer<SdlRenderer> renderer,
@@ -1583,7 +1590,7 @@ int sdlGetRenderLogicalPresentation(
 /// \sa SDL_SetRenderScale
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_RenderCoordinatesFromWindow(SDL_Renderer *renderer, float window_x, float window_y, float *x, float *y)
+/// extern SDL_DECLSPEC int SDLCALL SDL_RenderCoordinatesFromWindow(SDL_Renderer *renderer, float window_x, float window_y, float *x, float *y)
 /// ```
 int sdlRenderCoordinatesFromWindow(Pointer<SdlRenderer> renderer,
     double windowX, double windowY, Pointer<Float> x, Pointer<Float> y) {
@@ -1619,7 +1626,7 @@ int sdlRenderCoordinatesFromWindow(Pointer<SdlRenderer> renderer,
 /// \sa SDL_SetRenderScale
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_RenderCoordinatesToWindow(SDL_Renderer *renderer, float x, float y, float *window_x, float *window_y)
+/// extern SDL_DECLSPEC int SDLCALL SDL_RenderCoordinatesToWindow(SDL_Renderer *renderer, float x, float y, float *window_x, float *window_y)
 /// ```
 int sdlRenderCoordinatesToWindow(Pointer<SdlRenderer> renderer, double x,
     double y, Pointer<Float> windowX, Pointer<Float> windowY) {
@@ -1654,7 +1661,7 @@ int sdlRenderCoordinatesToWindow(Pointer<SdlRenderer> renderer, double x,
 /// \sa SDL_GetRenderCoordinatesFromWindowCoordinates
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_ConvertEventToRenderCoordinates(SDL_Renderer *renderer, SDL_Event *event)
+/// extern SDL_DECLSPEC int SDLCALL SDL_ConvertEventToRenderCoordinates(SDL_Renderer *renderer, SDL_Event *event)
 /// ```
 int sdlConvertEventToRenderCoordinates(
     Pointer<SdlRenderer> renderer, Pointer<SdlEvent> event) {
@@ -1682,7 +1689,7 @@ int sdlConvertEventToRenderCoordinates(
 /// \sa SDL_RenderViewportSet
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_SetRenderViewport(SDL_Renderer *renderer, const SDL_Rect *rect)
+/// extern SDL_DECLSPEC int SDLCALL SDL_SetRenderViewport(SDL_Renderer *renderer, const SDL_Rect *rect)
 /// ```
 int sdlSetRenderViewport(Pointer<SdlRenderer> renderer, Pointer<SdlRect> rect) {
   final sdlSetRenderViewportLookupFunction = libSdl3.lookupFunction<
@@ -1706,7 +1713,7 @@ int sdlSetRenderViewport(Pointer<SdlRenderer> renderer, Pointer<SdlRect> rect) {
 /// \sa SDL_SetRenderViewport
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_GetRenderViewport(SDL_Renderer *renderer, SDL_Rect *rect)
+/// extern SDL_DECLSPEC int SDLCALL SDL_GetRenderViewport(SDL_Renderer *renderer, SDL_Rect *rect)
 /// ```
 int sdlGetRenderViewport(Pointer<SdlRenderer> renderer, Pointer<SdlRect> rect) {
   final sdlGetRenderViewportLookupFunction = libSdl3.lookupFunction<
@@ -1733,7 +1740,7 @@ int sdlGetRenderViewport(Pointer<SdlRenderer> renderer, Pointer<SdlRect> rect) {
 /// \sa SDL_SetRenderViewport
 ///
 /// ```c
-/// extern DECLSPEC SDL_bool SDLCALL SDL_RenderViewportSet(SDL_Renderer *renderer)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_RenderViewportSet(SDL_Renderer *renderer)
 /// ```
 bool sdlRenderViewportSet(Pointer<SdlRenderer> renderer) {
   final sdlRenderViewportSetLookupFunction = libSdl3.lookupFunction<
@@ -1757,7 +1764,7 @@ bool sdlRenderViewportSet(Pointer<SdlRenderer> renderer) {
 /// \sa SDL_RenderClipEnabled
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_SetRenderClipRect(SDL_Renderer *renderer, const SDL_Rect *rect)
+/// extern SDL_DECLSPEC int SDLCALL SDL_SetRenderClipRect(SDL_Renderer *renderer, const SDL_Rect *rect)
 /// ```
 int sdlSetRenderClipRect(Pointer<SdlRenderer> renderer, Pointer<SdlRect> rect) {
   final sdlSetRenderClipRectLookupFunction = libSdl3.lookupFunction<
@@ -1782,7 +1789,7 @@ int sdlSetRenderClipRect(Pointer<SdlRenderer> renderer, Pointer<SdlRect> rect) {
 /// \sa SDL_SetRenderClipRect
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_GetRenderClipRect(SDL_Renderer *renderer, SDL_Rect *rect)
+/// extern SDL_DECLSPEC int SDLCALL SDL_GetRenderClipRect(SDL_Renderer *renderer, SDL_Rect *rect)
 /// ```
 int sdlGetRenderClipRect(Pointer<SdlRenderer> renderer, Pointer<SdlRect> rect) {
   final sdlGetRenderClipRectLookupFunction = libSdl3.lookupFunction<
@@ -1805,7 +1812,7 @@ int sdlGetRenderClipRect(Pointer<SdlRenderer> renderer, Pointer<SdlRect> rect) {
 /// \sa SDL_SetRenderClipRect
 ///
 /// ```c
-/// extern DECLSPEC SDL_bool SDLCALL SDL_RenderClipEnabled(SDL_Renderer *renderer)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_RenderClipEnabled(SDL_Renderer *renderer)
 /// ```
 bool sdlRenderClipEnabled(Pointer<SdlRenderer> renderer) {
   final sdlRenderClipEnabledLookupFunction = libSdl3.lookupFunction<
@@ -1836,7 +1843,7 @@ bool sdlRenderClipEnabled(Pointer<SdlRenderer> renderer) {
 /// \sa SDL_GetRenderScale
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_SetRenderScale(SDL_Renderer *renderer, float scaleX, float scaleY)
+/// extern SDL_DECLSPEC int SDLCALL SDL_SetRenderScale(SDL_Renderer *renderer, float scaleX, float scaleY)
 /// ```
 int sdlSetRenderScale(
     Pointer<SdlRenderer> renderer, double scaleX, double scaleY) {
@@ -1861,7 +1868,7 @@ int sdlSetRenderScale(
 /// \sa SDL_SetRenderScale
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_GetRenderScale(SDL_Renderer *renderer, float *scaleX, float *scaleY)
+/// extern SDL_DECLSPEC int SDLCALL SDL_GetRenderScale(SDL_Renderer *renderer, float *scaleX, float *scaleY)
 /// ```
 int sdlGetRenderScale(Pointer<SdlRenderer> renderer, Pointer<Float> scaleX,
     Pointer<Float> scaleY) {
@@ -1895,7 +1902,7 @@ int sdlGetRenderScale(Pointer<SdlRenderer> renderer, Pointer<Float> scaleX,
 /// \sa SDL_SetRenderDrawColorFloat
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_SetRenderDrawColor(SDL_Renderer *renderer, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
+/// extern SDL_DECLSPEC int SDLCALL SDL_SetRenderDrawColor(SDL_Renderer *renderer, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 /// ```
 int sdlSetRenderDrawColor(
     Pointer<SdlRenderer> renderer, int r, int g, int b, int a) {
@@ -1929,7 +1936,7 @@ int sdlSetRenderDrawColor(
 /// \sa SDL_SetRenderDrawColor
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_SetRenderDrawColorFloat(SDL_Renderer *renderer, float r, float g, float b, float a)
+/// extern SDL_DECLSPEC int SDLCALL SDL_SetRenderDrawColorFloat(SDL_Renderer *renderer, float r, float g, float b, float a)
 /// ```
 int sdlSetRenderDrawColorFloat(
     Pointer<SdlRenderer> renderer, double r, double g, double b, double a) {
@@ -1962,7 +1969,7 @@ int sdlSetRenderDrawColorFloat(
 /// \sa SDL_SetRenderDrawColor
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_GetRenderDrawColor(SDL_Renderer *renderer, Uint8 *r, Uint8 *g, Uint8 *b, Uint8 *a)
+/// extern SDL_DECLSPEC int SDLCALL SDL_GetRenderDrawColor(SDL_Renderer *renderer, Uint8 *r, Uint8 *g, Uint8 *b, Uint8 *a)
 /// ```
 int sdlGetRenderDrawColor(Pointer<SdlRenderer> renderer, Pointer<Uint8> r,
     Pointer<Uint8> g, Pointer<Uint8> b, Pointer<Uint8> a) {
@@ -1999,7 +2006,7 @@ int sdlGetRenderDrawColor(Pointer<SdlRenderer> renderer, Pointer<Uint8> r,
 /// \sa SDL_GetRenderDrawColor
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_GetRenderDrawColorFloat(SDL_Renderer *renderer, float *r, float *g, float *b, float *a)
+/// extern SDL_DECLSPEC int SDLCALL SDL_GetRenderDrawColorFloat(SDL_Renderer *renderer, float *r, float *g, float *b, float *a)
 /// ```
 int sdlGetRenderDrawColorFloat(Pointer<SdlRenderer> renderer, Pointer<Float> r,
     Pointer<Float> g, Pointer<Float> b, Pointer<Float> a) {
@@ -2036,7 +2043,7 @@ int sdlGetRenderDrawColorFloat(Pointer<SdlRenderer> renderer, Pointer<Float> r,
 /// \sa SDL_GetRenderColorScale
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_SetRenderColorScale(SDL_Renderer *renderer, float scale)
+/// extern SDL_DECLSPEC int SDLCALL SDL_SetRenderColorScale(SDL_Renderer *renderer, float scale)
 /// ```
 int sdlSetRenderColorScale(Pointer<SdlRenderer> renderer, double scale) {
   final sdlSetRenderColorScaleLookupFunction = libSdl3.lookupFunction<
@@ -2059,7 +2066,7 @@ int sdlSetRenderColorScale(Pointer<SdlRenderer> renderer, double scale) {
 /// \sa SDL_SetRenderColorScale
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_GetRenderColorScale(SDL_Renderer *renderer, float *scale)
+/// extern SDL_DECLSPEC int SDLCALL SDL_GetRenderColorScale(SDL_Renderer *renderer, float *scale)
 /// ```
 int sdlGetRenderColorScale(
     Pointer<SdlRenderer> renderer, Pointer<Float> scale) {
@@ -2085,7 +2092,7 @@ int sdlGetRenderColorScale(
 /// \sa SDL_GetRenderDrawBlendMode
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_SetRenderDrawBlendMode(SDL_Renderer *renderer, SDL_BlendMode blendMode)
+/// extern SDL_DECLSPEC int SDLCALL SDL_SetRenderDrawBlendMode(SDL_Renderer *renderer, SDL_BlendMode blendMode)
 /// ```
 int sdlSetRenderDrawBlendMode(Pointer<SdlRenderer> renderer, int blendMode) {
   final sdlSetRenderDrawBlendModeLookupFunction = libSdl3.lookupFunction<
@@ -2108,7 +2115,7 @@ int sdlSetRenderDrawBlendMode(Pointer<SdlRenderer> renderer, int blendMode) {
 /// \sa SDL_SetRenderDrawBlendMode
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_GetRenderDrawBlendMode(SDL_Renderer *renderer, SDL_BlendMode *blendMode)
+/// extern SDL_DECLSPEC int SDLCALL SDL_GetRenderDrawBlendMode(SDL_Renderer *renderer, SDL_BlendMode *blendMode)
 /// ```
 int sdlGetRenderDrawBlendMode(
     Pointer<SdlRenderer> renderer, Pointer<Uint32> blendMode) {
@@ -2134,7 +2141,7 @@ int sdlGetRenderDrawBlendMode(
 /// \sa SDL_SetRenderDrawColor
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_RenderClear(SDL_Renderer *renderer)
+/// extern SDL_DECLSPEC int SDLCALL SDL_RenderClear(SDL_Renderer *renderer)
 /// ```
 int sdlRenderClear(Pointer<SdlRenderer> renderer) {
   final sdlRenderClearLookupFunction = libSdl3.lookupFunction<
@@ -2156,7 +2163,7 @@ int sdlRenderClear(Pointer<SdlRenderer> renderer) {
 /// \sa SDL_RenderPoints
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_RenderPoint(SDL_Renderer *renderer, float x, float y)
+/// extern SDL_DECLSPEC int SDLCALL SDL_RenderPoint(SDL_Renderer *renderer, float x, float y)
 /// ```
 int sdlRenderPoint(Pointer<SdlRenderer> renderer, double x, double y) {
   final sdlRenderPointLookupFunction = libSdl3.lookupFunction<
@@ -2180,7 +2187,7 @@ int sdlRenderPoint(Pointer<SdlRenderer> renderer, double x, double y) {
 /// \sa SDL_RenderPoint
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_RenderPoints(SDL_Renderer *renderer, const SDL_FPoint *points, int count)
+/// extern SDL_DECLSPEC int SDLCALL SDL_RenderPoints(SDL_Renderer *renderer, const SDL_FPoint *points, int count)
 /// ```
 int sdlRenderPoints(
     Pointer<SdlRenderer> renderer, Pointer<SdlFPoint> points, int count) {
@@ -2207,7 +2214,7 @@ int sdlRenderPoints(
 /// \sa SDL_RenderLines
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_RenderLine(SDL_Renderer *renderer, float x1, float y1, float x2, float y2)
+/// extern SDL_DECLSPEC int SDLCALL SDL_RenderLine(SDL_Renderer *renderer, float x1, float y1, float x2, float y2)
 /// ```
 int sdlRenderLine(
     Pointer<SdlRenderer> renderer, double x1, double y1, double x2, double y2) {
@@ -2234,7 +2241,7 @@ int sdlRenderLine(
 /// \sa SDL_RenderLine
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_RenderLines(SDL_Renderer *renderer, const SDL_FPoint *points, int count)
+/// extern SDL_DECLSPEC int SDLCALL SDL_RenderLines(SDL_Renderer *renderer, const SDL_FPoint *points, int count)
 /// ```
 int sdlRenderLines(
     Pointer<SdlRenderer> renderer, Pointer<SdlFPoint> points, int count) {
@@ -2259,7 +2266,7 @@ int sdlRenderLines(
 /// \sa SDL_RenderRects
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_RenderRect(SDL_Renderer *renderer, const SDL_FRect *rect)
+/// extern SDL_DECLSPEC int SDLCALL SDL_RenderRect(SDL_Renderer *renderer, const SDL_FRect *rect)
 /// ```
 int sdlRenderRect(Pointer<SdlRenderer> renderer, Pointer<SdlFRect> rect) {
   final sdlRenderRectLookupFunction = libSdl3.lookupFunction<
@@ -2284,7 +2291,7 @@ int sdlRenderRect(Pointer<SdlRenderer> renderer, Pointer<SdlFRect> rect) {
 /// \sa SDL_RenderRect
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_RenderRects(SDL_Renderer *renderer, const SDL_FRect *rects, int count)
+/// extern SDL_DECLSPEC int SDLCALL SDL_RenderRects(SDL_Renderer *renderer, const SDL_FRect *rects, int count)
 /// ```
 int sdlRenderRects(
     Pointer<SdlRenderer> renderer, Pointer<SdlFRect> rects, int count) {
@@ -2310,7 +2317,7 @@ int sdlRenderRects(
 /// \sa SDL_RenderFillRects
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_RenderFillRect(SDL_Renderer *renderer, const SDL_FRect *rect)
+/// extern SDL_DECLSPEC int SDLCALL SDL_RenderFillRect(SDL_Renderer *renderer, const SDL_FRect *rect)
 /// ```
 int sdlRenderFillRect(Pointer<SdlRenderer> renderer, Pointer<SdlFRect> rect) {
   final sdlRenderFillRectLookupFunction = libSdl3.lookupFunction<
@@ -2335,7 +2342,7 @@ int sdlRenderFillRect(Pointer<SdlRenderer> renderer, Pointer<SdlFRect> rect) {
 /// \sa SDL_RenderFillRect
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_RenderFillRects(SDL_Renderer *renderer, const SDL_FRect *rects, int count)
+/// extern SDL_DECLSPEC int SDLCALL SDL_RenderFillRects(SDL_Renderer *renderer, const SDL_FRect *rects, int count)
 /// ```
 int sdlRenderFillRects(
     Pointer<SdlRenderer> renderer, Pointer<SdlFRect> rects, int count) {
@@ -2364,7 +2371,7 @@ int sdlRenderFillRects(
 /// \sa SDL_RenderTextureRotated
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_RenderTexture(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_FRect *srcrect, const SDL_FRect *dstrect)
+/// extern SDL_DECLSPEC int SDLCALL SDL_RenderTexture(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_FRect *srcrect, const SDL_FRect *dstrect)
 /// ```
 int sdlRenderTexture(Pointer<SdlRenderer> renderer, Pointer<SdlTexture> texture,
     Pointer<SdlFRect> srcrect, Pointer<SdlFRect> dstrect) {
@@ -2404,7 +2411,7 @@ int sdlRenderTexture(Pointer<SdlRenderer> renderer, Pointer<SdlTexture> texture,
 /// \sa SDL_RenderTexture
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_RenderTextureRotated(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_FRect *srcrect, const SDL_FRect *dstrect, const double angle, const SDL_FPoint *center, const SDL_FlipMode flip)
+/// extern SDL_DECLSPEC int SDLCALL SDL_RenderTextureRotated(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_FRect *srcrect, const SDL_FRect *dstrect, const double angle, const SDL_FPoint *center, const SDL_FlipMode flip)
 /// ```
 int sdlRenderTextureRotated(
     Pointer<SdlRenderer> renderer,
@@ -2455,7 +2462,7 @@ int sdlRenderTextureRotated(
 /// \sa SDL_RenderGeometryRaw
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_RenderGeometry(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_Vertex *vertices, int num_vertices, const int *indices, int num_indices)
+/// extern SDL_DECLSPEC int SDLCALL SDL_RenderGeometry(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_Vertex *vertices, int num_vertices, const int *indices, int num_indices)
 /// ```
 int sdlRenderGeometry(
     Pointer<SdlRenderer> renderer,
@@ -2509,7 +2516,7 @@ int sdlRenderGeometry(
 /// \sa SDL_RenderGeometry
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_RenderGeometryRaw(SDL_Renderer *renderer, SDL_Texture *texture, const float *xy, int xy_stride, const SDL_Color *color, int color_stride, const float *uv, int uv_stride, int num_vertices, const void *indices, int num_indices, int size_indices)
+/// extern SDL_DECLSPEC int SDLCALL SDL_RenderGeometryRaw(SDL_Renderer *renderer, SDL_Texture *texture, const float *xy, int xy_stride, const SDL_Color *color, int color_stride, const float *uv, int uv_stride, int num_vertices, const void *indices, int num_indices, int size_indices)
 /// ```
 int sdlRenderGeometryRaw(
     Pointer<SdlRenderer> renderer,
@@ -2593,7 +2600,7 @@ int sdlRenderGeometryRaw(
 /// \sa SDL_RenderGeometryRaw
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_RenderGeometryRawFloat(SDL_Renderer *renderer, SDL_Texture *texture, const float *xy, int xy_stride, const SDL_FColor *color, int color_stride, const float *uv, int uv_stride, int num_vertices, const void *indices, int num_indices, int size_indices)
+/// extern SDL_DECLSPEC int SDLCALL SDL_RenderGeometryRawFloat(SDL_Renderer *renderer, SDL_Texture *texture, const float *xy, int xy_stride, const SDL_FColor *color, int color_stride, const float *uv, int uv_stride, int num_vertices, const void *indices, int num_indices, int size_indices)
 /// ```
 int sdlRenderGeometryRawFloat(
     Pointer<SdlRenderer> renderer,
@@ -2668,7 +2675,7 @@ int sdlRenderGeometryRawFloat(
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC SDL_Surface * SDLCALL SDL_RenderReadPixels(SDL_Renderer *renderer, const SDL_Rect *rect)
+/// extern SDL_DECLSPEC SDL_Surface * SDLCALL SDL_RenderReadPixels(SDL_Renderer *renderer, const SDL_Rect *rect)
 /// ```
 Pointer<SdlSurface> sdlRenderReadPixels(
     Pointer<SdlRenderer> renderer, Pointer<SdlRect> rect) {
@@ -2720,7 +2727,7 @@ Pointer<SdlSurface> sdlRenderReadPixels(
 /// \sa SDL_SetRenderDrawColor
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_RenderPresent(SDL_Renderer *renderer)
+/// extern SDL_DECLSPEC int SDLCALL SDL_RenderPresent(SDL_Renderer *renderer)
 /// ```
 int sdlRenderPresent(Pointer<SdlRenderer> renderer) {
   final sdlRenderPresentLookupFunction = libSdl3.lookupFunction<
@@ -2743,7 +2750,7 @@ int sdlRenderPresent(Pointer<SdlRenderer> renderer) {
 /// \sa SDL_CreateTextureFromSurface
 ///
 /// ```c
-/// extern DECLSPEC void SDLCALL SDL_DestroyTexture(SDL_Texture *texture)
+/// extern SDL_DECLSPEC void SDLCALL SDL_DestroyTexture(SDL_Texture *texture)
 /// ```
 void sdlDestroyTexture(Pointer<SdlTexture> texture) {
   final sdlDestroyTextureLookupFunction = libSdl3.lookupFunction<
@@ -2765,7 +2772,7 @@ void sdlDestroyTexture(Pointer<SdlTexture> texture) {
 /// \sa SDL_CreateRenderer
 ///
 /// ```c
-/// extern DECLSPEC void SDLCALL SDL_DestroyRenderer(SDL_Renderer *renderer)
+/// extern SDL_DECLSPEC void SDLCALL SDL_DestroyRenderer(SDL_Renderer *renderer)
 /// ```
 void sdlDestroyRenderer(Pointer<SdlRenderer> renderer) {
   final sdlDestroyRendererLookupFunction = libSdl3.lookupFunction<
@@ -2804,7 +2811,7 @@ void sdlDestroyRenderer(Pointer<SdlRenderer> renderer) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_FlushRenderer(SDL_Renderer *renderer)
+/// extern SDL_DECLSPEC int SDLCALL SDL_FlushRenderer(SDL_Renderer *renderer)
 /// ```
 int sdlFlushRenderer(Pointer<SdlRenderer> renderer) {
   final sdlFlushRendererLookupFunction = libSdl3.lookupFunction<
@@ -2828,7 +2835,7 @@ int sdlFlushRenderer(Pointer<SdlRenderer> renderer) {
 /// \sa SDL_GetRenderMetalCommandEncoder
 ///
 /// ```c
-/// extern DECLSPEC void *SDLCALL SDL_GetRenderMetalLayer(SDL_Renderer *renderer)
+/// extern SDL_DECLSPEC void *SDLCALL SDL_GetRenderMetalLayer(SDL_Renderer *renderer)
 /// ```
 Pointer<NativeType> sdlGetRenderMetalLayer(Pointer<SdlRenderer> renderer) {
   final sdlGetRenderMetalLayerLookupFunction = libSdl3.lookupFunction<
@@ -2858,7 +2865,7 @@ Pointer<NativeType> sdlGetRenderMetalLayer(Pointer<SdlRenderer> renderer) {
 /// \sa SDL_GetRenderMetalLayer
 ///
 /// ```c
-/// extern DECLSPEC void *SDLCALL SDL_GetRenderMetalCommandEncoder(SDL_Renderer *renderer)
+/// extern SDL_DECLSPEC void *SDLCALL SDL_GetRenderMetalCommandEncoder(SDL_Renderer *renderer)
 /// ```
 Pointer<NativeType> sdlGetRenderMetalCommandEncoder(
     Pointer<SdlRenderer> renderer) {
@@ -2895,7 +2902,7 @@ Pointer<NativeType> sdlGetRenderMetalCommandEncoder(
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_AddVulkanRenderSemaphores(SDL_Renderer *renderer, Uint32 wait_stage_mask, Sint64 wait_semaphore, Sint64 signal_semaphore)
+/// extern SDL_DECLSPEC int SDLCALL SDL_AddVulkanRenderSemaphores(SDL_Renderer *renderer, Uint32 wait_stage_mask, Sint64 wait_semaphore, Sint64 signal_semaphore)
 /// ```
 int sdlAddVulkanRenderSemaphores(Pointer<SdlRenderer> renderer,
     int waitStageMask, int waitSemaphore, int signalSemaphore) {
@@ -2915,7 +2922,14 @@ int sdlAddVulkanRenderSemaphores(Pointer<SdlRenderer> renderer,
 /// Toggle VSync of the given renderer.
 ///
 /// \param renderer The renderer to toggle
-/// \param vsync 1 for on, 0 for off. All other values are reserved
+/// \param vsync the vertical refresh sync interval, 1 to synchronize present
+/// with every vertical refresh, 2 to synchronize present with
+/// every second vertical refresh, etc.,
+/// SDL_RENDERER_VSYNC_ADAPTIVE for late swap tearing (adaptive
+/// vsync), or SDL_RENDERER_VSYNC_DISABLED to disable. Not every
+/// value is supported by every renderer, so you should check the
+/// return value to see whether the requested setting is
+/// supported.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -2924,7 +2938,7 @@ int sdlAddVulkanRenderSemaphores(Pointer<SdlRenderer> renderer,
 /// \sa SDL_GetRenderVSync
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_SetRenderVSync(SDL_Renderer *renderer, int vsync)
+/// extern SDL_DECLSPEC int SDLCALL SDL_SetRenderVSync(SDL_Renderer *renderer, int vsync)
 /// ```
 int sdlSetRenderVSync(Pointer<SdlRenderer> renderer, int vsync) {
   final sdlSetRenderVSyncLookupFunction = libSdl3.lookupFunction<
@@ -2938,8 +2952,8 @@ int sdlSetRenderVSync(Pointer<SdlRenderer> renderer, int vsync) {
 /// Get VSync of the given renderer.
 ///
 /// \param renderer The renderer to toggle
-/// \param vsync an int filled with 1 for on, 0 for off. All other values are
-/// reserved
+/// \param vsync an int filled with the current vertical refresh sync interval.
+/// See SDL_SetRenderVSync for the meaning of the value.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -2948,7 +2962,7 @@ int sdlSetRenderVSync(Pointer<SdlRenderer> renderer, int vsync) {
 /// \sa SDL_SetRenderVSync
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_GetRenderVSync(SDL_Renderer *renderer, int *vsync)
+/// extern SDL_DECLSPEC int SDLCALL SDL_GetRenderVSync(SDL_Renderer *renderer, int *vsync)
 /// ```
 int sdlGetRenderVSync(Pointer<SdlRenderer> renderer, Pointer<Int32> vsync) {
   final sdlGetRenderVSyncLookupFunction = libSdl3.lookupFunction<

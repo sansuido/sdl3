@@ -33,7 +33,7 @@ import 'lib_sdl.dart';
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_OpenURL(const char *url)
+/// extern SDL_DECLSPEC int SDLCALL SDL_OpenURL(const char *url)
 /// ```
 int sdlOpenUrl(String? url) {
   final sdlOpenUrlLookupFunction = libSdl3.lookupFunction<

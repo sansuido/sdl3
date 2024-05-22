@@ -16,7 +16,7 @@ import 'lib_sdl.dart';
 /// \sa SDL_UnloadObject
 ///
 /// ```c
-/// extern DECLSPEC void *SDLCALL SDL_LoadObject(const char *sofile)
+/// extern SDL_DECLSPEC void *SDLCALL SDL_LoadObject(const char *sofile)
 /// ```
 Pointer<NativeType> sdlLoadObject(String? sofile) {
   final sdlLoadObjectLookupFunction = libSdl3.lookupFunction<
@@ -53,7 +53,7 @@ Pointer<NativeType> sdlLoadObject(String? sofile) {
 /// \sa SDL_LoadObject
 ///
 /// ```c
-/// extern DECLSPEC SDL_FunctionPointer SDLCALL SDL_LoadFunction(void *handle, const char *name)
+/// extern SDL_DECLSPEC SDL_FunctionPointer SDLCALL SDL_LoadFunction(void *handle, const char *name)
 /// ```
 Pointer<NativeType> sdlLoadFunction(Pointer<NativeType> handle, String? name) {
   final sdlLoadFunctionLookupFunction = libSdl3.lookupFunction<
@@ -77,7 +77,7 @@ Pointer<NativeType> sdlLoadFunction(Pointer<NativeType> handle, String? name) {
 /// \sa SDL_LoadObject
 ///
 /// ```c
-/// extern DECLSPEC void SDLCALL SDL_UnloadObject(void *handle)
+/// extern SDL_DECLSPEC void SDLCALL SDL_UnloadObject(void *handle)
 /// ```
 void sdlUnloadObject(Pointer<NativeType> handle) {
   final sdlUnloadObjectLookupFunction = libSdl3.lookupFunction<

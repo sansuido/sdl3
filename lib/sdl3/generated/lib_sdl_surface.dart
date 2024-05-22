@@ -19,7 +19,7 @@ import 'struct_sdl.dart';
 /// \sa SDL_DestroySurface
 ///
 /// ```c
-/// extern DECLSPEC SDL_Surface *SDLCALL SDL_CreateSurface(int width, int height, SDL_PixelFormatEnum format)
+/// extern SDL_DECLSPEC SDL_Surface *SDLCALL SDL_CreateSurface(int width, int height, SDL_PixelFormatEnum format)
 /// ```
 Pointer<SdlSurface> sdlCreateSurface(int width, int height, int format) {
   final sdlCreateSurfaceLookupFunction = libSdl3.lookupFunction<
@@ -56,7 +56,7 @@ Pointer<SdlSurface> sdlCreateSurface(int width, int height, int format) {
 /// \sa SDL_DestroySurface
 ///
 /// ```c
-/// extern DECLSPEC SDL_Surface *SDLCALL SDL_CreateSurfaceFrom(void *pixels, int width, int height, int pitch, SDL_PixelFormatEnum format)
+/// extern SDL_DECLSPEC SDL_Surface *SDLCALL SDL_CreateSurfaceFrom(void *pixels, int width, int height, int pitch, SDL_PixelFormatEnum format)
 /// ```
 Pointer<SdlSurface> sdlCreateSurfaceFrom(
     Pointer<NativeType> pixels, int width, int height, int pitch, int format) {
@@ -82,7 +82,7 @@ Pointer<SdlSurface> sdlCreateSurfaceFrom(
 /// \sa SDL_CreateSurfaceFrom
 ///
 /// ```c
-/// extern DECLSPEC void SDLCALL SDL_DestroySurface(SDL_Surface *surface)
+/// extern SDL_DECLSPEC void SDLCALL SDL_DestroySurface(SDL_Surface *surface)
 /// ```
 void sdlDestroySurface(Pointer<SdlSurface> surface) {
   final sdlDestroySurfaceLookupFunction = libSdl3.lookupFunction<
@@ -126,7 +126,7 @@ void sdlDestroySurface(Pointer<SdlSurface> surface) {
 /// \sa SDL_SetProperty
 ///
 /// ```c
-/// extern DECLSPEC SDL_PropertiesID SDLCALL SDL_GetSurfaceProperties(SDL_Surface *surface)
+/// extern SDL_DECLSPEC SDL_PropertiesID SDLCALL SDL_GetSurfaceProperties(SDL_Surface *surface)
 /// ```
 int sdlGetSurfaceProperties(Pointer<SdlSurface> surface) {
   final sdlGetSurfacePropertiesLookupFunction = libSdl3.lookupFunction<
@@ -149,7 +149,7 @@ int sdlGetSurfaceProperties(Pointer<SdlSurface> surface) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_SetSurfaceColorspace(SDL_Surface *surface, SDL_Colorspace colorspace)
+/// extern SDL_DECLSPEC int SDLCALL SDL_SetSurfaceColorspace(SDL_Surface *surface, SDL_Colorspace colorspace)
 /// ```
 int sdlSetSurfaceColorspace(Pointer<SdlSurface> surface, int colorspace) {
   final sdlSetSurfaceColorspaceLookupFunction = libSdl3.lookupFunction<
@@ -175,7 +175,7 @@ int sdlSetSurfaceColorspace(Pointer<SdlSurface> surface, int colorspace) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_GetSurfaceColorspace(SDL_Surface *surface, SDL_Colorspace *colorspace)
+/// extern SDL_DECLSPEC int SDLCALL SDL_GetSurfaceColorspace(SDL_Surface *surface, SDL_Colorspace *colorspace)
 /// ```
 int sdlGetSurfaceColorspace(
     Pointer<SdlSurface> surface, Pointer<Int32> colorspace) {
@@ -199,7 +199,7 @@ int sdlGetSurfaceColorspace(
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_SetSurfacePalette(SDL_Surface *surface, SDL_Palette *palette)
+/// extern SDL_DECLSPEC int SDLCALL SDL_SetSurfacePalette(SDL_Surface *surface, SDL_Palette *palette)
 /// ```
 int sdlSetSurfacePalette(
     Pointer<SdlSurface> surface, Pointer<SdlPalette> palette) {
@@ -232,7 +232,7 @@ int sdlSetSurfacePalette(
 /// \sa SDL_UnlockSurface
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_LockSurface(SDL_Surface *surface)
+/// extern SDL_DECLSPEC int SDLCALL SDL_LockSurface(SDL_Surface *surface)
 /// ```
 int sdlLockSurface(Pointer<SdlSurface> surface) {
   final sdlLockSurfaceLookupFunction = libSdl3.lookupFunction<
@@ -251,7 +251,7 @@ int sdlLockSurface(Pointer<SdlSurface> surface) {
 /// \sa SDL_LockSurface
 ///
 /// ```c
-/// extern DECLSPEC void SDLCALL SDL_UnlockSurface(SDL_Surface *surface)
+/// extern SDL_DECLSPEC void SDLCALL SDL_UnlockSurface(SDL_Surface *surface)
 /// ```
 void sdlUnlockSurface(Pointer<SdlSurface> surface) {
   final sdlUnlockSurfaceLookupFunction = libSdl3.lookupFunction<
@@ -279,7 +279,7 @@ void sdlUnlockSurface(Pointer<SdlSurface> surface) {
 /// \sa SDL_SaveBMP_IO
 ///
 /// ```c
-/// extern DECLSPEC SDL_Surface *SDLCALL SDL_LoadBMP_IO(SDL_IOStream *src, SDL_bool closeio)
+/// extern SDL_DECLSPEC SDL_Surface *SDLCALL SDL_LoadBMP_IO(SDL_IOStream *src, SDL_bool closeio)
 /// ```
 Pointer<SdlSurface> sdlLoadBmpIo(Pointer<SdlIoStream> src, bool closeio) {
   final sdlLoadBmpIoLookupFunction = libSdl3.lookupFunction<
@@ -306,7 +306,7 @@ Pointer<SdlSurface> sdlLoadBmpIo(Pointer<SdlIoStream> src, bool closeio) {
 /// \sa SDL_SaveBMP
 ///
 /// ```c
-/// extern DECLSPEC SDL_Surface *SDLCALL SDL_LoadBMP(const char *file)
+/// extern SDL_DECLSPEC SDL_Surface *SDLCALL SDL_LoadBMP(const char *file)
 /// ```
 Pointer<SdlSurface> sdlLoadBmp(String? file) {
   final sdlLoadBmpLookupFunction = libSdl3.lookupFunction<
@@ -340,7 +340,7 @@ Pointer<SdlSurface> sdlLoadBmp(String? file) {
 /// \sa SDL_SaveBMP
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_SaveBMP_IO(SDL_Surface *surface, SDL_IOStream *dst, SDL_bool closeio)
+/// extern SDL_DECLSPEC int SDLCALL SDL_SaveBMP_IO(SDL_Surface *surface, SDL_IOStream *dst, SDL_bool closeio)
 /// ```
 int sdlSaveBmpIo(
     Pointer<SdlSurface> surface, Pointer<SdlIoStream> dst, bool closeio) {
@@ -372,7 +372,7 @@ int sdlSaveBmpIo(
 /// \sa SDL_SaveBMP_IO
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_SaveBMP(SDL_Surface *surface, const char *file)
+/// extern SDL_DECLSPEC int SDLCALL SDL_SaveBMP(SDL_Surface *surface, const char *file)
 /// ```
 int sdlSaveBmp(Pointer<SdlSurface> surface, String? file) {
   final sdlSaveBmpLookupFunction = libSdl3.lookupFunction<
@@ -403,7 +403,7 @@ int sdlSaveBmp(Pointer<SdlSurface> surface, String? file) {
 /// \sa SDL_UnlockSurface
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_SetSurfaceRLE(SDL_Surface *surface, int flag)
+/// extern SDL_DECLSPEC int SDLCALL SDL_SetSurfaceRLE(SDL_Surface *surface, int flag)
 /// ```
 int sdlSetSurfaceRle(Pointer<SdlSurface> surface, int flag) {
   final sdlSetSurfaceRleLookupFunction = libSdl3.lookupFunction<
@@ -425,7 +425,7 @@ int sdlSetSurfaceRle(Pointer<SdlSurface> surface, int flag) {
 /// \sa SDL_SetSurfaceRLE
 ///
 /// ```c
-/// extern DECLSPEC SDL_bool SDLCALL SDL_SurfaceHasRLE(SDL_Surface *surface)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SurfaceHasRLE(SDL_Surface *surface)
 /// ```
 bool sdlSurfaceHasRle(Pointer<SdlSurface> surface) {
   final sdlSurfaceHasRleLookupFunction = libSdl3.lookupFunction<
@@ -459,7 +459,7 @@ bool sdlSurfaceHasRle(Pointer<SdlSurface> surface) {
 /// \sa SDL_SurfaceHasColorKey
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_SetSurfaceColorKey(SDL_Surface *surface, int flag, Uint32 key)
+/// extern SDL_DECLSPEC int SDLCALL SDL_SetSurfaceColorKey(SDL_Surface *surface, int flag, Uint32 key)
 /// ```
 int sdlSetSurfaceColorKey(Pointer<SdlSurface> surface, int flag, int key) {
   final sdlSetSurfaceColorKeyLookupFunction = libSdl3.lookupFunction<
@@ -483,7 +483,7 @@ int sdlSetSurfaceColorKey(Pointer<SdlSurface> surface, int flag, int key) {
 /// \sa SDL_GetSurfaceColorKey
 ///
 /// ```c
-/// extern DECLSPEC SDL_bool SDLCALL SDL_SurfaceHasColorKey(SDL_Surface *surface)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SurfaceHasColorKey(SDL_Surface *surface)
 /// ```
 bool sdlSurfaceHasColorKey(Pointer<SdlSurface> surface) {
   final sdlSurfaceHasColorKeyLookupFunction = libSdl3.lookupFunction<
@@ -511,7 +511,7 @@ bool sdlSurfaceHasColorKey(Pointer<SdlSurface> surface) {
 /// \sa SDL_SurfaceHasColorKey
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_GetSurfaceColorKey(SDL_Surface *surface, Uint32 *key)
+/// extern SDL_DECLSPEC int SDLCALL SDL_GetSurfaceColorKey(SDL_Surface *surface, Uint32 *key)
 /// ```
 int sdlGetSurfaceColorKey(Pointer<SdlSurface> surface, Pointer<Uint32> key) {
   final sdlGetSurfaceColorKeyLookupFunction = libSdl3.lookupFunction<
@@ -543,7 +543,7 @@ int sdlGetSurfaceColorKey(Pointer<SdlSurface> surface, Pointer<Uint32> key) {
 /// \sa SDL_SetSurfaceAlphaMod
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_SetSurfaceColorMod(SDL_Surface *surface, Uint8 r, Uint8 g, Uint8 b)
+/// extern SDL_DECLSPEC int SDLCALL SDL_SetSurfaceColorMod(SDL_Surface *surface, Uint8 r, Uint8 g, Uint8 b)
 /// ```
 int sdlSetSurfaceColorMod(Pointer<SdlSurface> surface, int r, int g, int b) {
   final sdlSetSurfaceColorModLookupFunction = libSdl3.lookupFunction<
@@ -569,7 +569,7 @@ int sdlSetSurfaceColorMod(Pointer<SdlSurface> surface, int r, int g, int b) {
 /// \sa SDL_SetSurfaceColorMod
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_GetSurfaceColorMod(SDL_Surface *surface, Uint8 *r, Uint8 *g, Uint8 *b)
+/// extern SDL_DECLSPEC int SDLCALL SDL_GetSurfaceColorMod(SDL_Surface *surface, Uint8 *r, Uint8 *g, Uint8 *b)
 /// ```
 int sdlGetSurfaceColorMod(Pointer<SdlSurface> surface, Pointer<Uint8> r,
     Pointer<Uint8> g, Pointer<Uint8> b) {
@@ -600,7 +600,7 @@ int sdlGetSurfaceColorMod(Pointer<SdlSurface> surface, Pointer<Uint8> r,
 /// \sa SDL_SetSurfaceColorMod
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_SetSurfaceAlphaMod(SDL_Surface *surface, Uint8 alpha)
+/// extern SDL_DECLSPEC int SDLCALL SDL_SetSurfaceAlphaMod(SDL_Surface *surface, Uint8 alpha)
 /// ```
 int sdlSetSurfaceAlphaMod(Pointer<SdlSurface> surface, int alpha) {
   final sdlSetSurfaceAlphaModLookupFunction = libSdl3.lookupFunction<
@@ -624,7 +624,7 @@ int sdlSetSurfaceAlphaMod(Pointer<SdlSurface> surface, int alpha) {
 /// \sa SDL_SetSurfaceAlphaMod
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_GetSurfaceAlphaMod(SDL_Surface *surface, Uint8 *alpha)
+/// extern SDL_DECLSPEC int SDLCALL SDL_GetSurfaceAlphaMod(SDL_Surface *surface, Uint8 *alpha)
 /// ```
 int sdlGetSurfaceAlphaMod(Pointer<SdlSurface> surface, Pointer<Uint8> alpha) {
   final sdlGetSurfaceAlphaModLookupFunction = libSdl3.lookupFunction<
@@ -651,7 +651,7 @@ int sdlGetSurfaceAlphaMod(Pointer<SdlSurface> surface, Pointer<Uint8> alpha) {
 /// \sa SDL_GetSurfaceBlendMode
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_SetSurfaceBlendMode(SDL_Surface *surface, SDL_BlendMode blendMode)
+/// extern SDL_DECLSPEC int SDLCALL SDL_SetSurfaceBlendMode(SDL_Surface *surface, SDL_BlendMode blendMode)
 /// ```
 int sdlSetSurfaceBlendMode(Pointer<SdlSurface> surface, int blendMode) {
   final sdlSetSurfaceBlendModeLookupFunction = libSdl3.lookupFunction<
@@ -674,7 +674,7 @@ int sdlSetSurfaceBlendMode(Pointer<SdlSurface> surface, int blendMode) {
 /// \sa SDL_SetSurfaceBlendMode
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_GetSurfaceBlendMode(SDL_Surface *surface, SDL_BlendMode *blendMode)
+/// extern SDL_DECLSPEC int SDLCALL SDL_GetSurfaceBlendMode(SDL_Surface *surface, SDL_BlendMode *blendMode)
 /// ```
 int sdlGetSurfaceBlendMode(
     Pointer<SdlSurface> surface, Pointer<Uint32> blendMode) {
@@ -705,7 +705,7 @@ int sdlGetSurfaceBlendMode(
 /// \sa SDL_GetSurfaceClipRect
 ///
 /// ```c
-/// extern DECLSPEC SDL_bool SDLCALL SDL_SetSurfaceClipRect(SDL_Surface *surface, const SDL_Rect *rect)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetSurfaceClipRect(SDL_Surface *surface, const SDL_Rect *rect)
 /// ```
 bool sdlSetSurfaceClipRect(Pointer<SdlSurface> surface, Pointer<SdlRect> rect) {
   final sdlSetSurfaceClipRectLookupFunction = libSdl3.lookupFunction<
@@ -733,7 +733,7 @@ bool sdlSetSurfaceClipRect(Pointer<SdlSurface> surface, Pointer<SdlRect> rect) {
 /// \sa SDL_SetSurfaceClipRect
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_GetSurfaceClipRect(SDL_Surface *surface, SDL_Rect *rect)
+/// extern SDL_DECLSPEC int SDLCALL SDL_GetSurfaceClipRect(SDL_Surface *surface, SDL_Rect *rect)
 /// ```
 int sdlGetSurfaceClipRect(Pointer<SdlSurface> surface, Pointer<SdlRect> rect) {
   final sdlGetSurfaceClipRectLookupFunction = libSdl3.lookupFunction<
@@ -754,7 +754,7 @@ int sdlGetSurfaceClipRect(Pointer<SdlSurface> surface, Pointer<SdlRect> rect) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_FlipSurface(SDL_Surface *surface, SDL_FlipMode flip)
+/// extern SDL_DECLSPEC int SDLCALL SDL_FlipSurface(SDL_Surface *surface, SDL_FlipMode flip)
 /// ```
 int sdlFlipSurface(Pointer<SdlSurface> surface, int flip) {
   final sdlFlipSurfaceLookupFunction = libSdl3.lookupFunction<
@@ -777,7 +777,7 @@ int sdlFlipSurface(Pointer<SdlSurface> surface, int flip) {
 /// \sa SDL_DestroySurface
 ///
 /// ```c
-/// extern DECLSPEC SDL_Surface *SDLCALL SDL_DuplicateSurface(SDL_Surface *surface)
+/// extern SDL_DECLSPEC SDL_Surface *SDLCALL SDL_DuplicateSurface(SDL_Surface *surface)
 /// ```
 Pointer<SdlSurface> sdlDuplicateSurface(Pointer<SdlSurface> surface) {
   final sdlDuplicateSurfaceLookupFunction = libSdl3.lookupFunction<
@@ -809,7 +809,7 @@ Pointer<SdlSurface> sdlDuplicateSurface(Pointer<SdlSurface> surface) {
 /// \sa SDL_DestroySurface
 ///
 /// ```c
-/// extern DECLSPEC SDL_Surface *SDLCALL SDL_ConvertSurface(SDL_Surface *surface, const SDL_PixelFormat *format)
+/// extern SDL_DECLSPEC SDL_Surface *SDLCALL SDL_ConvertSurface(SDL_Surface *surface, const SDL_PixelFormat *format)
 /// ```
 Pointer<SdlSurface> sdlConvertSurface(
     Pointer<SdlSurface> surface, Pointer<SdlPixelFormat> format) {
@@ -841,7 +841,7 @@ Pointer<SdlSurface> sdlConvertSurface(
 /// \sa SDL_DestroySurface
 ///
 /// ```c
-/// extern DECLSPEC SDL_Surface *SDLCALL SDL_ConvertSurfaceFormat(SDL_Surface *surface, SDL_PixelFormatEnum pixel_format)
+/// extern SDL_DECLSPEC SDL_Surface *SDLCALL SDL_ConvertSurfaceFormat(SDL_Surface *surface, SDL_PixelFormatEnum pixel_format)
 /// ```
 Pointer<SdlSurface> sdlConvertSurfaceFormat(
     Pointer<SdlSurface> surface, int pixelFormat) {
@@ -875,7 +875,7 @@ Pointer<SdlSurface> sdlConvertSurfaceFormat(
 /// \sa SDL_DestroySurface
 ///
 /// ```c
-/// extern DECLSPEC SDL_Surface *SDLCALL SDL_ConvertSurfaceFormatAndColorspace(SDL_Surface *surface, SDL_PixelFormatEnum pixel_format, SDL_Colorspace colorspace, SDL_PropertiesID props)
+/// extern SDL_DECLSPEC SDL_Surface *SDLCALL SDL_ConvertSurfaceFormatAndColorspace(SDL_Surface *surface, SDL_PixelFormatEnum pixel_format, SDL_Colorspace colorspace, SDL_PropertiesID props)
 /// ```
 Pointer<SdlSurface> sdlConvertSurfaceFormatAndColorspace(
     Pointer<SdlSurface> surface, int pixelFormat, int colorspace, int props) {
@@ -911,7 +911,7 @@ Pointer<SdlSurface> sdlConvertSurfaceFormatAndColorspace(
 /// \sa SDL_ConvertPixelsAndColorspace
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_ConvertPixels(int width, int height, SDL_PixelFormatEnum src_format, const void *src, int src_pitch, SDL_PixelFormatEnum dst_format, void *dst, int dst_pitch)
+/// extern SDL_DECLSPEC int SDLCALL SDL_ConvertPixels(int width, int height, SDL_PixelFormatEnum src_format, const void *src, int src_pitch, SDL_PixelFormatEnum dst_format, void *dst, int dst_pitch)
 /// ```
 int sdlConvertPixels(
     int width,
@@ -973,7 +973,7 @@ int sdlConvertPixels(
 /// \sa SDL_ConvertPixels
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_ConvertPixelsAndColorspace(int width, int height, SDL_PixelFormatEnum src_format, SDL_Colorspace src_colorspace, SDL_PropertiesID src_properties, const void *src, int src_pitch, SDL_PixelFormatEnum dst_format, SDL_Colorspace dst_colorspace, SDL_PropertiesID dst_properties, void *dst, int dst_pitch)
+/// extern SDL_DECLSPEC int SDLCALL SDL_ConvertPixelsAndColorspace(int width, int height, SDL_PixelFormatEnum src_format, SDL_Colorspace src_colorspace, SDL_PropertiesID src_properties, const void *src, int src_pitch, SDL_PixelFormatEnum dst_format, SDL_Colorspace dst_colorspace, SDL_PropertiesID dst_properties, void *dst, int dst_pitch)
 /// ```
 int sdlConvertPixelsAndColorspace(
     int width,
@@ -1051,7 +1051,7 @@ int sdlConvertPixelsAndColorspace(
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_PremultiplyAlpha(int width, int height, SDL_PixelFormatEnum src_format, const void *src, int src_pitch, SDL_PixelFormatEnum dst_format, void *dst, int dst_pitch)
+/// extern SDL_DECLSPEC int SDLCALL SDL_PremultiplyAlpha(int width, int height, SDL_PixelFormatEnum src_format, const void *src, int src_pitch, SDL_PixelFormatEnum dst_format, void *dst, int dst_pitch)
 /// ```
 int sdlPremultiplyAlpha(
     int width,
@@ -1109,7 +1109,7 @@ int sdlPremultiplyAlpha(
 /// \sa SDL_FillSurfaceRects
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_FillSurfaceRect(SDL_Surface *dst, const SDL_Rect *rect, Uint32 color)
+/// extern SDL_DECLSPEC int SDLCALL SDL_FillSurfaceRect(SDL_Surface *dst, const SDL_Rect *rect, Uint32 color)
 /// ```
 int sdlFillSurfaceRect(
     Pointer<SdlSurface> dst, Pointer<SdlRect> rect, int color) {
@@ -1145,7 +1145,7 @@ int sdlFillSurfaceRect(
 /// \sa SDL_FillSurfaceRect
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_FillSurfaceRects(SDL_Surface *dst, const SDL_Rect *rects, int count, Uint32 color)
+/// extern SDL_DECLSPEC int SDLCALL SDL_FillSurfaceRects(SDL_Surface *dst, const SDL_Rect *rects, int count, Uint32 color)
 /// ```
 int sdlFillSurfaceRects(
     Pointer<SdlSurface> dst, Pointer<SdlRect> rects, int count, int color) {
@@ -1226,7 +1226,7 @@ int sdlFillSurfaceRects(
 /// \sa SDL_BlitSurfaceScaled
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_BlitSurface(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, SDL_Rect *dstrect)
+/// extern SDL_DECLSPEC int SDLCALL SDL_BlitSurface(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, SDL_Rect *dstrect)
 /// ```
 int sdlBlitSurface(Pointer<SdlSurface> src, Pointer<SdlRect> srcrect,
     Pointer<SdlSurface> dst, Pointer<SdlRect> dstrect) {
@@ -1261,7 +1261,7 @@ int sdlBlitSurface(Pointer<SdlSurface> src, Pointer<SdlRect> srcrect,
 /// \sa SDL_BlitSurface
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_BlitSurfaceUnchecked(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, const SDL_Rect *dstrect)
+/// extern SDL_DECLSPEC int SDLCALL SDL_BlitSurfaceUnchecked(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, const SDL_Rect *dstrect)
 /// ```
 int sdlBlitSurfaceUnchecked(Pointer<SdlSurface> src, Pointer<SdlRect> srcrect,
     Pointer<SdlSurface> dst, Pointer<SdlRect> dstrect) {
@@ -1297,7 +1297,7 @@ int sdlBlitSurfaceUnchecked(Pointer<SdlSurface> src, Pointer<SdlRect> srcrect,
 /// \sa SDL_BlitSurfaceScaled
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_SoftStretch(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, const SDL_Rect *dstrect, SDL_ScaleMode scaleMode)
+/// extern SDL_DECLSPEC int SDLCALL SDL_SoftStretch(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, const SDL_Rect *dstrect, SDL_ScaleMode scaleMode)
 /// ```
 int sdlSoftStretch(Pointer<SdlSurface> src, Pointer<SdlRect> srcrect,
     Pointer<SdlSurface> dst, Pointer<SdlRect> dstrect, int scaleMode) {
@@ -1333,7 +1333,7 @@ int sdlSoftStretch(Pointer<SdlSurface> src, Pointer<SdlRect> srcrect,
 /// \sa SDL_BlitSurface
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_BlitSurfaceScaled(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, SDL_Rect *dstrect, SDL_ScaleMode scaleMode)
+/// extern SDL_DECLSPEC int SDLCALL SDL_BlitSurfaceScaled(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, SDL_Rect *dstrect, SDL_ScaleMode scaleMode)
 /// ```
 int sdlBlitSurfaceScaled(Pointer<SdlSurface> src, Pointer<SdlRect> srcrect,
     Pointer<SdlSurface> dst, Pointer<SdlRect> dstrect, int scaleMode) {
@@ -1371,7 +1371,7 @@ int sdlBlitSurfaceScaled(Pointer<SdlSurface> src, Pointer<SdlRect> srcrect,
 /// \sa SDL_BlitSurfaceScaled
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_BlitSurfaceUncheckedScaled(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, const SDL_Rect *dstrect, SDL_ScaleMode scaleMode)
+/// extern SDL_DECLSPEC int SDLCALL SDL_BlitSurfaceUncheckedScaled(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, const SDL_Rect *dstrect, SDL_ScaleMode scaleMode)
 /// ```
 int sdlBlitSurfaceUncheckedScaled(
     Pointer<SdlSurface> src,
@@ -1418,7 +1418,7 @@ int sdlBlitSurfaceUncheckedScaled(
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_ReadSurfacePixel(SDL_Surface *surface, int x, int y, Uint8 *r, Uint8 *g, Uint8 *b, Uint8 *a)
+/// extern SDL_DECLSPEC int SDLCALL SDL_ReadSurfacePixel(SDL_Surface *surface, int x, int y, Uint8 *r, Uint8 *g, Uint8 *b, Uint8 *a)
 /// ```
 int sdlReadSurfacePixel(Pointer<SdlSurface> surface, int x, int y,
     Pointer<Uint8> r, Pointer<Uint8> g, Pointer<Uint8> b, Pointer<Uint8> a) {

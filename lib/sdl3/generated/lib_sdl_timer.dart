@@ -11,7 +11,7 @@ import 'lib_sdl.dart';
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC Uint64 SDLCALL SDL_GetTicks(void)
+/// extern SDL_DECLSPEC Uint64 SDLCALL SDL_GetTicks(void)
 /// ```
 int sdlGetTicks() {
   final sdlGetTicksLookupFunction =
@@ -28,7 +28,7 @@ int sdlGetTicks() {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC Uint64 SDLCALL SDL_GetTicksNS(void)
+/// extern SDL_DECLSPEC Uint64 SDLCALL SDL_GetTicksNS(void)
 /// ```
 int sdlGetTicksNs() {
   final sdlGetTicksNsLookupFunction = libSdl3
@@ -52,7 +52,7 @@ int sdlGetTicksNs() {
 /// \sa SDL_GetPerformanceFrequency
 ///
 /// ```c
-/// extern DECLSPEC Uint64 SDLCALL SDL_GetPerformanceCounter(void)
+/// extern SDL_DECLSPEC Uint64 SDLCALL SDL_GetPerformanceCounter(void)
 /// ```
 int sdlGetPerformanceCounter() {
   final sdlGetPerformanceCounterLookupFunction =
@@ -71,7 +71,7 @@ int sdlGetPerformanceCounter() {
 /// \sa SDL_GetPerformanceCounter
 ///
 /// ```c
-/// extern DECLSPEC Uint64 SDLCALL SDL_GetPerformanceFrequency(void)
+/// extern SDL_DECLSPEC Uint64 SDLCALL SDL_GetPerformanceFrequency(void)
 /// ```
 int sdlGetPerformanceFrequency() {
   final sdlGetPerformanceFrequencyLookupFunction =
@@ -92,7 +92,7 @@ int sdlGetPerformanceFrequency() {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC void SDLCALL SDL_Delay(Uint32 ms)
+/// extern SDL_DECLSPEC void SDLCALL SDL_Delay(Uint32 ms)
 /// ```
 void sdlDelay(int ms) {
   final sdlDelayLookupFunction =
@@ -113,7 +113,7 @@ void sdlDelay(int ms) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC void SDLCALL SDL_DelayNS(Uint64 ns)
+/// extern SDL_DECLSPEC void SDLCALL SDL_DelayNS(Uint64 ns)
 /// ```
 void sdlDelayNs(int ns) {
   final sdlDelayNsLookupFunction =
@@ -155,7 +155,7 @@ void sdlDelayNs(int ns) {
 /// \sa SDL_RemoveTimer
 ///
 /// ```c
-/// extern DECLSPEC SDL_TimerID SDLCALL SDL_AddTimer(Uint32 interval, SDL_TimerCallback callback, void *param)
+/// extern SDL_DECLSPEC SDL_TimerID SDLCALL SDL_AddTimer(Uint32 interval, SDL_TimerCallback callback, void *param)
 /// ```
 int sdlAddTimer(
     int interval,
@@ -185,7 +185,7 @@ int sdlAddTimer(
 /// \sa SDL_AddTimer
 ///
 /// ```c
-/// extern DECLSPEC SDL_bool SDLCALL SDL_RemoveTimer(SDL_TimerID id)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_RemoveTimer(SDL_TimerID id)
 /// ```
 bool sdlRemoveTimer(int id) {
   final sdlRemoveTimerLookupFunction =

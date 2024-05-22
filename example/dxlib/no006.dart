@@ -42,6 +42,7 @@ class Game {
     if (sdlInit(SDL_INIT_VIDEO) < 0) {
       return false;
     }
+    sdlSetHint(SDL_HINT_RENDER_VSYNC, '1');
     if (ttfInit() != 0) {
       return false;
     }
@@ -53,7 +54,7 @@ class Game {
     if (window == nullptr) {
       return false;
     }
-    renderer = window.createRenderer(SDL_RENDERER_PRESENTVSYNC);
+    renderer = window.createRenderer();
     if (renderer == nullptr) {
       return false;
     }

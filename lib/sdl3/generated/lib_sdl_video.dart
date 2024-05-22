@@ -15,7 +15,7 @@ import 'struct_sdl.dart';
 /// \sa SDL_GetVideoDriver
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_GetNumVideoDrivers(void)
+/// extern SDL_DECLSPEC int SDLCALL SDL_GetNumVideoDrivers(void)
 /// ```
 int sdlGetNumVideoDrivers() {
   final sdlGetNumVideoDriversLookupFunction =
@@ -38,7 +38,7 @@ int sdlGetNumVideoDrivers() {
 /// \sa SDL_GetNumVideoDrivers
 ///
 /// ```c
-/// extern DECLSPEC const char *SDLCALL SDL_GetVideoDriver(int index)
+/// extern SDL_DECLSPEC const char *SDLCALL SDL_GetVideoDriver(int index)
 /// ```
 String? sdlGetVideoDriver(int index) {
   final sdlGetVideoDriverLookupFunction = libSdl3.lookupFunction<
@@ -63,7 +63,7 @@ String? sdlGetVideoDriver(int index) {
 /// \sa SDL_GetVideoDriver
 ///
 /// ```c
-/// extern DECLSPEC const char *SDLCALL SDL_GetCurrentVideoDriver(void)
+/// extern SDL_DECLSPEC const char *SDLCALL SDL_GetCurrentVideoDriver(void)
 /// ```
 String? sdlGetCurrentVideoDriver() {
   final sdlGetCurrentVideoDriverLookupFunction = libSdl3.lookupFunction<
@@ -84,7 +84,7 @@ String? sdlGetCurrentVideoDriver() {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC SDL_SystemTheme SDLCALL SDL_GetSystemTheme(void)
+/// extern SDL_DECLSPEC SDL_SystemTheme SDLCALL SDL_GetSystemTheme(void)
 /// ```
 int sdlGetSystemTheme() {
   final sdlGetSystemThemeLookupFunction = libSdl3
@@ -103,7 +103,7 @@ int sdlGetSystemTheme() {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC SDL_DisplayID *SDLCALL SDL_GetDisplays(int *count)
+/// extern SDL_DECLSPEC SDL_DisplayID *SDLCALL SDL_GetDisplays(int *count)
 /// ```
 Pointer<Uint32> sdlGetDisplays(Pointer<Int32> count) {
   final sdlGetDisplaysLookupFunction = libSdl3.lookupFunction<
@@ -123,7 +123,7 @@ Pointer<Uint32> sdlGetDisplays(Pointer<Int32> count) {
 /// \sa SDL_GetDisplays
 ///
 /// ```c
-/// extern DECLSPEC SDL_DisplayID SDLCALL SDL_GetPrimaryDisplay(void)
+/// extern SDL_DECLSPEC SDL_DisplayID SDLCALL SDL_GetPrimaryDisplay(void)
 /// ```
 int sdlGetPrimaryDisplay() {
   final sdlGetPrimaryDisplayLookupFunction =
@@ -168,7 +168,7 @@ int sdlGetPrimaryDisplay() {
 /// \sa SDL_SetProperty
 ///
 /// ```c
-/// extern DECLSPEC SDL_PropertiesID SDLCALL SDL_GetDisplayProperties(SDL_DisplayID displayID)
+/// extern SDL_DECLSPEC SDL_PropertiesID SDLCALL SDL_GetDisplayProperties(SDL_DisplayID displayID)
 /// ```
 int sdlGetDisplayProperties(int displayId) {
   final sdlGetDisplayPropertiesLookupFunction = libSdl3.lookupFunction<
@@ -189,7 +189,7 @@ int sdlGetDisplayProperties(int displayId) {
 /// \sa SDL_GetDisplays
 ///
 /// ```c
-/// extern DECLSPEC const char *SDLCALL SDL_GetDisplayName(SDL_DisplayID displayID)
+/// extern SDL_DECLSPEC const char *SDLCALL SDL_GetDisplayName(SDL_DisplayID displayID)
 /// ```
 String? sdlGetDisplayName(int displayId) {
   final sdlGetDisplayNameLookupFunction = libSdl3.lookupFunction<
@@ -218,7 +218,7 @@ String? sdlGetDisplayName(int displayId) {
 /// \sa SDL_GetDisplays
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_GetDisplayBounds(SDL_DisplayID displayID, SDL_Rect *rect)
+/// extern SDL_DECLSPEC int SDLCALL SDL_GetDisplayBounds(SDL_DisplayID displayID, SDL_Rect *rect)
 /// ```
 int sdlGetDisplayBounds(int displayId, Pointer<SdlRect> rect) {
   final sdlGetDisplayBoundsLookupFunction = libSdl3.lookupFunction<
@@ -251,7 +251,7 @@ int sdlGetDisplayBounds(int displayId, Pointer<SdlRect> rect) {
 /// \sa SDL_GetDisplays
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_GetDisplayUsableBounds(SDL_DisplayID displayID, SDL_Rect *rect)
+/// extern SDL_DECLSPEC int SDLCALL SDL_GetDisplayUsableBounds(SDL_DisplayID displayID, SDL_Rect *rect)
 /// ```
 int sdlGetDisplayUsableBounds(int displayId, Pointer<SdlRect> rect) {
   final sdlGetDisplayUsableBoundsLookupFunction = libSdl3.lookupFunction<
@@ -273,7 +273,7 @@ int sdlGetDisplayUsableBounds(int displayId, Pointer<SdlRect> rect) {
 /// \sa SDL_GetDisplays
 ///
 /// ```c
-/// extern DECLSPEC SDL_DisplayOrientation SDLCALL SDL_GetNaturalDisplayOrientation(SDL_DisplayID displayID)
+/// extern SDL_DECLSPEC SDL_DisplayOrientation SDLCALL SDL_GetNaturalDisplayOrientation(SDL_DisplayID displayID)
 /// ```
 int sdlGetNaturalDisplayOrientation(int displayId) {
   final sdlGetNaturalDisplayOrientationLookupFunction = libSdl3.lookupFunction<
@@ -294,7 +294,7 @@ int sdlGetNaturalDisplayOrientation(int displayId) {
 /// \sa SDL_GetDisplays
 ///
 /// ```c
-/// extern DECLSPEC SDL_DisplayOrientation SDLCALL SDL_GetCurrentDisplayOrientation(SDL_DisplayID displayID)
+/// extern SDL_DECLSPEC SDL_DisplayOrientation SDLCALL SDL_GetCurrentDisplayOrientation(SDL_DisplayID displayID)
 /// ```
 int sdlGetCurrentDisplayOrientation(int displayId) {
   final sdlGetCurrentDisplayOrientationLookupFunction = libSdl3.lookupFunction<
@@ -320,7 +320,7 @@ int sdlGetCurrentDisplayOrientation(int displayId) {
 /// \sa SDL_GetDisplays
 ///
 /// ```c
-/// extern DECLSPEC float SDLCALL SDL_GetDisplayContentScale(SDL_DisplayID displayID)
+/// extern SDL_DECLSPEC float SDLCALL SDL_GetDisplayContentScale(SDL_DisplayID displayID)
 /// ```
 double sdlGetDisplayContentScale(int displayId) {
   final sdlGetDisplayContentScaleLookupFunction = libSdl3.lookupFunction<
@@ -352,7 +352,7 @@ double sdlGetDisplayContentScale(int displayId) {
 /// \sa SDL_GetDisplays
 ///
 /// ```c
-/// extern DECLSPEC const SDL_DisplayMode **SDLCALL SDL_GetFullscreenDisplayModes(SDL_DisplayID displayID, int *count)
+/// extern SDL_DECLSPEC const SDL_DisplayMode **SDLCALL SDL_GetFullscreenDisplayModes(SDL_DisplayID displayID, int *count)
 /// ```
 Pointer<Pointer<SdlDisplayMode>> sdlGetFullscreenDisplayModes(
     int displayId, Pointer<Int32> count) {
@@ -391,7 +391,7 @@ Pointer<Pointer<SdlDisplayMode>> sdlGetFullscreenDisplayModes(
 /// \sa SDL_GetFullscreenDisplayModes
 ///
 /// ```c
-/// extern DECLSPEC const SDL_DisplayMode *SDLCALL SDL_GetClosestFullscreenDisplayMode(SDL_DisplayID displayID, int w, int h, float refresh_rate, SDL_bool include_high_density_modes)
+/// extern SDL_DECLSPEC const SDL_DisplayMode *SDLCALL SDL_GetClosestFullscreenDisplayMode(SDL_DisplayID displayID, int w, int h, float refresh_rate, SDL_bool include_high_density_modes)
 /// ```
 Pointer<SdlDisplayMode> sdlGetClosestFullscreenDisplayMode(int displayId, int w,
     int h, double refreshRate, bool includeHighDensityModes) {
@@ -425,7 +425,7 @@ Pointer<SdlDisplayMode> sdlGetClosestFullscreenDisplayMode(int displayId, int w,
 /// \sa SDL_GetDisplays
 ///
 /// ```c
-/// extern DECLSPEC const SDL_DisplayMode *SDLCALL SDL_GetDesktopDisplayMode(SDL_DisplayID displayID)
+/// extern SDL_DECLSPEC const SDL_DisplayMode *SDLCALL SDL_GetDesktopDisplayMode(SDL_DisplayID displayID)
 /// ```
 Pointer<SdlDisplayMode> sdlGetDesktopDisplayMode(int displayId) {
   final sdlGetDesktopDisplayModeLookupFunction = libSdl3.lookupFunction<
@@ -453,7 +453,7 @@ Pointer<SdlDisplayMode> sdlGetDesktopDisplayMode(int displayId) {
 /// \sa SDL_GetDisplays
 ///
 /// ```c
-/// extern DECLSPEC const SDL_DisplayMode *SDLCALL SDL_GetCurrentDisplayMode(SDL_DisplayID displayID)
+/// extern SDL_DECLSPEC const SDL_DisplayMode *SDLCALL SDL_GetCurrentDisplayMode(SDL_DisplayID displayID)
 /// ```
 Pointer<SdlDisplayMode> sdlGetCurrentDisplayMode(int displayId) {
   final sdlGetCurrentDisplayModeLookupFunction = libSdl3.lookupFunction<
@@ -476,7 +476,7 @@ Pointer<SdlDisplayMode> sdlGetCurrentDisplayMode(int displayId) {
 /// \sa SDL_GetDisplays
 ///
 /// ```c
-/// extern DECLSPEC SDL_DisplayID SDLCALL SDL_GetDisplayForPoint(const SDL_Point *point)
+/// extern SDL_DECLSPEC SDL_DisplayID SDLCALL SDL_GetDisplayForPoint(const SDL_Point *point)
 /// ```
 int sdlGetDisplayForPoint(Pointer<SdlPoint> point) {
   final sdlGetDisplayForPointLookupFunction = libSdl3.lookupFunction<
@@ -499,7 +499,7 @@ int sdlGetDisplayForPoint(Pointer<SdlPoint> point) {
 /// \sa SDL_GetDisplays
 ///
 /// ```c
-/// extern DECLSPEC SDL_DisplayID SDLCALL SDL_GetDisplayForRect(const SDL_Rect *rect)
+/// extern SDL_DECLSPEC SDL_DisplayID SDLCALL SDL_GetDisplayForRect(const SDL_Rect *rect)
 /// ```
 int sdlGetDisplayForRect(Pointer<SdlRect> rect) {
   final sdlGetDisplayForRectLookupFunction = libSdl3.lookupFunction<
@@ -522,7 +522,7 @@ int sdlGetDisplayForRect(Pointer<SdlRect> rect) {
 /// \sa SDL_GetDisplays
 ///
 /// ```c
-/// extern DECLSPEC SDL_DisplayID SDLCALL SDL_GetDisplayForWindow(SDL_Window *window)
+/// extern SDL_DECLSPEC SDL_DisplayID SDLCALL SDL_GetDisplayForWindow(SDL_Window *window)
 /// ```
 int sdlGetDisplayForWindow(Pointer<SdlWindow> window) {
   final sdlGetDisplayForWindowLookupFunction = libSdl3.lookupFunction<
@@ -547,7 +547,7 @@ int sdlGetDisplayForWindow(Pointer<SdlWindow> window) {
 /// \sa SDL_GetWindowDisplayScale
 ///
 /// ```c
-/// extern DECLSPEC float SDLCALL SDL_GetWindowPixelDensity(SDL_Window *window)
+/// extern SDL_DECLSPEC float SDLCALL SDL_GetWindowPixelDensity(SDL_Window *window)
 /// ```
 double sdlGetWindowPixelDensity(Pointer<SdlWindow> window) {
   final sdlGetWindowPixelDensityLookupFunction = libSdl3.lookupFunction<
@@ -577,7 +577,7 @@ double sdlGetWindowPixelDensity(Pointer<SdlWindow> window) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC float SDLCALL SDL_GetWindowDisplayScale(SDL_Window *window)
+/// extern SDL_DECLSPEC float SDLCALL SDL_GetWindowDisplayScale(SDL_Window *window)
 /// ```
 double sdlGetWindowDisplayScale(Pointer<SdlWindow> window) {
   final sdlGetWindowDisplayScaleLookupFunction = libSdl3.lookupFunction<
@@ -618,7 +618,7 @@ double sdlGetWindowDisplayScale(Pointer<SdlWindow> window) {
 /// \sa SDL_SyncWindow
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_SetWindowFullscreenMode(SDL_Window *window, const SDL_DisplayMode *mode)
+/// extern SDL_DECLSPEC int SDLCALL SDL_SetWindowFullscreenMode(SDL_Window *window, const SDL_DisplayMode *mode)
 /// ```
 int sdlSetWindowFullscreenMode(
     Pointer<SdlWindow> window, Pointer<SdlDisplayMode> mode) {
@@ -642,7 +642,7 @@ int sdlSetWindowFullscreenMode(
 /// \sa SDL_SetWindowFullscreen
 ///
 /// ```c
-/// extern DECLSPEC const SDL_DisplayMode *SDLCALL SDL_GetWindowFullscreenMode(SDL_Window *window)
+/// extern SDL_DECLSPEC const SDL_DisplayMode *SDLCALL SDL_GetWindowFullscreenMode(SDL_Window *window)
 /// ```
 Pointer<SdlDisplayMode> sdlGetWindowFullscreenMode(Pointer<SdlWindow> window) {
   final sdlGetWindowFullscreenModeLookupFunction = libSdl3.lookupFunction<
@@ -665,7 +665,7 @@ Pointer<SdlDisplayMode> sdlGetWindowFullscreenMode(Pointer<SdlWindow> window) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC void *SDLCALL SDL_GetWindowICCProfile(SDL_Window *window, size_t *size)
+/// extern SDL_DECLSPEC void *SDLCALL SDL_GetWindowICCProfile(SDL_Window *window, size_t *size)
 /// ```
 Pointer<NativeType> sdlGetWindowIccProfile(
     Pointer<SdlWindow> window, Pointer<Uint32> size) {
@@ -688,7 +688,7 @@ Pointer<NativeType> sdlGetWindowIccProfile(
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC Uint32 SDLCALL SDL_GetWindowPixelFormat(SDL_Window *window)
+/// extern SDL_DECLSPEC Uint32 SDLCALL SDL_GetWindowPixelFormat(SDL_Window *window)
 /// ```
 int sdlGetWindowPixelFormat(Pointer<SdlWindow> window) {
   final sdlGetWindowPixelFormatLookupFunction = libSdl3.lookupFunction<
@@ -755,7 +755,7 @@ int sdlGetWindowPixelFormat(Pointer<SdlWindow> window) {
 /// \sa SDL_DestroyWindow
 ///
 /// ```c
-/// extern DECLSPEC SDL_Window *SDLCALL SDL_CreateWindow(const char *title, int w, int h, SDL_WindowFlags flags)
+/// extern SDL_DECLSPEC SDL_Window *SDLCALL SDL_CreateWindow(const char *title, int w, int h, SDL_WindowFlags flags)
 /// ```
 Pointer<SdlWindow> sdlCreateWindow(String? title, int w, int h, int flags) {
   final sdlCreateWindowLookupFunction = libSdl3.lookupFunction<
@@ -823,7 +823,7 @@ Pointer<SdlWindow> sdlCreateWindow(String? title, int w, int h, int flags) {
 /// \sa SDL_GetWindowParent
 ///
 /// ```c
-/// extern DECLSPEC SDL_Window *SDLCALL SDL_CreatePopupWindow(SDL_Window *parent, int offset_x, int offset_y, int w, int h, SDL_WindowFlags flags)
+/// extern SDL_DECLSPEC SDL_Window *SDLCALL SDL_CreatePopupWindow(SDL_Window *parent, int offset_x, int offset_y, int w, int h, SDL_WindowFlags flags)
 /// ```
 Pointer<SdlWindow> sdlCreatePopupWindow(Pointer<SdlWindow> parent, int offsetX,
     int offsetY, int w, int h, int flags) {
@@ -901,18 +901,6 @@ Pointer<SdlWindow> sdlCreatePopupWindow(Pointer<SdlWindow> parent, int offsetX,
 ///
 /// These are additional supported properties on Wayland:
 ///
-/// - `SDL_PROP_WINDOW_CREATE_WAYLAND_SCALE_TO_DISPLAY_BOOLEAN` - true if the
-/// window should use forced scaling designed to produce 1:1 pixel mapping if
-/// not flagged as being DPI-aware. This is intended to allow legacy
-/// applications to be displayed without desktop scaling being applied, and
-/// has issues with certain display configurations, as this forces the window
-/// to behave in a way that Wayland desktops were not designed to
-/// accommodate. Potential issues include, but are not limited to: rounding
-/// errors can result when odd window sizes/scales are used, the window may
-/// be unusably small, the window may jump in visible size at times, the
-/// window may appear to be larger than the desktop space, and possible loss
-/// of cursor precision can occur. New applications should be designed with
-/// proper DPI awareness and handling instead of enabling this.
 /// - `SDL_PROP_WINDOW_CREATE_WAYLAND_SURFACE_ROLE_CUSTOM_BOOLEAN` - true if
 /// the application wants to use the Wayland surface for a custom role and
 /// does not want it attached to an XDG toplevel window. See
@@ -953,7 +941,7 @@ Pointer<SdlWindow> sdlCreatePopupWindow(Pointer<SdlWindow> parent, int offsetX,
 /// \sa SDL_DestroyWindow
 ///
 /// ```c
-/// extern DECLSPEC SDL_Window *SDLCALL SDL_CreateWindowWithProperties(SDL_PropertiesID props)
+/// extern SDL_DECLSPEC SDL_Window *SDLCALL SDL_CreateWindowWithProperties(SDL_PropertiesID props)
 /// ```
 Pointer<SdlWindow> sdlCreateWindowWithProperties(int props) {
   final sdlCreateWindowWithPropertiesLookupFunction = libSdl3.lookupFunction<
@@ -977,7 +965,7 @@ Pointer<SdlWindow> sdlCreateWindowWithProperties(int props) {
 /// \sa SDL_GetWindowFromID
 ///
 /// ```c
-/// extern DECLSPEC SDL_WindowID SDLCALL SDL_GetWindowID(SDL_Window *window)
+/// extern SDL_DECLSPEC SDL_WindowID SDLCALL SDL_GetWindowID(SDL_Window *window)
 /// ```
 int sdlGetWindowId(Pointer<SdlWindow> window) {
   final sdlGetWindowIdLookupFunction = libSdl3.lookupFunction<
@@ -1001,7 +989,7 @@ int sdlGetWindowId(Pointer<SdlWindow> window) {
 /// \sa SDL_GetWindowID
 ///
 /// ```c
-/// extern DECLSPEC SDL_Window *SDLCALL SDL_GetWindowFromID(SDL_WindowID id)
+/// extern SDL_DECLSPEC SDL_Window *SDLCALL SDL_GetWindowFromID(SDL_WindowID id)
 /// ```
 Pointer<SdlWindow> sdlGetWindowFromId(int id) {
   final sdlGetWindowFromIdLookupFunction = libSdl3.lookupFunction<
@@ -1022,7 +1010,7 @@ Pointer<SdlWindow> sdlGetWindowFromId(int id) {
 /// \sa SDL_CreatePopupWindow
 ///
 /// ```c
-/// extern DECLSPEC SDL_Window *SDLCALL SDL_GetWindowParent(SDL_Window *window)
+/// extern SDL_DECLSPEC SDL_Window *SDLCALL SDL_GetWindowParent(SDL_Window *window)
 /// ```
 Pointer<SdlWindow> sdlGetWindowParent(Pointer<SdlWindow> window) {
   final sdlGetWindowParentLookupFunction = libSdl3.lookupFunction<
@@ -1133,7 +1121,7 @@ Pointer<SdlWindow> sdlGetWindowParent(Pointer<SdlWindow> window) {
 /// \sa SDL_GetNumberProperty
 ///
 /// ```c
-/// extern DECLSPEC SDL_PropertiesID SDLCALL SDL_GetWindowProperties(SDL_Window *window)
+/// extern SDL_DECLSPEC SDL_PropertiesID SDLCALL SDL_GetWindowProperties(SDL_Window *window)
 /// ```
 int sdlGetWindowProperties(Pointer<SdlWindow> window) {
   final sdlGetWindowPropertiesLookupFunction = libSdl3.lookupFunction<
@@ -1159,7 +1147,7 @@ int sdlGetWindowProperties(Pointer<SdlWindow> window) {
 /// \sa SDL_ShowWindow
 ///
 /// ```c
-/// extern DECLSPEC SDL_WindowFlags SDLCALL SDL_GetWindowFlags(SDL_Window *window)
+/// extern SDL_DECLSPEC SDL_WindowFlags SDLCALL SDL_GetWindowFlags(SDL_Window *window)
 /// ```
 int sdlGetWindowFlags(Pointer<SdlWindow> window) {
   final sdlGetWindowFlagsLookupFunction = libSdl3.lookupFunction<
@@ -1183,7 +1171,7 @@ int sdlGetWindowFlags(Pointer<SdlWindow> window) {
 /// \sa SDL_GetWindowTitle
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_SetWindowTitle(SDL_Window *window, const char *title)
+/// extern SDL_DECLSPEC int SDLCALL SDL_SetWindowTitle(SDL_Window *window, const char *title)
 /// ```
 int sdlSetWindowTitle(Pointer<SdlWindow> window, String? title) {
   final sdlSetWindowTitleLookupFunction = libSdl3.lookupFunction<
@@ -1208,7 +1196,7 @@ int sdlSetWindowTitle(Pointer<SdlWindow> window, String? title) {
 /// \sa SDL_SetWindowTitle
 ///
 /// ```c
-/// extern DECLSPEC const char *SDLCALL SDL_GetWindowTitle(SDL_Window *window)
+/// extern SDL_DECLSPEC const char *SDLCALL SDL_GetWindowTitle(SDL_Window *window)
 /// ```
 String? sdlGetWindowTitle(Pointer<SdlWindow> window) {
   final sdlGetWindowTitleLookupFunction = libSdl3.lookupFunction<
@@ -1232,7 +1220,7 @@ String? sdlGetWindowTitle(Pointer<SdlWindow> window) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_SetWindowIcon(SDL_Window *window, SDL_Surface *icon)
+/// extern SDL_DECLSPEC int SDLCALL SDL_SetWindowIcon(SDL_Window *window, SDL_Surface *icon)
 /// ```
 int sdlSetWindowIcon(Pointer<SdlWindow> window, Pointer<SdlSurface> icon) {
   final sdlSetWindowIconLookupFunction = libSdl3.lookupFunction<
@@ -1281,7 +1269,7 @@ int sdlSetWindowIcon(Pointer<SdlWindow> window, Pointer<SdlSurface> icon) {
 /// \sa SDL_SyncWindow
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_SetWindowPosition(SDL_Window *window, int x, int y)
+/// extern SDL_DECLSPEC int SDLCALL SDL_SetWindowPosition(SDL_Window *window, int x, int y)
 /// ```
 int sdlSetWindowPosition(Pointer<SdlWindow> window, int x, int y) {
   final sdlSetWindowPositionLookupFunction = libSdl3.lookupFunction<
@@ -1311,7 +1299,7 @@ int sdlSetWindowPosition(Pointer<SdlWindow> window, int x, int y) {
 /// \sa SDL_SetWindowPosition
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_GetWindowPosition(SDL_Window *window, int *x, int *y)
+/// extern SDL_DECLSPEC int SDLCALL SDL_GetWindowPosition(SDL_Window *window, int *x, int *y)
 /// ```
 int sdlGetWindowPosition(
     Pointer<SdlWindow> window, Pointer<Int32> x, Pointer<Int32> y) {
@@ -1361,7 +1349,7 @@ int sdlGetWindowPosition(
 /// \sa SDL_SyncWindow
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_SetWindowSize(SDL_Window *window, int w, int h)
+/// extern SDL_DECLSPEC int SDLCALL SDL_SetWindowSize(SDL_Window *window, int w, int h)
 /// ```
 int sdlSetWindowSize(Pointer<SdlWindow> window, int w, int h) {
   final sdlSetWindowSizeLookupFunction = libSdl3.lookupFunction<
@@ -1394,7 +1382,7 @@ int sdlSetWindowSize(Pointer<SdlWindow> window, int w, int h) {
 /// \sa SDL_SetWindowSize
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_GetWindowSize(SDL_Window *window, int *w, int *h)
+/// extern SDL_DECLSPEC int SDLCALL SDL_GetWindowSize(SDL_Window *window, int *w, int *h)
 /// ```
 int sdlGetWindowSize(
     Pointer<SdlWindow> window, Pointer<Int32> w, Pointer<Int32> h) {
@@ -1439,7 +1427,7 @@ int sdlGetWindowSize(
 /// \sa SDL_GetWindowSize
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_GetWindowBordersSize(SDL_Window *window, int *top, int *left, int *bottom, int *right)
+/// extern SDL_DECLSPEC int SDLCALL SDL_GetWindowBordersSize(SDL_Window *window, int *top, int *left, int *bottom, int *right)
 /// ```
 int sdlGetWindowBordersSize(Pointer<SdlWindow> window, Pointer<Int32> top,
     Pointer<Int32> left, Pointer<Int32> bottom, Pointer<Int32> right) {
@@ -1472,7 +1460,7 @@ int sdlGetWindowBordersSize(Pointer<SdlWindow> window, Pointer<Int32> top,
 /// \sa SDL_GetWindowSize
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_GetWindowSizeInPixels(SDL_Window *window, int *w, int *h)
+/// extern SDL_DECLSPEC int SDLCALL SDL_GetWindowSizeInPixels(SDL_Window *window, int *w, int *h)
 /// ```
 int sdlGetWindowSizeInPixels(
     Pointer<SdlWindow> window, Pointer<Int32> w, Pointer<Int32> h) {
@@ -1499,7 +1487,7 @@ int sdlGetWindowSizeInPixels(
 /// \sa SDL_SetWindowMaximumSize
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_SetWindowMinimumSize(SDL_Window *window, int min_w, int min_h)
+/// extern SDL_DECLSPEC int SDLCALL SDL_SetWindowMinimumSize(SDL_Window *window, int min_w, int min_h)
 /// ```
 int sdlSetWindowMinimumSize(Pointer<SdlWindow> window, int minW, int minH) {
   final sdlSetWindowMinimumSizeLookupFunction = libSdl3.lookupFunction<
@@ -1526,7 +1514,7 @@ int sdlSetWindowMinimumSize(Pointer<SdlWindow> window, int minW, int minH) {
 /// \sa SDL_SetWindowMinimumSize
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_GetWindowMinimumSize(SDL_Window *window, int *w, int *h)
+/// extern SDL_DECLSPEC int SDLCALL SDL_GetWindowMinimumSize(SDL_Window *window, int *w, int *h)
 /// ```
 int sdlGetWindowMinimumSize(
     Pointer<SdlWindow> window, Pointer<Int32> w, Pointer<Int32> h) {
@@ -1553,7 +1541,7 @@ int sdlGetWindowMinimumSize(
 /// \sa SDL_SetWindowMinimumSize
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_SetWindowMaximumSize(SDL_Window *window, int max_w, int max_h)
+/// extern SDL_DECLSPEC int SDLCALL SDL_SetWindowMaximumSize(SDL_Window *window, int max_w, int max_h)
 /// ```
 int sdlSetWindowMaximumSize(Pointer<SdlWindow> window, int maxW, int maxH) {
   final sdlSetWindowMaximumSizeLookupFunction = libSdl3.lookupFunction<
@@ -1580,7 +1568,7 @@ int sdlSetWindowMaximumSize(Pointer<SdlWindow> window, int maxW, int maxH) {
 /// \sa SDL_SetWindowMaximumSize
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_GetWindowMaximumSize(SDL_Window *window, int *w, int *h)
+/// extern SDL_DECLSPEC int SDLCALL SDL_GetWindowMaximumSize(SDL_Window *window, int *w, int *h)
 /// ```
 int sdlGetWindowMaximumSize(
     Pointer<SdlWindow> window, Pointer<Int32> w, Pointer<Int32> h) {
@@ -1611,7 +1599,7 @@ int sdlGetWindowMaximumSize(
 /// \sa SDL_GetWindowFlags
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_SetWindowBordered(SDL_Window *window, SDL_bool bordered)
+/// extern SDL_DECLSPEC int SDLCALL SDL_SetWindowBordered(SDL_Window *window, SDL_bool bordered)
 /// ```
 int sdlSetWindowBordered(Pointer<SdlWindow> window, bool bordered) {
   final sdlSetWindowBorderedLookupFunction = libSdl3.lookupFunction<
@@ -1640,7 +1628,7 @@ int sdlSetWindowBordered(Pointer<SdlWindow> window, bool bordered) {
 /// \sa SDL_GetWindowFlags
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_SetWindowResizable(SDL_Window *window, SDL_bool resizable)
+/// extern SDL_DECLSPEC int SDLCALL SDL_SetWindowResizable(SDL_Window *window, SDL_bool resizable)
 /// ```
 int sdlSetWindowResizable(Pointer<SdlWindow> window, bool resizable) {
   final sdlSetWindowResizableLookupFunction = libSdl3.lookupFunction<
@@ -1667,7 +1655,7 @@ int sdlSetWindowResizable(Pointer<SdlWindow> window, bool resizable) {
 /// \sa SDL_GetWindowFlags
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_SetWindowAlwaysOnTop(SDL_Window *window, SDL_bool on_top)
+/// extern SDL_DECLSPEC int SDLCALL SDL_SetWindowAlwaysOnTop(SDL_Window *window, SDL_bool on_top)
 /// ```
 int sdlSetWindowAlwaysOnTop(Pointer<SdlWindow> window, bool onTop) {
   final sdlSetWindowAlwaysOnTopLookupFunction = libSdl3.lookupFunction<
@@ -1690,7 +1678,7 @@ int sdlSetWindowAlwaysOnTop(Pointer<SdlWindow> window, bool onTop) {
 /// \sa SDL_RaiseWindow
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_ShowWindow(SDL_Window *window)
+/// extern SDL_DECLSPEC int SDLCALL SDL_ShowWindow(SDL_Window *window)
 /// ```
 int sdlShowWindow(Pointer<SdlWindow> window) {
   final sdlShowWindowLookupFunction = libSdl3.lookupFunction<
@@ -1711,7 +1699,7 @@ int sdlShowWindow(Pointer<SdlWindow> window) {
 /// \sa SDL_ShowWindow
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_HideWindow(SDL_Window *window)
+/// extern SDL_DECLSPEC int SDLCALL SDL_HideWindow(SDL_Window *window)
 /// ```
 int sdlHideWindow(Pointer<SdlWindow> window) {
   final sdlHideWindowLookupFunction = libSdl3.lookupFunction<
@@ -1730,7 +1718,7 @@ int sdlHideWindow(Pointer<SdlWindow> window) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_RaiseWindow(SDL_Window *window)
+/// extern SDL_DECLSPEC int SDLCALL SDL_RaiseWindow(SDL_Window *window)
 /// ```
 int sdlRaiseWindow(Pointer<SdlWindow> window) {
   final sdlRaiseWindowLookupFunction = libSdl3.lookupFunction<
@@ -1770,7 +1758,7 @@ int sdlRaiseWindow(Pointer<SdlWindow> window) {
 /// \sa SDL_SyncWindow
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_MaximizeWindow(SDL_Window *window)
+/// extern SDL_DECLSPEC int SDLCALL SDL_MaximizeWindow(SDL_Window *window)
 /// ```
 int sdlMaximizeWindow(Pointer<SdlWindow> window) {
   final sdlMaximizeWindowLookupFunction = libSdl3.lookupFunction<
@@ -1802,7 +1790,7 @@ int sdlMaximizeWindow(Pointer<SdlWindow> window) {
 /// \sa SDL_SyncWindow
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_MinimizeWindow(SDL_Window *window)
+/// extern SDL_DECLSPEC int SDLCALL SDL_MinimizeWindow(SDL_Window *window)
 /// ```
 int sdlMinimizeWindow(Pointer<SdlWindow> window) {
   final sdlMinimizeWindowLookupFunction = libSdl3.lookupFunction<
@@ -1835,7 +1823,7 @@ int sdlMinimizeWindow(Pointer<SdlWindow> window) {
 /// \sa SDL_SyncWindow
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_RestoreWindow(SDL_Window *window)
+/// extern SDL_DECLSPEC int SDLCALL SDL_RestoreWindow(SDL_Window *window)
 /// ```
 int sdlRestoreWindow(Pointer<SdlWindow> window) {
   final sdlRestoreWindowLookupFunction = libSdl3.lookupFunction<
@@ -1872,7 +1860,7 @@ int sdlRestoreWindow(Pointer<SdlWindow> window) {
 /// \sa SDL_SyncWindow
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_SetWindowFullscreen(SDL_Window *window, SDL_bool fullscreen)
+/// extern SDL_DECLSPEC int SDLCALL SDL_SetWindowFullscreen(SDL_Window *window, SDL_bool fullscreen)
 /// ```
 int sdlSetWindowFullscreen(Pointer<SdlWindow> window, bool fullscreen) {
   final sdlSetWindowFullscreenLookupFunction = libSdl3.lookupFunction<
@@ -1908,9 +1896,10 @@ int sdlSetWindowFullscreen(Pointer<SdlWindow> window, bool fullscreen) {
 /// \sa SDL_MinimizeWindow
 /// \sa SDL_MaximizeWindow
 /// \sa SDL_RestoreWindow
+/// \sa SDL_HINT_VIDEO_SYNC_WINDOW_OPERATIONS
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_SyncWindow(SDL_Window *window)
+/// extern SDL_DECLSPEC int SDLCALL SDL_SyncWindow(SDL_Window *window)
 /// ```
 int sdlSyncWindow(Pointer<SdlWindow> window) {
   final sdlSyncWindowLookupFunction = libSdl3.lookupFunction<
@@ -1931,7 +1920,7 @@ int sdlSyncWindow(Pointer<SdlWindow> window) {
 /// \sa SDL_GetWindowSurface
 ///
 /// ```c
-/// extern DECLSPEC SDL_bool SDLCALL SDL_WindowHasSurface(SDL_Window *window)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_WindowHasSurface(SDL_Window *window)
 /// ```
 bool sdlWindowHasSurface(Pointer<SdlWindow> window) {
   final sdlWindowHasSurfaceLookupFunction = libSdl3.lookupFunction<
@@ -1966,7 +1955,7 @@ bool sdlWindowHasSurface(Pointer<SdlWindow> window) {
 /// \sa SDL_UpdateWindowSurfaceRects
 ///
 /// ```c
-/// extern DECLSPEC SDL_Surface *SDLCALL SDL_GetWindowSurface(SDL_Window *window)
+/// extern SDL_DECLSPEC SDL_Surface *SDLCALL SDL_GetWindowSurface(SDL_Window *window)
 /// ```
 Pointer<SdlSurface> sdlGetWindowSurface(Pointer<SdlWindow> window) {
   final sdlGetWindowSurfaceLookupFunction = libSdl3.lookupFunction<
@@ -1994,7 +1983,7 @@ Pointer<SdlSurface> sdlGetWindowSurface(Pointer<SdlWindow> window) {
 /// \sa SDL_UpdateWindowSurfaceRects
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_UpdateWindowSurface(SDL_Window *window)
+/// extern SDL_DECLSPEC int SDLCALL SDL_UpdateWindowSurface(SDL_Window *window)
 /// ```
 int sdlUpdateWindowSurface(Pointer<SdlWindow> window) {
   final sdlUpdateWindowSurfaceLookupFunction = libSdl3.lookupFunction<
@@ -2029,7 +2018,7 @@ int sdlUpdateWindowSurface(Pointer<SdlWindow> window) {
 /// \sa SDL_UpdateWindowSurface
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_UpdateWindowSurfaceRects(SDL_Window *window, const SDL_Rect *rects, int numrects)
+/// extern SDL_DECLSPEC int SDLCALL SDL_UpdateWindowSurfaceRects(SDL_Window *window, const SDL_Rect *rects, int numrects)
 /// ```
 int sdlUpdateWindowSurfaceRects(
     Pointer<SdlWindow> window, Pointer<SdlRect> rects, int numrects) {
@@ -2054,7 +2043,7 @@ int sdlUpdateWindowSurfaceRects(
 /// \sa SDL_WindowHasSurface
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_DestroyWindowSurface(SDL_Window *window)
+/// extern SDL_DECLSPEC int SDLCALL SDL_DestroyWindowSurface(SDL_Window *window)
 /// ```
 int sdlDestroyWindowSurface(Pointer<SdlWindow> window) {
   final sdlDestroyWindowSurfaceLookupFunction = libSdl3.lookupFunction<
@@ -2093,7 +2082,7 @@ int sdlDestroyWindowSurface(Pointer<SdlWindow> window) {
 /// \sa SDL_SetWindowMouseGrab
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_SetWindowKeyboardGrab(SDL_Window *window, SDL_bool grabbed)
+/// extern SDL_DECLSPEC int SDLCALL SDL_SetWindowKeyboardGrab(SDL_Window *window, SDL_bool grabbed)
 /// ```
 int sdlSetWindowKeyboardGrab(Pointer<SdlWindow> window, bool grabbed) {
   final sdlSetWindowKeyboardGrabLookupFunction = libSdl3.lookupFunction<
@@ -2119,7 +2108,7 @@ int sdlSetWindowKeyboardGrab(Pointer<SdlWindow> window, bool grabbed) {
 /// \sa SDL_SetWindowKeyboardGrab
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_SetWindowMouseGrab(SDL_Window *window, SDL_bool grabbed)
+/// extern SDL_DECLSPEC int SDLCALL SDL_SetWindowMouseGrab(SDL_Window *window, SDL_bool grabbed)
 /// ```
 int sdlSetWindowMouseGrab(Pointer<SdlWindow> window, bool grabbed) {
   final sdlSetWindowMouseGrabLookupFunction = libSdl3.lookupFunction<
@@ -2140,7 +2129,7 @@ int sdlSetWindowMouseGrab(Pointer<SdlWindow> window, bool grabbed) {
 /// \sa SDL_SetWindowKeyboardGrab
 ///
 /// ```c
-/// extern DECLSPEC SDL_bool SDLCALL SDL_GetWindowKeyboardGrab(SDL_Window *window)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetWindowKeyboardGrab(SDL_Window *window)
 /// ```
 bool sdlGetWindowKeyboardGrab(Pointer<SdlWindow> window) {
   final sdlGetWindowKeyboardGrabLookupFunction = libSdl3.lookupFunction<
@@ -2160,7 +2149,7 @@ bool sdlGetWindowKeyboardGrab(Pointer<SdlWindow> window) {
 /// \sa SDL_SetWindowKeyboardGrab
 ///
 /// ```c
-/// extern DECLSPEC SDL_bool SDLCALL SDL_GetWindowMouseGrab(SDL_Window *window)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetWindowMouseGrab(SDL_Window *window)
 /// ```
 bool sdlGetWindowMouseGrab(Pointer<SdlWindow> window) {
   final sdlGetWindowMouseGrabLookupFunction = libSdl3.lookupFunction<
@@ -2180,7 +2169,7 @@ bool sdlGetWindowMouseGrab(Pointer<SdlWindow> window) {
 /// \sa SDL_SetWindowKeyboardGrab
 ///
 /// ```c
-/// extern DECLSPEC SDL_Window *SDLCALL SDL_GetGrabbedWindow(void)
+/// extern SDL_DECLSPEC SDL_Window *SDLCALL SDL_GetGrabbedWindow(void)
 /// ```
 Pointer<SdlWindow> sdlGetGrabbedWindow() {
   final sdlGetGrabbedWindowLookupFunction = libSdl3.lookupFunction<
@@ -2207,7 +2196,7 @@ Pointer<SdlWindow> sdlGetGrabbedWindow() {
 /// \sa SDL_SetWindowMouseGrab
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_SetWindowMouseRect(SDL_Window *window, const SDL_Rect *rect)
+/// extern SDL_DECLSPEC int SDLCALL SDL_SetWindowMouseRect(SDL_Window *window, const SDL_Rect *rect)
 /// ```
 int sdlSetWindowMouseRect(Pointer<SdlWindow> window, Pointer<SdlRect> rect) {
   final sdlSetWindowMouseRectLookupFunction = libSdl3.lookupFunction<
@@ -2229,7 +2218,7 @@ int sdlSetWindowMouseRect(Pointer<SdlWindow> window, Pointer<SdlRect> rect) {
 /// \sa SDL_SetWindowMouseRect
 ///
 /// ```c
-/// extern DECLSPEC const SDL_Rect *SDLCALL SDL_GetWindowMouseRect(SDL_Window *window)
+/// extern SDL_DECLSPEC const SDL_Rect *SDLCALL SDL_GetWindowMouseRect(SDL_Window *window)
 /// ```
 Pointer<SdlRect> sdlGetWindowMouseRect(Pointer<SdlWindow> window) {
   final sdlGetWindowMouseRectLookupFunction = libSdl3.lookupFunction<
@@ -2257,7 +2246,7 @@ Pointer<SdlRect> sdlGetWindowMouseRect(Pointer<SdlWindow> window) {
 /// \sa SDL_GetWindowOpacity
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_SetWindowOpacity(SDL_Window *window, float opacity)
+/// extern SDL_DECLSPEC int SDLCALL SDL_SetWindowOpacity(SDL_Window *window, float opacity)
 /// ```
 int sdlSetWindowOpacity(Pointer<SdlWindow> window, double opacity) {
   final sdlSetWindowOpacityLookupFunction = libSdl3.lookupFunction<
@@ -2287,7 +2276,7 @@ int sdlSetWindowOpacity(Pointer<SdlWindow> window, double opacity) {
 /// \sa SDL_SetWindowOpacity
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_GetWindowOpacity(SDL_Window *window, float *out_opacity)
+/// extern SDL_DECLSPEC int SDLCALL SDL_GetWindowOpacity(SDL_Window *window, float *out_opacity)
 /// ```
 int sdlGetWindowOpacity(Pointer<SdlWindow> window, Pointer<Float> outOpacity) {
   final sdlGetWindowOpacityLookupFunction = libSdl3.lookupFunction<
@@ -2315,7 +2304,7 @@ int sdlGetWindowOpacity(Pointer<SdlWindow> window, Pointer<Float> outOpacity) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_SetWindowModalFor(SDL_Window *modal_window, SDL_Window *parent_window)
+/// extern SDL_DECLSPEC int SDLCALL SDL_SetWindowModalFor(SDL_Window *modal_window, SDL_Window *parent_window)
 /// ```
 int sdlSetWindowModalFor(
     Pointer<SdlWindow> modalWindow, Pointer<SdlWindow> parentWindow) {
@@ -2343,7 +2332,7 @@ int sdlSetWindowModalFor(
 /// \sa SDL_RaiseWindow
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_SetWindowInputFocus(SDL_Window *window)
+/// extern SDL_DECLSPEC int SDLCALL SDL_SetWindowInputFocus(SDL_Window *window)
 /// ```
 int sdlSetWindowInputFocus(Pointer<SdlWindow> window) {
   final sdlSetWindowInputFocusLookupFunction = libSdl3.lookupFunction<
@@ -2364,7 +2353,7 @@ int sdlSetWindowInputFocus(Pointer<SdlWindow> window) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_SetWindowFocusable(SDL_Window *window, SDL_bool focusable)
+/// extern SDL_DECLSPEC int SDLCALL SDL_SetWindowFocusable(SDL_Window *window, SDL_bool focusable)
 /// ```
 int sdlSetWindowFocusable(Pointer<SdlWindow> window, bool focusable) {
   final sdlSetWindowFocusableLookupFunction = libSdl3.lookupFunction<
@@ -2396,7 +2385,7 @@ int sdlSetWindowFocusable(Pointer<SdlWindow> window, bool focusable) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_ShowWindowSystemMenu(SDL_Window *window, int x, int y)
+/// extern SDL_DECLSPEC int SDLCALL SDL_ShowWindowSystemMenu(SDL_Window *window, int x, int y)
 /// ```
 int sdlShowWindowSystemMenu(Pointer<SdlWindow> window, int x, int y) {
   final sdlShowWindowSystemMenuLookupFunction = libSdl3.lookupFunction<
@@ -2447,7 +2436,7 @@ int sdlShowWindowSystemMenu(Pointer<SdlWindow> window, int x, int y) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_SetWindowHitTest(SDL_Window *window, SDL_HitTest callback, void *callback_data)
+/// extern SDL_DECLSPEC int SDLCALL SDL_SetWindowHitTest(SDL_Window *window, SDL_HitTest callback, void *callback_data)
 /// ```
 int sdlSetWindowHitTest(
     Pointer<SdlWindow> window,
@@ -2488,7 +2477,7 @@ int sdlSetWindowHitTest(
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_SetWindowShape(SDL_Window *window, SDL_Surface *shape)
+/// extern SDL_DECLSPEC int SDLCALL SDL_SetWindowShape(SDL_Window *window, SDL_Surface *shape)
 /// ```
 int sdlSetWindowShape(Pointer<SdlWindow> window, Pointer<SdlSurface> shape) {
   final sdlSetWindowShapeLookupFunction = libSdl3.lookupFunction<
@@ -2509,7 +2498,7 @@ int sdlSetWindowShape(Pointer<SdlWindow> window, Pointer<SdlSurface> shape) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_FlashWindow(SDL_Window *window, SDL_FlashOperation operation)
+/// extern SDL_DECLSPEC int SDLCALL SDL_FlashWindow(SDL_Window *window, SDL_FlashOperation operation)
 /// ```
 int sdlFlashWindow(Pointer<SdlWindow> window, int operation) {
   final sdlFlashWindowLookupFunction = libSdl3.lookupFunction<
@@ -2537,7 +2526,7 @@ int sdlFlashWindow(Pointer<SdlWindow> window, int operation) {
 /// \sa SDL_CreateWindowWithProperties
 ///
 /// ```c
-/// extern DECLSPEC void SDLCALL SDL_DestroyWindow(SDL_Window *window)
+/// extern SDL_DECLSPEC void SDLCALL SDL_DestroyWindow(SDL_Window *window)
 /// ```
 void sdlDestroyWindow(Pointer<SdlWindow> window) {
   final sdlDestroyWindowLookupFunction = libSdl3.lookupFunction<
@@ -2562,7 +2551,7 @@ void sdlDestroyWindow(Pointer<SdlWindow> window) {
 /// \sa SDL_EnableScreenSaver
 ///
 /// ```c
-/// extern DECLSPEC SDL_bool SDLCALL SDL_ScreenSaverEnabled(void)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_ScreenSaverEnabled(void)
 /// ```
 bool sdlScreenSaverEnabled() {
   final sdlScreenSaverEnabledLookupFunction =
@@ -2583,7 +2572,7 @@ bool sdlScreenSaverEnabled() {
 /// \sa SDL_ScreenSaverEnabled
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_EnableScreenSaver(void)
+/// extern SDL_DECLSPEC int SDLCALL SDL_EnableScreenSaver(void)
 /// ```
 int sdlEnableScreenSaver() {
   final sdlEnableScreenSaverLookupFunction =
@@ -2610,7 +2599,7 @@ int sdlEnableScreenSaver() {
 /// \sa SDL_ScreenSaverEnabled
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_DisableScreenSaver(void)
+/// extern SDL_DECLSPEC int SDLCALL SDL_DisableScreenSaver(void)
 /// ```
 int sdlDisableScreenSaver() {
   final sdlDisableScreenSaverLookupFunction =
@@ -2640,7 +2629,7 @@ int sdlDisableScreenSaver() {
 /// \sa SDL_GL_UnloadLibrary
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_GL_LoadLibrary(const char *path)
+/// extern SDL_DECLSPEC int SDLCALL SDL_GL_LoadLibrary(const char *path)
 /// ```
 int sdlGlLoadLibrary(String? path) {
   final sdlGlLoadLibraryLookupFunction = libSdl3.lookupFunction<
@@ -2704,7 +2693,7 @@ int sdlGlLoadLibrary(String? path) {
 /// \sa SDL_GL_UnloadLibrary
 ///
 /// ```c
-/// extern DECLSPEC SDL_FunctionPointer SDLCALL SDL_GL_GetProcAddress(const char *proc)
+/// extern SDL_DECLSPEC SDL_FunctionPointer SDLCALL SDL_GL_GetProcAddress(const char *proc)
 /// ```
 Pointer<NativeType> sdlGlGetProcAddress(String? proc) {
   final sdlGlGetProcAddressLookupFunction = libSdl3.lookupFunction<
@@ -2733,7 +2722,7 @@ Pointer<NativeType> sdlGlGetProcAddress(String? proc) {
 /// \sa SDL_GL_GetCurrentEGLDisplay
 ///
 /// ```c
-/// extern DECLSPEC SDL_FunctionPointer SDLCALL SDL_EGL_GetProcAddress(const char *proc)
+/// extern SDL_DECLSPEC SDL_FunctionPointer SDLCALL SDL_EGL_GetProcAddress(const char *proc)
 /// ```
 Pointer<NativeType> sdlEglGetProcAddress(String? proc) {
   final sdlEglGetProcAddressLookupFunction = libSdl3.lookupFunction<
@@ -2754,7 +2743,7 @@ Pointer<NativeType> sdlEglGetProcAddress(String? proc) {
 /// \sa SDL_GL_LoadLibrary
 ///
 /// ```c
-/// extern DECLSPEC void SDLCALL SDL_GL_UnloadLibrary(void)
+/// extern SDL_DECLSPEC void SDLCALL SDL_GL_UnloadLibrary(void)
 /// ```
 void sdlGlUnloadLibrary() {
   final sdlGlUnloadLibraryLookupFunction = libSdl3
@@ -2782,7 +2771,7 @@ void sdlGlUnloadLibrary() {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC SDL_bool SDLCALL SDL_GL_ExtensionSupported(const char *extension)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GL_ExtensionSupported(const char *extension)
 /// ```
 bool sdlGlExtensionSupported(String? extension) {
   final sdlGlExtensionSupportedLookupFunction = libSdl3.lookupFunction<
@@ -2804,7 +2793,7 @@ bool sdlGlExtensionSupported(String? extension) {
 /// \sa SDL_GL_SetAttribute
 ///
 /// ```c
-/// extern DECLSPEC void SDLCALL SDL_GL_ResetAttributes(void)
+/// extern SDL_DECLSPEC void SDLCALL SDL_GL_ResetAttributes(void)
 /// ```
 void sdlGlResetAttributes() {
   final sdlGlResetAttributesLookupFunction =
@@ -2832,7 +2821,7 @@ void sdlGlResetAttributes() {
 /// \sa SDL_GL_ResetAttributes
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_GL_SetAttribute(SDL_GLattr attr, int value)
+/// extern SDL_DECLSPEC int SDLCALL SDL_GL_SetAttribute(SDL_GLattr attr, int value)
 /// ```
 int sdlGlSetAttribute(int attr, int value) {
   final sdlGlSetAttributeLookupFunction = libSdl3.lookupFunction<
@@ -2855,7 +2844,7 @@ int sdlGlSetAttribute(int attr, int value) {
 /// \sa SDL_GL_SetAttribute
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_GL_GetAttribute(SDL_GLattr attr, int *value)
+/// extern SDL_DECLSPEC int SDLCALL SDL_GL_GetAttribute(SDL_GLattr attr, int *value)
 /// ```
 int sdlGlGetAttribute(int attr, Pointer<Int32> value) {
   final sdlGlGetAttributeLookupFunction = libSdl3.lookupFunction<
@@ -2885,7 +2874,7 @@ int sdlGlGetAttribute(int attr, Pointer<Int32> value) {
 /// \sa SDL_GL_MakeCurrent
 ///
 /// ```c
-/// extern DECLSPEC SDL_GLContext SDLCALL SDL_GL_CreateContext(SDL_Window *window)
+/// extern SDL_DECLSPEC SDL_GLContext SDLCALL SDL_GL_CreateContext(SDL_Window *window)
 /// ```
 Pointer<NativeType> sdlGlCreateContext(Pointer<SdlWindow> window) {
   final sdlGlCreateContextLookupFunction = libSdl3.lookupFunction<
@@ -2910,7 +2899,7 @@ Pointer<NativeType> sdlGlCreateContext(Pointer<SdlWindow> window) {
 /// \sa SDL_GL_CreateContext
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_GL_MakeCurrent(SDL_Window *window, SDL_GLContext context)
+/// extern SDL_DECLSPEC int SDLCALL SDL_GL_MakeCurrent(SDL_Window *window, SDL_GLContext context)
 /// ```
 int sdlGlMakeCurrent(Pointer<SdlWindow> window, Pointer<NativeType> context) {
   final sdlGlMakeCurrentLookupFunction = libSdl3.lookupFunction<
@@ -2929,7 +2918,7 @@ int sdlGlMakeCurrent(Pointer<SdlWindow> window, Pointer<NativeType> context) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC SDL_Window *SDLCALL SDL_GL_GetCurrentWindow(void)
+/// extern SDL_DECLSPEC SDL_Window *SDLCALL SDL_GL_GetCurrentWindow(void)
 /// ```
 Pointer<SdlWindow> sdlGlGetCurrentWindow() {
   final sdlGlGetCurrentWindowLookupFunction = libSdl3.lookupFunction<
@@ -2949,7 +2938,7 @@ Pointer<SdlWindow> sdlGlGetCurrentWindow() {
 /// \sa SDL_GL_MakeCurrent
 ///
 /// ```c
-/// extern DECLSPEC SDL_GLContext SDLCALL SDL_GL_GetCurrentContext(void)
+/// extern SDL_DECLSPEC SDL_GLContext SDLCALL SDL_GL_GetCurrentContext(void)
 /// ```
 Pointer<NativeType> sdlGlGetCurrentContext() {
   final sdlGlGetCurrentContextLookupFunction = libSdl3.lookupFunction<
@@ -2967,7 +2956,7 @@ Pointer<NativeType> sdlGlGetCurrentContext() {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC SDL_EGLDisplay SDLCALL SDL_EGL_GetCurrentEGLDisplay(void)
+/// extern SDL_DECLSPEC SDL_EGLDisplay SDLCALL SDL_EGL_GetCurrentEGLDisplay(void)
 /// ```
 Pointer<NativeType> sdlEglGetCurrentEglDisplay() {
   final sdlEglGetCurrentEglDisplayLookupFunction = libSdl3.lookupFunction<
@@ -2985,7 +2974,7 @@ Pointer<NativeType> sdlEglGetCurrentEglDisplay() {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC SDL_EGLConfig SDLCALL SDL_EGL_GetCurrentEGLConfig(void)
+/// extern SDL_DECLSPEC SDL_EGLConfig SDLCALL SDL_EGL_GetCurrentEGLConfig(void)
 /// ```
 Pointer<NativeType> sdlEglGetCurrentEglConfig() {
   final sdlEglGetCurrentEglConfigLookupFunction = libSdl3.lookupFunction<
@@ -3004,7 +2993,7 @@ Pointer<NativeType> sdlEglGetCurrentEglConfig() {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC SDL_EGLSurface SDLCALL SDL_EGL_GetWindowEGLSurface(SDL_Window *window)
+/// extern SDL_DECLSPEC SDL_EGLSurface SDLCALL SDL_EGL_GetWindowEGLSurface(SDL_Window *window)
 /// ```
 Pointer<NativeType> sdlEglGetWindowEglSurface(Pointer<SdlWindow> window) {
   final sdlEglGetWindowEglSurfaceLookupFunction = libSdl3.lookupFunction<
@@ -3037,7 +3026,7 @@ Pointer<NativeType> sdlEglGetWindowEglSurface(Pointer<SdlWindow> window) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC void SDLCALL SDL_EGL_SetEGLAttributeCallbacks(SDL_EGLAttribArrayCallback platformAttribCallback, SDL_EGLIntArrayCallback surfaceAttribCallback, SDL_EGLIntArrayCallback contextAttribCallback)
+/// extern SDL_DECLSPEC void SDLCALL SDL_EGL_SetEGLAttributeCallbacks(SDL_EGLAttribArrayCallback platformAttribCallback, SDL_EGLIntArrayCallback surfaceAttribCallback, SDL_EGLIntArrayCallback contextAttribCallback)
 /// ```
 void sdlEglSetEglAttributeCallbacks(
     Pointer<NativeFunction<SdlEglAttribArrayCallback>> platformAttribCallback,
@@ -3088,7 +3077,7 @@ void sdlEglSetEglAttributeCallbacks(
 /// \sa SDL_GL_GetSwapInterval
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_GL_SetSwapInterval(int interval)
+/// extern SDL_DECLSPEC int SDLCALL SDL_GL_SetSwapInterval(int interval)
 /// ```
 int sdlGlSetSwapInterval(int interval) {
   final sdlGlSetSwapIntervalLookupFunction = libSdl3.lookupFunction<
@@ -3115,7 +3104,7 @@ int sdlGlSetSwapInterval(int interval) {
 /// \sa SDL_GL_SetSwapInterval
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_GL_GetSwapInterval(int *interval)
+/// extern SDL_DECLSPEC int SDLCALL SDL_GL_GetSwapInterval(int *interval)
 /// ```
 int sdlGlGetSwapInterval(Pointer<Int32> interval) {
   final sdlGlGetSwapIntervalLookupFunction = libSdl3.lookupFunction<
@@ -3141,7 +3130,7 @@ int sdlGlGetSwapInterval(Pointer<Int32> interval) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_GL_SwapWindow(SDL_Window *window)
+/// extern SDL_DECLSPEC int SDLCALL SDL_GL_SwapWindow(SDL_Window *window)
 /// ```
 int sdlGlSwapWindow(Pointer<SdlWindow> window) {
   final sdlGlSwapWindowLookupFunction = libSdl3.lookupFunction<
@@ -3162,7 +3151,7 @@ int sdlGlSwapWindow(Pointer<SdlWindow> window) {
 /// \sa SDL_GL_CreateContext
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_GL_DeleteContext(SDL_GLContext context)
+/// extern SDL_DECLSPEC int SDLCALL SDL_GL_DeleteContext(SDL_GLContext context)
 /// ```
 int sdlGlDeleteContext(Pointer<NativeType> context) {
   final sdlGlDeleteContextLookupFunction = libSdl3.lookupFunction<

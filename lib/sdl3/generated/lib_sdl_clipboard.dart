@@ -16,7 +16,7 @@ import 'lib_sdl.dart';
 /// \sa SDL_HasClipboardText
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_SetClipboardText(const char *text)
+/// extern SDL_DECLSPEC int SDLCALL SDL_SetClipboardText(const char *text)
 /// ```
 int sdlSetClipboardText(String? text) {
   final sdlSetClipboardTextLookupFunction = libSdl3.lookupFunction<
@@ -45,7 +45,7 @@ int sdlSetClipboardText(String? text) {
 /// \sa SDL_SetClipboardText
 ///
 /// ```c
-/// extern DECLSPEC char * SDLCALL SDL_GetClipboardText(void)
+/// extern SDL_DECLSPEC char * SDLCALL SDL_GetClipboardText(void)
 /// ```
 Pointer<Int8> sdlGetClipboardText() {
   final sdlGetClipboardTextLookupFunction = libSdl3.lookupFunction<
@@ -65,7 +65,7 @@ Pointer<Int8> sdlGetClipboardText() {
 /// \sa SDL_SetClipboardText
 ///
 /// ```c
-/// extern DECLSPEC SDL_bool SDLCALL SDL_HasClipboardText(void)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_HasClipboardText(void)
 /// ```
 bool sdlHasClipboardText() {
   final sdlHasClipboardTextLookupFunction = libSdl3
@@ -86,7 +86,7 @@ bool sdlHasClipboardText() {
 /// \sa SDL_HasPrimarySelectionText
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_SetPrimarySelectionText(const char *text)
+/// extern SDL_DECLSPEC int SDLCALL SDL_SetPrimarySelectionText(const char *text)
 /// ```
 int sdlSetPrimarySelectionText(String? text) {
   final sdlSetPrimarySelectionTextLookupFunction = libSdl3.lookupFunction<
@@ -116,7 +116,7 @@ int sdlSetPrimarySelectionText(String? text) {
 /// \sa SDL_SetPrimarySelectionText
 ///
 /// ```c
-/// extern DECLSPEC char * SDLCALL SDL_GetPrimarySelectionText(void)
+/// extern SDL_DECLSPEC char * SDLCALL SDL_GetPrimarySelectionText(void)
 /// ```
 Pointer<Int8> sdlGetPrimarySelectionText() {
   final sdlGetPrimarySelectionTextLookupFunction = libSdl3.lookupFunction<
@@ -138,7 +138,7 @@ Pointer<Int8> sdlGetPrimarySelectionText() {
 /// \sa SDL_SetPrimarySelectionText
 ///
 /// ```c
-/// extern DECLSPEC SDL_bool SDLCALL SDL_HasPrimarySelectionText(void)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_HasPrimarySelectionText(void)
 /// ```
 bool sdlHasPrimarySelectionText() {
   final sdlHasPrimarySelectionTextLookupFunction =
@@ -176,7 +176,7 @@ bool sdlHasPrimarySelectionText() {
 /// \sa SDL_HasClipboardData
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_SetClipboardData(SDL_ClipboardDataCallback callback, SDL_ClipboardCleanupCallback cleanup, void *userdata, const char **mime_types, size_t num_mime_types)
+/// extern SDL_DECLSPEC int SDLCALL SDL_SetClipboardData(SDL_ClipboardDataCallback callback, SDL_ClipboardCleanupCallback cleanup, void *userdata, const char **mime_types, size_t num_mime_types)
 /// ```
 int sdlSetClipboardData(
     Pointer<NativeFunction<SdlClipboardDataCallback>> callback,
@@ -212,7 +212,7 @@ int sdlSetClipboardData(
 /// \sa SDL_SetClipboardData
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_ClearClipboardData(void)
+/// extern SDL_DECLSPEC int SDLCALL SDL_ClearClipboardData(void)
 /// ```
 int sdlClearClipboardData() {
   final sdlClearClipboardDataLookupFunction =
@@ -239,7 +239,7 @@ int sdlClearClipboardData() {
 /// \sa SDL_SetClipboardData
 ///
 /// ```c
-/// extern DECLSPEC void *SDLCALL SDL_GetClipboardData(const char *mime_type, size_t *size)
+/// extern SDL_DECLSPEC void *SDLCALL SDL_GetClipboardData(const char *mime_type, size_t *size)
 /// ```
 Pointer<NativeType> sdlGetClipboardData(
     String? mimeType, Pointer<Uint32> size) {
@@ -267,7 +267,7 @@ Pointer<NativeType> sdlGetClipboardData(
 /// \sa SDL_GetClipboardData
 ///
 /// ```c
-/// extern DECLSPEC SDL_bool SDLCALL SDL_HasClipboardData(const char *mime_type)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_HasClipboardData(const char *mime_type)
 /// ```
 bool sdlHasClipboardData(String? mimeType) {
   final sdlHasClipboardDataLookupFunction = libSdl3.lookupFunction<

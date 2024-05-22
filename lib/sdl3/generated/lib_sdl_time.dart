@@ -21,7 +21,7 @@ import 'struct_sdl.dart';
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_GetDateTimeLocalePreferences(SDL_DateFormat *dateFormat, SDL_TimeFormat *timeFormat)
+/// extern SDL_DECLSPEC int SDLCALL SDL_GetDateTimeLocalePreferences(SDL_DateFormat *dateFormat, SDL_TimeFormat *timeFormat)
 /// ```
 int sdlGetDateTimeLocalePreferences(
     Pointer<Int32> dateFormat, Pointer<Int32> timeFormat) {
@@ -43,7 +43,7 @@ int sdlGetDateTimeLocalePreferences(
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_GetCurrentTime(SDL_Time *ticks)
+/// extern SDL_DECLSPEC int SDLCALL SDL_GetCurrentTime(SDL_Time *ticks)
 /// ```
 int sdlGetCurrentTime(Pointer<Int64> ticks) {
   final sdlGetCurrentTimeLookupFunction = libSdl3.lookupFunction<
@@ -67,7 +67,7 @@ int sdlGetCurrentTime(Pointer<Int64> ticks) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_TimeToDateTime(SDL_Time ticks, SDL_DateTime *dt, SDL_bool localTime)
+/// extern SDL_DECLSPEC int SDLCALL SDL_TimeToDateTime(SDL_Time ticks, SDL_DateTime *dt, SDL_bool localTime)
 /// ```
 int sdlTimeToDateTime(int ticks, Pointer<SdlDateTime> dt, bool localTime) {
   final sdlTimeToDateTimeLookupFunction = libSdl3.lookupFunction<
@@ -91,7 +91,7 @@ int sdlTimeToDateTime(int ticks, Pointer<SdlDateTime> dt, bool localTime) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_DateTimeToTime(const SDL_DateTime *dt, SDL_Time *ticks)
+/// extern SDL_DECLSPEC int SDLCALL SDL_DateTimeToTime(const SDL_DateTime *dt, SDL_Time *ticks)
 /// ```
 int sdlDateTimeToTime(Pointer<SdlDateTime> dt, Pointer<Int64> ticks) {
   final sdlDateTimeToTimeLookupFunction = libSdl3.lookupFunction<
@@ -116,7 +116,7 @@ int sdlDateTimeToTime(Pointer<SdlDateTime> dt, Pointer<Int64> ticks) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC void SDLCALL SDL_TimeToWindows(SDL_Time ticks, Uint32 *dwLowDateTime, Uint32 *dwHighDateTime)
+/// extern SDL_DECLSPEC void SDLCALL SDL_TimeToWindows(SDL_Time ticks, Uint32 *dwLowDateTime, Uint32 *dwHighDateTime)
 /// ```
 void sdlTimeToWindows(
     int ticks, Pointer<Uint32> dwLowDateTime, Pointer<Uint32> dwHighDateTime) {
@@ -142,7 +142,7 @@ void sdlTimeToWindows(
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC SDL_Time SDLCALL SDL_TimeFromWindows(Uint32 dwLowDateTime, Uint32 dwHighDateTime)
+/// extern SDL_DECLSPEC SDL_Time SDLCALL SDL_TimeFromWindows(Uint32 dwLowDateTime, Uint32 dwHighDateTime)
 /// ```
 int sdlTimeFromWindows(int dwLowDateTime, int dwHighDateTime) {
   final sdlTimeFromWindowsLookupFunction = libSdl3.lookupFunction<
@@ -163,7 +163,7 @@ int sdlTimeFromWindows(int dwLowDateTime, int dwHighDateTime) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_GetDaysInMonth(int year, int month)
+/// extern SDL_DECLSPEC int SDLCALL SDL_GetDaysInMonth(int year, int month)
 /// ```
 int sdlGetDaysInMonth(int year, int month) {
   final sdlGetDaysInMonthLookupFunction = libSdl3.lookupFunction<
@@ -184,7 +184,7 @@ int sdlGetDaysInMonth(int year, int month) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_GetDayOfYear(int year, int month, int day)
+/// extern SDL_DECLSPEC int SDLCALL SDL_GetDayOfYear(int year, int month, int day)
 /// ```
 int sdlGetDayOfYear(int year, int month, int day) {
   final sdlGetDayOfYearLookupFunction = libSdl3.lookupFunction<
@@ -205,7 +205,7 @@ int sdlGetDayOfYear(int year, int month, int day) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern DECLSPEC int SDLCALL SDL_GetDayOfWeek(int year, int month, int day)
+/// extern SDL_DECLSPEC int SDLCALL SDL_GetDayOfWeek(int year, int month, int day)
 /// ```
 int sdlGetDayOfWeek(int year, int month, int day) {
   final sdlGetDayOfWeekLookupFunction = libSdl3.lookupFunction<
