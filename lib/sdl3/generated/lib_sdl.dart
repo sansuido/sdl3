@@ -147,16 +147,6 @@ typedef SdlAndroidRequestPermissionCallback = Void Function(
 typedef SdlThreadFunctionDart = int Function(Pointer<NativeType> data);
 typedef SdlThreadFunction = Int32 Function(Pointer<NativeType> data);
 
-// typedef uintptr_t (__cdecl * pfnSDL_CurrentBeginThread) (void *, unsigned, unsigned (__stdcall *func)(void *), void * , unsigned, unsigned * )
-typedef PfnSdlCurrentBeginThreadDart = Pointer<NativeType> Function(
-    Pointer<NativeType> arg0);
-typedef PfnSdlCurrentBeginThread = Pointer<NativeType> Function(
-    Pointer<NativeType> arg0);
-
-// typedef void (__cdecl * pfnSDL_CurrentEndThread) (unsigned code)
-typedef PfnSdlCurrentEndThreadDart = void Function(Pointer<NativeType> code);
-typedef PfnSdlCurrentEndThread = Void Function(Pointer<NativeType> code);
-
 // typedef Uint32 (SDLCALL *SDL_TimerCallback)(Uint32 interval, void *param)
 typedef SdlTimerCallbackDart = int Function(
     int interval, Pointer<NativeType> param);

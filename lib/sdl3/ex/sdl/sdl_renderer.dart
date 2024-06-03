@@ -415,6 +415,57 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
     return gfx.stringRgba(this, p.x, p.y, s, r, g, b, a);
   }
 
+  int stringAnchorRgba(math.Point<double> p, String s,
+      math.Point<double> anchorPoint, int r, int g, int b, int a,
+      {int? charRotation}) {
+    int result = 0;
+    double curx = p.x;
+    double cury = p.y;
+    double stringWidth = s.length * gfx.charWidthLocal.toDouble();
+    double stringHeight = gfx.charHeightLocal.toDouble();
+    double calcx = 0;
+    double calcy = 0;
+    charRotation ??= gfx.charRotation;
+    switch (charRotation) {
+      case 0:
+        calcx = -stringWidth * anchorPoint.x;
+        calcy = -stringHeight * anchorPoint.y;
+        break;
+      case 2:
+        calcx = stringWidth * anchorPoint.x;
+        calcy = -stringHeight * anchorPoint.y;
+        break;
+      case 1:
+        calcx = -stringHeight * anchorPoint.y;
+        calcy = -stringWidth * anchorPoint.x;
+        break;
+      case 3:
+        calcx = -stringHeight * anchorPoint.y;
+        calcy = stringWidth * anchorPoint.x;
+        break;
+    }
+    for (var i = 0; i < s.length; i++) {
+      var curchar = s[i];
+      result |= gfx.characterRgba(
+          this, curx + calcx, cury + calcy, curchar.codeUnitAt(0), r, g, b, a);
+      switch (charRotation) {
+        case 0:
+          curx += gfx.charWidthLocal;
+          break;
+        case 2:
+          curx -= gfx.charWidthLocal;
+          break;
+        case 1:
+          cury += gfx.charHeightLocal;
+          break;
+        case 3:
+          cury -= gfx.charHeightLocal;
+          break;
+      }
+    }
+    return result;
+  }
+
   // lib_sdl_image.dart
   Pointer<SdlTexture> loadTexture(String file) {
     // 358

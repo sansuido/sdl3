@@ -5,93 +5,176 @@ import 'lib_sdl.dart';
 import 'struct_sdl.dart';
 
 ///
-/// Create a SDL Thread
+/// Create a new thread with a default stack size.
 ///
-/// \param fn Thread function
-/// \param name name
-/// \param data some data
-/// \param pfnBeginThread begin function
-/// \param pfnEndThread end function
+/// This is a convenience function, equivalent to calling
+/// SDL_CreateThreadWithProperties with the following properties set:
 ///
-/// \returns SDL_Thread pointer
+/// - `SDL_PROP_THREAD_CREATE_ENTRY_FUNCTION_POINTER`: `fn`
+/// - `SDL_PROP_THREAD_CREATE_NAME_STRING`: `name`
+/// - `SDL_PROP_THREAD_CREATE_USERDATA_POINTER`: `data`
+///
+/// Note that this "function" is actually a macro that calls an internal
+/// function with two extra parameters not listed here; they are hidden through
+/// preprocessor macros and are needed to support various C runtimes at the
+/// point of the function call. Language bindings that aren't using the C
+/// headers will need to deal with this.
+///
+/// Usually, apps should just call this function the same way on every platform
+/// and let the macros hide the details.
+///
+/// \param fn the SDL_ThreadFunction function to call in the new thread
+/// \param name the name of the thread
+/// \param data a pointer that is passed to `fn`
+/// \returns an opaque pointer to the new thread object on success, NULL if the
+/// new thread could not be created; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
-/// /
+///
+/// \sa SDL_CreateThreadWithProperties
+/// \sa SDL_WaitThread
+///
 /// ```c
-/// extern SDL_DECLSPEC SDL_Thread *SDLCALL SDL_CreateThread(SDL_ThreadFunction fn, const char *name, void *data, pfnSDL_CurrentBeginThread pfnBeginThread, pfnSDL_CurrentEndThread pfnEndThread)
+/// extern SDL_DECLSPEC SDL_Thread * SDLCALL SDL_CreateThread(SDL_ThreadFunction fn, const char *name, void *data)
 /// ```
 Pointer<SdlThread> sdlCreateThread(
     Pointer<NativeFunction<SdlThreadFunction>> fn,
     String? name,
-    Pointer<NativeType> data,
-    Pointer<NativeFunction<PfnSdlCurrentBeginThread>> pfnBeginThread,
-    Pointer<NativeFunction<PfnSdlCurrentEndThread>> pfnEndThread) {
+    Pointer<NativeType> data) {
   final sdlCreateThreadLookupFunction = libSdl3.lookupFunction<
-          Pointer<SdlThread> Function(
-              Pointer<NativeFunction<SdlThreadFunction>> fn,
-              Pointer<Utf8> name,
-              Pointer<NativeType> data,
-              Pointer<NativeFunction<PfnSdlCurrentBeginThread>> pfnBeginThread,
-              Pointer<NativeFunction<PfnSdlCurrentEndThread>> pfnEndThread),
-          Pointer<SdlThread> Function(
-              Pointer<NativeFunction<SdlThreadFunction>> fn,
-              Pointer<Utf8> name,
-              Pointer<NativeType> data,
-              Pointer<NativeFunction<PfnSdlCurrentBeginThread>> pfnBeginThread,
-              Pointer<NativeFunction<PfnSdlCurrentEndThread>> pfnEndThread)>(
-      'SDL_CreateThread');
+      Pointer<SdlThread> Function(Pointer<NativeFunction<SdlThreadFunction>> fn,
+          Pointer<Utf8> name, Pointer<NativeType> data),
+      Pointer<SdlThread> Function(Pointer<NativeFunction<SdlThreadFunction>> fn,
+          Pointer<Utf8> name, Pointer<NativeType> data)>('SDL_CreateThread');
   final namePointer = name != null ? name.toNativeUtf8() : nullptr;
-  final result = sdlCreateThreadLookupFunction(
-      fn, namePointer, data, pfnBeginThread, pfnEndThread);
+  final result = sdlCreateThreadLookupFunction(fn, namePointer, data);
   calloc.free(namePointer);
   return result;
 }
 
 ///
-/// Create a SDL Thread, with explicit stack size
+/// Create a new thread with with the specified properties.
 ///
-/// \param fn Thread function
-/// \param name name
-/// \param stacksize stack size
-/// \param data some data
-/// \param pfnBeginThread begin function
-/// \param pfnEndThread end function
+/// These are the supported properties:
 ///
-/// \returns SDL_Thread pointer
+/// - `SDL_PROP_THREAD_CREATE_ENTRY_FUNCTION_POINTER`: an SDL_ThreadFunction
+/// value that will be called at the start of the new thread's life.
+/// Required.
+/// - `SDL_PROP_THREAD_CREATE_NAME_STRING`: the name of the new thread, which
+/// might be available to debuggers. Optional, defaults to NULL.
+/// - `SDL_PROP_THREAD_CREATE_USERDATA_POINTER`: an arbitrary app-defined
+/// pointer, which is passed to the entry function on the new thread, as its
+/// only parameter. Optional, defaults to NULL.
+/// - `SDL_PROP_THREAD_CREATE_STACKSIZE_NUMBER`: the size, in bytes, of the new
+/// thread's stack. Optional, defaults to 0 (system-defined default).
+///
+/// SDL makes an attempt to report `SDL_PROP_THREAD_CREATE_NAME_STRING` to the
+/// system, so that debuggers can display it. Not all platforms support this.
+///
+/// Thread naming is a little complicated: Most systems have very small limits
+/// for the string length (Haiku has 32 bytes, Linux currently has 16, Visual
+/// C++ 6.0 has _nine_!), and possibly other arbitrary rules. You'll have to
+/// see what happens with your system's debugger. The name should be UTF-8 (but
+/// using the naming limits of C identifiers is a better bet). There are no
+/// requirements for thread naming conventions, so long as the string is
+/// null-terminated UTF-8, but these guidelines are helpful in choosing a name:
+///
+/// https://stackoverflow.com/questions/149932/naming-conventions-for-threads
+///
+/// If a system imposes requirements, SDL will try to munge the string for it
+/// (truncate, etc), but the original string contents will be available from
+/// SDL_GetThreadName().
+///
+/// The size (in bytes) of the new stack can be specified with
+/// `SDL_PROP_THREAD_CREATE_STACKSIZE_NUMBER`. Zero means "use the system
+/// default" which might be wildly different between platforms. x86 Linux
+/// generally defaults to eight megabytes, an embedded device might be a few
+/// kilobytes instead. You generally need to specify a stack that is a multiple
+/// of the system's page size (in many cases, this is 4 kilobytes, but check
+/// your system documentation).
+///
+/// Note that this "function" is actually a macro that calls an internal
+/// function with two extra parameters not listed here; they are hidden through
+/// preprocessor macros and are needed to support various C runtimes at the
+/// point of the function call. Language bindings that aren't using the C
+/// headers will need to deal with this.
+///
+/// The actual symbol in SDL is `SDL_CreateThreadWithPropertiesRuntime`, so
+/// there is no symbol clash, but trying to load an SDL shared library and look
+/// for "SDL_CreateThreadWithProperties" will fail.
+///
+/// Usually, apps should just call this function the same way on every platform
+/// and let the macros hide the details.
+///
+/// \param props the properties to use
+/// \returns an opaque pointer to the new thread object on success, NULL if the
+/// new thread could not be created; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
-/// /
+///
+/// \sa SDL_CreateThread
+/// \sa SDL_WaitThread
+///
 /// ```c
-/// extern SDL_DECLSPEC SDL_Thread *SDLCALL SDL_CreateThreadWithStackSize(SDL_ThreadFunction fn, const char *name, const size_t stacksize, void *data, pfnSDL_CurrentBeginThread pfnBeginThread, pfnSDL_CurrentEndThread pfnEndThread)
+/// extern SDL_DECLSPEC SDL_Thread * SDLCALL SDL_CreateThreadWithProperties(SDL_PropertiesID props)
 /// ```
-Pointer<SdlThread> sdlCreateThreadWithStackSize(
+Pointer<SdlThread> sdlCreateThreadWithProperties(int props) {
+  final sdlCreateThreadWithPropertiesLookupFunction = libSdl3.lookupFunction<
+      Pointer<SdlThread> Function(Uint32 props),
+      Pointer<SdlThread> Function(int props)>('SDL_CreateThreadWithProperties');
+  return sdlCreateThreadWithPropertiesLookupFunction(props);
+}
+
+/// These are the actual functions exported from SDL! Don't use them directly! Use the SDL_CreateThread and SDL_CreateThreadWithProperties macros!
+/// ```c
+/// extern SDL_DECLSPEC SDL_Thread *SDLCALL SDL_CreateThreadRuntime(SDL_ThreadFunction fn, const char *name, void *data, SDL_FunctionPointer pfnBeginThread, SDL_FunctionPointer pfnEndThread)
+/// ```
+Pointer<SdlThread> sdlCreateThreadRuntime(
     Pointer<NativeFunction<SdlThreadFunction>> fn,
     String? name,
-    int stacksize,
     Pointer<NativeType> data,
-    Pointer<NativeFunction<PfnSdlCurrentBeginThread>> pfnBeginThread,
-    Pointer<NativeFunction<PfnSdlCurrentEndThread>> pfnEndThread) {
-  final sdlCreateThreadWithStackSizeLookupFunction = libSdl3.lookupFunction<
-          Pointer<SdlThread> Function(
-              Pointer<NativeFunction<SdlThreadFunction>> fn,
-              Pointer<Utf8> name,
-              Uint32 stacksize,
-              Pointer<NativeType> data,
-              Pointer<NativeFunction<PfnSdlCurrentBeginThread>> pfnBeginThread,
-              Pointer<NativeFunction<PfnSdlCurrentEndThread>> pfnEndThread),
-          Pointer<SdlThread> Function(
-              Pointer<NativeFunction<SdlThreadFunction>> fn,
-              Pointer<Utf8> name,
-              int stacksize,
-              Pointer<NativeType> data,
-              Pointer<NativeFunction<PfnSdlCurrentBeginThread>> pfnBeginThread,
-              Pointer<NativeFunction<PfnSdlCurrentEndThread>> pfnEndThread)>(
-      'SDL_CreateThreadWithStackSize');
+    Pointer<NativeType> pfnBeginThread,
+    Pointer<NativeType> pfnEndThread) {
+  final sdlCreateThreadRuntimeLookupFunction = libSdl3.lookupFunction<
+      Pointer<SdlThread> Function(
+          Pointer<NativeFunction<SdlThreadFunction>> fn,
+          Pointer<Utf8> name,
+          Pointer<NativeType> data,
+          Pointer<NativeType> pfnBeginThread,
+          Pointer<NativeType> pfnEndThread),
+      Pointer<SdlThread> Function(
+          Pointer<NativeFunction<SdlThreadFunction>> fn,
+          Pointer<Utf8> name,
+          Pointer<NativeType> data,
+          Pointer<NativeType> pfnBeginThread,
+          Pointer<NativeType> pfnEndThread)>('SDL_CreateThreadRuntime');
   final namePointer = name != null ? name.toNativeUtf8() : nullptr;
-  final result = sdlCreateThreadWithStackSizeLookupFunction(
-      fn, namePointer, stacksize, data, pfnBeginThread, pfnEndThread);
+  final result = sdlCreateThreadRuntimeLookupFunction(
+      fn, namePointer, data, pfnBeginThread, pfnEndThread);
   calloc.free(namePointer);
   return result;
+}
+
+/// ```c
+/// extern SDL_DECLSPEC SDL_Thread *SDLCALL SDL_CreateThreadWithPropertiesRuntime(SDL_PropertiesID props, SDL_FunctionPointer pfnBeginThread, SDL_FunctionPointer pfnEndThread)
+/// ```
+Pointer<SdlThread> sdlCreateThreadWithPropertiesRuntime(int props,
+    Pointer<NativeType> pfnBeginThread, Pointer<NativeType> pfnEndThread) {
+  final sdlCreateThreadWithPropertiesRuntimeLookupFunction =
+      libSdl3.lookupFunction<
+              Pointer<SdlThread> Function(
+                  Uint32 props,
+                  Pointer<NativeType> pfnBeginThread,
+                  Pointer<NativeType> pfnEndThread),
+              Pointer<SdlThread> Function(
+                  int props,
+                  Pointer<NativeType> pfnBeginThread,
+                  Pointer<NativeType> pfnEndThread)>(
+          'SDL_CreateThreadWithPropertiesRuntime');
+  return sdlCreateThreadWithPropertiesRuntimeLookupFunction(
+      props, pfnBeginThread, pfnEndThread);
 }
 
 ///

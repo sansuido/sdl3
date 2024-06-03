@@ -147,6 +147,8 @@ void sdlMemoryBarrierAcquireFunction() {
 /// \param newval the new value
 /// \returns SDL_TRUE if the atomic variable was set, SDL_FALSE otherwise.
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_AtomicCompareAndSwapPointer
@@ -174,6 +176,8 @@ bool sdlAtomicCompareAndSwap(Pointer<SdlAtomicInt> a, int oldval, int newval) {
 /// \param v the desired value
 /// \returns the previous value of the atomic variable.
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_AtomicGet
@@ -196,6 +200,8 @@ int sdlAtomicSet(Pointer<SdlAtomicInt> a, int v) {
 ///
 /// \param a a pointer to an SDL_AtomicInt variable
 /// \returns the current value of an atomic variable.
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -223,6 +229,8 @@ int sdlAtomicGet(Pointer<SdlAtomicInt> a) {
 /// \param v the desired value to add
 /// \returns the previous value of the atomic variable.
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_AtomicDecRef
@@ -248,6 +256,8 @@ int sdlAtomicAdd(Pointer<SdlAtomicInt> a, int v) {
 /// \param oldval the old pointer value
 /// \param newval the new pointer value
 /// \returns SDL_TRUE if the pointer was set, SDL_FALSE otherwise.
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -278,6 +288,8 @@ bool sdlAtomicCompareAndSwapPointer(Pointer<Pointer<NativeType>> a,
 /// \param v the desired pointer value
 /// \returns the previous value of the pointer.
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_AtomicCompareAndSwapPointer
@@ -304,6 +316,8 @@ Pointer<NativeType> sdlAtomicSetPtr(
 ///
 /// \param a a pointer to a pointer
 /// \returns the current value of a pointer.
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///

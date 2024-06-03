@@ -737,6 +737,10 @@ int sdlGetWindowPixelFormat(Pointer<SdlWindow> window) {
 /// If SDL_WINDOW_METAL is specified on an OS that does not support Metal,
 /// SDL_CreateWindow() will fail.
 ///
+/// If you intend to use this window with an SDL_Renderer, you should use
+/// SDL_CreateWindowAndRenderer() instead of this function, to avoid window
+/// flicker.
+///
 /// On non-Apple devices, SDL requires you to either not link to the Vulkan
 /// loader or link to a dynamic library version. This limitation may be removed
 /// in a future version of SDL.
@@ -929,6 +933,16 @@ Pointer<SdlWindow> sdlCreatePopupWindow(Pointer<SdlWindow> parent, int offsetX,
 ///
 /// Windows with the "tooltip" and "menu" properties are popup windows and have
 /// the behaviors and guidelines outlined in SDL_CreatePopupWindow().
+///
+/// If this window is being created to be used with an SDL_Renderer, you should
+/// not add a graphics API specific property
+/// (`SDL_PROP_WINDOW_CREATE_OPENGL_BOOLEAN`, etc), as SDL will handle that
+/// internally when it chooses a renderer. However, SDL might need to recreate
+/// your window at that point, which may cause the window to appear briefly,
+/// and then flicker as it is recreated. The correct approach to this is to
+/// create the window with the `SDL_PROP_WINDOW_CREATE_HIDDEN_BOOLEAN` property
+/// set to true, then create the renderer, then show the window with
+/// SDL_ShowWindow().
 ///
 /// \param props the properties to use
 /// \returns the window that was created or NULL on failure; call

@@ -150,6 +150,8 @@ void sdlDelayNs(int ns) {
 /// \returns a timer ID or 0 if an error occurs; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_RemoveTimer

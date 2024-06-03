@@ -247,6 +247,8 @@ void sdlIOsSetEventPump(bool enabled) {
 /// \returns a pointer to Java native interface object (JNIEnv) to which the
 /// current thread is attached, or 0 on error.
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_AndroidGetActivity
@@ -276,6 +278,8 @@ Pointer<NativeType> sdlAndroidGetJniEnv() {
 ///
 /// \returns the jobject representing the instance of the Activity class of the
 /// Android application, or NULL on error.
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -384,6 +388,8 @@ bool sdlIsDeXMode() {
 
 ///
 /// Trigger the Android system back button behavior.
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -512,6 +518,8 @@ String? sdlAndroidGetExternalStoragePath() {
 /// submitting. The result of the request is only ever reported
 /// through the callback, not this return value.
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
@@ -560,6 +568,8 @@ int sdlAndroidRequestPermission(
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
@@ -588,6 +598,8 @@ int sdlAndroidShowToast(
 /// \param param user parameter
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
