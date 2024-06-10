@@ -1328,9 +1328,6 @@ int sdlGetWindowPosition(
 ///
 /// Request that the size of a window's client area be set.
 ///
-/// NULL can safely be passed as the `w` or `h` parameter if the width or
-/// height value is not desired.
-///
 /// If, at the time of this request, the window in a fixed-size state, such as
 /// maximized or fullscreen, the request will be deferred until the window
 /// exits this state and becomes resizable again.
@@ -1376,9 +1373,6 @@ int sdlSetWindowSize(Pointer<SdlWindow> window, int w, int h) {
 ///
 /// Get the size of a window's client area.
 ///
-/// NULL can safely be passed as the `w` or `h` parameter if the width or
-/// height value is not desired.
-///
 /// The window pixel size may differ from its window coordinate size if the
 /// window is on a high pixel density display. Use SDL_GetWindowSizeInPixels()
 /// or SDL_GetRenderOutputSize() to get the real client area size in pixels.
@@ -1406,6 +1400,84 @@ int sdlGetWindowSize(
       int Function(Pointer<SdlWindow> window, Pointer<Int32> w,
           Pointer<Int32> h)>('SDL_GetWindowSize');
   return sdlGetWindowSizeLookupFunction(window, w, h);
+}
+
+///
+/// Request that the aspect ratio of a window's client area be set.
+///
+/// The aspect ratio is the ratio of width divided by height, e.g. 2560x1600
+/// would be 1.6. Larger aspect ratios are wider and smaller aspect ratios are
+/// narrower.
+///
+/// If, at the time of this request, the window in a fixed-size state, such as
+/// maximized or fullscreen, the request will be deferred until the window
+/// exits this state and becomes resizable again.
+///
+/// On some windowing systems, this request is asynchronous and the new window
+/// aspect ratio may not have have been applied immediately upon the return of
+/// this function. If an immediate change is required, call SDL_SyncWindow() to
+/// block until the changes have taken effect.
+///
+/// When the window size changes, an SDL_EVENT_WINDOW_RESIZED event will be
+/// emitted with the new window dimensions. Note that the new dimensions may
+/// not match the exact aspect ratio requested, as some windowing systems can
+/// restrict the window size in certain scenarios (e.g. constraining the size
+/// of the content area to remain within the usable desktop bounds).
+/// Additionally, as this is just a request, it can be denied by the windowing
+/// system.
+///
+/// \param window the window to change
+/// \param min_aspect the minimum aspect ratio of the window, or 0.0f for no
+/// limit
+/// \param max_aspect the maximum aspect ratio of the window, or 0.0f for no
+/// limit
+/// \returns 0 on success or a negative error code on failure; call
+/// SDL_GetError() for more information.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_GetWindowAspectRatio
+/// \sa SDL_SyncWindow
+///
+/// ```c
+/// extern SDL_DECLSPEC int SDLCALL SDL_SetWindowAspectRatio(SDL_Window *window, float min_aspect, float max_aspect)
+/// ```
+int sdlSetWindowAspectRatio(
+    Pointer<SdlWindow> window, double minAspect, double maxAspect) {
+  final sdlSetWindowAspectRatioLookupFunction = libSdl3.lookupFunction<
+      Int32 Function(
+          Pointer<SdlWindow> window, Float minAspect, Float maxAspect),
+      int Function(Pointer<SdlWindow> window, double minAspect,
+          double maxAspect)>('SDL_SetWindowAspectRatio');
+  return sdlSetWindowAspectRatioLookupFunction(window, minAspect, maxAspect);
+}
+
+///
+/// Get the size of a window's client area.
+///
+/// \param window the window to query the width and height from
+/// \param min_aspect a pointer filled in with the minimum aspect ratio of the
+/// window, may be NULL
+/// \param max_aspect a pointer filled in with the maximum aspect ratio of the
+/// window, may be NULL
+/// \returns 0 on success or a negative error code on failure; call
+/// SDL_GetError() for more information.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_SetWindowAspectRatio
+///
+/// ```c
+/// extern SDL_DECLSPEC int SDLCALL SDL_GetWindowAspectRatio(SDL_Window *window, float *min_aspect, float *max_aspect)
+/// ```
+int sdlGetWindowAspectRatio(Pointer<SdlWindow> window, Pointer<Float> minAspect,
+    Pointer<Float> maxAspect) {
+  final sdlGetWindowAspectRatioLookupFunction = libSdl3.lookupFunction<
+      Int32 Function(Pointer<SdlWindow> window, Pointer<Float> minAspect,
+          Pointer<Float> maxAspect),
+      int Function(Pointer<SdlWindow> window, Pointer<Float> minAspect,
+          Pointer<Float> maxAspect)>('SDL_GetWindowAspectRatio');
+  return sdlGetWindowAspectRatioLookupFunction(window, minAspect, maxAspect);
 }
 
 ///
@@ -1977,6 +2049,63 @@ Pointer<SdlSurface> sdlGetWindowSurface(Pointer<SdlWindow> window) {
       Pointer<SdlSurface> Function(
           Pointer<SdlWindow> window)>('SDL_GetWindowSurface');
   return sdlGetWindowSurfaceLookupFunction(window);
+}
+
+///
+/// Toggle VSync for the window surface.
+///
+/// When a window surface is created, vsync defaults to
+/// SDL_WINDOW_SURFACE_VSYNC_DISABLED.
+///
+/// The `vsync` parameter can be 1 to synchronize present with every vertical
+/// refresh, 2 to synchronize present with every second vertical refresh, etc.,
+/// SDL_WINDOW_SURFACE_VSYNC_ADAPTIVE for late swap tearing (adaptive vsync),
+/// or SDL_WINDOW_SURFACE_VSYNC_DISABLED to disable. Not every value is
+/// supported by every driver, so you should check the return value to see
+/// whether the requested setting is supported.
+///
+/// \param window the window.
+/// \param vsync the vertical refresh sync interval.
+/// \returns 0 on success or a negative error code on failure; call
+/// SDL_GetError() for more information.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_GetWindowSurfaceVSync
+///
+/// ```c
+/// extern SDL_DECLSPEC int SDLCALL SDL_SetWindowSurfaceVSync(SDL_Window *window, int vsync)
+/// ```
+int sdlSetWindowSurfaceVSync(Pointer<SdlWindow> window, int vsync) {
+  final sdlSetWindowSurfaceVSyncLookupFunction = libSdl3.lookupFunction<
+      Int32 Function(Pointer<SdlWindow> window, Int32 vsync),
+      int Function(
+          Pointer<SdlWindow> window, int vsync)>('SDL_SetWindowSurfaceVSync');
+  return sdlSetWindowSurfaceVSyncLookupFunction(window, vsync);
+}
+
+///
+/// Get VSync for the window surface.
+///
+/// \param window the window to query
+/// \param vsync an int filled with the current vertical refresh sync interval.
+/// See SDL_SetWindowSurfaceVSync() for the meaning of the value.
+/// \returns 0 on success or a negative error code on failure; call
+/// SDL_GetError() for more information.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_SetWindowSurfaceVSync
+///
+/// ```c
+/// extern SDL_DECLSPEC int SDLCALL SDL_GetWindowSurfaceVSync(SDL_Window *window, int *vsync)
+/// ```
+int sdlGetWindowSurfaceVSync(Pointer<SdlWindow> window, Pointer<Int32> vsync) {
+  final sdlGetWindowSurfaceVSyncLookupFunction = libSdl3.lookupFunction<
+      Int32 Function(Pointer<SdlWindow> window, Pointer<Int32> vsync),
+      int Function(Pointer<SdlWindow> window,
+          Pointer<Int32> vsync)>('SDL_GetWindowSurfaceVSync');
+  return sdlGetWindowSurfaceVSyncLookupFunction(window, vsync);
 }
 
 ///

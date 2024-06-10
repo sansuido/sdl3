@@ -199,6 +199,30 @@ void sdlSetModState(int modstate) {
 }
 
 ///
+/// Get the key code corresponding to the given scancode according to a default
+/// en_US keyboard layout.
+///
+/// See SDL_Keycode for details.
+///
+/// \param scancode the desired SDL_Scancode to query
+/// \returns the SDL_Keycode that corresponds to the given SDL_Scancode.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_GetKeyName
+/// \sa SDL_GetScancodeFromKey
+///
+/// ```c
+/// extern SDL_DECLSPEC SDL_Keycode SDLCALL SDL_GetDefaultKeyFromScancode(SDL_Scancode scancode)
+/// ```
+int sdlGetDefaultKeyFromScancode(int scancode) {
+  final sdlGetDefaultKeyFromScancodeLookupFunction = libSdl3.lookupFunction<
+      Uint32 Function(Int32 scancode),
+      int Function(int scancode)>('SDL_GetDefaultKeyFromScancode');
+  return sdlGetDefaultKeyFromScancodeLookupFunction(scancode);
+}
+
+///
 /// Get the key code corresponding to the given scancode according to the
 /// current keyboard layout.
 ///

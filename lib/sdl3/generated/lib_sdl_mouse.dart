@@ -115,7 +115,7 @@ Pointer<SdlWindow> sdlGetMouseFocus() {
 /// \sa SDL_GetRelativeMouseState
 ///
 /// ```c
-/// extern SDL_DECLSPEC Uint32 SDLCALL SDL_GetMouseState(float *x, float *y)
+/// extern SDL_DECLSPEC SDL_MouseButtonFlags SDLCALL SDL_GetMouseState(float *x, float *y)
 /// ```
 int sdlGetMouseState(Pointer<Float> x, Pointer<Float> y) {
   final sdlGetMouseStateLookupFunction = libSdl3.lookupFunction<
@@ -153,7 +153,7 @@ int sdlGetMouseState(Pointer<Float> x, Pointer<Float> y) {
 /// \sa SDL_GetMouseState
 ///
 /// ```c
-/// extern SDL_DECLSPEC Uint32 SDLCALL SDL_GetGlobalMouseState(float *x, float *y)
+/// extern SDL_DECLSPEC SDL_MouseButtonFlags SDLCALL SDL_GetGlobalMouseState(float *x, float *y)
 /// ```
 int sdlGetGlobalMouseState(Pointer<Float> x, Pointer<Float> y) {
   final sdlGetGlobalMouseStateLookupFunction = libSdl3.lookupFunction<
@@ -181,7 +181,7 @@ int sdlGetGlobalMouseState(Pointer<Float> x, Pointer<Float> y) {
 /// \sa SDL_GetMouseState
 ///
 /// ```c
-/// extern SDL_DECLSPEC Uint32 SDLCALL SDL_GetRelativeMouseState(float *x, float *y)
+/// extern SDL_DECLSPEC SDL_MouseButtonFlags SDLCALL SDL_GetRelativeMouseState(float *x, float *y)
 /// ```
 int sdlGetRelativeMouseState(Pointer<Float> x, Pointer<Float> y) {
   final sdlGetRelativeMouseStateLookupFunction = libSdl3.lookupFunction<

@@ -127,7 +127,20 @@ Pointer<SdlThread> sdlCreateThreadWithProperties(int props) {
   return sdlCreateThreadWithPropertiesLookupFunction(props);
 }
 
-/// These are the actual functions exported from SDL! Don't use them directly! Use the SDL_CreateThread and SDL_CreateThreadWithProperties macros!
+///
+/// The actual entry point for SDL_CreateThread.
+///
+/// \param fn the SDL_ThreadFunction function to call in the new thread
+/// \param name the name of the thread
+/// \param data a pointer that is passed to `fn`
+/// \param pfnBeginThread the C runtime's _beginthreadex (or whatnot). Can be NULL.
+/// \param pfnEndThread the C runtime's _endthreadex (or whatnot). Can be NULL.
+/// \returns an opaque pointer to the new thread object on success, NULL if the
+/// new thread could not be created; call SDL_GetError() for more
+/// information.
+///
+/// \since This function is available since SDL 3.0.0.
+///
 /// ```c
 /// extern SDL_DECLSPEC SDL_Thread *SDLCALL SDL_CreateThreadRuntime(SDL_ThreadFunction fn, const char *name, void *data, SDL_FunctionPointer pfnBeginThread, SDL_FunctionPointer pfnEndThread)
 /// ```
@@ -157,6 +170,18 @@ Pointer<SdlThread> sdlCreateThreadRuntime(
   return result;
 }
 
+///
+/// The actual entry point for SDL_CreateThreadWithProperties.
+///
+/// \param props the properties to use
+/// \param pfnBeginThread the C runtime's _beginthreadex (or whatnot). Can be NULL.
+/// \param pfnEndThread the C runtime's _endthreadex (or whatnot). Can be NULL.
+/// \returns an opaque pointer to the new thread object on success, NULL if the
+/// new thread could not be created; call SDL_GetError() for more
+/// information.
+///
+/// \since This function is available since SDL 3.0.0.
+///
 /// ```c
 /// extern SDL_DECLSPEC SDL_Thread *SDLCALL SDL_CreateThreadWithPropertiesRuntime(SDL_PropertiesID props, SDL_FunctionPointer pfnBeginThread, SDL_FunctionPointer pfnEndThread)
 /// ```

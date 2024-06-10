@@ -1790,6 +1790,8 @@ double sdlAcos(double x) {
 /// \param x floating point value.
 /// \returns arc cosine of `x`, in radians
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_acos
@@ -1825,6 +1827,8 @@ double sdlAcosf(double x) {
 /// \param x floating point value.
 /// \returns arc sine of `x`, in radians.
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_asinf
@@ -1859,6 +1863,8 @@ double sdlAsin(double x) {
 ///
 /// \param x floating point value.
 /// \returns arc sine of `x`, in radians.
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -1897,6 +1903,8 @@ double sdlAsinf(double x) {
 /// \param x floating point value.
 /// \returns arc tangent of of `x` in radians, or 0 if `x = 0`.
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_atanf
@@ -1933,6 +1941,8 @@ double sdlAtan(double x) {
 ///
 /// \param x floating point value.
 /// \returns arc tangent of of `x` in radians, or 0 if `x = 0`
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -1974,6 +1984,8 @@ double sdlAtanf(double x) {
 /// \param y floating point value of the numerator (y coordinate)
 /// \returns arc tangent of of `y / x` in radians, or, if `x = 0`, either
 /// `-Pi/2`, `0`, or `Pi/2`, depending on the value of `y`.
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -2017,6 +2029,8 @@ double sdlAtan2(double y, double x) {
 /// \returns arc tangent of of `y / x` in radians, or, if `x = 0`, either
 /// `-Pi/2`, `0`, or `Pi/2`, depending on the value of `y`.
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_atan2f
@@ -2048,6 +2062,8 @@ double sdlAtan2f(double y, double x) {
 ///
 /// \param x floating point value
 /// \returns the ceiling of `x`
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -2082,6 +2098,8 @@ double sdlCeil(double x) {
 /// \param x floating point value
 /// \returns the ceiling of `x`
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_ceil
@@ -2115,6 +2133,8 @@ double sdlCeilf(double x) {
 /// \param y floating point value to use as the sign
 /// \returns the floating point value with the sign of y and the magnitude of x
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_copysignf
@@ -2145,6 +2165,8 @@ double sdlCopysign(double x, double y) {
 /// \param x floating point value to use as the magnitude
 /// \param y floating point value to use as the sign
 /// \returns the floating point value with the sign of y and the magnitude of x
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -2179,6 +2201,8 @@ double sdlCopysignf(double x, double y) {
 /// \param x floating point value, in radians
 /// \returns cosine of `x`
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_cosf
@@ -2211,6 +2235,8 @@ double sdlCos(double x) {
 ///
 /// \param x floating point value, in radians
 /// \returns cosine of `x`
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -2250,6 +2276,8 @@ double sdlCosf(double x) {
 /// \param x floating point value
 /// \returns value of `e^x`
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_expf
@@ -2287,6 +2315,8 @@ double sdlExp(double x) {
 /// \param x floating point value
 /// \returns value of `e^x`
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_exp
@@ -2314,6 +2344,8 @@ double sdlExpf(double x) {
 /// \param x floating point value to use as the magnitude
 /// \returns the absolute value of `x`
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_fabsf
@@ -2339,6 +2371,8 @@ double sdlFabs(double x) {
 ///
 /// \param x floating point value to use as the magnitude
 /// \returns the absolute value of `x`
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -2368,6 +2402,8 @@ double sdlFabsf(double x) {
 ///
 /// \param x floating point value
 /// \returns the floor of `x`
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -2402,6 +2438,8 @@ double sdlFloor(double x) {
 /// \param x floating point value
 /// \returns the floor of `x`
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_floor
@@ -2434,6 +2472,8 @@ double sdlFloorf(double x) {
 ///
 /// \param x floating point value
 /// \returns `x` truncated to an integer
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -2469,6 +2509,8 @@ double sdlTrunc(double x) {
 /// \param x floating point value
 /// \returns `x` truncated to an integer
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_trunc
@@ -2502,6 +2544,8 @@ double sdlTruncf(double x) {
 /// \param x the numerator
 /// \param y the denominator. Must not be 0.
 /// \returns the remainder of `x / y`
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -2538,6 +2582,8 @@ double sdlFmod(double x, double y) {
 /// \param x the numerator
 /// \param y the denominator. Must not be 0.
 /// \returns the remainder of `x / y`
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -2579,6 +2625,8 @@ double sdlFmodf(double x, double y) {
 /// \param x floating point value. Must be greater than 0.
 /// \returns the natural logarithm of `x`
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_log
@@ -2612,6 +2660,8 @@ double sdlLogf(double x) {
 ///
 /// \param x floating point value. Must be greater than 0.
 /// \returns the logarithm of `x`
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -2648,6 +2698,8 @@ double sdlLog10(double x) {
 /// \param x floating point value. Must be greater than 0.
 /// \returns the logarithm of `x`
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_log10
@@ -2672,6 +2724,8 @@ double sdlLog10f(double x) {
 /// \param x floating point value
 /// \param y output pointer to store the integer part of `x`
 /// \returns the fractional part of `x`
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -2698,6 +2752,8 @@ double sdlModf(double x, Pointer<Double> y) {
 /// \param x floating point value
 /// \param y output pointer to store the integer part of `x`
 /// \returns the fractional part of `x`
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -2737,6 +2793,8 @@ double sdlModff(double x, Pointer<Float> y) {
 /// \param y the exponent
 /// \returns `x` raised to the power `y`
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_powf
@@ -2775,6 +2833,8 @@ double sdlPow(double x, double y) {
 /// \param y the exponent
 /// \returns `x` raised to the power `y`
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_pow
@@ -2807,6 +2867,8 @@ double sdlPowf(double x, double y) {
 ///
 /// \param x floating point value
 /// \returns the nearest integer to `x`
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -2842,6 +2904,8 @@ double sdlRound(double x) {
 /// \param x floating point value
 /// \returns the nearest integer to `x`
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_round
@@ -2875,6 +2939,8 @@ double sdlRoundf(double x) {
 ///
 /// \param x floating point value
 /// \returns the nearest integer to `x`
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -2911,6 +2977,8 @@ int sdlLround(double x) {
 /// \param x floating point value
 /// \returns the nearest integer to `x`
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_lround
@@ -2945,6 +3013,8 @@ int sdlLroundf(double x) {
 /// \param n integer exponent
 /// \returns `x * 2^n`
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_scalbnf
@@ -2975,6 +3045,8 @@ double sdlScalbn(double x, int n) {
 /// \param x floating point value to be scaled
 /// \param n integer exponent
 /// \returns `x * 2^n`
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -3009,6 +3081,8 @@ double sdlScalbnf(double x, int n) {
 /// \param x floating point value, in radians
 /// \returns sine of `x`
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_sinf
@@ -3041,6 +3115,8 @@ double sdlSin(double x) {
 ///
 /// \param x floating point value, in radians
 /// \returns sine of `x`
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -3075,6 +3151,8 @@ double sdlSinf(double x) {
 /// \param x floating point value. Must be greater than or equal to 0.
 /// \returns square root of `x`
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_sqrtf
@@ -3106,6 +3184,8 @@ double sdlSqrt(double x) {
 /// \param x floating point value. Must be greater than or equal to 0.
 /// \returns square root of `x`
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_sqrt
@@ -3136,6 +3216,8 @@ double sdlSqrtf(double x) {
 ///
 /// \param x floating point value, in radians
 /// \returns tangent of `x`
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -3171,6 +3253,8 @@ double sdlTan(double x) {
 ///
 /// \param x floating point value, in radians
 /// \returns tangent of `x`
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///

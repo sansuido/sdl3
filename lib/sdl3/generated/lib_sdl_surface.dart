@@ -1221,6 +1221,10 @@ int sdlFillSurfaceRects(
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
+/// \threadsafety The same destination surface should not be used from two
+/// threads at once. It is safe to use the same source surface
+/// from multiple threads.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_BlitSurfaceScaled
@@ -1255,6 +1259,10 @@ int sdlBlitSurface(Pointer<SdlSurface> src, Pointer<SdlRect> srcrect,
 /// the destination surface
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
+///
+/// \threadsafety The same destination surface should not be used from two
+/// threads at once. It is safe to use the same source surface
+/// from multiple threads.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -1328,6 +1336,10 @@ int sdlSoftStretch(Pointer<SdlSurface> src, Pointer<SdlRect> srcrect,
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
+/// \threadsafety The same destination surface should not be used from two
+/// threads at once. It is safe to use the same source surface
+/// from multiple threads.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_BlitSurface
@@ -1365,6 +1377,10 @@ int sdlBlitSurfaceScaled(Pointer<SdlSurface> src, Pointer<SdlRect> srcrect,
 /// \param scaleMode scale algorithm to be used
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
+///
+/// \threadsafety The same destination surface should not be used from two
+/// threads at once. It is safe to use the same source surface
+/// from multiple threads.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///

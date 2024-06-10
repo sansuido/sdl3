@@ -135,6 +135,11 @@ void sdlUnlockProperties(int props) {
 /// The cleanup function is also called if setting the property fails for any
 /// reason.
 ///
+/// For simply setting basic data types, like numbers, bools, or strings, use
+/// SDL_SetNumberProperty, SDL_SetBooleanProperty, or SDL_SetStringProperty
+/// instead, as those functions will handle cleanup on your behalf. This
+/// function is only for more complex, custom data.
+///
 /// \param props the properties to modify
 /// \param name the name of the property to modify
 /// \param value the new value of the property, or NULL to delete the property
@@ -150,28 +155,29 @@ void sdlUnlockProperties(int props) {
 ///
 /// \sa SDL_GetProperty
 /// \sa SDL_SetProperty
+/// \sa SDL_CleanupPropertyCallback
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_SetPropertyWithCleanup(SDL_PropertiesID props, const char *name, void *value, void (SDLCALL *cleanup)(void *userdata, void *value), void *userdata)
+/// extern SDL_DECLSPEC int SDLCALL SDL_SetPropertyWithCleanup(SDL_PropertiesID props, const char *name, void *value, SDL_CleanupPropertyCallback cleanup, void *userdata)
 /// ```
 int sdlSetPropertyWithCleanup(
     int props,
     String? name,
     Pointer<NativeType> value,
-    Pointer<NativeType> cleanup,
+    Pointer<NativeFunction<SdlCleanupPropertyCallback>> cleanup,
     Pointer<NativeType> userdata) {
   final sdlSetPropertyWithCleanupLookupFunction = libSdl3.lookupFunction<
       Int32 Function(
           Uint32 props,
           Pointer<Utf8> name,
           Pointer<NativeType> value,
-          Pointer<NativeType> cleanup,
+          Pointer<NativeFunction<SdlCleanupPropertyCallback>> cleanup,
           Pointer<NativeType> userdata),
       int Function(
           int props,
           Pointer<Utf8> name,
           Pointer<NativeType> value,
-          Pointer<NativeType> cleanup,
+          Pointer<NativeFunction<SdlCleanupPropertyCallback>> cleanup,
           Pointer<NativeType> userdata)>('SDL_SetPropertyWithCleanup');
   final namePointer = name != null ? name.toNativeUtf8() : nullptr;
   final result = sdlSetPropertyWithCleanupLookupFunction(

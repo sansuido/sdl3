@@ -659,6 +659,8 @@ void sdlDestroyCondition(Pointer<SdlCondition> cond) {
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_BroadcastCondition
@@ -681,6 +683,8 @@ int sdlSignalCondition(Pointer<SdlCondition> cond) {
 /// \param cond the condition variable to signal
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -717,6 +721,8 @@ int sdlBroadcastCondition(Pointer<SdlCondition> cond) {
 /// \param mutex the mutex used to coordinate thread access
 /// \returns 0 when it is signaled or a negative error code on failure; call
 /// SDL_GetError() for more information.
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -755,6 +761,8 @@ int sdlWaitCondition(Pointer<SdlCondition> cond, Pointer<SdlMutex> mutex) {
 /// \returns 0 if the condition variable is signaled, `SDL_MUTEX_TIMEDOUT` if
 /// the condition is not signaled in the allotted time, or a negative
 /// error code on failure; call SDL_GetError() for more information.
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///

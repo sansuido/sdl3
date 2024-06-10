@@ -97,6 +97,12 @@ typedef SdlAppQuitFunc = Void Function(Pointer<NativeType> appstate);
 typedef SdlMainFuncDart = int Function(int argc, Pointer<Pointer<Int8>> argv);
 typedef SdlMainFunc = Int32 Function(Int32 argc, Pointer<Pointer<Int8>> argv);
 
+// typedef void (SDLCALL *SDL_CleanupPropertyCallback)(void *userdata, void *value)
+typedef SdlCleanupPropertyCallbackDart = void Function(
+    Pointer<NativeType> userdata, Pointer<NativeType> value);
+typedef SdlCleanupPropertyCallback = Void Function(
+    Pointer<NativeType> userdata, Pointer<NativeType> value);
+
 // typedef void (SDLCALL *SDL_EnumeratePropertiesCallback)(void *userdata, SDL_PropertiesID props, const char *name)
 typedef SdlEnumeratePropertiesCallbackDart = void Function(
     Pointer<NativeType> userdata, int props, Pointer<Utf8> name);
@@ -147,11 +153,17 @@ typedef SdlAndroidRequestPermissionCallback = Void Function(
 typedef SdlThreadFunctionDart = int Function(Pointer<NativeType> data);
 typedef SdlThreadFunction = Int32 Function(Pointer<NativeType> data);
 
-// typedef Uint32 (SDLCALL *SDL_TimerCallback)(Uint32 interval, void *param)
+// typedef Uint32 (SDLCALL *SDL_TimerCallback)(void *userdata, SDL_TimerID timerID, Uint32 interval)
 typedef SdlTimerCallbackDart = int Function(
-    int interval, Pointer<NativeType> param);
+    Pointer<NativeType> userdata, int timerId, int interval);
 typedef SdlTimerCallback = Uint32 Function(
-    Uint32 interval, Pointer<NativeType> param);
+    Pointer<NativeType> userdata, Uint32 timerId, Uint32 interval);
+
+// typedef Uint64 (SDLCALL *SDL_NSTimerCallback)(void *userdata, SDL_TimerID timerID, Uint64 interval)
+typedef SdlNsTimerCallbackDart = int Function(
+    Pointer<NativeType> userdata, int timerId, int interval);
+typedef SdlNsTimerCallback = Uint64 Function(
+    Pointer<NativeType> userdata, Uint32 timerId, Uint64 interval);
 
 // typedef SDL_EGLAttrib *(SDLCALL *SDL_EGLAttribArrayCallback)(void)
 typedef SdlEglAttribArrayCallbackDart = Pointer<Uint64> Function();

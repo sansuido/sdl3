@@ -160,7 +160,7 @@ String? sdlGetPenName(int instanceId) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC Uint32 SDLCALL SDL_GetPenCapabilities(SDL_PenID instance_id, SDL_PenCapabilityInfo *capabilities)
+/// extern SDL_DECLSPEC SDL_PenCapabilityFlags SDLCALL SDL_GetPenCapabilities(SDL_PenID instance_id, SDL_PenCapabilityInfo *capabilities)
 /// ```
 int sdlGetPenCapabilities(
     int instanceId, Pointer<SdlPenCapabilityInfo> capabilities) {
