@@ -31,6 +31,8 @@ Pointer<Uint32> sdlGetHaptics(Pointer<Int32> count) {
 ///
 /// This can be called before any haptic devices are opened.
 ///
+/// The returned string follows the SDL_GetStringRule.
+///
 /// \param instance_id the haptic device instance ID
 /// \returns the name of the selected haptic device. If no name can be found,
 /// this function returns NULL; call SDL_GetError() for more
@@ -129,6 +131,8 @@ int sdlGetHapticInstanceId(Pointer<SdlHaptic> haptic) {
 
 ///
 /// Get the implementation dependent name of a haptic device.
+///
+/// The returned string follows the SDL_GetStringRule.
 ///
 /// \param haptic the SDL_Haptic obtained from SDL_OpenJoystick()
 /// \returns the name of the selected haptic device. If no name can be found,

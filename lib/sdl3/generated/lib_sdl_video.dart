@@ -30,6 +30,12 @@ int sdlGetNumVideoDrivers() {
 /// The video drivers are presented in the order in which they are normally
 /// checked during initialization.
 ///
+/// The names of drivers are all simple, low-ASCII identifiers, like "cocoa",
+/// "x11" or "windows". These never have Unicode characters, and are not meant
+/// to be proper names.
+///
+/// The returned string follows the SDL_GetStringRule.
+///
 /// \param index the index of a video driver
 /// \returns the name of the video driver with the given **index**.
 ///
@@ -53,6 +59,12 @@ String? sdlGetVideoDriver(int index) {
 
 ///
 /// Get the name of the currently initialized video driver.
+///
+/// The names of drivers are all simple, low-ASCII identifiers, like "cocoa",
+/// "x11" or "windows". These never have Unicode characters, and are not meant
+/// to be proper names.
+///
+/// The returned string follows the SDL_GetStringRule.
 ///
 /// \returns the name of the current video driver or NULL if no driver has been
 /// initialized.
@@ -179,6 +191,8 @@ int sdlGetDisplayProperties(int displayId) {
 
 ///
 /// Get the name of a display in UTF-8 encoding.
+///
+/// The returned string follows the SDL_GetStringRule.
 ///
 /// \param displayID the instance ID of the display to query
 /// \returns the name of a display or NULL on failure; call SDL_GetError() for
@@ -1055,6 +1069,13 @@ Pointer<SdlWindow> sdlGetWindowParent(Pointer<SdlWindow> window) {
 /// UIWindow associated with the window
 /// - `SDL_PROP_WINDOW_UIKIT_METAL_VIEW_TAG_NUMBER`: the NSInteger tag
 /// assocated with metal views on the window
+/// - `SDL_PROP_WINDOW_UIKIT_OPENGL_FRAMEBUFFER_NUMBER`: the OpenGL view's
+/// framebuffer object. It must be bound when rendering to the screen using
+/// OpenGL.
+/// - `SDL_PROP_WINDOW_UIKIT_OPENGL_RENDERBUFFER_NUMBER`: the OpenGL view's
+/// renderbuffer object. It must be bound when SDL_GL_SwapWindow is called.
+/// - `SDL_PROP_WINDOW_UIKIT_OPENGL_RESOLVE_FRAMEBUFFER_NUMBER`: the OpenGL
+/// view's resolve framebuffer, when MSAA is used.
 ///
 /// On KMS/DRM:
 ///
@@ -1200,6 +1221,8 @@ int sdlSetWindowTitle(Pointer<SdlWindow> window, String? title) {
 
 ///
 /// Get the title of a window.
+///
+/// The returned string follows the SDL_GetStringRule.
 ///
 /// \param window the window to query
 /// \returns the title of the window in UTF-8 format or "" if there is no
@@ -2633,8 +2656,8 @@ int sdlSetWindowShape(Pointer<SdlWindow> window, Pointer<SdlSurface> shape) {
 ///
 /// Request a window to demand attention from the user.
 ///
-/// \param window the window to be flashed
-/// \param operation the flash operation
+/// \param window the SDL_Window to be flashed
+/// \param operation the SDL_FlashOperation to perform
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///

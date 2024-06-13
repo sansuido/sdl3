@@ -447,6 +447,8 @@ Pointer<NativeType> sdlGetProperty(
 ///
 /// Get a string property on a set of properties.
 ///
+/// The returned string follows the SDL_GetStringRule.
+///
 /// \param props the properties to query
 /// \param name the name of the property to query
 /// \param default_value the default value of the property

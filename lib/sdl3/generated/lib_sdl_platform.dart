@@ -14,13 +14,15 @@ import 'lib_sdl.dart';
 /// - "iOS"
 /// - "Android"
 ///
+/// The returned string follows the SDL_GetStringRule.
+///
 /// \returns the name of the platform. If the correct platform name is not
 /// available, returns a string beginning with the text "Unknown".
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC const char * SDLCALL SDL_GetPlatform (void)
+/// extern SDL_DECLSPEC const char * SDLCALL SDL_GetPlatform(void)
 /// ```
 String? sdlGetPlatform() {
   final sdlGetPlatformLookupFunction = libSdl3.lookupFunction<

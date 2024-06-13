@@ -7,6 +7,8 @@ import 'struct_sdl.dart';
 ///
 /// Get the human readable name of a pixel format.
 ///
+/// The returned string follows the SDL_GetStringRule.
+///
 /// \param format the pixel format to query
 /// \returns the human readable name of the specified pixel format or
 /// `SDL_PIXELFORMAT_UNKNOWN` if the format isn't recognized.

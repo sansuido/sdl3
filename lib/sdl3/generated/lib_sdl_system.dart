@@ -412,6 +412,8 @@ void sdlAndroidBackButton() {
 /// Your internal storage path is typically:
 /// `/data/data/your.app.package/files`.
 ///
+/// The returned string follows the SDL_GetStringRule.
+///
 /// \returns the path used for internal storage or NULL on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -420,7 +422,7 @@ void sdlAndroidBackButton() {
 /// \sa SDL_AndroidGetExternalStorageState
 ///
 /// ```c
-/// extern SDL_DECLSPEC const char * SDLCALL SDL_AndroidGetInternalStoragePath(void)
+/// extern SDL_DECLSPEC const char *SDLCALL SDL_AndroidGetInternalStoragePath(void)
 /// ```
 String? sdlAndroidGetInternalStoragePath() {
   final sdlAndroidGetInternalStoragePathLookupFunction = libSdl3.lookupFunction<
@@ -470,6 +472,8 @@ int sdlAndroidGetExternalStorageState(Pointer<Uint32> state) {
 ///
 /// Your external storage path is typically:
 /// `/storage/sdcard0/Android/data/your.app.package/files`.
+///
+/// The returned string follows the SDL_GetStringRule.
 ///
 /// \returns the path used for external storage for this application on success
 /// or NULL on failure; call SDL_GetError() for more information.
@@ -624,6 +628,8 @@ int sdlAndroidSendMessage(int command, int param) {
 /// MSDN, at the URL:
 ///
 /// https://msdn.microsoft.com/en-us/library/windows/apps/hh464917.aspx
+///
+/// The returned string follows the SDL_GetStringRule.
 ///
 /// \param pathType the type of path to retrieve, one of SDL_WinRT_Path
 /// \returns a UTF-8 string (8-bit, multi-byte) containing the path, or NULL if

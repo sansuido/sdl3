@@ -327,6 +327,8 @@ bool sdlIsGamepad(int instanceId) {
 ///
 /// This can be called before any gamepads are opened.
 ///
+/// The returned string follows the SDL_GetStringRule.
+///
 /// \param instance_id the joystick instance ID
 /// \returns the name of the selected gamepad. If no name can be found, this
 /// function returns NULL; call SDL_GetError() for more information.
@@ -354,6 +356,8 @@ String? sdlGetGamepadInstanceName(int instanceId) {
 /// Get the implementation dependent path of a gamepad.
 ///
 /// This can be called before any gamepads are opened.
+///
+/// The returned string follows the SDL_GetStringRule.
 ///
 /// \param instance_id the joystick instance ID
 /// \returns the path of the selected gamepad. If no path can be found, this
@@ -699,6 +703,8 @@ int sdlGetGamepadInstanceId(Pointer<SdlGamepad> gamepad) {
 ///
 /// Get the implementation-dependent name for an opened gamepad.
 ///
+/// The returned string follows the SDL_GetStringRule.
+///
 /// \param gamepad a gamepad identifier previously returned by
 /// SDL_OpenGamepad()
 /// \returns the implementation dependent name for the gamepad, or NULL if
@@ -725,6 +731,8 @@ String? sdlGetGamepadName(Pointer<SdlGamepad> gamepad) {
 
 ///
 /// Get the implementation-dependent path for an opened gamepad.
+///
+/// The returned string follows the SDL_GetStringRule.
 ///
 /// \param gamepad a gamepad identifier previously returned by
 /// SDL_OpenGamepad()
@@ -930,6 +938,8 @@ int sdlGetGamepadFirmwareVersion(Pointer<SdlGamepad> gamepad) {
 /// Get the serial number of an opened gamepad, if available.
 ///
 /// Returns the serial number of the gamepad, or NULL if it is not available.
+///
+/// The returned string follows the SDL_GetStringRule.
 ///
 /// \param gamepad the gamepad object to query.
 /// \returns the serial number, or NULL if unavailable.
@@ -1191,7 +1201,7 @@ int sdlGetGamepadTypeFromString(String? str) {
 ///
 /// Convert from an SDL_GamepadType enum to a string.
 ///
-/// The caller should not SDL_free() the returned string.
+/// The returned string follows the SDL_GetStringRule.
 ///
 /// \param type an enum value for a given SDL_GamepadType
 /// \returns a string for the given type, or NULL if an invalid type is
@@ -1252,7 +1262,7 @@ int sdlGetGamepadAxisFromString(String? str) {
 ///
 /// Convert from an SDL_GamepadAxis enum to a string.
 ///
-/// The caller should not SDL_free() the returned string.
+/// The returned string follows the SDL_GetStringRule.
 ///
 /// \param axis an enum value for a given SDL_GamepadAxis
 /// \returns a string for the given axis, or NULL if an invalid axis is
@@ -1368,7 +1378,7 @@ int sdlGetGamepadButtonFromString(String? str) {
 ///
 /// Convert from an SDL_GamepadButton enum to a string.
 ///
-/// The caller should not SDL_free() the returned string.
+/// The returned string follows the SDL_GetStringRule.
 ///
 /// \param button an enum value for a given SDL_GamepadButton
 /// \returns a string for the given button, or NULL if an invalid button is
@@ -1853,6 +1863,8 @@ void sdlCloseGamepad(Pointer<SdlGamepad> gamepad) {
 /// Return the sfSymbolsName for a given button on a gamepad on Apple
 /// platforms.
 ///
+/// The returned string follows the SDL_GetStringRule.
+///
 /// \param gamepad the gamepad to query
 /// \param button a button on the gamepad
 /// \returns the sfSymbolsName or NULL if the name can't be found
@@ -1881,6 +1893,8 @@ String? sdlGetGamepadAppleSfSymbolsNameForButton(
 
 ///
 /// Return the sfSymbolsName for a given axis on a gamepad on Apple platforms.
+///
+/// The returned string follows the SDL_GetStringRule.
 ///
 /// \param gamepad the gamepad to query
 /// \param axis an axis on the gamepad

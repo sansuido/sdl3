@@ -2111,20 +2111,6 @@ final class SdlFRect extends Struct {
   external double h;
 }
 
-// SDL_RendererInfo
-final class SdlRendererInfo extends Struct {
-  // [0]+(8)
-  external Pointer<Utf8> name;
-  // [8]+(4)
-  @Int32()
-  external int numTextureFormats;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
-  // [16]+(8)
-  external Pointer<Int32> textureFormats;
-}
-
 // SDL_Vertex
 final class SdlVertex extends Struct {
   // [0]+(8)

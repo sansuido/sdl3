@@ -124,6 +124,8 @@ bool sdlPenConnected(int instanceId) {
 ///
 /// Retrieves a human-readable description for a SDL_PenID.
 ///
+/// The returned string follows the SDL_GetStringRule.
+///
 /// \param instance_id The pen to query.
 /// \returns A string that contains the name of the pen, intended for human
 /// consumption. The string might or might not be localised, depending

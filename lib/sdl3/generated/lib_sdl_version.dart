@@ -45,6 +45,8 @@ int sdlGetVersion() {
 /// You shouldn't use this function for anything but logging it for debugging
 /// purposes. The string is not intended to be reliable in any way.
 ///
+/// The returned string follows the SDL_GetStringRule.
+///
 /// \returns an arbitrary string, uniquely identifying the exact revision of
 /// the SDL library in use.
 ///

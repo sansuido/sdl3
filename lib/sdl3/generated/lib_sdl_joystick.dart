@@ -84,6 +84,8 @@ Pointer<Uint32> sdlGetJoysticks(Pointer<Int32> count) {
 ///
 /// This can be called before any joysticks are opened.
 ///
+/// The returned string follows the SDL_GetStringRule.
+///
 /// \param instance_id the joystick instance ID
 /// \returns the name of the selected joystick. If no name can be found, this
 /// function returns NULL; call SDL_GetError() for more information.
@@ -111,6 +113,8 @@ String? sdlGetJoystickInstanceName(int instanceId) {
 /// Get the implementation dependent path of a joystick.
 ///
 /// This can be called before any joysticks are opened.
+///
+/// The returned string follows the SDL_GetStringRule.
 ///
 /// \param instance_id the joystick instance ID
 /// \returns the path of the selected joystick. If no path can be found, this
@@ -656,6 +660,8 @@ int sdlGetJoystickProperties(Pointer<SdlJoystick> joystick) {
 ///
 /// Get the implementation dependent name of a joystick.
 ///
+/// The returned string follows the SDL_GetStringRule.
+///
 /// \param joystick the SDL_Joystick obtained from SDL_OpenJoystick()
 /// \returns the name of the selected joystick. If no name can be found, this
 /// function returns NULL; call SDL_GetError() for more information.
@@ -681,6 +687,8 @@ String? sdlGetJoystickName(Pointer<SdlJoystick> joystick) {
 
 ///
 /// Get the implementation dependent path of a joystick.
+///
+/// The returned string follows the SDL_GetStringRule.
 ///
 /// \param joystick the SDL_Joystick obtained from SDL_OpenJoystick()
 /// \returns the path of the selected joystick. If no path can be found, this
@@ -871,6 +879,8 @@ int sdlGetJoystickFirmwareVersion(Pointer<SdlJoystick> joystick) {
 /// Get the serial number of an opened joystick, if available.
 ///
 /// Returns the serial number of the joystick, or NULL if it is not available.
+///
+/// The returned string follows the SDL_GetStringRule.
 ///
 /// \param joystick the SDL_Joystick obtained from SDL_OpenJoystick()
 /// \returns the serial number of the selected joystick, or NULL if

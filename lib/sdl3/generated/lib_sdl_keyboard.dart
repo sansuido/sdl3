@@ -55,6 +55,8 @@ Pointer<Uint32> sdlGetKeyboards(Pointer<Int32> count) {
 ///
 /// This function returns "" if the keyboard doesn't have a name.
 ///
+/// The returned string follows the SDL_GetStringRule.
+///
 /// \param instance_id the keyboard instance ID
 /// \returns the name of the selected keyboard, or NULL on failure; call
 /// SDL_GetError() for more information.
@@ -275,6 +277,8 @@ int sdlGetScancodeFromKey(int key) {
 ///
 /// See SDL_Scancode for details.
 ///
+/// The returned string follows the SDL_GetStringRule.
+///
 /// **Warning**: The returned name is by design not stable across platforms,
 /// e.g. the name for `SDL_SCANCODE_LGUI` is "Left GUI" under Linux but "Left
 /// Windows" under Microsoft Windows, and some scancodes like
@@ -337,6 +341,8 @@ int sdlGetScancodeFromName(String? name) {
 /// Get a human-readable name for a key.
 ///
 /// See SDL_Scancode and SDL_Keycode for details.
+///
+/// The returned string follows the SDL_GetStringRule.
 ///
 /// \param key the desired SDL_Keycode to query
 /// \returns a pointer to a UTF-8 string that stays valid at least until the

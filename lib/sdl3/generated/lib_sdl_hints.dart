@@ -122,6 +122,8 @@ void sdlResetHints() {
 ///
 /// Get the value of a hint.
 ///
+/// The returned string follows the SDL_GetStringRule.
+///
 /// \param name the hint to query
 /// \returns the string value of a hint or NULL if the hint isn't set.
 ///

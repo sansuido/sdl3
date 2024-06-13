@@ -527,26 +527,6 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   }
 
   ///
-  /// Get information about a rendering context.
-  ///
-  /// \param renderer the rendering context
-  /// \param info an SDL_RendererInfo structure filled with information about the
-  /// current renderer
-  /// \returns 0 on success or a negative error code on failure; call
-  /// SDL_GetError() for more information.
-  ///
-  /// \since This function is available since SDL 3.0.0.
-  ///
-  /// \sa SDL_CreateRenderer
-  ///
-  /// ```c
-  /// extern DECLSPEC int SDLCALL SDL_GetRendererInfo(SDL_Renderer *renderer, SDL_RendererInfo *info)
-  /// ```
-  int getInfo(Pointer<SdlRendererInfo> info) {
-    return sdlGetRendererInfo(this, info);
-  }
-
-  ///
   /// Get the properties associated with a renderer.
   ///
   /// The following read-only properties are provided by SDL:

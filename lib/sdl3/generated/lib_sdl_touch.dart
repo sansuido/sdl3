@@ -32,7 +32,7 @@ Pointer<Uint64> sdlGetTouchDevices(Pointer<Int32> count) {
 ///
 /// Get the touch device name as reported from the driver.
 ///
-/// You do not own the returned string, do not modify or free it.
+/// The returned string follows the SDL_GetStringRule.
 ///
 /// \param touchID the touch device instance ID.
 /// \returns touch device name, or NULL on error; call SDL_GetError() for more
@@ -41,7 +41,7 @@ Pointer<Uint64> sdlGetTouchDevices(Pointer<Int32> count) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC const char* SDLCALL SDL_GetTouchDeviceName(SDL_TouchID touchID)
+/// extern SDL_DECLSPEC const char *SDLCALL SDL_GetTouchDeviceName(SDL_TouchID touchID)
 /// ```
 String? sdlGetTouchDeviceName(int touchId) {
   final sdlGetTouchDeviceNameLookupFunction = libSdl3.lookupFunction<

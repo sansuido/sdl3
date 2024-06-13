@@ -27,6 +27,8 @@ Pointer<Uint32> sdlGetSensors(Pointer<Int32> count) {
 ///
 /// Get the implementation dependent name of a sensor.
 ///
+/// The returned string follows the SDL_GetStringRule.
+///
 /// \param instance_id the sensor instance ID
 /// \returns the sensor name, or NULL if `instance_id` is not valid
 ///
@@ -145,6 +147,8 @@ int sdlGetSensorProperties(Pointer<SdlSensor> sensor) {
 
 ///
 /// Get the implementation dependent name of a sensor.
+///
+/// The returned string follows the SDL_GetStringRule.
 ///
 /// \param sensor The SDL_Sensor object
 /// \returns the sensor name, or NULL if `sensor` is NULL.

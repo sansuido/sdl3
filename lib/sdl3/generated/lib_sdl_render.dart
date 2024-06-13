@@ -42,8 +42,7 @@ int sdlGetNumRenderDrivers() {
 /// "direct3d12" or "metal". These never have Unicode characters, and are not
 /// meant to be proper names.
 ///
-/// The returned value points to a static, read-only string; do not modify or
-/// free it!
+/// The returned string follows the SDL_GetStringRule.
 ///
 /// \param index the index of the rendering driver; the value ranges from 0 to
 /// SDL_GetNumRenderDrivers() - 1
@@ -145,7 +144,7 @@ int sdlCreateWindowAndRenderer(
 /// \sa SDL_DestroyRenderer
 /// \sa SDL_GetNumRenderDrivers
 /// \sa SDL_GetRenderDriver
-/// \sa SDL_GetRendererInfo
+/// \sa SDL_GetRendererName
 ///
 /// ```c
 /// extern SDL_DECLSPEC SDL_Renderer * SDLCALL SDL_CreateRenderer(SDL_Window *window, const char *name)
@@ -210,7 +209,7 @@ Pointer<SdlRenderer> sdlCreateRenderer(
 /// \sa SDL_CreateRenderer
 /// \sa SDL_CreateSoftwareRenderer
 /// \sa SDL_DestroyRenderer
-/// \sa SDL_GetRendererInfo
+/// \sa SDL_GetRendererName
 ///
 /// ```c
 /// extern SDL_DECLSPEC SDL_Renderer * SDLCALL SDL_CreateRendererWithProperties(SDL_PropertiesID props)
@@ -292,13 +291,13 @@ Pointer<SdlWindow> sdlGetRenderWindow(Pointer<SdlRenderer> renderer) {
 }
 
 ///
-/// Get information about a rendering context.
+/// Get the name of a renderer.
+///
+/// The returned string follows the SDL_GetStringRule.
 ///
 /// \param renderer the rendering context
-/// \param info an SDL_RendererInfo structure filled with information about the
-/// current renderer
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns the name of the selected renderer, or NULL if the renderer is
+/// invalid.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -306,16 +305,18 @@ Pointer<SdlWindow> sdlGetRenderWindow(Pointer<SdlRenderer> renderer) {
 /// \sa SDL_CreateRendererWithProperties
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_GetRendererInfo(SDL_Renderer *renderer, SDL_RendererInfo *info)
+/// extern SDL_DECLSPEC const char *SDLCALL SDL_GetRendererName(SDL_Renderer *renderer)
 /// ```
-int sdlGetRendererInfo(
-    Pointer<SdlRenderer> renderer, Pointer<SdlRendererInfo> info) {
-  final sdlGetRendererInfoLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(
-          Pointer<SdlRenderer> renderer, Pointer<SdlRendererInfo> info),
-      int Function(Pointer<SdlRenderer> renderer,
-          Pointer<SdlRendererInfo> info)>('SDL_GetRendererInfo');
-  return sdlGetRendererInfoLookupFunction(renderer, info);
+String? sdlGetRendererName(Pointer<SdlRenderer> renderer) {
+  final sdlGetRendererNameLookupFunction = libSdl3.lookupFunction<
+      Pointer<Utf8> Function(Pointer<SdlRenderer> renderer),
+      Pointer<Utf8> Function(
+          Pointer<SdlRenderer> renderer)>('SDL_GetRendererName');
+  final result = sdlGetRendererNameLookupFunction(renderer);
+  if (result == nullptr) {
+    return null;
+  }
+  return result.toDartString();
 }
 
 ///
@@ -331,6 +332,9 @@ int sdlGetRendererInfo(
 /// - `SDL_PROP_RENDERER_VSYNC_NUMBER`: the current vsync setting
 /// - `SDL_PROP_RENDERER_MAX_TEXTURE_SIZE_NUMBER`: the maximum texture width
 /// and height
+/// - `SDL_PROP_RENDERER_TEXTURE_FORMATS_POINTER`: a (const SDL_PixelFormatEnum
+/// *) array of pixel formats, terminated with SDL_PIXELFORMAT_UNKNOWN,
+/// representing the available texture formats for this renderer.
 /// - `SDL_PROP_RENDERER_OUTPUT_COLORSPACE_NUMBER`: an SDL_ColorSpace value
 /// describing the colorspace for output to the display, defaults to
 /// SDL_COLORSPACE_SRGB.
@@ -1658,7 +1662,7 @@ int sdlRenderCoordinatesToWindow(Pointer<SdlRenderer> renderer, double x,
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_GetRenderCoordinatesFromWindowCoordinates
+/// \sa SDL_RenderCoordinatesFromWindow
 ///
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_ConvertEventToRenderCoordinates(SDL_Renderer *renderer, SDL_Event *event)

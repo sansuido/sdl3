@@ -43,9 +43,10 @@ import 'struct_sdl.dart';
 /// it will be invoked.
 /// \param window The window that the dialog should be modal for. May be NULL.
 /// Not all platforms support this option.
-/// \param filters A null-terminated list of SDL_DialogFileFilter's. May be
-/// NULL. Not all platforms support this option, and platforms
-/// that do support it may allow the user to ignore the filters.
+/// \param filters A list of SDL_DialogFileFilter's. May be NULL. Not all
+/// platforms support this option, and platforms that do support
+/// it may allow the user to ignore the filters.
+/// \param nfilters The number of filters. Ignored if filters is NULL.
 /// \param default_location The default folder or file to start the dialog at.
 /// May be NULL. Not all platforms support this option.
 /// \param allow_many If non-zero, the user will be allowed to select multiple
@@ -59,13 +60,14 @@ import 'struct_sdl.dart';
 /// \sa SDL_ShowOpenFolderDialog
 ///
 /// ```c
-/// extern SDL_DECLSPEC void SDLCALL SDL_ShowOpenFileDialog(SDL_DialogFileCallback callback, void *userdata, SDL_Window *window, const SDL_DialogFileFilter *filters, const char *default_location, SDL_bool allow_many)
+/// extern SDL_DECLSPEC void SDLCALL SDL_ShowOpenFileDialog(SDL_DialogFileCallback callback, void *userdata, SDL_Window *window, const SDL_DialogFileFilter *filters, int nfilters, const char *default_location, SDL_bool allow_many)
 /// ```
 void sdlShowOpenFileDialog(
     Pointer<NativeFunction<SdlDialogFileCallback>> callback,
     Pointer<NativeType> userdata,
     Pointer<SdlWindow> window,
     Pointer<SdlDialogFileFilter> filters,
+    int nfilters,
     String? defaultLocation,
     bool allowMany) {
   final sdlShowOpenFileDialogLookupFunction = libSdl3.lookupFunction<
@@ -74,6 +76,7 @@ void sdlShowOpenFileDialog(
           Pointer<NativeType> userdata,
           Pointer<SdlWindow> window,
           Pointer<SdlDialogFileFilter> filters,
+          Int32 nfilters,
           Pointer<Utf8> defaultLocation,
           Int32 allowMany),
       void Function(
@@ -81,12 +84,13 @@ void sdlShowOpenFileDialog(
           Pointer<NativeType> userdata,
           Pointer<SdlWindow> window,
           Pointer<SdlDialogFileFilter> filters,
+          int nfilters,
           Pointer<Utf8> defaultLocation,
           int allowMany)>('SDL_ShowOpenFileDialog');
   final defaultLocationPointer =
       defaultLocation != null ? defaultLocation.toNativeUtf8() : nullptr;
   final result = sdlShowOpenFileDialogLookupFunction(callback, userdata, window,
-      filters, defaultLocationPointer, allowMany ? 1 : 0);
+      filters, nfilters, defaultLocationPointer, allowMany ? 1 : 0);
   calloc.free(defaultLocationPointer);
   return result;
 }
@@ -130,9 +134,10 @@ void sdlShowOpenFileDialog(
 /// it will be invoked.
 /// \param window The window that the dialog should be modal for. May be NULL.
 /// Not all platforms support this option.
-/// \param filters A null-terminated list of SDL_DialogFileFilter's. May be
-/// NULL. Not all platforms support this option, and platforms
-/// that do support it may allow the user to ignore the filters.
+/// \param filters A list of SDL_DialogFileFilter's. May be NULL. Not all
+/// platforms support this option, and platforms that do support
+/// it may allow the user to ignore the filters.
+/// \param nfilters The number of filters. Ignored if filters is NULL.
 /// \param default_location The default folder or file to start the dialog at.
 /// May be NULL. Not all platforms support this option.
 ///
@@ -144,13 +149,14 @@ void sdlShowOpenFileDialog(
 /// \sa SDL_ShowOpenFolderDialog
 ///
 /// ```c
-/// extern SDL_DECLSPEC void SDLCALL SDL_ShowSaveFileDialog(SDL_DialogFileCallback callback, void *userdata, SDL_Window *window, const SDL_DialogFileFilter *filters, const char *default_location)
+/// extern SDL_DECLSPEC void SDLCALL SDL_ShowSaveFileDialog(SDL_DialogFileCallback callback, void *userdata, SDL_Window *window, const SDL_DialogFileFilter *filters, int nfilters, const char *default_location)
 /// ```
 void sdlShowSaveFileDialog(
     Pointer<NativeFunction<SdlDialogFileCallback>> callback,
     Pointer<NativeType> userdata,
     Pointer<SdlWindow> window,
     Pointer<SdlDialogFileFilter> filters,
+    int nfilters,
     String? defaultLocation) {
   final sdlShowSaveFileDialogLookupFunction = libSdl3.lookupFunction<
       Void Function(
@@ -158,17 +164,19 @@ void sdlShowSaveFileDialog(
           Pointer<NativeType> userdata,
           Pointer<SdlWindow> window,
           Pointer<SdlDialogFileFilter> filters,
+          Int32 nfilters,
           Pointer<Utf8> defaultLocation),
       void Function(
           Pointer<NativeFunction<SdlDialogFileCallback>> callback,
           Pointer<NativeType> userdata,
           Pointer<SdlWindow> window,
           Pointer<SdlDialogFileFilter> filters,
+          int nfilters,
           Pointer<Utf8> defaultLocation)>('SDL_ShowSaveFileDialog');
   final defaultLocationPointer =
       defaultLocation != null ? defaultLocation.toNativeUtf8() : nullptr;
   final result = sdlShowSaveFileDialogLookupFunction(
-      callback, userdata, window, filters, defaultLocationPointer);
+      callback, userdata, window, filters, nfilters, defaultLocationPointer);
   calloc.free(defaultLocationPointer);
   return result;
 }
