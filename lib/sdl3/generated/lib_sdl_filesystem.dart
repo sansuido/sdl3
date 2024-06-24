@@ -100,8 +100,8 @@ Pointer<Int8> sdlGetBasePath() {
 /// The pointer returned is owned by the caller. Please call SDL_free() on the
 /// pointer when done with it.
 ///
-/// \param org the name of your organization
-/// \param app the name of your application
+/// \param org the name of your organization.
+/// \param app the name of your application.
 /// \returns a UTF-8 string of the user directory in platform-dependent
 /// notation. NULL if there's a problem (creating directory failed,
 /// etc.).
@@ -150,8 +150,8 @@ Pointer<Int8> sdlGetPrefPath(String? org, String? app) {
 ///
 /// If NULL is returned, the error may be obtained with SDL_GetError().
 ///
-/// \param folder The type of folder to find
-/// \returns Either a null-terminated C string containing the full path to the
+/// \param folder the type of folder to find.
+/// \returns either a null-terminated C string containing the full path to the
 /// folder, or NULL if an error happened.
 ///
 /// \since This function is available since SDL 3.0.0.
@@ -171,7 +171,7 @@ Pointer<Int8> sdlGetUserFolder(int folder) {
 ///
 /// Create a directory.
 ///
-/// \param path the path of the directory to create
+/// \param path the path of the directory to create.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -197,9 +197,9 @@ int sdlCreateDirectory(String? path) {
 /// callback, called once for each directory entry, until all results have been
 /// provided or the callback returns <= 0.
 ///
-/// \param path the path of the directory to enumerate
-/// \param callback a function that is called for each entry in the directory
-/// \param userdata a pointer that is passed to `callback`
+/// \param path the path of the directory to enumerate.
+/// \param callback a function that is called for each entry in the directory.
+/// \param userdata a pointer that is passed to `callback`.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -231,7 +231,7 @@ int sdlEnumerateDirectory(
 ///
 /// Remove a file or an empty directory.
 ///
-/// \param path the path of the directory to enumerate
+/// \param path the path of the directory to enumerate.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -253,8 +253,8 @@ int sdlRemovePath(String? path) {
 ///
 /// Rename a file or directory.
 ///
-/// \param oldpath the old path
-/// \param newpath the new path
+/// \param oldpath the old path.
+/// \param newpath the new path.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -279,9 +279,9 @@ int sdlRenamePath(String? oldpath, String? newpath) {
 ///
 /// Get information about a filesystem path.
 ///
-/// \param path the path to query
+/// \param path the path to query.
 /// \param info a pointer filled in with information about the path, or NULL to
-/// check for the existence of a file
+/// check for the existence of a file.
 /// \returns 0 on success or a negative error code if the file doesn't exist,
 /// or another failure; call SDL_GetError() for more information.
 ///
@@ -320,7 +320,7 @@ int sdlGetPathInfo(String? path, Pointer<SdlPathInfo> info) {
 ///
 /// You must free the returned pointer with SDL_free() when done with it.
 ///
-/// \param path the path of the directory to enumerate
+/// \param path the path of the directory to enumerate.
 /// \param pattern the pattern that files in the directory must match. Can be
 /// NULL.
 /// \param flags `SDL_GLOB_*` bitflags that affect this search.

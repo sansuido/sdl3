@@ -67,7 +67,7 @@ import 'struct_sdl.dart';
 /// the filesystem. If SDL used some other method to access the filesystem,
 /// this property will not be set.
 ///
-/// \param file a UTF-8 string representing the filename to open
+/// \param file a UTF-8 string representing the filename to open.
 /// \param mode an ASCII string representing the mode to be used for opening
 /// the file.
 /// \returns a pointer to the SDL_IOStream structure that is created, or NULL
@@ -112,8 +112,8 @@ Pointer<SdlIoStream> sdlIoFromFile(String? file, String? mode) {
 /// buffer, you should use SDL_IOFromConstMem() with a read-only buffer of
 /// memory instead.
 ///
-/// \param mem a pointer to a buffer to feed an SDL_IOStream stream
-/// \param size the buffer size, in bytes
+/// \param mem a pointer to a buffer to feed an SDL_IOStream stream.
+/// \param size the buffer size, in bytes.
 /// \returns a pointer to a new SDL_IOStream structure, or NULL if it fails;
 /// call SDL_GetError() for more information.
 ///
@@ -154,8 +154,8 @@ Pointer<SdlIoStream> sdlIoFromMem(Pointer<NativeType> mem, int size) {
 /// If you need to write to a memory buffer, you should use SDL_IOFromMem()
 /// with a writable buffer of memory instead.
 ///
-/// \param mem a pointer to a read-only buffer to feed an SDL_IOStream stream
-/// \param size the buffer size, in bytes
+/// \param mem a pointer to a read-only buffer to feed an SDL_IOStream stream.
+/// \param size the buffer size, in bytes.
 /// \returns a pointer to a new SDL_IOStream structure, or NULL if it fails;
 /// call SDL_GetError() for more information.
 ///
@@ -183,12 +183,15 @@ Pointer<SdlIoStream> sdlIoFromConstMem(Pointer<NativeType> mem, int size) {
 /// allocated memory.
 ///
 /// This supports the following properties to provide access to the memory and
-/// control over allocations: - `SDL_PROP_IOSTREAM_DYNAMIC_MEMORY_POINTER`: a
-/// pointer to the internal memory of the stream. This can be set to NULL to
-/// transfer ownership of the memory to the application, which should free the
-/// memory with SDL_free(). If this is done, the next operation on the stream
-/// must be SDL_CloseIO(). - `SDL_PROP_IOSTREAM_DYNAMIC_CHUNKSIZE_NUMBER`:
-/// memory will be allocated in multiples of this size, defaulting to 1024.
+/// control over allocations:
+///
+/// - `SDL_PROP_IOSTREAM_DYNAMIC_MEMORY_POINTER`: a pointer to the internal
+/// memory of the stream. This can be set to NULL to transfer ownership of
+/// the memory to the application, which should free the memory with
+/// SDL_free(). If this is done, the next operation on the stream must be
+/// SDL_CloseIO().
+/// - `SDL_PROP_IOSTREAM_DYNAMIC_CHUNKSIZE_NUMBER`: memory will be allocated in
+/// multiples of this size, defaulting to 1024.
 ///
 /// \returns a pointer to a new SDL_IOStream structure, or NULL if it fails;
 /// call SDL_GetError() for more information.
@@ -224,8 +227,8 @@ Pointer<SdlIoStream> sdlIoFromDynamicMem() {
 /// This function makes a copy of `iface` and the caller does not need to keep
 /// this data around after this call.
 ///
-/// \param iface The function pointers that implement this SDL_IOStream.
-/// \param userdata The app-controlled pointer that is passed to iface's
+/// \param iface the function pointers that implement this SDL_IOStream.
+/// \param userdata the app-controlled pointer that is passed to iface's
 /// functions when called.
 /// \returns a pointer to the allocated memory on success, or NULL on failure;
 /// call SDL_GetError() for more information.
@@ -261,7 +264,7 @@ Pointer<SdlIoStream> sdlOpenIo(
 /// Note that if this fails to flush the stream to disk, this function reports
 /// an error, but the SDL_IOStream is still invalid once this function returns.
 ///
-/// \param context SDL_IOStream structure to close
+/// \param context SDL_IOStream structure to close.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -282,7 +285,7 @@ int sdlCloseIo(Pointer<SdlIoStream> context) {
 ///
 /// Get the properties associated with an SDL_IOStream.
 ///
-/// \param context a pointer to an SDL_IOStream structure
+/// \param context a pointer to an SDL_IOStream structure.
 /// \returns a valid property ID on success or 0 on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -333,7 +336,7 @@ int sdlGetIoStatus(Pointer<SdlIoStream> context) {
 ///
 /// Use this function to get the size of the data stream in an SDL_IOStream.
 ///
-/// \param context the SDL_IOStream to get the size of the data stream from
+/// \param context the SDL_IOStream to get the size of the data stream from.
 /// \returns the size of the data stream in the SDL_IOStream on success or a
 /// negative error code on failure; call SDL_GetError() for more
 /// information.
@@ -363,11 +366,11 @@ int sdlGetIoSize(Pointer<SdlIoStream> context) {
 ///
 /// If this stream can not seek, it will return -1.
 ///
-/// \param context a pointer to an SDL_IOStream structure
-/// \param offset an offset in bytes, relative to **whence** location; can be
-/// negative
+/// \param context a pointer to an SDL_IOStream structure.
+/// \param offset an offset in bytes, relative to `whence` location; can be
+/// negative.
 /// \param whence any of `SDL_IO_SEEK_SET`, `SDL_IO_SEEK_CUR`,
-/// `SDL_IO_SEEK_END`
+/// `SDL_IO_SEEK_END`.
 /// \returns the final offset in the data stream after the seek or a negative
 /// error code on failure; call SDL_GetError() for more information.
 ///
@@ -376,7 +379,7 @@ int sdlGetIoSize(Pointer<SdlIoStream> context) {
 /// \sa SDL_TellIO
 ///
 /// ```c
-/// extern SDL_DECLSPEC Sint64 SDLCALL SDL_SeekIO(SDL_IOStream *context, Sint64 offset, int whence)
+/// extern SDL_DECLSPEC Sint64 SDLCALL SDL_SeekIO(SDL_IOStream *context, Sint64 offset, SDL_IOWhence whence)
 /// ```
 int sdlSeekIo(Pointer<SdlIoStream> context, int offset, int whence) {
   final sdlSeekIoLookupFunction = libSdl3.lookupFunction<
@@ -394,7 +397,7 @@ int sdlSeekIo(Pointer<SdlIoStream> context, int offset, int whence) {
 /// simplify application development.
 ///
 /// \param context an SDL_IOStream data stream object from which to get the
-/// current offset
+/// current offset.
 /// \returns the current offset in the stream, or -1 if the information can not
 /// be determined.
 ///
@@ -421,8 +424,8 @@ int sdlTellIo(Pointer<SdlIoStream> context) {
 /// determine if there was an error or all data was read, call
 /// SDL_GetIOStatus().
 ///
-/// \param context a pointer to an SDL_IOStream structure
-/// \param ptr a pointer to a buffer to read data into
+/// \param context a pointer to an SDL_IOStream structure.
+/// \param ptr a pointer to a buffer to read data into.
 /// \param size the number of bytes to read from the data source.
 /// \returns the number of bytes read, or 0 on end of file or other error.
 ///
@@ -457,9 +460,9 @@ int sdlReadIo(Pointer<SdlIoStream> context, Pointer<NativeType> ptr, int size) {
 /// recoverable, such as a non-blocking write that can simply be retried later,
 /// or a fatal error.
 ///
-/// \param context a pointer to an SDL_IOStream structure
-/// \param ptr a pointer to a buffer containing data to write
-/// \param size the number of bytes to write
+/// \param context a pointer to an SDL_IOStream structure.
+/// \param ptr a pointer to a buffer containing data to write.
+/// \param size the number of bytes to write.
 /// \returns the number of bytes written, which will be less than `size` on
 /// error; call SDL_GetError() for more information.
 ///
@@ -488,10 +491,10 @@ int sdlWriteIo(
 ///
 /// This function does formatted printing to the stream.
 ///
-/// \param context a pointer to an SDL_IOStream structure
-/// \param fmt a printf() style format string
+/// \param context a pointer to an SDL_IOStream structure.
+/// \param fmt a printf() style format string.
 /// \param ... additional parameters matching % tokens in the `fmt` string, if
-/// any
+/// any.
 /// \returns the number of bytes written, or 0 on error; call SDL_GetError()
 /// for more information.
 ///
@@ -521,9 +524,9 @@ int sdlIOprintf(
 ///
 /// This function does formatted printing to the stream.
 ///
-/// \param context a pointer to an SDL_IOStream structure
-/// \param fmt a printf() style format string
-/// \param ap a variable argument list
+/// \param context a pointer to an SDL_IOStream structure.
+/// \param fmt a printf() style format string.
+/// \param ap a variable argument list.
 /// \returns the number of bytes written, or 0 on error; call SDL_GetError()
 /// for more information.
 ///
@@ -557,10 +560,10 @@ int sdlIOvprintf(
 ///
 /// The data should be freed with SDL_free().
 ///
-/// \param src the SDL_IOStream to read all available data from
-/// \param datasize if not NULL, will store the number of bytes read
+/// \param src the SDL_IOStream to read all available data from.
+/// \param datasize if not NULL, will store the number of bytes read.
 /// \param closeio if SDL_TRUE, calls SDL_CloseIO() on `src` before returning,
-/// even in the case of an error
+/// even in the case of an error.
 /// \returns the data, or NULL if there was an error.
 ///
 /// \since This function is available since SDL 3.0.0.
@@ -589,8 +592,8 @@ Pointer<NativeType> sdlLoadFileIo(
 ///
 /// The data should be freed with SDL_free().
 ///
-/// \param file the path to read all available data from
-/// \param datasize if not NULL, will store the number of bytes read
+/// \param file the path to read all available data from.
+/// \param datasize if not NULL, will store the number of bytes read.
 /// \returns the data, or NULL if there was an error.
 ///
 /// \since This function is available since SDL 3.0.0.
@@ -615,8 +618,8 @@ Pointer<NativeType> sdlLoadFile(String? file, Pointer<Uint32> datasize) {
 ///
 /// Use this function to read a byte from an SDL_IOStream.
 ///
-/// \param src the SDL_IOStream to read from
-/// \param value a pointer filled in with the data read
+/// \param src the SDL_IOStream to read from.
+/// \param value a pointer filled in with the data read.
 /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
 /// for more information.
 ///
@@ -634,14 +637,35 @@ bool sdlReadU8(Pointer<SdlIoStream> src, Pointer<Uint8> value) {
 }
 
 ///
+/// Use this function to read a signed byte from an SDL_IOStream.
+///
+/// \param src the SDL_IOStream to read from.
+/// \param value a pointer filled in with the data read.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_ReadS8(SDL_IOStream *src, Sint8 *value)
+/// ```
+bool sdlReadS8(Pointer<SdlIoStream> src, Pointer<Int8> value) {
+  final sdlReadS8LookupFunction = libSdl3.lookupFunction<
+      Int32 Function(Pointer<SdlIoStream> src, Pointer<Int8> value),
+      int Function(
+          Pointer<SdlIoStream> src, Pointer<Int8> value)>('SDL_ReadS8');
+  return sdlReadS8LookupFunction(src, value) == 1;
+}
+
+///
 /// Use this function to read 16 bits of little-endian data from an
 /// SDL_IOStream and return in native format.
 ///
 /// SDL byteswaps the data only if necessary, so the data returned will be in
 /// the native byte order.
 ///
-/// \param src the stream from which to read data
-/// \param value a pointer filled in with the data read
+/// \param src the stream from which to read data.
+/// \param value a pointer filled in with the data read.
 /// \returns SDL_TRUE on successful write, SDL_FALSE on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -665,8 +689,8 @@ bool sdlReadU16Le(Pointer<SdlIoStream> src, Pointer<Uint16> value) {
 /// SDL byteswaps the data only if necessary, so the data returned will be in
 /// the native byte order.
 ///
-/// \param src the stream from which to read data
-/// \param value a pointer filled in with the data read
+/// \param src the stream from which to read data.
+/// \param value a pointer filled in with the data read.
 /// \returns SDL_TRUE on successful write, SDL_FALSE on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -690,8 +714,8 @@ bool sdlReadS16Le(Pointer<SdlIoStream> src, Pointer<Int16> value) {
 /// SDL byteswaps the data only if necessary, so the data returned will be in
 /// the native byte order.
 ///
-/// \param src the stream from which to read data
-/// \param value a pointer filled in with the data read
+/// \param src the stream from which to read data.
+/// \param value a pointer filled in with the data read.
 /// \returns SDL_TRUE on successful write, SDL_FALSE on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -715,8 +739,8 @@ bool sdlReadU16Be(Pointer<SdlIoStream> src, Pointer<Uint16> value) {
 /// SDL byteswaps the data only if necessary, so the data returned will be in
 /// the native byte order.
 ///
-/// \param src the stream from which to read data
-/// \param value a pointer filled in with the data read
+/// \param src the stream from which to read data.
+/// \param value a pointer filled in with the data read.
 /// \returns SDL_TRUE on successful write, SDL_FALSE on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -740,8 +764,8 @@ bool sdlReadS16Be(Pointer<SdlIoStream> src, Pointer<Int16> value) {
 /// SDL byteswaps the data only if necessary, so the data returned will be in
 /// the native byte order.
 ///
-/// \param src the stream from which to read data
-/// \param value a pointer filled in with the data read
+/// \param src the stream from which to read data.
+/// \param value a pointer filled in with the data read.
 /// \returns SDL_TRUE on successful write, SDL_FALSE on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -765,8 +789,8 @@ bool sdlReadU32Le(Pointer<SdlIoStream> src, Pointer<Uint32> value) {
 /// SDL byteswaps the data only if necessary, so the data returned will be in
 /// the native byte order.
 ///
-/// \param src the stream from which to read data
-/// \param value a pointer filled in with the data read
+/// \param src the stream from which to read data.
+/// \param value a pointer filled in with the data read.
 /// \returns SDL_TRUE on successful write, SDL_FALSE on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -790,8 +814,8 @@ bool sdlReadS32Le(Pointer<SdlIoStream> src, Pointer<Int32> value) {
 /// SDL byteswaps the data only if necessary, so the data returned will be in
 /// the native byte order.
 ///
-/// \param src the stream from which to read data
-/// \param value a pointer filled in with the data read
+/// \param src the stream from which to read data.
+/// \param value a pointer filled in with the data read.
 /// \returns SDL_TRUE on successful write, SDL_FALSE on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -815,8 +839,8 @@ bool sdlReadU32Be(Pointer<SdlIoStream> src, Pointer<Uint32> value) {
 /// SDL byteswaps the data only if necessary, so the data returned will be in
 /// the native byte order.
 ///
-/// \param src the stream from which to read data
-/// \param value a pointer filled in with the data read
+/// \param src the stream from which to read data.
+/// \param value a pointer filled in with the data read.
 /// \returns SDL_TRUE on successful write, SDL_FALSE on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -840,8 +864,8 @@ bool sdlReadS32Be(Pointer<SdlIoStream> src, Pointer<Int32> value) {
 /// SDL byteswaps the data only if necessary, so the data returned will be in
 /// the native byte order.
 ///
-/// \param src the stream from which to read data
-/// \param value a pointer filled in with the data read
+/// \param src the stream from which to read data.
+/// \param value a pointer filled in with the data read.
 /// \returns SDL_TRUE on successful write, SDL_FALSE on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -865,8 +889,8 @@ bool sdlReadU64Le(Pointer<SdlIoStream> src, Pointer<Uint64> value) {
 /// SDL byteswaps the data only if necessary, so the data returned will be in
 /// the native byte order.
 ///
-/// \param src the stream from which to read data
-/// \param value a pointer filled in with the data read
+/// \param src the stream from which to read data.
+/// \param value a pointer filled in with the data read.
 /// \returns SDL_TRUE on successful write, SDL_FALSE on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -890,8 +914,8 @@ bool sdlReadS64Le(Pointer<SdlIoStream> src, Pointer<Int64> value) {
 /// SDL byteswaps the data only if necessary, so the data returned will be in
 /// the native byte order.
 ///
-/// \param src the stream from which to read data
-/// \param value a pointer filled in with the data read
+/// \param src the stream from which to read data.
+/// \param value a pointer filled in with the data read.
 /// \returns SDL_TRUE on successful write, SDL_FALSE on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -915,8 +939,8 @@ bool sdlReadU64Be(Pointer<SdlIoStream> src, Pointer<Uint64> value) {
 /// SDL byteswaps the data only if necessary, so the data returned will be in
 /// the native byte order.
 ///
-/// \param src the stream from which to read data
-/// \param value a pointer filled in with the data read
+/// \param src the stream from which to read data.
+/// \param value a pointer filled in with the data read.
 /// \returns SDL_TRUE on successful write, SDL_FALSE on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -936,8 +960,8 @@ bool sdlReadS64Be(Pointer<SdlIoStream> src, Pointer<Int64> value) {
 ///
 /// Use this function to write a byte to an SDL_IOStream.
 ///
-/// \param dst the SDL_IOStream to write to
-/// \param value the byte value to write
+/// \param dst the SDL_IOStream to write to.
+/// \param value the byte value to write.
 /// \returns SDL_TRUE on successful write, SDL_FALSE on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -954,6 +978,26 @@ bool sdlWriteU8(Pointer<SdlIoStream> dst, int value) {
 }
 
 ///
+/// Use this function to write a signed byte to an SDL_IOStream.
+///
+/// \param dst the SDL_IOStream to write to.
+/// \param value the byte value to write.
+/// \returns SDL_TRUE on successful write, SDL_FALSE on failure; call
+/// SDL_GetError() for more information.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_WriteS8(SDL_IOStream *dst, Sint8 value)
+/// ```
+bool sdlWriteS8(Pointer<SdlIoStream> dst, int value) {
+  final sdlWriteS8LookupFunction = libSdl3.lookupFunction<
+      Int32 Function(Pointer<SdlIoStream> dst, Int8 value),
+      int Function(Pointer<SdlIoStream> dst, int value)>('SDL_WriteS8');
+  return sdlWriteS8LookupFunction(dst, value) == 1;
+}
+
+///
 /// Use this function to write 16 bits in native format to an SDL_IOStream as
 /// little-endian data.
 ///
@@ -961,8 +1005,8 @@ bool sdlWriteU8(Pointer<SdlIoStream> dst, int value) {
 /// specifies native format, and the data written will be in little-endian
 /// format.
 ///
-/// \param dst the stream to which data will be written
-/// \param value the data to be written, in native format
+/// \param dst the stream to which data will be written.
+/// \param value the data to be written, in native format.
 /// \returns SDL_TRUE on successful write, SDL_FALSE on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -986,8 +1030,8 @@ bool sdlWriteU16Le(Pointer<SdlIoStream> dst, int value) {
 /// specifies native format, and the data written will be in little-endian
 /// format.
 ///
-/// \param dst the stream to which data will be written
-/// \param value the data to be written, in native format
+/// \param dst the stream to which data will be written.
+/// \param value the data to be written, in native format.
 /// \returns SDL_TRUE on successful write, SDL_FALSE on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -1010,8 +1054,8 @@ bool sdlWriteS16Le(Pointer<SdlIoStream> dst, int value) {
 /// SDL byteswaps the data only if necessary, so the application always
 /// specifies native format, and the data written will be in big-endian format.
 ///
-/// \param dst the stream to which data will be written
-/// \param value the data to be written, in native format
+/// \param dst the stream to which data will be written.
+/// \param value the data to be written, in native format.
 /// \returns SDL_TRUE on successful write, SDL_FALSE on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -1034,8 +1078,8 @@ bool sdlWriteU16Be(Pointer<SdlIoStream> dst, int value) {
 /// SDL byteswaps the data only if necessary, so the application always
 /// specifies native format, and the data written will be in big-endian format.
 ///
-/// \param dst the stream to which data will be written
-/// \param value the data to be written, in native format
+/// \param dst the stream to which data will be written.
+/// \param value the data to be written, in native format.
 /// \returns SDL_TRUE on successful write, SDL_FALSE on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -1059,8 +1103,8 @@ bool sdlWriteS16Be(Pointer<SdlIoStream> dst, int value) {
 /// specifies native format, and the data written will be in little-endian
 /// format.
 ///
-/// \param dst the stream to which data will be written
-/// \param value the data to be written, in native format
+/// \param dst the stream to which data will be written.
+/// \param value the data to be written, in native format.
 /// \returns SDL_TRUE on successful write, SDL_FALSE on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -1084,8 +1128,8 @@ bool sdlWriteU32Le(Pointer<SdlIoStream> dst, int value) {
 /// specifies native format, and the data written will be in little-endian
 /// format.
 ///
-/// \param dst the stream to which data will be written
-/// \param value the data to be written, in native format
+/// \param dst the stream to which data will be written.
+/// \param value the data to be written, in native format.
 /// \returns SDL_TRUE on successful write, SDL_FALSE on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -1108,8 +1152,8 @@ bool sdlWriteS32Le(Pointer<SdlIoStream> dst, int value) {
 /// SDL byteswaps the data only if necessary, so the application always
 /// specifies native format, and the data written will be in big-endian format.
 ///
-/// \param dst the stream to which data will be written
-/// \param value the data to be written, in native format
+/// \param dst the stream to which data will be written.
+/// \param value the data to be written, in native format.
 /// \returns SDL_TRUE on successful write, SDL_FALSE on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -1132,8 +1176,8 @@ bool sdlWriteU32Be(Pointer<SdlIoStream> dst, int value) {
 /// SDL byteswaps the data only if necessary, so the application always
 /// specifies native format, and the data written will be in big-endian format.
 ///
-/// \param dst the stream to which data will be written
-/// \param value the data to be written, in native format
+/// \param dst the stream to which data will be written.
+/// \param value the data to be written, in native format.
 /// \returns SDL_TRUE on successful write, SDL_FALSE on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -1157,8 +1201,8 @@ bool sdlWriteS32Be(Pointer<SdlIoStream> dst, int value) {
 /// specifies native format, and the data written will be in little-endian
 /// format.
 ///
-/// \param dst the stream to which data will be written
-/// \param value the data to be written, in native format
+/// \param dst the stream to which data will be written.
+/// \param value the data to be written, in native format.
 /// \returns SDL_TRUE on successful write, SDL_FALSE on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -1182,8 +1226,8 @@ bool sdlWriteU64Le(Pointer<SdlIoStream> dst, int value) {
 /// specifies native format, and the data written will be in little-endian
 /// format.
 ///
-/// \param dst the stream to which data will be written
-/// \param value the data to be written, in native format
+/// \param dst the stream to which data will be written.
+/// \param value the data to be written, in native format.
 /// \returns SDL_TRUE on successful write, SDL_FALSE on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -1206,8 +1250,8 @@ bool sdlWriteS64Le(Pointer<SdlIoStream> dst, int value) {
 /// SDL byteswaps the data only if necessary, so the application always
 /// specifies native format, and the data written will be in big-endian format.
 ///
-/// \param dst the stream to which data will be written
-/// \param value the data to be written, in native format
+/// \param dst the stream to which data will be written.
+/// \param value the data to be written, in native format.
 /// \returns SDL_TRUE on successful write, SDL_FALSE on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -1230,8 +1274,8 @@ bool sdlWriteU64Be(Pointer<SdlIoStream> dst, int value) {
 /// SDL byteswaps the data only if necessary, so the application always
 /// specifies native format, and the data written will be in big-endian format.
 ///
-/// \param dst the stream to which data will be written
-/// \param value the data to be written, in native format
+/// \param dst the stream to which data will be written.
+/// \param value the data to be written, in native format.
 /// \returns SDL_TRUE on successful write, SDL_FALSE on failure; call
 /// SDL_GetError() for more information.
 ///

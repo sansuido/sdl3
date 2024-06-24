@@ -57,8 +57,8 @@ String? sdlGetTouchDeviceName(int touchId) {
 ///
 /// Get the type of the given touch device.
 ///
-/// \param touchID the ID of a touch device
-/// \returns touch device type
+/// \param touchID the ID of a touch device.
+/// \returns touch device type.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -75,7 +75,7 @@ int sdlGetTouchDeviceType(int touchId) {
 ///
 /// Get a list of active fingers for a given touch device.
 ///
-/// \param touchID the ID of a touch device
+/// \param touchID the ID of a touch device.
 /// \param count a pointer filled in with the number of fingers returned, can
 /// be NULL.
 /// \returns a NULL terminated array of SDL_Finger pointers which should be

@@ -7,8 +7,8 @@ import 'struct_sdl.dart';
 ///
 /// Opens up a read-only container for the application's filesystem.
 ///
-/// \param override a path to override the backend's default title root
-/// \param props a property list that may contain backend-specific information
+/// \param override a path to override the backend's default title root.
+/// \param props a property list that may contain backend-specific information.
 /// \returns a title storage container on success or NULL on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -41,9 +41,9 @@ Pointer<SdlStorage> sdlOpenTitleStorage(String? override, int props) {
 /// This allows the backend to properly batch file operations and flush them
 /// when the container has been closed; ensuring safe and optimal save I/O.
 ///
-/// \param org the name of your organization
-/// \param app the name of your application
-/// \param props a property list that may contain backend-specific information
+/// \param org the name of your organization.
+/// \param app the name of your application.
+/// \param props a property list that may contain backend-specific information.
 /// \returns a user storage container on success or NULL on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -83,7 +83,7 @@ Pointer<SdlStorage> sdlOpenUserStorage(String? org, String? app, int props) {
 /// SDL_OpenUserStorage() for access to user data.
 ///
 /// \param path the base path prepended to all storage paths, or NULL for no
-/// base path
+/// base path.
 /// \returns a filesystem storage container on success or NULL on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -118,8 +118,8 @@ Pointer<SdlStorage> sdlOpenFileStorage(String? path) {
 /// should use the built-in implementations in SDL, like SDL_OpenTitleStorage()
 /// or SDL_OpenUserStorage().
 ///
-/// \param iface the function table to be used by this container
-/// \param userdata the pointer that will be passed to the store interface
+/// \param iface the function table to be used by this container.
+/// \param userdata the pointer that will be passed to the store interface.
 /// \returns a storage container on success or NULL on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -148,7 +148,7 @@ Pointer<SdlStorage> sdlOpenStorage(
 ///
 /// Closes and frees a storage container.
 ///
-/// \param storage a storage container to close
+/// \param storage a storage container to close.
 /// \returns 0 if the container was freed with no errors, a negative value
 /// otherwise; call SDL_GetError() for more information. Even if the
 /// function returns an error, the container data will be freed; the
@@ -178,8 +178,8 @@ int sdlCloseStorage(Pointer<SdlStorage> storage) {
 /// SDL_TRUE - however, it is not recommended to spinwait on this call, as the
 /// backend may depend on a synchronous message loop.
 ///
-/// \param storage a storage container to query
-/// \returns SDL_TRUE if the container is ready, SDL_FALSE otherwise
+/// \param storage a storage container to query.
+/// \returns SDL_TRUE if the container is ready, SDL_FALSE otherwise.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -196,9 +196,9 @@ bool sdlStorageReady(Pointer<SdlStorage> storage) {
 ///
 /// Query the size of a file within a storage container.
 ///
-/// \param storage a storage container to query
-/// \param path the relative path of the file to query
-/// \param length a pointer to be filled with the file's length
+/// \param storage a storage container to query.
+/// \param path the relative path of the file to query.
+/// \param length a pointer to be filled with the file's length.
 /// \returns 0 if the file could be queried, a negative value otherwise; call
 /// SDL_GetError() for more information.
 ///
@@ -228,10 +228,10 @@ int sdlGetStorageFileSize(
 /// Synchronously read a file from a storage container into a client-provided
 /// buffer.
 ///
-/// \param storage a storage container to read from
-/// \param path the relative path of the file to read
-/// \param destination a client-provided buffer to read the file into
-/// \param length the length of the destination buffer
+/// \param storage a storage container to read from.
+/// \param path the relative path of the file to read.
+/// \param destination a client-provided buffer to read the file into.
+/// \param length the length of the destination buffer.
 /// \returns 0 if the file was read, a negative value otherwise; call
 /// SDL_GetError() for more information.
 ///
@@ -261,10 +261,10 @@ int sdlReadStorageFile(Pointer<SdlStorage> storage, String? path,
 ///
 /// Synchronously write a file from client memory into a storage container.
 ///
-/// \param storage a storage container to write to
-/// \param path the relative path of the file to write
-/// \param source a client-provided buffer to write from
-/// \param length the length of the source buffer
+/// \param storage a storage container to write to.
+/// \param path the relative path of the file to write.
+/// \param source a client-provided buffer to write from.
+/// \param length the length of the source buffer.
 /// \returns 0 if the file was written, a negative value otherwise; call
 /// SDL_GetError() for more information.
 ///
@@ -294,8 +294,8 @@ int sdlWriteStorageFile(Pointer<SdlStorage> storage, String? path,
 ///
 /// Create a directory in a writable storage container.
 ///
-/// \param storage a storage container
-/// \param path the path of the directory to create
+/// \param storage a storage container.
+/// \param path the path of the directory to create.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -324,10 +324,10 @@ int sdlCreateStorageDirectory(Pointer<SdlStorage> storage, String? path) {
 /// callback, called once for each directory entry, until all results have been
 /// provided or the callback returns <= 0.
 ///
-/// \param storage a storage container
-/// \param path the path of the directory to enumerate
-/// \param callback a function that is called for each entry in the directory
-/// \param userdata a pointer that is passed to `callback`
+/// \param storage a storage container.
+/// \param path the path of the directory to enumerate.
+/// \param callback a function that is called for each entry in the directory.
+/// \param userdata a pointer that is passed to `callback`.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -364,8 +364,8 @@ int sdlEnumerateStorageDirectory(
 ///
 /// Remove a file or an empty directory in a writable storage container.
 ///
-/// \param storage a storage container
-/// \param path the path of the directory to enumerate
+/// \param storage a storage container.
+/// \param path the path of the directory to enumerate.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -390,9 +390,9 @@ int sdlRemoveStoragePath(Pointer<SdlStorage> storage, String? path) {
 ///
 /// Rename a file or directory in a writable storage container.
 ///
-/// \param storage a storage container
-/// \param oldpath the old path
-/// \param newpath the new path
+/// \param storage a storage container.
+/// \param oldpath the old path.
+/// \param newpath the new path.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -422,10 +422,10 @@ int sdlRenameStoragePath(
 ///
 /// Get information about a filesystem path in a storage container.
 ///
-/// \param storage a storage container
-/// \param path the path to query
+/// \param storage a storage container.
+/// \param path the path to query.
 /// \param info a pointer filled in with information about the path, or NULL to
-/// check for the existence of a file
+/// check for the existence of a file.
 /// \returns 0 on success or a negative error code if the file doesn't exist,
 /// or another failure; call SDL_GetError() for more information.
 ///
@@ -453,8 +453,8 @@ int sdlGetStoragePathInfo(
 ///
 /// Queries the remaining space in a storage container.
 ///
-/// \param storage a storage container to query
-/// \returns the amount of remaining space, in bytes
+/// \param storage a storage container to query.
+/// \returns the amount of remaining space, in bytes.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -491,8 +491,8 @@ int sdlGetStorageSpaceRemaining(Pointer<SdlStorage> storage) {
 ///
 /// You must free the returned pointer with SDL_free() when done with it.
 ///
-/// \param storage a storage container
-/// \param path the path of the directory to enumerate
+/// \param storage a storage container.
+/// \param path the path of the directory to enumerate.
 /// \param pattern the pattern that files in the directory must match. Can be
 /// NULL.
 /// \param flags `SDL_GLOB_*` bitflags that affect this search.

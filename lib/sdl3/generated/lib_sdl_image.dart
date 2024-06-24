@@ -10,7 +10,7 @@ final libSdl3Image = dylib.dylibOpen('SDL3_image');
 ///
 /// This function gets the version of the dynamically linked SDL_image library.
 ///
-/// \returns SDL_image version
+/// \returns SDL_image version.
 ///
 /// \since This function is available since SDL_image 3.0.0.
 ///
@@ -233,7 +233,9 @@ Pointer<SdlSurface> imgLoadTypedIo(
 /// software surface: call IMG_LoadTexture() instead.
 ///
 /// When done with the returned surface, the app should dispose of it with a
-/// call to SDL_DestroySurface().
+/// call to
+/// [SDL_DestroySurface](https://wiki.libsdl.org/SDL3/SDL_DestroySurface)
+/// ().
 ///
 /// \param file a path on the filesystem to load an image from.
 /// \returns a new SDL surface, or NULL on error.
@@ -1428,7 +1430,7 @@ int imgIsWebp(Pointer<SdlIoStream> src) {
 /// interface available here.
 ///
 /// \param src an SDL_IOStream to load image data from.
-/// \returns SDL surface, or NULL on error
+/// \returns SDL surface, or NULL on error.
 ///
 /// \since This function is available since SDL_image 3.0.0.
 ///
@@ -1471,7 +1473,7 @@ Pointer<SdlSurface> imgLoadAvifIo(Pointer<SdlIoStream> src) {
 /// interface available here.
 ///
 /// \param src an SDL_IOStream to load image data from.
-/// \returns SDL surface, or NULL on error
+/// \returns SDL surface, or NULL on error.
 ///
 /// \since This function is available since SDL_image 3.0.0.
 ///
@@ -1513,7 +1515,7 @@ Pointer<SdlSurface> imgLoadIcoIo(Pointer<SdlIoStream> src) {
 /// interface available here.
 ///
 /// \param src an SDL_IOStream to load image data from.
-/// \returns SDL surface, or NULL on error
+/// \returns SDL surface, or NULL on error.
 ///
 /// \since This function is available since SDL_image 3.0.0.
 ///
@@ -1555,7 +1557,7 @@ Pointer<SdlSurface> imgLoadCurIo(Pointer<SdlIoStream> src) {
 /// interface available here.
 ///
 /// \param src an SDL_IOStream to load image data from.
-/// \returns SDL surface, or NULL on error
+/// \returns SDL surface, or NULL on error.
 ///
 /// \since This function is available since SDL_image 3.0.0.
 ///
@@ -1597,7 +1599,7 @@ Pointer<SdlSurface> imgLoadBmpIo(Pointer<SdlIoStream> src) {
 /// interface available here.
 ///
 /// \param src an SDL_IOStream to load image data from.
-/// \returns SDL surface, or NULL on error
+/// \returns SDL surface, or NULL on error.
 ///
 /// \since This function is available since SDL_image 3.0.0.
 ///
@@ -1639,7 +1641,7 @@ Pointer<SdlSurface> imgLoadGifIo(Pointer<SdlIoStream> src) {
 /// interface available here.
 ///
 /// \param src an SDL_IOStream to load image data from.
-/// \returns SDL surface, or NULL on error
+/// \returns SDL surface, or NULL on error.
 ///
 /// \since This function is available since SDL_image 3.0.0.
 ///
@@ -1681,7 +1683,7 @@ Pointer<SdlSurface> imgLoadJpgIo(Pointer<SdlIoStream> src) {
 /// interface available here.
 ///
 /// \param src an SDL_IOStream to load image data from.
-/// \returns SDL surface, or NULL on error
+/// \returns SDL surface, or NULL on error.
 ///
 /// \since This function is available since SDL_image 3.0.0.
 ///
@@ -1723,7 +1725,7 @@ Pointer<SdlSurface> imgLoadJxlIo(Pointer<SdlIoStream> src) {
 /// interface available here.
 ///
 /// \param src an SDL_IOStream to load image data from.
-/// \returns SDL surface, or NULL on error
+/// \returns SDL surface, or NULL on error.
 ///
 /// \since This function is available since SDL_image 3.0.0.
 ///
@@ -1765,7 +1767,7 @@ Pointer<SdlSurface> imgLoadLbmIo(Pointer<SdlIoStream> src) {
 /// interface available here.
 ///
 /// \param src an SDL_IOStream to load image data from.
-/// \returns SDL surface, or NULL on error
+/// \returns SDL surface, or NULL on error.
 ///
 /// \since This function is available since SDL_image 3.0.0.
 ///
@@ -1807,7 +1809,7 @@ Pointer<SdlSurface> imgLoadPcxIo(Pointer<SdlIoStream> src) {
 /// interface available here.
 ///
 /// \param src an SDL_IOStream to load image data from.
-/// \returns SDL surface, or NULL on error
+/// \returns SDL surface, or NULL on error.
 ///
 /// \since This function is available since SDL_image 3.0.0.
 ///
@@ -1849,7 +1851,7 @@ Pointer<SdlSurface> imgLoadPngIo(Pointer<SdlIoStream> src) {
 /// interface available here.
 ///
 /// \param src an SDL_IOStream to load image data from.
-/// \returns SDL surface, or NULL on error
+/// \returns SDL surface, or NULL on error.
 ///
 /// \since This function is available since SDL_image 3.0.0.
 ///
@@ -1891,7 +1893,7 @@ Pointer<SdlSurface> imgLoadPnmIo(Pointer<SdlIoStream> src) {
 /// interface available here.
 ///
 /// \param src an SDL_IOStream to load image data from.
-/// \returns SDL surface, or NULL on error
+/// \returns SDL surface, or NULL on error.
 ///
 /// \since This function is available since SDL_image 3.0.0.
 ///
@@ -1933,7 +1935,7 @@ Pointer<SdlSurface> imgLoadSvgIo(Pointer<SdlIoStream> src) {
 /// interface available here.
 ///
 /// \param src an SDL_IOStream to load image data from.
-/// \returns SDL surface, or NULL on error
+/// \returns SDL surface, or NULL on error.
 ///
 /// \since This function is available since SDL_image 3.0.0.
 ///
@@ -1975,7 +1977,7 @@ Pointer<SdlSurface> imgLoadQoiIo(Pointer<SdlIoStream> src) {
 /// interface available here.
 ///
 /// \param src an SDL_IOStream to load image data from.
-/// \returns SDL surface, or NULL on error
+/// \returns SDL surface, or NULL on error.
 ///
 /// \since This function is available since SDL_image 3.0.0.
 ///
@@ -2017,7 +2019,7 @@ Pointer<SdlSurface> imgLoadTgaIo(Pointer<SdlIoStream> src) {
 /// interface available here.
 ///
 /// \param src an SDL_IOStream to load image data from.
-/// \returns SDL surface, or NULL on error
+/// \returns SDL surface, or NULL on error.
 ///
 /// \since This function is available since SDL_image 3.0.0.
 ///
@@ -2059,7 +2061,7 @@ Pointer<SdlSurface> imgLoadTifIo(Pointer<SdlIoStream> src) {
 /// interface available here.
 ///
 /// \param src an SDL_IOStream to load image data from.
-/// \returns SDL surface, or NULL on error
+/// \returns SDL surface, or NULL on error.
 ///
 /// \since This function is available since SDL_image 3.0.0.
 ///
@@ -2101,7 +2103,7 @@ Pointer<SdlSurface> imgLoadXcfIo(Pointer<SdlIoStream> src) {
 /// interface available here.
 ///
 /// \param src an SDL_IOStream to load image data from.
-/// \returns SDL surface, or NULL on error
+/// \returns SDL surface, or NULL on error.
 ///
 /// \since This function is available since SDL_image 3.0.0.
 ///
@@ -2143,7 +2145,7 @@ Pointer<SdlSurface> imgLoadXpmIo(Pointer<SdlIoStream> src) {
 /// interface available here.
 ///
 /// \param src an SDL_IOStream to load image data from.
-/// \returns SDL surface, or NULL on error
+/// \returns SDL surface, or NULL on error.
 ///
 /// \since This function is available since SDL_image 3.0.0.
 ///
@@ -2185,7 +2187,7 @@ Pointer<SdlSurface> imgLoadXvIo(Pointer<SdlIoStream> src) {
 /// interface available here.
 ///
 /// \param src an SDL_IOStream to load image data from.
-/// \returns SDL surface, or NULL on error
+/// \returns SDL surface, or NULL on error.
 ///
 /// \since This function is available since SDL_image 3.0.0.
 ///
@@ -2312,11 +2314,11 @@ Pointer<SdlSurface> imgReadXpmFromArrayToRgb888(Pointer<Pointer<Int8>> xpm) {
 ///
 /// If the file already exists, it will be overwritten.
 ///
-/// \param surface the SDL surface to save
+/// \param surface the SDL surface to save.
 /// \param file path on the filesystem to write new file to.
 /// \param quality the desired quality, ranging between 0 (lowest) and 100
-/// (highest)
-/// \returns 0 if successful, -1 on error
+/// (highest).
+/// \returns 0 if successful, -1 on error.
 ///
 /// \since This function is available since SDL_image 3.0.0.
 ///
@@ -2345,12 +2347,12 @@ int imgSaveAvif(Pointer<SdlSurface> surface, String? file, int quality) {
 /// If `closeio` is SDL_TRUE, `dst` will be closed before returning, whether
 /// this function succeeds or not.
 ///
-/// \param surface the SDL surface to save
+/// \param surface the SDL surface to save.
 /// \param dst the SDL_IOStream to save the image data to.
 /// \param closeio SDL_TRUE to close/free the SDL_IOStream before returning,
 /// SDL_FALSE to leave it open.
 /// \param quality the desired quality, ranging between 0 (lowest) and 100
-/// (highest)
+/// (highest).
 /// \returns 0 if successful, -1 on error.
 ///
 /// \since This function is available since SDL_image 3.0.0.
@@ -2375,9 +2377,9 @@ int imgSaveAvifIo(Pointer<SdlSurface> surface, Pointer<SdlIoStream> dst,
 ///
 /// If the file already exists, it will be overwritten.
 ///
-/// \param surface the SDL surface to save
+/// \param surface the SDL surface to save.
 /// \param file path on the filesystem to write new file to.
-/// \returns 0 if successful, -1 on error
+/// \returns 0 if successful, -1 on error.
 ///
 /// \since This function is available since SDL_image 3.0.0.
 ///
@@ -2405,7 +2407,7 @@ int imgSavePng(Pointer<SdlSurface> surface, String? file) {
 /// If `closeio` is SDL_TRUE, `dst` will be closed before returning, whether
 /// this function succeeds or not.
 ///
-/// \param surface the SDL surface to save
+/// \param surface the SDL surface to save.
 /// \param dst the SDL_IOStream to save the image data to.
 /// \param closeio SDL_TRUE to close/free the SDL_IOStream before returning,
 /// SDL_FALSE to leave it open.
@@ -2433,11 +2435,11 @@ int imgSavePngIo(
 ///
 /// If the file already exists, it will be overwritten.
 ///
-/// \param surface the SDL surface to save
+/// \param surface the SDL surface to save.
 /// \param file path on the filesystem to write new file to.
 /// \param quality [0; 33] is Lowest quality, [34; 66] is Middle quality, [67;
-/// 100] is Highest quality
-/// \returns 0 if successful, -1 on error
+/// 100] is Highest quality.
+/// \returns 0 if successful, -1 on error.
 ///
 /// \since This function is available since SDL_image 3.0.0.
 ///
@@ -2466,12 +2468,12 @@ int imgSaveJpg(Pointer<SdlSurface> surface, String? file, int quality) {
 /// If `closeio` is SDL_TRUE, `dst` will be closed before returning, whether
 /// this function succeeds or not.
 ///
-/// \param surface the SDL surface to save
+/// \param surface the SDL surface to save.
 /// \param dst the SDL_IOStream to save the image data to.
 /// \param closeio SDL_TRUE to close/free the SDL_IOStream before returning,
 /// SDL_FALSE to leave it open.
 /// \param quality [0; 33] is Lowest quality, [34; 66] is Middle quality, [67;
-/// 100] is Highest quality
+/// 100] is Highest quality.
 /// \returns 0 if successful, -1 on error.
 ///
 /// \since This function is available since SDL_image 3.0.0.

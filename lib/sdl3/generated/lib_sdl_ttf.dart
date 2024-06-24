@@ -10,7 +10,7 @@ final libSdl3Ttf = dylib.dylibOpen('SDL3_ttf');
 ///
 /// This function gets the version of the dynamically linked SDL_ttf library.
 ///
-/// \returns SDL_ttf version
+/// \returns SDL_ttf version.
 ///
 /// \since This function is available since SDL_ttf 3.0.0.
 ///
@@ -79,7 +79,7 @@ void ttfGetHarfBuzzVersion(
 /// A UNICODE BOM character in a string will override this setting for the
 /// remainder of that string.
 ///
-/// \param swapped boolean to indicate whether text is byteswapped
+/// \param swapped boolean to indicate whether text is byteswapped.
 ///
 /// \since This function is available since SDL_ttf 3.0.0.
 ///
@@ -439,7 +439,7 @@ Pointer<TtfFont> ttfOpenFontIndexDpiio(Pointer<SdlIoStream> src, bool closeio,
 ///
 /// \param font the font to resize.
 /// \param ptsize the new point size.
-/// \returns 0 if successful, -1 on error
+/// \returns 0 if successful, -1 on error.
 ///
 /// \since This function is available since SDL_ttf 3.0.0.
 ///
@@ -1188,9 +1188,9 @@ int ttfSizeUnicode(Pointer<TtfFont> font, Pointer<Uint16> text,
 /// \param font the font to query.
 /// \param text text to calculate, in Latin1 encoding.
 /// \param measure_width maximum width, in pixels, available for the string.
+/// \param extent on return, filled with latest calculated width.
 /// \param count on return, filled with number of characters that can be
 /// rendered.
-/// \param extent on return, filled with latest calculated width.
 /// \returns 0 if successful, -1 on error.
 ///
 /// \since This function is available since SDL_ttf 3.0.0.
@@ -1227,9 +1227,9 @@ int ttfMeasureText(Pointer<TtfFont> font, String? text, int measureWidth,
 /// \param font the font to query.
 /// \param text text to calculate, in UTF-8 encoding.
 /// \param measure_width maximum width, in pixels, available for the string.
+/// \param extent on return, filled with latest calculated width.
 /// \param count on return, filled with number of characters that can be
 /// rendered.
-/// \param extent on return, filled with latest calculated width.
 /// \returns 0 if successful, -1 on error.
 ///
 /// \since This function is available since SDL_ttf 3.0.0.
@@ -1271,9 +1271,9 @@ int ttfMeasureUtf8(Pointer<TtfFont> font, String? text, int measureWidth,
 /// \param font the font to query.
 /// \param text text to calculate, in UCS-2 encoding.
 /// \param measure_width maximum width, in pixels, available for the string.
+/// \param extent on return, filled with latest calculated width.
 /// \param count on return, filled with number of characters that can be
 /// rendered.
-/// \param extent on return, filled with latest calculated width.
 /// \returns 0 if successful, -1 on error.
 ///
 /// \since This function is available since SDL_ttf 3.0.0.

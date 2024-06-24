@@ -9,7 +9,7 @@ final libSdl3Net = dylib.dylibOpen('SDL3_net');
 ///
 /// This function gets the version of the dynamically linked SDL_net library.
 ///
-/// \returns SDL_net version
+/// \returns SDL_net version.
 ///
 /// \since This function is available since SDL_net 3.0.0.
 ///
@@ -516,8 +516,8 @@ void sdlNetFreeLocalAddresses(Pointer<Pointer<SdlNetAddress>> addresses) {
 /// you do not have to byteswap it into "network order," as the library will
 /// handle that for you.
 ///
-/// \param address the address of the remote server to connect to
-/// \param port the port on the remote server to connect to
+/// \param address the address of the remote server to connect to.
+/// \param port the port on the remote server to connect to.
 /// \returns a new SDLNet_StreamSocket, pending connection, or NULL on error;
 /// call SDL_GetError() for details.
 ///
@@ -630,7 +630,7 @@ int sdlNetWaitUntilConnected(Pointer<SdlNetStreamSocket> sock, int timeout) {
 /// handle that for you.
 ///
 /// \param addr the _local_ address to listen for connections on, or NULL.
-/// \param port the port on the local address to listen for connections on
+/// \param port the port on the local address to listen for connections on.
 /// \returns a new SDLNet_StreamSocket, pending connection, or NULL on error;
 /// call SDL_GetError() for details.
 ///
@@ -678,7 +678,7 @@ Pointer<SdlNetServer> sdlNetCreateServer(
 /// When done with the newly-accepted client, you can disconnect and dispose of
 /// the stream socket by calling SDL_DestroyStreamSocket().
 ///
-/// \param server the server object to check for pending connections
+/// \param server the server object to check for pending connections.
 /// \param client_stream Will be set to a new stream socket if a connection was
 /// pending, NULL otherwise.
 /// \returns 0 on success (even if no new connections were pending), -1 on
@@ -717,7 +717,7 @@ int sdlNetAcceptClient(Pointer<SdlNetServer> server,
 /// Further attempts to make new connections to this server will fail on the
 /// client side.
 ///
-/// \param server server to destroy
+/// \param server server to destroy.
 ///
 /// \threadsafety You should not operate on the same server from multiple
 /// threads at the same time without supplying a serialization
@@ -747,7 +747,7 @@ void sdlNetDestroyServer(Pointer<SdlNetServer> server) {
 /// This adds a reference to the address; the caller _must_ call
 /// SDLNet_UnrefAddress() when done with it.
 ///
-/// \param sock the stream socket to query
+/// \param sock the stream socket to query.
 /// \returns the socket's remote address, or NULL on error; call SDL_GetError()
 /// for details.
 ///
@@ -841,7 +841,7 @@ int sdlNetGetConnectionStatus(Pointer<SdlNetStreamSocket> sock) {
 /// conditions; once a stream socket fails, you should assume it is no longer
 /// usable and should destroy it with SDL_DestroyStreamSocket().
 ///
-/// \param sock the stream socket to send data through
+/// \param sock the stream socket to send data through.
 /// \param buf a pointer to the data to send.
 /// \param buflen the size of the data to send, in bytes.
 /// \returns 0 if data sent or queued for transmission, -1 on failure; call
@@ -887,7 +887,7 @@ int sdlNetWriteToStreamSocket(
 /// conditions; once a stream socket fails, you should assume it is no longer
 /// usable and should destroy it with SDL_DestroyStreamSocket().
 ///
-/// \param sock the stream socket to query
+/// \param sock the stream socket to query.
 /// \returns number of bytes still pending transmission, -1 on failure; call
 /// SDL_GetError() for details.
 ///
@@ -936,7 +936,7 @@ int sdlNetGetStreamSocketPendingWrites(Pointer<SdlNetStreamSocket> sock) {
 /// conditions; once a stream socket fails, you should assume it is no longer
 /// usable and should destroy it with SDL_DestroyStreamSocket().
 ///
-/// \param sock the stream socket to wait on
+/// \param sock the stream socket to wait on.
 /// \param timeout Number of milliseconds to wait for draining to complete. -1
 /// to wait indefinitely, 0 to check once without waiting.
 /// \returns number of bytes still pending transmission, -1 on failure; call
@@ -996,7 +996,7 @@ int sdlNetWaitUntilStreamSocketDrained(
 /// conditions; once a stream socket fails, you should assume it is no longer
 /// usable and should destroy it with SDL_DestroyStreamSocket().
 ///
-/// \param sock the stream socket to receive data from
+/// \param sock the stream socket to receive data from.
 /// \param buf a pointer to a buffer where received data will be collected.
 /// \param buflen the size of the buffer pointed to by `buf`, in bytes. This is
 /// the maximum that will be read from the stream socket.
@@ -1089,7 +1089,7 @@ void sdlNetSimulateStreamPacketLoss(
 /// SDLNet_WaitUntilStreamSocketDrained(). Any data that has arrived from the
 /// remote end of the connection that hasn't been read yet is lost.
 ///
-/// \param sock stream socket to destroy
+/// \param sock stream socket to destroy.
 ///
 /// \threadsafety You should not operate on the same socket from multiple
 /// threads at the same time without supplying a serialization
@@ -1158,7 +1158,6 @@ void sdlNetDestroyStreamSocket(Pointer<SdlNetStreamSocket> sock) {
 /// you do not have to byteswap it into "network order," as the library will
 /// handle that for you.
 ///
-/// \param address the _local_ address to listen for connections on, or NULL.
 /// \param port the port on the local address to listen for connections on, or
 /// zero for the system to decide.
 /// \returns a new SDLNet_DatagramSocket, or NULL on error; call SDL_GetError()
@@ -1217,7 +1216,7 @@ Pointer<SdlNetDatagramSocket> sdlNetCreateDatagramSocket(
 /// should assume it is no longer usable and should destroy it with
 /// SDL_DestroyDatagramSocket().
 ///
-/// \param sock the datagram socket to send data through
+/// \param sock the datagram socket to send data through.
 /// \param address the SDLNet_Address object address.
 /// \param port the address port.
 /// \param buf a pointer to the data to send as a single packet.
@@ -1290,7 +1289,7 @@ int sdlNetSendDatagram(
 /// should assume it is no longer usable and should destroy it with
 /// SDL_DestroyDatagramSocket().
 ///
-/// \param sock the datagram socket to send data through
+/// \param sock the datagram socket to send data through.
 /// \param dgram a pointer to the datagram packet pointer.
 /// \returns 0 if data sent or queued for transmission, -1 on failure; call
 /// SDL_GetError() for details.
@@ -1404,7 +1403,7 @@ void sdlNetSimulateDatagramPacketLoss(
 /// Any data that has arrived from the remote end of the connection that hasn't
 /// been read yet is lost.
 ///
-/// \param sock datagram socket to destroy
+/// \param sock datagram socket to destroy.
 ///
 /// \threadsafety You should not operate on the same socket from multiple
 /// threads at the same time without supplying a serialization

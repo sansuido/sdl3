@@ -11,8 +11,8 @@ import 'struct_sdl.dart';
 /// message should continue to be processed, or SDL_FALSE to prevent further
 /// processing.
 ///
-/// \param callback The SDL_WindowsMessageHook function to call.
-/// \param userdata a pointer to pass to every iteration of `callback`
+/// \param callback the SDL_WindowsMessageHook function to call.
+/// \param userdata a pointer to pass to every iteration of `callback`.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -39,7 +39,7 @@ void sdlSetWindowsMessageHook(
 /// The returned adapter index can be passed to `IDirect3D9::CreateDevice` and
 /// controls on which monitor a full screen application will appear.
 ///
-/// \param displayID the instance of the display to query
+/// \param displayID the instance of the display to query.
 /// \returns the D3D9 adapter index on success or a negative error code on
 /// failure; call SDL_GetError() for more information.
 ///
@@ -62,9 +62,9 @@ int sdlDirect3D9GetAdapterIndex(int displayId) {
 /// `EnumOutputs` respectively to get the objects required to create a DX10 or
 /// DX11 device and swap chain.
 ///
-/// \param displayID the instance of the display to query
-/// \param adapterIndex a pointer to be filled in with the adapter index
-/// \param outputIndex a pointer to be filled in with the output index
+/// \param displayID the instance of the display to query.
+/// \param adapterIndex a pointer to be filled in with the adapter index.
+/// \param outputIndex a pointer to be filled in with the output index.
 /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
 /// for more information.
 ///
@@ -92,8 +92,8 @@ bool sdlDxgiGetOutputInfo(
 /// should continue to be processed, or SDL_FALSE to prevent further
 /// processing.
 ///
-/// \param callback The SDL_X11EventHook function to call.
-/// \param userdata a pointer to pass to every iteration of `callback`
+/// \param callback the SDL_X11EventHook function to call.
+/// \param userdata a pointer to pass to every iteration of `callback`.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -116,7 +116,7 @@ void sdlSetX11EventHook(Pointer<NativeFunction<SdlX11EventHook>> callback,
 /// This uses setpriority() if possible, and RealtimeKit if available.
 ///
 /// \param threadID the Unix thread ID to change priority of.
-/// \param priority The new, Unix-specific, priority value.
+/// \param priority the new, Unix-specific, priority value.
 /// \returns 0 on success, or -1 on error.
 ///
 /// \since This function is available since SDL 3.0.0.
@@ -136,10 +136,10 @@ int sdlLinuxSetThreadPriority(int threadId, int priority) {
 ///
 /// This uses setpriority() if possible, and RealtimeKit if available.
 ///
-/// \param threadID The Unix thread ID to change priority of.
-/// \param sdlPriority The new SDL_ThreadPriority value.
-/// \param schedPolicy The new scheduling policy (SCHED_FIFO, SCHED_RR,
-/// SCHED_OTHER, etc...)
+/// \param threadID the Unix thread ID to change priority of.
+/// \param sdlPriority the new SDL_ThreadPriority value.
+/// \param schedPolicy the new scheduling policy (SCHED_FIFO, SCHED_RR,
+/// SCHED_OTHER, etc...).
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -184,9 +184,9 @@ int sdlLinuxSetThreadPriorityAndPolicy(
 ///
 /// https://wiki.libsdl.org/SDL3/README/main-functions
 ///
-/// \param window the window for which the animation callback should be set
+/// \param window the window for which the animation callback should be set.
 /// \param interval the number of frames after which **callback** will be
-/// called
+/// called.
 /// \param callback the function to call for every frame.
 /// \param callbackParam a pointer that is passed to `callback`.
 /// \returns 0 on success or a negative error code on failure; call
@@ -197,17 +197,23 @@ int sdlLinuxSetThreadPriorityAndPolicy(
 /// \sa SDL_iOSSetEventPump
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_iOSSetAnimationCallback(SDL_Window * window, int interval, void (SDLCALL *callback)(void*), void *callbackParam)
+/// extern SDL_DECLSPEC int SDLCALL SDL_iOSSetAnimationCallback(SDL_Window * window, int interval, SDL_iOSAnimationCallback callback, void *callbackParam)
 /// ```
-int sdlIOsSetAnimationCallback(Pointer<SdlWindow> window, int interval,
-    Pointer<NativeType> callback, Pointer<NativeType> callbackParam) {
+int sdlIOsSetAnimationCallback(
+    Pointer<SdlWindow> window,
+    int interval,
+    Pointer<NativeFunction<SdlIOsAnimationCallback>> callback,
+    Pointer<NativeType> callbackParam) {
   final sdlIOsSetAnimationCallbackLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlWindow> window, Int32 interval,
-          Pointer<NativeType> callback, Pointer<NativeType> callbackParam),
+      Int32 Function(
+          Pointer<SdlWindow> window,
+          Int32 interval,
+          Pointer<NativeFunction<SdlIOsAnimationCallback>> callback,
+          Pointer<NativeType> callbackParam),
       int Function(
           Pointer<SdlWindow> window,
           int interval,
-          Pointer<NativeType> callback,
+          Pointer<NativeFunction<SdlIOsAnimationCallback>> callback,
           Pointer<NativeType> callbackParam)>('SDL_iOSSetAnimationCallback');
   return sdlIOsSetAnimationCallbackLookupFunction(
       window, interval, callback, callbackParam);
@@ -218,7 +224,7 @@ int sdlIOsSetAnimationCallback(Pointer<SdlWindow> window, int interval,
 ///
 /// This function is only available on Apple iOS.
 ///
-/// \param enabled SDL_TRUE to enable the event pump, SDL_FALSE to disable it
+/// \param enabled SDL_TRUE to enable the event pump, SDL_FALSE to disable it.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -515,9 +521,9 @@ String? sdlAndroidGetExternalStoragePath() {
 /// like memory running out. Normally there will be a yes or no to the request
 /// through the callback.
 ///
-/// \param permission The permission to request.
-/// \param cb The callback to trigger when the request has a response.
-/// \param userdata An app-controlled pointer that is passed to the callback.
+/// \param permission the permission to request.
+/// \param cb the callback to trigger when the request has a response.
+/// \param userdata an app-controlled pointer that is passed to the callback.
 /// \returns zero if the request was submitted, -1 if there was an error
 /// submitting. The result of the request is only ever reported
 /// through the callback, not this return value.
@@ -564,11 +570,11 @@ int sdlAndroidRequestPermission(
 ///
 /// https://developer.android.com/reference/android/view/Gravity
 ///
-/// \param message text message to be shown
-/// \param duration 0=short, 1=long
+/// \param message text message to be shown.
+/// \param duration 0=short, 1=long.
 /// \param gravity where the notification should appear on the screen.
-/// \param xoffset set this parameter only when gravity >=0
-/// \param yoffset set this parameter only when gravity >=0
+/// \param xoffset set this parameter only when gravity >=0.
+/// \param yoffset set this parameter only when gravity >=0.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -598,8 +604,8 @@ int sdlAndroidShowToast(
 ///
 /// Override "boolean onUnhandledMessage(Message msg)" to handle the message.
 ///
-/// \param command user command that must be greater or equal to 0x8000
-/// \param param user parameter
+/// \param command user command that must be greater or equal to 0x8000.
+/// \param param user parameter.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -631,7 +637,7 @@ int sdlAndroidSendMessage(int command, int param) {
 ///
 /// The returned string follows the SDL_GetStringRule.
 ///
-/// \param pathType the type of path to retrieve, one of SDL_WinRT_Path
+/// \param pathType the type of path to retrieve, one of SDL_WinRT_Path.
 /// \returns a UTF-8 string (8-bit, multi-byte) containing the path, or NULL if
 /// the path is not available for any reason; call SDL_GetError() for
 /// more information.

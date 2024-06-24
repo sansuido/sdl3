@@ -23,9 +23,9 @@ import 'struct_sdl.dart';
 /// Usually, apps should just call this function the same way on every platform
 /// and let the macros hide the details.
 ///
-/// \param fn the SDL_ThreadFunction function to call in the new thread
-/// \param name the name of the thread
-/// \param data a pointer that is passed to `fn`
+/// \param fn the SDL_ThreadFunction function to call in the new thread.
+/// \param name the name of the thread.
+/// \param data a pointer that is passed to `fn`.
 /// \returns an opaque pointer to the new thread object on success, NULL if the
 /// new thread could not be created; call SDL_GetError() for more
 /// information.
@@ -107,7 +107,7 @@ Pointer<SdlThread> sdlCreateThread(
 /// Usually, apps should just call this function the same way on every platform
 /// and let the macros hide the details.
 ///
-/// \param props the properties to use
+/// \param props the properties to use.
 /// \returns an opaque pointer to the new thread object on success, NULL if the
 /// new thread could not be created; call SDL_GetError() for more
 /// information.
@@ -207,7 +207,7 @@ Pointer<SdlThread> sdlCreateThreadWithPropertiesRuntime(int props,
 ///
 /// The returned string follows the SDL_GetStringRule.
 ///
-/// \param thread the thread to query
+/// \param thread the thread to query.
 /// \returns a pointer to a UTF-8 string that names the specified thread, or
 /// NULL if it doesn't have a name.
 ///
@@ -260,7 +260,7 @@ int sdlGetCurrentThreadId() {
 /// If SDL is running on a platform that does not support threads the return
 /// value will always be zero.
 ///
-/// \param thread the thread to query
+/// \param thread the thread to query.
 /// \returns the ID of the specified thread, or the ID of the current thread if
 /// `thread` is NULL.
 ///
@@ -285,7 +285,7 @@ int sdlGetThreadId(Pointer<SdlThread> thread) {
 /// promote the thread to a higher priority) at all, and some require you to be
 /// an administrator account. Be prepared for this to fail.
 ///
-/// \param priority the SDL_ThreadPriority to set
+/// \param priority the SDL_ThreadPriority to set.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -324,7 +324,7 @@ int sdlSetThreadPriority(int priority) {
 /// afterward.
 ///
 /// \param thread the SDL_Thread pointer that was returned from the
-/// SDL_CreateThread() call that started this thread
+/// SDL_CreateThread() call that started this thread.
 /// \param status pointer to an integer that will receive the value returned
 /// from the thread function by its 'return', or NULL to not
 /// receive such value back.
@@ -372,7 +372,7 @@ void sdlWaitThread(Pointer<SdlThread> thread, Pointer<Int32> status) {
 /// It is safe to pass NULL to this function; it is a no-op.
 ///
 /// \param thread the SDL_Thread pointer that was returned from the
-/// SDL_CreateThread() call that started this thread
+/// SDL_CreateThread() call that started this thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -414,7 +414,7 @@ int sdlCreateTls() {
 ///
 /// Get the current thread's value associated with a thread local storage ID.
 ///
-/// \param id the thread local storage ID
+/// \param id the thread local storage ID.
 /// \returns the value associated with the ID for the current thread or NULL if
 /// no value has been set; call SDL_GetError() for more information.
 ///
@@ -435,18 +435,16 @@ Pointer<NativeType> sdlGetTls(int id) {
 ///
 /// Set the current thread's value associated with a thread local storage ID.
 ///
-/// The function prototype for `destructor` is:
+/// Note that replacing a value from a previous call to this function on the
+/// same thread does _not_ call the previous value's destructor!
 ///
-/// ```c
-/// void destructor(void *value)
-/// ```
+/// `destructor` can be NULL; it is assumed that `value` does not need to be
+/// cleaned up if so.
 ///
-/// where its parameter `value` is what was passed as `value` to SDL_SetTLS().
-///
-/// \param id the thread local storage ID
-/// \param value the value to associate with the ID for the current thread
+/// \param id the thread local storage ID.
+/// \param value the value to associate with the ID for the current thread.
 /// \param destructor a function called when the thread exits, to free the
-/// value
+/// value. Can be NULL.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -455,7 +453,7 @@ Pointer<NativeType> sdlGetTls(int id) {
 /// \sa SDL_GetTLS
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_SetTLS(SDL_TLSID id, const void *value, void (SDLCALL *destructor)(void*))
+/// extern SDL_DECLSPEC int SDLCALL SDL_SetTLS(SDL_TLSID id, const void *value, SDL_TLSDestructorCallback destructor)
 /// ```
 int sdlSetTls(int id, Pointer<NativeType> value, Pointer<NativeType> deor) {
   final sdlSetTlsLookupFunction = libSdl3.lookupFunction<

@@ -17,9 +17,9 @@ import 'lib_sdl.dart';
 /// }
 /// ```
 ///
-/// \param fmt a printf()-style message format string
+/// \param fmt a printf()-style message format string.
 /// \param ... additional parameters matching % tokens in the `fmt` string, if
-/// any
+/// any.
 /// \returns always -1.
 ///
 /// \since This function is available since SDL 3.0.0.
@@ -46,7 +46,7 @@ int sdlSetError(String? fmt, Pointer<NativeType> arg1) {
 ///
 /// This function does not do any memory allocation.
 ///
-/// \returns -1
+/// \returns -1.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -109,7 +109,7 @@ String? sdlGetError() {
 ///
 /// Clear any previous error message for this thread.
 ///
-/// \returns 0
+/// \returns 0.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///

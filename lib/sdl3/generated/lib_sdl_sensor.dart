@@ -7,7 +7,7 @@ import 'struct_sdl.dart';
 ///
 /// Get a list of currently connected sensors.
 ///
-/// \param count a pointer filled in with the number of sensors returned
+/// \param count a pointer filled in with the number of sensors returned.
 /// \returns a 0 terminated array of sensor instance IDs which should be freed
 /// with SDL_free(), or NULL on error; call SDL_GetError() for more
 /// details.
@@ -29,8 +29,8 @@ Pointer<Uint32> sdlGetSensors(Pointer<Int32> count) {
 ///
 /// The returned string follows the SDL_GetStringRule.
 ///
-/// \param instance_id the sensor instance ID
-/// \returns the sensor name, or NULL if `instance_id` is not valid
+/// \param instance_id the sensor instance ID.
+/// \returns the sensor name, or NULL if `instance_id` is not valid.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -51,9 +51,9 @@ String? sdlGetSensorInstanceName(int instanceId) {
 ///
 /// Get the type of a sensor.
 ///
-/// \param instance_id the sensor instance ID
+/// \param instance_id the sensor instance ID.
 /// \returns the SDL_SensorType, or `SDL_SENSOR_INVALID` if `instance_id` is
-/// not valid
+/// not valid.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -70,9 +70,9 @@ int sdlGetSensorInstanceType(int instanceId) {
 ///
 /// Get the platform dependent type of a sensor.
 ///
-/// \param instance_id the sensor instance ID
+/// \param instance_id the sensor instance ID.
 /// \returns the sensor platform dependent type, or -1 if `instance_id` is not
-/// valid
+/// valid.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -89,7 +89,7 @@ int sdlGetSensorInstanceNonPortableType(int instanceId) {
 ///
 /// Open a sensor for use.
 ///
-/// \param instance_id the sensor instance ID
+/// \param instance_id the sensor instance ID.
 /// \returns an SDL_Sensor sensor object, or NULL if an error occurred.
 ///
 /// \since This function is available since SDL 3.0.0.
@@ -107,7 +107,7 @@ Pointer<SdlSensor> sdlOpenSensor(int instanceId) {
 ///
 /// Return the SDL_Sensor associated with an instance ID.
 ///
-/// \param instance_id the sensor instance ID
+/// \param instance_id the sensor instance ID.
 /// \returns an SDL_Sensor object.
 ///
 /// \since This function is available since SDL 3.0.0.
@@ -126,7 +126,7 @@ Pointer<SdlSensor> sdlGetSensorFromInstanceId(int instanceId) {
 ///
 /// Get the properties associated with a sensor.
 ///
-/// \param sensor The SDL_Sensor object
+/// \param sensor the SDL_Sensor object.
 /// \returns a valid property ID on success or 0 on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -150,7 +150,7 @@ int sdlGetSensorProperties(Pointer<SdlSensor> sensor) {
 ///
 /// The returned string follows the SDL_GetStringRule.
 ///
-/// \param sensor The SDL_Sensor object
+/// \param sensor the SDL_Sensor object.
 /// \returns the sensor name, or NULL if `sensor` is NULL.
 ///
 /// \since This function is available since SDL 3.0.0.
@@ -172,7 +172,7 @@ String? sdlGetSensorName(Pointer<SdlSensor> sensor) {
 ///
 /// Get the type of a sensor.
 ///
-/// \param sensor The SDL_Sensor object to inspect
+/// \param sensor the SDL_Sensor object to inspect.
 /// \returns the SDL_SensorType type, or `SDL_SENSOR_INVALID` if `sensor` is
 /// NULL.
 ///
@@ -191,7 +191,7 @@ int sdlGetSensorType(Pointer<SdlSensor> sensor) {
 ///
 /// Get the platform dependent type of a sensor.
 ///
-/// \param sensor The SDL_Sensor object to inspect
+/// \param sensor the SDL_Sensor object to inspect.
 /// \returns the sensor platform dependent type, or -1 if `sensor` is NULL.
 ///
 /// \since This function is available since SDL 3.0.0.
@@ -209,7 +209,7 @@ int sdlGetSensorNonPortableType(Pointer<SdlSensor> sensor) {
 ///
 /// Get the instance ID of a sensor.
 ///
-/// \param sensor The SDL_Sensor object to inspect
+/// \param sensor the SDL_Sensor object to inspect.
 /// \returns the sensor instance ID, or 0 if `sensor` is NULL.
 ///
 /// \since This function is available since SDL 3.0.0.
@@ -229,9 +229,9 @@ int sdlGetSensorInstanceId(Pointer<SdlSensor> sensor) {
 ///
 /// The number of values and interpretation of the data is sensor dependent.
 ///
-/// \param sensor The SDL_Sensor object to query
-/// \param data A pointer filled with the current sensor state
-/// \param num_values The number of values to write to data
+/// \param sensor the SDL_Sensor object to query.
+/// \param data a pointer filled with the current sensor state.
+/// \param num_values the number of values to write to data.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -253,7 +253,7 @@ int sdlGetSensorData(
 ///
 /// Close a sensor previously opened with SDL_OpenSensor().
 ///
-/// \param sensor The SDL_Sensor object to close
+/// \param sensor the SDL_Sensor object to close.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///

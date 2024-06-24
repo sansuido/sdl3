@@ -7,6 +7,20 @@ import 'struct_sdl_mixer.dart';
 
 final libSdl3Mixer = dylib.dylibOpen('SDL3_mixer');
 
+// typedef void (SDLCALL *Mix_MixCallback)(void *udata, Uint8 *stream, int len)
+typedef MixMixCallbackDart = void Function(
+    Pointer<NativeType> udata, Pointer<Uint8> stream, int len);
+typedef MixMixCallback = Void Function(
+    Pointer<NativeType> udata, Pointer<Uint8> stream, Int32 len);
+
+// typedef void (SDLCALL *Mix_MusicFinishedCallback)(void)
+typedef MixMusicFinishedCallbackDart = void Function();
+typedef MixMusicFinishedCallback = Void Function();
+
+// typedef void (SDLCALL *Mix_ChannelFinishedCallback)(int channel)
+typedef MixChannelFinishedCallbackDart = void Function(int channel);
+typedef MixChannelFinishedCallback = Void Function(Int32 channel);
+
 // typedef void (SDLCALL *Mix_EffectFunc_t)(int chan, void *stream, int len, void *udata)
 typedef MixEffectFuncTDart = void Function(
     int chan, Pointer<NativeType> stream, int len, Pointer<NativeType> udata);
@@ -17,10 +31,16 @@ typedef MixEffectFuncT = Void Function(Int32 chan, Pointer<NativeType> stream,
 typedef MixEffectDoneTDart = void Function(int chan, Pointer<NativeType> udata);
 typedef MixEffectDoneT = Void Function(Int32 chan, Pointer<NativeType> udata);
 
+// typedef int (SDLCALL *Mix_EachSoundFontCallback)(const char*, void*)
+typedef MixEachSoundFontCallbackDart = int Function(
+    Pointer<Utf8> arg0, Pointer<NativeType> arg1);
+typedef MixEachSoundFontCallback = Int32 Function(
+    Pointer<Utf8> arg0, Pointer<NativeType> arg1);
+
 ///
 /// This function gets the version of the dynamically linked SDL_mixer library.
 ///
-/// \returns SDL_mixer version
+/// \returns SDL_mixer version.
 ///
 /// \since This function is available since SDL_mixer 3.0.0.
 ///
@@ -1129,12 +1149,14 @@ String? mixGetMusicCopyrightTag(Pointer<MixMusic> music) {
 /// \sa Mix_HookMusic
 ///
 /// ```c
-/// extern SDL_DECLSPEC void SDLCALL Mix_SetPostMix(void (SDLCALL *mix_func)(void *udata, Uint8 *stream, int len), void *arg)
+/// extern SDL_DECLSPEC void SDLCALL Mix_SetPostMix(Mix_MixCallback mix_func, void *arg)
 /// ```
-void mixSetPostMix(Pointer<NativeType> mixFunc, Pointer<NativeType> arg) {
+void mixSetPostMix(
+    Pointer<NativeFunction<MixMixCallback>> mixFunc, Pointer<NativeType> arg) {
   final mixSetPostMixLookupFunction = libSdl3Mixer.lookupFunction<
-      Void Function(Pointer<NativeType> mixFunc, Pointer<NativeType> arg),
-      void Function(Pointer<NativeType> mixFunc,
+      Void Function(Pointer<NativeFunction<MixMixCallback>> mixFunc,
+          Pointer<NativeType> arg),
+      void Function(Pointer<NativeFunction<MixMixCallback>> mixFunc,
           Pointer<NativeType> arg)>('Mix_SetPostMix');
   return mixSetPostMixLookupFunction(mixFunc, arg);
 }
@@ -1184,12 +1206,14 @@ void mixSetPostMix(Pointer<NativeType> mixFunc, Pointer<NativeType> arg) {
 /// \sa Mix_SetPostMix
 ///
 /// ```c
-/// extern SDL_DECLSPEC void SDLCALL Mix_HookMusic(void (SDLCALL *mix_func)(void *udata, Uint8 *stream, int len), void *arg)
+/// extern SDL_DECLSPEC void SDLCALL Mix_HookMusic(Mix_MixCallback mix_func, void *arg)
 /// ```
-void mixHookMusic(Pointer<NativeType> mixFunc, Pointer<NativeType> arg) {
+void mixHookMusic(
+    Pointer<NativeFunction<MixMixCallback>> mixFunc, Pointer<NativeType> arg) {
   final mixHookMusicLookupFunction = libSdl3Mixer.lookupFunction<
-      Void Function(Pointer<NativeType> mixFunc, Pointer<NativeType> arg),
-      void Function(Pointer<NativeType> mixFunc,
+      Void Function(Pointer<NativeFunction<MixMixCallback>> mixFunc,
+          Pointer<NativeType> arg),
+      void Function(Pointer<NativeFunction<MixMixCallback>> mixFunc,
           Pointer<NativeType> arg)>('Mix_HookMusic');
   return mixHookMusicLookupFunction(mixFunc, arg);
 }
@@ -1218,13 +1242,16 @@ void mixHookMusic(Pointer<NativeType> mixFunc, Pointer<NativeType> arg) {
 /// \since This function is available since SDL_mixer 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC void SDLCALL Mix_HookMusicFinished(void (SDLCALL *music_finished)(void))
+/// extern SDL_DECLSPEC void SDLCALL Mix_HookMusicFinished(Mix_MusicFinishedCallback music_finished)
 /// ```
-void mixHookMusicFinished(Pointer<NativeType> musicFinished) {
+void mixHookMusicFinished(
+    Pointer<NativeFunction<MixMusicFinishedCallback>> musicFinished) {
   final mixHookMusicFinishedLookupFunction = libSdl3Mixer.lookupFunction<
-      Void Function(Pointer<NativeType> musicFinished),
-      void Function(
-          Pointer<NativeType> musicFinished)>('Mix_HookMusicFinished');
+          Void Function(
+              Pointer<NativeFunction<MixMusicFinishedCallback>> musicFinished),
+          void Function(
+              Pointer<NativeFunction<MixMusicFinishedCallback>> musicFinished)>(
+      'Mix_HookMusicFinished');
   return mixHookMusicFinishedLookupFunction(musicFinished);
 }
 
@@ -1269,13 +1296,16 @@ Pointer<NativeType> mixGetMusicHookData() {
 /// \since This function is available since SDL_mixer 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC void SDLCALL Mix_ChannelFinished(void (SDLCALL *channel_finished)(int channel))
+/// extern SDL_DECLSPEC void SDLCALL Mix_ChannelFinished(Mix_ChannelFinishedCallback channel_finished)
 /// ```
-void mixChannelFinished(Pointer<NativeType> channelFinished) {
+void mixChannelFinished(
+    Pointer<NativeFunction<MixChannelFinishedCallback>> channelFinished) {
   final mixChannelFinishedLookupFunction = libSdl3Mixer.lookupFunction<
-      Void Function(Pointer<NativeType> channelFinished),
+      Void Function(
+          Pointer<NativeFunction<MixChannelFinishedCallback>> channelFinished),
       void Function(
-          Pointer<NativeType> channelFinished)>('Mix_ChannelFinished');
+          Pointer<NativeFunction<MixChannelFinishedCallback>>
+              channelFinished)>('Mix_ChannelFinished');
   return mixChannelFinishedLookupFunction(channelFinished);
 }
 
@@ -1336,8 +1366,8 @@ void mixChannelFinished(Pointer<NativeType> channelFinished) {
 /// \param chan the channel to register an effect to, or MIX_CHANNEL_POST.
 /// \param f effect the callback to run when more of this channel is to be
 /// mixed.
-/// \param d effect done callback
-/// \param arg argument
+/// \param d effect done callback.
+/// \param arg argument.
 /// \returns zero if error (no such channel), nonzero if added. Error messages
 /// can be retrieved from Mix_GetError().
 ///
@@ -1707,7 +1737,7 @@ int mixGroupChannel(int which, int tag) {
 /// \param from the first channel to set the tag on.
 /// \param to the last channel to set the tag on, inclusive.
 /// \param tag an arbitrary value to assign a channel.
-/// \returns 0 if successful, negative on error
+/// \returns 0 if successful, negative on error.
 ///
 /// \since This function is available since SDL_mixer 3.0.0.
 ///
@@ -1776,7 +1806,7 @@ int mixGroupCount(int tag) {
 /// If no channel with this tag is currently playing, this function returns -1.
 ///
 /// \param tag an arbitrary value, assigned to channels, to search through.
-/// \returns the "oldest" sample playing in a group of channels
+/// \returns the "oldest" sample playing in a group of channels.
 ///
 /// \since This function is available since SDL_mixer 3.0.0.
 ///
@@ -1801,7 +1831,7 @@ int mixGroupOldest(int tag) {
 /// If no channel with this tag is currently playing, this function returns -1.
 ///
 /// \param tag an arbitrary value, assigned to channels, to search through.
-/// \returns the "most recent" sample playing in a group of channels
+/// \returns the "most recent" sample playing in a group of channels.
 ///
 /// \since This function is available since SDL_mixer 3.0.0.
 ///
@@ -2775,7 +2805,7 @@ int mixPausedMusic() {
 ///
 /// This only applies to MOD music formats.
 ///
-/// \param order order
+/// \param order order.
 /// \returns 0 if successful, or -1 if failed or isn't implemented.
 ///
 /// \since This function is available since SDL_mixer 3.0.0.
@@ -2906,7 +2936,7 @@ double mixMusicDuration(Pointer<MixMusic> music) {
 ///
 /// \param music the music object to query.
 /// \returns -1.0 if this feature is not used for this music or not supported
-/// for some codec
+/// for some codec.
 ///
 /// \since This function is available since SDL_mixer 3.0.0.
 ///
@@ -2929,7 +2959,7 @@ double mixGetMusicLoopStartTime(Pointer<MixMusic> music) {
 ///
 /// \param music the music object to query.
 /// \returns -1.0 if this feature is not used for this music or not supported
-/// for some codec
+/// for some codec.
 ///
 /// \since This function is available since SDL_mixer 3.0.0.
 ///
@@ -2952,7 +2982,7 @@ double mixGetMusicLoopEndTime(Pointer<MixMusic> music) {
 ///
 /// \param music the music object to query.
 /// \returns -1.0 if this feature is not used for this music or not supported
-/// for some codec
+/// for some codec.
 ///
 /// \since This function is available since SDL_mixer 3.0.0.
 ///
@@ -2980,7 +3010,7 @@ double mixGetMusicLoopLengthTime(Pointer<MixMusic> music) {
 /// Paused channels are treated as playing, even though they are not currently
 /// making forward progress in mixing.
 ///
-/// \param channel channel
+/// \param channel channel.
 /// \returns non-zero if channel is playing, zero otherwise. If `channel` is
 /// -1, return the total number of channel playings.
 ///
@@ -3033,8 +3063,8 @@ int mixPlayingMusic() {
 /// You are strongly encouraged not to use this function without an extremely
 /// good reason.
 ///
-/// \param command command
-/// \returns 0 if successful, -1 on error
+/// \param command command.
+/// \returns 0 if successful, -1 on error.
 ///
 /// \since This function is available since SDL_mixer 3.0.0.
 ///
@@ -3192,12 +3222,14 @@ String? mixGetSoundFonts() {
 /// \sa Mix_GetSoundFonts
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL Mix_EachSoundFont(int (SDLCALL *function)(const char*, void*), void *data)
+/// extern SDL_DECLSPEC int SDLCALL Mix_EachSoundFont(Mix_EachSoundFontCallback function, void *data)
 /// ```
-int mixEachSoundFont(Pointer<NativeType> function, Pointer<NativeType> data) {
+int mixEachSoundFont(Pointer<NativeFunction<MixEachSoundFontCallback>> function,
+    Pointer<NativeType> data) {
   final mixEachSoundFontLookupFunction = libSdl3Mixer.lookupFunction<
-      Int32 Function(Pointer<NativeType> function, Pointer<NativeType> data),
-      int Function(Pointer<NativeType> function,
+      Int32 Function(Pointer<NativeFunction<MixEachSoundFontCallback>> function,
+          Pointer<NativeType> data),
+      int Function(Pointer<NativeFunction<MixEachSoundFontCallback>> function,
           Pointer<NativeType> data)>('Mix_EachSoundFont');
   return mixEachSoundFontLookupFunction(function, data);
 }
@@ -3211,7 +3243,7 @@ int mixEachSoundFont(Pointer<NativeType> function, Pointer<NativeType> data) {
 /// play MIDI files.
 ///
 /// \param path path to a Timidity config file.
-/// \returns 1 if successful, 0 on error
+/// \returns 1 if successful, 0 on error.
 ///
 /// \since This function is available since SDL_mixer 3.0.0.
 ///

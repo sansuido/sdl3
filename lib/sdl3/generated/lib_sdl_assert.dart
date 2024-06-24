@@ -1,40 +1,7 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 import 'dart:ffi';
-import 'package:ffi/ffi.dart';
 import 'lib_sdl.dart';
 import 'struct_sdl.dart';
-
-///
-/// Never call this directly.
-///
-/// Use the SDL_assert* macros instead.
-///
-/// \param data assert data structure
-/// \param func function name
-/// \param file file name
-/// \param line line number
-/// \returns assert state
-///
-/// \since This function is available since SDL 3.0.0.
-///
-/// ```c
-/// extern SDL_DECLSPEC SDL_AssertState SDLCALL SDL_ReportAssertion(SDL_AssertData *data, const char *func, const char *file, int line) __attribute__((analyzer_noreturn))
-/// ```
-int sdlReportAssertion(Pointer<SdlAssertData> data, String? func, String? file,
-    Pointer<NativeType> arg3) {
-  final sdlReportAssertionLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlAssertData> data, Pointer<Utf8> func,
-          Pointer<Utf8> file, Pointer<NativeType> arg3),
-      int Function(Pointer<SdlAssertData> data, Pointer<Utf8> func,
-          Pointer<Utf8> file, Pointer<NativeType> arg3)>('SDL_ReportAssertion');
-  final funcPointer = func != null ? func.toNativeUtf8() : nullptr;
-  final filePointer = file != null ? file.toNativeUtf8() : nullptr;
-  final result =
-      sdlReportAssertionLookupFunction(data, funcPointer, filePointer, arg3);
-  calloc.free(funcPointer);
-  calloc.free(filePointer);
-  return result;
-}
 
 ///
 /// Set an application-defined assertion handler.
@@ -50,8 +17,8 @@ int sdlReportAssertion(Pointer<SdlAssertData> data, String? func, String? file,
 /// This callback is NOT reset to SDL's internal handler upon SDL_Quit()!
 ///
 /// \param handler the SDL_AssertionHandler function to call when an assertion
-/// fails or NULL for the default handler
-/// \param userdata a pointer that is passed to `handler`
+/// fails or NULL for the default handler.
+/// \param userdata a pointer that is passed to `handler`.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -111,7 +78,7 @@ Pointer<NativeFunction<SdlAssertionHandler>> sdlGetDefaultAssertionHandler() {
 /// data, it is safe to pass a NULL pointer to this function to ignore it.
 ///
 /// \param puserdata pointer which is filled with the "userdata" pointer that
-/// was passed to SDL_SetAssertionHandler()
+/// was passed to SDL_SetAssertionHandler().
 /// \returns the SDL_AssertionHandler that is called when an assert triggers.
 ///
 /// \since This function is available since SDL 3.0.0.

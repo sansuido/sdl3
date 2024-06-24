@@ -7,8 +7,8 @@ import 'struct_sdl.dart';
 ///
 /// Allocate a new RGB surface with a specific pixel format.
 ///
-/// \param width the width of the surface
-/// \param height the height of the surface
+/// \param width the width of the surface.
+/// \param height the height of the surface.
 /// \param format the SDL_PixelFormatEnum for the new surface's pixel format.
 /// \returns the new SDL_Surface structure that is created or NULL if it fails;
 /// call SDL_GetError() for more information.
@@ -42,10 +42,10 @@ Pointer<SdlSurface> sdlCreateSurface(int width, int height, int format) {
 /// You may pass NULL for pixels and 0 for pitch to create a surface that you
 /// will fill in with valid values later.
 ///
-/// \param pixels a pointer to existing pixel data
-/// \param width the width of the surface
-/// \param height the height of the surface
-/// \param pitch the number of bytes between each row, including padding
+/// \param pixels a pointer to existing pixel data.
+/// \param width the width of the surface.
+/// \param height the height of the surface.
+/// \param pitch the number of bytes between each row, including padding.
 /// \param format the SDL_PixelFormatEnum for the new surface's pixel format.
 /// \returns the new SDL_Surface structure that is created or NULL if it fails;
 /// call SDL_GetError() for more information.
@@ -116,7 +116,7 @@ void sdlDestroySurface(Pointer<SdlSurface> surface) {
 /// where N is a floating point scale factor applied in linear space, and
 /// "none", which disables tone mapping. This defaults to "chrome".
 ///
-/// \param surface the SDL_Surface structure to query
+/// \param surface the SDL_Surface structure to query.
 /// \returns a valid property ID on success or 0 on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -141,8 +141,9 @@ int sdlGetSurfaceProperties(Pointer<SdlSurface> surface) {
 /// Setting the colorspace doesn't change the pixels, only how they are
 /// interpreted in color operations.
 ///
-/// \param surface the SDL_Surface structure to update
-/// \param colorspace an SDL_ColorSpace value describing the surface colorspace
+/// \param surface the SDL_Surface structure to update.
+/// \param colorspace an SDL_ColorSpace value describing the surface
+/// colorspace.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -166,9 +167,9 @@ int sdlSetSurfaceColorspace(Pointer<SdlSurface> surface, int colorspace) {
 /// formats, SDL_COLORSPACE_HDR10 for 10-bit formats, SDL_COLORSPACE_SRGB for
 /// other RGB surfaces and SDL_COLORSPACE_BT709_FULL for YUV textures.
 ///
-/// \param surface the SDL_Surface structure to query
+/// \param surface the SDL_Surface structure to query.
 /// \param colorspace a pointer filled in with an SDL_ColorSpace value
-/// describing the surface colorspace
+/// describing the surface colorspace.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -191,8 +192,8 @@ int sdlGetSurfaceColorspace(
 ///
 /// A single palette can be shared with many surfaces.
 ///
-/// \param surface the SDL_Surface structure to update
-/// \param palette the SDL_Palette structure to use
+/// \param surface the SDL_Surface structure to update.
+/// \param palette the SDL_Palette structure to use.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -222,7 +223,7 @@ int sdlSetSurfacePalette(
 /// 0, then you can read and write to the surface at any time, and the pixel
 /// format of the surface will not change.
 ///
-/// \param surface the SDL_Surface structure to be locked
+/// \param surface the SDL_Surface structure to be locked.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -244,7 +245,7 @@ int sdlLockSurface(Pointer<SdlSurface> surface) {
 ///
 /// Release a surface after directly accessing the pixels.
 ///
-/// \param surface the SDL_Surface structure to be unlocked
+/// \param surface the SDL_Surface structure to be unlocked.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -266,9 +267,9 @@ void sdlUnlockSurface(Pointer<SdlSurface> surface) {
 /// The new surface should be freed with SDL_DestroySurface(). Not doing so
 /// will result in a memory leak.
 ///
-/// \param src the data stream for the surface
+/// \param src the data stream for the surface.
 /// \param closeio if SDL_TRUE, calls SDL_CloseIO() on `src` before returning,
-/// even in the case of an error
+/// even in the case of an error.
 /// \returns a pointer to a new SDL_Surface structure or NULL if there was an
 /// error; call SDL_GetError() for more information.
 ///
@@ -295,7 +296,7 @@ Pointer<SdlSurface> sdlLoadBmpIo(Pointer<SdlIoStream> src, bool closeio) {
 /// The new surface should be freed with SDL_DestroySurface(). Not doing so
 /// will result in a memory leak.
 ///
-/// \param file the BMP file to load
+/// \param file the BMP file to load.
 /// \returns a pointer to a new SDL_Surface structure or NULL if there was an
 /// error; call SDL_GetError() for more information.
 ///
@@ -327,10 +328,10 @@ Pointer<SdlSurface> sdlLoadBmp(String? file) {
 /// surface before they are saved. YUV and paletted 1-bit and 4-bit formats are
 /// not supported.
 ///
-/// \param surface the SDL_Surface structure containing the image to be saved
-/// \param dst a data stream to save to
+/// \param surface the SDL_Surface structure containing the image to be saved.
+/// \param dst a data stream to save to.
 /// \param closeio if SDL_TRUE, calls SDL_CloseIO() on `dst` before returning,
-/// even in the case of an error
+/// even in the case of an error.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -361,8 +362,8 @@ int sdlSaveBmpIo(
 /// surface before they are saved. YUV and paletted 1-bit and 4-bit formats are
 /// not supported.
 ///
-/// \param surface the SDL_Surface structure containing the image to be saved
-/// \param file a file to save to
+/// \param surface the SDL_Surface structure containing the image to be saved.
+/// \param file a file to save to.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -391,8 +392,8 @@ int sdlSaveBmp(Pointer<SdlSurface> surface, String? file) {
 /// If RLE is enabled, color key and alpha blending blits are much faster, but
 /// the surface must be locked before directly accessing the pixels.
 ///
-/// \param surface the SDL_Surface structure to optimize
-/// \param flag 0 to disable, non-zero to enable RLE acceleration
+/// \param surface the SDL_Surface structure to optimize.
+/// \param flag 0 to disable, non-zero to enable RLE acceleration.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -417,7 +418,7 @@ int sdlSetSurfaceRle(Pointer<SdlSurface> surface, int flag) {
 ///
 /// It is safe to pass a NULL `surface` here; it will return SDL_FALSE.
 ///
-/// \param surface the SDL_Surface structure to query
+/// \param surface the SDL_Surface structure to query.
 /// \returns SDL_TRUE if the surface is RLE enabled, SDL_FALSE otherwise.
 ///
 /// \since This function is available since SDL 3.0.0.
@@ -447,9 +448,9 @@ bool sdlSurfaceHasRle(Pointer<SdlSurface> surface) {
 /// RLE acceleration can substantially speed up blitting of images with large
 /// horizontal runs of transparent pixels. See SDL_SetSurfaceRLE() for details.
 ///
-/// \param surface the SDL_Surface structure to update
-/// \param flag SDL_TRUE to enable color key, SDL_FALSE to disable color key
-/// \param key the transparent pixel
+/// \param surface the SDL_Surface structure to update.
+/// \param flag SDL_TRUE to enable color key, SDL_FALSE to disable color key.
+/// \param key the transparent pixel.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -474,7 +475,7 @@ int sdlSetSurfaceColorKey(Pointer<SdlSurface> surface, int flag, int key) {
 ///
 /// It is safe to pass a NULL `surface` here; it will return SDL_FALSE.
 ///
-/// \param surface the SDL_Surface structure to query
+/// \param surface the SDL_Surface structure to query.
 /// \returns SDL_TRUE if the surface has a color key, SDL_FALSE otherwise.
 ///
 /// \since This function is available since SDL 3.0.0.
@@ -500,8 +501,8 @@ bool sdlSurfaceHasColorKey(Pointer<SdlSurface> surface) {
 ///
 /// If the surface doesn't have color key enabled this function returns -1.
 ///
-/// \param surface the SDL_Surface structure to query
-/// \param key a pointer filled in with the transparent pixel
+/// \param surface the SDL_Surface structure to query.
+/// \param key a pointer filled in with the transparent pixel.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -530,10 +531,10 @@ int sdlGetSurfaceColorKey(Pointer<SdlSurface> surface, Pointer<Uint32> key) {
 ///
 /// `srcC = srcC * (color / 255)`
 ///
-/// \param surface the SDL_Surface structure to update
-/// \param r the red color value multiplied into blit operations
-/// \param g the green color value multiplied into blit operations
-/// \param b the blue color value multiplied into blit operations
+/// \param surface the SDL_Surface structure to update.
+/// \param r the red color value multiplied into blit operations.
+/// \param g the green color value multiplied into blit operations.
+/// \param b the blue color value multiplied into blit operations.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -556,10 +557,10 @@ int sdlSetSurfaceColorMod(Pointer<SdlSurface> surface, int r, int g, int b) {
 ///
 /// Get the additional color value multiplied into blit operations.
 ///
-/// \param surface the SDL_Surface structure to query
-/// \param r a pointer filled in with the current red color value
-/// \param g a pointer filled in with the current green color value
-/// \param b a pointer filled in with the current blue color value
+/// \param surface the SDL_Surface structure to query.
+/// \param r a pointer filled in with the current red color value.
+/// \param g a pointer filled in with the current green color value.
+/// \param b a pointer filled in with the current blue color value.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -589,8 +590,8 @@ int sdlGetSurfaceColorMod(Pointer<SdlSurface> surface, Pointer<Uint8> r,
 ///
 /// `srcA = srcA * (alpha / 255)`
 ///
-/// \param surface the SDL_Surface structure to update
-/// \param alpha the alpha value multiplied into blit operations
+/// \param surface the SDL_Surface structure to update.
+/// \param alpha the alpha value multiplied into blit operations.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -613,8 +614,8 @@ int sdlSetSurfaceAlphaMod(Pointer<SdlSurface> surface, int alpha) {
 ///
 /// Get the additional alpha value used in blit operations.
 ///
-/// \param surface the SDL_Surface structure to query
-/// \param alpha a pointer filled in with the current alpha value
+/// \param surface the SDL_Surface structure to query.
+/// \param alpha a pointer filled in with the current alpha value.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -641,8 +642,8 @@ int sdlGetSurfaceAlphaMod(Pointer<SdlSurface> surface, Pointer<Uint8> alpha) {
 /// existing data, the blendmode of the SOURCE surface should be set to
 /// `SDL_BLENDMODE_NONE`.
 ///
-/// \param surface the SDL_Surface structure to update
-/// \param blendMode the SDL_BlendMode to use for blit blending
+/// \param surface the SDL_Surface structure to update.
+/// \param blendMode the SDL_BlendMode to use for blit blending.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -664,8 +665,8 @@ int sdlSetSurfaceBlendMode(Pointer<SdlSurface> surface, int blendMode) {
 ///
 /// Get the blend mode used for blit operations.
 ///
-/// \param surface the SDL_Surface structure to query
-/// \param blendMode a pointer filled in with the current SDL_BlendMode
+/// \param surface the SDL_Surface structure to query.
+/// \param blendMode a pointer filled in with the current SDL_BlendMode.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -694,9 +695,9 @@ int sdlGetSurfaceBlendMode(
 /// Note that blits are automatically clipped to the edges of the source and
 /// destination surfaces.
 ///
-/// \param surface the SDL_Surface structure to be clipped
+/// \param surface the SDL_Surface structure to be clipped.
 /// \param rect the SDL_Rect structure representing the clipping rectangle, or
-/// NULL to disable clipping
+/// NULL to disable clipping.
 /// \returns SDL_TRUE if the rectangle intersects the surface, otherwise
 /// SDL_FALSE and blits will be completely clipped.
 ///
@@ -722,9 +723,9 @@ bool sdlSetSurfaceClipRect(Pointer<SdlSurface> surface, Pointer<SdlRect> rect) {
 /// rectangle is drawn into.
 ///
 /// \param surface the SDL_Surface structure representing the surface to be
-/// clipped
+/// clipped.
 /// \param rect an SDL_Rect structure filled in with the clipping rectangle for
-/// the surface
+/// the surface.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -746,8 +747,8 @@ int sdlGetSurfaceClipRect(Pointer<SdlSurface> surface, Pointer<SdlRect> rect) {
 ///
 /// Flip a surface vertically or horizontally.
 ///
-/// \param surface the surface to flip
-/// \param flip the direction to flip
+/// \param surface the surface to flip.
+/// \param flip the direction to flip.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -795,9 +796,9 @@ Pointer<SdlSurface> sdlDuplicateSurface(Pointer<SdlSurface> surface) {
 /// surface. The new, optimized surface can then be used as the source for
 /// future blits, making them faster.
 ///
-/// \param surface the existing SDL_Surface structure to convert
+/// \param surface the existing SDL_Surface structure to convert.
 /// \param format the SDL_PixelFormat structure that the new surface is
-/// optimized for
+/// optimized for.
 /// \returns the new SDL_Surface structure that is created or NULL if it fails;
 /// call SDL_GetError() for more information.
 ///
@@ -829,8 +830,8 @@ Pointer<SdlSurface> sdlConvertSurface(
 /// it might be easier to call but it doesn't have access to palette
 /// information for the destination surface, in case that would be important.
 ///
-/// \param surface the existing SDL_Surface structure to convert
-/// \param pixel_format the new pixel format
+/// \param surface the existing SDL_Surface structure to convert.
+/// \param pixel_format the new pixel format.
 /// \returns the new SDL_Surface structure that is created or NULL if it fails;
 /// call SDL_GetError() for more information.
 ///
@@ -861,10 +862,10 @@ Pointer<SdlSurface> sdlConvertSurfaceFormat(
 /// and returns the new surface. This will perform any pixel format and
 /// colorspace conversion needed.
 ///
-/// \param surface the existing SDL_Surface structure to convert
-/// \param pixel_format the new pixel format
-/// \param colorspace the new colorspace
-/// \param props an SDL_PropertiesID with additional color properties, or 0
+/// \param surface the existing SDL_Surface structure to convert.
+/// \param pixel_format the new pixel format.
+/// \param colorspace the new colorspace.
+/// \param props an SDL_PropertiesID with additional color properties, or 0.
 /// \returns the new SDL_Surface structure that is created or NULL if it fails;
 /// call SDL_GetError() for more information.
 ///
@@ -895,14 +896,14 @@ Pointer<SdlSurface> sdlConvertSurfaceFormatAndColorspace(
 ///
 /// Copy a block of pixels of one format to another format.
 ///
-/// \param width the width of the block to copy, in pixels
-/// \param height the height of the block to copy, in pixels
-/// \param src_format an SDL_PixelFormatEnum value of the `src` pixels format
-/// \param src a pointer to the source pixels
-/// \param src_pitch the pitch of the source pixels, in bytes
-/// \param dst_format an SDL_PixelFormatEnum value of the `dst` pixels format
-/// \param dst a pointer to be filled in with new pixel data
-/// \param dst_pitch the pitch of the destination pixels, in bytes
+/// \param width the width of the block to copy, in pixels.
+/// \param height the height of the block to copy, in pixels.
+/// \param src_format an SDL_PixelFormatEnum value of the `src` pixels format.
+/// \param src a pointer to the source pixels.
+/// \param src_pitch the pitch of the source pixels, in bytes.
+/// \param dst_format an SDL_PixelFormatEnum value of the `dst` pixels format.
+/// \param dst a pointer to be filled in with new pixel data.
+/// \param dst_pitch the pitch of the destination pixels, in bytes.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -949,22 +950,22 @@ int sdlConvertPixels(
 /// Copy a block of pixels of one format and colorspace to another format and
 /// colorspace.
 ///
-/// \param width the width of the block to copy, in pixels
-/// \param height the height of the block to copy, in pixels
-/// \param src_format an SDL_PixelFormatEnum value of the `src` pixels format
+/// \param width the width of the block to copy, in pixels.
+/// \param height the height of the block to copy, in pixels.
+/// \param src_format an SDL_PixelFormatEnum value of the `src` pixels format.
 /// \param src_colorspace an SDL_ColorSpace value describing the colorspace of
-/// the `src` pixels
+/// the `src` pixels.
 /// \param src_properties an SDL_PropertiesID with additional source color
-/// properties, or 0
-/// \param src a pointer to the source pixels
-/// \param src_pitch the pitch of the source pixels, in bytes
-/// \param dst_format an SDL_PixelFormatEnum value of the `dst` pixels format
+/// properties, or 0.
+/// \param src a pointer to the source pixels.
+/// \param src_pitch the pitch of the source pixels, in bytes.
+/// \param dst_format an SDL_PixelFormatEnum value of the `dst` pixels format.
 /// \param dst_colorspace an SDL_ColorSpace value describing the colorspace of
-/// the `dst` pixels
+/// the `dst` pixels.
 /// \param dst_properties an SDL_PropertiesID with additional destination color
-/// properties, or 0
-/// \param dst a pointer to be filled in with new pixel data
-/// \param dst_pitch the pitch of the destination pixels, in bytes
+/// properties, or 0.
+/// \param dst a pointer to be filled in with new pixel data.
+/// \param dst_pitch the pitch of the destination pixels, in bytes.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -1037,14 +1038,14 @@ int sdlConvertPixelsAndColorspace(
 ///
 /// This function is currently only implemented for SDL_PIXELFORMAT_ARGB8888.
 ///
-/// \param width the width of the block to convert, in pixels
-/// \param height the height of the block to convert, in pixels
-/// \param src_format an SDL_PixelFormatEnum value of the `src` pixels format
-/// \param src a pointer to the source pixels
-/// \param src_pitch the pitch of the source pixels, in bytes
-/// \param dst_format an SDL_PixelFormatEnum value of the `dst` pixels format
-/// \param dst a pointer to be filled in with premultiplied pixel data
-/// \param dst_pitch the pitch of the destination pixels, in bytes
+/// \param width the width of the block to convert, in pixels.
+/// \param height the height of the block to convert, in pixels.
+/// \param src_format an SDL_PixelFormatEnum value of the `src` pixels format.
+/// \param src a pointer to the source pixels.
+/// \param src_pitch the pitch of the source pixels, in bytes.
+/// \param dst_format an SDL_PixelFormatEnum value of the `dst` pixels format.
+/// \param dst a pointer to be filled in with premultiplied pixel data.
+/// \param dst_pitch the pitch of the destination pixels, in bytes.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -1097,10 +1098,10 @@ int sdlPremultiplyAlpha(
 /// SDL_SetSurfaceClipRect()), then this function will fill based on the
 /// intersection of the clip rectangle and `rect`.
 ///
-/// \param dst the SDL_Surface structure that is the drawing target
+/// \param dst the SDL_Surface structure that is the drawing target.
 /// \param rect the SDL_Rect structure representing the rectangle to fill, or
-/// NULL to fill the entire surface
-/// \param color the color to fill with
+/// NULL to fill the entire surface.
+/// \param color the color to fill with.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -1133,10 +1134,10 @@ int sdlFillSurfaceRect(
 /// SDL_SetSurfaceClipRect()), then this function will fill based on the
 /// intersection of the clip rectangle and `rect`.
 ///
-/// \param dst the SDL_Surface structure that is the drawing target
+/// \param dst the SDL_Surface structure that is the drawing target.
 /// \param rects an array of SDL_Rects representing the rectangles to fill.
-/// \param count the number of rectangles in the array
-/// \param color the color to fill with
+/// \param count the number of rectangles in the array.
+/// \param color the color to fill with.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -1210,10 +1211,10 @@ int sdlFillSurfaceRects(
 /// source color key.
 /// ```
 ///
-/// \param src the SDL_Surface structure to be copied from
+/// \param src the SDL_Surface structure to be copied from.
 /// \param srcrect the SDL_Rect structure representing the rectangle to be
-/// copied, or NULL to copy the entire surface
-/// \param dst the SDL_Surface structure that is the blit target
+/// copied, or NULL to copy the entire surface.
+/// \param dst the SDL_Surface structure that is the blit target.
 /// \param dstrect the SDL_Rect structure representing the x and y position in
 /// the destination surface. On input the width and height are
 /// ignored (taken from srcrect), and on output this is filled
@@ -1251,12 +1252,12 @@ int sdlBlitSurface(Pointer<SdlSurface> src, Pointer<SdlRect> srcrect,
 /// This is a semi-private blit function and it performs low-level surface
 /// blitting, assuming the input rectangles have already been clipped.
 ///
-/// \param src the SDL_Surface structure to be copied from
+/// \param src the SDL_Surface structure to be copied from.
 /// \param srcrect the SDL_Rect structure representing the rectangle to be
-/// copied, or NULL to copy the entire surface
-/// \param dst the SDL_Surface structure that is the blit target
+/// copied, or NULL to copy the entire surface.
+/// \param dst the SDL_Surface structure that is the blit target.
 /// \param dstrect the SDL_Rect structure representing the target rectangle in
-/// the destination surface
+/// the destination surface.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -1290,13 +1291,13 @@ int sdlBlitSurfaceUnchecked(Pointer<SdlSurface> src, Pointer<SdlRect> srcrect,
 /// Using SDL_SCALEMODE_NEAREST: fast, low quality. Using SDL_SCALEMODE_LINEAR:
 /// bilinear scaling, slower, better quality, only 32BPP.
 ///
-/// \param src the SDL_Surface structure to be copied from
+/// \param src the SDL_Surface structure to be copied from.
 /// \param srcrect the SDL_Rect structure representing the rectangle to be
-/// copied
-/// \param dst the SDL_Surface structure that is the blit target
+/// copied.
+/// \param dst the SDL_Surface structure that is the blit target.
 /// \param dstrect the SDL_Rect structure representing the target rectangle in
-/// the destination surface
-/// \param scaleMode scale algorithm to be used
+/// the destination surface.
+/// \param scaleMode scale algorithm to be used.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -1325,14 +1326,14 @@ int sdlSoftStretch(Pointer<SdlSurface> src, Pointer<SdlRect> srcrect,
 /// Perform a scaled blit to a destination surface, which may be of a different
 /// format.
 ///
-/// \param src the SDL_Surface structure to be copied from
+/// \param src the SDL_Surface structure to be copied from.
 /// \param srcrect the SDL_Rect structure representing the rectangle to be
-/// copied
-/// \param dst the SDL_Surface structure that is the blit target
+/// copied.
+/// \param dst the SDL_Surface structure that is the blit target.
 /// \param dstrect the SDL_Rect structure representing the target rectangle in
 /// the destination surface, filled with the actual rectangle
-/// used after clipping
-/// \param scaleMode the SDL_ScaleMode to be used
+/// used after clipping.
+/// \param scaleMode the SDL_ScaleMode to be used.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -1368,13 +1369,13 @@ int sdlBlitSurfaceScaled(Pointer<SdlSurface> src, Pointer<SdlRect> srcrect,
 /// This is a semi-private function and it performs low-level surface blitting,
 /// assuming the input rectangles have already been clipped.
 ///
-/// \param src the SDL_Surface structure to be copied from
+/// \param src the SDL_Surface structure to be copied from.
 /// \param srcrect the SDL_Rect structure representing the rectangle to be
-/// copied
-/// \param dst the SDL_Surface structure that is the blit target
+/// copied.
+/// \param dst the SDL_Surface structure that is the blit target.
 /// \param dstrect the SDL_Rect structure representing the target rectangle in
-/// the destination surface
-/// \param scaleMode scale algorithm to be used
+/// the destination surface.
+/// \param scaleMode scale algorithm to be used.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -1417,17 +1418,17 @@ int sdlBlitSurfaceUncheckedScaled(
 /// Like SDL_GetRGBA, this uses the entire 0..255 range when converting color
 /// components from pixel formats with less than 8 bits per RGB component.
 ///
-/// \param surface the surface to read
-/// \param x the horizontal coordinate, 0 <= x < width
-/// \param y the vertical coordinate, 0 <= y < height
+/// \param surface the surface to read.
+/// \param x the horizontal coordinate, 0 <= x < width.
+/// \param y the vertical coordinate, 0 <= y < height.
 /// \param r a pointer filled in with the red channel, 0-255, or NULL to ignore
-/// this channel
+/// this channel.
 /// \param g a pointer filled in with the green channel, 0-255, or NULL to
-/// ignore this channel
+/// ignore this channel.
 /// \param b a pointer filled in with the blue channel, 0-255, or NULL to
-/// ignore this channel
+/// ignore this channel.
 /// \param a a pointer filled in with the alpha channel, 0-255, or NULL to
-/// ignore this channel
+/// ignore this channel.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///

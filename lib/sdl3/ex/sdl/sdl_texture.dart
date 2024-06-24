@@ -8,16 +8,9 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   // lib_sdl_renderer.dart
 
   ///
-  /// Query the attributes of a texture.
+  /// Get the size of a texture, as floating point values.
   ///
-  /// \param texture the texture to query
-  /// \param format a pointer filled in with the raw format of the texture; the
-  /// actual format may differ, but pixel transfers will use this
-  /// format (one of the SDL_PixelFormatEnum values). This argument
-  /// can be NULL if you don't need this information.
-  /// \param access a pointer filled in with the actual access to the texture
-  /// (one of the SDL_TextureAccess values). This argument can be
-  /// NULL if you don't need this information.
+  /// \param texture the texture to query.
   /// \param w a pointer filled in with the width of the texture in pixels. This
   /// argument can be NULL if you don't need this information.
   /// \param h a pointer filled in with the height of the texture in pixels. This
@@ -28,39 +21,13 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// \since This function is available since SDL 3.0.0.
   ///
   /// ```c
-  /// extern DECLSPEC int SDLCALL SDL_QueryTexture(SDL_Texture *texture, SDL_PixelFormatEnum *format, int *access, int *w, int *h)
+  /// extern SDL_DECLSPEC int SDLCALL SDL_GetTextureSize(SDL_Texture *texture, float *w, float *h)
   /// ```
-  int query(Pointer<Int32> format, Pointer<Int32> access, Pointer<Int32> w,
-      Pointer<Int32> h) {
-    // 357
-    return sdlQueryTexture(this, format, access, w, h);
-  }
-
-  int? getAccess() {
-    int? result;
-    var accessPointer = calloc<Int32>();
-    if (query(accessPointer, nullptr, nullptr, nullptr) == 0) {
-      result = accessPointer.value;
-    }
-    calloc.free(accessPointer);
-    return result;
-  }
-
-  int? getFormat() {
-    int? result;
-    var formatPointer = calloc<Int32>();
-    if (query(nullptr, formatPointer, nullptr, nullptr) == 0) {
-      result = formatPointer.value;
-    }
-    calloc.free(formatPointer);
-    return result;
-  }
-
   Point<double>? getSize() {
     Point<double>? result;
-    var wPointer = calloc<Int32>();
-    var hPointer = calloc<Int32>();
-    if (query(nullptr, nullptr, wPointer, hPointer) == 0) {
+    var wPointer = calloc<Float>();
+    var hPointer = calloc<Float>();
+    if (sdlGetTextureSize(this, wPointer, hPointer) == 0) {
       result = Point(wPointer.value.toDouble(), hPointer.value.toDouble());
     }
     calloc.free(wPointer);

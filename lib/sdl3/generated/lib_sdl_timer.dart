@@ -87,7 +87,7 @@ int sdlGetPerformanceFrequency() {
 /// waits at least the specified time, but possibly longer due to OS
 /// scheduling.
 ///
-/// \param ms the number of milliseconds to delay
+/// \param ms the number of milliseconds to delay.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -108,7 +108,7 @@ void sdlDelay(int ms) {
 /// waits at least the specified time, but possibly longer due to OS
 /// scheduling.
 ///
-/// \param ns the number of nanoseconds to delay
+/// \param ns the number of nanoseconds to delay.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -144,10 +144,10 @@ void sdlDelayNs(int ns) {
 /// time with SDL_GetTicksNS() or SDL_GetPerformanceCounter() in case your
 /// callback needs to adjust for variances.
 ///
-/// \param interval the timer delay, in milliseconds, passed to `callback`
+/// \param interval the timer delay, in milliseconds, passed to `callback`.
 /// \param callback the SDL_TimerCallback function to call when the specified
-/// `interval` elapses
-/// \param userdata a pointer that is passed to `callback`
+/// `interval` elapses.
+/// \param userdata a pointer that is passed to `callback`.
 /// \returns a timer ID or 0 if an error occurs; call SDL_GetError() for more
 /// information.
 ///
@@ -199,10 +199,10 @@ int sdlAddTimer(
 /// time with SDL_GetTicksNS() or SDL_GetPerformanceCounter() in case your
 /// callback needs to adjust for variances.
 ///
-/// \param interval the timer delay, in nanoseconds, passed to `callback`
+/// \param interval the timer delay, in nanoseconds, passed to `callback`.
 /// \param callback the SDL_TimerCallback function to call when the specified
-/// `interval` elapses
-/// \param userdata a pointer that is passed to `callback`
+/// `interval` elapses.
+/// \param userdata a pointer that is passed to `callback`.
 /// \returns a timer ID or 0 if an error occurs; call SDL_GetError() for more
 /// information.
 ///
@@ -235,7 +235,7 @@ int sdlAddTimerNs(
 ///
 /// Remove a timer created with SDL_AddTimer().
 ///
-/// \param id the ID of the timer to remove
+/// \param id the ID of the timer to remove.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///

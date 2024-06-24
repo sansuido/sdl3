@@ -728,7 +728,7 @@ final class SdlAudioDeviceEvent extends Struct {
   external int which;
   // [20]+(1)
   @Uint8()
-  external int iscapture;
+  external int recording;
   // [21]+(1)
   @Uint8()
   external int padding1;
@@ -2321,3 +2321,6 @@ final class SdlDisplayMode extends Struct {
 
 // SDL_Window
 final class SdlWindow extends Opaque {}
+
+// SDL_GLContext
+final class SdlGlContext extends Opaque {}

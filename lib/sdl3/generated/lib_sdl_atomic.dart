@@ -9,7 +9,7 @@ import 'struct_sdl.dart';
 /// ***Please note that spinlocks are dangerous if you don't know what you're
 /// doing. Please be careful using any sort of spinlock!***
 ///
-/// \param lock a pointer to a lock variable
+/// \param lock a pointer to a lock variable.
 /// \returns SDL_TRUE if the lock succeeded, SDL_FALSE if the lock is already
 /// held.
 ///
@@ -34,7 +34,7 @@ bool sdlTryLockSpinlock(Pointer<Int32> lock) {
 /// ***Please note that spinlocks are dangerous if you don't know what you're
 /// doing. Please be careful using any sort of spinlock!***
 ///
-/// \param lock a pointer to a lock variable
+/// \param lock a pointer to a lock variable.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -59,7 +59,7 @@ void sdlLockSpinlock(Pointer<Int32> lock) {
 /// ***Please note that spinlocks are dangerous if you don't know what you're
 /// doing. Please be careful using any sort of spinlock!***
 ///
-/// \param lock a pointer to a lock variable
+/// \param lock a pointer to a lock variable.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -142,9 +142,9 @@ void sdlMemoryBarrierAcquireFunction() {
 /// ***Note: If you don't know what this function is for, you shouldn't use
 /// it!***
 ///
-/// \param a a pointer to an SDL_AtomicInt variable to be modified
-/// \param oldval the old value
-/// \param newval the new value
+/// \param a a pointer to an SDL_AtomicInt variable to be modified.
+/// \param oldval the old value.
+/// \param newval the new value.
 /// \returns SDL_TRUE if the atomic variable was set, SDL_FALSE otherwise.
 ///
 /// \threadsafety It is safe to call this function from any thread.
@@ -172,8 +172,8 @@ bool sdlAtomicCompareAndSwap(Pointer<SdlAtomicInt> a, int oldval, int newval) {
 /// ***Note: If you don't know what this function is for, you shouldn't use
 /// it!***
 ///
-/// \param a a pointer to an SDL_AtomicInt variable to be modified
-/// \param v the desired value
+/// \param a a pointer to an SDL_AtomicInt variable to be modified.
+/// \param v the desired value.
 /// \returns the previous value of the atomic variable.
 ///
 /// \threadsafety It is safe to call this function from any thread.
@@ -198,7 +198,7 @@ int sdlAtomicSet(Pointer<SdlAtomicInt> a, int v) {
 /// ***Note: If you don't know what this function is for, you shouldn't use
 /// it!***
 ///
-/// \param a a pointer to an SDL_AtomicInt variable
+/// \param a a pointer to an SDL_AtomicInt variable.
 /// \returns the current value of an atomic variable.
 ///
 /// \threadsafety It is safe to call this function from any thread.
@@ -225,8 +225,8 @@ int sdlAtomicGet(Pointer<SdlAtomicInt> a) {
 /// ***Note: If you don't know what this function is for, you shouldn't use
 /// it!***
 ///
-/// \param a a pointer to an SDL_AtomicInt variable to be modified
-/// \param v the desired value to add
+/// \param a a pointer to an SDL_AtomicInt variable to be modified.
+/// \param v the desired value to add.
 /// \returns the previous value of the atomic variable.
 ///
 /// \threadsafety It is safe to call this function from any thread.
@@ -252,9 +252,9 @@ int sdlAtomicAdd(Pointer<SdlAtomicInt> a, int v) {
 /// ***Note: If you don't know what this function is for, you shouldn't use
 /// it!***
 ///
-/// \param a a pointer to a pointer
-/// \param oldval the old pointer value
-/// \param newval the new pointer value
+/// \param a a pointer to a pointer.
+/// \param oldval the old pointer value.
+/// \param newval the new pointer value.
 /// \returns SDL_TRUE if the pointer was set, SDL_FALSE otherwise.
 ///
 /// \threadsafety It is safe to call this function from any thread.
@@ -284,8 +284,8 @@ bool sdlAtomicCompareAndSwapPointer(Pointer<Pointer<NativeType>> a,
 /// ***Note: If you don't know what this function is for, you shouldn't use
 /// it!***
 ///
-/// \param a a pointer to a pointer
-/// \param v the desired pointer value
+/// \param a a pointer to a pointer.
+/// \param v the desired pointer value.
 /// \returns the previous value of the pointer.
 ///
 /// \threadsafety It is safe to call this function from any thread.
@@ -314,7 +314,7 @@ Pointer<NativeType> sdlAtomicSetPtr(
 /// ***Note: If you don't know what this function is for, you shouldn't use
 /// it!***
 ///
-/// \param a a pointer to a pointer
+/// \param a a pointer to a pointer.
 /// \returns the current value of a pointer.
 ///
 /// \threadsafety It is safe to call this function from any thread.

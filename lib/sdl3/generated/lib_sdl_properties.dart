@@ -56,8 +56,8 @@ int sdlCreateProperties() {
 /// SDL_SetPropertyWithCleanup()), which will not be copied. Any property that
 /// already exists on `dst` will be overwritten.
 ///
-/// \param src the properties to copy
-/// \param dst the destination properties
+/// \param src the properties to copy.
+/// \param dst the destination properties.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -87,7 +87,7 @@ int sdlCopyProperties(int src, int dst) {
 /// or want to guarantee that properties being queried aren't freed in another
 /// thread.
 ///
-/// \param props the properties to lock
+/// \param props the properties to lock.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -110,7 +110,7 @@ int sdlLockProperties(int props) {
 ///
 /// Unlock a set of properties.
 ///
-/// \param props the properties to unlock
+/// \param props the properties to unlock.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -140,12 +140,12 @@ void sdlUnlockProperties(int props) {
 /// instead, as those functions will handle cleanup on your behalf. This
 /// function is only for more complex, custom data.
 ///
-/// \param props the properties to modify
-/// \param name the name of the property to modify
-/// \param value the new value of the property, or NULL to delete the property
+/// \param props the properties to modify.
+/// \param name the name of the property to modify.
+/// \param value the new value of the property, or NULL to delete the property.
 /// \param cleanup the function to call when this property is deleted, or NULL
-/// if no cleanup is necessary
-/// \param userdata a pointer that is passed to the cleanup function
+/// if no cleanup is necessary.
+/// \param userdata a pointer that is passed to the cleanup function.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -189,9 +189,9 @@ int sdlSetPropertyWithCleanup(
 ///
 /// Set a property on a set of properties.
 ///
-/// \param props the properties to modify
-/// \param name the name of the property to modify
-/// \param value the new value of the property, or NULL to delete the property
+/// \param props the properties to modify.
+/// \param name the name of the property to modify.
+/// \param value the new value of the property, or NULL to delete the property.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -228,9 +228,9 @@ int sdlSetProperty(int props, String? name, Pointer<NativeType> value) {
 /// This function makes a copy of the string; the caller does not have to
 /// preserve the data after this call completes.
 ///
-/// \param props the properties to modify
-/// \param name the name of the property to modify
-/// \param value the new value of the property, or NULL to delete the property
+/// \param props the properties to modify.
+/// \param name the name of the property to modify.
+/// \param value the new value of the property, or NULL to delete the property.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -260,9 +260,9 @@ int sdlSetStringProperty(int props, String? name, String? value) {
 ///
 /// Set an integer property on a set of properties.
 ///
-/// \param props the properties to modify
-/// \param name the name of the property to modify
-/// \param value the new value of the property
+/// \param props the properties to modify.
+/// \param name the name of the property to modify.
+/// \param value the new value of the property.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -289,9 +289,9 @@ int sdlSetNumberProperty(int props, String? name, int value) {
 ///
 /// Set a floating point property on a set of properties.
 ///
-/// \param props the properties to modify
-/// \param name the name of the property to modify
-/// \param value the new value of the property
+/// \param props the properties to modify.
+/// \param name the name of the property to modify.
+/// \param value the new value of the property.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -318,9 +318,9 @@ int sdlSetFloatProperty(int props, String? name, double value) {
 ///
 /// Set a boolean property on a set of properties.
 ///
-/// \param props the properties to modify
-/// \param name the name of the property to modify
-/// \param value the new value of the property
+/// \param props the properties to modify.
+/// \param name the name of the property to modify.
+/// \param value the new value of the property.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -348,8 +348,8 @@ int sdlSetBooleanProperty(int props, String? name, bool value) {
 ///
 /// Return whether a property exists in a set of properties.
 ///
-/// \param props the properties to query
-/// \param name the name of the property to query
+/// \param props the properties to query.
+/// \param name the name of the property to query.
 /// \returns SDL_TRUE if the property exists, or SDL_FALSE if it doesn't.
 ///
 /// \threadsafety It is safe to call this function from any thread.
@@ -374,8 +374,8 @@ bool sdlHasProperty(int props, String? name) {
 ///
 /// Get the type of a property on a set of properties.
 ///
-/// \param props the properties to query
-/// \param name the name of the property to query
+/// \param props the properties to query.
+/// \param name the name of the property to query.
 /// \returns the type of the property, or SDL_PROPERTY_TYPE_INVALID if it is
 /// not set.
 ///
@@ -406,9 +406,9 @@ int sdlGetPropertyType(int props, String? name) {
 /// "SDL.internal.". These should be considered read-only and should not be
 /// modified by applications.
 ///
-/// \param props the properties to query
-/// \param name the name of the property to query
-/// \param default_value the default value of the property
+/// \param props the properties to query.
+/// \param name the name of the property to query.
+/// \param default_value the default value of the property.
 /// \returns the value of the property, or `default_value` if it is not set or
 /// not a pointer property.
 ///
@@ -449,9 +449,9 @@ Pointer<NativeType> sdlGetProperty(
 ///
 /// The returned string follows the SDL_GetStringRule.
 ///
-/// \param props the properties to query
-/// \param name the name of the property to query
-/// \param default_value the default value of the property
+/// \param props the properties to query.
+/// \param name the name of the property to query.
+/// \param default_value the default value of the property.
 /// \returns the value of the property, or `default_value` if it is not set or
 /// not a string property.
 ///
@@ -491,9 +491,9 @@ String? sdlGetStringProperty(int props, String? name, String? defaultValue) {
 /// You can use SDL_GetPropertyType() to query whether the property exists and
 /// is a number property.
 ///
-/// \param props the properties to query
-/// \param name the name of the property to query
-/// \param default_value the default value of the property
+/// \param props the properties to query.
+/// \param name the name of the property to query.
+/// \param default_value the default value of the property.
 /// \returns the value of the property, or `default_value` if it is not set or
 /// not a number property.
 ///
@@ -526,9 +526,9 @@ int sdlGetNumberProperty(int props, String? name, int defaultValue) {
 /// You can use SDL_GetPropertyType() to query whether the property exists and
 /// is a floating point property.
 ///
-/// \param props the properties to query
-/// \param name the name of the property to query
-/// \param default_value the default value of the property
+/// \param props the properties to query.
+/// \param name the name of the property to query.
+/// \param default_value the default value of the property.
 /// \returns the value of the property, or `default_value` if it is not set or
 /// not a float property.
 ///
@@ -561,9 +561,9 @@ double sdlGetFloatProperty(int props, String? name, double defaultValue) {
 /// You can use SDL_GetPropertyType() to query whether the property exists and
 /// is a boolean property.
 ///
-/// \param props the properties to query
-/// \param name the name of the property to query
-/// \param default_value the default value of the property
+/// \param props the properties to query.
+/// \param name the name of the property to query.
+/// \param default_value the default value of the property.
 /// \returns the value of the property, or `default_value` if it is not set or
 /// not a float property.
 ///
@@ -594,8 +594,8 @@ bool sdlGetBooleanProperty(int props, String? name, bool defaultValue) {
 ///
 /// Clear a property on a set of properties.
 ///
-/// \param props the properties to modify
-/// \param name the name of the property to clear
+/// \param props the properties to modify.
+/// \param name the name of the property to clear.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -622,9 +622,9 @@ int sdlClearProperty(int props, String? name) {
 /// The callback function is called for each property on the set of properties.
 /// The properties are locked during enumeration.
 ///
-/// \param props the properties to query
-/// \param callback the function to call for each property
-/// \param userdata a pointer that is passed to `callback`
+/// \param props the properties to query.
+/// \param callback the function to call for each property.
+/// \param userdata a pointer that is passed to `callback`.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -657,7 +657,7 @@ int sdlEnumerateProperties(
 /// All properties are deleted and their cleanup functions will be called, if
 /// any.
 ///
-/// \param props the properties to destroy
+/// \param props the properties to destroy.
 ///
 /// \threadsafety This function should not be called while these properties are
 /// locked or other threads might be setting or getting values

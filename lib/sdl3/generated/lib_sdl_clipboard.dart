@@ -6,7 +6,7 @@ import 'lib_sdl.dart';
 ///
 /// Put UTF-8 text into the clipboard.
 ///
-/// \param text the text to store in the clipboard
+/// \param text the text to store in the clipboard.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -76,7 +76,7 @@ bool sdlHasClipboardText() {
 ///
 /// Put UTF-8 text into the primary selection.
 ///
-/// \param text the text to store in the primary selection
+/// \param text the text to store in the primary selection.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -159,13 +159,13 @@ bool sdlHasPrimarySelectionText() {
 /// not need to be null terminated (e.g. you can directly copy a portion of a
 /// document)
 ///
-/// \param callback A function pointer to the function that provides the
-/// clipboard data
-/// \param cleanup A function pointer to the function that cleans up the
-/// clipboard data
-/// \param userdata An opaque pointer that will be forwarded to the callbacks
-/// \param mime_types A list of mime-types that are being offered
-/// \param num_mime_types The number of mime-types in the mime_types list
+/// \param callback a function pointer to the function that provides the
+/// clipboard data.
+/// \param cleanup a function pointer to the function that cleans up the
+/// clipboard data.
+/// \param userdata an opaque pointer that will be forwarded to the callbacks.
+/// \param mime_types a list of mime-types that are being offered.
+/// \param num_mime_types the number of mime-types in the mime_types list.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -227,8 +227,8 @@ int sdlClearClipboardData() {
 /// The size of text data does not include the terminator, but the text is
 /// guaranteed to be null terminated.
 ///
-/// \param mime_type The mime type to read from the clipboard
-/// \param size A pointer filled in with the length of the returned data
+/// \param mime_type the mime type to read from the clipboard.
+/// \param size a pointer filled in with the length of the returned data.
 /// \returns the retrieved data buffer or NULL on failure; call SDL_GetError()
 /// for more information. Caller must call SDL_free() on the returned
 /// pointer when done with it.
@@ -257,7 +257,7 @@ Pointer<NativeType> sdlGetClipboardData(
 ///
 /// Query whether there is data in the clipboard for the provided mime type.
 ///
-/// \param mime_type The mime type to check for data for
+/// \param mime_type the mime type to check for data for.
 /// \returns SDL_TRUE if there exists data in clipboard for the provided mime
 /// type, SDL_FALSE if it does not.
 ///

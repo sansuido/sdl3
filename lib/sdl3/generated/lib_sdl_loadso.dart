@@ -6,7 +6,7 @@ import 'lib_sdl.dart';
 ///
 /// Dynamically load a shared object.
 ///
-/// \param sofile a system-dependent name of the object file
+/// \param sofile a system-dependent name of the object file.
 /// \returns an opaque pointer to the object handle or NULL if there was an
 /// error; call SDL_GetError() for more information.
 ///
@@ -43,8 +43,8 @@ Pointer<NativeType> sdlLoadObject(String? sofile) {
 ///
 /// If the requested function doesn't exist, NULL is returned.
 ///
-/// \param handle a valid shared object handle returned by SDL_LoadObject()
-/// \param name the name of the function to look up
+/// \param handle a valid shared object handle returned by SDL_LoadObject().
+/// \param name the name of the function to look up.
 /// \returns a pointer to the function or NULL if there was an error; call
 /// SDL_GetError() for more information.
 ///
@@ -70,7 +70,7 @@ Pointer<NativeType> sdlLoadFunction(Pointer<NativeType> handle, String? name) {
 ///
 /// Unload a shared object from memory.
 ///
-/// \param handle a valid shared object handle returned by SDL_LoadObject()
+/// \param handle a valid shared object handle returned by SDL_LoadObject().
 ///
 /// \since This function is available since SDL 3.0.0.
 ///

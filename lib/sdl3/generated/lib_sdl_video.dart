@@ -36,7 +36,7 @@ int sdlGetNumVideoDrivers() {
 ///
 /// The returned string follows the SDL_GetStringRule.
 ///
-/// \param index the index of a video driver
+/// \param index the index of a video driver.
 /// \returns the name of the video driver with the given **index**.
 ///
 /// \since This function is available since SDL 3.0.0.
@@ -91,7 +91,7 @@ String? sdlGetCurrentVideoDriver() {
 ///
 /// Get the current system theme.
 ///
-/// \returns the current system theme, light, dark, or unknown
+/// \returns the current system theme, light, dark, or unknown.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -107,7 +107,7 @@ int sdlGetSystemTheme() {
 ///
 /// Get a list of currently connected displays.
 ///
-/// \param count a pointer filled in with the number of displays returned
+/// \param count a pointer filled in with the number of displays returned.
 /// \returns a 0 terminated array of display instance IDs which should be freed
 /// with SDL_free(), or NULL on error; call SDL_GetError() for more
 /// details.
@@ -170,7 +170,7 @@ int sdlGetPrimaryDisplay() {
 /// coordinate transformations needed to conform to the requested display
 /// orientation.
 ///
-/// \param displayID the instance ID of the display to query
+/// \param displayID the instance ID of the display to query.
 /// \returns a valid property ID on success or 0 on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -194,7 +194,7 @@ int sdlGetDisplayProperties(int displayId) {
 ///
 /// The returned string follows the SDL_GetStringRule.
 ///
-/// \param displayID the instance ID of the display to query
+/// \param displayID the instance ID of the display to query.
 /// \returns the name of a display or NULL on failure; call SDL_GetError() for
 /// more information.
 ///
@@ -221,8 +221,8 @@ String? sdlGetDisplayName(int displayId) {
 ///
 /// The primary display is always located at (0,0).
 ///
-/// \param displayID the instance ID of the display to query
-/// \param rect the SDL_Rect structure filled in with the display bounds
+/// \param displayID the instance ID of the display to query.
+/// \param rect the SDL_Rect structure filled in with the display bounds.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -254,8 +254,8 @@ int sdlGetDisplayBounds(int displayId, Pointer<SdlRect> rect) {
 /// so these are good guidelines for the maximum space available to a
 /// non-fullscreen window.
 ///
-/// \param displayID the instance ID of the display to query
-/// \param rect the SDL_Rect structure filled in with the display bounds
+/// \param displayID the instance ID of the display to query.
+/// \param rect the SDL_Rect structure filled in with the display bounds.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -278,8 +278,8 @@ int sdlGetDisplayUsableBounds(int displayId, Pointer<SdlRect> rect) {
 ///
 /// Get the orientation of a display when it is unrotated.
 ///
-/// \param displayID the instance ID of the display to query
-/// \returns The SDL_DisplayOrientation enum value of the display, or
+/// \param displayID the instance ID of the display to query.
+/// \returns the SDL_DisplayOrientation enum value of the display, or
 /// `SDL_ORIENTATION_UNKNOWN` if it isn't available.
 ///
 /// \since This function is available since SDL 3.0.0.
@@ -299,8 +299,8 @@ int sdlGetNaturalDisplayOrientation(int displayId) {
 ///
 /// Get the orientation of a display.
 ///
-/// \param displayID the instance ID of the display to query
-/// \returns The SDL_DisplayOrientation enum value of the display, or
+/// \param displayID the instance ID of the display to query.
+/// \returns the SDL_DisplayOrientation enum value of the display, or
 /// `SDL_ORIENTATION_UNKNOWN` if it isn't available.
 ///
 /// \since This function is available since SDL 3.0.0.
@@ -325,8 +325,8 @@ int sdlGetCurrentDisplayOrientation(int displayId) {
 /// display scale, which means that the user expects UI elements to be twice as
 /// big on this display, to aid in readability.
 ///
-/// \param displayID the instance ID of the display to query
-/// \returns The content scale of the display, or 0.0f on error; call
+/// \param displayID the instance ID of the display to query.
+/// \returns the content scale of the display, or 0.0f on error; call
 /// SDL_GetError() for more details.
 ///
 /// \since This function is available since SDL 3.0.0.
@@ -355,8 +355,8 @@ double sdlGetDisplayContentScale(int displayId) {
 /// - refresh rate -> highest to lowest
 /// - pixel density -> lowest to highest
 ///
-/// \param displayID the instance ID of the display to query
-/// \param count a pointer filled in with the number of display modes returned
+/// \param displayID the instance ID of the display to query.
+/// \param count a pointer filled in with the number of display modes returned.
 /// \returns a NULL terminated array of display mode pointers which should be
 /// freed with SDL_free(), or NULL on error; call SDL_GetError() for
 /// more details.
@@ -388,13 +388,13 @@ Pointer<Pointer<SdlDisplayMode>> sdlGetFullscreenDisplayModes(
 /// and finally checking the refresh rate. If all the available modes are too
 /// small, then NULL is returned.
 ///
-/// \param displayID the instance ID of the display to query
-/// \param w the width in pixels of the desired display mode
-/// \param h the height in pixels of the desired display mode
+/// \param displayID the instance ID of the display to query.
+/// \param w the width in pixels of the desired display mode.
+/// \param h the height in pixels of the desired display mode.
 /// \param refresh_rate the refresh rate of the desired display mode, or 0.0f
-/// for the desktop refresh rate
-/// \param include_high_density_modes Boolean to include high density modes in
-/// the search
+/// for the desktop refresh rate.
+/// \param include_high_density_modes boolean to include high density modes in
+/// the search.
 /// \returns a pointer to the closest display mode equal to or larger than the
 /// desired mode, or NULL on error; call SDL_GetError() for more
 /// information.
@@ -429,7 +429,7 @@ Pointer<SdlDisplayMode> sdlGetClosestFullscreenDisplayMode(int displayId, int w,
 /// function will return the previous native display mode, and not the current
 /// display mode.
 ///
-/// \param displayID the instance ID of the display to query
+/// \param displayID the instance ID of the display to query.
 /// \returns a pointer to the desktop display mode or NULL on error; call
 /// SDL_GetError() for more information.
 ///
@@ -457,7 +457,7 @@ Pointer<SdlDisplayMode> sdlGetDesktopDisplayMode(int displayId) {
 /// function will return the current display mode, and not the previous native
 /// display mode.
 ///
-/// \param displayID the instance ID of the display to query
+/// \param displayID the instance ID of the display to query.
 /// \returns a pointer to the desktop display mode or NULL on error; call
 /// SDL_GetError() for more information.
 ///
@@ -480,7 +480,7 @@ Pointer<SdlDisplayMode> sdlGetCurrentDisplayMode(int displayId) {
 ///
 /// Get the display containing a point.
 ///
-/// \param point the point to query
+/// \param point the point to query.
 /// \returns the instance ID of the display containing the point or 0 on
 /// failure; call SDL_GetError() for more information.
 ///
@@ -502,7 +502,7 @@ int sdlGetDisplayForPoint(Pointer<SdlPoint> point) {
 ///
 /// Get the display primarily containing a rect.
 ///
-/// \param rect the rect to query
+/// \param rect the rect to query.
 /// \returns the instance ID of the display entirely containing the rect or
 /// closest to the center of the rect on success or 0 on failure; call
 /// SDL_GetError() for more information.
@@ -525,7 +525,7 @@ int sdlGetDisplayForRect(Pointer<SdlRect> rect) {
 ///
 /// Get the display associated with a window.
 ///
-/// \param window the window to query
+/// \param window the window to query.
 /// \returns the instance ID of the display containing the center of the window
 /// on success or 0 on failure; call SDL_GetError() for more
 /// information.
@@ -552,7 +552,7 @@ int sdlGetDisplayForWindow(Pointer<SdlWindow> window) {
 /// 1920x1080 and it has a high density back buffer of 3840x2160 pixels, it
 /// would have a pixel density of 2.0.
 ///
-/// \param window the window to query
+/// \param window the window to query.
 /// \returns the pixel density or 0.0f on failure; call SDL_GetError() for more
 /// information.
 ///
@@ -584,7 +584,7 @@ double sdlGetWindowPixelDensity(Pointer<SdlWindow> window) {
 /// updated when that setting is changed, or the window moves to a display with
 /// a different scale setting.
 ///
-/// \param window the window to query
+/// \param window the window to query.
 /// \returns the display scale, or 0.0f on failure; call SDL_GetError() for
 /// more information.
 ///
@@ -617,7 +617,7 @@ double sdlGetWindowDisplayScale(Pointer<SdlWindow> window) {
 /// SDL_EVENT_WINDOOW_PIXEL_SIZE_CHANGED event will be emitted with the new
 /// mode dimensions.
 ///
-/// \param window the window to affect
+/// \param window the window to affect.
 /// \param mode a pointer to the display mode to use, which can be NULL for
 /// borderless fullscreen desktop mode, or one of the fullscreen
 /// modes returned by SDL_GetFullscreenDisplayModes() to set an
@@ -646,9 +646,9 @@ int sdlSetWindowFullscreenMode(
 ///
 /// Query the display mode to use when a window is visible at fullscreen.
 ///
-/// \param window the window to query
+/// \param window the window to query.
 /// \returns a pointer to the exclusive fullscreen mode to use or NULL for
-/// borderless fullscreen desktop mode
+/// borderless fullscreen desktop mode.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -671,8 +671,8 @@ Pointer<SdlDisplayMode> sdlGetWindowFullscreenMode(Pointer<SdlWindow> window) {
 ///
 /// Data returned should be freed with SDL_free.
 ///
-/// \param window the window to query
-/// \param size the size of the ICC profile
+/// \param window the window to query.
+/// \param size the size of the ICC profile.
 /// \returns the raw ICC profile data on success or NULL on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -694,7 +694,7 @@ Pointer<NativeType> sdlGetWindowIccProfile(
 ///
 /// Get the pixel format associated with the window.
 ///
-/// \param window the window to query
+/// \param window the window to query.
 /// \returns the pixel format of the window on success or
 /// SDL_PIXELFORMAT_UNKNOWN on failure; call SDL_GetError() for more
 /// information.
@@ -759,10 +759,10 @@ int sdlGetWindowPixelFormat(Pointer<SdlWindow> window) {
 /// loader or link to a dynamic library version. This limitation may be removed
 /// in a future version of SDL.
 ///
-/// \param title the title of the window, in UTF-8 encoding
-/// \param w the width of the window
-/// \param h the height of the window
-/// \param flags 0, or one or more SDL_WindowFlags OR'd together
+/// \param title the title of the window, in UTF-8 encoding.
+/// \param w the width of the window.
+/// \param h the height of the window.
+/// \param flags 0, or one or more SDL_WindowFlags OR'd together.
 /// \returns the window that was created or NULL on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -821,13 +821,13 @@ Pointer<SdlWindow> sdlCreateWindow(String? title, int w, int h, int flags) {
 /// If the parent window is destroyed, any child popup windows will be
 /// recursively destroyed as well.
 ///
-/// \param parent the parent of the window, must not be NULL
+/// \param parent the parent of the window, must not be NULL.
 /// \param offset_x the x position of the popup window relative to the origin
-/// of the parent
+/// of the parent.
 /// \param offset_y the y position of the popup window relative to the origin
-/// of the parent window
-/// \param w the width of the window
-/// \param h the height of the window
+/// of the parent window.
+/// \param w the width of the window.
+/// \param h the height of the window.
 /// \param flags SDL_WINDOW_TOOLTIP or SDL_WINDOW_POPUP_MENU, and zero or more
 /// additional SDL_WindowFlags OR'd together.
 /// \returns the window that was created or NULL on failure; call
@@ -958,7 +958,7 @@ Pointer<SdlWindow> sdlCreatePopupWindow(Pointer<SdlWindow> parent, int offsetX,
 /// set to true, then create the renderer, then show the window with
 /// SDL_ShowWindow().
 ///
-/// \param props the properties to use
+/// \param props the properties to use.
 /// \returns the window that was created or NULL on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -984,7 +984,7 @@ Pointer<SdlWindow> sdlCreateWindowWithProperties(int props) {
 /// The numeric ID is what SDL_WindowEvent references, and is necessary to map
 /// these events to specific SDL_Window objects.
 ///
-/// \param window the window to query
+/// \param window the window to query.
 /// \returns the ID of the window on success or 0 on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -1008,7 +1008,7 @@ int sdlGetWindowId(Pointer<SdlWindow> window) {
 /// The numeric ID is what SDL_WindowEvent references, and is necessary to map
 /// these events to specific SDL_Window objects.
 ///
-/// \param id the ID of the window
+/// \param id the ID of the window.
 /// \returns the window associated with `id` or NULL if it doesn't exist; call
 /// SDL_GetError() for more information.
 ///
@@ -1029,7 +1029,7 @@ Pointer<SdlWindow> sdlGetWindowFromId(int id) {
 ///
 /// Get parent of a window.
 ///
-/// \param window the window to query
+/// \param window the window to query.
 /// \returns the parent of the window on success or NULL if the window has no
 /// parent.
 ///
@@ -1146,7 +1146,7 @@ Pointer<SdlWindow> sdlGetWindowParent(Pointer<SdlWindow> window) {
 /// - `SDL_PROP_WINDOW_X11_WINDOW_NUMBER`: the X11 Window associated with the
 /// window
 ///
-/// \param window the window to query
+/// \param window the window to query.
 /// \returns a valid property ID on success or 0 on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -1168,8 +1168,8 @@ int sdlGetWindowProperties(Pointer<SdlWindow> window) {
 ///
 /// Get the window flags.
 ///
-/// \param window the window to query
-/// \returns a mask of the SDL_WindowFlags associated with `window`
+/// \param window the window to query.
+/// \returns a mask of the SDL_WindowFlags associated with `window`.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -1196,8 +1196,8 @@ int sdlGetWindowFlags(Pointer<SdlWindow> window) {
 ///
 /// This string is expected to be in UTF-8 encoding.
 ///
-/// \param window the window to change
-/// \param title the desired window title in UTF-8 format
+/// \param window the window to change.
+/// \param title the desired window title in UTF-8 format.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -1224,7 +1224,7 @@ int sdlSetWindowTitle(Pointer<SdlWindow> window, String? title) {
 ///
 /// The returned string follows the SDL_GetStringRule.
 ///
-/// \param window the window to query
+/// \param window the window to query.
 /// \returns the title of the window in UTF-8 format or "" if there is no
 /// title.
 ///
@@ -1249,8 +1249,8 @@ String? sdlGetWindowTitle(Pointer<SdlWindow> window) {
 ///
 /// Set the icon for a window.
 ///
-/// \param window the window to change
-/// \param icon an SDL_Surface structure containing the icon for the window
+/// \param window the window to change.
+/// \param icon an SDL_Surface structure containing the icon for the window.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -1292,11 +1292,11 @@ int sdlSetWindowIcon(Pointer<SdlWindow> window, Pointer<SdlSurface> icon) {
 /// Additionally, as this is just a request, it can be denied by the windowing
 /// system.
 ///
-/// \param window the window to reposition
+/// \param window the window to reposition.
 /// \param x the x coordinate of the window, or `SDL_WINDOWPOS_CENTERED` or
-/// `SDL_WINDOWPOS_UNDEFINED`
+/// `SDL_WINDOWPOS_UNDEFINED`.
 /// \param y the y coordinate of the window, or `SDL_WINDOWPOS_CENTERED` or
-/// `SDL_WINDOWPOS_UNDEFINED`
+/// `SDL_WINDOWPOS_UNDEFINED`.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -1325,9 +1325,11 @@ int sdlSetWindowPosition(Pointer<SdlWindow> window, int x, int y) {
 /// If you do not need the value for one of the positions a NULL may be passed
 /// in the `x` or `y` parameter.
 ///
-/// \param window the window to query
-/// \param x a pointer filled in with the x position of the window, may be NULL
-/// \param y a pointer filled in with the y position of the window, may be NULL
+/// \param window the window to query.
+/// \param x a pointer filled in with the x position of the window, may be
+/// NULL.
+/// \param y a pointer filled in with the y position of the window, may be
+/// NULL.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -1370,9 +1372,9 @@ int sdlGetWindowPosition(
 /// content area to remain within the usable desktop bounds). Additionally, as
 /// this is just a request, it can be denied by the windowing system.
 ///
-/// \param window the window to change
-/// \param w the width of the window, must be > 0
-/// \param h the height of the window, must be > 0
+/// \param window the window to change.
+/// \param w the width of the window, must be > 0.
+/// \param h the height of the window, must be > 0.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -1400,9 +1402,9 @@ int sdlSetWindowSize(Pointer<SdlWindow> window, int w, int h) {
 /// window is on a high pixel density display. Use SDL_GetWindowSizeInPixels()
 /// or SDL_GetRenderOutputSize() to get the real client area size in pixels.
 ///
-/// \param window the window to query the width and height from
-/// \param w a pointer filled in with the width of the window, may be NULL
-/// \param h a pointer filled in with the height of the window, may be NULL
+/// \param window the window to query the width and height from.
+/// \param w a pointer filled in with the width of the window, may be NULL.
+/// \param h a pointer filled in with the height of the window, may be NULL.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -1449,11 +1451,11 @@ int sdlGetWindowSize(
 /// Additionally, as this is just a request, it can be denied by the windowing
 /// system.
 ///
-/// \param window the window to change
+/// \param window the window to change.
 /// \param min_aspect the minimum aspect ratio of the window, or 0.0f for no
-/// limit
+/// limit.
 /// \param max_aspect the maximum aspect ratio of the window, or 0.0f for no
-/// limit
+/// limit.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -1478,11 +1480,11 @@ int sdlSetWindowAspectRatio(
 ///
 /// Get the size of a window's client area.
 ///
-/// \param window the window to query the width and height from
+/// \param window the window to query the width and height from.
 /// \param min_aspect a pointer filled in with the minimum aspect ratio of the
-/// window, may be NULL
+/// window, may be NULL.
 /// \param max_aspect a pointer filled in with the maximum aspect ratio of the
-/// window, may be NULL
+/// window, may be NULL.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -1519,15 +1521,15 @@ int sdlGetWindowAspectRatio(Pointer<SdlWindow> window, Pointer<Float> minAspect,
 /// This function also returns -1 if getting the information is not supported.
 ///
 /// \param window the window to query the size values of the border
-/// (decorations) from
+/// (decorations) from.
 /// \param top pointer to variable for storing the size of the top border; NULL
-/// is permitted
+/// is permitted.
 /// \param left pointer to variable for storing the size of the left border;
-/// NULL is permitted
+/// NULL is permitted.
 /// \param bottom pointer to variable for storing the size of the bottom
-/// border; NULL is permitted
+/// border; NULL is permitted.
 /// \param right pointer to variable for storing the size of the right border;
-/// NULL is permitted
+/// NULL is permitted.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -1556,10 +1558,11 @@ int sdlGetWindowBordersSize(Pointer<SdlWindow> window, Pointer<Int32> top,
 ///
 /// Get the size of a window's client area, in pixels.
 ///
-/// \param window the window from which the drawable size should be queried
-/// \param w a pointer to variable for storing the width in pixels, may be NULL
+/// \param window the window from which the drawable size should be queried.
+/// \param w a pointer to variable for storing the width in pixels, may be
+/// NULL.
 /// \param h a pointer to variable for storing the height in pixels, may be
-/// NULL
+/// NULL.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -1584,9 +1587,9 @@ int sdlGetWindowSizeInPixels(
 ///
 /// Set the minimum size of a window's client area.
 ///
-/// \param window the window to change
-/// \param min_w the minimum width of the window, or 0 for no limit
-/// \param min_h the minimum height of the window, or 0 for no limit
+/// \param window the window to change.
+/// \param min_w the minimum width of the window, or 0 for no limit.
+/// \param min_h the minimum height of the window, or 0 for no limit.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -1609,11 +1612,11 @@ int sdlSetWindowMinimumSize(Pointer<SdlWindow> window, int minW, int minH) {
 ///
 /// Get the minimum size of a window's client area.
 ///
-/// \param window the window to query
+/// \param window the window to query.
 /// \param w a pointer filled in with the minimum width of the window, may be
-/// NULL
+/// NULL.
 /// \param h a pointer filled in with the minimum height of the window, may be
-/// NULL
+/// NULL.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -1638,9 +1641,9 @@ int sdlGetWindowMinimumSize(
 ///
 /// Set the maximum size of a window's client area.
 ///
-/// \param window the window to change
-/// \param max_w the maximum width of the window, or 0 for no limit
-/// \param max_h the maximum height of the window, or 0 for no limit
+/// \param window the window to change.
+/// \param max_w the maximum width of the window, or 0 for no limit.
+/// \param max_h the maximum height of the window, or 0 for no limit.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -1663,11 +1666,11 @@ int sdlSetWindowMaximumSize(Pointer<SdlWindow> window, int maxW, int maxH) {
 ///
 /// Get the maximum size of a window's client area.
 ///
-/// \param window the window to query
+/// \param window the window to query.
 /// \param w a pointer filled in with the maximum width of the window, may be
-/// NULL
+/// NULL.
 /// \param h a pointer filled in with the maximum height of the window, may be
-/// NULL
+/// NULL.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -1698,8 +1701,8 @@ int sdlGetWindowMaximumSize(
 ///
 /// You can't change the border state of a fullscreen window.
 ///
-/// \param window the window of which to change the border state
-/// \param bordered SDL_FALSE to remove border, SDL_TRUE to add border
+/// \param window the window of which to change the border state.
+/// \param bordered SDL_FALSE to remove border, SDL_TRUE to add border.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -1727,8 +1730,8 @@ int sdlSetWindowBordered(Pointer<SdlWindow> window, bool bordered) {
 ///
 /// You can't change the resizable state of a fullscreen window.
 ///
-/// \param window the window of which to change the resizable state
-/// \param resizable SDL_TRUE to allow resizing, SDL_FALSE to disallow
+/// \param window the window of which to change the resizable state.
+/// \param resizable SDL_TRUE to allow resizing, SDL_FALSE to disallow.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -1753,9 +1756,9 @@ int sdlSetWindowResizable(Pointer<SdlWindow> window, bool resizable) {
 /// This will add or remove the window's `SDL_WINDOW_ALWAYS_ON_TOP` flag. This
 /// will bring the window to the front and keep the window above the rest.
 ///
-/// \param window The window of which to change the always on top state
+/// \param window the window of which to change the always on top state.
 /// \param on_top SDL_TRUE to set the window always on top, SDL_FALSE to
-/// disable
+/// disable.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -1777,7 +1780,7 @@ int sdlSetWindowAlwaysOnTop(Pointer<SdlWindow> window, bool onTop) {
 ///
 /// Show a window.
 ///
-/// \param window the window to show
+/// \param window the window to show.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -1799,7 +1802,7 @@ int sdlShowWindow(Pointer<SdlWindow> window) {
 ///
 /// Hide a window.
 ///
-/// \param window the window to hide
+/// \param window the window to hide.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -1820,7 +1823,7 @@ int sdlHideWindow(Pointer<SdlWindow> window) {
 ///
 /// Raise a window above other windows and set the input focus.
 ///
-/// \param window the window to raise
+/// \param window the window to raise.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -1856,7 +1859,7 @@ int sdlRaiseWindow(Pointer<SdlWindow> window) {
 /// manager. Win32 and macOS enforce the constraints when maximizing, while X11
 /// and Wayland window managers may vary.
 ///
-/// \param window the window to maximize
+/// \param window the window to maximize.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -1888,7 +1891,7 @@ int sdlMaximizeWindow(Pointer<SdlWindow> window) {
 /// emitted. Note that, as this is just a request, the windowing system can
 /// deny the state change.
 ///
-/// \param window the window to minimize
+/// \param window the window to minimize.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -1921,7 +1924,7 @@ int sdlMinimizeWindow(Pointer<SdlWindow> window) {
 /// emitted. Note that, as this is just a request, the windowing system can
 /// deny the state change.
 ///
-/// \param window the window to restore
+/// \param window the window to restore.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -1957,8 +1960,9 @@ int sdlRestoreWindow(Pointer<SdlWindow> window) {
 /// SDL_EVENT_WINDOW_LEAVE_FULLSCREEN event will be emitted. Note that, as this
 /// is just a request, it can be denied by the windowing system.
 ///
-/// \param window the window to change
-/// \param fullscreen SDL_TRUE for fullscreen mode, SDL_FALSE for windowed mode
+/// \param window the window to change.
+/// \param fullscreen SDL_TRUE for fullscreen mode, SDL_FALSE for windowed
+/// mode.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -1992,7 +1996,7 @@ int sdlSetWindowFullscreen(Pointer<SdlWindow> window, bool fullscreen) {
 /// On windowing systems where changes are immediate, this does nothing.
 ///
 /// \param window the window for which to wait for the pending state to be
-/// applied
+/// applied.
 /// \returns 0 on success, a positive value if the operation timed out before
 /// the window was in the requested state, or a negative error code on
 /// failure; call SDL_GetError() for more information.
@@ -2020,7 +2024,7 @@ int sdlSyncWindow(Pointer<SdlWindow> window) {
 ///
 /// Return whether the window has a surface associated with it.
 ///
-/// \param window the window to query
+/// \param window the window to query.
 /// \returns SDL_TRUE if there is a surface associated with the window, or
 /// SDL_FALSE otherwise.
 ///
@@ -2052,7 +2056,7 @@ bool sdlWindowHasSurface(Pointer<SdlWindow> window) {
 ///
 /// This function is affected by `SDL_HINT_FRAMEBUFFER_ACCELERATION`.
 ///
-/// \param window the window to query
+/// \param window the window to query.
 /// \returns the surface associated with the window, or NULL on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -2110,7 +2114,7 @@ int sdlSetWindowSurfaceVSync(Pointer<SdlWindow> window, int vsync) {
 ///
 /// Get VSync for the window surface.
 ///
-/// \param window the window to query
+/// \param window the window to query.
 /// \param vsync an int filled with the current vertical refresh sync interval.
 /// See SDL_SetWindowSurfaceVSync() for the meaning of the value.
 /// \returns 0 on success or a negative error code on failure; call
@@ -2139,7 +2143,7 @@ int sdlGetWindowSurfaceVSync(Pointer<SdlWindow> window, Pointer<Int32> vsync) {
 ///
 /// This function is equivalent to the SDL 1.2 API SDL_Flip().
 ///
-/// \param window the window to update
+/// \param window the window to update.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -2171,10 +2175,10 @@ int sdlUpdateWindowSurface(Pointer<SdlWindow> window) {
 /// update more of the screen (or all of the screen!), depending on what method
 /// SDL uses to send pixels to the system.
 ///
-/// \param window the window to update
+/// \param window the window to update.
 /// \param rects an array of SDL_Rect structures representing areas of the
-/// surface to copy, in pixels
-/// \param numrects the number of rectangles
+/// surface to copy, in pixels.
+/// \param numrects the number of rectangles.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -2199,7 +2203,7 @@ int sdlUpdateWindowSurfaceRects(
 ///
 /// Destroy the surface associated with the window.
 ///
-/// \param window the window to update
+/// \param window the window to update.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -2237,8 +2241,8 @@ int sdlDestroyWindowSurface(Pointer<SdlWindow> window) {
 /// If the caller enables a grab while another window is currently grabbed, the
 /// other window loses its grab in favor of the caller's window.
 ///
-/// \param window The window for which the keyboard grab mode should be set.
-/// \param grabbed This is SDL_TRUE to grab keyboard, and SDL_FALSE to release.
+/// \param window the window for which the keyboard grab mode should be set.
+/// \param grabbed this is SDL_TRUE to grab keyboard, and SDL_FALSE to release.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -2263,8 +2267,8 @@ int sdlSetWindowKeyboardGrab(Pointer<SdlWindow> window, bool grabbed) {
 ///
 /// Mouse grab confines the mouse cursor to the window.
 ///
-/// \param window The window for which the mouse grab mode should be set.
-/// \param grabbed This is SDL_TRUE to grab mouse, and SDL_FALSE to release.
+/// \param window the window for which the mouse grab mode should be set.
+/// \param grabbed this is SDL_TRUE to grab mouse, and SDL_FALSE to release.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -2287,7 +2291,7 @@ int sdlSetWindowMouseGrab(Pointer<SdlWindow> window, bool grabbed) {
 ///
 /// Get a window's keyboard grab mode.
 ///
-/// \param window the window to query
+/// \param window the window to query.
 /// \returns SDL_TRUE if keyboard is grabbed, and SDL_FALSE otherwise.
 ///
 /// \since This function is available since SDL 3.0.0.
@@ -2307,7 +2311,7 @@ bool sdlGetWindowKeyboardGrab(Pointer<SdlWindow> window) {
 ///
 /// Get a window's mouse grab mode.
 ///
-/// \param window the window to query
+/// \param window the window to query.
 /// \returns SDL_TRUE if mouse is grabbed, and SDL_FALSE otherwise.
 ///
 /// \since This function is available since SDL 3.0.0.
@@ -2350,8 +2354,8 @@ Pointer<SdlWindow> sdlGetGrabbedWindow() {
 /// Note that this does NOT grab the cursor, it only defines the area a cursor
 /// is restricted to when the window has mouse focus.
 ///
-/// \param window The window that will be associated with the barrier.
-/// \param rect A rectangle area in window-relative coordinates. If NULL the
+/// \param window the window that will be associated with the barrier.
+/// \param rect a rectangle area in window-relative coordinates. If NULL the
 /// barrier for the specified window will be destroyed.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
@@ -2375,8 +2379,8 @@ int sdlSetWindowMouseRect(Pointer<SdlWindow> window, Pointer<SdlRect> rect) {
 ///
 /// Get the mouse confinement rectangle of a window.
 ///
-/// \param window The window to query
-/// \returns A pointer to the mouse confinement rectangle of a window, or NULL
+/// \param window the window to query.
+/// \returns a pointer to the mouse confinement rectangle of a window, or NULL
 /// if there isn't one.
 ///
 /// \since This function is available since SDL 3.0.0.
@@ -2402,8 +2406,8 @@ Pointer<SdlRect> sdlGetWindowMouseRect(Pointer<SdlWindow> window) {
 ///
 /// This function also returns -1 if setting the opacity isn't supported.
 ///
-/// \param window the window which will be made transparent or opaque
-/// \param opacity the opacity value (0.0f - transparent, 1.0f - opaque)
+/// \param window the window which will be made transparent or opaque.
+/// \param opacity the opacity value (0.0f - transparent, 1.0f - opaque).
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -2432,8 +2436,8 @@ int sdlSetWindowOpacity(Pointer<SdlWindow> window, double opacity) {
 ///
 /// This function also returns -1 if an invalid window was provided.
 ///
-/// \param window the window to get the current opacity value from
-/// \param out_opacity the float filled in (0.0f - transparent, 1.0f - opaque)
+/// \param window the window to get the current opacity value from.
+/// \param out_opacity the float filled in (0.0f - transparent, 1.0f - opaque).
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -2462,8 +2466,8 @@ int sdlGetWindowOpacity(Pointer<SdlWindow> window, Pointer<Float> outOpacity) {
 /// Setting a window as modal to a parent that is a descendent of the modal
 /// window results in undefined behavior.
 ///
-/// \param modal_window the window that should be set modal
-/// \param parent_window the parent window for the modal window
+/// \param modal_window the window that should be set modal.
+/// \param parent_window the parent window for the modal window.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -2489,7 +2493,7 @@ int sdlSetWindowModalFor(
 /// this with caution, as you might give focus to a window that is completely
 /// obscured by other windows.
 ///
-/// \param window the window that should get the input focus
+/// \param window the window that should get the input focus.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -2510,9 +2514,9 @@ int sdlSetWindowInputFocus(Pointer<SdlWindow> window) {
 ///
 /// Set whether the window may have input focus.
 ///
-/// \param window the window to set focusable state
+/// \param window the window to set focusable state.
 /// \param focusable SDL_TRUE to allow input focus, SDL_FALSE to not allow
-/// input focus
+/// input focus.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -2540,11 +2544,11 @@ int sdlSetWindowFocusable(Pointer<SdlWindow> window, bool focusable) {
 /// On platforms or desktops where this is unsupported, this function does
 /// nothing.
 ///
-/// \param window the window for which the menu will be displayed
+/// \param window the window for which the menu will be displayed.
 /// \param x the x coordinate of the menu, relative to the origin (top-left) of
-/// the client area
+/// the client area.
 /// \param y the y coordinate of the menu, relative to the origin (top-left) of
-/// the client area
+/// the client area.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -2593,9 +2597,9 @@ int sdlShowWindowSystemMenu(Pointer<SdlWindow> window, int x, int y) {
 /// can fire at any time, you should try to keep your callback efficient,
 /// devoid of allocations, etc.
 ///
-/// \param window the window to set hit-testing on
-/// \param callback the function to call when doing a hit-test
-/// \param callback_data an app-defined void pointer passed to **callback**
+/// \param window the window to set hit-testing on.
+/// \param callback the function to call when doing a hit-test.
+/// \param callback_data an app-defined void pointer passed to **callback**.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -2634,9 +2638,9 @@ int sdlSetWindowHitTest(
 ///
 /// The window must have been created with the SDL_WINDOW_TRANSPARENT flag.
 ///
-/// \param window the window
+/// \param window the window.
 /// \param shape the surface representing the shape of the window, or NULL to
-/// remove any current shape
+/// remove any current shape.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -2656,8 +2660,8 @@ int sdlSetWindowShape(Pointer<SdlWindow> window, Pointer<SdlSurface> shape) {
 ///
 /// Request a window to demand attention from the user.
 ///
-/// \param window the SDL_Window to be flashed
-/// \param operation the SDL_FlashOperation to perform
+/// \param window the window to be flashed.
+/// \param operation the operation to perform.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -2683,7 +2687,7 @@ int sdlFlashWindow(Pointer<SdlWindow> window, int operation) {
 /// If `window` is NULL, this function will return immediately after setting
 /// the SDL error message to "Invalid window". See SDL_GetError().
 ///
-/// \param window the window to destroy
+/// \param window the window to destroy.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -2785,7 +2789,7 @@ int sdlDisableScreenSaver() {
 /// program from the dynamic library using SDL_GL_GetProcAddress().
 ///
 /// \param path the platform dependent OpenGL library name, or NULL to open the
-/// default OpenGL library
+/// default OpenGL library.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -2848,7 +2852,7 @@ int sdlGlLoadLibrary(String? path) {
 /// code. This will ensure the proper calling convention is followed on
 /// platforms where this matters (Win32) thereby avoiding stack corruption.
 ///
-/// \param proc the name of an OpenGL function
+/// \param proc the name of an OpenGL function.
 /// \returns a pointer to the named OpenGL function. The returned pointer
 /// should be cast to the appropriate function signature.
 ///
@@ -2879,7 +2883,7 @@ Pointer<NativeType> sdlGlGetProcAddress(String? proc) {
 /// points for EGL functions. This is useful to provide to an EGL API and
 /// extension loader.
 ///
-/// \param proc the name of an EGL function
+/// \param proc the name of an EGL function.
 /// \returns a pointer to the named EGL function. The returned pointer should
 /// be cast to the appropriate function signature.
 ///
@@ -2931,7 +2935,7 @@ void sdlGlUnloadLibrary() {
 /// context and save that information somewhere instead of calling the function
 /// every time you need to know.
 ///
-/// \param extension the name of the extension to check
+/// \param extension the name of the extension to check.
 /// \returns SDL_TRUE if the extension is supported, SDL_FALSE otherwise.
 ///
 /// \since This function is available since SDL 3.0.0.
@@ -2976,8 +2980,9 @@ void sdlGlResetAttributes() {
 /// SDL_GL_GetAttribute() to check the values after creating the OpenGL
 /// context, since the values obtained can differ from the requested ones.
 ///
-/// \param attr an SDL_GLattr enum value specifying the OpenGL attribute to set
-/// \param value the desired value for the attribute
+/// \param attr an SDL_GLattr enum value specifying the OpenGL attribute to
+/// set.
+/// \param value the desired value for the attribute.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -2999,8 +3004,9 @@ int sdlGlSetAttribute(int attr, int value) {
 ///
 /// Get the actual value for an attribute from the current context.
 ///
-/// \param attr an SDL_GLattr enum value specifying the OpenGL attribute to get
-/// \param value a pointer filled in with the current value of `attr`
+/// \param attr an SDL_GLattr enum value specifying the OpenGL attribute to
+/// get.
+/// \param value a pointer filled in with the current value of `attr`.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -3028,9 +3034,9 @@ int sdlGlGetAttribute(int attr, Pointer<Int32> value) {
 /// extension-handling library or with SDL_GL_GetProcAddress() and its related
 /// functions.
 ///
-/// SDL_GLContext is an alias for `void *`. It's opaque to the application.
+/// SDL_GLContext is opaque to the application.
 ///
-/// \param window the window to associate with the context
+/// \param window the window to associate with the context.
 /// \returns the OpenGL context associated with `window` or NULL on error; call
 /// SDL_GetError() for more details.
 ///
@@ -3042,10 +3048,10 @@ int sdlGlGetAttribute(int attr, Pointer<Int32> value) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_GLContext SDLCALL SDL_GL_CreateContext(SDL_Window *window)
 /// ```
-Pointer<NativeType> sdlGlCreateContext(Pointer<SdlWindow> window) {
+Pointer<SdlGlContext> sdlGlCreateContext(Pointer<SdlWindow> window) {
   final sdlGlCreateContextLookupFunction = libSdl3.lookupFunction<
-      Pointer<NativeType> Function(Pointer<SdlWindow> window),
-      Pointer<NativeType> Function(
+      Pointer<SdlGlContext> Function(Pointer<SdlWindow> window),
+      Pointer<SdlGlContext> Function(
           Pointer<SdlWindow> window)>('SDL_GL_CreateContext');
   return sdlGlCreateContextLookupFunction(window);
 }
@@ -3055,8 +3061,8 @@ Pointer<NativeType> sdlGlCreateContext(Pointer<SdlWindow> window) {
 ///
 /// The context must have been created with a compatible window.
 ///
-/// \param window the window to associate with the context
-/// \param context the OpenGL context to associate with the window
+/// \param window the window to associate with the context.
+/// \param context the OpenGL context to associate with the window.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -3067,11 +3073,11 @@ Pointer<NativeType> sdlGlCreateContext(Pointer<SdlWindow> window) {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_GL_MakeCurrent(SDL_Window *window, SDL_GLContext context)
 /// ```
-int sdlGlMakeCurrent(Pointer<SdlWindow> window, Pointer<NativeType> context) {
+int sdlGlMakeCurrent(Pointer<SdlWindow> window, Pointer<SdlGlContext> context) {
   final sdlGlMakeCurrentLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlWindow> window, Pointer<NativeType> context),
+      Int32 Function(Pointer<SdlWindow> window, Pointer<SdlGlContext> context),
       int Function(Pointer<SdlWindow> window,
-          Pointer<NativeType> context)>('SDL_GL_MakeCurrent');
+          Pointer<SdlGlContext> context)>('SDL_GL_MakeCurrent');
   return sdlGlMakeCurrentLookupFunction(window, context);
 }
 
@@ -3106,10 +3112,10 @@ Pointer<SdlWindow> sdlGlGetCurrentWindow() {
 /// ```c
 /// extern SDL_DECLSPEC SDL_GLContext SDLCALL SDL_GL_GetCurrentContext(void)
 /// ```
-Pointer<NativeType> sdlGlGetCurrentContext() {
+Pointer<SdlGlContext> sdlGlGetCurrentContext() {
   final sdlGlGetCurrentContextLookupFunction = libSdl3.lookupFunction<
-      Pointer<NativeType> Function(),
-      Pointer<NativeType> Function()>('SDL_GL_GetCurrentContext');
+      Pointer<SdlGlContext> Function(),
+      Pointer<SdlGlContext> Function()>('SDL_GL_GetCurrentContext');
   return sdlGlGetCurrentContextLookupFunction();
 }
 
@@ -3152,7 +3158,7 @@ Pointer<NativeType> sdlEglGetCurrentEglConfig() {
 ///
 /// Get the EGL surface associated with the window.
 ///
-/// \param window the window to query
+/// \param window the window to query.
 /// \returns the EGLSurface pointer associated with the window, or NULL on
 /// failure.
 ///
@@ -3182,11 +3188,11 @@ Pointer<NativeType> sdlEglGetWindowEglSurface(Pointer<SdlWindow> window) {
 ///
 /// NOTE: These callback pointers will be reset after SDL_GL_ResetAttributes.
 ///
-/// \param platformAttribCallback Callback for attributes to pass to
+/// \param platformAttribCallback callback for attributes to pass to
 /// eglGetPlatformDisplay.
-/// \param surfaceAttribCallback Callback for attributes to pass to
+/// \param surfaceAttribCallback callback for attributes to pass to
 /// eglCreateSurface.
-/// \param contextAttribCallback Callback for attributes to pass to
+/// \param contextAttribCallback callback for attributes to pass to
 /// eglCreateContext.
 ///
 /// \since This function is available since SDL 3.0.0.
@@ -3234,7 +3240,7 @@ void sdlEglSetEglAttributeCallbacks(
 /// https://www.khronos.org/opengl/wiki/Swap_Interval#Adaptive_Vsync
 ///
 /// \param interval 0 for immediate updates, 1 for updates synchronized with
-/// the vertical retrace, -1 for adaptive vsync
+/// the vertical retrace, -1 for adaptive vsync.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -3258,10 +3264,10 @@ int sdlGlSetSwapInterval(int interval) {
 /// If the system can't determine the swap interval, or there isn't a valid
 /// current context, this function will set *interval to 0 as a safe default.
 ///
-/// \param interval Output interval value. 0 if there is no vertical retrace
+/// \param interval output interval value. 0 if there is no vertical retrace
 /// synchronization, 1 if the buffer swap is synchronized with
 /// the vertical retrace, and -1 if late swaps happen
-/// immediately instead of waiting for the next retrace
+/// immediately instead of waiting for the next retrace.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -3289,7 +3295,7 @@ int sdlGlGetSwapInterval(Pointer<Int32> interval) {
 /// glBindFramebuffer(), this is the default and you won't have to do anything
 /// extra.
 ///
-/// \param window the window to change
+/// \param window the window to change.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -3308,7 +3314,7 @@ int sdlGlSwapWindow(Pointer<SdlWindow> window) {
 ///
 /// Delete an OpenGL context.
 ///
-/// \param context the OpenGL context to be deleted
+/// \param context the OpenGL context to be deleted.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -3319,9 +3325,9 @@ int sdlGlSwapWindow(Pointer<SdlWindow> window) {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_GL_DeleteContext(SDL_GLContext context)
 /// ```
-int sdlGlDeleteContext(Pointer<NativeType> context) {
+int sdlGlDeleteContext(Pointer<SdlGlContext> context) {
   final sdlGlDeleteContextLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<NativeType> context),
-      int Function(Pointer<NativeType> context)>('SDL_GL_DeleteContext');
+      Int32 Function(Pointer<SdlGlContext> context),
+      int Function(Pointer<SdlGlContext> context)>('SDL_GL_DeleteContext');
   return sdlGlDeleteContextLookupFunction(context);
 }

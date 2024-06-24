@@ -26,7 +26,7 @@ import 'struct_sdl.dart';
 /// requires an event-handling loop. Apps that do not use SDL to handle events
 /// should add a call to SDL_PumpEvents in their main loop.
 ///
-/// \param callback An SDL_DialogFileCallback to be invoked when the user
+/// \param callback an SDL_DialogFileCallback to be invoked when the user
 /// selects a file and accepts, or cancels the dialog, or an
 /// error occurs. The first argument is a null-terminated list
 /// of C strings, representing the paths chosen by the user.
@@ -39,17 +39,17 @@ import 'struct_sdl.dart';
 /// index of the terminating NULL filter) if no filter was
 /// chosen, or -1 if the platform does not support detecting
 /// the selected filter.
-/// \param userdata An optional pointer to pass extra data to the callback when
+/// \param userdata an optional pointer to pass extra data to the callback when
 /// it will be invoked.
-/// \param window The window that the dialog should be modal for. May be NULL.
+/// \param window the window that the dialog should be modal for. May be NULL.
 /// Not all platforms support this option.
-/// \param filters A list of SDL_DialogFileFilter's. May be NULL. Not all
+/// \param filters a list of SDL_DialogFileFilter's. May be NULL. Not all
 /// platforms support this option, and platforms that do support
 /// it may allow the user to ignore the filters.
-/// \param nfilters The number of filters. Ignored if filters is NULL.
-/// \param default_location The default folder or file to start the dialog at.
+/// \param nfilters the number of filters. Ignored if filters is NULL.
+/// \param default_location the default folder or file to start the dialog at.
 /// May be NULL. Not all platforms support this option.
-/// \param allow_many If non-zero, the user will be allowed to select multiple
+/// \param allow_many if non-zero, the user will be allowed to select multiple
 /// entries. Not all platforms support this option.
 ///
 /// \since This function is available since SDL 3.0.0.
@@ -117,7 +117,7 @@ void sdlShowOpenFileDialog(
 /// requires an event-handling loop. Apps that do not use SDL to handle events
 /// should add a call to SDL_PumpEvents in their main loop.
 ///
-/// \param callback An SDL_DialogFileCallback to be invoked when the user
+/// \param callback an SDL_DialogFileCallback to be invoked when the user
 /// selects a file and accepts, or cancels the dialog, or an
 /// error occurs. The first argument is a null-terminated list
 /// of C strings, representing the paths chosen by the user.
@@ -130,15 +130,15 @@ void sdlShowOpenFileDialog(
 /// index of the terminating NULL filter) if no filter was
 /// chosen, or -1 if the platform does not support detecting
 /// the selected filter.
-/// \param userdata An optional pointer to pass extra data to the callback when
+/// \param userdata an optional pointer to pass extra data to the callback when
 /// it will be invoked.
-/// \param window The window that the dialog should be modal for. May be NULL.
+/// \param window the window that the dialog should be modal for. May be NULL.
 /// Not all platforms support this option.
-/// \param filters A list of SDL_DialogFileFilter's. May be NULL. Not all
+/// \param filters a list of SDL_DialogFileFilter's. May be NULL. Not all
 /// platforms support this option, and platforms that do support
 /// it may allow the user to ignore the filters.
-/// \param nfilters The number of filters. Ignored if filters is NULL.
-/// \param default_location The default folder or file to start the dialog at.
+/// \param nfilters the number of filters. Ignored if filters is NULL.
+/// \param default_location the default folder or file to start the dialog at.
 /// May be NULL. Not all platforms support this option.
 ///
 /// \since This function is available since SDL 3.0.0.
@@ -203,7 +203,7 @@ void sdlShowSaveFileDialog(
 /// requires an event-handling loop. Apps that do not use SDL to handle events
 /// should add a call to SDL_PumpEvents in their main loop.
 ///
-/// \param callback An SDL_DialogFileCallback to be invoked when the user
+/// \param callback an SDL_DialogFileCallback to be invoked when the user
 /// selects a file and accepts, or cancels the dialog, or an
 /// error occurs. The first argument is a null-terminated list
 /// of C strings, representing the paths chosen by the user.
@@ -212,13 +212,13 @@ void sdlShowSaveFileDialog(
 /// it can be fetched with SDL_GetError(). The second argument
 /// is the userdata pointer passed to the function. The third
 /// argument is always -1 for SDL_ShowOpenFolderDialog.
-/// \param userdata An optional pointer to pass extra data to the callback when
+/// \param userdata an optional pointer to pass extra data to the callback when
 /// it will be invoked.
-/// \param window The window that the dialog should be modal for. May be NULL.
+/// \param window the window that the dialog should be modal for. May be NULL.
 /// Not all platforms support this option.
-/// \param default_location The default folder or file to start the dialog at.
+/// \param default_location the default folder or file to start the dialog at.
 /// May be NULL. Not all platforms support this option.
-/// \param allow_many If non-zero, the user will be allowed to select multiple
+/// \param allow_many if non-zero, the user will be allowed to select multiple
 /// entries. Not all platforms support this option.
 ///
 /// \since This function is available since SDL 3.0.0.

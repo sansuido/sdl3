@@ -6,7 +6,7 @@ import 'lib_sdl.dart';
 ///
 /// Set the priority of all log categories.
 ///
-/// \param priority the SDL_LogPriority to assign
+/// \param priority the SDL_LogPriority to assign.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -26,8 +26,8 @@ void sdlSetLogPriorities(int priority) {
 ///
 /// Set the priority of a particular log category.
 ///
-/// \param category the category to assign a priority to
-/// \param priority the SDL_LogPriority to assign
+/// \param category the category to assign a priority to.
+/// \param priority the SDL_LogPriority to assign.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -48,8 +48,8 @@ void sdlSetLogPriority(int category, int priority) {
 ///
 /// Get the priority of a particular log category.
 ///
-/// \param category the category to query
-/// \returns the SDL_LogPriority for the requested category
+/// \param category the category to query.
+/// \returns the SDL_LogPriority for the requested category.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -88,9 +88,9 @@ void sdlResetLogPriorities() {
 ///
 /// Log a message with SDL_LOG_CATEGORY_APPLICATION and SDL_LOG_PRIORITY_INFO.
 ///
-/// \param fmt a printf() style message format string
+/// \param fmt a printf() style message format string.
 /// \param ... additional parameters matching % tokens in the `fmt` string, if
-/// any
+/// any.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -119,10 +119,10 @@ void sdlLog(String? fmt, Pointer<NativeType> arg1) {
 ///
 /// Log a message with SDL_LOG_PRIORITY_VERBOSE.
 ///
-/// \param category the category of the message
-/// \param fmt a printf() style message format string
+/// \param category the category of the message.
+/// \param fmt a printf() style message format string.
 /// \param ... additional parameters matching % tokens in the **fmt** string,
-/// if any
+/// if any.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -153,10 +153,10 @@ void sdlLogVerbose(int category, String? fmt, Pointer<NativeType> arg2) {
 ///
 /// Log a message with SDL_LOG_PRIORITY_DEBUG.
 ///
-/// \param category the category of the message
-/// \param fmt a printf() style message format string
+/// \param category the category of the message.
+/// \param fmt a printf() style message format string.
 /// \param ... additional parameters matching % tokens in the **fmt** string,
-/// if any
+/// if any.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -187,10 +187,10 @@ void sdlLogDebug(int category, String? fmt, Pointer<NativeType> arg2) {
 ///
 /// Log a message with SDL_LOG_PRIORITY_INFO.
 ///
-/// \param category the category of the message
-/// \param fmt a printf() style message format string
+/// \param category the category of the message.
+/// \param fmt a printf() style message format string.
 /// \param ... additional parameters matching % tokens in the **fmt** string,
-/// if any
+/// if any.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -221,10 +221,10 @@ void sdlLogInfo(int category, String? fmt, Pointer<NativeType> arg2) {
 ///
 /// Log a message with SDL_LOG_PRIORITY_WARN.
 ///
-/// \param category the category of the message
-/// \param fmt a printf() style message format string
+/// \param category the category of the message.
+/// \param fmt a printf() style message format string.
 /// \param ... additional parameters matching % tokens in the **fmt** string,
-/// if any
+/// if any.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -255,10 +255,10 @@ void sdlLogWarn(int category, String? fmt, Pointer<NativeType> arg2) {
 ///
 /// Log a message with SDL_LOG_PRIORITY_ERROR.
 ///
-/// \param category the category of the message
-/// \param fmt a printf() style message format string
+/// \param category the category of the message.
+/// \param fmt a printf() style message format string.
 /// \param ... additional parameters matching % tokens in the **fmt** string,
-/// if any
+/// if any.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -289,10 +289,10 @@ void sdlLogError(int category, String? fmt, Pointer<NativeType> arg2) {
 ///
 /// Log a message with SDL_LOG_PRIORITY_CRITICAL.
 ///
-/// \param category the category of the message
-/// \param fmt a printf() style message format string
+/// \param category the category of the message.
+/// \param fmt a printf() style message format string.
 /// \param ... additional parameters matching % tokens in the **fmt** string,
-/// if any
+/// if any.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -323,11 +323,11 @@ void sdlLogCritical(int category, String? fmt, Pointer<NativeType> arg2) {
 ///
 /// Log a message with the specified category and priority.
 ///
-/// \param category the category of the message
-/// \param priority the priority of the message
-/// \param fmt a printf() style message format string
+/// \param category the category of the message.
+/// \param priority the priority of the message.
+/// \param fmt a printf() style message format string.
 /// \param ... additional parameters matching % tokens in the **fmt** string,
-/// if any
+/// if any.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -360,10 +360,10 @@ void sdlLogMessage(
 ///
 /// Log a message with the specified category and priority.
 ///
-/// \param category the category of the message
-/// \param priority the priority of the message
-/// \param fmt a printf() style message format string
-/// \param ap a variable argument list
+/// \param category the category of the message.
+/// \param priority the priority of the message.
+/// \param fmt a printf() style message format string.
+/// \param ap a variable argument list.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -397,9 +397,9 @@ void sdlLogMessageV(
 /// Get the current log output function.
 ///
 /// \param callback an SDL_LogOutputFunction filled in with the current log
-/// callback
+/// callback.
 /// \param userdata a pointer filled in with the pointer that is passed to
-/// `callback`
+/// `callback`.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -424,8 +424,8 @@ void sdlGetLogOutputFunction(
 ///
 /// Replace the default log output function with one of your own.
 ///
-/// \param callback an SDL_LogOutputFunction to call instead of the default
-/// \param userdata a pointer that is passed to `callback`
+/// \param callback an SDL_LogOutputFunction to call instead of the default.
+/// \param userdata a pointer that is passed to `callback`.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///

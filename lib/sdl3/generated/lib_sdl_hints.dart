@@ -10,9 +10,9 @@ import 'lib_sdl.dart';
 /// value. Hints will replace existing hints of their priority and lower.
 /// Environment variables are considered to have override priority.
 ///
-/// \param name the hint to set
-/// \param value the value of the hint variable
-/// \param priority the SDL_HintPriority level for the hint
+/// \param name the hint to set.
+/// \param value the value of the hint variable.
+/// \param priority the SDL_HintPriority level for the hint.
 /// \returns SDL_TRUE if the hint was set, SDL_FALSE otherwise.
 ///
 /// \since This function is available since SDL 3.0.0.
@@ -46,8 +46,8 @@ bool sdlSetHintWithPriority(String? name, String? value, int priority) {
 /// variable that takes precedence. You can use SDL_SetHintWithPriority() to
 /// set the hint with override priority instead.
 ///
-/// \param name the hint to set
-/// \param value the value of the hint variable
+/// \param name the hint to set.
+/// \param value the value of the hint variable.
 /// \returns SDL_TRUE if the hint was set, SDL_FALSE otherwise.
 ///
 /// \since This function is available since SDL 3.0.0.
@@ -78,7 +78,7 @@ bool sdlSetHint(String? name, String? value) {
 /// the environment isn't set. Callbacks will be called normally with this
 /// change.
 ///
-/// \param name the hint to set
+/// \param name the hint to set.
 /// \returns SDL_TRUE if the hint was set, SDL_FALSE otherwise.
 ///
 /// \since This function is available since SDL 3.0.0.
@@ -124,7 +124,7 @@ void sdlResetHints() {
 ///
 /// The returned string follows the SDL_GetStringRule.
 ///
-/// \param name the hint to query
+/// \param name the hint to query.
 /// \returns the string value of a hint or NULL if the hint isn't set.
 ///
 /// \since This function is available since SDL 3.0.0.
@@ -151,8 +151,8 @@ String? sdlGetHint(String? name) {
 ///
 /// Get the boolean value of a hint variable.
 ///
-/// \param name the name of the hint to get the boolean value from
-/// \param default_value the value to return if the hint does not exist
+/// \param name the name of the hint to get the boolean value from.
+/// \param default_value the value to return if the hint does not exist.
 /// \returns the boolean value of a hint or the provided default value if the
 /// hint does not exist.
 ///
@@ -178,10 +178,10 @@ bool sdlGetHintBoolean(String? name, bool defaultValue) {
 ///
 /// Add a function to watch a particular hint.
 ///
-/// \param name the hint to watch
-/// \param callback An SDL_HintCallback function that will be called when the
-/// hint value changes
-/// \param userdata a pointer to pass to the callback function
+/// \param name the hint to watch.
+/// \param callback an SDL_HintCallback function that will be called when the
+/// hint value changes.
+/// \param userdata a pointer to pass to the callback function.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -218,10 +218,10 @@ int sdlAddHintCallback(
 ///
 /// Remove a function watching a particular hint.
 ///
-/// \param name the hint being watched
-/// \param callback An SDL_HintCallback function that will be called when the
-/// hint value changes
-/// \param userdata a pointer being passed to the callback function
+/// \param name the hint being watched.
+/// \param callback an SDL_HintCallback function that will be called when the
+/// hint value changes.
+/// \param userdata a pointer being passed to the callback function.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///

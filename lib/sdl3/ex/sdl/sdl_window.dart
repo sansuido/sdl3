@@ -292,8 +292,30 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
     return false;
   }
 
-  Pointer<NativeType> glCreateContext() {
-    // 2415
+  ///
+  /// Create an OpenGL context for an OpenGL window, and make it current.
+  ///
+  /// Windows users new to OpenGL should note that, for historical reasons, GL
+  /// functions added after OpenGL version 1.1 are not available by default.
+  /// Those functions must be loaded at run-time, either with an OpenGL
+  /// extension-handling library or with SDL_GL_GetProcAddress() and its related
+  /// functions.
+  ///
+  /// SDL_GLContext is opaque to the application.
+  ///
+  /// \param window the window to associate with the context.
+  /// \returns the OpenGL context associated with `window` or NULL on error; call
+  /// SDL_GetError() for more details.
+  ///
+  /// \since This function is available since SDL 3.0.0.
+  ///
+  /// \sa SDL_GL_DeleteContext
+  /// \sa SDL_GL_MakeCurrent
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC SDL_GLContext SDLCALL SDL_GL_CreateContext(SDL_Window *window)
+  /// ```
+  Pointer<SdlGlContext> glCreateContext() {
     return sdlGlCreateContext(this);
   }
 

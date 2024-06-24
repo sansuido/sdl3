@@ -49,7 +49,7 @@ int sdlGetNumCameraDrivers() {
 /// The returned string follows the SDL_GetStringRule.
 ///
 /// \param index the index of the camera driver; the value ranges from 0 to
-/// SDL_GetNumCameraDrivers() - 1
+/// SDL_GetNumCameraDrivers() - 1.
 /// \returns the name of the camera driver at the requested index, or NULL if
 /// an invalid index was specified.
 ///
@@ -183,14 +183,13 @@ Pointer<SdlCameraSpec> sdlGetCameraDeviceSupportedFormats(
 }
 
 ///
-/// Get human-readable device name for a camera.
+/// Get the human-readable device name for a camera.
 ///
-/// The returned string is owned by the caller; please release it with
-/// SDL_free() when done with it.
+/// The returned string follows the SDL_GetStringRule.
 ///
-/// \param instance_id the camera device instance ID
-/// \returns Human-readable device name, or NULL on error; call SDL_GetError()
-/// for more information.
+/// \param instance_id the camera device instance ID.
+/// \returns a human-readable device name, or NULL on error; call
+/// SDL_GetError() for more information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -199,13 +198,17 @@ Pointer<SdlCameraSpec> sdlGetCameraDeviceSupportedFormats(
 /// \sa SDL_GetCameraDevices
 ///
 /// ```c
-/// extern SDL_DECLSPEC char * SDLCALL SDL_GetCameraDeviceName(SDL_CameraDeviceID instance_id)
+/// extern SDL_DECLSPEC const char * SDLCALL SDL_GetCameraDeviceName(SDL_CameraDeviceID instance_id)
 /// ```
-Pointer<Int8> sdlGetCameraDeviceName(int instanceId) {
+String? sdlGetCameraDeviceName(int instanceId) {
   final sdlGetCameraDeviceNameLookupFunction = libSdl3.lookupFunction<
-      Pointer<Int8> Function(Uint32 instanceId),
-      Pointer<Int8> Function(int instanceId)>('SDL_GetCameraDeviceName');
-  return sdlGetCameraDeviceNameLookupFunction(instanceId);
+      Pointer<Utf8> Function(Uint32 instanceId),
+      Pointer<Utf8> Function(int instanceId)>('SDL_GetCameraDeviceName');
+  final result = sdlGetCameraDeviceNameLookupFunction(instanceId);
+  if (result == nullptr) {
+    return null;
+  }
+  return result.toDartString();
 }
 
 ///
@@ -216,8 +219,8 @@ Pointer<Int8> sdlGetCameraDeviceName(int instanceId) {
 /// points towards the user, for taking "selfies") and cameras on the back (for
 /// filming in the direction the user is facing).
 ///
-/// \param instance_id the camera device instance ID
-/// \returns The position of the camera on the system hardware.
+/// \param instance_id the camera device instance ID.
+/// \returns the position of the camera on the system hardware.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -236,7 +239,7 @@ int sdlGetCameraDevicePosition(int instanceId) {
 }
 
 ///
-/// Open a video capture device (a "camera").
+/// Open a video recording device (a "camera").
 ///
 /// You can open the device with any reasonable spec, and if the hardware can't
 /// directly support it, it will convert data seamlessly to the requested
@@ -266,8 +269,8 @@ int sdlGetCameraDevicePosition(int instanceId) {
 /// where the user previously permitted access), the approval event might come
 /// immediately, but it might come seconds, minutes, or hours later!
 ///
-/// \param instance_id the camera device instance ID
-/// \param spec The desired format for data the device will provide. Can be
+/// \param instance_id the camera device instance ID.
+/// \param spec the desired format for data the device will provide. Can be
 /// NULL.
 /// \returns device, or NULL on failure; call SDL_GetError() for more
 /// information.
@@ -312,7 +315,7 @@ Pointer<SdlCamera> sdlOpenCameraDevice(
 /// If a camera is declined, there's nothing to be done but call
 /// SDL_CloseCamera() to dispose of it.
 ///
-/// \param camera the opened camera device to query
+/// \param camera the opened camera device to query.
 /// \returns -1 if user denied access to the camera, 1 if user approved access,
 /// 0 if no decision has been made yet.
 ///
@@ -336,7 +339,7 @@ int sdlGetCameraPermissionState(Pointer<SdlCamera> camera) {
 ///
 /// Get the instance ID of an opened camera.
 ///
-/// \param camera an SDL_Camera to query
+/// \param camera an SDL_Camera to query.
 /// \returns the instance ID of the specified camera on success or 0 on
 /// failure; call SDL_GetError() for more information.
 ///
@@ -359,7 +362,7 @@ int sdlGetCameraInstanceId(Pointer<SdlCamera> camera) {
 ///
 /// Get the properties associated with an opened camera.
 ///
-/// \param camera the SDL_Camera obtained from SDL_OpenCameraDevice()
+/// \param camera the SDL_Camera obtained from SDL_OpenCameraDevice().
 /// \returns a valid property ID on success or 0 on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -392,8 +395,8 @@ int sdlGetCameraProperties(Pointer<SdlCamera> camera) {
 /// (or SDL_EVENT_CAMERA_DEVICE_DENIED) event, or poll SDL_IsCameraApproved()
 /// occasionally until it returns non-zero.
 ///
-/// \param camera opened camera device
-/// \param spec The SDL_CameraSpec to be initialized by this function.
+/// \param camera opened camera device.
+/// \param spec the SDL_CameraSpec to be initialized by this function.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -443,10 +446,10 @@ int sdlGetCameraFormat(Pointer<SdlCamera> camera, Pointer<SdlCameraSpec> spec) {
 /// SDL_EVENT_CAMERA_DEVICE_DENIED) event, or poll SDL_IsCameraApproved()
 /// occasionally until it returns non-zero.
 ///
-/// \param camera opened camera device
+/// \param camera opened camera device.
 /// \param timestampNS a pointer filled in with the frame's timestamp, or 0 on
 /// error. Can be NULL.
-/// \returns A new frame of video on success, NULL if none is currently
+/// \returns a new frame of video on success, NULL if none is currently
 /// available.
 ///
 /// \threadsafety It is safe to call this function from any thread.
@@ -485,8 +488,8 @@ Pointer<SdlSurface> sdlAcquireCameraFrame(
 /// The app should not use the surface again after calling this function;
 /// assume the surface is freed and the pointer is invalid.
 ///
-/// \param camera opened camera device
-/// \param frame The video frame surface to release.
+/// \param camera opened camera device.
+/// \param frame the video frame surface to release.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -512,7 +515,7 @@ int sdlReleaseCameraFrame(
 /// Use this function to shut down camera processing and close the camera
 /// device.
 ///
-/// \param camera opened camera device
+/// \param camera opened camera device.
 ///
 /// \threadsafety It is safe to call this function from any thread, but no
 /// thread may reference `device` once this function is called.

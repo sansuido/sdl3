@@ -13,8 +13,8 @@ import 'struct_sdl.dart';
 /// The returned handle can be casted directly to a NSView or UIView. To access
 /// the backing CAMetalLayer, call SDL_Metal_GetLayer().
 ///
-/// \param window the window
-/// \returns handle NSView or UIView
+/// \param window the window.
+/// \returns handle NSView or UIView.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -38,7 +38,7 @@ Pointer<NativeType> sdlMetalCreateView(Pointer<SdlWindow> window) {
 /// This should be called before SDL_DestroyWindow, if SDL_Metal_CreateView was
 /// called after SDL_CreateWindow.
 ///
-/// \param view the SDL_MetalView object
+/// \param view the SDL_MetalView object.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -57,8 +57,8 @@ void sdlMetalDestroyView(Pointer<NativeType> view) {
 ///
 /// Get a pointer to the backing CAMetalLayer for the given view.
 ///
-/// \param view the SDL_MetalView object
-/// \returns a pointer
+/// \param view the SDL_MetalView object.
+/// \returns a pointer.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///

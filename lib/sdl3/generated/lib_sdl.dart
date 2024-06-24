@@ -127,6 +127,18 @@ typedef SdlReallocFunc = Pointer<NativeType> Function(
 typedef SdlFreeFuncDart = void Function(Pointer<NativeType> mem);
 typedef SdlFreeFunc = Void Function(Pointer<NativeType> mem);
 
+// typedef int (SDLCALL *SDL_CompareCallback)(const void *a, const void *b)
+typedef SdlCompareCallbackDart = int Function(
+    Pointer<NativeType> a, Pointer<NativeType> b);
+typedef SdlCompareCallback = Int32 Function(
+    Pointer<NativeType> a, Pointer<NativeType> b);
+
+// typedef int (SDLCALL *SDL_CompareCallback_r)(void *userdata, const void *a, const void *b)
+typedef SdlCompareCallbackRDart = int Function(
+    Pointer<NativeType> userdata, Pointer<NativeType> a, Pointer<NativeType> b);
+typedef SdlCompareCallbackR = Int32 Function(
+    Pointer<NativeType> userdata, Pointer<NativeType> a, Pointer<NativeType> b);
+
 // typedef void (*SDL_FunctionPointer)(void)
 typedef SdlFunctionPointerDart = void Function();
 typedef SdlFunctionPointer = Void Function();
@@ -143,6 +155,11 @@ typedef SdlX11EventHookDart = int Function(
 typedef SdlX11EventHook = Int32 Function(
     Pointer<NativeType> userdata, Pointer<XEvent> xevent);
 
+// typedef void (SDLCALL *SDL_iOSAnimationCallback)(void *userdata)
+typedef SdlIOsAnimationCallbackDart = void Function(
+    Pointer<NativeType> userdata);
+typedef SdlIOsAnimationCallback = Void Function(Pointer<NativeType> userdata);
+
 // typedef void (SDLCALL *SDL_AndroidRequestPermissionCallback)(void *userdata, const char *permission, SDL_bool granted)
 typedef SdlAndroidRequestPermissionCallbackDart = void Function(
     Pointer<NativeType> userdata, Pointer<Utf8> permission, int granted);
@@ -152,6 +169,10 @@ typedef SdlAndroidRequestPermissionCallback = Void Function(
 // typedef int (SDLCALL * SDL_ThreadFunction) (void *data)
 typedef SdlThreadFunctionDart = int Function(Pointer<NativeType> data);
 typedef SdlThreadFunction = Int32 Function(Pointer<NativeType> data);
+
+// typedef void (SDLCALL *SDL_TLSDestructorCallback)(void *value)
+typedef SdlTlsDestructorCallbackDart = void Function(Pointer<NativeType> value);
+typedef SdlTlsDestructorCallback = Void Function(Pointer<NativeType> value);
 
 // typedef Uint32 (SDLCALL *SDL_TimerCallback)(void *userdata, SDL_TimerID timerID, Uint32 interval)
 typedef SdlTimerCallbackDart = int Function(

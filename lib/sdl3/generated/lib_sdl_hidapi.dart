@@ -95,9 +95,9 @@ int sdlHidDeviceChangeCount() {
 /// or crashing on bad drivers, but SDL_HINT_HIDAPI_ENUMERATE_ONLY_CONTROLLERS
 /// can be set to "0" to enumerate all HID devices.
 ///
-/// \param vendor_id The Vendor ID (VID) of the types of device to open, or 0
+/// \param vendor_id the Vendor ID (VID) of the types of device to open, or 0
 /// to match any vendor.
-/// \param product_id The Product ID (PID) of the types of device to open, or 0
+/// \param product_id the Product ID (PID) of the types of device to open, or 0
 /// to match any product.
 /// \returns a pointer to a linked list of type SDL_hid_device_info, containing
 /// information about the HID devices attached to the system, or NULL
@@ -124,7 +124,7 @@ Pointer<SdlHidDeviceInfo> sdlHidEnumerate(int vendorId, int productId) {
 ///
 /// This function frees a linked list created by SDL_hid_enumerate().
 ///
-/// \param devs Pointer to a list of struct_device returned from
+/// \param devs pointer to a list of struct_device returned from
 /// SDL_hid_enumerate().
 ///
 /// \since This function is available since SDL 3.0.0.
@@ -147,9 +147,9 @@ void sdlHidFreeEnumeration(Pointer<SdlHidDeviceInfo> devs) {
 /// If `serial_number` is NULL, the first device with the specified VID and PID
 /// is opened.
 ///
-/// \param vendor_id The Vendor ID (VID) of the device to open.
-/// \param product_id The Product ID (PID) of the device to open.
-/// \param serial_number The Serial Number of the device to open (Optionally
+/// \param vendor_id the Vendor ID (VID) of the device to open.
+/// \param product_id the Product ID (PID) of the device to open.
+/// \param serial_number the Serial Number of the device to open (Optionally
 /// NULL).
 /// \returns a pointer to a SDL_hid_device object on success or NULL on
 /// failure.
@@ -175,7 +175,7 @@ Pointer<SdlHidDevice> sdlHidOpen(
 /// The path name be determined by calling SDL_hid_enumerate(), or a
 /// platform-specific path name can be used (eg: /dev/hidraw0 on Linux).
 ///
-/// \param path The path name of the device to open
+/// \param path the path name of the device to open.
 /// \returns a pointer to a SDL_hid_device object on success or NULL on
 /// failure.
 ///
@@ -210,10 +210,10 @@ Pointer<SdlHidDevice> sdlHidOpenPath(String? path) {
 /// exists. If it does not, it will send the data through the Control Endpoint
 /// (Endpoint 0).
 ///
-/// \param dev A device handle returned from SDL_hid_open().
-/// \param data The data to send, including the report number as the first
+/// \param dev a device handle returned from SDL_hid_open().
+/// \param data the data to send, including the report number as the first
 /// byte.
-/// \param length The length in bytes of the data to send.
+/// \param length the length in bytes of the data to send.
 /// \returns the actual number of bytes written and -1 on error.
 ///
 /// \since This function is available since SDL 3.0.0.
@@ -237,9 +237,9 @@ int sdlHidWrite(Pointer<SdlHidDevice> dev, Pointer<Uint8> data, int length) {
 /// The first byte will contain the Report number if the device uses numbered
 /// reports.
 ///
-/// \param dev A device handle returned from SDL_hid_open().
-/// \param data A buffer to put the read data into.
-/// \param length The number of bytes to read. For devices with multiple
+/// \param dev a device handle returned from SDL_hid_open().
+/// \param data a buffer to put the read data into.
+/// \param length the number of bytes to read. For devices with multiple
 /// reports, make sure to read an extra byte for the report
 /// number.
 /// \param milliseconds timeout in milliseconds or -1 for blocking wait.
@@ -269,9 +269,9 @@ int sdlHidReadTimeout(Pointer<SdlHidDevice> dev, Pointer<Uint8> data,
 /// The first byte will contain the Report number if the device uses numbered
 /// reports.
 ///
-/// \param dev A device handle returned from SDL_hid_open().
-/// \param data A buffer to put the read data into.
-/// \param length The number of bytes to read. For devices with multiple
+/// \param dev a device handle returned from SDL_hid_open().
+/// \param data a buffer to put the read data into.
+/// \param length the number of bytes to read. For devices with multiple
 /// reports, make sure to read an extra byte for the report
 /// number.
 /// \returns the actual number of bytes read and -1 on error. If no packet was
@@ -301,7 +301,7 @@ int sdlHidRead(Pointer<SdlHidDevice> dev, Pointer<Uint8> data, int length) {
 ///
 /// Nonblocking can be turned on and off at any time.
 ///
-/// \param dev A device handle returned from SDL_hid_open().
+/// \param dev a device handle returned from SDL_hid_open().
 /// \param nonblock enable or not the nonblocking reads - 1 to enable
 /// nonblocking - 0 to disable nonblocking.
 /// \returns 0 on success or a negative error code on failure; call
@@ -333,10 +333,10 @@ int sdlHidSetNonblocking(Pointer<SdlHidDevice> dev, int nonblock) {
 /// devices which do not use numbered reports), followed by the report data (16
 /// bytes). In this example, the length passed in would be 17.
 ///
-/// \param dev A device handle returned from SDL_hid_open().
-/// \param data The data to send, including the report number as the first
+/// \param dev a device handle returned from SDL_hid_open().
+/// \param data the data to send, including the report number as the first
 /// byte.
-/// \param length The length in bytes of the data to send, including the report
+/// \param length the length in bytes of the data to send, including the report
 /// number.
 /// \returns the actual number of bytes written and -1 on error.
 ///
@@ -363,12 +363,12 @@ int sdlHidSendFeatureReport(
 /// first byte will still contain the Report ID, and the report data will start
 /// in data[1].
 ///
-/// \param dev A device handle returned from SDL_hid_open().
-/// \param data A buffer to put the read data into, including the Report ID.
+/// \param dev a device handle returned from SDL_hid_open().
+/// \param data a buffer to put the read data into, including the Report ID.
 /// Set the first byte of `data` to the Report ID of the report to
 /// be read, or set it to zero if your device does not use numbered
 /// reports.
-/// \param length The number of bytes to read, including an extra byte for the
+/// \param length the number of bytes to read, including an extra byte for the
 /// report ID. The buffer can be longer than the actual report.
 /// \returns the number of bytes read plus one for the report ID (which is
 /// still in the first byte), or -1 on error.
@@ -396,12 +396,12 @@ int sdlHidGetFeatureReport(
 /// first byte will still contain the Report ID, and the report data will start
 /// in data[1].
 ///
-/// \param dev A device handle returned from SDL_hid_open().
-/// \param data A buffer to put the read data into, including the Report ID.
+/// \param dev a device handle returned from SDL_hid_open().
+/// \param data a buffer to put the read data into, including the Report ID.
 /// Set the first byte of `data` to the Report ID of the report to
 /// be read, or set it to zero if your device does not use numbered
 /// reports.
-/// \param length The number of bytes to read, including an extra byte for the
+/// \param length the number of bytes to read, including an extra byte for the
 /// report ID. The buffer can be longer than the actual report.
 /// \returns the number of bytes read plus one for the report ID (which is
 /// still in the first byte), or -1 on error.
@@ -424,7 +424,7 @@ int sdlHidGetInputReport(
 ///
 /// Close a HID device.
 ///
-/// \param dev A device handle returned from SDL_hid_open().
+/// \param dev a device handle returned from SDL_hid_open().
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -443,9 +443,9 @@ int sdlHidClose(Pointer<SdlHidDevice> dev) {
 ///
 /// Get The Manufacturer String from a HID device.
 ///
-/// \param dev A device handle returned from SDL_hid_open().
-/// \param string A wide string buffer to put the data into.
-/// \param maxlen The length of the buffer in multiples of wchar_t.
+/// \param dev a device handle returned from SDL_hid_open().
+/// \param string a wide string buffer to put the data into.
+/// \param maxlen the length of the buffer in multiples of wchar_t.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -467,9 +467,9 @@ int sdlHidGetManufacturerString(
 ///
 /// Get The Product String from a HID device.
 ///
-/// \param dev A device handle returned from SDL_hid_open().
-/// \param string A wide string buffer to put the data into.
-/// \param maxlen The length of the buffer in multiples of wchar_t.
+/// \param dev a device handle returned from SDL_hid_open().
+/// \param string a wide string buffer to put the data into.
+/// \param maxlen the length of the buffer in multiples of wchar_t.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -491,9 +491,9 @@ int sdlHidGetProductString(
 ///
 /// Get The Serial Number String from a HID device.
 ///
-/// \param dev A device handle returned from SDL_hid_open().
-/// \param string A wide string buffer to put the data into.
-/// \param maxlen The length of the buffer in multiples of wchar_t.
+/// \param dev a device handle returned from SDL_hid_open().
+/// \param string a wide string buffer to put the data into.
+/// \param maxlen the length of the buffer in multiples of wchar_t.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -515,10 +515,10 @@ int sdlHidGetSerialNumberString(
 ///
 /// Get a string from a HID device, based on its string index.
 ///
-/// \param dev A device handle returned from SDL_hid_open().
-/// \param string_index The index of the string to get.
-/// \param string A wide string buffer to put the data into.
-/// \param maxlen The length of the buffer in multiples of wchar_t.
+/// \param dev a device handle returned from SDL_hid_open().
+/// \param string_index the index of the string to get.
+/// \param string a wide string buffer to put the data into.
+/// \param maxlen the length of the buffer in multiples of wchar_t.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -540,7 +540,7 @@ int sdlHidGetIndexedString(Pointer<SdlHidDevice> dev, int stringIndex,
 ///
 /// Get the device info from a HID device.
 ///
-/// \param dev A device handle returned from SDL_hid_open().
+/// \param dev a device handle returned from SDL_hid_open().
 /// \returns a pointer to the SDL_hid_device_info for this hid_device, or NULL
 /// in the case of failure; call SDL_GetError() for more information.
 /// This struct is valid until the device is closed with
@@ -565,9 +565,9 @@ Pointer<SdlHidDeviceInfo> sdlHidGetDeviceInfo(Pointer<SdlHidDevice> dev) {
 /// User has to provide a preallocated buffer where descriptor will be copied
 /// to. The recommended size for a preallocated buffer is 4096 bytes.
 ///
-/// \param dev A device handle returned from SDL_hid_open().
-/// \param buf The buffer to copy descriptor into.
-/// \param buf_size The size of the buffer in bytes.
+/// \param dev a device handle returned from SDL_hid_open().
+/// \param buf the buffer to copy descriptor into.
+/// \param buf_size the size of the buffer in bytes.
 /// \returns the number of bytes actually copied, or -1 on error; call
 /// SDL_GetError() for more information.
 ///
@@ -589,7 +589,7 @@ int sdlHidGetReportDescriptor(
 ///
 /// Start or stop a BLE scan on iOS and tvOS to pair Steam Controllers.
 ///
-/// \param active SDL_TRUE to start the scan, SDL_FALSE to stop the scan
+/// \param active SDL_TRUE to start the scan, SDL_FALSE to stop the scan.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///

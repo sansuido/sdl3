@@ -27,10 +27,17 @@ void sdlFree(Pointer<NativeType> mem) {
 ///
 /// Get the original set of SDL memory functions.
 ///
-/// \param malloc_func filled with malloc function
-/// \param calloc_func filled with calloc function
-/// \param realloc_func filled with realloc function
-/// \param free_func filled with free function
+/// This is what SDL_malloc and friends will use by default, if there has been
+/// no call to SDL_SetMemoryFunctions. This is not necessarily using the C
+/// runtime's `malloc` functions behind the scenes! Different platforms and
+/// build configurations might do any number of unexpected things.
+///
+/// \param malloc_func filled with malloc function.
+/// \param calloc_func filled with calloc function.
+/// \param realloc_func filled with realloc function.
+/// \param free_func filled with free function.
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -61,12 +68,19 @@ void sdlGetOriginalMemoryFunctions(
 ///
 /// Get the current set of SDL memory functions.
 ///
-/// \param malloc_func filled with malloc function
-/// \param calloc_func filled with calloc function
-/// \param realloc_func filled with realloc function
-/// \param free_func filled with free function
+/// \param malloc_func filled with malloc function.
+/// \param calloc_func filled with calloc function.
+/// \param realloc_func filled with realloc function.
+/// \param free_func filled with free function.
+///
+/// \threadsafety This does not hold a lock, so do not call this in the
+/// unlikely event of a background thread calling
+/// SDL_SetMemoryFunctions simultaneously.
 ///
 /// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_SetMemoryFunctions
+/// \sa SDL_GetOriginalMemoryFunctions
 ///
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_GetMemoryFunctions(SDL_malloc_func *malloc_func, SDL_calloc_func *calloc_func, SDL_realloc_func *realloc_func, SDL_free_func *free_func)
@@ -95,14 +109,28 @@ void sdlGetMemoryFunctions(
 ///
 /// Replace SDL's memory allocation functions with a custom set.
 ///
-/// \param malloc_func custom malloc function
-/// \param calloc_func custom calloc function
-/// \param realloc_func custom realloc function
-/// \param free_func custom free function
+/// It is not safe to call this function once any allocations have been made,
+/// as future calls to SDL_free will use the new allocator, even if they came
+/// from an SDL_malloc made with the old one!
+///
+/// If used, usually this needs to be the first call made into the SDL library,
+/// if not the very first thing done at program startup time.
+///
+/// \param malloc_func custom malloc function.
+/// \param calloc_func custom calloc function.
+/// \param realloc_func custom realloc function.
+/// \param free_func custom free function.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
+/// \threadsafety It is safe to call this function from any thread, but one
+/// should not replace the memory functions once any allocations
+/// are made!
+///
 /// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_GetMemoryFunctions
+/// \sa SDL_GetOriginalMemoryFunctions
 ///
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_SetMemoryFunctions(SDL_malloc_func malloc_func, SDL_calloc_func calloc_func, SDL_realloc_func realloc_func, SDL_free_func free_func)
@@ -137,11 +165,14 @@ int sdlSetMemoryFunctions(
 /// The returned memory address will be a multiple of the alignment value, and
 /// the amount of memory allocated will be a multiple of the alignment value.
 ///
-/// The memory returned by this function must be freed with SDL_aligned_free()
+/// The memory returned by this function must be freed with SDL_aligned_free(),
+/// and _not_ SDL_free.
 ///
-/// \param alignment the alignment requested
-/// \param size the size to allocate
-/// \returns a pointer to the aligned memory
+/// \param alignment the alignment requested.
+/// \param size the size to allocate.
+/// \returns a pointer to the aligned memory.
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -161,6 +192,13 @@ Pointer<NativeType> sdlAlignedAlloc(int alignment, int size) {
 ///
 /// Free memory allocated by SDL_aligned_alloc().
 ///
+/// The pointer is no longer valid after this call and cannot be dereferenced
+/// anymore.
+///
+/// \param mem a pointer previously returned by SDL_aligned_alloc.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_aligned_alloc
@@ -178,7 +216,9 @@ void sdlAlignedFree(Pointer<NativeType> mem) {
 ///
 /// Get the number of outstanding (unfreed) allocations.
 ///
-/// \returns the number of allocations
+/// \returns the number of allocations.
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -222,69 +262,77 @@ int sdlSetenv(String? name, String? value, int overwrite) {
 }
 
 /// ```c
-/// extern SDL_DECLSPEC void SDLCALL SDL_qsort(void *base, size_t nmemb, size_t size, int (SDLCALL *compare) (const void *, const void *))
+/// extern SDL_DECLSPEC void SDLCALL SDL_qsort(void *base, size_t nmemb, size_t size, SDL_CompareCallback compare)
 /// ```
 void sdlQsort(Pointer<NativeType> base, int nmemb, int size,
-    Pointer<NativeType> compare) {
+    Pointer<NativeFunction<SdlCompareCallback>> compare) {
   final sdlQsortLookupFunction = libSdl3.lookupFunction<
       Void Function(Pointer<NativeType> base, Uint32 nmemb, Uint32 size,
-          Pointer<NativeType> compare),
+          Pointer<NativeFunction<SdlCompareCallback>> compare),
       void Function(Pointer<NativeType> base, int nmemb, int size,
-          Pointer<NativeType> compare)>('SDL_qsort');
+          Pointer<NativeFunction<SdlCompareCallback>> compare)>('SDL_qsort');
   return sdlQsortLookupFunction(base, nmemb, size, compare);
 }
 
 /// ```c
-/// extern SDL_DECLSPEC void * SDLCALL SDL_bsearch(const void *key, const void *base, size_t nmemb, size_t size, int (SDLCALL *compare) (const void *, const void *))
+/// extern SDL_DECLSPEC void * SDLCALL SDL_bsearch(const void *key, const void *base, size_t nmemb, size_t size, SDL_CompareCallback compare)
 /// ```
 Pointer<NativeType> sdlBsearch(
     Pointer<NativeType> key,
     Pointer<NativeType> base,
     int nmemb,
     int size,
-    Pointer<NativeType> compare) {
+    Pointer<NativeFunction<SdlCompareCallback>> compare) {
   final sdlBsearchLookupFunction = libSdl3.lookupFunction<
       Pointer<NativeType> Function(
           Pointer<NativeType> key,
           Pointer<NativeType> base,
           Uint32 nmemb,
           Uint32 size,
-          Pointer<NativeType> compare),
+          Pointer<NativeFunction<SdlCompareCallback>> compare),
       Pointer<NativeType> Function(
           Pointer<NativeType> key,
           Pointer<NativeType> base,
           int nmemb,
           int size,
-          Pointer<NativeType> compare)>('SDL_bsearch');
+          Pointer<NativeFunction<SdlCompareCallback>> compare)>('SDL_bsearch');
   return sdlBsearchLookupFunction(key, base, nmemb, size, compare);
 }
 
 /// ```c
-/// extern SDL_DECLSPEC void SDLCALL SDL_qsort_r(void *base, size_t nmemb, size_t size, int (SDLCALL *compare) (void *, const void *, const void *), void *userdata)
+/// extern SDL_DECLSPEC void SDLCALL SDL_qsort_r(void *base, size_t nmemb, size_t size, SDL_CompareCallback_r compare, void *userdata)
 /// ```
-void sdlQsortR(Pointer<NativeType> base, int nmemb, int size,
-    Pointer<NativeType> compare, Pointer<NativeType> userdata) {
+void sdlQsortR(
+    Pointer<NativeType> base,
+    int nmemb,
+    int size,
+    Pointer<NativeFunction<SdlCompareCallbackR>> compare,
+    Pointer<NativeType> userdata) {
   final sdlQsortRLookupFunction = libSdl3.lookupFunction<
-      Void Function(Pointer<NativeType> base, Uint32 nmemb, Uint32 size,
-          Pointer<NativeType> compare, Pointer<NativeType> userdata),
+      Void Function(
+          Pointer<NativeType> base,
+          Uint32 nmemb,
+          Uint32 size,
+          Pointer<NativeFunction<SdlCompareCallbackR>> compare,
+          Pointer<NativeType> userdata),
       void Function(
           Pointer<NativeType> base,
           int nmemb,
           int size,
-          Pointer<NativeType> compare,
+          Pointer<NativeFunction<SdlCompareCallbackR>> compare,
           Pointer<NativeType> userdata)>('SDL_qsort_r');
   return sdlQsortRLookupFunction(base, nmemb, size, compare, userdata);
 }
 
 /// ```c
-/// extern SDL_DECLSPEC void * SDLCALL SDL_bsearch_r(const void *key, const void *base, size_t nmemb, size_t size, int (SDLCALL *compare) (void *, const void *, const void *), void *userdata)
+/// extern SDL_DECLSPEC void * SDLCALL SDL_bsearch_r(const void *key, const void *base, size_t nmemb, size_t size, SDL_CompareCallback_r compare, void *userdata)
 /// ```
 Pointer<NativeType> sdlBsearchR(
     Pointer<NativeType> key,
     Pointer<NativeType> base,
     int nmemb,
     int size,
-    Pointer<NativeType> compare,
+    Pointer<NativeFunction<SdlCompareCallbackR>> compare,
     Pointer<NativeType> userdata) {
   final sdlBsearchRLookupFunction = libSdl3.lookupFunction<
       Pointer<NativeType> Function(
@@ -292,14 +340,14 @@ Pointer<NativeType> sdlBsearchR(
           Pointer<NativeType> base,
           Uint32 nmemb,
           Uint32 size,
-          Pointer<NativeType> compare,
+          Pointer<NativeFunction<SdlCompareCallbackR>> compare,
           Pointer<NativeType> userdata),
       Pointer<NativeType> Function(
           Pointer<NativeType> key,
           Pointer<NativeType> base,
           int nmemb,
           int size,
-          Pointer<NativeType> compare,
+          Pointer<NativeFunction<SdlCompareCallbackR>> compare,
           Pointer<NativeType> userdata)>('SDL_bsearch_r');
   return sdlBsearchRLookupFunction(key, base, nmemb, size, compare, userdata);
 }
@@ -619,7 +667,7 @@ int sdlIsgraph(int x) {
 /// cannot be converted, or is already uppercase, this function returns `x`.
 ///
 /// \param x character value to check.
-/// \returns Capitalized version of x, or x if no conversion available.
+/// \returns capitalized version of x, or x if no conversion available.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -645,7 +693,7 @@ int sdlToupper(int x) {
 /// cannot be converted, or is already lowercase, this function returns `x`.
 ///
 /// \param x character value to check.
-/// \returns Lowercase version of x, or x if no conversion available.
+/// \returns lowercase version of x, or x if no conversion available.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -831,8 +879,8 @@ Pointer<Int16> sdlWcsnstr(
 /// character; it does not care if the string is well-formed UTF-16 (or UTF-32,
 /// depending on your platform's wchar_t size), or uses valid Unicode values.
 ///
-/// \param str1 The first string to compare. NULL is not permitted!
-/// \param str2 The second string to compare. NULL is not permitted!
+/// \param str1 the first string to compare. NULL is not permitted!
+/// \param str2 the second string to compare. NULL is not permitted!
 /// \returns less than zero if str1 is "less than" str2, greater than zero if
 /// str1 is "greater than" str2, and zero if the strings match
 /// exactly.
@@ -869,9 +917,9 @@ int sdlWcscmp(Pointer<Int16> str1, Pointer<Int16> str2) {
 /// null-terminator character before this count), they will be considered
 /// equal.
 ///
-/// \param str1 The first string to compare. NULL is not permitted!
-/// \param str2 The second string to compare. NULL is not permitted!
-/// \param maxlen The maximum number of wchar_t to compare.
+/// \param str1 the first string to compare. NULL is not permitted!
+/// \param str2 the second string to compare. NULL is not permitted!
+/// \param maxlen the maximum number of wchar_t to compare.
 /// \returns less than zero if str1 is "less than" str2, greater than zero if
 /// str1 is "greater than" str2, and zero if the strings match
 /// exactly.
@@ -909,8 +957,8 @@ int sdlWcsncmp(Pointer<Int16> str1, Pointer<Int16> str2, int maxlen) {
 /// CHARACTER), which is to say two strings of random bits may turn out to
 /// match if they convert to the same amount of replacement characters.
 ///
-/// \param str1 The first string to compare. NULL is not permitted!
-/// \param str2 The second string to compare. NULL is not permitted!
+/// \param str1 the first string to compare. NULL is not permitted!
+/// \param str2 the second string to compare. NULL is not permitted!
 /// \returns less than zero if str1 is "less than" str2, greater than zero if
 /// str1 is "greater than" str2, and zero if the strings match
 /// exactly.
@@ -958,9 +1006,9 @@ int sdlWcscasecmp(Pointer<Int16> str1, Pointer<Int16> str2) {
 /// null-terminator character before this number of bytes), they will be
 /// considered equal.
 ///
-/// \param str1 The first string to compare. NULL is not permitted!
-/// \param str2 The second string to compare. NULL is not permitted!
-/// \param maxlen The maximum number of wchar_t values to compare.
+/// \param str1 the first string to compare. NULL is not permitted!
+/// \param str2 the second string to compare. NULL is not permitted!
+/// \param maxlen the maximum number of wchar_t values to compare.
 /// \returns less than zero if str1 is "less than" str2, greater than zero if
 /// str1 is "greater than" str2, and zero if the strings match
 /// exactly.
@@ -1109,6 +1157,9 @@ Pointer<Int8> sdlStrrev(Pointer<Int8> str) {
 /// malformed UTF-8!--and converts ASCII characters 'a' through 'z' to their
 /// uppercase equivalents in-place, returning the original `str` pointer.
 ///
+/// \param str the string to convert in-place. Can not be NULL.
+/// \returns the `str` pointer passed into this function.
+///
 /// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.0.0.
@@ -1135,8 +1186,8 @@ Pointer<Int8> sdlStrupr(Pointer<Int8> str) {
 /// malformed UTF-8!--and converts ASCII characters 'A' through 'Z' to their
 /// lowercase equivalents in-place, returning the original `str` pointer.
 ///
-/// \param str The string to convert in-place.
-/// \returns The `str` pointer passed into this function.
+/// \param str the string to convert in-place. Can not be NULL.
+/// \returns the `str` pointer passed into this function.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -1446,8 +1497,8 @@ double sdlStrtod(String? str, Pointer<Pointer<Int8>> endp) {
 /// null-terminating character. Also due to the nature of UTF-8, this can be
 /// used with SDL_qsort() to put strings in (roughly) alphabetical order.
 ///
-/// \param str1 The first string to compare. NULL is not permitted!
-/// \param str2 The second string to compare. NULL is not permitted!
+/// \param str1 the first string to compare. NULL is not permitted!
+/// \param str2 the second string to compare. NULL is not permitted!
 /// \returns less than zero if str1 is "less than" str2, greater than zero if
 /// str1 is "greater than" str2, and zero if the strings match
 /// exactly.
@@ -1488,9 +1539,9 @@ int sdlStrcmp(String? str1, String? str2) {
 /// match to this number of bytes (or both have matched to a null-terminator
 /// character before this number of bytes), they will be considered equal.
 ///
-/// \param str1 The first string to compare. NULL is not permitted!
-/// \param str2 The second string to compare. NULL is not permitted!
-/// \param maxlen The maximum number of _bytes_ to compare.
+/// \param str1 the first string to compare. NULL is not permitted!
+/// \param str2 the second string to compare. NULL is not permitted!
+/// \param maxlen the maximum number of _bytes_ to compare.
 /// \returns less than zero if str1 is "less than" str2, greater than zero if
 /// str1 is "greater than" str2, and zero if the strings match
 /// exactly.
@@ -1531,8 +1582,8 @@ int sdlStrncmp(String? str1, String? str2, int maxlen) {
 /// CHARACTER), which is to say two strings of random bits may turn out to
 /// match if they convert to the same amount of replacement characters.
 ///
-/// \param str1 The first string to compare. NULL is not permitted!
-/// \param str2 The second string to compare. NULL is not permitted!
+/// \param str1 the first string to compare. NULL is not permitted!
+/// \param str2 the second string to compare. NULL is not permitted!
 /// \returns less than zero if str1 is "less than" str2, greater than zero if
 /// str1 is "greater than" str2, and zero if the strings match
 /// exactly.
@@ -1582,9 +1633,9 @@ int sdlStrcasecmp(String? str1, String? str2) {
 /// match to this number of bytes (or both have matched to a null-terminator
 /// character before this number of bytes), they will be considered equal.
 ///
-/// \param str1 The first string to compare. NULL is not permitted!
-/// \param str2 The second string to compare. NULL is not permitted!
-/// \param maxlen The maximum number of bytes to compare.
+/// \param str1 the first string to compare. NULL is not permitted!
+/// \param str2 the second string to compare. NULL is not permitted!
+/// \param maxlen the maximum number of bytes to compare.
 /// \returns less than zero if str1 is "less than" str2, greater than zero if
 /// str1 is "greater than" str2, and zero if the strings match
 /// exactly.
@@ -1750,8 +1801,8 @@ int sdlVasprintf(
 /// the same input on different machines or operating systems, or if SDL is
 /// updated.
 ///
-/// \param x floating point value
-/// \returns arc cosine of `x`, in radians
+/// \param x floating point value.
+/// \returns arc cosine of `x`, in radians.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -1788,7 +1839,7 @@ double sdlAcos(double x) {
 /// updated.
 ///
 /// \param x floating point value.
-/// \returns arc cosine of `x`, in radians
+/// \returns arc cosine of `x`, in radians.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -1940,7 +1991,7 @@ double sdlAtan(double x) {
 /// updated.
 ///
 /// \param x floating point value.
-/// \returns arc tangent of of `x` in radians, or 0 if `x = 0`
+/// \returns arc tangent of of `x` in radians, or 0 if `x = 0`.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -1980,8 +2031,8 @@ double sdlAtanf(double x) {
 /// the same input on different machines or operating systems, or if SDL is
 /// updated.
 ///
+/// \param y floating point value of the numerator (y coordinate).
 /// \param x floating point value of the denominator (x coordinate).
-/// \param y floating point value of the numerator (y coordinate)
 /// \returns arc tangent of of `y / x` in radians, or, if `x = 0`, either
 /// `-Pi/2`, `0`, or `Pi/2`, depending on the value of `y`.
 ///
@@ -2024,8 +2075,8 @@ double sdlAtan2(double y, double x) {
 /// the same input on different machines or operating systems, or if SDL is
 /// updated.
 ///
+/// \param y floating point value of the numerator (y coordinate).
 /// \param x floating point value of the denominator (x coordinate).
-/// \param y floating point value of the numerator (y coordinate)
 /// \returns arc tangent of of `y / x` in radians, or, if `x = 0`, either
 /// `-Pi/2`, `0`, or `Pi/2`, depending on the value of `y`.
 ///
@@ -2060,8 +2111,8 @@ double sdlAtan2f(double y, double x) {
 /// This function operates on double-precision floating point values, use
 /// SDL_ceilf for single-precision floats.
 ///
-/// \param x floating point value
-/// \returns the ceiling of `x`
+/// \param x floating point value.
+/// \returns the ceiling of `x`.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -2095,8 +2146,8 @@ double sdlCeil(double x) {
 /// This function operates on single-precision floating point values, use
 /// SDL_ceil for double-precision floats.
 ///
-/// \param x floating point value
-/// \returns the ceiling of `x`
+/// \param x floating point value.
+/// \returns the ceiling of `x`.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -2129,9 +2180,10 @@ double sdlCeilf(double x) {
 /// This function operates on double-precision floating point values, use
 /// SDL_copysignf for single-precision floats.
 ///
-/// \param x floating point value to use as the magnitude
-/// \param y floating point value to use as the sign
-/// \returns the floating point value with the sign of y and the magnitude of x
+/// \param x floating point value to use as the magnitude.
+/// \param y floating point value to use as the sign.
+/// \returns the floating point value with the sign of y and the magnitude of
+/// x.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -2162,9 +2214,10 @@ double sdlCopysign(double x, double y) {
 /// This function operates on single-precision floating point values, use
 /// SDL_copysign for double-precision floats.
 ///
-/// \param x floating point value to use as the magnitude
-/// \param y floating point value to use as the sign
-/// \returns the floating point value with the sign of y and the magnitude of x
+/// \param x floating point value to use as the magnitude.
+/// \param y floating point value to use as the sign.
+/// \returns the floating point value with the sign of y and the magnitude of
+/// x.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -2198,8 +2251,8 @@ double sdlCopysignf(double x, double y) {
 /// the same input on different machines or operating systems, or if SDL is
 /// updated.
 ///
-/// \param x floating point value, in radians
-/// \returns cosine of `x`
+/// \param x floating point value, in radians.
+/// \returns cosine of `x`.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -2233,8 +2286,8 @@ double sdlCos(double x) {
 /// the same input on different machines or operating systems, or if SDL is
 /// updated.
 ///
-/// \param x floating point value, in radians
-/// \returns cosine of `x`
+/// \param x floating point value, in radians.
+/// \returns cosine of `x`.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -2273,8 +2326,8 @@ double sdlCosf(double x) {
 /// the same input on different machines or operating systems, or if SDL is
 /// updated.
 ///
-/// \param x floating point value
-/// \returns value of `e^x`
+/// \param x floating point value.
+/// \returns value of `e^x`.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -2312,8 +2365,8 @@ double sdlExp(double x) {
 /// the same input on different machines or operating systems, or if SDL is
 /// updated.
 ///
-/// \param x floating point value
-/// \returns value of `e^x`
+/// \param x floating point value.
+/// \returns value of `e^x`.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -2341,8 +2394,8 @@ double sdlExpf(double x) {
 /// This function operates on double-precision floating point values, use
 /// SDL_copysignf for single-precision floats.
 ///
-/// \param x floating point value to use as the magnitude
-/// \returns the absolute value of `x`
+/// \param x floating point value to use as the magnitude.
+/// \returns the absolute value of `x`.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -2369,8 +2422,8 @@ double sdlFabs(double x) {
 /// This function operates on single-precision floating point values, use
 /// SDL_copysignf for double-precision floats.
 ///
-/// \param x floating point value to use as the magnitude
-/// \returns the absolute value of `x`
+/// \param x floating point value to use as the magnitude.
+/// \returns the absolute value of `x`.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -2400,8 +2453,8 @@ double sdlFabsf(double x) {
 /// This function operates on double-precision floating point values, use
 /// SDL_floorf for single-precision floats.
 ///
-/// \param x floating point value
-/// \returns the floor of `x`
+/// \param x floating point value.
+/// \returns the floor of `x`.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -2435,8 +2488,8 @@ double sdlFloor(double x) {
 /// This function operates on single-precision floating point values, use
 /// SDL_floorf for double-precision floats.
 ///
-/// \param x floating point value
-/// \returns the floor of `x`
+/// \param x floating point value.
+/// \returns the floor of `x`.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -2470,8 +2523,8 @@ double sdlFloorf(double x) {
 /// This function operates on double-precision floating point values, use
 /// SDL_truncf for single-precision floats.
 ///
-/// \param x floating point value
-/// \returns `x` truncated to an integer
+/// \param x floating point value.
+/// \returns `x` truncated to an integer.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -2506,8 +2559,8 @@ double sdlTrunc(double x) {
 /// This function operates on single-precision floating point values, use
 /// SDL_truncf for double-precision floats.
 ///
-/// \param x floating point value
-/// \returns `x` truncated to an integer
+/// \param x floating point value.
+/// \returns `x` truncated to an integer.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -2541,9 +2594,9 @@ double sdlTruncf(double x) {
 /// This function operates on double-precision floating point values, use
 /// SDL_fmodf for single-precision floats.
 ///
-/// \param x the numerator
+/// \param x the numerator.
 /// \param y the denominator. Must not be 0.
-/// \returns the remainder of `x / y`
+/// \returns the remainder of `x / y`.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -2579,9 +2632,9 @@ double sdlFmod(double x, double y) {
 /// This function operates on single-precision floating point values, use
 /// SDL_fmod for single-precision floats.
 ///
-/// \param x the numerator
+/// \param x the numerator.
 /// \param y the denominator. Must not be 0.
-/// \returns the remainder of `x / y`
+/// \returns the remainder of `x / y`.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -2623,7 +2676,7 @@ double sdlFmodf(double x, double y) {
 /// updated.
 ///
 /// \param x floating point value. Must be greater than 0.
-/// \returns the natural logarithm of `x`
+/// \returns the natural logarithm of `x`.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -2659,7 +2712,7 @@ double sdlLogf(double x) {
 /// updated.
 ///
 /// \param x floating point value. Must be greater than 0.
-/// \returns the logarithm of `x`
+/// \returns the logarithm of `x`.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -2696,7 +2749,7 @@ double sdlLog10(double x) {
 /// updated.
 ///
 /// \param x floating point value. Must be greater than 0.
-/// \returns the logarithm of `x`
+/// \returns the logarithm of `x`.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -2721,9 +2774,9 @@ double sdlLog10f(double x) {
 /// This function operates on double-precision floating point values, use
 /// SDL_modff for single-precision floats.
 ///
-/// \param x floating point value
-/// \param y output pointer to store the integer part of `x`
-/// \returns the fractional part of `x`
+/// \param x floating point value.
+/// \param y output pointer to store the integer part of `x`.
+/// \returns the fractional part of `x`.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -2749,9 +2802,9 @@ double sdlModf(double x, Pointer<Double> y) {
 /// This function operates on single-precision floating point values, use
 /// SDL_modf for double-precision floats.
 ///
-/// \param x floating point value
-/// \param y output pointer to store the integer part of `x`
-/// \returns the fractional part of `x`
+/// \param x floating point value.
+/// \param y output pointer to store the integer part of `x`.
+/// \returns the fractional part of `x`.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -2789,9 +2842,9 @@ double sdlModff(double x, Pointer<Float> y) {
 /// the same input on different machines or operating systems, or if SDL is
 /// updated.
 ///
-/// \param x the base
-/// \param y the exponent
-/// \returns `x` raised to the power `y`
+/// \param x the base.
+/// \param y the exponent.
+/// \returns `x` raised to the power `y`.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -2829,9 +2882,9 @@ double sdlPow(double x, double y) {
 /// the same input on different machines or operating systems, or if SDL is
 /// updated.
 ///
-/// \param x the base
-/// \param y the exponent
-/// \returns `x` raised to the power `y`
+/// \param x the base.
+/// \param y the exponent.
+/// \returns `x` raised to the power `y`.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -2865,8 +2918,8 @@ double sdlPowf(double x, double y) {
 /// SDL_roundf for single-precision floats. To get the result as an integer
 /// type, use SDL_lround.
 ///
-/// \param x floating point value
-/// \returns the nearest integer to `x`
+/// \param x floating point value.
+/// \returns the nearest integer to `x`.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -2901,8 +2954,8 @@ double sdlRound(double x) {
 /// SDL_roundf for single-precision floats. To get the result as an integer
 /// type, use SDL_lroundf.
 ///
-/// \param x floating point value
-/// \returns the nearest integer to `x`
+/// \param x floating point value.
+/// \returns the nearest integer to `x`.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -2937,8 +2990,8 @@ double sdlRoundf(double x) {
 /// SDL_lround for single-precision floats. To get the result as a
 /// floating-point type, use SDL_round.
 ///
-/// \param x floating point value
-/// \returns the nearest integer to `x`
+/// \param x floating point value.
+/// \returns the nearest integer to `x`.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -2974,8 +3027,8 @@ int sdlLround(double x) {
 /// SDL_lroundf for double-precision floats. To get the result as a
 /// floating-point type, use SDL_roundf,
 ///
-/// \param x floating point value
-/// \returns the nearest integer to `x`
+/// \param x floating point value.
+/// \returns the nearest integer to `x`.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -3009,9 +3062,9 @@ int sdlLroundf(double x) {
 /// This function operates on double-precision floating point values, use
 /// SDL_scalbnf for single-precision floats.
 ///
-/// \param x floating point value to be scaled
-/// \param n integer exponent
-/// \returns `x * 2^n`
+/// \param x floating point value to be scaled.
+/// \param n integer exponent.
+/// \returns `x * 2^n`.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -3042,9 +3095,9 @@ double sdlScalbn(double x, int n) {
 /// This function operates on single-precision floating point values, use
 /// SDL_scalbn for double-precision floats.
 ///
-/// \param x floating point value to be scaled
-/// \param n integer exponent
-/// \returns `x * 2^n`
+/// \param x floating point value to be scaled.
+/// \param n integer exponent.
+/// \returns `x * 2^n`.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -3078,8 +3131,8 @@ double sdlScalbnf(double x, int n) {
 /// the same input on different machines or operating systems, or if SDL is
 /// updated.
 ///
-/// \param x floating point value, in radians
-/// \returns sine of `x`
+/// \param x floating point value, in radians.
+/// \returns sine of `x`.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -3113,8 +3166,8 @@ double sdlSin(double x) {
 /// the same input on different machines or operating systems, or if SDL is
 /// updated.
 ///
-/// \param x floating point value, in radians
-/// \returns sine of `x`
+/// \param x floating point value, in radians.
+/// \returns sine of `x`.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -3149,7 +3202,7 @@ double sdlSinf(double x) {
 /// updated.
 ///
 /// \param x floating point value. Must be greater than or equal to 0.
-/// \returns square root of `x`
+/// \returns square root of `x`.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -3182,7 +3235,7 @@ double sdlSqrt(double x) {
 /// updated.
 ///
 /// \param x floating point value. Must be greater than or equal to 0.
-/// \returns square root of `x`
+/// \returns square root of `x`.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -3214,8 +3267,8 @@ double sdlSqrtf(double x) {
 /// the same input on different machines or operating systems, or if SDL is
 /// updated.
 ///
-/// \param x floating point value, in radians
-/// \returns tangent of `x`
+/// \param x floating point value, in radians.
+/// \returns tangent of `x`.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -3251,8 +3304,8 @@ double sdlTan(double x) {
 /// the same input on different machines or operating systems, or if SDL is
 /// updated.
 ///
-/// \param x floating point value, in radians
-/// \returns tangent of `x`
+/// \param x floating point value, in radians.
+/// \returns tangent of `x`.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -3325,8 +3378,23 @@ int sdlIconv(
 }
 
 ///
-/// This function converts a buffer or string between encodings in one pass,
-/// returning a string that must be freed with SDL_free() or NULL on error.
+/// Helper function to convert a string's encoding in one call.
+///
+/// This function converts a buffer or string between encodings in one pass.
+///
+/// The string does not need to be NULL-terminated; this function operates on
+/// the number of bytes specified in `inbytesleft` whether there is a NULL
+/// character anywhere in the buffer.
+///
+/// The returned string is owned by the caller, and should be passed to
+/// SDL_free when no longer needed.
+///
+/// \param tocode the character encoding of the output string. Examples are
+/// "UTF-8", "UCS-4", etc.
+/// \param fromcode the character encoding of data in `inbuf`.
+/// \param inbuf the string to convert to a different encoding.
+/// \param inbytesleft the size of the input string _in bytes_.
+/// \returns a new string, converted to the new encoding, or NULL on error.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///

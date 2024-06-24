@@ -8,8 +8,8 @@ import 'struct_sdl.dart';
 ///
 /// If either pointer is NULL the function will return SDL_FALSE.
 ///
-/// \param A an SDL_Rect structure representing the first rectangle
-/// \param B an SDL_Rect structure representing the second rectangle
+/// \param A an SDL_Rect structure representing the first rectangle.
+/// \param B an SDL_Rect structure representing the second rectangle.
 /// \returns SDL_TRUE if there is an intersection, SDL_FALSE otherwise.
 ///
 /// \threadsafety It is safe to call this function from any thread.
@@ -34,10 +34,10 @@ bool sdlHasRectIntersection(Pointer<SdlRect> a, Pointer<SdlRect> b) {
 ///
 /// If `result` is NULL then this function will return SDL_FALSE.
 ///
-/// \param A an SDL_Rect structure representing the first rectangle
-/// \param B an SDL_Rect structure representing the second rectangle
+/// \param A an SDL_Rect structure representing the first rectangle.
+/// \param B an SDL_Rect structure representing the second rectangle.
 /// \param result an SDL_Rect structure filled in with the intersection of
-/// rectangles `A` and `B`
+/// rectangles `A` and `B`.
 /// \returns SDL_TRUE if there is an intersection, SDL_FALSE otherwise.
 ///
 /// \since This function is available since SDL 3.0.0.
@@ -60,10 +60,10 @@ bool sdlGetRectIntersection(
 ///
 /// Calculate the union of two rectangles.
 ///
-/// \param A an SDL_Rect structure representing the first rectangle
-/// \param B an SDL_Rect structure representing the second rectangle
+/// \param A an SDL_Rect structure representing the first rectangle.
+/// \param B an SDL_Rect structure representing the second rectangle.
 /// \param result an SDL_Rect structure filled in with the union of rectangles
-/// `A` and `B`
+/// `A` and `B`.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -89,11 +89,11 @@ int sdlGetRectUnion(
 /// considered.
 ///
 /// \param points an array of SDL_Point structures representing points to be
-/// enclosed
-/// \param count the number of structures in the `points` array
-/// \param clip an SDL_Rect used for clipping or NULL to enclose all points
+/// enclosed.
+/// \param count the number of structures in the `points` array.
+/// \param clip an SDL_Rect used for clipping or NULL to enclose all points.
 /// \param result an SDL_Rect structure filled in with the minimal enclosing
-/// rectangle
+/// rectangle.
 /// \returns SDL_TRUE if any points were enclosed or SDL_FALSE if all the
 /// points were outside of the clipping rectangle.
 ///
@@ -122,11 +122,11 @@ bool sdlGetRectEnclosingPoints(Pointer<SdlPoint> points, int count,
 /// both ends will be clipped to the boundary of the rectangle and the new
 /// coordinates saved in `X1`, `Y1`, `X2`, and/or `Y2` as necessary.
 ///
-/// \param rect an SDL_Rect structure representing the rectangle to intersect
-/// \param X1 a pointer to the starting X-coordinate of the line
-/// \param Y1 a pointer to the starting Y-coordinate of the line
-/// \param X2 a pointer to the ending X-coordinate of the line
-/// \param Y2 a pointer to the ending Y-coordinate of the line
+/// \param rect an SDL_Rect structure representing the rectangle to intersect.
+/// \param X1 a pointer to the starting X-coordinate of the line.
+/// \param Y1 a pointer to the starting Y-coordinate of the line.
+/// \param X2 a pointer to the ending X-coordinate of the line.
+/// \param Y2 a pointer to the ending Y-coordinate of the line.
 /// \returns SDL_TRUE if there is an intersection, SDL_FALSE otherwise.
 ///
 /// \since This function is available since SDL 3.0.0.
@@ -153,8 +153,8 @@ bool sdlGetRectAndLineIntersection(Pointer<SdlRect> rect, Pointer<Int32> x1,
 ///
 /// If either pointer is NULL the function will return SDL_FALSE.
 ///
-/// \param A an SDL_FRect structure representing the first rectangle
-/// \param B an SDL_FRect structure representing the second rectangle
+/// \param A an SDL_FRect structure representing the first rectangle.
+/// \param B an SDL_FRect structure representing the second rectangle.
 /// \returns SDL_TRUE if there is an intersection, SDL_FALSE otherwise.
 ///
 /// \since This function is available since SDL 3.0.0.
@@ -177,10 +177,10 @@ bool sdlHasRectIntersectionFloat(Pointer<SdlFRect> a, Pointer<SdlFRect> b) {
 ///
 /// If `result` is NULL then this function will return SDL_FALSE.
 ///
-/// \param A an SDL_FRect structure representing the first rectangle
-/// \param B an SDL_FRect structure representing the second rectangle
+/// \param A an SDL_FRect structure representing the first rectangle.
+/// \param B an SDL_FRect structure representing the second rectangle.
 /// \param result an SDL_FRect structure filled in with the intersection of
-/// rectangles `A` and `B`
+/// rectangles `A` and `B`.
 /// \returns SDL_TRUE if there is an intersection, SDL_FALSE otherwise.
 ///
 /// \since This function is available since SDL 3.0.0.
@@ -203,10 +203,10 @@ bool sdlGetRectIntersectionFloat(
 ///
 /// Calculate the union of two rectangles with float precision.
 ///
-/// \param A an SDL_FRect structure representing the first rectangle
-/// \param B an SDL_FRect structure representing the second rectangle
+/// \param A an SDL_FRect structure representing the first rectangle.
+/// \param B an SDL_FRect structure representing the second rectangle.
 /// \param result an SDL_FRect structure filled in with the union of rectangles
-/// `A` and `B`
+/// `A` and `B`.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -233,11 +233,11 @@ int sdlGetRectUnionFloat(
 /// considered.
 ///
 /// \param points an array of SDL_FPoint structures representing points to be
-/// enclosed
-/// \param count the number of structures in the `points` array
-/// \param clip an SDL_FRect used for clipping or NULL to enclose all points
+/// enclosed.
+/// \param count the number of structures in the `points` array.
+/// \param clip an SDL_FRect used for clipping or NULL to enclose all points.
 /// \param result an SDL_FRect structure filled in with the minimal enclosing
-/// rectangle
+/// rectangle.
 /// \returns SDL_TRUE if any points were enclosed or SDL_FALSE if all the
 /// points were outside of the clipping rectangle.
 ///
@@ -268,11 +268,11 @@ bool sdlGetRectEnclosingPointsFloat(Pointer<SdlFPoint> points, int count,
 /// both ends will be clipped to the boundary of the rectangle and the new
 /// coordinates saved in `X1`, `Y1`, `X2`, and/or `Y2` as necessary.
 ///
-/// \param rect an SDL_FRect structure representing the rectangle to intersect
-/// \param X1 a pointer to the starting X-coordinate of the line
-/// \param Y1 a pointer to the starting Y-coordinate of the line
-/// \param X2 a pointer to the ending X-coordinate of the line
-/// \param Y2 a pointer to the ending Y-coordinate of the line
+/// \param rect an SDL_FRect structure representing the rectangle to intersect.
+/// \param X1 a pointer to the starting X-coordinate of the line.
+/// \param Y1 a pointer to the starting Y-coordinate of the line.
+/// \param X2 a pointer to the ending X-coordinate of the line.
+/// \param Y2 a pointer to the ending Y-coordinate of the line.
 /// \returns SDL_TRUE if there is an intersection, SDL_FALSE otherwise.
 ///
 /// \since This function is available since SDL 3.0.0.

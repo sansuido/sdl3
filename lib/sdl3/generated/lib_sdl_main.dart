@@ -35,18 +35,20 @@ void sdlSetMainReady() {
 /// using SDL_main (like when using SDL_MAIN_HANDLED). When using this, you do
 /// *not* need SDL_SetMainReady().
 ///
-/// \param argc The argc parameter from the application's main() function, or 0
-/// if the platform's main-equivalent has no argc
-/// \param argv The argv parameter from the application's main() function, or
-/// NULL if the platform's main-equivalent has no argv
-/// \param mainFunction Your SDL app's C-style main(), an SDL_main_func. NOT
-/// the function you're calling this from! Its name doesn't
-/// matter, but its signature must be like int my_main(int
-/// argc, char* argv[])
+/// \param argc the argc parameter from the application's main() function, or 0
+/// if the platform's main-equivalent has no argc.
+/// \param argv the argv parameter from the application's main() function, or
+/// NULL if the platform's main-equivalent has no argv.
+/// \param mainFunction your SDL app's C-style main(). NOT the function you're
+/// calling this from! Its name doesn't matter; it doesn't
+/// literally have to be `main`.
 /// \param reserved should be NULL (reserved for future use, will probably be
-/// platform-specific then)
+/// platform-specific then).
 /// \returns the return value from mainFunction: 0 on success, -1 on failure;
-/// SDL_GetError() might have more information on the failure
+/// SDL_GetError() might have more information on the failure.
+///
+/// \threadsafety Generally this is called once, near startup, from the
+/// process's initial thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -84,13 +86,13 @@ int sdlRunApp(
 /// header-only library, and you should not call this directly unless you
 /// _really_ know what you're doing.
 ///
-/// \param argc standard Unix main argc
-/// \param argv standard Unix main argv
-/// \param appinit The application's SDL_AppInit function
-/// \param appiter The application's SDL_AppIterate function
-/// \param appevent The application's SDL_AppEvent function
-/// \param appquit The application's SDL_AppQuit function
-/// \returns standard Unix main return value
+/// \param argc standard Unix main argc.
+/// \param argv standard Unix main argv.
+/// \param appinit the application's SDL_AppInit function.
+/// \param appiter the application's SDL_AppIterate function.
+/// \param appevent the application's SDL_AppEvent function.
+/// \param appquit the application's SDL_AppQuit function.
+/// \returns standard Unix main return value.
 ///
 /// \threadsafety It is not safe to call this anywhere except as the only
 /// function call in SDL_main.
