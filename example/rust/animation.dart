@@ -55,7 +55,7 @@ int main() {
           running = false;
           break;
         case SDL_EVENT_KEY_DOWN:
-          if (event.key.keysym.ref.sym == SDLK_ESCAPE) {
+          if (event.key.ref.key == SDLK_ESCAPE) {
             running = false;
           }
           break;

@@ -1785,6 +1785,135 @@ int sdlVasprintf(
 }
 
 ///
+/// Seeds the pseudo-random number generator.
+///
+/// Reusing the seed number will cause SDL_rand_*() to repeat the same stream
+/// of 'random' numbers.
+///
+/// \param seed the value to use as a random number seed, or 0 to use
+/// SDL_GetPerformanceCounter().
+///
+/// \threadsafety This should be called on the same thread that calls
+/// SDL_rand*()
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_rand_n
+/// \sa SDL_rand_float
+/// \sa SDL_rand_bits
+///
+/// ```c
+/// extern SDL_DECLSPEC void SDLCALL SDL_srand(Uint64 seed)
+/// ```
+void sdlSrand(int seed) {
+  final sdlSrandLookupFunction = libSdl3.lookupFunction<
+      Void Function(Uint64 seed), void Function(int seed)>('SDL_srand');
+  return sdlSrandLookupFunction(seed);
+}
+
+///
+/// Generates 32 pseudo-random bits.
+///
+/// You likely want to use SDL_rand_n() to get a psuedo-randum number instead.
+///
+/// If you want reproducible output, be sure to initialize with SDL_srand()
+/// first.
+///
+/// There are no guarantees as to the quality of the random sequence produced,
+/// and this should not be used for security (cryptography, passwords) or where
+/// money is on the line (loot-boxes, casinos). There are many random number
+/// libraries available with different characteristics and you should pick one
+/// of those to meet any serious needs.
+///
+/// \returns a random value in the range of [0-SDL_MAX_UINT32].
+///
+/// \threadsafety All calls should be made from a single thread
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_srand
+/// \sa SDL_rand_n
+/// \sa SDL_rand_float
+///
+/// ```c
+/// extern SDL_DECLSPEC Uint32 SDLCALL SDL_rand_bits(void)
+/// ```
+int sdlRandBits() {
+  final sdlRandBitsLookupFunction = libSdl3
+      .lookupFunction<Uint32 Function(), int Function()>('SDL_rand_bits');
+  return sdlRandBitsLookupFunction();
+}
+
+///
+/// Generates a pseudo-random number less than n for positive n
+///
+/// The method used is faster and of better quality than `rand() % n`. Odds are
+/// roughly 99.9% even for n = 1 million. Evenness is better for smaller n, and
+/// much worse as n gets bigger.
+///
+/// Example: to simulate a d6 use `SDL_rand_n(6) + 1` The +1 converts 0..5 to
+/// 1..6
+///
+/// If you want reproducible output, be sure to initialize with SDL_srand()
+/// first.
+///
+/// There are no guarantees as to the quality of the random sequence produced,
+/// and this should not be used for security (cryptography, passwords) or where
+/// money is on the line (loot-boxes, casinos). There are many random number
+/// libraries available with different characteristics and you should pick one
+/// of those to meet any serious needs.
+///
+/// \param n the number of possible outcomes. n must be positive.
+/// \returns a random value in the range of [0 .. n-1].
+///
+/// \threadsafety All calls should be made from a single thread
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_srand
+/// \sa SDL_rand_float
+///
+/// ```c
+/// extern SDL_DECLSPEC Sint32 SDLCALL SDL_rand_n(Sint32 n)
+/// ```
+int sdlRandN(int n) {
+  final sdlRandNLookupFunction =
+      libSdl3.lookupFunction<Int32 Function(Int32 n), int Function(int n)>(
+          'SDL_rand_n');
+  return sdlRandNLookupFunction(n);
+}
+
+///
+/// Generates a uniform pseudo-random floating point number less than 1.0
+///
+/// If you want reproducible output, be sure to initialize with SDL_srand()
+/// first.
+///
+/// There are no guarantees as to the quality of the random sequence produced,
+/// and this should not be used for security (cryptography, passwords) or where
+/// money is on the line (loot-boxes, casinos). There are many random number
+/// libraries available with different characteristics and you should pick one
+/// of those to meet any serious needs.
+///
+/// \returns a random value in the range of [0.0, 1.0).
+///
+/// \threadsafety All calls should be made from a single thread
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_srand
+/// \sa SDL_rand_n
+///
+/// ```c
+/// extern SDL_DECLSPEC float SDLCALL SDL_rand_float(void)
+/// ```
+double sdlRandFloat() {
+  final sdlRandFloatLookupFunction = libSdl3
+      .lookupFunction<Float Function(), double Function()>('SDL_rand_float');
+  return sdlRandFloatLookupFunction();
+}
+
+///
 /// Compute the arc cosine of `x`.
 ///
 /// The definition of `y = acos(x)` is `x = cos(y)`.

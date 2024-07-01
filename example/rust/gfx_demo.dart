@@ -42,7 +42,7 @@ int main() {
           running = false;
           break;
         case SDL_EVENT_KEY_DOWN:
-          switch (event.key.keysym.ref.sym) {
+          switch (event.key.ref.key) {
             case SDLK_ESCAPE:
               running = false;
               break;

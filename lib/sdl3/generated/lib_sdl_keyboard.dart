@@ -207,6 +207,8 @@ void sdlSetModState(int modstate) {
 /// See SDL_Keycode for details.
 ///
 /// \param scancode the desired SDL_Scancode to query.
+/// \param modstate the modifier state to use when translating the scancode to
+/// a keycode.
 /// \returns the SDL_Keycode that corresponds to the given SDL_Scancode.
 ///
 /// \since This function is available since SDL 3.0.0.
@@ -215,13 +217,14 @@ void sdlSetModState(int modstate) {
 /// \sa SDL_GetScancodeFromKey
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_Keycode SDLCALL SDL_GetDefaultKeyFromScancode(SDL_Scancode scancode)
+/// extern SDL_DECLSPEC SDL_Keycode SDLCALL SDL_GetDefaultKeyFromScancode(SDL_Scancode scancode, SDL_Keymod modstate)
 /// ```
-int sdlGetDefaultKeyFromScancode(int scancode) {
+int sdlGetDefaultKeyFromScancode(int scancode, int modstate) {
   final sdlGetDefaultKeyFromScancodeLookupFunction = libSdl3.lookupFunction<
-      Uint32 Function(Int32 scancode),
-      int Function(int scancode)>('SDL_GetDefaultKeyFromScancode');
-  return sdlGetDefaultKeyFromScancodeLookupFunction(scancode);
+      Uint32 Function(Int32 scancode, Uint16 modstate),
+      int Function(
+          int scancode, int modstate)>('SDL_GetDefaultKeyFromScancode');
+  return sdlGetDefaultKeyFromScancodeLookupFunction(scancode, modstate);
 }
 
 ///
@@ -231,51 +234,112 @@ int sdlGetDefaultKeyFromScancode(int scancode) {
 /// See SDL_Keycode for details.
 ///
 /// \param scancode the desired SDL_Scancode to query.
+/// \param modstate the modifier state to use when translating the scancode to
+/// a keycode.
 /// \returns the SDL_Keycode that corresponds to the given SDL_Scancode.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
+/// \sa SDL_GetDefaultKeyFromScancode
 /// \sa SDL_GetKeyName
 /// \sa SDL_GetScancodeFromKey
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_Keycode SDLCALL SDL_GetKeyFromScancode(SDL_Scancode scancode)
+/// extern SDL_DECLSPEC SDL_Keycode SDLCALL SDL_GetKeyFromScancode(SDL_Scancode scancode, SDL_Keymod modstate)
 /// ```
-int sdlGetKeyFromScancode(int scancode) {
+int sdlGetKeyFromScancode(int scancode, int modstate) {
   final sdlGetKeyFromScancodeLookupFunction = libSdl3.lookupFunction<
-      Uint32 Function(Int32 scancode),
-      int Function(int scancode)>('SDL_GetKeyFromScancode');
-  return sdlGetKeyFromScancodeLookupFunction(scancode);
+      Uint32 Function(Int32 scancode, Uint16 modstate),
+      int Function(int scancode, int modstate)>('SDL_GetKeyFromScancode');
+  return sdlGetKeyFromScancodeLookupFunction(scancode, modstate);
+}
+
+///
+/// Get the scancode corresponding to the given key code according to a default
+/// en_US keyboard layout.
+///
+/// Note that there may be multiple scancode+modifier states that can generate
+/// this keycode, this will just return the first one found.
+///
+/// \param key the desired SDL_Keycode to query.
+/// \param modstate a pointer to the modifier state that would be used when the
+/// scancode generates this key, may be NULL.
+/// \returns the SDL_Scancode that corresponds to the given SDL_Keycode.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_GetScancodeFromKey
+/// \sa SDL_GetScancodeName
+///
+/// ```c
+/// extern SDL_DECLSPEC SDL_Scancode SDLCALL SDL_GetDefaultScancodeFromKey(SDL_Keycode key, SDL_Keymod *modstate)
+/// ```
+int sdlGetDefaultScancodeFromKey(int key, Pointer<Uint16> modstate) {
+  final sdlGetDefaultScancodeFromKeyLookupFunction = libSdl3.lookupFunction<
+      Int32 Function(Uint32 key, Pointer<Uint16> modstate),
+      int Function(
+          int key, Pointer<Uint16> modstate)>('SDL_GetDefaultScancodeFromKey');
+  return sdlGetDefaultScancodeFromKeyLookupFunction(key, modstate);
 }
 
 ///
 /// Get the scancode corresponding to the given key code according to the
 /// current keyboard layout.
 ///
-/// See SDL_Scancode for details.
+/// Note that there may be multiple scancode+modifier states that can generate
+/// this keycode, this will just return the first one found.
 ///
 /// \param key the desired SDL_Keycode to query.
+/// \param modstate a pointer to the modifier state that would be used when the
+/// scancode generates this key, may be NULL.
 /// \returns the SDL_Scancode that corresponds to the given SDL_Keycode.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
+/// \sa SDL_GetDefaultScancodeFromKey
 /// \sa SDL_GetKeyFromScancode
 /// \sa SDL_GetScancodeName
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_Scancode SDLCALL SDL_GetScancodeFromKey(SDL_Keycode key)
+/// extern SDL_DECLSPEC SDL_Scancode SDLCALL SDL_GetScancodeFromKey(SDL_Keycode key, SDL_Keymod *modstate)
 /// ```
-int sdlGetScancodeFromKey(int key) {
-  final sdlGetScancodeFromKeyLookupFunction =
-      libSdl3.lookupFunction<Int32 Function(Uint32 key), int Function(int key)>(
-          'SDL_GetScancodeFromKey');
-  return sdlGetScancodeFromKeyLookupFunction(key);
+int sdlGetScancodeFromKey(int key, Pointer<Uint16> modstate) {
+  final sdlGetScancodeFromKeyLookupFunction = libSdl3.lookupFunction<
+      Int32 Function(Uint32 key, Pointer<Uint16> modstate),
+      int Function(
+          int key, Pointer<Uint16> modstate)>('SDL_GetScancodeFromKey');
+  return sdlGetScancodeFromKeyLookupFunction(key, modstate);
+}
+
+///
+/// Set a human-readable name for a scancode.
+///
+/// \param scancode the desired SDL_Scancode.
+/// \param name the name to use for the scancode, encoded as UTF-8. The string
+/// is not copied, so the pointer given to this function must stay
+/// valid while SDL is being used.
+/// \returns 0 on success or a negative error code on failure; call
+/// SDL_GetError() for more information.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_GetScancodeName
+///
+/// ```c
+/// extern SDL_DECLSPEC int SDLCALL SDL_SetScancodeName(SDL_Scancode scancode, const char *name)
+/// ```
+int sdlSetScancodeName(int scancode, String? name) {
+  final sdlSetScancodeNameLookupFunction = libSdl3.lookupFunction<
+      Int32 Function(Int32 scancode, Pointer<Utf8> name),
+      int Function(int scancode, Pointer<Utf8> name)>('SDL_SetScancodeName');
+  final namePointer = name != null ? name.toNativeUtf8() : nullptr;
+  final result = sdlSetScancodeNameLookupFunction(scancode, namePointer);
+  calloc.free(namePointer);
+  return result;
 }
 
 ///
 /// Get a human-readable name for a scancode.
-///
-/// See SDL_Scancode for details.
 ///
 /// The returned string follows the SDL_GetStringRule.
 ///
@@ -296,6 +360,7 @@ int sdlGetScancodeFromKey(int key) {
 ///
 /// \sa SDL_GetScancodeFromKey
 /// \sa SDL_GetScancodeFromName
+/// \sa SDL_SetScancodeName
 ///
 /// ```c
 /// extern SDL_DECLSPEC const char *SDLCALL SDL_GetScancodeName(SDL_Scancode scancode)
@@ -339,8 +404,6 @@ int sdlGetScancodeFromName(String? name) {
 
 ///
 /// Get a human-readable name for a key.
-///
-/// See SDL_Scancode and SDL_Keycode for details.
 ///
 /// The returned string follows the SDL_GetStringRule.
 ///

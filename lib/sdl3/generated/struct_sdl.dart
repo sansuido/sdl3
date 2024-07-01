@@ -68,19 +68,19 @@ final class SdlCameraSpec extends Struct {
   external int format;
   // [4]+(4)
   @Int32()
-  external int width;
+  external int colorspace;
   // [8]+(4)
   @Int32()
-  external int height;
+  external int width;
   // [12]+(4)
   @Int32()
-  external int intervalNumerator;
+  external int height;
   // [16]+(4)
   @Int32()
-  external int intervalDenominator;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
+  external int framerateNumerator;
+  // [20]+(4)
+  @Int32()
+  external int framerateDenominator;
 }
 
 // SDL_DialogFileFilter
@@ -184,30 +184,27 @@ final class SdlKeyboardEvent extends Struct {
   // [20]+(4)
   @Uint32()
   external int which;
-  // [24]+(1)
+  // [24]+(4)
+  @Int32()
+  external int scancode;
+  // [28]+(4)
+  @Uint32()
+  external int key;
+  // [32]+(2)
+  @Uint16()
+  external int mod;
+  // [34]+(2)
+  @Uint16()
+  external int raw;
+  // [36]+(1)
   @Uint8()
   external int state;
-  // [25]+(1)
+  // [37]+(1)
   @Uint8()
   external int repeat;
-  // [26]+(1)
-  @Uint8()
-  external int padding2;
-  // [27]+(1)
-  @Uint8()
-  external int padding3;
-  // [28]+(16)
-  @Uint64()
-  external int keysym_1;
-  @Uint64()
-  external int keysym_2;
-  // [] +(4)
-  @Uint32()
+  // [] +(2)
+  @Uint16()
   external int blank_1;
-}
-
-extension SdlKeyboardEventExtension on Pointer<SdlKeyboardEvent> {
-  Pointer<SdlKeysym> get keysym => (cast<Uint8>() + 28).cast<SdlKeysym>();
 }
 
 // SDL_TextEditingEvent
@@ -228,7 +225,7 @@ final class SdlTextEditingEvent extends Struct {
   @Uint32()
   external int blank_1;
   // [24]+(8)
-  external Pointer<Int8> text;
+  external Pointer<Utf8> text;
   // [32]+(4)
   @Int32()
   external int start;
@@ -255,7 +252,7 @@ final class SdlTextInputEvent extends Struct {
   @Uint32()
   external int blank_1;
   // [24]+(8)
-  external Pointer<Int8> text;
+  external Pointer<Utf8> text;
 }
 
 // SDL_MouseDeviceEvent
@@ -970,9 +967,9 @@ final class SdlDropEvent extends Struct {
   @Uint32()
   external int blank_1;
   // [32]+(8)
-  external Pointer<Int8> source;
+  external Pointer<Utf8> source;
   // [40]+(8)
-  external Pointer<Int8> data;
+  external Pointer<Utf8> data;
 }
 
 // SDL_ClipboardEvent
@@ -1793,25 +1790,6 @@ final class SdlVirtualJoystickDesc extends Struct {
   external Pointer<NativeType> sendEffect;
   // [112]+(8)
   external Pointer<NativeType> setSensorsEnabled;
-}
-
-// SDL_Keysym
-final class SdlKeysym extends Struct {
-  // [0]+(4)
-  @Int32()
-  external int scancode;
-  // [4]+(4)
-  @Uint32()
-  external int sym;
-  // [8]+(2)
-  @Uint16()
-  external int mod;
-  // [10]+(2)
-  @Uint16()
-  external int unused;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
 }
 
 // SDL_Locale

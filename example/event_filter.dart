@@ -20,7 +20,7 @@ int myEventFilter(Pointer<NativeType> bluePrev, Pointer<SdlEvent> event) {
   var blue = bluePrev.cast<Uint8>();
   switch (event.type) {
     case SDL_EVENT_KEY_DOWN:
-      switch (event.key.keysym.ref.sym) {
+      switch (event.key.ref.key) {
         case SDLK_SPACE:
           if (blue.value == 0) {
             blue.value = 255;

@@ -147,9 +147,9 @@ int main() {
             running = false;
             break;
           case SDL_EVENT_KEY_DOWN:
-            if (event.key.keysym.ref.sym == SDLK_ESCAPE) {
+            if (event.key.ref.key == SDLK_ESCAPE) {
               running = false;
-            } else if (event.key.keysym.ref.sym == SDLK_SPACE) {
+            } else if (event.key.ref.key == SDLK_SPACE) {
               if (wav.paused()) {
                 wav.resume();
               } else {

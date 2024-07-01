@@ -14,7 +14,7 @@ import 'struct_sdl.dart';
 ///
 /// The callback will be invoked with a null-terminated list of files the user
 /// chose. The list will be empty if the user canceled the dialog, and it will
-/// be NULL if an error occured.
+/// be NULL if an error occurred.
 ///
 /// Note that the callback may be called from a different thread than the one
 /// the function was invoked on.
@@ -31,7 +31,7 @@ import 'struct_sdl.dart';
 /// error occurs. The first argument is a null-terminated list
 /// of C strings, representing the paths chosen by the user.
 /// The list will be empty if the user canceled the dialog, and
-/// it will be NULL if an error occured. If an error occured,
+/// it will be NULL if an error occurred. If an error occurred,
 /// it can be fetched with SDL_GetError(). The second argument
 /// is the userdata pointer passed to the function. The third
 /// argument is the index of the filter selected by the user,
@@ -106,7 +106,7 @@ void sdlShowOpenFileDialog(
 ///
 /// The callback will be invoked with a null-terminated list of files the user
 /// chose. The list will be empty if the user canceled the dialog, and it will
-/// be NULL if an error occured.
+/// be NULL if an error occurred.
 ///
 /// Note that the callback may be called from a different thread than the one
 /// the function was invoked on.
@@ -122,7 +122,7 @@ void sdlShowOpenFileDialog(
 /// error occurs. The first argument is a null-terminated list
 /// of C strings, representing the paths chosen by the user.
 /// The list will be empty if the user canceled the dialog, and
-/// it will be NULL if an error occured. If an error occured,
+/// it will be NULL if an error occurred. If an error occurred,
 /// it can be fetched with SDL_GetError(). The second argument
 /// is the userdata pointer passed to the function. The third
 /// argument is the index of the filter selected by the user,
@@ -191,7 +191,7 @@ void sdlShowSaveFileDialog(
 ///
 /// The callback will be invoked with a null-terminated list of files the user
 /// chose. The list will be empty if the user canceled the dialog, and it will
-/// be NULL if an error occured.
+/// be NULL if an error occurred.
 ///
 /// Note that the callback may be called from a different thread than the one
 /// the function was invoked on.
@@ -208,7 +208,7 @@ void sdlShowSaveFileDialog(
 /// error occurs. The first argument is a null-terminated list
 /// of C strings, representing the paths chosen by the user.
 /// The list will be empty if the user canceled the dialog, and
-/// it will be NULL if an error occured. If an error occured,
+/// it will be NULL if an error occurred. If an error occurred,
 /// it can be fetched with SDL_GetError(). The second argument
 /// is the userdata pointer passed to the function. The third
 /// argument is always -1 for SDL_ShowOpenFolderDialog.
