@@ -234,6 +234,39 @@ final class SdlTextEditingEvent extends Struct {
   external int length;
 }
 
+// SDL_TextEditingCandidatesEvent
+final class SdlTextEditingCandidatesEvent extends Struct {
+  // [0]+(4)
+  @Int32()
+  external int type;
+  // [4]+(4)
+  @Uint32()
+  external int reserved;
+  // [8]+(8)
+  @Uint64()
+  external int timestamp;
+  // [16]+(4)
+  @Uint32()
+  external int windowId;
+  // [] +(4)
+  @Uint32()
+  external int blank_1;
+  // [24]+(8)
+  external Pointer<Pointer<Int8>> candidates;
+  // [32]+(4)
+  @Int32()
+  external int numCandidates;
+  // [36]+(4)
+  @Int32()
+  external int selectedCandidate;
+  // [40]+(4)
+  @Int32()
+  external int horizontal;
+  // [] +(4)
+  @Uint32()
+  external int blank_2;
+}
+
 // SDL_TextInputEvent
 final class SdlTextInputEvent extends Struct {
   // [0]+(4)
@@ -1107,6 +1140,8 @@ extension SdlEventExtension on Pointer<SdlEvent> {
       (cast<Uint8>() + 0).cast<SdlKeyboardEvent>();
   Pointer<SdlTextEditingEvent> get edit =>
       (cast<Uint8>() + 0).cast<SdlTextEditingEvent>();
+  Pointer<SdlTextEditingCandidatesEvent> get editCandidates =>
+      (cast<Uint8>() + 0).cast<SdlTextEditingCandidatesEvent>();
   Pointer<SdlTextInputEvent> get text =>
       (cast<Uint8>() + 0).cast<SdlTextInputEvent>();
   Pointer<SdlMouseDeviceEvent> get mdevice =>

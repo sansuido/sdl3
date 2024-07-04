@@ -1660,6 +1660,60 @@ int sdlStrncasecmp(String? str1, String? str2, int maxlen) {
   return result;
 }
 
+///
+/// Decode a UTF-8 string, one Unicode codepoint at a time.
+///
+/// This will return the first Unicode codepoint in the UTF-8 encoded string in
+/// `*pstr`, and then advance `*pstr` past any consumed bytes before returning.
+///
+/// It will not access more than `*pslen` bytes from the string. `*pslen` will
+/// be adjusted, as well, subtracting the number of bytes consumed.
+///
+/// `pslen` is allowed to be NULL, in which case the string _must_ be
+/// NULL-terminated, as the function will blindly read until it sees the NULL
+/// char.
+///
+/// if `*pslen` is zero, it assumes the end of string is reached and returns a
+/// zero codepoint regardless of the contents of the string buffer.
+///
+/// If the resulting codepoint is zero (a NULL terminator), or `*pslen` is
+/// zero, it will not advance `*pstr` or `*pslen` at all.
+///
+/// Generally this function is called in a loop until it returns zero,
+/// adjusting its parameters each iteration.
+///
+/// If an invalid UTF-8 sequence is encountered, this function returns
+/// SDL_INVALID_UNICODE_CODEPOINT and advances the string/length by one byte
+/// (which is to say, a multibyte sequence might produce several
+/// SDL_INVALID_UNICODE_CODEPOINT returns before it syncs to the next valid
+/// UTF-8 sequence).
+///
+/// Several things can generate invalid UTF-8 sequences, including overlong
+/// encodings, the use of UTF-16 surrogate values, and truncated data. Please
+/// refer to
+/// [RFC3629](https://www.ietf.org/rfc/rfc3629.txt)
+/// for details.
+///
+/// \param pstr a pointer to a UTF-8 string pointer to be read and adjusted.
+/// \param pslen a pointer to the number of bytes in the string, to be read and
+/// adjusted. NULL is allowed.
+/// \returns the first Unicode codepoint in the string.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC Uint32 SDLCALL SDL_StepUTF8(const char **pstr, size_t *pslen)
+/// ```
+int sdlStepUtf8(Pointer<Pointer<Int8>> pstr, Pointer<Uint32> pslen) {
+  final sdlStepUtf8LookupFunction = libSdl3.lookupFunction<
+      Uint32 Function(Pointer<Pointer<Int8>> pstr, Pointer<Uint32> pslen),
+      int Function(
+          Pointer<Pointer<Int8>> pstr, Pointer<Uint32> pslen)>('SDL_StepUTF8');
+  return sdlStepUtf8LookupFunction(pstr, pslen);
+}
+
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_sscanf(const char *text, SDL_SCANF_FORMAT_STRING const char *fmt, ...) SDL_SCANF_VARARG_FUNC(2)
 /// ```
@@ -1798,9 +1852,9 @@ int sdlVasprintf(
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_rand_n
-/// \sa SDL_rand_float
+/// \sa SDL_rand
 /// \sa SDL_rand_bits
+/// \sa SDL_randf
 ///
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_srand(Uint64 seed)
@@ -1812,47 +1866,17 @@ void sdlSrand(int seed) {
 }
 
 ///
-/// Generates 32 pseudo-random bits.
-///
-/// You likely want to use SDL_rand_n() to get a psuedo-randum number instead.
-///
-/// If you want reproducible output, be sure to initialize with SDL_srand()
-/// first.
-///
-/// There are no guarantees as to the quality of the random sequence produced,
-/// and this should not be used for security (cryptography, passwords) or where
-/// money is on the line (loot-boxes, casinos). There are many random number
-/// libraries available with different characteristics and you should pick one
-/// of those to meet any serious needs.
-///
-/// \returns a random value in the range of [0-SDL_MAX_UINT32].
-///
-/// \threadsafety All calls should be made from a single thread
-///
-/// \since This function is available since SDL 3.0.0.
-///
-/// \sa SDL_srand
-/// \sa SDL_rand_n
-/// \sa SDL_rand_float
-///
-/// ```c
-/// extern SDL_DECLSPEC Uint32 SDLCALL SDL_rand_bits(void)
-/// ```
-int sdlRandBits() {
-  final sdlRandBitsLookupFunction = libSdl3
-      .lookupFunction<Uint32 Function(), int Function()>('SDL_rand_bits');
-  return sdlRandBitsLookupFunction();
-}
-
-///
-/// Generates a pseudo-random number less than n for positive n
+/// Generate a pseudo-random number less than n for positive n
 ///
 /// The method used is faster and of better quality than `rand() % n`. Odds are
 /// roughly 99.9% even for n = 1 million. Evenness is better for smaller n, and
 /// much worse as n gets bigger.
 ///
-/// Example: to simulate a d6 use `SDL_rand_n(6) + 1` The +1 converts 0..5 to
+/// Example: to simulate a d6 use `SDL_rand(6) + 1` The +1 converts 0..5 to
 /// 1..6
+///
+/// If you want to generate a pseudo-random number in the full range of Sint32,
+/// you should use: (Sint32)SDL_rand_bits()
 ///
 /// If you want reproducible output, be sure to initialize with SDL_srand()
 /// first.
@@ -1871,20 +1895,19 @@ int sdlRandBits() {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_srand
-/// \sa SDL_rand_float
+/// \sa SDL_randf
 ///
 /// ```c
-/// extern SDL_DECLSPEC Sint32 SDLCALL SDL_rand_n(Sint32 n)
+/// extern SDL_DECLSPEC Sint32 SDLCALL SDL_rand(Sint32 n)
 /// ```
-int sdlRandN(int n) {
-  final sdlRandNLookupFunction =
-      libSdl3.lookupFunction<Int32 Function(Int32 n), int Function(int n)>(
-          'SDL_rand_n');
-  return sdlRandNLookupFunction(n);
+int sdlRand(int n) {
+  final sdlRandLookupFunction = libSdl3
+      .lookupFunction<Int32 Function(Int32 n), int Function(int n)>('SDL_rand');
+  return sdlRandLookupFunction(n);
 }
 
 ///
-/// Generates a uniform pseudo-random floating point number less than 1.0
+/// Generate a uniform pseudo-random floating point number less than 1.0
 ///
 /// If you want reproducible output, be sure to initialize with SDL_srand()
 /// first.
@@ -1902,15 +1925,156 @@ int sdlRandN(int n) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_srand
-/// \sa SDL_rand_n
+/// \sa SDL_rand
 ///
 /// ```c
-/// extern SDL_DECLSPEC float SDLCALL SDL_rand_float(void)
+/// extern SDL_DECLSPEC float SDLCALL SDL_randf(void)
 /// ```
-double sdlRandFloat() {
-  final sdlRandFloatLookupFunction = libSdl3
-      .lookupFunction<Float Function(), double Function()>('SDL_rand_float');
-  return sdlRandFloatLookupFunction();
+double sdlRandf() {
+  final sdlRandfLookupFunction =
+      libSdl3.lookupFunction<Float Function(), double Function()>('SDL_randf');
+  return sdlRandfLookupFunction();
+}
+
+///
+/// Generate 32 pseudo-random bits.
+///
+/// You likely want to use SDL_rand() to get a psuedo-random number instead.
+///
+/// There are no guarantees as to the quality of the random sequence produced,
+/// and this should not be used for security (cryptography, passwords) or where
+/// money is on the line (loot-boxes, casinos). There are many random number
+/// libraries available with different characteristics and you should pick one
+/// of those to meet any serious needs.
+///
+/// \returns a random value in the range of [0-SDL_MAX_UINT32].
+///
+/// \threadsafety All calls should be made from a single thread
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_rand
+/// \sa SDL_randf
+/// \sa SDL_srand
+///
+/// ```c
+/// extern SDL_DECLSPEC Uint32 SDLCALL SDL_rand_bits(void)
+/// ```
+int sdlRandBits() {
+  final sdlRandBitsLookupFunction = libSdl3
+      .lookupFunction<Uint32 Function(), int Function()>('SDL_rand_bits');
+  return sdlRandBitsLookupFunction();
+}
+
+///
+/// Generate a pseudo-random number less than n for positive n
+///
+/// The method used is faster and of better quality than `rand() % n`. Odds are
+/// roughly 99.9% even for n = 1 million. Evenness is better for smaller n, and
+/// much worse as n gets bigger.
+///
+/// Example: to simulate a d6 use `SDL_rand_r(state, 6) + 1` The +1 converts
+/// 0..5 to 1..6
+///
+/// If you want to generate a pseudo-random number in the full range of Sint32,
+/// you should use: (Sint32)SDL_rand_bits_r(state)
+///
+/// There are no guarantees as to the quality of the random sequence produced,
+/// and this should not be used for security (cryptography, passwords) or where
+/// money is on the line (loot-boxes, casinos). There are many random number
+/// libraries available with different characteristics and you should pick one
+/// of those to meet any serious needs.
+///
+/// \param state a pointer to the current random number state, this may not be
+/// NULL.
+/// \param n the number of possible outcomes. n must be positive.
+/// \returns a random value in the range of [0 .. n-1].
+///
+/// \threadsafety This function is thread-safe, as long as the state pointer
+/// isn't shared between threads.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_rand
+/// \sa SDL_rand_bits_r
+/// \sa SDL_randf_r
+///
+/// ```c
+/// extern SDL_DECLSPEC Sint32 SDLCALL SDL_rand_r(Uint64 *state, Sint32 n)
+/// ```
+int sdlRandR(Pointer<Uint64> state, int n) {
+  final sdlRandRLookupFunction = libSdl3.lookupFunction<
+      Int32 Function(Pointer<Uint64> state, Int32 n),
+      int Function(Pointer<Uint64> state, int n)>('SDL_rand_r');
+  return sdlRandRLookupFunction(state, n);
+}
+
+///
+/// Generate a uniform pseudo-random floating point number less than 1.0
+///
+/// If you want reproducible output, be sure to initialize with SDL_srand()
+/// first.
+///
+/// There are no guarantees as to the quality of the random sequence produced,
+/// and this should not be used for security (cryptography, passwords) or where
+/// money is on the line (loot-boxes, casinos). There are many random number
+/// libraries available with different characteristics and you should pick one
+/// of those to meet any serious needs.
+///
+/// \param state a pointer to the current random number state, this may not be
+/// NULL.
+/// \returns a random value in the range of [0.0, 1.0).
+///
+/// \threadsafety This function is thread-safe, as long as the state pointer
+/// isn't shared between threads.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_rand_bits_r
+/// \sa SDL_rand_r
+/// \sa SDL_randf
+///
+/// ```c
+/// extern SDL_DECLSPEC float SDLCALL SDL_randf_r(Uint64 *state)
+/// ```
+double sdlRandfR(Pointer<Uint64> state) {
+  final sdlRandfRLookupFunction = libSdl3.lookupFunction<
+      Float Function(Pointer<Uint64> state),
+      double Function(Pointer<Uint64> state)>('SDL_randf_r');
+  return sdlRandfRLookupFunction(state);
+}
+
+///
+/// Generate 32 pseudo-random bits.
+///
+/// You likely want to use SDL_rand_r() to get a psuedo-random number instead.
+///
+/// There are no guarantees as to the quality of the random sequence produced,
+/// and this should not be used for security (cryptography, passwords) or where
+/// money is on the line (loot-boxes, casinos). There are many random number
+/// libraries available with different characteristics and you should pick one
+/// of those to meet any serious needs.
+///
+/// \param state a pointer to the current random number state, this may not be
+/// NULL.
+/// \returns a random value in the range of [0-SDL_MAX_UINT32].
+///
+/// \threadsafety This function is thread-safe, as long as the state pointer
+/// isn't shared between threads.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_rand_r
+/// \sa SDL_randf_r
+///
+/// ```c
+/// extern SDL_DECLSPEC Uint32 SDLCALL SDL_rand_bits_r(Uint64 *state)
+/// ```
+int sdlRandBitsR(Pointer<Uint64> state) {
+  final sdlRandBitsRLookupFunction = libSdl3.lookupFunction<
+      Uint32 Function(Pointer<Uint64> state),
+      int Function(Pointer<Uint64> state)>('SDL_rand_bits_r');
+  return sdlRandBitsRLookupFunction(state);
 }
 
 ///
@@ -2785,6 +2949,94 @@ double sdlFmodf(double x, double y) {
       Float Function(Float x, Float y),
       double Function(double x, double y)>('SDL_fmodf');
   return sdlFmodfLookupFunction(x, y);
+}
+
+///
+/// Return whether the value is infinity.
+///
+/// \param x double-precision floating point value.
+/// \returns non-zero if the value is infinity, 0 otherwise.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_isinff
+///
+/// ```c
+/// extern SDL_DECLSPEC int SDLCALL SDL_isinf(double x)
+/// ```
+int sdlIsinf(double x) {
+  final sdlIsinfLookupFunction =
+      libSdl3.lookupFunction<Int32 Function(Double x), int Function(double x)>(
+          'SDL_isinf');
+  return sdlIsinfLookupFunction(x);
+}
+
+///
+/// Return whether the value is infinity.
+///
+/// \param x floating point value.
+/// \returns non-zero if the value is infinity, 0 otherwise.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_isinf
+///
+/// ```c
+/// extern SDL_DECLSPEC int SDLCALL SDL_isinff(float x)
+/// ```
+int sdlIsinff(double x) {
+  final sdlIsinffLookupFunction =
+      libSdl3.lookupFunction<Int32 Function(Float x), int Function(double x)>(
+          'SDL_isinff');
+  return sdlIsinffLookupFunction(x);
+}
+
+///
+/// Return whether the value is NaN.
+///
+/// \param x double-precision floating point value.
+/// \returns non-zero if the value is NaN, 0 otherwise.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_isnanf
+///
+/// ```c
+/// extern SDL_DECLSPEC int SDLCALL SDL_isnan(double x)
+/// ```
+int sdlIsnan(double x) {
+  final sdlIsnanLookupFunction =
+      libSdl3.lookupFunction<Int32 Function(Double x), int Function(double x)>(
+          'SDL_isnan');
+  return sdlIsnanLookupFunction(x);
+}
+
+///
+/// Return whether the value is NaN.
+///
+/// \param x floating point value.
+/// \returns non-zero if the value is NaN, 0 otherwise.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_isnan
+///
+/// ```c
+/// extern SDL_DECLSPEC int SDLCALL SDL_isnanf(float x)
+/// ```
+int sdlIsnanf(double x) {
+  final sdlIsnanfLookupFunction =
+      libSdl3.lookupFunction<Int32 Function(Float x), int Function(double x)>(
+          'SDL_isnanf');
+  return sdlIsnanfLookupFunction(x);
 }
 
 ///

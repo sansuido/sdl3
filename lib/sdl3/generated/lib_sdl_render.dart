@@ -1516,6 +1516,7 @@ Pointer<SdlTexture> sdlGetRenderTarget(Pointer<SdlRenderer> renderer) {
 ///
 /// \sa SDL_ConvertEventToRenderCoordinates
 /// \sa SDL_GetRenderLogicalPresentation
+/// \sa SDL_GetRenderLogicalPresentationRect
 ///
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_SetRenderLogicalPresentation(SDL_Renderer *renderer, int w, int h, SDL_RendererLogicalPresentation mode, SDL_ScaleMode scale_mode)
@@ -1569,6 +1570,37 @@ int sdlGetRenderLogicalPresentation(
           Pointer<Int32> scaleMode)>('SDL_GetRenderLogicalPresentation');
   return sdlGetRenderLogicalPresentationLookupFunction(
       renderer, w, h, mode, scaleMode);
+}
+
+///
+/// Get the final presentation rectangle for rendering.
+///
+/// This function returns the calculated rectangle used for logical
+/// presentation, based on the presentation mode and output size. If logical
+/// presentation is disabled, it will fill the rectangle with the output size,
+/// in pixels.
+///
+/// \param renderer the rendering context.
+/// \param rect a pointer filled in with the final presentation rectangle, may
+/// be NULL.
+/// \returns 0 on success or a negative error code on failure; call
+/// SDL_GetError() for more information.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_SetRenderLogicalPresentation
+///
+/// ```c
+/// extern SDL_DECLSPEC int SDLCALL SDL_GetRenderLogicalPresentationRect(SDL_Renderer *renderer, SDL_FRect *rect)
+/// ```
+int sdlGetRenderLogicalPresentationRect(
+    Pointer<SdlRenderer> renderer, Pointer<SdlFRect> rect) {
+  final sdlGetRenderLogicalPresentationRectLookupFunction =
+      libSdl3.lookupFunction<
+          Int32 Function(Pointer<SdlRenderer> renderer, Pointer<SdlFRect> rect),
+          int Function(Pointer<SdlRenderer> renderer,
+              Pointer<SdlFRect> rect)>('SDL_GetRenderLogicalPresentationRect');
+  return sdlGetRenderLogicalPresentationRectLookupFunction(renderer, rect);
 }
 
 ///
@@ -2499,89 +2531,6 @@ int sdlRenderGeometry(
 /// \param texture (optional) The SDL texture to use.
 /// \param xy vertex positions.
 /// \param xy_stride byte size to move from one element to the next element.
-/// \param color vertex colors (as SDL_Color).
-/// \param color_stride byte size to move from one element to the next element.
-/// \param uv vertex normalized texture coordinates.
-/// \param uv_stride byte size to move from one element to the next element.
-/// \param num_vertices number of vertices.
-/// \param indices (optional) An array of indices into the 'vertices' arrays,
-/// if NULL all vertices will be rendered in sequential order.
-/// \param num_indices number of indices.
-/// \param size_indices index size: 1 (byte), 2 (short), 4 (int).
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
-///
-/// \since This function is available since SDL 3.0.0.
-///
-/// \sa SDL_RenderGeometry
-///
-/// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_RenderGeometryRaw(SDL_Renderer *renderer, SDL_Texture *texture, const float *xy, int xy_stride, const SDL_Color *color, int color_stride, const float *uv, int uv_stride, int num_vertices, const void *indices, int num_indices, int size_indices)
-/// ```
-int sdlRenderGeometryRaw(
-    Pointer<SdlRenderer> renderer,
-    Pointer<SdlTexture> texture,
-    Pointer<Float> xy,
-    int xyStride,
-    Pointer<SdlColor> color,
-    int colorStride,
-    Pointer<Float> uv,
-    int uvStride,
-    int numVertices,
-    Pointer<NativeType> indices,
-    int numIndices,
-    int sizeIndices) {
-  final sdlRenderGeometryRawLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(
-          Pointer<SdlRenderer> renderer,
-          Pointer<SdlTexture> texture,
-          Pointer<Float> xy,
-          Int32 xyStride,
-          Pointer<SdlColor> color,
-          Int32 colorStride,
-          Pointer<Float> uv,
-          Int32 uvStride,
-          Int32 numVertices,
-          Pointer<NativeType> indices,
-          Int32 numIndices,
-          Int32 sizeIndices),
-      int Function(
-          Pointer<SdlRenderer> renderer,
-          Pointer<SdlTexture> texture,
-          Pointer<Float> xy,
-          int xyStride,
-          Pointer<SdlColor> color,
-          int colorStride,
-          Pointer<Float> uv,
-          int uvStride,
-          int numVertices,
-          Pointer<NativeType> indices,
-          int numIndices,
-          int sizeIndices)>('SDL_RenderGeometryRaw');
-  return sdlRenderGeometryRawLookupFunction(
-      renderer,
-      texture,
-      xy,
-      xyStride,
-      color,
-      colorStride,
-      uv,
-      uvStride,
-      numVertices,
-      indices,
-      numIndices,
-      sizeIndices);
-}
-
-///
-/// Render a list of triangles, optionally using a texture and indices into the
-/// vertex arrays Color and alpha modulation is done per vertex
-/// (SDL_SetTextureColorMod and SDL_SetTextureAlphaMod are ignored).
-///
-/// \param renderer the rendering context.
-/// \param texture (optional) The SDL texture to use.
-/// \param xy vertex positions.
-/// \param xy_stride byte size to move from one element to the next element.
 /// \param color vertex colors (as SDL_FColor).
 /// \param color_stride byte size to move from one element to the next element.
 /// \param uv vertex normalized texture coordinates.
@@ -2597,12 +2546,11 @@ int sdlRenderGeometryRaw(
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_RenderGeometry
-/// \sa SDL_RenderGeometryRaw
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_RenderGeometryRawFloat(SDL_Renderer *renderer, SDL_Texture *texture, const float *xy, int xy_stride, const SDL_FColor *color, int color_stride, const float *uv, int uv_stride, int num_vertices, const void *indices, int num_indices, int size_indices)
+/// extern SDL_DECLSPEC int SDLCALL SDL_RenderGeometryRaw(SDL_Renderer *renderer, SDL_Texture *texture, const float *xy, int xy_stride, const SDL_FColor *color, int color_stride, const float *uv, int uv_stride, int num_vertices, const void *indices, int num_indices, int size_indices)
 /// ```
-int sdlRenderGeometryRawFloat(
+int sdlRenderGeometryRaw(
     Pointer<SdlRenderer> renderer,
     Pointer<SdlTexture> texture,
     Pointer<Float> xy,
@@ -2615,7 +2563,7 @@ int sdlRenderGeometryRawFloat(
     Pointer<NativeType> indices,
     int numIndices,
     int sizeIndices) {
-  final sdlRenderGeometryRawFloatLookupFunction = libSdl3.lookupFunction<
+  final sdlRenderGeometryRawLookupFunction = libSdl3.lookupFunction<
       Int32 Function(
           Pointer<SdlRenderer> renderer,
           Pointer<SdlTexture> texture,
@@ -2641,8 +2589,8 @@ int sdlRenderGeometryRawFloat(
           int numVertices,
           Pointer<NativeType> indices,
           int numIndices,
-          int sizeIndices)>('SDL_RenderGeometryRawFloat');
-  return sdlRenderGeometryRawFloatLookupFunction(
+          int sizeIndices)>('SDL_RenderGeometryRaw');
+  return sdlRenderGeometryRawLookupFunction(
       renderer,
       texture,
       xy,

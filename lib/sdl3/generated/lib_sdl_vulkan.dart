@@ -153,7 +153,7 @@ Pointer<Pointer<Int8>> sdlVulkanGetInstanceExtensions(Pointer<Uint32> count) {
 /// allocator that creates the surface. Can be NULL.
 /// \param surface a pointer to a VkSurfaceKHR handle to output the newly
 /// created surface.
-/// \returns SDL_TRUE on success, SDL_FALSE on error.
+/// \returns 0 on success, -1 on error (check SDL_GetError() for specifics).
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -161,9 +161,9 @@ Pointer<Pointer<Int8>> sdlVulkanGetInstanceExtensions(Pointer<Uint32> count) {
 /// \sa SDL_Vulkan_DestroySurface
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_Vulkan_CreateSurface(SDL_Window *window, VkInstance instance, const struct VkAllocationCallbacks *allocator, VkSurfaceKHR* surface)
+/// extern SDL_DECLSPEC int SDLCALL SDL_Vulkan_CreateSurface(SDL_Window *window, VkInstance instance, const struct VkAllocationCallbacks *allocator, VkSurfaceKHR* surface)
 /// ```
-bool sdlVulkanCreateSurface(
+int sdlVulkanCreateSurface(
     Pointer<SdlWindow> window,
     Pointer<NativeType> instance,
     Pointer<Void> allocator,
@@ -177,8 +177,7 @@ bool sdlVulkanCreateSurface(
           Pointer<Void> allocator,
           Pointer<Void> surface)>('SDL_Vulkan_CreateSurface');
   return sdlVulkanCreateSurfaceLookupFunction(
-          window, instance, allocator, surface) ==
-      1;
+      window, instance, allocator, surface);
 }
 
 ///

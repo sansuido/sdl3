@@ -460,34 +460,40 @@ int sdlGetKeyFromName(String? name) {
 }
 
 ///
-/// Start accepting Unicode text input events.
+/// Start accepting Unicode text input events in a window.
 ///
-/// This function will start accepting Unicode text input events in the focused
-/// SDL window, and start emitting SDL_TextInputEvent (SDL_EVENT_TEXT_INPUT)
-/// and SDL_TextEditingEvent (SDL_EVENT_TEXT_EDITING) events. Please use this
-/// function in pair with SDL_StopTextInput().
+/// This function will enable text input (SDL_EVENT_TEXT_INPUT and
+/// SDL_EVENT_TEXT_EDITING events) in the specified window. Please use this
+/// function paired with SDL_StopTextInput().
 ///
 /// Text input events are not received by default.
 ///
-/// On some platforms using this function activates the screen keyboard.
+/// On some platforms using this function shows the screen keyboard.
+///
+/// \param window the window to enable text input.
+/// \returns 0 on success or a negative error code on failure; call
+/// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_SetTextInputRect
+/// \sa SDL_SetTextInputArea
 /// \sa SDL_StopTextInput
+/// \sa SDL_TextInputActive
 ///
 /// ```c
-/// extern SDL_DECLSPEC void SDLCALL SDL_StartTextInput(void)
+/// extern SDL_DECLSPEC int SDLCALL SDL_StartTextInput(SDL_Window *window)
 /// ```
-void sdlStartTextInput() {
-  final sdlStartTextInputLookupFunction = libSdl3
-      .lookupFunction<Void Function(), void Function()>('SDL_StartTextInput');
-  return sdlStartTextInputLookupFunction();
+int sdlStartTextInput(Pointer<SdlWindow> window) {
+  final sdlStartTextInputLookupFunction = libSdl3.lookupFunction<
+      Int32 Function(Pointer<SdlWindow> window),
+      int Function(Pointer<SdlWindow> window)>('SDL_StartTextInput');
+  return sdlStartTextInputLookupFunction(window);
 }
 
 ///
-/// Check whether or not Unicode text input events are enabled.
+/// Check whether or not Unicode text input events are enabled for a window.
 ///
+/// \param window the window to check.
 /// \returns SDL_TRUE if text input events are enabled else SDL_FALSE.
 ///
 /// \since This function is available since SDL 3.0.0.
@@ -495,65 +501,22 @@ void sdlStartTextInput() {
 /// \sa SDL_StartTextInput
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_TextInputActive(void)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_TextInputActive(SDL_Window *window)
 /// ```
-bool sdlTextInputActive() {
-  final sdlTextInputActiveLookupFunction = libSdl3
-      .lookupFunction<Int32 Function(), int Function()>('SDL_TextInputActive');
-  return sdlTextInputActiveLookupFunction() == 1;
+bool sdlTextInputActive(Pointer<SdlWindow> window) {
+  final sdlTextInputActiveLookupFunction = libSdl3.lookupFunction<
+      Int32 Function(Pointer<SdlWindow> window),
+      int Function(Pointer<SdlWindow> window)>('SDL_TextInputActive');
+  return sdlTextInputActiveLookupFunction(window) == 1;
 }
 
 ///
-/// Stop receiving any text input events.
+/// Stop receiving any text input events in a window.
 ///
-/// Text input events are not received by default.
+/// If SDL_StartTextInput() showed the screen keyboard, this function will hide
+/// it.
 ///
-/// \since This function is available since SDL 3.0.0.
-///
-/// \sa SDL_StartTextInput
-///
-/// ```c
-/// extern SDL_DECLSPEC void SDLCALL SDL_StopTextInput(void)
-/// ```
-void sdlStopTextInput() {
-  final sdlStopTextInputLookupFunction = libSdl3
-      .lookupFunction<Void Function(), void Function()>('SDL_StopTextInput');
-  return sdlStopTextInputLookupFunction();
-}
-
-///
-/// Dismiss the composition window/IME without disabling the subsystem.
-///
-/// \since This function is available since SDL 3.0.0.
-///
-/// \sa SDL_StartTextInput
-/// \sa SDL_StopTextInput
-///
-/// ```c
-/// extern SDL_DECLSPEC void SDLCALL SDL_ClearComposition(void)
-/// ```
-void sdlClearComposition() {
-  final sdlClearCompositionLookupFunction = libSdl3
-      .lookupFunction<Void Function(), void Function()>('SDL_ClearComposition');
-  return sdlClearCompositionLookupFunction();
-}
-
-///
-/// Set the rectangle used to type Unicode text inputs.
-///
-/// Native input methods will place a window with word suggestions near it,
-/// without covering the text being inputted.
-///
-/// To start text input in a given location, this function is intended to be
-/// called before SDL_StartTextInput, although some platforms support moving
-/// the rectangle even while text input (and a composition) is active.
-///
-/// Note: If you want to use the system native IME window, try setting hint
-/// **SDL_HINT_IME_SHOW_UI** to **1**, otherwise this function won't give you
-/// any feedback.
-///
-/// \param rect the SDL_Rect structure representing the rectangle to receive
-/// text (ignored if NULL).
+/// \param window the window to disable text input.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -562,13 +525,97 @@ void sdlClearComposition() {
 /// \sa SDL_StartTextInput
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_SetTextInputRect(const SDL_Rect *rect)
+/// extern SDL_DECLSPEC int SDLCALL SDL_StopTextInput(SDL_Window *window)
 /// ```
-int sdlSetTextInputRect(Pointer<SdlRect> rect) {
-  final sdlSetTextInputRectLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlRect> rect),
-      int Function(Pointer<SdlRect> rect)>('SDL_SetTextInputRect');
-  return sdlSetTextInputRectLookupFunction(rect);
+int sdlStopTextInput(Pointer<SdlWindow> window) {
+  final sdlStopTextInputLookupFunction = libSdl3.lookupFunction<
+      Int32 Function(Pointer<SdlWindow> window),
+      int Function(Pointer<SdlWindow> window)>('SDL_StopTextInput');
+  return sdlStopTextInputLookupFunction(window);
+}
+
+///
+/// Dismiss the composition window/IME without disabling the subsystem.
+///
+/// \param window the window to affect.
+/// \returns 0 on success or a negative error code on failure; call
+/// SDL_GetError() for more information.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_StartTextInput
+/// \sa SDL_StopTextInput
+///
+/// ```c
+/// extern SDL_DECLSPEC int SDLCALL SDL_ClearComposition(SDL_Window *window)
+/// ```
+int sdlClearComposition(Pointer<SdlWindow> window) {
+  final sdlClearCompositionLookupFunction = libSdl3.lookupFunction<
+      Int32 Function(Pointer<SdlWindow> window),
+      int Function(Pointer<SdlWindow> window)>('SDL_ClearComposition');
+  return sdlClearCompositionLookupFunction(window);
+}
+
+///
+/// Set the area used to type Unicode text input.
+///
+/// Native input methods may place a window with word suggestions near the
+/// cursor, without covering the text being entered.
+///
+/// \param window the window for which to set the text input area.
+/// \param rect the SDL_Rect representing the text input area, in window
+/// coordinates, or NULL to clear it.
+/// \param cursor the offset of the current cursor location relative to
+/// `rect->x`, in window coordinates.
+/// \returns 0 on success or a negative error code on failure; call
+/// SDL_GetError() for more information.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_GetTextInputArea
+/// \sa SDL_StartTextInput
+///
+/// ```c
+/// extern SDL_DECLSPEC int SDLCALL SDL_SetTextInputArea(SDL_Window *window, const SDL_Rect *rect, int cursor)
+/// ```
+int sdlSetTextInputArea(
+    Pointer<SdlWindow> window, Pointer<SdlRect> rect, int cursor) {
+  final sdlSetTextInputAreaLookupFunction = libSdl3.lookupFunction<
+      Int32 Function(
+          Pointer<SdlWindow> window, Pointer<SdlRect> rect, Int32 cursor),
+      int Function(Pointer<SdlWindow> window, Pointer<SdlRect> rect,
+          int cursor)>('SDL_SetTextInputArea');
+  return sdlSetTextInputAreaLookupFunction(window, rect, cursor);
+}
+
+///
+/// Get the area used to type Unicode text input.
+///
+/// This returns the values previously set by SDL_SetTextInputArea().
+///
+/// \param window the window for which to query the text input area.
+/// \param rect a pointer to an SDL_Rect filled in with the text input area,
+/// may be NULL.
+/// \param cursor a pointer to the offset of the current cursor location
+/// relative to `rect->x`, may be NULL.
+/// \returns 0 on success or a negative error code on failure; call
+/// SDL_GetError() for more information.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_SetTextInputArea
+///
+/// ```c
+/// extern SDL_DECLSPEC int SDLCALL SDL_GetTextInputArea(SDL_Window *window, SDL_Rect *rect, int *cursor)
+/// ```
+int sdlGetTextInputArea(
+    Pointer<SdlWindow> window, Pointer<SdlRect> rect, Pointer<Int32> cursor) {
+  final sdlGetTextInputAreaLookupFunction = libSdl3.lookupFunction<
+      Int32 Function(Pointer<SdlWindow> window, Pointer<SdlRect> rect,
+          Pointer<Int32> cursor),
+      int Function(Pointer<SdlWindow> window, Pointer<SdlRect> rect,
+          Pointer<Int32> cursor)>('SDL_GetTextInputArea');
+  return sdlGetTextInputAreaLookupFunction(window, rect, cursor);
 }
 
 ///

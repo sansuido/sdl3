@@ -1816,7 +1816,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
       Pointer<SdlTexture> texture,
       Pointer<Float> xy,
       int xyStride,
-      Pointer<SdlColor> color,
+      Pointer<SdlFColor> color,
       int colorStride,
       Pointer<Float> uv,
       int uvStride,
@@ -1826,62 +1826,6 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
       int sizeIndices) {
     return sdlRenderGeometryRaw(this, texture, xy, xyStride, color, colorStride,
         uv, uvStride, numVertices, indices, numIndices, sizeIndices);
-  }
-
-  ///
-  /// Render a list of triangles, optionally using a texture and indices into the
-  /// vertex arrays Color and alpha modulation is done per vertex
-  /// (SDL_SetTextureColorMod and SDL_SetTextureAlphaMod are ignored).
-  ///
-  /// \param renderer The rendering context.
-  /// \param texture (optional) The SDL texture to use.
-  /// \param xy Vertex positions
-  /// \param xy_stride Byte size to move from one element to the next element
-  /// \param color Vertex colors (as SDL_FColor)
-  /// \param color_stride Byte size to move from one element to the next element
-  /// \param uv Vertex normalized texture coordinates
-  /// \param uv_stride Byte size to move from one element to the next element
-  /// \param num_vertices Number of vertices.
-  /// \param indices (optional) An array of indices into the 'vertices' arrays,
-  /// if NULL all vertices will be rendered in sequential order.
-  /// \param num_indices Number of indices.
-  /// \param size_indices Index size: 1 (byte), 2 (short), 4 (int)
-  /// \returns 0 on success or a negative error code on failure; call
-  /// SDL_GetError() for more information.
-  ///
-  /// \since This function is available since SDL 3.0.0.
-  ///
-  /// \sa SDL_RenderGeometry
-  /// \sa SDL_Vertex
-  ///
-  /// ```c
-  /// extern DECLSPEC int SDLCALL SDL_RenderGeometryRawFloat(SDL_Renderer *renderer, SDL_Texture *texture, const float *xy, int xy_stride, const SDL_FColor *color, int color_stride, const float *uv, int uv_stride, int num_vertices, const void *indices, int num_indices, int size_indices)
-  /// ```
-  int geometryRawFloat(
-      Pointer<SdlTexture> texture,
-      Pointer<Float> xy,
-      int xyStride,
-      Pointer<SdlFColor> color,
-      int colorStride,
-      Pointer<Float> uv,
-      int uvStride,
-      int numVertices,
-      Pointer<NativeType> indices,
-      int numIndices,
-      int sizeIndices) {
-    return sdlRenderGeometryRawFloat(
-        this,
-        texture,
-        xy,
-        xyStride,
-        color,
-        colorStride,
-        uv,
-        uvStride,
-        numVertices,
-        indices,
-        numIndices,
-        sizeIndices);
   }
 
   Pointer<SdlSurface> readPixels(math.Rectangle<double> rect) {
