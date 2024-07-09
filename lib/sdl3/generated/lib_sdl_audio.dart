@@ -446,6 +446,78 @@ bool sdlAudioDevicePaused(int dev) {
 }
 
 ///
+/// Get the gain of an audio device.
+///
+/// The gain of a device is its volume; a larger gain means a louder output,
+/// with a gain of zero being silence.
+///
+/// Audio devices default to a gain of 1.0f (no change in output).
+///
+/// Physical devices may not have their gain changed, only logical devices, and
+/// this function will always return -1.0f when used on physical devices.
+///
+/// \param devid the audio device to query.
+/// \returns the gain of the device, or -1.0f on error.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_SetAudioDeviceGain
+///
+/// ```c
+/// extern SDL_DECLSPEC float SDLCALL SDL_GetAudioDeviceGain(SDL_AudioDeviceID devid)
+/// ```
+double sdlGetAudioDeviceGain(int devid) {
+  final sdlGetAudioDeviceGainLookupFunction = libSdl3.lookupFunction<
+      Float Function(Uint32 devid),
+      double Function(int devid)>('SDL_GetAudioDeviceGain');
+  return sdlGetAudioDeviceGainLookupFunction(devid);
+}
+
+///
+/// Change the gain of an audio device.
+///
+/// The gain of a device is its volume; a larger gain means a louder output,
+/// with a gain of zero being silence.
+///
+/// Audio devices default to a gain of 1.0f (no change in output).
+///
+/// Physical devices may not have their gain changed, only logical devices, and
+/// this function will always return -1 when used on physical devices. While it
+/// might seem attractive to adjust several logical devices at once in this
+/// way, it would allow an app or library to interfere with another portion of
+/// the program's otherwise-isolated devices.
+///
+/// This is applied, along with any per-audiostream gain, during playback to
+/// the hardware, and can be continuously changed to create various effects. On
+/// recording devices, this will adjust the gain before passing the data into
+/// an audiostream; that recording audiostream can then adjust its gain further
+/// when outputting the data elsewhere, if it likes, but that second gain is
+/// not applied until the data leaves the audiostream again.
+///
+/// \param devid the audio device on which to change gain.
+/// \param gain the gain. 1.0f is no change, 0.0f is silence.
+/// \returns 0 on success, or -1 on error.
+///
+/// \threadsafety It is safe to call this function from any thread, as it holds
+/// a stream-specific mutex while running.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_GetAudioDeviceGain
+///
+/// ```c
+/// extern SDL_DECLSPEC int SDLCALL SDL_SetAudioDeviceGain(SDL_AudioDeviceID devid, float gain)
+/// ```
+int sdlSetAudioDeviceGain(int devid, double gain) {
+  final sdlSetAudioDeviceGainLookupFunction = libSdl3.lookupFunction<
+      Int32 Function(Uint32 devid, Float gain),
+      int Function(int devid, double gain)>('SDL_SetAudioDeviceGain');
+  return sdlSetAudioDeviceGainLookupFunction(devid, gain);
+}
+
+///
 /// Close a previously-opened audio device.
 ///
 /// The application should close open audio devices once they are no longer
@@ -821,6 +893,68 @@ int sdlSetAudioStreamFrequencyRatio(
       int Function(Pointer<SdlAudioStream> stream,
           double ratio)>('SDL_SetAudioStreamFrequencyRatio');
   return sdlSetAudioStreamFrequencyRatioLookupFunction(stream, ratio);
+}
+
+///
+/// Get the gain of an audio stream.
+///
+/// The gain of a stream is its volume; a larger gain means a louder output,
+/// with a gain of zero being silence.
+///
+/// Audio streams default to a gain of 1.0f (no change in output).
+///
+/// \param stream the SDL_AudioStream to query.
+/// \returns the gain of the stream, or -1.0f on error.
+///
+/// \threadsafety It is safe to call this function from any thread, as it holds
+/// a stream-specific mutex while running.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_SetAudioStreamGain
+///
+/// ```c
+/// extern SDL_DECLSPEC float SDLCALL SDL_GetAudioStreamGain(SDL_AudioStream *stream)
+/// ```
+double sdlGetAudioStreamGain(Pointer<SdlAudioStream> stream) {
+  final sdlGetAudioStreamGainLookupFunction = libSdl3.lookupFunction<
+      Float Function(Pointer<SdlAudioStream> stream),
+      double Function(
+          Pointer<SdlAudioStream> stream)>('SDL_GetAudioStreamGain');
+  return sdlGetAudioStreamGainLookupFunction(stream);
+}
+
+///
+/// Change the gain of an audio stream.
+///
+/// The gain of a stream is its volume; a larger gain means a louder output,
+/// with a gain of zero being silence.
+///
+/// Audio streams default to a gain of 1.0f (no change in output).
+///
+/// This is applied during SDL_GetAudioStreamData, and can be continuously
+/// changed to create various effects.
+///
+/// \param stream the stream on which the gain is being changed.
+/// \param gain the gain. 1.0f is no change, 0.0f is silence.
+/// \returns 0 on success, or -1 on error.
+///
+/// \threadsafety It is safe to call this function from any thread, as it holds
+/// a stream-specific mutex while running.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_GetAudioStreamGain
+///
+/// ```c
+/// extern SDL_DECLSPEC int SDLCALL SDL_SetAudioStreamGain(SDL_AudioStream *stream, float gain)
+/// ```
+int sdlSetAudioStreamGain(Pointer<SdlAudioStream> stream, double gain) {
+  final sdlSetAudioStreamGainLookupFunction = libSdl3.lookupFunction<
+      Int32 Function(Pointer<SdlAudioStream> stream, Float gain),
+      int Function(Pointer<SdlAudioStream> stream,
+          double gain)>('SDL_SetAudioStreamGain');
+  return sdlSetAudioStreamGainLookupFunction(stream, gain);
 }
 
 ///

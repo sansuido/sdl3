@@ -2708,10 +2708,10 @@ void sdlDestroyTexture(Pointer<SdlTexture> texture) {
 }
 
 ///
-/// Destroy the rendering context for a window and free associated textures.
+/// Destroy the rendering context for a window and free all associated
+/// textures.
 ///
-/// If `renderer` is NULL, this function will return immediately after setting
-/// the SDL error message to "Invalid renderer". See SDL_GetError().
+/// This should be called before destroying the associated window.
 ///
 /// \param renderer the rendering context.
 ///

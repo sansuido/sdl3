@@ -50,9 +50,42 @@ final class SdlAudioSpec extends Struct {
   // [8]+(4)
   @Int32()
   external int freq;
-  // [] +(4)
-  @Uint32()
-  external int blank_2;
+  // [12]+(4)
+  @Int32()
+  external int useChannelMap;
+  // [16]+(1*16)
+  @Uint8()
+  external int channelMap_1;
+  @Uint8()
+  external int channelMap_2;
+  @Uint8()
+  external int channelMap_3;
+  @Uint8()
+  external int channelMap_4;
+  @Uint8()
+  external int channelMap_5;
+  @Uint8()
+  external int channelMap_6;
+  @Uint8()
+  external int channelMap_7;
+  @Uint8()
+  external int channelMap_8;
+  @Uint8()
+  external int channelMap_9;
+  @Uint8()
+  external int channelMap_10;
+  @Uint8()
+  external int channelMap_11;
+  @Uint8()
+  external int channelMap_12;
+  @Uint8()
+  external int channelMap_13;
+  @Uint8()
+  external int channelMap_14;
+  @Uint8()
+  external int channelMap_15;
+  @Uint8()
+  external int channelMap_16;
 }
 
 // SDL_AudioStream
@@ -2043,16 +2076,16 @@ final class SdlPixelFormat extends Struct {
   external int amask;
   // [36]+(1)
   @Uint8()
-  external int rloss;
+  external int rbits;
   // [37]+(1)
   @Uint8()
-  external int gloss;
+  external int gbits;
   // [38]+(1)
   @Uint8()
-  external int bloss;
+  external int bbits;
   // [39]+(1)
   @Uint8()
-  external int aloss;
+  external int abits;
   // [40]+(1)
   @Uint8()
   external int rshift;

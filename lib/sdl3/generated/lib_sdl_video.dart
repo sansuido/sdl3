@@ -1848,7 +1848,14 @@ int sdlHideWindow(Pointer<SdlWindow> window) {
 }
 
 ///
-/// Raise a window above other windows and set the input focus.
+/// Request that a window be raised above other windows and gain the input
+/// focus.
+///
+/// The result of this request is subject to desktop window manager policy,
+/// particularly if raising the requested window would result in stealing focus
+/// from another application. If the window is successfully raised and gains
+/// input focus, an SDL_EVENT_WINDOW_FOCUS_GAINED event will be emitted, and
+/// the window will have the SDL_WINDOW_INPUT_FOCUS flag set.
 ///
 /// \param window the window to raise.
 /// \returns 0 on success or a negative error code on failure; call
@@ -2514,31 +2521,6 @@ int sdlSetWindowModalFor(
 }
 
 ///
-/// Explicitly set input focus to the window.
-///
-/// You almost certainly want SDL_RaiseWindow() instead of this function. Use
-/// this with caution, as you might give focus to a window that is completely
-/// obscured by other windows.
-///
-/// \param window the window that should get the input focus.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
-///
-/// \since This function is available since SDL 3.0.0.
-///
-/// \sa SDL_RaiseWindow
-///
-/// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_SetWindowInputFocus(SDL_Window *window)
-/// ```
-int sdlSetWindowInputFocus(Pointer<SdlWindow> window) {
-  final sdlSetWindowInputFocusLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlWindow> window),
-      int Function(Pointer<SdlWindow> window)>('SDL_SetWindowInputFocus');
-  return sdlSetWindowInputFocusLookupFunction(window);
-}
-
-///
 /// Set whether the window may have input focus.
 ///
 /// \param window the window to set focusable state.
@@ -2710,9 +2692,6 @@ int sdlFlashWindow(Pointer<SdlWindow> window, int operation) {
 ///
 /// Any popups or modal windows owned by the window will be recursively
 /// destroyed as well.
-///
-/// If `window` is NULL, this function will return immediately after setting
-/// the SDL error message to "Invalid window". See SDL_GetError().
 ///
 /// \param window the window to destroy.
 ///
