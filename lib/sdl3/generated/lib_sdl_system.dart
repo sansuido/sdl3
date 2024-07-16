@@ -410,13 +410,17 @@ void sdlAndroidBackButton() {
 }
 
 ///
-/// Get the path used for internal storage for this application.
+/// Get the path used for internal storage for this Android application.
 ///
 /// This path is unique to your application and cannot be written to by other
 /// applications.
 ///
 /// Your internal storage path is typically:
 /// `/data/data/your.app.package/files`.
+///
+/// This is a C wrapper over `android.content.Context.getFilesDir()`:
+///
+/// https://developer.android.com/reference/android/content/Context#getFilesDir()
 ///
 /// The returned string follows the SDL_GetStringRule.
 ///
@@ -442,7 +446,7 @@ String? sdlAndroidGetInternalStoragePath() {
 }
 
 ///
-/// Get the current state of external storage.
+/// Get the current state of external storage for this Android application.
 ///
 /// The current state of external storage, a bitmask of these values:
 /// `SDL_ANDROID_EXTERNAL_STORAGE_READ`, `SDL_ANDROID_EXTERNAL_STORAGE_WRITE`.
@@ -471,13 +475,17 @@ int sdlAndroidGetExternalStorageState(Pointer<Uint32> state) {
 }
 
 ///
-/// Get the path used for external storage for this application.
+/// Get the path used for external storage for this Android application.
 ///
 /// This path is unique to your application, but is public and can be written
 /// to by other applications.
 ///
 /// Your external storage path is typically:
 /// `/storage/sdcard0/Android/data/your.app.package/files`.
+///
+/// This is a C wrapper over `android.content.Context.getExternalFilesDir()`:
+///
+/// https://developer.android.com/reference/android/content/Context#getExternalFilesDir()
 ///
 /// The returned string follows the SDL_GetStringRule.
 ///
@@ -496,6 +504,39 @@ String? sdlAndroidGetExternalStoragePath() {
       Pointer<Utf8> Function(),
       Pointer<Utf8> Function()>('SDL_AndroidGetExternalStoragePath');
   final result = sdlAndroidGetExternalStoragePathLookupFunction();
+  if (result == nullptr) {
+    return null;
+  }
+  return result.toDartString();
+}
+
+///
+/// Get the path used for caching data for this Android application.
+///
+/// This path is unique to your application, but is public and can be written
+/// to by other applications.
+///
+/// Your cache path is typically: `/data/data/your.app.package/cache/`.
+///
+/// This is a C wrapper over `android.content.Context.getCacheDir()`:
+///
+/// https://developer.android.com/reference/android/content/Context#getCacheDir()
+///
+/// The returned string follows the SDL_GetStringRule.
+///
+/// \returns the path used for caches for this application on success or NULL
+/// on failure; call SDL_GetError() for more information.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC const char * SDLCALL SDL_AndroidGetCachePath(void)
+/// ```
+String? sdlAndroidGetCachePath() {
+  final sdlAndroidGetCachePathLookupFunction = libSdl3.lookupFunction<
+      Pointer<Utf8> Function(),
+      Pointer<Utf8> Function()>('SDL_AndroidGetCachePath');
+  final result = sdlAndroidGetCachePathLookupFunction();
   if (result == nullptr) {
     return null;
   }

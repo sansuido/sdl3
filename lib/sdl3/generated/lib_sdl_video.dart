@@ -169,9 +169,6 @@ int sdlGetPrimaryDisplay() {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_GetProperty
-/// \sa SDL_SetProperty
-///
 /// ```c
 /// extern SDL_DECLSPEC SDL_PropertiesID SDLCALL SDL_GetDisplayProperties(SDL_DisplayID displayID)
 /// ```
@@ -1178,9 +1175,6 @@ Pointer<SdlWindow> sdlGetWindowParent(Pointer<SdlWindow> window) {
 /// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
-///
-/// \sa SDL_GetProperty
-/// \sa SDL_GetNumberProperty
 ///
 /// ```c
 /// extern SDL_DECLSPEC SDL_PropertiesID SDLCALL SDL_GetWindowProperties(SDL_Window *window)
@@ -3048,7 +3042,7 @@ int sdlGlGetAttribute(int attr, Pointer<Int32> value) {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_GL_DeleteContext
+/// \sa SDL_GL_DestroyContext
 /// \sa SDL_GL_MakeCurrent
 ///
 /// ```c
@@ -3329,11 +3323,11 @@ int sdlGlSwapWindow(Pointer<SdlWindow> window) {
 /// \sa SDL_GL_CreateContext
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_GL_DeleteContext(SDL_GLContext context)
+/// extern SDL_DECLSPEC int SDLCALL SDL_GL_DestroyContext(SDL_GLContext context)
 /// ```
-int sdlGlDeleteContext(Pointer<SdlGlContext> context) {
-  final sdlGlDeleteContextLookupFunction = libSdl3.lookupFunction<
+int sdlGlDestroyContext(Pointer<SdlGlContext> context) {
+  final sdlGlDestroyContextLookupFunction = libSdl3.lookupFunction<
       Int32 Function(Pointer<SdlGlContext> context),
-      int Function(Pointer<SdlGlContext> context)>('SDL_GL_DeleteContext');
-  return sdlGlDeleteContextLookupFunction(context);
+      int Function(Pointer<SdlGlContext> context)>('SDL_GL_DestroyContext');
+  return sdlGlDestroyContextLookupFunction(context);
 }

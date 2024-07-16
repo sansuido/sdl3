@@ -50,42 +50,9 @@ final class SdlAudioSpec extends Struct {
   // [8]+(4)
   @Int32()
   external int freq;
-  // [12]+(4)
-  @Int32()
-  external int useChannelMap;
-  // [16]+(1*16)
-  @Uint8()
-  external int channelMap_1;
-  @Uint8()
-  external int channelMap_2;
-  @Uint8()
-  external int channelMap_3;
-  @Uint8()
-  external int channelMap_4;
-  @Uint8()
-  external int channelMap_5;
-  @Uint8()
-  external int channelMap_6;
-  @Uint8()
-  external int channelMap_7;
-  @Uint8()
-  external int channelMap_8;
-  @Uint8()
-  external int channelMap_9;
-  @Uint8()
-  external int channelMap_10;
-  @Uint8()
-  external int channelMap_11;
-  @Uint8()
-  external int channelMap_12;
-  @Uint8()
-  external int channelMap_13;
-  @Uint8()
-  external int channelMap_14;
-  @Uint8()
-  external int channelMap_15;
-  @Uint8()
-  external int channelMap_16;
+  // [] +(4)
+  @Uint32()
+  external int blank_2;
 }
 
 // SDL_AudioStream
@@ -154,6 +121,12 @@ final class SdlDisplayEvent extends Struct {
   // [20]+(4)
   @Int32()
   external int data1;
+  // [24]+(4)
+  @Int32()
+  external int data2;
+  // [] +(4)
+  @Uint32()
+  external int blank_1;
 }
 
 // SDL_WindowEvent
@@ -2041,68 +2014,58 @@ final class SdlPalette extends Struct {
   external int refcount;
 }
 
-// SDL_PixelFormat
-final class SdlPixelFormat extends Struct {
+// SDL_PixelFormatDetails
+final class SdlPixelFormatDetails extends Struct {
   // [0]+(4)
   @Int32()
   external int format;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
-  // [8]+(8)
-  external Pointer<SdlPalette> palette;
-  // [16]+(1)
+  // [4]+(1)
   @Uint8()
   external int bitsPerPixel;
-  // [17]+(1)
+  // [5]+(1)
   @Uint8()
   external int bytesPerPixel;
-  // [18]+(1*2)
+  // [6]+(1*2)
   @Uint8()
   external int padding_1;
   @Uint8()
   external int padding_2;
-  // [20]+(4)
+  // [8]+(4)
   @Uint32()
   external int rmask;
-  // [24]+(4)
+  // [12]+(4)
   @Uint32()
   external int gmask;
-  // [28]+(4)
+  // [16]+(4)
   @Uint32()
   external int bmask;
-  // [32]+(4)
+  // [20]+(4)
   @Uint32()
   external int amask;
-  // [36]+(1)
+  // [24]+(1)
   @Uint8()
   external int rbits;
-  // [37]+(1)
+  // [25]+(1)
   @Uint8()
   external int gbits;
-  // [38]+(1)
+  // [26]+(1)
   @Uint8()
   external int bbits;
-  // [39]+(1)
+  // [27]+(1)
   @Uint8()
   external int abits;
-  // [40]+(1)
+  // [28]+(1)
   @Uint8()
   external int rshift;
-  // [41]+(1)
+  // [29]+(1)
   @Uint8()
   external int gshift;
-  // [42]+(1)
+  // [30]+(1)
   @Uint8()
   external int bshift;
-  // [43]+(1)
+  // [31]+(1)
   @Uint8()
   external int ashift;
-  // [44]+(4)
-  @Int32()
-  external int refcount;
-  // [48]+(8)
-  external Pointer<SdlPixelFormat> next;
 }
 
 // SDL_Point
@@ -2217,60 +2180,39 @@ final class SdlStorageInterface extends Struct {
 // SDL_Storage
 final class SdlStorage extends Opaque {}
 
-// SDL_BlitMap
-final class SdlBlitMap extends Opaque {}
+// SDL_SurfaceData
+final class SdlSurfaceData extends Opaque {}
 
 // SDL_Surface
 final class SdlSurface extends Struct {
   // [0]+(4)
   @Uint32()
   external int flags;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
-  // [8]+(8)
-  external Pointer<SdlPixelFormat> format;
-  // [16]+(4)
+  // [4]+(4)
+  @Int32()
+  external int format;
+  // [8]+(4)
   @Int32()
   external int w;
-  // [20]+(4)
+  // [12]+(4)
   @Int32()
   external int h;
-  // [24]+(4)
+  // [16]+(4)
   @Int32()
   external int pitch;
   // [] +(4)
   @Uint32()
-  external int blank_2;
-  // [32]+(8)
+  external int blank_1;
+  // [24]+(8)
   external Pointer<NativeType> pixels;
-  // [40]+(8)
-  external Pointer<NativeType> reserved;
-  // [48]+(4)
-  @Int32()
-  external int locked;
-  // [] +(4)
-  @Uint32()
-  external int blank_3;
-  // [56]+(8)
-  external Pointer<NativeType> listBlitmap;
-  // [64]+(16)
-  @Uint64()
-  external int clipRect_1;
-  @Uint64()
-  external int clipRect_2;
-  // [80]+(8)
-  external Pointer<Void> map;
-  // [88]+(4)
+  // [32]+(4)
   @Int32()
   external int refcount;
   // [] +(4)
   @Uint32()
-  external int blank_4;
-}
-
-extension SdlSurfaceExtension on Pointer<SdlSurface> {
-  Pointer<SdlRect> get clipRect => (cast<Uint8>() + 64).cast<SdlRect>();
+  external int blank_2;
+  // [40]+(8)
+  external Pointer<SdlSurfaceData> internal;
 }
 
 // MSG
@@ -2361,7 +2303,13 @@ final class SdlDisplayMode extends Struct {
   // [20]+(4)
   @Float()
   external double refreshRate;
-  // [24]+(8)
+  // [24]+(4)
+  @Int32()
+  external int refreshRateNumerator;
+  // [28]+(4)
+  @Int32()
+  external int refreshRateDenominator;
+  // [32]+(8)
   external Pointer<NativeType> driverdata;
 }
 

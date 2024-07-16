@@ -1176,7 +1176,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
-  /// \sa SDL_GL_DeleteContext
+  /// \sa SDL_GL_DestroyContext
   /// \sa SDL_GL_MakeCurrent
   ///
   /// ```c

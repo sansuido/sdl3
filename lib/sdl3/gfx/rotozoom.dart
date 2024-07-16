@@ -30,6 +30,7 @@ Andreas Schiffler -- aschiffler at ferzkopp dot net
 import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 
+import '../generated/lib_sdl_pixels.dart';
 import '../generated/lib_sdl_stdinc.dart';
 import '../generated/lib_sdl_surface.dart';
 import '../generated/struct_sdl.dart';
@@ -53,14 +54,18 @@ Pointer<SdlSurface> rotateSurface90Degrees(
   int bpp, bpr;
   Pointer<SdlSurface> dst;
   int normalizedClockwiseTurns;
-
   /* Has to be a valid surface pointer and be a Nbit surface where n is divisible by 8 */
-  if (src == nullptr || src.ref.format == nullptr) {
-    print('NULL source surface or source surface format');
+  if (src == nullptr) {
+    print('NULL source surface');
     return nullptr;
   }
-
-  if ((src.ref.format.ref.bitsPerPixel % 8) != 0) {
+  var details = sdlGetPixelFormatDetails(src.ref.format);
+  if (details == nullptr) {
+    print('NULL source surface format');
+    return nullptr;
+  }
+  if ((details.ref.bitsPerPixel % 8) != 0) {
+//  if ((src.ref.format.ref.bitsPerPixel % 8) != 0) {
     print('Invalid source surface bit depth');
     return nullptr;
   }
@@ -102,7 +107,8 @@ Pointer<SdlSurface> rotateSurface90Degrees(
   //}
 
   /* Calculate byte-per-pixel */
-  bpp = src.ref.format.ref.bitsPerPixel ~/ 8;
+  bpp = details.ref.bitsPerPixel ~/ 8;
+//  bpp = src.ref.format.ref.bitsPerPixel ~/ 8;
 
   Pointer<Pointer<Uint8>> srcBuf = calloc<Pointer<Uint8>>();
   Pointer<Pointer<Uint8>> dstBuf = calloc<Pointer<Uint8>>();

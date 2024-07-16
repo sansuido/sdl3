@@ -5,11 +5,11 @@ import 'lib_sdl.dart';
 import 'struct_sdl.dart';
 
 ///
-/// Allocate a new RGB surface with a specific pixel format.
+/// Allocate a new surface with a specific pixel format.
 ///
 /// \param width the width of the surface.
 /// \param height the height of the surface.
-/// \param format the SDL_PixelFormatEnum for the new surface's pixel format.
+/// \param format the SDL_PixelFormat for the new surface's pixel format.
 /// \returns the new SDL_Surface structure that is created or NULL if it fails;
 /// call SDL_GetError() for more information.
 ///
@@ -19,7 +19,7 @@ import 'struct_sdl.dart';
 /// \sa SDL_DestroySurface
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_Surface *SDLCALL SDL_CreateSurface(int width, int height, SDL_PixelFormatEnum format)
+/// extern SDL_DECLSPEC SDL_Surface *SDLCALL SDL_CreateSurface(int width, int height, SDL_PixelFormat format)
 /// ```
 Pointer<SdlSurface> sdlCreateSurface(int width, int height, int format) {
   final sdlCreateSurfaceLookupFunction = libSdl3.lookupFunction<
@@ -30,7 +30,7 @@ Pointer<SdlSurface> sdlCreateSurface(int width, int height, int format) {
 }
 
 ///
-/// Allocate a new RGB surface with a specific pixel format and existing pixel
+/// Allocate a new surface with a specific pixel format and existing pixel
 /// data.
 ///
 /// No copy is made of the pixel data. Pixel data is not managed automatically;
@@ -42,11 +42,11 @@ Pointer<SdlSurface> sdlCreateSurface(int width, int height, int format) {
 /// You may pass NULL for pixels and 0 for pitch to create a surface that you
 /// will fill in with valid values later.
 ///
-/// \param pixels a pointer to existing pixel data.
 /// \param width the width of the surface.
 /// \param height the height of the surface.
+/// \param format the SDL_PixelFormat for the new surface's pixel format.
+/// \param pixels a pointer to existing pixel data.
 /// \param pitch the number of bytes between each row, including padding.
-/// \param format the SDL_PixelFormatEnum for the new surface's pixel format.
 /// \returns the new SDL_Surface structure that is created or NULL if it fails;
 /// call SDL_GetError() for more information.
 ///
@@ -56,21 +56,21 @@ Pointer<SdlSurface> sdlCreateSurface(int width, int height, int format) {
 /// \sa SDL_DestroySurface
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_Surface *SDLCALL SDL_CreateSurfaceFrom(void *pixels, int width, int height, int pitch, SDL_PixelFormatEnum format)
+/// extern SDL_DECLSPEC SDL_Surface *SDLCALL SDL_CreateSurfaceFrom(int width, int height, SDL_PixelFormat format, void *pixels, int pitch)
 /// ```
 Pointer<SdlSurface> sdlCreateSurfaceFrom(
-    Pointer<NativeType> pixels, int width, int height, int pitch, int format) {
+    int width, int height, int format, Pointer<NativeType> pixels, int pitch) {
   final sdlCreateSurfaceFromLookupFunction = libSdl3.lookupFunction<
-      Pointer<SdlSurface> Function(Pointer<NativeType> pixels, Int32 width,
-          Int32 height, Int32 pitch, Int32 format),
-      Pointer<SdlSurface> Function(Pointer<NativeType> pixels, int width,
-          int height, int pitch, int format)>('SDL_CreateSurfaceFrom');
+      Pointer<SdlSurface> Function(Int32 width, Int32 height, Int32 format,
+          Pointer<NativeType> pixels, Int32 pitch),
+      Pointer<SdlSurface> Function(int width, int height, int format,
+          Pointer<NativeType> pixels, int pitch)>('SDL_CreateSurfaceFrom');
   return sdlCreateSurfaceFromLookupFunction(
-      pixels, width, height, pitch, format);
+      width, height, format, pixels, pitch);
 }
 
 ///
-/// Free an RGB surface.
+/// Free a surface.
 ///
 /// It is safe to pass NULL to this function.
 ///
@@ -78,6 +78,7 @@ Pointer<SdlSurface> sdlCreateSurfaceFrom(
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
+/// \sa SDL_CreateStackSurface
 /// \sa SDL_CreateSurface
 /// \sa SDL_CreateSurfaceFrom
 ///
@@ -122,9 +123,6 @@ void sdlDestroySurface(Pointer<SdlSurface> surface) {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_GetProperty
-/// \sa SDL_SetProperty
-///
 /// ```c
 /// extern SDL_DECLSPEC SDL_PropertiesID SDLCALL SDL_GetSurfaceProperties(SDL_Surface *surface)
 /// ```
@@ -149,6 +147,8 @@ int sdlGetSurfaceProperties(Pointer<SdlSurface> surface) {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
+/// \sa SDL_GetSurfaceColorspace
+///
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_SetSurfaceColorspace(SDL_Surface *surface, SDL_Colorspace colorspace)
 /// ```
@@ -168,23 +168,58 @@ int sdlSetSurfaceColorspace(Pointer<SdlSurface> surface, int colorspace) {
 /// other RGB surfaces and SDL_COLORSPACE_BT709_FULL for YUV textures.
 ///
 /// \param surface the SDL_Surface structure to query.
-/// \param colorspace a pointer filled in with an SDL_ColorSpace value
-/// describing the surface colorspace.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns the colorspace used by the surface, or SDL_COLORSPACE_UNKNOWN if
+/// the surface is NULL.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
+/// \sa SDL_SetSurfaceColorspace
+///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_GetSurfaceColorspace(SDL_Surface *surface, SDL_Colorspace *colorspace)
+/// extern SDL_DECLSPEC SDL_Colorspace SDLCALL SDL_GetSurfaceColorspace(SDL_Surface *surface)
 /// ```
-int sdlGetSurfaceColorspace(
-    Pointer<SdlSurface> surface, Pointer<Int32> colorspace) {
+int sdlGetSurfaceColorspace(Pointer<SdlSurface> surface) {
   final sdlGetSurfaceColorspaceLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlSurface> surface, Pointer<Int32> colorspace),
-      int Function(Pointer<SdlSurface> surface,
-          Pointer<Int32> colorspace)>('SDL_GetSurfaceColorspace');
-  return sdlGetSurfaceColorspaceLookupFunction(surface, colorspace);
+      Int32 Function(Pointer<SdlSurface> surface),
+      int Function(Pointer<SdlSurface> surface)>('SDL_GetSurfaceColorspace');
+  return sdlGetSurfaceColorspaceLookupFunction(surface);
+}
+
+///
+/// Create a palette and associate it with a surface.
+///
+/// This function creates a palette compatible with the provided surface. The
+/// palette is then returned for you to modify, and the surface will
+/// automatically use the new palette in future operations. You do not need to
+/// destroy the returned palette, it will be freed when the reference count
+/// reaches 0, usually when the surface is destroyed.
+///
+/// Bitmap surfaces (with format SDL_PIXELFORMAT_INDEX1LSB or
+/// SDL_PIXELFORMAT_INDEX1MSB) will have the palette initialized with 0 as
+/// white and 1 as black. Other surfaces will get a palette initialized with
+/// white in every entry.
+///
+/// If this function is called for a surface that already has a palette, a new
+/// palette will be created to replace it.
+///
+/// \param surface the SDL_Surface structure to update.
+/// \returns a new SDL_Palette structure on success or NULL on failure (e.g. if
+/// the surface didn't have an index format); call SDL_GetError() for
+/// more information.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_SetPaletteColors
+///
+/// ```c
+/// extern SDL_DECLSPEC SDL_Palette * SDLCALL SDL_CreateSurfacePalette(SDL_Surface *surface)
+/// ```
+Pointer<SdlPalette> sdlCreateSurfacePalette(Pointer<SdlSurface> surface) {
+  final sdlCreateSurfacePaletteLookupFunction = libSdl3.lookupFunction<
+      Pointer<SdlPalette> Function(Pointer<SdlSurface> surface),
+      Pointer<SdlPalette> Function(
+          Pointer<SdlSurface> surface)>('SDL_CreateSurfacePalette');
+  return sdlCreateSurfacePaletteLookupFunction(surface);
 }
 
 ///
@@ -199,6 +234,9 @@ int sdlGetSurfaceColorspace(
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
+/// \sa SDL_CreatePalette
+/// \sa SDL_GetSurfacePalette
+///
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_SetSurfacePalette(SDL_Surface *surface, SDL_Palette *palette)
 /// ```
@@ -209,6 +247,28 @@ int sdlSetSurfacePalette(
       int Function(Pointer<SdlSurface> surface,
           Pointer<SdlPalette> palette)>('SDL_SetSurfacePalette');
   return sdlSetSurfacePaletteLookupFunction(surface, palette);
+}
+
+///
+/// Get the palette used by a surface.
+///
+/// \param surface the SDL_Surface structure to query.
+/// \returns a pointer to the palette used by the surface, or NULL if there is
+/// no palette used.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_SetSurfacePalette
+///
+/// ```c
+/// extern SDL_DECLSPEC SDL_Palette * SDLCALL SDL_GetSurfacePalette(SDL_Surface *surface)
+/// ```
+Pointer<SdlPalette> sdlGetSurfacePalette(Pointer<SdlSurface> surface) {
+  final sdlGetSurfacePaletteLookupFunction = libSdl3.lookupFunction<
+      Pointer<SdlPalette> Function(Pointer<SdlSurface> surface),
+      Pointer<SdlPalette> Function(
+          Pointer<SdlSurface> surface)>('SDL_GetSurfacePalette');
+  return sdlGetSurfacePaletteLookupFunction(surface);
 }
 
 ///
@@ -393,7 +453,8 @@ int sdlSaveBmp(Pointer<SdlSurface> surface, String? file) {
 /// the surface must be locked before directly accessing the pixels.
 ///
 /// \param surface the SDL_Surface structure to optimize.
-/// \param flag 0 to disable, non-zero to enable RLE acceleration.
+/// \param enabled SDL_TRUE to enable RLE acceleration, SDL_FALSE to disable
+/// it.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -404,13 +465,14 @@ int sdlSaveBmp(Pointer<SdlSurface> surface, String? file) {
 /// \sa SDL_UnlockSurface
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_SetSurfaceRLE(SDL_Surface *surface, int flag)
+/// extern SDL_DECLSPEC int SDLCALL SDL_SetSurfaceRLE(SDL_Surface *surface, SDL_bool enabled)
 /// ```
-int sdlSetSurfaceRle(Pointer<SdlSurface> surface, int flag) {
+int sdlSetSurfaceRle(Pointer<SdlSurface> surface, bool enabled) {
   final sdlSetSurfaceRleLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlSurface> surface, Int32 flag),
-      int Function(Pointer<SdlSurface> surface, int flag)>('SDL_SetSurfaceRLE');
-  return sdlSetSurfaceRleLookupFunction(surface, flag);
+      Int32 Function(Pointer<SdlSurface> surface, Int32 enabled),
+      int Function(
+          Pointer<SdlSurface> surface, int enabled)>('SDL_SetSurfaceRLE');
+  return sdlSetSurfaceRleLookupFunction(surface, enabled ? 1 : 0);
 }
 
 ///
@@ -445,11 +507,9 @@ bool sdlSurfaceHasRle(Pointer<SdlSurface> surface) {
 /// It is a pixel of the format used by the surface, as generated by
 /// SDL_MapRGB().
 ///
-/// RLE acceleration can substantially speed up blitting of images with large
-/// horizontal runs of transparent pixels. See SDL_SetSurfaceRLE() for details.
-///
 /// \param surface the SDL_Surface structure to update.
-/// \param flag SDL_TRUE to enable color key, SDL_FALSE to disable color key.
+/// \param enabled SDL_TRUE to enable color key, SDL_FALSE to disable color
+/// key.
 /// \param key the transparent pixel.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
@@ -457,17 +517,18 @@ bool sdlSurfaceHasRle(Pointer<SdlSurface> surface) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetSurfaceColorKey
+/// \sa SDL_SetSurfaceRLE
 /// \sa SDL_SurfaceHasColorKey
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_SetSurfaceColorKey(SDL_Surface *surface, int flag, Uint32 key)
+/// extern SDL_DECLSPEC int SDLCALL SDL_SetSurfaceColorKey(SDL_Surface *surface, SDL_bool enabled, Uint32 key)
 /// ```
-int sdlSetSurfaceColorKey(Pointer<SdlSurface> surface, int flag, int key) {
+int sdlSetSurfaceColorKey(Pointer<SdlSurface> surface, bool enabled, int key) {
   final sdlSetSurfaceColorKeyLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlSurface> surface, Int32 flag, Uint32 key),
-      int Function(Pointer<SdlSurface> surface, int flag,
+      Int32 Function(Pointer<SdlSurface> surface, Int32 enabled, Uint32 key),
+      int Function(Pointer<SdlSurface> surface, int enabled,
           int key)>('SDL_SetSurfaceColorKey');
-  return sdlSetSurfaceColorKeyLookupFunction(surface, flag, key);
+  return sdlSetSurfaceColorKeyLookupFunction(surface, enabled ? 1 : 0, key);
 }
 
 ///
@@ -796,62 +857,28 @@ Pointer<SdlSurface> sdlDuplicateSurface(Pointer<SdlSurface> surface) {
 /// surface. The new, optimized surface can then be used as the source for
 /// future blits, making them faster.
 ///
+/// If you are converting to an indexed surface and want to map colors to a
+/// palette, you can use SDL_ConvertSurfaceAndColorspace() instead.
+///
 /// \param surface the existing SDL_Surface structure to convert.
-/// \param format the SDL_PixelFormat structure that the new surface is
-/// optimized for.
+/// \param format the new pixel format.
 /// \returns the new SDL_Surface structure that is created or NULL if it fails;
 /// call SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_ConvertSurfaceFormat
-/// \sa SDL_ConvertSurfaceFormatAndColorspace
-/// \sa SDL_CreatePixelFormat
+/// \sa SDL_ConvertSurfaceAndColorspace
 /// \sa SDL_DestroySurface
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_Surface *SDLCALL SDL_ConvertSurface(SDL_Surface *surface, const SDL_PixelFormat *format)
+/// extern SDL_DECLSPEC SDL_Surface *SDLCALL SDL_ConvertSurface(SDL_Surface *surface, SDL_PixelFormat format)
 /// ```
-Pointer<SdlSurface> sdlConvertSurface(
-    Pointer<SdlSurface> surface, Pointer<SdlPixelFormat> format) {
+Pointer<SdlSurface> sdlConvertSurface(Pointer<SdlSurface> surface, int format) {
   final sdlConvertSurfaceLookupFunction = libSdl3.lookupFunction<
+      Pointer<SdlSurface> Function(Pointer<SdlSurface> surface, Int32 format),
       Pointer<SdlSurface> Function(
-          Pointer<SdlSurface> surface, Pointer<SdlPixelFormat> format),
-      Pointer<SdlSurface> Function(Pointer<SdlSurface> surface,
-          Pointer<SdlPixelFormat> format)>('SDL_ConvertSurface');
+          Pointer<SdlSurface> surface, int format)>('SDL_ConvertSurface');
   return sdlConvertSurfaceLookupFunction(surface, format);
-}
-
-///
-/// Copy an existing surface to a new surface of the specified format.
-///
-/// This function operates just like SDL_ConvertSurface(), but accepts an
-/// SDL_PixelFormatEnum value instead of an SDL_PixelFormat structure. As such,
-/// it might be easier to call but it doesn't have access to palette
-/// information for the destination surface, in case that would be important.
-///
-/// \param surface the existing SDL_Surface structure to convert.
-/// \param pixel_format the new pixel format.
-/// \returns the new SDL_Surface structure that is created or NULL if it fails;
-/// call SDL_GetError() for more information.
-///
-/// \since This function is available since SDL 3.0.0.
-///
-/// \sa SDL_ConvertSurface
-/// \sa SDL_ConvertSurfaceFormatAndColorspace
-/// \sa SDL_DestroySurface
-///
-/// ```c
-/// extern SDL_DECLSPEC SDL_Surface *SDLCALL SDL_ConvertSurfaceFormat(SDL_Surface *surface, SDL_PixelFormatEnum pixel_format)
-/// ```
-Pointer<SdlSurface> sdlConvertSurfaceFormat(
-    Pointer<SdlSurface> surface, int pixelFormat) {
-  final sdlConvertSurfaceFormatLookupFunction = libSdl3.lookupFunction<
-      Pointer<SdlSurface> Function(
-          Pointer<SdlSurface> surface, Int32 pixelFormat),
-      Pointer<SdlSurface> Function(Pointer<SdlSurface> surface,
-          int pixelFormat)>('SDL_ConvertSurfaceFormat');
-  return sdlConvertSurfaceFormatLookupFunction(surface, pixelFormat);
 }
 
 ///
@@ -863,7 +890,8 @@ Pointer<SdlSurface> sdlConvertSurfaceFormat(
 /// colorspace conversion needed.
 ///
 /// \param surface the existing SDL_Surface structure to convert.
-/// \param pixel_format the new pixel format.
+/// \param format the new pixel format.
+/// \param palette an optional palette to use for indexed formats, may be NULL.
 /// \param colorspace the new colorspace.
 /// \param props an SDL_PropertiesID with additional color properties, or 0.
 /// \returns the new SDL_Surface structure that is created or NULL if it fails;
@@ -872,25 +900,25 @@ Pointer<SdlSurface> sdlConvertSurfaceFormat(
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_ConvertSurface
-/// \sa SDL_ConvertSurfaceFormat
+/// \sa SDL_ConvertSurface
 /// \sa SDL_DestroySurface
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_Surface *SDLCALL SDL_ConvertSurfaceFormatAndColorspace(SDL_Surface *surface, SDL_PixelFormatEnum pixel_format, SDL_Colorspace colorspace, SDL_PropertiesID props)
+/// extern SDL_DECLSPEC SDL_Surface *SDLCALL SDL_ConvertSurfaceAndColorspace(SDL_Surface *surface, SDL_PixelFormat format, const SDL_Palette *palette, SDL_Colorspace colorspace, SDL_PropertiesID props)
 /// ```
-Pointer<SdlSurface> sdlConvertSurfaceFormatAndColorspace(
-    Pointer<SdlSurface> surface, int pixelFormat, int colorspace, int props) {
-  final sdlConvertSurfaceFormatAndColorspaceLookupFunction =
-      libSdl3.lookupFunction<
-          Pointer<SdlSurface> Function(Pointer<SdlSurface> surface,
-              Int32 pixelFormat, Int32 colorspace, Uint32 props),
-          Pointer<SdlSurface> Function(
-              Pointer<SdlSurface> surface,
-              int pixelFormat,
-              int colorspace,
-              int props)>('SDL_ConvertSurfaceFormatAndColorspace');
-  return sdlConvertSurfaceFormatAndColorspaceLookupFunction(
-      surface, pixelFormat, colorspace, props);
+Pointer<SdlSurface> sdlConvertSurfaceAndColorspace(Pointer<SdlSurface> surface,
+    int format, Pointer<SdlPalette> palette, int colorspace, int props) {
+  final sdlConvertSurfaceAndColorspaceLookupFunction = libSdl3.lookupFunction<
+      Pointer<SdlSurface> Function(Pointer<SdlSurface> surface, Int32 format,
+          Pointer<SdlPalette> palette, Int32 colorspace, Uint32 props),
+      Pointer<SdlSurface> Function(
+          Pointer<SdlSurface> surface,
+          int format,
+          Pointer<SdlPalette> palette,
+          int colorspace,
+          int props)>('SDL_ConvertSurfaceAndColorspace');
+  return sdlConvertSurfaceAndColorspaceLookupFunction(
+      surface, format, palette, colorspace, props);
 }
 
 ///
@@ -898,10 +926,10 @@ Pointer<SdlSurface> sdlConvertSurfaceFormatAndColorspace(
 ///
 /// \param width the width of the block to copy, in pixels.
 /// \param height the height of the block to copy, in pixels.
-/// \param src_format an SDL_PixelFormatEnum value of the `src` pixels format.
+/// \param src_format an SDL_PixelFormat value of the `src` pixels format.
 /// \param src a pointer to the source pixels.
 /// \param src_pitch the pitch of the source pixels, in bytes.
-/// \param dst_format an SDL_PixelFormatEnum value of the `dst` pixels format.
+/// \param dst_format an SDL_PixelFormat value of the `dst` pixels format.
 /// \param dst a pointer to be filled in with new pixel data.
 /// \param dst_pitch the pitch of the destination pixels, in bytes.
 /// \returns 0 on success or a negative error code on failure; call
@@ -912,7 +940,7 @@ Pointer<SdlSurface> sdlConvertSurfaceFormatAndColorspace(
 /// \sa SDL_ConvertPixelsAndColorspace
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_ConvertPixels(int width, int height, SDL_PixelFormatEnum src_format, const void *src, int src_pitch, SDL_PixelFormatEnum dst_format, void *dst, int dst_pitch)
+/// extern SDL_DECLSPEC int SDLCALL SDL_ConvertPixels(int width, int height, SDL_PixelFormat src_format, const void *src, int src_pitch, SDL_PixelFormat dst_format, void *dst, int dst_pitch)
 /// ```
 int sdlConvertPixels(
     int width,
@@ -952,14 +980,14 @@ int sdlConvertPixels(
 ///
 /// \param width the width of the block to copy, in pixels.
 /// \param height the height of the block to copy, in pixels.
-/// \param src_format an SDL_PixelFormatEnum value of the `src` pixels format.
+/// \param src_format an SDL_PixelFormat value of the `src` pixels format.
 /// \param src_colorspace an SDL_ColorSpace value describing the colorspace of
 /// the `src` pixels.
 /// \param src_properties an SDL_PropertiesID with additional source color
 /// properties, or 0.
 /// \param src a pointer to the source pixels.
 /// \param src_pitch the pitch of the source pixels, in bytes.
-/// \param dst_format an SDL_PixelFormatEnum value of the `dst` pixels format.
+/// \param dst_format an SDL_PixelFormat value of the `dst` pixels format.
 /// \param dst_colorspace an SDL_ColorSpace value describing the colorspace of
 /// the `dst` pixels.
 /// \param dst_properties an SDL_PropertiesID with additional destination color
@@ -974,7 +1002,7 @@ int sdlConvertPixels(
 /// \sa SDL_ConvertPixels
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_ConvertPixelsAndColorspace(int width, int height, SDL_PixelFormatEnum src_format, SDL_Colorspace src_colorspace, SDL_PropertiesID src_properties, const void *src, int src_pitch, SDL_PixelFormatEnum dst_format, SDL_Colorspace dst_colorspace, SDL_PropertiesID dst_properties, void *dst, int dst_pitch)
+/// extern SDL_DECLSPEC int SDLCALL SDL_ConvertPixelsAndColorspace(int width, int height, SDL_PixelFormat src_format, SDL_Colorspace src_colorspace, SDL_PropertiesID src_properties, const void *src, int src_pitch, SDL_PixelFormat dst_format, SDL_Colorspace dst_colorspace, SDL_PropertiesID dst_properties, void *dst, int dst_pitch)
 /// ```
 int sdlConvertPixelsAndColorspace(
     int width,
@@ -1040,10 +1068,10 @@ int sdlConvertPixelsAndColorspace(
 ///
 /// \param width the width of the block to convert, in pixels.
 /// \param height the height of the block to convert, in pixels.
-/// \param src_format an SDL_PixelFormatEnum value of the `src` pixels format.
+/// \param src_format an SDL_PixelFormat value of the `src` pixels format.
 /// \param src a pointer to the source pixels.
 /// \param src_pitch the pitch of the source pixels, in bytes.
-/// \param dst_format an SDL_PixelFormatEnum value of the `dst` pixels format.
+/// \param dst_format an SDL_PixelFormat value of the `dst` pixels format.
 /// \param dst a pointer to be filled in with premultiplied pixel data.
 /// \param dst_pitch the pitch of the destination pixels, in bytes.
 /// \returns 0 on success or a negative error code on failure; call
@@ -1052,7 +1080,7 @@ int sdlConvertPixelsAndColorspace(
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_PremultiplyAlpha(int width, int height, SDL_PixelFormatEnum src_format, const void *src, int src_pitch, SDL_PixelFormatEnum dst_format, void *dst, int dst_pitch)
+/// extern SDL_DECLSPEC int SDLCALL SDL_PremultiplyAlpha(int width, int height, SDL_PixelFormat src_format, const void *src, int src_pitch, SDL_PixelFormat dst_format, void *dst, int dst_pitch)
 /// ```
 int sdlPremultiplyAlpha(
     int width,
@@ -1407,6 +1435,86 @@ int sdlBlitSurfaceUncheckedScaled(
           int scaleMode)>('SDL_BlitSurfaceUncheckedScaled');
   return sdlBlitSurfaceUncheckedScaledLookupFunction(
       src, srcrect, dst, dstrect, scaleMode);
+}
+
+///
+/// Map an RGB triple to an opaque pixel value for a surface.
+///
+/// This function maps the RGB color value to the specified pixel format and
+/// returns the pixel value best approximating the given RGB color value for
+/// the given pixel format.
+///
+/// If the surface has a palette, the index of the closest matching color in
+/// the palette will be returned.
+///
+/// If the surface pixel format has an alpha component it will be returned as
+/// all 1 bits (fully opaque).
+///
+/// If the pixel format bpp (color depth) is less than 32-bpp then the unused
+/// upper bits of the return value can safely be ignored (e.g., with a 16-bpp
+/// format the return value can be assigned to a Uint16, and similarly a Uint8
+/// for an 8-bpp format).
+///
+/// \param surface the surface to use for the pixel format and palette.
+/// \param r the red component of the pixel in the range 0-255.
+/// \param g the green component of the pixel in the range 0-255.
+/// \param b the blue component of the pixel in the range 0-255.
+/// \returns a pixel value.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_MapSurfaceRGBA
+///
+/// ```c
+/// extern SDL_DECLSPEC Uint32 SDLCALL SDL_MapSurfaceRGB(SDL_Surface *surface, Uint8 r, Uint8 g, Uint8 b)
+/// ```
+int sdlMapSurfaceRgb(Pointer<SdlSurface> surface, int r, int g, int b) {
+  final sdlMapSurfaceRgbLookupFunction = libSdl3.lookupFunction<
+      Uint32 Function(Pointer<SdlSurface> surface, Uint8 r, Uint8 g, Uint8 b),
+      int Function(Pointer<SdlSurface> surface, int r, int g,
+          int b)>('SDL_MapSurfaceRGB');
+  return sdlMapSurfaceRgbLookupFunction(surface, r, g, b);
+}
+
+///
+/// Map an RGBA quadruple to a pixel value for a surface.
+///
+/// This function maps the RGBA color value to the specified pixel format and
+/// returns the pixel value best approximating the given RGBA color value for
+/// the given pixel format.
+///
+/// If the surface pixel format has no alpha component the alpha value will be
+/// ignored (as it will be in formats with a palette).
+///
+/// If the surface has a palette, the index of the closest matching color in
+/// the palette will be returned.
+///
+/// If the pixel format bpp (color depth) is less than 32-bpp then the unused
+/// upper bits of the return value can safely be ignored (e.g., with a 16-bpp
+/// format the return value can be assigned to a Uint16, and similarly a Uint8
+/// for an 8-bpp format).
+///
+/// \param surface the surface to use for the pixel format and palette.
+/// \param r the red component of the pixel in the range 0-255.
+/// \param g the green component of the pixel in the range 0-255.
+/// \param b the blue component of the pixel in the range 0-255.
+/// \param a the alpha component of the pixel in the range 0-255.
+/// \returns a pixel value.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_MapSurfaceRGB
+///
+/// ```c
+/// extern SDL_DECLSPEC Uint32 SDLCALL SDL_MapSurfaceRGBA(SDL_Surface *surface, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
+/// ```
+int sdlMapSurfaceRgba(Pointer<SdlSurface> surface, int r, int g, int b, int a) {
+  final sdlMapSurfaceRgbaLookupFunction = libSdl3.lookupFunction<
+      Uint32 Function(
+          Pointer<SdlSurface> surface, Uint8 r, Uint8 g, Uint8 b, Uint8 a),
+      int Function(Pointer<SdlSurface> surface, int r, int g, int b,
+          int a)>('SDL_MapSurfaceRGBA');
+  return sdlMapSurfaceRgbaLookupFunction(surface, r, g, b, a);
 }
 
 ///

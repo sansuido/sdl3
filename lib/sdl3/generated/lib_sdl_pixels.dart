@@ -11,12 +11,14 @@ import 'struct_sdl.dart';
 ///
 /// \param format the pixel format to query.
 /// \returns the human readable name of the specified pixel format or
-/// `SDL_PIXELFORMAT_UNKNOWN` if the format isn't recognized.
+/// "SDL_PIXELFORMAT_UNKNOWN" if the format isn't recognized.
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC const char* SDLCALL SDL_GetPixelFormatName(SDL_PixelFormatEnum format)
+/// extern SDL_DECLSPEC const char* SDLCALL SDL_GetPixelFormatName(SDL_PixelFormat format)
 /// ```
 String? sdlGetPixelFormatName(int format) {
   final sdlGetPixelFormatNameLookupFunction = libSdl3.lookupFunction<
@@ -32,30 +34,32 @@ String? sdlGetPixelFormatName(int format) {
 ///
 /// Convert one of the enumerated pixel formats to a bpp value and RGBA masks.
 ///
-/// \param format one of the SDL_PixelFormatEnum values.
+/// \param format one of the SDL_PixelFormat values.
 /// \param bpp a bits per pixel value; usually 15, 16, or 32.
 /// \param Rmask a pointer filled in with the red mask for the format.
 /// \param Gmask a pointer filled in with the green mask for the format.
 /// \param Bmask a pointer filled in with the blue mask for the format.
 /// \param Amask a pointer filled in with the alpha mask for the format.
-/// \returns SDL_TRUE on success or SDL_FALSE if the conversion wasn't
-/// possible; call SDL_GetError() for more information.
+/// \returns 0 on success or a negative error code on failure; call
+/// SDL_GetError() for more information.
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_GetPixelFormatEnumForMasks
+/// \sa SDL_GetPixelFormatForMasks
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetMasksForPixelFormatEnum(SDL_PixelFormatEnum format, int *bpp, Uint32 * Rmask, Uint32 * Gmask, Uint32 * Bmask, Uint32 * Amask)
+/// extern SDL_DECLSPEC int SDLCALL SDL_GetMasksForPixelFormat(SDL_PixelFormat format, int *bpp, Uint32 *Rmask, Uint32 *Gmask, Uint32 *Bmask, Uint32 *Amask)
 /// ```
-bool sdlGetMasksForPixelFormatEnum(
+int sdlGetMasksForPixelFormat(
     int format,
     Pointer<Int32> bpp,
     Pointer<Uint32> rmask,
     Pointer<Uint32> gmask,
     Pointer<Uint32> bmask,
     Pointer<Uint32> amask) {
-  final sdlGetMasksForPixelFormatEnumLookupFunction = libSdl3.lookupFunction<
+  final sdlGetMasksForPixelFormatLookupFunction = libSdl3.lookupFunction<
       Int32 Function(Int32 format, Pointer<Int32> bpp, Pointer<Uint32> rmask,
           Pointer<Uint32> gmask, Pointer<Uint32> bmask, Pointer<Uint32> amask),
       int Function(
@@ -64,10 +68,9 @@ bool sdlGetMasksForPixelFormatEnum(
           Pointer<Uint32> rmask,
           Pointer<Uint32> gmask,
           Pointer<Uint32> bmask,
-          Pointer<Uint32> amask)>('SDL_GetMasksForPixelFormatEnum');
-  return sdlGetMasksForPixelFormatEnumLookupFunction(
-          format, bpp, rmask, gmask, bmask, amask) ==
-      1;
+          Pointer<Uint32> amask)>('SDL_GetMasksForPixelFormat');
+  return sdlGetMasksForPixelFormatLookupFunction(
+      format, bpp, rmask, gmask, bmask, amask);
 }
 
 ///
@@ -81,71 +84,53 @@ bool sdlGetMasksForPixelFormatEnum(
 /// \param Gmask the green mask for the format.
 /// \param Bmask the blue mask for the format.
 /// \param Amask the alpha mask for the format.
-/// \returns the SDL_PixelFormatEnum value corresponding to the format masks,
-/// or SDL_PIXELFORMAT_UNKNOWN if there isn't a match.
+/// \returns the SDL_PixelFormat value corresponding to the format masks, or
+/// SDL_PIXELFORMAT_UNKNOWN if there isn't a match.
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_GetMasksForPixelFormatEnum
+/// \sa SDL_GetMasksForPixelFormat
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_PixelFormatEnum SDLCALL SDL_GetPixelFormatEnumForMasks(int bpp, Uint32 Rmask, Uint32 Gmask, Uint32 Bmask, Uint32 Amask)
+/// extern SDL_DECLSPEC SDL_PixelFormat SDLCALL SDL_GetPixelFormatForMasks(int bpp, Uint32 Rmask, Uint32 Gmask, Uint32 Bmask, Uint32 Amask)
 /// ```
-int sdlGetPixelFormatEnumForMasks(
+int sdlGetPixelFormatForMasks(
     int bpp, int rmask, int gmask, int bmask, int amask) {
-  final sdlGetPixelFormatEnumForMasksLookupFunction = libSdl3.lookupFunction<
+  final sdlGetPixelFormatForMasksLookupFunction = libSdl3.lookupFunction<
       Int32 Function(
           Int32 bpp, Uint32 rmask, Uint32 gmask, Uint32 bmask, Uint32 amask),
       int Function(int bpp, int rmask, int gmask, int bmask,
-          int amask)>('SDL_GetPixelFormatEnumForMasks');
-  return sdlGetPixelFormatEnumForMasksLookupFunction(
+          int amask)>('SDL_GetPixelFormatForMasks');
+  return sdlGetPixelFormatForMasksLookupFunction(
       bpp, rmask, gmask, bmask, amask);
 }
 
 ///
-/// Create an SDL_PixelFormat structure corresponding to a pixel format.
+/// Create an SDL_PixelFormatDetails structure corresponding to a pixel format.
 ///
 /// Returned structure may come from a shared global cache (i.e. not newly
 /// allocated), and hence should not be modified, especially the palette. Weird
 /// errors such as `Blit combination not supported` may occur.
 ///
-/// \param pixel_format one of the SDL_PixelFormatEnum values.
-/// \returns the new SDL_PixelFormat structure or NULL on failure; call
-/// SDL_GetError() for more information.
+/// \param format one of the SDL_PixelFormat values.
+/// \returns a pointer to a SDL_PixelFormatDetails structure or NULL on
+/// failure; call SDL_GetError() for more information.
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_DestroyPixelFormat
-/// \sa SDL_SetPixelFormatPalette
-///
 /// ```c
-/// extern SDL_DECLSPEC SDL_PixelFormat * SDLCALL SDL_CreatePixelFormat(SDL_PixelFormatEnum pixel_format)
+/// extern SDL_DECLSPEC const SDL_PixelFormatDetails * SDLCALL SDL_GetPixelFormatDetails(SDL_PixelFormat format)
 /// ```
-Pointer<SdlPixelFormat> sdlCreatePixelFormat(int pixelFormat) {
-  final sdlCreatePixelFormatLookupFunction = libSdl3.lookupFunction<
-      Pointer<SdlPixelFormat> Function(Int32 pixelFormat),
-      Pointer<SdlPixelFormat> Function(
-          int pixelFormat)>('SDL_CreatePixelFormat');
-  return sdlCreatePixelFormatLookupFunction(pixelFormat);
-}
-
-///
-/// Free an SDL_PixelFormat structure allocated by SDL_CreatePixelFormat().
-///
-/// \param format the SDL_PixelFormat structure to free.
-///
-/// \since This function is available since SDL 3.0.0.
-///
-/// \sa SDL_CreatePixelFormat
-///
-/// ```c
-/// extern SDL_DECLSPEC void SDLCALL SDL_DestroyPixelFormat(SDL_PixelFormat *format)
-/// ```
-void sdlDestroyPixelFormat(Pointer<SdlPixelFormat> format) {
-  final sdlDestroyPixelFormatLookupFunction = libSdl3.lookupFunction<
-      Void Function(Pointer<SdlPixelFormat> format),
-      void Function(Pointer<SdlPixelFormat> format)>('SDL_DestroyPixelFormat');
-  return sdlDestroyPixelFormatLookupFunction(format);
+Pointer<SdlPixelFormatDetails> sdlGetPixelFormatDetails(int format) {
+  final sdlGetPixelFormatDetailsLookupFunction = libSdl3.lookupFunction<
+      Pointer<SdlPixelFormatDetails> Function(Int32 format),
+      Pointer<SdlPixelFormatDetails> Function(
+          int format)>('SDL_GetPixelFormatDetails');
+  return sdlGetPixelFormatDetailsLookupFunction(format);
 }
 
 ///
@@ -158,11 +143,13 @@ void sdlDestroyPixelFormat(Pointer<SdlPixelFormat> format) {
 /// there wasn't enough memory); call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_DestroyPalette
 /// \sa SDL_SetPaletteColors
-/// \sa SDL_SetPixelFormatPalette
+/// \sa SDL_SetSurfacePalette
 ///
 /// ```c
 /// extern SDL_DECLSPEC SDL_Palette *SDLCALL SDL_CreatePalette(int ncolors)
@@ -175,29 +162,6 @@ Pointer<SdlPalette> sdlCreatePalette(int ncolors) {
 }
 
 ///
-/// Set the palette for a pixel format structure.
-///
-/// \param format the SDL_PixelFormat structure that will use the palette.
-/// \param palette the SDL_Palette structure that will be used.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
-///
-/// \since This function is available since SDL 3.0.0.
-///
-/// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_SetPixelFormatPalette(SDL_PixelFormat * format, SDL_Palette *palette)
-/// ```
-int sdlSetPixelFormatPalette(
-    Pointer<SdlPixelFormat> format, Pointer<SdlPalette> palette) {
-  final sdlSetPixelFormatPaletteLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(
-          Pointer<SdlPixelFormat> format, Pointer<SdlPalette> palette),
-      int Function(Pointer<SdlPixelFormat> format,
-          Pointer<SdlPalette> palette)>('SDL_SetPixelFormatPalette');
-  return sdlSetPixelFormatPaletteLookupFunction(format, palette);
-}
-
-///
 /// Set a range of colors in a palette.
 ///
 /// \param palette the SDL_Palette structure to modify.
@@ -207,10 +171,13 @@ int sdlSetPixelFormatPalette(
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
+/// \threadsafety It is safe to call this function from any thread, as long as
+/// the palette is not modified or destroyed in another thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_SetPaletteColors(SDL_Palette * palette, const SDL_Color * colors, int firstcolor, int ncolors)
+/// extern SDL_DECLSPEC int SDLCALL SDL_SetPaletteColors(SDL_Palette *palette, const SDL_Color *colors, int firstcolor, int ncolors)
 /// ```
 int sdlSetPaletteColors(Pointer<SdlPalette> palette, Pointer<SdlColor> colors,
     int firstcolor, int ncolors) {
@@ -228,12 +195,15 @@ int sdlSetPaletteColors(Pointer<SdlPalette> palette, Pointer<SdlColor> colors,
 ///
 /// \param palette the SDL_Palette structure to be freed.
 ///
+/// \threadsafety It is safe to call this function from any thread, as long as
+/// the palette is not modified or destroyed in another thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_CreatePalette
 ///
 /// ```c
-/// extern SDL_DECLSPEC void SDLCALL SDL_DestroyPalette(SDL_Palette * palette)
+/// extern SDL_DECLSPEC void SDLCALL SDL_DestroyPalette(SDL_Palette *palette)
 /// ```
 void sdlDestroyPalette(Pointer<SdlPalette> palette) {
   final sdlDestroyPaletteLookupFunction = libSdl3.lookupFunction<
@@ -260,28 +230,34 @@ void sdlDestroyPalette(Pointer<SdlPalette> palette) {
 /// format the return value can be assigned to a Uint16, and similarly a Uint8
 /// for an 8-bpp format).
 ///
-/// \param format an SDL_PixelFormat structure describing the pixel format.
+/// \param format a pointer to SDL_PixelFormatDetails describing the pixel
+/// format.
+/// \param palette an optional palette for indexed formats, may be NULL.
 /// \param r the red component of the pixel in the range 0-255.
 /// \param g the green component of the pixel in the range 0-255.
 /// \param b the blue component of the pixel in the range 0-255.
 /// \returns a pixel value.
 ///
+/// \threadsafety It is safe to call this function from any thread, as long as
+/// the palette is not modified.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetRGB
-/// \sa SDL_GetRGBA
 /// \sa SDL_MapRGBA
+/// \sa SDL_MapSurfaceRGB
 ///
 /// ```c
-/// extern SDL_DECLSPEC Uint32 SDLCALL SDL_MapRGB(const SDL_PixelFormat * format, Uint8 r, Uint8 g, Uint8 b)
+/// extern SDL_DECLSPEC Uint32 SDLCALL SDL_MapRGB(const SDL_PixelFormatDetails *format, const SDL_Palette *palette, Uint8 r, Uint8 g, Uint8 b)
 /// ```
-int sdlMapRgb(Pointer<SdlPixelFormat> format, int r, int g, int b) {
+int sdlMapRgb(Pointer<SdlPixelFormatDetails> format,
+    Pointer<SdlPalette> palette, int r, int g, int b) {
   final sdlMapRgbLookupFunction = libSdl3.lookupFunction<
-      Uint32 Function(
-          Pointer<SdlPixelFormat> format, Uint8 r, Uint8 g, Uint8 b),
-      int Function(
-          Pointer<SdlPixelFormat> format, int r, int g, int b)>('SDL_MapRGB');
-  return sdlMapRgbLookupFunction(format, r, g, b);
+      Uint32 Function(Pointer<SdlPixelFormatDetails> format,
+          Pointer<SdlPalette> palette, Uint8 r, Uint8 g, Uint8 b),
+      int Function(Pointer<SdlPixelFormatDetails> format,
+          Pointer<SdlPalette> palette, int r, int g, int b)>('SDL_MapRGB');
+  return sdlMapRgbLookupFunction(format, palette, r, g, b);
 }
 
 ///
@@ -302,30 +278,40 @@ int sdlMapRgb(Pointer<SdlPixelFormat> format, int r, int g, int b) {
 /// format the return value can be assigned to a Uint16, and similarly a Uint8
 /// for an 8-bpp format).
 ///
-/// \param format an SDL_PixelFormat structure describing the format of the
-/// pixel.
+/// \param format a pointer to SDL_PixelFormatDetails describing the pixel
+/// format.
+/// \param palette an optional palette for indexed formats, may be NULL.
 /// \param r the red component of the pixel in the range 0-255.
 /// \param g the green component of the pixel in the range 0-255.
 /// \param b the blue component of the pixel in the range 0-255.
 /// \param a the alpha component of the pixel in the range 0-255.
 /// \returns a pixel value.
 ///
+/// \threadsafety It is safe to call this function from any thread, as long as
+/// the palette is not modified.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_GetRGB
 /// \sa SDL_GetRGBA
 /// \sa SDL_MapRGB
+/// \sa SDL_MapSurfaceRGBA
 ///
 /// ```c
-/// extern SDL_DECLSPEC Uint32 SDLCALL SDL_MapRGBA(const SDL_PixelFormat * format, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
+/// extern SDL_DECLSPEC Uint32 SDLCALL SDL_MapRGBA(const SDL_PixelFormatDetails *format, const SDL_Palette *palette, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 /// ```
-int sdlMapRgba(Pointer<SdlPixelFormat> format, int r, int g, int b, int a) {
+int sdlMapRgba(Pointer<SdlPixelFormatDetails> format,
+    Pointer<SdlPalette> palette, int r, int g, int b, int a) {
   final sdlMapRgbaLookupFunction = libSdl3.lookupFunction<
-      Uint32 Function(
-          Pointer<SdlPixelFormat> format, Uint8 r, Uint8 g, Uint8 b, Uint8 a),
-      int Function(Pointer<SdlPixelFormat> format, int r, int g, int b,
+      Uint32 Function(Pointer<SdlPixelFormatDetails> format,
+          Pointer<SdlPalette> palette, Uint8 r, Uint8 g, Uint8 b, Uint8 a),
+      int Function(
+          Pointer<SdlPixelFormatDetails> format,
+          Pointer<SdlPalette> palette,
+          int r,
+          int g,
+          int b,
           int a)>('SDL_MapRGBA');
-  return sdlMapRgbaLookupFunction(format, r, g, b, a);
+  return sdlMapRgbaLookupFunction(format, palette, r, g, b, a);
 }
 
 ///
@@ -337,11 +323,15 @@ int sdlMapRgba(Pointer<SdlPixelFormat> format, int r, int g, int b, int a) {
 /// 0xff, 0xff] not [0xf8, 0xfc, 0xf8]).
 ///
 /// \param pixel a pixel value.
-/// \param format an SDL_PixelFormat structure describing the format of the
-/// pixel.
-/// \param r a pointer filled in with the red component.
-/// \param g a pointer filled in with the green component.
-/// \param b a pointer filled in with the blue component.
+/// \param format a pointer to SDL_PixelFormatDetails describing the pixel
+/// format.
+/// \param palette an optional palette for indexed formats, may be NULL.
+/// \param r a pointer filled in with the red component, may be NULL.
+/// \param g a pointer filled in with the green component, may be NULL.
+/// \param b a pointer filled in with the blue component, may be NULL.
+///
+/// \threadsafety It is safe to call this function from any thread, as long as
+/// the palette is not modified.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -350,16 +340,31 @@ int sdlMapRgba(Pointer<SdlPixelFormat> format, int r, int g, int b, int a) {
 /// \sa SDL_MapRGBA
 ///
 /// ```c
-/// extern SDL_DECLSPEC void SDLCALL SDL_GetRGB(Uint32 pixel, const SDL_PixelFormat * format, Uint8 * r, Uint8 * g, Uint8 * b)
+/// extern SDL_DECLSPEC void SDLCALL SDL_GetRGB(Uint32 pixel, const SDL_PixelFormatDetails *format, const SDL_Palette *palette, Uint8 *r, Uint8 *g, Uint8 *b)
 /// ```
-void sdlGetRgb(int pixel, Pointer<SdlPixelFormat> format, Pointer<Uint8> r,
-    Pointer<Uint8> g, Pointer<Uint8> b) {
+void sdlGetRgb(
+    int pixel,
+    Pointer<SdlPixelFormatDetails> format,
+    Pointer<SdlPalette> palette,
+    Pointer<Uint8> r,
+    Pointer<Uint8> g,
+    Pointer<Uint8> b) {
   final sdlGetRgbLookupFunction = libSdl3.lookupFunction<
-      Void Function(Uint32 pixel, Pointer<SdlPixelFormat> format,
-          Pointer<Uint8> r, Pointer<Uint8> g, Pointer<Uint8> b),
-      void Function(int pixel, Pointer<SdlPixelFormat> format, Pointer<Uint8> r,
-          Pointer<Uint8> g, Pointer<Uint8> b)>('SDL_GetRGB');
-  return sdlGetRgbLookupFunction(pixel, format, r, g, b);
+      Void Function(
+          Uint32 pixel,
+          Pointer<SdlPixelFormatDetails> format,
+          Pointer<SdlPalette> palette,
+          Pointer<Uint8> r,
+          Pointer<Uint8> g,
+          Pointer<Uint8> b),
+      void Function(
+          int pixel,
+          Pointer<SdlPixelFormatDetails> format,
+          Pointer<SdlPalette> palette,
+          Pointer<Uint8> r,
+          Pointer<Uint8> g,
+          Pointer<Uint8> b)>('SDL_GetRGB');
+  return sdlGetRgbLookupFunction(pixel, format, palette, r, g, b);
 }
 
 ///
@@ -374,12 +379,16 @@ void sdlGetRgb(int pixel, Pointer<SdlPixelFormat> format, Pointer<Uint8> r,
 /// (100% opaque).
 ///
 /// \param pixel a pixel value.
-/// \param format an SDL_PixelFormat structure describing the format of the
-/// pixel.
-/// \param r a pointer filled in with the red component.
-/// \param g a pointer filled in with the green component.
-/// \param b a pointer filled in with the blue component.
-/// \param a a pointer filled in with the alpha component.
+/// \param format a pointer to SDL_PixelFormatDetails describing the pixel
+/// format.
+/// \param palette an optional palette for indexed formats, may be NULL.
+/// \param r a pointer filled in with the red component, may be NULL.
+/// \param g a pointer filled in with the green component, may be NULL.
+/// \param b a pointer filled in with the blue component, may be NULL.
+/// \param a a pointer filled in with the alpha component, may be NULL.
+///
+/// \threadsafety It is safe to call this function from any thread, as long as
+/// the palette is not modified.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -388,19 +397,32 @@ void sdlGetRgb(int pixel, Pointer<SdlPixelFormat> format, Pointer<Uint8> r,
 /// \sa SDL_MapRGBA
 ///
 /// ```c
-/// extern SDL_DECLSPEC void SDLCALL SDL_GetRGBA(Uint32 pixel, const SDL_PixelFormat * format, Uint8 * r, Uint8 * g, Uint8 * b, Uint8 * a)
+/// extern SDL_DECLSPEC void SDLCALL SDL_GetRGBA(Uint32 pixel, const SDL_PixelFormatDetails *format, const SDL_Palette *palette, Uint8 *r, Uint8 *g, Uint8 *b, Uint8 *a)
 /// ```
-void sdlGetRgba(int pixel, Pointer<SdlPixelFormat> format, Pointer<Uint8> r,
-    Pointer<Uint8> g, Pointer<Uint8> b, Pointer<Uint8> a) {
+void sdlGetRgba(
+    int pixel,
+    Pointer<SdlPixelFormatDetails> format,
+    Pointer<SdlPalette> palette,
+    Pointer<Uint8> r,
+    Pointer<Uint8> g,
+    Pointer<Uint8> b,
+    Pointer<Uint8> a) {
   final sdlGetRgbaLookupFunction = libSdl3.lookupFunction<
       Void Function(
           Uint32 pixel,
-          Pointer<SdlPixelFormat> format,
+          Pointer<SdlPixelFormatDetails> format,
+          Pointer<SdlPalette> palette,
           Pointer<Uint8> r,
           Pointer<Uint8> g,
           Pointer<Uint8> b,
           Pointer<Uint8> a),
-      void Function(int pixel, Pointer<SdlPixelFormat> format, Pointer<Uint8> r,
-          Pointer<Uint8> g, Pointer<Uint8> b, Pointer<Uint8> a)>('SDL_GetRGBA');
-  return sdlGetRgbaLookupFunction(pixel, format, r, g, b, a);
+      void Function(
+          int pixel,
+          Pointer<SdlPixelFormatDetails> format,
+          Pointer<SdlPalette> palette,
+          Pointer<Uint8> r,
+          Pointer<Uint8> g,
+          Pointer<Uint8> b,
+          Pointer<Uint8> a)>('SDL_GetRGBA');
+  return sdlGetRgbaLookupFunction(pixel, format, palette, r, g, b, a);
 }

@@ -256,6 +256,40 @@ int sdlGetAudioDeviceFormat(
 }
 
 ///
+/// Get the current channel map of an audio device.
+///
+/// Channel maps are optional; most things do not need them, instead passing
+/// data in the [order that SDL expects](CategoryAudio#channel-layouts).
+///
+/// Audio devices usually have no remapping applied. This is represented by
+/// returning NULL, and does not signify an error.
+///
+/// The returned array follows the SDL_GetStringRule (even though, strictly
+/// speaking, it isn't a string, it has the same memory manangement rules).
+///
+/// \param devid the instance ID of the device to query.
+/// \param count On output, set to number of channels in the map. Can be NULL.
+/// \returns an array of the current channel mapping, with as many elements as
+/// the current output spec's channels, or NULL if default.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_SetAudioStreamInputChannelMap
+///
+/// ```c
+/// extern SDL_DECLSPEC const int * SDLCALL SDL_GetAudioDeviceChannelMap(SDL_AudioDeviceID devid, int *count)
+/// ```
+Pointer<Int32> sdlGetAudioDeviceChannelMap(int devid, Pointer<Int32> count) {
+  final sdlGetAudioDeviceChannelMapLookupFunction = libSdl3.lookupFunction<
+      Pointer<Int32> Function(Uint32 devid, Pointer<Int32> count),
+      Pointer<Int32> Function(
+          int devid, Pointer<Int32> count)>('SDL_GetAudioDeviceChannelMap');
+  return sdlGetAudioDeviceChannelMapLookupFunction(devid, count);
+}
+
+///
 /// Open a specific audio device.
 ///
 /// You can open both playback and recording devices through this function.
@@ -747,9 +781,6 @@ Pointer<SdlAudioStream> sdlCreateAudioStream(
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_GetProperty
-/// \sa SDL_SetProperty
-///
 /// ```c
 /// extern SDL_DECLSPEC SDL_PropertiesID SDLCALL SDL_GetAudioStreamProperties(SDL_AudioStream *stream)
 /// ```
@@ -955,6 +986,200 @@ int sdlSetAudioStreamGain(Pointer<SdlAudioStream> stream, double gain) {
       int Function(Pointer<SdlAudioStream> stream,
           double gain)>('SDL_SetAudioStreamGain');
   return sdlSetAudioStreamGainLookupFunction(stream, gain);
+}
+
+///
+/// Get the current input channel map of an audio stream.
+///
+/// Channel maps are optional; most things do not need them, instead passing
+/// data in the [order that SDL expects](CategoryAudio#channel-layouts).
+///
+/// Audio streams default to no remapping applied. This is represented by
+/// returning NULL, and does not signify an error.
+///
+/// The returned array follows the SDL_GetStringRule (even though, strictly
+/// speaking, it isn't a string, it has the same memory manangement rules).
+///
+/// \param stream the SDL_AudioStream to query.
+/// \param count On output, set to number of channels in the map. Can be NULL.
+/// \returns an array of the current channel mapping, with as many elements as
+/// the current output spec's channels, or NULL if default.
+///
+/// \threadsafety It is safe to call this function from any thread, as it holds
+/// a stream-specific mutex while running.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_SetAudioStreamInputChannelMap
+///
+/// ```c
+/// extern SDL_DECLSPEC const int * SDLCALL SDL_GetAudioStreamInputChannelMap(SDL_AudioStream *stream, int *count)
+/// ```
+Pointer<Int32> sdlGetAudioStreamInputChannelMap(
+    Pointer<SdlAudioStream> stream, Pointer<Int32> count) {
+  final sdlGetAudioStreamInputChannelMapLookupFunction = libSdl3.lookupFunction<
+      Pointer<Int32> Function(
+          Pointer<SdlAudioStream> stream, Pointer<Int32> count),
+      Pointer<Int32> Function(Pointer<SdlAudioStream> stream,
+          Pointer<Int32> count)>('SDL_GetAudioStreamInputChannelMap');
+  return sdlGetAudioStreamInputChannelMapLookupFunction(stream, count);
+}
+
+///
+/// Get the current output channel map of an audio stream.
+///
+/// Channel maps are optional; most things do not need them, instead passing
+/// data in the [order that SDL expects](CategoryAudio#channel-layouts).
+///
+/// Audio streams default to no remapping applied. This is represented by
+/// returning NULL, and does not signify an error.
+///
+/// The returned array follows the SDL_GetStringRule (even though, strictly
+/// speaking, it isn't a string, it has the same memory manangement rules).
+///
+/// \param stream the SDL_AudioStream to query.
+/// \param count On output, set to number of channels in the map. Can be NULL.
+/// \returns an array of the current channel mapping, with as many elements as
+/// the current output spec's channels, or NULL if default.
+///
+/// \threadsafety It is safe to call this function from any thread, as it holds
+/// a stream-specific mutex while running.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_SetAudioStreamInputChannelMap
+///
+/// ```c
+/// extern SDL_DECLSPEC const int * SDLCALL SDL_GetAudioStreamOutputChannelMap(SDL_AudioStream *stream, int *count)
+/// ```
+Pointer<Int32> sdlGetAudioStreamOutputChannelMap(
+    Pointer<SdlAudioStream> stream, Pointer<Int32> count) {
+  final sdlGetAudioStreamOutputChannelMapLookupFunction =
+      libSdl3.lookupFunction<
+          Pointer<Int32> Function(
+              Pointer<SdlAudioStream> stream, Pointer<Int32> count),
+          Pointer<Int32> Function(Pointer<SdlAudioStream> stream,
+              Pointer<Int32> count)>('SDL_GetAudioStreamOutputChannelMap');
+  return sdlGetAudioStreamOutputChannelMapLookupFunction(stream, count);
+}
+
+///
+/// Set the current input channel map of an audio stream.
+///
+/// Channel maps are optional; most things do not need them, instead passing
+/// data in the [order that SDL expects](CategoryAudio#channel-layouts).
+///
+/// The input channel map reorders data that is added to a stream via
+/// SDL_PutAudioStreamData. Future calls to SDL_PutAudioStreamData must provide
+/// data in the new channel order.
+///
+/// Each item in the array represents an input channel, and its value is the
+/// channel that it should be remapped to. To reverse a stereo signal's left
+/// and right values, you'd have an array of `{ 1, 0 }`. It is legal to remap
+/// multiple channels to the same thing, so `{ 1, 1 }` would duplicate the
+/// right channel to both channels of a stereo signal. You cannot change the
+/// number of channels through a channel map, just reorder them.
+///
+/// Data that was previously queued in the stream will still be operated on in
+/// the order that was current when it was added, which is to say you can put
+/// the end of a sound file in one order to a stream, change orders for the
+/// next sound file, and start putting that new data while the previous sound
+/// file is still queued, and everything will still play back correctly.
+///
+/// Audio streams default to no remapping applied. Passing a NULL channel map
+/// is legal, and turns off remapping.
+///
+/// SDL will copy the channel map; the caller does not have to save this array
+/// after this call.
+///
+/// If `count` is not equal to the current number of channels in the audio
+/// stream's format, this will fail. This is a safety measure to make sure a a
+/// race condition hasn't changed the format while you this call is setting the
+/// channel map.
+///
+/// \param stream the SDL_AudioStream to change.
+/// \param chmap the new channel map, NULL to reset to default.
+/// \param count The number of channels in the map.
+/// \returns 0 on success, -1 on error.
+///
+/// \threadsafety It is safe to call this function from any thread, as it holds
+/// a stream-specific mutex while running. Don't change the
+/// stream's format to have a different number of channels from a
+/// a different thread at the same time, though!
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_SetAudioStreamInputChannelMap
+///
+/// ```c
+/// extern SDL_DECLSPEC int SDLCALL SDL_SetAudioStreamInputChannelMap(SDL_AudioStream *stream, const int *chmap, int count)
+/// ```
+int sdlSetAudioStreamInputChannelMap(
+    Pointer<SdlAudioStream> stream, Pointer<Int32> chmap, int count) {
+  final sdlSetAudioStreamInputChannelMapLookupFunction = libSdl3.lookupFunction<
+      Int32 Function(
+          Pointer<SdlAudioStream> stream, Pointer<Int32> chmap, Int32 count),
+      int Function(Pointer<SdlAudioStream> stream, Pointer<Int32> chmap,
+          int count)>('SDL_SetAudioStreamInputChannelMap');
+  return sdlSetAudioStreamInputChannelMapLookupFunction(stream, chmap, count);
+}
+
+///
+/// Set the current output channel map of an audio stream.
+///
+/// Channel maps are optional; most things do not need them, instead passing
+/// data in the [order that SDL expects](CategoryAudio#channel-layouts).
+///
+/// The output channel map reorders data that leaving a stream via
+/// SDL_GetAudioStreamData.
+///
+/// Each item in the array represents an output channel, and its value is the
+/// channel that it should be remapped to. To reverse a stereo signal's left
+/// and right values, you'd have an array of `{ 1, 0 }`. It is legal to remap
+/// multiple channels to the same thing, so `{ 1, 1 }` would duplicate the
+/// right channel to both channels of a stereo signal. You cannot change the
+/// number of channels through a channel map, just reorder them.
+///
+/// The output channel map can be changed at any time, as output remapping is
+/// applied during SDL_GetAudioStreamData.
+///
+/// Audio streams default to no remapping applied. Passing a NULL channel map
+/// is legal, and turns off remapping.
+///
+/// SDL will copy the channel map; the caller does not have to save this array
+/// after this call.
+///
+/// If `count` is not equal to the current number of channels in the audio
+/// stream's format, this will fail. This is a safety measure to make sure a a
+/// race condition hasn't changed the format while you this call is setting the
+/// channel map.
+///
+/// \param stream the SDL_AudioStream to change.
+/// \param chmap the new channel map, NULL to reset to default.
+/// \param count The number of channels in the map.
+/// \returns 0 on success, -1 on error.
+///
+/// \threadsafety It is safe to call this function from any thread, as it holds
+/// a stream-specific mutex while running. Don't change the
+/// stream's format to have a different number of channels from a
+/// a different thread at the same time, though!
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_SetAudioStreamInputChannelMap
+///
+/// ```c
+/// extern SDL_DECLSPEC int SDLCALL SDL_SetAudioStreamOutputChannelMap(SDL_AudioStream *stream, const int *chmap, int count)
+/// ```
+int sdlSetAudioStreamOutputChannelMap(
+    Pointer<SdlAudioStream> stream, Pointer<Int32> chmap, int count) {
+  final sdlSetAudioStreamOutputChannelMapLookupFunction =
+      libSdl3.lookupFunction<
+          Int32 Function(Pointer<SdlAudioStream> stream, Pointer<Int32> chmap,
+              Int32 count),
+          int Function(Pointer<SdlAudioStream> stream, Pointer<Int32> chmap,
+              int count)>('SDL_SetAudioStreamOutputChannelMap');
+  return sdlSetAudioStreamOutputChannelMapLookupFunction(stream, chmap, count);
 }
 
 ///
@@ -1464,7 +1689,7 @@ void sdlDestroyAudioStream(Pointer<SdlAudioStream> stream) {
 /// Also unlike other functions, the audio device begins paused. This is to map
 /// more closely to SDL2-style behavior, since there is no extra step here to
 /// bind a stream to begin audio flowing. The audio device should be resumed
-/// with `SDL_ResumeAudioDevice(SDL_GetAudioStreamDevice(stream));`
+/// with `SDL_ResumeAudioStreamDevice(stream);`
 ///
 /// This function works with both playback and recording devices.
 ///
@@ -1506,7 +1731,7 @@ void sdlDestroyAudioStream(Pointer<SdlAudioStream> stream) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetAudioStreamDevice
-/// \sa SDL_ResumeAudioDevice
+/// \sa SDL_ResumeAudioStreamDevice
 ///
 /// ```c
 /// extern SDL_DECLSPEC SDL_AudioStream *SDLCALL SDL_OpenAudioDeviceStream(SDL_AudioDeviceID devid, const SDL_AudioSpec *spec, SDL_AudioStreamCallback callback, void *userdata)

@@ -215,3 +215,38 @@ void sdlVulkanDestroySurface(Pointer<NativeType> instance,
           Pointer<Void> allocator)>('SDL_Vulkan_DestroySurface');
   return sdlVulkanDestroySurfaceLookupFunction(instance, surface, allocator);
 }
+
+///
+/// Query support for presentation via a given physical device and queue
+/// family.
+///
+/// The `instance` must have been created with extensions returned by
+/// SDL_Vulkan_GetInstanceExtensions() enabled.
+///
+/// \param instance the Vulkan instance handle.
+/// \param physicalDevice a valid Vulkan physical device handle.
+/// \param queueFamilyIndex a valid queue family index for the given physical
+/// device.
+/// \returns SDL_TRUE if supported, SDL_FALSE if unsupported or an error
+/// occurred.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_Vulkan_GetInstanceExtensions
+///
+/// ```c
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_Vulkan_GetPresentationSupport(VkInstance instance, VkPhysicalDevice physicalDevice, Uint32 queueFamilyIndex)
+/// ```
+bool sdlVulkanGetPresentationSupport(Pointer<NativeType> instance,
+    Pointer<NativeType> physicalDevice, int queueFamilyIndex) {
+  final sdlVulkanGetPresentationSupportLookupFunction = libSdl3.lookupFunction<
+      Int32 Function(Pointer<NativeType> instance,
+          Pointer<NativeType> physicalDevice, Uint32 queueFamilyIndex),
+      int Function(
+          Pointer<NativeType> instance,
+          Pointer<NativeType> physicalDevice,
+          int queueFamilyIndex)>('SDL_Vulkan_GetPresentationSupport');
+  return sdlVulkanGetPresentationSupportLookupFunction(
+          instance, physicalDevice, queueFamilyIndex) ==
+      1;
+}

@@ -11,9 +11,6 @@ import 'lib_sdl.dart';
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_GetProperty
-/// \sa SDL_SetProperty
-///
 /// ```c
 /// extern SDL_DECLSPEC SDL_PropertiesID SDLCALL SDL_GetGlobalProperties(void)
 /// ```
@@ -25,11 +22,11 @@ int sdlGetGlobalProperties() {
 }
 
 ///
-/// Create a set of properties.
+/// Create a group of properties.
 ///
 /// All properties are automatically destroyed when SDL_Quit() is called.
 ///
-/// \returns an ID for a new set of properties, or 0 on failure; call
+/// \returns an ID for a new group of properties, or 0 on failure; call
 /// SDL_GetError() for more information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
@@ -49,12 +46,12 @@ int sdlCreateProperties() {
 }
 
 ///
-/// Copy a set of properties.
+/// Copy a group of properties.
 ///
-/// Copy all the properties from one set of properties to another, with the
+/// Copy all the properties from one group of properties to another, with the
 /// exception of properties requiring cleanup (set using
-/// SDL_SetPropertyWithCleanup()), which will not be copied. Any property that
-/// already exists on `dst` will be overwritten.
+/// SDL_SetPointerPropertyWithCleanup()), which will not be copied. Any
+/// property that already exists on `dst` will be overwritten.
 ///
 /// \param src the properties to copy.
 /// \param dst the destination properties.
@@ -76,7 +73,7 @@ int sdlCopyProperties(int src, int dst) {
 }
 
 ///
-/// Lock a set of properties.
+/// Lock a group of properties.
 ///
 /// Obtain a multi-threaded lock for these properties. Other threads will wait
 /// while trying to lock these properties until they are unlocked. Properties
@@ -108,7 +105,7 @@ int sdlLockProperties(int props) {
 }
 
 ///
-/// Unlock a set of properties.
+/// Unlock a group of properties.
 ///
 /// \param props the properties to unlock.
 ///
@@ -129,8 +126,8 @@ void sdlUnlockProperties(int props) {
 }
 
 ///
-/// Set a property on a set of properties with a cleanup function that is
-/// called when the property is deleted.
+/// Set a pointer property in a group of properties with a cleanup function
+/// that is called when the property is deleted.
 ///
 /// The cleanup function is also called if setting the property fails for any
 /// reason.
@@ -153,20 +150,20 @@ void sdlUnlockProperties(int props) {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_GetProperty
-/// \sa SDL_SetProperty
+/// \sa SDL_GetPointerProperty
+/// \sa SDL_SetPointerProperty
 /// \sa SDL_CleanupPropertyCallback
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_SetPropertyWithCleanup(SDL_PropertiesID props, const char *name, void *value, SDL_CleanupPropertyCallback cleanup, void *userdata)
+/// extern SDL_DECLSPEC int SDLCALL SDL_SetPointerPropertyWithCleanup(SDL_PropertiesID props, const char *name, void *value, SDL_CleanupPropertyCallback cleanup, void *userdata)
 /// ```
-int sdlSetPropertyWithCleanup(
+int sdlSetPointerPropertyWithCleanup(
     int props,
     String? name,
     Pointer<NativeType> value,
     Pointer<NativeFunction<SdlCleanupPropertyCallback>> cleanup,
     Pointer<NativeType> userdata) {
-  final sdlSetPropertyWithCleanupLookupFunction = libSdl3.lookupFunction<
+  final sdlSetPointerPropertyWithCleanupLookupFunction = libSdl3.lookupFunction<
       Int32 Function(
           Uint32 props,
           Pointer<Utf8> name,
@@ -178,16 +175,16 @@ int sdlSetPropertyWithCleanup(
           Pointer<Utf8> name,
           Pointer<NativeType> value,
           Pointer<NativeFunction<SdlCleanupPropertyCallback>> cleanup,
-          Pointer<NativeType> userdata)>('SDL_SetPropertyWithCleanup');
+          Pointer<NativeType> userdata)>('SDL_SetPointerPropertyWithCleanup');
   final namePointer = name != null ? name.toNativeUtf8() : nullptr;
-  final result = sdlSetPropertyWithCleanupLookupFunction(
+  final result = sdlSetPointerPropertyWithCleanupLookupFunction(
       props, namePointer, value, cleanup, userdata);
   calloc.free(namePointer);
   return result;
 }
 
 ///
-/// Set a property on a set of properties.
+/// Set a pointer property in a group of properties.
 ///
 /// \param props the properties to modify.
 /// \param name the name of the property to modify.
@@ -199,31 +196,31 @@ int sdlSetPropertyWithCleanup(
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_GetProperty
+/// \sa SDL_GetPointerProperty
 /// \sa SDL_HasProperty
 /// \sa SDL_SetBooleanProperty
 /// \sa SDL_SetFloatProperty
 /// \sa SDL_SetNumberProperty
-/// \sa SDL_SetPropertyWithCleanup
+/// \sa SDL_SetPointerPropertyWithCleanup
 /// \sa SDL_SetStringProperty
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_SetProperty(SDL_PropertiesID props, const char *name, void *value)
+/// extern SDL_DECLSPEC int SDLCALL SDL_SetPointerProperty(SDL_PropertiesID props, const char *name, void *value)
 /// ```
-int sdlSetProperty(int props, String? name, Pointer<NativeType> value) {
-  final sdlSetPropertyLookupFunction = libSdl3.lookupFunction<
+int sdlSetPointerProperty(int props, String? name, Pointer<NativeType> value) {
+  final sdlSetPointerPropertyLookupFunction = libSdl3.lookupFunction<
       Int32 Function(
           Uint32 props, Pointer<Utf8> name, Pointer<NativeType> value),
       int Function(int props, Pointer<Utf8> name,
-          Pointer<NativeType> value)>('SDL_SetProperty');
+          Pointer<NativeType> value)>('SDL_SetPointerProperty');
   final namePointer = name != null ? name.toNativeUtf8() : nullptr;
-  final result = sdlSetPropertyLookupFunction(props, namePointer, value);
+  final result = sdlSetPointerPropertyLookupFunction(props, namePointer, value);
   calloc.free(namePointer);
   return result;
 }
 
 ///
-/// Set a string property on a set of properties.
+/// Set a string property in a group of properties.
 ///
 /// This function makes a copy of the string; the caller does not have to
 /// preserve the data after this call completes.
@@ -258,7 +255,7 @@ int sdlSetStringProperty(int props, String? name, String? value) {
 }
 
 ///
-/// Set an integer property on a set of properties.
+/// Set an integer property in a group of properties.
 ///
 /// \param props the properties to modify.
 /// \param name the name of the property to modify.
@@ -287,7 +284,7 @@ int sdlSetNumberProperty(int props, String? name, int value) {
 }
 
 ///
-/// Set a floating point property on a set of properties.
+/// Set a floating point property in a group of properties.
 ///
 /// \param props the properties to modify.
 /// \param name the name of the property to modify.
@@ -316,7 +313,7 @@ int sdlSetFloatProperty(int props, String? name, double value) {
 }
 
 ///
-/// Set a boolean property on a set of properties.
+/// Set a boolean property in a group of properties.
 ///
 /// \param props the properties to modify.
 /// \param name the name of the property to modify.
@@ -346,7 +343,7 @@ int sdlSetBooleanProperty(int props, String? name, bool value) {
 }
 
 ///
-/// Return whether a property exists in a set of properties.
+/// Return whether a property exists in a group of properties.
 ///
 /// \param props the properties to query.
 /// \param name the name of the property to query.
@@ -372,7 +369,7 @@ bool sdlHasProperty(int props, String? name) {
 }
 
 ///
-/// Get the type of a property on a set of properties.
+/// Get the type of a property in a group of properties.
 ///
 /// \param props the properties to query.
 /// \param name the name of the property to query.
@@ -399,7 +396,7 @@ int sdlGetPropertyType(int props, String? name) {
 }
 
 ///
-/// Get a property on a set of properties.
+/// Get a pointer property from a group of properties.
 ///
 /// By convention, the names of properties that SDL exposes on objects will
 /// start with "SDL.", and properties that SDL uses internally will start with
@@ -414,9 +411,10 @@ int sdlGetPropertyType(int props, String? name) {
 ///
 /// \threadsafety It is safe to call this function from any thread, although
 /// the data returned is not protected and could potentially be
-/// freed if you call SDL_SetProperty() or SDL_ClearProperty() on
-/// these properties from another thread. If you need to avoid
-/// this, use SDL_LockProperties() and SDL_UnlockProperties().
+/// freed if you call SDL_SetPointerProperty() or
+/// SDL_ClearProperty() on these properties from another thread.
+/// If you need to avoid this, use SDL_LockProperties() and
+/// SDL_UnlockProperties().
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -426,26 +424,27 @@ int sdlGetPropertyType(int props, String? name) {
 /// \sa SDL_GetPropertyType
 /// \sa SDL_GetStringProperty
 /// \sa SDL_HasProperty
-/// \sa SDL_SetProperty
+/// \sa SDL_SetPointerProperty
 ///
 /// ```c
-/// extern SDL_DECLSPEC void *SDLCALL SDL_GetProperty(SDL_PropertiesID props, const char *name, void *default_value)
+/// extern SDL_DECLSPEC void *SDLCALL SDL_GetPointerProperty(SDL_PropertiesID props, const char *name, void *default_value)
 /// ```
-Pointer<NativeType> sdlGetProperty(
+Pointer<NativeType> sdlGetPointerProperty(
     int props, String? name, Pointer<NativeType> defaultValue) {
-  final sdlGetPropertyLookupFunction = libSdl3.lookupFunction<
+  final sdlGetPointerPropertyLookupFunction = libSdl3.lookupFunction<
       Pointer<NativeType> Function(
           Uint32 props, Pointer<Utf8> name, Pointer<NativeType> defaultValue),
       Pointer<NativeType> Function(int props, Pointer<Utf8> name,
-          Pointer<NativeType> defaultValue)>('SDL_GetProperty');
+          Pointer<NativeType> defaultValue)>('SDL_GetPointerProperty');
   final namePointer = name != null ? name.toNativeUtf8() : nullptr;
-  final result = sdlGetPropertyLookupFunction(props, namePointer, defaultValue);
+  final result =
+      sdlGetPointerPropertyLookupFunction(props, namePointer, defaultValue);
   calloc.free(namePointer);
   return result;
 }
 
 ///
-/// Get a string property on a set of properties.
+/// Get a string property from a group of properties.
 ///
 /// The returned string follows the SDL_GetStringRule.
 ///
@@ -486,7 +485,7 @@ String? sdlGetStringProperty(int props, String? name, String? defaultValue) {
 }
 
 ///
-/// Get a number property on a set of properties.
+/// Get a number property from a group of properties.
 ///
 /// You can use SDL_GetPropertyType() to query whether the property exists and
 /// is a number property.
@@ -521,7 +520,7 @@ int sdlGetNumberProperty(int props, String? name, int defaultValue) {
 }
 
 ///
-/// Get a floating point property on a set of properties.
+/// Get a floating point property from a group of properties.
 ///
 /// You can use SDL_GetPropertyType() to query whether the property exists and
 /// is a floating point property.
@@ -556,7 +555,7 @@ double sdlGetFloatProperty(int props, String? name, double defaultValue) {
 }
 
 ///
-/// Get a boolean property on a set of properties.
+/// Get a boolean property from a group of properties.
 ///
 /// You can use SDL_GetPropertyType() to query whether the property exists and
 /// is a boolean property.
@@ -592,7 +591,7 @@ bool sdlGetBooleanProperty(int props, String? name, bool defaultValue) {
 }
 
 ///
-/// Clear a property on a set of properties.
+/// Clear a property from a group of properties.
 ///
 /// \param props the properties to modify.
 /// \param name the name of the property to clear.
@@ -617,10 +616,10 @@ int sdlClearProperty(int props, String? name) {
 }
 
 ///
-/// Enumerate the properties on a set of properties.
+/// Enumerate the properties contained in a group of properties.
 ///
-/// The callback function is called for each property on the set of properties.
-/// The properties are locked during enumeration.
+/// The callback function is called for each property in the group of
+/// properties. The properties are locked during enumeration.
 ///
 /// \param props the properties to query.
 /// \param callback the function to call for each property.
@@ -652,7 +651,7 @@ int sdlEnumerateProperties(
 }
 
 ///
-/// Destroy a set of properties.
+/// Destroy a group of properties.
 ///
 /// All properties are deleted and their cleanup functions will be called, if
 /// any.
