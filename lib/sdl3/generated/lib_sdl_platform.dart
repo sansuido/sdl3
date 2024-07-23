@@ -14,8 +14,6 @@ import 'lib_sdl.dart';
 /// - "iOS"
 /// - "Android"
 ///
-/// The returned string follows the SDL_GetStringRule.
-///
 /// \returns the name of the platform. If the correct platform name is not
 /// available, returns a string beginning with the text "Unknown".
 ///

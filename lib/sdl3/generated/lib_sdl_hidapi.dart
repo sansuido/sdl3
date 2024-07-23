@@ -152,7 +152,7 @@ void sdlHidFreeEnumeration(Pointer<SdlHidDeviceInfo> devs) {
 /// \param serial_number the Serial Number of the device to open (Optionally
 /// NULL).
 /// \returns a pointer to a SDL_hid_device object on success or NULL on
-/// failure.
+/// failure; call SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -177,7 +177,7 @@ Pointer<SdlHidDevice> sdlHidOpen(
 ///
 /// \param path the path name of the device to open.
 /// \returns a pointer to a SDL_hid_device object on success or NULL on
-/// failure.
+/// failure; call SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -214,7 +214,8 @@ Pointer<SdlHidDevice> sdlHidOpenPath(String? path) {
 /// \param data the data to send, including the report number as the first
 /// byte.
 /// \param length the length in bytes of the data to send.
-/// \returns the actual number of bytes written and -1 on error.
+/// \returns the actual number of bytes written and -1 on on failure; call
+/// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -243,9 +244,9 @@ int sdlHidWrite(Pointer<SdlHidDevice> dev, Pointer<Uint8> data, int length) {
 /// reports, make sure to read an extra byte for the report
 /// number.
 /// \param milliseconds timeout in milliseconds or -1 for blocking wait.
-/// \returns the actual number of bytes read and -1 on error. If no packet was
-/// available to be read within the timeout period, this function
-/// returns 0.
+/// \returns the actual number of bytes read and -1 on on failure; call
+/// SDL_GetError() for more information. If no packet was available to
+/// be read within the timeout period, this function returns 0.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -274,9 +275,10 @@ int sdlHidReadTimeout(Pointer<SdlHidDevice> dev, Pointer<Uint8> data,
 /// \param length the number of bytes to read. For devices with multiple
 /// reports, make sure to read an extra byte for the report
 /// number.
-/// \returns the actual number of bytes read and -1 on error. If no packet was
-/// available to be read and the handle is in non-blocking mode, this
-/// function returns 0.
+/// \returns the actual number of bytes read and -1 on failure; call
+/// SDL_GetError() for more information. If no packet was available to
+/// be read and the handle is in non-blocking mode, this function
+/// returns 0.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -338,7 +340,8 @@ int sdlHidSetNonblocking(Pointer<SdlHidDevice> dev, int nonblock) {
 /// byte.
 /// \param length the length in bytes of the data to send, including the report
 /// number.
-/// \returns the actual number of bytes written and -1 on error.
+/// \returns the actual number of bytes written and -1 on failure; call
+/// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -371,7 +374,8 @@ int sdlHidSendFeatureReport(
 /// \param length the number of bytes to read, including an extra byte for the
 /// report ID. The buffer can be longer than the actual report.
 /// \returns the number of bytes read plus one for the report ID (which is
-/// still in the first byte), or -1 on error.
+/// still in the first byte), or -1 on on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -404,7 +408,8 @@ int sdlHidGetFeatureReport(
 /// \param length the number of bytes to read, including an extra byte for the
 /// report ID. The buffer can be longer than the actual report.
 /// \returns the number of bytes read plus one for the report ID (which is
-/// still in the first byte), or -1 on error.
+/// still in the first byte), or -1 on on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -541,10 +546,9 @@ int sdlHidGetIndexedString(Pointer<SdlHidDevice> dev, int stringIndex,
 /// Get the device info from a HID device.
 ///
 /// \param dev a device handle returned from SDL_hid_open().
-/// \returns a pointer to the SDL_hid_device_info for this hid_device, or NULL
-/// in the case of failure; call SDL_GetError() for more information.
-/// This struct is valid until the device is closed with
-/// SDL_hid_close().
+/// \returns a pointer to the SDL_hid_device_info for this hid_device or NULL
+/// on failure; call SDL_GetError() for more information. This struct
+/// is valid until the device is closed with SDL_hid_close().
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -568,7 +572,7 @@ Pointer<SdlHidDeviceInfo> sdlHidGetDeviceInfo(Pointer<SdlHidDevice> dev) {
 /// \param dev a device handle returned from SDL_hid_open().
 /// \param buf the buffer to copy descriptor into.
 /// \param buf_size the size of the buffer in bytes.
-/// \returns the number of bytes actually copied, or -1 on error; call
+/// \returns the number of bytes actually copied or -1 on failure; call
 /// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.

@@ -296,7 +296,7 @@ bool sdlAtomicCompareAndSwapPointer(Pointer<Pointer<NativeType>> a,
 /// \sa SDL_AtomicGetPtr
 ///
 /// ```c
-/// extern SDL_DECLSPEC void* SDLCALL SDL_AtomicSetPtr(void **a, void* v)
+/// extern SDL_DECLSPEC void * SDLCALL SDL_AtomicSetPtr(void **a, void *v)
 /// ```
 Pointer<NativeType> sdlAtomicSetPtr(
     Pointer<Pointer<NativeType>> a, Pointer<NativeType> v) {
@@ -325,7 +325,7 @@ Pointer<NativeType> sdlAtomicSetPtr(
 /// \sa SDL_AtomicSetPtr
 ///
 /// ```c
-/// extern SDL_DECLSPEC void* SDLCALL SDL_AtomicGetPtr(void **a)
+/// extern SDL_DECLSPEC void * SDLCALL SDL_AtomicGetPtr(void **a)
 /// ```
 Pointer<NativeType> sdlAtomicGetPtr(Pointer<Pointer<NativeType>> a) {
   final sdlAtomicGetPtrLookupFunction = libSdl3.lookupFunction<

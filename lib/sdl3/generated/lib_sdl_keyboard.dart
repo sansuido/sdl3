@@ -30,18 +30,21 @@ bool sdlHasKeyboard() {
 /// power buttons, etc. You should wait for input from a device before you
 /// consider it actively in use.
 ///
-/// \param count a pointer filled in with the number of keyboards returned.
-/// \returns a 0 terminated array of keyboards instance IDs which should be
-/// freed with SDL_free(), or NULL on error; call SDL_GetError() for
-/// more details.
+/// This returns temporary memory which will be automatically freed later, and
+/// can be claimed with SDL_ClaimTemporaryMemory().
+///
+/// \param count a pointer filled in with the number of keyboards returned, may
+/// be NULL.
+/// \returns a 0 terminated array of keyboards instance IDs or NULL on failure;
+/// call SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_GetKeyboardInstanceName
+/// \sa SDL_GetKeyboardNameForID
 /// \sa SDL_HasKeyboard
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_KeyboardID *SDLCALL SDL_GetKeyboards(int *count)
+/// extern SDL_DECLSPEC const SDL_KeyboardID * SDLCALL SDL_GetKeyboards(int *count)
 /// ```
 Pointer<Uint32> sdlGetKeyboards(Pointer<Int32> count) {
   final sdlGetKeyboardsLookupFunction = libSdl3.lookupFunction<
@@ -55,10 +58,11 @@ Pointer<Uint32> sdlGetKeyboards(Pointer<Int32> count) {
 ///
 /// This function returns "" if the keyboard doesn't have a name.
 ///
-/// The returned string follows the SDL_GetStringRule.
+/// This returns temporary memory which will be automatically freed later, and
+/// can be claimed with SDL_ClaimTemporaryMemory().
 ///
 /// \param instance_id the keyboard instance ID.
-/// \returns the name of the selected keyboard, or NULL on failure; call
+/// \returns the name of the selected keyboard or NULL on failure; call
 /// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
@@ -66,13 +70,13 @@ Pointer<Uint32> sdlGetKeyboards(Pointer<Int32> count) {
 /// \sa SDL_GetKeyboards
 ///
 /// ```c
-/// extern SDL_DECLSPEC const char *SDLCALL SDL_GetKeyboardInstanceName(SDL_KeyboardID instance_id)
+/// extern SDL_DECLSPEC const char * SDLCALL SDL_GetKeyboardNameForID(SDL_KeyboardID instance_id)
 /// ```
-String? sdlGetKeyboardInstanceName(int instanceId) {
-  final sdlGetKeyboardInstanceNameLookupFunction = libSdl3.lookupFunction<
+String? sdlGetKeyboardNameForId(int instanceId) {
+  final sdlGetKeyboardNameForIdLookupFunction = libSdl3.lookupFunction<
       Pointer<Utf8> Function(Uint32 instanceId),
-      Pointer<Utf8> Function(int instanceId)>('SDL_GetKeyboardInstanceName');
-  final result = sdlGetKeyboardInstanceNameLookupFunction(instanceId);
+      Pointer<Utf8> Function(int instanceId)>('SDL_GetKeyboardNameForID');
+  final result = sdlGetKeyboardNameForIdLookupFunction(instanceId);
   if (result == nullptr) {
     return null;
   }
@@ -126,7 +130,7 @@ Pointer<SdlWindow> sdlGetKeyboardFocus() {
 /// \sa SDL_ResetKeyboard
 ///
 /// ```c
-/// extern SDL_DECLSPEC const Uint8 *SDLCALL SDL_GetKeyboardState(int *numkeys)
+/// extern SDL_DECLSPEC const Uint8 * SDLCALL SDL_GetKeyboardState(int *numkeys)
 /// ```
 Pointer<Uint8> sdlGetKeyboardState(Pointer<Int32> numkeys) {
   final sdlGetKeyboardStateLookupFunction = libSdl3.lookupFunction<
@@ -341,7 +345,8 @@ int sdlSetScancodeName(int scancode, String? name) {
 ///
 /// Get a human-readable name for a scancode.
 ///
-/// The returned string follows the SDL_GetStringRule.
+/// This returns temporary memory which will be automatically freed later, and
+/// can be claimed with SDL_ClaimTemporaryMemory().
 ///
 /// **Warning**: The returned name is by design not stable across platforms,
 /// e.g. the name for `SDL_SCANCODE_LGUI` is "Left GUI" under Linux but "Left
@@ -363,7 +368,7 @@ int sdlSetScancodeName(int scancode, String? name) {
 /// \sa SDL_SetScancodeName
 ///
 /// ```c
-/// extern SDL_DECLSPEC const char *SDLCALL SDL_GetScancodeName(SDL_Scancode scancode)
+/// extern SDL_DECLSPEC const char * SDLCALL SDL_GetScancodeName(SDL_Scancode scancode)
 /// ```
 String? sdlGetScancodeName(int scancode) {
   final sdlGetScancodeNameLookupFunction = libSdl3.lookupFunction<
@@ -410,7 +415,8 @@ int sdlGetScancodeFromName(String? name) {
 ///
 /// If the key doesn't have a name, this function returns an empty string ("").
 ///
-/// The returned string follows the SDL_GetStringRule.
+/// This returns temporary memory which will be automatically freed later, and
+/// can be claimed with SDL_ClaimTemporaryMemory().
 ///
 /// \param key the desired SDL_Keycode to query.
 /// \returns a UTF-8 encoded string of the key name.
@@ -422,7 +428,7 @@ int sdlGetScancodeFromName(String? name) {
 /// \sa SDL_GetScancodeFromKey
 ///
 /// ```c
-/// extern SDL_DECLSPEC const char *SDLCALL SDL_GetKeyName(SDL_Keycode key)
+/// extern SDL_DECLSPEC const char * SDLCALL SDL_GetKeyName(SDL_Keycode key)
 /// ```
 String? sdlGetKeyName(int key) {
   final sdlGetKeyNameLookupFunction = libSdl3.lookupFunction<

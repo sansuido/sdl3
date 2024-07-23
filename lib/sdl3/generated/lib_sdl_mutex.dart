@@ -24,7 +24,7 @@ import 'struct_sdl.dart';
 /// \sa SDL_UnlockMutex
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_Mutex *SDLCALL SDL_CreateMutex(void)
+/// extern SDL_DECLSPEC SDL_Mutex * SDLCALL SDL_CreateMutex(void)
 /// ```
 Pointer<SdlMutex> sdlCreateMutex() {
   final sdlCreateMutexLookupFunction = libSdl3.lookupFunction<
@@ -191,7 +191,7 @@ void sdlDestroyMutex(Pointer<SdlMutex> mutex) {
 /// \sa SDL_UnlockRWLock
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_RWLock *SDLCALL SDL_CreateRWLock(void)
+/// extern SDL_DECLSPEC SDL_RWLock * SDLCALL SDL_CreateRWLock(void)
 /// ```
 Pointer<SdlRwLock> sdlCreateRwLock() {
   final sdlCreateRwLockLookupFunction = libSdl3.lookupFunction<
@@ -446,7 +446,7 @@ void sdlDestroyRwLock(Pointer<SdlRwLock> rwlock) {
 /// \sa SDL_WaitSemaphoreTimeout
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_Semaphore *SDLCALL SDL_CreateSemaphore(Uint32 initial_value)
+/// extern SDL_DECLSPEC SDL_Semaphore * SDLCALL SDL_CreateSemaphore(Uint32 initial_value)
 /// ```
 Pointer<SdlSemaphore> sdlCreateSemaphore(int initialValue) {
   final sdlCreateSemaphoreLookupFunction = libSdl3.lookupFunction<
@@ -624,7 +624,7 @@ int sdlGetSemaphoreValue(Pointer<SdlSemaphore> sem) {
 /// \sa SDL_DestroyCondition
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_Condition *SDLCALL SDL_CreateCondition(void)
+/// extern SDL_DECLSPEC SDL_Condition * SDLCALL SDL_CreateCondition(void)
 /// ```
 Pointer<SdlCondition> sdlCreateCondition() {
   final sdlCreateConditionLookupFunction = libSdl3.lookupFunction<

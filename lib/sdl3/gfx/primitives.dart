@@ -35,7 +35,7 @@ import '../generated/lib_sdl_render.dart';
 import '../generated/lib_sdl_stdinc.dart';
 import '../generated/lib_sdl_surface.dart';
 import '../generated/struct_sdl.dart';
-import '../lib_sdl_ex.dart';
+//import '../lib_sdl_ex.dart';
 import 'primitives_font.dart';
 import 'rotozoom.dart';
 

@@ -15,8 +15,8 @@ import 'struct_sdl.dart';
 /// format, may be NULL.
 /// \param timeFormat a pointer to the SDL_TimeFormat to hold the returned time
 /// format, may be NULL.
-/// \returns 0 on success or -1 on error; call SDL_GetError() for more
-/// information.
+/// \returns 0 on success or a negative error code on failure; call
+/// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -37,8 +37,8 @@ int sdlGetDateTimeLocalePreferences(
 /// Jan 1, 1970 in Universal Coordinated Time (UTC).
 ///
 /// \param ticks the SDL_Time to hold the returned tick count.
-/// \returns 0 on success or -1 on error; call SDL_GetError() for more
-/// information.
+/// \returns 0 on success or a negative error code on failure; call
+/// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -61,8 +61,8 @@ int sdlGetCurrentTime(Pointer<Int64> ticks) {
 /// \param localTime the resulting SDL_DateTime will be expressed in local time
 /// if true, otherwise it will be in Universal Coordinated
 /// Time (UTC).
-/// \returns 0 on success or -1 on error; call SDL_GetError() for more
-/// information.
+/// \returns 0 on success or a negative error code on failure; call
+/// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -85,8 +85,8 @@ int sdlTimeToDateTime(int ticks, Pointer<SdlDateTime> dt, bool localTime) {
 ///
 /// \param dt the source SDL_DateTime.
 /// \param ticks the resulting SDL_Time.
-/// \returns 0 on success or -1 on error; call SDL_GetError() for more
-/// information.
+/// \returns 0 on success or a negative error code on failure; call
+/// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -157,8 +157,8 @@ int sdlTimeFromWindows(int dwLowDateTime, int dwHighDateTime) {
 ///
 /// \param year the year.
 /// \param month the month [1-12].
-/// \returns the number of days in the requested month, otherwise -1; call
-/// SDL_GetError() for more information.
+/// \returns the number of days in the requested month or a negative error code
+/// on failure; call SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -178,8 +178,8 @@ int sdlGetDaysInMonth(int year, int month) {
 /// \param year the year component of the date.
 /// \param month the month component of the date.
 /// \param day the day component of the date.
-/// \returns the day of year [0-365] if the date is valid, otherwise -1; call
-/// SDL_GetError() for more information.
+/// \returns the day of year [0-365] if the date is valid or a negative error
+/// code on failure; call SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -199,8 +199,9 @@ int sdlGetDayOfYear(int year, int month, int day) {
 /// \param year the year component of the date.
 /// \param month the month component of the date.
 /// \param day the day component of the date.
-/// \returns a value between 0 and 6 (0 being Sunday) if the date is valid,
-/// otherwise -1; call SDL_GetError() for more information.
+/// \returns a value between 0 and 6 (0 being Sunday) if the date is valid or a
+/// negative error code on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///

@@ -59,10 +59,13 @@ bool sdlHasJoystick() {
 ///
 /// Get a list of currently connected joysticks.
 ///
-/// \param count a pointer filled in with the number of joysticks returned.
-/// \returns a 0 terminated array of joystick instance IDs which should be
-/// freed with SDL_free(), or NULL on error; call SDL_GetError() for
-/// more details.
+/// This returns temporary memory which will be automatically freed later, and
+/// can be claimed with SDL_ClaimTemporaryMemory().
+///
+/// \param count a pointer filled in with the number of joysticks returned, may
+/// be NULL.
+/// \returns a 0 terminated array of joystick instance IDs or NULL on failure;
+/// call SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -70,7 +73,7 @@ bool sdlHasJoystick() {
 /// \sa SDL_OpenJoystick
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_JoystickID *SDLCALL SDL_GetJoysticks(int *count)
+/// extern SDL_DECLSPEC const SDL_JoystickID * SDLCALL SDL_GetJoysticks(int *count)
 /// ```
 Pointer<Uint32> sdlGetJoysticks(Pointer<Int32> count) {
   final sdlGetJoysticksLookupFunction = libSdl3.lookupFunction<
@@ -84,7 +87,8 @@ Pointer<Uint32> sdlGetJoysticks(Pointer<Int32> count) {
 ///
 /// This can be called before any joysticks are opened.
 ///
-/// The returned string follows the SDL_GetStringRule.
+/// This returns temporary memory which will be automatically freed later, and
+/// can be claimed with SDL_ClaimTemporaryMemory().
 ///
 /// \param instance_id the joystick instance ID.
 /// \returns the name of the selected joystick. If no name can be found, this
@@ -96,13 +100,13 @@ Pointer<Uint32> sdlGetJoysticks(Pointer<Int32> count) {
 /// \sa SDL_GetJoysticks
 ///
 /// ```c
-/// extern SDL_DECLSPEC const char *SDLCALL SDL_GetJoystickInstanceName(SDL_JoystickID instance_id)
+/// extern SDL_DECLSPEC const char * SDLCALL SDL_GetJoystickNameForID(SDL_JoystickID instance_id)
 /// ```
-String? sdlGetJoystickInstanceName(int instanceId) {
-  final sdlGetJoystickInstanceNameLookupFunction = libSdl3.lookupFunction<
+String? sdlGetJoystickNameForId(int instanceId) {
+  final sdlGetJoystickNameForIdLookupFunction = libSdl3.lookupFunction<
       Pointer<Utf8> Function(Uint32 instanceId),
-      Pointer<Utf8> Function(int instanceId)>('SDL_GetJoystickInstanceName');
-  final result = sdlGetJoystickInstanceNameLookupFunction(instanceId);
+      Pointer<Utf8> Function(int instanceId)>('SDL_GetJoystickNameForID');
+  final result = sdlGetJoystickNameForIdLookupFunction(instanceId);
   if (result == nullptr) {
     return null;
   }
@@ -114,7 +118,8 @@ String? sdlGetJoystickInstanceName(int instanceId) {
 ///
 /// This can be called before any joysticks are opened.
 ///
-/// The returned string follows the SDL_GetStringRule.
+/// This returns temporary memory which will be automatically freed later, and
+/// can be claimed with SDL_ClaimTemporaryMemory().
 ///
 /// \param instance_id the joystick instance ID.
 /// \returns the path of the selected joystick. If no path can be found, this
@@ -126,13 +131,13 @@ String? sdlGetJoystickInstanceName(int instanceId) {
 /// \sa SDL_GetJoysticks
 ///
 /// ```c
-/// extern SDL_DECLSPEC const char *SDLCALL SDL_GetJoystickInstancePath(SDL_JoystickID instance_id)
+/// extern SDL_DECLSPEC const char * SDLCALL SDL_GetJoystickPathForID(SDL_JoystickID instance_id)
 /// ```
-String? sdlGetJoystickInstancePath(int instanceId) {
-  final sdlGetJoystickInstancePathLookupFunction = libSdl3.lookupFunction<
+String? sdlGetJoystickPathForId(int instanceId) {
+  final sdlGetJoystickPathForIdLookupFunction = libSdl3.lookupFunction<
       Pointer<Utf8> Function(Uint32 instanceId),
-      Pointer<Utf8> Function(int instanceId)>('SDL_GetJoystickInstancePath');
-  final result = sdlGetJoystickInstancePathLookupFunction(instanceId);
+      Pointer<Utf8> Function(int instanceId)>('SDL_GetJoystickPathForID');
+  final result = sdlGetJoystickPathForIdLookupFunction(instanceId);
   if (result == nullptr) {
     return null;
   }
@@ -153,13 +158,13 @@ String? sdlGetJoystickInstancePath(int instanceId) {
 /// \sa SDL_GetJoysticks
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_GetJoystickInstancePlayerIndex(SDL_JoystickID instance_id)
+/// extern SDL_DECLSPEC int SDLCALL SDL_GetJoystickPlayerIndexForID(SDL_JoystickID instance_id)
 /// ```
-int sdlGetJoystickInstancePlayerIndex(int instanceId) {
-  final sdlGetJoystickInstancePlayerIndexLookupFunction =
-      libSdl3.lookupFunction<Int32 Function(Uint32 instanceId),
-          int Function(int instanceId)>('SDL_GetJoystickInstancePlayerIndex');
-  return sdlGetJoystickInstancePlayerIndexLookupFunction(instanceId);
+int sdlGetJoystickPlayerIndexForId(int instanceId) {
+  final sdlGetJoystickPlayerIndexForIdLookupFunction = libSdl3.lookupFunction<
+      Int32 Function(Uint32 instanceId),
+      int Function(int instanceId)>('SDL_GetJoystickPlayerIndexForID');
+  return sdlGetJoystickPlayerIndexForIdLookupFunction(instanceId);
 }
 
 ///
@@ -174,16 +179,16 @@ int sdlGetJoystickInstancePlayerIndex(int instanceId) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetJoystickGUID
-/// \sa SDL_GetJoystickGUIDString
+/// \sa SDL_GUIDToString
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_JoystickGUID SDLCALL SDL_GetJoystickInstanceGUID(SDL_JoystickID instance_id)
+/// extern SDL_DECLSPEC SDL_GUID SDLCALL SDL_GetJoystickGUIDForID(SDL_JoystickID instance_id)
 /// ```
-SdlGuid sdlGetJoystickInstanceGuid(int instanceId) {
-  final sdlGetJoystickInstanceGuidLookupFunction = libSdl3.lookupFunction<
+SdlGuid sdlGetJoystickGuidForId(int instanceId) {
+  final sdlGetJoystickGuidForIdLookupFunction = libSdl3.lookupFunction<
       SdlGuid Function(Uint32 instanceId),
-      SdlGuid Function(int instanceId)>('SDL_GetJoystickInstanceGUID');
-  return sdlGetJoystickInstanceGuidLookupFunction(instanceId);
+      SdlGuid Function(int instanceId)>('SDL_GetJoystickGUIDForID');
+  return sdlGetJoystickGuidForIdLookupFunction(instanceId);
 }
 
 ///
@@ -202,13 +207,13 @@ SdlGuid sdlGetJoystickInstanceGuid(int instanceId) {
 /// \sa SDL_GetJoysticks
 ///
 /// ```c
-/// extern SDL_DECLSPEC Uint16 SDLCALL SDL_GetJoystickInstanceVendor(SDL_JoystickID instance_id)
+/// extern SDL_DECLSPEC Uint16 SDLCALL SDL_GetJoystickVendorForID(SDL_JoystickID instance_id)
 /// ```
-int sdlGetJoystickInstanceVendor(int instanceId) {
-  final sdlGetJoystickInstanceVendorLookupFunction = libSdl3.lookupFunction<
+int sdlGetJoystickVendorForId(int instanceId) {
+  final sdlGetJoystickVendorForIdLookupFunction = libSdl3.lookupFunction<
       Uint16 Function(Uint32 instanceId),
-      int Function(int instanceId)>('SDL_GetJoystickInstanceVendor');
-  return sdlGetJoystickInstanceVendorLookupFunction(instanceId);
+      int Function(int instanceId)>('SDL_GetJoystickVendorForID');
+  return sdlGetJoystickVendorForIdLookupFunction(instanceId);
 }
 
 ///
@@ -227,13 +232,13 @@ int sdlGetJoystickInstanceVendor(int instanceId) {
 /// \sa SDL_GetJoysticks
 ///
 /// ```c
-/// extern SDL_DECLSPEC Uint16 SDLCALL SDL_GetJoystickInstanceProduct(SDL_JoystickID instance_id)
+/// extern SDL_DECLSPEC Uint16 SDLCALL SDL_GetJoystickProductForID(SDL_JoystickID instance_id)
 /// ```
-int sdlGetJoystickInstanceProduct(int instanceId) {
-  final sdlGetJoystickInstanceProductLookupFunction = libSdl3.lookupFunction<
+int sdlGetJoystickProductForId(int instanceId) {
+  final sdlGetJoystickProductForIdLookupFunction = libSdl3.lookupFunction<
       Uint16 Function(Uint32 instanceId),
-      int Function(int instanceId)>('SDL_GetJoystickInstanceProduct');
-  return sdlGetJoystickInstanceProductLookupFunction(instanceId);
+      int Function(int instanceId)>('SDL_GetJoystickProductForID');
+  return sdlGetJoystickProductForIdLookupFunction(instanceId);
 }
 
 ///
@@ -252,15 +257,13 @@ int sdlGetJoystickInstanceProduct(int instanceId) {
 /// \sa SDL_GetJoysticks
 ///
 /// ```c
-/// extern SDL_DECLSPEC Uint16 SDLCALL SDL_GetJoystickInstanceProductVersion(SDL_JoystickID instance_id)
+/// extern SDL_DECLSPEC Uint16 SDLCALL SDL_GetJoystickProductVersionForID(SDL_JoystickID instance_id)
 /// ```
-int sdlGetJoystickInstanceProductVersion(int instanceId) {
-  final sdlGetJoystickInstanceProductVersionLookupFunction =
-      libSdl3.lookupFunction<
-          Uint16 Function(Uint32 instanceId),
-          int Function(
-              int instanceId)>('SDL_GetJoystickInstanceProductVersion');
-  return sdlGetJoystickInstanceProductVersionLookupFunction(instanceId);
+int sdlGetJoystickProductVersionForId(int instanceId) {
+  final sdlGetJoystickProductVersionForIdLookupFunction =
+      libSdl3.lookupFunction<Uint16 Function(Uint32 instanceId),
+          int Function(int instanceId)>('SDL_GetJoystickProductVersionForID');
+  return sdlGetJoystickProductVersionForIdLookupFunction(instanceId);
 }
 
 ///
@@ -279,13 +282,13 @@ int sdlGetJoystickInstanceProductVersion(int instanceId) {
 /// \sa SDL_GetJoysticks
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_JoystickType SDLCALL SDL_GetJoystickInstanceType(SDL_JoystickID instance_id)
+/// extern SDL_DECLSPEC SDL_JoystickType SDLCALL SDL_GetJoystickTypeForID(SDL_JoystickID instance_id)
 /// ```
-int sdlGetJoystickInstanceType(int instanceId) {
-  final sdlGetJoystickInstanceTypeLookupFunction = libSdl3.lookupFunction<
+int sdlGetJoystickTypeForId(int instanceId) {
+  final sdlGetJoystickTypeForIdLookupFunction = libSdl3.lookupFunction<
       Int32 Function(Uint32 instanceId),
-      int Function(int instanceId)>('SDL_GetJoystickInstanceType');
-  return sdlGetJoystickInstanceTypeLookupFunction(instanceId);
+      int Function(int instanceId)>('SDL_GetJoystickTypeForID');
+  return sdlGetJoystickTypeForIdLookupFunction(instanceId);
 }
 
 ///
@@ -295,15 +298,15 @@ int sdlGetJoystickInstanceType(int instanceId) {
 /// for use.
 ///
 /// \param instance_id the joystick instance ID.
-/// \returns a joystick identifier or NULL if an error occurred; call
-/// SDL_GetError() for more information.
+/// \returns a joystick identifier or NULL on failure; call SDL_GetError() for
+/// more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_CloseJoystick
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_Joystick *SDLCALL SDL_OpenJoystick(SDL_JoystickID instance_id)
+/// extern SDL_DECLSPEC SDL_Joystick * SDLCALL SDL_OpenJoystick(SDL_JoystickID instance_id)
 /// ```
 Pointer<SdlJoystick> sdlOpenJoystick(int instanceId) {
   final sdlOpenJoystickLookupFunction = libSdl3.lookupFunction<
@@ -322,14 +325,13 @@ Pointer<SdlJoystick> sdlOpenJoystick(int instanceId) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_Joystick *SDLCALL SDL_GetJoystickFromInstanceID(SDL_JoystickID instance_id)
+/// extern SDL_DECLSPEC SDL_Joystick * SDLCALL SDL_GetJoystickFromID(SDL_JoystickID instance_id)
 /// ```
-Pointer<SdlJoystick> sdlGetJoystickFromInstanceId(int instanceId) {
-  final sdlGetJoystickFromInstanceIdLookupFunction = libSdl3.lookupFunction<
+Pointer<SdlJoystick> sdlGetJoystickFromId(int instanceId) {
+  final sdlGetJoystickFromIdLookupFunction = libSdl3.lookupFunction<
       Pointer<SdlJoystick> Function(Uint32 instanceId),
-      Pointer<SdlJoystick> Function(
-          int instanceId)>('SDL_GetJoystickFromInstanceID');
-  return sdlGetJoystickFromInstanceIdLookupFunction(instanceId);
+      Pointer<SdlJoystick> Function(int instanceId)>('SDL_GetJoystickFromID');
+  return sdlGetJoystickFromIdLookupFunction(instanceId);
 }
 
 ///
@@ -345,7 +347,7 @@ Pointer<SdlJoystick> sdlGetJoystickFromInstanceId(int instanceId) {
 /// \sa SDL_SetJoystickPlayerIndex
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_Joystick *SDLCALL SDL_GetJoystickFromPlayerIndex(int player_index)
+/// extern SDL_DECLSPEC SDL_Joystick * SDLCALL SDL_GetJoystickFromPlayerIndex(int player_index)
 /// ```
 Pointer<SdlJoystick> sdlGetJoystickFromPlayerIndex(int playerIndex) {
   final sdlGetJoystickFromPlayerIndexLookupFunction = libSdl3.lookupFunction<
@@ -359,8 +361,8 @@ Pointer<SdlJoystick> sdlGetJoystickFromPlayerIndex(int playerIndex) {
 /// Attach a new virtual joystick.
 ///
 /// \param desc joystick description.
-/// \returns the joystick instance ID, or 0 if an error occurred; call
-/// SDL_GetError() for more information.
+/// \returns the joystick instance ID, or 0 on failure; call SDL_GetError() for
+/// more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -657,7 +659,8 @@ int sdlGetJoystickProperties(Pointer<SdlJoystick> joystick) {
 ///
 /// Get the implementation dependent name of a joystick.
 ///
-/// The returned string follows the SDL_GetStringRule.
+/// This returns temporary memory which will be automatically freed later, and
+/// can be claimed with SDL_ClaimTemporaryMemory().
 ///
 /// \param joystick the SDL_Joystick obtained from SDL_OpenJoystick().
 /// \returns the name of the selected joystick. If no name can be found, this
@@ -665,10 +668,10 @@ int sdlGetJoystickProperties(Pointer<SdlJoystick> joystick) {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_GetJoystickInstanceName
+/// \sa SDL_GetJoystickNameForID
 ///
 /// ```c
-/// extern SDL_DECLSPEC const char *SDLCALL SDL_GetJoystickName(SDL_Joystick *joystick)
+/// extern SDL_DECLSPEC const char * SDLCALL SDL_GetJoystickName(SDL_Joystick *joystick)
 /// ```
 String? sdlGetJoystickName(Pointer<SdlJoystick> joystick) {
   final sdlGetJoystickNameLookupFunction = libSdl3.lookupFunction<
@@ -685,7 +688,8 @@ String? sdlGetJoystickName(Pointer<SdlJoystick> joystick) {
 ///
 /// Get the implementation dependent path of a joystick.
 ///
-/// The returned string follows the SDL_GetStringRule.
+/// This returns temporary memory which will be automatically freed later, and
+/// can be claimed with SDL_ClaimTemporaryMemory().
 ///
 /// \param joystick the SDL_Joystick obtained from SDL_OpenJoystick().
 /// \returns the path of the selected joystick. If no path can be found, this
@@ -693,10 +697,10 @@ String? sdlGetJoystickName(Pointer<SdlJoystick> joystick) {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_GetJoystickInstancePath
+/// \sa SDL_GetJoystickPathForID
 ///
 /// ```c
-/// extern SDL_DECLSPEC const char *SDLCALL SDL_GetJoystickPath(SDL_Joystick *joystick)
+/// extern SDL_DECLSPEC const char * SDLCALL SDL_GetJoystickPath(SDL_Joystick *joystick)
 /// ```
 String? sdlGetJoystickPath(Pointer<SdlJoystick> joystick) {
   final sdlGetJoystickPathLookupFunction = libSdl3.lookupFunction<
@@ -770,11 +774,11 @@ int sdlSetJoystickPlayerIndex(Pointer<SdlJoystick> joystick, int playerIndex) {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_GetJoystickInstanceGUID
-/// \sa SDL_GetJoystickGUIDString
+/// \sa SDL_GetJoystickGUIDForID
+/// \sa SDL_GUIDToString
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_JoystickGUID SDLCALL SDL_GetJoystickGUID(SDL_Joystick *joystick)
+/// extern SDL_DECLSPEC SDL_GUID SDLCALL SDL_GetJoystickGUID(SDL_Joystick *joystick)
 /// ```
 SdlGuid sdlGetJoystickGuid(Pointer<SdlJoystick> joystick) {
   final sdlGetJoystickGuidLookupFunction = libSdl3.lookupFunction<
@@ -793,7 +797,7 @@ SdlGuid sdlGetJoystickGuid(Pointer<SdlJoystick> joystick) {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_GetJoystickInstanceVendor
+/// \sa SDL_GetJoystickVendorForID
 ///
 /// ```c
 /// extern SDL_DECLSPEC Uint16 SDLCALL SDL_GetJoystickVendor(SDL_Joystick *joystick)
@@ -815,7 +819,7 @@ int sdlGetJoystickVendor(Pointer<SdlJoystick> joystick) {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_GetJoystickInstanceProduct
+/// \sa SDL_GetJoystickProductForID
 ///
 /// ```c
 /// extern SDL_DECLSPEC Uint16 SDLCALL SDL_GetJoystickProduct(SDL_Joystick *joystick)
@@ -837,7 +841,7 @@ int sdlGetJoystickProduct(Pointer<SdlJoystick> joystick) {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_GetJoystickInstanceProductVersion
+/// \sa SDL_GetJoystickProductVersionForID
 ///
 /// ```c
 /// extern SDL_DECLSPEC Uint16 SDLCALL SDL_GetJoystickProductVersion(SDL_Joystick *joystick)
@@ -877,7 +881,8 @@ int sdlGetJoystickFirmwareVersion(Pointer<SdlJoystick> joystick) {
 ///
 /// Returns the serial number of the joystick, or NULL if it is not available.
 ///
-/// The returned string follows the SDL_GetStringRule.
+/// This returns temporary memory which will be automatically freed later, and
+/// can be claimed with SDL_ClaimTemporaryMemory().
 ///
 /// \param joystick the SDL_Joystick obtained from SDL_OpenJoystick().
 /// \returns the serial number of the selected joystick, or NULL if
@@ -908,7 +913,7 @@ String? sdlGetJoystickSerial(Pointer<SdlJoystick> joystick) {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_GetJoystickInstanceType
+/// \sa SDL_GetJoystickTypeForID
 ///
 /// ```c
 /// extern SDL_DECLSPEC SDL_JoystickType SDLCALL SDL_GetJoystickType(SDL_Joystick *joystick)
@@ -921,64 +926,9 @@ int sdlGetJoystickType(Pointer<SdlJoystick> joystick) {
 }
 
 ///
-/// Get an ASCII string representation for a given SDL_JoystickGUID.
+/// Get the device information encoded in a SDL_GUID structure.
 ///
-/// You should supply at least 33 bytes for pszGUID.
-///
-/// \param guid the SDL_JoystickGUID you wish to convert to string.
-/// \param pszGUID buffer in which to write the ASCII string.
-/// \param cbGUID the size of pszGUID.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
-///
-/// \since This function is available since SDL 3.0.0.
-///
-/// \sa SDL_GetJoystickInstanceGUID
-/// \sa SDL_GetJoystickGUID
-/// \sa SDL_GetJoystickGUIDFromString
-///
-/// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_GetJoystickGUIDString(SDL_JoystickGUID guid, char *pszGUID, int cbGUID)
-/// ```
-int sdlGetJoystickGuidString(SdlGuid guid, Pointer<Int8> pszGuid, int cbGuid) {
-  final sdlGetJoystickGuidStringLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(SdlGuid guid, Pointer<Int8> pszGuid, Int32 cbGuid),
-      int Function(SdlGuid guid, Pointer<Int8> pszGuid,
-          int cbGuid)>('SDL_GetJoystickGUIDString');
-  return sdlGetJoystickGuidStringLookupFunction(guid, pszGuid, cbGuid);
-}
-
-///
-/// Convert a GUID string into a SDL_JoystickGUID structure.
-///
-/// Performs no error checking. If this function is given a string containing
-/// an invalid GUID, the function will silently succeed, but the GUID generated
-/// will not be useful.
-///
-/// \param pchGUID string containing an ASCII representation of a GUID.
-/// \returns a SDL_JoystickGUID structure.
-///
-/// \since This function is available since SDL 3.0.0.
-///
-/// \sa SDL_GetJoystickGUIDString
-///
-/// ```c
-/// extern SDL_DECLSPEC SDL_JoystickGUID SDLCALL SDL_GetJoystickGUIDFromString(const char *pchGUID)
-/// ```
-SdlGuid sdlGetJoystickGuidFromString(String? pchGuid) {
-  final sdlGetJoystickGuidFromStringLookupFunction = libSdl3.lookupFunction<
-      SdlGuid Function(Pointer<Utf8> pchGuid),
-      SdlGuid Function(Pointer<Utf8> pchGuid)>('SDL_GetJoystickGUIDFromString');
-  final pchGuidPointer = pchGuid != null ? pchGuid.toNativeUtf8() : nullptr;
-  final result = sdlGetJoystickGuidFromStringLookupFunction(pchGuidPointer);
-  calloc.free(pchGuidPointer);
-  return result;
-}
-
-///
-/// Get the device information encoded in a SDL_JoystickGUID structure.
-///
-/// \param guid the SDL_JoystickGUID you wish to get info about.
+/// \param guid the SDL_GUID you wish to get info about.
 /// \param vendor a pointer filled in with the device VID, or 0 if not
 /// available.
 /// \param product a pointer filled in with the device PID, or 0 if not
@@ -990,10 +940,10 @@ SdlGuid sdlGetJoystickGuidFromString(String? pchGuid) {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_GetJoystickInstanceGUID
+/// \sa SDL_GetJoystickGUIDForID
 ///
 /// ```c
-/// extern SDL_DECLSPEC void SDLCALL SDL_GetJoystickGUIDInfo(SDL_JoystickGUID guid, Uint16 *vendor, Uint16 *product, Uint16 *version, Uint16 *crc16)
+/// extern SDL_DECLSPEC void SDLCALL SDL_GetJoystickGUIDInfo(SDL_GUID guid, Uint16 *vendor, Uint16 *product, Uint16 *version, Uint16 *crc16)
 /// ```
 void sdlGetJoystickGuidInfo(SdlGuid guid, Pointer<Uint16> vendor,
     Pointer<Uint16> product, Pointer<Uint16> version, Pointer<Uint16> crc16) {
@@ -1043,13 +993,13 @@ bool sdlJoystickConnected(Pointer<SdlJoystick> joystick) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_JoystickID SDLCALL SDL_GetJoystickInstanceID(SDL_Joystick *joystick)
+/// extern SDL_DECLSPEC SDL_JoystickID SDLCALL SDL_GetJoystickID(SDL_Joystick *joystick)
 /// ```
-int sdlGetJoystickInstanceId(Pointer<SdlJoystick> joystick) {
-  final sdlGetJoystickInstanceIdLookupFunction = libSdl3.lookupFunction<
+int sdlGetJoystickId(Pointer<SdlJoystick> joystick) {
+  final sdlGetJoystickIdLookupFunction = libSdl3.lookupFunction<
       Uint32 Function(Pointer<SdlJoystick> joystick),
-      int Function(Pointer<SdlJoystick> joystick)>('SDL_GetJoystickInstanceID');
-  return sdlGetJoystickInstanceIdLookupFunction(joystick);
+      int Function(Pointer<SdlJoystick> joystick)>('SDL_GetJoystickID');
+  return sdlGetJoystickIdLookupFunction(joystick);
 }
 
 ///

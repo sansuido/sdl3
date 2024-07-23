@@ -263,14 +263,14 @@ void mixPauseAudio(int pauseOn) {
 /// \sa Mix_OpenAudio
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL Mix_QuerySpec(int *frequency, Uint16 *format, int *channels)
+/// extern SDL_DECLSPEC int SDLCALL Mix_QuerySpec(int *frequency, SDL_AudioFormat *format, int *channels)
 /// ```
 int mixQuerySpec(
-    Pointer<Int32> frequency, Pointer<Uint16> format, Pointer<Int32> channels) {
+    Pointer<Int32> frequency, Pointer<Int32> format, Pointer<Int32> channels) {
   final mixQuerySpecLookupFunction = libSdl3Mixer.lookupFunction<
-      Int32 Function(Pointer<Int32> frequency, Pointer<Uint16> format,
+      Int32 Function(Pointer<Int32> frequency, Pointer<Int32> format,
           Pointer<Int32> channels),
-      int Function(Pointer<Int32> frequency, Pointer<Uint16> format,
+      int Function(Pointer<Int32> frequency, Pointer<Int32> format,
           Pointer<Int32> channels)>('Mix_QuerySpec');
   return mixQuerySpecLookupFunction(frequency, format, channels);
 }

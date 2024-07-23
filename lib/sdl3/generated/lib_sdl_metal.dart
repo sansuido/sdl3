@@ -22,7 +22,7 @@ import 'struct_sdl.dart';
 /// \sa SDL_Metal_GetLayer
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_MetalView SDLCALL SDL_Metal_CreateView(SDL_Window * window)
+/// extern SDL_DECLSPEC SDL_MetalView SDLCALL SDL_Metal_CreateView(SDL_Window *window)
 /// ```
 Pointer<NativeType> sdlMetalCreateView(Pointer<SdlWindow> window) {
   final sdlMetalCreateViewLookupFunction = libSdl3.lookupFunction<
@@ -63,7 +63,7 @@ void sdlMetalDestroyView(Pointer<NativeType> view) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC void *SDLCALL SDL_Metal_GetLayer(SDL_MetalView view)
+/// extern SDL_DECLSPEC void * SDLCALL SDL_Metal_GetLayer(SDL_MetalView view)
 /// ```
 Pointer<NativeType> sdlMetalGetLayer(Pointer<NativeType> view) {
   final sdlMetalGetLayerLookupFunction = libSdl3.lookupFunction<

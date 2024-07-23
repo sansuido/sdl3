@@ -34,7 +34,8 @@ int sdlGetNumVideoDrivers() {
 /// "x11" or "windows". These never have Unicode characters, and are not meant
 /// to be proper names.
 ///
-/// The returned string follows the SDL_GetStringRule.
+/// This returns temporary memory which will be automatically freed later, and
+/// can be claimed with SDL_ClaimTemporaryMemory().
 ///
 /// \param index the index of a video driver.
 /// \returns the name of the video driver with the given **index**.
@@ -44,7 +45,7 @@ int sdlGetNumVideoDrivers() {
 /// \sa SDL_GetNumVideoDrivers
 ///
 /// ```c
-/// extern SDL_DECLSPEC const char *SDLCALL SDL_GetVideoDriver(int index)
+/// extern SDL_DECLSPEC const char * SDLCALL SDL_GetVideoDriver(int index)
 /// ```
 String? sdlGetVideoDriver(int index) {
   final sdlGetVideoDriverLookupFunction = libSdl3.lookupFunction<
@@ -64,7 +65,8 @@ String? sdlGetVideoDriver(int index) {
 /// "x11" or "windows". These never have Unicode characters, and are not meant
 /// to be proper names.
 ///
-/// The returned string follows the SDL_GetStringRule.
+/// This returns temporary memory which will be automatically freed later, and
+/// can be claimed with SDL_ClaimTemporaryMemory().
 ///
 /// \returns the name of the current video driver or NULL if no driver has been
 /// initialized.
@@ -75,7 +77,7 @@ String? sdlGetVideoDriver(int index) {
 /// \sa SDL_GetVideoDriver
 ///
 /// ```c
-/// extern SDL_DECLSPEC const char *SDLCALL SDL_GetCurrentVideoDriver(void)
+/// extern SDL_DECLSPEC const char * SDLCALL SDL_GetCurrentVideoDriver(void)
 /// ```
 String? sdlGetCurrentVideoDriver() {
   final sdlGetCurrentVideoDriverLookupFunction = libSdl3.lookupFunction<
@@ -107,16 +109,18 @@ int sdlGetSystemTheme() {
 ///
 /// Get a list of currently connected displays.
 ///
+/// This returns temporary memory which will be automatically freed later, and
+/// can be claimed with SDL_ClaimTemporaryMemory().
+///
 /// \param count a pointer filled in with the number of displays returned, may
 /// be NULL.
-/// \returns a 0 terminated array of display instance IDs which should be freed
-/// with SDL_free(), or NULL on error; call SDL_GetError() for more
-/// details.
+/// \returns a 0 terminated array of display instance IDs or NULL on failure;
+/// call SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_DisplayID *SDLCALL SDL_GetDisplays(int *count)
+/// extern SDL_DECLSPEC const SDL_DisplayID * SDLCALL SDL_GetDisplays(int *count)
 /// ```
 Pointer<Uint32> sdlGetDisplays(Pointer<Int32> count) {
   final sdlGetDisplaysLookupFunction = libSdl3.lookupFunction<
@@ -182,7 +186,8 @@ int sdlGetDisplayProperties(int displayId) {
 ///
 /// Get the name of a display in UTF-8 encoding.
 ///
-/// The returned string follows the SDL_GetStringRule.
+/// This returns temporary memory which will be automatically freed later, and
+/// can be claimed with SDL_ClaimTemporaryMemory().
 ///
 /// \param displayID the instance ID of the display to query.
 /// \returns the name of a display or NULL on failure; call SDL_GetError() for
@@ -193,7 +198,7 @@ int sdlGetDisplayProperties(int displayId) {
 /// \sa SDL_GetDisplays
 ///
 /// ```c
-/// extern SDL_DECLSPEC const char *SDLCALL SDL_GetDisplayName(SDL_DisplayID displayID)
+/// extern SDL_DECLSPEC const char * SDLCALL SDL_GetDisplayName(SDL_DisplayID displayID)
 /// ```
 String? sdlGetDisplayName(int displayId) {
   final sdlGetDisplayNameLookupFunction = libSdl3.lookupFunction<
@@ -316,8 +321,8 @@ int sdlGetCurrentDisplayOrientation(int displayId) {
 /// big on this display, to aid in readability.
 ///
 /// \param displayID the instance ID of the display to query.
-/// \returns the content scale of the display, or 0.0f on error; call
-/// SDL_GetError() for more details.
+/// \returns the content scale of the display, or 0.0f on failure; call
+/// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -345,18 +350,21 @@ double sdlGetDisplayContentScale(int displayId) {
 /// - refresh rate -> highest to lowest
 /// - pixel density -> lowest to highest
 ///
+/// This returns temporary memory which will be automatically freed later, and
+/// can be claimed with SDL_ClaimTemporaryMemory().
+///
 /// \param displayID the instance ID of the display to query.
-/// \param count a pointer filled in with the number of display modes returned.
-/// \returns a NULL terminated array of display mode pointers which should be
-/// freed with SDL_free(), or NULL on error; call SDL_GetError() for
-/// more details.
+/// \param count a pointer filled in with the number of display modes returned,
+/// may be NULL.
+/// \returns a NULL terminated array of display mode pointers or NULL on
+/// failure; call SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetDisplays
 ///
 /// ```c
-/// extern SDL_DECLSPEC const SDL_DisplayMode **SDLCALL SDL_GetFullscreenDisplayModes(SDL_DisplayID displayID, int *count)
+/// extern SDL_DECLSPEC const SDL_DisplayMode * const * SDLCALL SDL_GetFullscreenDisplayModes(SDL_DisplayID displayID, int *count)
 /// ```
 Pointer<Pointer<SdlDisplayMode>> sdlGetFullscreenDisplayModes(
     int displayId, Pointer<Int32> count) {
@@ -386,7 +394,7 @@ Pointer<Pointer<SdlDisplayMode>> sdlGetFullscreenDisplayModes(
 /// \param include_high_density_modes boolean to include high density modes in
 /// the search.
 /// \returns a pointer to the closest display mode equal to or larger than the
-/// desired mode, or NULL on error; call SDL_GetError() for more
+/// desired mode, or NULL on failure; call SDL_GetError() for more
 /// information.
 ///
 /// \since This function is available since SDL 3.0.0.
@@ -395,7 +403,7 @@ Pointer<Pointer<SdlDisplayMode>> sdlGetFullscreenDisplayModes(
 /// \sa SDL_GetFullscreenDisplayModes
 ///
 /// ```c
-/// extern SDL_DECLSPEC const SDL_DisplayMode *SDLCALL SDL_GetClosestFullscreenDisplayMode(SDL_DisplayID displayID, int w, int h, float refresh_rate, SDL_bool include_high_density_modes)
+/// extern SDL_DECLSPEC const SDL_DisplayMode * SDLCALL SDL_GetClosestFullscreenDisplayMode(SDL_DisplayID displayID, int w, int h, float refresh_rate, SDL_bool include_high_density_modes)
 /// ```
 Pointer<SdlDisplayMode> sdlGetClosestFullscreenDisplayMode(int displayId, int w,
     int h, double refreshRate, bool includeHighDensityModes) {
@@ -420,7 +428,7 @@ Pointer<SdlDisplayMode> sdlGetClosestFullscreenDisplayMode(int displayId, int w,
 /// display mode.
 ///
 /// \param displayID the instance ID of the display to query.
-/// \returns a pointer to the desktop display mode or NULL on error; call
+/// \returns a pointer to the desktop display mode or NULL on failure; call
 /// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
@@ -429,7 +437,7 @@ Pointer<SdlDisplayMode> sdlGetClosestFullscreenDisplayMode(int displayId, int w,
 /// \sa SDL_GetDisplays
 ///
 /// ```c
-/// extern SDL_DECLSPEC const SDL_DisplayMode *SDLCALL SDL_GetDesktopDisplayMode(SDL_DisplayID displayID)
+/// extern SDL_DECLSPEC const SDL_DisplayMode * SDLCALL SDL_GetDesktopDisplayMode(SDL_DisplayID displayID)
 /// ```
 Pointer<SdlDisplayMode> sdlGetDesktopDisplayMode(int displayId) {
   final sdlGetDesktopDisplayModeLookupFunction = libSdl3.lookupFunction<
@@ -448,7 +456,7 @@ Pointer<SdlDisplayMode> sdlGetDesktopDisplayMode(int displayId) {
 /// display mode.
 ///
 /// \param displayID the instance ID of the display to query.
-/// \returns a pointer to the desktop display mode or NULL on error; call
+/// \returns a pointer to the desktop display mode or NULL on failure; call
 /// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
@@ -457,7 +465,7 @@ Pointer<SdlDisplayMode> sdlGetDesktopDisplayMode(int displayId) {
 /// \sa SDL_GetDisplays
 ///
 /// ```c
-/// extern SDL_DECLSPEC const SDL_DisplayMode *SDLCALL SDL_GetCurrentDisplayMode(SDL_DisplayID displayID)
+/// extern SDL_DECLSPEC const SDL_DisplayMode * SDLCALL SDL_GetCurrentDisplayMode(SDL_DisplayID displayID)
 /// ```
 Pointer<SdlDisplayMode> sdlGetCurrentDisplayMode(int displayId) {
   final sdlGetCurrentDisplayModeLookupFunction = libSdl3.lookupFunction<
@@ -646,7 +654,7 @@ int sdlSetWindowFullscreenMode(
 /// \sa SDL_SetWindowFullscreen
 ///
 /// ```c
-/// extern SDL_DECLSPEC const SDL_DisplayMode *SDLCALL SDL_GetWindowFullscreenMode(SDL_Window *window)
+/// extern SDL_DECLSPEC const SDL_DisplayMode * SDLCALL SDL_GetWindowFullscreenMode(SDL_Window *window)
 /// ```
 Pointer<SdlDisplayMode> sdlGetWindowFullscreenMode(Pointer<SdlWindow> window) {
   final sdlGetWindowFullscreenModeLookupFunction = libSdl3.lookupFunction<
@@ -659,7 +667,8 @@ Pointer<SdlDisplayMode> sdlGetWindowFullscreenMode(Pointer<SdlWindow> window) {
 ///
 /// Get the raw ICC profile data for the screen the window is currently on.
 ///
-/// Data returned should be freed with SDL_free.
+/// This returns temporary memory which will be automatically freed later, and
+/// can be claimed with SDL_ClaimTemporaryMemory().
 ///
 /// \param window the window to query.
 /// \param size the size of the ICC profile.
@@ -669,7 +678,7 @@ Pointer<SdlDisplayMode> sdlGetWindowFullscreenMode(Pointer<SdlWindow> window) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC void *SDLCALL SDL_GetWindowICCProfile(SDL_Window *window, size_t *size)
+/// extern SDL_DECLSPEC const void * SDLCALL SDL_GetWindowICCProfile(SDL_Window *window, size_t *size)
 /// ```
 Pointer<NativeType> sdlGetWindowIccProfile(
     Pointer<SdlWindow> window, Pointer<Uint32> size) {
@@ -692,11 +701,11 @@ Pointer<NativeType> sdlGetWindowIccProfile(
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC Uint32 SDLCALL SDL_GetWindowPixelFormat(SDL_Window *window)
+/// extern SDL_DECLSPEC SDL_PixelFormat SDLCALL SDL_GetWindowPixelFormat(SDL_Window *window)
 /// ```
 int sdlGetWindowPixelFormat(Pointer<SdlWindow> window) {
   final sdlGetWindowPixelFormatLookupFunction = libSdl3.lookupFunction<
-      Uint32 Function(Pointer<SdlWindow> window),
+      Int32 Function(Pointer<SdlWindow> window),
       int Function(Pointer<SdlWindow> window)>('SDL_GetWindowPixelFormat');
   return sdlGetWindowPixelFormatLookupFunction(window);
 }
@@ -704,16 +713,18 @@ int sdlGetWindowPixelFormat(Pointer<SdlWindow> window) {
 ///
 /// Get a list of valid windows.
 ///
+/// This returns temporary memory which will be automatically freed later, and
+/// can be claimed with SDL_ClaimTemporaryMemory().
+///
 /// \param count a pointer filled in with the number of windows returned, may
 /// be NULL.
-/// \returns a 0 terminated array of window pointers which should be freed with
-/// SDL_free(), or NULL on error; call SDL_GetError() for more
-/// details.
+/// \returns a NULL terminated array of SDL_Window pointers or NULL on failure;
+/// call SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_Window **SDLCALL SDL_GetWindows(int *count)
+/// extern SDL_DECLSPEC SDL_Window * const * SDLCALL SDL_GetWindows(int *count)
 /// ```
 Pointer<Pointer<SdlWindow>> sdlGetWindows(Pointer<Int32> count) {
   final sdlGetWindowsLookupFunction = libSdl3.lookupFunction<
@@ -785,7 +796,7 @@ Pointer<Pointer<SdlWindow>> sdlGetWindows(Pointer<Int32> count) {
 /// \sa SDL_DestroyWindow
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_Window *SDLCALL SDL_CreateWindow(const char *title, int w, int h, SDL_WindowFlags flags)
+/// extern SDL_DECLSPEC SDL_Window * SDLCALL SDL_CreateWindow(const char *title, int w, int h, SDL_WindowFlags flags)
 /// ```
 Pointer<SdlWindow> sdlCreateWindow(String? title, int w, int h, int flags) {
   final sdlCreateWindowLookupFunction = libSdl3.lookupFunction<
@@ -853,7 +864,7 @@ Pointer<SdlWindow> sdlCreateWindow(String? title, int w, int h, int flags) {
 /// \sa SDL_GetWindowParent
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_Window *SDLCALL SDL_CreatePopupWindow(SDL_Window *parent, int offset_x, int offset_y, int w, int h, SDL_WindowFlags flags)
+/// extern SDL_DECLSPEC SDL_Window * SDLCALL SDL_CreatePopupWindow(SDL_Window *parent, int offset_x, int offset_y, int w, int h, SDL_WindowFlags flags)
 /// ```
 Pointer<SdlWindow> sdlCreatePopupWindow(Pointer<SdlWindow> parent, int offsetX,
     int offsetY, int w, int h, int flags) {
@@ -981,7 +992,7 @@ Pointer<SdlWindow> sdlCreatePopupWindow(Pointer<SdlWindow> parent, int offsetX,
 /// \sa SDL_DestroyWindow
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_Window *SDLCALL SDL_CreateWindowWithProperties(SDL_PropertiesID props)
+/// extern SDL_DECLSPEC SDL_Window * SDLCALL SDL_CreateWindowWithProperties(SDL_PropertiesID props)
 /// ```
 Pointer<SdlWindow> sdlCreateWindowWithProperties(int props) {
   final sdlCreateWindowWithPropertiesLookupFunction = libSdl3.lookupFunction<
@@ -1029,7 +1040,7 @@ int sdlGetWindowId(Pointer<SdlWindow> window) {
 /// \sa SDL_GetWindowID
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_Window *SDLCALL SDL_GetWindowFromID(SDL_WindowID id)
+/// extern SDL_DECLSPEC SDL_Window * SDLCALL SDL_GetWindowFromID(SDL_WindowID id)
 /// ```
 Pointer<SdlWindow> sdlGetWindowFromId(int id) {
   final sdlGetWindowFromIdLookupFunction = libSdl3.lookupFunction<
@@ -1050,7 +1061,7 @@ Pointer<SdlWindow> sdlGetWindowFromId(int id) {
 /// \sa SDL_CreatePopupWindow
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_Window *SDLCALL SDL_GetWindowParent(SDL_Window *window)
+/// extern SDL_DECLSPEC SDL_Window * SDLCALL SDL_GetWindowParent(SDL_Window *window)
 /// ```
 Pointer<SdlWindow> sdlGetWindowParent(Pointer<SdlWindow> window) {
   final sdlGetWindowParentLookupFunction = libSdl3.lookupFunction<
@@ -1243,7 +1254,8 @@ int sdlSetWindowTitle(Pointer<SdlWindow> window, String? title) {
 ///
 /// Get the title of a window.
 ///
-/// The returned string follows the SDL_GetStringRule.
+/// This returns temporary memory which will be automatically freed later, and
+/// can be claimed with SDL_ClaimTemporaryMemory().
 ///
 /// \param window the window to query.
 /// \returns the title of the window in UTF-8 format or "" if there is no
@@ -1254,7 +1266,7 @@ int sdlSetWindowTitle(Pointer<SdlWindow> window, String? title) {
 /// \sa SDL_SetWindowTitle
 ///
 /// ```c
-/// extern SDL_DECLSPEC const char *SDLCALL SDL_GetWindowTitle(SDL_Window *window)
+/// extern SDL_DECLSPEC const char * SDLCALL SDL_GetWindowTitle(SDL_Window *window)
 /// ```
 String? sdlGetWindowTitle(Pointer<SdlWindow> window) {
   final sdlGetWindowTitleLookupFunction = libSdl3.lookupFunction<
@@ -2096,7 +2108,7 @@ bool sdlWindowHasSurface(Pointer<SdlWindow> window) {
 /// \sa SDL_UpdateWindowSurfaceRects
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_Surface *SDLCALL SDL_GetWindowSurface(SDL_Window *window)
+/// extern SDL_DECLSPEC SDL_Surface * SDLCALL SDL_GetWindowSurface(SDL_Window *window)
 /// ```
 Pointer<SdlSurface> sdlGetWindowSurface(Pointer<SdlWindow> window) {
   final sdlGetWindowSurfaceLookupFunction = libSdl3.lookupFunction<
@@ -2367,7 +2379,7 @@ bool sdlGetWindowMouseGrab(Pointer<SdlWindow> window) {
 /// \sa SDL_SetWindowKeyboardGrab
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_Window *SDLCALL SDL_GetGrabbedWindow(void)
+/// extern SDL_DECLSPEC SDL_Window * SDLCALL SDL_GetGrabbedWindow(void)
 /// ```
 Pointer<SdlWindow> sdlGetGrabbedWindow() {
   final sdlGetGrabbedWindowLookupFunction = libSdl3.lookupFunction<
@@ -2416,7 +2428,7 @@ int sdlSetWindowMouseRect(Pointer<SdlWindow> window, Pointer<SdlRect> rect) {
 /// \sa SDL_SetWindowMouseRect
 ///
 /// ```c
-/// extern SDL_DECLSPEC const SDL_Rect *SDLCALL SDL_GetWindowMouseRect(SDL_Window *window)
+/// extern SDL_DECLSPEC const SDL_Rect * SDLCALL SDL_GetWindowMouseRect(SDL_Window *window)
 /// ```
 Pointer<SdlRect> sdlGetWindowMouseRect(Pointer<SdlWindow> window) {
   final sdlGetWindowMouseRectLookupFunction = libSdl3.lookupFunction<
@@ -2457,31 +2469,25 @@ int sdlSetWindowOpacity(Pointer<SdlWindow> window, double opacity) {
 ///
 /// Get the opacity of a window.
 ///
-/// If transparency isn't supported on this platform, opacity will be reported
+/// If transparency isn't supported on this platform, opacity will be returned
 /// as 1.0f without error.
 ///
-/// The parameter `opacity` is ignored if it is NULL.
-///
-/// This function also returns -1 if an invalid window was provided.
-///
 /// \param window the window to get the current opacity value from.
-/// \param out_opacity the float filled in (0.0f - transparent, 1.0f - opaque).
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns the opacity, (0.0f - transparent, 1.0f - opaque), or a negative
+/// error code on failure; call SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_SetWindowOpacity
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_GetWindowOpacity(SDL_Window *window, float *out_opacity)
+/// extern SDL_DECLSPEC float SDLCALL SDL_GetWindowOpacity(SDL_Window *window)
 /// ```
-int sdlGetWindowOpacity(Pointer<SdlWindow> window, Pointer<Float> outOpacity) {
+double sdlGetWindowOpacity(Pointer<SdlWindow> window) {
   final sdlGetWindowOpacityLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlWindow> window, Pointer<Float> outOpacity),
-      int Function(Pointer<SdlWindow> window,
-          Pointer<Float> outOpacity)>('SDL_GetWindowOpacity');
-  return sdlGetWindowOpacityLookupFunction(window, outOpacity);
+      Float Function(Pointer<SdlWindow> window),
+      double Function(Pointer<SdlWindow> window)>('SDL_GetWindowOpacity');
+  return sdlGetWindowOpacityLookupFunction(window);
 }
 
 ///
@@ -3037,8 +3043,8 @@ int sdlGlGetAttribute(int attr, Pointer<Int32> value) {
 /// SDL_GLContext is opaque to the application.
 ///
 /// \param window the window to associate with the context.
-/// \returns the OpenGL context associated with `window` or NULL on error; call
-/// SDL_GetError() for more details.
+/// \returns the OpenGL context associated with `window` or NULL on failure;
+/// call SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -3090,7 +3096,7 @@ int sdlGlMakeCurrent(Pointer<SdlWindow> window, Pointer<SdlGlContext> context) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_Window *SDLCALL SDL_GL_GetCurrentWindow(void)
+/// extern SDL_DECLSPEC SDL_Window * SDLCALL SDL_GL_GetCurrentWindow(void)
 /// ```
 Pointer<SdlWindow> sdlGlGetCurrentWindow() {
   final sdlGlGetCurrentWindowLookupFunction = libSdl3.lookupFunction<

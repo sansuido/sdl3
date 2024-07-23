@@ -15,8 +15,8 @@ extension SdlSurfaceEx on SdlSurface {
   /// will result in a memory leak.
   ///
   /// \param file the BMP file to load.
-  /// \returns a pointer to a new SDL_Surface structure or NULL if there was an
-  /// error; call SDL_GetError() for more information.
+  /// \returns a pointer to a new SDL_Surface structure or NULL on failure; call
+  /// SDL_GetError() for more information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -25,7 +25,7 @@ extension SdlSurfaceEx on SdlSurface {
   /// \sa SDL_SaveBMP
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_Surface *SDLCALL SDL_LoadBMP(const char *file)
+  /// extern SDL_DECLSPEC SDL_Surface * SDLCALL SDL_LoadBMP(const char *file)
   /// ```
   static Pointer<SdlSurface> loadBmp(String file) {
     return sdlLoadBmp(file);
@@ -52,7 +52,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// \sa SDL_SetCursor
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_Cursor *SDLCALL SDL_CreateColorCursor(SDL_Surface *surface, int hot_x, int hot_y)
+  /// extern SDL_DECLSPEC SDL_Cursor * SDLCALL SDL_CreateColorCursor(SDL_Surface *surface, int hot_x, int hot_y)
   /// ```
   Pointer<SdlCursor> createColorCursor(int hotX, int hotY) {
     return sdlCreateColorCursor(this, hotX, hotY);
@@ -164,8 +164,8 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// \param src the data stream for the surface.
   /// \param closeio if SDL_TRUE, calls SDL_CloseIO() on `src` before returning,
   /// even in the case of an error.
-  /// \returns a pointer to a new SDL_Surface structure or NULL if there was an
-  /// error; call SDL_GetError() for more information.
+  /// \returns a pointer to a new SDL_Surface structure or NULL on failure; call
+  /// SDL_GetError() for more information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -174,7 +174,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// \sa SDL_SaveBMP_IO
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_Surface *SDLCALL SDL_LoadBMP_IO(SDL_IOStream *src, SDL_bool closeio)
+  /// extern SDL_DECLSPEC SDL_Surface * SDLCALL SDL_LoadBMP_IO(SDL_IOStream *src, SDL_bool closeio)
   /// ```
   Pointer<SdlSurface> loadBmpIo(Pointer<SdlIoStream> src, bool freesrc) {
     return sdlLoadBmpIo(src, freesrc);
@@ -561,7 +561,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// The returned surface should be freed with SDL_DestroySurface().
   ///
   /// \param surface the surface to duplicate.
-  /// \returns a copy of the surface, or NULL on failure; call SDL_GetError() for
+  /// \returns a copy of the surface or NULL on failure; call SDL_GetError() for
   /// more information.
   ///
   /// \since This function is available since SDL 3.0.0.
@@ -569,7 +569,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// \sa SDL_DestroySurface
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_Surface *SDLCALL SDL_DuplicateSurface(SDL_Surface *surface)
+  /// extern SDL_DECLSPEC SDL_Surface * SDLCALL SDL_DuplicateSurface(SDL_Surface *surface)
   /// ```
   Pointer<SdlSurface> duplicate() {
     return sdlDuplicateSurface(this);

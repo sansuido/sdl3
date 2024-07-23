@@ -6,7 +6,7 @@ import 'struct_sdl.dart';
 
 final libSdl3 = dylib.dylibOpen('SDL3');
 
-// typedef SDL_AssertState (SDLCALL *SDL_AssertionHandler)( const SDL_AssertData* data, void* userdata)
+// typedef SDL_AssertState (SDLCALL *SDL_AssertionHandler)( const SDL_AssertData *data, void *userdata)
 typedef SdlAssertionHandlerDart = int Function(
     Pointer<SdlAssertData> data, Pointer<NativeType> userdata);
 typedef SdlAssertionHandler = Int32 Function(
@@ -43,7 +43,7 @@ typedef SdlClipboardCleanupCallbackDart = void Function(
 typedef SdlClipboardCleanupCallback = Void Function(
     Pointer<NativeType> userdata);
 
-// typedef void(SDLCALL *SDL_DialogFileCallback)(void *userdata, const char * const *filelist, int filter)
+// typedef void (SDLCALL *SDL_DialogFileCallback)(void *userdata, const char * const *filelist, int filter)
 typedef SdlDialogFileCallbackDart = void Function(
     Pointer<NativeType> userdata, Pointer<Pointer<Int8>> filelist, int filter);
 typedef SdlDialogFileCallback = Void Function(Pointer<NativeType> userdata,
@@ -160,10 +160,10 @@ typedef SdlIOsAnimationCallbackDart = void Function(
     Pointer<NativeType> userdata);
 typedef SdlIOsAnimationCallback = Void Function(Pointer<NativeType> userdata);
 
-// typedef void (SDLCALL *SDL_AndroidRequestPermissionCallback)(void *userdata, const char *permission, SDL_bool granted)
-typedef SdlAndroidRequestPermissionCallbackDart = void Function(
+// typedef void (SDLCALL *SDL_RequestAndroidPermissionCallback)(void *userdata, const char *permission, SDL_bool granted)
+typedef SdlRequestAndroidPermissionCallbackDart = void Function(
     Pointer<NativeType> userdata, Pointer<Utf8> permission, int granted);
-typedef SdlAndroidRequestPermissionCallback = Void Function(
+typedef SdlRequestAndroidPermissionCallback = Void Function(
     Pointer<NativeType> userdata, Pointer<Utf8> permission, Int32 granted);
 
 // typedef int (SDLCALL * SDL_ThreadFunction) (void *data)

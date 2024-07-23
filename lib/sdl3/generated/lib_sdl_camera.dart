@@ -46,7 +46,8 @@ int sdlGetNumCameraDrivers() {
 /// "coremedia" or "android". These never have Unicode characters, and are not
 /// meant to be proper names.
 ///
-/// The returned string follows the SDL_GetStringRule.
+/// This returns temporary memory which will be automatically freed later, and
+/// can be claimed with SDL_ClaimTemporaryMemory().
 ///
 /// \param index the index of the camera driver; the value ranges from 0 to
 /// SDL_GetNumCameraDrivers() - 1.
@@ -60,7 +61,7 @@ int sdlGetNumCameraDrivers() {
 /// \sa SDL_GetNumCameraDrivers
 ///
 /// ```c
-/// extern SDL_DECLSPEC const char *SDLCALL SDL_GetCameraDriver(int index)
+/// extern SDL_DECLSPEC const char * SDLCALL SDL_GetCameraDriver(int index)
 /// ```
 String? sdlGetCameraDriver(int index) {
   final sdlGetCameraDriverLookupFunction = libSdl3.lookupFunction<
@@ -80,7 +81,8 @@ String? sdlGetCameraDriver(int index) {
 /// "coremedia" or "android". These never have Unicode characters, and are not
 /// meant to be proper names.
 ///
-/// The returned string follows the SDL_GetStringRule.
+/// This returns temporary memory which will be automatically freed later, and
+/// can be claimed with SDL_ClaimTemporaryMemory().
 ///
 /// \returns the name of the current camera driver or NULL if no driver has
 /// been initialized.
@@ -90,7 +92,7 @@ String? sdlGetCameraDriver(int index) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC const char *SDLCALL SDL_GetCurrentCameraDriver(void)
+/// extern SDL_DECLSPEC const char * SDLCALL SDL_GetCurrentCameraDriver(void)
 /// ```
 String? sdlGetCurrentCameraDriver() {
   final sdlGetCurrentCameraDriverLookupFunction = libSdl3.lookupFunction<
@@ -106,11 +108,13 @@ String? sdlGetCurrentCameraDriver() {
 ///
 /// Get a list of currently connected camera devices.
 ///
-/// \param count a pointer filled in with the number of camera devices. Can be
-/// NULL.
-/// \returns a 0 terminated array of camera instance IDs which should be freed
-/// with SDL_free(), or NULL on error; call SDL_GetError() for more
-/// details.
+/// This returns temporary memory which will be automatically freed later, and
+/// can be claimed with SDL_ClaimTemporaryMemory().
+///
+/// \param count a pointer filled in with the number of cameras returned, may
+/// be NULL.
+/// \returns a 0 terminated array of camera instance IDs or NULL on failure;
+/// call SDL_GetError() for more information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -119,13 +123,13 @@ String? sdlGetCurrentCameraDriver() {
 /// \sa SDL_OpenCamera
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_CameraDeviceID *SDLCALL SDL_GetCameraDevices(int *count)
+/// extern SDL_DECLSPEC const SDL_CameraID * SDLCALL SDL_GetCameras(int *count)
 /// ```
-Pointer<Uint32> sdlGetCameraDevices(Pointer<Int32> count) {
-  final sdlGetCameraDevicesLookupFunction = libSdl3.lookupFunction<
+Pointer<Uint32> sdlGetCameras(Pointer<Int32> count) {
+  final sdlGetCamerasLookupFunction = libSdl3.lookupFunction<
       Pointer<Uint32> Function(Pointer<Int32> count),
-      Pointer<Uint32> Function(Pointer<Int32> count)>('SDL_GetCameraDevices');
-  return sdlGetCameraDevicesLookupFunction(count);
+      Pointer<Uint32> Function(Pointer<Int32> count)>('SDL_GetCameras');
+  return sdlGetCamerasLookupFunction(count);
 }
 
 ///
@@ -136,75 +140,73 @@ Pointer<Uint32> sdlGetCameraDevices(Pointer<Int32> count) {
 /// and sizes and so want to find the optimal spec that doesn't require
 /// conversion.
 ///
-/// This function isn't strictly required; if you call SDL_OpenCameraDevice
-/// with a NULL spec, SDL will choose a native format for you, and if you
-/// instead specify a desired format, it will transparently convert to the
-/// requested format on your behalf.
+/// This function isn't strictly required; if you call SDL_OpenCamera with a
+/// NULL spec, SDL will choose a native format for you, and if you instead
+/// specify a desired format, it will transparently convert to the requested
+/// format on your behalf.
 ///
 /// If `count` is not NULL, it will be filled with the number of elements in
-/// the returned array. Additionally, the last element of the array has all
-/// fields set to zero (this element is not included in `count`).
+/// the returned array.
 ///
-/// The returned list is owned by the caller, and should be released with
-/// SDL_free() when no longer needed.
+/// Note that it's legal for a camera to supply an empty list. This is what
+/// will happen on Emscripten builds, since that platform won't tell _anything_
+/// about available cameras until you've opened one, and won't even tell if
+/// there _is_ a camera until the user has given you permission to check
+/// through a scary warning popup.
 ///
-/// Note that it's legal for a camera to supply a list with only the zeroed
-/// final element and `*count` set to zero; this is what will happen on
-/// Emscripten builds, since that platform won't tell _anything_ about
-/// available cameras until you've opened one, and won't even tell if there
-/// _is_ a camera until the user has given you permission to check through a
-/// scary warning popup.
+/// This returns temporary memory which will be automatically freed later, and
+/// can be claimed with SDL_ClaimTemporaryMemory().
 ///
 /// \param devid the camera device instance ID to query.
-/// \param count a pointer filled in with the number of elements in the list.
-/// Can be NULL.
-/// \returns a 0 terminated array of SDL_CameraSpecs, which should be freed
-/// with SDL_free(), or NULL on error; call SDL_GetError() for more
-/// details.
+/// \param count a pointer filled in with the number of elements in the list,
+/// may be NULL.
+/// \returns a NULL terminated array of pointers to SDL_CameraSpec or NULL on
+/// failure; call SDL_GetError() for more information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_GetCameraDevices
-/// \sa SDL_OpenCameraDevice
+/// \sa SDL_GetCameras
+/// \sa SDL_OpenCamera
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_CameraSpec *SDLCALL SDL_GetCameraDeviceSupportedFormats(SDL_CameraDeviceID devid, int *count)
+/// extern SDL_DECLSPEC const SDL_CameraSpec * const * SDLCALL SDL_GetCameraSupportedFormats(SDL_CameraID devid, int *count)
 /// ```
-Pointer<SdlCameraSpec> sdlGetCameraDeviceSupportedFormats(
+Pointer<Pointer<SdlCameraSpec>> sdlGetCameraSupportedFormats(
     int devid, Pointer<Int32> count) {
-  final sdlGetCameraDeviceSupportedFormatsLookupFunction =
-      libSdl3.lookupFunction<
-          Pointer<SdlCameraSpec> Function(Uint32 devid, Pointer<Int32> count),
-          Pointer<SdlCameraSpec> Function(int devid,
-              Pointer<Int32> count)>('SDL_GetCameraDeviceSupportedFormats');
-  return sdlGetCameraDeviceSupportedFormatsLookupFunction(devid, count);
+  final sdlGetCameraSupportedFormatsLookupFunction = libSdl3.lookupFunction<
+      Pointer<Pointer<SdlCameraSpec>> Function(
+          Uint32 devid, Pointer<Int32> count),
+      Pointer<Pointer<SdlCameraSpec>> Function(
+          int devid, Pointer<Int32> count)>('SDL_GetCameraSupportedFormats');
+  return sdlGetCameraSupportedFormatsLookupFunction(devid, count);
 }
 
 ///
 /// Get the human-readable device name for a camera.
 ///
-/// The returned string follows the SDL_GetStringRule.
+/// This returns temporary memory which will be automatically freed later, and
+/// can be claimed with SDL_ClaimTemporaryMemory().
 ///
 /// \param instance_id the camera device instance ID.
-/// \returns a human-readable device name, or NULL on error; call
+/// \returns a human-readable device name or NULL on failure; call
 /// SDL_GetError() for more information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_GetCameraDevices
+/// \sa SDL_GetCameras
 ///
 /// ```c
-/// extern SDL_DECLSPEC const char * SDLCALL SDL_GetCameraDeviceName(SDL_CameraDeviceID instance_id)
+/// extern SDL_DECLSPEC const char * SDLCALL SDL_GetCameraName(SDL_CameraID instance_id)
 /// ```
-String? sdlGetCameraDeviceName(int instanceId) {
-  final sdlGetCameraDeviceNameLookupFunction = libSdl3.lookupFunction<
+String? sdlGetCameraName(int instanceId) {
+  final sdlGetCameraNameLookupFunction = libSdl3.lookupFunction<
       Pointer<Utf8> Function(Uint32 instanceId),
-      Pointer<Utf8> Function(int instanceId)>('SDL_GetCameraDeviceName');
-  final result = sdlGetCameraDeviceNameLookupFunction(instanceId);
+      Pointer<Utf8> Function(int instanceId)>('SDL_GetCameraName');
+  final result = sdlGetCameraNameLookupFunction(instanceId);
   if (result == nullptr) {
     return null;
   }
@@ -226,16 +228,16 @@ String? sdlGetCameraDeviceName(int instanceId) {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_GetCameraDevices
+/// \sa SDL_GetCameras
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_CameraPosition SDLCALL SDL_GetCameraDevicePosition(SDL_CameraDeviceID instance_id)
+/// extern SDL_DECLSPEC SDL_CameraPosition SDLCALL SDL_GetCameraPosition(SDL_CameraID instance_id)
 /// ```
-int sdlGetCameraDevicePosition(int instanceId) {
-  final sdlGetCameraDevicePositionLookupFunction = libSdl3.lookupFunction<
+int sdlGetCameraPosition(int instanceId) {
+  final sdlGetCameraPositionLookupFunction = libSdl3.lookupFunction<
       Int32 Function(Uint32 instanceId),
-      int Function(int instanceId)>('SDL_GetCameraDevicePosition');
-  return sdlGetCameraDevicePositionLookupFunction(instanceId);
+      int Function(int instanceId)>('SDL_GetCameraPosition');
+  return sdlGetCameraPositionLookupFunction(instanceId);
 }
 
 ///
@@ -272,27 +274,26 @@ int sdlGetCameraDevicePosition(int instanceId) {
 /// \param instance_id the camera device instance ID.
 /// \param spec the desired format for data the device will provide. Can be
 /// NULL.
-/// \returns device, or NULL on failure; call SDL_GetError() for more
-/// information.
+/// \returns an SDL_Camera object or NULL on failure; call SDL_GetError() for
+/// more information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_GetCameraDevices
+/// \sa SDL_GetCameras
 /// \sa SDL_GetCameraFormat
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_Camera *SDLCALL SDL_OpenCameraDevice(SDL_CameraDeviceID instance_id, const SDL_CameraSpec *spec)
+/// extern SDL_DECLSPEC SDL_Camera * SDLCALL SDL_OpenCamera(SDL_CameraID instance_id, const SDL_CameraSpec *spec)
 /// ```
-Pointer<SdlCamera> sdlOpenCameraDevice(
-    int instanceId, Pointer<SdlCameraSpec> spec) {
-  final sdlOpenCameraDeviceLookupFunction = libSdl3.lookupFunction<
+Pointer<SdlCamera> sdlOpenCamera(int instanceId, Pointer<SdlCameraSpec> spec) {
+  final sdlOpenCameraLookupFunction = libSdl3.lookupFunction<
       Pointer<SdlCamera> Function(
           Uint32 instanceId, Pointer<SdlCameraSpec> spec),
       Pointer<SdlCamera> Function(
-          int instanceId, Pointer<SdlCameraSpec> spec)>('SDL_OpenCameraDevice');
-  return sdlOpenCameraDeviceLookupFunction(instanceId, spec);
+          int instanceId, Pointer<SdlCameraSpec> spec)>('SDL_OpenCamera');
+  return sdlOpenCameraLookupFunction(instanceId, spec);
 }
 
 ///
@@ -323,7 +324,7 @@ Pointer<SdlCamera> sdlOpenCameraDevice(
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_OpenCameraDevice
+/// \sa SDL_OpenCamera
 /// \sa SDL_CloseCamera
 ///
 /// ```c
@@ -347,22 +348,22 @@ int sdlGetCameraPermissionState(Pointer<SdlCamera> camera) {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_OpenCameraDevice
+/// \sa SDL_OpenCamera
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_CameraDeviceID SDLCALL SDL_GetCameraInstanceID(SDL_Camera *camera)
+/// extern SDL_DECLSPEC SDL_CameraID SDLCALL SDL_GetCameraID(SDL_Camera *camera)
 /// ```
-int sdlGetCameraInstanceId(Pointer<SdlCamera> camera) {
-  final sdlGetCameraInstanceIdLookupFunction = libSdl3.lookupFunction<
+int sdlGetCameraId(Pointer<SdlCamera> camera) {
+  final sdlGetCameraIdLookupFunction = libSdl3.lookupFunction<
       Uint32 Function(Pointer<SdlCamera> camera),
-      int Function(Pointer<SdlCamera> camera)>('SDL_GetCameraInstanceID');
-  return sdlGetCameraInstanceIdLookupFunction(camera);
+      int Function(Pointer<SdlCamera> camera)>('SDL_GetCameraID');
+  return sdlGetCameraIdLookupFunction(camera);
 }
 
 ///
 /// Get the properties associated with an opened camera.
 ///
-/// \param camera the SDL_Camera obtained from SDL_OpenCameraDevice().
+/// \param camera the SDL_Camera obtained from SDL_OpenCamera().
 /// \returns a valid property ID on success or 0 on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -401,7 +402,7 @@ int sdlGetCameraProperties(Pointer<SdlCamera> camera) {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_OpenCameraDevice
+/// \sa SDL_OpenCamera
 ///
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_GetCameraFormat(SDL_Camera *camera, SDL_CameraSpec *spec)

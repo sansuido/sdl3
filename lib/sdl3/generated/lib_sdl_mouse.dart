@@ -30,18 +30,21 @@ bool sdlHasMouse() {
 /// You should wait for input from a device before you consider it actively in
 /// use.
 ///
-/// \param count a pointer filled in with the number of mice returned.
-/// \returns a 0 terminated array of mouse instance IDs which should be freed
-/// with SDL_free(), or NULL on error; call SDL_GetError() for more
-/// details.
+/// This returns temporary memory which will be automatically freed later, and
+/// can be claimed with SDL_ClaimTemporaryMemory().
+///
+/// \param count a pointer filled in with the number of mice returned, may be
+/// NULL.
+/// \returns a 0 terminated array of mouse instance IDs or NULL on failure;
+/// call SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_GetMouseInstanceName
+/// \sa SDL_GetMouseNameForID
 /// \sa SDL_HasMouse
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_MouseID *SDLCALL SDL_GetMice(int *count)
+/// extern SDL_DECLSPEC const SDL_MouseID * SDLCALL SDL_GetMice(int *count)
 /// ```
 Pointer<Uint32> sdlGetMice(Pointer<Int32> count) {
   final sdlGetMiceLookupFunction = libSdl3.lookupFunction<
@@ -55,7 +58,8 @@ Pointer<Uint32> sdlGetMice(Pointer<Int32> count) {
 ///
 /// This function returns "" if the mouse doesn't have a name.
 ///
-/// The returned string follows the SDL_GetStringRule.
+/// This returns temporary memory which will be automatically freed later, and
+/// can be claimed with SDL_ClaimTemporaryMemory().
 ///
 /// \param instance_id the mouse instance ID.
 /// \returns the name of the selected mouse, or NULL on failure; call
@@ -66,13 +70,13 @@ Pointer<Uint32> sdlGetMice(Pointer<Int32> count) {
 /// \sa SDL_GetMice
 ///
 /// ```c
-/// extern SDL_DECLSPEC const char *SDLCALL SDL_GetMouseInstanceName(SDL_MouseID instance_id)
+/// extern SDL_DECLSPEC const char * SDLCALL SDL_GetMouseNameForID(SDL_MouseID instance_id)
 /// ```
-String? sdlGetMouseInstanceName(int instanceId) {
-  final sdlGetMouseInstanceNameLookupFunction = libSdl3.lookupFunction<
+String? sdlGetMouseNameForId(int instanceId) {
+  final sdlGetMouseNameForIdLookupFunction = libSdl3.lookupFunction<
       Pointer<Utf8> Function(Uint32 instanceId),
-      Pointer<Utf8> Function(int instanceId)>('SDL_GetMouseInstanceName');
-  final result = sdlGetMouseInstanceNameLookupFunction(instanceId);
+      Pointer<Utf8> Function(int instanceId)>('SDL_GetMouseNameForID');
+  final result = sdlGetMouseNameForIdLookupFunction(instanceId);
   if (result == nullptr) {
     return null;
   }
@@ -396,7 +400,7 @@ bool sdlGetRelativeMouseMode() {
 /// \sa SDL_SetCursor
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_Cursor *SDLCALL SDL_CreateCursor(const Uint8 * data, const Uint8 * mask, int w, int h, int hot_x, int hot_y)
+/// extern SDL_DECLSPEC SDL_Cursor * SDLCALL SDL_CreateCursor(const Uint8 * data, const Uint8 * mask, int w, int h, int hot_x, int hot_y)
 /// ```
 Pointer<SdlCursor> sdlCreateCursor(Pointer<Uint8> data, Pointer<Uint8> mask,
     int w, int h, int hotX, int hotY) {
@@ -425,7 +429,7 @@ Pointer<SdlCursor> sdlCreateCursor(Pointer<Uint8> data, Pointer<Uint8> mask,
 /// \sa SDL_SetCursor
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_Cursor *SDLCALL SDL_CreateColorCursor(SDL_Surface *surface, int hot_x, int hot_y)
+/// extern SDL_DECLSPEC SDL_Cursor * SDLCALL SDL_CreateColorCursor(SDL_Surface *surface, int hot_x, int hot_y)
 /// ```
 Pointer<SdlCursor> sdlCreateColorCursor(
     Pointer<SdlSurface> surface, int hotX, int hotY) {
@@ -449,7 +453,7 @@ Pointer<SdlCursor> sdlCreateColorCursor(
 /// \sa SDL_DestroyCursor
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_Cursor *SDLCALL SDL_CreateSystemCursor(SDL_SystemCursor id)
+/// extern SDL_DECLSPEC SDL_Cursor * SDLCALL SDL_CreateSystemCursor(SDL_SystemCursor id)
 /// ```
 Pointer<SdlCursor> sdlCreateSystemCursor(int id) {
   final sdlCreateSystemCursorLookupFunction = libSdl3.lookupFunction<
@@ -475,7 +479,7 @@ Pointer<SdlCursor> sdlCreateSystemCursor(int id) {
 /// \sa SDL_GetCursor
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_SetCursor(SDL_Cursor * cursor)
+/// extern SDL_DECLSPEC int SDLCALL SDL_SetCursor(SDL_Cursor *cursor)
 /// ```
 int sdlSetCursor(Pointer<SdlCursor> cursor) {
   final sdlSetCursorLookupFunction = libSdl3.lookupFunction<
@@ -497,7 +501,7 @@ int sdlSetCursor(Pointer<SdlCursor> cursor) {
 /// \sa SDL_SetCursor
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_Cursor *SDLCALL SDL_GetCursor(void)
+/// extern SDL_DECLSPEC SDL_Cursor * SDLCALL SDL_GetCursor(void)
 /// ```
 Pointer<SdlCursor> sdlGetCursor() {
   final sdlGetCursorLookupFunction = libSdl3.lookupFunction<
@@ -512,12 +516,13 @@ Pointer<SdlCursor> sdlGetCursor() {
 /// You do not have to call SDL_DestroyCursor() on the return value, but it is
 /// safe to do so.
 ///
-/// \returns the default cursor on success or NULL on failure.
+/// \returns the default cursor on success or NULL on failuree; call
+/// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_Cursor *SDLCALL SDL_GetDefaultCursor(void)
+/// extern SDL_DECLSPEC SDL_Cursor * SDLCALL SDL_GetDefaultCursor(void)
 /// ```
 Pointer<SdlCursor> sdlGetDefaultCursor() {
   final sdlGetDefaultCursorLookupFunction = libSdl3.lookupFunction<
@@ -541,7 +546,7 @@ Pointer<SdlCursor> sdlGetDefaultCursor() {
 /// \sa SDL_CreateSystemCursor
 ///
 /// ```c
-/// extern SDL_DECLSPEC void SDLCALL SDL_DestroyCursor(SDL_Cursor * cursor)
+/// extern SDL_DECLSPEC void SDLCALL SDL_DestroyCursor(SDL_Cursor *cursor)
 /// ```
 void sdlDestroyCursor(Pointer<SdlCursor> cursor) {
   final sdlDestroyCursorLookupFunction = libSdl3.lookupFunction<

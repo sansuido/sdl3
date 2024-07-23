@@ -7,18 +7,20 @@ import 'struct_sdl.dart';
 ///
 /// Get a list of currently connected haptic devices.
 ///
+/// This returns temporary memory which will be automatically freed later, and
+/// can be claimed with SDL_ClaimTemporaryMemory().
+///
 /// \param count a pointer filled in with the number of haptic devices
-/// returned.
-/// \returns a 0 terminated array of haptic device instance IDs which should be
-/// freed with SDL_free(), or NULL on error; call SDL_GetError() for
-/// more details.
+/// returned, may be NULL.
+/// \returns a 0 terminated array of haptic device instance IDs or NULL on
+/// failure; call SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_OpenHaptic
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_HapticID *SDLCALL SDL_GetHaptics(int *count)
+/// extern SDL_DECLSPEC const SDL_HapticID * SDLCALL SDL_GetHaptics(int *count)
 /// ```
 Pointer<Uint32> sdlGetHaptics(Pointer<Int32> count) {
   final sdlGetHapticsLookupFunction = libSdl3.lookupFunction<
@@ -32,7 +34,8 @@ Pointer<Uint32> sdlGetHaptics(Pointer<Int32> count) {
 ///
 /// This can be called before any haptic devices are opened.
 ///
-/// The returned string follows the SDL_GetStringRule.
+/// This returns temporary memory which will be automatically freed later, and
+/// can be claimed with SDL_ClaimTemporaryMemory().
 ///
 /// \param instance_id the haptic device instance ID.
 /// \returns the name of the selected haptic device. If no name can be found,
@@ -45,13 +48,13 @@ Pointer<Uint32> sdlGetHaptics(Pointer<Int32> count) {
 /// \sa SDL_OpenHaptic
 ///
 /// ```c
-/// extern SDL_DECLSPEC const char *SDLCALL SDL_GetHapticInstanceName(SDL_HapticID instance_id)
+/// extern SDL_DECLSPEC const char * SDLCALL SDL_GetHapticNameForID(SDL_HapticID instance_id)
 /// ```
-String? sdlGetHapticInstanceName(int instanceId) {
-  final sdlGetHapticInstanceNameLookupFunction = libSdl3.lookupFunction<
+String? sdlGetHapticNameForId(int instanceId) {
+  final sdlGetHapticNameForIdLookupFunction = libSdl3.lookupFunction<
       Pointer<Utf8> Function(Uint32 instanceId),
-      Pointer<Utf8> Function(int instanceId)>('SDL_GetHapticInstanceName');
-  final result = sdlGetHapticInstanceNameLookupFunction(instanceId);
+      Pointer<Utf8> Function(int instanceId)>('SDL_GetHapticNameForID');
+  final result = sdlGetHapticNameForIdLookupFunction(instanceId);
   if (result == nullptr) {
     return null;
   }
@@ -82,7 +85,7 @@ String? sdlGetHapticInstanceName(int instanceId) {
 /// \sa SDL_SetHapticGain
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_Haptic *SDLCALL SDL_OpenHaptic(SDL_HapticID instance_id)
+/// extern SDL_DECLSPEC SDL_Haptic * SDLCALL SDL_OpenHaptic(SDL_HapticID instance_id)
 /// ```
 Pointer<SdlHaptic> sdlOpenHaptic(int instanceId) {
   final sdlOpenHapticLookupFunction = libSdl3.lookupFunction<
@@ -101,14 +104,13 @@ Pointer<SdlHaptic> sdlOpenHaptic(int instanceId) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_Haptic *SDLCALL SDL_GetHapticFromInstanceID(SDL_HapticID instance_id)
+/// extern SDL_DECLSPEC SDL_Haptic * SDLCALL SDL_GetHapticFromID(SDL_HapticID instance_id)
 /// ```
-Pointer<SdlHaptic> sdlGetHapticFromInstanceId(int instanceId) {
-  final sdlGetHapticFromInstanceIdLookupFunction = libSdl3.lookupFunction<
+Pointer<SdlHaptic> sdlGetHapticFromId(int instanceId) {
+  final sdlGetHapticFromIdLookupFunction = libSdl3.lookupFunction<
       Pointer<SdlHaptic> Function(Uint32 instanceId),
-      Pointer<SdlHaptic> Function(
-          int instanceId)>('SDL_GetHapticFromInstanceID');
-  return sdlGetHapticFromInstanceIdLookupFunction(instanceId);
+      Pointer<SdlHaptic> Function(int instanceId)>('SDL_GetHapticFromID');
+  return sdlGetHapticFromIdLookupFunction(instanceId);
 }
 
 ///
@@ -121,19 +123,20 @@ Pointer<SdlHaptic> sdlGetHapticFromInstanceId(int instanceId) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_HapticID SDLCALL SDL_GetHapticInstanceID(SDL_Haptic *haptic)
+/// extern SDL_DECLSPEC SDL_HapticID SDLCALL SDL_GetHapticID(SDL_Haptic *haptic)
 /// ```
-int sdlGetHapticInstanceId(Pointer<SdlHaptic> haptic) {
-  final sdlGetHapticInstanceIdLookupFunction = libSdl3.lookupFunction<
+int sdlGetHapticId(Pointer<SdlHaptic> haptic) {
+  final sdlGetHapticIdLookupFunction = libSdl3.lookupFunction<
       Uint32 Function(Pointer<SdlHaptic> haptic),
-      int Function(Pointer<SdlHaptic> haptic)>('SDL_GetHapticInstanceID');
-  return sdlGetHapticInstanceIdLookupFunction(haptic);
+      int Function(Pointer<SdlHaptic> haptic)>('SDL_GetHapticID');
+  return sdlGetHapticIdLookupFunction(haptic);
 }
 
 ///
 /// Get the implementation dependent name of a haptic device.
 ///
-/// The returned string follows the SDL_GetStringRule.
+/// This returns temporary memory which will be automatically freed later, and
+/// can be claimed with SDL_ClaimTemporaryMemory().
 ///
 /// \param haptic the SDL_Haptic obtained from SDL_OpenJoystick().
 /// \returns the name of the selected haptic device. If no name can be found,
@@ -142,10 +145,10 @@ int sdlGetHapticInstanceId(Pointer<SdlHaptic> haptic) {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_GetHapticInstanceName
+/// \sa SDL_GetHapticNameForID
 ///
 /// ```c
-/// extern SDL_DECLSPEC const char *SDLCALL SDL_GetHapticName(SDL_Haptic *haptic)
+/// extern SDL_DECLSPEC const char * SDLCALL SDL_GetHapticName(SDL_Haptic *haptic)
 /// ```
 String? sdlGetHapticName(Pointer<SdlHaptic> haptic) {
   final sdlGetHapticNameLookupFunction = libSdl3.lookupFunction<
@@ -188,7 +191,7 @@ bool sdlIsMouseHaptic() {
 /// \sa SDL_IsMouseHaptic
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_Haptic *SDLCALL SDL_OpenHapticFromMouse(void)
+/// extern SDL_DECLSPEC SDL_Haptic * SDLCALL SDL_OpenHapticFromMouse(void)
 /// ```
 Pointer<SdlHaptic> sdlOpenHapticFromMouse() {
   final sdlOpenHapticFromMouseLookupFunction = libSdl3.lookupFunction<
@@ -238,7 +241,7 @@ bool sdlIsJoystickHaptic(Pointer<SdlJoystick> joystick) {
 /// \sa SDL_IsJoystickHaptic
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_Haptic *SDLCALL SDL_OpenHapticFromJoystick(SDL_Joystick *joystick)
+/// extern SDL_DECLSPEC SDL_Haptic * SDLCALL SDL_OpenHapticFromJoystick(SDL_Joystick *joystick)
 /// ```
 Pointer<SdlHaptic> sdlOpenHapticFromJoystick(Pointer<SdlJoystick> joystick) {
   final sdlOpenHapticFromJoystickLookupFunction = libSdl3.lookupFunction<

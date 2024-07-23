@@ -7,12 +7,11 @@ import 'struct_sdl.dart';
 ///
 /// Get an ASCII string representation for a given SDL_GUID.
 ///
-/// You should supply at least 33 bytes for pszGUID.
+/// This returns temporary memory which will be automatically freed later, and
+/// can be claimed with SDL_ClaimTemporaryMemory().
 ///
 /// \param guid the SDL_GUID you wish to convert to string.
-/// \param pszGUID buffer in which to write the ASCII string.
-/// \param cbGUID the size of pszGUID.
-/// \returns 0 on success or a negative error code on failure; call
+/// \returns the string representation of the GUID or NULL on failure; call
 /// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
@@ -20,14 +19,17 @@ import 'struct_sdl.dart';
 /// \sa SDL_GUIDFromString
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_GUIDToString(SDL_GUID guid, char *pszGUID, int cbGUID)
+/// extern SDL_DECLSPEC const char * SDLCALL SDL_GUIDToString(SDL_GUID guid)
 /// ```
-int sdlGuidToString(SdlGuid guid, Pointer<Int8> pszGuid, int cbGuid) {
+String? sdlGuidToString(SdlGuid guid) {
   final sdlGuidToStringLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(SdlGuid guid, Pointer<Int8> pszGuid, Int32 cbGuid),
-      int Function(
-          SdlGuid guid, Pointer<Int8> pszGuid, int cbGuid)>('SDL_GUIDToString');
-  return sdlGuidToStringLookupFunction(guid, pszGuid, cbGuid);
+      Pointer<Utf8> Function(SdlGuid guid),
+      Pointer<Utf8> Function(SdlGuid guid)>('SDL_GUIDToString');
+  final result = sdlGuidToStringLookupFunction(guid);
+  if (result == nullptr) {
+    return null;
+  }
+  return result.toDartString();
 }
 
 ///

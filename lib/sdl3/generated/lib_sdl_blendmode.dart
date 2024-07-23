@@ -93,25 +93,25 @@ import 'lib_sdl.dart';
 int sdlComposeCustomBlendMode(
     int srcColorFactor,
     int dstColorFactor,
-    Pointer<NativeType> colorOperation,
+    int colorOperation,
     int srcAlphaFactor,
     int dstAlphaFactor,
-    Pointer<NativeType> alphaOperation) {
+    int alphaOperation) {
   final sdlComposeCustomBlendModeLookupFunction = libSdl3.lookupFunction<
       Uint32 Function(
           Int32 srcColorFactor,
           Int32 dstColorFactor,
-          Pointer<NativeType> colorOperation,
+          Int32 colorOperation,
           Int32 srcAlphaFactor,
           Int32 dstAlphaFactor,
-          Pointer<NativeType> alphaOperation),
+          Int32 alphaOperation),
       int Function(
           int srcColorFactor,
           int dstColorFactor,
-          Pointer<NativeType> colorOperation,
+          int colorOperation,
           int srcAlphaFactor,
           int dstAlphaFactor,
-          Pointer<NativeType> alphaOperation)>('SDL_ComposeCustomBlendMode');
+          int alphaOperation)>('SDL_ComposeCustomBlendMode');
   return sdlComposeCustomBlendModeLookupFunction(srcColorFactor, dstColorFactor,
       colorOperation, srcAlphaFactor, dstAlphaFactor, alphaOperation);
 }

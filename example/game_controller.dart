@@ -37,7 +37,7 @@ int main() {
     sdlQuit();
     return -1;
   }
-  window.setTitle(SdlGamepadEx.getInstanceName(0)!);
+  window.setTitle(SdlGamepadEx.getNameForId(0)!);
   var buttonNames = [
     'A',
     'B',

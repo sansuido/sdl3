@@ -11,16 +11,18 @@ import 'struct_sdl.dart';
 /// Therefore the returned list might be empty, although devices are available.
 /// After using all devices at least once the number will be correct.
 ///
-/// \param count a pointer filled in with the number of devices returned, can
+/// This returns temporary memory which will be automatically freed later, and
+/// can be claimed with SDL_ClaimTemporaryMemory().
+///
+/// \param count a pointer filled in with the number of devices returned, may
 /// be NULL.
-/// \returns a 0 terminated array of touch device IDs which should be freed
-/// with SDL_free(), or NULL on error; call SDL_GetError() for more
-/// details.
+/// \returns a 0 terminated array of touch device IDs or NULL on failure; call
+/// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_TouchID *SDLCALL SDL_GetTouchDevices(int *count)
+/// extern SDL_DECLSPEC const SDL_TouchID * SDLCALL SDL_GetTouchDevices(int *count)
 /// ```
 Pointer<Uint64> sdlGetTouchDevices(Pointer<Int32> count) {
   final sdlGetTouchDevicesLookupFunction = libSdl3.lookupFunction<
@@ -32,16 +34,17 @@ Pointer<Uint64> sdlGetTouchDevices(Pointer<Int32> count) {
 ///
 /// Get the touch device name as reported from the driver.
 ///
-/// The returned string follows the SDL_GetStringRule.
+/// This returns temporary memory which will be automatically freed later, and
+/// can be claimed with SDL_ClaimTemporaryMemory().
 ///
 /// \param touchID the touch device instance ID.
-/// \returns touch device name, or NULL on error; call SDL_GetError() for more
-/// details.
+/// \returns touch device name, or NULL on failure; call SDL_GetError() for
+/// more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC const char *SDLCALL SDL_GetTouchDeviceName(SDL_TouchID touchID)
+/// extern SDL_DECLSPEC const char * SDLCALL SDL_GetTouchDeviceName(SDL_TouchID touchID)
 /// ```
 String? sdlGetTouchDeviceName(int touchId) {
   final sdlGetTouchDeviceNameLookupFunction = libSdl3.lookupFunction<
@@ -75,17 +78,19 @@ int sdlGetTouchDeviceType(int touchId) {
 ///
 /// Get a list of active fingers for a given touch device.
 ///
+/// This returns temporary memory which will be automatically freed later, and
+/// can be claimed with SDL_ClaimTemporaryMemory().
+///
 /// \param touchID the ID of a touch device.
 /// \param count a pointer filled in with the number of fingers returned, can
 /// be NULL.
-/// \returns a NULL terminated array of SDL_Finger pointers which should be
-/// freed with SDL_free(), or NULL on error; call SDL_GetError() for
-/// more details.
+/// \returns a NULL terminated array of SDL_Finger pointers or NULL on failure;
+/// call SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_Finger **SDLCALL SDL_GetTouchFingers(SDL_TouchID touchID, int *count)
+/// extern SDL_DECLSPEC const SDL_Finger * const * SDLCALL SDL_GetTouchFingers(SDL_TouchID touchID, int *count)
 /// ```
 Pointer<Pointer<SdlFinger>> sdlGetTouchFingers(
     int touchId, Pointer<Int32> count) {

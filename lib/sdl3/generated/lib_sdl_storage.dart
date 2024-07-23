@@ -20,7 +20,7 @@ import 'struct_sdl.dart';
 /// \sa SDL_ReadStorageFile
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_Storage *SDLCALL SDL_OpenTitleStorage(const char *override, SDL_PropertiesID props)
+/// extern SDL_DECLSPEC SDL_Storage * SDLCALL SDL_OpenTitleStorage(const char *override, SDL_PropertiesID props)
 /// ```
 Pointer<SdlStorage> sdlOpenTitleStorage(String? override, int props) {
   final sdlOpenTitleStorageLookupFunction = libSdl3.lookupFunction<
@@ -58,7 +58,7 @@ Pointer<SdlStorage> sdlOpenTitleStorage(String? override, int props) {
 /// \sa SDL_WriteStorageFile
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_Storage *SDLCALL SDL_OpenUserStorage(const char *org, const char *app, SDL_PropertiesID props)
+/// extern SDL_DECLSPEC SDL_Storage * SDLCALL SDL_OpenUserStorage(const char *org, const char *app, SDL_PropertiesID props)
 /// ```
 Pointer<SdlStorage> sdlOpenUserStorage(String? org, String? app, int props) {
   final sdlOpenUserStorageLookupFunction = libSdl3.lookupFunction<
@@ -98,7 +98,7 @@ Pointer<SdlStorage> sdlOpenUserStorage(String? org, String? app, int props) {
 /// \sa SDL_WriteStorageFile
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_Storage *SDLCALL SDL_OpenFileStorage(const char *path)
+/// extern SDL_DECLSPEC SDL_Storage * SDLCALL SDL_OpenFileStorage(const char *path)
 /// ```
 Pointer<SdlStorage> sdlOpenFileStorage(String? path) {
   final sdlOpenFileStorageLookupFunction = libSdl3.lookupFunction<
@@ -133,7 +133,7 @@ Pointer<SdlStorage> sdlOpenFileStorage(String? path) {
 /// \sa SDL_WriteStorageFile
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_Storage *SDLCALL SDL_OpenStorage(const SDL_StorageInterface *iface, void *userdata)
+/// extern SDL_DECLSPEC SDL_Storage * SDLCALL SDL_OpenStorage(const SDL_StorageInterface *iface, void *userdata)
 /// ```
 Pointer<SdlStorage> sdlOpenStorage(
     Pointer<SdlStorageInterface> iface, Pointer<NativeType> userdata) {
@@ -199,8 +199,8 @@ bool sdlStorageReady(Pointer<SdlStorage> storage) {
 /// \param storage a storage container to query.
 /// \param path the relative path of the file to query.
 /// \param length a pointer to be filled with the file's length.
-/// \returns 0 if the file could be queried, a negative value otherwise; call
-/// SDL_GetError() for more information.
+/// \returns 0 if the file could be queried or a negative error code on
+/// failure; call SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -232,7 +232,7 @@ int sdlGetStorageFileSize(
 /// \param path the relative path of the file to read.
 /// \param destination a client-provided buffer to read the file into.
 /// \param length the length of the destination buffer.
-/// \returns 0 if the file was read, a negative value otherwise; call
+/// \returns 0 if the file was read or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
@@ -265,8 +265,8 @@ int sdlReadStorageFile(Pointer<SdlStorage> storage, String? path,
 /// \param path the relative path of the file to write.
 /// \param source a client-provided buffer to write from.
 /// \param length the length of the source buffer.
-/// \returns 0 if the file was written, a negative value otherwise; call
-/// SDL_GetError() for more information.
+/// \returns 0 if the file was written or a negative error code on failure;
+/// call SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -489,7 +489,8 @@ int sdlGetStorageSpaceRemaining(Pointer<SdlStorage> storage) {
 /// convenience, but if `count` is non-NULL, on return it will contain the
 /// number of items in the array, not counting the NULL terminator.
 ///
-/// You must free the returned pointer with SDL_free() when done with it.
+/// This returns temporary memory which will be automatically freed later, and
+/// can be claimed with SDL_ClaimTemporaryMemory().
 ///
 /// \param storage a storage container.
 /// \param path the path of the directory to enumerate.
@@ -508,7 +509,7 @@ int sdlGetStorageSpaceRemaining(Pointer<SdlStorage> storage) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC char **SDLCALL SDL_GlobStorageDirectory(SDL_Storage *storage, const char *path, const char *pattern, SDL_GlobFlags flags, int *count)
+/// extern SDL_DECLSPEC const char * const * SDLCALL SDL_GlobStorageDirectory(SDL_Storage *storage, const char *path, const char *pattern, SDL_GlobFlags flags, int *count)
 /// ```
 Pointer<Pointer<Int8>> sdlGlobStorageDirectory(Pointer<SdlStorage> storage,
     String? path, String? pattern, int flags, Pointer<Int32> count) {

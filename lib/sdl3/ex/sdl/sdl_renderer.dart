@@ -438,7 +438,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \sa SDL_DestroyRenderer
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_Renderer *SDLCALL SDL_CreateSoftwareRenderer(SDL_Surface *surface)
+  /// extern SDL_DECLSPEC SDL_Renderer * SDLCALL SDL_CreateSoftwareRenderer(SDL_Surface *surface)
   /// ```
   Pointer<SdlRenderer> createSoftware(Pointer<SdlSurface> surface) {
     return sdlCreateSoftwareRenderer(surface);
@@ -454,7 +454,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \since This function is available since SDL 3.0.0.
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_Window *SDLCALL SDL_GetRenderWindow(SDL_Renderer *renderer)
+  /// extern SDL_DECLSPEC SDL_Window * SDLCALL SDL_GetRenderWindow(SDL_Renderer *renderer)
   /// ```
   Pointer<SdlWindow> getWindow() {
     return sdlGetRenderWindow(this);
@@ -626,9 +626,8 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \sa SDL_GetTextureSize
   /// \sa SDL_UpdateTexture
   ///
-
   /// ```c
-  /// extern SDL_DECLSPEC SDL_Texture *SDLCALL SDL_CreateTexture(SDL_Renderer *renderer, SDL_PixelFormat format, int access, int w, int h)
+  /// extern SDL_DECLSPEC SDL_Texture * SDLCALL SDL_CreateTexture(SDL_Renderer *renderer, SDL_PixelFormat format, int access, int w, int h)
   /// ```
   Pointer<SdlTexture> createTexture(int format, int access, int w, int h) {
     return sdlCreateTexture(this, format, access, w, h);
@@ -659,7 +658,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \sa SDL_DestroyTexture
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_Texture *SDLCALL SDL_CreateTextureFromSurface(SDL_Renderer *renderer, SDL_Surface *surface)
+  /// extern SDL_DECLSPEC SDL_Texture * SDLCALL SDL_CreateTextureFromSurface(SDL_Renderer *renderer, SDL_Surface *surface)
   /// ```
   Pointer<SdlTexture> createTextureFromSurface(Pointer<SdlSurface> surface) {
     return sdlCreateTextureFromSurface(this, surface);
@@ -775,7 +774,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \sa SDL_UpdateTexture
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_Texture *SDLCALL SDL_CreateTextureWithProperties(SDL_Renderer *renderer, SDL_PropertiesID props)
+  /// extern SDL_DECLSPEC SDL_Texture * SDLCALL SDL_CreateTextureWithProperties(SDL_Renderer *renderer, SDL_PropertiesID props)
   /// ```
   Pointer<SdlTexture> createTextureWithProperties(int props) {
     return sdlCreateTextureWithProperties(this, props);
@@ -820,7 +819,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \sa SDL_SetRenderTarget
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_Texture *SDLCALL SDL_GetRenderTarget(SDL_Renderer *renderer)
+  /// extern SDL_DECLSPEC SDL_Texture * SDLCALL SDL_GetRenderTarget(SDL_Renderer *renderer)
   /// ```
   Pointer<SdlTexture> getTarget() {
     return sdlGetRenderTarget(this);
@@ -1518,7 +1517,8 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \param renderer the renderer which should draw a point.
   /// \param x the x coordinate of the point.
   /// \param y the y coordinate of the point.
-  /// \returns 0 on success, or -1 on error.
+  /// \returns 0 on success or a negative error code on failure; call
+  /// SDL_GetError() for more information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -1562,7 +1562,8 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \param y1 the y coordinate of the start point.
   /// \param x2 the x coordinate of the end point.
   /// \param y2 the y coordinate of the end point.
-  /// \returns 0 on success, or -1 on error.
+  /// \returns 0 on success or a negative error code on failure; call
+  /// SDL_GetError() for more information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -1605,7 +1606,8 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \param renderer the renderer which should draw a rectangle.
   /// \param rect a pointer to the destination rectangle, or NULL to outline the
   /// entire rendering target.
-  /// \returns 0 on success, or -1 on error.
+  /// \returns 0 on success or a negative error code on failure; call
+  /// SDL_GetError() for more information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -1655,7 +1657,8 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \param renderer the renderer which should fill a rectangle.
   /// \param rect a pointer to the destination rectangle, or NULL for the entire
   /// rendering target.
-  /// \returns 0 on success, or -1 on error.
+  /// \returns 0 on success or a negative error code on failure; call
+  /// SDL_GetError() for more information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -1708,7 +1711,8 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// texture.
   /// \param dstrect a pointer to the destination rectangle, or NULL for the
   /// entire rendering target.
-  /// \returns 0 on success, or -1 on error.
+  /// \returns 0 on success or a negative error code on failure; call
+  /// SDL_GetError() for more information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -1800,7 +1804,8 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// array, if NULL all vertices will be rendered in sequential
   /// order.
   /// \param num_indices number of indices.
-  /// \returns 0 on success, or -1 if the operation is not supported.
+  /// \returns 0 on success or a negative error code on failure; call
+  /// SDL_GetError() for more information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -1840,7 +1845,6 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   ///
   /// \sa SDL_RenderGeometry
   ///
-
   /// ```c
   /// extern SDL_DECLSPEC int SDLCALL SDL_RenderGeometryRaw(SDL_Renderer *renderer, SDL_Texture *texture, const float *xy, int xy_stride, const SDL_FColor *color, int color_stride, const float *uv, int uv_stride, int num_vertices, const void *indices, int num_indices, int size_indices)
   /// ```
@@ -1885,6 +1889,12 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// encouraged to call SDL_RenderClear() to initialize the backbuffer before
   /// starting each new frame's drawing, even if you plan to overwrite every
   /// pixel.
+  ///
+  /// Please note, that in case of rendering to a texture - there is **no need**
+  /// to call `SDL_RenderPresent` after drawing needed objects to a texture, you
+  /// are only required to change back the rendering target to default via
+  /// `SDL_SetRenderTarget(renderer, NULL)` afterwards, as textures by themselves
+  /// do not have a concept of backbuffers.
   ///
   /// \param renderer the rendering context.
   /// \returns 0 on success or a negative error code on failure; call
@@ -1987,7 +1997,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \sa SDL_GetRenderMetalCommandEncoder
   ///
   /// ```c
-  /// extern SDL_DECLSPEC void *SDLCALL SDL_GetRenderMetalLayer(SDL_Renderer *renderer)
+  /// extern SDL_DECLSPEC void * SDLCALL SDL_GetRenderMetalLayer(SDL_Renderer *renderer)
   /// ```
   Pointer<NativeType> getMetalLayer() {
     return sdlGetRenderMetalLayer(this);
@@ -2013,7 +2023,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \sa SDL_GetRenderMetalLayer
   ///
   /// ```c
-  /// extern SDL_DECLSPEC void *SDLCALL SDL_GetRenderMetalCommandEncoder(SDL_Renderer *renderer)
+  /// extern SDL_DECLSPEC void * SDLCALL SDL_GetRenderMetalCommandEncoder(SDL_Renderer *renderer)
   /// ```
   Pointer<NativeType> getMetalCommandEncoder() {
     return sdlGetRenderMetalCommandEncoder(this);

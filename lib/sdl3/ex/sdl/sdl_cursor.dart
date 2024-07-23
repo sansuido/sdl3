@@ -49,7 +49,7 @@ extension SdlCursorEx on SdlCursor {
   /// \sa SDL_SetCursor
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_Cursor *SDLCALL SDL_CreateCursor(const Uint8 * data, const Uint8 * mask, int w, int h, int hot_x, int hot_y)
+  /// extern SDL_DECLSPEC SDL_Cursor * SDLCALL SDL_CreateCursor(const Uint8 * data, const Uint8 * mask, int w, int h, int hot_x, int hot_y)
   /// ```
   static Pointer<SdlCursor> create(Pointer<Uint8> data, Pointer<Uint8> mask,
       int w, int h, int hotX, int hotY) {
@@ -73,7 +73,7 @@ extension SdlCursorEx on SdlCursor {
   /// \sa SDL_SetCursor
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_Cursor *SDLCALL SDL_CreateColorCursor(SDL_Surface *surface, int hot_x, int hot_y)
+  /// extern SDL_DECLSPEC SDL_Cursor * SDLCALL SDL_CreateColorCursor(SDL_Surface *surface, int hot_x, int hot_y)
   /// ```
   static Pointer<SdlCursor> createColor(
       Pointer<SdlSurface> surface, int hotX, int hotY) {
@@ -92,7 +92,7 @@ extension SdlCursorEx on SdlCursor {
   /// \sa SDL_DestroyCursor
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_Cursor *SDLCALL SDL_CreateSystemCursor(SDL_SystemCursor id)
+  /// extern SDL_DECLSPEC SDL_Cursor * SDLCALL SDL_CreateSystemCursor(SDL_SystemCursor id)
   /// ```
   static Pointer<SdlCursor> createSystem(int id) {
     return sdlCreateSystemCursor(id);
@@ -111,7 +111,7 @@ extension SdlCursorEx on SdlCursor {
   /// \sa SDL_SetCursor
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_Cursor *SDLCALL SDL_GetCursor(void)
+  /// extern SDL_DECLSPEC SDL_Cursor * SDLCALL SDL_GetCursor(void)
   /// ```
   static Pointer<SdlCursor> get() {
     return sdlGetCursor();
@@ -123,12 +123,13 @@ extension SdlCursorEx on SdlCursor {
   /// You do not have to call SDL_DestroyCursor() on the return value, but it is
   /// safe to do so.
   ///
-  /// \returns the default cursor on success or NULL on failure.
+  /// \returns the default cursor on success or NULL on failuree; call
+  /// SDL_GetError() for more information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_Cursor *SDLCALL SDL_GetDefaultCursor(void)
+  /// extern SDL_DECLSPEC SDL_Cursor * SDLCALL SDL_GetDefaultCursor(void)
   /// ```
   static Pointer<SdlCursor> getDefault() {
     return sdlGetDefaultCursor();
@@ -191,7 +192,7 @@ extension SdlCursorPointerEx on Pointer<SdlCursor> {
   /// \sa SDL_GetCursor
   ///
   /// ```c
-  /// extern SDL_DECLSPEC int SDLCALL SDL_SetCursor(SDL_Cursor * cursor)
+  /// extern SDL_DECLSPEC int SDLCALL SDL_SetCursor(SDL_Cursor *cursor)
   /// ```
   void set() {
     sdlSetCursor(this);
@@ -212,7 +213,7 @@ extension SdlCursorPointerEx on Pointer<SdlCursor> {
   /// \sa SDL_CreateSystemCursor
   ///
   /// ```c
-  /// extern SDL_DECLSPEC void SDLCALL SDL_DestroyCursor(SDL_Cursor * cursor)
+  /// extern SDL_DECLSPEC void SDLCALL SDL_DestroyCursor(SDL_Cursor *cursor)
   /// ```
   void destroy() {
     sdlDestroyCursor(this);

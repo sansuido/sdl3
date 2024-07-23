@@ -72,7 +72,8 @@ int sdlVulkanLoadLibrary(String? path) {
 /// `vkGetInstanceProcAddr =
 /// (PFN_vkGetInstanceProcAddr)SDL_Vulkan_GetVkGetInstanceProcAddr();`
 ///
-/// \returns the function pointer for `vkGetInstanceProcAddr` or NULL on error.
+/// \returns the function pointer for `vkGetInstanceProcAddr` or NULL on
+/// failure; call SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -120,14 +121,15 @@ void sdlVulkanUnloadLibrary() {
 /// You should not free the returned array; it is owned by SDL.
 ///
 /// \param count a pointer filled in with the number of extensions returned.
-/// \returns an array of extension name strings on success, NULL on error.
+/// \returns an array of extension name strings on success, NULL on failure;
+/// call SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_Vulkan_CreateSurface
 ///
 /// ```c
-/// extern SDL_DECLSPEC char const* const* SDLCALL SDL_Vulkan_GetInstanceExtensions(Uint32 *count)
+/// extern SDL_DECLSPEC char const * const * SDLCALL SDL_Vulkan_GetInstanceExtensions(Uint32 *count)
 /// ```
 Pointer<Pointer<Int8>> sdlVulkanGetInstanceExtensions(Pointer<Uint32> count) {
   final sdlVulkanGetInstanceExtensionsLookupFunction = libSdl3.lookupFunction<
@@ -153,7 +155,8 @@ Pointer<Pointer<Int8>> sdlVulkanGetInstanceExtensions(Pointer<Uint32> count) {
 /// allocator that creates the surface. Can be NULL.
 /// \param surface a pointer to a VkSurfaceKHR handle to output the newly
 /// created surface.
-/// \returns 0 on success, -1 on error (check SDL_GetError() for specifics).
+/// \returns 0 on success or a negative error code on failure; call
+/// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///

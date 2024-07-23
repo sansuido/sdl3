@@ -42,7 +42,8 @@ int sdlGetNumRenderDrivers() {
 /// "direct3d12" or "metal". These never have Unicode characters, and are not
 /// meant to be proper names.
 ///
-/// The returned string follows the SDL_GetStringRule.
+/// This returns temporary memory which will be automatically freed later, and
+/// can be claimed with SDL_ClaimTemporaryMemory().
 ///
 /// \param index the index of the rendering driver; the value ranges from 0 to
 /// SDL_GetNumRenderDrivers() - 1.
@@ -54,7 +55,7 @@ int sdlGetNumRenderDrivers() {
 /// \sa SDL_GetNumRenderDrivers
 ///
 /// ```c
-/// extern SDL_DECLSPEC const char *SDLCALL SDL_GetRenderDriver(int index)
+/// extern SDL_DECLSPEC const char * SDLCALL SDL_GetRenderDriver(int index)
 /// ```
 String? sdlGetRenderDriver(int index) {
   final sdlGetRenderDriverLookupFunction = libSdl3.lookupFunction<
@@ -240,7 +241,7 @@ Pointer<SdlRenderer> sdlCreateRendererWithProperties(int props) {
 /// \sa SDL_DestroyRenderer
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_Renderer *SDLCALL SDL_CreateSoftwareRenderer(SDL_Surface *surface)
+/// extern SDL_DECLSPEC SDL_Renderer * SDLCALL SDL_CreateSoftwareRenderer(SDL_Surface *surface)
 /// ```
 Pointer<SdlRenderer> sdlCreateSoftwareRenderer(Pointer<SdlSurface> surface) {
   final sdlCreateSoftwareRendererLookupFunction = libSdl3.lookupFunction<
@@ -260,7 +261,7 @@ Pointer<SdlRenderer> sdlCreateSoftwareRenderer(Pointer<SdlSurface> surface) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_Renderer *SDLCALL SDL_GetRenderer(SDL_Window *window)
+/// extern SDL_DECLSPEC SDL_Renderer * SDLCALL SDL_GetRenderer(SDL_Window *window)
 /// ```
 Pointer<SdlRenderer> sdlGetRenderer(Pointer<SdlWindow> window) {
   final sdlGetRendererLookupFunction = libSdl3.lookupFunction<
@@ -280,7 +281,7 @@ Pointer<SdlRenderer> sdlGetRenderer(Pointer<SdlWindow> window) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_Window *SDLCALL SDL_GetRenderWindow(SDL_Renderer *renderer)
+/// extern SDL_DECLSPEC SDL_Window * SDLCALL SDL_GetRenderWindow(SDL_Renderer *renderer)
 /// ```
 Pointer<SdlWindow> sdlGetRenderWindow(Pointer<SdlRenderer> renderer) {
   final sdlGetRenderWindowLookupFunction = libSdl3.lookupFunction<
@@ -293,11 +294,12 @@ Pointer<SdlWindow> sdlGetRenderWindow(Pointer<SdlRenderer> renderer) {
 ///
 /// Get the name of a renderer.
 ///
-/// The returned string follows the SDL_GetStringRule.
+/// This returns temporary memory which will be automatically freed later, and
+/// can be claimed with SDL_ClaimTemporaryMemory().
 ///
 /// \param renderer the rendering context.
-/// \returns the name of the selected renderer, or NULL if the renderer is
-/// invalid.
+/// \returns the name of the selected renderer, or NULL on failure; call
+/// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -305,7 +307,7 @@ Pointer<SdlWindow> sdlGetRenderWindow(Pointer<SdlRenderer> renderer) {
 /// \sa SDL_CreateRendererWithProperties
 ///
 /// ```c
-/// extern SDL_DECLSPEC const char *SDLCALL SDL_GetRendererName(SDL_Renderer *renderer)
+/// extern SDL_DECLSPEC const char * SDLCALL SDL_GetRendererName(SDL_Renderer *renderer)
 /// ```
 String? sdlGetRendererName(Pointer<SdlRenderer> renderer) {
   final sdlGetRendererNameLookupFunction = libSdl3.lookupFunction<
@@ -487,7 +489,7 @@ int sdlGetCurrentRenderOutputSize(
 /// \sa SDL_UpdateTexture
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_Texture *SDLCALL SDL_CreateTexture(SDL_Renderer *renderer, SDL_PixelFormat format, int access, int w, int h)
+/// extern SDL_DECLSPEC SDL_Texture * SDLCALL SDL_CreateTexture(SDL_Renderer *renderer, SDL_PixelFormat format, int access, int w, int h)
 /// ```
 Pointer<SdlTexture> sdlCreateTexture(
     Pointer<SdlRenderer> renderer, int format, int access, int w, int h) {
@@ -524,7 +526,7 @@ Pointer<SdlTexture> sdlCreateTexture(
 /// \sa SDL_DestroyTexture
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_Texture *SDLCALL SDL_CreateTextureFromSurface(SDL_Renderer *renderer, SDL_Surface *surface)
+/// extern SDL_DECLSPEC SDL_Texture * SDLCALL SDL_CreateTextureFromSurface(SDL_Renderer *renderer, SDL_Surface *surface)
 /// ```
 Pointer<SdlTexture> sdlCreateTextureFromSurface(
     Pointer<SdlRenderer> renderer, Pointer<SdlSurface> surface) {
@@ -646,7 +648,7 @@ Pointer<SdlTexture> sdlCreateTextureFromSurface(
 /// \sa SDL_UpdateTexture
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_Texture *SDLCALL SDL_CreateTextureWithProperties(SDL_Renderer *renderer, SDL_PropertiesID props)
+/// extern SDL_DECLSPEC SDL_Texture * SDLCALL SDL_CreateTextureWithProperties(SDL_Renderer *renderer, SDL_PropertiesID props)
 /// ```
 Pointer<SdlTexture> sdlCreateTextureWithProperties(
     Pointer<SdlRenderer> renderer, int props) {
@@ -774,7 +776,7 @@ int sdlGetTextureProperties(Pointer<SdlTexture> texture) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_Renderer *SDLCALL SDL_GetRendererFromTexture(SDL_Texture *texture)
+/// extern SDL_DECLSPEC SDL_Renderer * SDLCALL SDL_GetRendererFromTexture(SDL_Texture *texture)
 /// ```
 Pointer<SdlRenderer> sdlGetRendererFromTexture(Pointer<SdlTexture> texture) {
   final sdlGetRendererFromTextureLookupFunction = libSdl3.lookupFunction<
@@ -1474,7 +1476,7 @@ int sdlSetRenderTarget(
 /// \sa SDL_SetRenderTarget
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_Texture *SDLCALL SDL_GetRenderTarget(SDL_Renderer *renderer)
+/// extern SDL_DECLSPEC SDL_Texture * SDLCALL SDL_GetRenderTarget(SDL_Renderer *renderer)
 /// ```
 Pointer<SdlTexture> sdlGetRenderTarget(Pointer<SdlRenderer> renderer) {
   final sdlGetRenderTargetLookupFunction = libSdl3.lookupFunction<
@@ -2182,7 +2184,8 @@ int sdlRenderClear(Pointer<SdlRenderer> renderer) {
 /// \param renderer the renderer which should draw a point.
 /// \param x the x coordinate of the point.
 /// \param y the y coordinate of the point.
-/// \returns 0 on success, or -1 on error.
+/// \returns 0 on success or a negative error code on failure; call
+/// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -2233,7 +2236,8 @@ int sdlRenderPoints(
 /// \param y1 the y coordinate of the start point.
 /// \param x2 the x coordinate of the end point.
 /// \param y2 the y coordinate of the end point.
-/// \returns 0 on success, or -1 on error.
+/// \returns 0 on success or a negative error code on failure; call
+/// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -2285,7 +2289,8 @@ int sdlRenderLines(
 /// \param renderer the renderer which should draw a rectangle.
 /// \param rect a pointer to the destination rectangle, or NULL to outline the
 /// entire rendering target.
-/// \returns 0 on success, or -1 on error.
+/// \returns 0 on success or a negative error code on failure; call
+/// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -2336,7 +2341,8 @@ int sdlRenderRects(
 /// \param renderer the renderer which should fill a rectangle.
 /// \param rect a pointer to the destination rectangle, or NULL for the entire
 /// rendering target.
-/// \returns 0 on success, or -1 on error.
+/// \returns 0 on success or a negative error code on failure; call
+/// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -2390,7 +2396,8 @@ int sdlRenderFillRects(
 /// texture.
 /// \param dstrect a pointer to the destination rectangle, or NULL for the
 /// entire rendering target.
-/// \returns 0 on success, or -1 on error.
+/// \returns 0 on success or a negative error code on failure; call
+/// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -2481,7 +2488,8 @@ int sdlRenderTextureRotated(
 /// array, if NULL all vertices will be rendered in sequential
 /// order.
 /// \param num_indices number of indices.
-/// \returns 0 on success, or -1 if the operation is not supported.
+/// \returns 0 on success or a negative error code on failure; call
+/// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -2648,6 +2656,12 @@ Pointer<SdlSurface> sdlRenderReadPixels(
 /// starting each new frame's drawing, even if you plan to overwrite every
 /// pixel.
 ///
+/// Please note, that in case of rendering to a texture - there is **no need**
+/// to call `SDL_RenderPresent` after drawing needed objects to a texture, you
+/// are only required to change back the rendering target to default via
+/// `SDL_SetRenderTarget(renderer, NULL)` afterwards, as textures by themselves
+/// do not have a concept of backbuffers.
+///
 /// \param renderer the rendering context.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
@@ -2777,7 +2791,7 @@ int sdlFlushRenderer(Pointer<SdlRenderer> renderer) {
 /// \sa SDL_GetRenderMetalCommandEncoder
 ///
 /// ```c
-/// extern SDL_DECLSPEC void *SDLCALL SDL_GetRenderMetalLayer(SDL_Renderer *renderer)
+/// extern SDL_DECLSPEC void * SDLCALL SDL_GetRenderMetalLayer(SDL_Renderer *renderer)
 /// ```
 Pointer<NativeType> sdlGetRenderMetalLayer(Pointer<SdlRenderer> renderer) {
   final sdlGetRenderMetalLayerLookupFunction = libSdl3.lookupFunction<
@@ -2807,7 +2821,7 @@ Pointer<NativeType> sdlGetRenderMetalLayer(Pointer<SdlRenderer> renderer) {
 /// \sa SDL_GetRenderMetalLayer
 ///
 /// ```c
-/// extern SDL_DECLSPEC void *SDLCALL SDL_GetRenderMetalCommandEncoder(SDL_Renderer *renderer)
+/// extern SDL_DECLSPEC void * SDLCALL SDL_GetRenderMetalCommandEncoder(SDL_Renderer *renderer)
 /// ```
 Pointer<NativeType> sdlGetRenderMetalCommandEncoder(
     Pointer<SdlRenderer> renderer) {

@@ -9,9 +9,9 @@ import 'struct_sdl.dart';
 /// existing gamepad.
 ///
 /// The mapping string has the format "GUID,name,mapping", where GUID is the
-/// string value from SDL_GetJoystickGUIDString(), name is the human readable
-/// string for the device and mappings are gamepad mappings to joystick ones.
-/// Under Windows there is a reserved GUID of "xinput" that covers all XInput
+/// string value from SDL_GUIDToString(), name is the human readable string for
+/// the device and mappings are gamepad mappings to joystick ones. Under
+/// Windows there is a reserved GUID of "xinput" that covers all XInput
 /// devices. The mapping format for joystick is:
 ///
 /// - `bX`: a joystick button, index X
@@ -28,7 +28,7 @@ import 'struct_sdl.dart';
 ///
 /// \param mapping the mapping string.
 /// \returns 1 if a new mapping is added, 0 if an existing mapping is updated,
-/// -1 on error; call SDL_GetError() for more information.
+/// -1 on failure; call SDL_GetError() for more information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -70,7 +70,7 @@ int sdlAddGamepadMapping(String? mapping) {
 /// \param src the data stream for the mappings to be added.
 /// \param closeio if SDL_TRUE, calls SDL_CloseIO() on `src` before returning,
 /// even in the case of an error.
-/// \returns the number of mappings added or -1 on error; call SDL_GetError()
+/// \returns the number of mappings added or -1 on failure; call SDL_GetError()
 /// for more information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
@@ -107,7 +107,7 @@ int sdlAddGamepadMappingsFromIo(Pointer<SdlIoStream> src, bool closeio) {
 /// Windows, etc).
 ///
 /// \param file the mappings file to load.
-/// \returns the number of mappings added or -1 on error; call SDL_GetError()
+/// \returns the number of mappings added or -1 on failure; call SDL_GetError()
 /// for more information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
@@ -155,18 +155,18 @@ int sdlReloadGamepadMappings() {
 ///
 /// Get the current gamepad mappings.
 ///
-/// You must free the returned pointer with SDL_free() when you are done with
-/// it, but you do _not_ free each string in the array.
+/// This returns temporary memory which will be automatically freed later, and
+/// can be claimed with SDL_ClaimTemporaryMemory().
 ///
 /// \param count a pointer filled in with the number of mappings returned, can
 /// be NULL.
-/// \returns an array of the mapping strings, NULL-terminated. Must be freed
-/// with SDL_free(). Returns NULL on error.
+/// \returns an array of the mapping strings, NULL-terminated, or NULL on
+/// failure; call SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC char ** SDLCALL SDL_GetGamepadMappings(int *count)
+/// extern SDL_DECLSPEC const char * const * SDLCALL SDL_GetGamepadMappings(int *count)
 /// ```
 Pointer<Pointer<Int8>> sdlGetGamepadMappings(Pointer<Int32> count) {
   final sdlGetGamepadMappingsLookupFunction = libSdl3.lookupFunction<
@@ -179,31 +179,37 @@ Pointer<Pointer<Int8>> sdlGetGamepadMappings(Pointer<Int32> count) {
 ///
 /// Get the gamepad mapping string for a given GUID.
 ///
-/// The returned string must be freed with SDL_free().
+/// This returns temporary memory which will be automatically freed later, and
+/// can be claimed with SDL_ClaimTemporaryMemory().
 ///
 /// \param guid a structure containing the GUID for which a mapping is desired.
-/// \returns a mapping string or NULL on error; call SDL_GetError() for more
+/// \returns a mapping string or NULL on failure; call SDL_GetError() for more
 /// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_GetJoystickInstanceGUID
+/// \sa SDL_GetJoystickGUIDForID
 /// \sa SDL_GetJoystickGUID
 ///
 /// ```c
-/// extern SDL_DECLSPEC char * SDLCALL SDL_GetGamepadMappingForGUID(SDL_JoystickGUID guid)
+/// extern SDL_DECLSPEC const char * SDLCALL SDL_GetGamepadMappingForGUID(SDL_GUID guid)
 /// ```
-Pointer<Int8> sdlGetGamepadMappingForGuid(SdlGuid guid) {
+String? sdlGetGamepadMappingForGuid(SdlGuid guid) {
   final sdlGetGamepadMappingForGuidLookupFunction = libSdl3.lookupFunction<
-      Pointer<Int8> Function(SdlGuid guid),
-      Pointer<Int8> Function(SdlGuid guid)>('SDL_GetGamepadMappingForGUID');
-  return sdlGetGamepadMappingForGuidLookupFunction(guid);
+      Pointer<Utf8> Function(SdlGuid guid),
+      Pointer<Utf8> Function(SdlGuid guid)>('SDL_GetGamepadMappingForGUID');
+  final result = sdlGetGamepadMappingForGuidLookupFunction(guid);
+  if (result == nullptr) {
+    return null;
+  }
+  return result.toDartString();
 }
 
 ///
 /// Get the current mapping of a gamepad.
 ///
-/// The returned string must be freed with SDL_free().
+/// This returns temporary memory which will be automatically freed later, and
+/// can be claimed with SDL_ClaimTemporaryMemory().
 ///
 /// Details about mappings are discussed with SDL_AddGamepadMapping().
 ///
@@ -214,19 +220,23 @@ Pointer<Int8> sdlGetGamepadMappingForGuid(SdlGuid guid) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_AddGamepadMapping
-/// \sa SDL_GetGamepadInstanceMapping
+/// \sa SDL_GetGamepadMappingForID
 /// \sa SDL_GetGamepadMappingForGUID
 /// \sa SDL_SetGamepadMapping
 ///
 /// ```c
-/// extern SDL_DECLSPEC char * SDLCALL SDL_GetGamepadMapping(SDL_Gamepad *gamepad)
+/// extern SDL_DECLSPEC const char * SDLCALL SDL_GetGamepadMapping(SDL_Gamepad *gamepad)
 /// ```
-Pointer<Int8> sdlGetGamepadMapping(Pointer<SdlGamepad> gamepad) {
+String? sdlGetGamepadMapping(Pointer<SdlGamepad> gamepad) {
   final sdlGetGamepadMappingLookupFunction = libSdl3.lookupFunction<
-      Pointer<Int8> Function(Pointer<SdlGamepad> gamepad),
-      Pointer<Int8> Function(
+      Pointer<Utf8> Function(Pointer<SdlGamepad> gamepad),
+      Pointer<Utf8> Function(
           Pointer<SdlGamepad> gamepad)>('SDL_GetGamepadMapping');
-  return sdlGetGamepadMappingLookupFunction(gamepad);
+  final result = sdlGetGamepadMappingLookupFunction(gamepad);
+  if (result == nullptr) {
+    return null;
+  }
+  return result.toDartString();
 }
 
 ///
@@ -280,10 +290,13 @@ bool sdlHasGamepad() {
 ///
 /// Get a list of currently connected gamepads.
 ///
-/// \param count a pointer filled in with the number of gamepads returned.
-/// \returns a 0 terminated array of joystick instance IDs which should be
-/// freed with SDL_free(), or NULL on error; call SDL_GetError() for
-/// more details.
+/// This returns temporary memory which will be automatically freed later, and
+/// can be claimed with SDL_ClaimTemporaryMemory().
+///
+/// \param count a pointer filled in with the number of gamepads returned, may
+/// be NULL.
+/// \returns a 0 terminated array of joystick instance IDs or NULL on failure;
+/// call SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -291,7 +304,7 @@ bool sdlHasGamepad() {
 /// \sa SDL_OpenGamepad
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_JoystickID *SDLCALL SDL_GetGamepads(int *count)
+/// extern SDL_DECLSPEC const SDL_JoystickID * SDLCALL SDL_GetGamepads(int *count)
 /// ```
 Pointer<Uint32> sdlGetGamepads(Pointer<Int32> count) {
   final sdlGetGamepadsLookupFunction = libSdl3.lookupFunction<
@@ -327,7 +340,8 @@ bool sdlIsGamepad(int instanceId) {
 ///
 /// This can be called before any gamepads are opened.
 ///
-/// The returned string follows the SDL_GetStringRule.
+/// This returns temporary memory which will be automatically freed later, and
+/// can be claimed with SDL_ClaimTemporaryMemory().
 ///
 /// \param instance_id the joystick instance ID.
 /// \returns the name of the selected gamepad. If no name can be found, this
@@ -339,13 +353,13 @@ bool sdlIsGamepad(int instanceId) {
 /// \sa SDL_GetGamepads
 ///
 /// ```c
-/// extern SDL_DECLSPEC const char *SDLCALL SDL_GetGamepadInstanceName(SDL_JoystickID instance_id)
+/// extern SDL_DECLSPEC const char * SDLCALL SDL_GetGamepadNameForID(SDL_JoystickID instance_id)
 /// ```
-String? sdlGetGamepadInstanceName(int instanceId) {
-  final sdlGetGamepadInstanceNameLookupFunction = libSdl3.lookupFunction<
+String? sdlGetGamepadNameForId(int instanceId) {
+  final sdlGetGamepadNameForIdLookupFunction = libSdl3.lookupFunction<
       Pointer<Utf8> Function(Uint32 instanceId),
-      Pointer<Utf8> Function(int instanceId)>('SDL_GetGamepadInstanceName');
-  final result = sdlGetGamepadInstanceNameLookupFunction(instanceId);
+      Pointer<Utf8> Function(int instanceId)>('SDL_GetGamepadNameForID');
+  final result = sdlGetGamepadNameForIdLookupFunction(instanceId);
   if (result == nullptr) {
     return null;
   }
@@ -357,7 +371,8 @@ String? sdlGetGamepadInstanceName(int instanceId) {
 ///
 /// This can be called before any gamepads are opened.
 ///
-/// The returned string follows the SDL_GetStringRule.
+/// This returns temporary memory which will be automatically freed later, and
+/// can be claimed with SDL_ClaimTemporaryMemory().
 ///
 /// \param instance_id the joystick instance ID.
 /// \returns the path of the selected gamepad. If no path can be found, this
@@ -369,13 +384,13 @@ String? sdlGetGamepadInstanceName(int instanceId) {
 /// \sa SDL_GetGamepads
 ///
 /// ```c
-/// extern SDL_DECLSPEC const char *SDLCALL SDL_GetGamepadInstancePath(SDL_JoystickID instance_id)
+/// extern SDL_DECLSPEC const char * SDLCALL SDL_GetGamepadPathForID(SDL_JoystickID instance_id)
 /// ```
-String? sdlGetGamepadInstancePath(int instanceId) {
-  final sdlGetGamepadInstancePathLookupFunction = libSdl3.lookupFunction<
+String? sdlGetGamepadPathForId(int instanceId) {
+  final sdlGetGamepadPathForIdLookupFunction = libSdl3.lookupFunction<
       Pointer<Utf8> Function(Uint32 instanceId),
-      Pointer<Utf8> Function(int instanceId)>('SDL_GetGamepadInstancePath');
-  final result = sdlGetGamepadInstancePathLookupFunction(instanceId);
+      Pointer<Utf8> Function(int instanceId)>('SDL_GetGamepadPathForID');
+  final result = sdlGetGamepadPathForIdLookupFunction(instanceId);
   if (result == nullptr) {
     return null;
   }
@@ -396,13 +411,13 @@ String? sdlGetGamepadInstancePath(int instanceId) {
 /// \sa SDL_GetGamepads
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_GetGamepadInstancePlayerIndex(SDL_JoystickID instance_id)
+/// extern SDL_DECLSPEC int SDLCALL SDL_GetGamepadPlayerIndexForID(SDL_JoystickID instance_id)
 /// ```
-int sdlGetGamepadInstancePlayerIndex(int instanceId) {
-  final sdlGetGamepadInstancePlayerIndexLookupFunction = libSdl3.lookupFunction<
+int sdlGetGamepadPlayerIndexForId(int instanceId) {
+  final sdlGetGamepadPlayerIndexForIdLookupFunction = libSdl3.lookupFunction<
       Int32 Function(Uint32 instanceId),
-      int Function(int instanceId)>('SDL_GetGamepadInstancePlayerIndex');
-  return sdlGetGamepadInstancePlayerIndexLookupFunction(instanceId);
+      int Function(int instanceId)>('SDL_GetGamepadPlayerIndexForID');
+  return sdlGetGamepadPlayerIndexForIdLookupFunction(instanceId);
 }
 
 ///
@@ -421,13 +436,13 @@ int sdlGetGamepadInstancePlayerIndex(int instanceId) {
 /// \sa SDL_GetGamepads
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_JoystickGUID SDLCALL SDL_GetGamepadInstanceGUID(SDL_JoystickID instance_id)
+/// extern SDL_DECLSPEC SDL_GUID SDLCALL SDL_GetGamepadGUIDForID(SDL_JoystickID instance_id)
 /// ```
-SdlGuid sdlGetGamepadInstanceGuid(int instanceId) {
-  final sdlGetGamepadInstanceGuidLookupFunction = libSdl3.lookupFunction<
+SdlGuid sdlGetGamepadGuidForId(int instanceId) {
+  final sdlGetGamepadGuidForIdLookupFunction = libSdl3.lookupFunction<
       SdlGuid Function(Uint32 instanceId),
-      SdlGuid Function(int instanceId)>('SDL_GetGamepadInstanceGUID');
-  return sdlGetGamepadInstanceGuidLookupFunction(instanceId);
+      SdlGuid Function(int instanceId)>('SDL_GetGamepadGUIDForID');
+  return sdlGetGamepadGuidForIdLookupFunction(instanceId);
 }
 
 ///
@@ -446,13 +461,13 @@ SdlGuid sdlGetGamepadInstanceGuid(int instanceId) {
 /// \sa SDL_GetGamepads
 ///
 /// ```c
-/// extern SDL_DECLSPEC Uint16 SDLCALL SDL_GetGamepadInstanceVendor(SDL_JoystickID instance_id)
+/// extern SDL_DECLSPEC Uint16 SDLCALL SDL_GetGamepadVendorForID(SDL_JoystickID instance_id)
 /// ```
-int sdlGetGamepadInstanceVendor(int instanceId) {
-  final sdlGetGamepadInstanceVendorLookupFunction = libSdl3.lookupFunction<
+int sdlGetGamepadVendorForId(int instanceId) {
+  final sdlGetGamepadVendorForIdLookupFunction = libSdl3.lookupFunction<
       Uint16 Function(Uint32 instanceId),
-      int Function(int instanceId)>('SDL_GetGamepadInstanceVendor');
-  return sdlGetGamepadInstanceVendorLookupFunction(instanceId);
+      int Function(int instanceId)>('SDL_GetGamepadVendorForID');
+  return sdlGetGamepadVendorForIdLookupFunction(instanceId);
 }
 
 ///
@@ -471,13 +486,13 @@ int sdlGetGamepadInstanceVendor(int instanceId) {
 /// \sa SDL_GetGamepads
 ///
 /// ```c
-/// extern SDL_DECLSPEC Uint16 SDLCALL SDL_GetGamepadInstanceProduct(SDL_JoystickID instance_id)
+/// extern SDL_DECLSPEC Uint16 SDLCALL SDL_GetGamepadProductForID(SDL_JoystickID instance_id)
 /// ```
-int sdlGetGamepadInstanceProduct(int instanceId) {
-  final sdlGetGamepadInstanceProductLookupFunction = libSdl3.lookupFunction<
+int sdlGetGamepadProductForId(int instanceId) {
+  final sdlGetGamepadProductForIdLookupFunction = libSdl3.lookupFunction<
       Uint16 Function(Uint32 instanceId),
-      int Function(int instanceId)>('SDL_GetGamepadInstanceProduct');
-  return sdlGetGamepadInstanceProductLookupFunction(instanceId);
+      int Function(int instanceId)>('SDL_GetGamepadProductForID');
+  return sdlGetGamepadProductForIdLookupFunction(instanceId);
 }
 
 ///
@@ -496,13 +511,13 @@ int sdlGetGamepadInstanceProduct(int instanceId) {
 /// \sa SDL_GetGamepads
 ///
 /// ```c
-/// extern SDL_DECLSPEC Uint16 SDLCALL SDL_GetGamepadInstanceProductVersion(SDL_JoystickID instance_id)
+/// extern SDL_DECLSPEC Uint16 SDLCALL SDL_GetGamepadProductVersionForID(SDL_JoystickID instance_id)
 /// ```
-int sdlGetGamepadInstanceProductVersion(int instanceId) {
-  final sdlGetGamepadInstanceProductVersionLookupFunction =
-      libSdl3.lookupFunction<Uint16 Function(Uint32 instanceId),
-          int Function(int instanceId)>('SDL_GetGamepadInstanceProductVersion');
-  return sdlGetGamepadInstanceProductVersionLookupFunction(instanceId);
+int sdlGetGamepadProductVersionForId(int instanceId) {
+  final sdlGetGamepadProductVersionForIdLookupFunction = libSdl3.lookupFunction<
+      Uint16 Function(Uint32 instanceId),
+      int Function(int instanceId)>('SDL_GetGamepadProductVersionForID');
+  return sdlGetGamepadProductVersionForIdLookupFunction(instanceId);
 }
 
 ///
@@ -517,16 +532,16 @@ int sdlGetGamepadInstanceProductVersion(int instanceId) {
 ///
 /// \sa SDL_GetGamepadType
 /// \sa SDL_GetGamepads
-/// \sa SDL_GetRealGamepadInstanceType
+/// \sa SDL_GetRealGamepadTypeForID
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_GamepadType SDLCALL SDL_GetGamepadInstanceType(SDL_JoystickID instance_id)
+/// extern SDL_DECLSPEC SDL_GamepadType SDLCALL SDL_GetGamepadTypeForID(SDL_JoystickID instance_id)
 /// ```
-int sdlGetGamepadInstanceType(int instanceId) {
-  final sdlGetGamepadInstanceTypeLookupFunction = libSdl3.lookupFunction<
+int sdlGetGamepadTypeForId(int instanceId) {
+  final sdlGetGamepadTypeForIdLookupFunction = libSdl3.lookupFunction<
       Int32 Function(Uint32 instanceId),
-      int Function(int instanceId)>('SDL_GetGamepadInstanceType');
-  return sdlGetGamepadInstanceTypeLookupFunction(instanceId);
+      int Function(int instanceId)>('SDL_GetGamepadTypeForID');
+  return sdlGetGamepadTypeForIdLookupFunction(instanceId);
 }
 
 ///
@@ -539,18 +554,18 @@ int sdlGetGamepadInstanceType(int instanceId) {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_GetGamepadInstanceType
+/// \sa SDL_GetGamepadTypeForID
 /// \sa SDL_GetGamepads
 /// \sa SDL_GetRealGamepadType
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_GamepadType SDLCALL SDL_GetRealGamepadInstanceType(SDL_JoystickID instance_id)
+/// extern SDL_DECLSPEC SDL_GamepadType SDLCALL SDL_GetRealGamepadTypeForID(SDL_JoystickID instance_id)
 /// ```
-int sdlGetRealGamepadInstanceType(int instanceId) {
-  final sdlGetRealGamepadInstanceTypeLookupFunction = libSdl3.lookupFunction<
+int sdlGetRealGamepadTypeForId(int instanceId) {
+  final sdlGetRealGamepadTypeForIdLookupFunction = libSdl3.lookupFunction<
       Int32 Function(Uint32 instanceId),
-      int Function(int instanceId)>('SDL_GetRealGamepadInstanceType');
-  return sdlGetRealGamepadInstanceTypeLookupFunction(instanceId);
+      int Function(int instanceId)>('SDL_GetRealGamepadTypeForID');
+  return sdlGetRealGamepadTypeForIdLookupFunction(instanceId);
 }
 
 ///
@@ -558,9 +573,11 @@ int sdlGetRealGamepadInstanceType(int instanceId) {
 ///
 /// This can be called before any gamepads are opened.
 ///
+/// This returns temporary memory which will be automatically freed later, and
+/// can be claimed with SDL_ClaimTemporaryMemory().
+///
 /// \param instance_id the joystick instance ID.
-/// \returns the mapping string. Must be freed with SDL_free(). Returns NULL if
-/// no mapping is available.
+/// \returns the mapping string. Returns NULL if no mapping is available.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -568,13 +585,17 @@ int sdlGetRealGamepadInstanceType(int instanceId) {
 /// \sa SDL_GetGamepadMapping
 ///
 /// ```c
-/// extern SDL_DECLSPEC char *SDLCALL SDL_GetGamepadInstanceMapping(SDL_JoystickID instance_id)
+/// extern SDL_DECLSPEC const char * SDLCALL SDL_GetGamepadMappingForID(SDL_JoystickID instance_id)
 /// ```
-Pointer<Int8> sdlGetGamepadInstanceMapping(int instanceId) {
-  final sdlGetGamepadInstanceMappingLookupFunction = libSdl3.lookupFunction<
-      Pointer<Int8> Function(Uint32 instanceId),
-      Pointer<Int8> Function(int instanceId)>('SDL_GetGamepadInstanceMapping');
-  return sdlGetGamepadInstanceMappingLookupFunction(instanceId);
+String? sdlGetGamepadMappingForId(int instanceId) {
+  final sdlGetGamepadMappingForIdLookupFunction = libSdl3.lookupFunction<
+      Pointer<Utf8> Function(Uint32 instanceId),
+      Pointer<Utf8> Function(int instanceId)>('SDL_GetGamepadMappingForID');
+  final result = sdlGetGamepadMappingForIdLookupFunction(instanceId);
+  if (result == nullptr) {
+    return null;
+  }
+  return result.toDartString();
 }
 
 ///
@@ -590,7 +611,7 @@ Pointer<Int8> sdlGetGamepadInstanceMapping(int instanceId) {
 /// \sa SDL_IsGamepad
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_Gamepad *SDLCALL SDL_OpenGamepad(SDL_JoystickID instance_id)
+/// extern SDL_DECLSPEC SDL_Gamepad * SDLCALL SDL_OpenGamepad(SDL_JoystickID instance_id)
 /// ```
 Pointer<SdlGamepad> sdlOpenGamepad(int instanceId) {
   final sdlOpenGamepadLookupFunction = libSdl3.lookupFunction<
@@ -610,14 +631,13 @@ Pointer<SdlGamepad> sdlOpenGamepad(int instanceId) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_Gamepad *SDLCALL SDL_GetGamepadFromInstanceID(SDL_JoystickID instance_id)
+/// extern SDL_DECLSPEC SDL_Gamepad * SDLCALL SDL_GetGamepadFromID(SDL_JoystickID instance_id)
 /// ```
-Pointer<SdlGamepad> sdlGetGamepadFromInstanceId(int instanceId) {
-  final sdlGetGamepadFromInstanceIdLookupFunction = libSdl3.lookupFunction<
+Pointer<SdlGamepad> sdlGetGamepadFromId(int instanceId) {
+  final sdlGetGamepadFromIdLookupFunction = libSdl3.lookupFunction<
       Pointer<SdlGamepad> Function(Uint32 instanceId),
-      Pointer<SdlGamepad> Function(
-          int instanceId)>('SDL_GetGamepadFromInstanceID');
-  return sdlGetGamepadFromInstanceIdLookupFunction(instanceId);
+      Pointer<SdlGamepad> Function(int instanceId)>('SDL_GetGamepadFromID');
+  return sdlGetGamepadFromIdLookupFunction(instanceId);
 }
 
 ///
@@ -632,7 +652,7 @@ Pointer<SdlGamepad> sdlGetGamepadFromInstanceId(int instanceId) {
 /// \sa SDL_SetGamepadPlayerIndex
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_Gamepad *SDLCALL SDL_GetGamepadFromPlayerIndex(int player_index)
+/// extern SDL_DECLSPEC SDL_Gamepad * SDLCALL SDL_GetGamepadFromPlayerIndex(int player_index)
 /// ```
 Pointer<SdlGamepad> sdlGetGamepadFromPlayerIndex(int playerIndex) {
   final sdlGetGamepadFromPlayerIndexLookupFunction = libSdl3.lookupFunction<
@@ -688,19 +708,20 @@ int sdlGetGamepadProperties(Pointer<SdlGamepad> gamepad) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_JoystickID SDLCALL SDL_GetGamepadInstanceID(SDL_Gamepad *gamepad)
+/// extern SDL_DECLSPEC SDL_JoystickID SDLCALL SDL_GetGamepadID(SDL_Gamepad *gamepad)
 /// ```
-int sdlGetGamepadInstanceId(Pointer<SdlGamepad> gamepad) {
-  final sdlGetGamepadInstanceIdLookupFunction = libSdl3.lookupFunction<
+int sdlGetGamepadId(Pointer<SdlGamepad> gamepad) {
+  final sdlGetGamepadIdLookupFunction = libSdl3.lookupFunction<
       Uint32 Function(Pointer<SdlGamepad> gamepad),
-      int Function(Pointer<SdlGamepad> gamepad)>('SDL_GetGamepadInstanceID');
-  return sdlGetGamepadInstanceIdLookupFunction(gamepad);
+      int Function(Pointer<SdlGamepad> gamepad)>('SDL_GetGamepadID');
+  return sdlGetGamepadIdLookupFunction(gamepad);
 }
 
 ///
 /// Get the implementation-dependent name for an opened gamepad.
 ///
-/// The returned string follows the SDL_GetStringRule.
+/// This returns temporary memory which will be automatically freed later, and
+/// can be claimed with SDL_ClaimTemporaryMemory().
 ///
 /// \param gamepad a gamepad identifier previously returned by
 /// SDL_OpenGamepad().
@@ -709,10 +730,10 @@ int sdlGetGamepadInstanceId(Pointer<SdlGamepad> gamepad) {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_GetGamepadInstanceName
+/// \sa SDL_GetGamepadNameForID
 ///
 /// ```c
-/// extern SDL_DECLSPEC const char *SDLCALL SDL_GetGamepadName(SDL_Gamepad *gamepad)
+/// extern SDL_DECLSPEC const char * SDLCALL SDL_GetGamepadName(SDL_Gamepad *gamepad)
 /// ```
 String? sdlGetGamepadName(Pointer<SdlGamepad> gamepad) {
   final sdlGetGamepadNameLookupFunction = libSdl3.lookupFunction<
@@ -729,7 +750,8 @@ String? sdlGetGamepadName(Pointer<SdlGamepad> gamepad) {
 ///
 /// Get the implementation-dependent path for an opened gamepad.
 ///
-/// The returned string follows the SDL_GetStringRule.
+/// This returns temporary memory which will be automatically freed later, and
+/// can be claimed with SDL_ClaimTemporaryMemory().
 ///
 /// \param gamepad a gamepad identifier previously returned by
 /// SDL_OpenGamepad().
@@ -738,10 +760,10 @@ String? sdlGetGamepadName(Pointer<SdlGamepad> gamepad) {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_GetGamepadInstancePath
+/// \sa SDL_GetGamepadPathForID
 ///
 /// ```c
-/// extern SDL_DECLSPEC const char *SDLCALL SDL_GetGamepadPath(SDL_Gamepad *gamepad)
+/// extern SDL_DECLSPEC const char * SDLCALL SDL_GetGamepadPath(SDL_Gamepad *gamepad)
 /// ```
 String? sdlGetGamepadPath(Pointer<SdlGamepad> gamepad) {
   final sdlGetGamepadPathLookupFunction = libSdl3.lookupFunction<
@@ -764,7 +786,7 @@ String? sdlGetGamepadPath(Pointer<SdlGamepad> gamepad) {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_GetGamepadInstanceType
+/// \sa SDL_GetGamepadTypeForID
 ///
 /// ```c
 /// extern SDL_DECLSPEC SDL_GamepadType SDLCALL SDL_GetGamepadType(SDL_Gamepad *gamepad)
@@ -785,7 +807,7 @@ int sdlGetGamepadType(Pointer<SdlGamepad> gamepad) {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_GetRealGamepadInstanceType
+/// \sa SDL_GetRealGamepadTypeForID
 ///
 /// ```c
 /// extern SDL_DECLSPEC SDL_GamepadType SDLCALL SDL_GetRealGamepadType(SDL_Gamepad *gamepad)
@@ -853,7 +875,7 @@ int sdlSetGamepadPlayerIndex(Pointer<SdlGamepad> gamepad, int playerIndex) {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_GetGamepadInstanceVendor
+/// \sa SDL_GetGamepadVendorForID
 ///
 /// ```c
 /// extern SDL_DECLSPEC Uint16 SDLCALL SDL_GetGamepadVendor(SDL_Gamepad *gamepad)
@@ -875,7 +897,7 @@ int sdlGetGamepadVendor(Pointer<SdlGamepad> gamepad) {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_GetGamepadInstanceProduct
+/// \sa SDL_GetGamepadProductForID
 ///
 /// ```c
 /// extern SDL_DECLSPEC Uint16 SDLCALL SDL_GetGamepadProduct(SDL_Gamepad *gamepad)
@@ -897,7 +919,7 @@ int sdlGetGamepadProduct(Pointer<SdlGamepad> gamepad) {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_GetGamepadInstanceProductVersion
+/// \sa SDL_GetGamepadProductVersionForID
 ///
 /// ```c
 /// extern SDL_DECLSPEC Uint16 SDLCALL SDL_GetGamepadProductVersion(SDL_Gamepad *gamepad)
@@ -936,7 +958,8 @@ int sdlGetGamepadFirmwareVersion(Pointer<SdlGamepad> gamepad) {
 ///
 /// Returns the serial number of the gamepad, or NULL if it is not available.
 ///
-/// The returned string follows the SDL_GetStringRule.
+/// This returns temporary memory which will be automatically freed later, and
+/// can be claimed with SDL_ClaimTemporaryMemory().
 ///
 /// \param gamepad the gamepad object to query.
 /// \returns the serial number, or NULL if unavailable.
@@ -1063,12 +1086,13 @@ bool sdlGamepadConnected(Pointer<SdlGamepad> gamepad) {
 /// SDL to crash.
 ///
 /// \param gamepad the gamepad object that you want to get a joystick from.
-/// \returns an SDL_Joystick object; call SDL_GetError() for more information.
+/// \returns an SDL_Joystick object, or NULL on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_Joystick *SDLCALL SDL_GetGamepadJoystick(SDL_Gamepad *gamepad)
+/// extern SDL_DECLSPEC SDL_Joystick * SDLCALL SDL_GetGamepadJoystick(SDL_Gamepad *gamepad)
 /// ```
 Pointer<SdlJoystick> sdlGetGamepadJoystick(Pointer<SdlGamepad> gamepad) {
   final sdlGetGamepadJoystickLookupFunction = libSdl3.lookupFunction<
@@ -1127,16 +1151,18 @@ bool sdlGamepadEventsEnabled() {
 ///
 /// Get the SDL joystick layer bindings for a gamepad.
 ///
+/// This returns temporary memory which will be automatically freed later, and
+/// can be claimed with SDL_ClaimTemporaryMemory().
+///
 /// \param gamepad a gamepad.
 /// \param count a pointer filled in with the number of bindings returned.
-/// \returns a NULL terminated array of pointers to bindings which should be
-/// freed with SDL_free(), or NULL on error; call SDL_GetError() for
-/// more details.
+/// \returns a NULL terminated array of pointers to bindings or NULL on
+/// failure; call SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_GamepadBinding **SDLCALL SDL_GetGamepadBindings(SDL_Gamepad *gamepad, int *count)
+/// extern SDL_DECLSPEC const SDL_GamepadBinding * const * SDLCALL SDL_GetGamepadBindings(SDL_Gamepad *gamepad, int *count)
 /// ```
 Pointer<Pointer<SdlGamepadBinding>> sdlGetGamepadBindings(
     Pointer<SdlGamepad> gamepad, Pointer<Int32> count) {
@@ -1198,7 +1224,8 @@ int sdlGetGamepadTypeFromString(String? str) {
 ///
 /// Convert from an SDL_GamepadType enum to a string.
 ///
-/// The returned string follows the SDL_GetStringRule.
+/// This returns temporary memory which will be automatically freed later, and
+/// can be claimed with SDL_ClaimTemporaryMemory().
 ///
 /// \param type an enum value for a given SDL_GamepadType.
 /// \returns a string for the given type, or NULL if an invalid type is
@@ -1210,7 +1237,7 @@ int sdlGetGamepadTypeFromString(String? str) {
 /// \sa SDL_GetGamepadTypeFromString
 ///
 /// ```c
-/// extern SDL_DECLSPEC const char *SDLCALL SDL_GetGamepadStringForType(SDL_GamepadType type)
+/// extern SDL_DECLSPEC const char * SDLCALL SDL_GetGamepadStringForType(SDL_GamepadType type)
 /// ```
 String? sdlGetGamepadStringForType(int type) {
   final sdlGetGamepadStringForTypeLookupFunction = libSdl3.lookupFunction<
@@ -1259,7 +1286,8 @@ int sdlGetGamepadAxisFromString(String? str) {
 ///
 /// Convert from an SDL_GamepadAxis enum to a string.
 ///
-/// The returned string follows the SDL_GetStringRule.
+/// This returns temporary memory which will be automatically freed later, and
+/// can be claimed with SDL_ClaimTemporaryMemory().
 ///
 /// \param axis an enum value for a given SDL_GamepadAxis.
 /// \returns a string for the given axis, or NULL if an invalid axis is
@@ -1375,7 +1403,8 @@ int sdlGetGamepadButtonFromString(String? str) {
 ///
 /// Convert from an SDL_GamepadButton enum to a string.
 ///
-/// The returned string follows the SDL_GetStringRule.
+/// This returns temporary memory which will be automatically freed later, and
+/// can be claimed with SDL_ClaimTemporaryMemory().
 ///
 /// \param button an enum value for a given SDL_GamepadButton.
 /// \returns a string for the given button, or NULL if an invalid button is
@@ -1387,7 +1416,7 @@ int sdlGetGamepadButtonFromString(String? str) {
 /// \sa SDL_GetGamepadButtonFromString
 ///
 /// ```c
-/// extern SDL_DECLSPEC const char* SDLCALL SDL_GetGamepadStringForButton(SDL_GamepadButton button)
+/// extern SDL_DECLSPEC const char * SDLCALL SDL_GetGamepadStringForButton(SDL_GamepadButton button)
 /// ```
 String? sdlGetGamepadStringForButton(int button) {
   final sdlGetGamepadStringForButtonLookupFunction = libSdl3.lookupFunction<
@@ -1430,7 +1459,7 @@ bool sdlGamepadHasButton(Pointer<SdlGamepad> gamepad, int button) {
 ///
 /// \param gamepad a gamepad.
 /// \param button a button index (one of the SDL_GamepadButton values).
-/// \returns 1 for pressed state or 0 for not pressed state or error; call
+/// \returns 1 for pressed state or 0 for not pressed state or failure; call
 /// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
@@ -1860,7 +1889,8 @@ void sdlCloseGamepad(Pointer<SdlGamepad> gamepad) {
 /// Return the sfSymbolsName for a given button on a gamepad on Apple
 /// platforms.
 ///
-/// The returned string follows the SDL_GetStringRule.
+/// This returns temporary memory which will be automatically freed later, and
+/// can be claimed with SDL_ClaimTemporaryMemory().
 ///
 /// \param gamepad the gamepad to query.
 /// \param button a button on the gamepad.
@@ -1871,7 +1901,7 @@ void sdlCloseGamepad(Pointer<SdlGamepad> gamepad) {
 /// \sa SDL_GetGamepadAppleSFSymbolsNameForAxis
 ///
 /// ```c
-/// extern SDL_DECLSPEC const char* SDLCALL SDL_GetGamepadAppleSFSymbolsNameForButton(SDL_Gamepad *gamepad, SDL_GamepadButton button)
+/// extern SDL_DECLSPEC const char * SDLCALL SDL_GetGamepadAppleSFSymbolsNameForButton(SDL_Gamepad *gamepad, SDL_GamepadButton button)
 /// ```
 String? sdlGetGamepadAppleSfSymbolsNameForButton(
     Pointer<SdlGamepad> gamepad, int button) {
@@ -1891,7 +1921,8 @@ String? sdlGetGamepadAppleSfSymbolsNameForButton(
 ///
 /// Return the sfSymbolsName for a given axis on a gamepad on Apple platforms.
 ///
-/// The returned string follows the SDL_GetStringRule.
+/// This returns temporary memory which will be automatically freed later, and
+/// can be claimed with SDL_ClaimTemporaryMemory().
 ///
 /// \param gamepad the gamepad to query.
 /// \param axis an axis on the gamepad.
@@ -1902,7 +1933,7 @@ String? sdlGetGamepadAppleSfSymbolsNameForButton(
 /// \sa SDL_GetGamepadAppleSFSymbolsNameForButton
 ///
 /// ```c
-/// extern SDL_DECLSPEC const char* SDLCALL SDL_GetGamepadAppleSFSymbolsNameForAxis(SDL_Gamepad *gamepad, SDL_GamepadAxis axis)
+/// extern SDL_DECLSPEC const char * SDLCALL SDL_GetGamepadAppleSFSymbolsNameForAxis(SDL_Gamepad *gamepad, SDL_GamepadAxis axis)
 /// ```
 String? sdlGetGamepadAppleSfSymbolsNameForAxis(
     Pointer<SdlGamepad> gamepad, int axis) {

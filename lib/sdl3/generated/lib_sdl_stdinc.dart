@@ -5,7 +5,7 @@ import 'lib_sdl.dart';
 import 'struct_sdl.dart';
 
 /// ```c
-/// extern SDL_DECLSPEC SDL_MALLOC void *SDLCALL SDL_malloc(size_t size)
+/// extern SDL_DECLSPEC SDL_MALLOC void * SDLCALL SDL_malloc(size_t size)
 /// ```
 Pointer<NativeType> sdlMalloc(int size) {
   final sdlMallocLookupFunction = libSdl3.lookupFunction<
@@ -179,7 +179,7 @@ int sdlSetMemoryFunctions(
 /// \sa SDL_aligned_free
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_MALLOC void *SDLCALL SDL_aligned_alloc(size_t alignment, size_t size)
+/// extern SDL_DECLSPEC SDL_MALLOC void * SDLCALL SDL_aligned_alloc(size_t alignment, size_t size)
 /// ```
 Pointer<NativeType> sdlAlignedAlloc(int alignment, int size) {
   final sdlAlignedAllocLookupFunction = libSdl3.lookupFunction<
@@ -233,7 +233,7 @@ int sdlGetNumAllocations() {
 }
 
 /// ```c
-/// extern SDL_DECLSPEC char *SDLCALL SDL_getenv(const char *name)
+/// extern SDL_DECLSPEC char * SDLCALL SDL_getenv(const char *name)
 /// ```
 Pointer<Int8> sdlGetenv(String? name) {
   final sdlGetenvLookupFunction = libSdl3.lookupFunction<
@@ -730,7 +730,7 @@ int sdlCrc32(int crc, Pointer<NativeType> data, int len) {
 }
 
 /// ```c
-/// extern SDL_DECLSPEC void *SDLCALL SDL_memcpy(SDL_OUT_BYTECAP(len) void *dst, SDL_IN_BYTECAP(len) const void *src, size_t len)
+/// extern SDL_DECLSPEC void * SDLCALL SDL_memcpy(SDL_OUT_BYTECAP(len) void *dst, SDL_IN_BYTECAP(len) const void *src, size_t len)
 /// ```
 Pointer<NativeType> sdlMemcpy(
     Pointer<NativeType> arg0, Pointer<NativeType> arg1, int len) {
@@ -744,7 +744,7 @@ Pointer<NativeType> sdlMemcpy(
 
 /// Take advantage of compiler optimizations for memcpy
 /// ```c
-/// extern SDL_DECLSPEC void *SDLCALL SDL_memmove(SDL_OUT_BYTECAP(len) void *dst, SDL_IN_BYTECAP(len) const void *src, size_t len)
+/// extern SDL_DECLSPEC void * SDLCALL SDL_memmove(SDL_OUT_BYTECAP(len) void *dst, SDL_IN_BYTECAP(len) const void *src, size_t len)
 /// ```
 Pointer<NativeType> sdlMemmove(
     Pointer<NativeType> arg0, Pointer<NativeType> arg1, int len) {
@@ -758,7 +758,7 @@ Pointer<NativeType> sdlMemmove(
 
 /// Take advantage of compiler optimizations for memmove
 /// ```c
-/// extern SDL_DECLSPEC void *SDLCALL SDL_memset(SDL_OUT_BYTECAP(len) void *dst, int c, size_t len)
+/// extern SDL_DECLSPEC void * SDLCALL SDL_memset(SDL_OUT_BYTECAP(len) void *dst, int c, size_t len)
 /// ```
 Pointer<NativeType> sdlMemset(Pointer<NativeType> arg0, int c, int len) {
   final sdlMemsetLookupFunction = libSdl3.lookupFunction<
@@ -770,7 +770,7 @@ Pointer<NativeType> sdlMemset(Pointer<NativeType> arg0, int c, int len) {
 }
 
 /// ```c
-/// extern SDL_DECLSPEC void *SDLCALL SDL_memset4(void *dst, Uint32 val, size_t dwords)
+/// extern SDL_DECLSPEC void * SDLCALL SDL_memset4(void *dst, Uint32 val, size_t dwords)
 /// ```
 Pointer<NativeType> sdlMemset4(Pointer<NativeType> dst, int val, int dwords) {
   final sdlMemset4LookupFunction = libSdl3.lookupFunction<
@@ -839,7 +839,7 @@ int sdlWcslcat(Pointer<NativeType> arg0, Pointer<Int16> src, int maxlen) {
 }
 
 /// ```c
-/// extern SDL_DECLSPEC wchar_t *SDLCALL SDL_wcsdup(const wchar_t *wstr)
+/// extern SDL_DECLSPEC wchar_t * SDLCALL SDL_wcsdup(const wchar_t *wstr)
 /// ```
 Pointer<Int16> sdlWcsdup(Pointer<Int16> wstr) {
   final sdlWcsdupLookupFunction = libSdl3.lookupFunction<
@@ -849,7 +849,7 @@ Pointer<Int16> sdlWcsdup(Pointer<Int16> wstr) {
 }
 
 /// ```c
-/// extern SDL_DECLSPEC wchar_t *SDLCALL SDL_wcsstr(const wchar_t *haystack, const wchar_t *needle)
+/// extern SDL_DECLSPEC wchar_t * SDLCALL SDL_wcsstr(const wchar_t *haystack, const wchar_t *needle)
 /// ```
 Pointer<Int16> sdlWcsstr(Pointer<Int16> haystack, Pointer<Int16> needle) {
   final sdlWcsstrLookupFunction = libSdl3.lookupFunction<
@@ -860,7 +860,7 @@ Pointer<Int16> sdlWcsstr(Pointer<Int16> haystack, Pointer<Int16> needle) {
 }
 
 /// ```c
-/// extern SDL_DECLSPEC wchar_t *SDLCALL SDL_wcsnstr(const wchar_t *haystack, const wchar_t *needle, size_t maxlen)
+/// extern SDL_DECLSPEC wchar_t * SDLCALL SDL_wcsnstr(const wchar_t *haystack, const wchar_t *needle, size_t maxlen)
 /// ```
 Pointer<Int16> sdlWcsnstr(
     Pointer<Int16> haystack, Pointer<Int16> needle, int maxlen) {
@@ -1112,7 +1112,7 @@ int sdlStrlcat(Pointer<NativeType> arg0, String? src, int maxlen) {
 }
 
 /// ```c
-/// extern SDL_DECLSPEC SDL_MALLOC char *SDLCALL SDL_strdup(const char *str)
+/// extern SDL_DECLSPEC SDL_MALLOC char * SDLCALL SDL_strdup(const char *str)
 /// ```
 Pointer<Int8> sdlStrdup(String? str) {
   final sdlStrdupLookupFunction = libSdl3.lookupFunction<
@@ -1125,7 +1125,7 @@ Pointer<Int8> sdlStrdup(String? str) {
 }
 
 /// ```c
-/// extern SDL_DECLSPEC SDL_MALLOC char *SDLCALL SDL_strndup(const char *str, size_t maxlen)
+/// extern SDL_DECLSPEC SDL_MALLOC char * SDLCALL SDL_strndup(const char *str, size_t maxlen)
 /// ```
 Pointer<Int8> sdlStrndup(String? str, int maxlen) {
   final sdlStrndupLookupFunction = libSdl3.lookupFunction<
@@ -1138,7 +1138,7 @@ Pointer<Int8> sdlStrndup(String? str, int maxlen) {
 }
 
 /// ```c
-/// extern SDL_DECLSPEC char *SDLCALL SDL_strrev(char *str)
+/// extern SDL_DECLSPEC char * SDLCALL SDL_strrev(char *str)
 /// ```
 Pointer<Int8> sdlStrrev(Pointer<Int8> str) {
   final sdlStrrevLookupFunction = libSdl3.lookupFunction<
@@ -1167,7 +1167,7 @@ Pointer<Int8> sdlStrrev(Pointer<Int8> str) {
 /// \sa SDL_strlwr
 ///
 /// ```c
-/// extern SDL_DECLSPEC char *SDLCALL SDL_strupr(char *str)
+/// extern SDL_DECLSPEC char * SDLCALL SDL_strupr(char *str)
 /// ```
 Pointer<Int8> sdlStrupr(Pointer<Int8> str) {
   final sdlStruprLookupFunction = libSdl3.lookupFunction<
@@ -1196,7 +1196,7 @@ Pointer<Int8> sdlStrupr(Pointer<Int8> str) {
 /// \sa SDL_strupr
 ///
 /// ```c
-/// extern SDL_DECLSPEC char *SDLCALL SDL_strlwr(char *str)
+/// extern SDL_DECLSPEC char * SDLCALL SDL_strlwr(char *str)
 /// ```
 Pointer<Int8> sdlStrlwr(Pointer<Int8> str) {
   final sdlStrlwrLookupFunction = libSdl3.lookupFunction<
@@ -1206,7 +1206,7 @@ Pointer<Int8> sdlStrlwr(Pointer<Int8> str) {
 }
 
 /// ```c
-/// extern SDL_DECLSPEC char *SDLCALL SDL_strchr(const char *str, int c)
+/// extern SDL_DECLSPEC char * SDLCALL SDL_strchr(const char *str, int c)
 /// ```
 Pointer<Int8> sdlStrchr(String? str, int c) {
   final sdlStrchrLookupFunction = libSdl3.lookupFunction<
@@ -1219,7 +1219,7 @@ Pointer<Int8> sdlStrchr(String? str, int c) {
 }
 
 /// ```c
-/// extern SDL_DECLSPEC char *SDLCALL SDL_strrchr(const char *str, int c)
+/// extern SDL_DECLSPEC char * SDLCALL SDL_strrchr(const char *str, int c)
 /// ```
 Pointer<Int8> sdlStrrchr(String? str, int c) {
   final sdlStrrchrLookupFunction = libSdl3.lookupFunction<
@@ -1232,7 +1232,7 @@ Pointer<Int8> sdlStrrchr(String? str, int c) {
 }
 
 /// ```c
-/// extern SDL_DECLSPEC char *SDLCALL SDL_strstr(const char *haystack, const char *needle)
+/// extern SDL_DECLSPEC char * SDLCALL SDL_strstr(const char *haystack, const char *needle)
 /// ```
 Pointer<Int8> sdlStrstr(String? haystack, String? needle) {
   final sdlStrstrLookupFunction = libSdl3.lookupFunction<
@@ -1248,7 +1248,7 @@ Pointer<Int8> sdlStrstr(String? haystack, String? needle) {
 }
 
 /// ```c
-/// extern SDL_DECLSPEC char *SDLCALL SDL_strnstr(const char *haystack, const char *needle, size_t maxlen)
+/// extern SDL_DECLSPEC char * SDLCALL SDL_strnstr(const char *haystack, const char *needle, size_t maxlen)
 /// ```
 Pointer<Int8> sdlStrnstr(String? haystack, String? needle, int maxlen) {
   final sdlStrnstrLookupFunction = libSdl3.lookupFunction<
@@ -1266,7 +1266,7 @@ Pointer<Int8> sdlStrnstr(String? haystack, String? needle, int maxlen) {
 }
 
 /// ```c
-/// extern SDL_DECLSPEC char *SDLCALL SDL_strcasestr(const char *haystack, const char *needle)
+/// extern SDL_DECLSPEC char * SDLCALL SDL_strcasestr(const char *haystack, const char *needle)
 /// ```
 Pointer<Int8> sdlStrcasestr(String? haystack, String? needle) {
   final sdlStrcasestrLookupFunction = libSdl3.lookupFunction<
@@ -1282,7 +1282,7 @@ Pointer<Int8> sdlStrcasestr(String? haystack, String? needle) {
 }
 
 /// ```c
-/// extern SDL_DECLSPEC char *SDLCALL SDL_strtok_r(char *s1, const char *s2, char **saveptr)
+/// extern SDL_DECLSPEC char * SDLCALL SDL_strtok_r(char *s1, const char *s2, char **saveptr)
 /// ```
 Pointer<Int8> sdlStrtokR(
     Pointer<Int8> s1, String? s2, Pointer<Pointer<Int8>> saveptr) {
@@ -1324,7 +1324,7 @@ int sdlUtf8strnlen(String? str, int bytes) {
 }
 
 /// ```c
-/// extern SDL_DECLSPEC char *SDLCALL SDL_itoa(int value, char *str, int radix)
+/// extern SDL_DECLSPEC char * SDLCALL SDL_itoa(int value, char *str, int radix)
 /// ```
 Pointer<Int8> sdlItoa(int value, Pointer<Int8> str, int radix) {
   final sdlItoaLookupFunction = libSdl3.lookupFunction<
@@ -1335,7 +1335,7 @@ Pointer<Int8> sdlItoa(int value, Pointer<Int8> str, int radix) {
 }
 
 /// ```c
-/// extern SDL_DECLSPEC char *SDLCALL SDL_uitoa(unsigned int value, char *str, int radix)
+/// extern SDL_DECLSPEC char * SDLCALL SDL_uitoa(unsigned int value, char *str, int radix)
 /// ```
 Pointer<Int8> sdlUitoa(int value, Pointer<Int8> str, int radix) {
   final sdlUitoaLookupFunction = libSdl3.lookupFunction<
@@ -1346,7 +1346,7 @@ Pointer<Int8> sdlUitoa(int value, Pointer<Int8> str, int radix) {
 }
 
 /// ```c
-/// extern SDL_DECLSPEC char *SDLCALL SDL_ltoa(long value, char *str, int radix)
+/// extern SDL_DECLSPEC char * SDLCALL SDL_ltoa(long value, char *str, int radix)
 /// ```
 Pointer<Int8> sdlLtoa(int value, Pointer<Int8> str, int radix) {
   final sdlLtoaLookupFunction = libSdl3.lookupFunction<
@@ -1357,7 +1357,7 @@ Pointer<Int8> sdlLtoa(int value, Pointer<Int8> str, int radix) {
 }
 
 /// ```c
-/// extern SDL_DECLSPEC char *SDLCALL SDL_ultoa(unsigned long value, char *str, int radix)
+/// extern SDL_DECLSPEC char * SDLCALL SDL_ultoa(unsigned long value, char *str, int radix)
 /// ```
 Pointer<Int8> sdlUltoa(int value, Pointer<Int8> str, int radix) {
   final sdlUltoaLookupFunction = libSdl3.lookupFunction<
@@ -1368,7 +1368,7 @@ Pointer<Int8> sdlUltoa(int value, Pointer<Int8> str, int radix) {
 }
 
 /// ```c
-/// extern SDL_DECLSPEC char *SDLCALL SDL_lltoa(Sint64 value, char *str, int radix)
+/// extern SDL_DECLSPEC char * SDLCALL SDL_lltoa(Sint64 value, char *str, int radix)
 /// ```
 Pointer<Int8> sdlLltoa(int value, Pointer<Int8> str, int radix) {
   final sdlLltoaLookupFunction = libSdl3.lookupFunction<
@@ -1379,7 +1379,7 @@ Pointer<Int8> sdlLltoa(int value, Pointer<Int8> str, int radix) {
 }
 
 /// ```c
-/// extern SDL_DECLSPEC char *SDLCALL SDL_ulltoa(Uint64 value, char *str, int radix)
+/// extern SDL_DECLSPEC char * SDLCALL SDL_ulltoa(Uint64 value, char *str, int radix)
 /// ```
 Pointer<Int8> sdlUlltoa(int value, Pointer<Int8> str, int radix) {
   final sdlUlltoaLookupFunction = libSdl3.lookupFunction<
@@ -3818,7 +3818,7 @@ int sdlIconv(
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC char *SDLCALL SDL_iconv_string(const char *tocode, const char *fromcode, const char *inbuf, size_t inbytesleft)
+/// extern SDL_DECLSPEC char * SDLCALL SDL_iconv_string(const char *tocode, const char *fromcode, const char *inbuf, size_t inbytesleft)
 /// ```
 Pointer<Int8> sdlIconvString(
     String? tocode, String? fromcode, String? inbuf, int inbytesleft) {

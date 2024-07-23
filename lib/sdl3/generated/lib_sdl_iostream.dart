@@ -70,8 +70,8 @@ import 'struct_sdl.dart';
 /// \param file a UTF-8 string representing the filename to open.
 /// \param mode an ASCII string representing the mode to be used for opening
 /// the file.
-/// \returns a pointer to the SDL_IOStream structure that is created, or NULL
-/// on failure; call SDL_GetError() for more information.
+/// \returns a pointer to the SDL_IOStream structure that is created or NULL on
+/// failure; call SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -82,7 +82,7 @@ import 'struct_sdl.dart';
 /// \sa SDL_WriteIO
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_IOStream *SDLCALL SDL_IOFromFile(const char *file, const char *mode)
+/// extern SDL_DECLSPEC SDL_IOStream * SDLCALL SDL_IOFromFile(const char *file, const char *mode)
 /// ```
 Pointer<SdlIoStream> sdlIoFromFile(String? file, String? mode) {
   final sdlIoFromFileLookupFunction = libSdl3.lookupFunction<
@@ -114,8 +114,8 @@ Pointer<SdlIoStream> sdlIoFromFile(String? file, String? mode) {
 ///
 /// \param mem a pointer to a buffer to feed an SDL_IOStream stream.
 /// \param size the buffer size, in bytes.
-/// \returns a pointer to a new SDL_IOStream structure, or NULL if it fails;
-/// call SDL_GetError() for more information.
+/// \returns a pointer to a new SDL_IOStream structure or NULL on failure; call
+/// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -127,7 +127,7 @@ Pointer<SdlIoStream> sdlIoFromFile(String? file, String? mode) {
 /// \sa SDL_WriteIO
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_IOStream *SDLCALL SDL_IOFromMem(void *mem, size_t size)
+/// extern SDL_DECLSPEC SDL_IOStream * SDLCALL SDL_IOFromMem(void *mem, size_t size)
 /// ```
 Pointer<SdlIoStream> sdlIoFromMem(Pointer<NativeType> mem, int size) {
   final sdlIoFromMemLookupFunction = libSdl3.lookupFunction<
@@ -156,8 +156,8 @@ Pointer<SdlIoStream> sdlIoFromMem(Pointer<NativeType> mem, int size) {
 ///
 /// \param mem a pointer to a read-only buffer to feed an SDL_IOStream stream.
 /// \param size the buffer size, in bytes.
-/// \returns a pointer to a new SDL_IOStream structure, or NULL if it fails;
-/// call SDL_GetError() for more information.
+/// \returns a pointer to a new SDL_IOStream structure or NULL on failure; call
+/// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -168,7 +168,7 @@ Pointer<SdlIoStream> sdlIoFromMem(Pointer<NativeType> mem, int size) {
 /// \sa SDL_TellIO
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_IOStream *SDLCALL SDL_IOFromConstMem(const void *mem, size_t size)
+/// extern SDL_DECLSPEC SDL_IOStream * SDLCALL SDL_IOFromConstMem(const void *mem, size_t size)
 /// ```
 Pointer<SdlIoStream> sdlIoFromConstMem(Pointer<NativeType> mem, int size) {
   final sdlIoFromConstMemLookupFunction = libSdl3.lookupFunction<
@@ -193,8 +193,8 @@ Pointer<SdlIoStream> sdlIoFromConstMem(Pointer<NativeType> mem, int size) {
 /// - `SDL_PROP_IOSTREAM_DYNAMIC_CHUNKSIZE_NUMBER`: memory will be allocated in
 /// multiples of this size, defaulting to 1024.
 ///
-/// \returns a pointer to a new SDL_IOStream structure, or NULL if it fails;
-/// call SDL_GetError() for more information.
+/// \returns a pointer to a new SDL_IOStream structure or NULL on failure; call
+/// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -205,7 +205,7 @@ Pointer<SdlIoStream> sdlIoFromConstMem(Pointer<NativeType> mem, int size) {
 /// \sa SDL_WriteIO
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_IOStream *SDLCALL SDL_IOFromDynamicMem(void)
+/// extern SDL_DECLSPEC SDL_IOStream * SDLCALL SDL_IOFromDynamicMem(void)
 /// ```
 Pointer<SdlIoStream> sdlIoFromDynamicMem() {
   final sdlIoFromDynamicMemLookupFunction = libSdl3.lookupFunction<
@@ -230,7 +230,7 @@ Pointer<SdlIoStream> sdlIoFromDynamicMem() {
 /// \param iface the function pointers that implement this SDL_IOStream.
 /// \param userdata the app-controlled pointer that is passed to iface's
 /// functions when called.
-/// \returns a pointer to the allocated memory on success, or NULL on failure;
+/// \returns a pointer to the allocated memory on success or NULL on failure;
 /// call SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
@@ -241,7 +241,7 @@ Pointer<SdlIoStream> sdlIoFromDynamicMem() {
 /// \sa SDL_IOFromMem
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_IOStream *SDLCALL SDL_OpenIO(const SDL_IOStreamInterface *iface, void *userdata)
+/// extern SDL_DECLSPEC SDL_IOStream * SDLCALL SDL_OpenIO(const SDL_IOStreamInterface *iface, void *userdata)
 /// ```
 Pointer<SdlIoStream> sdlOpenIo(
     Pointer<SdlIoStreamInterface> iface, Pointer<NativeType> userdata) {
@@ -424,7 +424,8 @@ int sdlTellIo(Pointer<SdlIoStream> context) {
 /// \param context a pointer to an SDL_IOStream structure.
 /// \param ptr a pointer to a buffer to read data into.
 /// \param size the number of bytes to read from the data source.
-/// \returns the number of bytes read, or 0 on end of file or other error.
+/// \returns the number of bytes read, or 0 on end of file or other failure;
+/// call SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -461,7 +462,7 @@ int sdlReadIo(Pointer<SdlIoStream> context, Pointer<NativeType> ptr, int size) {
 /// \param ptr a pointer to a buffer containing data to write.
 /// \param size the number of bytes to write.
 /// \returns the number of bytes written, which will be less than `size` on
-/// error; call SDL_GetError() for more information.
+/// failure; call SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -492,7 +493,7 @@ int sdlWriteIo(
 /// \param fmt a printf() style format string.
 /// \param ... additional parameters matching % tokens in the `fmt` string, if
 /// any.
-/// \returns the number of bytes written, or 0 on error; call SDL_GetError()
+/// \returns the number of bytes written or 0 on failure; call SDL_GetError()
 /// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
@@ -524,7 +525,7 @@ int sdlIOprintf(
 /// \param context a pointer to an SDL_IOStream structure.
 /// \param fmt a printf() style format string.
 /// \param ap a variable argument list.
-/// \returns the number of bytes written, or 0 on error; call SDL_GetError()
+/// \returns the number of bytes written or 0 on failure; call SDL_GetError()
 /// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
@@ -561,14 +562,15 @@ int sdlIOvprintf(
 /// \param datasize if not NULL, will store the number of bytes read.
 /// \param closeio if SDL_TRUE, calls SDL_CloseIO() on `src` before returning,
 /// even in the case of an error.
-/// \returns the data, or NULL if there was an error.
+/// \returns the data or NULL on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_LoadFile
 ///
 /// ```c
-/// extern SDL_DECLSPEC void *SDLCALL SDL_LoadFile_IO(SDL_IOStream *src, size_t *datasize, SDL_bool closeio)
+/// extern SDL_DECLSPEC void * SDLCALL SDL_LoadFile_IO(SDL_IOStream *src, size_t *datasize, SDL_bool closeio)
 /// ```
 Pointer<NativeType> sdlLoadFileIo(
     Pointer<SdlIoStream> src, Pointer<Uint32> datasize, bool closeio) {
@@ -591,14 +593,15 @@ Pointer<NativeType> sdlLoadFileIo(
 ///
 /// \param file the path to read all available data from.
 /// \param datasize if not NULL, will store the number of bytes read.
-/// \returns the data, or NULL if there was an error.
+/// \returns the data or NULL on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_LoadFile_IO
 ///
 /// ```c
-/// extern SDL_DECLSPEC void *SDLCALL SDL_LoadFile(const char *file, size_t *datasize)
+/// extern SDL_DECLSPEC void * SDLCALL SDL_LoadFile(const char *file, size_t *datasize)
 /// ```
 Pointer<NativeType> sdlLoadFile(String? file, Pointer<Uint32> datasize) {
   final sdlLoadFileLookupFunction = libSdl3.lookupFunction<
@@ -663,7 +666,7 @@ bool sdlReadS8(Pointer<SdlIoStream> src, Pointer<Int8> value) {
 ///
 /// \param src the stream from which to read data.
 /// \param value a pointer filled in with the data read.
-/// \returns SDL_TRUE on successful write, SDL_FALSE on failure; call
+/// \returns SDL_TRUE on successful write or SDL_FALSE on failure; call
 /// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
@@ -688,7 +691,7 @@ bool sdlReadU16Le(Pointer<SdlIoStream> src, Pointer<Uint16> value) {
 ///
 /// \param src the stream from which to read data.
 /// \param value a pointer filled in with the data read.
-/// \returns SDL_TRUE on successful write, SDL_FALSE on failure; call
+/// \returns SDL_TRUE on successful write or SDL_FALSE on failure; call
 /// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
@@ -713,7 +716,7 @@ bool sdlReadS16Le(Pointer<SdlIoStream> src, Pointer<Int16> value) {
 ///
 /// \param src the stream from which to read data.
 /// \param value a pointer filled in with the data read.
-/// \returns SDL_TRUE on successful write, SDL_FALSE on failure; call
+/// \returns SDL_TRUE on successful write or SDL_FALSE on failure; call
 /// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
@@ -738,7 +741,7 @@ bool sdlReadU16Be(Pointer<SdlIoStream> src, Pointer<Uint16> value) {
 ///
 /// \param src the stream from which to read data.
 /// \param value a pointer filled in with the data read.
-/// \returns SDL_TRUE on successful write, SDL_FALSE on failure; call
+/// \returns SDL_TRUE on successful write or SDL_FALSE on failure; call
 /// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
@@ -763,7 +766,7 @@ bool sdlReadS16Be(Pointer<SdlIoStream> src, Pointer<Int16> value) {
 ///
 /// \param src the stream from which to read data.
 /// \param value a pointer filled in with the data read.
-/// \returns SDL_TRUE on successful write, SDL_FALSE on failure; call
+/// \returns SDL_TRUE on successful write or SDL_FALSE on failure; call
 /// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
@@ -788,7 +791,7 @@ bool sdlReadU32Le(Pointer<SdlIoStream> src, Pointer<Uint32> value) {
 ///
 /// \param src the stream from which to read data.
 /// \param value a pointer filled in with the data read.
-/// \returns SDL_TRUE on successful write, SDL_FALSE on failure; call
+/// \returns SDL_TRUE on successful write or SDL_FALSE on failure; call
 /// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
@@ -813,7 +816,7 @@ bool sdlReadS32Le(Pointer<SdlIoStream> src, Pointer<Int32> value) {
 ///
 /// \param src the stream from which to read data.
 /// \param value a pointer filled in with the data read.
-/// \returns SDL_TRUE on successful write, SDL_FALSE on failure; call
+/// \returns SDL_TRUE on successful write or SDL_FALSE on failure; call
 /// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
@@ -838,7 +841,7 @@ bool sdlReadU32Be(Pointer<SdlIoStream> src, Pointer<Uint32> value) {
 ///
 /// \param src the stream from which to read data.
 /// \param value a pointer filled in with the data read.
-/// \returns SDL_TRUE on successful write, SDL_FALSE on failure; call
+/// \returns SDL_TRUE on successful write or SDL_FALSE on failure; call
 /// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
@@ -863,7 +866,7 @@ bool sdlReadS32Be(Pointer<SdlIoStream> src, Pointer<Int32> value) {
 ///
 /// \param src the stream from which to read data.
 /// \param value a pointer filled in with the data read.
-/// \returns SDL_TRUE on successful write, SDL_FALSE on failure; call
+/// \returns SDL_TRUE on successful write or SDL_FALSE on failure; call
 /// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
@@ -888,7 +891,7 @@ bool sdlReadU64Le(Pointer<SdlIoStream> src, Pointer<Uint64> value) {
 ///
 /// \param src the stream from which to read data.
 /// \param value a pointer filled in with the data read.
-/// \returns SDL_TRUE on successful write, SDL_FALSE on failure; call
+/// \returns SDL_TRUE on successful write or SDL_FALSE on failure; call
 /// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
@@ -913,7 +916,7 @@ bool sdlReadS64Le(Pointer<SdlIoStream> src, Pointer<Int64> value) {
 ///
 /// \param src the stream from which to read data.
 /// \param value a pointer filled in with the data read.
-/// \returns SDL_TRUE on successful write, SDL_FALSE on failure; call
+/// \returns SDL_TRUE on successful write or SDL_FALSE on failure; call
 /// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
@@ -938,7 +941,7 @@ bool sdlReadU64Be(Pointer<SdlIoStream> src, Pointer<Uint64> value) {
 ///
 /// \param src the stream from which to read data.
 /// \param value a pointer filled in with the data read.
-/// \returns SDL_TRUE on successful write, SDL_FALSE on failure; call
+/// \returns SDL_TRUE on successful write or SDL_FALSE on failure; call
 /// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
@@ -959,7 +962,7 @@ bool sdlReadS64Be(Pointer<SdlIoStream> src, Pointer<Int64> value) {
 ///
 /// \param dst the SDL_IOStream to write to.
 /// \param value the byte value to write.
-/// \returns SDL_TRUE on successful write, SDL_FALSE on failure; call
+/// \returns SDL_TRUE on successful write or SDL_FALSE on failure; call
 /// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
@@ -979,7 +982,7 @@ bool sdlWriteU8(Pointer<SdlIoStream> dst, int value) {
 ///
 /// \param dst the SDL_IOStream to write to.
 /// \param value the byte value to write.
-/// \returns SDL_TRUE on successful write, SDL_FALSE on failure; call
+/// \returns SDL_TRUE on successful write or SDL_FALSE on failure; call
 /// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
@@ -1004,7 +1007,7 @@ bool sdlWriteS8(Pointer<SdlIoStream> dst, int value) {
 ///
 /// \param dst the stream to which data will be written.
 /// \param value the data to be written, in native format.
-/// \returns SDL_TRUE on successful write, SDL_FALSE on failure; call
+/// \returns SDL_TRUE on successful write or SDL_FALSE on failure; call
 /// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
@@ -1029,7 +1032,7 @@ bool sdlWriteU16Le(Pointer<SdlIoStream> dst, int value) {
 ///
 /// \param dst the stream to which data will be written.
 /// \param value the data to be written, in native format.
-/// \returns SDL_TRUE on successful write, SDL_FALSE on failure; call
+/// \returns SDL_TRUE on successful write or SDL_FALSE on failure; call
 /// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
@@ -1053,7 +1056,7 @@ bool sdlWriteS16Le(Pointer<SdlIoStream> dst, int value) {
 ///
 /// \param dst the stream to which data will be written.
 /// \param value the data to be written, in native format.
-/// \returns SDL_TRUE on successful write, SDL_FALSE on failure; call
+/// \returns SDL_TRUE on successful write or SDL_FALSE on failure; call
 /// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
@@ -1077,7 +1080,7 @@ bool sdlWriteU16Be(Pointer<SdlIoStream> dst, int value) {
 ///
 /// \param dst the stream to which data will be written.
 /// \param value the data to be written, in native format.
-/// \returns SDL_TRUE on successful write, SDL_FALSE on failure; call
+/// \returns SDL_TRUE on successful write or SDL_FALSE on failure; call
 /// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
@@ -1102,7 +1105,7 @@ bool sdlWriteS16Be(Pointer<SdlIoStream> dst, int value) {
 ///
 /// \param dst the stream to which data will be written.
 /// \param value the data to be written, in native format.
-/// \returns SDL_TRUE on successful write, SDL_FALSE on failure; call
+/// \returns SDL_TRUE on successful write or SDL_FALSE on failure; call
 /// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
@@ -1127,7 +1130,7 @@ bool sdlWriteU32Le(Pointer<SdlIoStream> dst, int value) {
 ///
 /// \param dst the stream to which data will be written.
 /// \param value the data to be written, in native format.
-/// \returns SDL_TRUE on successful write, SDL_FALSE on failure; call
+/// \returns SDL_TRUE on successful write or SDL_FALSE on failure; call
 /// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
@@ -1151,7 +1154,7 @@ bool sdlWriteS32Le(Pointer<SdlIoStream> dst, int value) {
 ///
 /// \param dst the stream to which data will be written.
 /// \param value the data to be written, in native format.
-/// \returns SDL_TRUE on successful write, SDL_FALSE on failure; call
+/// \returns SDL_TRUE on successful write or SDL_FALSE on failure; call
 /// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
@@ -1175,7 +1178,7 @@ bool sdlWriteU32Be(Pointer<SdlIoStream> dst, int value) {
 ///
 /// \param dst the stream to which data will be written.
 /// \param value the data to be written, in native format.
-/// \returns SDL_TRUE on successful write, SDL_FALSE on failure; call
+/// \returns SDL_TRUE on successful write or SDL_FALSE on failure; call
 /// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
@@ -1200,7 +1203,7 @@ bool sdlWriteS32Be(Pointer<SdlIoStream> dst, int value) {
 ///
 /// \param dst the stream to which data will be written.
 /// \param value the data to be written, in native format.
-/// \returns SDL_TRUE on successful write, SDL_FALSE on failure; call
+/// \returns SDL_TRUE on successful write or SDL_FALSE on failure; call
 /// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
@@ -1225,7 +1228,7 @@ bool sdlWriteU64Le(Pointer<SdlIoStream> dst, int value) {
 ///
 /// \param dst the stream to which data will be written.
 /// \param value the data to be written, in native format.
-/// \returns SDL_TRUE on successful write, SDL_FALSE on failure; call
+/// \returns SDL_TRUE on successful write or SDL_FALSE on failure; call
 /// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
@@ -1249,7 +1252,7 @@ bool sdlWriteS64Le(Pointer<SdlIoStream> dst, int value) {
 ///
 /// \param dst the stream to which data will be written.
 /// \param value the data to be written, in native format.
-/// \returns SDL_TRUE on successful write, SDL_FALSE on failure; call
+/// \returns SDL_TRUE on successful write or SDL_FALSE on failure; call
 /// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
@@ -1273,7 +1276,7 @@ bool sdlWriteU64Be(Pointer<SdlIoStream> dst, int value) {
 ///
 /// \param dst the stream to which data will be written.
 /// \param value the data to be written, in native format.
-/// \returns SDL_TRUE on successful write, SDL_FALSE on failure; call
+/// \returns SDL_TRUE on successful write or SDL_FALSE on failure; call
 /// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.

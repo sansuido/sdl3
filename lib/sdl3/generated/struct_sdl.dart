@@ -38,12 +38,9 @@ final class SdlAtomicInt extends Struct {
 
 // SDL_AudioSpec
 final class SdlAudioSpec extends Struct {
-  // [0]+(2)
-  @Uint16()
+  // [0]+(4)
+  @Int32()
   external int format;
-  // [] +(2)
-  @Uint16()
-  external int blank_1;
   // [4]+(4)
   @Int32()
   external int channels;
@@ -52,7 +49,7 @@ final class SdlAudioSpec extends Struct {
   external int freq;
   // [] +(4)
   @Uint32()
-  external int blank_2;
+  external int blank_1;
 }
 
 // SDL_AudioStream
@@ -2283,6 +2280,9 @@ final class SdlFinger extends Struct {
   external int blank_1;
 }
 
+// SDL_DisplayModeData
+final class SdlDisplayModeData extends Opaque {}
+
 // SDL_DisplayMode
 final class SdlDisplayMode extends Struct {
   // [0]+(4)
@@ -2310,7 +2310,7 @@ final class SdlDisplayMode extends Struct {
   @Int32()
   external int refreshRateDenominator;
   // [32]+(8)
-  external Pointer<NativeType> driverdata;
+  external Pointer<SdlDisplayModeData> internal;
 }
 
 // SDL_Window

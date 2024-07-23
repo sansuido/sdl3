@@ -427,7 +427,7 @@ int sdlGetPropertyType(int props, String? name) {
 /// \sa SDL_SetPointerProperty
 ///
 /// ```c
-/// extern SDL_DECLSPEC void *SDLCALL SDL_GetPointerProperty(SDL_PropertiesID props, const char *name, void *default_value)
+/// extern SDL_DECLSPEC void * SDLCALL SDL_GetPointerProperty(SDL_PropertiesID props, const char *name, void *default_value)
 /// ```
 Pointer<NativeType> sdlGetPointerProperty(
     int props, String? name, Pointer<NativeType> defaultValue) {
@@ -446,7 +446,8 @@ Pointer<NativeType> sdlGetPointerProperty(
 ///
 /// Get a string property from a group of properties.
 ///
-/// The returned string follows the SDL_GetStringRule.
+/// This returns temporary memory which will be automatically freed later, and
+/// can be claimed with SDL_ClaimTemporaryMemory().
 ///
 /// \param props the properties to query.
 /// \param name the name of the property to query.
@@ -463,7 +464,7 @@ Pointer<NativeType> sdlGetPointerProperty(
 /// \sa SDL_SetStringProperty
 ///
 /// ```c
-/// extern SDL_DECLSPEC const char *SDLCALL SDL_GetStringProperty(SDL_PropertiesID props, const char *name, const char *default_value)
+/// extern SDL_DECLSPEC const char * SDLCALL SDL_GetStringProperty(SDL_PropertiesID props, const char *name, const char *default_value)
 /// ```
 String? sdlGetStringProperty(int props, String? name, String? defaultValue) {
   final sdlGetStringPropertyLookupFunction = libSdl3.lookupFunction<
@@ -564,7 +565,7 @@ double sdlGetFloatProperty(int props, String? name, double defaultValue) {
 /// \param name the name of the property to query.
 /// \param default_value the default value of the property.
 /// \returns the value of the property, or `default_value` if it is not set or
-/// not a float property.
+/// not a boolean property.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///

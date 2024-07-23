@@ -29,15 +29,16 @@ int sdlSetClipboardText(String? text) {
 }
 
 ///
-/// Get UTF-8 text from the clipboard, which must be freed with SDL_free().
+/// Get UTF-8 text from the clipboard.
 ///
 /// This functions returns empty string if there was not enough memory left for
 /// a copy of the clipboard's content.
 ///
+/// This returns temporary memory which will be automatically freed later, and
+/// can be claimed with SDL_ClaimTemporaryMemory().
+///
 /// \returns the clipboard text on success or an empty string on failure; call
-/// SDL_GetError() for more information. Caller must call SDL_free()
-/// on the returned pointer when done with it (even if there was an
-/// error).
+/// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -45,13 +46,17 @@ int sdlSetClipboardText(String? text) {
 /// \sa SDL_SetClipboardText
 ///
 /// ```c
-/// extern SDL_DECLSPEC char * SDLCALL SDL_GetClipboardText(void)
+/// extern SDL_DECLSPEC const char * SDLCALL SDL_GetClipboardText(void)
 /// ```
-Pointer<Int8> sdlGetClipboardText() {
+String? sdlGetClipboardText() {
   final sdlGetClipboardTextLookupFunction = libSdl3.lookupFunction<
-      Pointer<Int8> Function(),
-      Pointer<Int8> Function()>('SDL_GetClipboardText');
-  return sdlGetClipboardTextLookupFunction();
+      Pointer<Utf8> Function(),
+      Pointer<Utf8> Function()>('SDL_GetClipboardText');
+  final result = sdlGetClipboardTextLookupFunction();
+  if (result == nullptr) {
+    return null;
+  }
+  return result.toDartString();
 }
 
 ///
@@ -99,16 +104,16 @@ int sdlSetPrimarySelectionText(String? text) {
 }
 
 ///
-/// Get UTF-8 text from the primary selection, which must be freed with
-/// SDL_free().
+/// Get UTF-8 text from the primary selection.
 ///
 /// This functions returns empty string if there was not enough memory left for
 /// a copy of the primary selection's content.
 ///
+/// This returns temporary memory which will be automatically freed later, and
+/// can be claimed with SDL_ClaimTemporaryMemory().
+///
 /// \returns the primary selection text on success or an empty string on
-/// failure; call SDL_GetError() for more information. Caller must
-/// call SDL_free() on the returned pointer when done with it (even if
-/// there was an error).
+/// failure; call SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -116,13 +121,17 @@ int sdlSetPrimarySelectionText(String? text) {
 /// \sa SDL_SetPrimarySelectionText
 ///
 /// ```c
-/// extern SDL_DECLSPEC char * SDLCALL SDL_GetPrimarySelectionText(void)
+/// extern SDL_DECLSPEC const char * SDLCALL SDL_GetPrimarySelectionText(void)
 /// ```
-Pointer<Int8> sdlGetPrimarySelectionText() {
+String? sdlGetPrimarySelectionText() {
   final sdlGetPrimarySelectionTextLookupFunction = libSdl3.lookupFunction<
-      Pointer<Int8> Function(),
-      Pointer<Int8> Function()>('SDL_GetPrimarySelectionText');
-  return sdlGetPrimarySelectionTextLookupFunction();
+      Pointer<Utf8> Function(),
+      Pointer<Utf8> Function()>('SDL_GetPrimarySelectionText');
+  final result = sdlGetPrimarySelectionTextLookupFunction();
+  if (result == nullptr) {
+    return null;
+  }
+  return result.toDartString();
 }
 
 ///
@@ -230,8 +239,10 @@ int sdlClearClipboardData() {
 /// \param mime_type the mime type to read from the clipboard.
 /// \param size a pointer filled in with the length of the returned data.
 /// \returns the retrieved data buffer or NULL on failure; call SDL_GetError()
-/// for more information. Caller must call SDL_free() on the returned
-/// pointer when done with it.
+/// for more information.
+///
+/// This returns temporary memory which will be automatically freed
+/// later, and can be claimed with SDL_ClaimTemporaryMemory().
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -239,7 +250,7 @@ int sdlClearClipboardData() {
 /// \sa SDL_SetClipboardData
 ///
 /// ```c
-/// extern SDL_DECLSPEC void *SDLCALL SDL_GetClipboardData(const char *mime_type, size_t *size)
+/// extern SDL_DECLSPEC const void * SDLCALL SDL_GetClipboardData(const char *mime_type, size_t *size)
 /// ```
 Pointer<NativeType> sdlGetClipboardData(
     String? mimeType, Pointer<Uint32> size) {

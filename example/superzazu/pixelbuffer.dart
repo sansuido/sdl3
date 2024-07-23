@@ -51,11 +51,11 @@ int main() {
   texture.lock(nullptr, texturePixels, texturePitch);
   // update texture with new data
   texturePixels.value.value =
-      ByteData.view(Uint8List.fromList([255, 0, 0, 0]).buffer).getUint32(0);
+      ByteData.view(Uint8List.fromList([255, 0, 0, 255]).buffer).getUint32(0);
   (texturePixels.value + gWinWidth * gWinHeight ~/ 2 + gWinWidth ~/ 2).value =
-      ByteData.view(Uint8List.fromList([0, 255, 0, 0]).buffer).getUint32(0);
+      ByteData.view(Uint8List.fromList([0, 255, 0, 255]).buffer).getUint32(0);
   (texturePixels.value + gWinWidth * gWinHeight - 1).value =
-      ByteData.view(Uint8List.fromList([0, 0, 255, 0]).buffer).getUint32(0);
+      ByteData.view(Uint8List.fromList([0, 0, 255, 255]).buffer).getUint32(0);
   texture.unlock();
   // main loop
   var event = calloc<SdlEvent>();

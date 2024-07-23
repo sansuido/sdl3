@@ -7,8 +7,6 @@ import 'struct_sdl.dart';
 ///
 /// Get the human readable name of a pixel format.
 ///
-/// The returned string follows the SDL_GetStringRule.
-///
 /// \param format the pixel format to query.
 /// \returns the human readable name of the specified pixel format or
 /// "SDL_PIXELFORMAT_UNKNOWN" if the format isn't recognized.
@@ -18,7 +16,7 @@ import 'struct_sdl.dart';
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC const char* SDLCALL SDL_GetPixelFormatName(SDL_PixelFormat format)
+/// extern SDL_DECLSPEC const char * SDLCALL SDL_GetPixelFormatName(SDL_PixelFormat format)
 /// ```
 String? sdlGetPixelFormatName(int format) {
   final sdlGetPixelFormatNameLookupFunction = libSdl3.lookupFunction<
@@ -152,7 +150,7 @@ Pointer<SdlPixelFormatDetails> sdlGetPixelFormatDetails(int format) {
 /// \sa SDL_SetSurfacePalette
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_Palette *SDLCALL SDL_CreatePalette(int ncolors)
+/// extern SDL_DECLSPEC SDL_Palette * SDLCALL SDL_CreatePalette(int ncolors)
 /// ```
 Pointer<SdlPalette> sdlCreatePalette(int ncolors) {
   final sdlCreatePaletteLookupFunction = libSdl3.lookupFunction<

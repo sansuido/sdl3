@@ -74,7 +74,7 @@ extension SdlWindowEx on SdlWindow {
   /// \sa SDL_DestroyWindow
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_Window *SDLCALL SDL_CreateWindow(const char *title, int w, int h, SDL_WindowFlags flags)
+  /// extern SDL_DECLSPEC SDL_Window * SDLCALL SDL_CreateWindow(const char *title, int w, int h, SDL_WindowFlags flags)
   /// ```
   static Pointer<SdlWindow> create(
       {required String title, required int w, required int h, int flags = 0}) {
@@ -157,7 +157,8 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   ///
   /// Get the title of a window.
   ///
-  /// The returned string follows the SDL_GetStringRule.
+  /// This returns temporary memory which will be automatically freed later, and
+  /// can be claimed with SDL_ClaimTemporaryMemory().
   ///
   /// \param window the window to query.
   /// \returns the title of the window in UTF-8 format or "" if there is no
@@ -168,7 +169,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// \sa SDL_SetWindowTitle
   ///
   /// ```c
-  /// extern SDL_DECLSPEC const char *SDLCALL SDL_GetWindowTitle(SDL_Window *window)
+  /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetWindowTitle(SDL_Window *window)
   /// ```
   String? getTitle() {
     return sdlGetWindowTitle(this);
@@ -777,7 +778,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// \sa SDL_UpdateWindowSurfaceRects
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_Surface *SDLCALL SDL_GetWindowSurface(SDL_Window *window)
+  /// extern SDL_DECLSPEC SDL_Surface * SDLCALL SDL_GetWindowSurface(SDL_Window *window)
   /// ```
   Pointer<SdlSurface> getSurface() {
     return sdlGetWindowSurface(this);
@@ -975,7 +976,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// \sa SDL_SetWindowMouseRect
   ///
   /// ```c
-  /// extern SDL_DECLSPEC const SDL_Rect *SDLCALL SDL_GetWindowMouseRect(SDL_Window *window)
+  /// extern SDL_DECLSPEC const SDL_Rect * SDLCALL SDL_GetWindowMouseRect(SDL_Window *window)
   /// ```
   math.Rectangle<double>? getMouseRect() {
     math.Rectangle<double>? result;
@@ -1013,33 +1014,22 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   ///
   /// Get the opacity of a window.
   ///
-  /// If transparency isn't supported on this platform, opacity will be reported
+  /// If transparency isn't supported on this platform, opacity will be returned
   /// as 1.0f without error.
   ///
-  /// The parameter `opacity` is ignored if it is NULL.
-  ///
-  /// This function also returns -1 if an invalid window was provided.
-  ///
   /// \param window the window to get the current opacity value from.
-  /// \param out_opacity the float filled in (0.0f - transparent, 1.0f - opaque).
-  /// \returns 0 on success or a negative error code on failure; call
-  /// SDL_GetError() for more information.
+  /// \returns the opacity, (0.0f - transparent, 1.0f - opaque), or a negative
+  /// error code on failure; call SDL_GetError() for more information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
   /// \sa SDL_SetWindowOpacity
   ///
   /// ```c
-  /// extern SDL_DECLSPEC int SDLCALL SDL_GetWindowOpacity(SDL_Window *window, float *out_opacity)
+  /// extern SDL_DECLSPEC float SDLCALL SDL_GetWindowOpacity(SDL_Window *window)
   /// ```
   double? getOpacity() {
-    double? result;
-    var opacityPointer = calloc<Float>();
-    if (sdlGetWindowOpacity(this, opacityPointer) == 0) {
-      result = opacityPointer.value;
-    }
-    calloc.free(opacityPointer);
-    return result;
+    return sdlGetWindowOpacity(this);
   }
 
   ///
@@ -1171,8 +1161,8 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// SDL_GLContext is opaque to the application.
   ///
   /// \param window the window to associate with the context.
-  /// \returns the OpenGL context associated with `window` or NULL on error; call
-  /// SDL_GetError() for more details.
+  /// \returns the OpenGL context associated with `window` or NULL on failure;
+  /// call SDL_GetError() for more information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -1253,7 +1243,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// \since This function is available since SDL 3.0.0.
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_Renderer *SDLCALL SDL_GetRenderer(SDL_Window *window)
+  /// extern SDL_DECLSPEC SDL_Renderer * SDLCALL SDL_GetRenderer(SDL_Window *window)
   /// ```
   Pointer<SdlRenderer> getRenderer() {
     return sdlGetRenderer(this);

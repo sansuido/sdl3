@@ -46,7 +46,8 @@ int sdlGetNumAudioDrivers() {
 /// "coreaudio" or "wasapi". These never have Unicode characters, and are not
 /// meant to be proper names.
 ///
-/// The returned string follows the SDL_GetStringRule.
+/// This returns temporary memory which will be automatically freed later, and
+/// can be claimed with SDL_ClaimTemporaryMemory().
 ///
 /// \param index the index of the audio driver; the value ranges from 0 to
 /// SDL_GetNumAudioDrivers() - 1.
@@ -60,7 +61,7 @@ int sdlGetNumAudioDrivers() {
 /// \sa SDL_GetNumAudioDrivers
 ///
 /// ```c
-/// extern SDL_DECLSPEC const char *SDLCALL SDL_GetAudioDriver(int index)
+/// extern SDL_DECLSPEC const char * SDLCALL SDL_GetAudioDriver(int index)
 /// ```
 String? sdlGetAudioDriver(int index) {
   final sdlGetAudioDriverLookupFunction = libSdl3.lookupFunction<
@@ -80,7 +81,8 @@ String? sdlGetAudioDriver(int index) {
 /// "coreaudio" or "wasapi". These never have Unicode characters, and are not
 /// meant to be proper names.
 ///
-/// The returned string follows the SDL_GetStringRule.
+/// This returns temporary memory which will be automatically freed later, and
+/// can be claimed with SDL_ClaimTemporaryMemory().
 ///
 /// \returns the name of the current audio driver or NULL if no driver has been
 /// initialized.
@@ -90,7 +92,7 @@ String? sdlGetAudioDriver(int index) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC const char *SDLCALL SDL_GetCurrentAudioDriver(void)
+/// extern SDL_DECLSPEC const char * SDLCALL SDL_GetCurrentAudioDriver(void)
 /// ```
 String? sdlGetCurrentAudioDriver() {
   final sdlGetCurrentAudioDriverLookupFunction = libSdl3.lookupFunction<
@@ -117,11 +119,13 @@ String? sdlGetCurrentAudioDriver() {
 /// If this function returns NULL, to signify an error, `*count` will be set to
 /// zero.
 ///
-/// \param count a pointer filled in with the number of devices returned. NULL
-/// is allowed.
-/// \returns a 0 terminated array of device instance IDs which should be freed
-/// with SDL_free(), or NULL on error; call SDL_GetError() for more
-/// details.
+/// This returns temporary memory which will be automatically freed later, and
+/// can be claimed with SDL_ClaimTemporaryMemory().
+///
+/// \param count a pointer filled in with the number of devices returned, may
+/// be NULL.
+/// \returns a 0 terminated array of device instance IDs or NULL on error; call
+/// SDL_GetError() for more information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -131,7 +135,7 @@ String? sdlGetCurrentAudioDriver() {
 /// \sa SDL_GetAudioRecordingDevices
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_AudioDeviceID *SDLCALL SDL_GetAudioPlaybackDevices(int *count)
+/// extern SDL_DECLSPEC const SDL_AudioDeviceID * SDLCALL SDL_GetAudioPlaybackDevices(int *count)
 /// ```
 Pointer<Uint32> sdlGetAudioPlaybackDevices(Pointer<Int32> count) {
   final sdlGetAudioPlaybackDevicesLookupFunction = libSdl3.lookupFunction<
@@ -155,11 +159,13 @@ Pointer<Uint32> sdlGetAudioPlaybackDevices(Pointer<Int32> count) {
 /// If this function returns NULL, to signify an error, `*count` will be set to
 /// zero.
 ///
-/// \param count a pointer filled in with the number of devices returned. NULL
-/// is allowed.
-/// \returns a 0 terminated array of device instance IDs which should be freed
-/// with SDL_free(), or NULL on error; call SDL_GetError() for more
-/// details.
+/// This returns temporary memory which will be automatically freed later, and
+/// can be claimed with SDL_ClaimTemporaryMemory().
+///
+/// \param count a pointer filled in with the number of devices returned, may
+/// be NULL.
+/// \returns a 0 terminated array of device instance IDs, or NULL on failure;
+/// call SDL_GetError() for more information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -169,7 +175,7 @@ Pointer<Uint32> sdlGetAudioPlaybackDevices(Pointer<Int32> count) {
 /// \sa SDL_GetAudioPlaybackDevices
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_AudioDeviceID *SDLCALL SDL_GetAudioRecordingDevices(int *count)
+/// extern SDL_DECLSPEC const SDL_AudioDeviceID * SDLCALL SDL_GetAudioRecordingDevices(int *count)
 /// ```
 Pointer<Uint32> sdlGetAudioRecordingDevices(Pointer<Int32> count) {
   final sdlGetAudioRecordingDevicesLookupFunction = libSdl3.lookupFunction<
@@ -182,10 +188,12 @@ Pointer<Uint32> sdlGetAudioRecordingDevices(Pointer<Int32> count) {
 ///
 /// Get the human-readable name of a specific audio device.
 ///
-/// The returned string follows the SDL_GetStringRule.
+/// This returns temporary memory which will be automatically freed later, and
+/// can be claimed with SDL_ClaimTemporaryMemory().
 ///
 /// \param devid the instance ID of the device to query.
-/// \returns the name of the audio device, or NULL on error.
+/// \returns the name of the audio device, or NULL on failure; call
+/// SDL_GetError() for more information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -196,7 +204,7 @@ Pointer<Uint32> sdlGetAudioRecordingDevices(Pointer<Int32> count) {
 /// \sa SDL_GetDefaultAudioInfo
 ///
 /// ```c
-/// extern SDL_DECLSPEC const char *SDLCALL SDL_GetAudioDeviceName(SDL_AudioDeviceID devid)
+/// extern SDL_DECLSPEC const char * SDLCALL SDL_GetAudioDeviceName(SDL_AudioDeviceID devid)
 /// ```
 String? sdlGetAudioDeviceName(int devid) {
   final sdlGetAudioDeviceNameLookupFunction = libSdl3.lookupFunction<
@@ -264,8 +272,8 @@ int sdlGetAudioDeviceFormat(
 /// Audio devices usually have no remapping applied. This is represented by
 /// returning NULL, and does not signify an error.
 ///
-/// The returned array follows the SDL_GetStringRule (even though, strictly
-/// speaking, it isn't a string, it has the same memory manangement rules).
+/// This returns temporary memory which will be automatically freed later, and
+/// can be claimed with SDL_ClaimTemporaryMemory().
 ///
 /// \param devid the instance ID of the device to query.
 /// \param count On output, set to number of channels in the map. Can be NULL.
@@ -353,8 +361,8 @@ Pointer<Int32> sdlGetAudioDeviceChannelMap(int devid, Pointer<Int32> count) {
 /// default device.
 /// \param spec the requested device configuration. Can be NULL to use
 /// reasonable defaults.
-/// \returns the device ID on success, 0 on error; call SDL_GetError() for more
-/// information.
+/// \returns the device ID on success or 0 on failure; call SDL_GetError() for
+/// more information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -491,7 +499,8 @@ bool sdlAudioDevicePaused(int dev) {
 /// this function will always return -1.0f when used on physical devices.
 ///
 /// \param devid the audio device to query.
-/// \returns the gain of the device, or -1.0f on error.
+/// \returns the gain of the device or -1.0f on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -532,7 +541,8 @@ double sdlGetAudioDeviceGain(int devid) {
 ///
 /// \param devid the audio device on which to change gain.
 /// \param gain the gain. 1.0f is no change, 0.0f is silence.
-/// \returns 0 on success, or -1 on error.
+/// \returns 0 on success or a negative error code on failure; call
+/// SDL_GetError() for more information.
 ///
 /// \threadsafety It is safe to call this function from any thread, as it holds
 /// a stream-specific mutex while running.
@@ -604,8 +614,8 @@ void sdlCloseAudioDevice(int devid) {
 /// \param devid an audio device to bind a stream to.
 /// \param streams an array of audio streams to unbind.
 /// \param num_streams number streams listed in the `streams` array.
-/// \returns 0 on success, -1 on error; call SDL_GetError() for more
-/// information.
+/// \returns 0 on success or a negative error code on failure; call
+/// SDL_GetError() for more information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -636,8 +646,8 @@ int sdlBindAudioStreams(
 ///
 /// \param devid an audio device to bind a stream to.
 /// \param stream an audio stream to bind to a device.
-/// \returns 0 on success, -1 on error; call SDL_GetError() for more
-/// information.
+/// \returns 0 on success or a negative error code on failure; call
+/// SDL_GetError() for more information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -745,7 +755,8 @@ int sdlGetAudioStreamDevice(Pointer<SdlAudioStream> stream) {
 ///
 /// \param src_spec the format details of the input audio.
 /// \param dst_spec the format details of the output audio.
-/// \returns a new audio stream on success, or NULL on failure.
+/// \returns a new audio stream on success or NULL on failure; call
+/// SDL_GetError() for more information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -760,7 +771,7 @@ int sdlGetAudioStreamDevice(Pointer<SdlAudioStream> stream) {
 /// \sa SDL_DestroyAudioStream
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_AudioStream *SDLCALL SDL_CreateAudioStream(const SDL_AudioSpec *src_spec, const SDL_AudioSpec *dst_spec)
+/// extern SDL_DECLSPEC SDL_AudioStream * SDLCALL SDL_CreateAudioStream(const SDL_AudioSpec *src_spec, const SDL_AudioSpec *dst_spec)
 /// ```
 Pointer<SdlAudioStream> sdlCreateAudioStream(
     Pointer<SdlAudioSpec> srcSpec, Pointer<SdlAudioSpec> dstSpec) {
@@ -798,7 +809,8 @@ int sdlGetAudioStreamProperties(Pointer<SdlAudioStream> stream) {
 /// \param stream the SDL_AudioStream to query.
 /// \param src_spec where to store the input audio format; ignored if NULL.
 /// \param dst_spec where to store the output audio format; ignored if NULL.
-/// \returns 0 on success, or -1 on error.
+/// \returns 0 on success or a negative error code on failure; call
+/// SDL_GetError() for more information.
 ///
 /// \threadsafety It is safe to call this function from any thread, as it holds
 /// a stream-specific mutex while running.
@@ -840,7 +852,8 @@ int sdlGetAudioStreamFormat(Pointer<SdlAudioStream> stream,
 /// changed.
 /// \param dst_spec the new format of the audio output; if NULL, it is not
 /// changed.
-/// \returns 0 on success, or -1 on error.
+/// \returns 0 on success or a negative error code on failure; call
+/// SDL_GetError() for more information.
 ///
 /// \threadsafety It is safe to call this function from any thread, as it holds
 /// a stream-specific mutex while running.
@@ -869,7 +882,8 @@ int sdlSetAudioStreamFormat(Pointer<SdlAudioStream> stream,
 /// Get the frequency ratio of an audio stream.
 ///
 /// \param stream the SDL_AudioStream to query.
-/// \returns the frequency ratio of the stream, or 0.0 on error.
+/// \returns the frequency ratio of the stream or 0.0 on failure; call
+/// SDL_GetError() for more information.
 ///
 /// \threadsafety It is safe to call this function from any thread, as it holds
 /// a stream-specific mutex while running.
@@ -904,7 +918,8 @@ double sdlGetAudioStreamFrequencyRatio(Pointer<SdlAudioStream> stream) {
 /// \param stream the stream the frequency ratio is being changed.
 /// \param ratio the frequency ratio. 1.0 is normal speed. Must be between 0.01
 /// and 100.
-/// \returns 0 on success, or -1 on error.
+/// \returns 0 on success or a negative error code on failure; call
+/// SDL_GetError() for more information.
 ///
 /// \threadsafety It is safe to call this function from any thread, as it holds
 /// a stream-specific mutex while running.
@@ -935,7 +950,8 @@ int sdlSetAudioStreamFrequencyRatio(
 /// Audio streams default to a gain of 1.0f (no change in output).
 ///
 /// \param stream the SDL_AudioStream to query.
-/// \returns the gain of the stream, or -1.0f on error.
+/// \returns the gain of the stream or -1.0f on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \threadsafety It is safe to call this function from any thread, as it holds
 /// a stream-specific mutex while running.
@@ -968,7 +984,8 @@ double sdlGetAudioStreamGain(Pointer<SdlAudioStream> stream) {
 ///
 /// \param stream the stream on which the gain is being changed.
 /// \param gain the gain. 1.0f is no change, 0.0f is silence.
-/// \returns 0 on success, or -1 on error.
+/// \returns 0 on successor a negative error code on failure; call
+/// SDL_GetError() for more information.
 ///
 /// \threadsafety It is safe to call this function from any thread, as it holds
 /// a stream-specific mutex while running.
@@ -997,8 +1014,8 @@ int sdlSetAudioStreamGain(Pointer<SdlAudioStream> stream, double gain) {
 /// Audio streams default to no remapping applied. This is represented by
 /// returning NULL, and does not signify an error.
 ///
-/// The returned array follows the SDL_GetStringRule (even though, strictly
-/// speaking, it isn't a string, it has the same memory manangement rules).
+/// This returns temporary memory which will be automatically freed later, and
+/// can be claimed with SDL_ClaimTemporaryMemory().
 ///
 /// \param stream the SDL_AudioStream to query.
 /// \param count On output, set to number of channels in the map. Can be NULL.
@@ -1034,8 +1051,8 @@ Pointer<Int32> sdlGetAudioStreamInputChannelMap(
 /// Audio streams default to no remapping applied. This is represented by
 /// returning NULL, and does not signify an error.
 ///
-/// The returned array follows the SDL_GetStringRule (even though, strictly
-/// speaking, it isn't a string, it has the same memory manangement rules).
+/// This returns temporary memory which will be automatically freed later, and
+/// can be claimed with SDL_ClaimTemporaryMemory().
 ///
 /// \param stream the SDL_AudioStream to query.
 /// \param count On output, set to number of channels in the map. Can be NULL.
@@ -1100,7 +1117,8 @@ Pointer<Int32> sdlGetAudioStreamOutputChannelMap(
 /// \param stream the SDL_AudioStream to change.
 /// \param chmap the new channel map, NULL to reset to default.
 /// \param count The number of channels in the map.
-/// \returns 0 on success, -1 on error.
+/// \returns 0 on success or a negative error code on failure; call
+/// SDL_GetError() for more information.
 ///
 /// \threadsafety It is safe to call this function from any thread, as it holds
 /// a stream-specific mutex while running. Don't change the
@@ -1157,7 +1175,8 @@ int sdlSetAudioStreamInputChannelMap(
 /// \param stream the SDL_AudioStream to change.
 /// \param chmap the new channel map, NULL to reset to default.
 /// \param count The number of channels in the map.
-/// \returns 0 on success, -1 on error.
+/// \returns 0 on success or a negative error code on failure; call
+/// SDL_GetError() for more information.
 ///
 /// \threadsafety It is safe to call this function from any thread, as it holds
 /// a stream-specific mutex while running. Don't change the
@@ -1238,7 +1257,8 @@ int sdlPutAudioStreamData(
 /// \param stream the stream the audio is being requested from.
 /// \param buf a buffer to fill with audio data.
 /// \param len the maximum number of bytes to fill.
-/// \returns the number of bytes read from the stream, or -1 on error.
+/// \returns the number of bytes read from the stream or a negative error code
+/// on failure; call SDL_GetError() for more information.
 ///
 /// \threadsafety It is safe to call this function from any thread, but if the
 /// stream has a callback set, the caller might need to manage
@@ -1552,7 +1572,9 @@ int sdlUnlockAudioStream(Pointer<SdlAudioStream> stream) {
 /// stream.
 /// \param userdata an opaque pointer provided to the callback for its own
 /// personal use.
-/// \returns 0 on success, -1 on error. This only fails if `stream` is NULL.
+/// \returns 0 on success or a negative error code on failure; call
+/// SDL_GetError() for more information. This only fails if `stream`
+/// is NULL.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -1617,7 +1639,9 @@ int sdlSetAudioStreamGetCallback(
 /// stream.
 /// \param userdata an opaque pointer provided to the callback for its own
 /// personal use.
-/// \returns 0 on success, -1 on error. This only fails if `stream` is NULL.
+/// \returns 0 on success or a negative error code on failure; call
+/// SDL_GetError() for more information. This only fails if `stream`
+/// is NULL.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -1721,7 +1745,7 @@ void sdlDestroyAudioStream(Pointer<SdlAudioStream> stream) {
 /// necessary.
 /// \param userdata app-controlled pointer passed to callback. Can be NULL.
 /// Ignored if callback is NULL.
-/// \returns an audio stream on success, ready to use. NULL on error; call
+/// \returns an audio stream on success, ready to use, or NULL on failure; call
 /// SDL_GetError() for more information. When done with this stream,
 /// call SDL_DestroyAudioStream to free resources and close the
 /// device.
@@ -1734,7 +1758,7 @@ void sdlDestroyAudioStream(Pointer<SdlAudioStream> stream) {
 /// \sa SDL_ResumeAudioStreamDevice
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_AudioStream *SDLCALL SDL_OpenAudioDeviceStream(SDL_AudioDeviceID devid, const SDL_AudioSpec *spec, SDL_AudioStreamCallback callback, void *userdata)
+/// extern SDL_DECLSPEC SDL_AudioStream * SDLCALL SDL_OpenAudioDeviceStream(SDL_AudioDeviceID devid, const SDL_AudioSpec *spec, SDL_AudioStreamCallback callback, void *userdata)
 /// ```
 Pointer<SdlAudioStream> sdlOpenAudioDeviceStream(
     int devid,
@@ -1801,8 +1825,8 @@ Pointer<SdlAudioStream> sdlOpenAudioDeviceStream(
 /// \param devid the ID of an opened audio device.
 /// \param callback a callback function to be called. Can be NULL.
 /// \param userdata app-controlled pointer passed to callback. Can be NULL.
-/// \returns zero on success, -1 on error; call SDL_GetError() for more
-/// information.
+/// \returns 0 on success or a negative error code on failure; call
+/// SDL_GetError() for more information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -2025,7 +2049,7 @@ int sdlLoadWav(String? path, Pointer<SdlAudioSpec> spec,
 int sdlMixAudio(Pointer<Uint8> dst, Pointer<Uint8> src, int format, int len,
     double volume) {
   final sdlMixAudioLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<Uint8> dst, Pointer<Uint8> src, Uint16 format,
+      Int32 Function(Pointer<Uint8> dst, Pointer<Uint8> src, Int32 format,
           Uint32 len, Float volume),
       int Function(Pointer<Uint8> dst, Pointer<Uint8> src, int format, int len,
           double volume)>('SDL_MixAudio');
@@ -2108,7 +2132,7 @@ int sdlConvertAudioSamples(
 /// ```
 int sdlGetSilenceValueForFormat(int format) {
   final sdlGetSilenceValueForFormatLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Uint16 format),
+      Int32 Function(Int32 format),
       int Function(int format)>('SDL_GetSilenceValueForFormat');
   return sdlGetSilenceValueForFormatLookupFunction(format);
 }

@@ -105,8 +105,8 @@ void sdlDelay(int ms) {
 /// Wait a specified number of nanoseconds before returning.
 ///
 /// This function waits a specified number of nanoseconds before returning. It
-/// waits at least the specified time, but possibly longer due to OS
-/// scheduling.
+/// will attempt to wait as close to the requested time as possible, busy
+/// waiting if necessary, but could return later due to OS scheduling.
 ///
 /// \param ns the number of nanoseconds to delay.
 ///
@@ -148,7 +148,7 @@ void sdlDelayNs(int ns) {
 /// \param callback the SDL_TimerCallback function to call when the specified
 /// `interval` elapses.
 /// \param userdata a pointer that is passed to `callback`.
-/// \returns a timer ID or 0 if an error occurs; call SDL_GetError() for more
+/// \returns a timer ID or 0 on failure; call SDL_GetError() for more
 /// information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
@@ -203,7 +203,7 @@ int sdlAddTimer(
 /// \param callback the SDL_TimerCallback function to call when the specified
 /// `interval` elapses.
 /// \param userdata a pointer that is passed to `callback`.
-/// \returns a timer ID or 0 if an error occurs; call SDL_GetError() for more
+/// \returns a timer ID or 0 on failure; call SDL_GetError() for more
 /// information.
 ///
 /// \threadsafety It is safe to call this function from any thread.

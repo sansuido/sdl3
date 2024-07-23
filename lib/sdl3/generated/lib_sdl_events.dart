@@ -472,7 +472,7 @@ bool sdlGetEventFilter(Pointer<Pointer<NativeFunction<SdlEventFilter>>> filter,
 ///
 /// \param filter an SDL_EventFilter function to call when an event happens.
 /// \param userdata a pointer that is passed to `filter`.
-/// \returns 0 on success, or a negative error code on failure; call
+/// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
@@ -612,10 +612,10 @@ int sdlRegisterEvents(int numevents) {
 }
 
 ///
-/// Allocate dynamic memory for an SDL event.
+/// Allocate temporary memory.
 ///
-/// You can use this to allocate memory for user events that will be
-/// automatically freed after the event is processed.
+/// You can use this to allocate memory that will be automatically freed later,
+/// after event processing is complete.
 ///
 /// \param size the amount of memory to allocate.
 /// \returns a pointer to the memory allocated or NULL on failure; call
@@ -625,12 +625,87 @@ int sdlRegisterEvents(int numevents) {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
+/// \sa SDL_ClaimTemporaryMemory
+/// \sa SDL_FreeTemporaryMemory
+///
 /// ```c
-/// extern SDL_DECLSPEC void * SDLCALL SDL_AllocateEventMemory(size_t size)
+/// extern SDL_DECLSPEC void * SDLCALL SDL_AllocateTemporaryMemory(size_t size)
 /// ```
-Pointer<NativeType> sdlAllocateEventMemory(int size) {
-  final sdlAllocateEventMemoryLookupFunction = libSdl3.lookupFunction<
+Pointer<NativeType> sdlAllocateTemporaryMemory(int size) {
+  final sdlAllocateTemporaryMemoryLookupFunction = libSdl3.lookupFunction<
       Pointer<NativeType> Function(Uint32 size),
-      Pointer<NativeType> Function(int size)>('SDL_AllocateEventMemory');
-  return sdlAllocateEventMemoryLookupFunction(size);
+      Pointer<NativeType> Function(int size)>('SDL_AllocateTemporaryMemory');
+  return sdlAllocateTemporaryMemoryLookupFunction(size);
+}
+
+///
+/// Claim ownership of temporary memory.
+///
+/// This function changes ownership of temporary memory allocated for events
+/// and functions that return temporary memory. If this function succeeds, the
+/// memory will no longer be automatically freed by SDL, it must be freed using
+/// SDL_free() by the application.
+///
+/// If the memory isn't temporary, or it was allocated on a different thread,
+/// or if it is associated with an event currently in the event queue, this
+/// will return NULL, and the application does not have ownership of the
+/// memory.
+///
+/// \param mem a pointer allocated with SDL_AllocateTemporaryMemory().
+/// \returns a pointer to the memory now owned by the application, which must
+/// be freed using SDL_free(), or NULL if the memory is not temporary
+/// or was allocated on a different thread.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_AllocateTemporaryMemory
+/// \sa SDL_free
+///
+/// ```c
+/// extern SDL_DECLSPEC void * SDLCALL SDL_ClaimTemporaryMemory(const void *mem)
+/// ```
+Pointer<NativeType> sdlClaimTemporaryMemory(Pointer<NativeType> mem) {
+  final sdlClaimTemporaryMemoryLookupFunction = libSdl3.lookupFunction<
+      Pointer<NativeType> Function(Pointer<NativeType> mem),
+      Pointer<NativeType> Function(
+          Pointer<NativeType> mem)>('SDL_ClaimTemporaryMemory');
+  return sdlClaimTemporaryMemoryLookupFunction(mem);
+}
+
+///
+/// Free temporary memory.
+///
+/// This function frees temporary memory allocated for events and functions
+/// that return temporary memory. This memory is local to the thread that
+/// creates it and is automatically freed for the main thread when processing
+/// events. For other threads you may call this function periodically to free
+/// any temporary memory created by that thread.
+///
+/// You can free a specific pointer, to provide more fine grained control over
+/// memory management, or you can pass NULL to free all pending temporary
+/// allocations.
+///
+/// All temporary memory is freed on the main thread in SDL_Quit() and for
+/// other threads when they call SDL_CleanupTLS(), which is automatically
+/// called at cleanup time for threads created using SDL_CreateThread().
+///
+/// \param mem a pointer allocated with SDL_AllocateTemporaryMemory(), or NULL
+/// to free all pending temporary allocations.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_AllocateTemporaryMemory
+///
+/// ```c
+/// extern SDL_DECLSPEC void SDLCALL SDL_FreeTemporaryMemory(const void *mem)
+/// ```
+void sdlFreeTemporaryMemory(Pointer<NativeType> mem) {
+  final sdlFreeTemporaryMemoryLookupFunction = libSdl3.lookupFunction<
+      Void Function(Pointer<NativeType> mem),
+      void Function(Pointer<NativeType> mem)>('SDL_FreeTemporaryMemory');
+  return sdlFreeTemporaryMemoryLookupFunction(mem);
 }

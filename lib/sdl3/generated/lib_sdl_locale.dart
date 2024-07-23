@@ -40,18 +40,23 @@ import 'struct_sdl.dart';
 /// if possible, and you can call this function again to get an updated copy of
 /// preferred locales.
 ///
-/// \returns array of locales, terminated with a locale with a NULL language
-/// field. Will return NULL on error; call SDL_GetError() for more
-/// information.
+/// This returns temporary memory which will be automatically freed later, and
+/// can be claimed with SDL_ClaimTemporaryMemory().
+///
+/// \param count a pointer filled in with the number of locales returned, may
+/// be NULL.
+/// \returns a NULL terminated array of locale pointers, or NULL on failure;
+/// call SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_Locale * SDLCALL SDL_GetPreferredLocales(void)
+/// extern SDL_DECLSPEC const SDL_Locale * const * SDLCALL SDL_GetPreferredLocales(int *count)
 /// ```
-Pointer<SdlLocale> sdlGetPreferredLocales() {
+Pointer<Pointer<SdlLocale>> sdlGetPreferredLocales(Pointer<Int32> count) {
   final sdlGetPreferredLocalesLookupFunction = libSdl3.lookupFunction<
-      Pointer<SdlLocale> Function(),
-      Pointer<SdlLocale> Function()>('SDL_GetPreferredLocales');
-  return sdlGetPreferredLocalesLookupFunction();
+      Pointer<Pointer<SdlLocale>> Function(Pointer<Int32> count),
+      Pointer<Pointer<SdlLocale>> Function(
+          Pointer<Int32> count)>('SDL_GetPreferredLocales');
+  return sdlGetPreferredLocalesLookupFunction(count);
 }

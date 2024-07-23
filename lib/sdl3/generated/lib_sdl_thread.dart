@@ -142,7 +142,7 @@ Pointer<SdlThread> sdlCreateThreadWithProperties(int props) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_Thread *SDLCALL SDL_CreateThreadRuntime(SDL_ThreadFunction fn, const char *name, void *data, SDL_FunctionPointer pfnBeginThread, SDL_FunctionPointer pfnEndThread)
+/// extern SDL_DECLSPEC SDL_Thread * SDLCALL SDL_CreateThreadRuntime(SDL_ThreadFunction fn, const char *name, void *data, SDL_FunctionPointer pfnBeginThread, SDL_FunctionPointer pfnEndThread)
 /// ```
 Pointer<SdlThread> sdlCreateThreadRuntime(
     Pointer<NativeFunction<SdlThreadFunction>> fn,
@@ -183,7 +183,7 @@ Pointer<SdlThread> sdlCreateThreadRuntime(
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_Thread *SDLCALL SDL_CreateThreadWithPropertiesRuntime(SDL_PropertiesID props, SDL_FunctionPointer pfnBeginThread, SDL_FunctionPointer pfnEndThread)
+/// extern SDL_DECLSPEC SDL_Thread * SDLCALL SDL_CreateThreadWithPropertiesRuntime(SDL_PropertiesID props, SDL_FunctionPointer pfnBeginThread, SDL_FunctionPointer pfnEndThread)
 /// ```
 Pointer<SdlThread> sdlCreateThreadWithPropertiesRuntime(int props,
     Pointer<NativeType> pfnBeginThread, Pointer<NativeType> pfnEndThread) {
@@ -205,7 +205,8 @@ Pointer<SdlThread> sdlCreateThreadWithPropertiesRuntime(int props,
 ///
 /// Get the thread name as it was specified in SDL_CreateThread().
 ///
-/// The returned string follows the SDL_GetStringRule.
+/// This returns temporary memory which will be automatically freed later, and
+/// can be claimed with SDL_ClaimTemporaryMemory().
 ///
 /// \param thread the thread to query.
 /// \returns a pointer to a UTF-8 string that names the specified thread, or
@@ -214,7 +215,7 @@ Pointer<SdlThread> sdlCreateThreadWithPropertiesRuntime(int props,
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC const char *SDLCALL SDL_GetThreadName(SDL_Thread *thread)
+/// extern SDL_DECLSPEC const char * SDLCALL SDL_GetThreadName(SDL_Thread *thread)
 /// ```
 String? sdlGetThreadName(Pointer<SdlThread> thread) {
   final sdlGetThreadNameLookupFunction = libSdl3.lookupFunction<
@@ -269,7 +270,7 @@ int sdlGetCurrentThreadId() {
 /// \sa SDL_GetCurrentThreadID
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_ThreadID SDLCALL SDL_GetThreadID(SDL_Thread * thread)
+/// extern SDL_DECLSPEC SDL_ThreadID SDLCALL SDL_GetThreadID(SDL_Thread *thread)
 /// ```
 int sdlGetThreadId(Pointer<SdlThread> thread) {
   final sdlGetThreadIdLookupFunction = libSdl3.lookupFunction<
@@ -335,7 +336,7 @@ int sdlSetThreadPriority(int priority) {
 /// \sa SDL_DetachThread
 ///
 /// ```c
-/// extern SDL_DECLSPEC void SDLCALL SDL_WaitThread(SDL_Thread * thread, int *status)
+/// extern SDL_DECLSPEC void SDLCALL SDL_WaitThread(SDL_Thread *thread, int *status)
 /// ```
 void sdlWaitThread(Pointer<SdlThread> thread, Pointer<Int32> status) {
   final sdlWaitThreadLookupFunction = libSdl3.lookupFunction<
@@ -380,7 +381,7 @@ void sdlWaitThread(Pointer<SdlThread> thread, Pointer<Int32> status) {
 /// \sa SDL_WaitThread
 ///
 /// ```c
-/// extern SDL_DECLSPEC void SDLCALL SDL_DetachThread(SDL_Thread * thread)
+/// extern SDL_DECLSPEC void SDLCALL SDL_DetachThread(SDL_Thread *thread)
 /// ```
 void sdlDetachThread(Pointer<SdlThread> thread) {
   final sdlDetachThreadLookupFunction = libSdl3.lookupFunction<
@@ -390,50 +391,34 @@ void sdlDetachThread(Pointer<SdlThread> thread) {
 }
 
 ///
-/// Create a piece of thread-local storage.
-///
-/// This creates an identifier that is globally visible to all threads but
-/// refers to data that is thread-specific.
-///
-/// \returns the newly created thread local storage identifier or 0 on error.
-///
-/// \since This function is available since SDL 3.0.0.
-///
-/// \sa SDL_GetTLS
-/// \sa SDL_SetTLS
-///
-/// ```c
-/// extern SDL_DECLSPEC SDL_TLSID SDLCALL SDL_CreateTLS(void)
-/// ```
-int sdlCreateTls() {
-  final sdlCreateTlsLookupFunction = libSdl3
-      .lookupFunction<Uint32 Function(), int Function()>('SDL_CreateTLS');
-  return sdlCreateTlsLookupFunction();
-}
-
-///
 /// Get the current thread's value associated with a thread local storage ID.
 ///
-/// \param id the thread local storage ID.
+/// \param id a pointer to the thread local storage ID, may not be NULL.
 /// \returns the value associated with the ID for the current thread or NULL if
 /// no value has been set; call SDL_GetError() for more information.
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_SetTLS
 ///
 /// ```c
-/// extern SDL_DECLSPEC void * SDLCALL SDL_GetTLS(SDL_TLSID id)
+/// extern SDL_DECLSPEC void * SDLCALL SDL_GetTLS(SDL_TLSID *id)
 /// ```
-Pointer<NativeType> sdlGetTls(int id) {
+Pointer<NativeType> sdlGetTls(Pointer<SdlAtomicInt> id) {
   final sdlGetTlsLookupFunction = libSdl3.lookupFunction<
-      Pointer<NativeType> Function(Uint32 id),
-      Pointer<NativeType> Function(int id)>('SDL_GetTLS');
+      Pointer<NativeType> Function(Pointer<SdlAtomicInt> id),
+      Pointer<NativeType> Function(Pointer<SdlAtomicInt> id)>('SDL_GetTLS');
   return sdlGetTlsLookupFunction(id);
 }
 
 ///
 /// Set the current thread's value associated with a thread local storage ID.
+///
+/// If the thread local storage ID is not initialized (the value is 0), a new
+/// ID will be created in a thread-safe way, so all calls using a pointer to
+/// the same ID will refer to the same local storage.
 ///
 /// Note that replacing a value from a previous call to this function on the
 /// same thread does _not_ call the previous value's destructor!
@@ -441,31 +426,40 @@ Pointer<NativeType> sdlGetTls(int id) {
 /// `destructor` can be NULL; it is assumed that `value` does not need to be
 /// cleaned up if so.
 ///
-/// \param id the thread local storage ID.
+/// \param id a pointer to the thread local storage ID, may not be NULL.
 /// \param value the value to associate with the ID for the current thread.
 /// \param destructor a function called when the thread exits, to free the
-/// value. Can be NULL.
+/// value, may be NULL.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetTLS
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_SetTLS(SDL_TLSID id, const void *value, SDL_TLSDestructorCallback destructor)
+/// extern SDL_DECLSPEC int SDLCALL SDL_SetTLS(SDL_TLSID *id, const void *value, SDL_TLSDestructorCallback destructor)
 /// ```
-int sdlSetTls(int id, Pointer<NativeType> value, Pointer<NativeType> deor) {
+int sdlSetTls(Pointer<SdlAtomicInt> id, Pointer<NativeType> value,
+    Pointer<NativeType> deor) {
   final sdlSetTlsLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(
-          Uint32 id, Pointer<NativeType> value, Pointer<NativeType> deor),
-      int Function(int id, Pointer<NativeType> value,
+      Int32 Function(Pointer<SdlAtomicInt> id, Pointer<NativeType> value,
+          Pointer<NativeType> deor),
+      int Function(Pointer<SdlAtomicInt> id, Pointer<NativeType> value,
           Pointer<NativeType> deor)>('SDL_SetTLS');
   return sdlSetTlsLookupFunction(id, value, deor);
 }
 
 ///
 /// Cleanup all TLS data for this thread.
+///
+/// If you are creating your threads outside of SDL and then calling SDL
+/// functions, you should call this function before your thread exits, to
+/// properly clean up SDL memory.
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///

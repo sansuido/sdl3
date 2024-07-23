@@ -46,13 +46,13 @@ void sdlSetWindowsMessageHook(
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_Direct3D9GetAdapterIndex(SDL_DisplayID displayID)
+/// extern SDL_DECLSPEC int SDLCALL SDL_GetDirect3D9AdapterIndex(SDL_DisplayID displayID)
 /// ```
-int sdlDirect3D9GetAdapterIndex(int displayId) {
-  final sdlDirect3D9GetAdapterIndexLookupFunction = libSdl3.lookupFunction<
+int sdlGetDirect3D9AdapterIndex(int displayId) {
+  final sdlGetDirect3D9AdapterIndexLookupFunction = libSdl3.lookupFunction<
       Int32 Function(Uint32 displayId),
-      int Function(int displayId)>('SDL_Direct3D9GetAdapterIndex');
-  return sdlDirect3D9GetAdapterIndexLookupFunction(displayId);
+      int Function(int displayId)>('SDL_GetDirect3D9AdapterIndex');
+  return sdlGetDirect3D9AdapterIndexLookupFunction(displayId);
 }
 
 ///
@@ -65,24 +65,23 @@ int sdlDirect3D9GetAdapterIndex(int displayId) {
 /// \param displayID the instance of the display to query.
 /// \param adapterIndex a pointer to be filled in with the adapter index.
 /// \param outputIndex a pointer to be filled in with the output index.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns 0 on success or a negative error code on failure; call
+/// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_DXGIGetOutputInfo(SDL_DisplayID displayID, int *adapterIndex, int *outputIndex)
+/// extern SDL_DECLSPEC int SDLCALL SDL_GetDXGIOutputInfo(SDL_DisplayID displayID, int *adapterIndex, int *outputIndex)
 /// ```
-bool sdlDxgiGetOutputInfo(
+int sdlGetDxgiOutputInfo(
     int displayId, Pointer<Int32> adapterIndex, Pointer<Int32> outputIndex) {
-  final sdlDxgiGetOutputInfoLookupFunction = libSdl3.lookupFunction<
+  final sdlGetDxgiOutputInfoLookupFunction = libSdl3.lookupFunction<
       Int32 Function(Uint32 displayId, Pointer<Int32> adapterIndex,
           Pointer<Int32> outputIndex),
       int Function(int displayId, Pointer<Int32> adapterIndex,
-          Pointer<Int32> outputIndex)>('SDL_DXGIGetOutputInfo');
-  return sdlDxgiGetOutputInfoLookupFunction(
-          displayId, adapterIndex, outputIndex) ==
-      1;
+          Pointer<Int32> outputIndex)>('SDL_GetDXGIOutputInfo');
+  return sdlGetDxgiOutputInfoLookupFunction(
+      displayId, adapterIndex, outputIndex);
 }
 
 ///
@@ -117,18 +116,19 @@ void sdlSetX11EventHook(Pointer<NativeFunction<SdlX11EventHook>> callback,
 ///
 /// \param threadID the Unix thread ID to change priority of.
 /// \param priority the new, Unix-specific, priority value.
-/// \returns 0 on success, or -1 on error.
+/// \returns 0 on success or a negative error code on failure; call
+/// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_LinuxSetThreadPriority(Sint64 threadID, int priority)
+/// extern SDL_DECLSPEC int SDLCALL SDL_SetLinuxThreadPriority(Sint64 threadID, int priority)
 /// ```
-int sdlLinuxSetThreadPriority(int threadId, int priority) {
-  final sdlLinuxSetThreadPriorityLookupFunction = libSdl3.lookupFunction<
+int sdlSetLinuxThreadPriority(int threadId, int priority) {
+  final sdlSetLinuxThreadPriorityLookupFunction = libSdl3.lookupFunction<
       Int32 Function(Int64 threadId, Int32 priority),
-      int Function(int threadId, int priority)>('SDL_LinuxSetThreadPriority');
-  return sdlLinuxSetThreadPriorityLookupFunction(threadId, priority);
+      int Function(int threadId, int priority)>('SDL_SetLinuxThreadPriority');
+  return sdlSetLinuxThreadPriorityLookupFunction(threadId, priority);
 }
 
 ///
@@ -146,16 +146,16 @@ int sdlLinuxSetThreadPriority(int threadId, int priority) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_LinuxSetThreadPriorityAndPolicy(Sint64 threadID, int sdlPriority, int schedPolicy)
+/// extern SDL_DECLSPEC int SDLCALL SDL_SetLinuxThreadPriorityAndPolicy(Sint64 threadID, int sdlPriority, int schedPolicy)
 /// ```
-int sdlLinuxSetThreadPriorityAndPolicy(
+int sdlSetLinuxThreadPriorityAndPolicy(
     int threadId, int sdlPriority, int schedPolicy) {
-  final sdlLinuxSetThreadPriorityAndPolicyLookupFunction =
+  final sdlSetLinuxThreadPriorityAndPolicyLookupFunction =
       libSdl3.lookupFunction<
           Int32 Function(Int64 threadId, Int32 sdlPriority, Int32 schedPolicy),
           int Function(int threadId, int sdlPriority,
-              int schedPolicy)>('SDL_LinuxSetThreadPriorityAndPolicy');
-  return sdlLinuxSetThreadPriorityAndPolicyLookupFunction(
+              int schedPolicy)>('SDL_SetLinuxThreadPriorityAndPolicy');
+  return sdlSetLinuxThreadPriorityAndPolicyLookupFunction(
       threadId, sdlPriority, schedPolicy);
 }
 
@@ -165,11 +165,11 @@ int sdlLinuxSetThreadPriorityAndPolicy(
 /// The function prototype for `callback` is:
 ///
 /// ```c
-/// void callback(void* callbackParam);
+/// void callback(void *callbackParam);
 /// ```
 ///
 /// Where its parameter, `callbackParam`, is what was passed as `callbackParam`
-/// to SDL_iOSSetAnimationCallback().
+/// to SDL_SetiOSAnimationCallback().
 ///
 /// This function is only available on Apple iOS.
 ///
@@ -194,17 +194,17 @@ int sdlLinuxSetThreadPriorityAndPolicy(
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_iOSSetEventPump
+/// \sa SDL_SetiOSEventPump
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_iOSSetAnimationCallback(SDL_Window * window, int interval, SDL_iOSAnimationCallback callback, void *callbackParam)
+/// extern SDL_DECLSPEC int SDLCALL SDL_SetiOSAnimationCallback(SDL_Window *window, int interval, SDL_iOSAnimationCallback callback, void *callbackParam)
 /// ```
-int sdlIOsSetAnimationCallback(
+int sdlSetiOsAnimationCallback(
     Pointer<SdlWindow> window,
     int interval,
     Pointer<NativeFunction<SdlIOsAnimationCallback>> callback,
     Pointer<NativeType> callbackParam) {
-  final sdlIOsSetAnimationCallbackLookupFunction = libSdl3.lookupFunction<
+  final sdlSetiOsAnimationCallbackLookupFunction = libSdl3.lookupFunction<
       Int32 Function(
           Pointer<SdlWindow> window,
           Int32 interval,
@@ -214,8 +214,8 @@ int sdlIOsSetAnimationCallback(
           Pointer<SdlWindow> window,
           int interval,
           Pointer<NativeFunction<SdlIOsAnimationCallback>> callback,
-          Pointer<NativeType> callbackParam)>('SDL_iOSSetAnimationCallback');
-  return sdlIOsSetAnimationCallbackLookupFunction(
+          Pointer<NativeType> callbackParam)>('SDL_SetiOSAnimationCallback');
+  return sdlSetiOsAnimationCallbackLookupFunction(
       window, interval, callback, callbackParam);
 }
 
@@ -228,16 +228,16 @@ int sdlIOsSetAnimationCallback(
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_iOSSetAnimationCallback
+/// \sa SDL_SetiOSAnimationCallback
 ///
 /// ```c
-/// extern SDL_DECLSPEC void SDLCALL SDL_iOSSetEventPump(SDL_bool enabled)
+/// extern SDL_DECLSPEC void SDLCALL SDL_SetiOSEventPump(SDL_bool enabled)
 /// ```
-void sdlIOsSetEventPump(bool enabled) {
-  final sdlIOsSetEventPumpLookupFunction = libSdl3.lookupFunction<
+void sdlSetiOsEventPump(bool enabled) {
+  final sdlSetiOsEventPumpLookupFunction = libSdl3.lookupFunction<
       Void Function(Int32 enabled),
-      void Function(int enabled)>('SDL_iOSSetEventPump');
-  return sdlIOsSetEventPumpLookupFunction(enabled ? 1 : 0);
+      void Function(int enabled)>('SDL_SetiOSEventPump');
+  return sdlSetiOsEventPumpLookupFunction(enabled ? 1 : 0);
 }
 
 ///
@@ -251,22 +251,23 @@ void sdlIOsSetEventPump(bool enabled) {
 /// rationale being that the SDL headers can avoid including jni.h.
 ///
 /// \returns a pointer to Java native interface object (JNIEnv) to which the
-/// current thread is attached, or 0 on error.
+/// current thread is attached, or NULL on failure; call
+/// SDL_GetError() for more information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_AndroidGetActivity
+/// \sa SDL_GetAndroidActivity
 ///
 /// ```c
-/// extern SDL_DECLSPEC void * SDLCALL SDL_AndroidGetJNIEnv(void)
+/// extern SDL_DECLSPEC void * SDLCALL SDL_GetAndroidJNIEnv(void)
 /// ```
-Pointer<NativeType> sdlAndroidGetJniEnv() {
-  final sdlAndroidGetJniEnvLookupFunction = libSdl3.lookupFunction<
+Pointer<NativeType> sdlGetAndroidJniEnv() {
+  final sdlGetAndroidJniEnvLookupFunction = libSdl3.lookupFunction<
       Pointer<NativeType> Function(),
-      Pointer<NativeType> Function()>('SDL_AndroidGetJNIEnv');
-  return sdlAndroidGetJniEnvLookupFunction();
+      Pointer<NativeType> Function()>('SDL_GetAndroidJNIEnv');
+  return sdlGetAndroidJniEnvLookupFunction();
 }
 
 ///
@@ -283,22 +284,23 @@ Pointer<NativeType> sdlAndroidGetJniEnv() {
 /// https://docs.oracle.com/javase/1.5.0/docs/guide/jni/spec/functions.html
 ///
 /// \returns the jobject representing the instance of the Activity class of the
-/// Android application, or NULL on error.
+/// Android application, or NULL on failure; call SDL_GetError() for
+/// more information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_AndroidGetJNIEnv
+/// \sa SDL_GetAndroidJNIEnv
 ///
 /// ```c
-/// extern SDL_DECLSPEC void * SDLCALL SDL_AndroidGetActivity(void)
+/// extern SDL_DECLSPEC void * SDLCALL SDL_GetAndroidActivity(void)
 /// ```
-Pointer<NativeType> sdlAndroidGetActivity() {
-  final sdlAndroidGetActivityLookupFunction = libSdl3.lookupFunction<
+Pointer<NativeType> sdlGetAndroidActivity() {
+  final sdlGetAndroidActivityLookupFunction = libSdl3.lookupFunction<
       Pointer<NativeType> Function(),
-      Pointer<NativeType> Function()>('SDL_AndroidGetActivity');
-  return sdlAndroidGetActivityLookupFunction();
+      Pointer<NativeType> Function()>('SDL_GetAndroidActivity');
+  return sdlGetAndroidActivityLookupFunction();
 }
 
 ///
@@ -400,13 +402,13 @@ bool sdlIsDeXMode() {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC void SDLCALL SDL_AndroidBackButton(void)
+/// extern SDL_DECLSPEC void SDLCALL SDL_SendAndroidBackButton(void)
 /// ```
-void sdlAndroidBackButton() {
-  final sdlAndroidBackButtonLookupFunction =
+void sdlSendAndroidBackButton() {
+  final sdlSendAndroidBackButtonLookupFunction =
       libSdl3.lookupFunction<Void Function(), void Function()>(
-          'SDL_AndroidBackButton');
-  return sdlAndroidBackButtonLookupFunction();
+          'SDL_SendAndroidBackButton');
+  return sdlSendAndroidBackButtonLookupFunction();
 }
 
 ///
@@ -422,23 +424,24 @@ void sdlAndroidBackButton() {
 ///
 /// https://developer.android.com/reference/android/content/Context#getFilesDir()
 ///
-/// The returned string follows the SDL_GetStringRule.
+/// This returns temporary memory which will be automatically freed later, and
+/// can be claimed with SDL_ClaimTemporaryMemory().
 ///
 /// \returns the path used for internal storage or NULL on failure; call
 /// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_AndroidGetExternalStorageState
+/// \sa SDL_GetAndroidExternalStorageState
 ///
 /// ```c
-/// extern SDL_DECLSPEC const char *SDLCALL SDL_AndroidGetInternalStoragePath(void)
+/// extern SDL_DECLSPEC const char * SDLCALL SDL_GetAndroidInternalStoragePath(void)
 /// ```
-String? sdlAndroidGetInternalStoragePath() {
-  final sdlAndroidGetInternalStoragePathLookupFunction = libSdl3.lookupFunction<
+String? sdlGetAndroidInternalStoragePath() {
+  final sdlGetAndroidInternalStoragePathLookupFunction = libSdl3.lookupFunction<
       Pointer<Utf8> Function(),
-      Pointer<Utf8> Function()>('SDL_AndroidGetInternalStoragePath');
-  final result = sdlAndroidGetInternalStoragePathLookupFunction();
+      Pointer<Utf8> Function()>('SDL_GetAndroidInternalStoragePath');
+  final result = sdlGetAndroidInternalStoragePathLookupFunction();
   if (result == nullptr) {
     return null;
   }
@@ -453,25 +456,21 @@ String? sdlAndroidGetInternalStoragePath() {
 ///
 /// If external storage is currently unavailable, this will return 0.
 ///
-/// \param state filled with the current state of external storage. 0 if
-/// external storage is currently unavailable.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns the current state of external storage, or 0 if external storage is
+/// currently unavailable.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_AndroidGetExternalStoragePath
+/// \sa SDL_GetAndroidExternalStoragePath
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_AndroidGetExternalStorageState(Uint32 *state)
+/// extern SDL_DECLSPEC Uint32 SDLCALL SDL_GetAndroidExternalStorageState(void)
 /// ```
-int sdlAndroidGetExternalStorageState(Pointer<Uint32> state) {
-  final sdlAndroidGetExternalStorageStateLookupFunction =
-      libSdl3.lookupFunction<
-          Int32 Function(Pointer<Uint32> state),
-          int Function(
-              Pointer<Uint32> state)>('SDL_AndroidGetExternalStorageState');
-  return sdlAndroidGetExternalStorageStateLookupFunction(state);
+int sdlGetAndroidExternalStorageState() {
+  final sdlGetAndroidExternalStorageStateLookupFunction =
+      libSdl3.lookupFunction<Uint32 Function(), int Function()>(
+          'SDL_GetAndroidExternalStorageState');
+  return sdlGetAndroidExternalStorageStateLookupFunction();
 }
 
 ///
@@ -487,23 +486,24 @@ int sdlAndroidGetExternalStorageState(Pointer<Uint32> state) {
 ///
 /// https://developer.android.com/reference/android/content/Context#getExternalFilesDir()
 ///
-/// The returned string follows the SDL_GetStringRule.
+/// This returns temporary memory which will be automatically freed later, and
+/// can be claimed with SDL_ClaimTemporaryMemory().
 ///
 /// \returns the path used for external storage for this application on success
 /// or NULL on failure; call SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_AndroidGetExternalStorageState
+/// \sa SDL_GetAndroidExternalStorageState
 ///
 /// ```c
-/// extern SDL_DECLSPEC const char * SDLCALL SDL_AndroidGetExternalStoragePath(void)
+/// extern SDL_DECLSPEC const char * SDLCALL SDL_GetAndroidExternalStoragePath(void)
 /// ```
-String? sdlAndroidGetExternalStoragePath() {
-  final sdlAndroidGetExternalStoragePathLookupFunction = libSdl3.lookupFunction<
+String? sdlGetAndroidExternalStoragePath() {
+  final sdlGetAndroidExternalStoragePathLookupFunction = libSdl3.lookupFunction<
       Pointer<Utf8> Function(),
-      Pointer<Utf8> Function()>('SDL_AndroidGetExternalStoragePath');
-  final result = sdlAndroidGetExternalStoragePathLookupFunction();
+      Pointer<Utf8> Function()>('SDL_GetAndroidExternalStoragePath');
+  final result = sdlGetAndroidExternalStoragePathLookupFunction();
   if (result == nullptr) {
     return null;
   }
@@ -522,7 +522,8 @@ String? sdlAndroidGetExternalStoragePath() {
 ///
 /// https://developer.android.com/reference/android/content/Context#getCacheDir()
 ///
-/// The returned string follows the SDL_GetStringRule.
+/// This returns temporary memory which will be automatically freed later, and
+/// can be claimed with SDL_ClaimTemporaryMemory().
 ///
 /// \returns the path used for caches for this application on success or NULL
 /// on failure; call SDL_GetError() for more information.
@@ -530,13 +531,13 @@ String? sdlAndroidGetExternalStoragePath() {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC const char * SDLCALL SDL_AndroidGetCachePath(void)
+/// extern SDL_DECLSPEC const char * SDLCALL SDL_GetAndroidCachePath(void)
 /// ```
-String? sdlAndroidGetCachePath() {
-  final sdlAndroidGetCachePathLookupFunction = libSdl3.lookupFunction<
+String? sdlGetAndroidCachePath() {
+  final sdlGetAndroidCachePathLookupFunction = libSdl3.lookupFunction<
       Pointer<Utf8> Function(),
-      Pointer<Utf8> Function()>('SDL_AndroidGetCachePath');
-  final result = sdlAndroidGetCachePathLookupFunction();
+      Pointer<Utf8> Function()>('SDL_GetAndroidCachePath');
+  final result = sdlGetAndroidCachePathLookupFunction();
   if (result == nullptr) {
     return null;
   }
@@ -574,24 +575,24 @@ String? sdlAndroidGetCachePath() {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_AndroidRequestPermission(const char *permission, SDL_AndroidRequestPermissionCallback cb, void *userdata)
+/// extern SDL_DECLSPEC int SDLCALL SDL_RequestAndroidPermission(const char *permission, SDL_RequestAndroidPermissionCallback cb, void *userdata)
 /// ```
-int sdlAndroidRequestPermission(
+int sdlRequestAndroidPermission(
     String? permission,
-    Pointer<NativeFunction<SdlAndroidRequestPermissionCallback>> cb,
+    Pointer<NativeFunction<SdlRequestAndroidPermissionCallback>> cb,
     Pointer<NativeType> userdata) {
-  final sdlAndroidRequestPermissionLookupFunction = libSdl3.lookupFunction<
+  final sdlRequestAndroidPermissionLookupFunction = libSdl3.lookupFunction<
       Int32 Function(
           Pointer<Utf8> permission,
-          Pointer<NativeFunction<SdlAndroidRequestPermissionCallback>> cb,
+          Pointer<NativeFunction<SdlRequestAndroidPermissionCallback>> cb,
           Pointer<NativeType> userdata),
       int Function(
           Pointer<Utf8> permission,
-          Pointer<NativeFunction<SdlAndroidRequestPermissionCallback>> cb,
-          Pointer<NativeType> userdata)>('SDL_AndroidRequestPermission');
+          Pointer<NativeFunction<SdlRequestAndroidPermissionCallback>> cb,
+          Pointer<NativeType> userdata)>('SDL_RequestAndroidPermission');
   final permissionPointer =
       permission != null ? permission.toNativeUtf8() : nullptr;
-  final result = sdlAndroidRequestPermissionLookupFunction(
+  final result = sdlRequestAndroidPermissionLookupFunction(
       permissionPointer, cb, userdata);
   calloc.free(permissionPointer);
   return result;
@@ -624,17 +625,17 @@ int sdlAndroidRequestPermission(
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_AndroidShowToast(const char* message, int duration, int gravity, int xoffset, int yoffset)
+/// extern SDL_DECLSPEC int SDLCALL SDL_ShowAndroidToast(const char *message, int duration, int gravity, int xoffset, int yoffset)
 /// ```
-int sdlAndroidShowToast(
+int sdlShowAndroidToast(
     String? message, int duration, int gravity, int xoffset, int yoffset) {
-  final sdlAndroidShowToastLookupFunction = libSdl3.lookupFunction<
+  final sdlShowAndroidToastLookupFunction = libSdl3.lookupFunction<
       Int32 Function(Pointer<Utf8> message, Int32 duration, Int32 gravity,
           Int32 xoffset, Int32 yoffset),
       int Function(Pointer<Utf8> message, int duration, int gravity,
-          int xoffset, int yoffset)>('SDL_AndroidShowToast');
+          int xoffset, int yoffset)>('SDL_ShowAndroidToast');
   final messagePointer = message != null ? message.toNativeUtf8() : nullptr;
-  final result = sdlAndroidShowToastLookupFunction(
+  final result = sdlShowAndroidToastLookupFunction(
       messagePointer, duration, gravity, xoffset, yoffset);
   calloc.free(messagePointer);
   return result;
@@ -655,13 +656,13 @@ int sdlAndroidShowToast(
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_AndroidSendMessage(Uint32 command, int param)
+/// extern SDL_DECLSPEC int SDLCALL SDL_SendAndroidMessage(Uint32 command, int param)
 /// ```
-int sdlAndroidSendMessage(int command, int param) {
-  final sdlAndroidSendMessageLookupFunction = libSdl3.lookupFunction<
+int sdlSendAndroidMessage(int command, int param) {
+  final sdlSendAndroidMessageLookupFunction = libSdl3.lookupFunction<
       Int32 Function(Uint32 command, Int32 param),
-      int Function(int command, int param)>('SDL_AndroidSendMessage');
-  return sdlAndroidSendMessageLookupFunction(command, param);
+      int Function(int command, int param)>('SDL_SendAndroidMessage');
+  return sdlSendAndroidMessageLookupFunction(command, param);
 }
 
 ///
@@ -676,7 +677,8 @@ int sdlAndroidSendMessage(int command, int param) {
 ///
 /// https://msdn.microsoft.com/en-us/library/windows/apps/hh464917.aspx
 ///
-/// The returned string follows the SDL_GetStringRule.
+/// This returns temporary memory which will be automatically freed later, and
+/// can be claimed with SDL_ClaimTemporaryMemory().
 ///
 /// \param pathType the type of path to retrieve, one of SDL_WinRT_Path.
 /// \returns a UTF-8 string (8-bit, multi-byte) containing the path, or NULL if
@@ -686,13 +688,13 @@ int sdlAndroidSendMessage(int command, int param) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC const char * SDLCALL SDL_WinRTGetFSPath(SDL_WinRT_Path pathType)
+/// extern SDL_DECLSPEC const char * SDLCALL SDL_GetWinRTFSPath(SDL_WinRT_Path pathType)
 /// ```
-String? sdlWinRtGetFsPath(int pathType) {
-  final sdlWinRtGetFsPathLookupFunction = libSdl3.lookupFunction<
+String? sdlGetWinRtfsPath(int pathType) {
+  final sdlGetWinRtfsPathLookupFunction = libSdl3.lookupFunction<
       Pointer<Utf8> Function(Int32 pathType),
-      Pointer<Utf8> Function(int pathType)>('SDL_WinRTGetFSPath');
-  final result = sdlWinRtGetFsPathLookupFunction(pathType);
+      Pointer<Utf8> Function(int pathType)>('SDL_GetWinRTFSPath');
+  final result = sdlGetWinRtfsPathLookupFunction(pathType);
   if (result == nullptr) {
     return null;
   }
@@ -707,13 +709,13 @@ String? sdlWinRtGetFsPath(int pathType) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_WinRT_DeviceFamily SDLCALL SDL_WinRTGetDeviceFamily()
+/// extern SDL_DECLSPEC SDL_WinRT_DeviceFamily SDLCALL SDL_GetWinRTDeviceFamily()
 /// ```
-int sdlWinRtGetDeviceFamily() {
-  final sdlWinRtGetDeviceFamilyLookupFunction =
+int sdlGetWinRtDeviceFamily() {
+  final sdlGetWinRtDeviceFamilyLookupFunction =
       libSdl3.lookupFunction<Int32 Function(), int Function()>(
-          'SDL_WinRTGetDeviceFamily');
-  return sdlWinRtGetDeviceFamilyLookupFunction();
+          'SDL_GetWinRTDeviceFamily');
+  return sdlGetWinRtDeviceFamilyLookupFunction();
 }
 
 ///
@@ -924,14 +926,14 @@ void sdlOnApplicationDidChangeStatusBarOrientation() {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_GDKGetTaskQueue(XTaskQueueHandle * outTaskQueue)
+/// extern SDL_DECLSPEC int SDLCALL SDL_GetGDKTaskQueue(XTaskQueueHandle *outTaskQueue)
 /// ```
-int sdlGdkGetTaskQueue(Pointer<XTaskQueueHandle> outTaskQueue) {
-  final sdlGdkGetTaskQueueLookupFunction = libSdl3.lookupFunction<
+int sdlGetGdkTaskQueue(Pointer<XTaskQueueHandle> outTaskQueue) {
+  final sdlGetGdkTaskQueueLookupFunction = libSdl3.lookupFunction<
       Int32 Function(Pointer<XTaskQueueHandle> outTaskQueue),
       int Function(
-          Pointer<XTaskQueueHandle> outTaskQueue)>('SDL_GDKGetTaskQueue');
-  return sdlGdkGetTaskQueueLookupFunction(outTaskQueue);
+          Pointer<XTaskQueueHandle> outTaskQueue)>('SDL_GetGDKTaskQueue');
+  return sdlGetGdkTaskQueueLookupFunction(outTaskQueue);
 }
 
 ///
@@ -942,17 +944,18 @@ int sdlGdkGetTaskQueue(Pointer<XTaskQueueHandle> outTaskQueue) {
 ///
 /// \param outUserHandle a pointer to be filled in with the default user
 /// handle.
-/// \returns 0 if success, -1 if any error occurs.
+/// \returns 0 if success or a negative error code on failure; call
+/// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_GDKGetDefaultUser(XUserHandle * outUserHandle)
+/// extern SDL_DECLSPEC int SDLCALL SDL_GetGDKDefaultUser(XUserHandle *outUserHandle)
 /// ```
-int sdlGdkGetDefaultUser(Pointer<XUserHandle> outUserHandle) {
-  final sdlGdkGetDefaultUserLookupFunction = libSdl3.lookupFunction<
+int sdlGetGdkDefaultUser(Pointer<XUserHandle> outUserHandle) {
+  final sdlGetGdkDefaultUserLookupFunction = libSdl3.lookupFunction<
       Int32 Function(Pointer<XUserHandle> outUserHandle),
       int Function(
-          Pointer<XUserHandle> outUserHandle)>('SDL_GDKGetDefaultUser');
-  return sdlGdkGetDefaultUserLookupFunction(outUserHandle);
+          Pointer<XUserHandle> outUserHandle)>('SDL_GetGDKDefaultUser');
+  return sdlGetGdkDefaultUserLookupFunction(outUserHandle);
 }

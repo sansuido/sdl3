@@ -13,14 +13,14 @@ import 'struct_sdl.dart';
 ///
 /// \param count the number of pens in the array (number of array elements
 /// minus 1, i.e., not counting the terminator 0).
-/// \returns a 0 terminated array of SDL_PenID values, or NULL on error. The
+/// \returns a 0 terminated array of SDL_PenID values, or NULL on failure. The
 /// array must be freed with SDL_free(). On a NULL return,
 /// SDL_GetError() is set.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_PenID *SDLCALL SDL_GetPens(int *count)
+/// extern SDL_DECLSPEC SDL_PenID * SDLCALL SDL_GetPens(int *count)
 /// ```
 Pointer<Uint32> sdlGetPens(Pointer<Int32> count) {
   final sdlGetPensLookupFunction = libSdl3.lookupFunction<
@@ -124,7 +124,8 @@ bool sdlPenConnected(int instanceId) {
 ///
 /// Retrieves a human-readable description for a SDL_PenID.
 ///
-/// The returned string follows the SDL_GetStringRule.
+/// This returns temporary memory which will be automatically freed later, and
+/// can be claimed with SDL_ClaimTemporaryMemory().
 ///
 /// \param instance_id the pen to query.
 /// \returns a string that contains the name of the pen, intended for human
@@ -138,7 +139,7 @@ bool sdlPenConnected(int instanceId) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC const char *SDLCALL SDL_GetPenName(SDL_PenID instance_id)
+/// extern SDL_DECLSPEC const char * SDLCALL SDL_GetPenName(SDL_PenID instance_id)
 /// ```
 String? sdlGetPenName(int instanceId) {
   final sdlGetPenNameLookupFunction = libSdl3.lookupFunction<

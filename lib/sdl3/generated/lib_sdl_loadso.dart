@@ -7,8 +7,8 @@ import 'lib_sdl.dart';
 /// Dynamically load a shared object.
 ///
 /// \param sofile a system-dependent name of the object file.
-/// \returns an opaque pointer to the object handle or NULL if there was an
-/// error; call SDL_GetError() for more information.
+/// \returns an opaque pointer to the object handle or NULL on failure; call
+/// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -16,7 +16,7 @@ import 'lib_sdl.dart';
 /// \sa SDL_UnloadObject
 ///
 /// ```c
-/// extern SDL_DECLSPEC void *SDLCALL SDL_LoadObject(const char *sofile)
+/// extern SDL_DECLSPEC void * SDLCALL SDL_LoadObject(const char *sofile)
 /// ```
 Pointer<NativeType> sdlLoadObject(String? sofile) {
   final sdlLoadObjectLookupFunction = libSdl3.lookupFunction<
@@ -45,8 +45,8 @@ Pointer<NativeType> sdlLoadObject(String? sofile) {
 ///
 /// \param handle a valid shared object handle returned by SDL_LoadObject().
 /// \param name the name of the function to look up.
-/// \returns a pointer to the function or NULL if there was an error; call
-/// SDL_GetError() for more information.
+/// \returns a pointer to the function or NULL on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
