@@ -306,6 +306,7 @@ Pointer<NativeType> sdlGetAndroidActivity() {
 ///
 /// Query Android API level of the current device.
 ///
+/// - API level 35: Android 15 (VANILLA_ICE_CREAM)
 /// - API level 34: Android 14 (UPSIDE_DOWN_CAKE)
 /// - API level 33: Android 13 (TIRAMISU)
 /// - API level 32: Android 12L (S_V2)
@@ -424,9 +425,6 @@ void sdlSendAndroidBackButton() {
 ///
 /// https://developer.android.com/reference/android/content/Context#getFilesDir()
 ///
-/// This returns temporary memory which will be automatically freed later, and
-/// can be claimed with SDL_ClaimTemporaryMemory().
-///
 /// \returns the path used for internal storage or NULL on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -486,9 +484,6 @@ int sdlGetAndroidExternalStorageState() {
 ///
 /// https://developer.android.com/reference/android/content/Context#getExternalFilesDir()
 ///
-/// This returns temporary memory which will be automatically freed later, and
-/// can be claimed with SDL_ClaimTemporaryMemory().
-///
 /// \returns the path used for external storage for this application on success
 /// or NULL on failure; call SDL_GetError() for more information.
 ///
@@ -521,9 +516,6 @@ String? sdlGetAndroidExternalStoragePath() {
 /// This is a C wrapper over `android.content.Context.getCacheDir()`:
 ///
 /// https://developer.android.com/reference/android/content/Context#getCacheDir()
-///
-/// This returns temporary memory which will be automatically freed later, and
-/// can be claimed with SDL_ClaimTemporaryMemory().
 ///
 /// \returns the path used for caches for this application on success or NULL
 /// on failure; call SDL_GetError() for more information.
@@ -677,9 +669,6 @@ int sdlSendAndroidMessage(int command, int param) {
 ///
 /// https://msdn.microsoft.com/en-us/library/windows/apps/hh464917.aspx
 ///
-/// This returns temporary memory which will be automatically freed later, and
-/// can be claimed with SDL_ClaimTemporaryMemory().
-///
 /// \param pathType the type of path to retrieve, one of SDL_WinRT_Path.
 /// \returns a UTF-8 string (8-bit, multi-byte) containing the path, or NULL if
 /// the path is not available for any reason; call SDL_GetError() for
@@ -802,13 +791,13 @@ void sdlOnApplicationDidReceiveMemoryWarning() {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC void SDLCALL SDL_OnApplicationWillResignActive(void)
+/// extern SDL_DECLSPEC void SDLCALL SDL_OnApplicationWillEnterBackground(void)
 /// ```
-void sdlOnApplicationWillResignActive() {
-  final sdlOnApplicationWillResignActiveLookupFunction =
+void sdlOnApplicationWillEnterBackground() {
+  final sdlOnApplicationWillEnterBackgroundLookupFunction =
       libSdl3.lookupFunction<Void Function(), void Function()>(
-          'SDL_OnApplicationWillResignActive');
-  return sdlOnApplicationWillResignActiveLookupFunction();
+          'SDL_OnApplicationWillEnterBackground');
+  return sdlOnApplicationWillEnterBackgroundLookupFunction();
 }
 
 ///
@@ -877,13 +866,13 @@ void sdlOnApplicationWillEnterForeground() {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC void SDLCALL SDL_OnApplicationDidBecomeActive(void)
+/// extern SDL_DECLSPEC void SDLCALL SDL_OnApplicationDidEnterForeground(void)
 /// ```
-void sdlOnApplicationDidBecomeActive() {
-  final sdlOnApplicationDidBecomeActiveLookupFunction =
+void sdlOnApplicationDidEnterForeground() {
+  final sdlOnApplicationDidEnterForegroundLookupFunction =
       libSdl3.lookupFunction<Void Function(), void Function()>(
-          'SDL_OnApplicationDidBecomeActive');
-  return sdlOnApplicationDidBecomeActiveLookupFunction();
+          'SDL_OnApplicationDidEnterForeground');
+  return sdlOnApplicationDidEnterForegroundLookupFunction();
 }
 
 ///

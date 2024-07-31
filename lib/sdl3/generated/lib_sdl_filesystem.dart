@@ -34,9 +34,6 @@ import 'struct_sdl.dart';
 /// The returned path is guaranteed to end with a path separator ('\\' on
 /// Windows, '/' on most other platforms).
 ///
-/// This returns temporary memory which will be automatically freed later, and
-/// can be claimed with SDL_ClaimTemporaryMemory().
-///
 /// \returns an absolute path in UTF-8 encoding to the application data
 /// directory. NULL will be returned on error or when the platform
 /// doesn't implement this functionality, call SDL_GetError() for more
@@ -101,36 +98,31 @@ String? sdlGetBasePath() {
 /// The returned path is guaranteed to end with a path separator ('\\' on
 /// Windows, '/' on most other platforms).
 ///
-/// This returns temporary memory which will be automatically freed later, and
-/// can be claimed with SDL_ClaimTemporaryMemory().
-///
 /// \param org the name of your organization.
 /// \param app the name of your application.
 /// \returns a UTF-8 string of the user directory in platform-dependent
 /// notation. NULL if there's a problem (creating directory failed,
-/// etc.).
+/// etc.). This should be freed with SDL_free() when it is no longer
+/// needed.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetBasePath
 ///
 /// ```c
-/// extern SDL_DECLSPEC const char * SDLCALL SDL_GetPrefPath(const char *org, const char *app)
+/// extern SDL_DECLSPEC_FREE char * SDLCALL SDL_GetPrefPath(const char *org, const char *app)
 /// ```
-String? sdlGetPrefPath(String? org, String? app) {
+Pointer<Int8> sdlGetPrefPath(String? org, String? app) {
   final sdlGetPrefPathLookupFunction = libSdl3.lookupFunction<
-      Pointer<Utf8> Function(Pointer<Utf8> org, Pointer<Utf8> app),
-      Pointer<Utf8> Function(
+      Pointer<Int8> Function(Pointer<Utf8> org, Pointer<Utf8> app),
+      Pointer<Int8> Function(
           Pointer<Utf8> org, Pointer<Utf8> app)>('SDL_GetPrefPath');
   final orgPointer = org != null ? org.toNativeUtf8() : nullptr;
   final appPointer = app != null ? app.toNativeUtf8() : nullptr;
   final result = sdlGetPrefPathLookupFunction(orgPointer, appPointer);
   calloc.free(orgPointer);
   calloc.free(appPointer);
-  if (result == nullptr) {
-    return null;
-  }
-  return result.toDartString();
+  return result;
 }
 
 ///
@@ -147,9 +139,6 @@ String? sdlGetPrefPath(String? org, String? app) {
 ///
 /// The returned path is guaranteed to end with a path separator ('\\' on
 /// Windows, '/' on most other platforms).
-///
-/// This returns temporary memory which will be automatically freed later, and
-/// can be claimed with SDL_ClaimTemporaryMemory().
 ///
 /// If NULL is returned, the error may be obtained with SDL_GetError().
 ///
@@ -282,6 +271,32 @@ int sdlRenamePath(String? oldpath, String? newpath) {
 }
 
 ///
+/// Copy a file.
+///
+/// \param oldpath the old path.
+/// \param newpath the new path.
+/// \returns 0 on success or a negative error code on failure; call
+/// SDL_GetError() for more information.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC int SDLCALL SDL_CopyFile(const char *oldpath, const char *newpath)
+/// ```
+int sdlCopyFile(String? oldpath, String? newpath) {
+  final sdlCopyFileLookupFunction = libSdl3.lookupFunction<
+      Int32 Function(Pointer<Utf8> oldpath, Pointer<Utf8> newpath),
+      int Function(
+          Pointer<Utf8> oldpath, Pointer<Utf8> newpath)>('SDL_CopyFile');
+  final oldpathPointer = oldpath != null ? oldpath.toNativeUtf8() : nullptr;
+  final newpathPointer = newpath != null ? newpath.toNativeUtf8() : nullptr;
+  final result = sdlCopyFileLookupFunction(oldpathPointer, newpathPointer);
+  calloc.free(oldpathPointer);
+  calloc.free(newpathPointer);
+  return result;
+}
+
+///
 /// Get information about a filesystem path.
 ///
 /// \param path the path to query.
@@ -323,9 +338,6 @@ int sdlGetPathInfo(String? path, Pointer<SdlPathInfo> info) {
 /// convenience, but if `count` is non-NULL, on return it will contain the
 /// number of items in the array, not counting the NULL terminator.
 ///
-/// This returns temporary memory which will be automatically freed later, and
-/// can be claimed with SDL_ClaimTemporaryMemory().
-///
 /// \param path the path of the directory to enumerate.
 /// \param pattern the pattern that files in the directory must match. Can be
 /// NULL.
@@ -333,14 +345,15 @@ int sdlGetPathInfo(String? path, Pointer<SdlPathInfo> info) {
 /// \param count on return, will be set to the number of items in the returned
 /// array. Can be NULL.
 /// \returns an array of strings on success or NULL on failure; call
-/// SDL_GetError() for more information.
+/// SDL_GetError() for more information. This is a single allocation
+/// that should be freed with SDL_free() when it is no longer needed.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC const char * const * SDLCALL SDL_GlobDirectory(const char *path, const char *pattern, SDL_GlobFlags flags, int *count)
+/// extern SDL_DECLSPEC_FREE char ** SDLCALL SDL_GlobDirectory(const char *path, const char *pattern, SDL_GlobFlags flags, int *count)
 /// ```
 Pointer<Pointer<Int8>> sdlGlobDirectory(
     String? path, String? pattern, int flags, Pointer<Int32> count) {

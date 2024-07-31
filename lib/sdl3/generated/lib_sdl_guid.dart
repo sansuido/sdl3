@@ -7,29 +7,23 @@ import 'struct_sdl.dart';
 ///
 /// Get an ASCII string representation for a given SDL_GUID.
 ///
-/// This returns temporary memory which will be automatically freed later, and
-/// can be claimed with SDL_ClaimTemporaryMemory().
-///
 /// \param guid the SDL_GUID you wish to convert to string.
-/// \returns the string representation of the GUID or NULL on failure; call
-/// SDL_GetError() for more information.
+/// \param pszGUID buffer in which to write the ASCII string.
+/// \param cbGUID the size of pszGUID, should be at least 33 bytes.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_GUIDFromString
+/// \sa SDL_StringToGUID
 ///
 /// ```c
-/// extern SDL_DECLSPEC const char * SDLCALL SDL_GUIDToString(SDL_GUID guid)
+/// extern SDL_DECLSPEC void SDLCALL SDL_GUIDToString(SDL_GUID guid, char *pszGUID, int cbGUID)
 /// ```
-String? sdlGuidToString(SdlGuid guid) {
+void sdlGuidToString(SdlGuid guid, Pointer<Int8> pszGuid, int cbGuid) {
   final sdlGuidToStringLookupFunction = libSdl3.lookupFunction<
-      Pointer<Utf8> Function(SdlGuid guid),
-      Pointer<Utf8> Function(SdlGuid guid)>('SDL_GUIDToString');
-  final result = sdlGuidToStringLookupFunction(guid);
-  if (result == nullptr) {
-    return null;
-  }
-  return result.toDartString();
+      Void Function(SdlGuid guid, Pointer<Int8> pszGuid, Int32 cbGuid),
+      void Function(
+          SdlGuid guid, Pointer<Int8> pszGuid, int cbGuid)>('SDL_GUIDToString');
+  return sdlGuidToStringLookupFunction(guid, pszGuid, cbGuid);
 }
 
 ///
@@ -47,14 +41,14 @@ String? sdlGuidToString(SdlGuid guid) {
 /// \sa SDL_GUIDToString
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_GUID SDLCALL SDL_GUIDFromString(const char *pchGUID)
+/// extern SDL_DECLSPEC SDL_GUID SDLCALL SDL_StringToGUID(const char *pchGUID)
 /// ```
-SdlGuid sdlGuidFromString(String? pchGuid) {
-  final sdlGuidFromStringLookupFunction = libSdl3.lookupFunction<
+SdlGuid sdlStringToGuid(String? pchGuid) {
+  final sdlStringToGuidLookupFunction = libSdl3.lookupFunction<
       SdlGuid Function(Pointer<Utf8> pchGuid),
-      SdlGuid Function(Pointer<Utf8> pchGuid)>('SDL_GUIDFromString');
+      SdlGuid Function(Pointer<Utf8> pchGuid)>('SDL_StringToGUID');
   final pchGuidPointer = pchGuid != null ? pchGuid.toNativeUtf8() : nullptr;
-  final result = sdlGuidFromStringLookupFunction(pchGuidPointer);
+  final result = sdlStringToGuidLookupFunction(pchGuidPointer);
   calloc.free(pchGuidPointer);
   return result;
 }

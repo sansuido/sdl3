@@ -5,7 +5,7 @@ import 'lib_sdl.dart';
 import 'struct_sdl.dart';
 
 /// ```c
-/// extern SDL_DECLSPEC SDL_MALLOC void * SDLCALL SDL_malloc(size_t size)
+/// extern SDL_DECLSPEC_FREE SDL_MALLOC void * SDLCALL SDL_malloc(size_t size)
 /// ```
 Pointer<NativeType> sdlMalloc(int size) {
   final sdlMallocLookupFunction = libSdl3.lookupFunction<
@@ -233,16 +233,19 @@ int sdlGetNumAllocations() {
 }
 
 /// ```c
-/// extern SDL_DECLSPEC char * SDLCALL SDL_getenv(const char *name)
+/// extern SDL_DECLSPEC const char * SDLCALL SDL_getenv(const char *name)
 /// ```
-Pointer<Int8> sdlGetenv(String? name) {
+String? sdlGetenv(String? name) {
   final sdlGetenvLookupFunction = libSdl3.lookupFunction<
-      Pointer<Int8> Function(Pointer<Utf8> name),
-      Pointer<Int8> Function(Pointer<Utf8> name)>('SDL_getenv');
+      Pointer<Utf8> Function(Pointer<Utf8> name),
+      Pointer<Utf8> Function(Pointer<Utf8> name)>('SDL_getenv');
   final namePointer = name != null ? name.toNativeUtf8() : nullptr;
   final result = sdlGetenvLookupFunction(namePointer);
   calloc.free(namePointer);
-  return result;
+  if (result == nullptr) {
+    return null;
+  }
+  return result.toDartString();
 }
 
 /// ```c
@@ -258,6 +261,19 @@ int sdlSetenv(String? name, String? value, int overwrite) {
   final result = sdlSetenvLookupFunction(namePointer, valuePointer, overwrite);
   calloc.free(namePointer);
   calloc.free(valuePointer);
+  return result;
+}
+
+/// ```c
+/// extern SDL_DECLSPEC int SDLCALL SDL_unsetenv(const char *name)
+/// ```
+int sdlUnsetenv(String? name) {
+  final sdlUnsetenvLookupFunction = libSdl3.lookupFunction<
+      Int32 Function(Pointer<Utf8> name),
+      int Function(Pointer<Utf8> name)>('SDL_unsetenv');
+  final namePointer = name != null ? name.toNativeUtf8() : nullptr;
+  final result = sdlUnsetenvLookupFunction(namePointer);
+  calloc.free(namePointer);
   return result;
 }
 

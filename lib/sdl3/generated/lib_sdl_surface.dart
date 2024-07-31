@@ -97,11 +97,6 @@ void sdlDestroySurface(Pointer<SdlSurface> surface) {
 ///
 /// The following properties are understood by SDL:
 ///
-/// - `SDL_PROP_SURFACE_COLORSPACE_NUMBER`: an SDL_ColorSpace value describing
-/// the surface colorspace, defaults to SDL_COLORSPACE_SRGB_LINEAR for
-/// floating point formats, SDL_COLORSPACE_HDR10 for 10-bit formats,
-/// SDL_COLORSPACE_SRGB for other RGB surfaces and SDL_COLORSPACE_BT709_FULL
-/// for YUV surfaces.
 /// - `SDL_PROP_SURFACE_SDR_WHITE_POINT_FLOAT`: for HDR10 and floating point
 /// surfaces, this defines the value of 100% diffuse white, with higher
 /// values being displayed in the High Dynamic Range headroom. This defaults
@@ -1264,7 +1259,7 @@ int sdlFillSurfaceRects(
 /// SDL_SRCCOLORKEY ignored.
 /// Source surface blend mode set to SDL_BLENDMODE_NONE:
 /// copy RGB.
-/// if SDL_SRCCOLORKEY set, only copy the pixels matching the
+/// if SDL_SRCCOLORKEY set, only copy the pixels that do not match the
 /// RGB values of the source color key, ignoring alpha in the
 /// comparison.
 ///
@@ -1274,7 +1269,7 @@ int sdlFillSurfaceRects(
 /// Source surface blend mode set to SDL_BLENDMODE_NONE:
 /// copy RGB, set destination alpha to source per-surface alpha value.
 /// both:
-/// if SDL_SRCCOLORKEY set, only copy the pixels matching the
+/// if SDL_SRCCOLORKEY set, only copy the pixels that do not match the
 /// source color key.
 ///
 /// RGBA->RGBA:
@@ -1283,7 +1278,7 @@ int sdlFillSurfaceRects(
 /// SDL_SRCCOLORKEY ignored.
 /// Source surface blend mode set to SDL_BLENDMODE_NONE:
 /// copy all of RGBA to the destination.
-/// if SDL_SRCCOLORKEY set, only copy the pixels matching the
+/// if SDL_SRCCOLORKEY set, only copy the pixels that do not match the
 /// RGB values of the source color key, ignoring alpha in the
 /// comparison.
 ///
@@ -1293,7 +1288,7 @@ int sdlFillSurfaceRects(
 /// Source surface blend mode set to SDL_BLENDMODE_NONE:
 /// copy RGB.
 /// both:
-/// if SDL_SRCCOLORKEY set, only copy the pixels matching the
+/// if SDL_SRCCOLORKEY set, only copy the pixels that do not match the
 /// source color key.
 /// ```
 ///
@@ -1302,9 +1297,10 @@ int sdlFillSurfaceRects(
 /// copied, or NULL to copy the entire surface.
 /// \param dst the SDL_Surface structure that is the blit target.
 /// \param dstrect the SDL_Rect structure representing the x and y position in
-/// the destination surface. On input the width and height are
-/// ignored (taken from srcrect), and on output this is filled
-/// in with the actual rectangle used after clipping.
+/// the destination surface, or NULL for (0,0). The width and
+/// height are ignored, and are copied from `srcrect`. If you
+/// want a specific width and height, you should use
+/// SDL_BlitSurfaceScaled().
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -1317,7 +1313,7 @@ int sdlFillSurfaceRects(
 /// \sa SDL_BlitSurfaceScaled
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_BlitSurface(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, SDL_Rect *dstrect)
+/// extern SDL_DECLSPEC int SDLCALL SDL_BlitSurface(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, const SDL_Rect *dstrect)
 /// ```
 int sdlBlitSurface(Pointer<SdlSurface> src, Pointer<SdlRect> srcrect,
     Pointer<SdlSurface> dst, Pointer<SdlRect> dstrect) {
@@ -1340,10 +1336,10 @@ int sdlBlitSurface(Pointer<SdlSurface> src, Pointer<SdlRect> srcrect,
 ///
 /// \param src the SDL_Surface structure to be copied from.
 /// \param srcrect the SDL_Rect structure representing the rectangle to be
-/// copied, or NULL to copy the entire surface.
+/// copied, may not be NULL.
 /// \param dst the SDL_Surface structure that is the blit target.
 /// \param dstrect the SDL_Rect structure representing the target rectangle in
-/// the destination surface.
+/// the destination surface, may not be NULL.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -1372,53 +1368,16 @@ int sdlBlitSurfaceUnchecked(Pointer<SdlSurface> src, Pointer<SdlRect> srcrect,
 }
 
 ///
-/// Perform stretch blit between two surfaces of the same format.
-///
-/// Using SDL_SCALEMODE_NEAREST: fast, low quality. Using SDL_SCALEMODE_LINEAR:
-/// bilinear scaling, slower, better quality, only 32BPP.
-///
-/// \param src the SDL_Surface structure to be copied from.
-/// \param srcrect the SDL_Rect structure representing the rectangle to be
-/// copied.
-/// \param dst the SDL_Surface structure that is the blit target.
-/// \param dstrect the SDL_Rect structure representing the target rectangle in
-/// the destination surface.
-/// \param scaleMode scale algorithm to be used.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
-///
-/// \since This function is available since SDL 3.0.0.
-///
-/// \sa SDL_BlitSurfaceScaled
-///
-/// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_SoftStretch(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, const SDL_Rect *dstrect, SDL_ScaleMode scaleMode)
-/// ```
-int sdlSoftStretch(Pointer<SdlSurface> src, Pointer<SdlRect> srcrect,
-    Pointer<SdlSurface> dst, Pointer<SdlRect> dstrect, int scaleMode) {
-  final sdlSoftStretchLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlSurface> src, Pointer<SdlRect> srcrect,
-          Pointer<SdlSurface> dst, Pointer<SdlRect> dstrect, Int32 scaleMode),
-      int Function(
-          Pointer<SdlSurface> src,
-          Pointer<SdlRect> srcrect,
-          Pointer<SdlSurface> dst,
-          Pointer<SdlRect> dstrect,
-          int scaleMode)>('SDL_SoftStretch');
-  return sdlSoftStretchLookupFunction(src, srcrect, dst, dstrect, scaleMode);
-}
-
-///
 /// Perform a scaled blit to a destination surface, which may be of a different
 /// format.
 ///
 /// \param src the SDL_Surface structure to be copied from.
 /// \param srcrect the SDL_Rect structure representing the rectangle to be
-/// copied.
+/// copied, or NULL to copy the entire surface.
 /// \param dst the SDL_Surface structure that is the blit target.
 /// \param dstrect the SDL_Rect structure representing the target rectangle in
-/// the destination surface, filled with the actual rectangle
-/// used after clipping.
+/// the destination surface, or NULL to fill the entire
+/// destination surface.
 /// \param scaleMode the SDL_ScaleMode to be used.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
@@ -1432,7 +1391,7 @@ int sdlSoftStretch(Pointer<SdlSurface> src, Pointer<SdlRect> srcrect,
 /// \sa SDL_BlitSurface
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_BlitSurfaceScaled(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, SDL_Rect *dstrect, SDL_ScaleMode scaleMode)
+/// extern SDL_DECLSPEC int SDLCALL SDL_BlitSurfaceScaled(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, const SDL_Rect *dstrect, SDL_ScaleMode scaleMode)
 /// ```
 int sdlBlitSurfaceScaled(Pointer<SdlSurface> src, Pointer<SdlRect> srcrect,
     Pointer<SdlSurface> dst, Pointer<SdlRect> dstrect, int scaleMode) {
@@ -1457,10 +1416,10 @@ int sdlBlitSurfaceScaled(Pointer<SdlSurface> src, Pointer<SdlRect> srcrect,
 ///
 /// \param src the SDL_Surface structure to be copied from.
 /// \param srcrect the SDL_Rect structure representing the rectangle to be
-/// copied.
+/// copied, may not be NULL.
 /// \param dst the SDL_Surface structure that is the blit target.
 /// \param dstrect the SDL_Rect structure representing the target rectangle in
-/// the destination surface.
+/// the destination surface, may not be NULL.
 /// \param scaleMode scale algorithm to be used.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
@@ -1493,6 +1452,166 @@ int sdlBlitSurfaceUncheckedScaled(
           int scaleMode)>('SDL_BlitSurfaceUncheckedScaled');
   return sdlBlitSurfaceUncheckedScaledLookupFunction(
       src, srcrect, dst, dstrect, scaleMode);
+}
+
+///
+/// Perform a tiled blit to a destination surface, which may be of a different
+/// format.
+///
+/// The pixels in `srcrect` will be repeated as many times as needed to
+/// completely fill `dstrect`.
+///
+/// \param src the SDL_Surface structure to be copied from.
+/// \param srcrect the SDL_Rect structure representing the rectangle to be
+/// copied, or NULL to copy the entire surface.
+/// \param dst the SDL_Surface structure that is the blit target.
+/// \param dstrect the SDL_Rect structure representing the target rectangle in
+/// the destination surface, or NULL to fill the entire surface.
+/// \returns 0 on success or a negative error code on failure; call
+/// SDL_GetError() for more information.
+///
+/// \threadsafety The same destination surface should not be used from two
+/// threads at once. It is safe to use the same source surface
+/// from multiple threads.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_BlitSurface
+///
+/// ```c
+/// extern SDL_DECLSPEC int SDLCALL SDL_BlitSurfaceTiled(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, const SDL_Rect *dstrect)
+/// ```
+int sdlBlitSurfaceTiled(Pointer<SdlSurface> src, Pointer<SdlRect> srcrect,
+    Pointer<SdlSurface> dst, Pointer<SdlRect> dstrect) {
+  final sdlBlitSurfaceTiledLookupFunction = libSdl3.lookupFunction<
+      Int32 Function(Pointer<SdlSurface> src, Pointer<SdlRect> srcrect,
+          Pointer<SdlSurface> dst, Pointer<SdlRect> dstrect),
+      int Function(
+          Pointer<SdlSurface> src,
+          Pointer<SdlRect> srcrect,
+          Pointer<SdlSurface> dst,
+          Pointer<SdlRect> dstrect)>('SDL_BlitSurfaceTiled');
+  return sdlBlitSurfaceTiledLookupFunction(src, srcrect, dst, dstrect);
+}
+
+///
+/// Perform a scaled and tiled blit to a destination surface, which may be of a
+/// different format.
+///
+/// The pixels in `srcrect` will be scaled and repeated as many times as needed
+/// to completely fill `dstrect`.
+///
+/// \param src the SDL_Surface structure to be copied from.
+/// \param srcrect the SDL_Rect structure representing the rectangle to be
+/// copied, or NULL to copy the entire surface.
+/// \param scale the scale used to transform srcrect into the destination
+/// rectangle, e.g. a 32x32 texture with a scale of 2 would fill
+/// 64x64 tiles.
+/// \param scaleMode scale algorithm to be used.
+/// \param dst the SDL_Surface structure that is the blit target.
+/// \param dstrect the SDL_Rect structure representing the target rectangle in
+/// the destination surface, or NULL to fill the entire surface.
+/// \returns 0 on success or a negative error code on failure; call
+/// SDL_GetError() for more information.
+///
+/// \threadsafety The same destination surface should not be used from two
+/// threads at once. It is safe to use the same source surface
+/// from multiple threads.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_BlitSurface
+///
+/// ```c
+/// extern SDL_DECLSPEC int SDLCALL SDL_BlitSurfaceTiledWithScale(SDL_Surface *src, const SDL_Rect *srcrect, float scale, SDL_ScaleMode scaleMode, SDL_Surface *dst, const SDL_Rect *dstrect)
+/// ```
+int sdlBlitSurfaceTiledWithScale(
+    Pointer<SdlSurface> src,
+    Pointer<SdlRect> srcrect,
+    double scale,
+    int scaleMode,
+    Pointer<SdlSurface> dst,
+    Pointer<SdlRect> dstrect) {
+  final sdlBlitSurfaceTiledWithScaleLookupFunction = libSdl3.lookupFunction<
+      Int32 Function(
+          Pointer<SdlSurface> src,
+          Pointer<SdlRect> srcrect,
+          Float scale,
+          Int32 scaleMode,
+          Pointer<SdlSurface> dst,
+          Pointer<SdlRect> dstrect),
+      int Function(
+          Pointer<SdlSurface> src,
+          Pointer<SdlRect> srcrect,
+          double scale,
+          int scaleMode,
+          Pointer<SdlSurface> dst,
+          Pointer<SdlRect> dstrect)>('SDL_BlitSurfaceTiledWithScale');
+  return sdlBlitSurfaceTiledWithScaleLookupFunction(
+      src, srcrect, scale, scaleMode, dst, dstrect);
+}
+
+///
+/// Perform a scaled blit using the 9-grid algorithm to a destination surface,
+/// which may be of a different format.
+///
+/// The pixels in the source surface are split into a 3x3 grid, using the
+/// corner size for each corner, and the sides and center making up the
+/// remaining pixels. The corners are then scaled using `scale` and fit into
+/// the corners of the destination rectangle. The sides and center are then
+/// stretched into place to cover the remaining destination rectangle.
+///
+/// \param src the SDL_Surface structure to be copied from.
+/// \param srcrect the SDL_Rect structure representing the rectangle to be used
+/// for the 9-grid, or NULL to use the entire surface.
+/// \param corner_size the size, in pixels, of the corner in `srcrect`.
+/// \param scale the scale used to transform the corner of `srcrect` into the
+/// corner of `dstrect`, or 0.0f for an unscaled blit.
+/// \param scaleMode scale algorithm to be used.
+/// \param dst the SDL_Surface structure that is the blit target.
+/// \param dstrect the SDL_Rect structure representing the target rectangle in
+/// the destination surface, or NULL to fill the entire surface.
+/// \returns 0 on success or a negative error code on failure; call
+/// SDL_GetError() for more information.
+///
+/// \threadsafety The same destination surface should not be used from two
+/// threads at once. It is safe to use the same source surface
+/// from multiple threads.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_BlitSurface
+///
+/// ```c
+/// extern SDL_DECLSPEC int SDLCALL SDL_BlitSurface9Grid(SDL_Surface *src, const SDL_Rect *srcrect, int corner_size, float scale, SDL_ScaleMode scaleMode, SDL_Surface *dst, const SDL_Rect *dstrect)
+/// ```
+int sdlBlitSurface9Grid(
+    Pointer<SdlSurface> src,
+    Pointer<SdlRect> srcrect,
+    int cornerSize,
+    double scale,
+    int scaleMode,
+    Pointer<SdlSurface> dst,
+    Pointer<SdlRect> dstrect) {
+  final sdlBlitSurface9GridLookupFunction = libSdl3.lookupFunction<
+      Int32 Function(
+          Pointer<SdlSurface> src,
+          Pointer<SdlRect> srcrect,
+          Int32 cornerSize,
+          Float scale,
+          Int32 scaleMode,
+          Pointer<SdlSurface> dst,
+          Pointer<SdlRect> dstrect),
+      int Function(
+          Pointer<SdlSurface> src,
+          Pointer<SdlRect> srcrect,
+          int cornerSize,
+          double scale,
+          int scaleMode,
+          Pointer<SdlSurface> dst,
+          Pointer<SdlRect> dstrect)>('SDL_BlitSurface9Grid');
+  return sdlBlitSurface9GridLookupFunction(
+      src, srcrect, cornerSize, scale, scaleMode, dst, dstrect);
 }
 
 ///
@@ -1670,4 +1789,69 @@ int sdlReadSurfacePixelFloat(Pointer<SdlSurface> surface, int x, int y,
           Pointer<Float> b,
           Pointer<Float> a)>('SDL_ReadSurfacePixelFloat');
   return sdlReadSurfacePixelFloatLookupFunction(surface, x, y, r, g, b, a);
+}
+
+///
+/// Writes a single pixel to a surface.
+///
+/// This function prioritizes correctness over speed: it is suitable for unit
+/// tests, but is not intended for use in a game engine.
+///
+/// Like SDL_MapRGBA, this uses the entire 0..255 range when converting color
+/// components from pixel formats with less than 8 bits per RGB component.
+///
+/// \param surface the surface to write.
+/// \param x the horizontal coordinate, 0 <= x < width.
+/// \param y the vertical coordinate, 0 <= y < height.
+/// \param r the red channel value, 0-255.
+/// \param g the green channel value, 0-255.
+/// \param b the blue channel value, 0-255.
+/// \param a the alpha channel value, 0-255.
+/// \returns 0 on success or a negative error code on failure; call
+/// SDL_GetError() for more information.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC int SDLCALL SDL_WriteSurfacePixel(SDL_Surface *surface, int x, int y, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
+/// ```
+int sdlWriteSurfacePixel(
+    Pointer<SdlSurface> surface, int x, int y, int r, int g, int b, int a) {
+  final sdlWriteSurfacePixelLookupFunction = libSdl3.lookupFunction<
+      Int32 Function(Pointer<SdlSurface> surface, Int32 x, Int32 y, Uint8 r,
+          Uint8 g, Uint8 b, Uint8 a),
+      int Function(Pointer<SdlSurface> surface, int x, int y, int r, int g,
+          int b, int a)>('SDL_WriteSurfacePixel');
+  return sdlWriteSurfacePixelLookupFunction(surface, x, y, r, g, b, a);
+}
+
+///
+/// Writes a single pixel to a surface.
+///
+/// This function prioritizes correctness over speed: it is suitable for unit
+/// tests, but is not intended for use in a game engine.
+///
+/// \param surface the surface to write.
+/// \param x the horizontal coordinate, 0 <= x < width.
+/// \param y the vertical coordinate, 0 <= y < height.
+/// \param r the red channel value, normally in the range 0-1.
+/// \param g the green channel value, normally in the range 0-1.
+/// \param b the blue channel value, normally in the range 0-1.
+/// \param a the alpha channel value, normally in the range 0-1.
+/// \returns 0 on success or a negative error code on failure; call
+/// SDL_GetError() for more information.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC int SDLCALL SDL_WriteSurfacePixelFloat(SDL_Surface *surface, int x, int y, float r, float g, float b, float a)
+/// ```
+int sdlWriteSurfacePixelFloat(Pointer<SdlSurface> surface, int x, int y,
+    double r, double g, double b, double a) {
+  final sdlWriteSurfacePixelFloatLookupFunction = libSdl3.lookupFunction<
+      Int32 Function(Pointer<SdlSurface> surface, Int32 x, Int32 y, Float r,
+          Float g, Float b, Float a),
+      int Function(Pointer<SdlSurface> surface, int x, int y, double r,
+          double g, double b, double a)>('SDL_WriteSurfacePixelFloat');
+  return sdlWriteSurfacePixelFloatLookupFunction(surface, x, y, r, g, b, a);
 }

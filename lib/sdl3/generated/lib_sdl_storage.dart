@@ -420,6 +420,38 @@ int sdlRenameStoragePath(
 }
 
 ///
+/// Copy a file in a writable storage container.
+///
+/// \param storage a storage container.
+/// \param oldpath the old path.
+/// \param newpath the new path.
+/// \returns 0 on success or a negative error code on failure; call
+/// SDL_GetError() for more information.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_StorageReady
+///
+/// ```c
+/// extern SDL_DECLSPEC int SDLCALL SDL_CopyStorageFile(SDL_Storage *storage, const char *oldpath, const char *newpath)
+/// ```
+int sdlCopyStorageFile(
+    Pointer<SdlStorage> storage, String? oldpath, String? newpath) {
+  final sdlCopyStorageFileLookupFunction = libSdl3.lookupFunction<
+      Int32 Function(Pointer<SdlStorage> storage, Pointer<Utf8> oldpath,
+          Pointer<Utf8> newpath),
+      int Function(Pointer<SdlStorage> storage, Pointer<Utf8> oldpath,
+          Pointer<Utf8> newpath)>('SDL_CopyStorageFile');
+  final oldpathPointer = oldpath != null ? oldpath.toNativeUtf8() : nullptr;
+  final newpathPointer = newpath != null ? newpath.toNativeUtf8() : nullptr;
+  final result =
+      sdlCopyStorageFileLookupFunction(storage, oldpathPointer, newpathPointer);
+  calloc.free(oldpathPointer);
+  calloc.free(newpathPointer);
+  return result;
+}
+
+///
 /// Get information about a filesystem path in a storage container.
 ///
 /// \param storage a storage container.
@@ -489,9 +521,6 @@ int sdlGetStorageSpaceRemaining(Pointer<SdlStorage> storage) {
 /// convenience, but if `count` is non-NULL, on return it will contain the
 /// number of items in the array, not counting the NULL terminator.
 ///
-/// This returns temporary memory which will be automatically freed later, and
-/// can be claimed with SDL_ClaimTemporaryMemory().
-///
 /// \param storage a storage container.
 /// \param path the path of the directory to enumerate.
 /// \param pattern the pattern that files in the directory must match. Can be
@@ -501,7 +530,9 @@ int sdlGetStorageSpaceRemaining(Pointer<SdlStorage> storage) {
 /// array. Can be NULL.
 /// \returns an array of strings on success or NULL on failure; call
 /// SDL_GetError() for more information. The caller should pass the
-/// returned pointer to SDL_free when done with it.
+/// returned pointer to SDL_free when done with it. This is a single
+/// allocation that should be freed with SDL_free() when it is no
+/// longer needed.
 ///
 /// \threadsafety It is safe to call this function from any thread, assuming
 /// the `storage` object is thread-safe.
@@ -509,7 +540,7 @@ int sdlGetStorageSpaceRemaining(Pointer<SdlStorage> storage) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC const char * const * SDLCALL SDL_GlobStorageDirectory(SDL_Storage *storage, const char *path, const char *pattern, SDL_GlobFlags flags, int *count)
+/// extern SDL_DECLSPEC_FREE char ** SDLCALL SDL_GlobStorageDirectory(SDL_Storage *storage, const char *path, const char *pattern, SDL_GlobFlags flags, int *count)
 /// ```
 Pointer<Pointer<Int8>> sdlGlobStorageDirectory(Pointer<SdlStorage> storage,
     String? path, String? pattern, int flags, Pointer<Int32> count) {

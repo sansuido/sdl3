@@ -668,7 +668,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// SDL_SRCCOLORKEY ignored.
   /// Source surface blend mode set to SDL_BLENDMODE_NONE:
   /// copy RGB.
-  /// if SDL_SRCCOLORKEY set, only copy the pixels matching the
+  /// if SDL_SRCCOLORKEY set, only copy the pixels that do not match the
   /// RGB values of the source color key, ignoring alpha in the
   /// comparison.
   ///
@@ -678,7 +678,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// Source surface blend mode set to SDL_BLENDMODE_NONE:
   /// copy RGB, set destination alpha to source per-surface alpha value.
   /// both:
-  /// if SDL_SRCCOLORKEY set, only copy the pixels matching the
+  /// if SDL_SRCCOLORKEY set, only copy the pixels that do not match the
   /// source color key.
   ///
   /// RGBA->RGBA:
@@ -687,7 +687,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// SDL_SRCCOLORKEY ignored.
   /// Source surface blend mode set to SDL_BLENDMODE_NONE:
   /// copy all of RGBA to the destination.
-  /// if SDL_SRCCOLORKEY set, only copy the pixels matching the
+  /// if SDL_SRCCOLORKEY set, only copy the pixels that do not match the
   /// RGB values of the source color key, ignoring alpha in the
   /// comparison.
   ///
@@ -697,7 +697,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// Source surface blend mode set to SDL_BLENDMODE_NONE:
   /// copy RGB.
   /// both:
-  /// if SDL_SRCCOLORKEY set, only copy the pixels matching the
+  /// if SDL_SRCCOLORKEY set, only copy the pixels that do not match the
   /// source color key.
   /// ```
   ///
@@ -706,9 +706,10 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// copied, or NULL to copy the entire surface.
   /// \param dst the SDL_Surface structure that is the blit target.
   /// \param dstrect the SDL_Rect structure representing the x and y position in
-  /// the destination surface. On input the width and height are
-  /// ignored (taken from srcrect), and on output this is filled
-  /// in with the actual rectangle used after clipping.
+  /// the destination surface, or NULL for (0,0). The width and
+  /// height are ignored, and are copied from `srcrect`. If you
+  /// want a specific width and height, you should use
+  /// SDL_BlitSurfaceScaled().
   /// \returns 0 on success or a negative error code on failure; call
   /// SDL_GetError() for more information.
   ///
@@ -721,7 +722,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// \sa SDL_BlitSurfaceScaled
   ///
   /// ```c
-  /// extern SDL_DECLSPEC int SDLCALL SDL_BlitSurface(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, SDL_Rect *dstrect)
+  /// extern SDL_DECLSPEC int SDLCALL SDL_BlitSurface(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, const SDL_Rect *dstrect)
   /// ```
   int upperBlit(
     Pointer<SdlSurface> dst, {
@@ -750,10 +751,10 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   ///
   /// \param src the SDL_Surface structure to be copied from.
   /// \param srcrect the SDL_Rect structure representing the rectangle to be
-  /// copied, or NULL to copy the entire surface.
+  /// copied, may not be NULL.
   /// \param dst the SDL_Surface structure that is the blit target.
   /// \param dstrect the SDL_Rect structure representing the target rectangle in
-  /// the destination surface.
+  /// the destination surface, may not be NULL.
   /// \returns 0 on success or a negative error code on failure; call
   /// SDL_GetError() for more information.
   ///
@@ -789,58 +790,16 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   }
 
   ///
-  /// Perform stretch blit between two surfaces of the same format.
-  ///
-  /// Using SDL_SCALEMODE_NEAREST: fast, low quality. Using SDL_SCALEMODE_LINEAR:
-  /// bilinear scaling, slower, better quality, only 32BPP.
-  ///
-  /// \param src the SDL_Surface structure to be copied from.
-  /// \param srcrect the SDL_Rect structure representing the rectangle to be
-  /// copied.
-  /// \param dst the SDL_Surface structure that is the blit target.
-  /// \param dstrect the SDL_Rect structure representing the target rectangle in
-  /// the destination surface.
-  /// \param scaleMode scale algorithm to be used.
-  /// \returns 0 on success or a negative error code on failure; call
-  /// SDL_GetError() for more information.
-  ///
-  /// \since This function is available since SDL 3.0.0.
-  ///
-  /// \sa SDL_BlitSurfaceScaled
-  ///
-  /// ```c
-  /// extern SDL_DECLSPEC int SDLCALL SDL_SoftStretch(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, const SDL_Rect *dstrect, SDL_ScaleMode scaleMode)
-  /// ```
-  int softStretch(Pointer<SdlSurface> dst,
-      {math.Rectangle<double>? srcrect,
-      math.Rectangle<double>? dstrect,
-      int scaleMode = 0}) {
-    Pointer<SdlRect> srcrectPointer = nullptr;
-    Pointer<SdlRect> dstrectPointer = nullptr;
-    if (srcrect != null) {
-      srcrectPointer = srcrect.callocInt();
-    }
-    if (dstrect != null) {
-      dstrectPointer = dstrect.callocInt();
-    }
-    var result =
-        sdlSoftStretch(this, srcrectPointer, dst, dstrectPointer, scaleMode);
-    calloc.free(srcrectPointer);
-    calloc.free(dstrectPointer);
-    return result;
-  }
-
-  ///
   /// Perform a scaled blit to a destination surface, which may be of a different
   /// format.
   ///
   /// \param src the SDL_Surface structure to be copied from.
   /// \param srcrect the SDL_Rect structure representing the rectangle to be
-  /// copied.
+  /// copied, or NULL to copy the entire surface.
   /// \param dst the SDL_Surface structure that is the blit target.
   /// \param dstrect the SDL_Rect structure representing the target rectangle in
-  /// the destination surface, filled with the actual rectangle
-  /// used after clipping.
+  /// the destination surface, or NULL to fill the entire
+  /// destination surface.
   /// \param scaleMode the SDL_ScaleMode to be used.
   /// \returns 0 on success or a negative error code on failure; call
   /// SDL_GetError() for more information.
@@ -854,7 +813,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// \sa SDL_BlitSurface
   ///
   /// ```c
-  /// extern SDL_DECLSPEC int SDLCALL SDL_BlitSurfaceScaled(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, SDL_Rect *dstrect, SDL_ScaleMode scaleMode)
+  /// extern SDL_DECLSPEC int SDLCALL SDL_BlitSurfaceScaled(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, const SDL_Rect *dstrect, SDL_ScaleMode scaleMode)
   /// ```
   int upperBlitScaled(Pointer<SdlSurface> dst,
       {math.Rectangle<double>? srcrect,
@@ -883,10 +842,10 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   ///
   /// \param src the SDL_Surface structure to be copied from.
   /// \param srcrect the SDL_Rect structure representing the rectangle to be
-  /// copied.
+  /// copied, may not be NULL.
   /// \param dst the SDL_Surface structure that is the blit target.
   /// \param dstrect the SDL_Rect structure representing the target rectangle in
-  /// the destination surface.
+  /// the destination surface, may not be NULL.
   /// \param scaleMode scale algorithm to be used.
   /// \returns 0 on success or a negative error code on failure; call
   /// SDL_GetError() for more information.

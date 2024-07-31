@@ -30,13 +30,11 @@ bool sdlHasMouse() {
 /// You should wait for input from a device before you consider it actively in
 /// use.
 ///
-/// This returns temporary memory which will be automatically freed later, and
-/// can be claimed with SDL_ClaimTemporaryMemory().
-///
 /// \param count a pointer filled in with the number of mice returned, may be
 /// NULL.
 /// \returns a 0 terminated array of mouse instance IDs or NULL on failure;
-/// call SDL_GetError() for more information.
+/// call SDL_GetError() for more information. This should be freed
+/// with SDL_free() when it is no longer needed.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -44,7 +42,7 @@ bool sdlHasMouse() {
 /// \sa SDL_HasMouse
 ///
 /// ```c
-/// extern SDL_DECLSPEC const SDL_MouseID * SDLCALL SDL_GetMice(int *count)
+/// extern SDL_DECLSPEC_FREE SDL_MouseID * SDLCALL SDL_GetMice(int *count)
 /// ```
 Pointer<Uint32> sdlGetMice(Pointer<Int32> count) {
   final sdlGetMiceLookupFunction = libSdl3.lookupFunction<
@@ -57,9 +55,6 @@ Pointer<Uint32> sdlGetMice(Pointer<Int32> count) {
 /// Get the name of a mouse.
 ///
 /// This function returns "" if the mouse doesn't have a name.
-///
-/// This returns temporary memory which will be automatically freed later, and
-/// can be claimed with SDL_ClaimTemporaryMemory().
 ///
 /// \param instance_id the mouse instance ID.
 /// \returns the name of the selected mouse, or NULL on failure; call

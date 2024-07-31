@@ -7,20 +7,18 @@ import 'struct_sdl.dart';
 ///
 /// Get a list of currently connected haptic devices.
 ///
-/// This returns temporary memory which will be automatically freed later, and
-/// can be claimed with SDL_ClaimTemporaryMemory().
-///
 /// \param count a pointer filled in with the number of haptic devices
 /// returned, may be NULL.
 /// \returns a 0 terminated array of haptic device instance IDs or NULL on
-/// failure; call SDL_GetError() for more information.
+/// failure; call SDL_GetError() for more information. This should be
+/// freed with SDL_free() when it is no longer needed.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_OpenHaptic
 ///
 /// ```c
-/// extern SDL_DECLSPEC const SDL_HapticID * SDLCALL SDL_GetHaptics(int *count)
+/// extern SDL_DECLSPEC_FREE SDL_HapticID * SDLCALL SDL_GetHaptics(int *count)
 /// ```
 Pointer<Uint32> sdlGetHaptics(Pointer<Int32> count) {
   final sdlGetHapticsLookupFunction = libSdl3.lookupFunction<
@@ -33,9 +31,6 @@ Pointer<Uint32> sdlGetHaptics(Pointer<Int32> count) {
 /// Get the implementation dependent name of a haptic device.
 ///
 /// This can be called before any haptic devices are opened.
-///
-/// This returns temporary memory which will be automatically freed later, and
-/// can be claimed with SDL_ClaimTemporaryMemory().
 ///
 /// \param instance_id the haptic device instance ID.
 /// \returns the name of the selected haptic device. If no name can be found,
@@ -134,9 +129,6 @@ int sdlGetHapticId(Pointer<SdlHaptic> haptic) {
 
 ///
 /// Get the implementation dependent name of a haptic device.
-///
-/// This returns temporary memory which will be automatically freed later, and
-/// can be claimed with SDL_ClaimTemporaryMemory().
 ///
 /// \param haptic the SDL_Haptic obtained from SDL_OpenJoystick().
 /// \returns the name of the selected haptic device. If no name can be found,

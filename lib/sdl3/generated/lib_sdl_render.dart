@@ -42,9 +42,6 @@ int sdlGetNumRenderDrivers() {
 /// "direct3d12" or "metal". These never have Unicode characters, and are not
 /// meant to be proper names.
 ///
-/// This returns temporary memory which will be automatically freed later, and
-/// can be claimed with SDL_ClaimTemporaryMemory().
-///
 /// \param index the index of the rendering driver; the value ranges from 0 to
 /// SDL_GetNumRenderDrivers() - 1.
 /// \returns the name of the rendering driver at the requested index, or NULL
@@ -294,9 +291,6 @@ Pointer<SdlWindow> sdlGetRenderWindow(Pointer<SdlRenderer> renderer) {
 ///
 /// Get the name of a renderer.
 ///
-/// This returns temporary memory which will be automatically freed later, and
-/// can be claimed with SDL_ClaimTemporaryMemory().
-///
 /// \param renderer the rendering context.
 /// \returns the name of the selected renderer, or NULL on failure; call
 /// SDL_GetError() for more information.
@@ -489,7 +483,7 @@ int sdlGetCurrentRenderOutputSize(
 /// \sa SDL_UpdateTexture
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_Texture * SDLCALL SDL_CreateTexture(SDL_Renderer *renderer, SDL_PixelFormat format, int access, int w, int h)
+/// extern SDL_DECLSPEC SDL_Texture * SDLCALL SDL_CreateTexture(SDL_Renderer *renderer, SDL_PixelFormat format, SDL_TextureAccess access, int w, int h)
 /// ```
 Pointer<SdlTexture> sdlCreateTexture(
     Pointer<SdlRenderer> renderer, int format, int access, int w, int h) {
@@ -1776,6 +1770,35 @@ bool sdlRenderViewportSet(Pointer<SdlRenderer> renderer) {
 }
 
 ///
+/// Get the safe area for rendering within the current viewport.
+///
+/// Some devices have portions of the screen which are partially obscured or
+/// not interactive, possibly due to on-screen controls, curved edges, camera
+/// notches, TV overscan, etc. This function provides the area of the current
+/// viewport which is safe to have interactible content. You should continue
+/// rendering into the rest of the render target, but it should not contain
+/// visually important or interactible content.
+///
+/// \param renderer the rendering context.
+/// \param rect a pointer filled in with the area that is safe for interactive
+/// content.
+/// \returns 0 on success or a negative error code on failure; call
+/// SDL_GetError() for more information.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC int SDLCALL SDL_GetRenderSafeArea(SDL_Renderer *renderer, SDL_Rect *rect)
+/// ```
+int sdlGetRenderSafeArea(Pointer<SdlRenderer> renderer, Pointer<SdlRect> rect) {
+  final sdlGetRenderSafeAreaLookupFunction = libSdl3.lookupFunction<
+      Int32 Function(Pointer<SdlRenderer> renderer, Pointer<SdlRect> rect),
+      int Function(Pointer<SdlRenderer> renderer,
+          Pointer<SdlRect> rect)>('SDL_GetRenderSafeArea');
+  return sdlGetRenderSafeAreaLookupFunction(renderer, rect);
+}
+
+///
 /// Set the clip rectangle for rendering on the specified target.
 ///
 /// \param renderer the rendering context.
@@ -2402,6 +2425,7 @@ int sdlRenderFillRects(
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_RenderTextureRotated
+/// \sa SDL_RenderTextureTiled
 ///
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_RenderTexture(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_FRect *srcrect, const SDL_FRect *dstrect)
@@ -2473,6 +2497,106 @@ int sdlRenderTextureRotated(
           int flip)>('SDL_RenderTextureRotated');
   return sdlRenderTextureRotatedLookupFunction(
       renderer, texture, srcrect, dstrect, angle, center, flip);
+}
+
+///
+/// Tile a portion of the texture to the current rendering target at subpixel
+/// precision.
+///
+/// The pixels in `srcrect` will be repeated as many times as needed to
+/// completely fill `dstrect`.
+///
+/// \param renderer the renderer which should copy parts of a texture.
+/// \param texture the source texture.
+/// \param srcrect a pointer to the source rectangle, or NULL for the entire
+/// texture.
+/// \param scale the scale used to transform srcrect into the destination
+/// rectangle, e.g. a 32x32 texture with a scale of 2 would fill
+/// 64x64 tiles.
+/// \param dstrect a pointer to the destination rectangle, or NULL for the
+/// entire rendering target.
+/// \returns 0 on success or a negative error code on failure; call
+/// SDL_GetError() for more information.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_RenderTexture
+///
+/// ```c
+/// extern SDL_DECLSPEC int SDLCALL SDL_RenderTextureTiled(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_FRect *srcrect, float scale, const SDL_FRect *dstrect)
+/// ```
+int sdlRenderTextureTiled(
+    Pointer<SdlRenderer> renderer,
+    Pointer<SdlTexture> texture,
+    Pointer<SdlFRect> srcrect,
+    double scale,
+    Pointer<SdlFRect> dstrect) {
+  final sdlRenderTextureTiledLookupFunction = libSdl3.lookupFunction<
+      Int32 Function(Pointer<SdlRenderer> renderer, Pointer<SdlTexture> texture,
+          Pointer<SdlFRect> srcrect, Float scale, Pointer<SdlFRect> dstrect),
+      int Function(
+          Pointer<SdlRenderer> renderer,
+          Pointer<SdlTexture> texture,
+          Pointer<SdlFRect> srcrect,
+          double scale,
+          Pointer<SdlFRect> dstrect)>('SDL_RenderTextureTiled');
+  return sdlRenderTextureTiledLookupFunction(
+      renderer, texture, srcrect, scale, dstrect);
+}
+
+///
+/// Perform a scaled copy using the 9-grid algorithm to the current rendering
+/// target at subpixel precision.
+///
+/// The pixels in the texture are split into a 3x3 grid, using the corner size
+/// for each corner, and the sides and center making up the remaining pixels.
+/// The corners are then scaled using `scale` and fit into the corners of the
+/// destination rectangle. The sides and center are then stretched into place
+/// to cover the remaining destination rectangle.
+///
+/// \param renderer the renderer which should copy parts of a texture.
+/// \param texture the source texture.
+/// \param srcrect the SDL_Rect structure representing the rectangle to be used
+/// for the 9-grid, or NULL to use the entire texture.
+/// \param corner_size the size, in pixels, of the corner in `srcrect`.
+/// \param scale the scale used to transform the corner of `srcrect` into the
+/// corner of `dstrect`, or 0.0f for an unscaled copy.
+/// \param dstrect a pointer to the destination rectangle, or NULL for the
+/// entire rendering target.
+/// \returns 0 on success or a negative error code on failure; call
+/// SDL_GetError() for more information.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_RenderTexture
+///
+/// ```c
+/// extern SDL_DECLSPEC int SDLCALL SDL_RenderTexture9Grid(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_FRect *srcrect, float corner_size, float scale, const SDL_FRect *dstrect)
+/// ```
+int sdlRenderTexture9Grid(
+    Pointer<SdlRenderer> renderer,
+    Pointer<SdlTexture> texture,
+    Pointer<SdlFRect> srcrect,
+    double cornerSize,
+    double scale,
+    Pointer<SdlFRect> dstrect) {
+  final sdlRenderTexture9GridLookupFunction = libSdl3.lookupFunction<
+      Int32 Function(
+          Pointer<SdlRenderer> renderer,
+          Pointer<SdlTexture> texture,
+          Pointer<SdlFRect> srcrect,
+          Float cornerSize,
+          Float scale,
+          Pointer<SdlFRect> dstrect),
+      int Function(
+          Pointer<SdlRenderer> renderer,
+          Pointer<SdlTexture> texture,
+          Pointer<SdlFRect> srcrect,
+          double cornerSize,
+          double scale,
+          Pointer<SdlFRect> dstrect)>('SDL_RenderTexture9Grid');
+  return sdlRenderTexture9GridLookupFunction(
+      renderer, texture, srcrect, cornerSize, scale, dstrect);
 }
 
 ///

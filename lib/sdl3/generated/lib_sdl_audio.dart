@@ -46,9 +46,6 @@ int sdlGetNumAudioDrivers() {
 /// "coreaudio" or "wasapi". These never have Unicode characters, and are not
 /// meant to be proper names.
 ///
-/// This returns temporary memory which will be automatically freed later, and
-/// can be claimed with SDL_ClaimTemporaryMemory().
-///
 /// \param index the index of the audio driver; the value ranges from 0 to
 /// SDL_GetNumAudioDrivers() - 1.
 /// \returns the name of the audio driver at the requested index, or NULL if an
@@ -80,9 +77,6 @@ String? sdlGetAudioDriver(int index) {
 /// The names of drivers are all simple, low-ASCII identifiers, like "alsa",
 /// "coreaudio" or "wasapi". These never have Unicode characters, and are not
 /// meant to be proper names.
-///
-/// This returns temporary memory which will be automatically freed later, and
-/// can be claimed with SDL_ClaimTemporaryMemory().
 ///
 /// \returns the name of the current audio driver or NULL if no driver has been
 /// initialized.
@@ -119,13 +113,11 @@ String? sdlGetCurrentAudioDriver() {
 /// If this function returns NULL, to signify an error, `*count` will be set to
 /// zero.
 ///
-/// This returns temporary memory which will be automatically freed later, and
-/// can be claimed with SDL_ClaimTemporaryMemory().
-///
 /// \param count a pointer filled in with the number of devices returned, may
 /// be NULL.
 /// \returns a 0 terminated array of device instance IDs or NULL on error; call
-/// SDL_GetError() for more information.
+/// SDL_GetError() for more information. This should be freed with
+/// SDL_free() when it is no longer needed.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -135,7 +127,7 @@ String? sdlGetCurrentAudioDriver() {
 /// \sa SDL_GetAudioRecordingDevices
 ///
 /// ```c
-/// extern SDL_DECLSPEC const SDL_AudioDeviceID * SDLCALL SDL_GetAudioPlaybackDevices(int *count)
+/// extern SDL_DECLSPEC_FREE SDL_AudioDeviceID * SDLCALL SDL_GetAudioPlaybackDevices(int *count)
 /// ```
 Pointer<Uint32> sdlGetAudioPlaybackDevices(Pointer<Int32> count) {
   final sdlGetAudioPlaybackDevicesLookupFunction = libSdl3.lookupFunction<
@@ -159,13 +151,11 @@ Pointer<Uint32> sdlGetAudioPlaybackDevices(Pointer<Int32> count) {
 /// If this function returns NULL, to signify an error, `*count` will be set to
 /// zero.
 ///
-/// This returns temporary memory which will be automatically freed later, and
-/// can be claimed with SDL_ClaimTemporaryMemory().
-///
 /// \param count a pointer filled in with the number of devices returned, may
 /// be NULL.
 /// \returns a 0 terminated array of device instance IDs, or NULL on failure;
-/// call SDL_GetError() for more information.
+/// call SDL_GetError() for more information. This should be freed
+/// with SDL_free() when it is no longer needed.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -175,7 +165,7 @@ Pointer<Uint32> sdlGetAudioPlaybackDevices(Pointer<Int32> count) {
 /// \sa SDL_GetAudioPlaybackDevices
 ///
 /// ```c
-/// extern SDL_DECLSPEC const SDL_AudioDeviceID * SDLCALL SDL_GetAudioRecordingDevices(int *count)
+/// extern SDL_DECLSPEC_FREE SDL_AudioDeviceID * SDLCALL SDL_GetAudioRecordingDevices(int *count)
 /// ```
 Pointer<Uint32> sdlGetAudioRecordingDevices(Pointer<Int32> count) {
   final sdlGetAudioRecordingDevicesLookupFunction = libSdl3.lookupFunction<
@@ -187,9 +177,6 @@ Pointer<Uint32> sdlGetAudioRecordingDevices(Pointer<Int32> count) {
 
 ///
 /// Get the human-readable name of a specific audio device.
-///
-/// This returns temporary memory which will be automatically freed later, and
-/// can be claimed with SDL_ClaimTemporaryMemory().
 ///
 /// \param devid the instance ID of the device to query.
 /// \returns the name of the audio device, or NULL on failure; call
@@ -272,13 +259,11 @@ int sdlGetAudioDeviceFormat(
 /// Audio devices usually have no remapping applied. This is represented by
 /// returning NULL, and does not signify an error.
 ///
-/// This returns temporary memory which will be automatically freed later, and
-/// can be claimed with SDL_ClaimTemporaryMemory().
-///
 /// \param devid the instance ID of the device to query.
 /// \param count On output, set to number of channels in the map. Can be NULL.
 /// \returns an array of the current channel mapping, with as many elements as
-/// the current output spec's channels, or NULL if default.
+/// the current output spec's channels, or NULL if default. This
+/// should be freed with SDL_free() when it is no longer needed.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -287,7 +272,7 @@ int sdlGetAudioDeviceFormat(
 /// \sa SDL_SetAudioStreamInputChannelMap
 ///
 /// ```c
-/// extern SDL_DECLSPEC const int * SDLCALL SDL_GetAudioDeviceChannelMap(SDL_AudioDeviceID devid, int *count)
+/// extern SDL_DECLSPEC_FREE int * SDLCALL SDL_GetAudioDeviceChannelMap(SDL_AudioDeviceID devid, int *count)
 /// ```
 Pointer<Int32> sdlGetAudioDeviceChannelMap(int devid, Pointer<Int32> count) {
   final sdlGetAudioDeviceChannelMapLookupFunction = libSdl3.lookupFunction<
@@ -1014,13 +999,11 @@ int sdlSetAudioStreamGain(Pointer<SdlAudioStream> stream, double gain) {
 /// Audio streams default to no remapping applied. This is represented by
 /// returning NULL, and does not signify an error.
 ///
-/// This returns temporary memory which will be automatically freed later, and
-/// can be claimed with SDL_ClaimTemporaryMemory().
-///
 /// \param stream the SDL_AudioStream to query.
 /// \param count On output, set to number of channels in the map. Can be NULL.
 /// \returns an array of the current channel mapping, with as many elements as
-/// the current output spec's channels, or NULL if default.
+/// the current output spec's channels, or NULL if default. This
+/// should be freed with SDL_free() when it is no longer needed.
 ///
 /// \threadsafety It is safe to call this function from any thread, as it holds
 /// a stream-specific mutex while running.
@@ -1030,7 +1013,7 @@ int sdlSetAudioStreamGain(Pointer<SdlAudioStream> stream, double gain) {
 /// \sa SDL_SetAudioStreamInputChannelMap
 ///
 /// ```c
-/// extern SDL_DECLSPEC const int * SDLCALL SDL_GetAudioStreamInputChannelMap(SDL_AudioStream *stream, int *count)
+/// extern SDL_DECLSPEC_FREE int * SDLCALL SDL_GetAudioStreamInputChannelMap(SDL_AudioStream *stream, int *count)
 /// ```
 Pointer<Int32> sdlGetAudioStreamInputChannelMap(
     Pointer<SdlAudioStream> stream, Pointer<Int32> count) {
@@ -1051,13 +1034,11 @@ Pointer<Int32> sdlGetAudioStreamInputChannelMap(
 /// Audio streams default to no remapping applied. This is represented by
 /// returning NULL, and does not signify an error.
 ///
-/// This returns temporary memory which will be automatically freed later, and
-/// can be claimed with SDL_ClaimTemporaryMemory().
-///
 /// \param stream the SDL_AudioStream to query.
 /// \param count On output, set to number of channels in the map. Can be NULL.
 /// \returns an array of the current channel mapping, with as many elements as
-/// the current output spec's channels, or NULL if default.
+/// the current output spec's channels, or NULL if default. This
+/// should be freed with SDL_free() when it is no longer needed.
 ///
 /// \threadsafety It is safe to call this function from any thread, as it holds
 /// a stream-specific mutex while running.
@@ -1067,7 +1048,7 @@ Pointer<Int32> sdlGetAudioStreamInputChannelMap(
 /// \sa SDL_SetAudioStreamInputChannelMap
 ///
 /// ```c
-/// extern SDL_DECLSPEC const int * SDLCALL SDL_GetAudioStreamOutputChannelMap(SDL_AudioStream *stream, int *count)
+/// extern SDL_DECLSPEC_FREE int * SDLCALL SDL_GetAudioStreamOutputChannelMap(SDL_AudioStream *stream, int *count)
 /// ```
 Pointer<Int32> sdlGetAudioStreamOutputChannelMap(
     Pointer<SdlAudioStream> stream, Pointer<Int32> count) {

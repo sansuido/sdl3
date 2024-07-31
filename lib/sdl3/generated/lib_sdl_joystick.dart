@@ -59,13 +59,11 @@ bool sdlHasJoystick() {
 ///
 /// Get a list of currently connected joysticks.
 ///
-/// This returns temporary memory which will be automatically freed later, and
-/// can be claimed with SDL_ClaimTemporaryMemory().
-///
 /// \param count a pointer filled in with the number of joysticks returned, may
 /// be NULL.
 /// \returns a 0 terminated array of joystick instance IDs or NULL on failure;
-/// call SDL_GetError() for more information.
+/// call SDL_GetError() for more information. This should be freed
+/// with SDL_free() when it is no longer needed.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -73,7 +71,7 @@ bool sdlHasJoystick() {
 /// \sa SDL_OpenJoystick
 ///
 /// ```c
-/// extern SDL_DECLSPEC const SDL_JoystickID * SDLCALL SDL_GetJoysticks(int *count)
+/// extern SDL_DECLSPEC_FREE SDL_JoystickID * SDLCALL SDL_GetJoysticks(int *count)
 /// ```
 Pointer<Uint32> sdlGetJoysticks(Pointer<Int32> count) {
   final sdlGetJoysticksLookupFunction = libSdl3.lookupFunction<
@@ -86,9 +84,6 @@ Pointer<Uint32> sdlGetJoysticks(Pointer<Int32> count) {
 /// Get the implementation dependent name of a joystick.
 ///
 /// This can be called before any joysticks are opened.
-///
-/// This returns temporary memory which will be automatically freed later, and
-/// can be claimed with SDL_ClaimTemporaryMemory().
 ///
 /// \param instance_id the joystick instance ID.
 /// \returns the name of the selected joystick. If no name can be found, this
@@ -117,9 +112,6 @@ String? sdlGetJoystickNameForId(int instanceId) {
 /// Get the implementation dependent path of a joystick.
 ///
 /// This can be called before any joysticks are opened.
-///
-/// This returns temporary memory which will be automatically freed later, and
-/// can be claimed with SDL_ClaimTemporaryMemory().
 ///
 /// \param instance_id the joystick instance ID.
 /// \returns the path of the selected joystick. If no path can be found, this
@@ -659,9 +651,6 @@ int sdlGetJoystickProperties(Pointer<SdlJoystick> joystick) {
 ///
 /// Get the implementation dependent name of a joystick.
 ///
-/// This returns temporary memory which will be automatically freed later, and
-/// can be claimed with SDL_ClaimTemporaryMemory().
-///
 /// \param joystick the SDL_Joystick obtained from SDL_OpenJoystick().
 /// \returns the name of the selected joystick. If no name can be found, this
 /// function returns NULL; call SDL_GetError() for more information.
@@ -687,9 +676,6 @@ String? sdlGetJoystickName(Pointer<SdlJoystick> joystick) {
 
 ///
 /// Get the implementation dependent path of a joystick.
-///
-/// This returns temporary memory which will be automatically freed later, and
-/// can be claimed with SDL_ClaimTemporaryMemory().
 ///
 /// \param joystick the SDL_Joystick obtained from SDL_OpenJoystick().
 /// \returns the path of the selected joystick. If no path can be found, this
@@ -880,9 +866,6 @@ int sdlGetJoystickFirmwareVersion(Pointer<SdlJoystick> joystick) {
 /// Get the serial number of an opened joystick, if available.
 ///
 /// Returns the serial number of the joystick, or NULL if it is not available.
-///
-/// This returns temporary memory which will be automatically freed later, and
-/// can be claimed with SDL_ClaimTemporaryMemory().
 ///
 /// \param joystick the SDL_Joystick obtained from SDL_OpenJoystick().
 /// \returns the serial number of the selected joystick, or NULL if

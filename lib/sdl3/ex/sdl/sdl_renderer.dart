@@ -406,14 +406,27 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   }
 
   // lib_sdl_image.dart
+
+  /// NOT FOUND
+  /// ```c
+  /// extern SDL_DECLSPEC SDL_Texture * SDLCALL IMG_LoadTexture(SDL_Renderer *renderer, const char *file)
+  /// ```
   Pointer<SdlTexture> loadTexture(String file) {
     return imgLoadTexture(this, file);
   }
 
+  /// NOT FOUND
+  /// ```c
+  /// extern SDL_DECLSPEC SDL_Texture * SDLCALL IMG_LoadTexture_IO(SDL_Renderer *renderer, SDL_IOStream *src, SDL_bool closeio)
+  /// ```
   Pointer<SdlTexture> loadTextureIo(Pointer<SdlIoStream> src, bool freesrc) {
     return imgLoadTextureIo(this, src, freesrc);
   }
 
+  /// NOT FOUND
+  /// ```c
+  /// extern SDL_DECLSPEC SDL_Texture * SDLCALL IMG_LoadTextureTyped_IO(SDL_Renderer *renderer, SDL_IOStream *src, SDL_bool closeio, const char *type)
+  /// ```
   Pointer<SdlTexture> loadTextureTypedIo(
       Pointer<SdlIoStream> src, bool freesrc, String type) {
     return imgLoadTextureTypedIo(this, src, freesrc, type);
@@ -627,7 +640,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \sa SDL_UpdateTexture
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_Texture * SDLCALL SDL_CreateTexture(SDL_Renderer *renderer, SDL_PixelFormat format, int access, int w, int h)
+  /// extern SDL_DECLSPEC SDL_Texture * SDLCALL SDL_CreateTexture(SDL_Renderer *renderer, SDL_PixelFormat format, SDL_TextureAccess access, int w, int h)
   /// ```
   Pointer<SdlTexture> createTexture(int format, int access, int w, int h) {
     return sdlCreateTexture(this, format, access, w, h);
@@ -1717,6 +1730,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \since This function is available since SDL 3.0.0.
   ///
   /// \sa SDL_RenderTextureRotated
+  /// \sa SDL_RenderTextureTiled
   ///
   /// ```c
   /// extern SDL_DECLSPEC int SDLCALL SDL_RenderTexture(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_FRect *srcrect, const SDL_FRect *dstrect)

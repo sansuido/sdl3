@@ -2171,6 +2171,8 @@ final class SdlStorageInterface extends Struct {
   // [64]+(8)
   external Pointer<NativeType> rename;
   // [72]+(8)
+  external Pointer<NativeType> copy;
+  // [80]+(8)
   external Pointer<NativeType> spaceRemaining;
 }
 

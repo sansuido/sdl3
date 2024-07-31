@@ -137,18 +137,17 @@ extension SdlGamepadEx on SdlGamepad {
   ///
   /// Get the current gamepad mappings.
   ///
-  /// This returns temporary memory which will be automatically freed later, and
-  /// can be claimed with SDL_ClaimTemporaryMemory().
-  ///
   /// \param count a pointer filled in with the number of mappings returned, can
   /// be NULL.
   /// \returns an array of the mapping strings, NULL-terminated, or NULL on
-  /// failure; call SDL_GetError() for more information.
+  /// failure; call SDL_GetError() for more information. This is a
+  /// single allocation that should be freed with SDL_free() when it is
+  /// no longer needed.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
   /// ```c
-  /// extern SDL_DECLSPEC const char * const * SDLCALL SDL_GetGamepadMappings(int *count)
+  /// extern SDL_DECLSPEC_FREE char ** SDLCALL SDL_GetGamepadMappings(int *count)
   /// ```
   static Pointer<Pointer<Int8>> getMappings(Pointer<Int32> count) {
     return sdlGetGamepadMappings(count);
@@ -157,12 +156,10 @@ extension SdlGamepadEx on SdlGamepad {
   ///
   /// Get the gamepad mapping string for a given GUID.
   ///
-  /// This returns temporary memory which will be automatically freed later, and
-  /// can be claimed with SDL_ClaimTemporaryMemory().
-  ///
   /// \param guid a structure containing the GUID for which a mapping is desired.
   /// \returns a mapping string or NULL on failure; call SDL_GetError() for more
-  /// information.
+  /// information. This should be freed with SDL_free() when it is no
+  /// longer needed.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -170,9 +167,9 @@ extension SdlGamepadEx on SdlGamepad {
   /// \sa SDL_GetJoystickGUID
   ///
   /// ```c
-  /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetGamepadMappingForGUID(SDL_GUID guid)
+  /// extern SDL_DECLSPEC_FREE char * SDLCALL SDL_GetGamepadMappingForGUID(SDL_GUID guid)
   /// ```
-  static String? getMappingForGuid(SdlGuid guid) {
+  static Pointer<Int8> getMappingForGuid(SdlGuid guid) {
     return sdlGetGamepadMappingForGuid(guid);
   }
 
@@ -202,13 +199,11 @@ extension SdlGamepadEx on SdlGamepad {
   ///
   /// Get a list of currently connected gamepads.
   ///
-  /// This returns temporary memory which will be automatically freed later, and
-  /// can be claimed with SDL_ClaimTemporaryMemory().
-  ///
   /// \param count a pointer filled in with the number of gamepads returned, may
   /// be NULL.
   /// \returns a 0 terminated array of joystick instance IDs or NULL on failure;
-  /// call SDL_GetError() for more information.
+  /// call SDL_GetError() for more information. This should be freed
+  /// with SDL_free() when it is no longer needed.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -216,7 +211,7 @@ extension SdlGamepadEx on SdlGamepad {
   /// \sa SDL_OpenGamepad
   ///
   /// ```c
-  /// extern SDL_DECLSPEC const SDL_JoystickID * SDLCALL SDL_GetGamepads(int *count)
+  /// extern SDL_DECLSPEC_FREE SDL_JoystickID * SDLCALL SDL_GetGamepads(int *count)
   /// ```
   static Pointer<Uint32> gets(Pointer<Int32> count) {
     return sdlGetGamepads(count);
@@ -246,9 +241,6 @@ extension SdlGamepadEx on SdlGamepad {
   ///
   /// This can be called before any gamepads are opened.
   ///
-  /// This returns temporary memory which will be automatically freed later, and
-  /// can be claimed with SDL_ClaimTemporaryMemory().
-  ///
   /// \param instance_id the joystick instance ID.
   /// \returns the name of the selected gamepad. If no name can be found, this
   /// function returns NULL; call SDL_GetError() for more information.
@@ -269,9 +261,6 @@ extension SdlGamepadEx on SdlGamepad {
   /// Get the implementation dependent path of a gamepad.
   ///
   /// This can be called before any gamepads are opened.
-  ///
-  /// This returns temporary memory which will be automatically freed later, and
-  /// can be claimed with SDL_ClaimTemporaryMemory().
   ///
   /// \param instance_id the joystick instance ID.
   /// \returns the path of the selected gamepad. If no path can be found, this
@@ -320,8 +309,7 @@ extension SdlGamepadEx on SdlGamepad {
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
-  /// \sa SDL_GetGamepadGUID
-  /// \sa SDL_GetGamepadGUIDString
+  /// \sa SDL_GUIDToString
   /// \sa SDL_GetGamepads
   ///
   /// ```c
@@ -444,11 +432,9 @@ extension SdlGamepadEx on SdlGamepad {
   ///
   /// This can be called before any gamepads are opened.
   ///
-  /// This returns temporary memory which will be automatically freed later, and
-  /// can be claimed with SDL_ClaimTemporaryMemory().
-  ///
   /// \param instance_id the joystick instance ID.
-  /// \returns the mapping string. Returns NULL if no mapping is available.
+  /// \returns the mapping string. Returns NULL if no mapping is available. This
+  /// should be freed with SDL_free() when it is no longer needed.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -456,9 +442,9 @@ extension SdlGamepadEx on SdlGamepad {
   /// \sa SDL_GetGamepadMapping
   ///
   /// ```c
-  /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetGamepadMappingForID(SDL_JoystickID instance_id)
+  /// extern SDL_DECLSPEC_FREE char * SDLCALL SDL_GetGamepadMappingForID(SDL_JoystickID instance_id)
   /// ```
-  static String? getMappingForId(int instanceId) {
+  static Pointer<Int8> getMappingForId(int instanceId) {
     return sdlGetGamepadMappingForId(instanceId);
   }
 
@@ -598,9 +584,6 @@ extension SdlGamepadEx on SdlGamepad {
   ///
   /// Convert from an SDL_GamepadType enum to a string.
   ///
-  /// This returns temporary memory which will be automatically freed later, and
-  /// can be claimed with SDL_ClaimTemporaryMemory().
-  ///
   /// \param type an enum value for a given SDL_GamepadType.
   /// \returns a string for the given type, or NULL if an invalid type is
   /// specified. The string returned is of the format used by
@@ -647,9 +630,6 @@ extension SdlGamepadEx on SdlGamepad {
   ///
   /// Convert from an SDL_GamepadAxis enum to a string.
   ///
-  /// This returns temporary memory which will be automatically freed later, and
-  /// can be claimed with SDL_ClaimTemporaryMemory().
-  ///
   /// \param axis an enum value for a given SDL_GamepadAxis.
   /// \returns a string for the given axis, or NULL if an invalid axis is
   /// specified. The string returned is of the format used by
@@ -692,9 +672,6 @@ extension SdlGamepadEx on SdlGamepad {
   ///
   /// Convert from an SDL_GamepadButton enum to a string.
   ///
-  /// This returns temporary memory which will be automatically freed later, and
-  /// can be claimed with SDL_ClaimTemporaryMemory().
-  ///
   /// \param button an enum value for a given SDL_GamepadButton.
   /// \returns a string for the given button, or NULL if an invalid button is
   /// specified. The string returned is of the format used by
@@ -735,14 +712,12 @@ extension SdlGamepadPointerEx on Pointer<SdlGamepad> {
   ///
   /// Get the current mapping of a gamepad.
   ///
-  /// This returns temporary memory which will be automatically freed later, and
-  /// can be claimed with SDL_ClaimTemporaryMemory().
-  ///
   /// Details about mappings are discussed with SDL_AddGamepadMapping().
   ///
   /// \param gamepad the gamepad you want to get the current mapping for.
   /// \returns a string that has the gamepad's mapping or NULL if no mapping is
-  /// available; call SDL_GetError() for more information.
+  /// available; call SDL_GetError() for more information. This should
+  /// be freed with SDL_free() when it is no longer needed.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -752,9 +727,9 @@ extension SdlGamepadPointerEx on Pointer<SdlGamepad> {
   /// \sa SDL_SetGamepadMapping
   ///
   /// ```c
-  /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetGamepadMapping(SDL_Gamepad *gamepad)
+  /// extern SDL_DECLSPEC_FREE char * SDLCALL SDL_GetGamepadMapping(SDL_Gamepad *gamepad)
   /// ```
-  String? getMapping() {
+  Pointer<Int8> getMapping() {
     return sdlGetGamepadMapping(this);
   }
 
@@ -810,9 +785,6 @@ extension SdlGamepadPointerEx on Pointer<SdlGamepad> {
   ///
   /// Get the implementation-dependent name for an opened gamepad.
   ///
-  /// This returns temporary memory which will be automatically freed later, and
-  /// can be claimed with SDL_ClaimTemporaryMemory().
-  ///
   /// \param gamepad a gamepad identifier previously returned by
   /// SDL_OpenGamepad().
   /// \returns the implementation dependent name for the gamepad, or NULL if
@@ -831,9 +803,6 @@ extension SdlGamepadPointerEx on Pointer<SdlGamepad> {
 
   ///
   /// Get the implementation-dependent path for an opened gamepad.
-  ///
-  /// This returns temporary memory which will be automatically freed later, and
-  /// can be claimed with SDL_ClaimTemporaryMemory().
   ///
   /// \param gamepad a gamepad identifier previously returned by
   /// SDL_OpenGamepad().
@@ -1005,9 +974,6 @@ extension SdlGamepadPointerEx on Pointer<SdlGamepad> {
   ///
   /// Returns the serial number of the gamepad, or NULL if it is not available.
   ///
-  /// This returns temporary memory which will be automatically freed later, and
-  /// can be claimed with SDL_ClaimTemporaryMemory().
-  ///
   /// \param gamepad the gamepad object to query.
   /// \returns the serial number, or NULL if unavailable.
   ///
@@ -1125,18 +1091,17 @@ extension SdlGamepadPointerEx on Pointer<SdlGamepad> {
   ///
   /// Get the SDL joystick layer bindings for a gamepad.
   ///
-  /// This returns temporary memory which will be automatically freed later, and
-  /// can be claimed with SDL_ClaimTemporaryMemory().
-  ///
   /// \param gamepad a gamepad.
   /// \param count a pointer filled in with the number of bindings returned.
   /// \returns a NULL terminated array of pointers to bindings or NULL on
-  /// failure; call SDL_GetError() for more information.
+  /// failure; call SDL_GetError() for more information. This is a
+  /// single allocation that should be freed with SDL_free() when it is
+  /// no longer needed.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
   /// ```c
-  /// extern SDL_DECLSPEC const SDL_GamepadBinding * const * SDLCALL SDL_GetGamepadBindings(SDL_Gamepad *gamepad, int *count)
+  /// extern SDL_DECLSPEC_FREE SDL_GamepadBinding ** SDLCALL SDL_GetGamepadBindings(SDL_Gamepad *gamepad, int *count)
   /// ```
   Pointer<Pointer<SdlGamepadBinding>> getBindings(Pointer<Int32> count) {
     return sdlGetGamepadBindings(this, count);
@@ -1538,9 +1503,6 @@ extension SdlGamepadPointerEx on Pointer<SdlGamepad> {
   /// Return the sfSymbolsName for a given button on a gamepad on Apple
   /// platforms.
   ///
-  /// This returns temporary memory which will be automatically freed later, and
-  /// can be claimed with SDL_ClaimTemporaryMemory().
-  ///
   /// \param gamepad the gamepad to query.
   /// \param button a button on the gamepad.
   /// \returns the sfSymbolsName or NULL if the name can't be found.
@@ -1558,9 +1520,6 @@ extension SdlGamepadPointerEx on Pointer<SdlGamepad> {
 
   ///
   /// Return the sfSymbolsName for a given axis on a gamepad on Apple platforms.
-  ///
-  /// This returns temporary memory which will be automatically freed later, and
-  /// can be claimed with SDL_ClaimTemporaryMemory().
   ///
   /// \param gamepad the gamepad to query.
   /// \param axis an axis on the gamepad.

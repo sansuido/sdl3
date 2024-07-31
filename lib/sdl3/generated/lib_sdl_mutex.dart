@@ -439,7 +439,7 @@ void sdlDestroyRwLock(Pointer<SdlRwLock> rwlock) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_DestroySemaphore
-/// \sa SDL_PostSemaphore
+/// \sa SDL_SignalSemaphore
 /// \sa SDL_TryWaitSemaphore
 /// \sa SDL_GetSemaphoreValue
 /// \sa SDL_WaitSemaphore
@@ -494,7 +494,7 @@ void sdlDestroySemaphore(Pointer<SdlSemaphore> sem) {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_PostSemaphore
+/// \sa SDL_SignalSemaphore
 /// \sa SDL_TryWaitSemaphore
 /// \sa SDL_WaitSemaphoreTimeout
 ///
@@ -523,7 +523,7 @@ int sdlWaitSemaphore(Pointer<SdlSemaphore> sem) {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_PostSemaphore
+/// \sa SDL_SignalSemaphore
 /// \sa SDL_WaitSemaphore
 /// \sa SDL_WaitSemaphoreTimeout
 ///
@@ -553,7 +553,7 @@ int sdlTryWaitSemaphore(Pointer<SdlSemaphore> sem) {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_PostSemaphore
+/// \sa SDL_SignalSemaphore
 /// \sa SDL_TryWaitSemaphore
 /// \sa SDL_WaitSemaphore
 ///
@@ -582,13 +582,13 @@ int sdlWaitSemaphoreTimeout(Pointer<SdlSemaphore> sem, int timeoutMs) {
 /// \sa SDL_WaitSemaphoreTimeout
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_PostSemaphore(SDL_Semaphore *sem)
+/// extern SDL_DECLSPEC int SDLCALL SDL_SignalSemaphore(SDL_Semaphore *sem)
 /// ```
-int sdlPostSemaphore(Pointer<SdlSemaphore> sem) {
-  final sdlPostSemaphoreLookupFunction = libSdl3.lookupFunction<
+int sdlSignalSemaphore(Pointer<SdlSemaphore> sem) {
+  final sdlSignalSemaphoreLookupFunction = libSdl3.lookupFunction<
       Int32 Function(Pointer<SdlSemaphore> sem),
-      int Function(Pointer<SdlSemaphore> sem)>('SDL_PostSemaphore');
-  return sdlPostSemaphoreLookupFunction(sem);
+      int Function(Pointer<SdlSemaphore> sem)>('SDL_SignalSemaphore');
+  return sdlSignalSemaphoreLookupFunction(sem);
 }
 
 ///

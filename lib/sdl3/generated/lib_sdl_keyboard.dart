@@ -30,13 +30,11 @@ bool sdlHasKeyboard() {
 /// power buttons, etc. You should wait for input from a device before you
 /// consider it actively in use.
 ///
-/// This returns temporary memory which will be automatically freed later, and
-/// can be claimed with SDL_ClaimTemporaryMemory().
-///
 /// \param count a pointer filled in with the number of keyboards returned, may
 /// be NULL.
 /// \returns a 0 terminated array of keyboards instance IDs or NULL on failure;
-/// call SDL_GetError() for more information.
+/// call SDL_GetError() for more information. This should be freed
+/// with SDL_free() when it is no longer needed.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -44,7 +42,7 @@ bool sdlHasKeyboard() {
 /// \sa SDL_HasKeyboard
 ///
 /// ```c
-/// extern SDL_DECLSPEC const SDL_KeyboardID * SDLCALL SDL_GetKeyboards(int *count)
+/// extern SDL_DECLSPEC_FREE SDL_KeyboardID * SDLCALL SDL_GetKeyboards(int *count)
 /// ```
 Pointer<Uint32> sdlGetKeyboards(Pointer<Int32> count) {
   final sdlGetKeyboardsLookupFunction = libSdl3.lookupFunction<
@@ -57,9 +55,6 @@ Pointer<Uint32> sdlGetKeyboards(Pointer<Int32> count) {
 /// Get the name of a keyboard.
 ///
 /// This function returns "" if the keyboard doesn't have a name.
-///
-/// This returns temporary memory which will be automatically freed later, and
-/// can be claimed with SDL_ClaimTemporaryMemory().
 ///
 /// \param instance_id the keyboard instance ID.
 /// \returns the name of the selected keyboard or NULL on failure; call
@@ -345,9 +340,6 @@ int sdlSetScancodeName(int scancode, String? name) {
 ///
 /// Get a human-readable name for a scancode.
 ///
-/// This returns temporary memory which will be automatically freed later, and
-/// can be claimed with SDL_ClaimTemporaryMemory().
-///
 /// **Warning**: The returned name is by design not stable across platforms,
 /// e.g. the name for `SDL_SCANCODE_LGUI` is "Left GUI" under Linux but "Left
 /// Windows" under Microsoft Windows, and some scancodes like
@@ -414,9 +406,6 @@ int sdlGetScancodeFromName(String? name) {
 /// SDL_Keycode 'a' and 'A' both have the name "A".
 ///
 /// If the key doesn't have a name, this function returns an empty string ("").
-///
-/// This returns temporary memory which will be automatically freed later, and
-/// can be claimed with SDL_ClaimTemporaryMemory().
 ///
 /// \param key the desired SDL_Keycode to query.
 /// \returns a UTF-8 encoded string of the key name.

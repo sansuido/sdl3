@@ -46,9 +46,6 @@ int sdlGetNumCameraDrivers() {
 /// "coremedia" or "android". These never have Unicode characters, and are not
 /// meant to be proper names.
 ///
-/// This returns temporary memory which will be automatically freed later, and
-/// can be claimed with SDL_ClaimTemporaryMemory().
-///
 /// \param index the index of the camera driver; the value ranges from 0 to
 /// SDL_GetNumCameraDrivers() - 1.
 /// \returns the name of the camera driver at the requested index, or NULL if
@@ -81,9 +78,6 @@ String? sdlGetCameraDriver(int index) {
 /// "coremedia" or "android". These never have Unicode characters, and are not
 /// meant to be proper names.
 ///
-/// This returns temporary memory which will be automatically freed later, and
-/// can be claimed with SDL_ClaimTemporaryMemory().
-///
 /// \returns the name of the current camera driver or NULL if no driver has
 /// been initialized.
 ///
@@ -108,13 +102,11 @@ String? sdlGetCurrentCameraDriver() {
 ///
 /// Get a list of currently connected camera devices.
 ///
-/// This returns temporary memory which will be automatically freed later, and
-/// can be claimed with SDL_ClaimTemporaryMemory().
-///
 /// \param count a pointer filled in with the number of cameras returned, may
 /// be NULL.
 /// \returns a 0 terminated array of camera instance IDs or NULL on failure;
-/// call SDL_GetError() for more information.
+/// call SDL_GetError() for more information. This should be freed
+/// with SDL_free() when it is no longer needed.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -123,7 +115,7 @@ String? sdlGetCurrentCameraDriver() {
 /// \sa SDL_OpenCamera
 ///
 /// ```c
-/// extern SDL_DECLSPEC const SDL_CameraID * SDLCALL SDL_GetCameras(int *count)
+/// extern SDL_DECLSPEC_FREE SDL_CameraID * SDLCALL SDL_GetCameras(int *count)
 /// ```
 Pointer<Uint32> sdlGetCameras(Pointer<Int32> count) {
   final sdlGetCamerasLookupFunction = libSdl3.lookupFunction<
@@ -154,14 +146,13 @@ Pointer<Uint32> sdlGetCameras(Pointer<Int32> count) {
 /// there _is_ a camera until the user has given you permission to check
 /// through a scary warning popup.
 ///
-/// This returns temporary memory which will be automatically freed later, and
-/// can be claimed with SDL_ClaimTemporaryMemory().
-///
 /// \param devid the camera device instance ID to query.
 /// \param count a pointer filled in with the number of elements in the list,
 /// may be NULL.
 /// \returns a NULL terminated array of pointers to SDL_CameraSpec or NULL on
-/// failure; call SDL_GetError() for more information.
+/// failure; call SDL_GetError() for more information. This is a
+/// single allocation that should be freed with SDL_free() when it is
+/// no longer needed.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -171,7 +162,7 @@ Pointer<Uint32> sdlGetCameras(Pointer<Int32> count) {
 /// \sa SDL_OpenCamera
 ///
 /// ```c
-/// extern SDL_DECLSPEC const SDL_CameraSpec * const * SDLCALL SDL_GetCameraSupportedFormats(SDL_CameraID devid, int *count)
+/// extern SDL_DECLSPEC_FREE SDL_CameraSpec ** SDLCALL SDL_GetCameraSupportedFormats(SDL_CameraID devid, int *count)
 /// ```
 Pointer<Pointer<SdlCameraSpec>> sdlGetCameraSupportedFormats(
     int devid, Pointer<Int32> count) {
@@ -185,9 +176,6 @@ Pointer<Pointer<SdlCameraSpec>> sdlGetCameraSupportedFormats(
 
 ///
 /// Get the human-readable device name for a camera.
-///
-/// This returns temporary memory which will be automatically freed later, and
-/// can be claimed with SDL_ClaimTemporaryMemory().
 ///
 /// \param instance_id the camera device instance ID.
 /// \returns a human-readable device name or NULL on failure; call
