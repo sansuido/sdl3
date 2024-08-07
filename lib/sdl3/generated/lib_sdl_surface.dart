@@ -267,6 +267,126 @@ Pointer<SdlPalette> sdlGetSurfacePalette(Pointer<SdlSurface> surface) {
 }
 
 ///
+/// Add an alternate version of a surface.
+///
+/// This function adds an alternate version of this surface, usually used for
+/// content with high DPI representations like cursors or icons. The size,
+/// format, and content do not need to match the original surface, and these
+/// alternate versions will not be updated when the original surface changes.
+///
+/// This function adds a reference to the alternate version, so you should call
+/// SDL_DestroySurface() on the image after this call.
+///
+/// \param surface the SDL_Surface structure to update.
+/// \param image a pointer to an alternate SDL_Surface to associate with this
+/// surface.
+/// \returns SDL_TRUE if alternate versions are available or SDL_TRUE
+/// otherwise.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_RemoveSurfaceAlternateImages
+/// \sa SDL_GetSurfaceImages
+/// \sa SDL_SurfaceHasAlternateImages
+///
+/// ```c
+/// extern SDL_DECLSPEC int SDLCALL SDL_AddSurfaceAlternateImage(SDL_Surface *surface, SDL_Surface *image)
+/// ```
+int sdlAddSurfaceAlternateImage(
+    Pointer<SdlSurface> surface, Pointer<SdlSurface> image) {
+  final sdlAddSurfaceAlternateImageLookupFunction = libSdl3.lookupFunction<
+      Int32 Function(Pointer<SdlSurface> surface, Pointer<SdlSurface> image),
+      int Function(Pointer<SdlSurface> surface,
+          Pointer<SdlSurface> image)>('SDL_AddSurfaceAlternateImage');
+  return sdlAddSurfaceAlternateImageLookupFunction(surface, image);
+}
+
+///
+/// Return whether a surface has alternate versions available.
+///
+/// \param surface the SDL_Surface structure to query.
+/// \returns SDL_TRUE if alternate versions are available or SDL_TRUE
+/// otherwise.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_AddSurfaceAlternateImage
+/// \sa SDL_RemoveSurfaceAlternateImages
+/// \sa SDL_GetSurfaceImages
+///
+/// ```c
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SurfaceHasAlternateImages(SDL_Surface *surface)
+/// ```
+bool sdlSurfaceHasAlternateImages(Pointer<SdlSurface> surface) {
+  final sdlSurfaceHasAlternateImagesLookupFunction = libSdl3.lookupFunction<
+      Int32 Function(Pointer<SdlSurface> surface),
+      int Function(
+          Pointer<SdlSurface> surface)>('SDL_SurfaceHasAlternateImages');
+  return sdlSurfaceHasAlternateImagesLookupFunction(surface) == 1;
+}
+
+///
+/// Get an array including all versions of a surface.
+///
+/// This returns all versions of a surface, with the surface being queried as
+/// the first element in the returned array.
+///
+/// Freeing the array of surfaces does not affect the surfaces in the array.
+/// They are still referenced by the surface being queried and will be cleaned
+/// up normally.
+///
+/// \param surface the SDL_Surface structure to query.
+/// \param count a pointer filled in with the number of surface pointers
+/// returned, may be NULL.
+/// \returns a NULL terminated array of SDL_Surface pointers or NULL on
+/// failure; call SDL_GetError() for more information. This should be
+/// freed with SDL_free() when it is no longer needed.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_AddSurfaceAlternateImage
+/// \sa SDL_RemoveSurfaceAlternateImages
+/// \sa SDL_SurfaceHasAlternateImages
+///
+/// ```c
+/// extern SDL_DECLSPEC SDL_Surface ** SDLCALL SDL_GetSurfaceImages(SDL_Surface *surface, int *count)
+/// ```
+Pointer<Pointer<SdlSurface>> sdlGetSurfaceImages(
+    Pointer<SdlSurface> surface, Pointer<Int32> count) {
+  final sdlGetSurfaceImagesLookupFunction = libSdl3.lookupFunction<
+      Pointer<Pointer<SdlSurface>> Function(
+          Pointer<SdlSurface> surface, Pointer<Int32> count),
+      Pointer<Pointer<SdlSurface>> Function(Pointer<SdlSurface> surface,
+          Pointer<Int32> count)>('SDL_GetSurfaceImages');
+  return sdlGetSurfaceImagesLookupFunction(surface, count);
+}
+
+///
+/// Remove all alternate versions of a surface.
+///
+/// This function removes a reference from all the alternative versions,
+/// destroying them if this is the last reference to them.
+///
+/// \param surface the SDL_Surface structure to update.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_AddSurfaceAlternateImage
+/// \sa SDL_GetSurfaceImages
+/// \sa SDL_SurfaceHasAlternateImages
+///
+/// ```c
+/// extern SDL_DECLSPEC void SDLCALL SDL_RemoveSurfaceAlternateImages(SDL_Surface *surface)
+/// ```
+void sdlRemoveSurfaceAlternateImages(Pointer<SdlSurface> surface) {
+  final sdlRemoveSurfaceAlternateImagesLookupFunction = libSdl3.lookupFunction<
+      Void Function(Pointer<SdlSurface> surface),
+      void Function(
+          Pointer<SdlSurface> surface)>('SDL_RemoveSurfaceAlternateImages');
+  return sdlRemoveSurfaceAlternateImagesLookupFunction(surface);
+}
+
+///
 /// Set up a surface for directly accessing the pixels.
 ///
 /// Between calls to SDL_LockSurface() / SDL_UnlockSurface(), you can write to
@@ -823,6 +943,9 @@ int sdlFlipSurface(Pointer<SdlSurface> surface, int flip) {
 ///
 /// Creates a new surface identical to the existing surface.
 ///
+/// If the original surface has alternate images, the new surface will have a
+/// reference to them as well.
+///
 /// The returned surface should be freed with SDL_DestroySurface().
 ///
 /// \param surface the surface to duplicate.
@@ -845,6 +968,36 @@ Pointer<SdlSurface> sdlDuplicateSurface(Pointer<SdlSurface> surface) {
 }
 
 ///
+/// Creates a new surface identical to the existing surface, scaled to the
+/// desired size.
+///
+/// The returned surface should be freed with SDL_DestroySurface().
+///
+/// \param surface the surface to duplicate and scale.
+/// \param width the width of the new surface.
+/// \param height the height of the new surface.
+/// \param scaleMode the SDL_ScaleMode to be used.
+/// \returns a copy of the surface or NULL on failure; call SDL_GetError() for
+/// more information.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_DestroySurface
+///
+/// ```c
+/// extern SDL_DECLSPEC SDL_Surface * SDLCALL SDL_ScaleSurface(SDL_Surface *surface, int width, int height, SDL_ScaleMode scaleMode)
+/// ```
+Pointer<SdlSurface> sdlScaleSurface(
+    Pointer<SdlSurface> surface, int width, int height, int scaleMode) {
+  final sdlScaleSurfaceLookupFunction = libSdl3.lookupFunction<
+      Pointer<SdlSurface> Function(Pointer<SdlSurface> surface, Int32 width,
+          Int32 height, Int32 scaleMode),
+      Pointer<SdlSurface> Function(Pointer<SdlSurface> surface, int width,
+          int height, int scaleMode)>('SDL_ScaleSurface');
+  return sdlScaleSurfaceLookupFunction(surface, width, height, scaleMode);
+}
+
+///
 /// Copy an existing surface to a new surface of the specified format.
 ///
 /// This function is used to optimize images for faster *repeat* blitting. This
@@ -854,6 +1007,9 @@ Pointer<SdlSurface> sdlDuplicateSurface(Pointer<SdlSurface> surface) {
 ///
 /// If you are converting to an indexed surface and want to map colors to a
 /// palette, you can use SDL_ConvertSurfaceAndColorspace() instead.
+///
+/// If the original surface has alternate images, the new surface will have a
+/// reference to them as well.
 ///
 /// \param surface the existing SDL_Surface structure to convert.
 /// \param format the new pixel format.
@@ -883,6 +1039,9 @@ Pointer<SdlSurface> sdlConvertSurface(Pointer<SdlSurface> surface, int format) {
 /// This function converts an existing surface to a new format and colorspace
 /// and returns the new surface. This will perform any pixel format and
 /// colorspace conversion needed.
+///
+/// If the original surface has alternate images, the new surface will have a
+/// reference to them as well.
 ///
 /// \param surface the existing SDL_Surface structure to convert.
 /// \param format the new pixel format.
@@ -1420,7 +1579,7 @@ int sdlBlitSurfaceScaled(Pointer<SdlSurface> src, Pointer<SdlRect> srcrect,
 /// \param dst the SDL_Surface structure that is the blit target.
 /// \param dstrect the SDL_Rect structure representing the target rectangle in
 /// the destination surface, may not be NULL.
-/// \param scaleMode scale algorithm to be used.
+/// \param scaleMode the SDL_ScaleMode to be used.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -1556,15 +1715,19 @@ int sdlBlitSurfaceTiledWithScale(
 /// which may be of a different format.
 ///
 /// The pixels in the source surface are split into a 3x3 grid, using the
-/// corner size for each corner, and the sides and center making up the
-/// remaining pixels. The corners are then scaled using `scale` and fit into
-/// the corners of the destination rectangle. The sides and center are then
-/// stretched into place to cover the remaining destination rectangle.
+/// different corner sizes for each corner, and the sides and center making up
+/// the remaining pixels. The corners are then scaled using `scale` and fit
+/// into the corners of the destination rectangle. The sides and center are
+/// then stretched into place to cover the remaining destination rectangle.
 ///
 /// \param src the SDL_Surface structure to be copied from.
 /// \param srcrect the SDL_Rect structure representing the rectangle to be used
 /// for the 9-grid, or NULL to use the entire surface.
-/// \param corner_size the size, in pixels, of the corner in `srcrect`.
+/// \param left_width the width, in pixels, of the left corners in `srcrect`.
+/// \param right_width the width, in pixels, of the right corners in `srcrect`.
+/// \param top_height the height, in pixels, of the top corners in `srcrect`.
+/// \param bottom_height the height, in pixels, of the bottom corners in
+/// `srcrect`.
 /// \param scale the scale used to transform the corner of `srcrect` into the
 /// corner of `dstrect`, or 0.0f for an unscaled blit.
 /// \param scaleMode scale algorithm to be used.
@@ -1583,12 +1746,15 @@ int sdlBlitSurfaceTiledWithScale(
 /// \sa SDL_BlitSurface
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_BlitSurface9Grid(SDL_Surface *src, const SDL_Rect *srcrect, int corner_size, float scale, SDL_ScaleMode scaleMode, SDL_Surface *dst, const SDL_Rect *dstrect)
+/// extern SDL_DECLSPEC int SDLCALL SDL_BlitSurface9Grid(SDL_Surface *src, const SDL_Rect *srcrect, int left_width, int right_width, int top_height, int bottom_height, float scale, SDL_ScaleMode scaleMode, SDL_Surface *dst, const SDL_Rect *dstrect)
 /// ```
 int sdlBlitSurface9Grid(
     Pointer<SdlSurface> src,
     Pointer<SdlRect> srcrect,
-    int cornerSize,
+    int leftWidth,
+    int rightWidth,
+    int topHeight,
+    int bottomHeight,
     double scale,
     int scaleMode,
     Pointer<SdlSurface> dst,
@@ -1597,7 +1763,10 @@ int sdlBlitSurface9Grid(
       Int32 Function(
           Pointer<SdlSurface> src,
           Pointer<SdlRect> srcrect,
-          Int32 cornerSize,
+          Int32 leftWidth,
+          Int32 rightWidth,
+          Int32 topHeight,
+          Int32 bottomHeight,
           Float scale,
           Int32 scaleMode,
           Pointer<SdlSurface> dst,
@@ -1605,13 +1774,16 @@ int sdlBlitSurface9Grid(
       int Function(
           Pointer<SdlSurface> src,
           Pointer<SdlRect> srcrect,
-          int cornerSize,
+          int leftWidth,
+          int rightWidth,
+          int topHeight,
+          int bottomHeight,
           double scale,
           int scaleMode,
           Pointer<SdlSurface> dst,
           Pointer<SdlRect> dstrect)>('SDL_BlitSurface9Grid');
-  return sdlBlitSurface9GridLookupFunction(
-      src, srcrect, cornerSize, scale, scaleMode, dst, dstrect);
+  return sdlBlitSurface9GridLookupFunction(src, srcrect, leftWidth, rightWidth,
+      topHeight, bottomHeight, scale, scaleMode, dst, dstrect);
 }
 
 ///

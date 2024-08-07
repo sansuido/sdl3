@@ -119,4 +119,35 @@ class FpsManager {
     }
     return timePassed.toInt();
   }
+
+  Future<int> delayNative() async {
+    double currentTicks;
+    double targetTicks;
+    double theDelay;
+    double timePassed = 0;
+
+    if (_baseticks == 0) {
+      init();
+    }
+    _framecount++;
+    currentTicks = _getTicks();
+    timePassed = currentTicks - _lastticks;
+    _lastticks = currentTicks.toDouble();
+    targetTicks = _baseticks + _framecount.toDouble() * _rateticks;
+    if (currentTicks <= targetTicks) {
+      theDelay = targetTicks - currentTicks;
+      await Future.delayed(Duration(milliseconds: theDelay.toInt()));
+    } else {
+      _framecount = 0;
+      _baseticks = _getTicks();
+    }
+    if ((sdlGetTicks() - _measticks) > 1000) {
+      _measrate = _meascount;
+      _meascount = 0;
+      _measticks = _getTicks();
+    } else {
+      _meascount++;
+    }
+    return timePassed.toInt();
+  }
 }

@@ -59,6 +59,15 @@ extension SdlCursorEx on SdlCursor {
   ///
   /// Create a color cursor.
   ///
+  /// If this function is passed a surface with alternate representations, the
+  /// surface will be interpreted as the content to be used for 100% display
+  /// scale, and the alternate representations will be used for high DPI
+  /// situations. For example, if the original surface is 32x32, then on a 2x
+  /// macOS display or 200% display scale on Windows, a 64x64 version of the
+  /// image will be used, if available. If a matching version of the image isn't
+  /// available, the closest size image will be scaled to the appropriate size
+  /// and be used instead.
+  ///
   /// \param surface an SDL_Surface structure representing the cursor image.
   /// \param hot_x the x position of the cursor hot spot.
   /// \param hot_y the y position of the cursor hot spot.
@@ -194,8 +203,8 @@ extension SdlCursorPointerEx on Pointer<SdlCursor> {
   /// ```c
   /// extern SDL_DECLSPEC int SDLCALL SDL_SetCursor(SDL_Cursor *cursor)
   /// ```
-  void set() {
-    sdlSetCursor(this);
+  int set() {
+    return sdlSetCursor(this);
   }
 
   ///

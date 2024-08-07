@@ -12,6 +12,8 @@ export 'sdl3/ex/sdl/sdl_gamepad.dart';
 export 'sdl3/ex/sdl/sdl_point.dart';
 export 'sdl3/ex/sdl/sdl_rect.dart';
 export 'sdl3/ex/sdl/sdl_renderer.dart';
+export 'sdl3/ex/sdl/sdl_renderer_from_gfx.dart';
+export 'sdl3/ex/sdl/sdl_renderer_from_image.dart';
 export 'sdl3/ex/sdl/sdl_surface.dart';
 export 'sdl3/ex/sdl/sdl_texture.dart';
 export 'sdl3/ex/sdl/sdl_window.dart';

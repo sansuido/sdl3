@@ -5,7 +5,7 @@ import 'lib_sdl.dart';
 import 'struct_sdl.dart';
 
 /// ```c
-/// extern SDL_DECLSPEC_FREE SDL_MALLOC void * SDLCALL SDL_malloc(size_t size)
+/// extern SDL_DECLSPEC SDL_MALLOC void * SDLCALL SDL_malloc(size_t size)
 /// ```
 Pointer<NativeType> sdlMalloc(int size) {
   final sdlMallocLookupFunction = libSdl3.lookupFunction<

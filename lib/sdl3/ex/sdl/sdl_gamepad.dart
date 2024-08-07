@@ -147,7 +147,7 @@ extension SdlGamepadEx on SdlGamepad {
   /// \since This function is available since SDL 3.0.0.
   ///
   /// ```c
-  /// extern SDL_DECLSPEC_FREE char ** SDLCALL SDL_GetGamepadMappings(int *count)
+  /// extern SDL_DECLSPEC char ** SDLCALL SDL_GetGamepadMappings(int *count)
   /// ```
   static Pointer<Pointer<Int8>> getMappings(Pointer<Int32> count) {
     return sdlGetGamepadMappings(count);
@@ -167,7 +167,7 @@ extension SdlGamepadEx on SdlGamepad {
   /// \sa SDL_GetJoystickGUID
   ///
   /// ```c
-  /// extern SDL_DECLSPEC_FREE char * SDLCALL SDL_GetGamepadMappingForGUID(SDL_GUID guid)
+  /// extern SDL_DECLSPEC char * SDLCALL SDL_GetGamepadMappingForGUID(SDL_GUID guid)
   /// ```
   static Pointer<Int8> getMappingForGuid(SdlGuid guid) {
     return sdlGetGamepadMappingForGuid(guid);
@@ -211,7 +211,7 @@ extension SdlGamepadEx on SdlGamepad {
   /// \sa SDL_OpenGamepad
   ///
   /// ```c
-  /// extern SDL_DECLSPEC_FREE SDL_JoystickID * SDLCALL SDL_GetGamepads(int *count)
+  /// extern SDL_DECLSPEC SDL_JoystickID * SDLCALL SDL_GetGamepads(int *count)
   /// ```
   static Pointer<Uint32> gets(Pointer<Int32> count) {
     return sdlGetGamepads(count);
@@ -442,7 +442,7 @@ extension SdlGamepadEx on SdlGamepad {
   /// \sa SDL_GetGamepadMapping
   ///
   /// ```c
-  /// extern SDL_DECLSPEC_FREE char * SDLCALL SDL_GetGamepadMappingForID(SDL_JoystickID instance_id)
+  /// extern SDL_DECLSPEC char * SDLCALL SDL_GetGamepadMappingForID(SDL_JoystickID instance_id)
   /// ```
   static Pointer<Int8> getMappingForId(int instanceId) {
     return sdlGetGamepadMappingForId(instanceId);
@@ -709,6 +709,7 @@ extension SdlGamepadEx on SdlGamepad {
 
 extension SdlGamepadPointerEx on Pointer<SdlGamepad> {
   // lib_sdl_gamepad.dart
+
   ///
   /// Get the current mapping of a gamepad.
   ///
@@ -727,7 +728,7 @@ extension SdlGamepadPointerEx on Pointer<SdlGamepad> {
   /// \sa SDL_SetGamepadMapping
   ///
   /// ```c
-  /// extern SDL_DECLSPEC_FREE char * SDLCALL SDL_GetGamepadMapping(SDL_Gamepad *gamepad)
+  /// extern SDL_DECLSPEC char * SDLCALL SDL_GetGamepadMapping(SDL_Gamepad *gamepad)
   /// ```
   Pointer<Int8> getMapping() {
     return sdlGetGamepadMapping(this);
@@ -1101,7 +1102,7 @@ extension SdlGamepadPointerEx on Pointer<SdlGamepad> {
   /// \since This function is available since SDL 3.0.0.
   ///
   /// ```c
-  /// extern SDL_DECLSPEC_FREE SDL_GamepadBinding ** SDLCALL SDL_GetGamepadBindings(SDL_Gamepad *gamepad, int *count)
+  /// extern SDL_DECLSPEC SDL_GamepadBinding ** SDLCALL SDL_GetGamepadBindings(SDL_Gamepad *gamepad, int *count)
   /// ```
   Pointer<Pointer<SdlGamepadBinding>> getBindings(Pointer<Int32> count) {
     return sdlGetGamepadBindings(this, count);

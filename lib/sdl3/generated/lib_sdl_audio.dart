@@ -127,7 +127,7 @@ String? sdlGetCurrentAudioDriver() {
 /// \sa SDL_GetAudioRecordingDevices
 ///
 /// ```c
-/// extern SDL_DECLSPEC_FREE SDL_AudioDeviceID * SDLCALL SDL_GetAudioPlaybackDevices(int *count)
+/// extern SDL_DECLSPEC SDL_AudioDeviceID * SDLCALL SDL_GetAudioPlaybackDevices(int *count)
 /// ```
 Pointer<Uint32> sdlGetAudioPlaybackDevices(Pointer<Int32> count) {
   final sdlGetAudioPlaybackDevicesLookupFunction = libSdl3.lookupFunction<
@@ -165,7 +165,7 @@ Pointer<Uint32> sdlGetAudioPlaybackDevices(Pointer<Int32> count) {
 /// \sa SDL_GetAudioPlaybackDevices
 ///
 /// ```c
-/// extern SDL_DECLSPEC_FREE SDL_AudioDeviceID * SDLCALL SDL_GetAudioRecordingDevices(int *count)
+/// extern SDL_DECLSPEC SDL_AudioDeviceID * SDLCALL SDL_GetAudioRecordingDevices(int *count)
 /// ```
 Pointer<Uint32> sdlGetAudioRecordingDevices(Pointer<Int32> count) {
   final sdlGetAudioRecordingDevicesLookupFunction = libSdl3.lookupFunction<
@@ -272,7 +272,7 @@ int sdlGetAudioDeviceFormat(
 /// \sa SDL_SetAudioStreamInputChannelMap
 ///
 /// ```c
-/// extern SDL_DECLSPEC_FREE int * SDLCALL SDL_GetAudioDeviceChannelMap(SDL_AudioDeviceID devid, int *count)
+/// extern SDL_DECLSPEC int * SDLCALL SDL_GetAudioDeviceChannelMap(SDL_AudioDeviceID devid, int *count)
 /// ```
 Pointer<Int32> sdlGetAudioDeviceChannelMap(int devid, Pointer<Int32> count) {
   final sdlGetAudioDeviceChannelMapLookupFunction = libSdl3.lookupFunction<
@@ -597,7 +597,7 @@ void sdlCloseAudioDevice(int devid) {
 /// stream's format at any time.
 ///
 /// \param devid an audio device to bind a stream to.
-/// \param streams an array of audio streams to unbind.
+/// \param streams an array of audio streams to bind.
 /// \param num_streams number streams listed in the `streams` array.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
@@ -1013,7 +1013,7 @@ int sdlSetAudioStreamGain(Pointer<SdlAudioStream> stream, double gain) {
 /// \sa SDL_SetAudioStreamInputChannelMap
 ///
 /// ```c
-/// extern SDL_DECLSPEC_FREE int * SDLCALL SDL_GetAudioStreamInputChannelMap(SDL_AudioStream *stream, int *count)
+/// extern SDL_DECLSPEC int * SDLCALL SDL_GetAudioStreamInputChannelMap(SDL_AudioStream *stream, int *count)
 /// ```
 Pointer<Int32> sdlGetAudioStreamInputChannelMap(
     Pointer<SdlAudioStream> stream, Pointer<Int32> count) {
@@ -1048,7 +1048,7 @@ Pointer<Int32> sdlGetAudioStreamInputChannelMap(
 /// \sa SDL_SetAudioStreamInputChannelMap
 ///
 /// ```c
-/// extern SDL_DECLSPEC_FREE int * SDLCALL SDL_GetAudioStreamOutputChannelMap(SDL_AudioStream *stream, int *count)
+/// extern SDL_DECLSPEC int * SDLCALL SDL_GetAudioStreamOutputChannelMap(SDL_AudioStream *stream, int *count)
 /// ```
 Pointer<Int32> sdlGetAudioStreamOutputChannelMap(
     Pointer<SdlAudioStream> stream, Pointer<Int32> count) {

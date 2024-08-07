@@ -2548,17 +2548,21 @@ int sdlRenderTextureTiled(
 /// Perform a scaled copy using the 9-grid algorithm to the current rendering
 /// target at subpixel precision.
 ///
-/// The pixels in the texture are split into a 3x3 grid, using the corner size
-/// for each corner, and the sides and center making up the remaining pixels.
-/// The corners are then scaled using `scale` and fit into the corners of the
-/// destination rectangle. The sides and center are then stretched into place
-/// to cover the remaining destination rectangle.
+/// The pixels in the texture are split into a 3x3 grid, using the different
+/// corner sizes for each corner, and the sides and center making up the
+/// remaining pixels. The corners are then scaled using `scale` and fit into
+/// the corners of the destination rectangle. The sides and center are then
+/// stretched into place to cover the remaining destination rectangle.
 ///
 /// \param renderer the renderer which should copy parts of a texture.
 /// \param texture the source texture.
 /// \param srcrect the SDL_Rect structure representing the rectangle to be used
 /// for the 9-grid, or NULL to use the entire texture.
-/// \param corner_size the size, in pixels, of the corner in `srcrect`.
+/// \param left_width the width, in pixels, of the left corners in `srcrect`.
+/// \param right_width the width, in pixels, of the right corners in `srcrect`.
+/// \param top_height the height, in pixels, of the top corners in `srcrect`.
+/// \param bottom_height the height, in pixels, of the bottom corners in
+/// `srcrect`.
 /// \param scale the scale used to transform the corner of `srcrect` into the
 /// corner of `dstrect`, or 0.0f for an unscaled copy.
 /// \param dstrect a pointer to the destination rectangle, or NULL for the
@@ -2571,13 +2575,16 @@ int sdlRenderTextureTiled(
 /// \sa SDL_RenderTexture
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_RenderTexture9Grid(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_FRect *srcrect, float corner_size, float scale, const SDL_FRect *dstrect)
+/// extern SDL_DECLSPEC int SDLCALL SDL_RenderTexture9Grid(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_FRect *srcrect, float left_width, float right_width, float top_height, float bottom_height, float scale, const SDL_FRect *dstrect)
 /// ```
 int sdlRenderTexture9Grid(
     Pointer<SdlRenderer> renderer,
     Pointer<SdlTexture> texture,
     Pointer<SdlFRect> srcrect,
-    double cornerSize,
+    double leftWidth,
+    double rightWidth,
+    double topHeight,
+    double bottomHeight,
     double scale,
     Pointer<SdlFRect> dstrect) {
   final sdlRenderTexture9GridLookupFunction = libSdl3.lookupFunction<
@@ -2585,18 +2592,24 @@ int sdlRenderTexture9Grid(
           Pointer<SdlRenderer> renderer,
           Pointer<SdlTexture> texture,
           Pointer<SdlFRect> srcrect,
-          Float cornerSize,
+          Float leftWidth,
+          Float rightWidth,
+          Float topHeight,
+          Float bottomHeight,
           Float scale,
           Pointer<SdlFRect> dstrect),
       int Function(
           Pointer<SdlRenderer> renderer,
           Pointer<SdlTexture> texture,
           Pointer<SdlFRect> srcrect,
-          double cornerSize,
+          double leftWidth,
+          double rightWidth,
+          double topHeight,
+          double bottomHeight,
           double scale,
           Pointer<SdlFRect> dstrect)>('SDL_RenderTexture9Grid');
-  return sdlRenderTexture9GridLookupFunction(
-      renderer, texture, srcrect, cornerSize, scale, dstrect);
+  return sdlRenderTexture9GridLookupFunction(renderer, texture, srcrect,
+      leftWidth, rightWidth, topHeight, bottomHeight, scale, dstrect);
 }
 
 ///

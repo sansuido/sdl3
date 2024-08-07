@@ -540,7 +540,7 @@ int sdlGetStorageSpaceRemaining(Pointer<SdlStorage> storage) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC_FREE char ** SDLCALL SDL_GlobStorageDirectory(SDL_Storage *storage, const char *path, const char *pattern, SDL_GlobFlags flags, int *count)
+/// extern SDL_DECLSPEC char ** SDLCALL SDL_GlobStorageDirectory(SDL_Storage *storage, const char *path, const char *pattern, SDL_GlobFlags flags, int *count)
 /// ```
 Pointer<Pointer<Int8>> sdlGlobStorageDirectory(Pointer<SdlStorage> storage,
     String? path, String? pattern, int flags, Pointer<Int32> count) {

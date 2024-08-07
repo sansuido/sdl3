@@ -20,7 +20,7 @@ import 'struct_sdl.dart';
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC_FREE SDL_TouchID * SDLCALL SDL_GetTouchDevices(int *count)
+/// extern SDL_DECLSPEC SDL_TouchID * SDLCALL SDL_GetTouchDevices(int *count)
 /// ```
 Pointer<Uint64> sdlGetTouchDevices(Pointer<Int32> count) {
   final sdlGetTouchDevicesLookupFunction = libSdl3.lookupFunction<
@@ -84,7 +84,7 @@ int sdlGetTouchDeviceType(int touchId) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC_FREE SDL_Finger ** SDLCALL SDL_GetTouchFingers(SDL_TouchID touchID, int *count)
+/// extern SDL_DECLSPEC SDL_Finger ** SDLCALL SDL_GetTouchFingers(SDL_TouchID touchID, int *count)
 /// ```
 Pointer<Pointer<SdlFinger>> sdlGetTouchFingers(
     int touchId, Pointer<Int32> count) {

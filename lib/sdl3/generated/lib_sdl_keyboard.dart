@@ -42,7 +42,7 @@ bool sdlHasKeyboard() {
 /// \sa SDL_HasKeyboard
 ///
 /// ```c
-/// extern SDL_DECLSPEC_FREE SDL_KeyboardID * SDLCALL SDL_GetKeyboards(int *count)
+/// extern SDL_DECLSPEC SDL_KeyboardID * SDLCALL SDL_GetKeyboards(int *count)
 /// ```
 Pointer<Uint32> sdlGetKeyboards(Pointer<Int32> count) {
   final sdlGetKeyboardsLookupFunction = libSdl3.lookupFunction<
@@ -474,6 +474,7 @@ int sdlGetKeyFromName(String? name) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_SetTextInputArea
+/// \sa SDL_StartTextInputWithProperties
 /// \sa SDL_StopTextInput
 /// \sa SDL_TextInputActive
 ///
@@ -485,6 +486,63 @@ int sdlStartTextInput(Pointer<SdlWindow> window) {
       Int32 Function(Pointer<SdlWindow> window),
       int Function(Pointer<SdlWindow> window)>('SDL_StartTextInput');
   return sdlStartTextInputLookupFunction(window);
+}
+
+///
+/// Start accepting Unicode text input events in a window, with properties
+/// describing the input.
+///
+/// This function will enable text input (SDL_EVENT_TEXT_INPUT and
+/// SDL_EVENT_TEXT_EDITING events) in the specified window. Please use this
+/// function paired with SDL_StopTextInput().
+///
+/// Text input events are not received by default.
+///
+/// On some platforms using this function shows the screen keyboard.
+///
+/// These are the supported properties:
+///
+/// - `SDL_PROP_TEXTINPUT_TYPE_NUMBER` - an SDL_TextInputType value that
+/// describes text being input, defaults to SDL_TEXTINPUT_TYPE_TEXT.
+/// - `SDL_PROP_TEXTINPUT_CAPITALIZATION_NUMBER` - an SDL_Capitalization value
+/// that describes how text should be capitalized, defaults to
+/// SDL_CAPITALIZE_SENTENCES for normal text entry, SDL_CAPITALIZE_WORDS for
+/// SDL_TEXTINPUT_TYPE_TEXT_NAME, and SDL_CAPITALIZE_NONE for e-mail
+/// addresses, usernames, and passwords.
+/// - `SDL_PROP_TEXTINPUT_AUTOCORRECT_BOOLEAN` - true to enable auto completion
+/// and auto correction, defaults to SDL_TRUE.
+/// - `SDL_PROP_TEXTINPUT_MULTILINE_BOOLEAN` - true if multiple lines of text
+/// are allowed. This defaults to SDL_TRUE if SDL_HINT_RETURN_KEY_HIDES_IME
+/// is "0" or is not set, and defaults to SDL_FALSE if
+/// SDL_HINT_RETURN_KEY_HIDES_IME is "1".
+///
+/// On Android you can directly specify the input type:
+///
+/// - `SDL_PROP_TEXTINPUT_ANDROID_INPUTTYPE_NUMBER` - the text input type to
+/// use, overriding other properties. This is documented at
+/// https://developer.android.com/reference/android/text/InputType
+///
+/// \param window the window to enable text input.
+/// \param props the properties to use.
+/// \returns 0 on success or a negative error code on failure; call
+/// SDL_GetError() for more information.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_SetTextInputArea
+/// \sa SDL_StartTextInput
+/// \sa SDL_StopTextInput
+/// \sa SDL_TextInputActive
+///
+/// ```c
+/// extern SDL_DECLSPEC int SDLCALL SDL_StartTextInputWithProperties(SDL_Window *window, SDL_PropertiesID props)
+/// ```
+int sdlStartTextInputWithProperties(Pointer<SdlWindow> window, int props) {
+  final sdlStartTextInputWithPropertiesLookupFunction = libSdl3.lookupFunction<
+      Int32 Function(Pointer<SdlWindow> window, Uint32 props),
+      int Function(Pointer<SdlWindow> window,
+          int props)>('SDL_StartTextInputWithProperties');
+  return sdlStartTextInputWithPropertiesLookupFunction(window, props);
 }
 
 ///

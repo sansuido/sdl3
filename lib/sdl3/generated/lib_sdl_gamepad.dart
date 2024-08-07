@@ -165,7 +165,7 @@ int sdlReloadGamepadMappings() {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC_FREE char ** SDLCALL SDL_GetGamepadMappings(int *count)
+/// extern SDL_DECLSPEC char ** SDLCALL SDL_GetGamepadMappings(int *count)
 /// ```
 Pointer<Pointer<Int8>> sdlGetGamepadMappings(Pointer<Int32> count) {
   final sdlGetGamepadMappingsLookupFunction = libSdl3.lookupFunction<
@@ -189,7 +189,7 @@ Pointer<Pointer<Int8>> sdlGetGamepadMappings(Pointer<Int32> count) {
 /// \sa SDL_GetJoystickGUID
 ///
 /// ```c
-/// extern SDL_DECLSPEC_FREE char * SDLCALL SDL_GetGamepadMappingForGUID(SDL_GUID guid)
+/// extern SDL_DECLSPEC char * SDLCALL SDL_GetGamepadMappingForGUID(SDL_GUID guid)
 /// ```
 Pointer<Int8> sdlGetGamepadMappingForGuid(SdlGuid guid) {
   final sdlGetGamepadMappingForGuidLookupFunction = libSdl3.lookupFunction<
@@ -216,7 +216,7 @@ Pointer<Int8> sdlGetGamepadMappingForGuid(SdlGuid guid) {
 /// \sa SDL_SetGamepadMapping
 ///
 /// ```c
-/// extern SDL_DECLSPEC_FREE char * SDLCALL SDL_GetGamepadMapping(SDL_Gamepad *gamepad)
+/// extern SDL_DECLSPEC char * SDLCALL SDL_GetGamepadMapping(SDL_Gamepad *gamepad)
 /// ```
 Pointer<Int8> sdlGetGamepadMapping(Pointer<SdlGamepad> gamepad) {
   final sdlGetGamepadMappingLookupFunction = libSdl3.lookupFunction<
@@ -289,7 +289,7 @@ bool sdlHasGamepad() {
 /// \sa SDL_OpenGamepad
 ///
 /// ```c
-/// extern SDL_DECLSPEC_FREE SDL_JoystickID * SDLCALL SDL_GetGamepads(int *count)
+/// extern SDL_DECLSPEC SDL_JoystickID * SDLCALL SDL_GetGamepads(int *count)
 /// ```
 Pointer<Uint32> sdlGetGamepads(Pointer<Int32> count) {
   final sdlGetGamepadsLookupFunction = libSdl3.lookupFunction<
@@ -561,7 +561,7 @@ int sdlGetRealGamepadTypeForId(int instanceId) {
 /// \sa SDL_GetGamepadMapping
 ///
 /// ```c
-/// extern SDL_DECLSPEC_FREE char * SDLCALL SDL_GetGamepadMappingForID(SDL_JoystickID instance_id)
+/// extern SDL_DECLSPEC char * SDLCALL SDL_GetGamepadMappingForID(SDL_JoystickID instance_id)
 /// ```
 Pointer<Int8> sdlGetGamepadMappingForId(int instanceId) {
   final sdlGetGamepadMappingForIdLookupFunction = libSdl3.lookupFunction<
@@ -1124,7 +1124,7 @@ bool sdlGamepadEventsEnabled() {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC_FREE SDL_GamepadBinding ** SDLCALL SDL_GetGamepadBindings(SDL_Gamepad *gamepad, int *count)
+/// extern SDL_DECLSPEC SDL_GamepadBinding ** SDLCALL SDL_GetGamepadBindings(SDL_Gamepad *gamepad, int *count)
 /// ```
 Pointer<Pointer<SdlGamepadBinding>> sdlGetGamepadBindings(
     Pointer<SdlGamepad> gamepad, Pointer<Int32> count) {

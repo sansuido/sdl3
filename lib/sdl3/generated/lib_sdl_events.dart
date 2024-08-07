@@ -610,3 +610,26 @@ int sdlRegisterEvents(int numevents) {
       int Function(int numevents)>('SDL_RegisterEvents');
   return sdlRegisterEventsLookupFunction(numevents);
 }
+
+///
+/// Get window associated with an event.
+///
+/// \param event an event containing a `windowID`.
+/// \returns the associated window on success or NULL if there is none.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_PollEvent
+/// \sa SDL_WaitEvent
+/// \sa SDL_WaitEventTimeout
+///
+/// ```c
+/// extern SDL_DECLSPEC SDL_Window * SDLCALL SDL_GetWindowFromEvent(const SDL_Event *event)
+/// ```
+Pointer<SdlWindow> sdlGetWindowFromEvent(Pointer<SdlEvent> event) {
+  final sdlGetWindowFromEventLookupFunction = libSdl3.lookupFunction<
+      Pointer<SdlWindow> Function(Pointer<SdlEvent> event),
+      Pointer<SdlWindow> Function(
+          Pointer<SdlEvent> event)>('SDL_GetWindowFromEvent');
+  return sdlGetWindowFromEventLookupFunction(event);
+}

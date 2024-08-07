@@ -18,7 +18,7 @@ import 'struct_sdl.dart';
 /// \sa SDL_OpenHaptic
 ///
 /// ```c
-/// extern SDL_DECLSPEC_FREE SDL_HapticID * SDLCALL SDL_GetHaptics(int *count)
+/// extern SDL_DECLSPEC SDL_HapticID * SDLCALL SDL_GetHaptics(int *count)
 /// ```
 Pointer<Uint32> sdlGetHaptics(Pointer<Int32> count) {
   final sdlGetHapticsLookupFunction = libSdl3.lookupFunction<

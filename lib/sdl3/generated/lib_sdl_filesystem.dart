@@ -110,7 +110,7 @@ String? sdlGetBasePath() {
 /// \sa SDL_GetBasePath
 ///
 /// ```c
-/// extern SDL_DECLSPEC_FREE char * SDLCALL SDL_GetPrefPath(const char *org, const char *app)
+/// extern SDL_DECLSPEC char * SDLCALL SDL_GetPrefPath(const char *org, const char *app)
 /// ```
 Pointer<Int8> sdlGetPrefPath(String? org, String? app) {
   final sdlGetPrefPathLookupFunction = libSdl3.lookupFunction<
@@ -353,7 +353,7 @@ int sdlGetPathInfo(String? path, Pointer<SdlPathInfo> info) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC_FREE char ** SDLCALL SDL_GlobDirectory(const char *path, const char *pattern, SDL_GlobFlags flags, int *count)
+/// extern SDL_DECLSPEC char ** SDLCALL SDL_GlobDirectory(const char *path, const char *pattern, SDL_GlobFlags flags, int *count)
 /// ```
 Pointer<Pointer<Int8>> sdlGlobDirectory(
     String? path, String? pattern, int flags, Pointer<Int32> count) {

@@ -71,7 +71,7 @@ bool sdlHasJoystick() {
 /// \sa SDL_OpenJoystick
 ///
 /// ```c
-/// extern SDL_DECLSPEC_FREE SDL_JoystickID * SDLCALL SDL_GetJoysticks(int *count)
+/// extern SDL_DECLSPEC SDL_JoystickID * SDLCALL SDL_GetJoysticks(int *count)
 /// ```
 Pointer<Uint32> sdlGetJoysticks(Pointer<Int32> count) {
   final sdlGetJoysticksLookupFunction = libSdl3.lookupFunction<

@@ -115,7 +115,7 @@ String? sdlGetCurrentCameraDriver() {
 /// \sa SDL_OpenCamera
 ///
 /// ```c
-/// extern SDL_DECLSPEC_FREE SDL_CameraID * SDLCALL SDL_GetCameras(int *count)
+/// extern SDL_DECLSPEC SDL_CameraID * SDLCALL SDL_GetCameras(int *count)
 /// ```
 Pointer<Uint32> sdlGetCameras(Pointer<Int32> count) {
   final sdlGetCamerasLookupFunction = libSdl3.lookupFunction<
@@ -162,7 +162,7 @@ Pointer<Uint32> sdlGetCameras(Pointer<Int32> count) {
 /// \sa SDL_OpenCamera
 ///
 /// ```c
-/// extern SDL_DECLSPEC_FREE SDL_CameraSpec ** SDLCALL SDL_GetCameraSupportedFormats(SDL_CameraID devid, int *count)
+/// extern SDL_DECLSPEC SDL_CameraSpec ** SDLCALL SDL_GetCameraSupportedFormats(SDL_CameraID devid, int *count)
 /// ```
 Pointer<Pointer<SdlCameraSpec>> sdlGetCameraSupportedFormats(
     int devid, Pointer<Int32> count) {

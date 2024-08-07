@@ -418,7 +418,7 @@ extension SdlAudioStreamPointerEx on Pointer<SdlAudioStream> {
   /// \sa SDL_SetAudioStreamInputChannelMap
   ///
   /// ```c
-  /// extern SDL_DECLSPEC_FREE int * SDLCALL SDL_GetAudioStreamInputChannelMap(SDL_AudioStream *stream, int *count)
+  /// extern SDL_DECLSPEC int * SDLCALL SDL_GetAudioStreamInputChannelMap(SDL_AudioStream *stream, int *count)
   /// ```
   Pointer<Int32> getInputChannelMap(Pointer<Int32> count) {
     return sdlGetAudioStreamInputChannelMap(this, count);

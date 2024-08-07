@@ -45,7 +45,7 @@ import 'struct_sdl.dart';
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC_FREE SDL_Locale ** SDLCALL SDL_GetPreferredLocales(int *count)
+/// extern SDL_DECLSPEC SDL_Locale ** SDLCALL SDL_GetPreferredLocales(int *count)
 /// ```
 Pointer<Pointer<SdlLocale>> sdlGetPreferredLocales(Pointer<Int32> count) {
   final sdlGetPreferredLocalesLookupFunction = libSdl3.lookupFunction<

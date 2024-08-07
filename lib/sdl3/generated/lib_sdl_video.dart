@@ -112,7 +112,7 @@ int sdlGetSystemTheme() {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC_FREE SDL_DisplayID * SDLCALL SDL_GetDisplays(int *count)
+/// extern SDL_DECLSPEC SDL_DisplayID * SDLCALL SDL_GetDisplays(int *count)
 /// ```
 Pointer<Uint32> sdlGetDisplays(Pointer<Int32> count) {
   final sdlGetDisplaysLookupFunction = libSdl3.lookupFunction<
@@ -352,7 +352,7 @@ double sdlGetDisplayContentScale(int displayId) {
 /// \sa SDL_GetDisplays
 ///
 /// ```c
-/// extern SDL_DECLSPEC_FREE SDL_DisplayMode ** SDLCALL SDL_GetFullscreenDisplayModes(SDL_DisplayID displayID, int *count)
+/// extern SDL_DECLSPEC SDL_DisplayMode ** SDLCALL SDL_GetFullscreenDisplayModes(SDL_DisplayID displayID, int *count)
 /// ```
 Pointer<Pointer<SdlDisplayMode>> sdlGetFullscreenDisplayModes(
     int displayId, Pointer<Int32> count) {
@@ -674,7 +674,7 @@ Pointer<SdlDisplayMode> sdlGetWindowFullscreenMode(Pointer<SdlWindow> window) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC_FREE void * SDLCALL SDL_GetWindowICCProfile(SDL_Window *window, size_t *size)
+/// extern SDL_DECLSPEC void * SDLCALL SDL_GetWindowICCProfile(SDL_Window *window, size_t *size)
 /// ```
 Pointer<NativeType> sdlGetWindowIccProfile(
     Pointer<SdlWindow> window, Pointer<Uint32> size) {
@@ -719,7 +719,7 @@ int sdlGetWindowPixelFormat(Pointer<SdlWindow> window) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC_FREE SDL_Window ** SDLCALL SDL_GetWindows(int *count)
+/// extern SDL_DECLSPEC SDL_Window ** SDLCALL SDL_GetWindows(int *count)
 /// ```
 Pointer<Pointer<SdlWindow>> sdlGetWindows(Pointer<Int32> count) {
   final sdlGetWindowsLookupFunction = libSdl3.lookupFunction<
@@ -1293,6 +1293,15 @@ String? sdlGetWindowTitle(Pointer<SdlWindow> window) {
 
 ///
 /// Set the icon for a window.
+///
+/// If this function is passed a surface with alternate representations, the
+/// surface will be interpreted as the content to be used for 100% display
+/// scale, and the alternate representations will be used for high DPI
+/// situations. For example, if the original surface is 32x32, then on a 2x
+/// macOS display or 200% display scale on Windows, a 64x64 version of the
+/// image will be used, if available. If a matching version of the image isn't
+/// available, the closest size image will be scaled to the appropriate size
+/// and be used instead.
 ///
 /// \param window the window to change.
 /// \param icon an SDL_Surface structure containing the icon for the window.

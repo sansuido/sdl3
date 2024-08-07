@@ -38,6 +38,15 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   ///
   /// Create a color cursor.
   ///
+  /// If this function is passed a surface with alternate representations, the
+  /// surface will be interpreted as the content to be used for 100% display
+  /// scale, and the alternate representations will be used for high DPI
+  /// situations. For example, if the original surface is 32x32, then on a 2x
+  /// macOS display or 200% display scale on Windows, a 64x64 version of the
+  /// image will be used, if available. If a matching version of the image isn't
+  /// available, the closest size image will be scaled to the appropriate size
+  /// and be used instead.
+  ///
   /// \param surface an SDL_Surface structure representing the cursor image.
   /// \param hot_x the x position of the cursor hot spot.
   /// \param hot_y the y position of the cursor hot spot.
@@ -558,6 +567,9 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   ///
   /// Creates a new surface identical to the existing surface.
   ///
+  /// If the original surface has alternate images, the new surface will have a
+  /// reference to them as well.
+  ///
   /// The returned surface should be freed with SDL_DestroySurface().
   ///
   /// \param surface the surface to duplicate.
@@ -846,7 +858,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// \param dst the SDL_Surface structure that is the blit target.
   /// \param dstrect the SDL_Rect structure representing the target rectangle in
   /// the destination surface, may not be NULL.
-  /// \param scaleMode scale algorithm to be used.
+  /// \param scaleMode the SDL_ScaleMode to be used.
   /// \returns 0 on success or a negative error code on failure; call
   /// SDL_GetError() for more information.
   ///
