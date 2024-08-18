@@ -13,7 +13,10 @@ import 'lib_sdl.dart';
 /// \param name the hint to set.
 /// \param value the value of the hint variable.
 /// \param priority the SDL_HintPriority level for the hint.
-/// \returns SDL_TRUE if the hint was set, SDL_FALSE otherwise.
+/// \returns 0 on success or a negative error code on failure; call
+/// SDL_GetError() for more information.
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -22,18 +25,17 @@ import 'lib_sdl.dart';
 /// \sa SDL_SetHint
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetHintWithPriority(const char *name, const char *value, SDL_HintPriority priority)
+/// extern SDL_DECLSPEC int SDLCALL SDL_SetHintWithPriority(const char *name, const char *value, SDL_HintPriority priority)
 /// ```
-bool sdlSetHintWithPriority(String? name, String? value, int priority) {
+int sdlSetHintWithPriority(String? name, String? value, int priority) {
   final sdlSetHintWithPriorityLookupFunction = libSdl3.lookupFunction<
       Int32 Function(Pointer<Utf8> name, Pointer<Utf8> value, Int32 priority),
       int Function(Pointer<Utf8> name, Pointer<Utf8> value,
           int priority)>('SDL_SetHintWithPriority');
   final namePointer = name != null ? name.toNativeUtf8() : nullptr;
   final valuePointer = value != null ? value.toNativeUtf8() : nullptr;
-  final result = sdlSetHintWithPriorityLookupFunction(
-          namePointer, valuePointer, priority) ==
-      1;
+  final result =
+      sdlSetHintWithPriorityLookupFunction(namePointer, valuePointer, priority);
   calloc.free(namePointer);
   calloc.free(valuePointer);
   return result;
@@ -48,7 +50,10 @@ bool sdlSetHintWithPriority(String? name, String? value, int priority) {
 ///
 /// \param name the hint to set.
 /// \param value the value of the hint variable.
-/// \returns SDL_TRUE if the hint was set, SDL_FALSE otherwise.
+/// \returns 0 on success or a negative error code on failure; call
+/// SDL_GetError() for more information.
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -57,15 +62,15 @@ bool sdlSetHintWithPriority(String? name, String? value, int priority) {
 /// \sa SDL_SetHintWithPriority
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetHint(const char *name, const char *value)
+/// extern SDL_DECLSPEC int SDLCALL SDL_SetHint(const char *name, const char *value)
 /// ```
-bool sdlSetHint(String? name, String? value) {
+int sdlSetHint(String? name, String? value) {
   final sdlSetHintLookupFunction = libSdl3.lookupFunction<
       Int32 Function(Pointer<Utf8> name, Pointer<Utf8> value),
       int Function(Pointer<Utf8> name, Pointer<Utf8> value)>('SDL_SetHint');
   final namePointer = name != null ? name.toNativeUtf8() : nullptr;
   final valuePointer = value != null ? value.toNativeUtf8() : nullptr;
-  final result = sdlSetHintLookupFunction(namePointer, valuePointer) == 1;
+  final result = sdlSetHintLookupFunction(namePointer, valuePointer);
   calloc.free(namePointer);
   calloc.free(valuePointer);
   return result;
@@ -79,7 +84,10 @@ bool sdlSetHint(String? name, String? value) {
 /// change.
 ///
 /// \param name the hint to set.
-/// \returns SDL_TRUE if the hint was set, SDL_FALSE otherwise.
+/// \returns 0 on success or a negative error code on failure; call
+/// SDL_GetError() for more information.
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -87,14 +95,14 @@ bool sdlSetHint(String? name, String? value) {
 /// \sa SDL_ResetHints
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_ResetHint(const char *name)
+/// extern SDL_DECLSPEC int SDLCALL SDL_ResetHint(const char *name)
 /// ```
-bool sdlResetHint(String? name) {
+int sdlResetHint(String? name) {
   final sdlResetHintLookupFunction = libSdl3.lookupFunction<
       Int32 Function(Pointer<Utf8> name),
       int Function(Pointer<Utf8> name)>('SDL_ResetHint');
   final namePointer = name != null ? name.toNativeUtf8() : nullptr;
-  final result = sdlResetHintLookupFunction(namePointer) == 1;
+  final result = sdlResetHintLookupFunction(namePointer);
   calloc.free(namePointer);
   return result;
 }
@@ -105,6 +113,8 @@ bool sdlResetHint(String? name) {
 /// This will reset all hints to the value of the associated environment
 /// variable, or NULL if the environment isn't set. Callbacks will be called
 /// normally with this change.
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -124,6 +134,13 @@ void sdlResetHints() {
 ///
 /// \param name the hint to query.
 /// \returns the string value of a hint or NULL if the hint isn't set.
+///
+/// \threadsafety It is safe to call this function from any thread, however the
+/// return value only remains valid until the hint is changed; if
+/// another thread might do so, the app should supply locks
+/// and/or make a copy of the string. Note that using a hint
+/// callback instead is always thread-safe, as SDL holds a lock
+/// on the thread subsystem during the callback.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -154,6 +171,8 @@ String? sdlGetHint(String? name) {
 /// \returns the boolean value of a hint or the provided default value if the
 /// hint does not exist.
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetHint
@@ -176,15 +195,17 @@ bool sdlGetHintBoolean(String? name, bool defaultValue) {
 ///
 /// Add a function to watch a particular hint.
 ///
+/// The callback function is called _during_ this function, to provide it an
+/// initial value, and again each time the hint's value changes.
+///
 /// \param name the hint to watch.
-/// \param callback an SDL_HintCallback function that will be called when the
+/// \param callback An SDL_HintCallback function that will be called when the
 /// hint value changes.
 /// \param userdata a pointer to pass to the callback function.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
-/// \threadsafety It is **NOT** safe to call this function from two threads at
-/// once.
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -220,6 +241,8 @@ int sdlAddHintCallback(
 /// \param callback an SDL_HintCallback function that will be called when the
 /// hint value changes.
 /// \param userdata a pointer being passed to the callback function.
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///

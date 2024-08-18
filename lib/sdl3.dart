@@ -56,7 +56,6 @@ export 'sdl3/generated/lib_sdl_mixer.dart';
 export 'sdl3/generated/lib_sdl_mouse.dart';
 export 'sdl3/generated/lib_sdl_mutex.dart';
 export 'sdl3/generated/lib_sdl_net.dart';
-export 'sdl3/generated/lib_sdl_pen.dart';
 export 'sdl3/generated/lib_sdl_pixels.dart';
 export 'sdl3/generated/lib_sdl_platform.dart';
 export 'sdl3/generated/lib_sdl_power.dart';

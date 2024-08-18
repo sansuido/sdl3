@@ -253,30 +253,55 @@ int sdlWarpMouseGlobal(double x, double y) {
 }
 
 ///
-/// Set relative mouse mode.
+/// Set relative mouse mode for a window.
 ///
-/// While the mouse is in relative mode, the cursor is hidden, the mouse
-/// position is constrained to the window, and SDL will report continuous
-/// relative mouse motion even if the mouse is at the edge of the window.
+/// While the window has focus and relative mouse mode is enabled, the cursor
+/// is hidden, the mouse position is constrained to the window, and SDL will
+/// report continuous relative mouse motion even if the mouse is at the edge of
+/// the window.
 ///
-/// This function will flush any pending mouse motion.
+/// This function will flush any pending mouse motion for this window.
 ///
+/// \param window the window to change.
 /// \param enabled SDL_TRUE to enable relative mode, SDL_FALSE to disable.
 /// \returns 0 on success or a negative error code on failure; call
 /// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_GetRelativeMouseMode
+/// \sa SDL_GetWindowRelativeMouseMode
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_SetRelativeMouseMode(SDL_bool enabled)
+/// extern SDL_DECLSPEC int SDLCALL SDL_SetWindowRelativeMouseMode(SDL_Window *window, SDL_bool enabled)
 /// ```
-int sdlSetRelativeMouseMode(bool enabled) {
-  final sdlSetRelativeMouseModeLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Int32 enabled),
-      int Function(int enabled)>('SDL_SetRelativeMouseMode');
-  return sdlSetRelativeMouseModeLookupFunction(enabled ? 1 : 0);
+int sdlSetWindowRelativeMouseMode(Pointer<SdlWindow> window, bool enabled) {
+  final sdlSetWindowRelativeMouseModeLookupFunction = libSdl3.lookupFunction<
+      Int32 Function(Pointer<SdlWindow> window, Int32 enabled),
+      int Function(Pointer<SdlWindow> window,
+          int enabled)>('SDL_SetWindowRelativeMouseMode');
+  return sdlSetWindowRelativeMouseModeLookupFunction(window, enabled ? 1 : 0);
+}
+
+///
+/// Query whether relative mouse mode is enabled for a window.
+///
+/// \param window the window to query.
+/// \returns SDL_TRUE if relative mode is enabled for a window or SDL_FALSE
+/// otherwise.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_SetWindowRelativeMouseMode
+///
+/// ```c
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetWindowRelativeMouseMode(SDL_Window *window)
+/// ```
+bool sdlGetWindowRelativeMouseMode(Pointer<SdlWindow> window) {
+  final sdlGetWindowRelativeMouseModeLookupFunction = libSdl3.lookupFunction<
+      Int32 Function(Pointer<SdlWindow> window),
+      int Function(
+          Pointer<SdlWindow> window)>('SDL_GetWindowRelativeMouseMode');
+  return sdlGetWindowRelativeMouseModeLookupFunction(window) == 1;
 }
 
 ///
@@ -294,7 +319,7 @@ int sdlSetRelativeMouseMode(bool enabled) {
 /// mouse while the user is dragging something, until the user releases a mouse
 /// button. It is not recommended that you capture the mouse for long periods
 /// of time, such as the entire time your app is running. For that, you should
-/// probably use SDL_SetRelativeMouseMode() or SDL_SetWindowMouseGrab(),
+/// probably use SDL_SetWindowRelativeMouseMode() or SDL_SetWindowMouseGrab(),
 /// depending on your goals.
 ///
 /// While captured, mouse events still report coordinates relative to the
@@ -331,25 +356,6 @@ int sdlCaptureMouse(bool enabled) {
       Int32 Function(Int32 enabled),
       int Function(int enabled)>('SDL_CaptureMouse');
   return sdlCaptureMouseLookupFunction(enabled ? 1 : 0);
-}
-
-///
-/// Query whether relative mouse mode is enabled.
-///
-/// \returns SDL_TRUE if relative mode is enabled or SDL_FALSE otherwise.
-///
-/// \since This function is available since SDL 3.0.0.
-///
-/// \sa SDL_SetRelativeMouseMode
-///
-/// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetRelativeMouseMode(void)
-/// ```
-bool sdlGetRelativeMouseMode() {
-  final sdlGetRelativeMouseModeLookupFunction =
-      libSdl3.lookupFunction<Int32 Function(), int Function()>(
-          'SDL_GetRelativeMouseMode');
-  return sdlGetRelativeMouseModeLookupFunction() == 1;
 }
 
 ///

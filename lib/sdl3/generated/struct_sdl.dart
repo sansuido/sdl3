@@ -829,8 +829,8 @@ final class SdlTouchFingerEvent extends Struct {
   external int windowId;
 }
 
-// SDL_PenTipEvent
-final class SdlPenTipEvent extends Struct {
+// SDL_PenProximityEvent
+final class SdlPenProximityEvent extends Struct {
   // [0]+(4)
   @Int32()
   external int type;
@@ -846,37 +846,6 @@ final class SdlPenTipEvent extends Struct {
   // [20]+(4)
   @Uint32()
   external int which;
-  // [24]+(1)
-  @Uint8()
-  external int tip;
-  // [25]+(1)
-  @Uint8()
-  external int state;
-  // [26]+(2)
-  @Uint16()
-  external int penState;
-  // [28]+(4)
-  @Float()
-  external double x;
-  // [32]+(4)
-  @Float()
-  external double y;
-  // [36]+(4*6)
-  @Float()
-  external double axes_1;
-  @Float()
-  external double axes_2;
-  @Float()
-  external double axes_3;
-  @Float()
-  external double axes_4;
-  @Float()
-  external double axes_5;
-  @Float()
-  external double axes_6;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
 }
 
 // SDL_PenMotionEvent
@@ -896,14 +865,8 @@ final class SdlPenMotionEvent extends Struct {
   // [20]+(4)
   @Uint32()
   external int which;
-  // [24]+(1)
-  @Uint8()
-  external int padding1;
-  // [25]+(1)
-  @Uint8()
-  external int padding2;
-  // [26]+(2)
-  @Uint16()
+  // [24]+(4)
+  @Uint32()
   external int penState;
   // [28]+(4)
   @Float()
@@ -911,21 +874,45 @@ final class SdlPenMotionEvent extends Struct {
   // [32]+(4)
   @Float()
   external double y;
-  // [36]+(4*6)
-  @Float()
-  external double axes_1;
-  @Float()
-  external double axes_2;
-  @Float()
-  external double axes_3;
-  @Float()
-  external double axes_4;
-  @Float()
-  external double axes_5;
-  @Float()
-  external double axes_6;
   // [] +(4)
   @Uint32()
+  external int blank_1;
+}
+
+// SDL_PenTouchEvent
+final class SdlPenTouchEvent extends Struct {
+  // [0]+(4)
+  @Int32()
+  external int type;
+  // [4]+(4)
+  @Uint32()
+  external int reserved;
+  // [8]+(8)
+  @Uint64()
+  external int timestamp;
+  // [16]+(4)
+  @Uint32()
+  external int windowId;
+  // [20]+(4)
+  @Uint32()
+  external int which;
+  // [24]+(4)
+  @Uint32()
+  external int penState;
+  // [28]+(4)
+  @Float()
+  external double x;
+  // [32]+(4)
+  @Float()
+  external double y;
+  // [36]+(1)
+  @Uint8()
+  external int eraser;
+  // [37]+(1)
+  @Uint8()
+  external int state;
+  // [] +(2)
+  @Uint16()
   external int blank_1;
 }
 
@@ -946,14 +933,8 @@ final class SdlPenButtonEvent extends Struct {
   // [20]+(4)
   @Uint32()
   external int which;
-  // [24]+(1)
-  @Uint8()
-  external int button;
-  // [25]+(1)
-  @Uint8()
-  external int state;
-  // [26]+(2)
-  @Uint16()
+  // [24]+(4)
+  @Uint32()
   external int penState;
   // [28]+(4)
   @Float()
@@ -961,19 +942,49 @@ final class SdlPenButtonEvent extends Struct {
   // [32]+(4)
   @Float()
   external double y;
-  // [36]+(4*6)
+  // [36]+(1)
+  @Uint8()
+  external int button;
+  // [37]+(1)
+  @Uint8()
+  external int state;
+  // [] +(2)
+  @Uint16()
+  external int blank_1;
+}
+
+// SDL_PenAxisEvent
+final class SdlPenAxisEvent extends Struct {
+  // [0]+(4)
+  @Int32()
+  external int type;
+  // [4]+(4)
+  @Uint32()
+  external int reserved;
+  // [8]+(8)
+  @Uint64()
+  external int timestamp;
+  // [16]+(4)
+  @Uint32()
+  external int windowId;
+  // [20]+(4)
+  @Uint32()
+  external int which;
+  // [24]+(4)
+  @Uint32()
+  external int penState;
+  // [28]+(4)
   @Float()
-  external double axes_1;
+  external double x;
+  // [32]+(4)
   @Float()
-  external double axes_2;
+  external double y;
+  // [36]+(4)
+  @Int32()
+  external int axis;
+  // [40]+(4)
   @Float()
-  external double axes_3;
-  @Float()
-  external double axes_4;
-  @Float()
-  external double axes_5;
-  @Float()
-  external double axes_6;
+  external double value;
   // [] +(4)
   @Uint32()
   external int blank_1;
@@ -1187,12 +1198,16 @@ extension SdlEventExtension on Pointer<SdlEvent> {
   Pointer<SdlUserEvent> get user => (cast<Uint8>() + 0).cast<SdlUserEvent>();
   Pointer<SdlTouchFingerEvent> get tfinger =>
       (cast<Uint8>() + 0).cast<SdlTouchFingerEvent>();
-  Pointer<SdlPenTipEvent> get ptip =>
-      (cast<Uint8>() + 0).cast<SdlPenTipEvent>();
+  Pointer<SdlPenProximityEvent> get pproximity =>
+      (cast<Uint8>() + 0).cast<SdlPenProximityEvent>();
+  Pointer<SdlPenTouchEvent> get ptouch =>
+      (cast<Uint8>() + 0).cast<SdlPenTouchEvent>();
   Pointer<SdlPenMotionEvent> get pmotion =>
       (cast<Uint8>() + 0).cast<SdlPenMotionEvent>();
   Pointer<SdlPenButtonEvent> get pbutton =>
       (cast<Uint8>() + 0).cast<SdlPenButtonEvent>();
+  Pointer<SdlPenAxisEvent> get paxis =>
+      (cast<Uint8>() + 0).cast<SdlPenAxisEvent>();
   Pointer<SdlDropEvent> get drop => (cast<Uint8>() + 0).cast<SdlDropEvent>();
   Pointer<SdlClipboardEvent> get clipboard =>
       (cast<Uint8>() + 0).cast<SdlClipboardEvent>();
@@ -1937,26 +1952,6 @@ final class SdlSemaphore extends Opaque {}
 
 // SDL_Condition
 final class SdlCondition extends Opaque {}
-
-// SDL_PenCapabilityInfo
-final class SdlPenCapabilityInfo extends Struct {
-  // [0]+(4)
-  @Float()
-  external double maxTilt;
-  // [4]+(4)
-  @Uint32()
-  external int wacomId;
-  // [8]+(1)
-  @Int8()
-  external int numButtons;
-  // [] +(7)
-  @Uint32()
-  external int blank_1;
-  @Uint16()
-  external int blank_2;
-  @Uint8()
-  external int blank_3;
-}
 
 // SDL_Color
 final class SdlColor extends Struct {

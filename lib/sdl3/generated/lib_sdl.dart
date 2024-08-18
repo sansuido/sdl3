@@ -49,7 +49,7 @@ typedef SdlDialogFileCallbackDart = void Function(
 typedef SdlDialogFileCallback = Void Function(Pointer<NativeType> userdata,
     Pointer<Pointer<Int8>> filelist, Int32 filter);
 
-// typedef int (SDLCALL *SDL_EventFilter)(void *userdata, SDL_Event *event)
+// typedef SDL_bool (SDLCALL *SDL_EventFilter)(void *userdata, SDL_Event *event)
 typedef SdlEventFilterDart = int Function(
     Pointer<NativeType> userdata, Pointer<SdlEvent> event);
 typedef SdlEventFilter = Int32 Function(

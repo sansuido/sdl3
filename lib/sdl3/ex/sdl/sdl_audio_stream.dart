@@ -616,7 +616,8 @@ extension SdlAudioStreamPointerEx on Pointer<SdlAudioStream> {
   /// clamped.
   ///
   /// \param stream the audio stream to query.
-  /// \returns the number of converted/resampled bytes available.
+  /// \returns the number of converted/resampled bytes available or a negative
+  /// error code on failure; call SDL_GetError() for more information.
   ///
   /// \threadsafety It is safe to call this function from any thread.
   ///
@@ -652,7 +653,8 @@ extension SdlAudioStreamPointerEx on Pointer<SdlAudioStream> {
   /// clamped.
   ///
   /// \param stream the audio stream to query.
-  /// \returns the number of bytes queued.
+  /// \returns the number of bytes queued or a negative error code on failure;
+  /// call SDL_GetError() for more information.
   ///
   /// \threadsafety It is safe to call this function from any thread.
   ///

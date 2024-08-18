@@ -369,10 +369,10 @@ int sdlPushEvent(Pointer<SdlEvent> event) {
 /// Set up a filter to process all events before they change internal state and
 /// are posted to the internal event queue.
 ///
-/// If the filter function returns 1 when called, then the event will be added
-/// to the internal queue. If it returns 0, then the event will be dropped from
-/// the queue, but the internal state will still be updated. This allows
-/// selective filtering of dynamically arriving events.
+/// If the filter function returns SDL_TRUE when called, then the event will be
+/// added to the internal queue. If it returns SDL_FALSE, then the event will
+/// be dropped from the queue, but the internal state will still be updated.
+/// This allows selective filtering of dynamically arriving events.
 ///
 /// **WARNING**: Be very careful of what you do in the event filter function,
 /// as it may run in a different thread!
@@ -523,7 +523,7 @@ void sdlDelEventWatch(Pointer<NativeFunction<SdlEventFilter>> filter,
 
 ///
 /// Run a specific filter function on the current event queue, removing any
-/// events for which the filter returns 0.
+/// events for which the filter returns SDL_FALSE.
 ///
 /// See SDL_SetEventFilter() for more information. Unlike SDL_SetEventFilter(),
 /// this function does not change the filter permanently, it only uses the

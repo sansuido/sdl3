@@ -1278,7 +1278,8 @@ int sdlGetAudioStreamData(
 /// clamped.
 ///
 /// \param stream the audio stream to query.
-/// \returns the number of converted/resampled bytes available.
+/// \returns the number of converted/resampled bytes available or a negative
+/// error code on failure; call SDL_GetError() for more information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -1318,7 +1319,8 @@ int sdlGetAudioStreamAvailable(Pointer<SdlAudioStream> stream) {
 /// clamped.
 ///
 /// \param stream the audio stream to query.
-/// \returns the number of bytes queued.
+/// \returns the number of bytes queued or a negative error code on failure;
+/// call SDL_GetError() for more information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -2092,6 +2094,31 @@ int sdlConvertAudioSamples(
           Pointer<Int32> dstLen)>('SDL_ConvertAudioSamples');
   return sdlConvertAudioSamplesLookupFunction(
       srcSpec, srcData, srcLen, dstSpec, dstData, dstLen);
+}
+
+///
+/// Get the human readable name of an audio format.
+///
+/// \param format the audio format to query.
+/// \returns the human readable name of the specified audio format or
+/// "SDL_AUDIO_UNKNOWN" if the format isn't recognized.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC const char * SDLCALL SDL_GetAudioFormatName(SDL_AudioFormat format)
+/// ```
+String? sdlGetAudioFormatName(int format) {
+  final sdlGetAudioFormatNameLookupFunction = libSdl3.lookupFunction<
+      Pointer<Utf8> Function(Int32 format),
+      Pointer<Utf8> Function(int format)>('SDL_GetAudioFormatName');
+  final result = sdlGetAudioFormatNameLookupFunction(format);
+  if (result == nullptr) {
+    return null;
+  }
+  return result.toDartString();
 }
 
 ///
