@@ -241,6 +241,7 @@ void sdlDestroyPalette(Pointer<SdlPalette> palette) {
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
+/// \sa SDL_GetPixelFormatDetails
 /// \sa SDL_GetRGB
 /// \sa SDL_MapRGBA
 /// \sa SDL_MapSurfaceRGB
@@ -290,6 +291,7 @@ int sdlMapRgb(Pointer<SdlPixelFormatDetails> format,
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
+/// \sa SDL_GetPixelFormatDetails
 /// \sa SDL_GetRGBA
 /// \sa SDL_MapRGB
 /// \sa SDL_MapSurfaceRGBA
@@ -333,6 +335,7 @@ int sdlMapRgba(Pointer<SdlPixelFormatDetails> format,
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
+/// \sa SDL_GetPixelFormatDetails
 /// \sa SDL_GetRGBA
 /// \sa SDL_MapRGB
 /// \sa SDL_MapRGBA
@@ -390,6 +393,7 @@ void sdlGetRgb(
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
+/// \sa SDL_GetPixelFormatDetails
 /// \sa SDL_GetRGB
 /// \sa SDL_MapRGB
 /// \sa SDL_MapRGBA

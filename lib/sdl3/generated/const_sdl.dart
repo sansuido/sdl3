@@ -659,6 +659,9 @@ const SDL_INIT_GAMEPAD = 0x00002000;
 const SDL_INIT_EVENTS = 0x00004000;
 const SDL_INIT_SENSOR = 0x00008000;
 const SDL_INIT_CAMERA = 0x00010000;
+const SDL_APP_CONTINUE = 0;
+const SDL_APP_SUCCESS = 1;
+const SDL_APP_FAILURE = 2;
 const SDL_PROP_APP_METADATA_NAME_STRING = 'SDL.app.metadata.name';
 const SDL_PROP_APP_METADATA_VERSION_STRING = 'SDL.app.metadata.version';
 const SDL_PROP_APP_METADATA_IDENTIFIER_STRING = 'SDL.app.metadata.identifier';
@@ -1062,9 +1065,6 @@ const SDL_NUM_LOG_PRIORITIES = 1 + 6;
 //const SDL_PS2_SKIP_IOP_RESET = () void reset_IOP(); void reset_IOP() {};
 const SDL_MAIN_USE_CALLBACKS = 1;
 //const main = SDL_main;
-const SDL_APP_CONTINUE = 0;
-const SDL_APP_FAILURE = -1;
-const SDL_APP_SUCCESS = 1;
 //const SDL_main_impl_h_ = ;
 const SDL_MAIN_CALLBACK_STANDARD = 1;
 //const WINAPI = __stdcall;
@@ -1724,7 +1724,8 @@ const SDL_PEN_AXIS_YTILT = 2;
 const SDL_PEN_AXIS_DISTANCE = 3;
 const SDL_PEN_AXIS_ROTATION = 4;
 const SDL_PEN_AXIS_SLIDER = 5;
-const SDL_PEN_NUM_AXES = 6;
+const SDL_PEN_AXIS_TANGENTIAL_PRESSURE = 6;
+const SDL_PEN_NUM_AXES = 7;
 //const SDL_pixels_h_ = ;
 const SDL_ALPHA_OPAQUE = 255;
 const SDL_ALPHA_TRANSPARENT = 0;
@@ -2011,20 +2012,25 @@ const SDL_LOGICAL_PRESENTATION_STRETCH = 1;
 const SDL_LOGICAL_PRESENTATION_LETTERBOX = 2;
 const SDL_LOGICAL_PRESENTATION_OVERSCAN = 3;
 const SDL_LOGICAL_PRESENTATION_INTEGER_SCALE = 4;
-const SDL_PROP_RENDERER_CREATE_NAME_STRING = 'name';
-const SDL_PROP_RENDERER_CREATE_WINDOW_POINTER = 'window';
-const SDL_PROP_RENDERER_CREATE_SURFACE_POINTER = 'surface';
-const SDL_PROP_RENDERER_CREATE_OUTPUT_COLORSPACE_NUMBER = 'output_colorspace';
-const SDL_PROP_RENDERER_CREATE_PRESENT_VSYNC_NUMBER = 'present_vsync';
-const SDL_PROP_RENDERER_CREATE_VULKAN_INSTANCE_POINTER = 'vulkan.instance';
-const SDL_PROP_RENDERER_CREATE_VULKAN_SURFACE_NUMBER = 'vulkan.surface';
+const SDL_PROP_RENDERER_CREATE_NAME_STRING = 'SDL.renderer.create.name';
+const SDL_PROP_RENDERER_CREATE_WINDOW_POINTER = 'SDL.renderer.create.window';
+const SDL_PROP_RENDERER_CREATE_SURFACE_POINTER = 'SDL.renderer.create.surface';
+const SDL_PROP_RENDERER_CREATE_OUTPUT_COLORSPACE_NUMBER =
+    'SDL.renderer.create.output_colorspace';
+const SDL_PROP_RENDERER_CREATE_PRESENT_VSYNC_NUMBER =
+    'SDL.renderer.create.present_vsync';
+const SDL_PROP_RENDERER_CREATE_VULKAN_INSTANCE_POINTER =
+    'SDL.renderer.create.vulkan.instance';
+const SDL_PROP_RENDERER_CREATE_VULKAN_SURFACE_NUMBER =
+    'SDL.renderer.create.vulkan.surface';
 const SDL_PROP_RENDERER_CREATE_VULKAN_PHYSICAL_DEVICE_POINTER =
-    'vulkan.physical_device';
-const SDL_PROP_RENDERER_CREATE_VULKAN_DEVICE_POINTER = 'vulkan.device';
+    'SDL.renderer.create.vulkan.physical_device';
+const SDL_PROP_RENDERER_CREATE_VULKAN_DEVICE_POINTER =
+    'SDL.renderer.create.vulkan.device';
 const SDL_PROP_RENDERER_CREATE_VULKAN_GRAPHICS_QUEUE_FAMILY_INDEX_NUMBER =
-    'vulkan.graphics_queue_family_index';
+    'SDL.renderer.create.vulkan.graphics_queue_family_index';
 const SDL_PROP_RENDERER_CREATE_VULKAN_PRESENT_QUEUE_FAMILY_INDEX_NUMBER =
-    'vulkan.present_queue_family_index';
+    'SDL.renderer.create.vulkan.present_queue_family_index';
 const SDL_PROP_RENDERER_NAME_STRING = 'SDL.renderer.name';
 const SDL_PROP_RENDERER_WINDOW_POINTER = 'SDL.renderer.window';
 const SDL_PROP_RENDERER_SURFACE_POINTER = 'SDL.renderer.surface';
@@ -2059,32 +2065,48 @@ const SDL_PROP_RENDERER_VULKAN_PRESENT_QUEUE_FAMILY_INDEX_NUMBER =
     'SDL.renderer.vulkan.present_queue_family_index';
 const SDL_PROP_RENDERER_VULKAN_SWAPCHAIN_IMAGE_COUNT_NUMBER =
     'SDL.renderer.vulkan.swapchain_image_count';
-const SDL_PROP_TEXTURE_CREATE_COLORSPACE_NUMBER = 'colorspace';
-const SDL_PROP_TEXTURE_CREATE_FORMAT_NUMBER = 'format';
-const SDL_PROP_TEXTURE_CREATE_ACCESS_NUMBER = 'access';
-const SDL_PROP_TEXTURE_CREATE_WIDTH_NUMBER = 'width';
-const SDL_PROP_TEXTURE_CREATE_HEIGHT_NUMBER = 'height';
-const SDL_PROP_TEXTURE_CREATE_SDR_WHITE_POINT_FLOAT = 'SDR_white_point';
-const SDL_PROP_TEXTURE_CREATE_HDR_HEADROOM_FLOAT = 'HDR_headroom';
-const SDL_PROP_TEXTURE_CREATE_D3D11_TEXTURE_POINTER = 'd3d11.texture';
-const SDL_PROP_TEXTURE_CREATE_D3D11_TEXTURE_U_POINTER = 'd3d11.texture_u';
-const SDL_PROP_TEXTURE_CREATE_D3D11_TEXTURE_V_POINTER = 'd3d11.texture_v';
-const SDL_PROP_TEXTURE_CREATE_D3D12_TEXTURE_POINTER = 'd3d12.texture';
-const SDL_PROP_TEXTURE_CREATE_D3D12_TEXTURE_U_POINTER = 'd3d12.texture_u';
-const SDL_PROP_TEXTURE_CREATE_D3D12_TEXTURE_V_POINTER = 'd3d12.texture_v';
-const SDL_PROP_TEXTURE_CREATE_METAL_PIXELBUFFER_POINTER = 'metal.pixelbuffer';
-const SDL_PROP_TEXTURE_CREATE_OPENGL_TEXTURE_NUMBER = 'opengl.texture';
-const SDL_PROP_TEXTURE_CREATE_OPENGL_TEXTURE_UV_NUMBER = 'opengl.texture_uv';
-const SDL_PROP_TEXTURE_CREATE_OPENGL_TEXTURE_U_NUMBER = 'opengl.texture_u';
-const SDL_PROP_TEXTURE_CREATE_OPENGL_TEXTURE_V_NUMBER = 'opengl.texture_v';
-const SDL_PROP_TEXTURE_CREATE_OPENGLES2_TEXTURE_NUMBER = 'opengles2.texture';
+const SDL_PROP_TEXTURE_CREATE_COLORSPACE_NUMBER =
+    'SDL.texture.create.colorspace';
+const SDL_PROP_TEXTURE_CREATE_FORMAT_NUMBER = 'SDL.texture.create.format';
+const SDL_PROP_TEXTURE_CREATE_ACCESS_NUMBER = 'SDL.texture.create.access';
+const SDL_PROP_TEXTURE_CREATE_WIDTH_NUMBER = 'SDL.texture.create.width';
+const SDL_PROP_TEXTURE_CREATE_HEIGHT_NUMBER = 'SDL.texture.create.height';
+const SDL_PROP_TEXTURE_CREATE_SDR_WHITE_POINT_FLOAT =
+    'SDL.texture.create.SDR_white_point';
+const SDL_PROP_TEXTURE_CREATE_HDR_HEADROOM_FLOAT =
+    'SDL.texture.create.HDR_headroom';
+const SDL_PROP_TEXTURE_CREATE_D3D11_TEXTURE_POINTER =
+    'SDL.texture.create.d3d11.texture';
+const SDL_PROP_TEXTURE_CREATE_D3D11_TEXTURE_U_POINTER =
+    'SDL.texture.create.d3d11.texture_u';
+const SDL_PROP_TEXTURE_CREATE_D3D11_TEXTURE_V_POINTER =
+    'SDL.texture.create.d3d11.texture_v';
+const SDL_PROP_TEXTURE_CREATE_D3D12_TEXTURE_POINTER =
+    'SDL.texture.create.d3d12.texture';
+const SDL_PROP_TEXTURE_CREATE_D3D12_TEXTURE_U_POINTER =
+    'SDL.texture.create.d3d12.texture_u';
+const SDL_PROP_TEXTURE_CREATE_D3D12_TEXTURE_V_POINTER =
+    'SDL.texture.create.d3d12.texture_v';
+const SDL_PROP_TEXTURE_CREATE_METAL_PIXELBUFFER_POINTER =
+    'SDL.texture.create.metal.pixelbuffer';
+const SDL_PROP_TEXTURE_CREATE_OPENGL_TEXTURE_NUMBER =
+    'SDL.texture.create.opengl.texture';
+const SDL_PROP_TEXTURE_CREATE_OPENGL_TEXTURE_UV_NUMBER =
+    'SDL.texture.create.opengl.texture_uv';
+const SDL_PROP_TEXTURE_CREATE_OPENGL_TEXTURE_U_NUMBER =
+    'SDL.texture.create.opengl.texture_u';
+const SDL_PROP_TEXTURE_CREATE_OPENGL_TEXTURE_V_NUMBER =
+    'SDL.texture.create.opengl.texture_v';
+const SDL_PROP_TEXTURE_CREATE_OPENGLES2_TEXTURE_NUMBER =
+    'SDL.texture.create.opengles2.texture';
 const SDL_PROP_TEXTURE_CREATE_OPENGLES2_TEXTURE_UV_NUMBER =
-    'opengles2.texture_uv';
+    'SDL.texture.create.opengles2.texture_uv';
 const SDL_PROP_TEXTURE_CREATE_OPENGLES2_TEXTURE_U_NUMBER =
-    'opengles2.texture_u';
+    'SDL.texture.create.opengles2.texture_u';
 const SDL_PROP_TEXTURE_CREATE_OPENGLES2_TEXTURE_V_NUMBER =
-    'opengles2.texture_v';
-const SDL_PROP_TEXTURE_CREATE_VULKAN_TEXTURE_NUMBER = 'vulkan.texture';
+    'SDL.texture.create.opengles2.texture_v';
+const SDL_PROP_TEXTURE_CREATE_VULKAN_TEXTURE_NUMBER =
+    'SDL.texture.create.vulkan.texture';
 const SDL_PROP_TEXTURE_COLORSPACE_NUMBER = 'SDL.texture.colorspace';
 const SDL_PROP_TEXTURE_FORMAT_NUMBER = 'SDL.texture.format';
 const SDL_PROP_TEXTURE_ACCESS_NUMBER = 'SDL.texture.access';
@@ -2525,10 +2547,11 @@ const SDL_THREAD_PRIORITY_LOW = 0;
 const SDL_THREAD_PRIORITY_NORMAL = 1;
 const SDL_THREAD_PRIORITY_HIGH = 2;
 const SDL_THREAD_PRIORITY_TIME_CRITICAL = 3;
-const SDL_PROP_THREAD_CREATE_ENTRY_FUNCTION_POINTER = 'entry_function';
-const SDL_PROP_THREAD_CREATE_NAME_STRING = 'name';
-const SDL_PROP_THREAD_CREATE_USERDATA_POINTER = 'userdata';
-const SDL_PROP_THREAD_CREATE_STACKSIZE_NUMBER = 'stacksize';
+const SDL_PROP_THREAD_CREATE_ENTRY_FUNCTION_POINTER =
+    'SDL.thread.create.entry_function';
+const SDL_PROP_THREAD_CREATE_NAME_STRING = 'SDL.thread.create.name';
+const SDL_PROP_THREAD_CREATE_USERDATA_POINTER = 'SDL.thread.create.userdata';
+const SDL_PROP_THREAD_CREATE_STACKSIZE_NUMBER = 'SDL.thread.create.stacksize';
 //const SDL_BeginThreadFunction = _beginthreadex;
 //const SDL_EndThreadFunction = _endthreadex;
 //const SDL_CreateThread = (fn, name, data) SDL_CreateThreadRuntime((fn), (name), (data), (SDL_FunctionPointer) (SDL_BeginThreadFunction), (SDL_FunctionPointer) (SDL_EndThreadFunction));
@@ -2657,43 +2680,54 @@ const SDL_GL_CONTEXT_RESET_LOSE_CONTEXT = 0x0001;
 const SDL_PROP_DISPLAY_HDR_ENABLED_BOOLEAN = 'SDL.display.HDR_enabled';
 const SDL_PROP_DISPLAY_KMSDRM_PANEL_ORIENTATION_NUMBER =
     'SDL.display.KMSDRM.panel_orientation';
-const SDL_PROP_WINDOW_CREATE_ALWAYS_ON_TOP_BOOLEAN = 'always_on_top';
-const SDL_PROP_WINDOW_CREATE_BORDERLESS_BOOLEAN = 'borderless';
-const SDL_PROP_WINDOW_CREATE_FOCUSABLE_BOOLEAN = 'focusable';
+const SDL_PROP_WINDOW_CREATE_ALWAYS_ON_TOP_BOOLEAN =
+    'SDL.window.create.always_on_top';
+const SDL_PROP_WINDOW_CREATE_BORDERLESS_BOOLEAN =
+    'SDL.window.create.borderless';
+const SDL_PROP_WINDOW_CREATE_FOCUSABLE_BOOLEAN = 'SDL.window.create.focusable';
 const SDL_PROP_WINDOW_CREATE_EXTERNAL_GRAPHICS_CONTEXT_BOOLEAN =
-    'external_graphics_context';
-const SDL_PROP_WINDOW_CREATE_FULLSCREEN_BOOLEAN = 'fullscreen';
-const SDL_PROP_WINDOW_CREATE_HEIGHT_NUMBER = 'height';
-const SDL_PROP_WINDOW_CREATE_HIDDEN_BOOLEAN = 'hidden';
-const SDL_PROP_WINDOW_CREATE_HIGH_PIXEL_DENSITY_BOOLEAN = 'high_pixel_density';
-const SDL_PROP_WINDOW_CREATE_MAXIMIZED_BOOLEAN = 'maximized';
-const SDL_PROP_WINDOW_CREATE_MENU_BOOLEAN = 'menu';
-const SDL_PROP_WINDOW_CREATE_METAL_BOOLEAN = 'metal';
-const SDL_PROP_WINDOW_CREATE_MINIMIZED_BOOLEAN = 'minimized';
-const SDL_PROP_WINDOW_CREATE_MODAL_BOOLEAN = 'modal';
-const SDL_PROP_WINDOW_CREATE_MOUSE_GRABBED_BOOLEAN = 'mouse_grabbed';
-const SDL_PROP_WINDOW_CREATE_OPENGL_BOOLEAN = 'opengl';
-const SDL_PROP_WINDOW_CREATE_PARENT_POINTER = 'parent';
-const SDL_PROP_WINDOW_CREATE_RESIZABLE_BOOLEAN = 'resizable';
-const SDL_PROP_WINDOW_CREATE_TITLE_STRING = 'title';
-const SDL_PROP_WINDOW_CREATE_TRANSPARENT_BOOLEAN = 'transparent';
-const SDL_PROP_WINDOW_CREATE_TOOLTIP_BOOLEAN = 'tooltip';
-const SDL_PROP_WINDOW_CREATE_UTILITY_BOOLEAN = 'utility';
-const SDL_PROP_WINDOW_CREATE_VULKAN_BOOLEAN = 'vulkan';
-const SDL_PROP_WINDOW_CREATE_WIDTH_NUMBER = 'width';
-const SDL_PROP_WINDOW_CREATE_X_NUMBER = 'x';
-const SDL_PROP_WINDOW_CREATE_Y_NUMBER = 'y';
-const SDL_PROP_WINDOW_CREATE_COCOA_WINDOW_POINTER = 'cocoa.window';
-const SDL_PROP_WINDOW_CREATE_COCOA_VIEW_POINTER = 'cocoa.view';
+    'SDL.window.create.external_graphics_context';
+const SDL_PROP_WINDOW_CREATE_FLAGS_NUMBER = 'SDL.window.create.flags';
+const SDL_PROP_WINDOW_CREATE_FULLSCREEN_BOOLEAN =
+    'SDL.window.create.fullscreen';
+const SDL_PROP_WINDOW_CREATE_HEIGHT_NUMBER = 'SDL.window.create.height';
+const SDL_PROP_WINDOW_CREATE_HIDDEN_BOOLEAN = 'SDL.window.create.hidden';
+const SDL_PROP_WINDOW_CREATE_HIGH_PIXEL_DENSITY_BOOLEAN =
+    'SDL.window.create.high_pixel_density';
+const SDL_PROP_WINDOW_CREATE_MAXIMIZED_BOOLEAN = 'SDL.window.create.maximized';
+const SDL_PROP_WINDOW_CREATE_MENU_BOOLEAN = 'SDL.window.create.menu';
+const SDL_PROP_WINDOW_CREATE_METAL_BOOLEAN = 'SDL.window.create.metal';
+const SDL_PROP_WINDOW_CREATE_MINIMIZED_BOOLEAN = 'SDL.window.create.minimized';
+const SDL_PROP_WINDOW_CREATE_MODAL_BOOLEAN = 'SDL.window.create.modal';
+const SDL_PROP_WINDOW_CREATE_MOUSE_GRABBED_BOOLEAN =
+    'SDL.window.create.mouse_grabbed';
+const SDL_PROP_WINDOW_CREATE_OPENGL_BOOLEAN = 'SDL.window.create.opengl';
+const SDL_PROP_WINDOW_CREATE_PARENT_POINTER = 'SDL.window.create.parent';
+const SDL_PROP_WINDOW_CREATE_RESIZABLE_BOOLEAN = 'SDL.window.create.resizable';
+const SDL_PROP_WINDOW_CREATE_TITLE_STRING = 'SDL.window.create.title';
+const SDL_PROP_WINDOW_CREATE_TRANSPARENT_BOOLEAN =
+    'SDL.window.create.transparent';
+const SDL_PROP_WINDOW_CREATE_TOOLTIP_BOOLEAN = 'SDL.window.create.tooltip';
+const SDL_PROP_WINDOW_CREATE_UTILITY_BOOLEAN = 'SDL.window.create.utility';
+const SDL_PROP_WINDOW_CREATE_VULKAN_BOOLEAN = 'SDL.window.create.vulkan';
+const SDL_PROP_WINDOW_CREATE_WIDTH_NUMBER = 'SDL.window.create.width';
+const SDL_PROP_WINDOW_CREATE_X_NUMBER = 'SDL.window.create.x';
+const SDL_PROP_WINDOW_CREATE_Y_NUMBER = 'SDL.window.create.y';
+const SDL_PROP_WINDOW_CREATE_COCOA_WINDOW_POINTER =
+    'SDL.window.create.cocoa.window';
+const SDL_PROP_WINDOW_CREATE_COCOA_VIEW_POINTER =
+    'SDL.window.create.cocoa.view';
 const SDL_PROP_WINDOW_CREATE_WAYLAND_SURFACE_ROLE_CUSTOM_BOOLEAN =
-    'wayland.surface_role_custom';
+    'SDL.window.create.wayland.surface_role_custom';
 const SDL_PROP_WINDOW_CREATE_WAYLAND_CREATE_EGL_WINDOW_BOOLEAN =
-    'wayland.create_egl_window';
-const SDL_PROP_WINDOW_CREATE_WAYLAND_WL_SURFACE_POINTER = 'wayland.wl_surface';
-const SDL_PROP_WINDOW_CREATE_WIN32_HWND_POINTER = 'win32.hwnd';
+    'SDL.window.create.wayland.create_egl_window';
+const SDL_PROP_WINDOW_CREATE_WAYLAND_WL_SURFACE_POINTER =
+    'SDL.window.create.wayland.wl_surface';
+const SDL_PROP_WINDOW_CREATE_WIN32_HWND_POINTER =
+    'SDL.window.create.win32.hwnd';
 const SDL_PROP_WINDOW_CREATE_WIN32_PIXEL_FORMAT_HWND_POINTER =
-    'win32.pixel_format_hwnd';
-const SDL_PROP_WINDOW_CREATE_X11_WINDOW_NUMBER = 'x11.window';
+    'SDL.window.create.win32.pixel_format_hwnd';
+const SDL_PROP_WINDOW_CREATE_X11_WINDOW_NUMBER = 'SDL.window.create.x11.window';
 const SDL_PROP_WINDOW_SHAPE_POINTER = 'SDL.window.shape';
 const SDL_PROP_WINDOW_HDR_ENABLED_BOOLEAN = 'SDL.window.HDR_enabled';
 const SDL_PROP_WINDOW_SDR_WHITE_LEVEL_FLOAT = 'SDL.window.SDR_white_level';

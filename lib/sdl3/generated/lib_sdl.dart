@@ -67,23 +67,17 @@ typedef SdlHintCallbackDart = void Function(Pointer<NativeType> userdata,
 typedef SdlHintCallback = Void Function(Pointer<NativeType> userdata,
     Pointer<Utf8> name, Pointer<Utf8> oldValue, Pointer<Utf8> newValue);
 
-// typedef void (SDLCALL *SDL_LogOutputFunction)(void *userdata, int category, SDL_LogPriority priority, const char *message)
-typedef SdlLogOutputFunctionDart = void Function(Pointer<NativeType> userdata,
-    int category, int priority, Pointer<Utf8> message);
-typedef SdlLogOutputFunction = Void Function(Pointer<NativeType> userdata,
-    Int32 category, Int32 priority, Pointer<Utf8> message);
-
-// typedef int (SDLCALL *SDL_AppInit_func)(void **appstate, int argc, char *argv[])
+// typedef SDL_AppResult (SDLCALL *SDL_AppInit_func)(void **appstate, int argc, char *argv[])
 typedef SdlAppInitFuncDart = int Function(Pointer<Pointer<NativeType>> appstate,
     int argc, Pointer<Pointer<Int8>> argv);
 typedef SdlAppInitFunc = Int32 Function(Pointer<Pointer<NativeType>> appstate,
     Int32 argc, Pointer<Pointer<Int8>> argv);
 
-// typedef int (SDLCALL *SDL_AppIterate_func)(void *appstate)
+// typedef SDL_AppResult (SDLCALL *SDL_AppIterate_func)(void *appstate)
 typedef SdlAppIterateFuncDart = int Function(Pointer<NativeType> appstate);
 typedef SdlAppIterateFunc = Int32 Function(Pointer<NativeType> appstate);
 
-// typedef int (SDLCALL *SDL_AppEvent_func)(void *appstate, const SDL_Event *event)
+// typedef SDL_AppResult (SDLCALL *SDL_AppEvent_func)(void *appstate, const SDL_Event *event)
 typedef SdlAppEventFuncDart = int Function(
     Pointer<NativeType> appstate, Pointer<SdlEvent> event);
 typedef SdlAppEventFunc = Int32 Function(
@@ -92,6 +86,12 @@ typedef SdlAppEventFunc = Int32 Function(
 // typedef void (SDLCALL *SDL_AppQuit_func)(void *appstate)
 typedef SdlAppQuitFuncDart = void Function(Pointer<NativeType> appstate);
 typedef SdlAppQuitFunc = Void Function(Pointer<NativeType> appstate);
+
+// typedef void (SDLCALL *SDL_LogOutputFunction)(void *userdata, int category, SDL_LogPriority priority, const char *message)
+typedef SdlLogOutputFunctionDart = void Function(Pointer<NativeType> userdata,
+    int category, int priority, Pointer<Utf8> message);
+typedef SdlLogOutputFunction = Void Function(Pointer<NativeType> userdata,
+    Int32 category, Int32 priority, Pointer<Utf8> message);
 
 // typedef int (SDLCALL *SDL_main_func)(int argc, char *argv[])
 typedef SdlMainFuncDart = int Function(int argc, Pointer<Pointer<Int8>> argv);
