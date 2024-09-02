@@ -12,5 +12,3 @@ const IMG_INIT_TIF = 0x00000004;
 const IMG_INIT_WEBP = 0x00000008;
 const IMG_INIT_JXL = 0x00000010;
 const IMG_INIT_AVIF = 0x00000020;
-//const IMG_SetError = SDL_SetError;
-//const IMG_GetError = SDL_GetError;

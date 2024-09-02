@@ -35,7 +35,7 @@ int myEventFilter(Pointer<NativeType> bluePrev, Pointer<SdlEvent> event) {
 }
 
 int main() {
-  if (sdlInit(SDL_INIT_VIDEO) < 0) {
+  if (sdlInit(SDL_INIT_VIDEO) == false) {
     print(sdlGetError());
     return -1;
   }

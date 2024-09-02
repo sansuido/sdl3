@@ -148,8 +148,8 @@ extension SdlCursorEx on SdlCursor {
   ///
   /// Show the cursor.
   ///
-  /// \returns 0 on success or a negative error code on failure; call
-  /// SDL_GetError() for more information.
+  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+  /// for more information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -157,27 +157,27 @@ extension SdlCursorEx on SdlCursor {
   /// \sa SDL_HideCursor
   ///
   /// ```c
-  /// extern SDL_DECLSPEC int SDLCALL SDL_ShowCursor(void)
+  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_ShowCursor(void)
   /// ```
-  static int show() {
+  static bool show() {
     return sdlShowCursor();
   }
 
   ///
-  /// Show the cursor.
+  /// Hide the cursor.
   ///
-  /// \returns 0 on success or a negative error code on failure; call
-  /// SDL_GetError() for more information.
+  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+  /// for more information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
   /// \sa SDL_CursorVisible
-  /// \sa SDL_HideCursor
+  /// \sa SDL_ShowCursor
   ///
   /// ```c
-  /// extern SDL_DECLSPEC int SDLCALL SDL_ShowCursor(void)
+  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_HideCursor(void)
   /// ```
-  static int hide() {
+  static bool hide() {
     return sdlHideCursor();
   }
 }
@@ -194,17 +194,17 @@ extension SdlCursorPointerEx on Pointer<SdlCursor> {
   /// this is desired for any reason.
   ///
   /// \param cursor a cursor to make active.
-  /// \returns 0 on success or a negative error code on failure; call
-  /// SDL_GetError() for more information.
+  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+  /// for more information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
   /// \sa SDL_GetCursor
   ///
   /// ```c
-  /// extern SDL_DECLSPEC int SDLCALL SDL_SetCursor(SDL_Cursor *cursor)
+  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetCursor(SDL_Cursor *cursor)
   /// ```
-  int set() {
+  bool set() {
     return sdlSetCursor(this);
   }
 

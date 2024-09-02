@@ -69,18 +69,15 @@ void sdlLockMutex(Pointer<NativeType> arg0) {
 /// Try to lock a mutex without blocking.
 ///
 /// This works just like SDL_LockMutex(), but if the mutex is not available,
-/// this function returns `SDL_MUTEX_TIMEDOUT` immediately.
+/// this function returns SDL_FALSE immediately.
 ///
 /// This technique is useful if you need exclusive access to a resource but
 /// don't want to wait for it, and will return to it to try again later.
 ///
-/// This function does not fail; if mutex is NULL, it will return 0 immediately
-/// having locked nothing. If the mutex is valid, this function will always
-/// either lock the mutex and return 0, or return SDL_MUTEX_TIMEOUT and lock
-/// nothing.
+/// This function returns SDL_TRUE if passed a NULL mutex.
 ///
 /// \param mutex the mutex to try to lock.
-/// \returns 0 or `SDL_MUTEX_TIMEDOUT`.
+/// \returns SDL_TRUE on success, SDL_FALSE if the mutex would block.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -88,14 +85,14 @@ void sdlLockMutex(Pointer<NativeType> arg0) {
 /// \sa SDL_UnlockMutex
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_TryLockMutex(SDL_Mutex *mutex) SDL_TRY_ACQUIRE(0, mutex)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_TryLockMutex(SDL_Mutex *mutex) SDL_TRY_ACQUIRE(0, mutex)
 /// ```
-int sdlTryLockMutex(Pointer<NativeType> arg0, Pointer<NativeType> arg1) {
+bool sdlTryLockMutex(Pointer<NativeType> arg0, Pointer<NativeType> arg1) {
   final sdlTryLockMutexLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<NativeType> arg0, Pointer<NativeType> arg1),
+      Uint8 Function(Pointer<NativeType> arg0, Pointer<NativeType> arg1),
       int Function(Pointer<NativeType> arg0,
           Pointer<NativeType> arg1)>('SDL_TryLockMutex');
-  return sdlTryLockMutexLookupFunction(arg0, arg1);
+  return sdlTryLockMutexLookupFunction(arg0, arg1) == 1;
 }
 
 ///
@@ -288,7 +285,7 @@ void sdlLockRwLockForWriting(Pointer<NativeType> arg0) {
 /// Try to lock a read/write lock _for reading_ without blocking.
 ///
 /// This works just like SDL_LockRWLockForReading(), but if the rwlock is not
-/// available, then this function returns `SDL_RWLOCK_TIMEDOUT` immediately.
+/// available, then this function returns SDL_FALSE immediately.
 ///
 /// This technique is useful if you need access to a resource but don't want to
 /// wait for it, and will return to it to try again later.
@@ -296,13 +293,10 @@ void sdlLockRwLockForWriting(Pointer<NativeType> arg0) {
 /// Trying to lock for read-only access can succeed if other threads are
 /// holding read-only locks, as this won't prevent access.
 ///
-/// This function does not fail; if rwlock is NULL, it will return 0
-/// immediately having locked nothing. If rwlock is valid, this function will
-/// always either lock the rwlock and return 0, or return SDL_RWLOCK_TIMEOUT
-/// and lock nothing.
+/// This function returns SDL_TRUE if passed a NULL rwlock.
 ///
 /// \param rwlock the rwlock to try to lock.
-/// \returns 0 or `SDL_RWLOCK_TIMEDOUT`.
+/// \returns SDL_TRUE on success, SDL_FALSE if the lock would block.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -311,22 +305,22 @@ void sdlLockRwLockForWriting(Pointer<NativeType> arg0) {
 /// \sa SDL_UnlockRWLock
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_TryLockRWLockForReading(SDL_RWLock *rwlock) SDL_TRY_ACQUIRE_SHARED(0, rwlock)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_TryLockRWLockForReading(SDL_RWLock *rwlock) SDL_TRY_ACQUIRE_SHARED(0, rwlock)
 /// ```
-int sdlTryLockRwLockForReading(
+bool sdlTryLockRwLockForReading(
     Pointer<NativeType> arg0, Pointer<NativeType> arg1) {
   final sdlTryLockRwLockForReadingLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<NativeType> arg0, Pointer<NativeType> arg1),
+      Uint8 Function(Pointer<NativeType> arg0, Pointer<NativeType> arg1),
       int Function(Pointer<NativeType> arg0,
           Pointer<NativeType> arg1)>('SDL_TryLockRWLockForReading');
-  return sdlTryLockRwLockForReadingLookupFunction(arg0, arg1);
+  return sdlTryLockRwLockForReadingLookupFunction(arg0, arg1) == 1;
 }
 
 ///
 /// Try to lock a read/write lock _for writing_ without blocking.
 ///
 /// This works just like SDL_LockRWLockForWriting(), but if the rwlock is not
-/// available, this function returns `SDL_RWLOCK_TIMEDOUT` immediately.
+/// available, then this function returns SDL_FALSE immediately.
 ///
 /// This technique is useful if you need exclusive access to a resource but
 /// don't want to wait for it, and will return to it to try again later.
@@ -339,13 +333,10 @@ int sdlTryLockRwLockForReading(
 /// read-only lock. Doing so results in undefined behavior. Unlock the
 /// read-only lock before requesting a write lock.
 ///
-/// This function does not fail; if rwlock is NULL, it will return 0
-/// immediately having locked nothing. If rwlock is valid, this function will
-/// always either lock the rwlock and return 0, or return SDL_RWLOCK_TIMEOUT
-/// and lock nothing.
+/// This function returns SDL_TRUE if passed a NULL rwlock.
 ///
 /// \param rwlock the rwlock to try to lock.
-/// \returns 0 or `SDL_RWLOCK_TIMEDOUT`.
+/// \returns SDL_TRUE on success, SDL_FALSE if the lock would block.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -354,15 +345,15 @@ int sdlTryLockRwLockForReading(
 /// \sa SDL_UnlockRWLock
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_TryLockRWLockForWriting(SDL_RWLock *rwlock) SDL_TRY_ACQUIRE(0, rwlock)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_TryLockRWLockForWriting(SDL_RWLock *rwlock) SDL_TRY_ACQUIRE(0, rwlock)
 /// ```
-int sdlTryLockRwLockForWriting(
+bool sdlTryLockRwLockForWriting(
     Pointer<NativeType> arg0, Pointer<NativeType> arg1) {
   final sdlTryLockRwLockForWritingLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<NativeType> arg0, Pointer<NativeType> arg1),
+      Uint8 Function(Pointer<NativeType> arg0, Pointer<NativeType> arg1),
       int Function(Pointer<NativeType> arg0,
           Pointer<NativeType> arg1)>('SDL_TryLockRWLockForWriting');
-  return sdlTryLockRwLockForWritingLookupFunction(arg0, arg1);
+  return sdlTryLockRwLockForWritingLookupFunction(arg0, arg1) == 1;
 }
 
 ///
@@ -480,17 +471,14 @@ void sdlDestroySemaphore(Pointer<SdlSemaphore> sem) {
 ///
 /// Wait until a semaphore has a positive value and then decrements it.
 ///
-/// This function suspends the calling thread until either the semaphore
-/// pointed to by `sem` has a positive value or the call is interrupted by a
-/// signal or error. If the call is successful it will atomically decrement the
-/// semaphore value.
+/// This function suspends the calling thread until the semaphore pointed to by
+/// `sem` has a positive value, and then atomically decrement the semaphore
+/// value.
 ///
 /// This function is the equivalent of calling SDL_WaitSemaphoreTimeout() with
 /// a time length of -1.
 ///
 /// \param sem the semaphore wait on.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -499,12 +487,12 @@ void sdlDestroySemaphore(Pointer<SdlSemaphore> sem) {
 /// \sa SDL_WaitSemaphoreTimeout
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_WaitSemaphore(SDL_Semaphore *sem)
+/// extern SDL_DECLSPEC void SDLCALL SDL_WaitSemaphore(SDL_Semaphore *sem)
 /// ```
-int sdlWaitSemaphore(Pointer<SdlSemaphore> sem) {
+void sdlWaitSemaphore(Pointer<SdlSemaphore> sem) {
   final sdlWaitSemaphoreLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlSemaphore> sem),
-      int Function(Pointer<SdlSemaphore> sem)>('SDL_WaitSemaphore');
+      Void Function(Pointer<SdlSemaphore> sem),
+      void Function(Pointer<SdlSemaphore> sem)>('SDL_WaitSemaphore');
   return sdlWaitSemaphoreLookupFunction(sem);
 }
 
@@ -514,12 +502,10 @@ int sdlWaitSemaphore(Pointer<SdlSemaphore> sem) {
 /// This function checks to see if the semaphore pointed to by `sem` has a
 /// positive value and atomically decrements the semaphore value if it does. If
 /// the semaphore doesn't have a positive value, the function immediately
-/// returns SDL_MUTEX_TIMEDOUT.
+/// returns SDL_FALSE.
 ///
 /// \param sem the semaphore to wait on.
-/// \returns 0 if the wait succeeds, `SDL_MUTEX_TIMEDOUT` if the wait would
-/// block, or a negative error code on failure; call SDL_GetError()
-/// for more information.
+/// \returns SDL_TRUE if the wait succeeds, SDL_FALSE if the wait would block.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -528,28 +514,26 @@ int sdlWaitSemaphore(Pointer<SdlSemaphore> sem) {
 /// \sa SDL_WaitSemaphoreTimeout
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_TryWaitSemaphore(SDL_Semaphore *sem)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_TryWaitSemaphore(SDL_Semaphore *sem)
 /// ```
-int sdlTryWaitSemaphore(Pointer<SdlSemaphore> sem) {
+bool sdlTryWaitSemaphore(Pointer<SdlSemaphore> sem) {
   final sdlTryWaitSemaphoreLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlSemaphore> sem),
+      Uint8 Function(Pointer<SdlSemaphore> sem),
       int Function(Pointer<SdlSemaphore> sem)>('SDL_TryWaitSemaphore');
-  return sdlTryWaitSemaphoreLookupFunction(sem);
+  return sdlTryWaitSemaphoreLookupFunction(sem) == 1;
 }
 
 ///
 /// Wait until a semaphore has a positive value and then decrements it.
 ///
 /// This function suspends the calling thread until either the semaphore
-/// pointed to by `sem` has a positive value, the call is interrupted by a
-/// signal or error, or the specified time has elapsed. If the call is
-/// successful it will atomically decrement the semaphore value.
+/// pointed to by `sem` has a positive value or the specified time has elapsed.
+/// If the call is successful it will atomically decrement the semaphore value.
 ///
 /// \param sem the semaphore to wait on.
-/// \param timeoutMS the length of the timeout, in milliseconds.
-/// \returns 0 if the wait succeeds, `SDL_MUTEX_TIMEDOUT` if the wait does not
-/// succeed in the allotted time, or a negative error code on failure;
-/// call SDL_GetError() for more information.
+/// \param timeoutMS the length of the timeout, in milliseconds, or -1 to wait
+/// indefinitely.
+/// \returns SDL_TRUE if the wait succeeds or SDL_FALSE if the wait times out.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -558,22 +542,20 @@ int sdlTryWaitSemaphore(Pointer<SdlSemaphore> sem) {
 /// \sa SDL_WaitSemaphore
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_WaitSemaphoreTimeout(SDL_Semaphore *sem, Sint32 timeoutMS)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_WaitSemaphoreTimeout(SDL_Semaphore *sem, Sint32 timeoutMS)
 /// ```
-int sdlWaitSemaphoreTimeout(Pointer<SdlSemaphore> sem, int timeoutMs) {
+bool sdlWaitSemaphoreTimeout(Pointer<SdlSemaphore> sem, int timeoutMs) {
   final sdlWaitSemaphoreTimeoutLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlSemaphore> sem, Int32 timeoutMs),
+      Uint8 Function(Pointer<SdlSemaphore> sem, Int32 timeoutMs),
       int Function(Pointer<SdlSemaphore> sem,
           int timeoutMs)>('SDL_WaitSemaphoreTimeout');
-  return sdlWaitSemaphoreTimeoutLookupFunction(sem, timeoutMs);
+  return sdlWaitSemaphoreTimeoutLookupFunction(sem, timeoutMs) == 1;
 }
 
 ///
 /// Atomically increment a semaphore's value and wake waiting threads.
 ///
 /// \param sem the semaphore to increment.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -582,12 +564,12 @@ int sdlWaitSemaphoreTimeout(Pointer<SdlSemaphore> sem, int timeoutMs) {
 /// \sa SDL_WaitSemaphoreTimeout
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_SignalSemaphore(SDL_Semaphore *sem)
+/// extern SDL_DECLSPEC void SDLCALL SDL_SignalSemaphore(SDL_Semaphore *sem)
 /// ```
-int sdlSignalSemaphore(Pointer<SdlSemaphore> sem) {
+void sdlSignalSemaphore(Pointer<SdlSemaphore> sem) {
   final sdlSignalSemaphoreLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlSemaphore> sem),
-      int Function(Pointer<SdlSemaphore> sem)>('SDL_SignalSemaphore');
+      Void Function(Pointer<SdlSemaphore> sem),
+      void Function(Pointer<SdlSemaphore> sem)>('SDL_SignalSemaphore');
   return sdlSignalSemaphoreLookupFunction(sem);
 }
 
@@ -656,8 +638,6 @@ void sdlDestroyCondition(Pointer<SdlCondition> cond) {
 /// Restart one of the threads that are waiting on the condition variable.
 ///
 /// \param cond the condition variable to signal.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -668,12 +648,12 @@ void sdlDestroyCondition(Pointer<SdlCondition> cond) {
 /// \sa SDL_WaitConditionTimeout
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_SignalCondition(SDL_Condition *cond)
+/// extern SDL_DECLSPEC void SDLCALL SDL_SignalCondition(SDL_Condition *cond)
 /// ```
-int sdlSignalCondition(Pointer<SdlCondition> cond) {
+void sdlSignalCondition(Pointer<SdlCondition> cond) {
   final sdlSignalConditionLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlCondition> cond),
-      int Function(Pointer<SdlCondition> cond)>('SDL_SignalCondition');
+      Void Function(Pointer<SdlCondition> cond),
+      void Function(Pointer<SdlCondition> cond)>('SDL_SignalCondition');
   return sdlSignalConditionLookupFunction(cond);
 }
 
@@ -681,8 +661,6 @@ int sdlSignalCondition(Pointer<SdlCondition> cond) {
 /// Restart all threads that are waiting on the condition variable.
 ///
 /// \param cond the condition variable to signal.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -693,12 +671,12 @@ int sdlSignalCondition(Pointer<SdlCondition> cond) {
 /// \sa SDL_WaitConditionTimeout
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_BroadcastCondition(SDL_Condition *cond)
+/// extern SDL_DECLSPEC void SDLCALL SDL_BroadcastCondition(SDL_Condition *cond)
 /// ```
-int sdlBroadcastCondition(Pointer<SdlCondition> cond) {
+void sdlBroadcastCondition(Pointer<SdlCondition> cond) {
   final sdlBroadcastConditionLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlCondition> cond),
-      int Function(Pointer<SdlCondition> cond)>('SDL_BroadcastCondition');
+      Void Function(Pointer<SdlCondition> cond),
+      void Function(Pointer<SdlCondition> cond)>('SDL_BroadcastCondition');
   return sdlBroadcastConditionLookupFunction(cond);
 }
 
@@ -719,8 +697,6 @@ int sdlBroadcastCondition(Pointer<SdlCondition> cond) {
 ///
 /// \param cond the condition variable to wait on.
 /// \param mutex the mutex used to coordinate thread access.
-/// \returns 0 when it is signaled or a negative error code on failure; call
-/// SDL_GetError() for more information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -731,12 +707,12 @@ int sdlBroadcastCondition(Pointer<SdlCondition> cond) {
 /// \sa SDL_WaitConditionTimeout
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_WaitCondition(SDL_Condition *cond, SDL_Mutex *mutex)
+/// extern SDL_DECLSPEC void SDLCALL SDL_WaitCondition(SDL_Condition *cond, SDL_Mutex *mutex)
 /// ```
-int sdlWaitCondition(Pointer<SdlCondition> cond, Pointer<SdlMutex> mutex) {
+void sdlWaitCondition(Pointer<SdlCondition> cond, Pointer<SdlMutex> mutex) {
   final sdlWaitConditionLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlCondition> cond, Pointer<SdlMutex> mutex),
-      int Function(Pointer<SdlCondition> cond,
+      Void Function(Pointer<SdlCondition> cond, Pointer<SdlMutex> mutex),
+      void Function(Pointer<SdlCondition> cond,
           Pointer<SdlMutex> mutex)>('SDL_WaitCondition');
   return sdlWaitConditionLookupFunction(cond, mutex);
 }
@@ -758,9 +734,8 @@ int sdlWaitCondition(Pointer<SdlCondition> cond, Pointer<SdlMutex> mutex) {
 /// \param mutex the mutex used to coordinate thread access.
 /// \param timeoutMS the maximum time to wait, in milliseconds, or -1 to wait
 /// indefinitely.
-/// \returns 0 if the condition variable is signaled, `SDL_MUTEX_TIMEDOUT` if
-/// the condition is not signaled in the allotted time, or a negative
-/// error code on failure; call SDL_GetError() for more information.
+/// \returns SDL_TRUE if the condition variable is signaled, SDL_FALSE if the
+/// condition is not signaled in the allotted time.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -771,14 +746,14 @@ int sdlWaitCondition(Pointer<SdlCondition> cond, Pointer<SdlMutex> mutex) {
 /// \sa SDL_WaitCondition
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_WaitConditionTimeout(SDL_Condition *cond, SDL_Mutex *mutex, Sint32 timeoutMS)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_WaitConditionTimeout(SDL_Condition *cond, SDL_Mutex *mutex, Sint32 timeoutMS)
 /// ```
-int sdlWaitConditionTimeout(
+bool sdlWaitConditionTimeout(
     Pointer<SdlCondition> cond, Pointer<SdlMutex> mutex, int timeoutMs) {
   final sdlWaitConditionTimeoutLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(
+      Uint8 Function(
           Pointer<SdlCondition> cond, Pointer<SdlMutex> mutex, Int32 timeoutMs),
       int Function(Pointer<SdlCondition> cond, Pointer<SdlMutex> mutex,
           int timeoutMs)>('SDL_WaitConditionTimeout');
-  return sdlWaitConditionTimeoutLookupFunction(cond, mutex, timeoutMs);
+  return sdlWaitConditionTimeoutLookupFunction(cond, mutex, timeoutMs) == 1;
 }

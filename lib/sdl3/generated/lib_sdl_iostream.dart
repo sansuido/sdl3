@@ -258,28 +258,28 @@ Pointer<SdlIoStream> sdlOpenIo(
 ///
 /// SDL_CloseIO() closes and cleans up the SDL_IOStream stream. It releases any
 /// resources used by the stream and frees the SDL_IOStream itself. This
-/// returns 0 on success, or -1 if the stream failed to flush to its output
-/// (e.g. to disk).
+/// returns SDL_TRUE on success, or SDL_FALSE if the stream failed to flush to
+/// its output (e.g. to disk).
 ///
 /// Note that if this fails to flush the stream to disk, this function reports
 /// an error, but the SDL_IOStream is still invalid once this function returns.
 ///
 /// \param context SDL_IOStream structure to close.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_OpenIO
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_CloseIO(SDL_IOStream *context)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_CloseIO(SDL_IOStream *context)
 /// ```
-int sdlCloseIo(Pointer<SdlIoStream> context) {
+bool sdlCloseIo(Pointer<SdlIoStream> context) {
   final sdlCloseIoLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlIoStream> context),
+      Uint8 Function(Pointer<SdlIoStream> context),
       int Function(Pointer<SdlIoStream> context)>('SDL_CloseIO');
-  return sdlCloseIoLookupFunction(context);
+  return sdlCloseIoLookupFunction(context) == 1;
 }
 
 ///
@@ -576,7 +576,7 @@ Pointer<NativeType> sdlLoadFileIo(
     Pointer<SdlIoStream> src, Pointer<Uint32> datasize, bool closeio) {
   final sdlLoadFileIoLookupFunction = libSdl3.lookupFunction<
       Pointer<NativeType> Function(
-          Pointer<SdlIoStream> src, Pointer<Uint32> datasize, Int32 closeio),
+          Pointer<SdlIoStream> src, Pointer<Uint32> datasize, Uint8 closeio),
       Pointer<NativeType> Function(Pointer<SdlIoStream> src,
           Pointer<Uint32> datasize, int closeio)>('SDL_LoadFile_IO');
   return sdlLoadFileIoLookupFunction(src, datasize, closeio ? 1 : 0);
@@ -630,7 +630,7 @@ Pointer<NativeType> sdlLoadFile(String? file, Pointer<Uint32> datasize) {
 /// ```
 bool sdlReadU8(Pointer<SdlIoStream> src, Pointer<Uint8> value) {
   final sdlReadU8LookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlIoStream> src, Pointer<Uint8> value),
+      Uint8 Function(Pointer<SdlIoStream> src, Pointer<Uint8> value),
       int Function(
           Pointer<SdlIoStream> src, Pointer<Uint8> value)>('SDL_ReadU8');
   return sdlReadU8LookupFunction(src, value) == 1;
@@ -651,7 +651,7 @@ bool sdlReadU8(Pointer<SdlIoStream> src, Pointer<Uint8> value) {
 /// ```
 bool sdlReadS8(Pointer<SdlIoStream> src, Pointer<Int8> value) {
   final sdlReadS8LookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlIoStream> src, Pointer<Int8> value),
+      Uint8 Function(Pointer<SdlIoStream> src, Pointer<Int8> value),
       int Function(
           Pointer<SdlIoStream> src, Pointer<Int8> value)>('SDL_ReadS8');
   return sdlReadS8LookupFunction(src, value) == 1;
@@ -676,7 +676,7 @@ bool sdlReadS8(Pointer<SdlIoStream> src, Pointer<Int8> value) {
 /// ```
 bool sdlReadU16Le(Pointer<SdlIoStream> src, Pointer<Uint16> value) {
   final sdlReadU16LeLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlIoStream> src, Pointer<Uint16> value),
+      Uint8 Function(Pointer<SdlIoStream> src, Pointer<Uint16> value),
       int Function(
           Pointer<SdlIoStream> src, Pointer<Uint16> value)>('SDL_ReadU16LE');
   return sdlReadU16LeLookupFunction(src, value) == 1;
@@ -701,7 +701,7 @@ bool sdlReadU16Le(Pointer<SdlIoStream> src, Pointer<Uint16> value) {
 /// ```
 bool sdlReadS16Le(Pointer<SdlIoStream> src, Pointer<Int16> value) {
   final sdlReadS16LeLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlIoStream> src, Pointer<Int16> value),
+      Uint8 Function(Pointer<SdlIoStream> src, Pointer<Int16> value),
       int Function(
           Pointer<SdlIoStream> src, Pointer<Int16> value)>('SDL_ReadS16LE');
   return sdlReadS16LeLookupFunction(src, value) == 1;
@@ -726,7 +726,7 @@ bool sdlReadS16Le(Pointer<SdlIoStream> src, Pointer<Int16> value) {
 /// ```
 bool sdlReadU16Be(Pointer<SdlIoStream> src, Pointer<Uint16> value) {
   final sdlReadU16BeLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlIoStream> src, Pointer<Uint16> value),
+      Uint8 Function(Pointer<SdlIoStream> src, Pointer<Uint16> value),
       int Function(
           Pointer<SdlIoStream> src, Pointer<Uint16> value)>('SDL_ReadU16BE');
   return sdlReadU16BeLookupFunction(src, value) == 1;
@@ -751,7 +751,7 @@ bool sdlReadU16Be(Pointer<SdlIoStream> src, Pointer<Uint16> value) {
 /// ```
 bool sdlReadS16Be(Pointer<SdlIoStream> src, Pointer<Int16> value) {
   final sdlReadS16BeLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlIoStream> src, Pointer<Int16> value),
+      Uint8 Function(Pointer<SdlIoStream> src, Pointer<Int16> value),
       int Function(
           Pointer<SdlIoStream> src, Pointer<Int16> value)>('SDL_ReadS16BE');
   return sdlReadS16BeLookupFunction(src, value) == 1;
@@ -776,7 +776,7 @@ bool sdlReadS16Be(Pointer<SdlIoStream> src, Pointer<Int16> value) {
 /// ```
 bool sdlReadU32Le(Pointer<SdlIoStream> src, Pointer<Uint32> value) {
   final sdlReadU32LeLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlIoStream> src, Pointer<Uint32> value),
+      Uint8 Function(Pointer<SdlIoStream> src, Pointer<Uint32> value),
       int Function(
           Pointer<SdlIoStream> src, Pointer<Uint32> value)>('SDL_ReadU32LE');
   return sdlReadU32LeLookupFunction(src, value) == 1;
@@ -801,7 +801,7 @@ bool sdlReadU32Le(Pointer<SdlIoStream> src, Pointer<Uint32> value) {
 /// ```
 bool sdlReadS32Le(Pointer<SdlIoStream> src, Pointer<Int32> value) {
   final sdlReadS32LeLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlIoStream> src, Pointer<Int32> value),
+      Uint8 Function(Pointer<SdlIoStream> src, Pointer<Int32> value),
       int Function(
           Pointer<SdlIoStream> src, Pointer<Int32> value)>('SDL_ReadS32LE');
   return sdlReadS32LeLookupFunction(src, value) == 1;
@@ -826,7 +826,7 @@ bool sdlReadS32Le(Pointer<SdlIoStream> src, Pointer<Int32> value) {
 /// ```
 bool sdlReadU32Be(Pointer<SdlIoStream> src, Pointer<Uint32> value) {
   final sdlReadU32BeLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlIoStream> src, Pointer<Uint32> value),
+      Uint8 Function(Pointer<SdlIoStream> src, Pointer<Uint32> value),
       int Function(
           Pointer<SdlIoStream> src, Pointer<Uint32> value)>('SDL_ReadU32BE');
   return sdlReadU32BeLookupFunction(src, value) == 1;
@@ -851,7 +851,7 @@ bool sdlReadU32Be(Pointer<SdlIoStream> src, Pointer<Uint32> value) {
 /// ```
 bool sdlReadS32Be(Pointer<SdlIoStream> src, Pointer<Int32> value) {
   final sdlReadS32BeLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlIoStream> src, Pointer<Int32> value),
+      Uint8 Function(Pointer<SdlIoStream> src, Pointer<Int32> value),
       int Function(
           Pointer<SdlIoStream> src, Pointer<Int32> value)>('SDL_ReadS32BE');
   return sdlReadS32BeLookupFunction(src, value) == 1;
@@ -876,7 +876,7 @@ bool sdlReadS32Be(Pointer<SdlIoStream> src, Pointer<Int32> value) {
 /// ```
 bool sdlReadU64Le(Pointer<SdlIoStream> src, Pointer<Uint64> value) {
   final sdlReadU64LeLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlIoStream> src, Pointer<Uint64> value),
+      Uint8 Function(Pointer<SdlIoStream> src, Pointer<Uint64> value),
       int Function(
           Pointer<SdlIoStream> src, Pointer<Uint64> value)>('SDL_ReadU64LE');
   return sdlReadU64LeLookupFunction(src, value) == 1;
@@ -901,7 +901,7 @@ bool sdlReadU64Le(Pointer<SdlIoStream> src, Pointer<Uint64> value) {
 /// ```
 bool sdlReadS64Le(Pointer<SdlIoStream> src, Pointer<Int64> value) {
   final sdlReadS64LeLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlIoStream> src, Pointer<Int64> value),
+      Uint8 Function(Pointer<SdlIoStream> src, Pointer<Int64> value),
       int Function(
           Pointer<SdlIoStream> src, Pointer<Int64> value)>('SDL_ReadS64LE');
   return sdlReadS64LeLookupFunction(src, value) == 1;
@@ -926,7 +926,7 @@ bool sdlReadS64Le(Pointer<SdlIoStream> src, Pointer<Int64> value) {
 /// ```
 bool sdlReadU64Be(Pointer<SdlIoStream> src, Pointer<Uint64> value) {
   final sdlReadU64BeLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlIoStream> src, Pointer<Uint64> value),
+      Uint8 Function(Pointer<SdlIoStream> src, Pointer<Uint64> value),
       int Function(
           Pointer<SdlIoStream> src, Pointer<Uint64> value)>('SDL_ReadU64BE');
   return sdlReadU64BeLookupFunction(src, value) == 1;
@@ -951,7 +951,7 @@ bool sdlReadU64Be(Pointer<SdlIoStream> src, Pointer<Uint64> value) {
 /// ```
 bool sdlReadS64Be(Pointer<SdlIoStream> src, Pointer<Int64> value) {
   final sdlReadS64BeLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlIoStream> src, Pointer<Int64> value),
+      Uint8 Function(Pointer<SdlIoStream> src, Pointer<Int64> value),
       int Function(
           Pointer<SdlIoStream> src, Pointer<Int64> value)>('SDL_ReadS64BE');
   return sdlReadS64BeLookupFunction(src, value) == 1;
@@ -972,7 +972,7 @@ bool sdlReadS64Be(Pointer<SdlIoStream> src, Pointer<Int64> value) {
 /// ```
 bool sdlWriteU8(Pointer<SdlIoStream> dst, int value) {
   final sdlWriteU8LookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlIoStream> dst, Uint8 value),
+      Uint8 Function(Pointer<SdlIoStream> dst, Uint8 value),
       int Function(Pointer<SdlIoStream> dst, int value)>('SDL_WriteU8');
   return sdlWriteU8LookupFunction(dst, value) == 1;
 }
@@ -992,7 +992,7 @@ bool sdlWriteU8(Pointer<SdlIoStream> dst, int value) {
 /// ```
 bool sdlWriteS8(Pointer<SdlIoStream> dst, int value) {
   final sdlWriteS8LookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlIoStream> dst, Int8 value),
+      Uint8 Function(Pointer<SdlIoStream> dst, Int8 value),
       int Function(Pointer<SdlIoStream> dst, int value)>('SDL_WriteS8');
   return sdlWriteS8LookupFunction(dst, value) == 1;
 }
@@ -1017,7 +1017,7 @@ bool sdlWriteS8(Pointer<SdlIoStream> dst, int value) {
 /// ```
 bool sdlWriteU16Le(Pointer<SdlIoStream> dst, int value) {
   final sdlWriteU16LeLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlIoStream> dst, Uint16 value),
+      Uint8 Function(Pointer<SdlIoStream> dst, Uint16 value),
       int Function(Pointer<SdlIoStream> dst, int value)>('SDL_WriteU16LE');
   return sdlWriteU16LeLookupFunction(dst, value) == 1;
 }
@@ -1042,7 +1042,7 @@ bool sdlWriteU16Le(Pointer<SdlIoStream> dst, int value) {
 /// ```
 bool sdlWriteS16Le(Pointer<SdlIoStream> dst, int value) {
   final sdlWriteS16LeLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlIoStream> dst, Int16 value),
+      Uint8 Function(Pointer<SdlIoStream> dst, Int16 value),
       int Function(Pointer<SdlIoStream> dst, int value)>('SDL_WriteS16LE');
   return sdlWriteS16LeLookupFunction(dst, value) == 1;
 }
@@ -1066,7 +1066,7 @@ bool sdlWriteS16Le(Pointer<SdlIoStream> dst, int value) {
 /// ```
 bool sdlWriteU16Be(Pointer<SdlIoStream> dst, int value) {
   final sdlWriteU16BeLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlIoStream> dst, Uint16 value),
+      Uint8 Function(Pointer<SdlIoStream> dst, Uint16 value),
       int Function(Pointer<SdlIoStream> dst, int value)>('SDL_WriteU16BE');
   return sdlWriteU16BeLookupFunction(dst, value) == 1;
 }
@@ -1090,7 +1090,7 @@ bool sdlWriteU16Be(Pointer<SdlIoStream> dst, int value) {
 /// ```
 bool sdlWriteS16Be(Pointer<SdlIoStream> dst, int value) {
   final sdlWriteS16BeLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlIoStream> dst, Int16 value),
+      Uint8 Function(Pointer<SdlIoStream> dst, Int16 value),
       int Function(Pointer<SdlIoStream> dst, int value)>('SDL_WriteS16BE');
   return sdlWriteS16BeLookupFunction(dst, value) == 1;
 }
@@ -1115,7 +1115,7 @@ bool sdlWriteS16Be(Pointer<SdlIoStream> dst, int value) {
 /// ```
 bool sdlWriteU32Le(Pointer<SdlIoStream> dst, int value) {
   final sdlWriteU32LeLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlIoStream> dst, Uint32 value),
+      Uint8 Function(Pointer<SdlIoStream> dst, Uint32 value),
       int Function(Pointer<SdlIoStream> dst, int value)>('SDL_WriteU32LE');
   return sdlWriteU32LeLookupFunction(dst, value) == 1;
 }
@@ -1140,7 +1140,7 @@ bool sdlWriteU32Le(Pointer<SdlIoStream> dst, int value) {
 /// ```
 bool sdlWriteS32Le(Pointer<SdlIoStream> dst, int value) {
   final sdlWriteS32LeLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlIoStream> dst, Int32 value),
+      Uint8 Function(Pointer<SdlIoStream> dst, Int32 value),
       int Function(Pointer<SdlIoStream> dst, int value)>('SDL_WriteS32LE');
   return sdlWriteS32LeLookupFunction(dst, value) == 1;
 }
@@ -1164,7 +1164,7 @@ bool sdlWriteS32Le(Pointer<SdlIoStream> dst, int value) {
 /// ```
 bool sdlWriteU32Be(Pointer<SdlIoStream> dst, int value) {
   final sdlWriteU32BeLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlIoStream> dst, Uint32 value),
+      Uint8 Function(Pointer<SdlIoStream> dst, Uint32 value),
       int Function(Pointer<SdlIoStream> dst, int value)>('SDL_WriteU32BE');
   return sdlWriteU32BeLookupFunction(dst, value) == 1;
 }
@@ -1188,7 +1188,7 @@ bool sdlWriteU32Be(Pointer<SdlIoStream> dst, int value) {
 /// ```
 bool sdlWriteS32Be(Pointer<SdlIoStream> dst, int value) {
   final sdlWriteS32BeLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlIoStream> dst, Int32 value),
+      Uint8 Function(Pointer<SdlIoStream> dst, Int32 value),
       int Function(Pointer<SdlIoStream> dst, int value)>('SDL_WriteS32BE');
   return sdlWriteS32BeLookupFunction(dst, value) == 1;
 }
@@ -1213,7 +1213,7 @@ bool sdlWriteS32Be(Pointer<SdlIoStream> dst, int value) {
 /// ```
 bool sdlWriteU64Le(Pointer<SdlIoStream> dst, int value) {
   final sdlWriteU64LeLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlIoStream> dst, Uint64 value),
+      Uint8 Function(Pointer<SdlIoStream> dst, Uint64 value),
       int Function(Pointer<SdlIoStream> dst, int value)>('SDL_WriteU64LE');
   return sdlWriteU64LeLookupFunction(dst, value) == 1;
 }
@@ -1238,7 +1238,7 @@ bool sdlWriteU64Le(Pointer<SdlIoStream> dst, int value) {
 /// ```
 bool sdlWriteS64Le(Pointer<SdlIoStream> dst, int value) {
   final sdlWriteS64LeLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlIoStream> dst, Int64 value),
+      Uint8 Function(Pointer<SdlIoStream> dst, Int64 value),
       int Function(Pointer<SdlIoStream> dst, int value)>('SDL_WriteS64LE');
   return sdlWriteS64LeLookupFunction(dst, value) == 1;
 }
@@ -1262,7 +1262,7 @@ bool sdlWriteS64Le(Pointer<SdlIoStream> dst, int value) {
 /// ```
 bool sdlWriteU64Be(Pointer<SdlIoStream> dst, int value) {
   final sdlWriteU64BeLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlIoStream> dst, Uint64 value),
+      Uint8 Function(Pointer<SdlIoStream> dst, Uint64 value),
       int Function(Pointer<SdlIoStream> dst, int value)>('SDL_WriteU64BE');
   return sdlWriteU64BeLookupFunction(dst, value) == 1;
 }
@@ -1286,7 +1286,7 @@ bool sdlWriteU64Be(Pointer<SdlIoStream> dst, int value) {
 /// ```
 bool sdlWriteS64Be(Pointer<SdlIoStream> dst, int value) {
   final sdlWriteS64BeLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlIoStream> dst, Int64 value),
+      Uint8 Function(Pointer<SdlIoStream> dst, Int64 value),
       int Function(Pointer<SdlIoStream> dst, int value)>('SDL_WriteS64BE');
   return sdlWriteS64BeLookupFunction(dst, value) == 1;
 }

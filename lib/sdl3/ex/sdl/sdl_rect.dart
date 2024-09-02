@@ -32,7 +32,7 @@ extension SdlRectPointerEx on Pointer<SdlRect> {
   /// \sa SDL_GetRectIntersection
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_HasRectIntersection(const SDL_Rect * A, const SDL_Rect * B)
+  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_HasRectIntersection(const SDL_Rect *A, const SDL_Rect *B)
   /// ```
   bool hasIntersection(Pointer<SdlRect> b) {
     return sdlHasRectIntersection(this, b);
@@ -54,7 +54,7 @@ extension SdlRectPointerEx on Pointer<SdlRect> {
   /// \sa SDL_HasRectIntersection
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetRectIntersection(const SDL_Rect * A, const SDL_Rect * B, SDL_Rect * result)
+  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetRectIntersection(const SDL_Rect *A, const SDL_Rect *B, SDL_Rect *result)
   /// ```
   bool getIntersection(Pointer<SdlRect> b, Pointer<SdlRect> result) {
     return sdlGetRectIntersection(this, b, result);
@@ -67,15 +67,15 @@ extension SdlRectPointerEx on Pointer<SdlRect> {
   /// \param B an SDL_Rect structure representing the second rectangle.
   /// \param result an SDL_Rect structure filled in with the union of rectangles
   /// `A` and `B`.
-  /// \returns 0 on success or a negative error code on failure; call
-  /// SDL_GetError() for more information.
+  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+  /// for more information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
   /// ```c
-  /// extern SDL_DECLSPEC int SDLCALL SDL_GetRectUnion(const SDL_Rect * A, const SDL_Rect * B, SDL_Rect * result)
+  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetRectUnion(const SDL_Rect *A, const SDL_Rect *B, SDL_Rect *result)
   /// ```
-  int union(Pointer<SdlRect> b, Pointer<SdlRect> result) {
+  bool union(Pointer<SdlRect> b, Pointer<SdlRect> result) {
     return sdlGetRectUnion(this, b, result);
   }
 
@@ -98,7 +98,7 @@ extension SdlRectPointerEx on Pointer<SdlRect> {
   /// \since This function is available since SDL 3.0.0.
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetRectAndLineIntersection(const SDL_Rect * rect, int *X1, int *Y1, int *X2, int *Y2)
+  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetRectAndLineIntersection(const SDL_Rect *rect, int *X1, int *Y1, int *X2, int *Y2)
   /// ```
   bool getLineIntersection(Pointer<Int32> x1, Pointer<Int32> y1,
       Pointer<Int32> x2, Pointer<Int32> y2) {

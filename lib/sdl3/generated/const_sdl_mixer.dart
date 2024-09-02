@@ -36,7 +36,3 @@ const MUS_WAVPACK = 11;
 const MUS_GME = 12;
 const MIX_CHANNEL_POST = (-2);
 const MIX_EFFECTSMAXSPEED = 'MIX_EFFECTSMAXSPEED';
-//const Mix_SetError = SDL_SetError;
-//const Mix_GetError = SDL_GetError;
-//const Mix_ClearError = SDL_ClearError;
-//const Mix_OutOfMemory = SDL_OutOfMemory;

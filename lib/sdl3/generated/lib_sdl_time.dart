@@ -15,21 +15,23 @@ import 'struct_sdl.dart';
 /// format, may be NULL.
 /// \param timeFormat a pointer to the SDL_TimeFormat to hold the returned time
 /// format, may be NULL.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_GetDateTimeLocalePreferences(SDL_DateFormat *dateFormat, SDL_TimeFormat *timeFormat)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetDateTimeLocalePreferences(SDL_DateFormat *dateFormat, SDL_TimeFormat *timeFormat)
 /// ```
-int sdlGetDateTimeLocalePreferences(
+bool sdlGetDateTimeLocalePreferences(
     Pointer<Int32> dateFormat, Pointer<Int32> timeFormat) {
   final sdlGetDateTimeLocalePreferencesLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<Int32> dateFormat, Pointer<Int32> timeFormat),
+      Uint8 Function(Pointer<Int32> dateFormat, Pointer<Int32> timeFormat),
       int Function(Pointer<Int32> dateFormat,
           Pointer<Int32> timeFormat)>('SDL_GetDateTimeLocalePreferences');
-  return sdlGetDateTimeLocalePreferencesLookupFunction(dateFormat, timeFormat);
+  return sdlGetDateTimeLocalePreferencesLookupFunction(
+          dateFormat, timeFormat) ==
+      1;
 }
 
 ///
@@ -37,19 +39,19 @@ int sdlGetDateTimeLocalePreferences(
 /// Jan 1, 1970 in Universal Coordinated Time (UTC).
 ///
 /// \param ticks the SDL_Time to hold the returned tick count.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_GetCurrentTime(SDL_Time *ticks)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetCurrentTime(SDL_Time *ticks)
 /// ```
-int sdlGetCurrentTime(Pointer<Int64> ticks) {
+bool sdlGetCurrentTime(Pointer<Int64> ticks) {
   final sdlGetCurrentTimeLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<Int64> ticks),
+      Uint8 Function(Pointer<Int64> ticks),
       int Function(Pointer<Int64> ticks)>('SDL_GetCurrentTime');
-  return sdlGetCurrentTimeLookupFunction(ticks);
+  return sdlGetCurrentTimeLookupFunction(ticks) == 1;
 }
 
 ///
@@ -61,20 +63,20 @@ int sdlGetCurrentTime(Pointer<Int64> ticks) {
 /// \param localTime the resulting SDL_DateTime will be expressed in local time
 /// if true, otherwise it will be in Universal Coordinated
 /// Time (UTC).
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_TimeToDateTime(SDL_Time ticks, SDL_DateTime *dt, SDL_bool localTime)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_TimeToDateTime(SDL_Time ticks, SDL_DateTime *dt, SDL_bool localTime)
 /// ```
-int sdlTimeToDateTime(int ticks, Pointer<SdlDateTime> dt, bool localTime) {
+bool sdlTimeToDateTime(int ticks, Pointer<SdlDateTime> dt, bool localTime) {
   final sdlTimeToDateTimeLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Int64 ticks, Pointer<SdlDateTime> dt, Int32 localTime),
+      Uint8 Function(Int64 ticks, Pointer<SdlDateTime> dt, Uint8 localTime),
       int Function(int ticks, Pointer<SdlDateTime> dt,
           int localTime)>('SDL_TimeToDateTime');
-  return sdlTimeToDateTimeLookupFunction(ticks, dt, localTime ? 1 : 0);
+  return sdlTimeToDateTimeLookupFunction(ticks, dt, localTime ? 1 : 0) == 1;
 }
 
 ///
@@ -85,20 +87,20 @@ int sdlTimeToDateTime(int ticks, Pointer<SdlDateTime> dt, bool localTime) {
 ///
 /// \param dt the source SDL_DateTime.
 /// \param ticks the resulting SDL_Time.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_DateTimeToTime(const SDL_DateTime *dt, SDL_Time *ticks)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_DateTimeToTime(const SDL_DateTime *dt, SDL_Time *ticks)
 /// ```
-int sdlDateTimeToTime(Pointer<SdlDateTime> dt, Pointer<Int64> ticks) {
+bool sdlDateTimeToTime(Pointer<SdlDateTime> dt, Pointer<Int64> ticks) {
   final sdlDateTimeToTimeLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlDateTime> dt, Pointer<Int64> ticks),
+      Uint8 Function(Pointer<SdlDateTime> dt, Pointer<Int64> ticks),
       int Function(
           Pointer<SdlDateTime> dt, Pointer<Int64> ticks)>('SDL_DateTimeToTime');
-  return sdlDateTimeToTimeLookupFunction(dt, ticks);
+  return sdlDateTimeToTimeLookupFunction(dt, ticks) == 1;
 }
 
 ///
@@ -157,8 +159,8 @@ int sdlTimeFromWindows(int dwLowDateTime, int dwHighDateTime) {
 ///
 /// \param year the year.
 /// \param month the month [1-12].
-/// \returns the number of days in the requested month or a negative error code
-/// on failure; call SDL_GetError() for more information.
+/// \returns the number of days in the requested month or -1 on failure; call
+/// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -178,8 +180,8 @@ int sdlGetDaysInMonth(int year, int month) {
 /// \param year the year component of the date.
 /// \param month the month component of the date.
 /// \param day the day component of the date.
-/// \returns the day of year [0-365] if the date is valid or a negative error
-/// code on failure; call SDL_GetError() for more information.
+/// \returns the day of year [0-365] if the date is valid or -1 on failure;
+/// call SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -199,9 +201,8 @@ int sdlGetDayOfYear(int year, int month, int day) {
 /// \param year the year component of the date.
 /// \param month the month component of the date.
 /// \param day the day component of the date.
-/// \returns a value between 0 and 6 (0 being Sunday) if the date is valid or a
-/// negative error code on failure; call SDL_GetError() for more
-/// information.
+/// \returns a value between 0 and 6 (0 being Sunday) if the date is valid or
+/// -1 on failure; call SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///

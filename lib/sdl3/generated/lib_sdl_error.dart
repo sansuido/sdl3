@@ -20,7 +20,7 @@ import 'lib_sdl.dart';
 /// \param fmt a printf()-style message format string.
 /// \param ... additional parameters matching % tokens in the `fmt` string, if
 /// any.
-/// \returns -1.
+/// \returns SDL_FALSE.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -28,15 +28,15 @@ import 'lib_sdl.dart';
 /// \sa SDL_GetError
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_SetError(SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(1)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetError(SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(1)
 /// ```
-int sdlSetError(String? fmt, Pointer<NativeType> arg1) {
+bool sdlSetError(String? fmt, Pointer<NativeType> arg1) {
   final sdlSetErrorLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<Utf8> fmt, Pointer<NativeType> arg1),
+      Uint8 Function(Pointer<Utf8> fmt, Pointer<NativeType> arg1),
       int Function(
           Pointer<Utf8> fmt, Pointer<NativeType> arg1)>('SDL_SetError');
   final fmtPointer = fmt != null ? fmt.toNativeUtf8() : nullptr;
-  final result = sdlSetErrorLookupFunction(fmtPointer, arg1);
+  final result = sdlSetErrorLookupFunction(fmtPointer, arg1) == 1;
   calloc.free(fmtPointer);
   return result;
 }
@@ -46,17 +46,17 @@ int sdlSetError(String? fmt, Pointer<NativeType> arg1) {
 ///
 /// This function does not do any memory allocation.
 ///
-/// \returns -1.
+/// \returns SDL_FALSE.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_OutOfMemory(void)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_OutOfMemory(void)
 /// ```
-int sdlOutOfMemory() {
+bool sdlOutOfMemory() {
   final sdlOutOfMemoryLookupFunction = libSdl3
-      .lookupFunction<Int32 Function(), int Function()>('SDL_OutOfMemory');
-  return sdlOutOfMemoryLookupFunction();
+      .lookupFunction<Uint8 Function(), int Function()>('SDL_OutOfMemory');
+  return sdlOutOfMemoryLookupFunction() == 1;
 }
 
 ///
@@ -108,7 +108,7 @@ String? sdlGetError() {
 ///
 /// Clear any previous error message for this thread.
 ///
-/// \returns 0.
+/// \returns SDL_TRUE.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -116,10 +116,10 @@ String? sdlGetError() {
 /// \sa SDL_SetError
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_ClearError(void)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_ClearError(void)
 /// ```
-int sdlClearError() {
+bool sdlClearError() {
   final sdlClearErrorLookupFunction = libSdl3
-      .lookupFunction<Int32 Function(), int Function()>('SDL_ClearError');
-  return sdlClearErrorLookupFunction();
+      .lookupFunction<Uint8 Function(), int Function()>('SDL_ClearError');
+  return sdlClearErrorLookupFunction() == 1;
 }

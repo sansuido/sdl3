@@ -149,7 +149,7 @@ Pointer<SdlStorage> sdlOpenStorage(
 /// Closes and frees a storage container.
 ///
 /// \param storage a storage container to close.
-/// \returns 0 if the container was freed with no errors, a negative value
+/// \returns SDL_TRUE if the container was freed with no errors, SDL_FALSE
 /// otherwise; call SDL_GetError() for more information. Even if the
 /// function returns an error, the container data will be freed; the
 /// error is only for informational purposes.
@@ -162,13 +162,13 @@ Pointer<SdlStorage> sdlOpenStorage(
 /// \sa SDL_OpenUserStorage
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_CloseStorage(SDL_Storage *storage)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_CloseStorage(SDL_Storage *storage)
 /// ```
-int sdlCloseStorage(Pointer<SdlStorage> storage) {
+bool sdlCloseStorage(Pointer<SdlStorage> storage) {
   final sdlCloseStorageLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlStorage> storage),
+      Uint8 Function(Pointer<SdlStorage> storage),
       int Function(Pointer<SdlStorage> storage)>('SDL_CloseStorage');
-  return sdlCloseStorageLookupFunction(storage);
+  return sdlCloseStorageLookupFunction(storage) == 1;
 }
 
 ///
@@ -188,7 +188,7 @@ int sdlCloseStorage(Pointer<SdlStorage> storage) {
 /// ```
 bool sdlStorageReady(Pointer<SdlStorage> storage) {
   final sdlStorageReadyLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlStorage> storage),
+      Uint8 Function(Pointer<SdlStorage> storage),
       int Function(Pointer<SdlStorage> storage)>('SDL_StorageReady');
   return sdlStorageReadyLookupFunction(storage) == 1;
 }
@@ -199,8 +199,8 @@ bool sdlStorageReady(Pointer<SdlStorage> storage) {
 /// \param storage a storage container to query.
 /// \param path the relative path of the file to query.
 /// \param length a pointer to be filled with the file's length.
-/// \returns 0 if the file could be queried or a negative error code on
-/// failure; call SDL_GetError() for more information.
+/// \returns SDL_TRUE if the file could be queried or SDL_FALSE on failure;
+/// call SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -208,18 +208,18 @@ bool sdlStorageReady(Pointer<SdlStorage> storage) {
 /// \sa SDL_StorageReady
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_GetStorageFileSize(SDL_Storage *storage, const char *path, Uint64 *length)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetStorageFileSize(SDL_Storage *storage, const char *path, Uint64 *length)
 /// ```
-int sdlGetStorageFileSize(
+bool sdlGetStorageFileSize(
     Pointer<SdlStorage> storage, String? path, Pointer<Uint64> length) {
   final sdlGetStorageFileSizeLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlStorage> storage, Pointer<Utf8> path,
+      Uint8 Function(Pointer<SdlStorage> storage, Pointer<Utf8> path,
           Pointer<Uint64> length),
       int Function(Pointer<SdlStorage> storage, Pointer<Utf8> path,
           Pointer<Uint64> length)>('SDL_GetStorageFileSize');
   final pathPointer = path != null ? path.toNativeUtf8() : nullptr;
   final result =
-      sdlGetStorageFileSizeLookupFunction(storage, pathPointer, length);
+      sdlGetStorageFileSizeLookupFunction(storage, pathPointer, length) == 1;
   calloc.free(pathPointer);
   return result;
 }
@@ -232,7 +232,7 @@ int sdlGetStorageFileSize(
 /// \param path the relative path of the file to read.
 /// \param destination a client-provided buffer to read the file into.
 /// \param length the length of the destination buffer.
-/// \returns 0 if the file was read or a negative error code on failure; call
+/// \returns SDL_TRUE if the file was read or SDL_FALSE on failure; call
 /// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
@@ -242,18 +242,19 @@ int sdlGetStorageFileSize(
 /// \sa SDL_WriteStorageFile
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_ReadStorageFile(SDL_Storage *storage, const char *path, void *destination, Uint64 length)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_ReadStorageFile(SDL_Storage *storage, const char *path, void *destination, Uint64 length)
 /// ```
-int sdlReadStorageFile(Pointer<SdlStorage> storage, String? path,
+bool sdlReadStorageFile(Pointer<SdlStorage> storage, String? path,
     Pointer<NativeType> destination, int length) {
   final sdlReadStorageFileLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlStorage> storage, Pointer<Utf8> path,
+      Uint8 Function(Pointer<SdlStorage> storage, Pointer<Utf8> path,
           Pointer<NativeType> destination, Uint64 length),
       int Function(Pointer<SdlStorage> storage, Pointer<Utf8> path,
           Pointer<NativeType> destination, int length)>('SDL_ReadStorageFile');
   final pathPointer = path != null ? path.toNativeUtf8() : nullptr;
   final result = sdlReadStorageFileLookupFunction(
-      storage, pathPointer, destination, length);
+          storage, pathPointer, destination, length) ==
+      1;
   calloc.free(pathPointer);
   return result;
 }
@@ -265,8 +266,8 @@ int sdlReadStorageFile(Pointer<SdlStorage> storage, String? path,
 /// \param path the relative path of the file to write.
 /// \param source a client-provided buffer to write from.
 /// \param length the length of the source buffer.
-/// \returns 0 if the file was written or a negative error code on failure;
-/// call SDL_GetError() for more information.
+/// \returns SDL_TRUE if the file was written or SDL_FALSE on failure; call
+/// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -275,18 +276,19 @@ int sdlReadStorageFile(Pointer<SdlStorage> storage, String? path,
 /// \sa SDL_StorageReady
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_WriteStorageFile(SDL_Storage *storage, const char *path, const void *source, Uint64 length)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_WriteStorageFile(SDL_Storage *storage, const char *path, const void *source, Uint64 length)
 /// ```
-int sdlWriteStorageFile(Pointer<SdlStorage> storage, String? path,
+bool sdlWriteStorageFile(Pointer<SdlStorage> storage, String? path,
     Pointer<NativeType> source, int length) {
   final sdlWriteStorageFileLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlStorage> storage, Pointer<Utf8> path,
+      Uint8 Function(Pointer<SdlStorage> storage, Pointer<Utf8> path,
           Pointer<NativeType> source, Uint64 length),
       int Function(Pointer<SdlStorage> storage, Pointer<Utf8> path,
           Pointer<NativeType> source, int length)>('SDL_WriteStorageFile');
   final pathPointer = path != null ? path.toNativeUtf8() : nullptr;
   final result =
-      sdlWriteStorageFileLookupFunction(storage, pathPointer, source, length);
+      sdlWriteStorageFileLookupFunction(storage, pathPointer, source, length) ==
+          1;
   calloc.free(pathPointer);
   return result;
 }
@@ -296,23 +298,24 @@ int sdlWriteStorageFile(Pointer<SdlStorage> storage, String? path,
 ///
 /// \param storage a storage container.
 /// \param path the path of the directory to create.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_StorageReady
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_CreateStorageDirectory(SDL_Storage *storage, const char *path)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_CreateStorageDirectory(SDL_Storage *storage, const char *path)
 /// ```
-int sdlCreateStorageDirectory(Pointer<SdlStorage> storage, String? path) {
+bool sdlCreateStorageDirectory(Pointer<SdlStorage> storage, String? path) {
   final sdlCreateStorageDirectoryLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlStorage> storage, Pointer<Utf8> path),
+      Uint8 Function(Pointer<SdlStorage> storage, Pointer<Utf8> path),
       int Function(Pointer<SdlStorage> storage,
           Pointer<Utf8> path)>('SDL_CreateStorageDirectory');
   final pathPointer = path != null ? path.toNativeUtf8() : nullptr;
-  final result = sdlCreateStorageDirectoryLookupFunction(storage, pathPointer);
+  final result =
+      sdlCreateStorageDirectoryLookupFunction(storage, pathPointer) == 1;
   calloc.free(pathPointer);
   return result;
 }
@@ -328,23 +331,23 @@ int sdlCreateStorageDirectory(Pointer<SdlStorage> storage, String? path) {
 /// \param path the path of the directory to enumerate.
 /// \param callback a function that is called for each entry in the directory.
 /// \param userdata a pointer that is passed to `callback`.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_StorageReady
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_EnumerateStorageDirectory(SDL_Storage *storage, const char *path, SDL_EnumerateDirectoryCallback callback, void *userdata)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_EnumerateStorageDirectory(SDL_Storage *storage, const char *path, SDL_EnumerateDirectoryCallback callback, void *userdata)
 /// ```
-int sdlEnumerateStorageDirectory(
+bool sdlEnumerateStorageDirectory(
     Pointer<SdlStorage> storage,
     String? path,
     Pointer<NativeFunction<SdlEnumerateDirectoryCallback>> callback,
     Pointer<NativeType> userdata) {
   final sdlEnumerateStorageDirectoryLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(
+      Uint8 Function(
           Pointer<SdlStorage> storage,
           Pointer<Utf8> path,
           Pointer<NativeFunction<SdlEnumerateDirectoryCallback>> callback,
@@ -356,7 +359,8 @@ int sdlEnumerateStorageDirectory(
           Pointer<NativeType> userdata)>('SDL_EnumerateStorageDirectory');
   final pathPointer = path != null ? path.toNativeUtf8() : nullptr;
   final result = sdlEnumerateStorageDirectoryLookupFunction(
-      storage, pathPointer, callback, userdata);
+          storage, pathPointer, callback, userdata) ==
+      1;
   calloc.free(pathPointer);
   return result;
 }
@@ -366,23 +370,23 @@ int sdlEnumerateStorageDirectory(
 ///
 /// \param storage a storage container.
 /// \param path the path of the directory to enumerate.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_StorageReady
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_RemoveStoragePath(SDL_Storage *storage, const char *path)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_RemoveStoragePath(SDL_Storage *storage, const char *path)
 /// ```
-int sdlRemoveStoragePath(Pointer<SdlStorage> storage, String? path) {
+bool sdlRemoveStoragePath(Pointer<SdlStorage> storage, String? path) {
   final sdlRemoveStoragePathLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlStorage> storage, Pointer<Utf8> path),
+      Uint8 Function(Pointer<SdlStorage> storage, Pointer<Utf8> path),
       int Function(Pointer<SdlStorage> storage,
           Pointer<Utf8> path)>('SDL_RemoveStoragePath');
   final pathPointer = path != null ? path.toNativeUtf8() : nullptr;
-  final result = sdlRemoveStoragePathLookupFunction(storage, pathPointer);
+  final result = sdlRemoveStoragePathLookupFunction(storage, pathPointer) == 1;
   calloc.free(pathPointer);
   return result;
 }
@@ -393,27 +397,28 @@ int sdlRemoveStoragePath(Pointer<SdlStorage> storage, String? path) {
 /// \param storage a storage container.
 /// \param oldpath the old path.
 /// \param newpath the new path.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_StorageReady
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_RenameStoragePath(SDL_Storage *storage, const char *oldpath, const char *newpath)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_RenameStoragePath(SDL_Storage *storage, const char *oldpath, const char *newpath)
 /// ```
-int sdlRenameStoragePath(
+bool sdlRenameStoragePath(
     Pointer<SdlStorage> storage, String? oldpath, String? newpath) {
   final sdlRenameStoragePathLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlStorage> storage, Pointer<Utf8> oldpath,
+      Uint8 Function(Pointer<SdlStorage> storage, Pointer<Utf8> oldpath,
           Pointer<Utf8> newpath),
       int Function(Pointer<SdlStorage> storage, Pointer<Utf8> oldpath,
           Pointer<Utf8> newpath)>('SDL_RenameStoragePath');
   final oldpathPointer = oldpath != null ? oldpath.toNativeUtf8() : nullptr;
   final newpathPointer = newpath != null ? newpath.toNativeUtf8() : nullptr;
   final result = sdlRenameStoragePathLookupFunction(
-      storage, oldpathPointer, newpathPointer);
+          storage, oldpathPointer, newpathPointer) ==
+      1;
   calloc.free(oldpathPointer);
   calloc.free(newpathPointer);
   return result;
@@ -425,27 +430,28 @@ int sdlRenameStoragePath(
 /// \param storage a storage container.
 /// \param oldpath the old path.
 /// \param newpath the new path.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_StorageReady
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_CopyStorageFile(SDL_Storage *storage, const char *oldpath, const char *newpath)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_CopyStorageFile(SDL_Storage *storage, const char *oldpath, const char *newpath)
 /// ```
-int sdlCopyStorageFile(
+bool sdlCopyStorageFile(
     Pointer<SdlStorage> storage, String? oldpath, String? newpath) {
   final sdlCopyStorageFileLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlStorage> storage, Pointer<Utf8> oldpath,
+      Uint8 Function(Pointer<SdlStorage> storage, Pointer<Utf8> oldpath,
           Pointer<Utf8> newpath),
       int Function(Pointer<SdlStorage> storage, Pointer<Utf8> oldpath,
           Pointer<Utf8> newpath)>('SDL_CopyStorageFile');
   final oldpathPointer = oldpath != null ? oldpath.toNativeUtf8() : nullptr;
   final newpathPointer = newpath != null ? newpath.toNativeUtf8() : nullptr;
-  final result =
-      sdlCopyStorageFileLookupFunction(storage, oldpathPointer, newpathPointer);
+  final result = sdlCopyStorageFileLookupFunction(
+          storage, oldpathPointer, newpathPointer) ==
+      1;
   calloc.free(oldpathPointer);
   calloc.free(newpathPointer);
   return result;
@@ -458,26 +464,26 @@ int sdlCopyStorageFile(
 /// \param path the path to query.
 /// \param info a pointer filled in with information about the path, or NULL to
 /// check for the existence of a file.
-/// \returns 0 on success or a negative error code if the file doesn't exist,
-/// or another failure; call SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE if the file doesn't exist, or
+/// another failure; call SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_StorageReady
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_GetStoragePathInfo(SDL_Storage *storage, const char *path, SDL_PathInfo *info)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetStoragePathInfo(SDL_Storage *storage, const char *path, SDL_PathInfo *info)
 /// ```
-int sdlGetStoragePathInfo(
+bool sdlGetStoragePathInfo(
     Pointer<SdlStorage> storage, String? path, Pointer<SdlPathInfo> info) {
   final sdlGetStoragePathInfoLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlStorage> storage, Pointer<Utf8> path,
+      Uint8 Function(Pointer<SdlStorage> storage, Pointer<Utf8> path,
           Pointer<SdlPathInfo> info),
       int Function(Pointer<SdlStorage> storage, Pointer<Utf8> path,
           Pointer<SdlPathInfo> info)>('SDL_GetStoragePathInfo');
   final pathPointer = path != null ? path.toNativeUtf8() : nullptr;
   final result =
-      sdlGetStoragePathInfoLookupFunction(storage, pathPointer, info);
+      sdlGetStoragePathInfoLookupFunction(storage, pathPointer, info) == 1;
   calloc.free(pathPointer);
   return result;
 }

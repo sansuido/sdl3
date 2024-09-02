@@ -78,7 +78,7 @@ void sdlShowOpenFileDialog(
           Pointer<SdlDialogFileFilter> filters,
           Int32 nfilters,
           Pointer<Utf8> defaultLocation,
-          Int32 allowMany),
+          Uint8 allowMany),
       void Function(
           Pointer<NativeFunction<SdlDialogFileCallback>> callback,
           Pointer<NativeType> userdata,
@@ -242,7 +242,7 @@ void sdlShowOpenFolderDialog(
           Pointer<NativeType> userdata,
           Pointer<SdlWindow> window,
           Pointer<Utf8> defaultLocation,
-          Int32 allowMany),
+          Uint8 allowMany),
       void Function(
           Pointer<NativeFunction<SdlDialogFileCallback>> callback,
           Pointer<NativeType> userdata,

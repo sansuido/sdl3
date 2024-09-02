@@ -602,7 +602,7 @@ int sdlHidGetReportDescriptor(
 /// ```
 void sdlHidBleScan(bool active) {
   final sdlHidBleScanLookupFunction = libSdl3.lookupFunction<
-      Void Function(Int32 active),
+      Void Function(Uint8 active),
       void Function(int active)>('SDL_hid_ble_scan');
   return sdlHidBleScanLookupFunction(active ? 1 : 0);
 }

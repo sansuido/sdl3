@@ -18,7 +18,7 @@ import 'struct_sdl.dart';
 /// ```
 bool sdlHasMouse() {
   final sdlHasMouseLookupFunction =
-      libSdl3.lookupFunction<Int32 Function(), int Function()>('SDL_HasMouse');
+      libSdl3.lookupFunction<Uint8 Function(), int Function()>('SDL_HasMouse');
   return sdlHasMouseLookupFunction() == 1;
 }
 
@@ -235,21 +235,21 @@ void sdlWarpMouseInWindow(Pointer<SdlWindow> window, double x, double y) {
 ///
 /// \param x the x coordinate.
 /// \param y the y coordinate.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_WarpMouseInWindow
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_WarpMouseGlobal(float x, float y)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_WarpMouseGlobal(float x, float y)
 /// ```
-int sdlWarpMouseGlobal(double x, double y) {
+bool sdlWarpMouseGlobal(double x, double y) {
   final sdlWarpMouseGlobalLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Float x, Float y),
+      Uint8 Function(Float x, Float y),
       int Function(double x, double y)>('SDL_WarpMouseGlobal');
-  return sdlWarpMouseGlobalLookupFunction(x, y);
+  return sdlWarpMouseGlobalLookupFunction(x, y) == 1;
 }
 
 ///
@@ -264,22 +264,23 @@ int sdlWarpMouseGlobal(double x, double y) {
 ///
 /// \param window the window to change.
 /// \param enabled SDL_TRUE to enable relative mode, SDL_FALSE to disable.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetWindowRelativeMouseMode
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_SetWindowRelativeMouseMode(SDL_Window *window, SDL_bool enabled)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetWindowRelativeMouseMode(SDL_Window *window, SDL_bool enabled)
 /// ```
-int sdlSetWindowRelativeMouseMode(Pointer<SdlWindow> window, bool enabled) {
+bool sdlSetWindowRelativeMouseMode(Pointer<SdlWindow> window, bool enabled) {
   final sdlSetWindowRelativeMouseModeLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlWindow> window, Int32 enabled),
+      Uint8 Function(Pointer<SdlWindow> window, Uint8 enabled),
       int Function(Pointer<SdlWindow> window,
           int enabled)>('SDL_SetWindowRelativeMouseMode');
-  return sdlSetWindowRelativeMouseModeLookupFunction(window, enabled ? 1 : 0);
+  return sdlSetWindowRelativeMouseModeLookupFunction(window, enabled ? 1 : 0) ==
+      1;
 }
 
 ///
@@ -298,7 +299,7 @@ int sdlSetWindowRelativeMouseMode(Pointer<SdlWindow> window, bool enabled) {
 /// ```
 bool sdlGetWindowRelativeMouseMode(Pointer<SdlWindow> window) {
   final sdlGetWindowRelativeMouseModeLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlWindow> window),
+      Uint8 Function(Pointer<SdlWindow> window),
       int Function(
           Pointer<SdlWindow> window)>('SDL_GetWindowRelativeMouseMode');
   return sdlGetWindowRelativeMouseModeLookupFunction(window) == 1;
@@ -341,21 +342,21 @@ bool sdlGetWindowRelativeMouseMode(Pointer<SdlWindow> window) {
 /// `SDL_HINT_MOUSE_AUTO_CAPTURE` hint to zero.
 ///
 /// \param enabled SDL_TRUE to enable capturing, SDL_FALSE to disable.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetGlobalMouseState
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_CaptureMouse(SDL_bool enabled)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_CaptureMouse(SDL_bool enabled)
 /// ```
-int sdlCaptureMouse(bool enabled) {
+bool sdlCaptureMouse(bool enabled) {
   final sdlCaptureMouseLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Int32 enabled),
+      Uint8 Function(Uint8 enabled),
       int Function(int enabled)>('SDL_CaptureMouse');
-  return sdlCaptureMouseLookupFunction(enabled ? 1 : 0);
+  return sdlCaptureMouseLookupFunction(enabled ? 1 : 0) == 1;
 }
 
 ///
@@ -482,21 +483,21 @@ Pointer<SdlCursor> sdlCreateSystemCursor(int id) {
 /// this is desired for any reason.
 ///
 /// \param cursor a cursor to make active.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetCursor
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_SetCursor(SDL_Cursor *cursor)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetCursor(SDL_Cursor *cursor)
 /// ```
-int sdlSetCursor(Pointer<SdlCursor> cursor) {
+bool sdlSetCursor(Pointer<SdlCursor> cursor) {
   final sdlSetCursorLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlCursor> cursor),
+      Uint8 Function(Pointer<SdlCursor> cursor),
       int Function(Pointer<SdlCursor> cursor)>('SDL_SetCursor');
-  return sdlSetCursorLookupFunction(cursor);
+  return sdlSetCursorLookupFunction(cursor) == 1;
 }
 
 ///
@@ -569,8 +570,8 @@ void sdlDestroyCursor(Pointer<SdlCursor> cursor) {
 ///
 /// Show the cursor.
 ///
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -578,19 +579,19 @@ void sdlDestroyCursor(Pointer<SdlCursor> cursor) {
 /// \sa SDL_HideCursor
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_ShowCursor(void)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_ShowCursor(void)
 /// ```
-int sdlShowCursor() {
+bool sdlShowCursor() {
   final sdlShowCursorLookupFunction = libSdl3
-      .lookupFunction<Int32 Function(), int Function()>('SDL_ShowCursor');
-  return sdlShowCursorLookupFunction();
+      .lookupFunction<Uint8 Function(), int Function()>('SDL_ShowCursor');
+  return sdlShowCursorLookupFunction() == 1;
 }
 
 ///
 /// Hide the cursor.
 ///
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -598,12 +599,12 @@ int sdlShowCursor() {
 /// \sa SDL_ShowCursor
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_HideCursor(void)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_HideCursor(void)
 /// ```
-int sdlHideCursor() {
+bool sdlHideCursor() {
   final sdlHideCursorLookupFunction = libSdl3
-      .lookupFunction<Int32 Function(), int Function()>('SDL_HideCursor');
-  return sdlHideCursorLookupFunction();
+      .lookupFunction<Uint8 Function(), int Function()>('SDL_HideCursor');
+  return sdlHideCursorLookupFunction() == 1;
 }
 
 ///
@@ -622,6 +623,6 @@ int sdlHideCursor() {
 /// ```
 bool sdlCursorVisible() {
   final sdlCursorVisibleLookupFunction = libSdl3
-      .lookupFunction<Int32 Function(), int Function()>('SDL_CursorVisible');
+      .lookupFunction<Uint8 Function(), int Function()>('SDL_CursorVisible');
   return sdlCursorVisibleLookupFunction() == 1;
 }

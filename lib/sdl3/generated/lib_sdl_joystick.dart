@@ -52,7 +52,7 @@ void sdlUnlockJoysticks(Pointer<NativeType> arg0) {
 /// ```
 bool sdlHasJoystick() {
   final sdlHasJoystickLookupFunction = libSdl3
-      .lookupFunction<Int32 Function(), int Function()>('SDL_HasJoystick');
+      .lookupFunction<Uint8 Function(), int Function()>('SDL_HasJoystick');
   return sdlHasJoystickLookupFunction() == 1;
 }
 
@@ -376,21 +376,21 @@ int sdlAttachVirtualJoystick(Pointer<SdlVirtualJoystickDesc> desc) {
 ///
 /// \param instance_id the joystick instance ID, previously returned from
 /// SDL_AttachVirtualJoystick().
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_AttachVirtualJoystick
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_DetachVirtualJoystick(SDL_JoystickID instance_id)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_DetachVirtualJoystick(SDL_JoystickID instance_id)
 /// ```
-int sdlDetachVirtualJoystick(int instanceId) {
+bool sdlDetachVirtualJoystick(int instanceId) {
   final sdlDetachVirtualJoystickLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Uint32 instanceId),
+      Uint8 Function(Uint32 instanceId),
       int Function(int instanceId)>('SDL_DetachVirtualJoystick');
-  return sdlDetachVirtualJoystickLookupFunction(instanceId);
+  return sdlDetachVirtualJoystickLookupFunction(instanceId) == 1;
 }
 
 ///
@@ -406,7 +406,7 @@ int sdlDetachVirtualJoystick(int instanceId) {
 /// ```
 bool sdlIsJoystickVirtual(int instanceId) {
   final sdlIsJoystickVirtualLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Uint32 instanceId),
+      Uint8 Function(Uint32 instanceId),
       int Function(int instanceId)>('SDL_IsJoystickVirtual');
   return sdlIsJoystickVirtualLookupFunction(instanceId) == 1;
 }
@@ -427,21 +427,21 @@ bool sdlIsJoystickVirtual(int instanceId) {
 /// \param joystick the virtual joystick on which to set state.
 /// \param axis the index of the axis on the virtual joystick to update.
 /// \param value the new value for the specified axis.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_SetJoystickVirtualAxis(SDL_Joystick *joystick, int axis, Sint16 value)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetJoystickVirtualAxis(SDL_Joystick *joystick, int axis, Sint16 value)
 /// ```
-int sdlSetJoystickVirtualAxis(
+bool sdlSetJoystickVirtualAxis(
     Pointer<SdlJoystick> joystick, int axis, int value) {
   final sdlSetJoystickVirtualAxisLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlJoystick> joystick, Int32 axis, Int16 value),
+      Uint8 Function(Pointer<SdlJoystick> joystick, Int32 axis, Int16 value),
       int Function(Pointer<SdlJoystick> joystick, int axis,
           int value)>('SDL_SetJoystickVirtualAxis');
-  return sdlSetJoystickVirtualAxisLookupFunction(joystick, axis, value);
+  return sdlSetJoystickVirtualAxisLookupFunction(joystick, axis, value) == 1;
 }
 
 ///
@@ -457,22 +457,23 @@ int sdlSetJoystickVirtualAxis(
 /// \param ball the index of the ball on the virtual joystick to update.
 /// \param xrel the relative motion on the X axis.
 /// \param yrel the relative motion on the Y axis.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_SetJoystickVirtualBall(SDL_Joystick *joystick, int ball, Sint16 xrel, Sint16 yrel)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetJoystickVirtualBall(SDL_Joystick *joystick, int ball, Sint16 xrel, Sint16 yrel)
 /// ```
-int sdlSetJoystickVirtualBall(
+bool sdlSetJoystickVirtualBall(
     Pointer<SdlJoystick> joystick, int ball, int xrel, int yrel) {
   final sdlSetJoystickVirtualBallLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(
+      Uint8 Function(
           Pointer<SdlJoystick> joystick, Int32 ball, Int16 xrel, Int16 yrel),
       int Function(Pointer<SdlJoystick> joystick, int ball, int xrel,
           int yrel)>('SDL_SetJoystickVirtualBall');
-  return sdlSetJoystickVirtualBallLookupFunction(joystick, ball, xrel, yrel);
+  return sdlSetJoystickVirtualBallLookupFunction(joystick, ball, xrel, yrel) ==
+      1;
 }
 
 ///
@@ -487,21 +488,22 @@ int sdlSetJoystickVirtualBall(
 /// \param joystick the virtual joystick on which to set state.
 /// \param button the index of the button on the virtual joystick to update.
 /// \param value the new value for the specified button.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_SetJoystickVirtualButton(SDL_Joystick *joystick, int button, Uint8 value)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetJoystickVirtualButton(SDL_Joystick *joystick, int button, Uint8 value)
 /// ```
-int sdlSetJoystickVirtualButton(
+bool sdlSetJoystickVirtualButton(
     Pointer<SdlJoystick> joystick, int button, int value) {
   final sdlSetJoystickVirtualButtonLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlJoystick> joystick, Int32 button, Uint8 value),
+      Uint8 Function(Pointer<SdlJoystick> joystick, Int32 button, Uint8 value),
       int Function(Pointer<SdlJoystick> joystick, int button,
           int value)>('SDL_SetJoystickVirtualButton');
-  return sdlSetJoystickVirtualButtonLookupFunction(joystick, button, value);
+  return sdlSetJoystickVirtualButtonLookupFunction(joystick, button, value) ==
+      1;
 }
 
 ///
@@ -516,21 +518,21 @@ int sdlSetJoystickVirtualButton(
 /// \param joystick the virtual joystick on which to set state.
 /// \param hat the index of the hat on the virtual joystick to update.
 /// \param value the new value for the specified hat.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_SetJoystickVirtualHat(SDL_Joystick *joystick, int hat, Uint8 value)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetJoystickVirtualHat(SDL_Joystick *joystick, int hat, Uint8 value)
 /// ```
-int sdlSetJoystickVirtualHat(
+bool sdlSetJoystickVirtualHat(
     Pointer<SdlJoystick> joystick, int hat, int value) {
   final sdlSetJoystickVirtualHatLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlJoystick> joystick, Int32 hat, Uint8 value),
+      Uint8 Function(Pointer<SdlJoystick> joystick, Int32 hat, Uint8 value),
       int Function(Pointer<SdlJoystick> joystick, int hat,
           int value)>('SDL_SetJoystickVirtualHat');
-  return sdlSetJoystickVirtualHatLookupFunction(joystick, hat, value);
+  return sdlSetJoystickVirtualHatLookupFunction(joystick, hat, value) == 1;
 }
 
 ///
@@ -553,18 +555,18 @@ int sdlSetJoystickVirtualHat(
 /// \param y the y coordinate of the finger on the touchpad, normalized 0 to 1,
 /// with the origin in the upper left.
 /// \param pressure the pressure of the finger.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_SetJoystickVirtualTouchpad(SDL_Joystick *joystick, int touchpad, int finger, Uint8 state, float x, float y, float pressure)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetJoystickVirtualTouchpad(SDL_Joystick *joystick, int touchpad, int finger, Uint8 state, float x, float y, float pressure)
 /// ```
-int sdlSetJoystickVirtualTouchpad(Pointer<SdlJoystick> joystick, int touchpad,
+bool sdlSetJoystickVirtualTouchpad(Pointer<SdlJoystick> joystick, int touchpad,
     int finger, int state, double x, double y, double pressure) {
   final sdlSetJoystickVirtualTouchpadLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlJoystick> joystick, Int32 touchpad,
+      Uint8 Function(Pointer<SdlJoystick> joystick, Int32 touchpad,
           Int32 finger, Uint8 state, Float x, Float y, Float pressure),
       int Function(
           Pointer<SdlJoystick> joystick,
@@ -575,7 +577,8 @@ int sdlSetJoystickVirtualTouchpad(Pointer<SdlJoystick> joystick, int touchpad,
           double y,
           double pressure)>('SDL_SetJoystickVirtualTouchpad');
   return sdlSetJoystickVirtualTouchpadLookupFunction(
-      joystick, touchpad, finger, state, x, y, pressure);
+          joystick, touchpad, finger, state, x, y, pressure) ==
+      1;
 }
 
 ///
@@ -593,18 +596,18 @@ int sdlSetJoystickVirtualTouchpad(Pointer<SdlJoystick> joystick, int touchpad,
 /// the sensor reading.
 /// \param data the data associated with the sensor reading.
 /// \param num_values the number of values pointed to by `data`.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_SendJoystickVirtualSensorData(SDL_Joystick *joystick, SDL_SensorType type, Uint64 sensor_timestamp, const float *data, int num_values)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SendJoystickVirtualSensorData(SDL_Joystick *joystick, SDL_SensorType type, Uint64 sensor_timestamp, const float *data, int num_values)
 /// ```
-int sdlSendJoystickVirtualSensorData(Pointer<SdlJoystick> joystick, int type,
+bool sdlSendJoystickVirtualSensorData(Pointer<SdlJoystick> joystick, int type,
     int sensorTimestamp, Pointer<Float> data, int numValues) {
   final sdlSendJoystickVirtualSensorDataLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlJoystick> joystick, Int32 type,
+      Uint8 Function(Pointer<SdlJoystick> joystick, Int32 type,
           Uint64 sensorTimestamp, Pointer<Float> data, Int32 numValues),
       int Function(
           Pointer<SdlJoystick> joystick,
@@ -613,7 +616,8 @@ int sdlSendJoystickVirtualSensorData(Pointer<SdlJoystick> joystick, int type,
           Pointer<Float> data,
           int numValues)>('SDL_SendJoystickVirtualSensorData');
   return sdlSendJoystickVirtualSensorDataLookupFunction(
-      joystick, type, sensorTimestamp, data, numValues);
+          joystick, type, sensorTimestamp, data, numValues) ==
+      1;
 }
 
 ///
@@ -730,22 +734,22 @@ int sdlGetJoystickPlayerIndex(Pointer<SdlJoystick> joystick) {
 /// \param joystick the SDL_Joystick obtained from SDL_OpenJoystick().
 /// \param player_index player index to assign to this joystick, or -1 to clear
 /// the player index and turn off player LEDs.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetJoystickPlayerIndex
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_SetJoystickPlayerIndex(SDL_Joystick *joystick, int player_index)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetJoystickPlayerIndex(SDL_Joystick *joystick, int player_index)
 /// ```
-int sdlSetJoystickPlayerIndex(Pointer<SdlJoystick> joystick, int playerIndex) {
+bool sdlSetJoystickPlayerIndex(Pointer<SdlJoystick> joystick, int playerIndex) {
   final sdlSetJoystickPlayerIndexLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlJoystick> joystick, Int32 playerIndex),
+      Uint8 Function(Pointer<SdlJoystick> joystick, Int32 playerIndex),
       int Function(Pointer<SdlJoystick> joystick,
           int playerIndex)>('SDL_SetJoystickPlayerIndex');
-  return sdlSetJoystickPlayerIndexLookupFunction(joystick, playerIndex);
+  return sdlSetJoystickPlayerIndexLookupFunction(joystick, playerIndex) == 1;
 }
 
 ///
@@ -961,7 +965,7 @@ void sdlGetJoystickGuidInfo(SdlGuid guid, Pointer<Uint16> vendor,
 /// ```
 bool sdlJoystickConnected(Pointer<SdlJoystick> joystick) {
   final sdlJoystickConnectedLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlJoystick> joystick),
+      Uint8 Function(Pointer<SdlJoystick> joystick),
       int Function(Pointer<SdlJoystick> joystick)>('SDL_JoystickConnected');
   return sdlJoystickConnectedLookupFunction(joystick) == 1;
 }
@@ -993,9 +997,8 @@ int sdlGetJoystickId(Pointer<SdlJoystick> joystick) {
 /// device and platform.
 ///
 /// \param joystick an SDL_Joystick structure containing joystick information.
-/// \returns the number of axis controls/number of axes on success or a
-/// negative error code on failure; call SDL_GetError() for more
-/// information.
+/// \returns the number of axis controls/number of axes on success or -1 on
+/// failure; call SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -1023,8 +1026,8 @@ int sdlGetNumJoystickAxes(Pointer<SdlJoystick> joystick) {
 /// Most joysticks do not have trackballs.
 ///
 /// \param joystick an SDL_Joystick structure containing joystick information.
-/// \returns the number of trackballs on success or a negative error code on
-/// failure; call SDL_GetError() for more information.
+/// \returns the number of trackballs on success or -1 on failure; call
+/// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -1047,8 +1050,8 @@ int sdlGetNumJoystickBalls(Pointer<SdlJoystick> joystick) {
 /// Get the number of POV hats on a joystick.
 ///
 /// \param joystick an SDL_Joystick structure containing joystick information.
-/// \returns the number of POV hats on success or a negative error code on
-/// failure; call SDL_GetError() for more information.
+/// \returns the number of POV hats on success or -1 on failure; call
+/// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -1071,8 +1074,8 @@ int sdlGetNumJoystickHats(Pointer<SdlJoystick> joystick) {
 /// Get the number of buttons on a joystick.
 ///
 /// \param joystick an SDL_Joystick structure containing joystick information.
-/// \returns the number of buttons on success or a negative error code on
-/// failure; call SDL_GetError() for more information.
+/// \returns the number of buttons on success or -1 on failure; call
+/// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -1110,7 +1113,7 @@ int sdlGetNumJoystickButtons(Pointer<SdlJoystick> joystick) {
 /// ```
 void sdlSetJoystickEventsEnabled(bool enabled) {
   final sdlSetJoystickEventsEnabledLookupFunction = libSdl3.lookupFunction<
-      Void Function(Int32 enabled),
+      Void Function(Uint8 enabled),
       void Function(int enabled)>('SDL_SetJoystickEventsEnabled');
   return sdlSetJoystickEventsEnabledLookupFunction(enabled ? 1 : 0);
 }
@@ -1134,7 +1137,7 @@ void sdlSetJoystickEventsEnabled(bool enabled) {
 /// ```
 bool sdlJoystickEventsEnabled() {
   final sdlJoystickEventsEnabledLookupFunction =
-      libSdl3.lookupFunction<Int32 Function(), int Function()>(
+      libSdl3.lookupFunction<Uint8 Function(), int Function()>(
           'SDL_JoystickEventsEnabled');
   return sdlJoystickEventsEnabledLookupFunction() == 1;
 }
@@ -1209,7 +1212,7 @@ int sdlGetJoystickAxis(Pointer<SdlJoystick> joystick, int axis) {
 bool sdlGetJoystickAxisInitialState(
     Pointer<SdlJoystick> joystick, int axis, Pointer<Int16> state) {
   final sdlGetJoystickAxisInitialStateLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(
+      Uint8 Function(
           Pointer<SdlJoystick> joystick, Int32 axis, Pointer<Int16> state),
       int Function(Pointer<SdlJoystick> joystick, int axis,
           Pointer<Int16> state)>('SDL_GetJoystickAxisInitialState');
@@ -1229,24 +1232,24 @@ bool sdlGetJoystickAxisInitialState(
 /// \param ball the ball index to query; ball indices start at index 0.
 /// \param dx stores the difference in the x axis position since the last poll.
 /// \param dy stores the difference in the y axis position since the last poll.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetNumJoystickBalls
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_GetJoystickBall(SDL_Joystick *joystick, int ball, int *dx, int *dy)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetJoystickBall(SDL_Joystick *joystick, int ball, int *dx, int *dy)
 /// ```
-int sdlGetJoystickBall(Pointer<SdlJoystick> joystick, int ball,
+bool sdlGetJoystickBall(Pointer<SdlJoystick> joystick, int ball,
     Pointer<Int32> dx, Pointer<Int32> dy) {
   final sdlGetJoystickBallLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlJoystick> joystick, Int32 ball,
+      Uint8 Function(Pointer<SdlJoystick> joystick, Int32 ball,
           Pointer<Int32> dx, Pointer<Int32> dy),
       int Function(Pointer<SdlJoystick> joystick, int ball, Pointer<Int32> dx,
           Pointer<Int32> dy)>('SDL_GetJoystickBall');
-  return sdlGetJoystickBallLookupFunction(joystick, ball, dx, dy);
+  return sdlGetJoystickBallLookupFunction(joystick, ball, dx, dy) == 1;
 }
 
 ///
@@ -1311,22 +1314,23 @@ int sdlGetJoystickButton(Pointer<SdlJoystick> joystick, int button) {
 /// \param high_frequency_rumble the intensity of the high frequency (right)
 /// rumble motor, from 0 to 0xFFFF.
 /// \param duration_ms the duration of the rumble effect, in milliseconds.
-/// \returns 0, or -1 if rumble isn't supported on this joystick.
+/// \returns SDL_TRUE, or SDL_FALSE if rumble isn't supported on this joystick.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_RumbleJoystick(SDL_Joystick *joystick, Uint16 low_frequency_rumble, Uint16 high_frequency_rumble, Uint32 duration_ms)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_RumbleJoystick(SDL_Joystick *joystick, Uint16 low_frequency_rumble, Uint16 high_frequency_rumble, Uint32 duration_ms)
 /// ```
-int sdlRumbleJoystick(Pointer<SdlJoystick> joystick, int lowFrequencyRumble,
+bool sdlRumbleJoystick(Pointer<SdlJoystick> joystick, int lowFrequencyRumble,
     int highFrequencyRumble, int durationMs) {
   final sdlRumbleJoystickLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlJoystick> joystick, Uint16 lowFrequencyRumble,
+      Uint8 Function(Pointer<SdlJoystick> joystick, Uint16 lowFrequencyRumble,
           Uint16 highFrequencyRumble, Uint32 durationMs),
       int Function(Pointer<SdlJoystick> joystick, int lowFrequencyRumble,
           int highFrequencyRumble, int durationMs)>('SDL_RumbleJoystick');
   return sdlRumbleJoystickLookupFunction(
-      joystick, lowFrequencyRumble, highFrequencyRumble, durationMs);
+          joystick, lowFrequencyRumble, highFrequencyRumble, durationMs) ==
+      1;
 }
 
 ///
@@ -1349,25 +1353,26 @@ int sdlRumbleJoystick(Pointer<SdlJoystick> joystick, int lowFrequencyRumble,
 /// \param right_rumble the intensity of the right trigger rumble motor, from 0
 /// to 0xFFFF.
 /// \param duration_ms the duration of the rumble effect, in milliseconds.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_RumbleJoystick
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_RumbleJoystickTriggers(SDL_Joystick *joystick, Uint16 left_rumble, Uint16 right_rumble, Uint32 duration_ms)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_RumbleJoystickTriggers(SDL_Joystick *joystick, Uint16 left_rumble, Uint16 right_rumble, Uint32 duration_ms)
 /// ```
-int sdlRumbleJoystickTriggers(Pointer<SdlJoystick> joystick, int leftRumble,
+bool sdlRumbleJoystickTriggers(Pointer<SdlJoystick> joystick, int leftRumble,
     int rightRumble, int durationMs) {
   final sdlRumbleJoystickTriggersLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlJoystick> joystick, Uint16 leftRumble,
+      Uint8 Function(Pointer<SdlJoystick> joystick, Uint16 leftRumble,
           Uint16 rightRumble, Uint32 durationMs),
       int Function(Pointer<SdlJoystick> joystick, int leftRumble,
           int rightRumble, int durationMs)>('SDL_RumbleJoystickTriggers');
   return sdlRumbleJoystickTriggersLookupFunction(
-      joystick, leftRumble, rightRumble, durationMs);
+          joystick, leftRumble, rightRumble, durationMs) ==
+      1;
 }
 
 ///
@@ -1383,22 +1388,22 @@ int sdlRumbleJoystickTriggers(Pointer<SdlJoystick> joystick, int leftRumble,
 /// \param red the intensity of the red LED.
 /// \param green the intensity of the green LED.
 /// \param blue the intensity of the blue LED.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_SetJoystickLED(SDL_Joystick *joystick, Uint8 red, Uint8 green, Uint8 blue)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetJoystickLED(SDL_Joystick *joystick, Uint8 red, Uint8 green, Uint8 blue)
 /// ```
-int sdlSetJoystickLed(
+bool sdlSetJoystickLed(
     Pointer<SdlJoystick> joystick, int red, int green, int blue) {
   final sdlSetJoystickLedLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(
+      Uint8 Function(
           Pointer<SdlJoystick> joystick, Uint8 red, Uint8 green, Uint8 blue),
       int Function(Pointer<SdlJoystick> joystick, int red, int green,
           int blue)>('SDL_SetJoystickLED');
-  return sdlSetJoystickLedLookupFunction(joystick, red, green, blue);
+  return sdlSetJoystickLedLookupFunction(joystick, red, green, blue) == 1;
 }
 
 ///
@@ -1407,22 +1412,22 @@ int sdlSetJoystickLed(
 /// \param joystick the joystick to affect.
 /// \param data the data to send to the joystick.
 /// \param size the size of the data to send to the joystick.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_SendJoystickEffect(SDL_Joystick *joystick, const void *data, int size)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SendJoystickEffect(SDL_Joystick *joystick, const void *data, int size)
 /// ```
-int sdlSendJoystickEffect(
+bool sdlSendJoystickEffect(
     Pointer<SdlJoystick> joystick, Pointer<NativeType> data, int size) {
   final sdlSendJoystickEffectLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(
+      Uint8 Function(
           Pointer<SdlJoystick> joystick, Pointer<NativeType> data, Int32 size),
       int Function(Pointer<SdlJoystick> joystick, Pointer<NativeType> data,
           int size)>('SDL_SendJoystickEffect');
-  return sdlSendJoystickEffectLookupFunction(joystick, data, size);
+  return sdlSendJoystickEffectLookupFunction(joystick, data, size) == 1;
 }
 
 ///

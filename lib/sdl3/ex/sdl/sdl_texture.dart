@@ -15,19 +15,19 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// argument can be NULL if you don't need this information.
   /// \param h a pointer filled in with the height of the texture in pixels. This
   /// argument can be NULL if you don't need this information.
-  /// \returns 0 on success or a negative error code on failure; call
-  /// SDL_GetError() for more information.
+  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+  /// for more information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
   /// ```c
-  /// extern SDL_DECLSPEC int SDLCALL SDL_GetTextureSize(SDL_Texture *texture, float *w, float *h)
+  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetTextureSize(SDL_Texture *texture, float *w, float *h)
   /// ```
   Point<double>? getSize() {
     Point<double>? result;
     var wPointer = calloc<Float>();
     var hPointer = calloc<Float>();
-    if (sdlGetTextureSize(this, wPointer, hPointer) == 0) {
+    if (sdlGetTextureSize(this, wPointer, hPointer) == true) {
       result = Point(wPointer.value.toDouble(), hPointer.value.toDouble());
     }
     calloc.free(wPointer);
@@ -44,15 +44,15 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   ///
   /// `srcC = srcC * (color / 255)`
   ///
-  /// Color modulation is not always supported by the renderer; it will return -1
-  /// if color modulation is not supported.
+  /// Color modulation is not always supported by the renderer; it will return
+  /// SDL_FALSE if color modulation is not supported.
   ///
   /// \param texture the texture to update.
   /// \param r the red color value multiplied into copy operations.
   /// \param g the green color value multiplied into copy operations.
   /// \param b the blue color value multiplied into copy operations.
-  /// \returns 0 on success or a negative error code on failure; call
-  /// SDL_GetError() for more information.
+  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+  /// for more information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -61,9 +61,9 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// \sa SDL_SetTextureColorModFloat
   ///
   /// ```c
-  /// extern SDL_DECLSPEC int SDLCALL SDL_SetTextureColorMod(SDL_Texture *texture, Uint8 r, Uint8 g, Uint8 b)
+  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetTextureColorMod(SDL_Texture *texture, Uint8 r, Uint8 g, Uint8 b)
   /// ```
-  int setColorMod(int r, int g, int b) {
+  bool setColorMod(int r, int g, int b) {
     return sdlSetTextureColorMod(this, r, g, b);
   }
 
@@ -74,8 +74,8 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// \param r a pointer filled in with the current red color value.
   /// \param g a pointer filled in with the current green color value.
   /// \param b a pointer filled in with the current blue color value.
-  /// \returns 0 on success or a negative error code on failure; call
-  /// SDL_GetError() for more information.
+  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+  /// for more information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -84,14 +84,14 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// \sa SDL_SetTextureColorMod
   ///
   /// ```c
-  /// extern SDL_DECLSPEC int SDLCALL SDL_GetTextureColorMod(SDL_Texture *texture, Uint8 *r, Uint8 *g, Uint8 *b)
+  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetTextureColorMod(SDL_Texture *texture, Uint8 *r, Uint8 *g, Uint8 *b)
   /// ```
   int? getColorMod() {
     int? result;
     var rPointer = calloc<Uint8>();
     var gPointer = calloc<Uint8>();
     var bPointer = calloc<Uint8>();
-    if (sdlGetTextureColorMod(this, rPointer, gPointer, bPointer) == 0) {
+    if (sdlGetTextureColorMod(this, rPointer, gPointer, bPointer) == true) {
       result = 0;
       result += rPointer.value << 16;
       result += gPointer.value << 8;
@@ -111,13 +111,13 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   ///
   /// `srcA = srcA * (alpha / 255)`
   ///
-  /// Alpha modulation is not always supported by the renderer; it will return -1
-  /// if alpha modulation is not supported.
+  /// Alpha modulation is not always supported by the renderer; it will return
+  /// SDL_FALSE if alpha modulation is not supported.
   ///
   /// \param texture the texture to update.
   /// \param alpha the source alpha value multiplied into copy operations.
-  /// \returns 0 on success or a negative error code on failure; call
-  /// SDL_GetError() for more information.
+  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+  /// for more information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -126,9 +126,9 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// \sa SDL_SetTextureColorMod
   ///
   /// ```c
-  /// extern SDL_DECLSPEC int SDLCALL SDL_SetTextureAlphaMod(SDL_Texture *texture, Uint8 alpha)
+  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetTextureAlphaMod(SDL_Texture *texture, Uint8 alpha)
   /// ```
-  int setAlphaMod(int alpha) {
+  bool setAlphaMod(int alpha) {
     return sdlSetTextureAlphaMod(this, alpha);
   }
 
@@ -137,8 +137,8 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   ///
   /// \param texture the texture to query.
   /// \param alpha a pointer filled in with the current alpha value.
-  /// \returns 0 on success or a negative error code on failure; call
-  /// SDL_GetError() for more information.
+  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+  /// for more information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -147,12 +147,12 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// \sa SDL_SetTextureAlphaMod
   ///
   /// ```c
-  /// extern SDL_DECLSPEC int SDLCALL SDL_GetTextureAlphaMod(SDL_Texture *texture, Uint8 *alpha)
+  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetTextureAlphaMod(SDL_Texture *texture, Uint8 *alpha)
   /// ```
   int? getAlphaMod() {
     int? result;
     var alphaPointer = calloc<Uint8>();
-    if (sdlGetTextureAlphaMod(this, alphaPointer) == 0) {
+    if (sdlGetTextureAlphaMod(this, alphaPointer) == true) {
       result = alphaPointer.value;
     }
     calloc.free(alphaPointer);
@@ -167,17 +167,17 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   ///
   /// \param texture the texture to update.
   /// \param blendMode the SDL_BlendMode to use for texture blending.
-  /// \returns 0 on success or a negative error code on failure; call
-  /// SDL_GetError() for more information.
+  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+  /// for more information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
   /// \sa SDL_GetTextureBlendMode
   ///
   /// ```c
-  /// extern SDL_DECLSPEC int SDLCALL SDL_SetTextureBlendMode(SDL_Texture *texture, SDL_BlendMode blendMode)
+  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetTextureBlendMode(SDL_Texture *texture, SDL_BlendMode blendMode)
   /// ```
-  int setBlendMode(int blendMode) {
+  bool setBlendMode(int blendMode) {
     return sdlSetTextureBlendMode(this, blendMode);
   }
 
@@ -186,20 +186,20 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   ///
   /// \param texture the texture to query.
   /// \param blendMode a pointer filled in with the current SDL_BlendMode.
-  /// \returns 0 on success or a negative error code on failure; call
-  /// SDL_GetError() for more information.
+  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+  /// for more information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
   /// \sa SDL_SetTextureBlendMode
   ///
   /// ```c
-  /// extern SDL_DECLSPEC int SDLCALL SDL_GetTextureBlendMode(SDL_Texture *texture, SDL_BlendMode *blendMode)
+  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetTextureBlendMode(SDL_Texture *texture, SDL_BlendMode *blendMode)
   /// ```
   int? getBlendMode() {
     int? result;
     var blendModePointer = calloc<Uint32>();
-    if (sdlGetTextureBlendMode(this, blendModePointer) == 0) {
+    if (sdlGetTextureBlendMode(this, blendModePointer) == true) {
       result = blendModePointer.value;
     }
     calloc.free(blendModePointer);
@@ -215,17 +215,17 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   ///
   /// \param texture the texture to update.
   /// \param scaleMode the SDL_ScaleMode to use for texture scaling.
-  /// \returns 0 on success or a negative error code on failure; call
-  /// SDL_GetError() for more information.
+  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+  /// for more information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
   /// \sa SDL_GetTextureScaleMode
   ///
   /// ```c
-  /// extern SDL_DECLSPEC int SDLCALL SDL_SetTextureScaleMode(SDL_Texture *texture, SDL_ScaleMode scaleMode)
+  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetTextureScaleMode(SDL_Texture *texture, SDL_ScaleMode scaleMode)
   /// ```
-  int setScaleMode(int scaleMode) {
+  bool setScaleMode(int scaleMode) {
     return sdlSetTextureScaleMode(this, scaleMode);
   }
 
@@ -234,20 +234,20 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   ///
   /// \param texture the texture to query.
   /// \param scaleMode a pointer filled in with the current scale mode.
-  /// \returns 0 on success or a negative error code on failure; call
-  /// SDL_GetError() for more information.
+  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+  /// for more information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
   /// \sa SDL_SetTextureScaleMode
   ///
   /// ```c
-  /// extern SDL_DECLSPEC int SDLCALL SDL_GetTextureScaleMode(SDL_Texture *texture, SDL_ScaleMode *scaleMode)
+  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetTextureScaleMode(SDL_Texture *texture, SDL_ScaleMode *scaleMode)
   /// ```
   int? getScaleMode() {
     int? result;
     var scaleModePointer = calloc<Int32>();
-    if (sdlGetTextureScaleMode(this, scaleModePointer) == 0) {
+    if (sdlGetTextureScaleMode(this, scaleModePointer) == true) {
       result = scaleModePointer.value;
     }
     calloc.free(scaleModePointer);
@@ -274,8 +274,8 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// \param pixels the raw pixel data in the format of the texture.
   /// \param pitch the number of bytes in a row of pixel data, including padding
   /// between lines.
-  /// \returns 0 on success or a negative error code on failure; call
-  /// SDL_GetError() for more information.
+  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+  /// for more information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -285,9 +285,9 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// \sa SDL_UpdateYUVTexture
   ///
   /// ```c
-  /// extern SDL_DECLSPEC int SDLCALL SDL_UpdateTexture(SDL_Texture *texture, const SDL_Rect *rect, const void *pixels, int pitch)
+  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_UpdateTexture(SDL_Texture *texture, const SDL_Rect *rect, const void *pixels, int pitch)
   /// ```
-  int update(Pointer<SdlRect> rect, Pointer<NativeType> pixels, int pitch) {
+  bool update(Pointer<SdlRect> rect, Pointer<NativeType> pixels, int pitch) {
     return sdlUpdateTexture(this, rect, pixels, pitch);
   }
 
@@ -311,8 +311,8 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// \param Vplane the raw pixel data for the V plane.
   /// \param Vpitch the number of bytes between rows of pixel data for the V
   /// plane.
-  /// \returns 0 on success or a negative error code on failure; call
-  /// SDL_GetError() for more information.
+  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+  /// for more information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -320,9 +320,9 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// \sa SDL_UpdateTexture
   ///
   /// ```c
-  /// extern SDL_DECLSPEC int SDLCALL SDL_UpdateYUVTexture(SDL_Texture *texture, const SDL_Rect *rect, const Uint8 *Yplane, int Ypitch, const Uint8 *Uplane, int Upitch, const Uint8 *Vplane, int Vpitch)
+  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_UpdateYUVTexture(SDL_Texture *texture, const SDL_Rect *rect, const Uint8 *Yplane, int Ypitch, const Uint8 *Uplane, int Upitch, const Uint8 *Vplane, int Vpitch)
   /// ```
-  int updateYuv(Pointer<SdlRect> rect, Pointer<Uint8> yplane, int ypitch,
+  bool updateYuv(Pointer<SdlRect> rect, Pointer<Uint8> yplane, int ypitch,
       Pointer<Uint8> uplane, int upitch, Pointer<Uint8> vplane, int vpitch) {
     return sdlUpdateYuvTexture(
         this, rect, yplane, ypitch, uplane, upitch, vplane, vpitch);
@@ -344,8 +344,8 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// \param UVplane the raw pixel data for the UV plane.
   /// \param UVpitch the number of bytes between rows of pixel data for the UV
   /// plane.
-  /// \returns 0 on success or a negative error code on failure; call
-  /// SDL_GetError() for more information.
+  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+  /// for more information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -353,9 +353,9 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// \sa SDL_UpdateYUVTexture
   ///
   /// ```c
-  /// extern SDL_DECLSPEC int SDLCALL SDL_UpdateNVTexture(SDL_Texture *texture, const SDL_Rect *rect, const Uint8 *Yplane, int Ypitch, const Uint8 *UVplane, int UVpitch)
+  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_UpdateNVTexture(SDL_Texture *texture, const SDL_Rect *rect, const Uint8 *Yplane, int Ypitch, const Uint8 *UVplane, int UVpitch)
   /// ```
-  int updateNv(Pointer<SdlRect> rect, Pointer<Uint8> yplane, int ypitch,
+  bool updateNv(Pointer<SdlRect> rect, Pointer<Uint8> yplane, int ypitch,
       Pointer<Uint8> uVplane, int uVpitch) {
     return sdlUpdateNvTexture(this, rect, yplane, ypitch, uVplane, uVpitch);
   }
@@ -379,8 +379,8 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// appropriately offset by the locked area.
   /// \param pitch this is filled in with the pitch of the locked pixels; the
   /// pitch is the length of one row in bytes.
-  /// \returns 0 on success or a negative error code if the texture is not valid
-  /// or was not created with `SDL_TEXTUREACCESS_STREAMING`; call
+  /// \returns SDL_TRUE on success or SDL_FALSE if the texture is not valid or
+  /// was not created with `SDL_TEXTUREACCESS_STREAMING`; call
   /// SDL_GetError() for more information.
   ///
   /// \since This function is available since SDL 3.0.0.
@@ -389,9 +389,9 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// \sa SDL_UnlockTexture
   ///
   /// ```c
-  /// extern SDL_DECLSPEC int SDLCALL SDL_LockTexture(SDL_Texture *texture, const SDL_Rect *rect, void **pixels, int *pitch)
+  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_LockTexture(SDL_Texture *texture, const SDL_Rect *rect, void **pixels, int *pitch)
   /// ```
-  int lock(Pointer<SdlRect> rect, Pointer<Pointer<NativeType>> pixels,
+  bool lock(Pointer<SdlRect> rect, Pointer<Pointer<NativeType>> pixels,
       Pointer<Int32> pitch) {
     return sdlLockTexture(this, rect, pixels, pitch);
   }
@@ -420,8 +420,8 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// NULL, the entire texture will be locked.
   /// \param surface this is filled in with an SDL surface representing the
   /// locked area.
-  /// \returns 0 on success or a negative error code on failure; call
-  /// SDL_GetError() for more information.
+  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+  /// for more information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -429,9 +429,9 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// \sa SDL_UnlockTexture
   ///
   /// ```c
-  /// extern SDL_DECLSPEC int SDLCALL SDL_LockTextureToSurface(SDL_Texture *texture, const SDL_Rect *rect, SDL_Surface **surface)
+  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_LockTextureToSurface(SDL_Texture *texture, const SDL_Rect *rect, SDL_Surface **surface)
   /// ```
-  int lockToSurface(
+  bool lockToSurface(
       Pointer<SdlRect> rect, Pointer<Pointer<SdlSurface>> surface) {
     return sdlLockTextureToSurface(this, rect, surface);
   }

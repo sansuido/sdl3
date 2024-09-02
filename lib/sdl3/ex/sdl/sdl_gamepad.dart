@@ -122,15 +122,15 @@ extension SdlGamepadEx on SdlGamepad {
   ///
   /// This will generate gamepad events as needed if device mappings change.
   ///
-  /// \returns 0 on success or a negative error code on failure; call
-  /// SDL_GetError() for more information.
+  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+  /// for more information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
   /// ```c
-  /// extern SDL_DECLSPEC int SDLCALL SDL_ReloadGamepadMappings(void)
+  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_ReloadGamepadMappings(void)
   /// ```
-  static int reloadMappings() {
+  static bool reloadMappings() {
     return sdlReloadGamepadMappings();
   }
 
@@ -181,8 +181,8 @@ extension SdlGamepadEx on SdlGamepad {
   /// \param instance_id the joystick instance ID.
   /// \param mapping the mapping to use for this device, or NULL to clear the
   /// mapping.
-  /// \returns 0 on success or a negative error code on failure; call
-  /// SDL_GetError() for more information.
+  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+  /// for more information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -190,9 +190,9 @@ extension SdlGamepadEx on SdlGamepad {
   /// \sa SDL_GetGamepadMapping
   ///
   /// ```c
-  /// extern SDL_DECLSPEC int SDLCALL SDL_SetGamepadMapping(SDL_JoystickID instance_id, const char *mapping)
+  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetGamepadMapping(SDL_JoystickID instance_id, const char *mapping)
   /// ```
-  static int setMapping(int instanceId, String? mapping) {
+  static bool setMapping(int instanceId, String? mapping) {
     return sdlSetGamepadMapping(instanceId, mapping);
   }
 
@@ -882,17 +882,17 @@ extension SdlGamepadPointerEx on Pointer<SdlGamepad> {
   /// \param gamepad the gamepad object to adjust.
   /// \param player_index player index to assign to this gamepad, or -1 to clear
   /// the player index and turn off player LEDs.
-  /// \returns 0 on success or a negative error code on failure; call
-  /// SDL_GetError() for more information.
+  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+  /// for more information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
   /// \sa SDL_GetGamepadPlayerIndex
   ///
   /// ```c
-  /// extern SDL_DECLSPEC int SDLCALL SDL_SetGamepadPlayerIndex(SDL_Gamepad *gamepad, int player_index)
+  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetGamepadPlayerIndex(SDL_Gamepad *gamepad, int player_index)
   /// ```
-  int setPlayerIndex(int playerIndex) {
+  bool setPlayerIndex(int playerIndex) {
     return sdlSetGamepadPlayerIndex(this, playerIndex);
   }
 
@@ -1267,17 +1267,17 @@ extension SdlGamepadPointerEx on Pointer<SdlGamepad> {
   /// \param y filled with y position, normalized 0 to 1, with the origin in the
   /// upper left.
   /// \param pressure filled with pressure value.
-  /// \returns 0 on success or a negative error code on failure; call
-  /// SDL_GetError() for more information.
+  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+  /// for more information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
   /// \sa SDL_GetNumGamepadTouchpadFingers
   ///
   /// ```c
-  /// extern SDL_DECLSPEC int SDLCALL SDL_GetGamepadTouchpadFinger(SDL_Gamepad *gamepad, int touchpad, int finger, Uint8 *state, float *x, float *y, float *pressure)
+  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetGamepadTouchpadFinger(SDL_Gamepad *gamepad, int touchpad, int finger, Uint8 *state, float *x, float *y, float *pressure)
   /// ```
-  int getTouchpadFinger(int touchpad, int finger, Pointer<Uint8> state,
+  bool getTouchpadFinger(int touchpad, int finger, Pointer<Uint8> state,
       Pointer<Float> x, Pointer<Float> y, Pointer<Float> pressure) {
     return sdlGetGamepadTouchpadFinger(
         this, touchpad, finger, state, x, y, pressure);
@@ -1309,8 +1309,8 @@ extension SdlGamepadPointerEx on Pointer<SdlGamepad> {
   /// \param gamepad the gamepad to update.
   /// \param type the type of sensor to enable/disable.
   /// \param enabled whether data reporting should be enabled.
-  /// \returns 0 on success or a negative error code on failure; call
-  /// SDL_GetError() for more information.
+  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+  /// for more information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -1318,9 +1318,9 @@ extension SdlGamepadPointerEx on Pointer<SdlGamepad> {
   /// \sa SDL_GamepadSensorEnabled
   ///
   /// ```c
-  /// extern SDL_DECLSPEC int SDLCALL SDL_SetGamepadSensorEnabled(SDL_Gamepad *gamepad, SDL_SensorType type, SDL_bool enabled)
+  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetGamepadSensorEnabled(SDL_Gamepad *gamepad, SDL_SensorType type, SDL_bool enabled)
   /// ```
-  int setSensorEnabled(int type, bool enabled) {
+  bool setSensorEnabled(int type, bool enabled) {
     return sdlSetGamepadSensorEnabled(this, type, enabled);
   }
 
@@ -1368,15 +1368,15 @@ extension SdlGamepadPointerEx on Pointer<SdlGamepad> {
   /// \param type the type of sensor to query.
   /// \param data a pointer filled with the current sensor state.
   /// \param num_values the number of values to write to data.
-  /// \returns 0 on success or a negative error code on failure; call
-  /// SDL_GetError() for more information.
+  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+  /// for more information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
   /// ```c
-  /// extern SDL_DECLSPEC int SDLCALL SDL_GetGamepadSensorData(SDL_Gamepad *gamepad, SDL_SensorType type, float *data, int num_values)
+  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetGamepadSensorData(SDL_Gamepad *gamepad, SDL_SensorType type, float *data, int num_values)
   /// ```
-  int getSensorData(int type, Pointer<Float> data, int numValues) {
+  bool getSensorData(int type, Pointer<Float> data, int numValues) {
     return sdlGetGamepadSensorData(this, type, data, numValues);
   }
 
@@ -1395,14 +1395,15 @@ extension SdlGamepadPointerEx on Pointer<SdlGamepad> {
   /// \param high_frequency_rumble the intensity of the high frequency (right)
   /// rumble motor, from 0 to 0xFFFF.
   /// \param duration_ms the duration of the rumble effect, in milliseconds.
-  /// \returns 0, or -1 if rumble isn't supported on this gamepad.
+  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+  /// for more information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
   /// ```c
-  /// extern SDL_DECLSPEC int SDLCALL SDL_RumbleGamepad(SDL_Gamepad *gamepad, Uint16 low_frequency_rumble, Uint16 high_frequency_rumble, Uint32 duration_ms)
+  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_RumbleGamepad(SDL_Gamepad *gamepad, Uint16 low_frequency_rumble, Uint16 high_frequency_rumble, Uint32 duration_ms)
   /// ```
-  int rumble(int lowFrequencyRumble, int highFrequencyRumble, int durationMs) {
+  bool rumble(int lowFrequencyRumble, int highFrequencyRumble, int durationMs) {
     return sdlRumbleGamepad(
         this, lowFrequencyRumble, highFrequencyRumble, durationMs);
   }
@@ -1426,17 +1427,17 @@ extension SdlGamepadPointerEx on Pointer<SdlGamepad> {
   /// \param right_rumble the intensity of the right trigger rumble motor, from 0
   /// to 0xFFFF.
   /// \param duration_ms the duration of the rumble effect, in milliseconds.
-  /// \returns 0 on success or a negative error code on failure; call
-  /// SDL_GetError() for more information.
+  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+  /// for more information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
   /// \sa SDL_RumbleGamepad
   ///
   /// ```c
-  /// extern SDL_DECLSPEC int SDLCALL SDL_RumbleGamepadTriggers(SDL_Gamepad *gamepad, Uint16 left_rumble, Uint16 right_rumble, Uint32 duration_ms)
+  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_RumbleGamepadTriggers(SDL_Gamepad *gamepad, Uint16 left_rumble, Uint16 right_rumble, Uint32 duration_ms)
   /// ```
-  int rumbleTriggers(int leftRumble, int rightRumble, int durationMs) {
+  bool rumbleTriggers(int leftRumble, int rightRumble, int durationMs) {
     return sdlRumbleGamepadTriggers(this, leftRumble, rightRumble, durationMs);
   }
 
@@ -1453,15 +1454,15 @@ extension SdlGamepadPointerEx on Pointer<SdlGamepad> {
   /// \param red the intensity of the red LED.
   /// \param green the intensity of the green LED.
   /// \param blue the intensity of the blue LED.
-  /// \returns 0 on success or a negative error code on failure; call
-  /// SDL_GetError() for more information.
+  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+  /// for more information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
   /// ```c
-  /// extern SDL_DECLSPEC int SDLCALL SDL_SetGamepadLED(SDL_Gamepad *gamepad, Uint8 red, Uint8 green, Uint8 blue)
+  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetGamepadLED(SDL_Gamepad *gamepad, Uint8 red, Uint8 green, Uint8 blue)
   /// ```
-  int setLed(int red, int green, int blue) {
+  bool setLed(int red, int green, int blue) {
     return sdlSetGamepadLed(this, red, green, blue);
   }
 
@@ -1471,15 +1472,15 @@ extension SdlGamepadPointerEx on Pointer<SdlGamepad> {
   /// \param gamepad the gamepad to affect.
   /// \param data the data to send to the gamepad.
   /// \param size the size of the data to send to the gamepad.
-  /// \returns 0 on success or a negative error code on failure; call
-  /// SDL_GetError() for more information.
+  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+  /// for more information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
   /// ```c
-  /// extern SDL_DECLSPEC int SDLCALL SDL_SendGamepadEffect(SDL_Gamepad *gamepad, const void *data, int size)
+  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SendGamepadEffect(SDL_Gamepad *gamepad, const void *data, int size)
   /// ```
-  int sendEffect(Pointer<NativeType> data, int size) {
+  bool sendEffect(Pointer<NativeType> data, int size) {
     return sdlSendGamepadEffect(this, data, size);
   }
 

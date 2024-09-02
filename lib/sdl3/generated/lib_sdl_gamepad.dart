@@ -87,7 +87,7 @@ int sdlAddGamepadMapping(String? mapping) {
 /// ```
 int sdlAddGamepadMappingsFromIo(Pointer<SdlIoStream> src, bool closeio) {
   final sdlAddGamepadMappingsFromIoLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlIoStream> src, Int32 closeio),
+      Int32 Function(Pointer<SdlIoStream> src, Uint8 closeio),
       int Function(Pointer<SdlIoStream> src,
           int closeio)>('SDL_AddGamepadMappingsFromIO');
   return sdlAddGamepadMappingsFromIoLookupFunction(src, closeio ? 1 : 0);
@@ -137,19 +137,19 @@ int sdlAddGamepadMappingsFromFile(String? file) {
 ///
 /// This will generate gamepad events as needed if device mappings change.
 ///
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_ReloadGamepadMappings(void)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_ReloadGamepadMappings(void)
 /// ```
-int sdlReloadGamepadMappings() {
+bool sdlReloadGamepadMappings() {
   final sdlReloadGamepadMappingsLookupFunction =
-      libSdl3.lookupFunction<Int32 Function(), int Function()>(
+      libSdl3.lookupFunction<Uint8 Function(), int Function()>(
           'SDL_ReloadGamepadMappings');
-  return sdlReloadGamepadMappingsLookupFunction();
+  return sdlReloadGamepadMappingsLookupFunction() == 1;
 }
 
 ///
@@ -234,8 +234,8 @@ Pointer<Int8> sdlGetGamepadMapping(Pointer<SdlGamepad> gamepad) {
 /// \param instance_id the joystick instance ID.
 /// \param mapping the mapping to use for this device, or NULL to clear the
 /// mapping.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -243,15 +243,16 @@ Pointer<Int8> sdlGetGamepadMapping(Pointer<SdlGamepad> gamepad) {
 /// \sa SDL_GetGamepadMapping
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_SetGamepadMapping(SDL_JoystickID instance_id, const char *mapping)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetGamepadMapping(SDL_JoystickID instance_id, const char *mapping)
 /// ```
-int sdlSetGamepadMapping(int instanceId, String? mapping) {
+bool sdlSetGamepadMapping(int instanceId, String? mapping) {
   final sdlSetGamepadMappingLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Uint32 instanceId, Pointer<Utf8> mapping),
+      Uint8 Function(Uint32 instanceId, Pointer<Utf8> mapping),
       int Function(
           int instanceId, Pointer<Utf8> mapping)>('SDL_SetGamepadMapping');
   final mappingPointer = mapping != null ? mapping.toNativeUtf8() : nullptr;
-  final result = sdlSetGamepadMappingLookupFunction(instanceId, mappingPointer);
+  final result =
+      sdlSetGamepadMappingLookupFunction(instanceId, mappingPointer) == 1;
   calloc.free(mappingPointer);
   return result;
 }
@@ -270,7 +271,7 @@ int sdlSetGamepadMapping(int instanceId, String? mapping) {
 /// ```
 bool sdlHasGamepad() {
   final sdlHasGamepadLookupFunction = libSdl3
-      .lookupFunction<Int32 Function(), int Function()>('SDL_HasGamepad');
+      .lookupFunction<Uint8 Function(), int Function()>('SDL_HasGamepad');
   return sdlHasGamepadLookupFunction() == 1;
 }
 
@@ -315,7 +316,7 @@ Pointer<Uint32> sdlGetGamepads(Pointer<Int32> count) {
 /// ```
 bool sdlIsGamepad(int instanceId) {
   final sdlIsGamepadLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Uint32 instanceId),
+      Uint8 Function(Uint32 instanceId),
       int Function(int instanceId)>('SDL_IsGamepad');
   return sdlIsGamepadLookupFunction(instanceId) == 1;
 }
@@ -813,22 +814,22 @@ int sdlGetGamepadPlayerIndex(Pointer<SdlGamepad> gamepad) {
 /// \param gamepad the gamepad object to adjust.
 /// \param player_index player index to assign to this gamepad, or -1 to clear
 /// the player index and turn off player LEDs.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetGamepadPlayerIndex
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_SetGamepadPlayerIndex(SDL_Gamepad *gamepad, int player_index)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetGamepadPlayerIndex(SDL_Gamepad *gamepad, int player_index)
 /// ```
-int sdlSetGamepadPlayerIndex(Pointer<SdlGamepad> gamepad, int playerIndex) {
+bool sdlSetGamepadPlayerIndex(Pointer<SdlGamepad> gamepad, int playerIndex) {
   final sdlSetGamepadPlayerIndexLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlGamepad> gamepad, Int32 playerIndex),
+      Uint8 Function(Pointer<SdlGamepad> gamepad, Int32 playerIndex),
       int Function(Pointer<SdlGamepad> gamepad,
           int playerIndex)>('SDL_SetGamepadPlayerIndex');
-  return sdlSetGamepadPlayerIndexLookupFunction(gamepad, playerIndex);
+  return sdlSetGamepadPlayerIndexLookupFunction(gamepad, playerIndex) == 1;
 }
 
 ///
@@ -1031,7 +1032,7 @@ int sdlGetGamepadPowerInfo(
 /// ```
 bool sdlGamepadConnected(Pointer<SdlGamepad> gamepad) {
   final sdlGamepadConnectedLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlGamepad> gamepad),
+      Uint8 Function(Pointer<SdlGamepad> gamepad),
       int Function(Pointer<SdlGamepad> gamepad)>('SDL_GamepadConnected');
   return sdlGamepadConnectedLookupFunction(gamepad) == 1;
 }
@@ -1083,7 +1084,7 @@ Pointer<SdlJoystick> sdlGetGamepadJoystick(Pointer<SdlGamepad> gamepad) {
 /// ```
 void sdlSetGamepadEventsEnabled(bool enabled) {
   final sdlSetGamepadEventsEnabledLookupFunction = libSdl3.lookupFunction<
-      Void Function(Int32 enabled),
+      Void Function(Uint8 enabled),
       void Function(int enabled)>('SDL_SetGamepadEventsEnabled');
   return sdlSetGamepadEventsEnabledLookupFunction(enabled ? 1 : 0);
 }
@@ -1106,7 +1107,7 @@ void sdlSetGamepadEventsEnabled(bool enabled) {
 /// ```
 bool sdlGamepadEventsEnabled() {
   final sdlGamepadEventsEnabledLookupFunction =
-      libSdl3.lookupFunction<Int32 Function(), int Function()>(
+      libSdl3.lookupFunction<Uint8 Function(), int Function()>(
           'SDL_GamepadEventsEnabled');
   return sdlGamepadEventsEnabledLookupFunction() == 1;
 }
@@ -1288,7 +1289,7 @@ String? sdlGetGamepadStringForAxis(int axis) {
 /// ```
 bool sdlGamepadHasAxis(Pointer<SdlGamepad> gamepad, int axis) {
   final sdlGamepadHasAxisLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlGamepad> gamepad, Int32 axis),
+      Uint8 Function(Pointer<SdlGamepad> gamepad, Int32 axis),
       int Function(
           Pointer<SdlGamepad> gamepad, int axis)>('SDL_GamepadHasAxis');
   return sdlGamepadHasAxisLookupFunction(gamepad, axis) == 1;
@@ -1401,7 +1402,7 @@ String? sdlGetGamepadStringForButton(int button) {
 /// ```
 bool sdlGamepadHasButton(Pointer<SdlGamepad> gamepad, int button) {
   final sdlGamepadHasButtonLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlGamepad> gamepad, Int32 button),
+      Uint8 Function(Pointer<SdlGamepad> gamepad, Int32 button),
       int Function(
           Pointer<SdlGamepad> gamepad, int button)>('SDL_GamepadHasButton');
   return sdlGamepadHasButtonLookupFunction(gamepad, button) == 1;
@@ -1530,17 +1531,17 @@ int sdlGetNumGamepadTouchpadFingers(Pointer<SdlGamepad> gamepad, int touchpad) {
 /// \param y filled with y position, normalized 0 to 1, with the origin in the
 /// upper left.
 /// \param pressure filled with pressure value.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetNumGamepadTouchpadFingers
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_GetGamepadTouchpadFinger(SDL_Gamepad *gamepad, int touchpad, int finger, Uint8 *state, float *x, float *y, float *pressure)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetGamepadTouchpadFinger(SDL_Gamepad *gamepad, int touchpad, int finger, Uint8 *state, float *x, float *y, float *pressure)
 /// ```
-int sdlGetGamepadTouchpadFinger(
+bool sdlGetGamepadTouchpadFinger(
     Pointer<SdlGamepad> gamepad,
     int touchpad,
     int finger,
@@ -1549,7 +1550,7 @@ int sdlGetGamepadTouchpadFinger(
     Pointer<Float> y,
     Pointer<Float> pressure) {
   final sdlGetGamepadTouchpadFingerLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(
+      Uint8 Function(
           Pointer<SdlGamepad> gamepad,
           Int32 touchpad,
           Int32 finger,
@@ -1566,7 +1567,8 @@ int sdlGetGamepadTouchpadFinger(
           Pointer<Float> y,
           Pointer<Float> pressure)>('SDL_GetGamepadTouchpadFinger');
   return sdlGetGamepadTouchpadFingerLookupFunction(
-      gamepad, touchpad, finger, state, x, y, pressure);
+          gamepad, touchpad, finger, state, x, y, pressure) ==
+      1;
 }
 
 ///
@@ -1587,7 +1589,7 @@ int sdlGetGamepadTouchpadFinger(
 /// ```
 bool sdlGamepadHasSensor(Pointer<SdlGamepad> gamepad, int type) {
   final sdlGamepadHasSensorLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlGamepad> gamepad, Int32 type),
+      Uint8 Function(Pointer<SdlGamepad> gamepad, Int32 type),
       int Function(
           Pointer<SdlGamepad> gamepad, int type)>('SDL_GamepadHasSensor');
   return sdlGamepadHasSensorLookupFunction(gamepad, type) == 1;
@@ -1599,8 +1601,8 @@ bool sdlGamepadHasSensor(Pointer<SdlGamepad> gamepad, int type) {
 /// \param gamepad the gamepad to update.
 /// \param type the type of sensor to enable/disable.
 /// \param enabled whether data reporting should be enabled.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -1608,16 +1610,17 @@ bool sdlGamepadHasSensor(Pointer<SdlGamepad> gamepad, int type) {
 /// \sa SDL_GamepadSensorEnabled
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_SetGamepadSensorEnabled(SDL_Gamepad *gamepad, SDL_SensorType type, SDL_bool enabled)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetGamepadSensorEnabled(SDL_Gamepad *gamepad, SDL_SensorType type, SDL_bool enabled)
 /// ```
-int sdlSetGamepadSensorEnabled(
+bool sdlSetGamepadSensorEnabled(
     Pointer<SdlGamepad> gamepad, int type, bool enabled) {
   final sdlSetGamepadSensorEnabledLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlGamepad> gamepad, Int32 type, Int32 enabled),
+      Uint8 Function(Pointer<SdlGamepad> gamepad, Int32 type, Uint8 enabled),
       int Function(Pointer<SdlGamepad> gamepad, int type,
           int enabled)>('SDL_SetGamepadSensorEnabled');
   return sdlSetGamepadSensorEnabledLookupFunction(
-      gamepad, type, enabled ? 1 : 0);
+          gamepad, type, enabled ? 1 : 0) ==
+      1;
 }
 
 ///
@@ -1636,7 +1639,7 @@ int sdlSetGamepadSensorEnabled(
 /// ```
 bool sdlGamepadSensorEnabled(Pointer<SdlGamepad> gamepad, int type) {
   final sdlGamepadSensorEnabledLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlGamepad> gamepad, Int32 type),
+      Uint8 Function(Pointer<SdlGamepad> gamepad, Int32 type),
       int Function(
           Pointer<SdlGamepad> gamepad, int type)>('SDL_GamepadSensorEnabled');
   return sdlGamepadSensorEnabledLookupFunction(gamepad, type) == 1;
@@ -1672,22 +1675,24 @@ double sdlGetGamepadSensorDataRate(Pointer<SdlGamepad> gamepad, int type) {
 /// \param type the type of sensor to query.
 /// \param data a pointer filled with the current sensor state.
 /// \param num_values the number of values to write to data.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_GetGamepadSensorData(SDL_Gamepad *gamepad, SDL_SensorType type, float *data, int num_values)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetGamepadSensorData(SDL_Gamepad *gamepad, SDL_SensorType type, float *data, int num_values)
 /// ```
-int sdlGetGamepadSensorData(
+bool sdlGetGamepadSensorData(
     Pointer<SdlGamepad> gamepad, int type, Pointer<Float> data, int numValues) {
   final sdlGetGamepadSensorDataLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlGamepad> gamepad, Int32 type,
+      Uint8 Function(Pointer<SdlGamepad> gamepad, Int32 type,
           Pointer<Float> data, Int32 numValues),
       int Function(Pointer<SdlGamepad> gamepad, int type, Pointer<Float> data,
           int numValues)>('SDL_GetGamepadSensorData');
-  return sdlGetGamepadSensorDataLookupFunction(gamepad, type, data, numValues);
+  return sdlGetGamepadSensorDataLookupFunction(
+          gamepad, type, data, numValues) ==
+      1;
 }
 
 ///
@@ -1705,22 +1710,24 @@ int sdlGetGamepadSensorData(
 /// \param high_frequency_rumble the intensity of the high frequency (right)
 /// rumble motor, from 0 to 0xFFFF.
 /// \param duration_ms the duration of the rumble effect, in milliseconds.
-/// \returns 0, or -1 if rumble isn't supported on this gamepad.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_RumbleGamepad(SDL_Gamepad *gamepad, Uint16 low_frequency_rumble, Uint16 high_frequency_rumble, Uint32 duration_ms)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_RumbleGamepad(SDL_Gamepad *gamepad, Uint16 low_frequency_rumble, Uint16 high_frequency_rumble, Uint32 duration_ms)
 /// ```
-int sdlRumbleGamepad(Pointer<SdlGamepad> gamepad, int lowFrequencyRumble,
+bool sdlRumbleGamepad(Pointer<SdlGamepad> gamepad, int lowFrequencyRumble,
     int highFrequencyRumble, int durationMs) {
   final sdlRumbleGamepadLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlGamepad> gamepad, Uint16 lowFrequencyRumble,
+      Uint8 Function(Pointer<SdlGamepad> gamepad, Uint16 lowFrequencyRumble,
           Uint16 highFrequencyRumble, Uint32 durationMs),
       int Function(Pointer<SdlGamepad> gamepad, int lowFrequencyRumble,
           int highFrequencyRumble, int durationMs)>('SDL_RumbleGamepad');
   return sdlRumbleGamepadLookupFunction(
-      gamepad, lowFrequencyRumble, highFrequencyRumble, durationMs);
+          gamepad, lowFrequencyRumble, highFrequencyRumble, durationMs) ==
+      1;
 }
 
 ///
@@ -1742,25 +1749,26 @@ int sdlRumbleGamepad(Pointer<SdlGamepad> gamepad, int lowFrequencyRumble,
 /// \param right_rumble the intensity of the right trigger rumble motor, from 0
 /// to 0xFFFF.
 /// \param duration_ms the duration of the rumble effect, in milliseconds.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_RumbleGamepad
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_RumbleGamepadTriggers(SDL_Gamepad *gamepad, Uint16 left_rumble, Uint16 right_rumble, Uint32 duration_ms)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_RumbleGamepadTriggers(SDL_Gamepad *gamepad, Uint16 left_rumble, Uint16 right_rumble, Uint32 duration_ms)
 /// ```
-int sdlRumbleGamepadTriggers(Pointer<SdlGamepad> gamepad, int leftRumble,
+bool sdlRumbleGamepadTriggers(Pointer<SdlGamepad> gamepad, int leftRumble,
     int rightRumble, int durationMs) {
   final sdlRumbleGamepadTriggersLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlGamepad> gamepad, Uint16 leftRumble,
+      Uint8 Function(Pointer<SdlGamepad> gamepad, Uint16 leftRumble,
           Uint16 rightRumble, Uint32 durationMs),
       int Function(Pointer<SdlGamepad> gamepad, int leftRumble, int rightRumble,
           int durationMs)>('SDL_RumbleGamepadTriggers');
   return sdlRumbleGamepadTriggersLookupFunction(
-      gamepad, leftRumble, rightRumble, durationMs);
+          gamepad, leftRumble, rightRumble, durationMs) ==
+      1;
 }
 
 ///
@@ -1776,22 +1784,22 @@ int sdlRumbleGamepadTriggers(Pointer<SdlGamepad> gamepad, int leftRumble,
 /// \param red the intensity of the red LED.
 /// \param green the intensity of the green LED.
 /// \param blue the intensity of the blue LED.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_SetGamepadLED(SDL_Gamepad *gamepad, Uint8 red, Uint8 green, Uint8 blue)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetGamepadLED(SDL_Gamepad *gamepad, Uint8 red, Uint8 green, Uint8 blue)
 /// ```
-int sdlSetGamepadLed(
+bool sdlSetGamepadLed(
     Pointer<SdlGamepad> gamepad, int red, int green, int blue) {
   final sdlSetGamepadLedLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(
+      Uint8 Function(
           Pointer<SdlGamepad> gamepad, Uint8 red, Uint8 green, Uint8 blue),
       int Function(Pointer<SdlGamepad> gamepad, int red, int green,
           int blue)>('SDL_SetGamepadLED');
-  return sdlSetGamepadLedLookupFunction(gamepad, red, green, blue);
+  return sdlSetGamepadLedLookupFunction(gamepad, red, green, blue) == 1;
 }
 
 ///
@@ -1800,22 +1808,22 @@ int sdlSetGamepadLed(
 /// \param gamepad the gamepad to affect.
 /// \param data the data to send to the gamepad.
 /// \param size the size of the data to send to the gamepad.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_SendGamepadEffect(SDL_Gamepad *gamepad, const void *data, int size)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SendGamepadEffect(SDL_Gamepad *gamepad, const void *data, int size)
 /// ```
-int sdlSendGamepadEffect(
+bool sdlSendGamepadEffect(
     Pointer<SdlGamepad> gamepad, Pointer<NativeType> data, int size) {
   final sdlSendGamepadEffectLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(
+      Uint8 Function(
           Pointer<SdlGamepad> gamepad, Pointer<NativeType> data, Int32 size),
       int Function(Pointer<SdlGamepad> gamepad, Pointer<NativeType> data,
           int size)>('SDL_SendGamepadEffect');
-  return sdlSendGamepadEffectLookupFunction(gamepad, data, size);
+  return sdlSendGamepadEffectLookupFunction(gamepad, data, size) == 1;
 }
 
 ///

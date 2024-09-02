@@ -7,7 +7,7 @@ const gScreenWidth = 800;
 const gScreenHeight = 600;
 
 int main() {
-  if (sdlInit(SDL_INIT_VIDEO | SDL_INIT_GAMEPAD | SDL_INIT_JOYSTICK) < 0) {
+  if (sdlInit(SDL_INIT_VIDEO | SDL_INIT_GAMEPAD | SDL_INIT_JOYSTICK) == false) {
     print(sdlGetError());
     return -1;
   }

@@ -9,7 +9,7 @@ const gWinHeight = 144;
 
 int main() {
   // SDL init
-  if (sdlInit(SDL_INIT_VIDEO) < 0) {
+  if (sdlInit(SDL_INIT_VIDEO) == false) {
     print('Unable to initialize SDL: ${sdlGetError()}');
     return 1;
   }

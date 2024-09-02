@@ -176,8 +176,8 @@ extension SdlEventPointerEx on Pointer<SdlEvent> {
   /// SDL_EVENT_FIRST is a safe choice.
   /// \param maxType maximum value of the event type to be considered;
   /// SDL_EVENT_LAST is a safe choice.
-  /// \returns the number of events actually stored or a negative error code on
-  /// failure; call SDL_GetError() for more information.
+  /// \returns the number of events actually stored or -1 on failure; call
+  /// SDL_GetError() for more information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -324,9 +324,9 @@ extension SdlEventPointerEx on Pointer<SdlEvent> {
   /// its own custom event types.
   ///
   /// \param event the SDL_Event to be added to the queue.
-  /// \returns 1 on success, 0 if the event was filtered, or a negative error
-  /// code on failure; call SDL_GetError() for more information. A
-  /// common reason for error is the event queue being full.
+  /// \returns SDL_TRUE on success, SDL_FALSE if the event was filtered or on
+  /// failure; call SDL_GetError() for more information. A common reason
+  /// for error is the event queue being full.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -335,9 +335,9 @@ extension SdlEventPointerEx on Pointer<SdlEvent> {
   /// \sa SDL_RegisterEvents
   ///
   /// ```c
-  /// extern SDL_DECLSPEC int SDLCALL SDL_PushEvent(SDL_Event *event)
+  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_PushEvent(SDL_Event *event)
   /// ```
-  int push() {
+  bool push() {
     return sdlPushEvent(this);
   }
 

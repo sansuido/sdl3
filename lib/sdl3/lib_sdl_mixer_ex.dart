@@ -31,7 +31,7 @@ const MIX_DEFAULT_FORMAT = AUDIO_S16LSB;
 /// ```c
 /// const Mix_SetError = SDL_SetError;
 /// ```
-int mixSetError(String fmt, Pointer<NativeType> arg1) {
+bool mixSetError(String fmt, Pointer<NativeType> arg1) {
   return sdlSetError(fmt, arg1);
 }
 
@@ -45,6 +45,6 @@ String? mixGetError() {
 /// ```c
 /// const Mix_ClearError = SDL_ClearError;
 /// ```
-int mixClearError() {
+bool mixClearError() {
   return sdlClearError();
 }

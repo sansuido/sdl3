@@ -88,7 +88,7 @@ void ttfGetHarfBuzzVersion(
 /// ```
 void ttfByteSwappedUnicode(bool swapped) {
   final ttfByteSwappedUnicodeLookupFunction = libSdl3Ttf.lookupFunction<
-      Void Function(Int32 swapped),
+      Void Function(Uint8 swapped),
       void Function(int swapped)>('TTF_ByteSwappedUNICODE');
   return ttfByteSwappedUnicodeLookupFunction(swapped ? 1 : 0);
 }
@@ -98,7 +98,7 @@ void ttfByteSwappedUnicode(bool swapped) {
 ///
 /// You must successfully call this function before it is safe to call any
 /// other function in this library, with one exception: a human-readable error
-/// message can be retrieved from TTF_GetError() if this function fails.
+/// message can be retrieved from SDL_GetError() if this function fails.
 ///
 /// SDL must be initialized before calls to functions in this library, because
 /// this library uses utility functions from the SDL library.
@@ -107,19 +107,20 @@ void ttfByteSwappedUnicode(bool swapped) {
 /// calls, and decrements it on each call to TTF_Quit, so you must pair your
 /// init and quit calls.
 ///
-/// \returns 0 on success, -1 on error.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL_ttf 3.0.0.
 ///
 /// \sa TTF_Quit
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL TTF_Init(void)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL TTF_Init(void)
 /// ```
-int ttfInit() {
+bool ttfInit() {
   final ttfInitLookupFunction =
-      libSdl3Ttf.lookupFunction<Int32 Function(), int Function()>('TTF_Init');
-  return ttfInitLookupFunction();
+      libSdl3Ttf.lookupFunction<Uint8 Function(), int Function()>('TTF_Init');
+  return ttfInitLookupFunction() == 1;
 }
 
 ///
@@ -219,7 +220,7 @@ Pointer<TtfFont> ttfOpenFontIo(
     Pointer<SdlIoStream> src, bool closeio, int ptsize) {
   final ttfOpenFontIoLookupFunction = libSdl3Ttf.lookupFunction<
       Pointer<TtfFont> Function(
-          Pointer<SdlIoStream> src, Int32 closeio, Int32 ptsize),
+          Pointer<SdlIoStream> src, Uint8 closeio, Int32 ptsize),
       Pointer<TtfFont> Function(
           Pointer<SdlIoStream> src, int closeio, int ptsize)>('TTF_OpenFontIO');
   return ttfOpenFontIoLookupFunction(src, closeio ? 1 : 0, ptsize);
@@ -260,7 +261,7 @@ Pointer<TtfFont> ttfOpenFontIndexIo(
     Pointer<SdlIoStream> src, bool closeio, int ptsize, int index) {
   final ttfOpenFontIndexIoLookupFunction = libSdl3Ttf.lookupFunction<
       Pointer<TtfFont> Function(
-          Pointer<SdlIoStream> src, Int32 closeio, Int32 ptsize, Int32 index),
+          Pointer<SdlIoStream> src, Uint8 closeio, Int32 ptsize, Int32 index),
       Pointer<TtfFont> Function(Pointer<SdlIoStream> src, int closeio,
           int ptsize, int index)>('TTF_OpenFontIndexIO');
   return ttfOpenFontIndexIoLookupFunction(src, closeio ? 1 : 0, ptsize, index);
@@ -378,7 +379,7 @@ Pointer<TtfFont> ttfOpenFontIndexDpi(
 Pointer<TtfFont> ttfOpenFontDpiio(
     Pointer<SdlIoStream> src, bool closeio, int ptsize, int hdpi, int vdpi) {
   final ttfOpenFontDpiioLookupFunction = libSdl3Ttf.lookupFunction<
-      Pointer<TtfFont> Function(Pointer<SdlIoStream> src, Int32 closeio,
+      Pointer<TtfFont> Function(Pointer<SdlIoStream> src, Uint8 closeio,
           Int32 ptsize, Uint32 hdpi, Uint32 vdpi),
       Pointer<TtfFont> Function(Pointer<SdlIoStream> src, int closeio,
           int ptsize, int hdpi, int vdpi)>('TTF_OpenFontDPIIO');
@@ -424,7 +425,7 @@ Pointer<TtfFont> ttfOpenFontDpiio(
 Pointer<TtfFont> ttfOpenFontIndexDpiio(Pointer<SdlIoStream> src, bool closeio,
     int ptsize, int index, int hdpi, int vdpi) {
   final ttfOpenFontIndexDpiioLookupFunction = libSdl3Ttf.lookupFunction<
-      Pointer<TtfFont> Function(Pointer<SdlIoStream> src, Int32 closeio,
+      Pointer<TtfFont> Function(Pointer<SdlIoStream> src, Uint8 closeio,
           Int32 ptsize, Int32 index, Uint32 hdpi, Uint32 vdpi),
       Pointer<TtfFont> Function(Pointer<SdlIoStream> src, int closeio,
           int ptsize, int index, int hdpi, int vdpi)>('TTF_OpenFontIndexDPIIO');
@@ -439,18 +440,19 @@ Pointer<TtfFont> ttfOpenFontIndexDpiio(Pointer<SdlIoStream> src, bool closeio,
 ///
 /// \param font the font to resize.
 /// \param ptsize the new point size.
-/// \returns 0 if successful, -1 on error.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL_ttf 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL TTF_SetFontSize(TTF_Font *font, int ptsize)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL TTF_SetFontSize(TTF_Font *font, int ptsize)
 /// ```
-int ttfSetFontSize(Pointer<TtfFont> font, int ptsize) {
+bool ttfSetFontSize(Pointer<TtfFont> font, int ptsize) {
   final ttfSetFontSizeLookupFunction = libSdl3Ttf.lookupFunction<
-      Int32 Function(Pointer<TtfFont> font, Int32 ptsize),
+      Uint8 Function(Pointer<TtfFont> font, Int32 ptsize),
       int Function(Pointer<TtfFont> font, int ptsize)>('TTF_SetFontSize');
-  return ttfSetFontSizeLookupFunction(font, ptsize);
+  return ttfSetFontSizeLookupFunction(font, ptsize) == 1;
 }
 
 ///
@@ -462,20 +464,21 @@ int ttfSetFontSize(Pointer<TtfFont> font, int ptsize) {
 /// \param ptsize the new point size.
 /// \param hdpi the target horizontal DPI.
 /// \param vdpi the target vertical DPI.
-/// \returns 0 if successful, -1 on error.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL_ttf 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL TTF_SetFontSizeDPI(TTF_Font *font, int ptsize, unsigned int hdpi, unsigned int vdpi)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL TTF_SetFontSizeDPI(TTF_Font *font, int ptsize, unsigned int hdpi, unsigned int vdpi)
 /// ```
-int ttfSetFontSizeDpi(Pointer<TtfFont> font, int ptsize, int hdpi, int vdpi) {
+bool ttfSetFontSizeDpi(Pointer<TtfFont> font, int ptsize, int hdpi, int vdpi) {
   final ttfSetFontSizeDpiLookupFunction = libSdl3Ttf.lookupFunction<
-      Int32 Function(
+      Uint8 Function(
           Pointer<TtfFont> font, Int32 ptsize, Uint32 hdpi, Uint32 vdpi),
       int Function(Pointer<TtfFont> font, int ptsize, int hdpi,
           int vdpi)>('TTF_SetFontSizeDPI');
-  return ttfSetFontSizeDpiLookupFunction(font, ptsize, hdpi, vdpi);
+  return ttfSetFontSizeDpiLookupFunction(font, ptsize, hdpi, vdpi) == 1;
 }
 
 ///
@@ -766,25 +769,25 @@ int ttfFontLineSkip(Pointer<TtfFont> font) {
 }
 
 ///
-/// Query whether or not kerning is allowed for a font.
+/// Query whether or not kerning is enabled for a font.
 ///
 /// \param font the font to query.
-/// \returns non-zero if kerning is enabled, zero otherwise.
+/// \returns SDL_TRUE if kerning is enabled, SDL_FALSE otherwise.
 ///
 /// \since This function is available since SDL_ttf 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL TTF_GetFontKerning(const TTF_Font *font)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL TTF_GetFontKerning(const TTF_Font *font)
 /// ```
-int ttfGetFontKerning(Pointer<TtfFont> font) {
+bool ttfGetFontKerning(Pointer<TtfFont> font) {
   final ttfGetFontKerningLookupFunction = libSdl3Ttf.lookupFunction<
-      Int32 Function(Pointer<TtfFont> font),
+      Uint8 Function(Pointer<TtfFont> font),
       int Function(Pointer<TtfFont> font)>('TTF_GetFontKerning');
-  return ttfGetFontKerningLookupFunction(font);
+  return ttfGetFontKerningLookupFunction(font) == 1;
 }
 
 ///
-/// Set if kerning is allowed for a font.
+/// Set if kerning is enabled for a font.
 ///
 /// Newly-opened fonts default to allowing kerning. This is generally a good
 /// policy unless you have a strong reason to disable it, as it tends to
@@ -792,18 +795,18 @@ int ttfGetFontKerning(Pointer<TtfFont> font) {
 /// the word `kerning` as something that looks like `keming` for example).
 ///
 /// \param font the font to set kerning on.
-/// \param allowed non-zero to allow kerning, zero to disallow.
+/// \param enabled SDL_TRUE to enable kerning, SDL_FALSE to disable.
 ///
 /// \since This function is available since SDL_ttf 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC void SDLCALL TTF_SetFontKerning(TTF_Font *font, int allowed)
+/// extern SDL_DECLSPEC void SDLCALL TTF_SetFontKerning(TTF_Font *font, SDL_bool enabled)
 /// ```
-void ttfSetFontKerning(Pointer<TtfFont> font, int allowed) {
+void ttfSetFontKerning(Pointer<TtfFont> font, bool enabled) {
   final ttfSetFontKerningLookupFunction = libSdl3Ttf.lookupFunction<
-      Void Function(Pointer<TtfFont> font, Int32 allowed),
-      void Function(Pointer<TtfFont> font, int allowed)>('TTF_SetFontKerning');
-  return ttfSetFontKerningLookupFunction(font, allowed);
+      Void Function(Pointer<TtfFont> font, Uint8 enabled),
+      void Function(Pointer<TtfFont> font, int enabled)>('TTF_SetFontKerning');
+  return ttfSetFontKerningLookupFunction(font, enabled ? 1 : 0);
 }
 
 ///
@@ -834,18 +837,18 @@ int ttfFontFaces(Pointer<TtfFont> font) {
 /// are more likely to not be fixed-width in most cases.
 ///
 /// \param font the font to query.
-/// \returns non-zero if fixed-width, zero if not.
+/// \returns SDL_TRUE if fixed-width, SDL_FALSE if not.
 ///
 /// \since This function is available since SDL_ttf 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL TTF_FontFaceIsFixedWidth(const TTF_Font *font)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL TTF_FontFaceIsFixedWidth(const TTF_Font *font)
 /// ```
-int ttfFontFaceIsFixedWidth(Pointer<TtfFont> font) {
+bool ttfFontFaceIsFixedWidth(Pointer<TtfFont> font) {
   final ttfFontFaceIsFixedWidthLookupFunction = libSdl3Ttf.lookupFunction<
-      Int32 Function(Pointer<TtfFont> font),
+      Uint8 Function(Pointer<TtfFont> font),
       int Function(Pointer<TtfFont> font)>('TTF_FontFaceIsFixedWidth');
-  return ttfFontFaceIsFixedWidthLookupFunction(font);
+  return ttfFontFaceIsFixedWidthLookupFunction(font) == 1;
 }
 
 ///
@@ -918,20 +921,21 @@ String? ttfFontFaceStyleName(Pointer<TtfFont> font) {
 ///
 /// \param font the font to query.
 /// \param ch the character code to check.
-/// \returns non-zero if font provides a glyph for this character, zero if not.
+/// \returns SDL_TRUE if font provides a glyph for this character, SDL_FALSE if
+/// not.
 ///
 /// \since This function is available since SDL_ttf 3.0.0.
 ///
 /// \sa TTF_GlyphIsProvided32
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL TTF_GlyphIsProvided(TTF_Font *font, Uint16 ch)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL TTF_GlyphIsProvided(TTF_Font *font, Uint16 ch)
 /// ```
-int ttfGlyphIsProvided(Pointer<TtfFont> font, int ch) {
+bool ttfGlyphIsProvided(Pointer<TtfFont> font, int ch) {
   final ttfGlyphIsProvidedLookupFunction = libSdl3Ttf.lookupFunction<
-      Int32 Function(Pointer<TtfFont> font, Uint16 ch),
+      Uint8 Function(Pointer<TtfFont> font, Uint16 ch),
       int Function(Pointer<TtfFont> font, int ch)>('TTF_GlyphIsProvided');
-  return ttfGlyphIsProvidedLookupFunction(font, ch);
+  return ttfGlyphIsProvidedLookupFunction(font, ch) == 1;
 }
 
 ///
@@ -944,18 +948,19 @@ int ttfGlyphIsProvided(Pointer<TtfFont> font, int ch) {
 ///
 /// \param font the font to query.
 /// \param ch the character code to check.
-/// \returns non-zero if font provides a glyph for this character, zero if not.
+/// \returns SDL_TRUE if font provides a glyph for this character, SDL_FALSE if
+/// not.
 ///
 /// \since This function is available since SDL_ttf 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL TTF_GlyphIsProvided32(TTF_Font *font, Uint32 ch)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL TTF_GlyphIsProvided32(TTF_Font *font, Uint32 ch)
 /// ```
-int ttfGlyphIsProvided32(Pointer<TtfFont> font, int ch) {
+bool ttfGlyphIsProvided32(Pointer<TtfFont> font, int ch) {
   final ttfGlyphIsProvided32LookupFunction = libSdl3Ttf.lookupFunction<
-      Int32 Function(Pointer<TtfFont> font, Uint32 ch),
+      Uint8 Function(Pointer<TtfFont> font, Uint32 ch),
       int Function(Pointer<TtfFont> font, int ch)>('TTF_GlyphIsProvided32');
-  return ttfGlyphIsProvided32LookupFunction(font, ch);
+  return ttfGlyphIsProvided32LookupFunction(font, ch) == 1;
 }
 
 ///
@@ -976,15 +981,17 @@ int ttfGlyphIsProvided32(Pointer<TtfFont> font, int ch) {
 ///
 /// \param font the font to query.
 /// \param ch the character code to check.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL_ttf 3.0.0.
 ///
 /// \sa TTF_GlyphMetrics32
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL TTF_GlyphMetrics(TTF_Font *font, Uint16 ch, int *minx, int *maxx, int *miny, int *maxy, int *advance)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL TTF_GlyphMetrics(TTF_Font *font, Uint16 ch, int *minx, int *maxx, int *miny, int *maxy, int *advance)
 /// ```
-int ttfGlyphMetrics(
+bool ttfGlyphMetrics(
     Pointer<TtfFont> font,
     int ch,
     Pointer<Int32> minx,
@@ -993,7 +1000,7 @@ int ttfGlyphMetrics(
     Pointer<Int32> maxy,
     Pointer<Int32> advance) {
   final ttfGlyphMetricsLookupFunction = libSdl3Ttf.lookupFunction<
-      Int32 Function(
+      Uint8 Function(
           Pointer<TtfFont> font,
           Uint16 ch,
           Pointer<Int32> minx,
@@ -1010,7 +1017,8 @@ int ttfGlyphMetrics(
           Pointer<Int32> maxy,
           Pointer<Int32> advance)>('TTF_GlyphMetrics');
   return ttfGlyphMetricsLookupFunction(
-      font, ch, minx, maxx, miny, maxy, advance);
+          font, ch, minx, maxx, miny, maxy, advance) ==
+      1;
 }
 
 ///
@@ -1027,13 +1035,15 @@ int ttfGlyphMetrics(
 ///
 /// \param font the font to query.
 /// \param ch the character code to check.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL_ttf 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL TTF_GlyphMetrics32(TTF_Font *font, Uint32 ch, int *minx, int *maxx, int *miny, int *maxy, int *advance)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL TTF_GlyphMetrics32(TTF_Font *font, Uint32 ch, int *minx, int *maxx, int *miny, int *maxy, int *advance)
 /// ```
-int ttfGlyphMetrics32(
+bool ttfGlyphMetrics32(
     Pointer<TtfFont> font,
     int ch,
     Pointer<Int32> minx,
@@ -1042,7 +1052,7 @@ int ttfGlyphMetrics32(
     Pointer<Int32> maxy,
     Pointer<Int32> advance) {
   final ttfGlyphMetrics32LookupFunction = libSdl3Ttf.lookupFunction<
-      Int32 Function(
+      Uint8 Function(
           Pointer<TtfFont> font,
           Uint32 ch,
           Pointer<Int32> minx,
@@ -1059,7 +1069,8 @@ int ttfGlyphMetrics32(
           Pointer<Int32> maxy,
           Pointer<Int32> advance)>('TTF_GlyphMetrics32');
   return ttfGlyphMetrics32LookupFunction(
-      font, ch, minx, maxx, miny, maxy, advance);
+          font, ch, minx, maxx, miny, maxy, advance) ==
+      1;
 }
 
 ///
@@ -1079,7 +1090,8 @@ int ttfGlyphMetrics32(
 /// \param text text to calculate, in Latin1 encoding.
 /// \param w will be filled with width, in pixels, on return.
 /// \param h will be filled with height, in pixels, on return.
-/// \returns 0 if successful, -1 on error.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL_ttf 3.0.0.
 ///
@@ -1087,17 +1099,17 @@ int ttfGlyphMetrics32(
 /// \sa TTF_SizeUNICODE
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL TTF_SizeText(TTF_Font *font, const char *text, int *w, int *h)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL TTF_SizeText(TTF_Font *font, const char *text, int *w, int *h)
 /// ```
-int ttfSizeText(
+bool ttfSizeText(
     Pointer<TtfFont> font, String? text, Pointer<Int32> w, Pointer<Int32> h) {
   final ttfSizeTextLookupFunction = libSdl3Ttf.lookupFunction<
-      Int32 Function(Pointer<TtfFont> font, Pointer<Utf8> text,
+      Uint8 Function(Pointer<TtfFont> font, Pointer<Utf8> text,
           Pointer<Int32> w, Pointer<Int32> h),
       int Function(Pointer<TtfFont> font, Pointer<Utf8> text, Pointer<Int32> w,
           Pointer<Int32> h)>('TTF_SizeText');
   final textPointer = text != null ? text.toNativeUtf8() : nullptr;
-  final result = ttfSizeTextLookupFunction(font, textPointer, w, h);
+  final result = ttfSizeTextLookupFunction(font, textPointer, w, h) == 1;
   calloc.free(textPointer);
   return result;
 }
@@ -1114,24 +1126,25 @@ int ttfSizeText(
 /// \param text text to calculate, in UTF-8 encoding.
 /// \param w will be filled with width, in pixels, on return.
 /// \param h will be filled with height, in pixels, on return.
-/// \returns 0 if successful, -1 on error.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL_ttf 3.0.0.
 ///
 /// \sa TTF_SizeUNICODE
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL TTF_SizeUTF8(TTF_Font *font, const char *text, int *w, int *h)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL TTF_SizeUTF8(TTF_Font *font, const char *text, int *w, int *h)
 /// ```
-int ttfSizeUtf8(
+bool ttfSizeUtf8(
     Pointer<TtfFont> font, String? text, Pointer<Int32> w, Pointer<Int32> h) {
   final ttfSizeUtf8LookupFunction = libSdl3Ttf.lookupFunction<
-      Int32 Function(Pointer<TtfFont> font, Pointer<Utf8> text,
+      Uint8 Function(Pointer<TtfFont> font, Pointer<Utf8> text,
           Pointer<Int32> w, Pointer<Int32> h),
       int Function(Pointer<TtfFont> font, Pointer<Utf8> text, Pointer<Int32> w,
           Pointer<Int32> h)>('TTF_SizeUTF8');
   final textPointer = text != null ? text.toNativeUtf8() : nullptr;
-  final result = ttfSizeUtf8LookupFunction(font, textPointer, w, h);
+  final result = ttfSizeUtf8LookupFunction(font, textPointer, w, h) == 1;
   calloc.free(textPointer);
   return result;
 }
@@ -1153,23 +1166,24 @@ int ttfSizeUtf8(
 /// \param text text to calculate, in UCS-2 encoding.
 /// \param w will be filled with width, in pixels, on return.
 /// \param h will be filled with height, in pixels, on return.
-/// \returns 0 if successful, -1 on error.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL_ttf 3.0.0.
 ///
 /// \sa TTF_SizeUTF8
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL TTF_SizeUNICODE(TTF_Font *font, const Uint16 *text, int *w, int *h)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL TTF_SizeUNICODE(TTF_Font *font, const Uint16 *text, int *w, int *h)
 /// ```
-int ttfSizeUnicode(Pointer<TtfFont> font, Pointer<Uint16> text,
+bool ttfSizeUnicode(Pointer<TtfFont> font, Pointer<Uint16> text,
     Pointer<Int32> w, Pointer<Int32> h) {
   final ttfSizeUnicodeLookupFunction = libSdl3Ttf.lookupFunction<
-      Int32 Function(Pointer<TtfFont> font, Pointer<Uint16> text,
+      Uint8 Function(Pointer<TtfFont> font, Pointer<Uint16> text,
           Pointer<Int32> w, Pointer<Int32> h),
       int Function(Pointer<TtfFont> font, Pointer<Uint16> text,
           Pointer<Int32> w, Pointer<Int32> h)>('TTF_SizeUNICODE');
-  return ttfSizeUnicodeLookupFunction(font, text, w, h);
+  return ttfSizeUnicodeLookupFunction(font, text, w, h) == 1;
 }
 
 ///
@@ -1191,7 +1205,8 @@ int ttfSizeUnicode(Pointer<TtfFont> font, Pointer<Uint16> text,
 /// \param extent on return, filled with latest calculated width.
 /// \param count on return, filled with number of characters that can be
 /// rendered.
-/// \returns 0 if successful, -1 on error.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL_ttf 3.0.0.
 ///
@@ -1200,18 +1215,19 @@ int ttfSizeUnicode(Pointer<TtfFont> font, Pointer<Uint16> text,
 /// \sa TTF_MeasureUNICODE
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL TTF_MeasureText(TTF_Font *font, const char *text, int measure_width, int *extent, int *count)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL TTF_MeasureText(TTF_Font *font, const char *text, int measure_width, int *extent, int *count)
 /// ```
-int ttfMeasureText(Pointer<TtfFont> font, String? text, int measureWidth,
+bool ttfMeasureText(Pointer<TtfFont> font, String? text, int measureWidth,
     Pointer<Int32> extent, Pointer<Int32> count) {
   final ttfMeasureTextLookupFunction = libSdl3Ttf.lookupFunction<
-      Int32 Function(Pointer<TtfFont> font, Pointer<Utf8> text,
+      Uint8 Function(Pointer<TtfFont> font, Pointer<Utf8> text,
           Int32 measureWidth, Pointer<Int32> extent, Pointer<Int32> count),
       int Function(Pointer<TtfFont> font, Pointer<Utf8> text, int measureWidth,
           Pointer<Int32> extent, Pointer<Int32> count)>('TTF_MeasureText');
   final textPointer = text != null ? text.toNativeUtf8() : nullptr;
   final result = ttfMeasureTextLookupFunction(
-      font, textPointer, measureWidth, extent, count);
+          font, textPointer, measureWidth, extent, count) ==
+      1;
   calloc.free(textPointer);
   return result;
 }
@@ -1230,7 +1246,8 @@ int ttfMeasureText(Pointer<TtfFont> font, String? text, int measureWidth,
 /// \param extent on return, filled with latest calculated width.
 /// \param count on return, filled with number of characters that can be
 /// rendered.
-/// \returns 0 if successful, -1 on error.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL_ttf 3.0.0.
 ///
@@ -1239,18 +1256,19 @@ int ttfMeasureText(Pointer<TtfFont> font, String? text, int measureWidth,
 /// \sa TTF_MeasureUNICODE
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL TTF_MeasureUTF8(TTF_Font *font, const char *text, int measure_width, int *extent, int *count)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL TTF_MeasureUTF8(TTF_Font *font, const char *text, int measure_width, int *extent, int *count)
 /// ```
-int ttfMeasureUtf8(Pointer<TtfFont> font, String? text, int measureWidth,
+bool ttfMeasureUtf8(Pointer<TtfFont> font, String? text, int measureWidth,
     Pointer<Int32> extent, Pointer<Int32> count) {
   final ttfMeasureUtf8LookupFunction = libSdl3Ttf.lookupFunction<
-      Int32 Function(Pointer<TtfFont> font, Pointer<Utf8> text,
+      Uint8 Function(Pointer<TtfFont> font, Pointer<Utf8> text,
           Int32 measureWidth, Pointer<Int32> extent, Pointer<Int32> count),
       int Function(Pointer<TtfFont> font, Pointer<Utf8> text, int measureWidth,
           Pointer<Int32> extent, Pointer<Int32> count)>('TTF_MeasureUTF8');
   final textPointer = text != null ? text.toNativeUtf8() : nullptr;
   final result = ttfMeasureUtf8LookupFunction(
-      font, textPointer, measureWidth, extent, count);
+          font, textPointer, measureWidth, extent, count) ==
+      1;
   calloc.free(textPointer);
   return result;
 }
@@ -1274,7 +1292,8 @@ int ttfMeasureUtf8(Pointer<TtfFont> font, String? text, int measureWidth,
 /// \param extent on return, filled with latest calculated width.
 /// \param count on return, filled with number of characters that can be
 /// rendered.
-/// \returns 0 if successful, -1 on error.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL_ttf 3.0.0.
 ///
@@ -1283,12 +1302,12 @@ int ttfMeasureUtf8(Pointer<TtfFont> font, String? text, int measureWidth,
 /// \sa TTF_MeasureUNICODE
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL TTF_MeasureUNICODE(TTF_Font *font, const Uint16 *text, int measure_width, int *extent, int *count)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL TTF_MeasureUNICODE(TTF_Font *font, const Uint16 *text, int measure_width, int *extent, int *count)
 /// ```
-int ttfMeasureUnicode(Pointer<TtfFont> font, Pointer<Uint16> text,
+bool ttfMeasureUnicode(Pointer<TtfFont> font, Pointer<Uint16> text,
     int measureWidth, Pointer<Int32> extent, Pointer<Int32> count) {
   final ttfMeasureUnicodeLookupFunction = libSdl3Ttf.lookupFunction<
-      Int32 Function(Pointer<TtfFont> font, Pointer<Uint16> text,
+      Uint8 Function(Pointer<TtfFont> font, Pointer<Uint16> text,
           Int32 measureWidth, Pointer<Int32> extent, Pointer<Int32> count),
       int Function(
           Pointer<TtfFont> font,
@@ -1297,7 +1316,8 @@ int ttfMeasureUnicode(Pointer<TtfFont> font, Pointer<Uint16> text,
           Pointer<Int32> extent,
           Pointer<Int32> count)>('TTF_MeasureUNICODE');
   return ttfMeasureUnicodeLookupFunction(
-      font, text, measureWidth, extent, count);
+          font, text, measureWidth, extent, count) ==
+      1;
 }
 
 ///
@@ -2927,22 +2947,22 @@ int ttfGetFontKerningSizeGlyphs32(
 /// This clears already-generated glyphs, if any, from the cache.
 ///
 /// \param font the font to set SDF support on.
-/// \param on_off SDL_TRUE to enable SDF, SDL_FALSE to disable.
-///
-/// \returns 0 on success, -1 on error.
+/// \param enabled SDL_TRUE to enable SDF, SDL_FALSE to disable.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL_ttf 3.0.0.
 ///
 /// \sa TTF_GetFontSDF
 ///
 /// ```c
-/// extern SDL_DECLSPEC int TTF_SetFontSDF(TTF_Font *font, SDL_bool on_off)
+/// extern SDL_DECLSPEC SDL_bool TTF_SetFontSDF(TTF_Font *font, SDL_bool enabled)
 /// ```
-int ttfSetFontSdf(Pointer<TtfFont> font, bool onOff) {
+bool ttfSetFontSdf(Pointer<TtfFont> font, bool enabled) {
   final ttfSetFontSdfLookupFunction = libSdl3Ttf.lookupFunction<
-      Int32 Function(Pointer<TtfFont> font, Int32 onOff),
-      int Function(Pointer<TtfFont> font, int onOff)>('TTF_SetFontSDF');
-  return ttfSetFontSdfLookupFunction(font, onOff ? 1 : 0);
+      Uint8 Function(Pointer<TtfFont> font, Uint8 enabled),
+      int Function(Pointer<TtfFont> font, int enabled)>('TTF_SetFontSDF');
+  return ttfSetFontSdfLookupFunction(font, enabled ? 1 : 0) == 1;
 }
 
 ///
@@ -2961,7 +2981,7 @@ int ttfSetFontSdf(Pointer<TtfFont> font, bool onOff) {
 /// ```
 bool ttfGetFontSdf(Pointer<TtfFont> font) {
   final ttfGetFontSdfLookupFunction = libSdl3Ttf.lookupFunction<
-      Int32 Function(Pointer<TtfFont> font),
+      Uint8 Function(Pointer<TtfFont> font),
       int Function(Pointer<TtfFont> font)>('TTF_GetFontSDF');
   return ttfGetFontSdfLookupFunction(font) == 1;
 }
@@ -2980,19 +3000,20 @@ bool ttfGetFontSdf(Pointer<TtfFont> font) {
 ///
 /// \param font the font to specify a direction for.
 /// \param direction the new direction for text to flow.
-/// \returns 0 on success, or -1 on error.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL_ttf 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL TTF_SetFontDirection(TTF_Font *font, TTF_Direction direction)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL TTF_SetFontDirection(TTF_Font *font, TTF_Direction direction)
 /// ```
-int ttfSetFontDirection(Pointer<TtfFont> font, int direction) {
+bool ttfSetFontDirection(Pointer<TtfFont> font, int direction) {
   final ttfSetFontDirectionLookupFunction = libSdl3Ttf.lookupFunction<
-      Int32 Function(Pointer<TtfFont> font, Int32 direction),
+      Uint8 Function(Pointer<TtfFont> font, Int32 direction),
       int Function(
           Pointer<TtfFont> font, int direction)>('TTF_SetFontDirection');
-  return ttfSetFontDirectionLookupFunction(font, direction);
+  return ttfSetFontDirectionLookupFunction(font, direction) == 1;
 }
 
 ///
@@ -3005,20 +3026,21 @@ int ttfSetFontDirection(Pointer<TtfFont> font, int direction) {
 ///
 /// \param font the font to specify a script name for.
 /// \param script null-terminated string of exactly 4 characters.
-/// \returns 0 on success, or -1 on error.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL_ttf 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL TTF_SetFontScriptName(TTF_Font *font, const char *script)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL TTF_SetFontScriptName(TTF_Font *font, const char *script)
 /// ```
-int ttfSetFontScriptName(Pointer<TtfFont> font, String? script) {
+bool ttfSetFontScriptName(Pointer<TtfFont> font, String? script) {
   final ttfSetFontScriptNameLookupFunction = libSdl3Ttf.lookupFunction<
-      Int32 Function(Pointer<TtfFont> font, Pointer<Utf8> script),
+      Uint8 Function(Pointer<TtfFont> font, Pointer<Utf8> script),
       int Function(Pointer<TtfFont> font,
           Pointer<Utf8> script)>('TTF_SetFontScriptName');
   final scriptPointer = script != null ? script.toNativeUtf8() : nullptr;
-  final result = ttfSetFontScriptNameLookupFunction(font, scriptPointer);
+  final result = ttfSetFontScriptNameLookupFunction(font, scriptPointer) == 1;
   calloc.free(scriptPointer);
   return result;
 }
@@ -3030,21 +3052,23 @@ int ttfSetFontScriptName(Pointer<TtfFont> font, String? script) {
 ///
 /// \param font the font to specify a language for.
 /// \param language_bcp47 a null-terminated string containing the desired language's BCP47 code. Or null to reset the value.
-/// \returns 0 on success, or -1 on error.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL_ttf 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC int TTF_SetFontLanguage(TTF_Font *font, const char *language_bcp47)
+/// extern SDL_DECLSPEC SDL_bool TTF_SetFontLanguage(TTF_Font *font, const char *language_bcp47)
 /// ```
-int ttfSetFontLanguage(Pointer<TtfFont> font, String? languageBcp47) {
+bool ttfSetFontLanguage(Pointer<TtfFont> font, String? languageBcp47) {
   final ttfSetFontLanguageLookupFunction = libSdl3Ttf.lookupFunction<
-      Int32 Function(Pointer<TtfFont> font, Pointer<Utf8> languageBcp47),
+      Uint8 Function(Pointer<TtfFont> font, Pointer<Utf8> languageBcp47),
       int Function(Pointer<TtfFont> font,
           Pointer<Utf8> languageBcp47)>('TTF_SetFontLanguage');
   final languageBcp47Pointer =
       languageBcp47 != null ? languageBcp47.toNativeUtf8() : nullptr;
-  final result = ttfSetFontLanguageLookupFunction(font, languageBcp47Pointer);
+  final result =
+      ttfSetFontLanguageLookupFunction(font, languageBcp47Pointer) == 1;
   calloc.free(languageBcp47Pointer);
   return result;
 }
@@ -3067,7 +3091,7 @@ int ttfSetFontLanguage(Pointer<TtfFont> font, String? languageBcp47) {
 /// ```
 bool ttfIsFontScalable(Pointer<TtfFont> font) {
   final ttfIsFontScalableLookupFunction = libSdl3Ttf.lookupFunction<
-      Int32 Function(Pointer<TtfFont> font),
+      Uint8 Function(Pointer<TtfFont> font),
       int Function(Pointer<TtfFont> font)>('TTF_IsFontScalable');
   return ttfIsFontScalableLookupFunction(font) == 1;
 }

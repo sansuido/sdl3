@@ -31,24 +31,24 @@ import 'struct_sdl.dart';
 /// other options.
 /// \param buttonid the pointer to which user id of hit button should be
 /// copied.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_ShowSimpleMessageBox
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_ShowMessageBox(const SDL_MessageBoxData *messageboxdata, int *buttonid)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_ShowMessageBox(const SDL_MessageBoxData *messageboxdata, int *buttonid)
 /// ```
-int sdlShowMessageBox(
+bool sdlShowMessageBox(
     Pointer<SdlMessageBoxData> messageboxdata, Pointer<Int32> buttonid) {
   final sdlShowMessageBoxLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(
+      Uint8 Function(
           Pointer<SdlMessageBoxData> messageboxdata, Pointer<Int32> buttonid),
       int Function(Pointer<SdlMessageBoxData> messageboxdata,
           Pointer<Int32> buttonid)>('SDL_ShowMessageBox');
-  return sdlShowMessageBoxLookupFunction(messageboxdata, buttonid);
+  return sdlShowMessageBoxLookupFunction(messageboxdata, buttonid) == 1;
 }
 
 ///
@@ -84,27 +84,28 @@ int sdlShowMessageBox(
 /// \param title uTF-8 title text.
 /// \param message uTF-8 message text.
 /// \param window the parent window, or NULL for no parent.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_ShowMessageBox
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_ShowSimpleMessageBox(SDL_MessageBoxFlags flags, const char *title, const char *message, SDL_Window *window)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_ShowSimpleMessageBox(SDL_MessageBoxFlags flags, const char *title, const char *message, SDL_Window *window)
 /// ```
-int sdlShowSimpleMessageBox(
+bool sdlShowSimpleMessageBox(
     int flags, String? title, String? message, Pointer<SdlWindow> window) {
   final sdlShowSimpleMessageBoxLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Uint32 flags, Pointer<Utf8> title, Pointer<Utf8> message,
+      Uint8 Function(Uint32 flags, Pointer<Utf8> title, Pointer<Utf8> message,
           Pointer<SdlWindow> window),
       int Function(int flags, Pointer<Utf8> title, Pointer<Utf8> message,
           Pointer<SdlWindow> window)>('SDL_ShowSimpleMessageBox');
   final titlePointer = title != null ? title.toNativeUtf8() : nullptr;
   final messagePointer = message != null ? message.toNativeUtf8() : nullptr;
   final result = sdlShowSimpleMessageBoxLookupFunction(
-      flags, titlePointer, messagePointer, window);
+          flags, titlePointer, messagePointer, window) ==
+      1;
   calloc.free(titlePointer);
   calloc.free(messagePointer);
   return result;

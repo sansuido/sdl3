@@ -44,21 +44,21 @@ class WavExample {
   int get device => sdlGetAudioStreamDevice(stream);
 
   bool load(String filename) {
-    int stat = 0;
+    bool stat = true;
     var rwops = sdlIoFromFile(filename, 'rb');
     if (rwops != nullptr) {
       var wavSpec = calloc<SdlAudioSpec>();
       var wavLength = calloc<Uint32>();
       var wavBuffer = calloc<Pointer<Uint8>>();
       stat = sdlLoadWavIo(rwops, true, wavSpec, wavBuffer, wavLength);
-      if (stat == 0) {
+      if (stat == true) {
         stream = sdlOpenAudioDeviceStream(
             SDL_AUDIO_DEVICE_DEFAULT_OUTPUT, wavSpec, nullptr, nullptr);
         if (stream != nullptr) {
           stat =
               sdlPutAudioStreamData(stream, wavBuffer.value, wavLength.value);
         } else {
-          stat = -1;
+          stat = false;
         }
         sdlFree(wavBuffer.value);
       }
@@ -66,20 +66,20 @@ class WavExample {
       wavLength.callocFree();
       wavSpec.callocFree();
     } else {
-      stat = -1;
+      stat = false;
     }
-    return stat == 0;
+    return stat;
   }
 
   bool paused() {
     return sdlAudioDevicePaused(device);
   }
 
-  int resume() {
+  bool resume() {
     return sdlResumeAudioDevice(device);
   }
 
-  int pause() {
+  bool pause() {
     return sdlPauseAudioDevice(device);
   }
 
@@ -96,7 +96,7 @@ class WavExample {
 
 int main() {
   // Initialize SDL
-  if (sdlInit(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0) {
+  if (sdlInit(SDL_INIT_VIDEO | SDL_INIT_AUDIO) == false) {
     print('SDL could not be initialized!\n'
         'SDL_Error: ${sdlGetError()}%s\n');
     return 0;

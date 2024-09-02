@@ -9,7 +9,7 @@ const gScreenWidth = 800;
 const gScreenHeight = 600;
 
 int main() {
-  if (sdlInit(SDL_INIT_VIDEO) < 0) {
+  if (sdlInit(SDL_INIT_VIDEO) == false) {
     print(sdlGetError());
     return -1;
   }

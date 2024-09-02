@@ -55,21 +55,21 @@ int sdlCreateProperties() {
 ///
 /// \param src the properties to copy.
 /// \param dst the destination properties.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_CopyProperties(SDL_PropertiesID src, SDL_PropertiesID dst)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_CopyProperties(SDL_PropertiesID src, SDL_PropertiesID dst)
 /// ```
-int sdlCopyProperties(int src, int dst) {
+bool sdlCopyProperties(int src, int dst) {
   final sdlCopyPropertiesLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Uint32 src, Uint32 dst),
+      Uint8 Function(Uint32 src, Uint32 dst),
       int Function(int src, int dst)>('SDL_CopyProperties');
-  return sdlCopyPropertiesLookupFunction(src, dst);
+  return sdlCopyPropertiesLookupFunction(src, dst) == 1;
 }
 
 ///
@@ -85,8 +85,8 @@ int sdlCopyProperties(int src, int dst) {
 /// thread.
 ///
 /// \param props the properties to lock.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -95,13 +95,13 @@ int sdlCopyProperties(int src, int dst) {
 /// \sa SDL_UnlockProperties
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_LockProperties(SDL_PropertiesID props)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_LockProperties(SDL_PropertiesID props)
 /// ```
-int sdlLockProperties(int props) {
+bool sdlLockProperties(int props) {
   final sdlLockPropertiesLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Uint32 props),
+      Uint8 Function(Uint32 props),
       int Function(int props)>('SDL_LockProperties');
-  return sdlLockPropertiesLookupFunction(props);
+  return sdlLockPropertiesLookupFunction(props) == 1;
 }
 
 ///
@@ -143,8 +143,8 @@ void sdlUnlockProperties(int props) {
 /// \param cleanup the function to call when this property is deleted, or NULL
 /// if no cleanup is necessary.
 /// \param userdata a pointer that is passed to the cleanup function.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -155,16 +155,16 @@ void sdlUnlockProperties(int props) {
 /// \sa SDL_CleanupPropertyCallback
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_SetPointerPropertyWithCleanup(SDL_PropertiesID props, const char *name, void *value, SDL_CleanupPropertyCallback cleanup, void *userdata)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetPointerPropertyWithCleanup(SDL_PropertiesID props, const char *name, void *value, SDL_CleanupPropertyCallback cleanup, void *userdata)
 /// ```
-int sdlSetPointerPropertyWithCleanup(
+bool sdlSetPointerPropertyWithCleanup(
     int props,
     String? name,
     Pointer<NativeType> value,
     Pointer<NativeFunction<SdlCleanupPropertyCallback>> cleanup,
     Pointer<NativeType> userdata) {
   final sdlSetPointerPropertyWithCleanupLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(
+      Uint8 Function(
           Uint32 props,
           Pointer<Utf8> name,
           Pointer<NativeType> value,
@@ -178,7 +178,8 @@ int sdlSetPointerPropertyWithCleanup(
           Pointer<NativeType> userdata)>('SDL_SetPointerPropertyWithCleanup');
   final namePointer = name != null ? name.toNativeUtf8() : nullptr;
   final result = sdlSetPointerPropertyWithCleanupLookupFunction(
-      props, namePointer, value, cleanup, userdata);
+          props, namePointer, value, cleanup, userdata) ==
+      1;
   calloc.free(namePointer);
   return result;
 }
@@ -189,8 +190,8 @@ int sdlSetPointerPropertyWithCleanup(
 /// \param props the properties to modify.
 /// \param name the name of the property to modify.
 /// \param value the new value of the property, or NULL to delete the property.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -205,16 +206,17 @@ int sdlSetPointerPropertyWithCleanup(
 /// \sa SDL_SetStringProperty
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_SetPointerProperty(SDL_PropertiesID props, const char *name, void *value)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetPointerProperty(SDL_PropertiesID props, const char *name, void *value)
 /// ```
-int sdlSetPointerProperty(int props, String? name, Pointer<NativeType> value) {
+bool sdlSetPointerProperty(int props, String? name, Pointer<NativeType> value) {
   final sdlSetPointerPropertyLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(
+      Uint8 Function(
           Uint32 props, Pointer<Utf8> name, Pointer<NativeType> value),
       int Function(int props, Pointer<Utf8> name,
           Pointer<NativeType> value)>('SDL_SetPointerProperty');
   final namePointer = name != null ? name.toNativeUtf8() : nullptr;
-  final result = sdlSetPointerPropertyLookupFunction(props, namePointer, value);
+  final result =
+      sdlSetPointerPropertyLookupFunction(props, namePointer, value) == 1;
   calloc.free(namePointer);
   return result;
 }
@@ -228,8 +230,8 @@ int sdlSetPointerProperty(int props, String? name, Pointer<NativeType> value) {
 /// \param props the properties to modify.
 /// \param name the name of the property to modify.
 /// \param value the new value of the property, or NULL to delete the property.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -238,17 +240,17 @@ int sdlSetPointerProperty(int props, String? name, Pointer<NativeType> value) {
 /// \sa SDL_GetStringProperty
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_SetStringProperty(SDL_PropertiesID props, const char *name, const char *value)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetStringProperty(SDL_PropertiesID props, const char *name, const char *value)
 /// ```
-int sdlSetStringProperty(int props, String? name, String? value) {
+bool sdlSetStringProperty(int props, String? name, String? value) {
   final sdlSetStringPropertyLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Uint32 props, Pointer<Utf8> name, Pointer<Utf8> value),
+      Uint8 Function(Uint32 props, Pointer<Utf8> name, Pointer<Utf8> value),
       int Function(int props, Pointer<Utf8> name,
           Pointer<Utf8> value)>('SDL_SetStringProperty');
   final namePointer = name != null ? name.toNativeUtf8() : nullptr;
   final valuePointer = value != null ? value.toNativeUtf8() : nullptr;
   final result =
-      sdlSetStringPropertyLookupFunction(props, namePointer, valuePointer);
+      sdlSetStringPropertyLookupFunction(props, namePointer, valuePointer) == 1;
   calloc.free(namePointer);
   calloc.free(valuePointer);
   return result;
@@ -260,8 +262,8 @@ int sdlSetStringProperty(int props, String? name, String? value) {
 /// \param props the properties to modify.
 /// \param name the name of the property to modify.
 /// \param value the new value of the property.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -270,15 +272,16 @@ int sdlSetStringProperty(int props, String? name, String? value) {
 /// \sa SDL_GetNumberProperty
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_SetNumberProperty(SDL_PropertiesID props, const char *name, Sint64 value)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetNumberProperty(SDL_PropertiesID props, const char *name, Sint64 value)
 /// ```
-int sdlSetNumberProperty(int props, String? name, int value) {
+bool sdlSetNumberProperty(int props, String? name, int value) {
   final sdlSetNumberPropertyLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Uint32 props, Pointer<Utf8> name, Int64 value),
+      Uint8 Function(Uint32 props, Pointer<Utf8> name, Int64 value),
       int Function(
           int props, Pointer<Utf8> name, int value)>('SDL_SetNumberProperty');
   final namePointer = name != null ? name.toNativeUtf8() : nullptr;
-  final result = sdlSetNumberPropertyLookupFunction(props, namePointer, value);
+  final result =
+      sdlSetNumberPropertyLookupFunction(props, namePointer, value) == 1;
   calloc.free(namePointer);
   return result;
 }
@@ -289,8 +292,8 @@ int sdlSetNumberProperty(int props, String? name, int value) {
 /// \param props the properties to modify.
 /// \param name the name of the property to modify.
 /// \param value the new value of the property.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -299,15 +302,16 @@ int sdlSetNumberProperty(int props, String? name, int value) {
 /// \sa SDL_GetFloatProperty
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_SetFloatProperty(SDL_PropertiesID props, const char *name, float value)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetFloatProperty(SDL_PropertiesID props, const char *name, float value)
 /// ```
-int sdlSetFloatProperty(int props, String? name, double value) {
+bool sdlSetFloatProperty(int props, String? name, double value) {
   final sdlSetFloatPropertyLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Uint32 props, Pointer<Utf8> name, Float value),
+      Uint8 Function(Uint32 props, Pointer<Utf8> name, Float value),
       int Function(
           int props, Pointer<Utf8> name, double value)>('SDL_SetFloatProperty');
   final namePointer = name != null ? name.toNativeUtf8() : nullptr;
-  final result = sdlSetFloatPropertyLookupFunction(props, namePointer, value);
+  final result =
+      sdlSetFloatPropertyLookupFunction(props, namePointer, value) == 1;
   calloc.free(namePointer);
   return result;
 }
@@ -318,8 +322,8 @@ int sdlSetFloatProperty(int props, String? name, double value) {
 /// \param props the properties to modify.
 /// \param name the name of the property to modify.
 /// \param value the new value of the property.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -328,16 +332,17 @@ int sdlSetFloatProperty(int props, String? name, double value) {
 /// \sa SDL_GetBooleanProperty
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_SetBooleanProperty(SDL_PropertiesID props, const char *name, SDL_bool value)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetBooleanProperty(SDL_PropertiesID props, const char *name, SDL_bool value)
 /// ```
-int sdlSetBooleanProperty(int props, String? name, bool value) {
+bool sdlSetBooleanProperty(int props, String? name, bool value) {
   final sdlSetBooleanPropertyLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Uint32 props, Pointer<Utf8> name, Int32 value),
+      Uint8 Function(Uint32 props, Pointer<Utf8> name, Uint8 value),
       int Function(
           int props, Pointer<Utf8> name, int value)>('SDL_SetBooleanProperty');
   final namePointer = name != null ? name.toNativeUtf8() : nullptr;
   final result =
-      sdlSetBooleanPropertyLookupFunction(props, namePointer, value ? 1 : 0);
+      sdlSetBooleanPropertyLookupFunction(props, namePointer, value ? 1 : 0) ==
+          1;
   calloc.free(namePointer);
   return result;
 }
@@ -360,7 +365,7 @@ int sdlSetBooleanProperty(int props, String? name, bool value) {
 /// ```
 bool sdlHasProperty(int props, String? name) {
   final sdlHasPropertyLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Uint32 props, Pointer<Utf8> name),
+      Uint8 Function(Uint32 props, Pointer<Utf8> name),
       int Function(int props, Pointer<Utf8> name)>('SDL_HasProperty');
   final namePointer = name != null ? name.toNativeUtf8() : nullptr;
   final result = sdlHasPropertyLookupFunction(props, namePointer) == 1;
@@ -582,7 +587,7 @@ double sdlGetFloatProperty(int props, String? name, double defaultValue) {
 /// ```
 bool sdlGetBooleanProperty(int props, String? name, bool defaultValue) {
   final sdlGetBooleanPropertyLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Uint32 props, Pointer<Utf8> name, Int32 defaultValue),
+      Uint8 Function(Uint32 props, Pointer<Utf8> name, Uint8 defaultValue),
       int Function(int props, Pointer<Utf8> name,
           int defaultValue)>('SDL_GetBooleanProperty');
   final namePointer = name != null ? name.toNativeUtf8() : nullptr;
@@ -598,22 +603,22 @@ bool sdlGetBooleanProperty(int props, String? name, bool defaultValue) {
 ///
 /// \param props the properties to modify.
 /// \param name the name of the property to clear.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_ClearProperty(SDL_PropertiesID props, const char *name)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_ClearProperty(SDL_PropertiesID props, const char *name)
 /// ```
-int sdlClearProperty(int props, String? name) {
+bool sdlClearProperty(int props, String? name) {
   final sdlClearPropertyLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Uint32 props, Pointer<Utf8> name),
+      Uint8 Function(Uint32 props, Pointer<Utf8> name),
       int Function(int props, Pointer<Utf8> name)>('SDL_ClearProperty');
   final namePointer = name != null ? name.toNativeUtf8() : nullptr;
-  final result = sdlClearPropertyLookupFunction(props, namePointer);
+  final result = sdlClearPropertyLookupFunction(props, namePointer) == 1;
   calloc.free(namePointer);
   return result;
 }
@@ -627,22 +632,22 @@ int sdlClearProperty(int props, String? name) {
 /// \param props the properties to query.
 /// \param callback the function to call for each property.
 /// \param userdata a pointer that is passed to `callback`.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_EnumerateProperties(SDL_PropertiesID props, SDL_EnumeratePropertiesCallback callback, void *userdata)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_EnumerateProperties(SDL_PropertiesID props, SDL_EnumeratePropertiesCallback callback, void *userdata)
 /// ```
-int sdlEnumerateProperties(
+bool sdlEnumerateProperties(
     int props,
     Pointer<NativeFunction<SdlEnumeratePropertiesCallback>> callback,
     Pointer<NativeType> userdata) {
   final sdlEnumeratePropertiesLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(
+      Uint8 Function(
           Uint32 props,
           Pointer<NativeFunction<SdlEnumeratePropertiesCallback>> callback,
           Pointer<NativeType> userdata),
@@ -650,7 +655,7 @@ int sdlEnumerateProperties(
           int props,
           Pointer<NativeFunction<SdlEnumeratePropertiesCallback>> callback,
           Pointer<NativeType> userdata)>('SDL_EnumerateProperties');
-  return sdlEnumeratePropertiesLookupFunction(props, callback, userdata);
+  return sdlEnumeratePropertiesLookupFunction(props, callback, userdata) == 1;
 }
 
 ///

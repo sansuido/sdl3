@@ -4,9 +4,14 @@ import 'package:ffi/ffi.dart';
 
 // SDL_AssertData
 final class SdlAssertData extends Struct {
-  // [0]+(4)
-  @Int32()
+  // [0]+(1)
+  @Uint8()
   external int alwaysIgnore;
+  // [] +(3)
+  @Uint16()
+  external int blank_1;
+  @Uint8()
+  external int blank_2;
   // [4]+(4)
   @Uint32()
   external int triggerCount;
@@ -19,7 +24,7 @@ final class SdlAssertData extends Struct {
   external int linenum;
   // [] +(4)
   @Uint32()
-  external int blank_1;
+  external int blank_3;
   // [32]+(8)
   external Pointer<Utf8> function;
   // [40]+(8)
@@ -262,12 +267,16 @@ final class SdlTextEditingCandidatesEvent extends Struct {
   // [36]+(4)
   @Int32()
   external int selectedCandidate;
-  // [40]+(4)
-  @Int32()
+  // [40]+(1)
+  @Uint8()
   external int horizontal;
-  // [] +(4)
+  // [] +(7)
   @Uint32()
   external int blank_2;
+  @Uint16()
+  external int blank_3;
+  @Uint8()
+  external int blank_4;
 }
 
 // SDL_TextInputEvent
@@ -1259,6 +1268,929 @@ final class SdlGamepadBinding extends Struct {
   external Pointer<NativeType> output;
 }
 
+// SDL_GPUDevice
+final class SdlGpuDevice extends Opaque {}
+
+// SDL_GPUBuffer
+final class SdlGpuBuffer extends Opaque {}
+
+// SDL_GPUTransferBuffer
+final class SdlGpuTransferBuffer extends Opaque {}
+
+// SDL_GPUTexture
+final class SdlGpuTexture extends Opaque {}
+
+// SDL_GPUSampler
+final class SdlGpuSampler extends Opaque {}
+
+// SDL_GPUShader
+final class SdlGpuShader extends Opaque {}
+
+// SDL_GPUComputePipeline
+final class SdlGpuComputePipeline extends Opaque {}
+
+// SDL_GPUGraphicsPipeline
+final class SdlGpuGraphicsPipeline extends Opaque {}
+
+// SDL_GPUCommandBuffer
+final class SdlGpuCommandBuffer extends Opaque {}
+
+// SDL_GPURenderPass
+final class SdlGpuRenderPass extends Opaque {}
+
+// SDL_GPUComputePass
+final class SdlGpuComputePass extends Opaque {}
+
+// SDL_GPUCopyPass
+final class SdlGpuCopyPass extends Opaque {}
+
+// SDL_GPUFence
+final class SdlGpuFence extends Opaque {}
+
+// SDL_GPUDepthStencilValue
+final class SdlGpuDepthStencilValue extends Struct {
+  // [0]+(4)
+  @Float()
+  external double depth;
+  // [4]+(1)
+  @Uint8()
+  external int stencil;
+  // [] +(3)
+  @Uint16()
+  external int blank_1;
+  @Uint8()
+  external int blank_2;
+}
+
+// SDL_GPUViewport
+final class SdlGpuViewport extends Struct {
+  // [0]+(4)
+  @Float()
+  external double x;
+  // [4]+(4)
+  @Float()
+  external double y;
+  // [8]+(4)
+  @Float()
+  external double w;
+  // [12]+(4)
+  @Float()
+  external double h;
+  // [16]+(4)
+  @Float()
+  external double minDepth;
+  // [20]+(4)
+  @Float()
+  external double maxDepth;
+}
+
+// SDL_GPUTextureTransferInfo
+final class SdlGpuTextureTransferInfo extends Struct {
+  // [0]+(8)
+  external Pointer<SdlGpuTransferBuffer> transferBuffer;
+  // [8]+(4)
+  @Uint32()
+  external int offset;
+  // [12]+(4)
+  @Uint32()
+  external int imagePitch;
+  // [16]+(4)
+  @Uint32()
+  external int imageHeight;
+  // [] +(4)
+  @Uint32()
+  external int blank_1;
+}
+
+// SDL_GPUTransferBufferLocation
+final class SdlGpuTransferBufferLocation extends Struct {
+  // [0]+(8)
+  external Pointer<SdlGpuTransferBuffer> transferBuffer;
+  // [8]+(4)
+  @Uint32()
+  external int offset;
+  // [] +(4)
+  @Uint32()
+  external int blank_1;
+}
+
+// SDL_GPUTextureLocation
+final class SdlGpuTextureLocation extends Struct {
+  // [0]+(8)
+  external Pointer<SdlGpuTexture> texture;
+  // [8]+(4)
+  @Uint32()
+  external int mipLevel;
+  // [12]+(4)
+  @Uint32()
+  external int layer;
+  // [16]+(4)
+  @Uint32()
+  external int x;
+  // [20]+(4)
+  @Uint32()
+  external int y;
+  // [24]+(4)
+  @Uint32()
+  external int z;
+  // [] +(4)
+  @Uint32()
+  external int blank_1;
+}
+
+// SDL_GPUTextureRegion
+final class SdlGpuTextureRegion extends Struct {
+  // [0]+(8)
+  external Pointer<SdlGpuTexture> texture;
+  // [8]+(4)
+  @Uint32()
+  external int mipLevel;
+  // [12]+(4)
+  @Uint32()
+  external int layer;
+  // [16]+(4)
+  @Uint32()
+  external int x;
+  // [20]+(4)
+  @Uint32()
+  external int y;
+  // [24]+(4)
+  @Uint32()
+  external int z;
+  // [28]+(4)
+  @Uint32()
+  external int w;
+  // [32]+(4)
+  @Uint32()
+  external int h;
+  // [36]+(4)
+  @Uint32()
+  external int d;
+}
+
+// SDL_GPUBlitRegion
+final class SdlGpuBlitRegion extends Struct {
+  // [0]+(8)
+  external Pointer<SdlGpuTexture> texture;
+  // [8]+(4)
+  @Uint32()
+  external int mipLevel;
+  // [12]+(4)
+  @Uint32()
+  external int layerOrDepthPlane;
+  // [16]+(4)
+  @Uint32()
+  external int x;
+  // [20]+(4)
+  @Uint32()
+  external int y;
+  // [24]+(4)
+  @Uint32()
+  external int w;
+  // [28]+(4)
+  @Uint32()
+  external int h;
+}
+
+// SDL_GPUBufferLocation
+final class SdlGpuBufferLocation extends Struct {
+  // [0]+(8)
+  external Pointer<SdlGpuBuffer> buffer;
+  // [8]+(4)
+  @Uint32()
+  external int offset;
+  // [] +(4)
+  @Uint32()
+  external int blank_1;
+}
+
+// SDL_GPUBufferRegion
+final class SdlGpuBufferRegion extends Struct {
+  // [0]+(8)
+  external Pointer<SdlGpuBuffer> buffer;
+  // [8]+(4)
+  @Uint32()
+  external int offset;
+  // [12]+(4)
+  @Uint32()
+  external int size;
+}
+
+// SDL_GPUIndirectDrawCommand
+final class SdlGpuIndirectDrawCommand extends Struct {
+  // [0]+(4)
+  @Uint32()
+  external int vertexCount;
+  // [4]+(4)
+  @Uint32()
+  external int instanceCount;
+  // [8]+(4)
+  @Uint32()
+  external int firstVertex;
+  // [12]+(4)
+  @Uint32()
+  external int firstInstance;
+}
+
+// SDL_GPUIndexedIndirectDrawCommand
+final class SdlGpuIndexedIndirectDrawCommand extends Struct {
+  // [0]+(4)
+  @Uint32()
+  external int indexCount;
+  // [4]+(4)
+  @Uint32()
+  external int instanceCount;
+  // [8]+(4)
+  @Uint32()
+  external int firstIndex;
+  // [12]+(4)
+  @Int32()
+  external int vertexOffset;
+  // [16]+(4)
+  @Uint32()
+  external int firstInstance;
+  // [] +(4)
+  @Uint32()
+  external int blank_1;
+}
+
+// SDL_GPUIndirectDispatchCommand
+final class SdlGpuIndirectDispatchCommand extends Struct {
+  // [0]+(4)
+  @Uint32()
+  external int groupCountX;
+  // [4]+(4)
+  @Uint32()
+  external int groupCountY;
+  // [8]+(4)
+  @Uint32()
+  external int groupCountZ;
+  // [] +(4)
+  @Uint32()
+  external int blank_1;
+}
+
+// SDL_GPUSamplerCreateInfo
+final class SdlGpuSamplerCreateInfo extends Struct {
+  // [0]+(4)
+  @Int32()
+  external int minFilter;
+  // [4]+(4)
+  @Int32()
+  external int magFilter;
+  // [8]+(4)
+  @Int32()
+  external int mipmapMode;
+  // [12]+(4)
+  @Int32()
+  external int addressModeU;
+  // [16]+(4)
+  @Int32()
+  external int addressModeV;
+  // [20]+(4)
+  @Int32()
+  external int addressModeW;
+  // [24]+(4)
+  @Float()
+  external double mipLodBias;
+  // [28]+(1)
+  @Uint8()
+  external int anisotropyEnable;
+  // [] +(3)
+  @Uint16()
+  external int blank_1;
+  @Uint8()
+  external int blank_2;
+  // [32]+(4)
+  @Float()
+  external double maxAnisotropy;
+  // [36]+(1)
+  @Uint8()
+  external int compareEnable;
+  // [] +(3)
+  @Uint16()
+  external int blank_3;
+  @Uint8()
+  external int blank_4;
+  // [40]+(4)
+  @Int32()
+  external int compareOp;
+  // [44]+(4)
+  @Float()
+  external double minLod;
+  // [48]+(4)
+  @Float()
+  external double maxLod;
+  // [52]+(4)
+  @Uint32()
+  external int props;
+}
+
+// SDL_GPUVertexBinding
+final class SdlGpuVertexBinding extends Struct {
+  // [0]+(4)
+  @Uint32()
+  external int binding;
+  // [4]+(4)
+  @Uint32()
+  external int stride;
+  // [8]+(4)
+  @Int32()
+  external int inputRate;
+  // [12]+(4)
+  @Uint32()
+  external int instanceStepRate;
+}
+
+// SDL_GPUVertexAttribute
+final class SdlGpuVertexAttribute extends Struct {
+  // [0]+(4)
+  @Uint32()
+  external int location;
+  // [4]+(4)
+  @Uint32()
+  external int binding;
+  // [8]+(4)
+  @Int32()
+  external int format;
+  // [12]+(4)
+  @Uint32()
+  external int offset;
+}
+
+// SDL_GPUVertexInputState
+final class SdlGpuVertexInputState extends Struct {
+  // [0]+(8)
+  external Pointer<SdlGpuVertexBinding> vertexBindings;
+  // [8]+(4)
+  @Uint32()
+  external int vertexBindingCount;
+  // [] +(4)
+  @Uint32()
+  external int blank_1;
+  // [16]+(8)
+  external Pointer<SdlGpuVertexAttribute> vertexAttributes;
+  // [24]+(4)
+  @Uint32()
+  external int vertexAttributeCount;
+  // [] +(4)
+  @Uint32()
+  external int blank_2;
+}
+
+// SDL_GPUStencilOpState
+final class SdlGpuStencilOpState extends Struct {
+  // [0]+(4)
+  @Int32()
+  external int failOp;
+  // [4]+(4)
+  @Int32()
+  external int passOp;
+  // [8]+(4)
+  @Int32()
+  external int depthFailOp;
+  // [12]+(4)
+  @Int32()
+  external int compareOp;
+}
+
+// SDL_GPUColorAttachmentBlendState
+final class SdlGpuColorAttachmentBlendState extends Struct {
+  // [0]+(1)
+  @Uint8()
+  external int blendEnable;
+  // [] +(3)
+  @Uint16()
+  external int blank_1;
+  @Uint8()
+  external int blank_2;
+  // [4]+(4)
+  @Int32()
+  external int srcColorBlendFactor;
+  // [8]+(4)
+  @Int32()
+  external int dstColorBlendFactor;
+  // [12]+(4)
+  @Int32()
+  external int colorBlendOp;
+  // [16]+(4)
+  @Int32()
+  external int srcAlphaBlendFactor;
+  // [20]+(4)
+  @Int32()
+  external int dstAlphaBlendFactor;
+  // [24]+(4)
+  @Int32()
+  external int alphaBlendOp;
+  // [28]+(1)
+  @Uint8()
+  external int colorWriteMask;
+  // [] +(3)
+  @Uint16()
+  external int blank_3;
+  @Uint8()
+  external int blank_4;
+}
+
+// SDL_GPUShaderCreateInfo
+final class SdlGpuShaderCreateInfo extends Struct {
+  // [0]+(4)
+  @Uint32()
+  external int codeSize;
+  // [] +(4)
+  @Uint32()
+  external int blank_1;
+  // [8]+(8)
+  external Pointer<Uint8> code;
+  // [16]+(8)
+  external Pointer<Utf8> entryPointName;
+  // [24]+(4)
+  @Uint32()
+  external int format;
+  // [28]+(4)
+  @Int32()
+  external int stage;
+  // [32]+(4)
+  @Uint32()
+  external int samplerCount;
+  // [36]+(4)
+  @Uint32()
+  external int storageTextureCount;
+  // [40]+(4)
+  @Uint32()
+  external int storageBufferCount;
+  // [44]+(4)
+  @Uint32()
+  external int uniformBufferCount;
+  // [48]+(4)
+  @Uint32()
+  external int props;
+  // [] +(4)
+  @Uint32()
+  external int blank_2;
+}
+
+// SDL_GPUTextureCreateInfo
+final class SdlGpuTextureCreateInfo extends Struct {
+  // [0]+(4)
+  @Int32()
+  external int type;
+  // [4]+(4)
+  @Int32()
+  external int format;
+  // [8]+(4)
+  @Uint32()
+  external int usageFlags;
+  // [12]+(4)
+  @Uint32()
+  external int width;
+  // [16]+(4)
+  @Uint32()
+  external int height;
+  // [20]+(4)
+  @Uint32()
+  external int layerCountOrDepth;
+  // [24]+(4)
+  @Uint32()
+  external int levelCount;
+  // [28]+(4)
+  @Int32()
+  external int sampleCount;
+  // [32]+(4)
+  @Uint32()
+  external int props;
+  // [] +(4)
+  @Uint32()
+  external int blank_1;
+}
+
+// SDL_GPUBufferCreateInfo
+final class SdlGpuBufferCreateInfo extends Struct {
+  // [0]+(4)
+  @Uint32()
+  external int usageFlags;
+  // [4]+(4)
+  @Uint32()
+  external int sizeInBytes;
+  // [8]+(4)
+  @Uint32()
+  external int props;
+  // [] +(4)
+  @Uint32()
+  external int blank_1;
+}
+
+// SDL_GPUTransferBufferCreateInfo
+final class SdlGpuTransferBufferCreateInfo extends Struct {
+  // [0]+(4)
+  @Int32()
+  external int usage;
+  // [4]+(4)
+  @Uint32()
+  external int sizeInBytes;
+  // [8]+(4)
+  @Uint32()
+  external int props;
+  // [] +(4)
+  @Uint32()
+  external int blank_1;
+}
+
+// SDL_GPURasterizerState
+final class SdlGpuRasterizerState extends Struct {
+  // [0]+(4)
+  @Int32()
+  external int fillMode;
+  // [4]+(4)
+  @Int32()
+  external int cullMode;
+  // [8]+(4)
+  @Int32()
+  external int frontFace;
+  // [12]+(1)
+  @Uint8()
+  external int depthBiasEnable;
+  // [] +(3)
+  @Uint16()
+  external int blank_1;
+  @Uint8()
+  external int blank_2;
+  // [16]+(4)
+  @Float()
+  external double depthBiasConstantFactor;
+  // [20]+(4)
+  @Float()
+  external double depthBiasClamp;
+  // [24]+(4)
+  @Float()
+  external double depthBiasSlopeFactor;
+  // [] +(4)
+  @Uint32()
+  external int blank_3;
+}
+
+// SDL_GPUMultisampleState
+final class SdlGpuMultisampleState extends Struct {
+  // [0]+(4)
+  @Int32()
+  external int sampleCount;
+  // [4]+(4)
+  @Uint32()
+  external int sampleMask;
+}
+
+// SDL_GPUDepthStencilState
+final class SdlGpuDepthStencilState extends Struct {
+  // [0]+(1)
+  @Uint8()
+  external int depthTestEnable;
+  // [1]+(1)
+  @Uint8()
+  external int depthWriteEnable;
+  // [] +(2)
+  @Uint16()
+  external int blank_1;
+  // [4]+(4)
+  @Int32()
+  external int compareOp;
+  // [8]+(1)
+  @Uint8()
+  external int stencilTestEnable;
+  // [9]+(16)
+  @Uint64()
+  external int backStencilState_1;
+  @Uint64()
+  external int backStencilState_2;
+  // [25]+(16)
+  @Uint64()
+  external int frontStencilState_1;
+  @Uint64()
+  external int frontStencilState_2;
+  // [41]+(1)
+  @Uint8()
+  external int compareMask;
+  // [42]+(1)
+  @Uint8()
+  external int writeMask;
+  // [43]+(1)
+  @Uint8()
+  external int reference;
+  // [] +(4)
+  @Uint32()
+  external int blank_2;
+}
+
+extension SdlGpuDepthStencilStateExtension on Pointer<SdlGpuDepthStencilState> {
+  Pointer<SdlGpuStencilOpState> get backStencilState =>
+      (cast<Uint8>() + 9).cast<SdlGpuStencilOpState>();
+  Pointer<SdlGpuStencilOpState> get frontStencilState =>
+      (cast<Uint8>() + 25).cast<SdlGpuStencilOpState>();
+}
+
+// SDL_GPUColorAttachmentDescription
+final class SdlGpuColorAttachmentDescription extends Struct {
+  // [0]+(4)
+  @Int32()
+  external int format;
+  // [4]+(32)
+  @Uint64()
+  external int blendState_1;
+  @Uint64()
+  external int blendState_2;
+  @Uint64()
+  external int blendState_3;
+  @Uint64()
+  external int blendState_4;
+  // [] +(4)
+  @Uint32()
+  external int blank_1;
+}
+
+extension SdlGpuColorAttachmentDescriptionExtension
+    on Pointer<SdlGpuColorAttachmentDescription> {
+  Pointer<SdlGpuColorAttachmentBlendState> get blendState =>
+      (cast<Uint8>() + 4).cast<SdlGpuColorAttachmentBlendState>();
+}
+
+// SDL_GPUGraphicsPipelineAttachmentInfo
+final class SdlGpuGraphicsPipelineAttachmentInfo extends Struct {
+  // [0]+(8)
+  external Pointer<SdlGpuColorAttachmentDescription>
+      colorAttachmentDescriptions;
+  // [8]+(4)
+  @Uint32()
+  external int colorAttachmentCount;
+  // [12]+(1)
+  @Uint8()
+  external int hasDepthStencilAttachment;
+  // [] +(3)
+  @Uint16()
+  external int blank_1;
+  @Uint8()
+  external int blank_2;
+  // [16]+(4)
+  @Int32()
+  external int depthStencilFormat;
+  // [] +(4)
+  @Uint32()
+  external int blank_3;
+}
+
+// SDL_GPUGraphicsPipelineCreateInfo
+final class SdlGpuGraphicsPipelineCreateInfo extends Struct {
+  // [0]+(8)
+  external Pointer<SdlGpuShader> vertexShader;
+  // [8]+(8)
+  external Pointer<SdlGpuShader> fragmentShader;
+  // [16]+(32)
+  @Uint64()
+  external int vertexInputState_1;
+  @Uint64()
+  external int vertexInputState_2;
+  @Uint64()
+  external int vertexInputState_3;
+  @Uint64()
+  external int vertexInputState_4;
+  // [48]+(4)
+  @Int32()
+  external int primitiveType;
+  // [52]+(32)
+  @Uint64()
+  external int rasterizerState_1;
+  @Uint64()
+  external int rasterizerState_2;
+  @Uint64()
+  external int rasterizerState_3;
+  @Uint64()
+  external int rasterizerState_4;
+  // [84]+(8)
+  @Uint64()
+  external int multisampleState_1;
+  // [92]+(48)
+  @Uint64()
+  external int depthStencilState_1;
+  @Uint64()
+  external int depthStencilState_2;
+  @Uint64()
+  external int depthStencilState_3;
+  @Uint64()
+  external int depthStencilState_4;
+  @Uint64()
+  external int depthStencilState_5;
+  @Uint64()
+  external int depthStencilState_6;
+  // [140]+(24)
+  @Uint64()
+  external int attachmentInfo_1;
+  @Uint64()
+  external int attachmentInfo_2;
+  @Uint64()
+  external int attachmentInfo_3;
+  // [164]+(4*4)
+  @Float()
+  external double blendConstants_1;
+  @Float()
+  external double blendConstants_2;
+  @Float()
+  external double blendConstants_3;
+  @Float()
+  external double blendConstants_4;
+  // [180]+(4)
+  @Uint32()
+  external int props;
+}
+
+extension SdlGpuGraphicsPipelineCreateInfoExtension
+    on Pointer<SdlGpuGraphicsPipelineCreateInfo> {
+  Pointer<SdlGpuVertexInputState> get vertexInputState =>
+      (cast<Uint8>() + 16).cast<SdlGpuVertexInputState>();
+  Pointer<SdlGpuRasterizerState> get rasterizerState =>
+      (cast<Uint8>() + 52).cast<SdlGpuRasterizerState>();
+  Pointer<SdlGpuMultisampleState> get multisampleState =>
+      (cast<Uint8>() + 84).cast<SdlGpuMultisampleState>();
+  Pointer<SdlGpuDepthStencilState> get depthStencilState =>
+      (cast<Uint8>() + 92).cast<SdlGpuDepthStencilState>();
+  Pointer<SdlGpuGraphicsPipelineAttachmentInfo> get attachmentInfo =>
+      (cast<Uint8>() + 140).cast<SdlGpuGraphicsPipelineAttachmentInfo>();
+}
+
+// SDL_GPUComputePipelineCreateInfo
+final class SdlGpuComputePipelineCreateInfo extends Struct {
+  // [0]+(4)
+  @Uint32()
+  external int codeSize;
+  // [] +(4)
+  @Uint32()
+  external int blank_1;
+  // [8]+(8)
+  external Pointer<Uint8> code;
+  // [16]+(8)
+  external Pointer<Utf8> entryPointName;
+  // [24]+(4)
+  @Uint32()
+  external int format;
+  // [28]+(4)
+  @Uint32()
+  external int readOnlyStorageTextureCount;
+  // [32]+(4)
+  @Uint32()
+  external int readOnlyStorageBufferCount;
+  // [36]+(4)
+  @Uint32()
+  external int writeOnlyStorageTextureCount;
+  // [40]+(4)
+  @Uint32()
+  external int writeOnlyStorageBufferCount;
+  // [44]+(4)
+  @Uint32()
+  external int uniformBufferCount;
+  // [48]+(4)
+  @Uint32()
+  external int threadCountX;
+  // [52]+(4)
+  @Uint32()
+  external int threadCountY;
+  // [56]+(4)
+  @Uint32()
+  external int threadCountZ;
+  // [60]+(4)
+  @Uint32()
+  external int props;
+}
+
+// SDL_GPUColorAttachmentInfo
+final class SdlGpuColorAttachmentInfo extends Struct {
+  // [0]+(8)
+  external Pointer<SdlGpuTexture> texture;
+  // [8]+(4)
+  @Uint32()
+  external int mipLevel;
+  // [12]+(4)
+  @Uint32()
+  external int layerOrDepthPlane;
+  // [16]+(16)
+  @Uint64()
+  external int clearColor_1;
+  @Uint64()
+  external int clearColor_2;
+  // [32]+(4)
+  @Int32()
+  external int loadOp;
+  // [36]+(4)
+  @Int32()
+  external int storeOp;
+  // [40]+(1)
+  @Uint8()
+  external int cycle;
+  // [] +(7)
+  @Uint32()
+  external int blank_1;
+  @Uint16()
+  external int blank_2;
+  @Uint8()
+  external int blank_3;
+}
+
+extension SdlGpuColorAttachmentInfoExtension
+    on Pointer<SdlGpuColorAttachmentInfo> {
+  Pointer<SdlFColor> get clearColor => (cast<Uint8>() + 16).cast<SdlFColor>();
+}
+
+// SDL_GPUDepthStencilAttachmentInfo
+final class SdlGpuDepthStencilAttachmentInfo extends Struct {
+  // [0]+(8)
+  external Pointer<SdlGpuTexture> texture;
+  // [8]+(8)
+  @Uint64()
+  external int depthStencilClearValue_1;
+  // [16]+(4)
+  @Int32()
+  external int loadOp;
+  // [20]+(4)
+  @Int32()
+  external int storeOp;
+  // [24]+(4)
+  @Int32()
+  external int stencilLoadOp;
+  // [28]+(4)
+  @Int32()
+  external int stencilStoreOp;
+  // [32]+(1)
+  @Uint8()
+  external int cycle;
+  // [] +(7)
+  @Uint32()
+  external int blank_1;
+  @Uint16()
+  external int blank_2;
+  @Uint8()
+  external int blank_3;
+}
+
+extension SdlGpuDepthStencilAttachmentInfoExtension
+    on Pointer<SdlGpuDepthStencilAttachmentInfo> {
+  Pointer<SdlGpuDepthStencilValue> get depthStencilClearValue =>
+      (cast<Uint8>() + 8).cast<SdlGpuDepthStencilValue>();
+}
+
+// SDL_GPUBufferBinding
+final class SdlGpuBufferBinding extends Struct {
+  // [0]+(8)
+  external Pointer<SdlGpuBuffer> buffer;
+  // [8]+(4)
+  @Uint32()
+  external int offset;
+  // [] +(4)
+  @Uint32()
+  external int blank_1;
+}
+
+// SDL_GPUTextureSamplerBinding
+final class SdlGpuTextureSamplerBinding extends Struct {
+  // [0]+(8)
+  external Pointer<SdlGpuTexture> texture;
+  // [8]+(8)
+  external Pointer<SdlGpuSampler> sampler;
+}
+
+// SDL_GPUStorageBufferWriteOnlyBinding
+final class SdlGpuStorageBufferWriteOnlyBinding extends Struct {
+  // [0]+(8)
+  external Pointer<SdlGpuBuffer> buffer;
+  // [8]+(1)
+  @Uint8()
+  external int cycle;
+  // [] +(7)
+  @Uint32()
+  external int blank_1;
+  @Uint16()
+  external int blank_2;
+  @Uint8()
+  external int blank_3;
+}
+
+// SDL_GPUStorageTextureWriteOnlyBinding
+final class SdlGpuStorageTextureWriteOnlyBinding extends Struct {
+  // [0]+(8)
+  external Pointer<SdlGpuTexture> texture;
+  // [8]+(4)
+  @Uint32()
+  external int mipLevel;
+  // [12]+(4)
+  @Uint32()
+  external int layer;
+  // [16]+(1)
+  @Uint8()
+  external int cycle;
+  // [] +(7)
+  @Uint32()
+  external int blank_1;
+  @Uint16()
+  external int blank_2;
+  @Uint8()
+  external int blank_3;
+}
+
 // SDL_GUID
 final class SdlGuid extends Struct {
   // [0]+(1*16)
@@ -1843,6 +2775,8 @@ final class SdlVirtualJoystickDesc extends Struct {
   external Pointer<NativeType> sendEffect;
   // [112]+(8)
   external Pointer<NativeType> setSensorsEnabled;
+  // [120]+(8)
+  external Pointer<NativeType> cleanup;
 }
 
 // SDL_Locale

@@ -9,7 +9,7 @@ const gHeight = 400;
 const gMaxN = 2000;
 
 int main() {
-  if (sdlInit(SDL_INIT_VIDEO) < 0) {
+  if (sdlInit(SDL_INIT_VIDEO) == false) {
     print('SDL_Init Error: ${sdlGetError()}');
     return 1;
   }

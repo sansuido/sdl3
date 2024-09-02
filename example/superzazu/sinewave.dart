@@ -30,7 +30,7 @@ void sinewave() {
 }
 
 int main() {
-  if (sdlInit(SDL_INIT_AUDIO) < 0) {
+  if (sdlInit(SDL_INIT_AUDIO) == false) {
     return -1;
   }
   sinewave();

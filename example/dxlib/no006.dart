@@ -39,11 +39,11 @@ class Game {
   var tick = 0;
 
   bool init() {
-    if (sdlInit(SDL_INIT_VIDEO) < 0) {
+    if (sdlInit(SDL_INIT_VIDEO) == false) {
       return false;
     }
     sdlSetHint(SDL_HINT_RENDER_VSYNC, '1');
-    if (ttfInit() != 0) {
+    if (ttfInit() == false) {
       return false;
     }
     window = SdlWindowEx.create(

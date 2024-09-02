@@ -252,14 +252,15 @@ extension MixMusicPointerEx on Pointer<MixMusic> {
   /// \param music the new music object to schedule for mixing.
   /// \param loops the number of loops to play the music for (0 means "play once
   /// and stop").
-  /// \returns zero on success, -1 on error.
+  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+  /// for more information.
   ///
   /// \since This function is available since SDL_mixer 3.0.0.
   ///
   /// ```c
-  /// extern SDL_DECLSPEC int SDLCALL Mix_PlayMusic(Mix_Music *music, int loops)
+  /// extern SDL_DECLSPEC SDL_bool SDLCALL Mix_PlayMusic(Mix_Music *music, int loops)
   /// ```
-  int play(int loops) {
+  bool play(int loops) {
     return mixPlayMusic(this, loops);
   }
 
@@ -284,14 +285,15 @@ extension MixMusicPointerEx on Pointer<MixMusic> {
   /// \param loops the number of times the chunk should loop, -1 to loop (not
   /// actually) infinitely.
   /// \param ms the number of milliseconds to spend fading in.
-  /// \returns zero on success, -1 on error.
+  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+  /// for more information.
   ///
   /// \since This function is available since SDL_mixer 3.0.0.
   ///
   /// ```c
-  /// extern SDL_DECLSPEC int SDLCALL Mix_FadeInMusic(Mix_Music *music, int loops, int ms)
+  /// extern SDL_DECLSPEC SDL_bool SDLCALL Mix_FadeInMusic(Mix_Music *music, int loops, int ms)
   /// ```
-  int fadeIn(int loops, int ms) {
+  bool fadeIn(int loops, int ms) {
     return mixFadeInMusic(this, loops, ms);
   }
 
@@ -328,14 +330,15 @@ extension MixMusicPointerEx on Pointer<MixMusic> {
   /// \param ms the number of milliseconds to spend fading in.
   /// \param position the start position within the music, in seconds, where
   /// playback should start.
-  /// \returns zero on success, -1 on error.
+  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+  /// for more information.
   ///
   /// \since This function is available since SDL_mixer 3.0.0.
   ///
   /// ```c
-  /// extern SDL_DECLSPEC int SDLCALL Mix_FadeInMusicPos(Mix_Music *music, int loops, int ms, double position)
+  /// extern SDL_DECLSPEC SDL_bool SDLCALL Mix_FadeInMusicPos(Mix_Music *music, int loops, int ms, double position)
   /// ```
-  int fadeInPos(int loops, int ms, double position) {
+  bool fadeInPos(int loops, int ms, double position) {
     return mixFadeInMusicPos(this, loops, ms, position);
   }
 

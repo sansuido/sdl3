@@ -13,8 +13,7 @@ import 'struct_sdl.dart';
 ///
 /// There may be none if SDL was compiled without render support.
 ///
-/// \returns a number >= 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns the number of built in render drivers.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -75,8 +74,8 @@ String? sdlGetRenderDriver(int index) {
 /// SDL_CreateWindow()).
 /// \param window a pointer filled with the window, or NULL on error.
 /// \param renderer a pointer filled with the renderer, or NULL on error.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -84,9 +83,9 @@ String? sdlGetRenderDriver(int index) {
 /// \sa SDL_CreateWindow
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_CreateWindowAndRenderer(const char *title, int width, int height, SDL_WindowFlags window_flags, SDL_Window **window, SDL_Renderer **renderer)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_CreateWindowAndRenderer(const char *title, int width, int height, SDL_WindowFlags window_flags, SDL_Window **window, SDL_Renderer **renderer)
 /// ```
-int sdlCreateWindowAndRenderer(
+bool sdlCreateWindowAndRenderer(
     String? title,
     int width,
     int height,
@@ -94,7 +93,7 @@ int sdlCreateWindowAndRenderer(
     Pointer<Pointer<SdlWindow>> window,
     Pointer<Pointer<SdlRenderer>> renderer) {
   final sdlCreateWindowAndRendererLookupFunction = libSdl3.lookupFunction<
-          Int32 Function(
+          Uint8 Function(
               Pointer<Utf8> title,
               Int32 width,
               Int32 height,
@@ -111,7 +110,8 @@ int sdlCreateWindowAndRenderer(
       'SDL_CreateWindowAndRenderer');
   final titlePointer = title != null ? title.toNativeUtf8() : nullptr;
   final result = sdlCreateWindowAndRendererLookupFunction(
-      titlePointer, width, height, windowFlags, window, renderer);
+          titlePointer, width, height, windowFlags, window, renderer) ==
+      1;
   calloc.free(titlePointer);
   return result;
 }
@@ -411,24 +411,24 @@ int sdlGetRendererProperties(Pointer<SdlRenderer> renderer) {
 /// \param renderer the rendering context.
 /// \param w a pointer filled in with the width in pixels.
 /// \param h a pointer filled in with the height in pixels.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetCurrentRenderOutputSize
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_GetRenderOutputSize(SDL_Renderer *renderer, int *w, int *h)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetRenderOutputSize(SDL_Renderer *renderer, int *w, int *h)
 /// ```
-int sdlGetRenderOutputSize(
+bool sdlGetRenderOutputSize(
     Pointer<SdlRenderer> renderer, Pointer<Int32> w, Pointer<Int32> h) {
   final sdlGetRenderOutputSizeLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(
+      Uint8 Function(
           Pointer<SdlRenderer> renderer, Pointer<Int32> w, Pointer<Int32> h),
       int Function(Pointer<SdlRenderer> renderer, Pointer<Int32> w,
           Pointer<Int32> h)>('SDL_GetRenderOutputSize');
-  return sdlGetRenderOutputSizeLookupFunction(renderer, w, h);
+  return sdlGetRenderOutputSizeLookupFunction(renderer, w, h) == 1;
 }
 
 ///
@@ -442,24 +442,24 @@ int sdlGetRenderOutputSize(
 /// \param renderer the rendering context.
 /// \param w a pointer filled in with the current width.
 /// \param h a pointer filled in with the current height.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetRenderOutputSize
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_GetCurrentRenderOutputSize(SDL_Renderer *renderer, int *w, int *h)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetCurrentRenderOutputSize(SDL_Renderer *renderer, int *w, int *h)
 /// ```
-int sdlGetCurrentRenderOutputSize(
+bool sdlGetCurrentRenderOutputSize(
     Pointer<SdlRenderer> renderer, Pointer<Int32> w, Pointer<Int32> h) {
   final sdlGetCurrentRenderOutputSizeLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(
+      Uint8 Function(
           Pointer<SdlRenderer> renderer, Pointer<Int32> w, Pointer<Int32> h),
       int Function(Pointer<SdlRenderer> renderer, Pointer<Int32> w,
           Pointer<Int32> h)>('SDL_GetCurrentRenderOutputSize');
-  return sdlGetCurrentRenderOutputSizeLookupFunction(renderer, w, h);
+  return sdlGetCurrentRenderOutputSizeLookupFunction(renderer, w, h) == 1;
 }
 
 ///
@@ -788,22 +788,22 @@ Pointer<SdlRenderer> sdlGetRendererFromTexture(Pointer<SdlTexture> texture) {
 /// argument can be NULL if you don't need this information.
 /// \param h a pointer filled in with the height of the texture in pixels. This
 /// argument can be NULL if you don't need this information.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_GetTextureSize(SDL_Texture *texture, float *w, float *h)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetTextureSize(SDL_Texture *texture, float *w, float *h)
 /// ```
-int sdlGetTextureSize(
+bool sdlGetTextureSize(
     Pointer<SdlTexture> texture, Pointer<Float> w, Pointer<Float> h) {
   final sdlGetTextureSizeLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(
+      Uint8 Function(
           Pointer<SdlTexture> texture, Pointer<Float> w, Pointer<Float> h),
       int Function(Pointer<SdlTexture> texture, Pointer<Float> w,
           Pointer<Float> h)>('SDL_GetTextureSize');
-  return sdlGetTextureSizeLookupFunction(texture, w, h);
+  return sdlGetTextureSizeLookupFunction(texture, w, h) == 1;
 }
 
 ///
@@ -815,15 +815,15 @@ int sdlGetTextureSize(
 ///
 /// `srcC = srcC * (color / 255)`
 ///
-/// Color modulation is not always supported by the renderer; it will return -1
-/// if color modulation is not supported.
+/// Color modulation is not always supported by the renderer; it will return
+/// SDL_FALSE if color modulation is not supported.
 ///
 /// \param texture the texture to update.
 /// \param r the red color value multiplied into copy operations.
 /// \param g the green color value multiplied into copy operations.
 /// \param b the blue color value multiplied into copy operations.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -832,14 +832,14 @@ int sdlGetTextureSize(
 /// \sa SDL_SetTextureColorModFloat
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_SetTextureColorMod(SDL_Texture *texture, Uint8 r, Uint8 g, Uint8 b)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetTextureColorMod(SDL_Texture *texture, Uint8 r, Uint8 g, Uint8 b)
 /// ```
-int sdlSetTextureColorMod(Pointer<SdlTexture> texture, int r, int g, int b) {
+bool sdlSetTextureColorMod(Pointer<SdlTexture> texture, int r, int g, int b) {
   final sdlSetTextureColorModLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlTexture> texture, Uint8 r, Uint8 g, Uint8 b),
+      Uint8 Function(Pointer<SdlTexture> texture, Uint8 r, Uint8 g, Uint8 b),
       int Function(Pointer<SdlTexture> texture, int r, int g,
           int b)>('SDL_SetTextureColorMod');
-  return sdlSetTextureColorModLookupFunction(texture, r, g, b);
+  return sdlSetTextureColorModLookupFunction(texture, r, g, b) == 1;
 }
 
 ///
@@ -851,15 +851,15 @@ int sdlSetTextureColorMod(Pointer<SdlTexture> texture, int r, int g, int b) {
 ///
 /// `srcC = srcC * color`
 ///
-/// Color modulation is not always supported by the renderer; it will return -1
-/// if color modulation is not supported.
+/// Color modulation is not always supported by the renderer; it will return
+/// SDL_FALSE if color modulation is not supported.
 ///
 /// \param texture the texture to update.
 /// \param r the red color value multiplied into copy operations.
 /// \param g the green color value multiplied into copy operations.
 /// \param b the blue color value multiplied into copy operations.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -868,15 +868,15 @@ int sdlSetTextureColorMod(Pointer<SdlTexture> texture, int r, int g, int b) {
 /// \sa SDL_SetTextureColorMod
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_SetTextureColorModFloat(SDL_Texture *texture, float r, float g, float b)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetTextureColorModFloat(SDL_Texture *texture, float r, float g, float b)
 /// ```
-int sdlSetTextureColorModFloat(
+bool sdlSetTextureColorModFloat(
     Pointer<SdlTexture> texture, double r, double g, double b) {
   final sdlSetTextureColorModFloatLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlTexture> texture, Float r, Float g, Float b),
+      Uint8 Function(Pointer<SdlTexture> texture, Float r, Float g, Float b),
       int Function(Pointer<SdlTexture> texture, double r, double g,
           double b)>('SDL_SetTextureColorModFloat');
-  return sdlSetTextureColorModFloatLookupFunction(texture, r, g, b);
+  return sdlSetTextureColorModFloatLookupFunction(texture, r, g, b) == 1;
 }
 
 ///
@@ -886,8 +886,8 @@ int sdlSetTextureColorModFloat(
 /// \param r a pointer filled in with the current red color value.
 /// \param g a pointer filled in with the current green color value.
 /// \param b a pointer filled in with the current blue color value.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -896,16 +896,16 @@ int sdlSetTextureColorModFloat(
 /// \sa SDL_SetTextureColorMod
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_GetTextureColorMod(SDL_Texture *texture, Uint8 *r, Uint8 *g, Uint8 *b)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetTextureColorMod(SDL_Texture *texture, Uint8 *r, Uint8 *g, Uint8 *b)
 /// ```
-int sdlGetTextureColorMod(Pointer<SdlTexture> texture, Pointer<Uint8> r,
+bool sdlGetTextureColorMod(Pointer<SdlTexture> texture, Pointer<Uint8> r,
     Pointer<Uint8> g, Pointer<Uint8> b) {
   final sdlGetTextureColorModLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlTexture> texture, Pointer<Uint8> r,
+      Uint8 Function(Pointer<SdlTexture> texture, Pointer<Uint8> r,
           Pointer<Uint8> g, Pointer<Uint8> b),
       int Function(Pointer<SdlTexture> texture, Pointer<Uint8> r,
           Pointer<Uint8> g, Pointer<Uint8> b)>('SDL_GetTextureColorMod');
-  return sdlGetTextureColorModLookupFunction(texture, r, g, b);
+  return sdlGetTextureColorModLookupFunction(texture, r, g, b) == 1;
 }
 
 ///
@@ -915,8 +915,8 @@ int sdlGetTextureColorMod(Pointer<SdlTexture> texture, Pointer<Uint8> r,
 /// \param r a pointer filled in with the current red color value.
 /// \param g a pointer filled in with the current green color value.
 /// \param b a pointer filled in with the current blue color value.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -925,16 +925,16 @@ int sdlGetTextureColorMod(Pointer<SdlTexture> texture, Pointer<Uint8> r,
 /// \sa SDL_SetTextureColorModFloat
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_GetTextureColorModFloat(SDL_Texture *texture, float *r, float *g, float *b)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetTextureColorModFloat(SDL_Texture *texture, float *r, float *g, float *b)
 /// ```
-int sdlGetTextureColorModFloat(Pointer<SdlTexture> texture, Pointer<Float> r,
+bool sdlGetTextureColorModFloat(Pointer<SdlTexture> texture, Pointer<Float> r,
     Pointer<Float> g, Pointer<Float> b) {
   final sdlGetTextureColorModFloatLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlTexture> texture, Pointer<Float> r,
+      Uint8 Function(Pointer<SdlTexture> texture, Pointer<Float> r,
           Pointer<Float> g, Pointer<Float> b),
       int Function(Pointer<SdlTexture> texture, Pointer<Float> r,
           Pointer<Float> g, Pointer<Float> b)>('SDL_GetTextureColorModFloat');
-  return sdlGetTextureColorModFloatLookupFunction(texture, r, g, b);
+  return sdlGetTextureColorModFloatLookupFunction(texture, r, g, b) == 1;
 }
 
 ///
@@ -945,13 +945,13 @@ int sdlGetTextureColorModFloat(Pointer<SdlTexture> texture, Pointer<Float> r,
 ///
 /// `srcA = srcA * (alpha / 255)`
 ///
-/// Alpha modulation is not always supported by the renderer; it will return -1
-/// if alpha modulation is not supported.
+/// Alpha modulation is not always supported by the renderer; it will return
+/// SDL_FALSE if alpha modulation is not supported.
 ///
 /// \param texture the texture to update.
 /// \param alpha the source alpha value multiplied into copy operations.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -960,14 +960,14 @@ int sdlGetTextureColorModFloat(Pointer<SdlTexture> texture, Pointer<Float> r,
 /// \sa SDL_SetTextureColorMod
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_SetTextureAlphaMod(SDL_Texture *texture, Uint8 alpha)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetTextureAlphaMod(SDL_Texture *texture, Uint8 alpha)
 /// ```
-int sdlSetTextureAlphaMod(Pointer<SdlTexture> texture, int alpha) {
+bool sdlSetTextureAlphaMod(Pointer<SdlTexture> texture, int alpha) {
   final sdlSetTextureAlphaModLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlTexture> texture, Uint8 alpha),
+      Uint8 Function(Pointer<SdlTexture> texture, Uint8 alpha),
       int Function(
           Pointer<SdlTexture> texture, int alpha)>('SDL_SetTextureAlphaMod');
-  return sdlSetTextureAlphaModLookupFunction(texture, alpha);
+  return sdlSetTextureAlphaModLookupFunction(texture, alpha) == 1;
 }
 
 ///
@@ -978,13 +978,13 @@ int sdlSetTextureAlphaMod(Pointer<SdlTexture> texture, int alpha) {
 ///
 /// `srcA = srcA * alpha`
 ///
-/// Alpha modulation is not always supported by the renderer; it will return -1
-/// if alpha modulation is not supported.
+/// Alpha modulation is not always supported by the renderer; it will return
+/// SDL_FALSE if alpha modulation is not supported.
 ///
 /// \param texture the texture to update.
 /// \param alpha the source alpha value multiplied into copy operations.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -993,14 +993,14 @@ int sdlSetTextureAlphaMod(Pointer<SdlTexture> texture, int alpha) {
 /// \sa SDL_SetTextureColorModFloat
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_SetTextureAlphaModFloat(SDL_Texture *texture, float alpha)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetTextureAlphaModFloat(SDL_Texture *texture, float alpha)
 /// ```
-int sdlSetTextureAlphaModFloat(Pointer<SdlTexture> texture, double alpha) {
+bool sdlSetTextureAlphaModFloat(Pointer<SdlTexture> texture, double alpha) {
   final sdlSetTextureAlphaModFloatLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlTexture> texture, Float alpha),
+      Uint8 Function(Pointer<SdlTexture> texture, Float alpha),
       int Function(Pointer<SdlTexture> texture,
           double alpha)>('SDL_SetTextureAlphaModFloat');
-  return sdlSetTextureAlphaModFloatLookupFunction(texture, alpha);
+  return sdlSetTextureAlphaModFloatLookupFunction(texture, alpha) == 1;
 }
 
 ///
@@ -1008,8 +1008,8 @@ int sdlSetTextureAlphaModFloat(Pointer<SdlTexture> texture, double alpha) {
 ///
 /// \param texture the texture to query.
 /// \param alpha a pointer filled in with the current alpha value.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -1018,14 +1018,14 @@ int sdlSetTextureAlphaModFloat(Pointer<SdlTexture> texture, double alpha) {
 /// \sa SDL_SetTextureAlphaMod
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_GetTextureAlphaMod(SDL_Texture *texture, Uint8 *alpha)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetTextureAlphaMod(SDL_Texture *texture, Uint8 *alpha)
 /// ```
-int sdlGetTextureAlphaMod(Pointer<SdlTexture> texture, Pointer<Uint8> alpha) {
+bool sdlGetTextureAlphaMod(Pointer<SdlTexture> texture, Pointer<Uint8> alpha) {
   final sdlGetTextureAlphaModLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlTexture> texture, Pointer<Uint8> alpha),
+      Uint8 Function(Pointer<SdlTexture> texture, Pointer<Uint8> alpha),
       int Function(Pointer<SdlTexture> texture,
           Pointer<Uint8> alpha)>('SDL_GetTextureAlphaMod');
-  return sdlGetTextureAlphaModLookupFunction(texture, alpha);
+  return sdlGetTextureAlphaModLookupFunction(texture, alpha) == 1;
 }
 
 ///
@@ -1033,8 +1033,8 @@ int sdlGetTextureAlphaMod(Pointer<SdlTexture> texture, Pointer<Uint8> alpha) {
 ///
 /// \param texture the texture to query.
 /// \param alpha a pointer filled in with the current alpha value.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -1043,15 +1043,15 @@ int sdlGetTextureAlphaMod(Pointer<SdlTexture> texture, Pointer<Uint8> alpha) {
 /// \sa SDL_SetTextureAlphaModFloat
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_GetTextureAlphaModFloat(SDL_Texture *texture, float *alpha)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetTextureAlphaModFloat(SDL_Texture *texture, float *alpha)
 /// ```
-int sdlGetTextureAlphaModFloat(
+bool sdlGetTextureAlphaModFloat(
     Pointer<SdlTexture> texture, Pointer<Float> alpha) {
   final sdlGetTextureAlphaModFloatLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlTexture> texture, Pointer<Float> alpha),
+      Uint8 Function(Pointer<SdlTexture> texture, Pointer<Float> alpha),
       int Function(Pointer<SdlTexture> texture,
           Pointer<Float> alpha)>('SDL_GetTextureAlphaModFloat');
-  return sdlGetTextureAlphaModFloatLookupFunction(texture, alpha);
+  return sdlGetTextureAlphaModFloatLookupFunction(texture, alpha) == 1;
 }
 
 ///
@@ -1062,22 +1062,22 @@ int sdlGetTextureAlphaModFloat(
 ///
 /// \param texture the texture to update.
 /// \param blendMode the SDL_BlendMode to use for texture blending.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetTextureBlendMode
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_SetTextureBlendMode(SDL_Texture *texture, SDL_BlendMode blendMode)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetTextureBlendMode(SDL_Texture *texture, SDL_BlendMode blendMode)
 /// ```
-int sdlSetTextureBlendMode(Pointer<SdlTexture> texture, int blendMode) {
+bool sdlSetTextureBlendMode(Pointer<SdlTexture> texture, int blendMode) {
   final sdlSetTextureBlendModeLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlTexture> texture, Uint32 blendMode),
+      Uint8 Function(Pointer<SdlTexture> texture, Uint32 blendMode),
       int Function(Pointer<SdlTexture> texture,
           int blendMode)>('SDL_SetTextureBlendMode');
-  return sdlSetTextureBlendModeLookupFunction(texture, blendMode);
+  return sdlSetTextureBlendModeLookupFunction(texture, blendMode) == 1;
 }
 
 ///
@@ -1085,23 +1085,23 @@ int sdlSetTextureBlendMode(Pointer<SdlTexture> texture, int blendMode) {
 ///
 /// \param texture the texture to query.
 /// \param blendMode a pointer filled in with the current SDL_BlendMode.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_SetTextureBlendMode
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_GetTextureBlendMode(SDL_Texture *texture, SDL_BlendMode *blendMode)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetTextureBlendMode(SDL_Texture *texture, SDL_BlendMode *blendMode)
 /// ```
-int sdlGetTextureBlendMode(
+bool sdlGetTextureBlendMode(
     Pointer<SdlTexture> texture, Pointer<Uint32> blendMode) {
   final sdlGetTextureBlendModeLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlTexture> texture, Pointer<Uint32> blendMode),
+      Uint8 Function(Pointer<SdlTexture> texture, Pointer<Uint32> blendMode),
       int Function(Pointer<SdlTexture> texture,
           Pointer<Uint32> blendMode)>('SDL_GetTextureBlendMode');
-  return sdlGetTextureBlendModeLookupFunction(texture, blendMode);
+  return sdlGetTextureBlendModeLookupFunction(texture, blendMode) == 1;
 }
 
 ///
@@ -1113,22 +1113,22 @@ int sdlGetTextureBlendMode(
 ///
 /// \param texture the texture to update.
 /// \param scaleMode the SDL_ScaleMode to use for texture scaling.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetTextureScaleMode
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_SetTextureScaleMode(SDL_Texture *texture, SDL_ScaleMode scaleMode)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetTextureScaleMode(SDL_Texture *texture, SDL_ScaleMode scaleMode)
 /// ```
-int sdlSetTextureScaleMode(Pointer<SdlTexture> texture, int scaleMode) {
+bool sdlSetTextureScaleMode(Pointer<SdlTexture> texture, int scaleMode) {
   final sdlSetTextureScaleModeLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlTexture> texture, Int32 scaleMode),
+      Uint8 Function(Pointer<SdlTexture> texture, Int32 scaleMode),
       int Function(Pointer<SdlTexture> texture,
           int scaleMode)>('SDL_SetTextureScaleMode');
-  return sdlSetTextureScaleModeLookupFunction(texture, scaleMode);
+  return sdlSetTextureScaleModeLookupFunction(texture, scaleMode) == 1;
 }
 
 ///
@@ -1136,23 +1136,23 @@ int sdlSetTextureScaleMode(Pointer<SdlTexture> texture, int scaleMode) {
 ///
 /// \param texture the texture to query.
 /// \param scaleMode a pointer filled in with the current scale mode.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_SetTextureScaleMode
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_GetTextureScaleMode(SDL_Texture *texture, SDL_ScaleMode *scaleMode)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetTextureScaleMode(SDL_Texture *texture, SDL_ScaleMode *scaleMode)
 /// ```
-int sdlGetTextureScaleMode(
+bool sdlGetTextureScaleMode(
     Pointer<SdlTexture> texture, Pointer<Int32> scaleMode) {
   final sdlGetTextureScaleModeLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlTexture> texture, Pointer<Int32> scaleMode),
+      Uint8 Function(Pointer<SdlTexture> texture, Pointer<Int32> scaleMode),
       int Function(Pointer<SdlTexture> texture,
           Pointer<Int32> scaleMode)>('SDL_GetTextureScaleMode');
-  return sdlGetTextureScaleModeLookupFunction(texture, scaleMode);
+  return sdlGetTextureScaleModeLookupFunction(texture, scaleMode) == 1;
 }
 
 ///
@@ -1175,8 +1175,8 @@ int sdlGetTextureScaleMode(
 /// \param pixels the raw pixel data in the format of the texture.
 /// \param pitch the number of bytes in a row of pixel data, including padding
 /// between lines.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -1186,16 +1186,16 @@ int sdlGetTextureScaleMode(
 /// \sa SDL_UpdateYUVTexture
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_UpdateTexture(SDL_Texture *texture, const SDL_Rect *rect, const void *pixels, int pitch)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_UpdateTexture(SDL_Texture *texture, const SDL_Rect *rect, const void *pixels, int pitch)
 /// ```
-int sdlUpdateTexture(Pointer<SdlTexture> texture, Pointer<SdlRect> rect,
+bool sdlUpdateTexture(Pointer<SdlTexture> texture, Pointer<SdlRect> rect,
     Pointer<NativeType> pixels, int pitch) {
   final sdlUpdateTextureLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlTexture> texture, Pointer<SdlRect> rect,
+      Uint8 Function(Pointer<SdlTexture> texture, Pointer<SdlRect> rect,
           Pointer<NativeType> pixels, Int32 pitch),
       int Function(Pointer<SdlTexture> texture, Pointer<SdlRect> rect,
           Pointer<NativeType> pixels, int pitch)>('SDL_UpdateTexture');
-  return sdlUpdateTextureLookupFunction(texture, rect, pixels, pitch);
+  return sdlUpdateTextureLookupFunction(texture, rect, pixels, pitch) == 1;
 }
 
 ///
@@ -1218,8 +1218,8 @@ int sdlUpdateTexture(Pointer<SdlTexture> texture, Pointer<SdlRect> rect,
 /// \param Vplane the raw pixel data for the V plane.
 /// \param Vpitch the number of bytes between rows of pixel data for the V
 /// plane.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -1227,9 +1227,9 @@ int sdlUpdateTexture(Pointer<SdlTexture> texture, Pointer<SdlRect> rect,
 /// \sa SDL_UpdateTexture
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_UpdateYUVTexture(SDL_Texture *texture, const SDL_Rect *rect, const Uint8 *Yplane, int Ypitch, const Uint8 *Uplane, int Upitch, const Uint8 *Vplane, int Vpitch)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_UpdateYUVTexture(SDL_Texture *texture, const SDL_Rect *rect, const Uint8 *Yplane, int Ypitch, const Uint8 *Uplane, int Upitch, const Uint8 *Vplane, int Vpitch)
 /// ```
-int sdlUpdateYuvTexture(
+bool sdlUpdateYuvTexture(
     Pointer<SdlTexture> texture,
     Pointer<SdlRect> rect,
     Pointer<Uint8> yplane,
@@ -1239,7 +1239,7 @@ int sdlUpdateYuvTexture(
     Pointer<Uint8> vplane,
     int vpitch) {
   final sdlUpdateYuvTextureLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(
+      Uint8 Function(
           Pointer<SdlTexture> texture,
           Pointer<SdlRect> rect,
           Pointer<Uint8> yplane,
@@ -1258,7 +1258,8 @@ int sdlUpdateYuvTexture(
           Pointer<Uint8> vplane,
           int vpitch)>('SDL_UpdateYUVTexture');
   return sdlUpdateYuvTextureLookupFunction(
-      texture, rect, yplane, ypitch, uplane, upitch, vplane, vpitch);
+          texture, rect, yplane, ypitch, uplane, upitch, vplane, vpitch) ==
+      1;
 }
 
 ///
@@ -1277,8 +1278,8 @@ int sdlUpdateYuvTexture(
 /// \param UVplane the raw pixel data for the UV plane.
 /// \param UVpitch the number of bytes between rows of pixel data for the UV
 /// plane.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -1286,12 +1287,12 @@ int sdlUpdateYuvTexture(
 /// \sa SDL_UpdateYUVTexture
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_UpdateNVTexture(SDL_Texture *texture, const SDL_Rect *rect, const Uint8 *Yplane, int Ypitch, const Uint8 *UVplane, int UVpitch)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_UpdateNVTexture(SDL_Texture *texture, const SDL_Rect *rect, const Uint8 *Yplane, int Ypitch, const Uint8 *UVplane, int UVpitch)
 /// ```
-int sdlUpdateNvTexture(Pointer<SdlTexture> texture, Pointer<SdlRect> rect,
+bool sdlUpdateNvTexture(Pointer<SdlTexture> texture, Pointer<SdlRect> rect,
     Pointer<Uint8> yplane, int ypitch, Pointer<Uint8> uVplane, int uVpitch) {
   final sdlUpdateNvTextureLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(
+      Uint8 Function(
           Pointer<SdlTexture> texture,
           Pointer<SdlRect> rect,
           Pointer<Uint8> yplane,
@@ -1306,7 +1307,8 @@ int sdlUpdateNvTexture(Pointer<SdlTexture> texture, Pointer<SdlRect> rect,
           Pointer<Uint8> uVplane,
           int uVpitch)>('SDL_UpdateNVTexture');
   return sdlUpdateNvTextureLookupFunction(
-      texture, rect, yplane, ypitch, uVplane, uVpitch);
+          texture, rect, yplane, ypitch, uVplane, uVpitch) ==
+      1;
 }
 
 ///
@@ -1328,8 +1330,8 @@ int sdlUpdateNvTexture(Pointer<SdlTexture> texture, Pointer<SdlRect> rect,
 /// appropriately offset by the locked area.
 /// \param pitch this is filled in with the pitch of the locked pixels; the
 /// pitch is the length of one row in bytes.
-/// \returns 0 on success or a negative error code if the texture is not valid
-/// or was not created with `SDL_TEXTUREACCESS_STREAMING`; call
+/// \returns SDL_TRUE on success or SDL_FALSE if the texture is not valid or
+/// was not created with `SDL_TEXTUREACCESS_STREAMING`; call
 /// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
@@ -1338,19 +1340,19 @@ int sdlUpdateNvTexture(Pointer<SdlTexture> texture, Pointer<SdlRect> rect,
 /// \sa SDL_UnlockTexture
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_LockTexture(SDL_Texture *texture, const SDL_Rect *rect, void **pixels, int *pitch)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_LockTexture(SDL_Texture *texture, const SDL_Rect *rect, void **pixels, int *pitch)
 /// ```
-int sdlLockTexture(Pointer<SdlTexture> texture, Pointer<SdlRect> rect,
+bool sdlLockTexture(Pointer<SdlTexture> texture, Pointer<SdlRect> rect,
     Pointer<Pointer<NativeType>> pixels, Pointer<Int32> pitch) {
   final sdlLockTextureLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlTexture> texture, Pointer<SdlRect> rect,
+      Uint8 Function(Pointer<SdlTexture> texture, Pointer<SdlRect> rect,
           Pointer<Pointer<NativeType>> pixels, Pointer<Int32> pitch),
       int Function(
           Pointer<SdlTexture> texture,
           Pointer<SdlRect> rect,
           Pointer<Pointer<NativeType>> pixels,
           Pointer<Int32> pitch)>('SDL_LockTexture');
-  return sdlLockTextureLookupFunction(texture, rect, pixels, pitch);
+  return sdlLockTextureLookupFunction(texture, rect, pixels, pitch) == 1;
 }
 
 ///
@@ -1377,8 +1379,8 @@ int sdlLockTexture(Pointer<SdlTexture> texture, Pointer<SdlRect> rect,
 /// NULL, the entire texture will be locked.
 /// \param surface this is filled in with an SDL surface representing the
 /// locked area.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -1386,16 +1388,16 @@ int sdlLockTexture(Pointer<SdlTexture> texture, Pointer<SdlRect> rect,
 /// \sa SDL_UnlockTexture
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_LockTextureToSurface(SDL_Texture *texture, const SDL_Rect *rect, SDL_Surface **surface)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_LockTextureToSurface(SDL_Texture *texture, const SDL_Rect *rect, SDL_Surface **surface)
 /// ```
-int sdlLockTextureToSurface(Pointer<SdlTexture> texture, Pointer<SdlRect> rect,
+bool sdlLockTextureToSurface(Pointer<SdlTexture> texture, Pointer<SdlRect> rect,
     Pointer<Pointer<SdlSurface>> surface) {
   final sdlLockTextureToSurfaceLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlTexture> texture, Pointer<SdlRect> rect,
+      Uint8 Function(Pointer<SdlTexture> texture, Pointer<SdlRect> rect,
           Pointer<Pointer<SdlSurface>> surface),
       int Function(Pointer<SdlTexture> texture, Pointer<SdlRect> rect,
           Pointer<Pointer<SdlSurface>> surface)>('SDL_LockTextureToSurface');
-  return sdlLockTextureToSurfaceLookupFunction(texture, rect, surface);
+  return sdlLockTextureToSurfaceLookupFunction(texture, rect, surface) == 1;
 }
 
 ///
@@ -1436,24 +1438,24 @@ void sdlUnlockTexture(Pointer<SdlTexture> texture) {
 /// \param texture the targeted texture, which must be created with the
 /// `SDL_TEXTUREACCESS_TARGET` flag, or NULL to render to the
 /// window instead of a texture.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetRenderTarget
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_SetRenderTarget(SDL_Renderer *renderer, SDL_Texture *texture)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetRenderTarget(SDL_Renderer *renderer, SDL_Texture *texture)
 /// ```
-int sdlSetRenderTarget(
+bool sdlSetRenderTarget(
     Pointer<SdlRenderer> renderer, Pointer<SdlTexture> texture) {
   final sdlSetRenderTargetLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(
+      Uint8 Function(
           Pointer<SdlRenderer> renderer, Pointer<SdlTexture> texture),
       int Function(Pointer<SdlRenderer> renderer,
           Pointer<SdlTexture> texture)>('SDL_SetRenderTarget');
-  return sdlSetRenderTargetLookupFunction(renderer, texture);
+  return sdlSetRenderTargetLookupFunction(renderer, texture) == 1;
 }
 
 ///
@@ -1499,8 +1501,8 @@ Pointer<SdlTexture> sdlGetRenderTarget(Pointer<SdlRenderer> renderer) {
 /// \param h the height of the logical resolution.
 /// \param mode the presentation mode used.
 /// \param scale_mode the scale mode used.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -1509,17 +1511,18 @@ Pointer<SdlTexture> sdlGetRenderTarget(Pointer<SdlRenderer> renderer) {
 /// \sa SDL_GetRenderLogicalPresentationRect
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_SetRenderLogicalPresentation(SDL_Renderer *renderer, int w, int h, SDL_RendererLogicalPresentation mode, SDL_ScaleMode scale_mode)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetRenderLogicalPresentation(SDL_Renderer *renderer, int w, int h, SDL_RendererLogicalPresentation mode, SDL_ScaleMode scale_mode)
 /// ```
-int sdlSetRenderLogicalPresentation(
+bool sdlSetRenderLogicalPresentation(
     Pointer<SdlRenderer> renderer, int w, int h, int mode, int scaleMode) {
   final sdlSetRenderLogicalPresentationLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlRenderer> renderer, Int32 w, Int32 h,
+      Uint8 Function(Pointer<SdlRenderer> renderer, Int32 w, Int32 h,
           Int32 mode, Int32 scaleMode),
       int Function(Pointer<SdlRenderer> renderer, int w, int h, int mode,
           int scaleMode)>('SDL_SetRenderLogicalPresentation');
   return sdlSetRenderLogicalPresentationLookupFunction(
-      renderer, w, h, mode, scaleMode);
+          renderer, w, h, mode, scaleMode) ==
+      1;
 }
 
 ///
@@ -1533,24 +1536,24 @@ int sdlSetRenderLogicalPresentation(
 /// \param h an int to be filled with the height.
 /// \param mode a pointer filled in with the presentation mode.
 /// \param scale_mode a pointer filled in with the scale mode.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_SetRenderLogicalPresentation
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_GetRenderLogicalPresentation(SDL_Renderer *renderer, int *w, int *h, SDL_RendererLogicalPresentation *mode, SDL_ScaleMode *scale_mode)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetRenderLogicalPresentation(SDL_Renderer *renderer, int *w, int *h, SDL_RendererLogicalPresentation *mode, SDL_ScaleMode *scale_mode)
 /// ```
-int sdlGetRenderLogicalPresentation(
+bool sdlGetRenderLogicalPresentation(
     Pointer<SdlRenderer> renderer,
     Pointer<Int32> w,
     Pointer<Int32> h,
     Pointer<Int32> mode,
     Pointer<Int32> scaleMode) {
   final sdlGetRenderLogicalPresentationLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlRenderer> renderer, Pointer<Int32> w,
+      Uint8 Function(Pointer<SdlRenderer> renderer, Pointer<Int32> w,
           Pointer<Int32> h, Pointer<Int32> mode, Pointer<Int32> scaleMode),
       int Function(
           Pointer<SdlRenderer> renderer,
@@ -1559,7 +1562,8 @@ int sdlGetRenderLogicalPresentation(
           Pointer<Int32> mode,
           Pointer<Int32> scaleMode)>('SDL_GetRenderLogicalPresentation');
   return sdlGetRenderLogicalPresentationLookupFunction(
-      renderer, w, h, mode, scaleMode);
+          renderer, w, h, mode, scaleMode) ==
+      1;
 }
 
 ///
@@ -1573,24 +1577,24 @@ int sdlGetRenderLogicalPresentation(
 /// \param renderer the rendering context.
 /// \param rect a pointer filled in with the final presentation rectangle, may
 /// be NULL.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_SetRenderLogicalPresentation
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_GetRenderLogicalPresentationRect(SDL_Renderer *renderer, SDL_FRect *rect)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetRenderLogicalPresentationRect(SDL_Renderer *renderer, SDL_FRect *rect)
 /// ```
-int sdlGetRenderLogicalPresentationRect(
+bool sdlGetRenderLogicalPresentationRect(
     Pointer<SdlRenderer> renderer, Pointer<SdlFRect> rect) {
   final sdlGetRenderLogicalPresentationRectLookupFunction =
       libSdl3.lookupFunction<
-          Int32 Function(Pointer<SdlRenderer> renderer, Pointer<SdlFRect> rect),
+          Uint8 Function(Pointer<SdlRenderer> renderer, Pointer<SdlFRect> rect),
           int Function(Pointer<SdlRenderer> renderer,
               Pointer<SdlFRect> rect)>('SDL_GetRenderLogicalPresentationRect');
-  return sdlGetRenderLogicalPresentationRectLookupFunction(renderer, rect);
+  return sdlGetRenderLogicalPresentationRectLookupFunction(renderer, rect) == 1;
 }
 
 ///
@@ -1601,8 +1605,8 @@ int sdlGetRenderLogicalPresentationRect(
 /// \param window_y the y coordinate in window coordinates.
 /// \param x a pointer filled with the x coordinate in render coordinates.
 /// \param y a pointer filled with the y coordinate in render coordinates.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -1610,12 +1614,12 @@ int sdlGetRenderLogicalPresentationRect(
 /// \sa SDL_SetRenderScale
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_RenderCoordinatesFromWindow(SDL_Renderer *renderer, float window_x, float window_y, float *x, float *y)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_RenderCoordinatesFromWindow(SDL_Renderer *renderer, float window_x, float window_y, float *x, float *y)
 /// ```
-int sdlRenderCoordinatesFromWindow(Pointer<SdlRenderer> renderer,
+bool sdlRenderCoordinatesFromWindow(Pointer<SdlRenderer> renderer,
     double windowX, double windowY, Pointer<Float> x, Pointer<Float> y) {
   final sdlRenderCoordinatesFromWindowLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlRenderer> renderer, Float windowX,
+      Uint8 Function(Pointer<SdlRenderer> renderer, Float windowX,
           Float windowY, Pointer<Float> x, Pointer<Float> y),
       int Function(
           Pointer<SdlRenderer> renderer,
@@ -1624,7 +1628,8 @@ int sdlRenderCoordinatesFromWindow(Pointer<SdlRenderer> renderer,
           Pointer<Float> x,
           Pointer<Float> y)>('SDL_RenderCoordinatesFromWindow');
   return sdlRenderCoordinatesFromWindowLookupFunction(
-      renderer, windowX, windowY, x, y);
+          renderer, windowX, windowY, x, y) ==
+      1;
 }
 
 ///
@@ -1637,8 +1642,8 @@ int sdlRenderCoordinatesFromWindow(Pointer<SdlRenderer> renderer,
 /// coordinates.
 /// \param window_y a pointer filled with the y coordinate in window
 /// coordinates.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -1646,12 +1651,12 @@ int sdlRenderCoordinatesFromWindow(Pointer<SdlRenderer> renderer,
 /// \sa SDL_SetRenderScale
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_RenderCoordinatesToWindow(SDL_Renderer *renderer, float x, float y, float *window_x, float *window_y)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_RenderCoordinatesToWindow(SDL_Renderer *renderer, float x, float y, float *window_x, float *window_y)
 /// ```
-int sdlRenderCoordinatesToWindow(Pointer<SdlRenderer> renderer, double x,
+bool sdlRenderCoordinatesToWindow(Pointer<SdlRenderer> renderer, double x,
     double y, Pointer<Float> windowX, Pointer<Float> windowY) {
   final sdlRenderCoordinatesToWindowLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlRenderer> renderer, Float x, Float y,
+      Uint8 Function(Pointer<SdlRenderer> renderer, Float x, Float y,
           Pointer<Float> windowX, Pointer<Float> windowY),
       int Function(
           Pointer<SdlRenderer> renderer,
@@ -1660,7 +1665,8 @@ int sdlRenderCoordinatesToWindow(Pointer<SdlRenderer> renderer, double x,
           Pointer<Float> windowX,
           Pointer<Float> windowY)>('SDL_RenderCoordinatesToWindow');
   return sdlRenderCoordinatesToWindowLookupFunction(
-      renderer, x, y, windowX, windowY);
+          renderer, x, y, windowX, windowY) ==
+      1;
 }
 
 ///
@@ -1673,25 +1679,25 @@ int sdlRenderCoordinatesToWindow(Pointer<SdlRenderer> renderer, double x,
 ///
 /// \param renderer the rendering context.
 /// \param event the event to modify.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_RenderCoordinatesFromWindow
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_ConvertEventToRenderCoordinates(SDL_Renderer *renderer, SDL_Event *event)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_ConvertEventToRenderCoordinates(SDL_Renderer *renderer, SDL_Event *event)
 /// ```
-int sdlConvertEventToRenderCoordinates(
+bool sdlConvertEventToRenderCoordinates(
     Pointer<SdlRenderer> renderer, Pointer<SdlEvent> event) {
   final sdlConvertEventToRenderCoordinatesLookupFunction =
       libSdl3.lookupFunction<
-          Int32 Function(
+          Uint8 Function(
               Pointer<SdlRenderer> renderer, Pointer<SdlEvent> event),
           int Function(Pointer<SdlRenderer> renderer,
               Pointer<SdlEvent> event)>('SDL_ConvertEventToRenderCoordinates');
-  return sdlConvertEventToRenderCoordinatesLookupFunction(renderer, event);
+  return sdlConvertEventToRenderCoordinatesLookupFunction(renderer, event) == 1;
 }
 
 ///
@@ -1700,8 +1706,8 @@ int sdlConvertEventToRenderCoordinates(
 /// \param renderer the rendering context.
 /// \param rect the SDL_Rect structure representing the drawing area, or NULL
 /// to set the viewport to the entire target.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -1709,14 +1715,15 @@ int sdlConvertEventToRenderCoordinates(
 /// \sa SDL_RenderViewportSet
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_SetRenderViewport(SDL_Renderer *renderer, const SDL_Rect *rect)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetRenderViewport(SDL_Renderer *renderer, const SDL_Rect *rect)
 /// ```
-int sdlSetRenderViewport(Pointer<SdlRenderer> renderer, Pointer<SdlRect> rect) {
+bool sdlSetRenderViewport(
+    Pointer<SdlRenderer> renderer, Pointer<SdlRect> rect) {
   final sdlSetRenderViewportLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlRenderer> renderer, Pointer<SdlRect> rect),
+      Uint8 Function(Pointer<SdlRenderer> renderer, Pointer<SdlRect> rect),
       int Function(Pointer<SdlRenderer> renderer,
           Pointer<SdlRect> rect)>('SDL_SetRenderViewport');
-  return sdlSetRenderViewportLookupFunction(renderer, rect);
+  return sdlSetRenderViewportLookupFunction(renderer, rect) == 1;
 }
 
 ///
@@ -1724,8 +1731,8 @@ int sdlSetRenderViewport(Pointer<SdlRenderer> renderer, Pointer<SdlRect> rect) {
 ///
 /// \param renderer the rendering context.
 /// \param rect an SDL_Rect structure filled in with the current drawing area.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -1733,14 +1740,15 @@ int sdlSetRenderViewport(Pointer<SdlRenderer> renderer, Pointer<SdlRect> rect) {
 /// \sa SDL_SetRenderViewport
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_GetRenderViewport(SDL_Renderer *renderer, SDL_Rect *rect)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetRenderViewport(SDL_Renderer *renderer, SDL_Rect *rect)
 /// ```
-int sdlGetRenderViewport(Pointer<SdlRenderer> renderer, Pointer<SdlRect> rect) {
+bool sdlGetRenderViewport(
+    Pointer<SdlRenderer> renderer, Pointer<SdlRect> rect) {
   final sdlGetRenderViewportLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlRenderer> renderer, Pointer<SdlRect> rect),
+      Uint8 Function(Pointer<SdlRenderer> renderer, Pointer<SdlRect> rect),
       int Function(Pointer<SdlRenderer> renderer,
           Pointer<SdlRect> rect)>('SDL_GetRenderViewport');
-  return sdlGetRenderViewportLookupFunction(renderer, rect);
+  return sdlGetRenderViewportLookupFunction(renderer, rect) == 1;
 }
 
 ///
@@ -1764,7 +1772,7 @@ int sdlGetRenderViewport(Pointer<SdlRenderer> renderer, Pointer<SdlRect> rect) {
 /// ```
 bool sdlRenderViewportSet(Pointer<SdlRenderer> renderer) {
   final sdlRenderViewportSetLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlRenderer> renderer),
+      Uint8 Function(Pointer<SdlRenderer> renderer),
       int Function(Pointer<SdlRenderer> renderer)>('SDL_RenderViewportSet');
   return sdlRenderViewportSetLookupFunction(renderer) == 1;
 }
@@ -1782,20 +1790,21 @@ bool sdlRenderViewportSet(Pointer<SdlRenderer> renderer) {
 /// \param renderer the rendering context.
 /// \param rect a pointer filled in with the area that is safe for interactive
 /// content.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_GetRenderSafeArea(SDL_Renderer *renderer, SDL_Rect *rect)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetRenderSafeArea(SDL_Renderer *renderer, SDL_Rect *rect)
 /// ```
-int sdlGetRenderSafeArea(Pointer<SdlRenderer> renderer, Pointer<SdlRect> rect) {
+bool sdlGetRenderSafeArea(
+    Pointer<SdlRenderer> renderer, Pointer<SdlRect> rect) {
   final sdlGetRenderSafeAreaLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlRenderer> renderer, Pointer<SdlRect> rect),
+      Uint8 Function(Pointer<SdlRenderer> renderer, Pointer<SdlRect> rect),
       int Function(Pointer<SdlRenderer> renderer,
           Pointer<SdlRect> rect)>('SDL_GetRenderSafeArea');
-  return sdlGetRenderSafeAreaLookupFunction(renderer, rect);
+  return sdlGetRenderSafeAreaLookupFunction(renderer, rect) == 1;
 }
 
 ///
@@ -1804,8 +1813,8 @@ int sdlGetRenderSafeArea(Pointer<SdlRenderer> renderer, Pointer<SdlRect> rect) {
 /// \param renderer the rendering context.
 /// \param rect an SDL_Rect structure representing the clip area, relative to
 /// the viewport, or NULL to disable clipping.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -1813,14 +1822,15 @@ int sdlGetRenderSafeArea(Pointer<SdlRenderer> renderer, Pointer<SdlRect> rect) {
 /// \sa SDL_RenderClipEnabled
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_SetRenderClipRect(SDL_Renderer *renderer, const SDL_Rect *rect)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetRenderClipRect(SDL_Renderer *renderer, const SDL_Rect *rect)
 /// ```
-int sdlSetRenderClipRect(Pointer<SdlRenderer> renderer, Pointer<SdlRect> rect) {
+bool sdlSetRenderClipRect(
+    Pointer<SdlRenderer> renderer, Pointer<SdlRect> rect) {
   final sdlSetRenderClipRectLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlRenderer> renderer, Pointer<SdlRect> rect),
+      Uint8 Function(Pointer<SdlRenderer> renderer, Pointer<SdlRect> rect),
       int Function(Pointer<SdlRenderer> renderer,
           Pointer<SdlRect> rect)>('SDL_SetRenderClipRect');
-  return sdlSetRenderClipRectLookupFunction(renderer, rect);
+  return sdlSetRenderClipRectLookupFunction(renderer, rect) == 1;
 }
 
 ///
@@ -1829,8 +1839,8 @@ int sdlSetRenderClipRect(Pointer<SdlRenderer> renderer, Pointer<SdlRect> rect) {
 /// \param renderer the rendering context.
 /// \param rect an SDL_Rect structure filled in with the current clipping area
 /// or an empty rectangle if clipping is disabled.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -1838,14 +1848,15 @@ int sdlSetRenderClipRect(Pointer<SdlRenderer> renderer, Pointer<SdlRect> rect) {
 /// \sa SDL_SetRenderClipRect
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_GetRenderClipRect(SDL_Renderer *renderer, SDL_Rect *rect)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetRenderClipRect(SDL_Renderer *renderer, SDL_Rect *rect)
 /// ```
-int sdlGetRenderClipRect(Pointer<SdlRenderer> renderer, Pointer<SdlRect> rect) {
+bool sdlGetRenderClipRect(
+    Pointer<SdlRenderer> renderer, Pointer<SdlRect> rect) {
   final sdlGetRenderClipRectLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlRenderer> renderer, Pointer<SdlRect> rect),
+      Uint8 Function(Pointer<SdlRenderer> renderer, Pointer<SdlRect> rect),
       int Function(Pointer<SdlRenderer> renderer,
           Pointer<SdlRect> rect)>('SDL_GetRenderClipRect');
-  return sdlGetRenderClipRectLookupFunction(renderer, rect);
+  return sdlGetRenderClipRectLookupFunction(renderer, rect) == 1;
 }
 
 ///
@@ -1865,7 +1876,7 @@ int sdlGetRenderClipRect(Pointer<SdlRenderer> renderer, Pointer<SdlRect> rect) {
 /// ```
 bool sdlRenderClipEnabled(Pointer<SdlRenderer> renderer) {
   final sdlRenderClipEnabledLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlRenderer> renderer),
+      Uint8 Function(Pointer<SdlRenderer> renderer),
       int Function(Pointer<SdlRenderer> renderer)>('SDL_RenderClipEnabled');
   return sdlRenderClipEnabledLookupFunction(renderer) == 1;
 }
@@ -1884,23 +1895,23 @@ bool sdlRenderClipEnabled(Pointer<SdlRenderer> renderer) {
 /// \param renderer the rendering context.
 /// \param scaleX the horizontal scaling factor.
 /// \param scaleY the vertical scaling factor.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetRenderScale
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_SetRenderScale(SDL_Renderer *renderer, float scaleX, float scaleY)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetRenderScale(SDL_Renderer *renderer, float scaleX, float scaleY)
 /// ```
-int sdlSetRenderScale(
+bool sdlSetRenderScale(
     Pointer<SdlRenderer> renderer, double scaleX, double scaleY) {
   final sdlSetRenderScaleLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlRenderer> renderer, Float scaleX, Float scaleY),
+      Uint8 Function(Pointer<SdlRenderer> renderer, Float scaleX, Float scaleY),
       int Function(Pointer<SdlRenderer> renderer, double scaleX,
           double scaleY)>('SDL_SetRenderScale');
-  return sdlSetRenderScaleLookupFunction(renderer, scaleX, scaleY);
+  return sdlSetRenderScaleLookupFunction(renderer, scaleX, scaleY) == 1;
 }
 
 ///
@@ -1909,24 +1920,24 @@ int sdlSetRenderScale(
 /// \param renderer the rendering context.
 /// \param scaleX a pointer filled in with the horizontal scaling factor.
 /// \param scaleY a pointer filled in with the vertical scaling factor.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_SetRenderScale
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_GetRenderScale(SDL_Renderer *renderer, float *scaleX, float *scaleY)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetRenderScale(SDL_Renderer *renderer, float *scaleX, float *scaleY)
 /// ```
-int sdlGetRenderScale(Pointer<SdlRenderer> renderer, Pointer<Float> scaleX,
+bool sdlGetRenderScale(Pointer<SdlRenderer> renderer, Pointer<Float> scaleX,
     Pointer<Float> scaleY) {
   final sdlGetRenderScaleLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlRenderer> renderer, Pointer<Float> scaleX,
+      Uint8 Function(Pointer<SdlRenderer> renderer, Pointer<Float> scaleX,
           Pointer<Float> scaleY),
       int Function(Pointer<SdlRenderer> renderer, Pointer<Float> scaleX,
           Pointer<Float> scaleY)>('SDL_GetRenderScale');
-  return sdlGetRenderScaleLookupFunction(renderer, scaleX, scaleY);
+  return sdlGetRenderScaleLookupFunction(renderer, scaleX, scaleY) == 1;
 }
 
 ///
@@ -1942,8 +1953,8 @@ int sdlGetRenderScale(Pointer<SdlRenderer> renderer, Pointer<Float> scaleX,
 /// \param a the alpha value used to draw on the rendering target; usually
 /// `SDL_ALPHA_OPAQUE` (255). Use SDL_SetRenderDrawBlendMode to
 /// specify how the alpha channel is used.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -1951,16 +1962,16 @@ int sdlGetRenderScale(Pointer<SdlRenderer> renderer, Pointer<Float> scaleX,
 /// \sa SDL_SetRenderDrawColorFloat
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_SetRenderDrawColor(SDL_Renderer *renderer, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetRenderDrawColor(SDL_Renderer *renderer, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 /// ```
-int sdlSetRenderDrawColor(
+bool sdlSetRenderDrawColor(
     Pointer<SdlRenderer> renderer, int r, int g, int b, int a) {
   final sdlSetRenderDrawColorLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(
+      Uint8 Function(
           Pointer<SdlRenderer> renderer, Uint8 r, Uint8 g, Uint8 b, Uint8 a),
       int Function(Pointer<SdlRenderer> renderer, int r, int g, int b,
           int a)>('SDL_SetRenderDrawColor');
-  return sdlSetRenderDrawColorLookupFunction(renderer, r, g, b, a);
+  return sdlSetRenderDrawColorLookupFunction(renderer, r, g, b, a) == 1;
 }
 
 ///
@@ -1976,8 +1987,8 @@ int sdlSetRenderDrawColor(
 /// \param a the alpha value used to draw on the rendering target. Use
 /// SDL_SetRenderDrawBlendMode to specify how the alpha channel is
 /// used.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -1985,16 +1996,16 @@ int sdlSetRenderDrawColor(
 /// \sa SDL_SetRenderDrawColor
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_SetRenderDrawColorFloat(SDL_Renderer *renderer, float r, float g, float b, float a)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetRenderDrawColorFloat(SDL_Renderer *renderer, float r, float g, float b, float a)
 /// ```
-int sdlSetRenderDrawColorFloat(
+bool sdlSetRenderDrawColorFloat(
     Pointer<SdlRenderer> renderer, double r, double g, double b, double a) {
   final sdlSetRenderDrawColorFloatLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(
+      Uint8 Function(
           Pointer<SdlRenderer> renderer, Float r, Float g, Float b, Float a),
       int Function(Pointer<SdlRenderer> renderer, double r, double g, double b,
           double a)>('SDL_SetRenderDrawColorFloat');
-  return sdlSetRenderDrawColorFloatLookupFunction(renderer, r, g, b, a);
+  return sdlSetRenderDrawColorFloatLookupFunction(renderer, r, g, b, a) == 1;
 }
 
 ///
@@ -2009,8 +2020,8 @@ int sdlSetRenderDrawColorFloat(
 /// rendering target.
 /// \param a a pointer filled in with the alpha value used to draw on the
 /// rendering target; usually `SDL_ALPHA_OPAQUE` (255).
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -2018,12 +2029,12 @@ int sdlSetRenderDrawColorFloat(
 /// \sa SDL_SetRenderDrawColor
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_GetRenderDrawColor(SDL_Renderer *renderer, Uint8 *r, Uint8 *g, Uint8 *b, Uint8 *a)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetRenderDrawColor(SDL_Renderer *renderer, Uint8 *r, Uint8 *g, Uint8 *b, Uint8 *a)
 /// ```
-int sdlGetRenderDrawColor(Pointer<SdlRenderer> renderer, Pointer<Uint8> r,
+bool sdlGetRenderDrawColor(Pointer<SdlRenderer> renderer, Pointer<Uint8> r,
     Pointer<Uint8> g, Pointer<Uint8> b, Pointer<Uint8> a) {
   final sdlGetRenderDrawColorLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlRenderer> renderer, Pointer<Uint8> r,
+      Uint8 Function(Pointer<SdlRenderer> renderer, Pointer<Uint8> r,
           Pointer<Uint8> g, Pointer<Uint8> b, Pointer<Uint8> a),
       int Function(
           Pointer<SdlRenderer> renderer,
@@ -2031,7 +2042,7 @@ int sdlGetRenderDrawColor(Pointer<SdlRenderer> renderer, Pointer<Uint8> r,
           Pointer<Uint8> g,
           Pointer<Uint8> b,
           Pointer<Uint8> a)>('SDL_GetRenderDrawColor');
-  return sdlGetRenderDrawColorLookupFunction(renderer, r, g, b, a);
+  return sdlGetRenderDrawColorLookupFunction(renderer, r, g, b, a) == 1;
 }
 
 ///
@@ -2046,8 +2057,8 @@ int sdlGetRenderDrawColor(Pointer<SdlRenderer> renderer, Pointer<Uint8> r,
 /// rendering target.
 /// \param a a pointer filled in with the alpha value used to draw on the
 /// rendering target.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -2055,12 +2066,12 @@ int sdlGetRenderDrawColor(Pointer<SdlRenderer> renderer, Pointer<Uint8> r,
 /// \sa SDL_GetRenderDrawColor
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_GetRenderDrawColorFloat(SDL_Renderer *renderer, float *r, float *g, float *b, float *a)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetRenderDrawColorFloat(SDL_Renderer *renderer, float *r, float *g, float *b, float *a)
 /// ```
-int sdlGetRenderDrawColorFloat(Pointer<SdlRenderer> renderer, Pointer<Float> r,
+bool sdlGetRenderDrawColorFloat(Pointer<SdlRenderer> renderer, Pointer<Float> r,
     Pointer<Float> g, Pointer<Float> b, Pointer<Float> a) {
   final sdlGetRenderDrawColorFloatLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlRenderer> renderer, Pointer<Float> r,
+      Uint8 Function(Pointer<SdlRenderer> renderer, Pointer<Float> r,
           Pointer<Float> g, Pointer<Float> b, Pointer<Float> a),
       int Function(
           Pointer<SdlRenderer> renderer,
@@ -2068,7 +2079,7 @@ int sdlGetRenderDrawColorFloat(Pointer<SdlRenderer> renderer, Pointer<Float> r,
           Pointer<Float> g,
           Pointer<Float> b,
           Pointer<Float> a)>('SDL_GetRenderDrawColorFloat');
-  return sdlGetRenderDrawColorFloatLookupFunction(renderer, r, g, b, a);
+  return sdlGetRenderDrawColorFloatLookupFunction(renderer, r, g, b, a) == 1;
 }
 
 ///
@@ -2084,22 +2095,22 @@ int sdlGetRenderDrawColorFloat(Pointer<SdlRenderer> renderer, Pointer<Float> r,
 ///
 /// \param renderer the rendering context.
 /// \param scale the color scale value.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetRenderColorScale
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_SetRenderColorScale(SDL_Renderer *renderer, float scale)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetRenderColorScale(SDL_Renderer *renderer, float scale)
 /// ```
-int sdlSetRenderColorScale(Pointer<SdlRenderer> renderer, double scale) {
+bool sdlSetRenderColorScale(Pointer<SdlRenderer> renderer, double scale) {
   final sdlSetRenderColorScaleLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlRenderer> renderer, Float scale),
+      Uint8 Function(Pointer<SdlRenderer> renderer, Float scale),
       int Function(Pointer<SdlRenderer> renderer,
           double scale)>('SDL_SetRenderColorScale');
-  return sdlSetRenderColorScaleLookupFunction(renderer, scale);
+  return sdlSetRenderColorScaleLookupFunction(renderer, scale) == 1;
 }
 
 ///
@@ -2107,23 +2118,23 @@ int sdlSetRenderColorScale(Pointer<SdlRenderer> renderer, double scale) {
 ///
 /// \param renderer the rendering context.
 /// \param scale a pointer filled in with the current color scale value.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_SetRenderColorScale
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_GetRenderColorScale(SDL_Renderer *renderer, float *scale)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetRenderColorScale(SDL_Renderer *renderer, float *scale)
 /// ```
-int sdlGetRenderColorScale(
+bool sdlGetRenderColorScale(
     Pointer<SdlRenderer> renderer, Pointer<Float> scale) {
   final sdlGetRenderColorScaleLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlRenderer> renderer, Pointer<Float> scale),
+      Uint8 Function(Pointer<SdlRenderer> renderer, Pointer<Float> scale),
       int Function(Pointer<SdlRenderer> renderer,
           Pointer<Float> scale)>('SDL_GetRenderColorScale');
-  return sdlGetRenderColorScaleLookupFunction(renderer, scale);
+  return sdlGetRenderColorScaleLookupFunction(renderer, scale) == 1;
 }
 
 ///
@@ -2133,22 +2144,22 @@ int sdlGetRenderColorScale(
 ///
 /// \param renderer the rendering context.
 /// \param blendMode the SDL_BlendMode to use for blending.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetRenderDrawBlendMode
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_SetRenderDrawBlendMode(SDL_Renderer *renderer, SDL_BlendMode blendMode)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetRenderDrawBlendMode(SDL_Renderer *renderer, SDL_BlendMode blendMode)
 /// ```
-int sdlSetRenderDrawBlendMode(Pointer<SdlRenderer> renderer, int blendMode) {
+bool sdlSetRenderDrawBlendMode(Pointer<SdlRenderer> renderer, int blendMode) {
   final sdlSetRenderDrawBlendModeLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlRenderer> renderer, Uint32 blendMode),
+      Uint8 Function(Pointer<SdlRenderer> renderer, Uint32 blendMode),
       int Function(Pointer<SdlRenderer> renderer,
           int blendMode)>('SDL_SetRenderDrawBlendMode');
-  return sdlSetRenderDrawBlendModeLookupFunction(renderer, blendMode);
+  return sdlSetRenderDrawBlendModeLookupFunction(renderer, blendMode) == 1;
 }
 
 ///
@@ -2156,23 +2167,23 @@ int sdlSetRenderDrawBlendMode(Pointer<SdlRenderer> renderer, int blendMode) {
 ///
 /// \param renderer the rendering context.
 /// \param blendMode a pointer filled in with the current SDL_BlendMode.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_SetRenderDrawBlendMode
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_GetRenderDrawBlendMode(SDL_Renderer *renderer, SDL_BlendMode *blendMode)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetRenderDrawBlendMode(SDL_Renderer *renderer, SDL_BlendMode *blendMode)
 /// ```
-int sdlGetRenderDrawBlendMode(
+bool sdlGetRenderDrawBlendMode(
     Pointer<SdlRenderer> renderer, Pointer<Uint32> blendMode) {
   final sdlGetRenderDrawBlendModeLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlRenderer> renderer, Pointer<Uint32> blendMode),
+      Uint8 Function(Pointer<SdlRenderer> renderer, Pointer<Uint32> blendMode),
       int Function(Pointer<SdlRenderer> renderer,
           Pointer<Uint32> blendMode)>('SDL_GetRenderDrawBlendMode');
-  return sdlGetRenderDrawBlendModeLookupFunction(renderer, blendMode);
+  return sdlGetRenderDrawBlendModeLookupFunction(renderer, blendMode) == 1;
 }
 
 ///
@@ -2184,21 +2195,21 @@ int sdlGetRenderDrawBlendMode(
 /// SDL_SetRenderDrawColor() when needed.
 ///
 /// \param renderer the rendering context.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_SetRenderDrawColor
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_RenderClear(SDL_Renderer *renderer)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_RenderClear(SDL_Renderer *renderer)
 /// ```
-int sdlRenderClear(Pointer<SdlRenderer> renderer) {
+bool sdlRenderClear(Pointer<SdlRenderer> renderer) {
   final sdlRenderClearLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlRenderer> renderer),
+      Uint8 Function(Pointer<SdlRenderer> renderer),
       int Function(Pointer<SdlRenderer> renderer)>('SDL_RenderClear');
-  return sdlRenderClearLookupFunction(renderer);
+  return sdlRenderClearLookupFunction(renderer) == 1;
 }
 
 ///
@@ -2207,22 +2218,22 @@ int sdlRenderClear(Pointer<SdlRenderer> renderer) {
 /// \param renderer the renderer which should draw a point.
 /// \param x the x coordinate of the point.
 /// \param y the y coordinate of the point.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_RenderPoints
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_RenderPoint(SDL_Renderer *renderer, float x, float y)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_RenderPoint(SDL_Renderer *renderer, float x, float y)
 /// ```
-int sdlRenderPoint(Pointer<SdlRenderer> renderer, double x, double y) {
+bool sdlRenderPoint(Pointer<SdlRenderer> renderer, double x, double y) {
   final sdlRenderPointLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlRenderer> renderer, Float x, Float y),
+      Uint8 Function(Pointer<SdlRenderer> renderer, Float x, Float y),
       int Function(Pointer<SdlRenderer> renderer, double x,
           double y)>('SDL_RenderPoint');
-  return sdlRenderPointLookupFunction(renderer, x, y);
+  return sdlRenderPointLookupFunction(renderer, x, y) == 1;
 }
 
 ///
@@ -2231,24 +2242,24 @@ int sdlRenderPoint(Pointer<SdlRenderer> renderer, double x, double y) {
 /// \param renderer the renderer which should draw multiple points.
 /// \param points the points to draw.
 /// \param count the number of points to draw.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_RenderPoint
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_RenderPoints(SDL_Renderer *renderer, const SDL_FPoint *points, int count)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_RenderPoints(SDL_Renderer *renderer, const SDL_FPoint *points, int count)
 /// ```
-int sdlRenderPoints(
+bool sdlRenderPoints(
     Pointer<SdlRenderer> renderer, Pointer<SdlFPoint> points, int count) {
   final sdlRenderPointsLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlRenderer> renderer, Pointer<SdlFPoint> points,
+      Uint8 Function(Pointer<SdlRenderer> renderer, Pointer<SdlFPoint> points,
           Int32 count),
       int Function(Pointer<SdlRenderer> renderer, Pointer<SdlFPoint> points,
           int count)>('SDL_RenderPoints');
-  return sdlRenderPointsLookupFunction(renderer, points, count);
+  return sdlRenderPointsLookupFunction(renderer, points, count) == 1;
 }
 
 ///
@@ -2259,24 +2270,24 @@ int sdlRenderPoints(
 /// \param y1 the y coordinate of the start point.
 /// \param x2 the x coordinate of the end point.
 /// \param y2 the y coordinate of the end point.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_RenderLines
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_RenderLine(SDL_Renderer *renderer, float x1, float y1, float x2, float y2)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_RenderLine(SDL_Renderer *renderer, float x1, float y1, float x2, float y2)
 /// ```
-int sdlRenderLine(
+bool sdlRenderLine(
     Pointer<SdlRenderer> renderer, double x1, double y1, double x2, double y2) {
   final sdlRenderLineLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlRenderer> renderer, Float x1, Float y1,
+      Uint8 Function(Pointer<SdlRenderer> renderer, Float x1, Float y1,
           Float x2, Float y2),
       int Function(Pointer<SdlRenderer> renderer, double x1, double y1,
           double x2, double y2)>('SDL_RenderLine');
-  return sdlRenderLineLookupFunction(renderer, x1, y1, x2, y2);
+  return sdlRenderLineLookupFunction(renderer, x1, y1, x2, y2) == 1;
 }
 
 ///
@@ -2286,24 +2297,24 @@ int sdlRenderLine(
 /// \param renderer the renderer which should draw multiple lines.
 /// \param points the points along the lines.
 /// \param count the number of points, drawing count-1 lines.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_RenderLine
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_RenderLines(SDL_Renderer *renderer, const SDL_FPoint *points, int count)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_RenderLines(SDL_Renderer *renderer, const SDL_FPoint *points, int count)
 /// ```
-int sdlRenderLines(
+bool sdlRenderLines(
     Pointer<SdlRenderer> renderer, Pointer<SdlFPoint> points, int count) {
   final sdlRenderLinesLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlRenderer> renderer, Pointer<SdlFPoint> points,
+      Uint8 Function(Pointer<SdlRenderer> renderer, Pointer<SdlFPoint> points,
           Int32 count),
       int Function(Pointer<SdlRenderer> renderer, Pointer<SdlFPoint> points,
           int count)>('SDL_RenderLines');
-  return sdlRenderLinesLookupFunction(renderer, points, count);
+  return sdlRenderLinesLookupFunction(renderer, points, count) == 1;
 }
 
 ///
@@ -2312,22 +2323,22 @@ int sdlRenderLines(
 /// \param renderer the renderer which should draw a rectangle.
 /// \param rect a pointer to the destination rectangle, or NULL to outline the
 /// entire rendering target.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_RenderRects
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_RenderRect(SDL_Renderer *renderer, const SDL_FRect *rect)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_RenderRect(SDL_Renderer *renderer, const SDL_FRect *rect)
 /// ```
-int sdlRenderRect(Pointer<SdlRenderer> renderer, Pointer<SdlFRect> rect) {
+bool sdlRenderRect(Pointer<SdlRenderer> renderer, Pointer<SdlFRect> rect) {
   final sdlRenderRectLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlRenderer> renderer, Pointer<SdlFRect> rect),
+      Uint8 Function(Pointer<SdlRenderer> renderer, Pointer<SdlFRect> rect),
       int Function(Pointer<SdlRenderer> renderer,
           Pointer<SdlFRect> rect)>('SDL_RenderRect');
-  return sdlRenderRectLookupFunction(renderer, rect);
+  return sdlRenderRectLookupFunction(renderer, rect) == 1;
 }
 
 ///
@@ -2337,24 +2348,24 @@ int sdlRenderRect(Pointer<SdlRenderer> renderer, Pointer<SdlFRect> rect) {
 /// \param renderer the renderer which should draw multiple rectangles.
 /// \param rects a pointer to an array of destination rectangles.
 /// \param count the number of rectangles.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_RenderRect
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_RenderRects(SDL_Renderer *renderer, const SDL_FRect *rects, int count)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_RenderRects(SDL_Renderer *renderer, const SDL_FRect *rects, int count)
 /// ```
-int sdlRenderRects(
+bool sdlRenderRects(
     Pointer<SdlRenderer> renderer, Pointer<SdlFRect> rects, int count) {
   final sdlRenderRectsLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(
+      Uint8 Function(
           Pointer<SdlRenderer> renderer, Pointer<SdlFRect> rects, Int32 count),
       int Function(Pointer<SdlRenderer> renderer, Pointer<SdlFRect> rects,
           int count)>('SDL_RenderRects');
-  return sdlRenderRectsLookupFunction(renderer, rects, count);
+  return sdlRenderRectsLookupFunction(renderer, rects, count) == 1;
 }
 
 ///
@@ -2364,22 +2375,22 @@ int sdlRenderRects(
 /// \param renderer the renderer which should fill a rectangle.
 /// \param rect a pointer to the destination rectangle, or NULL for the entire
 /// rendering target.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_RenderFillRects
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_RenderFillRect(SDL_Renderer *renderer, const SDL_FRect *rect)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_RenderFillRect(SDL_Renderer *renderer, const SDL_FRect *rect)
 /// ```
-int sdlRenderFillRect(Pointer<SdlRenderer> renderer, Pointer<SdlFRect> rect) {
+bool sdlRenderFillRect(Pointer<SdlRenderer> renderer, Pointer<SdlFRect> rect) {
   final sdlRenderFillRectLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlRenderer> renderer, Pointer<SdlFRect> rect),
+      Uint8 Function(Pointer<SdlRenderer> renderer, Pointer<SdlFRect> rect),
       int Function(Pointer<SdlRenderer> renderer,
           Pointer<SdlFRect> rect)>('SDL_RenderFillRect');
-  return sdlRenderFillRectLookupFunction(renderer, rect);
+  return sdlRenderFillRectLookupFunction(renderer, rect) == 1;
 }
 
 ///
@@ -2389,24 +2400,24 @@ int sdlRenderFillRect(Pointer<SdlRenderer> renderer, Pointer<SdlFRect> rect) {
 /// \param renderer the renderer which should fill multiple rectangles.
 /// \param rects a pointer to an array of destination rectangles.
 /// \param count the number of rectangles.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_RenderFillRect
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_RenderFillRects(SDL_Renderer *renderer, const SDL_FRect *rects, int count)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_RenderFillRects(SDL_Renderer *renderer, const SDL_FRect *rects, int count)
 /// ```
-int sdlRenderFillRects(
+bool sdlRenderFillRects(
     Pointer<SdlRenderer> renderer, Pointer<SdlFRect> rects, int count) {
   final sdlRenderFillRectsLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(
+      Uint8 Function(
           Pointer<SdlRenderer> renderer, Pointer<SdlFRect> rects, Int32 count),
       int Function(Pointer<SdlRenderer> renderer, Pointer<SdlFRect> rects,
           int count)>('SDL_RenderFillRects');
-  return sdlRenderFillRectsLookupFunction(renderer, rects, count);
+  return sdlRenderFillRectsLookupFunction(renderer, rects, count) == 1;
 }
 
 ///
@@ -2419,8 +2430,8 @@ int sdlRenderFillRects(
 /// texture.
 /// \param dstrect a pointer to the destination rectangle, or NULL for the
 /// entire rendering target.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -2428,19 +2439,23 @@ int sdlRenderFillRects(
 /// \sa SDL_RenderTextureTiled
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_RenderTexture(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_FRect *srcrect, const SDL_FRect *dstrect)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_RenderTexture(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_FRect *srcrect, const SDL_FRect *dstrect)
 /// ```
-int sdlRenderTexture(Pointer<SdlRenderer> renderer, Pointer<SdlTexture> texture,
-    Pointer<SdlFRect> srcrect, Pointer<SdlFRect> dstrect) {
+bool sdlRenderTexture(
+    Pointer<SdlRenderer> renderer,
+    Pointer<SdlTexture> texture,
+    Pointer<SdlFRect> srcrect,
+    Pointer<SdlFRect> dstrect) {
   final sdlRenderTextureLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlRenderer> renderer, Pointer<SdlTexture> texture,
+      Uint8 Function(Pointer<SdlRenderer> renderer, Pointer<SdlTexture> texture,
           Pointer<SdlFRect> srcrect, Pointer<SdlFRect> dstrect),
       int Function(
           Pointer<SdlRenderer> renderer,
           Pointer<SdlTexture> texture,
           Pointer<SdlFRect> srcrect,
           Pointer<SdlFRect> dstrect)>('SDL_RenderTexture');
-  return sdlRenderTextureLookupFunction(renderer, texture, srcrect, dstrect);
+  return sdlRenderTextureLookupFunction(renderer, texture, srcrect, dstrect) ==
+      1;
 }
 
 ///
@@ -2460,17 +2475,17 @@ int sdlRenderTexture(Pointer<SdlRenderer> renderer, Pointer<SdlTexture> texture,
 /// around dstrect.w/2, dstrect.h/2).
 /// \param flip an SDL_FlipMode value stating which flipping actions should be
 /// performed on the texture.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_RenderTexture
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_RenderTextureRotated(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_FRect *srcrect, const SDL_FRect *dstrect, const double angle, const SDL_FPoint *center, const SDL_FlipMode flip)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_RenderTextureRotated(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_FRect *srcrect, const SDL_FRect *dstrect, const double angle, const SDL_FPoint *center, const SDL_FlipMode flip)
 /// ```
-int sdlRenderTextureRotated(
+bool sdlRenderTextureRotated(
     Pointer<SdlRenderer> renderer,
     Pointer<SdlTexture> texture,
     Pointer<SdlFRect> srcrect,
@@ -2479,7 +2494,7 @@ int sdlRenderTextureRotated(
     Pointer<SdlFPoint> center,
     int flip) {
   final sdlRenderTextureRotatedLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(
+      Uint8 Function(
           Pointer<SdlRenderer> renderer,
           Pointer<SdlTexture> texture,
           Pointer<SdlFRect> srcrect,
@@ -2496,7 +2511,8 @@ int sdlRenderTextureRotated(
           Pointer<SdlFPoint> center,
           int flip)>('SDL_RenderTextureRotated');
   return sdlRenderTextureRotatedLookupFunction(
-      renderer, texture, srcrect, dstrect, angle, center, flip);
+          renderer, texture, srcrect, dstrect, angle, center, flip) ==
+      1;
 }
 
 ///
@@ -2515,24 +2531,24 @@ int sdlRenderTextureRotated(
 /// 64x64 tiles.
 /// \param dstrect a pointer to the destination rectangle, or NULL for the
 /// entire rendering target.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_RenderTexture
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_RenderTextureTiled(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_FRect *srcrect, float scale, const SDL_FRect *dstrect)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_RenderTextureTiled(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_FRect *srcrect, float scale, const SDL_FRect *dstrect)
 /// ```
-int sdlRenderTextureTiled(
+bool sdlRenderTextureTiled(
     Pointer<SdlRenderer> renderer,
     Pointer<SdlTexture> texture,
     Pointer<SdlFRect> srcrect,
     double scale,
     Pointer<SdlFRect> dstrect) {
   final sdlRenderTextureTiledLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlRenderer> renderer, Pointer<SdlTexture> texture,
+      Uint8 Function(Pointer<SdlRenderer> renderer, Pointer<SdlTexture> texture,
           Pointer<SdlFRect> srcrect, Float scale, Pointer<SdlFRect> dstrect),
       int Function(
           Pointer<SdlRenderer> renderer,
@@ -2541,7 +2557,8 @@ int sdlRenderTextureTiled(
           double scale,
           Pointer<SdlFRect> dstrect)>('SDL_RenderTextureTiled');
   return sdlRenderTextureTiledLookupFunction(
-      renderer, texture, srcrect, scale, dstrect);
+          renderer, texture, srcrect, scale, dstrect) ==
+      1;
 }
 
 ///
@@ -2567,17 +2584,17 @@ int sdlRenderTextureTiled(
 /// corner of `dstrect`, or 0.0f for an unscaled copy.
 /// \param dstrect a pointer to the destination rectangle, or NULL for the
 /// entire rendering target.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_RenderTexture
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_RenderTexture9Grid(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_FRect *srcrect, float left_width, float right_width, float top_height, float bottom_height, float scale, const SDL_FRect *dstrect)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_RenderTexture9Grid(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_FRect *srcrect, float left_width, float right_width, float top_height, float bottom_height, float scale, const SDL_FRect *dstrect)
 /// ```
-int sdlRenderTexture9Grid(
+bool sdlRenderTexture9Grid(
     Pointer<SdlRenderer> renderer,
     Pointer<SdlTexture> texture,
     Pointer<SdlFRect> srcrect,
@@ -2588,7 +2605,7 @@ int sdlRenderTexture9Grid(
     double scale,
     Pointer<SdlFRect> dstrect) {
   final sdlRenderTexture9GridLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(
+      Uint8 Function(
           Pointer<SdlRenderer> renderer,
           Pointer<SdlTexture> texture,
           Pointer<SdlFRect> srcrect,
@@ -2609,7 +2626,8 @@ int sdlRenderTexture9Grid(
           double scale,
           Pointer<SdlFRect> dstrect)>('SDL_RenderTexture9Grid');
   return sdlRenderTexture9GridLookupFunction(renderer, texture, srcrect,
-      leftWidth, rightWidth, topHeight, bottomHeight, scale, dstrect);
+          leftWidth, rightWidth, topHeight, bottomHeight, scale, dstrect) ==
+      1;
 }
 
 ///
@@ -2625,17 +2643,17 @@ int sdlRenderTexture9Grid(
 /// array, if NULL all vertices will be rendered in sequential
 /// order.
 /// \param num_indices number of indices.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_RenderGeometryRaw
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_RenderGeometry(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_Vertex *vertices, int num_vertices, const int *indices, int num_indices)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_RenderGeometry(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_Vertex *vertices, int num_vertices, const int *indices, int num_indices)
 /// ```
-int sdlRenderGeometry(
+bool sdlRenderGeometry(
     Pointer<SdlRenderer> renderer,
     Pointer<SdlTexture> texture,
     Pointer<SdlVertex> vertices,
@@ -2643,7 +2661,7 @@ int sdlRenderGeometry(
     Pointer<Int32> indices,
     int numIndices) {
   final sdlRenderGeometryLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(
+      Uint8 Function(
           Pointer<SdlRenderer> renderer,
           Pointer<SdlTexture> texture,
           Pointer<SdlVertex> vertices,
@@ -2658,7 +2676,8 @@ int sdlRenderGeometry(
           Pointer<Int32> indices,
           int numIndices)>('SDL_RenderGeometry');
   return sdlRenderGeometryLookupFunction(
-      renderer, texture, vertices, numVertices, indices, numIndices);
+          renderer, texture, vertices, numVertices, indices, numIndices) ==
+      1;
 }
 
 ///
@@ -2679,17 +2698,17 @@ int sdlRenderGeometry(
 /// if NULL all vertices will be rendered in sequential order.
 /// \param num_indices number of indices.
 /// \param size_indices index size: 1 (byte), 2 (short), 4 (int).
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_RenderGeometry
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_RenderGeometryRaw(SDL_Renderer *renderer, SDL_Texture *texture, const float *xy, int xy_stride, const SDL_FColor *color, int color_stride, const float *uv, int uv_stride, int num_vertices, const void *indices, int num_indices, int size_indices)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_RenderGeometryRaw(SDL_Renderer *renderer, SDL_Texture *texture, const float *xy, int xy_stride, const SDL_FColor *color, int color_stride, const float *uv, int uv_stride, int num_vertices, const void *indices, int num_indices, int size_indices)
 /// ```
-int sdlRenderGeometryRaw(
+bool sdlRenderGeometryRaw(
     Pointer<SdlRenderer> renderer,
     Pointer<SdlTexture> texture,
     Pointer<Float> xy,
@@ -2703,7 +2722,7 @@ int sdlRenderGeometryRaw(
     int numIndices,
     int sizeIndices) {
   final sdlRenderGeometryRawLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(
+      Uint8 Function(
           Pointer<SdlRenderer> renderer,
           Pointer<SdlTexture> texture,
           Pointer<Float> xy,
@@ -2730,18 +2749,19 @@ int sdlRenderGeometryRaw(
           int numIndices,
           int sizeIndices)>('SDL_RenderGeometryRaw');
   return sdlRenderGeometryRawLookupFunction(
-      renderer,
-      texture,
-      xy,
-      xyStride,
-      color,
-      colorStride,
-      uv,
-      uvStride,
-      numVertices,
-      indices,
-      numIndices,
-      sizeIndices);
+          renderer,
+          texture,
+          xy,
+          xyStride,
+          color,
+          colorStride,
+          uv,
+          uvStride,
+          numVertices,
+          indices,
+          numIndices,
+          sizeIndices) ==
+      1;
 }
 
 ///
@@ -2800,8 +2820,8 @@ Pointer<SdlSurface> sdlRenderReadPixels(
 /// do not have a concept of backbuffers.
 ///
 /// \param renderer the rendering context.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \threadsafety You may only call this function on the main thread.
 ///
@@ -2821,13 +2841,13 @@ Pointer<SdlSurface> sdlRenderReadPixels(
 /// \sa SDL_SetRenderDrawColor
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_RenderPresent(SDL_Renderer *renderer)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_RenderPresent(SDL_Renderer *renderer)
 /// ```
-int sdlRenderPresent(Pointer<SdlRenderer> renderer) {
+bool sdlRenderPresent(Pointer<SdlRenderer> renderer) {
   final sdlRenderPresentLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlRenderer> renderer),
+      Uint8 Function(Pointer<SdlRenderer> renderer),
       int Function(Pointer<SdlRenderer> renderer)>('SDL_RenderPresent');
-  return sdlRenderPresentLookupFunction(renderer);
+  return sdlRenderPresentLookupFunction(renderer) == 1;
 }
 
 ///
@@ -2899,19 +2919,19 @@ void sdlDestroyRenderer(Pointer<SdlRenderer> renderer) {
 /// be prepared to make changes if specific state needs to be protected.
 ///
 /// \param renderer the rendering context.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_FlushRenderer(SDL_Renderer *renderer)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_FlushRenderer(SDL_Renderer *renderer)
 /// ```
-int sdlFlushRenderer(Pointer<SdlRenderer> renderer) {
+bool sdlFlushRenderer(Pointer<SdlRenderer> renderer) {
   final sdlFlushRendererLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlRenderer> renderer),
+      Uint8 Function(Pointer<SdlRenderer> renderer),
       int Function(Pointer<SdlRenderer> renderer)>('SDL_FlushRenderer');
-  return sdlFlushRendererLookupFunction(renderer);
+  return sdlFlushRendererLookupFunction(renderer) == 1;
 }
 
 ///
@@ -2990,8 +3010,8 @@ Pointer<NativeType> sdlGetRenderMetalCommandEncoder(
 /// \param signal_semaphore a VkSempahore that SDL will signal when rendering
 /// for the current frame is complete, or 0 if not
 /// needed.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \threadsafety It is **NOT** safe to call this function from two threads at
 /// once.
@@ -2999,12 +3019,12 @@ Pointer<NativeType> sdlGetRenderMetalCommandEncoder(
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_AddVulkanRenderSemaphores(SDL_Renderer *renderer, Uint32 wait_stage_mask, Sint64 wait_semaphore, Sint64 signal_semaphore)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_AddVulkanRenderSemaphores(SDL_Renderer *renderer, Uint32 wait_stage_mask, Sint64 wait_semaphore, Sint64 signal_semaphore)
 /// ```
-int sdlAddVulkanRenderSemaphores(Pointer<SdlRenderer> renderer,
+bool sdlAddVulkanRenderSemaphores(Pointer<SdlRenderer> renderer,
     int waitStageMask, int waitSemaphore, int signalSemaphore) {
   final sdlAddVulkanRenderSemaphoresLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlRenderer> renderer, Uint32 waitStageMask,
+      Uint8 Function(Pointer<SdlRenderer> renderer, Uint32 waitStageMask,
           Int64 waitSemaphore, Int64 signalSemaphore),
       int Function(
           Pointer<SdlRenderer> renderer,
@@ -3012,7 +3032,8 @@ int sdlAddVulkanRenderSemaphores(Pointer<SdlRenderer> renderer,
           int waitSemaphore,
           int signalSemaphore)>('SDL_AddVulkanRenderSemaphores');
   return sdlAddVulkanRenderSemaphoresLookupFunction(
-      renderer, waitStageMask, waitSemaphore, signalSemaphore);
+          renderer, waitStageMask, waitSemaphore, signalSemaphore) ==
+      1;
 }
 
 ///
@@ -3029,22 +3050,22 @@ int sdlAddVulkanRenderSemaphores(Pointer<SdlRenderer> renderer,
 ///
 /// \param renderer the renderer to toggle.
 /// \param vsync the vertical refresh sync interval.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetRenderVSync
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_SetRenderVSync(SDL_Renderer *renderer, int vsync)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetRenderVSync(SDL_Renderer *renderer, int vsync)
 /// ```
-int sdlSetRenderVSync(Pointer<SdlRenderer> renderer, int vsync) {
+bool sdlSetRenderVSync(Pointer<SdlRenderer> renderer, int vsync) {
   final sdlSetRenderVSyncLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlRenderer> renderer, Int32 vsync),
+      Uint8 Function(Pointer<SdlRenderer> renderer, Int32 vsync),
       int Function(
           Pointer<SdlRenderer> renderer, int vsync)>('SDL_SetRenderVSync');
-  return sdlSetRenderVSyncLookupFunction(renderer, vsync);
+  return sdlSetRenderVSyncLookupFunction(renderer, vsync) == 1;
 }
 
 ///
@@ -3053,20 +3074,20 @@ int sdlSetRenderVSync(Pointer<SdlRenderer> renderer, int vsync) {
 /// \param renderer the renderer to toggle.
 /// \param vsync an int filled with the current vertical refresh sync interval.
 /// See SDL_SetRenderVSync() for the meaning of the value.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_SetRenderVSync
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_GetRenderVSync(SDL_Renderer *renderer, int *vsync)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetRenderVSync(SDL_Renderer *renderer, int *vsync)
 /// ```
-int sdlGetRenderVSync(Pointer<SdlRenderer> renderer, Pointer<Int32> vsync) {
+bool sdlGetRenderVSync(Pointer<SdlRenderer> renderer, Pointer<Int32> vsync) {
   final sdlGetRenderVSyncLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlRenderer> renderer, Pointer<Int32> vsync),
+      Uint8 Function(Pointer<SdlRenderer> renderer, Pointer<Int32> vsync),
       int Function(Pointer<SdlRenderer> renderer,
           Pointer<Int32> vsync)>('SDL_GetRenderVSync');
-  return sdlGetRenderVSyncLookupFunction(renderer, vsync);
+  return sdlGetRenderVSyncLookupFunction(renderer, vsync) == 1;
 }

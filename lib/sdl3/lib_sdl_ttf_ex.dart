@@ -47,7 +47,7 @@ Pointer<SdlSurface> ttfRenderUnicode(
 /// ```c
 /// const TTF_SetError = SDL_SetError;
 /// ```
-int ttfSetError(String fmt, Pointer<NativeType> arg1) {
+bool ttfSetError(String fmt, Pointer<NativeType> arg1) {
   return sdlSetError(fmt, arg1);
 }
 

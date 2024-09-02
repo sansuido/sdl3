@@ -47,8 +47,8 @@ import 'lib_sdl.dart';
 /// SDL_SetAppMetadataProperty().
 ///
 /// \param flags subsystem initialization flags.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -60,12 +60,12 @@ import 'lib_sdl.dart';
 /// \sa SDL_WasInit
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_Init(SDL_InitFlags flags)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_Init(SDL_InitFlags flags)
 /// ```
-int sdlInit(int flags) {
+bool sdlInit(int flags) {
   final sdlInitLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Uint32 flags), int Function(int flags)>('SDL_Init');
-  return sdlInitLookupFunction(flags);
+      Uint8 Function(Uint32 flags), int Function(int flags)>('SDL_Init');
+  return sdlInitLookupFunction(flags) == 1;
 }
 
 ///
@@ -74,8 +74,8 @@ int sdlInit(int flags) {
 /// This function and SDL_Init() are interchangeable.
 ///
 /// \param flags any of the flags used by SDL_Init(); see SDL_Init for details.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -84,13 +84,13 @@ int sdlInit(int flags) {
 /// \sa SDL_QuitSubSystem
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_InitSubSystem(SDL_InitFlags flags)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_InitSubSystem(SDL_InitFlags flags)
 /// ```
-int sdlInitSubSystem(int flags) {
+bool sdlInitSubSystem(int flags) {
   final sdlInitSubSystemLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Uint32 flags),
+      Uint8 Function(Uint32 flags),
       int Function(int flags)>('SDL_InitSubSystem');
-  return sdlInitSubSystemLookupFunction(flags);
+  return sdlInitSubSystemLookupFunction(flags) == 1;
 }
 
 ///
@@ -189,8 +189,8 @@ void sdlQuit() {
 /// hash, or whatever makes sense).
 /// \param appidentifier A unique string in reverse-domain format that
 /// identifies this app ("com.example.mygame2").
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -199,12 +199,12 @@ void sdlQuit() {
 /// \sa SDL_SetAppMetadataProperty
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_SetAppMetadata(const char *appname, const char *appversion, const char *appidentifier)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetAppMetadata(const char *appname, const char *appversion, const char *appidentifier)
 /// ```
-int sdlSetAppMetadata(
+bool sdlSetAppMetadata(
     String? appname, String? appversion, String? appidentifier) {
   final sdlSetAppMetadataLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<Utf8> appname, Pointer<Utf8> appversion,
+      Uint8 Function(Pointer<Utf8> appname, Pointer<Utf8> appversion,
           Pointer<Utf8> appidentifier),
       int Function(Pointer<Utf8> appname, Pointer<Utf8> appversion,
           Pointer<Utf8> appidentifier)>('SDL_SetAppMetadata');
@@ -214,7 +214,8 @@ int sdlSetAppMetadata(
   final appidentifierPointer =
       appidentifier != null ? appidentifier.toNativeUtf8() : nullptr;
   final result = sdlSetAppMetadataLookupFunction(
-      appnamePointer, appversionPointer, appidentifierPointer);
+          appnamePointer, appversionPointer, appidentifierPointer) ==
+      1;
   calloc.free(appnamePointer);
   calloc.free(appversionPointer);
   calloc.free(appidentifierPointer);
@@ -245,7 +246,7 @@ int sdlSetAppMetadata(
 /// anywhere the OS shows the name of the application separately from window
 /// titles, such as volume control applets, etc. This defaults to "SDL
 /// Application".
-/// - SDL_PROP_APP_METADATA_VERSION_STRING`: The version of the app that is
+/// - `SDL_PROP_APP_METADATA_VERSION_STRING`: The version of the app that is
 /// running; there are no rules on format, so "1.0.3beta2" and "April 22nd,
 /// 2024" and a git hash are all valid options. This has no default.
 /// - `SDL_PROP_APP_METADATA_IDENTIFIER_STRING`: A unique string that
@@ -255,16 +256,16 @@ int sdlSetAppMetadata(
 /// associated desktop settings and icons. If you plan to package your
 /// application in a container such as Flatpak, the app ID should match the
 /// name of your Flatpak container as well. This has no default.
-/// - SDL_PROP_APP_METADATA_CREATOR_STRING`: The human-readable name of the
+/// - `SDL_PROP_APP_METADATA_CREATOR_STRING`: The human-readable name of the
 /// creator/developer/maker of this app, like "MojoWorkshop, LLC"
-/// - SDL_PROP_APP_METADATA_COPYRIGHT_STRING`: The human-readable copyright
+/// - `SDL_PROP_APP_METADATA_COPYRIGHT_STRING`: The human-readable copyright
 /// notice, like "Copyright (c) 2024 MojoWorkshop, LLC" or whatnot. Keep this
 /// to one line, don't paste a copy of a whole software license in here. This
 /// has no default.
-/// - SDL_PROP_APP_METADATA_URL_STRING`: A URL to the app on the web. Maybe a
+/// - `SDL_PROP_APP_METADATA_URL_STRING`: A URL to the app on the web. Maybe a
 /// product page, or a storefront, or even a GitHub repository, for user's
 /// further information This has no default.
-/// - SDL_PROP_APP_METADATA_TYPE_STRING`: The type of application this is.
+/// - `SDL_PROP_APP_METADATA_TYPE_STRING`: The type of application this is.
 /// Currently this string can be "game" for a video game, "mediaplayer" for a
 /// media player, or generically "application" if nothing else applies.
 /// Future versions of SDL might add new types. This defaults to
@@ -272,8 +273,8 @@ int sdlSetAppMetadata(
 ///
 /// \param name the name of the metadata property to set.
 /// \param value the value of the property, or NULL to remove that property.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -283,17 +284,17 @@ int sdlSetAppMetadata(
 /// \sa SDL_SetAppMetadata
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_SetAppMetadataProperty(const char *name, const char *value)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetAppMetadataProperty(const char *name, const char *value)
 /// ```
-int sdlSetAppMetadataProperty(String? name, String? value) {
+bool sdlSetAppMetadataProperty(String? name, String? value) {
   final sdlSetAppMetadataPropertyLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<Utf8> name, Pointer<Utf8> value),
+      Uint8 Function(Pointer<Utf8> name, Pointer<Utf8> value),
       int Function(Pointer<Utf8> name,
           Pointer<Utf8> value)>('SDL_SetAppMetadataProperty');
   final namePointer = name != null ? name.toNativeUtf8() : nullptr;
   final valuePointer = value != null ? value.toNativeUtf8() : nullptr;
   final result =
-      sdlSetAppMetadataPropertyLookupFunction(namePointer, valuePointer);
+      sdlSetAppMetadataPropertyLookupFunction(namePointer, valuePointer) == 1;
   calloc.free(namePointer);
   calloc.free(valuePointer);
   return result;

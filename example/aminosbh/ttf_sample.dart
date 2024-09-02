@@ -42,7 +42,7 @@ const gFontPath = 'assets/SourceHanCodeJP.ttc';
 
 int main() {
   // Initialize SDL3
-  if (sdlInit(SDL_INIT_VIDEO) < 0) {
+  if (sdlInit(SDL_INIT_VIDEO) == false) {
     print('SDL3 could not be initialized!\n'
         'SDL3 s: ${sdlGetError()}\n');
     return 0;

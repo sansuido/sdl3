@@ -120,8 +120,8 @@ void sdlGetMemoryFunctions(
 /// \param calloc_func custom calloc function.
 /// \param realloc_func custom realloc function.
 /// \param free_func custom free function.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \threadsafety It is safe to call this function from any thread, but one
 /// should not replace the memory functions once any allocations
@@ -133,15 +133,15 @@ void sdlGetMemoryFunctions(
 /// \sa SDL_GetOriginalMemoryFunctions
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_SetMemoryFunctions(SDL_malloc_func malloc_func, SDL_calloc_func calloc_func, SDL_realloc_func realloc_func, SDL_free_func free_func)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetMemoryFunctions(SDL_malloc_func malloc_func, SDL_calloc_func calloc_func, SDL_realloc_func realloc_func, SDL_free_func free_func)
 /// ```
-int sdlSetMemoryFunctions(
+bool sdlSetMemoryFunctions(
     Pointer<NativeFunction<SdlMallocFunc>> mallocFunc,
     Pointer<NativeFunction<SdlCallocFunc>> callocFunc,
     Pointer<NativeFunction<SdlReallocFunc>> reallocFunc,
     Pointer<NativeFunction<SdlFreeFunc>> freeFunc) {
   final sdlSetMemoryFunctionsLookupFunction = libSdl3.lookupFunction<
-          Int32 Function(
+          Uint8 Function(
               Pointer<NativeFunction<SdlMallocFunc>> mallocFunc,
               Pointer<NativeFunction<SdlCallocFunc>> callocFunc,
               Pointer<NativeFunction<SdlReallocFunc>> reallocFunc,
@@ -153,7 +153,8 @@ int sdlSetMemoryFunctions(
               Pointer<NativeFunction<SdlFreeFunc>> freeFunc)>(
       'SDL_SetMemoryFunctions');
   return sdlSetMemoryFunctionsLookupFunction(
-      mallocFunc, callocFunc, reallocFunc, freeFunc);
+          mallocFunc, callocFunc, reallocFunc, freeFunc) ==
+      1;
 }
 
 ///

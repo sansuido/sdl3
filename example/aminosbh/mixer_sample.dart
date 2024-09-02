@@ -46,14 +46,14 @@ const gReverbSnareSound = 'assets/claps-and-snares/dubstep-reverb-snare.ogg';
 
 int main() {
   // Initialize SDL
-  if (sdlInit(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0) {
+  if (sdlInit(SDL_INIT_VIDEO | SDL_INIT_AUDIO) == false) {
     print('SDL could not be initialized!\n'
         'SDL_Error: ${sdlGetError()}\n');
     return 0;
   }
   sdlSetHint(SDL_HINT_RENDER_VSYNC, '1');
   //Initialize SDL3_mixer
-  if (mixOpenAudio(SDL_AUDIO_DEVICE_DEFAULT_OUTPUT, nullptr) != 0) {
+  if (mixOpenAudio(SDL_AUDIO_DEVICE_DEFAULT_OUTPUT, nullptr) == false) {
     print('SDL3_mixer could not be initialized!\n'
         'SDL_Error: ${sdlGetError()}%s\n');
     sdlQuit();
@@ -137,7 +137,7 @@ int main() {
       ..setDrawColor(0x19, 0x71, 0xA9, SDL_ALPHA_OPAQUE)
       // Draw filled square
       ..fillRect(squareRect);
-    if (mixPaused(-1) == SDL_TRUE) {
+    if (mixPaused(-1) != 0) {
       renderer
         ..setDrawColor(0xff, 0xff, 0xff, SDL_ALPHA_OPAQUE)
         ..fillRect(pauseRect1)

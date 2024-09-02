@@ -37,8 +37,8 @@ import 'struct_sdl.dart';
 /// library version.
 ///
 /// \param path the platform dependent Vulkan loader library name or NULL.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -46,14 +46,14 @@ import 'struct_sdl.dart';
 /// \sa SDL_Vulkan_UnloadLibrary
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_Vulkan_LoadLibrary(const char *path)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_Vulkan_LoadLibrary(const char *path)
 /// ```
-int sdlVulkanLoadLibrary(String? path) {
+bool sdlVulkanLoadLibrary(String? path) {
   final sdlVulkanLoadLibraryLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<Utf8> path),
+      Uint8 Function(Pointer<Utf8> path),
       int Function(Pointer<Utf8> path)>('SDL_Vulkan_LoadLibrary');
   final pathPointer = path != null ? path.toNativeUtf8() : nullptr;
-  final result = sdlVulkanLoadLibraryLookupFunction(pathPointer);
+  final result = sdlVulkanLoadLibraryLookupFunction(pathPointer) == 1;
   calloc.free(pathPointer);
   return result;
 }
@@ -155,8 +155,8 @@ Pointer<Pointer<Int8>> sdlVulkanGetInstanceExtensions(Pointer<Uint32> count) {
 /// allocator that creates the surface. Can be NULL.
 /// \param surface a pointer to a VkSurfaceKHR handle to output the newly
 /// created surface.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -164,15 +164,15 @@ Pointer<Pointer<Int8>> sdlVulkanGetInstanceExtensions(Pointer<Uint32> count) {
 /// \sa SDL_Vulkan_DestroySurface
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_Vulkan_CreateSurface(SDL_Window *window, VkInstance instance, const struct VkAllocationCallbacks *allocator, VkSurfaceKHR* surface)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_Vulkan_CreateSurface(SDL_Window *window, VkInstance instance, const struct VkAllocationCallbacks *allocator, VkSurfaceKHR* surface)
 /// ```
-int sdlVulkanCreateSurface(
+bool sdlVulkanCreateSurface(
     Pointer<SdlWindow> window,
     Pointer<NativeType> instance,
     Pointer<Void> allocator,
     Pointer<Void> surface) {
   final sdlVulkanCreateSurfaceLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlWindow> window, Pointer<NativeType> instance,
+      Uint8 Function(Pointer<SdlWindow> window, Pointer<NativeType> instance,
           Pointer<Void> allocator, Pointer<Void> surface),
       int Function(
           Pointer<SdlWindow> window,
@@ -180,7 +180,8 @@ int sdlVulkanCreateSurface(
           Pointer<Void> allocator,
           Pointer<Void> surface)>('SDL_Vulkan_CreateSurface');
   return sdlVulkanCreateSurfaceLookupFunction(
-      window, instance, allocator, surface);
+          window, instance, allocator, surface) ==
+      1;
 }
 
 ///
@@ -243,7 +244,7 @@ void sdlVulkanDestroySurface(Pointer<NativeType> instance,
 bool sdlVulkanGetPresentationSupport(Pointer<NativeType> instance,
     Pointer<NativeType> physicalDevice, int queueFamilyIndex) {
   final sdlVulkanGetPresentationSupportLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<NativeType> instance,
+      Uint8 Function(Pointer<NativeType> instance,
           Pointer<NativeType> physicalDevice, Uint32 queueFamilyIndex),
       int Function(
           Pointer<NativeType> instance,

@@ -106,8 +106,8 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   ///
   /// \param surface the SDL_Surface structure to update.
   /// \param palette the SDL_Palette structure to use.
-  /// \returns 0 on success or a negative error code on failure; call
-  /// SDL_GetError() for more information.
+  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+  /// for more information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -115,9 +115,9 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// \sa SDL_GetSurfacePalette
   ///
   /// ```c
-  /// extern SDL_DECLSPEC int SDLCALL SDL_SetSurfacePalette(SDL_Surface *surface, SDL_Palette *palette)
+  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetSurfacePalette(SDL_Surface *surface, SDL_Palette *palette)
   /// ```
-  int setPalette(Pointer<SdlPalette> palette) {
+  bool setPalette(Pointer<SdlPalette> palette) {
     return sdlSetSurfacePalette(this, palette);
   }
 
@@ -134,8 +134,8 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// format of the surface will not change.
   ///
   /// \param surface the SDL_Surface structure to be locked.
-  /// \returns 0 on success or a negative error code on failure; call
-  /// SDL_GetError() for more information.
+  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+  /// for more information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -143,9 +143,9 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// \sa SDL_UnlockSurface
   ///
   /// ```c
-  /// extern SDL_DECLSPEC int SDLCALL SDL_LockSurface(SDL_Surface *surface)
+  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_LockSurface(SDL_Surface *surface)
   /// ```
-  int lock() {
+  bool lock() {
     return sdlLockSurface(this);
   }
 
@@ -203,8 +203,8 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// \param dst a data stream to save to.
   /// \param closeio if SDL_TRUE, calls SDL_CloseIO() on `dst` before returning,
   /// even in the case of an error.
-  /// \returns 0 on success or a negative error code on failure; call
-  /// SDL_GetError() for more information.
+  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+  /// for more information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -212,9 +212,9 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// \sa SDL_SaveBMP
   ///
   /// ```c
-  /// extern SDL_DECLSPEC int SDLCALL SDL_SaveBMP_IO(SDL_Surface *surface, SDL_IOStream *dst, SDL_bool closeio)
+  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SaveBMP_IO(SDL_Surface *surface, SDL_IOStream *dst, SDL_bool closeio)
   /// ```
-  int saveBmpIo(Pointer<SdlIoStream> dst, bool freedst) {
+  bool saveBmpIo(Pointer<SdlIoStream> dst, bool freedst) {
     return sdlSaveBmpIo(this, dst, freedst);
   }
 
@@ -227,8 +227,8 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// \param surface the SDL_Surface structure to optimize.
   /// \param enabled SDL_TRUE to enable RLE acceleration, SDL_FALSE to disable
   /// it.
-  /// \returns 0 on success or a negative error code on failure; call
-  /// SDL_GetError() for more information.
+  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+  /// for more information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -237,9 +237,9 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// \sa SDL_UnlockSurface
   ///
   /// ```c
-  /// extern SDL_DECLSPEC int SDLCALL SDL_SetSurfaceRLE(SDL_Surface *surface, SDL_bool enabled)
+  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetSurfaceRLE(SDL_Surface *surface, SDL_bool enabled)
   /// ```
-  int setRre(bool enabled) {
+  bool setRre(bool enabled) {
     return sdlSetSurfaceRle(this, enabled);
   }
 
@@ -276,8 +276,8 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// \param enabled SDL_TRUE to enable color key, SDL_FALSE to disable color
   /// key.
   /// \param key the transparent pixel.
-  /// \returns 0 on success or a negative error code on failure; call
-  /// SDL_GetError() for more information.
+  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+  /// for more information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -286,9 +286,9 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// \sa SDL_SurfaceHasColorKey
   ///
   /// ```c
-  /// extern SDL_DECLSPEC int SDLCALL SDL_SetSurfaceColorKey(SDL_Surface *surface, SDL_bool enabled, Uint32 key)
+  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetSurfaceColorKey(SDL_Surface *surface, SDL_bool enabled, Uint32 key)
   /// ```
-  int setColorKey(bool enabled, int key) {
+  bool setColorKey(bool enabled, int key) {
     return sdlSetSurfaceColorKey(this, enabled, key);
   }
 
@@ -322,8 +322,8 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   ///
   /// \param surface the SDL_Surface structure to query.
   /// \param key a pointer filled in with the transparent pixel.
-  /// \returns 0 on success or a negative error code on failure; call
-  /// SDL_GetError() for more information.
+  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+  /// for more information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -331,12 +331,12 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// \sa SDL_SurfaceHasColorKey
   ///
   /// ```c
-  /// extern SDL_DECLSPEC int SDLCALL SDL_GetSurfaceColorKey(SDL_Surface *surface, Uint32 *key)
+  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetSurfaceColorKey(SDL_Surface *surface, Uint32 *key)
   /// ```
   int? getColorKey() {
     int? result;
     var keyPointer = calloc<Uint32>();
-    if (sdlGetSurfaceColorKey(this, keyPointer) == 0) {
+    if (sdlGetSurfaceColorKey(this, keyPointer) == true) {
       result = keyPointer.value;
     }
     calloc.free(keyPointer);
@@ -356,8 +356,8 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// \param r the red color value multiplied into blit operations.
   /// \param g the green color value multiplied into blit operations.
   /// \param b the blue color value multiplied into blit operations.
-  /// \returns 0 on success or a negative error code on failure; call
-  /// SDL_GetError() for more information.
+  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+  /// for more information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -365,9 +365,9 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// \sa SDL_SetSurfaceAlphaMod
   ///
   /// ```c
-  /// extern SDL_DECLSPEC int SDLCALL SDL_SetSurfaceColorMod(SDL_Surface *surface, Uint8 r, Uint8 g, Uint8 b)
+  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetSurfaceColorMod(SDL_Surface *surface, Uint8 r, Uint8 g, Uint8 b)
   /// ```
-  int setColorMod(int r, int g, int b) {
+  bool setColorMod(int r, int g, int b) {
     return sdlSetSurfaceColorMod(this, r, g, b);
   }
 
@@ -378,8 +378,8 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// \param r a pointer filled in with the current red color value.
   /// \param g a pointer filled in with the current green color value.
   /// \param b a pointer filled in with the current blue color value.
-  /// \returns 0 on success or a negative error code on failure; call
-  /// SDL_GetError() for more information.
+  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+  /// for more information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -387,14 +387,14 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// \sa SDL_SetSurfaceColorMod
   ///
   /// ```c
-  /// extern SDL_DECLSPEC int SDLCALL SDL_GetSurfaceColorMod(SDL_Surface *surface, Uint8 *r, Uint8 *g, Uint8 *b)
+  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetSurfaceColorMod(SDL_Surface *surface, Uint8 *r, Uint8 *g, Uint8 *b)
   /// ```
   int? getColorMod() {
     int? result;
     var rPointer = calloc<Uint8>();
     var gPointer = calloc<Uint8>();
     var bPointer = calloc<Uint8>();
-    if (sdlGetSurfaceColorMod(this, rPointer, gPointer, bPointer) == 0) {
+    if (sdlGetSurfaceColorMod(this, rPointer, gPointer, bPointer) == true) {
       result = 0;
       result += rPointer.value << 16;
       result += gPointer.value << 8;
@@ -416,8 +416,8 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   ///
   /// \param surface the SDL_Surface structure to update.
   /// \param alpha the alpha value multiplied into blit operations.
-  /// \returns 0 on success or a negative error code on failure; call
-  /// SDL_GetError() for more information.
+  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+  /// for more information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -425,9 +425,9 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// \sa SDL_SetSurfaceColorMod
   ///
   /// ```c
-  /// extern SDL_DECLSPEC int SDLCALL SDL_SetSurfaceAlphaMod(SDL_Surface *surface, Uint8 alpha)
+  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetSurfaceAlphaMod(SDL_Surface *surface, Uint8 alpha)
   /// ```
-  int setAlphaMod(int alpha) {
+  bool setAlphaMod(int alpha) {
     return sdlSetSurfaceAlphaMod(this, alpha);
   }
 
@@ -436,8 +436,8 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   ///
   /// \param surface the SDL_Surface structure to query.
   /// \param alpha a pointer filled in with the current alpha value.
-  /// \returns 0 on success or a negative error code on failure; call
-  /// SDL_GetError() for more information.
+  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+  /// for more information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -445,12 +445,12 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// \sa SDL_SetSurfaceAlphaMod
   ///
   /// ```c
-  /// extern SDL_DECLSPEC int SDLCALL SDL_GetSurfaceAlphaMod(SDL_Surface *surface, Uint8 *alpha)
+  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetSurfaceAlphaMod(SDL_Surface *surface, Uint8 *alpha)
   /// ```
   int? getAlphaMod() {
     int? result;
     var alphaPointer = calloc<Uint8>();
-    if (sdlGetSurfaceAlphaMod(this, alphaPointer) == 0) {
+    if (sdlGetSurfaceAlphaMod(this, alphaPointer) == true) {
       result = alphaPointer.value;
     }
     calloc.free(alphaPointer);
@@ -466,17 +466,17 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   ///
   /// \param surface the SDL_Surface structure to update.
   /// \param blendMode the SDL_BlendMode to use for blit blending.
-  /// \returns 0 on success or a negative error code on failure; call
-  /// SDL_GetError() for more information.
+  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+  /// for more information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
   /// \sa SDL_GetSurfaceBlendMode
   ///
   /// ```c
-  /// extern SDL_DECLSPEC int SDLCALL SDL_SetSurfaceBlendMode(SDL_Surface *surface, SDL_BlendMode blendMode)
+  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetSurfaceBlendMode(SDL_Surface *surface, SDL_BlendMode blendMode)
   /// ```
-  int setBlendMode(int blendMode) {
+  bool setBlendMode(int blendMode) {
     return sdlSetSurfaceBlendMode(this, blendMode);
   }
 
@@ -485,20 +485,20 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   ///
   /// \param surface the SDL_Surface structure to query.
   /// \param blendMode a pointer filled in with the current SDL_BlendMode.
-  /// \returns 0 on success or a negative error code on failure; call
-  /// SDL_GetError() for more information.
+  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+  /// for more information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
   /// \sa SDL_SetSurfaceBlendMode
   ///
   /// ```c
-  /// extern SDL_DECLSPEC int SDLCALL SDL_GetSurfaceBlendMode(SDL_Surface *surface, SDL_BlendMode *blendMode)
+  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetSurfaceBlendMode(SDL_Surface *surface, SDL_BlendMode *blendMode)
   /// ```
   int? getBlendMode() {
     int? result;
     var blendModePointer = calloc<Uint32>();
-    if (sdlGetSurfaceBlendMode(this, blendModePointer) == 0) {
+    if (sdlGetSurfaceBlendMode(this, blendModePointer) == true) {
       result = blendModePointer.value;
     }
     calloc.free(blendModePointer);
@@ -547,15 +547,15 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// clipped.
   /// \param rect an SDL_Rect structure filled in with the clipping rectangle for
   /// the surface.
-  /// \returns 0 on success or a negative error code on failure; call
-  /// SDL_GetError() for more information.
+  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+  /// for more information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
   /// \sa SDL_SetSurfaceClipRect
   ///
   /// ```c
-  /// extern SDL_DECLSPEC int SDLCALL SDL_GetSurfaceClipRect(SDL_Surface *surface, SDL_Rect *rect)
+  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetSurfaceClipRect(SDL_Surface *surface, SDL_Rect *rect)
   /// ```
   math.Rectangle<double> getClipRect() {
     var rectPointer = calloc<SdlRect>();
@@ -607,23 +607,22 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// \param rect the SDL_Rect structure representing the rectangle to fill, or
   /// NULL to fill the entire surface.
   /// \param color the color to fill with.
-  /// \returns 0 on success or a negative error code on failure; call
-  /// SDL_GetError() for more information.
+  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+  /// for more information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
   /// \sa SDL_FillSurfaceRects
   ///
   /// ```c
-  /// extern SDL_DECLSPEC int SDLCALL SDL_FillSurfaceRect(SDL_Surface *dst, const SDL_Rect *rect, Uint32 color)
+  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_FillSurfaceRect(SDL_Surface *dst, const SDL_Rect *rect, Uint32 color)
   /// ```
-  int fillRect(math.Rectangle<double>? rect, int color) {
-    int result;
+  bool fillRect(math.Rectangle<double>? rect, int color) {
     Pointer<SdlRect> rectPointer = nullptr;
     if (rect != null) {
       rectPointer = rect.callocInt();
     }
-    result = sdlFillSurfaceRect(this, rectPointer, color);
+    var result = sdlFillSurfaceRect(this, rectPointer, color);
     calloc.free(rectPointer);
     return result;
   }
@@ -644,17 +643,17 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// \param rects an array of SDL_Rects representing the rectangles to fill.
   /// \param count the number of rectangles in the array.
   /// \param color the color to fill with.
-  /// \returns 0 on success or a negative error code on failure; call
-  /// SDL_GetError() for more information.
+  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+  /// for more information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
   /// \sa SDL_FillSurfaceRect
   ///
   /// ```c
-  /// extern SDL_DECLSPEC int SDLCALL SDL_FillSurfaceRects(SDL_Surface *dst, const SDL_Rect *rects, int count, Uint32 color)
+  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_FillSurfaceRects(SDL_Surface *dst, const SDL_Rect *rects, int count, Uint32 color)
   /// ```
-  int fillRects(List<math.Rectangle<double>> rects, int color) {
+  bool fillRects(List<math.Rectangle<double>> rects, int color) {
     var rectsPointer = rects.callocInt();
     var result = sdlFillSurfaceRects(this, rectsPointer, rects.length, color);
     calloc.free(rectsPointer);
@@ -723,8 +722,8 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// height are ignored, and are copied from `srcrect`. If you
   /// want a specific width and height, you should use
   /// SDL_BlitSurfaceScaled().
-  /// \returns 0 on success or a negative error code on failure; call
-  /// SDL_GetError() for more information.
+  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+  /// for more information.
   ///
   /// \threadsafety The same destination surface should not be used from two
   /// threads at once. It is safe to use the same source surface
@@ -735,9 +734,9 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// \sa SDL_BlitSurfaceScaled
   ///
   /// ```c
-  /// extern SDL_DECLSPEC int SDLCALL SDL_BlitSurface(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, const SDL_Rect *dstrect)
+  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_BlitSurface(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, const SDL_Rect *dstrect)
   /// ```
-  int upperBlit(
+  bool upperBlit(
     Pointer<SdlSurface> dst, {
     math.Rectangle<double>? srcrect,
     math.Rectangle<double>? dstrect,
@@ -768,8 +767,8 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// \param dst the SDL_Surface structure that is the blit target.
   /// \param dstrect the SDL_Rect structure representing the target rectangle in
   /// the destination surface, may not be NULL.
-  /// \returns 0 on success or a negative error code on failure; call
-  /// SDL_GetError() for more information.
+  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+  /// for more information.
   ///
   /// \threadsafety The same destination surface should not be used from two
   /// threads at once. It is safe to use the same source surface
@@ -780,9 +779,9 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// \sa SDL_BlitSurface
   ///
   /// ```c
-  /// extern SDL_DECLSPEC int SDLCALL SDL_BlitSurfaceUnchecked(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, const SDL_Rect *dstrect)
+  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_BlitSurfaceUnchecked(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, const SDL_Rect *dstrect)
   /// ```
-  int lowerBlit(
+  bool lowerBlit(
     Pointer<SdlSurface> dst, {
     math.Rectangle<double>? srcrect,
     math.Rectangle<double>? dstrect,
@@ -814,8 +813,8 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// the destination surface, or NULL to fill the entire
   /// destination surface.
   /// \param scaleMode the SDL_ScaleMode to be used.
-  /// \returns 0 on success or a negative error code on failure; call
-  /// SDL_GetError() for more information.
+  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+  /// for more information.
   ///
   /// \threadsafety The same destination surface should not be used from two
   /// threads at once. It is safe to use the same source surface
@@ -826,9 +825,9 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// \sa SDL_BlitSurface
   ///
   /// ```c
-  /// extern SDL_DECLSPEC int SDLCALL SDL_BlitSurfaceScaled(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, const SDL_Rect *dstrect, SDL_ScaleMode scaleMode)
+  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_BlitSurfaceScaled(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, const SDL_Rect *dstrect, SDL_ScaleMode scaleMode)
   /// ```
-  int upperBlitScaled(Pointer<SdlSurface> dst,
+  bool upperBlitScaled(Pointer<SdlSurface> dst,
       {math.Rectangle<double>? srcrect,
       math.Rectangle<double>? dstrect,
       int scaleMode = 0}) {
@@ -860,8 +859,8 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// \param dstrect the SDL_Rect structure representing the target rectangle in
   /// the destination surface, may not be NULL.
   /// \param scaleMode the SDL_ScaleMode to be used.
-  /// \returns 0 on success or a negative error code on failure; call
-  /// SDL_GetError() for more information.
+  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+  /// for more information.
   ///
   /// \threadsafety The same destination surface should not be used from two
   /// threads at once. It is safe to use the same source surface
@@ -872,9 +871,9 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// \sa SDL_BlitSurfaceScaled
   ///
   /// ```c
-  /// extern SDL_DECLSPEC int SDLCALL SDL_BlitSurfaceUncheckedScaled(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, const SDL_Rect *dstrect, SDL_ScaleMode scaleMode)
+  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_BlitSurfaceUncheckedScaled(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, const SDL_Rect *dstrect, SDL_ScaleMode scaleMode)
   /// ```
-  int lowerBlitScaled(Pointer<SdlSurface> dst,
+  bool lowerBlitScaled(Pointer<SdlSurface> dst,
       {math.Rectangle<double>? srcrect,
       math.Rectangle<double>? dstrect,
       int scaleMode = 0}) {
@@ -913,8 +912,8 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   ///
   /// \param surface the SDL_Surface structure containing the image to be saved.
   /// \param file a file to save to.
-  /// \returns 0 on success or a negative error code on failure; call
-  /// SDL_GetError() for more information.
+  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+  /// for more information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -922,13 +921,13 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// \sa SDL_SaveBMP_IO
   ///
   /// ```c
-  /// extern SDL_DECLSPEC int SDLCALL SDL_SaveBMP(SDL_Surface *surface, const char *file)
+  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SaveBMP(SDL_Surface *surface, const char *file)
   /// ```
-  int saveBmp(String file) {
+  bool saveBmp(String file) {
     return sdlSaveBmp(this, file);
   }
 
-  int blit(
+  bool blit(
     Pointer<SdlSurface> dst, {
     math.Rectangle<double>? srcrect,
     math.Rectangle<double>? dstrect,
@@ -936,7 +935,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
     return upperBlit(dst, srcrect: srcrect, dstrect: dstrect);
   }
 
-  int blitScaled(
+  bool blitScaled(
     Pointer<SdlSurface> dst, {
     math.Rectangle<double>? srcrect,
     math.Rectangle<double>? dstrect,

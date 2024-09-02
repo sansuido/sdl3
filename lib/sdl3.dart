@@ -36,6 +36,7 @@ export 'sdl3/generated/lib_sdl_error.dart';
 export 'sdl3/generated/lib_sdl_events.dart';
 export 'sdl3/generated/lib_sdl_filesystem.dart';
 export 'sdl3/generated/lib_sdl_gamepad.dart';
+export 'sdl3/generated/lib_sdl_gpu.dart';
 export 'sdl3/generated/lib_sdl_guid.dart';
 export 'sdl3/generated/lib_sdl_haptic.dart';
 export 'sdl3/generated/lib_sdl_hidapi.dart';

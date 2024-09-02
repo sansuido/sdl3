@@ -12,7 +12,7 @@ void setTitle(Pointer<SdlWindow> window, gfx.FpsManager fpsManager) {
 }
 
 int main() {
-  if (sdlInit(SDL_INIT_VIDEO) < 0) {
+  if (sdlInit(SDL_INIT_VIDEO) == false) {
     print(sdlGetError());
     return -1;
   }

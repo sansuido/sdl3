@@ -19,7 +19,7 @@ double gPlayerY = (gScreenHeight - gPlayerHeight) / 2;
 var gJumpPower = 0;
 
 bool init() {
-  if (sdlInit(SDL_INIT_VIDEO) < 0) {
+  if (sdlInit(SDL_INIT_VIDEO) == false) {
     print(sdlGetError());
     return false;
   }

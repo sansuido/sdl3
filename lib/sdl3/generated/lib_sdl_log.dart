@@ -95,8 +95,8 @@ void sdlResetLogPriorities() {
 /// \param priority the SDL_LogPriority to modify.
 /// \param prefix the prefix to use for that log priority, or NULL to use no
 /// prefix.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -104,15 +104,16 @@ void sdlResetLogPriorities() {
 /// \sa SDL_SetLogPriority
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_SetLogPriorityPrefix(SDL_LogPriority priority, const char *prefix)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetLogPriorityPrefix(SDL_LogPriority priority, const char *prefix)
 /// ```
-int sdlSetLogPriorityPrefix(int priority, String? prefix) {
+bool sdlSetLogPriorityPrefix(int priority, String? prefix) {
   final sdlSetLogPriorityPrefixLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Int32 priority, Pointer<Utf8> prefix),
+      Uint8 Function(Int32 priority, Pointer<Utf8> prefix),
       int Function(
           int priority, Pointer<Utf8> prefix)>('SDL_SetLogPriorityPrefix');
   final prefixPointer = prefix != null ? prefix.toNativeUtf8() : nullptr;
-  final result = sdlSetLogPriorityPrefixLookupFunction(priority, prefixPointer);
+  final result =
+      sdlSetLogPriorityPrefixLookupFunction(priority, prefixPointer) == 1;
   calloc.free(prefixPointer);
   return result;
 }

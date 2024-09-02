@@ -44,8 +44,9 @@ void sdlSetMainReady() {
 /// literally have to be `main`.
 /// \param reserved should be NULL (reserved for future use, will probably be
 /// platform-specific then).
-/// \returns the return value from mainFunction: 0 on success, -1 on failure;
-/// SDL_GetError() might have more information on the failure.
+/// \returns the return value from mainFunction: 0 on success, otherwise
+/// failure; SDL_GetError() might have more information on the
+/// failure.
 ///
 /// \threadsafety Generally this is called once, near startup, from the
 /// process's initial thread.
@@ -148,22 +149,22 @@ int sdlEnterAppMainCallbacks(
 /// what is specified here.
 /// \param hInst the HINSTANCE to use in WNDCLASSEX::hInstance. If zero, SDL
 /// will use `GetModuleHandle(NULL)` instead.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_RegisterApp(const char *name, Uint32 style, void *hInst)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_RegisterApp(const char *name, Uint32 style, void *hInst)
 /// ```
-int sdlRegisterApp(String? name, int style, Pointer<NativeType> hInst) {
+bool sdlRegisterApp(String? name, int style, Pointer<NativeType> hInst) {
   final sdlRegisterAppLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(
+      Uint8 Function(
           Pointer<Utf8> name, Uint32 style, Pointer<NativeType> hInst),
       int Function(Pointer<Utf8> name, int style,
           Pointer<NativeType> hInst)>('SDL_RegisterApp');
   final namePointer = name != null ? name.toNativeUtf8() : nullptr;
-  final result = sdlRegisterAppLookupFunction(namePointer, style, hInst);
+  final result = sdlRegisterAppLookupFunction(namePointer, style, hInst) == 1;
   calloc.free(namePointer);
   return result;
 }

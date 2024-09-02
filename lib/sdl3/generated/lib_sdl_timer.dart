@@ -236,19 +236,19 @@ int sdlAddTimerNs(
 /// Remove a timer created with SDL_AddTimer().
 ///
 /// \param id the ID of the timer to remove.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_AddTimer
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_RemoveTimer(SDL_TimerID id)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_RemoveTimer(SDL_TimerID id)
 /// ```
-int sdlRemoveTimer(int id) {
+bool sdlRemoveTimer(int id) {
   final sdlRemoveTimerLookupFunction =
-      libSdl3.lookupFunction<Int32 Function(Uint32 id), int Function(int id)>(
+      libSdl3.lookupFunction<Uint8 Function(Uint32 id), int Function(int id)>(
           'SDL_RemoveTimer');
-  return sdlRemoveTimerLookupFunction(id);
+  return sdlRemoveTimerLookupFunction(id) == 1;
 }

@@ -38,8 +38,8 @@ String? sdlGetPixelFormatName(int format) {
 /// \param Gmask a pointer filled in with the green mask for the format.
 /// \param Bmask a pointer filled in with the blue mask for the format.
 /// \param Amask a pointer filled in with the alpha mask for the format.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -48,9 +48,9 @@ String? sdlGetPixelFormatName(int format) {
 /// \sa SDL_GetPixelFormatForMasks
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_GetMasksForPixelFormat(SDL_PixelFormat format, int *bpp, Uint32 *Rmask, Uint32 *Gmask, Uint32 *Bmask, Uint32 *Amask)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetMasksForPixelFormat(SDL_PixelFormat format, int *bpp, Uint32 *Rmask, Uint32 *Gmask, Uint32 *Bmask, Uint32 *Amask)
 /// ```
-int sdlGetMasksForPixelFormat(
+bool sdlGetMasksForPixelFormat(
     int format,
     Pointer<Int32> bpp,
     Pointer<Uint32> rmask,
@@ -58,7 +58,7 @@ int sdlGetMasksForPixelFormat(
     Pointer<Uint32> bmask,
     Pointer<Uint32> amask) {
   final sdlGetMasksForPixelFormatLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Int32 format, Pointer<Int32> bpp, Pointer<Uint32> rmask,
+      Uint8 Function(Int32 format, Pointer<Int32> bpp, Pointer<Uint32> rmask,
           Pointer<Uint32> gmask, Pointer<Uint32> bmask, Pointer<Uint32> amask),
       int Function(
           int format,
@@ -68,7 +68,8 @@ int sdlGetMasksForPixelFormat(
           Pointer<Uint32> bmask,
           Pointer<Uint32> amask)>('SDL_GetMasksForPixelFormat');
   return sdlGetMasksForPixelFormatLookupFunction(
-      format, bpp, rmask, gmask, bmask, amask);
+          format, bpp, rmask, gmask, bmask, amask) ==
+      1;
 }
 
 ///
@@ -166,8 +167,8 @@ Pointer<SdlPalette> sdlCreatePalette(int ncolors) {
 /// \param colors an array of SDL_Color structures to copy into the palette.
 /// \param firstcolor the index of the first palette entry to modify.
 /// \param ncolors the number of entries to modify.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \threadsafety It is safe to call this function from any thread, as long as
 /// the palette is not modified or destroyed in another thread.
@@ -175,17 +176,18 @@ Pointer<SdlPalette> sdlCreatePalette(int ncolors) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_SetPaletteColors(SDL_Palette *palette, const SDL_Color *colors, int firstcolor, int ncolors)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetPaletteColors(SDL_Palette *palette, const SDL_Color *colors, int firstcolor, int ncolors)
 /// ```
-int sdlSetPaletteColors(Pointer<SdlPalette> palette, Pointer<SdlColor> colors,
+bool sdlSetPaletteColors(Pointer<SdlPalette> palette, Pointer<SdlColor> colors,
     int firstcolor, int ncolors) {
   final sdlSetPaletteColorsLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlPalette> palette, Pointer<SdlColor> colors,
+      Uint8 Function(Pointer<SdlPalette> palette, Pointer<SdlColor> colors,
           Int32 firstcolor, Int32 ncolors),
       int Function(Pointer<SdlPalette> palette, Pointer<SdlColor> colors,
           int firstcolor, int ncolors)>('SDL_SetPaletteColors');
   return sdlSetPaletteColorsLookupFunction(
-      palette, colors, firstcolor, ncolors);
+          palette, colors, firstcolor, ncolors) ==
+      1;
 }
 
 ///

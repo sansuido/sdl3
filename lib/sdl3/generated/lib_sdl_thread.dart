@@ -284,19 +284,19 @@ int sdlGetThreadId(Pointer<SdlThread> thread) {
 /// an administrator account. Be prepared for this to fail.
 ///
 /// \param priority the SDL_ThreadPriority to set.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_SetThreadPriority(SDL_ThreadPriority priority)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetThreadPriority(SDL_ThreadPriority priority)
 /// ```
-int sdlSetThreadPriority(int priority) {
+bool sdlSetThreadPriority(int priority) {
   final sdlSetThreadPriorityLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Int32 priority),
+      Uint8 Function(Int32 priority),
       int Function(int priority)>('SDL_SetThreadPriority');
-  return sdlSetThreadPriorityLookupFunction(priority);
+  return sdlSetThreadPriorityLookupFunction(priority) == 1;
 }
 
 ///
@@ -427,8 +427,8 @@ Pointer<NativeType> sdlGetTls(Pointer<SdlAtomicInt> id) {
 /// \param value the value to associate with the ID for the current thread.
 /// \param destructor a function called when the thread exits, to free the
 /// value, may be NULL.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -437,16 +437,16 @@ Pointer<NativeType> sdlGetTls(Pointer<SdlAtomicInt> id) {
 /// \sa SDL_GetTLS
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_SetTLS(SDL_TLSID *id, const void *value, SDL_TLSDestructorCallback destructor)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetTLS(SDL_TLSID *id, const void *value, SDL_TLSDestructorCallback destructor)
 /// ```
-int sdlSetTls(Pointer<SdlAtomicInt> id, Pointer<NativeType> value,
+bool sdlSetTls(Pointer<SdlAtomicInt> id, Pointer<NativeType> value,
     Pointer<NativeType> deor) {
   final sdlSetTlsLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlAtomicInt> id, Pointer<NativeType> value,
+      Uint8 Function(Pointer<SdlAtomicInt> id, Pointer<NativeType> value,
           Pointer<NativeType> deor),
       int Function(Pointer<SdlAtomicInt> id, Pointer<NativeType> value,
           Pointer<NativeType> deor)>('SDL_SetTLS');
-  return sdlSetTlsLookupFunction(id, value, deor);
+  return sdlSetTlsLookupFunction(id, value, deor) == 1;
 }
 
 ///

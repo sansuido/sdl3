@@ -189,7 +189,7 @@ extension PointsEx on List<math.Point<double>> {
   /// \since This function is available since SDL 3.0.0.
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetRectEnclosingPoints(const SDL_Point * points, int count, const SDL_Rect * clip, SDL_Rect * result)
+  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetRectEnclosingPoints(const SDL_Point *points, int count, const SDL_Rect *clip, SDL_Rect *result)
   /// ```
   math.Rectangle<double>? getEncloseRect({math.Rectangle<double>? clip}) {
     math.Rectangle<double>? result;

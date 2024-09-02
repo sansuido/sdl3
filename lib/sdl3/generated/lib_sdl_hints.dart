@@ -13,8 +13,8 @@ import 'lib_sdl.dart';
 /// \param name the hint to set.
 /// \param value the value of the hint variable.
 /// \param priority the SDL_HintPriority level for the hint.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -25,17 +25,18 @@ import 'lib_sdl.dart';
 /// \sa SDL_SetHint
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_SetHintWithPriority(const char *name, const char *value, SDL_HintPriority priority)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetHintWithPriority(const char *name, const char *value, SDL_HintPriority priority)
 /// ```
-int sdlSetHintWithPriority(String? name, String? value, int priority) {
+bool sdlSetHintWithPriority(String? name, String? value, int priority) {
   final sdlSetHintWithPriorityLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<Utf8> name, Pointer<Utf8> value, Int32 priority),
+      Uint8 Function(Pointer<Utf8> name, Pointer<Utf8> value, Int32 priority),
       int Function(Pointer<Utf8> name, Pointer<Utf8> value,
           int priority)>('SDL_SetHintWithPriority');
   final namePointer = name != null ? name.toNativeUtf8() : nullptr;
   final valuePointer = value != null ? value.toNativeUtf8() : nullptr;
-  final result =
-      sdlSetHintWithPriorityLookupFunction(namePointer, valuePointer, priority);
+  final result = sdlSetHintWithPriorityLookupFunction(
+          namePointer, valuePointer, priority) ==
+      1;
   calloc.free(namePointer);
   calloc.free(valuePointer);
   return result;
@@ -50,8 +51,8 @@ int sdlSetHintWithPriority(String? name, String? value, int priority) {
 ///
 /// \param name the hint to set.
 /// \param value the value of the hint variable.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -62,15 +63,15 @@ int sdlSetHintWithPriority(String? name, String? value, int priority) {
 /// \sa SDL_SetHintWithPriority
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_SetHint(const char *name, const char *value)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetHint(const char *name, const char *value)
 /// ```
-int sdlSetHint(String? name, String? value) {
+bool sdlSetHint(String? name, String? value) {
   final sdlSetHintLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<Utf8> name, Pointer<Utf8> value),
+      Uint8 Function(Pointer<Utf8> name, Pointer<Utf8> value),
       int Function(Pointer<Utf8> name, Pointer<Utf8> value)>('SDL_SetHint');
   final namePointer = name != null ? name.toNativeUtf8() : nullptr;
   final valuePointer = value != null ? value.toNativeUtf8() : nullptr;
-  final result = sdlSetHintLookupFunction(namePointer, valuePointer);
+  final result = sdlSetHintLookupFunction(namePointer, valuePointer) == 1;
   calloc.free(namePointer);
   calloc.free(valuePointer);
   return result;
@@ -84,8 +85,8 @@ int sdlSetHint(String? name, String? value) {
 /// change.
 ///
 /// \param name the hint to set.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -95,14 +96,14 @@ int sdlSetHint(String? name, String? value) {
 /// \sa SDL_ResetHints
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_ResetHint(const char *name)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_ResetHint(const char *name)
 /// ```
-int sdlResetHint(String? name) {
+bool sdlResetHint(String? name) {
   final sdlResetHintLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<Utf8> name),
+      Uint8 Function(Pointer<Utf8> name),
       int Function(Pointer<Utf8> name)>('SDL_ResetHint');
   final namePointer = name != null ? name.toNativeUtf8() : nullptr;
-  final result = sdlResetHintLookupFunction(namePointer);
+  final result = sdlResetHintLookupFunction(namePointer) == 1;
   calloc.free(namePointer);
   return result;
 }
@@ -148,7 +149,7 @@ void sdlResetHints() {
 /// \sa SDL_SetHintWithPriority
 ///
 /// ```c
-/// extern SDL_DECLSPEC const char * SDLCALL SDL_GetHint(const char *name)
+/// extern SDL_DECLSPEC const char *SDLCALL SDL_GetHint(const char *name)
 /// ```
 String? sdlGetHint(String? name) {
   final sdlGetHintLookupFunction = libSdl3.lookupFunction<
@@ -183,7 +184,7 @@ String? sdlGetHint(String? name) {
 /// ```
 bool sdlGetHintBoolean(String? name, bool defaultValue) {
   final sdlGetHintBooleanLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<Utf8> name, Int32 defaultValue),
+      Uint8 Function(Pointer<Utf8> name, Uint8 defaultValue),
       int Function(Pointer<Utf8> name, int defaultValue)>('SDL_GetHintBoolean');
   final namePointer = name != null ? name.toNativeUtf8() : nullptr;
   final result =
@@ -202,24 +203,24 @@ bool sdlGetHintBoolean(String? name, bool defaultValue) {
 /// \param callback An SDL_HintCallback function that will be called when the
 /// hint value changes.
 /// \param userdata a pointer to pass to the callback function.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_DelHintCallback
+/// \sa SDL_RemoveHintCallback
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_AddHintCallback(const char *name, SDL_HintCallback callback, void *userdata)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_AddHintCallback(const char *name, SDL_HintCallback callback, void *userdata)
 /// ```
-int sdlAddHintCallback(
+bool sdlAddHintCallback(
     String? name,
     Pointer<NativeFunction<SdlHintCallback>> callback,
     Pointer<NativeType> userdata) {
   final sdlAddHintCallbackLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(
+      Uint8 Function(
           Pointer<Utf8> name,
           Pointer<NativeFunction<SdlHintCallback>> callback,
           Pointer<NativeType> userdata),
@@ -229,7 +230,7 @@ int sdlAddHintCallback(
           Pointer<NativeType> userdata)>('SDL_AddHintCallback');
   final namePointer = name != null ? name.toNativeUtf8() : nullptr;
   final result =
-      sdlAddHintCallbackLookupFunction(namePointer, callback, userdata);
+      sdlAddHintCallbackLookupFunction(namePointer, callback, userdata) == 1;
   calloc.free(namePointer);
   return result;
 }
@@ -249,13 +250,13 @@ int sdlAddHintCallback(
 /// \sa SDL_AddHintCallback
 ///
 /// ```c
-/// extern SDL_DECLSPEC void SDLCALL SDL_DelHintCallback(const char *name, SDL_HintCallback callback, void *userdata)
+/// extern SDL_DECLSPEC void SDLCALL SDL_RemoveHintCallback(const char *name, SDL_HintCallback callback, void *userdata)
 /// ```
-void sdlDelHintCallback(
+void sdlRemoveHintCallback(
     String? name,
     Pointer<NativeFunction<SdlHintCallback>> callback,
     Pointer<NativeType> userdata) {
-  final sdlDelHintCallbackLookupFunction = libSdl3.lookupFunction<
+  final sdlRemoveHintCallbackLookupFunction = libSdl3.lookupFunction<
       Void Function(
           Pointer<Utf8> name,
           Pointer<NativeFunction<SdlHintCallback>> callback,
@@ -263,10 +264,10 @@ void sdlDelHintCallback(
       void Function(
           Pointer<Utf8> name,
           Pointer<NativeFunction<SdlHintCallback>> callback,
-          Pointer<NativeType> userdata)>('SDL_DelHintCallback');
+          Pointer<NativeType> userdata)>('SDL_RemoveHintCallback');
   final namePointer = name != null ? name.toNativeUtf8() : nullptr;
   final result =
-      sdlDelHintCallbackLookupFunction(namePointer, callback, userdata);
+      sdlRemoveHintCallbackLookupFunction(namePointer, callback, userdata);
   calloc.free(namePointer);
   return result;
 }

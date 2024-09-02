@@ -52,7 +52,7 @@ typedef SdlDialogFileCallback = Void Function(Pointer<NativeType> userdata,
 // typedef SDL_bool (SDLCALL *SDL_EventFilter)(void *userdata, SDL_Event *event)
 typedef SdlEventFilterDart = int Function(
     Pointer<NativeType> userdata, Pointer<SdlEvent> event);
-typedef SdlEventFilter = Int32 Function(
+typedef SdlEventFilter = Uint8 Function(
     Pointer<NativeType> userdata, Pointer<SdlEvent> event);
 
 // typedef int (SDLCALL *SDL_EnumerateDirectoryCallback)(void *userdata, const char *dirname, const char *fname)
@@ -61,7 +61,7 @@ typedef SdlEnumerateDirectoryCallbackDart = int Function(
 typedef SdlEnumerateDirectoryCallback = Int32 Function(
     Pointer<NativeType> userdata, Pointer<Utf8> dirname, Pointer<Utf8> fname);
 
-// typedef void (SDLCALL *SDL_HintCallback)(void *userdata, const char *name, const char *oldValue, const char *newValue)
+// typedef void(SDLCALL *SDL_HintCallback)(void *userdata, const char *name, const char *oldValue, const char *newValue)
 typedef SdlHintCallbackDart = void Function(Pointer<NativeType> userdata,
     Pointer<Utf8> name, Pointer<Utf8> oldValue, Pointer<Utf8> newValue);
 typedef SdlHintCallback = Void Function(Pointer<NativeType> userdata,
@@ -146,13 +146,13 @@ typedef SdlFunctionPointer = Void Function();
 // typedef SDL_bool (SDLCALL *SDL_WindowsMessageHook)(void *userdata, MSG *msg)
 typedef SdlWindowsMessageHookDart = int Function(
     Pointer<NativeType> userdata, Pointer<MSG> msg);
-typedef SdlWindowsMessageHook = Int32 Function(
+typedef SdlWindowsMessageHook = Uint8 Function(
     Pointer<NativeType> userdata, Pointer<MSG> msg);
 
 // typedef SDL_bool (SDLCALL *SDL_X11EventHook)(void *userdata, XEvent *xevent)
 typedef SdlX11EventHookDart = int Function(
     Pointer<NativeType> userdata, Pointer<XEvent> xevent);
-typedef SdlX11EventHook = Int32 Function(
+typedef SdlX11EventHook = Uint8 Function(
     Pointer<NativeType> userdata, Pointer<XEvent> xevent);
 
 // typedef void (SDLCALL *SDL_iOSAnimationCallback)(void *userdata)
@@ -164,7 +164,7 @@ typedef SdlIOsAnimationCallback = Void Function(Pointer<NativeType> userdata);
 typedef SdlRequestAndroidPermissionCallbackDart = void Function(
     Pointer<NativeType> userdata, Pointer<Utf8> permission, int granted);
 typedef SdlRequestAndroidPermissionCallback = Void Function(
-    Pointer<NativeType> userdata, Pointer<Utf8> permission, Int32 granted);
+    Pointer<NativeType> userdata, Pointer<Utf8> permission, Uint8 granted);
 
 // typedef int (SDLCALL * SDL_ThreadFunction) (void *data)
 typedef SdlThreadFunctionDart = int Function(Pointer<NativeType> data);

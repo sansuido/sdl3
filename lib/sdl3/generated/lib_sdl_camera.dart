@@ -376,15 +376,15 @@ int sdlGetCameraProperties(Pointer<SdlCamera> camera) {
 /// be converting to this format behind the scenes.
 ///
 /// If the system is waiting for the user to approve access to the camera, as
-/// some platforms require, this will return -1, but this isn't necessarily a
-/// fatal error; you should either wait for an SDL_EVENT_CAMERA_DEVICE_APPROVED
-/// (or SDL_EVENT_CAMERA_DEVICE_DENIED) event, or poll SDL_IsCameraApproved()
-/// occasionally until it returns non-zero.
+/// some platforms require, this will return SDL_FALSE, but this isn't
+/// necessarily a fatal error; you should either wait for an
+/// SDL_EVENT_CAMERA_DEVICE_APPROVED (or SDL_EVENT_CAMERA_DEVICE_DENIED) event,
+/// or poll SDL_IsCameraApproved() occasionally until it returns non-zero.
 ///
 /// \param camera opened camera device.
 /// \param spec the SDL_CameraSpec to be initialized by this function.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -393,14 +393,15 @@ int sdlGetCameraProperties(Pointer<SdlCamera> camera) {
 /// \sa SDL_OpenCamera
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_GetCameraFormat(SDL_Camera *camera, SDL_CameraSpec *spec)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetCameraFormat(SDL_Camera *camera, SDL_CameraSpec *spec)
 /// ```
-int sdlGetCameraFormat(Pointer<SdlCamera> camera, Pointer<SdlCameraSpec> spec) {
+bool sdlGetCameraFormat(
+    Pointer<SdlCamera> camera, Pointer<SdlCameraSpec> spec) {
   final sdlGetCameraFormatLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlCamera> camera, Pointer<SdlCameraSpec> spec),
+      Uint8 Function(Pointer<SdlCamera> camera, Pointer<SdlCameraSpec> spec),
       int Function(Pointer<SdlCamera> camera,
           Pointer<SdlCameraSpec> spec)>('SDL_GetCameraFormat');
-  return sdlGetCameraFormatLookupFunction(camera, spec);
+  return sdlGetCameraFormatLookupFunction(camera, spec) == 1;
 }
 
 ///
@@ -476,8 +477,6 @@ Pointer<SdlSurface> sdlAcquireCameraFrame(
 ///
 /// \param camera opened camera device.
 /// \param frame the video frame surface to release.
-/// \returns 0 on success or a negative error code on failure; call
-/// SDL_GetError() for more information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -486,13 +485,13 @@ Pointer<SdlSurface> sdlAcquireCameraFrame(
 /// \sa SDL_AcquireCameraFrame
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_ReleaseCameraFrame(SDL_Camera *camera, SDL_Surface *frame)
+/// extern SDL_DECLSPEC void SDLCALL SDL_ReleaseCameraFrame(SDL_Camera *camera, SDL_Surface *frame)
 /// ```
-int sdlReleaseCameraFrame(
+void sdlReleaseCameraFrame(
     Pointer<SdlCamera> camera, Pointer<SdlSurface> frame) {
   final sdlReleaseCameraFrameLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlCamera> camera, Pointer<SdlSurface> frame),
-      int Function(Pointer<SdlCamera> camera,
+      Void Function(Pointer<SdlCamera> camera, Pointer<SdlSurface> frame),
+      void Function(Pointer<SdlCamera> camera,
           Pointer<SdlSurface> frame)>('SDL_ReleaseCameraFrame');
   return sdlReleaseCameraFrameLookupFunction(camera, frame);
 }
