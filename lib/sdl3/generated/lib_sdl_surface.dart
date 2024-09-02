@@ -7,6 +7,8 @@ import 'struct_sdl.dart';
 ///
 /// Allocate a new surface with a specific pixel format.
 ///
+/// The pixels of the new surface are initialized to zero.
+///
 /// \param width the width of the surface.
 /// \param height the height of the surface.
 /// \param format the SDL_PixelFormat for the new surface's pixel format.

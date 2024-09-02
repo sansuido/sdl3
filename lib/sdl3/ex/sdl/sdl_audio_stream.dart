@@ -378,7 +378,7 @@ extension SdlAudioStreamPointerEx on Pointer<SdlAudioStream> {
   ///
   /// \param stream the stream on which the gain is being changed.
   /// \param gain the gain. 1.0f is no change, 0.0f is silence.
-  /// \returns 0 on successor a negative error code on failure; call
+  /// \returns 0 on success or a negative error code on failure; call
   /// SDL_GetError() for more information.
   ///
   /// \threadsafety It is safe to call this function from any thread, as it holds
