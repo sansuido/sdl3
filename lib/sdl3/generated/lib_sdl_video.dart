@@ -1152,11 +1152,6 @@ Pointer<SdlWindow> sdlGetWindowParent(Pointer<SdlWindow> window) {
 /// - `SDL_PROP_WINDOW_VIVANTE_SURFACE_POINTER`: the EGLSurface associated with
 /// the window
 ///
-/// On UWP:
-///
-/// - `SDL_PROP_WINDOW_WINRT_WINDOW_POINTER`: the IInspectable CoreWindow
-/// associated with the window
-///
 /// On Windows:
 ///
 /// - `SDL_PROP_WINDOW_WIN32_HWND_POINTER`: the HWND associated with the window
@@ -2545,33 +2540,63 @@ double sdlGetWindowOpacity(Pointer<SdlWindow> window) {
 }
 
 ///
-/// Set the window as a modal to a parent window.
+/// Set the window as a child of a parent window.
 ///
-/// If the window is already modal to an existing window, it will be reparented
-/// to the new owner. Setting the parent window to null unparents the modal
-/// window and removes modal status.
+/// If the window is already the child of an existing window, it will be
+/// reparented to the new owner. Setting the parent window to NULL unparents
+/// the window and removes child window status.
 ///
-/// Setting a window as modal to a parent that is a descendent of the modal
-/// window results in undefined behavior.
+/// Attempting to set the parent of a window that is currently in the modal
+/// state will fail. Use SDL_SetWindowModalFor() to cancel the modal status
+/// before attempting to change the parent.
 ///
-/// \param modal_window the window that should be set modal.
-/// \param parent_window the parent window for the modal window.
+/// Setting a parent window that is currently the sibling or descendent of the
+/// child window results in undefined behavior.
+///
+/// \param window the window that should become the child of a parent.
+/// \param parent the new parent window for the child window.
 /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
 /// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
+/// \sa SDL_SetWindowModal
+///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetWindowModalFor(SDL_Window *modal_window, SDL_Window *parent_window)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetWindowParent(SDL_Window *window, SDL_Window *parent)
 /// ```
-bool sdlSetWindowModalFor(
-    Pointer<SdlWindow> modalWindow, Pointer<SdlWindow> parentWindow) {
-  final sdlSetWindowModalForLookupFunction = libSdl3.lookupFunction<
-      Uint8 Function(
-          Pointer<SdlWindow> modalWindow, Pointer<SdlWindow> parentWindow),
-      int Function(Pointer<SdlWindow> modalWindow,
-          Pointer<SdlWindow> parentWindow)>('SDL_SetWindowModalFor');
-  return sdlSetWindowModalForLookupFunction(modalWindow, parentWindow) == 1;
+bool sdlSetWindowParent(Pointer<SdlWindow> window, Pointer<SdlWindow> parent) {
+  final sdlSetWindowParentLookupFunction = libSdl3.lookupFunction<
+      Uint8 Function(Pointer<SdlWindow> window, Pointer<SdlWindow> parent),
+      int Function(Pointer<SdlWindow> window,
+          Pointer<SdlWindow> parent)>('SDL_SetWindowParent');
+  return sdlSetWindowParentLookupFunction(window, parent) == 1;
+}
+
+///
+/// Toggle the state of the window as modal.
+///
+/// To enable modal status on a window, the window must currently be the child
+/// window of a parent, or toggling modal status on will fail.
+///
+/// \param window the window on which to set the modal state.
+/// \param modal SDL_TRUE to toggle modal status on, SDL_FALSE to toggle it
+/// off.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_SetWindowParent
+///
+/// ```c
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetWindowModal(SDL_Window *window, SDL_bool modal)
+/// ```
+bool sdlSetWindowModal(Pointer<SdlWindow> window, bool modal) {
+  final sdlSetWindowModalLookupFunction = libSdl3.lookupFunction<
+      Uint8 Function(Pointer<SdlWindow> window, Uint8 modal),
+      int Function(Pointer<SdlWindow> window, int modal)>('SDL_SetWindowModal');
+  return sdlSetWindowModalLookupFunction(window, modal ? 1 : 0) == 1;
 }
 
 ///

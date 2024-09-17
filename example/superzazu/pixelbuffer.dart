@@ -37,7 +37,7 @@ int main() {
   renderer.setLogicalPresentation(gWinWidth, gWinHeight,
       SDL_LOGICAL_PRESENTATION_STRETCH, SDL_SCALEMODE_NEAREST);
   // create texture
-  var texture = renderer.createTexture(SDL_PIXELFORMAT_RGBA32,
+  var texture = renderer.createTexture(SDL_PIXELFORMAT_RGBA8888,
       SDL_TEXTUREACCESS_STREAMING, gWinWidth, gWinHeight);
   if (texture == nullptr) {
     print('Unable to create texture: ${sdlGetError()}');

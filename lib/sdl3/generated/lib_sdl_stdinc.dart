@@ -4,6 +4,29 @@ import 'package:ffi/ffi.dart';
 import 'lib_sdl.dart';
 import 'struct_sdl.dart';
 
+///
+/// Allocate uninitialized memory.
+///
+/// The allocated memory returned by this function must be freed with
+/// SDL_free().
+///
+/// If `size` is 0, it will be set to 1.
+///
+/// If you want to allocate memory aligned to a specific alignment, consider
+/// using SDL_aligned_alloc().
+///
+/// \param size the size to allocate.
+/// \returns a pointer to the allocated memory, or NULL if allocation failed.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_free
+/// \sa SDL_calloc
+/// \sa SDL_realloc
+/// \sa SDL_aligned_alloc
+///
 /// ```c
 /// extern SDL_DECLSPEC SDL_MALLOC void * SDLCALL SDL_malloc(size_t size)
 /// ```
@@ -14,6 +37,24 @@ Pointer<NativeType> sdlMalloc(int size) {
   return sdlMallocLookupFunction(size);
 }
 
+///
+/// Free allocated memory.
+///
+/// The pointer is no longer valid after this call and cannot be dereferenced
+/// anymore.
+///
+/// If `mem` is NULL, this function does nothing.
+///
+/// \param mem a pointer to allocated memory, or NULL.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_malloc
+/// \sa SDL_calloc
+/// \sa SDL_realloc
+///
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_free(void *mem)
 /// ```
@@ -158,20 +199,20 @@ bool sdlSetMemoryFunctions(
 }
 
 ///
-/// Allocate memory aligned to a specific value.
-///
-/// If `alignment` is less than the size of `void *`, then it will be increased
-/// to match that.
-///
-/// The returned memory address will be a multiple of the alignment value, and
-/// the amount of memory allocated will be a multiple of the alignment value.
+/// Allocate memory aligned to a specific alignment.
 ///
 /// The memory returned by this function must be freed with SDL_aligned_free(),
-/// and _not_ SDL_free.
+/// _not_ SDL_free().
 ///
-/// \param alignment the alignment requested.
+/// If `alignment` is less than the size of `void *`, it will be increased to
+/// match that.
+///
+/// The returned memory address will be a multiple of the alignment value, and
+/// the size of the memory allocated will be a multiple of the alignment value.
+///
+/// \param alignment the alignment of the memory.
 /// \param size the size to allocate.
-/// \returns a pointer to the aligned memory.
+/// \returns a pointer to the aligned memory, or NULL if allocation failed.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -196,7 +237,9 @@ Pointer<NativeType> sdlAlignedAlloc(int alignment, int size) {
 /// The pointer is no longer valid after this call and cannot be dereferenced
 /// anymore.
 ///
-/// \param mem a pointer previously returned by SDL_aligned_alloc.
+/// If `mem` is NULL, this function does nothing.
+///
+/// \param mem a pointer previously returned by SDL_aligned_alloc(), or NULL.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -746,6 +789,24 @@ int sdlCrc32(int crc, Pointer<NativeType> data, int len) {
   return sdlCrc32LookupFunction(crc, data, len);
 }
 
+///
+/// Copy non-overlapping memory.
+///
+/// The memory regions must not overlap. If they do, use SDL_memmove() instead.
+///
+/// \param dst The destination memory region. Must not be NULL, and must not
+/// overlap with `src`.
+/// \param src The source memory region. Must not be NULL, and must not overlap
+/// with `dst`.
+/// \param len The length in bytes of both `dst` and `src`.
+/// \returns `dst`.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_memmove
+///
 /// ```c
 /// extern SDL_DECLSPEC void * SDLCALL SDL_memcpy(SDL_OUT_BYTECAP(len) void *dst, SDL_IN_BYTECAP(len) const void *src, size_t len)
 /// ```
@@ -759,7 +820,23 @@ Pointer<NativeType> sdlMemcpy(
   return sdlMemcpyLookupFunction(arg0, arg1, len);
 }
 
-/// Take advantage of compiler optimizations for memcpy
+///
+/// Copy memory.
+///
+/// It is okay for the memory regions to overlap. If you are confident that the
+/// regions never overlap, using SDL_memcpy() may improve performance.
+///
+/// \param dst The destination memory region. Must not be NULL.
+/// \param src The source memory region. Must not be NULL.
+/// \param len The length in bytes of both `dst` and `src`.
+/// \returns `dst`.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_memcpy
+///
 /// ```c
 /// extern SDL_DECLSPEC void * SDLCALL SDL_memmove(SDL_OUT_BYTECAP(len) void *dst, SDL_IN_BYTECAP(len) const void *src, size_t len)
 /// ```
@@ -831,6 +908,31 @@ int sdlWcsnlen(Pointer<Int16> wstr, int maxlen) {
   return sdlWcsnlenLookupFunction(wstr, maxlen);
 }
 
+///
+/// Copy a wide string.
+///
+/// This function copies `maxlen` - 1 wide characters from `src` to `dst`, then
+/// appends a null terminator.
+///
+/// `src` and `dst` must not overlap.
+///
+/// If `maxlen` is 0, no wide characters are copied and no null terminator is
+/// written.
+///
+/// \param dst The destination buffer. Must not be NULL, and must not overlap
+/// with `src`.
+/// \param src The null-terminated wide string to copy. Must not be NULL, and
+/// must not overlap with `dst`.
+/// \param maxlen The length (in wide characters) of the destination buffer.
+/// \returns The length (in wide characters, excluding the null terminator) of
+/// `src`.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_wcslcat
+///
 /// ```c
 /// extern SDL_DECLSPEC size_t SDLCALL SDL_wcslcpy(SDL_OUT_Z_CAP(maxlen) wchar_t *dst, const wchar_t *src, size_t maxlen)
 /// ```
@@ -843,6 +945,33 @@ int sdlWcslcpy(Pointer<NativeType> arg0, Pointer<Int16> src, int maxlen) {
   return sdlWcslcpyLookupFunction(arg0, src, maxlen);
 }
 
+///
+/// Concatenate wide strings.
+///
+/// This function appends up to `maxlen` - SDL_wcslen(dst) - 1 wide characters
+/// from `src` to the end of the wide string in `dst`, then appends a null
+/// terminator.
+///
+/// `src` and `dst` must not overlap.
+///
+/// If `maxlen` - SDL_wcslen(dst) - 1 is less than or equal to 0, then `dst` is
+/// unmodified.
+///
+/// \param dst The destination buffer already containing the first
+/// null-terminated wide string. Must not be NULL and must not
+/// overlap with `src`.
+/// \param src The second null-terminated wide string. Must not be NULL, and
+/// must not overlap with `dst`.
+/// \param maxlen The length (in wide characters) of the destination buffer.
+/// \returns The length (in wide characters, excluding the null terminator) of
+/// the string in `dst` plus the length of `src`.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_wcslcpy
+///
 /// ```c
 /// extern SDL_DECLSPEC size_t SDLCALL SDL_wcslcat(SDL_INOUT_Z_CAP(maxlen) wchar_t *dst, const wchar_t *src, size_t maxlen)
 /// ```
@@ -1045,6 +1174,31 @@ int sdlWcsncasecmp(Pointer<Int16> str1, Pointer<Int16> str2, int maxlen) {
   return sdlWcsncasecmpLookupFunction(str1, str2, maxlen);
 }
 
+///
+/// Parse a `long` from a wide string.
+///
+/// This function makes fewer guarantees than the C runtime `wcstol`:
+///
+/// - Only the bases 10 and 16 are guaranteed to be supported. The behavior for
+/// other bases is unspecified.
+/// - It is unspecified what this function returns when the parsed integer does
+/// not fit inside a `long`.
+///
+/// \param str The null-terminated wide string to read. Must not be NULL.
+/// \param endp If not NULL, the address of the first invalid wide character
+/// (i.e. the next character after the parsed number) will be
+/// written to this pointer.
+/// \param base The base of the integer to read. The values 0, 10 and 16 are
+/// supported. If 0, the base will be inferred from the integer's
+/// prefix.
+/// \returns The parsed `long`.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_strtol
+///
 /// ```c
 /// extern SDL_DECLSPEC long SDLCALL SDL_wcstol(const wchar_t *str, wchar_t **endp, int base)
 /// ```
@@ -1083,6 +1237,33 @@ int sdlStrnlen(String? str, int maxlen) {
   return result;
 }
 
+///
+/// Copy a string.
+///
+/// This function copies up to `maxlen` - 1 characters from `src` to `dst`,
+/// then appends a null terminator.
+///
+/// If `maxlen` is 0, no characters are copied and no null terminator is
+/// written.
+///
+/// If you want to copy an UTF-8 string but need to ensure that multi-byte
+/// sequences are not truncated, consider using SDL_utf8strlcpy().
+///
+/// \param dst The destination buffer. Must not be NULL, and must not overlap
+/// with `src`.
+/// \param src The null-terminated string to copy. Must not be NULL, and must
+/// not overlap with `dst`.
+/// \param maxlen The length (in characters) of the destination buffer.
+/// \returns The length (in characters, excluding the null terminator) of
+/// `src`.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_strlcat
+/// \sa SDL_utf8strlcpy
+///
 /// ```c
 /// extern SDL_DECLSPEC size_t SDLCALL SDL_strlcpy(SDL_OUT_Z_CAP(maxlen) char *dst, const char *src, size_t maxlen)
 /// ```
@@ -1098,6 +1279,32 @@ int sdlStrlcpy(Pointer<NativeType> arg0, String? src, int maxlen) {
   return result;
 }
 
+///
+/// Copy an UTF-8 string.
+///
+/// This function copies up to `dst_bytes` - 1 bytes from `src` to `dst` while
+/// also ensuring that the string written to `dst` does not end in a truncated
+/// multi-byte sequence. Finally, it appends a null terminator.
+///
+/// `src` and `dst` must not overlap.
+///
+/// Note that unlike SDL_strlcpy(), this function returns the number of bytes
+/// written, not the length of `src`.
+///
+/// \param dst The destination buffer. Must not be NULL, and must not overlap
+/// with `src`.
+/// \param src The null-terminated UTF-8 string to copy. Must not be NULL, and
+/// must not overlap with `dst`.
+/// \param dst_bytes The length (in bytes) of the destination buffer. Must not
+/// be 0.
+/// \returns The number of bytes written, excluding the null terminator.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_strlcpy
+///
 /// ```c
 /// extern SDL_DECLSPEC size_t SDLCALL SDL_utf8strlcpy(SDL_OUT_Z_CAP(dst_bytes) char *dst, const char *src, size_t dst_bytes)
 /// ```
@@ -1113,6 +1320,32 @@ int sdlUtf8strlcpy(Pointer<NativeType> arg0, String? src, int dstBytes) {
   return result;
 }
 
+///
+/// Concatenate strings.
+///
+/// This function appends up to `maxlen` - SDL_strlen(dst) - 1 characters from
+/// `src` to the end of the string in `dst`, then appends a null terminator.
+///
+/// `src` and `dst` must not overlap.
+///
+/// If `maxlen` - SDL_strlen(dst) - 1 is less than or equal to 0, then `dst` is
+/// unmodified.
+///
+/// \param dst The destination buffer already containing the first
+/// null-terminated string. Must not be NULL and must not overlap
+/// with `src`.
+/// \param src The second null-terminated string. Must not be NULL, and must
+/// not overlap with `dst`.
+/// \param maxlen The length (in characters) of the destination buffer.
+/// \returns The length (in characters, excluding the null terminator) of the
+/// string in `dst` plus the length of `src`.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_strlcpy
+///
 /// ```c
 /// extern SDL_DECLSPEC size_t SDLCALL SDL_strlcat(SDL_INOUT_Z_CAP(maxlen) char *dst, const char *src, size_t maxlen)
 /// ```
@@ -1385,27 +1618,52 @@ Pointer<Int8> sdlUltoa(int value, Pointer<Int8> str, int radix) {
 }
 
 /// ```c
-/// extern SDL_DECLSPEC char * SDLCALL SDL_lltoa(Sint64 value, char *str, int radix)
+/// extern SDL_DECLSPEC char * SDLCALL SDL_lltoa(long long value, char *str, int radix)
 /// ```
-Pointer<Int8> sdlLltoa(int value, Pointer<Int8> str, int radix) {
+Pointer<Int8> sdlLltoa(
+    Pointer<NativeType> value, Pointer<Int8> str, int radix) {
   final sdlLltoaLookupFunction = libSdl3.lookupFunction<
-      Pointer<Int8> Function(Int64 value, Pointer<Int8> str, Int32 radix),
       Pointer<Int8> Function(
-          int value, Pointer<Int8> str, int radix)>('SDL_lltoa');
+          Pointer<NativeType> value, Pointer<Int8> str, Int32 radix),
+      Pointer<Int8> Function(Pointer<NativeType> value, Pointer<Int8> str,
+          int radix)>('SDL_lltoa');
   return sdlLltoaLookupFunction(value, str, radix);
 }
 
 /// ```c
-/// extern SDL_DECLSPEC char * SDLCALL SDL_ulltoa(Uint64 value, char *str, int radix)
+/// extern SDL_DECLSPEC char * SDLCALL SDL_ulltoa(unsigned long long value, char *str, int radix)
 /// ```
-Pointer<Int8> sdlUlltoa(int value, Pointer<Int8> str, int radix) {
+Pointer<Int8> sdlUlltoa(
+    Pointer<NativeType> value, Pointer<Int8> str, int radix) {
   final sdlUlltoaLookupFunction = libSdl3.lookupFunction<
-      Pointer<Int8> Function(Uint64 value, Pointer<Int8> str, Int32 radix),
       Pointer<Int8> Function(
-          int value, Pointer<Int8> str, int radix)>('SDL_ulltoa');
+          Pointer<NativeType> value, Pointer<Int8> str, Int32 radix),
+      Pointer<Int8> Function(Pointer<NativeType> value, Pointer<Int8> str,
+          int radix)>('SDL_ulltoa');
   return sdlUlltoaLookupFunction(value, str, radix);
 }
 
+///
+/// Parse an `int` from a string.
+///
+/// The result of calling `SDL_atoi(str)` is equivalent to
+/// `(int)SDL_strtol(str, NULL, 10)`.
+///
+/// \param str The null-terminated string to read. Must not be NULL.
+/// \returns The parsed `int`.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_atof
+/// \sa SDL_strtol
+/// \sa SDL_strtoul
+/// \sa SDL_strtoll
+/// \sa SDL_strtoull
+/// \sa SDL_strtod
+/// \sa SDL_itoa
+///
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_atoi(const char *str)
 /// ```
@@ -1419,6 +1677,26 @@ int sdlAtoi(String? str) {
   return result;
 }
 
+///
+/// Parse a `double` from a string.
+///
+/// The result of calling `SDL_atof(str)` is equivalent to `SDL_strtod(str,
+/// NULL)`.
+///
+/// \param str The null-terminated string to read. Must not be NULL.
+/// \returns The parsed `double`.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_atoi
+/// \sa SDL_strtol
+/// \sa SDL_strtoul
+/// \sa SDL_strtoll
+/// \sa SDL_strtoull
+/// \sa SDL_strtod
+///
 /// ```c
 /// extern SDL_DECLSPEC double SDLCALL SDL_atof(const char *str)
 /// ```
@@ -1432,6 +1710,38 @@ double sdlAtof(String? str) {
   return result;
 }
 
+///
+/// Parse a `long` from a string.
+///
+/// This function makes fewer guarantees than the C runtime `strtol`:
+///
+/// - Only the bases 10 and 16 are guaranteed to be supported. The behavior for
+/// other bases is unspecified.
+/// - It is unspecified what this function returns when the parsed integer does
+/// not fit inside a `long`.
+///
+/// \param str The null-terminated string to read. Must not be NULL.
+/// \param endp If not NULL, the address of the first invalid character (i.e.
+/// the next character after the parsed number) will be written to
+/// this pointer.
+/// \param base The base of the integer to read. The values 0, 10 and 16 are
+/// supported. If 0, the base will be inferred from the integer's
+/// prefix.
+/// \returns The parsed `long`.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_atoi
+/// \sa SDL_atof
+/// \sa SDL_strtoul
+/// \sa SDL_strtoll
+/// \sa SDL_strtoull
+/// \sa SDL_strtod
+/// \sa SDL_ltoa
+/// \sa SDL_wcstol
+///
 /// ```c
 /// extern SDL_DECLSPEC long SDLCALL SDL_strtol(const char *str, char **endp, int base)
 /// ```
@@ -1447,6 +1757,37 @@ int sdlStrtol(String? str, Pointer<Pointer<Int8>> endp, int base) {
   return result;
 }
 
+///
+/// Parse an `unsigned long` from a string.
+///
+/// This function makes fewer guarantees than the C runtime `strtoul`:
+///
+/// - Only the bases 10 and 16 are guaranteed to be supported. The behavior for
+/// other bases is unspecified.
+/// - It is unspecified what this function returns when the parsed integer does
+/// not fit inside an `unsigned long`.
+///
+/// \param str The null-terminated string to read. Must not be NULL.
+/// \param endp If not NULL, the address of the first invalid character (i.e.
+/// the next character after the parsed number) will be written to
+/// this pointer.
+/// \param base The base of the integer to read. The values 0, 10 and 16 are
+/// supported. If 0, the base will be inferred from the integer's
+/// prefix.
+/// \returns The parsed `unsigned long`.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_atoi
+/// \sa SDL_atof
+/// \sa SDL_strtol
+/// \sa SDL_strtoll
+/// \sa SDL_strtoull
+/// \sa SDL_strtod
+/// \sa SDL_ultoa
+///
 /// ```c
 /// extern SDL_DECLSPEC unsigned long SDLCALL SDL_strtoul(const char *str, char **endp, int base)
 /// ```
@@ -1462,36 +1803,127 @@ int sdlStrtoul(String? str, Pointer<Pointer<Int8>> endp, int base) {
   return result;
 }
 
+///
+/// Parse a `long long` from a string.
+///
+/// This function makes fewer guarantees than the C runtime `strtoll`:
+///
+/// - Only the bases 10 and 16 are guaranteed to be supported. The behavior for
+/// other bases is unspecified.
+/// - It is unspecified what this function returns when the parsed integer does
+/// not fit inside a `long long`.
+///
+/// \param str The null-terminated string to read. Must not be NULL.
+/// \param endp If not NULL, the address of the first invalid character (i.e.
+/// the next character after the parsed number) will be written to
+/// this pointer.
+/// \param base The base of the integer to read. The values 0, 10 and 16 are
+/// supported. If 0, the base will be inferred from the integer's
+/// prefix.
+/// \returns The parsed `long long`.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_atoi
+/// \sa SDL_atof
+/// \sa SDL_strtol
+/// \sa SDL_strtoul
+/// \sa SDL_strtoull
+/// \sa SDL_strtod
+/// \sa SDL_lltoa
+///
 /// ```c
-/// extern SDL_DECLSPEC Sint64 SDLCALL SDL_strtoll(const char *str, char **endp, int base)
+/// extern SDL_DECLSPEC long long SDLCALL SDL_strtoll(const char *str, char **endp, int base)
 /// ```
-int sdlStrtoll(String? str, Pointer<Pointer<Int8>> endp, int base) {
+Pointer<NativeType> sdlStrtoll(
+    String? str, Pointer<Pointer<Int8>> endp, int base) {
   final sdlStrtollLookupFunction = libSdl3.lookupFunction<
-      Int64 Function(
+      Pointer<NativeType> Function(
           Pointer<Utf8> str, Pointer<Pointer<Int8>> endp, Int32 base),
-      int Function(Pointer<Utf8> str, Pointer<Pointer<Int8>> endp,
-          int base)>('SDL_strtoll');
+      Pointer<NativeType> Function(Pointer<Utf8> str,
+          Pointer<Pointer<Int8>> endp, int base)>('SDL_strtoll');
   final strPointer = str != null ? str.toNativeUtf8() : nullptr;
   final result = sdlStrtollLookupFunction(strPointer, endp, base);
   calloc.free(strPointer);
   return result;
 }
 
+///
+/// Parse an `unsigned long long` from a string.
+///
+/// This function makes fewer guarantees than the C runtime `strtoull`:
+///
+/// - Only the bases 10 and 16 are guaranteed to be supported. The behavior for
+/// other bases is unspecified.
+/// - It is unspecified what this function returns when the parsed integer does
+/// not fit inside a `long long`.
+///
+/// \param str The null-terminated string to read. Must not be NULL.
+/// \param endp If not NULL, the address of the first invalid character (i.e.
+/// the next character after the parsed number) will be written to
+/// this pointer.
+/// \param base The base of the integer to read. The values 0, 10 and 16 are
+/// supported. If 0, the base will be inferred from the integer's
+/// prefix.
+/// \returns The parsed `unsigned long long`.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_atoi
+/// \sa SDL_atof
+/// \sa SDL_strtol
+/// \sa SDL_strtoll
+/// \sa SDL_strtoul
+/// \sa SDL_strtod
+/// \sa SDL_ulltoa
+///
 /// ```c
-/// extern SDL_DECLSPEC Uint64 SDLCALL SDL_strtoull(const char *str, char **endp, int base)
+/// extern SDL_DECLSPEC unsigned long long SDLCALL SDL_strtoull(const char *str, char **endp, int base)
 /// ```
-int sdlStrtoull(String? str, Pointer<Pointer<Int8>> endp, int base) {
+Pointer<NativeType> sdlStrtoull(
+    String? str, Pointer<Pointer<Int8>> endp, int base) {
   final sdlStrtoullLookupFunction = libSdl3.lookupFunction<
-      Uint64 Function(
+      Pointer<NativeType> Function(
           Pointer<Utf8> str, Pointer<Pointer<Int8>> endp, Int32 base),
-      int Function(Pointer<Utf8> str, Pointer<Pointer<Int8>> endp,
-          int base)>('SDL_strtoull');
+      Pointer<NativeType> Function(Pointer<Utf8> str,
+          Pointer<Pointer<Int8>> endp, int base)>('SDL_strtoull');
   final strPointer = str != null ? str.toNativeUtf8() : nullptr;
   final result = sdlStrtoullLookupFunction(strPointer, endp, base);
   calloc.free(strPointer);
   return result;
 }
 
+///
+/// Parse a `double` from a string.
+///
+/// This function makes fewer guarantees than the C runtime `strtod`:
+///
+/// - Only decimal notation is guaranteed to be supported. The handling of
+/// scientific and hexadecimal notation is unspecified.
+/// - Whether or not INF and NAN can be parsed is unspecified.
+/// - The precision of the result is unspecified.
+///
+/// \param str The null-terminated string to read. Must not be NULL.
+/// \param endp If not NULL, the address of the first invalid character (i.e.
+/// the next character after the parsed number) will be written to
+/// this pointer.
+/// \returns The parsed `double`.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_atoi
+/// \sa SDL_atof
+/// \sa SDL_strtol
+/// \sa SDL_strtoll
+/// \sa SDL_strtoul
+/// \sa SDL_strtoull
+///
 /// ```c
 /// extern SDL_DECLSPEC double SDLCALL SDL_strtod(const char *str, char **endp)
 /// ```
@@ -1678,6 +2110,38 @@ int sdlStrncasecmp(String? str1, String? str2, int maxlen) {
 }
 
 ///
+/// Searches a string for the first occurence of any character contained in a
+/// breakset, and returns a pointer from the string to that character.
+///
+/// \param str The null-terminated string to be searched. Must not be NULL, and
+/// must not overlap with `breakset`.
+/// \param breakset A null-terminated string containing the list of characters
+/// to look for. Must not be NULL, and must not overlap with
+/// `str`.
+/// \returns A pointer to the location, in str, of the first occurence of a
+/// character present in the breakset, or NULL if none is found.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC char * SDLCALL SDL_strpbrk(const char *str, const char *breakset)
+/// ```
+Pointer<Int8> sdlStrpbrk(String? str, String? breakset) {
+  final sdlStrpbrkLookupFunction = libSdl3.lookupFunction<
+      Pointer<Int8> Function(Pointer<Utf8> str, Pointer<Utf8> breakset),
+      Pointer<Int8> Function(
+          Pointer<Utf8> str, Pointer<Utf8> breakset)>('SDL_strpbrk');
+  final strPointer = str != null ? str.toNativeUtf8() : nullptr;
+  final breaksetPointer = breakset != null ? breakset.toNativeUtf8() : nullptr;
+  final result = sdlStrpbrkLookupFunction(strPointer, breaksetPointer);
+  calloc.free(strPointer);
+  calloc.free(breaksetPointer);
+  return result;
+}
+
+///
 /// Decode a UTF-8 string, one Unicode codepoint at a time.
 ///
 /// This will return the first Unicode codepoint in the UTF-8 encoded string in
@@ -1804,7 +2268,7 @@ int sdlVsscanf(String? text, String? fmt, Pointer<NativeType> arg2) {
 }
 
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_snprintf(SDL_OUT_Z_CAP(maxlen) char *text, size_t maxlen, SDL_PRINTF_FORMAT_STRING const char *fmt, ... ) SDL_PRINTF_VARARG_FUNC(3)
+/// extern SDL_DECLSPEC int SDLCALL SDL_snprintf(SDL_OUT_Z_CAP(maxlen) char *text, size_t maxlen, SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(3)
 /// ```
 int sdlSnprintf(Pointer<NativeType> arg0, int maxlen, String? fmt,
     Pointer<NativeType> arg3) {
@@ -1820,7 +2284,7 @@ int sdlSnprintf(Pointer<NativeType> arg0, int maxlen, String? fmt,
 }
 
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_swprintf(SDL_OUT_Z_CAP(maxlen) wchar_t *text, size_t maxlen, SDL_PRINTF_FORMAT_STRING const wchar_t *fmt, ... ) SDL_WPRINTF_VARARG_FUNC(3)
+/// extern SDL_DECLSPEC int SDLCALL SDL_swprintf(SDL_OUT_Z_CAP(maxlen) wchar_t *text, size_t maxlen, SDL_PRINTF_FORMAT_STRING const wchar_t *fmt, ...) SDL_WPRINTF_VARARG_FUNC(3)
 /// ```
 int sdlSwprintf(Pointer<NativeType> arg0, int maxlen, Pointer<Int16> fmt,
     Pointer<NativeType> arg3) {
@@ -1849,16 +2313,16 @@ int sdlVsnprintf(Pointer<NativeType> arg0, int maxlen, String? fmt,
 }
 
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_vswprintf(SDL_OUT_Z_CAP(maxlen) wchar_t *text, size_t maxlen, const wchar_t *fmt, va_list ap)
+/// extern SDL_DECLSPEC int SDLCALL SDL_vswprintf(SDL_OUT_Z_CAP(maxlen) wchar_t *text, size_t maxlen, SDL_PRINTF_FORMAT_STRING const wchar_t *fmt, va_list ap) SDL_WPRINTF_VARARG_FUNCV(3)
 /// ```
 int sdlVswprintf(Pointer<NativeType> arg0, int maxlen, Pointer<Int16> fmt,
-    Pointer<NativeType> ap) {
+    Pointer<NativeType> arg3) {
   final sdlVswprintfLookupFunction = libSdl3.lookupFunction<
       Int32 Function(Pointer<NativeType> arg0, Uint32 maxlen,
-          Pointer<Int16> fmt, Pointer<NativeType> ap),
+          Pointer<Int16> fmt, Pointer<NativeType> arg3),
       int Function(Pointer<NativeType> arg0, int maxlen, Pointer<Int16> fmt,
-          Pointer<NativeType> ap)>('SDL_vswprintf');
-  return sdlVswprintfLookupFunction(arg0, maxlen, fmt, ap);
+          Pointer<NativeType> arg3)>('SDL_vswprintf');
+  return sdlVswprintfLookupFunction(arg0, maxlen, fmt, arg3);
 }
 
 /// ```c

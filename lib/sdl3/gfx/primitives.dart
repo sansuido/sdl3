@@ -3375,7 +3375,7 @@ Pointer<SdlSurface> createCharacterSurface(int c, int rotation) {
   /*
   * Redraw character into surface
   */
-  character = sdlCreateSurface(charWidth, charHeight, SDL_PIXELFORMAT_RGBA32);
+  character = sdlCreateSurface(charWidth, charHeight, SDL_PIXELFORMAT_RGBA8888);
   if (character == nullptr) {
     return nullptr;
   }
@@ -3444,7 +3444,8 @@ bool characterRgba(Pointer<SdlRenderer> renderer, double x, double y, int c,
     /*
 		* Redraw character into surface
 		*/
-    character = sdlCreateSurface(charWidth, charHeight, SDL_PIXELFORMAT_RGBA32);
+    character =
+        sdlCreateSurface(charWidth, charHeight, SDL_PIXELFORMAT_RGBA8888);
     if (character == nullptr) {
       return false;
     }

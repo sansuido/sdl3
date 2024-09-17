@@ -352,7 +352,7 @@ Pointer<SdlJoystick> sdlGetJoystickFromPlayerIndex(int playerIndex) {
 ///
 /// Attach a new virtual joystick.
 ///
-/// \param desc joystick description.
+/// \param desc joystick description, initialized using SDL_INIT_INTERFACE().
 /// \returns the joystick instance ID, or 0 on failure; call SDL_GetError() for
 /// more information.
 ///
@@ -487,22 +487,23 @@ bool sdlSetJoystickVirtualBall(
 ///
 /// \param joystick the virtual joystick on which to set state.
 /// \param button the index of the button on the virtual joystick to update.
-/// \param value the new value for the specified button.
+/// \param down SDL_TRUE if the button is pressed, SDL_FALSE otherwise.
 /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
 /// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetJoystickVirtualButton(SDL_Joystick *joystick, int button, Uint8 value)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetJoystickVirtualButton(SDL_Joystick *joystick, int button, SDL_bool down)
 /// ```
 bool sdlSetJoystickVirtualButton(
-    Pointer<SdlJoystick> joystick, int button, int value) {
+    Pointer<SdlJoystick> joystick, int button, bool down) {
   final sdlSetJoystickVirtualButtonLookupFunction = libSdl3.lookupFunction<
-      Uint8 Function(Pointer<SdlJoystick> joystick, Int32 button, Uint8 value),
+      Uint8 Function(Pointer<SdlJoystick> joystick, Int32 button, Uint8 down),
       int Function(Pointer<SdlJoystick> joystick, int button,
-          int value)>('SDL_SetJoystickVirtualButton');
-  return sdlSetJoystickVirtualButtonLookupFunction(joystick, button, value) ==
+          int down)>('SDL_SetJoystickVirtualButton');
+  return sdlSetJoystickVirtualButtonLookupFunction(
+          joystick, button, down ? 1 : 0) ==
       1;
 }
 
@@ -548,8 +549,8 @@ bool sdlSetJoystickVirtualHat(
 /// \param touchpad the index of the touchpad on the virtual joystick to
 /// update.
 /// \param finger the index of the finger on the touchpad to set.
-/// \param state `SDL_PRESSED` if the finger is pressed, `SDL_RELEASED` if the
-/// finger is released.
+/// \param down SDL_TRUE if the finger is pressed, SDL_FALSE if the finger is
+/// released.
 /// \param x the x coordinate of the finger on the touchpad, normalized 0 to 1,
 /// with the origin in the upper left.
 /// \param y the y coordinate of the finger on the touchpad, normalized 0 to 1,
@@ -561,23 +562,23 @@ bool sdlSetJoystickVirtualHat(
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetJoystickVirtualTouchpad(SDL_Joystick *joystick, int touchpad, int finger, Uint8 state, float x, float y, float pressure)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetJoystickVirtualTouchpad(SDL_Joystick *joystick, int touchpad, int finger, SDL_bool down, float x, float y, float pressure)
 /// ```
 bool sdlSetJoystickVirtualTouchpad(Pointer<SdlJoystick> joystick, int touchpad,
-    int finger, int state, double x, double y, double pressure) {
+    int finger, bool down, double x, double y, double pressure) {
   final sdlSetJoystickVirtualTouchpadLookupFunction = libSdl3.lookupFunction<
       Uint8 Function(Pointer<SdlJoystick> joystick, Int32 touchpad,
-          Int32 finger, Uint8 state, Float x, Float y, Float pressure),
+          Int32 finger, Uint8 down, Float x, Float y, Float pressure),
       int Function(
           Pointer<SdlJoystick> joystick,
           int touchpad,
           int finger,
-          int state,
+          int down,
           double x,
           double y,
           double pressure)>('SDL_SetJoystickVirtualTouchpad');
   return sdlSetJoystickVirtualTouchpadLookupFunction(
-          joystick, touchpad, finger, state, x, y, pressure) ==
+          joystick, touchpad, finger, down ? 1 : 0, x, y, pressure) ==
       1;
 }
 
@@ -1282,21 +1283,21 @@ int sdlGetJoystickHat(Pointer<SdlJoystick> joystick, int hat) {
 /// \param joystick an SDL_Joystick structure containing joystick information.
 /// \param button the button index to get the state from; indices start at
 /// index 0.
-/// \returns 1 if the specified button is pressed, 0 otherwise.
+/// \returns SDL_TRUE if the button is pressed, SDL_FALSE otherwise.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetNumJoystickButtons
 ///
 /// ```c
-/// extern SDL_DECLSPEC Uint8 SDLCALL SDL_GetJoystickButton(SDL_Joystick *joystick, int button)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetJoystickButton(SDL_Joystick *joystick, int button)
 /// ```
-int sdlGetJoystickButton(Pointer<SdlJoystick> joystick, int button) {
+bool sdlGetJoystickButton(Pointer<SdlJoystick> joystick, int button) {
   final sdlGetJoystickButtonLookupFunction = libSdl3.lookupFunction<
       Uint8 Function(Pointer<SdlJoystick> joystick, Int32 button),
       int Function(
           Pointer<SdlJoystick> joystick, int button)>('SDL_GetJoystickButton');
-  return sdlGetJoystickButtonLookupFunction(joystick, button);
+  return sdlGetJoystickButtonLookupFunction(joystick, button) == 1;
 }
 
 ///

@@ -199,6 +199,8 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   ///
   /// Create a texture for a rendering context.
   ///
+  /// The contents of a texture when first created are not defined.
+  ///
   /// \param renderer the rendering context.
   /// \param format one of the enumerated values in SDL_PixelFormat.
   /// \param access one of the enumerated values in SDL_TextureAccess.

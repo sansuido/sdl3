@@ -102,9 +102,9 @@ Pointer<SdlWindow> sdlGetKeyboardFocus() {
 /// valid for the whole lifetime of the application and should not be freed by
 /// the caller.
 ///
-/// A array element with a value of 1 means that the key is pressed and a value
-/// of 0 means that it is not. Indexes into this array are obtained by using
-/// SDL_Scancode values.
+/// A array element with a value of SDL_TRUE means that the key is pressed and
+/// a value of SDL_FALSE means that it is not. Indexes into this array are
+/// obtained by using SDL_Scancode values.
 ///
 /// Use SDL_PumpEvents() to update the state array.
 ///
@@ -125,7 +125,7 @@ Pointer<SdlWindow> sdlGetKeyboardFocus() {
 /// \sa SDL_ResetKeyboard
 ///
 /// ```c
-/// extern SDL_DECLSPEC const Uint8 * SDLCALL SDL_GetKeyboardState(int *numkeys)
+/// extern SDL_DECLSPEC const SDL_bool * SDLCALL SDL_GetKeyboardState(int *numkeys)
 /// ```
 Pointer<Uint8> sdlGetKeyboardState(Pointer<Int32> numkeys) {
   final sdlGetKeyboardStateLookupFunction = libSdl3.lookupFunction<

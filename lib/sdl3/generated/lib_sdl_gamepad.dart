@@ -1413,8 +1413,7 @@ bool sdlGamepadHasButton(Pointer<SdlGamepad> gamepad, int button) {
 ///
 /// \param gamepad a gamepad.
 /// \param button a button index (one of the SDL_GamepadButton values).
-/// \returns 1 for pressed state or 0 for not pressed state or failure; call
-/// SDL_GetError() for more information.
+/// \returns SDL_TRUE if the button is pressed, SDL_FALSE otherwise.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -1422,14 +1421,14 @@ bool sdlGamepadHasButton(Pointer<SdlGamepad> gamepad, int button) {
 /// \sa SDL_GetGamepadAxis
 ///
 /// ```c
-/// extern SDL_DECLSPEC Uint8 SDLCALL SDL_GetGamepadButton(SDL_Gamepad *gamepad, SDL_GamepadButton button)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetGamepadButton(SDL_Gamepad *gamepad, SDL_GamepadButton button)
 /// ```
-int sdlGetGamepadButton(Pointer<SdlGamepad> gamepad, int button) {
+bool sdlGetGamepadButton(Pointer<SdlGamepad> gamepad, int button) {
   final sdlGetGamepadButtonLookupFunction = libSdl3.lookupFunction<
       Uint8 Function(Pointer<SdlGamepad> gamepad, Int32 button),
       int Function(
           Pointer<SdlGamepad> gamepad, int button)>('SDL_GetGamepadButton');
-  return sdlGetGamepadButtonLookupFunction(gamepad, button);
+  return sdlGetGamepadButtonLookupFunction(gamepad, button) == 1;
 }
 
 ///
@@ -1525,12 +1524,13 @@ int sdlGetNumGamepadTouchpadFingers(Pointer<SdlGamepad> gamepad, int touchpad) {
 /// \param gamepad a gamepad.
 /// \param touchpad a touchpad.
 /// \param finger a finger.
-/// \param state filled with state.
-/// \param x filled with x position, normalized 0 to 1, with the origin in the
-/// upper left.
-/// \param y filled with y position, normalized 0 to 1, with the origin in the
-/// upper left.
-/// \param pressure filled with pressure value.
+/// \param down a pointer filled with SDL_TRUE if the finger is down, SDL_FALSE
+/// otherwise, may be NULL.
+/// \param x a pointer filled with the x position, normalized 0 to 1, with the
+/// origin in the upper left, may be NULL.
+/// \param y a pointer filled with the y position, normalized 0 to 1, with the
+/// origin in the upper left, may be NULL.
+/// \param pressure a pointer filled with pressure value, may be NULL.
 /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
 /// for more information.
 ///
@@ -1539,13 +1539,13 @@ int sdlGetNumGamepadTouchpadFingers(Pointer<SdlGamepad> gamepad, int touchpad) {
 /// \sa SDL_GetNumGamepadTouchpadFingers
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetGamepadTouchpadFinger(SDL_Gamepad *gamepad, int touchpad, int finger, Uint8 *state, float *x, float *y, float *pressure)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetGamepadTouchpadFinger(SDL_Gamepad *gamepad, int touchpad, int finger, SDL_bool *down, float *x, float *y, float *pressure)
 /// ```
 bool sdlGetGamepadTouchpadFinger(
     Pointer<SdlGamepad> gamepad,
     int touchpad,
     int finger,
-    Pointer<Uint8> state,
+    Pointer<Uint8> down,
     Pointer<Float> x,
     Pointer<Float> y,
     Pointer<Float> pressure) {
@@ -1554,7 +1554,7 @@ bool sdlGetGamepadTouchpadFinger(
           Pointer<SdlGamepad> gamepad,
           Int32 touchpad,
           Int32 finger,
-          Pointer<Uint8> state,
+          Pointer<Uint8> down,
           Pointer<Float> x,
           Pointer<Float> y,
           Pointer<Float> pressure),
@@ -1562,12 +1562,12 @@ bool sdlGetGamepadTouchpadFinger(
           Pointer<SdlGamepad> gamepad,
           int touchpad,
           int finger,
-          Pointer<Uint8> state,
+          Pointer<Uint8> down,
           Pointer<Float> x,
           Pointer<Float> y,
           Pointer<Float> pressure)>('SDL_GetGamepadTouchpadFinger');
   return sdlGetGamepadTouchpadFingerLookupFunction(
-          gamepad, touchpad, finger, state, x, y, pressure) ==
+          gamepad, touchpad, finger, down, x, y, pressure) ==
       1;
 }
 

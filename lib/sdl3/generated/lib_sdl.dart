@@ -77,7 +77,7 @@ typedef SdlAppInitFunc = Int32 Function(Pointer<Pointer<NativeType>> appstate,
 typedef SdlAppIterateFuncDart = int Function(Pointer<NativeType> appstate);
 typedef SdlAppIterateFunc = Int32 Function(Pointer<NativeType> appstate);
 
-// typedef SDL_AppResult (SDLCALL *SDL_AppEvent_func)(void *appstate, const SDL_Event *event)
+// typedef SDL_AppResult (SDLCALL *SDL_AppEvent_func)(void *appstate, SDL_Event *event)
 typedef SdlAppEventFuncDart = int Function(
     Pointer<NativeType> appstate, Pointer<SdlEvent> event);
 typedef SdlAppEventFunc = Int32 Function(

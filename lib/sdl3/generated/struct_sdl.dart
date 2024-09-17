@@ -206,7 +206,7 @@ final class SdlKeyboardEvent extends Struct {
   external int raw;
   // [36]+(1)
   @Uint8()
-  external int state;
+  external int down;
   // [37]+(1)
   @Uint8()
   external int repeat;
@@ -270,13 +270,18 @@ final class SdlTextEditingCandidatesEvent extends Struct {
   // [40]+(1)
   @Uint8()
   external int horizontal;
-  // [] +(7)
+  // [41]+(1)
+  @Uint8()
+  external int padding1;
+  // [42]+(1)
+  @Uint8()
+  external int padding2;
+  // [43]+(1)
+  @Uint8()
+  external int padding3;
+  // [] +(4)
   @Uint32()
   external int blank_2;
-  @Uint16()
-  external int blank_3;
-  @Uint8()
-  external int blank_4;
 }
 
 // SDL_TextInputEvent
@@ -378,7 +383,7 @@ final class SdlMouseButtonEvent extends Struct {
   external int button;
   // [25]+(1)
   @Uint8()
-  external int state;
+  external int down;
   // [26]+(1)
   @Uint8()
   external int clicks;
@@ -554,7 +559,7 @@ final class SdlJoyButtonEvent extends Struct {
   external int button;
   // [21]+(1)
   @Uint8()
-  external int state;
+  external int down;
   // [22]+(1)
   @Uint8()
   external int padding1;
@@ -663,7 +668,7 @@ final class SdlGamepadButtonEvent extends Struct {
   external int button;
   // [21]+(1)
   @Uint8()
-  external int state;
+  external int down;
   // [22]+(1)
   @Uint8()
   external int padding1;
@@ -919,7 +924,7 @@ final class SdlPenTouchEvent extends Struct {
   external int eraser;
   // [37]+(1)
   @Uint8()
-  external int state;
+  external int down;
   // [] +(2)
   @Uint16()
   external int blank_1;
@@ -956,7 +961,7 @@ final class SdlPenButtonEvent extends Struct {
   external int button;
   // [37]+(1)
   @Uint8()
-  external int state;
+  external int down;
   // [] +(2)
   @Uint16()
   external int blank_1;
@@ -1307,21 +1312,6 @@ final class SdlGpuCopyPass extends Opaque {}
 // SDL_GPUFence
 final class SdlGpuFence extends Opaque {}
 
-// SDL_GPUDepthStencilValue
-final class SdlGpuDepthStencilValue extends Struct {
-  // [0]+(4)
-  @Float()
-  external double depth;
-  // [4]+(1)
-  @Uint8()
-  external int stencil;
-  // [] +(3)
-  @Uint16()
-  external int blank_1;
-  @Uint8()
-  external int blank_2;
-}
-
 // SDL_GPUViewport
 final class SdlGpuViewport extends Struct {
   // [0]+(4)
@@ -1353,10 +1343,10 @@ final class SdlGpuTextureTransferInfo extends Struct {
   external int offset;
   // [12]+(4)
   @Uint32()
-  external int imagePitch;
+  external int pixelsPerRow;
   // [16]+(4)
   @Uint32()
-  external int imageHeight;
+  external int rowsPerLayer;
   // [] +(4)
   @Uint32()
   external int blank_1;
@@ -1480,10 +1470,10 @@ final class SdlGpuBufferRegion extends Struct {
 final class SdlGpuIndirectDrawCommand extends Struct {
   // [0]+(4)
   @Uint32()
-  external int vertexCount;
+  external int numVertices;
   // [4]+(4)
   @Uint32()
-  external int instanceCount;
+  external int numInstances;
   // [8]+(4)
   @Uint32()
   external int firstVertex;
@@ -1496,10 +1486,10 @@ final class SdlGpuIndirectDrawCommand extends Struct {
 final class SdlGpuIndexedIndirectDrawCommand extends Struct {
   // [0]+(4)
   @Uint32()
-  external int indexCount;
+  external int numIndices;
   // [4]+(4)
   @Uint32()
-  external int instanceCount;
+  external int numInstances;
   // [8]+(4)
   @Uint32()
   external int firstIndex;
@@ -1518,13 +1508,13 @@ final class SdlGpuIndexedIndirectDrawCommand extends Struct {
 final class SdlGpuIndirectDispatchCommand extends Struct {
   // [0]+(4)
   @Uint32()
-  external int groupCountX;
+  external int groupcountX;
   // [4]+(4)
   @Uint32()
-  external int groupCountY;
+  external int groupcountY;
   // [8]+(4)
   @Uint32()
-  external int groupCountZ;
+  external int groupcountZ;
   // [] +(4)
   @Uint32()
   external int blank_1;
@@ -1553,47 +1543,46 @@ final class SdlGpuSamplerCreateInfo extends Struct {
   // [24]+(4)
   @Float()
   external double mipLodBias;
-  // [28]+(1)
-  @Uint8()
-  external int anisotropyEnable;
-  // [] +(3)
-  @Uint16()
-  external int blank_1;
-  @Uint8()
-  external int blank_2;
-  // [32]+(4)
+  // [28]+(4)
   @Float()
   external double maxAnisotropy;
-  // [36]+(1)
+  // [32]+(1)
   @Uint8()
-  external int compareEnable;
-  // [] +(3)
-  @Uint16()
-  external int blank_3;
+  external int enableAnisotropy;
+  // [33]+(1)
   @Uint8()
-  external int blank_4;
-  // [40]+(4)
+  external int enableCompare;
+  // [34]+(1)
+  @Uint8()
+  external int padding1;
+  // [35]+(1)
+  @Uint8()
+  external int padding2;
+  // [36]+(4)
   @Int32()
   external int compareOp;
-  // [44]+(4)
+  // [40]+(4)
   @Float()
   external double minLod;
-  // [48]+(4)
+  // [44]+(4)
   @Float()
   external double maxLod;
-  // [52]+(4)
+  // [48]+(4)
   @Uint32()
   external int props;
+  // [] +(4)
+  @Uint32()
+  external int blank_1;
 }
 
 // SDL_GPUVertexBinding
 final class SdlGpuVertexBinding extends Struct {
   // [0]+(4)
   @Uint32()
-  external int binding;
+  external int index;
   // [4]+(4)
   @Uint32()
-  external int stride;
+  external int pitch;
   // [8]+(4)
   @Int32()
   external int inputRate;
@@ -1609,7 +1598,7 @@ final class SdlGpuVertexAttribute extends Struct {
   external int location;
   // [4]+(4)
   @Uint32()
-  external int binding;
+  external int bindingIndex;
   // [8]+(4)
   @Int32()
   external int format;
@@ -1624,7 +1613,7 @@ final class SdlGpuVertexInputState extends Struct {
   external Pointer<SdlGpuVertexBinding> vertexBindings;
   // [8]+(4)
   @Uint32()
-  external int vertexBindingCount;
+  external int numVertexBindings;
   // [] +(4)
   @Uint32()
   external int blank_1;
@@ -1632,7 +1621,7 @@ final class SdlGpuVertexInputState extends Struct {
   external Pointer<SdlGpuVertexAttribute> vertexAttributes;
   // [24]+(4)
   @Uint32()
-  external int vertexAttributeCount;
+  external int numVertexAttributes;
   // [] +(4)
   @Uint32()
   external int blank_2;
@@ -1654,31 +1643,35 @@ final class SdlGpuStencilOpState extends Struct {
   external int compareOp;
 }
 
-// SDL_GPUColorAttachmentBlendState
-final class SdlGpuColorAttachmentBlendState extends Struct {
+// SDL_GPUColorTargetBlendState
+final class SdlGpuColorTargetBlendState extends Struct {
   // [0]+(1)
   @Uint8()
-  external int blendEnable;
-  // [] +(3)
-  @Uint16()
-  external int blank_1;
+  external int enableBlend;
+  // [1]+(1)
   @Uint8()
-  external int blank_2;
+  external int padding1;
+  // [2]+(1)
+  @Uint8()
+  external int padding2;
+  // [3]+(1)
+  @Uint8()
+  external int padding3;
   // [4]+(4)
   @Int32()
-  external int srcColorBlendFactor;
+  external int srcColorBlendfactor;
   // [8]+(4)
   @Int32()
-  external int dstColorBlendFactor;
+  external int dstColorBlendfactor;
   // [12]+(4)
   @Int32()
   external int colorBlendOp;
   // [16]+(4)
   @Int32()
-  external int srcAlphaBlendFactor;
+  external int srcAlphaBlendfactor;
   // [20]+(4)
   @Int32()
-  external int dstAlphaBlendFactor;
+  external int dstAlphaBlendfactor;
   // [24]+(4)
   @Int32()
   external int alphaBlendOp;
@@ -1687,9 +1680,9 @@ final class SdlGpuColorAttachmentBlendState extends Struct {
   external int colorWriteMask;
   // [] +(3)
   @Uint16()
-  external int blank_3;
+  external int blank_1;
   @Uint8()
-  external int blank_4;
+  external int blank_2;
 }
 
 // SDL_GPUShaderCreateInfo
@@ -1703,7 +1696,7 @@ final class SdlGpuShaderCreateInfo extends Struct {
   // [8]+(8)
   external Pointer<Uint8> code;
   // [16]+(8)
-  external Pointer<Utf8> entryPointName;
+  external Pointer<Utf8> entrypoint;
   // [24]+(4)
   @Uint32()
   external int format;
@@ -1712,16 +1705,16 @@ final class SdlGpuShaderCreateInfo extends Struct {
   external int stage;
   // [32]+(4)
   @Uint32()
-  external int samplerCount;
+  external int numSamplers;
   // [36]+(4)
   @Uint32()
-  external int storageTextureCount;
+  external int numStorageTextures;
   // [40]+(4)
   @Uint32()
-  external int storageBufferCount;
+  external int numStorageBuffers;
   // [44]+(4)
   @Uint32()
-  external int uniformBufferCount;
+  external int numUniformBuffers;
   // [48]+(4)
   @Uint32()
   external int props;
@@ -1740,7 +1733,7 @@ final class SdlGpuTextureCreateInfo extends Struct {
   external int format;
   // [8]+(4)
   @Uint32()
-  external int usageFlags;
+  external int usage;
   // [12]+(4)
   @Uint32()
   external int width;
@@ -1752,7 +1745,7 @@ final class SdlGpuTextureCreateInfo extends Struct {
   external int layerCountOrDepth;
   // [24]+(4)
   @Uint32()
-  external int levelCount;
+  external int numLevels;
   // [28]+(4)
   @Int32()
   external int sampleCount;
@@ -1768,10 +1761,10 @@ final class SdlGpuTextureCreateInfo extends Struct {
 final class SdlGpuBufferCreateInfo extends Struct {
   // [0]+(4)
   @Uint32()
-  external int usageFlags;
+  external int usage;
   // [4]+(4)
   @Uint32()
-  external int sizeInBytes;
+  external int size;
   // [8]+(4)
   @Uint32()
   external int props;
@@ -1787,7 +1780,7 @@ final class SdlGpuTransferBufferCreateInfo extends Struct {
   external int usage;
   // [4]+(4)
   @Uint32()
-  external int sizeInBytes;
+  external int size;
   // [8]+(4)
   @Uint32()
   external int props;
@@ -1809,15 +1802,19 @@ final class SdlGpuRasterizerState extends Struct {
   external int frontFace;
   // [12]+(1)
   @Uint8()
-  external int depthBiasEnable;
-  // [] +(3)
-  @Uint16()
-  external int blank_1;
+  external int enableDepthBias;
+  // [13]+(1)
   @Uint8()
-  external int blank_2;
+  external int padding1;
+  // [14]+(1)
+  @Uint8()
+  external int padding2;
+  // [15]+(1)
+  @Uint8()
+  external int padding3;
   // [16]+(4)
   @Float()
-  external double depthBiasConstantFactor;
+  external double depthBiasAntFactor;
   // [20]+(4)
   @Float()
   external double depthBiasClamp;
@@ -1826,7 +1823,7 @@ final class SdlGpuRasterizerState extends Struct {
   external double depthBiasSlopeFactor;
   // [] +(4)
   @Uint32()
-  external int blank_3;
+  external int blank_1;
 }
 
 // SDL_GPUMultisampleState
@@ -1843,52 +1840,55 @@ final class SdlGpuMultisampleState extends Struct {
 final class SdlGpuDepthStencilState extends Struct {
   // [0]+(1)
   @Uint8()
-  external int depthTestEnable;
+  external int enableDepthTest;
   // [1]+(1)
   @Uint8()
-  external int depthWriteEnable;
-  // [] +(2)
-  @Uint16()
-  external int blank_1;
+  external int enableDepthWrite;
+  // [2]+(1)
+  @Uint8()
+  external int enableStencilTest;
+  // [3]+(1)
+  @Uint8()
+  external int padding1;
   // [4]+(4)
   @Int32()
   external int compareOp;
-  // [8]+(1)
-  @Uint8()
-  external int stencilTestEnable;
-  // [9]+(16)
+  // [8]+(16)
   @Uint64()
   external int backStencilState_1;
   @Uint64()
   external int backStencilState_2;
-  // [25]+(16)
+  // [24]+(16)
   @Uint64()
   external int frontStencilState_1;
   @Uint64()
   external int frontStencilState_2;
-  // [41]+(1)
+  // [40]+(1)
   @Uint8()
   external int compareMask;
-  // [42]+(1)
+  // [41]+(1)
   @Uint8()
   external int writeMask;
+  // [42]+(1)
+  @Uint8()
+  external int padding2;
   // [43]+(1)
   @Uint8()
-  external int reference;
+  external int padding3;
   // [] +(4)
   @Uint32()
-  external int blank_2;
+  external int blank_1;
 }
 
 extension SdlGpuDepthStencilStateExtension on Pointer<SdlGpuDepthStencilState> {
   Pointer<SdlGpuStencilOpState> get backStencilState =>
-      (cast<Uint8>() + 9).cast<SdlGpuStencilOpState>();
+      (cast<Uint8>() + 8).cast<SdlGpuStencilOpState>();
   Pointer<SdlGpuStencilOpState> get frontStencilState =>
-      (cast<Uint8>() + 25).cast<SdlGpuStencilOpState>();
+      (cast<Uint8>() + 24).cast<SdlGpuStencilOpState>();
 }
 
-// SDL_GPUColorAttachmentDescription
-final class SdlGpuColorAttachmentDescription extends Struct {
+// SDL_GPUColorTargetDescription
+final class SdlGpuColorTargetDescription extends Struct {
   // [0]+(4)
   @Int32()
   external int format;
@@ -1906,34 +1906,37 @@ final class SdlGpuColorAttachmentDescription extends Struct {
   external int blank_1;
 }
 
-extension SdlGpuColorAttachmentDescriptionExtension
-    on Pointer<SdlGpuColorAttachmentDescription> {
-  Pointer<SdlGpuColorAttachmentBlendState> get blendState =>
-      (cast<Uint8>() + 4).cast<SdlGpuColorAttachmentBlendState>();
+extension SdlGpuColorTargetDescriptionExtension
+    on Pointer<SdlGpuColorTargetDescription> {
+  Pointer<SdlGpuColorTargetBlendState> get blendState =>
+      (cast<Uint8>() + 4).cast<SdlGpuColorTargetBlendState>();
 }
 
-// SDL_GPUGraphicsPipelineAttachmentInfo
-final class SdlGpuGraphicsPipelineAttachmentInfo extends Struct {
+// SDL_GpuGraphicsPipelineTargetInfo
+final class SdlGpuGraphicsPipelineTargetInfo extends Struct {
   // [0]+(8)
-  external Pointer<SdlGpuColorAttachmentDescription>
-      colorAttachmentDescriptions;
+  external Pointer<SdlGpuColorTargetDescription> colorTargetDescriptions;
   // [8]+(4)
   @Uint32()
-  external int colorAttachmentCount;
+  external int numColorTargets;
   // [12]+(1)
   @Uint8()
-  external int hasDepthStencilAttachment;
-  // [] +(3)
-  @Uint16()
-  external int blank_1;
+  external int hasDepthStencilTarget;
+  // [13]+(1)
   @Uint8()
-  external int blank_2;
+  external int padding1;
+  // [14]+(1)
+  @Uint8()
+  external int padding2;
+  // [15]+(1)
+  @Uint8()
+  external int padding3;
   // [16]+(4)
   @Int32()
   external int depthStencilFormat;
   // [] +(4)
   @Uint32()
-  external int blank_3;
+  external int blank_1;
 }
 
 // SDL_GPUGraphicsPipelineCreateInfo
@@ -1981,21 +1984,12 @@ final class SdlGpuGraphicsPipelineCreateInfo extends Struct {
   external int depthStencilState_6;
   // [140]+(24)
   @Uint64()
-  external int attachmentInfo_1;
+  external int targetInfo_1;
   @Uint64()
-  external int attachmentInfo_2;
+  external int targetInfo_2;
   @Uint64()
-  external int attachmentInfo_3;
-  // [164]+(4*4)
-  @Float()
-  external double blendConstants_1;
-  @Float()
-  external double blendConstants_2;
-  @Float()
-  external double blendConstants_3;
-  @Float()
-  external double blendConstants_4;
-  // [180]+(4)
+  external int targetInfo_3;
+  // [164]+(4)
   @Uint32()
   external int props;
 }
@@ -2010,8 +2004,8 @@ extension SdlGpuGraphicsPipelineCreateInfoExtension
       (cast<Uint8>() + 84).cast<SdlGpuMultisampleState>();
   Pointer<SdlGpuDepthStencilState> get depthStencilState =>
       (cast<Uint8>() + 92).cast<SdlGpuDepthStencilState>();
-  Pointer<SdlGpuGraphicsPipelineAttachmentInfo> get attachmentInfo =>
-      (cast<Uint8>() + 140).cast<SdlGpuGraphicsPipelineAttachmentInfo>();
+  Pointer<SdlGpuGraphicsPipelineTargetInfo> get targetInfo =>
+      (cast<Uint8>() + 140).cast<SdlGpuGraphicsPipelineTargetInfo>();
 }
 
 // SDL_GPUComputePipelineCreateInfo
@@ -2025,41 +2019,41 @@ final class SdlGpuComputePipelineCreateInfo extends Struct {
   // [8]+(8)
   external Pointer<Uint8> code;
   // [16]+(8)
-  external Pointer<Utf8> entryPointName;
+  external Pointer<Utf8> entrypoint;
   // [24]+(4)
   @Uint32()
   external int format;
   // [28]+(4)
   @Uint32()
-  external int readOnlyStorageTextureCount;
+  external int numReadonlyStorageTextures;
   // [32]+(4)
   @Uint32()
-  external int readOnlyStorageBufferCount;
+  external int numReadonlyStorageBuffers;
   // [36]+(4)
   @Uint32()
-  external int writeOnlyStorageTextureCount;
+  external int numWriteonlyStorageTextures;
   // [40]+(4)
   @Uint32()
-  external int writeOnlyStorageBufferCount;
+  external int numWriteonlyStorageBuffers;
   // [44]+(4)
   @Uint32()
-  external int uniformBufferCount;
+  external int numUniformBuffers;
   // [48]+(4)
   @Uint32()
-  external int threadCountX;
+  external int threadcountX;
   // [52]+(4)
   @Uint32()
-  external int threadCountY;
+  external int threadcountY;
   // [56]+(4)
   @Uint32()
-  external int threadCountZ;
+  external int threadcountZ;
   // [60]+(4)
   @Uint32()
   external int props;
 }
 
-// SDL_GPUColorAttachmentInfo
-final class SdlGpuColorAttachmentInfo extends Struct {
+// SDL_GPUColorTargetInfo
+final class SdlGpuColorTargetInfo extends Struct {
   // [0]+(8)
   external Pointer<SdlGpuTexture> texture;
   // [8]+(4)
@@ -2082,55 +2076,111 @@ final class SdlGpuColorAttachmentInfo extends Struct {
   // [40]+(1)
   @Uint8()
   external int cycle;
-  // [] +(7)
+  // [41]+(1)
+  @Uint8()
+  external int padding1;
+  // [42]+(1)
+  @Uint8()
+  external int padding2;
+  // [43]+(1)
+  @Uint8()
+  external int padding3;
+  // [] +(4)
   @Uint32()
   external int blank_1;
-  @Uint16()
-  external int blank_2;
-  @Uint8()
-  external int blank_3;
 }
 
-extension SdlGpuColorAttachmentInfoExtension
-    on Pointer<SdlGpuColorAttachmentInfo> {
+extension SdlGpuColorTargetInfoExtension on Pointer<SdlGpuColorTargetInfo> {
   Pointer<SdlFColor> get clearColor => (cast<Uint8>() + 16).cast<SdlFColor>();
 }
 
-// SDL_GPUDepthStencilAttachmentInfo
-final class SdlGpuDepthStencilAttachmentInfo extends Struct {
+// SDL_GPUDepthStencilTargetInfo
+final class SdlGpuDepthStencilTargetInfo extends Struct {
   // [0]+(8)
   external Pointer<SdlGpuTexture> texture;
-  // [8]+(8)
-  @Uint64()
-  external int depthStencilClearValue_1;
-  // [16]+(4)
+  // [8]+(4)
+  @Float()
+  external double clearDepth;
+  // [12]+(4)
   @Int32()
   external int loadOp;
-  // [20]+(4)
+  // [16]+(4)
   @Int32()
   external int storeOp;
-  // [24]+(4)
+  // [20]+(4)
   @Int32()
   external int stencilLoadOp;
-  // [28]+(4)
+  // [24]+(4)
   @Int32()
   external int stencilStoreOp;
-  // [32]+(1)
+  // [28]+(1)
   @Uint8()
   external int cycle;
-  // [] +(7)
-  @Uint32()
-  external int blank_1;
-  @Uint16()
-  external int blank_2;
+  // [29]+(1)
   @Uint8()
-  external int blank_3;
+  external int clearStencil;
+  // [30]+(1)
+  @Uint8()
+  external int padding1;
+  // [31]+(1)
+  @Uint8()
+  external int padding2;
 }
 
-extension SdlGpuDepthStencilAttachmentInfoExtension
-    on Pointer<SdlGpuDepthStencilAttachmentInfo> {
-  Pointer<SdlGpuDepthStencilValue> get depthStencilClearValue =>
-      (cast<Uint8>() + 8).cast<SdlGpuDepthStencilValue>();
+// SDL_GPUBlitInfo
+final class SdlGpuBlitInfo extends Struct {
+  // [0]+(32)
+  @Uint64()
+  external int source_1;
+  @Uint64()
+  external int source_2;
+  @Uint64()
+  external int source_3;
+  @Uint64()
+  external int source_4;
+  // [32]+(32)
+  @Uint64()
+  external int destination_1;
+  @Uint64()
+  external int destination_2;
+  @Uint64()
+  external int destination_3;
+  @Uint64()
+  external int destination_4;
+  // [64]+(4)
+  @Int32()
+  external int loadOp;
+  // [68]+(16)
+  @Uint64()
+  external int clearColor_1;
+  @Uint64()
+  external int clearColor_2;
+  // [84]+(4)
+  @Int32()
+  external int flipMode;
+  // [88]+(4)
+  @Int32()
+  external int filter;
+  // [92]+(1)
+  @Uint8()
+  external int cycle;
+  // [93]+(1)
+  @Uint8()
+  external int padding;
+  // [94]+(1)
+  @Uint8()
+  external int padding2;
+  // [95]+(1)
+  @Uint8()
+  external int padding3;
+}
+
+extension SdlGpuBlitInfoExtension on Pointer<SdlGpuBlitInfo> {
+  Pointer<SdlGpuBlitRegion> get source =>
+      (cast<Uint8>() + 0).cast<SdlGpuBlitRegion>();
+  Pointer<SdlGpuBlitRegion> get destination =>
+      (cast<Uint8>() + 32).cast<SdlGpuBlitRegion>();
+  Pointer<SdlFColor> get clearColor => (cast<Uint8>() + 68).cast<SdlFColor>();
 }
 
 // SDL_GPUBufferBinding
@@ -2160,13 +2210,18 @@ final class SdlGpuStorageBufferWriteOnlyBinding extends Struct {
   // [8]+(1)
   @Uint8()
   external int cycle;
-  // [] +(7)
+  // [9]+(1)
+  @Uint8()
+  external int padding1;
+  // [10]+(1)
+  @Uint8()
+  external int padding2;
+  // [11]+(1)
+  @Uint8()
+  external int padding3;
+  // [] +(4)
   @Uint32()
   external int blank_1;
-  @Uint16()
-  external int blank_2;
-  @Uint8()
-  external int blank_3;
 }
 
 // SDL_GPUStorageTextureWriteOnlyBinding
@@ -2182,13 +2237,18 @@ final class SdlGpuStorageTextureWriteOnlyBinding extends Struct {
   // [16]+(1)
   @Uint8()
   external int cycle;
-  // [] +(7)
+  // [17]+(1)
+  @Uint8()
+  external int padding1;
+  // [18]+(1)
+  @Uint8()
+  external int padding2;
+  // [19]+(1)
+  @Uint8()
+  external int padding3;
+  // [] +(4)
   @Uint32()
   external int blank_1;
-  @Uint16()
-  external int blank_2;
-  @Uint8()
-  external int blank_3;
 }
 
 // SDL_GUID
@@ -2668,15 +2728,21 @@ final class SdlHidDeviceInfo extends Struct {
 
 // SDL_IOStreamInterface
 final class SdlIoStreamInterface extends Struct {
-  // [0]+(8)
-  external Pointer<NativeType> size;
+  // [0]+(4)
+  @Uint32()
+  external int version;
+  // [] +(4)
+  @Uint32()
+  external int blank_1;
   // [8]+(8)
-  external Pointer<NativeType> seek;
+  external Pointer<NativeType> size;
   // [16]+(8)
-  external Pointer<NativeType> read;
+  external Pointer<NativeType> seek;
   // [24]+(8)
-  external Pointer<NativeType> write;
+  external Pointer<NativeType> read;
   // [32]+(8)
+  external Pointer<NativeType> write;
+  // [40]+(8)
   external Pointer<NativeType> close;
 }
 
@@ -2712,70 +2778,76 @@ final class SdlVirtualJoystickSensorDesc extends Struct {
 
 // SDL_VirtualJoystickDesc
 final class SdlVirtualJoystickDesc extends Struct {
-  // [0]+(2)
-  @Uint16()
-  external int type;
-  // [2]+(2)
-  @Uint16()
-  external int padding;
+  // [0]+(4)
+  @Uint32()
+  external int version;
   // [4]+(2)
   @Uint16()
-  external int vendorId;
+  external int type;
   // [6]+(2)
   @Uint16()
-  external int productId;
+  external int padding;
   // [8]+(2)
   @Uint16()
-  external int naxes;
+  external int vendorId;
   // [10]+(2)
   @Uint16()
-  external int nbuttons;
+  external int productId;
   // [12]+(2)
   @Uint16()
-  external int nballs;
+  external int naxes;
   // [14]+(2)
   @Uint16()
-  external int nhats;
+  external int nbuttons;
   // [16]+(2)
   @Uint16()
-  external int ntouchpads;
+  external int nballs;
   // [18]+(2)
   @Uint16()
+  external int nhats;
+  // [20]+(2)
+  @Uint16()
+  external int ntouchpads;
+  // [22]+(2)
+  @Uint16()
   external int nsensors;
-  // [20]+(2*2)
+  // [24]+(2*2)
   @Uint16()
   external int padding2_1;
   @Uint16()
   external int padding2_2;
-  // [24]+(4)
-  @Uint32()
-  external int buttonMask;
   // [28]+(4)
   @Uint32()
+  external int buttonMask;
+  // [32]+(4)
+  @Uint32()
   external int axisMask;
-  // [32]+(8)
-  external Pointer<Utf8> name;
+  // [] +(4)
+  @Uint32()
+  external int blank_1;
   // [40]+(8)
-  external Pointer<SdlVirtualJoystickTouchpadDesc> touchpads;
+  external Pointer<Utf8> name;
   // [48]+(8)
-  external Pointer<SdlVirtualJoystickSensorDesc> sensors;
+  external Pointer<SdlVirtualJoystickTouchpadDesc> touchpads;
   // [56]+(8)
-  external Pointer<NativeType> userdata;
+  external Pointer<SdlVirtualJoystickSensorDesc> sensors;
   // [64]+(8)
-  external Pointer<NativeType> update;
+  external Pointer<NativeType> userdata;
   // [72]+(8)
-  external Pointer<NativeType> setPlayerIndex;
+  external Pointer<NativeType> update;
   // [80]+(8)
-  external Pointer<NativeType> rumble;
+  external Pointer<NativeType> setPlayerIndex;
   // [88]+(8)
-  external Pointer<NativeType> rumbleTriggers;
+  external Pointer<NativeType> rumble;
   // [96]+(8)
-  external Pointer<NativeType> setLed;
+  external Pointer<NativeType> rumbleTriggers;
   // [104]+(8)
-  external Pointer<NativeType> sendEffect;
+  external Pointer<NativeType> setLed;
   // [112]+(8)
-  external Pointer<NativeType> setSensorsEnabled;
+  external Pointer<NativeType> sendEffect;
   // [120]+(8)
+  external Pointer<NativeType> setSensorsEnabled;
+  // [128]+(8)
   external Pointer<NativeType> cleanup;
 }
 
@@ -3076,32 +3148,54 @@ final class SdlTexture extends Opaque {}
 // SDL_Sensor
 final class SdlSensor extends Opaque {}
 
+// SDL_alignment_test
+final class SdlAlignmentTest extends Struct {
+  // [0]+(1)
+  @Uint8()
+  external int a;
+  // [] +(7)
+  @Uint32()
+  external int blank_1;
+  @Uint16()
+  external int blank_2;
+  @Uint8()
+  external int blank_3;
+  // [8]+(8)
+  external Pointer<NativeType> b;
+}
+
 // SDL_iconv_t
 final class SdlIconvT extends Opaque {}
 
 // SDL_StorageInterface
 final class SdlStorageInterface extends Struct {
-  // [0]+(8)
-  external Pointer<NativeType> close;
+  // [0]+(4)
+  @Uint32()
+  external int version;
+  // [] +(4)
+  @Uint32()
+  external int blank_1;
   // [8]+(8)
-  external Pointer<NativeType> ready;
+  external Pointer<NativeType> close;
   // [16]+(8)
-  external Pointer<NativeType> enumerate;
+  external Pointer<NativeType> ready;
   // [24]+(8)
-  external Pointer<NativeType> info;
+  external Pointer<NativeType> enumerate;
   // [32]+(8)
-  external Pointer<NativeType> readFile;
+  external Pointer<NativeType> info;
   // [40]+(8)
-  external Pointer<NativeType> writeFile;
+  external Pointer<NativeType> readFile;
   // [48]+(8)
-  external Pointer<NativeType> mkdir;
+  external Pointer<NativeType> writeFile;
   // [56]+(8)
-  external Pointer<NativeType> remove;
+  external Pointer<NativeType> mkdir;
   // [64]+(8)
-  external Pointer<NativeType> rename;
+  external Pointer<NativeType> remove;
   // [72]+(8)
-  external Pointer<NativeType> copy;
+  external Pointer<NativeType> rename;
   // [80]+(8)
+  external Pointer<NativeType> copy;
+  // [88]+(8)
   external Pointer<NativeType> spaceRemaining;
 }
 

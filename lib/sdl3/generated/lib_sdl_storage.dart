@@ -118,8 +118,12 @@ Pointer<SdlStorage> sdlOpenFileStorage(String? path) {
 /// should use the built-in implementations in SDL, like SDL_OpenTitleStorage()
 /// or SDL_OpenUserStorage().
 ///
-/// \param iface the function table to be used by this container.
-/// \param userdata the pointer that will be passed to the store interface.
+/// This function makes a copy of `iface` and the caller does not need to keep
+/// it around after this call.
+///
+/// \param iface the interface that implements this storage, initialized using
+/// SDL_INIT_INTERFACE().
+/// \param userdata the pointer that will be passed to the interface functions.
 /// \returns a storage container on success or NULL on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -128,6 +132,7 @@ Pointer<SdlStorage> sdlOpenFileStorage(String? path) {
 /// \sa SDL_CloseStorage
 /// \sa SDL_GetStorageFileSize
 /// \sa SDL_GetStorageSpaceRemaining
+/// \sa SDL_INIT_INTERFACE
 /// \sa SDL_ReadStorageFile
 /// \sa SDL_StorageReady
 /// \sa SDL_WriteStorageFile

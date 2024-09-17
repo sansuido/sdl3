@@ -663,56 +663,6 @@ bool sdlSendAndroidMessage(int command, int param) {
 }
 
 ///
-/// Retrieve a WinRT defined path on the local file system.
-///
-/// Not all paths are available on all versions of Windows. This is especially
-/// true on Windows Phone. Check the documentation for the given SDL_WinRT_Path
-/// for more information on which path types are supported where.
-///
-/// Documentation on most app-specific path types on WinRT can be found on
-/// MSDN, at the URL:
-///
-/// https://msdn.microsoft.com/en-us/library/windows/apps/hh464917.aspx
-///
-/// \param pathType the type of path to retrieve, one of SDL_WinRT_Path.
-/// \returns a UTF-8 string (8-bit, multi-byte) containing the path, or NULL if
-/// the path is not available for any reason; call SDL_GetError() for
-/// more information.
-///
-/// \since This function is available since SDL 3.0.0.
-///
-/// ```c
-/// extern SDL_DECLSPEC const char * SDLCALL SDL_GetWinRTFSPath(SDL_WinRT_Path pathType)
-/// ```
-String? sdlGetWinRtfsPath(int pathType) {
-  final sdlGetWinRtfsPathLookupFunction = libSdl3.lookupFunction<
-      Pointer<Utf8> Function(Int32 pathType),
-      Pointer<Utf8> Function(int pathType)>('SDL_GetWinRTFSPath');
-  final result = sdlGetWinRtfsPathLookupFunction(pathType);
-  if (result == nullptr) {
-    return null;
-  }
-  return result.toDartString();
-}
-
-///
-/// Detects the device family of WinRT platform at runtime.
-///
-/// \returns a value from the SDL_WinRT_DeviceFamily enum.
-///
-/// \since This function is available since SDL 3.0.0.
-///
-/// ```c
-/// extern SDL_DECLSPEC SDL_WinRT_DeviceFamily SDLCALL SDL_GetWinRTDeviceFamily()
-/// ```
-int sdlGetWinRtDeviceFamily() {
-  final sdlGetWinRtDeviceFamilyLookupFunction =
-      libSdl3.lookupFunction<Int32 Function(), int Function()>(
-          'SDL_GetWinRTDeviceFamily');
-  return sdlGetWinRtDeviceFamilyLookupFunction();
-}
-
-///
 /// Query if the current device is a tablet.
 ///
 /// If SDL can't determine this, it will return SDL_FALSE.
