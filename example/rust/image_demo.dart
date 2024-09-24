@@ -8,7 +8,7 @@ int main() {
     print(sdlGetError());
     return -1;
   }
-  sdlSetHint(SDL_HINT_RENDER_VSYNC, '1');
+  sdlSetHint(SDL_HINT_RENDER_VSYNC, '60');
   var imgFlags = IMG_INIT_PNG | IMG_INIT_JPG;
   if (imgInit(imgFlags) != imgFlags) {
     print(sdlGetError());

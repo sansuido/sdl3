@@ -276,15 +276,117 @@ int sdlGetNumAllocations() {
   return sdlGetNumAllocationsLookupFunction();
 }
 
+///
+/// Get the process environment.
+///
+/// This is initialized at application start and is not affected by setenv()
+/// and unsetenv() calls after that point. Use SDL_SetEnvironmentVariable() and
+/// SDL_UnsetEnvironmentVariable() if you want to modify this environment.
+///
+/// \returns a pointer to the environment for the process or NULL on failure;
+/// call SDL_GetError() for more information.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_CleanupEnvironment
+/// \sa SDL_GetEnvironmentVariable
+/// \sa SDL_GetEnvironmentVariables
+/// \sa SDL_SetEnvironmentVariable
+/// \sa SDL_UnsetEnvironmentVariable
+///
 /// ```c
-/// extern SDL_DECLSPEC const char * SDLCALL SDL_getenv(const char *name)
+/// extern SDL_DECLSPEC SDL_Environment * SDLCALL SDL_GetEnvironment(void)
 /// ```
-String? sdlGetenv(String? name) {
-  final sdlGetenvLookupFunction = libSdl3.lookupFunction<
-      Pointer<Utf8> Function(Pointer<Utf8> name),
-      Pointer<Utf8> Function(Pointer<Utf8> name)>('SDL_getenv');
+Pointer<SdlEnvironment> sdlGetEnvironment() {
+  final sdlGetEnvironmentLookupFunction = libSdl3.lookupFunction<
+      Pointer<SdlEnvironment> Function(),
+      Pointer<SdlEnvironment> Function()>('SDL_GetEnvironment');
+  return sdlGetEnvironmentLookupFunction();
+}
+
+///
+/// Cleanup the process environment.
+///
+/// This is called during SDL_Quit() to free the process environment. If
+/// SDL_GetEnvironment() is called afterwards, it will automatically create a
+/// new environment copied from the C runtime environment.
+///
+/// \threadsafety This function is not thread-safe.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_GetEnvironment
+///
+/// ```c
+/// extern SDL_DECLSPEC void SDLCALL SDL_CleanupEnvironment(void)
+/// ```
+void sdlCleanupEnvironment() {
+  final sdlCleanupEnvironmentLookupFunction =
+      libSdl3.lookupFunction<Void Function(), void Function()>(
+          'SDL_CleanupEnvironment');
+  return sdlCleanupEnvironmentLookupFunction();
+}
+
+///
+/// Create a set of environment variables
+///
+/// \param populated SDL_TRUE to initialize it from the C runtime environment,
+/// SDL_FALSE to create an empty environment.
+/// \returns a pointer to the new environment or NULL on failure; call
+/// SDL_GetError() for more information.
+///
+/// \threadsafety If `populated` is SDL_FALSE, it is safe to call this function
+/// from any thread, otherwise it is safe if no other threads are
+/// calling setenv() or unsetenv()
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_GetEnvironmentVariable
+/// \sa SDL_GetEnvironmentVariables
+/// \sa SDL_SetEnvironmentVariable
+/// \sa SDL_UnsetEnvironmentVariable
+/// \sa SDL_DestroyEnvironment
+///
+/// ```c
+/// extern SDL_DECLSPEC SDL_Environment * SDLCALL SDL_CreateEnvironment(SDL_bool populated)
+/// ```
+Pointer<SdlEnvironment> sdlCreateEnvironment(bool populated) {
+  final sdlCreateEnvironmentLookupFunction = libSdl3.lookupFunction<
+      Pointer<SdlEnvironment> Function(Uint8 populated),
+      Pointer<SdlEnvironment> Function(int populated)>('SDL_CreateEnvironment');
+  return sdlCreateEnvironmentLookupFunction(populated ? 1 : 0);
+}
+
+///
+/// Get the value of a variable in the environment.
+///
+/// \param env the environment to query.
+/// \param name the name of the variable to get.
+/// \returns a pointer to the value of the variable or NULL if it can't be
+/// found.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_GetEnvironment
+/// \sa SDL_CreateEnvironment
+/// \sa SDL_GetEnvironmentVariables
+/// \sa SDL_SetEnvironmentVariable
+/// \sa SDL_UnsetEnvironmentVariable
+///
+/// ```c
+/// extern SDL_DECLSPEC const char * SDLCALL SDL_GetEnvironmentVariable(SDL_Environment *env, const char *name)
+/// ```
+String? sdlGetEnvironmentVariable(Pointer<SdlEnvironment> env, String? name) {
+  final sdlGetEnvironmentVariableLookupFunction = libSdl3.lookupFunction<
+      Pointer<Utf8> Function(Pointer<SdlEnvironment> env, Pointer<Utf8> name),
+      Pointer<Utf8> Function(Pointer<SdlEnvironment> env,
+          Pointer<Utf8> name)>('SDL_GetEnvironmentVariable');
   final namePointer = name != null ? name.toNativeUtf8() : nullptr;
-  final result = sdlGetenvLookupFunction(namePointer);
+  final result = sdlGetEnvironmentVariableLookupFunction(env, namePointer);
   calloc.free(namePointer);
   if (result == nullptr) {
     return null;
@@ -292,31 +394,219 @@ String? sdlGetenv(String? name) {
   return result.toDartString();
 }
 
+///
+/// Get all variables in the environment.
+///
+/// \param env the environment to query.
+/// \returns a NULL terminated array of pointers to environment variables in
+/// the form "variable=value" or NULL on failure; call SDL_GetError()
+/// for more information. This is a single allocation that should be
+/// freed with SDL_free() when it is no longer needed.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_GetEnvironment
+/// \sa SDL_CreateEnvironment
+/// \sa SDL_GetEnvironmentVariables
+/// \sa SDL_SetEnvironmentVariable
+/// \sa SDL_UnsetEnvironmentVariable
+///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_setenv(const char *name, const char *value, int overwrite)
+/// extern SDL_DECLSPEC char ** SDLCALL SDL_GetEnvironmentVariables(SDL_Environment *env)
 /// ```
-int sdlSetenv(String? name, String? value, int overwrite) {
-  final sdlSetenvLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<Utf8> name, Pointer<Utf8> value, Int32 overwrite),
-      int Function(Pointer<Utf8> name, Pointer<Utf8> value,
-          int overwrite)>('SDL_setenv');
+Pointer<Pointer<Int8>> sdlGetEnvironmentVariables(Pointer<SdlEnvironment> env) {
+  final sdlGetEnvironmentVariablesLookupFunction = libSdl3.lookupFunction<
+      Pointer<Pointer<Int8>> Function(Pointer<SdlEnvironment> env),
+      Pointer<Pointer<Int8>> Function(
+          Pointer<SdlEnvironment> env)>('SDL_GetEnvironmentVariables');
+  return sdlGetEnvironmentVariablesLookupFunction(env);
+}
+
+///
+/// Set the value of a variable in the environment.
+///
+/// \param env the environment to modify.
+/// \param name the name of the variable to set.
+/// \param value the value of the variable to set.
+/// \param overwrite SDL_TRUE to overwrite the variable if it exists, SDL_FALSE
+/// to return success without setting the variable if it
+/// already exists.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_GetEnvironment
+/// \sa SDL_CreateEnvironment
+/// \sa SDL_GetEnvironmentVariable
+/// \sa SDL_GetEnvironmentVariables
+/// \sa SDL_UnsetEnvironmentVariable
+///
+/// ```c
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetEnvironmentVariable(SDL_Environment *env, const char *name, const char *value, SDL_bool overwrite)
+/// ```
+bool sdlSetEnvironmentVariable(
+    Pointer<SdlEnvironment> env, String? name, String? value, bool overwrite) {
+  final sdlSetEnvironmentVariableLookupFunction = libSdl3.lookupFunction<
+      Uint8 Function(Pointer<SdlEnvironment> env, Pointer<Utf8> name,
+          Pointer<Utf8> value, Uint8 overwrite),
+      int Function(Pointer<SdlEnvironment> env, Pointer<Utf8> name,
+          Pointer<Utf8> value, int overwrite)>('SDL_SetEnvironmentVariable');
   final namePointer = name != null ? name.toNativeUtf8() : nullptr;
   final valuePointer = value != null ? value.toNativeUtf8() : nullptr;
-  final result = sdlSetenvLookupFunction(namePointer, valuePointer, overwrite);
+  final result = sdlSetEnvironmentVariableLookupFunction(
+          env, namePointer, valuePointer, overwrite ? 1 : 0) ==
+      1;
   calloc.free(namePointer);
   calloc.free(valuePointer);
   return result;
 }
 
+///
+/// Clear a variable from the environment.
+///
+/// \param env the environment to modify.
+/// \param name the name of the variable to unset.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_GetEnvironment
+/// \sa SDL_CreateEnvironment
+/// \sa SDL_GetEnvironmentVariable
+/// \sa SDL_GetEnvironmentVariables
+/// \sa SDL_SetEnvironmentVariable
+/// \sa SDL_UnsetEnvironmentVariable
+///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_unsetenv(const char *name)
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_UnsetEnvironmentVariable(SDL_Environment *env, const char *name)
 /// ```
-int sdlUnsetenv(String? name) {
-  final sdlUnsetenvLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<Utf8> name),
-      int Function(Pointer<Utf8> name)>('SDL_unsetenv');
+bool sdlUnsetEnvironmentVariable(Pointer<SdlEnvironment> env, String? name) {
+  final sdlUnsetEnvironmentVariableLookupFunction = libSdl3.lookupFunction<
+      Uint8 Function(Pointer<SdlEnvironment> env, Pointer<Utf8> name),
+      int Function(Pointer<SdlEnvironment> env,
+          Pointer<Utf8> name)>('SDL_UnsetEnvironmentVariable');
   final namePointer = name != null ? name.toNativeUtf8() : nullptr;
-  final result = sdlUnsetenvLookupFunction(namePointer);
+  final result =
+      sdlUnsetEnvironmentVariableLookupFunction(env, namePointer) == 1;
+  calloc.free(namePointer);
+  return result;
+}
+
+///
+/// Destroy a set of environment variables.
+///
+/// \param env the environment to destroy.
+///
+/// \threadsafety It is safe to call this function from any thread, as long as
+/// the environment is no longer in use.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_CreateEnvironment
+///
+/// ```c
+/// extern SDL_DECLSPEC void SDLCALL SDL_DestroyEnvironment(SDL_Environment *env)
+/// ```
+void sdlDestroyEnvironment(Pointer<SdlEnvironment> env) {
+  final sdlDestroyEnvironmentLookupFunction = libSdl3.lookupFunction<
+      Void Function(Pointer<SdlEnvironment> env),
+      void Function(Pointer<SdlEnvironment> env)>('SDL_DestroyEnvironment');
+  return sdlDestroyEnvironmentLookupFunction(env);
+}
+
+///
+/// Get the value of a variable in the environment.
+///
+/// \param name the name of the variable to get.
+/// \returns a pointer to the value of the variable or NULL if it can't be
+/// found.
+///
+/// \threadsafety This function is not thread safe, consider using
+/// SDL_GetEnvironmentVariable() instead.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_GetEnvironmentVariable
+///
+/// ```c
+/// extern SDL_DECLSPEC const char * SDLCALL SDL_getenv_unsafe(const char *name)
+/// ```
+String? sdlGetenvUnsafe(String? name) {
+  final sdlGetenvUnsafeLookupFunction = libSdl3.lookupFunction<
+      Pointer<Utf8> Function(Pointer<Utf8> name),
+      Pointer<Utf8> Function(Pointer<Utf8> name)>('SDL_getenv_unsafe');
+  final namePointer = name != null ? name.toNativeUtf8() : nullptr;
+  final result = sdlGetenvUnsafeLookupFunction(namePointer);
+  calloc.free(namePointer);
+  if (result == nullptr) {
+    return null;
+  }
+  return result.toDartString();
+}
+
+///
+/// Set the value of a variable in the environment.
+///
+/// \param name the name of the variable to set.
+/// \param value the value of the variable to set.
+/// \param overwrite 1 to overwrite the variable if it exists, 0 to return
+/// success without setting the variable if it already exists.
+/// \returns 0 on success, -1 on error.
+///
+/// \threadsafety This function is not thread safe, consider using
+/// SDL_SetEnvironmentVariable() instead.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_SetEnvironmentVariable
+///
+/// ```c
+/// extern SDL_DECLSPEC int SDLCALL SDL_setenv_unsafe(const char *name, const char *value, int overwrite)
+/// ```
+int sdlSetenvUnsafe(String? name, String? value, int overwrite) {
+  final sdlSetenvUnsafeLookupFunction = libSdl3.lookupFunction<
+      Int32 Function(Pointer<Utf8> name, Pointer<Utf8> value, Int32 overwrite),
+      int Function(Pointer<Utf8> name, Pointer<Utf8> value,
+          int overwrite)>('SDL_setenv_unsafe');
+  final namePointer = name != null ? name.toNativeUtf8() : nullptr;
+  final valuePointer = value != null ? value.toNativeUtf8() : nullptr;
+  final result =
+      sdlSetenvUnsafeLookupFunction(namePointer, valuePointer, overwrite);
+  calloc.free(namePointer);
+  calloc.free(valuePointer);
+  return result;
+}
+
+///
+/// Clear a variable from the environment.
+///
+/// \param name the name of the variable to unset.
+/// \returns 0 on success, -1 on error.
+///
+/// \threadsafety This function is not thread safe, consider using
+/// SDL_UnsetEnvironmentVariable() instead.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_UnsetEnvironmentVariable
+///
+/// ```c
+/// extern SDL_DECLSPEC int SDLCALL SDL_unsetenv_unsafe(const char *name)
+/// ```
+int sdlUnsetenvUnsafe(String? name) {
+  final sdlUnsetenvUnsafeLookupFunction = libSdl3.lookupFunction<
+      Int32 Function(Pointer<Utf8> name),
+      int Function(Pointer<Utf8> name)>('SDL_unsetenv_unsafe');
+  final namePointer = name != null ? name.toNativeUtf8() : nullptr;
+  final result = sdlUnsetenvUnsafeLookupFunction(namePointer);
   calloc.free(namePointer);
   return result;
 }
@@ -1177,21 +1467,21 @@ int sdlWcsncasecmp(Pointer<Int16> str1, Pointer<Int16> str2, int maxlen) {
 ///
 /// Parse a `long` from a wide string.
 ///
-/// This function makes fewer guarantees than the C runtime `wcstol`:
+/// If `str` starts with whitespace, then those whitespace characters are
+/// skipped before attempting to parse the number.
 ///
-/// - Only the bases 10 and 16 are guaranteed to be supported. The behavior for
-/// other bases is unspecified.
-/// - It is unspecified what this function returns when the parsed integer does
-/// not fit inside a `long`.
+/// If the parsed number does not fit inside a `long`, the result is clamped to
+/// the minimum and maximum representable `long` values.
 ///
 /// \param str The null-terminated wide string to read. Must not be NULL.
 /// \param endp If not NULL, the address of the first invalid wide character
 /// (i.e. the next character after the parsed number) will be
 /// written to this pointer.
-/// \param base The base of the integer to read. The values 0, 10 and 16 are
-/// supported. If 0, the base will be inferred from the integer's
-/// prefix.
-/// \returns The parsed `long`.
+/// \param base The base of the integer to read. Supported values are 0 and 2
+/// to 36 inclusive. If 0, the base will be inferred from the
+/// number's prefix (0x for hexadecimal, 0 for octal, decimal
+/// otherwise).
+/// \returns The parsed `long`, or 0 if no number could be parsed.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -1713,21 +2003,21 @@ double sdlAtof(String? str) {
 ///
 /// Parse a `long` from a string.
 ///
-/// This function makes fewer guarantees than the C runtime `strtol`:
+/// If `str` starts with whitespace, then those whitespace characters are
+/// skipped before attempting to parse the number.
 ///
-/// - Only the bases 10 and 16 are guaranteed to be supported. The behavior for
-/// other bases is unspecified.
-/// - It is unspecified what this function returns when the parsed integer does
-/// not fit inside a `long`.
+/// If the parsed number does not fit inside a `long`, the result is clamped to
+/// the minimum and maximum representable `long` values.
 ///
 /// \param str The null-terminated string to read. Must not be NULL.
 /// \param endp If not NULL, the address of the first invalid character (i.e.
 /// the next character after the parsed number) will be written to
 /// this pointer.
-/// \param base The base of the integer to read. The values 0, 10 and 16 are
-/// supported. If 0, the base will be inferred from the integer's
-/// prefix.
-/// \returns The parsed `long`.
+/// \param base The base of the integer to read. Supported values are 0 and 2
+/// to 36 inclusive. If 0, the base will be inferred from the
+/// number's prefix (0x for hexadecimal, 0 for octal, decimal
+/// otherwise).
+/// \returns The parsed `long`, or 0 if no number could be parsed.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -1760,21 +2050,21 @@ int sdlStrtol(String? str, Pointer<Pointer<Int8>> endp, int base) {
 ///
 /// Parse an `unsigned long` from a string.
 ///
-/// This function makes fewer guarantees than the C runtime `strtoul`:
+/// If `str` starts with whitespace, then those whitespace characters are
+/// skipped before attempting to parse the number.
 ///
-/// - Only the bases 10 and 16 are guaranteed to be supported. The behavior for
-/// other bases is unspecified.
-/// - It is unspecified what this function returns when the parsed integer does
-/// not fit inside an `unsigned long`.
+/// If the parsed number does not fit inside an `unsigned long`, the result is
+/// clamped to the maximum representable `unsigned long` value.
 ///
 /// \param str The null-terminated string to read. Must not be NULL.
 /// \param endp If not NULL, the address of the first invalid character (i.e.
 /// the next character after the parsed number) will be written to
 /// this pointer.
-/// \param base The base of the integer to read. The values 0, 10 and 16 are
-/// supported. If 0, the base will be inferred from the integer's
-/// prefix.
-/// \returns The parsed `unsigned long`.
+/// \param base The base of the integer to read. Supported values are 0 and 2
+/// to 36 inclusive. If 0, the base will be inferred from the
+/// number's prefix (0x for hexadecimal, 0 for octal, decimal
+/// otherwise).
+/// \returns The parsed `unsigned long`, or 0 if no number could be parsed.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -1806,21 +2096,21 @@ int sdlStrtoul(String? str, Pointer<Pointer<Int8>> endp, int base) {
 ///
 /// Parse a `long long` from a string.
 ///
-/// This function makes fewer guarantees than the C runtime `strtoll`:
+/// If `str` starts with whitespace, then those whitespace characters are
+/// skipped before attempting to parse the number.
 ///
-/// - Only the bases 10 and 16 are guaranteed to be supported. The behavior for
-/// other bases is unspecified.
-/// - It is unspecified what this function returns when the parsed integer does
-/// not fit inside a `long long`.
+/// If the parsed number does not fit inside a `long long`, the result is
+/// clamped to the minimum and maximum representable `long long` values.
 ///
 /// \param str The null-terminated string to read. Must not be NULL.
 /// \param endp If not NULL, the address of the first invalid character (i.e.
 /// the next character after the parsed number) will be written to
 /// this pointer.
-/// \param base The base of the integer to read. The values 0, 10 and 16 are
-/// supported. If 0, the base will be inferred from the integer's
-/// prefix.
-/// \returns The parsed `long long`.
+/// \param base The base of the integer to read. Supported values are 0 and 2
+/// to 36 inclusive. If 0, the base will be inferred from the
+/// number's prefix (0x for hexadecimal, 0 for octal, decimal
+/// otherwise).
+/// \returns The parsed `long long`, or 0 if no number could be parsed.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -1853,21 +2143,22 @@ Pointer<NativeType> sdlStrtoll(
 ///
 /// Parse an `unsigned long long` from a string.
 ///
-/// This function makes fewer guarantees than the C runtime `strtoull`:
+/// If `str` starts with whitespace, then those whitespace characters are
+/// skipped before attempting to parse the number.
 ///
-/// - Only the bases 10 and 16 are guaranteed to be supported. The behavior for
-/// other bases is unspecified.
-/// - It is unspecified what this function returns when the parsed integer does
-/// not fit inside a `long long`.
+/// If the parsed number does not fit inside an `unsigned long long`, the
+/// result is clamped to the maximum representable `unsigned long long` value.
 ///
 /// \param str The null-terminated string to read. Must not be NULL.
 /// \param endp If not NULL, the address of the first invalid character (i.e.
 /// the next character after the parsed number) will be written to
 /// this pointer.
-/// \param base The base of the integer to read. The values 0, 10 and 16 are
-/// supported. If 0, the base will be inferred from the integer's
-/// prefix.
-/// \returns The parsed `unsigned long long`.
+/// \param base The base of the integer to read. Supported values are 0 and 2
+/// to 36 inclusive. If 0, the base will be inferred from the
+/// number's prefix (0x for hexadecimal, 0 for octal, decimal
+/// otherwise).
+/// \returns The parsed `unsigned long long`, or 0 if no number could be
+/// parsed.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -1911,7 +2202,7 @@ Pointer<NativeType> sdlStrtoull(
 /// \param endp If not NULL, the address of the first invalid character (i.e.
 /// the next character after the parsed number) will be written to
 /// this pointer.
-/// \returns The parsed `double`.
+/// \returns The parsed `double`, or 0 if no number could be parsed.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///

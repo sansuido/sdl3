@@ -62,6 +62,8 @@ import 'struct_sdl.dart';
 /// than your app, trying to use this pointer will almost certainly result in
 /// a crash! This is mostly a problem on Windows; make sure you build SDL and
 /// your app with the same compiler and settings to avoid it.
+/// - `SDL_PROP_IOSTREAM_FILE_DESCRIPTOR_NUMBER`: a file descriptor that this
+/// SDL_IOStream is using to access the filesystem.
 /// - `SDL_PROP_IOSTREAM_ANDROID_AASSET_POINTER`: a pointer, that can be cast
 /// to an Android NDK `AAsset *`, that this SDL_IOStream is using to access
 /// the filesystem. If SDL used some other method to access the filesystem,
@@ -76,6 +78,7 @@ import 'struct_sdl.dart';
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_CloseIO
+/// \sa SDL_FlushIO
 /// \sa SDL_ReadIO
 /// \sa SDL_SeekIO
 /// \sa SDL_TellIO
@@ -121,6 +124,7 @@ Pointer<SdlIoStream> sdlIoFromFile(String? file, String? mode) {
 ///
 /// \sa SDL_IOFromConstMem
 /// \sa SDL_CloseIO
+/// \sa SDL_FlushIO
 /// \sa SDL_ReadIO
 /// \sa SDL_SeekIO
 /// \sa SDL_TellIO
@@ -367,8 +371,8 @@ int sdlGetIoSize(Pointer<SdlIoStream> context) {
 /// negative.
 /// \param whence any of `SDL_IO_SEEK_SET`, `SDL_IO_SEEK_CUR`,
 /// `SDL_IO_SEEK_END`.
-/// \returns the final offset in the data stream after the seek or a negative
-/// error code on failure; call SDL_GetError() for more information.
+/// \returns the final offset in the data stream after the seek or -1 on
+/// failure; call SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -468,6 +472,7 @@ int sdlReadIo(Pointer<SdlIoStream> context, Pointer<NativeType> ptr, int size) {
 /// \sa SDL_IOprintf
 /// \sa SDL_ReadIO
 /// \sa SDL_SeekIO
+/// \sa SDL_FlushIO
 /// \sa SDL_GetIOStatus
 ///
 /// ```c
@@ -549,6 +554,32 @@ int sdlIOvprintf(
 }
 
 ///
+/// Flush any buffered data in the stream.
+///
+/// This function makes sure that any buffered data is written to the stream.
+/// Normally this isn't necessary but if the stream is a pipe or socket it
+/// guarantees that any pending data is sent.
+///
+/// \param context SDL_IOStream structure to flush.
+/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+/// for more information.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_OpenIO
+/// \sa SDL_WriteIO
+///
+/// ```c
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_FlushIO(SDL_IOStream *context)
+/// ```
+bool sdlFlushIo(Pointer<SdlIoStream> context) {
+  final sdlFlushIoLookupFunction = libSdl3.lookupFunction<
+      Uint8 Function(Pointer<SdlIoStream> context),
+      int Function(Pointer<SdlIoStream> context)>('SDL_FlushIO');
+  return sdlFlushIoLookupFunction(context) == 1;
+}
+
+///
 /// Load all the data from an SDL data stream.
 ///
 /// The data is allocated with a zero byte at the end (null terminated) for
@@ -558,7 +589,8 @@ int sdlIOvprintf(
 /// The data should be freed with SDL_free().
 ///
 /// \param src the SDL_IOStream to read all available data from.
-/// \param datasize if not NULL, will store the number of bytes read.
+/// \param datasize a pointer filled in with the number of bytes read, may be
+/// NULL.
 /// \param closeio if SDL_TRUE, calls SDL_CloseIO() on `src` before returning,
 /// even in the case of an error.
 /// \returns the data or NULL on failure; call SDL_GetError() for more

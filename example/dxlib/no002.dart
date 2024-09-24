@@ -23,7 +23,7 @@ bool init() {
     print(sdlGetError());
     return false;
   }
-  sdlSetHint(SDL_HINT_RENDER_VSYNC, '1');
+  sdlSetHint(SDL_HINT_RENDER_VSYNC, '60');
   gWindow =
       SdlWindowEx.create(title: gTitle, w: gScreenWidth, h: gScreenHeight);
   if (gWindow == nullptr) {

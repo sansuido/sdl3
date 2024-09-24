@@ -13,7 +13,7 @@ int main() {
     print(sdlGetError());
     return -1;
   }
-  sdlSetHint(SDL_HINT_RENDER_VSYNC, '1');
+  sdlSetHint(SDL_HINT_RENDER_VSYNC, '60');
   var window = SdlWindowEx.create(
       title: 'rust-sdl2_gfx: draw line & FPSManager',
       w: gScreenWidth,

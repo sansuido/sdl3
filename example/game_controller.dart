@@ -11,7 +11,7 @@ int main() {
     print(sdlGetError());
     return -1;
   }
-  sdlSetHint(SDL_HINT_RENDER_VSYNC, '1');
+  sdlSetHint(SDL_HINT_RENDER_VSYNC, '60');
   var window = SdlWindowEx.create(
       title: 'Gamepad',
       w: gScreenWidth,
@@ -62,7 +62,7 @@ int main() {
     'TOUCHPAD',
   ];
   var buttonEnables = <bool>[];
-  for (var n = 0; n < SDL_GAMEPAD_BUTTON_MAX; n++) {
+  for (var n = 0; n < SDL_GAMEPAD_BUTTON_COUNT; n++) {
     buttonEnables.add(false);
   }
   var event = calloc<SdlEvent>();

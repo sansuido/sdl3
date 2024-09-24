@@ -60,6 +60,7 @@ export 'sdl3/generated/lib_sdl_net.dart';
 export 'sdl3/generated/lib_sdl_pixels.dart';
 export 'sdl3/generated/lib_sdl_platform.dart';
 export 'sdl3/generated/lib_sdl_power.dart';
+export 'sdl3/generated/lib_sdl_process.dart';
 export 'sdl3/generated/lib_sdl_properties.dart';
 export 'sdl3/generated/lib_sdl_rect.dart';
 export 'sdl3/generated/lib_sdl_render.dart';

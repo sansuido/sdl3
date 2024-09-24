@@ -51,7 +51,7 @@ int main() {
         'SDL_Error: ${sdlGetError()}\n');
     return 0;
   }
-  sdlSetHint(SDL_HINT_RENDER_VSYNC, '1');
+  sdlSetHint(SDL_HINT_RENDER_VSYNC, '60');
   //Initialize SDL3_mixer
   if (mixOpenAudio(SDL_AUDIO_DEVICE_DEFAULT_OUTPUT, nullptr) == false) {
     print('SDL3_mixer could not be initialized!\n'

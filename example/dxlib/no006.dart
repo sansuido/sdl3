@@ -42,7 +42,7 @@ class Game {
     if (sdlInit(SDL_INIT_VIDEO) == false) {
       return false;
     }
-    sdlSetHint(SDL_HINT_RENDER_VSYNC, '1');
+    sdlSetHint(SDL_HINT_RENDER_VSYNC, '60');
     if (ttfInit() == false) {
       return false;
     }

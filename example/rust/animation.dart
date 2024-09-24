@@ -18,7 +18,7 @@ int main() {
     print(sdlGetError());
     return -1;
   }
-  sdlSetHint(SDL_HINT_RENDER_VSYNC, '1');
+  sdlSetHint(SDL_HINT_RENDER_VSYNC, '60');
   var window = SdlWindowEx.create(title: 'SDL3', w: 640, h: 480);
   if (window == nullptr) {
     print(sdlGetError());

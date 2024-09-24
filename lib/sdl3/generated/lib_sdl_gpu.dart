@@ -5,6 +5,54 @@ import 'lib_sdl.dart';
 import 'struct_sdl.dart';
 
 ///
+/// Checks for GPU runtime support.
+///
+/// \param format_flags a bitflag indicating which shader formats the app is
+/// able to provide.
+/// \param name the preferred GPU driver, or NULL to let SDL pick the optimal
+/// driver.
+/// \returns SDL_TRUE if supported, SDL_FALSE otherwise.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_CreateGPUDevice
+///
+/// ```c
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GPUSupportsShaderFormats( SDL_GPUShaderFormat format_flags, const char *name)
+/// ```
+bool sdlGpuSupportsShaderFormats(int formatFlags, String? name) {
+  final sdlGpuSupportsShaderFormatsLookupFunction = libSdl3.lookupFunction<
+      Uint8 Function(Uint32 formatFlags, Pointer<Utf8> name),
+      int Function(
+          int formatFlags, Pointer<Utf8> name)>('SDL_GPUSupportsShaderFormats');
+  final namePointer = name != null ? name.toNativeUtf8() : nullptr;
+  final result =
+      sdlGpuSupportsShaderFormatsLookupFunction(formatFlags, namePointer) == 1;
+  calloc.free(namePointer);
+  return result;
+}
+
+///
+/// Checks for GPU runtime support.
+///
+/// \param props the properties to use.
+/// \returns SDL_TRUE if supported, SDL_FALSE otherwise.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_CreateGPUDeviceWithProperties
+///
+/// ```c
+/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GPUSupportsProperties( SDL_PropertiesID props)
+/// ```
+bool sdlGpuSupportsProperties(int props) {
+  final sdlGpuSupportsPropertiesLookupFunction = libSdl3.lookupFunction<
+      Uint8 Function(Uint32 props),
+      int Function(int props)>('SDL_GPUSupportsProperties');
+  return sdlGpuSupportsPropertiesLookupFunction(props) == 1;
+}
+
+///
 /// Creates a GPU context.
 ///
 /// \param format_flags a bitflag indicating which shader formats the app is
@@ -16,8 +64,10 @@ import 'struct_sdl.dart';
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_GetGPUDriver
+/// \sa SDL_GetGPUShaderFormats
+/// \sa SDL_GetGPUDeviceDriver
 /// \sa SDL_DestroyGPUDevice
+/// \sa SDL_GPUSupportsShaderFormats
 ///
 /// ```c
 /// extern SDL_DECLSPEC SDL_GPUDevice *SDLCALL SDL_CreateGPUDevice( SDL_GPUShaderFormat format_flags, SDL_bool debug_mode, const char *name)
@@ -73,8 +123,10 @@ Pointer<SdlGpuDevice> sdlCreateGpuDevice(
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
-/// \sa SDL_GetGPUDriver
+/// \sa SDL_GetGPUShaderFormats
+/// \sa SDL_GetGPUDeviceDriver
 /// \sa SDL_DestroyGPUDevice
+/// \sa SDL_GPUSupportsProperties
 ///
 /// ```c
 /// extern SDL_DECLSPEC SDL_GPUDevice *SDLCALL SDL_CreateGPUDeviceWithProperties( SDL_PropertiesID props)
@@ -107,21 +159,94 @@ void sdlDestroyGpuDevice(Pointer<SdlGpuDevice> device) {
 }
 
 ///
-/// Returns the backend used to create this GPU context.
+/// Get the number of GPU drivers compiled into SDL.
+///
+/// \returns the number of built in GPU drivers.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_GetGPUDriver
+///
+/// ```c
+/// extern SDL_DECLSPEC int SDLCALL SDL_GetNumGPUDrivers(void)
+/// ```
+int sdlGetNumGpuDrivers() {
+  final sdlGetNumGpuDriversLookupFunction = libSdl3
+      .lookupFunction<Int32 Function(), int Function()>('SDL_GetNumGPUDrivers');
+  return sdlGetNumGpuDriversLookupFunction();
+}
+
+///
+/// Get the name of a built in GPU driver.
+///
+/// The GPU drivers are presented in the order in which they are normally
+/// checked during initialization.
+///
+/// The names of drivers are all simple, low-ASCII identifiers, like "vulkan",
+/// "metal" or "direct3d12". These never have Unicode characters, and are not
+/// meant to be proper names.
+///
+/// \param index the index of a GPU driver.
+/// \returns the name of the GPU driver with the given **index**.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_GetNumGPUDrivers
+///
+/// ```c
+/// extern SDL_DECLSPEC const char * SDLCALL SDL_GetGPUDriver(int index)
+/// ```
+String? sdlGetGpuDriver(int index) {
+  final sdlGetGpuDriverLookupFunction = libSdl3.lookupFunction<
+      Pointer<Utf8> Function(Int32 index),
+      Pointer<Utf8> Function(int index)>('SDL_GetGPUDriver');
+  final result = sdlGetGpuDriverLookupFunction(index);
+  if (result == nullptr) {
+    return null;
+  }
+  return result.toDartString();
+}
+
+///
+/// Returns the name of the backend used to create this GPU context.
 ///
 /// \param device a GPU context to query.
-/// \returns an SDL_GPUDriver value, or SDL_GPU_DRIVER_INVALID on error.
+/// \returns the name of the device's driver, or NULL on error.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_GPUDriver SDLCALL SDL_GetGPUDriver(SDL_GPUDevice *device)
+/// extern SDL_DECLSPEC const char * SDLCALL SDL_GetGPUDeviceDriver(SDL_GPUDevice *device)
 /// ```
-int sdlGetGpuDriver(Pointer<SdlGpuDevice> device) {
-  final sdlGetGpuDriverLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlGpuDevice> device),
-      int Function(Pointer<SdlGpuDevice> device)>('SDL_GetGPUDriver');
-  return sdlGetGpuDriverLookupFunction(device);
+String? sdlGetGpuDeviceDriver(Pointer<SdlGpuDevice> device) {
+  final sdlGetGpuDeviceDriverLookupFunction = libSdl3.lookupFunction<
+      Pointer<Utf8> Function(Pointer<SdlGpuDevice> device),
+      Pointer<Utf8> Function(
+          Pointer<SdlGpuDevice> device)>('SDL_GetGPUDeviceDriver');
+  final result = sdlGetGpuDeviceDriverLookupFunction(device);
+  if (result == nullptr) {
+    return null;
+  }
+  return result.toDartString();
+}
+
+///
+/// Returns the supported shader formats for this GPU context.
+///
+/// \param device a GPU context to query.
+/// \returns a bitflag indicating which shader formats the driver is able to
+/// consume.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC SDL_GPUShaderFormat SDLCALL SDL_GetGPUShaderFormats(SDL_GPUDevice *device)
+/// ```
+int sdlGetGpuShaderFormats(Pointer<SdlGpuDevice> device) {
+  final sdlGetGpuShaderFormatsLookupFunction = libSdl3.lookupFunction<
+      Uint32 Function(Pointer<SdlGpuDevice> device),
+      int Function(Pointer<SdlGpuDevice> device)>('SDL_GetGPUShaderFormats');
+  return sdlGetGpuShaderFormatsLookupFunction(device);
 }
 
 ///
@@ -132,22 +257,23 @@ int sdlGetGpuDriver(Pointer<SdlGpuDevice> device) {
 ///
 /// For SPIR-V shaders, use the following resource sets:
 ///
-/// - 0: Read-only storage textures, followed by read-only storage buffers
+/// - 0: Sampled textures, followed by read-only storage textures, followed by
+/// read-only storage buffers
 /// - 1: Write-only storage textures, followed by write-only storage buffers
 /// - 2: Uniform buffers
 ///
 /// For DXBC Shader Model 5_0 shaders, use the following register order:
 ///
-/// - t registers: Read-only storage textures, followed by read-only storage
-/// buffers
+/// - t registers: Sampled textures, followed by read-only storage textures,
+/// followed by read-only storage buffers
 /// - u registers: Write-only storage textures, followed by write-only storage
 /// buffers
 /// - b registers: Uniform buffers
 ///
 /// For DXIL shaders, use the following register order:
 ///
-/// - (t[n], space0): Read-only storage textures, followed by read-only storage
-/// buffers
+/// - (t[n], space0): Sampled textures, followed by read-only storage textures,
+/// followed by read-only storage buffers
 /// - (u[n], space1): Write-only storage textures, followed by write-only
 /// storage buffers
 /// - (b[n], space2): Uniform buffers
@@ -156,8 +282,8 @@ int sdlGetGpuDriver(Pointer<SdlGpuDevice> device) {
 ///
 /// - [[buffer]]: Uniform buffers, followed by write-only storage buffers,
 /// followed by write-only storage buffers
-/// - [[texture]]: Read-only storage textures, followed by write-only storage
-/// textures
+/// - [[texture]]: Sampled textures, followed by read-only storage textures,
+/// followed by write-only storage textures
 ///
 /// \param device a GPU Context.
 /// \param createinfo a struct describing the state of the compute pipeline to
@@ -1015,7 +1141,7 @@ void sdlSetGpuStencilReference(
 /// calls.
 ///
 /// \param render_pass a render pass handle.
-/// \param first_binding the starting bind point for the vertex buffers.
+/// \param first_slot the vertex buffer slot to begin binding from.
 /// \param bindings an array of SDL_GPUBufferBinding structs containing vertex
 /// buffers and offset values.
 /// \param num_bindings the number of bindings in the bindings array.
@@ -1023,20 +1149,20 @@ void sdlSetGpuStencilReference(
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC void SDLCALL SDL_BindGPUVertexBuffers( SDL_GPURenderPass *render_pass, Uint32 first_binding, const SDL_GPUBufferBinding *bindings, Uint32 num_bindings)
+/// extern SDL_DECLSPEC void SDLCALL SDL_BindGPUVertexBuffers( SDL_GPURenderPass *render_pass, Uint32 first_slot, const SDL_GPUBufferBinding *bindings, Uint32 num_bindings)
 /// ```
 void sdlBindGpuVertexBuffers(Pointer<SdlGpuRenderPass> renderPass,
-    int firstBinding, Pointer<SdlGpuBufferBinding> bindings, int numBindings) {
+    int firstSlot, Pointer<SdlGpuBufferBinding> bindings, int numBindings) {
   final sdlBindGpuVertexBuffersLookupFunction = libSdl3.lookupFunction<
-      Void Function(Pointer<SdlGpuRenderPass> renderPass, Uint32 firstBinding,
+      Void Function(Pointer<SdlGpuRenderPass> renderPass, Uint32 firstSlot,
           Pointer<SdlGpuBufferBinding> bindings, Uint32 numBindings),
       void Function(
           Pointer<SdlGpuRenderPass> renderPass,
-          int firstBinding,
+          int firstSlot,
           Pointer<SdlGpuBufferBinding> bindings,
           int numBindings)>('SDL_BindGPUVertexBuffers');
   return sdlBindGpuVertexBuffersLookupFunction(
-      renderPass, firstBinding, bindings, numBindings);
+      renderPass, firstSlot, bindings, numBindings);
 }
 
 ///
@@ -1366,78 +1492,67 @@ void sdlDrawGpuPrimitives(Pointer<SdlGpuRenderPass> renderPass, int numVertices,
 /// Draws data using bound graphics state and with draw parameters set from a
 /// buffer.
 ///
-/// The buffer layout should match the layout of SDL_GPUIndirectDrawCommand.
-/// You must not call this function before binding a graphics pipeline.
+/// The buffer must consist of tightly-packed draw parameter sets that each
+/// match the layout of SDL_GPUIndirectDrawCommand. You must not call this
+/// function before binding a graphics pipeline.
 ///
 /// \param render_pass a render pass handle.
 /// \param buffer a buffer containing draw parameters.
 /// \param offset the offset to start reading from the draw buffer.
 /// \param draw_count the number of draw parameter sets that should be read
 /// from the draw buffer.
-/// \param pitch the byte pitch between sets of draw parameters.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC void SDLCALL SDL_DrawGPUPrimitivesIndirect( SDL_GPURenderPass *render_pass, SDL_GPUBuffer *buffer, Uint32 offset, Uint32 draw_count, Uint32 pitch)
+/// extern SDL_DECLSPEC void SDLCALL SDL_DrawGPUPrimitivesIndirect( SDL_GPURenderPass *render_pass, SDL_GPUBuffer *buffer, Uint32 offset, Uint32 draw_count)
 /// ```
 void sdlDrawGpuPrimitivesIndirect(Pointer<SdlGpuRenderPass> renderPass,
-    Pointer<SdlGpuBuffer> buffer, int offset, int drawCount, int pitch) {
+    Pointer<SdlGpuBuffer> buffer, int offset, int drawCount) {
   final sdlDrawGpuPrimitivesIndirectLookupFunction = libSdl3.lookupFunction<
-      Void Function(
-          Pointer<SdlGpuRenderPass> renderPass,
-          Pointer<SdlGpuBuffer> buffer,
-          Uint32 offset,
-          Uint32 drawCount,
-          Uint32 pitch),
+      Void Function(Pointer<SdlGpuRenderPass> renderPass,
+          Pointer<SdlGpuBuffer> buffer, Uint32 offset, Uint32 drawCount),
       void Function(
           Pointer<SdlGpuRenderPass> renderPass,
           Pointer<SdlGpuBuffer> buffer,
           int offset,
-          int drawCount,
-          int pitch)>('SDL_DrawGPUPrimitivesIndirect');
+          int drawCount)>('SDL_DrawGPUPrimitivesIndirect');
   return sdlDrawGpuPrimitivesIndirectLookupFunction(
-      renderPass, buffer, offset, drawCount, pitch);
+      renderPass, buffer, offset, drawCount);
 }
 
 ///
 /// Draws data using bound graphics state with an index buffer enabled and with
 /// draw parameters set from a buffer.
 ///
-/// The buffer layout should match the layout of
-/// SDL_GPUIndexedIndirectDrawCommand. You must not call this function before
-/// binding a graphics pipeline.
+/// The buffer must consist of tightly-packed draw parameter sets that each
+/// match the layout of SDL_GPUIndexedIndirectDrawCommand. You must not call
+/// this function before binding a graphics pipeline.
 ///
 /// \param render_pass a render pass handle.
 /// \param buffer a buffer containing draw parameters.
 /// \param offset the offset to start reading from the draw buffer.
 /// \param draw_count the number of draw parameter sets that should be read
 /// from the draw buffer.
-/// \param pitch the byte pitch between sets of draw parameters.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC void SDLCALL SDL_DrawGPUIndexedPrimitivesIndirect( SDL_GPURenderPass *render_pass, SDL_GPUBuffer *buffer, Uint32 offset, Uint32 draw_count, Uint32 pitch)
+/// extern SDL_DECLSPEC void SDLCALL SDL_DrawGPUIndexedPrimitivesIndirect( SDL_GPURenderPass *render_pass, SDL_GPUBuffer *buffer, Uint32 offset, Uint32 draw_count)
 /// ```
 void sdlDrawGpuIndexedPrimitivesIndirect(Pointer<SdlGpuRenderPass> renderPass,
-    Pointer<SdlGpuBuffer> buffer, int offset, int drawCount, int pitch) {
+    Pointer<SdlGpuBuffer> buffer, int offset, int drawCount) {
   final sdlDrawGpuIndexedPrimitivesIndirectLookupFunction =
       libSdl3.lookupFunction<
-          Void Function(
-              Pointer<SdlGpuRenderPass> renderPass,
-              Pointer<SdlGpuBuffer> buffer,
-              Uint32 offset,
-              Uint32 drawCount,
-              Uint32 pitch),
+          Void Function(Pointer<SdlGpuRenderPass> renderPass,
+              Pointer<SdlGpuBuffer> buffer, Uint32 offset, Uint32 drawCount),
           void Function(
               Pointer<SdlGpuRenderPass> renderPass,
               Pointer<SdlGpuBuffer> buffer,
               int offset,
-              int drawCount,
-              int pitch)>('SDL_DrawGPUIndexedPrimitivesIndirect');
+              int drawCount)>('SDL_DrawGPUIndexedPrimitivesIndirect');
   return sdlDrawGpuIndexedPrimitivesIndirectLookupFunction(
-      renderPass, buffer, offset, drawCount, pitch);
+      renderPass, buffer, offset, drawCount);
 }
 
 ///
@@ -1542,6 +1657,43 @@ void sdlBindGpuComputePipeline(Pointer<SdlGpuComputePass> computePass,
               Pointer<SdlGpuComputePipeline> computePipeline)>(
       'SDL_BindGPUComputePipeline');
   return sdlBindGpuComputePipelineLookupFunction(computePass, computePipeline);
+}
+
+///
+/// Binds texture-sampler pairs for use on the compute shader.
+///
+/// The textures must have been created with SDL_GPU_TEXTUREUSAGE_SAMPLER.
+///
+/// \param compute_pass a compute pass handle.
+/// \param first_slot the compute sampler slot to begin binding from.
+/// \param texture_sampler_bindings an array of texture-sampler binding
+/// structs.
+/// \param num_bindings the number of texture-sampler bindings to bind from the
+/// array.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC void SDLCALL SDL_BindGPUComputeSamplers( SDL_GPUComputePass *compute_pass, Uint32 first_slot, const SDL_GPUTextureSamplerBinding *texture_sampler_bindings, Uint32 num_bindings)
+/// ```
+void sdlBindGpuComputeSamplers(
+    Pointer<SdlGpuComputePass> computePass,
+    int firstSlot,
+    Pointer<SdlGpuTextureSamplerBinding> textureSamplerBindings,
+    int numBindings) {
+  final sdlBindGpuComputeSamplersLookupFunction = libSdl3.lookupFunction<
+      Void Function(
+          Pointer<SdlGpuComputePass> computePass,
+          Uint32 firstSlot,
+          Pointer<SdlGpuTextureSamplerBinding> textureSamplerBindings,
+          Uint32 numBindings),
+      void Function(
+          Pointer<SdlGpuComputePass> computePass,
+          int firstSlot,
+          Pointer<SdlGpuTextureSamplerBinding> textureSamplerBindings,
+          int numBindings)>('SDL_BindGPUComputeSamplers');
+  return sdlBindGpuComputeSamplersLookupFunction(
+      computePass, firstSlot, textureSamplerBindings, numBindings);
 }
 
 ///
