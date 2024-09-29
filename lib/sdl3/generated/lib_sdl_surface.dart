@@ -139,15 +139,15 @@ int sdlGetSurfaceProperties(Pointer<SdlSurface> surface) {
 /// \param surface the SDL_Surface structure to update.
 /// \param colorspace an SDL_ColorSpace value describing the surface
 /// colorspace.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetSurfaceColorspace
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetSurfaceColorspace(SDL_Surface *surface, SDL_Colorspace colorspace)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetSurfaceColorspace(SDL_Surface *surface, SDL_Colorspace colorspace)
 /// ```
 bool sdlSetSurfaceColorspace(Pointer<SdlSurface> surface, int colorspace) {
   final sdlSetSurfaceColorspaceLookupFunction = libSdl3.lookupFunction<
@@ -226,8 +226,8 @@ Pointer<SdlPalette> sdlCreateSurfacePalette(Pointer<SdlSurface> surface) {
 ///
 /// \param surface the SDL_Surface structure to update.
 /// \param palette the SDL_Palette structure to use.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -235,7 +235,7 @@ Pointer<SdlPalette> sdlCreateSurfacePalette(Pointer<SdlSurface> surface) {
 /// \sa SDL_GetSurfacePalette
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetSurfacePalette(SDL_Surface *surface, SDL_Palette *palette)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetSurfacePalette(SDL_Surface *surface, SDL_Palette *palette)
 /// ```
 bool sdlSetSurfacePalette(
     Pointer<SdlSurface> surface, Pointer<SdlPalette> palette) {
@@ -282,8 +282,8 @@ Pointer<SdlPalette> sdlGetSurfacePalette(Pointer<SdlSurface> surface) {
 /// \param surface the SDL_Surface structure to update.
 /// \param image a pointer to an alternate SDL_Surface to associate with this
 /// surface.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -292,7 +292,7 @@ Pointer<SdlPalette> sdlGetSurfacePalette(Pointer<SdlSurface> surface) {
 /// \sa SDL_SurfaceHasAlternateImages
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_AddSurfaceAlternateImage(SDL_Surface *surface, SDL_Surface *image)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_AddSurfaceAlternateImage(SDL_Surface *surface, SDL_Surface *image)
 /// ```
 bool sdlAddSurfaceAlternateImage(
     Pointer<SdlSurface> surface, Pointer<SdlSurface> image) {
@@ -307,8 +307,7 @@ bool sdlAddSurfaceAlternateImage(
 /// Return whether a surface has alternate versions available.
 ///
 /// \param surface the SDL_Surface structure to query.
-/// \returns SDL_TRUE if alternate versions are available or SDL_TRUE
-/// otherwise.
+/// \returns true if alternate versions are available or true otherwise.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -317,7 +316,7 @@ bool sdlAddSurfaceAlternateImage(
 /// \sa SDL_GetSurfaceImages
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SurfaceHasAlternateImages(SDL_Surface *surface)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SurfaceHasAlternateImages(SDL_Surface *surface)
 /// ```
 bool sdlSurfaceHasAlternateImages(Pointer<SdlSurface> surface) {
   final sdlSurfaceHasAlternateImagesLookupFunction = libSdl3.lookupFunction<
@@ -401,8 +400,8 @@ void sdlRemoveSurfaceAlternateImages(Pointer<SdlSurface> surface) {
 /// format of the surface will not change.
 ///
 /// \param surface the SDL_Surface structure to be locked.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -410,7 +409,7 @@ void sdlRemoveSurfaceAlternateImages(Pointer<SdlSurface> surface) {
 /// \sa SDL_UnlockSurface
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_LockSurface(SDL_Surface *surface)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_LockSurface(SDL_Surface *surface)
 /// ```
 bool sdlLockSurface(Pointer<SdlSurface> surface) {
   final sdlLockSurfaceLookupFunction = libSdl3.lookupFunction<
@@ -445,8 +444,8 @@ void sdlUnlockSurface(Pointer<SdlSurface> surface) {
 /// will result in a memory leak.
 ///
 /// \param src the data stream for the surface.
-/// \param closeio if SDL_TRUE, calls SDL_CloseIO() on `src` before returning,
-/// even in the case of an error.
+/// \param closeio if true, calls SDL_CloseIO() on `src` before returning, even
+/// in the case of an error.
 /// \returns a pointer to a new SDL_Surface structure or NULL on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -457,7 +456,7 @@ void sdlUnlockSurface(Pointer<SdlSurface> surface) {
 /// \sa SDL_SaveBMP_IO
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_Surface * SDLCALL SDL_LoadBMP_IO(SDL_IOStream *src, SDL_bool closeio)
+/// extern SDL_DECLSPEC SDL_Surface * SDLCALL SDL_LoadBMP_IO(SDL_IOStream *src, bool closeio)
 /// ```
 Pointer<SdlSurface> sdlLoadBmpIo(Pointer<SdlIoStream> src, bool closeio) {
   final sdlLoadBmpIoLookupFunction = libSdl3.lookupFunction<
@@ -507,10 +506,10 @@ Pointer<SdlSurface> sdlLoadBmp(String? file) {
 ///
 /// \param surface the SDL_Surface structure containing the image to be saved.
 /// \param dst a data stream to save to.
-/// \param closeio if SDL_TRUE, calls SDL_CloseIO() on `dst` before returning,
-/// even in the case of an error.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \param closeio if true, calls SDL_CloseIO() on `dst` before returning, even
+/// in the case of an error.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -518,7 +517,7 @@ Pointer<SdlSurface> sdlLoadBmp(String? file) {
 /// \sa SDL_SaveBMP
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SaveBMP_IO(SDL_Surface *surface, SDL_IOStream *dst, SDL_bool closeio)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SaveBMP_IO(SDL_Surface *surface, SDL_IOStream *dst, bool closeio)
 /// ```
 bool sdlSaveBmpIo(
     Pointer<SdlSurface> surface, Pointer<SdlIoStream> dst, bool closeio) {
@@ -541,8 +540,8 @@ bool sdlSaveBmpIo(
 ///
 /// \param surface the SDL_Surface structure containing the image to be saved.
 /// \param file a file to save to.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -550,7 +549,7 @@ bool sdlSaveBmpIo(
 /// \sa SDL_SaveBMP_IO
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SaveBMP(SDL_Surface *surface, const char *file)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SaveBMP(SDL_Surface *surface, const char *file)
 /// ```
 bool sdlSaveBmp(Pointer<SdlSurface> surface, String? file) {
   final sdlSaveBmpLookupFunction = libSdl3.lookupFunction<
@@ -570,10 +569,9 @@ bool sdlSaveBmp(Pointer<SdlSurface> surface, String? file) {
 /// the surface must be locked before directly accessing the pixels.
 ///
 /// \param surface the SDL_Surface structure to optimize.
-/// \param enabled SDL_TRUE to enable RLE acceleration, SDL_FALSE to disable
-/// it.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \param enabled true to enable RLE acceleration, false to disable it.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -582,7 +580,7 @@ bool sdlSaveBmp(Pointer<SdlSurface> surface, String? file) {
 /// \sa SDL_UnlockSurface
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetSurfaceRLE(SDL_Surface *surface, SDL_bool enabled)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetSurfaceRLE(SDL_Surface *surface, bool enabled)
 /// ```
 bool sdlSetSurfaceRle(Pointer<SdlSurface> surface, bool enabled) {
   final sdlSetSurfaceRleLookupFunction = libSdl3.lookupFunction<
@@ -595,17 +593,17 @@ bool sdlSetSurfaceRle(Pointer<SdlSurface> surface, bool enabled) {
 ///
 /// Returns whether the surface is RLE enabled.
 ///
-/// It is safe to pass a NULL `surface` here; it will return SDL_FALSE.
+/// It is safe to pass a NULL `surface` here; it will return false.
 ///
 /// \param surface the SDL_Surface structure to query.
-/// \returns SDL_TRUE if the surface is RLE enabled, SDL_FALSE otherwise.
+/// \returns true if the surface is RLE enabled, false otherwise.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_SetSurfaceRLE
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SurfaceHasRLE(SDL_Surface *surface)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SurfaceHasRLE(SDL_Surface *surface)
 /// ```
 bool sdlSurfaceHasRle(Pointer<SdlSurface> surface) {
   final sdlSurfaceHasRleLookupFunction = libSdl3.lookupFunction<
@@ -625,11 +623,10 @@ bool sdlSurfaceHasRle(Pointer<SdlSurface> surface) {
 /// SDL_MapRGB().
 ///
 /// \param surface the SDL_Surface structure to update.
-/// \param enabled SDL_TRUE to enable color key, SDL_FALSE to disable color
-/// key.
+/// \param enabled true to enable color key, false to disable color key.
 /// \param key the transparent pixel.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -638,7 +635,7 @@ bool sdlSurfaceHasRle(Pointer<SdlSurface> surface) {
 /// \sa SDL_SurfaceHasColorKey
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetSurfaceColorKey(SDL_Surface *surface, SDL_bool enabled, Uint32 key)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetSurfaceColorKey(SDL_Surface *surface, bool enabled, Uint32 key)
 /// ```
 bool sdlSetSurfaceColorKey(Pointer<SdlSurface> surface, bool enabled, int key) {
   final sdlSetSurfaceColorKeyLookupFunction = libSdl3.lookupFunction<
@@ -652,10 +649,10 @@ bool sdlSetSurfaceColorKey(Pointer<SdlSurface> surface, bool enabled, int key) {
 ///
 /// Returns whether the surface has a color key.
 ///
-/// It is safe to pass a NULL `surface` here; it will return SDL_FALSE.
+/// It is safe to pass a NULL `surface` here; it will return false.
 ///
 /// \param surface the SDL_Surface structure to query.
-/// \returns SDL_TRUE if the surface has a color key, SDL_FALSE otherwise.
+/// \returns true if the surface has a color key, false otherwise.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -663,7 +660,7 @@ bool sdlSetSurfaceColorKey(Pointer<SdlSurface> surface, bool enabled, int key) {
 /// \sa SDL_GetSurfaceColorKey
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SurfaceHasColorKey(SDL_Surface *surface)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SurfaceHasColorKey(SDL_Surface *surface)
 /// ```
 bool sdlSurfaceHasColorKey(Pointer<SdlSurface> surface) {
   final sdlSurfaceHasColorKeyLookupFunction = libSdl3.lookupFunction<
@@ -678,12 +675,12 @@ bool sdlSurfaceHasColorKey(Pointer<SdlSurface> surface) {
 /// The color key is a pixel of the format used by the surface, as generated by
 /// SDL_MapRGB().
 ///
-/// If the surface doesn't have color key enabled this function returns -1.
+/// If the surface doesn't have color key enabled this function returns false.
 ///
 /// \param surface the SDL_Surface structure to query.
 /// \param key a pointer filled in with the transparent pixel.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -691,7 +688,7 @@ bool sdlSurfaceHasColorKey(Pointer<SdlSurface> surface) {
 /// \sa SDL_SurfaceHasColorKey
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetSurfaceColorKey(SDL_Surface *surface, Uint32 *key)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GetSurfaceColorKey(SDL_Surface *surface, Uint32 *key)
 /// ```
 bool sdlGetSurfaceColorKey(Pointer<SdlSurface> surface, Pointer<Uint32> key) {
   final sdlGetSurfaceColorKeyLookupFunction = libSdl3.lookupFunction<
@@ -714,8 +711,8 @@ bool sdlGetSurfaceColorKey(Pointer<SdlSurface> surface, Pointer<Uint32> key) {
 /// \param r the red color value multiplied into blit operations.
 /// \param g the green color value multiplied into blit operations.
 /// \param b the blue color value multiplied into blit operations.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -723,7 +720,7 @@ bool sdlGetSurfaceColorKey(Pointer<SdlSurface> surface, Pointer<Uint32> key) {
 /// \sa SDL_SetSurfaceAlphaMod
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetSurfaceColorMod(SDL_Surface *surface, Uint8 r, Uint8 g, Uint8 b)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetSurfaceColorMod(SDL_Surface *surface, Uint8 r, Uint8 g, Uint8 b)
 /// ```
 bool sdlSetSurfaceColorMod(Pointer<SdlSurface> surface, int r, int g, int b) {
   final sdlSetSurfaceColorModLookupFunction = libSdl3.lookupFunction<
@@ -740,8 +737,8 @@ bool sdlSetSurfaceColorMod(Pointer<SdlSurface> surface, int r, int g, int b) {
 /// \param r a pointer filled in with the current red color value.
 /// \param g a pointer filled in with the current green color value.
 /// \param b a pointer filled in with the current blue color value.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -749,7 +746,7 @@ bool sdlSetSurfaceColorMod(Pointer<SdlSurface> surface, int r, int g, int b) {
 /// \sa SDL_SetSurfaceColorMod
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetSurfaceColorMod(SDL_Surface *surface, Uint8 *r, Uint8 *g, Uint8 *b)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GetSurfaceColorMod(SDL_Surface *surface, Uint8 *r, Uint8 *g, Uint8 *b)
 /// ```
 bool sdlGetSurfaceColorMod(Pointer<SdlSurface> surface, Pointer<Uint8> r,
     Pointer<Uint8> g, Pointer<Uint8> b) {
@@ -771,8 +768,8 @@ bool sdlGetSurfaceColorMod(Pointer<SdlSurface> surface, Pointer<Uint8> r,
 ///
 /// \param surface the SDL_Surface structure to update.
 /// \param alpha the alpha value multiplied into blit operations.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -780,7 +777,7 @@ bool sdlGetSurfaceColorMod(Pointer<SdlSurface> surface, Pointer<Uint8> r,
 /// \sa SDL_SetSurfaceColorMod
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetSurfaceAlphaMod(SDL_Surface *surface, Uint8 alpha)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetSurfaceAlphaMod(SDL_Surface *surface, Uint8 alpha)
 /// ```
 bool sdlSetSurfaceAlphaMod(Pointer<SdlSurface> surface, int alpha) {
   final sdlSetSurfaceAlphaModLookupFunction = libSdl3.lookupFunction<
@@ -795,8 +792,8 @@ bool sdlSetSurfaceAlphaMod(Pointer<SdlSurface> surface, int alpha) {
 ///
 /// \param surface the SDL_Surface structure to query.
 /// \param alpha a pointer filled in with the current alpha value.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -804,7 +801,7 @@ bool sdlSetSurfaceAlphaMod(Pointer<SdlSurface> surface, int alpha) {
 /// \sa SDL_SetSurfaceAlphaMod
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetSurfaceAlphaMod(SDL_Surface *surface, Uint8 *alpha)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GetSurfaceAlphaMod(SDL_Surface *surface, Uint8 *alpha)
 /// ```
 bool sdlGetSurfaceAlphaMod(Pointer<SdlSurface> surface, Pointer<Uint8> alpha) {
   final sdlGetSurfaceAlphaModLookupFunction = libSdl3.lookupFunction<
@@ -823,15 +820,15 @@ bool sdlGetSurfaceAlphaMod(Pointer<SdlSurface> surface, Pointer<Uint8> alpha) {
 ///
 /// \param surface the SDL_Surface structure to update.
 /// \param blendMode the SDL_BlendMode to use for blit blending.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetSurfaceBlendMode
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetSurfaceBlendMode(SDL_Surface *surface, SDL_BlendMode blendMode)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetSurfaceBlendMode(SDL_Surface *surface, SDL_BlendMode blendMode)
 /// ```
 bool sdlSetSurfaceBlendMode(Pointer<SdlSurface> surface, int blendMode) {
   final sdlSetSurfaceBlendModeLookupFunction = libSdl3.lookupFunction<
@@ -846,15 +843,15 @@ bool sdlSetSurfaceBlendMode(Pointer<SdlSurface> surface, int blendMode) {
 ///
 /// \param surface the SDL_Surface structure to query.
 /// \param blendMode a pointer filled in with the current SDL_BlendMode.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_SetSurfaceBlendMode
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetSurfaceBlendMode(SDL_Surface *surface, SDL_BlendMode *blendMode)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GetSurfaceBlendMode(SDL_Surface *surface, SDL_BlendMode *blendMode)
 /// ```
 bool sdlGetSurfaceBlendMode(
     Pointer<SdlSurface> surface, Pointer<Uint32> blendMode) {
@@ -877,15 +874,15 @@ bool sdlGetSurfaceBlendMode(
 /// \param surface the SDL_Surface structure to be clipped.
 /// \param rect the SDL_Rect structure representing the clipping rectangle, or
 /// NULL to disable clipping.
-/// \returns SDL_TRUE if the rectangle intersects the surface, otherwise
-/// SDL_FALSE and blits will be completely clipped.
+/// \returns true if the rectangle intersects the surface, otherwise false and
+/// blits will be completely clipped.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetSurfaceClipRect
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetSurfaceClipRect(SDL_Surface *surface, const SDL_Rect *rect)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetSurfaceClipRect(SDL_Surface *surface, const SDL_Rect *rect)
 /// ```
 bool sdlSetSurfaceClipRect(Pointer<SdlSurface> surface, Pointer<SdlRect> rect) {
   final sdlSetSurfaceClipRectLookupFunction = libSdl3.lookupFunction<
@@ -905,15 +902,15 @@ bool sdlSetSurfaceClipRect(Pointer<SdlSurface> surface, Pointer<SdlRect> rect) {
 /// clipped.
 /// \param rect an SDL_Rect structure filled in with the clipping rectangle for
 /// the surface.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_SetSurfaceClipRect
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetSurfaceClipRect(SDL_Surface *surface, SDL_Rect *rect)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GetSurfaceClipRect(SDL_Surface *surface, SDL_Rect *rect)
 /// ```
 bool sdlGetSurfaceClipRect(Pointer<SdlSurface> surface, Pointer<SdlRect> rect) {
   final sdlGetSurfaceClipRectLookupFunction = libSdl3.lookupFunction<
@@ -928,13 +925,13 @@ bool sdlGetSurfaceClipRect(Pointer<SdlSurface> surface, Pointer<SdlRect> rect) {
 ///
 /// \param surface the surface to flip.
 /// \param flip the direction to flip.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_FlipSurface(SDL_Surface *surface, SDL_FlipMode flip)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_FlipSurface(SDL_Surface *surface, SDL_FlipMode flip)
 /// ```
 bool sdlFlipSurface(Pointer<SdlSurface> surface, int flip) {
   final sdlFlipSurfaceLookupFunction = libSdl3.lookupFunction<
@@ -1089,15 +1086,15 @@ Pointer<SdlSurface> sdlConvertSurfaceAndColorspace(Pointer<SdlSurface> surface,
 /// \param dst_format an SDL_PixelFormat value of the `dst` pixels format.
 /// \param dst a pointer to be filled in with new pixel data.
 /// \param dst_pitch the pitch of the destination pixels, in bytes.
-/// \returns SDL_FALSE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns false on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_ConvertPixelsAndColorspace
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_ConvertPixels(int width, int height, SDL_PixelFormat src_format, const void *src, int src_pitch, SDL_PixelFormat dst_format, void *dst, int dst_pitch)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_ConvertPixels(int width, int height, SDL_PixelFormat src_format, const void *src, int src_pitch, SDL_PixelFormat dst_format, void *dst, int dst_pitch)
 /// ```
 bool sdlConvertPixels(
     int width,
@@ -1152,15 +1149,15 @@ bool sdlConvertPixels(
 /// properties, or 0.
 /// \param dst a pointer to be filled in with new pixel data.
 /// \param dst_pitch the pitch of the destination pixels, in bytes.
-/// \returns SDL_FALSE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns false on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_ConvertPixels
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_ConvertPixelsAndColorspace(int width, int height, SDL_PixelFormat src_format, SDL_Colorspace src_colorspace, SDL_PropertiesID src_properties, const void *src, int src_pitch, SDL_PixelFormat dst_format, SDL_Colorspace dst_colorspace, SDL_PropertiesID dst_properties, void *dst, int dst_pitch)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_ConvertPixelsAndColorspace(int width, int height, SDL_PixelFormat src_format, SDL_Colorspace src_colorspace, SDL_PropertiesID src_properties, const void *src, int src_pitch, SDL_PixelFormat dst_format, SDL_Colorspace dst_colorspace, SDL_PropertiesID dst_properties, void *dst, int dst_pitch)
 /// ```
 bool sdlConvertPixelsAndColorspace(
     int width,
@@ -1231,15 +1228,15 @@ bool sdlConvertPixelsAndColorspace(
 /// \param dst_format an SDL_PixelFormat value of the `dst` pixels format.
 /// \param dst a pointer to be filled in with premultiplied pixel data.
 /// \param dst_pitch the pitch of the destination pixels, in bytes.
-/// \param linear SDL_TRUE to convert from sRGB to linear space for the alpha
-/// multiplication, SDL_FALSE to do multiplication in sRGB space.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \param linear true to convert from sRGB to linear space for the alpha
+/// multiplication, false to do multiplication in sRGB space.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_PremultiplyAlpha(int width, int height, SDL_PixelFormat src_format, const void *src, int src_pitch, SDL_PixelFormat dst_format, void *dst, int dst_pitch, SDL_bool linear)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_PremultiplyAlpha(int width, int height, SDL_PixelFormat src_format, const void *src, int src_pitch, SDL_PixelFormat dst_format, void *dst, int dst_pitch, bool linear)
 /// ```
 bool sdlPremultiplyAlpha(
     int width,
@@ -1283,15 +1280,15 @@ bool sdlPremultiplyAlpha(
 /// This is safe to use with src == dst, but not for other overlapping areas.
 ///
 /// \param surface the surface to modify.
-/// \param linear SDL_TRUE to convert from sRGB to linear space for the alpha
-/// multiplication, SDL_FALSE to do multiplication in sRGB space.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \param linear true to convert from sRGB to linear space for the alpha
+/// multiplication, false to do multiplication in sRGB space.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_PremultiplySurfaceAlpha(SDL_Surface *surface, SDL_bool linear)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_PremultiplySurfaceAlpha(SDL_Surface *surface, bool linear)
 /// ```
 bool sdlPremultiplySurfaceAlpha(Pointer<SdlSurface> surface, bool linear) {
   final sdlPremultiplySurfaceAlphaLookupFunction = libSdl3.lookupFunction<
@@ -1314,13 +1311,13 @@ bool sdlPremultiplySurfaceAlpha(Pointer<SdlSurface> surface, bool linear) {
 /// \param g the green component of the pixel, normally in the range 0-1.
 /// \param b the blue component of the pixel, normally in the range 0-1.
 /// \param a the alpha component of the pixel, normally in the range 0-1.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_ClearSurface(SDL_Surface *surface, float r, float g, float b, float a)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_ClearSurface(SDL_Surface *surface, float r, float g, float b, float a)
 /// ```
 bool sdlClearSurface(
     Pointer<SdlSurface> surface, double r, double g, double b, double a) {
@@ -1348,15 +1345,15 @@ bool sdlClearSurface(
 /// \param rect the SDL_Rect structure representing the rectangle to fill, or
 /// NULL to fill the entire surface.
 /// \param color the color to fill with.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_FillSurfaceRects
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_FillSurfaceRect(SDL_Surface *dst, const SDL_Rect *rect, Uint32 color)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_FillSurfaceRect(SDL_Surface *dst, const SDL_Rect *rect, Uint32 color)
 /// ```
 bool sdlFillSurfaceRect(
     Pointer<SdlSurface> dst, Pointer<SdlRect> rect, int color) {
@@ -1384,15 +1381,15 @@ bool sdlFillSurfaceRect(
 /// \param rects an array of SDL_Rects representing the rectangles to fill.
 /// \param count the number of rectangles in the array.
 /// \param color the color to fill with.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_FillSurfaceRect
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_FillSurfaceRects(SDL_Surface *dst, const SDL_Rect *rects, int count, Uint32 color)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_FillSurfaceRects(SDL_Surface *dst, const SDL_Rect *rects, int count, Uint32 color)
 /// ```
 bool sdlFillSurfaceRects(
     Pointer<SdlSurface> dst, Pointer<SdlRect> rects, int count, int color) {
@@ -1466,8 +1463,8 @@ bool sdlFillSurfaceRects(
 /// height are ignored, and are copied from `srcrect`. If you
 /// want a specific width and height, you should use
 /// SDL_BlitSurfaceScaled().
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \threadsafety The same destination surface should not be used from two
 /// threads at once. It is safe to use the same source surface
@@ -1478,7 +1475,7 @@ bool sdlFillSurfaceRects(
 /// \sa SDL_BlitSurfaceScaled
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_BlitSurface(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, const SDL_Rect *dstrect)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_BlitSurface(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, const SDL_Rect *dstrect)
 /// ```
 bool sdlBlitSurface(Pointer<SdlSurface> src, Pointer<SdlRect> srcrect,
     Pointer<SdlSurface> dst, Pointer<SdlRect> dstrect) {
@@ -1505,8 +1502,8 @@ bool sdlBlitSurface(Pointer<SdlSurface> src, Pointer<SdlRect> srcrect,
 /// \param dst the SDL_Surface structure that is the blit target.
 /// \param dstrect the SDL_Rect structure representing the target rectangle in
 /// the destination surface, may not be NULL.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \threadsafety The same destination surface should not be used from two
 /// threads at once. It is safe to use the same source surface
@@ -1517,7 +1514,7 @@ bool sdlBlitSurface(Pointer<SdlSurface> src, Pointer<SdlRect> srcrect,
 /// \sa SDL_BlitSurface
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_BlitSurfaceUnchecked(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, const SDL_Rect *dstrect)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_BlitSurfaceUnchecked(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, const SDL_Rect *dstrect)
 /// ```
 bool sdlBlitSurfaceUnchecked(Pointer<SdlSurface> src, Pointer<SdlRect> srcrect,
     Pointer<SdlSurface> dst, Pointer<SdlRect> dstrect) {
@@ -1544,8 +1541,8 @@ bool sdlBlitSurfaceUnchecked(Pointer<SdlSurface> src, Pointer<SdlRect> srcrect,
 /// the destination surface, or NULL to fill the entire
 /// destination surface.
 /// \param scaleMode the SDL_ScaleMode to be used.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \threadsafety The same destination surface should not be used from two
 /// threads at once. It is safe to use the same source surface
@@ -1556,7 +1553,7 @@ bool sdlBlitSurfaceUnchecked(Pointer<SdlSurface> src, Pointer<SdlRect> srcrect,
 /// \sa SDL_BlitSurface
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_BlitSurfaceScaled(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, const SDL_Rect *dstrect, SDL_ScaleMode scaleMode)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_BlitSurfaceScaled(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, const SDL_Rect *dstrect, SDL_ScaleMode scaleMode)
 /// ```
 bool sdlBlitSurfaceScaled(Pointer<SdlSurface> src, Pointer<SdlRect> srcrect,
     Pointer<SdlSurface> dst, Pointer<SdlRect> dstrect, int scaleMode) {
@@ -1587,8 +1584,8 @@ bool sdlBlitSurfaceScaled(Pointer<SdlSurface> src, Pointer<SdlRect> srcrect,
 /// \param dstrect the SDL_Rect structure representing the target rectangle in
 /// the destination surface, may not be NULL.
 /// \param scaleMode the SDL_ScaleMode to be used.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \threadsafety The same destination surface should not be used from two
 /// threads at once. It is safe to use the same source surface
@@ -1599,7 +1596,7 @@ bool sdlBlitSurfaceScaled(Pointer<SdlSurface> src, Pointer<SdlRect> srcrect,
 /// \sa SDL_BlitSurfaceScaled
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_BlitSurfaceUncheckedScaled(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, const SDL_Rect *dstrect, SDL_ScaleMode scaleMode)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_BlitSurfaceUncheckedScaled(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, const SDL_Rect *dstrect, SDL_ScaleMode scaleMode)
 /// ```
 bool sdlBlitSurfaceUncheckedScaled(
     Pointer<SdlSurface> src,
@@ -1634,8 +1631,8 @@ bool sdlBlitSurfaceUncheckedScaled(
 /// \param dst the SDL_Surface structure that is the blit target.
 /// \param dstrect the SDL_Rect structure representing the target rectangle in
 /// the destination surface, or NULL to fill the entire surface.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \threadsafety The same destination surface should not be used from two
 /// threads at once. It is safe to use the same source surface
@@ -1646,7 +1643,7 @@ bool sdlBlitSurfaceUncheckedScaled(
 /// \sa SDL_BlitSurface
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_BlitSurfaceTiled(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, const SDL_Rect *dstrect)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_BlitSurfaceTiled(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, const SDL_Rect *dstrect)
 /// ```
 bool sdlBlitSurfaceTiled(Pointer<SdlSurface> src, Pointer<SdlRect> srcrect,
     Pointer<SdlSurface> dst, Pointer<SdlRect> dstrect) {
@@ -1678,8 +1675,8 @@ bool sdlBlitSurfaceTiled(Pointer<SdlSurface> src, Pointer<SdlRect> srcrect,
 /// \param dst the SDL_Surface structure that is the blit target.
 /// \param dstrect the SDL_Rect structure representing the target rectangle in
 /// the destination surface, or NULL to fill the entire surface.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \threadsafety The same destination surface should not be used from two
 /// threads at once. It is safe to use the same source surface
@@ -1690,7 +1687,7 @@ bool sdlBlitSurfaceTiled(Pointer<SdlSurface> src, Pointer<SdlRect> srcrect,
 /// \sa SDL_BlitSurface
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_BlitSurfaceTiledWithScale(SDL_Surface *src, const SDL_Rect *srcrect, float scale, SDL_ScaleMode scaleMode, SDL_Surface *dst, const SDL_Rect *dstrect)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_BlitSurfaceTiledWithScale(SDL_Surface *src, const SDL_Rect *srcrect, float scale, SDL_ScaleMode scaleMode, SDL_Surface *dst, const SDL_Rect *dstrect)
 /// ```
 bool sdlBlitSurfaceTiledWithScale(
     Pointer<SdlSurface> src,
@@ -1743,8 +1740,8 @@ bool sdlBlitSurfaceTiledWithScale(
 /// \param dst the SDL_Surface structure that is the blit target.
 /// \param dstrect the SDL_Rect structure representing the target rectangle in
 /// the destination surface, or NULL to fill the entire surface.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \threadsafety The same destination surface should not be used from two
 /// threads at once. It is safe to use the same source surface
@@ -1755,7 +1752,7 @@ bool sdlBlitSurfaceTiledWithScale(
 /// \sa SDL_BlitSurface
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_BlitSurface9Grid(SDL_Surface *src, const SDL_Rect *srcrect, int left_width, int right_width, int top_height, int bottom_height, float scale, SDL_ScaleMode scaleMode, SDL_Surface *dst, const SDL_Rect *dstrect)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_BlitSurface9Grid(SDL_Surface *src, const SDL_Rect *srcrect, int left_width, int right_width, int top_height, int bottom_height, float scale, SDL_ScaleMode scaleMode, SDL_Surface *dst, const SDL_Rect *dstrect)
 /// ```
 bool sdlBlitSurface9Grid(
     Pointer<SdlSurface> src,
@@ -1896,13 +1893,13 @@ int sdlMapSurfaceRgba(Pointer<SdlSurface> surface, int r, int g, int b, int a) {
 /// ignore this channel.
 /// \param a a pointer filled in with the alpha channel, 0-255, or NULL to
 /// ignore this channel.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_ReadSurfacePixel(SDL_Surface *surface, int x, int y, Uint8 *r, Uint8 *g, Uint8 *b, Uint8 *a)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_ReadSurfacePixel(SDL_Surface *surface, int x, int y, Uint8 *r, Uint8 *g, Uint8 *b, Uint8 *a)
 /// ```
 bool sdlReadSurfacePixel(Pointer<SdlSurface> surface, int x, int y,
     Pointer<Uint8> r, Pointer<Uint8> g, Pointer<Uint8> b, Pointer<Uint8> a) {
@@ -1943,13 +1940,13 @@ bool sdlReadSurfacePixel(Pointer<SdlSurface> surface, int x, int y,
 /// 0-1, or NULL to ignore this channel.
 /// \param a a pointer filled in with the alpha channel, normally in the range
 /// 0-1, or NULL to ignore this channel.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_ReadSurfacePixelFloat(SDL_Surface *surface, int x, int y, float *r, float *g, float *b, float *a)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_ReadSurfacePixelFloat(SDL_Surface *surface, int x, int y, float *r, float *g, float *b, float *a)
 /// ```
 bool sdlReadSurfacePixelFloat(Pointer<SdlSurface> surface, int x, int y,
     Pointer<Float> r, Pointer<Float> g, Pointer<Float> b, Pointer<Float> a) {
@@ -1989,13 +1986,13 @@ bool sdlReadSurfacePixelFloat(Pointer<SdlSurface> surface, int x, int y,
 /// \param g the green channel value, 0-255.
 /// \param b the blue channel value, 0-255.
 /// \param a the alpha channel value, 0-255.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_WriteSurfacePixel(SDL_Surface *surface, int x, int y, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_WriteSurfacePixel(SDL_Surface *surface, int x, int y, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 /// ```
 bool sdlWriteSurfacePixel(
     Pointer<SdlSurface> surface, int x, int y, int r, int g, int b, int a) {
@@ -2020,13 +2017,13 @@ bool sdlWriteSurfacePixel(
 /// \param g the green channel value, normally in the range 0-1.
 /// \param b the blue channel value, normally in the range 0-1.
 /// \param a the alpha channel value, normally in the range 0-1.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_WriteSurfacePixelFloat(SDL_Surface *surface, int x, int y, float r, float g, float b, float a)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_WriteSurfacePixelFloat(SDL_Surface *surface, int x, int y, float r, float g, float b, float a)
 /// ```
 bool sdlWriteSurfacePixelFloat(Pointer<SdlSurface> surface, int x, int y,
     double r, double g, double b, double a) {

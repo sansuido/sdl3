@@ -74,8 +74,8 @@ String? sdlGetRenderDriver(int index) {
 /// SDL_CreateWindow()).
 /// \param window a pointer filled with the window, or NULL on error.
 /// \param renderer a pointer filled with the renderer, or NULL on error.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -83,7 +83,7 @@ String? sdlGetRenderDriver(int index) {
 /// \sa SDL_CreateWindow
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_CreateWindowAndRenderer(const char *title, int width, int height, SDL_WindowFlags window_flags, SDL_Window **window, SDL_Renderer **renderer)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_CreateWindowAndRenderer(const char *title, int width, int height, SDL_WindowFlags window_flags, SDL_Window **window, SDL_Renderer **renderer)
 /// ```
 bool sdlCreateWindowAndRenderer(
     String? title,
@@ -411,15 +411,15 @@ int sdlGetRendererProperties(Pointer<SdlRenderer> renderer) {
 /// \param renderer the rendering context.
 /// \param w a pointer filled in with the width in pixels.
 /// \param h a pointer filled in with the height in pixels.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetCurrentRenderOutputSize
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetRenderOutputSize(SDL_Renderer *renderer, int *w, int *h)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderOutputSize(SDL_Renderer *renderer, int *w, int *h)
 /// ```
 bool sdlGetRenderOutputSize(
     Pointer<SdlRenderer> renderer, Pointer<Int32> w, Pointer<Int32> h) {
@@ -442,15 +442,15 @@ bool sdlGetRenderOutputSize(
 /// \param renderer the rendering context.
 /// \param w a pointer filled in with the current width.
 /// \param h a pointer filled in with the current height.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetRenderOutputSize
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetCurrentRenderOutputSize(SDL_Renderer *renderer, int *w, int *h)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GetCurrentRenderOutputSize(SDL_Renderer *renderer, int *w, int *h)
 /// ```
 bool sdlGetCurrentRenderOutputSize(
     Pointer<SdlRenderer> renderer, Pointer<Int32> w, Pointer<Int32> h) {
@@ -790,13 +790,13 @@ Pointer<SdlRenderer> sdlGetRendererFromTexture(Pointer<SdlTexture> texture) {
 /// argument can be NULL if you don't need this information.
 /// \param h a pointer filled in with the height of the texture in pixels. This
 /// argument can be NULL if you don't need this information.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetTextureSize(SDL_Texture *texture, float *w, float *h)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GetTextureSize(SDL_Texture *texture, float *w, float *h)
 /// ```
 bool sdlGetTextureSize(
     Pointer<SdlTexture> texture, Pointer<Float> w, Pointer<Float> h) {
@@ -818,14 +818,14 @@ bool sdlGetTextureSize(
 /// `srcC = srcC * (color / 255)`
 ///
 /// Color modulation is not always supported by the renderer; it will return
-/// SDL_FALSE if color modulation is not supported.
+/// false if color modulation is not supported.
 ///
 /// \param texture the texture to update.
 /// \param r the red color value multiplied into copy operations.
 /// \param g the green color value multiplied into copy operations.
 /// \param b the blue color value multiplied into copy operations.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -834,7 +834,7 @@ bool sdlGetTextureSize(
 /// \sa SDL_SetTextureColorModFloat
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetTextureColorMod(SDL_Texture *texture, Uint8 r, Uint8 g, Uint8 b)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetTextureColorMod(SDL_Texture *texture, Uint8 r, Uint8 g, Uint8 b)
 /// ```
 bool sdlSetTextureColorMod(Pointer<SdlTexture> texture, int r, int g, int b) {
   final sdlSetTextureColorModLookupFunction = libSdl3.lookupFunction<
@@ -854,14 +854,14 @@ bool sdlSetTextureColorMod(Pointer<SdlTexture> texture, int r, int g, int b) {
 /// `srcC = srcC * color`
 ///
 /// Color modulation is not always supported by the renderer; it will return
-/// SDL_FALSE if color modulation is not supported.
+/// false if color modulation is not supported.
 ///
 /// \param texture the texture to update.
 /// \param r the red color value multiplied into copy operations.
 /// \param g the green color value multiplied into copy operations.
 /// \param b the blue color value multiplied into copy operations.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -870,7 +870,7 @@ bool sdlSetTextureColorMod(Pointer<SdlTexture> texture, int r, int g, int b) {
 /// \sa SDL_SetTextureColorMod
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetTextureColorModFloat(SDL_Texture *texture, float r, float g, float b)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetTextureColorModFloat(SDL_Texture *texture, float r, float g, float b)
 /// ```
 bool sdlSetTextureColorModFloat(
     Pointer<SdlTexture> texture, double r, double g, double b) {
@@ -888,8 +888,8 @@ bool sdlSetTextureColorModFloat(
 /// \param r a pointer filled in with the current red color value.
 /// \param g a pointer filled in with the current green color value.
 /// \param b a pointer filled in with the current blue color value.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -898,7 +898,7 @@ bool sdlSetTextureColorModFloat(
 /// \sa SDL_SetTextureColorMod
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetTextureColorMod(SDL_Texture *texture, Uint8 *r, Uint8 *g, Uint8 *b)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GetTextureColorMod(SDL_Texture *texture, Uint8 *r, Uint8 *g, Uint8 *b)
 /// ```
 bool sdlGetTextureColorMod(Pointer<SdlTexture> texture, Pointer<Uint8> r,
     Pointer<Uint8> g, Pointer<Uint8> b) {
@@ -917,8 +917,8 @@ bool sdlGetTextureColorMod(Pointer<SdlTexture> texture, Pointer<Uint8> r,
 /// \param r a pointer filled in with the current red color value.
 /// \param g a pointer filled in with the current green color value.
 /// \param b a pointer filled in with the current blue color value.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -927,7 +927,7 @@ bool sdlGetTextureColorMod(Pointer<SdlTexture> texture, Pointer<Uint8> r,
 /// \sa SDL_SetTextureColorModFloat
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetTextureColorModFloat(SDL_Texture *texture, float *r, float *g, float *b)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GetTextureColorModFloat(SDL_Texture *texture, float *r, float *g, float *b)
 /// ```
 bool sdlGetTextureColorModFloat(Pointer<SdlTexture> texture, Pointer<Float> r,
     Pointer<Float> g, Pointer<Float> b) {
@@ -948,12 +948,12 @@ bool sdlGetTextureColorModFloat(Pointer<SdlTexture> texture, Pointer<Float> r,
 /// `srcA = srcA * (alpha / 255)`
 ///
 /// Alpha modulation is not always supported by the renderer; it will return
-/// SDL_FALSE if alpha modulation is not supported.
+/// false if alpha modulation is not supported.
 ///
 /// \param texture the texture to update.
 /// \param alpha the source alpha value multiplied into copy operations.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -962,7 +962,7 @@ bool sdlGetTextureColorModFloat(Pointer<SdlTexture> texture, Pointer<Float> r,
 /// \sa SDL_SetTextureColorMod
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetTextureAlphaMod(SDL_Texture *texture, Uint8 alpha)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetTextureAlphaMod(SDL_Texture *texture, Uint8 alpha)
 /// ```
 bool sdlSetTextureAlphaMod(Pointer<SdlTexture> texture, int alpha) {
   final sdlSetTextureAlphaModLookupFunction = libSdl3.lookupFunction<
@@ -981,12 +981,12 @@ bool sdlSetTextureAlphaMod(Pointer<SdlTexture> texture, int alpha) {
 /// `srcA = srcA * alpha`
 ///
 /// Alpha modulation is not always supported by the renderer; it will return
-/// SDL_FALSE if alpha modulation is not supported.
+/// false if alpha modulation is not supported.
 ///
 /// \param texture the texture to update.
 /// \param alpha the source alpha value multiplied into copy operations.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -995,7 +995,7 @@ bool sdlSetTextureAlphaMod(Pointer<SdlTexture> texture, int alpha) {
 /// \sa SDL_SetTextureColorModFloat
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetTextureAlphaModFloat(SDL_Texture *texture, float alpha)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetTextureAlphaModFloat(SDL_Texture *texture, float alpha)
 /// ```
 bool sdlSetTextureAlphaModFloat(Pointer<SdlTexture> texture, double alpha) {
   final sdlSetTextureAlphaModFloatLookupFunction = libSdl3.lookupFunction<
@@ -1010,8 +1010,8 @@ bool sdlSetTextureAlphaModFloat(Pointer<SdlTexture> texture, double alpha) {
 ///
 /// \param texture the texture to query.
 /// \param alpha a pointer filled in with the current alpha value.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -1020,7 +1020,7 @@ bool sdlSetTextureAlphaModFloat(Pointer<SdlTexture> texture, double alpha) {
 /// \sa SDL_SetTextureAlphaMod
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetTextureAlphaMod(SDL_Texture *texture, Uint8 *alpha)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GetTextureAlphaMod(SDL_Texture *texture, Uint8 *alpha)
 /// ```
 bool sdlGetTextureAlphaMod(Pointer<SdlTexture> texture, Pointer<Uint8> alpha) {
   final sdlGetTextureAlphaModLookupFunction = libSdl3.lookupFunction<
@@ -1035,8 +1035,8 @@ bool sdlGetTextureAlphaMod(Pointer<SdlTexture> texture, Pointer<Uint8> alpha) {
 ///
 /// \param texture the texture to query.
 /// \param alpha a pointer filled in with the current alpha value.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -1045,7 +1045,7 @@ bool sdlGetTextureAlphaMod(Pointer<SdlTexture> texture, Pointer<Uint8> alpha) {
 /// \sa SDL_SetTextureAlphaModFloat
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetTextureAlphaModFloat(SDL_Texture *texture, float *alpha)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GetTextureAlphaModFloat(SDL_Texture *texture, float *alpha)
 /// ```
 bool sdlGetTextureAlphaModFloat(
     Pointer<SdlTexture> texture, Pointer<Float> alpha) {
@@ -1060,19 +1060,19 @@ bool sdlGetTextureAlphaModFloat(
 /// Set the blend mode for a texture, used by SDL_RenderTexture().
 ///
 /// If the blend mode is not supported, the closest supported mode is chosen
-/// and this function returns -1.
+/// and this function returns false.
 ///
 /// \param texture the texture to update.
 /// \param blendMode the SDL_BlendMode to use for texture blending.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetTextureBlendMode
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetTextureBlendMode(SDL_Texture *texture, SDL_BlendMode blendMode)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetTextureBlendMode(SDL_Texture *texture, SDL_BlendMode blendMode)
 /// ```
 bool sdlSetTextureBlendMode(Pointer<SdlTexture> texture, int blendMode) {
   final sdlSetTextureBlendModeLookupFunction = libSdl3.lookupFunction<
@@ -1087,15 +1087,15 @@ bool sdlSetTextureBlendMode(Pointer<SdlTexture> texture, int blendMode) {
 ///
 /// \param texture the texture to query.
 /// \param blendMode a pointer filled in with the current SDL_BlendMode.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_SetTextureBlendMode
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetTextureBlendMode(SDL_Texture *texture, SDL_BlendMode *blendMode)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GetTextureBlendMode(SDL_Texture *texture, SDL_BlendMode *blendMode)
 /// ```
 bool sdlGetTextureBlendMode(
     Pointer<SdlTexture> texture, Pointer<Uint32> blendMode) {
@@ -1115,15 +1115,15 @@ bool sdlGetTextureBlendMode(
 ///
 /// \param texture the texture to update.
 /// \param scaleMode the SDL_ScaleMode to use for texture scaling.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetTextureScaleMode
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetTextureScaleMode(SDL_Texture *texture, SDL_ScaleMode scaleMode)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetTextureScaleMode(SDL_Texture *texture, SDL_ScaleMode scaleMode)
 /// ```
 bool sdlSetTextureScaleMode(Pointer<SdlTexture> texture, int scaleMode) {
   final sdlSetTextureScaleModeLookupFunction = libSdl3.lookupFunction<
@@ -1138,15 +1138,15 @@ bool sdlSetTextureScaleMode(Pointer<SdlTexture> texture, int scaleMode) {
 ///
 /// \param texture the texture to query.
 /// \param scaleMode a pointer filled in with the current scale mode.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_SetTextureScaleMode
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetTextureScaleMode(SDL_Texture *texture, SDL_ScaleMode *scaleMode)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GetTextureScaleMode(SDL_Texture *texture, SDL_ScaleMode *scaleMode)
 /// ```
 bool sdlGetTextureScaleMode(
     Pointer<SdlTexture> texture, Pointer<Int32> scaleMode) {
@@ -1177,8 +1177,8 @@ bool sdlGetTextureScaleMode(
 /// \param pixels the raw pixel data in the format of the texture.
 /// \param pitch the number of bytes in a row of pixel data, including padding
 /// between lines.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -1188,7 +1188,7 @@ bool sdlGetTextureScaleMode(
 /// \sa SDL_UpdateYUVTexture
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_UpdateTexture(SDL_Texture *texture, const SDL_Rect *rect, const void *pixels, int pitch)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_UpdateTexture(SDL_Texture *texture, const SDL_Rect *rect, const void *pixels, int pitch)
 /// ```
 bool sdlUpdateTexture(Pointer<SdlTexture> texture, Pointer<SdlRect> rect,
     Pointer<NativeType> pixels, int pitch) {
@@ -1220,8 +1220,8 @@ bool sdlUpdateTexture(Pointer<SdlTexture> texture, Pointer<SdlRect> rect,
 /// \param Vplane the raw pixel data for the V plane.
 /// \param Vpitch the number of bytes between rows of pixel data for the V
 /// plane.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -1229,7 +1229,7 @@ bool sdlUpdateTexture(Pointer<SdlTexture> texture, Pointer<SdlRect> rect,
 /// \sa SDL_UpdateTexture
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_UpdateYUVTexture(SDL_Texture *texture, const SDL_Rect *rect, const Uint8 *Yplane, int Ypitch, const Uint8 *Uplane, int Upitch, const Uint8 *Vplane, int Vpitch)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_UpdateYUVTexture(SDL_Texture *texture, const SDL_Rect *rect, const Uint8 *Yplane, int Ypitch, const Uint8 *Uplane, int Upitch, const Uint8 *Vplane, int Vpitch)
 /// ```
 bool sdlUpdateYuvTexture(
     Pointer<SdlTexture> texture,
@@ -1280,8 +1280,8 @@ bool sdlUpdateYuvTexture(
 /// \param UVplane the raw pixel data for the UV plane.
 /// \param UVpitch the number of bytes between rows of pixel data for the UV
 /// plane.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -1289,7 +1289,7 @@ bool sdlUpdateYuvTexture(
 /// \sa SDL_UpdateYUVTexture
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_UpdateNVTexture(SDL_Texture *texture, const SDL_Rect *rect, const Uint8 *Yplane, int Ypitch, const Uint8 *UVplane, int UVpitch)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_UpdateNVTexture(SDL_Texture *texture, const SDL_Rect *rect, const Uint8 *Yplane, int Ypitch, const Uint8 *UVplane, int UVpitch)
 /// ```
 bool sdlUpdateNvTexture(Pointer<SdlTexture> texture, Pointer<SdlRect> rect,
     Pointer<Uint8> yplane, int ypitch, Pointer<Uint8> uVplane, int uVpitch) {
@@ -1332,9 +1332,9 @@ bool sdlUpdateNvTexture(Pointer<SdlTexture> texture, Pointer<SdlRect> rect,
 /// appropriately offset by the locked area.
 /// \param pitch this is filled in with the pitch of the locked pixels; the
 /// pitch is the length of one row in bytes.
-/// \returns SDL_TRUE on success or SDL_FALSE if the texture is not valid or
-/// was not created with `SDL_TEXTUREACCESS_STREAMING`; call
-/// SDL_GetError() for more information.
+/// \returns true on success or false if the texture is not valid or was not
+/// created with `SDL_TEXTUREACCESS_STREAMING`; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -1342,7 +1342,7 @@ bool sdlUpdateNvTexture(Pointer<SdlTexture> texture, Pointer<SdlRect> rect,
 /// \sa SDL_UnlockTexture
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_LockTexture(SDL_Texture *texture, const SDL_Rect *rect, void **pixels, int *pitch)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_LockTexture(SDL_Texture *texture, const SDL_Rect *rect, void **pixels, int *pitch)
 /// ```
 bool sdlLockTexture(Pointer<SdlTexture> texture, Pointer<SdlRect> rect,
     Pointer<Pointer<NativeType>> pixels, Pointer<Int32> pitch) {
@@ -1381,8 +1381,8 @@ bool sdlLockTexture(Pointer<SdlTexture> texture, Pointer<SdlRect> rect,
 /// NULL, the entire texture will be locked.
 /// \param surface this is filled in with an SDL surface representing the
 /// locked area.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -1390,7 +1390,7 @@ bool sdlLockTexture(Pointer<SdlTexture> texture, Pointer<SdlRect> rect,
 /// \sa SDL_UnlockTexture
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_LockTextureToSurface(SDL_Texture *texture, const SDL_Rect *rect, SDL_Surface **surface)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_LockTextureToSurface(SDL_Texture *texture, const SDL_Rect *rect, SDL_Surface **surface)
 /// ```
 bool sdlLockTextureToSurface(Pointer<SdlTexture> texture, Pointer<SdlRect> rect,
     Pointer<Pointer<SdlSurface>> surface) {
@@ -1440,15 +1440,15 @@ void sdlUnlockTexture(Pointer<SdlTexture> texture) {
 /// \param texture the targeted texture, which must be created with the
 /// `SDL_TEXTUREACCESS_TARGET` flag, or NULL to render to the
 /// window instead of a texture.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetRenderTarget
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetRenderTarget(SDL_Renderer *renderer, SDL_Texture *texture)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetRenderTarget(SDL_Renderer *renderer, SDL_Texture *texture)
 /// ```
 bool sdlSetRenderTarget(
     Pointer<SdlRenderer> renderer, Pointer<SdlTexture> texture) {
@@ -1503,8 +1503,8 @@ Pointer<SdlTexture> sdlGetRenderTarget(Pointer<SdlRenderer> renderer) {
 /// \param h the height of the logical resolution.
 /// \param mode the presentation mode used.
 /// \param scale_mode the scale mode used.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -1513,7 +1513,7 @@ Pointer<SdlTexture> sdlGetRenderTarget(Pointer<SdlRenderer> renderer) {
 /// \sa SDL_GetRenderLogicalPresentationRect
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetRenderLogicalPresentation(SDL_Renderer *renderer, int w, int h, SDL_RendererLogicalPresentation mode, SDL_ScaleMode scale_mode)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetRenderLogicalPresentation(SDL_Renderer *renderer, int w, int h, SDL_RendererLogicalPresentation mode, SDL_ScaleMode scale_mode)
 /// ```
 bool sdlSetRenderLogicalPresentation(
     Pointer<SdlRenderer> renderer, int w, int h, int mode, int scaleMode) {
@@ -1538,15 +1538,15 @@ bool sdlSetRenderLogicalPresentation(
 /// \param h an int to be filled with the height.
 /// \param mode a pointer filled in with the presentation mode.
 /// \param scale_mode a pointer filled in with the scale mode.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_SetRenderLogicalPresentation
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetRenderLogicalPresentation(SDL_Renderer *renderer, int *w, int *h, SDL_RendererLogicalPresentation *mode, SDL_ScaleMode *scale_mode)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderLogicalPresentation(SDL_Renderer *renderer, int *w, int *h, SDL_RendererLogicalPresentation *mode, SDL_ScaleMode *scale_mode)
 /// ```
 bool sdlGetRenderLogicalPresentation(
     Pointer<SdlRenderer> renderer,
@@ -1579,15 +1579,15 @@ bool sdlGetRenderLogicalPresentation(
 /// \param renderer the rendering context.
 /// \param rect a pointer filled in with the final presentation rectangle, may
 /// be NULL.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_SetRenderLogicalPresentation
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetRenderLogicalPresentationRect(SDL_Renderer *renderer, SDL_FRect *rect)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderLogicalPresentationRect(SDL_Renderer *renderer, SDL_FRect *rect)
 /// ```
 bool sdlGetRenderLogicalPresentationRect(
     Pointer<SdlRenderer> renderer, Pointer<SdlFRect> rect) {
@@ -1607,8 +1607,8 @@ bool sdlGetRenderLogicalPresentationRect(
 /// \param window_y the y coordinate in window coordinates.
 /// \param x a pointer filled with the x coordinate in render coordinates.
 /// \param y a pointer filled with the y coordinate in render coordinates.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -1616,7 +1616,7 @@ bool sdlGetRenderLogicalPresentationRect(
 /// \sa SDL_SetRenderScale
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_RenderCoordinatesFromWindow(SDL_Renderer *renderer, float window_x, float window_y, float *x, float *y)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_RenderCoordinatesFromWindow(SDL_Renderer *renderer, float window_x, float window_y, float *x, float *y)
 /// ```
 bool sdlRenderCoordinatesFromWindow(Pointer<SdlRenderer> renderer,
     double windowX, double windowY, Pointer<Float> x, Pointer<Float> y) {
@@ -1644,8 +1644,8 @@ bool sdlRenderCoordinatesFromWindow(Pointer<SdlRenderer> renderer,
 /// coordinates.
 /// \param window_y a pointer filled with the y coordinate in window
 /// coordinates.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -1653,7 +1653,7 @@ bool sdlRenderCoordinatesFromWindow(Pointer<SdlRenderer> renderer,
 /// \sa SDL_SetRenderScale
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_RenderCoordinatesToWindow(SDL_Renderer *renderer, float x, float y, float *window_x, float *window_y)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_RenderCoordinatesToWindow(SDL_Renderer *renderer, float x, float y, float *window_x, float *window_y)
 /// ```
 bool sdlRenderCoordinatesToWindow(Pointer<SdlRenderer> renderer, double x,
     double y, Pointer<Float> windowX, Pointer<Float> windowY) {
@@ -1681,15 +1681,15 @@ bool sdlRenderCoordinatesToWindow(Pointer<SdlRenderer> renderer, double x,
 ///
 /// \param renderer the rendering context.
 /// \param event the event to modify.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_RenderCoordinatesFromWindow
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_ConvertEventToRenderCoordinates(SDL_Renderer *renderer, SDL_Event *event)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_ConvertEventToRenderCoordinates(SDL_Renderer *renderer, SDL_Event *event)
 /// ```
 bool sdlConvertEventToRenderCoordinates(
     Pointer<SdlRenderer> renderer, Pointer<SdlEvent> event) {
@@ -1708,8 +1708,8 @@ bool sdlConvertEventToRenderCoordinates(
 /// \param renderer the rendering context.
 /// \param rect the SDL_Rect structure representing the drawing area, or NULL
 /// to set the viewport to the entire target.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -1717,7 +1717,7 @@ bool sdlConvertEventToRenderCoordinates(
 /// \sa SDL_RenderViewportSet
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetRenderViewport(SDL_Renderer *renderer, const SDL_Rect *rect)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetRenderViewport(SDL_Renderer *renderer, const SDL_Rect *rect)
 /// ```
 bool sdlSetRenderViewport(
     Pointer<SdlRenderer> renderer, Pointer<SdlRect> rect) {
@@ -1733,8 +1733,8 @@ bool sdlSetRenderViewport(
 ///
 /// \param renderer the rendering context.
 /// \param rect an SDL_Rect structure filled in with the current drawing area.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -1742,7 +1742,7 @@ bool sdlSetRenderViewport(
 /// \sa SDL_SetRenderViewport
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetRenderViewport(SDL_Renderer *renderer, SDL_Rect *rect)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderViewport(SDL_Renderer *renderer, SDL_Rect *rect)
 /// ```
 bool sdlGetRenderViewport(
     Pointer<SdlRenderer> renderer, Pointer<SdlRect> rect) {
@@ -1761,8 +1761,8 @@ bool sdlGetRenderViewport(
 /// viewport is always reset when changing rendering targets.
 ///
 /// \param renderer the rendering context.
-/// \returns SDL_TRUE if the viewport was set to a specific rectangle, or
-/// SDL_FALSE if it was set to NULL (the entire target).
+/// \returns true if the viewport was set to a specific rectangle, or false if
+/// it was set to NULL (the entire target).
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -1770,7 +1770,7 @@ bool sdlGetRenderViewport(
 /// \sa SDL_SetRenderViewport
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_RenderViewportSet(SDL_Renderer *renderer)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_RenderViewportSet(SDL_Renderer *renderer)
 /// ```
 bool sdlRenderViewportSet(Pointer<SdlRenderer> renderer) {
   final sdlRenderViewportSetLookupFunction = libSdl3.lookupFunction<
@@ -1792,13 +1792,13 @@ bool sdlRenderViewportSet(Pointer<SdlRenderer> renderer) {
 /// \param renderer the rendering context.
 /// \param rect a pointer filled in with the area that is safe for interactive
 /// content.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetRenderSafeArea(SDL_Renderer *renderer, SDL_Rect *rect)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderSafeArea(SDL_Renderer *renderer, SDL_Rect *rect)
 /// ```
 bool sdlGetRenderSafeArea(
     Pointer<SdlRenderer> renderer, Pointer<SdlRect> rect) {
@@ -1815,8 +1815,8 @@ bool sdlGetRenderSafeArea(
 /// \param renderer the rendering context.
 /// \param rect an SDL_Rect structure representing the clip area, relative to
 /// the viewport, or NULL to disable clipping.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -1824,7 +1824,7 @@ bool sdlGetRenderSafeArea(
 /// \sa SDL_RenderClipEnabled
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetRenderClipRect(SDL_Renderer *renderer, const SDL_Rect *rect)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetRenderClipRect(SDL_Renderer *renderer, const SDL_Rect *rect)
 /// ```
 bool sdlSetRenderClipRect(
     Pointer<SdlRenderer> renderer, Pointer<SdlRect> rect) {
@@ -1841,8 +1841,8 @@ bool sdlSetRenderClipRect(
 /// \param renderer the rendering context.
 /// \param rect an SDL_Rect structure filled in with the current clipping area
 /// or an empty rectangle if clipping is disabled.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -1850,7 +1850,7 @@ bool sdlSetRenderClipRect(
 /// \sa SDL_SetRenderClipRect
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetRenderClipRect(SDL_Renderer *renderer, SDL_Rect *rect)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderClipRect(SDL_Renderer *renderer, SDL_Rect *rect)
 /// ```
 bool sdlGetRenderClipRect(
     Pointer<SdlRenderer> renderer, Pointer<SdlRect> rect) {
@@ -1865,8 +1865,8 @@ bool sdlGetRenderClipRect(
 /// Get whether clipping is enabled on the given renderer.
 ///
 /// \param renderer the rendering context.
-/// \returns SDL_TRUE if clipping is enabled or SDL_FALSE if not; call
-/// SDL_GetError() for more information.
+/// \returns true if clipping is enabled or false if not; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -1874,7 +1874,7 @@ bool sdlGetRenderClipRect(
 /// \sa SDL_SetRenderClipRect
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_RenderClipEnabled(SDL_Renderer *renderer)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_RenderClipEnabled(SDL_Renderer *renderer)
 /// ```
 bool sdlRenderClipEnabled(Pointer<SdlRenderer> renderer) {
   final sdlRenderClipEnabledLookupFunction = libSdl3.lookupFunction<
@@ -1897,15 +1897,15 @@ bool sdlRenderClipEnabled(Pointer<SdlRenderer> renderer) {
 /// \param renderer the rendering context.
 /// \param scaleX the horizontal scaling factor.
 /// \param scaleY the vertical scaling factor.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetRenderScale
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetRenderScale(SDL_Renderer *renderer, float scaleX, float scaleY)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetRenderScale(SDL_Renderer *renderer, float scaleX, float scaleY)
 /// ```
 bool sdlSetRenderScale(
     Pointer<SdlRenderer> renderer, double scaleX, double scaleY) {
@@ -1922,15 +1922,15 @@ bool sdlSetRenderScale(
 /// \param renderer the rendering context.
 /// \param scaleX a pointer filled in with the horizontal scaling factor.
 /// \param scaleY a pointer filled in with the vertical scaling factor.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_SetRenderScale
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetRenderScale(SDL_Renderer *renderer, float *scaleX, float *scaleY)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderScale(SDL_Renderer *renderer, float *scaleX, float *scaleY)
 /// ```
 bool sdlGetRenderScale(Pointer<SdlRenderer> renderer, Pointer<Float> scaleX,
     Pointer<Float> scaleY) {
@@ -1955,8 +1955,8 @@ bool sdlGetRenderScale(Pointer<SdlRenderer> renderer, Pointer<Float> scaleX,
 /// \param a the alpha value used to draw on the rendering target; usually
 /// `SDL_ALPHA_OPAQUE` (255). Use SDL_SetRenderDrawBlendMode to
 /// specify how the alpha channel is used.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -1964,7 +1964,7 @@ bool sdlGetRenderScale(Pointer<SdlRenderer> renderer, Pointer<Float> scaleX,
 /// \sa SDL_SetRenderDrawColorFloat
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetRenderDrawColor(SDL_Renderer *renderer, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetRenderDrawColor(SDL_Renderer *renderer, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 /// ```
 bool sdlSetRenderDrawColor(
     Pointer<SdlRenderer> renderer, int r, int g, int b, int a) {
@@ -1989,8 +1989,8 @@ bool sdlSetRenderDrawColor(
 /// \param a the alpha value used to draw on the rendering target. Use
 /// SDL_SetRenderDrawBlendMode to specify how the alpha channel is
 /// used.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -1998,7 +1998,7 @@ bool sdlSetRenderDrawColor(
 /// \sa SDL_SetRenderDrawColor
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetRenderDrawColorFloat(SDL_Renderer *renderer, float r, float g, float b, float a)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetRenderDrawColorFloat(SDL_Renderer *renderer, float r, float g, float b, float a)
 /// ```
 bool sdlSetRenderDrawColorFloat(
     Pointer<SdlRenderer> renderer, double r, double g, double b, double a) {
@@ -2022,8 +2022,8 @@ bool sdlSetRenderDrawColorFloat(
 /// rendering target.
 /// \param a a pointer filled in with the alpha value used to draw on the
 /// rendering target; usually `SDL_ALPHA_OPAQUE` (255).
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -2031,7 +2031,7 @@ bool sdlSetRenderDrawColorFloat(
 /// \sa SDL_SetRenderDrawColor
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetRenderDrawColor(SDL_Renderer *renderer, Uint8 *r, Uint8 *g, Uint8 *b, Uint8 *a)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderDrawColor(SDL_Renderer *renderer, Uint8 *r, Uint8 *g, Uint8 *b, Uint8 *a)
 /// ```
 bool sdlGetRenderDrawColor(Pointer<SdlRenderer> renderer, Pointer<Uint8> r,
     Pointer<Uint8> g, Pointer<Uint8> b, Pointer<Uint8> a) {
@@ -2059,8 +2059,8 @@ bool sdlGetRenderDrawColor(Pointer<SdlRenderer> renderer, Pointer<Uint8> r,
 /// rendering target.
 /// \param a a pointer filled in with the alpha value used to draw on the
 /// rendering target.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -2068,7 +2068,7 @@ bool sdlGetRenderDrawColor(Pointer<SdlRenderer> renderer, Pointer<Uint8> r,
 /// \sa SDL_GetRenderDrawColor
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetRenderDrawColorFloat(SDL_Renderer *renderer, float *r, float *g, float *b, float *a)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderDrawColorFloat(SDL_Renderer *renderer, float *r, float *g, float *b, float *a)
 /// ```
 bool sdlGetRenderDrawColorFloat(Pointer<SdlRenderer> renderer, Pointer<Float> r,
     Pointer<Float> g, Pointer<Float> b, Pointer<Float> a) {
@@ -2097,15 +2097,15 @@ bool sdlGetRenderDrawColorFloat(Pointer<SdlRenderer> renderer, Pointer<Float> r,
 ///
 /// \param renderer the rendering context.
 /// \param scale the color scale value.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetRenderColorScale
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetRenderColorScale(SDL_Renderer *renderer, float scale)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetRenderColorScale(SDL_Renderer *renderer, float scale)
 /// ```
 bool sdlSetRenderColorScale(Pointer<SdlRenderer> renderer, double scale) {
   final sdlSetRenderColorScaleLookupFunction = libSdl3.lookupFunction<
@@ -2120,15 +2120,15 @@ bool sdlSetRenderColorScale(Pointer<SdlRenderer> renderer, double scale) {
 ///
 /// \param renderer the rendering context.
 /// \param scale a pointer filled in with the current color scale value.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_SetRenderColorScale
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetRenderColorScale(SDL_Renderer *renderer, float *scale)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderColorScale(SDL_Renderer *renderer, float *scale)
 /// ```
 bool sdlGetRenderColorScale(
     Pointer<SdlRenderer> renderer, Pointer<Float> scale) {
@@ -2146,15 +2146,15 @@ bool sdlGetRenderColorScale(
 ///
 /// \param renderer the rendering context.
 /// \param blendMode the SDL_BlendMode to use for blending.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetRenderDrawBlendMode
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetRenderDrawBlendMode(SDL_Renderer *renderer, SDL_BlendMode blendMode)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetRenderDrawBlendMode(SDL_Renderer *renderer, SDL_BlendMode blendMode)
 /// ```
 bool sdlSetRenderDrawBlendMode(Pointer<SdlRenderer> renderer, int blendMode) {
   final sdlSetRenderDrawBlendModeLookupFunction = libSdl3.lookupFunction<
@@ -2169,15 +2169,15 @@ bool sdlSetRenderDrawBlendMode(Pointer<SdlRenderer> renderer, int blendMode) {
 ///
 /// \param renderer the rendering context.
 /// \param blendMode a pointer filled in with the current SDL_BlendMode.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_SetRenderDrawBlendMode
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetRenderDrawBlendMode(SDL_Renderer *renderer, SDL_BlendMode *blendMode)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderDrawBlendMode(SDL_Renderer *renderer, SDL_BlendMode *blendMode)
 /// ```
 bool sdlGetRenderDrawBlendMode(
     Pointer<SdlRenderer> renderer, Pointer<Uint32> blendMode) {
@@ -2197,15 +2197,15 @@ bool sdlGetRenderDrawBlendMode(
 /// SDL_SetRenderDrawColor() when needed.
 ///
 /// \param renderer the rendering context.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_SetRenderDrawColor
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_RenderClear(SDL_Renderer *renderer)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_RenderClear(SDL_Renderer *renderer)
 /// ```
 bool sdlRenderClear(Pointer<SdlRenderer> renderer) {
   final sdlRenderClearLookupFunction = libSdl3.lookupFunction<
@@ -2220,15 +2220,15 @@ bool sdlRenderClear(Pointer<SdlRenderer> renderer) {
 /// \param renderer the renderer which should draw a point.
 /// \param x the x coordinate of the point.
 /// \param y the y coordinate of the point.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_RenderPoints
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_RenderPoint(SDL_Renderer *renderer, float x, float y)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_RenderPoint(SDL_Renderer *renderer, float x, float y)
 /// ```
 bool sdlRenderPoint(Pointer<SdlRenderer> renderer, double x, double y) {
   final sdlRenderPointLookupFunction = libSdl3.lookupFunction<
@@ -2244,15 +2244,15 @@ bool sdlRenderPoint(Pointer<SdlRenderer> renderer, double x, double y) {
 /// \param renderer the renderer which should draw multiple points.
 /// \param points the points to draw.
 /// \param count the number of points to draw.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_RenderPoint
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_RenderPoints(SDL_Renderer *renderer, const SDL_FPoint *points, int count)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_RenderPoints(SDL_Renderer *renderer, const SDL_FPoint *points, int count)
 /// ```
 bool sdlRenderPoints(
     Pointer<SdlRenderer> renderer, Pointer<SdlFPoint> points, int count) {
@@ -2272,15 +2272,15 @@ bool sdlRenderPoints(
 /// \param y1 the y coordinate of the start point.
 /// \param x2 the x coordinate of the end point.
 /// \param y2 the y coordinate of the end point.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_RenderLines
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_RenderLine(SDL_Renderer *renderer, float x1, float y1, float x2, float y2)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_RenderLine(SDL_Renderer *renderer, float x1, float y1, float x2, float y2)
 /// ```
 bool sdlRenderLine(
     Pointer<SdlRenderer> renderer, double x1, double y1, double x2, double y2) {
@@ -2299,15 +2299,15 @@ bool sdlRenderLine(
 /// \param renderer the renderer which should draw multiple lines.
 /// \param points the points along the lines.
 /// \param count the number of points, drawing count-1 lines.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_RenderLine
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_RenderLines(SDL_Renderer *renderer, const SDL_FPoint *points, int count)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_RenderLines(SDL_Renderer *renderer, const SDL_FPoint *points, int count)
 /// ```
 bool sdlRenderLines(
     Pointer<SdlRenderer> renderer, Pointer<SdlFPoint> points, int count) {
@@ -2325,15 +2325,15 @@ bool sdlRenderLines(
 /// \param renderer the renderer which should draw a rectangle.
 /// \param rect a pointer to the destination rectangle, or NULL to outline the
 /// entire rendering target.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_RenderRects
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_RenderRect(SDL_Renderer *renderer, const SDL_FRect *rect)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_RenderRect(SDL_Renderer *renderer, const SDL_FRect *rect)
 /// ```
 bool sdlRenderRect(Pointer<SdlRenderer> renderer, Pointer<SdlFRect> rect) {
   final sdlRenderRectLookupFunction = libSdl3.lookupFunction<
@@ -2350,15 +2350,15 @@ bool sdlRenderRect(Pointer<SdlRenderer> renderer, Pointer<SdlFRect> rect) {
 /// \param renderer the renderer which should draw multiple rectangles.
 /// \param rects a pointer to an array of destination rectangles.
 /// \param count the number of rectangles.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_RenderRect
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_RenderRects(SDL_Renderer *renderer, const SDL_FRect *rects, int count)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_RenderRects(SDL_Renderer *renderer, const SDL_FRect *rects, int count)
 /// ```
 bool sdlRenderRects(
     Pointer<SdlRenderer> renderer, Pointer<SdlFRect> rects, int count) {
@@ -2377,15 +2377,15 @@ bool sdlRenderRects(
 /// \param renderer the renderer which should fill a rectangle.
 /// \param rect a pointer to the destination rectangle, or NULL for the entire
 /// rendering target.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_RenderFillRects
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_RenderFillRect(SDL_Renderer *renderer, const SDL_FRect *rect)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_RenderFillRect(SDL_Renderer *renderer, const SDL_FRect *rect)
 /// ```
 bool sdlRenderFillRect(Pointer<SdlRenderer> renderer, Pointer<SdlFRect> rect) {
   final sdlRenderFillRectLookupFunction = libSdl3.lookupFunction<
@@ -2402,15 +2402,15 @@ bool sdlRenderFillRect(Pointer<SdlRenderer> renderer, Pointer<SdlFRect> rect) {
 /// \param renderer the renderer which should fill multiple rectangles.
 /// \param rects a pointer to an array of destination rectangles.
 /// \param count the number of rectangles.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_RenderFillRect
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_RenderFillRects(SDL_Renderer *renderer, const SDL_FRect *rects, int count)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_RenderFillRects(SDL_Renderer *renderer, const SDL_FRect *rects, int count)
 /// ```
 bool sdlRenderFillRects(
     Pointer<SdlRenderer> renderer, Pointer<SdlFRect> rects, int count) {
@@ -2432,8 +2432,8 @@ bool sdlRenderFillRects(
 /// texture.
 /// \param dstrect a pointer to the destination rectangle, or NULL for the
 /// entire rendering target.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -2441,7 +2441,7 @@ bool sdlRenderFillRects(
 /// \sa SDL_RenderTextureTiled
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_RenderTexture(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_FRect *srcrect, const SDL_FRect *dstrect)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_RenderTexture(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_FRect *srcrect, const SDL_FRect *dstrect)
 /// ```
 bool sdlRenderTexture(
     Pointer<SdlRenderer> renderer,
@@ -2477,15 +2477,15 @@ bool sdlRenderTexture(
 /// around dstrect.w/2, dstrect.h/2).
 /// \param flip an SDL_FlipMode value stating which flipping actions should be
 /// performed on the texture.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_RenderTexture
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_RenderTextureRotated(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_FRect *srcrect, const SDL_FRect *dstrect, const double angle, const SDL_FPoint *center, const SDL_FlipMode flip)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_RenderTextureRotated(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_FRect *srcrect, const SDL_FRect *dstrect, const double angle, const SDL_FPoint *center, const SDL_FlipMode flip)
 /// ```
 bool sdlRenderTextureRotated(
     Pointer<SdlRenderer> renderer,
@@ -2533,15 +2533,15 @@ bool sdlRenderTextureRotated(
 /// 64x64 tiles.
 /// \param dstrect a pointer to the destination rectangle, or NULL for the
 /// entire rendering target.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_RenderTexture
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_RenderTextureTiled(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_FRect *srcrect, float scale, const SDL_FRect *dstrect)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_RenderTextureTiled(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_FRect *srcrect, float scale, const SDL_FRect *dstrect)
 /// ```
 bool sdlRenderTextureTiled(
     Pointer<SdlRenderer> renderer,
@@ -2586,15 +2586,15 @@ bool sdlRenderTextureTiled(
 /// corner of `dstrect`, or 0.0f for an unscaled copy.
 /// \param dstrect a pointer to the destination rectangle, or NULL for the
 /// entire rendering target.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_RenderTexture
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_RenderTexture9Grid(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_FRect *srcrect, float left_width, float right_width, float top_height, float bottom_height, float scale, const SDL_FRect *dstrect)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_RenderTexture9Grid(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_FRect *srcrect, float left_width, float right_width, float top_height, float bottom_height, float scale, const SDL_FRect *dstrect)
 /// ```
 bool sdlRenderTexture9Grid(
     Pointer<SdlRenderer> renderer,
@@ -2645,15 +2645,15 @@ bool sdlRenderTexture9Grid(
 /// array, if NULL all vertices will be rendered in sequential
 /// order.
 /// \param num_indices number of indices.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_RenderGeometryRaw
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_RenderGeometry(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_Vertex *vertices, int num_vertices, const int *indices, int num_indices)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_RenderGeometry(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_Vertex *vertices, int num_vertices, const int *indices, int num_indices)
 /// ```
 bool sdlRenderGeometry(
     Pointer<SdlRenderer> renderer,
@@ -2700,15 +2700,15 @@ bool sdlRenderGeometry(
 /// if NULL all vertices will be rendered in sequential order.
 /// \param num_indices number of indices.
 /// \param size_indices index size: 1 (byte), 2 (short), 4 (int).
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_RenderGeometry
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_RenderGeometryRaw(SDL_Renderer *renderer, SDL_Texture *texture, const float *xy, int xy_stride, const SDL_FColor *color, int color_stride, const float *uv, int uv_stride, int num_vertices, const void *indices, int num_indices, int size_indices)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_RenderGeometryRaw(SDL_Renderer *renderer, SDL_Texture *texture, const float *xy, int xy_stride, const SDL_FColor *color, int color_stride, const float *uv, int uv_stride, int num_vertices, const void *indices, int num_indices, int size_indices)
 /// ```
 bool sdlRenderGeometryRaw(
     Pointer<SdlRenderer> renderer,
@@ -2822,8 +2822,8 @@ Pointer<SdlSurface> sdlRenderReadPixels(
 /// do not have a concept of backbuffers.
 ///
 /// \param renderer the rendering context.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \threadsafety You may only call this function on the main thread.
 ///
@@ -2843,7 +2843,7 @@ Pointer<SdlSurface> sdlRenderReadPixels(
 /// \sa SDL_SetRenderDrawColor
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_RenderPresent(SDL_Renderer *renderer)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_RenderPresent(SDL_Renderer *renderer)
 /// ```
 bool sdlRenderPresent(Pointer<SdlRenderer> renderer) {
   final sdlRenderPresentLookupFunction = libSdl3.lookupFunction<
@@ -2921,13 +2921,13 @@ void sdlDestroyRenderer(Pointer<SdlRenderer> renderer) {
 /// be prepared to make changes if specific state needs to be protected.
 ///
 /// \param renderer the rendering context.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_FlushRenderer(SDL_Renderer *renderer)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_FlushRenderer(SDL_Renderer *renderer)
 /// ```
 bool sdlFlushRenderer(Pointer<SdlRenderer> renderer) {
   final sdlFlushRendererLookupFunction = libSdl3.lookupFunction<
@@ -3012,8 +3012,8 @@ Pointer<NativeType> sdlGetRenderMetalCommandEncoder(
 /// \param signal_semaphore a VkSempahore that SDL will signal when rendering
 /// for the current frame is complete, or 0 if not
 /// needed.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \threadsafety It is **NOT** safe to call this function from two threads at
 /// once.
@@ -3021,7 +3021,7 @@ Pointer<NativeType> sdlGetRenderMetalCommandEncoder(
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_AddVulkanRenderSemaphores(SDL_Renderer *renderer, Uint32 wait_stage_mask, Sint64 wait_semaphore, Sint64 signal_semaphore)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_AddVulkanRenderSemaphores(SDL_Renderer *renderer, Uint32 wait_stage_mask, Sint64 wait_semaphore, Sint64 signal_semaphore)
 /// ```
 bool sdlAddVulkanRenderSemaphores(Pointer<SdlRenderer> renderer,
     int waitStageMask, int waitSemaphore, int signalSemaphore) {
@@ -3052,15 +3052,15 @@ bool sdlAddVulkanRenderSemaphores(Pointer<SdlRenderer> renderer,
 ///
 /// \param renderer the renderer to toggle.
 /// \param vsync the vertical refresh sync interval.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetRenderVSync
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetRenderVSync(SDL_Renderer *renderer, int vsync)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetRenderVSync(SDL_Renderer *renderer, int vsync)
 /// ```
 bool sdlSetRenderVSync(Pointer<SdlRenderer> renderer, int vsync) {
   final sdlSetRenderVSyncLookupFunction = libSdl3.lookupFunction<
@@ -3076,15 +3076,15 @@ bool sdlSetRenderVSync(Pointer<SdlRenderer> renderer, int vsync) {
 /// \param renderer the renderer to toggle.
 /// \param vsync an int filled with the current vertical refresh sync interval.
 /// See SDL_SetRenderVSync() for the meaning of the value.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_SetRenderVSync
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetRenderVSync(SDL_Renderer *renderer, int *vsync)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderVSync(SDL_Renderer *renderer, int *vsync)
 /// ```
 bool sdlGetRenderVSync(Pointer<SdlRenderer> renderer, Pointer<Int32> vsync) {
   final sdlGetRenderVSyncLookupFunction = libSdl3.lookupFunction<

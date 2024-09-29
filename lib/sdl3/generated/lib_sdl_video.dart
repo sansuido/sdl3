@@ -206,8 +206,8 @@ String? sdlGetDisplayName(int displayId) {
 ///
 /// \param displayID the instance ID of the display to query.
 /// \param rect the SDL_Rect structure filled in with the display bounds.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -215,7 +215,7 @@ String? sdlGetDisplayName(int displayId) {
 /// \sa SDL_GetDisplays
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetDisplayBounds(SDL_DisplayID displayID, SDL_Rect *rect)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GetDisplayBounds(SDL_DisplayID displayID, SDL_Rect *rect)
 /// ```
 bool sdlGetDisplayBounds(int displayId, Pointer<SdlRect> rect) {
   final sdlGetDisplayBoundsLookupFunction = libSdl3.lookupFunction<
@@ -239,8 +239,8 @@ bool sdlGetDisplayBounds(int displayId, Pointer<SdlRect> rect) {
 ///
 /// \param displayID the instance ID of the display to query.
 /// \param rect the SDL_Rect structure filled in with the display bounds.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -248,7 +248,7 @@ bool sdlGetDisplayBounds(int displayId, Pointer<SdlRect> rect) {
 /// \sa SDL_GetDisplays
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetDisplayUsableBounds(SDL_DisplayID displayID, SDL_Rect *rect)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GetDisplayUsableBounds(SDL_DisplayID displayID, SDL_Rect *rect)
 /// ```
 bool sdlGetDisplayUsableBounds(int displayId, Pointer<SdlRect> rect) {
   final sdlGetDisplayUsableBoundsLookupFunction = libSdl3.lookupFunction<
@@ -382,8 +382,8 @@ Pointer<Pointer<SdlDisplayMode>> sdlGetFullscreenDisplayModes(
 /// the search.
 /// \param mode a pointer filled in with the closest display mode equal to or
 /// larger than the desired mode.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -391,7 +391,7 @@ Pointer<Pointer<SdlDisplayMode>> sdlGetFullscreenDisplayModes(
 /// \sa SDL_GetFullscreenDisplayModes
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetClosestFullscreenDisplayMode(SDL_DisplayID displayID, int w, int h, float refresh_rate, SDL_bool include_high_density_modes, SDL_DisplayMode *mode)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GetClosestFullscreenDisplayMode(SDL_DisplayID displayID, int w, int h, float refresh_rate, bool include_high_density_modes, SDL_DisplayMode *mode)
 /// ```
 bool sdlGetClosestFullscreenDisplayMode(
     int displayId,
@@ -610,16 +610,16 @@ double sdlGetWindowDisplayScale(Pointer<SdlWindow> window) {
 /// taken effect.
 ///
 /// When the new mode takes effect, an SDL_EVENT_WINDOW_RESIZED and/or an
-/// SDL_EVENT_WINDOOW_PIXEL_SIZE_CHANGED event will be emitted with the new
-/// mode dimensions.
+/// SDL_EVENT_WINDOW_PIXEL_SIZE_CHANGED event will be emitted with the new mode
+/// dimensions.
 ///
 /// \param window the window to affect.
 /// \param mode a pointer to the display mode to use, which can be NULL for
 /// borderless fullscreen desktop mode, or one of the fullscreen
 /// modes returned by SDL_GetFullscreenDisplayModes() to set an
 /// exclusive fullscreen mode.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -628,7 +628,7 @@ double sdlGetWindowDisplayScale(Pointer<SdlWindow> window) {
 /// \sa SDL_SyncWindow
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetWindowFullscreenMode(SDL_Window *window, const SDL_DisplayMode *mode)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowFullscreenMode(SDL_Window *window, const SDL_DisplayMode *mode)
 /// ```
 bool sdlSetWindowFullscreenMode(
     Pointer<SdlWindow> window, Pointer<SdlDisplayMode> mode) {
@@ -1240,15 +1240,15 @@ int sdlGetWindowFlags(Pointer<SdlWindow> window) {
 ///
 /// \param window the window to change.
 /// \param title the desired window title in UTF-8 format.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetWindowTitle
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetWindowTitle(SDL_Window *window, const char *title)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowTitle(SDL_Window *window, const char *title)
 /// ```
 bool sdlSetWindowTitle(Pointer<SdlWindow> window, String? title) {
   final sdlSetWindowTitleLookupFunction = libSdl3.lookupFunction<
@@ -1301,13 +1301,13 @@ String? sdlGetWindowTitle(Pointer<SdlWindow> window) {
 ///
 /// \param window the window to change.
 /// \param icon an SDL_Surface structure containing the icon for the window.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetWindowIcon(SDL_Window *window, SDL_Surface *icon)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowIcon(SDL_Window *window, SDL_Surface *icon)
 /// ```
 bool sdlSetWindowIcon(Pointer<SdlWindow> window, Pointer<SdlSurface> icon) {
   final sdlSetWindowIconLookupFunction = libSdl3.lookupFunction<
@@ -1347,8 +1347,8 @@ bool sdlSetWindowIcon(Pointer<SdlWindow> window, Pointer<SdlSurface> icon) {
 /// `SDL_WINDOWPOS_UNDEFINED`.
 /// \param y the y coordinate of the window, or `SDL_WINDOWPOS_CENTERED` or
 /// `SDL_WINDOWPOS_UNDEFINED`.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -1356,7 +1356,7 @@ bool sdlSetWindowIcon(Pointer<SdlWindow> window, Pointer<SdlSurface> icon) {
 /// \sa SDL_SyncWindow
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetWindowPosition(SDL_Window *window, int x, int y)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowPosition(SDL_Window *window, int x, int y)
 /// ```
 bool sdlSetWindowPosition(Pointer<SdlWindow> window, int x, int y) {
   final sdlSetWindowPositionLookupFunction = libSdl3.lookupFunction<
@@ -1380,15 +1380,15 @@ bool sdlSetWindowPosition(Pointer<SdlWindow> window, int x, int y) {
 /// NULL.
 /// \param y a pointer filled in with the y position of the window, may be
 /// NULL.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_SetWindowPosition
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetWindowPosition(SDL_Window *window, int *x, int *y)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowPosition(SDL_Window *window, int *x, int *y)
 /// ```
 bool sdlGetWindowPosition(
     Pointer<SdlWindow> window, Pointer<Int32> x, Pointer<Int32> y) {
@@ -1425,8 +1425,8 @@ bool sdlGetWindowPosition(
 /// \param window the window to change.
 /// \param w the width of the window, must be > 0.
 /// \param h the height of the window, must be > 0.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -1435,7 +1435,7 @@ bool sdlGetWindowPosition(
 /// \sa SDL_SyncWindow
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetWindowSize(SDL_Window *window, int w, int h)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowSize(SDL_Window *window, int w, int h)
 /// ```
 bool sdlSetWindowSize(Pointer<SdlWindow> window, int w, int h) {
   final sdlSetWindowSizeLookupFunction = libSdl3.lookupFunction<
@@ -1455,8 +1455,8 @@ bool sdlSetWindowSize(Pointer<SdlWindow> window, int w, int h) {
 /// \param window the window to query the width and height from.
 /// \param w a pointer filled in with the width of the window, may be NULL.
 /// \param h a pointer filled in with the height of the window, may be NULL.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -1465,7 +1465,7 @@ bool sdlSetWindowSize(Pointer<SdlWindow> window, int w, int h) {
 /// \sa SDL_SetWindowSize
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetWindowSize(SDL_Window *window, int *w, int *h)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowSize(SDL_Window *window, int *w, int *h)
 /// ```
 bool sdlGetWindowSize(
     Pointer<SdlWindow> window, Pointer<Int32> w, Pointer<Int32> h) {
@@ -1490,13 +1490,13 @@ bool sdlGetWindowSize(
 /// \param window the window to query.
 /// \param rect a pointer filled in with the client area that is safe for
 /// interactive content.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetWindowSafeArea(SDL_Window *window, SDL_Rect *rect)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowSafeArea(SDL_Window *window, SDL_Rect *rect)
 /// ```
 bool sdlGetWindowSafeArea(Pointer<SdlWindow> window, Pointer<SdlRect> rect) {
   final sdlGetWindowSafeAreaLookupFunction = libSdl3.lookupFunction<
@@ -1535,8 +1535,8 @@ bool sdlGetWindowSafeArea(Pointer<SdlWindow> window, Pointer<SdlRect> rect) {
 /// limit.
 /// \param max_aspect the maximum aspect ratio of the window, or 0.0f for no
 /// limit.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -1544,7 +1544,7 @@ bool sdlGetWindowSafeArea(Pointer<SdlWindow> window, Pointer<SdlRect> rect) {
 /// \sa SDL_SyncWindow
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetWindowAspectRatio(SDL_Window *window, float min_aspect, float max_aspect)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowAspectRatio(SDL_Window *window, float min_aspect, float max_aspect)
 /// ```
 bool sdlSetWindowAspectRatio(
     Pointer<SdlWindow> window, double minAspect, double maxAspect) {
@@ -1565,15 +1565,15 @@ bool sdlSetWindowAspectRatio(
 /// window, may be NULL.
 /// \param max_aspect a pointer filled in with the maximum aspect ratio of the
 /// window, may be NULL.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_SetWindowAspectRatio
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetWindowAspectRatio(SDL_Window *window, float *min_aspect, float *max_aspect)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowAspectRatio(SDL_Window *window, float *min_aspect, float *max_aspect)
 /// ```
 bool sdlGetWindowAspectRatio(Pointer<SdlWindow> window,
     Pointer<Float> minAspect, Pointer<Float> maxAspect) {
@@ -1589,7 +1589,7 @@ bool sdlGetWindowAspectRatio(Pointer<SdlWindow> window,
 ///
 /// Get the size of a window's borders (decorations) around the client area.
 ///
-/// Note: If this function fails (returns -1), the size values will be
+/// Note: If this function fails (returns false), the size values will be
 /// initialized to 0, 0, 0, 0 (if a non-NULL pointer is provided), as if the
 /// window in question was borderless.
 ///
@@ -1599,7 +1599,8 @@ bool sdlGetWindowAspectRatio(Pointer<SdlWindow> window,
 /// window has been presented and composited, so that the window system has a
 /// chance to decorate the window and provide the border dimensions to SDL.
 ///
-/// This function also returns -1 if getting the information is not supported.
+/// This function also returns false if getting the information is not
+/// supported.
 ///
 /// \param window the window to query the size values of the border
 /// (decorations) from.
@@ -1611,15 +1612,15 @@ bool sdlGetWindowAspectRatio(Pointer<SdlWindow> window,
 /// border; NULL is permitted.
 /// \param right pointer to variable for storing the size of the right border;
 /// NULL is permitted.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetWindowSize
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetWindowBordersSize(SDL_Window *window, int *top, int *left, int *bottom, int *right)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowBordersSize(SDL_Window *window, int *top, int *left, int *bottom, int *right)
 /// ```
 bool sdlGetWindowBordersSize(Pointer<SdlWindow> window, Pointer<Int32> top,
     Pointer<Int32> left, Pointer<Int32> bottom, Pointer<Int32> right) {
@@ -1645,8 +1646,8 @@ bool sdlGetWindowBordersSize(Pointer<SdlWindow> window, Pointer<Int32> top,
 /// NULL.
 /// \param h a pointer to variable for storing the height in pixels, may be
 /// NULL.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -1654,7 +1655,7 @@ bool sdlGetWindowBordersSize(Pointer<SdlWindow> window, Pointer<Int32> top,
 /// \sa SDL_GetWindowSize
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetWindowSizeInPixels(SDL_Window *window, int *w, int *h)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowSizeInPixels(SDL_Window *window, int *w, int *h)
 /// ```
 bool sdlGetWindowSizeInPixels(
     Pointer<SdlWindow> window, Pointer<Int32> w, Pointer<Int32> h) {
@@ -1672,8 +1673,8 @@ bool sdlGetWindowSizeInPixels(
 /// \param window the window to change.
 /// \param min_w the minimum width of the window, or 0 for no limit.
 /// \param min_h the minimum height of the window, or 0 for no limit.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -1681,7 +1682,7 @@ bool sdlGetWindowSizeInPixels(
 /// \sa SDL_SetWindowMaximumSize
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetWindowMinimumSize(SDL_Window *window, int min_w, int min_h)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowMinimumSize(SDL_Window *window, int min_w, int min_h)
 /// ```
 bool sdlSetWindowMinimumSize(Pointer<SdlWindow> window, int minW, int minH) {
   final sdlSetWindowMinimumSizeLookupFunction = libSdl3.lookupFunction<
@@ -1699,8 +1700,8 @@ bool sdlSetWindowMinimumSize(Pointer<SdlWindow> window, int minW, int minH) {
 /// NULL.
 /// \param h a pointer filled in with the minimum height of the window, may be
 /// NULL.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -1708,7 +1709,7 @@ bool sdlSetWindowMinimumSize(Pointer<SdlWindow> window, int minW, int minH) {
 /// \sa SDL_SetWindowMinimumSize
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetWindowMinimumSize(SDL_Window *window, int *w, int *h)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowMinimumSize(SDL_Window *window, int *w, int *h)
 /// ```
 bool sdlGetWindowMinimumSize(
     Pointer<SdlWindow> window, Pointer<Int32> w, Pointer<Int32> h) {
@@ -1726,8 +1727,8 @@ bool sdlGetWindowMinimumSize(
 /// \param window the window to change.
 /// \param max_w the maximum width of the window, or 0 for no limit.
 /// \param max_h the maximum height of the window, or 0 for no limit.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -1735,7 +1736,7 @@ bool sdlGetWindowMinimumSize(
 /// \sa SDL_SetWindowMinimumSize
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetWindowMaximumSize(SDL_Window *window, int max_w, int max_h)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowMaximumSize(SDL_Window *window, int max_w, int max_h)
 /// ```
 bool sdlSetWindowMaximumSize(Pointer<SdlWindow> window, int maxW, int maxH) {
   final sdlSetWindowMaximumSizeLookupFunction = libSdl3.lookupFunction<
@@ -1753,8 +1754,8 @@ bool sdlSetWindowMaximumSize(Pointer<SdlWindow> window, int maxW, int maxH) {
 /// NULL.
 /// \param h a pointer filled in with the maximum height of the window, may be
 /// NULL.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -1762,7 +1763,7 @@ bool sdlSetWindowMaximumSize(Pointer<SdlWindow> window, int maxW, int maxH) {
 /// \sa SDL_SetWindowMaximumSize
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetWindowMaximumSize(SDL_Window *window, int *w, int *h)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowMaximumSize(SDL_Window *window, int *w, int *h)
 /// ```
 bool sdlGetWindowMaximumSize(
     Pointer<SdlWindow> window, Pointer<Int32> w, Pointer<Int32> h) {
@@ -1784,16 +1785,16 @@ bool sdlGetWindowMaximumSize(
 /// You can't change the border state of a fullscreen window.
 ///
 /// \param window the window of which to change the border state.
-/// \param bordered SDL_FALSE to remove border, SDL_TRUE to add border.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \param bordered false to remove border, true to add border.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetWindowFlags
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetWindowBordered(SDL_Window *window, SDL_bool bordered)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowBordered(SDL_Window *window, bool bordered)
 /// ```
 bool sdlSetWindowBordered(Pointer<SdlWindow> window, bool bordered) {
   final sdlSetWindowBorderedLookupFunction = libSdl3.lookupFunction<
@@ -1813,16 +1814,16 @@ bool sdlSetWindowBordered(Pointer<SdlWindow> window, bool bordered) {
 /// You can't change the resizable state of a fullscreen window.
 ///
 /// \param window the window of which to change the resizable state.
-/// \param resizable SDL_TRUE to allow resizing, SDL_FALSE to disallow.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \param resizable true to allow resizing, false to disallow.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetWindowFlags
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetWindowResizable(SDL_Window *window, SDL_bool resizable)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowResizable(SDL_Window *window, bool resizable)
 /// ```
 bool sdlSetWindowResizable(Pointer<SdlWindow> window, bool resizable) {
   final sdlSetWindowResizableLookupFunction = libSdl3.lookupFunction<
@@ -1839,17 +1840,16 @@ bool sdlSetWindowResizable(Pointer<SdlWindow> window, bool resizable) {
 /// will bring the window to the front and keep the window above the rest.
 ///
 /// \param window the window of which to change the always on top state.
-/// \param on_top SDL_TRUE to set the window always on top, SDL_FALSE to
-/// disable.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \param on_top true to set the window always on top, false to disable.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetWindowFlags
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetWindowAlwaysOnTop(SDL_Window *window, SDL_bool on_top)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowAlwaysOnTop(SDL_Window *window, bool on_top)
 /// ```
 bool sdlSetWindowAlwaysOnTop(Pointer<SdlWindow> window, bool onTop) {
   final sdlSetWindowAlwaysOnTopLookupFunction = libSdl3.lookupFunction<
@@ -1863,8 +1863,8 @@ bool sdlSetWindowAlwaysOnTop(Pointer<SdlWindow> window, bool onTop) {
 /// Show a window.
 ///
 /// \param window the window to show.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -1872,7 +1872,7 @@ bool sdlSetWindowAlwaysOnTop(Pointer<SdlWindow> window, bool onTop) {
 /// \sa SDL_RaiseWindow
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_ShowWindow(SDL_Window *window)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_ShowWindow(SDL_Window *window)
 /// ```
 bool sdlShowWindow(Pointer<SdlWindow> window) {
   final sdlShowWindowLookupFunction = libSdl3.lookupFunction<
@@ -1885,15 +1885,15 @@ bool sdlShowWindow(Pointer<SdlWindow> window) {
 /// Hide a window.
 ///
 /// \param window the window to hide.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_ShowWindow
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_HideWindow(SDL_Window *window)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_HideWindow(SDL_Window *window)
 /// ```
 bool sdlHideWindow(Pointer<SdlWindow> window) {
   final sdlHideWindowLookupFunction = libSdl3.lookupFunction<
@@ -1913,13 +1913,13 @@ bool sdlHideWindow(Pointer<SdlWindow> window) {
 /// the window will have the SDL_WINDOW_INPUT_FOCUS flag set.
 ///
 /// \param window the window to raise.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_RaiseWindow(SDL_Window *window)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_RaiseWindow(SDL_Window *window)
 /// ```
 bool sdlRaiseWindow(Pointer<SdlWindow> window) {
   final sdlRaiseWindowLookupFunction = libSdl3.lookupFunction<
@@ -1949,8 +1949,8 @@ bool sdlRaiseWindow(Pointer<SdlWindow> window) {
 /// and Wayland window managers may vary.
 ///
 /// \param window the window to maximize.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -1959,7 +1959,7 @@ bool sdlRaiseWindow(Pointer<SdlWindow> window) {
 /// \sa SDL_SyncWindow
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_MaximizeWindow(SDL_Window *window)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_MaximizeWindow(SDL_Window *window)
 /// ```
 bool sdlMaximizeWindow(Pointer<SdlWindow> window) {
   final sdlMaximizeWindowLookupFunction = libSdl3.lookupFunction<
@@ -1981,8 +1981,8 @@ bool sdlMaximizeWindow(Pointer<SdlWindow> window) {
 /// deny the state change.
 ///
 /// \param window the window to minimize.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -1991,7 +1991,7 @@ bool sdlMaximizeWindow(Pointer<SdlWindow> window) {
 /// \sa SDL_SyncWindow
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_MinimizeWindow(SDL_Window *window)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_MinimizeWindow(SDL_Window *window)
 /// ```
 bool sdlMinimizeWindow(Pointer<SdlWindow> window) {
   final sdlMinimizeWindowLookupFunction = libSdl3.lookupFunction<
@@ -2014,8 +2014,8 @@ bool sdlMinimizeWindow(Pointer<SdlWindow> window) {
 /// deny the state change.
 ///
 /// \param window the window to restore.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -2024,7 +2024,7 @@ bool sdlMinimizeWindow(Pointer<SdlWindow> window) {
 /// \sa SDL_SyncWindow
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_RestoreWindow(SDL_Window *window)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_RestoreWindow(SDL_Window *window)
 /// ```
 bool sdlRestoreWindow(Pointer<SdlWindow> window) {
   final sdlRestoreWindowLookupFunction = libSdl3.lookupFunction<
@@ -2050,10 +2050,9 @@ bool sdlRestoreWindow(Pointer<SdlWindow> window) {
 /// is just a request, it can be denied by the windowing system.
 ///
 /// \param window the window to change.
-/// \param fullscreen SDL_TRUE for fullscreen mode, SDL_FALSE for windowed
-/// mode.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \param fullscreen true for fullscreen mode, false for windowed mode.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -2062,7 +2061,7 @@ bool sdlRestoreWindow(Pointer<SdlWindow> window) {
 /// \sa SDL_SyncWindow
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetWindowFullscreen(SDL_Window *window, SDL_bool fullscreen)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowFullscreen(SDL_Window *window, bool fullscreen)
 /// ```
 bool sdlSetWindowFullscreen(Pointer<SdlWindow> window, bool fullscreen) {
   final sdlSetWindowFullscreenLookupFunction = libSdl3.lookupFunction<
@@ -2086,8 +2085,8 @@ bool sdlSetWindowFullscreen(Pointer<SdlWindow> window, bool fullscreen) {
 ///
 /// \param window the window for which to wait for the pending state to be
 /// applied.
-/// \returns SDL_TRUE on success or SDL_FALSE if the operation timed out before
-/// the window was in the requested state.
+/// \returns true on success or false if the operation timed out before the
+/// window was in the requested state.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -2100,7 +2099,7 @@ bool sdlSetWindowFullscreen(Pointer<SdlWindow> window, bool fullscreen) {
 /// \sa SDL_HINT_VIDEO_SYNC_WINDOW_OPERATIONS
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SyncWindow(SDL_Window *window)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SyncWindow(SDL_Window *window)
 /// ```
 bool sdlSyncWindow(Pointer<SdlWindow> window) {
   final sdlSyncWindowLookupFunction = libSdl3.lookupFunction<
@@ -2113,15 +2112,15 @@ bool sdlSyncWindow(Pointer<SdlWindow> window) {
 /// Return whether the window has a surface associated with it.
 ///
 /// \param window the window to query.
-/// \returns SDL_TRUE if there is a surface associated with the window, or
-/// SDL_FALSE otherwise.
+/// \returns true if there is a surface associated with the window, or false
+/// otherwise.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetWindowSurface
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_WindowHasSurface(SDL_Window *window)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_WindowHasSurface(SDL_Window *window)
 /// ```
 bool sdlWindowHasSurface(Pointer<SdlWindow> window) {
   final sdlWindowHasSurfaceLookupFunction = libSdl3.lookupFunction<
@@ -2181,15 +2180,15 @@ Pointer<SdlSurface> sdlGetWindowSurface(Pointer<SdlWindow> window) {
 ///
 /// \param window the window.
 /// \param vsync the vertical refresh sync interval.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetWindowSurfaceVSync
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetWindowSurfaceVSync(SDL_Window *window, int vsync)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowSurfaceVSync(SDL_Window *window, int vsync)
 /// ```
 bool sdlSetWindowSurfaceVSync(Pointer<SdlWindow> window, int vsync) {
   final sdlSetWindowSurfaceVSyncLookupFunction = libSdl3.lookupFunction<
@@ -2205,15 +2204,15 @@ bool sdlSetWindowSurfaceVSync(Pointer<SdlWindow> window, int vsync) {
 /// \param window the window to query.
 /// \param vsync an int filled with the current vertical refresh sync interval.
 /// See SDL_SetWindowSurfaceVSync() for the meaning of the value.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_SetWindowSurfaceVSync
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetWindowSurfaceVSync(SDL_Window *window, int *vsync)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowSurfaceVSync(SDL_Window *window, int *vsync)
 /// ```
 bool sdlGetWindowSurfaceVSync(Pointer<SdlWindow> window, Pointer<Int32> vsync) {
   final sdlGetWindowSurfaceVSyncLookupFunction = libSdl3.lookupFunction<
@@ -2232,8 +2231,8 @@ bool sdlGetWindowSurfaceVSync(Pointer<SdlWindow> window, Pointer<Int32> vsync) {
 /// This function is equivalent to the SDL 1.2 API SDL_Flip().
 ///
 /// \param window the window to update.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -2241,7 +2240,7 @@ bool sdlGetWindowSurfaceVSync(Pointer<SdlWindow> window, Pointer<Int32> vsync) {
 /// \sa SDL_UpdateWindowSurfaceRects
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_UpdateWindowSurface(SDL_Window *window)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_UpdateWindowSurface(SDL_Window *window)
 /// ```
 bool sdlUpdateWindowSurface(Pointer<SdlWindow> window) {
   final sdlUpdateWindowSurfaceLookupFunction = libSdl3.lookupFunction<
@@ -2267,8 +2266,8 @@ bool sdlUpdateWindowSurface(Pointer<SdlWindow> window) {
 /// \param rects an array of SDL_Rect structures representing areas of the
 /// surface to copy, in pixels.
 /// \param numrects the number of rectangles.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -2276,7 +2275,7 @@ bool sdlUpdateWindowSurface(Pointer<SdlWindow> window) {
 /// \sa SDL_UpdateWindowSurface
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_UpdateWindowSurfaceRects(SDL_Window *window, const SDL_Rect *rects, int numrects)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_UpdateWindowSurfaceRects(SDL_Window *window, const SDL_Rect *rects, int numrects)
 /// ```
 bool sdlUpdateWindowSurfaceRects(
     Pointer<SdlWindow> window, Pointer<SdlRect> rects, int numrects) {
@@ -2293,8 +2292,8 @@ bool sdlUpdateWindowSurfaceRects(
 /// Destroy the surface associated with the window.
 ///
 /// \param window the window to update.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -2302,7 +2301,7 @@ bool sdlUpdateWindowSurfaceRects(
 /// \sa SDL_WindowHasSurface
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_DestroyWindowSurface(SDL_Window *window)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_DestroyWindowSurface(SDL_Window *window)
 /// ```
 bool sdlDestroyWindowSurface(Pointer<SdlWindow> window) {
   final sdlDestroyWindowSurfaceLookupFunction = libSdl3.lookupFunction<
@@ -2331,9 +2330,9 @@ bool sdlDestroyWindowSurface(Pointer<SdlWindow> window) {
 /// other window loses its grab in favor of the caller's window.
 ///
 /// \param window the window for which the keyboard grab mode should be set.
-/// \param grabbed this is SDL_TRUE to grab keyboard, and SDL_FALSE to release.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \param grabbed this is true to grab keyboard, and false to release.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -2341,7 +2340,7 @@ bool sdlDestroyWindowSurface(Pointer<SdlWindow> window) {
 /// \sa SDL_SetWindowMouseGrab
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetWindowKeyboardGrab(SDL_Window *window, SDL_bool grabbed)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowKeyboardGrab(SDL_Window *window, bool grabbed)
 /// ```
 bool sdlSetWindowKeyboardGrab(Pointer<SdlWindow> window, bool grabbed) {
   final sdlSetWindowKeyboardGrabLookupFunction = libSdl3.lookupFunction<
@@ -2357,9 +2356,9 @@ bool sdlSetWindowKeyboardGrab(Pointer<SdlWindow> window, bool grabbed) {
 /// Mouse grab confines the mouse cursor to the window.
 ///
 /// \param window the window for which the mouse grab mode should be set.
-/// \param grabbed this is SDL_TRUE to grab mouse, and SDL_FALSE to release.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \param grabbed this is true to grab mouse, and false to release.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -2367,7 +2366,7 @@ bool sdlSetWindowKeyboardGrab(Pointer<SdlWindow> window, bool grabbed) {
 /// \sa SDL_SetWindowKeyboardGrab
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetWindowMouseGrab(SDL_Window *window, SDL_bool grabbed)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowMouseGrab(SDL_Window *window, bool grabbed)
 /// ```
 bool sdlSetWindowMouseGrab(Pointer<SdlWindow> window, bool grabbed) {
   final sdlSetWindowMouseGrabLookupFunction = libSdl3.lookupFunction<
@@ -2381,14 +2380,14 @@ bool sdlSetWindowMouseGrab(Pointer<SdlWindow> window, bool grabbed) {
 /// Get a window's keyboard grab mode.
 ///
 /// \param window the window to query.
-/// \returns SDL_TRUE if keyboard is grabbed, and SDL_FALSE otherwise.
+/// \returns true if keyboard is grabbed, and false otherwise.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_SetWindowKeyboardGrab
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetWindowKeyboardGrab(SDL_Window *window)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowKeyboardGrab(SDL_Window *window)
 /// ```
 bool sdlGetWindowKeyboardGrab(Pointer<SdlWindow> window) {
   final sdlGetWindowKeyboardGrabLookupFunction = libSdl3.lookupFunction<
@@ -2401,14 +2400,14 @@ bool sdlGetWindowKeyboardGrab(Pointer<SdlWindow> window) {
 /// Get a window's mouse grab mode.
 ///
 /// \param window the window to query.
-/// \returns SDL_TRUE if mouse is grabbed, and SDL_FALSE otherwise.
+/// \returns true if mouse is grabbed, and false otherwise.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_SetWindowKeyboardGrab
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetWindowMouseGrab(SDL_Window *window)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowMouseGrab(SDL_Window *window)
 /// ```
 bool sdlGetWindowMouseGrab(Pointer<SdlWindow> window) {
   final sdlGetWindowMouseGrabLookupFunction = libSdl3.lookupFunction<
@@ -2446,8 +2445,8 @@ Pointer<SdlWindow> sdlGetGrabbedWindow() {
 /// \param window the window that will be associated with the barrier.
 /// \param rect a rectangle area in window-relative coordinates. If NULL the
 /// barrier for the specified window will be destroyed.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -2455,7 +2454,7 @@ Pointer<SdlWindow> sdlGetGrabbedWindow() {
 /// \sa SDL_SetWindowMouseGrab
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetWindowMouseRect(SDL_Window *window, const SDL_Rect *rect)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowMouseRect(SDL_Window *window, const SDL_Rect *rect)
 /// ```
 bool sdlSetWindowMouseRect(Pointer<SdlWindow> window, Pointer<SdlRect> rect) {
   final sdlSetWindowMouseRectLookupFunction = libSdl3.lookupFunction<
@@ -2493,19 +2492,19 @@ Pointer<SdlRect> sdlGetWindowMouseRect(Pointer<SdlWindow> window) {
 /// The parameter `opacity` will be clamped internally between 0.0f
 /// (transparent) and 1.0f (opaque).
 ///
-/// This function also returns -1 if setting the opacity isn't supported.
+/// This function also returns false if setting the opacity isn't supported.
 ///
 /// \param window the window which will be made transparent or opaque.
 /// \param opacity the opacity value (0.0f - transparent, 1.0f - opaque).
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetWindowOpacity
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetWindowOpacity(SDL_Window *window, float opacity)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowOpacity(SDL_Window *window, float opacity)
 /// ```
 bool sdlSetWindowOpacity(Pointer<SdlWindow> window, double opacity) {
   final sdlSetWindowOpacityLookupFunction = libSdl3.lookupFunction<
@@ -2555,15 +2554,15 @@ double sdlGetWindowOpacity(Pointer<SdlWindow> window) {
 ///
 /// \param window the window that should become the child of a parent.
 /// \param parent the new parent window for the child window.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_SetWindowModal
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetWindowParent(SDL_Window *window, SDL_Window *parent)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowParent(SDL_Window *window, SDL_Window *parent)
 /// ```
 bool sdlSetWindowParent(Pointer<SdlWindow> window, Pointer<SdlWindow> parent) {
   final sdlSetWindowParentLookupFunction = libSdl3.lookupFunction<
@@ -2580,17 +2579,16 @@ bool sdlSetWindowParent(Pointer<SdlWindow> window, Pointer<SdlWindow> parent) {
 /// window of a parent, or toggling modal status on will fail.
 ///
 /// \param window the window on which to set the modal state.
-/// \param modal SDL_TRUE to toggle modal status on, SDL_FALSE to toggle it
-/// off.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \param modal true to toggle modal status on, false to toggle it off.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_SetWindowParent
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetWindowModal(SDL_Window *window, SDL_bool modal)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowModal(SDL_Window *window, bool modal)
 /// ```
 bool sdlSetWindowModal(Pointer<SdlWindow> window, bool modal) {
   final sdlSetWindowModalLookupFunction = libSdl3.lookupFunction<
@@ -2603,15 +2601,14 @@ bool sdlSetWindowModal(Pointer<SdlWindow> window, bool modal) {
 /// Set whether the window may have input focus.
 ///
 /// \param window the window to set focusable state.
-/// \param focusable SDL_TRUE to allow input focus, SDL_FALSE to not allow
-/// input focus.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \param focusable true to allow input focus, false to not allow input focus.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetWindowFocusable(SDL_Window *window, SDL_bool focusable)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowFocusable(SDL_Window *window, bool focusable)
 /// ```
 bool sdlSetWindowFocusable(Pointer<SdlWindow> window, bool focusable) {
   final sdlSetWindowFocusableLookupFunction = libSdl3.lookupFunction<
@@ -2637,13 +2634,13 @@ bool sdlSetWindowFocusable(Pointer<SdlWindow> window, bool focusable) {
 /// the client area.
 /// \param y the y coordinate of the menu, relative to the origin (top-left) of
 /// the client area.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_ShowWindowSystemMenu(SDL_Window *window, int x, int y)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_ShowWindowSystemMenu(SDL_Window *window, int x, int y)
 /// ```
 bool sdlShowWindowSystemMenu(Pointer<SdlWindow> window, int x, int y) {
   final sdlShowWindowSystemMenuLookupFunction = libSdl3.lookupFunction<
@@ -2674,7 +2671,7 @@ bool sdlShowWindowSystemMenu(Pointer<SdlWindow> window, int x, int y) {
 /// Specifying NULL for a callback disables hit-testing. Hit-testing is
 /// disabled by default.
 ///
-/// Platforms that don't support this functionality will return SDL_FALSE
+/// Platforms that don't support this functionality will return false
 /// unconditionally, even if you're attempting to disable hit-testing.
 ///
 /// Your callback may fire at any time, and its firing does not indicate any
@@ -2688,13 +2685,13 @@ bool sdlShowWindowSystemMenu(Pointer<SdlWindow> window, int x, int y) {
 /// \param window the window to set hit-testing on.
 /// \param callback the function to call when doing a hit-test.
 /// \param callback_data an app-defined void pointer passed to **callback**.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetWindowHitTest(SDL_Window *window, SDL_HitTest callback, void *callback_data)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowHitTest(SDL_Window *window, SDL_HitTest callback, void *callback_data)
 /// ```
 bool sdlSetWindowHitTest(
     Pointer<SdlWindow> window,
@@ -2729,13 +2726,13 @@ bool sdlSetWindowHitTest(
 /// \param window the window.
 /// \param shape the surface representing the shape of the window, or NULL to
 /// remove any current shape.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetWindowShape(SDL_Window *window, SDL_Surface *shape)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowShape(SDL_Window *window, SDL_Surface *shape)
 /// ```
 bool sdlSetWindowShape(Pointer<SdlWindow> window, Pointer<SdlSurface> shape) {
   final sdlSetWindowShapeLookupFunction = libSdl3.lookupFunction<
@@ -2750,13 +2747,13 @@ bool sdlSetWindowShape(Pointer<SdlWindow> window, Pointer<SdlSurface> shape) {
 ///
 /// \param window the window to be flashed.
 /// \param operation the operation to perform.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_FlashWindow(SDL_Window *window, SDL_FlashOperation operation)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_FlashWindow(SDL_Window *window, SDL_FlashOperation operation)
 /// ```
 bool sdlFlashWindow(Pointer<SdlWindow> window, int operation) {
   final sdlFlashWindowLookupFunction = libSdl3.lookupFunction<
@@ -2797,8 +2794,7 @@ void sdlDestroyWindow(Pointer<SdlWindow> window) {
 ///
 /// The default can also be changed using `SDL_HINT_VIDEO_ALLOW_SCREENSAVER`.
 ///
-/// \returns SDL_TRUE if the screensaver is enabled, SDL_FALSE if it is
-/// disabled.
+/// \returns true if the screensaver is enabled, false if it is disabled.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -2806,7 +2802,7 @@ void sdlDestroyWindow(Pointer<SdlWindow> window) {
 /// \sa SDL_EnableScreenSaver
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_ScreenSaverEnabled(void)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_ScreenSaverEnabled(void)
 /// ```
 bool sdlScreenSaverEnabled() {
   final sdlScreenSaverEnabledLookupFunction =
@@ -2818,8 +2814,8 @@ bool sdlScreenSaverEnabled() {
 ///
 /// Allow the screen to be blanked by a screen saver.
 ///
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -2827,7 +2823,7 @@ bool sdlScreenSaverEnabled() {
 /// \sa SDL_ScreenSaverEnabled
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_EnableScreenSaver(void)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_EnableScreenSaver(void)
 /// ```
 bool sdlEnableScreenSaver() {
   final sdlEnableScreenSaverLookupFunction =
@@ -2845,8 +2841,8 @@ bool sdlEnableScreenSaver() {
 /// The screensaver is disabled by default, but this may by changed by
 /// SDL_HINT_VIDEO_ALLOW_SCREENSAVER.
 ///
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -2854,7 +2850,7 @@ bool sdlEnableScreenSaver() {
 /// \sa SDL_ScreenSaverEnabled
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_DisableScreenSaver(void)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_DisableScreenSaver(void)
 /// ```
 bool sdlDisableScreenSaver() {
   final sdlDisableScreenSaverLookupFunction =
@@ -2875,8 +2871,8 @@ bool sdlDisableScreenSaver() {
 ///
 /// \param path the platform dependent OpenGL library name, or NULL to open the
 /// default OpenGL library.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -2884,7 +2880,7 @@ bool sdlDisableScreenSaver() {
 /// \sa SDL_GL_UnloadLibrary
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GL_LoadLibrary(const char *path)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GL_LoadLibrary(const char *path)
 /// ```
 bool sdlGlLoadLibrary(String? path) {
   final sdlGlLoadLibraryLookupFunction = libSdl3.lookupFunction<
@@ -3021,12 +3017,12 @@ void sdlGlUnloadLibrary() {
 /// every time you need to know.
 ///
 /// \param extension the name of the extension to check.
-/// \returns SDL_TRUE if the extension is supported, SDL_FALSE otherwise.
+/// \returns true if the extension is supported, false otherwise.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GL_ExtensionSupported(const char *extension)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GL_ExtensionSupported(const char *extension)
 /// ```
 bool sdlGlExtensionSupported(String? extension) {
   final sdlGlExtensionSupportedLookupFunction = libSdl3.lookupFunction<
@@ -3068,8 +3064,8 @@ void sdlGlResetAttributes() {
 /// \param attr an SDL_GLattr enum value specifying the OpenGL attribute to
 /// set.
 /// \param value the desired value for the attribute.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -3077,7 +3073,7 @@ void sdlGlResetAttributes() {
 /// \sa SDL_GL_ResetAttributes
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GL_SetAttribute(SDL_GLattr attr, int value)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GL_SetAttribute(SDL_GLattr attr, int value)
 /// ```
 bool sdlGlSetAttribute(int attr, int value) {
   final sdlGlSetAttributeLookupFunction = libSdl3.lookupFunction<
@@ -3092,8 +3088,8 @@ bool sdlGlSetAttribute(int attr, int value) {
 /// \param attr an SDL_GLattr enum value specifying the OpenGL attribute to
 /// get.
 /// \param value a pointer filled in with the current value of `attr`.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -3101,7 +3097,7 @@ bool sdlGlSetAttribute(int attr, int value) {
 /// \sa SDL_GL_SetAttribute
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GL_GetAttribute(SDL_GLattr attr, int *value)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GL_GetAttribute(SDL_GLattr attr, int *value)
 /// ```
 bool sdlGlGetAttribute(int attr, Pointer<Int32> value) {
   final sdlGlGetAttributeLookupFunction = libSdl3.lookupFunction<
@@ -3148,15 +3144,15 @@ Pointer<SdlGlContext> sdlGlCreateContext(Pointer<SdlWindow> window) {
 ///
 /// \param window the window to associate with the context.
 /// \param context the OpenGL context to associate with the window.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GL_CreateContext
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GL_MakeCurrent(SDL_Window *window, SDL_GLContext context)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GL_MakeCurrent(SDL_Window *window, SDL_GLContext context)
 /// ```
 bool sdlGlMakeCurrent(
     Pointer<SdlWindow> window, Pointer<SdlGlContext> context) {
@@ -3315,7 +3311,7 @@ void sdlEglSetAttributeCallbacks(
 /// the vertical retrace for a given frame, it swaps buffers immediately, which
 /// might be less jarring for the user during occasional framerate drops. If an
 /// application requests adaptive vsync and the system does not support it,
-/// this function will fail and return SDL_FALSE. In such a case, you should
+/// this function will fail and return false. In such a case, you should
 /// probably retry the call with 1 for the interval.
 ///
 /// Adaptive vsync is implemented for some glX drivers with
@@ -3327,15 +3323,15 @@ void sdlEglSetAttributeCallbacks(
 ///
 /// \param interval 0 for immediate updates, 1 for updates synchronized with
 /// the vertical retrace, -1 for adaptive vsync.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GL_GetSwapInterval
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GL_SetSwapInterval(int interval)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GL_SetSwapInterval(int interval)
 /// ```
 bool sdlGlSetSwapInterval(int interval) {
   final sdlGlSetSwapIntervalLookupFunction = libSdl3.lookupFunction<
@@ -3354,15 +3350,15 @@ bool sdlGlSetSwapInterval(int interval) {
 /// synchronization, 1 if the buffer swap is synchronized with
 /// the vertical retrace, and -1 if late swaps happen
 /// immediately instead of waiting for the next retrace.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GL_SetSwapInterval
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GL_GetSwapInterval(int *interval)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GL_GetSwapInterval(int *interval)
 /// ```
 bool sdlGlGetSwapInterval(Pointer<Int32> interval) {
   final sdlGlGetSwapIntervalLookupFunction = libSdl3.lookupFunction<
@@ -3382,13 +3378,13 @@ bool sdlGlGetSwapInterval(Pointer<Int32> interval) {
 /// extra.
 ///
 /// \param window the window to change.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GL_SwapWindow(SDL_Window *window)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GL_SwapWindow(SDL_Window *window)
 /// ```
 bool sdlGlSwapWindow(Pointer<SdlWindow> window) {
   final sdlGlSwapWindowLookupFunction = libSdl3.lookupFunction<
@@ -3401,15 +3397,15 @@ bool sdlGlSwapWindow(Pointer<SdlWindow> window) {
 /// Delete an OpenGL context.
 ///
 /// \param context the OpenGL context to be deleted.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GL_CreateContext
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GL_DestroyContext(SDL_GLContext context)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GL_DestroyContext(SDL_GLContext context)
 /// ```
 bool sdlGlDestroyContext(Pointer<SdlGlContext> context) {
   final sdlGlDestroyContextLookupFunction = libSdl3.lookupFunction<

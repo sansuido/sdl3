@@ -7,9 +7,8 @@ import 'struct_sdl.dart';
 ///
 /// Set a callback for every Windows message, run before TranslateMessage().
 ///
-/// The callback may modify the message, and should return SDL_TRUE if the
-/// message should continue to be processed, or SDL_FALSE to prevent further
-/// processing.
+/// The callback may modify the message, and should return true if the message
+/// should continue to be processed, or false to prevent further processing.
 ///
 /// \param callback the SDL_WindowsMessageHook function to call.
 /// \param userdata a pointer to pass to every iteration of `callback`.
@@ -65,13 +64,13 @@ int sdlGetDirect3D9AdapterIndex(int displayId) {
 /// \param displayID the instance of the display to query.
 /// \param adapterIndex a pointer to be filled in with the adapter index.
 /// \param outputIndex a pointer to be filled in with the output index.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetDXGIOutputInfo(SDL_DisplayID displayID, int *adapterIndex, int *outputIndex)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GetDXGIOutputInfo(SDL_DisplayID displayID, int *adapterIndex, int *outputIndex)
 /// ```
 bool sdlGetDxgiOutputInfo(
     int displayId, Pointer<Int32> adapterIndex, Pointer<Int32> outputIndex) {
@@ -88,9 +87,8 @@ bool sdlGetDxgiOutputInfo(
 ///
 /// Set a callback for every X11 event.
 ///
-/// The callback may modify the event, and should return SDL_TRUE if the event
-/// should continue to be processed, or SDL_FALSE to prevent further
-/// processing.
+/// The callback may modify the event, and should return true if the event
+/// should continue to be processed, or false to prevent further processing.
 ///
 /// \param callback the SDL_X11EventHook function to call.
 /// \param userdata a pointer to pass to every iteration of `callback`.
@@ -117,13 +115,13 @@ void sdlSetX11EventHook(Pointer<NativeFunction<SdlX11EventHook>> callback,
 ///
 /// \param threadID the Unix thread ID to change priority of.
 /// \param priority the new, Unix-specific, priority value.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetLinuxThreadPriority(Sint64 threadID, int priority)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetLinuxThreadPriority(Sint64 threadID, int priority)
 /// ```
 bool sdlSetLinuxThreadPriority(int threadId, int priority) {
   final sdlSetLinuxThreadPriorityLookupFunction = libSdl3.lookupFunction<
@@ -141,13 +139,13 @@ bool sdlSetLinuxThreadPriority(int threadId, int priority) {
 /// \param sdlPriority the new SDL_ThreadPriority value.
 /// \param schedPolicy the new scheduling policy (SCHED_FIFO, SCHED_RR,
 /// SCHED_OTHER, etc...).
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetLinuxThreadPriorityAndPolicy(Sint64 threadID, int sdlPriority, int schedPolicy)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetLinuxThreadPriorityAndPolicy(Sint64 threadID, int sdlPriority, int schedPolicy)
 /// ```
 bool sdlSetLinuxThreadPriorityAndPolicy(
     int threadId, int sdlPriority, int schedPolicy) {
@@ -191,15 +189,15 @@ bool sdlSetLinuxThreadPriorityAndPolicy(
 /// called.
 /// \param callback the function to call for every frame.
 /// \param callbackParam a pointer that is passed to `callback`.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_SetiOSEventPump
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetiOSAnimationCallback(SDL_Window *window, int interval, SDL_iOSAnimationCallback callback, void *callbackParam)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetiOSAnimationCallback(SDL_Window *window, int interval, SDL_iOSAnimationCallback callback, void *callbackParam)
 /// ```
 bool sdlSetiOsAnimationCallback(
     Pointer<SdlWindow> window,
@@ -227,14 +225,14 @@ bool sdlSetiOsAnimationCallback(
 ///
 /// This function is only available on Apple iOS.
 ///
-/// \param enabled SDL_TRUE to enable the event pump, SDL_FALSE to disable it.
+/// \param enabled true to enable the event pump, false to disable it.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_SetiOSAnimationCallback
 ///
 /// ```c
-/// extern SDL_DECLSPEC void SDLCALL SDL_SetiOSEventPump(SDL_bool enabled)
+/// extern SDL_DECLSPEC void SDLCALL SDL_SetiOSEventPump(bool enabled)
 /// ```
 void sdlSetiOsEventPump(bool enabled) {
   final sdlSetiOsEventPumpLookupFunction = libSdl3.lookupFunction<
@@ -353,12 +351,12 @@ int sdlGetAndroidSdkVersion() {
 ///
 /// Query if the application is running on Android TV.
 ///
-/// \returns SDL_TRUE if this is Android TV, SDL_FALSE otherwise.
+/// \returns true if this is Android TV, false otherwise.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_IsAndroidTV(void)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_IsAndroidTV(void)
 /// ```
 bool sdlIsAndroidTv() {
   final sdlIsAndroidTvLookupFunction = libSdl3
@@ -369,12 +367,12 @@ bool sdlIsAndroidTv() {
 ///
 /// Query if the application is running on a Chromebook.
 ///
-/// \returns SDL_TRUE if this is a Chromebook, SDL_FALSE otherwise.
+/// \returns true if this is a Chromebook, false otherwise.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_IsChromebook(void)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_IsChromebook(void)
 /// ```
 bool sdlIsChromebook() {
   final sdlIsChromebookLookupFunction = libSdl3
@@ -385,12 +383,12 @@ bool sdlIsChromebook() {
 ///
 /// Query if the application is running on a Samsung DeX docking station.
 ///
-/// \returns SDL_TRUE if this is a DeX docking station, SDL_FALSE otherwise.
+/// \returns true if this is a DeX docking station, false otherwise.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_IsDeXMode(void)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_IsDeXMode(void)
 /// ```
 bool sdlIsDeXMode() {
   final sdlIsDeXModeLookupFunction =
@@ -561,8 +559,8 @@ String? sdlGetAndroidCachePath() {
 /// \param permission the permission to request.
 /// \param cb the callback to trigger when the request has a response.
 /// \param userdata an app-controlled pointer that is passed to the callback.
-/// \returns SDL_TRUE if the request was submitted, SDL_FALSE if there was an
-/// error submitting. The result of the request is only ever reported
+/// \returns true if the request was submitted, false if there was an error
+/// submitting. The result of the request is only ever reported
 /// through the callback, not this return value.
 ///
 /// \threadsafety It is safe to call this function from any thread.
@@ -570,7 +568,7 @@ String? sdlGetAndroidCachePath() {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_RequestAndroidPermission(const char *permission, SDL_RequestAndroidPermissionCallback cb, void *userdata)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_RequestAndroidPermission(const char *permission, SDL_RequestAndroidPermissionCallback cb, void *userdata)
 /// ```
 bool sdlRequestAndroidPermission(
     String? permission,
@@ -613,15 +611,15 @@ bool sdlRequestAndroidPermission(
 /// \param gravity where the notification should appear on the screen.
 /// \param xoffset set this parameter only when gravity >=0.
 /// \param yoffset set this parameter only when gravity >=0.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_ShowAndroidToast(const char *message, int duration, int gravity, int xoffset, int yoffset)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_ShowAndroidToast(const char *message, int duration, int gravity, int xoffset, int yoffset)
 /// ```
 bool sdlShowAndroidToast(
     String? message, int duration, int gravity, int xoffset, int yoffset) {
@@ -645,15 +643,15 @@ bool sdlShowAndroidToast(
 ///
 /// \param command user command that must be greater or equal to 0x8000.
 /// \param param user parameter.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SendAndroidMessage(Uint32 command, int param)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SendAndroidMessage(Uint32 command, int param)
 /// ```
 bool sdlSendAndroidMessage(int command, int param) {
   final sdlSendAndroidMessageLookupFunction = libSdl3.lookupFunction<
@@ -665,14 +663,14 @@ bool sdlSendAndroidMessage(int command, int param) {
 ///
 /// Query if the current device is a tablet.
 ///
-/// If SDL can't determine this, it will return SDL_FALSE.
+/// If SDL can't determine this, it will return false.
 ///
-/// \returns SDL_TRUE if the device is a tablet, SDL_FALSE otherwise.
+/// \returns true if the device is a tablet, false otherwise.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_IsTablet(void)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_IsTablet(void)
 /// ```
 bool sdlIsTablet() {
   final sdlIsTabletLookupFunction =
@@ -864,13 +862,13 @@ void sdlOnApplicationDidChangeStatusBarOrientation() {
 /// leak.
 ///
 /// \param outTaskQueue a pointer to be filled in with task queue handle.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetGDKTaskQueue(XTaskQueueHandle *outTaskQueue)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GetGDKTaskQueue(XTaskQueueHandle *outTaskQueue)
 /// ```
 bool sdlGetGdkTaskQueue(Pointer<XTaskQueueHandle> outTaskQueue) {
   final sdlGetGdkTaskQueueLookupFunction = libSdl3.lookupFunction<
@@ -888,13 +886,13 @@ bool sdlGetGdkTaskQueue(Pointer<XTaskQueueHandle> outTaskQueue) {
 ///
 /// \param outUserHandle a pointer to be filled in with the default user
 /// handle.
-/// \returns SDL_TRUE if success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true if success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetGDKDefaultUser(XUserHandle *outUserHandle)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GetGDKDefaultUser(XUserHandle *outUserHandle)
 /// ```
 bool sdlGetGdkDefaultUser(Pointer<XUserHandle> outUserHandle) {
   final sdlGetGdkDefaultUserLookupFunction = libSdl3.lookupFunction<

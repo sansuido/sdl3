@@ -160,15 +160,15 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   ///
   /// \param window the window to change.
   /// \param title the desired window title in UTF-8 format.
-  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-  /// for more information.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
   /// \sa SDL_GetWindowTitle
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetWindowTitle(SDL_Window *window, const char *title)
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowTitle(SDL_Window *window, const char *title)
   /// ```
   bool setTitle(String title) {
     return sdlSetWindowTitle(this, title);
@@ -207,13 +207,13 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   ///
   /// \param window the window to change.
   /// \param icon an SDL_Surface structure containing the icon for the window.
-  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-  /// for more information.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetWindowIcon(SDL_Window *window, SDL_Surface *icon)
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowIcon(SDL_Window *window, SDL_Surface *icon)
   /// ```
   bool setIcon(Pointer<SdlSurface> icon) {
     return sdlSetWindowIcon(this, icon);
@@ -249,8 +249,8 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// `SDL_WINDOWPOS_UNDEFINED`.
   /// \param y the y coordinate of the window, or `SDL_WINDOWPOS_CENTERED` or
   /// `SDL_WINDOWPOS_UNDEFINED`.
-  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-  /// for more information.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -258,7 +258,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// \sa SDL_SyncWindow
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetWindowPosition(SDL_Window *window, int x, int y)
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowPosition(SDL_Window *window, int x, int y)
   /// ```
   bool setPosition(int x, int y) {
     return sdlSetWindowPosition(this, x, y);
@@ -278,15 +278,15 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// NULL.
   /// \param y a pointer filled in with the y position of the window, may be
   /// NULL.
-  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-  /// for more information.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
   /// \sa SDL_SetWindowPosition
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetWindowPosition(SDL_Window *window, int *x, int *y)
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowPosition(SDL_Window *window, int *x, int *y)
   /// ```
   math.Point<double> getPosition() {
     var x = calloc<Int32>();
@@ -323,8 +323,8 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// \param window the window to change.
   /// \param w the width of the window, must be > 0.
   /// \param h the height of the window, must be > 0.
-  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-  /// for more information.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -333,7 +333,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// \sa SDL_SyncWindow
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetWindowSize(SDL_Window *window, int w, int h)
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowSize(SDL_Window *window, int w, int h)
   /// ```
   bool setSize(int w, int h) {
     return sdlSetWindowSize(this, w, h);
@@ -349,8 +349,8 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// \param window the window to query the width and height from.
   /// \param w a pointer filled in with the width of the window, may be NULL.
   /// \param h a pointer filled in with the height of the window, may be NULL.
-  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-  /// for more information.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -359,7 +359,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// \sa SDL_SetWindowSize
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetWindowSize(SDL_Window *window, int *w, int *h)
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowSize(SDL_Window *window, int *w, int *h)
   /// ```
   math.Point<double> getSize() {
     var w = calloc<Int32>();
@@ -374,7 +374,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   ///
   /// Get the size of a window's borders (decorations) around the client area.
   ///
-  /// Note: If this function fails (returns -1), the size values will be
+  /// Note: If this function fails (returns false), the size values will be
   /// initialized to 0, 0, 0, 0 (if a non-NULL pointer is provided), as if the
   /// window in question was borderless.
   ///
@@ -384,7 +384,8 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// window has been presented and composited, so that the window system has a
   /// chance to decorate the window and provide the border dimensions to SDL.
   ///
-  /// This function also returns -1 if getting the information is not supported.
+  /// This function also returns false if getting the information is not
+  /// supported.
   ///
   /// \param window the window to query the size values of the border
   /// (decorations) from.
@@ -396,15 +397,15 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// border; NULL is permitted.
   /// \param right pointer to variable for storing the size of the right border;
   /// NULL is permitted.
-  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-  /// for more information.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
   /// \sa SDL_GetWindowSize
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetWindowBordersSize(SDL_Window *window, int *top, int *left, int *bottom, int *right)
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowBordersSize(SDL_Window *window, int *top, int *left, int *bottom, int *right)
   /// ```
   math.Rectangle<double> getBordersSize() {
     var top = calloc<Int32>();
@@ -429,8 +430,8 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// NULL.
   /// \param h a pointer to variable for storing the height in pixels, may be
   /// NULL.
-  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-  /// for more information.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -438,7 +439,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// \sa SDL_GetWindowSize
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetWindowSizeInPixels(SDL_Window *window, int *w, int *h)
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowSizeInPixels(SDL_Window *window, int *w, int *h)
   /// ```
   math.Point<double> getSizeInPixels() {
     var w = calloc<Int32>();
@@ -456,8 +457,8 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// \param window the window to change.
   /// \param min_w the minimum width of the window, or 0 for no limit.
   /// \param min_h the minimum height of the window, or 0 for no limit.
-  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-  /// for more information.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -465,7 +466,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// \sa SDL_SetWindowMaximumSize
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetWindowMinimumSize(SDL_Window *window, int min_w, int min_h)
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowMinimumSize(SDL_Window *window, int min_w, int min_h)
   /// ```
   bool setMinimumSize(int w, int h) {
     return sdlSetWindowMinimumSize(this, w, h);
@@ -479,8 +480,8 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// NULL.
   /// \param h a pointer filled in with the minimum height of the window, may be
   /// NULL.
-  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-  /// for more information.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -488,7 +489,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// \sa SDL_SetWindowMinimumSize
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetWindowMinimumSize(SDL_Window *window, int *w, int *h)
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowMinimumSize(SDL_Window *window, int *w, int *h)
   /// ```
   math.Point<double> getMinimumSize() {
     var w = calloc<Int32>();
@@ -506,8 +507,8 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// \param window the window to change.
   /// \param max_w the maximum width of the window, or 0 for no limit.
   /// \param max_h the maximum height of the window, or 0 for no limit.
-  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-  /// for more information.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -515,7 +516,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// \sa SDL_SetWindowMinimumSize
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetWindowMaximumSize(SDL_Window *window, int max_w, int max_h)
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowMaximumSize(SDL_Window *window, int max_w, int max_h)
   /// ```
   bool setMaximumSize(int w, int h) {
     return sdlSetWindowMaximumSize(this, w, h);
@@ -529,8 +530,8 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// NULL.
   /// \param h a pointer filled in with the maximum height of the window, may be
   /// NULL.
-  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-  /// for more information.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -538,7 +539,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// \sa SDL_SetWindowMaximumSize
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetWindowMaximumSize(SDL_Window *window, int *w, int *h)
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowMaximumSize(SDL_Window *window, int *w, int *h)
   /// ```
   math.Point<double> getMaximumSize() {
     var w = calloc<Int32>();
@@ -560,16 +561,16 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// You can't change the border state of a fullscreen window.
   ///
   /// \param window the window of which to change the border state.
-  /// \param bordered SDL_FALSE to remove border, SDL_TRUE to add border.
-  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-  /// for more information.
+  /// \param bordered false to remove border, true to add border.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
   /// \sa SDL_GetWindowFlags
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetWindowBordered(SDL_Window *window, SDL_bool bordered)
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowBordered(SDL_Window *window, bool bordered)
   /// ```
   bool setBordered(bool bordered) {
     return sdlSetWindowBordered(this, bordered);
@@ -585,16 +586,16 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// You can't change the resizable state of a fullscreen window.
   ///
   /// \param window the window of which to change the resizable state.
-  /// \param resizable SDL_TRUE to allow resizing, SDL_FALSE to disallow.
-  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-  /// for more information.
+  /// \param resizable true to allow resizing, false to disallow.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
   /// \sa SDL_GetWindowFlags
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetWindowResizable(SDL_Window *window, SDL_bool resizable)
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowResizable(SDL_Window *window, bool resizable)
   /// ```
   bool setResizable(bool resizable) {
     return sdlSetWindowResizable(this, resizable);
@@ -607,17 +608,16 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// will bring the window to the front and keep the window above the rest.
   ///
   /// \param window the window of which to change the always on top state.
-  /// \param on_top SDL_TRUE to set the window always on top, SDL_FALSE to
-  /// disable.
-  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-  /// for more information.
+  /// \param on_top true to set the window always on top, false to disable.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
   /// \sa SDL_GetWindowFlags
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetWindowAlwaysOnTop(SDL_Window *window, SDL_bool on_top)
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowAlwaysOnTop(SDL_Window *window, bool on_top)
   /// ```
   bool setAlwaysOnTop(bool onTop) {
     return sdlSetWindowAlwaysOnTop(this, onTop);
@@ -627,8 +627,8 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// Show a window.
   ///
   /// \param window the window to show.
-  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-  /// for more information.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -636,7 +636,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// \sa SDL_RaiseWindow
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_ShowWindow(SDL_Window *window)
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_ShowWindow(SDL_Window *window)
   /// ```
   bool show() {
     return sdlShowWindow(this);
@@ -646,15 +646,15 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// Hide a window.
   ///
   /// \param window the window to hide.
-  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-  /// for more information.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
   /// \sa SDL_ShowWindow
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_HideWindow(SDL_Window *window)
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_HideWindow(SDL_Window *window)
   /// ```
   bool hide() {
     return sdlHideWindow(this);
@@ -671,13 +671,13 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// the window will have the SDL_WINDOW_INPUT_FOCUS flag set.
   ///
   /// \param window the window to raise.
-  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-  /// for more information.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_RaiseWindow(SDL_Window *window)
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_RaiseWindow(SDL_Window *window)
   /// ```
   bool raise() {
     return sdlRaiseWindow(this);
@@ -704,8 +704,8 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// and Wayland window managers may vary.
   ///
   /// \param window the window to maximize.
-  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-  /// for more information.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -714,7 +714,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// \sa SDL_SyncWindow
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_MaximizeWindow(SDL_Window *window)
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_MaximizeWindow(SDL_Window *window)
   /// ```
   bool maximize() {
     return sdlMaximizeWindow(this);
@@ -733,8 +733,8 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// deny the state change.
   ///
   /// \param window the window to minimize.
-  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-  /// for more information.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -743,7 +743,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// \sa SDL_SyncWindow
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_MinimizeWindow(SDL_Window *window)
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_MinimizeWindow(SDL_Window *window)
   /// ```
   bool minimize() {
     return sdlMinimizeWindow(this);
@@ -763,8 +763,8 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// deny the state change.
   ///
   /// \param window the window to restore.
-  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-  /// for more information.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -773,7 +773,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// \sa SDL_SyncWindow
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_RestoreWindow(SDL_Window *window)
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_RestoreWindow(SDL_Window *window)
   /// ```
   bool restore() {
     return sdlRestoreWindow(this);
@@ -820,8 +820,8 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// This function is equivalent to the SDL 1.2 API SDL_Flip().
   ///
   /// \param window the window to update.
-  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-  /// for more information.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -829,7 +829,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// \sa SDL_UpdateWindowSurfaceRects
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_UpdateWindowSurface(SDL_Window *window)
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_UpdateWindowSurface(SDL_Window *window)
   /// ```
   bool updateSurface() {
     return sdlUpdateWindowSurface(this);
@@ -852,8 +852,8 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// \param rects an array of SDL_Rect structures representing areas of the
   /// surface to copy, in pixels.
   /// \param numrects the number of rectangles.
-  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-  /// for more information.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -861,7 +861,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// \sa SDL_UpdateWindowSurface
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_UpdateWindowSurfaceRects(SDL_Window *window, const SDL_Rect *rects, int numrects)
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_UpdateWindowSurfaceRects(SDL_Window *window, const SDL_Rect *rects, int numrects)
   /// ```
   bool updateSurfaceRects(List<math.Rectangle<double>> rects) {
     var rectsPointer = rects.callocInt();
@@ -890,9 +890,9 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// other window loses its grab in favor of the caller's window.
   ///
   /// \param window the window for which the keyboard grab mode should be set.
-  /// \param grabbed this is SDL_TRUE to grab keyboard, and SDL_FALSE to release.
-  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-  /// for more information.
+  /// \param grabbed this is true to grab keyboard, and false to release.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -900,7 +900,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// \sa SDL_SetWindowMouseGrab
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetWindowKeyboardGrab(SDL_Window *window, SDL_bool grabbed)
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowKeyboardGrab(SDL_Window *window, bool grabbed)
   /// ```
   bool setKeyboardGrab(bool grabbed) {
     return sdlSetWindowKeyboardGrab(this, grabbed);
@@ -912,9 +912,9 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// Mouse grab confines the mouse cursor to the window.
   ///
   /// \param window the window for which the mouse grab mode should be set.
-  /// \param grabbed this is SDL_TRUE to grab mouse, and SDL_FALSE to release.
-  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-  /// for more information.
+  /// \param grabbed this is true to grab mouse, and false to release.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -922,7 +922,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// \sa SDL_SetWindowKeyboardGrab
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetWindowMouseGrab(SDL_Window *window, SDL_bool grabbed)
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowMouseGrab(SDL_Window *window, bool grabbed)
   /// ```
   bool setMouseGrab(bool grabbed) {
     return sdlSetWindowMouseGrab(this, grabbed);
@@ -932,14 +932,14 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// Get a window's keyboard grab mode.
   ///
   /// \param window the window to query.
-  /// \returns SDL_TRUE if keyboard is grabbed, and SDL_FALSE otherwise.
+  /// \returns true if keyboard is grabbed, and false otherwise.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
   /// \sa SDL_SetWindowKeyboardGrab
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetWindowKeyboardGrab(SDL_Window *window)
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowKeyboardGrab(SDL_Window *window)
   /// ```
   bool getKeyboardGrab() {
     return sdlGetWindowKeyboardGrab(this);
@@ -949,14 +949,14 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// Get a window's mouse grab mode.
   ///
   /// \param window the window to query.
-  /// \returns SDL_TRUE if mouse is grabbed, and SDL_FALSE otherwise.
+  /// \returns true if mouse is grabbed, and false otherwise.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
   /// \sa SDL_SetWindowKeyboardGrab
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetWindowMouseGrab(SDL_Window *window)
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowMouseGrab(SDL_Window *window)
   /// ```
   bool getMouseGrab() {
     return sdlGetWindowMouseGrab(this);
@@ -973,8 +973,8 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// \param window the window that will be associated with the barrier.
   /// \param rect a rectangle area in window-relative coordinates. If NULL the
   /// barrier for the specified window will be destroyed.
-  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-  /// for more information.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -982,7 +982,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// \sa SDL_SetWindowMouseGrab
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetWindowMouseRect(SDL_Window *window, const SDL_Rect *rect)
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowMouseRect(SDL_Window *window, const SDL_Rect *rect)
   /// ```
   bool setMouseRect(math.Rectangle<double> rect) {
     var rectPointer = rect.callocInt();
@@ -1020,19 +1020,19 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// The parameter `opacity` will be clamped internally between 0.0f
   /// (transparent) and 1.0f (opaque).
   ///
-  /// This function also returns -1 if setting the opacity isn't supported.
+  /// This function also returns false if setting the opacity isn't supported.
   ///
   /// \param window the window which will be made transparent or opaque.
   /// \param opacity the opacity value (0.0f - transparent, 1.0f - opaque).
-  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-  /// for more information.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
   /// \sa SDL_GetWindowOpacity
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetWindowOpacity(SDL_Window *window, float opacity)
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowOpacity(SDL_Window *window, float opacity)
   /// ```
   bool setOpacity(double opacity) {
     return sdlSetWindowOpacity(this, opacity);
@@ -1075,15 +1075,15 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   ///
   /// \param window the window that should become the child of a parent.
   /// \param parent the new parent window for the child window.
-  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-  /// for more information.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
   /// \sa SDL_SetWindowModal
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetWindowParent(SDL_Window *window, SDL_Window *parent)
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowParent(SDL_Window *window, SDL_Window *parent)
   /// ```
   bool setWindowParent(Pointer<SdlWindow> parent) {
     return sdlSetWindowParent(this, parent);
@@ -1096,17 +1096,16 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// window of a parent, or toggling modal status on will fail.
   ///
   /// \param window the window on which to set the modal state.
-  /// \param modal SDL_TRUE to toggle modal status on, SDL_FALSE to toggle it
-  /// off.
-  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-  /// for more information.
+  /// \param modal true to toggle modal status on, false to toggle it off.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
   /// \sa SDL_SetWindowParent
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetWindowModal(SDL_Window *window, SDL_bool modal)
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowModal(SDL_Window *window, bool modal)
   /// ```
   bool setWindowModal(bool modal) {
     return sdlSetWindowModal(this, modal);
@@ -1116,15 +1115,14 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// Set whether the window may have input focus.
   ///
   /// \param window the window to set focusable state.
-  /// \param focusable SDL_TRUE to allow input focus, SDL_FALSE to not allow
-  /// input focus.
-  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-  /// for more information.
+  /// \param focusable true to allow input focus, false to not allow input focus.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetWindowFocusable(SDL_Window *window, SDL_bool focusable)
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowFocusable(SDL_Window *window, bool focusable)
   /// ```
   bool setWindowFocasable(bool focusable) {
     return sdlSetWindowFocusable(this, focusable);
@@ -1146,13 +1144,13 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// the client area.
   /// \param y the y coordinate of the menu, relative to the origin (top-left) of
   /// the client area.
-  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-  /// for more information.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_ShowWindowSystemMenu(SDL_Window *window, int x, int y)
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_ShowWindowSystemMenu(SDL_Window *window, int x, int y)
   /// ```
   bool showWindowSystemMenu(int x, int y) {
     return sdlShowWindowSystemMenu(this, x, y);
@@ -1182,7 +1180,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// Specifying NULL for a callback disables hit-testing. Hit-testing is
   /// disabled by default.
   ///
-  /// Platforms that don't support this functionality will return SDL_FALSE
+  /// Platforms that don't support this functionality will return false
   /// unconditionally, even if you're attempting to disable hit-testing.
   ///
   /// Your callback may fire at any time, and its firing does not indicate any
@@ -1196,13 +1194,13 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// \param window the window to set hit-testing on.
   /// \param callback the function to call when doing a hit-test.
   /// \param callback_data an app-defined void pointer passed to **callback**.
-  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-  /// for more information.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetWindowHitTest(SDL_Window *window, SDL_HitTest callback, void *callback_data)
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowHitTest(SDL_Window *window, SDL_HitTest callback, void *callback_data)
   /// ```
   bool setHitTest(Pointer<NativeFunction<SdlHitTest>> callback,
       Pointer<NativeType> callbackData) {
@@ -1214,13 +1212,13 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   ///
   /// \param window the window to be flashed.
   /// \param operation the operation to perform.
-  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-  /// for more information.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_FlashWindow(SDL_Window *window, SDL_FlashOperation operation)
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_FlashWindow(SDL_Window *window, SDL_FlashOperation operation)
   /// ```
   bool flash(int operation) {
     return sdlFlashWindow(this, operation);

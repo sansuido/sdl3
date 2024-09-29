@@ -95,15 +95,15 @@ int sdlPeepEvents(Pointer<SdlEvent> events, int numevents, int action,
 /// instead.
 ///
 /// \param type the type of event to be queried; see SDL_EventType for details.
-/// \returns SDL_TRUE if events matching `type` are present, or SDL_FALSE if
-/// events matching `type` are not present.
+/// \returns true if events matching `type` are present, or false if events
+/// matching `type` are not present.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_HasEvents
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_HasEvent(Uint32 type)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_HasEvent(Uint32 type)
 /// ```
 bool sdlHasEvent(int type) {
   final sdlHasEventLookupFunction = libSdl3.lookupFunction<
@@ -120,15 +120,15 @@ bool sdlHasEvent(int type) {
 /// SDL_EventType for details.
 /// \param maxType the high end of event type to be queried, inclusive; see
 /// SDL_EventType for details.
-/// \returns SDL_TRUE if events with type >= `minType` and <= `maxType` are
-/// present, or SDL_FALSE if not.
+/// \returns true if events with type >= `minType` and <= `maxType` are
+/// present, or false if not.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_HasEvents
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_HasEvents(Uint32 minType, Uint32 maxType)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_HasEvents(Uint32 minType, Uint32 maxType)
 /// ```
 bool sdlHasEvents(int minType, int maxType) {
   final sdlHasEventsLookupFunction = libSdl3.lookupFunction<
@@ -237,8 +237,7 @@ void sdlFlushEvents(int minType, int maxType) {
 ///
 /// \param event the SDL_Event structure to be filled with the next event from
 /// the queue, or NULL.
-/// \returns SDL_TRUE if this got an event or SDL_FALSE if there are none
-/// available.
+/// \returns true if this got an event or false if there are none available.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -247,7 +246,7 @@ void sdlFlushEvents(int minType, int maxType) {
 /// \sa SDL_WaitEventTimeout
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_PollEvent(SDL_Event *event)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_PollEvent(SDL_Event *event)
 /// ```
 bool sdlPollEvent(Pointer<SdlEvent> event) {
   final sdlPollEventLookupFunction = libSdl3.lookupFunction<
@@ -267,8 +266,8 @@ bool sdlPollEvent(Pointer<SdlEvent> event) {
 ///
 /// \param event the SDL_Event structure to be filled in with the next event
 /// from the queue, or NULL.
-/// \returns SDL_TRUE on success or SDL_FALSE if there was an error while
-/// waiting for events; call SDL_GetError() for more information.
+/// \returns true on success or false if there was an error while waiting for
+/// events; call SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -277,7 +276,7 @@ bool sdlPollEvent(Pointer<SdlEvent> event) {
 /// \sa SDL_WaitEventTimeout
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_WaitEvent(SDL_Event *event)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_WaitEvent(SDL_Event *event)
 /// ```
 bool sdlWaitEvent(Pointer<SdlEvent> event) {
   final sdlWaitEventLookupFunction = libSdl3.lookupFunction<
@@ -303,8 +302,8 @@ bool sdlWaitEvent(Pointer<SdlEvent> event) {
 /// from the queue, or NULL.
 /// \param timeoutMS the maximum number of milliseconds to wait for the next
 /// available event.
-/// \returns SDL_TRUE if this got an event or SDL_FALSE if the timeout elapsed
-/// without any events available.
+/// \returns true if this got an event or false if the timeout elapsed without
+/// any events available.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -313,7 +312,7 @@ bool sdlWaitEvent(Pointer<SdlEvent> event) {
 /// \sa SDL_WaitEvent
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_WaitEventTimeout(SDL_Event *event, Sint32 timeoutMS)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_WaitEventTimeout(SDL_Event *event, Sint32 timeoutMS)
 /// ```
 bool sdlWaitEventTimeout(Pointer<SdlEvent> event, int timeoutMs) {
   final sdlWaitEventTimeoutLookupFunction = libSdl3.lookupFunction<
@@ -345,9 +344,9 @@ bool sdlWaitEventTimeout(Pointer<SdlEvent> event, int timeoutMs) {
 /// its own custom event types.
 ///
 /// \param event the SDL_Event to be added to the queue.
-/// \returns SDL_TRUE on success, SDL_FALSE if the event was filtered or on
-/// failure; call SDL_GetError() for more information. A common reason
-/// for error is the event queue being full.
+/// \returns true on success, false if the event was filtered or on failure;
+/// call SDL_GetError() for more information. A common reason for
+/// error is the event queue being full.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -356,7 +355,7 @@ bool sdlWaitEventTimeout(Pointer<SdlEvent> event, int timeoutMs) {
 /// \sa SDL_RegisterEvents
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_PushEvent(SDL_Event *event)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_PushEvent(SDL_Event *event)
 /// ```
 bool sdlPushEvent(Pointer<SdlEvent> event) {
   final sdlPushEventLookupFunction = libSdl3.lookupFunction<
@@ -369,10 +368,10 @@ bool sdlPushEvent(Pointer<SdlEvent> event) {
 /// Set up a filter to process all events before they change internal state and
 /// are posted to the internal event queue.
 ///
-/// If the filter function returns SDL_TRUE when called, then the event will be
-/// added to the internal queue. If it returns SDL_FALSE, then the event will
-/// be dropped from the queue, but the internal state will still be updated.
-/// This allows selective filtering of dynamically arriving events.
+/// If the filter function returns true when called, then the event will be
+/// added to the internal queue. If it returns false, then the event will be
+/// dropped from the queue, but the internal state will still be updated. This
+/// allows selective filtering of dynamically arriving events.
 ///
 /// **WARNING**: Be very careful of what you do in the event filter function,
 /// as it may run in a different thread!
@@ -433,14 +432,14 @@ void sdlSetEventFilter(Pointer<NativeFunction<SdlEventFilter>> filter,
 /// \param filter the current callback function will be stored here.
 /// \param userdata the pointer that is passed to the current event filter will
 /// be stored here.
-/// \returns SDL_TRUE on success or SDL_FALSE if there is no event filter set.
+/// \returns true on success or false if there is no event filter set.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_SetEventFilter
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetEventFilter(SDL_EventFilter *filter, void **userdata)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GetEventFilter(SDL_EventFilter *filter, void **userdata)
 /// ```
 bool sdlGetEventFilter(Pointer<Pointer<NativeFunction<SdlEventFilter>>> filter,
     Pointer<Pointer<NativeType>> userdata) {
@@ -472,8 +471,8 @@ bool sdlGetEventFilter(Pointer<Pointer<NativeFunction<SdlEventFilter>>> filter,
 ///
 /// \param filter an SDL_EventFilter function to call when an event happens.
 /// \param userdata a pointer that is passed to `filter`.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -483,7 +482,7 @@ bool sdlGetEventFilter(Pointer<Pointer<NativeFunction<SdlEventFilter>>> filter,
 /// \sa SDL_SetEventFilter
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_AddEventWatch(SDL_EventFilter filter, void *userdata)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_AddEventWatch(SDL_EventFilter filter, void *userdata)
 /// ```
 bool sdlAddEventWatch(Pointer<NativeFunction<SdlEventFilter>> filter,
     Pointer<NativeType> userdata) {
@@ -523,7 +522,7 @@ void sdlRemoveEventWatch(Pointer<NativeFunction<SdlEventFilter>> filter,
 
 ///
 /// Run a specific filter function on the current event queue, removing any
-/// events for which the filter returns SDL_FALSE.
+/// events for which the filter returns false.
 ///
 /// See SDL_SetEventFilter() for more information. Unlike SDL_SetEventFilter(),
 /// this function does not change the filter permanently, it only uses the
@@ -561,7 +560,7 @@ void sdlFilterEvents(Pointer<NativeFunction<SdlEventFilter>> filter,
 /// \sa SDL_EventEnabled
 ///
 /// ```c
-/// extern SDL_DECLSPEC void SDLCALL SDL_SetEventEnabled(Uint32 type, SDL_bool enabled)
+/// extern SDL_DECLSPEC void SDLCALL SDL_SetEventEnabled(Uint32 type, bool enabled)
 /// ```
 void sdlSetEventEnabled(int type, bool enabled) {
   final sdlSetEventEnabledLookupFunction = libSdl3.lookupFunction<
@@ -574,14 +573,14 @@ void sdlSetEventEnabled(int type, bool enabled) {
 /// Query the state of processing events by type.
 ///
 /// \param type the type of event; see SDL_EventType for details.
-/// \returns SDL_TRUE if the event is being processed, SDL_FALSE otherwise.
+/// \returns true if the event is being processed, false otherwise.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_SetEventEnabled
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_EventEnabled(Uint32 type)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_EventEnabled(Uint32 type)
 /// ```
 bool sdlEventEnabled(int type) {
   final sdlEventEnabledLookupFunction = libSdl3.lookupFunction<

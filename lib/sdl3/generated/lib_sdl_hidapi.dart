@@ -593,12 +593,12 @@ int sdlHidGetReportDescriptor(
 ///
 /// Start or stop a BLE scan on iOS and tvOS to pair Steam Controllers.
 ///
-/// \param active SDL_TRUE to start the scan, SDL_FALSE to stop the scan.
+/// \param active true to start the scan, false to stop the scan.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC void SDLCALL SDL_hid_ble_scan(SDL_bool active)
+/// extern SDL_DECLSPEC void SDLCALL SDL_hid_ble_scan(bool active)
 /// ```
 void sdlHidBleScan(bool active) {
   final sdlHidBleScanLookupFunction = libSdl3.lookupFunction<

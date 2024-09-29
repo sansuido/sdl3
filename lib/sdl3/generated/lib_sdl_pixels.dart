@@ -38,8 +38,8 @@ String? sdlGetPixelFormatName(int format) {
 /// \param Gmask a pointer filled in with the green mask for the format.
 /// \param Bmask a pointer filled in with the blue mask for the format.
 /// \param Amask a pointer filled in with the alpha mask for the format.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -48,7 +48,7 @@ String? sdlGetPixelFormatName(int format) {
 /// \sa SDL_GetPixelFormatForMasks
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetMasksForPixelFormat(SDL_PixelFormat format, int *bpp, Uint32 *Rmask, Uint32 *Gmask, Uint32 *Bmask, Uint32 *Amask)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GetMasksForPixelFormat(SDL_PixelFormat format, int *bpp, Uint32 *Rmask, Uint32 *Gmask, Uint32 *Bmask, Uint32 *Amask)
 /// ```
 bool sdlGetMasksForPixelFormat(
     int format,
@@ -167,8 +167,8 @@ Pointer<SdlPalette> sdlCreatePalette(int ncolors) {
 /// \param colors an array of SDL_Color structures to copy into the palette.
 /// \param firstcolor the index of the first palette entry to modify.
 /// \param ncolors the number of entries to modify.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \threadsafety It is safe to call this function from any thread, as long as
 /// the palette is not modified or destroyed in another thread.
@@ -176,7 +176,7 @@ Pointer<SdlPalette> sdlCreatePalette(int ncolors) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetPaletteColors(SDL_Palette *palette, const SDL_Color *colors, int firstcolor, int ncolors)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetPaletteColors(SDL_Palette *palette, const SDL_Color *colors, int firstcolor, int ncolors)
 /// ```
 bool sdlSetPaletteColors(Pointer<SdlPalette> palette, Pointer<SdlColor> colors,
     int firstcolor, int ncolors) {

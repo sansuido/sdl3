@@ -55,15 +55,15 @@ int sdlCreateProperties() {
 ///
 /// \param src the properties to copy.
 /// \param dst the destination properties.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_CopyProperties(SDL_PropertiesID src, SDL_PropertiesID dst)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_CopyProperties(SDL_PropertiesID src, SDL_PropertiesID dst)
 /// ```
 bool sdlCopyProperties(int src, int dst) {
   final sdlCopyPropertiesLookupFunction = libSdl3.lookupFunction<
@@ -85,8 +85,8 @@ bool sdlCopyProperties(int src, int dst) {
 /// thread.
 ///
 /// \param props the properties to lock.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -95,7 +95,7 @@ bool sdlCopyProperties(int src, int dst) {
 /// \sa SDL_UnlockProperties
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_LockProperties(SDL_PropertiesID props)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_LockProperties(SDL_PropertiesID props)
 /// ```
 bool sdlLockProperties(int props) {
   final sdlLockPropertiesLookupFunction = libSdl3.lookupFunction<
@@ -143,8 +143,8 @@ void sdlUnlockProperties(int props) {
 /// \param cleanup the function to call when this property is deleted, or NULL
 /// if no cleanup is necessary.
 /// \param userdata a pointer that is passed to the cleanup function.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -155,7 +155,7 @@ void sdlUnlockProperties(int props) {
 /// \sa SDL_CleanupPropertyCallback
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetPointerPropertyWithCleanup(SDL_PropertiesID props, const char *name, void *value, SDL_CleanupPropertyCallback cleanup, void *userdata)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetPointerPropertyWithCleanup(SDL_PropertiesID props, const char *name, void *value, SDL_CleanupPropertyCallback cleanup, void *userdata)
 /// ```
 bool sdlSetPointerPropertyWithCleanup(
     int props,
@@ -190,8 +190,8 @@ bool sdlSetPointerPropertyWithCleanup(
 /// \param props the properties to modify.
 /// \param name the name of the property to modify.
 /// \param value the new value of the property, or NULL to delete the property.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -206,7 +206,7 @@ bool sdlSetPointerPropertyWithCleanup(
 /// \sa SDL_SetStringProperty
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetPointerProperty(SDL_PropertiesID props, const char *name, void *value)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetPointerProperty(SDL_PropertiesID props, const char *name, void *value)
 /// ```
 bool sdlSetPointerProperty(int props, String? name, Pointer<NativeType> value) {
   final sdlSetPointerPropertyLookupFunction = libSdl3.lookupFunction<
@@ -230,8 +230,8 @@ bool sdlSetPointerProperty(int props, String? name, Pointer<NativeType> value) {
 /// \param props the properties to modify.
 /// \param name the name of the property to modify.
 /// \param value the new value of the property, or NULL to delete the property.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -240,7 +240,7 @@ bool sdlSetPointerProperty(int props, String? name, Pointer<NativeType> value) {
 /// \sa SDL_GetStringProperty
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetStringProperty(SDL_PropertiesID props, const char *name, const char *value)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetStringProperty(SDL_PropertiesID props, const char *name, const char *value)
 /// ```
 bool sdlSetStringProperty(int props, String? name, String? value) {
   final sdlSetStringPropertyLookupFunction = libSdl3.lookupFunction<
@@ -262,8 +262,8 @@ bool sdlSetStringProperty(int props, String? name, String? value) {
 /// \param props the properties to modify.
 /// \param name the name of the property to modify.
 /// \param value the new value of the property.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -272,7 +272,7 @@ bool sdlSetStringProperty(int props, String? name, String? value) {
 /// \sa SDL_GetNumberProperty
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetNumberProperty(SDL_PropertiesID props, const char *name, Sint64 value)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetNumberProperty(SDL_PropertiesID props, const char *name, Sint64 value)
 /// ```
 bool sdlSetNumberProperty(int props, String? name, int value) {
   final sdlSetNumberPropertyLookupFunction = libSdl3.lookupFunction<
@@ -292,8 +292,8 @@ bool sdlSetNumberProperty(int props, String? name, int value) {
 /// \param props the properties to modify.
 /// \param name the name of the property to modify.
 /// \param value the new value of the property.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -302,7 +302,7 @@ bool sdlSetNumberProperty(int props, String? name, int value) {
 /// \sa SDL_GetFloatProperty
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetFloatProperty(SDL_PropertiesID props, const char *name, float value)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetFloatProperty(SDL_PropertiesID props, const char *name, float value)
 /// ```
 bool sdlSetFloatProperty(int props, String? name, double value) {
   final sdlSetFloatPropertyLookupFunction = libSdl3.lookupFunction<
@@ -322,8 +322,8 @@ bool sdlSetFloatProperty(int props, String? name, double value) {
 /// \param props the properties to modify.
 /// \param name the name of the property to modify.
 /// \param value the new value of the property.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -332,7 +332,7 @@ bool sdlSetFloatProperty(int props, String? name, double value) {
 /// \sa SDL_GetBooleanProperty
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetBooleanProperty(SDL_PropertiesID props, const char *name, SDL_bool value)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetBooleanProperty(SDL_PropertiesID props, const char *name, bool value)
 /// ```
 bool sdlSetBooleanProperty(int props, String? name, bool value) {
   final sdlSetBooleanPropertyLookupFunction = libSdl3.lookupFunction<
@@ -352,7 +352,7 @@ bool sdlSetBooleanProperty(int props, String? name, bool value) {
 ///
 /// \param props the properties to query.
 /// \param name the name of the property to query.
-/// \returns SDL_TRUE if the property exists, or SDL_FALSE if it doesn't.
+/// \returns true if the property exists, or false if it doesn't.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -361,7 +361,7 @@ bool sdlSetBooleanProperty(int props, String? name, bool value) {
 /// \sa SDL_GetPropertyType
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_HasProperty(SDL_PropertiesID props, const char *name)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_HasProperty(SDL_PropertiesID props, const char *name)
 /// ```
 bool sdlHasProperty(int props, String? name) {
   final sdlHasPropertyLookupFunction = libSdl3.lookupFunction<
@@ -583,7 +583,7 @@ double sdlGetFloatProperty(int props, String? name, double defaultValue) {
 /// \sa SDL_SetBooleanProperty
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetBooleanProperty(SDL_PropertiesID props, const char *name, SDL_bool default_value)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GetBooleanProperty(SDL_PropertiesID props, const char *name, bool default_value)
 /// ```
 bool sdlGetBooleanProperty(int props, String? name, bool defaultValue) {
   final sdlGetBooleanPropertyLookupFunction = libSdl3.lookupFunction<
@@ -603,15 +603,15 @@ bool sdlGetBooleanProperty(int props, String? name, bool defaultValue) {
 ///
 /// \param props the properties to modify.
 /// \param name the name of the property to clear.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_ClearProperty(SDL_PropertiesID props, const char *name)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_ClearProperty(SDL_PropertiesID props, const char *name)
 /// ```
 bool sdlClearProperty(int props, String? name) {
   final sdlClearPropertyLookupFunction = libSdl3.lookupFunction<
@@ -632,15 +632,15 @@ bool sdlClearProperty(int props, String? name) {
 /// \param props the properties to query.
 /// \param callback the function to call for each property.
 /// \param userdata a pointer that is passed to `callback`.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_EnumerateProperties(SDL_PropertiesID props, SDL_EnumeratePropertiesCallback callback, void *userdata)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_EnumerateProperties(SDL_PropertiesID props, SDL_EnumeratePropertiesCallback callback, void *userdata)
 /// ```
 bool sdlEnumerateProperties(
     int props,

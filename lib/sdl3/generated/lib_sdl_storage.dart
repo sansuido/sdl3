@@ -154,10 +154,10 @@ Pointer<SdlStorage> sdlOpenStorage(
 /// Closes and frees a storage container.
 ///
 /// \param storage a storage container to close.
-/// \returns SDL_TRUE if the container was freed with no errors, SDL_FALSE
-/// otherwise; call SDL_GetError() for more information. Even if the
-/// function returns an error, the container data will be freed; the
-/// error is only for informational purposes.
+/// \returns true if the container was freed with no errors, false otherwise;
+/// call SDL_GetError() for more information. Even if the function
+/// returns an error, the container data will be freed; the error is
+/// only for informational purposes.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -167,7 +167,7 @@ Pointer<SdlStorage> sdlOpenStorage(
 /// \sa SDL_OpenUserStorage
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_CloseStorage(SDL_Storage *storage)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_CloseStorage(SDL_Storage *storage)
 /// ```
 bool sdlCloseStorage(Pointer<SdlStorage> storage) {
   final sdlCloseStorageLookupFunction = libSdl3.lookupFunction<
@@ -179,17 +179,17 @@ bool sdlCloseStorage(Pointer<SdlStorage> storage) {
 ///
 /// Checks if the storage container is ready to use.
 ///
-/// This function should be called in regular intervals until it returns
-/// SDL_TRUE - however, it is not recommended to spinwait on this call, as the
-/// backend may depend on a synchronous message loop.
+/// This function should be called in regular intervals until it returns true -
+/// however, it is not recommended to spinwait on this call, as the backend may
+/// depend on a synchronous message loop.
 ///
 /// \param storage a storage container to query.
-/// \returns SDL_TRUE if the container is ready, SDL_FALSE otherwise.
+/// \returns true if the container is ready, false otherwise.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_StorageReady(SDL_Storage *storage)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_StorageReady(SDL_Storage *storage)
 /// ```
 bool sdlStorageReady(Pointer<SdlStorage> storage) {
   final sdlStorageReadyLookupFunction = libSdl3.lookupFunction<
@@ -204,8 +204,8 @@ bool sdlStorageReady(Pointer<SdlStorage> storage) {
 /// \param storage a storage container to query.
 /// \param path the relative path of the file to query.
 /// \param length a pointer to be filled with the file's length.
-/// \returns SDL_TRUE if the file could be queried or SDL_FALSE on failure;
-/// call SDL_GetError() for more information.
+/// \returns true if the file could be queried or false on failure; call
+/// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -213,7 +213,7 @@ bool sdlStorageReady(Pointer<SdlStorage> storage) {
 /// \sa SDL_StorageReady
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetStorageFileSize(SDL_Storage *storage, const char *path, Uint64 *length)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GetStorageFileSize(SDL_Storage *storage, const char *path, Uint64 *length)
 /// ```
 bool sdlGetStorageFileSize(
     Pointer<SdlStorage> storage, String? path, Pointer<Uint64> length) {
@@ -237,8 +237,8 @@ bool sdlGetStorageFileSize(
 /// \param path the relative path of the file to read.
 /// \param destination a client-provided buffer to read the file into.
 /// \param length the length of the destination buffer.
-/// \returns SDL_TRUE if the file was read or SDL_FALSE on failure; call
-/// SDL_GetError() for more information.
+/// \returns true if the file was read or false on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -247,7 +247,7 @@ bool sdlGetStorageFileSize(
 /// \sa SDL_WriteStorageFile
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_ReadStorageFile(SDL_Storage *storage, const char *path, void *destination, Uint64 length)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_ReadStorageFile(SDL_Storage *storage, const char *path, void *destination, Uint64 length)
 /// ```
 bool sdlReadStorageFile(Pointer<SdlStorage> storage, String? path,
     Pointer<NativeType> destination, int length) {
@@ -271,7 +271,7 @@ bool sdlReadStorageFile(Pointer<SdlStorage> storage, String? path,
 /// \param path the relative path of the file to write.
 /// \param source a client-provided buffer to write from.
 /// \param length the length of the source buffer.
-/// \returns SDL_TRUE if the file was written or SDL_FALSE on failure; call
+/// \returns true if the file was written or false on failure; call
 /// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
@@ -281,7 +281,7 @@ bool sdlReadStorageFile(Pointer<SdlStorage> storage, String? path,
 /// \sa SDL_StorageReady
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_WriteStorageFile(SDL_Storage *storage, const char *path, const void *source, Uint64 length)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_WriteStorageFile(SDL_Storage *storage, const char *path, const void *source, Uint64 length)
 /// ```
 bool sdlWriteStorageFile(Pointer<SdlStorage> storage, String? path,
     Pointer<NativeType> source, int length) {
@@ -303,15 +303,15 @@ bool sdlWriteStorageFile(Pointer<SdlStorage> storage, String? path,
 ///
 /// \param storage a storage container.
 /// \param path the path of the directory to create.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_StorageReady
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_CreateStorageDirectory(SDL_Storage *storage, const char *path)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_CreateStorageDirectory(SDL_Storage *storage, const char *path)
 /// ```
 bool sdlCreateStorageDirectory(Pointer<SdlStorage> storage, String? path) {
   final sdlCreateStorageDirectoryLookupFunction = libSdl3.lookupFunction<
@@ -336,15 +336,15 @@ bool sdlCreateStorageDirectory(Pointer<SdlStorage> storage, String? path) {
 /// \param path the path of the directory to enumerate.
 /// \param callback a function that is called for each entry in the directory.
 /// \param userdata a pointer that is passed to `callback`.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_StorageReady
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_EnumerateStorageDirectory(SDL_Storage *storage, const char *path, SDL_EnumerateDirectoryCallback callback, void *userdata)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_EnumerateStorageDirectory(SDL_Storage *storage, const char *path, SDL_EnumerateDirectoryCallback callback, void *userdata)
 /// ```
 bool sdlEnumerateStorageDirectory(
     Pointer<SdlStorage> storage,
@@ -375,15 +375,15 @@ bool sdlEnumerateStorageDirectory(
 ///
 /// \param storage a storage container.
 /// \param path the path of the directory to enumerate.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_StorageReady
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_RemoveStoragePath(SDL_Storage *storage, const char *path)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_RemoveStoragePath(SDL_Storage *storage, const char *path)
 /// ```
 bool sdlRemoveStoragePath(Pointer<SdlStorage> storage, String? path) {
   final sdlRemoveStoragePathLookupFunction = libSdl3.lookupFunction<
@@ -402,15 +402,15 @@ bool sdlRemoveStoragePath(Pointer<SdlStorage> storage, String? path) {
 /// \param storage a storage container.
 /// \param oldpath the old path.
 /// \param newpath the new path.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_StorageReady
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_RenameStoragePath(SDL_Storage *storage, const char *oldpath, const char *newpath)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_RenameStoragePath(SDL_Storage *storage, const char *oldpath, const char *newpath)
 /// ```
 bool sdlRenameStoragePath(
     Pointer<SdlStorage> storage, String? oldpath, String? newpath) {
@@ -435,15 +435,15 @@ bool sdlRenameStoragePath(
 /// \param storage a storage container.
 /// \param oldpath the old path.
 /// \param newpath the new path.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_StorageReady
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_CopyStorageFile(SDL_Storage *storage, const char *oldpath, const char *newpath)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_CopyStorageFile(SDL_Storage *storage, const char *oldpath, const char *newpath)
 /// ```
 bool sdlCopyStorageFile(
     Pointer<SdlStorage> storage, String? oldpath, String? newpath) {
@@ -469,15 +469,15 @@ bool sdlCopyStorageFile(
 /// \param path the path to query.
 /// \param info a pointer filled in with information about the path, or NULL to
 /// check for the existence of a file.
-/// \returns SDL_TRUE on success or SDL_FALSE if the file doesn't exist, or
-/// another failure; call SDL_GetError() for more information.
+/// \returns true on success or false if the file doesn't exist, or another
+/// failure; call SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_StorageReady
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetStoragePathInfo(SDL_Storage *storage, const char *path, SDL_PathInfo *info)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GetStoragePathInfo(SDL_Storage *storage, const char *path, SDL_PathInfo *info)
 /// ```
 bool sdlGetStoragePathInfo(
     Pointer<SdlStorage> storage, String? path, Pointer<SdlPathInfo> info) {

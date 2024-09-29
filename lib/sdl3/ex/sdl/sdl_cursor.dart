@@ -148,8 +148,8 @@ extension SdlCursorEx on SdlCursor {
   ///
   /// Show the cursor.
   ///
-  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-  /// for more information.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -157,7 +157,7 @@ extension SdlCursorEx on SdlCursor {
   /// \sa SDL_HideCursor
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_ShowCursor(void)
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_ShowCursor(void)
   /// ```
   static bool show() {
     return sdlShowCursor();
@@ -166,8 +166,8 @@ extension SdlCursorEx on SdlCursor {
   ///
   /// Hide the cursor.
   ///
-  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-  /// for more information.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -175,7 +175,7 @@ extension SdlCursorEx on SdlCursor {
   /// \sa SDL_ShowCursor
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_HideCursor(void)
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_HideCursor(void)
   /// ```
   static bool hide() {
     return sdlHideCursor();
@@ -194,15 +194,15 @@ extension SdlCursorPointerEx on Pointer<SdlCursor> {
   /// this is desired for any reason.
   ///
   /// \param cursor a cursor to make active.
-  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-  /// for more information.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
   /// \sa SDL_GetCursor
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetCursor(SDL_Cursor *cursor)
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_SetCursor(SDL_Cursor *cursor)
   /// ```
   bool set() {
     return sdlSetCursor(this);

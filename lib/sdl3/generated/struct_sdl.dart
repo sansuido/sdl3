@@ -41,6 +41,16 @@ final class SdlAtomicInt extends Struct {
   external int blank_1;
 }
 
+// SDL_AtomicU32
+final class SdlAtomicU32 extends Struct {
+  // [0]+(4)
+  @Uint32()
+  external int value;
+  // [] +(4)
+  @Uint32()
+  external int blank_1;
+}
+
 // SDL_AudioSpec
 final class SdlAudioSpec extends Struct {
   // [0]+(4)
@@ -1927,7 +1937,7 @@ extension SdlGpuColorTargetDescriptionExtension
       (cast<Uint8>() + 4).cast<SdlGpuColorTargetBlendState>();
 }
 
-// SDL_GpuGraphicsPipelineTargetInfo
+// SDL_GPUGraphicsPipelineTargetInfo
 final class SdlGpuGraphicsPipelineTargetInfo extends Struct {
   // [0]+(8)
   external Pointer<SdlGpuColorTargetDescription> colorTargetDescriptions;
@@ -2096,18 +2106,26 @@ final class SdlGpuColorTargetInfo extends Struct {
   // [36]+(4)
   @Int32()
   external int storeOp;
-  // [40]+(1)
+  // [40]+(8)
+  external Pointer<SdlGpuTexture> resolveTexture;
+  // [48]+(4)
+  @Uint32()
+  external int resolveMipLevel;
+  // [52]+(4)
+  @Uint32()
+  external int resolveLayer;
+  // [56]+(1)
   @Uint8()
   external int cycle;
-  // [41]+(1)
+  // [57]+(1)
+  @Uint8()
+  external int cycleResolveTexture;
+  // [58]+(1)
   @Uint8()
   external int padding1;
-  // [42]+(1)
+  // [59]+(1)
   @Uint8()
   external int padding2;
-  // [43]+(1)
-  @Uint8()
-  external int padding3;
   // [] +(4)
   @Uint32()
   external int blank_1;

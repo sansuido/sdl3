@@ -19,11 +19,11 @@ extension SdlRectPointerEx on Pointer<SdlRect> {
   ///
   /// Determine whether two rectangles intersect.
   ///
-  /// If either pointer is NULL the function will return SDL_FALSE.
+  /// If either pointer is NULL the function will return false.
   ///
   /// \param A an SDL_Rect structure representing the first rectangle.
   /// \param B an SDL_Rect structure representing the second rectangle.
-  /// \returns SDL_TRUE if there is an intersection, SDL_FALSE otherwise.
+  /// \returns true if there is an intersection, false otherwise.
   ///
   /// \threadsafety It is safe to call this function from any thread.
   ///
@@ -32,7 +32,7 @@ extension SdlRectPointerEx on Pointer<SdlRect> {
   /// \sa SDL_GetRectIntersection
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_HasRectIntersection(const SDL_Rect *A, const SDL_Rect *B)
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_HasRectIntersection(const SDL_Rect *A, const SDL_Rect *B)
   /// ```
   bool hasIntersection(Pointer<SdlRect> b) {
     return sdlHasRectIntersection(this, b);
@@ -41,20 +41,20 @@ extension SdlRectPointerEx on Pointer<SdlRect> {
   ///
   /// Calculate the intersection of two rectangles.
   ///
-  /// If `result` is NULL then this function will return SDL_FALSE.
+  /// If `result` is NULL then this function will return false.
   ///
   /// \param A an SDL_Rect structure representing the first rectangle.
   /// \param B an SDL_Rect structure representing the second rectangle.
   /// \param result an SDL_Rect structure filled in with the intersection of
   /// rectangles `A` and `B`.
-  /// \returns SDL_TRUE if there is an intersection, SDL_FALSE otherwise.
+  /// \returns true if there is an intersection, false otherwise.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
   /// \sa SDL_HasRectIntersection
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetRectIntersection(const SDL_Rect *A, const SDL_Rect *B, SDL_Rect *result)
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRectIntersection(const SDL_Rect *A, const SDL_Rect *B, SDL_Rect *result)
   /// ```
   bool getIntersection(Pointer<SdlRect> b, Pointer<SdlRect> result) {
     return sdlGetRectIntersection(this, b, result);
@@ -67,13 +67,13 @@ extension SdlRectPointerEx on Pointer<SdlRect> {
   /// \param B an SDL_Rect structure representing the second rectangle.
   /// \param result an SDL_Rect structure filled in with the union of rectangles
   /// `A` and `B`.
-  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-  /// for more information.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetRectUnion(const SDL_Rect *A, const SDL_Rect *B, SDL_Rect *result)
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRectUnion(const SDL_Rect *A, const SDL_Rect *B, SDL_Rect *result)
   /// ```
   bool union(Pointer<SdlRect> b, Pointer<SdlRect> result) {
     return sdlGetRectUnion(this, b, result);
@@ -93,12 +93,12 @@ extension SdlRectPointerEx on Pointer<SdlRect> {
   /// \param Y1 a pointer to the starting Y-coordinate of the line.
   /// \param X2 a pointer to the ending X-coordinate of the line.
   /// \param Y2 a pointer to the ending Y-coordinate of the line.
-  /// \returns SDL_TRUE if there is an intersection, SDL_FALSE otherwise.
+  /// \returns true if there is an intersection, false otherwise.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetRectAndLineIntersection(const SDL_Rect *rect, int *X1, int *Y1, int *X2, int *Y2)
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRectAndLineIntersection(const SDL_Rect *rect, int *X1, int *Y1, int *X2, int *Y2)
   /// ```
   bool getLineIntersection(Pointer<Int32> x1, Pointer<Int32> y1,
       Pointer<Int32> x2, Pointer<Int32> y2) {

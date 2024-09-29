@@ -13,8 +13,8 @@ import 'lib_sdl.dart';
 /// \param name the hint to set.
 /// \param value the value of the hint variable.
 /// \param priority the SDL_HintPriority level for the hint.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -25,7 +25,7 @@ import 'lib_sdl.dart';
 /// \sa SDL_SetHint
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetHintWithPriority(const char *name, const char *value, SDL_HintPriority priority)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetHintWithPriority(const char *name, const char *value, SDL_HintPriority priority)
 /// ```
 bool sdlSetHintWithPriority(String? name, String? value, int priority) {
   final sdlSetHintWithPriorityLookupFunction = libSdl3.lookupFunction<
@@ -51,8 +51,8 @@ bool sdlSetHintWithPriority(String? name, String? value, int priority) {
 ///
 /// \param name the hint to set.
 /// \param value the value of the hint variable.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -63,7 +63,7 @@ bool sdlSetHintWithPriority(String? name, String? value, int priority) {
 /// \sa SDL_SetHintWithPriority
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetHint(const char *name, const char *value)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetHint(const char *name, const char *value)
 /// ```
 bool sdlSetHint(String? name, String? value) {
   final sdlSetHintLookupFunction = libSdl3.lookupFunction<
@@ -85,8 +85,8 @@ bool sdlSetHint(String? name, String? value) {
 /// change.
 ///
 /// \param name the hint to set.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -96,7 +96,7 @@ bool sdlSetHint(String? name, String? value) {
 /// \sa SDL_ResetHints
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_ResetHint(const char *name)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_ResetHint(const char *name)
 /// ```
 bool sdlResetHint(String? name) {
   final sdlResetHintLookupFunction = libSdl3.lookupFunction<
@@ -180,7 +180,7 @@ String? sdlGetHint(String? name) {
 /// \sa SDL_SetHint
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetHintBoolean(const char *name, SDL_bool default_value)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GetHintBoolean(const char *name, bool default_value)
 /// ```
 bool sdlGetHintBoolean(String? name, bool defaultValue) {
   final sdlGetHintBooleanLookupFunction = libSdl3.lookupFunction<
@@ -203,8 +203,8 @@ bool sdlGetHintBoolean(String? name, bool defaultValue) {
 /// \param callback An SDL_HintCallback function that will be called when the
 /// hint value changes.
 /// \param userdata a pointer to pass to the callback function.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -213,7 +213,7 @@ bool sdlGetHintBoolean(String? name, bool defaultValue) {
 /// \sa SDL_RemoveHintCallback
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_AddHintCallback(const char *name, SDL_HintCallback callback, void *userdata)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_AddHintCallback(const char *name, SDL_HintCallback callback, void *userdata)
 /// ```
 bool sdlAddHintCallback(
     String? name,

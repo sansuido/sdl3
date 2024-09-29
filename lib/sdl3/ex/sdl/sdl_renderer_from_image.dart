@@ -59,9 +59,9 @@ extension SdlRendererFromImagePointerEx on Pointer<SdlRenderer> {
   /// data (but in many cases, this will just end up being 32-bit RGB or 32-bit
   /// RGBA).
   ///
-  /// If `closeio` is SDL_TRUE, `src` will be closed before returning, whether
-  /// this function succeeds or not. SDL_image reads everything it needs from
-  /// `src` during this call in any case.
+  /// If `closeio` is true, `src` will be closed before returning, whether this
+  /// function succeeds or not. SDL_image reads everything it needs from `src`
+  /// during this call in any case.
   ///
   /// There is a separate function to read files from disk without having to deal
   /// with SDL_IOStream: `IMG_LoadTexture(renderer, "filename.jpg")` will call
@@ -80,8 +80,8 @@ extension SdlRendererFromImagePointerEx on Pointer<SdlRenderer> {
   ///
   /// \param renderer the SDL_Renderer to use to create the GPU texture.
   /// \param src an SDL_IOStream that data will be read from.
-  /// \param closeio SDL_TRUE to close/free the SDL_IOStream before returning,
-  /// SDL_FALSE to leave it open.
+  /// \param closeio true to close/free the SDL_IOStream before returning, false
+  /// to leave it open.
   /// \returns a new texture, or NULL on error.
   ///
   /// \since This function is available since SDL_image 3.0.0.
@@ -91,7 +91,7 @@ extension SdlRendererFromImagePointerEx on Pointer<SdlRenderer> {
   /// \sa SDL_DestroyTexture
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_Texture * SDLCALL IMG_LoadTexture_IO(SDL_Renderer *renderer, SDL_IOStream *src, SDL_bool closeio)
+  /// extern SDL_DECLSPEC SDL_Texture * SDLCALL IMG_LoadTexture_IO(SDL_Renderer *renderer, SDL_IOStream *src, bool closeio)
   /// ```
   Pointer<SdlTexture> loadTextureIo(Pointer<SdlIoStream> src, bool freesrc) {
     return imgLoadTextureIo(this, src, freesrc);
@@ -111,9 +111,9 @@ extension SdlRendererFromImagePointerEx on Pointer<SdlRenderer> {
   /// data (but in many cases, this will just end up being 32-bit RGB or 32-bit
   /// RGBA).
   ///
-  /// If `closeio` is SDL_TRUE, `src` will be closed before returning, whether
-  /// this function succeeds or not. SDL_image reads everything it needs from
-  /// `src` during this call in any case.
+  /// If `closeio` is true, `src` will be closed before returning, whether this
+  /// function succeeds or not. SDL_image reads everything it needs from `src`
+  /// during this call in any case.
   ///
   /// Even though this function accepts a file type, SDL_image may still try
   /// other decoders that are capable of detecting file type from the contents of
@@ -138,8 +138,8 @@ extension SdlRendererFromImagePointerEx on Pointer<SdlRenderer> {
   ///
   /// \param renderer the SDL_Renderer to use to create the GPU texture.
   /// \param src an SDL_IOStream that data will be read from.
-  /// \param closeio SDL_TRUE to close/free the SDL_IOStream before returning,
-  /// SDL_FALSE to leave it open.
+  /// \param closeio true to close/free the SDL_IOStream before returning, false
+  /// to leave it open.
   /// \param type a filename extension that represent this data ("BMP", "GIF",
   /// "PNG", etc).
   /// \returns a new texture, or NULL on error.
@@ -151,7 +151,7 @@ extension SdlRendererFromImagePointerEx on Pointer<SdlRenderer> {
   /// \sa SDL_DestroyTexture
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_Texture * SDLCALL IMG_LoadTextureTyped_IO(SDL_Renderer *renderer, SDL_IOStream *src, SDL_bool closeio, const char *type)
+  /// extern SDL_DECLSPEC SDL_Texture * SDLCALL IMG_LoadTextureTyped_IO(SDL_Renderer *renderer, SDL_IOStream *src, bool closeio, const char *type)
   /// ```
   Pointer<SdlTexture> loadTextureTypedIo(
       Pointer<SdlIoStream> src, bool freesrc, String type) {

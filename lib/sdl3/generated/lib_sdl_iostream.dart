@@ -261,22 +261,22 @@ Pointer<SdlIoStream> sdlOpenIo(
 ///
 /// SDL_CloseIO() closes and cleans up the SDL_IOStream stream. It releases any
 /// resources used by the stream and frees the SDL_IOStream itself. This
-/// returns SDL_TRUE on success, or SDL_FALSE if the stream failed to flush to
-/// its output (e.g. to disk).
+/// returns true on success, or false if the stream failed to flush to its
+/// output (e.g. to disk).
 ///
 /// Note that if this fails to flush the stream to disk, this function reports
 /// an error, but the SDL_IOStream is still invalid once this function returns.
 ///
 /// \param context SDL_IOStream structure to close.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_OpenIO
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_CloseIO(SDL_IOStream *context)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_CloseIO(SDL_IOStream *context)
 /// ```
 bool sdlCloseIo(Pointer<SdlIoStream> context) {
   final sdlCloseIoLookupFunction = libSdl3.lookupFunction<
@@ -561,8 +561,8 @@ int sdlIOvprintf(
 /// guarantees that any pending data is sent.
 ///
 /// \param context SDL_IOStream structure to flush.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -570,7 +570,7 @@ int sdlIOvprintf(
 /// \sa SDL_WriteIO
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_FlushIO(SDL_IOStream *context)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_FlushIO(SDL_IOStream *context)
 /// ```
 bool sdlFlushIo(Pointer<SdlIoStream> context) {
   final sdlFlushIoLookupFunction = libSdl3.lookupFunction<
@@ -591,8 +591,8 @@ bool sdlFlushIo(Pointer<SdlIoStream> context) {
 /// \param src the SDL_IOStream to read all available data from.
 /// \param datasize a pointer filled in with the number of bytes read, may be
 /// NULL.
-/// \param closeio if SDL_TRUE, calls SDL_CloseIO() on `src` before returning,
-/// even in the case of an error.
+/// \param closeio if true, calls SDL_CloseIO() on `src` before returning, even
+/// in the case of an error.
 /// \returns the data or NULL on failure; call SDL_GetError() for more
 /// information.
 ///
@@ -601,7 +601,7 @@ bool sdlFlushIo(Pointer<SdlIoStream> context) {
 /// \sa SDL_LoadFile
 ///
 /// ```c
-/// extern SDL_DECLSPEC void * SDLCALL SDL_LoadFile_IO(SDL_IOStream *src, size_t *datasize, SDL_bool closeio)
+/// extern SDL_DECLSPEC void * SDLCALL SDL_LoadFile_IO(SDL_IOStream *src, size_t *datasize, bool closeio)
 /// ```
 Pointer<NativeType> sdlLoadFileIo(
     Pointer<SdlIoStream> src, Pointer<Uint32> datasize, bool closeio) {
@@ -651,13 +651,13 @@ Pointer<NativeType> sdlLoadFile(String? file, Pointer<Uint32> datasize) {
 ///
 /// \param src the SDL_IOStream to read from.
 /// \param value a pointer filled in with the data read.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_ReadU8(SDL_IOStream *src, Uint8 *value)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_ReadU8(SDL_IOStream *src, Uint8 *value)
 /// ```
 bool sdlReadU8(Pointer<SdlIoStream> src, Pointer<Uint8> value) {
   final sdlReadU8LookupFunction = libSdl3.lookupFunction<
@@ -672,13 +672,13 @@ bool sdlReadU8(Pointer<SdlIoStream> src, Pointer<Uint8> value) {
 ///
 /// \param src the SDL_IOStream to read from.
 /// \param value a pointer filled in with the data read.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_ReadS8(SDL_IOStream *src, Sint8 *value)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_ReadS8(SDL_IOStream *src, Sint8 *value)
 /// ```
 bool sdlReadS8(Pointer<SdlIoStream> src, Pointer<Int8> value) {
   final sdlReadS8LookupFunction = libSdl3.lookupFunction<
@@ -697,13 +697,13 @@ bool sdlReadS8(Pointer<SdlIoStream> src, Pointer<Int8> value) {
 ///
 /// \param src the stream from which to read data.
 /// \param value a pointer filled in with the data read.
-/// \returns SDL_TRUE on successful write or SDL_FALSE on failure; call
-/// SDL_GetError() for more information.
+/// \returns true on successful write or false on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_ReadU16LE(SDL_IOStream *src, Uint16 *value)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_ReadU16LE(SDL_IOStream *src, Uint16 *value)
 /// ```
 bool sdlReadU16Le(Pointer<SdlIoStream> src, Pointer<Uint16> value) {
   final sdlReadU16LeLookupFunction = libSdl3.lookupFunction<
@@ -722,13 +722,13 @@ bool sdlReadU16Le(Pointer<SdlIoStream> src, Pointer<Uint16> value) {
 ///
 /// \param src the stream from which to read data.
 /// \param value a pointer filled in with the data read.
-/// \returns SDL_TRUE on successful write or SDL_FALSE on failure; call
-/// SDL_GetError() for more information.
+/// \returns true on successful write or false on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_ReadS16LE(SDL_IOStream *src, Sint16 *value)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_ReadS16LE(SDL_IOStream *src, Sint16 *value)
 /// ```
 bool sdlReadS16Le(Pointer<SdlIoStream> src, Pointer<Int16> value) {
   final sdlReadS16LeLookupFunction = libSdl3.lookupFunction<
@@ -747,13 +747,13 @@ bool sdlReadS16Le(Pointer<SdlIoStream> src, Pointer<Int16> value) {
 ///
 /// \param src the stream from which to read data.
 /// \param value a pointer filled in with the data read.
-/// \returns SDL_TRUE on successful write or SDL_FALSE on failure; call
-/// SDL_GetError() for more information.
+/// \returns true on successful write or false on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_ReadU16BE(SDL_IOStream *src, Uint16 *value)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_ReadU16BE(SDL_IOStream *src, Uint16 *value)
 /// ```
 bool sdlReadU16Be(Pointer<SdlIoStream> src, Pointer<Uint16> value) {
   final sdlReadU16BeLookupFunction = libSdl3.lookupFunction<
@@ -772,13 +772,13 @@ bool sdlReadU16Be(Pointer<SdlIoStream> src, Pointer<Uint16> value) {
 ///
 /// \param src the stream from which to read data.
 /// \param value a pointer filled in with the data read.
-/// \returns SDL_TRUE on successful write or SDL_FALSE on failure; call
-/// SDL_GetError() for more information.
+/// \returns true on successful write or false on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_ReadS16BE(SDL_IOStream *src, Sint16 *value)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_ReadS16BE(SDL_IOStream *src, Sint16 *value)
 /// ```
 bool sdlReadS16Be(Pointer<SdlIoStream> src, Pointer<Int16> value) {
   final sdlReadS16BeLookupFunction = libSdl3.lookupFunction<
@@ -797,13 +797,13 @@ bool sdlReadS16Be(Pointer<SdlIoStream> src, Pointer<Int16> value) {
 ///
 /// \param src the stream from which to read data.
 /// \param value a pointer filled in with the data read.
-/// \returns SDL_TRUE on successful write or SDL_FALSE on failure; call
-/// SDL_GetError() for more information.
+/// \returns true on successful write or false on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_ReadU32LE(SDL_IOStream *src, Uint32 *value)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_ReadU32LE(SDL_IOStream *src, Uint32 *value)
 /// ```
 bool sdlReadU32Le(Pointer<SdlIoStream> src, Pointer<Uint32> value) {
   final sdlReadU32LeLookupFunction = libSdl3.lookupFunction<
@@ -822,13 +822,13 @@ bool sdlReadU32Le(Pointer<SdlIoStream> src, Pointer<Uint32> value) {
 ///
 /// \param src the stream from which to read data.
 /// \param value a pointer filled in with the data read.
-/// \returns SDL_TRUE on successful write or SDL_FALSE on failure; call
-/// SDL_GetError() for more information.
+/// \returns true on successful write or false on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_ReadS32LE(SDL_IOStream *src, Sint32 *value)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_ReadS32LE(SDL_IOStream *src, Sint32 *value)
 /// ```
 bool sdlReadS32Le(Pointer<SdlIoStream> src, Pointer<Int32> value) {
   final sdlReadS32LeLookupFunction = libSdl3.lookupFunction<
@@ -847,13 +847,13 @@ bool sdlReadS32Le(Pointer<SdlIoStream> src, Pointer<Int32> value) {
 ///
 /// \param src the stream from which to read data.
 /// \param value a pointer filled in with the data read.
-/// \returns SDL_TRUE on successful write or SDL_FALSE on failure; call
-/// SDL_GetError() for more information.
+/// \returns true on successful write or false on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_ReadU32BE(SDL_IOStream *src, Uint32 *value)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_ReadU32BE(SDL_IOStream *src, Uint32 *value)
 /// ```
 bool sdlReadU32Be(Pointer<SdlIoStream> src, Pointer<Uint32> value) {
   final sdlReadU32BeLookupFunction = libSdl3.lookupFunction<
@@ -872,13 +872,13 @@ bool sdlReadU32Be(Pointer<SdlIoStream> src, Pointer<Uint32> value) {
 ///
 /// \param src the stream from which to read data.
 /// \param value a pointer filled in with the data read.
-/// \returns SDL_TRUE on successful write or SDL_FALSE on failure; call
-/// SDL_GetError() for more information.
+/// \returns true on successful write or false on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_ReadS32BE(SDL_IOStream *src, Sint32 *value)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_ReadS32BE(SDL_IOStream *src, Sint32 *value)
 /// ```
 bool sdlReadS32Be(Pointer<SdlIoStream> src, Pointer<Int32> value) {
   final sdlReadS32BeLookupFunction = libSdl3.lookupFunction<
@@ -897,13 +897,13 @@ bool sdlReadS32Be(Pointer<SdlIoStream> src, Pointer<Int32> value) {
 ///
 /// \param src the stream from which to read data.
 /// \param value a pointer filled in with the data read.
-/// \returns SDL_TRUE on successful write or SDL_FALSE on failure; call
-/// SDL_GetError() for more information.
+/// \returns true on successful write or false on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_ReadU64LE(SDL_IOStream *src, Uint64 *value)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_ReadU64LE(SDL_IOStream *src, Uint64 *value)
 /// ```
 bool sdlReadU64Le(Pointer<SdlIoStream> src, Pointer<Uint64> value) {
   final sdlReadU64LeLookupFunction = libSdl3.lookupFunction<
@@ -922,13 +922,13 @@ bool sdlReadU64Le(Pointer<SdlIoStream> src, Pointer<Uint64> value) {
 ///
 /// \param src the stream from which to read data.
 /// \param value a pointer filled in with the data read.
-/// \returns SDL_TRUE on successful write or SDL_FALSE on failure; call
-/// SDL_GetError() for more information.
+/// \returns true on successful write or false on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_ReadS64LE(SDL_IOStream *src, Sint64 *value)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_ReadS64LE(SDL_IOStream *src, Sint64 *value)
 /// ```
 bool sdlReadS64Le(Pointer<SdlIoStream> src, Pointer<Int64> value) {
   final sdlReadS64LeLookupFunction = libSdl3.lookupFunction<
@@ -947,13 +947,13 @@ bool sdlReadS64Le(Pointer<SdlIoStream> src, Pointer<Int64> value) {
 ///
 /// \param src the stream from which to read data.
 /// \param value a pointer filled in with the data read.
-/// \returns SDL_TRUE on successful write or SDL_FALSE on failure; call
-/// SDL_GetError() for more information.
+/// \returns true on successful write or false on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_ReadU64BE(SDL_IOStream *src, Uint64 *value)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_ReadU64BE(SDL_IOStream *src, Uint64 *value)
 /// ```
 bool sdlReadU64Be(Pointer<SdlIoStream> src, Pointer<Uint64> value) {
   final sdlReadU64BeLookupFunction = libSdl3.lookupFunction<
@@ -972,13 +972,13 @@ bool sdlReadU64Be(Pointer<SdlIoStream> src, Pointer<Uint64> value) {
 ///
 /// \param src the stream from which to read data.
 /// \param value a pointer filled in with the data read.
-/// \returns SDL_TRUE on successful write or SDL_FALSE on failure; call
-/// SDL_GetError() for more information.
+/// \returns true on successful write or false on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_ReadS64BE(SDL_IOStream *src, Sint64 *value)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_ReadS64BE(SDL_IOStream *src, Sint64 *value)
 /// ```
 bool sdlReadS64Be(Pointer<SdlIoStream> src, Pointer<Int64> value) {
   final sdlReadS64BeLookupFunction = libSdl3.lookupFunction<
@@ -993,13 +993,13 @@ bool sdlReadS64Be(Pointer<SdlIoStream> src, Pointer<Int64> value) {
 ///
 /// \param dst the SDL_IOStream to write to.
 /// \param value the byte value to write.
-/// \returns SDL_TRUE on successful write or SDL_FALSE on failure; call
-/// SDL_GetError() for more information.
+/// \returns true on successful write or false on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_WriteU8(SDL_IOStream *dst, Uint8 value)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_WriteU8(SDL_IOStream *dst, Uint8 value)
 /// ```
 bool sdlWriteU8(Pointer<SdlIoStream> dst, int value) {
   final sdlWriteU8LookupFunction = libSdl3.lookupFunction<
@@ -1013,13 +1013,13 @@ bool sdlWriteU8(Pointer<SdlIoStream> dst, int value) {
 ///
 /// \param dst the SDL_IOStream to write to.
 /// \param value the byte value to write.
-/// \returns SDL_TRUE on successful write or SDL_FALSE on failure; call
-/// SDL_GetError() for more information.
+/// \returns true on successful write or false on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_WriteS8(SDL_IOStream *dst, Sint8 value)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_WriteS8(SDL_IOStream *dst, Sint8 value)
 /// ```
 bool sdlWriteS8(Pointer<SdlIoStream> dst, int value) {
   final sdlWriteS8LookupFunction = libSdl3.lookupFunction<
@@ -1038,13 +1038,13 @@ bool sdlWriteS8(Pointer<SdlIoStream> dst, int value) {
 ///
 /// \param dst the stream to which data will be written.
 /// \param value the data to be written, in native format.
-/// \returns SDL_TRUE on successful write or SDL_FALSE on failure; call
-/// SDL_GetError() for more information.
+/// \returns true on successful write or false on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_WriteU16LE(SDL_IOStream *dst, Uint16 value)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_WriteU16LE(SDL_IOStream *dst, Uint16 value)
 /// ```
 bool sdlWriteU16Le(Pointer<SdlIoStream> dst, int value) {
   final sdlWriteU16LeLookupFunction = libSdl3.lookupFunction<
@@ -1063,13 +1063,13 @@ bool sdlWriteU16Le(Pointer<SdlIoStream> dst, int value) {
 ///
 /// \param dst the stream to which data will be written.
 /// \param value the data to be written, in native format.
-/// \returns SDL_TRUE on successful write or SDL_FALSE on failure; call
-/// SDL_GetError() for more information.
+/// \returns true on successful write or false on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_WriteS16LE(SDL_IOStream *dst, Sint16 value)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_WriteS16LE(SDL_IOStream *dst, Sint16 value)
 /// ```
 bool sdlWriteS16Le(Pointer<SdlIoStream> dst, int value) {
   final sdlWriteS16LeLookupFunction = libSdl3.lookupFunction<
@@ -1087,13 +1087,13 @@ bool sdlWriteS16Le(Pointer<SdlIoStream> dst, int value) {
 ///
 /// \param dst the stream to which data will be written.
 /// \param value the data to be written, in native format.
-/// \returns SDL_TRUE on successful write or SDL_FALSE on failure; call
-/// SDL_GetError() for more information.
+/// \returns true on successful write or false on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_WriteU16BE(SDL_IOStream *dst, Uint16 value)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_WriteU16BE(SDL_IOStream *dst, Uint16 value)
 /// ```
 bool sdlWriteU16Be(Pointer<SdlIoStream> dst, int value) {
   final sdlWriteU16BeLookupFunction = libSdl3.lookupFunction<
@@ -1111,13 +1111,13 @@ bool sdlWriteU16Be(Pointer<SdlIoStream> dst, int value) {
 ///
 /// \param dst the stream to which data will be written.
 /// \param value the data to be written, in native format.
-/// \returns SDL_TRUE on successful write or SDL_FALSE on failure; call
-/// SDL_GetError() for more information.
+/// \returns true on successful write or false on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_WriteS16BE(SDL_IOStream *dst, Sint16 value)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_WriteS16BE(SDL_IOStream *dst, Sint16 value)
 /// ```
 bool sdlWriteS16Be(Pointer<SdlIoStream> dst, int value) {
   final sdlWriteS16BeLookupFunction = libSdl3.lookupFunction<
@@ -1136,13 +1136,13 @@ bool sdlWriteS16Be(Pointer<SdlIoStream> dst, int value) {
 ///
 /// \param dst the stream to which data will be written.
 /// \param value the data to be written, in native format.
-/// \returns SDL_TRUE on successful write or SDL_FALSE on failure; call
-/// SDL_GetError() for more information.
+/// \returns true on successful write or false on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_WriteU32LE(SDL_IOStream *dst, Uint32 value)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_WriteU32LE(SDL_IOStream *dst, Uint32 value)
 /// ```
 bool sdlWriteU32Le(Pointer<SdlIoStream> dst, int value) {
   final sdlWriteU32LeLookupFunction = libSdl3.lookupFunction<
@@ -1161,13 +1161,13 @@ bool sdlWriteU32Le(Pointer<SdlIoStream> dst, int value) {
 ///
 /// \param dst the stream to which data will be written.
 /// \param value the data to be written, in native format.
-/// \returns SDL_TRUE on successful write or SDL_FALSE on failure; call
-/// SDL_GetError() for more information.
+/// \returns true on successful write or false on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_WriteS32LE(SDL_IOStream *dst, Sint32 value)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_WriteS32LE(SDL_IOStream *dst, Sint32 value)
 /// ```
 bool sdlWriteS32Le(Pointer<SdlIoStream> dst, int value) {
   final sdlWriteS32LeLookupFunction = libSdl3.lookupFunction<
@@ -1185,13 +1185,13 @@ bool sdlWriteS32Le(Pointer<SdlIoStream> dst, int value) {
 ///
 /// \param dst the stream to which data will be written.
 /// \param value the data to be written, in native format.
-/// \returns SDL_TRUE on successful write or SDL_FALSE on failure; call
-/// SDL_GetError() for more information.
+/// \returns true on successful write or false on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_WriteU32BE(SDL_IOStream *dst, Uint32 value)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_WriteU32BE(SDL_IOStream *dst, Uint32 value)
 /// ```
 bool sdlWriteU32Be(Pointer<SdlIoStream> dst, int value) {
   final sdlWriteU32BeLookupFunction = libSdl3.lookupFunction<
@@ -1209,13 +1209,13 @@ bool sdlWriteU32Be(Pointer<SdlIoStream> dst, int value) {
 ///
 /// \param dst the stream to which data will be written.
 /// \param value the data to be written, in native format.
-/// \returns SDL_TRUE on successful write or SDL_FALSE on failure; call
-/// SDL_GetError() for more information.
+/// \returns true on successful write or false on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_WriteS32BE(SDL_IOStream *dst, Sint32 value)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_WriteS32BE(SDL_IOStream *dst, Sint32 value)
 /// ```
 bool sdlWriteS32Be(Pointer<SdlIoStream> dst, int value) {
   final sdlWriteS32BeLookupFunction = libSdl3.lookupFunction<
@@ -1234,13 +1234,13 @@ bool sdlWriteS32Be(Pointer<SdlIoStream> dst, int value) {
 ///
 /// \param dst the stream to which data will be written.
 /// \param value the data to be written, in native format.
-/// \returns SDL_TRUE on successful write or SDL_FALSE on failure; call
-/// SDL_GetError() for more information.
+/// \returns true on successful write or false on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_WriteU64LE(SDL_IOStream *dst, Uint64 value)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_WriteU64LE(SDL_IOStream *dst, Uint64 value)
 /// ```
 bool sdlWriteU64Le(Pointer<SdlIoStream> dst, int value) {
   final sdlWriteU64LeLookupFunction = libSdl3.lookupFunction<
@@ -1259,13 +1259,13 @@ bool sdlWriteU64Le(Pointer<SdlIoStream> dst, int value) {
 ///
 /// \param dst the stream to which data will be written.
 /// \param value the data to be written, in native format.
-/// \returns SDL_TRUE on successful write or SDL_FALSE on failure; call
-/// SDL_GetError() for more information.
+/// \returns true on successful write or false on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_WriteS64LE(SDL_IOStream *dst, Sint64 value)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_WriteS64LE(SDL_IOStream *dst, Sint64 value)
 /// ```
 bool sdlWriteS64Le(Pointer<SdlIoStream> dst, int value) {
   final sdlWriteS64LeLookupFunction = libSdl3.lookupFunction<
@@ -1283,13 +1283,13 @@ bool sdlWriteS64Le(Pointer<SdlIoStream> dst, int value) {
 ///
 /// \param dst the stream to which data will be written.
 /// \param value the data to be written, in native format.
-/// \returns SDL_TRUE on successful write or SDL_FALSE on failure; call
-/// SDL_GetError() for more information.
+/// \returns true on successful write or false on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_WriteU64BE(SDL_IOStream *dst, Uint64 value)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_WriteU64BE(SDL_IOStream *dst, Uint64 value)
 /// ```
 bool sdlWriteU64Be(Pointer<SdlIoStream> dst, int value) {
   final sdlWriteU64BeLookupFunction = libSdl3.lookupFunction<
@@ -1307,13 +1307,13 @@ bool sdlWriteU64Be(Pointer<SdlIoStream> dst, int value) {
 ///
 /// \param dst the stream to which data will be written.
 /// \param value the data to be written, in native format.
-/// \returns SDL_TRUE on successful write or SDL_FALSE on failure; call
-/// SDL_GetError() for more information.
+/// \returns true on successful write or false on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_WriteS64BE(SDL_IOStream *dst, Sint64 value)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_WriteS64BE(SDL_IOStream *dst, Sint64 value)
 /// ```
 bool sdlWriteS64Be(Pointer<SdlIoStream> dst, int value) {
   final sdlWriteS64BeLookupFunction = libSdl3.lookupFunction<

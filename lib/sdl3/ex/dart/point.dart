@@ -183,13 +183,13 @@ extension PointsEx on List<math.Point<double>> {
   /// \param clip an SDL_Rect used for clipping or NULL to enclose all points.
   /// \param result an SDL_Rect structure filled in with the minimal enclosing
   /// rectangle.
-  /// \returns SDL_TRUE if any points were enclosed or SDL_FALSE if all the
-  /// points were outside of the clipping rectangle.
+  /// \returns true if any points were enclosed or false if all the points were
+  /// outside of the clipping rectangle.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetRectEnclosingPoints(const SDL_Point *points, int count, const SDL_Rect *clip, SDL_Rect *result)
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRectEnclosingPoints(const SDL_Point *points, int count, const SDL_Rect *clip, SDL_Rect *result)
   /// ```
   math.Rectangle<double>? getEncloseRect({math.Rectangle<double>? clip}) {
     math.Rectangle<double>? result;

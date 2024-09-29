@@ -235,13 +235,13 @@ int sdlGetSensorId(Pointer<SdlSensor> sensor) {
 /// \param sensor the SDL_Sensor object to query.
 /// \param data a pointer filled with the current sensor state.
 /// \param num_values the number of values to write to data.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetSensorData(SDL_Sensor *sensor, float *data, int num_values)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GetSensorData(SDL_Sensor *sensor, float *data, int num_values)
 /// ```
 bool sdlGetSensorData(
     Pointer<SdlSensor> sensor, Pointer<Float> data, int numValues) {

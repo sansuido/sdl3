@@ -21,7 +21,6 @@ import 'lib_sdl.dart';
 ///
 /// `flags` may be any of the following OR'd together:
 ///
-/// - `SDL_INIT_TIMER`: timer subsystem
 /// - `SDL_INIT_AUDIO`: audio subsystem; automatically initializes the events
 /// subsystem
 /// - `SDL_INIT_VIDEO`: video subsystem; automatically initializes the events
@@ -47,8 +46,8 @@ import 'lib_sdl.dart';
 /// SDL_SetAppMetadataProperty().
 ///
 /// \param flags subsystem initialization flags.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -60,7 +59,7 @@ import 'lib_sdl.dart';
 /// \sa SDL_WasInit
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_Init(SDL_InitFlags flags)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_Init(SDL_InitFlags flags)
 /// ```
 bool sdlInit(int flags) {
   final sdlInitLookupFunction = libSdl3.lookupFunction<
@@ -74,8 +73,8 @@ bool sdlInit(int flags) {
 /// This function and SDL_Init() are interchangeable.
 ///
 /// \param flags any of the flags used by SDL_Init(); see SDL_Init for details.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -84,7 +83,7 @@ bool sdlInit(int flags) {
 /// \sa SDL_QuitSubSystem
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_InitSubSystem(SDL_InitFlags flags)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_InitSubSystem(SDL_InitFlags flags)
 /// ```
 bool sdlInitSubSystem(int flags) {
   final sdlInitSubSystemLookupFunction = libSdl3.lookupFunction<
@@ -189,8 +188,8 @@ void sdlQuit() {
 /// hash, or whatever makes sense).
 /// \param appidentifier A unique string in reverse-domain format that
 /// identifies this app ("com.example.mygame2").
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -199,7 +198,7 @@ void sdlQuit() {
 /// \sa SDL_SetAppMetadataProperty
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetAppMetadata(const char *appname, const char *appversion, const char *appidentifier)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetAppMetadata(const char *appname, const char *appversion, const char *appidentifier)
 /// ```
 bool sdlSetAppMetadata(
     String? appname, String? appversion, String? appidentifier) {
@@ -273,8 +272,8 @@ bool sdlSetAppMetadata(
 ///
 /// \param name the name of the metadata property to set.
 /// \param value the value of the property, or NULL to remove that property.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -284,7 +283,7 @@ bool sdlSetAppMetadata(
 /// \sa SDL_SetAppMetadata
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetAppMetadataProperty(const char *name, const char *value)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetAppMetadataProperty(const char *name, const char *value)
 /// ```
 bool sdlSetAppMetadataProperty(String? name, String? value) {
   final sdlSetAppMetadataPropertyLookupFunction = libSdl3.lookupFunction<

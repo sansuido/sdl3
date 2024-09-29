@@ -11,14 +11,14 @@ import 'struct_sdl.dart';
 /// able to provide.
 /// \param name the preferred GPU driver, or NULL to let SDL pick the optimal
 /// driver.
-/// \returns SDL_TRUE if supported, SDL_FALSE otherwise.
+/// \returns true if supported, false otherwise.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_CreateGPUDevice
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GPUSupportsShaderFormats( SDL_GPUShaderFormat format_flags, const char *name)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GPUSupportsShaderFormats( SDL_GPUShaderFormat format_flags, const char *name)
 /// ```
 bool sdlGpuSupportsShaderFormats(int formatFlags, String? name) {
   final sdlGpuSupportsShaderFormatsLookupFunction = libSdl3.lookupFunction<
@@ -36,14 +36,14 @@ bool sdlGpuSupportsShaderFormats(int formatFlags, String? name) {
 /// Checks for GPU runtime support.
 ///
 /// \param props the properties to use.
-/// \returns SDL_TRUE if supported, SDL_FALSE otherwise.
+/// \returns true if supported, false otherwise.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_CreateGPUDeviceWithProperties
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GPUSupportsProperties( SDL_PropertiesID props)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GPUSupportsProperties( SDL_PropertiesID props)
 /// ```
 bool sdlGpuSupportsProperties(int props) {
   final sdlGpuSupportsPropertiesLookupFunction = libSdl3.lookupFunction<
@@ -70,7 +70,7 @@ bool sdlGpuSupportsProperties(int props) {
 /// \sa SDL_GPUSupportsShaderFormats
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_GPUDevice *SDLCALL SDL_CreateGPUDevice( SDL_GPUShaderFormat format_flags, SDL_bool debug_mode, const char *name)
+/// extern SDL_DECLSPEC SDL_GPUDevice *SDLCALL SDL_CreateGPUDevice( SDL_GPUShaderFormat format_flags, bool debug_mode, const char *name)
 /// ```
 Pointer<SdlGpuDevice> sdlCreateGpuDevice(
     int formatFlags, bool debugMode, String? name) {
@@ -92,9 +92,9 @@ Pointer<SdlGpuDevice> sdlCreateGpuDevice(
 /// These are the supported properties:
 ///
 /// - `SDL_PROP_GPU_DEVICE_CREATE_DEBUGMODE_BOOL`: enable debug mode properties
-/// and validations, defaults to SDL_TRUE.
+/// and validations, defaults to true.
 /// - `SDL_PROP_GPU_DEVICE_CREATE_PREFERLOWPOWER_BOOL`: enable to prefer energy
-/// efficiency over maximum GPU performance, defaults to SDL_FALSE.
+/// efficiency over maximum GPU performance, defaults to false.
 /// - `SDL_PROP_GPU_DEVICE_CREATE_NAME_STRING`: the name of the GPU driver to
 /// use, if a specific one is desired.
 ///
@@ -416,7 +416,7 @@ Pointer<SdlGpuSampler> sdlCreateGpuSampler(
 /// - [[texture]]: Sampled textures, followed by storage textures
 /// - [[sampler]]: Samplers with indices corresponding to the sampled textures
 /// - [[buffer]]: Uniform buffers, followed by storage buffers. Vertex buffer 0
-/// is bound at [[buffer(30)]], vertex buffer 1 at [[buffer(29)]], and so on.
+/// is bound at [[buffer(14)]], vertex buffer 1 at [[buffer(15)]], and so on.
 /// Rather than manually authoring vertex buffer indices, use the
 /// [[stage_in]] attribute which will automatically use the vertex input
 /// information from the SDL_GPUPipeline.
@@ -1858,14 +1858,13 @@ void sdlEndGpuComputePass(Pointer<SdlGpuComputePass> computePass) {
 ///
 /// \param device a GPU context.
 /// \param transfer_buffer a transfer buffer.
-/// \param cycle if SDL_TRUE, cycles the transfer buffer if it is already
-/// bound.
+/// \param cycle if true, cycles the transfer buffer if it is already bound.
 /// \returns the address of the mapped transfer buffer memory.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC void *SDLCALL SDL_MapGPUTransferBuffer( SDL_GPUDevice *device, SDL_GPUTransferBuffer *transfer_buffer, SDL_bool cycle)
+/// extern SDL_DECLSPEC void *SDLCALL SDL_MapGPUTransferBuffer( SDL_GPUDevice *device, SDL_GPUTransferBuffer *transfer_buffer, bool cycle)
 /// ```
 Pointer<NativeType> sdlMapGpuTransferBuffer(Pointer<SdlGpuDevice> device,
     Pointer<SdlGpuTransferBuffer> transferBuffer, bool cycle) {
@@ -1939,13 +1938,13 @@ Pointer<SdlGpuCopyPass> sdlBeginGpuCopyPass(
 /// \param copy_pass a copy pass handle.
 /// \param source the source transfer buffer with image layout information.
 /// \param destination the destination texture region.
-/// \param cycle if SDL_TRUE, cycles the texture if the texture is bound,
-/// otherwise overwrites the data.
+/// \param cycle if true, cycles the texture if the texture is bound, otherwise
+/// overwrites the data.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC void SDLCALL SDL_UploadToGPUTexture( SDL_GPUCopyPass *copy_pass, const SDL_GPUTextureTransferInfo *source, const SDL_GPUTextureRegion *destination, SDL_bool cycle)
+/// extern SDL_DECLSPEC void SDLCALL SDL_UploadToGPUTexture( SDL_GPUCopyPass *copy_pass, const SDL_GPUTextureTransferInfo *source, const SDL_GPUTextureRegion *destination, bool cycle)
 /// ```
 void sdlUploadToGpuTexture(
     Pointer<SdlGpuCopyPass> copyPass,
@@ -1976,13 +1975,13 @@ void sdlUploadToGpuTexture(
 /// \param copy_pass a copy pass handle.
 /// \param source the source transfer buffer with offset.
 /// \param destination the destination buffer with offset and size.
-/// \param cycle if SDL_TRUE, cycles the buffer if it is already bound,
-/// otherwise overwrites the data.
+/// \param cycle if true, cycles the buffer if it is already bound, otherwise
+/// overwrites the data.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC void SDLCALL SDL_UploadToGPUBuffer( SDL_GPUCopyPass *copy_pass, const SDL_GPUTransferBufferLocation *source, const SDL_GPUBufferRegion *destination, SDL_bool cycle)
+/// extern SDL_DECLSPEC void SDLCALL SDL_UploadToGPUBuffer( SDL_GPUCopyPass *copy_pass, const SDL_GPUTransferBufferLocation *source, const SDL_GPUBufferRegion *destination, bool cycle)
 /// ```
 void sdlUploadToGpuBuffer(
     Pointer<SdlGpuCopyPass> copyPass,
@@ -2016,13 +2015,13 @@ void sdlUploadToGpuBuffer(
 /// \param w the width of the region to copy.
 /// \param h the height of the region to copy.
 /// \param d the depth of the region to copy.
-/// \param cycle if SDL_TRUE, cycles the destination texture if the destination
+/// \param cycle if true, cycles the destination texture if the destination
 /// texture is bound, otherwise overwrites the data.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC void SDLCALL SDL_CopyGPUTextureToTexture( SDL_GPUCopyPass *copy_pass, const SDL_GPUTextureLocation *source, const SDL_GPUTextureLocation *destination, Uint32 w, Uint32 h, Uint32 d, SDL_bool cycle)
+/// extern SDL_DECLSPEC void SDLCALL SDL_CopyGPUTextureToTexture( SDL_GPUCopyPass *copy_pass, const SDL_GPUTextureLocation *source, const SDL_GPUTextureLocation *destination, Uint32 w, Uint32 h, Uint32 d, bool cycle)
 /// ```
 void sdlCopyGpuTextureToTexture(
     Pointer<SdlGpuCopyPass> copyPass,
@@ -2063,13 +2062,13 @@ void sdlCopyGpuTextureToTexture(
 /// \param source the buffer and offset to copy from.
 /// \param destination the buffer and offset to copy to.
 /// \param size the length of the buffer to copy.
-/// \param cycle if SDL_TRUE, cycles the destination buffer if it is already
-/// bound, otherwise overwrites the data.
+/// \param cycle if true, cycles the destination buffer if it is already bound,
+/// otherwise overwrites the data.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC void SDLCALL SDL_CopyGPUBufferToBuffer( SDL_GPUCopyPass *copy_pass, const SDL_GPUBufferLocation *source, const SDL_GPUBufferLocation *destination, Uint32 size, SDL_bool cycle)
+/// extern SDL_DECLSPEC void SDLCALL SDL_CopyGPUBufferToBuffer( SDL_GPUCopyPass *copy_pass, const SDL_GPUBufferLocation *source, const SDL_GPUBufferLocation *destination, Uint32 size, bool cycle)
 /// ```
 void sdlCopyGpuBufferToBuffer(
     Pointer<SdlGpuCopyPass> copyPass,
@@ -2230,14 +2229,14 @@ void sdlBlitGpuTexture(
 /// \param device a GPU context.
 /// \param window an SDL_Window.
 /// \param swapchain_composition the swapchain composition to check.
-/// \returns SDL_TRUE if supported, SDL_FALSE if unsupported (or on error).
+/// \returns true if supported, false if unsupported (or on error).
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_ClaimWindowForGPUDevice
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_WindowSupportsGPUSwapchainComposition( SDL_GPUDevice *device, SDL_Window *window, SDL_GPUSwapchainComposition swapchain_composition)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_WindowSupportsGPUSwapchainComposition( SDL_GPUDevice *device, SDL_Window *window, SDL_GPUSwapchainComposition swapchain_composition)
 /// ```
 bool sdlWindowSupportsGpuSwapchainComposition(Pointer<SdlGpuDevice> device,
     Pointer<SdlWindow> window, int swapchainComposition) {
@@ -2261,14 +2260,14 @@ bool sdlWindowSupportsGpuSwapchainComposition(Pointer<SdlGpuDevice> device,
 /// \param device a GPU context.
 /// \param window an SDL_Window.
 /// \param present_mode the presentation mode to check.
-/// \returns SDL_TRUE if supported, SDL_FALSE if unsupported (or on error).
+/// \returns true if supported, false if unsupported (or on error).
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_ClaimWindowForGPUDevice
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_WindowSupportsGPUPresentMode( SDL_GPUDevice *device, SDL_Window *window, SDL_GPUPresentMode present_mode)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_WindowSupportsGPUPresentMode( SDL_GPUDevice *device, SDL_Window *window, SDL_GPUPresentMode present_mode)
 /// ```
 bool sdlWindowSupportsGpuPresentMode(
     Pointer<SdlGpuDevice> device, Pointer<SdlWindow> window, int presentMode) {
@@ -2295,7 +2294,7 @@ bool sdlWindowSupportsGpuPresentMode(
 ///
 /// \param device a GPU context.
 /// \param window an SDL_Window.
-/// \returns SDL_TRUE on success, otherwise SDL_FALSE.
+/// \returns true on success, otherwise false.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -2305,7 +2304,7 @@ bool sdlWindowSupportsGpuPresentMode(
 /// \sa SDL_WindowSupportsGPUSwapchainComposition
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_ClaimWindowForGPUDevice( SDL_GPUDevice *device, SDL_Window *window)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_ClaimWindowForGPUDevice( SDL_GPUDevice *device, SDL_Window *window)
 /// ```
 bool sdlClaimWindowForGpuDevice(
     Pointer<SdlGpuDevice> device, Pointer<SdlWindow> window) {
@@ -2353,7 +2352,7 @@ void sdlReleaseWindowFromGpuDevice(
 /// \param window an SDL_Window that has been claimed.
 /// \param swapchain_composition the desired composition of the swapchain.
 /// \param present_mode the desired present mode for the swapchain.
-/// \returns SDL_TRUE if successful, SDL_FALSE on error.
+/// \returns true if successful, false on error.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -2361,7 +2360,7 @@ void sdlReleaseWindowFromGpuDevice(
 /// \sa SDL_WindowSupportsGPUSwapchainComposition
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetGPUSwapchainParameters( SDL_GPUDevice *device, SDL_Window *window, SDL_GPUSwapchainComposition swapchain_composition, SDL_GPUPresentMode present_mode)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetGPUSwapchainParameters( SDL_GPUDevice *device, SDL_Window *window, SDL_GPUSwapchainComposition swapchain_composition, SDL_GPUPresentMode present_mode)
 /// ```
 bool sdlSetGpuSwapchainParameters(Pointer<SdlGpuDevice> device,
     Pointer<SdlWindow> window, int swapchainComposition, int presentMode) {
@@ -2545,7 +2544,7 @@ void sdlWaitForGpuIdle(Pointer<SdlGpuDevice> device) {
 /// \sa SDL_WaitForGPUIdle
 ///
 /// ```c
-/// extern SDL_DECLSPEC void SDLCALL SDL_WaitForGPUFences( SDL_GPUDevice *device, SDL_bool wait_all, SDL_GPUFence *const *fences, Uint32 num_fences)
+/// extern SDL_DECLSPEC void SDLCALL SDL_WaitForGPUFences( SDL_GPUDevice *device, bool wait_all, SDL_GPUFence *const *fences, Uint32 num_fences)
 /// ```
 void sdlWaitForGpuFences(Pointer<SdlGpuDevice> device, bool waitAll,
     Pointer<Pointer<SdlGpuFence>> fences, int numFences) {
@@ -2566,14 +2565,14 @@ void sdlWaitForGpuFences(Pointer<SdlGpuDevice> device, bool waitAll,
 ///
 /// \param device a GPU context.
 /// \param fence a fence.
-/// \returns SDL_TRUE if the fence is signaled, SDL_FALSE if it is not.
+/// \returns true if the fence is signaled, false if it is not.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_SubmitGPUCommandBufferAndAcquireFence
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_QueryGPUFence( SDL_GPUDevice *device, SDL_GPUFence *fence)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_QueryGPUFence( SDL_GPUDevice *device, SDL_GPUFence *fence)
 /// ```
 bool sdlQueryGpuFence(
     Pointer<SdlGpuDevice> device, Pointer<SdlGpuFence> fence) {
@@ -2639,7 +2638,7 @@ int sdlGpuTextureFormatTexelBlockSize(int format) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GPUTextureSupportsFormat( SDL_GPUDevice *device, SDL_GPUTextureFormat format, SDL_GPUTextureType type, SDL_GPUTextureUsageFlags usage)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GPUTextureSupportsFormat( SDL_GPUDevice *device, SDL_GPUTextureFormat format, SDL_GPUTextureType type, SDL_GPUTextureUsageFlags usage)
 /// ```
 bool sdlGpuTextureSupportsFormat(
     Pointer<SdlGpuDevice> device, int format, int type, int usage) {
@@ -2664,7 +2663,7 @@ bool sdlGpuTextureSupportsFormat(
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GPUTextureSupportsSampleCount( SDL_GPUDevice *device, SDL_GPUTextureFormat format, SDL_GPUSampleCount sample_count)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GPUTextureSupportsSampleCount( SDL_GPUDevice *device, SDL_GPUTextureFormat format, SDL_GPUSampleCount sample_count)
 /// ```
 bool sdlGpuTextureSupportsSampleCount(
     Pointer<SdlGpuDevice> device, int format, int sampleCount) {

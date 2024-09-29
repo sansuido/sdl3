@@ -141,13 +141,13 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   ///
   /// \param font the font to resize.
   /// \param ptsize the new point size.
-  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-  /// for more information.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
   ///
   /// \since This function is available since SDL_ttf 3.0.0.
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool SDLCALL TTF_SetFontSize(TTF_Font *font, int ptsize)
+  /// extern SDL_DECLSPEC bool SDLCALL TTF_SetFontSize(TTF_Font *font, int ptsize)
   /// ```
   bool setSize(int ptsize) {
     return ttfSetFontSize(this, ptsize);
@@ -162,13 +162,13 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// \param ptsize the new point size.
   /// \param hdpi the target horizontal DPI.
   /// \param vdpi the target vertical DPI.
-  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-  /// for more information.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
   ///
   /// \since This function is available since SDL_ttf 3.0.0.
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool SDLCALL TTF_SetFontSizeDPI(TTF_Font *font, int ptsize, unsigned int hdpi, unsigned int vdpi)
+  /// extern SDL_DECLSPEC bool SDLCALL TTF_SetFontSizeDPI(TTF_Font *font, int ptsize, unsigned int hdpi, unsigned int vdpi)
   /// ```
   bool setSizeDpi(int ptsize, int hdpi, int vdpi) {
     return ttfSetFontSizeDpi(this, ptsize, hdpi, vdpi);
@@ -428,12 +428,12 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// Query whether or not kerning is enabled for a font.
   ///
   /// \param font the font to query.
-  /// \returns SDL_TRUE if kerning is enabled, SDL_FALSE otherwise.
+  /// \returns true if kerning is enabled, false otherwise.
   ///
   /// \since This function is available since SDL_ttf 3.0.0.
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool SDLCALL TTF_GetFontKerning(const TTF_Font *font)
+  /// extern SDL_DECLSPEC bool SDLCALL TTF_GetFontKerning(const TTF_Font *font)
   /// ```
   bool getKerning() {
     return ttfGetFontKerning(this);
@@ -448,12 +448,12 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// the word `kerning` as something that looks like `keming` for example).
   ///
   /// \param font the font to set kerning on.
-  /// \param enabled SDL_TRUE to enable kerning, SDL_FALSE to disable.
+  /// \param enabled true to enable kerning, false to disable.
   ///
   /// \since This function is available since SDL_ttf 3.0.0.
   ///
   /// ```c
-  /// extern SDL_DECLSPEC void SDLCALL TTF_SetFontKerning(TTF_Font *font, SDL_bool enabled)
+  /// extern SDL_DECLSPEC void SDLCALL TTF_SetFontKerning(TTF_Font *font, bool enabled)
   /// ```
   void setKerning(bool allowed) {
     ttfSetFontKerning(this, allowed);
@@ -484,12 +484,12 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// are more likely to not be fixed-width in most cases.
   ///
   /// \param font the font to query.
-  /// \returns SDL_TRUE if fixed-width, SDL_FALSE if not.
+  /// \returns true if fixed-width, false if not.
   ///
   /// \since This function is available since SDL_ttf 3.0.0.
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool SDLCALL TTF_FontFaceIsFixedWidth(const TTF_Font *font)
+  /// extern SDL_DECLSPEC bool SDLCALL TTF_FontFaceIsFixedWidth(const TTF_Font *font)
   /// ```
   bool faceIsFixedWidth() {
     return ttfFontFaceIsFixedWidth(this);
@@ -551,15 +551,14 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   ///
   /// \param font the font to query.
   /// \param ch the character code to check.
-  /// \returns SDL_TRUE if font provides a glyph for this character, SDL_FALSE if
-  /// not.
+  /// \returns true if font provides a glyph for this character, false if not.
   ///
   /// \since This function is available since SDL_ttf 3.0.0.
   ///
   /// \sa TTF_GlyphIsProvided32
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool SDLCALL TTF_GlyphIsProvided(TTF_Font *font, Uint16 ch)
+  /// extern SDL_DECLSPEC bool SDLCALL TTF_GlyphIsProvided(TTF_Font *font, Uint16 ch)
   /// ```
   bool glyphIsProvided(int ch) {
     return ttfGlyphIsProvided(this, ch);
@@ -575,13 +574,12 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   ///
   /// \param font the font to query.
   /// \param ch the character code to check.
-  /// \returns SDL_TRUE if font provides a glyph for this character, SDL_FALSE if
-  /// not.
+  /// \returns true if font provides a glyph for this character, false if not.
   ///
   /// \since This function is available since SDL_ttf 3.0.0.
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool SDLCALL TTF_GlyphIsProvided32(TTF_Font *font, Uint32 ch)
+  /// extern SDL_DECLSPEC bool SDLCALL TTF_GlyphIsProvided32(TTF_Font *font, Uint32 ch)
   /// ```
   bool glyphIsProvided32(int ch) {
     return ttfGlyphIsProvided32(this, ch);
@@ -605,15 +603,15 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   ///
   /// \param font the font to query.
   /// \param ch the character code to check.
-  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-  /// for more information.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
   ///
   /// \since This function is available since SDL_ttf 3.0.0.
   ///
   /// \sa TTF_GlyphMetrics32
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool SDLCALL TTF_GlyphMetrics(TTF_Font *font, Uint16 ch, int *minx, int *maxx, int *miny, int *maxy, int *advance)
+  /// extern SDL_DECLSPEC bool SDLCALL TTF_GlyphMetrics(TTF_Font *font, Uint16 ch, int *minx, int *maxx, int *miny, int *maxy, int *advance)
   /// ```
   bool glyphMetrics(int ch, Pointer<Int32> minx, Pointer<Int32> maxx,
       Pointer<Int32> miny, Pointer<Int32> maxy, Pointer<Int32> advance) {
@@ -634,13 +632,13 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   ///
   /// \param font the font to query.
   /// \param ch the character code to check.
-  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-  /// for more information.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
   ///
   /// \since This function is available since SDL_ttf 3.0.0.
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool SDLCALL TTF_GlyphMetrics32(TTF_Font *font, Uint32 ch, int *minx, int *maxx, int *miny, int *maxy, int *advance)
+  /// extern SDL_DECLSPEC bool SDLCALL TTF_GlyphMetrics32(TTF_Font *font, Uint32 ch, int *minx, int *maxx, int *miny, int *maxy, int *advance)
   /// ```
   bool glyphMetrics32(int ch, Pointer<Int32> minx, Pointer<Int32> maxx,
       Pointer<Int32> miny, Pointer<Int32> maxy, Pointer<Int32> advance) {
@@ -664,8 +662,8 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// \param text text to calculate, in Latin1 encoding.
   /// \param w will be filled with width, in pixels, on return.
   /// \param h will be filled with height, in pixels, on return.
-  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-  /// for more information.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
   ///
   /// \since This function is available since SDL_ttf 3.0.0.
   ///
@@ -673,7 +671,7 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// \sa TTF_SizeUNICODE
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool SDLCALL TTF_SizeText(TTF_Font *font, const char *text, int *w, int *h)
+  /// extern SDL_DECLSPEC bool SDLCALL TTF_SizeText(TTF_Font *font, const char *text, int *w, int *h)
   /// ```
   bool sizeText(String text, Pointer<Int32> w, Pointer<Int32> h) {
     return ttfSizeText(this, text, w, h);
@@ -691,15 +689,15 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// \param text text to calculate, in UTF-8 encoding.
   /// \param w will be filled with width, in pixels, on return.
   /// \param h will be filled with height, in pixels, on return.
-  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-  /// for more information.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
   ///
   /// \since This function is available since SDL_ttf 3.0.0.
   ///
   /// \sa TTF_SizeUNICODE
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool SDLCALL TTF_SizeUTF8(TTF_Font *font, const char *text, int *w, int *h)
+  /// extern SDL_DECLSPEC bool SDLCALL TTF_SizeUTF8(TTF_Font *font, const char *text, int *w, int *h)
   /// ```
   bool sizeUtf8(String text, Pointer<Int32> w, Pointer<Int32> h) {
     return ttfSizeUtf8(this, text, w, h);
@@ -722,15 +720,15 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// \param text text to calculate, in UCS-2 encoding.
   /// \param w will be filled with width, in pixels, on return.
   /// \param h will be filled with height, in pixels, on return.
-  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-  /// for more information.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
   ///
   /// \since This function is available since SDL_ttf 3.0.0.
   ///
   /// \sa TTF_SizeUTF8
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool SDLCALL TTF_SizeUNICODE(TTF_Font *font, const Uint16 *text, int *w, int *h)
+  /// extern SDL_DECLSPEC bool SDLCALL TTF_SizeUNICODE(TTF_Font *font, const Uint16 *text, int *w, int *h)
   /// ```
   bool sizeUnicode(Pointer<Uint16> text, Pointer<Int32> w, Pointer<Int32> h) {
     return ttfSizeUnicode(this, text, w, h);
@@ -755,8 +753,8 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// \param extent on return, filled with latest calculated width.
   /// \param count on return, filled with number of characters that can be
   /// rendered.
-  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-  /// for more information.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
   ///
   /// \since This function is available since SDL_ttf 3.0.0.
   ///
@@ -765,7 +763,7 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// \sa TTF_MeasureUNICODE
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool SDLCALL TTF_MeasureText(TTF_Font *font, const char *text, int measure_width, int *extent, int *count)
+  /// extern SDL_DECLSPEC bool SDLCALL TTF_MeasureText(TTF_Font *font, const char *text, int measure_width, int *extent, int *count)
   /// ```
   bool measureText(String text, int measureWidth, Pointer<Int32> extent,
       Pointer<Int32> count) {
@@ -786,8 +784,8 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// \param extent on return, filled with latest calculated width.
   /// \param count on return, filled with number of characters that can be
   /// rendered.
-  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-  /// for more information.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
   ///
   /// \since This function is available since SDL_ttf 3.0.0.
   ///
@@ -796,7 +794,7 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// \sa TTF_MeasureUNICODE
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool SDLCALL TTF_MeasureUTF8(TTF_Font *font, const char *text, int measure_width, int *extent, int *count)
+  /// extern SDL_DECLSPEC bool SDLCALL TTF_MeasureUTF8(TTF_Font *font, const char *text, int measure_width, int *extent, int *count)
   /// ```
   bool measureUtf8(String text, int measureWidth, Pointer<Int32> extent,
       Pointer<Int32> count) {
@@ -822,8 +820,8 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// \param extent on return, filled with latest calculated width.
   /// \param count on return, filled with number of characters that can be
   /// rendered.
-  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-  /// for more information.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
   ///
   /// \since This function is available since SDL_ttf 3.0.0.
   ///
@@ -832,7 +830,7 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// \sa TTF_MeasureUNICODE
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool SDLCALL TTF_MeasureUNICODE(TTF_Font *font, const Uint16 *text, int measure_width, int *extent, int *count)
+  /// extern SDL_DECLSPEC bool SDLCALL TTF_MeasureUNICODE(TTF_Font *font, const Uint16 *text, int measure_width, int *extent, int *count)
   /// ```
   bool measureUnicode(Pointer<Uint16> text, int measureWidth,
       Pointer<Int32> extent, Pointer<Int32> count) {
@@ -2276,8 +2274,8 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// This clears already-generated glyphs, if any, from the cache.
   ///
   /// \param font the font to set SDF support on.
-  /// \param enabled SDL_TRUE to enable SDF, SDL_FALSE to disable.
-  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
+  /// \param enabled true to enable SDF, false to disable.
+  /// \returns true on success or false on failure; call SDL_GetError()
   /// for more information.
   ///
   /// \since This function is available since SDL_ttf 3.0.0.
@@ -2285,7 +2283,7 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// \sa TTF_GetFontSDF
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool TTF_SetFontSDF(TTF_Font *font, SDL_bool enabled)
+  /// extern SDL_DECLSPEC bool TTF_SetFontSDF(TTF_Font *font, bool enabled)
   /// ```
   bool setSdf(bool onOff) {
     return ttfSetFontSdf(this, onOff);
@@ -2296,14 +2294,14 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   ///
   /// \param font the font to query
   ///
-  /// \returns SDL_TRUE if enabled, SDL_FALSE otherwise.
+  /// \returns true if enabled, false otherwise.
   ///
   /// \since This function is available since SDL_ttf 3.0.0.
   ///
   /// \sa TTF_SetFontSDF
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool TTF_GetFontSDF(const TTF_Font *font)
+  /// extern SDL_DECLSPEC bool TTF_GetFontSDF(const TTF_Font *font)
   /// ```
   bool getSdf() {
     return ttfGetFontSdf(this);
@@ -2323,13 +2321,13 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   ///
   /// \param font the font to specify a direction for.
   /// \param direction the new direction for text to flow.
-  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-  /// for more information.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
   ///
   /// \since This function is available since SDL_ttf 3.0.0.
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool SDLCALL TTF_SetFontDirection(TTF_Font *font, TTF_Direction direction)
+  /// extern SDL_DECLSPEC bool SDLCALL TTF_SetFontDirection(TTF_Font *font, TTF_Direction direction)
   /// ```
   bool setDirection(int direction) {
     return ttfSetFontDirection(this, direction);
@@ -2345,13 +2343,13 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   ///
   /// \param font the font to specify a script name for.
   /// \param script null-terminated string of exactly 4 characters.
-  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-  /// for more information.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
   ///
   /// \since This function is available since SDL_ttf 3.0.0.
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool SDLCALL TTF_SetFontScriptName(TTF_Font *font, const char *script)
+  /// extern SDL_DECLSPEC bool SDLCALL TTF_SetFontScriptName(TTF_Font *font, const char *script)
   /// ```
   bool setScriptName(String script) {
     return ttfSetFontScriptName(this, script);

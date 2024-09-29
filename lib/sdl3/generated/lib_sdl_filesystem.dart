@@ -166,13 +166,13 @@ String? sdlGetUserFolder(int folder) {
 /// Create a directory.
 ///
 /// \param path the path of the directory to create.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_CreateDirectory(const char *path)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_CreateDirectory(const char *path)
 /// ```
 bool sdlCreateDirectory(String? path) {
   final sdlCreateDirectoryLookupFunction = libSdl3.lookupFunction<
@@ -194,13 +194,13 @@ bool sdlCreateDirectory(String? path) {
 /// \param path the path of the directory to enumerate.
 /// \param callback a function that is called for each entry in the directory.
 /// \param userdata a pointer that is passed to `callback`.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_EnumerateDirectory(const char *path, SDL_EnumerateDirectoryCallback callback, void *userdata)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_EnumerateDirectory(const char *path, SDL_EnumerateDirectoryCallback callback, void *userdata)
 /// ```
 bool sdlEnumerateDirectory(
     String? path,
@@ -226,13 +226,13 @@ bool sdlEnumerateDirectory(
 /// Remove a file or an empty directory.
 ///
 /// \param path the path of the directory to enumerate.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_RemovePath(const char *path)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_RemovePath(const char *path)
 /// ```
 bool sdlRemovePath(String? path) {
   final sdlRemovePathLookupFunction = libSdl3.lookupFunction<
@@ -249,13 +249,13 @@ bool sdlRemovePath(String? path) {
 ///
 /// \param oldpath the old path.
 /// \param newpath the new path.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_RenamePath(const char *oldpath, const char *newpath)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_RenamePath(const char *oldpath, const char *newpath)
 /// ```
 bool sdlRenamePath(String? oldpath, String? newpath) {
   final sdlRenamePathLookupFunction = libSdl3.lookupFunction<
@@ -276,13 +276,13 @@ bool sdlRenamePath(String? oldpath, String? newpath) {
 ///
 /// \param oldpath the old path.
 /// \param newpath the new path.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_CopyFile(const char *oldpath, const char *newpath)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_CopyFile(const char *oldpath, const char *newpath)
 /// ```
 bool sdlCopyFile(String? oldpath, String? newpath) {
   final sdlCopyFileLookupFunction = libSdl3.lookupFunction<
@@ -303,13 +303,13 @@ bool sdlCopyFile(String? oldpath, String? newpath) {
 /// \param path the path to query.
 /// \param info a pointer filled in with information about the path, or NULL to
 /// check for the existence of a file.
-/// \returns SDL_TRUE on success or SDL_FALSE if the file doesn't exist, or
-/// another failure; call SDL_GetError() for more information.
+/// \returns true on success or false if the file doesn't exist, or another
+/// failure; call SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetPathInfo(const char *path, SDL_PathInfo *info)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GetPathInfo(const char *path, SDL_PathInfo *info)
 /// ```
 bool sdlGetPathInfo(String? path, Pointer<SdlPathInfo> info) {
   final sdlGetPathInfoLookupFunction = libSdl3.lookupFunction<

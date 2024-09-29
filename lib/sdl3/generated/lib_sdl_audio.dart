@@ -230,15 +230,15 @@ String? sdlGetAudioDeviceName(int devid) {
 /// \param spec on return, will be filled with device details.
 /// \param sample_frames pointer to store device buffer size, in sample frames.
 /// Can be NULL.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetAudioDeviceFormat(SDL_AudioDeviceID devid, SDL_AudioSpec *spec, int *sample_frames)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GetAudioDeviceFormat(SDL_AudioDeviceID devid, SDL_AudioSpec *spec, int *sample_frames)
 /// ```
 bool sdlGetAudioDeviceFormat(
     int devid, Pointer<SdlAudioSpec> spec, Pointer<Int32> sampleFrames) {
@@ -386,8 +386,8 @@ int sdlOpenAudioDevice(int devid, Pointer<SdlAudioSpec> spec) {
 /// created through SDL_OpenAudioDevice() can be.
 ///
 /// \param dev a device opened by SDL_OpenAudioDevice().
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -397,7 +397,7 @@ int sdlOpenAudioDevice(int devid, Pointer<SdlAudioSpec> spec) {
 /// \sa SDL_AudioDevicePaused
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_PauseAudioDevice(SDL_AudioDeviceID dev)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_PauseAudioDevice(SDL_AudioDeviceID dev)
 /// ```
 bool sdlPauseAudioDevice(int dev) {
   final sdlPauseAudioDeviceLookupFunction =
@@ -422,8 +422,8 @@ bool sdlPauseAudioDevice(int dev) {
 /// created through SDL_OpenAudioDevice() can be.
 ///
 /// \param dev a device opened by SDL_OpenAudioDevice().
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -433,7 +433,7 @@ bool sdlPauseAudioDevice(int dev) {
 /// \sa SDL_PauseAudioDevice
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_ResumeAudioDevice(SDL_AudioDeviceID dev)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_ResumeAudioDevice(SDL_AudioDeviceID dev)
 /// ```
 bool sdlResumeAudioDevice(int dev) {
   final sdlResumeAudioDeviceLookupFunction =
@@ -453,7 +453,7 @@ bool sdlResumeAudioDevice(int dev) {
 /// IDs will report themselves as unpaused here.
 ///
 /// \param dev a device opened by SDL_OpenAudioDevice().
-/// \returns SDL_TRUE if device is valid and paused, SDL_FALSE otherwise.
+/// \returns true if device is valid and paused, false otherwise.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -463,7 +463,7 @@ bool sdlResumeAudioDevice(int dev) {
 /// \sa SDL_ResumeAudioDevice
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_AudioDevicePaused(SDL_AudioDeviceID dev)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_AudioDevicePaused(SDL_AudioDeviceID dev)
 /// ```
 bool sdlAudioDevicePaused(int dev) {
   final sdlAudioDevicePausedLookupFunction =
@@ -512,8 +512,8 @@ double sdlGetAudioDeviceGain(int devid) {
 /// Audio devices default to a gain of 1.0f (no change in output).
 ///
 /// Physical devices may not have their gain changed, only logical devices, and
-/// this function will always return -1 when used on physical devices. While it
-/// might seem attractive to adjust several logical devices at once in this
+/// this function will always return false when used on physical devices. While
+/// it might seem attractive to adjust several logical devices at once in this
 /// way, it would allow an app or library to interfere with another portion of
 /// the program's otherwise-isolated devices.
 ///
@@ -526,8 +526,8 @@ double sdlGetAudioDeviceGain(int devid) {
 ///
 /// \param devid the audio device on which to change gain.
 /// \param gain the gain. 1.0f is no change, 0.0f is silence.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \threadsafety It is safe to call this function from any thread, as it holds
 /// a stream-specific mutex while running.
@@ -537,7 +537,7 @@ double sdlGetAudioDeviceGain(int devid) {
 /// \sa SDL_GetAudioDeviceGain
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetAudioDeviceGain(SDL_AudioDeviceID devid, float gain)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetAudioDeviceGain(SDL_AudioDeviceID devid, float gain)
 /// ```
 bool sdlSetAudioDeviceGain(int devid, double gain) {
   final sdlSetAudioDeviceGainLookupFunction = libSdl3.lookupFunction<
@@ -599,8 +599,8 @@ void sdlCloseAudioDevice(int devid) {
 /// \param devid an audio device to bind a stream to.
 /// \param streams an array of audio streams to bind.
 /// \param num_streams number streams listed in the `streams` array.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -611,7 +611,7 @@ void sdlCloseAudioDevice(int devid) {
 /// \sa SDL_GetAudioStreamDevice
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_BindAudioStreams(SDL_AudioDeviceID devid, SDL_AudioStream **streams, int num_streams)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_BindAudioStreams(SDL_AudioDeviceID devid, SDL_AudioStream **streams, int num_streams)
 /// ```
 bool sdlBindAudioStreams(
     int devid, Pointer<Pointer<SdlAudioStream>> streams, int numStreams) {
@@ -631,8 +631,8 @@ bool sdlBindAudioStreams(
 ///
 /// \param devid an audio device to bind a stream to.
 /// \param stream an audio stream to bind to a device.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -643,7 +643,7 @@ bool sdlBindAudioStreams(
 /// \sa SDL_GetAudioStreamDevice
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_BindAudioStream(SDL_AudioDeviceID devid, SDL_AudioStream *stream)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_BindAudioStream(SDL_AudioDeviceID devid, SDL_AudioStream *stream)
 /// ```
 bool sdlBindAudioStream(int devid, Pointer<SdlAudioStream> stream) {
   final sdlBindAudioStreamLookupFunction = libSdl3.lookupFunction<
@@ -794,8 +794,8 @@ int sdlGetAudioStreamProperties(Pointer<SdlAudioStream> stream) {
 /// \param stream the SDL_AudioStream to query.
 /// \param src_spec where to store the input audio format; ignored if NULL.
 /// \param dst_spec where to store the output audio format; ignored if NULL.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \threadsafety It is safe to call this function from any thread, as it holds
 /// a stream-specific mutex while running.
@@ -805,7 +805,7 @@ int sdlGetAudioStreamProperties(Pointer<SdlAudioStream> stream) {
 /// \sa SDL_SetAudioStreamFormat
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetAudioStreamFormat(SDL_AudioStream *stream, SDL_AudioSpec *src_spec, SDL_AudioSpec *dst_spec)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GetAudioStreamFormat(SDL_AudioStream *stream, SDL_AudioSpec *src_spec, SDL_AudioSpec *dst_spec)
 /// ```
 bool sdlGetAudioStreamFormat(Pointer<SdlAudioStream> stream,
     Pointer<SdlAudioSpec> srcSpec, Pointer<SdlAudioSpec> dstSpec) {
@@ -837,8 +837,8 @@ bool sdlGetAudioStreamFormat(Pointer<SdlAudioStream> stream,
 /// changed.
 /// \param dst_spec the new format of the audio output; if NULL, it is not
 /// changed.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \threadsafety It is safe to call this function from any thread, as it holds
 /// a stream-specific mutex while running.
@@ -849,7 +849,7 @@ bool sdlGetAudioStreamFormat(Pointer<SdlAudioStream> stream,
 /// \sa SDL_SetAudioStreamFrequencyRatio
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetAudioStreamFormat(SDL_AudioStream *stream, const SDL_AudioSpec *src_spec, const SDL_AudioSpec *dst_spec)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetAudioStreamFormat(SDL_AudioStream *stream, const SDL_AudioSpec *src_spec, const SDL_AudioSpec *dst_spec)
 /// ```
 bool sdlSetAudioStreamFormat(Pointer<SdlAudioStream> stream,
     Pointer<SdlAudioSpec> srcSpec, Pointer<SdlAudioSpec> dstSpec) {
@@ -903,8 +903,8 @@ double sdlGetAudioStreamFrequencyRatio(Pointer<SdlAudioStream> stream) {
 /// \param stream the stream the frequency ratio is being changed.
 /// \param ratio the frequency ratio. 1.0 is normal speed. Must be between 0.01
 /// and 100.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \threadsafety It is safe to call this function from any thread, as it holds
 /// a stream-specific mutex while running.
@@ -915,7 +915,7 @@ double sdlGetAudioStreamFrequencyRatio(Pointer<SdlAudioStream> stream) {
 /// \sa SDL_SetAudioStreamFormat
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetAudioStreamFrequencyRatio(SDL_AudioStream *stream, float ratio)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetAudioStreamFrequencyRatio(SDL_AudioStream *stream, float ratio)
 /// ```
 bool sdlSetAudioStreamFrequencyRatio(
     Pointer<SdlAudioStream> stream, double ratio) {
@@ -969,8 +969,8 @@ double sdlGetAudioStreamGain(Pointer<SdlAudioStream> stream) {
 ///
 /// \param stream the stream on which the gain is being changed.
 /// \param gain the gain. 1.0f is no change, 0.0f is silence.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \threadsafety It is safe to call this function from any thread, as it holds
 /// a stream-specific mutex while running.
@@ -980,7 +980,7 @@ double sdlGetAudioStreamGain(Pointer<SdlAudioStream> stream) {
 /// \sa SDL_GetAudioStreamGain
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetAudioStreamGain(SDL_AudioStream *stream, float gain)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetAudioStreamGain(SDL_AudioStream *stream, float gain)
 /// ```
 bool sdlSetAudioStreamGain(Pointer<SdlAudioStream> stream, double gain) {
   final sdlSetAudioStreamGainLookupFunction = libSdl3.lookupFunction<
@@ -1098,8 +1098,8 @@ Pointer<Int32> sdlGetAudioStreamOutputChannelMap(
 /// \param stream the SDL_AudioStream to change.
 /// \param chmap the new channel map, NULL to reset to default.
 /// \param count The number of channels in the map.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \threadsafety It is safe to call this function from any thread, as it holds
 /// a stream-specific mutex while running. Don't change the
@@ -1111,7 +1111,7 @@ Pointer<Int32> sdlGetAudioStreamOutputChannelMap(
 /// \sa SDL_SetAudioStreamInputChannelMap
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetAudioStreamInputChannelMap(SDL_AudioStream *stream, const int *chmap, int count)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetAudioStreamInputChannelMap(SDL_AudioStream *stream, const int *chmap, int count)
 /// ```
 bool sdlSetAudioStreamInputChannelMap(
     Pointer<SdlAudioStream> stream, Pointer<Int32> chmap, int count) {
@@ -1157,8 +1157,8 @@ bool sdlSetAudioStreamInputChannelMap(
 /// \param stream the SDL_AudioStream to change.
 /// \param chmap the new channel map, NULL to reset to default.
 /// \param count The number of channels in the map.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \threadsafety It is safe to call this function from any thread, as it holds
 /// a stream-specific mutex while running. Don't change the
@@ -1170,7 +1170,7 @@ bool sdlSetAudioStreamInputChannelMap(
 /// \sa SDL_SetAudioStreamInputChannelMap
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetAudioStreamOutputChannelMap(SDL_AudioStream *stream, const int *chmap, int count)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetAudioStreamOutputChannelMap(SDL_AudioStream *stream, const int *chmap, int count)
 /// ```
 bool sdlSetAudioStreamOutputChannelMap(
     Pointer<SdlAudioStream> stream, Pointer<Int32> chmap, int count) {
@@ -1199,8 +1199,8 @@ bool sdlSetAudioStreamOutputChannelMap(
 /// \param stream the stream the audio data is being added to.
 /// \param buf a pointer to the audio data to add.
 /// \param len the number of bytes to write to the stream.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \threadsafety It is safe to call this function from any thread, but if the
 /// stream has a callback set, the caller might need to manage
@@ -1214,7 +1214,7 @@ bool sdlSetAudioStreamOutputChannelMap(
 /// \sa SDL_GetAudioStreamQueued
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_PutAudioStreamData(SDL_AudioStream *stream, const void *buf, int len)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_PutAudioStreamData(SDL_AudioStream *stream, const void *buf, int len)
 /// ```
 bool sdlPutAudioStreamData(
     Pointer<SdlAudioStream> stream, Pointer<NativeType> buf, int len) {
@@ -1351,8 +1351,8 @@ int sdlGetAudioStreamQueued(Pointer<SdlAudioStream> stream) {
 /// input, so the complete output becomes available.
 ///
 /// \param stream the audio stream to flush.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -1361,7 +1361,7 @@ int sdlGetAudioStreamQueued(Pointer<SdlAudioStream> stream) {
 /// \sa SDL_PutAudioStreamData
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_FlushAudioStream(SDL_AudioStream *stream)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_FlushAudioStream(SDL_AudioStream *stream)
 /// ```
 bool sdlFlushAudioStream(Pointer<SdlAudioStream> stream) {
   final sdlFlushAudioStreamLookupFunction = libSdl3.lookupFunction<
@@ -1377,8 +1377,8 @@ bool sdlFlushAudioStream(Pointer<SdlAudioStream> stream) {
 /// stream until more is added.
 ///
 /// \param stream the audio stream to clear.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -1390,7 +1390,7 @@ bool sdlFlushAudioStream(Pointer<SdlAudioStream> stream) {
 /// \sa SDL_PutAudioStreamData
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_ClearAudioStream(SDL_AudioStream *stream)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_ClearAudioStream(SDL_AudioStream *stream)
 /// ```
 bool sdlClearAudioStream(Pointer<SdlAudioStream> stream) {
   final sdlClearAudioStreamLookupFunction = libSdl3.lookupFunction<
@@ -1412,8 +1412,8 @@ bool sdlClearAudioStream(Pointer<SdlAudioStream> stream) {
 /// loading, etc.
 ///
 /// \param stream the audio stream associated with the audio device to pause.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -1422,7 +1422,7 @@ bool sdlClearAudioStream(Pointer<SdlAudioStream> stream) {
 /// \sa SDL_ResumeAudioStreamDevice
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_PauseAudioStreamDevice(SDL_AudioStream *stream)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_PauseAudioStreamDevice(SDL_AudioStream *stream)
 /// ```
 bool sdlPauseAudioStreamDevice(Pointer<SdlAudioStream> stream) {
   final sdlPauseAudioStreamDeviceLookupFunction = libSdl3.lookupFunction<
@@ -1441,8 +1441,8 @@ bool sdlPauseAudioStreamDevice(Pointer<SdlAudioStream> stream) {
 /// to progress again, and audio can be generated.
 ///
 /// \param stream the audio stream associated with the audio device to resume.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -1451,7 +1451,7 @@ bool sdlPauseAudioStreamDevice(Pointer<SdlAudioStream> stream) {
 /// \sa SDL_PauseAudioStreamDevice
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_ResumeAudioStreamDevice(SDL_AudioStream *stream)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_ResumeAudioStreamDevice(SDL_AudioStream *stream)
 /// ```
 bool sdlResumeAudioStreamDevice(Pointer<SdlAudioStream> stream) {
   final sdlResumeAudioStreamDeviceLookupFunction = libSdl3.lookupFunction<
@@ -1478,8 +1478,8 @@ bool sdlResumeAudioStreamDevice(Pointer<SdlAudioStream> stream) {
 /// all the same attributes (recursive locks are allowed, etc).
 ///
 /// \param stream the audio stream to lock.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -1488,7 +1488,7 @@ bool sdlResumeAudioStreamDevice(Pointer<SdlAudioStream> stream) {
 /// \sa SDL_UnlockAudioStream
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_LockAudioStream(SDL_AudioStream *stream)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_LockAudioStream(SDL_AudioStream *stream)
 /// ```
 bool sdlLockAudioStream(Pointer<SdlAudioStream> stream) {
   final sdlLockAudioStreamLookupFunction = libSdl3.lookupFunction<
@@ -1503,8 +1503,8 @@ bool sdlLockAudioStream(Pointer<SdlAudioStream> stream) {
 /// This unlocks an audio stream after a call to SDL_LockAudioStream.
 ///
 /// \param stream the audio stream to unlock.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \threadsafety You should only call this from the same thread that
 /// previously called SDL_LockAudioStream.
@@ -1514,7 +1514,7 @@ bool sdlLockAudioStream(Pointer<SdlAudioStream> stream) {
 /// \sa SDL_LockAudioStream
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_UnlockAudioStream(SDL_AudioStream *stream)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_UnlockAudioStream(SDL_AudioStream *stream)
 /// ```
 bool sdlUnlockAudioStream(Pointer<SdlAudioStream> stream) {
   final sdlUnlockAudioStreamLookupFunction = libSdl3.lookupFunction<
@@ -1558,8 +1558,8 @@ bool sdlUnlockAudioStream(Pointer<SdlAudioStream> stream) {
 /// from the stream.
 /// \param userdata an opaque pointer provided to the callback for its own
 /// personal use.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information. This only fails if `stream` is NULL.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information. This only fails if `stream` is NULL.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -1568,7 +1568,7 @@ bool sdlUnlockAudioStream(Pointer<SdlAudioStream> stream) {
 /// \sa SDL_SetAudioStreamPutCallback
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetAudioStreamGetCallback(SDL_AudioStream *stream, SDL_AudioStreamCallback callback, void *userdata)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetAudioStreamGetCallback(SDL_AudioStream *stream, SDL_AudioStreamCallback callback, void *userdata)
 /// ```
 bool sdlSetAudioStreamGetCallback(
     Pointer<SdlAudioStream> stream,
@@ -1626,8 +1626,8 @@ bool sdlSetAudioStreamGetCallback(
 /// stream.
 /// \param userdata an opaque pointer provided to the callback for its own
 /// personal use.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information. This only fails if `stream` is NULL.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information. This only fails if `stream` is NULL.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -1636,7 +1636,7 @@ bool sdlSetAudioStreamGetCallback(
 /// \sa SDL_SetAudioStreamGetCallback
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetAudioStreamPutCallback(SDL_AudioStream *stream, SDL_AudioStreamCallback callback, void *userdata)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetAudioStreamPutCallback(SDL_AudioStream *stream, SDL_AudioStreamCallback callback, void *userdata)
 /// ```
 bool sdlSetAudioStreamPutCallback(
     Pointer<SdlAudioStream> stream,
@@ -1813,15 +1813,15 @@ Pointer<SdlAudioStream> sdlOpenAudioDeviceStream(
 /// \param devid the ID of an opened audio device.
 /// \param callback a callback function to be called. Can be NULL.
 /// \param userdata app-controlled pointer passed to callback. Can be NULL.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetAudioPostmixCallback(SDL_AudioDeviceID devid, SDL_AudioPostmixCallback callback, void *userdata)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetAudioPostmixCallback(SDL_AudioDeviceID devid, SDL_AudioPostmixCallback callback, void *userdata)
 /// ```
 bool sdlSetAudioPostmixCallback(
     int devid,
@@ -1892,19 +1892,19 @@ bool sdlSetAudioPostmixCallback(
 /// ```
 ///
 /// \param src the data source for the WAVE data.
-/// \param closeio if SDL_TRUE, calls SDL_CloseIO() on `src` before returning,
-/// even in the case of an error.
+/// \param closeio if true, calls SDL_CloseIO() on `src` before returning, even
+/// in the case of an error.
 /// \param spec a pointer to an SDL_AudioSpec that will be set to the WAVE
 /// data's format details on successful return.
 /// \param audio_buf a pointer filled with the audio data, allocated by the
 /// function.
 /// \param audio_len a pointer filled with the length of the audio data buffer
 /// in bytes.
-/// \returns SDL_TRUE on success. `audio_buf` will be filled with a pointer to
-/// an allocated buffer containing the audio data, and `audio_len` is
+/// \returns true on success. `audio_buf` will be filled with a pointer to an
+/// allocated buffer containing the audio data, and `audio_len` is
 /// filled with the length of that audio buffer in bytes.
 ///
-/// This function returns SDL_FALSE if the .WAV file cannot be opened,
+/// This function returns false if the .WAV file cannot be opened,
 /// uses an unknown data format, or is corrupt; call SDL_GetError()
 /// for more information.
 ///
@@ -1919,7 +1919,7 @@ bool sdlSetAudioPostmixCallback(
 /// \sa SDL_LoadWAV
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_LoadWAV_IO(SDL_IOStream *src, SDL_bool closeio, SDL_AudioSpec *spec, Uint8 **audio_buf, Uint32 *audio_len)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_LoadWAV_IO(SDL_IOStream *src, bool closeio, SDL_AudioSpec *spec, Uint8 **audio_buf, Uint32 *audio_len)
 /// ```
 bool sdlLoadWavIo(
     Pointer<SdlIoStream> src,
@@ -1951,7 +1951,7 @@ bool sdlLoadWavIo(
 /// This is a convenience function that is effectively the same as:
 ///
 /// ```c
-/// SDL_LoadWAV_IO(SDL_IOFromFile(path, "rb"), SDL_TRUE, spec, audio_buf, audio_len);
+/// SDL_LoadWAV_IO(SDL_IOFromFile(path, "rb"), true, spec, audio_buf, audio_len);
 /// ```
 ///
 /// \param path the file path of the WAV file to open.
@@ -1961,11 +1961,11 @@ bool sdlLoadWavIo(
 /// function.
 /// \param audio_len a pointer filled with the length of the audio data buffer
 /// in bytes.
-/// \returns SDL_TRUE on success. `audio_buf` will be filled with a pointer to
-/// an allocated buffer containing the audio data, and `audio_len` is
+/// \returns true on success. `audio_buf` will be filled with a pointer to an
+/// allocated buffer containing the audio data, and `audio_len` is
 /// filled with the length of that audio buffer in bytes.
 ///
-/// This function returns SDL_FALSE if the .WAV file cannot be opened,
+/// This function returns false if the .WAV file cannot be opened,
 /// uses an unknown data format, or is corrupt; call SDL_GetError()
 /// for more information.
 ///
@@ -1980,7 +1980,7 @@ bool sdlLoadWavIo(
 /// \sa SDL_LoadWAV_IO
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_LoadWAV(const char *path, SDL_AudioSpec *spec, Uint8 **audio_buf, Uint32 *audio_len)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_LoadWAV(const char *path, SDL_AudioSpec *spec, Uint8 **audio_buf, Uint32 *audio_len)
 /// ```
 bool sdlLoadWav(String? path, Pointer<SdlAudioSpec> spec,
     Pointer<Pointer<Uint8>> audioBuf, Pointer<Uint32> audioLen) {
@@ -2026,15 +2026,15 @@ bool sdlLoadWav(String? path, Pointer<SdlAudioSpec> spec,
 /// \param len the length of the audio buffer in bytes.
 /// \param volume ranges from 0.0 - 1.0, and should be set to 1.0 for full
 /// audio volume.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_MixAudio(Uint8 *dst, const Uint8 *src, SDL_AudioFormat format, Uint32 len, float volume)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_MixAudio(Uint8 *dst, const Uint8 *src, SDL_AudioFormat format, Uint32 len, float volume)
 /// ```
 bool sdlMixAudio(Pointer<Uint8> dst, Pointer<Uint8> src, int format, int len,
     double volume) {
@@ -2067,15 +2067,15 @@ bool sdlMixAudio(Pointer<Uint8> dst, Pointer<Uint8> src, int format, int len,
 /// which should be freed with SDL_free(). On error, it will be
 /// NULL.
 /// \param dst_len will be filled with the len of dst_data.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_ConvertAudioSamples(const SDL_AudioSpec *src_spec, const Uint8 *src_data, int src_len, const SDL_AudioSpec *dst_spec, Uint8 **dst_data, int *dst_len)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_ConvertAudioSamples(const SDL_AudioSpec *src_spec, const Uint8 *src_data, int src_len, const SDL_AudioSpec *dst_spec, Uint8 **dst_data, int *dst_len)
 /// ```
 bool sdlConvertAudioSamples(
     Pointer<SdlAudioSpec> srcSpec,

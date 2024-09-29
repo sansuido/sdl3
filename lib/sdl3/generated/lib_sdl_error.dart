@@ -8,8 +8,8 @@ import 'lib_sdl.dart';
 ///
 /// Calling this function will replace any previous error message that was set.
 ///
-/// This function always returns SDL_FALSE, since SDL frequently uses SDL_FALSE
-/// to signify a failing result, leading to this idiom:
+/// This function always returns false, since SDL frequently uses false to
+/// signify a failing result, leading to this idiom:
 ///
 /// ```c
 /// if (error_code) {
@@ -20,7 +20,7 @@ import 'lib_sdl.dart';
 /// \param fmt a printf()-style message format string.
 /// \param ... additional parameters matching % tokens in the `fmt` string, if
 /// any.
-/// \returns SDL_FALSE.
+/// \returns false.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -28,7 +28,7 @@ import 'lib_sdl.dart';
 /// \sa SDL_GetError
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetError(SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(1)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetError(SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(1)
 /// ```
 bool sdlSetError(String? fmt, Pointer<NativeType> arg1) {
   final sdlSetErrorLookupFunction = libSdl3.lookupFunction<
@@ -46,12 +46,12 @@ bool sdlSetError(String? fmt, Pointer<NativeType> arg1) {
 ///
 /// This function does not do any memory allocation.
 ///
-/// \returns SDL_FALSE.
+/// \returns false.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_OutOfMemory(void)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_OutOfMemory(void)
 /// ```
 bool sdlOutOfMemory() {
   final sdlOutOfMemoryLookupFunction = libSdl3
@@ -108,7 +108,7 @@ String? sdlGetError() {
 ///
 /// Clear any previous error message for this thread.
 ///
-/// \returns SDL_TRUE.
+/// \returns true.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -116,7 +116,7 @@ String? sdlGetError() {
 /// \sa SDL_SetError
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_ClearError(void)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_ClearError(void)
 /// ```
 bool sdlClearError() {
   final sdlClearErrorLookupFunction = libSdl3

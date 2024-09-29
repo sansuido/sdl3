@@ -7,14 +7,14 @@ import 'struct_sdl.dart';
 ///
 /// Return whether a mouse is currently connected.
 ///
-/// \returns SDL_TRUE if a mouse is connected, SDL_FALSE otherwise.
+/// \returns true if a mouse is connected, false otherwise.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetMice
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_HasMouse(void)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_HasMouse(void)
 /// ```
 bool sdlHasMouse() {
   final sdlHasMouseLookupFunction =
@@ -235,15 +235,15 @@ void sdlWarpMouseInWindow(Pointer<SdlWindow> window, double x, double y) {
 ///
 /// \param x the x coordinate.
 /// \param y the y coordinate.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_WarpMouseInWindow
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_WarpMouseGlobal(float x, float y)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_WarpMouseGlobal(float x, float y)
 /// ```
 bool sdlWarpMouseGlobal(double x, double y) {
   final sdlWarpMouseGlobalLookupFunction = libSdl3.lookupFunction<
@@ -263,16 +263,16 @@ bool sdlWarpMouseGlobal(double x, double y) {
 /// This function will flush any pending mouse motion for this window.
 ///
 /// \param window the window to change.
-/// \param enabled SDL_TRUE to enable relative mode, SDL_FALSE to disable.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \param enabled true to enable relative mode, false to disable.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetWindowRelativeMouseMode
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetWindowRelativeMouseMode(SDL_Window *window, SDL_bool enabled)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowRelativeMouseMode(SDL_Window *window, bool enabled)
 /// ```
 bool sdlSetWindowRelativeMouseMode(Pointer<SdlWindow> window, bool enabled) {
   final sdlSetWindowRelativeMouseModeLookupFunction = libSdl3.lookupFunction<
@@ -287,15 +287,14 @@ bool sdlSetWindowRelativeMouseMode(Pointer<SdlWindow> window, bool enabled) {
 /// Query whether relative mouse mode is enabled for a window.
 ///
 /// \param window the window to query.
-/// \returns SDL_TRUE if relative mode is enabled for a window or SDL_FALSE
-/// otherwise.
+/// \returns true if relative mode is enabled for a window or false otherwise.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_SetWindowRelativeMouseMode
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetWindowRelativeMouseMode(SDL_Window *window)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowRelativeMouseMode(SDL_Window *window)
 /// ```
 bool sdlGetWindowRelativeMouseMode(Pointer<SdlWindow> window) {
   final sdlGetWindowRelativeMouseModeLookupFunction = libSdl3.lookupFunction<
@@ -341,16 +340,16 @@ bool sdlGetWindowRelativeMouseMode(Pointer<SdlWindow> window) {
 /// app, you can disable auto capture by setting the
 /// `SDL_HINT_MOUSE_AUTO_CAPTURE` hint to zero.
 ///
-/// \param enabled SDL_TRUE to enable capturing, SDL_FALSE to disable.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \param enabled true to enable capturing, false to disable.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetGlobalMouseState
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_CaptureMouse(SDL_bool enabled)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_CaptureMouse(bool enabled)
 /// ```
 bool sdlCaptureMouse(bool enabled) {
   final sdlCaptureMouseLookupFunction = libSdl3.lookupFunction<
@@ -483,15 +482,15 @@ Pointer<SdlCursor> sdlCreateSystemCursor(int id) {
 /// this is desired for any reason.
 ///
 /// \param cursor a cursor to make active.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetCursor
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetCursor(SDL_Cursor *cursor)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetCursor(SDL_Cursor *cursor)
 /// ```
 bool sdlSetCursor(Pointer<SdlCursor> cursor) {
   final sdlSetCursorLookupFunction = libSdl3.lookupFunction<
@@ -570,8 +569,8 @@ void sdlDestroyCursor(Pointer<SdlCursor> cursor) {
 ///
 /// Show the cursor.
 ///
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -579,7 +578,7 @@ void sdlDestroyCursor(Pointer<SdlCursor> cursor) {
 /// \sa SDL_HideCursor
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_ShowCursor(void)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_ShowCursor(void)
 /// ```
 bool sdlShowCursor() {
   final sdlShowCursorLookupFunction = libSdl3
@@ -590,8 +589,8 @@ bool sdlShowCursor() {
 ///
 /// Hide the cursor.
 ///
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -599,7 +598,7 @@ bool sdlShowCursor() {
 /// \sa SDL_ShowCursor
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_HideCursor(void)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_HideCursor(void)
 /// ```
 bool sdlHideCursor() {
   final sdlHideCursorLookupFunction = libSdl3
@@ -610,8 +609,8 @@ bool sdlHideCursor() {
 ///
 /// Return whether the cursor is currently being shown.
 ///
-/// \returns `SDL_TRUE` if the cursor is being shown, or `SDL_FALSE` if the
-/// cursor is hidden.
+/// \returns `true` if the cursor is being shown, or `false` if the cursor is
+/// hidden.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -619,7 +618,7 @@ bool sdlHideCursor() {
 /// \sa SDL_ShowCursor
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_CursorVisible(void)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_CursorVisible(void)
 /// ```
 bool sdlCursorVisible() {
   final sdlCursorVisibleLookupFunction = libSdl3

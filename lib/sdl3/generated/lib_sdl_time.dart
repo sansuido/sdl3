@@ -15,13 +15,13 @@ import 'struct_sdl.dart';
 /// format, may be NULL.
 /// \param timeFormat a pointer to the SDL_TimeFormat to hold the returned time
 /// format, may be NULL.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetDateTimeLocalePreferences(SDL_DateFormat *dateFormat, SDL_TimeFormat *timeFormat)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GetDateTimeLocalePreferences(SDL_DateFormat *dateFormat, SDL_TimeFormat *timeFormat)
 /// ```
 bool sdlGetDateTimeLocalePreferences(
     Pointer<Int32> dateFormat, Pointer<Int32> timeFormat) {
@@ -39,13 +39,13 @@ bool sdlGetDateTimeLocalePreferences(
 /// Jan 1, 1970 in Universal Coordinated Time (UTC).
 ///
 /// \param ticks the SDL_Time to hold the returned tick count.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetCurrentTime(SDL_Time *ticks)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GetCurrentTime(SDL_Time *ticks)
 /// ```
 bool sdlGetCurrentTime(Pointer<Int64> ticks) {
   final sdlGetCurrentTimeLookupFunction = libSdl3.lookupFunction<
@@ -63,13 +63,13 @@ bool sdlGetCurrentTime(Pointer<Int64> ticks) {
 /// \param localTime the resulting SDL_DateTime will be expressed in local time
 /// if true, otherwise it will be in Universal Coordinated
 /// Time (UTC).
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_TimeToDateTime(SDL_Time ticks, SDL_DateTime *dt, SDL_bool localTime)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_TimeToDateTime(SDL_Time ticks, SDL_DateTime *dt, bool localTime)
 /// ```
 bool sdlTimeToDateTime(int ticks, Pointer<SdlDateTime> dt, bool localTime) {
   final sdlTimeToDateTimeLookupFunction = libSdl3.lookupFunction<
@@ -87,13 +87,13 @@ bool sdlTimeToDateTime(int ticks, Pointer<SdlDateTime> dt, bool localTime) {
 ///
 /// \param dt the source SDL_DateTime.
 /// \param ticks the resulting SDL_Time.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_DateTimeToTime(const SDL_DateTime *dt, SDL_Time *ticks)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_DateTimeToTime(const SDL_DateTime *dt, SDL_Time *ticks)
 /// ```
 bool sdlDateTimeToTime(Pointer<SdlDateTime> dt, Pointer<Int64> ticks) {
   final sdlDateTimeToTimeLookupFunction = libSdl3.lookupFunction<

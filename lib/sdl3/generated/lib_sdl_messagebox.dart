@@ -31,15 +31,15 @@ import 'struct_sdl.dart';
 /// other options.
 /// \param buttonid the pointer to which user id of hit button should be
 /// copied.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_ShowSimpleMessageBox
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_ShowMessageBox(const SDL_MessageBoxData *messageboxdata, int *buttonid)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_ShowMessageBox(const SDL_MessageBoxData *messageboxdata, int *buttonid)
 /// ```
 bool sdlShowMessageBox(
     Pointer<SdlMessageBoxData> messageboxdata, Pointer<Int32> buttonid) {
@@ -84,15 +84,15 @@ bool sdlShowMessageBox(
 /// \param title uTF-8 title text.
 /// \param message uTF-8 message text.
 /// \param window the parent window, or NULL for no parent.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_ShowMessageBox
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_ShowSimpleMessageBox(SDL_MessageBoxFlags flags, const char *title, const char *message, SDL_Window *window)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_ShowSimpleMessageBox(SDL_MessageBoxFlags flags, const char *title, const char *message, SDL_Window *window)
 /// ```
 bool sdlShowSimpleMessageBox(
     int flags, String? title, String? message, Pointer<SdlWindow> window) {

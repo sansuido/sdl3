@@ -24,9 +24,9 @@ extension MixChunkEx on MixChunk {
   /// fly. Also, crucially, there are as many channels for chunks as the app can
   /// allocate, but SDL_mixer only offers a single "music" channel.
   ///
-  /// If `closeio` is SDL_TRUE, the IOStream will be closed before returning,
-  /// whether this function succeeds or not. SDL_mixer reads everything it needs
-  /// from the IOStream during this call in any case.
+  /// If `closeio` is true, the IOStream will be closed before returning, whether
+  /// this function succeeds or not. SDL_mixer reads everything it needs from the
+  /// IOStream during this call in any case.
   ///
   /// There is a separate function (a macro, before SDL_mixer 3.0.0) to read
   /// files from disk without having to deal with SDL_IOStream:
@@ -37,8 +37,8 @@ extension MixChunkEx on MixChunk {
   /// Mix_FreeChunk().
   ///
   /// \param src an SDL_IOStream that data will be read from.
-  /// \param closeio SDL_TRUE to close the SDL_IOStream before returning,
-  /// SDL_FALSE to leave it open.
+  /// \param closeio true to close the SDL_IOStream before returning, false to
+  /// leave it open.
   /// \returns a new chunk, or NULL on error.
   ///
   /// \since This function is available since SDL_mixer 3.0.0
@@ -47,7 +47,7 @@ extension MixChunkEx on MixChunk {
   /// \sa Mix_FreeChunk
   ///
   /// ```c
-  /// extern SDL_DECLSPEC Mix_Chunk * SDLCALL Mix_LoadWAV_IO(SDL_IOStream *src, SDL_bool closeio)
+  /// extern SDL_DECLSPEC Mix_Chunk * SDLCALL Mix_LoadWAV_IO(SDL_IOStream *src, bool closeio)
   /// ```
   static Pointer<MixChunk> loadWavIo(Pointer<SdlIoStream> src, bool closeio) {
     return mixLoadWavIo(src, closeio);
@@ -79,8 +79,8 @@ extension MixChunkEx on MixChunk {
   /// Mix_FreeChunk().
   ///
   /// Note that before SDL_mixer 3.0.0, this function was a macro that called
-  /// Mix_LoadWAV_IO(), creating a IOStream and setting `closeio` to SDL_TRUE.
-  /// This macro has since been promoted to a proper API function. Older binaries
+  /// Mix_LoadWAV_IO(), creating a IOStream and setting `closeio` to true. This
+  /// macro has since been promoted to a proper API function. Older binaries
   /// linked against a newer SDL_mixer will still call Mix_LoadWAV_IO directly,
   /// as they are using the macro, which was available since the dawn of time.
   ///

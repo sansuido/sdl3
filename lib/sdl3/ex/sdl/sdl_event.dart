@@ -41,15 +41,15 @@ extension SdlEventEx on SdlEvent {
   /// instead.
   ///
   /// \param type the type of event to be queried; see SDL_EventType for details.
-  /// \returns SDL_TRUE if events matching `type` are present, or SDL_FALSE if
-  /// events matching `type` are not present.
+  /// \returns true if events matching `type` are present, or false if events
+  /// matching `type` are not present.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
   /// \sa SDL_HasEvents
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_HasEvent(Uint32 type)
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_HasEvent(Uint32 type)
   /// ```
   static bool have(int type) {
     return sdlHasEvent(type);
@@ -64,15 +64,15 @@ extension SdlEventEx on SdlEvent {
   /// SDL_EventType for details.
   /// \param maxType the high end of event type to be queried, inclusive; see
   /// SDL_EventType for details.
-  /// \returns SDL_TRUE if events with type >= `minType` and <= `maxType` are
-  /// present, or SDL_FALSE if not.
+  /// \returns true if events with type >= `minType` and <= `maxType` are
+  /// present, or false if not.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
   /// \sa SDL_HasEvents
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_HasEvents(Uint32 minType, Uint32 maxType)
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_HasEvents(Uint32 minType, Uint32 maxType)
   /// ```
   static bool has(int minType, int maxType) {
     return sdlHasEvents(minType, maxType);
@@ -226,8 +226,7 @@ extension SdlEventPointerEx on Pointer<SdlEvent> {
   ///
   /// \param event the SDL_Event structure to be filled with the next event from
   /// the queue, or NULL.
-  /// \returns SDL_TRUE if this got an event or SDL_FALSE if there are none
-  /// available.
+  /// \returns true if this got an event or false if there are none available.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -236,7 +235,7 @@ extension SdlEventPointerEx on Pointer<SdlEvent> {
   /// \sa SDL_WaitEventTimeout
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_PollEvent(SDL_Event *event)
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_PollEvent(SDL_Event *event)
   /// ```
   bool poll() {
     return sdlPollEvent(this);
@@ -253,8 +252,8 @@ extension SdlEventPointerEx on Pointer<SdlEvent> {
   ///
   /// \param event the SDL_Event structure to be filled in with the next event
   /// from the queue, or NULL.
-  /// \returns SDL_TRUE on success or SDL_FALSE if there was an error while
-  /// waiting for events; call SDL_GetError() for more information.
+  /// \returns true on success or false if there was an error while waiting for
+  /// events; call SDL_GetError() for more information.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -263,7 +262,7 @@ extension SdlEventPointerEx on Pointer<SdlEvent> {
   /// \sa SDL_WaitEventTimeout
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_WaitEvent(SDL_Event *event)
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_WaitEvent(SDL_Event *event)
   /// ```
   bool wait() {
     return sdlWaitEvent(this);
@@ -286,8 +285,8 @@ extension SdlEventPointerEx on Pointer<SdlEvent> {
   /// from the queue, or NULL.
   /// \param timeoutMS the maximum number of milliseconds to wait for the next
   /// available event.
-  /// \returns SDL_TRUE if this got an event or SDL_FALSE if the timeout elapsed
-  /// without any events available.
+  /// \returns true if this got an event or false if the timeout elapsed without
+  /// any events available.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -296,7 +295,7 @@ extension SdlEventPointerEx on Pointer<SdlEvent> {
   /// \sa SDL_WaitEvent
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_WaitEventTimeout(SDL_Event *event, Sint32 timeoutMS)
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_WaitEventTimeout(SDL_Event *event, Sint32 timeoutMS)
   /// ```
   bool waitTimeout(int timeout) {
     return sdlWaitEventTimeout(this, timeout);
@@ -324,9 +323,9 @@ extension SdlEventPointerEx on Pointer<SdlEvent> {
   /// its own custom event types.
   ///
   /// \param event the SDL_Event to be added to the queue.
-  /// \returns SDL_TRUE on success, SDL_FALSE if the event was filtered or on
-  /// failure; call SDL_GetError() for more information. A common reason
-  /// for error is the event queue being full.
+  /// \returns true on success, false if the event was filtered or on failure;
+  /// call SDL_GetError() for more information. A common reason for
+  /// error is the event queue being full.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -335,7 +334,7 @@ extension SdlEventPointerEx on Pointer<SdlEvent> {
   /// \sa SDL_RegisterEvents
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_PushEvent(SDL_Event *event)
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_PushEvent(SDL_Event *event)
   /// ```
   bool push() {
     return sdlPushEvent(this);

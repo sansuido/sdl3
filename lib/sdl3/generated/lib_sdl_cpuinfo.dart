@@ -3,7 +3,7 @@ import 'dart:ffi';
 import 'lib_sdl.dart';
 
 ///
-/// Get the number of CPU cores available.
+/// Get the number of logical CPU cores available.
 ///
 /// \returns the total number of logical CPU cores. On CPUs that include
 /// technologies such as hyperthreading, the number of logical cores
@@ -12,12 +12,13 @@ import 'lib_sdl.dart';
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_GetCPUCount(void)
+/// extern SDL_DECLSPEC int SDLCALL SDL_GetNumLogicalCPUCores(void)
 /// ```
-int sdlGetCpuCount() {
-  final sdlGetCpuCountLookupFunction = libSdl3
-      .lookupFunction<Int32 Function(), int Function()>('SDL_GetCPUCount');
-  return sdlGetCpuCountLookupFunction();
+int sdlGetNumLogicalCpuCores() {
+  final sdlGetNumLogicalCpuCoresLookupFunction =
+      libSdl3.lookupFunction<Int32 Function(), int Function()>(
+          'SDL_GetNumLogicalCPUCores');
+  return sdlGetNumLogicalCpuCoresLookupFunction();
 }
 
 ///
@@ -46,12 +47,12 @@ int sdlGetCpuCacheLineSize() {
 /// This always returns false on CPUs that aren't using PowerPC instruction
 /// sets.
 ///
-/// \returns SDL_TRUE if the CPU has AltiVec features or SDL_FALSE if not.
+/// \returns true if the CPU has AltiVec features or false if not.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_HasAltiVec(void)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_HasAltiVec(void)
 /// ```
 bool sdlHasAltiVec() {
   final sdlHasAltiVecLookupFunction = libSdl3
@@ -64,12 +65,12 @@ bool sdlHasAltiVec() {
 ///
 /// This always returns false on CPUs that aren't using Intel instruction sets.
 ///
-/// \returns SDL_TRUE if the CPU has MMX features or SDL_FALSE if not.
+/// \returns true if the CPU has MMX features or false if not.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_HasMMX(void)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_HasMMX(void)
 /// ```
 bool sdlHasMmx() {
   final sdlHasMmxLookupFunction =
@@ -82,7 +83,7 @@ bool sdlHasMmx() {
 ///
 /// This always returns false on CPUs that aren't using Intel instruction sets.
 ///
-/// \returns SDL_TRUE if the CPU has SSE features or SDL_FALSE if not.
+/// \returns true if the CPU has SSE features or false if not.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -92,7 +93,7 @@ bool sdlHasMmx() {
 /// \sa SDL_HasSSE42
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_HasSSE(void)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_HasSSE(void)
 /// ```
 bool sdlHasSse() {
   final sdlHasSseLookupFunction =
@@ -105,7 +106,7 @@ bool sdlHasSse() {
 ///
 /// This always returns false on CPUs that aren't using Intel instruction sets.
 ///
-/// \returns SDL_TRUE if the CPU has SSE2 features or SDL_FALSE if not.
+/// \returns true if the CPU has SSE2 features or false if not.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -115,7 +116,7 @@ bool sdlHasSse() {
 /// \sa SDL_HasSSE42
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_HasSSE2(void)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_HasSSE2(void)
 /// ```
 bool sdlHasSse2() {
   final sdlHasSse2LookupFunction =
@@ -128,7 +129,7 @@ bool sdlHasSse2() {
 ///
 /// This always returns false on CPUs that aren't using Intel instruction sets.
 ///
-/// \returns SDL_TRUE if the CPU has SSE3 features or SDL_FALSE if not.
+/// \returns true if the CPU has SSE3 features or false if not.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -138,7 +139,7 @@ bool sdlHasSse2() {
 /// \sa SDL_HasSSE42
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_HasSSE3(void)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_HasSSE3(void)
 /// ```
 bool sdlHasSse3() {
   final sdlHasSse3LookupFunction =
@@ -151,7 +152,7 @@ bool sdlHasSse3() {
 ///
 /// This always returns false on CPUs that aren't using Intel instruction sets.
 ///
-/// \returns SDL_TRUE if the CPU has SSE4.1 features or SDL_FALSE if not.
+/// \returns true if the CPU has SSE4.1 features or false if not.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -161,7 +162,7 @@ bool sdlHasSse3() {
 /// \sa SDL_HasSSE42
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_HasSSE41(void)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_HasSSE41(void)
 /// ```
 bool sdlHasSse41() {
   final sdlHasSse41LookupFunction =
@@ -174,7 +175,7 @@ bool sdlHasSse41() {
 ///
 /// This always returns false on CPUs that aren't using Intel instruction sets.
 ///
-/// \returns SDL_TRUE if the CPU has SSE4.2 features or SDL_FALSE if not.
+/// \returns true if the CPU has SSE4.2 features or false if not.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -184,7 +185,7 @@ bool sdlHasSse41() {
 /// \sa SDL_HasSSE41
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_HasSSE42(void)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_HasSSE42(void)
 /// ```
 bool sdlHasSse42() {
   final sdlHasSse42LookupFunction =
@@ -197,7 +198,7 @@ bool sdlHasSse42() {
 ///
 /// This always returns false on CPUs that aren't using Intel instruction sets.
 ///
-/// \returns SDL_TRUE if the CPU has AVX features or SDL_FALSE if not.
+/// \returns true if the CPU has AVX features or false if not.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -205,7 +206,7 @@ bool sdlHasSse42() {
 /// \sa SDL_HasAVX512F
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_HasAVX(void)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_HasAVX(void)
 /// ```
 bool sdlHasAvx() {
   final sdlHasAvxLookupFunction =
@@ -218,7 +219,7 @@ bool sdlHasAvx() {
 ///
 /// This always returns false on CPUs that aren't using Intel instruction sets.
 ///
-/// \returns SDL_TRUE if the CPU has AVX2 features or SDL_FALSE if not.
+/// \returns true if the CPU has AVX2 features or false if not.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -226,7 +227,7 @@ bool sdlHasAvx() {
 /// \sa SDL_HasAVX512F
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_HasAVX2(void)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_HasAVX2(void)
 /// ```
 bool sdlHasAvx2() {
   final sdlHasAvx2LookupFunction =
@@ -239,7 +240,7 @@ bool sdlHasAvx2() {
 ///
 /// This always returns false on CPUs that aren't using Intel instruction sets.
 ///
-/// \returns SDL_TRUE if the CPU has AVX-512F features or SDL_FALSE if not.
+/// \returns true if the CPU has AVX-512F features or false if not.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -247,7 +248,7 @@ bool sdlHasAvx2() {
 /// \sa SDL_HasAVX2
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_HasAVX512F(void)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_HasAVX512F(void)
 /// ```
 bool sdlHasAvx512F() {
   final sdlHasAvx512FLookupFunction = libSdl3
@@ -262,14 +263,14 @@ bool sdlHasAvx512F() {
 ///
 /// This always returns false on CPUs that aren't using ARM instruction sets.
 ///
-/// \returns SDL_TRUE if the CPU has ARM SIMD features or SDL_FALSE if not.
+/// \returns true if the CPU has ARM SIMD features or false if not.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_HasNEON
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_HasARMSIMD(void)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_HasARMSIMD(void)
 /// ```
 bool sdlHasArmsimd() {
   final sdlHasArmsimdLookupFunction = libSdl3
@@ -282,12 +283,12 @@ bool sdlHasArmsimd() {
 ///
 /// This always returns false on CPUs that aren't using ARM instruction sets.
 ///
-/// \returns SDL_TRUE if the CPU has ARM NEON features or SDL_FALSE if not.
+/// \returns true if the CPU has ARM NEON features or false if not.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_HasNEON(void)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_HasNEON(void)
 /// ```
 bool sdlHasNeon() {
   final sdlHasNeonLookupFunction =
@@ -301,13 +302,12 @@ bool sdlHasNeon() {
 /// This always returns false on CPUs that aren't using LOONGARCH instruction
 /// sets.
 ///
-/// \returns SDL_TRUE if the CPU has LOONGARCH LSX features or SDL_FALSE if
-/// not.
+/// \returns true if the CPU has LOONGARCH LSX features or false if not.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_HasLSX(void)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_HasLSX(void)
 /// ```
 bool sdlHasLsx() {
   final sdlHasLsxLookupFunction =
@@ -321,13 +321,12 @@ bool sdlHasLsx() {
 /// This always returns false on CPUs that aren't using LOONGARCH instruction
 /// sets.
 ///
-/// \returns SDL_TRUE if the CPU has LOONGARCH LASX features or SDL_FALSE if
-/// not.
+/// \returns true if the CPU has LOONGARCH LASX features or false if not.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_HasLASX(void)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_HasLASX(void)
 /// ```
 bool sdlHasLasx() {
   final sdlHasLasxLookupFunction =

@@ -8,6 +8,8 @@ import 'lib_sdl.dart';
 ///
 /// \param priority the SDL_LogPriority to assign.
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_ResetLogPriorities
@@ -28,6 +30,8 @@ void sdlSetLogPriorities(int priority) {
 ///
 /// \param category the category to assign a priority to.
 /// \param priority the SDL_LogPriority to assign.
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -51,6 +55,8 @@ void sdlSetLogPriority(int category, int priority) {
 /// \param category the category to query.
 /// \returns the SDL_LogPriority for the requested category.
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_SetLogPriority
@@ -69,6 +75,8 @@ int sdlGetLogPriority(int category) {
 /// Reset all priorities to default.
 ///
 /// This is called by SDL_Quit().
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -95,8 +103,10 @@ void sdlResetLogPriorities() {
 /// \param priority the SDL_LogPriority to modify.
 /// \param prefix the prefix to use for that log priority, or NULL to use no
 /// prefix.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -104,7 +114,7 @@ void sdlResetLogPriorities() {
 /// \sa SDL_SetLogPriority
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetLogPriorityPrefix(SDL_LogPriority priority, const char *prefix)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetLogPriorityPrefix(SDL_LogPriority priority, const char *prefix)
 /// ```
 bool sdlSetLogPriorityPrefix(int priority, String? prefix) {
   final sdlSetLogPriorityPrefixLookupFunction = libSdl3.lookupFunction<
@@ -125,6 +135,8 @@ bool sdlSetLogPriorityPrefix(int priority, String? prefix) {
 /// \param ... additional parameters matching % tokens in the `fmt` string, if
 /// any.
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_LogCritical
@@ -133,6 +145,7 @@ bool sdlSetLogPriorityPrefix(int priority, String? prefix) {
 /// \sa SDL_LogInfo
 /// \sa SDL_LogMessage
 /// \sa SDL_LogMessageV
+/// \sa SDL_LogTrace
 /// \sa SDL_LogVerbose
 /// \sa SDL_LogWarn
 ///
@@ -150,12 +163,52 @@ void sdlLog(String? fmt, Pointer<NativeType> arg1) {
 }
 
 ///
+/// Log a message with SDL_LOG_PRIORITY_TRACE.
+///
+/// \param category the category of the message.
+/// \param fmt a printf() style message format string.
+/// \param ... additional parameters matching % tokens in the **fmt** string,
+/// if any.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_Log
+/// \sa SDL_LogCritical
+/// \sa SDL_LogDebug
+/// \sa SDL_LogError
+/// \sa SDL_LogInfo
+/// \sa SDL_LogMessage
+/// \sa SDL_LogMessageV
+/// \sa SDL_LogTrace
+/// \sa SDL_LogVerbose
+/// \sa SDL_LogWarn
+///
+/// ```c
+/// extern SDL_DECLSPEC void SDLCALL SDL_LogTrace(int category, SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(2)
+/// ```
+void sdlLogTrace(int category, String? fmt, Pointer<NativeType> arg2) {
+  final sdlLogTraceLookupFunction = libSdl3.lookupFunction<
+      Void Function(
+          Int32 category, Pointer<Utf8> fmt, Pointer<NativeType> arg2),
+      void Function(int category, Pointer<Utf8> fmt,
+          Pointer<NativeType> arg2)>('SDL_LogTrace');
+  final fmtPointer = fmt != null ? fmt.toNativeUtf8() : nullptr;
+  final result = sdlLogTraceLookupFunction(category, fmtPointer, arg2);
+  calloc.free(fmtPointer);
+  return result;
+}
+
+///
 /// Log a message with SDL_LOG_PRIORITY_VERBOSE.
 ///
 /// \param category the category of the message.
 /// \param fmt a printf() style message format string.
 /// \param ... additional parameters matching % tokens in the **fmt** string,
 /// if any.
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -191,6 +244,8 @@ void sdlLogVerbose(int category, String? fmt, Pointer<NativeType> arg2) {
 /// \param ... additional parameters matching % tokens in the **fmt** string,
 /// if any.
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_Log
@@ -199,6 +254,7 @@ void sdlLogVerbose(int category, String? fmt, Pointer<NativeType> arg2) {
 /// \sa SDL_LogInfo
 /// \sa SDL_LogMessage
 /// \sa SDL_LogMessageV
+/// \sa SDL_LogTrace
 /// \sa SDL_LogVerbose
 /// \sa SDL_LogWarn
 ///
@@ -225,6 +281,8 @@ void sdlLogDebug(int category, String? fmt, Pointer<NativeType> arg2) {
 /// \param ... additional parameters matching % tokens in the **fmt** string,
 /// if any.
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_Log
@@ -233,6 +291,7 @@ void sdlLogDebug(int category, String? fmt, Pointer<NativeType> arg2) {
 /// \sa SDL_LogError
 /// \sa SDL_LogMessage
 /// \sa SDL_LogMessageV
+/// \sa SDL_LogTrace
 /// \sa SDL_LogVerbose
 /// \sa SDL_LogWarn
 ///
@@ -259,6 +318,8 @@ void sdlLogInfo(int category, String? fmt, Pointer<NativeType> arg2) {
 /// \param ... additional parameters matching % tokens in the **fmt** string,
 /// if any.
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_Log
@@ -268,6 +329,7 @@ void sdlLogInfo(int category, String? fmt, Pointer<NativeType> arg2) {
 /// \sa SDL_LogInfo
 /// \sa SDL_LogMessage
 /// \sa SDL_LogMessageV
+/// \sa SDL_LogTrace
 /// \sa SDL_LogVerbose
 ///
 /// ```c
@@ -293,6 +355,8 @@ void sdlLogWarn(int category, String? fmt, Pointer<NativeType> arg2) {
 /// \param ... additional parameters matching % tokens in the **fmt** string,
 /// if any.
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_Log
@@ -301,6 +365,7 @@ void sdlLogWarn(int category, String? fmt, Pointer<NativeType> arg2) {
 /// \sa SDL_LogInfo
 /// \sa SDL_LogMessage
 /// \sa SDL_LogMessageV
+/// \sa SDL_LogTrace
 /// \sa SDL_LogVerbose
 /// \sa SDL_LogWarn
 ///
@@ -327,6 +392,8 @@ void sdlLogError(int category, String? fmt, Pointer<NativeType> arg2) {
 /// \param ... additional parameters matching % tokens in the **fmt** string,
 /// if any.
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_Log
@@ -335,6 +402,7 @@ void sdlLogError(int category, String? fmt, Pointer<NativeType> arg2) {
 /// \sa SDL_LogInfo
 /// \sa SDL_LogMessage
 /// \sa SDL_LogMessageV
+/// \sa SDL_LogTrace
 /// \sa SDL_LogVerbose
 /// \sa SDL_LogWarn
 ///
@@ -362,6 +430,8 @@ void sdlLogCritical(int category, String? fmt, Pointer<NativeType> arg2) {
 /// \param ... additional parameters matching % tokens in the **fmt** string,
 /// if any.
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_Log
@@ -370,6 +440,7 @@ void sdlLogCritical(int category, String? fmt, Pointer<NativeType> arg2) {
 /// \sa SDL_LogError
 /// \sa SDL_LogInfo
 /// \sa SDL_LogMessageV
+/// \sa SDL_LogTrace
 /// \sa SDL_LogVerbose
 /// \sa SDL_LogWarn
 ///
@@ -398,6 +469,8 @@ void sdlLogMessage(
 /// \param fmt a printf() style message format string.
 /// \param ap a variable argument list.
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_Log
@@ -406,6 +479,7 @@ void sdlLogMessage(
 /// \sa SDL_LogError
 /// \sa SDL_LogInfo
 /// \sa SDL_LogMessage
+/// \sa SDL_LogTrace
 /// \sa SDL_LogVerbose
 /// \sa SDL_LogWarn
 ///
@@ -434,6 +508,8 @@ void sdlLogMessageV(
 /// \param userdata a pointer filled in with the pointer that is passed to
 /// `callback`.
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_SetLogOutputFunction
@@ -459,6 +535,8 @@ void sdlGetLogOutputFunction(
 ///
 /// \param callback an SDL_LogOutputFunction to call instead of the default.
 /// \param userdata a pointer that is passed to `callback`.
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///

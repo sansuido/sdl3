@@ -7,14 +7,14 @@ import 'struct_sdl.dart';
 ///
 /// Return whether a keyboard is currently connected.
 ///
-/// \returns SDL_TRUE if a keyboard is connected, SDL_FALSE otherwise.
+/// \returns true if a keyboard is connected, false otherwise.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetKeyboards
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_HasKeyboard(void)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_HasKeyboard(void)
 /// ```
 bool sdlHasKeyboard() {
   final sdlHasKeyboardLookupFunction = libSdl3
@@ -102,9 +102,9 @@ Pointer<SdlWindow> sdlGetKeyboardFocus() {
 /// valid for the whole lifetime of the application and should not be freed by
 /// the caller.
 ///
-/// A array element with a value of SDL_TRUE means that the key is pressed and
-/// a value of SDL_FALSE means that it is not. Indexes into this array are
-/// obtained by using SDL_Scancode values.
+/// A array element with a value of true means that the key is pressed and a
+/// value of false means that it is not. Indexes into this array are obtained
+/// by using SDL_Scancode values.
 ///
 /// Use SDL_PumpEvents() to update the state array.
 ///
@@ -125,7 +125,7 @@ Pointer<SdlWindow> sdlGetKeyboardFocus() {
 /// \sa SDL_ResetKeyboard
 ///
 /// ```c
-/// extern SDL_DECLSPEC const SDL_bool * SDLCALL SDL_GetKeyboardState(int *numkeys)
+/// extern SDL_DECLSPEC const bool * SDLCALL SDL_GetKeyboardState(int *numkeys)
 /// ```
 Pointer<Uint8> sdlGetKeyboardState(Pointer<Int32> numkeys) {
   final sdlGetKeyboardStateLookupFunction = libSdl3.lookupFunction<
@@ -205,13 +205,13 @@ void sdlSetModState(int modstate) {
 ///
 /// If you want to get the keycode as it would be delivered in key events,
 /// including options specified in SDL_HINT_KEYCODE_OPTIONS, then you should
-/// pass `key_event` as SDL_TRUE. Otherwise this function simply translates the
+/// pass `key_event` as true. Otherwise this function simply translates the
 /// scancode based on the given modifier state.
 ///
 /// \param scancode the desired SDL_Scancode to query.
 /// \param modstate the modifier state to use when translating the scancode to
 /// a keycode.
-/// \param key_event SDL_TRUE if the keycode will be used in key events.
+/// \param key_event true if the keycode will be used in key events.
 /// \returns the SDL_Keycode that corresponds to the given SDL_Scancode.
 ///
 /// \since This function is available since SDL 3.0.0.
@@ -220,7 +220,7 @@ void sdlSetModState(int modstate) {
 /// \sa SDL_GetScancodeFromKey
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_Keycode SDLCALL SDL_GetKeyFromScancode(SDL_Scancode scancode, SDL_Keymod modstate, SDL_bool key_event)
+/// extern SDL_DECLSPEC SDL_Keycode SDLCALL SDL_GetKeyFromScancode(SDL_Scancode scancode, SDL_Keymod modstate, bool key_event)
 /// ```
 int sdlGetKeyFromScancode(int scancode, int modstate, bool keyEvent) {
   final sdlGetKeyFromScancodeLookupFunction = libSdl3.lookupFunction<
@@ -266,15 +266,15 @@ int sdlGetScancodeFromKey(int key, Pointer<Uint16> modstate) {
 /// \param name the name to use for the scancode, encoded as UTF-8. The string
 /// is not copied, so the pointer given to this function must stay
 /// valid while SDL is being used.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetScancodeName
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetScancodeName(SDL_Scancode scancode, const char *name)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetScancodeName(SDL_Scancode scancode, const char *name)
 /// ```
 bool sdlSetScancodeName(int scancode, String? name) {
   final sdlSetScancodeNameLookupFunction = libSdl3.lookupFunction<
@@ -414,8 +414,8 @@ int sdlGetKeyFromName(String? name) {
 /// On some platforms using this function shows the screen keyboard.
 ///
 /// \param window the window to enable text input.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -425,7 +425,7 @@ int sdlGetKeyFromName(String? name) {
 /// \sa SDL_TextInputActive
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_StartTextInput(SDL_Window *window)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_StartTextInput(SDL_Window *window)
 /// ```
 bool sdlStartTextInput(Pointer<SdlWindow> window) {
   final sdlStartTextInputLookupFunction = libSdl3.lookupFunction<
@@ -456,11 +456,11 @@ bool sdlStartTextInput(Pointer<SdlWindow> window) {
 /// SDL_TEXTINPUT_TYPE_TEXT_NAME, and SDL_CAPITALIZE_NONE for e-mail
 /// addresses, usernames, and passwords.
 /// - `SDL_PROP_TEXTINPUT_AUTOCORRECT_BOOLEAN` - true to enable auto completion
-/// and auto correction, defaults to SDL_TRUE.
+/// and auto correction, defaults to true.
 /// - `SDL_PROP_TEXTINPUT_MULTILINE_BOOLEAN` - true if multiple lines of text
-/// are allowed. This defaults to SDL_TRUE if SDL_HINT_RETURN_KEY_HIDES_IME
-/// is "0" or is not set, and defaults to SDL_FALSE if
-/// SDL_HINT_RETURN_KEY_HIDES_IME is "1".
+/// are allowed. This defaults to true if SDL_HINT_RETURN_KEY_HIDES_IME is
+/// "0" or is not set, and defaults to false if SDL_HINT_RETURN_KEY_HIDES_IME
+/// is "1".
 ///
 /// On Android you can directly specify the input type:
 ///
@@ -470,8 +470,8 @@ bool sdlStartTextInput(Pointer<SdlWindow> window) {
 ///
 /// \param window the window to enable text input.
 /// \param props the properties to use.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -481,7 +481,7 @@ bool sdlStartTextInput(Pointer<SdlWindow> window) {
 /// \sa SDL_TextInputActive
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_StartTextInputWithProperties(SDL_Window *window, SDL_PropertiesID props)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_StartTextInputWithProperties(SDL_Window *window, SDL_PropertiesID props)
 /// ```
 bool sdlStartTextInputWithProperties(Pointer<SdlWindow> window, int props) {
   final sdlStartTextInputWithPropertiesLookupFunction = libSdl3.lookupFunction<
@@ -495,14 +495,14 @@ bool sdlStartTextInputWithProperties(Pointer<SdlWindow> window, int props) {
 /// Check whether or not Unicode text input events are enabled for a window.
 ///
 /// \param window the window to check.
-/// \returns SDL_TRUE if text input events are enabled else SDL_FALSE.
+/// \returns true if text input events are enabled else false.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_StartTextInput
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_TextInputActive(SDL_Window *window)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_TextInputActive(SDL_Window *window)
 /// ```
 bool sdlTextInputActive(Pointer<SdlWindow> window) {
   final sdlTextInputActiveLookupFunction = libSdl3.lookupFunction<
@@ -518,15 +518,15 @@ bool sdlTextInputActive(Pointer<SdlWindow> window) {
 /// it.
 ///
 /// \param window the window to disable text input.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_StartTextInput
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_StopTextInput(SDL_Window *window)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_StopTextInput(SDL_Window *window)
 /// ```
 bool sdlStopTextInput(Pointer<SdlWindow> window) {
   final sdlStopTextInputLookupFunction = libSdl3.lookupFunction<
@@ -539,8 +539,8 @@ bool sdlStopTextInput(Pointer<SdlWindow> window) {
 /// Dismiss the composition window/IME without disabling the subsystem.
 ///
 /// \param window the window to affect.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -548,7 +548,7 @@ bool sdlStopTextInput(Pointer<SdlWindow> window) {
 /// \sa SDL_StopTextInput
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_ClearComposition(SDL_Window *window)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_ClearComposition(SDL_Window *window)
 /// ```
 bool sdlClearComposition(Pointer<SdlWindow> window) {
   final sdlClearCompositionLookupFunction = libSdl3.lookupFunction<
@@ -568,8 +568,8 @@ bool sdlClearComposition(Pointer<SdlWindow> window) {
 /// coordinates, or NULL to clear it.
 /// \param cursor the offset of the current cursor location relative to
 /// `rect->x`, in window coordinates.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -577,7 +577,7 @@ bool sdlClearComposition(Pointer<SdlWindow> window) {
 /// \sa SDL_StartTextInput
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_SetTextInputArea(SDL_Window *window, const SDL_Rect *rect, int cursor)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetTextInputArea(SDL_Window *window, const SDL_Rect *rect, int cursor)
 /// ```
 bool sdlSetTextInputArea(
     Pointer<SdlWindow> window, Pointer<SdlRect> rect, int cursor) {
@@ -599,15 +599,15 @@ bool sdlSetTextInputArea(
 /// may be NULL.
 /// \param cursor a pointer to the offset of the current cursor location
 /// relative to `rect->x`, may be NULL.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_SetTextInputArea
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_GetTextInputArea(SDL_Window *window, SDL_Rect *rect, int *cursor)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GetTextInputArea(SDL_Window *window, SDL_Rect *rect, int *cursor)
 /// ```
 bool sdlGetTextInputArea(
     Pointer<SdlWindow> window, Pointer<SdlRect> rect, Pointer<Int32> cursor) {
@@ -622,8 +622,8 @@ bool sdlGetTextInputArea(
 ///
 /// Check whether the platform has screen keyboard support.
 ///
-/// \returns SDL_TRUE if the platform has some screen keyboard support or
-/// SDL_FALSE if not.
+/// \returns true if the platform has some screen keyboard support or false if
+/// not.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -631,7 +631,7 @@ bool sdlGetTextInputArea(
 /// \sa SDL_ScreenKeyboardShown
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_HasScreenKeyboardSupport(void)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_HasScreenKeyboardSupport(void)
 /// ```
 bool sdlHasScreenKeyboardSupport() {
   final sdlHasScreenKeyboardSupportLookupFunction =
@@ -644,14 +644,14 @@ bool sdlHasScreenKeyboardSupport() {
 /// Check whether the screen keyboard is shown for given window.
 ///
 /// \param window the window for which screen keyboard should be queried.
-/// \returns SDL_TRUE if screen keyboard is shown or SDL_FALSE if not.
+/// \returns true if screen keyboard is shown or false if not.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_HasScreenKeyboardSupport
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_ScreenKeyboardShown(SDL_Window *window)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_ScreenKeyboardShown(SDL_Window *window)
 /// ```
 bool sdlScreenKeyboardShown(Pointer<SdlWindow> window) {
   final sdlScreenKeyboardShownLookupFunction = libSdl3.lookupFunction<

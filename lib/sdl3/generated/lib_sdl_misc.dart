@@ -27,13 +27,13 @@ import 'lib_sdl.dart';
 ///
 /// \param url a valid URL/URI to open. Use `file:///full/path/to/file` for
 /// local files, if supported.
-/// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL SDL_OpenURL(const char *url)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_OpenURL(const char *url)
 /// ```
 bool sdlOpenUrl(String? url) {
   final sdlOpenUrlLookupFunction = libSdl3.lookupFunction<

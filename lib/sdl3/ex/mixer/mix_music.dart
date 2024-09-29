@@ -59,9 +59,9 @@ extension MixMusicEx on MixMusic {
   /// fly. Also, crucially, there are as many channels for chunks as the app can
   /// allocate, but SDL_mixer only offers a single "music" channel.
   ///
-  /// If `closeio` is SDL_TRUE, the IOStream will be closed before returning,
-  /// whether this function succeeds or not. SDL_mixer reads everything it needs
-  /// from the IOStream during this call in any case.
+  /// If `closeio` is true, the IOStream will be closed before returning, whether
+  /// this function succeeds or not. SDL_mixer reads everything it needs from the
+  /// IOStream during this call in any case.
   ///
   /// As a convenience, there is a function to read files from disk without
   /// having to deal with SDL_IOStream: `Mix_LoadMUS("filename.mp3")` will manage
@@ -75,8 +75,8 @@ extension MixMusicEx on MixMusic {
   /// Mix_FreeMusic().
   ///
   /// \param src an SDL_IOStream that data will be read from.
-  /// \param closeio SDL_TRUE to close the SDL_IOStream before returning,
-  /// SDL_FALSE to leave it open.
+  /// \param closeio true to close the SDL_IOStream before returning, false to
+  /// leave it open.
   /// \returns a new music object, or NULL on error.
   ///
   /// \since This function is available since SDL_mixer 3.0.0.
@@ -84,7 +84,7 @@ extension MixMusicEx on MixMusic {
   /// \sa Mix_FreeMusic
   ///
   /// ```c
-  /// extern SDL_DECLSPEC Mix_Music * SDLCALL Mix_LoadMUS_IO(SDL_IOStream *src, SDL_bool closeio)
+  /// extern SDL_DECLSPEC Mix_Music * SDLCALL Mix_LoadMUS_IO(SDL_IOStream *src, bool closeio)
   /// ```
   static Pointer<MixMusic> loadIo(Pointer<SdlIoStream> src, bool closeio) {
     return mixLoadMusIo(src, closeio);
@@ -124,9 +124,9 @@ extension MixMusicEx on MixMusic {
   /// - `MUS_OPUS` (Opus files)
   /// - `MUS_WAVPACK` (WavPack files)
   ///
-  /// If `closeio` is SDL_TRUE, the IOStream will be closed before returning,
-  /// whether this function succeeds or not. SDL_mixer reads everything it needs
-  /// from the IOStream during this call in any case.
+  /// If `closeio` is true, the IOStream will be closed before returning, whether
+  /// this function succeeds or not. SDL_mixer reads everything it needs from the
+  /// IOStream during this call in any case.
   ///
   /// As a convenience, there is a function to read files from disk without
   /// having to deal with SDL_IOStream: `Mix_LoadMUS("filename.mp3")` will manage
@@ -137,8 +137,8 @@ extension MixMusicEx on MixMusic {
   ///
   /// \param src an SDL_IOStream that data will be read from.
   /// \param type the type of audio data provided by `src`.
-  /// \param closeio SDL_TRUE to close the SDL_IOStream before returning,
-  /// SDL_FALSE to leave it open.
+  /// \param closeio true to close the SDL_IOStream before returning, false to
+  /// leave it open.
   /// \returns a new music object, or NULL on error.
   ///
   /// \since This function is available since SDL_mixer 3.0.0.
@@ -146,7 +146,7 @@ extension MixMusicEx on MixMusic {
   /// \sa Mix_FreeMusic
   ///
   /// ```c
-  /// extern SDL_DECLSPEC Mix_Music * SDLCALL Mix_LoadMUSType_IO(SDL_IOStream *src, Mix_MusicType type, SDL_bool closeio)
+  /// extern SDL_DECLSPEC Mix_Music * SDLCALL Mix_LoadMUSType_IO(SDL_IOStream *src, Mix_MusicType type, bool closeio)
   /// ```
   static Pointer<MixMusic> loadTypeIo(
       Pointer<SdlIoStream> src, int type, bool closeio) {
@@ -221,8 +221,7 @@ extension MixMusicEx on MixMusic {
   /// capital letters (some example names are "MOD", "MP3", "FLAC").
   ///
   /// \param name the decoder name to query.
-  /// \returns SDL_TRUE if a decoder by that name is available, SDL_FALSE
-  /// otherwise.
+  /// \returns true if a decoder by that name is available, false otherwise.
   ///
   /// \since This function is available since SDL_mixer 3.0.0
   ///
@@ -230,7 +229,7 @@ extension MixMusicEx on MixMusic {
   /// \sa Mix_GetMusicDecoder
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool SDLCALL Mix_HasMusicDecoder(const char *name)
+  /// extern SDL_DECLSPEC bool SDLCALL Mix_HasMusicDecoder(const char *name)
   /// ```
   static bool hasDecoder(String? name) {
     return mixHasMusicDecoder(name);
@@ -448,13 +447,13 @@ extension MixMusicPointerEx on Pointer<MixMusic> {
   /// \param music the new music object to schedule for mixing.
   /// \param loops the number of loops to play the music for (0 means "play once
   /// and stop").
-  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-  /// for more information.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
   ///
   /// \since This function is available since SDL_mixer 3.0.0.
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool SDLCALL Mix_PlayMusic(Mix_Music *music, int loops)
+  /// extern SDL_DECLSPEC bool SDLCALL Mix_PlayMusic(Mix_Music *music, int loops)
   /// ```
   bool play(int loops) {
     return mixPlayMusic(this, loops);
@@ -481,13 +480,13 @@ extension MixMusicPointerEx on Pointer<MixMusic> {
   /// \param loops the number of times the chunk should loop, -1 to loop (not
   /// actually) infinitely.
   /// \param ms the number of milliseconds to spend fading in.
-  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-  /// for more information.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
   ///
   /// \since This function is available since SDL_mixer 3.0.0.
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool SDLCALL Mix_FadeInMusic(Mix_Music *music, int loops, int ms)
+  /// extern SDL_DECLSPEC bool SDLCALL Mix_FadeInMusic(Mix_Music *music, int loops, int ms)
   /// ```
   bool fadeIn(int loops, int ms) {
     return mixFadeInMusic(this, loops, ms);
@@ -526,13 +525,13 @@ extension MixMusicPointerEx on Pointer<MixMusic> {
   /// \param ms the number of milliseconds to spend fading in.
   /// \param position the start position within the music, in seconds, where
   /// playback should start.
-  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-  /// for more information.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
   ///
   /// \since This function is available since SDL_mixer 3.0.0.
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool SDLCALL Mix_FadeInMusicPos(Mix_Music *music, int loops, int ms, double position)
+  /// extern SDL_DECLSPEC bool SDLCALL Mix_FadeInMusicPos(Mix_Music *music, int loops, int ms, double position)
   /// ```
   bool fadeInPos(int loops, int ms, double position) {
     return mixFadeInMusicPos(this, loops, ms, position);
@@ -615,13 +614,13 @@ extension MixMusicPointerEx on Pointer<MixMusic> {
   /// mixer to manage later, and returns immediately.
   ///
   /// \param ms number of milliseconds to fade before halting the channel.
-  /// \returns SDL_TRUE if music was scheduled to fade, SDL_FALSE otherwise. If
-  /// no music is currently playing, this returns SDL_FALSE.
+  /// \returns true if music was scheduled to fade, false otherwise. If no music
+  /// is currently playing, this returns false.
   ///
   /// \since This function is available since SDL_mixer 3.0.0.
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool SDLCALL Mix_FadeOutMusic(int ms)
+  /// extern SDL_DECLSPEC bool SDLCALL Mix_FadeOutMusic(int ms)
   /// ```
   bool fadeOut(int ms) {
     return mixFadeOutMusic(ms);
@@ -705,7 +704,7 @@ extension MixMusicPointerEx on Pointer<MixMusic> {
   ///
   /// Query whether the music stream is paused.
   ///
-  /// \return SDL_TRUE if music is paused, SDL_FALSE otherwise.
+  /// \return true if music is paused, false otherwise.
   ///
   /// \since This function is available since SDL_mixer 3.0.0.
   ///
@@ -713,7 +712,7 @@ extension MixMusicPointerEx on Pointer<MixMusic> {
   /// \sa Mix_ResumeMusic
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool SDLCALL Mix_PausedMusic(void)
+  /// extern SDL_DECLSPEC bool SDLCALL Mix_PausedMusic(void)
   /// ```
   bool paused() {
     return mixPausedMusic();
@@ -725,13 +724,13 @@ extension MixMusicPointerEx on Pointer<MixMusic> {
   /// This only applies to MOD music formats.
   ///
   /// \param order order.
-  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-  /// for more information.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
   ///
   /// \since This function is available since SDL_mixer 3.0.0.
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool SDLCALL Mix_ModMusicJumpToOrder(int order)
+  /// extern SDL_DECLSPEC bool SDLCALL Mix_ModMusicJumpToOrder(int order)
   /// ```
   bool modJumpToOrder(int order) {
     return mixModMusicJumpToOrder(order);
@@ -744,13 +743,13 @@ extension MixMusicPointerEx on Pointer<MixMusic> {
   ///
   /// \param music the music object.
   /// \param track the track number to play. 0 is the first track.
-  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-  /// for more information.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
   ///
   /// \since This function is available since SDL_mixer 3.0.0.
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool SDLCALL Mix_StartTrack(Mix_Music *music, int track)
+  /// extern SDL_DECLSPEC bool SDLCALL Mix_StartTrack(Mix_Music *music, int track)
   /// ```
   bool startTrack(int track) {
     return mixStartTrack(this, track);
@@ -783,13 +782,13 @@ extension MixMusicPointerEx on Pointer<MixMusic> {
   /// number) and for WAV, OGG, FLAC, MP3, and MODPLUG music at the moment.
   ///
   /// \param position the new position, in seconds (as a double).
-  /// \returns SDL_TRUE on success or SDL_FALSE on failure; call SDL_GetError()
-  /// for more information.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
   ///
   /// \since This function is available since SDL_mixer 3.0.0.
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool SDLCALL Mix_SetMusicPosition(double position)
+  /// extern SDL_DECLSPEC bool SDLCALL Mix_SetMusicPosition(double position)
   /// ```
   bool setPosition(double position) {
     return mixSetMusicPosition(position);
@@ -900,12 +899,12 @@ extension MixMusicPointerEx on Pointer<MixMusic> {
   /// Paused music is treated as playing, even though it is not currently making
   /// forward progress in mixing.
   ///
-  /// \returns SDL_TRUE if music is playing, SDL_FALSE otherwise.
+  /// \returns true if music is playing, false otherwise.
   ///
   /// \since This function is available since SDL_mixer 3.0.0.
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_bool SDLCALL Mix_PlayingMusic(void)
+  /// extern SDL_DECLSPEC bool SDLCALL Mix_PlayingMusic(void)
   /// ```
   bool playing() {
     return mixPlayingMusic();

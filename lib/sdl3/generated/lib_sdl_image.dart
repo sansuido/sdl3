@@ -147,9 +147,9 @@ void imgQuit() {
 /// by calling: SDL_SetSurfaceColorKey(image, SDL_RLEACCEL,
 /// image->format->colorkey);
 ///
-/// If `closeio` is SDL_TRUE, `src` will be closed before returning, whether
-/// this function succeeds or not. SDL_image reads everything it needs from
-/// `src` during this call in any case.
+/// If `closeio` is true, `src` will be closed before returning, whether this
+/// function succeeds or not. SDL_image reads everything it needs from `src`
+/// during this call in any case.
 ///
 /// Even though this function accepts a file type, SDL_image may still try
 /// other decoders that are capable of detecting file type from the contents of
@@ -174,8 +174,8 @@ void imgQuit() {
 /// call to SDL_DestroySurface().
 ///
 /// \param src an SDL_IOStream that data will be read from.
-/// \param closeio SDL_TRUE to close/free the SDL_IOStream before returning,
-/// SDL_FALSE to leave it open.
+/// \param closeio true to close/free the SDL_IOStream before returning, false
+/// to leave it open.
 /// \param type a filename extension that represent this data ("BMP", "GIF",
 /// "PNG", etc).
 /// \returns a new SDL surface, or NULL on error.
@@ -187,7 +187,7 @@ void imgQuit() {
 /// \sa SDL_DestroySurface
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_Surface * SDLCALL IMG_LoadTyped_IO(SDL_IOStream *src, SDL_bool closeio, const char *type)
+/// extern SDL_DECLSPEC SDL_Surface * SDLCALL IMG_LoadTyped_IO(SDL_IOStream *src, bool closeio, const char *type)
 /// ```
 Pointer<SdlSurface> imgLoadTypedIo(
     Pointer<SdlIoStream> src, bool closeio, String? type) {
@@ -280,9 +280,9 @@ Pointer<SdlSurface> imgLoad(String? file) {
 /// by calling: SDL_SetSurfaceColorKey(image, SDL_RLEACCEL,
 /// image->format->colorkey);
 ///
-/// If `closeio` is SDL_TRUE, `src` will be closed before returning, whether
-/// this function succeeds or not. SDL_image reads everything it needs from
-/// `src` during this call in any case.
+/// If `closeio` is true, `src` will be closed before returning, whether this
+/// function succeeds or not. SDL_image reads everything it needs from `src`
+/// during this call in any case.
 ///
 /// There is a separate function to read files from disk without having to deal
 /// with SDL_IOStream: `IMG_Load("filename.jpg")` will call this function and
@@ -301,8 +301,8 @@ Pointer<SdlSurface> imgLoad(String? file) {
 /// call to SDL_DestroySurface().
 ///
 /// \param src an SDL_IOStream that data will be read from.
-/// \param closeio SDL_TRUE to close/free the SDL_IOStream before returning,
-/// SDL_FALSE to leave it open.
+/// \param closeio true to close/free the SDL_IOStream before returning, false
+/// to leave it open.
 /// \returns a new SDL surface, or NULL on error.
 ///
 /// \since This function is available since SDL_image 3.0.0.
@@ -312,7 +312,7 @@ Pointer<SdlSurface> imgLoad(String? file) {
 /// \sa SDL_DestroySurface
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_Surface * SDLCALL IMG_Load_IO(SDL_IOStream *src, SDL_bool closeio)
+/// extern SDL_DECLSPEC SDL_Surface * SDLCALL IMG_Load_IO(SDL_IOStream *src, bool closeio)
 /// ```
 Pointer<SdlSurface> imgLoadIo(Pointer<SdlIoStream> src, bool closeio) {
   final imgLoadIoLookupFunction = libSdl3Image.lookupFunction<
@@ -385,9 +385,9 @@ Pointer<SdlTexture> imgLoadTexture(
 /// data (but in many cases, this will just end up being 32-bit RGB or 32-bit
 /// RGBA).
 ///
-/// If `closeio` is SDL_TRUE, `src` will be closed before returning, whether
-/// this function succeeds or not. SDL_image reads everything it needs from
-/// `src` during this call in any case.
+/// If `closeio` is true, `src` will be closed before returning, whether this
+/// function succeeds or not. SDL_image reads everything it needs from `src`
+/// during this call in any case.
 ///
 /// There is a separate function to read files from disk without having to deal
 /// with SDL_IOStream: `IMG_LoadTexture(renderer, "filename.jpg")` will call
@@ -406,8 +406,8 @@ Pointer<SdlTexture> imgLoadTexture(
 ///
 /// \param renderer the SDL_Renderer to use to create the GPU texture.
 /// \param src an SDL_IOStream that data will be read from.
-/// \param closeio SDL_TRUE to close/free the SDL_IOStream before returning,
-/// SDL_FALSE to leave it open.
+/// \param closeio true to close/free the SDL_IOStream before returning, false
+/// to leave it open.
 /// \returns a new texture, or NULL on error.
 ///
 /// \since This function is available since SDL_image 3.0.0.
@@ -417,7 +417,7 @@ Pointer<SdlTexture> imgLoadTexture(
 /// \sa SDL_DestroyTexture
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_Texture * SDLCALL IMG_LoadTexture_IO(SDL_Renderer *renderer, SDL_IOStream *src, SDL_bool closeio)
+/// extern SDL_DECLSPEC SDL_Texture * SDLCALL IMG_LoadTexture_IO(SDL_Renderer *renderer, SDL_IOStream *src, bool closeio)
 /// ```
 Pointer<SdlTexture> imgLoadTextureIo(
     Pointer<SdlRenderer> renderer, Pointer<SdlIoStream> src, bool closeio) {
@@ -443,9 +443,9 @@ Pointer<SdlTexture> imgLoadTextureIo(
 /// data (but in many cases, this will just end up being 32-bit RGB or 32-bit
 /// RGBA).
 ///
-/// If `closeio` is SDL_TRUE, `src` will be closed before returning, whether
-/// this function succeeds or not. SDL_image reads everything it needs from
-/// `src` during this call in any case.
+/// If `closeio` is true, `src` will be closed before returning, whether this
+/// function succeeds or not. SDL_image reads everything it needs from `src`
+/// during this call in any case.
 ///
 /// Even though this function accepts a file type, SDL_image may still try
 /// other decoders that are capable of detecting file type from the contents of
@@ -470,8 +470,8 @@ Pointer<SdlTexture> imgLoadTextureIo(
 ///
 /// \param renderer the SDL_Renderer to use to create the GPU texture.
 /// \param src an SDL_IOStream that data will be read from.
-/// \param closeio SDL_TRUE to close/free the SDL_IOStream before returning,
-/// SDL_FALSE to leave it open.
+/// \param closeio true to close/free the SDL_IOStream before returning, false
+/// to leave it open.
 /// \param type a filename extension that represent this data ("BMP", "GIF",
 /// "PNG", etc).
 /// \returns a new texture, or NULL on error.
@@ -483,7 +483,7 @@ Pointer<SdlTexture> imgLoadTextureIo(
 /// \sa SDL_DestroyTexture
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_Texture * SDLCALL IMG_LoadTextureTyped_IO(SDL_Renderer *renderer, SDL_IOStream *src, SDL_bool closeio, const char *type)
+/// extern SDL_DECLSPEC SDL_Texture * SDLCALL IMG_LoadTextureTyped_IO(SDL_Renderer *renderer, SDL_IOStream *src, bool closeio, const char *type)
 /// ```
 Pointer<SdlTexture> imgLoadTextureTypedIo(Pointer<SdlRenderer> renderer,
     Pointer<SdlIoStream> src, bool closeio, String? type) {
@@ -545,7 +545,7 @@ Pointer<SdlTexture> imgLoadTextureTypedIo(Pointer<SdlRenderer> renderer,
 /// \sa IMG_isWEBP
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL IMG_isAVIF(SDL_IOStream *src)
+/// extern SDL_DECLSPEC bool SDLCALL IMG_isAVIF(SDL_IOStream *src)
 /// ```
 bool imgIsAvif(Pointer<SdlIoStream> src) {
   final imgIsAvifLookupFunction = libSdl3Image.lookupFunction<
@@ -596,7 +596,7 @@ bool imgIsAvif(Pointer<SdlIoStream> src) {
 /// \sa IMG_isWEBP
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL IMG_isICO(SDL_IOStream *src)
+/// extern SDL_DECLSPEC bool SDLCALL IMG_isICO(SDL_IOStream *src)
 /// ```
 bool imgIsIco(Pointer<SdlIoStream> src) {
   final imgIsIcoLookupFunction = libSdl3Image.lookupFunction<
@@ -647,7 +647,7 @@ bool imgIsIco(Pointer<SdlIoStream> src) {
 /// \sa IMG_isWEBP
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL IMG_isCUR(SDL_IOStream *src)
+/// extern SDL_DECLSPEC bool SDLCALL IMG_isCUR(SDL_IOStream *src)
 /// ```
 bool imgIsCur(Pointer<SdlIoStream> src) {
   final imgIsCurLookupFunction = libSdl3Image.lookupFunction<
@@ -698,7 +698,7 @@ bool imgIsCur(Pointer<SdlIoStream> src) {
 /// \sa IMG_isWEBP
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL IMG_isBMP(SDL_IOStream *src)
+/// extern SDL_DECLSPEC bool SDLCALL IMG_isBMP(SDL_IOStream *src)
 /// ```
 bool imgIsBmp(Pointer<SdlIoStream> src) {
   final imgIsBmpLookupFunction = libSdl3Image.lookupFunction<
@@ -749,7 +749,7 @@ bool imgIsBmp(Pointer<SdlIoStream> src) {
 /// \sa IMG_isWEBP
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL IMG_isGIF(SDL_IOStream *src)
+/// extern SDL_DECLSPEC bool SDLCALL IMG_isGIF(SDL_IOStream *src)
 /// ```
 bool imgIsGif(Pointer<SdlIoStream> src) {
   final imgIsGifLookupFunction = libSdl3Image.lookupFunction<
@@ -800,7 +800,7 @@ bool imgIsGif(Pointer<SdlIoStream> src) {
 /// \sa IMG_isWEBP
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL IMG_isJPG(SDL_IOStream *src)
+/// extern SDL_DECLSPEC bool SDLCALL IMG_isJPG(SDL_IOStream *src)
 /// ```
 bool imgIsJpg(Pointer<SdlIoStream> src) {
   final imgIsJpgLookupFunction = libSdl3Image.lookupFunction<
@@ -851,7 +851,7 @@ bool imgIsJpg(Pointer<SdlIoStream> src) {
 /// \sa IMG_isWEBP
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL IMG_isJXL(SDL_IOStream *src)
+/// extern SDL_DECLSPEC bool SDLCALL IMG_isJXL(SDL_IOStream *src)
 /// ```
 bool imgIsJxl(Pointer<SdlIoStream> src) {
   final imgIsJxlLookupFunction = libSdl3Image.lookupFunction<
@@ -902,7 +902,7 @@ bool imgIsJxl(Pointer<SdlIoStream> src) {
 /// \sa IMG_isWEBP
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL IMG_isLBM(SDL_IOStream *src)
+/// extern SDL_DECLSPEC bool SDLCALL IMG_isLBM(SDL_IOStream *src)
 /// ```
 bool imgIsLbm(Pointer<SdlIoStream> src) {
   final imgIsLbmLookupFunction = libSdl3Image.lookupFunction<
@@ -953,7 +953,7 @@ bool imgIsLbm(Pointer<SdlIoStream> src) {
 /// \sa IMG_isWEBP
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL IMG_isPCX(SDL_IOStream *src)
+/// extern SDL_DECLSPEC bool SDLCALL IMG_isPCX(SDL_IOStream *src)
 /// ```
 bool imgIsPcx(Pointer<SdlIoStream> src) {
   final imgIsPcxLookupFunction = libSdl3Image.lookupFunction<
@@ -1004,7 +1004,7 @@ bool imgIsPcx(Pointer<SdlIoStream> src) {
 /// \sa IMG_isWEBP
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL IMG_isPNG(SDL_IOStream *src)
+/// extern SDL_DECLSPEC bool SDLCALL IMG_isPNG(SDL_IOStream *src)
 /// ```
 bool imgIsPng(Pointer<SdlIoStream> src) {
   final imgIsPngLookupFunction = libSdl3Image.lookupFunction<
@@ -1055,7 +1055,7 @@ bool imgIsPng(Pointer<SdlIoStream> src) {
 /// \sa IMG_isWEBP
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL IMG_isPNM(SDL_IOStream *src)
+/// extern SDL_DECLSPEC bool SDLCALL IMG_isPNM(SDL_IOStream *src)
 /// ```
 bool imgIsPnm(Pointer<SdlIoStream> src) {
   final imgIsPnmLookupFunction = libSdl3Image.lookupFunction<
@@ -1106,7 +1106,7 @@ bool imgIsPnm(Pointer<SdlIoStream> src) {
 /// \sa IMG_isWEBP
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL IMG_isSVG(SDL_IOStream *src)
+/// extern SDL_DECLSPEC bool SDLCALL IMG_isSVG(SDL_IOStream *src)
 /// ```
 bool imgIsSvg(Pointer<SdlIoStream> src) {
   final imgIsSvgLookupFunction = libSdl3Image.lookupFunction<
@@ -1157,7 +1157,7 @@ bool imgIsSvg(Pointer<SdlIoStream> src) {
 /// \sa IMG_isWEBP
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL IMG_isQOI(SDL_IOStream *src)
+/// extern SDL_DECLSPEC bool SDLCALL IMG_isQOI(SDL_IOStream *src)
 /// ```
 bool imgIsQoi(Pointer<SdlIoStream> src) {
   final imgIsQoiLookupFunction = libSdl3Image.lookupFunction<
@@ -1208,7 +1208,7 @@ bool imgIsQoi(Pointer<SdlIoStream> src) {
 /// \sa IMG_isWEBP
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL IMG_isTIF(SDL_IOStream *src)
+/// extern SDL_DECLSPEC bool SDLCALL IMG_isTIF(SDL_IOStream *src)
 /// ```
 bool imgIsTif(Pointer<SdlIoStream> src) {
   final imgIsTifLookupFunction = libSdl3Image.lookupFunction<
@@ -1259,7 +1259,7 @@ bool imgIsTif(Pointer<SdlIoStream> src) {
 /// \sa IMG_isWEBP
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL IMG_isXCF(SDL_IOStream *src)
+/// extern SDL_DECLSPEC bool SDLCALL IMG_isXCF(SDL_IOStream *src)
 /// ```
 bool imgIsXcf(Pointer<SdlIoStream> src) {
   final imgIsXcfLookupFunction = libSdl3Image.lookupFunction<
@@ -1310,7 +1310,7 @@ bool imgIsXcf(Pointer<SdlIoStream> src) {
 /// \sa IMG_isWEBP
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL IMG_isXPM(SDL_IOStream *src)
+/// extern SDL_DECLSPEC bool SDLCALL IMG_isXPM(SDL_IOStream *src)
 /// ```
 bool imgIsXpm(Pointer<SdlIoStream> src) {
   final imgIsXpmLookupFunction = libSdl3Image.lookupFunction<
@@ -1361,7 +1361,7 @@ bool imgIsXpm(Pointer<SdlIoStream> src) {
 /// \sa IMG_isWEBP
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL IMG_isXV(SDL_IOStream *src)
+/// extern SDL_DECLSPEC bool SDLCALL IMG_isXV(SDL_IOStream *src)
 /// ```
 bool imgIsXv(Pointer<SdlIoStream> src) {
   final imgIsXvLookupFunction = libSdl3Image.lookupFunction<
@@ -1412,7 +1412,7 @@ bool imgIsXv(Pointer<SdlIoStream> src) {
 /// \sa IMG_isXV
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL IMG_isWEBP(SDL_IOStream *src)
+/// extern SDL_DECLSPEC bool SDLCALL IMG_isWEBP(SDL_IOStream *src)
 /// ```
 bool imgIsWebp(Pointer<SdlIoStream> src) {
   final imgIsWebpLookupFunction = libSdl3Image.lookupFunction<
@@ -2325,7 +2325,7 @@ Pointer<SdlSurface> imgReadXpmFromArrayToRgb888(Pointer<Pointer<Int8>> xpm) {
 /// \sa IMG_SaveAVIF_IO
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL IMG_SaveAVIF(SDL_Surface *surface, const char *file, int quality)
+/// extern SDL_DECLSPEC bool SDLCALL IMG_SaveAVIF(SDL_Surface *surface, const char *file, int quality)
 /// ```
 bool imgSaveAvif(Pointer<SdlSurface> surface, String? file, int quality) {
   final imgSaveAvifLookupFunction = libSdl3Image.lookupFunction<
@@ -2344,13 +2344,13 @@ bool imgSaveAvif(Pointer<SdlSurface> surface, String? file, int quality) {
 ///
 /// If you just want to save to a filename, you can use IMG_SaveAVIF() instead.
 ///
-/// If `closeio` is SDL_TRUE, `dst` will be closed before returning, whether
-/// this function succeeds or not.
+/// If `closeio` is true, `dst` will be closed before returning, whether this
+/// function succeeds or not.
 ///
 /// \param surface the SDL surface to save.
 /// \param dst the SDL_IOStream to save the image data to.
-/// \param closeio SDL_TRUE to close/free the SDL_IOStream before returning,
-/// SDL_FALSE to leave it open.
+/// \param closeio true to close/free the SDL_IOStream before returning, false
+/// to leave it open.
 /// \param quality the desired quality, ranging between 0 (lowest) and 100
 /// (highest).
 /// \returns 0 if successful, -1 on error.
@@ -2360,7 +2360,7 @@ bool imgSaveAvif(Pointer<SdlSurface> surface, String? file, int quality) {
 /// \sa IMG_SaveAVIF
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL IMG_SaveAVIF_IO(SDL_Surface *surface, SDL_IOStream *dst, int closeio, int quality)
+/// extern SDL_DECLSPEC bool SDLCALL IMG_SaveAVIF_IO(SDL_Surface *surface, SDL_IOStream *dst, int closeio, int quality)
 /// ```
 bool imgSaveAvifIo(Pointer<SdlSurface> surface, Pointer<SdlIoStream> dst,
     int closeio, int quality) {
@@ -2386,7 +2386,7 @@ bool imgSaveAvifIo(Pointer<SdlSurface> surface, Pointer<SdlIoStream> dst,
 /// \sa IMG_SavePNG_IO
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL IMG_SavePNG(SDL_Surface *surface, const char *file)
+/// extern SDL_DECLSPEC bool SDLCALL IMG_SavePNG(SDL_Surface *surface, const char *file)
 /// ```
 bool imgSavePng(Pointer<SdlSurface> surface, String? file) {
   final imgSavePngLookupFunction = libSdl3Image.lookupFunction<
@@ -2404,13 +2404,13 @@ bool imgSavePng(Pointer<SdlSurface> surface, String? file) {
 ///
 /// If you just want to save to a filename, you can use IMG_SavePNG() instead.
 ///
-/// If `closeio` is SDL_TRUE, `dst` will be closed before returning, whether
-/// this function succeeds or not.
+/// If `closeio` is true, `dst` will be closed before returning, whether this
+/// function succeeds or not.
 ///
 /// \param surface the SDL surface to save.
 /// \param dst the SDL_IOStream to save the image data to.
-/// \param closeio SDL_TRUE to close/free the SDL_IOStream before returning,
-/// SDL_FALSE to leave it open.
+/// \param closeio true to close/free the SDL_IOStream before returning, false
+/// to leave it open.
 /// \returns 0 if successful, -1 on error.
 ///
 /// \since This function is available since SDL_image 3.0.0.
@@ -2418,7 +2418,7 @@ bool imgSavePng(Pointer<SdlSurface> surface, String? file) {
 /// \sa IMG_SavePNG
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL IMG_SavePNG_IO(SDL_Surface *surface, SDL_IOStream *dst, int closeio)
+/// extern SDL_DECLSPEC bool SDLCALL IMG_SavePNG_IO(SDL_Surface *surface, SDL_IOStream *dst, int closeio)
 /// ```
 bool imgSavePngIo(
     Pointer<SdlSurface> surface, Pointer<SdlIoStream> dst, int closeio) {
@@ -2446,7 +2446,7 @@ bool imgSavePngIo(
 /// \sa IMG_SaveJPG_IO
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL IMG_SaveJPG(SDL_Surface *surface, const char *file, int quality)
+/// extern SDL_DECLSPEC bool SDLCALL IMG_SaveJPG(SDL_Surface *surface, const char *file, int quality)
 /// ```
 bool imgSaveJpg(Pointer<SdlSurface> surface, String? file, int quality) {
   final imgSaveJpgLookupFunction = libSdl3Image.lookupFunction<
@@ -2465,13 +2465,13 @@ bool imgSaveJpg(Pointer<SdlSurface> surface, String? file, int quality) {
 ///
 /// If you just want to save to a filename, you can use IMG_SaveJPG() instead.
 ///
-/// If `closeio` is SDL_TRUE, `dst` will be closed before returning, whether
-/// this function succeeds or not.
+/// If `closeio` is true, `dst` will be closed before returning, whether this
+/// function succeeds or not.
 ///
 /// \param surface the SDL surface to save.
 /// \param dst the SDL_IOStream to save the image data to.
-/// \param closeio SDL_TRUE to close/free the SDL_IOStream before returning,
-/// SDL_FALSE to leave it open.
+/// \param closeio true to close/free the SDL_IOStream before returning, false
+/// to leave it open.
 /// \param quality [0; 33] is Lowest quality, [34; 66] is Middle quality, [67;
 /// 100] is Highest quality.
 /// \returns 0 if successful, -1 on error.
@@ -2481,7 +2481,7 @@ bool imgSaveJpg(Pointer<SdlSurface> surface, String? file, int quality) {
 /// \sa IMG_SaveJPG
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_bool SDLCALL IMG_SaveJPG_IO(SDL_Surface *surface, SDL_IOStream *dst, int closeio, int quality)
+/// extern SDL_DECLSPEC bool SDLCALL IMG_SaveJPG_IO(SDL_Surface *surface, SDL_IOStream *dst, int closeio, int quality)
 /// ```
 bool imgSaveJpgIo(Pointer<SdlSurface> surface, Pointer<SdlIoStream> dst,
     int closeio, int quality) {
@@ -2522,16 +2522,16 @@ Pointer<ImgAnimation> imgLoadAnimation(String? file) {
 ///
 /// Load an animation from an SDL_IOStream.
 ///
-/// If `closeio` is SDL_TRUE, `src` will be closed before returning, whether
-/// this function succeeds or not. SDL_image reads everything it needs from
-/// `src` during this call in any case.
+/// If `closeio` is true, `src` will be closed before returning, whether this
+/// function succeeds or not. SDL_image reads everything it needs from `src`
+/// during this call in any case.
 ///
 /// When done with the returned animation, the app should dispose of it with a
 /// call to IMG_FreeAnimation().
 ///
 /// \param src an SDL_IOStream that data will be read from.
-/// \param closeio SDL_TRUE to close/free the SDL_IOStream before returning,
-/// SDL_FALSE to leave it open.
+/// \param closeio true to close/free the SDL_IOStream before returning, false
+/// to leave it open.
 /// \returns a new IMG_Animation, or NULL on error.
 ///
 /// \since This function is available since SDL_image 3.0.0.
@@ -2539,7 +2539,7 @@ Pointer<ImgAnimation> imgLoadAnimation(String? file) {
 /// \sa IMG_FreeAnimation
 ///
 /// ```c
-/// extern SDL_DECLSPEC IMG_Animation * SDLCALL IMG_LoadAnimation_IO(SDL_IOStream *src, SDL_bool closeio)
+/// extern SDL_DECLSPEC IMG_Animation * SDLCALL IMG_LoadAnimation_IO(SDL_IOStream *src, bool closeio)
 /// ```
 Pointer<ImgAnimation> imgLoadAnimationIo(
     Pointer<SdlIoStream> src, bool closeio) {
@@ -2559,16 +2559,16 @@ Pointer<ImgAnimation> imgLoadAnimationIo(
 /// that it cannot autodetect. If `type` is NULL, SDL_image will rely solely on
 /// its ability to guess the format.
 ///
-/// If `closeio` is SDL_TRUE, `src` will be closed before returning, whether
-/// this function succeeds or not. SDL_image reads everything it needs from
-/// `src` during this call in any case.
+/// If `closeio` is true, `src` will be closed before returning, whether this
+/// function succeeds or not. SDL_image reads everything it needs from `src`
+/// during this call in any case.
 ///
 /// When done with the returned animation, the app should dispose of it with a
 /// call to IMG_FreeAnimation().
 ///
 /// \param src an SDL_IOStream that data will be read from.
-/// \param closeio SDL_TRUE to close/free the SDL_IOStream before returning,
-/// SDL_FALSE to leave it open.
+/// \param closeio true to close/free the SDL_IOStream before returning, false
+/// to leave it open.
 /// \param type a filename extension that represent this data ("GIF", etc).
 /// \returns a new IMG_Animation, or NULL on error.
 ///
@@ -2579,7 +2579,7 @@ Pointer<ImgAnimation> imgLoadAnimationIo(
 /// \sa IMG_FreeAnimation
 ///
 /// ```c
-/// extern SDL_DECLSPEC IMG_Animation * SDLCALL IMG_LoadAnimationTyped_IO(SDL_IOStream *src, SDL_bool closeio, const char *type)
+/// extern SDL_DECLSPEC IMG_Animation * SDLCALL IMG_LoadAnimationTyped_IO(SDL_IOStream *src, bool closeio, const char *type)
 /// ```
 Pointer<ImgAnimation> imgLoadAnimationTypedIo(
     Pointer<SdlIoStream> src, bool closeio, String? type) {
