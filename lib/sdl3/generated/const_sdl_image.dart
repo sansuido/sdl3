@@ -12,3 +12,12 @@ const IMG_INIT_TIF = 0x00000004;
 const IMG_INIT_WEBP = 0x00000008;
 const IMG_INIT_JXL = 0x00000010;
 const IMG_INIT_AVIF = 0x00000020;
+
+class ImgInitEnum {
+  static const jpg = IMG_INIT_JPG;
+  static const png = IMG_INIT_PNG;
+  static const tif = IMG_INIT_TIF;
+  static const webp = IMG_INIT_WEBP;
+  static const jxl = IMG_INIT_JXL;
+  static const avif = IMG_INIT_AVIF;
+}

@@ -262,6 +262,9 @@ const SDL_PATHTYPE_FILE = 1;
 const SDL_PATHTYPE_DIRECTORY = 2;
 const SDL_PATHTYPE_OTHER = 3;
 const SDL_GLOB_CASEINSENSITIVE = (1 << 0);
+const SDL_ENUM_CONTINUE = 0;
+const SDL_ENUM_SUCCESS = 1;
+const SDL_ENUM_FAILURE = 2;
 //const SDL_gamepad_h_ = ;
 const SDL_GAMEPAD_TYPE_UNKNOWN = 0;
 const SDL_GAMEPAD_TYPE_STANDARD = 0 + 1;
@@ -384,29 +387,36 @@ const SDL_GPU_TEXTUREFORMAT_R8G8B8A8_UINT = 36;
 const SDL_GPU_TEXTUREFORMAT_R16_UINT = 37;
 const SDL_GPU_TEXTUREFORMAT_R16G16_UINT = 38;
 const SDL_GPU_TEXTUREFORMAT_R16G16B16A16_UINT = 39;
-const SDL_GPU_TEXTUREFORMAT_R8_INT = 40;
-const SDL_GPU_TEXTUREFORMAT_R8G8_INT = 41;
-const SDL_GPU_TEXTUREFORMAT_R8G8B8A8_INT = 42;
-const SDL_GPU_TEXTUREFORMAT_R16_INT = 43;
-const SDL_GPU_TEXTUREFORMAT_R16G16_INT = 44;
-const SDL_GPU_TEXTUREFORMAT_R16G16B16A16_INT = 45;
-const SDL_GPU_TEXTUREFORMAT_R8G8B8A8_UNORM_SRGB = 46;
-const SDL_GPU_TEXTUREFORMAT_B8G8R8A8_UNORM_SRGB = 47;
-const SDL_GPU_TEXTUREFORMAT_BC1_RGBA_UNORM_SRGB = 48;
-const SDL_GPU_TEXTUREFORMAT_BC2_RGBA_UNORM_SRGB = 49;
-const SDL_GPU_TEXTUREFORMAT_BC3_RGBA_UNORM_SRGB = 50;
-const SDL_GPU_TEXTUREFORMAT_BC7_RGBA_UNORM_SRGB = 51;
-const SDL_GPU_TEXTUREFORMAT_D16_UNORM = 52;
-const SDL_GPU_TEXTUREFORMAT_D24_UNORM = 53;
-const SDL_GPU_TEXTUREFORMAT_D32_FLOAT = 54;
-const SDL_GPU_TEXTUREFORMAT_D24_UNORM_S8_UINT = 55;
-const SDL_GPU_TEXTUREFORMAT_D32_FLOAT_S8_UINT = 56;
+const SDL_GPU_TEXTUREFORMAT_R32_UINT = 40;
+const SDL_GPU_TEXTUREFORMAT_R32G32_UINT = 41;
+const SDL_GPU_TEXTUREFORMAT_R32G32B32A32_UINT = 42;
+const SDL_GPU_TEXTUREFORMAT_R8_INT = 43;
+const SDL_GPU_TEXTUREFORMAT_R8G8_INT = 44;
+const SDL_GPU_TEXTUREFORMAT_R8G8B8A8_INT = 45;
+const SDL_GPU_TEXTUREFORMAT_R16_INT = 46;
+const SDL_GPU_TEXTUREFORMAT_R16G16_INT = 47;
+const SDL_GPU_TEXTUREFORMAT_R16G16B16A16_INT = 48;
+const SDL_GPU_TEXTUREFORMAT_R32_INT = 49;
+const SDL_GPU_TEXTUREFORMAT_R32G32_INT = 50;
+const SDL_GPU_TEXTUREFORMAT_R32G32B32A32_INT = 51;
+const SDL_GPU_TEXTUREFORMAT_R8G8B8A8_UNORM_SRGB = 52;
+const SDL_GPU_TEXTUREFORMAT_B8G8R8A8_UNORM_SRGB = 53;
+const SDL_GPU_TEXTUREFORMAT_BC1_RGBA_UNORM_SRGB = 54;
+const SDL_GPU_TEXTUREFORMAT_BC2_RGBA_UNORM_SRGB = 55;
+const SDL_GPU_TEXTUREFORMAT_BC3_RGBA_UNORM_SRGB = 56;
+const SDL_GPU_TEXTUREFORMAT_BC7_RGBA_UNORM_SRGB = 57;
+const SDL_GPU_TEXTUREFORMAT_D16_UNORM = 58;
+const SDL_GPU_TEXTUREFORMAT_D24_UNORM = 59;
+const SDL_GPU_TEXTUREFORMAT_D32_FLOAT = 60;
+const SDL_GPU_TEXTUREFORMAT_D24_UNORM_S8_UINT = 61;
+const SDL_GPU_TEXTUREFORMAT_D32_FLOAT_S8_UINT = 62;
 const SDL_GPU_TEXTUREUSAGE_SAMPLER = (1 << 0);
 const SDL_GPU_TEXTUREUSAGE_COLOR_TARGET = (1 << 1);
 const SDL_GPU_TEXTUREUSAGE_DEPTH_STENCIL_TARGET = (1 << 2);
 const SDL_GPU_TEXTUREUSAGE_GRAPHICS_STORAGE_READ = (1 << 3);
 const SDL_GPU_TEXTUREUSAGE_COMPUTE_STORAGE_READ = (1 << 4);
 const SDL_GPU_TEXTUREUSAGE_COMPUTE_STORAGE_WRITE = (1 << 5);
+const SDL_GPU_TEXTUREUSAGE_COMPUTE_STORAGE_SIMULTANEOUS_READ_WRITE = (1 << 6);
 const SDL_GPU_TEXTURETYPE_2D = 0;
 const SDL_GPU_TEXTURETYPE_2D_ARRAY = 1;
 const SDL_GPU_TEXTURETYPE_3D = 2;
@@ -1377,587 +1387,10 @@ const SDL_BUTTON_X2 = 5;
 //const SDL_ASSERT_SHARED_CAPABILITY = (x) SDL_THREAD_ANNOTATION_ATTRIBUTE__(assert_shared_capability(x));
 //const SDL_RETURN_CAPABILITY = (x) SDL_THREAD_ANNOTATION_ATTRIBUTE__(lock_returned(x));
 //const SDL_NO_THREAD_SAFETY_ANALYSIS = SDL_THREAD_ANNOTATION_ATTRIBUTE__(no_thread_safety_analysis);
-//const SDL_oldnames_h_ = ;
-//const SDL_AtomicAdd = SDL_AddAtomicInt;
-//const SDL_AtomicCAS = SDL_CompareAndSwapAtomicInt;
-//const SDL_AtomicCASPtr = SDL_CompareAndSwapAtomicPointer;
-//const SDL_AtomicGet = SDL_GetAtomicInt;
-//const SDL_AtomicGetPtr = SDL_GetAtomicPointer;
-//const SDL_AtomicLock = SDL_LockSpinlock;
-//const SDL_AtomicSet = SDL_SetAtomicInt;
-//const SDL_AtomicSetPtr = SDL_SetAtomicPointer;
-//const SDL_AtomicTryLock = SDL_TryLockSpinlock;
-//const SDL_AtomicUnlock = SDL_UnlockSpinlock;
-//const SDL_atomic_t = SDL_AtomicInt;
-const AUDIO_F32 = SDL_AUDIO_F32LE;
-const AUDIO_F32LSB = SDL_AUDIO_F32LE;
-const AUDIO_F32MSB = SDL_AUDIO_F32BE;
-//const AUDIO_F32SYS = SDL_AUDIO_F32;
-const AUDIO_S16 = SDL_AUDIO_S16LE;
-const AUDIO_S16LSB = SDL_AUDIO_S16LE;
-const AUDIO_S16MSB = SDL_AUDIO_S16BE;
-//const AUDIO_S16SYS = SDL_AUDIO_S16;
-const AUDIO_S32 = SDL_AUDIO_S32LE;
-const AUDIO_S32LSB = SDL_AUDIO_S32LE;
-const AUDIO_S32MSB = SDL_AUDIO_S32BE;
-//const AUDIO_S32SYS = SDL_AUDIO_S32;
-const AUDIO_S8 = SDL_AUDIO_S8;
-const AUDIO_U8 = SDL_AUDIO_U8;
-//const SDL_AudioStreamAvailable = SDL_GetAudioStreamAvailable;
-//const SDL_AudioStreamClear = SDL_ClearAudioStream;
-//const SDL_AudioStreamFlush = SDL_FlushAudioStream;
-//const SDL_AudioStreamGet = SDL_GetAudioStreamData;
-//const SDL_AudioStreamPut = SDL_PutAudioStreamData;
-//const SDL_FreeAudioStream = SDL_DestroyAudioStream;
-//const SDL_FreeWAV = SDL_free;
-//const SDL_LoadWAV_RW = SDL_LoadWAV_IO;
-//const SDL_MixAudioFormat = SDL_MixAudio;
-//const SDL_NewAudioStream = SDL_CreateAudioStream;
-//const SDL_GetCPUCount = SDL_GetNumLogicalCPUCores;
-//const SDL_SIMDGetAlignment = SDL_GetSIMDAlignment;
-//const SDL_SwapBE16 = SDL_Swap16BE;
-//const SDL_SwapBE32 = SDL_Swap32BE;
-//const SDL_SwapBE64 = SDL_Swap64BE;
-//const SDL_SwapLE16 = SDL_Swap16LE;
-//const SDL_SwapLE32 = SDL_Swap32LE;
-//const SDL_SwapLE64 = SDL_Swap64LE;
-const SDL_APP_DIDENTERBACKGROUND = SDL_EVENT_DID_ENTER_BACKGROUND;
-const SDL_APP_DIDENTERFOREGROUND = SDL_EVENT_DID_ENTER_FOREGROUND;
-const SDL_APP_LOWMEMORY = SDL_EVENT_LOW_MEMORY;
-const SDL_APP_TERMINATING = SDL_EVENT_TERMINATING;
-const SDL_APP_WILLENTERBACKGROUND = SDL_EVENT_WILL_ENTER_BACKGROUND;
-const SDL_APP_WILLENTERFOREGROUND = SDL_EVENT_WILL_ENTER_FOREGROUND;
-const SDL_AUDIODEVICEADDED = SDL_EVENT_AUDIO_DEVICE_ADDED;
-const SDL_AUDIODEVICEREMOVED = SDL_EVENT_AUDIO_DEVICE_REMOVED;
-const SDL_CLIPBOARDUPDATE = SDL_EVENT_CLIPBOARD_UPDATE;
-const SDL_CONTROLLERAXISMOTION = SDL_EVENT_GAMEPAD_AXIS_MOTION;
-const SDL_CONTROLLERBUTTONDOWN = SDL_EVENT_GAMEPAD_BUTTON_DOWN;
-const SDL_CONTROLLERBUTTONUP = SDL_EVENT_GAMEPAD_BUTTON_UP;
-const SDL_CONTROLLERDEVICEADDED = SDL_EVENT_GAMEPAD_ADDED;
-const SDL_CONTROLLERDEVICEREMAPPED = SDL_EVENT_GAMEPAD_REMAPPED;
-const SDL_CONTROLLERDEVICEREMOVED = SDL_EVENT_GAMEPAD_REMOVED;
-const SDL_CONTROLLERSENSORUPDATE = SDL_EVENT_GAMEPAD_SENSOR_UPDATE;
-const SDL_CONTROLLERSTEAMHANDLEUPDATED = SDL_EVENT_GAMEPAD_STEAM_HANDLE_UPDATED;
-const SDL_CONTROLLERTOUCHPADDOWN = SDL_EVENT_GAMEPAD_TOUCHPAD_DOWN;
-const SDL_CONTROLLERTOUCHPADMOTION = SDL_EVENT_GAMEPAD_TOUCHPAD_MOTION;
-const SDL_CONTROLLERTOUCHPADUP = SDL_EVENT_GAMEPAD_TOUCHPAD_UP;
-//const SDL_ControllerAxisEvent = SDL_GamepadAxisEvent;
-//const SDL_ControllerButtonEvent = SDL_GamepadButtonEvent;
-//const SDL_ControllerDeviceEvent = SDL_GamepadDeviceEvent;
-//const SDL_ControllerSensorEvent = SDL_GamepadSensorEvent;
-//const SDL_ControllerTouchpadEvent = SDL_GamepadTouchpadEvent;
-const SDL_DISPLAYEVENT_CONNECTED = SDL_EVENT_DISPLAY_ADDED;
-const SDL_DISPLAYEVENT_DISCONNECTED = SDL_EVENT_DISPLAY_REMOVED;
-const SDL_DISPLAYEVENT_MOVED = SDL_EVENT_DISPLAY_MOVED;
-const SDL_DISPLAYEVENT_ORIENTATION = SDL_EVENT_DISPLAY_ORIENTATION;
-const SDL_DROPBEGIN = SDL_EVENT_DROP_BEGIN;
-const SDL_DROPCOMPLETE = SDL_EVENT_DROP_COMPLETE;
-const SDL_DROPFILE = SDL_EVENT_DROP_FILE;
-const SDL_DROPTEXT = SDL_EVENT_DROP_TEXT;
-//const SDL_DelEventWatch = SDL_RemoveEventWatch;
-const SDL_FINGERDOWN = SDL_EVENT_FINGER_DOWN;
-const SDL_FINGERMOTION = SDL_EVENT_FINGER_MOTION;
-const SDL_FINGERUP = SDL_EVENT_FINGER_UP;
-const SDL_FIRSTEVENT = SDL_EVENT_FIRST;
-const SDL_JOYAXISMOTION = SDL_EVENT_JOYSTICK_AXIS_MOTION;
-const SDL_JOYBATTERYUPDATED = SDL_EVENT_JOYSTICK_BATTERY_UPDATED;
-const SDL_JOYBUTTONDOWN = SDL_EVENT_JOYSTICK_BUTTON_DOWN;
-const SDL_JOYBUTTONUP = SDL_EVENT_JOYSTICK_BUTTON_UP;
-const SDL_JOYDEVICEADDED = SDL_EVENT_JOYSTICK_ADDED;
-const SDL_JOYDEVICEREMOVED = SDL_EVENT_JOYSTICK_REMOVED;
-const SDL_JOYBALLMOTION = SDL_EVENT_JOYSTICK_BALL_MOTION;
-const SDL_JOYHATMOTION = SDL_EVENT_JOYSTICK_HAT_MOTION;
-const SDL_KEYDOWN = SDL_EVENT_KEY_DOWN;
-const SDL_KEYMAPCHANGED = SDL_EVENT_KEYMAP_CHANGED;
-const SDL_KEYUP = SDL_EVENT_KEY_UP;
-const SDL_LASTEVENT = SDL_EVENT_LAST;
-const SDL_LOCALECHANGED = SDL_EVENT_LOCALE_CHANGED;
-const SDL_MOUSEBUTTONDOWN = SDL_EVENT_MOUSE_BUTTON_DOWN;
-const SDL_MOUSEBUTTONUP = SDL_EVENT_MOUSE_BUTTON_UP;
-const SDL_MOUSEMOTION = SDL_EVENT_MOUSE_MOTION;
-const SDL_MOUSEWHEEL = SDL_EVENT_MOUSE_WHEEL;
-const SDL_POLLSENTINEL = SDL_EVENT_POLL_SENTINEL;
-const SDL_QUIT = SDL_EVENT_QUIT;
-const SDL_RENDER_DEVICE_RESET = SDL_EVENT_RENDER_DEVICE_RESET;
-const SDL_RENDER_TARGETS_RESET = SDL_EVENT_RENDER_TARGETS_RESET;
-const SDL_SENSORUPDATE = SDL_EVENT_SENSOR_UPDATE;
-const SDL_TEXTEDITING = SDL_EVENT_TEXT_EDITING;
-//const SDL_TEXTEDITING_EXT = SDL_EVENT_TEXT_EDITING_EXT;
-const SDL_TEXTINPUT = SDL_EVENT_TEXT_INPUT;
-const SDL_USEREVENT = SDL_EVENT_USER;
-const SDL_WINDOWEVENT_CLOSE = SDL_EVENT_WINDOW_CLOSE_REQUESTED;
-const SDL_WINDOWEVENT_DISPLAY_CHANGED = SDL_EVENT_WINDOW_DISPLAY_CHANGED;
-const SDL_WINDOWEVENT_ENTER = SDL_EVENT_WINDOW_MOUSE_ENTER;
-const SDL_WINDOWEVENT_EXPOSED = SDL_EVENT_WINDOW_EXPOSED;
-const SDL_WINDOWEVENT_FOCUS_GAINED = SDL_EVENT_WINDOW_FOCUS_GAINED;
-const SDL_WINDOWEVENT_FOCUS_LOST = SDL_EVENT_WINDOW_FOCUS_LOST;
-const SDL_WINDOWEVENT_HIDDEN = SDL_EVENT_WINDOW_HIDDEN;
-const SDL_WINDOWEVENT_HIT_TEST = SDL_EVENT_WINDOW_HIT_TEST;
-const SDL_WINDOWEVENT_ICCPROF_CHANGED = SDL_EVENT_WINDOW_ICCPROF_CHANGED;
-const SDL_WINDOWEVENT_LEAVE = SDL_EVENT_WINDOW_MOUSE_LEAVE;
-const SDL_WINDOWEVENT_MAXIMIZED = SDL_EVENT_WINDOW_MAXIMIZED;
-const SDL_WINDOWEVENT_MINIMIZED = SDL_EVENT_WINDOW_MINIMIZED;
-const SDL_WINDOWEVENT_MOVED = SDL_EVENT_WINDOW_MOVED;
-const SDL_WINDOWEVENT_RESIZED = SDL_EVENT_WINDOW_RESIZED;
-const SDL_WINDOWEVENT_RESTORED = SDL_EVENT_WINDOW_RESTORED;
-const SDL_WINDOWEVENT_SHOWN = SDL_EVENT_WINDOW_SHOWN;
-const SDL_WINDOWEVENT_SIZE_CHANGED = SDL_EVENT_WINDOW_PIXEL_SIZE_CHANGED;
-//const SDL_WINDOWEVENT_TAKE_FOCUS = SDL_EVENT_WINDOW_TAKE_FOCUS;
-//const SDL_eventaction = SDL_EventAction;
-const SDL_CONTROLLER_AXIS_INVALID = SDL_GAMEPAD_AXIS_INVALID;
-const SDL_CONTROLLER_AXIS_LEFTX = SDL_GAMEPAD_AXIS_LEFTX;
-const SDL_CONTROLLER_AXIS_LEFTY = SDL_GAMEPAD_AXIS_LEFTY;
-//const SDL_CONTROLLER_AXIS_MAX = SDL_GAMEPAD_AXIS_MAX;
-const SDL_CONTROLLER_AXIS_RIGHTX = SDL_GAMEPAD_AXIS_RIGHTX;
-const SDL_CONTROLLER_AXIS_RIGHTY = SDL_GAMEPAD_AXIS_RIGHTY;
-const SDL_CONTROLLER_AXIS_TRIGGERLEFT = SDL_GAMEPAD_AXIS_LEFT_TRIGGER;
-const SDL_CONTROLLER_AXIS_TRIGGERRIGHT = SDL_GAMEPAD_AXIS_RIGHT_TRIGGER;
-const SDL_CONTROLLER_BINDTYPE_AXIS = SDL_GAMEPAD_BINDTYPE_AXIS;
-const SDL_CONTROLLER_BINDTYPE_BUTTON = SDL_GAMEPAD_BINDTYPE_BUTTON;
-const SDL_CONTROLLER_BINDTYPE_HAT = SDL_GAMEPAD_BINDTYPE_HAT;
-const SDL_CONTROLLER_BINDTYPE_NONE = SDL_GAMEPAD_BINDTYPE_NONE;
-const SDL_CONTROLLER_BUTTON_A = SDL_GAMEPAD_BUTTON_SOUTH;
-const SDL_CONTROLLER_BUTTON_B = SDL_GAMEPAD_BUTTON_EAST;
-const SDL_CONTROLLER_BUTTON_BACK = SDL_GAMEPAD_BUTTON_BACK;
-const SDL_CONTROLLER_BUTTON_DPAD_DOWN = SDL_GAMEPAD_BUTTON_DPAD_DOWN;
-const SDL_CONTROLLER_BUTTON_DPAD_LEFT = SDL_GAMEPAD_BUTTON_DPAD_LEFT;
-const SDL_CONTROLLER_BUTTON_DPAD_RIGHT = SDL_GAMEPAD_BUTTON_DPAD_RIGHT;
-const SDL_CONTROLLER_BUTTON_DPAD_UP = SDL_GAMEPAD_BUTTON_DPAD_UP;
-const SDL_CONTROLLER_BUTTON_GUIDE = SDL_GAMEPAD_BUTTON_GUIDE;
-const SDL_CONTROLLER_BUTTON_INVALID = SDL_GAMEPAD_BUTTON_INVALID;
-const SDL_CONTROLLER_BUTTON_LEFTSHOULDER = SDL_GAMEPAD_BUTTON_LEFT_SHOULDER;
-const SDL_CONTROLLER_BUTTON_LEFTSTICK = SDL_GAMEPAD_BUTTON_LEFT_STICK;
-//const SDL_CONTROLLER_BUTTON_MAX = SDL_GAMEPAD_BUTTON_MAX;
-const SDL_CONTROLLER_BUTTON_MISC1 = SDL_GAMEPAD_BUTTON_MISC1;
-const SDL_CONTROLLER_BUTTON_PADDLE1 = SDL_GAMEPAD_BUTTON_RIGHT_PADDLE1;
-const SDL_CONTROLLER_BUTTON_PADDLE2 = SDL_GAMEPAD_BUTTON_LEFT_PADDLE1;
-const SDL_CONTROLLER_BUTTON_PADDLE3 = SDL_GAMEPAD_BUTTON_RIGHT_PADDLE2;
-const SDL_CONTROLLER_BUTTON_PADDLE4 = SDL_GAMEPAD_BUTTON_LEFT_PADDLE2;
-const SDL_CONTROLLER_BUTTON_RIGHTSHOULDER = SDL_GAMEPAD_BUTTON_RIGHT_SHOULDER;
-const SDL_CONTROLLER_BUTTON_RIGHTSTICK = SDL_GAMEPAD_BUTTON_RIGHT_STICK;
-const SDL_CONTROLLER_BUTTON_START = SDL_GAMEPAD_BUTTON_START;
-const SDL_CONTROLLER_BUTTON_TOUCHPAD = SDL_GAMEPAD_BUTTON_TOUCHPAD;
-const SDL_CONTROLLER_BUTTON_X = SDL_GAMEPAD_BUTTON_WEST;
-const SDL_CONTROLLER_BUTTON_Y = SDL_GAMEPAD_BUTTON_NORTH;
-const SDL_CONTROLLER_TYPE_NINTENDO_SWITCH_JOYCON_LEFT =
-    SDL_GAMEPAD_TYPE_NINTENDO_SWITCH_JOYCON_LEFT;
-const SDL_CONTROLLER_TYPE_NINTENDO_SWITCH_JOYCON_PAIR =
-    SDL_GAMEPAD_TYPE_NINTENDO_SWITCH_JOYCON_PAIR;
-const SDL_CONTROLLER_TYPE_NINTENDO_SWITCH_JOYCON_RIGHT =
-    SDL_GAMEPAD_TYPE_NINTENDO_SWITCH_JOYCON_RIGHT;
-const SDL_CONTROLLER_TYPE_NINTENDO_SWITCH_PRO =
-    SDL_GAMEPAD_TYPE_NINTENDO_SWITCH_PRO;
-const SDL_CONTROLLER_TYPE_PS3 = SDL_GAMEPAD_TYPE_PS3;
-const SDL_CONTROLLER_TYPE_PS4 = SDL_GAMEPAD_TYPE_PS4;
-const SDL_CONTROLLER_TYPE_PS5 = SDL_GAMEPAD_TYPE_PS5;
-const SDL_CONTROLLER_TYPE_UNKNOWN = SDL_GAMEPAD_TYPE_STANDARD;
-//const SDL_CONTROLLER_TYPE_VIRTUAL = SDL_GAMEPAD_TYPE_VIRTUAL;
-const SDL_CONTROLLER_TYPE_XBOX360 = SDL_GAMEPAD_TYPE_XBOX360;
-const SDL_CONTROLLER_TYPE_XBOXONE = SDL_GAMEPAD_TYPE_XBOXONE;
-//const SDL_GameController = SDL_Gamepad;
-//const SDL_GameControllerAddMapping = SDL_AddGamepadMapping;
-//const SDL_GameControllerAddMappingsFromFile = SDL_AddGamepadMappingsFromFile;
-//const SDL_GameControllerAddMappingsFromRW = SDL_AddGamepadMappingsFromIO;
-//const SDL_GameControllerAxis = SDL_GamepadAxis;
-//const SDL_GameControllerBindType = SDL_GamepadBindingType;
-//const SDL_GameControllerButton = SDL_GamepadButton;
-//const SDL_GameControllerClose = SDL_CloseGamepad;
-//const SDL_GameControllerFromInstanceID = SDL_GetGamepadFromID;
-//const SDL_GameControllerFromPlayerIndex = SDL_GetGamepadFromPlayerIndex;
-//const SDL_GameControllerGetAppleSFSymbolsNameForAxis = SDL_GetGamepadAppleSFSymbolsNameForAxis;
-//const SDL_GameControllerGetAppleSFSymbolsNameForButton = SDL_GetGamepadAppleSFSymbolsNameForButton;
-//const SDL_GameControllerGetAttached = SDL_GamepadConnected;
-//const SDL_GameControllerGetAxis = SDL_GetGamepadAxis;
-//const SDL_GameControllerGetAxisFromString = SDL_GetGamepadAxisFromString;
-//const SDL_GameControllerGetButton = SDL_GetGamepadButton;
-//const SDL_GameControllerGetButtonFromString = SDL_GetGamepadButtonFromString;
-//const SDL_GameControllerGetFirmwareVersion = SDL_GetGamepadFirmwareVersion;
-//const SDL_GameControllerGetJoystick = SDL_GetGamepadJoystick;
-//const SDL_GameControllerGetNumTouchpadFingers = SDL_GetNumGamepadTouchpadFingers;
-//const SDL_GameControllerGetNumTouchpads = SDL_GetNumGamepadTouchpads;
-//const SDL_GameControllerGetPlayerIndex = SDL_GetGamepadPlayerIndex;
-//const SDL_GameControllerGetProduct = SDL_GetGamepadProduct;
-//const SDL_GameControllerGetProductVersion = SDL_GetGamepadProductVersion;
-//const SDL_GameControllerGetSensorData = SDL_GetGamepadSensorData;
-//const SDL_GameControllerGetSensorDataRate = SDL_GetGamepadSensorDataRate;
-//const SDL_GameControllerGetSerial = SDL_GetGamepadSerial;
-//const SDL_GameControllerGetSteamHandle = SDL_GetGamepadSteamHandle;
-//const SDL_GameControllerGetStringForAxis = SDL_GetGamepadStringForAxis;
-//const SDL_GameControllerGetStringForButton = SDL_GetGamepadStringForButton;
-//const SDL_GameControllerGetTouchpadFinger = SDL_GetGamepadTouchpadFinger;
-//const SDL_GameControllerGetType = SDL_GetGamepadType;
-//const SDL_GameControllerGetVendor = SDL_GetGamepadVendor;
-//const SDL_GameControllerHasAxis = SDL_GamepadHasAxis;
-//const SDL_GameControllerHasButton = SDL_GamepadHasButton;
-//const SDL_GameControllerHasSensor = SDL_GamepadHasSensor;
-//const SDL_GameControllerIsSensorEnabled = SDL_GamepadSensorEnabled;
-//const SDL_GameControllerMapping = SDL_GetGamepadMapping;
-//const SDL_GameControllerMappingForGUID = SDL_GetGamepadMappingForGUID;
-//const SDL_GameControllerName = SDL_GetGamepadName;
-//const SDL_GameControllerOpen = SDL_OpenGamepad;
-//const SDL_GameControllerPath = SDL_GetGamepadPath;
-//const SDL_GameControllerRumble = SDL_RumbleGamepad;
-//const SDL_GameControllerRumbleTriggers = SDL_RumbleGamepadTriggers;
-//const SDL_GameControllerSendEffect = SDL_SendGamepadEffect;
-//const SDL_GameControllerSetLED = SDL_SetGamepadLED;
-//const SDL_GameControllerSetPlayerIndex = SDL_SetGamepadPlayerIndex;
-//const SDL_GameControllerSetSensorEnabled = SDL_SetGamepadSensorEnabled;
-//const SDL_GameControllerType = SDL_GamepadType;
-//const SDL_GameControllerUpdate = SDL_UpdateGamepads;
-const SDL_INIT_GAMECONTROLLER = SDL_INIT_GAMEPAD;
-//const SDL_IsGameController = SDL_IsGamepad;
-//const SDL_GUIDFromString = SDL_StringToGUID;
-//const SDL_HapticClose = SDL_CloseHaptic;
-//const SDL_HapticDestroyEffect = SDL_DestroyHapticEffect;
-//const SDL_HapticGetEffectStatus = SDL_GetHapticEffectStatus;
-//const SDL_HapticNewEffect = SDL_CreateHapticEffect;
-//const SDL_HapticNumAxes = SDL_GetNumHapticAxes;
-//const SDL_HapticNumEffects = SDL_GetMaxHapticEffects;
-//const SDL_HapticNumEffectsPlaying = SDL_GetMaxHapticEffectsPlaying;
-//const SDL_HapticOpen = SDL_OpenHaptic;
-//const SDL_HapticOpenFromJoystick = SDL_OpenHapticFromJoystick;
-//const SDL_HapticOpenFromMouse = SDL_OpenHapticFromMouse;
-//const SDL_HapticPause = SDL_PauseHaptic;
-//const SDL_HapticQuery = SDL_GetHapticFeatures;
-//const SDL_HapticRumbleInit = SDL_InitHapticRumble;
-//const SDL_HapticRumblePlay = SDL_PlayHapticRumble;
-//const SDL_HapticRumbleStop = SDL_StopHapticRumble;
-//const SDL_HapticRunEffect = SDL_RunHapticEffect;
-//const SDL_HapticSetAutocenter = SDL_SetHapticAutocenter;
-//const SDL_HapticSetGain = SDL_SetHapticGain;
-//const SDL_HapticStopAll = SDL_StopHapticEffects;
-//const SDL_HapticStopEffect = SDL_StopHapticEffect;
-//const SDL_HapticUnpause = SDL_ResumeHaptic;
-//const SDL_HapticUpdateEffect = SDL_UpdateHapticEffect;
-//const SDL_JoystickIsHaptic = SDL_IsJoystickHaptic;
-//const SDL_MouseIsHaptic = SDL_IsMouseHaptic;
-//const SDL_DelHintCallback = SDL_RemoveHintCallback;
-const SDL_HINT_ALLOW_TOPMOST = SDL_HINT_WINDOW_ALLOW_TOPMOST;
-const SDL_HINT_DIRECTINPUT_ENABLED = SDL_HINT_JOYSTICK_DIRECTINPUT;
-const SDL_HINT_GDK_TEXTINPUT_DEFAULT = SDL_HINT_GDK_TEXTINPUT_DEFAULT_TEXT;
-const SDL_HINT_JOYSTICK_GAMECUBE_RUMBLE_BRAKE =
-    SDL_HINT_JOYSTICK_HIDAPI_GAMECUBE_RUMBLE_BRAKE;
-const SDL_HINT_LINUX_DIGITAL_HATS = SDL_HINT_JOYSTICK_LINUX_DIGITAL_HATS;
-const SDL_HINT_LINUX_HAT_DEADZONES = SDL_HINT_JOYSTICK_LINUX_HAT_DEADZONES;
-const SDL_HINT_LINUX_JOYSTICK_CLASSIC = SDL_HINT_JOYSTICK_LINUX_CLASSIC;
-const SDL_HINT_LINUX_JOYSTICK_DEADZONES = SDL_HINT_JOYSTICK_LINUX_DEADZONES;
-const SDL_JOYSTICK_TYPE_GAMECONTROLLER = SDL_JOYSTICK_TYPE_GAMEPAD;
-//const SDL_JoystickAttachVirtualEx = SDL_AttachVirtualJoystick;
-//const SDL_JoystickClose = SDL_CloseJoystick;
-//const SDL_JoystickDetachVirtual = SDL_DetachVirtualJoystick;
-//const SDL_JoystickFromInstanceID = SDL_GetJoystickFromID;
-//const SDL_JoystickFromPlayerIndex = SDL_GetJoystickFromPlayerIndex;
-//const SDL_JoystickGUID = SDL_GUID;
-//const SDL_JoystickGetAttached = SDL_JoystickConnected;
-//const SDL_JoystickGetAxis = SDL_GetJoystickAxis;
-//const SDL_JoystickGetAxisInitialState = SDL_GetJoystickAxisInitialState;
-//const SDL_JoystickGetBall = SDL_GetJoystickBall;
-//const SDL_JoystickGetButton = SDL_GetJoystickButton;
-//const SDL_JoystickGetFirmwareVersion = SDL_GetJoystickFirmwareVersion;
-//const SDL_JoystickGetGUID = SDL_GetJoystickGUID;
-//const SDL_JoystickGetGUIDFromString = SDL_StringToGUID;
-//const SDL_JoystickGetHat = SDL_GetJoystickHat;
-//const SDL_JoystickGetPlayerIndex = SDL_GetJoystickPlayerIndex;
-//const SDL_JoystickGetProduct = SDL_GetJoystickProduct;
-//const SDL_JoystickGetProductVersion = SDL_GetJoystickProductVersion;
-//const SDL_JoystickGetSerial = SDL_GetJoystickSerial;
-//const SDL_JoystickGetType = SDL_GetJoystickType;
-//const SDL_JoystickGetVendor = SDL_GetJoystickVendor;
-//const SDL_JoystickInstanceID = SDL_GetJoystickID;
-//const SDL_JoystickIsVirtual = SDL_IsJoystickVirtual;
-//const SDL_JoystickName = SDL_GetJoystickName;
-//const SDL_JoystickNumAxes = SDL_GetNumJoystickAxes;
-//const SDL_JoystickNumBalls = SDL_GetNumJoystickBalls;
-//const SDL_JoystickNumButtons = SDL_GetNumJoystickButtons;
-//const SDL_JoystickNumHats = SDL_GetNumJoystickHats;
-//const SDL_JoystickOpen = SDL_OpenJoystick;
-//const SDL_JoystickPath = SDL_GetJoystickPath;
-//const SDL_JoystickRumble = SDL_RumbleJoystick;
-//const SDL_JoystickRumbleTriggers = SDL_RumbleJoystickTriggers;
-//const SDL_JoystickSendEffect = SDL_SendJoystickEffect;
-//const SDL_JoystickSetLED = SDL_SetJoystickLED;
-//const SDL_JoystickSetPlayerIndex = SDL_SetJoystickPlayerIndex;
-//const SDL_JoystickSetVirtualAxis = SDL_SetJoystickVirtualAxis;
-//const SDL_JoystickSetVirtualButton = SDL_SetJoystickVirtualButton;
-//const SDL_JoystickSetVirtualHat = SDL_SetJoystickVirtualHat;
-//const SDL_JoystickUpdate = SDL_UpdateJoysticks;
-//const SDL_IsScreenKeyboardShown = SDL_ScreenKeyboardShown;
-//const SDL_IsTextInputActive = SDL_TextInputActive;
-const KMOD_ALT = SDL_KMOD_ALT;
-const KMOD_CAPS = SDL_KMOD_CAPS;
-const KMOD_CTRL = SDL_KMOD_CTRL;
-const KMOD_GUI = SDL_KMOD_GUI;
-const KMOD_LALT = SDL_KMOD_LALT;
-const KMOD_LCTRL = SDL_KMOD_LCTRL;
-const KMOD_LGUI = SDL_KMOD_LGUI;
-const KMOD_LSHIFT = SDL_KMOD_LSHIFT;
-const KMOD_MODE = SDL_KMOD_MODE;
-const KMOD_NONE = SDL_KMOD_NONE;
-const KMOD_NUM = SDL_KMOD_NUM;
-const KMOD_RALT = SDL_KMOD_RALT;
-const KMOD_RCTRL = SDL_KMOD_RCTRL;
-const KMOD_RGUI = SDL_KMOD_RGUI;
-const KMOD_RSHIFT = SDL_KMOD_RSHIFT;
-const KMOD_SCROLL = SDL_KMOD_SCROLL;
-const KMOD_SHIFT = SDL_KMOD_SHIFT;
-const SDLK_AUDIOFASTFORWARD = SDLK_MEDIA_FAST_FORWARD;
-const SDLK_AUDIOMUTE = SDLK_MUTE;
-const SDLK_AUDIONEXT = SDLK_MEDIA_NEXT_TRACK;
-const SDLK_AUDIOPLAY = SDLK_MEDIA_PLAY;
-const SDLK_AUDIOPREV = SDLK_MEDIA_PREVIOUS_TRACK;
-const SDLK_AUDIOREWIND = SDLK_MEDIA_REWIND;
-const SDLK_AUDIOSTOP = SDLK_MEDIA_STOP;
-const SDLK_BACKQUOTE = SDLK_GRAVE;
-const SDLK_EJECT = SDLK_MEDIA_EJECT;
-const SDLK_MEDIASELECT = SDLK_MEDIA_SELECT;
-const SDLK_QUOTE = SDLK_APOSTROPHE;
-const SDLK_QUOTEDBL = SDLK_DBLAPOSTROPHE;
-const SDLK_a = SDLK_A;
-const SDLK_b = SDLK_B;
-const SDLK_c = SDLK_C;
-const SDLK_d = SDLK_D;
-const SDLK_e = SDLK_E;
-const SDLK_f = SDLK_F;
-const SDLK_g = SDLK_G;
-const SDLK_h = SDLK_H;
-const SDLK_i = SDLK_I;
-const SDLK_j = SDLK_J;
-const SDLK_k = SDLK_K;
-const SDLK_l = SDLK_L;
-const SDLK_m = SDLK_M;
-const SDLK_n = SDLK_N;
-const SDLK_o = SDLK_O;
-const SDLK_p = SDLK_P;
-const SDLK_q = SDLK_Q;
-const SDLK_r = SDLK_R;
-const SDLK_s = SDLK_S;
-const SDLK_t = SDLK_T;
-const SDLK_u = SDLK_U;
-const SDLK_v = SDLK_V;
-const SDLK_w = SDLK_W;
-const SDLK_x = SDLK_X;
-const SDLK_y = SDLK_Y;
-const SDLK_z = SDLK_Z;
-//const SDL_LogGetOutputFunction = SDL_GetLogOutputFunction;
-//const SDL_LogGetPriority = SDL_GetLogPriority;
-//const SDL_LogResetPriorities = SDL_ResetLogPriorities;
-//const SDL_LogSetAllPriority = SDL_SetLogPriorities;
-//const SDL_LogSetOutputFunction = SDL_SetLogOutputFunction;
-//const SDL_LogSetPriority = SDL_SetLogPriority;
-const SDL_NUM_LOG_PRIORITIES = SDL_LOG_PRIORITY_COUNT;
-const SDL_MESSAGEBOX_COLOR_MAX = SDL_MESSAGEBOX_COLOR_COUNT;
-//const SDL_FreeCursor = SDL_DestroyCursor;
-const SDL_NUM_SYSTEM_CURSORS = SDL_SYSTEM_CURSOR_COUNT;
-const SDL_SYSTEM_CURSOR_ARROW = SDL_SYSTEM_CURSOR_DEFAULT;
-const SDL_SYSTEM_CURSOR_HAND = SDL_SYSTEM_CURSOR_POINTER;
-const SDL_SYSTEM_CURSOR_IBEAM = SDL_SYSTEM_CURSOR_TEXT;
-const SDL_SYSTEM_CURSOR_NO = SDL_SYSTEM_CURSOR_NOT_ALLOWED;
-const SDL_SYSTEM_CURSOR_SIZEALL = SDL_SYSTEM_CURSOR_MOVE;
-const SDL_SYSTEM_CURSOR_SIZENESW = SDL_SYSTEM_CURSOR_NESW_RESIZE;
-const SDL_SYSTEM_CURSOR_SIZENS = SDL_SYSTEM_CURSOR_NS_RESIZE;
-const SDL_SYSTEM_CURSOR_SIZENWSE = SDL_SYSTEM_CURSOR_NWSE_RESIZE;
-const SDL_SYSTEM_CURSOR_SIZEWE = SDL_SYSTEM_CURSOR_EW_RESIZE;
-const SDL_SYSTEM_CURSOR_WAITARROW = SDL_SYSTEM_CURSOR_PROGRESS;
-const SDL_SYSTEM_CURSOR_WINDOW_BOTTOM = SDL_SYSTEM_CURSOR_S_RESIZE;
-const SDL_SYSTEM_CURSOR_WINDOW_BOTTOMLEFT = SDL_SYSTEM_CURSOR_SW_RESIZE;
-const SDL_SYSTEM_CURSOR_WINDOW_BOTTOMRIGHT = SDL_SYSTEM_CURSOR_SE_RESIZE;
-const SDL_SYSTEM_CURSOR_WINDOW_LEFT = SDL_SYSTEM_CURSOR_W_RESIZE;
-const SDL_SYSTEM_CURSOR_WINDOW_RIGHT = SDL_SYSTEM_CURSOR_E_RESIZE;
-const SDL_SYSTEM_CURSOR_WINDOW_TOP = SDL_SYSTEM_CURSOR_N_RESIZE;
-const SDL_SYSTEM_CURSOR_WINDOW_TOPLEFT = SDL_SYSTEM_CURSOR_NW_RESIZE;
-const SDL_SYSTEM_CURSOR_WINDOW_TOPRIGHT = SDL_SYSTEM_CURSOR_NE_RESIZE;
-//const SDL_CondBroadcast = SDL_BroadcastCondition;
-//const SDL_CondSignal = SDL_SignalCondition;
-//const SDL_CondWait = SDL_WaitCondition;
-//const SDL_CondWaitTimeout = SDL_WaitConditionTimeout;
-//const SDL_CreateCond = SDL_CreateCondition;
-//const SDL_DestroyCond = SDL_DestroyCondition;
-//const SDL_SemPost = SDL_SignalSemaphore;
-//const SDL_SemTryWait = SDL_TryWaitSemaphore;
-//const SDL_SemValue = SDL_GetSemaphoreValue;
-//const SDL_SemWait = SDL_WaitSemaphore;
-//const SDL_SemWaitTimeout = SDL_WaitSemaphoreTimeout;
-//const SDL_cond = SDL_Condition;
-//const SDL_mutex = SDL_Mutex;
-//const SDL_sem = SDL_Semaphore;
-//const SDL_AllocFormat = SDL_GetPixelFormatDetails;
-//const SDL_AllocPalette = SDL_CreatePalette;
-//const SDL_Colour = SDL_Color;
-//const SDL_FreePalette = SDL_DestroyPalette;
-//const SDL_MasksToPixelFormatEnum = SDL_GetPixelFormatForMasks;
-//const SDL_PIXELFORMAT_BGR444 = SDL_PIXELFORMAT_XBGR4444;
-//const SDL_PIXELFORMAT_BGR555 = SDL_PIXELFORMAT_XBGR1555;
-//const SDL_PIXELFORMAT_BGR888 = SDL_PIXELFORMAT_XBGR8888;
-//const SDL_PIXELFORMAT_RGB444 = SDL_PIXELFORMAT_XRGB4444;
-//const SDL_PIXELFORMAT_RGB555 = SDL_PIXELFORMAT_XRGB1555;
-//const SDL_PIXELFORMAT_RGB888 = SDL_PIXELFORMAT_XRGB8888;
-//const SDL_PixelFormatEnumToMasks = SDL_GetMasksForPixelFormat;
-//const SDL_EncloseFPoints = SDL_GetRectEnclosingPointsFloat;
-//const SDL_EnclosePoints = SDL_GetRectEnclosingPoints;
-//const SDL_FRectEmpty = SDL_RectEmptyFloat;
-//const SDL_FRectEquals = SDL_RectsEqualFloat;
-//const SDL_FRectEqualsEpsilon = SDL_RectsEqualEpsilon;
-//const SDL_HasIntersection = SDL_HasRectIntersection;
-//const SDL_HasIntersectionF = SDL_HasRectIntersectionFloat;
-//const SDL_IntersectFRect = SDL_GetRectIntersectionFloat;
-//const SDL_IntersectFRectAndLine = SDL_GetRectAndLineIntersectionFloat;
-//const SDL_IntersectRect = SDL_GetRectIntersection;
-//const SDL_IntersectRectAndLine = SDL_GetRectAndLineIntersection;
-//const SDL_PointInFRect = SDL_PointInRectFloat;
-//const SDL_RectEquals = SDL_RectsEqual;
-//const SDL_UnionFRect = SDL_GetRectUnionFloat;
-//const SDL_UnionRect = SDL_GetRectUnion;
-//const SDL_GetRendererOutputSize = SDL_GetCurrentRenderOutputSize;
-//const SDL_RenderCopy = SDL_RenderTexture;
-//const SDL_RenderCopyEx = SDL_RenderTextureRotated;
-//const SDL_RenderCopyExF = SDL_RenderTextureRotated;
-//const SDL_RenderCopyF = SDL_RenderTexture;
-//const SDL_RenderDrawLine = SDL_RenderLine;
-//const SDL_RenderDrawLineF = SDL_RenderLine;
-//const SDL_RenderDrawLines = SDL_RenderLines;
-//const SDL_RenderDrawLinesF = SDL_RenderLines;
-//const SDL_RenderDrawPoint = SDL_RenderPoint;
-//const SDL_RenderDrawPointF = SDL_RenderPoint;
-//const SDL_RenderDrawPoints = SDL_RenderPoints;
-//const SDL_RenderDrawPointsF = SDL_RenderPoints;
-//const SDL_RenderDrawRect = SDL_RenderRect;
-//const SDL_RenderDrawRectF = SDL_RenderRect;
-//const SDL_RenderDrawRects = SDL_RenderRects;
-//const SDL_RenderDrawRectsF = SDL_RenderRects;
-//const SDL_RenderFillRectF = SDL_RenderFillRect;
-//const SDL_RenderFillRectsF = SDL_RenderFillRects;
-//const SDL_RendererFlip = SDL_FlipMode;
-//const SDL_RenderFlush = SDL_FlushRenderer;
-//const SDL_RenderGetClipRect = SDL_GetRenderClipRect;
-//const SDL_RenderGetLogicalSize = SDL_GetRenderLogicalPresentation;
-//const SDL_RenderGetMetalCommandEncoder = SDL_GetRenderMetalCommandEncoder;
-//const SDL_RenderGetMetalLayer = SDL_GetRenderMetalLayer;
-//const SDL_RenderGetScale = SDL_GetRenderScale;
-//const SDL_RenderGetViewport = SDL_GetRenderViewport;
-//const SDL_RenderGetWindow = SDL_GetRenderWindow;
-//const SDL_RenderIsClipEnabled = SDL_RenderClipEnabled;
-//const SDL_RenderLogicalToWindow = SDL_RenderCoordinatesToWindow;
-//const SDL_RenderSetClipRect = SDL_SetRenderClipRect;
-//const SDL_RenderSetLogicalSize = SDL_SetRenderLogicalPresentation;
-//const SDL_RenderSetScale = SDL_SetRenderScale;
-//const SDL_RenderSetVSync = SDL_SetRenderVSync;
-//const SDL_RenderSetViewport = SDL_SetRenderViewport;
-//const SDL_RenderWindowToLogical = SDL_RenderCoordinatesFromWindow;
-//const SDL_ScaleModeLinear = SDL_SCALEMODE_LINEAR;
-//const SDL_ScaleModeNearest = SDL_SCALEMODE_NEAREST;
-const RW_SEEK_CUR = SDL_IO_SEEK_CUR;
-const RW_SEEK_END = SDL_IO_SEEK_END;
-const RW_SEEK_SET = SDL_IO_SEEK_SET;
-//const SDL_RWFromConstMem = SDL_IOFromConstMem;
-//const SDL_RWFromFile = SDL_IOFromFile;
-//const SDL_RWFromMem = SDL_IOFromMem;
-//const SDL_RWclose = SDL_CloseIO;
-//const SDL_RWops = SDL_IOStream;
-//const SDL_RWread = SDL_ReadIO;
-//const SDL_RWseek = SDL_SeekIO;
-//const SDL_RWsize = SDL_GetIOSize;
-//const SDL_RWtell = SDL_TellIO;
-//const SDL_RWwrite = SDL_WriteIO;
-//const SDL_ReadBE16 = SDL_ReadU16BE;
-//const SDL_ReadBE32 = SDL_ReadU32BE;
-//const SDL_ReadBE64 = SDL_ReadU64BE;
-//const SDL_ReadLE16 = SDL_ReadU16LE;
-//const SDL_ReadLE32 = SDL_ReadU32LE;
-//const SDL_ReadLE64 = SDL_ReadU64LE;
-//const SDL_WriteBE16 = SDL_WriteU16BE;
-//const SDL_WriteBE32 = SDL_WriteU32BE;
-//const SDL_WriteBE64 = SDL_WriteU64BE;
-//const SDL_WriteLE16 = SDL_WriteU16LE;
-//const SDL_WriteLE32 = SDL_WriteU32LE;
-//const SDL_WriteLE64 = SDL_WriteU64LE;
-//const SDL_NUM_SCANCODES = SDL_SCANCODE_COUNT;
-//const SDL_SCANCODE_AUDIOFASTFORWARD = SDL_SCANCODE_MEDIA_FAST_FORWARD;
-//const SDL_SCANCODE_AUDIOMUTE = SDL_SCANCODE_MUTE;
-//const SDL_SCANCODE_AUDIONEXT = SDL_SCANCODE_MEDIA_NEXT_TRACK;
-//const SDL_SCANCODE_AUDIOPLAY = SDL_SCANCODE_MEDIA_PLAY;
-//const SDL_SCANCODE_AUDIOPREV = SDL_SCANCODE_MEDIA_PREVIOUS_TRACK;
-//const SDL_SCANCODE_AUDIOREWIND = SDL_SCANCODE_MEDIA_REWIND;
-//const SDL_SCANCODE_AUDIOSTOP = SDL_SCANCODE_MEDIA_STOP;
-//const SDL_SCANCODE_EJECT = SDL_SCANCODE_MEDIA_EJECT;
-//const SDL_SCANCODE_MEDIASELECT = SDL_SCANCODE_MEDIA_SELECT;
-//const SDL_SensorClose = SDL_CloseSensor;
-//const SDL_SensorFromInstanceID = SDL_GetSensorFromID;
-//const SDL_SensorGetData = SDL_GetSensorData;
-//const SDL_SensorGetInstanceID = SDL_GetSensorID;
-//const SDL_SensorGetName = SDL_GetSensorName;
-//const SDL_SensorGetNonPortableType = SDL_GetSensorNonPortableType;
-//const SDL_SensorGetType = SDL_GetSensorType;
-//const SDL_SensorOpen = SDL_OpenSensor;
-//const SDL_SensorUpdate = SDL_UpdateSensors;
-//const SDL_FALSE = false;
-//const SDL_TABLESIZE = SDL_arraysize;
-//const SDL_TRUE = true;
-//const SDL_bool = bool;
-//const SDL_size_add_overflow = SDL_size_add_check_overflow;
-//const SDL_size_mul_overflow = SDL_size_mul_check_overflow;
-//const SDL_strtokr = SDL_strtok_r;
-//const SDL_BlitScaled = SDL_BlitSurfaceScaled;
-//const SDL_ConvertSurfaceFormat = SDL_ConvertSurface;
-//const SDL_FillRect = SDL_FillSurfaceRect;
-//const SDL_FillRects = SDL_FillSurfaceRects;
-//const SDL_FreeSurface = SDL_DestroySurface;
-//const SDL_GetClipRect = SDL_GetSurfaceClipRect;
-//const SDL_GetColorKey = SDL_GetSurfaceColorKey;
-//const SDL_HasColorKey = SDL_SurfaceHasColorKey;
-//const SDL_HasSurfaceRLE = SDL_SurfaceHasRLE;
-//const SDL_LoadBMP_RW = SDL_LoadBMP_IO;
-//const SDL_LowerBlit = SDL_BlitSurfaceUnchecked;
-//const SDL_LowerBlitScaled = SDL_BlitSurfaceUncheckedScaled;
-//const SDL_PREALLOC = SDL_SURFACE_PREALLOCATED;
-//const SDL_SIMD_ALIGNED = SDL_SURFACE_SIMD_ALIGNED;
-//const SDL_SaveBMP_RW = SDL_SaveBMP_IO;
-//const SDL_SetClipRect = SDL_SetSurfaceClipRect;
-//const SDL_SetColorKey = SDL_SetSurfaceColorKey;
-//const SDL_UpperBlit = SDL_BlitSurface;
-//const SDL_UpperBlitScaled = SDL_BlitSurfaceScaled;
-//const SDL_AndroidBackButton = SDL_SendAndroidBackButton;
-//const SDL_AndroidGetActivity = SDL_GetAndroidActivity;
-//const SDL_AndroidGetExternalStoragePath = SDL_GetAndroidExternalStoragePath;
-//const SDL_AndroidGetExternalStorageState = SDL_GetAndroidExternalStorageState;
-//const SDL_AndroidGetInternalStoragePath = SDL_GetAndroidInternalStoragePath;
-//const SDL_AndroidGetJNIEnv = SDL_GetAndroidJNIEnv;
-//const SDL_AndroidRequestPermission = SDL_RequestAndroidPermission;
-//const SDL_AndroidRequestPermissionCallback = SDL_RequestAndroidPermissionCallback;
-//const SDL_AndroidSendMessage = SDL_SendAndroidMessage;
-//const SDL_AndroidShowToast = SDL_ShowAndroidToast;
-//const SDL_DXGIGetOutputInfo = SDL_GetDXGIOutputInfo;
-//const SDL_Direct3D9GetAdapterIndex = SDL_GetDirect3D9AdapterIndex;
-//const SDL_GDKGetDefaultUser = SDL_GetGDKDefaultUser;
-//const SDL_GDKGetTaskQueue = SDL_GetGDKTaskQueue;
-//const SDL_LinuxSetThreadPriority = SDL_SetLinuxThreadPriority;
-//const SDL_LinuxSetThreadPriorityAndPolicy = SDL_SetLinuxThreadPriorityAndPolicy;
-//const SDL_OnApplicationDidBecomeActive = SDL_OnApplicationDidEnterForeground;
-//const SDL_OnApplicationWillResignActive = SDL_OnApplicationWillEnterBackground;
-//const SDL_iOSSetAnimationCallback = SDL_SetiOSAnimationCallback;
-//const SDL_iOSSetEventPump = SDL_SetiOSEventPump;
-//const SDL_iPhoneSetAnimationCallback = SDL_SetiOSAnimationCallback;
-//const SDL_iPhoneSetEventPump = SDL_SetiOSEventPump;
-//const SDL_TLSCleanup = SDL_CleanupTLS;
-//const SDL_TLSGet = SDL_GetTLS;
-//const SDL_TLSSet = SDL_SetTLS;
-//const SDL_threadID = SDL_ThreadID;
-//const SDL_GetTicks64 = SDL_GetTicks;
-//const SDL_COMPILEDVERSION = SDL_VERSION;
-//const SDL_PATCHLEVEL = SDL_MICRO_VERSION;
-//const SDL_GL_DeleteContext = SDL_GL_DestroyContext;
-//const SDL_GetClosestDisplayMode = SDL_GetClosestFullscreenDisplayMode;
-//const SDL_GetDisplayOrientation = SDL_GetCurrentDisplayOrientation;
-//const SDL_GetPointDisplayIndex = SDL_GetDisplayForPoint;
-//const SDL_GetRectDisplayIndex = SDL_GetDisplayForRect;
-//const SDL_GetWindowDisplayIndex = SDL_GetDisplayForWindow;
-//const SDL_GetWindowDisplayMode = SDL_GetWindowFullscreenMode;
-//const SDL_HasWindowSurface = SDL_WindowHasSurface;
-//const SDL_IsScreenSaverEnabled = SDL_ScreenSaverEnabled;
-//const SDL_SetWindowDisplayMode = SDL_SetWindowFullscreenMode;
-//const SDL_WINDOW_ALLOW_HIGHDPI = SDL_WINDOW_HIGH_PIXEL_DENSITY;
-//const SDL_WINDOW_INPUT_GRABBED = SDL_WINDOW_MOUSE_GRABBED;
-//const SDL_WINDOW_SKIP_TASKBAR = SDL_WINDOW_UTILITY;
-//const SDL_GameControllerMappingForDeviceIndex = SDL_GameControllerMappingForDeviceIndex_renamed_SDL_GetGamepadMappingForDeviceIndex;
+const SDL_INIT_STATUS_UNINITIALIZED = 0;
+const SDL_INIT_STATUS_INITIALIZING = 1;
+const SDL_INIT_STATUS_INITIALIZED = 2;
+const SDL_INIT_STATUS_UNINITIALIZING = 3;
 //const SDL_pen_h_ = ;
 const SDL_PEN_INPUT_DOWN = (1 << 0);
 const SDL_PEN_INPUT_BUTTON_1 = (1 << 1);
@@ -2673,11 +2106,10 @@ const SDL_SENSOR_GYRO_L = -1 + 5;
 const SDL_SENSOR_ACCEL_R = -1 + 6;
 const SDL_SENSOR_GYRO_R = -1 + 7;
 //const SDL_stdinc_h_ = ;
-//const SDL_DEFINE_STDBOOL = ;
-//const __bool_true_false_are_defined = 1;
-//const bool = uint8_t;
+//const bool = unsigned char;
 //const false = 0;
 //const true = 1;
+//const __bool_true_false_are_defined = 1;
 //const SDL_DISABLE_ALLOCA = ;
 //const alloca = __builtin_alloca;
 //const SDL_SIZE_MAX = SIZE_MAX;
@@ -2718,7 +2150,7 @@ const SDL_PRIX64 = 'I64X';
 //const SDL_PRIu32 = PRIu32;
 //const SDL_PRIx32 = PRIx32;
 //const SDL_PRIX32 = PRIX32;
-const SDL_PRILL_PREFIX = 'll';
+const SDL_PRILL_PREFIX = 'I64';
 //const SDL_PRILLd = SDL_PRILL_PREFIX "d";
 //const SDL_PRILLu = SDL_PRILL_PREFIX "u";
 //const SDL_PRILLx = SDL_PRILL_PREFIX "x";
@@ -3054,7 +2486,2087 @@ const SDL_HITTEST_RESIZE_BOTTOMRIGHT = 6;
 const SDL_HITTEST_RESIZE_BOTTOM = 7;
 const SDL_HITTEST_RESIZE_BOTTOMLEFT = 8;
 const SDL_HITTEST_RESIZE_LEFT = 9;
+
 //const SDL_vulkan_h_ = ;
 //const NO_SDL_VULKAN_TYPEDEFS = ;
 //const VK_DEFINE_HANDLE = (object) typedef struct object##_T* object;;
 //const VK_DEFINE_NON_DISPATCHABLE_HANDLE = (object) typedef struct object##_T *object;;
+class SdlAssertionEnum {
+  static const retry = SDL_ASSERTION_RETRY;
+  static const onBreak = SDL_ASSERTION_BREAK;
+  static const abort = SDL_ASSERTION_ABORT;
+  static const ignore = SDL_ASSERTION_IGNORE;
+  static const alwaysIgnore = SDL_ASSERTION_ALWAYS_IGNORE;
+}
+
+class SdlAudioEnum {
+  static const unknown = SDL_AUDIO_UNKNOWN;
+  static const u8 = SDL_AUDIO_U8;
+  static const s8 = SDL_AUDIO_S8;
+  static const s16Le = SDL_AUDIO_S16LE;
+  static const s16Be = SDL_AUDIO_S16BE;
+  static const s32Le = SDL_AUDIO_S32LE;
+  static const s32Be = SDL_AUDIO_S32BE;
+  static const f32Le = SDL_AUDIO_F32LE;
+  static const f32Be = SDL_AUDIO_F32BE;
+}
+
+class SdlBlendmodeEnum {
+  static const none = SDL_BLENDMODE_NONE;
+  static const blend = SDL_BLENDMODE_BLEND;
+  static const blendPremultiplied = SDL_BLENDMODE_BLEND_PREMULTIPLIED;
+  static const add = SDL_BLENDMODE_ADD;
+  static const addPremultiplied = SDL_BLENDMODE_ADD_PREMULTIPLIED;
+  static const mod = SDL_BLENDMODE_MOD;
+  static const mul = SDL_BLENDMODE_MUL;
+  static const invalid = SDL_BLENDMODE_INVALID;
+}
+
+class SdlBlendoperationEnum {
+  static const add = SDL_BLENDOPERATION_ADD;
+  static const subtract = SDL_BLENDOPERATION_SUBTRACT;
+  static const revSubtract = SDL_BLENDOPERATION_REV_SUBTRACT;
+  static const minimum = SDL_BLENDOPERATION_MINIMUM;
+  static const maximum = SDL_BLENDOPERATION_MAXIMUM;
+}
+
+class SdlBlendfactorEnum {
+  static const zero = SDL_BLENDFACTOR_ZERO;
+  static const one = SDL_BLENDFACTOR_ONE;
+  static const srcColor = SDL_BLENDFACTOR_SRC_COLOR;
+  static const oneMinusSrcColor = SDL_BLENDFACTOR_ONE_MINUS_SRC_COLOR;
+  static const srcAlpha = SDL_BLENDFACTOR_SRC_ALPHA;
+  static const oneMinusSrcAlpha = SDL_BLENDFACTOR_ONE_MINUS_SRC_ALPHA;
+  static const dstColor = SDL_BLENDFACTOR_DST_COLOR;
+  static const oneMinusDstColor = SDL_BLENDFACTOR_ONE_MINUS_DST_COLOR;
+  static const dstAlpha = SDL_BLENDFACTOR_DST_ALPHA;
+  static const oneMinusDstAlpha = SDL_BLENDFACTOR_ONE_MINUS_DST_ALPHA;
+}
+
+class SdlCameraPositionEnum {
+  static const unknown = SDL_CAMERA_POSITION_UNKNOWN;
+  static const frontFacing = SDL_CAMERA_POSITION_FRONT_FACING;
+  static const backFacing = SDL_CAMERA_POSITION_BACK_FACING;
+}
+
+class SdlEventEnum {
+  static const first = SDL_EVENT_FIRST;
+  static const quit = SDL_EVENT_QUIT;
+  static const terminating = SDL_EVENT_TERMINATING;
+  static const lowMemory = SDL_EVENT_LOW_MEMORY;
+  static const willEnterBackground = SDL_EVENT_WILL_ENTER_BACKGROUND;
+  static const didEnterBackground = SDL_EVENT_DID_ENTER_BACKGROUND;
+  static const willEnterForeground = SDL_EVENT_WILL_ENTER_FOREGROUND;
+  static const didEnterForeground = SDL_EVENT_DID_ENTER_FOREGROUND;
+  static const localeChanged = SDL_EVENT_LOCALE_CHANGED;
+  static const systemThemeChanged = SDL_EVENT_SYSTEM_THEME_CHANGED;
+  static const displayOrientation = SDL_EVENT_DISPLAY_ORIENTATION;
+  static const displayAdded = SDL_EVENT_DISPLAY_ADDED;
+  static const displayRemoved = SDL_EVENT_DISPLAY_REMOVED;
+  static const displayMoved = SDL_EVENT_DISPLAY_MOVED;
+  static const displayDesktopModeChanged =
+      SDL_EVENT_DISPLAY_DESKTOP_MODE_CHANGED;
+  static const displayCurrentModeChanged =
+      SDL_EVENT_DISPLAY_CURRENT_MODE_CHANGED;
+  static const displayContentScaleChanged =
+      SDL_EVENT_DISPLAY_CONTENT_SCALE_CHANGED;
+  static const displayFirst = SDL_EVENT_DISPLAY_FIRST;
+  static const displayLast = SDL_EVENT_DISPLAY_LAST;
+  static const windowShown = SDL_EVENT_WINDOW_SHOWN;
+  static const windowHidden = SDL_EVENT_WINDOW_HIDDEN;
+  static const windowExposed = SDL_EVENT_WINDOW_EXPOSED;
+  static const windowMoved = SDL_EVENT_WINDOW_MOVED;
+  static const windowResized = SDL_EVENT_WINDOW_RESIZED;
+  static const windowPixelSizeChanged = SDL_EVENT_WINDOW_PIXEL_SIZE_CHANGED;
+  static const windowMetalViewResized = SDL_EVENT_WINDOW_METAL_VIEW_RESIZED;
+  static const windowMinimized = SDL_EVENT_WINDOW_MINIMIZED;
+  static const windowMaximized = SDL_EVENT_WINDOW_MAXIMIZED;
+  static const windowRestored = SDL_EVENT_WINDOW_RESTORED;
+  static const windowMouseEnter = SDL_EVENT_WINDOW_MOUSE_ENTER;
+  static const windowMouseLeave = SDL_EVENT_WINDOW_MOUSE_LEAVE;
+  static const windowFocusGained = SDL_EVENT_WINDOW_FOCUS_GAINED;
+  static const windowFocusLost = SDL_EVENT_WINDOW_FOCUS_LOST;
+  static const windowCloseRequested = SDL_EVENT_WINDOW_CLOSE_REQUESTED;
+  static const windowHitTest = SDL_EVENT_WINDOW_HIT_TEST;
+  static const windowIccprofChanged = SDL_EVENT_WINDOW_ICCPROF_CHANGED;
+  static const windowDisplayChanged = SDL_EVENT_WINDOW_DISPLAY_CHANGED;
+  static const windowDisplayScaleChanged =
+      SDL_EVENT_WINDOW_DISPLAY_SCALE_CHANGED;
+  static const windowSafeAreaChanged = SDL_EVENT_WINDOW_SAFE_AREA_CHANGED;
+  static const windowOccluded = SDL_EVENT_WINDOW_OCCLUDED;
+  static const windowEnterFullscreen = SDL_EVENT_WINDOW_ENTER_FULLSCREEN;
+  static const windowLeaveFullscreen = SDL_EVENT_WINDOW_LEAVE_FULLSCREEN;
+  static const windowDestroyed = SDL_EVENT_WINDOW_DESTROYED;
+  static const windowHdrStateChanged = SDL_EVENT_WINDOW_HDR_STATE_CHANGED;
+  static const windowFirst = SDL_EVENT_WINDOW_FIRST;
+  static const windowLast = SDL_EVENT_WINDOW_LAST;
+  static const keyDown = SDL_EVENT_KEY_DOWN;
+  static const keyUp = SDL_EVENT_KEY_UP;
+  static const textEditing = SDL_EVENT_TEXT_EDITING;
+  static const textInput = SDL_EVENT_TEXT_INPUT;
+  static const keymapChanged = SDL_EVENT_KEYMAP_CHANGED;
+  static const keyboardAdded = SDL_EVENT_KEYBOARD_ADDED;
+  static const keyboardRemoved = SDL_EVENT_KEYBOARD_REMOVED;
+  static const textEditingCandidates = SDL_EVENT_TEXT_EDITING_CANDIDATES;
+  static const mouseMotion = SDL_EVENT_MOUSE_MOTION;
+  static const mouseButtonDown = SDL_EVENT_MOUSE_BUTTON_DOWN;
+  static const mouseButtonUp = SDL_EVENT_MOUSE_BUTTON_UP;
+  static const mouseWheel = SDL_EVENT_MOUSE_WHEEL;
+  static const mouseAdded = SDL_EVENT_MOUSE_ADDED;
+  static const mouseRemoved = SDL_EVENT_MOUSE_REMOVED;
+  static const joystickAxisMotion = SDL_EVENT_JOYSTICK_AXIS_MOTION;
+  static const joystickBallMotion = SDL_EVENT_JOYSTICK_BALL_MOTION;
+  static const joystickHatMotion = SDL_EVENT_JOYSTICK_HAT_MOTION;
+  static const joystickButtonDown = SDL_EVENT_JOYSTICK_BUTTON_DOWN;
+  static const joystickButtonUp = SDL_EVENT_JOYSTICK_BUTTON_UP;
+  static const joystickAdded = SDL_EVENT_JOYSTICK_ADDED;
+  static const joystickRemoved = SDL_EVENT_JOYSTICK_REMOVED;
+  static const joystickBatteryUpdated = SDL_EVENT_JOYSTICK_BATTERY_UPDATED;
+  static const joystickUpdateComplete = SDL_EVENT_JOYSTICK_UPDATE_COMPLETE;
+  static const gamepadAxisMotion = SDL_EVENT_GAMEPAD_AXIS_MOTION;
+  static const gamepadButtonDown = SDL_EVENT_GAMEPAD_BUTTON_DOWN;
+  static const gamepadButtonUp = SDL_EVENT_GAMEPAD_BUTTON_UP;
+  static const gamepadAdded = SDL_EVENT_GAMEPAD_ADDED;
+  static const gamepadRemoved = SDL_EVENT_GAMEPAD_REMOVED;
+  static const gamepadRemapped = SDL_EVENT_GAMEPAD_REMAPPED;
+  static const gamepadTouchpadDown = SDL_EVENT_GAMEPAD_TOUCHPAD_DOWN;
+  static const gamepadTouchpadMotion = SDL_EVENT_GAMEPAD_TOUCHPAD_MOTION;
+  static const gamepadTouchpadUp = SDL_EVENT_GAMEPAD_TOUCHPAD_UP;
+  static const gamepadSensorUpdate = SDL_EVENT_GAMEPAD_SENSOR_UPDATE;
+  static const gamepadUpdateComplete = SDL_EVENT_GAMEPAD_UPDATE_COMPLETE;
+  static const gamepadSteamHandleUpdated =
+      SDL_EVENT_GAMEPAD_STEAM_HANDLE_UPDATED;
+  static const fingerDown = SDL_EVENT_FINGER_DOWN;
+  static const fingerUp = SDL_EVENT_FINGER_UP;
+  static const fingerMotion = SDL_EVENT_FINGER_MOTION;
+  static const clipboardUpdate = SDL_EVENT_CLIPBOARD_UPDATE;
+  static const dropFile = SDL_EVENT_DROP_FILE;
+  static const dropText = SDL_EVENT_DROP_TEXT;
+  static const dropBegin = SDL_EVENT_DROP_BEGIN;
+  static const dropComplete = SDL_EVENT_DROP_COMPLETE;
+  static const dropPosition = SDL_EVENT_DROP_POSITION;
+  static const audioDeviceAdded = SDL_EVENT_AUDIO_DEVICE_ADDED;
+  static const audioDeviceRemoved = SDL_EVENT_AUDIO_DEVICE_REMOVED;
+  static const audioDeviceFormatChanged = SDL_EVENT_AUDIO_DEVICE_FORMAT_CHANGED;
+  static const sensorUpdate = SDL_EVENT_SENSOR_UPDATE;
+  static const penProximityIn = SDL_EVENT_PEN_PROXIMITY_IN;
+  static const penProximityOut = SDL_EVENT_PEN_PROXIMITY_OUT;
+  static const penDown = SDL_EVENT_PEN_DOWN;
+  static const penUp = SDL_EVENT_PEN_UP;
+  static const penButtonDown = SDL_EVENT_PEN_BUTTON_DOWN;
+  static const penButtonUp = SDL_EVENT_PEN_BUTTON_UP;
+  static const penMotion = SDL_EVENT_PEN_MOTION;
+  static const penAxis = SDL_EVENT_PEN_AXIS;
+  static const cameraDeviceAdded = SDL_EVENT_CAMERA_DEVICE_ADDED;
+  static const cameraDeviceRemoved = SDL_EVENT_CAMERA_DEVICE_REMOVED;
+  static const cameraDeviceApproved = SDL_EVENT_CAMERA_DEVICE_APPROVED;
+  static const cameraDeviceDenied = SDL_EVENT_CAMERA_DEVICE_DENIED;
+  static const renderTargetsReset = SDL_EVENT_RENDER_TARGETS_RESET;
+  static const renderDeviceReset = SDL_EVENT_RENDER_DEVICE_RESET;
+  static const pollSentinel = SDL_EVENT_POLL_SENTINEL;
+  static const user = SDL_EVENT_USER;
+  static const last = SDL_EVENT_LAST;
+  static const enumPadding = SDL_EVENT_ENUM_PADDING;
+}
+
+class SdlFolderEnum {
+  static const home = SDL_FOLDER_HOME;
+  static const desktop = SDL_FOLDER_DESKTOP;
+  static const documents = SDL_FOLDER_DOCUMENTS;
+  static const downloads = SDL_FOLDER_DOWNLOADS;
+  static const music = SDL_FOLDER_MUSIC;
+  static const pictures = SDL_FOLDER_PICTURES;
+  static const publicshare = SDL_FOLDER_PUBLICSHARE;
+  static const savedgames = SDL_FOLDER_SAVEDGAMES;
+  static const screenshots = SDL_FOLDER_SCREENSHOTS;
+  static const templates = SDL_FOLDER_TEMPLATES;
+  static const videos = SDL_FOLDER_VIDEOS;
+  static const count = SDL_FOLDER_COUNT;
+}
+
+class SdlPathtypeEnum {
+  static const none = SDL_PATHTYPE_NONE;
+  static const file = SDL_PATHTYPE_FILE;
+  static const directory = SDL_PATHTYPE_DIRECTORY;
+  static const other = SDL_PATHTYPE_OTHER;
+}
+
+class SdlEnumEnum {
+  static const onContinue = SDL_ENUM_CONTINUE;
+  static const success = SDL_ENUM_SUCCESS;
+  static const failure = SDL_ENUM_FAILURE;
+}
+
+class SdlGamepadTypeEnum {
+  static const unknown = SDL_GAMEPAD_TYPE_UNKNOWN;
+  static const standard = SDL_GAMEPAD_TYPE_STANDARD;
+  static const xbox360 = SDL_GAMEPAD_TYPE_XBOX360;
+  static const xboxone = SDL_GAMEPAD_TYPE_XBOXONE;
+  static const ps3 = SDL_GAMEPAD_TYPE_PS3;
+  static const ps4 = SDL_GAMEPAD_TYPE_PS4;
+  static const ps5 = SDL_GAMEPAD_TYPE_PS5;
+  static const nintendoSwitchPro = SDL_GAMEPAD_TYPE_NINTENDO_SWITCH_PRO;
+  static const nintendoSwitchJoyconLeft =
+      SDL_GAMEPAD_TYPE_NINTENDO_SWITCH_JOYCON_LEFT;
+  static const nintendoSwitchJoyconRight =
+      SDL_GAMEPAD_TYPE_NINTENDO_SWITCH_JOYCON_RIGHT;
+  static const nintendoSwitchJoyconPair =
+      SDL_GAMEPAD_TYPE_NINTENDO_SWITCH_JOYCON_PAIR;
+  static const count = SDL_GAMEPAD_TYPE_COUNT;
+}
+
+class SdlGamepadButtonEnum {
+  static const invalid = SDL_GAMEPAD_BUTTON_INVALID;
+  static const south = SDL_GAMEPAD_BUTTON_SOUTH;
+  static const east = SDL_GAMEPAD_BUTTON_EAST;
+  static const west = SDL_GAMEPAD_BUTTON_WEST;
+  static const north = SDL_GAMEPAD_BUTTON_NORTH;
+  static const back = SDL_GAMEPAD_BUTTON_BACK;
+  static const guide = SDL_GAMEPAD_BUTTON_GUIDE;
+  static const start = SDL_GAMEPAD_BUTTON_START;
+  static const leftStick = SDL_GAMEPAD_BUTTON_LEFT_STICK;
+  static const rightStick = SDL_GAMEPAD_BUTTON_RIGHT_STICK;
+  static const leftShoulder = SDL_GAMEPAD_BUTTON_LEFT_SHOULDER;
+  static const rightShoulder = SDL_GAMEPAD_BUTTON_RIGHT_SHOULDER;
+  static const dpadUp = SDL_GAMEPAD_BUTTON_DPAD_UP;
+  static const dpadDown = SDL_GAMEPAD_BUTTON_DPAD_DOWN;
+  static const dpadLeft = SDL_GAMEPAD_BUTTON_DPAD_LEFT;
+  static const dpadRight = SDL_GAMEPAD_BUTTON_DPAD_RIGHT;
+  static const misc1 = SDL_GAMEPAD_BUTTON_MISC1;
+  static const rightPaddle1 = SDL_GAMEPAD_BUTTON_RIGHT_PADDLE1;
+  static const leftPaddle1 = SDL_GAMEPAD_BUTTON_LEFT_PADDLE1;
+  static const rightPaddle2 = SDL_GAMEPAD_BUTTON_RIGHT_PADDLE2;
+  static const leftPaddle2 = SDL_GAMEPAD_BUTTON_LEFT_PADDLE2;
+  static const touchpad = SDL_GAMEPAD_BUTTON_TOUCHPAD;
+  static const misc2 = SDL_GAMEPAD_BUTTON_MISC2;
+  static const misc3 = SDL_GAMEPAD_BUTTON_MISC3;
+  static const misc4 = SDL_GAMEPAD_BUTTON_MISC4;
+  static const misc5 = SDL_GAMEPAD_BUTTON_MISC5;
+  static const misc6 = SDL_GAMEPAD_BUTTON_MISC6;
+  static const count = SDL_GAMEPAD_BUTTON_COUNT;
+}
+
+class SdlGamepadButtonLabelEnum {
+  static const unknown = SDL_GAMEPAD_BUTTON_LABEL_UNKNOWN;
+  static const a = SDL_GAMEPAD_BUTTON_LABEL_A;
+  static const b = SDL_GAMEPAD_BUTTON_LABEL_B;
+  static const x = SDL_GAMEPAD_BUTTON_LABEL_X;
+  static const y = SDL_GAMEPAD_BUTTON_LABEL_Y;
+  static const cross = SDL_GAMEPAD_BUTTON_LABEL_CROSS;
+  static const circle = SDL_GAMEPAD_BUTTON_LABEL_CIRCLE;
+  static const square = SDL_GAMEPAD_BUTTON_LABEL_SQUARE;
+  static const triangle = SDL_GAMEPAD_BUTTON_LABEL_TRIANGLE;
+}
+
+class SdlGamepadAxisEnum {
+  static const invalid = SDL_GAMEPAD_AXIS_INVALID;
+  static const leftx = SDL_GAMEPAD_AXIS_LEFTX;
+  static const lefty = SDL_GAMEPAD_AXIS_LEFTY;
+  static const rightx = SDL_GAMEPAD_AXIS_RIGHTX;
+  static const righty = SDL_GAMEPAD_AXIS_RIGHTY;
+  static const leftTrigger = SDL_GAMEPAD_AXIS_LEFT_TRIGGER;
+  static const rightTrigger = SDL_GAMEPAD_AXIS_RIGHT_TRIGGER;
+  static const count = SDL_GAMEPAD_AXIS_COUNT;
+}
+
+class SdlGamepadBindtypeEnum {
+  static const none = SDL_GAMEPAD_BINDTYPE_NONE;
+  static const button = SDL_GAMEPAD_BINDTYPE_BUTTON;
+  static const axis = SDL_GAMEPAD_BINDTYPE_AXIS;
+  static const hat = SDL_GAMEPAD_BINDTYPE_HAT;
+}
+
+class SdlGpuPrimitivetypeEnum {
+  static const trianglelist = SDL_GPU_PRIMITIVETYPE_TRIANGLELIST;
+  static const trianglestrip = SDL_GPU_PRIMITIVETYPE_TRIANGLESTRIP;
+  static const linelist = SDL_GPU_PRIMITIVETYPE_LINELIST;
+  static const linestrip = SDL_GPU_PRIMITIVETYPE_LINESTRIP;
+  static const pointlist = SDL_GPU_PRIMITIVETYPE_POINTLIST;
+}
+
+class SdlGpuLoadopEnum {
+  static const load = SDL_GPU_LOADOP_LOAD;
+  static const clear = SDL_GPU_LOADOP_CLEAR;
+  static const dontCare = SDL_GPU_LOADOP_DONT_CARE;
+}
+
+class SdlGpuStoreopEnum {
+  static const store = SDL_GPU_STOREOP_STORE;
+  static const dontCare = SDL_GPU_STOREOP_DONT_CARE;
+  static const resolve = SDL_GPU_STOREOP_RESOLVE;
+  static const resolveAndStore = SDL_GPU_STOREOP_RESOLVE_AND_STORE;
+}
+
+class SdlGpuIndexelementsizeEnum {
+  static const on16Bit = SDL_GPU_INDEXELEMENTSIZE_16BIT;
+  static const on32Bit = SDL_GPU_INDEXELEMENTSIZE_32BIT;
+}
+
+class SdlGpuTextureformatEnum {
+  static const invalid = SDL_GPU_TEXTUREFORMAT_INVALID;
+  static const a8Unorm = SDL_GPU_TEXTUREFORMAT_A8_UNORM;
+  static const r8Unorm = SDL_GPU_TEXTUREFORMAT_R8_UNORM;
+  static const r8G8Unorm = SDL_GPU_TEXTUREFORMAT_R8G8_UNORM;
+  static const r8G8B8A8Unorm = SDL_GPU_TEXTUREFORMAT_R8G8B8A8_UNORM;
+  static const r16Unorm = SDL_GPU_TEXTUREFORMAT_R16_UNORM;
+  static const r16G16Unorm = SDL_GPU_TEXTUREFORMAT_R16G16_UNORM;
+  static const r16G16B16A16Unorm = SDL_GPU_TEXTUREFORMAT_R16G16B16A16_UNORM;
+  static const r10G10B10A2Unorm = SDL_GPU_TEXTUREFORMAT_R10G10B10A2_UNORM;
+  static const b5G6R5Unorm = SDL_GPU_TEXTUREFORMAT_B5G6R5_UNORM;
+  static const b5G5R5A1Unorm = SDL_GPU_TEXTUREFORMAT_B5G5R5A1_UNORM;
+  static const b4G4R4A4Unorm = SDL_GPU_TEXTUREFORMAT_B4G4R4A4_UNORM;
+  static const b8G8R8A8Unorm = SDL_GPU_TEXTUREFORMAT_B8G8R8A8_UNORM;
+  static const bc1RgbaUnorm = SDL_GPU_TEXTUREFORMAT_BC1_RGBA_UNORM;
+  static const bc2RgbaUnorm = SDL_GPU_TEXTUREFORMAT_BC2_RGBA_UNORM;
+  static const bc3RgbaUnorm = SDL_GPU_TEXTUREFORMAT_BC3_RGBA_UNORM;
+  static const bc4RUnorm = SDL_GPU_TEXTUREFORMAT_BC4_R_UNORM;
+  static const bc5RgUnorm = SDL_GPU_TEXTUREFORMAT_BC5_RG_UNORM;
+  static const bc7RgbaUnorm = SDL_GPU_TEXTUREFORMAT_BC7_RGBA_UNORM;
+  static const bc6HRgbFloat = SDL_GPU_TEXTUREFORMAT_BC6H_RGB_FLOAT;
+  static const bc6HRgbUfloat = SDL_GPU_TEXTUREFORMAT_BC6H_RGB_UFLOAT;
+  static const r8Snorm = SDL_GPU_TEXTUREFORMAT_R8_SNORM;
+  static const r8G8Snorm = SDL_GPU_TEXTUREFORMAT_R8G8_SNORM;
+  static const r8G8B8A8Snorm = SDL_GPU_TEXTUREFORMAT_R8G8B8A8_SNORM;
+  static const r16Snorm = SDL_GPU_TEXTUREFORMAT_R16_SNORM;
+  static const r16G16Snorm = SDL_GPU_TEXTUREFORMAT_R16G16_SNORM;
+  static const r16G16B16A16Snorm = SDL_GPU_TEXTUREFORMAT_R16G16B16A16_SNORM;
+  static const r16Float = SDL_GPU_TEXTUREFORMAT_R16_FLOAT;
+  static const r16G16Float = SDL_GPU_TEXTUREFORMAT_R16G16_FLOAT;
+  static const r16G16B16A16Float = SDL_GPU_TEXTUREFORMAT_R16G16B16A16_FLOAT;
+  static const r32Float = SDL_GPU_TEXTUREFORMAT_R32_FLOAT;
+  static const r32G32Float = SDL_GPU_TEXTUREFORMAT_R32G32_FLOAT;
+  static const r32G32B32A32Float = SDL_GPU_TEXTUREFORMAT_R32G32B32A32_FLOAT;
+  static const r11G11B10Ufloat = SDL_GPU_TEXTUREFORMAT_R11G11B10_UFLOAT;
+  static const r8Uint = SDL_GPU_TEXTUREFORMAT_R8_UINT;
+  static const r8G8Uint = SDL_GPU_TEXTUREFORMAT_R8G8_UINT;
+  static const r8G8B8A8Uint = SDL_GPU_TEXTUREFORMAT_R8G8B8A8_UINT;
+  static const r16Uint = SDL_GPU_TEXTUREFORMAT_R16_UINT;
+  static const r16G16Uint = SDL_GPU_TEXTUREFORMAT_R16G16_UINT;
+  static const r16G16B16A16Uint = SDL_GPU_TEXTUREFORMAT_R16G16B16A16_UINT;
+  static const r32Uint = SDL_GPU_TEXTUREFORMAT_R32_UINT;
+  static const r32G32Uint = SDL_GPU_TEXTUREFORMAT_R32G32_UINT;
+  static const r32G32B32A32Uint = SDL_GPU_TEXTUREFORMAT_R32G32B32A32_UINT;
+  static const r8Int = SDL_GPU_TEXTUREFORMAT_R8_INT;
+  static const r8G8Int = SDL_GPU_TEXTUREFORMAT_R8G8_INT;
+  static const r8G8B8A8Int = SDL_GPU_TEXTUREFORMAT_R8G8B8A8_INT;
+  static const r16Int = SDL_GPU_TEXTUREFORMAT_R16_INT;
+  static const r16G16Int = SDL_GPU_TEXTUREFORMAT_R16G16_INT;
+  static const r16G16B16A16Int = SDL_GPU_TEXTUREFORMAT_R16G16B16A16_INT;
+  static const r32Int = SDL_GPU_TEXTUREFORMAT_R32_INT;
+  static const r32G32Int = SDL_GPU_TEXTUREFORMAT_R32G32_INT;
+  static const r32G32B32A32Int = SDL_GPU_TEXTUREFORMAT_R32G32B32A32_INT;
+  static const r8G8B8A8UnormSrgb = SDL_GPU_TEXTUREFORMAT_R8G8B8A8_UNORM_SRGB;
+  static const b8G8R8A8UnormSrgb = SDL_GPU_TEXTUREFORMAT_B8G8R8A8_UNORM_SRGB;
+  static const bc1RgbaUnormSrgb = SDL_GPU_TEXTUREFORMAT_BC1_RGBA_UNORM_SRGB;
+  static const bc2RgbaUnormSrgb = SDL_GPU_TEXTUREFORMAT_BC2_RGBA_UNORM_SRGB;
+  static const bc3RgbaUnormSrgb = SDL_GPU_TEXTUREFORMAT_BC3_RGBA_UNORM_SRGB;
+  static const bc7RgbaUnormSrgb = SDL_GPU_TEXTUREFORMAT_BC7_RGBA_UNORM_SRGB;
+  static const d16Unorm = SDL_GPU_TEXTUREFORMAT_D16_UNORM;
+  static const d24Unorm = SDL_GPU_TEXTUREFORMAT_D24_UNORM;
+  static const d32Float = SDL_GPU_TEXTUREFORMAT_D32_FLOAT;
+  static const d24UnormS8Uint = SDL_GPU_TEXTUREFORMAT_D24_UNORM_S8_UINT;
+  static const d32FloatS8Uint = SDL_GPU_TEXTUREFORMAT_D32_FLOAT_S8_UINT;
+}
+
+class SdlGpuTextureusageEnum {
+  static const sampler = SDL_GPU_TEXTUREUSAGE_SAMPLER;
+  static const colorTarget = SDL_GPU_TEXTUREUSAGE_COLOR_TARGET;
+  static const depthStencilTarget = SDL_GPU_TEXTUREUSAGE_DEPTH_STENCIL_TARGET;
+  static const graphicsStorageRead = SDL_GPU_TEXTUREUSAGE_GRAPHICS_STORAGE_READ;
+  static const computeStorageRead = SDL_GPU_TEXTUREUSAGE_COMPUTE_STORAGE_READ;
+  static const computeStorageWrite = SDL_GPU_TEXTUREUSAGE_COMPUTE_STORAGE_WRITE;
+  static const computeStorageSimultaneousReadWrite =
+      SDL_GPU_TEXTUREUSAGE_COMPUTE_STORAGE_SIMULTANEOUS_READ_WRITE;
+}
+
+class SdlGpuTexturetypeEnum {
+  static const on2D = SDL_GPU_TEXTURETYPE_2D;
+  static const on2DArray = SDL_GPU_TEXTURETYPE_2D_ARRAY;
+  static const on3D = SDL_GPU_TEXTURETYPE_3D;
+  static const cube = SDL_GPU_TEXTURETYPE_CUBE;
+  static const cubeArray = SDL_GPU_TEXTURETYPE_CUBE_ARRAY;
+}
+
+class SdlGpuSamplecountEnum {
+  static const on1 = SDL_GPU_SAMPLECOUNT_1;
+  static const on2 = SDL_GPU_SAMPLECOUNT_2;
+  static const on4 = SDL_GPU_SAMPLECOUNT_4;
+  static const on8 = SDL_GPU_SAMPLECOUNT_8;
+}
+
+class SdlGpuCubemapfaceEnum {
+  static const positivex = SDL_GPU_CUBEMAPFACE_POSITIVEX;
+  static const negativex = SDL_GPU_CUBEMAPFACE_NEGATIVEX;
+  static const positivey = SDL_GPU_CUBEMAPFACE_POSITIVEY;
+  static const negativey = SDL_GPU_CUBEMAPFACE_NEGATIVEY;
+  static const positivez = SDL_GPU_CUBEMAPFACE_POSITIVEZ;
+  static const negativez = SDL_GPU_CUBEMAPFACE_NEGATIVEZ;
+}
+
+class SdlGpuBufferusageEnum {
+  static const vertex = SDL_GPU_BUFFERUSAGE_VERTEX;
+  static const index = SDL_GPU_BUFFERUSAGE_INDEX;
+  static const indirect = SDL_GPU_BUFFERUSAGE_INDIRECT;
+  static const graphicsStorageRead = SDL_GPU_BUFFERUSAGE_GRAPHICS_STORAGE_READ;
+  static const computeStorageRead = SDL_GPU_BUFFERUSAGE_COMPUTE_STORAGE_READ;
+  static const computeStorageWrite = SDL_GPU_BUFFERUSAGE_COMPUTE_STORAGE_WRITE;
+}
+
+class SdlGpuTransferbufferusageEnum {
+  static const upload = SDL_GPU_TRANSFERBUFFERUSAGE_UPLOAD;
+  static const download = SDL_GPU_TRANSFERBUFFERUSAGE_DOWNLOAD;
+}
+
+class SdlGpuShaderstageEnum {
+  static const vertex = SDL_GPU_SHADERSTAGE_VERTEX;
+  static const fragment = SDL_GPU_SHADERSTAGE_FRAGMENT;
+}
+
+class SdlGpuShaderformatEnum {
+  static const invalid = SDL_GPU_SHADERFORMAT_INVALID;
+  static const private = SDL_GPU_SHADERFORMAT_PRIVATE;
+  static const spirv = SDL_GPU_SHADERFORMAT_SPIRV;
+  static const dxbc = SDL_GPU_SHADERFORMAT_DXBC;
+  static const dxil = SDL_GPU_SHADERFORMAT_DXIL;
+  static const msl = SDL_GPU_SHADERFORMAT_MSL;
+  static const metallib = SDL_GPU_SHADERFORMAT_METALLIB;
+}
+
+class SdlGpuVertexelementformatEnum {
+  static const invalid = SDL_GPU_VERTEXELEMENTFORMAT_INVALID;
+  static const int = SDL_GPU_VERTEXELEMENTFORMAT_INT;
+  static const int2 = SDL_GPU_VERTEXELEMENTFORMAT_INT2;
+  static const int3 = SDL_GPU_VERTEXELEMENTFORMAT_INT3;
+  static const int4 = SDL_GPU_VERTEXELEMENTFORMAT_INT4;
+  static const uint = SDL_GPU_VERTEXELEMENTFORMAT_UINT;
+  static const uint2 = SDL_GPU_VERTEXELEMENTFORMAT_UINT2;
+  static const uint3 = SDL_GPU_VERTEXELEMENTFORMAT_UINT3;
+  static const uint4 = SDL_GPU_VERTEXELEMENTFORMAT_UINT4;
+  static const float = SDL_GPU_VERTEXELEMENTFORMAT_FLOAT;
+  static const float2 = SDL_GPU_VERTEXELEMENTFORMAT_FLOAT2;
+  static const float3 = SDL_GPU_VERTEXELEMENTFORMAT_FLOAT3;
+  static const float4 = SDL_GPU_VERTEXELEMENTFORMAT_FLOAT4;
+  static const byte2 = SDL_GPU_VERTEXELEMENTFORMAT_BYTE2;
+  static const byte4 = SDL_GPU_VERTEXELEMENTFORMAT_BYTE4;
+  static const ubyte2 = SDL_GPU_VERTEXELEMENTFORMAT_UBYTE2;
+  static const ubyte4 = SDL_GPU_VERTEXELEMENTFORMAT_UBYTE4;
+  static const byte2Norm = SDL_GPU_VERTEXELEMENTFORMAT_BYTE2_NORM;
+  static const byte4Norm = SDL_GPU_VERTEXELEMENTFORMAT_BYTE4_NORM;
+  static const ubyte2Norm = SDL_GPU_VERTEXELEMENTFORMAT_UBYTE2_NORM;
+  static const ubyte4Norm = SDL_GPU_VERTEXELEMENTFORMAT_UBYTE4_NORM;
+  static const short2 = SDL_GPU_VERTEXELEMENTFORMAT_SHORT2;
+  static const short4 = SDL_GPU_VERTEXELEMENTFORMAT_SHORT4;
+  static const ushort2 = SDL_GPU_VERTEXELEMENTFORMAT_USHORT2;
+  static const ushort4 = SDL_GPU_VERTEXELEMENTFORMAT_USHORT4;
+  static const short2Norm = SDL_GPU_VERTEXELEMENTFORMAT_SHORT2_NORM;
+  static const short4Norm = SDL_GPU_VERTEXELEMENTFORMAT_SHORT4_NORM;
+  static const ushort2Norm = SDL_GPU_VERTEXELEMENTFORMAT_USHORT2_NORM;
+  static const ushort4Norm = SDL_GPU_VERTEXELEMENTFORMAT_USHORT4_NORM;
+  static const half2 = SDL_GPU_VERTEXELEMENTFORMAT_HALF2;
+  static const half4 = SDL_GPU_VERTEXELEMENTFORMAT_HALF4;
+}
+
+class SdlGpuVertexinputrateEnum {
+  static const vertex = SDL_GPU_VERTEXINPUTRATE_VERTEX;
+  static const instance = SDL_GPU_VERTEXINPUTRATE_INSTANCE;
+}
+
+class SdlGpuFillmodeEnum {
+  static const fill = SDL_GPU_FILLMODE_FILL;
+  static const line = SDL_GPU_FILLMODE_LINE;
+}
+
+class SdlGpuCullmodeEnum {
+  static const none = SDL_GPU_CULLMODE_NONE;
+  static const front = SDL_GPU_CULLMODE_FRONT;
+  static const back = SDL_GPU_CULLMODE_BACK;
+}
+
+class SdlGpuFrontfaceEnum {
+  static const counterClockwise = SDL_GPU_FRONTFACE_COUNTER_CLOCKWISE;
+  static const clockwise = SDL_GPU_FRONTFACE_CLOCKWISE;
+}
+
+class SdlGpuCompareopEnum {
+  static const invalid = SDL_GPU_COMPAREOP_INVALID;
+  static const never = SDL_GPU_COMPAREOP_NEVER;
+  static const less = SDL_GPU_COMPAREOP_LESS;
+  static const equal = SDL_GPU_COMPAREOP_EQUAL;
+  static const lessOrEqual = SDL_GPU_COMPAREOP_LESS_OR_EQUAL;
+  static const greater = SDL_GPU_COMPAREOP_GREATER;
+  static const notEqual = SDL_GPU_COMPAREOP_NOT_EQUAL;
+  static const greaterOrEqual = SDL_GPU_COMPAREOP_GREATER_OR_EQUAL;
+  static const always = SDL_GPU_COMPAREOP_ALWAYS;
+}
+
+class SdlGpuStencilopEnum {
+  static const invalid = SDL_GPU_STENCILOP_INVALID;
+  static const keep = SDL_GPU_STENCILOP_KEEP;
+  static const zero = SDL_GPU_STENCILOP_ZERO;
+  static const replace = SDL_GPU_STENCILOP_REPLACE;
+  static const incrementAndClamp = SDL_GPU_STENCILOP_INCREMENT_AND_CLAMP;
+  static const decrementAndClamp = SDL_GPU_STENCILOP_DECREMENT_AND_CLAMP;
+  static const invert = SDL_GPU_STENCILOP_INVERT;
+  static const incrementAndWrap = SDL_GPU_STENCILOP_INCREMENT_AND_WRAP;
+  static const decrementAndWrap = SDL_GPU_STENCILOP_DECREMENT_AND_WRAP;
+}
+
+class SdlGpuBlendopEnum {
+  static const invalid = SDL_GPU_BLENDOP_INVALID;
+  static const add = SDL_GPU_BLENDOP_ADD;
+  static const subtract = SDL_GPU_BLENDOP_SUBTRACT;
+  static const reverseSubtract = SDL_GPU_BLENDOP_REVERSE_SUBTRACT;
+  static const min = SDL_GPU_BLENDOP_MIN;
+  static const max = SDL_GPU_BLENDOP_MAX;
+}
+
+class SdlGpuBlendfactorEnum {
+  static const invalid = SDL_GPU_BLENDFACTOR_INVALID;
+  static const zero = SDL_GPU_BLENDFACTOR_ZERO;
+  static const one = SDL_GPU_BLENDFACTOR_ONE;
+  static const srcColor = SDL_GPU_BLENDFACTOR_SRC_COLOR;
+  static const oneMinusSrcColor = SDL_GPU_BLENDFACTOR_ONE_MINUS_SRC_COLOR;
+  static const dstColor = SDL_GPU_BLENDFACTOR_DST_COLOR;
+  static const oneMinusDstColor = SDL_GPU_BLENDFACTOR_ONE_MINUS_DST_COLOR;
+  static const srcAlpha = SDL_GPU_BLENDFACTOR_SRC_ALPHA;
+  static const oneMinusSrcAlpha = SDL_GPU_BLENDFACTOR_ONE_MINUS_SRC_ALPHA;
+  static const dstAlpha = SDL_GPU_BLENDFACTOR_DST_ALPHA;
+  static const oneMinusDstAlpha = SDL_GPU_BLENDFACTOR_ONE_MINUS_DST_ALPHA;
+  static const constantColor = SDL_GPU_BLENDFACTOR_CONSTANT_COLOR;
+  static const oneMinusConstantColor =
+      SDL_GPU_BLENDFACTOR_ONE_MINUS_CONSTANT_COLOR;
+  static const srcAlphaSaturate = SDL_GPU_BLENDFACTOR_SRC_ALPHA_SATURATE;
+}
+
+class SdlGpuColorcomponentEnum {
+  static const r = SDL_GPU_COLORCOMPONENT_R;
+  static const g = SDL_GPU_COLORCOMPONENT_G;
+  static const b = SDL_GPU_COLORCOMPONENT_B;
+  static const a = SDL_GPU_COLORCOMPONENT_A;
+}
+
+class SdlGpuFilterEnum {
+  static const nearest = SDL_GPU_FILTER_NEAREST;
+  static const linear = SDL_GPU_FILTER_LINEAR;
+}
+
+class SdlGpuSamplermipmapmodeEnum {
+  static const nearest = SDL_GPU_SAMPLERMIPMAPMODE_NEAREST;
+  static const linear = SDL_GPU_SAMPLERMIPMAPMODE_LINEAR;
+}
+
+class SdlGpuSampleraddressmodeEnum {
+  static const repeat = SDL_GPU_SAMPLERADDRESSMODE_REPEAT;
+  static const mirroredRepeat = SDL_GPU_SAMPLERADDRESSMODE_MIRRORED_REPEAT;
+  static const clampToEdge = SDL_GPU_SAMPLERADDRESSMODE_CLAMP_TO_EDGE;
+}
+
+class SdlGpuPresentmodeEnum {
+  static const vsync = SDL_GPU_PRESENTMODE_VSYNC;
+  static const immediate = SDL_GPU_PRESENTMODE_IMMEDIATE;
+  static const mailbox = SDL_GPU_PRESENTMODE_MAILBOX;
+}
+
+class SdlGpuSwapchaincompositionEnum {
+  static const sdr = SDL_GPU_SWAPCHAINCOMPOSITION_SDR;
+  static const sdrLinear = SDL_GPU_SWAPCHAINCOMPOSITION_SDR_LINEAR;
+  static const hdrExtendedLinear =
+      SDL_GPU_SWAPCHAINCOMPOSITION_HDR_EXTENDED_LINEAR;
+  static const hdr10St2048 = SDL_GPU_SWAPCHAINCOMPOSITION_HDR10_ST2048;
+}
+
+class SdlHapticEnum {
+  static const constant = SDL_HAPTIC_CONSTANT;
+  static const sine = SDL_HAPTIC_SINE;
+  static const square = SDL_HAPTIC_SQUARE;
+  static const triangle = SDL_HAPTIC_TRIANGLE;
+  static const sawtoothup = SDL_HAPTIC_SAWTOOTHUP;
+  static const sawtoothdown = SDL_HAPTIC_SAWTOOTHDOWN;
+  static const ramp = SDL_HAPTIC_RAMP;
+  static const spring = SDL_HAPTIC_SPRING;
+  static const damper = SDL_HAPTIC_DAMPER;
+  static const inertia = SDL_HAPTIC_INERTIA;
+  static const friction = SDL_HAPTIC_FRICTION;
+  static const leftright = SDL_HAPTIC_LEFTRIGHT;
+  static const reserved1 = SDL_HAPTIC_RESERVED1;
+  static const reserved2 = SDL_HAPTIC_RESERVED2;
+  static const reserved3 = SDL_HAPTIC_RESERVED3;
+  static const custom = SDL_HAPTIC_CUSTOM;
+  static const gain = SDL_HAPTIC_GAIN;
+  static const autocenter = SDL_HAPTIC_AUTOCENTER;
+  static const status = SDL_HAPTIC_STATUS;
+  static const pause = SDL_HAPTIC_PAUSE;
+  static const polar = SDL_HAPTIC_POLAR;
+  static const cartesian = SDL_HAPTIC_CARTESIAN;
+  static const spherical = SDL_HAPTIC_SPHERICAL;
+  static const steeringAxis = SDL_HAPTIC_STEERING_AXIS;
+  static const infinity = SDL_HAPTIC_INFINITY;
+}
+
+class SdlHidApiBusEnum {
+  static const unknown = SDL_HID_API_BUS_UNKNOWN;
+  static const usb = SDL_HID_API_BUS_USB;
+  static const bluetooth = SDL_HID_API_BUS_BLUETOOTH;
+  static const i2C = SDL_HID_API_BUS_I2C;
+  static const spi = SDL_HID_API_BUS_SPI;
+}
+
+class SdlHintEnum {
+  static const allowAltTabWhileGrabbed = SDL_HINT_ALLOW_ALT_TAB_WHILE_GRABBED;
+  static const androidAllowRecreateActivity =
+      SDL_HINT_ANDROID_ALLOW_RECREATE_ACTIVITY;
+  static const androidBlockOnPause = SDL_HINT_ANDROID_BLOCK_ON_PAUSE;
+  static const androidTrapBackButton = SDL_HINT_ANDROID_TRAP_BACK_BUTTON;
+  static const appId = SDL_HINT_APP_ID;
+  static const appName = SDL_HINT_APP_NAME;
+  static const appleTvControllerUiEvents =
+      SDL_HINT_APPLE_TV_CONTROLLER_UI_EVENTS;
+  static const appleTvRemoteAllowRotation =
+      SDL_HINT_APPLE_TV_REMOTE_ALLOW_ROTATION;
+  static const audioAlsaDefaultDevice = SDL_HINT_AUDIO_ALSA_DEFAULT_DEVICE;
+  static const audioCategory = SDL_HINT_AUDIO_CATEGORY;
+  static const audioChannels = SDL_HINT_AUDIO_CHANNELS;
+  static const audioDeviceAppIconName = SDL_HINT_AUDIO_DEVICE_APP_ICON_NAME;
+  static const audioDeviceSampleFrames = SDL_HINT_AUDIO_DEVICE_SAMPLE_FRAMES;
+  static const audioDeviceStreamName = SDL_HINT_AUDIO_DEVICE_STREAM_NAME;
+  static const audioDeviceStreamRole = SDL_HINT_AUDIO_DEVICE_STREAM_ROLE;
+  static const audioDiskInputFile = SDL_HINT_AUDIO_DISK_INPUT_FILE;
+  static const audioDiskOutputFile = SDL_HINT_AUDIO_DISK_OUTPUT_FILE;
+  static const audioDiskTimescale = SDL_HINT_AUDIO_DISK_TIMESCALE;
+  static const audioDriver = SDL_HINT_AUDIO_DRIVER;
+  static const audioDummyTimescale = SDL_HINT_AUDIO_DUMMY_TIMESCALE;
+  static const audioFormat = SDL_HINT_AUDIO_FORMAT;
+  static const audioFrequency = SDL_HINT_AUDIO_FREQUENCY;
+  static const audioIncludeMonitors = SDL_HINT_AUDIO_INCLUDE_MONITORS;
+  static const autoUpdateJoysticks = SDL_HINT_AUTO_UPDATE_JOYSTICKS;
+  static const autoUpdateSensors = SDL_HINT_AUTO_UPDATE_SENSORS;
+  static const bmpSaveLegacyFormat = SDL_HINT_BMP_SAVE_LEGACY_FORMAT;
+  static const cameraDriver = SDL_HINT_CAMERA_DRIVER;
+  static const cpuFeatureMask = SDL_HINT_CPU_FEATURE_MASK;
+  static const joystickDirectinput = SDL_HINT_JOYSTICK_DIRECTINPUT;
+  static const fileDialogDriver = SDL_HINT_FILE_DIALOG_DRIVER;
+  static const displayUsableBounds = SDL_HINT_DISPLAY_USABLE_BOUNDS;
+  static const emscriptenAsyncify = SDL_HINT_EMSCRIPTEN_ASYNCIFY;
+  static const emscriptenCanvasSelector = SDL_HINT_EMSCRIPTEN_CANVAS_SELECTOR;
+  static const emscriptenKeyboardElement = SDL_HINT_EMSCRIPTEN_KEYBOARD_ELEMENT;
+  static const enableScreenKeyboard = SDL_HINT_ENABLE_SCREEN_KEYBOARD;
+  static const evdevDevices = SDL_HINT_EVDEV_DEVICES;
+  static const eventLogging = SDL_HINT_EVENT_LOGGING;
+  static const forceRaisewindow = SDL_HINT_FORCE_RAISEWINDOW;
+  static const framebufferAcceleration = SDL_HINT_FRAMEBUFFER_ACCELERATION;
+  static const gamecontrollerconfig = SDL_HINT_GAMECONTROLLERCONFIG;
+  static const gamecontrollerconfigFile = SDL_HINT_GAMECONTROLLERCONFIG_FILE;
+  static const gamecontrollertype = SDL_HINT_GAMECONTROLLERTYPE;
+  static const gamecontrollerIgnoreDevices =
+      SDL_HINT_GAMECONTROLLER_IGNORE_DEVICES;
+  static const gamecontrollerIgnoreDevicesExcept =
+      SDL_HINT_GAMECONTROLLER_IGNORE_DEVICES_EXCEPT;
+  static const gamecontrollerSensorFusion =
+      SDL_HINT_GAMECONTROLLER_SENSOR_FUSION;
+  static const gdkTextinputDefaultText = SDL_HINT_GDK_TEXTINPUT_DEFAULT_TEXT;
+  static const gdkTextinputDescription = SDL_HINT_GDK_TEXTINPUT_DESCRIPTION;
+  static const gdkTextinputMaxLength = SDL_HINT_GDK_TEXTINPUT_MAX_LENGTH;
+  static const gdkTextinputScope = SDL_HINT_GDK_TEXTINPUT_SCOPE;
+  static const gdkTextinputTitle = SDL_HINT_GDK_TEXTINPUT_TITLE;
+  static const hidapiLibusb = SDL_HINT_HIDAPI_LIBUSB;
+  static const hidapiLibusbWhitelist = SDL_HINT_HIDAPI_LIBUSB_WHITELIST;
+  static const hidapiUdev = SDL_HINT_HIDAPI_UDEV;
+  static const gpuDriver = SDL_HINT_GPU_DRIVER;
+  static const hidapiEnumerateOnlyControllers =
+      SDL_HINT_HIDAPI_ENUMERATE_ONLY_CONTROLLERS;
+  static const hidapiIgnoreDevices = SDL_HINT_HIDAPI_IGNORE_DEVICES;
+  static const imeImplementedUi = SDL_HINT_IME_IMPLEMENTED_UI;
+  static const iosHideHomeIndicator = SDL_HINT_IOS_HIDE_HOME_INDICATOR;
+  static const joystickAllowBackgroundEvents =
+      SDL_HINT_JOYSTICK_ALLOW_BACKGROUND_EVENTS;
+  static const joystickArcadestickDevices =
+      SDL_HINT_JOYSTICK_ARCADESTICK_DEVICES;
+  static const joystickArcadestickDevicesExcluded =
+      SDL_HINT_JOYSTICK_ARCADESTICK_DEVICES_EXCLUDED;
+  static const joystickBlacklistDevices = SDL_HINT_JOYSTICK_BLACKLIST_DEVICES;
+  static const joystickBlacklistDevicesExcluded =
+      SDL_HINT_JOYSTICK_BLACKLIST_DEVICES_EXCLUDED;
+  static const joystickDevice = SDL_HINT_JOYSTICK_DEVICE;
+  static const joystickFlightstickDevices =
+      SDL_HINT_JOYSTICK_FLIGHTSTICK_DEVICES;
+  static const joystickFlightstickDevicesExcluded =
+      SDL_HINT_JOYSTICK_FLIGHTSTICK_DEVICES_EXCLUDED;
+  static const joystickGameinput = SDL_HINT_JOYSTICK_GAMEINPUT;
+  static const joystickGamecubeDevices = SDL_HINT_JOYSTICK_GAMECUBE_DEVICES;
+  static const joystickGamecubeDevicesExcluded =
+      SDL_HINT_JOYSTICK_GAMECUBE_DEVICES_EXCLUDED;
+  static const joystickHidapi = SDL_HINT_JOYSTICK_HIDAPI;
+  static const joystickHidapiCombineJoyCons =
+      SDL_HINT_JOYSTICK_HIDAPI_COMBINE_JOY_CONS;
+  static const joystickHidapiGamecube = SDL_HINT_JOYSTICK_HIDAPI_GAMECUBE;
+  static const joystickHidapiGamecubeRumbleBrake =
+      SDL_HINT_JOYSTICK_HIDAPI_GAMECUBE_RUMBLE_BRAKE;
+  static const joystickHidapiJoyCons = SDL_HINT_JOYSTICK_HIDAPI_JOY_CONS;
+  static const joystickHidapiJoyconHomeLed =
+      SDL_HINT_JOYSTICK_HIDAPI_JOYCON_HOME_LED;
+  static const joystickHidapiLuna = SDL_HINT_JOYSTICK_HIDAPI_LUNA;
+  static const joystickHidapiNintendoClassic =
+      SDL_HINT_JOYSTICK_HIDAPI_NINTENDO_CLASSIC;
+  static const joystickHidapiPs3 = SDL_HINT_JOYSTICK_HIDAPI_PS3;
+  static const joystickHidapiPs3SixaxisDriver =
+      SDL_HINT_JOYSTICK_HIDAPI_PS3_SIXAXIS_DRIVER;
+  static const joystickHidapiPs4 = SDL_HINT_JOYSTICK_HIDAPI_PS4;
+  static const joystickHidapiPs4ReportInterval =
+      SDL_HINT_JOYSTICK_HIDAPI_PS4_REPORT_INTERVAL;
+  static const joystickHidapiPs4Rumble = SDL_HINT_JOYSTICK_HIDAPI_PS4_RUMBLE;
+  static const joystickHidapiPs5 = SDL_HINT_JOYSTICK_HIDAPI_PS5;
+  static const joystickHidapiPs5PlayerLed =
+      SDL_HINT_JOYSTICK_HIDAPI_PS5_PLAYER_LED;
+  static const joystickHidapiPs5Rumble = SDL_HINT_JOYSTICK_HIDAPI_PS5_RUMBLE;
+  static const joystickHidapiShield = SDL_HINT_JOYSTICK_HIDAPI_SHIELD;
+  static const joystickHidapiStadia = SDL_HINT_JOYSTICK_HIDAPI_STADIA;
+  static const joystickHidapiSteam = SDL_HINT_JOYSTICK_HIDAPI_STEAM;
+  static const joystickHidapiSteamdeck = SDL_HINT_JOYSTICK_HIDAPI_STEAMDECK;
+  static const joystickHidapiSteamHori = SDL_HINT_JOYSTICK_HIDAPI_STEAM_HORI;
+  static const joystickHidapiSwitch = SDL_HINT_JOYSTICK_HIDAPI_SWITCH;
+  static const joystickHidapiSwitchHomeLed =
+      SDL_HINT_JOYSTICK_HIDAPI_SWITCH_HOME_LED;
+  static const joystickHidapiSwitchPlayerLed =
+      SDL_HINT_JOYSTICK_HIDAPI_SWITCH_PLAYER_LED;
+  static const joystickHidapiVerticalJoyCons =
+      SDL_HINT_JOYSTICK_HIDAPI_VERTICAL_JOY_CONS;
+  static const joystickHidapiWii = SDL_HINT_JOYSTICK_HIDAPI_WII;
+  static const joystickHidapiWiiPlayerLed =
+      SDL_HINT_JOYSTICK_HIDAPI_WII_PLAYER_LED;
+  static const joystickHidapiXbox = SDL_HINT_JOYSTICK_HIDAPI_XBOX;
+  static const joystickHidapiXbox360 = SDL_HINT_JOYSTICK_HIDAPI_XBOX_360;
+  static const joystickHidapiXbox360PlayerLed =
+      SDL_HINT_JOYSTICK_HIDAPI_XBOX_360_PLAYER_LED;
+  static const joystickHidapiXbox360Wireless =
+      SDL_HINT_JOYSTICK_HIDAPI_XBOX_360_WIRELESS;
+  static const joystickHidapiXboxOne = SDL_HINT_JOYSTICK_HIDAPI_XBOX_ONE;
+  static const joystickHidapiXboxOneHomeLed =
+      SDL_HINT_JOYSTICK_HIDAPI_XBOX_ONE_HOME_LED;
+  static const joystickIokit = SDL_HINT_JOYSTICK_IOKIT;
+  static const joystickLinuxClassic = SDL_HINT_JOYSTICK_LINUX_CLASSIC;
+  static const joystickLinuxDeadzones = SDL_HINT_JOYSTICK_LINUX_DEADZONES;
+  static const joystickLinuxDigitalHats = SDL_HINT_JOYSTICK_LINUX_DIGITAL_HATS;
+  static const joystickLinuxHatDeadzones =
+      SDL_HINT_JOYSTICK_LINUX_HAT_DEADZONES;
+  static const joystickMfi = SDL_HINT_JOYSTICK_MFI;
+  static const joystickRawinput = SDL_HINT_JOYSTICK_RAWINPUT;
+  static const joystickRawinputCorrelateXinput =
+      SDL_HINT_JOYSTICK_RAWINPUT_CORRELATE_XINPUT;
+  static const joystickRogChakram = SDL_HINT_JOYSTICK_ROG_CHAKRAM;
+  static const joystickThread = SDL_HINT_JOYSTICK_THREAD;
+  static const joystickThrottleDevices = SDL_HINT_JOYSTICK_THROTTLE_DEVICES;
+  static const joystickThrottleDevicesExcluded =
+      SDL_HINT_JOYSTICK_THROTTLE_DEVICES_EXCLUDED;
+  static const joystickWgi = SDL_HINT_JOYSTICK_WGI;
+  static const joystickWheelDevices = SDL_HINT_JOYSTICK_WHEEL_DEVICES;
+  static const joystickWheelDevicesExcluded =
+      SDL_HINT_JOYSTICK_WHEEL_DEVICES_EXCLUDED;
+  static const joystickZeroCenteredDevices =
+      SDL_HINT_JOYSTICK_ZERO_CENTERED_DEVICES;
+  static const keycodeOptions = SDL_HINT_KEYCODE_OPTIONS;
+  static const kmsdrmDeviceIndex = SDL_HINT_KMSDRM_DEVICE_INDEX;
+  static const kmsdrmRequireDrmMaster = SDL_HINT_KMSDRM_REQUIRE_DRM_MASTER;
+  static const logging = SDL_HINT_LOGGING;
+  static const macBackgroundApp = SDL_HINT_MAC_BACKGROUND_APP;
+  static const macCtrlClickEmulateRightClick =
+      SDL_HINT_MAC_CTRL_CLICK_EMULATE_RIGHT_CLICK;
+  static const macOpenglAsyncDispatch = SDL_HINT_MAC_OPENGL_ASYNC_DISPATCH;
+  static const mainCallbackRate = SDL_HINT_MAIN_CALLBACK_RATE;
+  static const mouseAutoCapture = SDL_HINT_MOUSE_AUTO_CAPTURE;
+  static const mouseDoubleClickRadius = SDL_HINT_MOUSE_DOUBLE_CLICK_RADIUS;
+  static const mouseDoubleClickTime = SDL_HINT_MOUSE_DOUBLE_CLICK_TIME;
+  static const mouseEmulateWarpWithRelative =
+      SDL_HINT_MOUSE_EMULATE_WARP_WITH_RELATIVE;
+  static const mouseFocusClickthrough = SDL_HINT_MOUSE_FOCUS_CLICKTHROUGH;
+  static const mouseNormalSpeedScale = SDL_HINT_MOUSE_NORMAL_SPEED_SCALE;
+  static const mouseRelativeModeCenter = SDL_HINT_MOUSE_RELATIVE_MODE_CENTER;
+  static const mouseRelativeModeWarp = SDL_HINT_MOUSE_RELATIVE_MODE_WARP;
+  static const mouseRelativeSpeedScale = SDL_HINT_MOUSE_RELATIVE_SPEED_SCALE;
+  static const mouseRelativeSystemScale = SDL_HINT_MOUSE_RELATIVE_SYSTEM_SCALE;
+  static const mouseRelativeWarpMotion = SDL_HINT_MOUSE_RELATIVE_WARP_MOTION;
+  static const mouseRelativeCursorVisible =
+      SDL_HINT_MOUSE_RELATIVE_CURSOR_VISIBLE;
+  static const mouseRelativeClipInterval =
+      SDL_HINT_MOUSE_RELATIVE_CLIP_INTERVAL;
+  static const mouseTouchEvents = SDL_HINT_MOUSE_TOUCH_EVENTS;
+  static const muteConsoleKeyboard = SDL_HINT_MUTE_CONSOLE_KEYBOARD;
+  static const noSignalHandlers = SDL_HINT_NO_SIGNAL_HANDLERS;
+  static const openglLibrary = SDL_HINT_OPENGL_LIBRARY;
+  static const openglEsDriver = SDL_HINT_OPENGL_ES_DRIVER;
+  static const orientations = SDL_HINT_ORIENTATIONS;
+  static const pollSentinel = SDL_HINT_POLL_SENTINEL;
+  static const preferredLocales = SDL_HINT_PREFERRED_LOCALES;
+  static const quitOnLastWindowClose = SDL_HINT_QUIT_ON_LAST_WINDOW_CLOSE;
+  static const renderDirect3DThreadsafe = SDL_HINT_RENDER_DIRECT3D_THREADSAFE;
+  static const renderDirect3D11Debug = SDL_HINT_RENDER_DIRECT3D11_DEBUG;
+  static const renderVulkanDebug = SDL_HINT_RENDER_VULKAN_DEBUG;
+  static const renderGpuDebug = SDL_HINT_RENDER_GPU_DEBUG;
+  static const renderGpuLowPower = SDL_HINT_RENDER_GPU_LOW_POWER;
+  static const renderDriver = SDL_HINT_RENDER_DRIVER;
+  static const renderLineMethod = SDL_HINT_RENDER_LINE_METHOD;
+  static const renderMetalPreferLowPowerDevice =
+      SDL_HINT_RENDER_METAL_PREFER_LOW_POWER_DEVICE;
+  static const renderVsync = SDL_HINT_RENDER_VSYNC;
+  static const returnKeyHidesIme = SDL_HINT_RETURN_KEY_HIDES_IME;
+  static const rogGamepadMice = SDL_HINT_ROG_GAMEPAD_MICE;
+  static const rogGamepadMiceExcluded = SDL_HINT_ROG_GAMEPAD_MICE_EXCLUDED;
+  static const rpiVideoLayer = SDL_HINT_RPI_VIDEO_LAYER;
+  static const screensaverInhibitActivityName =
+      SDL_HINT_SCREENSAVER_INHIBIT_ACTIVITY_NAME;
+  static const shutdownDbusOnQuit = SDL_HINT_SHUTDOWN_DBUS_ON_QUIT;
+  static const storageTitleDriver = SDL_HINT_STORAGE_TITLE_DRIVER;
+  static const storageUserDriver = SDL_HINT_STORAGE_USER_DRIVER;
+  static const threadForceRealtimeTimeCritical =
+      SDL_HINT_THREAD_FORCE_REALTIME_TIME_CRITICAL;
+  static const threadPriorityPolicy = SDL_HINT_THREAD_PRIORITY_POLICY;
+  static const timerResolution = SDL_HINT_TIMER_RESOLUTION;
+  static const touchMouseEvents = SDL_HINT_TOUCH_MOUSE_EVENTS;
+  static const trackpadIsTouchOnly = SDL_HINT_TRACKPAD_IS_TOUCH_ONLY;
+  static const tvRemoteAsJoystick = SDL_HINT_TV_REMOTE_AS_JOYSTICK;
+  static const videoAllowScreensaver = SDL_HINT_VIDEO_ALLOW_SCREENSAVER;
+  static const videoDoubleBuffer = SDL_HINT_VIDEO_DOUBLE_BUFFER;
+  static const videoDriver = SDL_HINT_VIDEO_DRIVER;
+  static const videoDummySaveFrames = SDL_HINT_VIDEO_DUMMY_SAVE_FRAMES;
+  static const videoEglAllowGetdisplayFallback =
+      SDL_HINT_VIDEO_EGL_ALLOW_GETDISPLAY_FALLBACK;
+  static const videoForceEgl = SDL_HINT_VIDEO_FORCE_EGL;
+  static const videoMacFullscreenSpaces = SDL_HINT_VIDEO_MAC_FULLSCREEN_SPACES;
+  static const videoMinimizeOnFocusLoss = SDL_HINT_VIDEO_MINIMIZE_ON_FOCUS_LOSS;
+  static const videoOffscreenSaveFrames = SDL_HINT_VIDEO_OFFSCREEN_SAVE_FRAMES;
+  static const videoSyncWindowOperations =
+      SDL_HINT_VIDEO_SYNC_WINDOW_OPERATIONS;
+  static const videoWaylandAllowLibdecor =
+      SDL_HINT_VIDEO_WAYLAND_ALLOW_LIBDECOR;
+  static const videoWaylandModeEmulation =
+      SDL_HINT_VIDEO_WAYLAND_MODE_EMULATION;
+  static const videoWaylandModeScaling = SDL_HINT_VIDEO_WAYLAND_MODE_SCALING;
+  static const videoWaylandPreferLibdecor =
+      SDL_HINT_VIDEO_WAYLAND_PREFER_LIBDECOR;
+  static const videoWaylandScaleToDisplay =
+      SDL_HINT_VIDEO_WAYLAND_SCALE_TO_DISPLAY;
+  static const videoWinD3Dcompiler = SDL_HINT_VIDEO_WIN_D3DCOMPILER;
+  static const videoX11NetWmBypassCompositor =
+      SDL_HINT_VIDEO_X11_NET_WM_BYPASS_COMPOSITOR;
+  static const videoX11NetWmPing = SDL_HINT_VIDEO_X11_NET_WM_PING;
+  static const videoX11Nodirectcolor = SDL_HINT_VIDEO_X11_NODIRECTCOLOR;
+  static const videoX11ScalingFactor = SDL_HINT_VIDEO_X11_SCALING_FACTOR;
+  static const videoX11Visualid = SDL_HINT_VIDEO_X11_VISUALID;
+  static const videoX11WindowVisualid = SDL_HINT_VIDEO_X11_WINDOW_VISUALID;
+  static const videoX11Xrandr = SDL_HINT_VIDEO_X11_XRANDR;
+  static const vitaEnableBackTouch = SDL_HINT_VITA_ENABLE_BACK_TOUCH;
+  static const vitaEnableFrontTouch = SDL_HINT_VITA_ENABLE_FRONT_TOUCH;
+  static const vitaModulePath = SDL_HINT_VITA_MODULE_PATH;
+  static const vitaPvrInit = SDL_HINT_VITA_PVR_INIT;
+  static const vitaResolution = SDL_HINT_VITA_RESOLUTION;
+  static const vitaPvrOpengl = SDL_HINT_VITA_PVR_OPENGL;
+  static const vitaTouchMouseDevice = SDL_HINT_VITA_TOUCH_MOUSE_DEVICE;
+  static const vulkanDisplay = SDL_HINT_VULKAN_DISPLAY;
+  static const vulkanLibrary = SDL_HINT_VULKAN_LIBRARY;
+  static const waveFactChunk = SDL_HINT_WAVE_FACT_CHUNK;
+  static const waveChunkLimit = SDL_HINT_WAVE_CHUNK_LIMIT;
+  static const waveRiffChunkSize = SDL_HINT_WAVE_RIFF_CHUNK_SIZE;
+  static const waveTruncation = SDL_HINT_WAVE_TRUNCATION;
+  static const windowActivateWhenRaised = SDL_HINT_WINDOW_ACTIVATE_WHEN_RAISED;
+  static const windowActivateWhenShown = SDL_HINT_WINDOW_ACTIVATE_WHEN_SHOWN;
+  static const windowAllowTopmost = SDL_HINT_WINDOW_ALLOW_TOPMOST;
+  static const windowFrameUsableWhileCursorHidden =
+      SDL_HINT_WINDOW_FRAME_USABLE_WHILE_CURSOR_HIDDEN;
+  static const windowsCloseOnAltF4 = SDL_HINT_WINDOWS_CLOSE_ON_ALT_F4;
+  static const windowsEnableMenuMnemonics =
+      SDL_HINT_WINDOWS_ENABLE_MENU_MNEMONICS;
+  static const windowsEnableMessageloop = SDL_HINT_WINDOWS_ENABLE_MESSAGELOOP;
+  static const windowsGameinput = SDL_HINT_WINDOWS_GAMEINPUT;
+  static const windowsRawKeyboard = SDL_HINT_WINDOWS_RAW_KEYBOARD;
+  static const windowsForceSemaphoreKernel =
+      SDL_HINT_WINDOWS_FORCE_SEMAPHORE_KERNEL;
+  static const windowsIntresourceIcon = SDL_HINT_WINDOWS_INTRESOURCE_ICON;
+  static const windowsIntresourceIconSmall =
+      SDL_HINT_WINDOWS_INTRESOURCE_ICON_SMALL;
+  static const windowsUseD3D9Ex = SDL_HINT_WINDOWS_USE_D3D9EX;
+  static const windowsEraseBackgroundMode =
+      SDL_HINT_WINDOWS_ERASE_BACKGROUND_MODE;
+  static const x11ForceOverrideRedirect = SDL_HINT_X11_FORCE_OVERRIDE_REDIRECT;
+  static const x11WindowType = SDL_HINT_X11_WINDOW_TYPE;
+  static const x11XcbLibrary = SDL_HINT_X11_XCB_LIBRARY;
+  static const xinputEnabled = SDL_HINT_XINPUT_ENABLED;
+  static const onAssert = SDL_HINT_ASSERT;
+  static const onDefault = SDL_HINT_DEFAULT;
+  static const normal = SDL_HINT_NORMAL;
+  static const override = SDL_HINT_OVERRIDE;
+}
+
+class SdlInitEnum {
+  static const audio = SDL_INIT_AUDIO;
+  static const video = SDL_INIT_VIDEO;
+  static const joystick = SDL_INIT_JOYSTICK;
+  static const haptic = SDL_INIT_HAPTIC;
+  static const gamepad = SDL_INIT_GAMEPAD;
+  static const events = SDL_INIT_EVENTS;
+  static const sensor = SDL_INIT_SENSOR;
+  static const camera = SDL_INIT_CAMERA;
+}
+
+class SdlAppEnum {
+  static const onContinue = SDL_APP_CONTINUE;
+  static const success = SDL_APP_SUCCESS;
+  static const failure = SDL_APP_FAILURE;
+}
+
+class SdlIoStatusEnum {
+  static const ready = SDL_IO_STATUS_READY;
+  static const error = SDL_IO_STATUS_ERROR;
+  static const eof = SDL_IO_STATUS_EOF;
+  static const notReady = SDL_IO_STATUS_NOT_READY;
+  static const readonly = SDL_IO_STATUS_READONLY;
+  static const writeonly = SDL_IO_STATUS_WRITEONLY;
+}
+
+class SdlIoSeekEnum {
+  static const set = SDL_IO_SEEK_SET;
+  static const cur = SDL_IO_SEEK_CUR;
+  static const end = SDL_IO_SEEK_END;
+}
+
+class SdlJoystickTypeEnum {
+  static const unknown = SDL_JOYSTICK_TYPE_UNKNOWN;
+  static const gamepad = SDL_JOYSTICK_TYPE_GAMEPAD;
+  static const wheel = SDL_JOYSTICK_TYPE_WHEEL;
+  static const arcadeStick = SDL_JOYSTICK_TYPE_ARCADE_STICK;
+  static const flightStick = SDL_JOYSTICK_TYPE_FLIGHT_STICK;
+  static const dancePad = SDL_JOYSTICK_TYPE_DANCE_PAD;
+  static const guitar = SDL_JOYSTICK_TYPE_GUITAR;
+  static const drumKit = SDL_JOYSTICK_TYPE_DRUM_KIT;
+  static const arcadePad = SDL_JOYSTICK_TYPE_ARCADE_PAD;
+  static const throttle = SDL_JOYSTICK_TYPE_THROTTLE;
+  static const count = SDL_JOYSTICK_TYPE_COUNT;
+}
+
+class SdlJoystickConnectionEnum {
+  static const invalid = SDL_JOYSTICK_CONNECTION_INVALID;
+  static const unknown = SDL_JOYSTICK_CONNECTION_UNKNOWN;
+  static const wired = SDL_JOYSTICK_CONNECTION_WIRED;
+  static const wireless = SDL_JOYSTICK_CONNECTION_WIRELESS;
+}
+
+class SdlJoystickAxisEnum {
+  static const max = SDL_JOYSTICK_AXIS_MAX;
+  static const min = SDL_JOYSTICK_AXIS_MIN;
+}
+
+class SdlHatEnum {
+  static const centered = SDL_HAT_CENTERED;
+  static const up = SDL_HAT_UP;
+  static const right = SDL_HAT_RIGHT;
+  static const down = SDL_HAT_DOWN;
+  static const left = SDL_HAT_LEFT;
+  static const rightup = SDL_HAT_RIGHTUP;
+  static const rightdown = SDL_HAT_RIGHTDOWN;
+  static const leftup = SDL_HAT_LEFTUP;
+  static const leftdown = SDL_HAT_LEFTDOWN;
+}
+
+class SdlTextinputTypeEnum {
+  static const text = SDL_TEXTINPUT_TYPE_TEXT;
+  static const textName = SDL_TEXTINPUT_TYPE_TEXT_NAME;
+  static const textEmail = SDL_TEXTINPUT_TYPE_TEXT_EMAIL;
+  static const textUsername = SDL_TEXTINPUT_TYPE_TEXT_USERNAME;
+  static const textPasswordHidden = SDL_TEXTINPUT_TYPE_TEXT_PASSWORD_HIDDEN;
+  static const textPasswordVisible = SDL_TEXTINPUT_TYPE_TEXT_PASSWORD_VISIBLE;
+  static const number = SDL_TEXTINPUT_TYPE_NUMBER;
+  static const numberPasswordHidden = SDL_TEXTINPUT_TYPE_NUMBER_PASSWORD_HIDDEN;
+  static const numberPasswordVisible =
+      SDL_TEXTINPUT_TYPE_NUMBER_PASSWORD_VISIBLE;
+}
+
+class SdlCapitalizeEnum {
+  static const none = SDL_CAPITALIZE_NONE;
+  static const sentences = SDL_CAPITALIZE_SENTENCES;
+  static const words = SDL_CAPITALIZE_WORDS;
+  static const letters = SDL_CAPITALIZE_LETTERS;
+}
+
+class SdlkEnum {
+  static const unknown = SDLK_UNKNOWN;
+  static const onReturn = SDLK_RETURN;
+  static const escape = SDLK_ESCAPE;
+  static const backspace = SDLK_BACKSPACE;
+  static const tab = SDLK_TAB;
+  static const space = SDLK_SPACE;
+  static const exclaim = SDLK_EXCLAIM;
+  static const dblapostrophe = SDLK_DBLAPOSTROPHE;
+  static const hash = SDLK_HASH;
+  static const dollar = SDLK_DOLLAR;
+  static const percent = SDLK_PERCENT;
+  static const ampersand = SDLK_AMPERSAND;
+  static const apostrophe = SDLK_APOSTROPHE;
+  static const leftparen = SDLK_LEFTPAREN;
+  static const rightparen = SDLK_RIGHTPAREN;
+  static const asterisk = SDLK_ASTERISK;
+  static const plus = SDLK_PLUS;
+  static const comma = SDLK_COMMA;
+  static const minus = SDLK_MINUS;
+  static const period = SDLK_PERIOD;
+  static const slash = SDLK_SLASH;
+  static const on0 = SDLK_0;
+  static const on1 = SDLK_1;
+  static const on2 = SDLK_2;
+  static const on3 = SDLK_3;
+  static const on4 = SDLK_4;
+  static const on5 = SDLK_5;
+  static const on6 = SDLK_6;
+  static const on7 = SDLK_7;
+  static const on8 = SDLK_8;
+  static const on9 = SDLK_9;
+  static const colon = SDLK_COLON;
+  static const semicolon = SDLK_SEMICOLON;
+  static const less = SDLK_LESS;
+  static const equals = SDLK_EQUALS;
+  static const greater = SDLK_GREATER;
+  static const question = SDLK_QUESTION;
+  static const at = SDLK_AT;
+  static const leftbracket = SDLK_LEFTBRACKET;
+  static const backslash = SDLK_BACKSLASH;
+  static const rightbracket = SDLK_RIGHTBRACKET;
+  static const caret = SDLK_CARET;
+  static const underscore = SDLK_UNDERSCORE;
+  static const grave = SDLK_GRAVE;
+  static const a = SDLK_A;
+  static const b = SDLK_B;
+  static const c = SDLK_C;
+  static const d = SDLK_D;
+  static const e = SDLK_E;
+  static const f = SDLK_F;
+  static const g = SDLK_G;
+  static const h = SDLK_H;
+  static const i = SDLK_I;
+  static const j = SDLK_J;
+  static const k = SDLK_K;
+  static const l = SDLK_L;
+  static const m = SDLK_M;
+  static const n = SDLK_N;
+  static const o = SDLK_O;
+  static const p = SDLK_P;
+  static const q = SDLK_Q;
+  static const r = SDLK_R;
+  static const s = SDLK_S;
+  static const t = SDLK_T;
+  static const u = SDLK_U;
+  static const v = SDLK_V;
+  static const w = SDLK_W;
+  static const x = SDLK_X;
+  static const y = SDLK_Y;
+  static const z = SDLK_Z;
+  static const leftbrace = SDLK_LEFTBRACE;
+  static const pipe = SDLK_PIPE;
+  static const rightbrace = SDLK_RIGHTBRACE;
+  static const tilde = SDLK_TILDE;
+  static const delete = SDLK_DELETE;
+  static const plusminus = SDLK_PLUSMINUS;
+  static const capslock = SDLK_CAPSLOCK;
+  static const f1 = SDLK_F1;
+  static const f2 = SDLK_F2;
+  static const f3 = SDLK_F3;
+  static const f4 = SDLK_F4;
+  static const f5 = SDLK_F5;
+  static const f6 = SDLK_F6;
+  static const f7 = SDLK_F7;
+  static const f8 = SDLK_F8;
+  static const f9 = SDLK_F9;
+  static const f10 = SDLK_F10;
+  static const f11 = SDLK_F11;
+  static const f12 = SDLK_F12;
+  static const printscreen = SDLK_PRINTSCREEN;
+  static const scrolllock = SDLK_SCROLLLOCK;
+  static const pause = SDLK_PAUSE;
+  static const insert = SDLK_INSERT;
+  static const home = SDLK_HOME;
+  static const pageup = SDLK_PAGEUP;
+  static const end = SDLK_END;
+  static const pagedown = SDLK_PAGEDOWN;
+  static const right = SDLK_RIGHT;
+  static const left = SDLK_LEFT;
+  static const down = SDLK_DOWN;
+  static const up = SDLK_UP;
+  static const numlockclear = SDLK_NUMLOCKCLEAR;
+  static const kpDivide = SDLK_KP_DIVIDE;
+  static const kpMultiply = SDLK_KP_MULTIPLY;
+  static const kpMinus = SDLK_KP_MINUS;
+  static const kpPlus = SDLK_KP_PLUS;
+  static const kpEnter = SDLK_KP_ENTER;
+  static const kp1 = SDLK_KP_1;
+  static const kp2 = SDLK_KP_2;
+  static const kp3 = SDLK_KP_3;
+  static const kp4 = SDLK_KP_4;
+  static const kp5 = SDLK_KP_5;
+  static const kp6 = SDLK_KP_6;
+  static const kp7 = SDLK_KP_7;
+  static const kp8 = SDLK_KP_8;
+  static const kp9 = SDLK_KP_9;
+  static const kp0 = SDLK_KP_0;
+  static const kpPeriod = SDLK_KP_PERIOD;
+  static const application = SDLK_APPLICATION;
+  static const power = SDLK_POWER;
+  static const kpEquals = SDLK_KP_EQUALS;
+  static const f13 = SDLK_F13;
+  static const f14 = SDLK_F14;
+  static const f15 = SDLK_F15;
+  static const f16 = SDLK_F16;
+  static const f17 = SDLK_F17;
+  static const f18 = SDLK_F18;
+  static const f19 = SDLK_F19;
+  static const f20 = SDLK_F20;
+  static const f21 = SDLK_F21;
+  static const f22 = SDLK_F22;
+  static const f23 = SDLK_F23;
+  static const f24 = SDLK_F24;
+  static const execute = SDLK_EXECUTE;
+  static const help = SDLK_HELP;
+  static const menu = SDLK_MENU;
+  static const select = SDLK_SELECT;
+  static const stop = SDLK_STOP;
+  static const again = SDLK_AGAIN;
+  static const undo = SDLK_UNDO;
+  static const cut = SDLK_CUT;
+  static const copy = SDLK_COPY;
+  static const paste = SDLK_PASTE;
+  static const find = SDLK_FIND;
+  static const mute = SDLK_MUTE;
+  static const volumeup = SDLK_VOLUMEUP;
+  static const volumedown = SDLK_VOLUMEDOWN;
+  static const kpComma = SDLK_KP_COMMA;
+  static const kpEqualsas400 = SDLK_KP_EQUALSAS400;
+  static const alterase = SDLK_ALTERASE;
+  static const sysreq = SDLK_SYSREQ;
+  static const cancel = SDLK_CANCEL;
+  static const clear = SDLK_CLEAR;
+  static const prior = SDLK_PRIOR;
+  static const return2 = SDLK_RETURN2;
+  static const separator = SDLK_SEPARATOR;
+  static const out = SDLK_OUT;
+  static const oper = SDLK_OPER;
+  static const clearagain = SDLK_CLEARAGAIN;
+  static const crsel = SDLK_CRSEL;
+  static const exsel = SDLK_EXSEL;
+  static const kp00 = SDLK_KP_00;
+  static const kp000 = SDLK_KP_000;
+  static const thousandsseparator = SDLK_THOUSANDSSEPARATOR;
+  static const decimalseparator = SDLK_DECIMALSEPARATOR;
+  static const currencyunit = SDLK_CURRENCYUNIT;
+  static const currencysubunit = SDLK_CURRENCYSUBUNIT;
+  static const kpLeftparen = SDLK_KP_LEFTPAREN;
+  static const kpRightparen = SDLK_KP_RIGHTPAREN;
+  static const kpLeftbrace = SDLK_KP_LEFTBRACE;
+  static const kpRightbrace = SDLK_KP_RIGHTBRACE;
+  static const kpTab = SDLK_KP_TAB;
+  static const kpBackspace = SDLK_KP_BACKSPACE;
+  static const kpA = SDLK_KP_A;
+  static const kpB = SDLK_KP_B;
+  static const kpC = SDLK_KP_C;
+  static const kpD = SDLK_KP_D;
+  static const kpE = SDLK_KP_E;
+  static const kpF = SDLK_KP_F;
+  static const kpXor = SDLK_KP_XOR;
+  static const kpPower = SDLK_KP_POWER;
+  static const kpPercent = SDLK_KP_PERCENT;
+  static const kpLess = SDLK_KP_LESS;
+  static const kpGreater = SDLK_KP_GREATER;
+  static const kpAmpersand = SDLK_KP_AMPERSAND;
+  static const kpDblampersand = SDLK_KP_DBLAMPERSAND;
+  static const kpVerticalbar = SDLK_KP_VERTICALBAR;
+  static const kpDblverticalbar = SDLK_KP_DBLVERTICALBAR;
+  static const kpColon = SDLK_KP_COLON;
+  static const kpHash = SDLK_KP_HASH;
+  static const kpSpace = SDLK_KP_SPACE;
+  static const kpAt = SDLK_KP_AT;
+  static const kpExclam = SDLK_KP_EXCLAM;
+  static const kpMemstore = SDLK_KP_MEMSTORE;
+  static const kpMemrecall = SDLK_KP_MEMRECALL;
+  static const kpMemclear = SDLK_KP_MEMCLEAR;
+  static const kpMemadd = SDLK_KP_MEMADD;
+  static const kpMemsubtract = SDLK_KP_MEMSUBTRACT;
+  static const kpMemmultiply = SDLK_KP_MEMMULTIPLY;
+  static const kpMemdivide = SDLK_KP_MEMDIVIDE;
+  static const kpPlusminus = SDLK_KP_PLUSMINUS;
+  static const kpClear = SDLK_KP_CLEAR;
+  static const kpClearentry = SDLK_KP_CLEARENTRY;
+  static const kpBinary = SDLK_KP_BINARY;
+  static const kpOctal = SDLK_KP_OCTAL;
+  static const kpDecimal = SDLK_KP_DECIMAL;
+  static const kpHexadecimal = SDLK_KP_HEXADECIMAL;
+  static const lctrl = SDLK_LCTRL;
+  static const lshift = SDLK_LSHIFT;
+  static const lalt = SDLK_LALT;
+  static const lgui = SDLK_LGUI;
+  static const rctrl = SDLK_RCTRL;
+  static const rshift = SDLK_RSHIFT;
+  static const ralt = SDLK_RALT;
+  static const rgui = SDLK_RGUI;
+  static const mode = SDLK_MODE;
+  static const sleep = SDLK_SLEEP;
+  static const wake = SDLK_WAKE;
+  static const channelIncrement = SDLK_CHANNEL_INCREMENT;
+  static const channelDecrement = SDLK_CHANNEL_DECREMENT;
+  static const mediaPlay = SDLK_MEDIA_PLAY;
+  static const mediaPause = SDLK_MEDIA_PAUSE;
+  static const mediaRecord = SDLK_MEDIA_RECORD;
+  static const mediaFastForward = SDLK_MEDIA_FAST_FORWARD;
+  static const mediaRewind = SDLK_MEDIA_REWIND;
+  static const mediaNextTrack = SDLK_MEDIA_NEXT_TRACK;
+  static const mediaPreviousTrack = SDLK_MEDIA_PREVIOUS_TRACK;
+  static const mediaStop = SDLK_MEDIA_STOP;
+  static const mediaEject = SDLK_MEDIA_EJECT;
+  static const mediaPlayPause = SDLK_MEDIA_PLAY_PAUSE;
+  static const mediaSelect = SDLK_MEDIA_SELECT;
+  static const acNew = SDLK_AC_NEW;
+  static const acOpen = SDLK_AC_OPEN;
+  static const acClose = SDLK_AC_CLOSE;
+  static const acExit = SDLK_AC_EXIT;
+  static const acSave = SDLK_AC_SAVE;
+  static const acPrint = SDLK_AC_PRINT;
+  static const acProperties = SDLK_AC_PROPERTIES;
+  static const acSearch = SDLK_AC_SEARCH;
+  static const acHome = SDLK_AC_HOME;
+  static const acBack = SDLK_AC_BACK;
+  static const acForward = SDLK_AC_FORWARD;
+  static const acStop = SDLK_AC_STOP;
+  static const acRefresh = SDLK_AC_REFRESH;
+  static const acBookmarks = SDLK_AC_BOOKMARKS;
+  static const softleft = SDLK_SOFTLEFT;
+  static const softright = SDLK_SOFTRIGHT;
+  static const call = SDLK_CALL;
+  static const endcall = SDLK_ENDCALL;
+}
+
+class SdlKmodEnum {
+  static const none = SDL_KMOD_NONE;
+  static const lshift = SDL_KMOD_LSHIFT;
+  static const rshift = SDL_KMOD_RSHIFT;
+  static const lctrl = SDL_KMOD_LCTRL;
+  static const rctrl = SDL_KMOD_RCTRL;
+  static const lalt = SDL_KMOD_LALT;
+  static const ralt = SDL_KMOD_RALT;
+  static const lgui = SDL_KMOD_LGUI;
+  static const rgui = SDL_KMOD_RGUI;
+  static const num = SDL_KMOD_NUM;
+  static const caps = SDL_KMOD_CAPS;
+  static const mode = SDL_KMOD_MODE;
+  static const scroll = SDL_KMOD_SCROLL;
+  static const ctrl = SDL_KMOD_CTRL;
+  static const shift = SDL_KMOD_SHIFT;
+  static const alt = SDL_KMOD_ALT;
+  static const gui = SDL_KMOD_GUI;
+}
+
+class SdlLogCategoryEnum {
+  static const application = SDL_LOG_CATEGORY_APPLICATION;
+  static const error = SDL_LOG_CATEGORY_ERROR;
+  static const onAssert = SDL_LOG_CATEGORY_ASSERT;
+  static const system = SDL_LOG_CATEGORY_SYSTEM;
+  static const audio = SDL_LOG_CATEGORY_AUDIO;
+  static const video = SDL_LOG_CATEGORY_VIDEO;
+  static const render = SDL_LOG_CATEGORY_RENDER;
+  static const input = SDL_LOG_CATEGORY_INPUT;
+  static const test = SDL_LOG_CATEGORY_TEST;
+  static const gpu = SDL_LOG_CATEGORY_GPU;
+  static const reserved2 = SDL_LOG_CATEGORY_RESERVED2;
+  static const reserved3 = SDL_LOG_CATEGORY_RESERVED3;
+  static const reserved4 = SDL_LOG_CATEGORY_RESERVED4;
+  static const reserved5 = SDL_LOG_CATEGORY_RESERVED5;
+  static const reserved6 = SDL_LOG_CATEGORY_RESERVED6;
+  static const reserved7 = SDL_LOG_CATEGORY_RESERVED7;
+  static const reserved8 = SDL_LOG_CATEGORY_RESERVED8;
+  static const reserved9 = SDL_LOG_CATEGORY_RESERVED9;
+  static const reserved10 = SDL_LOG_CATEGORY_RESERVED10;
+  static const custom = SDL_LOG_CATEGORY_CUSTOM;
+}
+
+class SdlLogPriorityEnum {
+  static const invalid = SDL_LOG_PRIORITY_INVALID;
+  static const trace = SDL_LOG_PRIORITY_TRACE;
+  static const verbose = SDL_LOG_PRIORITY_VERBOSE;
+  static const debug = SDL_LOG_PRIORITY_DEBUG;
+  static const info = SDL_LOG_PRIORITY_INFO;
+  static const warn = SDL_LOG_PRIORITY_WARN;
+  static const error = SDL_LOG_PRIORITY_ERROR;
+  static const critical = SDL_LOG_PRIORITY_CRITICAL;
+  static const count = SDL_LOG_PRIORITY_COUNT;
+}
+
+class SdlMessageboxEnum {
+  static const error = SDL_MESSAGEBOX_ERROR;
+  static const warning = SDL_MESSAGEBOX_WARNING;
+  static const information = SDL_MESSAGEBOX_INFORMATION;
+  static const buttonsLeftToRight = SDL_MESSAGEBOX_BUTTONS_LEFT_TO_RIGHT;
+  static const buttonsRightToLeft = SDL_MESSAGEBOX_BUTTONS_RIGHT_TO_LEFT;
+}
+
+class SdlMessageboxButtonEnum {
+  static const returnkeyDefault = SDL_MESSAGEBOX_BUTTON_RETURNKEY_DEFAULT;
+  static const escapekeyDefault = SDL_MESSAGEBOX_BUTTON_ESCAPEKEY_DEFAULT;
+}
+
+class SdlMessageboxColorEnum {
+  static const background = SDL_MESSAGEBOX_COLOR_BACKGROUND;
+  static const text = SDL_MESSAGEBOX_COLOR_TEXT;
+  static const buttonBorder = SDL_MESSAGEBOX_COLOR_BUTTON_BORDER;
+  static const buttonBackground = SDL_MESSAGEBOX_COLOR_BUTTON_BACKGROUND;
+  static const buttonSelected = SDL_MESSAGEBOX_COLOR_BUTTON_SELECTED;
+  static const count = SDL_MESSAGEBOX_COLOR_COUNT;
+}
+
+class SdlSystemCursorEnum {
+  static const onDefault = SDL_SYSTEM_CURSOR_DEFAULT;
+  static const text = SDL_SYSTEM_CURSOR_TEXT;
+  static const wait = SDL_SYSTEM_CURSOR_WAIT;
+  static const crosshair = SDL_SYSTEM_CURSOR_CROSSHAIR;
+  static const progress = SDL_SYSTEM_CURSOR_PROGRESS;
+  static const nwseResize = SDL_SYSTEM_CURSOR_NWSE_RESIZE;
+  static const neswResize = SDL_SYSTEM_CURSOR_NESW_RESIZE;
+  static const ewResize = SDL_SYSTEM_CURSOR_EW_RESIZE;
+  static const nsResize = SDL_SYSTEM_CURSOR_NS_RESIZE;
+  static const move = SDL_SYSTEM_CURSOR_MOVE;
+  static const notAllowed = SDL_SYSTEM_CURSOR_NOT_ALLOWED;
+  static const pointer = SDL_SYSTEM_CURSOR_POINTER;
+  static const nwResize = SDL_SYSTEM_CURSOR_NW_RESIZE;
+  static const nResize = SDL_SYSTEM_CURSOR_N_RESIZE;
+  static const neResize = SDL_SYSTEM_CURSOR_NE_RESIZE;
+  static const eResize = SDL_SYSTEM_CURSOR_E_RESIZE;
+  static const seResize = SDL_SYSTEM_CURSOR_SE_RESIZE;
+  static const sResize = SDL_SYSTEM_CURSOR_S_RESIZE;
+  static const swResize = SDL_SYSTEM_CURSOR_SW_RESIZE;
+  static const wResize = SDL_SYSTEM_CURSOR_W_RESIZE;
+  static const count = SDL_SYSTEM_CURSOR_COUNT;
+}
+
+class SdlMousewheelEnum {
+  static const normal = SDL_MOUSEWHEEL_NORMAL;
+  static const flipped = SDL_MOUSEWHEEL_FLIPPED;
+}
+
+class SdlButtonEnum {
+  static const left = SDL_BUTTON_LEFT;
+  static const middle = SDL_BUTTON_MIDDLE;
+  static const right = SDL_BUTTON_RIGHT;
+  static const x1 = SDL_BUTTON_X1;
+  static const x2 = SDL_BUTTON_X2;
+}
+
+class SdlInitStatusEnum {
+  static const uninitialized = SDL_INIT_STATUS_UNINITIALIZED;
+  static const initializing = SDL_INIT_STATUS_INITIALIZING;
+  static const initialized = SDL_INIT_STATUS_INITIALIZED;
+  static const uninitializing = SDL_INIT_STATUS_UNINITIALIZING;
+}
+
+class SdlPenInputEnum {
+  static const down = SDL_PEN_INPUT_DOWN;
+  static const button1 = SDL_PEN_INPUT_BUTTON_1;
+  static const button2 = SDL_PEN_INPUT_BUTTON_2;
+  static const button3 = SDL_PEN_INPUT_BUTTON_3;
+  static const button4 = SDL_PEN_INPUT_BUTTON_4;
+  static const button5 = SDL_PEN_INPUT_BUTTON_5;
+  static const eraserTip = SDL_PEN_INPUT_ERASER_TIP;
+}
+
+class SdlPenAxisEnum {
+  static const pressure = SDL_PEN_AXIS_PRESSURE;
+  static const xtilt = SDL_PEN_AXIS_XTILT;
+  static const ytilt = SDL_PEN_AXIS_YTILT;
+  static const distance = SDL_PEN_AXIS_DISTANCE;
+  static const rotation = SDL_PEN_AXIS_ROTATION;
+  static const slider = SDL_PEN_AXIS_SLIDER;
+  static const tangentialPressure = SDL_PEN_AXIS_TANGENTIAL_PRESSURE;
+  static const count = SDL_PEN_AXIS_COUNT;
+}
+
+class SdlAlphaEnum {
+  static const opaque = SDL_ALPHA_OPAQUE;
+  static const opaqueFloat = SDL_ALPHA_OPAQUE_FLOAT;
+  static const transparent = SDL_ALPHA_TRANSPARENT;
+  static const transparentFloat = SDL_ALPHA_TRANSPARENT_FLOAT;
+}
+
+class SdlPixeltypeEnum {
+  static const unknown = SDL_PIXELTYPE_UNKNOWN;
+  static const index1 = SDL_PIXELTYPE_INDEX1;
+  static const index4 = SDL_PIXELTYPE_INDEX4;
+  static const index8 = SDL_PIXELTYPE_INDEX8;
+  static const packed8 = SDL_PIXELTYPE_PACKED8;
+  static const packed16 = SDL_PIXELTYPE_PACKED16;
+  static const packed32 = SDL_PIXELTYPE_PACKED32;
+  static const arrayu8 = SDL_PIXELTYPE_ARRAYU8;
+  static const arrayu16 = SDL_PIXELTYPE_ARRAYU16;
+  static const arrayu32 = SDL_PIXELTYPE_ARRAYU32;
+  static const arrayf16 = SDL_PIXELTYPE_ARRAYF16;
+  static const arrayf32 = SDL_PIXELTYPE_ARRAYF32;
+  static const index2 = SDL_PIXELTYPE_INDEX2;
+}
+
+class SdlBitmaporderEnum {
+  static const none = SDL_BITMAPORDER_NONE;
+  static const on4321 = SDL_BITMAPORDER_4321;
+  static const on1234 = SDL_BITMAPORDER_1234;
+}
+
+class SdlPackedorderEnum {
+  static const none = SDL_PACKEDORDER_NONE;
+  static const xrgb = SDL_PACKEDORDER_XRGB;
+  static const rgbx = SDL_PACKEDORDER_RGBX;
+  static const argb = SDL_PACKEDORDER_ARGB;
+  static const rgba = SDL_PACKEDORDER_RGBA;
+  static const xbgr = SDL_PACKEDORDER_XBGR;
+  static const bgrx = SDL_PACKEDORDER_BGRX;
+  static const abgr = SDL_PACKEDORDER_ABGR;
+  static const bgra = SDL_PACKEDORDER_BGRA;
+}
+
+class SdlArrayorderEnum {
+  static const none = SDL_ARRAYORDER_NONE;
+  static const rgb = SDL_ARRAYORDER_RGB;
+  static const rgba = SDL_ARRAYORDER_RGBA;
+  static const argb = SDL_ARRAYORDER_ARGB;
+  static const bgr = SDL_ARRAYORDER_BGR;
+  static const bgra = SDL_ARRAYORDER_BGRA;
+  static const abgr = SDL_ARRAYORDER_ABGR;
+}
+
+class SdlPackedlayoutEnum {
+  static const none = SDL_PACKEDLAYOUT_NONE;
+  static const on332 = SDL_PACKEDLAYOUT_332;
+  static const on4444 = SDL_PACKEDLAYOUT_4444;
+  static const on1555 = SDL_PACKEDLAYOUT_1555;
+  static const on5551 = SDL_PACKEDLAYOUT_5551;
+  static const on565 = SDL_PACKEDLAYOUT_565;
+  static const on8888 = SDL_PACKEDLAYOUT_8888;
+  static const on2101010 = SDL_PACKEDLAYOUT_2101010;
+  static const on1010102 = SDL_PACKEDLAYOUT_1010102;
+}
+
+class SdlPixelformatEnum {
+  static const unknown = SDL_PIXELFORMAT_UNKNOWN;
+  static const index1Lsb = SDL_PIXELFORMAT_INDEX1LSB;
+  static const index1Msb = SDL_PIXELFORMAT_INDEX1MSB;
+  static const index2Lsb = SDL_PIXELFORMAT_INDEX2LSB;
+  static const index2Msb = SDL_PIXELFORMAT_INDEX2MSB;
+  static const index4Lsb = SDL_PIXELFORMAT_INDEX4LSB;
+  static const index4Msb = SDL_PIXELFORMAT_INDEX4MSB;
+  static const index8 = SDL_PIXELFORMAT_INDEX8;
+  static const rgb332 = SDL_PIXELFORMAT_RGB332;
+  static const xrgb4444 = SDL_PIXELFORMAT_XRGB4444;
+  static const xbgr4444 = SDL_PIXELFORMAT_XBGR4444;
+  static const xrgb1555 = SDL_PIXELFORMAT_XRGB1555;
+  static const xbgr1555 = SDL_PIXELFORMAT_XBGR1555;
+  static const argb4444 = SDL_PIXELFORMAT_ARGB4444;
+  static const rgba4444 = SDL_PIXELFORMAT_RGBA4444;
+  static const abgr4444 = SDL_PIXELFORMAT_ABGR4444;
+  static const bgra4444 = SDL_PIXELFORMAT_BGRA4444;
+  static const argb1555 = SDL_PIXELFORMAT_ARGB1555;
+  static const rgba5551 = SDL_PIXELFORMAT_RGBA5551;
+  static const abgr1555 = SDL_PIXELFORMAT_ABGR1555;
+  static const bgra5551 = SDL_PIXELFORMAT_BGRA5551;
+  static const rgb565 = SDL_PIXELFORMAT_RGB565;
+  static const bgr565 = SDL_PIXELFORMAT_BGR565;
+  static const rgb24 = SDL_PIXELFORMAT_RGB24;
+  static const bgr24 = SDL_PIXELFORMAT_BGR24;
+  static const xrgb8888 = SDL_PIXELFORMAT_XRGB8888;
+  static const rgbx8888 = SDL_PIXELFORMAT_RGBX8888;
+  static const xbgr8888 = SDL_PIXELFORMAT_XBGR8888;
+  static const bgrx8888 = SDL_PIXELFORMAT_BGRX8888;
+  static const argb8888 = SDL_PIXELFORMAT_ARGB8888;
+  static const rgba8888 = SDL_PIXELFORMAT_RGBA8888;
+  static const abgr8888 = SDL_PIXELFORMAT_ABGR8888;
+  static const bgra8888 = SDL_PIXELFORMAT_BGRA8888;
+  static const xrgb2101010 = SDL_PIXELFORMAT_XRGB2101010;
+  static const xbgr2101010 = SDL_PIXELFORMAT_XBGR2101010;
+  static const argb2101010 = SDL_PIXELFORMAT_ARGB2101010;
+  static const abgr2101010 = SDL_PIXELFORMAT_ABGR2101010;
+  static const rgb48 = SDL_PIXELFORMAT_RGB48;
+  static const bgr48 = SDL_PIXELFORMAT_BGR48;
+  static const rgba64 = SDL_PIXELFORMAT_RGBA64;
+  static const argb64 = SDL_PIXELFORMAT_ARGB64;
+  static const bgra64 = SDL_PIXELFORMAT_BGRA64;
+  static const abgr64 = SDL_PIXELFORMAT_ABGR64;
+  static const rgb48Float = SDL_PIXELFORMAT_RGB48_FLOAT;
+  static const bgr48Float = SDL_PIXELFORMAT_BGR48_FLOAT;
+  static const rgba64Float = SDL_PIXELFORMAT_RGBA64_FLOAT;
+  static const argb64Float = SDL_PIXELFORMAT_ARGB64_FLOAT;
+  static const bgra64Float = SDL_PIXELFORMAT_BGRA64_FLOAT;
+  static const abgr64Float = SDL_PIXELFORMAT_ABGR64_FLOAT;
+  static const rgb96Float = SDL_PIXELFORMAT_RGB96_FLOAT;
+  static const bgr96Float = SDL_PIXELFORMAT_BGR96_FLOAT;
+  static const rgba128Float = SDL_PIXELFORMAT_RGBA128_FLOAT;
+  static const argb128Float = SDL_PIXELFORMAT_ARGB128_FLOAT;
+  static const bgra128Float = SDL_PIXELFORMAT_BGRA128_FLOAT;
+  static const abgr128Float = SDL_PIXELFORMAT_ABGR128_FLOAT;
+  static const yv12 = SDL_PIXELFORMAT_YV12;
+  static const iyuv = SDL_PIXELFORMAT_IYUV;
+  static const yuy2 = SDL_PIXELFORMAT_YUY2;
+  static const uyvy = SDL_PIXELFORMAT_UYVY;
+  static const yvyu = SDL_PIXELFORMAT_YVYU;
+  static const nv12 = SDL_PIXELFORMAT_NV12;
+  static const nv21 = SDL_PIXELFORMAT_NV21;
+  static const p010 = SDL_PIXELFORMAT_P010;
+  static const externalOes = SDL_PIXELFORMAT_EXTERNAL_OES;
+}
+
+class SdlColorTypeEnum {
+  static const unknown = SDL_COLOR_TYPE_UNKNOWN;
+  static const rgb = SDL_COLOR_TYPE_RGB;
+  static const ycbcr = SDL_COLOR_TYPE_YCBCR;
+}
+
+class SdlColorRangeEnum {
+  static const unknown = SDL_COLOR_RANGE_UNKNOWN;
+  static const limited = SDL_COLOR_RANGE_LIMITED;
+  static const full = SDL_COLOR_RANGE_FULL;
+}
+
+class SdlColorPrimariesEnum {
+  static const unknown = SDL_COLOR_PRIMARIES_UNKNOWN;
+  static const bt709 = SDL_COLOR_PRIMARIES_BT709;
+  static const unspecified = SDL_COLOR_PRIMARIES_UNSPECIFIED;
+  static const bt470M = SDL_COLOR_PRIMARIES_BT470M;
+  static const bt470Bg = SDL_COLOR_PRIMARIES_BT470BG;
+  static const bt601 = SDL_COLOR_PRIMARIES_BT601;
+  static const smpte240 = SDL_COLOR_PRIMARIES_SMPTE240;
+  static const genericFilm = SDL_COLOR_PRIMARIES_GENERIC_FILM;
+  static const bt2020 = SDL_COLOR_PRIMARIES_BT2020;
+  static const xyz = SDL_COLOR_PRIMARIES_XYZ;
+  static const smpte431 = SDL_COLOR_PRIMARIES_SMPTE431;
+  static const smpte432 = SDL_COLOR_PRIMARIES_SMPTE432;
+  static const ebu3213 = SDL_COLOR_PRIMARIES_EBU3213;
+  static const custom = SDL_COLOR_PRIMARIES_CUSTOM;
+}
+
+class SdlTransferCharacteristicsEnum {
+  static const unknown = SDL_TRANSFER_CHARACTERISTICS_UNKNOWN;
+  static const bt709 = SDL_TRANSFER_CHARACTERISTICS_BT709;
+  static const unspecified = SDL_TRANSFER_CHARACTERISTICS_UNSPECIFIED;
+  static const gamma22 = SDL_TRANSFER_CHARACTERISTICS_GAMMA22;
+  static const gamma28 = SDL_TRANSFER_CHARACTERISTICS_GAMMA28;
+  static const bt601 = SDL_TRANSFER_CHARACTERISTICS_BT601;
+  static const smpte240 = SDL_TRANSFER_CHARACTERISTICS_SMPTE240;
+  static const linear = SDL_TRANSFER_CHARACTERISTICS_LINEAR;
+  static const log100 = SDL_TRANSFER_CHARACTERISTICS_LOG100;
+  static const log100Sqrt10 = SDL_TRANSFER_CHARACTERISTICS_LOG100_SQRT10;
+  static const iec61966 = SDL_TRANSFER_CHARACTERISTICS_IEC61966;
+  static const bt1361 = SDL_TRANSFER_CHARACTERISTICS_BT1361;
+  static const srgb = SDL_TRANSFER_CHARACTERISTICS_SRGB;
+  static const bt202010Bit = SDL_TRANSFER_CHARACTERISTICS_BT2020_10BIT;
+  static const bt202012Bit = SDL_TRANSFER_CHARACTERISTICS_BT2020_12BIT;
+  static const pq = SDL_TRANSFER_CHARACTERISTICS_PQ;
+  static const smpte428 = SDL_TRANSFER_CHARACTERISTICS_SMPTE428;
+  static const hlg = SDL_TRANSFER_CHARACTERISTICS_HLG;
+  static const custom = SDL_TRANSFER_CHARACTERISTICS_CUSTOM;
+}
+
+class SdlMatrixCoefficientsEnum {
+  static const identity = SDL_MATRIX_COEFFICIENTS_IDENTITY;
+  static const bt709 = SDL_MATRIX_COEFFICIENTS_BT709;
+  static const unspecified = SDL_MATRIX_COEFFICIENTS_UNSPECIFIED;
+  static const fcc = SDL_MATRIX_COEFFICIENTS_FCC;
+  static const bt470Bg = SDL_MATRIX_COEFFICIENTS_BT470BG;
+  static const bt601 = SDL_MATRIX_COEFFICIENTS_BT601;
+  static const smpte240 = SDL_MATRIX_COEFFICIENTS_SMPTE240;
+  static const ycgco = SDL_MATRIX_COEFFICIENTS_YCGCO;
+  static const bt2020Ncl = SDL_MATRIX_COEFFICIENTS_BT2020_NCL;
+  static const bt2020Cl = SDL_MATRIX_COEFFICIENTS_BT2020_CL;
+  static const smpte2085 = SDL_MATRIX_COEFFICIENTS_SMPTE2085;
+  static const chromaDerivedNcl = SDL_MATRIX_COEFFICIENTS_CHROMA_DERIVED_NCL;
+  static const chromaDerivedCl = SDL_MATRIX_COEFFICIENTS_CHROMA_DERIVED_CL;
+  static const ictcp = SDL_MATRIX_COEFFICIENTS_ICTCP;
+  static const custom = SDL_MATRIX_COEFFICIENTS_CUSTOM;
+}
+
+class SdlChromaLocationEnum {
+  static const none = SDL_CHROMA_LOCATION_NONE;
+  static const left = SDL_CHROMA_LOCATION_LEFT;
+  static const center = SDL_CHROMA_LOCATION_CENTER;
+  static const topleft = SDL_CHROMA_LOCATION_TOPLEFT;
+}
+
+class SdlColorspaceEnum {
+  static const unknown = SDL_COLORSPACE_UNKNOWN;
+  static const srgb = SDL_COLORSPACE_SRGB;
+  static const srgbLinear = SDL_COLORSPACE_SRGB_LINEAR;
+  static const hdr10 = SDL_COLORSPACE_HDR10;
+  static const jpeg = SDL_COLORSPACE_JPEG;
+  static const bt601Limited = SDL_COLORSPACE_BT601_LIMITED;
+  static const bt601Full = SDL_COLORSPACE_BT601_FULL;
+  static const bt709Limited = SDL_COLORSPACE_BT709_LIMITED;
+  static const bt709Full = SDL_COLORSPACE_BT709_FULL;
+  static const bt2020Limited = SDL_COLORSPACE_BT2020_LIMITED;
+  static const bt2020Full = SDL_COLORSPACE_BT2020_FULL;
+  static const rgbDefault = SDL_COLORSPACE_RGB_DEFAULT;
+  static const yuvDefault = SDL_COLORSPACE_YUV_DEFAULT;
+}
+
+class SdlPowerstateEnum {
+  static const error = SDL_POWERSTATE_ERROR;
+  static const unknown = SDL_POWERSTATE_UNKNOWN;
+  static const onBattery = SDL_POWERSTATE_ON_BATTERY;
+  static const noBattery = SDL_POWERSTATE_NO_BATTERY;
+  static const charging = SDL_POWERSTATE_CHARGING;
+  static const charged = SDL_POWERSTATE_CHARGED;
+}
+
+class SdlProcessStdioEnum {
+  static const inherited = SDL_PROCESS_STDIO_INHERITED;
+  static const onNull = SDL_PROCESS_STDIO_NULL;
+  static const app = SDL_PROCESS_STDIO_APP;
+  static const redirect = SDL_PROCESS_STDIO_REDIRECT;
+}
+
+class SdlPropertyTypeEnum {
+  static const invalid = SDL_PROPERTY_TYPE_INVALID;
+  static const pointer = SDL_PROPERTY_TYPE_POINTER;
+  static const string = SDL_PROPERTY_TYPE_STRING;
+  static const number = SDL_PROPERTY_TYPE_NUMBER;
+  static const float = SDL_PROPERTY_TYPE_FLOAT;
+  static const boolean = SDL_PROPERTY_TYPE_BOOLEAN;
+}
+
+class SdlTextureaccessEnum {
+  static const static = SDL_TEXTUREACCESS_STATIC;
+  static const streaming = SDL_TEXTUREACCESS_STREAMING;
+  static const target = SDL_TEXTUREACCESS_TARGET;
+}
+
+class SdlLogicalPresentationEnum {
+  static const disabled = SDL_LOGICAL_PRESENTATION_DISABLED;
+  static const stretch = SDL_LOGICAL_PRESENTATION_STRETCH;
+  static const letterbox = SDL_LOGICAL_PRESENTATION_LETTERBOX;
+  static const overscan = SDL_LOGICAL_PRESENTATION_OVERSCAN;
+  static const integerScale = SDL_LOGICAL_PRESENTATION_INTEGER_SCALE;
+}
+
+class SdlRendererVsyncEnum {
+  static const disabled = SDL_RENDERER_VSYNC_DISABLED;
+  static const adaptive = SDL_RENDERER_VSYNC_ADAPTIVE;
+}
+
+class SdlScancodeEnum {
+  static const unknown = SDL_SCANCODE_UNKNOWN;
+  static const a = SDL_SCANCODE_A;
+  static const b = SDL_SCANCODE_B;
+  static const c = SDL_SCANCODE_C;
+  static const d = SDL_SCANCODE_D;
+  static const e = SDL_SCANCODE_E;
+  static const f = SDL_SCANCODE_F;
+  static const g = SDL_SCANCODE_G;
+  static const h = SDL_SCANCODE_H;
+  static const i = SDL_SCANCODE_I;
+  static const j = SDL_SCANCODE_J;
+  static const k = SDL_SCANCODE_K;
+  static const l = SDL_SCANCODE_L;
+  static const m = SDL_SCANCODE_M;
+  static const n = SDL_SCANCODE_N;
+  static const o = SDL_SCANCODE_O;
+  static const p = SDL_SCANCODE_P;
+  static const q = SDL_SCANCODE_Q;
+  static const r = SDL_SCANCODE_R;
+  static const s = SDL_SCANCODE_S;
+  static const t = SDL_SCANCODE_T;
+  static const u = SDL_SCANCODE_U;
+  static const v = SDL_SCANCODE_V;
+  static const w = SDL_SCANCODE_W;
+  static const x = SDL_SCANCODE_X;
+  static const y = SDL_SCANCODE_Y;
+  static const z = SDL_SCANCODE_Z;
+  static const on1 = SDL_SCANCODE_1;
+  static const on2 = SDL_SCANCODE_2;
+  static const on3 = SDL_SCANCODE_3;
+  static const on4 = SDL_SCANCODE_4;
+  static const on5 = SDL_SCANCODE_5;
+  static const on6 = SDL_SCANCODE_6;
+  static const on7 = SDL_SCANCODE_7;
+  static const on8 = SDL_SCANCODE_8;
+  static const on9 = SDL_SCANCODE_9;
+  static const on0 = SDL_SCANCODE_0;
+  static const onReturn = SDL_SCANCODE_RETURN;
+  static const escape = SDL_SCANCODE_ESCAPE;
+  static const backspace = SDL_SCANCODE_BACKSPACE;
+  static const tab = SDL_SCANCODE_TAB;
+  static const space = SDL_SCANCODE_SPACE;
+  static const minus = SDL_SCANCODE_MINUS;
+  static const equals = SDL_SCANCODE_EQUALS;
+  static const leftbracket = SDL_SCANCODE_LEFTBRACKET;
+  static const rightbracket = SDL_SCANCODE_RIGHTBRACKET;
+  static const backslash = SDL_SCANCODE_BACKSLASH;
+  static const nonushash = SDL_SCANCODE_NONUSHASH;
+  static const semicolon = SDL_SCANCODE_SEMICOLON;
+  static const apostrophe = SDL_SCANCODE_APOSTROPHE;
+  static const grave = SDL_SCANCODE_GRAVE;
+  static const comma = SDL_SCANCODE_COMMA;
+  static const period = SDL_SCANCODE_PERIOD;
+  static const slash = SDL_SCANCODE_SLASH;
+  static const capslock = SDL_SCANCODE_CAPSLOCK;
+  static const f1 = SDL_SCANCODE_F1;
+  static const f2 = SDL_SCANCODE_F2;
+  static const f3 = SDL_SCANCODE_F3;
+  static const f4 = SDL_SCANCODE_F4;
+  static const f5 = SDL_SCANCODE_F5;
+  static const f6 = SDL_SCANCODE_F6;
+  static const f7 = SDL_SCANCODE_F7;
+  static const f8 = SDL_SCANCODE_F8;
+  static const f9 = SDL_SCANCODE_F9;
+  static const f10 = SDL_SCANCODE_F10;
+  static const f11 = SDL_SCANCODE_F11;
+  static const f12 = SDL_SCANCODE_F12;
+  static const printscreen = SDL_SCANCODE_PRINTSCREEN;
+  static const scrolllock = SDL_SCANCODE_SCROLLLOCK;
+  static const pause = SDL_SCANCODE_PAUSE;
+  static const insert = SDL_SCANCODE_INSERT;
+  static const home = SDL_SCANCODE_HOME;
+  static const pageup = SDL_SCANCODE_PAGEUP;
+  static const delete = SDL_SCANCODE_DELETE;
+  static const end = SDL_SCANCODE_END;
+  static const pagedown = SDL_SCANCODE_PAGEDOWN;
+  static const right = SDL_SCANCODE_RIGHT;
+  static const left = SDL_SCANCODE_LEFT;
+  static const down = SDL_SCANCODE_DOWN;
+  static const up = SDL_SCANCODE_UP;
+  static const numlockclear = SDL_SCANCODE_NUMLOCKCLEAR;
+  static const kpDivide = SDL_SCANCODE_KP_DIVIDE;
+  static const kpMultiply = SDL_SCANCODE_KP_MULTIPLY;
+  static const kpMinus = SDL_SCANCODE_KP_MINUS;
+  static const kpPlus = SDL_SCANCODE_KP_PLUS;
+  static const kpEnter = SDL_SCANCODE_KP_ENTER;
+  static const kp1 = SDL_SCANCODE_KP_1;
+  static const kp2 = SDL_SCANCODE_KP_2;
+  static const kp3 = SDL_SCANCODE_KP_3;
+  static const kp4 = SDL_SCANCODE_KP_4;
+  static const kp5 = SDL_SCANCODE_KP_5;
+  static const kp6 = SDL_SCANCODE_KP_6;
+  static const kp7 = SDL_SCANCODE_KP_7;
+  static const kp8 = SDL_SCANCODE_KP_8;
+  static const kp9 = SDL_SCANCODE_KP_9;
+  static const kp0 = SDL_SCANCODE_KP_0;
+  static const kpPeriod = SDL_SCANCODE_KP_PERIOD;
+  static const nonusbackslash = SDL_SCANCODE_NONUSBACKSLASH;
+  static const application = SDL_SCANCODE_APPLICATION;
+  static const power = SDL_SCANCODE_POWER;
+  static const kpEquals = SDL_SCANCODE_KP_EQUALS;
+  static const f13 = SDL_SCANCODE_F13;
+  static const f14 = SDL_SCANCODE_F14;
+  static const f15 = SDL_SCANCODE_F15;
+  static const f16 = SDL_SCANCODE_F16;
+  static const f17 = SDL_SCANCODE_F17;
+  static const f18 = SDL_SCANCODE_F18;
+  static const f19 = SDL_SCANCODE_F19;
+  static const f20 = SDL_SCANCODE_F20;
+  static const f21 = SDL_SCANCODE_F21;
+  static const f22 = SDL_SCANCODE_F22;
+  static const f23 = SDL_SCANCODE_F23;
+  static const f24 = SDL_SCANCODE_F24;
+  static const execute = SDL_SCANCODE_EXECUTE;
+  static const help = SDL_SCANCODE_HELP;
+  static const menu = SDL_SCANCODE_MENU;
+  static const select = SDL_SCANCODE_SELECT;
+  static const stop = SDL_SCANCODE_STOP;
+  static const again = SDL_SCANCODE_AGAIN;
+  static const undo = SDL_SCANCODE_UNDO;
+  static const cut = SDL_SCANCODE_CUT;
+  static const copy = SDL_SCANCODE_COPY;
+  static const paste = SDL_SCANCODE_PASTE;
+  static const find = SDL_SCANCODE_FIND;
+  static const mute = SDL_SCANCODE_MUTE;
+  static const volumeup = SDL_SCANCODE_VOLUMEUP;
+  static const volumedown = SDL_SCANCODE_VOLUMEDOWN;
+  static const kpComma = SDL_SCANCODE_KP_COMMA;
+  static const kpEqualsas400 = SDL_SCANCODE_KP_EQUALSAS400;
+  static const international1 = SDL_SCANCODE_INTERNATIONAL1;
+  static const international2 = SDL_SCANCODE_INTERNATIONAL2;
+  static const international3 = SDL_SCANCODE_INTERNATIONAL3;
+  static const international4 = SDL_SCANCODE_INTERNATIONAL4;
+  static const international5 = SDL_SCANCODE_INTERNATIONAL5;
+  static const international6 = SDL_SCANCODE_INTERNATIONAL6;
+  static const international7 = SDL_SCANCODE_INTERNATIONAL7;
+  static const international8 = SDL_SCANCODE_INTERNATIONAL8;
+  static const international9 = SDL_SCANCODE_INTERNATIONAL9;
+  static const lang1 = SDL_SCANCODE_LANG1;
+  static const lang2 = SDL_SCANCODE_LANG2;
+  static const lang3 = SDL_SCANCODE_LANG3;
+  static const lang4 = SDL_SCANCODE_LANG4;
+  static const lang5 = SDL_SCANCODE_LANG5;
+  static const lang6 = SDL_SCANCODE_LANG6;
+  static const lang7 = SDL_SCANCODE_LANG7;
+  static const lang8 = SDL_SCANCODE_LANG8;
+  static const lang9 = SDL_SCANCODE_LANG9;
+  static const alterase = SDL_SCANCODE_ALTERASE;
+  static const sysreq = SDL_SCANCODE_SYSREQ;
+  static const cancel = SDL_SCANCODE_CANCEL;
+  static const clear = SDL_SCANCODE_CLEAR;
+  static const prior = SDL_SCANCODE_PRIOR;
+  static const return2 = SDL_SCANCODE_RETURN2;
+  static const separator = SDL_SCANCODE_SEPARATOR;
+  static const out = SDL_SCANCODE_OUT;
+  static const oper = SDL_SCANCODE_OPER;
+  static const clearagain = SDL_SCANCODE_CLEARAGAIN;
+  static const crsel = SDL_SCANCODE_CRSEL;
+  static const exsel = SDL_SCANCODE_EXSEL;
+  static const kp00 = SDL_SCANCODE_KP_00;
+  static const kp000 = SDL_SCANCODE_KP_000;
+  static const thousandsseparator = SDL_SCANCODE_THOUSANDSSEPARATOR;
+  static const decimalseparator = SDL_SCANCODE_DECIMALSEPARATOR;
+  static const currencyunit = SDL_SCANCODE_CURRENCYUNIT;
+  static const currencysubunit = SDL_SCANCODE_CURRENCYSUBUNIT;
+  static const kpLeftparen = SDL_SCANCODE_KP_LEFTPAREN;
+  static const kpRightparen = SDL_SCANCODE_KP_RIGHTPAREN;
+  static const kpLeftbrace = SDL_SCANCODE_KP_LEFTBRACE;
+  static const kpRightbrace = SDL_SCANCODE_KP_RIGHTBRACE;
+  static const kpTab = SDL_SCANCODE_KP_TAB;
+  static const kpBackspace = SDL_SCANCODE_KP_BACKSPACE;
+  static const kpA = SDL_SCANCODE_KP_A;
+  static const kpB = SDL_SCANCODE_KP_B;
+  static const kpC = SDL_SCANCODE_KP_C;
+  static const kpD = SDL_SCANCODE_KP_D;
+  static const kpE = SDL_SCANCODE_KP_E;
+  static const kpF = SDL_SCANCODE_KP_F;
+  static const kpXor = SDL_SCANCODE_KP_XOR;
+  static const kpPower = SDL_SCANCODE_KP_POWER;
+  static const kpPercent = SDL_SCANCODE_KP_PERCENT;
+  static const kpLess = SDL_SCANCODE_KP_LESS;
+  static const kpGreater = SDL_SCANCODE_KP_GREATER;
+  static const kpAmpersand = SDL_SCANCODE_KP_AMPERSAND;
+  static const kpDblampersand = SDL_SCANCODE_KP_DBLAMPERSAND;
+  static const kpVerticalbar = SDL_SCANCODE_KP_VERTICALBAR;
+  static const kpDblverticalbar = SDL_SCANCODE_KP_DBLVERTICALBAR;
+  static const kpColon = SDL_SCANCODE_KP_COLON;
+  static const kpHash = SDL_SCANCODE_KP_HASH;
+  static const kpSpace = SDL_SCANCODE_KP_SPACE;
+  static const kpAt = SDL_SCANCODE_KP_AT;
+  static const kpExclam = SDL_SCANCODE_KP_EXCLAM;
+  static const kpMemstore = SDL_SCANCODE_KP_MEMSTORE;
+  static const kpMemrecall = SDL_SCANCODE_KP_MEMRECALL;
+  static const kpMemclear = SDL_SCANCODE_KP_MEMCLEAR;
+  static const kpMemadd = SDL_SCANCODE_KP_MEMADD;
+  static const kpMemsubtract = SDL_SCANCODE_KP_MEMSUBTRACT;
+  static const kpMemmultiply = SDL_SCANCODE_KP_MEMMULTIPLY;
+  static const kpMemdivide = SDL_SCANCODE_KP_MEMDIVIDE;
+  static const kpPlusminus = SDL_SCANCODE_KP_PLUSMINUS;
+  static const kpClear = SDL_SCANCODE_KP_CLEAR;
+  static const kpClearentry = SDL_SCANCODE_KP_CLEARENTRY;
+  static const kpBinary = SDL_SCANCODE_KP_BINARY;
+  static const kpOctal = SDL_SCANCODE_KP_OCTAL;
+  static const kpDecimal = SDL_SCANCODE_KP_DECIMAL;
+  static const kpHexadecimal = SDL_SCANCODE_KP_HEXADECIMAL;
+  static const lctrl = SDL_SCANCODE_LCTRL;
+  static const lshift = SDL_SCANCODE_LSHIFT;
+  static const lalt = SDL_SCANCODE_LALT;
+  static const lgui = SDL_SCANCODE_LGUI;
+  static const rctrl = SDL_SCANCODE_RCTRL;
+  static const rshift = SDL_SCANCODE_RSHIFT;
+  static const ralt = SDL_SCANCODE_RALT;
+  static const rgui = SDL_SCANCODE_RGUI;
+  static const mode = SDL_SCANCODE_MODE;
+  static const sleep = SDL_SCANCODE_SLEEP;
+  static const wake = SDL_SCANCODE_WAKE;
+  static const channelIncrement = SDL_SCANCODE_CHANNEL_INCREMENT;
+  static const channelDecrement = SDL_SCANCODE_CHANNEL_DECREMENT;
+  static const mediaPlay = SDL_SCANCODE_MEDIA_PLAY;
+  static const mediaPause = SDL_SCANCODE_MEDIA_PAUSE;
+  static const mediaRecord = SDL_SCANCODE_MEDIA_RECORD;
+  static const mediaFastForward = SDL_SCANCODE_MEDIA_FAST_FORWARD;
+  static const mediaRewind = SDL_SCANCODE_MEDIA_REWIND;
+  static const mediaNextTrack = SDL_SCANCODE_MEDIA_NEXT_TRACK;
+  static const mediaPreviousTrack = SDL_SCANCODE_MEDIA_PREVIOUS_TRACK;
+  static const mediaStop = SDL_SCANCODE_MEDIA_STOP;
+  static const mediaEject = SDL_SCANCODE_MEDIA_EJECT;
+  static const mediaPlayPause = SDL_SCANCODE_MEDIA_PLAY_PAUSE;
+  static const mediaSelect = SDL_SCANCODE_MEDIA_SELECT;
+  static const acNew = SDL_SCANCODE_AC_NEW;
+  static const acOpen = SDL_SCANCODE_AC_OPEN;
+  static const acClose = SDL_SCANCODE_AC_CLOSE;
+  static const acExit = SDL_SCANCODE_AC_EXIT;
+  static const acSave = SDL_SCANCODE_AC_SAVE;
+  static const acPrint = SDL_SCANCODE_AC_PRINT;
+  static const acProperties = SDL_SCANCODE_AC_PROPERTIES;
+  static const acSearch = SDL_SCANCODE_AC_SEARCH;
+  static const acHome = SDL_SCANCODE_AC_HOME;
+  static const acBack = SDL_SCANCODE_AC_BACK;
+  static const acForward = SDL_SCANCODE_AC_FORWARD;
+  static const acStop = SDL_SCANCODE_AC_STOP;
+  static const acRefresh = SDL_SCANCODE_AC_REFRESH;
+  static const acBookmarks = SDL_SCANCODE_AC_BOOKMARKS;
+  static const softleft = SDL_SCANCODE_SOFTLEFT;
+  static const softright = SDL_SCANCODE_SOFTRIGHT;
+  static const call = SDL_SCANCODE_CALL;
+  static const endcall = SDL_SCANCODE_ENDCALL;
+  static const reserved = SDL_SCANCODE_RESERVED;
+  static const count = SDL_SCANCODE_COUNT;
+}
+
+class SdlSensorEnum {
+  static const invalid = SDL_SENSOR_INVALID;
+  static const unknown = SDL_SENSOR_UNKNOWN;
+  static const accel = SDL_SENSOR_ACCEL;
+  static const gyro = SDL_SENSOR_GYRO;
+  static const accelL = SDL_SENSOR_ACCEL_L;
+  static const gyroL = SDL_SENSOR_GYRO_L;
+  static const accelR = SDL_SENSOR_ACCEL_R;
+  static const gyroR = SDL_SENSOR_GYRO_R;
+}
+
+class SdlSurfaceEnum {
+  static const preallocated = SDL_SURFACE_PREALLOCATED;
+  static const lockNeeded = SDL_SURFACE_LOCK_NEEDED;
+  static const locked = SDL_SURFACE_LOCKED;
+  static const simdAligned = SDL_SURFACE_SIMD_ALIGNED;
+}
+
+class SdlScalemodeEnum {
+  static const nearest = SDL_SCALEMODE_NEAREST;
+  static const linear = SDL_SCALEMODE_LINEAR;
+}
+
+class SdlFlipEnum {
+  static const none = SDL_FLIP_NONE;
+  static const horizontal = SDL_FLIP_HORIZONTAL;
+  static const vertical = SDL_FLIP_VERTICAL;
+}
+
+class SdlAndroidExternalStorageEnum {
+  static const read = SDL_ANDROID_EXTERNAL_STORAGE_READ;
+  static const write = SDL_ANDROID_EXTERNAL_STORAGE_WRITE;
+}
+
+class SdlThreadPriorityEnum {
+  static const low = SDL_THREAD_PRIORITY_LOW;
+  static const normal = SDL_THREAD_PRIORITY_NORMAL;
+  static const high = SDL_THREAD_PRIORITY_HIGH;
+  static const timeCritical = SDL_THREAD_PRIORITY_TIME_CRITICAL;
+}
+
+class SdlDateFormatEnum {
+  static const yyyymmdd = SDL_DATE_FORMAT_YYYYMMDD;
+  static const ddmmyyyy = SDL_DATE_FORMAT_DDMMYYYY;
+  static const mmddyyyy = SDL_DATE_FORMAT_MMDDYYYY;
+}
+
+class SdlTimeFormatEnum {
+  static const on24Hr = SDL_TIME_FORMAT_24HR;
+  static const on12Hr = SDL_TIME_FORMAT_12HR;
+}
+
+class SdlTouchDeviceEnum {
+  static const invalid = SDL_TOUCH_DEVICE_INVALID;
+  static const direct = SDL_TOUCH_DEVICE_DIRECT;
+  static const indirectAbsolute = SDL_TOUCH_DEVICE_INDIRECT_ABSOLUTE;
+  static const indirectRelative = SDL_TOUCH_DEVICE_INDIRECT_RELATIVE;
+}
+
+class SdlSystemThemeEnum {
+  static const unknown = SDL_SYSTEM_THEME_UNKNOWN;
+  static const light = SDL_SYSTEM_THEME_LIGHT;
+  static const dark = SDL_SYSTEM_THEME_DARK;
+}
+
+class SdlOrientationEnum {
+  static const unknown = SDL_ORIENTATION_UNKNOWN;
+  static const landscape = SDL_ORIENTATION_LANDSCAPE;
+  static const landscapeFlipped = SDL_ORIENTATION_LANDSCAPE_FLIPPED;
+  static const portrait = SDL_ORIENTATION_PORTRAIT;
+  static const portraitFlipped = SDL_ORIENTATION_PORTRAIT_FLIPPED;
+}
+
+class SdlWindowEnum {
+  static const fullscreen = SDL_WINDOW_FULLSCREEN;
+  static const opengl = SDL_WINDOW_OPENGL;
+  static const occluded = SDL_WINDOW_OCCLUDED;
+  static const hidden = SDL_WINDOW_HIDDEN;
+  static const borderless = SDL_WINDOW_BORDERLESS;
+  static const resizable = SDL_WINDOW_RESIZABLE;
+  static const minimized = SDL_WINDOW_MINIMIZED;
+  static const maximized = SDL_WINDOW_MAXIMIZED;
+  static const mouseGrabbed = SDL_WINDOW_MOUSE_GRABBED;
+  static const inputFocus = SDL_WINDOW_INPUT_FOCUS;
+  static const mouseFocus = SDL_WINDOW_MOUSE_FOCUS;
+  static const external = SDL_WINDOW_EXTERNAL;
+  static const modal = SDL_WINDOW_MODAL;
+  static const highPixelDensity = SDL_WINDOW_HIGH_PIXEL_DENSITY;
+  static const mouseCapture = SDL_WINDOW_MOUSE_CAPTURE;
+  static const mouseRelativeMode = SDL_WINDOW_MOUSE_RELATIVE_MODE;
+  static const alwaysOnTop = SDL_WINDOW_ALWAYS_ON_TOP;
+  static const utility = SDL_WINDOW_UTILITY;
+  static const tooltip = SDL_WINDOW_TOOLTIP;
+  static const popupMenu = SDL_WINDOW_POPUP_MENU;
+  static const keyboardGrabbed = SDL_WINDOW_KEYBOARD_GRABBED;
+  static const vulkan = SDL_WINDOW_VULKAN;
+  static const metal = SDL_WINDOW_METAL;
+  static const transparent = SDL_WINDOW_TRANSPARENT;
+  static const notFocusable = SDL_WINDOW_NOT_FOCUSABLE;
+  static const surfaceVsyncDisabled = SDL_WINDOW_SURFACE_VSYNC_DISABLED;
+  static const surfaceVsyncAdaptive = SDL_WINDOW_SURFACE_VSYNC_ADAPTIVE;
+}
+
+class SdlFlashEnum {
+  static const cancel = SDL_FLASH_CANCEL;
+  static const briefly = SDL_FLASH_BRIEFLY;
+  static const untilFocused = SDL_FLASH_UNTIL_FOCUSED;
+}
+
+class SdlGlEnum {
+  static const redSize = SDL_GL_RED_SIZE;
+  static const greenSize = SDL_GL_GREEN_SIZE;
+  static const blueSize = SDL_GL_BLUE_SIZE;
+  static const alphaSize = SDL_GL_ALPHA_SIZE;
+  static const bufferSize = SDL_GL_BUFFER_SIZE;
+  static const doublebuffer = SDL_GL_DOUBLEBUFFER;
+  static const depthSize = SDL_GL_DEPTH_SIZE;
+  static const stencilSize = SDL_GL_STENCIL_SIZE;
+  static const accumRedSize = SDL_GL_ACCUM_RED_SIZE;
+  static const accumGreenSize = SDL_GL_ACCUM_GREEN_SIZE;
+  static const accumBlueSize = SDL_GL_ACCUM_BLUE_SIZE;
+  static const accumAlphaSize = SDL_GL_ACCUM_ALPHA_SIZE;
+  static const stereo = SDL_GL_STEREO;
+  static const multisamplebuffers = SDL_GL_MULTISAMPLEBUFFERS;
+  static const multisamplesamples = SDL_GL_MULTISAMPLESAMPLES;
+  static const acceleratedVisual = SDL_GL_ACCELERATED_VISUAL;
+  static const retainedBacking = SDL_GL_RETAINED_BACKING;
+  static const contextMajorVersion = SDL_GL_CONTEXT_MAJOR_VERSION;
+  static const contextMinorVersion = SDL_GL_CONTEXT_MINOR_VERSION;
+  static const contextFlags = SDL_GL_CONTEXT_FLAGS;
+  static const contextProfileMask = SDL_GL_CONTEXT_PROFILE_MASK;
+  static const shareWithCurrentContext = SDL_GL_SHARE_WITH_CURRENT_CONTEXT;
+  static const framebufferSrgbCapable = SDL_GL_FRAMEBUFFER_SRGB_CAPABLE;
+  static const contextReleaseBehavior = SDL_GL_CONTEXT_RELEASE_BEHAVIOR;
+  static const contextResetNotification = SDL_GL_CONTEXT_RESET_NOTIFICATION;
+  static const contextNoError = SDL_GL_CONTEXT_NO_ERROR;
+  static const floatbuffers = SDL_GL_FLOATBUFFERS;
+  static const eglPlatform = SDL_GL_EGL_PLATFORM;
+  static const contextProfileCore = SDL_GL_CONTEXT_PROFILE_CORE;
+  static const contextProfileCompatibility =
+      SDL_GL_CONTEXT_PROFILE_COMPATIBILITY;
+  static const contextProfileEs = SDL_GL_CONTEXT_PROFILE_ES;
+  static const contextDebugFlag = SDL_GL_CONTEXT_DEBUG_FLAG;
+  static const contextForwardCompatibleFlag =
+      SDL_GL_CONTEXT_FORWARD_COMPATIBLE_FLAG;
+  static const contextRobustAccessFlag = SDL_GL_CONTEXT_ROBUST_ACCESS_FLAG;
+  static const contextResetIsolationFlag = SDL_GL_CONTEXT_RESET_ISOLATION_FLAG;
+  static const contextReleaseBehaviorNone =
+      SDL_GL_CONTEXT_RELEASE_BEHAVIOR_NONE;
+  static const contextReleaseBehaviorFlush =
+      SDL_GL_CONTEXT_RELEASE_BEHAVIOR_FLUSH;
+  static const contextResetNoNotification =
+      SDL_GL_CONTEXT_RESET_NO_NOTIFICATION;
+  static const contextResetLoseContext = SDL_GL_CONTEXT_RESET_LOSE_CONTEXT;
+}
+
+class SdlWindowSurfaceVsyncEnum {
+  static const disabled = SDL_WINDOW_SURFACE_VSYNC_DISABLED;
+  static const adaptive = SDL_WINDOW_SURFACE_VSYNC_ADAPTIVE;
+}
+
+class SdlHittestEnum {
+  static const normal = SDL_HITTEST_NORMAL;
+  static const draggable = SDL_HITTEST_DRAGGABLE;
+  static const resizeTopleft = SDL_HITTEST_RESIZE_TOPLEFT;
+  static const resizeTop = SDL_HITTEST_RESIZE_TOP;
+  static const resizeTopright = SDL_HITTEST_RESIZE_TOPRIGHT;
+  static const resizeRight = SDL_HITTEST_RESIZE_RIGHT;
+  static const resizeBottomright = SDL_HITTEST_RESIZE_BOTTOMRIGHT;
+  static const resizeBottom = SDL_HITTEST_RESIZE_BOTTOM;
+  static const resizeBottomleft = SDL_HITTEST_RESIZE_BOTTOMLEFT;
+  static const resizeLeft = SDL_HITTEST_RESIZE_LEFT;
+}

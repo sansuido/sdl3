@@ -62,10 +62,10 @@ int main() {
             case SDLK_RIGHT:
               zY += 0.01;
               break;
-            case SDLK_z:
+            case SDLK_Z:
               fun++;
               break;
-            case SDLK_x:
+            case SDLK_X:
               fun--;
               if (fun == 0) {
                 fun = 1;

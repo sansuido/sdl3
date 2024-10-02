@@ -1,3 +1,7 @@
+## 0.1.36
+- SDL3-2024-09-30
+- [update] Support Enum classes.
+
 ## 0.1.35
 - SDL3-2024-09-22
 

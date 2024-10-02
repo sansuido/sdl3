@@ -757,3 +757,91 @@ bool sdlWaitConditionTimeout(
           int timeoutMs)>('SDL_WaitConditionTimeout');
   return sdlWaitConditionTimeoutLookupFunction(cond, mutex, timeoutMs) == 1;
 }
+
+///
+/// Return whether initialization should be done.
+///
+/// This function checks the passed in state and if initialization should be
+/// done, sets the status to `SDL_INIT_STATUS_INITIALIZING` and returns true.
+/// If another thread is already modifying this state, it will wait until
+/// that's done before returning.
+///
+/// If this function returns true, the calling code must call
+/// SDL_SetInitialized() to complete the initialization.
+///
+/// \param state the initialization state to check.
+/// \returns true if initialization needs to be done, false otherwise.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_SetInitialized
+/// \sa SDL_ShouldQuit
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL SDL_ShouldInit(SDL_InitState *state)
+/// ```
+bool sdlShouldInit(Pointer<SdlInitState> state) {
+  final sdlShouldInitLookupFunction = libSdl3.lookupFunction<
+      Uint8 Function(Pointer<SdlInitState> state),
+      int Function(Pointer<SdlInitState> state)>('SDL_ShouldInit');
+  return sdlShouldInitLookupFunction(state) == 1;
+}
+
+///
+/// Return whether cleanup should be done.
+///
+/// This function checks the passed in state and if cleanup should be done,
+/// sets the status to `SDL_INIT_STATUS_UNINITIALIZING` and returns true.
+///
+/// If this function returns true, the calling code must call
+/// SDL_SetInitialized() to complete the cleanup.
+///
+/// \param state the initialization state to check.
+/// \returns true if cleanup needs to be done, false otherwise.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_SetInitialized
+/// \sa SDL_ShouldInit
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL SDL_ShouldQuit(SDL_InitState *state)
+/// ```
+bool sdlShouldQuit(Pointer<SdlInitState> state) {
+  final sdlShouldQuitLookupFunction = libSdl3.lookupFunction<
+      Uint8 Function(Pointer<SdlInitState> state),
+      int Function(Pointer<SdlInitState> state)>('SDL_ShouldQuit');
+  return sdlShouldQuitLookupFunction(state) == 1;
+}
+
+///
+/// Finish an initialization state transition.
+///
+/// This function sets the status of the passed in state to
+/// `SDL_INIT_STATUS_INITIALIZED` or `SDL_INIT_STATUS_UNINITIALIZED` and allows
+/// any threads waiting for the status to proceed.
+///
+/// \param state the initialization state to check.
+/// \param initialized the new initialization state.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_ShouldInit
+/// \sa SDL_ShouldQuit
+///
+/// ```c
+/// extern SDL_DECLSPEC void SDLCALL SDL_SetInitialized(SDL_InitState *state, bool initialized)
+/// ```
+void sdlSetInitialized(Pointer<SdlInitState> state, bool initialized) {
+  final sdlSetInitializedLookupFunction = libSdl3.lookupFunction<
+      Void Function(Pointer<SdlInitState> state, Uint8 initialized),
+      void Function(
+          Pointer<SdlInitState> state, int initialized)>('SDL_SetInitialized');
+  return sdlSetInitializedLookupFunction(state, initialized ? 1 : 0);
+}

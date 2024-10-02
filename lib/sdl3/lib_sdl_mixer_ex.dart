@@ -1,6 +1,6 @@
 // ignore_for_file: constant_identifier_names, non_constant_identifier_names
 import 'dart:ffi';
-import './generated/const_sdl.dart';
+//import './generated/const_sdl.dart';
 import './generated/const_sdl_mixer.dart';
 import './generated/lib_sdl_error.dart';
 import 'lib_sdl_ex.dart';
@@ -17,11 +17,6 @@ final SDL_MIXER_COMPILEDVERSION = sdlVersionnum(
 bool sdlMixerVersionAtleast(int x, int y, int z) {
   return SDL_MIXER_COMPILEDVERSION >= sdlVersionnum(x, y, z);
 }
-
-/// ```c
-/// const MIX_DEFAULT_FORMAT = AUDIO_S16LSB;
-/// ```
-const MIX_DEFAULT_FORMAT = AUDIO_S16LSB;
 
 /// ```c
 /// const MIX_MAX_VOLUME = SDL_MIX_MAXVOLUME;

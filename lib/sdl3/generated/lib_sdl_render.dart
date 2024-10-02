@@ -15,6 +15,8 @@ import 'struct_sdl.dart';
 ///
 /// \returns the number of built in render drivers.
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_CreateRenderer
@@ -46,6 +48,8 @@ int sdlGetNumRenderDrivers() {
 /// \returns the name of the rendering driver at the requested index, or NULL
 /// if an invalid index was specified.
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetNumRenderDrivers
@@ -76,6 +80,8 @@ String? sdlGetRenderDriver(int index) {
 /// \param renderer a pointer filled with the renderer, or NULL on error.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety You may only call this function from the main thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -134,6 +140,8 @@ bool sdlCreateWindowAndRenderer(
 /// initialize the first one supporting the requested flags.
 /// \returns a valid rendering context or NULL if there was an error; call
 /// SDL_GetError() for more information.
+///
+/// \threadsafety You may only call this function from the main thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -201,6 +209,8 @@ Pointer<SdlRenderer> sdlCreateRenderer(
 /// \returns a valid rendering context or NULL if there was an error; call
 /// SDL_GetError() for more information.
 ///
+/// \threadsafety You may only call this function from the main thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_CreateProperties
@@ -233,6 +243,8 @@ Pointer<SdlRenderer> sdlCreateRendererWithProperties(int props) {
 /// \returns a valid rendering context or NULL if there was an error; call
 /// SDL_GetError() for more information.
 ///
+/// \threadsafety You may only call this function from the main thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_DestroyRenderer
@@ -255,6 +267,8 @@ Pointer<SdlRenderer> sdlCreateSoftwareRenderer(Pointer<SdlSurface> surface) {
 /// \returns the rendering context on success or NULL on failure; call
 /// SDL_GetError() for more information.
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
@@ -275,6 +289,8 @@ Pointer<SdlRenderer> sdlGetRenderer(Pointer<SdlWindow> window) {
 /// \returns the window on success or NULL on failure; call SDL_GetError() for
 /// more information.
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
@@ -294,6 +310,8 @@ Pointer<SdlWindow> sdlGetRenderWindow(Pointer<SdlRenderer> renderer) {
 /// \param renderer the rendering context.
 /// \returns the name of the selected renderer, or NULL on failure; call
 /// SDL_GetError() for more information.
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -390,6 +408,8 @@ String? sdlGetRendererName(Pointer<SdlRenderer> renderer) {
 /// \returns a valid property ID on success or 0 on failure; call
 /// SDL_GetError() for more information.
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
@@ -413,6 +433,8 @@ int sdlGetRendererProperties(Pointer<SdlRenderer> renderer) {
 /// \param h a pointer filled in with the height in pixels.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety You may only call this function from the main thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -445,6 +467,8 @@ bool sdlGetRenderOutputSize(
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety You may only call this function from the main thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetRenderOutputSize
@@ -475,6 +499,8 @@ bool sdlGetCurrentRenderOutputSize(
 /// \returns a pointer to the created texture or NULL if no rendering context
 /// was active, the format was unsupported, or the width or height
 /// were out of range; call SDL_GetError() for more information.
+///
+/// \threadsafety You may only call this function from the main thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -514,6 +540,8 @@ Pointer<SdlTexture> sdlCreateTexture(
 /// the texture.
 /// \returns the created texture or NULL on failure; call SDL_GetError() for
 /// more information.
+///
+/// \threadsafety You may only call this function from the main thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -634,6 +662,8 @@ Pointer<SdlTexture> sdlCreateTextureFromSurface(
 /// was active, the format was unsupported, or the width or height
 /// were out of range; call SDL_GetError() for more information.
 ///
+/// \threadsafety You may only call this function from the main thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_CreateProperties
@@ -748,6 +778,8 @@ Pointer<SdlTexture> sdlCreateTextureWithProperties(
 /// \returns a valid property ID on success or 0 on failure; call
 /// SDL_GetError() for more information.
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
@@ -793,6 +825,8 @@ Pointer<SdlRenderer> sdlGetRendererFromTexture(Pointer<SdlTexture> texture) {
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety You may only call this function from the main thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
@@ -826,6 +860,8 @@ bool sdlGetTextureSize(
 /// \param b the blue color value multiplied into copy operations.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety You may only call this function from the main thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -863,6 +899,8 @@ bool sdlSetTextureColorMod(Pointer<SdlTexture> texture, int r, int g, int b) {
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety You may only call this function from the main thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetTextureColorModFloat
@@ -890,6 +928,8 @@ bool sdlSetTextureColorModFloat(
 /// \param b a pointer filled in with the current blue color value.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety You may only call this function from the main thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -919,6 +959,8 @@ bool sdlGetTextureColorMod(Pointer<SdlTexture> texture, Pointer<Uint8> r,
 /// \param b a pointer filled in with the current blue color value.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety You may only call this function from the main thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -955,6 +997,8 @@ bool sdlGetTextureColorModFloat(Pointer<SdlTexture> texture, Pointer<Float> r,
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety You may only call this function from the main thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetTextureAlphaMod
@@ -988,6 +1032,8 @@ bool sdlSetTextureAlphaMod(Pointer<SdlTexture> texture, int alpha) {
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety You may only call this function from the main thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetTextureAlphaModFloat
@@ -1013,6 +1059,8 @@ bool sdlSetTextureAlphaModFloat(Pointer<SdlTexture> texture, double alpha) {
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety You may only call this function from the main thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetTextureAlphaModFloat
@@ -1037,6 +1085,8 @@ bool sdlGetTextureAlphaMod(Pointer<SdlTexture> texture, Pointer<Uint8> alpha) {
 /// \param alpha a pointer filled in with the current alpha value.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety You may only call this function from the main thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -1067,6 +1117,8 @@ bool sdlGetTextureAlphaModFloat(
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety You may only call this function from the main thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetTextureBlendMode
@@ -1089,6 +1141,8 @@ bool sdlSetTextureBlendMode(Pointer<SdlTexture> texture, int blendMode) {
 /// \param blendMode a pointer filled in with the current SDL_BlendMode.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety You may only call this function from the main thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -1118,6 +1172,8 @@ bool sdlGetTextureBlendMode(
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety You may only call this function from the main thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetTextureScaleMode
@@ -1140,6 +1196,8 @@ bool sdlSetTextureScaleMode(Pointer<SdlTexture> texture, int scaleMode) {
 /// \param scaleMode a pointer filled in with the current scale mode.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety You may only call this function from the main thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -1179,6 +1237,8 @@ bool sdlGetTextureScaleMode(
 /// between lines.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety You may only call this function from the main thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -1222,6 +1282,8 @@ bool sdlUpdateTexture(Pointer<SdlTexture> texture, Pointer<SdlRect> rect,
 /// plane.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety You may only call this function from the main thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -1283,6 +1345,8 @@ bool sdlUpdateYuvTexture(
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety You may only call this function from the main thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_UpdateTexture
@@ -1336,6 +1400,8 @@ bool sdlUpdateNvTexture(Pointer<SdlTexture> texture, Pointer<SdlRect> rect,
 /// created with `SDL_TEXTUREACCESS_STREAMING`; call SDL_GetError()
 /// for more information.
 ///
+/// \threadsafety You may only call this function from the main thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_LockTextureToSurface
@@ -1384,6 +1450,8 @@ bool sdlLockTexture(Pointer<SdlTexture> texture, Pointer<SdlRect> rect,
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety You may only call this function from the main thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_LockTexture
@@ -1415,6 +1483,8 @@ bool sdlLockTextureToSurface(Pointer<SdlTexture> texture, Pointer<SdlRect> rect,
 ///
 /// \param texture a texture locked by SDL_LockTexture().
 ///
+/// \threadsafety You may only call this function from the main thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_LockTexture
@@ -1443,6 +1513,8 @@ void sdlUnlockTexture(Pointer<SdlTexture> texture) {
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety You may only call this function from the main thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetRenderTarget
@@ -1469,6 +1541,8 @@ bool sdlSetRenderTarget(
 /// \param renderer the rendering context.
 /// \returns the current render target or NULL for the default render target.
 ///
+/// \threadsafety You may only call this function from the main thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_SetRenderTarget
@@ -1487,13 +1561,23 @@ Pointer<SdlTexture> sdlGetRenderTarget(Pointer<SdlRenderer> renderer) {
 ///
 /// Set a device independent resolution and presentation mode for rendering.
 ///
-/// This function sets the width and height of the logical rendering output. A
-/// render target is created at the specified size and used for rendering and
-/// then copied to the output during presentation.
+/// This function sets the width and height of the logical rendering output.
+/// The renderer will act as if the window is always the requested dimensions,
+/// scaling to the actual window resolution as necessary.
+///
+/// This can be useful for games that expect a fixed size, but would like to
+/// scale the output to whatever is available, regardless of how a user resizes
+/// a window, or if the display is high DPI.
 ///
 /// You can disable logical coordinates by setting the mode to
 /// SDL_LOGICAL_PRESENTATION_DISABLED, and in that case you get the full pixel
-/// resolution of the output window.
+/// resolution of the output window; it is safe to toggle logical presentation
+/// during the rendering of a frame: perhaps most of the rendering is done to
+/// specific dimensions but to make fonts look sharp, the app turns off logical
+/// presentation while drawing text.
+///
+/// Letterboxing will only happen if logical presentation is enabled during
+/// SDL_RenderPresent; be sure to reenable it first if you were using it.
 ///
 /// You can convert coordinates in an event into rendering coordinates using
 /// SDL_ConvertEventToRenderCoordinates().
@@ -1502,9 +1586,10 @@ Pointer<SdlTexture> sdlGetRenderTarget(Pointer<SdlRenderer> renderer) {
 /// \param w the width of the logical resolution.
 /// \param h the height of the logical resolution.
 /// \param mode the presentation mode used.
-/// \param scale_mode the scale mode used.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety You may only call this function from the main thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -1513,17 +1598,16 @@ Pointer<SdlTexture> sdlGetRenderTarget(Pointer<SdlRenderer> renderer) {
 /// \sa SDL_GetRenderLogicalPresentationRect
 ///
 /// ```c
-/// extern SDL_DECLSPEC bool SDLCALL SDL_SetRenderLogicalPresentation(SDL_Renderer *renderer, int w, int h, SDL_RendererLogicalPresentation mode, SDL_ScaleMode scale_mode)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetRenderLogicalPresentation(SDL_Renderer *renderer, int w, int h, SDL_RendererLogicalPresentation mode)
 /// ```
 bool sdlSetRenderLogicalPresentation(
-    Pointer<SdlRenderer> renderer, int w, int h, int mode, int scaleMode) {
+    Pointer<SdlRenderer> renderer, int w, int h, int mode) {
   final sdlSetRenderLogicalPresentationLookupFunction = libSdl3.lookupFunction<
-      Uint8 Function(Pointer<SdlRenderer> renderer, Int32 w, Int32 h,
-          Int32 mode, Int32 scaleMode),
-      int Function(Pointer<SdlRenderer> renderer, int w, int h, int mode,
-          int scaleMode)>('SDL_SetRenderLogicalPresentation');
-  return sdlSetRenderLogicalPresentationLookupFunction(
-          renderer, w, h, mode, scaleMode) ==
+      Uint8 Function(
+          Pointer<SdlRenderer> renderer, Int32 w, Int32 h, Int32 mode),
+      int Function(Pointer<SdlRenderer> renderer, int w, int h,
+          int mode)>('SDL_SetRenderLogicalPresentation');
+  return sdlSetRenderLogicalPresentationLookupFunction(renderer, w, h, mode) ==
       1;
 }
 
@@ -1536,35 +1620,30 @@ bool sdlSetRenderLogicalPresentation(
 /// \param renderer the rendering context.
 /// \param w an int to be filled with the width.
 /// \param h an int to be filled with the height.
-/// \param mode a pointer filled in with the presentation mode.
-/// \param scale_mode a pointer filled in with the scale mode.
+/// \param mode the presentation mode used.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety You may only call this function from the main thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_SetRenderLogicalPresentation
 ///
 /// ```c
-/// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderLogicalPresentation(SDL_Renderer *renderer, int *w, int *h, SDL_RendererLogicalPresentation *mode, SDL_ScaleMode *scale_mode)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderLogicalPresentation(SDL_Renderer *renderer, int *w, int *h, SDL_RendererLogicalPresentation *mode)
 /// ```
-bool sdlGetRenderLogicalPresentation(
-    Pointer<SdlRenderer> renderer,
-    Pointer<Int32> w,
-    Pointer<Int32> h,
-    Pointer<Int32> mode,
-    Pointer<Int32> scaleMode) {
+bool sdlGetRenderLogicalPresentation(Pointer<SdlRenderer> renderer,
+    Pointer<Int32> w, Pointer<Int32> h, Pointer<Int32> mode) {
   final sdlGetRenderLogicalPresentationLookupFunction = libSdl3.lookupFunction<
       Uint8 Function(Pointer<SdlRenderer> renderer, Pointer<Int32> w,
-          Pointer<Int32> h, Pointer<Int32> mode, Pointer<Int32> scaleMode),
+          Pointer<Int32> h, Pointer<Int32> mode),
       int Function(
           Pointer<SdlRenderer> renderer,
           Pointer<Int32> w,
           Pointer<Int32> h,
-          Pointer<Int32> mode,
-          Pointer<Int32> scaleMode)>('SDL_GetRenderLogicalPresentation');
-  return sdlGetRenderLogicalPresentationLookupFunction(
-          renderer, w, h, mode, scaleMode) ==
+          Pointer<Int32> mode)>('SDL_GetRenderLogicalPresentation');
+  return sdlGetRenderLogicalPresentationLookupFunction(renderer, w, h, mode) ==
       1;
 }
 
@@ -1581,6 +1660,8 @@ bool sdlGetRenderLogicalPresentation(
 /// be NULL.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety You may only call this function from the main thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -1609,6 +1690,8 @@ bool sdlGetRenderLogicalPresentationRect(
 /// \param y a pointer filled with the y coordinate in render coordinates.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety You may only call this function from the main thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -1647,6 +1730,8 @@ bool sdlRenderCoordinatesFromWindow(Pointer<SdlRenderer> renderer,
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety You may only call this function from the main thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_SetRenderLogicalPresentation
@@ -1684,6 +1769,8 @@ bool sdlRenderCoordinatesToWindow(Pointer<SdlRenderer> renderer, double x,
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety You may only call this function from the main thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_RenderCoordinatesFromWindow
@@ -1705,11 +1792,19 @@ bool sdlConvertEventToRenderCoordinates(
 ///
 /// Set the drawing area for rendering on the current target.
 ///
+/// Drawing will clip to this area (separately from any clipping done with
+/// SDL_SetRenderClipRect), and the top left of the area will become coordinate
+/// (0, 0) for future drawing commands.
+///
+/// The area's width and height must be >= 0.
+///
 /// \param renderer the rendering context.
 /// \param rect the SDL_Rect structure representing the drawing area, or NULL
 /// to set the viewport to the entire target.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety You may only call this function from the main thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -1735,6 +1830,8 @@ bool sdlSetRenderViewport(
 /// \param rect an SDL_Rect structure filled in with the current drawing area.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety You may only call this function from the main thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -1763,6 +1860,8 @@ bool sdlGetRenderViewport(
 /// \param renderer the rendering context.
 /// \returns true if the viewport was set to a specific rectangle, or false if
 /// it was set to NULL (the entire target).
+///
+/// \threadsafety You may only call this function from the main thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -1795,6 +1894,8 @@ bool sdlRenderViewportSet(Pointer<SdlRenderer> renderer) {
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety You may only call this function from the main thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
@@ -1817,6 +1918,8 @@ bool sdlGetRenderSafeArea(
 /// the viewport, or NULL to disable clipping.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety You may only call this function from the main thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -1844,6 +1947,8 @@ bool sdlSetRenderClipRect(
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety You may only call this function from the main thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_RenderClipEnabled
@@ -1867,6 +1972,8 @@ bool sdlGetRenderClipRect(
 /// \param renderer the rendering context.
 /// \returns true if clipping is enabled or false if not; call SDL_GetError()
 /// for more information.
+///
+/// \threadsafety You may only call this function from the main thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -1900,6 +2007,8 @@ bool sdlRenderClipEnabled(Pointer<SdlRenderer> renderer) {
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety You may only call this function from the main thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetRenderScale
@@ -1924,6 +2033,8 @@ bool sdlSetRenderScale(
 /// \param scaleY a pointer filled in with the vertical scaling factor.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety You may only call this function from the main thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -1957,6 +2068,8 @@ bool sdlGetRenderScale(Pointer<SdlRenderer> renderer, Pointer<Float> scaleX,
 /// specify how the alpha channel is used.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety You may only call this function from the main thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -1992,6 +2105,8 @@ bool sdlSetRenderDrawColor(
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety You may only call this function from the main thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetRenderDrawColorFloat
@@ -2024,6 +2139,8 @@ bool sdlSetRenderDrawColorFloat(
 /// rendering target; usually `SDL_ALPHA_OPAQUE` (255).
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety You may only call this function from the main thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -2061,6 +2178,8 @@ bool sdlGetRenderDrawColor(Pointer<SdlRenderer> renderer, Pointer<Uint8> r,
 /// rendering target.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety You may only call this function from the main thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -2100,6 +2219,8 @@ bool sdlGetRenderDrawColorFloat(Pointer<SdlRenderer> renderer, Pointer<Float> r,
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety You may only call this function from the main thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetRenderColorScale
@@ -2122,6 +2243,8 @@ bool sdlSetRenderColorScale(Pointer<SdlRenderer> renderer, double scale) {
 /// \param scale a pointer filled in with the current color scale value.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety You may only call this function from the main thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -2149,6 +2272,8 @@ bool sdlGetRenderColorScale(
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety You may only call this function from the main thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetRenderDrawBlendMode
@@ -2171,6 +2296,8 @@ bool sdlSetRenderDrawBlendMode(Pointer<SdlRenderer> renderer, int blendMode) {
 /// \param blendMode a pointer filled in with the current SDL_BlendMode.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety You may only call this function from the main thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -2200,6 +2327,8 @@ bool sdlGetRenderDrawBlendMode(
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety You may only call this function from the main thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_SetRenderDrawColor
@@ -2222,6 +2351,8 @@ bool sdlRenderClear(Pointer<SdlRenderer> renderer) {
 /// \param y the y coordinate of the point.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety You may only call this function from the main thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -2246,6 +2377,8 @@ bool sdlRenderPoint(Pointer<SdlRenderer> renderer, double x, double y) {
 /// \param count the number of points to draw.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety You may only call this function from the main thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -2275,6 +2408,8 @@ bool sdlRenderPoints(
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety You may only call this function from the main thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_RenderLines
@@ -2302,6 +2437,8 @@ bool sdlRenderLine(
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety You may only call this function from the main thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_RenderLine
@@ -2328,6 +2465,8 @@ bool sdlRenderLines(
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety You may only call this function from the main thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_RenderRects
@@ -2352,6 +2491,8 @@ bool sdlRenderRect(Pointer<SdlRenderer> renderer, Pointer<SdlFRect> rect) {
 /// \param count the number of rectangles.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety You may only call this function from the main thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -2380,6 +2521,8 @@ bool sdlRenderRects(
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety You may only call this function from the main thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_RenderFillRects
@@ -2404,6 +2547,8 @@ bool sdlRenderFillRect(Pointer<SdlRenderer> renderer, Pointer<SdlFRect> rect) {
 /// \param count the number of rectangles.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety You may only call this function from the main thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -2434,6 +2579,8 @@ bool sdlRenderFillRects(
 /// entire rendering target.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety You may only call this function from the main thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -2479,6 +2626,8 @@ bool sdlRenderTexture(
 /// performed on the texture.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety You may only call this function from the main thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -2536,6 +2685,8 @@ bool sdlRenderTextureRotated(
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety You may only call this function from the main thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_RenderTexture
@@ -2588,6 +2739,8 @@ bool sdlRenderTextureTiled(
 /// entire rendering target.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety You may only call this function from the main thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -2648,6 +2801,8 @@ bool sdlRenderTexture9Grid(
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety You may only call this function from the main thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_RenderGeometryRaw
@@ -2702,6 +2857,8 @@ bool sdlRenderGeometry(
 /// \param size_indices index size: 1 (byte), 2 (short), 4 (int).
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety You may only call this function from the main thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -2781,6 +2938,8 @@ bool sdlRenderGeometryRaw(
 /// \returns a new SDL_Surface on success or NULL on failure; call
 /// SDL_GetError() for more information.
 ///
+/// \threadsafety You may only call this function from the main thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
@@ -2816,16 +2975,18 @@ Pointer<SdlSurface> sdlRenderReadPixels(
 /// pixel.
 ///
 /// Please note, that in case of rendering to a texture - there is **no need**
-/// to call `SDL_RenderPresent` after drawing needed objects to a texture, you
-/// are only required to change back the rendering target to default via
-/// `SDL_SetRenderTarget(renderer, NULL)` afterwards, as textures by themselves
-/// do not have a concept of backbuffers.
+/// to call `SDL_RenderPresent` after drawing needed objects to a texture, and
+/// should not be done; you are only required to change back the rendering
+/// target to default via `SDL_SetRenderTarget(renderer, NULL)` afterwards, as
+/// textures by themselves do not have a concept of backbuffers. Calling
+/// SDL_RenderPresent while rendering to a texture will still update the screen
+/// with any current drawing that has been done _to the window itself_.
 ///
 /// \param renderer the rendering context.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
-/// \threadsafety You may only call this function on the main thread.
+/// \threadsafety You may only call this function from the main thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -2860,6 +3021,8 @@ bool sdlRenderPresent(Pointer<SdlRenderer> renderer) {
 ///
 /// \param texture the texture to destroy.
 ///
+/// \threadsafety You may only call this function from the main thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_CreateTexture
@@ -2882,6 +3045,8 @@ void sdlDestroyTexture(Pointer<SdlTexture> texture) {
 /// This should be called before destroying the associated window.
 ///
 /// \param renderer the rendering context.
+///
+/// \threadsafety You may only call this function from the main thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -2924,6 +3089,8 @@ void sdlDestroyRenderer(Pointer<SdlRenderer> renderer) {
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety You may only call this function from the main thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
@@ -2945,6 +3112,8 @@ bool sdlFlushRenderer(Pointer<SdlRenderer> renderer) {
 /// \param renderer the renderer to query.
 /// \returns a `CAMetalLayer *` on success, or NULL if the renderer isn't a
 /// Metal renderer.
+///
+/// \threadsafety You may only call this function from the main thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -2975,6 +3144,8 @@ Pointer<NativeType> sdlGetRenderMetalLayer(Pointer<SdlRenderer> renderer) {
 /// \param renderer the renderer to query.
 /// \returns an `id<MTLRenderCommandEncoder>` on success, or NULL if the
 /// renderer isn't a Metal renderer or there was an error.
+///
+/// \threadsafety You may only call this function from the main thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -3055,6 +3226,8 @@ bool sdlAddVulkanRenderSemaphores(Pointer<SdlRenderer> renderer,
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety You may only call this function from the main thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_GetRenderVSync
@@ -3078,6 +3251,8 @@ bool sdlSetRenderVSync(Pointer<SdlRenderer> renderer, int vsync) {
 /// See SDL_SetRenderVSync() for the meaning of the value.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety You may only call this function from the main thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///

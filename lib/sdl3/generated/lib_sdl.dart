@@ -55,7 +55,7 @@ typedef SdlEventFilterDart = int Function(
 typedef SdlEventFilter = Uint8 Function(
     Pointer<NativeType> userdata, Pointer<SdlEvent> event);
 
-// typedef int (SDLCALL *SDL_EnumerateDirectoryCallback)(void *userdata, const char *dirname, const char *fname)
+// typedef SDL_EnumerationResult (SDLCALL *SDL_EnumerateDirectoryCallback)(void *userdata, const char *dirname, const char *fname)
 typedef SdlEnumerateDirectoryCallbackDart = int Function(
     Pointer<NativeType> userdata, Pointer<Utf8> dirname, Pointer<Utf8> fname);
 typedef SdlEnumerateDirectoryCallback = Int32 Function(

@@ -34,8 +34,8 @@ int main() {
     return 1;
   }
 
-  renderer.setLogicalPresentation(gWinWidth, gWinHeight,
-      SDL_LOGICAL_PRESENTATION_STRETCH, SDL_SCALEMODE_NEAREST);
+  renderer.setLogicalPresentation(
+      gWinWidth, gWinHeight, SDL_LOGICAL_PRESENTATION_STRETCH);
   // create texture
   var texture = renderer.createTexture(SDL_PIXELFORMAT_RGBA8888,
       SDL_TEXTUREACCESS_STREAMING, gWinWidth, gWinHeight);

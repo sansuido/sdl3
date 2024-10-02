@@ -11,7 +11,7 @@ const gScreenWidth = 640;
 const gScreenHeight = 480;
 const gFontPath = 'assets/SourceHanCodeJP.ttc';
 //const gFontPath = 'C:/Windows/Fonts/msgothic.ttc';
-const gFontSize = 24;
+const gFontSize = 24.0;
 const gString = '　ゲームプログラムとは、いやプログラムとは'
     'ある事柄を実現するプログラムの方法を説明されても理解できないことがある。B'
     '@　なぜならそのプログラム技法も何かの基本的な技法の組み合わせで出来ているからだ。B'
@@ -69,12 +69,14 @@ class Game {
     for (var n = 0; n < gString.length; n++) {
       var chara = gString[n];
       if (charaTextures.containsKey(chara) == false) {
-        var surface = font.renderUtf8Blended(chara, gTextColor);
+        var textColor = calloc<SdlColor>()..setRgba(0, 0, 0, 255);
+        var surface = font.renderTextBlended(chara, textColor.ref);
         if (surface != nullptr) {
           var texture = renderer.createTextureFromSurface(surface);
           charaTextures[chara] = texture;
           surface.destroy();
         }
+        textColor.callocFree();
       }
     }
     font.close();
@@ -86,13 +88,18 @@ class Game {
     if (font == nullptr) {
       return false;
     }
+    var textColor = calloc<SdlColor>()..setRgba(0, 0, 0, 255);
+    var alertColor = calloc<SdlColor>()..setRgba(255, 0, 0, 255);
+
     var surface =
-        font.renderUtf8Shaded('[PRESS ANY KEY]', gTextColor, gAlertColor);
+        font.renderTextShaded('[PRESS ANY KEY]', textColor.ref, alertColor.ref);
     if (surface != nullptr) {
       pressAnyKeyTexture = renderer.createTextureFromSurface(surface);
       surface.destroy();
     }
     font.close();
+    textColor.callocFree();
+    alertColor.callocFree();
     return true;
   }
 

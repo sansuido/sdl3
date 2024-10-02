@@ -36,3 +36,29 @@ const MUS_WAVPACK = 11;
 const MUS_GME = 12;
 const MIX_CHANNEL_POST = (-2);
 const MIX_EFFECTSMAXSPEED = 'MIX_EFFECTSMAXSPEED';
+
+class MixInitEnum {
+  static const flac = MIX_INIT_FLAC;
+  static const mod = MIX_INIT_MOD;
+  static const mp3 = MIX_INIT_MP3;
+  static const ogg = MIX_INIT_OGG;
+  static const mid = MIX_INIT_MID;
+  static const opus = MIX_INIT_OPUS;
+  static const wavpack = MIX_INIT_WAVPACK;
+}
+
+class MusEnum {
+  static const none = MUS_NONE;
+  static const cmd = MUS_CMD;
+  static const wav = MUS_WAV;
+  static const mod = MUS_MOD;
+  static const mid = MUS_MID;
+  static const ogg = MUS_OGG;
+  static const mp3 = MUS_MP3;
+  static const mp3MadUnused = MUS_MP3_MAD_UNUSED;
+  static const flac = MUS_FLAC;
+  static const modplugUnused = MUS_MODPLUG_UNUSED;
+  static const opus = MUS_OPUS;
+  static const wavpack = MUS_WAVPACK;
+  static const gme = MUS_GME;
+}

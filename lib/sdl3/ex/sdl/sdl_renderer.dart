@@ -23,6 +23,8 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \returns a valid rendering context or NULL if there was an error; call
   /// SDL_GetError() for more information.
   ///
+  /// \threadsafety You may only call this function from the main thread.
+  ///
   /// \since This function is available since SDL 3.0.0.
   ///
   /// \sa SDL_DestroyRenderer
@@ -40,6 +42,8 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \param renderer the renderer to query.
   /// \returns the window on success or NULL on failure; call SDL_GetError() for
   /// more information.
+  ///
+  /// \threadsafety It is safe to call this function from any thread.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -125,6 +129,8 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \returns a valid property ID on success or 0 on failure; call
   /// SDL_GetError() for more information.
   ///
+  /// \threadsafety It is safe to call this function from any thread.
+  ///
   /// \since This function is available since SDL 3.0.0.
   ///
   /// ```c
@@ -145,6 +151,8 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \param h a pointer filled in with the height in pixels.
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
+  ///
+  /// \threadsafety You may only call this function from the main thread.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -178,6 +186,8 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
+  /// \threadsafety You may only call this function from the main thread.
+  ///
   /// \since This function is available since SDL 3.0.0.
   ///
   /// \sa SDL_GetRenderOutputSize
@@ -209,6 +219,8 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \returns a pointer to the created texture or NULL if no rendering context
   /// was active, the format was unsupported, or the width or height
   /// were out of range; call SDL_GetError() for more information.
+  ///
+  /// \threadsafety You may only call this function from the main thread.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -242,6 +254,8 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// the texture.
   /// \returns the created texture or NULL on failure; call SDL_GetError() for
   /// more information.
+  ///
+  /// \threadsafety You may only call this function from the main thread.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -356,6 +370,8 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// was active, the format was unsupported, or the width or height
   /// were out of range; call SDL_GetError() for more information.
   ///
+  /// \threadsafety You may only call this function from the main thread.
+  ///
   /// \since This function is available since SDL 3.0.0.
   ///
   /// \sa SDL_CreateProperties
@@ -386,6 +402,8 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
+  /// \threadsafety You may only call this function from the main thread.
+  ///
   /// \since This function is available since SDL 3.0.0.
   ///
   /// \sa SDL_GetRenderTarget
@@ -406,6 +424,8 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \param renderer the rendering context.
   /// \returns the current render target or NULL for the default render target.
   ///
+  /// \threadsafety You may only call this function from the main thread.
+  ///
   /// \since This function is available since SDL 3.0.0.
   ///
   /// \sa SDL_SetRenderTarget
@@ -420,13 +440,23 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   ///
   /// Set a device independent resolution and presentation mode for rendering.
   ///
-  /// This function sets the width and height of the logical rendering output. A
-  /// render target is created at the specified size and used for rendering and
-  /// then copied to the output during presentation.
+  /// This function sets the width and height of the logical rendering output.
+  /// The renderer will act as if the window is always the requested dimensions,
+  /// scaling to the actual window resolution as necessary.
+  ///
+  /// This can be useful for games that expect a fixed size, but would like to
+  /// scale the output to whatever is available, regardless of how a user resizes
+  /// a window, or if the display is high DPI.
   ///
   /// You can disable logical coordinates by setting the mode to
   /// SDL_LOGICAL_PRESENTATION_DISABLED, and in that case you get the full pixel
-  /// resolution of the output window.
+  /// resolution of the output window; it is safe to toggle logical presentation
+  /// during the rendering of a frame: perhaps most of the rendering is done to
+  /// specific dimensions but to make fonts look sharp, the app turns off logical
+  /// presentation while drawing text.
+  ///
+  /// Letterboxing will only happen if logical presentation is enabled during
+  /// SDL_RenderPresent; be sure to reenable it first if you were using it.
   ///
   /// You can convert coordinates in an event into rendering coordinates using
   /// SDL_ConvertEventToRenderCoordinates().
@@ -435,9 +465,10 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \param w the width of the logical resolution.
   /// \param h the height of the logical resolution.
   /// \param mode the presentation mode used.
-  /// \param scale_mode the scale mode used.
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
+  ///
+  /// \threadsafety You may only call this function from the main thread.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -446,10 +477,10 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \sa SDL_GetRenderLogicalPresentationRect
   ///
   /// ```c
-  /// extern SDL_DECLSPEC bool SDLCALL SDL_SetRenderLogicalPresentation(SDL_Renderer *renderer, int w, int h, SDL_RendererLogicalPresentation mode, SDL_ScaleMode scale_mode)
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_SetRenderLogicalPresentation(SDL_Renderer *renderer, int w, int h, SDL_RendererLogicalPresentation mode)
   /// ```
-  bool setLogicalPresentation(int w, int h, int mode, int scaleMode) {
-    return sdlSetRenderLogicalPresentation(this, w, h, mode, scaleMode);
+  bool setLogicalPresentation(int w, int h, int mode) {
+    return sdlSetRenderLogicalPresentation(this, w, h, mode);
   }
 
   ///
@@ -461,21 +492,22 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \param renderer the rendering context.
   /// \param w an int to be filled with the width.
   /// \param h an int to be filled with the height.
-  /// \param mode a pointer filled in with the presentation mode.
-  /// \param scale_mode a pointer filled in with the scale mode.
+  /// \param mode the presentation mode used.
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
+  ///
+  /// \threadsafety You may only call this function from the main thread.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
   /// \sa SDL_SetRenderLogicalPresentation
   ///
   /// ```c
-  /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderLogicalPresentation(SDL_Renderer *renderer, int *w, int *h, SDL_RendererLogicalPresentation *mode, SDL_ScaleMode *scale_mode)
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderLogicalPresentation(SDL_Renderer *renderer, int *w, int *h, SDL_RendererLogicalPresentation *mode)
   /// ```
-  bool getLogicalPresentation(Pointer<Int32> w, Pointer<Int32> h,
-      Pointer<Int32> mode, Pointer<Int32> scaleMode) {
-    return sdlGetRenderLogicalPresentation(this, w, h, mode, scaleMode);
+  bool getLogicalPresentation(
+      Pointer<Int32> w, Pointer<Int32> h, Pointer<Int32> mode) {
+    return sdlGetRenderLogicalPresentation(this, w, h, mode);
   }
 
   ///
@@ -487,31 +519,29 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \param renderer the rendering context.
   /// \param w an int to be filled with the width.
   /// \param h an int to be filled with the height.
-  /// \param mode a pointer filled in with the presentation mode.
-  /// \param scale_mode a pointer filled in with the scale mode.
+  /// \param mode the presentation mode used.
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
+  ///
+  /// \threadsafety You may only call this function from the main thread.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
   /// \sa SDL_SetRenderLogicalPresentation
   ///
   /// ```c
-  /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderLogicalPresentation(SDL_Renderer *renderer, int *w, int *h, SDL_RendererLogicalPresentation *mode, SDL_ScaleMode *scale_mode)
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderLogicalPresentation(SDL_Renderer *renderer, int *w, int *h, SDL_RendererLogicalPresentation *mode)
   /// ```
   math.Point<double> getLogicalSize() {
     var wPointer = calloc<Int32>();
     var hPointer = calloc<Int32>();
     var modePointer = calloc<Int32>();
-    var scaleModePointer = calloc<Int32>();
-    sdlGetRenderLogicalPresentation(
-        this, wPointer, hPointer, modePointer, scaleModePointer);
+    sdlGetRenderLogicalPresentation(this, wPointer, hPointer, modePointer);
     var result = math.Point<double>(
         wPointer.value.toDouble(), hPointer.value.toDouble());
     calloc.free(wPointer);
     calloc.free(hPointer);
     calloc.free(modePointer);
-    calloc.free(scaleModePointer);
     return result;
   }
 
@@ -524,66 +554,28 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \param renderer the rendering context.
   /// \param w an int to be filled with the width.
   /// \param h an int to be filled with the height.
-  /// \param mode a pointer filled in with the presentation mode.
-  /// \param scale_mode a pointer filled in with the scale mode.
+  /// \param mode the presentation mode used.
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
+  ///
+  /// \threadsafety You may only call this function from the main thread.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
   /// \sa SDL_SetRenderLogicalPresentation
   ///
   /// ```c
-  /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderLogicalPresentation(SDL_Renderer *renderer, int *w, int *h, SDL_RendererLogicalPresentation *mode, SDL_ScaleMode *scale_mode)
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderLogicalPresentation(SDL_Renderer *renderer, int *w, int *h, SDL_RendererLogicalPresentation *mode)
   /// ```
   int getLogicalMode() {
     var wPointer = calloc<Int32>();
     var hPointer = calloc<Int32>();
     var modePointer = calloc<Int32>();
-    var scaleModePointer = calloc<Int32>();
-    sdlGetRenderLogicalPresentation(
-        this, wPointer, hPointer, modePointer, scaleModePointer);
+    sdlGetRenderLogicalPresentation(this, wPointer, hPointer, modePointer);
     var result = modePointer.value;
     calloc.free(wPointer);
     calloc.free(hPointer);
     calloc.free(modePointer);
-    calloc.free(scaleModePointer);
-    return result;
-  }
-
-  ///
-  /// Get device independent resolution and presentation mode for rendering.
-  ///
-  /// This function gets the width and height of the logical rendering output, or
-  /// the output size in pixels if a logical resolution is not enabled.
-  ///
-  /// \param renderer the rendering context.
-  /// \param w an int to be filled with the width.
-  /// \param h an int to be filled with the height.
-  /// \param mode a pointer filled in with the presentation mode.
-  /// \param scale_mode a pointer filled in with the scale mode.
-  /// \returns true on success or false on failure; call SDL_GetError() for more
-  /// information.
-  ///
-  /// \since This function is available since SDL 3.0.0.
-  ///
-  /// \sa SDL_SetRenderLogicalPresentation
-  ///
-  /// ```c
-  /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderLogicalPresentation(SDL_Renderer *renderer, int *w, int *h, SDL_RendererLogicalPresentation *mode, SDL_ScaleMode *scale_mode)
-  /// ```
-  int getLogicalScaleMode() {
-    var wPointer = calloc<Int32>();
-    var hPointer = calloc<Int32>();
-    var modePointer = calloc<Int32>();
-    var scaleModePointer = calloc<Int32>();
-    sdlGetRenderLogicalPresentation(
-        this, wPointer, hPointer, modePointer, scaleModePointer);
-    var result = scaleModePointer.value;
-    calloc.free(wPointer);
-    calloc.free(hPointer);
-    calloc.free(modePointer);
-    calloc.free(scaleModePointer);
     return result;
   }
 
@@ -597,6 +589,8 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \param y a pointer filled with the y coordinate in render coordinates.
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
+  ///
+  /// \threadsafety You may only call this function from the main thread.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -628,6 +622,8 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// coordinates.
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
+  ///
+  /// \threadsafety You may only call this function from the main thread.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -661,6 +657,8 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
+  /// \threadsafety You may only call this function from the main thread.
+  ///
   /// \since This function is available since SDL 3.0.0.
   ///
   /// \sa SDL_RenderCoordinatesFromWindow
@@ -675,11 +673,19 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   ///
   /// Set the drawing area for rendering on the current target.
   ///
+  /// Drawing will clip to this area (separately from any clipping done with
+  /// SDL_SetRenderClipRect), and the top left of the area will become coordinate
+  /// (0, 0) for future drawing commands.
+  ///
+  /// The area's width and height must be >= 0.
+  ///
   /// \param renderer the rendering context.
   /// \param rect the SDL_Rect structure representing the drawing area, or NULL
   /// to set the viewport to the entire target.
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
+  ///
+  /// \threadsafety You may only call this function from the main thread.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -707,6 +713,8 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
+  /// \threadsafety You may only call this function from the main thread.
+  ///
   /// \since This function is available since SDL 3.0.0.
   ///
   /// \sa SDL_RenderViewportSet
@@ -731,6 +739,8 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// the viewport, or NULL to disable clipping.
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
+  ///
+  /// \threadsafety You may only call this function from the main thread.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -759,6 +769,8 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
+  /// \threadsafety You may only call this function from the main thread.
+  ///
   /// \since This function is available since SDL 3.0.0.
   ///
   /// \sa SDL_RenderClipEnabled
@@ -781,6 +793,8 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \param renderer the rendering context.
   /// \returns true if clipping is enabled or false if not; call SDL_GetError()
   /// for more information.
+  ///
+  /// \threadsafety You may only call this function from the main thread.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -811,6 +825,8 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
+  /// \threadsafety You may only call this function from the main thread.
+  ///
   /// \since This function is available since SDL 3.0.0.
   ///
   /// \sa SDL_GetRenderScale
@@ -830,6 +846,8 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \param scaleY a pointer filled in with the vertical scaling factor.
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
+  ///
+  /// \threadsafety You may only call this function from the main thread.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -864,6 +882,8 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
+  /// \threadsafety You may only call this function from the main thread.
+  ///
   /// \since This function is available since SDL 3.0.0.
   ///
   /// \sa SDL_GetRenderDrawColor
@@ -892,6 +912,8 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
+  /// \threadsafety You may only call this function from the main thread.
+  ///
   /// \since This function is available since SDL 3.0.0.
   ///
   /// \sa SDL_GetRenderDrawColorFloat
@@ -918,6 +940,8 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// rendering target; usually `SDL_ALPHA_OPAQUE` (255).
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
+  ///
+  /// \threadsafety You may only call this function from the main thread.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -959,6 +983,8 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// rendering target.
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
+  ///
+  /// \threadsafety You may only call this function from the main thread.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -1002,6 +1028,8 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
+  /// \threadsafety You may only call this function from the main thread.
+  ///
   /// \since This function is available since SDL 3.0.0.
   ///
   /// \sa SDL_GetRenderColorScale
@@ -1020,6 +1048,8 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \param scale a pointer filled in with the current color scale value.
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
+  ///
+  /// \threadsafety You may only call this function from the main thread.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -1046,6 +1076,8 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
+  /// \threadsafety You may only call this function from the main thread.
+  ///
   /// \since This function is available since SDL 3.0.0.
   ///
   /// \sa SDL_GetRenderDrawBlendMode
@@ -1064,6 +1096,8 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \param blendMode a pointer filled in with the current SDL_BlendMode.
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
+  ///
+  /// \threadsafety You may only call this function from the main thread.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -1092,6 +1126,8 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
+  /// \threadsafety You may only call this function from the main thread.
+  ///
   /// \since This function is available since SDL 3.0.0.
   ///
   /// \sa SDL_SetRenderDrawColor
@@ -1112,6 +1148,8 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
+  /// \threadsafety You may only call this function from the main thread.
+  ///
   /// \since This function is available since SDL 3.0.0.
   ///
   /// \sa SDL_RenderPoints
@@ -1131,6 +1169,8 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \param count the number of points to draw.
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
+  ///
+  /// \threadsafety You may only call this function from the main thread.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -1157,6 +1197,8 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
+  /// \threadsafety You may only call this function from the main thread.
+  ///
   /// \since This function is available since SDL 3.0.0.
   ///
   /// \sa SDL_RenderLines
@@ -1177,6 +1219,8 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \param count the number of points, drawing count-1 lines.
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
+  ///
+  /// \threadsafety You may only call this function from the main thread.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -1200,6 +1244,8 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// entire rendering target.
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
+  ///
+  /// \threadsafety You may only call this function from the main thread.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -1228,6 +1274,8 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
+  /// \threadsafety You may only call this function from the main thread.
+  ///
   /// \since This function is available since SDL 3.0.0.
   ///
   /// \sa SDL_RenderRect
@@ -1251,6 +1299,8 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// rendering target.
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
+  ///
+  /// \threadsafety You may only call this function from the main thread.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -1279,6 +1329,8 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
+  /// \threadsafety You may only call this function from the main thread.
+  ///
   /// \since This function is available since SDL 3.0.0.
   ///
   /// \sa SDL_RenderFillRect
@@ -1305,6 +1357,8 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// entire rendering target.
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
+  ///
+  /// \threadsafety You may only call this function from the main thread.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -1350,6 +1404,8 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// performed on the texture.
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
+  ///
+  /// \threadsafety You may only call this function from the main thread.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -1400,6 +1456,8 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
+  /// \threadsafety You may only call this function from the main thread.
+  ///
   /// \since This function is available since SDL 3.0.0.
   ///
   /// \sa SDL_RenderGeometryRaw
@@ -1433,6 +1491,8 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \param size_indices index size: 1 (byte), 2 (short), 4 (int).
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
+  ///
+  /// \threadsafety You may only call this function from the main thread.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -1484,16 +1544,18 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// pixel.
   ///
   /// Please note, that in case of rendering to a texture - there is **no need**
-  /// to call `SDL_RenderPresent` after drawing needed objects to a texture, you
-  /// are only required to change back the rendering target to default via
-  /// `SDL_SetRenderTarget(renderer, NULL)` afterwards, as textures by themselves
-  /// do not have a concept of backbuffers.
+  /// to call `SDL_RenderPresent` after drawing needed objects to a texture, and
+  /// should not be done; you are only required to change back the rendering
+  /// target to default via `SDL_SetRenderTarget(renderer, NULL)` afterwards, as
+  /// textures by themselves do not have a concept of backbuffers. Calling
+  /// SDL_RenderPresent while rendering to a texture will still update the screen
+  /// with any current drawing that has been done _to the window itself_.
   ///
   /// \param renderer the rendering context.
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \threadsafety You may only call this function on the main thread.
+  /// \threadsafety You may only call this function from the main thread.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -1524,6 +1586,8 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// This should be called before destroying the associated window.
   ///
   /// \param renderer the rendering context.
+  ///
+  /// \threadsafety You may only call this function from the main thread.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -1567,6 +1631,8 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
+  /// \threadsafety You may only call this function from the main thread.
+  ///
   /// \since This function is available since SDL 3.0.0.
   ///
   /// ```c
@@ -1585,6 +1651,8 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \param renderer the renderer to query.
   /// \returns a `CAMetalLayer *` on success, or NULL if the renderer isn't a
   /// Metal renderer.
+  ///
+  /// \threadsafety You may only call this function from the main thread.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -1611,6 +1679,8 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \param renderer the renderer to query.
   /// \returns an `id<MTLRenderCommandEncoder>` on success, or NULL if the
   /// renderer isn't a Metal renderer or there was an error.
+  ///
+  /// \threadsafety You may only call this function from the main thread.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
@@ -1640,6 +1710,8 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
+  /// \threadsafety You may only call this function from the main thread.
+  ///
   /// \since This function is available since SDL 3.0.0.
   ///
   /// \sa SDL_GetRenderVSync
@@ -1659,6 +1731,8 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// See SDL_SetRenderVSync() for the meaning of the value.
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
+  ///
+  /// \threadsafety You may only call this function from the main thread.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///

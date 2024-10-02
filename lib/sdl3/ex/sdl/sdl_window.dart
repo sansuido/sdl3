@@ -1317,6 +1317,8 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// \returns a valid rendering context or NULL if there was an error; call
   /// SDL_GetError() for more information.
   ///
+  /// \threadsafety You may only call this function from the main thread.
+  ///
   /// \since This function is available since SDL 3.0.0.
   ///
   /// \sa SDL_CreateRendererWithProperties
@@ -1339,6 +1341,8 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// \param window the window to query.
   /// \returns the rendering context on success or NULL on failure; call
   /// SDL_GetError() for more information.
+  ///
+  /// \threadsafety It is safe to call this function from any thread.
   ///
   /// \since This function is available since SDL 3.0.0.
   ///

@@ -1089,6 +1089,17 @@ int sdlCrc32(int crc, Pointer<NativeType> data, int len) {
   return sdlCrc32LookupFunction(crc, data, len);
 }
 
+/// ```c
+/// extern SDL_DECLSPEC Uint32 SDLCALL SDL_murmur3_32(const void *data, size_t len, Uint32 seed)
+/// ```
+int sdlMurmur332(Pointer<NativeType> data, int len, int seed) {
+  final sdlMurmur332LookupFunction = libSdl3.lookupFunction<
+      Uint32 Function(Pointer<NativeType> data, Uint32 len, Uint32 seed),
+      int Function(
+          Pointer<NativeType> data, int len, int seed)>('SDL_murmur3_32');
+  return sdlMurmur332LookupFunction(data, len, seed);
+}
+
 ///
 /// Copy non-overlapping memory.
 ///

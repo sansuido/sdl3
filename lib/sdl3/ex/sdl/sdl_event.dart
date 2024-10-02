@@ -105,7 +105,7 @@ extension SdlEventEx on SdlEvent {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_FlushEvent(Uint32 type)
   /// ```
-  static void flash(int type) {
+  static void flush(int type) {
     sdlFlushEvent(type);
   }
 
@@ -135,7 +135,7 @@ extension SdlEventEx on SdlEvent {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_FlushEvents(Uint32 minType, Uint32 maxType)
   /// ```
-  static void flashs(int minType, int maxType) {
+  static void flushs(int minType, int maxType) {
     sdlFlushEvents(minType, maxType);
   }
 }
@@ -154,7 +154,9 @@ extension SdlEventPointerEx on Pointer<SdlEvent> {
   /// event queue.
   /// - `SDL_PEEKEVENT`: `numevents` events at the front of the event queue,
   /// within the specified minimum and maximum type, will be returned to the
-  /// caller and will _not_ be removed from the queue.
+  /// caller and will _not_ be removed from the queue. If you pass NULL for
+  /// `events`, then `numevents` is ignored and the total number of matching
+  /// events will be returned.
   /// - `SDL_GETEVENT`: up to `numevents` events at the front of the event queue,
   /// within the specified minimum and maximum type, will be returned to the
   /// caller and will be removed from the queue.

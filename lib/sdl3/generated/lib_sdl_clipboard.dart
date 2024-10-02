@@ -275,3 +275,27 @@ bool sdlHasClipboardData(String? mimeType) {
   calloc.free(mimeTypePointer);
   return result;
 }
+
+///
+/// Retrieve the list of mime types available in the clipboard.
+///
+/// \param num_mime_types a pointer filled with the number of mime types, may
+/// be NULL.
+/// \returns a null terminated array of strings with mime types, or NULL on
+/// failure; call SDL_GetError() for more information. This should be
+/// freed with SDL_free() when it is no longer needed.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// \sa SDL_SetClipboardData
+///
+/// ```c
+/// extern SDL_DECLSPEC char ** SDLCALL SDL_GetClipboardMimeTypes(size_t *num_mime_types)
+/// ```
+Pointer<Pointer<Int8>> sdlGetClipboardMimeTypes(Pointer<Uint32> numMimeTypes) {
+  final sdlGetClipboardMimeTypesLookupFunction = libSdl3.lookupFunction<
+      Pointer<Pointer<Int8>> Function(Pointer<Uint32> numMimeTypes),
+      Pointer<Pointer<Int8>> Function(
+          Pointer<Uint32> numMimeTypes)>('SDL_GetClipboardMimeTypes');
+  return sdlGetClipboardMimeTypesLookupFunction(numMimeTypes);
+}

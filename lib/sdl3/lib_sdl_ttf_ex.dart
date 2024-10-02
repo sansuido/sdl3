@@ -2,9 +2,9 @@
 import 'dart:ffi';
 import './generated/const_sdl_ttf.dart';
 import './generated/lib_sdl_error.dart';
-import './generated/lib_sdl_ttf.dart';
-import './generated/struct_sdl.dart';
-import './generated/struct_sdl_ttf.dart';
+//import './generated/lib_sdl_ttf.dart';
+//import './generated/struct_sdl.dart';
+//import './generated/struct_sdl_ttf.dart';
 import 'lib_sdl_ex.dart';
 
 /// ```c
@@ -20,29 +20,29 @@ bool sdlTtfVersionAtleast(int x, int y, int z) {
   return SDL_TTF_COMPILEDVERSION >= sdlVersionnum(x, y, z);
 }
 
-/// ```c
-/// const TTF_RenderText = (font, text, fg, bg) \ TTF_RenderText_Shaded(font, text, fg, bg);
-/// ```
-Pointer<SdlSurface> ttfRenderText(
-    Pointer<TtfFont> font, String text, SdlColor fg, SdlColor bg) {
-  return ttfRenderTextShaded(font, text, fg, bg);
-}
-
-/// ```c
-/// const TTF_RenderUTF8 = (font, text, fg, bg) \ TTF_RenderUTF8_Shaded(font, text, fg, bg);
-///
-Pointer<SdlSurface> ttfRenderUtf8(
-    Pointer<TtfFont> font, String text, SdlColor fg, SdlColor bg) {
-  return ttfRenderUtf8Shaded(font, text, fg, bg);
-}
-
-/// ```c
-/// const TTF_RenderUNICODE = (font, text, fg, bg) \ TTF_RenderUNICODE_Shaded(font, text, fg, bg);
-/// ```
-Pointer<SdlSurface> ttfRenderUnicode(
-    Pointer<TtfFont> font, Pointer<Uint16> text, SdlColor fg, SdlColor bg) {
-  return ttfRenderUnicodeShaded(font, text, fg, bg);
-}
+///// ```c
+///// const TTF_RenderText = (font, text, fg, bg) \ TTF_RenderText_Shaded(font, text, fg, bg);
+///// ```
+//Pointer<SdlSurface> ttfRenderText(
+//    Pointer<TtfFont> font, String text, SdlColor fg, SdlColor bg) {
+//  return ttfRenderTextShaded(font, text, fg, bg);
+//}
+//
+///// ```c
+///// const TTF_RenderUTF8 = (font, text, fg, bg) \ TTF_RenderUTF8_Shaded(font, text, fg, bg);
+/////
+//Pointer<SdlSurface> ttfRenderUtf8(
+//    Pointer<TtfFont> font, String text, SdlColor fg, SdlColor bg) {
+//  return ttfRenderUtf8Shaded(font, text, fg, bg);
+//}
+//
+///// ```c
+///// const TTF_RenderUNICODE = (font, text, fg, bg) \ TTF_RenderUNICODE_Shaded(font, text, fg, bg);
+///// ```
+//Pointer<SdlSurface> ttfRenderUnicode(
+//    Pointer<TtfFont> font, Pointer<Uint16> text, SdlColor fg, SdlColor bg) {
+//  return ttfRenderUnicodeShaded(font, text, fg, bg);
+//}
 
 /// ```c
 /// const TTF_SetError = SDL_SetError;

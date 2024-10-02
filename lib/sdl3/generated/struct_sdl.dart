@@ -1824,13 +1824,13 @@ final class SdlGpuRasterizerState extends Struct {
   external int enableDepthBias;
   // [25]+(1)
   @Uint8()
-  external int padding1;
+  external int enableDepthClip;
   // [26]+(1)
   @Uint8()
-  external int padding2;
+  external int padding1;
   // [27]+(1)
   @Uint8()
-  external int padding3;
+  external int padding2;
   // [] +(4)
   @Uint32()
   external int blank_1;
@@ -2061,10 +2061,10 @@ final class SdlGpuComputePipelineCreateInfo extends Struct {
   external int numReadonlyStorageBuffers;
   // [40]+(4)
   @Uint32()
-  external int numWriteonlyStorageTextures;
+  external int numReadwriteStorageTextures;
   // [44]+(4)
   @Uint32()
-  external int numWriteonlyStorageBuffers;
+  external int numReadwriteStorageBuffers;
   // [48]+(4)
   @Uint32()
   external int numUniformBuffers;
@@ -2244,8 +2244,8 @@ final class SdlGpuTextureSamplerBinding extends Struct {
   external Pointer<SdlGpuSampler> sampler;
 }
 
-// SDL_GPUStorageBufferWriteOnlyBinding
-final class SdlGpuStorageBufferWriteOnlyBinding extends Struct {
+// SDL_GPUStorageBufferReadWriteBinding
+final class SdlGpuStorageBufferReadWriteBinding extends Struct {
   // [0]+(8)
   external Pointer<SdlGpuBuffer> buffer;
   // [8]+(1)
@@ -2265,8 +2265,8 @@ final class SdlGpuStorageBufferWriteOnlyBinding extends Struct {
   external int blank_1;
 }
 
-// SDL_GPUStorageTextureWriteOnlyBinding
-final class SdlGpuStorageTextureWriteOnlyBinding extends Struct {
+// SDL_GPUStorageTextureReadWriteBinding
+final class SdlGpuStorageTextureReadWriteBinding extends Struct {
   // [0]+(8)
   external Pointer<SdlGpuTexture> texture;
   // [8]+(4)
@@ -3001,6 +3001,22 @@ final class SdlSemaphore extends Opaque {}
 
 // SDL_Condition
 final class SdlCondition extends Opaque {}
+
+// SDL_InitState
+final class SdlInitState extends Struct {
+  // [0]+(8)
+  @Uint64()
+  external int status_1;
+  // [8]+(8)
+  @Uint64()
+  external int thread;
+  // [16]+(8)
+  external Pointer<NativeType> reserved;
+}
+
+extension SdlInitStateExtension on Pointer<SdlInitState> {
+  Pointer<SdlAtomicInt> get status => (cast<Uint8>() + 0).cast<SdlAtomicInt>();
+}
 
 // SDL_Color
 final class SdlColor extends Struct {

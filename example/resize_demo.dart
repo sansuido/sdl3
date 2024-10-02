@@ -25,8 +25,8 @@ int main() {
   if (texture != nullptr) {
     var size = texture.getSize();
     if (size != null) {
-      renderer.setLogicalPresentation(size.x.toInt(), size.y.toInt(),
-          SDL_LOGICAL_PRESENTATION_LETTERBOX, SDL_SCALEMODE_NEAREST);
+      renderer.setLogicalPresentation(
+          size.x.toInt(), size.y.toInt(), SDL_LOGICAL_PRESENTATION_LETTERBOX);
     }
   }
   bool done = true;

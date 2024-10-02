@@ -60,7 +60,8 @@ bool sdlGpuSupportsProperties(int props) {
 /// \param debug_mode enable debug mode properties and validations.
 /// \param name the preferred GPU driver, or NULL to let SDL pick the optimal
 /// driver.
-/// \returns a GPU context on success or NULL on failure.
+/// \returns a GPU context on success or NULL on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -119,7 +120,8 @@ Pointer<SdlGpuDevice> sdlCreateGpuDevice(
 /// use for all vertex semantics, default is "TEXCOORD".
 ///
 /// \param props the properties to use.
-/// \returns a GPU context on success or NULL on failure.
+/// \returns a GPU context on success or NULL on failure; call SDL_GetError()
+/// for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -288,7 +290,8 @@ int sdlGetGpuShaderFormats(Pointer<SdlGpuDevice> device) {
 /// \param device a GPU Context.
 /// \param createinfo a struct describing the state of the compute pipeline to
 /// create.
-/// \returns a compute pipeline object on success, or NULL on failure.
+/// \returns a compute pipeline object on success, or NULL on failure; call
+/// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -316,7 +319,8 @@ Pointer<SdlGpuComputePipeline> sdlCreateGpuComputePipeline(
 /// \param device a GPU Context.
 /// \param createinfo a struct describing the state of the graphics pipeline to
 /// create.
-/// \returns a graphics pipeline object on success, or NULL on failure.
+/// \returns a graphics pipeline object on success, or NULL on failure; call
+/// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -345,7 +349,8 @@ Pointer<SdlGpuGraphicsPipeline> sdlCreateGpuGraphicsPipeline(
 ///
 /// \param device a GPU Context.
 /// \param createinfo a struct describing the state of the sampler to create.
-/// \returns a sampler object on success, or NULL on failure.
+/// \returns a sampler object on success, or NULL on failure; call
+/// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -423,7 +428,8 @@ Pointer<SdlGpuSampler> sdlCreateGpuSampler(
 ///
 /// \param device a GPU Context.
 /// \param createinfo a struct describing the state of the shader to create.
-/// \returns a shader object on success, or NULL on failure.
+/// \returns a shader object on success, or NULL on failure; call
+/// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -458,7 +464,8 @@ Pointer<SdlGpuShader> sdlCreateGpuShader(
 ///
 /// \param device a GPU Context.
 /// \param createinfo a struct describing the state of the texture to create.
-/// \returns a texture object on success, or NULL on failure.
+/// \returns a texture object on success, or NULL on failure; call
+/// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -497,7 +504,8 @@ Pointer<SdlGpuTexture> sdlCreateGpuTexture(
 ///
 /// \param device a GPU Context.
 /// \param createinfo a struct describing the state of the buffer to create.
-/// \returns a buffer object on success, or NULL on failure.
+/// \returns a buffer object on success, or NULL on failure; call
+/// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -535,7 +543,8 @@ Pointer<SdlGpuBuffer> sdlCreateGpuBuffer(
 /// \param device a GPU Context.
 /// \param createinfo a struct describing the state of the transfer buffer to
 /// create.
-/// \returns a transfer buffer on success, or NULL on failure.
+/// \returns a transfer buffer on success, or NULL on failure; call
+/// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -872,7 +881,8 @@ void sdlReleaseGpuGraphicsPipeline(Pointer<SdlGpuDevice> device,
 /// acquired on.
 ///
 /// \param device a GPU context.
-/// \returns a command buffer.
+/// \returns a command buffer, or NULL on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -1580,17 +1590,23 @@ void sdlEndGpuRenderPass(Pointer<SdlGpuRenderPass> renderPass) {
 /// Begins a compute pass on a command buffer.
 ///
 /// A compute pass is defined by a set of texture subresources and buffers that
-/// will be written to by compute pipelines. These textures and buffers must
-/// have been created with the COMPUTE_STORAGE_WRITE bit. All operations
-/// related to compute pipelines must take place inside of a compute pass. You
-/// must not begin another compute pass, or a render pass or copy pass before
-/// ending the compute pass.
+/// may be written to by compute pipelines. These textures and buffers must
+/// have been created with the COMPUTE_STORAGE_WRITE bit or the
+/// COMPUTE_STORAGE_SIMULTANEOUS_READ_WRITE bit. If you do not create a texture
+/// with COMPUTE_STORAGE_SIMULTANEOUS_READ_WRITE, you must not read from the
+/// texture in the compute pass. All operations related to compute pipelines
+/// must take place inside of a compute pass. You must not begin another
+/// compute pass, or a render pass or copy pass before ending the compute pass.
 ///
-/// A VERY IMPORTANT NOTE Textures and buffers bound as write-only MUST NOT be
-/// read from during the compute pass. Doing so will result in undefined
-/// behavior. If your compute work requires reading the output from a previous
-/// dispatch, you MUST end the current compute pass and begin a new one before
-/// you can safely access the data.
+/// A VERY IMPORTANT NOTE - Reads and writes in compute passes are NOT
+/// implicitly synchronized. This means you may cause data races by both
+/// reading and writing a resource region in a compute pass, or by writing
+/// multiple times to a resource region. If your compute work depends on
+/// reading the completed output from a previous dispatch, you MUST end the
+/// current compute pass and begin a new one before you can safely access the
+/// data. Otherwise you will receive unexpected results. Reading and writing a
+/// texture in the same compute pass is only supported by specific texture
+/// formats. Make sure you check the format support!
 ///
 /// \param command_buffer a command buffer.
 /// \param storage_texture_bindings an array of writeable storage texture
@@ -1608,26 +1624,26 @@ void sdlEndGpuRenderPass(Pointer<SdlGpuRenderPass> renderPass) {
 /// \sa SDL_EndGPUComputePass
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_GPUComputePass *SDLCALL SDL_BeginGPUComputePass( SDL_GPUCommandBuffer *command_buffer, const SDL_GPUStorageTextureWriteOnlyBinding *storage_texture_bindings, Uint32 num_storage_texture_bindings, const SDL_GPUStorageBufferWriteOnlyBinding *storage_buffer_bindings, Uint32 num_storage_buffer_bindings)
+/// extern SDL_DECLSPEC SDL_GPUComputePass *SDLCALL SDL_BeginGPUComputePass( SDL_GPUCommandBuffer *command_buffer, const SDL_GPUStorageTextureReadWriteBinding *storage_texture_bindings, Uint32 num_storage_texture_bindings, const SDL_GPUStorageBufferReadWriteBinding *storage_buffer_bindings, Uint32 num_storage_buffer_bindings)
 /// ```
 Pointer<SdlGpuComputePass> sdlBeginGpuComputePass(
     Pointer<SdlGpuCommandBuffer> commandBuffer,
-    Pointer<SdlGpuStorageTextureWriteOnlyBinding> storageTextureBindings,
+    Pointer<SdlGpuStorageTextureReadWriteBinding> storageTextureBindings,
     int numStorageTextureBindings,
-    Pointer<SdlGpuStorageBufferWriteOnlyBinding> storageBufferBindings,
+    Pointer<SdlGpuStorageBufferReadWriteBinding> storageBufferBindings,
     int numStorageBufferBindings) {
   final sdlBeginGpuComputePassLookupFunction = libSdl3.lookupFunction<
       Pointer<SdlGpuComputePass> Function(
           Pointer<SdlGpuCommandBuffer> commandBuffer,
-          Pointer<SdlGpuStorageTextureWriteOnlyBinding> storageTextureBindings,
+          Pointer<SdlGpuStorageTextureReadWriteBinding> storageTextureBindings,
           Uint32 numStorageTextureBindings,
-          Pointer<SdlGpuStorageBufferWriteOnlyBinding> storageBufferBindings,
+          Pointer<SdlGpuStorageBufferReadWriteBinding> storageBufferBindings,
           Uint32 numStorageBufferBindings),
       Pointer<SdlGpuComputePass> Function(
           Pointer<SdlGpuCommandBuffer> commandBuffer,
-          Pointer<SdlGpuStorageTextureWriteOnlyBinding> storageTextureBindings,
+          Pointer<SdlGpuStorageTextureReadWriteBinding> storageTextureBindings,
           int numStorageTextureBindings,
-          Pointer<SdlGpuStorageBufferWriteOnlyBinding> storageBufferBindings,
+          Pointer<SdlGpuStorageBufferReadWriteBinding> storageBufferBindings,
           int numStorageBufferBindings)>('SDL_BeginGPUComputePass');
   return sdlBeginGpuComputePassLookupFunction(
       commandBuffer,
@@ -1859,7 +1875,8 @@ void sdlEndGpuComputePass(Pointer<SdlGpuComputePass> computePass) {
 /// \param device a GPU context.
 /// \param transfer_buffer a transfer buffer.
 /// \param cycle if true, cycles the transfer buffer if it is already bound.
-/// \returns the address of the mapped transfer buffer memory.
+/// \returns the address of the mapped transfer buffer memory, or NULL on
+/// failure; call SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -2229,7 +2246,7 @@ void sdlBlitGpuTexture(
 /// \param device a GPU context.
 /// \param window an SDL_Window.
 /// \param swapchain_composition the swapchain composition to check.
-/// \returns true if supported, false if unsupported (or on error).
+/// \returns true if supported, false if unsupported.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -2260,7 +2277,7 @@ bool sdlWindowSupportsGpuSwapchainComposition(Pointer<SdlGpuDevice> device,
 /// \param device a GPU context.
 /// \param window an SDL_Window.
 /// \param present_mode the presentation mode to check.
-/// \returns true if supported, false if unsupported (or on error).
+/// \returns true if supported, false if unsupported.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -2285,6 +2302,7 @@ bool sdlWindowSupportsGpuPresentMode(
 /// Claims a window, creating a swapchain structure for it.
 ///
 /// This must be called before SDL_AcquireGPUSwapchainTexture is called using
+/// the window. You should only call this function from the thread that created
 /// the window.
 ///
 /// The swapchain will be created with SDL_GPU_SWAPCHAINCOMPOSITION_SDR and
@@ -2294,7 +2312,8 @@ bool sdlWindowSupportsGpuPresentMode(
 ///
 /// \param device a GPU context.
 /// \param window an SDL_Window.
-/// \returns true on success, otherwise false.
+/// \returns true on success, or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -2380,6 +2399,8 @@ bool sdlSetGpuSwapchainParameters(Pointer<SdlGpuDevice> device,
 ///
 /// Obtains the texture format of the swapchain for the given window.
 ///
+/// Note that this format can change if the swapchain parameters change.
+///
 /// \param device a GPU context.
 /// \param window an SDL_Window that has been claimed.
 /// \returns the texture format of the swapchain.
@@ -2404,44 +2425,48 @@ int sdlGetGpuSwapchainTextureFormat(
 /// When a swapchain texture is acquired on a command buffer, it will
 /// automatically be submitted for presentation when the command buffer is
 /// submitted. The swapchain texture should only be referenced by the command
-/// buffer used to acquire it. May return NULL under certain conditions. This
-/// is not necessarily an error. This texture is managed by the implementation
-/// and must not be freed by the user. You MUST NOT call this function from any
-/// thread other than the one that created the window.
+/// buffer used to acquire it. The swapchain texture handle can be NULL under
+/// certain conditions. This is not necessarily an error. If this function
+/// returns false then there is an error. The swapchain texture is managed by
+/// the implementation and must not be freed by the user. The texture
+/// dimensions will be the width and height of the claimed window. You can
+/// obtain these dimensions by calling SDL_GetWindowSizeInPixels. You MUST NOT
+/// call this function from any thread other than the one that created the
+/// window.
 ///
 /// \param command_buffer a command buffer.
 /// \param window a window that has been claimed.
-/// \param w a pointer filled in with the swapchain width.
-/// \param h a pointer filled in with the swapchain height.
-/// \returns a swapchain texture.
+/// \param swapchainTexture a pointer filled in with a swapchain texture
+/// handle.
+/// \returns true on success, false on error.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_ClaimWindowForGPUDevice
 /// \sa SDL_SubmitGPUCommandBuffer
 /// \sa SDL_SubmitGPUCommandBufferAndAcquireFence
+/// \sa SDL_GetWindowSizeInPixels
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_GPUTexture *SDLCALL SDL_AcquireGPUSwapchainTexture( SDL_GPUCommandBuffer *command_buffer, SDL_Window *window, Uint32 *w, Uint32 *h)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_AcquireGPUSwapchainTexture( SDL_GPUCommandBuffer *command_buffer, SDL_Window *window, SDL_GPUTexture **swapchainTexture)
 /// ```
-Pointer<SdlGpuTexture> sdlAcquireGpuSwapchainTexture(
+bool sdlAcquireGpuSwapchainTexture(
     Pointer<SdlGpuCommandBuffer> commandBuffer,
     Pointer<SdlWindow> window,
-    Pointer<Uint32> w,
-    Pointer<Uint32> h) {
+    Pointer<Pointer<SdlGpuTexture>> swapchainTexture) {
   final sdlAcquireGpuSwapchainTextureLookupFunction = libSdl3.lookupFunction<
-      Pointer<SdlGpuTexture> Function(
-          Pointer<SdlGpuCommandBuffer> commandBuffer,
-          Pointer<SdlWindow> window,
-          Pointer<Uint32> w,
-          Pointer<Uint32> h),
-      Pointer<SdlGpuTexture> Function(
-          Pointer<SdlGpuCommandBuffer> commandBuffer,
-          Pointer<SdlWindow> window,
-          Pointer<Uint32> w,
-          Pointer<Uint32> h)>('SDL_AcquireGPUSwapchainTexture');
+          Uint8 Function(
+              Pointer<SdlGpuCommandBuffer> commandBuffer,
+              Pointer<SdlWindow> window,
+              Pointer<Pointer<SdlGpuTexture>> swapchainTexture),
+          int Function(
+              Pointer<SdlGpuCommandBuffer> commandBuffer,
+              Pointer<SdlWindow> window,
+              Pointer<Pointer<SdlGpuTexture>> swapchainTexture)>(
+      'SDL_AcquireGPUSwapchainTexture');
   return sdlAcquireGpuSwapchainTextureLookupFunction(
-      commandBuffer, window, w, h);
+          commandBuffer, window, swapchainTexture) ==
+      1;
 }
 
 ///
@@ -2455,6 +2480,8 @@ Pointer<SdlGpuTexture> sdlAcquireGpuSwapchainTexture(
 /// command in a subsequent submission begins executing.
 ///
 /// \param command_buffer a command buffer.
+/// \returns true on success, false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -2463,14 +2490,14 @@ Pointer<SdlGpuTexture> sdlAcquireGpuSwapchainTexture(
 /// \sa SDL_SubmitGPUCommandBufferAndAcquireFence
 ///
 /// ```c
-/// extern SDL_DECLSPEC void SDLCALL SDL_SubmitGPUCommandBuffer( SDL_GPUCommandBuffer *command_buffer)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SubmitGPUCommandBuffer( SDL_GPUCommandBuffer *command_buffer)
 /// ```
-void sdlSubmitGpuCommandBuffer(Pointer<SdlGpuCommandBuffer> commandBuffer) {
+bool sdlSubmitGpuCommandBuffer(Pointer<SdlGpuCommandBuffer> commandBuffer) {
   final sdlSubmitGpuCommandBufferLookupFunction = libSdl3.lookupFunction<
-          Void Function(Pointer<SdlGpuCommandBuffer> commandBuffer),
-          void Function(Pointer<SdlGpuCommandBuffer> commandBuffer)>(
+          Uint8 Function(Pointer<SdlGpuCommandBuffer> commandBuffer),
+          int Function(Pointer<SdlGpuCommandBuffer> commandBuffer)>(
       'SDL_SubmitGPUCommandBuffer');
-  return sdlSubmitGpuCommandBufferLookupFunction(commandBuffer);
+  return sdlSubmitGpuCommandBufferLookupFunction(commandBuffer) == 1;
 }
 
 ///
@@ -2486,7 +2513,8 @@ void sdlSubmitGpuCommandBuffer(Pointer<SdlGpuCommandBuffer> commandBuffer) {
 /// command in a subsequent submission begins executing.
 ///
 /// \param command_buffer a command buffer.
-/// \returns a fence associated with the command buffer.
+/// \returns a fence associated with the command buffer, or NULL on failure;
+/// call SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -2514,19 +2542,21 @@ Pointer<SdlGpuFence> sdlSubmitGpuCommandBufferAndAcquireFence(
 /// Blocks the thread until the GPU is completely idle.
 ///
 /// \param device a GPU context.
+/// \returns true on success, false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_WaitForGPUFences
 ///
 /// ```c
-/// extern SDL_DECLSPEC void SDLCALL SDL_WaitForGPUIdle( SDL_GPUDevice *device)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_WaitForGPUIdle( SDL_GPUDevice *device)
 /// ```
-void sdlWaitForGpuIdle(Pointer<SdlGpuDevice> device) {
+bool sdlWaitForGpuIdle(Pointer<SdlGpuDevice> device) {
   final sdlWaitForGpuIdleLookupFunction = libSdl3.lookupFunction<
-      Void Function(Pointer<SdlGpuDevice> device),
-      void Function(Pointer<SdlGpuDevice> device)>('SDL_WaitForGPUIdle');
-  return sdlWaitForGpuIdleLookupFunction(device);
+      Uint8 Function(Pointer<SdlGpuDevice> device),
+      int Function(Pointer<SdlGpuDevice> device)>('SDL_WaitForGPUIdle');
+  return sdlWaitForGpuIdleLookupFunction(device) == 1;
 }
 
 ///
@@ -2537,6 +2567,8 @@ void sdlWaitForGpuIdle(Pointer<SdlGpuDevice> device) {
 /// fences to be signaled.
 /// \param fences an array of fences to wait on.
 /// \param num_fences the number of fences in the fences array.
+/// \returns true on success, false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -2544,20 +2576,21 @@ void sdlWaitForGpuIdle(Pointer<SdlGpuDevice> device) {
 /// \sa SDL_WaitForGPUIdle
 ///
 /// ```c
-/// extern SDL_DECLSPEC void SDLCALL SDL_WaitForGPUFences( SDL_GPUDevice *device, bool wait_all, SDL_GPUFence *const *fences, Uint32 num_fences)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_WaitForGPUFences( SDL_GPUDevice *device, bool wait_all, SDL_GPUFence *const *fences, Uint32 num_fences)
 /// ```
-void sdlWaitForGpuFences(Pointer<SdlGpuDevice> device, bool waitAll,
+bool sdlWaitForGpuFences(Pointer<SdlGpuDevice> device, bool waitAll,
     Pointer<Pointer<SdlGpuFence>> fences, int numFences) {
   final sdlWaitForGpuFencesLookupFunction = libSdl3.lookupFunction<
-      Void Function(Pointer<SdlGpuDevice> device, Uint8 waitAll,
+      Uint8 Function(Pointer<SdlGpuDevice> device, Uint8 waitAll,
           Pointer<Pointer<SdlGpuFence>> fences, Uint32 numFences),
-      void Function(
+      int Function(
           Pointer<SdlGpuDevice> device,
           int waitAll,
           Pointer<Pointer<SdlGpuFence>> fences,
           int numFences)>('SDL_WaitForGPUFences');
   return sdlWaitForGpuFencesLookupFunction(
-      device, waitAll ? 1 : 0, fences, numFences);
+          device, waitAll ? 1 : 0, fences, numFences) ==
+      1;
 }
 
 ///
