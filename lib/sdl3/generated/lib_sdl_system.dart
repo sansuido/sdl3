@@ -349,22 +349,6 @@ int sdlGetAndroidSdkVersion() {
 }
 
 ///
-/// Query if the application is running on Android TV.
-///
-/// \returns true if this is Android TV, false otherwise.
-///
-/// \since This function is available since SDL 3.0.0.
-///
-/// ```c
-/// extern SDL_DECLSPEC bool SDLCALL SDL_IsAndroidTV(void)
-/// ```
-bool sdlIsAndroidTv() {
-  final sdlIsAndroidTvLookupFunction = libSdl3
-      .lookupFunction<Uint8 Function(), int Function()>('SDL_IsAndroidTV');
-  return sdlIsAndroidTvLookupFunction() == 1;
-}
-
-///
 /// Query if the application is running on a Chromebook.
 ///
 /// \returns true if this is a Chromebook, false otherwise.
@@ -676,6 +660,24 @@ bool sdlIsTablet() {
   final sdlIsTabletLookupFunction =
       libSdl3.lookupFunction<Uint8 Function(), int Function()>('SDL_IsTablet');
   return sdlIsTabletLookupFunction() == 1;
+}
+
+///
+/// Query if the current device is a TV.
+///
+/// If SDL can't determine this, it will return false.
+///
+/// \returns true if the device is a TV, false otherwise.
+///
+/// \since This function is available since SDL 3.0.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL SDL_IsTV(void)
+/// ```
+bool sdlIsTv() {
+  final sdlIsTvLookupFunction =
+      libSdl3.lookupFunction<Uint8 Function(), int Function()>('SDL_IsTV');
+  return sdlIsTvLookupFunction() == 1;
 }
 
 ///

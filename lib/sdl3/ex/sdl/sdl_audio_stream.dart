@@ -636,6 +636,12 @@ extension SdlAudioStreamPointerEx on Pointer<SdlAudioStream> {
   ///
   /// Get the number of bytes currently queued.
   ///
+  /// This is the number of bytes put into a stream as input, not the number that
+  /// can be retrieved as output. Because of several details, it's not possible
+  /// to calculate one number directly from the other. If you need to know how
+  /// much usable data can be retrieved right now, you should use
+  /// SDL_GetAudioStreamAvailable() and not this function.
+  ///
   /// Note that audio streams can change their input format at any time, even if
   /// there is still data queued in a different format, so the returned byte
   /// count will not necessarily match the number of _sample frames_ available.

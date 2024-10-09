@@ -1,3 +1,7 @@
+## 0.1.37
+- SDL3-2024-10-06
+- [update] Enum classes Renamed.
+
 ## 0.1.36
 - SDL3-2024-09-30
 - [update] Support Enum classes.

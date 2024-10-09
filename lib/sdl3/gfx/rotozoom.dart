@@ -121,12 +121,10 @@ Pointer<SdlSurface> rotateSurface90Degrees(
 			since it does not preserve alpha. */
 
         if (src.ref.pitch == dst.ref.pitch) {
-          print('(1)kotti');
           /* If the pitch is the same for both surfaces, the memory can be copied all at once. */
           sdlMemcpy(
               dst.ref.pixels, src.ref.pixels, (src.ref.h * src.ref.pitch));
         } else {
-          print('(2)kotti');
           /* If the pitch differs, copy each row separately */
           srcBuf.value = src.ref.pixels.cast<Uint8>();
           dstBuf.value = dst.ref.pixels.cast<Uint8>();

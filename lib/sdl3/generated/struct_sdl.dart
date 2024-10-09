@@ -1267,19 +1267,17 @@ final class SdlGamepad extends Opaque {}
 final class SdlGamepadBinding extends Struct {
   // [0]+(4)
   @Int32()
-  external int inputType;
+  external int axis;
+  // [4]+(4)
+  @Int32()
+  external int axisMin;
+  // [8]+(4)
+  @Int32()
+  external int axisMax;
   // [] +(4)
   @Uint32()
   external int blank_1;
-  // [8]+(8)
-  external Pointer<NativeType> input;
-  // [16]+(4)
-  @Int32()
-  external int outputType;
-  // [] +(4)
-  @Uint32()
-  external int blank_2;
-  // [24]+(8)
+  // [16]+(8)
   external Pointer<NativeType> output;
 }
 
@@ -1684,10 +1682,10 @@ final class SdlGpuColorTargetBlendState extends Struct {
   external int enableColorWriteMask;
   // [27]+(1)
   @Uint8()
-  external int padding2;
+  external int padding1;
   // [28]+(1)
   @Uint8()
-  external int padding3;
+  external int padding2;
   // [] +(3)
   @Uint16()
   external int blank_1;
@@ -2894,6 +2892,9 @@ final class SdlVirtualJoystickDesc extends Struct {
   external Pointer<NativeType> cleanup;
 }
 
+// SDL_SharedObject
+final class SdlSharedObject extends Opaque {}
+
 // SDL_Locale
 final class SdlLocale extends Struct {
   // [0]+(8)
@@ -3205,7 +3206,20 @@ extension SdlVertexExtension on Pointer<SdlVertex> {
 final class SdlRenderer extends Opaque {}
 
 // SDL_Texture
-final class SdlTexture extends Opaque {}
+final class SdlTexture extends Struct {
+  // [0]+(4)
+  @Int32()
+  external int format;
+  // [4]+(4)
+  @Int32()
+  external int w;
+  // [8]+(4)
+  @Int32()
+  external int h;
+  // [12]+(4)
+  @Int32()
+  external int refcount;
+}
 
 // SDL_Sensor
 final class SdlSensor extends Opaque {}
@@ -3267,9 +3281,6 @@ final class SdlStorageInterface extends Struct {
 // SDL_Storage
 final class SdlStorage extends Opaque {}
 
-// SDL_SurfaceData
-final class SdlSurfaceData extends Opaque {}
-
 // SDL_Surface
 final class SdlSurface extends Struct {
   // [0]+(4)
@@ -3299,7 +3310,7 @@ final class SdlSurface extends Struct {
   @Uint32()
   external int blank_2;
   // [40]+(8)
-  external Pointer<SdlSurfaceData> internal;
+  external Pointer<NativeType> reserved;
 }
 
 // MSG

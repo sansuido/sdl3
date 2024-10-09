@@ -36,7 +36,7 @@ const TTF_DIRECTION_RTL = 0 + 1;
 const TTF_DIRECTION_TTB = 0 + 2;
 const TTF_DIRECTION_BTT = 0 + 3;
 
-class TtfPropFontEnum {
+class TtfkPropFont {
   static const createFilenameString = TTF_PROP_FONT_CREATE_FILENAME_STRING;
   static const createIostreamPointer = TTF_PROP_FONT_CREATE_IOSTREAM_POINTER;
   static const createIostreamOffsetNumber =
@@ -52,7 +52,7 @@ class TtfPropFontEnum {
   static const facePointer = TTF_PROP_FONT_FACE_POINTER;
 }
 
-class TtfStyleEnum {
+class TtfkStyle {
   static const normal = TTF_STYLE_NORMAL;
   static const bold = TTF_STYLE_BOLD;
   static const italic = TTF_STYLE_ITALIC;
@@ -60,7 +60,7 @@ class TtfStyleEnum {
   static const strikethrough = TTF_STYLE_STRIKETHROUGH;
 }
 
-class TtfHintingEnum {
+class TtfkHinting {
   static const normal = TTF_HINTING_NORMAL;
   static const light = TTF_HINTING_LIGHT;
   static const mono = TTF_HINTING_MONO;
@@ -68,14 +68,14 @@ class TtfHintingEnum {
   static const lightSubpixel = TTF_HINTING_LIGHT_SUBPIXEL;
 }
 
-class TtfHorizontalAlignEnum {
+class TtfkHorizontalAlign {
   static const invalid = TTF_HORIZONTAL_ALIGN_INVALID;
   static const left = TTF_HORIZONTAL_ALIGN_LEFT;
   static const center = TTF_HORIZONTAL_ALIGN_CENTER;
   static const right = TTF_HORIZONTAL_ALIGN_RIGHT;
 }
 
-class TtfDirectionEnum {
+class TtfkDirection {
   static const ltr = TTF_DIRECTION_LTR;
   static const rtl = TTF_DIRECTION_RTL;
   static const ttb = TTF_DIRECTION_TTB;

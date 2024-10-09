@@ -582,6 +582,13 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   ///
   /// Get a point in render coordinates when given a point in window coordinates.
   ///
+  /// This takes into account several states:
+  ///
+  /// - The window dimensions.
+  /// - The logical presentation settings (SDL_SetRenderLogicalPresentation)
+  /// - The scale (SDL_SetRenderScale)
+  /// - The viewport (SDL_SetRenderViewport)
+  ///
   /// \param renderer the rendering context.
   /// \param window_x the x coordinate in window coordinates.
   /// \param window_y the y coordinate in window coordinates.
@@ -613,6 +620,13 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   ///
   /// Get a point in window coordinates when given a point in render coordinates.
   ///
+  /// This takes into account several states:
+  ///
+  /// - The window dimensions.
+  /// - The logical presentation settings (SDL_SetRenderLogicalPresentation)
+  /// - The scale (SDL_SetRenderScale)
+  /// - The viewport (SDL_SetRenderViewport)
+  ///
   /// \param renderer the rendering context.
   /// \param x the x coordinate in render coordinates.
   /// \param y the y coordinate in render coordinates.
@@ -629,6 +643,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   ///
   /// \sa SDL_SetRenderLogicalPresentation
   /// \sa SDL_SetRenderScale
+  /// \sa SDL_SetRenderViewport
   ///
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderCoordinatesToWindow(SDL_Renderer *renderer, float x, float y, float *window_x, float *window_y)
@@ -646,6 +661,13 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
 
   ///
   /// Convert the coordinates in an event to render coordinates.
+  ///
+  /// This takes into account several states:
+  ///
+  /// - The window dimensions.
+  /// - The logical presentation settings (SDL_SetRenderLogicalPresentation)
+  /// - The scale (SDL_SetRenderScale)
+  /// - The viewport (SDL_SetRenderViewport)
   ///
   /// Touch coordinates are converted from normalized coordinates in the window
   /// to non-normalized rendering coordinates.
@@ -1412,7 +1434,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \sa SDL_RenderTexture
   ///
   /// ```c
-  /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderTextureRotated(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_FRect *srcrect, const SDL_FRect *dstrect, const double angle, const SDL_FPoint *center, const SDL_FlipMode flip)
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderTextureRotated(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_FRect *srcrect, const SDL_FRect *dstrect, double angle, const SDL_FPoint *center, SDL_FlipMode flip)
   /// ```
   bool textureRotated(Pointer<SdlTexture> texture,
       {math.Rectangle<double>? srcrect,

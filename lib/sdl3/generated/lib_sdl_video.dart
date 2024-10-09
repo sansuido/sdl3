@@ -3261,46 +3261,43 @@ Pointer<NativeType> sdlEglGetWindowSurface(Pointer<SdlWindow> window) {
 /// Sets the callbacks for defining custom EGLAttrib arrays for EGL
 /// initialization.
 ///
-/// Each callback should return a pointer to an EGL attribute array terminated
-/// with EGL_NONE. Callbacks may return NULL pointers to signal an error, which
-/// will cause the SDL_CreateWindow process to fail gracefully.
-///
-/// The arrays returned by each callback will be appended to the existing
-/// attribute arrays defined by SDL.
+/// Callbacks that aren't needed can be set to NULL.
 ///
 /// NOTE: These callback pointers will be reset after SDL_GL_ResetAttributes.
 ///
 /// \param platformAttribCallback callback for attributes to pass to
-/// eglGetPlatformDisplay.
+/// eglGetPlatformDisplay. May be NULL.
 /// \param surfaceAttribCallback callback for attributes to pass to
-/// eglCreateSurface.
+/// eglCreateSurface. May be NULL.
 /// \param contextAttribCallback callback for attributes to pass to
-/// eglCreateContext.
+/// eglCreateContext. May be NULL.
+/// \param userdata a pointer that is passed to the callbacks.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC void SDLCALL SDL_EGL_SetAttributeCallbacks(SDL_EGLAttribArrayCallback platformAttribCallback, SDL_EGLIntArrayCallback surfaceAttribCallback, SDL_EGLIntArrayCallback contextAttribCallback)
+/// extern SDL_DECLSPEC void SDLCALL SDL_EGL_SetAttributeCallbacks(SDL_EGLAttribArrayCallback platformAttribCallback, SDL_EGLIntArrayCallback surfaceAttribCallback, SDL_EGLIntArrayCallback contextAttribCallback, void *userdata)
 /// ```
 void sdlEglSetAttributeCallbacks(
     Pointer<NativeFunction<SdlEglAttribArrayCallback>> platformAttribCallback,
     Pointer<NativeFunction<SdlEglIntArrayCallback>> surfaceAttribCallback,
-    Pointer<NativeFunction<SdlEglIntArrayCallback>> contextAttribCallback) {
+    Pointer<NativeFunction<SdlEglIntArrayCallback>> contextAttribCallback,
+    Pointer<NativeType> userdata) {
   final sdlEglSetAttributeCallbacksLookupFunction = libSdl3.lookupFunction<
       Void Function(
           Pointer<NativeFunction<SdlEglAttribArrayCallback>>
               platformAttribCallback,
           Pointer<NativeFunction<SdlEglIntArrayCallback>> surfaceAttribCallback,
-          Pointer<NativeFunction<SdlEglIntArrayCallback>>
-              contextAttribCallback),
+          Pointer<NativeFunction<SdlEglIntArrayCallback>> contextAttribCallback,
+          Pointer<NativeType> userdata),
       void Function(
           Pointer<NativeFunction<SdlEglAttribArrayCallback>>
               platformAttribCallback,
           Pointer<NativeFunction<SdlEglIntArrayCallback>> surfaceAttribCallback,
-          Pointer<NativeFunction<SdlEglIntArrayCallback>>
-              contextAttribCallback)>('SDL_EGL_SetAttributeCallbacks');
-  return sdlEglSetAttributeCallbacksLookupFunction(
-      platformAttribCallback, surfaceAttribCallback, contextAttribCallback);
+          Pointer<NativeFunction<SdlEglIntArrayCallback>> contextAttribCallback,
+          Pointer<NativeType> userdata)>('SDL_EGL_SetAttributeCallbacks');
+  return sdlEglSetAttributeCallbacksLookupFunction(platformAttribCallback,
+      surfaceAttribCallback, contextAttribCallback, userdata);
 }
 
 ///

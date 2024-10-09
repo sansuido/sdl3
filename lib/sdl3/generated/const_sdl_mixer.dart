@@ -37,7 +37,7 @@ const MUS_GME = 12;
 const MIX_CHANNEL_POST = (-2);
 const MIX_EFFECTSMAXSPEED = 'MIX_EFFECTSMAXSPEED';
 
-class MixInitEnum {
+class MixkInit {
   static const flac = MIX_INIT_FLAC;
   static const mod = MIX_INIT_MOD;
   static const mp3 = MIX_INIT_MP3;
@@ -47,7 +47,7 @@ class MixInitEnum {
   static const wavpack = MIX_INIT_WAVPACK;
 }
 
-class MusEnum {
+class Mus {
   static const none = MUS_NONE;
   static const cmd = MUS_CMD;
   static const wav = MUS_WAV;

@@ -290,13 +290,13 @@ int sdlGetThreadId(Pointer<SdlThread> thread) {
 /// \since This function is available since SDL 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC bool SDLCALL SDL_SetThreadPriority(SDL_ThreadPriority priority)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetCurrentThreadPriority(SDL_ThreadPriority priority)
 /// ```
-bool sdlSetThreadPriority(int priority) {
-  final sdlSetThreadPriorityLookupFunction = libSdl3.lookupFunction<
+bool sdlSetCurrentThreadPriority(int priority) {
+  final sdlSetCurrentThreadPriorityLookupFunction = libSdl3.lookupFunction<
       Uint8 Function(Int32 priority),
-      int Function(int priority)>('SDL_SetThreadPriority');
-  return sdlSetThreadPriorityLookupFunction(priority) == 1;
+      int Function(int priority)>('SDL_SetCurrentThreadPriority');
+  return sdlSetCurrentThreadPriorityLookupFunction(priority) == 1;
 }
 
 ///

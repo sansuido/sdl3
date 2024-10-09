@@ -2,6 +2,7 @@
 import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'lib_sdl.dart';
+import 'struct_sdl.dart';
 
 ///
 /// Dynamically load a shared object.
@@ -10,18 +11,21 @@ import 'lib_sdl.dart';
 /// \returns an opaque pointer to the object handle or NULL on failure; call
 /// SDL_GetError() for more information.
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_LoadFunction
 /// \sa SDL_UnloadObject
 ///
 /// ```c
-/// extern SDL_DECLSPEC void * SDLCALL SDL_LoadObject(const char *sofile)
+/// extern SDL_DECLSPEC SDL_SharedObject * SDLCALL SDL_LoadObject(const char *sofile)
 /// ```
-Pointer<NativeType> sdlLoadObject(String? sofile) {
+Pointer<SdlSharedObject> sdlLoadObject(String? sofile) {
   final sdlLoadObjectLookupFunction = libSdl3.lookupFunction<
-      Pointer<NativeType> Function(Pointer<Utf8> sofile),
-      Pointer<NativeType> Function(Pointer<Utf8> sofile)>('SDL_LoadObject');
+      Pointer<SdlSharedObject> Function(Pointer<Utf8> sofile),
+      Pointer<SdlSharedObject> Function(
+          Pointer<Utf8> sofile)>('SDL_LoadObject');
   final sofilePointer = sofile != null ? sofile.toNativeUtf8() : nullptr;
   final result = sdlLoadObjectLookupFunction(sofilePointer);
   calloc.free(sofilePointer);
@@ -48,19 +52,22 @@ Pointer<NativeType> sdlLoadObject(String? sofile) {
 /// \returns a pointer to the function or NULL on failure; call SDL_GetError()
 /// for more information.
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_LoadObject
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_FunctionPointer SDLCALL SDL_LoadFunction(void *handle, const char *name)
+/// extern SDL_DECLSPEC SDL_FunctionPointer SDLCALL SDL_LoadFunction(SDL_SharedObject *handle, const char *name)
 /// ```
-Pointer<NativeType> sdlLoadFunction(Pointer<NativeType> handle, String? name) {
+Pointer<NativeType> sdlLoadFunction(
+    Pointer<SdlSharedObject> handle, String? name) {
   final sdlLoadFunctionLookupFunction = libSdl3.lookupFunction<
       Pointer<NativeType> Function(
-          Pointer<NativeType> handle, Pointer<Utf8> name),
-      Pointer<NativeType> Function(
-          Pointer<NativeType> handle, Pointer<Utf8> name)>('SDL_LoadFunction');
+          Pointer<SdlSharedObject> handle, Pointer<Utf8> name),
+      Pointer<NativeType> Function(Pointer<SdlSharedObject> handle,
+          Pointer<Utf8> name)>('SDL_LoadFunction');
   final namePointer = name != null ? name.toNativeUtf8() : nullptr;
   final result = sdlLoadFunctionLookupFunction(handle, namePointer);
   calloc.free(namePointer);
@@ -70,18 +77,23 @@ Pointer<NativeType> sdlLoadFunction(Pointer<NativeType> handle, String? name) {
 ///
 /// Unload a shared object from memory.
 ///
+/// Note that any pointers from this object looked up through
+/// SDL_LoadFunction() will no longer be valid.
+///
 /// \param handle a valid shared object handle returned by SDL_LoadObject().
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
 /// \sa SDL_LoadObject
 ///
 /// ```c
-/// extern SDL_DECLSPEC void SDLCALL SDL_UnloadObject(void *handle)
+/// extern SDL_DECLSPEC void SDLCALL SDL_UnloadObject(SDL_SharedObject *handle)
 /// ```
-void sdlUnloadObject(Pointer<NativeType> handle) {
+void sdlUnloadObject(Pointer<SdlSharedObject> handle) {
   final sdlUnloadObjectLookupFunction = libSdl3.lookupFunction<
-      Void Function(Pointer<NativeType> handle),
-      void Function(Pointer<NativeType> handle)>('SDL_UnloadObject');
+      Void Function(Pointer<SdlSharedObject> handle),
+      void Function(Pointer<SdlSharedObject> handle)>('SDL_UnloadObject');
   return sdlUnloadObjectLookupFunction(handle);
 }

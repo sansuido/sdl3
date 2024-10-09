@@ -2371,7 +2371,8 @@ void sdlReleaseWindowFromGpuDevice(
 /// \param window an SDL_Window that has been claimed.
 /// \param swapchain_composition the desired composition of the swapchain.
 /// \param present_mode the desired present mode for the swapchain.
-/// \returns true if successful, false on error.
+/// \returns true if successful, false on error; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -2425,20 +2426,24 @@ int sdlGetGpuSwapchainTextureFormat(
 /// When a swapchain texture is acquired on a command buffer, it will
 /// automatically be submitted for presentation when the command buffer is
 /// submitted. The swapchain texture should only be referenced by the command
-/// buffer used to acquire it. The swapchain texture handle can be NULL under
-/// certain conditions. This is not necessarily an error. If this function
-/// returns false then there is an error. The swapchain texture is managed by
-/// the implementation and must not be freed by the user. The texture
-/// dimensions will be the width and height of the claimed window. You can
-/// obtain these dimensions by calling SDL_GetWindowSizeInPixels. You MUST NOT
-/// call this function from any thread other than the one that created the
-/// window.
+/// buffer used to acquire it. The swapchain texture handle can be filled in
+/// with NULL under certain conditions. This is not necessarily an error. If
+/// this function returns false then there is an error.
+///
+/// The swapchain texture is managed by the implementation and must not be
+/// freed by the user. You MUST NOT call this function from any thread other
+/// than the one that created the window.
 ///
 /// \param command_buffer a command buffer.
 /// \param window a window that has been claimed.
-/// \param swapchainTexture a pointer filled in with a swapchain texture
+/// \param swapchain_texture a pointer filled in with a swapchain texture
 /// handle.
-/// \returns true on success, false on error.
+/// \param swapchain_texture_width a pointer filled in with the swapchain
+/// texture width, may be NULL.
+/// \param swapchain_texture_height a pointer filled in with the swapchain
+/// texture height, may be NULL.
+/// \returns true on success, false on error; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
@@ -2448,24 +2453,30 @@ int sdlGetGpuSwapchainTextureFormat(
 /// \sa SDL_GetWindowSizeInPixels
 ///
 /// ```c
-/// extern SDL_DECLSPEC bool SDLCALL SDL_AcquireGPUSwapchainTexture( SDL_GPUCommandBuffer *command_buffer, SDL_Window *window, SDL_GPUTexture **swapchainTexture)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_AcquireGPUSwapchainTexture( SDL_GPUCommandBuffer *command_buffer, SDL_Window *window, SDL_GPUTexture **swapchain_texture, Uint32 *swapchain_texture_width, Uint32 *swapchain_texture_height)
 /// ```
 bool sdlAcquireGpuSwapchainTexture(
     Pointer<SdlGpuCommandBuffer> commandBuffer,
     Pointer<SdlWindow> window,
-    Pointer<Pointer<SdlGpuTexture>> swapchainTexture) {
+    Pointer<Pointer<SdlGpuTexture>> swapchainTexture,
+    Pointer<Uint32> swapchainTextureWidth,
+    Pointer<Uint32> swapchainTextureHeight) {
   final sdlAcquireGpuSwapchainTextureLookupFunction = libSdl3.lookupFunction<
           Uint8 Function(
               Pointer<SdlGpuCommandBuffer> commandBuffer,
               Pointer<SdlWindow> window,
-              Pointer<Pointer<SdlGpuTexture>> swapchainTexture),
+              Pointer<Pointer<SdlGpuTexture>> swapchainTexture,
+              Pointer<Uint32> swapchainTextureWidth,
+              Pointer<Uint32> swapchainTextureHeight),
           int Function(
               Pointer<SdlGpuCommandBuffer> commandBuffer,
               Pointer<SdlWindow> window,
-              Pointer<Pointer<SdlGpuTexture>> swapchainTexture)>(
+              Pointer<Pointer<SdlGpuTexture>> swapchainTexture,
+              Pointer<Uint32> swapchainTextureWidth,
+              Pointer<Uint32> swapchainTextureHeight)>(
       'SDL_AcquireGPUSwapchainTexture');
-  return sdlAcquireGpuSwapchainTextureLookupFunction(
-          commandBuffer, window, swapchainTexture) ==
+  return sdlAcquireGpuSwapchainTextureLookupFunction(commandBuffer, window,
+          swapchainTexture, swapchainTextureWidth, swapchainTextureHeight) ==
       1;
 }
 

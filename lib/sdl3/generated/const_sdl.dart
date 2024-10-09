@@ -946,6 +946,8 @@ const SDL_PROP_IOSTREAM_WINDOWS_HANDLE_POINTER = 'SDL.iostream.windows.handle';
 const SDL_PROP_IOSTREAM_STDIO_FILE_POINTER = 'SDL.iostream.stdio.file';
 const SDL_PROP_IOSTREAM_FILE_DESCRIPTOR_NUMBER = 'SDL.iostream.file_descriptor';
 const SDL_PROP_IOSTREAM_ANDROID_AASSET_POINTER = 'SDL.iostream.android.aasset';
+const SDL_PROP_IOSTREAM_MEMORY_POINTER = 'SDL.iostream.memory.base';
+const SDL_PROP_IOSTREAM_MEMORY_SIZE_NUMBER = 'SDL.iostream.memory.size';
 const SDL_PROP_IOSTREAM_DYNAMIC_MEMORY_POINTER = 'SDL.iostream.dynamic.memory';
 const SDL_PROP_IOSTREAM_DYNAMIC_CHUNKSIZE_NUMBER =
     'SDL.iostream.dynamic.chunksize';
@@ -967,7 +969,6 @@ const SDL_JOYSTICK_CONNECTION_WIRED = -1 + 2;
 const SDL_JOYSTICK_CONNECTION_WIRELESS = -1 + 3;
 const SDL_JOYSTICK_AXIS_MAX = 32767;
 const SDL_JOYSTICK_AXIS_MIN = -32768;
-const SDL_IPHONE_MAX_GFORCE = 5.0;
 const SDL_PROP_JOYSTICK_CAP_MONO_LED_BOOLEAN = 'SDL.joystick.cap.mono_led';
 const SDL_PROP_JOYSTICK_CAP_RGB_LED_BOOLEAN = 'SDL.joystick.cap.rgb_led';
 const SDL_PROP_JOYSTICK_CAP_PLAYER_LED_BOOLEAN = 'SDL.joystick.cap.player_led';
@@ -1359,12 +1360,12 @@ const SDL_BUTTON_MIDDLE = 2;
 const SDL_BUTTON_RIGHT = 3;
 const SDL_BUTTON_X1 = 4;
 const SDL_BUTTON_X2 = 5;
-//const SDL_BUTTON = (X) (1 << ((X)-1));
-//const SDL_BUTTON_LMASK = SDL_BUTTON(SDL_BUTTON_LEFT);
-//const SDL_BUTTON_MMASK = SDL_BUTTON(SDL_BUTTON_MIDDLE);
-//const SDL_BUTTON_RMASK = SDL_BUTTON(SDL_BUTTON_RIGHT);
-//const SDL_BUTTON_X1MASK = SDL_BUTTON(SDL_BUTTON_X1);
-//const SDL_BUTTON_X2MASK = SDL_BUTTON(SDL_BUTTON_X2);
+//const SDL_BUTTON_MASK = (X) (1 << ((X)-1));
+//const SDL_BUTTON_LMASK = SDL_BUTTON_MASK(SDL_BUTTON_LEFT);
+//const SDL_BUTTON_MMASK = SDL_BUTTON_MASK(SDL_BUTTON_MIDDLE);
+//const SDL_BUTTON_RMASK = SDL_BUTTON_MASK(SDL_BUTTON_RIGHT);
+//const SDL_BUTTON_X1MASK = SDL_BUTTON_MASK(SDL_BUTTON_X1);
+//const SDL_BUTTON_X2MASK = SDL_BUTTON_MASK(SDL_BUTTON_X2);
 //const SDL_mutex_h_ = ;
 //const SDL_THREAD_ANNOTATION_ATTRIBUTE__ = (x) __attribute__((x));
 //const SDL_CAPABILITY = (x) SDL_THREAD_ANNOTATION_ATTRIBUTE__(capability(x));
@@ -2285,7 +2286,7 @@ const SDL_TOUCH_DEVICE_INDIRECT_RELATIVE = -1 + 3;
 //const SDL_version_h_ = ;
 const SDL_MAJOR_VERSION = 3;
 const SDL_MINOR_VERSION = 1;
-const SDL_MICRO_VERSION = 2;
+const SDL_MICRO_VERSION = 3;
 //const SDL_VERSIONNUM = (major, minor, patch) ((major) * 1000000 + (minor) * 1000 + (patch));
 //const SDL_VERSIONNUM_MAJOR = (version) ((version) / 1000000);
 //const SDL_VERSIONNUM_MINOR = (version) (((version) / 1000) % 1000);
@@ -2491,7 +2492,7 @@ const SDL_HITTEST_RESIZE_LEFT = 9;
 //const NO_SDL_VULKAN_TYPEDEFS = ;
 //const VK_DEFINE_HANDLE = (object) typedef struct object##_T* object;;
 //const VK_DEFINE_NON_DISPATCHABLE_HANDLE = (object) typedef struct object##_T *object;;
-class SdlAssertionEnum {
+class SdlkAssertion {
   static const retry = SDL_ASSERTION_RETRY;
   static const onBreak = SDL_ASSERTION_BREAK;
   static const abort = SDL_ASSERTION_ABORT;
@@ -2499,7 +2500,7 @@ class SdlAssertionEnum {
   static const alwaysIgnore = SDL_ASSERTION_ALWAYS_IGNORE;
 }
 
-class SdlAudioEnum {
+class SdlkAudio {
   static const unknown = SDL_AUDIO_UNKNOWN;
   static const u8 = SDL_AUDIO_U8;
   static const s8 = SDL_AUDIO_S8;
@@ -2511,7 +2512,7 @@ class SdlAudioEnum {
   static const f32Be = SDL_AUDIO_F32BE;
 }
 
-class SdlBlendmodeEnum {
+class SdlkBlendmode {
   static const none = SDL_BLENDMODE_NONE;
   static const blend = SDL_BLENDMODE_BLEND;
   static const blendPremultiplied = SDL_BLENDMODE_BLEND_PREMULTIPLIED;
@@ -2522,7 +2523,7 @@ class SdlBlendmodeEnum {
   static const invalid = SDL_BLENDMODE_INVALID;
 }
 
-class SdlBlendoperationEnum {
+class SdlkBlendoperation {
   static const add = SDL_BLENDOPERATION_ADD;
   static const subtract = SDL_BLENDOPERATION_SUBTRACT;
   static const revSubtract = SDL_BLENDOPERATION_REV_SUBTRACT;
@@ -2530,7 +2531,7 @@ class SdlBlendoperationEnum {
   static const maximum = SDL_BLENDOPERATION_MAXIMUM;
 }
 
-class SdlBlendfactorEnum {
+class SdlkBlendfactor {
   static const zero = SDL_BLENDFACTOR_ZERO;
   static const one = SDL_BLENDFACTOR_ONE;
   static const srcColor = SDL_BLENDFACTOR_SRC_COLOR;
@@ -2543,13 +2544,13 @@ class SdlBlendfactorEnum {
   static const oneMinusDstAlpha = SDL_BLENDFACTOR_ONE_MINUS_DST_ALPHA;
 }
 
-class SdlCameraPositionEnum {
+class SdlkCameraPosition {
   static const unknown = SDL_CAMERA_POSITION_UNKNOWN;
   static const frontFacing = SDL_CAMERA_POSITION_FRONT_FACING;
   static const backFacing = SDL_CAMERA_POSITION_BACK_FACING;
 }
 
-class SdlEventEnum {
+class SdlkEvent {
   static const first = SDL_EVENT_FIRST;
   static const quit = SDL_EVENT_QUIT;
   static const terminating = SDL_EVENT_TERMINATING;
@@ -2669,7 +2670,7 @@ class SdlEventEnum {
   static const enumPadding = SDL_EVENT_ENUM_PADDING;
 }
 
-class SdlFolderEnum {
+class SdlkFolder {
   static const home = SDL_FOLDER_HOME;
   static const desktop = SDL_FOLDER_DESKTOP;
   static const documents = SDL_FOLDER_DOCUMENTS;
@@ -2684,20 +2685,20 @@ class SdlFolderEnum {
   static const count = SDL_FOLDER_COUNT;
 }
 
-class SdlPathtypeEnum {
+class SdlkPathtype {
   static const none = SDL_PATHTYPE_NONE;
   static const file = SDL_PATHTYPE_FILE;
   static const directory = SDL_PATHTYPE_DIRECTORY;
   static const other = SDL_PATHTYPE_OTHER;
 }
 
-class SdlEnumEnum {
+class SdlkEnum {
   static const onContinue = SDL_ENUM_CONTINUE;
   static const success = SDL_ENUM_SUCCESS;
   static const failure = SDL_ENUM_FAILURE;
 }
 
-class SdlGamepadTypeEnum {
+class SdlkGamepadType {
   static const unknown = SDL_GAMEPAD_TYPE_UNKNOWN;
   static const standard = SDL_GAMEPAD_TYPE_STANDARD;
   static const xbox360 = SDL_GAMEPAD_TYPE_XBOX360;
@@ -2715,7 +2716,7 @@ class SdlGamepadTypeEnum {
   static const count = SDL_GAMEPAD_TYPE_COUNT;
 }
 
-class SdlGamepadButtonEnum {
+class SdlkGamepadButton {
   static const invalid = SDL_GAMEPAD_BUTTON_INVALID;
   static const south = SDL_GAMEPAD_BUTTON_SOUTH;
   static const east = SDL_GAMEPAD_BUTTON_EAST;
@@ -2746,7 +2747,7 @@ class SdlGamepadButtonEnum {
   static const count = SDL_GAMEPAD_BUTTON_COUNT;
 }
 
-class SdlGamepadButtonLabelEnum {
+class SdlkGamepadButtonLabel {
   static const unknown = SDL_GAMEPAD_BUTTON_LABEL_UNKNOWN;
   static const a = SDL_GAMEPAD_BUTTON_LABEL_A;
   static const b = SDL_GAMEPAD_BUTTON_LABEL_B;
@@ -2758,7 +2759,7 @@ class SdlGamepadButtonLabelEnum {
   static const triangle = SDL_GAMEPAD_BUTTON_LABEL_TRIANGLE;
 }
 
-class SdlGamepadAxisEnum {
+class SdlkGamepadAxis {
   static const invalid = SDL_GAMEPAD_AXIS_INVALID;
   static const leftx = SDL_GAMEPAD_AXIS_LEFTX;
   static const lefty = SDL_GAMEPAD_AXIS_LEFTY;
@@ -2769,14 +2770,14 @@ class SdlGamepadAxisEnum {
   static const count = SDL_GAMEPAD_AXIS_COUNT;
 }
 
-class SdlGamepadBindtypeEnum {
+class SdlkGamepadBindtype {
   static const none = SDL_GAMEPAD_BINDTYPE_NONE;
   static const button = SDL_GAMEPAD_BINDTYPE_BUTTON;
   static const axis = SDL_GAMEPAD_BINDTYPE_AXIS;
   static const hat = SDL_GAMEPAD_BINDTYPE_HAT;
 }
 
-class SdlGpuPrimitivetypeEnum {
+class SdlkGpuPrimitivetype {
   static const trianglelist = SDL_GPU_PRIMITIVETYPE_TRIANGLELIST;
   static const trianglestrip = SDL_GPU_PRIMITIVETYPE_TRIANGLESTRIP;
   static const linelist = SDL_GPU_PRIMITIVETYPE_LINELIST;
@@ -2784,25 +2785,25 @@ class SdlGpuPrimitivetypeEnum {
   static const pointlist = SDL_GPU_PRIMITIVETYPE_POINTLIST;
 }
 
-class SdlGpuLoadopEnum {
+class SdlkGpuLoadop {
   static const load = SDL_GPU_LOADOP_LOAD;
   static const clear = SDL_GPU_LOADOP_CLEAR;
   static const dontCare = SDL_GPU_LOADOP_DONT_CARE;
 }
 
-class SdlGpuStoreopEnum {
+class SdlkGpuStoreop {
   static const store = SDL_GPU_STOREOP_STORE;
   static const dontCare = SDL_GPU_STOREOP_DONT_CARE;
   static const resolve = SDL_GPU_STOREOP_RESOLVE;
   static const resolveAndStore = SDL_GPU_STOREOP_RESOLVE_AND_STORE;
 }
 
-class SdlGpuIndexelementsizeEnum {
+class SdlkGpuIndexelementsize {
   static const on16Bit = SDL_GPU_INDEXELEMENTSIZE_16BIT;
   static const on32Bit = SDL_GPU_INDEXELEMENTSIZE_32BIT;
 }
 
-class SdlGpuTextureformatEnum {
+class SdlkGpuTextureformat {
   static const invalid = SDL_GPU_TEXTUREFORMAT_INVALID;
   static const a8Unorm = SDL_GPU_TEXTUREFORMAT_A8_UNORM;
   static const r8Unorm = SDL_GPU_TEXTUREFORMAT_R8_UNORM;
@@ -2868,7 +2869,7 @@ class SdlGpuTextureformatEnum {
   static const d32FloatS8Uint = SDL_GPU_TEXTUREFORMAT_D32_FLOAT_S8_UINT;
 }
 
-class SdlGpuTextureusageEnum {
+class SdlkGpuTextureusage {
   static const sampler = SDL_GPU_TEXTUREUSAGE_SAMPLER;
   static const colorTarget = SDL_GPU_TEXTUREUSAGE_COLOR_TARGET;
   static const depthStencilTarget = SDL_GPU_TEXTUREUSAGE_DEPTH_STENCIL_TARGET;
@@ -2879,7 +2880,7 @@ class SdlGpuTextureusageEnum {
       SDL_GPU_TEXTUREUSAGE_COMPUTE_STORAGE_SIMULTANEOUS_READ_WRITE;
 }
 
-class SdlGpuTexturetypeEnum {
+class SdlkGpuTexturetype {
   static const on2D = SDL_GPU_TEXTURETYPE_2D;
   static const on2DArray = SDL_GPU_TEXTURETYPE_2D_ARRAY;
   static const on3D = SDL_GPU_TEXTURETYPE_3D;
@@ -2887,14 +2888,14 @@ class SdlGpuTexturetypeEnum {
   static const cubeArray = SDL_GPU_TEXTURETYPE_CUBE_ARRAY;
 }
 
-class SdlGpuSamplecountEnum {
+class SdlkGpuSamplecount {
   static const on1 = SDL_GPU_SAMPLECOUNT_1;
   static const on2 = SDL_GPU_SAMPLECOUNT_2;
   static const on4 = SDL_GPU_SAMPLECOUNT_4;
   static const on8 = SDL_GPU_SAMPLECOUNT_8;
 }
 
-class SdlGpuCubemapfaceEnum {
+class SdlkGpuCubemapface {
   static const positivex = SDL_GPU_CUBEMAPFACE_POSITIVEX;
   static const negativex = SDL_GPU_CUBEMAPFACE_NEGATIVEX;
   static const positivey = SDL_GPU_CUBEMAPFACE_POSITIVEY;
@@ -2903,7 +2904,7 @@ class SdlGpuCubemapfaceEnum {
   static const negativez = SDL_GPU_CUBEMAPFACE_NEGATIVEZ;
 }
 
-class SdlGpuBufferusageEnum {
+class SdlkGpuBufferusage {
   static const vertex = SDL_GPU_BUFFERUSAGE_VERTEX;
   static const index = SDL_GPU_BUFFERUSAGE_INDEX;
   static const indirect = SDL_GPU_BUFFERUSAGE_INDIRECT;
@@ -2912,17 +2913,17 @@ class SdlGpuBufferusageEnum {
   static const computeStorageWrite = SDL_GPU_BUFFERUSAGE_COMPUTE_STORAGE_WRITE;
 }
 
-class SdlGpuTransferbufferusageEnum {
+class SdlkGpuTransferbufferusage {
   static const upload = SDL_GPU_TRANSFERBUFFERUSAGE_UPLOAD;
   static const download = SDL_GPU_TRANSFERBUFFERUSAGE_DOWNLOAD;
 }
 
-class SdlGpuShaderstageEnum {
+class SdlkGpuShaderstage {
   static const vertex = SDL_GPU_SHADERSTAGE_VERTEX;
   static const fragment = SDL_GPU_SHADERSTAGE_FRAGMENT;
 }
 
-class SdlGpuShaderformatEnum {
+class SdlkGpuShaderformat {
   static const invalid = SDL_GPU_SHADERFORMAT_INVALID;
   static const private = SDL_GPU_SHADERFORMAT_PRIVATE;
   static const spirv = SDL_GPU_SHADERFORMAT_SPIRV;
@@ -2932,7 +2933,7 @@ class SdlGpuShaderformatEnum {
   static const metallib = SDL_GPU_SHADERFORMAT_METALLIB;
 }
 
-class SdlGpuVertexelementformatEnum {
+class SdlkGpuVertexelementformat {
   static const invalid = SDL_GPU_VERTEXELEMENTFORMAT_INVALID;
   static const int = SDL_GPU_VERTEXELEMENTFORMAT_INT;
   static const int2 = SDL_GPU_VERTEXELEMENTFORMAT_INT2;
@@ -2966,28 +2967,28 @@ class SdlGpuVertexelementformatEnum {
   static const half4 = SDL_GPU_VERTEXELEMENTFORMAT_HALF4;
 }
 
-class SdlGpuVertexinputrateEnum {
+class SdlkGpuVertexinputrate {
   static const vertex = SDL_GPU_VERTEXINPUTRATE_VERTEX;
   static const instance = SDL_GPU_VERTEXINPUTRATE_INSTANCE;
 }
 
-class SdlGpuFillmodeEnum {
+class SdlkGpuFillmode {
   static const fill = SDL_GPU_FILLMODE_FILL;
   static const line = SDL_GPU_FILLMODE_LINE;
 }
 
-class SdlGpuCullmodeEnum {
+class SdlkGpuCullmode {
   static const none = SDL_GPU_CULLMODE_NONE;
   static const front = SDL_GPU_CULLMODE_FRONT;
   static const back = SDL_GPU_CULLMODE_BACK;
 }
 
-class SdlGpuFrontfaceEnum {
+class SdlkGpuFrontface {
   static const counterClockwise = SDL_GPU_FRONTFACE_COUNTER_CLOCKWISE;
   static const clockwise = SDL_GPU_FRONTFACE_CLOCKWISE;
 }
 
-class SdlGpuCompareopEnum {
+class SdlkGpuCompareop {
   static const invalid = SDL_GPU_COMPAREOP_INVALID;
   static const never = SDL_GPU_COMPAREOP_NEVER;
   static const less = SDL_GPU_COMPAREOP_LESS;
@@ -2999,7 +3000,7 @@ class SdlGpuCompareopEnum {
   static const always = SDL_GPU_COMPAREOP_ALWAYS;
 }
 
-class SdlGpuStencilopEnum {
+class SdlkGpuStencilop {
   static const invalid = SDL_GPU_STENCILOP_INVALID;
   static const keep = SDL_GPU_STENCILOP_KEEP;
   static const zero = SDL_GPU_STENCILOP_ZERO;
@@ -3011,7 +3012,7 @@ class SdlGpuStencilopEnum {
   static const decrementAndWrap = SDL_GPU_STENCILOP_DECREMENT_AND_WRAP;
 }
 
-class SdlGpuBlendopEnum {
+class SdlkGpuBlendop {
   static const invalid = SDL_GPU_BLENDOP_INVALID;
   static const add = SDL_GPU_BLENDOP_ADD;
   static const subtract = SDL_GPU_BLENDOP_SUBTRACT;
@@ -3020,7 +3021,7 @@ class SdlGpuBlendopEnum {
   static const max = SDL_GPU_BLENDOP_MAX;
 }
 
-class SdlGpuBlendfactorEnum {
+class SdlkGpuBlendfactor {
   static const invalid = SDL_GPU_BLENDFACTOR_INVALID;
   static const zero = SDL_GPU_BLENDFACTOR_ZERO;
   static const one = SDL_GPU_BLENDFACTOR_ONE;
@@ -3038,36 +3039,36 @@ class SdlGpuBlendfactorEnum {
   static const srcAlphaSaturate = SDL_GPU_BLENDFACTOR_SRC_ALPHA_SATURATE;
 }
 
-class SdlGpuColorcomponentEnum {
+class SdlkGpuColorcomponent {
   static const r = SDL_GPU_COLORCOMPONENT_R;
   static const g = SDL_GPU_COLORCOMPONENT_G;
   static const b = SDL_GPU_COLORCOMPONENT_B;
   static const a = SDL_GPU_COLORCOMPONENT_A;
 }
 
-class SdlGpuFilterEnum {
+class SdlkGpuFilter {
   static const nearest = SDL_GPU_FILTER_NEAREST;
   static const linear = SDL_GPU_FILTER_LINEAR;
 }
 
-class SdlGpuSamplermipmapmodeEnum {
+class SdlkGpuSamplermipmapmode {
   static const nearest = SDL_GPU_SAMPLERMIPMAPMODE_NEAREST;
   static const linear = SDL_GPU_SAMPLERMIPMAPMODE_LINEAR;
 }
 
-class SdlGpuSampleraddressmodeEnum {
+class SdlkGpuSampleraddressmode {
   static const repeat = SDL_GPU_SAMPLERADDRESSMODE_REPEAT;
   static const mirroredRepeat = SDL_GPU_SAMPLERADDRESSMODE_MIRRORED_REPEAT;
   static const clampToEdge = SDL_GPU_SAMPLERADDRESSMODE_CLAMP_TO_EDGE;
 }
 
-class SdlGpuPresentmodeEnum {
+class SdlkGpuPresentmode {
   static const vsync = SDL_GPU_PRESENTMODE_VSYNC;
   static const immediate = SDL_GPU_PRESENTMODE_IMMEDIATE;
   static const mailbox = SDL_GPU_PRESENTMODE_MAILBOX;
 }
 
-class SdlGpuSwapchaincompositionEnum {
+class SdlkGpuSwapchaincomposition {
   static const sdr = SDL_GPU_SWAPCHAINCOMPOSITION_SDR;
   static const sdrLinear = SDL_GPU_SWAPCHAINCOMPOSITION_SDR_LINEAR;
   static const hdrExtendedLinear =
@@ -3075,7 +3076,7 @@ class SdlGpuSwapchaincompositionEnum {
   static const hdr10St2048 = SDL_GPU_SWAPCHAINCOMPOSITION_HDR10_ST2048;
 }
 
-class SdlHapticEnum {
+class SdlkHaptic {
   static const constant = SDL_HAPTIC_CONSTANT;
   static const sine = SDL_HAPTIC_SINE;
   static const square = SDL_HAPTIC_SQUARE;
@@ -3103,7 +3104,7 @@ class SdlHapticEnum {
   static const infinity = SDL_HAPTIC_INFINITY;
 }
 
-class SdlHidApiBusEnum {
+class SdlkHidApiBus {
   static const unknown = SDL_HID_API_BUS_UNKNOWN;
   static const usb = SDL_HID_API_BUS_USB;
   static const bluetooth = SDL_HID_API_BUS_BLUETOOTH;
@@ -3111,7 +3112,7 @@ class SdlHidApiBusEnum {
   static const spi = SDL_HID_API_BUS_SPI;
 }
 
-class SdlHintEnum {
+class SdlkHint {
   static const allowAltTabWhileGrabbed = SDL_HINT_ALLOW_ALT_TAB_WHILE_GRABBED;
   static const androidAllowRecreateActivity =
       SDL_HINT_ANDROID_ALLOW_RECREATE_ACTIVITY;
@@ -3395,7 +3396,7 @@ class SdlHintEnum {
   static const override = SDL_HINT_OVERRIDE;
 }
 
-class SdlInitEnum {
+class SdlkInit {
   static const audio = SDL_INIT_AUDIO;
   static const video = SDL_INIT_VIDEO;
   static const joystick = SDL_INIT_JOYSTICK;
@@ -3406,13 +3407,13 @@ class SdlInitEnum {
   static const camera = SDL_INIT_CAMERA;
 }
 
-class SdlAppEnum {
+class SdlkApp {
   static const onContinue = SDL_APP_CONTINUE;
   static const success = SDL_APP_SUCCESS;
   static const failure = SDL_APP_FAILURE;
 }
 
-class SdlIoStatusEnum {
+class SdlkIoStatus {
   static const ready = SDL_IO_STATUS_READY;
   static const error = SDL_IO_STATUS_ERROR;
   static const eof = SDL_IO_STATUS_EOF;
@@ -3421,13 +3422,13 @@ class SdlIoStatusEnum {
   static const writeonly = SDL_IO_STATUS_WRITEONLY;
 }
 
-class SdlIoSeekEnum {
+class SdlkIoSeek {
   static const set = SDL_IO_SEEK_SET;
   static const cur = SDL_IO_SEEK_CUR;
   static const end = SDL_IO_SEEK_END;
 }
 
-class SdlJoystickTypeEnum {
+class SdlkJoystickType {
   static const unknown = SDL_JOYSTICK_TYPE_UNKNOWN;
   static const gamepad = SDL_JOYSTICK_TYPE_GAMEPAD;
   static const wheel = SDL_JOYSTICK_TYPE_WHEEL;
@@ -3441,19 +3442,19 @@ class SdlJoystickTypeEnum {
   static const count = SDL_JOYSTICK_TYPE_COUNT;
 }
 
-class SdlJoystickConnectionEnum {
+class SdlkJoystickConnection {
   static const invalid = SDL_JOYSTICK_CONNECTION_INVALID;
   static const unknown = SDL_JOYSTICK_CONNECTION_UNKNOWN;
   static const wired = SDL_JOYSTICK_CONNECTION_WIRED;
   static const wireless = SDL_JOYSTICK_CONNECTION_WIRELESS;
 }
 
-class SdlJoystickAxisEnum {
+class SdlkJoystickAxis {
   static const max = SDL_JOYSTICK_AXIS_MAX;
   static const min = SDL_JOYSTICK_AXIS_MIN;
 }
 
-class SdlHatEnum {
+class SdlkHat {
   static const centered = SDL_HAT_CENTERED;
   static const up = SDL_HAT_UP;
   static const right = SDL_HAT_RIGHT;
@@ -3465,7 +3466,7 @@ class SdlHatEnum {
   static const leftdown = SDL_HAT_LEFTDOWN;
 }
 
-class SdlTextinputTypeEnum {
+class SdlkTextinputType {
   static const text = SDL_TEXTINPUT_TYPE_TEXT;
   static const textName = SDL_TEXTINPUT_TYPE_TEXT_NAME;
   static const textEmail = SDL_TEXTINPUT_TYPE_TEXT_EMAIL;
@@ -3478,14 +3479,14 @@ class SdlTextinputTypeEnum {
       SDL_TEXTINPUT_TYPE_NUMBER_PASSWORD_VISIBLE;
 }
 
-class SdlCapitalizeEnum {
+class SdlkCapitalize {
   static const none = SDL_CAPITALIZE_NONE;
   static const sentences = SDL_CAPITALIZE_SENTENCES;
   static const words = SDL_CAPITALIZE_WORDS;
   static const letters = SDL_CAPITALIZE_LETTERS;
 }
 
-class SdlkEnum {
+class Sdlk {
   static const unknown = SDLK_UNKNOWN;
   static const onReturn = SDLK_RETURN;
   static const escape = SDLK_ESCAPE;
@@ -3737,7 +3738,7 @@ class SdlkEnum {
   static const endcall = SDLK_ENDCALL;
 }
 
-class SdlKmodEnum {
+class SdlkKmod {
   static const none = SDL_KMOD_NONE;
   static const lshift = SDL_KMOD_LSHIFT;
   static const rshift = SDL_KMOD_RSHIFT;
@@ -3757,7 +3758,7 @@ class SdlKmodEnum {
   static const gui = SDL_KMOD_GUI;
 }
 
-class SdlLogCategoryEnum {
+class SdlkLogCategory {
   static const application = SDL_LOG_CATEGORY_APPLICATION;
   static const error = SDL_LOG_CATEGORY_ERROR;
   static const onAssert = SDL_LOG_CATEGORY_ASSERT;
@@ -3780,7 +3781,7 @@ class SdlLogCategoryEnum {
   static const custom = SDL_LOG_CATEGORY_CUSTOM;
 }
 
-class SdlLogPriorityEnum {
+class SdlkLogPriority {
   static const invalid = SDL_LOG_PRIORITY_INVALID;
   static const trace = SDL_LOG_PRIORITY_TRACE;
   static const verbose = SDL_LOG_PRIORITY_VERBOSE;
@@ -3792,7 +3793,7 @@ class SdlLogPriorityEnum {
   static const count = SDL_LOG_PRIORITY_COUNT;
 }
 
-class SdlMessageboxEnum {
+class SdlkMessagebox {
   static const error = SDL_MESSAGEBOX_ERROR;
   static const warning = SDL_MESSAGEBOX_WARNING;
   static const information = SDL_MESSAGEBOX_INFORMATION;
@@ -3800,12 +3801,12 @@ class SdlMessageboxEnum {
   static const buttonsRightToLeft = SDL_MESSAGEBOX_BUTTONS_RIGHT_TO_LEFT;
 }
 
-class SdlMessageboxButtonEnum {
+class SdlkMessageboxButton {
   static const returnkeyDefault = SDL_MESSAGEBOX_BUTTON_RETURNKEY_DEFAULT;
   static const escapekeyDefault = SDL_MESSAGEBOX_BUTTON_ESCAPEKEY_DEFAULT;
 }
 
-class SdlMessageboxColorEnum {
+class SdlkMessageboxColor {
   static const background = SDL_MESSAGEBOX_COLOR_BACKGROUND;
   static const text = SDL_MESSAGEBOX_COLOR_TEXT;
   static const buttonBorder = SDL_MESSAGEBOX_COLOR_BUTTON_BORDER;
@@ -3814,7 +3815,7 @@ class SdlMessageboxColorEnum {
   static const count = SDL_MESSAGEBOX_COLOR_COUNT;
 }
 
-class SdlSystemCursorEnum {
+class SdlkSystemCursor {
   static const onDefault = SDL_SYSTEM_CURSOR_DEFAULT;
   static const text = SDL_SYSTEM_CURSOR_TEXT;
   static const wait = SDL_SYSTEM_CURSOR_WAIT;
@@ -3838,12 +3839,12 @@ class SdlSystemCursorEnum {
   static const count = SDL_SYSTEM_CURSOR_COUNT;
 }
 
-class SdlMousewheelEnum {
+class SdlkMousewheel {
   static const normal = SDL_MOUSEWHEEL_NORMAL;
   static const flipped = SDL_MOUSEWHEEL_FLIPPED;
 }
 
-class SdlButtonEnum {
+class SdlkButton {
   static const left = SDL_BUTTON_LEFT;
   static const middle = SDL_BUTTON_MIDDLE;
   static const right = SDL_BUTTON_RIGHT;
@@ -3851,14 +3852,14 @@ class SdlButtonEnum {
   static const x2 = SDL_BUTTON_X2;
 }
 
-class SdlInitStatusEnum {
+class SdlkInitStatus {
   static const uninitialized = SDL_INIT_STATUS_UNINITIALIZED;
   static const initializing = SDL_INIT_STATUS_INITIALIZING;
   static const initialized = SDL_INIT_STATUS_INITIALIZED;
   static const uninitializing = SDL_INIT_STATUS_UNINITIALIZING;
 }
 
-class SdlPenInputEnum {
+class SdlkPenInput {
   static const down = SDL_PEN_INPUT_DOWN;
   static const button1 = SDL_PEN_INPUT_BUTTON_1;
   static const button2 = SDL_PEN_INPUT_BUTTON_2;
@@ -3868,7 +3869,7 @@ class SdlPenInputEnum {
   static const eraserTip = SDL_PEN_INPUT_ERASER_TIP;
 }
 
-class SdlPenAxisEnum {
+class SdlkPenAxis {
   static const pressure = SDL_PEN_AXIS_PRESSURE;
   static const xtilt = SDL_PEN_AXIS_XTILT;
   static const ytilt = SDL_PEN_AXIS_YTILT;
@@ -3879,14 +3880,14 @@ class SdlPenAxisEnum {
   static const count = SDL_PEN_AXIS_COUNT;
 }
 
-class SdlAlphaEnum {
+class SdlkAlpha {
   static const opaque = SDL_ALPHA_OPAQUE;
   static const opaqueFloat = SDL_ALPHA_OPAQUE_FLOAT;
   static const transparent = SDL_ALPHA_TRANSPARENT;
   static const transparentFloat = SDL_ALPHA_TRANSPARENT_FLOAT;
 }
 
-class SdlPixeltypeEnum {
+class SdlkPixeltype {
   static const unknown = SDL_PIXELTYPE_UNKNOWN;
   static const index1 = SDL_PIXELTYPE_INDEX1;
   static const index4 = SDL_PIXELTYPE_INDEX4;
@@ -3902,13 +3903,13 @@ class SdlPixeltypeEnum {
   static const index2 = SDL_PIXELTYPE_INDEX2;
 }
 
-class SdlBitmaporderEnum {
+class SdlkBitmaporder {
   static const none = SDL_BITMAPORDER_NONE;
   static const on4321 = SDL_BITMAPORDER_4321;
   static const on1234 = SDL_BITMAPORDER_1234;
 }
 
-class SdlPackedorderEnum {
+class SdlkPackedorder {
   static const none = SDL_PACKEDORDER_NONE;
   static const xrgb = SDL_PACKEDORDER_XRGB;
   static const rgbx = SDL_PACKEDORDER_RGBX;
@@ -3920,7 +3921,7 @@ class SdlPackedorderEnum {
   static const bgra = SDL_PACKEDORDER_BGRA;
 }
 
-class SdlArrayorderEnum {
+class SdlkArrayorder {
   static const none = SDL_ARRAYORDER_NONE;
   static const rgb = SDL_ARRAYORDER_RGB;
   static const rgba = SDL_ARRAYORDER_RGBA;
@@ -3930,7 +3931,7 @@ class SdlArrayorderEnum {
   static const abgr = SDL_ARRAYORDER_ABGR;
 }
 
-class SdlPackedlayoutEnum {
+class SdlkPackedlayout {
   static const none = SDL_PACKEDLAYOUT_NONE;
   static const on332 = SDL_PACKEDLAYOUT_332;
   static const on4444 = SDL_PACKEDLAYOUT_4444;
@@ -3942,7 +3943,7 @@ class SdlPackedlayoutEnum {
   static const on1010102 = SDL_PACKEDLAYOUT_1010102;
 }
 
-class SdlPixelformatEnum {
+class SdlkPixelformat {
   static const unknown = SDL_PIXELFORMAT_UNKNOWN;
   static const index1Lsb = SDL_PIXELFORMAT_INDEX1LSB;
   static const index1Msb = SDL_PIXELFORMAT_INDEX1MSB;
@@ -4009,19 +4010,19 @@ class SdlPixelformatEnum {
   static const externalOes = SDL_PIXELFORMAT_EXTERNAL_OES;
 }
 
-class SdlColorTypeEnum {
+class SdlkColorType {
   static const unknown = SDL_COLOR_TYPE_UNKNOWN;
   static const rgb = SDL_COLOR_TYPE_RGB;
   static const ycbcr = SDL_COLOR_TYPE_YCBCR;
 }
 
-class SdlColorRangeEnum {
+class SdlkColorRange {
   static const unknown = SDL_COLOR_RANGE_UNKNOWN;
   static const limited = SDL_COLOR_RANGE_LIMITED;
   static const full = SDL_COLOR_RANGE_FULL;
 }
 
-class SdlColorPrimariesEnum {
+class SdlkColorPrimaries {
   static const unknown = SDL_COLOR_PRIMARIES_UNKNOWN;
   static const bt709 = SDL_COLOR_PRIMARIES_BT709;
   static const unspecified = SDL_COLOR_PRIMARIES_UNSPECIFIED;
@@ -4038,7 +4039,7 @@ class SdlColorPrimariesEnum {
   static const custom = SDL_COLOR_PRIMARIES_CUSTOM;
 }
 
-class SdlTransferCharacteristicsEnum {
+class SdlkTransferCharacteristics {
   static const unknown = SDL_TRANSFER_CHARACTERISTICS_UNKNOWN;
   static const bt709 = SDL_TRANSFER_CHARACTERISTICS_BT709;
   static const unspecified = SDL_TRANSFER_CHARACTERISTICS_UNSPECIFIED;
@@ -4060,7 +4061,7 @@ class SdlTransferCharacteristicsEnum {
   static const custom = SDL_TRANSFER_CHARACTERISTICS_CUSTOM;
 }
 
-class SdlMatrixCoefficientsEnum {
+class SdlkMatrixCoefficients {
   static const identity = SDL_MATRIX_COEFFICIENTS_IDENTITY;
   static const bt709 = SDL_MATRIX_COEFFICIENTS_BT709;
   static const unspecified = SDL_MATRIX_COEFFICIENTS_UNSPECIFIED;
@@ -4078,14 +4079,14 @@ class SdlMatrixCoefficientsEnum {
   static const custom = SDL_MATRIX_COEFFICIENTS_CUSTOM;
 }
 
-class SdlChromaLocationEnum {
+class SdlkChromaLocation {
   static const none = SDL_CHROMA_LOCATION_NONE;
   static const left = SDL_CHROMA_LOCATION_LEFT;
   static const center = SDL_CHROMA_LOCATION_CENTER;
   static const topleft = SDL_CHROMA_LOCATION_TOPLEFT;
 }
 
-class SdlColorspaceEnum {
+class SdlkColorspace {
   static const unknown = SDL_COLORSPACE_UNKNOWN;
   static const srgb = SDL_COLORSPACE_SRGB;
   static const srgbLinear = SDL_COLORSPACE_SRGB_LINEAR;
@@ -4101,7 +4102,7 @@ class SdlColorspaceEnum {
   static const yuvDefault = SDL_COLORSPACE_YUV_DEFAULT;
 }
 
-class SdlPowerstateEnum {
+class SdlkPowerstate {
   static const error = SDL_POWERSTATE_ERROR;
   static const unknown = SDL_POWERSTATE_UNKNOWN;
   static const onBattery = SDL_POWERSTATE_ON_BATTERY;
@@ -4110,14 +4111,14 @@ class SdlPowerstateEnum {
   static const charged = SDL_POWERSTATE_CHARGED;
 }
 
-class SdlProcessStdioEnum {
+class SdlkProcessStdio {
   static const inherited = SDL_PROCESS_STDIO_INHERITED;
   static const onNull = SDL_PROCESS_STDIO_NULL;
   static const app = SDL_PROCESS_STDIO_APP;
   static const redirect = SDL_PROCESS_STDIO_REDIRECT;
 }
 
-class SdlPropertyTypeEnum {
+class SdlkPropertyType {
   static const invalid = SDL_PROPERTY_TYPE_INVALID;
   static const pointer = SDL_PROPERTY_TYPE_POINTER;
   static const string = SDL_PROPERTY_TYPE_STRING;
@@ -4126,13 +4127,13 @@ class SdlPropertyTypeEnum {
   static const boolean = SDL_PROPERTY_TYPE_BOOLEAN;
 }
 
-class SdlTextureaccessEnum {
+class SdlkTextureaccess {
   static const static = SDL_TEXTUREACCESS_STATIC;
   static const streaming = SDL_TEXTUREACCESS_STREAMING;
   static const target = SDL_TEXTUREACCESS_TARGET;
 }
 
-class SdlLogicalPresentationEnum {
+class SdlkLogicalPresentation {
   static const disabled = SDL_LOGICAL_PRESENTATION_DISABLED;
   static const stretch = SDL_LOGICAL_PRESENTATION_STRETCH;
   static const letterbox = SDL_LOGICAL_PRESENTATION_LETTERBOX;
@@ -4140,12 +4141,12 @@ class SdlLogicalPresentationEnum {
   static const integerScale = SDL_LOGICAL_PRESENTATION_INTEGER_SCALE;
 }
 
-class SdlRendererVsyncEnum {
+class SdlkRendererVsync {
   static const disabled = SDL_RENDERER_VSYNC_DISABLED;
   static const adaptive = SDL_RENDERER_VSYNC_ADAPTIVE;
 }
 
-class SdlScancodeEnum {
+class SdlkScancode {
   static const unknown = SDL_SCANCODE_UNKNOWN;
   static const a = SDL_SCANCODE_A;
   static const b = SDL_SCANCODE_B;
@@ -4397,7 +4398,7 @@ class SdlScancodeEnum {
   static const count = SDL_SCANCODE_COUNT;
 }
 
-class SdlSensorEnum {
+class SdlkSensor {
   static const invalid = SDL_SENSOR_INVALID;
   static const unknown = SDL_SENSOR_UNKNOWN;
   static const accel = SDL_SENSOR_ACCEL;
@@ -4408,61 +4409,61 @@ class SdlSensorEnum {
   static const gyroR = SDL_SENSOR_GYRO_R;
 }
 
-class SdlSurfaceEnum {
+class SdlkSurface {
   static const preallocated = SDL_SURFACE_PREALLOCATED;
   static const lockNeeded = SDL_SURFACE_LOCK_NEEDED;
   static const locked = SDL_SURFACE_LOCKED;
   static const simdAligned = SDL_SURFACE_SIMD_ALIGNED;
 }
 
-class SdlScalemodeEnum {
+class SdlkScalemode {
   static const nearest = SDL_SCALEMODE_NEAREST;
   static const linear = SDL_SCALEMODE_LINEAR;
 }
 
-class SdlFlipEnum {
+class SdlkFlip {
   static const none = SDL_FLIP_NONE;
   static const horizontal = SDL_FLIP_HORIZONTAL;
   static const vertical = SDL_FLIP_VERTICAL;
 }
 
-class SdlAndroidExternalStorageEnum {
+class SdlkAndroidExternalStorage {
   static const read = SDL_ANDROID_EXTERNAL_STORAGE_READ;
   static const write = SDL_ANDROID_EXTERNAL_STORAGE_WRITE;
 }
 
-class SdlThreadPriorityEnum {
+class SdlkThreadPriority {
   static const low = SDL_THREAD_PRIORITY_LOW;
   static const normal = SDL_THREAD_PRIORITY_NORMAL;
   static const high = SDL_THREAD_PRIORITY_HIGH;
   static const timeCritical = SDL_THREAD_PRIORITY_TIME_CRITICAL;
 }
 
-class SdlDateFormatEnum {
+class SdlkDateFormat {
   static const yyyymmdd = SDL_DATE_FORMAT_YYYYMMDD;
   static const ddmmyyyy = SDL_DATE_FORMAT_DDMMYYYY;
   static const mmddyyyy = SDL_DATE_FORMAT_MMDDYYYY;
 }
 
-class SdlTimeFormatEnum {
+class SdlkTimeFormat {
   static const on24Hr = SDL_TIME_FORMAT_24HR;
   static const on12Hr = SDL_TIME_FORMAT_12HR;
 }
 
-class SdlTouchDeviceEnum {
+class SdlkTouchDevice {
   static const invalid = SDL_TOUCH_DEVICE_INVALID;
   static const direct = SDL_TOUCH_DEVICE_DIRECT;
   static const indirectAbsolute = SDL_TOUCH_DEVICE_INDIRECT_ABSOLUTE;
   static const indirectRelative = SDL_TOUCH_DEVICE_INDIRECT_RELATIVE;
 }
 
-class SdlSystemThemeEnum {
+class SdlkSystemTheme {
   static const unknown = SDL_SYSTEM_THEME_UNKNOWN;
   static const light = SDL_SYSTEM_THEME_LIGHT;
   static const dark = SDL_SYSTEM_THEME_DARK;
 }
 
-class SdlOrientationEnum {
+class SdlkOrientation {
   static const unknown = SDL_ORIENTATION_UNKNOWN;
   static const landscape = SDL_ORIENTATION_LANDSCAPE;
   static const landscapeFlipped = SDL_ORIENTATION_LANDSCAPE_FLIPPED;
@@ -4470,7 +4471,7 @@ class SdlOrientationEnum {
   static const portraitFlipped = SDL_ORIENTATION_PORTRAIT_FLIPPED;
 }
 
-class SdlWindowEnum {
+class SdlkWindow {
   static const fullscreen = SDL_WINDOW_FULLSCREEN;
   static const opengl = SDL_WINDOW_OPENGL;
   static const occluded = SDL_WINDOW_OCCLUDED;
@@ -4500,13 +4501,13 @@ class SdlWindowEnum {
   static const surfaceVsyncAdaptive = SDL_WINDOW_SURFACE_VSYNC_ADAPTIVE;
 }
 
-class SdlFlashEnum {
+class SdlkFlash {
   static const cancel = SDL_FLASH_CANCEL;
   static const briefly = SDL_FLASH_BRIEFLY;
   static const untilFocused = SDL_FLASH_UNTIL_FOCUSED;
 }
 
-class SdlGlEnum {
+class SdlkGl {
   static const redSize = SDL_GL_RED_SIZE;
   static const greenSize = SDL_GL_GREEN_SIZE;
   static const blueSize = SDL_GL_BLUE_SIZE;
@@ -4553,12 +4554,12 @@ class SdlGlEnum {
   static const contextResetLoseContext = SDL_GL_CONTEXT_RESET_LOSE_CONTEXT;
 }
 
-class SdlWindowSurfaceVsyncEnum {
+class SdlkWindowSurfaceVsync {
   static const disabled = SDL_WINDOW_SURFACE_VSYNC_DISABLED;
   static const adaptive = SDL_WINDOW_SURFACE_VSYNC_ADAPTIVE;
 }
 
-class SdlHittestEnum {
+class SdlkHittest {
   static const normal = SDL_HITTEST_NORMAL;
   static const draggable = SDL_HITTEST_DRAGGABLE;
   static const resizeTopleft = SDL_HITTEST_RESIZE_TOPLEFT;

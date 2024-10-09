@@ -83,9 +83,11 @@ typedef SdlAppEventFuncDart = int Function(
 typedef SdlAppEventFunc = Int32 Function(
     Pointer<NativeType> appstate, Pointer<SdlEvent> event);
 
-// typedef void (SDLCALL *SDL_AppQuit_func)(void *appstate)
-typedef SdlAppQuitFuncDart = void Function(Pointer<NativeType> appstate);
-typedef SdlAppQuitFunc = Void Function(Pointer<NativeType> appstate);
+// typedef void (SDLCALL *SDL_AppQuit_func)(void *appstate, SDL_AppResult result)
+typedef SdlAppQuitFuncDart = void Function(
+    Pointer<NativeType> appstate, int result);
+typedef SdlAppQuitFunc = Void Function(
+    Pointer<NativeType> appstate, Int32 result);
 
 // typedef void (SDLCALL *SDL_LogOutputFunction)(void *userdata, int category, SDL_LogPriority priority, const char *message)
 typedef SdlLogOutputFunctionDart = void Function(Pointer<NativeType> userdata,
@@ -186,13 +188,21 @@ typedef SdlNsTimerCallbackDart = int Function(
 typedef SdlNsTimerCallback = Uint64 Function(
     Pointer<NativeType> userdata, Uint32 timerId, Uint64 interval);
 
-// typedef SDL_EGLAttrib *(SDLCALL *SDL_EGLAttribArrayCallback)(void)
-typedef SdlEglAttribArrayCallbackDart = Pointer<Uint64> Function();
-typedef SdlEglAttribArrayCallback = Pointer<Uint64> Function();
+// typedef SDL_EGLAttrib *(SDLCALL *SDL_EGLAttribArrayCallback)(void *userdata)
+typedef SdlEglAttribArrayCallbackDart = Pointer<Uint64> Function(
+    Pointer<NativeType> userdata);
+typedef SdlEglAttribArrayCallback = Pointer<Uint64> Function(
+    Pointer<NativeType> userdata);
 
-// typedef SDL_EGLint *(SDLCALL *SDL_EGLIntArrayCallback)(void)
-typedef SdlEglIntArrayCallbackDart = Pointer<Int32> Function();
-typedef SdlEglIntArrayCallback = Pointer<Int32> Function();
+// typedef SDL_EGLint *(SDLCALL *SDL_EGLIntArrayCallback)(void *userdata, SDL_EGLDisplay display, SDL_EGLConfig config)
+typedef SdlEglIntArrayCallbackDart = Pointer<Int32> Function(
+    Pointer<NativeType> userdata,
+    Pointer<NativeType> display,
+    Pointer<NativeType> config);
+typedef SdlEglIntArrayCallback = Pointer<Int32> Function(
+    Pointer<NativeType> userdata,
+    Pointer<NativeType> display,
+    Pointer<NativeType> config);
 
 // typedef SDL_HitTestResult (SDLCALL *SDL_HitTest)(SDL_Window *win, const SDL_Point *area, void *data)
 typedef SdlHitTestDart = int Function(
