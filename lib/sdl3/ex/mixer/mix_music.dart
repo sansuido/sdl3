@@ -909,8 +909,4 @@ extension MixMusicPointerEx on Pointer<MixMusic> {
   bool playing() {
     return mixPlayingMusic();
   }
-
-  bool setCmd(String? command) {
-    return mixSetMusicCmd(command);
-  }
 }

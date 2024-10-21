@@ -232,10 +232,6 @@ Pointer<TtfFont> ttfOpenFontWithProperties(int props) {
 ///
 /// Get the properties associated with a font.
 ///
-/// The following read-only properties are provided by SDL:
-///
-/// - `TTF_PROP_FONT_FACE_POINTER`: the FT_Face associated with the font.
-///
 /// \param font the font to query.
 /// \returns a valid property ID on success or 0 on failure; call
 /// SDL_GetError() for more information.
@@ -2376,10 +2372,11 @@ bool ttfGetTextSize(Pointer<TtfText> text, Pointer<Int32> w, Pointer<Int32> h) {
 ///
 /// Get the substring of a text object that surrounds a text offset.
 ///
-/// If `offset` is less than 0, this will return a zero width substring at the
-/// beginning of the text. If `offset` is greater than or equal to the length
-/// of the text string, this will return a zero width substring at the end of
-/// the text.
+/// If `offset` is less than 0, this will return a zero length substring at the
+/// beginning of the text with the TTF_SUBSTRING_TEXT_START flag set. If
+/// `offset` is greater than or equal to the length of the text string, this
+/// will return a zero length substring at the end of the text with the
+/// TTF_SUBSTRING_TEXT_END flag set.
 ///
 /// \param text the TTF_Text to query.
 /// \param offset a byte offset into the text string.
@@ -2404,10 +2401,11 @@ bool ttfGetTextSubString(
 ///
 /// Get the substring of a text object that contains the given line.
 ///
-/// If `line` is less than 0, this will return a zero width substring at the
-/// beginning of the text. If `line` is greater than or equal to
-/// `text->num_lines` this will return a zero width substring at the end of the
-/// text.
+/// If `line` is less than 0, this will return a zero length substring at the
+/// beginning of the text with the TTF_SUBSTRING_TEXT_START flag set. If `line`
+/// is greater than or equal to `text->num_lines` this will return a zero
+/// length substring at the end of the text with the TTF_SUBSTRING_TEXT_END
+/// flag set.
 ///
 /// \param text the TTF_Text to query.
 /// \param line a zero-based line index, in the range [0 .. text->num_lines-1].
@@ -2432,18 +2430,10 @@ bool ttfGetTextSubStringForLine(
 ///
 /// Get the substrings of a text object that contain a range of text.
 ///
-/// The smaller offset will be clamped to 0 and the larger offset will be
-/// clamped to the length of text minus 1. The substrings that are returned
-/// will include the first offset and the second offset inclusive, e.g. {0, 2}
-/// of "abcd" will return "abc". If the text is empty, this will return a
-/// single zero width substring.
-///
-/// If an offset is negative, it will be considered as an offset from the end
-/// of the text, so {0, -1} would return substrings for the entire text.
-///
 /// \param text the TTF_Text to query.
-/// \param offset1 the first byte offset into the text string.
-/// \param offset2 the second byte offset into the text string.
+/// \param offset a byte offset into the text string.
+/// \param length the length of the range being queried, in bytes, or -1 for
+/// the remainder of the string.
 /// \param count a pointer filled in with the number of substrings returned,
 /// may be NULL.
 /// \returns a NULL terminated array of substring pointers or NULL on failure;
@@ -2452,20 +2442,17 @@ bool ttfGetTextSubStringForLine(
 /// longer needed.
 ///
 /// ```c
-/// extern SDL_DECLSPEC TTF_SubString ** SDLCALL TTF_GetTextSubStringsForRange(TTF_Text *text, int offset1, int offset2, int *count)
+/// extern SDL_DECLSPEC TTF_SubString ** SDLCALL TTF_GetTextSubStringsForRange(TTF_Text *text, int offset, int length, int *count)
 /// ```
 Pointer<Pointer<TtfSubString>> ttfGetTextSubStringsForRange(
-    Pointer<TtfText> text, int offset1, int offset2, Pointer<Int32> count) {
+    Pointer<TtfText> text, int offset, int length, Pointer<Int32> count) {
   final ttfGetTextSubStringsForRangeLookupFunction = libSdl3Ttf.lookupFunction<
       Pointer<Pointer<TtfSubString>> Function(Pointer<TtfText> text,
-          Int32 offset1, Int32 offset2, Pointer<Int32> count),
-      Pointer<Pointer<TtfSubString>> Function(
-          Pointer<TtfText> text,
-          int offset1,
-          int offset2,
-          Pointer<Int32> count)>('TTF_GetTextSubStringsForRange');
+          Int32 offset, Int32 length, Pointer<Int32> count),
+      Pointer<Pointer<TtfSubString>> Function(Pointer<TtfText> text, int offset,
+          int length, Pointer<Int32> count)>('TTF_GetTextSubStringsForRange');
   return ttfGetTextSubStringsForRangeLookupFunction(
-      text, offset1, offset2, count);
+      text, offset, length, count);
 }
 
 ///
@@ -2494,6 +2481,56 @@ bool ttfGetTextSubStringForPoint(
       int Function(Pointer<TtfText> text, int x, int y,
           Pointer<TtfSubString> substring)>('TTF_GetTextSubStringForPoint');
   return ttfGetTextSubStringForPointLookupFunction(text, x, y, substring) == 1;
+}
+
+///
+/// Get the previous substring in a text object
+///
+/// If called at the start of the text, this will return a zero length
+/// substring with the TTF_SUBSTRING_TEXT_START flag set.
+///
+/// \param text the TTF_Text to query.
+/// \param substring the TTF_SubString to query.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL TTF_GetPreviousTextSubString(TTF_Text *text, const TTF_SubString *substring, TTF_SubString *previous)
+/// ```
+bool ttfGetPreviousTextSubString(Pointer<TtfText> text,
+    Pointer<TtfSubString> substring, Pointer<TtfSubString> previous) {
+  final ttfGetPreviousTextSubStringLookupFunction = libSdl3Ttf.lookupFunction<
+      Uint8 Function(Pointer<TtfText> text, Pointer<TtfSubString> substring,
+          Pointer<TtfSubString> previous),
+      int Function(Pointer<TtfText> text, Pointer<TtfSubString> substring,
+          Pointer<TtfSubString> previous)>('TTF_GetPreviousTextSubString');
+  return ttfGetPreviousTextSubStringLookupFunction(text, substring, previous) ==
+      1;
+}
+
+///
+/// Get the next substring in a text object
+///
+/// If called at the end of the text, this will return a zero length substring
+/// with the TTF_SUBSTRING_TEXT_END flag set.
+///
+/// \param text the TTF_Text to query.
+/// \param substring the TTF_SubString to query.
+/// \param next a pointer filled in with the next substring.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL TTF_GetNextTextSubString(TTF_Text *text, const TTF_SubString *substring, TTF_SubString *next)
+/// ```
+bool ttfGetNextTextSubString(Pointer<TtfText> text,
+    Pointer<TtfSubString> substring, Pointer<TtfSubString> next) {
+  final ttfGetNextTextSubStringLookupFunction = libSdl3Ttf.lookupFunction<
+      Uint8 Function(Pointer<TtfText> text, Pointer<TtfSubString> substring,
+          Pointer<TtfSubString> next),
+      int Function(Pointer<TtfText> text, Pointer<TtfSubString> substring,
+          Pointer<TtfSubString> next)>('TTF_GetNextTextSubString');
+  return ttfGetNextTextSubStringLookupFunction(text, substring, next) == 1;
 }
 
 ///

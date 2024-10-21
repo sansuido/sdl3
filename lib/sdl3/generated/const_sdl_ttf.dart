@@ -16,7 +16,6 @@ const TTF_PROP_FONT_CREATE_SIZE_FLOAT = 'SDL_ttf.font.create.size';
 const TTF_PROP_FONT_CREATE_FACE_NUMBER = 'SDL_ttf.font.create.face';
 const TTF_PROP_FONT_CREATE_HORIZONTAL_DPI_NUMBER = 'SDL_ttf.font.create.hdpi';
 const TTF_PROP_FONT_CREATE_VERTICAL_DPI_NUMBER = 'SDL_ttf.font.create.vdpi';
-const TTF_PROP_FONT_FACE_POINTER = 'SDL_ttf.font.face';
 const TTF_STYLE_NORMAL = 0x00;
 const TTF_STYLE_BOLD = 0x01;
 const TTF_STYLE_ITALIC = 0x02;
@@ -35,6 +34,10 @@ const TTF_DIRECTION_LTR = 0;
 const TTF_DIRECTION_RTL = 0 + 1;
 const TTF_DIRECTION_TTB = 0 + 2;
 const TTF_DIRECTION_BTT = 0 + 3;
+const TTF_SUBSTRING_TEXT_START = 0x00000001;
+const TTF_SUBSTRING_LINE_START = 0x00000002;
+const TTF_SUBSTRING_LINE_END = 0x00000004;
+const TTF_SUBSTRING_TEXT_END = 0x00000008;
 
 class TtfkPropFont {
   static const createFilenameString = TTF_PROP_FONT_CREATE_FILENAME_STRING;
@@ -49,7 +52,6 @@ class TtfkPropFont {
       TTF_PROP_FONT_CREATE_HORIZONTAL_DPI_NUMBER;
   static const createVerticalDpiNumber =
       TTF_PROP_FONT_CREATE_VERTICAL_DPI_NUMBER;
-  static const facePointer = TTF_PROP_FONT_FACE_POINTER;
 }
 
 class TtfkStyle {

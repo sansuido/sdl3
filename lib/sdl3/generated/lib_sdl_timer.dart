@@ -105,8 +105,8 @@ void sdlDelay(int ms) {
 /// Wait a specified number of nanoseconds before returning.
 ///
 /// This function waits a specified number of nanoseconds before returning. It
-/// will attempt to wait as close to the requested time as possible, busy
-/// waiting if necessary, but could return later due to OS scheduling.
+/// waits at least the specified time, but possibly longer due to OS
+/// scheduling.
 ///
 /// \param ns the number of nanoseconds to delay.
 ///
@@ -120,6 +120,27 @@ void sdlDelayNs(int ns) {
       libSdl3.lookupFunction<Void Function(Uint64 ns), void Function(int ns)>(
           'SDL_DelayNS');
   return sdlDelayNsLookupFunction(ns);
+}
+
+///
+/// Wait a specified number of nanoseconds before returning.
+///
+/// This function waits a specified number of nanoseconds before returning. It
+/// will attempt to wait as close to the requested time as possible, busy
+/// waiting if necessary, but could return later due to OS scheduling.
+///
+/// \param ns the number of nanoseconds to delay.
+///
+/// \since This function is available since SDL 3.1.4.
+///
+/// ```c
+/// extern SDL_DECLSPEC void SDLCALL SDL_DelayPrecise(Uint64 ns)
+/// ```
+void sdlDelayPrecise(int ns) {
+  final sdlDelayPreciseLookupFunction =
+      libSdl3.lookupFunction<Void Function(Uint64 ns), void Function(int ns)>(
+          'SDL_DelayPrecise');
+  return sdlDelayPreciseLookupFunction(ns);
 }
 
 ///

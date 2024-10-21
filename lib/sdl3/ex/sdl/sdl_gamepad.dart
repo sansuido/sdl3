@@ -1017,7 +1017,7 @@ extension SdlGamepadPointerEx on Pointer<SdlGamepad> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_JoystickConnectionState SDLCALL SDL_GetGamepadConnectionState(SDL_Gamepad *gamepad)
   /// ```
-  int sdlGetConnectionState() {
+  int getConnectionState() {
     return sdlGetGamepadConnectionState(this);
   }
 

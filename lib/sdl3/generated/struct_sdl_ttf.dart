@@ -37,24 +37,30 @@ extension TtfTextExtension on Pointer<TtfText> {
 // TTF_SubString
 final class TtfSubString extends Struct {
   // [0]+(4)
-  @Int32()
-  external int offset;
+  @Uint32()
+  external int flags;
   // [4]+(4)
   @Int32()
-  external int length;
+  external int offset;
   // [8]+(4)
   @Int32()
-  external int lineIndex;
+  external int length;
   // [12]+(4)
   @Int32()
+  external int lineIndex;
+  // [16]+(4)
+  @Int32()
   external int clusterIndex;
-  // [16]+(16)
+  // [20]+(16)
   @Uint64()
   external int rect_1;
   @Uint64()
   external int rect_2;
+  // [] +(4)
+  @Uint32()
+  external int blank_1;
 }
 
 extension TtfSubStringExtension on Pointer<TtfSubString> {
-  Pointer<SdlRect> get rect => (cast<Uint8>() + 16).cast<SdlRect>();
+  Pointer<SdlRect> get rect => (cast<Uint8>() + 20).cast<SdlRect>();
 }

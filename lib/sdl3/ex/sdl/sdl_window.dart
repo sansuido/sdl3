@@ -67,7 +67,7 @@ extension SdlWindowEx on SdlWindow {
   /// corresponding UnloadLibrary function is called by SDL_DestroyWindow().
   ///
   /// If SDL_WINDOW_VULKAN is specified and there isn't a working Vulkan driver,
-  /// SDL_CreateWindow() will fail because SDL_Vulkan_LoadLibrary() will fail.
+  /// SDL_CreateWindow() will fail, because SDL_Vulkan_LoadLibrary() will fail.
   ///
   /// If SDL_WINDOW_METAL is specified on an OS that does not support Metal,
   /// SDL_CreateWindow() will fail.
@@ -89,6 +89,7 @@ extension SdlWindowEx on SdlWindow {
   ///
   /// \since This function is available since SDL 3.0.0.
   ///
+  /// \sa SDL_CreateWindowAndRenderer
   /// \sa SDL_CreatePopupWindow
   /// \sa SDL_CreateWindowWithProperties
   /// \sa SDL_DestroyWindow
@@ -724,7 +725,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// Request that the window be minimized to an iconic representation.
   ///
   /// On some windowing systems this request is asynchronous and the new window
-  /// state may not have have been applied immediately upon the return of this
+  /// state may not have been applied immediately upon the return of this
   /// function. If an immediate change is required, call SDL_SyncWindow() to
   /// block until the changes have taken effect.
   ///
@@ -1066,9 +1067,16 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// reparented to the new owner. Setting the parent window to NULL unparents
   /// the window and removes child window status.
   ///
+  /// If a parent window is hidden or destroyed, the operation will be
+  /// recursively applied to child windows. Child windows hidden with the parent
+  /// that did not have their hidden status explicitly set will be restored when
+  /// the parent is shown.
+  ///
   /// Attempting to set the parent of a window that is currently in the modal
-  /// state will fail. Use SDL_SetWindowModalFor() to cancel the modal status
-  /// before attempting to change the parent.
+  /// state will fail. Use SDL_SetWindowModal() to cancel the modal status before
+  /// attempting to change the parent.
+  ///
+  /// Popup windows cannot change parents and attempts to do so will fail.
   ///
   /// Setting a parent window that is currently the sibling or descendent of the
   /// child window results in undefined behavior.
@@ -1227,8 +1235,8 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   ///
   /// Destroy a window.
   ///
-  /// Any popups or modal windows owned by the window will be recursively
-  /// destroyed as well.
+  /// Any child windows owned by the window will be recursively destroyed as
+  /// well.
   ///
   /// \param window the window to destroy.
   ///

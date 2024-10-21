@@ -291,10 +291,6 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   ///
   /// Get the properties associated with a font.
   ///
-  /// The following read-only properties are provided by SDL:
-  ///
-  /// - `TTF_PROP_FONT_FACE_POINTER`: the FT_Face associated with the font.
-  ///
   /// \param font the font to query.
   /// \returns a valid property ID on success or 0 on failure; call
   /// SDL_GetError() for more information.

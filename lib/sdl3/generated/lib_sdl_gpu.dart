@@ -105,8 +105,8 @@ Pointer<SdlGpuDevice> sdlCreateGpuDevice(
 /// provide shaders for an NDA platform.
 /// - `SDL_PROP_GPU_DEVICE_CREATE_SHADERS_SPIRV_BOOL`: The app is able to
 /// provide SPIR-V shaders if applicable.
-/// - SDL_PROP_GPU_DEVICE_CREATE_SHADERS_DXBC_BOOL`: The app is able to provide
-/// DXBC shaders if applicable
+/// - `SDL_PROP_GPU_DEVICE_CREATE_SHADERS_DXBC_BOOL`: The app is able to
+/// provide DXBC shaders if applicable
 /// `SDL_PROP_GPU_DEVICE_CREATE_SHADERS_DXIL_BOOL`: The app is able to
 /// provide DXIL shaders if applicable.
 /// - `SDL_PROP_GPU_DEVICE_CREATE_SHADERS_MSL_BOOL`: The app is able to provide
@@ -2719,6 +2719,31 @@ bool sdlGpuTextureSupportsSampleCount(
   return sdlGpuTextureSupportsSampleCountLookupFunction(
           device, format, sampleCount) ==
       1;
+}
+
+///
+/// Calculate the size in bytes of a texture format with dimensions.
+///
+/// \param format a texture format.
+/// \param width width in pixels.
+/// \param height height in pixels.
+/// \param depth_or_layer_count depth for 3D textures or layer count otherwise.
+/// \returns the size of a texture with this format and dimensions.
+///
+/// \since This function is available since SDL 3.1.4.
+///
+/// ```c
+/// extern SDL_DECLSPEC Uint32 SDLCALL SDL_CalculateGPUTextureFormatSize( SDL_GPUTextureFormat format, Uint32 width, Uint32 height, Uint32 depth_or_layer_count)
+/// ```
+int sdlCalculateGpuTextureFormatSize(
+    int format, int width, int height, int depthOrLayerCount) {
+  final sdlCalculateGpuTextureFormatSizeLookupFunction = libSdl3.lookupFunction<
+      Uint32 Function(
+          Int32 format, Uint32 width, Uint32 height, Uint32 depthOrLayerCount),
+      int Function(int format, int width, int height,
+          int depthOrLayerCount)>('SDL_CalculateGPUTextureFormatSize');
+  return sdlCalculateGpuTextureFormatSizeLookupFunction(
+      format, width, height, depthOrLayerCount);
 }
 
 ///

@@ -3046,41 +3046,6 @@ bool mixPlayingMusic() {
 }
 
 ///
-/// Run an external command as the music stream.
-///
-/// This halts any currently-playing music, and next time the music stream is
-/// played, SDL_mixer will spawn a process using the command line specified in
-/// `command`. This command is not subject to shell expansion, and beyond some
-/// basic splitting up of arguments, is passed to execvp() on most platforms,
-/// not system().
-///
-/// The command is responsible for generating sound; it is NOT mixed by
-/// SDL_mixer! SDL_mixer will kill the child process if asked to halt the
-/// music, but otherwise does not have any control over what the process does.
-///
-/// You are strongly encouraged not to use this function without an extremely
-/// good reason.
-///
-/// \param command command.
-/// \returns true on success or false on failure; call SDL_GetError() for more
-/// information.
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// ```c
-/// extern SDL_DECLSPEC bool SDLCALL Mix_SetMusicCMD(const char *command)
-/// ```
-bool mixSetMusicCmd(String? command) {
-  final mixSetMusicCmdLookupFunction = libSdl3Mixer.lookupFunction<
-      Uint8 Function(Pointer<Utf8> command),
-      int Function(Pointer<Utf8> command)>('Mix_SetMusicCMD');
-  final commandPointer = command != null ? command.toNativeUtf8() : nullptr;
-  final result = mixSetMusicCmdLookupFunction(commandPointer) == 1;
-  calloc.free(commandPointer);
-  return result;
-}
-
-///
 /// Set SoundFonts paths to use by supported MIDI backends.
 ///
 /// You may specify multiple paths in a single string by separating them with

@@ -22,18 +22,17 @@ const MIX_NO_FADING = 0;
 const MIX_FADING_OUT = 1;
 const MIX_FADING_IN = 2;
 const MUS_NONE = 0;
-const MUS_CMD = 1;
-const MUS_WAV = 2;
-const MUS_MOD = 3;
-const MUS_MID = 4;
-const MUS_OGG = 5;
-const MUS_MP3 = 6;
-const MUS_MP3_MAD_UNUSED = 7;
-const MUS_FLAC = 8;
-const MUS_MODPLUG_UNUSED = 9;
-const MUS_OPUS = 10;
-const MUS_WAVPACK = 11;
-const MUS_GME = 12;
+const MUS_WAV = 1;
+const MUS_MOD = 2;
+const MUS_MID = 3;
+const MUS_OGG = 4;
+const MUS_MP3 = 5;
+const MUS_MP3_MAD_UNUSED = 6;
+const MUS_FLAC = 7;
+const MUS_MODPLUG_UNUSED = 8;
+const MUS_OPUS = 9;
+const MUS_WAVPACK = 10;
+const MUS_GME = 11;
 const MIX_CHANNEL_POST = (-2);
 const MIX_EFFECTSMAXSPEED = 'MIX_EFFECTSMAXSPEED';
 
@@ -49,7 +48,6 @@ class MixkInit {
 
 class Mus {
   static const none = MUS_NONE;
-  static const cmd = MUS_CMD;
   static const wav = MUS_WAV;
   static const mod = MUS_MOD;
   static const mid = MUS_MID;

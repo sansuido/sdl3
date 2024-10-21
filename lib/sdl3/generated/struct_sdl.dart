@@ -1054,6 +1054,19 @@ final class SdlClipboardEvent extends Struct {
   // [8]+(8)
   @Uint64()
   external int timestamp;
+  // [16]+(1)
+  @Uint8()
+  external int owner;
+  // [] +(3)
+  @Uint16()
+  external int blank_1;
+  @Uint8()
+  external int blank_2;
+  // [20]+(4)
+  @Int32()
+  external int nMimeTypes;
+  // [24]+(8)
+  external Pointer<Pointer<Int8>> mimeTypes;
 }
 
 // SDL_SensorEvent
