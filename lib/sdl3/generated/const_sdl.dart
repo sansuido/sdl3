@@ -237,6 +237,10 @@ const SDL_EVENT_CAMERA_DEVICE_APPROVED = 0x1400 + 2;
 const SDL_EVENT_CAMERA_DEVICE_DENIED = 0x1400 + 3;
 const SDL_EVENT_RENDER_TARGETS_RESET = 0x2000;
 const SDL_EVENT_RENDER_DEVICE_RESET = 0x2000 + 1;
+const SDL_EVENT_PRIVATE0 = 0x4000;
+const SDL_EVENT_PRIVATE1 = 0x4000 + 1;
+const SDL_EVENT_PRIVATE2 = 0x4000 + 2;
+const SDL_EVENT_PRIVATE3 = 0x4000 + 3;
 const SDL_EVENT_POLL_SENTINEL = 0x7F00;
 const SDL_EVENT_USER = 0x8000;
 const SDL_EVENT_LAST = 0xFFFF;
@@ -599,22 +603,22 @@ const SDL_PROP_GPU_CREATETEXTURE_D3D12_CLEAR_DEPTH_FLOAT =
     'SDL.gpu.createtexture.d3d12.clear.depth';
 const SDL_PROP_GPU_CREATETEXTURE_D3D12_CLEAR_STENCIL_UINT8 =
     'SDL.gpu.createtexture.d3d12.clear.stencil';
-const SDL_PROP_GPU_DEVICE_CREATE_DEBUGMODE_BOOL =
+const SDL_PROP_GPU_DEVICE_CREATE_DEBUGMODE_BOOLEAN =
     'SDL.gpu.device.create.debugmode';
-const SDL_PROP_GPU_DEVICE_CREATE_PREFERLOWPOWER_BOOL =
+const SDL_PROP_GPU_DEVICE_CREATE_PREFERLOWPOWER_BOOLEAN =
     'SDL.gpu.device.create.preferlowpower';
 const SDL_PROP_GPU_DEVICE_CREATE_NAME_STRING = 'SDL.gpu.device.create.name';
-const SDL_PROP_GPU_DEVICE_CREATE_SHADERS_PRIVATE_BOOL =
+const SDL_PROP_GPU_DEVICE_CREATE_SHADERS_PRIVATE_BOOLEAN =
     'SDL.gpu.device.create.shaders.private';
-const SDL_PROP_GPU_DEVICE_CREATE_SHADERS_SPIRV_BOOL =
+const SDL_PROP_GPU_DEVICE_CREATE_SHADERS_SPIRV_BOOLEAN =
     'SDL.gpu.device.create.shaders.spirv';
-const SDL_PROP_GPU_DEVICE_CREATE_SHADERS_DXBC_BOOL =
+const SDL_PROP_GPU_DEVICE_CREATE_SHADERS_DXBC_BOOLEAN =
     'SDL.gpu.device.create.shaders.dxbc';
-const SDL_PROP_GPU_DEVICE_CREATE_SHADERS_DXIL_BOOL =
+const SDL_PROP_GPU_DEVICE_CREATE_SHADERS_DXIL_BOOLEAN =
     'SDL.gpu.device.create.shaders.dxil';
-const SDL_PROP_GPU_DEVICE_CREATE_SHADERS_MSL_BOOL =
+const SDL_PROP_GPU_DEVICE_CREATE_SHADERS_MSL_BOOLEAN =
     'SDL.gpu.device.create.shaders.msl';
-const SDL_PROP_GPU_DEVICE_CREATE_SHADERS_METALLIB_BOOL =
+const SDL_PROP_GPU_DEVICE_CREATE_SHADERS_METALLIB_BOOLEAN =
     'SDL.gpu.device.create.shaders.metallib';
 const SDL_PROP_GPU_DEVICE_CREATE_D3D12_SEMANTIC_NAME_STRING =
     'SDL.gpu.device.create.d3d12.semantic';
@@ -834,6 +838,7 @@ const SDL_HINT_MUTE_CONSOLE_KEYBOARD = 'SDL_MUTE_CONSOLE_KEYBOARD';
 const SDL_HINT_NO_SIGNAL_HANDLERS = 'SDL_NO_SIGNAL_HANDLERS';
 const SDL_HINT_OPENGL_LIBRARY = 'SDL_OPENGL_LIBRARY';
 const SDL_HINT_OPENGL_ES_DRIVER = 'SDL_OPENGL_ES_DRIVER';
+const SDL_HINT_OPENVR_LIBRARY = 'SDL_OPENVR_LIBRARY';
 const SDL_HINT_ORIENTATIONS = 'SDL_ORIENTATIONS';
 const SDL_HINT_POLL_SENTINEL = 'SDL_POLL_SENTINEL';
 const SDL_HINT_PREFERRED_LOCALES = 'SDL_PREFERRED_LOCALES';
@@ -865,6 +870,7 @@ const SDL_HINT_TOUCH_MOUSE_EVENTS = 'SDL_TOUCH_MOUSE_EVENTS';
 const SDL_HINT_TRACKPAD_IS_TOUCH_ONLY = 'SDL_TRACKPAD_IS_TOUCH_ONLY';
 const SDL_HINT_TV_REMOTE_AS_JOYSTICK = 'SDL_TV_REMOTE_AS_JOYSTICK';
 const SDL_HINT_VIDEO_ALLOW_SCREENSAVER = 'SDL_VIDEO_ALLOW_SCREENSAVER';
+const SDL_HINT_VIDEO_DISPLAY_PRIORITY = 'SDL_VIDEO_DISPLAY_PRIORITY';
 const SDL_HINT_VIDEO_DOUBLE_BUFFER = 'SDL_VIDEO_DOUBLE_BUFFER';
 const SDL_HINT_VIDEO_DRIVER = 'SDL_VIDEO_DRIVER';
 const SDL_HINT_VIDEO_DUMMY_SAVE_FRAMES = 'SDL_VIDEO_DUMMY_SAVE_FRAMES';
@@ -1888,6 +1894,7 @@ const SDL_PROP_TEXTURE_OPENGLES2_TEXTURE_TARGET_NUMBER =
 const SDL_PROP_TEXTURE_VULKAN_TEXTURE_NUMBER = 'SDL.texture.vulkan.texture';
 const SDL_RENDERER_VSYNC_DISABLED = 0;
 const SDL_RENDERER_VSYNC_ADAPTIVE = (-1);
+const SDL_DEBUG_TEXT_FONT_CHARACTER_SIZE = 8;
 //const SDL_revision_h_ = ;
 const SDL_REVISION = 'Some arbitrary string decided at SDL build time';
 //const SDL_scancode_h_ = ;
@@ -2288,6 +2295,11 @@ const SDL_PROP_SURFACE_TONEMAP_OPERATOR_STRING = 'SDL.surface.tonemap';
 //const SDL_system_h_ = ;
 const SDL_ANDROID_EXTERNAL_STORAGE_READ = 0x01;
 const SDL_ANDROID_EXTERNAL_STORAGE_WRITE = 0x02;
+const SDL_SANDBOX_NONE = 0;
+const SDL_SANDBOX_UNKNOWN_CONTAINER = 0 + 1;
+const SDL_SANDBOX_FLATPAK = 0 + 2;
+const SDL_SANDBOX_SNAP = 0 + 3;
+const SDL_SANDBOX_MACOS = 0 + 4;
 //const SDL_thread_h_ = ;
 const SDL_THREAD_PRIORITY_LOW = 0;
 const SDL_THREAD_PRIORITY_NORMAL = 1;
@@ -2496,6 +2508,7 @@ const SDL_PROP_WINDOW_KMSDRM_GBM_DEVICE_POINTER = 'SDL.window.kmsdrm.gbm_dev';
 const SDL_PROP_WINDOW_COCOA_WINDOW_POINTER = 'SDL.window.cocoa.window';
 const SDL_PROP_WINDOW_COCOA_METAL_VIEW_TAG_NUMBER =
     'SDL.window.cocoa.metal_view_tag';
+const SDL_PROP_WINDOW_OPENVR_OVERLAY_ID = 'SDL.window.openvr.overlay_id';
 const SDL_PROP_WINDOW_VIVANTE_DISPLAY_POINTER = 'SDL.window.vivante.display';
 const SDL_PROP_WINDOW_VIVANTE_WINDOW_POINTER = 'SDL.window.vivante.window';
 const SDL_PROP_WINDOW_VIVANTE_SURFACE_POINTER = 'SDL.window.vivante.surface';
@@ -2708,6 +2721,10 @@ class SdlkEvent {
   static const cameraDeviceDenied = SDL_EVENT_CAMERA_DEVICE_DENIED;
   static const renderTargetsReset = SDL_EVENT_RENDER_TARGETS_RESET;
   static const renderDeviceReset = SDL_EVENT_RENDER_DEVICE_RESET;
+  static const private0 = SDL_EVENT_PRIVATE0;
+  static const private1 = SDL_EVENT_PRIVATE1;
+  static const private2 = SDL_EVENT_PRIVATE2;
+  static const private3 = SDL_EVENT_PRIVATE3;
   static const pollSentinel = SDL_EVENT_POLL_SENTINEL;
   static const user = SDL_EVENT_USER;
   static const last = SDL_EVENT_LAST;
@@ -3381,6 +3398,7 @@ class SdlkHint {
   static const noSignalHandlers = SDL_HINT_NO_SIGNAL_HANDLERS;
   static const openglLibrary = SDL_HINT_OPENGL_LIBRARY;
   static const openglEsDriver = SDL_HINT_OPENGL_ES_DRIVER;
+  static const openvrLibrary = SDL_HINT_OPENVR_LIBRARY;
   static const orientations = SDL_HINT_ORIENTATIONS;
   static const pollSentinel = SDL_HINT_POLL_SENTINEL;
   static const preferredLocales = SDL_HINT_PREFERRED_LOCALES;
@@ -3412,6 +3430,7 @@ class SdlkHint {
   static const trackpadIsTouchOnly = SDL_HINT_TRACKPAD_IS_TOUCH_ONLY;
   static const tvRemoteAsJoystick = SDL_HINT_TV_REMOTE_AS_JOYSTICK;
   static const videoAllowScreensaver = SDL_HINT_VIDEO_ALLOW_SCREENSAVER;
+  static const videoDisplayPriority = SDL_HINT_VIDEO_DISPLAY_PRIORITY;
   static const videoDoubleBuffer = SDL_HINT_VIDEO_DOUBLE_BUFFER;
   static const videoDriver = SDL_HINT_VIDEO_DRIVER;
   static const videoDummySaveFrames = SDL_HINT_VIDEO_DUMMY_SAVE_FRAMES;

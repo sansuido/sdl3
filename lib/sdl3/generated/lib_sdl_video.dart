@@ -371,7 +371,7 @@ Pointer<Pointer<SdlDisplayMode>> sdlGetFullscreenDisplayModes(
 /// refresh rate default to the desktop mode if they are set to 0. The modes
 /// are scanned with size being first priority, format being second priority,
 /// and finally checking the refresh rate. If all the available modes are too
-/// small, then NULL is returned.
+/// small, then false is returned.
 ///
 /// \param displayID the instance ID of the display to query.
 /// \param w the width in pixels of the desired display mode.
@@ -1149,6 +1149,11 @@ Pointer<SdlWindow> sdlGetWindowParent(Pointer<SdlWindow> window) {
 /// NSWindow associated with the window
 /// - `SDL_PROP_WINDOW_COCOA_METAL_VIEW_TAG_NUMBER`: the NSInteger tag
 /// assocated with metal views on the window
+///
+/// On OpenVR:
+///
+/// - `SDL_PROP_WINDOW_OPENVR_OVERLAY_ID`: the OpenVR Overlay Handle ID for the
+/// associated overlay window.
 ///
 /// On Vivante:
 ///
@@ -2728,12 +2733,14 @@ bool sdlSetWindowHitTest(
 ///
 /// This sets the alpha channel of a transparent window and any fully
 /// transparent areas are also transparent to mouse clicks. If you are using
-/// something besides the SDL render API, then you are responsible for setting
-/// the alpha channel of the window yourself.
+/// something besides the SDL render API, then you are responsible for drawing
+/// the alpha channel of the window to match the shape alpha channel to get
+/// consistent cross-platform results.
 ///
 /// The shape is copied inside this function, so you can free it afterwards. If
 /// your shape surface changes, you should call SDL_SetWindowShape() again to
-/// update the window.
+/// update the window. This is an expensive operation, so should be done
+/// sparingly.
 ///
 /// The window must have been created with the SDL_WINDOW_TRANSPARENT flag.
 ///

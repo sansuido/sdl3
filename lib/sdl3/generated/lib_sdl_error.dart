@@ -26,6 +26,7 @@ import 'lib_sdl.dart';
 ///
 /// \sa SDL_ClearError
 /// \sa SDL_GetError
+/// \sa SDL_SetErrorV
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetError(SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(1)
@@ -37,6 +38,35 @@ bool sdlSetError(String? fmt, Pointer<NativeType> arg1) {
           Pointer<Utf8> fmt, Pointer<NativeType> arg1)>('SDL_SetError');
   final fmtPointer = fmt != null ? fmt.toNativeUtf8() : nullptr;
   final result = sdlSetErrorLookupFunction(fmtPointer, arg1) == 1;
+  calloc.free(fmtPointer);
+  return result;
+}
+
+///
+/// Set the SDL error message for the current thread.
+///
+/// Calling this function will replace any previous error message that was set.
+///
+/// \param fmt a printf()-style message format string.
+/// \param ap a variable argument list.
+/// \returns false.
+///
+/// \since This function is available since SDL 3.1.4.
+///
+/// \sa SDL_ClearError
+/// \sa SDL_GetError
+/// \sa SDL_SetError
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetErrorV(SDL_PRINTF_FORMAT_STRING const char *fmt, va_list ap) SDL_PRINTF_VARARG_FUNCV(1)
+/// ```
+bool sdlSetErrorV(String? fmt, Pointer<NativeType> arg1) {
+  final sdlSetErrorVLookupFunction = libSdl3.lookupFunction<
+      Uint8 Function(Pointer<Utf8> fmt, Pointer<NativeType> arg1),
+      int Function(
+          Pointer<Utf8> fmt, Pointer<NativeType> arg1)>('SDL_SetErrorV');
+  final fmtPointer = fmt != null ? fmt.toNativeUtf8() : nullptr;
+  final result = sdlSetErrorVLookupFunction(fmtPointer, arg1) == 1;
   calloc.free(fmtPointer);
   return result;
 }

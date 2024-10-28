@@ -681,6 +681,23 @@ bool sdlIsTv() {
 }
 
 ///
+/// Get the application sandbox environment, if any.
+///
+/// \returns the application sandbox environment or SDL_SANDBOX_NONE if the
+/// application is not running in a sandbox environment.
+///
+/// \since This function is available since SDL 3.1.4.
+///
+/// ```c
+/// extern SDL_DECLSPEC SDL_Sandbox SDLCALL SDL_GetSandbox(void)
+/// ```
+int sdlGetSandbox() {
+  final sdlGetSandboxLookupFunction = libSdl3
+      .lookupFunction<Int32 Function(), int Function()>('SDL_GetSandbox');
+  return sdlGetSandboxLookupFunction();
+}
+
+///
 /// Let iOS apps with external event handling report
 /// onApplicationWillTerminate.
 ///

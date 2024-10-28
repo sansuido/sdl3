@@ -648,11 +648,10 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderCoordinatesToWindow(SDL_Renderer *renderer, float x, float y, float *window_x, float *window_y)
   /// ```
-  math.Point<double> coordinatesToWindow(Pointer<SdlRenderer> renderer,
-      double x, double y, Pointer<Float> windowX, Pointer<Float> windowY) {
+  math.Point<double> coordinatesToWindow(double x, double y) {
     var windowXPointer = calloc<Float>();
     var windowYPointer = calloc<Float>();
-    sdlRenderCoordinatesToWindow(this, x, y, windowX, windowY);
+    sdlRenderCoordinatesToWindow(this, x, y, windowXPointer, windowYPointer);
     var result = math.Point<double>(windowXPointer.value, windowYPointer.value);
     calloc.free(windowXPointer);
     calloc.free(windowYPointer);

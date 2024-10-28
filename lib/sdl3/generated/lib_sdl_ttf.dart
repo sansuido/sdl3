@@ -83,15 +83,10 @@ void ttfGetHarfBuzzVersion(
 /// Initialize SDL_ttf.
 ///
 /// You must successfully call this function before it is safe to call any
-/// other function in this library, with one exception: a human-readable error
-/// message can be retrieved from SDL_GetError() if this function fails.
+/// other function in this library.
 ///
-/// SDL must be initialized before calls to functions in this library, because
-/// this library uses utility functions from the SDL library.
-///
-/// It is safe to call this more than once; the library keeps a counter of init
-/// calls, and decrements it on each call to TTF_Quit, so you must pair your
-/// init and quit calls.
+/// It is safe to call this more than once, and each successful TTF_Init() call
+/// should be paired with a matching TTF_Quit() call.
 ///
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
@@ -2000,12 +1995,8 @@ void ttfDestroyRendererTextEngine(Pointer<TtfTextEngine> engine) {
 ///
 /// Create a text object from UTF-8 text and a text engine.
 ///
-/// This will not word-wrap the string; you'll get a surface with a single line
-/// of text, as long as the string requires. You can use
-/// TTF_CreateText_Wrapped() instead if you need to wrap the output to multiple
-/// lines.
-///
-/// This will not wrap on newline characters.
+/// This function is equivalent to `TTF_CreateText_Wrapped(engine, font, text,
+/// 0)` and will wrap on newline characters.
 ///
 /// \param engine the text engine to use when creating the text object, may be
 /// NULL.
@@ -2102,7 +2093,10 @@ Pointer<TtfText> ttfCreateTextWrapped(Pointer<TtfTextEngine> engine,
 /// \returns a valid property ID on success or 0 on failure; call
 /// SDL_GetError() for more information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \threadsafety This function should be called on the thread that created the
+/// text.
+///
+/// \since This function is available since SDL_ttf 3.0.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC SDL_PropertiesID SDLCALL TTF_GetTextProperties(TTF_Text *text)
@@ -2122,6 +2116,11 @@ int ttfGetTextProperties(Pointer<TtfText> text) {
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety This function should be called on the thread that created the
+/// text.
+///
+/// \since This function is available since SDL_ttf 3.0.0.
+///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL TTF_SetTextEngine(TTF_Text *text, TTF_TextEngine *engine)
 /// ```
@@ -2139,6 +2138,11 @@ bool ttfSetTextEngine(Pointer<TtfText> text, Pointer<TtfTextEngine> engine) {
 /// \param text the TTF_Text to query.
 /// \returns the TTF_TextEngine used by the text on success or NULL on failure;
 /// call SDL_GetError() for more information.
+///
+/// \threadsafety This function should be called on the thread that created the
+/// text.
+///
+/// \since This function is available since SDL_ttf 3.0.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC TTF_TextEngine * SDLCALL TTF_GetTextEngine(TTF_Text *text)
@@ -2161,6 +2165,11 @@ Pointer<TtfTextEngine> ttfGetTextEngine(Pointer<TtfText> text) {
 /// \param text the TTF_Text to modify.
 /// \param font the font to use, may be NULL.
 ///
+/// \threadsafety This function should be called on the thread that created the
+/// text.
+///
+/// \since This function is available since SDL_ttf 3.0.0.
+///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL TTF_SetTextFont(TTF_Text *text, TTF_Font *font)
 /// ```
@@ -2179,6 +2188,11 @@ bool ttfSetTextFont(Pointer<TtfText> text, Pointer<TtfFont> font) {
 /// \returns the TTF_Font used by the text on success or NULL on failure; call
 /// SDL_GetError() for more information.
 ///
+/// \threadsafety This function should be called on the thread that created the
+/// text.
+///
+/// \since This function is available since SDL_ttf 3.0.0.
+///
 /// ```c
 /// extern SDL_DECLSPEC TTF_Font * SDLCALL TTF_GetTextFont(TTF_Text *text)
 /// ```
@@ -2190,6 +2204,57 @@ Pointer<TtfFont> ttfGetTextFont(Pointer<TtfText> text) {
 }
 
 ///
+/// Set the position of a text object.
+///
+/// This can be used to position multiple text objects within a single wrapping
+/// text area.
+///
+/// \param text the TTF_Text to modify.
+/// \param x the x offset of the upper left corner of this text in pixels.
+/// \param y the y offset of the upper left corner of this text in pixels.
+///
+/// \threadsafety This function should be called on the thread that created the
+/// text.
+///
+/// \since This function is available since SDL_ttf 3.0.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL TTF_SetTextPosition(TTF_Text *text, int x, int y)
+/// ```
+bool ttfSetTextPosition(Pointer<TtfText> text, int x, int y) {
+  final ttfSetTextPositionLookupFunction = libSdl3Ttf.lookupFunction<
+      Uint8 Function(Pointer<TtfText> text, Int32 x, Int32 y),
+      int Function(Pointer<TtfText> text, int x, int y)>('TTF_SetTextPosition');
+  return ttfSetTextPositionLookupFunction(text, x, y) == 1;
+}
+
+///
+/// Get the position of a text object.
+///
+/// \param text the TTF_Text to query.
+/// \param x a pointer filled in with the x offset of the upper left corner of
+/// this text in pixels, may be NULL.
+/// \param y a pointer filled in with the y offset of the upper left corner of
+/// this text in pixels, may be NULL.
+///
+/// \threadsafety This function should be called on the thread that created the
+/// text.
+///
+/// \since This function is available since SDL_ttf 3.0.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL TTF_GetTextPosition(TTF_Text *text, int *x, int *y)
+/// ```
+bool ttfGetTextPosition(
+    Pointer<TtfText> text, Pointer<Int32> x, Pointer<Int32> y) {
+  final ttfGetTextPositionLookupFunction = libSdl3Ttf.lookupFunction<
+      Uint8 Function(Pointer<TtfText> text, Pointer<Int32> x, Pointer<Int32> y),
+      int Function(Pointer<TtfText> text, Pointer<Int32> x,
+          Pointer<Int32> y)>('TTF_GetTextPosition');
+  return ttfGetTextPositionLookupFunction(text, x, y) == 1;
+}
+
+///
 /// Set the UTF-8 text used by a text object.
 ///
 /// \param text the TTF_Text to modify.
@@ -2198,6 +2263,11 @@ Pointer<TtfFont> ttfGetTextFont(Pointer<TtfText> text) {
 /// text.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety This function should be called on the thread that created the
+/// text.
+///
+/// \since This function is available since SDL_ttf 3.0.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL TTF_SetTextString(TTF_Text *text, const char *string, size_t length)
@@ -2229,6 +2299,11 @@ bool ttfSetTextString(Pointer<TtfText> text, String? string, int length) {
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety This function should be called on the thread that created the
+/// text.
+///
+/// \since This function is available since SDL_ttf 3.0.0.
+///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL TTF_InsertTextString(TTF_Text *text, int offset, const char *string, size_t length)
 /// ```
@@ -2256,6 +2331,11 @@ bool ttfInsertTextString(
 /// text.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety This function should be called on the thread that created the
+/// text.
+///
+/// \since This function is available since SDL_ttf 3.0.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL TTF_AppendTextString(TTF_Text *text, const char *string, size_t length)
@@ -2286,6 +2366,11 @@ bool ttfAppendTextString(Pointer<TtfText> text, String? string, int length) {
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety This function should be called on the thread that created the
+/// text.
+///
+/// \since This function is available since SDL_ttf 3.0.0.
+///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL TTF_DeleteTextString(TTF_Text *text, int offset, int length)
 /// ```
@@ -2301,47 +2386,50 @@ bool ttfDeleteTextString(Pointer<TtfText> text, int offset, int length) {
 /// Set whether wrapping is enabled on a text object.
 ///
 /// \param text the TTF_Text to modify.
-/// \param wrap true if wrapping should be enabled, false if it should be
-/// disabled.
 /// \param wrapLength the maximum width in pixels, 0 to wrap on newline
-/// characters, or -1 to leave wrapLength unchanged.
+/// characters.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety This function should be called on the thread that created the
+/// text.
+///
+/// \since This function is available since SDL_ttf 3.0.0.
+///
 /// ```c
-/// extern SDL_DECLSPEC bool SDLCALL TTF_SetTextWrapping(TTF_Text *text, bool wrap, int wrapLength)
+/// extern SDL_DECLSPEC bool SDLCALL TTF_SetTextWrapping(TTF_Text *text, int wrapLength)
 /// ```
-bool ttfSetTextWrapping(Pointer<TtfText> text, bool wrap, int wrapLength) {
+bool ttfSetTextWrapping(Pointer<TtfText> text, int wrapLength) {
   final ttfSetTextWrappingLookupFunction = libSdl3Ttf.lookupFunction<
-      Uint8 Function(Pointer<TtfText> text, Uint8 wrap, Int32 wrapLength),
-      int Function(Pointer<TtfText> text, int wrap,
-          int wrapLength)>('TTF_SetTextWrapping');
-  return ttfSetTextWrappingLookupFunction(text, wrap ? 1 : 0, wrapLength) == 1;
+      Uint8 Function(Pointer<TtfText> text, Int32 wrapLength),
+      int Function(
+          Pointer<TtfText> text, int wrapLength)>('TTF_SetTextWrapping');
+  return ttfSetTextWrappingLookupFunction(text, wrapLength) == 1;
 }
 
 ///
 /// Get whether wrapping is enabled on a text object.
 ///
 /// \param text the TTF_Text to query.
-/// \param wrap a pointer filled in with true if wrapping is enabled, false if
-/// it is disabled, may be NULL.
 /// \param wrapLength a pointer filled in with the maximum width in pixels or 0
-/// if the text is being wrapped on newline characters, may
-/// be NULL.
+/// if the text is being wrapped on newline characters.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety This function should be called on the thread that created the
+/// text.
+///
+/// \since This function is available since SDL_ttf 3.0.0.
+///
 /// ```c
-/// extern SDL_DECLSPEC bool SDLCALL TTF_GetTextWrapping(TTF_Text *text, bool *wrap, int *wrapLength)
+/// extern SDL_DECLSPEC bool SDLCALL TTF_GetTextWrapping(TTF_Text *text, int *wrapLength)
 /// ```
-bool ttfGetTextWrapping(
-    Pointer<TtfText> text, Pointer<Uint8> wrap, Pointer<Int32> wrapLength) {
+bool ttfGetTextWrapping(Pointer<TtfText> text, Pointer<Int32> wrapLength) {
   final ttfGetTextWrappingLookupFunction = libSdl3Ttf.lookupFunction<
-      Uint8 Function(Pointer<TtfText> text, Pointer<Uint8> wrap,
-          Pointer<Int32> wrapLength),
-      int Function(Pointer<TtfText> text, Pointer<Uint8> wrap,
+      Uint8 Function(Pointer<TtfText> text, Pointer<Int32> wrapLength),
+      int Function(Pointer<TtfText> text,
           Pointer<Int32> wrapLength)>('TTF_GetTextWrapping');
-  return ttfGetTextWrappingLookupFunction(text, wrap, wrapLength) == 1;
+  return ttfGetTextWrappingLookupFunction(text, wrapLength) == 1;
 }
 
 ///
@@ -2357,6 +2445,11 @@ bool ttfGetTextWrapping(
 /// NULL.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety This function should be called on the thread that created the
+/// text.
+///
+/// \since This function is available since SDL_ttf 3.0.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL TTF_GetTextSize(TTF_Text *text, int *w, int *h)
@@ -2384,6 +2477,11 @@ bool ttfGetTextSize(Pointer<TtfText> text, Pointer<Int32> w, Pointer<Int32> h) {
 /// offset.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety This function should be called on the thread that created the
+/// text.
+///
+/// \since This function is available since SDL_ttf 3.0.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL TTF_GetTextSubString(TTF_Text *text, int offset, TTF_SubString *substring)
@@ -2414,6 +2512,11 @@ bool ttfGetTextSubString(
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety This function should be called on the thread that created the
+/// text.
+///
+/// \since This function is available since SDL_ttf 3.0.0.
+///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL TTF_GetTextSubStringForLine(TTF_Text *text, int line, TTF_SubString *substring)
 /// ```
@@ -2440,6 +2543,11 @@ bool ttfGetTextSubStringForLine(
 /// call SDL_GetError() for more information. This is a single
 /// allocation that should be freed with SDL_free() when it is no
 /// longer needed.
+///
+/// \threadsafety This function should be called on the thread that created the
+/// text.
+///
+/// \since This function is available since SDL_ttf 3.0.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC TTF_SubString ** SDLCALL TTF_GetTextSubStringsForRange(TTF_Text *text, int offset, int length, int *count)
@@ -2470,6 +2578,11 @@ Pointer<Pointer<TtfSubString>> ttfGetTextSubStringsForRange(
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety This function should be called on the thread that created the
+/// text.
+///
+/// \since This function is available since SDL_ttf 3.0.0.
+///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL TTF_GetTextSubStringForPoint(TTF_Text *text, int x, int y, TTF_SubString *substring)
 /// ```
@@ -2493,6 +2606,11 @@ bool ttfGetTextSubStringForPoint(
 /// \param substring the TTF_SubString to query.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety This function should be called on the thread that created the
+/// text.
+///
+/// \since This function is available since SDL_ttf 3.0.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL TTF_GetPreviousTextSubString(TTF_Text *text, const TTF_SubString *substring, TTF_SubString *previous)
@@ -2520,6 +2638,11 @@ bool ttfGetPreviousTextSubString(Pointer<TtfText> text,
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety This function should be called on the thread that created the
+/// text.
+///
+/// \since This function is available since SDL_ttf 3.0.0.
+///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL TTF_GetNextTextSubString(TTF_Text *text, const TTF_SubString *substring, TTF_SubString *next)
 /// ```
@@ -2543,6 +2666,11 @@ bool ttfGetNextTextSubString(Pointer<TtfText> text,
 /// \param text the TTF_Text to update.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety This function should be called on the thread that created the
+/// text.
+///
+/// \since This function is available since SDL_ttf 3.0.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL TTF_UpdateText(TTF_Text *text)

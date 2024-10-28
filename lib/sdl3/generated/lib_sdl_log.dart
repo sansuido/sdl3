@@ -501,6 +501,29 @@ void sdlLogMessageV(
 }
 
 ///
+/// Get the default log output function.
+///
+/// \returns the default log output callback.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.1.4.
+///
+/// \sa SDL_SetLogOutputFunction
+/// \sa SDL_GetLogOutputFunction
+///
+/// ```c
+/// extern SDL_DECLSPEC SDL_LogOutputFunction SDLCALL SDL_GetDefaultLogOutputFunction(void)
+/// ```
+Pointer<NativeFunction<SdlLogOutputFunction>> sdlGetDefaultLogOutputFunction() {
+  final sdlGetDefaultLogOutputFunctionLookupFunction = libSdl3.lookupFunction<
+      Pointer<NativeFunction<SdlLogOutputFunction>> Function(),
+      Pointer<NativeFunction<SdlLogOutputFunction>>
+          Function()>('SDL_GetDefaultLogOutputFunction');
+  return sdlGetDefaultLogOutputFunctionLookupFunction();
+}
+
+///
 /// Get the current log output function.
 ///
 /// \param callback an SDL_LogOutputFunction filled in with the current log
@@ -512,6 +535,7 @@ void sdlLogMessageV(
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
+/// \sa SDL_GetDefaultLogOutputFunction
 /// \sa SDL_SetLogOutputFunction
 ///
 /// ```c
@@ -540,6 +564,7 @@ void sdlGetLogOutputFunction(
 ///
 /// \since This function is available since SDL 3.0.0.
 ///
+/// \sa SDL_GetDefaultLogOutputFunction
 /// \sa SDL_GetLogOutputFunction
 ///
 /// ```c

@@ -81,8 +81,8 @@ bool sdlShowMessageBox(
 /// to stderr if you can.
 ///
 /// \param flags an SDL_MessageBoxFlags value.
-/// \param title uTF-8 title text.
-/// \param message uTF-8 message text.
+/// \param title UTF-8 title text.
+/// \param message UTF-8 message text.
 /// \param window the parent window, or NULL for no parent.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
