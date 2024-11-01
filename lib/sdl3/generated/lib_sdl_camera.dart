@@ -21,7 +21,7 @@ import 'struct_sdl.dart';
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetCameraDriver
 ///
@@ -53,7 +53,7 @@ int sdlGetNumCameraDrivers() {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetNumCameraDrivers
 ///
@@ -83,7 +83,7 @@ String? sdlGetCameraDriver(int index) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetCurrentCameraDriver(void)
@@ -110,7 +110,7 @@ String? sdlGetCurrentCameraDriver() {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_OpenCamera
 ///
@@ -156,7 +156,7 @@ Pointer<Uint32> sdlGetCameras(Pointer<Int32> count) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetCameras
 /// \sa SDL_OpenCamera
@@ -183,7 +183,7 @@ Pointer<Pointer<SdlCameraSpec>> sdlGetCameraSupportedFormats(
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetCameras
 ///
@@ -214,7 +214,7 @@ String? sdlGetCameraName(int instanceId) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetCameras
 ///
@@ -268,7 +268,7 @@ int sdlGetCameraPosition(int instanceId) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetCameras
 /// \sa SDL_GetCameraFormat
@@ -311,7 +311,7 @@ Pointer<SdlCamera> sdlOpenCamera(int instanceId, Pointer<SdlCameraSpec> spec) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_OpenCamera
 /// \sa SDL_CloseCamera
@@ -335,7 +335,7 @@ int sdlGetCameraPermissionState(Pointer<SdlCamera> camera) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_OpenCamera
 ///
@@ -358,7 +358,7 @@ int sdlGetCameraId(Pointer<SdlCamera> camera) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
 /// extern SDL_DECLSPEC SDL_PropertiesID SDLCALL SDL_GetCameraProperties(SDL_Camera *camera)
@@ -390,7 +390,7 @@ int sdlGetCameraProperties(Pointer<SdlCamera> camera) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_OpenCamera
 ///
@@ -443,7 +443,7 @@ bool sdlGetCameraFormat(
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_ReleaseCameraFrame
 ///
@@ -482,7 +482,7 @@ Pointer<SdlSurface> sdlAcquireCameraFrame(
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_AcquireCameraFrame
 ///
@@ -507,7 +507,7 @@ void sdlReleaseCameraFrame(
 /// \threadsafety It is safe to call this function from any thread, but no
 /// thread may reference `device` once this function is called.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_OpenCameraWithSpec
 /// \sa SDL_OpenCamera

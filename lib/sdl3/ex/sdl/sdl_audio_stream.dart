@@ -17,7 +17,7 @@ extension SdlAudioStreamEx on SdlAudioStream {
   ///
   /// \threadsafety It is safe to call this function from any thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_PutAudioStreamData
   /// \sa SDL_GetAudioStreamData
@@ -90,7 +90,7 @@ extension SdlAudioStreamEx on SdlAudioStream {
   ///
   /// \threadsafety It is safe to call this function from any thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_GetAudioStreamDevice
   /// \sa SDL_ResumeAudioStreamDevice
@@ -119,7 +119,7 @@ extension SdlAudioStreamPointerEx on Pointer<SdlAudioStream> {
   ///
   /// \threadsafety It is safe to call this function from any thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_GetAudioPlaybackDevices
   /// \sa SDL_GetAudioRecordingDevices
@@ -147,7 +147,7 @@ extension SdlAudioStreamPointerEx on Pointer<SdlAudioStream> {
   ///
   /// \threadsafety It is safe to call this function from any thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_PauseAudioDevice
   /// \sa SDL_ResumeAudioDevice
@@ -174,7 +174,7 @@ extension SdlAudioStreamPointerEx on Pointer<SdlAudioStream> {
   ///
   /// \threadsafety It is safe to call this function from any thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_OpenAudioDevice
   ///
@@ -198,7 +198,7 @@ extension SdlAudioStreamPointerEx on Pointer<SdlAudioStream> {
   ///
   /// \threadsafety It is safe to call this function from any thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_BindAudioStream
   /// \sa SDL_BindAudioStreams
@@ -217,7 +217,9 @@ extension SdlAudioStreamPointerEx on Pointer<SdlAudioStream> {
   /// \returns a valid property ID on success or 0 on failure; call
   /// SDL_GetError() for more information.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \threadsafety It is safe to call this function from any thread.
+  ///
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// ```c
   /// extern SDL_DECLSPEC SDL_PropertiesID SDLCALL SDL_GetAudioStreamProperties(SDL_AudioStream *stream)
@@ -238,7 +240,7 @@ extension SdlAudioStreamPointerEx on Pointer<SdlAudioStream> {
   /// \threadsafety It is safe to call this function from any thread, as it holds
   /// a stream-specific mutex while running.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_SetAudioStreamFormat
   ///
@@ -273,7 +275,7 @@ extension SdlAudioStreamPointerEx on Pointer<SdlAudioStream> {
   /// \threadsafety It is safe to call this function from any thread, as it holds
   /// a stream-specific mutex while running.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_GetAudioStreamFormat
   /// \sa SDL_SetAudioStreamFrequencyRatio
@@ -295,7 +297,7 @@ extension SdlAudioStreamPointerEx on Pointer<SdlAudioStream> {
   /// \threadsafety It is safe to call this function from any thread, as it holds
   /// a stream-specific mutex while running.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_SetAudioStreamFrequencyRatio
   ///
@@ -327,7 +329,7 @@ extension SdlAudioStreamPointerEx on Pointer<SdlAudioStream> {
   /// \threadsafety It is safe to call this function from any thread, as it holds
   /// a stream-specific mutex while running.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_GetAudioStreamFrequencyRatio
   /// \sa SDL_SetAudioStreamFormat
@@ -354,7 +356,7 @@ extension SdlAudioStreamPointerEx on Pointer<SdlAudioStream> {
   /// \threadsafety It is safe to call this function from any thread, as it holds
   /// a stream-specific mutex while running.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_SetAudioStreamGain
   ///
@@ -384,7 +386,7 @@ extension SdlAudioStreamPointerEx on Pointer<SdlAudioStream> {
   /// \threadsafety It is safe to call this function from any thread, as it holds
   /// a stream-specific mutex while running.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_GetAudioStreamGain
   ///
@@ -413,7 +415,7 @@ extension SdlAudioStreamPointerEx on Pointer<SdlAudioStream> {
   /// \threadsafety It is safe to call this function from any thread, as it holds
   /// a stream-specific mutex while running.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_SetAudioStreamInputChannelMap
   ///
@@ -469,7 +471,7 @@ extension SdlAudioStreamPointerEx on Pointer<SdlAudioStream> {
   /// stream's format to have a different number of channels from a
   /// a different thread at the same time, though!
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_SetAudioStreamInputChannelMap
   ///
@@ -521,7 +523,7 @@ extension SdlAudioStreamPointerEx on Pointer<SdlAudioStream> {
   /// stream's format to have a different number of channels from a
   /// a different thread at the same time, though!
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_SetAudioStreamInputChannelMap
   ///
@@ -553,7 +555,7 @@ extension SdlAudioStreamPointerEx on Pointer<SdlAudioStream> {
   /// stream has a callback set, the caller might need to manage
   /// extra locking.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_ClearAudioStream
   /// \sa SDL_FlushAudioStream
@@ -589,7 +591,7 @@ extension SdlAudioStreamPointerEx on Pointer<SdlAudioStream> {
   /// stream has a callback set, the caller might need to manage
   /// extra locking.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_ClearAudioStream
   /// \sa SDL_GetAudioStreamAvailable
@@ -621,7 +623,7 @@ extension SdlAudioStreamPointerEx on Pointer<SdlAudioStream> {
   ///
   /// \threadsafety It is safe to call this function from any thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_GetAudioStreamData
   /// \sa SDL_PutAudioStreamData
@@ -664,7 +666,7 @@ extension SdlAudioStreamPointerEx on Pointer<SdlAudioStream> {
   ///
   /// \threadsafety It is safe to call this function from any thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_PutAudioStreamData
   /// \sa SDL_ClearAudioStream
@@ -690,7 +692,7 @@ extension SdlAudioStreamPointerEx on Pointer<SdlAudioStream> {
   ///
   /// \threadsafety It is safe to call this function from any thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_PutAudioStreamData
   ///
@@ -713,7 +715,7 @@ extension SdlAudioStreamPointerEx on Pointer<SdlAudioStream> {
   ///
   /// \threadsafety It is safe to call this function from any thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_GetAudioStreamAvailable
   /// \sa SDL_GetAudioStreamData
@@ -745,7 +747,7 @@ extension SdlAudioStreamPointerEx on Pointer<SdlAudioStream> {
   ///
   /// \threadsafety It is safe to call this function from any thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_ResumeAudioStreamDevice
   ///
@@ -770,7 +772,7 @@ extension SdlAudioStreamPointerEx on Pointer<SdlAudioStream> {
   ///
   /// \threadsafety It is safe to call this function from any thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_PauseAudioStreamDevice
   ///
@@ -803,7 +805,7 @@ extension SdlAudioStreamPointerEx on Pointer<SdlAudioStream> {
   ///
   /// \threadsafety It is safe to call this function from any thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_UnlockAudioStream
   ///
@@ -826,7 +828,7 @@ extension SdlAudioStreamPointerEx on Pointer<SdlAudioStream> {
   /// \threadsafety You should only call this from the same thread that
   /// previously called SDL_LockAudioStream.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_LockAudioStream
   ///
@@ -877,7 +879,7 @@ extension SdlAudioStreamPointerEx on Pointer<SdlAudioStream> {
   ///
   /// \threadsafety It is safe to call this function from any thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_SetAudioStreamPutCallback
   ///
@@ -932,7 +934,7 @@ extension SdlAudioStreamPointerEx on Pointer<SdlAudioStream> {
   ///
   /// \threadsafety It is safe to call this function from any thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_SetAudioStreamGetCallback
   ///
@@ -959,7 +961,7 @@ extension SdlAudioStreamPointerEx on Pointer<SdlAudioStream> {
   ///
   /// \threadsafety It is safe to call this function from any thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_CreateAudioStream
   ///

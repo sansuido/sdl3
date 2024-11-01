@@ -32,7 +32,7 @@ import 'struct_sdl.dart';
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_CreateProcessWithProperties
 /// \sa SDL_GetProcessProperties
@@ -105,7 +105,7 @@ Pointer<SdlProcess> sdlCreateProcess(
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_CreateProcess
 /// \sa SDL_GetProcessProperties
@@ -151,7 +151,7 @@ Pointer<SdlProcess> sdlCreateProcessWithProperties(int props) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_CreateProcess
 /// \sa SDL_CreateProcessWithProperties
@@ -189,7 +189,7 @@ int sdlGetProcessProperties(Pointer<SdlProcess> process) {
 ///
 /// \threadsafety This function is not thread safe.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_CreateProcess
 /// \sa SDL_CreateProcessWithProperties
@@ -228,7 +228,7 @@ Pointer<NativeType> sdlReadProcess(Pointer<SdlProcess> process,
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_CreateProcess
 /// \sa SDL_CreateProcessWithProperties
@@ -261,7 +261,7 @@ Pointer<SdlIoStream> sdlGetProcessInput(Pointer<SdlProcess> process) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_CreateProcess
 /// \sa SDL_CreateProcessWithProperties
@@ -292,7 +292,7 @@ Pointer<SdlIoStream> sdlGetProcessOutput(Pointer<SdlProcess> process) {
 ///
 /// \threadsafety This function is not thread safe.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_CreateProcess
 /// \sa SDL_CreateProcessWithProperties
@@ -327,7 +327,7 @@ bool sdlKillProcess(Pointer<SdlProcess> process, bool force) {
 ///
 /// \threadsafety This function is not thread safe.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_CreateProcess
 /// \sa SDL_CreateProcessWithProperties
@@ -358,7 +358,7 @@ bool sdlWaitProcess(
 ///
 /// \threadsafety This function is not thread safe.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_CreateProcess
 /// \sa SDL_CreateProcessWithProperties

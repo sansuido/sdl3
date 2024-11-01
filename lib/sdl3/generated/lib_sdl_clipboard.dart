@@ -10,7 +10,9 @@ import 'lib_sdl.dart';
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \threadsafety You may only call this function from the main thread.
+///
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetClipboardText
 /// \sa SDL_HasClipboardText
@@ -31,14 +33,16 @@ bool sdlSetClipboardText(String? text) {
 ///
 /// Get UTF-8 text from the clipboard.
 ///
-/// This functions returns empty string if there was not enough memory left for
-/// a copy of the clipboard's content.
+/// This functions returns an empty string if there was not enough memory left
+/// for a copy of the clipboard's content.
 ///
 /// \returns the clipboard text on success or an empty string on failure; call
 /// SDL_GetError() for more information. This should be freed with
 /// SDL_free() when it is no longer needed.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \threadsafety You may only call this function from the main thread.
+///
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_HasClipboardText
 /// \sa SDL_SetClipboardText
@@ -58,7 +62,9 @@ Pointer<Int8> sdlGetClipboardText() {
 ///
 /// \returns true if the clipboard has text, or false if it does not.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \threadsafety You may only call this function from the main thread.
+///
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetClipboardText
 /// \sa SDL_SetClipboardText
@@ -79,7 +85,9 @@ bool sdlHasClipboardText() {
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \threadsafety You may only call this function from the main thread.
+///
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetPrimarySelectionText
 /// \sa SDL_HasPrimarySelectionText
@@ -100,14 +108,16 @@ bool sdlSetPrimarySelectionText(String? text) {
 ///
 /// Get UTF-8 text from the primary selection.
 ///
-/// This functions returns empty string if there was not enough memory left for
-/// a copy of the primary selection's content.
+/// This functions returns an empty string if there was not enough memory left
+/// for a copy of the primary selection's content.
 ///
 /// \returns the primary selection text on success or an empty string on
 /// failure; call SDL_GetError() for more information. This should be
 /// freed with SDL_free() when it is no longer needed.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \threadsafety You may only call this function from the main thread.
+///
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_HasPrimarySelectionText
 /// \sa SDL_SetPrimarySelectionText
@@ -128,7 +138,9 @@ Pointer<Int8> sdlGetPrimarySelectionText() {
 ///
 /// \returns true if the primary selection has text, or false if it does not.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \threadsafety You may only call this function from the main thread.
+///
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetPrimarySelectionText
 /// \sa SDL_SetPrimarySelectionText
@@ -165,7 +177,9 @@ bool sdlHasPrimarySelectionText() {
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \threadsafety You may only call this function from the main thread.
+///
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_ClearClipboardData
 /// \sa SDL_GetClipboardData
@@ -204,7 +218,9 @@ bool sdlSetClipboardData(
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \threadsafety You may only call this function from the main thread.
+///
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_SetClipboardData
 ///
@@ -230,7 +246,9 @@ bool sdlClearClipboardData() {
 /// for more information. This should be freed with SDL_free() when it
 /// is no longer needed.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \threadsafety You may only call this function from the main thread.
+///
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_HasClipboardData
 /// \sa SDL_SetClipboardData
@@ -258,7 +276,9 @@ Pointer<NativeType> sdlGetClipboardData(
 /// \returns true if there exists data in clipboard for the provided mime type,
 /// false if it does not.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \threadsafety You may only call this function from the main thread.
+///
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_SetClipboardData
 /// \sa SDL_GetClipboardData
@@ -285,7 +305,9 @@ bool sdlHasClipboardData(String? mimeType) {
 /// failure; call SDL_GetError() for more information. This should be
 /// freed with SDL_free() when it is no longer needed.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \threadsafety You may only call this function from the main thread.
+///
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_SetClipboardData
 ///

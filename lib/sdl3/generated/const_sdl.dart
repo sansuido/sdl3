@@ -237,6 +237,7 @@ const SDL_EVENT_CAMERA_DEVICE_APPROVED = 0x1400 + 2;
 const SDL_EVENT_CAMERA_DEVICE_DENIED = 0x1400 + 3;
 const SDL_EVENT_RENDER_TARGETS_RESET = 0x2000;
 const SDL_EVENT_RENDER_DEVICE_RESET = 0x2000 + 1;
+const SDL_EVENT_RENDER_DEVICE_LOST = 0x2000 + 2;
 const SDL_EVENT_PRIVATE0 = 0x4000;
 const SDL_EVENT_PRIVATE1 = 0x4000 + 1;
 const SDL_EVENT_PRIVATE2 = 0x4000 + 2;
@@ -2721,6 +2722,7 @@ class SdlkEvent {
   static const cameraDeviceDenied = SDL_EVENT_CAMERA_DEVICE_DENIED;
   static const renderTargetsReset = SDL_EVENT_RENDER_TARGETS_RESET;
   static const renderDeviceReset = SDL_EVENT_RENDER_DEVICE_RESET;
+  static const renderDeviceLost = SDL_EVENT_RENDER_DEVICE_LOST;
   static const private0 = SDL_EVENT_PRIVATE0;
   static const private1 = SDL_EVENT_PRIVATE1;
   static const private2 = SDL_EVENT_PRIVATE2;

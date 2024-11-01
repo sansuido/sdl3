@@ -9,7 +9,7 @@ import 'lib_sdl.dart';
 /// \returns a valid property ID on success or 0 on failure; call
 /// SDL_GetError() for more information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
 /// extern SDL_DECLSPEC SDL_PropertiesID SDLCALL SDL_GetGlobalProperties(void)
@@ -31,7 +31,7 @@ int sdlGetGlobalProperties() {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_DestroyProperties
 ///
@@ -60,7 +60,7 @@ int sdlCreateProperties() {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_CopyProperties(SDL_PropertiesID src, SDL_PropertiesID dst)
@@ -90,7 +90,7 @@ bool sdlCopyProperties(int src, int dst) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_UnlockProperties
 ///
@@ -111,7 +111,7 @@ bool sdlLockProperties(int props) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_LockProperties
 ///
@@ -148,7 +148,7 @@ void sdlUnlockProperties(int props) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetPointerProperty
 /// \sa SDL_SetPointerProperty
@@ -195,7 +195,7 @@ bool sdlSetPointerPropertyWithCleanup(
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetPointerProperty
 /// \sa SDL_HasProperty
@@ -235,7 +235,7 @@ bool sdlSetPointerProperty(int props, String? name, Pointer<NativeType> value) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetStringProperty
 ///
@@ -267,7 +267,7 @@ bool sdlSetStringProperty(int props, String? name, String? value) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetNumberProperty
 ///
@@ -297,7 +297,7 @@ bool sdlSetNumberProperty(int props, String? name, int value) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetFloatProperty
 ///
@@ -327,7 +327,7 @@ bool sdlSetFloatProperty(int props, String? name, double value) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetBooleanProperty
 ///
@@ -356,7 +356,7 @@ bool sdlSetBooleanProperty(int props, String? name, bool value) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetPropertyType
 ///
@@ -383,7 +383,7 @@ bool sdlHasProperty(int props, String? name) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_HasProperty
 ///
@@ -421,7 +421,7 @@ int sdlGetPropertyType(int props, String? name) {
 /// If you need to avoid this, use SDL_LockProperties() and
 /// SDL_UnlockProperties().
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetBooleanProperty
 /// \sa SDL_GetFloatProperty
@@ -464,7 +464,7 @@ Pointer<NativeType> sdlGetPointerProperty(
 /// If you need to avoid this, use SDL_LockProperties() and
 /// SDL_UnlockProperties().
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetPropertyType
 /// \sa SDL_HasProperty
@@ -506,7 +506,7 @@ String? sdlGetStringProperty(int props, String? name, String? defaultValue) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetPropertyType
 /// \sa SDL_HasProperty
@@ -541,7 +541,7 @@ int sdlGetNumberProperty(int props, String? name, int defaultValue) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetPropertyType
 /// \sa SDL_HasProperty
@@ -576,7 +576,7 @@ double sdlGetFloatProperty(int props, String? name, double defaultValue) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetPropertyType
 /// \sa SDL_HasProperty
@@ -608,7 +608,7 @@ bool sdlGetBooleanProperty(int props, String? name, bool defaultValue) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_ClearProperty(SDL_PropertiesID props, const char *name)
@@ -637,7 +637,7 @@ bool sdlClearProperty(int props, String? name) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_EnumerateProperties(SDL_PropertiesID props, SDL_EnumeratePropertiesCallback callback, void *userdata)
@@ -670,7 +670,7 @@ bool sdlEnumerateProperties(
 /// locked or other threads might be setting or getting values
 /// from these properties.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_CreateProperties
 ///

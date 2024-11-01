@@ -41,7 +41,7 @@ extension SdlCursorEx on SdlCursor {
   /// \returns a new cursor with the specified parameters on success or NULL on
   /// failure; call SDL_GetError() for more information.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_CreateColorCursor
   /// \sa SDL_CreateSystemCursor
@@ -75,7 +75,7 @@ extension SdlCursorEx on SdlCursor {
   /// \returns the new cursor on success or NULL on failure; call SDL_GetError()
   /// for more information.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_CreateCursor
   /// \sa SDL_CreateSystemCursor
@@ -97,7 +97,7 @@ extension SdlCursorEx on SdlCursor {
   /// \returns a cursor on success or NULL on failure; call SDL_GetError() for
   /// more information.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_DestroyCursor
   ///
@@ -116,7 +116,7 @@ extension SdlCursorEx on SdlCursor {
   ///
   /// \returns the active cursor or NULL if there is no mouse.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_SetCursor
   ///
@@ -136,7 +136,7 @@ extension SdlCursorEx on SdlCursor {
   /// \returns the default cursor on success or NULL on failuree; call
   /// SDL_GetError() for more information.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// ```c
   /// extern SDL_DECLSPEC SDL_Cursor * SDLCALL SDL_GetDefaultCursor(void)
@@ -151,7 +151,7 @@ extension SdlCursorEx on SdlCursor {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_CursorVisible
   /// \sa SDL_HideCursor
@@ -169,7 +169,7 @@ extension SdlCursorEx on SdlCursor {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_CursorVisible
   /// \sa SDL_ShowCursor
@@ -197,7 +197,7 @@ extension SdlCursorPointerEx on Pointer<SdlCursor> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_GetCursor
   ///
@@ -216,7 +216,7 @@ extension SdlCursorPointerEx on Pointer<SdlCursor> {
   ///
   /// \param cursor the cursor to free.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_CreateColorCursor
   /// \sa SDL_CreateCursor

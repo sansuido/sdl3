@@ -20,7 +20,7 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   ///
   /// \threadsafety You may only call this function from the main thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetTextureSize(SDL_Texture *texture, float *w, float *h)
@@ -58,7 +58,7 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   ///
   /// \threadsafety You may only call this function from the main thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_GetTextureColorMod
   /// \sa SDL_SetTextureAlphaMod
@@ -83,7 +83,7 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   ///
   /// \threadsafety You may only call this function from the main thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_GetTextureAlphaMod
   /// \sa SDL_GetTextureColorModFloat
@@ -127,7 +127,7 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   ///
   /// \threadsafety You may only call this function from the main thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_GetTextureAlphaMod
   /// \sa SDL_SetTextureAlphaModFloat
@@ -150,7 +150,7 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   ///
   /// \threadsafety You may only call this function from the main thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_GetTextureAlphaModFloat
   /// \sa SDL_GetTextureColorMod
@@ -182,7 +182,7 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   ///
   /// \threadsafety You may only call this function from the main thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_GetTextureBlendMode
   ///
@@ -203,7 +203,7 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   ///
   /// \threadsafety You may only call this function from the main thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_SetTextureBlendMode
   ///
@@ -234,7 +234,7 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   ///
   /// \threadsafety You may only call this function from the main thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_GetTextureScaleMode
   ///
@@ -255,7 +255,7 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   ///
   /// \threadsafety You may only call this function from the main thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_SetTextureScaleMode
   ///
@@ -297,7 +297,7 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   ///
   /// \threadsafety You may only call this function from the main thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_LockTexture
   /// \sa SDL_UnlockTexture
@@ -336,7 +336,7 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   ///
   /// \threadsafety You may only call this function from the main thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_UpdateNVTexture
   /// \sa SDL_UpdateTexture
@@ -371,7 +371,7 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   ///
   /// \threadsafety You may only call this function from the main thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_UpdateTexture
   /// \sa SDL_UpdateYUVTexture
@@ -409,7 +409,7 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   ///
   /// \threadsafety You may only call this function from the main thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_LockTextureToSurface
   /// \sa SDL_UnlockTexture
@@ -451,7 +451,7 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   ///
   /// \threadsafety You may only call this function from the main thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_LockTexture
   /// \sa SDL_UnlockTexture
@@ -479,7 +479,7 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   ///
   /// \threadsafety You may only call this function from the main thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_LockTexture
   ///
@@ -500,7 +500,7 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   ///
   /// \threadsafety You may only call this function from the main thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_CreateTexture
   /// \sa SDL_CreateTextureFromSurface

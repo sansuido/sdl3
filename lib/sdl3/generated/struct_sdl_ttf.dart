@@ -15,23 +15,14 @@ final class TtfTextData extends Opaque {}
 final class TtfText extends Struct {
   // [0]+(8)
   external Pointer<Int8> text;
-  // [8]+(16)
-  @Uint64()
-  external int color_1;
-  @Uint64()
-  external int color_2;
-  // [24]+(4)
+  // [8]+(4)
   @Int32()
   external int numLines;
-  // [28]+(4)
+  // [12]+(4)
   @Int32()
   external int refcount;
-  // [32]+(8)
+  // [16]+(8)
   external Pointer<TtfTextData> internal;
-}
-
-extension TtfTextExtension on Pointer<TtfText> {
-  Pointer<SdlFColor> get color => (cast<Uint8>() + 8).cast<SdlFColor>();
 }
 
 // TTF_SubString

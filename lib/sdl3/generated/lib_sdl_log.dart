@@ -10,7 +10,7 @@ import 'lib_sdl.dart';
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_ResetLogPriorities
 /// \sa SDL_SetLogPriority
@@ -33,7 +33,7 @@ void sdlSetLogPriorities(int priority) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetLogPriority
 /// \sa SDL_ResetLogPriorities
@@ -57,7 +57,7 @@ void sdlSetLogPriority(int category, int priority) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_SetLogPriority
 ///
@@ -78,7 +78,7 @@ int sdlGetLogPriority(int category) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_SetLogPriorities
 /// \sa SDL_SetLogPriority
@@ -108,7 +108,7 @@ void sdlResetLogPriorities() {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_SetLogPriorities
 /// \sa SDL_SetLogPriority
@@ -137,7 +137,7 @@ bool sdlSetLogPriorityPrefix(int priority, String? prefix) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_LogCritical
 /// \sa SDL_LogDebug
@@ -172,7 +172,7 @@ void sdlLog(String? fmt, Pointer<NativeType> arg1) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_Log
 /// \sa SDL_LogCritical
@@ -210,7 +210,7 @@ void sdlLogTrace(int category, String? fmt, Pointer<NativeType> arg2) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_Log
 /// \sa SDL_LogCritical
@@ -246,7 +246,7 @@ void sdlLogVerbose(int category, String? fmt, Pointer<NativeType> arg2) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_Log
 /// \sa SDL_LogCritical
@@ -283,7 +283,7 @@ void sdlLogDebug(int category, String? fmt, Pointer<NativeType> arg2) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_Log
 /// \sa SDL_LogCritical
@@ -320,7 +320,7 @@ void sdlLogInfo(int category, String? fmt, Pointer<NativeType> arg2) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_Log
 /// \sa SDL_LogCritical
@@ -357,7 +357,7 @@ void sdlLogWarn(int category, String? fmt, Pointer<NativeType> arg2) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_Log
 /// \sa SDL_LogCritical
@@ -394,7 +394,7 @@ void sdlLogError(int category, String? fmt, Pointer<NativeType> arg2) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_Log
 /// \sa SDL_LogDebug
@@ -432,7 +432,7 @@ void sdlLogCritical(int category, String? fmt, Pointer<NativeType> arg2) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_Log
 /// \sa SDL_LogCritical
@@ -471,7 +471,7 @@ void sdlLogMessage(
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_Log
 /// \sa SDL_LogCritical
@@ -507,7 +507,7 @@ void sdlLogMessageV(
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.4.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_SetLogOutputFunction
 /// \sa SDL_GetLogOutputFunction
@@ -533,7 +533,7 @@ Pointer<NativeFunction<SdlLogOutputFunction>> sdlGetDefaultLogOutputFunction() {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetDefaultLogOutputFunction
 /// \sa SDL_SetLogOutputFunction
@@ -562,7 +562,7 @@ void sdlGetLogOutputFunction(
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetDefaultLogOutputFunction
 /// \sa SDL_GetLogOutputFunction

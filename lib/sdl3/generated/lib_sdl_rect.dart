@@ -14,7 +14,7 @@ import 'struct_sdl.dart';
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetRectIntersection
 ///
@@ -40,7 +40,7 @@ bool sdlHasRectIntersection(Pointer<SdlRect> a, Pointer<SdlRect> b) {
 /// rectangles `A` and `B`.
 /// \returns true if there is an intersection, false otherwise.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_HasRectIntersection
 ///
@@ -67,7 +67,7 @@ bool sdlGetRectIntersection(
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRectUnion(const SDL_Rect *A, const SDL_Rect *B, SDL_Rect *result)
@@ -97,7 +97,7 @@ bool sdlGetRectUnion(
 /// \returns true if any points were enclosed or false if all the points were
 /// outside of the clipping rectangle.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRectEnclosingPoints(const SDL_Point *points, int count, const SDL_Rect *clip, SDL_Rect *result)
@@ -129,7 +129,7 @@ bool sdlGetRectEnclosingPoints(Pointer<SdlPoint> points, int count,
 /// \param Y2 a pointer to the ending Y-coordinate of the line.
 /// \returns true if there is an intersection, false otherwise.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRectAndLineIntersection(const SDL_Rect *rect, int *X1, int *Y1, int *X2, int *Y2)
@@ -157,7 +157,7 @@ bool sdlGetRectAndLineIntersection(Pointer<SdlRect> rect, Pointer<Int32> x1,
 /// \param B an SDL_FRect structure representing the second rectangle.
 /// \returns true if there is an intersection, false otherwise.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetRectIntersection
 ///
@@ -183,7 +183,7 @@ bool sdlHasRectIntersectionFloat(Pointer<SdlFRect> a, Pointer<SdlFRect> b) {
 /// rectangles `A` and `B`.
 /// \returns true if there is an intersection, false otherwise.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_HasRectIntersectionFloat
 ///
@@ -210,7 +210,7 @@ bool sdlGetRectIntersectionFloat(
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRectUnionFloat(const SDL_FRect *A, const SDL_FRect *B, SDL_FRect *result)
@@ -241,7 +241,7 @@ bool sdlGetRectUnionFloat(
 /// \returns true if any points were enclosed or false if all the points were
 /// outside of the clipping rectangle.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRectEnclosingPointsFloat(const SDL_FPoint *points, int count, const SDL_FRect *clip, SDL_FRect *result)
@@ -275,7 +275,7 @@ bool sdlGetRectEnclosingPointsFloat(Pointer<SdlFPoint> points, int count,
 /// \param Y2 a pointer to the ending Y-coordinate of the line.
 /// \returns true if there is an intersection, false otherwise.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRectAndLineIntersectionFloat(const SDL_FRect *rect, float *X1, float *Y1, float *X2, float *Y2)

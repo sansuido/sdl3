@@ -8,10 +8,6 @@ import 'struct_sdl.dart';
 ///
 /// This function updates the event queue and internal input device state.
 ///
-/// **WARNING**: This should only be run in the thread that initialized the
-/// video subsystem, and for extra safety, you should consider only doing those
-/// things on the main thread in any case.
-///
 /// SDL_PumpEvents() gathers all the pending input information from devices and
 /// places it in the event queue. Without calls to SDL_PumpEvents() no events
 /// would ever be placed on the queue. Often the need for calls to
@@ -20,7 +16,11 @@ import 'struct_sdl.dart';
 /// polling or waiting for events (e.g. you are filtering them), then you must
 /// call SDL_PumpEvents() to force an event queue update.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \threadsafety This should only be run in the thread that initialized the
+/// video subsystem, and for extra safety, you should consider
+/// only doing those things on the main thread in any case.
+///
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_PollEvent
 /// \sa SDL_WaitEvent
@@ -54,8 +54,6 @@ void sdlPumpEvents() {
 /// Otherwise, the events may not be ready to be filtered when you call
 /// SDL_PeepEvents().
 ///
-/// This function is thread-safe.
-///
 /// \param events destination buffer for the retrieved events, may be NULL to
 /// leave the events in the queue and return the number of events
 /// that would have been stored.
@@ -70,7 +68,9 @@ void sdlPumpEvents() {
 /// \returns the number of events actually stored or -1 on failure; call
 /// SDL_GetError() for more information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_PollEvent
 /// \sa SDL_PumpEvents
@@ -100,7 +100,9 @@ int sdlPeepEvents(Pointer<SdlEvent> events, int numevents, int action,
 /// \returns true if events matching `type` are present, or false if events
 /// matching `type` are not present.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_HasEvents
 ///
@@ -125,7 +127,9 @@ bool sdlHasEvent(int type) {
 /// \returns true if events with type >= `minType` and <= `maxType` are
 /// present, or false if not.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_HasEvents
 ///
@@ -159,7 +163,9 @@ bool sdlHasEvents(int minType, int maxType) {
 ///
 /// \param type the type of event to be cleared; see SDL_EventType for details.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_FlushEvents
 ///
@@ -191,7 +197,9 @@ void sdlFlushEvent(int type) {
 /// \param maxType the high end of event type to be cleared, inclusive; see
 /// SDL_EventType for details.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_FlushEvent
 ///
@@ -241,7 +249,11 @@ void sdlFlushEvents(int minType, int maxType) {
 /// the queue, or NULL.
 /// \returns true if this got an event or false if there are none available.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \threadsafety This should only be run in the thread that initialized the
+/// video subsystem, and for extra safety, you should consider
+/// only doing those things on the main thread in any case.
+///
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_PushEvent
 /// \sa SDL_WaitEvent
@@ -271,7 +283,11 @@ bool sdlPollEvent(Pointer<SdlEvent> event) {
 /// \returns true on success or false if there was an error while waiting for
 /// events; call SDL_GetError() for more information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \threadsafety This should only be run in the thread that initialized the
+/// video subsystem, and for extra safety, you should consider
+/// only doing those things on the main thread in any case.
+///
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_PollEvent
 /// \sa SDL_PushEvent
@@ -307,7 +323,11 @@ bool sdlWaitEvent(Pointer<SdlEvent> event) {
 /// \returns true if this got an event or false if the timeout elapsed without
 /// any events available.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \threadsafety This should only be run in the thread that initialized the
+/// video subsystem, and for extra safety, you should consider
+/// only doing those things on the main thread in any case.
+///
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_PollEvent
 /// \sa SDL_PushEvent
@@ -336,8 +356,6 @@ bool sdlWaitEventTimeout(Pointer<SdlEvent> event, int timeoutMs) {
 /// Note: Pushing device input events onto the queue doesn't modify the state
 /// of the device within SDL.
 ///
-/// This function is thread-safe, and can be called from other threads safely.
-///
 /// Note: Events pushed onto the queue with SDL_PushEvent() get passed through
 /// the event filter but events added with SDL_PeepEvents() do not.
 ///
@@ -350,7 +368,9 @@ bool sdlWaitEventTimeout(Pointer<SdlEvent> event, int timeoutMs) {
 /// call SDL_GetError() for more information. A common reason for
 /// error is the event queue being full.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_PeepEvents
 /// \sa SDL_PollEvent
@@ -400,11 +420,9 @@ bool sdlPushEvent(Pointer<SdlEvent> event) {
 /// \param filter an SDL_EventFilter function to call when an event happens.
 /// \param userdata a pointer that is passed to `filter`.
 ///
-/// \threadsafety SDL may call the filter callback at any time from any thread;
-/// the application is responsible for locking resources the
-/// callback touches that need to be protected.
+/// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_AddEventWatch
 /// \sa SDL_SetEventEnabled
@@ -436,7 +454,9 @@ void sdlSetEventFilter(Pointer<NativeFunction<SdlEventFilter>> filter,
 /// be stored here.
 /// \returns true on success or false if there is no event filter set.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_SetEventFilter
 ///
@@ -478,7 +498,7 @@ bool sdlGetEventFilter(Pointer<Pointer<NativeFunction<SdlEventFilter>>> filter,
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_RemoveEventWatch
 /// \sa SDL_SetEventFilter
@@ -505,7 +525,9 @@ bool sdlAddEventWatch(Pointer<NativeFunction<SdlEventFilter>> filter,
 /// \param filter the function originally passed to SDL_AddEventWatch().
 /// \param userdata the pointer originally passed to SDL_AddEventWatch().
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_AddEventWatch
 ///
@@ -533,7 +555,9 @@ void sdlRemoveEventWatch(Pointer<NativeFunction<SdlEventFilter>> filter,
 /// \param filter the SDL_EventFilter function to call when an event happens.
 /// \param userdata a pointer that is passed to `filter`.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetEventFilter
 /// \sa SDL_SetEventFilter
@@ -557,7 +581,9 @@ void sdlFilterEvents(Pointer<NativeFunction<SdlEventFilter>> filter,
 /// \param type the type of event; see SDL_EventType for details.
 /// \param enabled whether to process the event or not.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_EventEnabled
 ///
@@ -577,7 +603,9 @@ void sdlSetEventEnabled(int type, bool enabled) {
 /// \param type the type of event; see SDL_EventType for details.
 /// \returns true if the event is being processed, false otherwise.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_SetEventEnabled
 ///
@@ -598,7 +626,9 @@ bool sdlEventEnabled(int type) {
 /// \returns the beginning event number, or 0 if numevents is invalid or if
 /// there are not enough user-defined events left.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_PushEvent
 ///
@@ -618,7 +648,9 @@ int sdlRegisterEvents(int numevents) {
 /// \param event an event containing a `windowID`.
 /// \returns the associated window on success or NULL if there is none.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_PollEvent
 /// \sa SDL_WaitEvent

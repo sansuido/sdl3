@@ -9,7 +9,7 @@ import 'struct_sdl.dart';
 ///
 /// \returns true if a keyboard is connected, false otherwise.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetKeyboards
 ///
@@ -36,7 +36,7 @@ bool sdlHasKeyboard() {
 /// call SDL_GetError() for more information. This should be freed
 /// with SDL_free() when it is no longer needed.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetKeyboardNameForID
 /// \sa SDL_HasKeyboard
@@ -60,7 +60,7 @@ Pointer<Uint32> sdlGetKeyboards(Pointer<Int32> count) {
 /// \returns the name of the selected keyboard or NULL on failure; call
 /// SDL_GetError() for more information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetKeyboards
 ///
@@ -83,7 +83,7 @@ String? sdlGetKeyboardNameForId(int instanceId) {
 ///
 /// \returns the window with keyboard focus.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
 /// extern SDL_DECLSPEC SDL_Window * SDLCALL SDL_GetKeyboardFocus(void)
@@ -119,7 +119,7 @@ Pointer<SdlWindow> sdlGetKeyboardFocus() {
 /// \param numkeys if non-NULL, receives the length of the returned array.
 /// \returns a pointer to an array of key states.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_PumpEvents
 /// \sa SDL_ResetKeyboard
@@ -139,7 +139,7 @@ Pointer<Uint8> sdlGetKeyboardState(Pointer<Int32> numkeys) {
 ///
 /// This function will generate key up events for all pressed keys.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetKeyboardState
 ///
@@ -158,7 +158,7 @@ void sdlResetKeyboard() {
 /// \returns an OR'd combination of the modifier keys for the keyboard. See
 /// SDL_Keymod for details.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetKeyboardState
 /// \sa SDL_SetModState
@@ -185,7 +185,7 @@ int sdlGetModState() {
 ///
 /// \param modstate the desired SDL_Keymod for the keyboard.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetModState
 ///
@@ -214,7 +214,7 @@ void sdlSetModState(int modstate) {
 /// \param key_event true if the keycode will be used in key events.
 /// \returns the SDL_Keycode that corresponds to the given SDL_Scancode.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetKeyName
 /// \sa SDL_GetScancodeFromKey
@@ -243,7 +243,7 @@ int sdlGetKeyFromScancode(int scancode, int modstate, bool keyEvent) {
 /// scancode generates this key, may be NULL.
 /// \returns the SDL_Scancode that corresponds to the given SDL_Keycode.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetKeyFromScancode
 /// \sa SDL_GetScancodeName
@@ -269,7 +269,7 @@ int sdlGetScancodeFromKey(int key, Pointer<Uint16> modstate) {
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetScancodeName
 ///
@@ -302,7 +302,7 @@ bool sdlSetScancodeName(int scancode, String? name) {
 /// \returns a pointer to the name for the scancode. If the scancode doesn't
 /// have a name this function returns an empty string ("").
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetScancodeFromKey
 /// \sa SDL_GetScancodeFromName
@@ -329,7 +329,7 @@ String? sdlGetScancodeName(int scancode) {
 /// \returns the SDL_Scancode, or `SDL_SCANCODE_UNKNOWN` if the name wasn't
 /// recognized; call SDL_GetError() for more information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetKeyFromName
 /// \sa SDL_GetScancodeFromKey
@@ -356,7 +356,7 @@ int sdlGetScancodeFromName(String? name) {
 /// \param key the desired SDL_Keycode to query.
 /// \returns a UTF-8 encoded string of the key name.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetKeyFromName
 /// \sa SDL_GetKeyFromScancode
@@ -383,7 +383,7 @@ String? sdlGetKeyName(int key) {
 /// \returns key code, or `SDLK_UNKNOWN` if the name wasn't recognized; call
 /// SDL_GetError() for more information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetKeyFromScancode
 /// \sa SDL_GetKeyName
@@ -419,7 +419,7 @@ int sdlGetKeyFromName(String? name) {
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_SetTextInputArea
 /// \sa SDL_StartTextInputWithProperties
@@ -477,7 +477,7 @@ bool sdlStartTextInput(Pointer<SdlWindow> window) {
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_SetTextInputArea
 /// \sa SDL_StartTextInput
@@ -501,7 +501,7 @@ bool sdlStartTextInputWithProperties(Pointer<SdlWindow> window, int props) {
 /// \param window the window to check.
 /// \returns true if text input events are enabled else false.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_StartTextInput
 ///
@@ -525,7 +525,7 @@ bool sdlTextInputActive(Pointer<SdlWindow> window) {
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_StartTextInput
 ///
@@ -546,7 +546,7 @@ bool sdlStopTextInput(Pointer<SdlWindow> window) {
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_StartTextInput
 /// \sa SDL_StopTextInput
@@ -575,7 +575,7 @@ bool sdlClearComposition(Pointer<SdlWindow> window) {
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetTextInputArea
 /// \sa SDL_StartTextInput
@@ -606,7 +606,7 @@ bool sdlSetTextInputArea(
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_SetTextInputArea
 ///
@@ -629,7 +629,7 @@ bool sdlGetTextInputArea(
 /// \returns true if the platform has some screen keyboard support or false if
 /// not.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_StartTextInput
 /// \sa SDL_ScreenKeyboardShown
@@ -650,7 +650,7 @@ bool sdlHasScreenKeyboardSupport() {
 /// \param window the window for which screen keyboard should be queried.
 /// \returns true if screen keyboard is shown or false if not.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_HasScreenKeyboardSupport
 ///

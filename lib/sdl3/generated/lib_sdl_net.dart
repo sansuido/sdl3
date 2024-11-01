@@ -32,7 +32,7 @@ int sdlNetVersion() {
 /// once, and won't deinitialize until SDLNet_Quit() has been called a matching
 /// number of times. Extra attempts to init report success.
 ///
-/// \returns 0 on success, -1 on error; call SDL_GetError() for details.
+/// \returns true on success, false on error; call SDL_GetError() for details.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -41,12 +41,12 @@ int sdlNetVersion() {
 /// \sa SDLNet_Quit
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDLNet_Init(void)
+/// extern SDL_DECLSPEC bool SDLCALL SDLNet_Init(void)
 /// ```
-int sdlNetInit() {
+bool sdlNetInit() {
   final sdlNetInitLookupFunction = libSdl3Net
-      .lookupFunction<Int32 Function(), int Function()>('SDLNet_Init');
-  return sdlNetInitLookupFunction();
+      .lookupFunction<Uint8 Function(), int Function()>('SDLNet_Init');
+  return sdlNetInitLookupFunction() == 1;
 }
 
 ///
@@ -667,7 +667,7 @@ Pointer<SdlNetServer> sdlNetCreateServer(
 /// as server acceptance is the final step of connecting.
 ///
 /// This function does not block. If there are no new connections pending, this
-/// function will return 0 (for success, but `*client_stream` will be set to
+/// function will return true (for success, but `*client_stream` will be set to
 /// NULL. This is not an error and a common condition the app should expect. In
 /// fact, this function should be called in a loop until this condition occurs,
 /// so all pending connections are accepted in a single batch.
@@ -681,8 +681,8 @@ Pointer<SdlNetServer> sdlNetCreateServer(
 /// \param server the server object to check for pending connections.
 /// \param client_stream Will be set to a new stream socket if a connection was
 /// pending, NULL otherwise.
-/// \returns 0 on success (even if no new connections were pending), -1 on
-/// error; call SDL_GetError() for details.
+/// \returns true on success (even if no new connections were pending), false
+/// on error; call SDL_GetError() for details.
 ///
 /// \threadsafety You should not operate on the same server from multiple
 /// threads at the same time without supplying a serialization
@@ -695,17 +695,17 @@ Pointer<SdlNetServer> sdlNetCreateServer(
 /// \sa SDLNet_DestroyStreamSocket
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDLNet_AcceptClient(SDLNet_Server *server, SDLNet_StreamSocket **client_stream)
+/// extern SDL_DECLSPEC bool SDLCALL SDLNet_AcceptClient(SDLNet_Server *server, SDLNet_StreamSocket **client_stream)
 /// ```
-int sdlNetAcceptClient(Pointer<SdlNetServer> server,
+bool sdlNetAcceptClient(Pointer<SdlNetServer> server,
     Pointer<Pointer<SdlNetStreamSocket>> clientStream) {
   final sdlNetAcceptClientLookupFunction = libSdl3Net.lookupFunction<
-          Int32 Function(Pointer<SdlNetServer> server,
+          Uint8 Function(Pointer<SdlNetServer> server,
               Pointer<Pointer<SdlNetStreamSocket>> clientStream),
           int Function(Pointer<SdlNetServer> server,
               Pointer<Pointer<SdlNetStreamSocket>> clientStream)>(
       'SDLNet_AcceptClient');
-  return sdlNetAcceptClientLookupFunction(server, clientStream);
+  return sdlNetAcceptClientLookupFunction(server, clientStream) == 1;
 }
 
 ///
@@ -837,15 +837,15 @@ int sdlNetGetConnectionStatus(Pointer<SdlNetStreamSocket> sock) {
 ///
 /// If the connection has failed (remote side dropped us, or one of a million
 /// other networking failures occurred), this function will report failure by
-/// returning -1. Stream sockets only report failure for unrecoverable
+/// returning false. Stream sockets only report failure for unrecoverable
 /// conditions; once a stream socket fails, you should assume it is no longer
 /// usable and should destroy it with SDL_DestroyStreamSocket().
 ///
 /// \param sock the stream socket to send data through.
 /// \param buf a pointer to the data to send.
 /// \param buflen the size of the data to send, in bytes.
-/// \returns 0 if data sent or queued for transmission, -1 on failure; call
-/// SDL_GetError() for details.
+/// \returns true if data sent or queued for transmission, false on failure;
+/// call SDL_GetError() for details.
 ///
 /// \threadsafety You should not operate on the same socket from multiple
 /// threads at the same time without supplying a serialization
@@ -859,16 +859,16 @@ int sdlNetGetConnectionStatus(Pointer<SdlNetStreamSocket> sock) {
 /// \sa SDLNet_ReadFromStreamSocket
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDLNet_WriteToStreamSocket(SDLNet_StreamSocket *sock, const void *buf, int buflen)
+/// extern SDL_DECLSPEC bool SDLCALL SDLNet_WriteToStreamSocket(SDLNet_StreamSocket *sock, const void *buf, int buflen)
 /// ```
-int sdlNetWriteToStreamSocket(
+bool sdlNetWriteToStreamSocket(
     Pointer<SdlNetStreamSocket> sock, Pointer<NativeType> buf, int buflen) {
   final sdlNetWriteToStreamSocketLookupFunction = libSdl3Net.lookupFunction<
-      Int32 Function(Pointer<SdlNetStreamSocket> sock, Pointer<NativeType> buf,
+      Uint8 Function(Pointer<SdlNetStreamSocket> sock, Pointer<NativeType> buf,
           Int32 buflen),
       int Function(Pointer<SdlNetStreamSocket> sock, Pointer<NativeType> buf,
           int buflen)>('SDLNet_WriteToStreamSocket');
-  return sdlNetWriteToStreamSocketLookupFunction(sock, buf, buflen);
+  return sdlNetWriteToStreamSocketLookupFunction(sock, buf, buflen) == 1;
 }
 
 ///
@@ -1209,7 +1209,7 @@ Pointer<SdlNetDatagramSocket> sdlNetCreateDatagramSocket(
 /// still queued, as datagram transmission is unreliable, so you should never
 /// assume anything about queued data.
 ///
-/// If there's a fatal error, this function will return -1. Datagram sockets
+/// If there's a fatal error, this function will return false. Datagram sockets
 /// generally won't report failures, because there is no state like a
 /// "connection" to fail at this level, but may report failure for
 /// unrecoverable system-level conditions; once a datagram socket fails, you
@@ -1221,8 +1221,8 @@ Pointer<SdlNetDatagramSocket> sdlNetCreateDatagramSocket(
 /// \param port the address port.
 /// \param buf a pointer to the data to send as a single packet.
 /// \param buflen the size of the data to send, in bytes.
-/// \returns 0 if data sent or queued for transmission, -1 on failure; call
-/// SDL_GetError() for details.
+/// \returns true if data sent or queued for transmission, false on failure;
+/// call SDL_GetError() for details.
 ///
 /// \threadsafety You should not operate on the same socket from multiple
 /// threads at the same time without supplying a serialization
@@ -1234,16 +1234,16 @@ Pointer<SdlNetDatagramSocket> sdlNetCreateDatagramSocket(
 /// \sa SDLNet_ReceiveDatagram
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDLNet_SendDatagram(SDLNet_DatagramSocket *sock, SDLNet_Address *address, Uint16 port, const void *buf, int buflen)
+/// extern SDL_DECLSPEC bool SDLCALL SDLNet_SendDatagram(SDLNet_DatagramSocket *sock, SDLNet_Address *address, Uint16 port, const void *buf, int buflen)
 /// ```
-int sdlNetSendDatagram(
+bool sdlNetSendDatagram(
     Pointer<SdlNetDatagramSocket> sock,
     Pointer<SdlNetAddress> address,
     int port,
     Pointer<NativeType> buf,
     int buflen) {
   final sdlNetSendDatagramLookupFunction = libSdl3Net.lookupFunction<
-      Int32 Function(
+      Uint8 Function(
           Pointer<SdlNetDatagramSocket> sock,
           Pointer<SdlNetAddress> address,
           Uint16 port,
@@ -1255,7 +1255,8 @@ int sdlNetSendDatagram(
           int port,
           Pointer<NativeType> buf,
           int buflen)>('SDLNet_SendDatagram');
-  return sdlNetSendDatagramLookupFunction(sock, address, port, buf, buflen);
+  return sdlNetSendDatagramLookupFunction(sock, address, port, buf, buflen) ==
+      1;
 }
 
 ///
@@ -1282,7 +1283,7 @@ int sdlNetSendDatagram(
 /// reply to. Even if you aren't acting as a "server," packets can still arrive
 /// at your socket if someone sends one.
 ///
-/// If there's a fatal error, this function will return -1. Datagram sockets
+/// If there's a fatal error, this function will return false. Datagram sockets
 /// generally won't report failures, because there is no state like a
 /// "connection" to fail at this level, but may report failure for
 /// unrecoverable system-level conditions; once a datagram socket fails, you
@@ -1291,8 +1292,8 @@ int sdlNetSendDatagram(
 ///
 /// \param sock the datagram socket to send data through.
 /// \param dgram a pointer to the datagram packet pointer.
-/// \returns 0 if data sent or queued for transmission, -1 on failure; call
-/// SDL_GetError() for details.
+/// \returns true if data sent or queued for transmission, false on failure;
+/// call SDL_GetError() for details.
 ///
 /// \threadsafety You should not operate on the same socket from multiple
 /// threads at the same time without supplying a serialization
@@ -1305,16 +1306,16 @@ int sdlNetSendDatagram(
 /// \sa SDLNet_DestroyDatagram
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDLNet_ReceiveDatagram(SDLNet_DatagramSocket *sock, SDLNet_Datagram **dgram)
+/// extern SDL_DECLSPEC bool SDLCALL SDLNet_ReceiveDatagram(SDLNet_DatagramSocket *sock, SDLNet_Datagram **dgram)
 /// ```
-int sdlNetReceiveDatagram(Pointer<SdlNetDatagramSocket> sock,
+bool sdlNetReceiveDatagram(Pointer<SdlNetDatagramSocket> sock,
     Pointer<Pointer<SdlNetDatagram>> dgram) {
   final sdlNetReceiveDatagramLookupFunction = libSdl3Net.lookupFunction<
-      Int32 Function(Pointer<SdlNetDatagramSocket> sock,
+      Uint8 Function(Pointer<SdlNetDatagramSocket> sock,
           Pointer<Pointer<SdlNetDatagram>> dgram),
       int Function(Pointer<SdlNetDatagramSocket> sock,
           Pointer<Pointer<SdlNetDatagram>> dgram)>('SDLNet_ReceiveDatagram');
-  return sdlNetReceiveDatagramLookupFunction(sock, dgram);
+  return sdlNetReceiveDatagramLookupFunction(sock, dgram) == 1;
 }
 
 ///
@@ -1463,6 +1464,7 @@ void sdlNetDestroyDatagramSocket(Pointer<SdlNetDatagramSocket> sock) {
 /// \param timeout Number of milliseconds to wait for new input to become
 /// available. -1 to wait indefinitely, 0 to check once without
 /// waiting.
+/// \returns the number of items that have new input, or -1 on error.
 ///
 /// \threadsafety You should not operate on the same socket from multiple
 /// threads at the same time without supplying a serialization

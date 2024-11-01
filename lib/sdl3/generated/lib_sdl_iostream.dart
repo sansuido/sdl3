@@ -75,7 +75,7 @@ import 'struct_sdl.dart';
 /// \returns a pointer to the SDL_IOStream structure that is created or NULL on
 /// failure; call SDL_GetError() for more information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_CloseIO
 /// \sa SDL_FlushIO
@@ -127,7 +127,7 @@ Pointer<SdlIoStream> sdlIoFromFile(String? file, String? mode) {
 /// \returns a pointer to a new SDL_IOStream structure or NULL on failure; call
 /// SDL_GetError() for more information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_IOFromConstMem
 /// \sa SDL_CloseIO
@@ -177,7 +177,7 @@ Pointer<SdlIoStream> sdlIoFromMem(Pointer<NativeType> mem, int size) {
 /// \returns a pointer to a new SDL_IOStream structure or NULL on failure; call
 /// SDL_GetError() for more information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_IOFromMem
 /// \sa SDL_CloseIO
@@ -214,7 +214,7 @@ Pointer<SdlIoStream> sdlIoFromConstMem(Pointer<NativeType> mem, int size) {
 /// \returns a pointer to a new SDL_IOStream structure or NULL on failure; call
 /// SDL_GetError() for more information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_CloseIO
 /// \sa SDL_ReadIO
@@ -249,7 +249,7 @@ Pointer<SdlIoStream> sdlIoFromDynamicMem() {
 /// \returns a pointer to the allocated memory on success or NULL on failure;
 /// call SDL_GetError() for more information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_CloseIO
 /// \sa SDL_INIT_INTERFACE
@@ -294,7 +294,7 @@ Pointer<SdlIoStream> sdlOpenIo(
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_OpenIO
 ///
@@ -315,7 +315,7 @@ bool sdlCloseIo(Pointer<SdlIoStream> context) {
 /// \returns a valid property ID on success or 0 on failure; call
 /// SDL_GetError() for more information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
 /// extern SDL_DECLSPEC SDL_PropertiesID SDLCALL SDL_GetIOProperties(SDL_IOStream *context)
@@ -344,7 +344,7 @@ int sdlGetIoProperties(Pointer<SdlIoStream> context) {
 /// \threadsafety This function should not be called at the same time that
 /// another thread is operating on the same SDL_IOStream.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
 /// extern SDL_DECLSPEC SDL_IOStatus SDLCALL SDL_GetIOStatus(SDL_IOStream *context)
@@ -364,7 +364,7 @@ int sdlGetIoStatus(Pointer<SdlIoStream> context) {
 /// negative error code on failure; call SDL_GetError() for more
 /// information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
 /// extern SDL_DECLSPEC Sint64 SDLCALL SDL_GetIOSize(SDL_IOStream *context)
@@ -397,7 +397,7 @@ int sdlGetIoSize(Pointer<SdlIoStream> context) {
 /// \returns the final offset in the data stream after the seek or -1 on
 /// failure; call SDL_GetError() for more information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_TellIO
 ///
@@ -424,7 +424,7 @@ int sdlSeekIo(Pointer<SdlIoStream> context, int offset, int whence) {
 /// \returns the current offset in the stream, or -1 if the information can not
 /// be determined.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_SeekIO
 ///
@@ -453,7 +453,7 @@ int sdlTellIo(Pointer<SdlIoStream> context) {
 /// \returns the number of bytes read, or 0 on end of file or other failure;
 /// call SDL_GetError() for more information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_WriteIO
 /// \sa SDL_GetIOStatus
@@ -490,7 +490,7 @@ int sdlReadIo(Pointer<SdlIoStream> context, Pointer<NativeType> ptr, int size) {
 /// \returns the number of bytes written, which will be less than `size` on
 /// failure; call SDL_GetError() for more information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_IOprintf
 /// \sa SDL_ReadIO
@@ -523,7 +523,7 @@ int sdlWriteIo(
 /// \returns the number of bytes written or 0 on failure; call SDL_GetError()
 /// for more information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_IOvprintf
 /// \sa SDL_WriteIO
@@ -555,7 +555,7 @@ int sdlIOprintf(
 /// \returns the number of bytes written or 0 on failure; call SDL_GetError()
 /// for more information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_IOprintf
 /// \sa SDL_WriteIO
@@ -587,7 +587,7 @@ int sdlIOvprintf(
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_OpenIO
 /// \sa SDL_WriteIO
@@ -619,7 +619,7 @@ bool sdlFlushIo(Pointer<SdlIoStream> context) {
 /// \returns the data or NULL on failure; call SDL_GetError() for more
 /// information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_LoadFile
 ///
@@ -650,7 +650,7 @@ Pointer<NativeType> sdlLoadFileIo(
 /// \returns the data or NULL on failure; call SDL_GetError() for more
 /// information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_LoadFile_IO
 ///
@@ -677,7 +677,7 @@ Pointer<NativeType> sdlLoadFile(String? file, Pointer<Uint32> datasize) {
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_ReadU8(SDL_IOStream *src, Uint8 *value)
@@ -698,7 +698,7 @@ bool sdlReadU8(Pointer<SdlIoStream> src, Pointer<Uint8> value) {
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_ReadS8(SDL_IOStream *src, Sint8 *value)
@@ -723,7 +723,7 @@ bool sdlReadS8(Pointer<SdlIoStream> src, Pointer<Int8> value) {
 /// \returns true on successful write or false on failure; call SDL_GetError()
 /// for more information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_ReadU16LE(SDL_IOStream *src, Uint16 *value)
@@ -748,7 +748,7 @@ bool sdlReadU16Le(Pointer<SdlIoStream> src, Pointer<Uint16> value) {
 /// \returns true on successful write or false on failure; call SDL_GetError()
 /// for more information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_ReadS16LE(SDL_IOStream *src, Sint16 *value)
@@ -773,7 +773,7 @@ bool sdlReadS16Le(Pointer<SdlIoStream> src, Pointer<Int16> value) {
 /// \returns true on successful write or false on failure; call SDL_GetError()
 /// for more information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_ReadU16BE(SDL_IOStream *src, Uint16 *value)
@@ -798,7 +798,7 @@ bool sdlReadU16Be(Pointer<SdlIoStream> src, Pointer<Uint16> value) {
 /// \returns true on successful write or false on failure; call SDL_GetError()
 /// for more information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_ReadS16BE(SDL_IOStream *src, Sint16 *value)
@@ -823,7 +823,7 @@ bool sdlReadS16Be(Pointer<SdlIoStream> src, Pointer<Int16> value) {
 /// \returns true on successful write or false on failure; call SDL_GetError()
 /// for more information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_ReadU32LE(SDL_IOStream *src, Uint32 *value)
@@ -848,7 +848,7 @@ bool sdlReadU32Le(Pointer<SdlIoStream> src, Pointer<Uint32> value) {
 /// \returns true on successful write or false on failure; call SDL_GetError()
 /// for more information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_ReadS32LE(SDL_IOStream *src, Sint32 *value)
@@ -873,7 +873,7 @@ bool sdlReadS32Le(Pointer<SdlIoStream> src, Pointer<Int32> value) {
 /// \returns true on successful write or false on failure; call SDL_GetError()
 /// for more information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_ReadU32BE(SDL_IOStream *src, Uint32 *value)
@@ -898,7 +898,7 @@ bool sdlReadU32Be(Pointer<SdlIoStream> src, Pointer<Uint32> value) {
 /// \returns true on successful write or false on failure; call SDL_GetError()
 /// for more information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_ReadS32BE(SDL_IOStream *src, Sint32 *value)
@@ -923,7 +923,7 @@ bool sdlReadS32Be(Pointer<SdlIoStream> src, Pointer<Int32> value) {
 /// \returns true on successful write or false on failure; call SDL_GetError()
 /// for more information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_ReadU64LE(SDL_IOStream *src, Uint64 *value)
@@ -948,7 +948,7 @@ bool sdlReadU64Le(Pointer<SdlIoStream> src, Pointer<Uint64> value) {
 /// \returns true on successful write or false on failure; call SDL_GetError()
 /// for more information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_ReadS64LE(SDL_IOStream *src, Sint64 *value)
@@ -973,7 +973,7 @@ bool sdlReadS64Le(Pointer<SdlIoStream> src, Pointer<Int64> value) {
 /// \returns true on successful write or false on failure; call SDL_GetError()
 /// for more information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_ReadU64BE(SDL_IOStream *src, Uint64 *value)
@@ -998,7 +998,7 @@ bool sdlReadU64Be(Pointer<SdlIoStream> src, Pointer<Uint64> value) {
 /// \returns true on successful write or false on failure; call SDL_GetError()
 /// for more information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_ReadS64BE(SDL_IOStream *src, Sint64 *value)
@@ -1019,7 +1019,7 @@ bool sdlReadS64Be(Pointer<SdlIoStream> src, Pointer<Int64> value) {
 /// \returns true on successful write or false on failure; call SDL_GetError()
 /// for more information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_WriteU8(SDL_IOStream *dst, Uint8 value)
@@ -1039,7 +1039,7 @@ bool sdlWriteU8(Pointer<SdlIoStream> dst, int value) {
 /// \returns true on successful write or false on failure; call SDL_GetError()
 /// for more information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_WriteS8(SDL_IOStream *dst, Sint8 value)
@@ -1064,7 +1064,7 @@ bool sdlWriteS8(Pointer<SdlIoStream> dst, int value) {
 /// \returns true on successful write or false on failure; call SDL_GetError()
 /// for more information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_WriteU16LE(SDL_IOStream *dst, Uint16 value)
@@ -1089,7 +1089,7 @@ bool sdlWriteU16Le(Pointer<SdlIoStream> dst, int value) {
 /// \returns true on successful write or false on failure; call SDL_GetError()
 /// for more information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_WriteS16LE(SDL_IOStream *dst, Sint16 value)
@@ -1113,7 +1113,7 @@ bool sdlWriteS16Le(Pointer<SdlIoStream> dst, int value) {
 /// \returns true on successful write or false on failure; call SDL_GetError()
 /// for more information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_WriteU16BE(SDL_IOStream *dst, Uint16 value)
@@ -1137,7 +1137,7 @@ bool sdlWriteU16Be(Pointer<SdlIoStream> dst, int value) {
 /// \returns true on successful write or false on failure; call SDL_GetError()
 /// for more information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_WriteS16BE(SDL_IOStream *dst, Sint16 value)
@@ -1162,7 +1162,7 @@ bool sdlWriteS16Be(Pointer<SdlIoStream> dst, int value) {
 /// \returns true on successful write or false on failure; call SDL_GetError()
 /// for more information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_WriteU32LE(SDL_IOStream *dst, Uint32 value)
@@ -1187,7 +1187,7 @@ bool sdlWriteU32Le(Pointer<SdlIoStream> dst, int value) {
 /// \returns true on successful write or false on failure; call SDL_GetError()
 /// for more information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_WriteS32LE(SDL_IOStream *dst, Sint32 value)
@@ -1211,7 +1211,7 @@ bool sdlWriteS32Le(Pointer<SdlIoStream> dst, int value) {
 /// \returns true on successful write or false on failure; call SDL_GetError()
 /// for more information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_WriteU32BE(SDL_IOStream *dst, Uint32 value)
@@ -1235,7 +1235,7 @@ bool sdlWriteU32Be(Pointer<SdlIoStream> dst, int value) {
 /// \returns true on successful write or false on failure; call SDL_GetError()
 /// for more information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_WriteS32BE(SDL_IOStream *dst, Sint32 value)
@@ -1260,7 +1260,7 @@ bool sdlWriteS32Be(Pointer<SdlIoStream> dst, int value) {
 /// \returns true on successful write or false on failure; call SDL_GetError()
 /// for more information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_WriteU64LE(SDL_IOStream *dst, Uint64 value)
@@ -1285,7 +1285,7 @@ bool sdlWriteU64Le(Pointer<SdlIoStream> dst, int value) {
 /// \returns true on successful write or false on failure; call SDL_GetError()
 /// for more information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_WriteS64LE(SDL_IOStream *dst, Sint64 value)
@@ -1309,7 +1309,7 @@ bool sdlWriteS64Le(Pointer<SdlIoStream> dst, int value) {
 /// \returns true on successful write or false on failure; call SDL_GetError()
 /// for more information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_WriteU64BE(SDL_IOStream *dst, Uint64 value)
@@ -1333,7 +1333,7 @@ bool sdlWriteU64Be(Pointer<SdlIoStream> dst, int value) {
 /// \returns true on successful write or false on failure; call SDL_GetError()
 /// for more information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_WriteS64BE(SDL_IOStream *dst, Sint64 value)

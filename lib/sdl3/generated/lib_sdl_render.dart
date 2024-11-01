@@ -17,7 +17,7 @@ import 'struct_sdl.dart';
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_CreateRenderer
 /// \sa SDL_GetRenderDriver
@@ -50,7 +50,7 @@ int sdlGetNumRenderDrivers() {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetNumRenderDrivers
 ///
@@ -83,7 +83,7 @@ String? sdlGetRenderDriver(int index) {
 ///
 /// \threadsafety You may only call this function from the main thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_CreateRenderer
 /// \sa SDL_CreateWindow
@@ -126,24 +126,24 @@ bool sdlCreateWindowAndRenderer(
 /// Create a 2D rendering context for a window.
 ///
 /// If you want a specific renderer, you can specify its name here. A list of
-/// available renderers can be obtained by calling SDL_GetRenderDriver multiple
-/// times, with indices from 0 to SDL_GetNumRenderDrivers()-1. If you don't
-/// need a specific renderer, specify NULL and SDL will attempt to choose the
-/// best option for you, based on what is available on the user's system.
+/// available renderers can be obtained by calling SDL_GetRenderDriver()
+/// multiple times, with indices from 0 to SDL_GetNumRenderDrivers()-1. If you
+/// don't need a specific renderer, specify NULL and SDL will attempt to choose
+/// the best option for you, based on what is available on the user's system.
 ///
 /// By default the rendering size matches the window size in pixels, but you
 /// can call SDL_SetRenderLogicalPresentation() to change the content size and
 /// scaling options.
 ///
 /// \param window the window where rendering is displayed.
-/// \param name the name of the rendering driver to initialize, or NULL to
-/// initialize the first one supporting the requested flags.
+/// \param name the name of the rendering driver to initialize, or NULL to let
+/// SDL choose one.
 /// \returns a valid rendering context or NULL if there was an error; call
 /// SDL_GetError() for more information.
 ///
 /// \threadsafety You may only call this function from the main thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_CreateRendererWithProperties
 /// \sa SDL_CreateSoftwareRenderer
@@ -211,7 +211,7 @@ Pointer<SdlRenderer> sdlCreateRenderer(
 ///
 /// \threadsafety You may only call this function from the main thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_CreateProperties
 /// \sa SDL_CreateRenderer
@@ -245,7 +245,7 @@ Pointer<SdlRenderer> sdlCreateRendererWithProperties(int props) {
 ///
 /// \threadsafety You may only call this function from the main thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_DestroyRenderer
 ///
@@ -269,7 +269,7 @@ Pointer<SdlRenderer> sdlCreateSoftwareRenderer(Pointer<SdlSurface> surface) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
 /// extern SDL_DECLSPEC SDL_Renderer * SDLCALL SDL_GetRenderer(SDL_Window *window)
@@ -291,7 +291,7 @@ Pointer<SdlRenderer> sdlGetRenderer(Pointer<SdlWindow> window) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
 /// extern SDL_DECLSPEC SDL_Window * SDLCALL SDL_GetRenderWindow(SDL_Renderer *renderer)
@@ -313,7 +313,7 @@ Pointer<SdlWindow> sdlGetRenderWindow(Pointer<SdlRenderer> renderer) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_CreateRenderer
 /// \sa SDL_CreateRendererWithProperties
@@ -410,7 +410,7 @@ String? sdlGetRendererName(Pointer<SdlRenderer> renderer) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
 /// extern SDL_DECLSPEC SDL_PropertiesID SDLCALL SDL_GetRendererProperties(SDL_Renderer *renderer)
@@ -436,7 +436,7 @@ int sdlGetRendererProperties(Pointer<SdlRenderer> renderer) {
 ///
 /// \threadsafety You may only call this function from the main thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetCurrentRenderOutputSize
 ///
@@ -469,7 +469,7 @@ bool sdlGetRenderOutputSize(
 ///
 /// \threadsafety You may only call this function from the main thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetRenderOutputSize
 ///
@@ -502,7 +502,7 @@ bool sdlGetCurrentRenderOutputSize(
 ///
 /// \threadsafety You may only call this function from the main thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_CreateTextureFromSurface
 /// \sa SDL_CreateTextureWithProperties
@@ -543,7 +543,7 @@ Pointer<SdlTexture> sdlCreateTexture(
 ///
 /// \threadsafety You may only call this function from the main thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_CreateTexture
 /// \sa SDL_CreateTextureWithProperties
@@ -664,7 +664,7 @@ Pointer<SdlTexture> sdlCreateTextureFromSurface(
 ///
 /// \threadsafety You may only call this function from the main thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_CreateProperties
 /// \sa SDL_CreateTexture
@@ -780,7 +780,7 @@ Pointer<SdlTexture> sdlCreateTextureWithProperties(
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
 /// extern SDL_DECLSPEC SDL_PropertiesID SDLCALL SDL_GetTextureProperties(SDL_Texture *texture)
@@ -801,7 +801,7 @@ int sdlGetTextureProperties(Pointer<SdlTexture> texture) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
 /// extern SDL_DECLSPEC SDL_Renderer * SDLCALL SDL_GetRendererFromTexture(SDL_Texture *texture)
@@ -827,7 +827,7 @@ Pointer<SdlRenderer> sdlGetRendererFromTexture(Pointer<SdlTexture> texture) {
 ///
 /// \threadsafety You may only call this function from the main thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetTextureSize(SDL_Texture *texture, float *w, float *h)
@@ -863,7 +863,7 @@ bool sdlGetTextureSize(
 ///
 /// \threadsafety You may only call this function from the main thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetTextureColorMod
 /// \sa SDL_SetTextureAlphaMod
@@ -901,7 +901,7 @@ bool sdlSetTextureColorMod(Pointer<SdlTexture> texture, int r, int g, int b) {
 ///
 /// \threadsafety You may only call this function from the main thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetTextureColorModFloat
 /// \sa SDL_SetTextureAlphaModFloat
@@ -931,7 +931,7 @@ bool sdlSetTextureColorModFloat(
 ///
 /// \threadsafety You may only call this function from the main thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetTextureAlphaMod
 /// \sa SDL_GetTextureColorModFloat
@@ -962,7 +962,7 @@ bool sdlGetTextureColorMod(Pointer<SdlTexture> texture, Pointer<Uint8> r,
 ///
 /// \threadsafety You may only call this function from the main thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetTextureAlphaModFloat
 /// \sa SDL_GetTextureColorMod
@@ -999,7 +999,7 @@ bool sdlGetTextureColorModFloat(Pointer<SdlTexture> texture, Pointer<Float> r,
 ///
 /// \threadsafety You may only call this function from the main thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetTextureAlphaMod
 /// \sa SDL_SetTextureAlphaModFloat
@@ -1034,7 +1034,7 @@ bool sdlSetTextureAlphaMod(Pointer<SdlTexture> texture, int alpha) {
 ///
 /// \threadsafety You may only call this function from the main thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetTextureAlphaModFloat
 /// \sa SDL_SetTextureAlphaMod
@@ -1061,7 +1061,7 @@ bool sdlSetTextureAlphaModFloat(Pointer<SdlTexture> texture, double alpha) {
 ///
 /// \threadsafety You may only call this function from the main thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetTextureAlphaModFloat
 /// \sa SDL_GetTextureColorMod
@@ -1088,7 +1088,7 @@ bool sdlGetTextureAlphaMod(Pointer<SdlTexture> texture, Pointer<Uint8> alpha) {
 ///
 /// \threadsafety You may only call this function from the main thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetTextureAlphaMod
 /// \sa SDL_GetTextureColorModFloat
@@ -1119,7 +1119,7 @@ bool sdlGetTextureAlphaModFloat(
 ///
 /// \threadsafety You may only call this function from the main thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetTextureBlendMode
 ///
@@ -1144,7 +1144,7 @@ bool sdlSetTextureBlendMode(Pointer<SdlTexture> texture, int blendMode) {
 ///
 /// \threadsafety You may only call this function from the main thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_SetTextureBlendMode
 ///
@@ -1174,7 +1174,7 @@ bool sdlGetTextureBlendMode(
 ///
 /// \threadsafety You may only call this function from the main thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetTextureScaleMode
 ///
@@ -1199,7 +1199,7 @@ bool sdlSetTextureScaleMode(Pointer<SdlTexture> texture, int scaleMode) {
 ///
 /// \threadsafety You may only call this function from the main thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_SetTextureScaleMode
 ///
@@ -1240,7 +1240,7 @@ bool sdlGetTextureScaleMode(
 ///
 /// \threadsafety You may only call this function from the main thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_LockTexture
 /// \sa SDL_UnlockTexture
@@ -1285,7 +1285,7 @@ bool sdlUpdateTexture(Pointer<SdlTexture> texture, Pointer<SdlRect> rect,
 ///
 /// \threadsafety You may only call this function from the main thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_UpdateNVTexture
 /// \sa SDL_UpdateTexture
@@ -1347,7 +1347,7 @@ bool sdlUpdateYuvTexture(
 ///
 /// \threadsafety You may only call this function from the main thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_UpdateTexture
 /// \sa SDL_UpdateYUVTexture
@@ -1402,7 +1402,7 @@ bool sdlUpdateNvTexture(Pointer<SdlTexture> texture, Pointer<SdlRect> rect,
 ///
 /// \threadsafety You may only call this function from the main thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_LockTextureToSurface
 /// \sa SDL_UnlockTexture
@@ -1452,7 +1452,7 @@ bool sdlLockTexture(Pointer<SdlTexture> texture, Pointer<SdlRect> rect,
 ///
 /// \threadsafety You may only call this function from the main thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_LockTexture
 /// \sa SDL_UnlockTexture
@@ -1485,7 +1485,7 @@ bool sdlLockTextureToSurface(Pointer<SdlTexture> texture, Pointer<SdlRect> rect,
 ///
 /// \threadsafety You may only call this function from the main thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_LockTexture
 ///
@@ -1515,7 +1515,7 @@ void sdlUnlockTexture(Pointer<SdlTexture> texture) {
 ///
 /// \threadsafety You may only call this function from the main thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetRenderTarget
 ///
@@ -1543,7 +1543,7 @@ bool sdlSetRenderTarget(
 ///
 /// \threadsafety You may only call this function from the main thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_SetRenderTarget
 ///
@@ -1591,7 +1591,7 @@ Pointer<SdlTexture> sdlGetRenderTarget(Pointer<SdlRenderer> renderer) {
 ///
 /// \threadsafety You may only call this function from the main thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_ConvertEventToRenderCoordinates
 /// \sa SDL_GetRenderLogicalPresentation
@@ -1626,7 +1626,7 @@ bool sdlSetRenderLogicalPresentation(
 ///
 /// \threadsafety You may only call this function from the main thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_SetRenderLogicalPresentation
 ///
@@ -1663,7 +1663,7 @@ bool sdlGetRenderLogicalPresentation(Pointer<SdlRenderer> renderer,
 ///
 /// \threadsafety You may only call this function from the main thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_SetRenderLogicalPresentation
 ///
@@ -1700,7 +1700,7 @@ bool sdlGetRenderLogicalPresentationRect(
 ///
 /// \threadsafety You may only call this function from the main thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_SetRenderLogicalPresentation
 /// \sa SDL_SetRenderScale
@@ -1746,7 +1746,7 @@ bool sdlRenderCoordinatesFromWindow(Pointer<SdlRenderer> renderer,
 ///
 /// \threadsafety You may only call this function from the main thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_SetRenderLogicalPresentation
 /// \sa SDL_SetRenderScale
@@ -1793,7 +1793,7 @@ bool sdlRenderCoordinatesToWindow(Pointer<SdlRenderer> renderer, double x,
 ///
 /// \threadsafety You may only call this function from the main thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_RenderCoordinatesFromWindow
 ///
@@ -1828,7 +1828,7 @@ bool sdlConvertEventToRenderCoordinates(
 ///
 /// \threadsafety You may only call this function from the main thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetRenderViewport
 /// \sa SDL_RenderViewportSet
@@ -1855,7 +1855,7 @@ bool sdlSetRenderViewport(
 ///
 /// \threadsafety You may only call this function from the main thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_RenderViewportSet
 /// \sa SDL_SetRenderViewport
@@ -1885,7 +1885,7 @@ bool sdlGetRenderViewport(
 ///
 /// \threadsafety You may only call this function from the main thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetRenderViewport
 /// \sa SDL_SetRenderViewport
@@ -1918,7 +1918,7 @@ bool sdlRenderViewportSet(Pointer<SdlRenderer> renderer) {
 ///
 /// \threadsafety You may only call this function from the main thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderSafeArea(SDL_Renderer *renderer, SDL_Rect *rect)
@@ -1943,7 +1943,7 @@ bool sdlGetRenderSafeArea(
 ///
 /// \threadsafety You may only call this function from the main thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetRenderClipRect
 /// \sa SDL_RenderClipEnabled
@@ -1971,7 +1971,7 @@ bool sdlSetRenderClipRect(
 ///
 /// \threadsafety You may only call this function from the main thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_RenderClipEnabled
 /// \sa SDL_SetRenderClipRect
@@ -1997,7 +1997,7 @@ bool sdlGetRenderClipRect(
 ///
 /// \threadsafety You may only call this function from the main thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetRenderClipRect
 /// \sa SDL_SetRenderClipRect
@@ -2031,7 +2031,7 @@ bool sdlRenderClipEnabled(Pointer<SdlRenderer> renderer) {
 ///
 /// \threadsafety You may only call this function from the main thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetRenderScale
 ///
@@ -2058,7 +2058,7 @@ bool sdlSetRenderScale(
 ///
 /// \threadsafety You may only call this function from the main thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_SetRenderScale
 ///
@@ -2093,7 +2093,7 @@ bool sdlGetRenderScale(Pointer<SdlRenderer> renderer, Pointer<Float> scaleX,
 ///
 /// \threadsafety You may only call this function from the main thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetRenderDrawColor
 /// \sa SDL_SetRenderDrawColorFloat
@@ -2129,7 +2129,7 @@ bool sdlSetRenderDrawColor(
 ///
 /// \threadsafety You may only call this function from the main thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetRenderDrawColorFloat
 /// \sa SDL_SetRenderDrawColor
@@ -2164,7 +2164,7 @@ bool sdlSetRenderDrawColorFloat(
 ///
 /// \threadsafety You may only call this function from the main thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetRenderDrawColorFloat
 /// \sa SDL_SetRenderDrawColor
@@ -2203,7 +2203,7 @@ bool sdlGetRenderDrawColor(Pointer<SdlRenderer> renderer, Pointer<Uint8> r,
 ///
 /// \threadsafety You may only call this function from the main thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_SetRenderDrawColorFloat
 /// \sa SDL_GetRenderDrawColor
@@ -2243,7 +2243,7 @@ bool sdlGetRenderDrawColorFloat(Pointer<SdlRenderer> renderer, Pointer<Float> r,
 ///
 /// \threadsafety You may only call this function from the main thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetRenderColorScale
 ///
@@ -2268,7 +2268,7 @@ bool sdlSetRenderColorScale(Pointer<SdlRenderer> renderer, double scale) {
 ///
 /// \threadsafety You may only call this function from the main thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_SetRenderColorScale
 ///
@@ -2296,7 +2296,7 @@ bool sdlGetRenderColorScale(
 ///
 /// \threadsafety You may only call this function from the main thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetRenderDrawBlendMode
 ///
@@ -2321,7 +2321,7 @@ bool sdlSetRenderDrawBlendMode(Pointer<SdlRenderer> renderer, int blendMode) {
 ///
 /// \threadsafety You may only call this function from the main thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_SetRenderDrawBlendMode
 ///
@@ -2351,7 +2351,7 @@ bool sdlGetRenderDrawBlendMode(
 ///
 /// \threadsafety You may only call this function from the main thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_SetRenderDrawColor
 ///
@@ -2376,7 +2376,7 @@ bool sdlRenderClear(Pointer<SdlRenderer> renderer) {
 ///
 /// \threadsafety You may only call this function from the main thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_RenderPoints
 ///
@@ -2402,7 +2402,7 @@ bool sdlRenderPoint(Pointer<SdlRenderer> renderer, double x, double y) {
 ///
 /// \threadsafety You may only call this function from the main thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_RenderPoint
 ///
@@ -2432,7 +2432,7 @@ bool sdlRenderPoints(
 ///
 /// \threadsafety You may only call this function from the main thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_RenderLines
 ///
@@ -2461,7 +2461,7 @@ bool sdlRenderLine(
 ///
 /// \threadsafety You may only call this function from the main thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_RenderLine
 ///
@@ -2489,7 +2489,7 @@ bool sdlRenderLines(
 ///
 /// \threadsafety You may only call this function from the main thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_RenderRects
 ///
@@ -2516,7 +2516,7 @@ bool sdlRenderRect(Pointer<SdlRenderer> renderer, Pointer<SdlFRect> rect) {
 ///
 /// \threadsafety You may only call this function from the main thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_RenderRect
 ///
@@ -2545,7 +2545,7 @@ bool sdlRenderRects(
 ///
 /// \threadsafety You may only call this function from the main thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_RenderFillRects
 ///
@@ -2572,7 +2572,7 @@ bool sdlRenderFillRect(Pointer<SdlRenderer> renderer, Pointer<SdlFRect> rect) {
 ///
 /// \threadsafety You may only call this function from the main thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_RenderFillRect
 ///
@@ -2604,7 +2604,7 @@ bool sdlRenderFillRects(
 ///
 /// \threadsafety You may only call this function from the main thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_RenderTextureRotated
 /// \sa SDL_RenderTextureTiled
@@ -2651,7 +2651,7 @@ bool sdlRenderTexture(
 ///
 /// \threadsafety You may only call this function from the main thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_RenderTexture
 ///
@@ -2709,7 +2709,7 @@ bool sdlRenderTextureRotated(
 ///
 /// \threadsafety You may only call this function from the main thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_RenderTexture
 ///
@@ -2764,7 +2764,7 @@ bool sdlRenderTextureTiled(
 ///
 /// \threadsafety You may only call this function from the main thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_RenderTexture
 ///
@@ -2825,7 +2825,7 @@ bool sdlRenderTexture9Grid(
 ///
 /// \threadsafety You may only call this function from the main thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_RenderGeometryRaw
 ///
@@ -2882,7 +2882,7 @@ bool sdlRenderGeometry(
 ///
 /// \threadsafety You may only call this function from the main thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_RenderGeometry
 ///
@@ -2962,7 +2962,7 @@ bool sdlRenderGeometryRaw(
 ///
 /// \threadsafety You may only call this function from the main thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
 /// extern SDL_DECLSPEC SDL_Surface * SDLCALL SDL_RenderReadPixels(SDL_Renderer *renderer, const SDL_Rect *rect)
@@ -3010,7 +3010,7 @@ Pointer<SdlSurface> sdlRenderReadPixels(
 ///
 /// \threadsafety You may only call this function from the main thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_CreateRenderer
 /// \sa SDL_RenderClear
@@ -3045,7 +3045,7 @@ bool sdlRenderPresent(Pointer<SdlRenderer> renderer) {
 ///
 /// \threadsafety You may only call this function from the main thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_CreateTexture
 /// \sa SDL_CreateTextureFromSurface
@@ -3070,7 +3070,7 @@ void sdlDestroyTexture(Pointer<SdlTexture> texture) {
 ///
 /// \threadsafety You may only call this function from the main thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_CreateRenderer
 ///
@@ -3113,7 +3113,7 @@ void sdlDestroyRenderer(Pointer<SdlRenderer> renderer) {
 ///
 /// \threadsafety You may only call this function from the main thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_FlushRenderer(SDL_Renderer *renderer)
@@ -3137,7 +3137,7 @@ bool sdlFlushRenderer(Pointer<SdlRenderer> renderer) {
 ///
 /// \threadsafety You may only call this function from the main thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetRenderMetalCommandEncoder
 ///
@@ -3169,7 +3169,7 @@ Pointer<NativeType> sdlGetRenderMetalLayer(Pointer<SdlRenderer> renderer) {
 ///
 /// \threadsafety You may only call this function from the main thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetRenderMetalLayer
 ///
@@ -3211,7 +3211,7 @@ Pointer<NativeType> sdlGetRenderMetalCommandEncoder(
 /// \threadsafety It is **NOT** safe to call this function from two threads at
 /// once.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_AddVulkanRenderSemaphores(SDL_Renderer *renderer, Uint32 wait_stage_mask, Sint64 wait_semaphore, Sint64 signal_semaphore)
@@ -3238,10 +3238,10 @@ bool sdlAddVulkanRenderSemaphores(Pointer<SdlRenderer> renderer,
 ///
 /// The `vsync` parameter can be 1 to synchronize present with every vertical
 /// refresh, 2 to synchronize present with every second vertical refresh, etc.,
-/// SDL_WINDOW_SURFACE_VSYNC_ADAPTIVE for late swap tearing (adaptive vsync),
-/// or SDL_WINDOW_SURFACE_VSYNC_DISABLED to disable. Not every value is
-/// supported by every driver, so you should check the return value to see
-/// whether the requested setting is supported.
+/// SDL_RENDERER_VSYNC_ADAPTIVE for late swap tearing (adaptive vsync), or
+/// SDL_RENDERER_VSYNC_DISABLED to disable. Not every value is supported by
+/// every driver, so you should check the return value to see whether the
+/// requested setting is supported.
 ///
 /// \param renderer the renderer to toggle.
 /// \param vsync the vertical refresh sync interval.
@@ -3250,7 +3250,7 @@ bool sdlAddVulkanRenderSemaphores(Pointer<SdlRenderer> renderer,
 ///
 /// \threadsafety You may only call this function from the main thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetRenderVSync
 ///
@@ -3276,7 +3276,7 @@ bool sdlSetRenderVSync(Pointer<SdlRenderer> renderer, int vsync) {
 ///
 /// \threadsafety You may only call this function from the main thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_SetRenderVSync
 ///
@@ -3325,7 +3325,7 @@ bool sdlGetRenderVSync(Pointer<SdlRenderer> renderer, Pointer<Int32> vsync) {
 ///
 /// \threadsafety You may only call this function from the main thread.
 ///
-/// \since This function is available since SDL 3.1.4.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_DEBUG_TEXT_FONT_CHARACTER_SIZE
 ///

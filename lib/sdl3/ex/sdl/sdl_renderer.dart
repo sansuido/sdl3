@@ -10,31 +10,6 @@ import 'sdl_rect.dart';
 
 extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   // lib_sdl_renderer.dart
-  ///
-  /// Create a 2D software rendering context for a surface.
-  ///
-  /// Two other API which can be used to create SDL_Renderer:
-  /// SDL_CreateRenderer() and SDL_CreateWindowAndRenderer(). These can _also_
-  /// create a software renderer, but they are intended to be used with an
-  /// SDL_Window as the final destination and not an SDL_Surface.
-  ///
-  /// \param surface the SDL_Surface structure representing the surface where
-  /// rendering is done.
-  /// \returns a valid rendering context or NULL if there was an error; call
-  /// SDL_GetError() for more information.
-  ///
-  /// \threadsafety You may only call this function from the main thread.
-  ///
-  /// \since This function is available since SDL 3.0.0.
-  ///
-  /// \sa SDL_DestroyRenderer
-  ///
-  /// ```c
-  /// extern SDL_DECLSPEC SDL_Renderer * SDLCALL SDL_CreateSoftwareRenderer(SDL_Surface *surface)
-  /// ```
-  Pointer<SdlRenderer> createSoftware(Pointer<SdlSurface> surface) {
-    return sdlCreateSoftwareRenderer(surface);
-  }
 
   ///
   /// Get the window associated with a renderer.
@@ -45,7 +20,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   ///
   /// \threadsafety It is safe to call this function from any thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// ```c
   /// extern SDL_DECLSPEC SDL_Window * SDLCALL SDL_GetRenderWindow(SDL_Renderer *renderer)
@@ -131,7 +106,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   ///
   /// \threadsafety It is safe to call this function from any thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// ```c
   /// extern SDL_DECLSPEC SDL_PropertiesID SDLCALL SDL_GetRendererProperties(SDL_Renderer *renderer)
@@ -154,7 +129,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   ///
   /// \threadsafety You may only call this function from the main thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_GetCurrentRenderOutputSize
   ///
@@ -188,7 +163,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   ///
   /// \threadsafety You may only call this function from the main thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_GetRenderOutputSize
   ///
@@ -222,7 +197,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   ///
   /// \threadsafety You may only call this function from the main thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_CreateTextureFromSurface
   /// \sa SDL_CreateTextureWithProperties
@@ -257,7 +232,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   ///
   /// \threadsafety You may only call this function from the main thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_CreateTexture
   /// \sa SDL_CreateTextureWithProperties
@@ -372,7 +347,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   ///
   /// \threadsafety You may only call this function from the main thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_CreateProperties
   /// \sa SDL_CreateTexture
@@ -404,7 +379,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   ///
   /// \threadsafety You may only call this function from the main thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_GetRenderTarget
   ///
@@ -426,7 +401,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   ///
   /// \threadsafety You may only call this function from the main thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_SetRenderTarget
   ///
@@ -470,7 +445,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   ///
   /// \threadsafety You may only call this function from the main thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_ConvertEventToRenderCoordinates
   /// \sa SDL_GetRenderLogicalPresentation
@@ -498,7 +473,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   ///
   /// \threadsafety You may only call this function from the main thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_SetRenderLogicalPresentation
   ///
@@ -525,7 +500,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   ///
   /// \threadsafety You may only call this function from the main thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_SetRenderLogicalPresentation
   ///
@@ -560,7 +535,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   ///
   /// \threadsafety You may only call this function from the main thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_SetRenderLogicalPresentation
   ///
@@ -599,7 +574,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   ///
   /// \threadsafety You may only call this function from the main thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_SetRenderLogicalPresentation
   /// \sa SDL_SetRenderScale
@@ -639,7 +614,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   ///
   /// \threadsafety You may only call this function from the main thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_SetRenderLogicalPresentation
   /// \sa SDL_SetRenderScale
@@ -680,7 +655,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   ///
   /// \threadsafety You may only call this function from the main thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_RenderCoordinatesFromWindow
   ///
@@ -708,7 +683,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   ///
   /// \threadsafety You may only call this function from the main thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_GetRenderViewport
   /// \sa SDL_RenderViewportSet
@@ -736,7 +711,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   ///
   /// \threadsafety You may only call this function from the main thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_RenderViewportSet
   /// \sa SDL_SetRenderViewport
@@ -763,7 +738,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   ///
   /// \threadsafety You may only call this function from the main thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_GetRenderClipRect
   /// \sa SDL_RenderClipEnabled
@@ -792,7 +767,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   ///
   /// \threadsafety You may only call this function from the main thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_RenderClipEnabled
   /// \sa SDL_SetRenderClipRect
@@ -817,7 +792,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   ///
   /// \threadsafety You may only call this function from the main thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_GetRenderClipRect
   /// \sa SDL_SetRenderClipRect
@@ -848,7 +823,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   ///
   /// \threadsafety You may only call this function from the main thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_GetRenderScale
   ///
@@ -870,7 +845,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   ///
   /// \threadsafety You may only call this function from the main thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_SetRenderScale
   ///
@@ -905,7 +880,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   ///
   /// \threadsafety You may only call this function from the main thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_GetRenderDrawColor
   /// \sa SDL_SetRenderDrawColorFloat
@@ -935,7 +910,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   ///
   /// \threadsafety You may only call this function from the main thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_GetRenderDrawColorFloat
   /// \sa SDL_SetRenderDrawColor
@@ -964,7 +939,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   ///
   /// \threadsafety You may only call this function from the main thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_GetRenderDrawColorFloat
   /// \sa SDL_SetRenderDrawColor
@@ -1007,7 +982,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   ///
   /// \threadsafety You may only call this function from the main thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_SetRenderDrawColorFloat
   /// \sa SDL_GetRenderDrawColor
@@ -1051,7 +1026,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   ///
   /// \threadsafety You may only call this function from the main thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_GetRenderColorScale
   ///
@@ -1072,7 +1047,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   ///
   /// \threadsafety You may only call this function from the main thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_SetRenderColorScale
   ///
@@ -1099,7 +1074,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   ///
   /// \threadsafety You may only call this function from the main thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_GetRenderDrawBlendMode
   ///
@@ -1120,7 +1095,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   ///
   /// \threadsafety You may only call this function from the main thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_SetRenderDrawBlendMode
   ///
@@ -1149,7 +1124,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   ///
   /// \threadsafety You may only call this function from the main thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_SetRenderDrawColor
   ///
@@ -1171,7 +1146,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   ///
   /// \threadsafety You may only call this function from the main thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_RenderPoints
   ///
@@ -1193,7 +1168,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   ///
   /// \threadsafety You may only call this function from the main thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_RenderPoint
   ///
@@ -1220,7 +1195,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   ///
   /// \threadsafety You may only call this function from the main thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_RenderLines
   ///
@@ -1243,7 +1218,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   ///
   /// \threadsafety You may only call this function from the main thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_RenderLine
   ///
@@ -1268,7 +1243,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   ///
   /// \threadsafety You may only call this function from the main thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_RenderRects
   ///
@@ -1297,7 +1272,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   ///
   /// \threadsafety You may only call this function from the main thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_RenderRect
   ///
@@ -1323,14 +1298,14 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   ///
   /// \threadsafety You may only call this function from the main thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_RenderFillRects
   ///
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderFillRect(SDL_Renderer *renderer, const SDL_FRect *rect)
   /// ```
-  bool fillRect(math.Rectangle<double>? rect) {
+  bool fillRect([math.Rectangle<double>? rect]) {
     Pointer<SdlFRect> rectPointer = nullptr;
     if (rect != null) {
       rectPointer = rect.calloc();
@@ -1352,7 +1327,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   ///
   /// \threadsafety You may only call this function from the main thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_RenderFillRect
   ///
@@ -1381,7 +1356,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   ///
   /// \threadsafety You may only call this function from the main thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_RenderTextureRotated
   /// \sa SDL_RenderTextureTiled
@@ -1428,7 +1403,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   ///
   /// \threadsafety You may only call this function from the main thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_RenderTexture
   ///
@@ -1479,7 +1454,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   ///
   /// \threadsafety You may only call this function from the main thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_RenderGeometryRaw
   ///
@@ -1515,7 +1490,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   ///
   /// \threadsafety You may only call this function from the main thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_RenderGeometry
   ///
@@ -1578,7 +1553,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   ///
   /// \threadsafety You may only call this function from the main thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_CreateRenderer
   /// \sa SDL_RenderClear
@@ -1610,7 +1585,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   ///
   /// \threadsafety You may only call this function from the main thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_CreateRenderer
   ///
@@ -1654,7 +1629,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   ///
   /// \threadsafety You may only call this function from the main thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_FlushRenderer(SDL_Renderer *renderer)
@@ -1675,7 +1650,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   ///
   /// \threadsafety You may only call this function from the main thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_GetRenderMetalCommandEncoder
   ///
@@ -1703,7 +1678,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   ///
   /// \threadsafety You may only call this function from the main thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_GetRenderMetalLayer
   ///
@@ -1721,10 +1696,10 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   ///
   /// The `vsync` parameter can be 1 to synchronize present with every vertical
   /// refresh, 2 to synchronize present with every second vertical refresh, etc.,
-  /// SDL_WINDOW_SURFACE_VSYNC_ADAPTIVE for late swap tearing (adaptive vsync),
-  /// or SDL_WINDOW_SURFACE_VSYNC_DISABLED to disable. Not every value is
-  /// supported by every driver, so you should check the return value to see
-  /// whether the requested setting is supported.
+  /// SDL_RENDERER_VSYNC_ADAPTIVE for late swap tearing (adaptive vsync), or
+  /// SDL_RENDERER_VSYNC_DISABLED to disable. Not every value is supported by
+  /// every driver, so you should check the return value to see whether the
+  /// requested setting is supported.
   ///
   /// \param renderer the renderer to toggle.
   /// \param vsync the vertical refresh sync interval.
@@ -1733,7 +1708,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   ///
   /// \threadsafety You may only call this function from the main thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_GetRenderVSync
   ///
@@ -1755,7 +1730,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   ///
   /// \threadsafety You may only call this function from the main thread.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_SetRenderVSync
   ///

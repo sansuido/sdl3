@@ -18,7 +18,7 @@ import 'lib_sdl.dart';
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetHint
 /// \sa SDL_ResetHint
@@ -56,7 +56,7 @@ bool sdlSetHintWithPriority(String? name, String? value, int priority) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetHint
 /// \sa SDL_ResetHint
@@ -90,7 +90,7 @@ bool sdlSetHint(String? name, String? value) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_SetHint
 /// \sa SDL_ResetHints
@@ -117,7 +117,7 @@ bool sdlResetHint(String? name) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_ResetHint
 ///
@@ -143,7 +143,7 @@ void sdlResetHints() {
 /// callback instead is always thread-safe, as SDL holds a lock
 /// on the thread subsystem during the callback.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_SetHint
 /// \sa SDL_SetHintWithPriority
@@ -174,7 +174,7 @@ String? sdlGetHint(String? name) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetHint
 /// \sa SDL_SetHint
@@ -208,7 +208,7 @@ bool sdlGetHintBoolean(String? name, bool defaultValue) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_RemoveHintCallback
 ///
@@ -245,7 +245,7 @@ bool sdlAddHintCallback(
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_AddHintCallback
 ///

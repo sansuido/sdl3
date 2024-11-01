@@ -942,6 +942,153 @@ String? ttfGetFontStyleName(Pointer<TtfFont> font) {
 }
 
 ///
+/// Render UTF-8 text at fast quality to a new 8-bit surface.
+///
+/// This function will allocate a new 8-bit, palettized surface. The surface's
+/// 0 pixel will be the colorkey, giving a transparent background. The 1 pixel
+/// will be set to the text color.
+///
+/// This will not word-wrap the string; you'll get a surface with a single line
+/// of text, as long as the string requires. You can use
+/// TTF_RenderText_Solid_Wrapped() instead if you need to wrap the output to
+/// multiple lines.
+///
+/// This will not wrap on newline characters.
+///
+/// You can render at other quality levels with TTF_RenderText_Shaded,
+/// TTF_RenderText_Blended, and TTF_RenderText_LCD.
+///
+/// \param font the font to render with.
+/// \param text text to render, in UTF-8 encoding.
+/// \param length the length of the text, in bytes, or 0 for null terminated
+/// text.
+/// \param fg the foreground color for the text.
+/// \returns a new 8-bit, palettized surface, or NULL if there was an error.
+///
+/// \threadsafety This function should be called on the thread that created the
+/// font.
+///
+/// \since This function is available since SDL_ttf 3.0.0.
+///
+/// \sa TTF_RenderText_Blended
+/// \sa TTF_RenderText_LCD
+/// \sa TTF_RenderText_Shaded
+/// \sa TTF_RenderText_Solid
+/// \sa TTF_RenderText_Solid_Wrapped
+///
+/// ```c
+/// extern SDL_DECLSPEC SDL_Surface * SDLCALL TTF_RenderText_Solid(TTF_Font *font, const char *text, size_t length, SDL_Color fg)
+/// ```
+Pointer<SdlSurface> ttfRenderTextSolid(
+    Pointer<TtfFont> font, String? text, int length, SdlColor fg) {
+  final ttfRenderTextSolidLookupFunction = libSdl3Ttf.lookupFunction<
+      Pointer<SdlSurface> Function(Pointer<TtfFont> font, Pointer<Utf8> text,
+          Uint32 length, SdlColor fg),
+      Pointer<SdlSurface> Function(Pointer<TtfFont> font, Pointer<Utf8> text,
+          int length, SdlColor fg)>('TTF_RenderText_Solid');
+  final textPointer = text != null ? text.toNativeUtf8() : nullptr;
+  final result =
+      ttfRenderTextSolidLookupFunction(font, textPointer, length, fg);
+  calloc.free(textPointer);
+  return result;
+}
+
+///
+/// Render word-wrapped UTF-8 text at fast quality to a new 8-bit surface.
+///
+/// This function will allocate a new 8-bit, palettized surface. The surface's
+/// 0 pixel will be the colorkey, giving a transparent background. The 1 pixel
+/// will be set to the text color.
+///
+/// Text is wrapped to multiple lines on line endings and on word boundaries if
+/// it extends beyond `wrapLength` in pixels.
+///
+/// If wrapLength is 0, this function will only wrap on newline characters.
+///
+/// You can render at other quality levels with TTF_RenderText_Shaded_Wrapped,
+/// TTF_RenderText_Blended_Wrapped, and TTF_RenderText_LCD_Wrapped.
+///
+/// \param font the font to render with.
+/// \param text text to render, in UTF-8 encoding.
+/// \param length the length of the text, in bytes, or 0 for null terminated
+/// text.
+/// \param fg the foreground color for the text.
+/// \param wrapLength the maximum width of the text surface or 0 to wrap on
+/// newline characters.
+/// \returns a new 8-bit, palettized surface, or NULL if there was an error.
+///
+/// \threadsafety This function should be called on the thread that created the
+/// font.
+///
+/// \since This function is available since SDL_ttf 3.0.0.
+///
+/// \sa TTF_RenderText_Blended_Wrapped
+/// \sa TTF_RenderText_LCD_Wrapped
+/// \sa TTF_RenderText_Shaded_Wrapped
+/// \sa TTF_RenderText_Solid
+///
+/// ```c
+/// extern SDL_DECLSPEC SDL_Surface * SDLCALL TTF_RenderText_Solid_Wrapped(TTF_Font *font, const char *text, size_t length, SDL_Color fg, int wrapLength)
+/// ```
+Pointer<SdlSurface> ttfRenderTextSolidWrapped(Pointer<TtfFont> font,
+    String? text, int length, SdlColor fg, int wrapLength) {
+  final ttfRenderTextSolidWrappedLookupFunction = libSdl3Ttf.lookupFunction<
+      Pointer<SdlSurface> Function(Pointer<TtfFont> font, Pointer<Utf8> text,
+          Uint32 length, SdlColor fg, Int32 wrapLength),
+      Pointer<SdlSurface> Function(
+          Pointer<TtfFont> font,
+          Pointer<Utf8> text,
+          int length,
+          SdlColor fg,
+          int wrapLength)>('TTF_RenderText_Solid_Wrapped');
+  final textPointer = text != null ? text.toNativeUtf8() : nullptr;
+  final result = ttfRenderTextSolidWrappedLookupFunction(
+      font, textPointer, length, fg, wrapLength);
+  calloc.free(textPointer);
+  return result;
+}
+
+///
+/// Render a single 32-bit glyph at fast quality to a new 8-bit surface.
+///
+/// This function will allocate a new 8-bit, palettized surface. The surface's
+/// 0 pixel will be the colorkey, giving a transparent background. The 1 pixel
+/// will be set to the text color.
+///
+/// The glyph is rendered without any padding or centering in the X direction,
+/// and aligned normally in the Y direction.
+///
+/// You can render at other quality levels with TTF_RenderGlyph_Shaded,
+/// TTF_RenderGlyph_Blended, and TTF_RenderGlyph_LCD.
+///
+/// \param font the font to render with.
+/// \param ch the character to render.
+/// \param fg the foreground color for the text.
+/// \returns a new 8-bit, palettized surface, or NULL if there was an error.
+///
+/// \threadsafety This function should be called on the thread that created the
+/// font.
+///
+/// \since This function is available since SDL_ttf 3.0.0.
+///
+/// \sa TTF_RenderGlyph_Blended
+/// \sa TTF_RenderGlyph_LCD
+/// \sa TTF_RenderGlyph_Shaded
+///
+/// ```c
+/// extern SDL_DECLSPEC SDL_Surface * SDLCALL TTF_RenderGlyph_Solid(TTF_Font *font, Uint32 ch, SDL_Color fg)
+/// ```
+Pointer<SdlSurface> ttfRenderGlyphSolid(
+    Pointer<TtfFont> font, int ch, SdlColor fg) {
+  final ttfRenderGlyphSolidLookupFunction = libSdl3Ttf.lookupFunction<
+      Pointer<SdlSurface> Function(
+          Pointer<TtfFont> font, Uint32 ch, SdlColor fg),
+      Pointer<SdlSurface> Function(
+          Pointer<TtfFont> font, int ch, SdlColor fg)>('TTF_RenderGlyph_Solid');
+  return ttfRenderGlyphSolidLookupFunction(font, ch, fg);
+}
+
+///
 /// Set direction to be used for text shaping by a font.
 ///
 /// Possible direction values are:
@@ -1313,15 +1460,15 @@ bool ttfGetStringSize(Pointer<TtfFont> font, String? text, int length,
 /// specified string will take to fully render.
 ///
 /// Text is wrapped to multiple lines on line endings and on word boundaries if
-/// it extends beyond `wrapLength` in pixels.
+/// it extends beyond `wrap_width` in pixels.
 ///
-/// If wrapLength is 0, this function will only wrap on newline characters.
+/// If wrap_width is 0, this function will only wrap on newline characters.
 ///
 /// \param font the font to query.
 /// \param text text to calculate, in UTF-8 encoding.
 /// \param length the length of the text, in bytes, or 0 for null terminated
 /// text.
-/// \param wrapLength the maximum width or 0 to wrap on newline characters.
+/// \param wrap_width the maximum width or 0 to wrap on newline characters.
 /// \param w will be filled with width, in pixels, on return.
 /// \param h will be filled with height, in pixels, on return.
 /// \returns true on success or false on failure; call SDL_GetError() for more
@@ -1333,23 +1480,23 @@ bool ttfGetStringSize(Pointer<TtfFont> font, String? text, int length,
 /// \since This function is available since SDL_ttf 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC bool SDLCALL TTF_GetStringSizeWrapped(TTF_Font *font, const char *text, size_t length, int wrapLength, int *w, int *h)
+/// extern SDL_DECLSPEC bool SDLCALL TTF_GetStringSizeWrapped(TTF_Font *font, const char *text, size_t length, int wrap_width, int *w, int *h)
 /// ```
 bool ttfGetStringSizeWrapped(Pointer<TtfFont> font, String? text, int length,
-    int wrapLength, Pointer<Int32> w, Pointer<Int32> h) {
+    int wrapWidth, Pointer<Int32> w, Pointer<Int32> h) {
   final ttfGetStringSizeWrappedLookupFunction = libSdl3Ttf.lookupFunction<
       Uint8 Function(Pointer<TtfFont> font, Pointer<Utf8> text, Uint32 length,
-          Int32 wrapLength, Pointer<Int32> w, Pointer<Int32> h),
+          Int32 wrapWidth, Pointer<Int32> w, Pointer<Int32> h),
       int Function(
           Pointer<TtfFont> font,
           Pointer<Utf8> text,
           int length,
-          int wrapLength,
+          int wrapWidth,
           Pointer<Int32> w,
           Pointer<Int32> h)>('TTF_GetStringSizeWrapped');
   final textPointer = text != null ? text.toNativeUtf8() : nullptr;
   final result = ttfGetStringSizeWrappedLookupFunction(
-          font, textPointer, length, wrapLength, w, h) ==
+          font, textPointer, length, wrapWidth, w, h) ==
       1;
   calloc.free(textPointer);
   return result;
@@ -1359,7 +1506,7 @@ bool ttfGetStringSizeWrapped(Pointer<TtfFont> font, String? text, int length,
 /// Calculate how much of a UTF-8 string will fit in a given width.
 ///
 /// This reports the number of characters that can be rendered before reaching
-/// `measure_width`.
+/// `max_width`.
 ///
 /// This does not need to render the string to do this calculation.
 ///
@@ -1367,10 +1514,12 @@ bool ttfGetStringSizeWrapped(Pointer<TtfFont> font, String? text, int length,
 /// \param text text to calculate, in UTF-8 encoding.
 /// \param length the length of the text, in bytes, or 0 for null terminated
 /// text.
-/// \param measure_width maximum width, in pixels, available for the string.
-/// \param extent on return, filled with latest calculated width.
-/// \param count on return, filled with number of characters that can be
-/// rendered.
+/// \param max_width maximum width, in pixels, available for the string, or 0
+/// for unbounded width.
+/// \param measured_width a pointer filled in with the width, in pixels, of the
+/// string that will fit, may be NULL.
+/// \param measured_length a pointer filled in with the length, in bytes, of
+/// the string that will fit, may be NULL.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
@@ -1380,23 +1529,33 @@ bool ttfGetStringSizeWrapped(Pointer<TtfFont> font, String? text, int length,
 /// \since This function is available since SDL_ttf 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC bool SDLCALL TTF_MeasureString(TTF_Font *font, const char *text, size_t length, int measure_width, int *extent, int *count)
+/// extern SDL_DECLSPEC bool SDLCALL TTF_MeasureString(TTF_Font *font, const char *text, size_t length, int max_width, int *measured_width, size_t *measured_length)
 /// ```
-bool ttfMeasureString(Pointer<TtfFont> font, String? text, int length,
-    int measureWidth, Pointer<Int32> extent, Pointer<Int32> count) {
+bool ttfMeasureString(
+    Pointer<TtfFont> font,
+    String? text,
+    int length,
+    int maxWidth,
+    Pointer<Int32> measuredWidth,
+    Pointer<Uint32> measuredLength) {
   final ttfMeasureStringLookupFunction = libSdl3Ttf.lookupFunction<
-      Uint8 Function(Pointer<TtfFont> font, Pointer<Utf8> text, Uint32 length,
-          Int32 measureWidth, Pointer<Int32> extent, Pointer<Int32> count),
+      Uint8 Function(
+          Pointer<TtfFont> font,
+          Pointer<Utf8> text,
+          Uint32 length,
+          Int32 maxWidth,
+          Pointer<Int32> measuredWidth,
+          Pointer<Uint32> measuredLength),
       int Function(
           Pointer<TtfFont> font,
           Pointer<Utf8> text,
           int length,
-          int measureWidth,
-          Pointer<Int32> extent,
-          Pointer<Int32> count)>('TTF_MeasureString');
+          int maxWidth,
+          Pointer<Int32> measuredWidth,
+          Pointer<Uint32> measuredLength)>('TTF_MeasureString');
   final textPointer = text != null ? text.toNativeUtf8() : nullptr;
   final result = ttfMeasureStringLookupFunction(
-          font, textPointer, length, measureWidth, extent, count) ==
+          font, textPointer, length, maxWidth, measuredWidth, measuredLength) ==
       1;
   calloc.free(textPointer);
   return result;
@@ -1417,6 +1576,9 @@ bool ttfMeasureString(Pointer<TtfFont> font, String? text, int length,
 ///
 /// This will not wrap on newline characters.
 ///
+/// You can render at other quality levels with TTF_RenderText_Solid,
+/// TTF_RenderText_Blended, and TTF_RenderText_LCD.
+///
 /// \param font the font to render with.
 /// \param text text to render, in UTF-8 encoding.
 /// \param length the length of the text, in bytes, or 0 for null terminated
@@ -1433,6 +1595,7 @@ bool ttfMeasureString(Pointer<TtfFont> font, String? text, int length,
 /// \sa TTF_RenderText_Blended
 /// \sa TTF_RenderText_LCD
 /// \sa TTF_RenderText_Shaded_Wrapped
+/// \sa TTF_RenderText_Solid
 ///
 /// ```c
 /// extern SDL_DECLSPEC SDL_Surface * SDLCALL TTF_RenderText_Shaded(TTF_Font *font, const char *text, size_t length, SDL_Color fg, SDL_Color bg)
@@ -1460,9 +1623,12 @@ Pointer<SdlSurface> ttfRenderTextShaded(
 /// surface, or NULL if there was an error.
 ///
 /// Text is wrapped to multiple lines on line endings and on word boundaries if
-/// it extends beyond `wrapLength` in pixels.
+/// it extends beyond `wrap_width` in pixels.
 ///
-/// If wrapLength is 0, this function will only wrap on newline characters.
+/// If wrap_width is 0, this function will only wrap on newline characters.
+///
+/// You can render at other quality levels with TTF_RenderText_Solid_Wrapped,
+/// TTF_RenderText_Blended_Wrapped, and TTF_RenderText_LCD_Wrapped.
 ///
 /// \param font the font to render with.
 /// \param text text to render, in UTF-8 encoding.
@@ -1470,7 +1636,7 @@ Pointer<SdlSurface> ttfRenderTextShaded(
 /// text.
 /// \param fg the foreground color for the text.
 /// \param bg the background color for the text.
-/// \param wrapLength the maximum width of the text surface or 0 to wrap on
+/// \param wrap_width the maximum width of the text surface or 0 to wrap on
 /// newline characters.
 /// \returns a new 8-bit, palettized surface, or NULL if there was an error.
 ///
@@ -1482,25 +1648,26 @@ Pointer<SdlSurface> ttfRenderTextShaded(
 /// \sa TTF_RenderText_Blended_Wrapped
 /// \sa TTF_RenderText_LCD_Wrapped
 /// \sa TTF_RenderText_Shaded
+/// \sa TTF_RenderText_Solid_Wrapped
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_Surface * SDLCALL TTF_RenderText_Shaded_Wrapped(TTF_Font *font, const char *text, size_t length, SDL_Color fg, SDL_Color bg, int wrapLength)
+/// extern SDL_DECLSPEC SDL_Surface * SDLCALL TTF_RenderText_Shaded_Wrapped(TTF_Font *font, const char *text, size_t length, SDL_Color fg, SDL_Color bg, int wrap_width)
 /// ```
 Pointer<SdlSurface> ttfRenderTextShadedWrapped(Pointer<TtfFont> font,
-    String? text, int length, SdlColor fg, SdlColor bg, int wrapLength) {
+    String? text, int length, SdlColor fg, SdlColor bg, int wrapWidth) {
   final ttfRenderTextShadedWrappedLookupFunction = libSdl3Ttf.lookupFunction<
       Pointer<SdlSurface> Function(Pointer<TtfFont> font, Pointer<Utf8> text,
-          Uint32 length, SdlColor fg, SdlColor bg, Int32 wrapLength),
+          Uint32 length, SdlColor fg, SdlColor bg, Int32 wrapWidth),
       Pointer<SdlSurface> Function(
           Pointer<TtfFont> font,
           Pointer<Utf8> text,
           int length,
           SdlColor fg,
           SdlColor bg,
-          int wrapLength)>('TTF_RenderText_Shaded_Wrapped');
+          int wrapWidth)>('TTF_RenderText_Shaded_Wrapped');
   final textPointer = text != null ? text.toNativeUtf8() : nullptr;
   final result = ttfRenderTextShadedWrappedLookupFunction(
-      font, textPointer, length, fg, bg, wrapLength);
+      font, textPointer, length, fg, bg, wrapWidth);
   calloc.free(textPointer);
   return result;
 }
@@ -1516,6 +1683,9 @@ Pointer<SdlSurface> ttfRenderTextShadedWrapped(Pointer<TtfFont> font,
 /// The glyph is rendered without any padding or centering in the X direction,
 /// and aligned normally in the Y direction.
 ///
+/// You can render at other quality levels with TTF_RenderGlyph_Solid,
+/// TTF_RenderGlyph_Blended, and TTF_RenderGlyph_LCD.
+///
 /// \param font the font to render with.
 /// \param ch the codepoint to render.
 /// \param fg the foreground color for the text.
@@ -1529,6 +1699,7 @@ Pointer<SdlSurface> ttfRenderTextShadedWrapped(Pointer<TtfFont> font,
 ///
 /// \sa TTF_RenderGlyph_Blended
 /// \sa TTF_RenderGlyph_LCD
+/// \sa TTF_RenderGlyph_Solid
 ///
 /// ```c
 /// extern SDL_DECLSPEC SDL_Surface * SDLCALL TTF_RenderGlyph_Shaded(TTF_Font *font, Uint32 ch, SDL_Color fg, SDL_Color bg)
@@ -1557,6 +1728,9 @@ Pointer<SdlSurface> ttfRenderGlyphShaded(
 ///
 /// This will not wrap on newline characters.
 ///
+/// You can render at other quality levels with TTF_RenderText_Solid,
+/// TTF_RenderText_Shaded, and TTF_RenderText_LCD.
+///
 /// \param font the font to render with.
 /// \param text text to render, in UTF-8 encoding.
 /// \param length the length of the text, in bytes, or 0 for null terminated
@@ -1572,6 +1746,7 @@ Pointer<SdlSurface> ttfRenderGlyphShaded(
 /// \sa TTF_RenderText_Blended_Wrapped
 /// \sa TTF_RenderText_LCD
 /// \sa TTF_RenderText_Shaded
+/// \sa TTF_RenderText_Solid
 ///
 /// ```c
 /// extern SDL_DECLSPEC SDL_Surface * SDLCALL TTF_RenderText_Blended(TTF_Font *font, const char *text, size_t length, SDL_Color fg)
@@ -1598,16 +1773,19 @@ Pointer<SdlSurface> ttfRenderTextBlended(
 /// new surface, or NULL if there was an error.
 ///
 /// Text is wrapped to multiple lines on line endings and on word boundaries if
-/// it extends beyond `wrapLength` in pixels.
+/// it extends beyond `wrap_width` in pixels.
 ///
-/// If wrapLength is 0, this function will only wrap on newline characters.
+/// If wrap_width is 0, this function will only wrap on newline characters.
+///
+/// You can render at other quality levels with TTF_RenderText_Solid_Wrapped,
+/// TTF_RenderText_Shaded_Wrapped, and TTF_RenderText_LCD_Wrapped.
 ///
 /// \param font the font to render with.
 /// \param text text to render, in UTF-8 encoding.
 /// \param length the length of the text, in bytes, or 0 for null terminated
 /// text.
 /// \param fg the foreground color for the text.
-/// \param wrapLength the maximum width of the text surface or 0 to wrap on
+/// \param wrap_width the maximum width of the text surface or 0 to wrap on
 /// newline characters.
 /// \returns a new 32-bit, ARGB surface, or NULL if there was an error.
 ///
@@ -1619,24 +1797,25 @@ Pointer<SdlSurface> ttfRenderTextBlended(
 /// \sa TTF_RenderText_Blended
 /// \sa TTF_RenderText_LCD_Wrapped
 /// \sa TTF_RenderText_Shaded_Wrapped
+/// \sa TTF_RenderText_Solid_Wrapped
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_Surface * SDLCALL TTF_RenderText_Blended_Wrapped(TTF_Font *font, const char *text, size_t length, SDL_Color fg, int wrapLength)
+/// extern SDL_DECLSPEC SDL_Surface * SDLCALL TTF_RenderText_Blended_Wrapped(TTF_Font *font, const char *text, size_t length, SDL_Color fg, int wrap_width)
 /// ```
 Pointer<SdlSurface> ttfRenderTextBlendedWrapped(Pointer<TtfFont> font,
-    String? text, int length, SdlColor fg, int wrapLength) {
+    String? text, int length, SdlColor fg, int wrapWidth) {
   final ttfRenderTextBlendedWrappedLookupFunction = libSdl3Ttf.lookupFunction<
       Pointer<SdlSurface> Function(Pointer<TtfFont> font, Pointer<Utf8> text,
-          Uint32 length, SdlColor fg, Int32 wrapLength),
+          Uint32 length, SdlColor fg, Int32 wrapWidth),
       Pointer<SdlSurface> Function(
           Pointer<TtfFont> font,
           Pointer<Utf8> text,
           int length,
           SdlColor fg,
-          int wrapLength)>('TTF_RenderText_Blended_Wrapped');
+          int wrapWidth)>('TTF_RenderText_Blended_Wrapped');
   final textPointer = text != null ? text.toNativeUtf8() : nullptr;
   final result = ttfRenderTextBlendedWrappedLookupFunction(
-      font, textPointer, length, fg, wrapLength);
+      font, textPointer, length, fg, wrapWidth);
   calloc.free(textPointer);
   return result;
 }
@@ -1651,6 +1830,9 @@ Pointer<SdlSurface> ttfRenderTextBlendedWrapped(Pointer<TtfFont> font,
 /// The glyph is rendered without any padding or centering in the X direction,
 /// and aligned normally in the Y direction.
 ///
+/// You can render at other quality levels with TTF_RenderGlyph_Solid,
+/// TTF_RenderGlyph_Shaded, and TTF_RenderGlyph_LCD.
+///
 /// \param font the font to render with.
 /// \param ch the codepoint to render.
 /// \param fg the foreground color for the text.
@@ -1663,6 +1845,7 @@ Pointer<SdlSurface> ttfRenderTextBlendedWrapped(Pointer<TtfFont> font,
 ///
 /// \sa TTF_RenderGlyph_LCD
 /// \sa TTF_RenderGlyph_Shaded
+/// \sa TTF_RenderGlyph_Solid
 ///
 /// ```c
 /// extern SDL_DECLSPEC SDL_Surface * SDLCALL TTF_RenderGlyph_Blended(TTF_Font *font, Uint32 ch, SDL_Color fg)
@@ -1691,6 +1874,9 @@ Pointer<SdlSurface> ttfRenderGlyphBlended(
 ///
 /// This will not wrap on newline characters.
 ///
+/// You can render at other quality levels with TTF_RenderText_Solid,
+/// TTF_RenderText_Shaded, and TTF_RenderText_Blended.
+///
 /// \param font the font to render with.
 /// \param text text to render, in UTF-8 encoding.
 /// \param length the length of the text, in bytes, or 0 for null terminated
@@ -1707,6 +1893,7 @@ Pointer<SdlSurface> ttfRenderGlyphBlended(
 /// \sa TTF_RenderText_Blended
 /// \sa TTF_RenderText_LCD_Wrapped
 /// \sa TTF_RenderText_Shaded
+/// \sa TTF_RenderText_Solid
 ///
 /// ```c
 /// extern SDL_DECLSPEC SDL_Surface * SDLCALL TTF_RenderText_LCD(TTF_Font *font, const char *text, size_t length, SDL_Color fg, SDL_Color bg)
@@ -1734,9 +1921,12 @@ Pointer<SdlSurface> ttfRenderTextLcd(
 /// returns the new surface, or NULL if there was an error.
 ///
 /// Text is wrapped to multiple lines on line endings and on word boundaries if
-/// it extends beyond `wrapLength` in pixels.
+/// it extends beyond `wrap_width` in pixels.
 ///
-/// If wrapLength is 0, this function will only wrap on newline characters.
+/// If wrap_width is 0, this function will only wrap on newline characters.
+///
+/// You can render at other quality levels with TTF_RenderText_Solid_Wrapped,
+/// TTF_RenderText_Shaded_Wrapped, and TTF_RenderText_Blended_Wrapped.
 ///
 /// \param font the font to render with.
 /// \param text text to render, in UTF-8 encoding.
@@ -1744,7 +1934,7 @@ Pointer<SdlSurface> ttfRenderTextLcd(
 /// text.
 /// \param fg the foreground color for the text.
 /// \param bg the background color for the text.
-/// \param wrapLength the maximum width of the text surface or 0 to wrap on
+/// \param wrap_width the maximum width of the text surface or 0 to wrap on
 /// newline characters.
 /// \returns a new 32-bit, ARGB surface, or NULL if there was an error.
 ///
@@ -1756,25 +1946,26 @@ Pointer<SdlSurface> ttfRenderTextLcd(
 /// \sa TTF_RenderText_Blended_Wrapped
 /// \sa TTF_RenderText_LCD
 /// \sa TTF_RenderText_Shaded_Wrapped
+/// \sa TTF_RenderText_Solid_Wrapped
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_Surface * SDLCALL TTF_RenderText_LCD_Wrapped(TTF_Font *font, const char *text, size_t length, SDL_Color fg, SDL_Color bg, int wrapLength)
+/// extern SDL_DECLSPEC SDL_Surface * SDLCALL TTF_RenderText_LCD_Wrapped(TTF_Font *font, const char *text, size_t length, SDL_Color fg, SDL_Color bg, int wrap_width)
 /// ```
 Pointer<SdlSurface> ttfRenderTextLcdWrapped(Pointer<TtfFont> font, String? text,
-    int length, SdlColor fg, SdlColor bg, int wrapLength) {
+    int length, SdlColor fg, SdlColor bg, int wrapWidth) {
   final ttfRenderTextLcdWrappedLookupFunction = libSdl3Ttf.lookupFunction<
       Pointer<SdlSurface> Function(Pointer<TtfFont> font, Pointer<Utf8> text,
-          Uint32 length, SdlColor fg, SdlColor bg, Int32 wrapLength),
+          Uint32 length, SdlColor fg, SdlColor bg, Int32 wrapWidth),
       Pointer<SdlSurface> Function(
           Pointer<TtfFont> font,
           Pointer<Utf8> text,
           int length,
           SdlColor fg,
           SdlColor bg,
-          int wrapLength)>('TTF_RenderText_LCD_Wrapped');
+          int wrapWidth)>('TTF_RenderText_LCD_Wrapped');
   final textPointer = text != null ? text.toNativeUtf8() : nullptr;
   final result = ttfRenderTextLcdWrappedLookupFunction(
-      font, textPointer, length, fg, bg, wrapLength);
+      font, textPointer, length, fg, bg, wrapWidth);
   calloc.free(textPointer);
   return result;
 }
@@ -1790,6 +1981,9 @@ Pointer<SdlSurface> ttfRenderTextLcdWrapped(Pointer<TtfFont> font, String? text,
 /// The glyph is rendered without any padding or centering in the X direction,
 /// and aligned normally in the Y direction.
 ///
+/// You can render at other quality levels with TTF_RenderGlyph_Solid,
+/// TTF_RenderGlyph_Shaded, and TTF_RenderGlyph_Blended.
+///
 /// \param font the font to render with.
 /// \param ch the codepoint to render.
 /// \param fg the foreground color for the text.
@@ -1803,6 +1997,7 @@ Pointer<SdlSurface> ttfRenderTextLcdWrapped(Pointer<TtfFont> font, String? text,
 ///
 /// \sa TTF_RenderGlyph_Blended
 /// \sa TTF_RenderGlyph_Shaded
+/// \sa TTF_RenderGlyph_Solid
 ///
 /// ```c
 /// extern SDL_DECLSPEC SDL_Surface * SDLCALL TTF_RenderGlyph_LCD(TTF_Font *font, Uint32 ch, SDL_Color fg, SDL_Color bg)
@@ -1862,7 +2057,6 @@ Pointer<TtfTextEngine> ttfCreateSurfaceTextEngine() {
 ///
 /// \sa TTF_CreateSurfaceTextEngine
 /// \sa TTF_CreateText
-/// \sa TTF_CreateText_Wrapped
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL TTF_DrawSurfaceText(TTF_Text *text, int x, int y, SDL_Surface *surface)
@@ -1952,7 +2146,6 @@ Pointer<TtfTextEngine> ttfCreateRendererTextEngine(
 ///
 /// \sa TTF_CreateRendererTextEngine
 /// \sa TTF_CreateText
-/// \sa TTF_CreateText_Wrapped
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL TTF_DrawRendererText(TTF_Text *text, float x, float y)
@@ -1995,9 +2188,6 @@ void ttfDestroyRendererTextEngine(Pointer<TtfTextEngine> engine) {
 ///
 /// Create a text object from UTF-8 text and a text engine.
 ///
-/// This function is equivalent to `TTF_CreateText_Wrapped(engine, font, text,
-/// 0)` and will wrap on newline characters.
-///
 /// \param engine the text engine to use when creating the text object, may be
 /// NULL.
 /// \param font the font to render with.
@@ -2012,7 +2202,6 @@ void ttfDestroyRendererTextEngine(Pointer<TtfTextEngine> engine) {
 ///
 /// \since This function is available since SDL_ttf 3.0.0.
 ///
-/// \sa TTF_CreateText_Wrapped
 /// \sa TTF_DestroyText
 ///
 /// ```c
@@ -2030,58 +2219,6 @@ Pointer<TtfText> ttfCreateText(Pointer<TtfTextEngine> engine,
           int length)>('TTF_CreateText');
   final textPointer = text != null ? text.toNativeUtf8() : nullptr;
   final result = ttfCreateTextLookupFunction(engine, font, textPointer, length);
-  calloc.free(textPointer);
-  return result;
-}
-
-///
-/// Create a text object from word-wrapped UTF-8 text and a text engine.
-///
-/// Text is wrapped to multiple lines on line endings and on word boundaries if
-/// it extends beyond `wrapLength` in pixels.
-///
-/// If wrapLength is 0, this function will only wrap on newline characters.
-///
-/// \param engine the text engine to use when creating the text object, may be
-/// NULL.
-/// \param font the font to render with.
-/// \param text the text to use, in UTF-8 encoding.
-/// \param length the length of the text, in bytes, or 0 for null terminated
-/// text.
-/// \param wrapLength the maximum width of the text surface or 0 to wrap on
-/// newline characters.
-/// \returns a TTF_Text object or NULL on failure; call SDL_GetError() for more
-/// information.
-///
-/// \threadsafety This function should be called on the thread that created the
-/// font.
-///
-/// \since This function is available since SDL_ttf 3.0.0.
-///
-/// \sa TTF_CreateText
-/// \sa TTF_DestroyText
-///
-/// ```c
-/// extern SDL_DECLSPEC TTF_Text * SDLCALL TTF_CreateText_Wrapped(TTF_TextEngine *engine, TTF_Font *font, const char *text, size_t length, int wrapLength)
-/// ```
-Pointer<TtfText> ttfCreateTextWrapped(Pointer<TtfTextEngine> engine,
-    Pointer<TtfFont> font, String? text, int length, int wrapLength) {
-  final ttfCreateTextWrappedLookupFunction = libSdl3Ttf.lookupFunction<
-      Pointer<TtfText> Function(
-          Pointer<TtfTextEngine> engine,
-          Pointer<TtfFont> font,
-          Pointer<Utf8> text,
-          Uint32 length,
-          Int32 wrapLength),
-      Pointer<TtfText> Function(
-          Pointer<TtfTextEngine> engine,
-          Pointer<TtfFont> font,
-          Pointer<Utf8> text,
-          int length,
-          int wrapLength)>('TTF_CreateText_Wrapped');
-  final textPointer = text != null ? text.toNativeUtf8() : nullptr;
-  final result = ttfCreateTextWrappedLookupFunction(
-      engine, font, textPointer, length, wrapLength);
   calloc.free(textPointer);
   return result;
 }
@@ -2121,6 +2258,8 @@ int ttfGetTextProperties(Pointer<TtfText> text) {
 ///
 /// \since This function is available since SDL_ttf 3.0.0.
 ///
+/// \sa TTF_GetTextEngine
+///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL TTF_SetTextEngine(TTF_Text *text, TTF_TextEngine *engine)
 /// ```
@@ -2143,6 +2282,8 @@ bool ttfSetTextEngine(Pointer<TtfText> text, Pointer<TtfTextEngine> engine) {
 /// text.
 ///
 /// \since This function is available since SDL_ttf 3.0.0.
+///
+/// \sa TTF_SetTextEngine
 ///
 /// ```c
 /// extern SDL_DECLSPEC TTF_TextEngine * SDLCALL TTF_GetTextEngine(TTF_Text *text)
@@ -2170,6 +2311,8 @@ Pointer<TtfTextEngine> ttfGetTextEngine(Pointer<TtfText> text) {
 ///
 /// \since This function is available since SDL_ttf 3.0.0.
 ///
+/// \sa TTF_GetTextFont
+///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL TTF_SetTextFont(TTF_Text *text, TTF_Font *font)
 /// ```
@@ -2193,6 +2336,8 @@ bool ttfSetTextFont(Pointer<TtfText> text, Pointer<TtfFont> font) {
 ///
 /// \since This function is available since SDL_ttf 3.0.0.
 ///
+/// \sa TTF_SetTextFont
+///
 /// ```c
 /// extern SDL_DECLSPEC TTF_Font * SDLCALL TTF_GetTextFont(TTF_Text *text)
 /// ```
@@ -2201,6 +2346,143 @@ Pointer<TtfFont> ttfGetTextFont(Pointer<TtfText> text) {
       Pointer<TtfFont> Function(Pointer<TtfText> text),
       Pointer<TtfFont> Function(Pointer<TtfText> text)>('TTF_GetTextFont');
   return ttfGetTextFontLookupFunction(text);
+}
+
+///
+/// Set the color of a text object.
+///
+/// The default text color is white (255, 255, 255, 255).
+///
+/// \param text the TTF_Text to modify.
+/// \param r the red color value in the range of 0-255.
+/// \param g the green color value in the range of 0-255.
+/// \param b the blue color value in the range of 0-255.
+/// \param a the alpha value in the range of 0-255.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety This function should be called on the thread that created the
+/// text.
+///
+/// \since This function is available since SDL_ttf 3.0.0.
+///
+/// \sa TTF_GetTextColor
+/// \sa TTF_SetTextColorFloat
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL TTF_SetTextColor(TTF_Text *text, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
+/// ```
+bool ttfSetTextColor(Pointer<TtfText> text, int r, int g, int b, int a) {
+  final ttfSetTextColorLookupFunction = libSdl3Ttf.lookupFunction<
+      Uint8 Function(Pointer<TtfText> text, Uint8 r, Uint8 g, Uint8 b, Uint8 a),
+      int Function(Pointer<TtfText> text, int r, int g, int b,
+          int a)>('TTF_SetTextColor');
+  return ttfSetTextColorLookupFunction(text, r, g, b, a) == 1;
+}
+
+///
+/// Set the color of a text object.
+///
+/// The default text color is white (1.0f, 1.0f, 1.0f, 1.0f).
+///
+/// \param text the TTF_Text to modify.
+/// \param r the red color value, normally in the range of 0-1.
+/// \param g the green color value, normally in the range of 0-1.
+/// \param b the blue color value, normally in the range of 0-1.
+/// \param a the alpha value in the range of 0-1.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety This function should be called on the thread that created the
+/// text.
+///
+/// \since This function is available since SDL_ttf 3.0.0.
+///
+/// \sa TTF_GetTextColorFloat
+/// \sa TTF_SetTextColor
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL TTF_SetTextColorFloat(TTF_Text *text, float r, float g, float b, float a)
+/// ```
+bool ttfSetTextColorFloat(
+    Pointer<TtfText> text, double r, double g, double b, double a) {
+  final ttfSetTextColorFloatLookupFunction = libSdl3Ttf.lookupFunction<
+      Uint8 Function(Pointer<TtfText> text, Float r, Float g, Float b, Float a),
+      int Function(Pointer<TtfText> text, double r, double g, double b,
+          double a)>('TTF_SetTextColorFloat');
+  return ttfSetTextColorFloatLookupFunction(text, r, g, b, a) == 1;
+}
+
+///
+/// Get the color of a text object.
+///
+/// \param text the TTF_Text to query.
+/// \param r a pointer filled in with the red color value in the range of
+/// 0-255, may be NULL.
+/// \param g a pointer filled in with the green color value in the range of
+/// 0-255, may be NULL.
+/// \param b a pointer filled in with the blue color value in the range of
+/// 0-255, may be NULL.
+/// \param a a pointer filled in with the alpha value in the range of 0-255,
+/// may be NULL.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety This function should be called on the thread that created the
+/// text.
+///
+/// \since This function is available since SDL_ttf 3.0.0.
+///
+/// \sa TTF_GetTextColorFloat
+/// \sa TTF_SetTextColor
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL TTF_GetTextColor(TTF_Text *text, Uint8 *r, Uint8 *g, Uint8 *b, Uint8 *a)
+/// ```
+bool ttfGetTextColor(Pointer<TtfText> text, Pointer<Uint8> r, Pointer<Uint8> g,
+    Pointer<Uint8> b, Pointer<Uint8> a) {
+  final ttfGetTextColorLookupFunction = libSdl3Ttf.lookupFunction<
+      Uint8 Function(Pointer<TtfText> text, Pointer<Uint8> r, Pointer<Uint8> g,
+          Pointer<Uint8> b, Pointer<Uint8> a),
+      int Function(Pointer<TtfText> text, Pointer<Uint8> r, Pointer<Uint8> g,
+          Pointer<Uint8> b, Pointer<Uint8> a)>('TTF_GetTextColor');
+  return ttfGetTextColorLookupFunction(text, r, g, b, a) == 1;
+}
+
+///
+/// Get the color of a text object.
+///
+/// \param text the TTF_Text to query.
+/// \param r a pointer filled in with the red color value, normally in the
+/// range of 0-1, may be NULL.
+/// \param g a pointer filled in with the green color value, normally in the
+/// range of 0-1, may be NULL.
+/// \param b a pointer filled in with the blue color value, normally in the
+/// range of 0-1, may be NULL.
+/// \param a a pointer filled in with the alpha value in the range of 0-1, may
+/// be NULL.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety This function should be called on the thread that created the
+/// text.
+///
+/// \since This function is available since SDL_ttf 3.0.0.
+///
+/// \sa TTF_GetTextColor
+/// \sa TTF_SetTextColorFloat
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL TTF_GetTextColorFloat(TTF_Text *text, float *r, float *g, float *b, float *a)
+/// ```
+bool ttfGetTextColorFloat(Pointer<TtfText> text, Pointer<Float> r,
+    Pointer<Float> g, Pointer<Float> b, Pointer<Float> a) {
+  final ttfGetTextColorFloatLookupFunction = libSdl3Ttf.lookupFunction<
+      Uint8 Function(Pointer<TtfText> text, Pointer<Float> r, Pointer<Float> g,
+          Pointer<Float> b, Pointer<Float> a),
+      int Function(Pointer<TtfText> text, Pointer<Float> r, Pointer<Float> g,
+          Pointer<Float> b, Pointer<Float> a)>('TTF_GetTextColorFloat');
+  return ttfGetTextColorFloatLookupFunction(text, r, g, b, a) == 1;
 }
 
 ///
@@ -2217,6 +2499,8 @@ Pointer<TtfFont> ttfGetTextFont(Pointer<TtfText> text) {
 /// text.
 ///
 /// \since This function is available since SDL_ttf 3.0.0.
+///
+/// \sa TTF_GetTextPosition
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL TTF_SetTextPosition(TTF_Text *text, int x, int y)
@@ -2242,6 +2526,8 @@ bool ttfSetTextPosition(Pointer<TtfText> text, int x, int y) {
 ///
 /// \since This function is available since SDL_ttf 3.0.0.
 ///
+/// \sa TTF_SetTextPosition
+///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL TTF_GetTextPosition(TTF_Text *text, int *x, int *y)
 /// ```
@@ -2252,6 +2538,118 @@ bool ttfGetTextPosition(
       int Function(Pointer<TtfText> text, Pointer<Int32> x,
           Pointer<Int32> y)>('TTF_GetTextPosition');
   return ttfGetTextPositionLookupFunction(text, x, y) == 1;
+}
+
+///
+/// Set whether wrapping is enabled on a text object.
+///
+/// \param text the TTF_Text to modify.
+/// \param wrap_width the maximum width in pixels, 0 to wrap on newline
+/// characters.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety This function should be called on the thread that created the
+/// text.
+///
+/// \since This function is available since SDL_ttf 3.0.0.
+///
+/// \sa TTF_GetTextWrapWidth
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL TTF_SetTextWrapWidth(TTF_Text *text, int wrap_width)
+/// ```
+bool ttfSetTextWrapWidth(Pointer<TtfText> text, int wrapWidth) {
+  final ttfSetTextWrapWidthLookupFunction = libSdl3Ttf.lookupFunction<
+      Uint8 Function(Pointer<TtfText> text, Int32 wrapWidth),
+      int Function(
+          Pointer<TtfText> text, int wrapWidth)>('TTF_SetTextWrapWidth');
+  return ttfSetTextWrapWidthLookupFunction(text, wrapWidth) == 1;
+}
+
+///
+/// Get whether wrapping is enabled on a text object.
+///
+/// \param text the TTF_Text to query.
+/// \param wrap_width a pointer filled in with the maximum width in pixels or 0
+/// if the text is being wrapped on newline characters.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety This function should be called on the thread that created the
+/// text.
+///
+/// \since This function is available since SDL_ttf 3.0.0.
+///
+/// \sa TTF_SetTextWrapWidth
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL TTF_GetTextWrapWidth(TTF_Text *text, int *wrap_width)
+/// ```
+bool ttfGetTextWrapWidth(Pointer<TtfText> text, Pointer<Int32> wrapWidth) {
+  final ttfGetTextWrapWidthLookupFunction = libSdl3Ttf.lookupFunction<
+      Uint8 Function(Pointer<TtfText> text, Pointer<Int32> wrapWidth),
+      int Function(Pointer<TtfText> text,
+          Pointer<Int32> wrapWidth)>('TTF_GetTextWrapWidth');
+  return ttfGetTextWrapWidthLookupFunction(text, wrapWidth) == 1;
+}
+
+///
+/// Set whether whitespace should be visible when wrapping a text object.
+///
+/// If the whitespace is visible, it will take up space for purposes of
+/// alignment and wrapping. This is good for editing, but looks better when
+/// centered or aligned if whitespace around line wrapping is hidden. This
+/// defaults false.
+///
+/// \param text the TTF_Text to modify.
+/// \param visible true to show whitespace when wrapping text, false to hide
+/// it.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety This function should be called on the thread that created the
+/// text.
+///
+/// \since This function is available since SDL_ttf 3.0.0.
+///
+/// \sa TTF_TextWrapWhitespaceVisible
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL TTF_SetTextWrapWhitespaceVisible(TTF_Text *text, bool visible)
+/// ```
+bool ttfSetTextWrapWhitespaceVisible(Pointer<TtfText> text, bool visible) {
+  final ttfSetTextWrapWhitespaceVisibleLookupFunction =
+      libSdl3Ttf.lookupFunction<
+          Uint8 Function(Pointer<TtfText> text, Uint8 visible),
+          int Function(Pointer<TtfText> text,
+              int visible)>('TTF_SetTextWrapWhitespaceVisible');
+  return ttfSetTextWrapWhitespaceVisibleLookupFunction(text, visible ? 1 : 0) ==
+      1;
+}
+
+///
+/// Return whether whitespace is shown when wrapping a text object.
+///
+/// \param text the TTF_Text to query.
+/// \returns true if whitespace is shown when wrapping text, or false
+/// otherwise.
+///
+/// \threadsafety This function should be called on the thread that created the
+/// text.
+///
+/// \since This function is available since SDL_ttf 3.0.0.
+///
+/// \sa TTF_SetTextWrapWhitespaceVisible
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL TTF_TextWrapWhitespaceVisible(TTF_Text *text)
+/// ```
+bool ttfTextWrapWhitespaceVisible(Pointer<TtfText> text) {
+  final ttfTextWrapWhitespaceVisibleLookupFunction = libSdl3Ttf.lookupFunction<
+      Uint8 Function(Pointer<TtfText> text),
+      int Function(Pointer<TtfText> text)>('TTF_TextWrapWhitespaceVisible');
+  return ttfTextWrapWhitespaceVisibleLookupFunction(text) == 1;
 }
 
 ///
@@ -2268,6 +2666,10 @@ bool ttfGetTextPosition(
 /// text.
 ///
 /// \since This function is available since SDL_ttf 3.0.0.
+///
+/// \sa TTF_AppendTextString
+/// \sa TTF_DeleteTextString
+/// \sa TTF_InsertTextString
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL TTF_SetTextString(TTF_Text *text, const char *string, size_t length)
@@ -2304,6 +2706,10 @@ bool ttfSetTextString(Pointer<TtfText> text, String? string, int length) {
 ///
 /// \since This function is available since SDL_ttf 3.0.0.
 ///
+/// \sa TTF_AppendTextString
+/// \sa TTF_DeleteTextString
+/// \sa TTF_SetTextString
+///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL TTF_InsertTextString(TTF_Text *text, int offset, const char *string, size_t length)
 /// ```
@@ -2336,6 +2742,10 @@ bool ttfInsertTextString(
 /// text.
 ///
 /// \since This function is available since SDL_ttf 3.0.0.
+///
+/// \sa TTF_DeleteTextString
+/// \sa TTF_InsertTextString
+/// \sa TTF_SetTextString
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL TTF_AppendTextString(TTF_Text *text, const char *string, size_t length)
@@ -2371,6 +2781,10 @@ bool ttfAppendTextString(Pointer<TtfText> text, String? string, int length) {
 ///
 /// \since This function is available since SDL_ttf 3.0.0.
 ///
+/// \sa TTF_AppendTextString
+/// \sa TTF_InsertTextString
+/// \sa TTF_SetTextString
+///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL TTF_DeleteTextString(TTF_Text *text, int offset, int length)
 /// ```
@@ -2380,56 +2794,6 @@ bool ttfDeleteTextString(Pointer<TtfText> text, int offset, int length) {
       int Function(Pointer<TtfText> text, int offset,
           int length)>('TTF_DeleteTextString');
   return ttfDeleteTextStringLookupFunction(text, offset, length) == 1;
-}
-
-///
-/// Set whether wrapping is enabled on a text object.
-///
-/// \param text the TTF_Text to modify.
-/// \param wrapLength the maximum width in pixels, 0 to wrap on newline
-/// characters.
-/// \returns true on success or false on failure; call SDL_GetError() for more
-/// information.
-///
-/// \threadsafety This function should be called on the thread that created the
-/// text.
-///
-/// \since This function is available since SDL_ttf 3.0.0.
-///
-/// ```c
-/// extern SDL_DECLSPEC bool SDLCALL TTF_SetTextWrapping(TTF_Text *text, int wrapLength)
-/// ```
-bool ttfSetTextWrapping(Pointer<TtfText> text, int wrapLength) {
-  final ttfSetTextWrappingLookupFunction = libSdl3Ttf.lookupFunction<
-      Uint8 Function(Pointer<TtfText> text, Int32 wrapLength),
-      int Function(
-          Pointer<TtfText> text, int wrapLength)>('TTF_SetTextWrapping');
-  return ttfSetTextWrappingLookupFunction(text, wrapLength) == 1;
-}
-
-///
-/// Get whether wrapping is enabled on a text object.
-///
-/// \param text the TTF_Text to query.
-/// \param wrapLength a pointer filled in with the maximum width in pixels or 0
-/// if the text is being wrapped on newline characters.
-/// \returns true on success or false on failure; call SDL_GetError() for more
-/// information.
-///
-/// \threadsafety This function should be called on the thread that created the
-/// text.
-///
-/// \since This function is available since SDL_ttf 3.0.0.
-///
-/// ```c
-/// extern SDL_DECLSPEC bool SDLCALL TTF_GetTextWrapping(TTF_Text *text, int *wrapLength)
-/// ```
-bool ttfGetTextWrapping(Pointer<TtfText> text, Pointer<Int32> wrapLength) {
-  final ttfGetTextWrappingLookupFunction = libSdl3Ttf.lookupFunction<
-      Uint8 Function(Pointer<TtfText> text, Pointer<Int32> wrapLength),
-      int Function(Pointer<TtfText> text,
-          Pointer<Int32> wrapLength)>('TTF_GetTextWrapping');
-  return ttfGetTextWrappingLookupFunction(text, wrapLength) == 1;
 }
 
 ///

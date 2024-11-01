@@ -62,7 +62,7 @@ extension TtfFontEx on TtfFont {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL TTF_GetHarfBuzzVersion(int *major, int *minor, int *patch)
   /// ```
-  void getHarfBuzzVersion(
+  static void getHarfBuzzVersion(
       Pointer<Int32> major, Pointer<Int32> minor, Pointer<Int32> patch) {
     return ttfGetHarfBuzzVersion(major, minor, patch);
   }
@@ -1010,6 +1010,9 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   ///
   /// This will not wrap on newline characters.
   ///
+  /// You can render at other quality levels with TTF_RenderText_Solid,
+  /// TTF_RenderText_Blended, and TTF_RenderText_LCD.
+  ///
   /// \param font the font to render with.
   /// \param text text to render, in UTF-8 encoding.
   /// \param length the length of the text, in bytes, or 0 for null terminated
@@ -1026,6 +1029,7 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// \sa TTF_RenderText_Blended
   /// \sa TTF_RenderText_LCD
   /// \sa TTF_RenderText_Shaded_Wrapped
+  /// \sa TTF_RenderText_Solid
   ///
   /// ```c
   /// extern SDL_DECLSPEC SDL_Surface * SDLCALL TTF_RenderText_Shaded(TTF_Font *font, const char *text, size_t length, SDL_Color fg, SDL_Color bg)
@@ -1055,6 +1059,9 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   ///
   /// This will not wrap on newline characters.
   ///
+  /// You can render at other quality levels with TTF_RenderText_Solid,
+  /// TTF_RenderText_Blended, and TTF_RenderText_LCD.
+  ///
   /// \param font the font to render with.
   /// \param text text to render, in UTF-8 encoding.
   /// \param length the length of the text, in bytes, or 0 for null terminated
@@ -1071,6 +1078,7 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// \sa TTF_RenderText_Blended
   /// \sa TTF_RenderText_LCD
   /// \sa TTF_RenderText_Shaded_Wrapped
+  /// \sa TTF_RenderText_Solid
   ///
   /// ```c
   /// extern SDL_DECLSPEC SDL_Surface * SDLCALL TTF_RenderText_Shaded(TTF_Font *font, const char *text, size_t length, SDL_Color fg, SDL_Color bg)
@@ -1097,6 +1105,9 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// The glyph is rendered without any padding or centering in the X direction,
   /// and aligned normally in the Y direction.
   ///
+  /// You can render at other quality levels with TTF_RenderGlyph_Solid,
+  /// TTF_RenderGlyph_Blended, and TTF_RenderGlyph_LCD.
+  ///
   /// \param font the font to render with.
   /// \param ch the codepoint to render.
   /// \param fg the foreground color for the text.
@@ -1110,6 +1121,7 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   ///
   /// \sa TTF_RenderGlyph_Blended
   /// \sa TTF_RenderGlyph_LCD
+  /// \sa TTF_RenderGlyph_Solid
   ///
   /// ```c
   /// extern SDL_DECLSPEC SDL_Surface * SDLCALL TTF_RenderGlyph_Shaded(TTF_Font *font, Uint32 ch, SDL_Color fg, SDL_Color bg)
@@ -1132,6 +1144,9 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   ///
   /// This will not wrap on newline characters.
   ///
+  /// You can render at other quality levels with TTF_RenderText_Solid,
+  /// TTF_RenderText_Shaded, and TTF_RenderText_LCD.
+  ///
   /// \param font the font to render with.
   /// \param text text to render, in UTF-8 encoding.
   /// \param length the length of the text, in bytes, or 0 for null terminated
@@ -1147,6 +1162,7 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// \sa TTF_RenderText_Blended_Wrapped
   /// \sa TTF_RenderText_LCD
   /// \sa TTF_RenderText_Shaded
+  /// \sa TTF_RenderText_Solid
   ///
   /// ```c
   /// extern SDL_DECLSPEC SDL_Surface * SDLCALL TTF_RenderText_Blended(TTF_Font *font, const char *text, size_t length, SDL_Color fg)
@@ -1169,16 +1185,19 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// new surface, or NULL if there was an error.
   ///
   /// Text is wrapped to multiple lines on line endings and on word boundaries if
-  /// it extends beyond `wrapLength` in pixels.
+  /// it extends beyond `wrap_width` in pixels.
   ///
-  /// If wrapLength is 0, this function will only wrap on newline characters.
+  /// If wrap_width is 0, this function will only wrap on newline characters.
+  ///
+  /// You can render at other quality levels with TTF_RenderText_Solid_Wrapped,
+  /// TTF_RenderText_Shaded_Wrapped, and TTF_RenderText_LCD_Wrapped.
   ///
   /// \param font the font to render with.
   /// \param text text to render, in UTF-8 encoding.
   /// \param length the length of the text, in bytes, or 0 for null terminated
   /// text.
   /// \param fg the foreground color for the text.
-  /// \param wrapLength the maximum width of the text surface or 0 to wrap on
+  /// \param wrap_width the maximum width of the text surface or 0 to wrap on
   /// newline characters.
   /// \returns a new 32-bit, ARGB surface, or NULL if there was an error.
   ///
@@ -1190,9 +1209,10 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// \sa TTF_RenderText_Blended
   /// \sa TTF_RenderText_LCD_Wrapped
   /// \sa TTF_RenderText_Shaded_Wrapped
+  /// \sa TTF_RenderText_Solid_Wrapped
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_Surface * SDLCALL TTF_RenderText_Blended_Wrapped(TTF_Font *font, const char *text, size_t length, SDL_Color fg, int wrapLength)
+  /// extern SDL_DECLSPEC SDL_Surface * SDLCALL TTF_RenderText_Blended_Wrapped(TTF_Font *font, const char *text, size_t length, SDL_Color fg, int wrap_width)
   /// ```
   Pointer<SdlSurface> renderTextBlendedWrapped(
       String? text, SdlColor fg, int wrapLength) {
@@ -1215,6 +1235,9 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// The glyph is rendered without any padding or centering in the X direction,
   /// and aligned normally in the Y direction.
   ///
+  /// You can render at other quality levels with TTF_RenderGlyph_Solid,
+  /// TTF_RenderGlyph_Shaded, and TTF_RenderGlyph_LCD.
+  ///
   /// \param font the font to render with.
   /// \param ch the codepoint to render.
   /// \param fg the foreground color for the text.
@@ -1227,6 +1250,7 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   ///
   /// \sa TTF_RenderGlyph_LCD
   /// \sa TTF_RenderGlyph_Shaded
+  /// \sa TTF_RenderGlyph_Solid
   ///
   /// ```c
   /// extern SDL_DECLSPEC SDL_Surface * SDLCALL TTF_RenderGlyph_Blended(TTF_Font *font, Uint32 ch, SDL_Color fg)
@@ -1249,6 +1273,9 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   ///
   /// This will not wrap on newline characters.
   ///
+  /// You can render at other quality levels with TTF_RenderText_Solid,
+  /// TTF_RenderText_Shaded, and TTF_RenderText_Blended.
+  ///
   /// \param font the font to render with.
   /// \param text text to render, in UTF-8 encoding.
   /// \param length the length of the text, in bytes, or 0 for null terminated
@@ -1265,6 +1292,7 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// \sa TTF_RenderText_Blended
   /// \sa TTF_RenderText_LCD_Wrapped
   /// \sa TTF_RenderText_Shaded
+  /// \sa TTF_RenderText_Solid
   ///
   /// ```c
   /// extern SDL_DECLSPEC SDL_Surface * SDLCALL TTF_RenderText_LCD(TTF_Font *font, const char *text, size_t length, SDL_Color fg, SDL_Color bg)
@@ -1289,9 +1317,12 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// returns the new surface, or NULL if there was an error.
   ///
   /// Text is wrapped to multiple lines on line endings and on word boundaries if
-  /// it extends beyond `wrapLength` in pixels.
+  /// it extends beyond `wrap_width` in pixels.
   ///
-  /// If wrapLength is 0, this function will only wrap on newline characters.
+  /// If wrap_width is 0, this function will only wrap on newline characters.
+  ///
+  /// You can render at other quality levels with TTF_RenderText_Solid_Wrapped,
+  /// TTF_RenderText_Shaded_Wrapped, and TTF_RenderText_Blended_Wrapped.
   ///
   /// \param font the font to render with.
   /// \param text text to render, in UTF-8 encoding.
@@ -1299,7 +1330,7 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// text.
   /// \param fg the foreground color for the text.
   /// \param bg the background color for the text.
-  /// \param wrapLength the maximum width of the text surface or 0 to wrap on
+  /// \param wrap_width the maximum width of the text surface or 0 to wrap on
   /// newline characters.
   /// \returns a new 32-bit, ARGB surface, or NULL if there was an error.
   ///
@@ -1311,9 +1342,10 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// \sa TTF_RenderText_Blended_Wrapped
   /// \sa TTF_RenderText_LCD
   /// \sa TTF_RenderText_Shaded_Wrapped
+  /// \sa TTF_RenderText_Solid_Wrapped
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_Surface * SDLCALL TTF_RenderText_LCD_Wrapped(TTF_Font *font, const char *text, size_t length, SDL_Color fg, SDL_Color bg, int wrapLength)
+  /// extern SDL_DECLSPEC SDL_Surface * SDLCALL TTF_RenderText_LCD_Wrapped(TTF_Font *font, const char *text, size_t length, SDL_Color fg, SDL_Color bg, int wrap_width)
   /// ```
   Pointer<SdlSurface> renderTextLcdWrapped(
       String? text, int length, SdlColor fg, SdlColor bg, int wrapLength) {
@@ -1337,6 +1369,9 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// The glyph is rendered without any padding or centering in the X direction,
   /// and aligned normally in the Y direction.
   ///
+  /// You can render at other quality levels with TTF_RenderGlyph_Solid,
+  /// TTF_RenderGlyph_Shaded, and TTF_RenderGlyph_Blended.
+  ///
   /// \param font the font to render with.
   /// \param ch the codepoint to render.
   /// \param fg the foreground color for the text.
@@ -1350,6 +1385,7 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   ///
   /// \sa TTF_RenderGlyph_Blended
   /// \sa TTF_RenderGlyph_Shaded
+  /// \sa TTF_RenderGlyph_Solid
   ///
   /// ```c
   /// extern SDL_DECLSPEC SDL_Surface * SDLCALL TTF_RenderGlyph_LCD(TTF_Font *font, Uint32 ch, SDL_Color fg, SDL_Color bg)

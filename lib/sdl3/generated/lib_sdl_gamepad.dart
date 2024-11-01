@@ -20,6 +20,9 @@ import 'struct_sdl.dart';
 ///
 /// Buttons can be used as a gamepad axes and vice versa.
 ///
+/// If a device with this GUID is already plugged in, SDL will generate an
+/// SDL_EVENT_GAMEPAD_ADDED event.
+///
 /// This string shows an example of a valid mapping for a gamepad:
 ///
 /// ```c
@@ -32,10 +35,15 @@ import 'struct_sdl.dart';
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
+/// \sa SDL_AddGamepadMappingsFromFile
+/// \sa SDL_AddGamepadMappingsFromIO
 /// \sa SDL_GetGamepadMapping
 /// \sa SDL_GetGamepadMappingForGUID
+/// \sa SDL_HINT_GAMECONTROLLERCONFIG
+/// \sa SDL_HINT_GAMECONTROLLERCONFIG_FILE
+/// \sa SDL_EVENT_GAMEPAD_ADDED
 ///
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_AddGamepadMapping(const char *mapping)
@@ -59,6 +67,9 @@ int sdlAddGamepadMapping(String? mapping) {
 /// If a new mapping is loaded for an already known gamepad GUID, the later
 /// version will overwrite the one currently loaded.
 ///
+/// Any new mappings for already plugged in controllers will generate
+/// SDL_EVENT_GAMEPAD_ADDED events.
+///
 /// Mappings not belonging to the current platform or with no platform field
 /// specified will be ignored (i.e. mappings for Linux will be ignored in
 /// Windows, etc).
@@ -75,12 +86,15 @@ int sdlAddGamepadMapping(String? mapping) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_AddGamepadMapping
 /// \sa SDL_AddGamepadMappingsFromFile
 /// \sa SDL_GetGamepadMapping
 /// \sa SDL_GetGamepadMappingForGUID
+/// \sa SDL_HINT_GAMECONTROLLERCONFIG
+/// \sa SDL_HINT_GAMECONTROLLERCONFIG_FILE
+/// \sa SDL_EVENT_GAMEPAD_ADDED
 ///
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_AddGamepadMappingsFromIO(SDL_IOStream *src, bool closeio)
@@ -102,6 +116,9 @@ int sdlAddGamepadMappingsFromIo(Pointer<SdlIoStream> src, bool closeio) {
 /// If a new mapping is loaded for an already known gamepad GUID, the later
 /// version will overwrite the one currently loaded.
 ///
+/// Any new mappings for already plugged in controllers will generate
+/// SDL_EVENT_GAMEPAD_ADDED events.
+///
 /// Mappings not belonging to the current platform or with no platform field
 /// specified will be ignored (i.e. mappings for Linux will be ignored in
 /// Windows, etc).
@@ -112,12 +129,15 @@ int sdlAddGamepadMappingsFromIo(Pointer<SdlIoStream> src, bool closeio) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_AddGamepadMapping
 /// \sa SDL_AddGamepadMappingsFromIO
 /// \sa SDL_GetGamepadMapping
 /// \sa SDL_GetGamepadMappingForGUID
+/// \sa SDL_HINT_GAMECONTROLLERCONFIG
+/// \sa SDL_HINT_GAMECONTROLLERCONFIG_FILE
+/// \sa SDL_EVENT_GAMEPAD_ADDED
 ///
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_AddGamepadMappingsFromFile(const char *file)
@@ -140,7 +160,7 @@ int sdlAddGamepadMappingsFromFile(String? file) {
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_ReloadGamepadMappings(void)
@@ -162,7 +182,7 @@ bool sdlReloadGamepadMappings() {
 /// single allocation that should be freed with SDL_free() when it is
 /// no longer needed.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
 /// extern SDL_DECLSPEC char ** SDLCALL SDL_GetGamepadMappings(int *count)
@@ -183,7 +203,7 @@ Pointer<Pointer<Int8>> sdlGetGamepadMappings(Pointer<Int32> count) {
 /// information. This should be freed with SDL_free() when it is no
 /// longer needed.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetJoystickGUIDForID
 /// \sa SDL_GetJoystickGUID
@@ -208,7 +228,7 @@ Pointer<Int8> sdlGetGamepadMappingForGuid(SdlGuid guid) {
 /// available; call SDL_GetError() for more information. This should
 /// be freed with SDL_free() when it is no longer needed.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_AddGamepadMapping
 /// \sa SDL_GetGamepadMappingForID
@@ -237,7 +257,7 @@ Pointer<Int8> sdlGetGamepadMapping(Pointer<SdlGamepad> gamepad) {
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_AddGamepadMapping
 /// \sa SDL_GetGamepadMapping
@@ -262,7 +282,7 @@ bool sdlSetGamepadMapping(int instanceId, String? mapping) {
 ///
 /// \returns true if a gamepad is connected, false otherwise.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetGamepads
 ///
@@ -284,7 +304,7 @@ bool sdlHasGamepad() {
 /// call SDL_GetError() for more information. This should be freed
 /// with SDL_free() when it is no longer needed.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_HasGamepad
 /// \sa SDL_OpenGamepad
@@ -306,7 +326,7 @@ Pointer<Uint32> sdlGetGamepads(Pointer<Int32> count) {
 /// \returns true if the given joystick is supported by the gamepad interface,
 /// false if it isn't or it's an invalid index.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetJoysticks
 /// \sa SDL_OpenGamepad
@@ -330,7 +350,7 @@ bool sdlIsGamepad(int instanceId) {
 /// \returns the name of the selected gamepad. If no name can be found, this
 /// function returns NULL; call SDL_GetError() for more information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetGamepadName
 /// \sa SDL_GetGamepads
@@ -358,7 +378,7 @@ String? sdlGetGamepadNameForId(int instanceId) {
 /// \returns the path of the selected gamepad. If no path can be found, this
 /// function returns NULL; call SDL_GetError() for more information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetGamepadPath
 /// \sa SDL_GetGamepads
@@ -385,7 +405,7 @@ String? sdlGetGamepadPathForId(int instanceId) {
 /// \param instance_id the joystick instance ID.
 /// \returns the player index of a gamepad, or -1 if it's not available.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetGamepadPlayerIndex
 /// \sa SDL_GetGamepads
@@ -409,7 +429,7 @@ int sdlGetGamepadPlayerIndexForId(int instanceId) {
 /// \returns the GUID of the selected gamepad. If called on an invalid index,
 /// this function returns a zero GUID.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GUIDToString
 /// \sa SDL_GetGamepads
@@ -434,7 +454,7 @@ SdlGuid sdlGetGamepadGuidForId(int instanceId) {
 /// \returns the USB vendor ID of the selected gamepad. If called on an invalid
 /// index, this function returns zero.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetGamepadVendor
 /// \sa SDL_GetGamepads
@@ -459,7 +479,7 @@ int sdlGetGamepadVendorForId(int instanceId) {
 /// \returns the USB product ID of the selected gamepad. If called on an
 /// invalid index, this function returns zero.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetGamepadProduct
 /// \sa SDL_GetGamepads
@@ -484,7 +504,7 @@ int sdlGetGamepadProductForId(int instanceId) {
 /// \returns the product version of the selected gamepad. If called on an
 /// invalid index, this function returns zero.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetGamepadProductVersion
 /// \sa SDL_GetGamepads
@@ -507,7 +527,7 @@ int sdlGetGamepadProductVersionForId(int instanceId) {
 /// \param instance_id the joystick instance ID.
 /// \returns the gamepad type.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetGamepadType
 /// \sa SDL_GetGamepads
@@ -531,7 +551,7 @@ int sdlGetGamepadTypeForId(int instanceId) {
 /// \param instance_id the joystick instance ID.
 /// \returns the gamepad type.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetGamepadTypeForID
 /// \sa SDL_GetGamepads
@@ -556,7 +576,7 @@ int sdlGetRealGamepadTypeForId(int instanceId) {
 /// \returns the mapping string. Returns NULL if no mapping is available. This
 /// should be freed with SDL_free() when it is no longer needed.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetGamepads
 /// \sa SDL_GetGamepadMapping
@@ -578,7 +598,7 @@ Pointer<Int8> sdlGetGamepadMappingForId(int instanceId) {
 /// \returns a gamepad identifier or NULL if an error occurred; call
 /// SDL_GetError() for more information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_CloseGamepad
 /// \sa SDL_IsGamepad
@@ -601,7 +621,7 @@ Pointer<SdlGamepad> sdlOpenGamepad(int instanceId) {
 /// \returns an SDL_Gamepad on success or NULL on failure or if it hasn't been
 /// opened yet; call SDL_GetError() for more information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
 /// extern SDL_DECLSPEC SDL_Gamepad * SDLCALL SDL_GetGamepadFromID(SDL_JoystickID instance_id)
@@ -619,7 +639,7 @@ Pointer<SdlGamepad> sdlGetGamepadFromId(int instanceId) {
 /// \param player_index the player index, which different from the instance ID.
 /// \returns the SDL_Gamepad associated with a player index.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetGamepadPlayerIndex
 /// \sa SDL_SetGamepadPlayerIndex
@@ -658,7 +678,7 @@ Pointer<SdlGamepad> sdlGetGamepadFromPlayerIndex(int playerIndex) {
 /// \returns a valid property ID on success or 0 on failure; call
 /// SDL_GetError() for more information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
 /// extern SDL_DECLSPEC SDL_PropertiesID SDLCALL SDL_GetGamepadProperties(SDL_Gamepad *gamepad)
@@ -678,7 +698,7 @@ int sdlGetGamepadProperties(Pointer<SdlGamepad> gamepad) {
 /// \returns the instance ID of the specified gamepad on success or 0 on
 /// failure; call SDL_GetError() for more information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
 /// extern SDL_DECLSPEC SDL_JoystickID SDLCALL SDL_GetGamepadID(SDL_Gamepad *gamepad)
@@ -698,7 +718,7 @@ int sdlGetGamepadId(Pointer<SdlGamepad> gamepad) {
 /// \returns the implementation dependent name for the gamepad, or NULL if
 /// there is no name or the identifier passed is invalid.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetGamepadNameForID
 ///
@@ -725,7 +745,7 @@ String? sdlGetGamepadName(Pointer<SdlGamepad> gamepad) {
 /// \returns the implementation dependent path for the gamepad, or NULL if
 /// there is no path or the identifier passed is invalid.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetGamepadPathForID
 ///
@@ -751,7 +771,7 @@ String? sdlGetGamepadPath(Pointer<SdlGamepad> gamepad) {
 /// \returns the gamepad type, or SDL_GAMEPAD_TYPE_UNKNOWN if it's not
 /// available.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetGamepadTypeForID
 ///
@@ -772,7 +792,7 @@ int sdlGetGamepadType(Pointer<SdlGamepad> gamepad) {
 /// \returns the gamepad type, or SDL_GAMEPAD_TYPE_UNKNOWN if it's not
 /// available.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetRealGamepadTypeForID
 ///
@@ -794,7 +814,7 @@ int sdlGetRealGamepadType(Pointer<SdlGamepad> gamepad) {
 /// \param gamepad the gamepad object to query.
 /// \returns the player index for gamepad, or -1 if it's not available.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_SetGamepadPlayerIndex
 ///
@@ -817,7 +837,7 @@ int sdlGetGamepadPlayerIndex(Pointer<SdlGamepad> gamepad) {
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetGamepadPlayerIndex
 ///
@@ -840,7 +860,7 @@ bool sdlSetGamepadPlayerIndex(Pointer<SdlGamepad> gamepad, int playerIndex) {
 /// \param gamepad the gamepad object to query.
 /// \returns the USB vendor ID, or zero if unavailable.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetGamepadVendorForID
 ///
@@ -862,7 +882,7 @@ int sdlGetGamepadVendor(Pointer<SdlGamepad> gamepad) {
 /// \param gamepad the gamepad object to query.
 /// \returns the USB product ID, or zero if unavailable.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetGamepadProductForID
 ///
@@ -884,7 +904,7 @@ int sdlGetGamepadProduct(Pointer<SdlGamepad> gamepad) {
 /// \param gamepad the gamepad object to query.
 /// \returns the USB product version, or zero if unavailable.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetGamepadProductVersionForID
 ///
@@ -907,7 +927,7 @@ int sdlGetGamepadProductVersion(Pointer<SdlGamepad> gamepad) {
 /// \param gamepad the gamepad object to query.
 /// \returns the gamepad firmware version, or zero if unavailable.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
 /// extern SDL_DECLSPEC Uint16 SDLCALL SDL_GetGamepadFirmwareVersion(SDL_Gamepad *gamepad)
@@ -928,7 +948,7 @@ int sdlGetGamepadFirmwareVersion(Pointer<SdlGamepad> gamepad) {
 /// \param gamepad the gamepad object to query.
 /// \returns the serial number, or NULL if unavailable.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetGamepadSerial(SDL_Gamepad *gamepad)
@@ -954,7 +974,7 @@ String? sdlGetGamepadSerial(Pointer<SdlGamepad> gamepad) {
 /// \param gamepad the gamepad object to query.
 /// \returns the gamepad handle, or 0 if unavailable.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
 /// extern SDL_DECLSPEC Uint64 SDLCALL SDL_GetGamepadSteamHandle(SDL_Gamepad *gamepad)
@@ -974,7 +994,7 @@ int sdlGetGamepadSteamHandle(Pointer<SdlGamepad> gamepad) {
 /// `SDL_JOYSTICK_CONNECTION_INVALID` on failure; call SDL_GetError()
 /// for more information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
 /// extern SDL_DECLSPEC SDL_JoystickConnectionState SDLCALL SDL_GetGamepadConnectionState(SDL_Gamepad *gamepad)
@@ -1003,7 +1023,7 @@ int sdlGetGamepadConnectionState(Pointer<SdlGamepad> gamepad) {
 /// battery.
 /// \returns the current battery state.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
 /// extern SDL_DECLSPEC SDL_PowerState SDLCALL SDL_GetGamepadPowerInfo(SDL_Gamepad *gamepad, int *percent)
@@ -1025,7 +1045,7 @@ int sdlGetGamepadPowerInfo(
 /// \returns true if the gamepad has been opened and is currently connected, or
 /// false if not.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GamepadConnected(SDL_Gamepad *gamepad)
@@ -1053,7 +1073,7 @@ bool sdlGamepadConnected(Pointer<SdlGamepad> gamepad) {
 /// \returns an SDL_Joystick object, or NULL on failure; call SDL_GetError()
 /// for more information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
 /// extern SDL_DECLSPEC SDL_Joystick * SDLCALL SDL_GetGamepadJoystick(SDL_Gamepad *gamepad)
@@ -1074,7 +1094,7 @@ Pointer<SdlJoystick> sdlGetGamepadJoystick(Pointer<SdlGamepad> gamepad) {
 ///
 /// \param enabled whether to process gamepad events or not.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GamepadEventsEnabled
 /// \sa SDL_UpdateGamepads
@@ -1097,7 +1117,7 @@ void sdlSetGamepadEventsEnabled(bool enabled) {
 ///
 /// \returns true if gamepad events are being processed, false otherwise.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_SetGamepadEventsEnabled
 ///
@@ -1121,7 +1141,7 @@ bool sdlGamepadEventsEnabled() {
 /// single allocation that should be freed with SDL_free() when it is
 /// no longer needed.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
 /// extern SDL_DECLSPEC SDL_GamepadBinding ** SDLCALL SDL_GetGamepadBindings(SDL_Gamepad *gamepad, int *count)
@@ -1143,7 +1163,7 @@ Pointer<Pointer<SdlGamepadBinding>> sdlGetGamepadBindings(
 /// enabled. Under such circumstances, it will not be necessary to call this
 /// function.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_UpdateGamepads(void)
@@ -1166,7 +1186,7 @@ void sdlUpdateGamepads() {
 /// \returns the SDL_GamepadType enum corresponding to the input string, or
 /// `SDL_GAMEPAD_TYPE_UNKNOWN` if no match was found.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetGamepadStringForType
 ///
@@ -1191,7 +1211,7 @@ int sdlGetGamepadTypeFromString(String? str) {
 /// specified. The string returned is of the format used by
 /// SDL_Gamepad mapping strings.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetGamepadTypeFromString
 ///
@@ -1225,7 +1245,7 @@ String? sdlGetGamepadStringForType(int type) {
 /// \returns the SDL_GamepadAxis enum corresponding to the input string, or
 /// `SDL_GAMEPAD_AXIS_INVALID` if no match was found.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetGamepadStringForAxis
 ///
@@ -1250,7 +1270,7 @@ int sdlGetGamepadAxisFromString(String? str) {
 /// specified. The string returned is of the format used by
 /// SDL_Gamepad mapping strings.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetGamepadAxisFromString
 ///
@@ -1278,7 +1298,7 @@ String? sdlGetGamepadStringForAxis(int axis) {
 /// \param axis an axis enum value (an SDL_GamepadAxis value).
 /// \returns true if the gamepad has this axis, false otherwise.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GamepadHasButton
 /// \sa SDL_GetGamepadAxis
@@ -1311,7 +1331,7 @@ bool sdlGamepadHasAxis(Pointer<SdlGamepad> gamepad, int axis) {
 /// \returns axis state (including 0) on success or 0 (also) on failure; call
 /// SDL_GetError() for more information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GamepadHasAxis
 /// \sa SDL_GetGamepadButton
@@ -1339,7 +1359,7 @@ int sdlGetGamepadAxis(Pointer<SdlGamepad> gamepad, int axis) {
 /// \returns the SDL_GamepadButton enum corresponding to the input string, or
 /// `SDL_GAMEPAD_BUTTON_INVALID` if no match was found.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetGamepadStringForButton
 ///
@@ -1364,7 +1384,7 @@ int sdlGetGamepadButtonFromString(String? str) {
 /// specified. The string returned is of the format used by
 /// SDL_Gamepad mapping strings.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetGamepadButtonFromString
 ///
@@ -1392,7 +1412,7 @@ String? sdlGetGamepadStringForButton(int button) {
 /// \param button a button enum value (an SDL_GamepadButton value).
 /// \returns true if the gamepad has this button, false otherwise.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GamepadHasAxis
 ///
@@ -1414,7 +1434,7 @@ bool sdlGamepadHasButton(Pointer<SdlGamepad> gamepad, int button) {
 /// \param button a button index (one of the SDL_GamepadButton values).
 /// \returns true if the button is pressed, false otherwise.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GamepadHasButton
 /// \sa SDL_GetGamepadAxis
@@ -1437,7 +1457,7 @@ bool sdlGetGamepadButton(Pointer<SdlGamepad> gamepad, int button) {
 /// \param button a button index (one of the SDL_GamepadButton values).
 /// \returns the SDL_GamepadButtonLabel enum corresponding to the button label.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetGamepadButtonLabel
 ///
@@ -1458,7 +1478,7 @@ int sdlGetGamepadButtonLabelForType(int type, int button) {
 /// \param button a button index (one of the SDL_GamepadButton values).
 /// \returns the SDL_GamepadButtonLabel enum corresponding to the button label.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetGamepadButtonLabelForType
 ///
@@ -1479,7 +1499,7 @@ int sdlGetGamepadButtonLabel(Pointer<SdlGamepad> gamepad, int button) {
 /// \param gamepad a gamepad.
 /// \returns number of touchpads.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetNumGamepadTouchpadFingers
 ///
@@ -1501,7 +1521,7 @@ int sdlGetNumGamepadTouchpads(Pointer<SdlGamepad> gamepad) {
 /// \param touchpad a touchpad.
 /// \returns number of supported simultaneous fingers.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetGamepadTouchpadFinger
 /// \sa SDL_GetNumGamepadTouchpads
@@ -1533,7 +1553,7 @@ int sdlGetNumGamepadTouchpadFingers(Pointer<SdlGamepad> gamepad, int touchpad) {
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetNumGamepadTouchpadFingers
 ///
@@ -1577,7 +1597,7 @@ bool sdlGetGamepadTouchpadFinger(
 /// \param type the type of sensor to query.
 /// \returns true if the sensor exists, false otherwise.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetGamepadSensorData
 /// \sa SDL_GetGamepadSensorDataRate
@@ -1603,7 +1623,7 @@ bool sdlGamepadHasSensor(Pointer<SdlGamepad> gamepad, int type) {
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GamepadHasSensor
 /// \sa SDL_GamepadSensorEnabled
@@ -1629,7 +1649,7 @@ bool sdlSetGamepadSensorEnabled(
 /// \param type the type of sensor to query.
 /// \returns true if the sensor is enabled, false otherwise.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_SetGamepadSensorEnabled
 ///
@@ -1651,7 +1671,7 @@ bool sdlGamepadSensorEnabled(Pointer<SdlGamepad> gamepad, int type) {
 /// \param type the type of sensor to query.
 /// \returns the data rate, or 0.0f if the data rate is not available.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
 /// extern SDL_DECLSPEC float SDLCALL SDL_GetGamepadSensorDataRate(SDL_Gamepad *gamepad, SDL_SensorType type)
@@ -1677,7 +1697,7 @@ double sdlGetGamepadSensorDataRate(Pointer<SdlGamepad> gamepad, int type) {
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetGamepadSensorData(SDL_Gamepad *gamepad, SDL_SensorType type, float *data, int num_values)
@@ -1712,7 +1732,7 @@ bool sdlGetGamepadSensorData(
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_RumbleGamepad(SDL_Gamepad *gamepad, Uint16 low_frequency_rumble, Uint16 high_frequency_rumble, Uint32 duration_ms)
@@ -1751,7 +1771,7 @@ bool sdlRumbleGamepad(Pointer<SdlGamepad> gamepad, int lowFrequencyRumble,
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_RumbleGamepad
 ///
@@ -1786,7 +1806,7 @@ bool sdlRumbleGamepadTriggers(Pointer<SdlGamepad> gamepad, int leftRumble,
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetGamepadLED(SDL_Gamepad *gamepad, Uint8 red, Uint8 green, Uint8 blue)
@@ -1810,7 +1830,7 @@ bool sdlSetGamepadLed(
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SendGamepadEffect(SDL_Gamepad *gamepad, const void *data, int size)
@@ -1831,7 +1851,7 @@ bool sdlSendGamepadEffect(
 /// \param gamepad a gamepad identifier previously returned by
 /// SDL_OpenGamepad().
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_OpenGamepad
 ///
@@ -1853,7 +1873,7 @@ void sdlCloseGamepad(Pointer<SdlGamepad> gamepad) {
 /// \param button a button on the gamepad.
 /// \returns the sfSymbolsName or NULL if the name can't be found.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetGamepadAppleSFSymbolsNameForAxis
 ///
@@ -1882,7 +1902,7 @@ String? sdlGetGamepadAppleSfSymbolsNameForButton(
 /// \param axis an axis on the gamepad.
 /// \returns the sfSymbolsName or NULL if the name can't be found.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetGamepadAppleSFSymbolsNameForButton
 ///

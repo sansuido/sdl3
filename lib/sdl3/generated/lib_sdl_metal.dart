@@ -16,7 +16,7 @@ import 'struct_sdl.dart';
 /// \param window the window.
 /// \returns handle NSView or UIView.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_Metal_DestroyView
 /// \sa SDL_Metal_GetLayer
@@ -40,7 +40,7 @@ Pointer<NativeType> sdlMetalCreateView(Pointer<SdlWindow> window) {
 ///
 /// \param view the SDL_MetalView object.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_Metal_CreateView
 ///
@@ -60,7 +60,7 @@ void sdlMetalDestroyView(Pointer<NativeType> view) {
 /// \param view the SDL_MetalView object.
 /// \returns a pointer.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
 /// extern SDL_DECLSPEC void * SDLCALL SDL_Metal_GetLayer(SDL_MetalView view)

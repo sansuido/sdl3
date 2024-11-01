@@ -52,7 +52,7 @@ import 'struct_sdl.dart';
 /// \param allow_many if non-zero, the user will be allowed to select multiple
 /// entries. Not all platforms support this option.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_DialogFileCallback
 /// \sa SDL_DialogFileFilter
@@ -141,7 +141,7 @@ void sdlShowOpenFileDialog(
 /// \param default_location the default folder or file to start the dialog at,
 /// may be NULL. Not all platforms support this option.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_DialogFileCallback
 /// \sa SDL_DialogFileFilter
@@ -221,7 +221,7 @@ void sdlShowSaveFileDialog(
 /// \param allow_many if non-zero, the user will be allowed to select multiple
 /// entries. Not all platforms support this option.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_DialogFileCallback
 /// \sa SDL_ShowOpenFileDialog

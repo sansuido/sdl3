@@ -40,7 +40,7 @@ extension PointEx on math.Point<double> {
   /// focus window.
   /// \returns a 32-bit button bitmask of the current button state.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_GetGlobalMouseState
   /// \sa SDL_GetRelativeMouseState
@@ -81,7 +81,7 @@ extension PointEx on math.Point<double> {
   /// \returns the current button state as a bitmask which can be tested using
   /// the SDL_BUTTON_MASK(X) macros.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_CaptureMouse
   /// \sa SDL_GetMouseState
@@ -112,7 +112,7 @@ extension PointEx on math.Point<double> {
   /// \param y a pointer filled with the last recorded y coordinate of the mouse.
   /// \returns a 32-bit button bitmask of the relative button state.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_GetMouseState
   ///
@@ -186,7 +186,7 @@ extension PointsEx on List<math.Point<double>> {
   /// \returns true if any points were enclosed or false if all the points were
   /// outside of the clipping rectangle.
   ///
-  /// \since This function is available since SDL 3.0.0.
+  /// \since This function is available since SDL 3.1.3.
   ///
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRectEnclosingPoints(const SDL_Point *points, int count, const SDL_Rect *clip, SDL_Rect *result)

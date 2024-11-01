@@ -80,7 +80,9 @@ import 'lib_sdl.dart';
 /// \returns an SDL_BlendMode that represents the chosen factors and
 /// operations.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_SetRenderDrawBlendMode
 /// \sa SDL_GetRenderDrawBlendMode

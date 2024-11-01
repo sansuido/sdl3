@@ -20,7 +20,9 @@ import 'struct_sdl.dart';
 /// fails or NULL for the default handler.
 /// \param userdata a pointer that is passed to `handler`.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetAssertionHandler
 ///
@@ -49,7 +51,9 @@ void sdlSetAssertionHandler(
 /// \returns the default SDL_AssertionHandler that is called when an assert
 /// triggers.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetAssertionHandler
 ///
@@ -81,7 +85,9 @@ Pointer<NativeFunction<SdlAssertionHandler>> sdlGetDefaultAssertionHandler() {
 /// was passed to SDL_SetAssertionHandler().
 /// \returns the SDL_AssertionHandler that is called when an assert triggers.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_SetAssertionHandler
 ///
@@ -118,9 +124,15 @@ Pointer<NativeFunction<SdlAssertionHandler>> sdlGetAssertionHandler(
 /// ```
 ///
 /// \returns a list of all failed assertions or NULL if the list is empty. This
-/// memory should not be modified or freed by the application.
+/// memory should not be modified or freed by the application. This
+/// pointer remains valid until the next call to SDL_Quit() or
+/// SDL_ResetAssertionReport().
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \threadsafety This function is not thread safe. Other threads calling
+/// SDL_ResetAssertionReport() simultaneously, may render the
+/// returned pointer invalid.
+///
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_ResetAssertionReport
 ///
@@ -142,7 +154,11 @@ Pointer<SdlAssertData> sdlGetAssertionReport() {
 /// no items. In addition, any previously-triggered assertions will be reset to
 /// a trigger_count of zero, and their always_ignore state will be false.
 ///
-/// \since This function is available since SDL 3.0.0.
+/// \threadsafety This function is not thread safe. Other threads triggering an
+/// assertion, or simultaneously calling this function may cause
+/// memory leaks or crashes.
+///
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetAssertionReport
 ///
