@@ -1,6 +1,6 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 import 'dart:ffi';
-import 'package:sdl3/sdl3/generated/struct_sdl.dart';
+import 'struct_sdl.dart';
 
 // TTF_Font
 final class TtfFont extends Opaque {}

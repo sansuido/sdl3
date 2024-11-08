@@ -1,3 +1,6 @@
+## 0.1.41
+- SDL3-2024-11-03
+
 ## 0.1.40
 - SDL3-2024-10-27
 - [add] Added spot light example.

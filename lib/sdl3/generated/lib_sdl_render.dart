@@ -3325,7 +3325,7 @@ bool sdlGetRenderVSync(Pointer<SdlRenderer> renderer, Pointer<Int32> vsync) {
 ///
 /// \threadsafety You may only call this function from the main thread.
 ///
-/// \since This function is available since SDL 3.2.0.
+/// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_DEBUG_TEXT_FONT_CHARACTER_SIZE
 ///
