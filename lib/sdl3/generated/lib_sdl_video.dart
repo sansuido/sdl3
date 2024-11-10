@@ -380,8 +380,8 @@ Pointer<Pointer<SdlDisplayMode>> sdlGetFullscreenDisplayModes(
 /// for the desktop refresh rate.
 /// \param include_high_density_modes boolean to include high density modes in
 /// the search.
-/// \param mode a pointer filled in with the closest display mode equal to or
-/// larger than the desired mode.
+/// \param closest a pointer filled in with the closest display mode equal to
+/// or larger than the desired mode.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
@@ -391,7 +391,7 @@ Pointer<Pointer<SdlDisplayMode>> sdlGetFullscreenDisplayModes(
 /// \sa SDL_GetFullscreenDisplayModes
 ///
 /// ```c
-/// extern SDL_DECLSPEC bool SDLCALL SDL_GetClosestFullscreenDisplayMode(SDL_DisplayID displayID, int w, int h, float refresh_rate, bool include_high_density_modes, SDL_DisplayMode *mode)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GetClosestFullscreenDisplayMode(SDL_DisplayID displayID, int w, int h, float refresh_rate, bool include_high_density_modes, SDL_DisplayMode *closest)
 /// ```
 bool sdlGetClosestFullscreenDisplayMode(
     int displayId,
@@ -399,11 +399,11 @@ bool sdlGetClosestFullscreenDisplayMode(
     int h,
     double refreshRate,
     bool includeHighDensityModes,
-    Pointer<SdlDisplayMode> mode) {
+    Pointer<SdlDisplayMode> closest) {
   final sdlGetClosestFullscreenDisplayModeLookupFunction =
       libSdl3.lookupFunction<
           Uint8 Function(Uint32 displayId, Int32 w, Int32 h, Float refreshRate,
-              Uint8 includeHighDensityModes, Pointer<SdlDisplayMode> mode),
+              Uint8 includeHighDensityModes, Pointer<SdlDisplayMode> closest),
           int Function(
               int displayId,
               int w,
@@ -411,9 +411,9 @@ bool sdlGetClosestFullscreenDisplayMode(
               double refreshRate,
               int includeHighDensityModes,
               Pointer<SdlDisplayMode>
-                  mode)>('SDL_GetClosestFullscreenDisplayMode');
+                  closest)>('SDL_GetClosestFullscreenDisplayMode');
   return sdlGetClosestFullscreenDisplayModeLookupFunction(displayId, w, h,
-          refreshRate, includeHighDensityModes ? 1 : 0, mode) ==
+          refreshRate, includeHighDensityModes ? 1 : 0, closest) ==
       1;
 }
 
@@ -1181,6 +1181,8 @@ Pointer<SdlWindow> sdlGetWindowParent(Pointer<SdlWindow> window) {
 /// the window
 /// - `SDL_PROP_WINDOW_WAYLAND_SURFACE_POINTER`: the wl_surface associated with
 /// the window
+/// - `SDL_PROP_WINDOW_WAYLAND_VIEWPORT_POINTER`: the wp_viewport associated
+/// with the window
 /// - `SDL_PROP_WINDOW_WAYLAND_EGL_WINDOW_POINTER`: the wl_egl_window
 /// associated with the window
 /// - `SDL_PROP_WINDOW_WAYLAND_XDG_SURFACE_POINTER`: the xdg_surface associated

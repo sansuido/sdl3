@@ -622,6 +622,7 @@ bool sdlFlushIo(Pointer<SdlIoStream> context) {
 /// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_LoadFile
+/// \sa SDL_SaveFile_IO
 ///
 /// ```c
 /// extern SDL_DECLSPEC void * SDLCALL SDL_LoadFile_IO(SDL_IOStream *src, size_t *datasize, bool closeio)
@@ -653,6 +654,7 @@ Pointer<NativeType> sdlLoadFileIo(
 /// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_LoadFile_IO
+/// \sa SDL_SaveFile
 ///
 /// ```c
 /// extern SDL_DECLSPEC void * SDLCALL SDL_LoadFile(const char *file, size_t *datasize)
@@ -665,6 +667,66 @@ Pointer<NativeType> sdlLoadFile(String? file, Pointer<Uint32> datasize) {
           Pointer<Utf8> file, Pointer<Uint32> datasize)>('SDL_LoadFile');
   final filePointer = file != null ? file.toNativeUtf8() : nullptr;
   final result = sdlLoadFileLookupFunction(filePointer, datasize);
+  calloc.free(filePointer);
+  return result;
+}
+
+///
+/// Save all the data into an SDL data stream.
+///
+/// \param src the SDL_IOStream to write all data to.
+/// \param data the data to be written. If datasize is 0, may be NULL or a
+/// invalid pointer.
+/// \param datasize the number of bytes to be written.
+/// \param closeio if true, calls SDL_CloseIO() on `src` before returning, even
+/// in the case of an error.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \since This function is available since SDL 3.2.0.
+///
+/// \sa SDL_SaveFile
+/// \sa SDL_LoadFile_IO
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SaveFile_IO(SDL_IOStream *src, const void *data, size_t datasize, bool closeio)
+/// ```
+bool sdlSaveFileIo(Pointer<SdlIoStream> src, Pointer<NativeType> data,
+    int datasize, bool closeio) {
+  final sdlSaveFileIoLookupFunction = libSdl3.lookupFunction<
+      Uint8 Function(Pointer<SdlIoStream> src, Pointer<NativeType> data,
+          Uint32 datasize, Uint8 closeio),
+      int Function(Pointer<SdlIoStream> src, Pointer<NativeType> data,
+          int datasize, int closeio)>('SDL_SaveFile_IO');
+  return sdlSaveFileIoLookupFunction(src, data, datasize, closeio ? 1 : 0) == 1;
+}
+
+///
+/// Save all the data into a file path.
+///
+/// \param file the path to read all available data from.
+/// \param data the data to be written. If datasize is 0, may be NULL or a
+/// invalid pointer.
+/// \param datasize the number of bytes to be written.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \since This function is available since SDL 3.2.0.
+///
+/// \sa SDL_SaveFile_IO
+/// \sa SDL_LoadFile
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SaveFile(const char *file, const void *data, size_t datasize)
+/// ```
+bool sdlSaveFile(String? file, Pointer<NativeType> data, int datasize) {
+  final sdlSaveFileLookupFunction = libSdl3.lookupFunction<
+      Uint8 Function(
+          Pointer<Utf8> file, Pointer<NativeType> data, Uint32 datasize),
+      int Function(Pointer<Utf8> file, Pointer<NativeType> data,
+          int datasize)>('SDL_SaveFile');
+  final filePointer = file != null ? file.toNativeUtf8() : nullptr;
+  final result = sdlSaveFileLookupFunction(filePointer, data, datasize) == 1;
   calloc.free(filePointer);
   return result;
 }
