@@ -919,7 +919,9 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   ///
   /// \since This function is available since SDL 3.1.3.
   ///
-  /// \sa SDL_GetWindowMouseGrab
+  /// \sa SDL_GetWindowMouseRect
+  /// \sa SDL_SetWindowMouseRect
+  /// \sa SDL_SetWindowMouseGrab
   /// \sa SDL_SetWindowKeyboardGrab
   ///
   /// ```c
@@ -954,6 +956,9 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   ///
   /// \since This function is available since SDL 3.1.3.
   ///
+  /// \sa SDL_GetWindowMouseRect
+  /// \sa SDL_SetWindowMouseRect
+  /// \sa SDL_SetWindowMouseGrab
   /// \sa SDL_SetWindowKeyboardGrab
   ///
   /// ```c
@@ -980,6 +985,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_GetWindowMouseRect
+  /// \sa SDL_GetWindowMouseGrab
   /// \sa SDL_SetWindowMouseGrab
   ///
   /// ```c
@@ -1002,6 +1008,8 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_SetWindowMouseRect
+  /// \sa SDL_GetWindowMouseGrab
+  /// \sa SDL_SetWindowMouseGrab
   ///
   /// ```c
   /// extern SDL_DECLSPEC const SDL_Rect * SDLCALL SDL_GetWindowMouseRect(SDL_Window *window)

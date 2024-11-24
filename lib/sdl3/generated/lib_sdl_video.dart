@@ -2376,7 +2376,9 @@ bool sdlSetWindowKeyboardGrab(Pointer<SdlWindow> window, bool grabbed) {
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
-/// \sa SDL_GetWindowMouseGrab
+/// \sa SDL_GetWindowMouseRect
+/// \sa SDL_SetWindowMouseRect
+/// \sa SDL_SetWindowMouseGrab
 /// \sa SDL_SetWindowKeyboardGrab
 ///
 /// ```c
@@ -2418,6 +2420,9 @@ bool sdlGetWindowKeyboardGrab(Pointer<SdlWindow> window) {
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
+/// \sa SDL_GetWindowMouseRect
+/// \sa SDL_SetWindowMouseRect
+/// \sa SDL_SetWindowMouseGrab
 /// \sa SDL_SetWindowKeyboardGrab
 ///
 /// ```c
@@ -2465,6 +2470,7 @@ Pointer<SdlWindow> sdlGetGrabbedWindow() {
 /// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetWindowMouseRect
+/// \sa SDL_GetWindowMouseGrab
 /// \sa SDL_SetWindowMouseGrab
 ///
 /// ```c
@@ -2488,6 +2494,8 @@ bool sdlSetWindowMouseRect(Pointer<SdlWindow> window, Pointer<SdlRect> rect) {
 /// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_SetWindowMouseRect
+/// \sa SDL_GetWindowMouseGrab
+/// \sa SDL_SetWindowMouseGrab
 ///
 /// ```c
 /// extern SDL_DECLSPEC const SDL_Rect * SDLCALL SDL_GetWindowMouseRect(SDL_Window *window)

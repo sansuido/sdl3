@@ -1,6 +1,6 @@
 name: sdl3
 description: A Dart library for accessing common SDL 3 (test) APIs using, FFI.
-version: 0.1.42
+version: 0.1.43
 homepage: https://github.com/sansuido/sdl3
 repository: https://github.com/sansuido/sdl3
 
