@@ -4,7 +4,9 @@ import 'package:ffi/ffi.dart';
 import '../dylib.dart' as dylib;
 import 'struct_sdl.dart';
 
-final libSdl3 = dylib.dylibOpen('SDL3');
+DynamicLibrary libSdl3 = dylib.dylibOpen('SDL3');
+
+void openLib(String path) => libSdl3 = DynamicLibrary.open(path);
 
 // typedef SDL_AssertState (SDLCALL *SDL_AssertionHandler)( const SDL_AssertData *data, void *userdata)
 typedef SdlAssertionHandlerDart = int Function(
