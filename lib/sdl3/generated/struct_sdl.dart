@@ -816,6 +816,25 @@ final class SdlCameraDeviceEvent extends Struct {
   external int blank_1;
 }
 
+// SDL_RenderEvent
+final class SdlRenderEvent extends Struct {
+  // [0]+(4)
+  @Int32()
+  external int type;
+  // [4]+(4)
+  @Uint32()
+  external int reserved;
+  // [8]+(8)
+  @Uint64()
+  external int timestamp;
+  // [16]+(4)
+  @Uint32()
+  external int windowId;
+  // [] +(4)
+  @Uint32()
+  external int blank_1;
+}
+
 // SDL_TouchFingerEvent
 final class SdlTouchFingerEvent extends Struct {
   // [0]+(4)
@@ -1245,6 +1264,8 @@ extension SdlEventExtension on Pointer<SdlEvent> {
       (cast<Uint8>() + 0).cast<SdlPenButtonEvent>();
   Pointer<SdlPenAxisEvent> get paxis =>
       (cast<Uint8>() + 0).cast<SdlPenAxisEvent>();
+  Pointer<SdlRenderEvent> get render =>
+      (cast<Uint8>() + 0).cast<SdlRenderEvent>();
   Pointer<SdlDropEvent> get drop => (cast<Uint8>() + 0).cast<SdlDropEvent>();
   Pointer<SdlClipboardEvent> get clipboard =>
       (cast<Uint8>() + 0).cast<SdlClipboardEvent>();

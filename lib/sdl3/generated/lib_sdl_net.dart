@@ -4,7 +4,7 @@ import 'package:ffi/ffi.dart';
 import '../dylib.dart' as dylib;
 import 'struct_sdl_net.dart';
 
-final libSdl3Net = dylib.dylibOpen('SDL3_net');
+final libSdl3Net = dylib.SdlDynamicLibraryService().open('SDL3_net');
 
 ///
 /// This function gets the version of the dynamically linked SDL_net library.

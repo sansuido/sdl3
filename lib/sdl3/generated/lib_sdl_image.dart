@@ -5,7 +5,7 @@ import '../dylib.dart' as dylib;
 import 'struct_sdl.dart';
 import 'struct_sdl_image.dart';
 
-final libSdl3Image = dylib.dylibOpen('SDL3_image');
+final libSdl3Image = dylib.SdlDynamicLibraryService().open('SDL3_image');
 
 ///
 /// This function gets the version of the dynamically linked SDL_image library.

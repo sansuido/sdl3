@@ -80,7 +80,6 @@ Pointer<SdlSurface> sdlCreateSurfaceFrom(
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
-/// \sa SDL_CreateStackSurface
 /// \sa SDL_CreateSurface
 /// \sa SDL_CreateSurfaceFrom
 ///
@@ -137,7 +136,7 @@ int sdlGetSurfaceProperties(Pointer<SdlSurface> surface) {
 /// interpreted in color operations.
 ///
 /// \param surface the SDL_Surface structure to update.
-/// \param colorspace an SDL_ColorSpace value describing the surface
+/// \param colorspace an SDL_Colorspace value describing the surface
 /// colorspace.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
@@ -1136,14 +1135,14 @@ bool sdlConvertPixels(
 /// \param width the width of the block to copy, in pixels.
 /// \param height the height of the block to copy, in pixels.
 /// \param src_format an SDL_PixelFormat value of the `src` pixels format.
-/// \param src_colorspace an SDL_ColorSpace value describing the colorspace of
+/// \param src_colorspace an SDL_Colorspace value describing the colorspace of
 /// the `src` pixels.
 /// \param src_properties an SDL_PropertiesID with additional source color
 /// properties, or 0.
 /// \param src a pointer to the source pixels.
 /// \param src_pitch the pitch of the source pixels, in bytes.
 /// \param dst_format an SDL_PixelFormat value of the `dst` pixels format.
-/// \param dst_colorspace an SDL_ColorSpace value describing the colorspace of
+/// \param dst_colorspace an SDL_Colorspace value describing the colorspace of
 /// the `dst` pixels.
 /// \param dst_properties an SDL_PropertiesID with additional destination color
 /// properties, or 0.

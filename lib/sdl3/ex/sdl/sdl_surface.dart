@@ -84,7 +84,6 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   ///
   /// \since This function is available since SDL 3.1.3.
   ///
-  /// \sa SDL_CreateStackSurface
   /// \sa SDL_CreateSurface
   /// \sa SDL_CreateSurfaceFrom
   ///

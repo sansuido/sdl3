@@ -188,7 +188,6 @@ Pointer<Uint32> sdlGetAudioRecordingDevices(Pointer<Int32> count) {
 ///
 /// \sa SDL_GetAudioPlaybackDevices
 /// \sa SDL_GetAudioRecordingDevices
-/// \sa SDL_GetDefaultAudioInfo
 ///
 /// ```c
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetAudioDeviceName(SDL_AudioDeviceID devid)

@@ -5,7 +5,7 @@ import '../dylib.dart' as dylib;
 import 'struct_sdl.dart';
 import 'struct_sdl_ttf.dart';
 
-final libSdl3Ttf = dylib.dylibOpen('SDL3_ttf');
+final libSdl3Ttf = dylib.SdlDynamicLibraryService().open('SDL3_ttf');
 
 ///
 /// This function gets the version of the dynamically linked SDL_ttf library.

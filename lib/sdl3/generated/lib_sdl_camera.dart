@@ -426,7 +426,7 @@ bool sdlGetCameraFormat(
 /// After use, the frame should be released with SDL_ReleaseCameraFrame(). If
 /// you don't do this, the system may stop providing more video!
 ///
-/// Do not call SDL_FreeSurface() on the returned surface! It must be given
+/// Do not call SDL_DestroySurface() on the returned surface! It must be given
 /// back to the camera subsystem with SDL_ReleaseCameraFrame!
 ///
 /// If the system is waiting for the user to approve access to the camera, as
@@ -509,7 +509,6 @@ void sdlReleaseCameraFrame(
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
-/// \sa SDL_OpenCameraWithSpec
 /// \sa SDL_OpenCamera
 ///
 /// ```c

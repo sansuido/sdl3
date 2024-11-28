@@ -348,7 +348,7 @@ Pointer<SdlGpuGraphicsPipeline> sdlCreateGpuGraphicsPipeline(
 ///
 /// \sa SDL_BindGPUVertexSamplers
 /// \sa SDL_BindGPUFragmentSamplers
-/// \sa SDL_ReleaseSampler
+/// \sa SDL_ReleaseGPUSampler
 ///
 /// ```c
 /// extern SDL_DECLSPEC SDL_GPUSampler *SDLCALL SDL_CreateGPUSampler( SDL_GPUDevice *device, const SDL_GPUSamplerCreateInfo *createinfo)
@@ -409,7 +409,7 @@ Pointer<SdlGpuSampler> sdlCreateGpuSampler(
 /// is bound at [[buffer(14)]], vertex buffer 1 at [[buffer(15)]], and so on.
 /// Rather than manually authoring vertex buffer indices, use the
 /// [[stage_in]] attribute which will automatically use the vertex input
-/// information from the SDL_GPUPipeline.
+/// information from the SDL_GPUGraphicsPipeline.
 ///
 /// \param device a GPU Context.
 /// \param createinfo a struct describing the state of the shader to create.

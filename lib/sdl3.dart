@@ -1,3 +1,4 @@
+export 'sdl3/dylib.dart';
 export 'sdl3/ex/dart/native_type.dart';
 export 'sdl3/ex/dart/point.dart';
 export 'sdl3/ex/dart/rectangle.dart';

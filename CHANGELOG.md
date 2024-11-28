@@ -1,3 +1,7 @@
+## 0.1.44
+- SDL3-2024-11-24
+- [add] Added SdlDynamicLibraryService class. You can now specify dynamic libraries for specific environments.
+
 ## 0.1.43
 - SDL3-2024-11-17
 

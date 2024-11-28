@@ -5,7 +5,7 @@ import '../dylib.dart' as dylib;
 import 'struct_sdl.dart';
 import 'struct_sdl_mixer.dart';
 
-final libSdl3Mixer = dylib.dylibOpen('SDL3_mixer');
+final libSdl3Mixer = dylib.SdlDynamicLibraryService().open('SDL3_mixer');
 
 // typedef void (SDLCALL *Mix_MixCallback)(void *udata, Uint8 *stream, int len)
 typedef MixMixCallbackDart = void Function(

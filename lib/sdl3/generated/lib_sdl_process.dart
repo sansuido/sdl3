@@ -219,7 +219,7 @@ Pointer<NativeType> sdlReadProcess(Pointer<SdlProcess> process,
 ///
 /// Writing to this stream can return less data than expected if the process
 /// hasn't read its input. It may be blocked waiting for its output to be read,
-/// so if you may need to call SDL_GetOutputStream() and read the output in
+/// if so you may need to call SDL_GetProcessOutput() and read the output in
 /// parallel with writing input.
 ///
 /// \param process The process to get the input stream for.

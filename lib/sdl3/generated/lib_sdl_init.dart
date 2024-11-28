@@ -236,7 +236,7 @@ bool sdlSetAppMetadata(
 /// Multiple calls to this function are allowed, but various state might not
 /// change once it has been set up with a previous call to this function.
 ///
-/// Once set, this metadata can be read using SDL_GetMetadataProperty().
+/// Once set, this metadata can be read using SDL_GetAppMetadataProperty().
 ///
 /// These are the supported properties:
 ///

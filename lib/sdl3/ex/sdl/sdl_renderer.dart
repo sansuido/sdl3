@@ -45,21 +45,21 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// - `SDL_PROP_RENDERER_TEXTURE_FORMATS_POINTER`: a (const SDL_PixelFormat *)
   /// array of pixel formats, terminated with SDL_PIXELFORMAT_UNKNOWN,
   /// representing the available texture formats for this renderer.
-  /// - `SDL_PROP_RENDERER_OUTPUT_COLORSPACE_NUMBER`: an SDL_ColorSpace value
+  /// - `SDL_PROP_RENDERER_OUTPUT_COLORSPACE_NUMBER`: an SDL_Colorspace value
   /// describing the colorspace for output to the display, defaults to
   /// SDL_COLORSPACE_SRGB.
   /// - `SDL_PROP_RENDERER_HDR_ENABLED_BOOLEAN`: true if the output colorspace is
   /// SDL_COLORSPACE_SRGB_LINEAR and the renderer is showing on a display with
   /// HDR enabled. This property can change dynamically when
-  /// SDL_EVENT_DISPLAY_HDR_STATE_CHANGED is sent.
+  /// SDL_EVENT_WINDOW_HDR_STATE_CHANGED is sent.
   /// - `SDL_PROP_RENDERER_SDR_WHITE_POINT_FLOAT`: the value of SDR white in the
   /// SDL_COLORSPACE_SRGB_LINEAR colorspace. When HDR is enabled, this value is
   /// automatically multiplied into the color scale. This property can change
-  /// dynamically when SDL_EVENT_DISPLAY_HDR_STATE_CHANGED is sent.
+  /// dynamically when SDL_EVENT_WINDOW_HDR_STATE_CHANGED is sent.
   /// - `SDL_PROP_RENDERER_HDR_HEADROOM_FLOAT`: the additional high dynamic range
   /// that can be displayed, in terms of the SDR white point. When HDR is not
   /// enabled, this will be 1.0. This property can change dynamically when
-  /// SDL_EVENT_DISPLAY_HDR_STATE_CHANGED is sent.
+  /// SDL_EVENT_WINDOW_HDR_STATE_CHANGED is sent.
   ///
   /// With the direct3d renderer:
   ///
@@ -250,7 +250,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   ///
   /// These are the supported properties:
   ///
-  /// - `SDL_PROP_TEXTURE_CREATE_COLORSPACE_NUMBER`: an SDL_ColorSpace value
+  /// - `SDL_PROP_TEXTURE_CREATE_COLORSPACE_NUMBER`: an SDL_Colorspace value
   /// describing the texture colorspace, defaults to SDL_COLORSPACE_SRGB_LINEAR
   /// for floating point textures, SDL_COLORSPACE_HDR10 for 10-bit textures,
   /// SDL_COLORSPACE_SRGB for other RGB textures and SDL_COLORSPACE_JPEG for
