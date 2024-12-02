@@ -1905,6 +1905,7 @@ bool sdlShowWindow(Pointer<SdlWindow> window) {
 /// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_ShowWindow
+/// \sa SDL_WINDOW_HIDDEN
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_HideWindow(SDL_Window *window)
@@ -2073,6 +2074,7 @@ bool sdlRestoreWindow(Pointer<SdlWindow> window) {
 /// \sa SDL_GetWindowFullscreenMode
 /// \sa SDL_SetWindowFullscreenMode
 /// \sa SDL_SyncWindow
+/// \sa SDL_WINDOW_FULLSCREEN
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowFullscreen(SDL_Window *window, bool fullscreen)
@@ -2615,6 +2617,7 @@ bool sdlSetWindowParent(Pointer<SdlWindow> window, Pointer<SdlWindow> parent) {
 /// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_SetWindowParent
+/// \sa SDL_WINDOW_MODAL
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowModal(SDL_Window *window, bool modal)

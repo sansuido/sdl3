@@ -653,6 +653,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_ShowWindow
+  /// \sa SDL_WINDOW_HIDDEN
   ///
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_HideWindow(SDL_Window *window)
@@ -1119,6 +1120,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_SetWindowParent
+  /// \sa SDL_WINDOW_MODAL
   ///
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowModal(SDL_Window *window, bool modal)

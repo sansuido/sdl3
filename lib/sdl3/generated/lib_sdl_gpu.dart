@@ -2560,7 +2560,7 @@ Pointer<SdlGpuFence> sdlSubmitGpuCommandBufferAndAcquireFence(
 /// \returns true on success, false on error; call SDL_GetError() for more
 /// information.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.1.6.
 ///
 /// \sa SDL_AcquireGPUCommandBuffer
 /// \sa SDL_AcquireGPUSwapchainTexture
@@ -2757,7 +2757,7 @@ bool sdlGpuTextureSupportsSampleCount(
 /// \param depth_or_layer_count depth for 3D textures or layer count otherwise.
 /// \returns the size of a texture with this format and dimensions.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.1.6.
 ///
 /// ```c
 /// extern SDL_DECLSPEC Uint32 SDLCALL SDL_CalculateGPUTextureFormatSize( SDL_GPUTextureFormat format, Uint32 width, Uint32 height, Uint32 depth_or_layer_count)

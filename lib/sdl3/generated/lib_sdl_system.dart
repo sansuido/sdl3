@@ -696,7 +696,7 @@ bool sdlIsTv() {
 /// \returns the application sandbox environment or SDL_SANDBOX_NONE if the
 /// application is not running in a sandbox environment.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.1.6.
 ///
 /// ```c
 /// extern SDL_DECLSPEC SDL_Sandbox SDLCALL SDL_GetSandbox(void)

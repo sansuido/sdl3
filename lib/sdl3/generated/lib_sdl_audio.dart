@@ -367,6 +367,61 @@ int sdlOpenAudioDevice(int devid, Pointer<SdlAudioSpec> spec) {
 }
 
 ///
+/// Determine if an audio device is physical (instead of logical).
+///
+/// An SDL_AudioDeviceID that represents physical hardare is a physical device;
+/// there is one for each piece of hardware that SDL can see. Logical devices
+/// are created by calling SDL_OpenAudioDevice or SDL_OpenAudioDeviceStream,
+/// and while each is associated with a physical device, there can be any
+/// number of logical devices on one physical device.
+///
+/// For the most part, logical and physical IDs are interchangeable--if you try
+/// to open a logical device, SDL understands to assign that effort to the
+/// underlying physical device, etc. However, it might be useful to know if an
+/// arbitrary device ID is physical or logical. This function reports which.
+///
+/// This function may return either true or false for invalid device IDs.
+///
+/// \param devid the device ID to query.
+/// \returns true if devid is a physical device, false if it is logical.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.2.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL SDL_IsAudioDevicePhysical(SDL_AudioDeviceID devid)
+/// ```
+bool sdlIsAudioDevicePhysical(int devid) {
+  final sdlIsAudioDevicePhysicalLookupFunction = libSdl3.lookupFunction<
+      Uint8 Function(Uint32 devid),
+      int Function(int devid)>('SDL_IsAudioDevicePhysical');
+  return sdlIsAudioDevicePhysicalLookupFunction(devid) == 1;
+}
+
+///
+/// Determine if an audio device is a playback device (instead of recording).
+///
+/// This function may return either true or false for invalid device IDs.
+///
+/// \param devid the device ID to query.
+/// \returns true if devid is a playback device, false if it is recording.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.2.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL SDL_IsAudioDevicePlayback(SDL_AudioDeviceID devid)
+/// ```
+bool sdlIsAudioDevicePlayback(int devid) {
+  final sdlIsAudioDevicePlaybackLookupFunction = libSdl3.lookupFunction<
+      Uint8 Function(Uint32 devid),
+      int Function(int devid)>('SDL_IsAudioDevicePlayback');
+  return sdlIsAudioDevicePlaybackLookupFunction(devid) == 1;
+}
+
+///
 /// Use this function to pause audio playback on a specified device.
 ///
 /// This function pauses audio processing for a given device. Any bound audio
@@ -1076,8 +1131,12 @@ Pointer<Int32> sdlGetAudioStreamOutputChannelMap(
 /// channel that it should be remapped to. To reverse a stereo signal's left
 /// and right values, you'd have an array of `{ 1, 0 }`. It is legal to remap
 /// multiple channels to the same thing, so `{ 1, 1 }` would duplicate the
-/// right channel to both channels of a stereo signal. You cannot change the
-/// number of channels through a channel map, just reorder them.
+/// right channel to both channels of a stereo signal. An element in the
+/// channel map set to -1 instead of a valid channel will mute that channel,
+/// setting it to a silence value.
+///
+/// You cannot change the number of channels through a channel map, just
+/// reorder/mute them.
 ///
 /// Data that was previously queued in the stream will still be operated on in
 /// the order that was current when it was added, which is to say you can put
@@ -1092,8 +1151,8 @@ Pointer<Int32> sdlGetAudioStreamOutputChannelMap(
 /// after this call.
 ///
 /// If `count` is not equal to the current number of channels in the audio
-/// stream's format, this will fail. This is a safety measure to make sure a a
-/// race condition hasn't changed the format while you this call is setting the
+/// stream's format, this will fail. This is a safety measure to make sure a
+/// race condition hasn't changed the format while this call is setting the
 /// channel map.
 ///
 /// \param stream the SDL_AudioStream to change.
@@ -1134,12 +1193,16 @@ bool sdlSetAudioStreamInputChannelMap(
 /// The output channel map reorders data that leaving a stream via
 /// SDL_GetAudioStreamData.
 ///
-/// Each item in the array represents an output channel, and its value is the
+/// Each item in the array represents an input channel, and its value is the
 /// channel that it should be remapped to. To reverse a stereo signal's left
 /// and right values, you'd have an array of `{ 1, 0 }`. It is legal to remap
 /// multiple channels to the same thing, so `{ 1, 1 }` would duplicate the
-/// right channel to both channels of a stereo signal. You cannot change the
-/// number of channels through a channel map, just reorder them.
+/// right channel to both channels of a stereo signal. An element in the
+/// channel map set to -1 instead of a valid channel will mute that channel,
+/// setting it to a silence value.
+///
+/// You cannot change the number of channels through a channel map, just
+/// reorder/mute them.
 ///
 /// The output channel map can be changed at any time, as output remapping is
 /// applied during SDL_GetAudioStreamData.
@@ -1151,8 +1214,8 @@ bool sdlSetAudioStreamInputChannelMap(
 /// after this call.
 ///
 /// If `count` is not equal to the current number of channels in the audio
-/// stream's format, this will fail. This is a safety measure to make sure a a
-/// race condition hasn't changed the format while you this call is setting the
+/// stream's format, this will fail. This is a safety measure to make sure a
+/// race condition hasn't changed the format while this call is setting the
 /// channel map.
 ///
 /// \param stream the SDL_AudioStream to change.
