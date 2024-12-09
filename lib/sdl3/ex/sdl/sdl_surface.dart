@@ -54,6 +54,8 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// \returns the new cursor on success or NULL on failure; call SDL_GetError()
   /// for more information.
   ///
+  /// \threadsafety This function should only be called on the main thread.
+  ///
   /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_CreateCursor

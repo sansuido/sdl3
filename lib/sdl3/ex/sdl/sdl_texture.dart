@@ -18,7 +18,7 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \threadsafety You may only call this function from the main thread.
+  /// \threadsafety This function should only be called on the main thread.
   ///
   /// \since This function is available since SDL 3.1.3.
   ///
@@ -56,7 +56,7 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \threadsafety You may only call this function from the main thread.
+  /// \threadsafety This function should only be called on the main thread.
   ///
   /// \since This function is available since SDL 3.1.3.
   ///
@@ -81,7 +81,7 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \threadsafety You may only call this function from the main thread.
+  /// \threadsafety This function should only be called on the main thread.
   ///
   /// \since This function is available since SDL 3.1.3.
   ///
@@ -125,7 +125,7 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \threadsafety You may only call this function from the main thread.
+  /// \threadsafety This function should only be called on the main thread.
   ///
   /// \since This function is available since SDL 3.1.3.
   ///
@@ -148,7 +148,7 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \threadsafety You may only call this function from the main thread.
+  /// \threadsafety This function should only be called on the main thread.
   ///
   /// \since This function is available since SDL 3.1.3.
   ///
@@ -180,7 +180,7 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \threadsafety You may only call this function from the main thread.
+  /// \threadsafety This function should only be called on the main thread.
   ///
   /// \since This function is available since SDL 3.1.3.
   ///
@@ -201,7 +201,7 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \threadsafety You may only call this function from the main thread.
+  /// \threadsafety This function should only be called on the main thread.
   ///
   /// \since This function is available since SDL 3.1.3.
   ///
@@ -232,7 +232,7 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \threadsafety You may only call this function from the main thread.
+  /// \threadsafety This function should only be called on the main thread.
   ///
   /// \since This function is available since SDL 3.1.3.
   ///
@@ -253,7 +253,7 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \threadsafety You may only call this function from the main thread.
+  /// \threadsafety This function should only be called on the main thread.
   ///
   /// \since This function is available since SDL 3.1.3.
   ///
@@ -295,7 +295,7 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \threadsafety You may only call this function from the main thread.
+  /// \threadsafety This function should only be called on the main thread.
   ///
   /// \since This function is available since SDL 3.1.3.
   ///
@@ -334,7 +334,7 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \threadsafety You may only call this function from the main thread.
+  /// \threadsafety This function should only be called on the main thread.
   ///
   /// \since This function is available since SDL 3.1.3.
   ///
@@ -369,7 +369,7 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \threadsafety You may only call this function from the main thread.
+  /// \threadsafety This function should only be called on the main thread.
   ///
   /// \since This function is available since SDL 3.1.3.
   ///
@@ -407,7 +407,7 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// created with `SDL_TEXTUREACCESS_STREAMING`; call SDL_GetError()
   /// for more information.
   ///
-  /// \threadsafety You may only call this function from the main thread.
+  /// \threadsafety This function should only be called on the main thread.
   ///
   /// \since This function is available since SDL 3.1.3.
   ///
@@ -449,7 +449,7 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \threadsafety You may only call this function from the main thread.
+  /// \threadsafety This function should only be called on the main thread.
   ///
   /// \since This function is available since SDL 3.1.3.
   ///
@@ -477,7 +477,7 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   ///
   /// \param texture a texture locked by SDL_LockTexture().
   ///
-  /// \threadsafety You may only call this function from the main thread.
+  /// \threadsafety This function should only be called on the main thread.
   ///
   /// \since This function is available since SDL 3.1.3.
   ///
@@ -498,7 +498,7 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   ///
   /// \param texture the texture to destroy.
   ///
-  /// \threadsafety You may only call this function from the main thread.
+  /// \threadsafety This function should only be called on the main thread.
   ///
   /// \since This function is available since SDL 3.1.3.
   ///

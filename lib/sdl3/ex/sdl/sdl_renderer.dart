@@ -127,7 +127,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \threadsafety You may only call this function from the main thread.
+  /// \threadsafety This function should only be called on the main thread.
   ///
   /// \since This function is available since SDL 3.1.3.
   ///
@@ -161,7 +161,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \threadsafety You may only call this function from the main thread.
+  /// \threadsafety This function should only be called on the main thread.
   ///
   /// \since This function is available since SDL 3.1.3.
   ///
@@ -195,7 +195,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// was active, the format was unsupported, or the width or height
   /// were out of range; call SDL_GetError() for more information.
   ///
-  /// \threadsafety You may only call this function from the main thread.
+  /// \threadsafety This function should only be called on the main thread.
   ///
   /// \since This function is available since SDL 3.1.3.
   ///
@@ -230,7 +230,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \returns the created texture or NULL on failure; call SDL_GetError() for
   /// more information.
   ///
-  /// \threadsafety You may only call this function from the main thread.
+  /// \threadsafety This function should only be called on the main thread.
   ///
   /// \since This function is available since SDL 3.1.3.
   ///
@@ -345,7 +345,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// was active, the format was unsupported, or the width or height
   /// were out of range; call SDL_GetError() for more information.
   ///
-  /// \threadsafety You may only call this function from the main thread.
+  /// \threadsafety This function should only be called on the main thread.
   ///
   /// \since This function is available since SDL 3.1.3.
   ///
@@ -377,7 +377,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \threadsafety You may only call this function from the main thread.
+  /// \threadsafety This function should only be called on the main thread.
   ///
   /// \since This function is available since SDL 3.1.3.
   ///
@@ -399,7 +399,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \param renderer the rendering context.
   /// \returns the current render target or NULL for the default render target.
   ///
-  /// \threadsafety You may only call this function from the main thread.
+  /// \threadsafety This function should only be called on the main thread.
   ///
   /// \since This function is available since SDL 3.1.3.
   ///
@@ -443,7 +443,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \threadsafety You may only call this function from the main thread.
+  /// \threadsafety This function should only be called on the main thread.
   ///
   /// \since This function is available since SDL 3.1.3.
   ///
@@ -471,7 +471,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \threadsafety You may only call this function from the main thread.
+  /// \threadsafety This function should only be called on the main thread.
   ///
   /// \since This function is available since SDL 3.1.3.
   ///
@@ -498,7 +498,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \threadsafety You may only call this function from the main thread.
+  /// \threadsafety This function should only be called on the main thread.
   ///
   /// \since This function is available since SDL 3.1.3.
   ///
@@ -533,7 +533,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \threadsafety You may only call this function from the main thread.
+  /// \threadsafety This function should only be called on the main thread.
   ///
   /// \since This function is available since SDL 3.1.3.
   ///
@@ -572,7 +572,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \threadsafety You may only call this function from the main thread.
+  /// \threadsafety This function should only be called on the main thread.
   ///
   /// \since This function is available since SDL 3.1.3.
   ///
@@ -612,7 +612,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \threadsafety You may only call this function from the main thread.
+  /// \threadsafety This function should only be called on the main thread.
   ///
   /// \since This function is available since SDL 3.1.3.
   ///
@@ -653,7 +653,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \threadsafety You may only call this function from the main thread.
+  /// \threadsafety This function should only be called on the main thread.
   ///
   /// \since This function is available since SDL 3.1.3.
   ///
@@ -681,7 +681,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \threadsafety You may only call this function from the main thread.
+  /// \threadsafety This function should only be called on the main thread.
   ///
   /// \since This function is available since SDL 3.1.3.
   ///
@@ -709,7 +709,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \threadsafety You may only call this function from the main thread.
+  /// \threadsafety This function should only be called on the main thread.
   ///
   /// \since This function is available since SDL 3.1.3.
   ///
@@ -736,7 +736,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \threadsafety You may only call this function from the main thread.
+  /// \threadsafety This function should only be called on the main thread.
   ///
   /// \since This function is available since SDL 3.1.3.
   ///
@@ -765,7 +765,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \threadsafety You may only call this function from the main thread.
+  /// \threadsafety This function should only be called on the main thread.
   ///
   /// \since This function is available since SDL 3.1.3.
   ///
@@ -790,7 +790,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \returns true if clipping is enabled or false if not; call SDL_GetError()
   /// for more information.
   ///
-  /// \threadsafety You may only call this function from the main thread.
+  /// \threadsafety This function should only be called on the main thread.
   ///
   /// \since This function is available since SDL 3.1.3.
   ///
@@ -821,7 +821,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \threadsafety You may only call this function from the main thread.
+  /// \threadsafety This function should only be called on the main thread.
   ///
   /// \since This function is available since SDL 3.1.3.
   ///
@@ -843,7 +843,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \threadsafety You may only call this function from the main thread.
+  /// \threadsafety This function should only be called on the main thread.
   ///
   /// \since This function is available since SDL 3.1.3.
   ///
@@ -878,7 +878,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \threadsafety You may only call this function from the main thread.
+  /// \threadsafety This function should only be called on the main thread.
   ///
   /// \since This function is available since SDL 3.1.3.
   ///
@@ -908,7 +908,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \threadsafety You may only call this function from the main thread.
+  /// \threadsafety This function should only be called on the main thread.
   ///
   /// \since This function is available since SDL 3.1.3.
   ///
@@ -937,7 +937,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \threadsafety You may only call this function from the main thread.
+  /// \threadsafety This function should only be called on the main thread.
   ///
   /// \since This function is available since SDL 3.1.3.
   ///
@@ -980,7 +980,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \threadsafety You may only call this function from the main thread.
+  /// \threadsafety This function should only be called on the main thread.
   ///
   /// \since This function is available since SDL 3.1.3.
   ///
@@ -1024,7 +1024,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \threadsafety You may only call this function from the main thread.
+  /// \threadsafety This function should only be called on the main thread.
   ///
   /// \since This function is available since SDL 3.1.3.
   ///
@@ -1045,7 +1045,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \threadsafety You may only call this function from the main thread.
+  /// \threadsafety This function should only be called on the main thread.
   ///
   /// \since This function is available since SDL 3.1.3.
   ///
@@ -1072,7 +1072,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \threadsafety You may only call this function from the main thread.
+  /// \threadsafety This function should only be called on the main thread.
   ///
   /// \since This function is available since SDL 3.1.3.
   ///
@@ -1093,7 +1093,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \threadsafety You may only call this function from the main thread.
+  /// \threadsafety This function should only be called on the main thread.
   ///
   /// \since This function is available since SDL 3.1.3.
   ///
@@ -1122,7 +1122,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \threadsafety You may only call this function from the main thread.
+  /// \threadsafety This function should only be called on the main thread.
   ///
   /// \since This function is available since SDL 3.1.3.
   ///
@@ -1144,7 +1144,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \threadsafety You may only call this function from the main thread.
+  /// \threadsafety This function should only be called on the main thread.
   ///
   /// \since This function is available since SDL 3.1.3.
   ///
@@ -1166,7 +1166,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \threadsafety You may only call this function from the main thread.
+  /// \threadsafety This function should only be called on the main thread.
   ///
   /// \since This function is available since SDL 3.1.3.
   ///
@@ -1193,7 +1193,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \threadsafety You may only call this function from the main thread.
+  /// \threadsafety This function should only be called on the main thread.
   ///
   /// \since This function is available since SDL 3.1.3.
   ///
@@ -1216,7 +1216,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \threadsafety You may only call this function from the main thread.
+  /// \threadsafety This function should only be called on the main thread.
   ///
   /// \since This function is available since SDL 3.1.3.
   ///
@@ -1241,7 +1241,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \threadsafety You may only call this function from the main thread.
+  /// \threadsafety This function should only be called on the main thread.
   ///
   /// \since This function is available since SDL 3.1.3.
   ///
@@ -1270,7 +1270,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \threadsafety You may only call this function from the main thread.
+  /// \threadsafety This function should only be called on the main thread.
   ///
   /// \since This function is available since SDL 3.1.3.
   ///
@@ -1296,7 +1296,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \threadsafety You may only call this function from the main thread.
+  /// \threadsafety This function should only be called on the main thread.
   ///
   /// \since This function is available since SDL 3.1.3.
   ///
@@ -1325,7 +1325,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \threadsafety You may only call this function from the main thread.
+  /// \threadsafety This function should only be called on the main thread.
   ///
   /// \since This function is available since SDL 3.1.3.
   ///
@@ -1354,7 +1354,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \threadsafety You may only call this function from the main thread.
+  /// \threadsafety This function should only be called on the main thread.
   ///
   /// \since This function is available since SDL 3.1.3.
   ///
@@ -1401,7 +1401,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \threadsafety You may only call this function from the main thread.
+  /// \threadsafety This function should only be called on the main thread.
   ///
   /// \since This function is available since SDL 3.1.3.
   ///
@@ -1452,7 +1452,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \threadsafety You may only call this function from the main thread.
+  /// \threadsafety This function should only be called on the main thread.
   ///
   /// \since This function is available since SDL 3.1.3.
   ///
@@ -1488,7 +1488,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \threadsafety You may only call this function from the main thread.
+  /// \threadsafety This function should only be called on the main thread.
   ///
   /// \since This function is available since SDL 3.1.3.
   ///
@@ -1551,7 +1551,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \threadsafety You may only call this function from the main thread.
+  /// \threadsafety This function should only be called on the main thread.
   ///
   /// \since This function is available since SDL 3.1.3.
   ///
@@ -1583,7 +1583,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   ///
   /// \param renderer the rendering context.
   ///
-  /// \threadsafety You may only call this function from the main thread.
+  /// \threadsafety This function should only be called on the main thread.
   ///
   /// \since This function is available since SDL 3.1.3.
   ///
@@ -1627,7 +1627,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \threadsafety You may only call this function from the main thread.
+  /// \threadsafety This function should only be called on the main thread.
   ///
   /// \since This function is available since SDL 3.1.3.
   ///
@@ -1648,7 +1648,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \returns a `CAMetalLayer *` on success, or NULL if the renderer isn't a
   /// Metal renderer.
   ///
-  /// \threadsafety You may only call this function from the main thread.
+  /// \threadsafety This function should only be called on the main thread.
   ///
   /// \since This function is available since SDL 3.1.3.
   ///
@@ -1676,7 +1676,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \returns an `id<MTLRenderCommandEncoder>` on success, or NULL if the
   /// renderer isn't a Metal renderer or there was an error.
   ///
-  /// \threadsafety You may only call this function from the main thread.
+  /// \threadsafety This function should only be called on the main thread.
   ///
   /// \since This function is available since SDL 3.1.3.
   ///
@@ -1706,7 +1706,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \threadsafety You may only call this function from the main thread.
+  /// \threadsafety This function should only be called on the main thread.
   ///
   /// \since This function is available since SDL 3.1.3.
   ///
@@ -1728,7 +1728,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \threadsafety You may only call this function from the main thread.
+  /// \threadsafety This function should only be called on the main thread.
   ///
   /// \since This function is available since SDL 3.1.3.
   ///

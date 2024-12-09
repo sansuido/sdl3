@@ -16,9 +16,7 @@ import 'struct_sdl.dart';
 /// polling or waiting for events (e.g. you are filtering them), then you must
 /// call SDL_PumpEvents() to force an event queue update.
 ///
-/// \threadsafety This should only be run in the thread that initialized the
-/// video subsystem, and for extra safety, you should consider
-/// only doing those things on the main thread in any case.
+/// \threadsafety This function should only be called on the main thread.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -249,9 +247,7 @@ void sdlFlushEvents(int minType, int maxType) {
 /// the queue, or NULL.
 /// \returns true if this got an event or false if there are none available.
 ///
-/// \threadsafety This should only be run in the thread that initialized the
-/// video subsystem, and for extra safety, you should consider
-/// only doing those things on the main thread in any case.
+/// \threadsafety This function should only be called on the main thread.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -283,9 +279,7 @@ bool sdlPollEvent(Pointer<SdlEvent> event) {
 /// \returns true on success or false if there was an error while waiting for
 /// events; call SDL_GetError() for more information.
 ///
-/// \threadsafety This should only be run in the thread that initialized the
-/// video subsystem, and for extra safety, you should consider
-/// only doing those things on the main thread in any case.
+/// \threadsafety This function should only be called on the main thread.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -323,9 +317,7 @@ bool sdlWaitEvent(Pointer<SdlEvent> event) {
 /// \returns true if this got an event or false if the timeout elapsed without
 /// any events available.
 ///
-/// \threadsafety This should only be run in the thread that initialized the
-/// video subsystem, and for extra safety, you should consider
-/// only doing those things on the main thread in any case.
+/// \threadsafety This function should only be called on the main thread.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///

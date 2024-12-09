@@ -31,6 +31,37 @@ final class SdlAssertData extends Struct {
   external Pointer<SdlAssertData> next;
 }
 
+// SDL_AsyncIO
+final class SdlAsyncIo extends Opaque {}
+
+// SDL_AsyncIOOutcome
+final class SdlAsyncIoOutcome extends Struct {
+  // [0]+(8)
+  external Pointer<SdlAsyncIo> asyncio;
+  // [8]+(4)
+  @Int32()
+  external int type;
+  // [12]+(4)
+  @Int32()
+  external int result;
+  // [16]+(8)
+  external Pointer<NativeType> buffer;
+  // [24]+(8)
+  @Uint64()
+  external int offset;
+  // [32]+(8)
+  @Uint64()
+  external int bytesRequested;
+  // [40]+(8)
+  @Uint64()
+  external int bytesTransferred;
+  // [48]+(8)
+  external Pointer<NativeType> userdata;
+}
+
+// SDL_AsyncIOQueue
+final class SdlAsyncIoQueue extends Opaque {}
+
 // SDL_AtomicInt
 final class SdlAtomicInt extends Struct {
   // [0]+(4)

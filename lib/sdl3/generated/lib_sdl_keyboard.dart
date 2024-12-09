@@ -9,6 +9,8 @@ import 'struct_sdl.dart';
 ///
 /// \returns true if a keyboard is connected, false otherwise.
 ///
+/// \threadsafety This function should only be called on the main thread.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetKeyboards
@@ -36,6 +38,8 @@ bool sdlHasKeyboard() {
 /// call SDL_GetError() for more information. This should be freed
 /// with SDL_free() when it is no longer needed.
 ///
+/// \threadsafety This function should only be called on the main thread.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetKeyboardNameForID
@@ -60,6 +64,8 @@ Pointer<Uint32> sdlGetKeyboards(Pointer<Int32> count) {
 /// \returns the name of the selected keyboard or NULL on failure; call
 /// SDL_GetError() for more information.
 ///
+/// \threadsafety This function should only be called on the main thread.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetKeyboards
@@ -82,6 +88,8 @@ String? sdlGetKeyboardNameForId(int instanceId) {
 /// Query the window which currently has keyboard focus.
 ///
 /// \returns the window with keyboard focus.
+///
+/// \threadsafety This function should only be called on the main thread.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -119,6 +127,8 @@ Pointer<SdlWindow> sdlGetKeyboardFocus() {
 /// \param numkeys if non-NULL, receives the length of the returned array.
 /// \returns a pointer to an array of key states.
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_PumpEvents
@@ -139,6 +149,8 @@ Pointer<Uint8> sdlGetKeyboardState(Pointer<Int32> numkeys) {
 ///
 /// This function will generate key up events for all pressed keys.
 ///
+/// \threadsafety This function should only be called on the main thread.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetKeyboardState
@@ -157,6 +169,8 @@ void sdlResetKeyboard() {
 ///
 /// \returns an OR'd combination of the modifier keys for the keyboard. See
 /// SDL_Keymod for details.
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -184,6 +198,8 @@ int sdlGetModState() {
 /// SDL reports.
 ///
 /// \param modstate the desired SDL_Keymod for the keyboard.
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -214,6 +230,8 @@ void sdlSetModState(int modstate) {
 /// \param key_event true if the keycode will be used in key events.
 /// \returns the SDL_Keycode that corresponds to the given SDL_Scancode.
 ///
+/// \threadsafety This function is not thread safe.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetKeyName
@@ -243,6 +261,8 @@ int sdlGetKeyFromScancode(int scancode, int modstate, bool keyEvent) {
 /// scancode generates this key, may be NULL.
 /// \returns the SDL_Scancode that corresponds to the given SDL_Keycode.
 ///
+/// \threadsafety This function is not thread safe.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetKeyFromScancode
@@ -268,6 +288,8 @@ int sdlGetScancodeFromKey(int key, Pointer<Uint16> modstate) {
 /// valid while SDL is being used.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety This function is not thread safe.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -302,6 +324,8 @@ bool sdlSetScancodeName(int scancode, String? name) {
 /// \returns a pointer to the name for the scancode. If the scancode doesn't
 /// have a name this function returns an empty string ("").
 ///
+/// \threadsafety This function is not thread safe.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetScancodeFromKey
@@ -328,6 +352,8 @@ String? sdlGetScancodeName(int scancode) {
 /// \param name the human-readable scancode name.
 /// \returns the SDL_Scancode, or `SDL_SCANCODE_UNKNOWN` if the name wasn't
 /// recognized; call SDL_GetError() for more information.
+///
+/// \threadsafety This function is not thread safe.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -356,6 +382,8 @@ int sdlGetScancodeFromName(String? name) {
 /// \param key the desired SDL_Keycode to query.
 /// \returns a UTF-8 encoded string of the key name.
 ///
+/// \threadsafety This function is not thread safe.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetKeyFromName
@@ -382,6 +410,8 @@ String? sdlGetKeyName(int key) {
 /// \param name the human-readable key name.
 /// \returns key code, or `SDLK_UNKNOWN` if the name wasn't recognized; call
 /// SDL_GetError() for more information.
+///
+/// \threadsafety This function is not thread safe.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -418,6 +448,8 @@ int sdlGetKeyFromName(String? name) {
 /// \param window the window to enable text input.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety This function should only be called on the main thread.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -477,6 +509,8 @@ bool sdlStartTextInput(Pointer<SdlWindow> window) {
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety This function should only be called on the main thread.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_SetTextInputArea
@@ -500,6 +534,8 @@ bool sdlStartTextInputWithProperties(Pointer<SdlWindow> window, int props) {
 ///
 /// \param window the window to check.
 /// \returns true if text input events are enabled else false.
+///
+/// \threadsafety This function should only be called on the main thread.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -525,6 +561,8 @@ bool sdlTextInputActive(Pointer<SdlWindow> window) {
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety This function should only be called on the main thread.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_StartTextInput
@@ -545,6 +583,8 @@ bool sdlStopTextInput(Pointer<SdlWindow> window) {
 /// \param window the window to affect.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety This function should only be called on the main thread.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -574,6 +614,8 @@ bool sdlClearComposition(Pointer<SdlWindow> window) {
 /// `rect->x`, in window coordinates.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety This function should only be called on the main thread.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -606,6 +648,8 @@ bool sdlSetTextInputArea(
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety This function should only be called on the main thread.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_SetTextInputArea
@@ -629,6 +673,8 @@ bool sdlGetTextInputArea(
 /// \returns true if the platform has some screen keyboard support or false if
 /// not.
 ///
+/// \threadsafety This function should only be called on the main thread.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_StartTextInput
@@ -649,6 +695,8 @@ bool sdlHasScreenKeyboardSupport() {
 ///
 /// \param window the window for which screen keyboard should be queried.
 /// \returns true if screen keyboard is shown or false if not.
+///
+/// \threadsafety This function should only be called on the main thread.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///

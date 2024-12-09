@@ -13,7 +13,7 @@ int main() {
     print('SDL_Init Error: ${sdlGetError()}');
     return 1;
   }
-  sdlSetHint(SDL_HINT_RENDER_VSYNC, '60');
+  sdlSetHint(SDL_HINT_RENDER_VSYNC, '1');
   var window = SdlWindowEx.create(
       title: 'Wave test', w: gWidth, h: gHeight, flags: SDL_WINDOW_OPENGL);
   if (window == nullptr) {

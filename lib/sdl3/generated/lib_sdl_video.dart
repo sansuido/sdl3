@@ -9,6 +9,8 @@ import 'struct_sdl.dart';
 ///
 /// \returns the number of built in video drivers.
 ///
+/// \threadsafety This function should only be called on the main thread.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetVideoDriver
@@ -35,6 +37,8 @@ int sdlGetNumVideoDrivers() {
 ///
 /// \param index the index of a video driver.
 /// \returns the name of the video driver with the given **index**.
+///
+/// \threadsafety This function should only be called on the main thread.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -64,6 +68,8 @@ String? sdlGetVideoDriver(int index) {
 /// \returns the name of the current video driver or NULL if no driver has been
 /// initialized.
 ///
+/// \threadsafety This function should only be called on the main thread.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetNumVideoDrivers
@@ -88,6 +94,8 @@ String? sdlGetCurrentVideoDriver() {
 ///
 /// \returns the current system theme, light, dark, or unknown.
 ///
+/// \threadsafety This function should only be called on the main thread.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
@@ -108,6 +116,8 @@ int sdlGetSystemTheme() {
 /// call SDL_GetError() for more information. This should be freed
 /// with SDL_free() when it is no longer needed.
 ///
+/// \threadsafety This function should only be called on the main thread.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
@@ -125,6 +135,8 @@ Pointer<Uint32> sdlGetDisplays(Pointer<Int32> count) {
 ///
 /// \returns the instance ID of the primary display on success or 0 on failure;
 /// call SDL_GetError() for more information.
+///
+/// \threadsafety This function should only be called on the main thread.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -162,6 +174,8 @@ int sdlGetPrimaryDisplay() {
 /// \returns a valid property ID on success or 0 on failure; call
 /// SDL_GetError() for more information.
 ///
+/// \threadsafety This function should only be called on the main thread.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
@@ -180,6 +194,8 @@ int sdlGetDisplayProperties(int displayId) {
 /// \param displayID the instance ID of the display to query.
 /// \returns the name of a display or NULL on failure; call SDL_GetError() for
 /// more information.
+///
+/// \threadsafety This function should only be called on the main thread.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -208,6 +224,8 @@ String? sdlGetDisplayName(int displayId) {
 /// \param rect the SDL_Rect structure filled in with the display bounds.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety This function should only be called on the main thread.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -242,6 +260,8 @@ bool sdlGetDisplayBounds(int displayId, Pointer<SdlRect> rect) {
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety This function should only be called on the main thread.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetDisplayBounds
@@ -265,6 +285,8 @@ bool sdlGetDisplayUsableBounds(int displayId, Pointer<SdlRect> rect) {
 /// \returns the SDL_DisplayOrientation enum value of the display, or
 /// `SDL_ORIENTATION_UNKNOWN` if it isn't available.
 ///
+/// \threadsafety This function should only be called on the main thread.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetDisplays
@@ -285,6 +307,8 @@ int sdlGetNaturalDisplayOrientation(int displayId) {
 /// \param displayID the instance ID of the display to query.
 /// \returns the SDL_DisplayOrientation enum value of the display, or
 /// `SDL_ORIENTATION_UNKNOWN` if it isn't available.
+///
+/// \threadsafety This function should only be called on the main thread.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -311,6 +335,8 @@ int sdlGetCurrentDisplayOrientation(int displayId) {
 /// \param displayID the instance ID of the display to query.
 /// \returns the content scale of the display, or 0.0f on failure; call
 /// SDL_GetError() for more information.
+///
+/// \threadsafety This function should only be called on the main thread.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -345,6 +371,8 @@ double sdlGetDisplayContentScale(int displayId) {
 /// failure; call SDL_GetError() for more information. This is a
 /// single allocation that should be freed with SDL_free() when it is
 /// no longer needed.
+///
+/// \threadsafety This function should only be called on the main thread.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -384,6 +412,8 @@ Pointer<Pointer<SdlDisplayMode>> sdlGetFullscreenDisplayModes(
 /// or larger than the desired mode.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety This function should only be called on the main thread.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -429,6 +459,8 @@ bool sdlGetClosestFullscreenDisplayMode(
 /// \returns a pointer to the desktop display mode or NULL on failure; call
 /// SDL_GetError() for more information.
 ///
+/// \threadsafety This function should only be called on the main thread.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetCurrentDisplayMode
@@ -457,6 +489,8 @@ Pointer<SdlDisplayMode> sdlGetDesktopDisplayMode(int displayId) {
 /// \returns a pointer to the desktop display mode or NULL on failure; call
 /// SDL_GetError() for more information.
 ///
+/// \threadsafety This function should only be called on the main thread.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetDesktopDisplayMode
@@ -479,6 +513,8 @@ Pointer<SdlDisplayMode> sdlGetCurrentDisplayMode(int displayId) {
 /// \param point the point to query.
 /// \returns the instance ID of the display containing the point or 0 on
 /// failure; call SDL_GetError() for more information.
+///
+/// \threadsafety This function should only be called on the main thread.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -503,6 +539,8 @@ int sdlGetDisplayForPoint(Pointer<SdlPoint> point) {
 /// closest to the center of the rect on success or 0 on failure; call
 /// SDL_GetError() for more information.
 ///
+/// \threadsafety This function should only be called on the main thread.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetDisplayBounds
@@ -525,6 +563,8 @@ int sdlGetDisplayForRect(Pointer<SdlRect> rect) {
 /// \returns the instance ID of the display containing the center of the window
 /// on success or 0 on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety This function should only be called on the main thread.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -551,6 +591,8 @@ int sdlGetDisplayForWindow(Pointer<SdlWindow> window) {
 /// \param window the window to query.
 /// \returns the pixel density or 0.0f on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety This function should only be called on the main thread.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -583,6 +625,8 @@ double sdlGetWindowPixelDensity(Pointer<SdlWindow> window) {
 /// \param window the window to query.
 /// \returns the display scale, or 0.0f on failure; call SDL_GetError() for
 /// more information.
+///
+/// \threadsafety This function should only be called on the main thread.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -621,6 +665,8 @@ double sdlGetWindowDisplayScale(Pointer<SdlWindow> window) {
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety This function should only be called on the main thread.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetWindowFullscreenMode
@@ -645,6 +691,8 @@ bool sdlSetWindowFullscreenMode(
 /// \param window the window to query.
 /// \returns a pointer to the exclusive fullscreen mode to use or NULL for
 /// borderless fullscreen desktop mode.
+///
+/// \threadsafety This function should only be called on the main thread.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -671,6 +719,8 @@ Pointer<SdlDisplayMode> sdlGetWindowFullscreenMode(Pointer<SdlWindow> window) {
 /// SDL_GetError() for more information. This should be freed with
 /// SDL_free() when it is no longer needed.
 ///
+/// \threadsafety This function should only be called on the main thread.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
@@ -694,6 +744,8 @@ Pointer<NativeType> sdlGetWindowIccProfile(
 /// SDL_PIXELFORMAT_UNKNOWN on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety This function should only be called on the main thread.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
@@ -715,6 +767,8 @@ int sdlGetWindowPixelFormat(Pointer<SdlWindow> window) {
 /// call SDL_GetError() for more information. This is a single
 /// allocation that should be freed with SDL_free() when it is no
 /// longer needed.
+///
+/// \threadsafety This function should only be called on the main thread.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -804,6 +858,8 @@ Pointer<Pointer<SdlWindow>> sdlGetWindows(Pointer<Int32> count) {
 /// \returns the window that was created or NULL on failure; call
 /// SDL_GetError() for more information.
 ///
+/// \threadsafety This function should only be called on the main thread.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_CreateWindowAndRenderer
@@ -876,6 +932,8 @@ Pointer<SdlWindow> sdlCreateWindow(String? title, int w, int h, int flags) {
 /// additional SDL_WindowFlags OR'd together.
 /// \returns the window that was created or NULL on failure; call
 /// SDL_GetError() for more information.
+///
+/// \threadsafety This function should only be called on the main thread.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -1007,6 +1065,8 @@ Pointer<SdlWindow> sdlCreatePopupWindow(Pointer<SdlWindow> parent, int offsetX,
 /// \returns the window that was created or NULL on failure; call
 /// SDL_GetError() for more information.
 ///
+/// \threadsafety This function should only be called on the main thread.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_CreateProperties
@@ -1033,6 +1093,8 @@ Pointer<SdlWindow> sdlCreateWindowWithProperties(int props) {
 /// \returns the ID of the window on success or 0 on failure; call
 /// SDL_GetError() for more information.
 ///
+/// \threadsafety This function should only be called on the main thread.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetWindowFromID
@@ -1057,6 +1119,8 @@ int sdlGetWindowId(Pointer<SdlWindow> window) {
 /// \returns the window associated with `id` or NULL if it doesn't exist; call
 /// SDL_GetError() for more information.
 ///
+/// \threadsafety This function should only be called on the main thread.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetWindowID
@@ -1077,6 +1141,8 @@ Pointer<SdlWindow> sdlGetWindowFromId(int id) {
 /// \param window the window to query.
 /// \returns the parent of the window on success or NULL if the window has no
 /// parent.
+///
+/// \threadsafety This function should only be called on the main thread.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -1209,6 +1275,8 @@ Pointer<SdlWindow> sdlGetWindowParent(Pointer<SdlWindow> window) {
 /// \returns a valid property ID on success or 0 on failure; call
 /// SDL_GetError() for more information.
 ///
+/// \threadsafety This function should only be called on the main thread.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
@@ -1226,6 +1294,8 @@ int sdlGetWindowProperties(Pointer<SdlWindow> window) {
 ///
 /// \param window the window to query.
 /// \returns a mask of the SDL_WindowFlags associated with `window`.
+///
+/// \threadsafety This function should only be called on the main thread.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -1257,6 +1327,8 @@ int sdlGetWindowFlags(Pointer<SdlWindow> window) {
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety This function should only be called on the main thread.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetWindowTitle
@@ -1281,6 +1353,8 @@ bool sdlSetWindowTitle(Pointer<SdlWindow> window, String? title) {
 /// \param window the window to query.
 /// \returns the title of the window in UTF-8 format or "" if there is no
 /// title.
+///
+/// \threadsafety This function should only be called on the main thread.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -1317,6 +1391,8 @@ String? sdlGetWindowTitle(Pointer<SdlWindow> window) {
 /// \param icon an SDL_Surface structure containing the icon for the window.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety This function should only be called on the main thread.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -1364,6 +1440,8 @@ bool sdlSetWindowIcon(Pointer<SdlWindow> window, Pointer<SdlSurface> icon) {
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety This function should only be called on the main thread.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetWindowPosition
@@ -1396,6 +1474,8 @@ bool sdlSetWindowPosition(Pointer<SdlWindow> window, int x, int y) {
 /// NULL.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety This function should only be called on the main thread.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -1442,6 +1522,8 @@ bool sdlGetWindowPosition(
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety This function should only be called on the main thread.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetWindowSize
@@ -1471,6 +1553,8 @@ bool sdlSetWindowSize(Pointer<SdlWindow> window, int w, int h) {
 /// \param h a pointer filled in with the height of the window, may be NULL.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety This function should only be called on the main thread.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -1506,6 +1590,8 @@ bool sdlGetWindowSize(
 /// interactive content.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety This function should only be called on the main thread.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -1552,6 +1638,8 @@ bool sdlGetWindowSafeArea(Pointer<SdlWindow> window, Pointer<SdlRect> rect) {
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety This function should only be called on the main thread.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetWindowAspectRatio
@@ -1581,6 +1669,8 @@ bool sdlSetWindowAspectRatio(
 /// window, may be NULL.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety This function should only be called on the main thread.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -1629,6 +1719,8 @@ bool sdlGetWindowAspectRatio(Pointer<SdlWindow> window,
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety This function should only be called on the main thread.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetWindowSize
@@ -1663,6 +1755,8 @@ bool sdlGetWindowBordersSize(Pointer<SdlWindow> window, Pointer<Int32> top,
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety This function should only be called on the main thread.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_CreateWindow
@@ -1689,6 +1783,8 @@ bool sdlGetWindowSizeInPixels(
 /// \param min_h the minimum height of the window, or 0 for no limit.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety This function should only be called on the main thread.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -1717,6 +1813,8 @@ bool sdlSetWindowMinimumSize(Pointer<SdlWindow> window, int minW, int minH) {
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety This function should only be called on the main thread.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetWindowMaximumSize
@@ -1744,6 +1842,8 @@ bool sdlGetWindowMinimumSize(
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety This function should only be called on the main thread.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetWindowMaximumSize
@@ -1770,6 +1870,8 @@ bool sdlSetWindowMaximumSize(Pointer<SdlWindow> window, int maxW, int maxH) {
 /// NULL.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety This function should only be called on the main thread.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -1803,6 +1905,8 @@ bool sdlGetWindowMaximumSize(
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety This function should only be called on the main thread.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetWindowFlags
@@ -1832,6 +1936,8 @@ bool sdlSetWindowBordered(Pointer<SdlWindow> window, bool bordered) {
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety This function should only be called on the main thread.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetWindowFlags
@@ -1858,6 +1964,8 @@ bool sdlSetWindowResizable(Pointer<SdlWindow> window, bool resizable) {
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety This function should only be called on the main thread.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetWindowFlags
@@ -1880,6 +1988,8 @@ bool sdlSetWindowAlwaysOnTop(Pointer<SdlWindow> window, bool onTop) {
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety This function should only be called on the main thread.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_HideWindow
@@ -1901,6 +2011,8 @@ bool sdlShowWindow(Pointer<SdlWindow> window) {
 /// \param window the window to hide.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety This function should only be called on the main thread.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -1930,6 +2042,8 @@ bool sdlHideWindow(Pointer<SdlWindow> window) {
 /// \param window the window to raise.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety This function should only be called on the main thread.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -1967,6 +2081,8 @@ bool sdlRaiseWindow(Pointer<SdlWindow> window) {
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety This function should only be called on the main thread.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_MinimizeWindow
@@ -1998,6 +2114,8 @@ bool sdlMaximizeWindow(Pointer<SdlWindow> window) {
 /// \param window the window to minimize.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety This function should only be called on the main thread.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -2031,6 +2149,8 @@ bool sdlMinimizeWindow(Pointer<SdlWindow> window) {
 /// \param window the window to restore.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety This function should only be called on the main thread.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -2069,6 +2189,8 @@ bool sdlRestoreWindow(Pointer<SdlWindow> window) {
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety This function should only be called on the main thread.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetWindowFullscreenMode
@@ -2104,6 +2226,8 @@ bool sdlSetWindowFullscreen(Pointer<SdlWindow> window, bool fullscreen) {
 /// \returns true on success or false if the operation timed out before the
 /// window was in the requested state.
 ///
+/// \threadsafety This function should only be called on the main thread.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_SetWindowSize
@@ -2130,6 +2254,8 @@ bool sdlSyncWindow(Pointer<SdlWindow> window) {
 /// \param window the window to query.
 /// \returns true if there is a surface associated with the window, or false
 /// otherwise.
+///
+/// \threadsafety This function should only be called on the main thread.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -2162,6 +2288,8 @@ bool sdlWindowHasSurface(Pointer<SdlWindow> window) {
 /// \param window the window to query.
 /// \returns the surface associated with the window, or NULL on failure; call
 /// SDL_GetError() for more information.
+///
+/// \threadsafety This function should only be called on the main thread.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -2199,6 +2327,8 @@ Pointer<SdlSurface> sdlGetWindowSurface(Pointer<SdlWindow> window) {
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety This function should only be called on the main thread.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetWindowSurfaceVSync
@@ -2222,6 +2352,8 @@ bool sdlSetWindowSurfaceVSync(Pointer<SdlWindow> window, int vsync) {
 /// See SDL_SetWindowSurfaceVSync() for the meaning of the value.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety This function should only be called on the main thread.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -2249,6 +2381,8 @@ bool sdlGetWindowSurfaceVSync(Pointer<SdlWindow> window, Pointer<Int32> vsync) {
 /// \param window the window to update.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety This function should only be called on the main thread.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -2285,6 +2419,8 @@ bool sdlUpdateWindowSurface(Pointer<SdlWindow> window) {
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety This function should only be called on the main thread.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetWindowSurface
@@ -2310,6 +2446,8 @@ bool sdlUpdateWindowSurfaceRects(
 /// \param window the window to update.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety This function should only be called on the main thread.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -2350,6 +2488,8 @@ bool sdlDestroyWindowSurface(Pointer<SdlWindow> window) {
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety This function should only be called on the main thread.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetWindowKeyboardGrab
@@ -2376,6 +2516,8 @@ bool sdlSetWindowKeyboardGrab(Pointer<SdlWindow> window, bool grabbed) {
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety This function should only be called on the main thread.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetWindowMouseRect
@@ -2400,6 +2542,8 @@ bool sdlSetWindowMouseGrab(Pointer<SdlWindow> window, bool grabbed) {
 /// \param window the window to query.
 /// \returns true if keyboard is grabbed, and false otherwise.
 ///
+/// \threadsafety This function should only be called on the main thread.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_SetWindowKeyboardGrab
@@ -2419,6 +2563,8 @@ bool sdlGetWindowKeyboardGrab(Pointer<SdlWindow> window) {
 ///
 /// \param window the window to query.
 /// \returns true if mouse is grabbed, and false otherwise.
+///
+/// \threadsafety This function should only be called on the main thread.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -2441,6 +2587,8 @@ bool sdlGetWindowMouseGrab(Pointer<SdlWindow> window) {
 /// Get the window that currently has an input grab enabled.
 ///
 /// \returns the window if input is grabbed or NULL otherwise.
+///
+/// \threadsafety This function should only be called on the main thread.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -2469,6 +2617,8 @@ Pointer<SdlWindow> sdlGetGrabbedWindow() {
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety This function should only be called on the main thread.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetWindowMouseRect
@@ -2492,6 +2642,8 @@ bool sdlSetWindowMouseRect(Pointer<SdlWindow> window, Pointer<SdlRect> rect) {
 /// \param window the window to query.
 /// \returns a pointer to the mouse confinement rectangle of a window, or NULL
 /// if there isn't one.
+///
+/// \threadsafety This function should only be called on the main thread.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -2523,6 +2675,8 @@ Pointer<SdlRect> sdlGetWindowMouseRect(Pointer<SdlWindow> window) {
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety This function should only be called on the main thread.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GetWindowOpacity
@@ -2547,6 +2701,8 @@ bool sdlSetWindowOpacity(Pointer<SdlWindow> window, double opacity) {
 /// \param window the window to get the current opacity value from.
 /// \returns the opacity, (0.0f - transparent, 1.0f - opaque), or -1.0f on
 /// failure; call SDL_GetError() for more information.
+///
+/// \threadsafety This function should only be called on the main thread.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -2588,6 +2744,8 @@ double sdlGetWindowOpacity(Pointer<SdlWindow> window) {
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety This function should only be called on the main thread.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_SetWindowModal
@@ -2614,6 +2772,8 @@ bool sdlSetWindowParent(Pointer<SdlWindow> window, Pointer<SdlWindow> parent) {
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety This function should only be called on the main thread.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_SetWindowParent
@@ -2636,6 +2796,8 @@ bool sdlSetWindowModal(Pointer<SdlWindow> window, bool modal) {
 /// \param focusable true to allow input focus, false to not allow input focus.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety This function should only be called on the main thread.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -2668,6 +2830,8 @@ bool sdlSetWindowFocusable(Pointer<SdlWindow> window, bool focusable) {
 /// the client area.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety This function should only be called on the main thread.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -2720,6 +2884,8 @@ bool sdlShowWindowSystemMenu(Pointer<SdlWindow> window, int x, int y) {
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety This function should only be called on the main thread.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
@@ -2763,6 +2929,8 @@ bool sdlSetWindowHitTest(
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety This function should only be called on the main thread.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
@@ -2784,6 +2952,8 @@ bool sdlSetWindowShape(Pointer<SdlWindow> window, Pointer<SdlSurface> shape) {
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety This function should only be called on the main thread.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
@@ -2804,6 +2974,8 @@ bool sdlFlashWindow(Pointer<SdlWindow> window, int operation) {
 /// well.
 ///
 /// \param window the window to destroy.
+///
+/// \threadsafety This function should only be called on the main thread.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -2830,6 +3002,8 @@ void sdlDestroyWindow(Pointer<SdlWindow> window) {
 ///
 /// \returns true if the screensaver is enabled, false if it is disabled.
 ///
+/// \threadsafety This function should only be called on the main thread.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_DisableScreenSaver
@@ -2850,6 +3024,8 @@ bool sdlScreenSaverEnabled() {
 ///
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety This function should only be called on the main thread.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -2877,6 +3053,8 @@ bool sdlEnableScreenSaver() {
 ///
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety This function should only be called on the main thread.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -2907,6 +3085,8 @@ bool sdlDisableScreenSaver() {
 /// default OpenGL library.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety This function should only be called on the main thread.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -2971,6 +3151,8 @@ bool sdlGlLoadLibrary(String? path) {
 /// \returns a pointer to the named OpenGL function. The returned pointer
 /// should be cast to the appropriate function signature.
 ///
+/// \threadsafety This function should only be called on the main thread.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GL_ExtensionSupported
@@ -3002,6 +3184,8 @@ Pointer<NativeType> sdlGlGetProcAddress(String? proc) {
 /// \returns a pointer to the named EGL function. The returned pointer should
 /// be cast to the appropriate function signature.
 ///
+/// \threadsafety This function should only be called on the main thread.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_EGL_GetCurrentDisplay
@@ -3022,6 +3206,8 @@ Pointer<NativeType> sdlEglGetProcAddress(String? proc) {
 
 ///
 /// Unload the OpenGL library previously loaded by SDL_GL_LoadLibrary().
+///
+/// \threadsafety This function should only be called on the main thread.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -3053,6 +3239,8 @@ void sdlGlUnloadLibrary() {
 /// \param extension the name of the extension to check.
 /// \returns true if the extension is supported, false otherwise.
 ///
+/// \threadsafety This function should only be called on the main thread.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
@@ -3071,6 +3259,8 @@ bool sdlGlExtensionSupported(String? extension) {
 
 ///
 /// Reset all previously set OpenGL context attributes to their default values.
+///
+/// \threadsafety This function should only be called on the main thread.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -3101,6 +3291,8 @@ void sdlGlResetAttributes() {
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety This function should only be called on the main thread.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GL_GetAttribute
@@ -3124,6 +3316,8 @@ bool sdlGlSetAttribute(int attr, int value) {
 /// \param value a pointer filled in with the current value of `attr`.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety This function should only be called on the main thread.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -3155,6 +3349,8 @@ bool sdlGlGetAttribute(int attr, Pointer<Int32> value) {
 /// \returns the OpenGL context associated with `window` or NULL on failure;
 /// call SDL_GetError() for more information.
 ///
+/// \threadsafety This function should only be called on the main thread.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GL_DestroyContext
@@ -3181,6 +3377,8 @@ Pointer<SdlGlContext> sdlGlCreateContext(Pointer<SdlWindow> window) {
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety This function should only be called on the main thread.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GL_CreateContext
@@ -3203,6 +3401,8 @@ bool sdlGlMakeCurrent(
 /// \returns the currently active OpenGL window on success or NULL on failure;
 /// call SDL_GetError() for more information.
 ///
+/// \threadsafety This function should only be called on the main thread.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
@@ -3220,6 +3420,8 @@ Pointer<SdlWindow> sdlGlGetCurrentWindow() {
 ///
 /// \returns the currently active OpenGL context or NULL on failure; call
 /// SDL_GetError() for more information.
+///
+/// \threadsafety This function should only be called on the main thread.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -3241,6 +3443,8 @@ Pointer<SdlGlContext> sdlGlGetCurrentContext() {
 /// \returns the currently active EGL display or NULL on failure; call
 /// SDL_GetError() for more information.
 ///
+/// \threadsafety This function should only be called on the main thread.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
@@ -3258,6 +3462,8 @@ Pointer<NativeType> sdlEglGetCurrentDisplay() {
 ///
 /// \returns the currently active EGL config or NULL on failure; call
 /// SDL_GetError() for more information.
+///
+/// \threadsafety This function should only be called on the main thread.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -3277,6 +3483,8 @@ Pointer<NativeType> sdlEglGetCurrentConfig() {
 /// \param window the window to query.
 /// \returns the EGLSurface pointer associated with the window, or NULL on
 /// failure.
+///
+/// \threadsafety This function should only be called on the main thread.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -3306,6 +3514,8 @@ Pointer<NativeType> sdlEglGetWindowSurface(Pointer<SdlWindow> window) {
 /// \param contextAttribCallback callback for attributes to pass to
 /// eglCreateContext. May be NULL.
 /// \param userdata a pointer that is passed to the callbacks.
+///
+/// \threadsafety This function should only be called on the main thread.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -3357,6 +3567,8 @@ void sdlEglSetAttributeCallbacks(
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety This function should only be called on the main thread.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_GL_GetSwapInterval
@@ -3383,6 +3595,8 @@ bool sdlGlSetSwapInterval(int interval) {
 /// immediately instead of waiting for the next retrace.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety This function should only be called on the main thread.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -3412,6 +3626,8 @@ bool sdlGlGetSwapInterval(Pointer<Int32> interval) {
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety This function should only be called on the main thread.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
@@ -3430,6 +3646,8 @@ bool sdlGlSwapWindow(Pointer<SdlWindow> window) {
 /// \param context the OpenGL context to be deleted.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety This function should only be called on the main thread.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///

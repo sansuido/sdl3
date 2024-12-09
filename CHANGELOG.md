@@ -1,3 +1,9 @@
+## 1.0.0
+- SDL3-2024-12-08
+- [deprecate] imgInit (IMG_INIT_flags...) and imgQuit are deprecated.
+- [add] Added SdlAsyncIo related functions.
+- [fixed] Fixed example sources.
+
 ## 0.1.45
 - SDL3-2024-12-01
 

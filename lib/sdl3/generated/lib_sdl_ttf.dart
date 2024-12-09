@@ -227,6 +227,17 @@ Pointer<TtfFont> ttfOpenFontWithProperties(int props) {
 ///
 /// Get the properties associated with a font.
 ///
+/// The following read-write properties are provided by SDL:
+///
+/// - `TTF_PROP_FONT_OUTLINE_LINE_CAP_NUMBER`: The FT_Stroker_LineCap value
+/// used when setting the font outline, defaults to
+/// `FT_STROKER_LINECAP_ROUND`.
+/// - `TTF_PROP_FONT_OUTLINE_LINE_JOIN_NUMBER`: The FT_Stroker_LineJoin value
+/// used when setting the font outline, defaults to
+/// `FT_STROKER_LINEJOIN_ROUND`.
+/// - `TTF_PROP_FONT_OUTLINE_MITER_LIMIT_NUMBER`: The FT_Fixed miter limit used
+/// when setting the font outline, defaults to 0.
+///
 /// \param font the font to query.
 /// \returns a valid property ID on success or 0 on failure; call
 /// SDL_GetError() for more information.
@@ -452,6 +463,10 @@ int ttfGetFontStyle(Pointer<TtfFont> font) {
 
 ///
 /// Set a font's current outline.
+///
+/// This uses the font properties `TTF_PROP_FONT_OUTLINE_LINE_CAP_NUMBER`,
+/// `TTF_PROP_FONT_OUTLINE_LINE_JOIN_NUMBER`, and
+/// `TTF_PROP_FONT_OUTLINE_MITER_LIMIT_NUMBER` when setting the font outline.
 ///
 /// This updates any TTF_Text objects using this font, and clears
 /// already-generated glyphs, if any, from the cache.
@@ -2183,6 +2198,91 @@ void ttfDestroyRendererTextEngine(Pointer<TtfTextEngine> engine) {
       void Function(
           Pointer<TtfTextEngine> engine)>('TTF_DestroyRendererTextEngine');
   return ttfDestroyRendererTextEngineLookupFunction(engine);
+}
+
+///
+/// Create a text engine for drawing text with the SDL GPU API.
+///
+/// \param device the SDL_GPUDevice to use for creating textures and drawing
+/// text.
+/// \returns a TTF_TextEngine object or NULL on failure; call SDL_GetError()
+/// for more information.
+///
+/// \threadsafety This function should be called on the thread that created the
+/// device.
+///
+/// \since This function is available since SDL_ttf 3.0.0.
+///
+/// \sa TTF_DestroyGPUTextEngine
+///
+/// ```c
+/// extern SDL_DECLSPEC TTF_TextEngine * SDLCALL TTF_CreateGPUTextEngine(SDL_GPUDevice *device)
+/// ```
+Pointer<TtfTextEngine> ttfCreateGpuTextEngine(Pointer<SdlGpuDevice> device) {
+  final ttfCreateGpuTextEngineLookupFunction = libSdl3Ttf.lookupFunction<
+      Pointer<TtfTextEngine> Function(Pointer<SdlGpuDevice> device),
+      Pointer<TtfTextEngine> Function(
+          Pointer<SdlGpuDevice> device)>('TTF_CreateGPUTextEngine');
+  return ttfCreateGpuTextEngineLookupFunction(device);
+}
+
+///
+/// Get the geometry data needed for drawing the text.
+///
+/// `text` must have been created using a TTF_TextEngine from
+/// TTF_CreateGPUTextEngine().
+///
+/// If the text looks blocky use linear filtering.
+///
+/// \param text the text to draw.
+/// \returns a NULL terminated linked list of TTF_GPUAtlasDrawSequence objects
+/// or NULL if the passed text is empty or in case of failure; call
+/// SDL_GetError() for more information.
+///
+/// \threadsafety This function should be called on the thread that created the
+/// text.
+///
+/// \since This function is available since SDL_ttf 3.0.0.
+///
+/// \sa TTF_CreateGPUTextEngine
+/// \sa TTF_CreateText
+/// \sa TTF_CreateText_Wrapped
+///
+/// ```c
+/// extern SDL_DECLSPEC TTF_GPUAtlasDrawSequence* SDLCALL TTF_GetGPUTextDrawData(TTF_Text *text)
+/// ```
+Pointer<TtfGpuAtlasDrawSequence> ttfGetGpuTextDrawData(Pointer<TtfText> text) {
+  final ttfGetGpuTextDrawDataLookupFunction = libSdl3Ttf.lookupFunction<
+      Pointer<TtfGpuAtlasDrawSequence> Function(Pointer<TtfText> text),
+      Pointer<TtfGpuAtlasDrawSequence> Function(
+          Pointer<TtfText> text)>('TTF_GetGPUTextDrawData');
+  return ttfGetGpuTextDrawDataLookupFunction(text);
+}
+
+///
+/// Destroy a text engine created for drawing text with the SDL GPU API.
+///
+/// All text created by this engine should be destroyed before calling this
+/// function.
+///
+/// \param engine a TTF_TextEngine object created with
+/// TTF_CreateGPUTextEngine().
+///
+/// \threadsafety This function should be called on the thread that created the
+/// engine.
+///
+/// \since This function is available since SDL_ttf 3.0.0.
+///
+/// \sa TTF_CreateGPUTextEngine
+///
+/// ```c
+/// extern SDL_DECLSPEC void SDLCALL TTF_DestroyGPUTextEngine(TTF_TextEngine *engine)
+/// ```
+void ttfDestroyGpuTextEngine(Pointer<TtfTextEngine> engine) {
+  final ttfDestroyGpuTextEngineLookupFunction = libSdl3Ttf.lookupFunction<
+      Void Function(Pointer<TtfTextEngine> engine),
+      void Function(Pointer<TtfTextEngine> engine)>('TTF_DestroyGPUTextEngine');
+  return ttfDestroyGpuTextEngineLookupFunction(engine);
 }
 
 ///

@@ -8,13 +8,7 @@ int main() {
     print(sdlGetError());
     return -1;
   }
-  sdlSetHint(SDL_HINT_RENDER_VSYNC, '60');
-  var imgFlags = IMG_INIT_PNG | IMG_INIT_JPG;
-  if (imgInit(imgFlags) != imgFlags) {
-    print(sdlGetError());
-    sdlQuit();
-    return -1;
-  }
+  sdlSetHint(SDL_HINT_RENDER_VSYNC, '1');
   var window = SdlWindowEx.create(
       title: 'rust-sdl2 demo: Video [usage: drag and drop file.(png|jpg|bmp)]',
       w: 800,
@@ -22,7 +16,6 @@ int main() {
       flags: SDL_WINDOW_RESIZABLE);
   if (window == nullptr) {
     print(sdlGetError());
-    imgQuit();
     sdlQuit();
     return -1;
   }
@@ -31,7 +24,6 @@ int main() {
   if (renderer == nullptr) {
     print(sdlGetError());
     window.destroy();
-    imgQuit();
     sdlQuit();
     return -1;
   }
@@ -83,7 +75,6 @@ int main() {
   texture.destroy();
   renderer.destroy();
   window.destroy();
-  imgQuit();
   sdlQuit();
   return 0;
 }

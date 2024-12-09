@@ -10,7 +10,7 @@ import 'lib_sdl.dart';
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
-/// \threadsafety You may only call this function from the main thread.
+/// \threadsafety This function should only be called on the main thread.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -40,7 +40,7 @@ bool sdlSetClipboardText(String? text) {
 /// SDL_GetError() for more information. This should be freed with
 /// SDL_free() when it is no longer needed.
 ///
-/// \threadsafety You may only call this function from the main thread.
+/// \threadsafety This function should only be called on the main thread.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -62,7 +62,7 @@ Pointer<Int8> sdlGetClipboardText() {
 ///
 /// \returns true if the clipboard has text, or false if it does not.
 ///
-/// \threadsafety You may only call this function from the main thread.
+/// \threadsafety This function should only be called on the main thread.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -85,7 +85,7 @@ bool sdlHasClipboardText() {
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
-/// \threadsafety You may only call this function from the main thread.
+/// \threadsafety This function should only be called on the main thread.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -115,7 +115,7 @@ bool sdlSetPrimarySelectionText(String? text) {
 /// failure; call SDL_GetError() for more information. This should be
 /// freed with SDL_free() when it is no longer needed.
 ///
-/// \threadsafety You may only call this function from the main thread.
+/// \threadsafety This function should only be called on the main thread.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -138,7 +138,7 @@ Pointer<Int8> sdlGetPrimarySelectionText() {
 ///
 /// \returns true if the primary selection has text, or false if it does not.
 ///
-/// \threadsafety You may only call this function from the main thread.
+/// \threadsafety This function should only be called on the main thread.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -177,7 +177,7 @@ bool sdlHasPrimarySelectionText() {
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
-/// \threadsafety You may only call this function from the main thread.
+/// \threadsafety This function should only be called on the main thread.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -218,7 +218,7 @@ bool sdlSetClipboardData(
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
-/// \threadsafety You may only call this function from the main thread.
+/// \threadsafety This function should only be called on the main thread.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -246,7 +246,7 @@ bool sdlClearClipboardData() {
 /// for more information. This should be freed with SDL_free() when it
 /// is no longer needed.
 ///
-/// \threadsafety You may only call this function from the main thread.
+/// \threadsafety This function should only be called on the main thread.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -276,7 +276,7 @@ Pointer<NativeType> sdlGetClipboardData(
 /// \returns true if there exists data in clipboard for the provided mime type,
 /// false if it does not.
 ///
-/// \threadsafety You may only call this function from the main thread.
+/// \threadsafety This function should only be called on the main thread.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -305,7 +305,7 @@ bool sdlHasClipboardData(String? mimeType) {
 /// failure; call SDL_GetError() for more information. This should be
 /// freed with SDL_free() when it is no longer needed.
 ///
-/// \threadsafety You may only call this function from the main thread.
+/// \threadsafety This function should only be called on the main thread.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///

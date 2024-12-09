@@ -16,6 +16,10 @@ const TTF_PROP_FONT_CREATE_SIZE_FLOAT = 'SDL_ttf.font.create.size';
 const TTF_PROP_FONT_CREATE_FACE_NUMBER = 'SDL_ttf.font.create.face';
 const TTF_PROP_FONT_CREATE_HORIZONTAL_DPI_NUMBER = 'SDL_ttf.font.create.hdpi';
 const TTF_PROP_FONT_CREATE_VERTICAL_DPI_NUMBER = 'SDL_ttf.font.create.vdpi';
+const TTF_PROP_FONT_OUTLINE_LINE_CAP_NUMBER = 'SDL_ttf.font.outline.line_cap';
+const TTF_PROP_FONT_OUTLINE_LINE_JOIN_NUMBER = 'SDL_ttf.font.outline.line_join';
+const TTF_PROP_FONT_OUTLINE_MITER_LIMIT_NUMBER =
+    'SDL_ttf.font.outline.miter_limit';
 const TTF_STYLE_NORMAL = 0x00;
 const TTF_STYLE_BOLD = 0x01;
 const TTF_STYLE_ITALIC = 0x02;
@@ -52,6 +56,10 @@ class TtfkPropFont {
       TTF_PROP_FONT_CREATE_HORIZONTAL_DPI_NUMBER;
   static const createVerticalDpiNumber =
       TTF_PROP_FONT_CREATE_VERTICAL_DPI_NUMBER;
+  static const outlineLineCapNumber = TTF_PROP_FONT_OUTLINE_LINE_CAP_NUMBER;
+  static const outlineLineJoinNumber = TTF_PROP_FONT_OUTLINE_LINE_JOIN_NUMBER;
+  static const outlineMiterLimitNumber =
+      TTF_PROP_FONT_OUTLINE_MITER_LIMIT_NUMBER;
 }
 
 class TtfkStyle {

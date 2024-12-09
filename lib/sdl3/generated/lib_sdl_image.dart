@@ -24,109 +24,6 @@ int imgVersion() {
 }
 
 ///
-/// Initialize SDL_image.
-///
-/// This function loads dynamic libraries that SDL_image needs, and prepares
-/// them for use. This must be the first function you call in SDL_image, and if
-/// it fails you should not continue with the library.
-///
-/// Flags should be one or more flags from IMG_InitFlags OR'd together. It
-/// returns the flags successfully initialized, or 0 on failure.
-///
-/// Currently, these flags are:
-///
-/// - `IMG_INIT_JPG`
-/// - `IMG_INIT_PNG`
-/// - `IMG_INIT_TIF`
-/// - `IMG_INIT_WEBP`
-/// - `IMG_INIT_JXL`
-/// - `IMG_INIT_AVIF`
-///
-/// More flags may be added in a future SDL_image release.
-///
-/// This function may need to load external shared libraries to support various
-/// codecs, which means this function can fail to initialize that support on an
-/// otherwise-reasonable system if the library isn't available; this is not
-/// just a question of exceptional circumstances like running out of memory at
-/// startup!
-///
-/// Note that you may call this function more than once to initialize with
-/// additional flags. The return value will reflect both new flags that
-/// successfully initialized, and also include flags that had previously been
-/// initialized as well.
-///
-/// As this will return previously-initialized flags, it's legal to call this
-/// with zero (no flags set). This is a safe no-op that can be used to query
-/// the current initialization state without changing it at all.
-///
-/// Since this returns previously-initialized flags as well as new ones, and
-/// you can call this with zero, you should not check for a zero return value
-/// to determine an error condition. Instead, you should check to make sure all
-/// the flags you require are set in the return value. If you have a game with
-/// data in a specific format, this might be a fatal error. If you're a generic
-/// image displaying app, perhaps you are fine with only having JPG and PNG
-/// support and can live without WEBP, even if you request support for
-/// everything.
-///
-/// Unlike other SDL satellite libraries, calls to IMG_Init do not stack; a
-/// single call to IMG_Quit() will deinitialize everything and does not have to
-/// be paired with a matching IMG_Init call. For that reason, it's considered
-/// best practices to have a single IMG_Init and IMG_Quit call in your program.
-/// While this isn't required, be aware of the risks of deviating from that
-/// behavior.
-///
-/// After initializing SDL_image, the app may begin to load images into
-/// SDL_Surfaces or SDL_Textures.
-///
-/// \param flags initialization flags, OR'd together.
-/// \returns all currently initialized flags.
-///
-/// \since This function is available since SDL_image 3.0.0.
-///
-/// \sa IMG_Quit
-///
-/// ```c
-/// extern SDL_DECLSPEC IMG_InitFlags SDLCALL IMG_Init(IMG_InitFlags flags)
-/// ```
-int imgInit(int flags) {
-  final imgInitLookupFunction = libSdl3Image.lookupFunction<
-      Uint32 Function(Uint32 flags), int Function(int flags)>('IMG_Init');
-  return imgInitLookupFunction(flags);
-}
-
-///
-/// Deinitialize SDL_image.
-///
-/// This should be the last function you call in SDL_image, after freeing all
-/// other resources. This will unload any shared libraries it is using for
-/// various codecs.
-///
-/// After this call, a call to IMG_Init(0) will return 0 (no codecs loaded).
-///
-/// You can safely call IMG_Init() to reload various codec support after this
-/// call.
-///
-/// Unlike other SDL satellite libraries, calls to IMG_Init do not stack; a
-/// single call to IMG_Quit() will deinitialize everything and does not have to
-/// be paired with a matching IMG_Init call. For that reason, it's considered
-/// best practices to have a single IMG_Init and IMG_Quit call in your program.
-/// While this isn't required, be aware of the risks of deviating from that
-/// behavior.
-///
-/// \since This function is available since SDL_image 3.0.0.
-///
-/// \sa IMG_Init
-///
-/// ```c
-/// extern SDL_DECLSPEC void SDLCALL IMG_Quit(void)
-/// ```
-void imgQuit() {
-  final imgQuitLookupFunction =
-      libSdl3Image.lookupFunction<Void Function(), void Function()>('IMG_Quit');
-  return imgQuitLookupFunction();
-}
-
-///
 /// Load an image from an SDL data source into a software surface.
 ///
 /// An SDL_Surface is a buffer of pixels in memory accessible by the CPU. Use
@@ -2318,7 +2215,8 @@ Pointer<SdlSurface> imgReadXpmFromArrayToRgb888(Pointer<Pointer<Int8>> xpm) {
 /// \param file path on the filesystem to write new file to.
 /// \param quality the desired quality, ranging between 0 (lowest) and 100
 /// (highest).
-/// \returns 0 if successful, -1 on error.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL_image 3.0.0.
 ///
@@ -2353,23 +2251,25 @@ bool imgSaveAvif(Pointer<SdlSurface> surface, String? file, int quality) {
 /// to leave it open.
 /// \param quality the desired quality, ranging between 0 (lowest) and 100
 /// (highest).
-/// \returns 0 if successful, -1 on error.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL_image 3.0.0.
 ///
 /// \sa IMG_SaveAVIF
 ///
 /// ```c
-/// extern SDL_DECLSPEC bool SDLCALL IMG_SaveAVIF_IO(SDL_Surface *surface, SDL_IOStream *dst, int closeio, int quality)
+/// extern SDL_DECLSPEC bool SDLCALL IMG_SaveAVIF_IO(SDL_Surface *surface, SDL_IOStream *dst, bool closeio, int quality)
 /// ```
 bool imgSaveAvifIo(Pointer<SdlSurface> surface, Pointer<SdlIoStream> dst,
-    int closeio, int quality) {
+    bool closeio, int quality) {
   final imgSaveAvifIoLookupFunction = libSdl3Image.lookupFunction<
       Uint8 Function(Pointer<SdlSurface> surface, Pointer<SdlIoStream> dst,
-          Int32 closeio, Int32 quality),
+          Uint8 closeio, Int32 quality),
       int Function(Pointer<SdlSurface> surface, Pointer<SdlIoStream> dst,
           int closeio, int quality)>('IMG_SaveAVIF_IO');
-  return imgSaveAvifIoLookupFunction(surface, dst, closeio, quality) == 1;
+  return imgSaveAvifIoLookupFunction(surface, dst, closeio ? 1 : 0, quality) ==
+      1;
 }
 
 ///
@@ -2379,7 +2279,8 @@ bool imgSaveAvifIo(Pointer<SdlSurface> surface, Pointer<SdlIoStream> dst,
 ///
 /// \param surface the SDL surface to save.
 /// \param file path on the filesystem to write new file to.
-/// \returns 0 if successful, -1 on error.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL_image 3.0.0.
 ///
@@ -2411,23 +2312,24 @@ bool imgSavePng(Pointer<SdlSurface> surface, String? file) {
 /// \param dst the SDL_IOStream to save the image data to.
 /// \param closeio true to close/free the SDL_IOStream before returning, false
 /// to leave it open.
-/// \returns 0 if successful, -1 on error.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL_image 3.0.0.
 ///
 /// \sa IMG_SavePNG
 ///
 /// ```c
-/// extern SDL_DECLSPEC bool SDLCALL IMG_SavePNG_IO(SDL_Surface *surface, SDL_IOStream *dst, int closeio)
+/// extern SDL_DECLSPEC bool SDLCALL IMG_SavePNG_IO(SDL_Surface *surface, SDL_IOStream *dst, bool closeio)
 /// ```
 bool imgSavePngIo(
-    Pointer<SdlSurface> surface, Pointer<SdlIoStream> dst, int closeio) {
+    Pointer<SdlSurface> surface, Pointer<SdlIoStream> dst, bool closeio) {
   final imgSavePngIoLookupFunction = libSdl3Image.lookupFunction<
       Uint8 Function(
-          Pointer<SdlSurface> surface, Pointer<SdlIoStream> dst, Int32 closeio),
+          Pointer<SdlSurface> surface, Pointer<SdlIoStream> dst, Uint8 closeio),
       int Function(Pointer<SdlSurface> surface, Pointer<SdlIoStream> dst,
           int closeio)>('IMG_SavePNG_IO');
-  return imgSavePngIoLookupFunction(surface, dst, closeio) == 1;
+  return imgSavePngIoLookupFunction(surface, dst, closeio ? 1 : 0) == 1;
 }
 
 ///
@@ -2439,7 +2341,8 @@ bool imgSavePngIo(
 /// \param file path on the filesystem to write new file to.
 /// \param quality [0; 33] is Lowest quality, [34; 66] is Middle quality, [67;
 /// 100] is Highest quality.
-/// \returns 0 if successful, -1 on error.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL_image 3.0.0.
 ///
@@ -2474,23 +2377,25 @@ bool imgSaveJpg(Pointer<SdlSurface> surface, String? file, int quality) {
 /// to leave it open.
 /// \param quality [0; 33] is Lowest quality, [34; 66] is Middle quality, [67;
 /// 100] is Highest quality.
-/// \returns 0 if successful, -1 on error.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \since This function is available since SDL_image 3.0.0.
 ///
 /// \sa IMG_SaveJPG
 ///
 /// ```c
-/// extern SDL_DECLSPEC bool SDLCALL IMG_SaveJPG_IO(SDL_Surface *surface, SDL_IOStream *dst, int closeio, int quality)
+/// extern SDL_DECLSPEC bool SDLCALL IMG_SaveJPG_IO(SDL_Surface *surface, SDL_IOStream *dst, bool closeio, int quality)
 /// ```
 bool imgSaveJpgIo(Pointer<SdlSurface> surface, Pointer<SdlIoStream> dst,
-    int closeio, int quality) {
+    bool closeio, int quality) {
   final imgSaveJpgIoLookupFunction = libSdl3Image.lookupFunction<
       Uint8 Function(Pointer<SdlSurface> surface, Pointer<SdlIoStream> dst,
-          Int32 closeio, Int32 quality),
+          Uint8 closeio, Int32 quality),
       int Function(Pointer<SdlSurface> surface, Pointer<SdlIoStream> dst,
           int closeio, int quality)>('IMG_SaveJPG_IO');
-  return imgSaveJpgIoLookupFunction(surface, dst, closeio, quality) == 1;
+  return imgSaveJpgIoLookupFunction(surface, dst, closeio ? 1 : 0, quality) ==
+      1;
 }
 
 ///

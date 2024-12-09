@@ -101,7 +101,7 @@ int main() {
         'SDL_Error: ${sdlGetError()}%s\n');
     return 0;
   }
-  sdlSetHint(SDL_HINT_RENDER_VSYNC, '60');
+  sdlSetHint(SDL_HINT_RENDER_VSYNC, '1');
   // Create window
   var window = SdlWindowEx.create(
       title: 'SDL3 audio sample (Press SPACE to pause/play)',

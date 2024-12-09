@@ -41,6 +41,8 @@ extension SdlCursorEx on SdlCursor {
   /// \returns a new cursor with the specified parameters on success or NULL on
   /// failure; call SDL_GetError() for more information.
   ///
+  /// \threadsafety This function should only be called on the main thread.
+  ///
   /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_CreateColorCursor
@@ -75,6 +77,8 @@ extension SdlCursorEx on SdlCursor {
   /// \returns the new cursor on success or NULL on failure; call SDL_GetError()
   /// for more information.
   ///
+  /// \threadsafety This function should only be called on the main thread.
+  ///
   /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_CreateCursor
@@ -97,6 +101,8 @@ extension SdlCursorEx on SdlCursor {
   /// \returns a cursor on success or NULL on failure; call SDL_GetError() for
   /// more information.
   ///
+  /// \threadsafety This function should only be called on the main thread.
+  ///
   /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_DestroyCursor
@@ -115,6 +121,8 @@ extension SdlCursorEx on SdlCursor {
   /// library. It is not necessary to free the cursor with SDL_DestroyCursor().
   ///
   /// \returns the active cursor or NULL if there is no mouse.
+  ///
+  /// \threadsafety This function should only be called on the main thread.
   ///
   /// \since This function is available since SDL 3.1.3.
   ///
@@ -136,6 +144,8 @@ extension SdlCursorEx on SdlCursor {
   /// \returns the default cursor on success or NULL on failuree; call
   /// SDL_GetError() for more information.
   ///
+  /// \threadsafety This function should only be called on the main thread.
+  ///
   /// \since This function is available since SDL 3.1.3.
   ///
   /// ```c
@@ -150,6 +160,8 @@ extension SdlCursorEx on SdlCursor {
   ///
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
+  ///
+  /// \threadsafety This function should only be called on the main thread.
   ///
   /// \since This function is available since SDL 3.1.3.
   ///
@@ -168,6 +180,8 @@ extension SdlCursorEx on SdlCursor {
   ///
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
+  ///
+  /// \threadsafety This function should only be called on the main thread.
   ///
   /// \since This function is available since SDL 3.1.3.
   ///
@@ -197,6 +211,8 @@ extension SdlCursorPointerEx on Pointer<SdlCursor> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
+  /// \threadsafety This function should only be called on the main thread.
+  ///
   /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_GetCursor
@@ -215,6 +231,8 @@ extension SdlCursorPointerEx on Pointer<SdlCursor> {
   /// SDL_CreateColorCursor() or SDL_CreateSystemCursor().
   ///
   /// \param cursor the cursor to free.
+  ///
+  /// \threadsafety This function should only be called on the main thread.
   ///
   /// \since This function is available since SDL 3.1.3.
   ///

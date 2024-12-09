@@ -49,6 +49,8 @@ extension PointEx on math.Point<double> {
   /// \returns a 32-bit bitmask of the button state that can be bitwise-compared
   /// against the SDL_BUTTON_MASK(X) macro.
   ///
+  /// \threadsafety This function should only be called on the main thread.
+  ///
   /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_GetGlobalMouseState
@@ -94,6 +96,8 @@ extension PointEx on math.Point<double> {
   /// \returns a 32-bit bitmask of the button state that can be bitwise-compared
   /// against the SDL_BUTTON_MASK(X) macro.
   ///
+  /// \threadsafety This function should only be called on the main thread.
+  ///
   /// \since This function is available since SDL 3.1.3.
   ///
   /// \sa SDL_CaptureMouse
@@ -138,6 +142,8 @@ extension PointEx on math.Point<double> {
   /// call, can be NULL if unused.
   /// \returns a 32-bit bitmask of the button state that can be bitwise-compared
   /// against the SDL_BUTTON_MASK(X) macro.
+  ///
+  /// \threadsafety This function should only be called on the main thread.
   ///
   /// \since This function is available since SDL 3.1.3.
   ///

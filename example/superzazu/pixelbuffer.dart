@@ -13,7 +13,7 @@ int main() {
     print('Unable to initialize SDL: ${sdlGetError()}');
     return 1;
   }
-  sdlSetHint(SDL_HINT_RENDER_VSYNC, '60');
+  sdlSetHint(SDL_HINT_RENDER_VSYNC, '1');
   // create SDL window
   var window = SdlWindowEx.create(
       title: 'sdl2_pixelbuffer',

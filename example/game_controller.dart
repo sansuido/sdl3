@@ -11,7 +11,7 @@ int main() {
     print(sdlGetError());
     return -1;
   }
-  sdlSetHint(SDL_HINT_RENDER_VSYNC, '60');
+  sdlSetHint(SDL_HINT_RENDER_VSYNC, '1');
   var window = SdlWindowEx.create(
       title: 'Gamepad',
       w: gScreenWidth,

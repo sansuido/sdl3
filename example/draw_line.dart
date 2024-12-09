@@ -5,7 +5,7 @@ import 'package:sdl3/sdl3.dart';
 
 int main() {
   if (sdlInit(SDL_INIT_VIDEO) == true) {
-    sdlSetHint(SDL_HINT_RENDER_VSYNC, '60');
+    sdlSetHint(SDL_HINT_RENDER_VSYNC, '1');
     var window = calloc<Pointer<SdlWindow>>();
     var renderer = calloc<Pointer<SdlRenderer>>();
     if (sdlCreateWindowAndRenderer(

@@ -306,7 +306,7 @@ bool sdlAddSurfaceAlternateImage(
 /// Return whether a surface has alternate versions available.
 ///
 /// \param surface the SDL_Surface structure to query.
-/// \returns true if alternate versions are available or true otherwise.
+/// \returns true if alternate versions are available or false otherwise.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -1053,7 +1053,6 @@ Pointer<SdlSurface> sdlConvertSurface(Pointer<SdlSurface> surface, int format) {
 /// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_ConvertSurface
-/// \sa SDL_ConvertSurface
 /// \sa SDL_DestroySurface
 ///
 /// ```c
@@ -1085,7 +1084,7 @@ Pointer<SdlSurface> sdlConvertSurfaceAndColorspace(Pointer<SdlSurface> surface,
 /// \param dst_format an SDL_PixelFormat value of the `dst` pixels format.
 /// \param dst a pointer to be filled in with new pixel data.
 /// \param dst_pitch the pitch of the destination pixels, in bytes.
-/// \returns false on success or false on failure; call SDL_GetError() for more
+/// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
 /// \since This function is available since SDL 3.1.3.

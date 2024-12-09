@@ -89,6 +89,10 @@ typedef SdlAppQuitFuncDart = void Function(
 typedef SdlAppQuitFunc = Void Function(
     Pointer<NativeType> appstate, Int32 result);
 
+// typedef void (SDLCALL *SDL_MainThreadCallback)(void *userdata)
+typedef SdlMainThreadCallbackDart = void Function(Pointer<NativeType> userdata);
+typedef SdlMainThreadCallback = Void Function(Pointer<NativeType> userdata);
+
 // typedef void (SDLCALL *SDL_LogOutputFunction)(void *userdata, int category, SDL_LogPriority priority, const char *message)
 typedef SdlLogOutputFunctionDart = void Function(Pointer<NativeType> userdata,
     int category, int priority, Pointer<Utf8> message);

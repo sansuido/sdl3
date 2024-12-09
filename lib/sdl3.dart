@@ -26,6 +26,7 @@ export 'sdl3/generated/const_sdl_net.dart';
 export 'sdl3/generated/const_sdl_ttf.dart';
 export 'sdl3/generated/lib_sdl.dart';
 export 'sdl3/generated/lib_sdl_assert.dart';
+export 'sdl3/generated/lib_sdl_asyncio.dart';
 export 'sdl3/generated/lib_sdl_atomic.dart';
 export 'sdl3/generated/lib_sdl_audio.dart';
 export 'sdl3/generated/lib_sdl_blendmode.dart';

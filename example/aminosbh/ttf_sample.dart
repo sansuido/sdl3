@@ -47,7 +47,7 @@ int main() {
         'SDL3 s: ${sdlGetError()}\n');
     return 0;
   }
-  sdlSetHint(SDL_HINT_RENDER_VSYNC, '60');
+  sdlSetHint(SDL_HINT_RENDER_VSYNC, '1');
   // Initialize SDL3_ttf
   ttfInit();
   // Create window

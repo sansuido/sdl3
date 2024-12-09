@@ -286,6 +286,17 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   ///
   /// Get the properties associated with a font.
   ///
+  /// The following read-write properties are provided by SDL:
+  ///
+  /// - `TTF_PROP_FONT_OUTLINE_LINE_CAP_NUMBER`: The FT_Stroker_LineCap value
+  /// used when setting the font outline, defaults to
+  /// `FT_STROKER_LINECAP_ROUND`.
+  /// - `TTF_PROP_FONT_OUTLINE_LINE_JOIN_NUMBER`: The FT_Stroker_LineJoin value
+  /// used when setting the font outline, defaults to
+  /// `FT_STROKER_LINEJOIN_ROUND`.
+  /// - `TTF_PROP_FONT_OUTLINE_MITER_LIMIT_NUMBER`: The FT_Fixed miter limit used
+  /// when setting the font outline, defaults to 0.
+  ///
   /// \param font the font to query.
   /// \returns a valid property ID on success or 0 on failure; call
   /// SDL_GetError() for more information.
@@ -414,6 +425,10 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
 
   ///
   /// Set a font's current outline.
+  ///
+  /// This uses the font properties `TTF_PROP_FONT_OUTLINE_LINE_CAP_NUMBER`,
+  /// `TTF_PROP_FONT_OUTLINE_LINE_JOIN_NUMBER`, and
+  /// `TTF_PROP_FONT_OUTLINE_MITER_LIMIT_NUMBER` when setting the font outline.
   ///
   /// This updates any TTF_Text objects using this font, and clears
   /// already-generated glyphs, if any, from the cache.
