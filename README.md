@@ -44,8 +44,8 @@ If you want to add a library under special circumstances (example: dylib), do th
 SdlDynamicLibraryService().add('SDL3', DynamicLibrary.open('YOUR_SDL3_ENVIONMENT.dylib'));
 SdlDynamicLibraryService().add('SDL3_image', DynamicLibrary.open('YOUR_SDL3_image_ENVIONMENT.dylib'));
 SdlDynamicLibraryService().add('SDL3_mixer', DynamicLibrary.open('YOUR_SDL3_mixer_ENVIONMENT.dylib'));
-SdlDynamicLibraryService().add('SDL3_met', DynamicLibrary.open('YOUR_SDL3_net_ENVIONMENT.dylib'));
-SdlDynamicLibraryService().add('SDL3_met', DynamicLibrary.open('YOUR_SDL3_ttf_ENVIONMENT.dylib'));
+SdlDynamicLibraryService().add('SDL3_net', DynamicLibrary.open('YOUR_SDL3_net_ENVIONMENT.dylib'));
+SdlDynamicLibraryService().add('SDL3_ttf', DynamicLibrary.open('YOUR_SDL3_ttf_ENVIONMENT.dylib'));
 if (sdlInit(SDL_INIT_VIDEO)) {
   // success
 }
