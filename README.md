@@ -16,6 +16,7 @@ import 'package:sdl3/sdl3gfx.dart'; // SDL3_gfx
 ```
 
 ## Windows requires dll files.
+
 SDL3.dll  
 SDL3_image.dll  
 SDL3_mixer.dll  
@@ -23,6 +24,7 @@ SDL3_net.dll
 SDL3_ttf.dll  
 
 ## Linux (or Android, Fuchsia) requires so files.
+
 libSDL3.so  
 libSDL3_image.so  
 libSDL3_mixer.so  
@@ -30,6 +32,7 @@ libSDL3_net.so
 libSDL3_ttf.so  
 
 ## MacOS (or iOS) requires dylib files.
+
 libSDL3.dylib  
 libSDL3_image.dylib  
 libSDL3_mixer.dylib  
@@ -53,7 +56,7 @@ if (sdlInit(SDL_INIT_VIDEO)) {
 
 # Note
 
-A Dart library for accessing SDL 3 (test) APIs using, FFI.
+A Dart library for accessing SDL 3 APIs using, FFI.
 
 https://www.libsdl.org/
 

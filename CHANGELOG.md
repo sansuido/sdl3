@@ -1,3 +1,7 @@
+## 1.1.0
+- SDL3-2024-12-15
+- [add] Added gpu functions.
+
 ## 1.0.0
 - SDL3-2024-12-08
 - [deprecate] imgInit (IMG_INIT_flags...) and imgQuit are deprecated.

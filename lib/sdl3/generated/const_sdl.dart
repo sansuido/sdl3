@@ -1699,7 +1699,6 @@ const SDL_PLATFORM_HPUX = 1;
 const SDL_PLATFORM_IRIX = 1;
 const SDL_PLATFORM_LINUX = 1;
 const SDL_PLATFORM_ANDROID = 1;
-const SDL_PLATFORM_NGAGE = 1;
 const SDL_PLATFORM_UNIX = 1;
 const SDL_PLATFORM_APPLE = 1;
 //const __has_extension = (x) 0;

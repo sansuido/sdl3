@@ -2303,6 +2303,9 @@ bool sdlWindowSupportsGpuPresentMode(
 /// \returns true on success, or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety This function should only be called from the thread that
+/// created the window.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_AcquireGPUSwapchainTexture
@@ -2390,8 +2393,9 @@ bool sdlSetGpuSwapchainParameters(Pointer<SdlGpuDevice> device,
 ///
 /// The default value when the device is created is 2. This means that after
 /// you have submitted 2 frames for presentation, if the GPU has not finished
-/// working on the first frame, SDL_AcquireGPUSwapchainTexture() will block or
-/// return false depending on the present mode.
+/// working on the first frame, SDL_AcquireGPUSwapchainTexture() will fill the
+/// swapchain texture pointer with NULL, and
+/// SDL_WaitAndAcquireGPUSwapchainTexture() will block.
 ///
 /// Higher values increase throughput at the expense of visual latency. Lower
 /// values decrease visual latency at the expense of throughput.
@@ -2403,9 +2407,7 @@ bool sdlSetGpuSwapchainParameters(Pointer<SdlGpuDevice> device,
 ///
 /// \param device a GPU context.
 /// \param allowed_frames_in_flight the maximum number of frames that can be
-/// pending on the GPU before
-/// AcquireSwapchainTexture blocks or returns
-/// false.
+/// pending on the GPU.
 /// \returns true if successful, false on error; call SDL_GetError() for more
 /// information.
 ///
@@ -2455,19 +2457,16 @@ int sdlGetGpuSwapchainTextureFormat(
 /// When a swapchain texture is acquired on a command buffer, it will
 /// automatically be submitted for presentation when the command buffer is
 /// submitted. The swapchain texture should only be referenced by the command
-/// buffer used to acquire it. The swapchain texture handle can be filled in
-/// with NULL under certain conditions. This is not necessarily an error. If
-/// this function returns false then there is an error.
+/// buffer used to acquire it.
+///
+/// This function will fill the swapchain texture handle with NULL if too many
+/// frames are in flight. This is not an error. The best practice is to call
+/// SDL_CancelGPUCommandBuffer if the swapchain texture handle is NULL to avoid
+/// enqueuing needless work on the GPU.
 ///
 /// The swapchain texture is managed by the implementation and must not be
 /// freed by the user. You MUST NOT call this function from any thread other
 /// than the one that created the window.
-///
-/// When using SDL_GPU_PRESENTMODE_VSYNC, this function will block if too many
-/// frames are in flight. Otherwise, this function will fill the swapchain
-/// texture handle with NULL if too many frames are in flight. The best
-/// practice is to call SDL_CancelGPUCommandBuffer if the swapchain texture
-/// handle is NULL to avoid enqueuing needless work on the GPU.
 ///
 /// \param command_buffer a command buffer.
 /// \param window a window that has been claimed.
@@ -2480,14 +2479,18 @@ int sdlGetGpuSwapchainTextureFormat(
 /// \returns true on success, false on error; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety This function should only be called from the thread that
+/// created the window.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
-/// \sa SDL_GPUPresentMode
 /// \sa SDL_ClaimWindowForGPUDevice
 /// \sa SDL_SubmitGPUCommandBuffer
 /// \sa SDL_SubmitGPUCommandBufferAndAcquireFence
 /// \sa SDL_CancelGPUCommandBuffer
 /// \sa SDL_GetWindowSizeInPixels
+/// \sa SDL_WaitForGPUSwapchain
+/// \sa SDL_SetGPUAllowedFramesInFlight
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_AcquireGPUSwapchainTexture( SDL_GPUCommandBuffer *command_buffer, SDL_Window *window, SDL_GPUTexture **swapchain_texture, Uint32 *swapchain_texture_width, Uint32 *swapchain_texture_height)
@@ -2514,6 +2517,100 @@ bool sdlAcquireGpuSwapchainTexture(
       'SDL_AcquireGPUSwapchainTexture');
   return sdlAcquireGpuSwapchainTextureLookupFunction(commandBuffer, window,
           swapchainTexture, swapchainTextureWidth, swapchainTextureHeight) ==
+      1;
+}
+
+///
+/// Blocks the thread until a swapchain texture is available to be acquired.
+///
+/// \param device a GPU context.
+/// \param window a window that has been claimed.
+/// \returns true on success, false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety This function should only be called from the thread that
+/// created the window.
+///
+/// \since This function is available since SDL 3.2.0.
+///
+/// \sa SDL_AcquireGPUSwapchainTexture
+/// \sa SDL_SetGPUAllowedFramesInFlight
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL SDL_WaitForGPUSwapchain( SDL_GPUDevice *device, SDL_Window *window)
+/// ```
+bool sdlWaitForGpuSwapchain(
+    Pointer<SdlGpuDevice> device, Pointer<SdlWindow> window) {
+  final sdlWaitForGpuSwapchainLookupFunction = libSdl3.lookupFunction<
+      Uint8 Function(Pointer<SdlGpuDevice> device, Pointer<SdlWindow> window),
+      int Function(Pointer<SdlGpuDevice> device,
+          Pointer<SdlWindow> window)>('SDL_WaitForGPUSwapchain');
+  return sdlWaitForGpuSwapchainLookupFunction(device, window) == 1;
+}
+
+///
+/// Blocks the thread until a swapchain texture is available to be acquired,
+/// and then acquires it.
+///
+/// When a swapchain texture is acquired on a command buffer, it will
+/// automatically be submitted for presentation when the command buffer is
+/// submitted. The swapchain texture should only be referenced by the command
+/// buffer used to acquire it. It is an error to call
+/// SDL_CancelGPUCommandBuffer() after a swapchain texture is acquired.
+///
+/// The swapchain texture is managed by the implementation and must not be
+/// freed by the user. You MUST NOT call this function from any thread other
+/// than the one that created the window.
+///
+/// \param command_buffer a command buffer.
+/// \param window a window that has been claimed.
+/// \param swapchain_texture a pointer filled in with a swapchain texture
+/// handle.
+/// \param swapchain_texture_width a pointer filled in with the swapchain
+/// texture width, may be NULL.
+/// \param swapchain_texture_height a pointer filled in with the swapchain
+/// texture height, may be NULL.
+/// \returns true on success, false on error; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety This function should only be called from the thread that
+/// created the window.
+///
+/// \since This function is available since SDL 3.2.0.
+///
+/// \sa SDL_SubmitGPUCommandBuffer
+/// \sa SDL_SubmitGPUCommandBufferAndAcquireFence
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL SDL_WaitAndAcquireGPUSwapchainTexture( SDL_GPUCommandBuffer *command_buffer, SDL_Window *window, SDL_GPUTexture **swapchain_texture, Uint32 *swapchain_texture_width, Uint32 *swapchain_texture_height)
+/// ```
+bool sdlWaitAndAcquireGpuSwapchainTexture(
+    Pointer<SdlGpuCommandBuffer> commandBuffer,
+    Pointer<SdlWindow> window,
+    Pointer<Pointer<SdlGpuTexture>> swapchainTexture,
+    Pointer<Uint32> swapchainTextureWidth,
+    Pointer<Uint32> swapchainTextureHeight) {
+  final sdlWaitAndAcquireGpuSwapchainTextureLookupFunction =
+      libSdl3.lookupFunction<
+              Uint8 Function(
+                  Pointer<SdlGpuCommandBuffer> commandBuffer,
+                  Pointer<SdlWindow> window,
+                  Pointer<Pointer<SdlGpuTexture>> swapchainTexture,
+                  Pointer<Uint32> swapchainTextureWidth,
+                  Pointer<Uint32> swapchainTextureHeight),
+              int Function(
+                  Pointer<SdlGpuCommandBuffer> commandBuffer,
+                  Pointer<SdlWindow> window,
+                  Pointer<Pointer<SdlGpuTexture>> swapchainTexture,
+                  Pointer<Uint32> swapchainTextureWidth,
+                  Pointer<Uint32> swapchainTextureHeight)>(
+          'SDL_WaitAndAcquireGPUSwapchainTexture');
+  return sdlWaitAndAcquireGpuSwapchainTextureLookupFunction(
+          commandBuffer,
+          window,
+          swapchainTexture,
+          swapchainTextureWidth,
+          swapchainTextureHeight) ==
       1;
 }
 
