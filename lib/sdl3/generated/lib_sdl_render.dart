@@ -3372,6 +3372,7 @@ bool sdlGetRenderVSync(Pointer<SdlRenderer> renderer, Pointer<Int32> vsync) {
 ///
 /// \since This function is available since SDL 3.1.6.
 ///
+/// \sa SDL_RenderDebugTextFormat
 /// \sa SDL_DEBUG_TEXT_FONT_CHARACTER_SIZE
 ///
 /// ```c
@@ -3388,5 +3389,53 @@ bool sdlRenderDebugText(
   final result =
       sdlRenderDebugTextLookupFunction(renderer, x, y, strPointer) == 1;
   calloc.free(strPointer);
+  return result;
+}
+
+///
+/// Draw debug text to an SDL_Renderer.
+///
+/// This function will render a printf()-style format string to a renderer.
+/// Note that this is a convinence function for debugging, with severe
+/// limitations, and is not intended to be used for production apps and games.
+///
+/// For the full list of limitations and other useful information, see
+/// SDL_RenderDebugText.
+///
+/// \param renderer the renderer which should draw the text.
+/// \param x the x coordinate where the top-left corner of the text will draw.
+/// \param y the y coordinate where the top-left corner of the text will draw.
+/// \param fmt the format string to draw.
+/// \param ... additional parameters matching % tokens in the `fmt` string, if
+/// any.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety This function should only be called on the main thread.
+///
+/// \since This function is available since SDL 3.2.0.
+///
+/// \sa SDL_RenderDebugText
+/// \sa SDL_DEBUG_TEXT_FONT_CHARACTER_SIZE
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL SDL_RenderDebugTextFormat(SDL_Renderer *renderer, float x, float y, SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(4)
+/// ```
+bool sdlRenderDebugTextFormat(Pointer<SdlRenderer> renderer, double x, double y,
+    String? fmt, Pointer<NativeType> arg4) {
+  final sdlRenderDebugTextFormatLookupFunction = libSdl3.lookupFunction<
+      Uint8 Function(Pointer<SdlRenderer> renderer, Float x, Float y,
+          Pointer<Utf8> fmt, Pointer<NativeType> arg4),
+      int Function(
+          Pointer<SdlRenderer> renderer,
+          double x,
+          double y,
+          Pointer<Utf8> fmt,
+          Pointer<NativeType> arg4)>('SDL_RenderDebugTextFormat');
+  final fmtPointer = fmt != null ? fmt.toNativeUtf8() : nullptr;
+  final result = sdlRenderDebugTextFormatLookupFunction(
+          renderer, x, y, fmtPointer, arg4) ==
+      1;
+  calloc.free(fmtPointer);
   return result;
 }

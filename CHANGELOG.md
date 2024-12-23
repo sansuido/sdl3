@@ -1,3 +1,6 @@
+## 1.1.1
+- SDL3-2024-12-22
+
 ## 1.1.0
 - SDL3-2024-12-15
 - [add] Added gpu functions.
