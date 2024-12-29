@@ -82,31 +82,22 @@ void sdlUnlockSpinlock(Pointer<Int32> lock) {
 }
 
 ///
-/// Insert a memory release barrier.
+/// Insert a memory release barrier (function version).
 ///
-/// Memory barriers are designed to prevent reads and writes from being
-/// reordered by the compiler and being seen out of order on multi-core CPUs.
+/// Please refer to SDL_MemoryBarrierRelease for details. This is a function
+/// version, which might be useful if you need to use this functionality from a
+/// scripting language, etc. Also, some of the macro versions call this
+/// function behind the scenes, where more heavy lifting can happen inside of
+/// SDL. Generally, though, an app written in C/C++/etc should use the macro
+/// version, as it will be more efficient.
 ///
-/// A typical pattern would be for thread A to write some data and a flag, and
-/// for thread B to read the flag and get the data. In this case you would
-/// insert a release barrier between writing the data and the flag,
-/// guaranteeing that the data write completes no later than the flag is
-/// written, and you would insert an acquire barrier between reading the flag
-/// and reading the data, to ensure that all the reads associated with the flag
-/// have completed.
-///
-/// In this pattern you should always see a release barrier paired with an
-/// acquire barrier and you should gate the data reads/writes with a single
-/// flag variable.
-///
-/// For more information on these semantics, take a look at the blog post:
-/// http://preshing.com/20120913/acquire-and-release-semantics
-///
-/// \threadsafety Obviously this macro is safe to use from any thread at any
+/// \threadsafety Obviously this function is safe to use from any thread at any
 /// time, but if you find yourself needing this, you are probably
 /// dealing with some very sensitive code; be careful!
 ///
 /// \since This function is available since SDL 3.1.3.
+///
+/// \sa SDL_MemoryBarrierRelease
 ///
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_MemoryBarrierReleaseFunction(void)
@@ -119,9 +110,14 @@ void sdlMemoryBarrierReleaseFunction() {
 }
 
 ///
-/// Insert a memory acquire barrier.
+/// Insert a memory acquire barrier (function version).
 ///
-/// Please refer to SDL_MemoryBarrierReleaseFunction for the details!
+/// Please refer to SDL_MemoryBarrierRelease for details. This is a function
+/// version, which might be useful if you need to use this functionality from a
+/// scripting language, etc. Also, some of the macro versions call this
+/// function behind the scenes, where more heavy lifting can happen inside of
+/// SDL. Generally, though, an app written in C/C++/etc should use the macro
+/// version, as it will be more efficient.
 ///
 /// \threadsafety Obviously this function is safe to use from any thread at any
 /// time, but if you find yourself needing this, you are probably
@@ -129,7 +125,7 @@ void sdlMemoryBarrierReleaseFunction() {
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
-/// \sa SDL_MemoryBarrierReleaseFunction
+/// \sa SDL_MemoryBarrierAcquire
 ///
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_MemoryBarrierAcquireFunction(void)

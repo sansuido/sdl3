@@ -260,7 +260,8 @@ void sdlAlignedFree(Pointer<NativeType> mem) {
 ///
 /// Get the number of outstanding (unfreed) allocations.
 ///
-/// \returns the number of allocations.
+/// \returns the number of allocations or -1 if allocation counting is
+/// disabled.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -1493,21 +1494,18 @@ Pointer<NativeType> sdlMemset4(Pointer<NativeType> dst, int val, int dwords) {
 }
 
 ///
-/// Clear an array's memory to zero.
+/// Compare two buffers of memory.
 ///
-/// This is wrapper over SDL_memset that handles calculating the array size, so
-/// there's no chance of copy/paste errors, and the code is cleaner.
+/// \param s1 the first buffer to compare. NULL is not permitted!
+/// \param s2 the second buffer to compare. NULL is not permitted!
+/// \param len the number of bytes to compare between the buffers.
+/// \returns less than zero if s1 is "less than" s2, greater than zero if s1 is
+/// "greater than" s2, and zero if the buffers match exactly for `len`
+/// bytes.
 ///
-/// This requires an array, not an object, nor a pointer to an object.
+/// \threadsafety It is safe to call this function from any thread.
 ///
-/// \param x an array to clear.
-///
-/// \threadsafety It is safe to call this macro from any thread.
-///
-/// \since This macro is available since SDL 3.1.3.
-///
-/// \sa SDL_zero
-/// \sa SDL_zeroa
+/// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_memcmp(const void *s1, const void *s2, size_t len)
@@ -1521,6 +1519,31 @@ int sdlMemcmp(Pointer<NativeType> s1, Pointer<NativeType> s2, int len) {
   return sdlMemcmpLookupFunction(s1, s2, len);
 }
 
+///
+/// This works exactly like wcslen() but doesn't require access to a C runtime.
+///
+/// Counts the number of wchar_t values in `wstr`, excluding the null
+/// terminator.
+///
+/// Like SDL_strlen only counts bytes and not codepoints in a UTF-8 string,
+/// this counts wchar_t values in a string, even if the string's encoding is of
+/// variable width, like UTF-16.
+///
+/// Also be aware that wchar_t is different sizes on different platforms (4
+/// bytes on Linux, 2 on Windows, etc).
+///
+/// \param wstr The null-terminated wide string to read. Must not be NULL.
+/// \returns the length (in wchar_t values, excluding the null terminator) of
+/// `wstr`.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.1.3.
+///
+/// \sa SDL_wcsnlen
+/// \sa SDL_utf8strlen
+/// \sa SDL_utf8strnlen
+///
 /// ```c
 /// extern SDL_DECLSPEC size_t SDLCALL SDL_wcslen(const wchar_t *wstr)
 /// ```
@@ -1531,6 +1554,35 @@ int sdlWcslen(Pointer<Int16> wstr) {
   return sdlWcslenLookupFunction(wstr);
 }
 
+///
+/// This works exactly like wcsnlen() but doesn't require access to a C
+/// runtime.
+///
+/// Counts up to a maximum of `maxlen` wchar_t values in `wstr`, excluding the
+/// null terminator.
+///
+/// Like SDL_strnlen only counts bytes and not codepoints in a UTF-8 string,
+/// this counts wchar_t values in a string, even if the string's encoding is of
+/// variable width, like UTF-16.
+///
+/// Also be aware that wchar_t is different sizes on different platforms (4
+/// bytes on Linux, 2 on Windows, etc).
+///
+/// Also, `maxlen` is a count of wide characters, not bytes!
+///
+/// \param wstr The null-terminated wide string to read. Must not be NULL.
+/// \param maxlen The maximum amount of wide characters to count.
+/// \returns the length (in wide characters, excluding the null terminator) of
+/// `wstr` but never more than `maxlen`.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.1.3.
+///
+/// \sa SDL_wcslen
+/// \sa SDL_utf8strlen
+/// \sa SDL_utf8strnlen
+///
 /// ```c
 /// extern SDL_DECLSPEC size_t SDLCALL SDL_wcsnlen(const wchar_t *wstr, size_t maxlen)
 /// ```
@@ -1557,7 +1609,7 @@ int sdlWcsnlen(Pointer<Int16> wstr, int maxlen) {
 /// \param src The null-terminated wide string to copy. Must not be NULL, and
 /// must not overlap with `dst`.
 /// \param maxlen The length (in wide characters) of the destination buffer.
-/// \returns The length (in wide characters, excluding the null terminator) of
+/// \returns the length (in wide characters, excluding the null terminator) of
 /// `src`.
 ///
 /// \threadsafety It is safe to call this function from any thread.
@@ -1596,7 +1648,7 @@ int sdlWcslcpy(Pointer<NativeType> arg0, Pointer<Int16> src, int maxlen) {
 /// \param src The second null-terminated wide string. Must not be NULL, and
 /// must not overlap with `dst`.
 /// \param maxlen The length (in wide characters) of the destination buffer.
-/// \returns The length (in wide characters, excluding the null terminator) of
+/// \returns the length (in wide characters, excluding the null terminator) of
 /// the string in `dst` plus the length of `src`.
 ///
 /// \threadsafety It is safe to call this function from any thread.
@@ -1617,6 +1669,22 @@ int sdlWcslcat(Pointer<NativeType> arg0, Pointer<Int16> src, int maxlen) {
   return sdlWcslcatLookupFunction(arg0, src, maxlen);
 }
 
+///
+/// Allocate a copy of a wide string.
+///
+/// This allocates enough space for a null-terminated copy of `wstr`, using
+/// SDL_malloc, and then makes a copy of the string into this space.
+///
+/// The returned string is owned by the caller, and should be passed to
+/// SDL_free when no longer needed.
+///
+/// \param wstr the string to copy.
+/// \returns a pointer to the newly-allocated wide string.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.1.3.
+///
 /// ```c
 /// extern SDL_DECLSPEC wchar_t * SDLCALL SDL_wcsdup(const wchar_t *wstr)
 /// ```
@@ -1627,6 +1695,24 @@ Pointer<Int16> sdlWcsdup(Pointer<Int16> wstr) {
   return sdlWcsdupLookupFunction(wstr);
 }
 
+///
+/// Search a wide string for the first instance of a specific substring.
+///
+/// The search ends once it finds the requested substring, or a null terminator
+/// byte to end the string.
+///
+/// Note that this looks for strings of _wide characters_, not _codepoints_, so
+/// it's legal to search for malformed and incomplete UTF-16 sequences.
+///
+/// \param haystack the wide string to search. Must not be NULL.
+/// \param needle the wide string to search for. Must not be NULL.
+/// \returns a pointer to the first instance of `needle` in the string, or NULL
+/// if not found.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.1.3.
+///
 /// ```c
 /// extern SDL_DECLSPEC wchar_t * SDLCALL SDL_wcsstr(const wchar_t *haystack, const wchar_t *needle)
 /// ```
@@ -1638,6 +1724,29 @@ Pointer<Int16> sdlWcsstr(Pointer<Int16> haystack, Pointer<Int16> needle) {
   return sdlWcsstrLookupFunction(haystack, needle);
 }
 
+///
+/// Search a wide string, up to n wide chars, for the first instance of a
+/// specific substring.
+///
+/// The search ends once it finds the requested substring, or a null terminator
+/// value to end the string, or `maxlen` wide character have been examined. It
+/// is possible to use this function on a wide string without a null
+/// terminator.
+///
+/// Note that this looks for strings of _wide characters_, not _codepoints_, so
+/// it's legal to search for malformed and incomplete UTF-16 sequences.
+///
+/// \param haystack the wide string to search. Must not be NULL.
+/// \param needle the wide string to search for. Must not be NULL.
+/// \param maxlen the maximum number of wide characters to search in
+/// `haystack`.
+/// \returns a pointer to the first instance of `needle` in the string, or NULL
+/// if not found.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.1.3.
+///
 /// ```c
 /// extern SDL_DECLSPEC wchar_t * SDLCALL SDL_wcsnstr(const wchar_t *haystack, const wchar_t *needle, size_t maxlen)
 /// ```
@@ -1824,7 +1933,7 @@ int sdlWcsncasecmp(Pointer<Int16> str1, Pointer<Int16> str2, int maxlen) {
 /// to 36 inclusive. If 0, the base will be inferred from the
 /// number's prefix (0x for hexadecimal, 0 for octal, decimal
 /// otherwise).
-/// \returns The parsed `long`, or 0 if no number could be parsed.
+/// \returns the parsed `long`, or 0 if no number could be parsed.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -1852,7 +1961,7 @@ int sdlWcstol(Pointer<Int16> str, Pointer<Pointer<Int16>> endp, int base) {
 /// If you need the length of a UTF-8 string, consider using SDL_utf8strlen().
 ///
 /// \param str The null-terminated string to read. Must not be NULL.
-/// \returns The length (in bytes, excluding the null terminator) of `src`.
+/// \returns the length (in bytes, excluding the null terminator) of `src`.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -1886,7 +1995,7 @@ int sdlStrlen(String? str) {
 ///
 /// \param str The null-terminated string to read. Must not be NULL.
 /// \param maxlen The maximum amount of bytes to count.
-/// \returns The length (in bytes, excluding the null terminator) of `src` but
+/// \returns the length (in bytes, excluding the null terminator) of `src` but
 /// never more than `maxlen`.
 ///
 /// \threadsafety It is safe to call this function from any thread.
@@ -1927,7 +2036,7 @@ int sdlStrnlen(String? str, int maxlen) {
 /// \param src The null-terminated string to copy. Must not be NULL, and must
 /// not overlap with `dst`.
 /// \param maxlen The length (in characters) of the destination buffer.
-/// \returns The length (in characters, excluding the null terminator) of
+/// \returns the length (in characters, excluding the null terminator) of
 /// `src`.
 ///
 /// \threadsafety It is safe to call this function from any thread.
@@ -1970,7 +2079,7 @@ int sdlStrlcpy(Pointer<NativeType> arg0, String? src, int maxlen) {
 /// must not overlap with `dst`.
 /// \param dst_bytes The length (in bytes) of the destination buffer. Must not
 /// be 0.
-/// \returns The number of bytes written, excluding the null terminator.
+/// \returns the number of bytes written, excluding the null terminator.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -2010,7 +2119,7 @@ int sdlUtf8strlcpy(Pointer<NativeType> arg0, String? src, int dstBytes) {
 /// \param src The second null-terminated string. Must not be NULL, and must
 /// not overlap with `dst`.
 /// \param maxlen The length (in characters) of the destination buffer.
-/// \returns The length (in characters, excluding the null terminator) of the
+/// \returns the length (in characters, excluding the null terminator) of the
 /// string in `dst` plus the length of `src`.
 ///
 /// \threadsafety It is safe to call this function from any thread.
@@ -2034,6 +2143,22 @@ int sdlStrlcat(Pointer<NativeType> arg0, String? src, int maxlen) {
   return result;
 }
 
+///
+/// Allocate a copy of a string.
+///
+/// This allocates enough space for a null-terminated copy of `str`, using
+/// SDL_malloc, and then makes a copy of the string into this space.
+///
+/// The returned string is owned by the caller, and should be passed to
+/// SDL_free when no longer needed.
+///
+/// \param str the string to copy.
+/// \returns a pointer to the newly-allocated string.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.1.3.
+///
 /// ```c
 /// extern SDL_DECLSPEC SDL_MALLOC char * SDLCALL SDL_strdup(const char *str)
 /// ```
@@ -2047,6 +2172,29 @@ Pointer<Int8> sdlStrdup(String? str) {
   return result;
 }
 
+///
+/// Allocate a copy of a string, up to n characters.
+///
+/// This allocates enough space for a null-terminated copy of `str`, up to
+/// `maxlen` bytes, using SDL_malloc, and then makes a copy of the string into
+/// this space.
+///
+/// If the string is longer than `maxlen` bytes, the returned string will be
+/// `maxlen` bytes long, plus a null-terminator character that isn't included
+/// in the count.
+///
+/// The returned string is owned by the caller, and should be passed to
+/// SDL_free when no longer needed.
+///
+/// \param str the string to copy.
+/// \param maxlen the maximum length of the copied string, not counting the
+/// null-terminator character.
+/// \returns a pointer to the newly-allocated string.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.1.3.
+///
 /// ```c
 /// extern SDL_DECLSPEC SDL_MALLOC char * SDLCALL SDL_strndup(const char *str, size_t maxlen)
 /// ```
@@ -2060,6 +2208,25 @@ Pointer<Int8> sdlStrndup(String? str, int maxlen) {
   return result;
 }
 
+///
+/// Reverse a string's contents.
+///
+/// This reverses a null-terminated string in-place. Only the content of the
+/// string is reversed; the null-terminator character remains at the end of the
+/// reversed string.
+///
+/// **WARNING**: This function reverses the _bytes_ of the string, not the
+/// codepoints. If `str` is a UTF-8 string with Unicode codepoints > 127, this
+/// will ruin the string data. You should only use this function on strings
+/// that are completely comprised of low ASCII characters.
+///
+/// \param str the string to reverse.
+/// \returns `str`.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.1.3.
+///
 /// ```c
 /// extern SDL_DECLSPEC char * SDLCALL SDL_strrev(char *str)
 /// ```
@@ -2663,7 +2830,7 @@ Pointer<Int8> sdlUlltoa(
 /// `(int)SDL_strtol(str, NULL, 10)`.
 ///
 /// \param str The null-terminated string to read. Must not be NULL.
-/// \returns The parsed `int`.
+/// \returns the parsed `int`.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -2697,7 +2864,7 @@ int sdlAtoi(String? str) {
 /// NULL)`.
 ///
 /// \param str The null-terminated string to read. Must not be NULL.
-/// \returns The parsed `double`.
+/// \returns the parsed `double`.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -2740,7 +2907,7 @@ double sdlAtof(String? str) {
 /// to 36 inclusive. If 0, the base will be inferred from the
 /// number's prefix (0x for hexadecimal, 0 for octal, decimal
 /// otherwise).
-/// \returns The parsed `long`, or 0 if no number could be parsed.
+/// \returns the parsed `long`, or 0 if no number could be parsed.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -2787,7 +2954,7 @@ int sdlStrtol(String? str, Pointer<Pointer<Int8>> endp, int base) {
 /// to 36 inclusive. If 0, the base will be inferred from the
 /// number's prefix (0x for hexadecimal, 0 for octal, decimal
 /// otherwise).
-/// \returns The parsed `unsigned long`, or 0 if no number could be parsed.
+/// \returns the parsed `unsigned long`, or 0 if no number could be parsed.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -2833,7 +3000,7 @@ int sdlStrtoul(String? str, Pointer<Pointer<Int8>> endp, int base) {
 /// to 36 inclusive. If 0, the base will be inferred from the
 /// number's prefix (0x for hexadecimal, 0 for octal, decimal
 /// otherwise).
-/// \returns The parsed `long long`, or 0 if no number could be parsed.
+/// \returns the parsed `long long`, or 0 if no number could be parsed.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -2880,7 +3047,7 @@ Pointer<NativeType> sdlStrtoll(
 /// to 36 inclusive. If 0, the base will be inferred from the
 /// number's prefix (0x for hexadecimal, 0 for octal, decimal
 /// otherwise).
-/// \returns The parsed `unsigned long long`, or 0 if no number could be
+/// \returns the parsed `unsigned long long`, or 0 if no number could be
 /// parsed.
 ///
 /// \threadsafety It is safe to call this function from any thread.
@@ -2921,11 +3088,11 @@ Pointer<NativeType> sdlStrtoull(
 /// - Whether or not INF and NAN can be parsed is unspecified.
 /// - The precision of the result is unspecified.
 ///
-/// \param str The null-terminated string to read. Must not be NULL.
-/// \param endp If not NULL, the address of the first invalid character (i.e.
+/// \param str the null-terminated string to read. Must not be NULL.
+/// \param endp if not NULL, the address of the first invalid character (i.e.
 /// the next character after the parsed number) will be written to
 /// this pointer.
-/// \returns The parsed `double`, or 0 if no number could be parsed.
+/// \returns the parsed `double`, or 0 if no number could be parsed.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -3290,6 +3457,21 @@ Pointer<Int8> sdlUcs4ToUtf8(int codepoint, Pointer<Int8> dst) {
   return sdlUcs4ToUtf8LookupFunction(codepoint, dst);
 }
 
+///
+/// This works exactly like sscanf() but doesn't require access to a C runtime.
+///
+/// Scan a string, matching a format string, converting each '%' item and
+/// storing it to pointers provided through variable arguments.
+///
+/// \param text the string to scan. Must not be NULL.
+/// \param fmt a printf-style format string. Must not be NULL.
+/// \param ... a list of pointers to values to be filled in with scanned items.
+/// \returns the number of items that matched the format string.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.1.3.
+///
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_sscanf(const char *text, SDL_SCANF_FORMAT_STRING const char *fmt, ...) SDL_SCANF_VARARG_FUNC(2)
 /// ```
@@ -3307,6 +3489,23 @@ int sdlSscanf(String? text, String? fmt, Pointer<NativeType> arg2) {
   return result;
 }
 
+///
+/// This works exactly like vsscanf() but doesn't require access to a C
+/// runtime.
+///
+/// Functions identically to SDL_sscanf(), except it takes a `va_list` instead
+/// of using `...` variable arguments.
+///
+/// \param text the string to scan. Must not be NULL.
+/// \param fmt a printf-style format string. Must not be NULL.
+/// \param ap a `va_list` of pointers to values to be filled in with scanned
+/// items.
+/// \returns the number of items that matched the format string.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.1.3.
+///
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_vsscanf(const char *text, SDL_SCANF_FORMAT_STRING const char *fmt, va_list ap) SDL_SCANF_VARARG_FUNCV(2)
 /// ```
@@ -3324,6 +3523,37 @@ int sdlVsscanf(String? text, String? fmt, Pointer<NativeType> arg2) {
   return result;
 }
 
+///
+/// This works exactly like snprintf() but doesn't require access to a C
+/// runtime.
+///
+/// Format a string of up to `maxlen`-1 bytes, converting each '%' item with
+/// values provided through variable arguments.
+///
+/// While some C runtimes differ on how to deal with too-large strings, this
+/// function null-terminates the output, by treating the null-terminator as
+/// part of the `maxlen` count. Note that if `maxlen` is zero, however, no
+/// bytes will be written at all.
+///
+/// This function returns the number of _bytes_ (not _characters_) that should
+/// be written, excluding the null-terminator character. If this returns a
+/// number >= `maxlen`, it means the output string was truncated. A negative
+/// return value means an error occurred.
+///
+/// Referencing the output string's pointer with a format item is undefined
+/// behavior.
+///
+/// \param text the buffer to write the string into. Must not be NULL.
+/// \param maxlen the maximum bytes to write, including the null-terminator.
+/// \param fmt a printf-style format string. Must not be NULL.
+/// \param ... a list of values to be used with the format string.
+/// \returns the number of bytes that should be written, not counting the
+/// null-terminator char, or a negative value on error.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.1.3.
+///
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_snprintf(SDL_OUT_Z_CAP(maxlen) char *text, size_t maxlen, SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(3)
 /// ```
@@ -3340,6 +3570,38 @@ int sdlSnprintf(Pointer<NativeType> arg0, int maxlen, String? fmt,
   return result;
 }
 
+///
+/// This works exactly like swprintf() but doesn't require access to a C
+/// runtime.
+///
+/// Format a wide string of up to `maxlen`-1 wchar_t values, converting each
+/// '%' item with values provided through variable arguments.
+///
+/// While some C runtimes differ on how to deal with too-large strings, this
+/// function null-terminates the output, by treating the null-terminator as
+/// part of the `maxlen` count. Note that if `maxlen` is zero, however, no wide
+/// characters will be written at all.
+///
+/// This function returns the number of _wide characters_ (not _codepoints_)
+/// that should be written, excluding the null-terminator character. If this
+/// returns a number >= `maxlen`, it means the output string was truncated. A
+/// negative return value means an error occurred.
+///
+/// Referencing the output string's pointer with a format item is undefined
+/// behavior.
+///
+/// \param text the buffer to write the wide string into. Must not be NULL.
+/// \param maxlen the maximum wchar_t values to write, including the
+/// null-terminator.
+/// \param fmt a printf-style format string. Must not be NULL.
+/// \param ... a list of values to be used with the format string.
+/// \returns the number of wide characters that should be written, not counting
+/// the null-terminator char, or a negative value on error.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.1.3.
+///
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_swprintf(SDL_OUT_Z_CAP(maxlen) wchar_t *text, size_t maxlen, SDL_PRINTF_FORMAT_STRING const wchar_t *fmt, ...) SDL_WPRINTF_VARARG_FUNC(3)
 /// ```
@@ -3353,6 +3615,24 @@ int sdlSwprintf(Pointer<NativeType> arg0, int maxlen, Pointer<Int16> fmt,
   return sdlSwprintfLookupFunction(arg0, maxlen, fmt, arg3);
 }
 
+///
+/// This works exactly like vsnprintf() but doesn't require access to a C
+/// runtime.
+///
+/// Functions identically to SDL_snprintf(), except it takes a `va_list`
+/// instead of using `...` variable arguments.
+///
+/// \param text the buffer to write the string into. Must not be NULL.
+/// \param maxlen the maximum bytes to write, including the null-terminator.
+/// \param fmt a printf-style format string. Must not be NULL.
+/// \param ap a `va_list` values to be used with the format string.
+/// \returns the number of bytes that should be written, not counting the
+/// null-terminator char, or a negative value on error.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.1.3.
+///
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_vsnprintf(SDL_OUT_Z_CAP(maxlen) char *text, size_t maxlen, SDL_PRINTF_FORMAT_STRING const char *fmt, va_list ap) SDL_PRINTF_VARARG_FUNCV(3)
 /// ```
@@ -3369,6 +3649,25 @@ int sdlVsnprintf(Pointer<NativeType> arg0, int maxlen, String? fmt,
   return result;
 }
 
+///
+/// This works exactly like vswprintf() but doesn't require access to a C
+/// runtime.
+///
+/// Functions identically to SDL_swprintf(), except it takes a `va_list`
+/// instead of using `...` variable arguments.
+///
+/// \param text the buffer to write the string into. Must not be NULL.
+/// \param maxlen the maximum wide characters to write, including the
+/// null-terminator.
+/// \param fmt a printf-style format wide string. Must not be NULL.
+/// \param ap a `va_list` values to be used with the format string.
+/// \returns the number of wide characters that should be written, not counting
+/// the null-terminator char, or a negative value on error.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.1.3.
+///
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_vswprintf(SDL_OUT_Z_CAP(maxlen) wchar_t *text, size_t maxlen, SDL_PRINTF_FORMAT_STRING const wchar_t *fmt, va_list ap) SDL_WPRINTF_VARARG_FUNCV(3)
 /// ```
@@ -3382,6 +3681,33 @@ int sdlVswprintf(Pointer<NativeType> arg0, int maxlen, Pointer<Int16> fmt,
   return sdlVswprintfLookupFunction(arg0, maxlen, fmt, arg3);
 }
 
+///
+/// This works exactly like asprintf() but doesn't require access to a C
+/// runtime.
+///
+/// Functions identically to SDL_snprintf(), except it allocates a buffer large
+/// enough to hold the output string on behalf of the caller.
+///
+/// On success, this function returns the number of bytes (not characters)
+/// comprising the output string, not counting the null-terminator character,
+/// and sets `*strp` to the newly-allocated string.
+///
+/// On error, this function returns a negative number, and the value of `*strp`
+/// is undefined.
+///
+/// The returned string is owned by the caller, and should be passed to
+/// SDL_free when no longer needed.
+///
+/// \param strp on output, is set to the new string. Must not be NULL.
+/// \param fmt a printf-style format string. Must not be NULL.
+/// \param ... a list of values to be used with the format string.
+/// \returns the number of bytes in the newly-allocated string, not counting
+/// the null-terminator char, or a negative value on error.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.1.3.
+///
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_asprintf(char **strp, SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(2)
 /// ```
@@ -3398,6 +3724,23 @@ int sdlAsprintf(
   return result;
 }
 
+///
+/// This works exactly like vasprintf() but doesn't require access to a C
+/// runtime.
+///
+/// Functions identically to SDL_asprintf(), except it takes a `va_list`
+/// instead of using `...` variable arguments.
+///
+/// \param strp on output, is set to the new string. Must not be NULL.
+/// \param fmt a printf-style format string. Must not be NULL.
+/// \param ap a `va_list` values to be used with the format string.
+/// \returns the number of bytes in the newly-allocated string, not counting
+/// the null-terminator char, or a negative value on error.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.1.3.
+///
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_vasprintf(char **strp, SDL_PRINTF_FORMAT_STRING const char *fmt, va_list ap) SDL_PRINTF_VARARG_FUNCV(2)
 /// ```
@@ -5116,7 +5459,7 @@ double sdlSin(double x) {
 /// Range: `-1 <= y <= 1`
 ///
 /// This function operates on single-precision floating point values, use
-/// SDL_sinf for double-precision floats.
+/// SDL_sin for double-precision floats.
 ///
 /// This function may use a different approximation across different versions,
 /// platforms and configurations. i.e, it can return a different value given

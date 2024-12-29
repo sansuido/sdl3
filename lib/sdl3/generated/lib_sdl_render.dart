@@ -404,6 +404,11 @@ String? sdlGetRendererName(Pointer<SdlRenderer> renderer) {
 /// swapchain images, or potential frames in flight, used by the Vulkan
 /// renderer
 ///
+/// With the gpu renderer:
+///
+/// - `SDL_PROP_RENDERER_GPU_DEVICE_POINTER`: the SDL_GPUDevice associated with
+/// the renderer
+///
 /// \param renderer the rendering context.
 /// \returns a valid property ID on success or 0 on failure; call
 /// SDL_GetError() for more information.
@@ -496,9 +501,8 @@ bool sdlGetCurrentRenderOutputSize(
 /// \param access one of the enumerated values in SDL_TextureAccess.
 /// \param w the width of the texture in pixels.
 /// \param h the height of the texture in pixels.
-/// \returns a pointer to the created texture or NULL if no rendering context
-/// was active, the format was unsupported, or the width or height
-/// were out of range; call SDL_GetError() for more information.
+/// \returns the created texture or NULL on failure; call SDL_GetError() for
+/// more information.
 ///
 /// \threadsafety This function should only be called on the main thread.
 ///
@@ -658,9 +662,8 @@ Pointer<SdlTexture> sdlCreateTextureFromSurface(
 ///
 /// \param renderer the rendering context.
 /// \param props the properties to use.
-/// \returns a pointer to the created texture or NULL if no rendering context
-/// was active, the format was unsupported, or the width or height
-/// were out of range; call SDL_GetError() for more information.
+/// \returns the created texture or NULL on failure; call SDL_GetError() for
+/// more information.
 ///
 /// \threadsafety This function should only be called on the main thread.
 ///

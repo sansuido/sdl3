@@ -75,6 +75,7 @@ export 'sdl3/generated/lib_sdl_thread.dart';
 export 'sdl3/generated/lib_sdl_time.dart';
 export 'sdl3/generated/lib_sdl_timer.dart';
 export 'sdl3/generated/lib_sdl_touch.dart';
+export 'sdl3/generated/lib_sdl_tray.dart';
 export 'sdl3/generated/lib_sdl_ttf.dart';
 export 'sdl3/generated/lib_sdl_version.dart';
 export 'sdl3/generated/lib_sdl_video.dart';

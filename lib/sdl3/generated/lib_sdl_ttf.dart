@@ -191,7 +191,7 @@ Pointer<TtfFont> ttfOpenFontIo(
 /// for the beginning of the font, defaults to 0.
 /// - `TTF_PROP_FONT_CREATE_IOSTREAM_AUTOCLOSE_BOOLEAN`: true if closing the
 /// font should also close the associated SDL_IOStream.
-/// - `TTF_PROP_FONT_CREATE_SIZE_NUMBER`: the point size of the font. Some .fon
+/// - `TTF_PROP_FONT_CREATE_SIZE_FLOAT`: the point size of the font. Some .fon
 /// fonts will have several sizes embedded in the file, so the point size
 /// becomes the index of choosing which size. If the value is too high, the
 /// last indexed size will be the default.
@@ -422,11 +422,11 @@ bool ttfGetFontDpi(
 /// \sa TTF_GetFontStyle
 ///
 /// ```c
-/// extern SDL_DECLSPEC void SDLCALL TTF_SetFontStyle(TTF_Font *font, int style)
+/// extern SDL_DECLSPEC void SDLCALL TTF_SetFontStyle(TTF_Font *font, TTF_FontStyleFlags style)
 /// ```
 void ttfSetFontStyle(Pointer<TtfFont> font, int style) {
   final ttfSetFontStyleLookupFunction = libSdl3Ttf.lookupFunction<
-      Void Function(Pointer<TtfFont> font, Int32 style),
+      Void Function(Pointer<TtfFont> font, Uint32 style),
       void Function(Pointer<TtfFont> font, int style)>('TTF_SetFontStyle');
   return ttfSetFontStyleLookupFunction(font, style);
 }
@@ -452,11 +452,11 @@ void ttfSetFontStyle(Pointer<TtfFont> font, int style) {
 /// \sa TTF_SetFontStyle
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL TTF_GetFontStyle(const TTF_Font *font)
+/// extern SDL_DECLSPEC TTF_FontStyleFlags SDLCALL TTF_GetFontStyle(const TTF_Font *font)
 /// ```
 int ttfGetFontStyle(Pointer<TtfFont> font) {
   final ttfGetFontStyleLookupFunction = libSdl3Ttf.lookupFunction<
-      Int32 Function(Pointer<TtfFont> font),
+      Uint32 Function(Pointer<TtfFont> font),
       int Function(Pointer<TtfFont> font)>('TTF_GetFontStyle');
   return ttfGetFontStyleLookupFunction(font);
 }
@@ -540,7 +540,7 @@ int ttfGetFontOutline(Pointer<TtfFont> font) {
 /// \sa TTF_GetFontHinting
 ///
 /// ```c
-/// extern SDL_DECLSPEC void SDLCALL TTF_SetFontHinting(TTF_Font *font, int hinting)
+/// extern SDL_DECLSPEC void SDLCALL TTF_SetFontHinting(TTF_Font *font, TTF_HintingFlags hinting)
 /// ```
 void ttfSetFontHinting(Pointer<TtfFont> font, int hinting) {
   final ttfSetFontHintingLookupFunction = libSdl3Ttf.lookupFunction<
@@ -570,7 +570,7 @@ void ttfSetFontHinting(Pointer<TtfFont> font, int hinting) {
 /// \sa TTF_SetFontHinting
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL TTF_GetFontHinting(const TTF_Font *font)
+/// extern SDL_DECLSPEC TTF_HintingFlags SDLCALL TTF_GetFontHinting(const TTF_Font *font)
 /// ```
 int ttfGetFontHinting(Pointer<TtfFont> font) {
   final ttfGetFontHintingLookupFunction = libSdl3Ttf.lookupFunction<
@@ -2283,6 +2283,59 @@ void ttfDestroyGpuTextEngine(Pointer<TtfTextEngine> engine) {
       Void Function(Pointer<TtfTextEngine> engine),
       void Function(Pointer<TtfTextEngine> engine)>('TTF_DestroyGPUTextEngine');
   return ttfDestroyGpuTextEngineLookupFunction(engine);
+}
+
+///
+/// Sets the winding order of the vertices returned by TTF_GetGPUTextDrawData
+/// for a particular GPU text engine.
+///
+/// \param engine a TTF_TextEngine object created with
+/// TTF_CreateGPUTextEngine().
+/// \param winding the new winding order option.
+///
+/// \threadsafety This function should be called on the thread that created the
+/// engine.
+///
+/// \since This function is available since SDL_ttf 3.0.0.
+///
+/// \sa TTF_GetGPUTextEngineWinding
+///
+/// ```c
+/// extern SDL_DECLSPEC void SDLCALL TTF_SetGPUTextEngineWinding(TTF_TextEngine *engine, TTF_GPUTextEngineWinding winding)
+/// ```
+void ttfSetGpuTextEngineWinding(Pointer<TtfTextEngine> engine, int winding) {
+  final ttfSetGpuTextEngineWindingLookupFunction = libSdl3Ttf.lookupFunction<
+      Void Function(Pointer<TtfTextEngine> engine, Int32 winding),
+      void Function(Pointer<TtfTextEngine> engine,
+          int winding)>('TTF_SetGPUTextEngineWinding');
+  return ttfSetGpuTextEngineWindingLookupFunction(engine, winding);
+}
+
+///
+/// Get the winding order of the vertices returned by TTF_GetGPUTextDrawData
+/// for a particular GPU text engine
+///
+/// \param engine a TTF_TextEngine object created with
+/// TTF_CreateGPUTextEngine().
+/// \returns the winding order used by the GPU text engine or
+/// TTF_GPU_TEXTENGINE_WINDING_INVALID in case of error.
+///
+/// \threadsafety This function should be called on the thread that created the
+/// engine.
+///
+/// \since This function is available since SDL_ttf 3.0.0.
+///
+/// \sa TTF_SetGPUTextEngineWinding
+///
+/// ```c
+/// extern SDL_DECLSPEC TTF_GPUTextEngineWinding SDLCALL TTF_GetGPUTextEngineWinding(const TTF_TextEngine *engine)
+/// ```
+int ttfGetGpuTextEngineWinding(Pointer<TtfTextEngine> engine) {
+  final ttfGetGpuTextEngineWindingLookupFunction = libSdl3Ttf.lookupFunction<
+      Int32 Function(Pointer<TtfTextEngine> engine),
+      int Function(
+          Pointer<TtfTextEngine> engine)>('TTF_GetGPUTextEngineWinding');
+  return ttfGetGpuTextEngineWindingLookupFunction(engine);
 }
 
 ///

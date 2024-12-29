@@ -193,7 +193,7 @@ void mixQuit() {
 /// with the `devid` parameter. If you specify 0, SDL_mixer will choose the
 /// best default it can on your behalf (which, in many cases, is exactly what
 /// you want anyhow). This is equivalent to specifying
-/// `SDL_AUDIO_DEVICE_DEFAULT_OUTPUT`, but is less wordy. SDL_mixer does not
+/// `SDL_AUDIO_DEVICE_DEFAULT_PLAYBACK`, but is less wordy. SDL_mixer does not
 /// offer a mechanism to determine device IDs to open, but you can use
 /// SDL_GetAudioOutputDevices() to get a list of available devices. If you do
 /// this, be sure to call `SDL_Init(SDL_INIT_AUDIO)` first to initialize SDL's
@@ -257,7 +257,7 @@ void mixPauseAudio(int pauseOn) {
 /// \param format On return, will be filled with the audio device's format.
 /// \param channels On return, will be filled with the audio device's channel
 /// count.
-/// \returns true if the audio device has been opened, true otherwise.
+/// \returns true if the audio device has been opened, false otherwise.
 ///
 /// \since This function is available since SDL_mixer 3.0.0.
 ///
@@ -1229,10 +1229,6 @@ void mixHookMusic(
 /// restart the one that just stopped). If the music finished normally, this
 /// can be used to loop the music without a gap in the audio playback.
 ///
-/// Do not call SDL_LockAudio() from this callback; you will either be inside
-/// the audio callback, or SDL_mixer will explicitly lock the audio before
-/// calling your callback.
-///
 /// A NULL pointer will disable the callback.
 ///
 /// \param music_finished the callback function to become the new notification
@@ -1282,10 +1278,6 @@ Pointer<NativeType> mixGetMusicHookData() {
 ///
 /// The callback has a single parameter, `channel`, which says what mixer
 /// channel has just stopped.
-///
-/// Do not call SDL_LockAudio() from this callback; you will either be inside
-/// the audio callback, or SDL_mixer will explicitly lock the audio before
-/// calling your callback.
 ///
 /// A NULL pointer will disable the callback.
 ///
@@ -1354,9 +1346,6 @@ void mixChannelFinished(
 /// After all these effects have finished processing, the callback registered
 /// through Mix_SetPostMix() runs, and then the stream goes to the audio
 /// device.
-///
-/// DO NOT EVER call SDL_LockAudio() from your callback function! You are
-/// already running in the audio thread and the lock is already held!
 ///
 /// Note that unlike most SDL and SDL_mixer functions, this function returns
 /// zero if there's an error, not on success. We apologize for the API design
@@ -2287,7 +2276,7 @@ int mixGetMusicVolume(Pointer<MixMusic> music) {
 /// this function returns the previous (in this case, still-current) value.
 ///
 /// Note that the master volume does not affect any playing music; it is only
-/// applied when mixing chunks. Use Mix_VolumeMusic() for that.\
+/// applied when mixing chunks. Use Mix_VolumeMusic() for that.
 ///
 /// \param volume the new volume, between 0 and MIX_MAX_VOLUME, or -1 to query.
 /// \returns the previous volume. If the specified volume is -1, this returns
@@ -3088,7 +3077,7 @@ bool mixSetSoundFonts(String? paths) {
 /// - If the boolean _SDL hint_ `"SDL_FORCE_SOUNDFONTS"` is set, AND the
 /// `"SDL_SOUNDFONTS"` _environment variable_ is also set, this function will
 /// return that environment variable regardless of whether
-/// Mix_SetSoundFounts() was ever called.
+/// Mix_SetSoundFonts() was ever called.
 /// - Otherwise, if Mix_SetSoundFonts() was successfully called with a non-NULL
 /// path, this function will return the string passed to that function.
 /// - Otherwise, if the `"SDL_SOUNDFONTS"` variable is set, this function will

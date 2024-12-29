@@ -4,17 +4,17 @@
 //const SDL_assert_h_ = ;
 //const SDL_ASSERT_LEVEL = SomeNumberBasedOnVariousFactors;
 //const SDL_TriggerBreakpoint = () TriggerABreakpointInAPlatformSpecificManner;
-//const SDL_FUNCTION = __func__;
+//const SDL_FUNCTION = __FUNCTION__;
 //const SDL_FILE = __FILE__;
 //const SDL_LINE = __LINE__;
-//const SDL_NULL_WHILE_LOOP_CONDITION = (0,0);
+const SDL_NULL_WHILE_LOOP_CONDITION = (0);
 //const SDL_disabled_assert = (condition) do { (void) sizeof ((condition)); } while (SDL_NULL_WHILE_LOOP_CONDITION);
 const SDL_ASSERTION_RETRY = 0;
 const SDL_ASSERTION_BREAK = 1;
 const SDL_ASSERTION_ABORT = 2;
 const SDL_ASSERTION_IGNORE = 3;
 const SDL_ASSERTION_ALWAYS_IGNORE = 4;
-//const SDL_AssertBreakpoint = ();
+//const SDL_AssertBreakpoint = () SDL_TriggerBreakpoint();
 //const SDL_enabled_assert = (condition) do { while ( !(condition) ) { static struct SDL_AssertData sdl_assert_data = { 0, 0, #condition, 0, 0, 0, 0 }; const SDL_AssertState sdl_assert_state = SDL_ReportAssertion(&sdl_assert_data, SDL_FUNCTION, SDL_FILE, SDL_LINE); if (sdl_assert_state == SDL_ASSERTION_RETRY) { continue; } } while (SDL_NULL_WHILE_LOOP_CONDITION);
 //const SDL_assert = (condition) if (assertion_enabled && (condition)) { trigger_assertion; };
 //const SDL_assert_release = (condition) SDL_disabled_assert(condition);
@@ -29,8 +29,8 @@ const SDL_ASYNCIO_FAILURE = 1;
 const SDL_ASYNCIO_CANCELLED = 2;
 //const SDL_atomic_h_ = ;
 //const SDL_CompilerBarrier = () DoCompilerSpecificReadWriteBarrier();
-//const SDL_MemoryBarrierRelease = () __asm__ __volatile__ ("lwsync" : : : "memory");
-//const SDL_MemoryBarrierAcquire = () __asm__ __volatile__ ("lwsync" : : : "memory");
+//const SDL_MemoryBarrierRelease = () SDL_MemoryBarrierReleaseFunction();
+//const SDL_MemoryBarrierAcquire = () SDL_MemoryBarrierAcquireFunction();
 //const SDL_MEMORY_BARRIER_USES_FUNCTION = ;
 //const SDL_CPUPauseInstruction = () DoACPUPauseInACompilerAndArchitectureSpecificWay;
 //const SDL_AtomicIncRef = (a) SDL_AddAtomicInt(a, 1);
@@ -40,7 +40,7 @@ const SDL_AUDIO_MASK_BITSIZE = (0xFF);
 const SDL_AUDIO_MASK_FLOAT = (1 << 8);
 const SDL_AUDIO_MASK_BIG_ENDIAN = (1 << 12);
 const SDL_AUDIO_MASK_SIGNED = (1 << 15);
-//const SDL_DEFINE_AUDIO_FORMAT = (signed, bigendian, float, size) (((Uint16)(signed) << 15) | ((Uint16)(bigendian) << 12) | ((Uint16)(float) << 8) | ((size) & SDL_AUDIO_MASK_BITSIZE));
+//const SDL_DEFINE_AUDIO_FORMAT = (signed, bigendian, flt, size) (((Uint16)(signed) << 15) | ((Uint16)(bigendian) << 12) | ((Uint16)(flt) << 8) | ((size) & SDL_AUDIO_MASK_BITSIZE));
 const SDL_AUDIO_UNKNOWN = 0x0000;
 const SDL_AUDIO_U8 = 0x0008;
 const SDL_AUDIO_S8 = 0x8008;
@@ -611,19 +611,7 @@ const SDL_GPU_PRESENTMODE_MAILBOX = 2;
 const SDL_GPU_SWAPCHAINCOMPOSITION_SDR = 0;
 const SDL_GPU_SWAPCHAINCOMPOSITION_SDR_LINEAR = 1;
 const SDL_GPU_SWAPCHAINCOMPOSITION_HDR_EXTENDED_LINEAR = 2;
-const SDL_GPU_SWAPCHAINCOMPOSITION_HDR10_ST2048 = 3;
-const SDL_PROP_GPU_CREATETEXTURE_D3D12_CLEAR_R_FLOAT =
-    'SDL.gpu.createtexture.d3d12.clear.r';
-const SDL_PROP_GPU_CREATETEXTURE_D3D12_CLEAR_G_FLOAT =
-    'SDL.gpu.createtexture.d3d12.clear.g';
-const SDL_PROP_GPU_CREATETEXTURE_D3D12_CLEAR_B_FLOAT =
-    'SDL.gpu.createtexture.d3d12.clear.b';
-const SDL_PROP_GPU_CREATETEXTURE_D3D12_CLEAR_A_FLOAT =
-    'SDL.gpu.createtexture.d3d12.clear.a';
-const SDL_PROP_GPU_CREATETEXTURE_D3D12_CLEAR_DEPTH_FLOAT =
-    'SDL.gpu.createtexture.d3d12.clear.depth';
-const SDL_PROP_GPU_CREATETEXTURE_D3D12_CLEAR_STENCIL_UINT8 =
-    'SDL.gpu.createtexture.d3d12.clear.stencil';
+const SDL_GPU_SWAPCHAINCOMPOSITION_HDR10_ST2084 = 3;
 const SDL_PROP_GPU_DEVICE_CREATE_DEBUGMODE_BOOLEAN =
     'SDL.gpu.device.create.debugmode';
 const SDL_PROP_GPU_DEVICE_CREATE_PREFERLOWPOWER_BOOLEAN =
@@ -643,6 +631,18 @@ const SDL_PROP_GPU_DEVICE_CREATE_SHADERS_METALLIB_BOOLEAN =
     'SDL.gpu.device.create.shaders.metallib';
 const SDL_PROP_GPU_DEVICE_CREATE_D3D12_SEMANTIC_NAME_STRING =
     'SDL.gpu.device.create.d3d12.semantic';
+const SDL_PROP_GPU_CREATETEXTURE_D3D12_CLEAR_R_FLOAT =
+    'SDL.gpu.createtexture.d3d12.clear.r';
+const SDL_PROP_GPU_CREATETEXTURE_D3D12_CLEAR_G_FLOAT =
+    'SDL.gpu.createtexture.d3d12.clear.g';
+const SDL_PROP_GPU_CREATETEXTURE_D3D12_CLEAR_B_FLOAT =
+    'SDL.gpu.createtexture.d3d12.clear.b';
+const SDL_PROP_GPU_CREATETEXTURE_D3D12_CLEAR_A_FLOAT =
+    'SDL.gpu.createtexture.d3d12.clear.a';
+const SDL_PROP_GPU_CREATETEXTURE_D3D12_CLEAR_DEPTH_FLOAT =
+    'SDL.gpu.createtexture.d3d12.clear.depth';
+const SDL_PROP_GPU_CREATETEXTURE_D3D12_CLEAR_STENCIL_UINT8 =
+    'SDL.gpu.createtexture.d3d12.clear.stencil';
 //const SDL_guid_h_ = ;
 //const SDL_haptic_h_ = ;
 const SDL_HAPTIC_CONSTANT = (1 << 0);
@@ -1381,12 +1381,13 @@ const SDL_LOG_PRIORITY_ERROR = 6;
 const SDL_LOG_PRIORITY_CRITICAL = 7;
 const SDL_LOG_PRIORITY_COUNT = 8;
 //const SDL_main_h_ = ;
+const SDL_MAIN_HANDLED = 1;
+const SDL_MAIN_USE_CALLBACKS = 1;
 //const SDL_MAIN_AVAILABLE = ;
 //const SDL_MAIN_NEEDED = ;
 //const SDL_MAIN_EXPORTED = ;
 //const SDL_PS2_SKIP_IOP_RESET = () void reset_IOP(); void reset_IOP() {};
-//const SDLMAIN_DECLSPEC = SDL_DECLSPEC;
-const SDL_MAIN_USE_CALLBACKS = 1;
+//const SDLMAIN_DECLSPEC = ;
 //const main = SDL_main;
 //const SDL_main_impl_h_ = ;
 const SDL_MAIN_CALLBACK_STANDARD = 1;
@@ -1532,12 +1533,12 @@ const SDL_PACKEDLAYOUT_2101010 = 7;
 const SDL_PACKEDLAYOUT_1010102 = 8;
 //const SDL_DEFINE_PIXELFOURCC = (A, B, C, D) SDL_FOURCC(A, B, C, D);
 //const SDL_DEFINE_PIXELFORMAT = (type, order, layout, bits, bytes) ((1 << 28) | ((type) << 24) | ((order) << 20) | ((layout) << 16) | ((bits) << 8) | ((bytes) << 0));
-//const SDL_PIXELFLAG = (X) (((X) >> 28) & 0x0);
-//const SDL_PIXELTYPE = (X) (((X) >> 24) & 0x0);
-//const SDL_PIXELORDER = (X) (((X) >> 20) & 0x0);
-//const SDL_PIXELLAYOUT = (X) (((X) >> 16) & 0x0);
-//const SDL_BITSPERPIXEL = (X) (SDL_ISPIXELFORMAT_FOURCC(X) ? 0 : (((X) >> 8) & 0xFF));
-//const SDL_BYTESPERPIXEL = (X) (SDL_ISPIXELFORMAT_FOURCC(X) ? ((((X) == SDL_PIXELFORMAT_YUY2) || ((X) == SDL_PIXELFORMAT_UYVY) || ((X) == SDL_PIXELFORMAT_YVYU) || ((X) == SDL_PIXELFORMAT_P010)) ? 2 : 1) : (((X) >> 0) & 0xFF));
+//const SDL_PIXELFLAG = (format) (((format) >> 28) & 0x0);
+//const SDL_PIXELTYPE = (format) (((format) >> 24) & 0x0);
+//const SDL_PIXELORDER = (format) (((format) >> 20) & 0x0);
+//const SDL_PIXELLAYOUT = (format) (((format) >> 16) & 0x0);
+//const SDL_BITSPERPIXEL = (format) (SDL_ISPIXELFORMAT_FOURCC(format) ? 0 : (((format) >> 8) & 0xFF));
+//const SDL_BYTESPERPIXEL = (format) (SDL_ISPIXELFORMAT_FOURCC(format) ? ((((format) == SDL_PIXELFORMAT_YUY2) || ((format) == SDL_PIXELFORMAT_UYVY) || ((format) == SDL_PIXELFORMAT_YVYU) || ((format) == SDL_PIXELFORMAT_P010)) ? 2 : 1) : (((format) >> 0) & 0xFF));
 //const SDL_ISPIXELFORMAT_INDEXED = (format) (!SDL_ISPIXELFORMAT_FOURCC(format) && ((SDL_PIXELTYPE(format) == SDL_PIXELTYPE_INDEX1) || (SDL_PIXELTYPE(format) == SDL_PIXELTYPE_INDEX2) || (SDL_PIXELTYPE(format) == SDL_PIXELTYPE_INDEX4) || (SDL_PIXELTYPE(format) == SDL_PIXELTYPE_INDEX8)));
 //const SDL_ISPIXELFORMAT_PACKED = (format) (!SDL_ISPIXELFORMAT_FOURCC(format) && ((SDL_PIXELTYPE(format) == SDL_PIXELTYPE_PACKED8) || (SDL_PIXELTYPE(format) == SDL_PIXELTYPE_PACKED16) || (SDL_PIXELTYPE(format) == SDL_PIXELTYPE_PACKED32)));
 //const SDL_ISPIXELFORMAT_ARRAY = (format) (!SDL_ISPIXELFORMAT_FOURCC(format) && ((SDL_PIXELTYPE(format) == SDL_PIXELTYPE_ARRAYU8) || (SDL_PIXELTYPE(format) == SDL_PIXELTYPE_ARRAYU16) || (SDL_PIXELTYPE(format) == SDL_PIXELTYPE_ARRAYU32) || (SDL_PIXELTYPE(format) == SDL_PIXELTYPE_ARRAYF16) || (SDL_PIXELTYPE(format) == SDL_PIXELTYPE_ARRAYF32)));
@@ -1668,17 +1669,17 @@ const SDL_CHROMA_LOCATION_LEFT = 1;
 const SDL_CHROMA_LOCATION_CENTER = 2;
 const SDL_CHROMA_LOCATION_TOPLEFT = 3;
 //const SDL_DEFINE_COLORSPACE = (type, range, primaries, transfer, matrix, chroma) (((Uint32)(type) << 28) | ((Uint32)(range) << 24) | ((Uint32)(chroma) << 20) | ((Uint32)(primaries) << 10) | ((Uint32)(transfer) << 5) | ((Uint32)(matrix) << 0));
-//const SDL_COLORSPACETYPE = (X) (SDL_ColorType)(((X) >> 28) & 0x0);
-//const SDL_COLORSPACERANGE = (X) (SDL_ColorRange)(((X) >> 24) & 0x0);
-//const SDL_COLORSPACECHROMA = (X) (SDL_ChromaLocation)(((X) >> 20) & 0x0);
-//const SDL_COLORSPACEPRIMARIES = (X) (SDL_ColorPrimaries)(((X) >> 10) & 0x1);
-//const SDL_COLORSPACETRANSFER = (X) (SDL_TransferCharacteristics)(((X) >> 5) & 0x1);
-//const SDL_COLORSPACEMATRIX = (X) (SDL_MatrixCoefficients)((X) & 0x1);
-//const SDL_ISCOLORSPACE_MATRIX_BT601 = (X) (SDL_COLORSPACEMATRIX(X) == SDL_MATRIX_COEFFICIENTS_BT601 || SDL_COLORSPACEMATRIX(X) == SDL_MATRIX_COEFFICIENTS_BT470BG);
-//const SDL_ISCOLORSPACE_MATRIX_BT709 = (X) (SDL_COLORSPACEMATRIX(X) == SDL_MATRIX_COEFFICIENTS_BT709);
-//const SDL_ISCOLORSPACE_MATRIX_BT2020_NCL = (X) (SDL_COLORSPACEMATRIX(X) == SDL_MATRIX_COEFFICIENTS_BT2020_NCL);
-//const SDL_ISCOLORSPACE_LIMITED_RANGE = (X) (SDL_COLORSPACERANGE(X) != SDL_COLOR_RANGE_FULL);
-//const SDL_ISCOLORSPACE_FULL_RANGE = (X) (SDL_COLORSPACERANGE(X) == SDL_COLOR_RANGE_FULL);
+//const SDL_COLORSPACETYPE = (cspace) (SDL_ColorType)(((cspace) >> 28) & 0x0);
+//const SDL_COLORSPACERANGE = (cspace) (SDL_ColorRange)(((cspace) >> 24) & 0x0);
+//const SDL_COLORSPACECHROMA = (cspace) (SDL_ChromaLocation)(((cspace) >> 20) & 0x0);
+//const SDL_COLORSPACEPRIMARIES = (cspace) (SDL_ColorPrimaries)(((cspace) >> 10) & 0x1);
+//const SDL_COLORSPACETRANSFER = (cspace) (SDL_TransferCharacteristics)(((cspace) >> 5) & 0x1);
+//const SDL_COLORSPACEMATRIX = (cspace) (SDL_MatrixCoefficients)((cspace) & 0x1);
+//const SDL_ISCOLORSPACE_MATRIX_BT601 = (cspace) (SDL_COLORSPACEMATRIX(cspace) == SDL_MATRIX_COEFFICIENTS_BT601 || SDL_COLORSPACEMATRIX(cspace) == SDL_MATRIX_COEFFICIENTS_BT470BG);
+//const SDL_ISCOLORSPACE_MATRIX_BT709 = (cspace) (SDL_COLORSPACEMATRIX(cspace) == SDL_MATRIX_COEFFICIENTS_BT709);
+//const SDL_ISCOLORSPACE_MATRIX_BT2020_NCL = (cspace) (SDL_COLORSPACEMATRIX(cspace) == SDL_MATRIX_COEFFICIENTS_BT2020_NCL);
+//const SDL_ISCOLORSPACE_LIMITED_RANGE = (cspace) (SDL_COLORSPACERANGE(cspace) != SDL_COLOR_RANGE_FULL);
+//const SDL_ISCOLORSPACE_FULL_RANGE = (cspace) (SDL_COLORSPACERANGE(cspace) == SDL_COLOR_RANGE_FULL);
 const SDL_COLORSPACE_UNKNOWN = 0;
 const SDL_COLORSPACE_SRGB = 0x120005a0;
 const SDL_COLORSPACE_SRGB_LINEAR = 0x12000500;
@@ -1842,6 +1843,7 @@ const SDL_PROP_RENDERER_VULKAN_PRESENT_QUEUE_FAMILY_INDEX_NUMBER =
     'SDL.renderer.vulkan.present_queue_family_index';
 const SDL_PROP_RENDERER_VULKAN_SWAPCHAIN_IMAGE_COUNT_NUMBER =
     'SDL.renderer.vulkan.swapchain_image_count';
+const SDL_PROP_RENDERER_GPU_DEVICE_POINTER = 'SDL.renderer.gpu.device';
 const SDL_PROP_TEXTURE_CREATE_COLORSPACE_NUMBER =
     'SDL.texture.create.colorspace';
 const SDL_PROP_TEXTURE_CREATE_FORMAT_NUMBER = 'SDL.texture.create.format';
@@ -2231,18 +2233,18 @@ const SDL_PRILL_PREFIX = 'll';
 //const SDL_PRILLu = SDL_PRILL_PREFIX "u";
 //const SDL_PRILLx = SDL_PRILL_PREFIX "x";
 //const SDL_PRILLX = SDL_PRILL_PREFIX "X";
-//const SDL_IN_BYTECAP = (x);
-//const SDL_INOUT_Z_CAP = (x);
-//const SDL_OUT_Z_CAP = (x);
-//const SDL_OUT_CAP = (x);
-//const SDL_OUT_BYTECAP = (x);
-//const SDL_OUT_Z_BYTECAP = (x);
-//const SDL_PRINTF_FORMAT_STRING = ;
-//const SDL_SCANF_FORMAT_STRING = ;
-//const SDL_PRINTF_VARARG_FUNC = ( fmtargnumber );
-//const SDL_PRINTF_VARARG_FUNCV = ( fmtargnumber );
-//const SDL_SCANF_VARARG_FUNC = ( fmtargnumber );
-//const SDL_SCANF_VARARG_FUNCV = ( fmtargnumber );
+//const SDL_IN_BYTECAP = (x) _In_bytecount_(x);
+//const SDL_INOUT_Z_CAP = (x) _Inout_z_cap_(x);
+//const SDL_OUT_Z_CAP = (x) _Out_z_cap_(x);
+//const SDL_OUT_CAP = (x) _Out_cap_(x);
+//const SDL_OUT_BYTECAP = (x) _Out_bytecap_(x);
+//const SDL_OUT_Z_BYTECAP = (x) _Out_z_bytecap_(x);
+//const SDL_PRINTF_FORMAT_STRING = _Printf_format_string_;
+//const SDL_SCANF_FORMAT_STRING = _Scanf_format_string_impl_;
+//const SDL_PRINTF_VARARG_FUNC = ( fmtargnumber ) __attribute__ (( format( __printf__, fmtargnumber, fmtargnumber+1 )));
+//const SDL_PRINTF_VARARG_FUNCV = ( fmtargnumber ) __attribute__(( format( __printf__, fmtargnumber, 0 )));
+//const SDL_SCANF_VARARG_FUNC = ( fmtargnumber ) __attribute__ (( format( __scanf__, fmtargnumber, fmtargnumber+1 )));
+//const SDL_SCANF_VARARG_FUNCV = ( fmtargnumber ) __attribute__(( format( __scanf__, fmtargnumber, 0 )));
 //const SDL_WPRINTF_VARARG_FUNC = ( fmtargnumber );
 //const SDL_WPRINTF_VARARG_FUNCV = ( fmtargnumber );
 const DUMMY_ENUM_VALUE = 0;
@@ -2329,6 +2331,10 @@ const SDL_THREAD_PRIORITY_LOW = 0;
 const SDL_THREAD_PRIORITY_NORMAL = 1;
 const SDL_THREAD_PRIORITY_HIGH = 2;
 const SDL_THREAD_PRIORITY_TIME_CRITICAL = 3;
+const SDL_THREAD_UNKNOWN = 0;
+const SDL_THREAD_ALIVE = 1;
+const SDL_THREAD_DETACHED = 2;
+const SDL_THREAD_COMPLETE = 3;
 const SDL_PROP_THREAD_CREATE_ENTRY_FUNCTION_POINTER =
     'SDL.thread.create.entry_function';
 const SDL_PROP_THREAD_CREATE_NAME_STRING = 'SDL.thread.create.name';
@@ -2363,6 +2369,12 @@ const SDL_TOUCH_DEVICE_INDIRECT_ABSOLUTE = -1 + 2;
 const SDL_TOUCH_DEVICE_INDIRECT_RELATIVE = -1 + 3;
 //const SDL_TOUCH_MOUSEID = ((SDL_MouseID)-1);
 //const SDL_MOUSE_TOUCHID = ((SDL_TouchID)-1);
+//const SDL_tray_h_ = ;
+const SDL_TRAYENTRY_BUTTON = 0x00000001;
+const SDL_TRAYENTRY_CHECKBOX = 0x00000002;
+const SDL_TRAYENTRY_SUBMENU = 0x00000004;
+const SDL_TRAYENTRY_DISABLED = 0x80000000;
+const SDL_TRAYENTRY_CHECKED = 0x40000000;
 //const SDL_version_h_ = ;
 const SDL_MAJOR_VERSION = 3;
 const SDL_MINOR_VERSION = 1;
@@ -3202,7 +3214,7 @@ class SdlkGpuSwapchaincomposition {
   static const sdrLinear = SDL_GPU_SWAPCHAINCOMPOSITION_SDR_LINEAR;
   static const hdrExtendedLinear =
       SDL_GPU_SWAPCHAINCOMPOSITION_HDR_EXTENDED_LINEAR;
-  static const hdr10St2048 = SDL_GPU_SWAPCHAINCOMPOSITION_HDR10_ST2048;
+  static const hdr10St2084 = SDL_GPU_SWAPCHAINCOMPOSITION_HDR10_ST2084;
 }
 
 class SdlkHaptic {

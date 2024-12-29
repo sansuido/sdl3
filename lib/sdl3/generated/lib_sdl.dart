@@ -192,6 +192,12 @@ typedef SdlNsTimerCallbackDart = int Function(
 typedef SdlNsTimerCallback = Uint64 Function(
     Pointer<NativeType> userdata, Uint32 timerId, Uint64 interval);
 
+// typedef void (SDLCALL *SDL_TrayCallback)(void *userdata, SDL_TrayEntry *entry)
+typedef SdlTrayCallbackDart = void Function(
+    Pointer<NativeType> userdata, Pointer<SdlTrayEntry> entry);
+typedef SdlTrayCallback = Void Function(
+    Pointer<NativeType> userdata, Pointer<SdlTrayEntry> entry);
+
 // typedef SDL_EGLAttrib *(SDLCALL *SDL_EGLAttribArrayCallback)(void *userdata)
 typedef SdlEglAttribArrayCallbackDart = Pointer<Uint64> Function(
     Pointer<NativeType> userdata);

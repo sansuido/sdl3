@@ -302,15 +302,15 @@ bool sdlSetCurrentThreadPriority(int priority) {
 ///
 /// Wait for a thread to finish.
 ///
-/// Threads that haven't been detached will remain (as a "zombie") until this
-/// function cleans them up. Not doing so is a resource leak.
+/// Threads that haven't been detached will remain until this function cleans
+/// them up. Not doing so is a resource leak.
 ///
 /// Once a thread has been cleaned up through this function, the SDL_Thread
 /// that references it becomes invalid and should not be referenced again. As
 /// such, only one thread may call SDL_WaitThread() on another.
 ///
-/// The return code for the thread function is placed in the area pointed to by
-/// `status`, if `status` is not NULL.
+/// The return code from the thread function is placed in the area pointed to
+/// by `status`, if `status` is not NULL.
 ///
 /// You may not wait on a thread that has been used in a call to
 /// SDL_DetachThread(). Use either that function or this one, but not both, or
@@ -323,9 +323,9 @@ bool sdlSetCurrentThreadPriority(int priority) {
 ///
 /// \param thread the SDL_Thread pointer that was returned from the
 /// SDL_CreateThread() call that started this thread.
-/// \param status pointer to an integer that will receive the value returned
-/// from the thread function by its 'return', or NULL to not
-/// receive such value back.
+/// \param status a pointer filled in with the value returned from the thread
+/// function by its 'return', or -1 if the thread has been
+/// detached or isn't valid, may be NULL.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -341,6 +341,27 @@ void sdlWaitThread(Pointer<SdlThread> thread, Pointer<Int32> status) {
       void Function(
           Pointer<SdlThread> thread, Pointer<Int32> status)>('SDL_WaitThread');
   return sdlWaitThreadLookupFunction(thread, status);
+}
+
+///
+/// Get the current state of a thread.
+///
+/// \param thread the thread to query.
+/// \returns the current state of a thread, or SDL_THREAD_UNKNOWN if the thread
+/// isn't valid.
+///
+/// \since This function is available since SDL 3.2.0.
+///
+/// \sa SDL_ThreadState
+///
+/// ```c
+/// extern SDL_DECLSPEC SDL_ThreadState SDLCALL SDL_GetThreadState(SDL_Thread *thread)
+/// ```
+int sdlGetThreadState(Pointer<SdlThread> thread) {
+  final sdlGetThreadStateLookupFunction = libSdl3.lookupFunction<
+      Int32 Function(Pointer<SdlThread> thread),
+      int Function(Pointer<SdlThread> thread)>('SDL_GetThreadState');
+  return sdlGetThreadStateLookupFunction(thread);
 }
 
 ///

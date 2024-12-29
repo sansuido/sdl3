@@ -261,23 +261,23 @@ int sdlGetGpuShaderFormats(Pointer<SdlGpuDevice> device) {
 ///
 /// - 0: Sampled textures, followed by read-only storage textures, followed by
 /// read-only storage buffers
-/// - 1: Write-only storage textures, followed by write-only storage buffers
+/// - 1: Read-write storage textures, followed by read-write storage buffers
 /// - 2: Uniform buffers
 ///
 /// For DXBC and DXIL shaders, use the following register order:
 ///
 /// - (t[n], space0): Sampled textures, followed by read-only storage textures,
 /// followed by read-only storage buffers
-/// - (u[n], space1): Write-only storage textures, followed by write-only
+/// - (u[n], space1): Read-write storage textures, followed by read-write
 /// storage buffers
 /// - (b[n], space2): Uniform buffers
 ///
 /// For MSL/metallib, use the following order:
 ///
-/// - [[buffer]]: Uniform buffers, followed by write-only storage buffers,
-/// followed by write-only storage buffers
+/// - [[buffer]]: Uniform buffers, followed by read-only storage buffers,
+/// followed by read-write storage buffers
 /// - [[texture]]: Sampled textures, followed by read-only storage textures,
-/// followed by write-only storage textures
+/// followed by read-write storage textures
 ///
 /// \param device a GPU Context.
 /// \param createinfo a struct describing the state of the compute pipeline to
@@ -456,6 +456,31 @@ Pointer<SdlGpuShader> sdlCreateGpuShader(
 /// implementation will automatically fall back to the highest available sample
 /// count.
 ///
+/// There are optional properties that can be provided through
+/// SDL_GPUTextureCreateInfo's `props`. These are the supported properties:
+///
+/// - `SDL_PROP_PROCESS_CREATE_ARGS_POINTER`: an array of strings containing
+/// the program to run, any arguments, and a NULL pointer, e.g. const char
+/// *args[] = { "myprogram", "argument", NULL }. This is a required property.
+/// - `SDL_PROP_GPU_CREATETEXTURE_D3D12_CLEAR_R_FLOAT`: (Direct3D 12 only) if
+/// the texture usage is SDL_GPU_TEXTUREUSAGE_COLOR_TARGET, clear the texture
+/// to a color with this red intensity. Defaults to zero.
+/// - `SDL_PROP_GPU_CREATETEXTURE_D3D12_CLEAR_G_FLOAT`: (Direct3D 12 only) if
+/// the texture usage is SDL_GPU_TEXTUREUSAGE_COLOR_TARGET, clear the texture
+/// to a color with this green intensity. Defaults to zero.
+/// - `SDL_PROP_GPU_CREATETEXTURE_D3D12_CLEAR_B_FLOAT`: (Direct3D 12 only) if
+/// the texture usage is SDL_GPU_TEXTUREUSAGE_COLOR_TARGET, clear the texture
+/// to a color with this blue intensity. Defaults to zero.
+/// - `SDL_PROP_GPU_CREATETEXTURE_D3D12_CLEAR_A_FLOAT`: (Direct3D 12 only) if
+/// the texture usage is SDL_GPU_TEXTUREUSAGE_COLOR_TARGET, clear the texture
+/// to a color with this alpha intensity. Defaults to zero.
+/// - `SDL_PROP_GPU_CREATETEXTURE_D3D12_CLEAR_DEPTH_FLOAT`: (Direct3D 12 only)
+/// if the texture usage is SDL_GPU_TEXTUREUSAGE_DEPTH_STENCIL_TARGET, clear
+/// the texture to a depth of this value. Defaults to zero.
+/// - `SDL_PROP_GPU_CREATETEXTURE_D3D12_CLEAR_STENCIL_UINT8`: (Direct3D 12
+/// only) if the texture usage is SDL_GPU_TEXTUREUSAGE_DEPTH_STENCIL_TARGET,
+/// clear the texture to a stencil of this value. Defaults to zero.
+///
 /// \param device a GPU Context.
 /// \param createinfo a struct describing the state of the texture to create.
 /// \returns a texture object on success, or NULL on failure; call
@@ -495,6 +520,11 @@ Pointer<SdlGpuTexture> sdlCreateGpuTexture(
 ///
 /// Note that certain combinations of usage flags are invalid. For example, a
 /// buffer cannot have both the VERTEX and INDEX flags.
+///
+/// For better understanding of underlying concepts and memory management with
+/// SDL GPU API, you may refer
+/// [this blog post](https://moonside.games/posts/sdl-gpu-concepts-cycling/)
+/// .
 ///
 /// \param device a GPU Context.
 /// \param createinfo a struct describing the state of the buffer to create.
@@ -876,6 +906,13 @@ void sdlReleaseGpuGraphicsPipeline(Pointer<SdlGpuDevice> device,
 /// freed by the user. The command buffer may only be used on the thread it was
 /// acquired on. The command buffer should be submitted on the thread it was
 /// acquired on.
+///
+/// It is valid to acquire multiple command buffers on the same thread at once.
+/// In fact a common design pattern is to acquire two command buffers per frame
+/// where one is dedicated to render and compute passes and the other is
+/// dedicated to copy passes and other preparatory work such as generating
+/// mipmaps. Interleaving commands between the two command buffers reduces the
+/// total amount of passes overall which improves rendering performance.
 ///
 /// \param device a GPU context.
 /// \returns a command buffer, or NULL on failure; call SDL_GetError() for more
@@ -2572,6 +2609,11 @@ bool sdlWaitForGpuSwapchain(
 /// submitted. The swapchain texture should only be referenced by the command
 /// buffer used to acquire it. It is an error to call
 /// SDL_CancelGPUCommandBuffer() after a swapchain texture is acquired.
+///
+/// This function can fill the swapchain texture handle with NULL in certain
+/// cases, for example if the window is minimized. This is not an error. You
+/// should always make sure to check whether the pointer is NULL before
+/// actually using it.
 ///
 /// The swapchain texture is managed by the implementation and must not be
 /// freed by the user. You MUST NOT call this function from any thread other

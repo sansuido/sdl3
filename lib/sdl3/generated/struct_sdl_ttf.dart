@@ -30,30 +30,24 @@ final class TtfGpuAtlasDrawSequence extends Struct {
   // [0]+(8)
   external Pointer<SdlGpuTexture> atlasTexture;
   // [8]+(8)
-  external Pointer<Float> xy;
-  // [16]+(4)
+  external Pointer<SdlFPoint> xy;
+  // [16]+(8)
+  external Pointer<SdlFPoint> uv;
+  // [24]+(4)
   @Int32()
-  external int xyStride;
+  external int numVertices;
   // [] +(4)
   @Uint32()
   external int blank_1;
-  // [24]+(8)
-  external Pointer<Float> uv;
-  // [32]+(4)
-  @Int32()
-  external int uvStride;
-  // [36]+(4)
-  @Int32()
-  external int numVertices;
-  // [40]+(8)
+  // [32]+(8)
   external Pointer<Int32> indices;
-  // [48]+(4)
+  // [40]+(4)
   @Int32()
   external int numIndices;
   // [] +(4)
   @Uint32()
   external int blank_2;
-  // [56]+(8)
+  // [48]+(8)
   external Pointer<TtfGpuAtlasDrawSequence> next;
 }
 

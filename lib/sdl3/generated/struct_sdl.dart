@@ -3446,6 +3446,15 @@ final class SdlFinger extends Struct {
   external int blank_1;
 }
 
+// SDL_Tray
+final class SdlTray extends Opaque {}
+
+// SDL_TrayMenu
+final class SdlTrayMenu extends Opaque {}
+
+// SDL_TrayEntry
+final class SdlTrayEntry extends Opaque {}
+
 // SDL_DisplayModeData
 final class SdlDisplayModeData extends Opaque {}
 

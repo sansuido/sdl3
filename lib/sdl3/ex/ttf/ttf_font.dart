@@ -165,7 +165,7 @@ extension TtfFontEx on TtfFont {
   /// for the beginning of the font, defaults to 0.
   /// - `TTF_PROP_FONT_CREATE_IOSTREAM_AUTOCLOSE_BOOLEAN`: true if closing the
   /// font should also close the associated SDL_IOStream.
-  /// - `TTF_PROP_FONT_CREATE_SIZE_NUMBER`: the point size of the font. Some .fon
+  /// - `TTF_PROP_FONT_CREATE_SIZE_FLOAT`: the point size of the font. Some .fon
   /// fonts will have several sizes embedded in the file, so the point size
   /// becomes the index of choosing which size. If the value is too high, the
   /// last indexed size will be the default.
@@ -390,7 +390,7 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// \sa TTF_GetFontStyle
   ///
   /// ```c
-  /// extern SDL_DECLSPEC void SDLCALL TTF_SetFontStyle(TTF_Font *font, int style)
+  /// extern SDL_DECLSPEC void SDLCALL TTF_SetFontStyle(TTF_Font *font, TTF_FontStyleFlags style)
   /// ```
   void setStyle(int style) {
     ttfSetFontStyle(this, style);
@@ -417,7 +417,7 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// \sa TTF_SetFontStyle
   ///
   /// ```c
-  /// extern SDL_DECLSPEC int SDLCALL TTF_GetFontStyle(const TTF_Font *font)
+  /// extern SDL_DECLSPEC TTF_FontStyleFlags SDLCALL TTF_GetFontStyle(const TTF_Font *font)
   /// ```
   int getStyle() {
     return ttfGetFontStyle(this);
@@ -496,7 +496,7 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// \sa TTF_GetFontHinting
   ///
   /// ```c
-  /// extern SDL_DECLSPEC void SDLCALL TTF_SetFontHinting(TTF_Font *font, int hinting)
+  /// extern SDL_DECLSPEC void SDLCALL TTF_SetFontHinting(TTF_Font *font, TTF_HintingFlags hinting)
   /// ```
   void setHinting(int hinting) {
     ttfSetFontHinting(this, hinting);
@@ -523,7 +523,7 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// \sa TTF_SetFontHinting
   ///
   /// ```c
-  /// extern SDL_DECLSPEC int SDLCALL TTF_GetFontHinting(const TTF_Font *font)
+  /// extern SDL_DECLSPEC TTF_HintingFlags SDLCALL TTF_GetFontHinting(const TTF_Font *font)
   /// ```
   int getHinting() {
     return ttfGetFontHinting(this);

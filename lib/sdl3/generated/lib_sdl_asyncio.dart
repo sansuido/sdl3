@@ -117,7 +117,6 @@ int sdlGetAsyncIoSize(Pointer<SdlAsyncIo> asyncio) {
 ///
 /// \sa SDL_WriteAsyncIO
 /// \sa SDL_CreateAsyncIOQueue
-/// \sa SDL_GetAsyncIOTaskResult
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_ReadAsyncIO(SDL_AsyncIO *asyncio, void *ptr, Uint64 offset, Uint64 size, SDL_AsyncIOQueue *queue, void *userdata)
@@ -183,7 +182,6 @@ bool sdlReadAsyncIo(
 ///
 /// \sa SDL_ReadAsyncIO
 /// \sa SDL_CreateAsyncIOQueue
-/// \sa SDL_GetAsyncIOTaskResult
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_WriteAsyncIO(SDL_AsyncIO *asyncio, void *ptr, Uint64 offset, Uint64 size, SDL_AsyncIOQueue *queue, void *userdata)
@@ -238,10 +236,10 @@ bool sdlWriteAsyncIo(
 /// close the file immediately, then check for all results later. This function
 /// will not block until the tasks have completed.
 ///
-/// Once this function returns non-NULL, `asyncio` is no longer valid,
-/// regardless of any future outcomes. Any completed tasks might still contain
-/// this pointer in their SDL_AsyncIOOutcome data, in case the app was using
-/// this value to track information, but it should not be used again.
+/// Once this function returns true, `asyncio` is no longer valid, regardless
+/// of any future outcomes. Any completed tasks might still contain this
+/// pointer in their SDL_AsyncIOOutcome data, in case the app was using this
+/// value to track information, but it should not be used again.
 ///
 /// If this function returns false, the close wasn't started at all, and it's
 /// safe to attempt to close again later.
@@ -361,7 +359,7 @@ void sdlDestroyAsyncIoQueue(Pointer<SdlAsyncIoQueue> queue) {
 /// \param queue the async I/O task queue to query.
 /// \param outcome details of a finished task will be written here. May not be
 /// NULL.
-/// \returns true if task has completed, false otherwise.
+/// \returns true if a task has completed, false otherwise.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
