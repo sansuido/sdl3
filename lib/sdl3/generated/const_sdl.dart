@@ -26,7 +26,7 @@ const SDL_ASYNCIO_TASK_WRITE = 1;
 const SDL_ASYNCIO_TASK_CLOSE = 2;
 const SDL_ASYNCIO_COMPLETE = 0;
 const SDL_ASYNCIO_FAILURE = 1;
-const SDL_ASYNCIO_CANCELLED = 2;
+const SDL_ASYNCIO_CANCELED = 2;
 //const SDL_atomic_h_ = ;
 //const SDL_CompilerBarrier = () DoCompilerSpecificReadWriteBarrier();
 //const SDL_MemoryBarrierRelease = () SDL_MemoryBarrierReleaseFunction();
@@ -233,6 +233,7 @@ const SDL_EVENT_GAMEPAD_STEAM_HANDLE_UPDATED = 0x650 + 11;
 const SDL_EVENT_FINGER_DOWN = 0x700;
 const SDL_EVENT_FINGER_UP = 0x700 + 1;
 const SDL_EVENT_FINGER_MOTION = 0x700 + 2;
+const SDL_EVENT_FINGER_CANCELED = 0x700 + 3;
 const SDL_EVENT_CLIPBOARD_UPDATE = 0x900;
 const SDL_EVENT_DROP_FILE = 0x1000;
 const SDL_EVENT_DROP_TEXT = 0x1000 + 1;
@@ -757,6 +758,7 @@ const SDL_HINT_JOYSTICK_BLACKLIST_DEVICES = 'SDL_JOYSTICK_BLACKLIST_DEVICES';
 const SDL_HINT_JOYSTICK_BLACKLIST_DEVICES_EXCLUDED =
     'SDL_JOYSTICK_BLACKLIST_DEVICES_EXCLUDED';
 const SDL_HINT_JOYSTICK_DEVICE = 'SDL_JOYSTICK_DEVICE';
+const SDL_HINT_JOYSTICK_ENHANCED_REPORTS = 'SDL_JOYSTICK_ENHANCED_REPORTS';
 const SDL_HINT_JOYSTICK_FLIGHTSTICK_DEVICES =
     'SDL_JOYSTICK_FLIGHTSTICK_DEVICES';
 const SDL_HINT_JOYSTICK_FLIGHTSTICK_DEVICES_EXCLUDED =
@@ -783,11 +785,9 @@ const SDL_HINT_JOYSTICK_HIDAPI_PS3_SIXAXIS_DRIVER =
 const SDL_HINT_JOYSTICK_HIDAPI_PS4 = 'SDL_JOYSTICK_HIDAPI_PS4';
 const SDL_HINT_JOYSTICK_HIDAPI_PS4_REPORT_INTERVAL =
     'SDL_JOYSTICK_HIDAPI_PS4_REPORT_INTERVAL';
-const SDL_HINT_JOYSTICK_HIDAPI_PS4_RUMBLE = 'SDL_JOYSTICK_HIDAPI_PS4_RUMBLE';
 const SDL_HINT_JOYSTICK_HIDAPI_PS5 = 'SDL_JOYSTICK_HIDAPI_PS5';
 const SDL_HINT_JOYSTICK_HIDAPI_PS5_PLAYER_LED =
     'SDL_JOYSTICK_HIDAPI_PS5_PLAYER_LED';
-const SDL_HINT_JOYSTICK_HIDAPI_PS5_RUMBLE = 'SDL_JOYSTICK_HIDAPI_PS5_RUMBLE';
 const SDL_HINT_JOYSTICK_HIDAPI_SHIELD = 'SDL_JOYSTICK_HIDAPI_SHIELD';
 const SDL_HINT_JOYSTICK_HIDAPI_STADIA = 'SDL_JOYSTICK_HIDAPI_STADIA';
 const SDL_HINT_JOYSTICK_HIDAPI_STEAM = 'SDL_JOYSTICK_HIDAPI_STEAM';
@@ -2185,6 +2185,7 @@ const SDL_SENSOR_GYRO_L = -1 + 5;
 const SDL_SENSOR_ACCEL_R = -1 + 6;
 const SDL_SENSOR_GYRO_R = -1 + 7;
 //const SDL_stdinc_h_ = ;
+//const SDL_INCLUDE_STDBOOL_H = ;
 //const bool = unsigned char;
 //const false = 0;
 //const true = 1;
@@ -2734,6 +2735,7 @@ class SdlkEvent {
   static const fingerDown = SDL_EVENT_FINGER_DOWN;
   static const fingerUp = SDL_EVENT_FINGER_UP;
   static const fingerMotion = SDL_EVENT_FINGER_MOTION;
+  static const fingerCanceled = SDL_EVENT_FINGER_CANCELED;
   static const clipboardUpdate = SDL_EVENT_CLIPBOARD_UPDATE;
   static const dropFile = SDL_EVENT_DROP_FILE;
   static const dropText = SDL_EVENT_DROP_TEXT;
@@ -3334,6 +3336,7 @@ class SdlkHint {
   static const joystickBlacklistDevicesExcluded =
       SDL_HINT_JOYSTICK_BLACKLIST_DEVICES_EXCLUDED;
   static const joystickDevice = SDL_HINT_JOYSTICK_DEVICE;
+  static const joystickEnhancedReports = SDL_HINT_JOYSTICK_ENHANCED_REPORTS;
   static const joystickFlightstickDevices =
       SDL_HINT_JOYSTICK_FLIGHTSTICK_DEVICES;
   static const joystickFlightstickDevicesExcluded =
@@ -3360,11 +3363,9 @@ class SdlkHint {
   static const joystickHidapiPs4 = SDL_HINT_JOYSTICK_HIDAPI_PS4;
   static const joystickHidapiPs4ReportInterval =
       SDL_HINT_JOYSTICK_HIDAPI_PS4_REPORT_INTERVAL;
-  static const joystickHidapiPs4Rumble = SDL_HINT_JOYSTICK_HIDAPI_PS4_RUMBLE;
   static const joystickHidapiPs5 = SDL_HINT_JOYSTICK_HIDAPI_PS5;
   static const joystickHidapiPs5PlayerLed =
       SDL_HINT_JOYSTICK_HIDAPI_PS5_PLAYER_LED;
-  static const joystickHidapiPs5Rumble = SDL_HINT_JOYSTICK_HIDAPI_PS5_RUMBLE;
   static const joystickHidapiShield = SDL_HINT_JOYSTICK_HIDAPI_SHIELD;
   static const joystickHidapiStadia = SDL_HINT_JOYSTICK_HIDAPI_STADIA;
   static const joystickHidapiSteam = SDL_HINT_JOYSTICK_HIDAPI_STEAM;

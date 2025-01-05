@@ -2246,7 +2246,6 @@ Pointer<TtfTextEngine> ttfCreateGpuTextEngine(Pointer<SdlGpuDevice> device) {
 ///
 /// \sa TTF_CreateGPUTextEngine
 /// \sa TTF_CreateText
-/// \sa TTF_CreateText_Wrapped
 ///
 /// ```c
 /// extern SDL_DECLSPEC TTF_GPUAtlasDrawSequence* SDLCALL TTF_GetGPUTextDrawData(TTF_Text *text)
@@ -2458,6 +2457,8 @@ Pointer<TtfTextEngine> ttfGetTextEngine(Pointer<TtfText> text) {
 ///
 /// \param text the TTF_Text to modify.
 /// \param font the font to use, may be NULL.
+/// \returns false if the text pointer is null; otherwise, true. call
+/// SDL_GetError() for more information.
 ///
 /// \threadsafety This function should be called on the thread that created the
 /// text.
@@ -3241,14 +3242,7 @@ void ttfDestroyText(Pointer<TtfText> text) {
 /// \since This function is available since SDL_ttf 3.0.0.
 ///
 /// \sa TTF_OpenFont
-/// \sa TTF_OpenFontIndexDPIIO
 /// \sa TTF_OpenFontIO
-/// \sa TTF_OpenFontDPI
-/// \sa TTF_OpenFontDPIIO
-/// \sa TTF_OpenFontIndex
-/// \sa TTF_OpenFontIndexDPI
-/// \sa TTF_OpenFontIndexDPIIO
-/// \sa TTF_OpenFontIndexIO
 ///
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL TTF_CloseFont(TTF_Font *font)

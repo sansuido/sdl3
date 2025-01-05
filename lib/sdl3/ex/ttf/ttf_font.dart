@@ -1429,14 +1429,7 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// \since This function is available since SDL_ttf 3.0.0.
   ///
   /// \sa TTF_OpenFont
-  /// \sa TTF_OpenFontIndexDPIIO
   /// \sa TTF_OpenFontIO
-  /// \sa TTF_OpenFontDPI
-  /// \sa TTF_OpenFontDPIIO
-  /// \sa TTF_OpenFontIndex
-  /// \sa TTF_OpenFontIndexDPI
-  /// \sa TTF_OpenFontIndexDPIIO
-  /// \sa TTF_OpenFontIndexIO
   ///
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL TTF_CloseFont(TTF_Font *font)

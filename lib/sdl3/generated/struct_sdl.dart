@@ -1114,7 +1114,7 @@ final class SdlClipboardEvent extends Struct {
   external int blank_2;
   // [20]+(4)
   @Int32()
-  external int nMimeTypes;
+  external int numMimeTypes;
   // [24]+(8)
   external Pointer<Pointer<Int8>> mimeTypes;
 }

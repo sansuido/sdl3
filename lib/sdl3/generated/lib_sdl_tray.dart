@@ -14,8 +14,8 @@ import 'struct_sdl.dart';
 /// Using tray icons require the video subsystem.
 ///
 /// \param icon a surface to be used as icon. May be NULL.
-/// \param tooltip a tooltip to be displayed when the mouse hovers the icon.
-/// Not supported on all platforms. May be NULL.
+/// \param tooltip a tooltip to be displayed when the mouse hovers the icon in
+/// UTF-8 encoding. Not supported on all platforms. May be NULL.
 /// \returns The newly created system tray icon.
 ///
 /// \since This function is available since SDL 3.2.0.
@@ -64,7 +64,7 @@ void sdlSetTrayIcon(Pointer<SdlTray> tray, Pointer<SdlSurface> icon) {
 /// Updates the system tray icon's tooltip.
 ///
 /// \param tray the tray icon to be updated.
-/// \param tooltip the new tooltip. May be NULL.
+/// \param tooltip the new tooltip in UTF-8 encoding. May be NULL.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
@@ -209,9 +209,9 @@ Pointer<SdlTrayMenu> sdlGetTraySubmenu(Pointer<SdlTrayEntry> entry) {
 /// \param menu The menu to get entries from.
 /// \param size An optional pointer to obtain the number of entries in the
 /// menu.
-/// \returns the entries within the given menu. The pointer becomes invalid
-/// when any function that inserts or deletes entries in the menu is
-/// called.
+/// \returns a NULL-terminated list of entries within the given menu. The
+/// pointer becomes invalid when any function that inserts or deletes
+/// entries in the menu is called.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
@@ -262,8 +262,8 @@ void sdlRemoveTrayEntry(Pointer<SdlTrayEntry> entry) {
 /// \param menu the menu to append the entry to.
 /// \param pos the desired position for the new entry. Entries at or following
 /// this place will be moved. If pos is -1, the entry is appended.
-/// \param label the text to be displayed on the entry, or NULL for a
-/// separator.
+/// \param label the text to be displayed on the entry, in UTF-8 encoding, or
+/// NULL for a separator.
 /// \param flags a combination of flags, some of which are mandatory.
 /// \returns the newly created entry, or NULL if pos is out of bounds.
 ///
@@ -300,7 +300,7 @@ Pointer<SdlTrayEntry> sdlInsertTrayEntryAt(
 /// label. The function will silently fail if that happens.
 ///
 /// \param entry the entry to be updated.
-/// \param label the new label for the entry.
+/// \param label the new label for the entry in UTF-8 encoding.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
@@ -328,7 +328,7 @@ void sdlSetTrayEntryLabel(Pointer<SdlTrayEntry> entry, String? label) {
 /// If the returned value is NULL, the entry is a separator.
 ///
 /// \param entry the entry to be read.
-/// \returns the label of the entry.
+/// \returns the label of the entry in UTF-8 encoding.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///

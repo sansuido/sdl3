@@ -1,3 +1,6 @@
+## 1.2.1
+- SDL3-2025-01-05
+
 ## 1.2.0
 - SDL3-2024-12-29
 - [add] Added tray functions.
