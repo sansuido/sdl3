@@ -1,5 +1,4 @@
 // ignore_for_file: constant_identifier_names, non_constant_identifier_names
-import 'dart:ffi';
 //import './generated/const_sdl.dart';
 import './generated/const_sdl_mixer.dart';
 import './generated/lib_sdl_error.dart';
@@ -26,8 +25,8 @@ bool sdlMixerVersionAtleast(int x, int y, int z) {
 /// ```c
 /// const Mix_SetError = SDL_SetError;
 /// ```
-bool mixSetError(String fmt, Pointer<NativeType> arg1) {
-  return sdlSetError(fmt, arg1);
+bool mixSetError(String fmt) {
+  return sdlSetError(fmt);
 }
 
 /// ```c

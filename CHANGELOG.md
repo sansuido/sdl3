@@ -1,3 +1,8 @@
+## 1.3.0
+- SDL3-2025-01-12
+- [fixed] Ignore `...` & `va_list`. (sdlLog and more)
+- [add] Added SdlRendererPointerEx functions(textureAffine, textureTiled, texture9Grid, debugText).
+
 ## 1.2.1
 - SDL3-2025-01-05
 

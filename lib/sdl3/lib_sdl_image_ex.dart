@@ -1,5 +1,4 @@
 // ignore_for_file: non_constant_identifier_names
-import 'dart:ffi';
 import './generated/const_sdl_image.dart';
 import './generated/lib_sdl_error.dart';
 import 'lib_sdl_ex.dart';
@@ -20,8 +19,8 @@ bool sdlImageVersionAtleast(int x, int y, int z) {
 /// ```c
 /// const IMG_SetError = SDL_SetError;
 /// ```
-bool imgSetError(String fmt, Pointer<NativeType> arg1) {
-  return sdlSetError(fmt, arg1);
+bool imgSetError(String fmt) {
+  return sdlSetError(fmt);
 }
 
 /// ```c

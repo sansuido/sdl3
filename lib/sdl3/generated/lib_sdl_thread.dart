@@ -350,7 +350,7 @@ void sdlWaitThread(Pointer<SdlThread> thread, Pointer<Int32> status) {
 /// \returns the current state of a thread, or SDL_THREAD_UNKNOWN if the thread
 /// isn't valid.
 ///
-/// \since This function is available since SDL 3.2.0.
+/// \since This function is available since SDL 3.1.8.
 ///
 /// \sa SDL_ThreadState
 ///

@@ -280,7 +280,7 @@ void sdlShowOpenFolderDialog(
 /// callback may be invoked from the same thread or from a
 /// different one, depending on the OS's constraints.
 ///
-/// \since This function is available since SDL 3.2.0.
+/// \since This function is available since SDL 3.1.8.
 ///
 /// \sa SDL_FileDialogType
 /// \sa SDL_DialogFileCallback

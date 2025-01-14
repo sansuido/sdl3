@@ -863,6 +863,7 @@ const SDL_HINT_MOUSE_TOUCH_EVENTS = 'SDL_MOUSE_TOUCH_EVENTS';
 const SDL_HINT_MUTE_CONSOLE_KEYBOARD = 'SDL_MUTE_CONSOLE_KEYBOARD';
 const SDL_HINT_NO_SIGNAL_HANDLERS = 'SDL_NO_SIGNAL_HANDLERS';
 const SDL_HINT_OPENGL_LIBRARY = 'SDL_OPENGL_LIBRARY';
+const SDL_HINT_EGL_LIBRARY = 'SDL_EGL_LIBRARY';
 const SDL_HINT_OPENGL_ES_DRIVER = 'SDL_OPENGL_ES_DRIVER';
 const SDL_HINT_OPENVR_LIBRARY = 'SDL_OPENVR_LIBRARY';
 const SDL_HINT_ORIENTATIONS = 'SDL_ORIENTATIONS';
@@ -1080,6 +1081,7 @@ const SDL_PROP_TEXTINPUT_MULTILINE_BOOLEAN = 'SDL.textinput.multiline';
 const SDL_PROP_TEXTINPUT_ANDROID_INPUTTYPE_NUMBER =
     'SDL.textinput.android.inputtype';
 //const SDL_keycode_h_ = ;
+const SDLK_EXTENDED_MASK = (1 << 29);
 const SDLK_SCANCODE_MASK = (1 << 30);
 //const SDL_SCANCODE_TO_KEYCODE = (X) (X | SDLK_SCANCODE_MASK);
 const SDLK_UNKNOWN = 0x00000000;
@@ -1331,9 +1333,17 @@ const SDLK_SOFTLEFT = 0x4000011f;
 const SDLK_SOFTRIGHT = 0x40000120;
 const SDLK_CALL = 0x40000121;
 const SDLK_ENDCALL = 0x40000122;
+const SDLK_LEFT_TAB = 0x20000001;
+const SDLK_LEVEL5_SHIFT = 0x20000002;
+const SDLK_MULTI_KEY_COMPOSE = 0x20000003;
+const SDLK_LMETA = 0x20000004;
+const SDLK_RMETA = 0x20000005;
+const SDLK_LHYPER = 0x20000006;
+const SDLK_RHYPER = 0x20000007;
 const SDL_KMOD_NONE = 0x0000;
 const SDL_KMOD_LSHIFT = 0x0001;
 const SDL_KMOD_RSHIFT = 0x0002;
+const SDL_KMOD_LEVEL5 = 0x0004;
 const SDL_KMOD_LCTRL = 0x0040;
 const SDL_KMOD_RCTRL = 0x0080;
 const SDL_KMOD_LALT = 0x0100;
@@ -2192,6 +2202,7 @@ const SDL_SENSOR_GYRO_R = -1 + 7;
 //const __bool_true_false_are_defined = 1;
 //const SDL_DISABLE_ALLOCA = ;
 //const alloca = __builtin_alloca;
+const SDL_NOLONGLONG = 1;
 //const SDL_SIZE_MAX = SIZE_MAX;
 //const SDL_COMPILE_TIME_ASSERT = (name, x) FailToCompileIf_x_IsFalse(x);
 //const SDL_arraysize = (array) (sizeof(array)/sizeof(array[0]));
@@ -2379,7 +2390,7 @@ const SDL_TRAYENTRY_CHECKED = 0x40000000;
 //const SDL_version_h_ = ;
 const SDL_MAJOR_VERSION = 3;
 const SDL_MINOR_VERSION = 1;
-const SDL_MICRO_VERSION = 7;
+const SDL_MICRO_VERSION = 9;
 //const SDL_VERSIONNUM = (major, minor, patch) ((major) * 1000000 + (minor) * 1000 + (patch));
 //const SDL_VERSIONNUM_MAJOR = (version) ((version) / 1000000);
 //const SDL_VERSIONNUM_MINOR = (version) (((version) / 1000) % 1000);
@@ -3441,6 +3452,7 @@ class SdlkHint {
   static const muteConsoleKeyboard = SDL_HINT_MUTE_CONSOLE_KEYBOARD;
   static const noSignalHandlers = SDL_HINT_NO_SIGNAL_HANDLERS;
   static const openglLibrary = SDL_HINT_OPENGL_LIBRARY;
+  static const eglLibrary = SDL_HINT_EGL_LIBRARY;
   static const openglEsDriver = SDL_HINT_OPENGL_ES_DRIVER;
   static const openvrLibrary = SDL_HINT_OPENVR_LIBRARY;
   static const orientations = SDL_HINT_ORIENTATIONS;
@@ -3637,6 +3649,7 @@ class SdlkCapitalize {
 }
 
 class Sdlk {
+  static const extendedMask = SDLK_EXTENDED_MASK;
   static const unknown = SDLK_UNKNOWN;
   static const onReturn = SDLK_RETURN;
   static const escape = SDLK_ESCAPE;
@@ -3886,12 +3899,20 @@ class Sdlk {
   static const softright = SDLK_SOFTRIGHT;
   static const call = SDLK_CALL;
   static const endcall = SDLK_ENDCALL;
+  static const leftTab = SDLK_LEFT_TAB;
+  static const level5Shift = SDLK_LEVEL5_SHIFT;
+  static const multiKeyCompose = SDLK_MULTI_KEY_COMPOSE;
+  static const lmeta = SDLK_LMETA;
+  static const rmeta = SDLK_RMETA;
+  static const lhyper = SDLK_LHYPER;
+  static const rhyper = SDLK_RHYPER;
 }
 
 class SdlkKmod {
   static const none = SDL_KMOD_NONE;
   static const lshift = SDL_KMOD_LSHIFT;
   static const rshift = SDL_KMOD_RSHIFT;
+  static const level5 = SDL_KMOD_LEVEL5;
   static const lctrl = SDL_KMOD_LCTRL;
   static const rctrl = SDL_KMOD_RCTRL;
   static const lalt = SDL_KMOD_LALT;

@@ -1773,10 +1773,18 @@ bool sdlRenderCoordinatesToWindow(Pointer<SdlRenderer> renderer, double x,
 /// - The scale (SDL_SetRenderScale)
 /// - The viewport (SDL_SetRenderViewport)
 ///
+/// Various event types are converted with this function: mouse, touch, pen,
+/// etc.
+///
 /// Touch coordinates are converted from normalized coordinates in the window
 /// to non-normalized rendering coordinates.
 ///
-/// Once converted, the coordinates may be outside the rendering area.
+/// Relative mouse coordinates (xrel and yrel event fields) are _also_
+/// converted. Applications that do not want these fields converted should use
+/// SDL_RenderCoordinatesFromWindow() on the specific event fields instead of
+/// converting the entire event structure.
+///
+/// Once converted, coordinates may be outside the rendering area.
 ///
 /// \param renderer the rendering context.
 /// \param event the event to modify.
@@ -2702,7 +2710,7 @@ bool sdlRenderTextureRotated(
 ///
 /// \threadsafety You may only call this function from the main thread.
 ///
-/// \since This function is available since SDL 3.2.0.
+/// \since This function is available since SDL 3.1.8.
 ///
 /// \sa SDL_RenderTexture
 ///
@@ -3416,7 +3424,7 @@ bool sdlRenderDebugText(
 ///
 /// \threadsafety This function should only be called on the main thread.
 ///
-/// \since This function is available since SDL 3.2.0.
+/// \since This function is available since SDL 3.1.8.
 ///
 /// \sa SDL_RenderDebugText
 /// \sa SDL_DEBUG_TEXT_FONT_CHARACTER_SIZE
@@ -3424,21 +3432,16 @@ bool sdlRenderDebugText(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderDebugTextFormat(SDL_Renderer *renderer, float x, float y, SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(4)
 /// ```
-bool sdlRenderDebugTextFormat(Pointer<SdlRenderer> renderer, double x, double y,
-    String? fmt, Pointer<NativeType> arg4) {
+bool sdlRenderDebugTextFormat(
+    Pointer<SdlRenderer> renderer, double x, double y, String? fmt) {
   final sdlRenderDebugTextFormatLookupFunction = libSdl3.lookupFunction<
-      Uint8 Function(Pointer<SdlRenderer> renderer, Float x, Float y,
-          Pointer<Utf8> fmt, Pointer<NativeType> arg4),
-      int Function(
-          Pointer<SdlRenderer> renderer,
-          double x,
-          double y,
-          Pointer<Utf8> fmt,
-          Pointer<NativeType> arg4)>('SDL_RenderDebugTextFormat');
+      Uint8 Function(
+          Pointer<SdlRenderer> renderer, Float x, Float y, Pointer<Utf8> fmt),
+      int Function(Pointer<SdlRenderer> renderer, double x, double y,
+          Pointer<Utf8> fmt)>('SDL_RenderDebugTextFormat');
   final fmtPointer = fmt != null ? fmt.toNativeUtf8() : nullptr;
-  final result = sdlRenderDebugTextFormatLookupFunction(
-          renderer, x, y, fmtPointer, arg4) ==
-      1;
+  final result =
+      sdlRenderDebugTextFormatLookupFunction(renderer, x, y, fmtPointer) == 1;
   calloc.free(fmtPointer);
   return result;
 }

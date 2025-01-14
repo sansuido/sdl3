@@ -646,10 +646,18 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// - The scale (SDL_SetRenderScale)
   /// - The viewport (SDL_SetRenderViewport)
   ///
+  /// Various event types are converted with this function: mouse, touch, pen,
+  /// etc.
+  ///
   /// Touch coordinates are converted from normalized coordinates in the window
   /// to non-normalized rendering coordinates.
   ///
-  /// Once converted, the coordinates may be outside the rendering area.
+  /// Relative mouse coordinates (xrel and yrel event fields) are _also_
+  /// converted. Applications that do not want these fields converted should use
+  /// SDL_RenderCoordinatesFromWindow() on the specific event fields instead of
+  /// converting the entire event structure.
+  ///
+  /// Once converted, coordinates may be outside the rendering area.
   ///
   /// \param renderer the rendering context.
   /// \param event the event to modify.
@@ -1440,6 +1448,189 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   }
 
   ///
+  /// Copy a portion of the source texture to the current rendering target, with
+  /// affine transform, at subpixel precision.
+  ///
+  /// \param renderer the renderer which should copy parts of a texture.
+  /// \param texture the source texture.
+  /// \param srcrect a pointer to the source rectangle, or NULL for the entire
+  /// texture.
+  /// \param origin a pointer to a point indicating where the top-left corner of
+  /// srcrect should be mapped to, or NULL for the rendering
+  /// target's origin.
+  /// \param right a pointer to a point indicating where the top-right corner of
+  /// srcrect should be mapped to, or NULL for the rendering
+  /// target's top-right corner.
+  /// \param down a pointer to a point indicating where the bottom-left corner of
+  /// srcrect should be mapped to, or NULL for the rendering target's
+  /// bottom-left corner.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
+  ///
+  /// \threadsafety You may only call this function from the main thread.
+  ///
+  /// \since This function is available since SDL 3.1.8.
+  ///
+  /// \sa SDL_RenderTexture
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderTextureAffine(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_FRect *srcrect, const SDL_FPoint *origin, const SDL_FPoint *right, const SDL_FPoint *down)
+  /// ```
+  bool textureAffine(Pointer<SdlTexture> texture,
+      {math.Rectangle<double>? srcrect,
+      math.Point<double>? origin,
+      math.Point<double>? right,
+      math.Point<double>? down}) {
+    Pointer<SdlFRect> srcrectPointer = nullptr;
+    Pointer<SdlFPoint> originPointer = nullptr;
+    Pointer<SdlFPoint> rightPointer = nullptr;
+    Pointer<SdlFPoint> downPointer = nullptr;
+    if (srcrect != null) {
+      srcrectPointer = srcrect.calloc();
+    }
+    if (origin != null) {
+      originPointer = origin.calloc();
+    }
+    if (right != null) {
+      rightPointer = right.calloc();
+    }
+    if (down != null) {
+      downPointer = down.calloc();
+    }
+    var result = sdlRenderTextureAffine(this, texture, srcrectPointer,
+        originPointer, rightPointer, downPointer);
+    calloc.free(srcrectPointer);
+    calloc.free(originPointer);
+    calloc.free(rightPointer);
+    calloc.free(downPointer);
+    return result;
+  }
+
+  ///
+  /// Tile a portion of the texture to the current rendering target at subpixel
+  /// precision.
+  ///
+  /// The pixels in `srcrect` will be repeated as many times as needed to
+  /// completely fill `dstrect`.
+  ///
+  /// \param renderer the renderer which should copy parts of a texture.
+  /// \param texture the source texture.
+  /// \param srcrect a pointer to the source rectangle, or NULL for the entire
+  /// texture.
+  /// \param scale the scale used to transform srcrect into the destination
+  /// rectangle, e.g. a 32x32 texture with a scale of 2 would fill
+  /// 64x64 tiles.
+  /// \param dstrect a pointer to the destination rectangle, or NULL for the
+  /// entire rendering target.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
+  ///
+  /// \threadsafety This function should only be called on the main thread.
+  ///
+  /// \since This function is available since SDL 3.1.3.
+  ///
+  /// \sa SDL_RenderTexture
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderTextureTiled(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_FRect *srcrect, float scale, const SDL_FRect *dstrect)
+  /// ```
+  bool textureTiled(
+    Pointer<SdlTexture> texture, {
+    math.Rectangle<double>? srcrect,
+    double scale = 1.0,
+    math.Rectangle<double>? dstrect,
+  }) {
+    Pointer<SdlFRect> srcrectPointer = nullptr;
+    Pointer<SdlFRect> dstrectPointer = nullptr;
+    if (srcrect != null) {
+      srcrectPointer = srcrect.calloc();
+    }
+    if (dstrect != null) {
+      dstrectPointer = dstrect.calloc();
+    }
+    var result = sdlRenderTextureTiled(
+        this, texture, srcrectPointer, scale, dstrectPointer);
+    calloc.free(srcrectPointer);
+    calloc.free(dstrectPointer);
+    return result;
+  }
+
+  ///
+  /// Perform a scaled copy using the 9-grid algorithm to the current rendering
+  /// target at subpixel precision.
+  ///
+  /// The pixels in the texture are split into a 3x3 grid, using the different
+  /// corner sizes for each corner, and the sides and center making up the
+  /// remaining pixels. The corners are then scaled using `scale` and fit into
+  /// the corners of the destination rectangle. The sides and center are then
+  /// stretched into place to cover the remaining destination rectangle.
+  ///
+  /// \param renderer the renderer which should copy parts of a texture.
+  /// \param texture the source texture.
+  /// \param srcrect the SDL_Rect structure representing the rectangle to be used
+  /// for the 9-grid, or NULL to use the entire texture.
+  /// \param left_width the width, in pixels, of the left corners in `srcrect`.
+  /// \param right_width the width, in pixels, of the right corners in `srcrect`.
+  /// \param top_height the height, in pixels, of the top corners in `srcrect`.
+  /// \param bottom_height the height, in pixels, of the bottom corners in
+  /// `srcrect`.
+  /// \param scale the scale used to transform the corner of `srcrect` into the
+  /// corner of `dstrect`, or 0.0f for an unscaled copy.
+  /// \param dstrect a pointer to the destination rectangle, or NULL for the
+  /// entire rendering target.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
+  ///
+  /// \threadsafety This function should only be called on the main thread.
+  ///
+  /// \since This function is available since SDL 3.1.3.
+  ///
+  /// \sa SDL_RenderTexture
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderTexture9Grid(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_FRect *srcrect, float left_width, float right_width, float top_height, float bottom_height, float scale, const SDL_FRect *dstrect)
+  /// ```
+  bool texture9Grid(
+    Pointer<SdlRenderer> renderer,
+    Pointer<SdlTexture> texture, {
+    math.Rectangle<double>? srcrect,
+    double? width,
+    double? leftWidth,
+    double? rightWidth,
+    double? height,
+    double? topHeight,
+    double? bottomHeight,
+    double scale = 1.0,
+    math.Rectangle<double>? dstrect,
+  }) {
+    Pointer<SdlFRect> srcrectPointer = nullptr;
+    Pointer<SdlFRect> dstrectPointer = nullptr;
+    if (srcrect != null) {
+      srcrectPointer = srcrect.calloc();
+    }
+    if (dstrect != null) {
+      dstrectPointer = dstrect.calloc();
+    }
+    if (width != null) {
+      leftWidth ??= width;
+      rightWidth ??= width;
+    }
+    if (height != null) {
+      topHeight ??= height;
+      bottomHeight ??= height;
+    }
+    leftWidth ??= 0.0;
+    rightWidth ??= 0.0;
+    topHeight ??= 0.0;
+    bottomHeight ??= 0.0;
+    var result = sdlRenderTexture9Grid(this, texture, srcrectPointer, leftWidth,
+        rightWidth, topHeight, bottomHeight, scale, dstrectPointer);
+    calloc.free(srcrectPointer);
+    calloc.free(dstrectPointer);
+    return result;
+  }
+
+  ///
   /// Render a list of triangles, optionally using a texture and indices into the
   /// vertex array Color and alpha modulation is done per vertex
   /// (SDL_SetTextureColorMod and SDL_SetTextureAlphaMod are ignored).
@@ -1516,6 +1707,28 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
         uv, uvStride, numVertices, indices, numIndices, sizeIndices);
   }
 
+  ///
+  /// Read pixels from the current rendering target.
+  ///
+  /// The returned surface should be freed with SDL_DestroySurface()
+  ///
+  /// **WARNING**: This is a very slow operation, and should not be used
+  /// frequently. If you're using this on the main rendering target, it should be
+  /// called after rendering and before SDL_RenderPresent().
+  ///
+  /// \param renderer the rendering context.
+  /// \param rect an SDL_Rect structure representing the area in pixels relative
+  /// to the to current viewport, or NULL for the entire viewport.
+  /// \returns a new SDL_Surface on success or NULL on failure; call
+  /// SDL_GetError() for more information.
+  ///
+  /// \threadsafety This function should only be called on the main thread.
+  ///
+  /// \since This function is available since SDL 3.1.3.
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC SDL_Surface * SDLCALL SDL_RenderReadPixels(SDL_Renderer *renderer, const SDL_Rect *rect)
+  /// ```
   Pointer<SdlSurface> readPixels(math.Rectangle<double> rect) {
     var rectPointer = rect.callocInt();
     var result = sdlRenderReadPixels(this, rectPointer);
@@ -1693,6 +1906,43 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   }
 
   ///
+  /// Add a set of synchronization semaphores for the current frame.
+  ///
+  /// The Vulkan renderer will wait for `wait_semaphore` before submitting
+  /// rendering commands and signal `signal_semaphore` after rendering commands
+  /// are complete for this frame.
+  ///
+  /// This should be called each frame that you want semaphore synchronization.
+  /// The Vulkan renderer may have multiple frames in flight on the GPU, so you
+  /// should have multiple semaphores that are used for synchronization. Querying
+  /// SDL_PROP_RENDERER_VULKAN_SWAPCHAIN_IMAGE_COUNT_NUMBER will give you the
+  /// maximum number of semaphores you'll need.
+  ///
+  /// \param renderer the rendering context.
+  /// \param wait_stage_mask the VkPipelineStageFlags for the wait.
+  /// \param wait_semaphore a VkSempahore to wait on before rendering the current
+  /// frame, or 0 if not needed.
+  /// \param signal_semaphore a VkSempahore that SDL will signal when rendering
+  /// for the current frame is complete, or 0 if not
+  /// needed.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
+  ///
+  /// \threadsafety It is **NOT** safe to call this function from two threads at
+  /// once.
+  ///
+  /// \since This function is available since SDL 3.1.3.
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_AddVulkanRenderSemaphores(SDL_Renderer *renderer, Uint32 wait_stage_mask, Sint64 wait_semaphore, Sint64 signal_semaphore)
+  /// ```
+  bool addVulkanSemaphores(
+      int waitStageMask, int waitSemaphore, int signalSemaphore) {
+    return sdlAddVulkanRenderSemaphores(
+        this, waitStageMask, waitSemaphore, signalSemaphore);
+  }
+
+  ///
   /// Toggle VSync of the given renderer.
   ///
   /// When a renderer is created, vsync defaults to SDL_RENDERER_VSYNC_DISABLED.
@@ -1746,5 +1996,51 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
     var result = vSyncPointer.value;
     calloc.free(vSyncPointer);
     return result;
+  }
+
+  ///
+  /// Draw debug text to an SDL_Renderer.
+  ///
+  /// This function will render a string of text to an SDL_Renderer. Note that
+  /// this is a convenience function for debugging, with severe limitations, and
+  /// not intended to be used for production apps and games.
+  ///
+  /// Among these limitations:
+  ///
+  /// - It accepts UTF-8 strings, but will only renders ASCII characters.
+  /// - It has a single, tiny size (8x8 pixels). One can use logical presentation
+  /// or scaling to adjust it, but it will be blurry.
+  /// - It uses a simple, hardcoded bitmap font. It does not allow different font
+  /// selections and it does not support truetype, for proper scaling.
+  /// - It does no word-wrapping and does not treat newline characters as a line
+  /// break. If the text goes out of the window, it's gone.
+  ///
+  /// For serious text rendering, there are several good options, such as
+  /// SDL_ttf, stb_truetype, or other external libraries.
+  ///
+  /// On first use, this will create an internal texture for rendering glyphs.
+  /// This texture will live until the renderer is destroyed.
+  ///
+  /// The text is drawn in the color specified by SDL_SetRenderDrawColor().
+  ///
+  /// \param renderer the renderer which should draw a line of text.
+  /// \param x the x coordinate where the top-left corner of the text will draw.
+  /// \param y the y coordinate where the top-left corner of the text will draw.
+  /// \param str the string to render.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
+  ///
+  /// \threadsafety This function should only be called on the main thread.
+  ///
+  /// \since This function is available since SDL 3.1.6.
+  ///
+  /// \sa SDL_RenderDebugTextFormat
+  /// \sa SDL_DEBUG_TEXT_FONT_CHARACTER_SIZE
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderDebugText(SDL_Renderer *renderer, float x, float y, const char *str)
+  /// ```
+  bool debugText(double x, double y, String? str) {
+    return sdlRenderDebugText(this, x, y, str);
   }
 }

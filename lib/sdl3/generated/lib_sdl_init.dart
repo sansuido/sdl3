@@ -175,7 +175,7 @@ void sdlQuit() {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.2.0.
+/// \since This function is available since SDL 3.1.8.
 ///
 /// \sa SDL_RunOnMainThread
 ///
@@ -208,7 +208,7 @@ bool sdlIsMainThread() {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.2.0.
+/// \since This function is available since SDL 3.1.8.
 ///
 /// \sa SDL_IsMainThread
 ///

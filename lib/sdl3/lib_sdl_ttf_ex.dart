@@ -1,5 +1,4 @@
 // ignore_for_file: non_constant_identifier_names
-import 'dart:ffi';
 import './generated/const_sdl_ttf.dart';
 import './generated/lib_sdl_error.dart';
 //import './generated/lib_sdl_ttf.dart';
@@ -47,8 +46,8 @@ bool sdlTtfVersionAtleast(int x, int y, int z) {
 /// ```c
 /// const TTF_SetError = SDL_SetError;
 /// ```
-bool ttfSetError(String fmt, Pointer<NativeType> arg1) {
-  return sdlSetError(fmt, arg1);
+bool ttfSetError(String fmt) {
+  return sdlSetError(fmt);
 }
 
 /// ```c

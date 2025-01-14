@@ -6,11 +6,12 @@ int main() {
   Pointer<SdlWindow> window = nullptr;
   Pointer<SdlRenderer> renderer = nullptr;
   Pointer<SdlTexture> texture = nullptr;
-  int resizeCount = 0;
+  double width = 50;
+  double height = 50;
   if (sdlInit(SDL_INIT_VIDEO) == false) {
     return -1;
   }
-  window = sdlCreateWindow('resize demo', 640, 320, SDL_WINDOW_RESIZABLE);
+  window = sdlCreateWindow('texture9grid demo', 640, 320, SDL_WINDOW_RESIZABLE);
   if (window == nullptr) {
     sdlQuit();
     return -1;
@@ -22,13 +23,6 @@ int main() {
   }
   sdlSetHint(SDL_HINT_RENDER_VSYNC, '1');
   texture = renderer.loadTexture('assets/jap/gate.png');
-  if (texture != nullptr) {
-    var size = texture.getSize();
-    if (size != null) {
-      renderer.setLogicalPresentation(
-          size.x.toInt(), size.y.toInt(), SDL_LOGICAL_PRESENTATION_LETTERBOX);
-    }
-  }
   bool done = true;
   var event = calloc<SdlEvent>();
   while (done) {
@@ -37,21 +31,35 @@ int main() {
         case SDL_EVENT_QUIT:
           done = false;
           break;
-        case SDL_EVENT_WINDOW_RESIZED:
-          //resizeCount = 2;
-          break;
+        case SDL_EVENT_KEY_DOWN:
+          switch (event.key.ref.key) {
+            case SDLK_LEFT:
+              width += 1;
+              break;
+            case SDLK_RIGHT:
+              width -= 1;
+              break;
+            case SDLK_UP:
+              height += 1;
+              break;
+            case SDLK_DOWN:
+              height -= 1;
+              break;
+          }
         default:
           break;
       }
     }
     sdlRenderClear(renderer);
-    sdlRenderTexture(renderer, texture, nullptr, nullptr);
+    sdlRenderTexture9Grid(
+        renderer, texture, nullptr, width, width, height, height, 1.0, nullptr);
+    sdlSetRenderDrawColor(renderer, 255, 255, 255, 255);
+    sdlRenderDebugText(
+        renderer, 5, 5, 'usage: key left(+) or key right(-) change to width');
+    sdlRenderDebugText(
+        renderer, 5, 25, 'usage: key up(+) or key down(-) change to height');
+    sdlRenderDebugText(renderer, 5, 45, 'width: $width height: $height');
     sdlRenderPresent(renderer);
-    if (resizeCount > 0) {
-      sdlShowSimpleMessageBox(
-          SDL_MESSAGEBOX_INFORMATION, 'resize', 'count=$resizeCount', window);
-      resizeCount -= 1;
-    }
   }
   calloc.free(event);
   sdlDestroyRenderer(renderer);

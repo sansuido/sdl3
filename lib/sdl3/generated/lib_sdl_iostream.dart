@@ -533,15 +533,13 @@ int sdlWriteIo(
 /// ```c
 /// extern SDL_DECLSPEC size_t SDLCALL SDL_IOprintf(SDL_IOStream *context, SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(2)
 /// ```
-int sdlIOprintf(
-    Pointer<SdlIoStream> context, String? fmt, Pointer<NativeType> arg2) {
+int sdlIOprintf(Pointer<SdlIoStream> context, String? fmt) {
   final sdlIOprintfLookupFunction = libSdl3.lookupFunction<
-      Uint32 Function(Pointer<SdlIoStream> context, Pointer<Utf8> fmt,
-          Pointer<NativeType> arg2),
-      int Function(Pointer<SdlIoStream> context, Pointer<Utf8> fmt,
-          Pointer<NativeType> arg2)>('SDL_IOprintf');
+      Uint32 Function(Pointer<SdlIoStream> context, Pointer<Utf8> fmt),
+      int Function(
+          Pointer<SdlIoStream> context, Pointer<Utf8> fmt)>('SDL_IOprintf');
   final fmtPointer = fmt != null ? fmt.toNativeUtf8() : nullptr;
-  final result = sdlIOprintfLookupFunction(context, fmtPointer, arg2);
+  final result = sdlIOprintfLookupFunction(context, fmtPointer);
   calloc.free(fmtPointer);
   return result;
 }
@@ -565,15 +563,13 @@ int sdlIOprintf(
 /// ```c
 /// extern SDL_DECLSPEC size_t SDLCALL SDL_IOvprintf(SDL_IOStream *context, SDL_PRINTF_FORMAT_STRING const char *fmt, va_list ap) SDL_PRINTF_VARARG_FUNCV(2)
 /// ```
-int sdlIOvprintf(
-    Pointer<SdlIoStream> context, String? fmt, Pointer<NativeType> arg2) {
+int sdlIOvprintf(Pointer<SdlIoStream> context, String? fmt) {
   final sdlIOvprintfLookupFunction = libSdl3.lookupFunction<
-      Uint32 Function(Pointer<SdlIoStream> context, Pointer<Utf8> fmt,
-          Pointer<NativeType> arg2),
-      int Function(Pointer<SdlIoStream> context, Pointer<Utf8> fmt,
-          Pointer<NativeType> arg2)>('SDL_IOvprintf');
+      Uint32 Function(Pointer<SdlIoStream> context, Pointer<Utf8> fmt),
+      int Function(
+          Pointer<SdlIoStream> context, Pointer<Utf8> fmt)>('SDL_IOvprintf');
   final fmtPointer = fmt != null ? fmt.toNativeUtf8() : nullptr;
-  final result = sdlIOvprintfLookupFunction(context, fmtPointer, arg2);
+  final result = sdlIOvprintfLookupFunction(context, fmtPointer);
   calloc.free(fmtPointer);
   return result;
 }
@@ -685,7 +681,7 @@ Pointer<NativeType> sdlLoadFile(String? file, Pointer<Uint32> datasize) {
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
-/// \since This function is available since SDL 3.2.0.
+/// \since This function is available since SDL 3.1.8.
 ///
 /// \sa SDL_SaveFile
 /// \sa SDL_LoadFile_IO
@@ -706,14 +702,14 @@ bool sdlSaveFileIo(Pointer<SdlIoStream> src, Pointer<NativeType> data,
 ///
 /// Save all the data into a file path.
 ///
-/// \param file the path to read all available data from.
+/// \param file the path to write all available data into.
 /// \param data the data to be written. If datasize is 0, may be NULL or a
 /// invalid pointer.
 /// \param datasize the number of bytes to be written.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
-/// \since This function is available since SDL 3.2.0.
+/// \since This function is available since SDL 3.1.8.
 ///
 /// \sa SDL_SaveFile_IO
 /// \sa SDL_LoadFile

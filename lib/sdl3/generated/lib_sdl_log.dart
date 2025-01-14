@@ -152,12 +152,12 @@ bool sdlSetLogPriorityPrefix(int priority, String? prefix) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_Log(SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(1)
 /// ```
-void sdlLog(String? fmt, Pointer<NativeType> arg1) {
+void sdlLog(String? fmt) {
   final sdlLogLookupFunction = libSdl3.lookupFunction<
-      Void Function(Pointer<Utf8> fmt, Pointer<NativeType> arg1),
-      void Function(Pointer<Utf8> fmt, Pointer<NativeType> arg1)>('SDL_Log');
+      Void Function(Pointer<Utf8> fmt),
+      void Function(Pointer<Utf8> fmt)>('SDL_Log');
   final fmtPointer = fmt != null ? fmt.toNativeUtf8() : nullptr;
-  final result = sdlLogLookupFunction(fmtPointer, arg1);
+  final result = sdlLogLookupFunction(fmtPointer);
   calloc.free(fmtPointer);
   return result;
 }
@@ -188,14 +188,12 @@ void sdlLog(String? fmt, Pointer<NativeType> arg1) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_LogTrace(int category, SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(2)
 /// ```
-void sdlLogTrace(int category, String? fmt, Pointer<NativeType> arg2) {
+void sdlLogTrace(int category, String? fmt) {
   final sdlLogTraceLookupFunction = libSdl3.lookupFunction<
-      Void Function(
-          Int32 category, Pointer<Utf8> fmt, Pointer<NativeType> arg2),
-      void Function(int category, Pointer<Utf8> fmt,
-          Pointer<NativeType> arg2)>('SDL_LogTrace');
+      Void Function(Int32 category, Pointer<Utf8> fmt),
+      void Function(int category, Pointer<Utf8> fmt)>('SDL_LogTrace');
   final fmtPointer = fmt != null ? fmt.toNativeUtf8() : nullptr;
-  final result = sdlLogTraceLookupFunction(category, fmtPointer, arg2);
+  final result = sdlLogTraceLookupFunction(category, fmtPointer);
   calloc.free(fmtPointer);
   return result;
 }
@@ -224,14 +222,12 @@ void sdlLogTrace(int category, String? fmt, Pointer<NativeType> arg2) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_LogVerbose(int category, SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(2)
 /// ```
-void sdlLogVerbose(int category, String? fmt, Pointer<NativeType> arg2) {
+void sdlLogVerbose(int category, String? fmt) {
   final sdlLogVerboseLookupFunction = libSdl3.lookupFunction<
-      Void Function(
-          Int32 category, Pointer<Utf8> fmt, Pointer<NativeType> arg2),
-      void Function(int category, Pointer<Utf8> fmt,
-          Pointer<NativeType> arg2)>('SDL_LogVerbose');
+      Void Function(Int32 category, Pointer<Utf8> fmt),
+      void Function(int category, Pointer<Utf8> fmt)>('SDL_LogVerbose');
   final fmtPointer = fmt != null ? fmt.toNativeUtf8() : nullptr;
-  final result = sdlLogVerboseLookupFunction(category, fmtPointer, arg2);
+  final result = sdlLogVerboseLookupFunction(category, fmtPointer);
   calloc.free(fmtPointer);
   return result;
 }
@@ -261,14 +257,12 @@ void sdlLogVerbose(int category, String? fmt, Pointer<NativeType> arg2) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_LogDebug(int category, SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(2)
 /// ```
-void sdlLogDebug(int category, String? fmt, Pointer<NativeType> arg2) {
+void sdlLogDebug(int category, String? fmt) {
   final sdlLogDebugLookupFunction = libSdl3.lookupFunction<
-      Void Function(
-          Int32 category, Pointer<Utf8> fmt, Pointer<NativeType> arg2),
-      void Function(int category, Pointer<Utf8> fmt,
-          Pointer<NativeType> arg2)>('SDL_LogDebug');
+      Void Function(Int32 category, Pointer<Utf8> fmt),
+      void Function(int category, Pointer<Utf8> fmt)>('SDL_LogDebug');
   final fmtPointer = fmt != null ? fmt.toNativeUtf8() : nullptr;
-  final result = sdlLogDebugLookupFunction(category, fmtPointer, arg2);
+  final result = sdlLogDebugLookupFunction(category, fmtPointer);
   calloc.free(fmtPointer);
   return result;
 }
@@ -298,14 +292,12 @@ void sdlLogDebug(int category, String? fmt, Pointer<NativeType> arg2) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_LogInfo(int category, SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(2)
 /// ```
-void sdlLogInfo(int category, String? fmt, Pointer<NativeType> arg2) {
+void sdlLogInfo(int category, String? fmt) {
   final sdlLogInfoLookupFunction = libSdl3.lookupFunction<
-      Void Function(
-          Int32 category, Pointer<Utf8> fmt, Pointer<NativeType> arg2),
-      void Function(int category, Pointer<Utf8> fmt,
-          Pointer<NativeType> arg2)>('SDL_LogInfo');
+      Void Function(Int32 category, Pointer<Utf8> fmt),
+      void Function(int category, Pointer<Utf8> fmt)>('SDL_LogInfo');
   final fmtPointer = fmt != null ? fmt.toNativeUtf8() : nullptr;
-  final result = sdlLogInfoLookupFunction(category, fmtPointer, arg2);
+  final result = sdlLogInfoLookupFunction(category, fmtPointer);
   calloc.free(fmtPointer);
   return result;
 }
@@ -335,14 +327,12 @@ void sdlLogInfo(int category, String? fmt, Pointer<NativeType> arg2) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_LogWarn(int category, SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(2)
 /// ```
-void sdlLogWarn(int category, String? fmt, Pointer<NativeType> arg2) {
+void sdlLogWarn(int category, String? fmt) {
   final sdlLogWarnLookupFunction = libSdl3.lookupFunction<
-      Void Function(
-          Int32 category, Pointer<Utf8> fmt, Pointer<NativeType> arg2),
-      void Function(int category, Pointer<Utf8> fmt,
-          Pointer<NativeType> arg2)>('SDL_LogWarn');
+      Void Function(Int32 category, Pointer<Utf8> fmt),
+      void Function(int category, Pointer<Utf8> fmt)>('SDL_LogWarn');
   final fmtPointer = fmt != null ? fmt.toNativeUtf8() : nullptr;
-  final result = sdlLogWarnLookupFunction(category, fmtPointer, arg2);
+  final result = sdlLogWarnLookupFunction(category, fmtPointer);
   calloc.free(fmtPointer);
   return result;
 }
@@ -372,14 +362,12 @@ void sdlLogWarn(int category, String? fmt, Pointer<NativeType> arg2) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_LogError(int category, SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(2)
 /// ```
-void sdlLogError(int category, String? fmt, Pointer<NativeType> arg2) {
+void sdlLogError(int category, String? fmt) {
   final sdlLogErrorLookupFunction = libSdl3.lookupFunction<
-      Void Function(
-          Int32 category, Pointer<Utf8> fmt, Pointer<NativeType> arg2),
-      void Function(int category, Pointer<Utf8> fmt,
-          Pointer<NativeType> arg2)>('SDL_LogError');
+      Void Function(Int32 category, Pointer<Utf8> fmt),
+      void Function(int category, Pointer<Utf8> fmt)>('SDL_LogError');
   final fmtPointer = fmt != null ? fmt.toNativeUtf8() : nullptr;
-  final result = sdlLogErrorLookupFunction(category, fmtPointer, arg2);
+  final result = sdlLogErrorLookupFunction(category, fmtPointer);
   calloc.free(fmtPointer);
   return result;
 }
@@ -409,14 +397,12 @@ void sdlLogError(int category, String? fmt, Pointer<NativeType> arg2) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_LogCritical(int category, SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(2)
 /// ```
-void sdlLogCritical(int category, String? fmt, Pointer<NativeType> arg2) {
+void sdlLogCritical(int category, String? fmt) {
   final sdlLogCriticalLookupFunction = libSdl3.lookupFunction<
-      Void Function(
-          Int32 category, Pointer<Utf8> fmt, Pointer<NativeType> arg2),
-      void Function(int category, Pointer<Utf8> fmt,
-          Pointer<NativeType> arg2)>('SDL_LogCritical');
+      Void Function(Int32 category, Pointer<Utf8> fmt),
+      void Function(int category, Pointer<Utf8> fmt)>('SDL_LogCritical');
   final fmtPointer = fmt != null ? fmt.toNativeUtf8() : nullptr;
-  final result = sdlLogCriticalLookupFunction(category, fmtPointer, arg2);
+  final result = sdlLogCriticalLookupFunction(category, fmtPointer);
   calloc.free(fmtPointer);
   return result;
 }
@@ -447,16 +433,13 @@ void sdlLogCritical(int category, String? fmt, Pointer<NativeType> arg2) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_LogMessage(int category, SDL_LogPriority priority, SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(3)
 /// ```
-void sdlLogMessage(
-    int category, int priority, String? fmt, Pointer<NativeType> arg3) {
+void sdlLogMessage(int category, int priority, String? fmt) {
   final sdlLogMessageLookupFunction = libSdl3.lookupFunction<
-      Void Function(Int32 category, Int32 priority, Pointer<Utf8> fmt,
-          Pointer<NativeType> arg3),
-      void Function(int category, int priority, Pointer<Utf8> fmt,
-          Pointer<NativeType> arg3)>('SDL_LogMessage');
+      Void Function(Int32 category, Int32 priority, Pointer<Utf8> fmt),
+      void Function(
+          int category, int priority, Pointer<Utf8> fmt)>('SDL_LogMessage');
   final fmtPointer = fmt != null ? fmt.toNativeUtf8() : nullptr;
-  final result =
-      sdlLogMessageLookupFunction(category, priority, fmtPointer, arg3);
+  final result = sdlLogMessageLookupFunction(category, priority, fmtPointer);
   calloc.free(fmtPointer);
   return result;
 }
@@ -486,16 +469,13 @@ void sdlLogMessage(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_LogMessageV(int category, SDL_LogPriority priority, SDL_PRINTF_FORMAT_STRING const char *fmt, va_list ap) SDL_PRINTF_VARARG_FUNCV(3)
 /// ```
-void sdlLogMessageV(
-    int category, int priority, String? fmt, Pointer<NativeType> arg3) {
+void sdlLogMessageV(int category, int priority, String? fmt) {
   final sdlLogMessageVLookupFunction = libSdl3.lookupFunction<
-      Void Function(Int32 category, Int32 priority, Pointer<Utf8> fmt,
-          Pointer<NativeType> arg3),
-      void Function(int category, int priority, Pointer<Utf8> fmt,
-          Pointer<NativeType> arg3)>('SDL_LogMessageV');
+      Void Function(Int32 category, Int32 priority, Pointer<Utf8> fmt),
+      void Function(
+          int category, int priority, Pointer<Utf8> fmt)>('SDL_LogMessageV');
   final fmtPointer = fmt != null ? fmt.toNativeUtf8() : nullptr;
-  final result =
-      sdlLogMessageVLookupFunction(category, priority, fmtPointer, arg3);
+  final result = sdlLogMessageVLookupFunction(category, priority, fmtPointer);
   calloc.free(fmtPointer);
   return result;
 }
