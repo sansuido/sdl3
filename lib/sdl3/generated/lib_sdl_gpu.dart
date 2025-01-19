@@ -279,6 +279,12 @@ int sdlGetGpuShaderFormats(Pointer<SdlGpuDevice> device) {
 /// - [[texture]]: Sampled textures, followed by read-only storage textures,
 /// followed by read-write storage textures
 ///
+/// There are optional properties that can be provided through `props`. These
+/// are the supported properties:
+///
+/// - `SDL_PROP_GPU_COMPUTEPIPELINE_CREATE_NAME_STRING`: a name that can be
+/// displayed in debugging tools.
+///
 /// \param device a GPU Context.
 /// \param createinfo a struct describing the state of the compute pipeline to
 /// create.
@@ -307,6 +313,12 @@ Pointer<SdlGpuComputePipeline> sdlCreateGpuComputePipeline(
 
 ///
 /// Creates a pipeline object to be used in a graphics workflow.
+///
+/// There are optional properties that can be provided through `props`. These
+/// are the supported properties:
+///
+/// - `SDL_PROP_GPU_GRAPHICSPIPELINE_CREATE_NAME_STRING`: a name that can be
+/// displayed in debugging tools.
 ///
 /// \param device a GPU Context.
 /// \param createinfo a struct describing the state of the graphics pipeline to
@@ -338,6 +350,12 @@ Pointer<SdlGpuGraphicsPipeline> sdlCreateGpuGraphicsPipeline(
 ///
 /// Creates a sampler object to be used when binding textures in a graphics
 /// workflow.
+///
+/// There are optional properties that can be provided through `props`. These
+/// are the supported properties:
+///
+/// - `SDL_PROP_GPU_SAMPLER_CREATE_NAME_STRING`: a name that can be displayed
+/// in debugging tools.
 ///
 /// \param device a GPU Context.
 /// \param createinfo a struct describing the state of the sampler to create.
@@ -420,6 +438,12 @@ Pointer<SdlGpuSampler> sdlCreateGpuSampler(
 /// SDL_PROP_GPU_DEVICE_CREATE_D3D12_SEMANTIC_NAME_STRING with
 /// SDL_CreateGPUDeviceWithProperties().
 ///
+/// There are optional properties that can be provided through `props`. These
+/// are the supported properties:
+///
+/// - `SDL_PROP_GPU_SHADER_CREATE_NAME_STRING`: a name that can be displayed in
+/// debugging tools.
+///
 /// \param device a GPU Context.
 /// \param createinfo a struct describing the state of the shader to create.
 /// \returns a shader object on success, or NULL on failure; call
@@ -459,27 +483,26 @@ Pointer<SdlGpuShader> sdlCreateGpuShader(
 /// There are optional properties that can be provided through
 /// SDL_GPUTextureCreateInfo's `props`. These are the supported properties:
 ///
-/// - `SDL_PROP_PROCESS_CREATE_ARGS_POINTER`: an array of strings containing
-/// the program to run, any arguments, and a NULL pointer, e.g. const char
-/// *args[] = { "myprogram", "argument", NULL }. This is a required property.
-/// - `SDL_PROP_GPU_CREATETEXTURE_D3D12_CLEAR_R_FLOAT`: (Direct3D 12 only) if
+/// - `SDL_PROP_GPU_TEXTURE_CREATE_D3D12_CLEAR_R_FLOAT`: (Direct3D 12 only) if
 /// the texture usage is SDL_GPU_TEXTUREUSAGE_COLOR_TARGET, clear the texture
 /// to a color with this red intensity. Defaults to zero.
-/// - `SDL_PROP_GPU_CREATETEXTURE_D3D12_CLEAR_G_FLOAT`: (Direct3D 12 only) if
+/// - `SDL_PROP_GPU_TEXTURE_CREATE_D3D12_CLEAR_G_FLOAT`: (Direct3D 12 only) if
 /// the texture usage is SDL_GPU_TEXTUREUSAGE_COLOR_TARGET, clear the texture
 /// to a color with this green intensity. Defaults to zero.
-/// - `SDL_PROP_GPU_CREATETEXTURE_D3D12_CLEAR_B_FLOAT`: (Direct3D 12 only) if
+/// - `SDL_PROP_GPU_TEXTURE_CREATE_D3D12_CLEAR_B_FLOAT`: (Direct3D 12 only) if
 /// the texture usage is SDL_GPU_TEXTUREUSAGE_COLOR_TARGET, clear the texture
 /// to a color with this blue intensity. Defaults to zero.
-/// - `SDL_PROP_GPU_CREATETEXTURE_D3D12_CLEAR_A_FLOAT`: (Direct3D 12 only) if
+/// - `SDL_PROP_GPU_TEXTURE_CREATE_D3D12_CLEAR_A_FLOAT`: (Direct3D 12 only) if
 /// the texture usage is SDL_GPU_TEXTUREUSAGE_COLOR_TARGET, clear the texture
 /// to a color with this alpha intensity. Defaults to zero.
-/// - `SDL_PROP_GPU_CREATETEXTURE_D3D12_CLEAR_DEPTH_FLOAT`: (Direct3D 12 only)
+/// - `SDL_PROP_GPU_TEXTURE_CREATE_D3D12_CLEAR_DEPTH_FLOAT`: (Direct3D 12 only)
 /// if the texture usage is SDL_GPU_TEXTUREUSAGE_DEPTH_STENCIL_TARGET, clear
 /// the texture to a depth of this value. Defaults to zero.
-/// - `SDL_PROP_GPU_CREATETEXTURE_D3D12_CLEAR_STENCIL_UINT8`: (Direct3D 12
+/// - `SDL_PROP_GPU_TEXTURE_CREATE_D3D12_CLEAR_STENCIL_UINT8`: (Direct3D 12
 /// only) if the texture usage is SDL_GPU_TEXTUREUSAGE_DEPTH_STENCIL_TARGET,
 /// clear the texture to a stencil of this value. Defaults to zero.
+/// - `SDL_PROP_GPU_TEXTURE_CREATE_NAME_STRING`: a name that can be displayed
+/// in debugging tools.
 ///
 /// \param device a GPU Context.
 /// \param createinfo a struct describing the state of the texture to create.
@@ -526,6 +549,12 @@ Pointer<SdlGpuTexture> sdlCreateGpuTexture(
 /// [this blog post](https://moonside.games/posts/sdl-gpu-concepts-cycling/)
 /// .
 ///
+/// There are optional properties that can be provided through `props`. These
+/// are the supported properties:
+///
+/// - `SDL_PROP_GPU_BUFFER_CREATE_NAME_STRING`: a name that can be displayed in
+/// debugging tools.
+///
 /// \param device a GPU Context.
 /// \param createinfo a struct describing the state of the buffer to create.
 /// \returns a buffer object on success, or NULL on failure; call
@@ -533,7 +562,6 @@ Pointer<SdlGpuTexture> sdlCreateGpuTexture(
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
-/// \sa SDL_SetGPUBufferName
 /// \sa SDL_UploadToGPUBuffer
 /// \sa SDL_DownloadFromGPUBuffer
 /// \sa SDL_CopyGPUBufferToBuffer
@@ -567,6 +595,12 @@ Pointer<SdlGpuBuffer> sdlCreateGpuBuffer(
 /// Download buffers can be particularly expensive to create, so it is good
 /// practice to reuse them if data will be downloaded regularly.
 ///
+/// There are optional properties that can be provided through `props`. These
+/// are the supported properties:
+///
+/// - `SDL_PROP_GPU_TRANSFERBUFFER_CREATE_NAME_STRING`: a name that can be
+/// displayed in debugging tools.
+///
 /// \param device a GPU Context.
 /// \param createinfo a struct describing the state of the transfer buffer to
 /// create.
@@ -599,13 +633,19 @@ Pointer<SdlGpuTransferBuffer> sdlCreateGpuTransferBuffer(
 ///
 /// Sets an arbitrary string constant to label a buffer.
 ///
-/// Useful for debugging.
+/// You should use SDL_PROP_GPU_BUFFER_CREATE_NAME_STRING with
+/// SDL_CreateGPUBuffer instead of this function to avoid thread safety issues.
 ///
 /// \param device a GPU Context.
 /// \param buffer a buffer to attach the name to.
 /// \param text a UTF-8 string constant to mark as the name of the buffer.
 ///
+/// \threadsafety This function is not thread safe, you must make sure the
+/// buffer is not simultaneously used by any other thread.
+///
 /// \since This function is available since SDL 3.1.3.
+///
+/// \sa SDL_CreateGPUBuffer
 ///
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_SetGPUBufferName( SDL_GPUDevice *device, SDL_GPUBuffer *buffer, const char *text)
@@ -626,13 +666,20 @@ void sdlSetGpuBufferName(
 ///
 /// Sets an arbitrary string constant to label a texture.
 ///
-/// Useful for debugging.
+/// You should use SDL_PROP_GPU_TEXTURE_CREATE_NAME_STRING with
+/// SDL_CreateGPUTexture instead of this function to avoid thread safety
+/// issues.
 ///
 /// \param device a GPU Context.
 /// \param texture a texture to attach the name to.
 /// \param text a UTF-8 string constant to mark as the name of the texture.
 ///
+/// \threadsafety This function is not thread safe, you must make sure the
+/// texture is not simultaneously used by any other thread.
+///
 /// \since This function is available since SDL 3.1.3.
+///
+/// \sa SDL_CreateGPUTexture
 ///
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_SetGPUTextureName( SDL_GPUDevice *device, SDL_GPUTexture *texture, const char *text)

@@ -1437,8 +1437,8 @@ bool sdlLockTexture(Pointer<SdlTexture> texture, Pointer<SdlRect> rect,
 /// `SDL_TEXTUREACCESS_STREAMING`.
 /// \param rect a pointer to the rectangle to lock for access. If the rect is
 /// NULL, the entire texture will be locked.
-/// \param surface this is filled in with an SDL surface representing the
-/// locked area.
+/// \param surface a pointer to an SDL surface of size **rect**. Don't assume
+/// any specific pixel content.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///

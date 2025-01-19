@@ -176,7 +176,7 @@ Pointer<SdlTrayMenu> sdlGetTrayMenu(Pointer<SdlTray> tray) {
 ///
 /// Gets a previously created tray entry submenu.
 ///
-/// You should have called SDL_CreateTraySubenu() on the entry object. This
+/// You should have called SDL_CreateTraySubmenu() on the entry object. This
 /// function allows you to fetch it again later.
 ///
 /// This function does the same thing as SDL_GetTrayMenu(), except that it
@@ -357,8 +357,7 @@ String? sdlGetTrayEntryLabel(Pointer<SdlTrayEntry> entry) {
 /// The entry must have been created with the SDL_TRAYENTRY_CHECKBOX flag.
 ///
 /// \param entry the entry to be updated.
-/// \param checked SDL_TRUE if the entry should be checked; SDL_FALSE
-/// otherwise.
+/// \param checked true if the entry should be checked; false otherwise.
 ///
 /// \since This function is available since SDL 3.1.8.
 ///
@@ -383,7 +382,7 @@ void sdlSetTrayEntryChecked(Pointer<SdlTrayEntry> entry, bool checked) {
 /// The entry must have been created with the SDL_TRAYENTRY_CHECKBOX flag.
 ///
 /// \param entry the entry to be read.
-/// \returns SDL_TRUE if the entry is checked; SDL_FALSE otherwise.
+/// \returns true if the entry is checked; false otherwise.
 ///
 /// \since This function is available since SDL 3.1.8.
 ///
@@ -405,8 +404,7 @@ bool sdlGetTrayEntryChecked(Pointer<SdlTrayEntry> entry) {
 /// Sets whether or not an entry is enabled.
 ///
 /// \param entry the entry to be updated.
-/// \param enabled SDL_TRUE if the entry should be enabled; SDL_FALSE
-/// otherwise.
+/// \param enabled true if the entry should be enabled; false otherwise.
 ///
 /// \since This function is available since SDL 3.1.8.
 ///
@@ -429,7 +427,7 @@ void sdlSetTrayEntryEnabled(Pointer<SdlTrayEntry> entry, bool enabled) {
 /// Gets whether or not an entry is enabled.
 ///
 /// \param entry the entry to be read.
-/// \returns SDL_TRUE if the entry is enabled; SDL_FALSE otherwise.
+/// \returns true if the entry is enabled; false otherwise.
 ///
 /// \since This function is available since SDL 3.1.8.
 ///
@@ -484,7 +482,7 @@ void sdlSetTrayEntryCallback(
 ///
 /// \param entry The entry to activate.
 ///
-/// \since This function is available since SDL 3.2.0.
+/// \since This function is available since SDL 3.1.10.
 ///
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_ClickTrayEntry(SDL_TrayEntry *entry)

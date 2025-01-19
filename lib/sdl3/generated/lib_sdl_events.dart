@@ -379,8 +379,11 @@ bool sdlPushEvent(Pointer<SdlEvent> event) {
 }
 
 ///
-/// Set up a filter to process all events before they change internal state and
-/// are posted to the internal event queue.
+/// Set up a filter to process all events before they are added to the internal
+/// event queue.
+///
+/// If you just want to see events without modifying them or preventing them
+/// from being queued, you should use SDL_AddEventWatch() instead.
 ///
 /// If the filter function returns true when called, then the event will be
 /// added to the internal queue. If it returns false, then the event will be
@@ -394,16 +397,8 @@ bool sdlPushEvent(Pointer<SdlEvent> event) {
 /// interrupt signal (e.g. pressing Ctrl-C), it will be delivered to the
 /// application at the next event poll.
 ///
-/// There is one caveat when dealing with the SDL_QuitEvent event type. The
-/// event filter is only called when the window manager desires to close the
-/// application window. If the event filter returns 1, then the window will be
-/// closed, otherwise the window will remain open if possible.
-///
 /// Note: Disabled events never make it to the event filter function; see
 /// SDL_SetEventEnabled().
-///
-/// Note: If you just want to inspect events without filtering, you should use
-/// SDL_AddEventWatch() instead.
 ///
 /// Note: Events pushed onto the queue with SDL_PushEvent() get passed through
 /// the event filter, but events pushed onto the queue with SDL_PeepEvents() do

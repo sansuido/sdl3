@@ -632,18 +632,28 @@ const SDL_PROP_GPU_DEVICE_CREATE_SHADERS_METALLIB_BOOLEAN =
     'SDL.gpu.device.create.shaders.metallib';
 const SDL_PROP_GPU_DEVICE_CREATE_D3D12_SEMANTIC_NAME_STRING =
     'SDL.gpu.device.create.d3d12.semantic';
-const SDL_PROP_GPU_CREATETEXTURE_D3D12_CLEAR_R_FLOAT =
-    'SDL.gpu.createtexture.d3d12.clear.r';
-const SDL_PROP_GPU_CREATETEXTURE_D3D12_CLEAR_G_FLOAT =
-    'SDL.gpu.createtexture.d3d12.clear.g';
-const SDL_PROP_GPU_CREATETEXTURE_D3D12_CLEAR_B_FLOAT =
-    'SDL.gpu.createtexture.d3d12.clear.b';
-const SDL_PROP_GPU_CREATETEXTURE_D3D12_CLEAR_A_FLOAT =
-    'SDL.gpu.createtexture.d3d12.clear.a';
-const SDL_PROP_GPU_CREATETEXTURE_D3D12_CLEAR_DEPTH_FLOAT =
-    'SDL.gpu.createtexture.d3d12.clear.depth';
-const SDL_PROP_GPU_CREATETEXTURE_D3D12_CLEAR_STENCIL_UINT8 =
-    'SDL.gpu.createtexture.d3d12.clear.stencil';
+const SDL_PROP_GPU_COMPUTEPIPELINE_CREATE_NAME_STRING =
+    'SDL.gpu.computepipeline.create.name';
+const SDL_PROP_GPU_GRAPHICSPIPELINE_CREATE_NAME_STRING =
+    'SDL.gpu.graphicspipeline.create.name';
+const SDL_PROP_GPU_SAMPLER_CREATE_NAME_STRING = 'SDL.gpu.sampler.create.name';
+const SDL_PROP_GPU_SHADER_CREATE_NAME_STRING = 'SDL.gpu.shader.create.name';
+const SDL_PROP_GPU_TEXTURE_CREATE_D3D12_CLEAR_R_FLOAT =
+    'SDL.gpu.texture.create.d3d12.clear.r';
+const SDL_PROP_GPU_TEXTURE_CREATE_D3D12_CLEAR_G_FLOAT =
+    'SDL.gpu.texture.create.d3d12.clear.g';
+const SDL_PROP_GPU_TEXTURE_CREATE_D3D12_CLEAR_B_FLOAT =
+    'SDL.gpu.texture.create.d3d12.clear.b';
+const SDL_PROP_GPU_TEXTURE_CREATE_D3D12_CLEAR_A_FLOAT =
+    'SDL.gpu.texture.create.d3d12.clear.a';
+const SDL_PROP_GPU_TEXTURE_CREATE_D3D12_CLEAR_DEPTH_FLOAT =
+    'SDL.gpu.texture.create.d3d12.clear.depth';
+const SDL_PROP_GPU_TEXTURE_CREATE_D3D12_CLEAR_STENCIL_UINT8 =
+    'SDL.gpu.texture.create.d3d12.clear.stencil';
+const SDL_PROP_GPU_TEXTURE_CREATE_NAME_STRING = 'SDL.gpu.texture.create.name';
+const SDL_PROP_GPU_BUFFER_CREATE_NAME_STRING = 'SDL.gpu.buffer.create.name';
+const SDL_PROP_GPU_TRANSFERBUFFER_CREATE_NAME_STRING =
+    'SDL.gpu.transferbuffer.create.name';
 //const SDL_guid_h_ = ;
 //const SDL_haptic_h_ = ;
 const SDL_HAPTIC_CONSTANT = (1 << 0);
@@ -905,6 +915,8 @@ const SDL_HINT_VIDEO_EGL_ALLOW_GETDISPLAY_FALLBACK =
     'SDL_VIDEO_EGL_ALLOW_GETDISPLAY_FALLBACK';
 const SDL_HINT_VIDEO_FORCE_EGL = 'SDL_VIDEO_FORCE_EGL';
 const SDL_HINT_VIDEO_MAC_FULLSCREEN_SPACES = 'SDL_VIDEO_MAC_FULLSCREEN_SPACES';
+const SDL_HINT_VIDEO_MAC_FULLSCREEN_MENU_VISIBILITY =
+    'SDL_VIDEO_MAC_FULLSCREEN_MENU_VISIBILITY';
 const SDL_HINT_VIDEO_MINIMIZE_ON_FOCUS_LOSS =
     'SDL_VIDEO_MINIMIZE_ON_FOCUS_LOSS';
 const SDL_HINT_VIDEO_OFFSCREEN_SAVE_FRAMES = 'SDL_VIDEO_OFFSCREEN_SAVE_FRAMES';
@@ -965,6 +977,8 @@ const SDL_HINT_X11_WINDOW_TYPE = 'SDL_X11_WINDOW_TYPE';
 const SDL_HINT_X11_XCB_LIBRARY = 'SDL_X11_XCB_LIBRARY';
 const SDL_HINT_XINPUT_ENABLED = 'SDL_XINPUT_ENABLED';
 const SDL_HINT_ASSERT = 'SDL_ASSERT';
+const SDL_HINT_PEN_MOUSE_EVENTS = 'SDL_PEN_MOUSE_EVENTS';
+const SDL_HINT_PEN_TOUCH_EVENTS = 'SDL_PEN_TOUCH_EVENTS';
 const SDL_HINT_DEFAULT = 0;
 const SDL_HINT_NORMAL = 1;
 const SDL_HINT_OVERRIDE = 2;
@@ -1480,6 +1494,8 @@ const SDL_INIT_STATUS_INITIALIZING = 1;
 const SDL_INIT_STATUS_INITIALIZED = 2;
 const SDL_INIT_STATUS_UNINITIALIZING = 3;
 //const SDL_pen_h_ = ;
+//const SDL_PEN_MOUSEID = ((SDL_MouseID)-2);
+//const SDL_PEN_TOUCHID = ((SDL_TouchID)-2);
 const SDL_PEN_INPUT_DOWN = (1 << 0);
 const SDL_PEN_INPUT_BUTTON_1 = (1 << 1);
 const SDL_PEN_INPUT_BUTTON_2 = (1 << 2);
@@ -2390,7 +2406,7 @@ const SDL_TRAYENTRY_CHECKED = 0x40000000;
 //const SDL_version_h_ = ;
 const SDL_MAJOR_VERSION = 3;
 const SDL_MINOR_VERSION = 1;
-const SDL_MICRO_VERSION = 9;
+const SDL_MICRO_VERSION = 11;
 //const SDL_VERSIONNUM = (major, minor, patch) ((major) * 1000000 + (minor) * 1000 + (patch));
 //const SDL_VERSIONNUM_MAJOR = (version) ((version) / 1000000);
 //const SDL_VERSIONNUM_MINOR = (version) (((version) / 1000) % 1000);
@@ -3494,6 +3510,8 @@ class SdlkHint {
       SDL_HINT_VIDEO_EGL_ALLOW_GETDISPLAY_FALLBACK;
   static const videoForceEgl = SDL_HINT_VIDEO_FORCE_EGL;
   static const videoMacFullscreenSpaces = SDL_HINT_VIDEO_MAC_FULLSCREEN_SPACES;
+  static const videoMacFullscreenMenuVisibility =
+      SDL_HINT_VIDEO_MAC_FULLSCREEN_MENU_VISIBILITY;
   static const videoMinimizeOnFocusLoss = SDL_HINT_VIDEO_MINIMIZE_ON_FOCUS_LOSS;
   static const videoOffscreenSaveFrames = SDL_HINT_VIDEO_OFFSCREEN_SAVE_FRAMES;
   static const videoSyncWindowOperations =
@@ -3553,6 +3571,8 @@ class SdlkHint {
   static const x11XcbLibrary = SDL_HINT_X11_XCB_LIBRARY;
   static const xinputEnabled = SDL_HINT_XINPUT_ENABLED;
   static const onAssert = SDL_HINT_ASSERT;
+  static const penMouseEvents = SDL_HINT_PEN_MOUSE_EVENTS;
+  static const penTouchEvents = SDL_HINT_PEN_TOUCH_EVENTS;
   static const onDefault = SDL_HINT_DEFAULT;
   static const normal = SDL_HINT_NORMAL;
   static const override = SDL_HINT_OVERRIDE;

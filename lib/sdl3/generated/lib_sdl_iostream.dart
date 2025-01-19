@@ -75,6 +75,8 @@ import 'struct_sdl.dart';
 /// \returns a pointer to the SDL_IOStream structure that is created or NULL on
 /// failure; call SDL_GetError() for more information.
 ///
+/// \threadsafety This function is not thread safe.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_CloseIO
@@ -127,6 +129,8 @@ Pointer<SdlIoStream> sdlIoFromFile(String? file, String? mode) {
 /// \returns a pointer to a new SDL_IOStream structure or NULL on failure; call
 /// SDL_GetError() for more information.
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_IOFromConstMem
@@ -177,6 +181,8 @@ Pointer<SdlIoStream> sdlIoFromMem(Pointer<NativeType> mem, int size) {
 /// \returns a pointer to a new SDL_IOStream structure or NULL on failure; call
 /// SDL_GetError() for more information.
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_IOFromMem
@@ -214,6 +220,8 @@ Pointer<SdlIoStream> sdlIoFromConstMem(Pointer<NativeType> mem, int size) {
 /// \returns a pointer to a new SDL_IOStream structure or NULL on failure; call
 /// SDL_GetError() for more information.
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_CloseIO
@@ -248,6 +256,8 @@ Pointer<SdlIoStream> sdlIoFromDynamicMem() {
 /// \param userdata the pointer that will be passed to the interface functions.
 /// \returns a pointer to the allocated memory on success or NULL on failure;
 /// call SDL_GetError() for more information.
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -294,6 +304,8 @@ Pointer<SdlIoStream> sdlOpenIo(
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety This function is not thread safe.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_OpenIO
@@ -314,6 +326,8 @@ bool sdlCloseIo(Pointer<SdlIoStream> context) {
 /// \param context a pointer to an SDL_IOStream structure.
 /// \returns a valid property ID on success or 0 on failure; call
 /// SDL_GetError() for more information.
+///
+/// \threadsafety This function is not thread safe.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -341,8 +355,7 @@ int sdlGetIoProperties(Pointer<SdlIoStream> context) {
 /// \param context the SDL_IOStream to query.
 /// \returns an SDL_IOStatus enum with the current state.
 ///
-/// \threadsafety This function should not be called at the same time that
-/// another thread is operating on the same SDL_IOStream.
+/// \threadsafety This function is not thread safe.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -363,6 +376,8 @@ int sdlGetIoStatus(Pointer<SdlIoStream> context) {
 /// \returns the size of the data stream in the SDL_IOStream on success or a
 /// negative error code on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety This function is not thread safe.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -397,6 +412,8 @@ int sdlGetIoSize(Pointer<SdlIoStream> context) {
 /// \returns the final offset in the data stream after the seek or -1 on
 /// failure; call SDL_GetError() for more information.
 ///
+/// \threadsafety This function is not thread safe.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_TellIO
@@ -423,6 +440,8 @@ int sdlSeekIo(Pointer<SdlIoStream> context, int offset, int whence) {
 /// current offset.
 /// \returns the current offset in the stream, or -1 if the information can not
 /// be determined.
+///
+/// \threadsafety This function is not thread safe.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -454,6 +473,8 @@ int sdlTellIo(Pointer<SdlIoStream> context) {
 /// \param size the number of bytes to read from the data source.
 /// \returns the number of bytes read, or 0 on end of file or other failure;
 /// call SDL_GetError() for more information.
+///
+/// \threadsafety This function is not thread safe.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -492,6 +513,8 @@ int sdlReadIo(Pointer<SdlIoStream> context, Pointer<NativeType> ptr, int size) {
 /// \returns the number of bytes written, which will be less than `size` on
 /// failure; call SDL_GetError() for more information.
 ///
+/// \threadsafety This function is not thread safe.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_IOprintf
@@ -525,6 +548,8 @@ int sdlWriteIo(
 /// \returns the number of bytes written or 0 on failure; call SDL_GetError()
 /// for more information.
 ///
+/// \threadsafety This function is not thread safe.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_IOvprintf
@@ -555,6 +580,8 @@ int sdlIOprintf(Pointer<SdlIoStream> context, String? fmt) {
 /// \returns the number of bytes written or 0 on failure; call SDL_GetError()
 /// for more information.
 ///
+/// \threadsafety This function is not thread safe.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_IOprintf
@@ -584,6 +611,8 @@ int sdlIOvprintf(Pointer<SdlIoStream> context, String? fmt) {
 /// \param context SDL_IOStream structure to flush.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety This function is not thread safe.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -617,6 +646,8 @@ bool sdlFlushIo(Pointer<SdlIoStream> context) {
 /// \returns the data or NULL on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety This function is not thread safe.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// \sa SDL_LoadFile
@@ -648,6 +679,8 @@ Pointer<NativeType> sdlLoadFileIo(
 /// \param datasize if not NULL, will store the number of bytes read.
 /// \returns the data or NULL on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety This function is not thread safe.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -681,6 +714,8 @@ Pointer<NativeType> sdlLoadFile(String? file, Pointer<Uint32> datasize) {
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety This function is not thread safe.
+///
 /// \since This function is available since SDL 3.1.8.
 ///
 /// \sa SDL_SaveFile
@@ -708,6 +743,8 @@ bool sdlSaveFileIo(Pointer<SdlIoStream> src, Pointer<NativeType> data,
 /// \param datasize the number of bytes to be written.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety This function is not thread safe.
 ///
 /// \since This function is available since SDL 3.1.8.
 ///
@@ -742,6 +779,8 @@ bool sdlSaveFile(String? file, Pointer<NativeType> data, int datasize) {
 /// \returns true on success or false on failure or EOF; call SDL_GetError()
 /// for more information.
 ///
+/// \threadsafety This function is not thread safe.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
@@ -767,6 +806,8 @@ bool sdlReadU8(Pointer<SdlIoStream> src, Pointer<Uint8> value) {
 /// \param value a pointer filled in with the data read.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety This function is not thread safe.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -798,6 +839,8 @@ bool sdlReadS8(Pointer<SdlIoStream> src, Pointer<Int8> value) {
 /// \returns true on successful write or false on failure; call SDL_GetError()
 /// for more information.
 ///
+/// \threadsafety This function is not thread safe.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
@@ -827,6 +870,8 @@ bool sdlReadU16Le(Pointer<SdlIoStream> src, Pointer<Uint16> value) {
 /// \param value a pointer filled in with the data read.
 /// \returns true on successful write or false on failure; call SDL_GetError()
 /// for more information.
+///
+/// \threadsafety This function is not thread safe.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -858,6 +903,8 @@ bool sdlReadS16Le(Pointer<SdlIoStream> src, Pointer<Int16> value) {
 /// \returns true on successful write or false on failure; call SDL_GetError()
 /// for more information.
 ///
+/// \threadsafety This function is not thread safe.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
@@ -887,6 +934,8 @@ bool sdlReadU16Be(Pointer<SdlIoStream> src, Pointer<Uint16> value) {
 /// \param value a pointer filled in with the data read.
 /// \returns true on successful write or false on failure; call SDL_GetError()
 /// for more information.
+///
+/// \threadsafety This function is not thread safe.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -918,6 +967,8 @@ bool sdlReadS16Be(Pointer<SdlIoStream> src, Pointer<Int16> value) {
 /// \returns true on successful write or false on failure; call SDL_GetError()
 /// for more information.
 ///
+/// \threadsafety This function is not thread safe.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
@@ -947,6 +998,8 @@ bool sdlReadU32Le(Pointer<SdlIoStream> src, Pointer<Uint32> value) {
 /// \param value a pointer filled in with the data read.
 /// \returns true on successful write or false on failure; call SDL_GetError()
 /// for more information.
+///
+/// \threadsafety This function is not thread safe.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -978,6 +1031,8 @@ bool sdlReadS32Le(Pointer<SdlIoStream> src, Pointer<Int32> value) {
 /// \returns true on successful write or false on failure; call SDL_GetError()
 /// for more information.
 ///
+/// \threadsafety This function is not thread safe.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
@@ -1007,6 +1062,8 @@ bool sdlReadU32Be(Pointer<SdlIoStream> src, Pointer<Uint32> value) {
 /// \param value a pointer filled in with the data read.
 /// \returns true on successful write or false on failure; call SDL_GetError()
 /// for more information.
+///
+/// \threadsafety This function is not thread safe.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -1038,6 +1095,8 @@ bool sdlReadS32Be(Pointer<SdlIoStream> src, Pointer<Int32> value) {
 /// \returns true on successful write or false on failure; call SDL_GetError()
 /// for more information.
 ///
+/// \threadsafety This function is not thread safe.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
@@ -1067,6 +1126,8 @@ bool sdlReadU64Le(Pointer<SdlIoStream> src, Pointer<Uint64> value) {
 /// \param value a pointer filled in with the data read.
 /// \returns true on successful write or false on failure; call SDL_GetError()
 /// for more information.
+///
+/// \threadsafety This function is not thread safe.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -1098,6 +1159,8 @@ bool sdlReadS64Le(Pointer<SdlIoStream> src, Pointer<Int64> value) {
 /// \returns true on successful write or false on failure; call SDL_GetError()
 /// for more information.
 ///
+/// \threadsafety This function is not thread safe.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
@@ -1128,6 +1191,8 @@ bool sdlReadU64Be(Pointer<SdlIoStream> src, Pointer<Uint64> value) {
 /// \returns true on successful write or false on failure; call SDL_GetError()
 /// for more information.
 ///
+/// \threadsafety This function is not thread safe.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
@@ -1149,6 +1214,8 @@ bool sdlReadS64Be(Pointer<SdlIoStream> src, Pointer<Int64> value) {
 /// \returns true on successful write or false on failure; call SDL_GetError()
 /// for more information.
 ///
+/// \threadsafety This function is not thread safe.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
@@ -1168,6 +1235,8 @@ bool sdlWriteU8(Pointer<SdlIoStream> dst, int value) {
 /// \param value the byte value to write.
 /// \returns true on successful write or false on failure; call SDL_GetError()
 /// for more information.
+///
+/// \threadsafety This function is not thread safe.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -1194,6 +1263,8 @@ bool sdlWriteS8(Pointer<SdlIoStream> dst, int value) {
 /// \returns true on successful write or false on failure; call SDL_GetError()
 /// for more information.
 ///
+/// \threadsafety This function is not thread safe.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
@@ -1219,6 +1290,8 @@ bool sdlWriteU16Le(Pointer<SdlIoStream> dst, int value) {
 /// \returns true on successful write or false on failure; call SDL_GetError()
 /// for more information.
 ///
+/// \threadsafety This function is not thread safe.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
@@ -1243,6 +1316,8 @@ bool sdlWriteS16Le(Pointer<SdlIoStream> dst, int value) {
 /// \returns true on successful write or false on failure; call SDL_GetError()
 /// for more information.
 ///
+/// \threadsafety This function is not thread safe.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
@@ -1266,6 +1341,8 @@ bool sdlWriteU16Be(Pointer<SdlIoStream> dst, int value) {
 /// \param value the data to be written, in native format.
 /// \returns true on successful write or false on failure; call SDL_GetError()
 /// for more information.
+///
+/// \threadsafety This function is not thread safe.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -1292,6 +1369,8 @@ bool sdlWriteS16Be(Pointer<SdlIoStream> dst, int value) {
 /// \returns true on successful write or false on failure; call SDL_GetError()
 /// for more information.
 ///
+/// \threadsafety This function is not thread safe.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
@@ -1317,6 +1396,8 @@ bool sdlWriteU32Le(Pointer<SdlIoStream> dst, int value) {
 /// \returns true on successful write or false on failure; call SDL_GetError()
 /// for more information.
 ///
+/// \threadsafety This function is not thread safe.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
@@ -1341,6 +1422,8 @@ bool sdlWriteS32Le(Pointer<SdlIoStream> dst, int value) {
 /// \returns true on successful write or false on failure; call SDL_GetError()
 /// for more information.
 ///
+/// \threadsafety This function is not thread safe.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
@@ -1364,6 +1447,8 @@ bool sdlWriteU32Be(Pointer<SdlIoStream> dst, int value) {
 /// \param value the data to be written, in native format.
 /// \returns true on successful write or false on failure; call SDL_GetError()
 /// for more information.
+///
+/// \threadsafety This function is not thread safe.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///
@@ -1390,6 +1475,8 @@ bool sdlWriteS32Be(Pointer<SdlIoStream> dst, int value) {
 /// \returns true on successful write or false on failure; call SDL_GetError()
 /// for more information.
 ///
+/// \threadsafety This function is not thread safe.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
@@ -1415,6 +1502,8 @@ bool sdlWriteU64Le(Pointer<SdlIoStream> dst, int value) {
 /// \returns true on successful write or false on failure; call SDL_GetError()
 /// for more information.
 ///
+/// \threadsafety This function is not thread safe.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
@@ -1439,6 +1528,8 @@ bool sdlWriteS64Le(Pointer<SdlIoStream> dst, int value) {
 /// \returns true on successful write or false on failure; call SDL_GetError()
 /// for more information.
 ///
+/// \threadsafety This function is not thread safe.
+///
 /// \since This function is available since SDL 3.1.3.
 ///
 /// ```c
@@ -1462,6 +1553,8 @@ bool sdlWriteU64Be(Pointer<SdlIoStream> dst, int value) {
 /// \param value the data to be written, in native format.
 /// \returns true on successful write or false on failure; call SDL_GetError()
 /// for more information.
+///
+/// \threadsafety This function is not thread safe.
 ///
 /// \since This function is available since SDL 3.1.3.
 ///

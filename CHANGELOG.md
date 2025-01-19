@@ -1,3 +1,6 @@
+## 1.3.1
+- SDL3-2025-01-19
+
 ## 1.3.0
 - SDL3-2025-01-12
 - [fixed] Ignore `...` & `va_list`. (sdlLog and more)
