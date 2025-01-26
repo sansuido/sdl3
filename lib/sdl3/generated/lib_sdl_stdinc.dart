@@ -20,7 +20,7 @@ import 'struct_sdl.dart';
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_free
 /// \sa SDL_calloc
@@ -49,7 +49,7 @@ Pointer<NativeType> sdlMalloc(int size) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_malloc
 /// \sa SDL_calloc
@@ -80,7 +80,7 @@ void sdlFree(Pointer<NativeType> mem) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_GetOriginalMemoryFunctions(SDL_malloc_func *malloc_func, SDL_calloc_func *calloc_func, SDL_realloc_func *realloc_func, SDL_free_func *free_func)
@@ -118,7 +118,7 @@ void sdlGetOriginalMemoryFunctions(
 /// unlikely event of a background thread calling
 /// SDL_SetMemoryFunctions simultaneously.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_SetMemoryFunctions
 /// \sa SDL_GetOriginalMemoryFunctions
@@ -168,7 +168,7 @@ void sdlGetMemoryFunctions(
 /// should not replace the memory functions once any allocations
 /// are made!
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_GetMemoryFunctions
 /// \sa SDL_GetOriginalMemoryFunctions
@@ -216,7 +216,7 @@ bool sdlSetMemoryFunctions(
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_aligned_free
 ///
@@ -243,7 +243,7 @@ Pointer<NativeType> sdlAlignedAlloc(int alignment, int size) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_aligned_alloc
 ///
@@ -265,7 +265,7 @@ void sdlAlignedFree(Pointer<NativeType> mem) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_GetNumAllocations(void)
@@ -291,7 +291,7 @@ int sdlGetNumAllocations() {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_GetEnvironmentVariable
 /// \sa SDL_GetEnvironmentVariables
@@ -320,7 +320,7 @@ Pointer<SdlEnvironment> sdlGetEnvironment() {
 /// from any thread, otherwise it is safe if no other threads are
 /// calling setenv() or unsetenv()
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_GetEnvironmentVariable
 /// \sa SDL_GetEnvironmentVariables
@@ -348,7 +348,7 @@ Pointer<SdlEnvironment> sdlCreateEnvironment(bool populated) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_GetEnvironment
 /// \sa SDL_CreateEnvironment
@@ -384,7 +384,7 @@ String? sdlGetEnvironmentVariable(Pointer<SdlEnvironment> env, String? name) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_GetEnvironment
 /// \sa SDL_CreateEnvironment
@@ -417,7 +417,7 @@ Pointer<Pointer<Int8>> sdlGetEnvironmentVariables(Pointer<SdlEnvironment> env) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_GetEnvironment
 /// \sa SDL_CreateEnvironment
@@ -455,7 +455,7 @@ bool sdlSetEnvironmentVariable(
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_GetEnvironment
 /// \sa SDL_CreateEnvironment
@@ -487,7 +487,7 @@ bool sdlUnsetEnvironmentVariable(Pointer<SdlEnvironment> env, String? name) {
 /// \threadsafety It is safe to call this function from any thread, as long as
 /// the environment is no longer in use.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_CreateEnvironment
 ///
@@ -512,7 +512,7 @@ void sdlDestroyEnvironment(Pointer<SdlEnvironment> env) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_getenv(const char *name)
@@ -543,7 +543,7 @@ String? sdlGetenv(String? name) {
 /// \threadsafety This function is not thread safe, consider using SDL_getenv()
 /// instead.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_getenv
 ///
@@ -575,7 +575,7 @@ String? sdlGetenvUnsafe(String? name) {
 /// \threadsafety This function is not thread safe, consider using
 /// SDL_SetEnvironmentVariable() instead.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_SetEnvironmentVariable
 ///
@@ -605,7 +605,7 @@ int sdlSetenvUnsafe(String? name, String? value, int overwrite) {
 /// \threadsafety This function is not thread safe, consider using
 /// SDL_UnsetEnvironmentVariable() instead.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_UnsetEnvironmentVariable
 ///
@@ -661,7 +661,7 @@ int sdlUnsetenvUnsafe(String? name) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_bsearch
 /// \sa SDL_qsort_r
@@ -722,7 +722,7 @@ void sdlQsort(Pointer<NativeType> base, int nmemb, int size,
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_bsearch_r
 /// \sa SDL_qsort
@@ -798,7 +798,7 @@ Pointer<NativeType> sdlBsearch(
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_bsearch_r
 /// \sa SDL_qsort
@@ -879,7 +879,7 @@ void sdlQsortR(
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_bsearch
 /// \sa SDL_qsort_r
@@ -920,7 +920,7 @@ Pointer<NativeType> sdlBsearchR(
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_abs(int x)
@@ -942,7 +942,7 @@ int sdlAbs(int x) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_isalpha(int x)
@@ -965,7 +965,7 @@ int sdlIsalpha(int x) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_isalnum(int x)
@@ -988,7 +988,7 @@ int sdlIsalnum(int x) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_isblank(int x)
@@ -1011,7 +1011,7 @@ int sdlIsblank(int x) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_iscntrl(int x)
@@ -1034,7 +1034,7 @@ int sdlIscntrl(int x) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_isdigit(int x)
@@ -1057,7 +1057,7 @@ int sdlIsdigit(int x) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_isxdigit(int x)
@@ -1080,7 +1080,7 @@ int sdlIsxdigit(int x) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_isgraph
 /// \sa SDL_isalnum
@@ -1113,7 +1113,7 @@ int sdlIspunct(int x) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_isspace(int x)
@@ -1136,7 +1136,7 @@ int sdlIsspace(int x) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_isupper(int x)
@@ -1159,7 +1159,7 @@ int sdlIsupper(int x) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_islower(int x)
@@ -1186,7 +1186,7 @@ int sdlIslower(int x) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_isprint(int x)
@@ -1213,7 +1213,7 @@ int sdlIsprint(int x) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_isprint
 ///
@@ -1241,7 +1241,7 @@ int sdlIsgraph(int x) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_toupper(int x)
@@ -1267,7 +1267,7 @@ int sdlToupper(int x) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_tolower(int x)
@@ -1296,7 +1296,7 @@ int sdlTolower(int x) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC Uint16 SDLCALL SDL_crc16(Uint16 crc, const void *data, size_t len)
@@ -1325,7 +1325,7 @@ int sdlCrc16(int crc, Pointer<NativeType> data, int len) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC Uint32 SDLCALL SDL_crc32(Uint32 crc, const void *data, size_t len)
@@ -1359,7 +1359,7 @@ int sdlCrc32(int crc, Pointer<NativeType> data, int len) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC Uint32 SDLCALL SDL_murmur3_32(const void *data, size_t len, Uint32 seed)
@@ -1386,7 +1386,7 @@ int sdlMurmur332(Pointer<NativeType> data, int len, int seed) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_memmove
 ///
@@ -1416,7 +1416,7 @@ Pointer<NativeType> sdlMemcpy(
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_memcpy
 ///
@@ -1449,7 +1449,7 @@ Pointer<NativeType> sdlMemmove(
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC void * SDLCALL SDL_memset(SDL_OUT_BYTECAP(len) void *dst, int c, size_t len)
@@ -1479,7 +1479,7 @@ Pointer<NativeType> sdlMemset(Pointer<NativeType> arg0, int c, int len) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC void * SDLCALL SDL_memset4(void *dst, Uint32 val, size_t dwords)
@@ -1505,7 +1505,7 @@ Pointer<NativeType> sdlMemset4(Pointer<NativeType> dst, int val, int dwords) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_memcmp(const void *s1, const void *s2, size_t len)
@@ -1538,7 +1538,7 @@ int sdlMemcmp(Pointer<NativeType> s1, Pointer<NativeType> s2, int len) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_wcsnlen
 /// \sa SDL_utf8strlen
@@ -1577,7 +1577,7 @@ int sdlWcslen(Pointer<Int16> wstr) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_wcslen
 /// \sa SDL_utf8strlen
@@ -1614,7 +1614,7 @@ int sdlWcsnlen(Pointer<Int16> wstr, int maxlen) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_wcslcat
 ///
@@ -1652,7 +1652,7 @@ int sdlWcslcpy(Pointer<Int16> dst, Pointer<Int16> src, int maxlen) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_wcslcpy
 ///
@@ -1682,7 +1682,7 @@ int sdlWcslcat(Pointer<NativeType> arg0, Pointer<Int16> src, int maxlen) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC wchar_t * SDLCALL SDL_wcsdup(const wchar_t *wstr)
@@ -1710,7 +1710,7 @@ Pointer<Int16> sdlWcsdup(Pointer<Int16> wstr) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC wchar_t * SDLCALL SDL_wcsstr(const wchar_t *haystack, const wchar_t *needle)
@@ -1744,7 +1744,7 @@ Pointer<Int16> sdlWcsstr(Pointer<Int16> haystack, Pointer<Int16> needle) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC wchar_t * SDLCALL SDL_wcsnstr(const wchar_t *haystack, const wchar_t *needle, size_t maxlen)
@@ -1774,7 +1774,7 @@ Pointer<Int16> sdlWcsnstr(
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_wcscmp(const wchar_t *str1, const wchar_t *str2)
@@ -1813,7 +1813,7 @@ int sdlWcscmp(Pointer<Int16> str1, Pointer<Int16> str2) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_wcsncmp(const wchar_t *str1, const wchar_t *str2, size_t maxlen)
@@ -1852,7 +1852,7 @@ int sdlWcsncmp(Pointer<Int16> str1, Pointer<Int16> str2, int maxlen) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_wcscasecmp(const wchar_t *str1, const wchar_t *str2)
@@ -1902,7 +1902,7 @@ int sdlWcscasecmp(Pointer<Int16> str1, Pointer<Int16> str2) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_wcsncasecmp(const wchar_t *str1, const wchar_t *str2, size_t maxlen)
@@ -1936,7 +1936,7 @@ int sdlWcsncasecmp(Pointer<Int16> str1, Pointer<Int16> str2, int maxlen) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_strtol
 ///
@@ -1964,7 +1964,7 @@ int sdlWcstol(Pointer<Int16> str, Pointer<Pointer<Int16>> endp, int base) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_strnlen
 /// \sa SDL_utf8strlen
@@ -1999,7 +1999,7 @@ int sdlStrlen(String? str) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_strlen
 /// \sa SDL_utf8strlen
@@ -2040,7 +2040,7 @@ int sdlStrnlen(String? str, int maxlen) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_strlcat
 /// \sa SDL_utf8strlcpy
@@ -2081,7 +2081,7 @@ int sdlStrlcpy(Pointer<Int8> dst, String? src, int maxlen) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_strlcpy
 ///
@@ -2121,7 +2121,7 @@ int sdlUtf8strlcpy(Pointer<Int8> dst, String? src, int dstBytes) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_strlcpy
 ///
@@ -2154,7 +2154,7 @@ int sdlStrlcat(Pointer<NativeType> arg0, String? src, int maxlen) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC SDL_MALLOC char * SDLCALL SDL_strdup(const char *str)
@@ -2190,7 +2190,7 @@ Pointer<Int8> sdlStrdup(String? str) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC SDL_MALLOC char * SDLCALL SDL_strndup(const char *str, size_t maxlen)
@@ -2222,7 +2222,7 @@ Pointer<Int8> sdlStrndup(String? str, int maxlen) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC char * SDLCALL SDL_strrev(char *str)
@@ -2249,7 +2249,7 @@ Pointer<Int8> sdlStrrev(Pointer<Int8> str) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_strlwr
 ///
@@ -2278,7 +2278,7 @@ Pointer<Int8> sdlStrupr(Pointer<Int8> str) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_strupr
 ///
@@ -2308,7 +2308,7 @@ Pointer<Int8> sdlStrlwr(Pointer<Int8> str) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC char * SDLCALL SDL_strchr(const char *str, int c)
@@ -2338,7 +2338,7 @@ Pointer<Int8> sdlStrchr(String? str, int c) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC char * SDLCALL SDL_strrchr(const char *str, int c)
@@ -2369,7 +2369,7 @@ Pointer<Int8> sdlStrrchr(String? str, int c) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC char * SDLCALL SDL_strstr(const char *haystack, const char *needle)
@@ -2406,7 +2406,7 @@ Pointer<Int8> sdlStrstr(String? haystack, String? needle) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC char * SDLCALL SDL_strnstr(const char *haystack, const char *needle, size_t maxlen)
@@ -2450,7 +2450,7 @@ Pointer<Int8> sdlStrnstr(String? haystack, String? needle, int maxlen) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC char * SDLCALL SDL_strcasestr(const char *haystack, const char *needle)
@@ -2493,7 +2493,7 @@ Pointer<Int8> sdlStrcasestr(String? haystack, String? needle) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC char * SDLCALL SDL_strtok_r(char *str, const char *delim, char **saveptr)
@@ -2532,7 +2532,7 @@ Pointer<Int8> sdlStrtokR(
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_utf8strnlen
 /// \sa SDL_strlen
@@ -2576,7 +2576,7 @@ int sdlUtf8strlen(String? str) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_utf8strlen
 /// \sa SDL_strnlen
@@ -2614,7 +2614,7 @@ int sdlUtf8strnlen(String? str, int bytes) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_uitoa
 /// \sa SDL_ltoa
@@ -2651,7 +2651,7 @@ Pointer<Int8> sdlItoa(int value, Pointer<Int8> str, int radix) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_itoa
 /// \sa SDL_ultoa
@@ -2688,7 +2688,7 @@ Pointer<Int8> sdlUitoa(int value, Pointer<Int8> str, int radix) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_ultoa
 /// \sa SDL_itoa
@@ -2725,7 +2725,7 @@ Pointer<Int8> sdlLtoa(int value, Pointer<Int8> str, int radix) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_ltoa
 /// \sa SDL_uitoa
@@ -2762,7 +2762,7 @@ Pointer<Int8> sdlUltoa(int value, Pointer<Int8> str, int radix) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_ulltoa
 /// \sa SDL_itoa
@@ -2801,7 +2801,7 @@ Pointer<Int8> sdlLltoa(
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_lltoa
 /// \sa SDL_uitoa
@@ -2831,7 +2831,7 @@ Pointer<Int8> sdlUlltoa(
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_atof
 /// \sa SDL_strtol
@@ -2865,7 +2865,7 @@ int sdlAtoi(String? str) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_atoi
 /// \sa SDL_strtol
@@ -2908,7 +2908,7 @@ double sdlAtof(String? str) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_atoi
 /// \sa SDL_atof
@@ -2955,7 +2955,7 @@ int sdlStrtol(String? str, Pointer<Pointer<Int8>> endp, int base) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_atoi
 /// \sa SDL_atof
@@ -3001,7 +3001,7 @@ int sdlStrtoul(String? str, Pointer<Pointer<Int8>> endp, int base) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_atoi
 /// \sa SDL_atof
@@ -3049,7 +3049,7 @@ Pointer<NativeType> sdlStrtoll(
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_atoi
 /// \sa SDL_atof
@@ -3093,7 +3093,7 @@ Pointer<NativeType> sdlStrtoull(
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_atoi
 /// \sa SDL_atof
@@ -3132,7 +3132,7 @@ double sdlStrtod(String? str, Pointer<Pointer<Int8>> endp) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_strcmp(const char *str1, const char *str2)
@@ -3175,7 +3175,7 @@ int sdlStrcmp(String? str1, String? str2) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_strncmp(const char *str1, const char *str2, size_t maxlen)
@@ -3217,7 +3217,7 @@ int sdlStrncmp(String? str1, String? str2, int maxlen) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_strcasecmp(const char *str1, const char *str2)
@@ -3269,7 +3269,7 @@ int sdlStrcasecmp(String? str1, String? str2) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_strncasecmp(const char *str1, const char *str2, size_t maxlen)
@@ -3301,7 +3301,7 @@ int sdlStrncasecmp(String? str1, String? str2, int maxlen) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC char * SDLCALL SDL_strpbrk(const char *str, const char *breakset)
@@ -3360,7 +3360,7 @@ Pointer<Int8> sdlStrpbrk(String? str, String? breakset) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC Uint32 SDLCALL SDL_StepUTF8(const char **pstr, size_t *pslen)
@@ -3400,7 +3400,7 @@ int sdlStepUtf8(Pointer<Pointer<Int8>> pstr, Pointer<Uint32> pslen) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.6.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC Uint32 SDLCALL SDL_StepBackUTF8(const char *start, const char **pstr)
@@ -3441,7 +3441,7 @@ int sdlStepBackUtf8(String? start, Pointer<Pointer<Int8>> pstr) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC char * SDLCALL SDL_UCS4ToUTF8(Uint32 codepoint, char *dst)
@@ -3467,7 +3467,7 @@ Pointer<Int8> sdlUcs4ToUtf8(int codepoint, Pointer<Int8> dst) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_sscanf(const char *text, SDL_SCANF_FORMAT_STRING const char *fmt, ...) SDL_SCANF_VARARG_FUNC(2)
@@ -3499,7 +3499,7 @@ int sdlSscanf(String? text, String? fmt) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_vsscanf(const char *text, SDL_SCANF_FORMAT_STRING const char *fmt, va_list ap) SDL_SCANF_VARARG_FUNCV(2)
@@ -3545,7 +3545,7 @@ int sdlVsscanf(String? text, String? fmt) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_snprintf(SDL_OUT_Z_CAP(maxlen) char *text, size_t maxlen, SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(3)
@@ -3591,7 +3591,7 @@ int sdlSnprintf(Pointer<Int8> text, int maxlen, String? fmt) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_swprintf(SDL_OUT_Z_CAP(maxlen) wchar_t *text, size_t maxlen, SDL_PRINTF_FORMAT_STRING const wchar_t *fmt, ...) SDL_WPRINTF_VARARG_FUNC(3)
@@ -3620,7 +3620,7 @@ int sdlSwprintf(Pointer<Int16> text, int maxlen, Pointer<Int16> fmt) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_vsnprintf(SDL_OUT_Z_CAP(maxlen) char *text, size_t maxlen, SDL_PRINTF_FORMAT_STRING const char *fmt, va_list ap) SDL_PRINTF_VARARG_FUNCV(3)
@@ -3653,7 +3653,7 @@ int sdlVsnprintf(Pointer<Int8> text, int maxlen, String? fmt) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_vswprintf(SDL_OUT_Z_CAP(maxlen) wchar_t *text, size_t maxlen, SDL_PRINTF_FORMAT_STRING const wchar_t *fmt, va_list ap) SDL_WPRINTF_VARARG_FUNCV(3)
@@ -3691,7 +3691,7 @@ int sdlVswprintf(Pointer<Int16> text, int maxlen, Pointer<Int16> fmt) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_asprintf(char **strp, SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(2)
@@ -3722,7 +3722,7 @@ int sdlAsprintf(Pointer<Pointer<Int8>> strp, String? fmt) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_vasprintf(char **strp, SDL_PRINTF_FORMAT_STRING const char *fmt, va_list ap) SDL_PRINTF_VARARG_FUNCV(2)
@@ -3750,7 +3750,7 @@ int sdlVasprintf(Pointer<Pointer<Int8>> strp, String? fmt) {
 /// \threadsafety This should be called on the same thread that calls
 /// SDL_rand*()
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_rand
 /// \sa SDL_rand_bits
@@ -3792,7 +3792,7 @@ void sdlSrand(int seed) {
 ///
 /// \threadsafety All calls should be made from a single thread
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_srand
 /// \sa SDL_randf
@@ -3822,7 +3822,7 @@ int sdlRand(int n) {
 ///
 /// \threadsafety All calls should be made from a single thread
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_srand
 /// \sa SDL_rand
@@ -3851,7 +3851,7 @@ double sdlRandf() {
 ///
 /// \threadsafety All calls should be made from a single thread
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_rand
 /// \sa SDL_randf
@@ -3893,7 +3893,7 @@ int sdlRandBits() {
 /// \threadsafety This function is thread-safe, as long as the state pointer
 /// isn't shared between threads.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_rand
 /// \sa SDL_rand_bits_r
@@ -3928,7 +3928,7 @@ int sdlRandR(Pointer<Uint64> state, int n) {
 /// \threadsafety This function is thread-safe, as long as the state pointer
 /// isn't shared between threads.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_rand_bits_r
 /// \sa SDL_rand_r
@@ -3962,7 +3962,7 @@ double sdlRandfR(Pointer<Uint64> state) {
 /// \threadsafety This function is thread-safe, as long as the state pointer
 /// isn't shared between threads.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_rand_r
 /// \sa SDL_randf_r
@@ -3999,7 +3999,7 @@ int sdlRandBitsR(Pointer<Uint64> state) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_acosf
 /// \sa SDL_asin
@@ -4036,7 +4036,7 @@ double sdlAcos(double x) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_acos
 /// \sa SDL_asinf
@@ -4073,7 +4073,7 @@ double sdlAcosf(double x) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_asinf
 /// \sa SDL_acos
@@ -4110,7 +4110,7 @@ double sdlAsin(double x) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_asin
 /// \sa SDL_acosf
@@ -4149,7 +4149,7 @@ double sdlAsinf(double x) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_atanf
 /// \sa SDL_atan2
@@ -4188,7 +4188,7 @@ double sdlAtan(double x) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_atan
 /// \sa SDL_atan2f
@@ -4231,7 +4231,7 @@ double sdlAtanf(double x) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_atan2f
 /// \sa SDL_atan
@@ -4275,7 +4275,7 @@ double sdlAtan2(double y, double x) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_atan2f
 /// \sa SDL_atan
@@ -4309,7 +4309,7 @@ double sdlAtan2f(double y, double x) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_ceilf
 /// \sa SDL_floor
@@ -4344,7 +4344,7 @@ double sdlCeil(double x) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_ceil
 /// \sa SDL_floorf
@@ -4380,7 +4380,7 @@ double sdlCeilf(double x) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_copysignf
 /// \sa SDL_fabs
@@ -4414,7 +4414,7 @@ double sdlCopysign(double x, double y) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_copysignf
 /// \sa SDL_fabsf
@@ -4449,7 +4449,7 @@ double sdlCopysignf(double x, double y) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_cosf
 /// \sa SDL_acos
@@ -4484,7 +4484,7 @@ double sdlCos(double x) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_cos
 /// \sa SDL_acosf
@@ -4524,7 +4524,7 @@ double sdlCosf(double x) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_expf
 /// \sa SDL_log
@@ -4563,7 +4563,7 @@ double sdlExp(double x) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_exp
 /// \sa SDL_logf
@@ -4592,7 +4592,7 @@ double sdlExpf(double x) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_fabsf
 ///
@@ -4620,7 +4620,7 @@ double sdlFabs(double x) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_fabs
 ///
@@ -4651,7 +4651,7 @@ double sdlFabsf(double x) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_floorf
 /// \sa SDL_ceil
@@ -4686,7 +4686,7 @@ double sdlFloor(double x) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_floor
 /// \sa SDL_ceilf
@@ -4721,7 +4721,7 @@ double sdlFloorf(double x) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_truncf
 /// \sa SDL_fmod
@@ -4757,7 +4757,7 @@ double sdlTrunc(double x) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_trunc
 /// \sa SDL_fmodf
@@ -4793,7 +4793,7 @@ double sdlTruncf(double x) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_fmodf
 /// \sa SDL_modf
@@ -4831,7 +4831,7 @@ double sdlFmod(double x, double y) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_fmod
 /// \sa SDL_truncf
@@ -4859,7 +4859,7 @@ double sdlFmodf(double x, double y) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_isinff
 ///
@@ -4881,7 +4881,7 @@ int sdlIsinf(double x) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_isinf
 ///
@@ -4903,7 +4903,7 @@ int sdlIsinff(double x) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_isnanf
 ///
@@ -4925,7 +4925,7 @@ int sdlIsnan(double x) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_isnan
 ///
@@ -4961,7 +4961,7 @@ int sdlIsnanf(double x) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_log
 /// \sa SDL_expf
@@ -4997,7 +4997,7 @@ double sdlLogf(double x) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_log10f
 /// \sa SDL_log
@@ -5034,7 +5034,7 @@ double sdlLog10(double x) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_log10
 /// \sa SDL_logf
@@ -5061,7 +5061,7 @@ double sdlLog10f(double x) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_modff
 /// \sa SDL_trunc
@@ -5089,7 +5089,7 @@ double sdlModf(double x, Pointer<Double> y) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_modf
 /// \sa SDL_truncf
@@ -5129,7 +5129,7 @@ double sdlModff(double x, Pointer<Float> y) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_powf
 /// \sa SDL_exp
@@ -5169,7 +5169,7 @@ double sdlPow(double x, double y) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_pow
 /// \sa SDL_expf
@@ -5204,7 +5204,7 @@ double sdlPowf(double x, double y) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_roundf
 /// \sa SDL_lround
@@ -5240,7 +5240,7 @@ double sdlRound(double x) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_round
 /// \sa SDL_lroundf
@@ -5276,7 +5276,7 @@ double sdlRoundf(double x) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_lroundf
 /// \sa SDL_round
@@ -5313,7 +5313,7 @@ int sdlLround(double x) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_lround
 /// \sa SDL_roundf
@@ -5349,7 +5349,7 @@ int sdlLroundf(double x) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_scalbnf
 /// \sa SDL_pow
@@ -5382,7 +5382,7 @@ double sdlScalbn(double x, int n) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_scalbn
 /// \sa SDL_powf
@@ -5417,7 +5417,7 @@ double sdlScalbnf(double x, int n) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_sinf
 /// \sa SDL_asin
@@ -5452,7 +5452,7 @@ double sdlSin(double x) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_sin
 /// \sa SDL_asinf
@@ -5487,7 +5487,7 @@ double sdlSinf(double x) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_sqrtf
 ///
@@ -5520,7 +5520,7 @@ double sdlSqrt(double x) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_sqrt
 ///
@@ -5553,7 +5553,7 @@ double sdlSqrtf(double x) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_tanf
 /// \sa SDL_sin
@@ -5590,7 +5590,7 @@ double sdlTan(double x) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_tan
 /// \sa SDL_sinf
@@ -5616,7 +5616,7 @@ double sdlTanf(double x) {
 /// \returns a handle that must be freed with SDL_iconv_close, or
 /// SDL_ICONV_ERROR on failure.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_iconv
 /// \sa SDL_iconv_close
@@ -5644,7 +5644,7 @@ Pointer<SdlIconvT> sdlIconvOpen(String? tocode, String? fromcode) {
 /// \param cd The character set conversion handle.
 /// \returns 0 on success, or -1 on failure.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_iconv
 /// \sa SDL_iconv_open
@@ -5690,7 +5690,7 @@ int sdlIconvClose(Pointer<SdlIconvT> cd) {
 /// \param outbytesleft The number of bytes in the output buffer.
 /// \returns the number of conversions on success, or a negative error code.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_iconv_open
 /// \sa SDL_iconv_close
@@ -5740,7 +5740,7 @@ int sdlIconv(
 /// \param inbytesleft the size of the input string _in bytes_.
 /// \returns a new string, converted to the new encoding, or NULL on error.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_iconv_open
 /// \sa SDL_iconv_close

@@ -89,7 +89,7 @@ extension SdlWindowEx on SdlWindow {
   ///
   /// \threadsafety This function should only be called on the main thread.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_CreateWindowAndRenderer
   /// \sa SDL_CreatePopupWindow
@@ -122,7 +122,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   ///
   /// \threadsafety This function should only be called on the main thread.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_GetWindowFromID
   ///
@@ -143,7 +143,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   ///
   /// \threadsafety This function should only be called on the main thread.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_CreateWindow
   /// \sa SDL_HideWindow
@@ -172,7 +172,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   ///
   /// \threadsafety This function should only be called on the main thread.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_GetWindowTitle
   ///
@@ -192,7 +192,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   ///
   /// \threadsafety This function should only be called on the main thread.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_SetWindowTitle
   ///
@@ -223,7 +223,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   ///
   /// \threadsafety This function should only be called on the main thread.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowIcon(SDL_Window *window, SDL_Surface *icon)
@@ -266,7 +266,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   ///
   /// \threadsafety This function should only be called on the main thread.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_GetWindowPosition
   /// \sa SDL_SyncWindow
@@ -297,7 +297,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   ///
   /// \threadsafety This function should only be called on the main thread.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_SetWindowPosition
   ///
@@ -343,7 +343,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   ///
   /// \threadsafety This function should only be called on the main thread.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_GetWindowSize
   /// \sa SDL_SetWindowFullscreenMode
@@ -371,7 +371,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   ///
   /// \threadsafety This function should only be called on the main thread.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_GetRenderOutputSize
   /// \sa SDL_GetWindowSizeInPixels
@@ -421,7 +421,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   ///
   /// \threadsafety This function should only be called on the main thread.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_GetWindowSize
   ///
@@ -456,7 +456,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   ///
   /// \threadsafety This function should only be called on the main thread.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_CreateWindow
   /// \sa SDL_GetWindowSize
@@ -485,7 +485,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   ///
   /// \threadsafety This function should only be called on the main thread.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_GetWindowMinimumSize
   /// \sa SDL_SetWindowMaximumSize
@@ -510,7 +510,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   ///
   /// \threadsafety This function should only be called on the main thread.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_GetWindowMaximumSize
   /// \sa SDL_SetWindowMinimumSize
@@ -539,7 +539,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   ///
   /// \threadsafety This function should only be called on the main thread.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_GetWindowMaximumSize
   /// \sa SDL_SetWindowMinimumSize
@@ -564,7 +564,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   ///
   /// \threadsafety This function should only be called on the main thread.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_GetWindowMinimumSize
   /// \sa SDL_SetWindowMaximumSize
@@ -598,7 +598,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   ///
   /// \threadsafety This function should only be called on the main thread.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_GetWindowFlags
   ///
@@ -625,7 +625,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   ///
   /// \threadsafety This function should only be called on the main thread.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_GetWindowFlags
   ///
@@ -649,7 +649,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   ///
   /// \threadsafety This function should only be called on the main thread.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_GetWindowFlags
   ///
@@ -669,7 +669,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   ///
   /// \threadsafety This function should only be called on the main thread.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_HideWindow
   /// \sa SDL_RaiseWindow
@@ -690,7 +690,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   ///
   /// \threadsafety This function should only be called on the main thread.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_ShowWindow
   /// \sa SDL_WINDOW_HIDDEN
@@ -718,7 +718,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   ///
   /// \threadsafety This function should only be called on the main thread.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_RaiseWindow(SDL_Window *window)
@@ -753,7 +753,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   ///
   /// \threadsafety This function should only be called on the main thread.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_MinimizeWindow
   /// \sa SDL_RestoreWindow
@@ -787,7 +787,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   ///
   /// \threadsafety This function should only be called on the main thread.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_MaximizeWindow
   /// \sa SDL_RestoreWindow
@@ -822,7 +822,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   ///
   /// \threadsafety This function should only be called on the main thread.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_MaximizeWindow
   /// \sa SDL_MinimizeWindow
@@ -855,7 +855,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   ///
   /// \threadsafety This function should only be called on the main thread.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_DestroyWindowSurface
   /// \sa SDL_WindowHasSurface
@@ -883,7 +883,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   ///
   /// \threadsafety This function should only be called on the main thread.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_GetWindowSurface
   /// \sa SDL_UpdateWindowSurfaceRects
@@ -917,7 +917,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   ///
   /// \threadsafety This function should only be called on the main thread.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_GetWindowSurface
   /// \sa SDL_UpdateWindowSurface
@@ -958,7 +958,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   ///
   /// \threadsafety This function should only be called on the main thread.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_GetWindowKeyboardGrab
   /// \sa SDL_SetWindowMouseGrab
@@ -982,7 +982,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   ///
   /// \threadsafety This function should only be called on the main thread.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_GetWindowMouseRect
   /// \sa SDL_SetWindowMouseRect
@@ -1004,7 +1004,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   ///
   /// \threadsafety This function should only be called on the main thread.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_SetWindowKeyboardGrab
   ///
@@ -1023,7 +1023,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   ///
   /// \threadsafety This function should only be called on the main thread.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_GetWindowMouseRect
   /// \sa SDL_SetWindowMouseRect
@@ -1053,7 +1053,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   ///
   /// \threadsafety This function should only be called on the main thread.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_GetWindowMouseRect
   /// \sa SDL_GetWindowMouseGrab
@@ -1078,7 +1078,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   ///
   /// \threadsafety This function should only be called on the main thread.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_SetWindowMouseRect
   /// \sa SDL_GetWindowMouseGrab
@@ -1111,7 +1111,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   ///
   /// \threadsafety This function should only be called on the main thread.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_GetWindowOpacity
   ///
@@ -1134,7 +1134,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   ///
   /// \threadsafety This function should only be called on the main thread.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_SetWindowOpacity
   ///
@@ -1173,7 +1173,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   ///
   /// \threadsafety This function should only be called on the main thread.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_SetWindowModal
   ///
@@ -1197,7 +1197,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   ///
   /// \threadsafety This function should only be called on the main thread.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_SetWindowParent
   /// \sa SDL_WINDOW_MODAL
@@ -1219,7 +1219,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   ///
   /// \threadsafety This function should only be called on the main thread.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowFocusable(SDL_Window *window, bool focusable)
@@ -1249,7 +1249,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   ///
   /// \threadsafety This function should only be called on the main thread.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_ShowWindowSystemMenu(SDL_Window *window, int x, int y)
@@ -1301,7 +1301,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   ///
   /// \threadsafety This function should only be called on the main thread.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowHitTest(SDL_Window *window, SDL_HitTest callback, void *callback_data)
@@ -1321,7 +1321,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   ///
   /// \threadsafety This function should only be called on the main thread.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_FlashWindow(SDL_Window *window, SDL_FlashOperation operation)
@@ -1344,7 +1344,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   ///
   /// \threadsafety This function should only be called on the main thread.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_CreatePopupWindow
   /// \sa SDL_CreateWindow
@@ -1378,7 +1378,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   ///
   /// \threadsafety This function should only be called on the main thread.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_GL_DestroyContext
   /// \sa SDL_GL_MakeCurrent
@@ -1400,7 +1400,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   ///
   /// \threadsafety This function should only be called on the main thread.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_GetDisplayBounds
   /// \sa SDL_GetDisplays
@@ -1423,6 +1423,9 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// don't need a specific renderer, specify NULL and SDL will attempt to choose
   /// the best option for you, based on what is available on the user's system.
   ///
+  /// If `name` is a comma-separated list, SDL will try each name, in the order
+  /// listed, until one succeeds or all of them fail.
+  ///
   /// By default the rendering size matches the window size in pixels, but you
   /// can call SDL_SetRenderLogicalPresentation() to change the content size and
   /// scaling options.
@@ -1435,7 +1438,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   ///
   /// \threadsafety This function should only be called on the main thread.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_CreateRendererWithProperties
   /// \sa SDL_CreateSoftwareRenderer
@@ -1460,7 +1463,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   ///
   /// \threadsafety It is safe to call this function from any thread.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// ```c
   /// extern SDL_DECLSPEC SDL_Renderer * SDLCALL SDL_GetRenderer(SDL_Window *window)

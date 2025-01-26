@@ -14,7 +14,7 @@ import 'struct_sdl.dart';
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_LockSpinlock
 /// \sa SDL_UnlockSpinlock
@@ -39,7 +39,7 @@ bool sdlTryLockSpinlock(Pointer<Int32> lock) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_TryLockSpinlock
 /// \sa SDL_UnlockSpinlock
@@ -66,7 +66,7 @@ void sdlLockSpinlock(Pointer<Int32> lock) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_LockSpinlock
 /// \sa SDL_TryLockSpinlock
@@ -95,7 +95,7 @@ void sdlUnlockSpinlock(Pointer<Int32> lock) {
 /// time, but if you find yourself needing this, you are probably
 /// dealing with some very sensitive code; be careful!
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_MemoryBarrierRelease
 ///
@@ -123,7 +123,7 @@ void sdlMemoryBarrierReleaseFunction() {
 /// time, but if you find yourself needing this, you are probably
 /// dealing with some very sensitive code; be careful!
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_MemoryBarrierAcquire
 ///
@@ -150,7 +150,7 @@ void sdlMemoryBarrierAcquireFunction() {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_GetAtomicInt
 /// \sa SDL_SetAtomicInt
@@ -181,7 +181,7 @@ bool sdlCompareAndSwapAtomicInt(
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_GetAtomicInt
 ///
@@ -206,7 +206,7 @@ int sdlSetAtomicInt(Pointer<SdlAtomicInt> a, int v) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_SetAtomicInt
 ///
@@ -234,7 +234,7 @@ int sdlGetAtomicInt(Pointer<SdlAtomicInt> a) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_AtomicDecRef
 /// \sa SDL_AtomicIncRef
@@ -262,7 +262,7 @@ int sdlAddAtomicInt(Pointer<SdlAtomicInt> a, int v) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_GetAtomicU32
 /// \sa SDL_SetAtomicU32
@@ -293,7 +293,7 @@ bool sdlCompareAndSwapAtomicU32(
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_GetAtomicU32
 ///
@@ -318,7 +318,7 @@ int sdlSetAtomicU32(Pointer<SdlAtomicU32> a, int v) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_SetAtomicU32
 ///
@@ -345,7 +345,7 @@ int sdlGetAtomicU32(Pointer<SdlAtomicU32> a) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_CompareAndSwapAtomicInt
 /// \sa SDL_GetAtomicPointer
@@ -376,7 +376,7 @@ bool sdlCompareAndSwapAtomicPointer(Pointer<Pointer<NativeType>> a,
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_CompareAndSwapAtomicPointer
 /// \sa SDL_GetAtomicPointer
@@ -405,7 +405,7 @@ Pointer<NativeType> sdlSetAtomicPointer(
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_CompareAndSwapAtomicPointer
 /// \sa SDL_SetAtomicPointer

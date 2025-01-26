@@ -18,7 +18,9 @@ import 'struct_sdl.dart';
 /// UTF-8 encoding. Not supported on all platforms. May be NULL.
 /// \returns The newly created system tray icon.
 ///
-/// \since This function is available since SDL 3.1.8.
+/// \threadsafety This function should only be called on the main thread.
+///
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_CreateTrayMenu
 /// \sa SDL_GetTrayMenu
@@ -45,7 +47,10 @@ Pointer<SdlTray> sdlCreateTray(Pointer<SdlSurface> icon, String? tooltip) {
 /// \param tray the tray icon to be updated.
 /// \param icon the new icon. May be NULL.
 ///
-/// \since This function is available since SDL 3.1.8.
+/// \threadsafety This function should be called on the thread that created the
+/// tray.
+///
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_CreateTray
 ///
@@ -66,7 +71,10 @@ void sdlSetTrayIcon(Pointer<SdlTray> tray, Pointer<SdlSurface> icon) {
 /// \param tray the tray icon to be updated.
 /// \param tooltip the new tooltip in UTF-8 encoding. May be NULL.
 ///
-/// \since This function is available since SDL 3.1.8.
+/// \threadsafety This function should be called on the thread that created the
+/// tray.
+///
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_CreateTray
 ///
@@ -97,7 +105,10 @@ void sdlSetTrayTooltip(Pointer<SdlTray> tray, String? tooltip) {
 /// \param tray the tray to bind the menu to.
 /// \returns the newly created menu.
 ///
-/// \since This function is available since SDL 3.1.8.
+/// \threadsafety This function should be called on the thread that created the
+/// tray.
+///
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_CreateTray
 /// \sa SDL_GetTrayMenu
@@ -127,7 +138,10 @@ Pointer<SdlTrayMenu> sdlCreateTrayMenu(Pointer<SdlTray> tray) {
 /// \param entry the tray entry to bind the menu to.
 /// \returns the newly created menu.
 ///
-/// \since This function is available since SDL 3.1.8.
+/// \threadsafety This function should be called on the thread that created the
+/// tray.
+///
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_InsertTrayEntryAt
 /// \sa SDL_GetTraySubmenu
@@ -158,7 +172,10 @@ Pointer<SdlTrayMenu> sdlCreateTraySubmenu(Pointer<SdlTrayEntry> entry) {
 /// \param tray the tray entry to bind the menu to.
 /// \returns the newly created menu.
 ///
-/// \since This function is available since SDL 3.1.8.
+/// \threadsafety This function should be called on the thread that created the
+/// tray.
+///
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_CreateTray
 /// \sa SDL_CreateTrayMenu
@@ -187,7 +204,10 @@ Pointer<SdlTrayMenu> sdlGetTrayMenu(Pointer<SdlTray> tray) {
 /// \param entry the tray entry to bind the menu to.
 /// \returns the newly created menu.
 ///
-/// \since This function is available since SDL 3.1.8.
+/// \threadsafety This function should be called on the thread that created the
+/// tray.
+///
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_InsertTrayEntryAt
 /// \sa SDL_CreateTraySubmenu
@@ -213,7 +233,10 @@ Pointer<SdlTrayMenu> sdlGetTraySubmenu(Pointer<SdlTrayEntry> entry) {
 /// pointer becomes invalid when any function that inserts or deletes
 /// entries in the menu is called.
 ///
-/// \since This function is available since SDL 3.1.8.
+/// \threadsafety This function should be called on the thread that created the
+/// tray.
+///
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_RemoveTrayEntry
 /// \sa SDL_InsertTrayEntryAt
@@ -236,7 +259,10 @@ Pointer<Pointer<SdlTrayEntry>> sdlGetTrayEntries(
 ///
 /// \param entry The entry to be deleted.
 ///
-/// \since This function is available since SDL 3.1.8.
+/// \threadsafety This function should be called on the thread that created the
+/// tray.
+///
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_GetTrayEntries
 /// \sa SDL_InsertTrayEntryAt
@@ -267,7 +293,10 @@ void sdlRemoveTrayEntry(Pointer<SdlTrayEntry> entry) {
 /// \param flags a combination of flags, some of which are mandatory.
 /// \returns the newly created entry, or NULL if pos is out of bounds.
 ///
-/// \since This function is available since SDL 3.1.8.
+/// \threadsafety This function should be called on the thread that created the
+/// tray.
+///
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_TrayEntryFlags
 /// \sa SDL_GetTrayEntries
@@ -302,7 +331,10 @@ Pointer<SdlTrayEntry> sdlInsertTrayEntryAt(
 /// \param entry the entry to be updated.
 /// \param label the new label for the entry in UTF-8 encoding.
 ///
-/// \since This function is available since SDL 3.1.8.
+/// \threadsafety This function should be called on the thread that created the
+/// tray.
+///
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_GetTrayEntries
 /// \sa SDL_InsertTrayEntryAt
@@ -330,7 +362,10 @@ void sdlSetTrayEntryLabel(Pointer<SdlTrayEntry> entry, String? label) {
 /// \param entry the entry to be read.
 /// \returns the label of the entry in UTF-8 encoding.
 ///
-/// \since This function is available since SDL 3.1.8.
+/// \threadsafety This function should be called on the thread that created the
+/// tray.
+///
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_GetTrayEntries
 /// \sa SDL_InsertTrayEntryAt
@@ -359,7 +394,10 @@ String? sdlGetTrayEntryLabel(Pointer<SdlTrayEntry> entry) {
 /// \param entry the entry to be updated.
 /// \param checked true if the entry should be checked; false otherwise.
 ///
-/// \since This function is available since SDL 3.1.8.
+/// \threadsafety This function should be called on the thread that created the
+/// tray.
+///
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_GetTrayEntries
 /// \sa SDL_InsertTrayEntryAt
@@ -384,7 +422,10 @@ void sdlSetTrayEntryChecked(Pointer<SdlTrayEntry> entry, bool checked) {
 /// \param entry the entry to be read.
 /// \returns true if the entry is checked; false otherwise.
 ///
-/// \since This function is available since SDL 3.1.8.
+/// \threadsafety This function should be called on the thread that created the
+/// tray.
+///
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_GetTrayEntries
 /// \sa SDL_InsertTrayEntryAt
@@ -406,7 +447,10 @@ bool sdlGetTrayEntryChecked(Pointer<SdlTrayEntry> entry) {
 /// \param entry the entry to be updated.
 /// \param enabled true if the entry should be enabled; false otherwise.
 ///
-/// \since This function is available since SDL 3.1.8.
+/// \threadsafety This function should be called on the thread that created the
+/// tray.
+///
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_GetTrayEntries
 /// \sa SDL_InsertTrayEntryAt
@@ -429,7 +473,10 @@ void sdlSetTrayEntryEnabled(Pointer<SdlTrayEntry> entry, bool enabled) {
 /// \param entry the entry to be read.
 /// \returns true if the entry is enabled; false otherwise.
 ///
-/// \since This function is available since SDL 3.1.8.
+/// \threadsafety This function should be called on the thread that created the
+/// tray.
+///
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_GetTrayEntries
 /// \sa SDL_InsertTrayEntryAt
@@ -453,7 +500,10 @@ bool sdlGetTrayEntryEnabled(Pointer<SdlTrayEntry> entry) {
 /// \param userdata an optional pointer to pass extra data to the callback when
 /// it will be invoked.
 ///
-/// \since This function is available since SDL 3.1.8.
+/// \threadsafety This function should be called on the thread that created the
+/// tray.
+///
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_GetTrayEntries
 /// \sa SDL_InsertTrayEntryAt
@@ -482,7 +532,10 @@ void sdlSetTrayEntryCallback(
 ///
 /// \param entry The entry to activate.
 ///
-/// \since This function is available since SDL 3.1.10.
+/// \threadsafety This function should be called on the thread that created the
+/// tray.
+///
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_ClickTrayEntry(SDL_TrayEntry *entry)
@@ -501,7 +554,10 @@ void sdlClickTrayEntry(Pointer<SdlTrayEntry> entry) {
 ///
 /// \param tray the tray icon to be destroyed.
 ///
-/// \since This function is available since SDL 3.1.8.
+/// \threadsafety This function should be called on the thread that created the
+/// tray.
+///
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_CreateTray
 ///
@@ -516,12 +572,15 @@ void sdlDestroyTray(Pointer<SdlTray> tray) {
 }
 
 ///
-/// Gets the menu contianing a certain tray entry.
+/// Gets the menu containing a certain tray entry.
 ///
 /// \param entry the entry for which to get the parent menu.
 /// \returns the parent menu.
 ///
-/// \since This function is available since SDL 3.1.8.
+/// \threadsafety This function should be called on the thread that created the
+/// tray.
+///
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_InsertTrayEntryAt
 ///
@@ -546,7 +605,10 @@ Pointer<SdlTrayMenu> sdlGetTrayEntryParent(Pointer<SdlTrayEntry> entry) {
 /// \param menu the menu for which to get the parent entry.
 /// \returns the parent entry, or NULL if this menu is not a submenu.
 ///
-/// \since This function is available since SDL 3.1.8.
+/// \threadsafety This function should be called on the thread that created the
+/// tray.
+///
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_CreateTraySubmenu
 /// \sa SDL_GetTrayMenuParentTray
@@ -572,7 +634,10 @@ Pointer<SdlTrayEntry> sdlGetTrayMenuParentEntry(Pointer<SdlTrayMenu> menu) {
 /// \param menu the menu for which to get the parent enttrayry.
 /// \returns the parent tray, or NULL if this menu is a submenu.
 ///
-/// \since This function is available since SDL 3.1.8.
+/// \threadsafety This function should be called on the thread that created the
+/// tray.
+///
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_CreateTrayMenu
 /// \sa SDL_GetTrayMenuParentEntry
@@ -586,4 +651,23 @@ Pointer<SdlTray> sdlGetTrayMenuParentTray(Pointer<SdlTrayMenu> menu) {
       Pointer<SdlTray> Function(
           Pointer<SdlTrayMenu> menu)>('SDL_GetTrayMenuParentTray');
   return sdlGetTrayMenuParentTrayLookupFunction(menu);
+}
+
+///
+/// Update the trays.
+///
+/// This is called automatically by the event loop and is only needed if you're
+/// using trays but aren't handling SDL events.
+///
+/// \threadsafety This function should only be called on the main thread.
+///
+/// \since This function is available since SDL 3.2.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC void SDLCALL SDL_UpdateTrays(void)
+/// ```
+void sdlUpdateTrays() {
+  final sdlUpdateTraysLookupFunction = libSdl3
+      .lookupFunction<Void Function(), void Function()>('SDL_UpdateTrays');
+  return sdlUpdateTraysLookupFunction();
 }

@@ -24,7 +24,7 @@ import 'lib_sdl.dart';
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_ClearError
 /// \sa SDL_GetError
@@ -54,7 +54,7 @@ bool sdlSetError(String? fmt) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.6.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_ClearError
 /// \sa SDL_GetError
@@ -82,7 +82,7 @@ bool sdlSetErrorV(String? fmt) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_OutOfMemory(void)
@@ -123,7 +123,7 @@ bool sdlOutOfMemory() {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_ClearError
 /// \sa SDL_SetError
@@ -148,7 +148,7 @@ String? sdlGetError() {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_GetError
 /// \sa SDL_SetError

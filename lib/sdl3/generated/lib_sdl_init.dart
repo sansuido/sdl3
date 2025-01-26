@@ -49,7 +49,7 @@ import 'lib_sdl.dart';
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_SetAppMetadata
 /// \sa SDL_SetAppMetadataProperty
@@ -76,7 +76,7 @@ bool sdlInit(int flags) {
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_Init
 /// \sa SDL_Quit
@@ -100,7 +100,7 @@ bool sdlInitSubSystem(int flags) {
 ///
 /// \param flags any of the flags used by SDL_Init(); see SDL_Init for details.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_InitSubSystem
 /// \sa SDL_Quit
@@ -122,7 +122,7 @@ void sdlQuitSubSystem(int flags) {
 /// \returns a mask of all initialized subsystems if `flags` is 0, otherwise it
 /// returns the initialization status of the specified subsystems.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_Init
 /// \sa SDL_InitSubSystem
@@ -147,7 +147,7 @@ int sdlWasInit(int flags) {
 /// application is shutdown, but it is not wise to do this from a library or
 /// other dynamically loaded code.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_Init
 /// \sa SDL_QuitSubSystem
@@ -175,7 +175,7 @@ void sdlQuit() {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.8.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_RunOnMainThread
 ///
@@ -208,7 +208,7 @@ bool sdlIsMainThread() {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.8.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_IsMainThread
 ///
@@ -261,7 +261,7 @@ bool sdlRunOnMainThread(Pointer<NativeFunction<SdlMainThreadCallback>> callback,
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_SetAppMetadataProperty
 ///
@@ -345,7 +345,7 @@ bool sdlSetAppMetadata(
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_GetAppMetadataProperty
 /// \sa SDL_SetAppMetadata
@@ -383,7 +383,7 @@ bool sdlSetAppMetadataProperty(String? name, String? value) {
 /// freed if you call SDL_SetAppMetadataProperty() to set that
 /// property from another thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_SetAppMetadata
 /// \sa SDL_SetAppMetadataProperty

@@ -30,7 +30,7 @@ import 'struct_sdl.dart';
 /// new thread could not be created; call SDL_GetError() for more
 /// information.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_CreateThreadWithProperties
 /// \sa SDL_WaitThread
@@ -112,7 +112,7 @@ Pointer<SdlThread> sdlCreateThread(
 /// new thread could not be created; call SDL_GetError() for more
 /// information.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_CreateThread
 /// \sa SDL_WaitThread
@@ -139,7 +139,7 @@ Pointer<SdlThread> sdlCreateThreadWithProperties(int props) {
 /// new thread could not be created; call SDL_GetError() for more
 /// information.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC SDL_Thread * SDLCALL SDL_CreateThreadRuntime(SDL_ThreadFunction fn, const char *name, void *data, SDL_FunctionPointer pfnBeginThread, SDL_FunctionPointer pfnEndThread)
@@ -180,7 +180,7 @@ Pointer<SdlThread> sdlCreateThreadRuntime(
 /// new thread could not be created; call SDL_GetError() for more
 /// information.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC SDL_Thread * SDLCALL SDL_CreateThreadWithPropertiesRuntime(SDL_PropertiesID props, SDL_FunctionPointer pfnBeginThread, SDL_FunctionPointer pfnEndThread)
@@ -209,7 +209,7 @@ Pointer<SdlThread> sdlCreateThreadWithPropertiesRuntime(int props,
 /// \returns a pointer to a UTF-8 string that names the specified thread, or
 /// NULL if it doesn't have a name.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetThreadName(SDL_Thread *thread)
@@ -237,7 +237,7 @@ String? sdlGetThreadName(Pointer<SdlThread> thread) {
 ///
 /// \returns the ID of the current thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_GetThreadID
 ///
@@ -262,7 +262,7 @@ int sdlGetCurrentThreadId() {
 /// \returns the ID of the specified thread, or the ID of the current thread if
 /// `thread` is NULL.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_GetCurrentThreadID
 ///
@@ -287,7 +287,7 @@ int sdlGetThreadId(Pointer<SdlThread> thread) {
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetCurrentThreadPriority(SDL_ThreadPriority priority)
@@ -327,7 +327,7 @@ bool sdlSetCurrentThreadPriority(int priority) {
 /// function by its 'return', or -1 if the thread has been
 /// detached or isn't valid, may be NULL.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_CreateThread
 /// \sa SDL_DetachThread
@@ -350,7 +350,7 @@ void sdlWaitThread(Pointer<SdlThread> thread, Pointer<Int32> status) {
 /// \returns the current state of a thread, or SDL_THREAD_UNKNOWN if the thread
 /// isn't valid.
 ///
-/// \since This function is available since SDL 3.1.8.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_ThreadState
 ///
@@ -393,7 +393,7 @@ int sdlGetThreadState(Pointer<SdlThread> thread) {
 /// \param thread the SDL_Thread pointer that was returned from the
 /// SDL_CreateThread() call that started this thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_CreateThread
 /// \sa SDL_WaitThread
@@ -417,7 +417,7 @@ void sdlDetachThread(Pointer<SdlThread> thread) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_SetTLS
 ///
@@ -453,7 +453,7 @@ Pointer<NativeType> sdlGetTls(Pointer<SdlAtomicInt> id) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_GetTLS
 ///
@@ -479,7 +479,7 @@ bool sdlSetTls(Pointer<SdlAtomicInt> id, Pointer<NativeType> value,
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_CleanupTLS(void)

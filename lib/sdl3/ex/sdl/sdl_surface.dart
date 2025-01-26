@@ -18,7 +18,7 @@ extension SdlSurfaceEx on SdlSurface {
   /// \returns a pointer to a new SDL_Surface structure or NULL on failure; call
   /// SDL_GetError() for more information.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_DestroySurface
   /// \sa SDL_LoadBMP_IO
@@ -56,7 +56,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   ///
   /// \threadsafety This function should only be called on the main thread.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_CreateCursor
   /// \sa SDL_CreateSystemCursor
@@ -84,7 +84,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   ///
   /// \param surface the SDL_Surface to free.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_CreateSurface
   /// \sa SDL_CreateSurfaceFrom
@@ -110,7 +110,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_CreatePalette
   /// \sa SDL_GetSurfacePalette
@@ -138,7 +138,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_MUSTLOCK
   /// \sa SDL_UnlockSurface
@@ -155,7 +155,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   ///
   /// \param surface the SDL_Surface structure to be unlocked.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_LockSurface
   ///
@@ -178,7 +178,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// \returns a pointer to a new SDL_Surface structure or NULL on failure; call
   /// SDL_GetError() for more information.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_DestroySurface
   /// \sa SDL_LoadBMP
@@ -207,7 +207,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_LoadBMP_IO
   /// \sa SDL_SaveBMP
@@ -230,7 +230,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_BlitSurface
   /// \sa SDL_LockSurface
@@ -251,7 +251,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// \param surface the SDL_Surface structure to query.
   /// \returns true if the surface is RLE enabled, false otherwise.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_SetSurfaceRLE
   ///
@@ -278,7 +278,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_GetSurfaceColorKey
   /// \sa SDL_SetSurfaceRLE
@@ -299,7 +299,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// \param surface the SDL_Surface structure to query.
   /// \returns true if the surface has a color key, false otherwise.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_SetSurfaceColorKey
   /// \sa SDL_GetSurfaceColorKey
@@ -324,7 +324,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_SetSurfaceColorKey
   /// \sa SDL_SurfaceHasColorKey
@@ -358,7 +358,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_GetSurfaceColorMod
   /// \sa SDL_SetSurfaceAlphaMod
@@ -380,7 +380,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_GetSurfaceAlphaMod
   /// \sa SDL_SetSurfaceColorMod
@@ -418,7 +418,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_GetSurfaceAlphaMod
   /// \sa SDL_SetSurfaceColorMod
@@ -438,7 +438,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_GetSurfaceColorMod
   /// \sa SDL_SetSurfaceAlphaMod
@@ -468,7 +468,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_GetSurfaceBlendMode
   ///
@@ -487,7 +487,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_SetSurfaceBlendMode
   ///
@@ -519,7 +519,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// \returns true if the rectangle intersects the surface, otherwise false and
   /// blits will be completely clipped.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_GetSurfaceClipRect
   ///
@@ -549,7 +549,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_SetSurfaceClipRect
   ///
@@ -576,7 +576,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// \returns a copy of the surface or NULL on failure; call SDL_GetError() for
   /// more information.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_DestroySurface
   ///
@@ -609,7 +609,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_FillSurfaceRects
   ///
@@ -645,7 +645,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_FillSurfaceRect
   ///
@@ -730,7 +730,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// threads at once. It is safe to use the same source surface
   /// from multiple threads.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_BlitSurfaceScaled
   ///
@@ -775,7 +775,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// threads at once. It is safe to use the same source surface
   /// from multiple threads.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_BlitSurface
   ///
@@ -821,7 +821,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// threads at once. It is safe to use the same source surface
   /// from multiple threads.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_BlitSurface
   ///
@@ -867,7 +867,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// threads at once. It is safe to use the same source surface
   /// from multiple threads.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_BlitSurfaceScaled
   ///
@@ -916,7 +916,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_LoadBMP
   /// \sa SDL_SaveBMP_IO

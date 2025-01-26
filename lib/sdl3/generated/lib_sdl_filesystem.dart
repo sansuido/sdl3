@@ -39,7 +39,7 @@ import 'struct_sdl.dart';
 /// doesn't implement this functionality, call SDL_GetError() for more
 /// information.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_GetPrefPath
 ///
@@ -105,7 +105,7 @@ String? sdlGetBasePath() {
 /// etc.). This should be freed with SDL_free() when it is no longer
 /// needed.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_GetBasePath
 ///
@@ -146,7 +146,7 @@ Pointer<Int8> sdlGetPrefPath(String? org, String? app) {
 /// \returns either a null-terminated C string containing the full path to the
 /// folder, or NULL if an error happened.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetUserFolder(SDL_Folder folder)
@@ -174,7 +174,7 @@ String? sdlGetUserFolder(int folder) {
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_CreateDirectory(const char *path)
@@ -208,7 +208,7 @@ bool sdlCreateDirectory(String? path) {
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_EnumerateDirectory(const char *path, SDL_EnumerateDirectoryCallback callback, void *userdata)
@@ -243,7 +243,7 @@ bool sdlEnumerateDirectory(
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_RemovePath(const char *path)
@@ -277,7 +277,7 @@ bool sdlRemovePath(String? path) {
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_RenamePath(const char *oldpath, const char *newpath)
@@ -332,7 +332,7 @@ bool sdlRenamePath(String? oldpath, String? newpath) {
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_CopyFile(const char *oldpath, const char *newpath)
@@ -359,7 +359,7 @@ bool sdlCopyFile(String? oldpath, String? newpath) {
 /// \returns true on success or false if the file doesn't exist, or another
 /// failure; call SDL_GetError() for more information.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetPathInfo(const char *path, SDL_PathInfo *info)
@@ -404,7 +404,7 @@ bool sdlGetPathInfo(String? path, Pointer<SdlPathInfo> info) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC char ** SDLCALL SDL_GlobDirectory(const char *path, const char *pattern, SDL_GlobFlags flags, int *count)
@@ -442,7 +442,7 @@ Pointer<Pointer<Int8>> sdlGlobDirectory(
 /// platform-dependent notation. NULL if there's a problem. This
 /// should be freed with SDL_free() when it is no longer needed.
 ///
-/// \since This function is available since SDL 3.1.8.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC char * SDLCALL SDL_GetCurrentDirectory(void)

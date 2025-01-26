@@ -43,7 +43,7 @@ extension SdlCursorEx on SdlCursor {
   ///
   /// \threadsafety This function should only be called on the main thread.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_CreateColorCursor
   /// \sa SDL_CreateSystemCursor
@@ -79,7 +79,7 @@ extension SdlCursorEx on SdlCursor {
   ///
   /// \threadsafety This function should only be called on the main thread.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_CreateCursor
   /// \sa SDL_CreateSystemCursor
@@ -103,7 +103,7 @@ extension SdlCursorEx on SdlCursor {
   ///
   /// \threadsafety This function should only be called on the main thread.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_DestroyCursor
   ///
@@ -124,7 +124,7 @@ extension SdlCursorEx on SdlCursor {
   ///
   /// \threadsafety This function should only be called on the main thread.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_SetCursor
   ///
@@ -146,7 +146,7 @@ extension SdlCursorEx on SdlCursor {
   ///
   /// \threadsafety This function should only be called on the main thread.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// ```c
   /// extern SDL_DECLSPEC SDL_Cursor * SDLCALL SDL_GetDefaultCursor(void)
@@ -163,7 +163,7 @@ extension SdlCursorEx on SdlCursor {
   ///
   /// \threadsafety This function should only be called on the main thread.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_CursorVisible
   /// \sa SDL_HideCursor
@@ -183,7 +183,7 @@ extension SdlCursorEx on SdlCursor {
   ///
   /// \threadsafety This function should only be called on the main thread.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_CursorVisible
   /// \sa SDL_ShowCursor
@@ -213,7 +213,7 @@ extension SdlCursorPointerEx on Pointer<SdlCursor> {
   ///
   /// \threadsafety This function should only be called on the main thread.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_GetCursor
   ///
@@ -234,7 +234,7 @@ extension SdlCursorPointerEx on Pointer<SdlCursor> {
   ///
   /// \threadsafety This function should only be called on the main thread.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_CreateColorCursor
   /// \sa SDL_CreateCursor

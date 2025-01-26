@@ -22,7 +22,7 @@ import 'struct_sdl.dart';
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_GetAssertionHandler
 ///
@@ -53,7 +53,7 @@ void sdlSetAssertionHandler(
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_GetAssertionHandler
 ///
@@ -87,7 +87,7 @@ Pointer<NativeFunction<SdlAssertionHandler>> sdlGetDefaultAssertionHandler() {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_SetAssertionHandler
 ///
@@ -132,7 +132,7 @@ Pointer<NativeFunction<SdlAssertionHandler>> sdlGetAssertionHandler(
 /// SDL_ResetAssertionReport() simultaneously, may render the
 /// returned pointer invalid.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_ResetAssertionReport
 ///
@@ -158,7 +158,7 @@ Pointer<SdlAssertData> sdlGetAssertionReport() {
 /// assertion, or simultaneously calling this function may cause
 /// memory leaks or crashes.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_GetAssertionReport
 ///

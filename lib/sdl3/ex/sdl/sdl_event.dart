@@ -20,7 +20,7 @@ extension SdlEventEx on SdlEvent {
   ///
   /// \threadsafety This function should only be called on the main thread.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_PollEvent
   /// \sa SDL_WaitEvent
@@ -44,7 +44,7 @@ extension SdlEventEx on SdlEvent {
   ///
   /// \threadsafety It is safe to call this function from any thread.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_HasEvents
   ///
@@ -69,7 +69,7 @@ extension SdlEventEx on SdlEvent {
   ///
   /// \threadsafety It is safe to call this function from any thread.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_HasEvents
   ///
@@ -102,7 +102,7 @@ extension SdlEventEx on SdlEvent {
   ///
   /// \threadsafety It is safe to call this function from any thread.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_FlushEvents
   ///
@@ -134,7 +134,7 @@ extension SdlEventEx on SdlEvent {
   ///
   /// \threadsafety It is safe to call this function from any thread.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_FlushEvent
   ///
@@ -187,7 +187,7 @@ extension SdlEventPointerEx on Pointer<SdlEvent> {
   ///
   /// \threadsafety It is safe to call this function from any thread.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_PollEvent
   /// \sa SDL_PumpEvents
@@ -238,7 +238,7 @@ extension SdlEventPointerEx on Pointer<SdlEvent> {
   ///
   /// \threadsafety This function should only be called on the main thread.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_PushEvent
   /// \sa SDL_WaitEvent
@@ -267,7 +267,7 @@ extension SdlEventPointerEx on Pointer<SdlEvent> {
   ///
   /// \threadsafety This function should only be called on the main thread.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_PollEvent
   /// \sa SDL_PushEvent
@@ -302,7 +302,7 @@ extension SdlEventPointerEx on Pointer<SdlEvent> {
   ///
   /// \threadsafety This function should only be called on the main thread.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_PollEvent
   /// \sa SDL_PushEvent
@@ -341,7 +341,7 @@ extension SdlEventPointerEx on Pointer<SdlEvent> {
   ///
   /// \threadsafety It is safe to call this function from any thread.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_PeepEvents
   /// \sa SDL_PollEvent

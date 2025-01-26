@@ -51,7 +51,7 @@ extension PointEx on math.Point<double> {
   ///
   /// \threadsafety This function should only be called on the main thread.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_GetGlobalMouseState
   /// \sa SDL_GetRelativeMouseState
@@ -98,7 +98,7 @@ extension PointEx on math.Point<double> {
   ///
   /// \threadsafety This function should only be called on the main thread.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_CaptureMouse
   /// \sa SDL_GetMouseState
@@ -145,7 +145,7 @@ extension PointEx on math.Point<double> {
   ///
   /// \threadsafety This function should only be called on the main thread.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_GetMouseState
   /// \sa SDL_GetGlobalMouseState
@@ -220,7 +220,7 @@ extension PointsEx on List<math.Point<double>> {
   /// \returns true if any points were enclosed or false if all the points were
   /// outside of the clipping rectangle.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRectEnclosingPoints(const SDL_Point *points, int count, const SDL_Rect *clip, SDL_Rect *result)

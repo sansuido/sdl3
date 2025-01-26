@@ -10,7 +10,7 @@ import 'lib_sdl.dart';
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC Uint64 SDLCALL SDL_GetTicks(void)
@@ -29,7 +29,7 @@ int sdlGetTicks() {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC Uint64 SDLCALL SDL_GetTicksNS(void)
@@ -53,7 +53,7 @@ int sdlGetTicksNs() {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_GetPerformanceFrequency
 ///
@@ -74,7 +74,7 @@ int sdlGetPerformanceCounter() {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_GetPerformanceCounter
 ///
@@ -99,7 +99,10 @@ int sdlGetPerformanceFrequency() {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
+///
+/// \sa SDL_DelayNS
+/// \sa SDL_DelayPrecise
 ///
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_Delay(Uint32 ms)
@@ -122,7 +125,10 @@ void sdlDelay(int ms) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
+///
+/// \sa SDL_Delay
+/// \sa SDL_DelayPrecise
 ///
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_DelayNS(Uint64 ns)
@@ -145,7 +151,10 @@ void sdlDelayNs(int ns) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.6.
+/// \since This function is available since SDL 3.2.0.
+///
+/// \sa SDL_Delay
+/// \sa SDL_DelayNS
 ///
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_DelayPrecise(Uint64 ns)
@@ -186,7 +195,7 @@ void sdlDelayPrecise(int ns) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_AddTimerNS
 /// \sa SDL_RemoveTimer
@@ -239,7 +248,7 @@ int sdlAddTimer(
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_AddTimer
 /// \sa SDL_RemoveTimer
@@ -272,7 +281,7 @@ int sdlAddTimerNs(
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_AddTimer
 ///

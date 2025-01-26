@@ -11,7 +11,7 @@ import 'struct_sdl.dart';
 /// \param pszGUID buffer in which to write the ASCII string.
 /// \param cbGUID the size of pszGUID, should be at least 33 bytes.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_StringToGUID
 ///
@@ -36,7 +36,7 @@ void sdlGuidToString(SdlGuid guid, Pointer<Int8> pszGuid, int cbGuid) {
 /// \param pchGUID string containing an ASCII representation of a GUID.
 /// \returns a SDL_GUID structure.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_GUIDToString
 ///

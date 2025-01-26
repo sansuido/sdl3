@@ -11,7 +11,7 @@ import 'lib_sdl.dart';
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_GetNumLogicalCPUCores(void)
@@ -33,7 +33,7 @@ int sdlGetNumLogicalCpuCores() {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_GetCPUCacheLineSize(void)
@@ -55,7 +55,7 @@ int sdlGetCpuCacheLineSize() {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_HasAltiVec(void)
@@ -75,7 +75,7 @@ bool sdlHasAltiVec() {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_HasMMX(void)
@@ -95,7 +95,7 @@ bool sdlHasMmx() {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_HasSSE2
 /// \sa SDL_HasSSE3
@@ -120,7 +120,7 @@ bool sdlHasSse() {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_HasSSE
 /// \sa SDL_HasSSE3
@@ -145,7 +145,7 @@ bool sdlHasSse2() {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_HasSSE
 /// \sa SDL_HasSSE2
@@ -170,7 +170,7 @@ bool sdlHasSse3() {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_HasSSE
 /// \sa SDL_HasSSE2
@@ -195,7 +195,7 @@ bool sdlHasSse41() {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_HasSSE
 /// \sa SDL_HasSSE2
@@ -220,7 +220,7 @@ bool sdlHasSse42() {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_HasAVX2
 /// \sa SDL_HasAVX512F
@@ -243,7 +243,7 @@ bool sdlHasAvx() {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_HasAVX
 /// \sa SDL_HasAVX512F
@@ -266,7 +266,7 @@ bool sdlHasAvx2() {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_HasAVX
 /// \sa SDL_HasAVX2
@@ -291,7 +291,7 @@ bool sdlHasAvx512F() {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_HasNEON
 ///
@@ -313,7 +313,7 @@ bool sdlHasArmsimd() {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_HasNEON(void)
@@ -334,7 +334,7 @@ bool sdlHasNeon() {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_HasLSX(void)
@@ -355,7 +355,7 @@ bool sdlHasLsx() {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_HasLASX(void)
@@ -373,7 +373,7 @@ bool sdlHasLasx() {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_GetSystemRAM(void)
@@ -401,7 +401,7 @@ int sdlGetSystemRam() {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_aligned_alloc
 /// \sa SDL_aligned_free

@@ -12,7 +12,7 @@ import 'lib_sdl.dart';
 ///
 /// \threadsafety This function should only be called on the main thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_GetClipboardText
 /// \sa SDL_HasClipboardText
@@ -42,7 +42,7 @@ bool sdlSetClipboardText(String? text) {
 ///
 /// \threadsafety This function should only be called on the main thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_HasClipboardText
 /// \sa SDL_SetClipboardText
@@ -64,7 +64,7 @@ Pointer<Int8> sdlGetClipboardText() {
 ///
 /// \threadsafety This function should only be called on the main thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_GetClipboardText
 /// \sa SDL_SetClipboardText
@@ -87,7 +87,7 @@ bool sdlHasClipboardText() {
 ///
 /// \threadsafety This function should only be called on the main thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_GetPrimarySelectionText
 /// \sa SDL_HasPrimarySelectionText
@@ -117,7 +117,7 @@ bool sdlSetPrimarySelectionText(String? text) {
 ///
 /// \threadsafety This function should only be called on the main thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_HasPrimarySelectionText
 /// \sa SDL_SetPrimarySelectionText
@@ -140,7 +140,7 @@ Pointer<Int8> sdlGetPrimarySelectionText() {
 ///
 /// \threadsafety This function should only be called on the main thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_GetPrimarySelectionText
 /// \sa SDL_SetPrimarySelectionText
@@ -179,7 +179,7 @@ bool sdlHasPrimarySelectionText() {
 ///
 /// \threadsafety This function should only be called on the main thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_ClearClipboardData
 /// \sa SDL_GetClipboardData
@@ -220,7 +220,7 @@ bool sdlSetClipboardData(
 ///
 /// \threadsafety This function should only be called on the main thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_SetClipboardData
 ///
@@ -248,7 +248,7 @@ bool sdlClearClipboardData() {
 ///
 /// \threadsafety This function should only be called on the main thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_HasClipboardData
 /// \sa SDL_SetClipboardData
@@ -278,7 +278,7 @@ Pointer<NativeType> sdlGetClipboardData(
 ///
 /// \threadsafety This function should only be called on the main thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_SetClipboardData
 /// \sa SDL_GetClipboardData
@@ -307,7 +307,7 @@ bool sdlHasClipboardData(String? mimeType) {
 ///
 /// \threadsafety This function should only be called on the main thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_SetClipboardData
 ///

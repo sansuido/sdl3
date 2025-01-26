@@ -13,7 +13,7 @@ import 'struct_sdl.dart';
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetPixelFormatName(SDL_PixelFormat format)
@@ -43,7 +43,7 @@ String? sdlGetPixelFormatName(int format) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_GetPixelFormatForMasks
 ///
@@ -88,7 +88,7 @@ bool sdlGetMasksForPixelFormat(
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_GetMasksForPixelFormat
 ///
@@ -119,7 +119,7 @@ int sdlGetPixelFormatForMasks(
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC const SDL_PixelFormatDetails * SDLCALL SDL_GetPixelFormatDetails(SDL_PixelFormat format)
@@ -144,7 +144,7 @@ Pointer<SdlPixelFormatDetails> sdlGetPixelFormatDetails(int format) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_DestroyPalette
 /// \sa SDL_SetPaletteColors
@@ -173,7 +173,7 @@ Pointer<SdlPalette> sdlCreatePalette(int ncolors) {
 /// \threadsafety It is safe to call this function from any thread, as long as
 /// the palette is not modified or destroyed in another thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetPaletteColors(SDL_Palette *palette, const SDL_Color *colors, int firstcolor, int ncolors)
@@ -198,7 +198,7 @@ bool sdlSetPaletteColors(Pointer<SdlPalette> palette, Pointer<SdlColor> colors,
 /// \threadsafety It is safe to call this function from any thread, as long as
 /// the palette is not modified or destroyed in another thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_CreatePalette
 ///
@@ -241,7 +241,7 @@ void sdlDestroyPalette(Pointer<SdlPalette> palette) {
 /// \threadsafety It is safe to call this function from any thread, as long as
 /// the palette is not modified.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_GetPixelFormatDetails
 /// \sa SDL_GetRGB
@@ -291,7 +291,7 @@ int sdlMapRgb(Pointer<SdlPixelFormatDetails> format,
 /// \threadsafety It is safe to call this function from any thread, as long as
 /// the palette is not modified.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_GetPixelFormatDetails
 /// \sa SDL_GetRGBA
@@ -335,7 +335,7 @@ int sdlMapRgba(Pointer<SdlPixelFormatDetails> format,
 /// \threadsafety It is safe to call this function from any thread, as long as
 /// the palette is not modified.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_GetPixelFormatDetails
 /// \sa SDL_GetRGBA
@@ -393,7 +393,7 @@ void sdlGetRgb(
 /// \threadsafety It is safe to call this function from any thread, as long as
 /// the palette is not modified.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_GetPixelFormatDetails
 /// \sa SDL_GetRGB

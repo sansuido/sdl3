@@ -17,7 +17,7 @@ import 'struct_sdl.dart';
 /// SDL_GetError() for more information. This should be freed with
 /// SDL_free() when it is no longer needed.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC SDL_TouchID * SDLCALL SDL_GetTouchDevices(int *count)
@@ -36,7 +36,7 @@ Pointer<Uint64> sdlGetTouchDevices(Pointer<Int32> count) {
 /// \returns touch device name, or NULL on failure; call SDL_GetError() for
 /// more information.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetTouchDeviceName(SDL_TouchID touchID)
@@ -58,7 +58,7 @@ String? sdlGetTouchDeviceName(int touchId) {
 /// \param touchID the ID of a touch device.
 /// \returns touch device type.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC SDL_TouchDeviceType SDLCALL SDL_GetTouchDeviceType(SDL_TouchID touchID)
@@ -81,7 +81,7 @@ int sdlGetTouchDeviceType(int touchId) {
 /// allocation that should be freed with SDL_free() when it is no
 /// longer needed.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC SDL_Finger ** SDLCALL SDL_GetTouchFingers(SDL_TouchID touchID, int *count)

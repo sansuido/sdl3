@@ -18,7 +18,7 @@ import 'struct_sdl.dart';
 ///
 /// \threadsafety This function should only be called on the main thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_PollEvent
 /// \sa SDL_WaitEvent
@@ -68,7 +68,7 @@ void sdlPumpEvents() {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_PollEvent
 /// \sa SDL_PumpEvents
@@ -100,7 +100,7 @@ int sdlPeepEvents(Pointer<SdlEvent> events, int numevents, int action,
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_HasEvents
 ///
@@ -127,7 +127,7 @@ bool sdlHasEvent(int type) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_HasEvents
 ///
@@ -163,7 +163,7 @@ bool sdlHasEvents(int minType, int maxType) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_FlushEvents
 ///
@@ -197,7 +197,7 @@ void sdlFlushEvent(int type) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_FlushEvent
 ///
@@ -249,7 +249,7 @@ void sdlFlushEvents(int minType, int maxType) {
 ///
 /// \threadsafety This function should only be called on the main thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_PushEvent
 /// \sa SDL_WaitEvent
@@ -281,7 +281,7 @@ bool sdlPollEvent(Pointer<SdlEvent> event) {
 ///
 /// \threadsafety This function should only be called on the main thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_PollEvent
 /// \sa SDL_PushEvent
@@ -319,7 +319,7 @@ bool sdlWaitEvent(Pointer<SdlEvent> event) {
 ///
 /// \threadsafety This function should only be called on the main thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_PollEvent
 /// \sa SDL_PushEvent
@@ -362,7 +362,7 @@ bool sdlWaitEventTimeout(Pointer<SdlEvent> event, int timeoutMs) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_PeepEvents
 /// \sa SDL_PollEvent
@@ -409,7 +409,7 @@ bool sdlPushEvent(Pointer<SdlEvent> event) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_AddEventWatch
 /// \sa SDL_SetEventEnabled
@@ -443,7 +443,7 @@ void sdlSetEventFilter(Pointer<NativeFunction<SdlEventFilter>> filter,
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_SetEventFilter
 ///
@@ -485,7 +485,7 @@ bool sdlGetEventFilter(Pointer<Pointer<NativeFunction<SdlEventFilter>>> filter,
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_RemoveEventWatch
 /// \sa SDL_SetEventFilter
@@ -514,7 +514,7 @@ bool sdlAddEventWatch(Pointer<NativeFunction<SdlEventFilter>> filter,
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_AddEventWatch
 ///
@@ -544,7 +544,7 @@ void sdlRemoveEventWatch(Pointer<NativeFunction<SdlEventFilter>> filter,
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_GetEventFilter
 /// \sa SDL_SetEventFilter
@@ -570,7 +570,7 @@ void sdlFilterEvents(Pointer<NativeFunction<SdlEventFilter>> filter,
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_EventEnabled
 ///
@@ -592,7 +592,7 @@ void sdlSetEventEnabled(int type, bool enabled) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_SetEventEnabled
 ///
@@ -615,7 +615,7 @@ bool sdlEventEnabled(int type) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_PushEvent
 ///
@@ -637,7 +637,7 @@ int sdlRegisterEvents(int numevents) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_PollEvent
 /// \sa SDL_WaitEvent

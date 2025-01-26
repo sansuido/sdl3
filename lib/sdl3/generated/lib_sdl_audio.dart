@@ -21,7 +21,7 @@ import 'struct_sdl.dart';
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_GetAudioDriver
 ///
@@ -53,7 +53,7 @@ int sdlGetNumAudioDrivers() {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_GetNumAudioDrivers
 ///
@@ -83,7 +83,7 @@ String? sdlGetAudioDriver(int index) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetCurrentAudioDriver(void)
@@ -121,7 +121,7 @@ String? sdlGetCurrentAudioDriver() {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_OpenAudioDevice
 /// \sa SDL_GetAudioRecordingDevices
@@ -159,7 +159,7 @@ Pointer<Uint32> sdlGetAudioPlaybackDevices(Pointer<Int32> count) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_OpenAudioDevice
 /// \sa SDL_GetAudioPlaybackDevices
@@ -184,7 +184,7 @@ Pointer<Uint32> sdlGetAudioRecordingDevices(Pointer<Int32> count) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_GetAudioPlaybackDevices
 /// \sa SDL_GetAudioRecordingDevices
@@ -234,7 +234,7 @@ String? sdlGetAudioDeviceName(int devid) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetAudioDeviceFormat(SDL_AudioDeviceID devid, SDL_AudioSpec *spec, int *sample_frames)
@@ -266,7 +266,7 @@ bool sdlGetAudioDeviceFormat(
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_SetAudioStreamInputChannelMap
 ///
@@ -350,7 +350,7 @@ Pointer<Int32> sdlGetAudioDeviceChannelMap(int devid, Pointer<Int32> count) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_CloseAudioDevice
 /// \sa SDL_GetAudioDeviceFormat
@@ -387,7 +387,7 @@ int sdlOpenAudioDevice(int devid, Pointer<SdlAudioSpec> spec) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.8.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_IsAudioDevicePhysical(SDL_AudioDeviceID devid)
@@ -409,7 +409,7 @@ bool sdlIsAudioDevicePhysical(int devid) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.8.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_IsAudioDevicePlayback(SDL_AudioDeviceID devid)
@@ -445,7 +445,7 @@ bool sdlIsAudioDevicePlayback(int devid) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_ResumeAudioDevice
 /// \sa SDL_AudioDevicePaused
@@ -481,7 +481,7 @@ bool sdlPauseAudioDevice(int dev) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_AudioDevicePaused
 /// \sa SDL_PauseAudioDevice
@@ -511,7 +511,7 @@ bool sdlResumeAudioDevice(int dev) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_PauseAudioDevice
 /// \sa SDL_ResumeAudioDevice
@@ -543,7 +543,7 @@ bool sdlAudioDevicePaused(int dev) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_SetAudioDeviceGain
 ///
@@ -586,7 +586,7 @@ double sdlGetAudioDeviceGain(int devid) {
 /// \threadsafety It is safe to call this function from any thread, as it holds
 /// a stream-specific mutex while running.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_GetAudioDeviceGain
 ///
@@ -615,7 +615,7 @@ bool sdlSetAudioDeviceGain(int devid, double gain) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_OpenAudioDevice
 ///
@@ -658,7 +658,7 @@ void sdlCloseAudioDevice(int devid) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_BindAudioStreams
 /// \sa SDL_UnbindAudioStream
@@ -690,7 +690,7 @@ bool sdlBindAudioStreams(
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_BindAudioStreams
 /// \sa SDL_UnbindAudioStream
@@ -722,7 +722,7 @@ bool sdlBindAudioStream(int devid, Pointer<SdlAudioStream> stream) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_BindAudioStreams
 ///
@@ -748,7 +748,7 @@ void sdlUnbindAudioStreams(
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_BindAudioStream
 ///
@@ -775,7 +775,7 @@ void sdlUnbindAudioStream(Pointer<SdlAudioStream> stream) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_BindAudioStream
 /// \sa SDL_BindAudioStreams
@@ -800,7 +800,7 @@ int sdlGetAudioStreamDevice(Pointer<SdlAudioStream> stream) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_PutAudioStreamData
 /// \sa SDL_GetAudioStreamData
@@ -832,7 +832,7 @@ Pointer<SdlAudioStream> sdlCreateAudioStream(
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC SDL_PropertiesID SDLCALL SDL_GetAudioStreamProperties(SDL_AudioStream *stream)
@@ -857,7 +857,7 @@ int sdlGetAudioStreamProperties(Pointer<SdlAudioStream> stream) {
 /// \threadsafety It is safe to call this function from any thread, as it holds
 /// a stream-specific mutex while running.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_SetAudioStreamFormat
 ///
@@ -906,7 +906,7 @@ bool sdlGetAudioStreamFormat(Pointer<SdlAudioStream> stream,
 /// \threadsafety It is safe to call this function from any thread, as it holds
 /// a stream-specific mutex while running.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_GetAudioStreamFormat
 /// \sa SDL_SetAudioStreamFrequencyRatio
@@ -936,7 +936,7 @@ bool sdlSetAudioStreamFormat(Pointer<SdlAudioStream> stream,
 /// \threadsafety It is safe to call this function from any thread, as it holds
 /// a stream-specific mutex while running.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_SetAudioStreamFrequencyRatio
 ///
@@ -972,7 +972,7 @@ double sdlGetAudioStreamFrequencyRatio(Pointer<SdlAudioStream> stream) {
 /// \threadsafety It is safe to call this function from any thread, as it holds
 /// a stream-specific mutex while running.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_GetAudioStreamFrequencyRatio
 /// \sa SDL_SetAudioStreamFormat
@@ -1004,7 +1004,7 @@ bool sdlSetAudioStreamFrequencyRatio(
 /// \threadsafety It is safe to call this function from any thread, as it holds
 /// a stream-specific mutex while running.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_SetAudioStreamGain
 ///
@@ -1038,7 +1038,7 @@ double sdlGetAudioStreamGain(Pointer<SdlAudioStream> stream) {
 /// \threadsafety It is safe to call this function from any thread, as it holds
 /// a stream-specific mutex while running.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_GetAudioStreamGain
 ///
@@ -1071,7 +1071,7 @@ bool sdlSetAudioStreamGain(Pointer<SdlAudioStream> stream, double gain) {
 /// \threadsafety It is safe to call this function from any thread, as it holds
 /// a stream-specific mutex while running.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_SetAudioStreamInputChannelMap
 ///
@@ -1106,7 +1106,7 @@ Pointer<Int32> sdlGetAudioStreamInputChannelMap(
 /// \threadsafety It is safe to call this function from any thread, as it holds
 /// a stream-specific mutex while running.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_SetAudioStreamInputChannelMap
 ///
@@ -1178,7 +1178,7 @@ Pointer<Int32> sdlGetAudioStreamOutputChannelMap(
 /// stream's format to have a different number of channels from a
 /// a different thread at the same time, though!
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_SetAudioStreamInputChannelMap
 ///
@@ -1248,7 +1248,7 @@ bool sdlSetAudioStreamInputChannelMap(
 /// stream's format to have a different number of channels from a
 /// a different thread at the same time, though!
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_SetAudioStreamInputChannelMap
 ///
@@ -1289,7 +1289,7 @@ bool sdlSetAudioStreamOutputChannelMap(
 /// stream has a callback set, the caller might need to manage
 /// extra locking.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_ClearAudioStream
 /// \sa SDL_FlushAudioStream
@@ -1331,7 +1331,7 @@ bool sdlPutAudioStreamData(
 /// stream has a callback set, the caller might need to manage
 /// extra locking.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_ClearAudioStream
 /// \sa SDL_GetAudioStreamAvailable
@@ -1369,7 +1369,7 @@ int sdlGetAudioStreamData(
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_GetAudioStreamData
 /// \sa SDL_PutAudioStreamData
@@ -1416,7 +1416,7 @@ int sdlGetAudioStreamAvailable(Pointer<SdlAudioStream> stream) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_PutAudioStreamData
 /// \sa SDL_ClearAudioStream
@@ -1445,7 +1445,7 @@ int sdlGetAudioStreamQueued(Pointer<SdlAudioStream> stream) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_PutAudioStreamData
 ///
@@ -1471,7 +1471,7 @@ bool sdlFlushAudioStream(Pointer<SdlAudioStream> stream) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_GetAudioStreamAvailable
 /// \sa SDL_GetAudioStreamData
@@ -1506,7 +1506,7 @@ bool sdlClearAudioStream(Pointer<SdlAudioStream> stream) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_ResumeAudioStreamDevice
 ///
@@ -1535,7 +1535,7 @@ bool sdlPauseAudioStreamDevice(Pointer<SdlAudioStream> stream) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_PauseAudioStreamDevice
 ///
@@ -1562,7 +1562,7 @@ bool sdlResumeAudioStreamDevice(Pointer<SdlAudioStream> stream) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.10.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_PauseAudioStreamDevice
 /// \sa SDL_ResumeAudioStreamDevice
@@ -1600,7 +1600,7 @@ bool sdlAudioStreamDevicePaused(Pointer<SdlAudioStream> stream) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_UnlockAudioStream
 ///
@@ -1626,7 +1626,7 @@ bool sdlLockAudioStream(Pointer<SdlAudioStream> stream) {
 /// \threadsafety You should only call this from the same thread that
 /// previously called SDL_LockAudioStream.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_LockAudioStream
 ///
@@ -1680,7 +1680,7 @@ bool sdlUnlockAudioStream(Pointer<SdlAudioStream> stream) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_SetAudioStreamPutCallback
 ///
@@ -1748,7 +1748,7 @@ bool sdlSetAudioStreamGetCallback(
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_SetAudioStreamGetCallback
 ///
@@ -1788,7 +1788,7 @@ bool sdlSetAudioStreamPutCallback(
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_CreateAudioStream
 ///
@@ -1857,7 +1857,7 @@ void sdlDestroyAudioStream(Pointer<SdlAudioStream> stream) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_GetAudioStreamDevice
 /// \sa SDL_ResumeAudioStreamDevice
@@ -1935,7 +1935,7 @@ Pointer<SdlAudioStream> sdlOpenAudioDeviceStream(
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetAudioPostmixCallback(SDL_AudioDeviceID devid, SDL_AudioPostmixCallback callback, void *userdata)
@@ -2030,7 +2030,7 @@ bool sdlSetAudioPostmixCallback(
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_free
 /// \sa SDL_LoadWAV
@@ -2091,7 +2091,7 @@ bool sdlLoadWavIo(
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_free
 /// \sa SDL_LoadWAV_IO
@@ -2148,7 +2148,7 @@ bool sdlLoadWav(String? path, Pointer<SdlAudioSpec> spec,
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_MixAudio(Uint8 *dst, const Uint8 *src, SDL_AudioFormat format, Uint32 len, float volume)
@@ -2189,7 +2189,7 @@ bool sdlMixAudio(Pointer<Uint8> dst, Pointer<Uint8> src, int format, int len,
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_ConvertAudioSamples(const SDL_AudioSpec *src_spec, const Uint8 *src_data, int src_len, const SDL_AudioSpec *dst_spec, Uint8 **dst_data, int *dst_len)
@@ -2230,7 +2230,7 @@ bool sdlConvertAudioSamples(
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetAudioFormatName(SDL_AudioFormat format)
@@ -2258,7 +2258,7 @@ String? sdlGetAudioFormatName(int format) {
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_GetSilenceValueForFormat(SDL_AudioFormat format)

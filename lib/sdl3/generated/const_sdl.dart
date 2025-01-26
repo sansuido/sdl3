@@ -853,6 +853,7 @@ const SDL_HINT_MAC_BACKGROUND_APP = 'SDL_MAC_BACKGROUND_APP';
 const SDL_HINT_MAC_CTRL_CLICK_EMULATE_RIGHT_CLICK =
     'SDL_MAC_CTRL_CLICK_EMULATE_RIGHT_CLICK';
 const SDL_HINT_MAC_OPENGL_ASYNC_DISPATCH = 'SDL_MAC_OPENGL_ASYNC_DISPATCH';
+const SDL_HINT_MAC_OPTION_AS_ALT = 'SDL_MAC_OPTION_AS_ALT';
 const SDL_HINT_MAC_SCROLL_MOMENTUM = 'SDL_MAC_SCROLL_MOMENTUM';
 const SDL_HINT_MAIN_CALLBACK_RATE = 'SDL_MAIN_CALLBACK_RATE';
 const SDL_HINT_MOUSE_AUTO_CAPTURE = 'SDL_MOUSE_AUTO_CAPTURE';
@@ -1409,6 +1410,7 @@ const SDL_MAIN_HANDLED = 1;
 const SDL_MAIN_USE_CALLBACKS = 1;
 //const SDL_MAIN_AVAILABLE = ;
 //const SDL_MAIN_NEEDED = ;
+//const SDL_PLATFORM_PRIVATE_MAIN = ;
 //const SDL_MAIN_EXPORTED = ;
 //const SDL_PS2_SKIP_IOP_RESET = () void reset_IOP(); void reset_IOP() {};
 //const SDLMAIN_DECLSPEC = ;
@@ -2405,8 +2407,8 @@ const SDL_TRAYENTRY_DISABLED = 0x80000000;
 const SDL_TRAYENTRY_CHECKED = 0x40000000;
 //const SDL_version_h_ = ;
 const SDL_MAJOR_VERSION = 3;
-const SDL_MINOR_VERSION = 1;
-const SDL_MICRO_VERSION = 11;
+const SDL_MINOR_VERSION = 2;
+const SDL_MICRO_VERSION = 1;
 //const SDL_VERSIONNUM = (major, minor, patch) ((major) * 1000000 + (minor) * 1000 + (patch));
 //const SDL_VERSIONNUM_MAJOR = (version) ((version) / 1000000);
 //const SDL_VERSIONNUM_MINOR = (version) (((version) / 1000) % 1000);
@@ -3448,6 +3450,7 @@ class SdlkHint {
   static const macCtrlClickEmulateRightClick =
       SDL_HINT_MAC_CTRL_CLICK_EMULATE_RIGHT_CLICK;
   static const macOpenglAsyncDispatch = SDL_HINT_MAC_OPENGL_ASYNC_DISPATCH;
+  static const macOptionAsAlt = SDL_HINT_MAC_OPTION_AS_ALT;
   static const macScrollMomentum = SDL_HINT_MAC_SCROLL_MOMENTUM;
   static const mainCallbackRate = SDL_HINT_MAIN_CALLBACK_RATE;
   static const mouseAutoCapture = SDL_HINT_MOUSE_AUTO_CAPTURE;

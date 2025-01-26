@@ -2400,6 +2400,8 @@ int ttfGetTextProperties(Pointer<TtfText> text) {
 ///
 /// Set the text engine used by a text object.
 ///
+/// This function may cause the internal text representation to be rebuilt.
+///
 /// \param text the TTF_Text to modify.
 /// \param engine the text engine to use for drawing.
 /// \returns true on success or false on failure; call SDL_GetError() for more
@@ -2454,6 +2456,8 @@ Pointer<TtfTextEngine> ttfGetTextEngine(Pointer<TtfText> text) {
 /// When a text object has a font, any changes to the font will automatically
 /// regenerate the text. If you set the font to NULL, the text will continue to
 /// render but changes to the font will no longer affect the text.
+///
+/// This function may cause the internal text representation to be rebuilt.
 ///
 /// \param text the TTF_Text to modify.
 /// \param font the font to use, may be NULL.
@@ -2645,6 +2649,8 @@ bool ttfGetTextColorFloat(Pointer<TtfText> text, Pointer<Float> r,
 /// This can be used to position multiple text objects within a single wrapping
 /// text area.
 ///
+/// This function may cause the internal text representation to be rebuilt.
+///
 /// \param text the TTF_Text to modify.
 /// \param x the x offset of the upper left corner of this text in pixels.
 /// \param y the y offset of the upper left corner of this text in pixels.
@@ -2696,6 +2702,8 @@ bool ttfGetTextPosition(
 
 ///
 /// Set whether wrapping is enabled on a text object.
+///
+/// This function may cause the internal text representation to be rebuilt.
 ///
 /// \param text the TTF_Text to modify.
 /// \param wrap_width the maximum width in pixels, 0 to wrap on newline
@@ -2756,6 +2764,8 @@ bool ttfGetTextWrapWidth(Pointer<TtfText> text, Pointer<Int32> wrapWidth) {
 /// centered or aligned if whitespace around line wrapping is hidden. This
 /// defaults false.
 ///
+/// This function may cause the internal text representation to be rebuilt.
+///
 /// \param text the TTF_Text to modify.
 /// \param visible true to show whitespace when wrapping text, false to hide
 /// it.
@@ -2809,6 +2819,8 @@ bool ttfTextWrapWhitespaceVisible(Pointer<TtfText> text) {
 ///
 /// Set the UTF-8 text used by a text object.
 ///
+/// This function may cause the internal text representation to be rebuilt.
+///
 /// \param text the TTF_Text to modify.
 /// \param string the UTF-8 text to use, may be NULL.
 /// \param length the length of the text, in bytes, or 0 for null terminated
@@ -2843,6 +2855,8 @@ bool ttfSetTextString(Pointer<TtfText> text, String? string, int length) {
 
 ///
 /// Insert UTF-8 text into a text object.
+///
+/// This function may cause the internal text representation to be rebuilt.
 ///
 /// \param text the TTF_Text to modify.
 /// \param offset the offset, in bytes, from the beginning of the string if >=
@@ -2885,6 +2899,8 @@ bool ttfInsertTextString(
 ///
 /// Append UTF-8 text to a text object.
 ///
+/// This function may cause the internal text representation to be rebuilt.
+///
 /// \param text the TTF_Text to modify.
 /// \param string the UTF-8 text to insert.
 /// \param length the length of the text, in bytes, or 0 for null terminated
@@ -2919,6 +2935,8 @@ bool ttfAppendTextString(Pointer<TtfText> text, String? string, int length) {
 
 ///
 /// Delete UTF-8 text from a text object.
+///
+/// This function may cause the internal text representation to be rebuilt.
 ///
 /// \param text the TTF_Text to modify.
 /// \param offset the offset, in bytes, from the beginning of the string if >=

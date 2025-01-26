@@ -18,7 +18,7 @@ import 'struct_sdl.dart';
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetDateTimeLocalePreferences(SDL_DateFormat *dateFormat, SDL_TimeFormat *timeFormat)
@@ -42,7 +42,7 @@ bool sdlGetDateTimeLocalePreferences(
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetCurrentTime(SDL_Time *ticks)
@@ -66,7 +66,7 @@ bool sdlGetCurrentTime(Pointer<Int64> ticks) {
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_TimeToDateTime(SDL_Time ticks, SDL_DateTime *dt, bool localTime)
@@ -90,7 +90,7 @@ bool sdlTimeToDateTime(int ticks, Pointer<SdlDateTime> dt, bool localTime) {
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_DateTimeToTime(const SDL_DateTime *dt, SDL_Time *ticks)
@@ -115,7 +115,7 @@ bool sdlDateTimeToTime(Pointer<SdlDateTime> dt, Pointer<Int64> ticks) {
 /// \param dwHighDateTime a pointer filled in with the high portion of the
 /// Windows FILETIME value.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_TimeToWindows(SDL_Time ticks, Uint32 *dwLowDateTime, Uint32 *dwHighDateTime)
@@ -141,7 +141,7 @@ void sdlTimeToWindows(
 /// \param dwHighDateTime the high portion of the Windows FILETIME value.
 /// \returns the converted SDL time.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC SDL_Time SDLCALL SDL_TimeFromWindows(Uint32 dwLowDateTime, Uint32 dwHighDateTime)
@@ -162,7 +162,7 @@ int sdlTimeFromWindows(int dwLowDateTime, int dwHighDateTime) {
 /// \returns the number of days in the requested month or -1 on failure; call
 /// SDL_GetError() for more information.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_GetDaysInMonth(int year, int month)
@@ -183,7 +183,7 @@ int sdlGetDaysInMonth(int year, int month) {
 /// \returns the day of year [0-365] if the date is valid or -1 on failure;
 /// call SDL_GetError() for more information.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_GetDayOfYear(int year, int month, int day)
@@ -204,7 +204,7 @@ int sdlGetDayOfYear(int year, int month, int day) {
 /// \returns a value between 0 and 6 (0 being Sunday) if the date is valid or
 /// -1 on failure; call SDL_GetError() for more information.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_GetDayOfWeek(int year, int month, int day)

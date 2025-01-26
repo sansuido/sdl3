@@ -27,7 +27,7 @@ extension SdlRectPointerEx on Pointer<SdlRect> {
   ///
   /// \threadsafety It is safe to call this function from any thread.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_GetRectIntersection
   ///
@@ -49,7 +49,7 @@ extension SdlRectPointerEx on Pointer<SdlRect> {
   /// rectangles `A` and `B`.
   /// \returns true if there is an intersection, false otherwise.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_HasRectIntersection
   ///
@@ -70,7 +70,7 @@ extension SdlRectPointerEx on Pointer<SdlRect> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRectUnion(const SDL_Rect *A, const SDL_Rect *B, SDL_Rect *result)
@@ -95,7 +95,7 @@ extension SdlRectPointerEx on Pointer<SdlRect> {
   /// \param Y2 a pointer to the ending Y-coordinate of the line.
   /// \returns true if there is an intersection, false otherwise.
   ///
-  /// \since This function is available since SDL 3.1.3.
+  /// \since This function is available since SDL 3.2.0.
   ///
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRectAndLineIntersection(const SDL_Rect *rect, int *X1, int *Y1, int *X2, int *Y2)

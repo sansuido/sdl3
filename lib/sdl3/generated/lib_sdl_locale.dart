@@ -42,7 +42,7 @@ import 'struct_sdl.dart';
 /// allocation that should be freed with SDL_free() when it is no
 /// longer needed.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC SDL_Locale ** SDLCALL SDL_GetPreferredLocales(int *count)

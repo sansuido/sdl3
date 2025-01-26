@@ -13,7 +13,7 @@ import 'struct_sdl.dart';
 /// failure; call SDL_GetError() for more information. This should be
 /// freed with SDL_free() when it is no longer needed.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_OpenHaptic
 ///
@@ -37,7 +37,7 @@ Pointer<Uint32> sdlGetHaptics(Pointer<Int32> count) {
 /// this function returns NULL; call SDL_GetError() for more
 /// information.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_GetHapticName
 /// \sa SDL_OpenHaptic
@@ -70,7 +70,7 @@ String? sdlGetHapticNameForId(int instanceId) {
 /// \returns the device identifier or NULL on failure; call SDL_GetError() for
 /// more information.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_CloseHaptic
 /// \sa SDL_GetHaptics
@@ -96,7 +96,7 @@ Pointer<SdlHaptic> sdlOpenHaptic(int instanceId) {
 /// \returns an SDL_Haptic on success or NULL on failure or if it hasn't been
 /// opened yet; call SDL_GetError() for more information.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC SDL_Haptic * SDLCALL SDL_GetHapticFromID(SDL_HapticID instance_id)
@@ -115,7 +115,7 @@ Pointer<SdlHaptic> sdlGetHapticFromId(int instanceId) {
 /// \returns the instance ID of the specified haptic device on success or 0 on
 /// failure; call SDL_GetError() for more information.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC SDL_HapticID SDLCALL SDL_GetHapticID(SDL_Haptic *haptic)
@@ -135,7 +135,7 @@ int sdlGetHapticId(Pointer<SdlHaptic> haptic) {
 /// this function returns NULL; call SDL_GetError() for more
 /// information.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_GetHapticNameForID
 ///
@@ -158,7 +158,7 @@ String? sdlGetHapticName(Pointer<SdlHaptic> haptic) {
 ///
 /// \returns true if the mouse is haptic or false if it isn't.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_OpenHapticFromMouse
 ///
@@ -177,7 +177,7 @@ bool sdlIsMouseHaptic() {
 /// \returns the haptic device identifier or NULL on failure; call
 /// SDL_GetError() for more information.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_CloseHaptic
 /// \sa SDL_IsMouseHaptic
@@ -198,7 +198,7 @@ Pointer<SdlHaptic> sdlOpenHapticFromMouse() {
 /// \param joystick the SDL_Joystick to test for haptic capabilities.
 /// \returns true if the joystick is haptic or false if it isn't.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_OpenHapticFromJoystick
 ///
@@ -227,7 +227,7 @@ bool sdlIsJoystickHaptic(Pointer<SdlJoystick> joystick) {
 /// \returns a valid haptic device identifier on success or NULL on failure;
 /// call SDL_GetError() for more information.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_CloseHaptic
 /// \sa SDL_IsJoystickHaptic
@@ -248,7 +248,7 @@ Pointer<SdlHaptic> sdlOpenHapticFromJoystick(Pointer<SdlJoystick> joystick) {
 ///
 /// \param haptic the SDL_Haptic device to close.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_OpenHaptic
 ///
@@ -273,7 +273,7 @@ void sdlCloseHaptic(Pointer<SdlHaptic> haptic) {
 /// \returns the number of effects the haptic device can store or a negative
 /// error code on failure; call SDL_GetError() for more information.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_GetMaxHapticEffectsPlaying
 /// \sa SDL_GetHapticFeatures
@@ -297,7 +297,7 @@ int sdlGetMaxHapticEffects(Pointer<SdlHaptic> haptic) {
 /// \returns the number of effects the haptic device can play at the same time
 /// or -1 on failure; call SDL_GetError() for more information.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_GetMaxHapticEffects
 /// \sa SDL_GetHapticFeatures
@@ -320,7 +320,7 @@ int sdlGetMaxHapticEffectsPlaying(Pointer<SdlHaptic> haptic) {
 /// \returns a list of supported haptic features in bitwise manner (OR'd), or 0
 /// on failure; call SDL_GetError() for more information.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_HapticEffectSupported
 /// \sa SDL_GetMaxHapticEffects
@@ -345,7 +345,7 @@ int sdlGetHapticFeatures(Pointer<SdlHaptic> haptic) {
 /// \returns the number of axes on success or -1 on failure; call
 /// SDL_GetError() for more information.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_GetNumHapticAxes(SDL_Haptic *haptic)
@@ -364,7 +364,7 @@ int sdlGetNumHapticAxes(Pointer<SdlHaptic> haptic) {
 /// \param effect the desired effect to query.
 /// \returns true if the effect is supported or false if it isn't.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_CreateHapticEffect
 /// \sa SDL_GetHapticFeatures
@@ -391,7 +391,7 @@ bool sdlHapticEffectSupported(
 /// \returns the ID of the effect on success or -1 on failure; call
 /// SDL_GetError() for more information.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_DestroyHapticEffect
 /// \sa SDL_RunHapticEffect
@@ -425,7 +425,7 @@ int sdlCreateHapticEffect(
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_CreateHapticEffect
 /// \sa SDL_RunHapticEffect
@@ -459,7 +459,7 @@ bool sdlUpdateHapticEffect(
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_GetHapticEffectStatus
 /// \sa SDL_StopHapticEffect
@@ -485,7 +485,7 @@ bool sdlRunHapticEffect(Pointer<SdlHaptic> haptic, int effect, int iterations) {
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_RunHapticEffect
 /// \sa SDL_StopHapticEffects
@@ -510,7 +510,7 @@ bool sdlStopHapticEffect(Pointer<SdlHaptic> haptic, int effect) {
 /// \param haptic the SDL_Haptic device to destroy the effect on.
 /// \param effect the ID of the haptic effect to destroy.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_CreateHapticEffect
 ///
@@ -535,7 +535,7 @@ void sdlDestroyHapticEffect(Pointer<SdlHaptic> haptic, int effect) {
 /// \returns true if it is playing, false if it isn't playing or haptic status
 /// isn't supported.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_GetHapticFeatures
 ///
@@ -566,7 +566,7 @@ bool sdlGetHapticEffectStatus(Pointer<SdlHaptic> haptic, int effect) {
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_GetHapticFeatures
 ///
@@ -593,7 +593,7 @@ bool sdlSetHapticGain(Pointer<SdlHaptic> haptic, int gain) {
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_GetHapticFeatures
 ///
@@ -621,7 +621,7 @@ bool sdlSetHapticAutocenter(Pointer<SdlHaptic> haptic, int autocenter) {
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_ResumeHaptic
 ///
@@ -644,7 +644,7 @@ bool sdlPauseHaptic(Pointer<SdlHaptic> haptic) {
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_PauseHaptic
 ///
@@ -665,7 +665,7 @@ bool sdlResumeHaptic(Pointer<SdlHaptic> haptic) {
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_RunHapticEffect
 /// \sa SDL_StopHapticEffects
@@ -686,7 +686,7 @@ bool sdlStopHapticEffects(Pointer<SdlHaptic> haptic) {
 /// \param haptic haptic device to check for rumble support.
 /// \returns true if the effect is supported or false if it isn't.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_InitHapticRumble
 ///
@@ -707,7 +707,7 @@ bool sdlHapticRumbleSupported(Pointer<SdlHaptic> haptic) {
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_PlayHapticRumble
 /// \sa SDL_StopHapticRumble
@@ -732,7 +732,7 @@ bool sdlInitHapticRumble(Pointer<SdlHaptic> haptic) {
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_InitHapticRumble
 /// \sa SDL_StopHapticRumble
@@ -756,7 +756,7 @@ bool sdlPlayHapticRumble(
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
-/// \since This function is available since SDL 3.1.3.
+/// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_PlayHapticRumble
 ///
