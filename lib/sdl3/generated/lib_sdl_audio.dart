@@ -439,7 +439,7 @@ bool sdlIsAudioDevicePlayback(int devid) {
 /// Physical devices can not be paused or unpaused, only logical devices
 /// created through SDL_OpenAudioDevice() can be.
 ///
-/// \param dev a device opened by SDL_OpenAudioDevice().
+/// \param devid a device opened by SDL_OpenAudioDevice().
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
@@ -451,13 +451,13 @@ bool sdlIsAudioDevicePlayback(int devid) {
 /// \sa SDL_AudioDevicePaused
 ///
 /// ```c
-/// extern SDL_DECLSPEC bool SDLCALL SDL_PauseAudioDevice(SDL_AudioDeviceID dev)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_PauseAudioDevice(SDL_AudioDeviceID devid)
 /// ```
-bool sdlPauseAudioDevice(int dev) {
-  final sdlPauseAudioDeviceLookupFunction =
-      libSdl3.lookupFunction<Uint8 Function(Uint32 dev), int Function(int dev)>(
-          'SDL_PauseAudioDevice');
-  return sdlPauseAudioDeviceLookupFunction(dev) == 1;
+bool sdlPauseAudioDevice(int devid) {
+  final sdlPauseAudioDeviceLookupFunction = libSdl3.lookupFunction<
+      Uint8 Function(Uint32 devid),
+      int Function(int devid)>('SDL_PauseAudioDevice');
+  return sdlPauseAudioDeviceLookupFunction(devid) == 1;
 }
 
 ///
@@ -475,7 +475,7 @@ bool sdlPauseAudioDevice(int dev) {
 /// Physical devices can not be paused or unpaused, only logical devices
 /// created through SDL_OpenAudioDevice() can be.
 ///
-/// \param dev a device opened by SDL_OpenAudioDevice().
+/// \param devid a device opened by SDL_OpenAudioDevice().
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
@@ -487,13 +487,13 @@ bool sdlPauseAudioDevice(int dev) {
 /// \sa SDL_PauseAudioDevice
 ///
 /// ```c
-/// extern SDL_DECLSPEC bool SDLCALL SDL_ResumeAudioDevice(SDL_AudioDeviceID dev)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_ResumeAudioDevice(SDL_AudioDeviceID devid)
 /// ```
-bool sdlResumeAudioDevice(int dev) {
-  final sdlResumeAudioDeviceLookupFunction =
-      libSdl3.lookupFunction<Uint8 Function(Uint32 dev), int Function(int dev)>(
-          'SDL_ResumeAudioDevice');
-  return sdlResumeAudioDeviceLookupFunction(dev) == 1;
+bool sdlResumeAudioDevice(int devid) {
+  final sdlResumeAudioDeviceLookupFunction = libSdl3.lookupFunction<
+      Uint8 Function(Uint32 devid),
+      int Function(int devid)>('SDL_ResumeAudioDevice');
+  return sdlResumeAudioDeviceLookupFunction(devid) == 1;
 }
 
 ///
@@ -506,7 +506,7 @@ bool sdlResumeAudioDevice(int dev) {
 /// created through SDL_OpenAudioDevice() can be. Physical and invalid device
 /// IDs will report themselves as unpaused here.
 ///
-/// \param dev a device opened by SDL_OpenAudioDevice().
+/// \param devid a device opened by SDL_OpenAudioDevice().
 /// \returns true if device is valid and paused, false otherwise.
 ///
 /// \threadsafety It is safe to call this function from any thread.
@@ -517,13 +517,13 @@ bool sdlResumeAudioDevice(int dev) {
 /// \sa SDL_ResumeAudioDevice
 ///
 /// ```c
-/// extern SDL_DECLSPEC bool SDLCALL SDL_AudioDevicePaused(SDL_AudioDeviceID dev)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_AudioDevicePaused(SDL_AudioDeviceID devid)
 /// ```
-bool sdlAudioDevicePaused(int dev) {
-  final sdlAudioDevicePausedLookupFunction =
-      libSdl3.lookupFunction<Uint8 Function(Uint32 dev), int Function(int dev)>(
-          'SDL_AudioDevicePaused');
-  return sdlAudioDevicePausedLookupFunction(dev) == 1;
+bool sdlAudioDevicePaused(int devid) {
+  final sdlAudioDevicePausedLookupFunction = libSdl3.lookupFunction<
+      Uint8 Function(Uint32 devid),
+      int Function(int devid)>('SDL_AudioDevicePaused');
+  return sdlAudioDevicePausedLookupFunction(devid) == 1;
 }
 
 ///
@@ -1528,6 +1528,9 @@ bool sdlPauseAudioStreamDevice(Pointer<SdlAudioStream> stream) {
 /// This function unpauses audio processing for a given device that has
 /// previously been paused. Once unpaused, any bound audio streams will begin
 /// to progress again, and audio can be generated.
+///
+/// Remember, SDL_OpenAudioDeviceStream opens device in a paused state, so this
+/// function call is required for audio playback to begin on such device.
 ///
 /// \param stream the audio stream associated with the audio device to resume.
 /// \returns true on success or false on failure; call SDL_GetError() for more

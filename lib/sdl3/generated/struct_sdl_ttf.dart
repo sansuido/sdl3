@@ -44,9 +44,9 @@ final class TtfGpuAtlasDrawSequence extends Struct {
   // [40]+(4)
   @Int32()
   external int numIndices;
-  // [] +(4)
-  @Uint32()
-  external int blank_2;
+  // [44]+(4)
+  @Int32()
+  external int imageType;
   // [48]+(8)
   external Pointer<TtfGpuAtlasDrawSequence> next;
 }

@@ -157,10 +157,12 @@ extension TtfFontEx on TtfFont {
   ///
   /// - `TTF_PROP_FONT_CREATE_FILENAME_STRING`: the font file to open, if an
   /// SDL_IOStream isn't being used. This is required if
-  /// `TTF_PROP_FONT_CREATE_IOSTREAM_POINTER` isn't set.
+  /// `TTF_PROP_FONT_CREATE_IOSTREAM_POINTER` and
+  /// `TTF_PROP_FONT_CREATE_EXISTING_FONT` aren't set.
   /// - `TTF_PROP_FONT_CREATE_IOSTREAM_POINTER`: an SDL_IOStream containing the
   /// font to be opened. This should not be closed until the font is closed.
-  /// This is required if `TTF_PROP_FONT_CREATE_FILENAME_STRING` isn't set.
+  /// This is required if `TTF_PROP_FONT_CREATE_FILENAME_STRING` and
+  /// `TTF_PROP_FONT_CREATE_EXISTING_FONT` aren't set.
   /// - `TTF_PROP_FONT_CREATE_IOSTREAM_OFFSET_NUMBER`: the offset in the iostream
   /// for the beginning of the font, defaults to 0.
   /// - `TTF_PROP_FONT_CREATE_IOSTREAM_AUTOCLOSE_BOOLEAN`: true if closing the
@@ -177,6 +179,9 @@ extension TtfFontEx on TtfFont {
   /// - `TTF_PROP_FONT_CREATE_VERTICAL_DPI_NUMBER`: the vertical DPI to use for
   /// font rendering, defaults to `TTF_PROP_FONT_CREATE_HORIZONTAL_DPI_NUMBER`
   /// if set, or 72 otherwise.
+  /// - `TTF_PROP_FONT_CREATE_EXISTING_FONT`: an optional TTF_Font that, if set,
+  /// will be used as the font data source and the initial size and style of
+  /// the new font.
   ///
   /// \param props the properties to use.
   /// \returns a valid TTF_Font, or NULL on failure; call SDL_GetError() for more
@@ -198,29 +203,19 @@ extension TtfFontEx on TtfFont {
   ///
   /// Get the script used by a 32-bit codepoint.
   ///
-  /// The supplied script value will be a null-terminated string of exactly four
-  /// characters.
-  ///
-  /// If SDL_ttf was not built with HarfBuzz support, this function returns
-  /// false.
-  ///
   /// \param ch the character code to check.
-  /// \param script a pointer filled in with the script used by `ch`.
-  /// \param script_size the size of the script buffer, which must be at least 5
-  /// characters.
-  /// \returns true on success or false on failure; call SDL_GetError() for more
-  /// information.
+  /// \returns a script tag in the format used by HarfBuzz on success, or 0 on
+  /// failure; call SDL_GetError() for more information.
   ///
-  /// \threadsafety This function should be called on the thread that created the
-  /// font.
+  /// \threadsafety This function is thread-safe.
   ///
   /// \since This function is available since SDL_ttf 3.0.0.
   ///
   /// ```c
-  /// extern SDL_DECLSPEC bool SDLCALL TTF_GetGlyphScript(Uint32 ch, char *script, size_t script_size)
+  /// extern SDL_DECLSPEC Uint32 SDLCALL TTF_GetGlyphScript(Uint32 ch)
   /// ```
-  static bool getGlyphScript(int ch, Pointer<Int8> script, int scriptSize) {
-    return ttfGetGlyphScript(ch, script, scriptSize);
+  static int getGlyphScript(int ch) {
+    return ttfGetGlyphScript(ch);
   }
 
   ///
@@ -532,8 +527,9 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   ///
   /// Enable Signed Distance Field rendering for a font.
   ///
-  /// This works with the Blended APIs. SDF is a technique that
-  /// helps fonts look sharp even when scaling and rotating.
+  /// SDF is a technique that helps fonts look sharp even when scaling and rotating, and requires special shader support for display.
+  ///
+  /// This works with Blended APIs, and generates the raw signed distance values in the alpha channel of the resulting texture.
   ///
   /// This updates any TTF_Text objects using this font, and clears already-generated glyphs, if any, from the cache.
   ///
@@ -852,21 +848,14 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   }
 
   ///
-  /// Set direction to be used for text shaping by a font.
+  /// Set the direction to be used for text shaping by a font.
   ///
-  /// Possible direction values are:
-  ///
-  /// - `TTF_DIRECTION_LTR` (Left to Right)
-  /// - `TTF_DIRECTION_RTL` (Right to Left)
-  /// - `TTF_DIRECTION_TTB` (Top to Bottom)
-  /// - `TTF_DIRECTION_BTT` (Bottom to Top)
-  ///
-  /// If SDL_ttf was not built with HarfBuzz support, this function returns
-  /// false.
+  /// This function only supports left-to-right text shaping if SDL_ttf was not
+  /// built with HarfBuzz support.
   ///
   /// This updates any TTF_Text objects using this font.
   ///
-  /// \param font the font to specify a direction for.
+  /// \param font the font to modify.
   /// \param direction the new direction for text to flow.
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
@@ -884,29 +873,26 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   }
 
   ///
-  /// Set script to be used for text shaping by a font.
+  /// Set the script to be used for text shaping by a font.
   ///
-  /// The supplied script value must be a null-terminated string of exactly four
-  /// characters.
-  ///
-  /// If SDL_ttf was not built with HarfBuzz support, this function returns
-  /// false.
+  /// This returns false if SDL_ttf isn't build with HarfBuzz support.
   ///
   /// This updates any TTF_Text objects using this font.
   ///
-  /// \param font the font to specify a script name for.
-  /// \param script null-terminated string of exactly 4 characters.
+  /// \param font the font to modify.
+  /// \param script a script tag in the format used by HarfBuzz.
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \threadsafety This function is not thread-safe.
+  /// \threadsafety This function should be called on the thread that created the
+  /// font.
   ///
   /// \since This function is available since SDL_ttf 3.0.0.
   ///
   /// ```c
-  /// extern SDL_DECLSPEC bool SDLCALL TTF_SetFontScript(TTF_Font *font, const char *script)
+  /// extern SDL_DECLSPEC bool SDLCALL TTF_SetFontScript(TTF_Font *font, Uint32 script)
   /// ```
-  bool setScript(String? script) {
+  bool setScript(int script) {
     return ttfSetFontScript(this, script);
   }
 

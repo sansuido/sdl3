@@ -4277,7 +4277,7 @@ double sdlAtan2(double y, double x) {
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
-/// \sa SDL_atan2f
+/// \sa SDL_atan2
 /// \sa SDL_atan
 /// \sa SDL_tan
 ///
@@ -4416,7 +4416,7 @@ double sdlCopysign(double x, double y) {
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
-/// \sa SDL_copysignf
+/// \sa SDL_copysign
 /// \sa SDL_fabsf
 ///
 /// ```c
@@ -4585,7 +4585,7 @@ double sdlExpf(double x) {
 /// Range: `0 <= y <= INF`
 ///
 /// This function operates on double-precision floating point values, use
-/// SDL_copysignf for single-precision floats.
+/// SDL_fabsf for single-precision floats.
 ///
 /// \param x floating point value to use as the magnitude.
 /// \returns the absolute value of `x`.
@@ -4613,7 +4613,7 @@ double sdlFabs(double x) {
 /// Range: `0 <= y <= INF`
 ///
 /// This function operates on single-precision floating point values, use
-/// SDL_copysignf for double-precision floats.
+/// SDL_fabs for double-precision floats.
 ///
 /// \param x floating point value to use as the magnitude.
 /// \returns the absolute value of `x`.
@@ -4679,7 +4679,7 @@ double sdlFloor(double x) {
 /// Range: `-INF <= y <= INF`, y integer
 ///
 /// This function operates on single-precision floating point values, use
-/// SDL_floorf for double-precision floats.
+/// SDL_floor for double-precision floats.
 ///
 /// \param x floating point value.
 /// \returns the floor of `x`.
@@ -4750,7 +4750,7 @@ double sdlTrunc(double x) {
 /// Range: `-INF <= y <= INF`, y integer
 ///
 /// This function operates on single-precision floating point values, use
-/// SDL_truncf for double-precision floats.
+/// SDL_trunc for double-precision floats.
 ///
 /// \param x floating point value.
 /// \returns `x` truncated to an integer.
@@ -4823,7 +4823,7 @@ double sdlFmod(double x, double y) {
 /// Range: `-y <= z <= y`
 ///
 /// This function operates on single-precision floating point values, use
-/// SDL_fmod for single-precision floats.
+/// SDL_fmod for double-precision floats.
 ///
 /// \param x the numerator.
 /// \param y the denominator. Must not be 0.
@@ -5156,7 +5156,7 @@ double sdlPow(double x, double y) {
 /// instead.
 ///
 /// This function operates on single-precision floating point values, use
-/// SDL_powf for double-precision floats.
+/// SDL_pow for double-precision floats.
 ///
 /// This function may use a different approximation across different versions,
 /// platforms and configurations. i.e, it can return a different value given
@@ -5231,8 +5231,8 @@ double sdlRound(double x) {
 ///
 /// Range: `-INF <= y <= INF`, y integer
 ///
-/// This function operates on double-precision floating point values, use
-/// SDL_roundf for single-precision floats. To get the result as an integer
+/// This function operates on single-precision floating point values, use
+/// SDL_round for double-precision floats. To get the result as an integer
 /// type, use SDL_lroundf.
 ///
 /// \param x floating point value.
@@ -5268,7 +5268,7 @@ double sdlRoundf(double x) {
 /// Range: `MIN_LONG <= y <= MAX_LONG`
 ///
 /// This function operates on double-precision floating point values, use
-/// SDL_lround for single-precision floats. To get the result as a
+/// SDL_lroundf for single-precision floats. To get the result as a
 /// floating-point type, use SDL_round.
 ///
 /// \param x floating point value.
@@ -5305,8 +5305,8 @@ int sdlLround(double x) {
 /// Range: `MIN_LONG <= y <= MAX_LONG`
 ///
 /// This function operates on single-precision floating point values, use
-/// SDL_lroundf for double-precision floats. To get the result as a
-/// floating-point type, use SDL_roundf,
+/// SDL_lround for double-precision floats. To get the result as a
+/// floating-point type, use SDL_roundf.
 ///
 /// \param x floating point value.
 /// \returns the nearest integer to `x`.
@@ -5578,7 +5578,7 @@ double sdlTan(double x) {
 /// Range: `-INF <= y <= INF`
 ///
 /// This function operates on single-precision floating point values, use
-/// SDL_tanf for double-precision floats.
+/// SDL_tan for double-precision floats.
 ///
 /// This function may use a different approximation across different versions,
 /// platforms and configurations. i.e, it can return a different value given

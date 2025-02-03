@@ -80,7 +80,7 @@ void sdlNetQuit() {
 ///
 /// Resolve a human-readable hostname.
 ///
-/// SDL_net doesn't operate on human-readable hostnames (like "www.libsdl.org")
+/// SDL_net doesn't operate on human-readable hostnames (like `www.libsdl.org`
 /// but on computer-readable addresses. This function converts from one to the
 /// other. This process is known as "resolving" an address.
 ///
@@ -885,7 +885,8 @@ bool sdlNetWriteToStreamSocket(
 /// other networking failures occurred), this function will report failure by
 /// returning -1. Stream sockets only report failure for unrecoverable
 /// conditions; once a stream socket fails, you should assume it is no longer
-/// usable and should destroy it with SDL_DestroyStreamSocket().
+/// usable and should destroy it with
+/// [SDLNet_DestroyStreamSocket()](SDLNet_DestroyStreamSocket).
 ///
 /// \param sock the stream socket to query.
 /// \returns number of bytes still pending transmission, -1 on failure; call

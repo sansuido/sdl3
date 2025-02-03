@@ -141,7 +141,7 @@ extension SdlAudioStreamPointerEx on Pointer<SdlAudioStream> {
   /// created through SDL_OpenAudioDevice() can be. Physical and invalid device
   /// IDs will report themselves as unpaused here.
   ///
-  /// \param dev a device opened by SDL_OpenAudioDevice().
+  /// \param devid a device opened by SDL_OpenAudioDevice().
   /// \returns true if device is valid and paused, false otherwise.
   ///
   /// \threadsafety It is safe to call this function from any thread.
@@ -152,7 +152,7 @@ extension SdlAudioStreamPointerEx on Pointer<SdlAudioStream> {
   /// \sa SDL_ResumeAudioDevice
   ///
   /// ```c
-  /// extern SDL_DECLSPEC bool SDLCALL SDL_AudioDevicePaused(SDL_AudioDeviceID dev)
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_AudioDevicePaused(SDL_AudioDeviceID devid)
   /// ```
   bool paused() {
     return sdlAudioDevicePaused(getDevice());
@@ -790,6 +790,9 @@ extension SdlAudioStreamPointerEx on Pointer<SdlAudioStream> {
   /// This function unpauses audio processing for a given device that has
   /// previously been paused. Once unpaused, any bound audio streams will begin
   /// to progress again, and audio can be generated.
+  ///
+  /// Remember, SDL_OpenAudioDeviceStream opens device in a paused state, so this
+  /// function call is required for audio playback to begin on such device.
   ///
   /// \param stream the audio stream associated with the audio device to resume.
   /// \returns true on success or false on failure; call SDL_GetError() for more

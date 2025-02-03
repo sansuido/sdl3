@@ -146,7 +146,7 @@ Pointer<Uint32> sdlGetCameras(Pointer<Int32> count) {
 /// there _is_ a camera until the user has given you permission to check
 /// through a scary warning popup.
 ///
-/// \param devid the camera device instance ID to query.
+/// \param instance_id the camera device instance ID.
 /// \param count a pointer filled in with the number of elements in the list,
 /// may be NULL.
 /// \returns a NULL terminated array of pointers to SDL_CameraSpec or NULL on
@@ -162,16 +162,16 @@ Pointer<Uint32> sdlGetCameras(Pointer<Int32> count) {
 /// \sa SDL_OpenCamera
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_CameraSpec ** SDLCALL SDL_GetCameraSupportedFormats(SDL_CameraID devid, int *count)
+/// extern SDL_DECLSPEC SDL_CameraSpec ** SDLCALL SDL_GetCameraSupportedFormats(SDL_CameraID instance_id, int *count)
 /// ```
 Pointer<Pointer<SdlCameraSpec>> sdlGetCameraSupportedFormats(
-    int devid, Pointer<Int32> count) {
+    int instanceId, Pointer<Int32> count) {
   final sdlGetCameraSupportedFormatsLookupFunction = libSdl3.lookupFunction<
       Pointer<Pointer<SdlCameraSpec>> Function(
-          Uint32 devid, Pointer<Int32> count),
-      Pointer<Pointer<SdlCameraSpec>> Function(
-          int devid, Pointer<Int32> count)>('SDL_GetCameraSupportedFormats');
-  return sdlGetCameraSupportedFormatsLookupFunction(devid, count);
+          Uint32 instanceId, Pointer<Int32> count),
+      Pointer<Pointer<SdlCameraSpec>> Function(int instanceId,
+          Pointer<Int32> count)>('SDL_GetCameraSupportedFormats');
+  return sdlGetCameraSupportedFormatsLookupFunction(instanceId, count);
 }
 
 ///

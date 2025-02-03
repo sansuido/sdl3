@@ -183,10 +183,12 @@ Pointer<TtfFont> ttfOpenFontIo(
 ///
 /// - `TTF_PROP_FONT_CREATE_FILENAME_STRING`: the font file to open, if an
 /// SDL_IOStream isn't being used. This is required if
-/// `TTF_PROP_FONT_CREATE_IOSTREAM_POINTER` isn't set.
+/// `TTF_PROP_FONT_CREATE_IOSTREAM_POINTER` and
+/// `TTF_PROP_FONT_CREATE_EXISTING_FONT` aren't set.
 /// - `TTF_PROP_FONT_CREATE_IOSTREAM_POINTER`: an SDL_IOStream containing the
 /// font to be opened. This should not be closed until the font is closed.
-/// This is required if `TTF_PROP_FONT_CREATE_FILENAME_STRING` isn't set.
+/// This is required if `TTF_PROP_FONT_CREATE_FILENAME_STRING` and
+/// `TTF_PROP_FONT_CREATE_EXISTING_FONT` aren't set.
 /// - `TTF_PROP_FONT_CREATE_IOSTREAM_OFFSET_NUMBER`: the offset in the iostream
 /// for the beginning of the font, defaults to 0.
 /// - `TTF_PROP_FONT_CREATE_IOSTREAM_AUTOCLOSE_BOOLEAN`: true if closing the
@@ -203,6 +205,9 @@ Pointer<TtfFont> ttfOpenFontIo(
 /// - `TTF_PROP_FONT_CREATE_VERTICAL_DPI_NUMBER`: the vertical DPI to use for
 /// font rendering, defaults to `TTF_PROP_FONT_CREATE_HORIZONTAL_DPI_NUMBER`
 /// if set, or 72 otherwise.
+/// - `TTF_PROP_FONT_CREATE_EXISTING_FONT`: an optional TTF_Font that, if set,
+/// will be used as the font data source and the initial size and style of
+/// the new font.
 ///
 /// \param props the properties to use.
 /// \returns a valid TTF_Font, or NULL on failure; call SDL_GetError() for more
@@ -222,6 +227,35 @@ Pointer<TtfFont> ttfOpenFontWithProperties(int props) {
       Pointer<TtfFont> Function(Uint32 props),
       Pointer<TtfFont> Function(int props)>('TTF_OpenFontWithProperties');
   return ttfOpenFontWithPropertiesLookupFunction(props);
+}
+
+///
+/// Create a copy of an existing font.
+///
+/// The copy will be distinct from the original, but will share the font file
+/// and have the same size and style as the original.
+///
+/// When done with the returned TTF_Font, use TTF_CloseFont() to dispose of it.
+///
+/// \param existing_font the font to copy.
+/// \returns a valid TTF_Font, or NULL on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety This function should be called on the thread that created the
+/// original font.
+///
+/// \since This function is available since SDL_ttf 3.0.0.
+///
+/// \sa TTF_CloseFont
+///
+/// ```c
+/// extern SDL_DECLSPEC TTF_Font * SDLCALL TTF_CopyFont(TTF_Font *existing_font)
+/// ```
+Pointer<TtfFont> ttfCopyFont(Pointer<TtfFont> existingFont) {
+  final ttfCopyFontLookupFunction = libSdl3Ttf.lookupFunction<
+      Pointer<TtfFont> Function(Pointer<TtfFont> existingFont),
+      Pointer<TtfFont> Function(Pointer<TtfFont> existingFont)>('TTF_CopyFont');
+  return ttfCopyFontLookupFunction(existingFont);
 }
 
 ///
@@ -279,6 +313,92 @@ int ttfGetFontGeneration(Pointer<TtfFont> font) {
       Uint32 Function(Pointer<TtfFont> font),
       int Function(Pointer<TtfFont> font)>('TTF_GetFontGeneration');
   return ttfGetFontGenerationLookupFunction(font);
+}
+
+///
+/// Add a fallback font.
+///
+/// Add a font that will be used for glyphs that are not in the current font.
+/// The fallback font should have the same size and style as the current font.
+///
+/// If there are multiple fallback fonts, they are used in the order added.
+///
+/// This updates any TTF_Text objects using this font.
+///
+/// \param font the font to modify.
+/// \param fallback the font to add as a fallback.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety This function should be called on the thread that created
+/// both fonts.
+///
+/// \since This function is available since SDL_ttf 3.0.0.
+///
+/// \sa TTF_ClearFallbackFonts
+/// \sa TTF_RemoveFallbackFont
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL TTF_AddFallbackFont(TTF_Font *font, TTF_Font *fallback)
+/// ```
+bool ttfAddFallbackFont(Pointer<TtfFont> font, Pointer<TtfFont> fallback) {
+  final ttfAddFallbackFontLookupFunction = libSdl3Ttf.lookupFunction<
+      Uint8 Function(Pointer<TtfFont> font, Pointer<TtfFont> fallback),
+      int Function(Pointer<TtfFont> font,
+          Pointer<TtfFont> fallback)>('TTF_AddFallbackFont');
+  return ttfAddFallbackFontLookupFunction(font, fallback) == 1;
+}
+
+///
+/// Remove a fallback font.
+///
+/// This updates any TTF_Text objects using this font.
+///
+/// \param font the font to modify.
+/// \param fallback the font to remove as a fallback.
+///
+/// \threadsafety This function should be called on the thread that created
+/// both fonts.
+///
+/// \since This function is available since SDL_ttf 3.0.0.
+///
+/// \sa TTF_AddFallbackFont
+/// \sa TTF_ClearFallbackFonts
+///
+/// ```c
+/// extern SDL_DECLSPEC void SDLCALL TTF_RemoveFallbackFont(TTF_Font *font, TTF_Font *fallback)
+/// ```
+void ttfRemoveFallbackFont(Pointer<TtfFont> font, Pointer<TtfFont> fallback) {
+  final ttfRemoveFallbackFontLookupFunction = libSdl3Ttf.lookupFunction<
+      Void Function(Pointer<TtfFont> font, Pointer<TtfFont> fallback),
+      void Function(Pointer<TtfFont> font,
+          Pointer<TtfFont> fallback)>('TTF_RemoveFallbackFont');
+  return ttfRemoveFallbackFontLookupFunction(font, fallback);
+}
+
+///
+/// Remove all fallback fonts.
+///
+/// This updates any TTF_Text objects using this font.
+///
+/// \param font the font to modify.
+///
+/// \threadsafety This function should be called on the thread that created the
+/// font.
+///
+/// \since This function is available since SDL_ttf 3.0.0.
+///
+/// \sa TTF_AddFallbackFont
+/// \sa TTF_RemoveFallbackFont
+///
+/// ```c
+/// extern SDL_DECLSPEC void SDLCALL TTF_ClearFallbackFonts(TTF_Font *font)
+/// ```
+void ttfClearFallbackFonts(Pointer<TtfFont> font) {
+  final ttfClearFallbackFontsLookupFunction = libSdl3Ttf.lookupFunction<
+      Void Function(Pointer<TtfFont> font),
+      void Function(Pointer<TtfFont> font)>('TTF_ClearFallbackFonts');
+  return ttfClearFallbackFontsLookupFunction(font);
 }
 
 ///
@@ -550,6 +670,26 @@ void ttfSetFontHinting(Pointer<TtfFont> font, int hinting) {
 }
 
 ///
+/// Query the number of faces of a font.
+///
+/// \param font the font to query.
+/// \returns the number of FreeType font faces.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL_ttf 3.0.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC int SDLCALL TTF_GetNumFontFaces(const TTF_Font *font)
+/// ```
+int ttfGetNumFontFaces(Pointer<TtfFont> font) {
+  final ttfGetNumFontFacesLookupFunction = libSdl3Ttf.lookupFunction<
+      Int32 Function(Pointer<TtfFont> font),
+      int Function(Pointer<TtfFont> font)>('TTF_GetNumFontFaces');
+  return ttfGetNumFontFacesLookupFunction(font);
+}
+
+///
 /// Query a font's current FreeType hinter setting.
 ///
 /// The hinter setting is a single value:
@@ -582,8 +722,9 @@ int ttfGetFontHinting(Pointer<TtfFont> font) {
 ///
 /// Enable Signed Distance Field rendering for a font.
 ///
-/// This works with the Blended APIs. SDF is a technique that
-/// helps fonts look sharp even when scaling and rotating.
+/// SDF is a technique that helps fonts look sharp even when scaling and rotating, and requires special shader support for display.
+///
+/// This works with Blended APIs, and generates the raw signed distance values in the alpha channel of the resulting texture.
 ///
 /// This updates any TTF_Text objects using this font, and clears already-generated glyphs, if any, from the cache.
 ///
@@ -957,168 +1098,14 @@ String? ttfGetFontStyleName(Pointer<TtfFont> font) {
 }
 
 ///
-/// Render UTF-8 text at fast quality to a new 8-bit surface.
+/// Set the direction to be used for text shaping by a font.
 ///
-/// This function will allocate a new 8-bit, palettized surface. The surface's
-/// 0 pixel will be the colorkey, giving a transparent background. The 1 pixel
-/// will be set to the text color.
-///
-/// This will not word-wrap the string; you'll get a surface with a single line
-/// of text, as long as the string requires. You can use
-/// TTF_RenderText_Solid_Wrapped() instead if you need to wrap the output to
-/// multiple lines.
-///
-/// This will not wrap on newline characters.
-///
-/// You can render at other quality levels with TTF_RenderText_Shaded,
-/// TTF_RenderText_Blended, and TTF_RenderText_LCD.
-///
-/// \param font the font to render with.
-/// \param text text to render, in UTF-8 encoding.
-/// \param length the length of the text, in bytes, or 0 for null terminated
-/// text.
-/// \param fg the foreground color for the text.
-/// \returns a new 8-bit, palettized surface, or NULL if there was an error.
-///
-/// \threadsafety This function should be called on the thread that created the
-/// font.
-///
-/// \since This function is available since SDL_ttf 3.0.0.
-///
-/// \sa TTF_RenderText_Blended
-/// \sa TTF_RenderText_LCD
-/// \sa TTF_RenderText_Shaded
-/// \sa TTF_RenderText_Solid
-/// \sa TTF_RenderText_Solid_Wrapped
-///
-/// ```c
-/// extern SDL_DECLSPEC SDL_Surface * SDLCALL TTF_RenderText_Solid(TTF_Font *font, const char *text, size_t length, SDL_Color fg)
-/// ```
-Pointer<SdlSurface> ttfRenderTextSolid(
-    Pointer<TtfFont> font, String? text, int length, SdlColor fg) {
-  final ttfRenderTextSolidLookupFunction = libSdl3Ttf.lookupFunction<
-      Pointer<SdlSurface> Function(Pointer<TtfFont> font, Pointer<Utf8> text,
-          Uint32 length, SdlColor fg),
-      Pointer<SdlSurface> Function(Pointer<TtfFont> font, Pointer<Utf8> text,
-          int length, SdlColor fg)>('TTF_RenderText_Solid');
-  final textPointer = text != null ? text.toNativeUtf8() : nullptr;
-  final result =
-      ttfRenderTextSolidLookupFunction(font, textPointer, length, fg);
-  calloc.free(textPointer);
-  return result;
-}
-
-///
-/// Render word-wrapped UTF-8 text at fast quality to a new 8-bit surface.
-///
-/// This function will allocate a new 8-bit, palettized surface. The surface's
-/// 0 pixel will be the colorkey, giving a transparent background. The 1 pixel
-/// will be set to the text color.
-///
-/// Text is wrapped to multiple lines on line endings and on word boundaries if
-/// it extends beyond `wrapLength` in pixels.
-///
-/// If wrapLength is 0, this function will only wrap on newline characters.
-///
-/// You can render at other quality levels with TTF_RenderText_Shaded_Wrapped,
-/// TTF_RenderText_Blended_Wrapped, and TTF_RenderText_LCD_Wrapped.
-///
-/// \param font the font to render with.
-/// \param text text to render, in UTF-8 encoding.
-/// \param length the length of the text, in bytes, or 0 for null terminated
-/// text.
-/// \param fg the foreground color for the text.
-/// \param wrapLength the maximum width of the text surface or 0 to wrap on
-/// newline characters.
-/// \returns a new 8-bit, palettized surface, or NULL if there was an error.
-///
-/// \threadsafety This function should be called on the thread that created the
-/// font.
-///
-/// \since This function is available since SDL_ttf 3.0.0.
-///
-/// \sa TTF_RenderText_Blended_Wrapped
-/// \sa TTF_RenderText_LCD_Wrapped
-/// \sa TTF_RenderText_Shaded_Wrapped
-/// \sa TTF_RenderText_Solid
-///
-/// ```c
-/// extern SDL_DECLSPEC SDL_Surface * SDLCALL TTF_RenderText_Solid_Wrapped(TTF_Font *font, const char *text, size_t length, SDL_Color fg, int wrapLength)
-/// ```
-Pointer<SdlSurface> ttfRenderTextSolidWrapped(Pointer<TtfFont> font,
-    String? text, int length, SdlColor fg, int wrapLength) {
-  final ttfRenderTextSolidWrappedLookupFunction = libSdl3Ttf.lookupFunction<
-      Pointer<SdlSurface> Function(Pointer<TtfFont> font, Pointer<Utf8> text,
-          Uint32 length, SdlColor fg, Int32 wrapLength),
-      Pointer<SdlSurface> Function(
-          Pointer<TtfFont> font,
-          Pointer<Utf8> text,
-          int length,
-          SdlColor fg,
-          int wrapLength)>('TTF_RenderText_Solid_Wrapped');
-  final textPointer = text != null ? text.toNativeUtf8() : nullptr;
-  final result = ttfRenderTextSolidWrappedLookupFunction(
-      font, textPointer, length, fg, wrapLength);
-  calloc.free(textPointer);
-  return result;
-}
-
-///
-/// Render a single 32-bit glyph at fast quality to a new 8-bit surface.
-///
-/// This function will allocate a new 8-bit, palettized surface. The surface's
-/// 0 pixel will be the colorkey, giving a transparent background. The 1 pixel
-/// will be set to the text color.
-///
-/// The glyph is rendered without any padding or centering in the X direction,
-/// and aligned normally in the Y direction.
-///
-/// You can render at other quality levels with TTF_RenderGlyph_Shaded,
-/// TTF_RenderGlyph_Blended, and TTF_RenderGlyph_LCD.
-///
-/// \param font the font to render with.
-/// \param ch the character to render.
-/// \param fg the foreground color for the text.
-/// \returns a new 8-bit, palettized surface, or NULL if there was an error.
-///
-/// \threadsafety This function should be called on the thread that created the
-/// font.
-///
-/// \since This function is available since SDL_ttf 3.0.0.
-///
-/// \sa TTF_RenderGlyph_Blended
-/// \sa TTF_RenderGlyph_LCD
-/// \sa TTF_RenderGlyph_Shaded
-///
-/// ```c
-/// extern SDL_DECLSPEC SDL_Surface * SDLCALL TTF_RenderGlyph_Solid(TTF_Font *font, Uint32 ch, SDL_Color fg)
-/// ```
-Pointer<SdlSurface> ttfRenderGlyphSolid(
-    Pointer<TtfFont> font, int ch, SdlColor fg) {
-  final ttfRenderGlyphSolidLookupFunction = libSdl3Ttf.lookupFunction<
-      Pointer<SdlSurface> Function(
-          Pointer<TtfFont> font, Uint32 ch, SdlColor fg),
-      Pointer<SdlSurface> Function(
-          Pointer<TtfFont> font, int ch, SdlColor fg)>('TTF_RenderGlyph_Solid');
-  return ttfRenderGlyphSolidLookupFunction(font, ch, fg);
-}
-
-///
-/// Set direction to be used for text shaping by a font.
-///
-/// Possible direction values are:
-///
-/// - `TTF_DIRECTION_LTR` (Left to Right)
-/// - `TTF_DIRECTION_RTL` (Right to Left)
-/// - `TTF_DIRECTION_TTB` (Top to Bottom)
-/// - `TTF_DIRECTION_BTT` (Bottom to Top)
-///
-/// If SDL_ttf was not built with HarfBuzz support, this function returns
-/// false.
+/// This function only supports left-to-right text shaping if SDL_ttf was not
+/// built with HarfBuzz support.
 ///
 /// This updates any TTF_Text objects using this font.
 ///
-/// \param font the font to specify a direction for.
+/// \param font the font to modify.
 /// \param direction the new direction for text to flow.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
@@ -1140,17 +1127,9 @@ bool ttfSetFontDirection(Pointer<TtfFont> font, int direction) {
 }
 
 ///
-/// Get direction to be used for text shaping by a font.
+/// Get the direction to be used for text shaping by a font.
 ///
-/// Possible direction values are:
-///
-/// - `TTF_DIRECTION_LTR` (Left to Right)
-/// - `TTF_DIRECTION_RTL` (Right to Left)
-/// - `TTF_DIRECTION_TTB` (Top to Bottom)
-/// - `TTF_DIRECTION_BTT` (Bottom to Top)
-///
-/// If SDL_ttf was not built with HarfBuzz support, this function returns
-/// TTF_DIRECTION_LTR.
+/// This defaults to TTF_DIRECTION_INVALID if it hasn't been set.
 ///
 /// \param font the font to query.
 /// \returns the direction to be used for text shaping.
@@ -1171,52 +1150,14 @@ int ttfGetFontDirection(Pointer<TtfFont> font) {
 }
 
 ///
-/// Set script to be used for text shaping by a font.
+/// Set the script to be used for text shaping by a font.
 ///
-/// The supplied script value must be a null-terminated string of exactly four
-/// characters.
-///
-/// If SDL_ttf was not built with HarfBuzz support, this function returns
-/// false.
+/// This returns false if SDL_ttf isn't build with HarfBuzz support.
 ///
 /// This updates any TTF_Text objects using this font.
 ///
-/// \param font the font to specify a script name for.
-/// \param script null-terminated string of exactly 4 characters.
-/// \returns true on success or false on failure; call SDL_GetError() for more
-/// information.
-///
-/// \threadsafety This function is not thread-safe.
-///
-/// \since This function is available since SDL_ttf 3.0.0.
-///
-/// ```c
-/// extern SDL_DECLSPEC bool SDLCALL TTF_SetFontScript(TTF_Font *font, const char *script)
-/// ```
-bool ttfSetFontScript(Pointer<TtfFont> font, String? script) {
-  final ttfSetFontScriptLookupFunction = libSdl3Ttf.lookupFunction<
-      Uint8 Function(Pointer<TtfFont> font, Pointer<Utf8> script),
-      int Function(
-          Pointer<TtfFont> font, Pointer<Utf8> script)>('TTF_SetFontScript');
-  final scriptPointer = script != null ? script.toNativeUtf8() : nullptr;
-  final result = ttfSetFontScriptLookupFunction(font, scriptPointer) == 1;
-  calloc.free(scriptPointer);
-  return result;
-}
-
-///
-/// Get the script used by a 32-bit codepoint.
-///
-/// The supplied script value will be a null-terminated string of exactly four
-/// characters.
-///
-/// If SDL_ttf was not built with HarfBuzz support, this function returns
-/// false.
-///
-/// \param ch the character code to check.
-/// \param script a pointer filled in with the script used by `ch`.
-/// \param script_size the size of the script buffer, which must be at least 5
-/// characters.
+/// \param font the font to modify.
+/// \param script a script tag in the format used by HarfBuzz.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
@@ -1226,14 +1167,54 @@ bool ttfSetFontScript(Pointer<TtfFont> font, String? script) {
 /// \since This function is available since SDL_ttf 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC bool SDLCALL TTF_GetGlyphScript(Uint32 ch, char *script, size_t script_size)
+/// extern SDL_DECLSPEC bool SDLCALL TTF_SetFontScript(TTF_Font *font, Uint32 script)
 /// ```
-bool ttfGetGlyphScript(int ch, Pointer<Int8> script, int scriptSize) {
+bool ttfSetFontScript(Pointer<TtfFont> font, int script) {
+  final ttfSetFontScriptLookupFunction = libSdl3Ttf.lookupFunction<
+      Uint8 Function(Pointer<TtfFont> font, Uint32 script),
+      int Function(Pointer<TtfFont> font, int script)>('TTF_SetFontScript');
+  return ttfSetFontScriptLookupFunction(font, script) == 1;
+}
+
+///
+/// Get the script used for text shaping a font.
+///
+/// \param font the font to query.
+/// \returns a script tag in the format used by HarfBuzz.
+///
+/// \threadsafety This function should be called on the thread that created the
+/// font.
+///
+/// \since This function is available since SDL_ttf 3.0.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC Uint32 SDLCALL TTF_GetFontScript(TTF_Font *font)
+/// ```
+int ttfGetFontScript(Pointer<TtfFont> font) {
+  final ttfGetFontScriptLookupFunction = libSdl3Ttf.lookupFunction<
+      Uint32 Function(Pointer<TtfFont> font),
+      int Function(Pointer<TtfFont> font)>('TTF_GetFontScript');
+  return ttfGetFontScriptLookupFunction(font);
+}
+
+///
+/// Get the script used by a 32-bit codepoint.
+///
+/// \param ch the character code to check.
+/// \returns a script tag in the format used by HarfBuzz on success, or 0 on
+/// failure; call SDL_GetError() for more information.
+///
+/// \threadsafety This function is thread-safe.
+///
+/// \since This function is available since SDL_ttf 3.0.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC Uint32 SDLCALL TTF_GetGlyphScript(Uint32 ch)
+/// ```
+int ttfGetGlyphScript(int ch) {
   final ttfGetGlyphScriptLookupFunction = libSdl3Ttf.lookupFunction<
-      Uint8 Function(Uint32 ch, Pointer<Int8> script, Uint32 scriptSize),
-      int Function(
-          int ch, Pointer<Int8> script, int scriptSize)>('TTF_GetGlyphScript');
-  return ttfGetGlyphScriptLookupFunction(ch, script, scriptSize) == 1;
+      Uint32 Function(Uint32 ch), int Function(int ch)>('TTF_GetGlyphScript');
+  return ttfGetGlyphScriptLookupFunction(ch);
 }
 
 ///
@@ -1295,6 +1276,8 @@ bool ttfFontHasGlyph(Pointer<TtfFont> font, int ch) {
 ///
 /// \param font the font to query.
 /// \param ch the codepoint to check.
+/// \param image_type a pointer filled in with the glyph image type, may be
+/// NULL.
 /// \returns an SDL_Surface containing the glyph, or NULL on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -1304,14 +1287,16 @@ bool ttfFontHasGlyph(Pointer<TtfFont> font, int ch) {
 /// \since This function is available since SDL_ttf 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_Surface * SDLCALL TTF_GetGlyphImage(TTF_Font *font, Uint32 ch)
+/// extern SDL_DECLSPEC SDL_Surface * SDLCALL TTF_GetGlyphImage(TTF_Font *font, Uint32 ch, TTF_ImageType *image_type)
 /// ```
-Pointer<SdlSurface> ttfGetGlyphImage(Pointer<TtfFont> font, int ch) {
+Pointer<SdlSurface> ttfGetGlyphImage(
+    Pointer<TtfFont> font, int ch, Pointer<Int32> imageType) {
   final ttfGetGlyphImageLookupFunction = libSdl3Ttf.lookupFunction<
-      Pointer<SdlSurface> Function(Pointer<TtfFont> font, Uint32 ch),
       Pointer<SdlSurface> Function(
-          Pointer<TtfFont> font, int ch)>('TTF_GetGlyphImage');
-  return ttfGetGlyphImageLookupFunction(font, ch);
+          Pointer<TtfFont> font, Uint32 ch, Pointer<Int32> imageType),
+      Pointer<SdlSurface> Function(Pointer<TtfFont> font, int ch,
+          Pointer<Int32> imageType)>('TTF_GetGlyphImage');
+  return ttfGetGlyphImageLookupFunction(font, ch, imageType);
 }
 
 ///
@@ -1322,6 +1307,8 @@ Pointer<SdlSurface> ttfGetGlyphImage(Pointer<TtfFont> font, int ch) {
 ///
 /// \param font the font to query.
 /// \param glyph_index the index of the glyph to return.
+/// \param image_type a pointer filled in with the glyph image type, may be
+/// NULL.
 /// \returns an SDL_Surface containing the glyph, or NULL on failure; call
 /// SDL_GetError() for more information.
 ///
@@ -1331,15 +1318,16 @@ Pointer<SdlSurface> ttfGetGlyphImage(Pointer<TtfFont> font, int ch) {
 /// \since This function is available since SDL_ttf 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_Surface * SDLCALL TTF_GetGlyphImageForIndex(TTF_Font *font, Uint32 glyph_index)
+/// extern SDL_DECLSPEC SDL_Surface * SDLCALL TTF_GetGlyphImageForIndex(TTF_Font *font, Uint32 glyph_index, TTF_ImageType *image_type)
 /// ```
 Pointer<SdlSurface> ttfGetGlyphImageForIndex(
-    Pointer<TtfFont> font, int glyphIndex) {
+    Pointer<TtfFont> font, int glyphIndex, Pointer<Int32> imageType) {
   final ttfGetGlyphImageForIndexLookupFunction = libSdl3Ttf.lookupFunction<
-      Pointer<SdlSurface> Function(Pointer<TtfFont> font, Uint32 glyphIndex),
       Pointer<SdlSurface> Function(
-          Pointer<TtfFont> font, int glyphIndex)>('TTF_GetGlyphImageForIndex');
-  return ttfGetGlyphImageForIndexLookupFunction(font, glyphIndex);
+          Pointer<TtfFont> font, Uint32 glyphIndex, Pointer<Int32> imageType),
+      Pointer<SdlSurface> Function(Pointer<TtfFont> font, int glyphIndex,
+          Pointer<Int32> imageType)>('TTF_GetGlyphImageForIndex');
+  return ttfGetGlyphImageForIndexLookupFunction(font, glyphIndex, imageType);
 }
 
 ///
@@ -1574,6 +1562,153 @@ bool ttfMeasureString(
       1;
   calloc.free(textPointer);
   return result;
+}
+
+///
+/// Render UTF-8 text at fast quality to a new 8-bit surface.
+///
+/// This function will allocate a new 8-bit, palettized surface. The surface's
+/// 0 pixel will be the colorkey, giving a transparent background. The 1 pixel
+/// will be set to the text color.
+///
+/// This will not word-wrap the string; you'll get a surface with a single line
+/// of text, as long as the string requires. You can use
+/// TTF_RenderText_Solid_Wrapped() instead if you need to wrap the output to
+/// multiple lines.
+///
+/// This will not wrap on newline characters.
+///
+/// You can render at other quality levels with TTF_RenderText_Shaded,
+/// TTF_RenderText_Blended, and TTF_RenderText_LCD.
+///
+/// \param font the font to render with.
+/// \param text text to render, in UTF-8 encoding.
+/// \param length the length of the text, in bytes, or 0 for null terminated
+/// text.
+/// \param fg the foreground color for the text.
+/// \returns a new 8-bit, palettized surface, or NULL if there was an error.
+///
+/// \threadsafety This function should be called on the thread that created the
+/// font.
+///
+/// \since This function is available since SDL_ttf 3.0.0.
+///
+/// \sa TTF_RenderText_Blended
+/// \sa TTF_RenderText_LCD
+/// \sa TTF_RenderText_Shaded
+/// \sa TTF_RenderText_Solid
+/// \sa TTF_RenderText_Solid_Wrapped
+///
+/// ```c
+/// extern SDL_DECLSPEC SDL_Surface * SDLCALL TTF_RenderText_Solid(TTF_Font *font, const char *text, size_t length, SDL_Color fg)
+/// ```
+Pointer<SdlSurface> ttfRenderTextSolid(
+    Pointer<TtfFont> font, String? text, int length, SdlColor fg) {
+  final ttfRenderTextSolidLookupFunction = libSdl3Ttf.lookupFunction<
+      Pointer<SdlSurface> Function(Pointer<TtfFont> font, Pointer<Utf8> text,
+          Uint32 length, SdlColor fg),
+      Pointer<SdlSurface> Function(Pointer<TtfFont> font, Pointer<Utf8> text,
+          int length, SdlColor fg)>('TTF_RenderText_Solid');
+  final textPointer = text != null ? text.toNativeUtf8() : nullptr;
+  final result =
+      ttfRenderTextSolidLookupFunction(font, textPointer, length, fg);
+  calloc.free(textPointer);
+  return result;
+}
+
+///
+/// Render word-wrapped UTF-8 text at fast quality to a new 8-bit surface.
+///
+/// This function will allocate a new 8-bit, palettized surface. The surface's
+/// 0 pixel will be the colorkey, giving a transparent background. The 1 pixel
+/// will be set to the text color.
+///
+/// Text is wrapped to multiple lines on line endings and on word boundaries if
+/// it extends beyond `wrapLength` in pixels.
+///
+/// If wrapLength is 0, this function will only wrap on newline characters.
+///
+/// You can render at other quality levels with TTF_RenderText_Shaded_Wrapped,
+/// TTF_RenderText_Blended_Wrapped, and TTF_RenderText_LCD_Wrapped.
+///
+/// \param font the font to render with.
+/// \param text text to render, in UTF-8 encoding.
+/// \param length the length of the text, in bytes, or 0 for null terminated
+/// text.
+/// \param fg the foreground color for the text.
+/// \param wrapLength the maximum width of the text surface or 0 to wrap on
+/// newline characters.
+/// \returns a new 8-bit, palettized surface, or NULL if there was an error.
+///
+/// \threadsafety This function should be called on the thread that created the
+/// font.
+///
+/// \since This function is available since SDL_ttf 3.0.0.
+///
+/// \sa TTF_RenderText_Blended_Wrapped
+/// \sa TTF_RenderText_LCD_Wrapped
+/// \sa TTF_RenderText_Shaded_Wrapped
+/// \sa TTF_RenderText_Solid
+///
+/// ```c
+/// extern SDL_DECLSPEC SDL_Surface * SDLCALL TTF_RenderText_Solid_Wrapped(TTF_Font *font, const char *text, size_t length, SDL_Color fg, int wrapLength)
+/// ```
+Pointer<SdlSurface> ttfRenderTextSolidWrapped(Pointer<TtfFont> font,
+    String? text, int length, SdlColor fg, int wrapLength) {
+  final ttfRenderTextSolidWrappedLookupFunction = libSdl3Ttf.lookupFunction<
+      Pointer<SdlSurface> Function(Pointer<TtfFont> font, Pointer<Utf8> text,
+          Uint32 length, SdlColor fg, Int32 wrapLength),
+      Pointer<SdlSurface> Function(
+          Pointer<TtfFont> font,
+          Pointer<Utf8> text,
+          int length,
+          SdlColor fg,
+          int wrapLength)>('TTF_RenderText_Solid_Wrapped');
+  final textPointer = text != null ? text.toNativeUtf8() : nullptr;
+  final result = ttfRenderTextSolidWrappedLookupFunction(
+      font, textPointer, length, fg, wrapLength);
+  calloc.free(textPointer);
+  return result;
+}
+
+///
+/// Render a single 32-bit glyph at fast quality to a new 8-bit surface.
+///
+/// This function will allocate a new 8-bit, palettized surface. The surface's
+/// 0 pixel will be the colorkey, giving a transparent background. The 1 pixel
+/// will be set to the text color.
+///
+/// The glyph is rendered without any padding or centering in the X direction,
+/// and aligned normally in the Y direction.
+///
+/// You can render at other quality levels with TTF_RenderGlyph_Shaded,
+/// TTF_RenderGlyph_Blended, and TTF_RenderGlyph_LCD.
+///
+/// \param font the font to render with.
+/// \param ch the character to render.
+/// \param fg the foreground color for the text.
+/// \returns a new 8-bit, palettized surface, or NULL if there was an error.
+///
+/// \threadsafety This function should be called on the thread that created the
+/// font.
+///
+/// \since This function is available since SDL_ttf 3.0.0.
+///
+/// \sa TTF_RenderGlyph_Blended
+/// \sa TTF_RenderGlyph_LCD
+/// \sa TTF_RenderGlyph_Shaded
+///
+/// ```c
+/// extern SDL_DECLSPEC SDL_Surface * SDLCALL TTF_RenderGlyph_Solid(TTF_Font *font, Uint32 ch, SDL_Color fg)
+/// ```
+Pointer<SdlSurface> ttfRenderGlyphSolid(
+    Pointer<TtfFont> font, int ch, SdlColor fg) {
+  final ttfRenderGlyphSolidLookupFunction = libSdl3Ttf.lookupFunction<
+      Pointer<SdlSurface> Function(
+          Pointer<TtfFont> font, Uint32 ch, SdlColor fg),
+      Pointer<SdlSurface> Function(
+          Pointer<TtfFont> font, int ch, SdlColor fg)>('TTF_RenderGlyph_Solid');
+  return ttfRenderGlyphSolidLookupFunction(font, ch, fg);
 }
 
 ///
@@ -2126,6 +2261,8 @@ void ttfDestroySurfaceTextEngine(Pointer<TtfTextEngine> engine) {
 /// \since This function is available since SDL_ttf 3.0.0.
 ///
 /// \sa TTF_DestroyRendererTextEngine
+/// \sa TTF_DrawRendererText
+/// \sa TTF_CreateRendererTextEngineWithProperties
 ///
 /// ```c
 /// extern SDL_DECLSPEC TTF_TextEngine * SDLCALL TTF_CreateRendererTextEngine(SDL_Renderer *renderer)
@@ -2137,6 +2274,42 @@ Pointer<TtfTextEngine> ttfCreateRendererTextEngine(
       Pointer<TtfTextEngine> Function(
           Pointer<SdlRenderer> renderer)>('TTF_CreateRendererTextEngine');
   return ttfCreateRendererTextEngineLookupFunction(renderer);
+}
+
+///
+/// Create a text engine for drawing text on an SDL renderer, with the
+/// specified properties.
+///
+/// These are the supported properties:
+///
+/// - `TTF_PROP_RENDERER_TEXT_ENGINE_RENDERER`: the renderer to use for
+/// creating textures and drawing text
+/// - `TTF_PROP_RENDERER_TEXT_ENGINE_ATLAS_TEXTURE_SIZE`: the size of the
+/// texture atlas
+///
+/// \param props the properties to use.
+/// \returns a TTF_TextEngine object or NULL on failure; call SDL_GetError()
+/// for more information.
+///
+/// \threadsafety This function should be called on the thread that created the
+/// renderer.
+///
+/// \since This function is available since SDL_ttf 3.0.0.
+///
+/// \sa TTF_CreateRendererTextEngine
+/// \sa TTF_DestroyRendererTextEngine
+/// \sa TTF_DrawRendererText
+///
+/// ```c
+/// extern SDL_DECLSPEC TTF_TextEngine * SDLCALL TTF_CreateRendererTextEngineWithProperties(SDL_PropertiesID props)
+/// ```
+Pointer<TtfTextEngine> ttfCreateRendererTextEngineWithProperties(int props) {
+  final ttfCreateRendererTextEngineWithPropertiesLookupFunction =
+      libSdl3Ttf.lookupFunction<
+          Pointer<TtfTextEngine> Function(Uint32 props),
+          Pointer<TtfTextEngine> Function(
+              int props)>('TTF_CreateRendererTextEngineWithProperties');
+  return ttfCreateRendererTextEngineWithPropertiesLookupFunction(props);
 }
 
 ///
@@ -2213,7 +2386,9 @@ void ttfDestroyRendererTextEngine(Pointer<TtfTextEngine> engine) {
 ///
 /// \since This function is available since SDL_ttf 3.0.0.
 ///
+/// \sa TTF_CreateGPUTextEngineWithProperties
 /// \sa TTF_DestroyGPUTextEngine
+/// \sa TTF_GetGPUTextDrawData
 ///
 /// ```c
 /// extern SDL_DECLSPEC TTF_TextEngine * SDLCALL TTF_CreateGPUTextEngine(SDL_GPUDevice *device)
@@ -2227,10 +2402,52 @@ Pointer<TtfTextEngine> ttfCreateGpuTextEngine(Pointer<SdlGpuDevice> device) {
 }
 
 ///
+/// Create a text engine for drawing text with the SDL GPU API, with the
+/// specified properties.
+///
+/// These are the supported properties:
+///
+/// - `TTF_PROP_GPU_TEXT_ENGINE_DEVICE`: the SDL_GPUDevice to use for creating
+/// textures and drawing text.
+/// - `TTF_PROP_GPU_TEXT_ENGINE_ATLAS_TEXTURE_SIZE`: the size of the texture
+/// atlas
+///
+/// \param props the properties to use.
+/// \returns a TTF_TextEngine object or NULL on failure; call SDL_GetError()
+/// for more information.
+///
+/// \threadsafety This function should be called on the thread that created the
+/// device.
+///
+/// \since This function is available since SDL_ttf 3.0.0.
+///
+/// \sa TTF_CreateGPUTextEngine
+/// \sa TTF_DestroyGPUTextEngine
+/// \sa TTF_GetGPUTextDrawData
+///
+/// ```c
+/// extern SDL_DECLSPEC TTF_TextEngine * SDLCALL TTF_CreateGPUTextEngineWithProperties(SDL_PropertiesID props)
+/// ```
+Pointer<TtfTextEngine> ttfCreateGpuTextEngineWithProperties(int props) {
+  final ttfCreateGpuTextEngineWithPropertiesLookupFunction =
+      libSdl3Ttf.lookupFunction<
+          Pointer<TtfTextEngine> Function(Uint32 props),
+          Pointer<TtfTextEngine> Function(
+              int props)>('TTF_CreateGPUTextEngineWithProperties');
+  return ttfCreateGpuTextEngineWithPropertiesLookupFunction(props);
+}
+
+///
 /// Get the geometry data needed for drawing the text.
 ///
 /// `text` must have been created using a TTF_TextEngine from
 /// TTF_CreateGPUTextEngine().
+///
+/// The positive X-axis is taken towards the right and the positive Y-axis is
+/// taken upwards for both the vertex and the texture coordinates, i.e, it
+/// follows the same convention used by the SDL_GPU API. If you want to use a
+/// different coordinate system you will need to transform the vertices
+/// yourself.
 ///
 /// If the text looks blocky use linear filtering.
 ///
@@ -2248,7 +2465,7 @@ Pointer<TtfTextEngine> ttfCreateGpuTextEngine(Pointer<SdlGpuDevice> device) {
 /// \sa TTF_CreateText
 ///
 /// ```c
-/// extern SDL_DECLSPEC TTF_GPUAtlasDrawSequence* SDLCALL TTF_GetGPUTextDrawData(TTF_Text *text)
+/// extern SDL_DECLSPEC TTF_GPUAtlasDrawSequence * SDLCALL TTF_GetGPUTextDrawData(TTF_Text *text)
 /// ```
 Pointer<TtfGpuAtlasDrawSequence> ttfGetGpuTextDrawData(Pointer<TtfText> text) {
   final ttfGetGpuTextDrawDataLookupFunction = libSdl3Ttf.lookupFunction<
@@ -2504,6 +2721,104 @@ Pointer<TtfFont> ttfGetTextFont(Pointer<TtfText> text) {
       Pointer<TtfFont> Function(Pointer<TtfText> text),
       Pointer<TtfFont> Function(Pointer<TtfText> text)>('TTF_GetTextFont');
   return ttfGetTextFontLookupFunction(text);
+}
+
+///
+/// Set the direction to be used for text shaping a text object.
+///
+/// This function only supports left-to-right text shaping if SDL_ttf was not
+/// built with HarfBuzz support.
+///
+/// \param text the text to modify.
+/// \param direction the new direction for text to flow.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety This function should be called on the thread that created the
+/// text.
+///
+/// \since This function is available since SDL_ttf 3.0.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL TTF_SetTextDirection(TTF_Text *text, TTF_Direction direction)
+/// ```
+bool ttfSetTextDirection(Pointer<TtfText> text, int direction) {
+  final ttfSetTextDirectionLookupFunction = libSdl3Ttf.lookupFunction<
+      Uint8 Function(Pointer<TtfText> text, Int32 direction),
+      int Function(
+          Pointer<TtfText> text, int direction)>('TTF_SetTextDirection');
+  return ttfSetTextDirectionLookupFunction(text, direction) == 1;
+}
+
+///
+/// Get the direction to be used for text shaping a text object.
+///
+/// This defaults to the direction of the font used by the text object.
+///
+/// \param text the text to query.
+/// \returns the direction to be used for text shaping.
+///
+/// \threadsafety This function should be called on the thread that created the
+/// text.
+///
+/// \since This function is available since SDL_ttf 3.0.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC TTF_Direction SDLCALL TTF_GetTextDirection(TTF_Text *text)
+/// ```
+int ttfGetTextDirection(Pointer<TtfText> text) {
+  final ttfGetTextDirectionLookupFunction = libSdl3Ttf.lookupFunction<
+      Int32 Function(Pointer<TtfText> text),
+      int Function(Pointer<TtfText> text)>('TTF_GetTextDirection');
+  return ttfGetTextDirectionLookupFunction(text);
+}
+
+///
+/// Set the script to be used for text shaping a text object.
+///
+/// This returns false if SDL_ttf isn't build with HarfBuzz support.
+///
+/// \param text the text to modify.
+/// \param script a script tag in the format used by HarfBuzz.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety This function should be called on the thread that created the
+/// text.
+///
+/// \since This function is available since SDL_ttf 3.0.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL TTF_SetTextScript(TTF_Text *text, Uint32 script)
+/// ```
+bool ttfSetTextScript(Pointer<TtfText> text, int script) {
+  final ttfSetTextScriptLookupFunction = libSdl3Ttf.lookupFunction<
+      Uint8 Function(Pointer<TtfText> text, Uint32 script),
+      int Function(Pointer<TtfText> text, int script)>('TTF_SetTextScript');
+  return ttfSetTextScriptLookupFunction(text, script) == 1;
+}
+
+///
+/// Get the script used for text shaping a text object.
+///
+/// This defaults to the script of the font used by the text object.
+///
+/// \param text the text to query.
+/// \returns a script tag in the format used by HarfBuzz.
+///
+/// \threadsafety This function should be called on the thread that created the
+/// text.
+///
+/// \since This function is available since SDL_ttf 3.0.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC Uint32 SDLCALL TTF_GetTextScript(TTF_Text *text)
+/// ```
+int ttfGetTextScript(Pointer<TtfText> text) {
+  final ttfGetTextScriptLookupFunction = libSdl3Ttf.lookupFunction<
+      Uint32 Function(Pointer<TtfText> text),
+      int Function(Pointer<TtfText> text)>('TTF_GetTextScript');
+  return ttfGetTextScriptLookupFunction(text);
 }
 
 ///
