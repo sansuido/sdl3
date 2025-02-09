@@ -51,7 +51,7 @@ extension SdlCursorEx on SdlCursor {
   /// \sa SDL_SetCursor
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_Cursor * SDLCALL SDL_CreateCursor(const Uint8 * data, const Uint8 * mask, int w, int h, int hot_x, int hot_y)
+  /// extern SDL_DECLSPEC SDL_Cursor * SDLCALL SDL_CreateCursor(const Uint8 *data, const Uint8 *mask, int w, int h, int hot_x, int hot_y)
   /// ```
   static Pointer<SdlCursor> create(Pointer<Uint8> data, Pointer<Uint8> mask,
       int w, int h, int hotX, int hotY) {

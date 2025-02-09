@@ -204,12 +204,16 @@ extension TtfFontEx on TtfFont {
   /// Get the script used by a 32-bit codepoint.
   ///
   /// \param ch the character code to check.
-  /// \returns a script tag in the format used by HarfBuzz on success, or 0 on
-  /// failure; call SDL_GetError() for more information.
+  /// \returns an
+  /// [ISO 15924 code](https://unicode.org/iso15924/iso15924-codes.html)
+  /// on success, or 0 on failure; call SDL_GetError() for more
+  /// information.
   ///
   /// \threadsafety This function is thread-safe.
   ///
   /// \since This function is available since SDL_ttf 3.0.0.
+  ///
+  /// \sa TTF_TagToString
   ///
   /// ```c
   /// extern SDL_DECLSPEC Uint32 SDLCALL TTF_GetGlyphScript(Uint32 ch)
@@ -875,12 +879,14 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   ///
   /// Set the script to be used for text shaping by a font.
   ///
-  /// This returns false if SDL_ttf isn't build with HarfBuzz support.
+  /// This returns false if SDL_ttf isn't built with HarfBuzz support.
   ///
   /// This updates any TTF_Text objects using this font.
   ///
   /// \param font the font to modify.
-  /// \param script a script tag in the format used by HarfBuzz.
+  /// \param script an
+  /// [ISO 15924 code](https://unicode.org/iso15924/iso15924-codes.html)
+  /// .
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
@@ -888,6 +894,8 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// font.
   ///
   /// \since This function is available since SDL_ttf 3.0.0.
+  ///
+  /// \sa TTF_StringToTag
   ///
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL TTF_SetFontScript(TTF_Font *font, Uint32 script)

@@ -1619,6 +1619,46 @@ bool sdlBlitSurfaceUncheckedScaled(
 }
 
 ///
+/// Perform a stretched pixel copy from one surface to another.
+///
+/// \param src the SDL_Surface structure to be copied from.
+/// \param srcrect the SDL_Rect structure representing the rectangle to be
+/// copied, may not be NULL.
+/// \param dst the SDL_Surface structure that is the blit target.
+/// \param dstrect the SDL_Rect structure representing the target rectangle in
+/// the destination surface, may not be NULL.
+/// \param scaleMode the SDL_ScaleMode to be used.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety The same destination surface should not be used from two
+/// threads at once. It is safe to use the same source surface
+/// from multiple threads.
+///
+/// \since This function is available since SDL 3.4.0.
+///
+/// \sa SDL_BlitSurfaceScaled
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL SDL_StretchSurface(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, const SDL_Rect *dstrect, SDL_ScaleMode scaleMode)
+/// ```
+bool sdlStretchSurface(Pointer<SdlSurface> src, Pointer<SdlRect> srcrect,
+    Pointer<SdlSurface> dst, Pointer<SdlRect> dstrect, int scaleMode) {
+  final sdlStretchSurfaceLookupFunction = libSdl3.lookupFunction<
+      Uint8 Function(Pointer<SdlSurface> src, Pointer<SdlRect> srcrect,
+          Pointer<SdlSurface> dst, Pointer<SdlRect> dstrect, Int32 scaleMode),
+      int Function(
+          Pointer<SdlSurface> src,
+          Pointer<SdlRect> srcrect,
+          Pointer<SdlSurface> dst,
+          Pointer<SdlRect> dstrect,
+          int scaleMode)>('SDL_StretchSurface');
+  return sdlStretchSurfaceLookupFunction(
+          src, srcrect, dst, dstrect, scaleMode) ==
+      1;
+}
+
+///
 /// Perform a tiled blit to a destination surface, which may be of a different
 /// format.
 ///

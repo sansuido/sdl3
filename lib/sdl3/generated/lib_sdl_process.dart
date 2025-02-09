@@ -44,7 +44,7 @@ import 'struct_sdl.dart';
 /// \sa SDL_DestroyProcess
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_Process *SDLCALL SDL_CreateProcess(const char * const *args, bool pipe_stdio)
+/// extern SDL_DECLSPEC SDL_Process * SDLCALL SDL_CreateProcess(const char * const *args, bool pipe_stdio)
 /// ```
 Pointer<SdlProcess> sdlCreateProcess(
     Pointer<Pointer<Int8>> args, bool pipeStdio) {
@@ -117,7 +117,7 @@ Pointer<SdlProcess> sdlCreateProcess(
 /// \sa SDL_DestroyProcess
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_Process *SDLCALL SDL_CreateProcessWithProperties(SDL_PropertiesID props)
+/// extern SDL_DECLSPEC SDL_Process * SDLCALL SDL_CreateProcessWithProperties(SDL_PropertiesID props)
 /// ```
 Pointer<SdlProcess> sdlCreateProcessWithProperties(int props) {
   final sdlCreateProcessWithPropertiesLookupFunction = libSdl3.lookupFunction<
@@ -235,7 +235,7 @@ Pointer<NativeType> sdlReadProcess(Pointer<SdlProcess> process,
 /// \sa SDL_GetProcessOutput
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_IOStream *SDLCALL SDL_GetProcessInput(SDL_Process *process)
+/// extern SDL_DECLSPEC SDL_IOStream * SDLCALL SDL_GetProcessInput(SDL_Process *process)
 /// ```
 Pointer<SdlIoStream> sdlGetProcessInput(Pointer<SdlProcess> process) {
   final sdlGetProcessInputLookupFunction = libSdl3.lookupFunction<
@@ -268,7 +268,7 @@ Pointer<SdlIoStream> sdlGetProcessInput(Pointer<SdlProcess> process) {
 /// \sa SDL_GetProcessInput
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_IOStream *SDLCALL SDL_GetProcessOutput(SDL_Process *process)
+/// extern SDL_DECLSPEC SDL_IOStream * SDLCALL SDL_GetProcessOutput(SDL_Process *process)
 /// ```
 Pointer<SdlIoStream> sdlGetProcessOutput(Pointer<SdlProcess> process) {
   final sdlGetProcessOutputLookupFunction = libSdl3.lookupFunction<

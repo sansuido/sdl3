@@ -71,7 +71,7 @@ bool sdlGpuSupportsProperties(int props) {
 /// \sa SDL_GPUSupportsShaderFormats
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_GPUDevice *SDLCALL SDL_CreateGPUDevice( SDL_GPUShaderFormat format_flags, bool debug_mode, const char *name)
+/// extern SDL_DECLSPEC SDL_GPUDevice * SDLCALL SDL_CreateGPUDevice( SDL_GPUShaderFormat format_flags, bool debug_mode, const char *name)
 /// ```
 Pointer<SdlGpuDevice> sdlCreateGpuDevice(
     int formatFlags, bool debugMode, String? name) {
@@ -131,7 +131,7 @@ Pointer<SdlGpuDevice> sdlCreateGpuDevice(
 /// \sa SDL_GPUSupportsProperties
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_GPUDevice *SDLCALL SDL_CreateGPUDeviceWithProperties( SDL_PropertiesID props)
+/// extern SDL_DECLSPEC SDL_GPUDevice * SDLCALL SDL_CreateGPUDeviceWithProperties( SDL_PropertiesID props)
 /// ```
 Pointer<SdlGpuDevice> sdlCreateGpuDeviceWithProperties(int props) {
   final sdlCreateGpuDeviceWithPropertiesLookupFunction = libSdl3.lookupFunction<
@@ -297,7 +297,7 @@ int sdlGetGpuShaderFormats(Pointer<SdlGpuDevice> device) {
 /// \sa SDL_ReleaseGPUComputePipeline
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_GPUComputePipeline *SDLCALL SDL_CreateGPUComputePipeline( SDL_GPUDevice *device, const SDL_GPUComputePipelineCreateInfo *createinfo)
+/// extern SDL_DECLSPEC SDL_GPUComputePipeline * SDLCALL SDL_CreateGPUComputePipeline( SDL_GPUDevice *device, const SDL_GPUComputePipelineCreateInfo *createinfo)
 /// ```
 Pointer<SdlGpuComputePipeline> sdlCreateGpuComputePipeline(
     Pointer<SdlGpuDevice> device,
@@ -333,7 +333,7 @@ Pointer<SdlGpuComputePipeline> sdlCreateGpuComputePipeline(
 /// \sa SDL_ReleaseGPUGraphicsPipeline
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_GPUGraphicsPipeline *SDLCALL SDL_CreateGPUGraphicsPipeline( SDL_GPUDevice *device, const SDL_GPUGraphicsPipelineCreateInfo *createinfo)
+/// extern SDL_DECLSPEC SDL_GPUGraphicsPipeline * SDLCALL SDL_CreateGPUGraphicsPipeline( SDL_GPUDevice *device, const SDL_GPUGraphicsPipelineCreateInfo *createinfo)
 /// ```
 Pointer<SdlGpuGraphicsPipeline> sdlCreateGpuGraphicsPipeline(
     Pointer<SdlGpuDevice> device,
@@ -369,7 +369,7 @@ Pointer<SdlGpuGraphicsPipeline> sdlCreateGpuGraphicsPipeline(
 /// \sa SDL_ReleaseGPUSampler
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_GPUSampler *SDLCALL SDL_CreateGPUSampler( SDL_GPUDevice *device, const SDL_GPUSamplerCreateInfo *createinfo)
+/// extern SDL_DECLSPEC SDL_GPUSampler * SDLCALL SDL_CreateGPUSampler( SDL_GPUDevice *device, const SDL_GPUSamplerCreateInfo *createinfo)
 /// ```
 Pointer<SdlGpuSampler> sdlCreateGpuSampler(
     Pointer<SdlGpuDevice> device, Pointer<SdlGpuSamplerCreateInfo> createinfo) {
@@ -455,7 +455,7 @@ Pointer<SdlGpuSampler> sdlCreateGpuSampler(
 /// \sa SDL_ReleaseGPUShader
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_GPUShader *SDLCALL SDL_CreateGPUShader( SDL_GPUDevice *device, const SDL_GPUShaderCreateInfo *createinfo)
+/// extern SDL_DECLSPEC SDL_GPUShader * SDLCALL SDL_CreateGPUShader( SDL_GPUDevice *device, const SDL_GPUShaderCreateInfo *createinfo)
 /// ```
 Pointer<SdlGpuShader> sdlCreateGpuShader(
     Pointer<SdlGpuDevice> device, Pointer<SdlGpuShaderCreateInfo> createinfo) {
@@ -523,7 +523,7 @@ Pointer<SdlGpuShader> sdlCreateGpuShader(
 /// \sa SDL_GPUTextureSupportsFormat
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_GPUTexture *SDLCALL SDL_CreateGPUTexture( SDL_GPUDevice *device, const SDL_GPUTextureCreateInfo *createinfo)
+/// extern SDL_DECLSPEC SDL_GPUTexture * SDLCALL SDL_CreateGPUTexture( SDL_GPUDevice *device, const SDL_GPUTextureCreateInfo *createinfo)
 /// ```
 Pointer<SdlGpuTexture> sdlCreateGpuTexture(
     Pointer<SdlGpuDevice> device, Pointer<SdlGpuTextureCreateInfo> createinfo) {
@@ -580,7 +580,7 @@ Pointer<SdlGpuTexture> sdlCreateGpuTexture(
 /// \sa SDL_ReleaseGPUBuffer
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_GPUBuffer *SDLCALL SDL_CreateGPUBuffer( SDL_GPUDevice *device, const SDL_GPUBufferCreateInfo *createinfo)
+/// extern SDL_DECLSPEC SDL_GPUBuffer * SDLCALL SDL_CreateGPUBuffer( SDL_GPUDevice *device, const SDL_GPUBufferCreateInfo *createinfo)
 /// ```
 Pointer<SdlGpuBuffer> sdlCreateGpuBuffer(
     Pointer<SdlGpuDevice> device, Pointer<SdlGpuBufferCreateInfo> createinfo) {
@@ -620,7 +620,7 @@ Pointer<SdlGpuBuffer> sdlCreateGpuBuffer(
 /// \sa SDL_ReleaseGPUTransferBuffer
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_GPUTransferBuffer *SDLCALL SDL_CreateGPUTransferBuffer( SDL_GPUDevice *device, const SDL_GPUTransferBufferCreateInfo *createinfo)
+/// extern SDL_DECLSPEC SDL_GPUTransferBuffer * SDLCALL SDL_CreateGPUTransferBuffer( SDL_GPUDevice *device, const SDL_GPUTransferBufferCreateInfo *createinfo)
 /// ```
 Pointer<SdlGpuTransferBuffer> sdlCreateGpuTransferBuffer(
     Pointer<SdlGpuDevice> device,
@@ -975,7 +975,7 @@ void sdlReleaseGpuGraphicsPipeline(Pointer<SdlGpuDevice> device,
 /// \sa SDL_SubmitGPUCommandBufferAndAcquireFence
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_GPUCommandBuffer *SDLCALL SDL_AcquireGPUCommandBuffer( SDL_GPUDevice *device)
+/// extern SDL_DECLSPEC SDL_GPUCommandBuffer * SDLCALL SDL_AcquireGPUCommandBuffer( SDL_GPUDevice *device)
 /// ```
 Pointer<SdlGpuCommandBuffer> sdlAcquireGpuCommandBuffer(
     Pointer<SdlGpuDevice> device) {
@@ -1111,7 +1111,7 @@ void sdlPushGpuComputeUniformData(Pointer<SdlGpuCommandBuffer> commandBuffer,
 /// \sa SDL_EndGPURenderPass
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_GPURenderPass *SDLCALL SDL_BeginGPURenderPass( SDL_GPUCommandBuffer *command_buffer, const SDL_GPUColorTargetInfo *color_target_infos, Uint32 num_color_targets, const SDL_GPUDepthStencilTargetInfo *depth_stencil_target_info)
+/// extern SDL_DECLSPEC SDL_GPURenderPass * SDLCALL SDL_BeginGPURenderPass( SDL_GPUCommandBuffer *command_buffer, const SDL_GPUColorTargetInfo *color_target_infos, Uint32 num_color_targets, const SDL_GPUDepthStencilTargetInfo *depth_stencil_target_info)
 /// ```
 Pointer<SdlGpuRenderPass> sdlBeginGpuRenderPass(
     Pointer<SdlGpuCommandBuffer> commandBuffer,
@@ -1755,7 +1755,7 @@ void sdlEndGpuRenderPass(Pointer<SdlGpuRenderPass> renderPass) {
 /// \sa SDL_EndGPUComputePass
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_GPUComputePass *SDLCALL SDL_BeginGPUComputePass( SDL_GPUCommandBuffer *command_buffer, const SDL_GPUStorageTextureReadWriteBinding *storage_texture_bindings, Uint32 num_storage_texture_bindings, const SDL_GPUStorageBufferReadWriteBinding *storage_buffer_bindings, Uint32 num_storage_buffer_bindings)
+/// extern SDL_DECLSPEC SDL_GPUComputePass * SDLCALL SDL_BeginGPUComputePass( SDL_GPUCommandBuffer *command_buffer, const SDL_GPUStorageTextureReadWriteBinding *storage_texture_bindings, Uint32 num_storage_texture_bindings, const SDL_GPUStorageBufferReadWriteBinding *storage_buffer_bindings, Uint32 num_storage_buffer_bindings)
 /// ```
 Pointer<SdlGpuComputePass> sdlBeginGpuComputePass(
     Pointer<SdlGpuCommandBuffer> commandBuffer,
@@ -2029,7 +2029,7 @@ void sdlEndGpuComputePass(Pointer<SdlGpuComputePass> computePass) {
 /// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC void *SDLCALL SDL_MapGPUTransferBuffer( SDL_GPUDevice *device, SDL_GPUTransferBuffer *transfer_buffer, bool cycle)
+/// extern SDL_DECLSPEC void * SDLCALL SDL_MapGPUTransferBuffer( SDL_GPUDevice *device, SDL_GPUTransferBuffer *transfer_buffer, bool cycle)
 /// ```
 Pointer<NativeType> sdlMapGpuTransferBuffer(Pointer<SdlGpuDevice> device,
     Pointer<SdlGpuTransferBuffer> transferBuffer, bool cycle) {
@@ -2079,7 +2079,7 @@ void sdlUnmapGpuTransferBuffer(Pointer<SdlGpuDevice> device,
 /// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_GPUCopyPass *SDLCALL SDL_BeginGPUCopyPass( SDL_GPUCommandBuffer *command_buffer)
+/// extern SDL_DECLSPEC SDL_GPUCopyPass * SDLCALL SDL_BeginGPUCopyPass( SDL_GPUCommandBuffer *command_buffer)
 /// ```
 Pointer<SdlGpuCopyPass> sdlBeginGpuCopyPass(
     Pointer<SdlGpuCommandBuffer> commandBuffer) {
@@ -2842,7 +2842,7 @@ bool sdlSubmitGpuCommandBuffer(Pointer<SdlGpuCommandBuffer> commandBuffer) {
 /// \sa SDL_ReleaseGPUFence
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_GPUFence *SDLCALL SDL_SubmitGPUCommandBufferAndAcquireFence( SDL_GPUCommandBuffer *command_buffer)
+/// extern SDL_DECLSPEC SDL_GPUFence * SDLCALL SDL_SubmitGPUCommandBufferAndAcquireFence( SDL_GPUCommandBuffer *command_buffer)
 /// ```
 Pointer<SdlGpuFence> sdlSubmitGpuCommandBufferAndAcquireFence(
     Pointer<SdlGpuCommandBuffer> commandBuffer) {
@@ -2969,6 +2969,8 @@ bool sdlQueryGpuFence(
 
 ///
 /// Releases a fence obtained from SDL_SubmitGPUCommandBufferAndAcquireFence.
+///
+/// You must not reference the fence after calling this function.
 ///
 /// \param device a GPU context.
 /// \param fence a fence.

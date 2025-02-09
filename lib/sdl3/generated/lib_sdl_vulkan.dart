@@ -186,7 +186,7 @@ Pointer<Pointer<Int8>> sdlVulkanGetInstanceExtensions(Pointer<Uint32> count) {
 /// \sa SDL_Vulkan_DestroySurface
 ///
 /// ```c
-/// extern SDL_DECLSPEC bool SDLCALL SDL_Vulkan_CreateSurface(SDL_Window *window, VkInstance instance, const struct VkAllocationCallbacks *allocator, VkSurfaceKHR* surface)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_Vulkan_CreateSurface(SDL_Window *window, VkInstance instance, const struct VkAllocationCallbacks *allocator, VkSurfaceKHR *surface)
 /// ```
 bool sdlVulkanCreateSurface(
     Pointer<SdlWindow> window,

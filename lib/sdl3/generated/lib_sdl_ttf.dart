@@ -1150,14 +1150,67 @@ int ttfGetFontDirection(Pointer<TtfFont> font) {
 }
 
 ///
+/// Convert from a 4 character string to a 32-bit tag.
+///
+/// \param string the 4 character string to convert.
+/// \returns the 32-bit representation of the string.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL_ttf 3.0.0.
+///
+/// \sa TTF_TagToString
+///
+/// ```c
+/// extern SDL_DECLSPEC Uint32 SDLCALL TTF_StringToTag(const char *string)
+/// ```
+int ttfStringToTag(String? string) {
+  final ttfStringToTagLookupFunction = libSdl3Ttf.lookupFunction<
+      Uint32 Function(Pointer<Utf8> string),
+      int Function(Pointer<Utf8> string)>('TTF_StringToTag');
+  final stringPointer = string != null ? string.toNativeUtf8() : nullptr;
+  final result = ttfStringToTagLookupFunction(stringPointer);
+  calloc.free(stringPointer);
+  return result;
+}
+
+///
+/// Convert from a 32-bit tag to a 4 character string.
+///
+/// \param tag the 32-bit tag to convert.
+/// \param string a pointer filled in with the 4 character representation of
+/// the tag.
+/// \param size the size of the buffer pointed at by string, should be at least
+/// 4.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL_ttf 3.0.0.
+///
+/// \sa TTF_TagToString
+///
+/// ```c
+/// extern SDL_DECLSPEC void SDLCALL TTF_TagToString(Uint32 tag, char *string, size_t size)
+/// ```
+void ttfTagToString(int tag, Pointer<Int8> string, int size) {
+  final ttfTagToStringLookupFunction = libSdl3Ttf.lookupFunction<
+      Void Function(Uint32 tag, Pointer<Int8> string, Uint32 size),
+      void Function(
+          int tag, Pointer<Int8> string, int size)>('TTF_TagToString');
+  return ttfTagToStringLookupFunction(tag, string, size);
+}
+
+///
 /// Set the script to be used for text shaping by a font.
 ///
-/// This returns false if SDL_ttf isn't build with HarfBuzz support.
+/// This returns false if SDL_ttf isn't built with HarfBuzz support.
 ///
 /// This updates any TTF_Text objects using this font.
 ///
 /// \param font the font to modify.
-/// \param script a script tag in the format used by HarfBuzz.
+/// \param script an
+/// [ISO 15924 code](https://unicode.org/iso15924/iso15924-codes.html)
+/// .
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
@@ -1165,6 +1218,8 @@ int ttfGetFontDirection(Pointer<TtfFont> font) {
 /// font.
 ///
 /// \since This function is available since SDL_ttf 3.0.0.
+///
+/// \sa TTF_StringToTag
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL TTF_SetFontScript(TTF_Font *font, Uint32 script)
@@ -1180,12 +1235,16 @@ bool ttfSetFontScript(Pointer<TtfFont> font, int script) {
 /// Get the script used for text shaping a font.
 ///
 /// \param font the font to query.
-/// \returns a script tag in the format used by HarfBuzz.
+/// \returns an
+/// [ISO 15924 code](https://unicode.org/iso15924/iso15924-codes.html)
+/// or 0 if a script hasn't been set.
 ///
 /// \threadsafety This function should be called on the thread that created the
 /// font.
 ///
 /// \since This function is available since SDL_ttf 3.0.0.
+///
+/// \sa TTF_TagToString
 ///
 /// ```c
 /// extern SDL_DECLSPEC Uint32 SDLCALL TTF_GetFontScript(TTF_Font *font)
@@ -1201,12 +1260,16 @@ int ttfGetFontScript(Pointer<TtfFont> font) {
 /// Get the script used by a 32-bit codepoint.
 ///
 /// \param ch the character code to check.
-/// \returns a script tag in the format used by HarfBuzz on success, or 0 on
-/// failure; call SDL_GetError() for more information.
+/// \returns an
+/// [ISO 15924 code](https://unicode.org/iso15924/iso15924-codes.html)
+/// on success, or 0 on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \threadsafety This function is thread-safe.
 ///
 /// \since This function is available since SDL_ttf 3.0.0.
+///
+/// \sa TTF_TagToString
 ///
 /// ```c
 /// extern SDL_DECLSPEC Uint32 SDLCALL TTF_GetGlyphScript(Uint32 ch)
@@ -2776,10 +2839,12 @@ int ttfGetTextDirection(Pointer<TtfText> text) {
 ///
 /// Set the script to be used for text shaping a text object.
 ///
-/// This returns false if SDL_ttf isn't build with HarfBuzz support.
+/// This returns false if SDL_ttf isn't built with HarfBuzz support.
 ///
 /// \param text the text to modify.
-/// \param script a script tag in the format used by HarfBuzz.
+/// \param script an
+/// [ISO 15924 code](https://unicode.org/iso15924/iso15924-codes.html)
+/// .
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
@@ -2787,6 +2852,8 @@ int ttfGetTextDirection(Pointer<TtfText> text) {
 /// text.
 ///
 /// \since This function is available since SDL_ttf 3.0.0.
+///
+/// \sa TTF_StringToTag
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL TTF_SetTextScript(TTF_Text *text, Uint32 script)
@@ -2804,12 +2871,17 @@ bool ttfSetTextScript(Pointer<TtfText> text, int script) {
 /// This defaults to the script of the font used by the text object.
 ///
 /// \param text the text to query.
-/// \returns a script tag in the format used by HarfBuzz.
+/// \returns an
+/// [ISO 15924 code](https://unicode.org/iso15924/iso15924-codes.html)
+/// or 0 if a script hasn't been set on either the text object or the
+/// font.
 ///
 /// \threadsafety This function should be called on the thread that created the
 /// text.
 ///
 /// \since This function is available since SDL_ttf 3.0.0.
+///
+/// \sa TTF_TagToString
 ///
 /// ```c
 /// extern SDL_DECLSPEC Uint32 SDLCALL TTF_GetTextScript(TTF_Text *text)

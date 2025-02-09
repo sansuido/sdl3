@@ -149,7 +149,7 @@ void sdlResetHints() {
 /// \sa SDL_SetHintWithPriority
 ///
 /// ```c
-/// extern SDL_DECLSPEC const char *SDLCALL SDL_GetHint(const char *name)
+/// extern SDL_DECLSPEC const char * SDLCALL SDL_GetHint(const char *name)
 /// ```
 String? sdlGetHint(String? name) {
   final sdlGetHintLookupFunction = libSdl3.lookupFunction<

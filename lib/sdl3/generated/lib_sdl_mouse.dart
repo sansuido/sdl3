@@ -256,7 +256,7 @@ int sdlGetRelativeMouseState(Pointer<Float> x, Pointer<Float> y) {
 /// \sa SDL_WarpMouseGlobal
 ///
 /// ```c
-/// extern SDL_DECLSPEC void SDLCALL SDL_WarpMouseInWindow(SDL_Window * window, float x, float y)
+/// extern SDL_DECLSPEC void SDLCALL SDL_WarpMouseInWindow(SDL_Window *window, float x, float y)
 /// ```
 void sdlWarpMouseInWindow(Pointer<SdlWindow> window, double x, double y) {
   final sdlWarpMouseInWindowLookupFunction = libSdl3.lookupFunction<
@@ -460,7 +460,7 @@ bool sdlCaptureMouse(bool enabled) {
 /// \sa SDL_SetCursor
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_Cursor * SDLCALL SDL_CreateCursor(const Uint8 * data, const Uint8 * mask, int w, int h, int hot_x, int hot_y)
+/// extern SDL_DECLSPEC SDL_Cursor * SDLCALL SDL_CreateCursor(const Uint8 *data, const Uint8 *mask, int w, int h, int hot_x, int hot_y)
 /// ```
 Pointer<SdlCursor> sdlCreateCursor(Pointer<Uint8> data, Pointer<Uint8> mask,
     int w, int h, int hotX, int hotY) {

@@ -1,3 +1,7 @@
+## 1.3.4
+- SDL3-2025-02-09
+- [add] Added sdlStretchSurface and ttf tag functions.
+
 ## 1.3.3
 - SDL3-2025-02-02
 - [add] Added ttf functions.

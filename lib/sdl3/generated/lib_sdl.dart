@@ -172,7 +172,7 @@ typedef SdlRequestAndroidPermissionCallbackDart = void Function(
 typedef SdlRequestAndroidPermissionCallback = Void Function(
     Pointer<NativeType> userdata, Pointer<Utf8> permission, Uint8 granted);
 
-// typedef int (SDLCALL * SDL_ThreadFunction) (void *data)
+// typedef int (SDLCALL *SDL_ThreadFunction) (void *data)
 typedef SdlThreadFunctionDart = int Function(Pointer<NativeType> data);
 typedef SdlThreadFunction = Int32 Function(Pointer<NativeType> data);
 
