@@ -13,10 +13,11 @@ int main() {
   }
   sdlSetHint(SDL_HINT_RENDER_VSYNC, '1');
   var window = SdlWindowEx.create(
-      title: 'Gamepad',
-      w: gScreenWidth,
-      h: gScreenHeight,
-      flags: SDL_WINDOW_OPENGL);
+    title: 'Gamepad',
+    w: gScreenWidth,
+    h: gScreenHeight,
+    flags: SDL_WINDOW_OPENGL,
+  );
   if (window == nullptr) {
     print(sdlGetError());
     sdlQuit();
@@ -98,8 +99,11 @@ int main() {
         }
         renderer
           ..filledCircleColor(Point(20, (n + 1) * 20), 10, color)
-          ..stringColor(Point(20 + 20, (n + 1) * 20), buttonNames[n],
-              SdlColorEx.rgbaToU32(0, 0, 0, SDL_ALPHA_OPAQUE));
+          ..stringColor(
+            Point(20 + 20, (n + 1) * 20),
+            buttonNames[n],
+            SdlColorEx.rgbaToU32(0, 0, 0, SDL_ALPHA_OPAQUE),
+          );
       }
       renderer.present();
     }

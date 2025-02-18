@@ -56,8 +56,10 @@ int sdlGetVersion() {
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetRevision(void)
 /// ```
 String? sdlGetRevision() {
-  final sdlGetRevisionLookupFunction = libSdl3.lookupFunction<
-      Pointer<Utf8> Function(), Pointer<Utf8> Function()>('SDL_GetRevision');
+  final sdlGetRevisionLookupFunction = libSdl3
+      .lookupFunction<Pointer<Utf8> Function(), Pointer<Utf8> Function()>(
+        'SDL_GetRevision',
+      );
   final result = sdlGetRevisionLookupFunction();
   if (result == nullptr) {
     return null;

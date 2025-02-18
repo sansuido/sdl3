@@ -795,8 +795,12 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
     if (dstrect != null) {
       dstrectPointer = dstrect.callocInt();
     }
-    var result =
-        sdlBlitSurfaceUnchecked(this, srcrectPointer, dst, dstrectPointer);
+    var result = sdlBlitSurfaceUnchecked(
+      this,
+      srcrectPointer,
+      dst,
+      dstrectPointer,
+    );
     calloc.free(srcrectPointer);
     calloc.free(dstrectPointer);
     return result;
@@ -828,10 +832,12 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_BlitSurfaceScaled(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, const SDL_Rect *dstrect, SDL_ScaleMode scaleMode)
   /// ```
-  bool upperBlitScaled(Pointer<SdlSurface> dst,
-      {math.Rectangle<double>? srcrect,
-      math.Rectangle<double>? dstrect,
-      int scaleMode = 0}) {
+  bool upperBlitScaled(
+    Pointer<SdlSurface> dst, {
+    math.Rectangle<double>? srcrect,
+    math.Rectangle<double>? dstrect,
+    int scaleMode = 0,
+  }) {
     Pointer<SdlRect> srcrectPointer = nullptr;
     Pointer<SdlRect> dstrectPointer = nullptr;
     if (srcrect != null) {
@@ -841,7 +847,12 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
       dstrectPointer = dstrect.callocInt();
     }
     var result = sdlBlitSurfaceScaled(
-        this, srcrectPointer, dst, dstrectPointer, scaleMode);
+      this,
+      srcrectPointer,
+      dst,
+      dstrectPointer,
+      scaleMode,
+    );
     calloc.free(srcrectPointer);
     calloc.free(dstrectPointer);
     return result;
@@ -874,10 +885,12 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_BlitSurfaceUncheckedScaled(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, const SDL_Rect *dstrect, SDL_ScaleMode scaleMode)
   /// ```
-  bool lowerBlitScaled(Pointer<SdlSurface> dst,
-      {math.Rectangle<double>? srcrect,
-      math.Rectangle<double>? dstrect,
-      int scaleMode = 0}) {
+  bool lowerBlitScaled(
+    Pointer<SdlSurface> dst, {
+    math.Rectangle<double>? srcrect,
+    math.Rectangle<double>? dstrect,
+    int scaleMode = 0,
+  }) {
     Pointer<SdlRect> srcrectPointer = nullptr;
     Pointer<SdlRect> dstrectPointer = nullptr;
     if (srcrect != null) {
@@ -887,7 +900,12 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
       dstrectPointer = dstrect.callocInt();
     }
     var result = sdlBlitSurfaceUncheckedScaled(
-        this, srcrectPointer, dst, dstrectPointer, scaleMode);
+      this,
+      srcrectPointer,
+      dst,
+      dstrectPointer,
+      scaleMode,
+    );
     calloc.free(srcrectPointer);
     calloc.free(dstrectPointer);
     return result;

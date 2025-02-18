@@ -31,10 +31,9 @@ import 'struct_sdl.dart';
 /// ```
 Pointer<SdlTray> sdlCreateTray(Pointer<SdlSurface> icon, String? tooltip) {
   final sdlCreateTrayLookupFunction = libSdl3.lookupFunction<
-      Pointer<SdlTray> Function(
-          Pointer<SdlSurface> icon, Pointer<Utf8> tooltip),
-      Pointer<SdlTray> Function(
-          Pointer<SdlSurface> icon, Pointer<Utf8> tooltip)>('SDL_CreateTray');
+    Pointer<SdlTray> Function(Pointer<SdlSurface> icon, Pointer<Utf8> tooltip),
+    Pointer<SdlTray> Function(Pointer<SdlSurface> icon, Pointer<Utf8> tooltip)
+  >('SDL_CreateTray');
   final tooltipPointer = tooltip != null ? tooltip.toNativeUtf8() : nullptr;
   final result = sdlCreateTrayLookupFunction(icon, tooltipPointer);
   calloc.free(tooltipPointer);
@@ -59,9 +58,9 @@ Pointer<SdlTray> sdlCreateTray(Pointer<SdlSurface> icon, String? tooltip) {
 /// ```
 void sdlSetTrayIcon(Pointer<SdlTray> tray, Pointer<SdlSurface> icon) {
   final sdlSetTrayIconLookupFunction = libSdl3.lookupFunction<
-      Void Function(Pointer<SdlTray> tray, Pointer<SdlSurface> icon),
-      void Function(
-          Pointer<SdlTray> tray, Pointer<SdlSurface> icon)>('SDL_SetTrayIcon');
+    Void Function(Pointer<SdlTray> tray, Pointer<SdlSurface> icon),
+    void Function(Pointer<SdlTray> tray, Pointer<SdlSurface> icon)
+  >('SDL_SetTrayIcon');
   return sdlSetTrayIconLookupFunction(tray, icon);
 }
 
@@ -83,9 +82,9 @@ void sdlSetTrayIcon(Pointer<SdlTray> tray, Pointer<SdlSurface> icon) {
 /// ```
 void sdlSetTrayTooltip(Pointer<SdlTray> tray, String? tooltip) {
   final sdlSetTrayTooltipLookupFunction = libSdl3.lookupFunction<
-      Void Function(Pointer<SdlTray> tray, Pointer<Utf8> tooltip),
-      void Function(
-          Pointer<SdlTray> tray, Pointer<Utf8> tooltip)>('SDL_SetTrayTooltip');
+    Void Function(Pointer<SdlTray> tray, Pointer<Utf8> tooltip),
+    void Function(Pointer<SdlTray> tray, Pointer<Utf8> tooltip)
+  >('SDL_SetTrayTooltip');
   final tooltipPointer = tooltip != null ? tooltip.toNativeUtf8() : nullptr;
   final result = sdlSetTrayTooltipLookupFunction(tray, tooltipPointer);
   calloc.free(tooltipPointer);
@@ -119,9 +118,9 @@ void sdlSetTrayTooltip(Pointer<SdlTray> tray, String? tooltip) {
 /// ```
 Pointer<SdlTrayMenu> sdlCreateTrayMenu(Pointer<SdlTray> tray) {
   final sdlCreateTrayMenuLookupFunction = libSdl3.lookupFunction<
-      Pointer<SdlTrayMenu> Function(Pointer<SdlTray> tray),
-      Pointer<SdlTrayMenu> Function(
-          Pointer<SdlTray> tray)>('SDL_CreateTrayMenu');
+    Pointer<SdlTrayMenu> Function(Pointer<SdlTray> tray),
+    Pointer<SdlTrayMenu> Function(Pointer<SdlTray> tray)
+  >('SDL_CreateTrayMenu');
   return sdlCreateTrayMenuLookupFunction(tray);
 }
 
@@ -152,9 +151,9 @@ Pointer<SdlTrayMenu> sdlCreateTrayMenu(Pointer<SdlTray> tray) {
 /// ```
 Pointer<SdlTrayMenu> sdlCreateTraySubmenu(Pointer<SdlTrayEntry> entry) {
   final sdlCreateTraySubmenuLookupFunction = libSdl3.lookupFunction<
-      Pointer<SdlTrayMenu> Function(Pointer<SdlTrayEntry> entry),
-      Pointer<SdlTrayMenu> Function(
-          Pointer<SdlTrayEntry> entry)>('SDL_CreateTraySubmenu');
+    Pointer<SdlTrayMenu> Function(Pointer<SdlTrayEntry> entry),
+    Pointer<SdlTrayMenu> Function(Pointer<SdlTrayEntry> entry)
+  >('SDL_CreateTraySubmenu');
   return sdlCreateTraySubmenuLookupFunction(entry);
 }
 
@@ -185,8 +184,9 @@ Pointer<SdlTrayMenu> sdlCreateTraySubmenu(Pointer<SdlTrayEntry> entry) {
 /// ```
 Pointer<SdlTrayMenu> sdlGetTrayMenu(Pointer<SdlTray> tray) {
   final sdlGetTrayMenuLookupFunction = libSdl3.lookupFunction<
-      Pointer<SdlTrayMenu> Function(Pointer<SdlTray> tray),
-      Pointer<SdlTrayMenu> Function(Pointer<SdlTray> tray)>('SDL_GetTrayMenu');
+    Pointer<SdlTrayMenu> Function(Pointer<SdlTray> tray),
+    Pointer<SdlTrayMenu> Function(Pointer<SdlTray> tray)
+  >('SDL_GetTrayMenu');
   return sdlGetTrayMenuLookupFunction(tray);
 }
 
@@ -217,9 +217,9 @@ Pointer<SdlTrayMenu> sdlGetTrayMenu(Pointer<SdlTray> tray) {
 /// ```
 Pointer<SdlTrayMenu> sdlGetTraySubmenu(Pointer<SdlTrayEntry> entry) {
   final sdlGetTraySubmenuLookupFunction = libSdl3.lookupFunction<
-      Pointer<SdlTrayMenu> Function(Pointer<SdlTrayEntry> entry),
-      Pointer<SdlTrayMenu> Function(
-          Pointer<SdlTrayEntry> entry)>('SDL_GetTraySubmenu');
+    Pointer<SdlTrayMenu> Function(Pointer<SdlTrayEntry> entry),
+    Pointer<SdlTrayMenu> Function(Pointer<SdlTrayEntry> entry)
+  >('SDL_GetTraySubmenu');
   return sdlGetTraySubmenuLookupFunction(entry);
 }
 
@@ -245,12 +245,19 @@ Pointer<SdlTrayMenu> sdlGetTraySubmenu(Pointer<SdlTrayEntry> entry) {
 /// extern SDL_DECLSPEC const SDL_TrayEntry ** SDLCALL SDL_GetTrayEntries(SDL_TrayMenu *menu, int *count)
 /// ```
 Pointer<Pointer<SdlTrayEntry>> sdlGetTrayEntries(
-    Pointer<SdlTrayMenu> menu, Pointer<Int32> count) {
+  Pointer<SdlTrayMenu> menu,
+  Pointer<Int32> count,
+) {
   final sdlGetTrayEntriesLookupFunction = libSdl3.lookupFunction<
-      Pointer<Pointer<SdlTrayEntry>> Function(
-          Pointer<SdlTrayMenu> menu, Pointer<Int32> count),
-      Pointer<Pointer<SdlTrayEntry>> Function(Pointer<SdlTrayMenu> menu,
-          Pointer<Int32> count)>('SDL_GetTrayEntries');
+    Pointer<Pointer<SdlTrayEntry>> Function(
+      Pointer<SdlTrayMenu> menu,
+      Pointer<Int32> count,
+    ),
+    Pointer<Pointer<SdlTrayEntry>> Function(
+      Pointer<SdlTrayMenu> menu,
+      Pointer<Int32> count,
+    )
+  >('SDL_GetTrayEntries');
   return sdlGetTrayEntriesLookupFunction(menu, count);
 }
 
@@ -272,8 +279,9 @@ Pointer<Pointer<SdlTrayEntry>> sdlGetTrayEntries(
 /// ```
 void sdlRemoveTrayEntry(Pointer<SdlTrayEntry> entry) {
   final sdlRemoveTrayEntryLookupFunction = libSdl3.lookupFunction<
-      Void Function(Pointer<SdlTrayEntry> entry),
-      void Function(Pointer<SdlTrayEntry> entry)>('SDL_RemoveTrayEntry');
+    Void Function(Pointer<SdlTrayEntry> entry),
+    void Function(Pointer<SdlTrayEntry> entry)
+  >('SDL_RemoveTrayEntry');
   return sdlRemoveTrayEntryLookupFunction(entry);
 }
 
@@ -307,15 +315,32 @@ void sdlRemoveTrayEntry(Pointer<SdlTrayEntry> entry) {
 /// extern SDL_DECLSPEC SDL_TrayEntry * SDLCALL SDL_InsertTrayEntryAt(SDL_TrayMenu *menu, int pos, const char *label, SDL_TrayEntryFlags flags)
 /// ```
 Pointer<SdlTrayEntry> sdlInsertTrayEntryAt(
-    Pointer<SdlTrayMenu> menu, int pos, String? label, int flags) {
+  Pointer<SdlTrayMenu> menu,
+  int pos,
+  String? label,
+  int flags,
+) {
   final sdlInsertTrayEntryAtLookupFunction = libSdl3.lookupFunction<
-      Pointer<SdlTrayEntry> Function(Pointer<SdlTrayMenu> menu, Int32 pos,
-          Pointer<Utf8> label, Uint32 flags),
-      Pointer<SdlTrayEntry> Function(Pointer<SdlTrayMenu> menu, int pos,
-          Pointer<Utf8> label, int flags)>('SDL_InsertTrayEntryAt');
+    Pointer<SdlTrayEntry> Function(
+      Pointer<SdlTrayMenu> menu,
+      Int32 pos,
+      Pointer<Utf8> label,
+      Uint32 flags,
+    ),
+    Pointer<SdlTrayEntry> Function(
+      Pointer<SdlTrayMenu> menu,
+      int pos,
+      Pointer<Utf8> label,
+      int flags,
+    )
+  >('SDL_InsertTrayEntryAt');
   final labelPointer = label != null ? label.toNativeUtf8() : nullptr;
-  final result =
-      sdlInsertTrayEntryAtLookupFunction(menu, pos, labelPointer, flags);
+  final result = sdlInsertTrayEntryAtLookupFunction(
+    menu,
+    pos,
+    labelPointer,
+    flags,
+  );
   calloc.free(labelPointer);
   return result;
 }
@@ -345,9 +370,9 @@ Pointer<SdlTrayEntry> sdlInsertTrayEntryAt(
 /// ```
 void sdlSetTrayEntryLabel(Pointer<SdlTrayEntry> entry, String? label) {
   final sdlSetTrayEntryLabelLookupFunction = libSdl3.lookupFunction<
-      Void Function(Pointer<SdlTrayEntry> entry, Pointer<Utf8> label),
-      void Function(Pointer<SdlTrayEntry> entry,
-          Pointer<Utf8> label)>('SDL_SetTrayEntryLabel');
+    Void Function(Pointer<SdlTrayEntry> entry, Pointer<Utf8> label),
+    void Function(Pointer<SdlTrayEntry> entry, Pointer<Utf8> label)
+  >('SDL_SetTrayEntryLabel');
   final labelPointer = label != null ? label.toNativeUtf8() : nullptr;
   final result = sdlSetTrayEntryLabelLookupFunction(entry, labelPointer);
   calloc.free(labelPointer);
@@ -376,9 +401,9 @@ void sdlSetTrayEntryLabel(Pointer<SdlTrayEntry> entry, String? label) {
 /// ```
 String? sdlGetTrayEntryLabel(Pointer<SdlTrayEntry> entry) {
   final sdlGetTrayEntryLabelLookupFunction = libSdl3.lookupFunction<
-      Pointer<Utf8> Function(Pointer<SdlTrayEntry> entry),
-      Pointer<Utf8> Function(
-          Pointer<SdlTrayEntry> entry)>('SDL_GetTrayEntryLabel');
+    Pointer<Utf8> Function(Pointer<SdlTrayEntry> entry),
+    Pointer<Utf8> Function(Pointer<SdlTrayEntry> entry)
+  >('SDL_GetTrayEntryLabel');
   final result = sdlGetTrayEntryLabelLookupFunction(entry);
   if (result == nullptr) {
     return null;
@@ -408,9 +433,9 @@ String? sdlGetTrayEntryLabel(Pointer<SdlTrayEntry> entry) {
 /// ```
 void sdlSetTrayEntryChecked(Pointer<SdlTrayEntry> entry, bool checked) {
   final sdlSetTrayEntryCheckedLookupFunction = libSdl3.lookupFunction<
-      Void Function(Pointer<SdlTrayEntry> entry, Uint8 checked),
-      void Function(
-          Pointer<SdlTrayEntry> entry, int checked)>('SDL_SetTrayEntryChecked');
+    Void Function(Pointer<SdlTrayEntry> entry, Uint8 checked),
+    void Function(Pointer<SdlTrayEntry> entry, int checked)
+  >('SDL_SetTrayEntryChecked');
   return sdlSetTrayEntryCheckedLookupFunction(entry, checked ? 1 : 0);
 }
 
@@ -436,8 +461,9 @@ void sdlSetTrayEntryChecked(Pointer<SdlTrayEntry> entry, bool checked) {
 /// ```
 bool sdlGetTrayEntryChecked(Pointer<SdlTrayEntry> entry) {
   final sdlGetTrayEntryCheckedLookupFunction = libSdl3.lookupFunction<
-      Uint8 Function(Pointer<SdlTrayEntry> entry),
-      int Function(Pointer<SdlTrayEntry> entry)>('SDL_GetTrayEntryChecked');
+    Uint8 Function(Pointer<SdlTrayEntry> entry),
+    int Function(Pointer<SdlTrayEntry> entry)
+  >('SDL_GetTrayEntryChecked');
   return sdlGetTrayEntryCheckedLookupFunction(entry) == 1;
 }
 
@@ -461,9 +487,9 @@ bool sdlGetTrayEntryChecked(Pointer<SdlTrayEntry> entry) {
 /// ```
 void sdlSetTrayEntryEnabled(Pointer<SdlTrayEntry> entry, bool enabled) {
   final sdlSetTrayEntryEnabledLookupFunction = libSdl3.lookupFunction<
-      Void Function(Pointer<SdlTrayEntry> entry, Uint8 enabled),
-      void Function(
-          Pointer<SdlTrayEntry> entry, int enabled)>('SDL_SetTrayEntryEnabled');
+    Void Function(Pointer<SdlTrayEntry> entry, Uint8 enabled),
+    void Function(Pointer<SdlTrayEntry> entry, int enabled)
+  >('SDL_SetTrayEntryEnabled');
   return sdlSetTrayEntryEnabledLookupFunction(entry, enabled ? 1 : 0);
 }
 
@@ -487,8 +513,9 @@ void sdlSetTrayEntryEnabled(Pointer<SdlTrayEntry> entry, bool enabled) {
 /// ```
 bool sdlGetTrayEntryEnabled(Pointer<SdlTrayEntry> entry) {
   final sdlGetTrayEntryEnabledLookupFunction = libSdl3.lookupFunction<
-      Uint8 Function(Pointer<SdlTrayEntry> entry),
-      int Function(Pointer<SdlTrayEntry> entry)>('SDL_GetTrayEntryEnabled');
+    Uint8 Function(Pointer<SdlTrayEntry> entry),
+    int Function(Pointer<SdlTrayEntry> entry)
+  >('SDL_GetTrayEntryEnabled');
   return sdlGetTrayEntryEnabledLookupFunction(entry) == 1;
 }
 
@@ -512,18 +539,22 @@ bool sdlGetTrayEntryEnabled(Pointer<SdlTrayEntry> entry) {
 /// extern SDL_DECLSPEC void SDLCALL SDL_SetTrayEntryCallback(SDL_TrayEntry *entry, SDL_TrayCallback callback, void *userdata)
 /// ```
 void sdlSetTrayEntryCallback(
-    Pointer<SdlTrayEntry> entry,
-    Pointer<NativeFunction<SdlTrayCallback>> callback,
-    Pointer<NativeType> userdata) {
+  Pointer<SdlTrayEntry> entry,
+  Pointer<NativeFunction<SdlTrayCallback>> callback,
+  Pointer<NativeType> userdata,
+) {
   final sdlSetTrayEntryCallbackLookupFunction = libSdl3.lookupFunction<
-      Void Function(
-          Pointer<SdlTrayEntry> entry,
-          Pointer<NativeFunction<SdlTrayCallback>> callback,
-          Pointer<NativeType> userdata),
-      void Function(
-          Pointer<SdlTrayEntry> entry,
-          Pointer<NativeFunction<SdlTrayCallback>> callback,
-          Pointer<NativeType> userdata)>('SDL_SetTrayEntryCallback');
+    Void Function(
+      Pointer<SdlTrayEntry> entry,
+      Pointer<NativeFunction<SdlTrayCallback>> callback,
+      Pointer<NativeType> userdata,
+    ),
+    void Function(
+      Pointer<SdlTrayEntry> entry,
+      Pointer<NativeFunction<SdlTrayCallback>> callback,
+      Pointer<NativeType> userdata,
+    )
+  >('SDL_SetTrayEntryCallback');
   return sdlSetTrayEntryCallbackLookupFunction(entry, callback, userdata);
 }
 
@@ -542,8 +573,9 @@ void sdlSetTrayEntryCallback(
 /// ```
 void sdlClickTrayEntry(Pointer<SdlTrayEntry> entry) {
   final sdlClickTrayEntryLookupFunction = libSdl3.lookupFunction<
-      Void Function(Pointer<SdlTrayEntry> entry),
-      void Function(Pointer<SdlTrayEntry> entry)>('SDL_ClickTrayEntry');
+    Void Function(Pointer<SdlTrayEntry> entry),
+    void Function(Pointer<SdlTrayEntry> entry)
+  >('SDL_ClickTrayEntry');
   return sdlClickTrayEntryLookupFunction(entry);
 }
 
@@ -566,8 +598,9 @@ void sdlClickTrayEntry(Pointer<SdlTrayEntry> entry) {
 /// ```
 void sdlDestroyTray(Pointer<SdlTray> tray) {
   final sdlDestroyTrayLookupFunction = libSdl3.lookupFunction<
-      Void Function(Pointer<SdlTray> tray),
-      void Function(Pointer<SdlTray> tray)>('SDL_DestroyTray');
+    Void Function(Pointer<SdlTray> tray),
+    void Function(Pointer<SdlTray> tray)
+  >('SDL_DestroyTray');
   return sdlDestroyTrayLookupFunction(tray);
 }
 
@@ -589,9 +622,9 @@ void sdlDestroyTray(Pointer<SdlTray> tray) {
 /// ```
 Pointer<SdlTrayMenu> sdlGetTrayEntryParent(Pointer<SdlTrayEntry> entry) {
   final sdlGetTrayEntryParentLookupFunction = libSdl3.lookupFunction<
-      Pointer<SdlTrayMenu> Function(Pointer<SdlTrayEntry> entry),
-      Pointer<SdlTrayMenu> Function(
-          Pointer<SdlTrayEntry> entry)>('SDL_GetTrayEntryParent');
+    Pointer<SdlTrayMenu> Function(Pointer<SdlTrayEntry> entry),
+    Pointer<SdlTrayMenu> Function(Pointer<SdlTrayEntry> entry)
+  >('SDL_GetTrayEntryParent');
   return sdlGetTrayEntryParentLookupFunction(entry);
 }
 
@@ -618,9 +651,9 @@ Pointer<SdlTrayMenu> sdlGetTrayEntryParent(Pointer<SdlTrayEntry> entry) {
 /// ```
 Pointer<SdlTrayEntry> sdlGetTrayMenuParentEntry(Pointer<SdlTrayMenu> menu) {
   final sdlGetTrayMenuParentEntryLookupFunction = libSdl3.lookupFunction<
-      Pointer<SdlTrayEntry> Function(Pointer<SdlTrayMenu> menu),
-      Pointer<SdlTrayEntry> Function(
-          Pointer<SdlTrayMenu> menu)>('SDL_GetTrayMenuParentEntry');
+    Pointer<SdlTrayEntry> Function(Pointer<SdlTrayMenu> menu),
+    Pointer<SdlTrayEntry> Function(Pointer<SdlTrayMenu> menu)
+  >('SDL_GetTrayMenuParentEntry');
   return sdlGetTrayMenuParentEntryLookupFunction(menu);
 }
 
@@ -647,9 +680,9 @@ Pointer<SdlTrayEntry> sdlGetTrayMenuParentEntry(Pointer<SdlTrayMenu> menu) {
 /// ```
 Pointer<SdlTray> sdlGetTrayMenuParentTray(Pointer<SdlTrayMenu> menu) {
   final sdlGetTrayMenuParentTrayLookupFunction = libSdl3.lookupFunction<
-      Pointer<SdlTray> Function(Pointer<SdlTrayMenu> menu),
-      Pointer<SdlTray> Function(
-          Pointer<SdlTrayMenu> menu)>('SDL_GetTrayMenuParentTray');
+    Pointer<SdlTray> Function(Pointer<SdlTrayMenu> menu),
+    Pointer<SdlTray> Function(Pointer<SdlTrayMenu> menu)
+  >('SDL_GetTrayMenuParentTray');
   return sdlGetTrayMenuParentTrayLookupFunction(menu);
 }
 

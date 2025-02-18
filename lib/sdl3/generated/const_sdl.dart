@@ -1638,6 +1638,7 @@ const SDL_PIXELFORMAT_NV12 = 0x3231564e;
 const SDL_PIXELFORMAT_NV21 = 0x3132564e;
 const SDL_PIXELFORMAT_P010 = 0x30313050;
 const SDL_PIXELFORMAT_EXTERNAL_OES = 0x2053454f;
+const SDL_PIXELFORMAT_MJPG = 0x47504a4d;
 const SDL_COLOR_TYPE_UNKNOWN = 0;
 const SDL_COLOR_TYPE_RGB = 1;
 const SDL_COLOR_TYPE_YCBCR = 2;
@@ -2348,6 +2349,8 @@ const SDL_FLIP_VERTICAL = 2;
 const SDL_PROP_SURFACE_SDR_WHITE_POINT_FLOAT = 'SDL.surface.SDR_white_point';
 const SDL_PROP_SURFACE_HDR_HEADROOM_FLOAT = 'SDL.surface.HDR_headroom';
 const SDL_PROP_SURFACE_TONEMAP_OPERATOR_STRING = 'SDL.surface.tonemap';
+const SDL_PROP_SURFACE_HOTSPOT_X_NUMBER = 'SDL.surface.hotspot.x';
+const SDL_PROP_SURFACE_HOTSPOT_Y_NUMBER = 'SDL.surface.hotspot.y';
 //const SDL_system_h_ = ;
 const SDL_ANDROID_EXTERNAL_STORAGE_READ = 0x01;
 const SDL_ANDROID_EXTERNAL_STORAGE_WRITE = 0x02;
@@ -4202,6 +4205,7 @@ class SdlkPixelformat {
   static const nv21 = SDL_PIXELFORMAT_NV21;
   static const p010 = SDL_PIXELFORMAT_P010;
   static const externalOes = SDL_PIXELFORMAT_EXTERNAL_OES;
+  static const mjpg = SDL_PIXELFORMAT_MJPG;
 }
 
 class SdlkColorType {

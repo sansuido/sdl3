@@ -10,10 +10,11 @@ int main() {
   }
   sdlSetHint(SDL_HINT_RENDER_VSYNC, '1');
   var window = SdlWindowEx.create(
-      title: 'rust-sdl2 demo: Video [usage: drag and drop file.(png|jpg|bmp)]',
-      w: 800,
-      h: 600,
-      flags: SDL_WINDOW_RESIZABLE);
+    title: 'rust-sdl2 demo: Video [usage: drag and drop file.(png|jpg|bmp)]',
+    w: 800,
+    h: 600,
+    flags: SDL_WINDOW_RESIZABLE,
+  );
   if (window == nullptr) {
     print(sdlGetError());
     sdlQuit();

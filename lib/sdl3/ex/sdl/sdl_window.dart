@@ -99,8 +99,12 @@ extension SdlWindowEx on SdlWindow {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Window * SDLCALL SDL_CreateWindow(const char *title, int w, int h, SDL_WindowFlags flags)
   /// ```
-  static Pointer<SdlWindow> create(
-      {required String title, required int w, required int h, int flags = 0}) {
+  static Pointer<SdlWindow> create({
+    required String title,
+    required int w,
+    required int h,
+    int flags = 0,
+  }) {
     return sdlCreateWindow(title, w, h, flags);
   }
 }
@@ -434,8 +438,12 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
     var bottom = calloc<Int32>();
     var right = calloc<Int32>();
     sdlGetWindowBordersSize(this, top, left, bottom, right);
-    var result = math.Rectangle<double>(top.value.toDouble(),
-        left.value.toDouble(), bottom.value.toDouble(), right.value.toDouble());
+    var result = math.Rectangle<double>(
+      top.value.toDouble(),
+      left.value.toDouble(),
+      bottom.value.toDouble(),
+      right.value.toDouble(),
+    );
     calloc.free(top);
     calloc.free(left);
     calloc.free(bottom);
@@ -1306,8 +1314,10 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowHitTest(SDL_Window *window, SDL_HitTest callback, void *callback_data)
   /// ```
-  bool setHitTest(Pointer<NativeFunction<SdlHitTest>> callback,
-      Pointer<NativeType> callbackData) {
+  bool setHitTest(
+    Pointer<NativeFunction<SdlHitTest>> callback,
+    Pointer<NativeType> callbackData,
+  ) {
     return sdlSetWindowHitTest(this, callback, callbackData);
   }
 

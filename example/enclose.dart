@@ -14,10 +14,11 @@ int main() {
   }
   sdlSetHint(SDL_HINT_RENDER_VSYNC, '1');
   var window = SdlWindowEx.create(
-      title: 'enclose',
-      w: gScreenWidth,
-      h: gScreenHeight,
-      flags: SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE);
+    title: 'enclose',
+    w: gScreenWidth,
+    h: gScreenHeight,
+    flags: SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE,
+  );
   if (window == nullptr) {
     print(sdlGetError());
     sdlQuit();
@@ -66,8 +67,12 @@ int main() {
       }
     }
     var marge = 64;
-    var clip = Rectangle<double>(marge.toDouble(), marge.toDouble(),
-        window.getSize().x - marge * 2, window.getSize().y - marge * 2);
+    var clip = Rectangle<double>(
+      marge.toDouble(),
+      marge.toDouble(),
+      window.getSize().x - marge * 2,
+      window.getSize().y - marge * 2,
+    );
     renderer
       ..setDrawColor(0, 0, 0, 0)
       ..clear()
@@ -77,8 +82,11 @@ int main() {
       renderer.rectangleColor(rect, SdlColorEx.rgbaToU32(255, 255, 255, 255));
     }
     for (var n = 0; n < clickPoints.length; n++) {
-      renderer.stringColor(clickPoints[n], (n + 1).toString(),
-          SdlColorEx.rgbaToU32(0, 255, 0, 255));
+      renderer.stringColor(
+        clickPoints[n],
+        (n + 1).toString(),
+        SdlColorEx.rgbaToU32(0, 255, 0, 255),
+      );
     }
     renderer.present();
     fpsManager.delay();

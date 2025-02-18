@@ -29,13 +29,17 @@ import 'lib_sdl.dart';
 /// ```
 bool sdlSetHintWithPriority(String? name, String? value, int priority) {
   final sdlSetHintWithPriorityLookupFunction = libSdl3.lookupFunction<
-      Uint8 Function(Pointer<Utf8> name, Pointer<Utf8> value, Int32 priority),
-      int Function(Pointer<Utf8> name, Pointer<Utf8> value,
-          int priority)>('SDL_SetHintWithPriority');
+    Uint8 Function(Pointer<Utf8> name, Pointer<Utf8> value, Int32 priority),
+    int Function(Pointer<Utf8> name, Pointer<Utf8> value, int priority)
+  >('SDL_SetHintWithPriority');
   final namePointer = name != null ? name.toNativeUtf8() : nullptr;
   final valuePointer = value != null ? value.toNativeUtf8() : nullptr;
-  final result = sdlSetHintWithPriorityLookupFunction(
-          namePointer, valuePointer, priority) ==
+  final result =
+      sdlSetHintWithPriorityLookupFunction(
+        namePointer,
+        valuePointer,
+        priority,
+      ) ==
       1;
   calloc.free(namePointer);
   calloc.free(valuePointer);
@@ -67,8 +71,9 @@ bool sdlSetHintWithPriority(String? name, String? value, int priority) {
 /// ```
 bool sdlSetHint(String? name, String? value) {
   final sdlSetHintLookupFunction = libSdl3.lookupFunction<
-      Uint8 Function(Pointer<Utf8> name, Pointer<Utf8> value),
-      int Function(Pointer<Utf8> name, Pointer<Utf8> value)>('SDL_SetHint');
+    Uint8 Function(Pointer<Utf8> name, Pointer<Utf8> value),
+    int Function(Pointer<Utf8> name, Pointer<Utf8> value)
+  >('SDL_SetHint');
   final namePointer = name != null ? name.toNativeUtf8() : nullptr;
   final valuePointer = value != null ? value.toNativeUtf8() : nullptr;
   final result = sdlSetHintLookupFunction(namePointer, valuePointer) == 1;
@@ -100,8 +105,9 @@ bool sdlSetHint(String? name, String? value) {
 /// ```
 bool sdlResetHint(String? name) {
   final sdlResetHintLookupFunction = libSdl3.lookupFunction<
-      Uint8 Function(Pointer<Utf8> name),
-      int Function(Pointer<Utf8> name)>('SDL_ResetHint');
+    Uint8 Function(Pointer<Utf8> name),
+    int Function(Pointer<Utf8> name)
+  >('SDL_ResetHint');
   final namePointer = name != null ? name.toNativeUtf8() : nullptr;
   final result = sdlResetHintLookupFunction(namePointer) == 1;
   calloc.free(namePointer);
@@ -153,8 +159,9 @@ void sdlResetHints() {
 /// ```
 String? sdlGetHint(String? name) {
   final sdlGetHintLookupFunction = libSdl3.lookupFunction<
-      Pointer<Utf8> Function(Pointer<Utf8> name),
-      Pointer<Utf8> Function(Pointer<Utf8> name)>('SDL_GetHint');
+    Pointer<Utf8> Function(Pointer<Utf8> name),
+    Pointer<Utf8> Function(Pointer<Utf8> name)
+  >('SDL_GetHint');
   final namePointer = name != null ? name.toNativeUtf8() : nullptr;
   final result = sdlGetHintLookupFunction(namePointer);
   calloc.free(namePointer);
@@ -184,8 +191,9 @@ String? sdlGetHint(String? name) {
 /// ```
 bool sdlGetHintBoolean(String? name, bool defaultValue) {
   final sdlGetHintBooleanLookupFunction = libSdl3.lookupFunction<
-      Uint8 Function(Pointer<Utf8> name, Uint8 defaultValue),
-      int Function(Pointer<Utf8> name, int defaultValue)>('SDL_GetHintBoolean');
+    Uint8 Function(Pointer<Utf8> name, Uint8 defaultValue),
+    int Function(Pointer<Utf8> name, int defaultValue)
+  >('SDL_GetHintBoolean');
   final namePointer = name != null ? name.toNativeUtf8() : nullptr;
   final result =
       sdlGetHintBooleanLookupFunction(namePointer, defaultValue ? 1 : 0) == 1;
@@ -216,18 +224,22 @@ bool sdlGetHintBoolean(String? name, bool defaultValue) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_AddHintCallback(const char *name, SDL_HintCallback callback, void *userdata)
 /// ```
 bool sdlAddHintCallback(
-    String? name,
-    Pointer<NativeFunction<SdlHintCallback>> callback,
-    Pointer<NativeType> userdata) {
+  String? name,
+  Pointer<NativeFunction<SdlHintCallback>> callback,
+  Pointer<NativeType> userdata,
+) {
   final sdlAddHintCallbackLookupFunction = libSdl3.lookupFunction<
-      Uint8 Function(
-          Pointer<Utf8> name,
-          Pointer<NativeFunction<SdlHintCallback>> callback,
-          Pointer<NativeType> userdata),
-      int Function(
-          Pointer<Utf8> name,
-          Pointer<NativeFunction<SdlHintCallback>> callback,
-          Pointer<NativeType> userdata)>('SDL_AddHintCallback');
+    Uint8 Function(
+      Pointer<Utf8> name,
+      Pointer<NativeFunction<SdlHintCallback>> callback,
+      Pointer<NativeType> userdata,
+    ),
+    int Function(
+      Pointer<Utf8> name,
+      Pointer<NativeFunction<SdlHintCallback>> callback,
+      Pointer<NativeType> userdata,
+    )
+  >('SDL_AddHintCallback');
   final namePointer = name != null ? name.toNativeUtf8() : nullptr;
   final result =
       sdlAddHintCallbackLookupFunction(namePointer, callback, userdata) == 1;
@@ -253,21 +265,28 @@ bool sdlAddHintCallback(
 /// extern SDL_DECLSPEC void SDLCALL SDL_RemoveHintCallback(const char *name, SDL_HintCallback callback, void *userdata)
 /// ```
 void sdlRemoveHintCallback(
-    String? name,
-    Pointer<NativeFunction<SdlHintCallback>> callback,
-    Pointer<NativeType> userdata) {
+  String? name,
+  Pointer<NativeFunction<SdlHintCallback>> callback,
+  Pointer<NativeType> userdata,
+) {
   final sdlRemoveHintCallbackLookupFunction = libSdl3.lookupFunction<
-      Void Function(
-          Pointer<Utf8> name,
-          Pointer<NativeFunction<SdlHintCallback>> callback,
-          Pointer<NativeType> userdata),
-      void Function(
-          Pointer<Utf8> name,
-          Pointer<NativeFunction<SdlHintCallback>> callback,
-          Pointer<NativeType> userdata)>('SDL_RemoveHintCallback');
+    Void Function(
+      Pointer<Utf8> name,
+      Pointer<NativeFunction<SdlHintCallback>> callback,
+      Pointer<NativeType> userdata,
+    ),
+    void Function(
+      Pointer<Utf8> name,
+      Pointer<NativeFunction<SdlHintCallback>> callback,
+      Pointer<NativeType> userdata,
+    )
+  >('SDL_RemoveHintCallback');
   final namePointer = name != null ? name.toNativeUtf8() : nullptr;
-  final result =
-      sdlRemoveHintCallbackLookupFunction(namePointer, callback, userdata);
+  final result = sdlRemoveHintCallbackLookupFunction(
+    namePointer,
+    callback,
+    userdata,
+  );
   calloc.free(namePointer);
   return result;
 }

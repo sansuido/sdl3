@@ -154,7 +154,10 @@ extension SdlRendererFromImagePointerEx on Pointer<SdlRenderer> {
   /// extern SDL_DECLSPEC SDL_Texture * SDLCALL IMG_LoadTextureTyped_IO(SDL_Renderer *renderer, SDL_IOStream *src, bool closeio, const char *type)
   /// ```
   Pointer<SdlTexture> loadTextureTypedIo(
-      Pointer<SdlIoStream> src, bool freesrc, String type) {
+    Pointer<SdlIoStream> src,
+    bool freesrc,
+    String type,
+  ) {
     return imgLoadTextureTypedIo(this, src, freesrc, type);
   }
 }

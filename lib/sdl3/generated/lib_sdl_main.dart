@@ -57,21 +57,25 @@ void sdlSetMainReady() {
 /// extern SDL_DECLSPEC int SDLCALL SDL_RunApp(int argc, char *argv[], SDL_main_func mainFunction, void *reserved)
 /// ```
 int sdlRunApp(
-    int argc,
-    Pointer<Pointer<Int8>> argv,
-    Pointer<NativeFunction<SdlMainFunc>> mainFunction,
-    Pointer<NativeType> reserved) {
+  int argc,
+  Pointer<Pointer<Int8>> argv,
+  Pointer<NativeFunction<SdlMainFunc>> mainFunction,
+  Pointer<NativeType> reserved,
+) {
   final sdlRunAppLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(
-          Int32 argc,
-          Pointer<Pointer<Int8>> argv,
-          Pointer<NativeFunction<SdlMainFunc>> mainFunction,
-          Pointer<NativeType> reserved),
-      int Function(
-          int argc,
-          Pointer<Pointer<Int8>> argv,
-          Pointer<NativeFunction<SdlMainFunc>> mainFunction,
-          Pointer<NativeType> reserved)>('SDL_RunApp');
+    Int32 Function(
+      Int32 argc,
+      Pointer<Pointer<Int8>> argv,
+      Pointer<NativeFunction<SdlMainFunc>> mainFunction,
+      Pointer<NativeType> reserved,
+    ),
+    int Function(
+      int argc,
+      Pointer<Pointer<Int8>> argv,
+      Pointer<NativeFunction<SdlMainFunc>> mainFunction,
+      Pointer<NativeType> reserved,
+    )
+  >('SDL_RunApp');
   return sdlRunAppLookupFunction(argc, argv, mainFunction, reserved);
 }
 
@@ -104,30 +108,39 @@ int sdlRunApp(
 /// extern SDL_DECLSPEC int SDLCALL SDL_EnterAppMainCallbacks(int argc, char *argv[], SDL_AppInit_func appinit, SDL_AppIterate_func appiter, SDL_AppEvent_func appevent, SDL_AppQuit_func appquit)
 /// ```
 int sdlEnterAppMainCallbacks(
-    int argc,
-    Pointer<Pointer<Int8>> argv,
-    Pointer<NativeFunction<SdlAppInitFunc>> appinit,
-    Pointer<NativeFunction<SdlAppIterateFunc>> appiter,
-    Pointer<NativeFunction<SdlAppEventFunc>> appevent,
-    Pointer<NativeFunction<SdlAppQuitFunc>> appquit) {
+  int argc,
+  Pointer<Pointer<Int8>> argv,
+  Pointer<NativeFunction<SdlAppInitFunc>> appinit,
+  Pointer<NativeFunction<SdlAppIterateFunc>> appiter,
+  Pointer<NativeFunction<SdlAppEventFunc>> appevent,
+  Pointer<NativeFunction<SdlAppQuitFunc>> appquit,
+) {
   final sdlEnterAppMainCallbacksLookupFunction = libSdl3.lookupFunction<
-          Int32 Function(
-              Int32 argc,
-              Pointer<Pointer<Int8>> argv,
-              Pointer<NativeFunction<SdlAppInitFunc>> appinit,
-              Pointer<NativeFunction<SdlAppIterateFunc>> appiter,
-              Pointer<NativeFunction<SdlAppEventFunc>> appevent,
-              Pointer<NativeFunction<SdlAppQuitFunc>> appquit),
-          int Function(
-              int argc,
-              Pointer<Pointer<Int8>> argv,
-              Pointer<NativeFunction<SdlAppInitFunc>> appinit,
-              Pointer<NativeFunction<SdlAppIterateFunc>> appiter,
-              Pointer<NativeFunction<SdlAppEventFunc>> appevent,
-              Pointer<NativeFunction<SdlAppQuitFunc>> appquit)>(
-      'SDL_EnterAppMainCallbacks');
+    Int32 Function(
+      Int32 argc,
+      Pointer<Pointer<Int8>> argv,
+      Pointer<NativeFunction<SdlAppInitFunc>> appinit,
+      Pointer<NativeFunction<SdlAppIterateFunc>> appiter,
+      Pointer<NativeFunction<SdlAppEventFunc>> appevent,
+      Pointer<NativeFunction<SdlAppQuitFunc>> appquit,
+    ),
+    int Function(
+      int argc,
+      Pointer<Pointer<Int8>> argv,
+      Pointer<NativeFunction<SdlAppInitFunc>> appinit,
+      Pointer<NativeFunction<SdlAppIterateFunc>> appiter,
+      Pointer<NativeFunction<SdlAppEventFunc>> appevent,
+      Pointer<NativeFunction<SdlAppQuitFunc>> appquit,
+    )
+  >('SDL_EnterAppMainCallbacks');
   return sdlEnterAppMainCallbacksLookupFunction(
-      argc, argv, appinit, appiter, appevent, appquit);
+    argc,
+    argv,
+    appinit,
+    appiter,
+    appevent,
+    appquit,
+  );
 }
 
 ///
@@ -159,10 +172,9 @@ int sdlEnterAppMainCallbacks(
 /// ```
 bool sdlRegisterApp(String? name, int style, Pointer<NativeType> hInst) {
   final sdlRegisterAppLookupFunction = libSdl3.lookupFunction<
-      Uint8 Function(
-          Pointer<Utf8> name, Uint32 style, Pointer<NativeType> hInst),
-      int Function(Pointer<Utf8> name, int style,
-          Pointer<NativeType> hInst)>('SDL_RegisterApp');
+    Uint8 Function(Pointer<Utf8> name, Uint32 style, Pointer<NativeType> hInst),
+    int Function(Pointer<Utf8> name, int style, Pointer<NativeType> hInst)
+  >('SDL_RegisterApp');
   final namePointer = name != null ? name.toNativeUtf8() : nullptr;
   final result = sdlRegisterAppLookupFunction(namePointer, style, hInst) == 1;
   calloc.free(namePointer);
@@ -205,8 +217,9 @@ void sdlUnregisterApp() {
 /// extern SDL_DECLSPEC void SDLCALL SDL_GDKSuspendComplete(void)
 /// ```
 void sdlGdkSuspendComplete() {
-  final sdlGdkSuspendCompleteLookupFunction =
-      libSdl3.lookupFunction<Void Function(), void Function()>(
-          'SDL_GDKSuspendComplete');
+  final sdlGdkSuspendCompleteLookupFunction = libSdl3
+      .lookupFunction<Void Function(), void Function()>(
+        'SDL_GDKSuspendComplete',
+      );
   return sdlGdkSuspendCompleteLookupFunction();
 }

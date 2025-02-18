@@ -26,7 +26,10 @@ int main() {
     var size = texture.getSize();
     if (size != null) {
       renderer.setLogicalPresentation(
-          size.x.toInt(), size.y.toInt(), SDL_LOGICAL_PRESENTATION_LETTERBOX);
+        size.x.toInt(),
+        size.y.toInt(),
+        SDL_LOGICAL_PRESENTATION_LETTERBOX,
+      );
     }
   }
   bool done = true;
@@ -49,7 +52,11 @@ int main() {
     sdlRenderPresent(renderer);
     if (resizeCount > 0) {
       sdlShowSimpleMessageBox(
-          SDL_MESSAGEBOX_INFORMATION, 'resize', 'count=$resizeCount', window);
+        SDL_MESSAGEBOX_INFORMATION,
+        'resize',
+        'count=$resizeCount',
+        window,
+      );
       resizeCount -= 1;
     }
   }

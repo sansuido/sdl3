@@ -24,9 +24,9 @@ import 'struct_sdl.dart';
 /// ```
 Pointer<SdlStorage> sdlOpenTitleStorage(String? override, int props) {
   final sdlOpenTitleStorageLookupFunction = libSdl3.lookupFunction<
-      Pointer<SdlStorage> Function(Pointer<Utf8> override, Uint32 props),
-      Pointer<SdlStorage> Function(
-          Pointer<Utf8> override, int props)>('SDL_OpenTitleStorage');
+    Pointer<SdlStorage> Function(Pointer<Utf8> override, Uint32 props),
+    Pointer<SdlStorage> Function(Pointer<Utf8> override, int props)
+  >('SDL_OpenTitleStorage');
   final overridePointer = override != null ? override.toNativeUtf8() : nullptr;
   final result = sdlOpenTitleStorageLookupFunction(overridePointer, props);
   calloc.free(overridePointer);
@@ -62,14 +62,24 @@ Pointer<SdlStorage> sdlOpenTitleStorage(String? override, int props) {
 /// ```
 Pointer<SdlStorage> sdlOpenUserStorage(String? org, String? app, int props) {
   final sdlOpenUserStorageLookupFunction = libSdl3.lookupFunction<
-      Pointer<SdlStorage> Function(
-          Pointer<Utf8> org, Pointer<Utf8> app, Uint32 props),
-      Pointer<SdlStorage> Function(Pointer<Utf8> org, Pointer<Utf8> app,
-          int props)>('SDL_OpenUserStorage');
+    Pointer<SdlStorage> Function(
+      Pointer<Utf8> org,
+      Pointer<Utf8> app,
+      Uint32 props,
+    ),
+    Pointer<SdlStorage> Function(
+      Pointer<Utf8> org,
+      Pointer<Utf8> app,
+      int props,
+    )
+  >('SDL_OpenUserStorage');
   final orgPointer = org != null ? org.toNativeUtf8() : nullptr;
   final appPointer = app != null ? app.toNativeUtf8() : nullptr;
-  final result =
-      sdlOpenUserStorageLookupFunction(orgPointer, appPointer, props);
+  final result = sdlOpenUserStorageLookupFunction(
+    orgPointer,
+    appPointer,
+    props,
+  );
   calloc.free(orgPointer);
   calloc.free(appPointer);
   return result;
@@ -102,8 +112,9 @@ Pointer<SdlStorage> sdlOpenUserStorage(String? org, String? app, int props) {
 /// ```
 Pointer<SdlStorage> sdlOpenFileStorage(String? path) {
   final sdlOpenFileStorageLookupFunction = libSdl3.lookupFunction<
-      Pointer<SdlStorage> Function(Pointer<Utf8> path),
-      Pointer<SdlStorage> Function(Pointer<Utf8> path)>('SDL_OpenFileStorage');
+    Pointer<SdlStorage> Function(Pointer<Utf8> path),
+    Pointer<SdlStorage> Function(Pointer<Utf8> path)
+  >('SDL_OpenFileStorage');
   final pathPointer = path != null ? path.toNativeUtf8() : nullptr;
   final result = sdlOpenFileStorageLookupFunction(pathPointer);
   calloc.free(pathPointer);
@@ -141,12 +152,19 @@ Pointer<SdlStorage> sdlOpenFileStorage(String? path) {
 /// extern SDL_DECLSPEC SDL_Storage * SDLCALL SDL_OpenStorage(const SDL_StorageInterface *iface, void *userdata)
 /// ```
 Pointer<SdlStorage> sdlOpenStorage(
-    Pointer<SdlStorageInterface> iface, Pointer<NativeType> userdata) {
+  Pointer<SdlStorageInterface> iface,
+  Pointer<NativeType> userdata,
+) {
   final sdlOpenStorageLookupFunction = libSdl3.lookupFunction<
-      Pointer<SdlStorage> Function(
-          Pointer<SdlStorageInterface> iface, Pointer<NativeType> userdata),
-      Pointer<SdlStorage> Function(Pointer<SdlStorageInterface> iface,
-          Pointer<NativeType> userdata)>('SDL_OpenStorage');
+    Pointer<SdlStorage> Function(
+      Pointer<SdlStorageInterface> iface,
+      Pointer<NativeType> userdata,
+    ),
+    Pointer<SdlStorage> Function(
+      Pointer<SdlStorageInterface> iface,
+      Pointer<NativeType> userdata,
+    )
+  >('SDL_OpenStorage');
   return sdlOpenStorageLookupFunction(iface, userdata);
 }
 
@@ -171,8 +189,9 @@ Pointer<SdlStorage> sdlOpenStorage(
 /// ```
 bool sdlCloseStorage(Pointer<SdlStorage> storage) {
   final sdlCloseStorageLookupFunction = libSdl3.lookupFunction<
-      Uint8 Function(Pointer<SdlStorage> storage),
-      int Function(Pointer<SdlStorage> storage)>('SDL_CloseStorage');
+    Uint8 Function(Pointer<SdlStorage> storage),
+    int Function(Pointer<SdlStorage> storage)
+  >('SDL_CloseStorage');
   return sdlCloseStorageLookupFunction(storage) == 1;
 }
 
@@ -193,8 +212,9 @@ bool sdlCloseStorage(Pointer<SdlStorage> storage) {
 /// ```
 bool sdlStorageReady(Pointer<SdlStorage> storage) {
   final sdlStorageReadyLookupFunction = libSdl3.lookupFunction<
-      Uint8 Function(Pointer<SdlStorage> storage),
-      int Function(Pointer<SdlStorage> storage)>('SDL_StorageReady');
+    Uint8 Function(Pointer<SdlStorage> storage),
+    int Function(Pointer<SdlStorage> storage)
+  >('SDL_StorageReady');
   return sdlStorageReadyLookupFunction(storage) == 1;
 }
 
@@ -216,12 +236,22 @@ bool sdlStorageReady(Pointer<SdlStorage> storage) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetStorageFileSize(SDL_Storage *storage, const char *path, Uint64 *length)
 /// ```
 bool sdlGetStorageFileSize(
-    Pointer<SdlStorage> storage, String? path, Pointer<Uint64> length) {
+  Pointer<SdlStorage> storage,
+  String? path,
+  Pointer<Uint64> length,
+) {
   final sdlGetStorageFileSizeLookupFunction = libSdl3.lookupFunction<
-      Uint8 Function(Pointer<SdlStorage> storage, Pointer<Utf8> path,
-          Pointer<Uint64> length),
-      int Function(Pointer<SdlStorage> storage, Pointer<Utf8> path,
-          Pointer<Uint64> length)>('SDL_GetStorageFileSize');
+    Uint8 Function(
+      Pointer<SdlStorage> storage,
+      Pointer<Utf8> path,
+      Pointer<Uint64> length,
+    ),
+    int Function(
+      Pointer<SdlStorage> storage,
+      Pointer<Utf8> path,
+      Pointer<Uint64> length,
+    )
+  >('SDL_GetStorageFileSize');
   final pathPointer = path != null ? path.toNativeUtf8() : nullptr;
   final result =
       sdlGetStorageFileSizeLookupFunction(storage, pathPointer, length) == 1;
@@ -253,16 +283,34 @@ bool sdlGetStorageFileSize(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_ReadStorageFile(SDL_Storage *storage, const char *path, void *destination, Uint64 length)
 /// ```
-bool sdlReadStorageFile(Pointer<SdlStorage> storage, String? path,
-    Pointer<NativeType> destination, int length) {
+bool sdlReadStorageFile(
+  Pointer<SdlStorage> storage,
+  String? path,
+  Pointer<NativeType> destination,
+  int length,
+) {
   final sdlReadStorageFileLookupFunction = libSdl3.lookupFunction<
-      Uint8 Function(Pointer<SdlStorage> storage, Pointer<Utf8> path,
-          Pointer<NativeType> destination, Uint64 length),
-      int Function(Pointer<SdlStorage> storage, Pointer<Utf8> path,
-          Pointer<NativeType> destination, int length)>('SDL_ReadStorageFile');
+    Uint8 Function(
+      Pointer<SdlStorage> storage,
+      Pointer<Utf8> path,
+      Pointer<NativeType> destination,
+      Uint64 length,
+    ),
+    int Function(
+      Pointer<SdlStorage> storage,
+      Pointer<Utf8> path,
+      Pointer<NativeType> destination,
+      int length,
+    )
+  >('SDL_ReadStorageFile');
   final pathPointer = path != null ? path.toNativeUtf8() : nullptr;
-  final result = sdlReadStorageFileLookupFunction(
-          storage, pathPointer, destination, length) ==
+  final result =
+      sdlReadStorageFileLookupFunction(
+        storage,
+        pathPointer,
+        destination,
+        length,
+      ) ==
       1;
   calloc.free(pathPointer);
   return result;
@@ -287,17 +335,30 @@ bool sdlReadStorageFile(Pointer<SdlStorage> storage, String? path,
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_WriteStorageFile(SDL_Storage *storage, const char *path, const void *source, Uint64 length)
 /// ```
-bool sdlWriteStorageFile(Pointer<SdlStorage> storage, String? path,
-    Pointer<NativeType> source, int length) {
+bool sdlWriteStorageFile(
+  Pointer<SdlStorage> storage,
+  String? path,
+  Pointer<NativeType> source,
+  int length,
+) {
   final sdlWriteStorageFileLookupFunction = libSdl3.lookupFunction<
-      Uint8 Function(Pointer<SdlStorage> storage, Pointer<Utf8> path,
-          Pointer<NativeType> source, Uint64 length),
-      int Function(Pointer<SdlStorage> storage, Pointer<Utf8> path,
-          Pointer<NativeType> source, int length)>('SDL_WriteStorageFile');
+    Uint8 Function(
+      Pointer<SdlStorage> storage,
+      Pointer<Utf8> path,
+      Pointer<NativeType> source,
+      Uint64 length,
+    ),
+    int Function(
+      Pointer<SdlStorage> storage,
+      Pointer<Utf8> path,
+      Pointer<NativeType> source,
+      int length,
+    )
+  >('SDL_WriteStorageFile');
   final pathPointer = path != null ? path.toNativeUtf8() : nullptr;
   final result =
       sdlWriteStorageFileLookupFunction(storage, pathPointer, source, length) ==
-          1;
+      1;
   calloc.free(pathPointer);
   return result;
 }
@@ -319,9 +380,9 @@ bool sdlWriteStorageFile(Pointer<SdlStorage> storage, String? path,
 /// ```
 bool sdlCreateStorageDirectory(Pointer<SdlStorage> storage, String? path) {
   final sdlCreateStorageDirectoryLookupFunction = libSdl3.lookupFunction<
-      Uint8 Function(Pointer<SdlStorage> storage, Pointer<Utf8> path),
-      int Function(Pointer<SdlStorage> storage,
-          Pointer<Utf8> path)>('SDL_CreateStorageDirectory');
+    Uint8 Function(Pointer<SdlStorage> storage, Pointer<Utf8> path),
+    int Function(Pointer<SdlStorage> storage, Pointer<Utf8> path)
+  >('SDL_CreateStorageDirectory');
   final pathPointer = path != null ? path.toNativeUtf8() : nullptr;
   final result =
       sdlCreateStorageDirectoryLookupFunction(storage, pathPointer) == 1;
@@ -360,24 +421,33 @@ bool sdlCreateStorageDirectory(Pointer<SdlStorage> storage, String? path) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_EnumerateStorageDirectory(SDL_Storage *storage, const char *path, SDL_EnumerateDirectoryCallback callback, void *userdata)
 /// ```
 bool sdlEnumerateStorageDirectory(
-    Pointer<SdlStorage> storage,
-    String? path,
-    Pointer<NativeFunction<SdlEnumerateDirectoryCallback>> callback,
-    Pointer<NativeType> userdata) {
+  Pointer<SdlStorage> storage,
+  String? path,
+  Pointer<NativeFunction<SdlEnumerateDirectoryCallback>> callback,
+  Pointer<NativeType> userdata,
+) {
   final sdlEnumerateStorageDirectoryLookupFunction = libSdl3.lookupFunction<
-      Uint8 Function(
-          Pointer<SdlStorage> storage,
-          Pointer<Utf8> path,
-          Pointer<NativeFunction<SdlEnumerateDirectoryCallback>> callback,
-          Pointer<NativeType> userdata),
-      int Function(
-          Pointer<SdlStorage> storage,
-          Pointer<Utf8> path,
-          Pointer<NativeFunction<SdlEnumerateDirectoryCallback>> callback,
-          Pointer<NativeType> userdata)>('SDL_EnumerateStorageDirectory');
+    Uint8 Function(
+      Pointer<SdlStorage> storage,
+      Pointer<Utf8> path,
+      Pointer<NativeFunction<SdlEnumerateDirectoryCallback>> callback,
+      Pointer<NativeType> userdata,
+    ),
+    int Function(
+      Pointer<SdlStorage> storage,
+      Pointer<Utf8> path,
+      Pointer<NativeFunction<SdlEnumerateDirectoryCallback>> callback,
+      Pointer<NativeType> userdata,
+    )
+  >('SDL_EnumerateStorageDirectory');
   final pathPointer = path != null ? path.toNativeUtf8() : nullptr;
-  final result = sdlEnumerateStorageDirectoryLookupFunction(
-          storage, pathPointer, callback, userdata) ==
+  final result =
+      sdlEnumerateStorageDirectoryLookupFunction(
+        storage,
+        pathPointer,
+        callback,
+        userdata,
+      ) ==
       1;
   calloc.free(pathPointer);
   return result;
@@ -400,9 +470,9 @@ bool sdlEnumerateStorageDirectory(
 /// ```
 bool sdlRemoveStoragePath(Pointer<SdlStorage> storage, String? path) {
   final sdlRemoveStoragePathLookupFunction = libSdl3.lookupFunction<
-      Uint8 Function(Pointer<SdlStorage> storage, Pointer<Utf8> path),
-      int Function(Pointer<SdlStorage> storage,
-          Pointer<Utf8> path)>('SDL_RemoveStoragePath');
+    Uint8 Function(Pointer<SdlStorage> storage, Pointer<Utf8> path),
+    int Function(Pointer<SdlStorage> storage, Pointer<Utf8> path)
+  >('SDL_RemoveStoragePath');
   final pathPointer = path != null ? path.toNativeUtf8() : nullptr;
   final result = sdlRemoveStoragePathLookupFunction(storage, pathPointer) == 1;
   calloc.free(pathPointer);
@@ -426,16 +496,30 @@ bool sdlRemoveStoragePath(Pointer<SdlStorage> storage, String? path) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_RenameStoragePath(SDL_Storage *storage, const char *oldpath, const char *newpath)
 /// ```
 bool sdlRenameStoragePath(
-    Pointer<SdlStorage> storage, String? oldpath, String? newpath) {
+  Pointer<SdlStorage> storage,
+  String? oldpath,
+  String? newpath,
+) {
   final sdlRenameStoragePathLookupFunction = libSdl3.lookupFunction<
-      Uint8 Function(Pointer<SdlStorage> storage, Pointer<Utf8> oldpath,
-          Pointer<Utf8> newpath),
-      int Function(Pointer<SdlStorage> storage, Pointer<Utf8> oldpath,
-          Pointer<Utf8> newpath)>('SDL_RenameStoragePath');
+    Uint8 Function(
+      Pointer<SdlStorage> storage,
+      Pointer<Utf8> oldpath,
+      Pointer<Utf8> newpath,
+    ),
+    int Function(
+      Pointer<SdlStorage> storage,
+      Pointer<Utf8> oldpath,
+      Pointer<Utf8> newpath,
+    )
+  >('SDL_RenameStoragePath');
   final oldpathPointer = oldpath != null ? oldpath.toNativeUtf8() : nullptr;
   final newpathPointer = newpath != null ? newpath.toNativeUtf8() : nullptr;
-  final result = sdlRenameStoragePathLookupFunction(
-          storage, oldpathPointer, newpathPointer) ==
+  final result =
+      sdlRenameStoragePathLookupFunction(
+        storage,
+        oldpathPointer,
+        newpathPointer,
+      ) ==
       1;
   calloc.free(oldpathPointer);
   calloc.free(newpathPointer);
@@ -459,16 +543,30 @@ bool sdlRenameStoragePath(
 /// extern SDL_DECLSPEC bool SDLCALL SDL_CopyStorageFile(SDL_Storage *storage, const char *oldpath, const char *newpath)
 /// ```
 bool sdlCopyStorageFile(
-    Pointer<SdlStorage> storage, String? oldpath, String? newpath) {
+  Pointer<SdlStorage> storage,
+  String? oldpath,
+  String? newpath,
+) {
   final sdlCopyStorageFileLookupFunction = libSdl3.lookupFunction<
-      Uint8 Function(Pointer<SdlStorage> storage, Pointer<Utf8> oldpath,
-          Pointer<Utf8> newpath),
-      int Function(Pointer<SdlStorage> storage, Pointer<Utf8> oldpath,
-          Pointer<Utf8> newpath)>('SDL_CopyStorageFile');
+    Uint8 Function(
+      Pointer<SdlStorage> storage,
+      Pointer<Utf8> oldpath,
+      Pointer<Utf8> newpath,
+    ),
+    int Function(
+      Pointer<SdlStorage> storage,
+      Pointer<Utf8> oldpath,
+      Pointer<Utf8> newpath,
+    )
+  >('SDL_CopyStorageFile');
   final oldpathPointer = oldpath != null ? oldpath.toNativeUtf8() : nullptr;
   final newpathPointer = newpath != null ? newpath.toNativeUtf8() : nullptr;
-  final result = sdlCopyStorageFileLookupFunction(
-          storage, oldpathPointer, newpathPointer) ==
+  final result =
+      sdlCopyStorageFileLookupFunction(
+        storage,
+        oldpathPointer,
+        newpathPointer,
+      ) ==
       1;
   calloc.free(oldpathPointer);
   calloc.free(newpathPointer);
@@ -493,12 +591,22 @@ bool sdlCopyStorageFile(
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetStoragePathInfo(SDL_Storage *storage, const char *path, SDL_PathInfo *info)
 /// ```
 bool sdlGetStoragePathInfo(
-    Pointer<SdlStorage> storage, String? path, Pointer<SdlPathInfo> info) {
+  Pointer<SdlStorage> storage,
+  String? path,
+  Pointer<SdlPathInfo> info,
+) {
   final sdlGetStoragePathInfoLookupFunction = libSdl3.lookupFunction<
-      Uint8 Function(Pointer<SdlStorage> storage, Pointer<Utf8> path,
-          Pointer<SdlPathInfo> info),
-      int Function(Pointer<SdlStorage> storage, Pointer<Utf8> path,
-          Pointer<SdlPathInfo> info)>('SDL_GetStoragePathInfo');
+    Uint8 Function(
+      Pointer<SdlStorage> storage,
+      Pointer<Utf8> path,
+      Pointer<SdlPathInfo> info,
+    ),
+    int Function(
+      Pointer<SdlStorage> storage,
+      Pointer<Utf8> path,
+      Pointer<SdlPathInfo> info,
+    )
+  >('SDL_GetStoragePathInfo');
   final pathPointer = path != null ? path.toNativeUtf8() : nullptr;
   final result =
       sdlGetStoragePathInfoLookupFunction(storage, pathPointer, info) == 1;
@@ -522,9 +630,9 @@ bool sdlGetStoragePathInfo(
 /// ```
 int sdlGetStorageSpaceRemaining(Pointer<SdlStorage> storage) {
   final sdlGetStorageSpaceRemainingLookupFunction = libSdl3.lookupFunction<
-      Uint64 Function(Pointer<SdlStorage> storage),
-      int Function(
-          Pointer<SdlStorage> storage)>('SDL_GetStorageSpaceRemaining');
+    Uint64 Function(Pointer<SdlStorage> storage),
+    int Function(Pointer<SdlStorage> storage)
+  >('SDL_GetStorageSpaceRemaining');
   return sdlGetStorageSpaceRemainingLookupFunction(storage);
 }
 
@@ -569,25 +677,38 @@ int sdlGetStorageSpaceRemaining(Pointer<SdlStorage> storage) {
 /// ```c
 /// extern SDL_DECLSPEC char ** SDLCALL SDL_GlobStorageDirectory(SDL_Storage *storage, const char *path, const char *pattern, SDL_GlobFlags flags, int *count)
 /// ```
-Pointer<Pointer<Int8>> sdlGlobStorageDirectory(Pointer<SdlStorage> storage,
-    String? path, String? pattern, int flags, Pointer<Int32> count) {
+Pointer<Pointer<Int8>> sdlGlobStorageDirectory(
+  Pointer<SdlStorage> storage,
+  String? path,
+  String? pattern,
+  int flags,
+  Pointer<Int32> count,
+) {
   final sdlGlobStorageDirectoryLookupFunction = libSdl3.lookupFunction<
-      Pointer<Pointer<Int8>> Function(
-          Pointer<SdlStorage> storage,
-          Pointer<Utf8> path,
-          Pointer<Utf8> pattern,
-          Uint32 flags,
-          Pointer<Int32> count),
-      Pointer<Pointer<Int8>> Function(
-          Pointer<SdlStorage> storage,
-          Pointer<Utf8> path,
-          Pointer<Utf8> pattern,
-          int flags,
-          Pointer<Int32> count)>('SDL_GlobStorageDirectory');
+    Pointer<Pointer<Int8>> Function(
+      Pointer<SdlStorage> storage,
+      Pointer<Utf8> path,
+      Pointer<Utf8> pattern,
+      Uint32 flags,
+      Pointer<Int32> count,
+    ),
+    Pointer<Pointer<Int8>> Function(
+      Pointer<SdlStorage> storage,
+      Pointer<Utf8> path,
+      Pointer<Utf8> pattern,
+      int flags,
+      Pointer<Int32> count,
+    )
+  >('SDL_GlobStorageDirectory');
   final pathPointer = path != null ? path.toNativeUtf8() : nullptr;
   final patternPointer = pattern != null ? pattern.toNativeUtf8() : nullptr;
   final result = sdlGlobStorageDirectoryLookupFunction(
-      storage, pathPointer, patternPointer, flags, count);
+    storage,
+    pathPointer,
+    patternPointer,
+    flags,
+    count,
+  );
   calloc.free(pathPointer);
   calloc.free(patternPointer);
   return result;

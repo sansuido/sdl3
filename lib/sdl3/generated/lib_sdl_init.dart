@@ -62,8 +62,10 @@ import 'lib_sdl.dart';
 /// extern SDL_DECLSPEC bool SDLCALL SDL_Init(SDL_InitFlags flags)
 /// ```
 bool sdlInit(int flags) {
-  final sdlInitLookupFunction = libSdl3.lookupFunction<
-      Uint8 Function(Uint32 flags), int Function(int flags)>('SDL_Init');
+  final sdlInitLookupFunction = libSdl3
+      .lookupFunction<Uint8 Function(Uint32 flags), int Function(int flags)>(
+        'SDL_Init',
+      );
   return sdlInitLookupFunction(flags) == 1;
 }
 
@@ -86,9 +88,10 @@ bool sdlInit(int flags) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_InitSubSystem(SDL_InitFlags flags)
 /// ```
 bool sdlInitSubSystem(int flags) {
-  final sdlInitSubSystemLookupFunction = libSdl3.lookupFunction<
-      Uint8 Function(Uint32 flags),
-      int Function(int flags)>('SDL_InitSubSystem');
+  final sdlInitSubSystemLookupFunction = libSdl3
+      .lookupFunction<Uint8 Function(Uint32 flags), int Function(int flags)>(
+        'SDL_InitSubSystem',
+      );
   return sdlInitSubSystemLookupFunction(flags) == 1;
 }
 
@@ -109,9 +112,10 @@ bool sdlInitSubSystem(int flags) {
 /// extern SDL_DECLSPEC void SDLCALL SDL_QuitSubSystem(SDL_InitFlags flags)
 /// ```
 void sdlQuitSubSystem(int flags) {
-  final sdlQuitSubSystemLookupFunction = libSdl3.lookupFunction<
-      Void Function(Uint32 flags),
-      void Function(int flags)>('SDL_QuitSubSystem');
+  final sdlQuitSubSystemLookupFunction = libSdl3
+      .lookupFunction<Void Function(Uint32 flags), void Function(int flags)>(
+        'SDL_QuitSubSystem',
+      );
   return sdlQuitSubSystemLookupFunction(flags);
 }
 
@@ -131,8 +135,10 @@ void sdlQuitSubSystem(int flags) {
 /// extern SDL_DECLSPEC SDL_InitFlags SDLCALL SDL_WasInit(SDL_InitFlags flags)
 /// ```
 int sdlWasInit(int flags) {
-  final sdlWasInitLookupFunction = libSdl3.lookupFunction<
-      Uint32 Function(Uint32 flags), int Function(int flags)>('SDL_WasInit');
+  final sdlWasInitLookupFunction = libSdl3
+      .lookupFunction<Uint32 Function(Uint32 flags), int Function(int flags)>(
+        'SDL_WasInit',
+      );
   return sdlWasInitLookupFunction(flags);
 }
 
@@ -156,8 +162,8 @@ int sdlWasInit(int flags) {
 /// extern SDL_DECLSPEC void SDLCALL SDL_Quit(void)
 /// ```
 void sdlQuit() {
-  final sdlQuitLookupFunction =
-      libSdl3.lookupFunction<Void Function(), void Function()>('SDL_Quit');
+  final sdlQuitLookupFunction = libSdl3
+      .lookupFunction<Void Function(), void Function()>('SDL_Quit');
   return sdlQuitLookupFunction();
 }
 
@@ -215,17 +221,28 @@ bool sdlIsMainThread() {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_RunOnMainThread(SDL_MainThreadCallback callback, void *userdata, bool wait_complete)
 /// ```
-bool sdlRunOnMainThread(Pointer<NativeFunction<SdlMainThreadCallback>> callback,
-    Pointer<NativeType> userdata, bool waitComplete) {
+bool sdlRunOnMainThread(
+  Pointer<NativeFunction<SdlMainThreadCallback>> callback,
+  Pointer<NativeType> userdata,
+  bool waitComplete,
+) {
   final sdlRunOnMainThreadLookupFunction = libSdl3.lookupFunction<
-      Uint8 Function(Pointer<NativeFunction<SdlMainThreadCallback>> callback,
-          Pointer<NativeType> userdata, Uint8 waitComplete),
-      int Function(
-          Pointer<NativeFunction<SdlMainThreadCallback>> callback,
-          Pointer<NativeType> userdata,
-          int waitComplete)>('SDL_RunOnMainThread');
+    Uint8 Function(
+      Pointer<NativeFunction<SdlMainThreadCallback>> callback,
+      Pointer<NativeType> userdata,
+      Uint8 waitComplete,
+    ),
+    int Function(
+      Pointer<NativeFunction<SdlMainThreadCallback>> callback,
+      Pointer<NativeType> userdata,
+      int waitComplete,
+    )
+  >('SDL_RunOnMainThread');
   return sdlRunOnMainThreadLookupFunction(
-          callback, userdata, waitComplete ? 1 : 0) ==
+        callback,
+        userdata,
+        waitComplete ? 1 : 0,
+      ) ==
       1;
 }
 
@@ -269,19 +286,33 @@ bool sdlRunOnMainThread(Pointer<NativeFunction<SdlMainThreadCallback>> callback,
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetAppMetadata(const char *appname, const char *appversion, const char *appidentifier)
 /// ```
 bool sdlSetAppMetadata(
-    String? appname, String? appversion, String? appidentifier) {
+  String? appname,
+  String? appversion,
+  String? appidentifier,
+) {
   final sdlSetAppMetadataLookupFunction = libSdl3.lookupFunction<
-      Uint8 Function(Pointer<Utf8> appname, Pointer<Utf8> appversion,
-          Pointer<Utf8> appidentifier),
-      int Function(Pointer<Utf8> appname, Pointer<Utf8> appversion,
-          Pointer<Utf8> appidentifier)>('SDL_SetAppMetadata');
+    Uint8 Function(
+      Pointer<Utf8> appname,
+      Pointer<Utf8> appversion,
+      Pointer<Utf8> appidentifier,
+    ),
+    int Function(
+      Pointer<Utf8> appname,
+      Pointer<Utf8> appversion,
+      Pointer<Utf8> appidentifier,
+    )
+  >('SDL_SetAppMetadata');
   final appnamePointer = appname != null ? appname.toNativeUtf8() : nullptr;
   final appversionPointer =
       appversion != null ? appversion.toNativeUtf8() : nullptr;
   final appidentifierPointer =
       appidentifier != null ? appidentifier.toNativeUtf8() : nullptr;
-  final result = sdlSetAppMetadataLookupFunction(
-          appnamePointer, appversionPointer, appidentifierPointer) ==
+  final result =
+      sdlSetAppMetadataLookupFunction(
+        appnamePointer,
+        appversionPointer,
+        appidentifierPointer,
+      ) ==
       1;
   calloc.free(appnamePointer);
   calloc.free(appversionPointer);
@@ -355,9 +386,9 @@ bool sdlSetAppMetadata(
 /// ```
 bool sdlSetAppMetadataProperty(String? name, String? value) {
   final sdlSetAppMetadataPropertyLookupFunction = libSdl3.lookupFunction<
-      Uint8 Function(Pointer<Utf8> name, Pointer<Utf8> value),
-      int Function(Pointer<Utf8> name,
-          Pointer<Utf8> value)>('SDL_SetAppMetadataProperty');
+    Uint8 Function(Pointer<Utf8> name, Pointer<Utf8> value),
+    int Function(Pointer<Utf8> name, Pointer<Utf8> value)
+  >('SDL_SetAppMetadataProperty');
   final namePointer = name != null ? name.toNativeUtf8() : nullptr;
   final valuePointer = value != null ? value.toNativeUtf8() : nullptr;
   final result =
@@ -393,8 +424,9 @@ bool sdlSetAppMetadataProperty(String? name, String? value) {
 /// ```
 String? sdlGetAppMetadataProperty(String? name) {
   final sdlGetAppMetadataPropertyLookupFunction = libSdl3.lookupFunction<
-      Pointer<Utf8> Function(Pointer<Utf8> name),
-      Pointer<Utf8> Function(Pointer<Utf8> name)>('SDL_GetAppMetadataProperty');
+    Pointer<Utf8> Function(Pointer<Utf8> name),
+    Pointer<Utf8> Function(Pointer<Utf8> name)
+  >('SDL_GetAppMetadataProperty');
   final namePointer = name != null ? name.toNativeUtf8() : nullptr;
   final result = sdlGetAppMetadataPropertyLookupFunction(namePointer);
   calloc.free(namePointer);

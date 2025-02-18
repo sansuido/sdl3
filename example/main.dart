@@ -9,11 +9,7 @@ int main() {
     return -1;
   }
   sdlSetHint(SDL_HINT_RENDER_VSYNC, '1');
-  var window = SdlWindowEx.create(
-    title: 'draw triangle',
-    w: 640,
-    h: 480,
-  );
+  var window = SdlWindowEx.create(title: 'draw triangle', w: 640, h: 480);
   if (window == nullptr) {
     print(sdlGetError());
     sdlQuit();
@@ -30,7 +26,7 @@ int main() {
     Point(320, 200),
     Point(300, 240),
     Point(340, 240),
-    Point(320, 200)
+    Point(320, 200),
   ];
   var event = calloc<SdlEvent>();
   var running = true;

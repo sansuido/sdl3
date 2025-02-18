@@ -19,8 +19,8 @@ import 'struct_sdl.dart';
 /// extern SDL_DECLSPEC bool SDLCALL SDL_HasMouse(void)
 /// ```
 bool sdlHasMouse() {
-  final sdlHasMouseLookupFunction =
-      libSdl3.lookupFunction<Uint8 Function(), int Function()>('SDL_HasMouse');
+  final sdlHasMouseLookupFunction = libSdl3
+      .lookupFunction<Uint8 Function(), int Function()>('SDL_HasMouse');
   return sdlHasMouseLookupFunction() == 1;
 }
 
@@ -50,8 +50,9 @@ bool sdlHasMouse() {
 /// ```
 Pointer<Uint32> sdlGetMice(Pointer<Int32> count) {
   final sdlGetMiceLookupFunction = libSdl3.lookupFunction<
-      Pointer<Uint32> Function(Pointer<Int32> count),
-      Pointer<Uint32> Function(Pointer<Int32> count)>('SDL_GetMice');
+    Pointer<Uint32> Function(Pointer<Int32> count),
+    Pointer<Uint32> Function(Pointer<Int32> count)
+  >('SDL_GetMice');
   return sdlGetMiceLookupFunction(count);
 }
 
@@ -75,8 +76,9 @@ Pointer<Uint32> sdlGetMice(Pointer<Int32> count) {
 /// ```
 String? sdlGetMouseNameForId(int instanceId) {
   final sdlGetMouseNameForIdLookupFunction = libSdl3.lookupFunction<
-      Pointer<Utf8> Function(Uint32 instanceId),
-      Pointer<Utf8> Function(int instanceId)>('SDL_GetMouseNameForID');
+    Pointer<Utf8> Function(Uint32 instanceId),
+    Pointer<Utf8> Function(int instanceId)
+  >('SDL_GetMouseNameForID');
   final result = sdlGetMouseNameForIdLookupFunction(instanceId);
   if (result == nullptr) {
     return null;
@@ -98,8 +100,9 @@ String? sdlGetMouseNameForId(int instanceId) {
 /// ```
 Pointer<SdlWindow> sdlGetMouseFocus() {
   final sdlGetMouseFocusLookupFunction = libSdl3.lookupFunction<
-      Pointer<SdlWindow> Function(),
-      Pointer<SdlWindow> Function()>('SDL_GetMouseFocus');
+    Pointer<SdlWindow> Function(),
+    Pointer<SdlWindow> Function()
+  >('SDL_GetMouseFocus');
   return sdlGetMouseFocusLookupFunction();
 }
 
@@ -139,8 +142,9 @@ Pointer<SdlWindow> sdlGetMouseFocus() {
 /// ```
 int sdlGetMouseState(Pointer<Float> x, Pointer<Float> y) {
   final sdlGetMouseStateLookupFunction = libSdl3.lookupFunction<
-      Uint32 Function(Pointer<Float> x, Pointer<Float> y),
-      int Function(Pointer<Float> x, Pointer<Float> y)>('SDL_GetMouseState');
+    Uint32 Function(Pointer<Float> x, Pointer<Float> y),
+    int Function(Pointer<Float> x, Pointer<Float> y)
+  >('SDL_GetMouseState');
   return sdlGetMouseStateLookupFunction(x, y);
 }
 
@@ -184,9 +188,9 @@ int sdlGetMouseState(Pointer<Float> x, Pointer<Float> y) {
 /// ```
 int sdlGetGlobalMouseState(Pointer<Float> x, Pointer<Float> y) {
   final sdlGetGlobalMouseStateLookupFunction = libSdl3.lookupFunction<
-      Uint32 Function(Pointer<Float> x, Pointer<Float> y),
-      int Function(
-          Pointer<Float> x, Pointer<Float> y)>('SDL_GetGlobalMouseState');
+    Uint32 Function(Pointer<Float> x, Pointer<Float> y),
+    int Function(Pointer<Float> x, Pointer<Float> y)
+  >('SDL_GetGlobalMouseState');
   return sdlGetGlobalMouseStateLookupFunction(x, y);
 }
 
@@ -228,9 +232,9 @@ int sdlGetGlobalMouseState(Pointer<Float> x, Pointer<Float> y) {
 /// ```
 int sdlGetRelativeMouseState(Pointer<Float> x, Pointer<Float> y) {
   final sdlGetRelativeMouseStateLookupFunction = libSdl3.lookupFunction<
-      Uint32 Function(Pointer<Float> x, Pointer<Float> y),
-      int Function(
-          Pointer<Float> x, Pointer<Float> y)>('SDL_GetRelativeMouseState');
+    Uint32 Function(Pointer<Float> x, Pointer<Float> y),
+    int Function(Pointer<Float> x, Pointer<Float> y)
+  >('SDL_GetRelativeMouseState');
   return sdlGetRelativeMouseStateLookupFunction(x, y);
 }
 
@@ -260,9 +264,9 @@ int sdlGetRelativeMouseState(Pointer<Float> x, Pointer<Float> y) {
 /// ```
 void sdlWarpMouseInWindow(Pointer<SdlWindow> window, double x, double y) {
   final sdlWarpMouseInWindowLookupFunction = libSdl3.lookupFunction<
-      Void Function(Pointer<SdlWindow> window, Float x, Float y),
-      void Function(Pointer<SdlWindow> window, double x,
-          double y)>('SDL_WarpMouseInWindow');
+    Void Function(Pointer<SdlWindow> window, Float x, Float y),
+    void Function(Pointer<SdlWindow> window, double x, double y)
+  >('SDL_WarpMouseInWindow');
   return sdlWarpMouseInWindowLookupFunction(window, x, y);
 }
 
@@ -293,8 +297,9 @@ void sdlWarpMouseInWindow(Pointer<SdlWindow> window, double x, double y) {
 /// ```
 bool sdlWarpMouseGlobal(double x, double y) {
   final sdlWarpMouseGlobalLookupFunction = libSdl3.lookupFunction<
-      Uint8 Function(Float x, Float y),
-      int Function(double x, double y)>('SDL_WarpMouseGlobal');
+    Uint8 Function(Float x, Float y),
+    int Function(double x, double y)
+  >('SDL_WarpMouseGlobal');
   return sdlWarpMouseGlobalLookupFunction(x, y) == 1;
 }
 
@@ -329,9 +334,9 @@ bool sdlWarpMouseGlobal(double x, double y) {
 /// ```
 bool sdlSetWindowRelativeMouseMode(Pointer<SdlWindow> window, bool enabled) {
   final sdlSetWindowRelativeMouseModeLookupFunction = libSdl3.lookupFunction<
-      Uint8 Function(Pointer<SdlWindow> window, Uint8 enabled),
-      int Function(Pointer<SdlWindow> window,
-          int enabled)>('SDL_SetWindowRelativeMouseMode');
+    Uint8 Function(Pointer<SdlWindow> window, Uint8 enabled),
+    int Function(Pointer<SdlWindow> window, int enabled)
+  >('SDL_SetWindowRelativeMouseMode');
   return sdlSetWindowRelativeMouseModeLookupFunction(window, enabled ? 1 : 0) ==
       1;
 }
@@ -353,9 +358,9 @@ bool sdlSetWindowRelativeMouseMode(Pointer<SdlWindow> window, bool enabled) {
 /// ```
 bool sdlGetWindowRelativeMouseMode(Pointer<SdlWindow> window) {
   final sdlGetWindowRelativeMouseModeLookupFunction = libSdl3.lookupFunction<
-      Uint8 Function(Pointer<SdlWindow> window),
-      int Function(
-          Pointer<SdlWindow> window)>('SDL_GetWindowRelativeMouseMode');
+    Uint8 Function(Pointer<SdlWindow> window),
+    int Function(Pointer<SdlWindow> window)
+  >('SDL_GetWindowRelativeMouseMode');
   return sdlGetWindowRelativeMouseModeLookupFunction(window) == 1;
 }
 
@@ -409,9 +414,10 @@ bool sdlGetWindowRelativeMouseMode(Pointer<SdlWindow> window) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_CaptureMouse(bool enabled)
 /// ```
 bool sdlCaptureMouse(bool enabled) {
-  final sdlCaptureMouseLookupFunction = libSdl3.lookupFunction<
-      Uint8 Function(Uint8 enabled),
-      int Function(int enabled)>('SDL_CaptureMouse');
+  final sdlCaptureMouseLookupFunction = libSdl3
+      .lookupFunction<Uint8 Function(Uint8 enabled), int Function(int enabled)>(
+        'SDL_CaptureMouse',
+      );
   return sdlCaptureMouseLookupFunction(enabled ? 1 : 0) == 1;
 }
 
@@ -462,13 +468,32 @@ bool sdlCaptureMouse(bool enabled) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Cursor * SDLCALL SDL_CreateCursor(const Uint8 *data, const Uint8 *mask, int w, int h, int hot_x, int hot_y)
 /// ```
-Pointer<SdlCursor> sdlCreateCursor(Pointer<Uint8> data, Pointer<Uint8> mask,
-    int w, int h, int hotX, int hotY) {
+Pointer<SdlCursor> sdlCreateCursor(
+  Pointer<Uint8> data,
+  Pointer<Uint8> mask,
+  int w,
+  int h,
+  int hotX,
+  int hotY,
+) {
   final sdlCreateCursorLookupFunction = libSdl3.lookupFunction<
-      Pointer<SdlCursor> Function(Pointer<Uint8> data, Pointer<Uint8> mask,
-          Int32 w, Int32 h, Int32 hotX, Int32 hotY),
-      Pointer<SdlCursor> Function(Pointer<Uint8> data, Pointer<Uint8> mask,
-          int w, int h, int hotX, int hotY)>('SDL_CreateCursor');
+    Pointer<SdlCursor> Function(
+      Pointer<Uint8> data,
+      Pointer<Uint8> mask,
+      Int32 w,
+      Int32 h,
+      Int32 hotX,
+      Int32 hotY,
+    ),
+    Pointer<SdlCursor> Function(
+      Pointer<Uint8> data,
+      Pointer<Uint8> mask,
+      int w,
+      int h,
+      int hotX,
+      int hotY,
+    )
+  >('SDL_CreateCursor');
   return sdlCreateCursorLookupFunction(data, mask, w, h, hotX, hotY);
 }
 
@@ -504,12 +529,18 @@ Pointer<SdlCursor> sdlCreateCursor(Pointer<Uint8> data, Pointer<Uint8> mask,
 /// extern SDL_DECLSPEC SDL_Cursor * SDLCALL SDL_CreateColorCursor(SDL_Surface *surface, int hot_x, int hot_y)
 /// ```
 Pointer<SdlCursor> sdlCreateColorCursor(
-    Pointer<SdlSurface> surface, int hotX, int hotY) {
+  Pointer<SdlSurface> surface,
+  int hotX,
+  int hotY,
+) {
   final sdlCreateColorCursorLookupFunction = libSdl3.lookupFunction<
-      Pointer<SdlCursor> Function(
-          Pointer<SdlSurface> surface, Int32 hotX, Int32 hotY),
-      Pointer<SdlCursor> Function(Pointer<SdlSurface> surface, int hotX,
-          int hotY)>('SDL_CreateColorCursor');
+    Pointer<SdlCursor> Function(
+      Pointer<SdlSurface> surface,
+      Int32 hotX,
+      Int32 hotY,
+    ),
+    Pointer<SdlCursor> Function(Pointer<SdlSurface> surface, int hotX, int hotY)
+  >('SDL_CreateColorCursor');
   return sdlCreateColorCursorLookupFunction(surface, hotX, hotY);
 }
 
@@ -531,8 +562,9 @@ Pointer<SdlCursor> sdlCreateColorCursor(
 /// ```
 Pointer<SdlCursor> sdlCreateSystemCursor(int id) {
   final sdlCreateSystemCursorLookupFunction = libSdl3.lookupFunction<
-      Pointer<SdlCursor> Function(Int32 id),
-      Pointer<SdlCursor> Function(int id)>('SDL_CreateSystemCursor');
+    Pointer<SdlCursor> Function(Int32 id),
+    Pointer<SdlCursor> Function(int id)
+  >('SDL_CreateSystemCursor');
   return sdlCreateSystemCursorLookupFunction(id);
 }
 
@@ -559,8 +591,9 @@ Pointer<SdlCursor> sdlCreateSystemCursor(int id) {
 /// ```
 bool sdlSetCursor(Pointer<SdlCursor> cursor) {
   final sdlSetCursorLookupFunction = libSdl3.lookupFunction<
-      Uint8 Function(Pointer<SdlCursor> cursor),
-      int Function(Pointer<SdlCursor> cursor)>('SDL_SetCursor');
+    Uint8 Function(Pointer<SdlCursor> cursor),
+    int Function(Pointer<SdlCursor> cursor)
+  >('SDL_SetCursor');
   return sdlSetCursorLookupFunction(cursor) == 1;
 }
 
@@ -583,8 +616,9 @@ bool sdlSetCursor(Pointer<SdlCursor> cursor) {
 /// ```
 Pointer<SdlCursor> sdlGetCursor() {
   final sdlGetCursorLookupFunction = libSdl3.lookupFunction<
-      Pointer<SdlCursor> Function(),
-      Pointer<SdlCursor> Function()>('SDL_GetCursor');
+    Pointer<SdlCursor> Function(),
+    Pointer<SdlCursor> Function()
+  >('SDL_GetCursor');
   return sdlGetCursorLookupFunction();
 }
 
@@ -606,8 +640,9 @@ Pointer<SdlCursor> sdlGetCursor() {
 /// ```
 Pointer<SdlCursor> sdlGetDefaultCursor() {
   final sdlGetDefaultCursorLookupFunction = libSdl3.lookupFunction<
-      Pointer<SdlCursor> Function(),
-      Pointer<SdlCursor> Function()>('SDL_GetDefaultCursor');
+    Pointer<SdlCursor> Function(),
+    Pointer<SdlCursor> Function()
+  >('SDL_GetDefaultCursor');
   return sdlGetDefaultCursorLookupFunction();
 }
 
@@ -632,8 +667,9 @@ Pointer<SdlCursor> sdlGetDefaultCursor() {
 /// ```
 void sdlDestroyCursor(Pointer<SdlCursor> cursor) {
   final sdlDestroyCursorLookupFunction = libSdl3.lookupFunction<
-      Void Function(Pointer<SdlCursor> cursor),
-      void Function(Pointer<SdlCursor> cursor)>('SDL_DestroyCursor');
+    Void Function(Pointer<SdlCursor> cursor),
+    void Function(Pointer<SdlCursor> cursor)
+  >('SDL_DestroyCursor');
   return sdlDestroyCursorLookupFunction(cursor);
 }
 

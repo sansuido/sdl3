@@ -17,20 +17,22 @@ extension RectangleEx on math.Rectangle<double> {
 
   // dependence package:ffi
   Pointer<SdlFRect> calloc() {
-    var result = ffi.calloc<SdlFRect>()
-      ..ref.x = left
-      ..ref.y = top
-      ..ref.w = width
-      ..ref.h = height;
+    var result =
+        ffi.calloc<SdlFRect>()
+          ..ref.x = left
+          ..ref.y = top
+          ..ref.w = width
+          ..ref.h = height;
     return result;
   }
 
   Pointer<SdlRect> callocInt() {
-    var result = ffi.calloc<SdlRect>()
-      ..ref.x = left.toInt()
-      ..ref.y = top.toInt()
-      ..ref.w = width.toInt()
-      ..ref.h = height.toInt();
+    var result =
+        ffi.calloc<SdlRect>()
+          ..ref.x = left.toInt()
+          ..ref.y = top.toInt()
+          ..ref.w = width.toInt()
+          ..ref.h = height.toInt();
     return result;
   }
 
@@ -66,12 +68,16 @@ extension RectangleEx on math.Rectangle<double> {
 
   math.Rectangle<double> expansion(math.Point<double> value) {
     return fromCenter(
-        center, math.Point<double>(width + value.x, height + value.y));
+      center,
+      math.Point<double>(width + value.x, height + value.y),
+    );
   }
 
   math.Rectangle<double> expansionLT(math.Point<double> value) {
     return fromLTWH(
-        topLeft, math.Point<double>(width + value.x, height + value.y));
+      topLeft,
+      math.Point<double>(width + value.x, height + value.y),
+    );
   }
 
   math.Rectangle<double> union(math.Rectangle<double> b) {
@@ -87,14 +93,19 @@ extension RectangleEx on math.Rectangle<double> {
   }
 
   static math.Rectangle<double> fromCenter(
-      math.Point<double> center, math.Point<double> size) {
+    math.Point<double> center,
+    math.Point<double> size,
+  ) {
     return math.Rectangle<double>.fromPoints(
-        math.Point<double>(center.x - size.x / 2, center.y - size.y / 2),
-        math.Point<double>(center.x + size.x / 2, center.y + size.y / 2));
+      math.Point<double>(center.x - size.x / 2, center.y - size.y / 2),
+      math.Point<double>(center.x + size.x / 2, center.y + size.y / 2),
+    );
   }
 
   static math.Rectangle<double> fromLTWH(
-      math.Point<double> topLeft, math.Point<double> size) {
+    math.Point<double> topLeft,
+    math.Point<double> size,
+  ) {
     return math.Rectangle<double>(topLeft.x, topLeft.y, size.x, size.y);
   }
 }

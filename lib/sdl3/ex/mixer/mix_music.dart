@@ -149,7 +149,10 @@ extension MixMusicEx on MixMusic {
   /// extern SDL_DECLSPEC Mix_Music * SDLCALL Mix_LoadMUSType_IO(SDL_IOStream *src, Mix_MusicType type, bool closeio)
   /// ```
   static Pointer<MixMusic> loadTypeIo(
-      Pointer<SdlIoStream> src, int type, bool closeio) {
+    Pointer<SdlIoStream> src,
+    int type,
+    bool closeio,
+  ) {
     return mixLoadMusTypeIo(src, type, closeio);
   }
 

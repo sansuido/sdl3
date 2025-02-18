@@ -10,10 +10,11 @@ int main() {
   }
   sdlSetHint(SDL_HINT_RENDER_VSYNC, '1');
   var window = SdlWindowEx.create(
-      title: 'rust-sdl2 demo: Window',
-      w: 800,
-      h: 600,
-      flags: SDL_WINDOW_RESIZABLE);
+    title: 'rust-sdl2 demo: Window',
+    w: 800,
+    h: 600,
+    flags: SDL_WINDOW_RESIZABLE,
+  );
   if (window == nullptr) {
     print(sdlGetError());
     sdlQuit();
@@ -46,7 +47,8 @@ int main() {
     var position = window.getPosition();
     var size = window.getSize();
     window.setTitle(
-        'Window - pos(${position.x}x${position.y}), size(${size.x}x${size.y}): $tick');
+      'Window - pos(${position.x}x${position.y}), size(${size.x}x${size.y}): $tick',
+    );
     tick++;
     renderer
       ..setDrawColor(0, 0, 0, SDL_ALPHA_OPAQUE)

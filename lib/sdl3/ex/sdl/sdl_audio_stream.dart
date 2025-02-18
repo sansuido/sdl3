@@ -31,7 +31,9 @@ extension SdlAudioStreamEx on SdlAudioStream {
   /// extern SDL_DECLSPEC SDL_AudioStream * SDLCALL SDL_CreateAudioStream(const SDL_AudioSpec *src_spec, const SDL_AudioSpec *dst_spec)
   /// ```
   static Pointer<SdlAudioStream> create(
-      Pointer<SdlAudioSpec> srcSpec, Pointer<SdlAudioSpec> dstSpec) {
+    Pointer<SdlAudioSpec> srcSpec,
+    Pointer<SdlAudioSpec> dstSpec,
+  ) {
     return sdlCreateAudioStream(srcSpec, dstSpec);
   }
 
@@ -99,10 +101,11 @@ extension SdlAudioStreamEx on SdlAudioStream {
   /// extern SDL_DECLSPEC SDL_AudioStream * SDLCALL SDL_OpenAudioDeviceStream(SDL_AudioDeviceID devid, const SDL_AudioSpec *spec, SDL_AudioStreamCallback callback, void *userdata)
   /// ```
   static Pointer<SdlAudioStream> open(
-      int devid,
-      Pointer<SdlAudioSpec> spec,
-      Pointer<NativeFunction<SdlAudioStreamCallback>> callback,
-      Pointer<NativeType> userdata) {
+    int devid,
+    Pointer<SdlAudioSpec> spec,
+    Pointer<NativeFunction<SdlAudioStreamCallback>> callback,
+    Pointer<NativeType> userdata,
+  ) {
     return sdlOpenAudioDeviceStream(devid, spec, callback, userdata);
   }
 }
@@ -914,8 +917,10 @@ extension SdlAudioStreamPointerEx on Pointer<SdlAudioStream> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetAudioStreamGetCallback(SDL_AudioStream *stream, SDL_AudioStreamCallback callback, void *userdata)
   /// ```
-  bool setGetCallback(Pointer<NativeFunction<SdlAudioStreamCallback>> callback,
-      Pointer<NativeType> userdata) {
+  bool setGetCallback(
+    Pointer<NativeFunction<SdlAudioStreamCallback>> callback,
+    Pointer<NativeType> userdata,
+  ) {
     return sdlSetAudioStreamGetCallback(this, callback, userdata);
   }
 
@@ -969,8 +974,10 @@ extension SdlAudioStreamPointerEx on Pointer<SdlAudioStream> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetAudioStreamPutCallback(SDL_AudioStream *stream, SDL_AudioStreamCallback callback, void *userdata)
   /// ```
-  bool setPutCallback(Pointer<NativeFunction<SdlAudioStreamCallback>> callback,
-      Pointer<NativeType> userdata) {
+  bool setPutCallback(
+    Pointer<NativeFunction<SdlAudioStreamCallback>> callback,
+    Pointer<NativeType> userdata,
+  ) {
     return sdlSetAudioStreamPutCallback(this, callback, userdata);
   }
 

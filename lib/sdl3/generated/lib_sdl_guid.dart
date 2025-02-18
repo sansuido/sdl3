@@ -22,9 +22,9 @@ import 'struct_sdl.dart';
 /// ```
 void sdlGuidToString(SdlGuid guid, Pointer<Int8> pszGuid, int cbGuid) {
   final sdlGuidToStringLookupFunction = libSdl3.lookupFunction<
-      Void Function(SdlGuid guid, Pointer<Int8> pszGuid, Int32 cbGuid),
-      void Function(
-          SdlGuid guid, Pointer<Int8> pszGuid, int cbGuid)>('SDL_GUIDToString');
+    Void Function(SdlGuid guid, Pointer<Int8> pszGuid, Int32 cbGuid),
+    void Function(SdlGuid guid, Pointer<Int8> pszGuid, int cbGuid)
+  >('SDL_GUIDToString');
   return sdlGuidToStringLookupFunction(guid, pszGuid, cbGuid);
 }
 
@@ -49,8 +49,9 @@ void sdlGuidToString(SdlGuid guid, Pointer<Int8> pszGuid, int cbGuid) {
 /// ```
 SdlGuid sdlStringToGuid(String? pchGuid) {
   final sdlStringToGuidLookupFunction = libSdl3.lookupFunction<
-      SdlGuid Function(Pointer<Utf8> pchGuid),
-      SdlGuid Function(Pointer<Utf8> pchGuid)>('SDL_StringToGUID');
+    SdlGuid Function(Pointer<Utf8> pchGuid),
+    SdlGuid Function(Pointer<Utf8> pchGuid)
+  >('SDL_StringToGUID');
   final pchGuidPointer = pchGuid != null ? pchGuid.toNativeUtf8() : nullptr;
   final result = sdlStringToGuidLookupFunction(pchGuidPointer);
   calloc.free(pchGuidPointer);

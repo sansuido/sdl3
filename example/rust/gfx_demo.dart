@@ -15,10 +15,11 @@ int main() {
   }
   sdlSetHint(SDL_HINT_RENDER_VSYNC, '1');
   var window = SdlWindowEx.create(
-      title: 'rust-sdl2_gfx: draw line & FPSManager',
-      w: gScreenWidth,
-      h: gScreenHeight,
-      flags: SDL_WINDOW_OPENGL);
+    title: 'rust-sdl2_gfx: draw line & FPSManager',
+    w: gScreenWidth,
+    h: gScreenHeight,
+    flags: SDL_WINDOW_OPENGL,
+  );
   if (window == nullptr) {
     print(sdlGetError());
     sdlQuit();
@@ -73,8 +74,11 @@ int main() {
       ..polygonColor(clickPoints, SdlColorEx.rgbaToU32(255, 255, 255, 255))
       ..bezierColor(clickPoints, 10, SdlColorEx.rgbaToU32(255, 0, 0, 255));
     for (var n = 0; n < clickPoints.length; n++) {
-      renderer.stringColor(clickPoints[n], (n + 1).toString(),
-          SdlColorEx.rgbaToU32(0, 255, 0, 255));
+      renderer.stringColor(
+        clickPoints[n],
+        (n + 1).toString(),
+        SdlColorEx.rgbaToU32(0, 255, 0, 255),
+      );
     }
     renderer.present();
     fpsManager.delay();

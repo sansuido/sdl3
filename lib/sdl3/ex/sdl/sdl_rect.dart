@@ -13,7 +13,11 @@ extension SdlFRectPointerEx on Pointer<SdlFRect> {
 extension SdlRectPointerEx on Pointer<SdlRect> {
   math.Rectangle<double> create() {
     return math.Rectangle<double>(
-        ref.x.toDouble(), ref.y.toDouble(), ref.w.toDouble(), ref.h.toDouble());
+      ref.x.toDouble(),
+      ref.y.toDouble(),
+      ref.w.toDouble(),
+      ref.h.toDouble(),
+    );
   }
 
   ///
@@ -100,8 +104,12 @@ extension SdlRectPointerEx on Pointer<SdlRect> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRectAndLineIntersection(const SDL_Rect *rect, int *X1, int *Y1, int *X2, int *Y2)
   /// ```
-  bool getLineIntersection(Pointer<Int32> x1, Pointer<Int32> y1,
-      Pointer<Int32> x2, Pointer<Int32> y2) {
+  bool getLineIntersection(
+    Pointer<Int32> x1,
+    Pointer<Int32> y1,
+    Pointer<Int32> x2,
+    Pointer<Int32> y2,
+  ) {
     return sdlGetRectAndLineIntersection(this, x1, y1, x2, y2);
   }
 }

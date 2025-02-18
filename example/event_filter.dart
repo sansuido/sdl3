@@ -40,11 +40,7 @@ int main() {
     return -1;
   }
   sdlSetHint(SDL_HINT_RENDER_VSYNC, '1');
-  var window = SdlWindowEx.create(
-    title: 'Hello SDL',
-    w: 640,
-    h: 480,
-  );
+  var window = SdlWindowEx.create(title: 'Hello SDL', w: 640, h: 480);
   if (window == nullptr) {
     print(sdlGetError());
     sdlQuit();

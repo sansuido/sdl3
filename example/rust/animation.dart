@@ -9,8 +9,12 @@ class Chara {
   late Rectangle<double> dstrect;
   late double angle;
   late int flip;
-  Chara(this.srcrect, this.dstrect,
-      {this.angle = 0, this.flip = SDL_FLIP_NONE});
+  Chara(
+    this.srcrect,
+    this.dstrect, {
+    this.angle = 0,
+    this.flip = SDL_FLIP_NONE,
+  });
 }
 
 int main() {
@@ -41,8 +45,13 @@ int main() {
   // Baby - walk animation
   charas.add(Chara(Rectangle(0, 0, 32, 32), Rectangle(0, 0, 32 * 4, 32 * 4)));
   // King - walk animation
-  charas.add(Chara(Rectangle(0, 32, 32, 32), Rectangle(0, 0, 32 * 4, 32 * 4),
-      flip: SDL_FLIP_HORIZONTAL));
+  charas.add(
+    Chara(
+      Rectangle(0, 32, 32, 32),
+      Rectangle(0, 0, 32 * 4, 32 * 4),
+      flip: SDL_FLIP_HORIZONTAL,
+    ),
+  );
   // Soldier - walk animation
   charas.add(Chara(Rectangle(0, 64, 32, 32), Rectangle(0, 0, 32 * 4, 32 * 4)));
   charas[0].dstrect = charas[0].dstrect.centerOn(Point(-64, 120));
@@ -64,28 +73,36 @@ int main() {
       }
     }
     var ticks = sdlGetTicks();
-    charas[0].srcrect =
-        charas[0].srcrect.setX(32 * ((ticks / 100) % 4).floor().toDouble());
-    charas[0].dstrect =
-        charas[0].dstrect.setX(1 * ((ticks / 14) % 768).floor() - 128);
-    charas[1].srcrect =
-        charas[1].srcrect.setX(32 * ((ticks / 100) % 4).floor().toDouble());
-    charas[1].dstrect =
-        charas[1].dstrect.setX((1 * ((ticks / 12) % 768).floor() - 672) * -1);
-    charas[2].srcrect =
-        charas[2].srcrect.setX(32 * ((ticks / 100) % 4).floor().toDouble());
-    charas[2].dstrect =
-        charas[2].dstrect.setX(1 * ((ticks / 10) % 768).floor() - 128);
+    charas[0].srcrect = charas[0].srcrect.setX(
+      32 * ((ticks / 100) % 4).floor().toDouble(),
+    );
+    charas[0].dstrect = charas[0].dstrect.setX(
+      1 * ((ticks / 14) % 768).floor() - 128,
+    );
+    charas[1].srcrect = charas[1].srcrect.setX(
+      32 * ((ticks / 100) % 4).floor().toDouble(),
+    );
+    charas[1].dstrect = charas[1].dstrect.setX(
+      (1 * ((ticks / 12) % 768).floor() - 672) * -1,
+    );
+    charas[2].srcrect = charas[2].srcrect.setX(
+      32 * ((ticks / 100) % 4).floor().toDouble(),
+    );
+    charas[2].dstrect = charas[2].dstrect.setX(
+      1 * ((ticks / 10) % 768).floor() - 128,
+    );
     renderer
       ..setDrawColor(0, 0, 0, SDL_ALPHA_OPAQUE)
       ..clear();
     // copy the frame to the canvas
     for (var chara in charas) {
-      renderer.textureRotated(texture,
-          srcrect: chara.srcrect,
-          dstrect: chara.dstrect,
-          angle: chara.angle,
-          flip: chara.flip);
+      renderer.textureRotated(
+        texture,
+        srcrect: chara.srcrect,
+        dstrect: chara.dstrect,
+        angle: chara.angle,
+        flip: chara.flip,
+      );
     }
     renderer.present();
   }

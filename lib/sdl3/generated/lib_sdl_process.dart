@@ -47,12 +47,13 @@ import 'struct_sdl.dart';
 /// extern SDL_DECLSPEC SDL_Process * SDLCALL SDL_CreateProcess(const char * const *args, bool pipe_stdio)
 /// ```
 Pointer<SdlProcess> sdlCreateProcess(
-    Pointer<Pointer<Int8>> args, bool pipeStdio) {
+  Pointer<Pointer<Int8>> args,
+  bool pipeStdio,
+) {
   final sdlCreateProcessLookupFunction = libSdl3.lookupFunction<
-      Pointer<SdlProcess> Function(
-          Pointer<Pointer<Int8>> args, Uint8 pipeStdio),
-      Pointer<SdlProcess> Function(
-          Pointer<Pointer<Int8>> args, int pipeStdio)>('SDL_CreateProcess');
+    Pointer<SdlProcess> Function(Pointer<Pointer<Int8>> args, Uint8 pipeStdio),
+    Pointer<SdlProcess> Function(Pointer<Pointer<Int8>> args, int pipeStdio)
+  >('SDL_CreateProcess');
   return sdlCreateProcessLookupFunction(args, pipeStdio ? 1 : 0);
 }
 
@@ -121,9 +122,9 @@ Pointer<SdlProcess> sdlCreateProcess(
 /// ```
 Pointer<SdlProcess> sdlCreateProcessWithProperties(int props) {
   final sdlCreateProcessWithPropertiesLookupFunction = libSdl3.lookupFunction<
-      Pointer<SdlProcess> Function(Uint32 props),
-      Pointer<SdlProcess> Function(
-          int props)>('SDL_CreateProcessWithProperties');
+    Pointer<SdlProcess> Function(Uint32 props),
+    Pointer<SdlProcess> Function(int props)
+  >('SDL_CreateProcessWithProperties');
   return sdlCreateProcessWithPropertiesLookupFunction(props);
 }
 
@@ -161,8 +162,9 @@ Pointer<SdlProcess> sdlCreateProcessWithProperties(int props) {
 /// ```
 int sdlGetProcessProperties(Pointer<SdlProcess> process) {
   final sdlGetProcessPropertiesLookupFunction = libSdl3.lookupFunction<
-      Uint32 Function(Pointer<SdlProcess> process),
-      int Function(Pointer<SdlProcess> process)>('SDL_GetProcessProperties');
+    Uint32 Function(Pointer<SdlProcess> process),
+    int Function(Pointer<SdlProcess> process)
+  >('SDL_GetProcessProperties');
   return sdlGetProcessPropertiesLookupFunction(process);
 }
 
@@ -198,15 +200,23 @@ int sdlGetProcessProperties(Pointer<SdlProcess> process) {
 /// ```c
 /// extern SDL_DECLSPEC void * SDLCALL SDL_ReadProcess(SDL_Process *process, size_t *datasize, int *exitcode)
 /// ```
-Pointer<NativeType> sdlReadProcess(Pointer<SdlProcess> process,
-    Pointer<Uint32> datasize, Pointer<Int32> exitcode) {
+Pointer<NativeType> sdlReadProcess(
+  Pointer<SdlProcess> process,
+  Pointer<Uint32> datasize,
+  Pointer<Int32> exitcode,
+) {
   final sdlReadProcessLookupFunction = libSdl3.lookupFunction<
-      Pointer<NativeType> Function(Pointer<SdlProcess> process,
-          Pointer<Uint32> datasize, Pointer<Int32> exitcode),
-      Pointer<NativeType> Function(
-          Pointer<SdlProcess> process,
-          Pointer<Uint32> datasize,
-          Pointer<Int32> exitcode)>('SDL_ReadProcess');
+    Pointer<NativeType> Function(
+      Pointer<SdlProcess> process,
+      Pointer<Uint32> datasize,
+      Pointer<Int32> exitcode,
+    ),
+    Pointer<NativeType> Function(
+      Pointer<SdlProcess> process,
+      Pointer<Uint32> datasize,
+      Pointer<Int32> exitcode,
+    )
+  >('SDL_ReadProcess');
   return sdlReadProcessLookupFunction(process, datasize, exitcode);
 }
 
@@ -239,9 +249,9 @@ Pointer<NativeType> sdlReadProcess(Pointer<SdlProcess> process,
 /// ```
 Pointer<SdlIoStream> sdlGetProcessInput(Pointer<SdlProcess> process) {
   final sdlGetProcessInputLookupFunction = libSdl3.lookupFunction<
-      Pointer<SdlIoStream> Function(Pointer<SdlProcess> process),
-      Pointer<SdlIoStream> Function(
-          Pointer<SdlProcess> process)>('SDL_GetProcessInput');
+    Pointer<SdlIoStream> Function(Pointer<SdlProcess> process),
+    Pointer<SdlIoStream> Function(Pointer<SdlProcess> process)
+  >('SDL_GetProcessInput');
   return sdlGetProcessInputLookupFunction(process);
 }
 
@@ -272,9 +282,9 @@ Pointer<SdlIoStream> sdlGetProcessInput(Pointer<SdlProcess> process) {
 /// ```
 Pointer<SdlIoStream> sdlGetProcessOutput(Pointer<SdlProcess> process) {
   final sdlGetProcessOutputLookupFunction = libSdl3.lookupFunction<
-      Pointer<SdlIoStream> Function(Pointer<SdlProcess> process),
-      Pointer<SdlIoStream> Function(
-          Pointer<SdlProcess> process)>('SDL_GetProcessOutput');
+    Pointer<SdlIoStream> Function(Pointer<SdlProcess> process),
+    Pointer<SdlIoStream> Function(Pointer<SdlProcess> process)
+  >('SDL_GetProcessOutput');
   return sdlGetProcessOutputLookupFunction(process);
 }
 
@@ -304,8 +314,9 @@ Pointer<SdlIoStream> sdlGetProcessOutput(Pointer<SdlProcess> process) {
 /// ```
 bool sdlKillProcess(Pointer<SdlProcess> process, bool force) {
   final sdlKillProcessLookupFunction = libSdl3.lookupFunction<
-      Uint8 Function(Pointer<SdlProcess> process, Uint8 force),
-      int Function(Pointer<SdlProcess> process, int force)>('SDL_KillProcess');
+    Uint8 Function(Pointer<SdlProcess> process, Uint8 force),
+    int Function(Pointer<SdlProcess> process, int force)
+  >('SDL_KillProcess');
   return sdlKillProcessLookupFunction(process, force ? 1 : 0) == 1;
 }
 
@@ -344,12 +355,22 @@ bool sdlKillProcess(Pointer<SdlProcess> process, bool force) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_WaitProcess(SDL_Process *process, bool block, int *exitcode)
 /// ```
 bool sdlWaitProcess(
-    Pointer<SdlProcess> process, bool block, Pointer<Int32> exitcode) {
+  Pointer<SdlProcess> process,
+  bool block,
+  Pointer<Int32> exitcode,
+) {
   final sdlWaitProcessLookupFunction = libSdl3.lookupFunction<
-      Uint8 Function(
-          Pointer<SdlProcess> process, Uint8 block, Pointer<Int32> exitcode),
-      int Function(Pointer<SdlProcess> process, int block,
-          Pointer<Int32> exitcode)>('SDL_WaitProcess');
+    Uint8 Function(
+      Pointer<SdlProcess> process,
+      Uint8 block,
+      Pointer<Int32> exitcode,
+    ),
+    int Function(
+      Pointer<SdlProcess> process,
+      int block,
+      Pointer<Int32> exitcode,
+    )
+  >('SDL_WaitProcess');
   return sdlWaitProcessLookupFunction(process, block ? 1 : 0, exitcode) == 1;
 }
 
@@ -375,7 +396,8 @@ bool sdlWaitProcess(
 /// ```
 void sdlDestroyProcess(Pointer<SdlProcess> process) {
   final sdlDestroyProcessLookupFunction = libSdl3.lookupFunction<
-      Void Function(Pointer<SdlProcess> process),
-      void Function(Pointer<SdlProcess> process)>('SDL_DestroyProcess');
+    Void Function(Pointer<SdlProcess> process),
+    void Function(Pointer<SdlProcess> process)
+  >('SDL_DestroyProcess');
   return sdlDestroyProcessLookupFunction(process);
 }

@@ -27,8 +27,11 @@ bool init() {
     return false;
   }
   sdlSetHint(SDL_HINT_RENDER_VSYNC, '1');
-  gWindow =
-      SdlWindowEx.create(title: gTitle, w: gScreenWidth, h: gScreenHeight);
+  gWindow = SdlWindowEx.create(
+    title: gTitle,
+    w: gScreenWidth,
+    h: gScreenHeight,
+  );
   if (gWindow == nullptr) {
     print(sdlGetError());
     return false;
@@ -67,9 +70,11 @@ void update() {
     }
   }
   if (keys[SDL_SCANCODE_Z] != 0 && gShotList.length < gMaxShot) {
-    gShotList.add(Position()
-      ..x = gPlayer.x
-      ..y = gPlayer.y);
+    gShotList.add(
+      Position()
+        ..x = gPlayer.x
+        ..y = gPlayer.y,
+    );
   }
 }
 

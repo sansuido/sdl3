@@ -26,9 +26,9 @@ import 'struct_sdl.dart';
 /// ```
 Pointer<NativeType> sdlMetalCreateView(Pointer<SdlWindow> window) {
   final sdlMetalCreateViewLookupFunction = libSdl3.lookupFunction<
-      Pointer<NativeType> Function(Pointer<SdlWindow> window),
-      Pointer<NativeType> Function(
-          Pointer<SdlWindow> window)>('SDL_Metal_CreateView');
+    Pointer<NativeType> Function(Pointer<SdlWindow> window),
+    Pointer<NativeType> Function(Pointer<SdlWindow> window)
+  >('SDL_Metal_CreateView');
   return sdlMetalCreateViewLookupFunction(window);
 }
 
@@ -49,8 +49,9 @@ Pointer<NativeType> sdlMetalCreateView(Pointer<SdlWindow> window) {
 /// ```
 void sdlMetalDestroyView(Pointer<NativeType> view) {
   final sdlMetalDestroyViewLookupFunction = libSdl3.lookupFunction<
-      Void Function(Pointer<NativeType> view),
-      void Function(Pointer<NativeType> view)>('SDL_Metal_DestroyView');
+    Void Function(Pointer<NativeType> view),
+    void Function(Pointer<NativeType> view)
+  >('SDL_Metal_DestroyView');
   return sdlMetalDestroyViewLookupFunction(view);
 }
 
@@ -67,8 +68,8 @@ void sdlMetalDestroyView(Pointer<NativeType> view) {
 /// ```
 Pointer<NativeType> sdlMetalGetLayer(Pointer<NativeType> view) {
   final sdlMetalGetLayerLookupFunction = libSdl3.lookupFunction<
-      Pointer<NativeType> Function(Pointer<NativeType> view),
-      Pointer<NativeType> Function(
-          Pointer<NativeType> view)>('SDL_Metal_GetLayer');
+    Pointer<NativeType> Function(Pointer<NativeType> view),
+    Pointer<NativeType> Function(Pointer<NativeType> view)
+  >('SDL_Metal_GetLayer');
   return sdlMetalGetLayerLookupFunction(view);
 }

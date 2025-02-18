@@ -9,7 +9,13 @@ int main() {
     var window = calloc<Pointer<SdlWindow>>();
     var renderer = calloc<Pointer<SdlRenderer>>();
     if (sdlCreateWindowAndRenderer(
-            'Draw Line', 640, 480, 0, window, renderer) ==
+          'Draw Line',
+          640,
+          480,
+          0,
+          window,
+          renderer,
+        ) ==
         true) {
       var done = true;
       while (done) {

@@ -94,12 +94,21 @@ bool pixelColor(Pointer<SdlRenderer> renderer, double x, double y, int color) {
 
 \returns Returns 0 on success, -1 on failure.
 */
-bool pixelRgba(Pointer<SdlRenderer> renderer, double x, double y, int r, int g,
-    int b, int a) {
+bool pixelRgba(
+  Pointer<SdlRenderer> renderer,
+  double x,
+  double y,
+  int r,
+  int g,
+  int b,
+  int a,
+) {
   bool result = true;
   if (result) {
     result = sdlSetRenderDrawBlendMode(
-        renderer, (a == 255) ? SDL_BLENDMODE_NONE : SDL_BLENDMODE_BLEND);
+      renderer,
+      (a == 255) ? SDL_BLENDMODE_NONE : SDL_BLENDMODE_BLEND,
+    );
   }
   if (result) {
     result = sdlSetRenderDrawColor(renderer, r, g, b, a);
@@ -124,8 +133,16 @@ bool pixelRgba(Pointer<SdlRenderer> renderer, double x, double y, int r, int g,
 
 \returns Returns 0 on success, -1 on failure.
 */
-bool pixelRgbaWeight(Pointer<SdlRenderer> renderer, double x, double y, int r,
-    int g, int b, int a, int weight) {
+bool pixelRgbaWeight(
+  Pointer<SdlRenderer> renderer,
+  double x,
+  double y,
+  int r,
+  int g,
+  int b,
+  int a,
+  int weight,
+) {
   /*
 	* Modify Alpha by weight 
 	*/
@@ -167,7 +184,12 @@ bool hline(Pointer<SdlRenderer> renderer, double x1, double x2, double y) {
 \returns Returns 0 on success, -1 on failure.
 */
 bool hlineColor(
-    Pointer<SdlRenderer> renderer, double x1, double x2, double y, int color) {
+  Pointer<SdlRenderer> renderer,
+  double x1,
+  double x2,
+  double y,
+  int color,
+) {
   var co = Uint32List.fromList([color]).buffer.asUint8List();
   return hlineRgba(renderer, x1, x2, y, co[0], co[1], co[2], co[3]);
 }
@@ -186,12 +208,22 @@ bool hlineColor(
 
 \returns Returns 0 on success, -1 on failure.
 */
-bool hlineRgba(Pointer<SdlRenderer> renderer, double x1, double x2, double y,
-    int r, int g, int b, int a) {
+bool hlineRgba(
+  Pointer<SdlRenderer> renderer,
+  double x1,
+  double x2,
+  double y,
+  int r,
+  int g,
+  int b,
+  int a,
+) {
   bool result = true;
   if (result) {
     result = sdlSetRenderDrawBlendMode(
-        renderer, (a == 255) ? SDL_BLENDMODE_NONE : SDL_BLENDMODE_BLEND);
+      renderer,
+      (a == 255) ? SDL_BLENDMODE_NONE : SDL_BLENDMODE_BLEND,
+    );
   }
   if (result) {
     result = sdlSetRenderDrawColor(renderer, r, g, b, a);
@@ -230,7 +262,12 @@ bool vline(Pointer<SdlRenderer> renderer, double x, double y1, double y2) {
 \returns Returns 0 on success, -1 on failure.
 */
 bool vlineColor(
-    Pointer<SdlRenderer> renderer, double x, double y1, double y2, int color) {
+  Pointer<SdlRenderer> renderer,
+  double x,
+  double y1,
+  double y2,
+  int color,
+) {
   var co = Uint32List.fromList([color]).buffer.asUint8List();
   return vlineRgba(renderer, x, y1, y2, co[0], co[1], co[2], co[3]);
 }
@@ -249,12 +286,22 @@ bool vlineColor(
 
 \returns Returns 0 on success, -1 on failure.
 */
-bool vlineRgba(Pointer<SdlRenderer> renderer, double x, double y1, double y2,
-    int r, int g, int b, int a) {
+bool vlineRgba(
+  Pointer<SdlRenderer> renderer,
+  double x,
+  double y1,
+  double y2,
+  int r,
+  int g,
+  int b,
+  int a,
+) {
   bool result = true;
   if (result) {
     result = sdlSetRenderDrawBlendMode(
-        renderer, (a == 255) ? SDL_BLENDMODE_NONE : SDL_BLENDMODE_BLEND);
+      renderer,
+      (a == 255) ? SDL_BLENDMODE_NONE : SDL_BLENDMODE_BLEND,
+    );
   }
   if (result) {
     result = sdlSetRenderDrawColor(renderer, r, g, b, a);
@@ -279,8 +326,14 @@ bool vlineRgba(Pointer<SdlRenderer> renderer, double x, double y1, double y2,
 
 \returns Returns 0 on success, -1 on failure.
 */
-bool rectangleColor(Pointer<SdlRenderer> renderer, double x1, double y1,
-    double x2, double y2, int color) {
+bool rectangleColor(
+  Pointer<SdlRenderer> renderer,
+  double x1,
+  double y1,
+  double x2,
+  double y2,
+  int color,
+) {
   var co = Uint32List.fromList([color]).buffer.asUint8List();
   return rectangleRgba(renderer, x1, y1, x2, y2, co[0], co[1], co[2], co[3]);
 }
@@ -300,8 +353,17 @@ bool rectangleColor(Pointer<SdlRenderer> renderer, double x1, double y1,
 
 \returns Returns 0 on success, -1 on failure.
 */
-bool rectangleRgba(Pointer<SdlRenderer> renderer, double x1, double y1,
-    double x2, double y2, int r, int g, int b, int a) {
+bool rectangleRgba(
+  Pointer<SdlRenderer> renderer,
+  double x1,
+  double y1,
+  double x2,
+  double y2,
+  int r,
+  int g,
+  int b,
+  int a,
+) {
   bool result = true;
   double tmp;
 
@@ -353,7 +415,9 @@ bool rectangleRgba(Pointer<SdlRenderer> renderer, double x1, double y1,
   result = true;
   if (result) {
     result = sdlSetRenderDrawBlendMode(
-        renderer, (a == 255) ? SDL_BLENDMODE_NONE : SDL_BLENDMODE_BLEND);
+      renderer,
+      (a == 255) ? SDL_BLENDMODE_NONE : SDL_BLENDMODE_BLEND,
+    );
   }
   if (result) {
     result = sdlSetRenderDrawColor(renderer, r, g, b, a);
@@ -380,11 +444,28 @@ bool rectangleRgba(Pointer<SdlRenderer> renderer, double x1, double y1,
 
 \returns Returns 0 on success, -1 on failure.
 */
-bool roundedRectangleColor(Pointer<SdlRenderer> renderer, double x1, double y1,
-    double x2, double y2, double rad, int color) {
+bool roundedRectangleColor(
+  Pointer<SdlRenderer> renderer,
+  double x1,
+  double y1,
+  double x2,
+  double y2,
+  double rad,
+  int color,
+) {
   var co = Uint32List.fromList([color]).buffer.asUint8List();
   return roundedRectangleRgba(
-      renderer, x1, y1, x2, y2, rad, co[0], co[1], co[2], co[3]);
+    renderer,
+    x1,
+    y1,
+    x2,
+    y2,
+    rad,
+    co[0],
+    co[1],
+    co[2],
+    co[3],
+  );
 }
 
 /*!
@@ -403,8 +484,18 @@ bool roundedRectangleColor(Pointer<SdlRenderer> renderer, double x1, double y1,
 
 \returns Returns 0 on success, -1 on failure.
 */
-bool roundedRectangleRgba(Pointer<SdlRenderer> renderer, double x1, double y1,
-    double x2, double y2, double rad, int r, int g, int b, int a) {
+bool roundedRectangleRgba(
+  Pointer<SdlRenderer> renderer,
+  double x1,
+  double y1,
+  double x2,
+  double y2,
+  double rad,
+  int r,
+  int g,
+  int b,
+  int a,
+) {
   bool result = true;
   double tmp;
   double w, h;
@@ -538,11 +629,28 @@ bool roundedRectangleRgba(Pointer<SdlRenderer> renderer, double x1, double y1,
 
 \returns Returns 0 on success, -1 on failure.
 */
-bool roundedBoxColor(Pointer<SdlRenderer> renderer, double x1, double y1,
-    double x2, double y2, double rad, int color) {
+bool roundedBoxColor(
+  Pointer<SdlRenderer> renderer,
+  double x1,
+  double y1,
+  double x2,
+  double y2,
+  double rad,
+  int color,
+) {
   var co = Uint32List.fromList([color]).buffer.asUint8List();
   return roundedBoxRgba(
-      renderer, x1, y1, x2, y2, rad, co[0], co[1], co[2], co[3]);
+    renderer,
+    x1,
+    y1,
+    x2,
+    y2,
+    rad,
+    co[0],
+    co[1],
+    co[2],
+    co[3],
+  );
 }
 
 /*!
@@ -561,8 +669,18 @@ bool roundedBoxColor(Pointer<SdlRenderer> renderer, double x1, double y1,
 
 \returns Returns 0 on success, -1 on failure.
 */
-bool roundedBoxRgba(Pointer<SdlRenderer> renderer, double x1, double y1,
-    double x2, double y2, double rad, int r, int g, int b, int a) {
+bool roundedBoxRgba(
+  Pointer<SdlRenderer> renderer,
+  double x1,
+  double y1,
+  double x2,
+  double y2,
+  double rad,
+  int r,
+  int g,
+  int b,
+  int a,
+) {
   bool result = true;
   double w, h, r2, tmp;
   double cx = 0;
@@ -660,7 +778,9 @@ bool roundedBoxRgba(Pointer<SdlRenderer> renderer, double x1, double y1,
   result = true;
   if (result) {
     result = sdlSetRenderDrawBlendMode(
-        renderer, (a == 255) ? SDL_BLENDMODE_NONE : SDL_BLENDMODE_BLEND);
+      renderer,
+      (a == 255) ? SDL_BLENDMODE_NONE : SDL_BLENDMODE_BLEND,
+    );
   }
   if (result) {
     result = sdlSetRenderDrawColor(renderer, r, g, b, a);
@@ -750,8 +870,14 @@ bool roundedBoxRgba(Pointer<SdlRenderer> renderer, double x1, double y1,
 
 \returns Returns 0 on success, -1 on failure.
 */
-bool boxColor(Pointer<SdlRenderer> renderer, double x1, double y1, double x2,
-    double y2, int color) {
+bool boxColor(
+  Pointer<SdlRenderer> renderer,
+  double x1,
+  double y1,
+  double x2,
+  double y2,
+  int color,
+) {
   var co = Uint32List.fromList([color]).buffer.asUint8List();
   return boxRgba(renderer, x1, y1, x2, y2, co[0], co[1], co[2], co[3]);
 }
@@ -771,8 +897,17 @@ bool boxColor(Pointer<SdlRenderer> renderer, double x1, double y1, double x2,
 
 \returns Returns 0 on success, -1 on failure.
 */
-bool boxRgba(Pointer<SdlRenderer> renderer, double x1, double y1, double x2,
-    double y2, int r, int g, int b, int a) {
+bool boxRgba(
+  Pointer<SdlRenderer> renderer,
+  double x1,
+  double y1,
+  double x2,
+  double y2,
+  int r,
+  int g,
+  int b,
+  int a,
+) {
   bool result = true;
   double tmp;
 
@@ -824,7 +959,9 @@ bool boxRgba(Pointer<SdlRenderer> renderer, double x1, double y1, double x2,
   result = true;
   if (result) {
     result = sdlSetRenderDrawBlendMode(
-        renderer, (a == 255) ? SDL_BLENDMODE_NONE : SDL_BLENDMODE_BLEND);
+      renderer,
+      (a == 255) ? SDL_BLENDMODE_NONE : SDL_BLENDMODE_BLEND,
+    );
   }
   if (result) {
     result = sdlSetRenderDrawColor(renderer, r, g, b, a);
@@ -850,7 +987,12 @@ bool boxRgba(Pointer<SdlRenderer> renderer, double x1, double y1, double x2,
 \returns Returns 0 on success, -1 on failure.
 */
 bool line(
-    Pointer<SdlRenderer> renderer, double x1, double y1, double x2, double y2) {
+  Pointer<SdlRenderer> renderer,
+  double x1,
+  double y1,
+  double x2,
+  double y2,
+) {
   /*
 	* Draw
 	*/
@@ -869,8 +1011,14 @@ bool line(
 
 \returns Returns 0 on success, -1 on failure.
 */
-bool lineColor(Pointer<SdlRenderer> renderer, double x1, double y1, double x2,
-    double y2, int color) {
+bool lineColor(
+  Pointer<SdlRenderer> renderer,
+  double x1,
+  double y1,
+  double x2,
+  double y2,
+  int color,
+) {
   var co = Uint32List.fromList([color]).buffer.asUint8List();
   return lineRgba(renderer, x1, y1, x2, y2, co[0], co[1], co[2], co[3]);
 }
@@ -890,15 +1038,26 @@ bool lineColor(Pointer<SdlRenderer> renderer, double x1, double y1, double x2,
 
 \returns Returns 0 on success, -1 on failure.
 */
-bool lineRgba(Pointer<SdlRenderer> renderer, double x1, double y1, double x2,
-    double y2, int r, int g, int b, int a) {
+bool lineRgba(
+  Pointer<SdlRenderer> renderer,
+  double x1,
+  double y1,
+  double x2,
+  double y2,
+  int r,
+  int g,
+  int b,
+  int a,
+) {
   /*
 	* Draw
 	*/
   bool result = true;
   if (result) {
     result = sdlSetRenderDrawBlendMode(
-        renderer, (a == 255) ? SDL_BLENDMODE_NONE : SDL_BLENDMODE_BLEND);
+      renderer,
+      (a == 255) ? SDL_BLENDMODE_NONE : SDL_BLENDMODE_BLEND,
+    );
   }
   if (result) {
     result = sdlSetRenderDrawColor(renderer, r, g, b, a);
@@ -932,8 +1091,18 @@ with alpha<255.
 
 \returns Returns 0 on success, -1 on failure.
 */
-bool _aalineRgba(Pointer<SdlRenderer> renderer, double x1, double y1, double x2,
-    double y2, int r, int g, int b, int a, int drawEndpoint) {
+bool _aalineRgba(
+  Pointer<SdlRenderer> renderer,
+  double x1,
+  double y1,
+  double x2,
+  double y2,
+  int r,
+  int g,
+  int b,
+  int a,
+  int drawEndpoint,
+) {
   double xx0, yy0, xx1, yy1;
   bool result = true;
   double erracc, erradj;
@@ -1153,8 +1322,14 @@ bool _aalineRgba(Pointer<SdlRenderer> renderer, double x1, double y1, double x2,
 
 \returns Returns 0 on success, -1 on failure.
 */
-bool aalineColor(Pointer<SdlRenderer> renderer, double x1, double y1, double x2,
-    double y2, int color) {
+bool aalineColor(
+  Pointer<SdlRenderer> renderer,
+  double x1,
+  double y1,
+  double x2,
+  double y2,
+  int color,
+) {
   var co = Uint32List.fromList([color]).buffer.asUint8List();
   return _aalineRgba(renderer, x1, y1, x2, y2, co[0], co[1], co[2], co[3], 1);
 }
@@ -1174,8 +1349,17 @@ bool aalineColor(Pointer<SdlRenderer> renderer, double x1, double y1, double x2,
 
 \returns Returns 0 on success, -1 on failure.
 */
-bool aalineRgba(Pointer<SdlRenderer> renderer, double x1, double y1, double x2,
-    double y2, int r, int g, int b, int a) {
+bool aalineRgba(
+  Pointer<SdlRenderer> renderer,
+  double x1,
+  double y1,
+  double x2,
+  double y2,
+  int r,
+  int g,
+  int b,
+  int a,
+) {
   return _aalineRgba(renderer, x1, y1, x2, y2, r, g, b, a, 1);
 }
 
@@ -1193,7 +1377,12 @@ bool aalineRgba(Pointer<SdlRenderer> renderer, double x1, double y1, double x2,
 \returns Returns 0 on success, -1 on failure.
 */
 bool circleColor(
-    Pointer<SdlRenderer> renderer, double x, double y, double rad, int color) {
+  Pointer<SdlRenderer> renderer,
+  double x,
+  double y,
+  double rad,
+  int color,
+) {
   var co = Uint32List.fromList([color]).buffer.asUint8List();
   return ellipseRgba(renderer, x, y, rad, rad, co[0], co[1], co[2], co[3]);
 }
@@ -1212,8 +1401,16 @@ bool circleColor(
 
 \returns Returns 0 on success, -1 on failure.
 */
-bool circleRgba(Pointer<SdlRenderer> renderer, double x, double y, double rad,
-    int r, int g, int b, int a) {
+bool circleRgba(
+  Pointer<SdlRenderer> renderer,
+  double x,
+  double y,
+  double rad,
+  int r,
+  int g,
+  int b,
+  int a,
+) {
   return ellipseRgba(renderer, x, y, rad, rad, r, g, b, a);
 }
 
@@ -1232,8 +1429,15 @@ bool circleRgba(Pointer<SdlRenderer> renderer, double x, double y, double rad,
 
 \returns Returns 0 on success, -1 on failure.
 */
-bool arcColor(Pointer<SdlRenderer> renderer, double x, double y, double rad,
-    double start, double end, int color) {
+bool arcColor(
+  Pointer<SdlRenderer> renderer,
+  double x,
+  double y,
+  double rad,
+  double start,
+  double end,
+  int color,
+) {
   var co = Uint32List.fromList([color]).buffer.asUint8List();
   return arcRgba(renderer, x, y, rad, start, end, co[0], co[1], co[2], co[3]);
 }
@@ -1254,8 +1458,18 @@ bool arcColor(Pointer<SdlRenderer> renderer, double x, double y, double rad,
 
 \returns Returns 0 on success, -1 on failure.
 */
-bool arcRgba(Pointer<SdlRenderer> renderer, double x, double y, double rad,
-    double start, double end, int r, int g, int b, int a) {
+bool arcRgba(
+  Pointer<SdlRenderer> renderer,
+  double x,
+  double y,
+  double rad,
+  double start,
+  double end,
+  int r,
+  int g,
+  int b,
+  int a,
+) {
   bool result = true;
   double cx = 0;
   double cy = rad;
@@ -1356,10 +1570,12 @@ bool arcRgba(Pointer<SdlRenderer> renderer, double x, double y, double rad,
 			and whether to draw in this octant initially
 			*/
       if ((oct % 2) != 0) {
-        drawoct |= (1 <<
-            oct); /* this is basically like saying drawoct[oct] = true, if drawoct were a bool array */
+        drawoct |=
+            (1 <<
+                oct); /* this is basically like saying drawoct[oct] = true, if drawoct were a bool array */
       } else {
-        drawoct &= 255 -
+        drawoct &=
+            255 -
             (1 << oct); /* this is basically like saying drawoct[oct] = false */
       }
     }
@@ -1417,7 +1633,9 @@ bool arcRgba(Pointer<SdlRenderer> renderer, double x, double y, double rad,
   result = true;
   if (result) {
     result = sdlSetRenderDrawBlendMode(
-        renderer, (a == 255) ? SDL_BLENDMODE_NONE : SDL_BLENDMODE_BLEND);
+      renderer,
+      (a == 255) ? SDL_BLENDMODE_NONE : SDL_BLENDMODE_BLEND,
+    );
   }
   if (result) {
     result = sdlSetRenderDrawColor(renderer, r, g, b, a);
@@ -1556,7 +1774,12 @@ bool arcRgba(Pointer<SdlRenderer> renderer, double x, double y, double rad,
 \returns Returns 0 on success, -1 on failure.
 */
 bool aacircleColor(
-    Pointer<SdlRenderer> renderer, double x, double y, double rad, int color) {
+  Pointer<SdlRenderer> renderer,
+  double x,
+  double y,
+  double rad,
+  int color,
+) {
   var co = Uint32List.fromList([color]).buffer.asUint8List();
   return aaellipseRgba(renderer, x, y, rad, rad, co[0], co[1], co[2], co[3]);
 }
@@ -1575,8 +1798,16 @@ bool aacircleColor(
 
 \returns Returns 0 on success, -1 on failure.
 */
-bool aacircleRgba(Pointer<SdlRenderer> renderer, double x, double y, double rad,
-    int r, int g, int b, int a) {
+bool aacircleRgba(
+  Pointer<SdlRenderer> renderer,
+  double x,
+  double y,
+  double rad,
+  int r,
+  int g,
+  int b,
+  int a,
+) {
   /*
 	* Draw 
 	*/
@@ -1597,8 +1828,14 @@ bool aacircleRgba(Pointer<SdlRenderer> renderer, double x, double y, double rad,
 
 \returns Returns 0 on success, -1 on failure.
 */
-bool _drawQuadrants(Pointer<SdlRenderer> renderer, double x, double y,
-    double dx, double dy, int f) {
+bool _drawQuadrants(
+  Pointer<SdlRenderer> renderer,
+  double x,
+  double y,
+  double dx,
+  double dy,
+  int f,
+) {
   bool result = true;
   double xpdx, xmdx;
   double ypdy, ymdy;
@@ -1670,8 +1907,18 @@ bool _drawQuadrants(Pointer<SdlRenderer> renderer, double x, double y,
 
 \returns Returns 0 on success, -1 on failure.
 */
-bool _ellipseRgba(Pointer<SdlRenderer> renderer, double x, double y, double rx,
-    double ry, int r, int g, int b, int a, int f) {
+bool _ellipseRgba(
+  Pointer<SdlRenderer> renderer,
+  double x,
+  double y,
+  double rx,
+  double ry,
+  int r,
+  int g,
+  int b,
+  int a,
+  int f,
+) {
   bool result = true;
   int rxi, ryi;
   int rx2, ry2, rx22, ry22;
@@ -1694,7 +1941,9 @@ bool _ellipseRgba(Pointer<SdlRenderer> renderer, double x, double y, double rx,
   result = true;
   if (result) {
     result = sdlSetRenderDrawBlendMode(
-        renderer, (a == 255) ? SDL_BLENDMODE_NONE : SDL_BLENDMODE_BLEND);
+      renderer,
+      (a == 255) ? SDL_BLENDMODE_NONE : SDL_BLENDMODE_BLEND,
+    );
   }
   if (result) {
     result = sdlSetRenderDrawColor(renderer, r, g, b, a);
@@ -1765,8 +2014,14 @@ bool _ellipseRgba(Pointer<SdlRenderer> renderer, double x, double y, double rx,
     scrY = curY ~/ ellipseOverscan;
     if ((scrX != oldX && scrY == oldY) || (scrX != oldX && scrY != oldY)) {
       if (result) {
-        result =
-            _drawQuadrants(renderer, x, y, scrX.toDouble(), scrY.toDouble(), f);
+        result = _drawQuadrants(
+          renderer,
+          x,
+          y,
+          scrX.toDouble(),
+          scrY.toDouble(),
+          f,
+        );
       }
       oldX = scrX;
       oldY = scrY;
@@ -1777,7 +2032,8 @@ bool _ellipseRgba(Pointer<SdlRenderer> renderer, double x, double y, double rx,
   if (curY > 0) {
     curXp1 = curX + 1;
     curYm1 = curY - 1;
-    error = ry2 * curX * curXp1 +
+    error =
+        ry2 * curX * curXp1 +
         ((ry2 + 3) ~/ 4) +
         rx2 * curYm1 * curYm1 -
         rx2 * ry2;
@@ -1801,7 +2057,13 @@ bool _ellipseRgba(Pointer<SdlRenderer> renderer, double x, double y, double rx,
         for (; oldY >= scrY; oldY--) {
           if (result) {
             result = _drawQuadrants(
-                renderer, x, y, scrX.toDouble(), oldY.toDouble(), f);
+              renderer,
+              x,
+              y,
+              scrX.toDouble(),
+              oldY.toDouble(),
+              f,
+            );
           }
           /* prevent overdraw */
           if (f != 0) {
@@ -1819,7 +2081,13 @@ bool _ellipseRgba(Pointer<SdlRenderer> renderer, double x, double y, double rx,
       for (; oldY >= 0; oldY--) {
         if (result) {
           result = _drawQuadrants(
-              renderer, x, y, scrX.toDouble(), oldY.toDouble(), f);
+            renderer,
+            x,
+            y,
+            scrX.toDouble(),
+            oldY.toDouble(),
+            f,
+          );
         }
       }
     }
@@ -1839,8 +2107,14 @@ bool _ellipseRgba(Pointer<SdlRenderer> renderer, double x, double y, double rx,
 
 \returns Returns 0 on success, -1 on failure.
 */
-bool ellipseColor(Pointer<SdlRenderer> renderer, double x, double y, double rx,
-    double ry, int color) {
+bool ellipseColor(
+  Pointer<SdlRenderer> renderer,
+  double x,
+  double y,
+  double rx,
+  double ry,
+  int color,
+) {
   var co = Uint32List.fromList([color]).buffer.asUint8List();
   return _ellipseRgba(renderer, x, y, rx, ry, co[0], co[1], co[2], co[3], 0);
 }
@@ -1860,8 +2134,17 @@ bool ellipseColor(Pointer<SdlRenderer> renderer, double x, double y, double rx,
 
 \returns Returns 0 on success, -1 on failure.
 */
-bool ellipseRgba(Pointer<SdlRenderer> renderer, double x, double y, double rx,
-    double ry, int r, int g, int b, int a) {
+bool ellipseRgba(
+  Pointer<SdlRenderer> renderer,
+  double x,
+  double y,
+  double rx,
+  double ry,
+  int r,
+  int g,
+  int b,
+  int a,
+) {
   return _ellipseRgba(renderer, x, y, rx, ry, r, g, b, a, 0);
 }
 
@@ -1879,10 +2162,24 @@ bool ellipseRgba(Pointer<SdlRenderer> renderer, double x, double y, double rx,
 \returns Returns 0 on success, -1 on failure.
 */
 bool filledCircleColor(
-    Pointer<SdlRenderer> renderer, double x, double y, double rad, int color) {
+  Pointer<SdlRenderer> renderer,
+  double x,
+  double y,
+  double rad,
+  int color,
+) {
   var co = Uint32List.fromList([color]).buffer.asUint8List();
   return filledEllipseRgba(
-      renderer, x, y, rad, rad, co[0], co[1], co[2], co[3]);
+    renderer,
+    x,
+    y,
+    rad,
+    rad,
+    co[0],
+    co[1],
+    co[2],
+    co[3],
+  );
 }
 
 /*!
@@ -1899,8 +2196,16 @@ bool filledCircleColor(
 
 \returns Returns 0 on success, -1 on failure.
 */
-bool filledCircleRgba(Pointer<SdlRenderer> renderer, double x, double y,
-    double rad, int r, int g, int b, int a) {
+bool filledCircleRgba(
+  Pointer<SdlRenderer> renderer,
+  double x,
+  double y,
+  double rad,
+  int r,
+  int g,
+  int b,
+  int a,
+) {
   return _ellipseRgba(renderer, x, y, rad, rad, r, g, b, a, 1);
 }
 
@@ -1916,8 +2221,14 @@ bool filledCircleRgba(Pointer<SdlRenderer> renderer, double x, double y,
 
 \returns Returns 0 on success, -1 on failure.
 */
-bool aaellipseColor(Pointer<SdlRenderer> renderer, double x, double y,
-    double rx, double ry, int color) {
+bool aaellipseColor(
+  Pointer<SdlRenderer> renderer,
+  double x,
+  double y,
+  double rx,
+  double ry,
+  int color,
+) {
   var co = Uint32List.fromList([color]).buffer.asUint8List();
   return aaellipseRgba(renderer, x, y, rx, ry, co[0], co[1], co[2], co[3]);
 }
@@ -1937,8 +2248,17 @@ bool aaellipseColor(Pointer<SdlRenderer> renderer, double x, double y,
 
 \returns Returns 0 on success, -1 on failure.
 */
-bool aaellipseRgba(Pointer<SdlRenderer> renderer, double x, double y, double rx,
-    double ry, int r, int g, int b, int a) {
+bool aaellipseRgba(
+  Pointer<SdlRenderer> renderer,
+  double x,
+  double y,
+  double rx,
+  double ry,
+  int r,
+  int g,
+  int b,
+  int a,
+) {
   bool result = true;
   int i;
   double a2, b2, ds, dt, dxt, t, s, d;
@@ -1994,7 +2314,9 @@ bool aaellipseRgba(Pointer<SdlRenderer> renderer, double x, double y, double rx,
   result = true;
   if (result) {
     result = sdlSetRenderDrawBlendMode(
-        renderer, (a == 255) ? SDL_BLENDMODE_NONE : SDL_BLENDMODE_BLEND);
+      renderer,
+      (a == 255) ? SDL_BLENDMODE_NONE : SDL_BLENDMODE_BLEND,
+    );
   }
 
   /* "End points" */
@@ -2173,8 +2495,14 @@ bool aaellipseRgba(Pointer<SdlRenderer> renderer, double x, double y, double rx,
 
 \returns Returns 0 on success, -1 on failure.
 */
-bool filledEllipseColor(Pointer<SdlRenderer> renderer, double x, double y,
-    double rx, double ry, int color) {
+bool filledEllipseColor(
+  Pointer<SdlRenderer> renderer,
+  double x,
+  double y,
+  double rx,
+  double ry,
+  int color,
+) {
   var co = Uint32List.fromList([color]).buffer.asUint8List();
   return _ellipseRgba(renderer, x, y, rx, ry, co[0], co[1], co[2], co[3], 1);
 }
@@ -2194,8 +2522,17 @@ bool filledEllipseColor(Pointer<SdlRenderer> renderer, double x, double y,
 
 \returns Returns 0 on success, -1 on failure.
 */
-bool filledEllipseRgba(Pointer<SdlRenderer> renderer, double x, double y,
-    double rx, double ry, int r, int g, int b, int a) {
+bool filledEllipseRgba(
+  Pointer<SdlRenderer> renderer,
+  double x,
+  double y,
+  double rx,
+  double ry,
+  int r,
+  int g,
+  int b,
+  int a,
+) {
   return _ellipseRgba(renderer, x, y, rx, ry, r, g, b, a, 1);
 }
 
@@ -2220,8 +2557,19 @@ Note: Determines vertex array and uses polygon or filledPolygon drawing routines
 
 \returns Returns 0 on success, -1 on failure.
 */
-bool _pieRgba(Pointer<SdlRenderer> renderer, double x, double y, double rad,
-    double start, double end, int r, int g, int b, int a, int filled) {
+bool _pieRgba(
+  Pointer<SdlRenderer> renderer,
+  double x,
+  double y,
+  double rad,
+  double start,
+  double end,
+  int r,
+  int g,
+  int b,
+  int a,
+  int filled,
+) {
   bool result = true;
   double angle, startAngle, endAngle;
   double deltaAngle;
@@ -2285,8 +2633,17 @@ bool _pieRgba(Pointer<SdlRenderer> renderer, double x, double y, double rad,
   vy[1] = (y + dr * math.sin(angle)).toInt();
 
   if (numpoints < 3) {
-    result = lineRgba(renderer, vx[0].toDouble(), vy[0].toDouble(),
-        vx[1].toDouble(), vy[1].toDouble(), r, g, b, a);
+    result = lineRgba(
+      renderer,
+      vx[0].toDouble(),
+      vy[0].toDouble(),
+      vx[1].toDouble(),
+      vy[1].toDouble(),
+      r,
+      g,
+      b,
+      a,
+    );
   } else {
     /* Calculate other vertices */
     i = 2;
@@ -2330,11 +2687,29 @@ bool _pieRgba(Pointer<SdlRenderer> renderer, double x, double y, double rad,
 
 \returns Returns 0 on success, -1 on failure.
 */
-bool pieColor(Pointer<SdlRenderer> renderer, double x, double y, double rad,
-    double start, double end, int color) {
+bool pieColor(
+  Pointer<SdlRenderer> renderer,
+  double x,
+  double y,
+  double rad,
+  double start,
+  double end,
+  int color,
+) {
   var co = Uint32List.fromList([color]).buffer.asUint8List();
   return _pieRgba(
-      renderer, x, y, rad, start, end, co[0], co[1], co[2], co[3], 0);
+    renderer,
+    x,
+    y,
+    rad,
+    start,
+    end,
+    co[0],
+    co[1],
+    co[2],
+    co[3],
+    0,
+  );
 }
 
 /*!
@@ -2353,8 +2728,18 @@ bool pieColor(Pointer<SdlRenderer> renderer, double x, double y, double rad,
 
 \returns Returns 0 on success, -1 on failure.
 */
-bool pieRgba(Pointer<SdlRenderer> renderer, double x, double y, double rad,
-    double start, double end, int r, int g, int b, int a) {
+bool pieRgba(
+  Pointer<SdlRenderer> renderer,
+  double x,
+  double y,
+  double rad,
+  double start,
+  double end,
+  int r,
+  int g,
+  int b,
+  int a,
+) {
   return _pieRgba(renderer, x, y, rad, start, end, r, g, b, a, 0);
 }
 
@@ -2371,11 +2756,29 @@ bool pieRgba(Pointer<SdlRenderer> renderer, double x, double y, double rad,
 
 \returns Returns 0 on success, -1 on failure.
 */
-bool filledPieColor(Pointer<SdlRenderer> renderer, double x, double y,
-    double rad, double start, double end, int color) {
+bool filledPieColor(
+  Pointer<SdlRenderer> renderer,
+  double x,
+  double y,
+  double rad,
+  double start,
+  double end,
+  int color,
+) {
   var co = Uint32List.fromList([color]).buffer.asUint8List();
   return _pieRgba(
-      renderer, x, y, rad, start, end, co[0], co[1], co[2], co[3], 1);
+    renderer,
+    x,
+    y,
+    rad,
+    start,
+    end,
+    co[0],
+    co[1],
+    co[2],
+    co[3],
+    1,
+  );
 }
 
 /*!
@@ -2394,8 +2797,18 @@ bool filledPieColor(Pointer<SdlRenderer> renderer, double x, double y,
 
 \returns Returns 0 on success, -1 on failure.
 */
-bool filledPieRgba(Pointer<SdlRenderer> renderer, double x, double y,
-    double rad, double start, double end, int r, int g, int b, int a) {
+bool filledPieRgba(
+  Pointer<SdlRenderer> renderer,
+  double x,
+  double y,
+  double rad,
+  double start,
+  double end,
+  int r,
+  int g,
+  int b,
+  int a,
+) {
   return _pieRgba(renderer, x, y, rad, start, end, r, g, b, a, 1);
 }
 
@@ -2417,8 +2830,16 @@ Note: Creates vertex array and uses polygon routine to render.
 
 \returns Returns 0 on success, -1 on failure.
 */
-bool trigonColor(Pointer<SdlRenderer> renderer, double x1, double y1, double x2,
-    double y2, double x3, double y3, int color) {
+bool trigonColor(
+  Pointer<SdlRenderer> renderer,
+  double x1,
+  double y1,
+  double x2,
+  double y2,
+  double x3,
+  double y3,
+  int color,
+) {
   var vx = calloc<Int16>(3);
   var vy = calloc<Int16>(3);
 
@@ -2453,8 +2874,19 @@ bool trigonColor(Pointer<SdlRenderer> renderer, double x1, double y1, double x2,
 
 \returns Returns 0 on success, -1 on failure.
 */
-bool trigonRgba(Pointer<SdlRenderer> renderer, double x1, double y1, double x2,
-    double y2, double x3, double y3, int r, int g, int b, int a) {
+bool trigonRgba(
+  Pointer<SdlRenderer> renderer,
+  double x1,
+  double y1,
+  double x2,
+  double y2,
+  double x3,
+  double y3,
+  int r,
+  int g,
+  int b,
+  int a,
+) {
   var vx = calloc<Int16>(3);
   var vy = calloc<Int16>(3);
 
@@ -2490,8 +2922,16 @@ Note: Creates vertex array and uses aapolygon routine to render.
 
 \returns Returns 0 on success, -1 on failure.
 */
-bool aatrigonColor(Pointer<SdlRenderer> renderer, double x1, double y1,
-    double x2, double y2, double x3, double y3, int color) {
+bool aatrigonColor(
+  Pointer<SdlRenderer> renderer,
+  double x1,
+  double y1,
+  double x2,
+  double y2,
+  double x3,
+  double y3,
+  int color,
+) {
   var vx = calloc<Int16>(3);
   var vy = calloc<Int16>(3);
 
@@ -2526,8 +2966,19 @@ bool aatrigonColor(Pointer<SdlRenderer> renderer, double x1, double y1,
 
 \returns Returns 0 on success, -1 on failure.
 */
-bool aatrigonRgba(Pointer<SdlRenderer> renderer, double x1, double y1,
-    double x2, double y2, double x3, double y3, int r, int g, int b, int a) {
+bool aatrigonRgba(
+  Pointer<SdlRenderer> renderer,
+  double x1,
+  double y1,
+  double x2,
+  double y2,
+  double x3,
+  double y3,
+  int r,
+  int g,
+  int b,
+  int a,
+) {
   var vx = calloc<Int16>(3);
   var vy = calloc<Int16>(3);
 
@@ -2563,8 +3014,16 @@ Note: Creates vertex array and uses aapolygon routine to render.
 
 \returns Returns 0 on success, -1 on failure.
 */
-bool filledTrigonColor(Pointer<SdlRenderer> renderer, double x1, double y1,
-    double x2, double y2, double x3, double y3, int color) {
+bool filledTrigonColor(
+  Pointer<SdlRenderer> renderer,
+  double x1,
+  double y1,
+  double x2,
+  double y2,
+  double x3,
+  double y3,
+  int color,
+) {
   var vx = calloc<Int16>(3);
   var vy = calloc<Int16>(3);
 
@@ -2601,8 +3060,19 @@ Note: Creates vertex array and uses aapolygon routine to render.
 
 \returns Returns 0 on success, -1 on failure.
 */
-bool filledTrigonRgba(Pointer<SdlRenderer> renderer, double x1, double y1,
-    double x2, double y2, double x3, double y3, int r, int g, int b, int a) {
+bool filledTrigonRgba(
+  Pointer<SdlRenderer> renderer,
+  double x1,
+  double y1,
+  double x2,
+  double y2,
+  double x3,
+  double y3,
+  int r,
+  int g,
+  int b,
+  int a,
+) {
   var vx = calloc<Int16>(3);
   var vy = calloc<Int16>(3);
 
@@ -2633,8 +3103,13 @@ bool filledTrigonRgba(Pointer<SdlRenderer> renderer, double x1, double y1,
 
 \returns Returns 0 on success, -1 on failure.
 */
-bool polygonColor(Pointer<SdlRenderer> renderer, Pointer<Int16> vx,
-    Pointer<Int16> vy, int n, int color) {
+bool polygonColor(
+  Pointer<SdlRenderer> renderer,
+  Pointer<Int16> vx,
+  Pointer<Int16> vy,
+  int n,
+  int color,
+) {
   var co = Uint32List.fromList([color]).buffer.asUint8List();
   return polygonRgba(renderer, vx, vy, n, co[0], co[1], co[2], co[3]);
 }
@@ -2649,8 +3124,12 @@ bool polygonColor(Pointer<SdlRenderer> renderer, Pointer<Int16> vx,
 
 \returns Returns 0 on success, -1 on failure.
 */
-bool polygon(Pointer<SdlRenderer> renderer, Pointer<Int16> vx,
-    Pointer<Int16> vy, int n) {
+bool polygon(
+  Pointer<SdlRenderer> renderer,
+  Pointer<Int16> vx,
+  Pointer<Int16> vy,
+  int n,
+) {
   /*
 	* Draw 
 	*/
@@ -2679,7 +3158,7 @@ bool polygon(Pointer<SdlRenderer> renderer, Pointer<Int16> vx,
 	*/
   nn = n + 1;
   var points = calloc<SdlFPoint>(nn);
-//	points = (SDL_Point*)malloc(sizeof(SDL_Point) * nn);
+  //	points = (SDL_Point*)malloc(sizeof(SDL_Point) * nn);
   if (points == nullptr) {
     return false;
   }
@@ -2715,8 +3194,16 @@ bool polygon(Pointer<SdlRenderer> renderer, Pointer<Int16> vx,
 
 \returns Returns 0 on success, -1 on failure.
 */
-bool polygonRgba(Pointer<SdlRenderer> renderer, Pointer<Int16> vx,
-    Pointer<Int16> vy, int n, int r, int g, int b, int a) {
+bool polygonRgba(
+  Pointer<SdlRenderer> renderer,
+  Pointer<Int16> vx,
+  Pointer<Int16> vy,
+  int n,
+  int r,
+  int g,
+  int b,
+  int a,
+) {
   /*
 	* Draw 
 	*/
@@ -2749,7 +3236,9 @@ bool polygonRgba(Pointer<SdlRenderer> renderer, Pointer<Int16> vx,
   result = true;
   if (result) {
     result = sdlSetRenderDrawBlendMode(
-        renderer, (a == 255) ? SDL_BLENDMODE_NONE : SDL_BLENDMODE_BLEND);
+      renderer,
+      (a == 255) ? SDL_BLENDMODE_NONE : SDL_BLENDMODE_BLEND,
+    );
   }
   if (result) {
     result = sdlSetRenderDrawColor(renderer, r, g, b, a);
@@ -2778,8 +3267,13 @@ bool polygonRgba(Pointer<SdlRenderer> renderer, Pointer<Int16> vx,
 
 \returns Returns 0 on success, -1 on failure.
 */
-bool aapolygonColor(Pointer<SdlRenderer> renderer, Pointer<Int16> vx,
-    Pointer<Int16> vy, int n, int color) {
+bool aapolygonColor(
+  Pointer<SdlRenderer> renderer,
+  Pointer<Int16> vx,
+  Pointer<Int16> vy,
+  int n,
+  int color,
+) {
   var co = Uint32List.fromList([color]).buffer.asUint8List();
   return aapolygonRgba(renderer, vx, vy, n, co[0], co[1], co[2], co[3]);
 }
@@ -2798,8 +3292,16 @@ bool aapolygonColor(Pointer<SdlRenderer> renderer, Pointer<Int16> vx,
 
 \returns Returns 0 on success, -1 on failure.
 */
-bool aapolygonRgba(Pointer<SdlRenderer> renderer, Pointer<Int16> vx,
-    Pointer<Int16> vy, int n, int r, int g, int b, int a) {
+bool aapolygonRgba(
+  Pointer<SdlRenderer> renderer,
+  Pointer<Int16> vx,
+  Pointer<Int16> vy,
+  int n,
+  int r,
+  int g,
+  int b,
+  int a,
+) {
   bool result = true;
   int i;
 
@@ -2830,13 +3332,33 @@ bool aapolygonRgba(Pointer<SdlRenderer> renderer, Pointer<Int16> vx,
   result = true;
   for (i = 1; i < n; i++) {
     if (result) {
-      result = _aalineRgba(renderer, vx[i - 1].toDouble(), vy[i - 1].toDouble(),
-          vx[i].toDouble(), vy[i].toDouble(), r, g, b, a, 0);
+      result = _aalineRgba(
+        renderer,
+        vx[i - 1].toDouble(),
+        vy[i - 1].toDouble(),
+        vx[i].toDouble(),
+        vy[i].toDouble(),
+        r,
+        g,
+        b,
+        a,
+        0,
+      );
     }
   }
   if (result) {
-    result = _aalineRgba(renderer, vx[n - 1].toDouble(), vy[n - 1].toDouble(),
-        vx[0].toDouble(), vy[0].toDouble(), r, g, b, a, 0);
+    result = _aalineRgba(
+      renderer,
+      vx[n - 1].toDouble(),
+      vy[n - 1].toDouble(),
+      vx[0].toDouble(),
+      vy[0].toDouble(),
+      r,
+      g,
+      b,
+      a,
+      0,
+    );
   }
 
   return result;
@@ -2860,8 +3382,16 @@ Note: The last two parameters are optional; but are required for multithreaded o
 
 \returns Returns 0 on success, -1 on failure.
 */
-bool filledPolygonRgbaMt(Pointer<SdlRenderer> renderer, Pointer<Int16> vx,
-    Pointer<Int16> vy, int n, int r, int g, int b, int a) {
+bool filledPolygonRgbaMt(
+  Pointer<SdlRenderer> renderer,
+  Pointer<Int16> vx,
+  Pointer<Int16> vy,
+  int n,
+  int r,
+  int g,
+  int b,
+  int a,
+) {
   bool result = true;
   int i;
   int y, xa, xb;
@@ -2926,8 +3456,9 @@ bool filledPolygonRgbaMt(Pointer<SdlRenderer> renderer, Pointer<Int16> vx,
         continue;
       }
       if (((y >= y1) && (y < y2)) || ((y == maxy) && (y > y1) && (y <= y2))) {
-        gfxPrimitivesPolyInts
-            .add(((65536 * (y - y1)) ~/ (y2 - y1)) * (x2 - x1) + (65536 * x1));
+        gfxPrimitivesPolyInts.add(
+          ((65536 * (y - y1)) ~/ (y2 - y1)) * (x2 - x1) + (65536 * x1),
+        );
       }
     }
     gfxPrimitivesPolyInts.sort((a, b) => b - a);
@@ -2937,7 +3468,9 @@ bool filledPolygonRgbaMt(Pointer<SdlRenderer> renderer, Pointer<Int16> vx,
     result = true;
     if (result) {
       result = sdlSetRenderDrawBlendMode(
-          renderer, (a == 255) ? SDL_BLENDMODE_NONE : SDL_BLENDMODE_BLEND);
+        renderer,
+        (a == 255) ? SDL_BLENDMODE_NONE : SDL_BLENDMODE_BLEND,
+      );
     }
     if (result) {
       result = sdlSetRenderDrawColor(renderer, r, g, b, a);
@@ -2966,8 +3499,13 @@ bool filledPolygonRgbaMt(Pointer<SdlRenderer> renderer, Pointer<Int16> vx,
 
 \returns Returns 0 on success, -1 on failure.
 */
-bool filledPolygonColor(Pointer<SdlRenderer> renderer, Pointer<Int16> vx,
-    Pointer<Int16> vy, int n, int color) {
+bool filledPolygonColor(
+  Pointer<SdlRenderer> renderer,
+  Pointer<Int16> vx,
+  Pointer<Int16> vy,
+  int n,
+  int color,
+) {
   var co = Uint32List.fromList([color]).buffer.asUint8List();
   return filledPolygonRgbaMt(renderer, vx, vy, n, co[0], co[1], co[2], co[3]);
 }
@@ -2986,8 +3524,16 @@ bool filledPolygonColor(Pointer<SdlRenderer> renderer, Pointer<Int16> vx,
 
 \returns Returns 0 on success, -1 on failure.
 */
-bool filledPolygonRgba(Pointer<SdlRenderer> renderer, Pointer<Int16> vx,
-    Pointer<Int16> vy, int n, int r, int g, int b, int a) {
+bool filledPolygonRgba(
+  Pointer<SdlRenderer> renderer,
+  Pointer<Int16> vx,
+  Pointer<Int16> vy,
+  int n,
+  int r,
+  int g,
+  int b,
+  int a,
+) {
   return filledPolygonRgbaMt(renderer, vx, vy, n, r, g, b, a);
 }
 
@@ -3009,15 +3555,16 @@ bool filledPolygonRgba(Pointer<SdlRenderer> renderer, Pointer<Int16> vx,
 \returns Returns 0 on success, -1 on failure.
 */
 bool _hLineTextured(
-    Pointer<SdlRenderer> renderer,
-    double x1,
-    double x2,
-    double y,
-    Pointer<SdlTexture> texture,
-    int textureW,
-    int textureH,
-    int textureDx,
-    int textureDy) {
+  Pointer<SdlRenderer> renderer,
+  double x1,
+  double x2,
+  double y,
+  Pointer<SdlTexture> texture,
+  int textureW,
+  int textureH,
+  int textureDx,
+  int textureDy,
+) {
   double w;
   double xtmp;
   bool result = true;
@@ -3122,13 +3669,14 @@ to the left and want the texture to apear the same you need to increase the text
 \returns Returns 0 on success, -1 on failure.
 */
 bool texturedPolygonMt(
-    Pointer<SdlRenderer> renderer,
-    Pointer<Int16> vx,
-    Pointer<Int16> vy,
-    int n,
-    Pointer<SdlSurface> texture,
-    int textureDx,
-    int textureDy) {
+  Pointer<SdlRenderer> renderer,
+  Pointer<Int16> vx,
+  Pointer<Int16> vy,
+  int n,
+  Pointer<SdlSurface> texture,
+  int textureDx,
+  int textureDy,
+) {
   bool result = true;
   int i;
   int y, xa, xb;
@@ -3221,8 +3769,9 @@ bool texturedPolygonMt(
         continue;
       }
       if (((y >= y1) && (y < y2)) || ((y == maxy) && (y > y1) && (y <= y2))) {
-        gfxPrimitivesPolyInts
-            .add(((65536 * (y - y1)) ~/ (y2 - y1)) * (x2 - x1) + (65536 * x1));
+        gfxPrimitivesPolyInts.add(
+          ((65536 * (y - y1)) ~/ (y2 - y1)) * (x2 - x1) + (65536 * x1),
+        );
       }
     }
     gfxPrimitivesPolyInts.sort((a, b) => b - a);
@@ -3234,15 +3783,16 @@ bool texturedPolygonMt(
       xb = (xb >> 16) + ((xb & 32768) >> 15);
       if (result) {
         result = _hLineTextured(
-            renderer,
-            xa.toDouble(),
-            xb.toDouble(),
-            y.toDouble(),
-            textureAsTexture,
-            texture.ref.w,
-            texture.ref.h,
-            textureDx,
-            textureDy);
+          renderer,
+          xa.toDouble(),
+          xb.toDouble(),
+          y.toDouble(),
+          textureAsTexture,
+          texture.ref.w,
+          texture.ref.h,
+          textureDx,
+          textureDy,
+        );
       }
     }
   }
@@ -3270,13 +3820,14 @@ to the left and want the texture to apear the same you need to increase the text
 \returns Returns 0 on success, -1 on failure.
 */
 bool texturedPolygon(
-    Pointer<SdlRenderer> renderer,
-    Pointer<Int16> vx,
-    Pointer<Int16> vy,
-    int n,
-    Pointer<SdlSurface> texture,
-    int textureDx,
-    int textureDy) {
+  Pointer<SdlRenderer> renderer,
+  Pointer<Int16> vx,
+  Pointer<Int16> vy,
+  int n,
+  Pointer<SdlSurface> texture,
+  int textureDx,
+  int textureDy,
+) {
   /*
 	* Draw
 	*/
@@ -3422,8 +3973,16 @@ Pointer<SdlSurface> createCharacterSurface(int c, int rotation) {
 
 \returns Returns 0 on success, -1 on failure.
 */
-bool characterRgba(Pointer<SdlRenderer> renderer, double x, double y, int c,
-    int r, int g, int b, int a) {
+bool characterRgba(
+  Pointer<SdlRenderer> renderer,
+  double x,
+  double y,
+  int c,
+  int r,
+  int g,
+  int b,
+  int a,
+) {
   Pointer<SdlFRect> srect = calloc<SdlFRect>();
   Pointer<SdlFRect> drect = calloc<SdlFRect>();
   bool result = true;
@@ -3444,8 +4003,11 @@ bool characterRgba(Pointer<SdlRenderer> renderer, double x, double y, int c,
     /*
 		* Redraw character into surface
 		*/
-    character =
-        sdlCreateSurface(charWidth, charHeight, SDL_PIXELFORMAT_RGBA8888);
+    character = sdlCreateSurface(
+      charWidth,
+      charHeight,
+      SDL_PIXELFORMAT_RGBA8888,
+    );
     if (character == nullptr) {
       return false;
     }
@@ -3532,7 +4094,12 @@ bool characterRgba(Pointer<SdlRenderer> renderer, double x, double y, int c,
 \returns Returns 0 on success, -1 on failure.
 */
 bool characterColor(
-    Pointer<SdlRenderer> renderer, double x, double y, int c, int color) {
+  Pointer<SdlRenderer> renderer,
+  double x,
+  double y,
+  int c,
+  int color,
+) {
   var co = Uint32List.fromList([color]).buffer.asUint8List();
   return characterRgba(renderer, x, y, c, co[0], co[1], co[2], co[3]);
 }
@@ -3552,7 +4119,12 @@ of the character width of the current global font.
 \returns Returns 0 on success, -1 on failure.
 */
 bool stringColor(
-    Pointer<SdlRenderer> renderer, double x, double y, String s, int color) {
+  Pointer<SdlRenderer> renderer,
+  double x,
+  double y,
+  String s,
+  int color,
+) {
   var co = Uint32List.fromList([color]).buffer.asUint8List();
   return stringRgba(renderer, x, y, s, co[0], co[1], co[2], co[3]);
 }
@@ -3571,8 +4143,16 @@ bool stringColor(
 
 \returns Returns 0 on success, -1 on failure.
 */
-bool stringRgba(Pointer<SdlRenderer> renderer, double x, double y, String s,
-    int r, int g, int b, int a) {
+bool stringRgba(
+  Pointer<SdlRenderer> renderer,
+  double x,
+  double y,
+  String s,
+  int r,
+  int g,
+  int b,
+  int a,
+) {
   bool result = true;
   double curx = x;
   double cury = y;
@@ -3580,7 +4160,15 @@ bool stringRgba(Pointer<SdlRenderer> renderer, double x, double y, String s,
     var curchar = s[i];
     if (result) {
       result = characterRgba(
-          renderer, curx, cury, curchar.codeUnitAt(0), r, g, b, a);
+        renderer,
+        curx,
+        cury,
+        curchar.codeUnitAt(0),
+        r,
+        g,
+        b,
+        a,
+      );
     }
     switch (charRotation) {
       case 0:
@@ -3669,8 +4257,14 @@ double _evaluateBezier(List<double> data, int ndata, double t) {
 
 \returns Returns 0 on success, -1 on failure.
 */
-bool bezierColor(Pointer<SdlRenderer> renderer, Pointer<Int16> vx,
-    Pointer<Int16> vy, int n, int s, int color) {
+bool bezierColor(
+  Pointer<SdlRenderer> renderer,
+  Pointer<Int16> vx,
+  Pointer<Int16> vy,
+  int n,
+  int s,
+  int color,
+) {
   var co = Uint32List.fromList([color]).buffer.asUint8List();
   return bezierRgba(renderer, vx, vy, n, s, co[0], co[1], co[2], co[3]);
 }
@@ -3690,8 +4284,17 @@ bool bezierColor(Pointer<SdlRenderer> renderer, Pointer<Int16> vx,
 
 \returns Returns 0 on success, -1 on failure.
 */
-bool bezierRgba(Pointer<SdlRenderer> renderer, Pointer<Int16> vx,
-    Pointer<Int16> vy, int n, int s, int r, int g, int b, int a) {
+bool bezierRgba(
+  Pointer<SdlRenderer> renderer,
+  Pointer<Int16> vx,
+  Pointer<Int16> vy,
+  int n,
+  int s,
+  int r,
+  int g,
+  int b,
+  int a,
+) {
   bool result = true;
   int i;
   double t, stepsize;
@@ -3728,7 +4331,9 @@ bool bezierRgba(Pointer<SdlRenderer> renderer, Pointer<Int16> vx,
   result = true;
   if (result) {
     result = sdlSetRenderDrawBlendMode(
-        renderer, (a == 255) ? SDL_BLENDMODE_NONE : SDL_BLENDMODE_BLEND);
+      renderer,
+      (a == 255) ? SDL_BLENDMODE_NONE : SDL_BLENDMODE_BLEND,
+    );
   }
   if (result) {
     result = sdlSetRenderDrawColor(renderer, r, g, b, a);
@@ -3746,7 +4351,12 @@ bool bezierRgba(Pointer<SdlRenderer> renderer, Pointer<Int16> vx,
     y2 = _evaluateBezier(y, n, t).toInt();
     if (result) {
       result = line(
-          renderer, x1.toDouble(), y1.toDouble(), x2.toDouble(), y2.toDouble());
+        renderer,
+        x1.toDouble(),
+        y1.toDouble(),
+        x2.toDouble(),
+        y2.toDouble(),
+      );
     }
     x1 = x2;
     y1 = y2;
@@ -3772,11 +4382,28 @@ bool bezierRgba(Pointer<SdlRenderer> renderer, Pointer<Int16> vx,
 
 \returns Returns 0 on success, -1 on failure.
 */
-bool thickLineColor(Pointer<SdlRenderer> renderer, double x1, double y1,
-    double x2, double y2, double width, int color) {
+bool thickLineColor(
+  Pointer<SdlRenderer> renderer,
+  double x1,
+  double y1,
+  double x2,
+  double y2,
+  double width,
+  int color,
+) {
   var co = Uint32List.fromList([color]).buffer.asUint8List();
   return thickLineRgba(
-      renderer, x1, y1, x2, y2, width, co[0], co[1], co[2], co[3]);
+    renderer,
+    x1,
+    y1,
+    x2,
+    y2,
+    width,
+    co[0],
+    co[1],
+    co[2],
+    co[3],
+  );
 }
 
 /*!
@@ -3795,8 +4422,18 @@ bool thickLineColor(Pointer<SdlRenderer> renderer, double x1, double y1,
 
 \returns Returns 0 on success, -1 on failure.
 */
-bool thickLineRgba(Pointer<SdlRenderer> renderer, double x1, double y1,
-    double x2, double y2, double width, int r, int g, int b, int a) {
+bool thickLineRgba(
+  Pointer<SdlRenderer> renderer,
+  double x1,
+  double y1,
+  double x2,
+  double y2,
+  double width,
+  int r,
+  int g,
+  int b,
+  int a,
+) {
   int wh;
   double dx, dy, dx1, dy1, dx2, dy2;
   double l, wl2, nx, ny, ang, adj;
@@ -3815,7 +4452,16 @@ bool thickLineRgba(Pointer<SdlRenderer> renderer, double x1, double y1,
   if ((x1 == x2) && (y1 == y2)) {
     wh = width ~/ 2;
     return boxRgba(
-        renderer, x1 - wh, y1 - wh, x2 + width, y2 + width, r, g, b, a);
+      renderer,
+      x1 - wh,
+      y1 - wh,
+      x2 + width,
+      y2 + width,
+      r,
+      g,
+      b,
+      a,
+    );
   }
 
   /* Special case: width == 1 */

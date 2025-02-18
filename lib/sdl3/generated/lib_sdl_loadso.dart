@@ -23,9 +23,9 @@ import 'struct_sdl.dart';
 /// ```
 Pointer<SdlSharedObject> sdlLoadObject(String? sofile) {
   final sdlLoadObjectLookupFunction = libSdl3.lookupFunction<
-      Pointer<SdlSharedObject> Function(Pointer<Utf8> sofile),
-      Pointer<SdlSharedObject> Function(
-          Pointer<Utf8> sofile)>('SDL_LoadObject');
+    Pointer<SdlSharedObject> Function(Pointer<Utf8> sofile),
+    Pointer<SdlSharedObject> Function(Pointer<Utf8> sofile)
+  >('SDL_LoadObject');
   final sofilePointer = sofile != null ? sofile.toNativeUtf8() : nullptr;
   final result = sdlLoadObjectLookupFunction(sofilePointer);
   calloc.free(sofilePointer);
@@ -62,12 +62,19 @@ Pointer<SdlSharedObject> sdlLoadObject(String? sofile) {
 /// extern SDL_DECLSPEC SDL_FunctionPointer SDLCALL SDL_LoadFunction(SDL_SharedObject *handle, const char *name)
 /// ```
 Pointer<NativeType> sdlLoadFunction(
-    Pointer<SdlSharedObject> handle, String? name) {
+  Pointer<SdlSharedObject> handle,
+  String? name,
+) {
   final sdlLoadFunctionLookupFunction = libSdl3.lookupFunction<
-      Pointer<NativeType> Function(
-          Pointer<SdlSharedObject> handle, Pointer<Utf8> name),
-      Pointer<NativeType> Function(Pointer<SdlSharedObject> handle,
-          Pointer<Utf8> name)>('SDL_LoadFunction');
+    Pointer<NativeType> Function(
+      Pointer<SdlSharedObject> handle,
+      Pointer<Utf8> name,
+    ),
+    Pointer<NativeType> Function(
+      Pointer<SdlSharedObject> handle,
+      Pointer<Utf8> name,
+    )
+  >('SDL_LoadFunction');
   final namePointer = name != null ? name.toNativeUtf8() : nullptr;
   final result = sdlLoadFunctionLookupFunction(handle, namePointer);
   calloc.free(namePointer);
@@ -93,7 +100,8 @@ Pointer<NativeType> sdlLoadFunction(
 /// ```
 void sdlUnloadObject(Pointer<SdlSharedObject> handle) {
   final sdlUnloadObjectLookupFunction = libSdl3.lookupFunction<
-      Void Function(Pointer<SdlSharedObject> handle),
-      void Function(Pointer<SdlSharedObject> handle)>('SDL_UnloadObject');
+    Void Function(Pointer<SdlSharedObject> handle),
+    void Function(Pointer<SdlSharedObject> handle)
+  >('SDL_UnloadObject');
   return sdlUnloadObjectLookupFunction(handle);
 }

@@ -42,7 +42,10 @@ extension TtfFontEx on TtfFont {
   /// extern SDL_DECLSPEC void SDLCALL TTF_GetFreeTypeVersion(int *major, int *minor, int *patch)
   /// ```
   static void getFreeTypeVersion(
-      Pointer<Int32> major, Pointer<Int32> minor, Pointer<Int32> patch) {
+    Pointer<Int32> major,
+    Pointer<Int32> minor,
+    Pointer<Int32> patch,
+  ) {
     ttfGetFreeTypeVersion(major, minor, patch);
   }
 
@@ -63,7 +66,10 @@ extension TtfFontEx on TtfFont {
   /// extern SDL_DECLSPEC void SDLCALL TTF_GetHarfBuzzVersion(int *major, int *minor, int *patch)
   /// ```
   static void getHarfBuzzVersion(
-      Pointer<Int32> major, Pointer<Int32> minor, Pointer<Int32> patch) {
+    Pointer<Int32> major,
+    Pointer<Int32> minor,
+    Pointer<Int32> patch,
+  ) {
     return ttfGetHarfBuzzVersion(major, minor, patch);
   }
 
@@ -146,7 +152,10 @@ extension TtfFontEx on TtfFont {
   /// extern SDL_DECLSPEC TTF_Font * SDLCALL TTF_OpenFontIO(SDL_IOStream *src, bool closeio, float ptsize)
   /// ```
   static Pointer<TtfFont> openIo(
-      Pointer<SdlIoStream> src, bool closeio, double ptsize) {
+    Pointer<SdlIoStream> src,
+    bool closeio,
+    double ptsize,
+  ) {
     return ttfOpenFontIo(src, closeio, ptsize);
   }
 
@@ -978,8 +987,14 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL TTF_GetGlyphMetrics(TTF_Font *font, Uint32 ch, int *minx, int *maxx, int *miny, int *maxy, int *advance)
   /// ```
-  bool getGlyphMetrics(int ch, Pointer<Int32> minx, Pointer<Int32> maxx,
-      Pointer<Int32> miny, Pointer<Int32> maxy, Pointer<Int32> advance) {
+  bool getGlyphMetrics(
+    int ch,
+    Pointer<Int32> minx,
+    Pointer<Int32> maxx,
+    Pointer<Int32> miny,
+    Pointer<Int32> maxy,
+    Pointer<Int32> advance,
+  ) {
     return ttfGetGlyphMetrics(this, ch, minx, maxx, miny, maxy, advance);
   }
 
@@ -1093,7 +1108,11 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// extern SDL_DECLSPEC SDL_Surface * SDLCALL TTF_RenderText_Shaded(TTF_Font *font, const char *text, size_t length, SDL_Color fg, SDL_Color bg)
   /// ```
   Pointer<SdlSurface> renderTextShadedWrapped(
-      String? text, SdlColor fg, SdlColor bg, int wrapLength) {
+    String? text,
+    SdlColor fg,
+    SdlColor bg,
+    int wrapLength,
+  ) {
     var length = 0;
     if (text != null) {
       var pointer = text.toNativeUtf8();
@@ -1224,7 +1243,10 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// extern SDL_DECLSPEC SDL_Surface * SDLCALL TTF_RenderText_Blended_Wrapped(TTF_Font *font, const char *text, size_t length, SDL_Color fg, int wrap_width)
   /// ```
   Pointer<SdlSurface> renderTextBlendedWrapped(
-      String? text, SdlColor fg, int wrapLength) {
+    String? text,
+    SdlColor fg,
+    int wrapLength,
+  ) {
     var length = 0;
     if (text != null) {
       var pointer = text.toNativeUtf8();
@@ -1307,7 +1329,11 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// extern SDL_DECLSPEC SDL_Surface * SDLCALL TTF_RenderText_LCD(TTF_Font *font, const char *text, size_t length, SDL_Color fg, SDL_Color bg)
   /// ```
   Pointer<SdlSurface> renderTextLcd(
-      String? text, int length, SdlColor fg, SdlColor bg) {
+    String? text,
+    int length,
+    SdlColor fg,
+    SdlColor bg,
+  ) {
     var length = 0;
     if (text != null) {
       var pointer = text.toNativeUtf8();
@@ -1357,7 +1383,12 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// extern SDL_DECLSPEC SDL_Surface * SDLCALL TTF_RenderText_LCD_Wrapped(TTF_Font *font, const char *text, size_t length, SDL_Color fg, SDL_Color bg, int wrap_width)
   /// ```
   Pointer<SdlSurface> renderTextLcdWrapped(
-      String? text, int length, SdlColor fg, SdlColor bg, int wrapLength) {
+    String? text,
+    int length,
+    SdlColor fg,
+    SdlColor bg,
+    int wrapLength,
+  ) {
     var length = 0;
     if (text != null) {
       var pointer = text.toNativeUtf8();

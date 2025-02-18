@@ -22,8 +22,9 @@ import 'struct_sdl.dart';
 /// ```
 Pointer<Uint32> sdlGetHaptics(Pointer<Int32> count) {
   final sdlGetHapticsLookupFunction = libSdl3.lookupFunction<
-      Pointer<Uint32> Function(Pointer<Int32> count),
-      Pointer<Uint32> Function(Pointer<Int32> count)>('SDL_GetHaptics');
+    Pointer<Uint32> Function(Pointer<Int32> count),
+    Pointer<Uint32> Function(Pointer<Int32> count)
+  >('SDL_GetHaptics');
   return sdlGetHapticsLookupFunction(count);
 }
 
@@ -47,8 +48,9 @@ Pointer<Uint32> sdlGetHaptics(Pointer<Int32> count) {
 /// ```
 String? sdlGetHapticNameForId(int instanceId) {
   final sdlGetHapticNameForIdLookupFunction = libSdl3.lookupFunction<
-      Pointer<Utf8> Function(Uint32 instanceId),
-      Pointer<Utf8> Function(int instanceId)>('SDL_GetHapticNameForID');
+    Pointer<Utf8> Function(Uint32 instanceId),
+    Pointer<Utf8> Function(int instanceId)
+  >('SDL_GetHapticNameForID');
   final result = sdlGetHapticNameForIdLookupFunction(instanceId);
   if (result == nullptr) {
     return null;
@@ -84,8 +86,9 @@ String? sdlGetHapticNameForId(int instanceId) {
 /// ```
 Pointer<SdlHaptic> sdlOpenHaptic(int instanceId) {
   final sdlOpenHapticLookupFunction = libSdl3.lookupFunction<
-      Pointer<SdlHaptic> Function(Uint32 instanceId),
-      Pointer<SdlHaptic> Function(int instanceId)>('SDL_OpenHaptic');
+    Pointer<SdlHaptic> Function(Uint32 instanceId),
+    Pointer<SdlHaptic> Function(int instanceId)
+  >('SDL_OpenHaptic');
   return sdlOpenHapticLookupFunction(instanceId);
 }
 
@@ -103,8 +106,9 @@ Pointer<SdlHaptic> sdlOpenHaptic(int instanceId) {
 /// ```
 Pointer<SdlHaptic> sdlGetHapticFromId(int instanceId) {
   final sdlGetHapticFromIdLookupFunction = libSdl3.lookupFunction<
-      Pointer<SdlHaptic> Function(Uint32 instanceId),
-      Pointer<SdlHaptic> Function(int instanceId)>('SDL_GetHapticFromID');
+    Pointer<SdlHaptic> Function(Uint32 instanceId),
+    Pointer<SdlHaptic> Function(int instanceId)
+  >('SDL_GetHapticFromID');
   return sdlGetHapticFromIdLookupFunction(instanceId);
 }
 
@@ -122,8 +126,9 @@ Pointer<SdlHaptic> sdlGetHapticFromId(int instanceId) {
 /// ```
 int sdlGetHapticId(Pointer<SdlHaptic> haptic) {
   final sdlGetHapticIdLookupFunction = libSdl3.lookupFunction<
-      Uint32 Function(Pointer<SdlHaptic> haptic),
-      int Function(Pointer<SdlHaptic> haptic)>('SDL_GetHapticID');
+    Uint32 Function(Pointer<SdlHaptic> haptic),
+    int Function(Pointer<SdlHaptic> haptic)
+  >('SDL_GetHapticID');
   return sdlGetHapticIdLookupFunction(haptic);
 }
 
@@ -144,8 +149,9 @@ int sdlGetHapticId(Pointer<SdlHaptic> haptic) {
 /// ```
 String? sdlGetHapticName(Pointer<SdlHaptic> haptic) {
   final sdlGetHapticNameLookupFunction = libSdl3.lookupFunction<
-      Pointer<Utf8> Function(Pointer<SdlHaptic> haptic),
-      Pointer<Utf8> Function(Pointer<SdlHaptic> haptic)>('SDL_GetHapticName');
+    Pointer<Utf8> Function(Pointer<SdlHaptic> haptic),
+    Pointer<Utf8> Function(Pointer<SdlHaptic> haptic)
+  >('SDL_GetHapticName');
   final result = sdlGetHapticNameLookupFunction(haptic);
   if (result == nullptr) {
     return null;
@@ -187,8 +193,9 @@ bool sdlIsMouseHaptic() {
 /// ```
 Pointer<SdlHaptic> sdlOpenHapticFromMouse() {
   final sdlOpenHapticFromMouseLookupFunction = libSdl3.lookupFunction<
-      Pointer<SdlHaptic> Function(),
-      Pointer<SdlHaptic> Function()>('SDL_OpenHapticFromMouse');
+    Pointer<SdlHaptic> Function(),
+    Pointer<SdlHaptic> Function()
+  >('SDL_OpenHapticFromMouse');
   return sdlOpenHapticFromMouseLookupFunction();
 }
 
@@ -207,8 +214,9 @@ Pointer<SdlHaptic> sdlOpenHapticFromMouse() {
 /// ```
 bool sdlIsJoystickHaptic(Pointer<SdlJoystick> joystick) {
   final sdlIsJoystickHapticLookupFunction = libSdl3.lookupFunction<
-      Uint8 Function(Pointer<SdlJoystick> joystick),
-      int Function(Pointer<SdlJoystick> joystick)>('SDL_IsJoystickHaptic');
+    Uint8 Function(Pointer<SdlJoystick> joystick),
+    int Function(Pointer<SdlJoystick> joystick)
+  >('SDL_IsJoystickHaptic');
   return sdlIsJoystickHapticLookupFunction(joystick) == 1;
 }
 
@@ -237,9 +245,9 @@ bool sdlIsJoystickHaptic(Pointer<SdlJoystick> joystick) {
 /// ```
 Pointer<SdlHaptic> sdlOpenHapticFromJoystick(Pointer<SdlJoystick> joystick) {
   final sdlOpenHapticFromJoystickLookupFunction = libSdl3.lookupFunction<
-      Pointer<SdlHaptic> Function(Pointer<SdlJoystick> joystick),
-      Pointer<SdlHaptic> Function(
-          Pointer<SdlJoystick> joystick)>('SDL_OpenHapticFromJoystick');
+    Pointer<SdlHaptic> Function(Pointer<SdlJoystick> joystick),
+    Pointer<SdlHaptic> Function(Pointer<SdlJoystick> joystick)
+  >('SDL_OpenHapticFromJoystick');
   return sdlOpenHapticFromJoystickLookupFunction(joystick);
 }
 
@@ -257,8 +265,9 @@ Pointer<SdlHaptic> sdlOpenHapticFromJoystick(Pointer<SdlJoystick> joystick) {
 /// ```
 void sdlCloseHaptic(Pointer<SdlHaptic> haptic) {
   final sdlCloseHapticLookupFunction = libSdl3.lookupFunction<
-      Void Function(Pointer<SdlHaptic> haptic),
-      void Function(Pointer<SdlHaptic> haptic)>('SDL_CloseHaptic');
+    Void Function(Pointer<SdlHaptic> haptic),
+    void Function(Pointer<SdlHaptic> haptic)
+  >('SDL_CloseHaptic');
   return sdlCloseHapticLookupFunction(haptic);
 }
 
@@ -283,8 +292,9 @@ void sdlCloseHaptic(Pointer<SdlHaptic> haptic) {
 /// ```
 int sdlGetMaxHapticEffects(Pointer<SdlHaptic> haptic) {
   final sdlGetMaxHapticEffectsLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlHaptic> haptic),
-      int Function(Pointer<SdlHaptic> haptic)>('SDL_GetMaxHapticEffects');
+    Int32 Function(Pointer<SdlHaptic> haptic),
+    int Function(Pointer<SdlHaptic> haptic)
+  >('SDL_GetMaxHapticEffects');
   return sdlGetMaxHapticEffectsLookupFunction(haptic);
 }
 
@@ -307,9 +317,9 @@ int sdlGetMaxHapticEffects(Pointer<SdlHaptic> haptic) {
 /// ```
 int sdlGetMaxHapticEffectsPlaying(Pointer<SdlHaptic> haptic) {
   final sdlGetMaxHapticEffectsPlayingLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlHaptic> haptic),
-      int Function(
-          Pointer<SdlHaptic> haptic)>('SDL_GetMaxHapticEffectsPlaying');
+    Int32 Function(Pointer<SdlHaptic> haptic),
+    int Function(Pointer<SdlHaptic> haptic)
+  >('SDL_GetMaxHapticEffectsPlaying');
   return sdlGetMaxHapticEffectsPlayingLookupFunction(haptic);
 }
 
@@ -330,8 +340,9 @@ int sdlGetMaxHapticEffectsPlaying(Pointer<SdlHaptic> haptic) {
 /// ```
 int sdlGetHapticFeatures(Pointer<SdlHaptic> haptic) {
   final sdlGetHapticFeaturesLookupFunction = libSdl3.lookupFunction<
-      Uint32 Function(Pointer<SdlHaptic> haptic),
-      int Function(Pointer<SdlHaptic> haptic)>('SDL_GetHapticFeatures');
+    Uint32 Function(Pointer<SdlHaptic> haptic),
+    int Function(Pointer<SdlHaptic> haptic)
+  >('SDL_GetHapticFeatures');
   return sdlGetHapticFeaturesLookupFunction(haptic);
 }
 
@@ -352,8 +363,9 @@ int sdlGetHapticFeatures(Pointer<SdlHaptic> haptic) {
 /// ```
 int sdlGetNumHapticAxes(Pointer<SdlHaptic> haptic) {
   final sdlGetNumHapticAxesLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlHaptic> haptic),
-      int Function(Pointer<SdlHaptic> haptic)>('SDL_GetNumHapticAxes');
+    Int32 Function(Pointer<SdlHaptic> haptic),
+    int Function(Pointer<SdlHaptic> haptic)
+  >('SDL_GetNumHapticAxes');
   return sdlGetNumHapticAxesLookupFunction(haptic);
 }
 
@@ -373,12 +385,13 @@ int sdlGetNumHapticAxes(Pointer<SdlHaptic> haptic) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_HapticEffectSupported(SDL_Haptic *haptic, const SDL_HapticEffect *effect)
 /// ```
 bool sdlHapticEffectSupported(
-    Pointer<SdlHaptic> haptic, Pointer<SdlHapticEffect> effect) {
+  Pointer<SdlHaptic> haptic,
+  Pointer<SdlHapticEffect> effect,
+) {
   final sdlHapticEffectSupportedLookupFunction = libSdl3.lookupFunction<
-      Uint8 Function(
-          Pointer<SdlHaptic> haptic, Pointer<SdlHapticEffect> effect),
-      int Function(Pointer<SdlHaptic> haptic,
-          Pointer<SdlHapticEffect> effect)>('SDL_HapticEffectSupported');
+    Uint8 Function(Pointer<SdlHaptic> haptic, Pointer<SdlHapticEffect> effect),
+    int Function(Pointer<SdlHaptic> haptic, Pointer<SdlHapticEffect> effect)
+  >('SDL_HapticEffectSupported');
   return sdlHapticEffectSupportedLookupFunction(haptic, effect) == 1;
 }
 
@@ -401,12 +414,13 @@ bool sdlHapticEffectSupported(
 /// extern SDL_DECLSPEC int SDLCALL SDL_CreateHapticEffect(SDL_Haptic *haptic, const SDL_HapticEffect *effect)
 /// ```
 int sdlCreateHapticEffect(
-    Pointer<SdlHaptic> haptic, Pointer<SdlHapticEffect> effect) {
+  Pointer<SdlHaptic> haptic,
+  Pointer<SdlHapticEffect> effect,
+) {
   final sdlCreateHapticEffectLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(
-          Pointer<SdlHaptic> haptic, Pointer<SdlHapticEffect> effect),
-      int Function(Pointer<SdlHaptic> haptic,
-          Pointer<SdlHapticEffect> effect)>('SDL_CreateHapticEffect');
+    Int32 Function(Pointer<SdlHaptic> haptic, Pointer<SdlHapticEffect> effect),
+    int Function(Pointer<SdlHaptic> haptic, Pointer<SdlHapticEffect> effect)
+  >('SDL_CreateHapticEffect');
   return sdlCreateHapticEffectLookupFunction(haptic, effect);
 }
 
@@ -434,12 +448,22 @@ int sdlCreateHapticEffect(
 /// extern SDL_DECLSPEC bool SDLCALL SDL_UpdateHapticEffect(SDL_Haptic *haptic, int effect, const SDL_HapticEffect *data)
 /// ```
 bool sdlUpdateHapticEffect(
-    Pointer<SdlHaptic> haptic, int effect, Pointer<SdlHapticEffect> data) {
+  Pointer<SdlHaptic> haptic,
+  int effect,
+  Pointer<SdlHapticEffect> data,
+) {
   final sdlUpdateHapticEffectLookupFunction = libSdl3.lookupFunction<
-      Uint8 Function(Pointer<SdlHaptic> haptic, Int32 effect,
-          Pointer<SdlHapticEffect> data),
-      int Function(Pointer<SdlHaptic> haptic, int effect,
-          Pointer<SdlHapticEffect> data)>('SDL_UpdateHapticEffect');
+    Uint8 Function(
+      Pointer<SdlHaptic> haptic,
+      Int32 effect,
+      Pointer<SdlHapticEffect> data,
+    ),
+    int Function(
+      Pointer<SdlHaptic> haptic,
+      int effect,
+      Pointer<SdlHapticEffect> data,
+    )
+  >('SDL_UpdateHapticEffect');
   return sdlUpdateHapticEffectLookupFunction(haptic, effect, data) == 1;
 }
 
@@ -470,10 +494,9 @@ bool sdlUpdateHapticEffect(
 /// ```
 bool sdlRunHapticEffect(Pointer<SdlHaptic> haptic, int effect, int iterations) {
   final sdlRunHapticEffectLookupFunction = libSdl3.lookupFunction<
-      Uint8 Function(
-          Pointer<SdlHaptic> haptic, Int32 effect, Uint32 iterations),
-      int Function(Pointer<SdlHaptic> haptic, int effect,
-          int iterations)>('SDL_RunHapticEffect');
+    Uint8 Function(Pointer<SdlHaptic> haptic, Int32 effect, Uint32 iterations),
+    int Function(Pointer<SdlHaptic> haptic, int effect, int iterations)
+  >('SDL_RunHapticEffect');
   return sdlRunHapticEffectLookupFunction(haptic, effect, iterations) == 1;
 }
 
@@ -495,9 +518,9 @@ bool sdlRunHapticEffect(Pointer<SdlHaptic> haptic, int effect, int iterations) {
 /// ```
 bool sdlStopHapticEffect(Pointer<SdlHaptic> haptic, int effect) {
   final sdlStopHapticEffectLookupFunction = libSdl3.lookupFunction<
-      Uint8 Function(Pointer<SdlHaptic> haptic, Int32 effect),
-      int Function(
-          Pointer<SdlHaptic> haptic, int effect)>('SDL_StopHapticEffect');
+    Uint8 Function(Pointer<SdlHaptic> haptic, Int32 effect),
+    int Function(Pointer<SdlHaptic> haptic, int effect)
+  >('SDL_StopHapticEffect');
   return sdlStopHapticEffectLookupFunction(haptic, effect) == 1;
 }
 
@@ -519,9 +542,9 @@ bool sdlStopHapticEffect(Pointer<SdlHaptic> haptic, int effect) {
 /// ```
 void sdlDestroyHapticEffect(Pointer<SdlHaptic> haptic, int effect) {
   final sdlDestroyHapticEffectLookupFunction = libSdl3.lookupFunction<
-      Void Function(Pointer<SdlHaptic> haptic, Int32 effect),
-      void Function(
-          Pointer<SdlHaptic> haptic, int effect)>('SDL_DestroyHapticEffect');
+    Void Function(Pointer<SdlHaptic> haptic, Int32 effect),
+    void Function(Pointer<SdlHaptic> haptic, int effect)
+  >('SDL_DestroyHapticEffect');
   return sdlDestroyHapticEffectLookupFunction(haptic, effect);
 }
 
@@ -544,9 +567,9 @@ void sdlDestroyHapticEffect(Pointer<SdlHaptic> haptic, int effect) {
 /// ```
 bool sdlGetHapticEffectStatus(Pointer<SdlHaptic> haptic, int effect) {
   final sdlGetHapticEffectStatusLookupFunction = libSdl3.lookupFunction<
-      Uint8 Function(Pointer<SdlHaptic> haptic, Int32 effect),
-      int Function(
-          Pointer<SdlHaptic> haptic, int effect)>('SDL_GetHapticEffectStatus');
+    Uint8 Function(Pointer<SdlHaptic> haptic, Int32 effect),
+    int Function(Pointer<SdlHaptic> haptic, int effect)
+  >('SDL_GetHapticEffectStatus');
   return sdlGetHapticEffectStatusLookupFunction(haptic, effect) == 1;
 }
 
@@ -575,8 +598,9 @@ bool sdlGetHapticEffectStatus(Pointer<SdlHaptic> haptic, int effect) {
 /// ```
 bool sdlSetHapticGain(Pointer<SdlHaptic> haptic, int gain) {
   final sdlSetHapticGainLookupFunction = libSdl3.lookupFunction<
-      Uint8 Function(Pointer<SdlHaptic> haptic, Int32 gain),
-      int Function(Pointer<SdlHaptic> haptic, int gain)>('SDL_SetHapticGain');
+    Uint8 Function(Pointer<SdlHaptic> haptic, Int32 gain),
+    int Function(Pointer<SdlHaptic> haptic, int gain)
+  >('SDL_SetHapticGain');
   return sdlSetHapticGainLookupFunction(haptic, gain) == 1;
 }
 
@@ -602,9 +626,9 @@ bool sdlSetHapticGain(Pointer<SdlHaptic> haptic, int gain) {
 /// ```
 bool sdlSetHapticAutocenter(Pointer<SdlHaptic> haptic, int autocenter) {
   final sdlSetHapticAutocenterLookupFunction = libSdl3.lookupFunction<
-      Uint8 Function(Pointer<SdlHaptic> haptic, Int32 autocenter),
-      int Function(Pointer<SdlHaptic> haptic,
-          int autocenter)>('SDL_SetHapticAutocenter');
+    Uint8 Function(Pointer<SdlHaptic> haptic, Int32 autocenter),
+    int Function(Pointer<SdlHaptic> haptic, int autocenter)
+  >('SDL_SetHapticAutocenter');
   return sdlSetHapticAutocenterLookupFunction(haptic, autocenter) == 1;
 }
 
@@ -630,8 +654,9 @@ bool sdlSetHapticAutocenter(Pointer<SdlHaptic> haptic, int autocenter) {
 /// ```
 bool sdlPauseHaptic(Pointer<SdlHaptic> haptic) {
   final sdlPauseHapticLookupFunction = libSdl3.lookupFunction<
-      Uint8 Function(Pointer<SdlHaptic> haptic),
-      int Function(Pointer<SdlHaptic> haptic)>('SDL_PauseHaptic');
+    Uint8 Function(Pointer<SdlHaptic> haptic),
+    int Function(Pointer<SdlHaptic> haptic)
+  >('SDL_PauseHaptic');
   return sdlPauseHapticLookupFunction(haptic) == 1;
 }
 
@@ -653,8 +678,9 @@ bool sdlPauseHaptic(Pointer<SdlHaptic> haptic) {
 /// ```
 bool sdlResumeHaptic(Pointer<SdlHaptic> haptic) {
   final sdlResumeHapticLookupFunction = libSdl3.lookupFunction<
-      Uint8 Function(Pointer<SdlHaptic> haptic),
-      int Function(Pointer<SdlHaptic> haptic)>('SDL_ResumeHaptic');
+    Uint8 Function(Pointer<SdlHaptic> haptic),
+    int Function(Pointer<SdlHaptic> haptic)
+  >('SDL_ResumeHaptic');
   return sdlResumeHapticLookupFunction(haptic) == 1;
 }
 
@@ -675,8 +701,9 @@ bool sdlResumeHaptic(Pointer<SdlHaptic> haptic) {
 /// ```
 bool sdlStopHapticEffects(Pointer<SdlHaptic> haptic) {
   final sdlStopHapticEffectsLookupFunction = libSdl3.lookupFunction<
-      Uint8 Function(Pointer<SdlHaptic> haptic),
-      int Function(Pointer<SdlHaptic> haptic)>('SDL_StopHapticEffects');
+    Uint8 Function(Pointer<SdlHaptic> haptic),
+    int Function(Pointer<SdlHaptic> haptic)
+  >('SDL_StopHapticEffects');
   return sdlStopHapticEffectsLookupFunction(haptic) == 1;
 }
 
@@ -695,8 +722,9 @@ bool sdlStopHapticEffects(Pointer<SdlHaptic> haptic) {
 /// ```
 bool sdlHapticRumbleSupported(Pointer<SdlHaptic> haptic) {
   final sdlHapticRumbleSupportedLookupFunction = libSdl3.lookupFunction<
-      Uint8 Function(Pointer<SdlHaptic> haptic),
-      int Function(Pointer<SdlHaptic> haptic)>('SDL_HapticRumbleSupported');
+    Uint8 Function(Pointer<SdlHaptic> haptic),
+    int Function(Pointer<SdlHaptic> haptic)
+  >('SDL_HapticRumbleSupported');
   return sdlHapticRumbleSupportedLookupFunction(haptic) == 1;
 }
 
@@ -718,8 +746,9 @@ bool sdlHapticRumbleSupported(Pointer<SdlHaptic> haptic) {
 /// ```
 bool sdlInitHapticRumble(Pointer<SdlHaptic> haptic) {
   final sdlInitHapticRumbleLookupFunction = libSdl3.lookupFunction<
-      Uint8 Function(Pointer<SdlHaptic> haptic),
-      int Function(Pointer<SdlHaptic> haptic)>('SDL_InitHapticRumble');
+    Uint8 Function(Pointer<SdlHaptic> haptic),
+    int Function(Pointer<SdlHaptic> haptic)
+  >('SDL_InitHapticRumble');
   return sdlInitHapticRumbleLookupFunction(haptic) == 1;
 }
 
@@ -741,11 +770,14 @@ bool sdlInitHapticRumble(Pointer<SdlHaptic> haptic) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_PlayHapticRumble(SDL_Haptic *haptic, float strength, Uint32 length)
 /// ```
 bool sdlPlayHapticRumble(
-    Pointer<SdlHaptic> haptic, double strength, int length) {
+  Pointer<SdlHaptic> haptic,
+  double strength,
+  int length,
+) {
   final sdlPlayHapticRumbleLookupFunction = libSdl3.lookupFunction<
-      Uint8 Function(Pointer<SdlHaptic> haptic, Float strength, Uint32 length),
-      int Function(Pointer<SdlHaptic> haptic, double strength,
-          int length)>('SDL_PlayHapticRumble');
+    Uint8 Function(Pointer<SdlHaptic> haptic, Float strength, Uint32 length),
+    int Function(Pointer<SdlHaptic> haptic, double strength, int length)
+  >('SDL_PlayHapticRumble');
   return sdlPlayHapticRumbleLookupFunction(haptic, strength, length) == 1;
 }
 
@@ -765,7 +797,8 @@ bool sdlPlayHapticRumble(
 /// ```
 bool sdlStopHapticRumble(Pointer<SdlHaptic> haptic) {
   final sdlStopHapticRumbleLookupFunction = libSdl3.lookupFunction<
-      Uint8 Function(Pointer<SdlHaptic> haptic),
-      int Function(Pointer<SdlHaptic> haptic)>('SDL_StopHapticRumble');
+    Uint8 Function(Pointer<SdlHaptic> haptic),
+    int Function(Pointer<SdlHaptic> haptic)
+  >('SDL_StopHapticRumble');
   return sdlStopHapticRumbleLookupFunction(haptic) == 1;
 }

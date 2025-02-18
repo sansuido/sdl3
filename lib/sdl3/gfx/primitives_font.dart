@@ -29,8 +29,10 @@ Andreas Schiffler -- aschiffler at ferzkopp dot net
 import 'dart:ffi';
 import '../generated/struct_sdl.dart';
 
-var gfxPrimitivesFont =
-    List<Pointer<SdlTexture>>.generate(256, (axisValue) => nullptr);
+var gfxPrimitivesFont = List<Pointer<SdlTexture>>.generate(
+  256,
+  (axisValue) => nullptr,
+);
 
 var gfxPrimitivesFontdata = [
   /*
@@ -5150,5 +5152,5 @@ var gfxPrimitivesFontdata = [
   /* 00000000 */
   0x00,
   /* 00000000 */
-  0x00, /* 00000000 */
+  0x00 /* 00000000 */,
 ];

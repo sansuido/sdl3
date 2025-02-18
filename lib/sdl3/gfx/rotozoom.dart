@@ -49,7 +49,9 @@ no scanning or interpolation takes place. Input surface must be 8/16/24/32 bit.
 \returns The new, rotated surface; or NULL for surfaces with incorrect input format.
 */
 Pointer<SdlSurface> rotateSurface90Degrees(
-    Pointer<SdlSurface> src, int numClockwiseTurns) {
+  Pointer<SdlSurface> src,
+  int numClockwiseTurns,
+) {
   int row, col, newWidth, newHeight;
   int bpp, bpr;
   Pointer<SdlSurface> dst;
@@ -65,7 +67,7 @@ Pointer<SdlSurface> rotateSurface90Degrees(
     return nullptr;
   }
   if ((details.ref.bitsPerPixel % 8) != 0) {
-//  if ((src.ref.format.ref.bitsPerPixel % 8) != 0) {
+    //  if ((src.ref.format.ref.bitsPerPixel % 8) != 0) {
     print('Invalid source surface bit depth');
     return nullptr;
   }
@@ -108,7 +110,7 @@ Pointer<SdlSurface> rotateSurface90Degrees(
 
   /* Calculate byte-per-pixel */
   bpp = details.ref.bitsPerPixel ~/ 8;
-//  bpp = src.ref.format.ref.bitsPerPixel ~/ 8;
+  //  bpp = src.ref.format.ref.bitsPerPixel ~/ 8;
 
   Pointer<Pointer<Uint8>> srcBuf = calloc<Pointer<Uint8>>();
   Pointer<Pointer<Uint8>> dstBuf = calloc<Pointer<Uint8>>();
@@ -123,7 +125,10 @@ Pointer<SdlSurface> rotateSurface90Degrees(
         if (src.ref.pitch == dst.ref.pitch) {
           /* If the pitch is the same for both surfaces, the memory can be copied all at once. */
           sdlMemcpy(
-              dst.ref.pixels, src.ref.pixels, (src.ref.h * src.ref.pitch));
+            dst.ref.pixels,
+            src.ref.pixels,
+            (src.ref.h * src.ref.pitch),
+          );
         } else {
           /* If the pitch differs, copy each row separately */
           srcBuf.value = src.ref.pixels.cast<Uint8>();
@@ -161,7 +166,8 @@ Pointer<SdlSurface> rotateSurface90Degrees(
           srcBuf.value = src.ref.pixels.cast<Uint8>();
           srcBuf.value = srcBuf.value + row * src.ref.pitch;
           dstBuf.value = dst.ref.pixels.cast<Uint8>();
-          dstBuf.value = dstBuf.value +
+          dstBuf.value =
+              dstBuf.value +
               (dst.ref.h - row - 1) * dst.ref.pitch +
               (dst.ref.w - 1) * bpp;
           for (col = 0; col < src.ref.w; ++col) {

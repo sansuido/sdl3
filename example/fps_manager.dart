@@ -18,7 +18,11 @@ int main() {
   }
   sdlSetHint(SDL_HINT_RENDER_VSYNC, '1');
   var window = SdlWindowEx.create(
-      title: '', w: gWindowWidth, h: gWindowHeight, flags: SDL_WINDOW_OPENGL);
+    title: '',
+    w: gWindowWidth,
+    h: gWindowHeight,
+    flags: SDL_WINDOW_OPENGL,
+  );
   if (window == nullptr) {
     print(sdlGetError());
     sdlQuit();
@@ -74,7 +78,10 @@ int main() {
       ..setDrawColor(0, 0, 0, 0)
       ..clear()
       ..stringColor(
-          Point(15, 15), 'FPS:$frameRate', SdlColorEx.rgbaToU32(0, 255, 0, 255))
+        Point(15, 15),
+        'FPS:$frameRate',
+        SdlColorEx.rgbaToU32(0, 255, 0, 255),
+      )
       ..present();
   }
   gfx.gfxFree();

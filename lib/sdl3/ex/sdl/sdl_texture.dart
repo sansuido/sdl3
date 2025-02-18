@@ -344,10 +344,25 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_UpdateYUVTexture(SDL_Texture *texture, const SDL_Rect *rect, const Uint8 *Yplane, int Ypitch, const Uint8 *Uplane, int Upitch, const Uint8 *Vplane, int Vpitch)
   /// ```
-  bool updateYuv(Pointer<SdlRect> rect, Pointer<Uint8> yplane, int ypitch,
-      Pointer<Uint8> uplane, int upitch, Pointer<Uint8> vplane, int vpitch) {
+  bool updateYuv(
+    Pointer<SdlRect> rect,
+    Pointer<Uint8> yplane,
+    int ypitch,
+    Pointer<Uint8> uplane,
+    int upitch,
+    Pointer<Uint8> vplane,
+    int vpitch,
+  ) {
     return sdlUpdateYuvTexture(
-        this, rect, yplane, ypitch, uplane, upitch, vplane, vpitch);
+      this,
+      rect,
+      yplane,
+      ypitch,
+      uplane,
+      upitch,
+      vplane,
+      vpitch,
+    );
   }
 
   ///
@@ -379,8 +394,13 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_UpdateNVTexture(SDL_Texture *texture, const SDL_Rect *rect, const Uint8 *Yplane, int Ypitch, const Uint8 *UVplane, int UVpitch)
   /// ```
-  bool updateNv(Pointer<SdlRect> rect, Pointer<Uint8> yplane, int ypitch,
-      Pointer<Uint8> uVplane, int uVpitch) {
+  bool updateNv(
+    Pointer<SdlRect> rect,
+    Pointer<Uint8> yplane,
+    int ypitch,
+    Pointer<Uint8> uVplane,
+    int uVpitch,
+  ) {
     return sdlUpdateNvTexture(this, rect, yplane, ypitch, uVplane, uVpitch);
   }
 
@@ -417,8 +437,11 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_LockTexture(SDL_Texture *texture, const SDL_Rect *rect, void **pixels, int *pitch)
   /// ```
-  bool lock(Pointer<SdlRect> rect, Pointer<Pointer<NativeType>> pixels,
-      Pointer<Int32> pitch) {
+  bool lock(
+    Pointer<SdlRect> rect,
+    Pointer<Pointer<NativeType>> pixels,
+    Pointer<Int32> pitch,
+  ) {
     return sdlLockTexture(this, rect, pixels, pitch);
   }
 
@@ -460,7 +483,9 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// extern SDL_DECLSPEC bool SDLCALL SDL_LockTextureToSurface(SDL_Texture *texture, const SDL_Rect *rect, SDL_Surface **surface)
   /// ```
   bool lockToSurface(
-      Pointer<SdlRect> rect, Pointer<Pointer<SdlSurface>> surface) {
+    Pointer<SdlRect> rect,
+    Pointer<Pointer<SdlSurface>> surface,
+  ) {
     return sdlLockTextureToSurface(this, rect, surface);
   }
 

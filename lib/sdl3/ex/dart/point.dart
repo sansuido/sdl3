@@ -10,16 +10,18 @@ import '../../generated/struct_sdl.dart';
 extension PointEx on math.Point<double> {
   // dependence package:ffi
   Pointer<SdlFPoint> calloc() {
-    var result = ffi.calloc<SdlFPoint>()
-      ..ref.x = x
-      ..ref.y = y;
+    var result =
+        ffi.calloc<SdlFPoint>()
+          ..ref.x = x
+          ..ref.y = y;
     return result;
   }
 
   Pointer<SdlPoint> callocInt() {
-    var result = ffi.calloc<SdlPoint>()
-      ..ref.x = x.toInt()
-      ..ref.y = y.toInt();
+    var result =
+        ffi.calloc<SdlPoint>()
+          ..ref.x = x.toInt()
+          ..ref.y = y.toInt();
     return result;
   }
 
@@ -158,7 +160,9 @@ extension PointEx on math.Point<double> {
     var yPointer = ffi.calloc<Float>();
     sdlGetRelativeMouseState(xPointer, yPointer);
     var result = math.Point<double>(
-        xPointer.value.toDouble(), yPointer.value.toDouble());
+      xPointer.value.toDouble(),
+      yPointer.value.toDouble(),
+    );
     ffi.calloc.free(xPointer);
     ffi.calloc.free(yPointer);
     return result;
@@ -234,7 +238,11 @@ extension PointsEx on List<math.Point<double>> {
       clipPointer = clip.callocInt();
     }
     var bl = sdlGetRectEnclosingPoints(
-        pointsPointer, length, clipPointer, resultPointer);
+      pointsPointer,
+      length,
+      clipPointer,
+      resultPointer,
+    );
     if (bl == true) {
       result = resultPointer.create();
     }

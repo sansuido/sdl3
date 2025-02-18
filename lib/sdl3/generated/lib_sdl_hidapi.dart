@@ -26,8 +26,8 @@ import 'struct_sdl.dart';
 /// extern SDL_DECLSPEC int SDLCALL SDL_hid_init(void)
 /// ```
 int sdlHidInit() {
-  final sdlHidInitLookupFunction =
-      libSdl3.lookupFunction<Int32 Function(), int Function()>('SDL_hid_init');
+  final sdlHidInitLookupFunction = libSdl3
+      .lookupFunction<Int32 Function(), int Function()>('SDL_hid_init');
   return sdlHidInitLookupFunction();
 }
 
@@ -48,8 +48,8 @@ int sdlHidInit() {
 /// extern SDL_DECLSPEC int SDLCALL SDL_hid_exit(void)
 /// ```
 int sdlHidExit() {
-  final sdlHidExitLookupFunction =
-      libSdl3.lookupFunction<Int32 Function(), int Function()>('SDL_hid_exit');
+  final sdlHidExitLookupFunction = libSdl3
+      .lookupFunction<Int32 Function(), int Function()>('SDL_hid_exit');
   return sdlHidExitLookupFunction();
 }
 
@@ -76,9 +76,10 @@ int sdlHidExit() {
 /// extern SDL_DECLSPEC Uint32 SDLCALL SDL_hid_device_change_count(void)
 /// ```
 int sdlHidDeviceChangeCount() {
-  final sdlHidDeviceChangeCountLookupFunction =
-      libSdl3.lookupFunction<Uint32 Function(), int Function()>(
-          'SDL_hid_device_change_count');
+  final sdlHidDeviceChangeCountLookupFunction = libSdl3
+      .lookupFunction<Uint32 Function(), int Function()>(
+        'SDL_hid_device_change_count',
+      );
   return sdlHidDeviceChangeCountLookupFunction();
 }
 
@@ -113,9 +114,9 @@ int sdlHidDeviceChangeCount() {
 /// ```
 Pointer<SdlHidDeviceInfo> sdlHidEnumerate(int vendorId, int productId) {
   final sdlHidEnumerateLookupFunction = libSdl3.lookupFunction<
-      Pointer<SdlHidDeviceInfo> Function(Uint16 vendorId, Uint16 productId),
-      Pointer<SdlHidDeviceInfo> Function(
-          int vendorId, int productId)>('SDL_hid_enumerate');
+    Pointer<SdlHidDeviceInfo> Function(Uint16 vendorId, Uint16 productId),
+    Pointer<SdlHidDeviceInfo> Function(int vendorId, int productId)
+  >('SDL_hid_enumerate');
   return sdlHidEnumerateLookupFunction(vendorId, productId);
 }
 
@@ -134,9 +135,9 @@ Pointer<SdlHidDeviceInfo> sdlHidEnumerate(int vendorId, int productId) {
 /// ```
 void sdlHidFreeEnumeration(Pointer<SdlHidDeviceInfo> devs) {
   final sdlHidFreeEnumerationLookupFunction = libSdl3.lookupFunction<
-      Void Function(Pointer<SdlHidDeviceInfo> devs),
-      void Function(
-          Pointer<SdlHidDeviceInfo> devs)>('SDL_hid_free_enumeration');
+    Void Function(Pointer<SdlHidDeviceInfo> devs),
+    void Function(Pointer<SdlHidDeviceInfo> devs)
+  >('SDL_hid_free_enumeration');
   return sdlHidFreeEnumerationLookupFunction(devs);
 }
 
@@ -160,12 +161,22 @@ void sdlHidFreeEnumeration(Pointer<SdlHidDeviceInfo> devs) {
 /// extern SDL_DECLSPEC SDL_hid_device * SDLCALL SDL_hid_open(unsigned short vendor_id, unsigned short product_id, const wchar_t *serial_number)
 /// ```
 Pointer<SdlHidDevice> sdlHidOpen(
-    int vendorId, int productId, Pointer<Int16> serialNumber) {
+  int vendorId,
+  int productId,
+  Pointer<Int16> serialNumber,
+) {
   final sdlHidOpenLookupFunction = libSdl3.lookupFunction<
-      Pointer<SdlHidDevice> Function(
-          Uint16 vendorId, Uint16 productId, Pointer<Int16> serialNumber),
-      Pointer<SdlHidDevice> Function(int vendorId, int productId,
-          Pointer<Int16> serialNumber)>('SDL_hid_open');
+    Pointer<SdlHidDevice> Function(
+      Uint16 vendorId,
+      Uint16 productId,
+      Pointer<Int16> serialNumber,
+    ),
+    Pointer<SdlHidDevice> Function(
+      int vendorId,
+      int productId,
+      Pointer<Int16> serialNumber,
+    )
+  >('SDL_hid_open');
   return sdlHidOpenLookupFunction(vendorId, productId, serialNumber);
 }
 
@@ -186,8 +197,9 @@ Pointer<SdlHidDevice> sdlHidOpen(
 /// ```
 Pointer<SdlHidDevice> sdlHidOpenPath(String? path) {
   final sdlHidOpenPathLookupFunction = libSdl3.lookupFunction<
-      Pointer<SdlHidDevice> Function(Pointer<Utf8> path),
-      Pointer<SdlHidDevice> Function(Pointer<Utf8> path)>('SDL_hid_open_path');
+    Pointer<SdlHidDevice> Function(Pointer<Utf8> path),
+    Pointer<SdlHidDevice> Function(Pointer<Utf8> path)
+  >('SDL_hid_open_path');
   final pathPointer = path != null ? path.toNativeUtf8() : nullptr;
   final result = sdlHidOpenPathLookupFunction(pathPointer);
   calloc.free(pathPointer);
@@ -224,10 +236,13 @@ Pointer<SdlHidDevice> sdlHidOpenPath(String? path) {
 /// ```
 int sdlHidWrite(Pointer<SdlHidDevice> dev, Pointer<Uint8> data, int length) {
   final sdlHidWriteLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(
-          Pointer<SdlHidDevice> dev, Pointer<Uint8> data, Uint32 length),
-      int Function(Pointer<SdlHidDevice> dev, Pointer<Uint8> data,
-          int length)>('SDL_hid_write');
+    Int32 Function(
+      Pointer<SdlHidDevice> dev,
+      Pointer<Uint8> data,
+      Uint32 length,
+    ),
+    int Function(Pointer<SdlHidDevice> dev, Pointer<Uint8> data, int length)
+  >('SDL_hid_write');
   return sdlHidWriteLookupFunction(dev, data, length);
 }
 
@@ -253,13 +268,26 @@ int sdlHidWrite(Pointer<SdlHidDevice> dev, Pointer<Uint8> data, int length) {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_hid_read_timeout(SDL_hid_device *dev, unsigned char *data, size_t length, int milliseconds)
 /// ```
-int sdlHidReadTimeout(Pointer<SdlHidDevice> dev, Pointer<Uint8> data,
-    int length, int milliseconds) {
+int sdlHidReadTimeout(
+  Pointer<SdlHidDevice> dev,
+  Pointer<Uint8> data,
+  int length,
+  int milliseconds,
+) {
   final sdlHidReadTimeoutLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlHidDevice> dev, Pointer<Uint8> data,
-          Uint32 length, Int32 milliseconds),
-      int Function(Pointer<SdlHidDevice> dev, Pointer<Uint8> data, int length,
-          int milliseconds)>('SDL_hid_read_timeout');
+    Int32 Function(
+      Pointer<SdlHidDevice> dev,
+      Pointer<Uint8> data,
+      Uint32 length,
+      Int32 milliseconds,
+    ),
+    int Function(
+      Pointer<SdlHidDevice> dev,
+      Pointer<Uint8> data,
+      int length,
+      int milliseconds,
+    )
+  >('SDL_hid_read_timeout');
   return sdlHidReadTimeoutLookupFunction(dev, data, length, milliseconds);
 }
 
@@ -287,10 +315,13 @@ int sdlHidReadTimeout(Pointer<SdlHidDevice> dev, Pointer<Uint8> data,
 /// ```
 int sdlHidRead(Pointer<SdlHidDevice> dev, Pointer<Uint8> data, int length) {
   final sdlHidReadLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(
-          Pointer<SdlHidDevice> dev, Pointer<Uint8> data, Uint32 length),
-      int Function(Pointer<SdlHidDevice> dev, Pointer<Uint8> data,
-          int length)>('SDL_hid_read');
+    Int32 Function(
+      Pointer<SdlHidDevice> dev,
+      Pointer<Uint8> data,
+      Uint32 length,
+    ),
+    int Function(Pointer<SdlHidDevice> dev, Pointer<Uint8> data, int length)
+  >('SDL_hid_read');
   return sdlHidReadLookupFunction(dev, data, length);
 }
 
@@ -316,9 +347,9 @@ int sdlHidRead(Pointer<SdlHidDevice> dev, Pointer<Uint8> data, int length) {
 /// ```
 int sdlHidSetNonblocking(Pointer<SdlHidDevice> dev, int nonblock) {
   final sdlHidSetNonblockingLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlHidDevice> dev, Int32 nonblock),
-      int Function(
-          Pointer<SdlHidDevice> dev, int nonblock)>('SDL_hid_set_nonblocking');
+    Int32 Function(Pointer<SdlHidDevice> dev, Int32 nonblock),
+    int Function(Pointer<SdlHidDevice> dev, int nonblock)
+  >('SDL_hid_set_nonblocking');
   return sdlHidSetNonblockingLookupFunction(dev, nonblock);
 }
 
@@ -349,12 +380,18 @@ int sdlHidSetNonblocking(Pointer<SdlHidDevice> dev, int nonblock) {
 /// extern SDL_DECLSPEC int SDLCALL SDL_hid_send_feature_report(SDL_hid_device *dev, const unsigned char *data, size_t length)
 /// ```
 int sdlHidSendFeatureReport(
-    Pointer<SdlHidDevice> dev, Pointer<Uint8> data, int length) {
+  Pointer<SdlHidDevice> dev,
+  Pointer<Uint8> data,
+  int length,
+) {
   final sdlHidSendFeatureReportLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(
-          Pointer<SdlHidDevice> dev, Pointer<Uint8> data, Uint32 length),
-      int Function(Pointer<SdlHidDevice> dev, Pointer<Uint8> data,
-          int length)>('SDL_hid_send_feature_report');
+    Int32 Function(
+      Pointer<SdlHidDevice> dev,
+      Pointer<Uint8> data,
+      Uint32 length,
+    ),
+    int Function(Pointer<SdlHidDevice> dev, Pointer<Uint8> data, int length)
+  >('SDL_hid_send_feature_report');
   return sdlHidSendFeatureReportLookupFunction(dev, data, length);
 }
 
@@ -383,12 +420,18 @@ int sdlHidSendFeatureReport(
 /// extern SDL_DECLSPEC int SDLCALL SDL_hid_get_feature_report(SDL_hid_device *dev, unsigned char *data, size_t length)
 /// ```
 int sdlHidGetFeatureReport(
-    Pointer<SdlHidDevice> dev, Pointer<Uint8> data, int length) {
+  Pointer<SdlHidDevice> dev,
+  Pointer<Uint8> data,
+  int length,
+) {
   final sdlHidGetFeatureReportLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(
-          Pointer<SdlHidDevice> dev, Pointer<Uint8> data, Uint32 length),
-      int Function(Pointer<SdlHidDevice> dev, Pointer<Uint8> data,
-          int length)>('SDL_hid_get_feature_report');
+    Int32 Function(
+      Pointer<SdlHidDevice> dev,
+      Pointer<Uint8> data,
+      Uint32 length,
+    ),
+    int Function(Pointer<SdlHidDevice> dev, Pointer<Uint8> data, int length)
+  >('SDL_hid_get_feature_report');
   return sdlHidGetFeatureReportLookupFunction(dev, data, length);
 }
 
@@ -417,12 +460,18 @@ int sdlHidGetFeatureReport(
 /// extern SDL_DECLSPEC int SDLCALL SDL_hid_get_input_report(SDL_hid_device *dev, unsigned char *data, size_t length)
 /// ```
 int sdlHidGetInputReport(
-    Pointer<SdlHidDevice> dev, Pointer<Uint8> data, int length) {
+  Pointer<SdlHidDevice> dev,
+  Pointer<Uint8> data,
+  int length,
+) {
   final sdlHidGetInputReportLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(
-          Pointer<SdlHidDevice> dev, Pointer<Uint8> data, Uint32 length),
-      int Function(Pointer<SdlHidDevice> dev, Pointer<Uint8> data,
-          int length)>('SDL_hid_get_input_report');
+    Int32 Function(
+      Pointer<SdlHidDevice> dev,
+      Pointer<Uint8> data,
+      Uint32 length,
+    ),
+    int Function(Pointer<SdlHidDevice> dev, Pointer<Uint8> data, int length)
+  >('SDL_hid_get_input_report');
   return sdlHidGetInputReportLookupFunction(dev, data, length);
 }
 
@@ -440,8 +489,9 @@ int sdlHidGetInputReport(
 /// ```
 int sdlHidClose(Pointer<SdlHidDevice> dev) {
   final sdlHidCloseLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlHidDevice> dev),
-      int Function(Pointer<SdlHidDevice> dev)>('SDL_hid_close');
+    Int32 Function(Pointer<SdlHidDevice> dev),
+    int Function(Pointer<SdlHidDevice> dev)
+  >('SDL_hid_close');
   return sdlHidCloseLookupFunction(dev);
 }
 
@@ -460,12 +510,18 @@ int sdlHidClose(Pointer<SdlHidDevice> dev) {
 /// extern SDL_DECLSPEC int SDLCALL SDL_hid_get_manufacturer_string(SDL_hid_device *dev, wchar_t *string, size_t maxlen)
 /// ```
 int sdlHidGetManufacturerString(
-    Pointer<SdlHidDevice> dev, Pointer<Int16> string, int maxlen) {
+  Pointer<SdlHidDevice> dev,
+  Pointer<Int16> string,
+  int maxlen,
+) {
   final sdlHidGetManufacturerStringLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(
-          Pointer<SdlHidDevice> dev, Pointer<Int16> string, Uint32 maxlen),
-      int Function(Pointer<SdlHidDevice> dev, Pointer<Int16> string,
-          int maxlen)>('SDL_hid_get_manufacturer_string');
+    Int32 Function(
+      Pointer<SdlHidDevice> dev,
+      Pointer<Int16> string,
+      Uint32 maxlen,
+    ),
+    int Function(Pointer<SdlHidDevice> dev, Pointer<Int16> string, int maxlen)
+  >('SDL_hid_get_manufacturer_string');
   return sdlHidGetManufacturerStringLookupFunction(dev, string, maxlen);
 }
 
@@ -484,12 +540,18 @@ int sdlHidGetManufacturerString(
 /// extern SDL_DECLSPEC int SDLCALL SDL_hid_get_product_string(SDL_hid_device *dev, wchar_t *string, size_t maxlen)
 /// ```
 int sdlHidGetProductString(
-    Pointer<SdlHidDevice> dev, Pointer<Int16> string, int maxlen) {
+  Pointer<SdlHidDevice> dev,
+  Pointer<Int16> string,
+  int maxlen,
+) {
   final sdlHidGetProductStringLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(
-          Pointer<SdlHidDevice> dev, Pointer<Int16> string, Uint32 maxlen),
-      int Function(Pointer<SdlHidDevice> dev, Pointer<Int16> string,
-          int maxlen)>('SDL_hid_get_product_string');
+    Int32 Function(
+      Pointer<SdlHidDevice> dev,
+      Pointer<Int16> string,
+      Uint32 maxlen,
+    ),
+    int Function(Pointer<SdlHidDevice> dev, Pointer<Int16> string, int maxlen)
+  >('SDL_hid_get_product_string');
   return sdlHidGetProductStringLookupFunction(dev, string, maxlen);
 }
 
@@ -508,12 +570,18 @@ int sdlHidGetProductString(
 /// extern SDL_DECLSPEC int SDLCALL SDL_hid_get_serial_number_string(SDL_hid_device *dev, wchar_t *string, size_t maxlen)
 /// ```
 int sdlHidGetSerialNumberString(
-    Pointer<SdlHidDevice> dev, Pointer<Int16> string, int maxlen) {
+  Pointer<SdlHidDevice> dev,
+  Pointer<Int16> string,
+  int maxlen,
+) {
   final sdlHidGetSerialNumberStringLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(
-          Pointer<SdlHidDevice> dev, Pointer<Int16> string, Uint32 maxlen),
-      int Function(Pointer<SdlHidDevice> dev, Pointer<Int16> string,
-          int maxlen)>('SDL_hid_get_serial_number_string');
+    Int32 Function(
+      Pointer<SdlHidDevice> dev,
+      Pointer<Int16> string,
+      Uint32 maxlen,
+    ),
+    int Function(Pointer<SdlHidDevice> dev, Pointer<Int16> string, int maxlen)
+  >('SDL_hid_get_serial_number_string');
   return sdlHidGetSerialNumberStringLookupFunction(dev, string, maxlen);
 }
 
@@ -532,13 +600,26 @@ int sdlHidGetSerialNumberString(
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_hid_get_indexed_string(SDL_hid_device *dev, int string_index, wchar_t *string, size_t maxlen)
 /// ```
-int sdlHidGetIndexedString(Pointer<SdlHidDevice> dev, int stringIndex,
-    Pointer<Int16> string, int maxlen) {
+int sdlHidGetIndexedString(
+  Pointer<SdlHidDevice> dev,
+  int stringIndex,
+  Pointer<Int16> string,
+  int maxlen,
+) {
   final sdlHidGetIndexedStringLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlHidDevice> dev, Int32 stringIndex,
-          Pointer<Int16> string, Uint32 maxlen),
-      int Function(Pointer<SdlHidDevice> dev, int stringIndex,
-          Pointer<Int16> string, int maxlen)>('SDL_hid_get_indexed_string');
+    Int32 Function(
+      Pointer<SdlHidDevice> dev,
+      Int32 stringIndex,
+      Pointer<Int16> string,
+      Uint32 maxlen,
+    ),
+    int Function(
+      Pointer<SdlHidDevice> dev,
+      int stringIndex,
+      Pointer<Int16> string,
+      int maxlen,
+    )
+  >('SDL_hid_get_indexed_string');
   return sdlHidGetIndexedStringLookupFunction(dev, stringIndex, string, maxlen);
 }
 
@@ -557,9 +638,9 @@ int sdlHidGetIndexedString(Pointer<SdlHidDevice> dev, int stringIndex,
 /// ```
 Pointer<SdlHidDeviceInfo> sdlHidGetDeviceInfo(Pointer<SdlHidDevice> dev) {
   final sdlHidGetDeviceInfoLookupFunction = libSdl3.lookupFunction<
-      Pointer<SdlHidDeviceInfo> Function(Pointer<SdlHidDevice> dev),
-      Pointer<SdlHidDeviceInfo> Function(
-          Pointer<SdlHidDevice> dev)>('SDL_hid_get_device_info');
+    Pointer<SdlHidDeviceInfo> Function(Pointer<SdlHidDevice> dev),
+    Pointer<SdlHidDeviceInfo> Function(Pointer<SdlHidDevice> dev)
+  >('SDL_hid_get_device_info');
   return sdlHidGetDeviceInfoLookupFunction(dev);
 }
 
@@ -581,12 +662,18 @@ Pointer<SdlHidDeviceInfo> sdlHidGetDeviceInfo(Pointer<SdlHidDevice> dev) {
 /// extern SDL_DECLSPEC int SDLCALL SDL_hid_get_report_descriptor(SDL_hid_device *dev, unsigned char *buf, size_t buf_size)
 /// ```
 int sdlHidGetReportDescriptor(
-    Pointer<SdlHidDevice> dev, Pointer<Uint8> buf, int bufSize) {
+  Pointer<SdlHidDevice> dev,
+  Pointer<Uint8> buf,
+  int bufSize,
+) {
   final sdlHidGetReportDescriptorLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(
-          Pointer<SdlHidDevice> dev, Pointer<Uint8> buf, Uint32 bufSize),
-      int Function(Pointer<SdlHidDevice> dev, Pointer<Uint8> buf,
-          int bufSize)>('SDL_hid_get_report_descriptor');
+    Int32 Function(
+      Pointer<SdlHidDevice> dev,
+      Pointer<Uint8> buf,
+      Uint32 bufSize,
+    ),
+    int Function(Pointer<SdlHidDevice> dev, Pointer<Uint8> buf, int bufSize)
+  >('SDL_hid_get_report_descriptor');
   return sdlHidGetReportDescriptorLookupFunction(dev, buf, bufSize);
 }
 
@@ -601,8 +688,9 @@ int sdlHidGetReportDescriptor(
 /// extern SDL_DECLSPEC void SDLCALL SDL_hid_ble_scan(bool active)
 /// ```
 void sdlHidBleScan(bool active) {
-  final sdlHidBleScanLookupFunction = libSdl3.lookupFunction<
-      Void Function(Uint8 active),
-      void Function(int active)>('SDL_hid_ble_scan');
+  final sdlHidBleScanLookupFunction = libSdl3
+      .lookupFunction<Void Function(Uint8 active), void Function(int active)>(
+        'SDL_hid_ble_scan',
+      );
   return sdlHidBleScanLookupFunction(active ? 1 : 0);
 }

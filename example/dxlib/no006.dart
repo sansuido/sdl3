@@ -12,7 +12,8 @@ const gScreenHeight = 480;
 const gFontPath = 'assets/SourceHanCodeJP.ttc';
 //const gFontPath = 'C:/Windows/Fonts/msgothic.ttc';
 const gFontSize = 24.0;
-const gString = '　ゲームプログラムとは、いやプログラムとは'
+const gString =
+    '　ゲームプログラムとは、いやプログラムとは'
     'ある事柄を実現するプログラムの方法を説明されても理解できないことがある。B'
     '@　なぜならそのプログラム技法も何かの基本的な技法の組み合わせで出来ているからだ。B'
     '@　これはその他の学問も基本がわからないと応用が利かないということと同じ現象で、'
@@ -47,10 +48,11 @@ class Game {
       return false;
     }
     window = SdlWindowEx.create(
-        title: gTitle,
-        w: gScreenWidth,
-        h: gScreenHeight,
-        flags: SDL_WINDOW_RESIZABLE);
+      title: gTitle,
+      w: gScreenWidth,
+      h: gScreenHeight,
+      flags: SDL_WINDOW_RESIZABLE,
+    );
     if (window == nullptr) {
       return false;
     }
@@ -91,8 +93,11 @@ class Game {
     var textColor = calloc<SdlColor>()..setRgba(0, 0, 0, 255);
     var alertColor = calloc<SdlColor>()..setRgba(255, 0, 0, 255);
 
-    var surface =
-        font.renderTextShaded('[PRESS ANY KEY]', textColor.ref, alertColor.ref);
+    var surface = font.renderTextShaded(
+      '[PRESS ANY KEY]',
+      textColor.ref,
+      alertColor.ref,
+    );
     if (surface != nullptr) {
       pressAnyKeyTexture = renderer.createTextureFromSurface(surface);
       surface.destroy();
@@ -180,9 +185,15 @@ class Game {
               drawY += height;
               height = 0;
             }
-            renderer.texture(texture,
-                dstrect: Rectangle<double>(drawX.toDouble(), drawY.toDouble(),
-                    size.x.toDouble(), size.y.toDouble()));
+            renderer.texture(
+              texture,
+              dstrect: Rectangle<double>(
+                drawX.toDouble(),
+                drawY.toDouble(),
+                size.x.toDouble(),
+                size.y.toDouble(),
+              ),
+            );
             drawX += size.x.toInt();
             height = size.y.toInt() > height ? size.y.toInt() : height;
           }
@@ -193,9 +204,15 @@ class Game {
       var size = pressAnyKeyTexture.getSize()!;
       drawX = 0;
       drawY += height;
-      renderer.texture(pressAnyKeyTexture,
-          dstrect: Rectangle<double>(drawX.toDouble(), drawY.toDouble(),
-              size.x.toDouble(), size.y.toDouble()));
+      renderer.texture(
+        pressAnyKeyTexture,
+        dstrect: Rectangle<double>(
+          drawX.toDouble(),
+          drawY.toDouble(),
+          size.x.toDouble(),
+          size.y.toDouble(),
+        ),
+      );
     }
     renderer.present();
   }

@@ -49,8 +49,8 @@ import 'struct_sdl.dart';
 /// ```
 Pointer<Pointer<SdlLocale>> sdlGetPreferredLocales(Pointer<Int32> count) {
   final sdlGetPreferredLocalesLookupFunction = libSdl3.lookupFunction<
-      Pointer<Pointer<SdlLocale>> Function(Pointer<Int32> count),
-      Pointer<Pointer<SdlLocale>> Function(
-          Pointer<Int32> count)>('SDL_GetPreferredLocales');
+    Pointer<Pointer<SdlLocale>> Function(Pointer<Int32> count),
+    Pointer<Pointer<SdlLocale>> Function(Pointer<Int32> count)
+  >('SDL_GetPreferredLocales');
   return sdlGetPreferredLocalesLookupFunction(count);
 }

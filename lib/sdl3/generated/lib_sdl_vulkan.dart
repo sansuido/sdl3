@@ -59,8 +59,9 @@ import 'struct_sdl.dart';
 /// ```
 bool sdlVulkanLoadLibrary(String? path) {
   final sdlVulkanLoadLibraryLookupFunction = libSdl3.lookupFunction<
-      Uint8 Function(Pointer<Utf8> path),
-      int Function(Pointer<Utf8> path)>('SDL_Vulkan_LoadLibrary');
+    Uint8 Function(Pointer<Utf8> path),
+    int Function(Pointer<Utf8> path)
+  >('SDL_Vulkan_LoadLibrary');
   final pathPointer = path != null ? path.toNativeUtf8() : nullptr;
   final result = sdlVulkanLoadLibraryLookupFunction(pathPointer) == 1;
   calloc.free(pathPointer);
@@ -90,11 +91,11 @@ bool sdlVulkanLoadLibrary(String? path) {
 /// extern SDL_DECLSPEC SDL_FunctionPointer SDLCALL SDL_Vulkan_GetVkGetInstanceProcAddr(void)
 /// ```
 Pointer<NativeType> sdlVulkanGetVkGetInstanceProcAddr() {
-  final sdlVulkanGetVkGetInstanceProcAddrLookupFunction =
-      libSdl3.lookupFunction<
-          Pointer<NativeType> Function(),
-          Pointer<NativeType>
-              Function()>('SDL_Vulkan_GetVkGetInstanceProcAddr');
+  final sdlVulkanGetVkGetInstanceProcAddrLookupFunction = libSdl3
+      .lookupFunction<
+        Pointer<NativeType> Function(),
+        Pointer<NativeType> Function()
+      >('SDL_Vulkan_GetVkGetInstanceProcAddr');
   return sdlVulkanGetVkGetInstanceProcAddrLookupFunction();
 }
 
@@ -122,9 +123,10 @@ Pointer<NativeType> sdlVulkanGetVkGetInstanceProcAddr() {
 /// extern SDL_DECLSPEC void SDLCALL SDL_Vulkan_UnloadLibrary(void)
 /// ```
 void sdlVulkanUnloadLibrary() {
-  final sdlVulkanUnloadLibraryLookupFunction =
-      libSdl3.lookupFunction<Void Function(), void Function()>(
-          'SDL_Vulkan_UnloadLibrary');
+  final sdlVulkanUnloadLibraryLookupFunction = libSdl3
+      .lookupFunction<Void Function(), void Function()>(
+        'SDL_Vulkan_UnloadLibrary',
+      );
   return sdlVulkanUnloadLibraryLookupFunction();
 }
 
@@ -155,9 +157,9 @@ void sdlVulkanUnloadLibrary() {
 /// ```
 Pointer<Pointer<Int8>> sdlVulkanGetInstanceExtensions(Pointer<Uint32> count) {
   final sdlVulkanGetInstanceExtensionsLookupFunction = libSdl3.lookupFunction<
-      Pointer<Pointer<Int8>> Function(Pointer<Uint32> count),
-      Pointer<Pointer<Int8>> Function(
-          Pointer<Uint32> count)>('SDL_Vulkan_GetInstanceExtensions');
+    Pointer<Pointer<Int8>> Function(Pointer<Uint32> count),
+    Pointer<Pointer<Int8>> Function(Pointer<Uint32> count)
+  >('SDL_Vulkan_GetInstanceExtensions');
   return sdlVulkanGetInstanceExtensionsLookupFunction(count);
 }
 
@@ -189,20 +191,31 @@ Pointer<Pointer<Int8>> sdlVulkanGetInstanceExtensions(Pointer<Uint32> count) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_Vulkan_CreateSurface(SDL_Window *window, VkInstance instance, const struct VkAllocationCallbacks *allocator, VkSurfaceKHR *surface)
 /// ```
 bool sdlVulkanCreateSurface(
-    Pointer<SdlWindow> window,
-    Pointer<NativeType> instance,
-    Pointer<Void> allocator,
-    Pointer<Void> surface) {
+  Pointer<SdlWindow> window,
+  Pointer<NativeType> instance,
+  Pointer<Void> allocator,
+  Pointer<Void> surface,
+) {
   final sdlVulkanCreateSurfaceLookupFunction = libSdl3.lookupFunction<
-      Uint8 Function(Pointer<SdlWindow> window, Pointer<NativeType> instance,
-          Pointer<Void> allocator, Pointer<Void> surface),
-      int Function(
-          Pointer<SdlWindow> window,
-          Pointer<NativeType> instance,
-          Pointer<Void> allocator,
-          Pointer<Void> surface)>('SDL_Vulkan_CreateSurface');
+    Uint8 Function(
+      Pointer<SdlWindow> window,
+      Pointer<NativeType> instance,
+      Pointer<Void> allocator,
+      Pointer<Void> surface,
+    ),
+    int Function(
+      Pointer<SdlWindow> window,
+      Pointer<NativeType> instance,
+      Pointer<Void> allocator,
+      Pointer<Void> surface,
+    )
+  >('SDL_Vulkan_CreateSurface');
   return sdlVulkanCreateSurfaceLookupFunction(
-          window, instance, allocator, surface) ==
+        window,
+        instance,
+        allocator,
+        surface,
+      ) ==
       1;
 }
 
@@ -232,13 +245,23 @@ bool sdlVulkanCreateSurface(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_Vulkan_DestroySurface(VkInstance instance, VkSurfaceKHR surface, const struct VkAllocationCallbacks *allocator)
 /// ```
-void sdlVulkanDestroySurface(Pointer<NativeType> instance,
-    Pointer<NativeType> surface, Pointer<Void> allocator) {
+void sdlVulkanDestroySurface(
+  Pointer<NativeType> instance,
+  Pointer<NativeType> surface,
+  Pointer<Void> allocator,
+) {
   final sdlVulkanDestroySurfaceLookupFunction = libSdl3.lookupFunction<
-      Void Function(Pointer<NativeType> instance, Pointer<NativeType> surface,
-          Pointer<Void> allocator),
-      void Function(Pointer<NativeType> instance, Pointer<NativeType> surface,
-          Pointer<Void> allocator)>('SDL_Vulkan_DestroySurface');
+    Void Function(
+      Pointer<NativeType> instance,
+      Pointer<NativeType> surface,
+      Pointer<Void> allocator,
+    ),
+    void Function(
+      Pointer<NativeType> instance,
+      Pointer<NativeType> surface,
+      Pointer<Void> allocator,
+    )
+  >('SDL_Vulkan_DestroySurface');
   return sdlVulkanDestroySurfaceLookupFunction(instance, surface, allocator);
 }
 
@@ -262,16 +285,27 @@ void sdlVulkanDestroySurface(Pointer<NativeType> instance,
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_Vulkan_GetPresentationSupport(VkInstance instance, VkPhysicalDevice physicalDevice, Uint32 queueFamilyIndex)
 /// ```
-bool sdlVulkanGetPresentationSupport(Pointer<NativeType> instance,
-    Pointer<NativeType> physicalDevice, int queueFamilyIndex) {
+bool sdlVulkanGetPresentationSupport(
+  Pointer<NativeType> instance,
+  Pointer<NativeType> physicalDevice,
+  int queueFamilyIndex,
+) {
   final sdlVulkanGetPresentationSupportLookupFunction = libSdl3.lookupFunction<
-      Uint8 Function(Pointer<NativeType> instance,
-          Pointer<NativeType> physicalDevice, Uint32 queueFamilyIndex),
-      int Function(
-          Pointer<NativeType> instance,
-          Pointer<NativeType> physicalDevice,
-          int queueFamilyIndex)>('SDL_Vulkan_GetPresentationSupport');
+    Uint8 Function(
+      Pointer<NativeType> instance,
+      Pointer<NativeType> physicalDevice,
+      Uint32 queueFamilyIndex,
+    ),
+    int Function(
+      Pointer<NativeType> instance,
+      Pointer<NativeType> physicalDevice,
+      int queueFamilyIndex,
+    )
+  >('SDL_Vulkan_GetPresentationSupport');
   return sdlVulkanGetPresentationSupportLookupFunction(
-          instance, physicalDevice, queueFamilyIndex) ==
+        instance,
+        physicalDevice,
+        queueFamilyIndex,
+      ) ==
       1;
 }

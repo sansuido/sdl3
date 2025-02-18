@@ -35,8 +35,9 @@ import 'lib_sdl.dart';
 /// ```
 bool sdlSetError(String? fmt) {
   final sdlSetErrorLookupFunction = libSdl3.lookupFunction<
-      Uint8 Function(Pointer<Utf8> fmt),
-      int Function(Pointer<Utf8> fmt)>('SDL_SetError');
+    Uint8 Function(Pointer<Utf8> fmt),
+    int Function(Pointer<Utf8> fmt)
+  >('SDL_SetError');
   final fmtPointer = fmt != null ? fmt.toNativeUtf8() : nullptr;
   final result = sdlSetErrorLookupFunction(fmtPointer) == 1;
   calloc.free(fmtPointer);
@@ -65,8 +66,9 @@ bool sdlSetError(String? fmt) {
 /// ```
 bool sdlSetErrorV(String? fmt) {
   final sdlSetErrorVLookupFunction = libSdl3.lookupFunction<
-      Uint8 Function(Pointer<Utf8> fmt),
-      int Function(Pointer<Utf8> fmt)>('SDL_SetErrorV');
+    Uint8 Function(Pointer<Utf8> fmt),
+    int Function(Pointer<Utf8> fmt)
+  >('SDL_SetErrorV');
   final fmtPointer = fmt != null ? fmt.toNativeUtf8() : nullptr;
   final result = sdlSetErrorVLookupFunction(fmtPointer) == 1;
   calloc.free(fmtPointer);
@@ -132,8 +134,10 @@ bool sdlOutOfMemory() {
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetError(void)
 /// ```
 String? sdlGetError() {
-  final sdlGetErrorLookupFunction = libSdl3.lookupFunction<
-      Pointer<Utf8> Function(), Pointer<Utf8> Function()>('SDL_GetError');
+  final sdlGetErrorLookupFunction = libSdl3
+      .lookupFunction<Pointer<Utf8> Function(), Pointer<Utf8> Function()>(
+        'SDL_GetError',
+      );
   final result = sdlGetErrorLookupFunction();
   if (result == nullptr) {
     return null;

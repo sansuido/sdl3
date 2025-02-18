@@ -24,8 +24,11 @@ bool init() {
     return false;
   }
   sdlSetHint(SDL_HINT_RENDER_VSYNC, '1');
-  gWindow =
-      SdlWindowEx.create(title: gTitle, w: gScreenWidth, h: gScreenHeight);
+  gWindow = SdlWindowEx.create(
+    title: gTitle,
+    w: gScreenWidth,
+    h: gScreenHeight,
+  );
   if (gWindow == nullptr) {
     print(sdlGetError());
     return false;
@@ -94,8 +97,14 @@ void render() {
     ..clear()
     // player
     ..setDrawColor(0x00, 0xff, 0x00, SDL_ALPHA_OPAQUE)
-    ..fillRect(Rectangle(
-        gPlayerX, gPlayerY, gPlayerWidth.toDouble(), gPlayerHeight.toDouble()))
+    ..fillRect(
+      Rectangle(
+        gPlayerX,
+        gPlayerY,
+        gPlayerWidth.toDouble(),
+        gPlayerHeight.toDouble(),
+      ),
+    )
     // term
     ..present();
 }

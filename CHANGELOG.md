@@ -1,3 +1,7 @@
+## 1.3.5
+- SDL3-2025-02-16
+- [update] New formatting style. (Dart 3.7.0)
+
 ## 1.3.4
 - SDL3-2025-02-09
 - [add] Added sdlStretchSurface and ttf tag functions.

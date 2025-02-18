@@ -1296,10 +1296,23 @@ extension SdlGamepadPointerEx on Pointer<SdlGamepad> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetGamepadTouchpadFinger(SDL_Gamepad *gamepad, int touchpad, int finger, bool *down, float *x, float *y, float *pressure)
   /// ```
-  bool getTouchpadFinger(int touchpad, int finger, Pointer<Uint8> down,
-      Pointer<Float> x, Pointer<Float> y, Pointer<Float> pressure) {
+  bool getTouchpadFinger(
+    int touchpad,
+    int finger,
+    Pointer<Uint8> down,
+    Pointer<Float> x,
+    Pointer<Float> y,
+    Pointer<Float> pressure,
+  ) {
     return sdlGetGamepadTouchpadFinger(
-        this, touchpad, finger, down, x, y, pressure);
+      this,
+      touchpad,
+      finger,
+      down,
+      x,
+      y,
+      pressure,
+    );
   }
 
   ///
@@ -1424,7 +1437,11 @@ extension SdlGamepadPointerEx on Pointer<SdlGamepad> {
   /// ```
   bool rumble(int lowFrequencyRumble, int highFrequencyRumble, int durationMs) {
     return sdlRumbleGamepad(
-        this, lowFrequencyRumble, highFrequencyRumble, durationMs);
+      this,
+      lowFrequencyRumble,
+      highFrequencyRumble,
+      durationMs,
+    );
   }
 
   ///

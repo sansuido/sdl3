@@ -52,12 +52,29 @@ int main() {
     }
     sdlRenderClear(renderer);
     sdlRenderTexture9Grid(
-        renderer, texture, nullptr, width, width, height, height, 1.0, nullptr);
+      renderer,
+      texture,
+      nullptr,
+      width,
+      width,
+      height,
+      height,
+      1.0,
+      nullptr,
+    );
     sdlSetRenderDrawColor(renderer, 255, 255, 255, 255);
     sdlRenderDebugText(
-        renderer, 5, 5, 'usage: key left(+) or key right(-) change to width');
+      renderer,
+      5,
+      5,
+      'usage: key left(+) or key right(-) change to width',
+    );
     sdlRenderDebugText(
-        renderer, 5, 25, 'usage: key up(+) or key down(-) change to height');
+      renderer,
+      5,
+      25,
+      'usage: key up(+) or key down(-) change to height',
+    );
     sdlRenderDebugText(renderer, 5, 45, 'width: $width height: $height');
     sdlRenderPresent(renderer);
   }

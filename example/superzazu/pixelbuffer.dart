@@ -16,10 +16,11 @@ int main() {
   sdlSetHint(SDL_HINT_RENDER_VSYNC, '1');
   // create SDL window
   var window = SdlWindowEx.create(
-      title: 'sdl2_pixelbuffer',
-      w: gWinWidth * 4,
-      h: gWinHeight * 4,
-      flags: SDL_WINDOW_RESIZABLE);
+    title: 'sdl2_pixelbuffer',
+    w: gWinWidth * 4,
+    h: gWinHeight * 4,
+    flags: SDL_WINDOW_RESIZABLE,
+  );
   if (window == nullptr) {
     print("Unable to create window: ${sdlGetError()}");
     sdlQuit();
@@ -35,10 +36,17 @@ int main() {
   }
 
   renderer.setLogicalPresentation(
-      gWinWidth, gWinHeight, SDL_LOGICAL_PRESENTATION_STRETCH);
+    gWinWidth,
+    gWinHeight,
+    SDL_LOGICAL_PRESENTATION_STRETCH,
+  );
   // create texture
-  var texture = renderer.createTexture(SDL_PIXELFORMAT_RGBA8888,
-      SDL_TEXTUREACCESS_STREAMING, gWinWidth, gWinHeight);
+  var texture = renderer.createTexture(
+    SDL_PIXELFORMAT_RGBA8888,
+    SDL_TEXTUREACCESS_STREAMING,
+    gWinWidth,
+    gWinHeight,
+  );
   if (texture == nullptr) {
     print('Unable to create texture: ${sdlGetError()}');
     renderer.destroy();
@@ -50,12 +58,14 @@ int main() {
   var texturePitch = calloc<Int32>();
   texture.lock(nullptr, texturePixels, texturePitch);
   // update texture with new data
-  texturePixels.value.value =
-      ByteData.view(Uint8List.fromList([255, 0, 0, 255]).buffer).getUint32(0);
+  texturePixels.value.value = ByteData.view(
+    Uint8List.fromList([255, 0, 0, 255]).buffer,
+  ).getUint32(0);
   (texturePixels.value + gWinWidth * gWinHeight ~/ 2 + gWinWidth ~/ 2).value =
       ByteData.view(Uint8List.fromList([0, 255, 0, 255]).buffer).getUint32(0);
-  (texturePixels.value + gWinWidth * gWinHeight - 1).value =
-      ByteData.view(Uint8List.fromList([0, 0, 255, 255]).buffer).getUint32(0);
+  (texturePixels.value + gWinWidth * gWinHeight - 1).value = ByteData.view(
+    Uint8List.fromList([0, 0, 255, 255]).buffer,
+  ).getUint32(0);
   texture.unlock();
   // main loop
   var event = calloc<SdlEvent>();

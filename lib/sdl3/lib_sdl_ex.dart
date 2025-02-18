@@ -269,7 +269,12 @@ final int SDL_BUTTON_X2MASK = sdlButton(SDL_BUTTON_X2);
 //const SDL_DEFINE_PIXELFOURCC = (A, B, C, D) SDL_FOURCC(A, B, C, D);
 
 int sdlDefinePixcelFormat(
-    int type, int order, int layout, int bits, int bytes) {
+  int type,
+  int order,
+  int layout,
+  int bits,
+  int bytes,
+) {
   return (1 << 28) |
       ((type) << 24) |
       ((order) << 20) |
@@ -404,16 +409,24 @@ Pointer<Int8> sdlIconvUtf8Locate(String s) {
 /// const SDL_iconv_utf8_ucs2 = (S) (Uint16 *)SDL_iconv_string('UCS-2-INTERNAL', 'UTF-8', S, SDL_strlen(S)+1);
 /// ```
 Pointer<Uint16> sdlIconvUtf8Ucs2(String s) {
-  return sdlIconvString('UCS-2-INTERNAL', 'UTF-8', s, sdlStrlen(s) + 1)
-      .cast<Uint16>();
+  return sdlIconvString(
+    'UCS-2-INTERNAL',
+    'UTF-8',
+    s,
+    sdlStrlen(s) + 1,
+  ).cast<Uint16>();
 }
 
 /// ```c
 /// const SDL_iconv_utf8_ucs4 = (S) (Uint32 *)SDL_iconv_string('UCS-4-INTERNAL', 'UTF-8', S, SDL_strlen(S)+1);
 /// ```
 Pointer<Uint32> sdlIconvUtf8Ucs4(String s) {
-  return sdlIconvString('UCS-4-INTERNAL', 'UTF-8', s, sdlStrlen(s) + 1)
-      .cast<Uint32>();
+  return sdlIconvString(
+    'UCS-4-INTERNAL',
+    'UTF-8',
+    s,
+    sdlStrlen(s) + 1,
+  ).cast<Uint32>();
 }
 
 //const SDL_MUSTLOCK = (S) (((S)->flags & SDL_RLEACCEL) != 0);
@@ -440,8 +453,11 @@ int sdlVersionnum(int x, int y, int z) {
 /// ```c
 /// const SDL_COMPILEDVERSION = \ SDL_VERSIONNUM(SDL_MAJOR_VERSION, SDL_MINOR_VERSION, SDL_PATCHLEVEL);
 /// ```
-final SDL_COMPILEDVERSION =
-    sdlVersionnum(SDL_MAJOR_VERSION, SDL_MINOR_VERSION, SDL_MICRO_VERSION);
+final SDL_COMPILEDVERSION = sdlVersionnum(
+  SDL_MAJOR_VERSION,
+  SDL_MINOR_VERSION,
+  SDL_MICRO_VERSION,
+);
 
 /// ```c
 /// const SDL_VERSION_ATLEAST = (X, Y, Z) \ (SDL_COMPILEDVERSION >= SDL_VERSIONNUM(X, Y, Z));

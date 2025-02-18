@@ -15,7 +15,11 @@ int main() {
   }
   sdlSetHint(SDL_HINT_RENDER_VSYNC, '1');
   var window = SdlWindowEx.create(
-      title: 'Wave test', w: gWidth, h: gHeight, flags: SDL_WINDOW_OPENGL);
+    title: 'Wave test',
+    w: gWidth,
+    h: gHeight,
+    flags: SDL_WINDOW_OPENGL,
+  );
   if (window == nullptr) {
     print('SDL_CreateRenderer Error: ${sdlGetError()}');
     sdlQuit();
@@ -95,16 +99,31 @@ int main() {
       ..setDrawColor(0, 0, 0, 0)
       ..clear()
       ..hlineColor(
-          0, gWidth - 1, baseY, SdlColorEx.rgbaToU32(0xff, 0xff, 0xff, 0xff))
+        0,
+        gWidth - 1,
+        baseY,
+        SdlColorEx.rgbaToU32(0xff, 0xff, 0xff, 0xff),
+      )
       ..vlineColor(
-          baseX, 0, gHeight - 1, SdlColorEx.rgbaToU32(0xff, 0xff, 0xff, 0xff));
+        baseX,
+        0,
+        gHeight - 1,
+        SdlColorEx.rgbaToU32(0xff, 0xff, 0xff, 0xff),
+      );
     for (var i = 0; (i + fun) < tot; i++) {
-      renderer.thickLineColor(points[i], points[i + fun], 1,
-          SdlColorEx.rgbaToU32(0x00, 0xff, 0x00, 0xff));
+      renderer.thickLineColor(
+        points[i],
+        points[i + fun],
+        1,
+        SdlColorEx.rgbaToU32(0x00, 0xff, 0x00, 0xff),
+      );
     }
     renderer
-      ..stringColor(Point(10, 10), 'coY:$coY zY:$zY fun:$fun',
-          SdlColorEx.rgbaToU32(0x00, 0xff, 0x00, 0xff))
+      ..stringColor(
+        Point(10, 10),
+        'coY:$coY zY:$zY fun:$fun',
+        SdlColorEx.rgbaToU32(0x00, 0xff, 0x00, 0xff),
+      )
       ..present();
   }
   event.callocFree();

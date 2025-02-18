@@ -45,8 +45,11 @@ bool init() {
     return false;
   }
   sdlSetHint(SDL_HINT_RENDER_VSYNC, '1');
-  gWindow =
-      SdlWindowEx.create(title: gTitle, w: gScreenWidth, h: gScreenHeight);
+  gWindow = SdlWindowEx.create(
+    title: gTitle,
+    w: gScreenWidth,
+    h: gScreenHeight,
+  );
   if (gWindow == nullptr) {
     print(sdlGetError());
     return false;
@@ -152,19 +155,28 @@ void render() {
         continue;
       }
       if (gMapData[drawY][drawX] == 0) {
-        gRenderer.fillRect(Rectangle<double>(x * gMapSize + gScrollX,
-            y * gMapSize + gScrollY, gMapSize.toDouble(), gMapSize.toDouble()));
+        gRenderer.fillRect(
+          Rectangle<double>(
+            x * gMapSize + gScrollX,
+            y * gMapSize + gScrollY,
+            gMapSize.toDouble(),
+            gMapSize.toDouble(),
+          ),
+        );
       }
     }
   }
   // player
   gRenderer
     ..setDrawColor(0xff, 0xff, 0xff, 0xff)
-    ..fillRect(Rectangle<double>(
+    ..fillRect(
+      Rectangle<double>(
         (gPlayerX - mapDrawPointX) * gMapSize.toDouble(),
         (gPlayerY - mapDrawPointY) * gMapSize.toDouble(),
         gMapSize.toDouble(),
-        gMapSize.toDouble()))
+        gMapSize.toDouble(),
+      ),
+    )
     // term
     ..present();
 }

@@ -24,8 +24,11 @@ bool init() {
     success = false;
   } else {
     sdlSetHint(SDL_HINT_RENDER_VSYNC, '1');
-    gWindow =
-        SdlWindowEx.create(title: gTitle, w: gScreenWidth, h: gScreenHeight);
+    gWindow = SdlWindowEx.create(
+      title: gTitle,
+      w: gScreenWidth,
+      h: gScreenHeight,
+    );
     if (gWindow == nullptr) {
       print(sdlGetError());
       success = false;
@@ -80,8 +83,14 @@ int main() {
         ..setDrawColor(0x00, 0x00, 0x00, SDL_ALPHA_OPAQUE)
         ..clear()
         ..setDrawColor(0x00, 0xff, 0x00, SDL_ALPHA_OPAQUE)
-        ..fillRect(Rectangle(gPlayerX, gPlayerY, gPlayerWidth.toDouble(),
-            gPlayerHeight.toDouble()))
+        ..fillRect(
+          Rectangle(
+            gPlayerX,
+            gPlayerY,
+            gPlayerWidth.toDouble(),
+            gPlayerHeight.toDouble(),
+          ),
+        )
         ..present();
     }
     event.callocFree();

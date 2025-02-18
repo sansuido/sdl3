@@ -28,7 +28,11 @@ int main() {
     return -1;
   }
   var texture = renderer.createTexture(
-      SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, 400, 300);
+    SDL_PIXELFORMAT_RGBA8888,
+    SDL_TEXTUREACCESS_TARGET,
+    400,
+    300,
+  );
   var event = calloc<SdlEvent>();
   var running = true;
   var angle = 0.0;
@@ -57,8 +61,12 @@ int main() {
       ..setTarget(nullptr)
       ..setDrawColor(0, 0, 0, SDL_ALPHA_OPAQUE)
       ..clear()
-      ..textureRotated(texture,
-          dstrect: dstrect, angle: angle, center: Point(400, 300))
+      ..textureRotated(
+        texture,
+        dstrect: dstrect,
+        angle: angle,
+        center: Point(400, 300),
+      )
       ..present();
   }
   texture.destroy();

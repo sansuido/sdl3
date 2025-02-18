@@ -87,15 +87,28 @@ int imgVersion() {
 /// extern SDL_DECLSPEC SDL_Surface * SDLCALL IMG_LoadTyped_IO(SDL_IOStream *src, bool closeio, const char *type)
 /// ```
 Pointer<SdlSurface> imgLoadTypedIo(
-    Pointer<SdlIoStream> src, bool closeio, String? type) {
+  Pointer<SdlIoStream> src,
+  bool closeio,
+  String? type,
+) {
   final imgLoadTypedIoLookupFunction = libSdl3Image.lookupFunction<
-      Pointer<SdlSurface> Function(
-          Pointer<SdlIoStream> src, Uint8 closeio, Pointer<Utf8> type),
-      Pointer<SdlSurface> Function(Pointer<SdlIoStream> src, int closeio,
-          Pointer<Utf8> type)>('IMG_LoadTyped_IO');
+    Pointer<SdlSurface> Function(
+      Pointer<SdlIoStream> src,
+      Uint8 closeio,
+      Pointer<Utf8> type,
+    ),
+    Pointer<SdlSurface> Function(
+      Pointer<SdlIoStream> src,
+      int closeio,
+      Pointer<Utf8> type,
+    )
+  >('IMG_LoadTyped_IO');
   final typePointer = type != null ? type.toNativeUtf8() : nullptr;
-  final result =
-      imgLoadTypedIoLookupFunction(src, closeio ? 1 : 0, typePointer);
+  final result = imgLoadTypedIoLookupFunction(
+    src,
+    closeio ? 1 : 0,
+    typePointer,
+  );
   calloc.free(typePointer);
   return result;
 }
@@ -148,8 +161,9 @@ Pointer<SdlSurface> imgLoadTypedIo(
 /// ```
 Pointer<SdlSurface> imgLoad(String? file) {
   final imgLoadLookupFunction = libSdl3Image.lookupFunction<
-      Pointer<SdlSurface> Function(Pointer<Utf8> file),
-      Pointer<SdlSurface> Function(Pointer<Utf8> file)>('IMG_Load');
+    Pointer<SdlSurface> Function(Pointer<Utf8> file),
+    Pointer<SdlSurface> Function(Pointer<Utf8> file)
+  >('IMG_Load');
   final filePointer = file != null ? file.toNativeUtf8() : nullptr;
   final result = imgLoadLookupFunction(filePointer);
   calloc.free(filePointer);
@@ -213,9 +227,9 @@ Pointer<SdlSurface> imgLoad(String? file) {
 /// ```
 Pointer<SdlSurface> imgLoadIo(Pointer<SdlIoStream> src, bool closeio) {
   final imgLoadIoLookupFunction = libSdl3Image.lookupFunction<
-      Pointer<SdlSurface> Function(Pointer<SdlIoStream> src, Uint8 closeio),
-      Pointer<SdlSurface> Function(
-          Pointer<SdlIoStream> src, int closeio)>('IMG_Load_IO');
+    Pointer<SdlSurface> Function(Pointer<SdlIoStream> src, Uint8 closeio),
+    Pointer<SdlSurface> Function(Pointer<SdlIoStream> src, int closeio)
+  >('IMG_Load_IO');
   return imgLoadIoLookupFunction(src, closeio ? 1 : 0);
 }
 
@@ -256,12 +270,19 @@ Pointer<SdlSurface> imgLoadIo(Pointer<SdlIoStream> src, bool closeio) {
 /// extern SDL_DECLSPEC SDL_Texture * SDLCALL IMG_LoadTexture(SDL_Renderer *renderer, const char *file)
 /// ```
 Pointer<SdlTexture> imgLoadTexture(
-    Pointer<SdlRenderer> renderer, String? file) {
+  Pointer<SdlRenderer> renderer,
+  String? file,
+) {
   final imgLoadTextureLookupFunction = libSdl3Image.lookupFunction<
-      Pointer<SdlTexture> Function(
-          Pointer<SdlRenderer> renderer, Pointer<Utf8> file),
-      Pointer<SdlTexture> Function(Pointer<SdlRenderer> renderer,
-          Pointer<Utf8> file)>('IMG_LoadTexture');
+    Pointer<SdlTexture> Function(
+      Pointer<SdlRenderer> renderer,
+      Pointer<Utf8> file,
+    ),
+    Pointer<SdlTexture> Function(
+      Pointer<SdlRenderer> renderer,
+      Pointer<Utf8> file,
+    )
+  >('IMG_LoadTexture');
   final filePointer = file != null ? file.toNativeUtf8() : nullptr;
   final result = imgLoadTextureLookupFunction(renderer, filePointer);
   calloc.free(filePointer);
@@ -317,12 +338,22 @@ Pointer<SdlTexture> imgLoadTexture(
 /// extern SDL_DECLSPEC SDL_Texture * SDLCALL IMG_LoadTexture_IO(SDL_Renderer *renderer, SDL_IOStream *src, bool closeio)
 /// ```
 Pointer<SdlTexture> imgLoadTextureIo(
-    Pointer<SdlRenderer> renderer, Pointer<SdlIoStream> src, bool closeio) {
+  Pointer<SdlRenderer> renderer,
+  Pointer<SdlIoStream> src,
+  bool closeio,
+) {
   final imgLoadTextureIoLookupFunction = libSdl3Image.lookupFunction<
-      Pointer<SdlTexture> Function(Pointer<SdlRenderer> renderer,
-          Pointer<SdlIoStream> src, Uint8 closeio),
-      Pointer<SdlTexture> Function(Pointer<SdlRenderer> renderer,
-          Pointer<SdlIoStream> src, int closeio)>('IMG_LoadTexture_IO');
+    Pointer<SdlTexture> Function(
+      Pointer<SdlRenderer> renderer,
+      Pointer<SdlIoStream> src,
+      Uint8 closeio,
+    ),
+    Pointer<SdlTexture> Function(
+      Pointer<SdlRenderer> renderer,
+      Pointer<SdlIoStream> src,
+      int closeio,
+    )
+  >('IMG_LoadTexture_IO');
   return imgLoadTextureIoLookupFunction(renderer, src, closeio ? 1 : 0);
 }
 
@@ -382,19 +413,33 @@ Pointer<SdlTexture> imgLoadTextureIo(
 /// ```c
 /// extern SDL_DECLSPEC SDL_Texture * SDLCALL IMG_LoadTextureTyped_IO(SDL_Renderer *renderer, SDL_IOStream *src, bool closeio, const char *type)
 /// ```
-Pointer<SdlTexture> imgLoadTextureTypedIo(Pointer<SdlRenderer> renderer,
-    Pointer<SdlIoStream> src, bool closeio, String? type) {
+Pointer<SdlTexture> imgLoadTextureTypedIo(
+  Pointer<SdlRenderer> renderer,
+  Pointer<SdlIoStream> src,
+  bool closeio,
+  String? type,
+) {
   final imgLoadTextureTypedIoLookupFunction = libSdl3Image.lookupFunction<
-      Pointer<SdlTexture> Function(Pointer<SdlRenderer> renderer,
-          Pointer<SdlIoStream> src, Uint8 closeio, Pointer<Utf8> type),
-      Pointer<SdlTexture> Function(
-          Pointer<SdlRenderer> renderer,
-          Pointer<SdlIoStream> src,
-          int closeio,
-          Pointer<Utf8> type)>('IMG_LoadTextureTyped_IO');
+    Pointer<SdlTexture> Function(
+      Pointer<SdlRenderer> renderer,
+      Pointer<SdlIoStream> src,
+      Uint8 closeio,
+      Pointer<Utf8> type,
+    ),
+    Pointer<SdlTexture> Function(
+      Pointer<SdlRenderer> renderer,
+      Pointer<SdlIoStream> src,
+      int closeio,
+      Pointer<Utf8> type,
+    )
+  >('IMG_LoadTextureTyped_IO');
   final typePointer = type != null ? type.toNativeUtf8() : nullptr;
   final result = imgLoadTextureTypedIoLookupFunction(
-      renderer, src, closeio ? 1 : 0, typePointer);
+    renderer,
+    src,
+    closeio ? 1 : 0,
+    typePointer,
+  );
   calloc.free(typePointer);
   return result;
 }
@@ -446,8 +491,9 @@ Pointer<SdlTexture> imgLoadTextureTypedIo(Pointer<SdlRenderer> renderer,
 /// ```
 bool imgIsAvif(Pointer<SdlIoStream> src) {
   final imgIsAvifLookupFunction = libSdl3Image.lookupFunction<
-      Uint8 Function(Pointer<SdlIoStream> src),
-      int Function(Pointer<SdlIoStream> src)>('IMG_isAVIF');
+    Uint8 Function(Pointer<SdlIoStream> src),
+    int Function(Pointer<SdlIoStream> src)
+  >('IMG_isAVIF');
   return imgIsAvifLookupFunction(src) == 1;
 }
 
@@ -497,8 +543,9 @@ bool imgIsAvif(Pointer<SdlIoStream> src) {
 /// ```
 bool imgIsIco(Pointer<SdlIoStream> src) {
   final imgIsIcoLookupFunction = libSdl3Image.lookupFunction<
-      Uint8 Function(Pointer<SdlIoStream> src),
-      int Function(Pointer<SdlIoStream> src)>('IMG_isICO');
+    Uint8 Function(Pointer<SdlIoStream> src),
+    int Function(Pointer<SdlIoStream> src)
+  >('IMG_isICO');
   return imgIsIcoLookupFunction(src) == 1;
 }
 
@@ -548,8 +595,9 @@ bool imgIsIco(Pointer<SdlIoStream> src) {
 /// ```
 bool imgIsCur(Pointer<SdlIoStream> src) {
   final imgIsCurLookupFunction = libSdl3Image.lookupFunction<
-      Uint8 Function(Pointer<SdlIoStream> src),
-      int Function(Pointer<SdlIoStream> src)>('IMG_isCUR');
+    Uint8 Function(Pointer<SdlIoStream> src),
+    int Function(Pointer<SdlIoStream> src)
+  >('IMG_isCUR');
   return imgIsCurLookupFunction(src) == 1;
 }
 
@@ -599,8 +647,9 @@ bool imgIsCur(Pointer<SdlIoStream> src) {
 /// ```
 bool imgIsBmp(Pointer<SdlIoStream> src) {
   final imgIsBmpLookupFunction = libSdl3Image.lookupFunction<
-      Uint8 Function(Pointer<SdlIoStream> src),
-      int Function(Pointer<SdlIoStream> src)>('IMG_isBMP');
+    Uint8 Function(Pointer<SdlIoStream> src),
+    int Function(Pointer<SdlIoStream> src)
+  >('IMG_isBMP');
   return imgIsBmpLookupFunction(src) == 1;
 }
 
@@ -650,8 +699,9 @@ bool imgIsBmp(Pointer<SdlIoStream> src) {
 /// ```
 bool imgIsGif(Pointer<SdlIoStream> src) {
   final imgIsGifLookupFunction = libSdl3Image.lookupFunction<
-      Uint8 Function(Pointer<SdlIoStream> src),
-      int Function(Pointer<SdlIoStream> src)>('IMG_isGIF');
+    Uint8 Function(Pointer<SdlIoStream> src),
+    int Function(Pointer<SdlIoStream> src)
+  >('IMG_isGIF');
   return imgIsGifLookupFunction(src) == 1;
 }
 
@@ -701,8 +751,9 @@ bool imgIsGif(Pointer<SdlIoStream> src) {
 /// ```
 bool imgIsJpg(Pointer<SdlIoStream> src) {
   final imgIsJpgLookupFunction = libSdl3Image.lookupFunction<
-      Uint8 Function(Pointer<SdlIoStream> src),
-      int Function(Pointer<SdlIoStream> src)>('IMG_isJPG');
+    Uint8 Function(Pointer<SdlIoStream> src),
+    int Function(Pointer<SdlIoStream> src)
+  >('IMG_isJPG');
   return imgIsJpgLookupFunction(src) == 1;
 }
 
@@ -752,8 +803,9 @@ bool imgIsJpg(Pointer<SdlIoStream> src) {
 /// ```
 bool imgIsJxl(Pointer<SdlIoStream> src) {
   final imgIsJxlLookupFunction = libSdl3Image.lookupFunction<
-      Uint8 Function(Pointer<SdlIoStream> src),
-      int Function(Pointer<SdlIoStream> src)>('IMG_isJXL');
+    Uint8 Function(Pointer<SdlIoStream> src),
+    int Function(Pointer<SdlIoStream> src)
+  >('IMG_isJXL');
   return imgIsJxlLookupFunction(src) == 1;
 }
 
@@ -803,8 +855,9 @@ bool imgIsJxl(Pointer<SdlIoStream> src) {
 /// ```
 bool imgIsLbm(Pointer<SdlIoStream> src) {
   final imgIsLbmLookupFunction = libSdl3Image.lookupFunction<
-      Uint8 Function(Pointer<SdlIoStream> src),
-      int Function(Pointer<SdlIoStream> src)>('IMG_isLBM');
+    Uint8 Function(Pointer<SdlIoStream> src),
+    int Function(Pointer<SdlIoStream> src)
+  >('IMG_isLBM');
   return imgIsLbmLookupFunction(src) == 1;
 }
 
@@ -854,8 +907,9 @@ bool imgIsLbm(Pointer<SdlIoStream> src) {
 /// ```
 bool imgIsPcx(Pointer<SdlIoStream> src) {
   final imgIsPcxLookupFunction = libSdl3Image.lookupFunction<
-      Uint8 Function(Pointer<SdlIoStream> src),
-      int Function(Pointer<SdlIoStream> src)>('IMG_isPCX');
+    Uint8 Function(Pointer<SdlIoStream> src),
+    int Function(Pointer<SdlIoStream> src)
+  >('IMG_isPCX');
   return imgIsPcxLookupFunction(src) == 1;
 }
 
@@ -905,8 +959,9 @@ bool imgIsPcx(Pointer<SdlIoStream> src) {
 /// ```
 bool imgIsPng(Pointer<SdlIoStream> src) {
   final imgIsPngLookupFunction = libSdl3Image.lookupFunction<
-      Uint8 Function(Pointer<SdlIoStream> src),
-      int Function(Pointer<SdlIoStream> src)>('IMG_isPNG');
+    Uint8 Function(Pointer<SdlIoStream> src),
+    int Function(Pointer<SdlIoStream> src)
+  >('IMG_isPNG');
   return imgIsPngLookupFunction(src) == 1;
 }
 
@@ -956,8 +1011,9 @@ bool imgIsPng(Pointer<SdlIoStream> src) {
 /// ```
 bool imgIsPnm(Pointer<SdlIoStream> src) {
   final imgIsPnmLookupFunction = libSdl3Image.lookupFunction<
-      Uint8 Function(Pointer<SdlIoStream> src),
-      int Function(Pointer<SdlIoStream> src)>('IMG_isPNM');
+    Uint8 Function(Pointer<SdlIoStream> src),
+    int Function(Pointer<SdlIoStream> src)
+  >('IMG_isPNM');
   return imgIsPnmLookupFunction(src) == 1;
 }
 
@@ -1007,8 +1063,9 @@ bool imgIsPnm(Pointer<SdlIoStream> src) {
 /// ```
 bool imgIsSvg(Pointer<SdlIoStream> src) {
   final imgIsSvgLookupFunction = libSdl3Image.lookupFunction<
-      Uint8 Function(Pointer<SdlIoStream> src),
-      int Function(Pointer<SdlIoStream> src)>('IMG_isSVG');
+    Uint8 Function(Pointer<SdlIoStream> src),
+    int Function(Pointer<SdlIoStream> src)
+  >('IMG_isSVG');
   return imgIsSvgLookupFunction(src) == 1;
 }
 
@@ -1058,8 +1115,9 @@ bool imgIsSvg(Pointer<SdlIoStream> src) {
 /// ```
 bool imgIsQoi(Pointer<SdlIoStream> src) {
   final imgIsQoiLookupFunction = libSdl3Image.lookupFunction<
-      Uint8 Function(Pointer<SdlIoStream> src),
-      int Function(Pointer<SdlIoStream> src)>('IMG_isQOI');
+    Uint8 Function(Pointer<SdlIoStream> src),
+    int Function(Pointer<SdlIoStream> src)
+  >('IMG_isQOI');
   return imgIsQoiLookupFunction(src) == 1;
 }
 
@@ -1109,8 +1167,9 @@ bool imgIsQoi(Pointer<SdlIoStream> src) {
 /// ```
 bool imgIsTif(Pointer<SdlIoStream> src) {
   final imgIsTifLookupFunction = libSdl3Image.lookupFunction<
-      Uint8 Function(Pointer<SdlIoStream> src),
-      int Function(Pointer<SdlIoStream> src)>('IMG_isTIF');
+    Uint8 Function(Pointer<SdlIoStream> src),
+    int Function(Pointer<SdlIoStream> src)
+  >('IMG_isTIF');
   return imgIsTifLookupFunction(src) == 1;
 }
 
@@ -1160,8 +1219,9 @@ bool imgIsTif(Pointer<SdlIoStream> src) {
 /// ```
 bool imgIsXcf(Pointer<SdlIoStream> src) {
   final imgIsXcfLookupFunction = libSdl3Image.lookupFunction<
-      Uint8 Function(Pointer<SdlIoStream> src),
-      int Function(Pointer<SdlIoStream> src)>('IMG_isXCF');
+    Uint8 Function(Pointer<SdlIoStream> src),
+    int Function(Pointer<SdlIoStream> src)
+  >('IMG_isXCF');
   return imgIsXcfLookupFunction(src) == 1;
 }
 
@@ -1211,8 +1271,9 @@ bool imgIsXcf(Pointer<SdlIoStream> src) {
 /// ```
 bool imgIsXpm(Pointer<SdlIoStream> src) {
   final imgIsXpmLookupFunction = libSdl3Image.lookupFunction<
-      Uint8 Function(Pointer<SdlIoStream> src),
-      int Function(Pointer<SdlIoStream> src)>('IMG_isXPM');
+    Uint8 Function(Pointer<SdlIoStream> src),
+    int Function(Pointer<SdlIoStream> src)
+  >('IMG_isXPM');
   return imgIsXpmLookupFunction(src) == 1;
 }
 
@@ -1262,8 +1323,9 @@ bool imgIsXpm(Pointer<SdlIoStream> src) {
 /// ```
 bool imgIsXv(Pointer<SdlIoStream> src) {
   final imgIsXvLookupFunction = libSdl3Image.lookupFunction<
-      Uint8 Function(Pointer<SdlIoStream> src),
-      int Function(Pointer<SdlIoStream> src)>('IMG_isXV');
+    Uint8 Function(Pointer<SdlIoStream> src),
+    int Function(Pointer<SdlIoStream> src)
+  >('IMG_isXV');
   return imgIsXvLookupFunction(src) == 1;
 }
 
@@ -1313,8 +1375,9 @@ bool imgIsXv(Pointer<SdlIoStream> src) {
 /// ```
 bool imgIsWebp(Pointer<SdlIoStream> src) {
   final imgIsWebpLookupFunction = libSdl3Image.lookupFunction<
-      Uint8 Function(Pointer<SdlIoStream> src),
-      int Function(Pointer<SdlIoStream> src)>('IMG_isWEBP');
+    Uint8 Function(Pointer<SdlIoStream> src),
+    int Function(Pointer<SdlIoStream> src)
+  >('IMG_isWEBP');
   return imgIsWebpLookupFunction(src) == 1;
 }
 
@@ -1355,9 +1418,9 @@ bool imgIsWebp(Pointer<SdlIoStream> src) {
 /// ```
 Pointer<SdlSurface> imgLoadAvifIo(Pointer<SdlIoStream> src) {
   final imgLoadAvifIoLookupFunction = libSdl3Image.lookupFunction<
-      Pointer<SdlSurface> Function(Pointer<SdlIoStream> src),
-      Pointer<SdlSurface> Function(
-          Pointer<SdlIoStream> src)>('IMG_LoadAVIF_IO');
+    Pointer<SdlSurface> Function(Pointer<SdlIoStream> src),
+    Pointer<SdlSurface> Function(Pointer<SdlIoStream> src)
+  >('IMG_LoadAVIF_IO');
   return imgLoadAvifIoLookupFunction(src);
 }
 
@@ -1398,8 +1461,9 @@ Pointer<SdlSurface> imgLoadAvifIo(Pointer<SdlIoStream> src) {
 /// ```
 Pointer<SdlSurface> imgLoadIcoIo(Pointer<SdlIoStream> src) {
   final imgLoadIcoIoLookupFunction = libSdl3Image.lookupFunction<
-      Pointer<SdlSurface> Function(Pointer<SdlIoStream> src),
-      Pointer<SdlSurface> Function(Pointer<SdlIoStream> src)>('IMG_LoadICO_IO');
+    Pointer<SdlSurface> Function(Pointer<SdlIoStream> src),
+    Pointer<SdlSurface> Function(Pointer<SdlIoStream> src)
+  >('IMG_LoadICO_IO');
   return imgLoadIcoIoLookupFunction(src);
 }
 
@@ -1440,8 +1504,9 @@ Pointer<SdlSurface> imgLoadIcoIo(Pointer<SdlIoStream> src) {
 /// ```
 Pointer<SdlSurface> imgLoadCurIo(Pointer<SdlIoStream> src) {
   final imgLoadCurIoLookupFunction = libSdl3Image.lookupFunction<
-      Pointer<SdlSurface> Function(Pointer<SdlIoStream> src),
-      Pointer<SdlSurface> Function(Pointer<SdlIoStream> src)>('IMG_LoadCUR_IO');
+    Pointer<SdlSurface> Function(Pointer<SdlIoStream> src),
+    Pointer<SdlSurface> Function(Pointer<SdlIoStream> src)
+  >('IMG_LoadCUR_IO');
   return imgLoadCurIoLookupFunction(src);
 }
 
@@ -1482,8 +1547,9 @@ Pointer<SdlSurface> imgLoadCurIo(Pointer<SdlIoStream> src) {
 /// ```
 Pointer<SdlSurface> imgLoadBmpIo(Pointer<SdlIoStream> src) {
   final imgLoadBmpIoLookupFunction = libSdl3Image.lookupFunction<
-      Pointer<SdlSurface> Function(Pointer<SdlIoStream> src),
-      Pointer<SdlSurface> Function(Pointer<SdlIoStream> src)>('IMG_LoadBMP_IO');
+    Pointer<SdlSurface> Function(Pointer<SdlIoStream> src),
+    Pointer<SdlSurface> Function(Pointer<SdlIoStream> src)
+  >('IMG_LoadBMP_IO');
   return imgLoadBmpIoLookupFunction(src);
 }
 
@@ -1524,8 +1590,9 @@ Pointer<SdlSurface> imgLoadBmpIo(Pointer<SdlIoStream> src) {
 /// ```
 Pointer<SdlSurface> imgLoadGifIo(Pointer<SdlIoStream> src) {
   final imgLoadGifIoLookupFunction = libSdl3Image.lookupFunction<
-      Pointer<SdlSurface> Function(Pointer<SdlIoStream> src),
-      Pointer<SdlSurface> Function(Pointer<SdlIoStream> src)>('IMG_LoadGIF_IO');
+    Pointer<SdlSurface> Function(Pointer<SdlIoStream> src),
+    Pointer<SdlSurface> Function(Pointer<SdlIoStream> src)
+  >('IMG_LoadGIF_IO');
   return imgLoadGifIoLookupFunction(src);
 }
 
@@ -1566,8 +1633,9 @@ Pointer<SdlSurface> imgLoadGifIo(Pointer<SdlIoStream> src) {
 /// ```
 Pointer<SdlSurface> imgLoadJpgIo(Pointer<SdlIoStream> src) {
   final imgLoadJpgIoLookupFunction = libSdl3Image.lookupFunction<
-      Pointer<SdlSurface> Function(Pointer<SdlIoStream> src),
-      Pointer<SdlSurface> Function(Pointer<SdlIoStream> src)>('IMG_LoadJPG_IO');
+    Pointer<SdlSurface> Function(Pointer<SdlIoStream> src),
+    Pointer<SdlSurface> Function(Pointer<SdlIoStream> src)
+  >('IMG_LoadJPG_IO');
   return imgLoadJpgIoLookupFunction(src);
 }
 
@@ -1608,8 +1676,9 @@ Pointer<SdlSurface> imgLoadJpgIo(Pointer<SdlIoStream> src) {
 /// ```
 Pointer<SdlSurface> imgLoadJxlIo(Pointer<SdlIoStream> src) {
   final imgLoadJxlIoLookupFunction = libSdl3Image.lookupFunction<
-      Pointer<SdlSurface> Function(Pointer<SdlIoStream> src),
-      Pointer<SdlSurface> Function(Pointer<SdlIoStream> src)>('IMG_LoadJXL_IO');
+    Pointer<SdlSurface> Function(Pointer<SdlIoStream> src),
+    Pointer<SdlSurface> Function(Pointer<SdlIoStream> src)
+  >('IMG_LoadJXL_IO');
   return imgLoadJxlIoLookupFunction(src);
 }
 
@@ -1650,8 +1719,9 @@ Pointer<SdlSurface> imgLoadJxlIo(Pointer<SdlIoStream> src) {
 /// ```
 Pointer<SdlSurface> imgLoadLbmIo(Pointer<SdlIoStream> src) {
   final imgLoadLbmIoLookupFunction = libSdl3Image.lookupFunction<
-      Pointer<SdlSurface> Function(Pointer<SdlIoStream> src),
-      Pointer<SdlSurface> Function(Pointer<SdlIoStream> src)>('IMG_LoadLBM_IO');
+    Pointer<SdlSurface> Function(Pointer<SdlIoStream> src),
+    Pointer<SdlSurface> Function(Pointer<SdlIoStream> src)
+  >('IMG_LoadLBM_IO');
   return imgLoadLbmIoLookupFunction(src);
 }
 
@@ -1692,8 +1762,9 @@ Pointer<SdlSurface> imgLoadLbmIo(Pointer<SdlIoStream> src) {
 /// ```
 Pointer<SdlSurface> imgLoadPcxIo(Pointer<SdlIoStream> src) {
   final imgLoadPcxIoLookupFunction = libSdl3Image.lookupFunction<
-      Pointer<SdlSurface> Function(Pointer<SdlIoStream> src),
-      Pointer<SdlSurface> Function(Pointer<SdlIoStream> src)>('IMG_LoadPCX_IO');
+    Pointer<SdlSurface> Function(Pointer<SdlIoStream> src),
+    Pointer<SdlSurface> Function(Pointer<SdlIoStream> src)
+  >('IMG_LoadPCX_IO');
   return imgLoadPcxIoLookupFunction(src);
 }
 
@@ -1734,8 +1805,9 @@ Pointer<SdlSurface> imgLoadPcxIo(Pointer<SdlIoStream> src) {
 /// ```
 Pointer<SdlSurface> imgLoadPngIo(Pointer<SdlIoStream> src) {
   final imgLoadPngIoLookupFunction = libSdl3Image.lookupFunction<
-      Pointer<SdlSurface> Function(Pointer<SdlIoStream> src),
-      Pointer<SdlSurface> Function(Pointer<SdlIoStream> src)>('IMG_LoadPNG_IO');
+    Pointer<SdlSurface> Function(Pointer<SdlIoStream> src),
+    Pointer<SdlSurface> Function(Pointer<SdlIoStream> src)
+  >('IMG_LoadPNG_IO');
   return imgLoadPngIoLookupFunction(src);
 }
 
@@ -1776,8 +1848,9 @@ Pointer<SdlSurface> imgLoadPngIo(Pointer<SdlIoStream> src) {
 /// ```
 Pointer<SdlSurface> imgLoadPnmIo(Pointer<SdlIoStream> src) {
   final imgLoadPnmIoLookupFunction = libSdl3Image.lookupFunction<
-      Pointer<SdlSurface> Function(Pointer<SdlIoStream> src),
-      Pointer<SdlSurface> Function(Pointer<SdlIoStream> src)>('IMG_LoadPNM_IO');
+    Pointer<SdlSurface> Function(Pointer<SdlIoStream> src),
+    Pointer<SdlSurface> Function(Pointer<SdlIoStream> src)
+  >('IMG_LoadPNM_IO');
   return imgLoadPnmIoLookupFunction(src);
 }
 
@@ -1818,8 +1891,9 @@ Pointer<SdlSurface> imgLoadPnmIo(Pointer<SdlIoStream> src) {
 /// ```
 Pointer<SdlSurface> imgLoadSvgIo(Pointer<SdlIoStream> src) {
   final imgLoadSvgIoLookupFunction = libSdl3Image.lookupFunction<
-      Pointer<SdlSurface> Function(Pointer<SdlIoStream> src),
-      Pointer<SdlSurface> Function(Pointer<SdlIoStream> src)>('IMG_LoadSVG_IO');
+    Pointer<SdlSurface> Function(Pointer<SdlIoStream> src),
+    Pointer<SdlSurface> Function(Pointer<SdlIoStream> src)
+  >('IMG_LoadSVG_IO');
   return imgLoadSvgIoLookupFunction(src);
 }
 
@@ -1860,8 +1934,9 @@ Pointer<SdlSurface> imgLoadSvgIo(Pointer<SdlIoStream> src) {
 /// ```
 Pointer<SdlSurface> imgLoadQoiIo(Pointer<SdlIoStream> src) {
   final imgLoadQoiIoLookupFunction = libSdl3Image.lookupFunction<
-      Pointer<SdlSurface> Function(Pointer<SdlIoStream> src),
-      Pointer<SdlSurface> Function(Pointer<SdlIoStream> src)>('IMG_LoadQOI_IO');
+    Pointer<SdlSurface> Function(Pointer<SdlIoStream> src),
+    Pointer<SdlSurface> Function(Pointer<SdlIoStream> src)
+  >('IMG_LoadQOI_IO');
   return imgLoadQoiIoLookupFunction(src);
 }
 
@@ -1902,8 +1977,9 @@ Pointer<SdlSurface> imgLoadQoiIo(Pointer<SdlIoStream> src) {
 /// ```
 Pointer<SdlSurface> imgLoadTgaIo(Pointer<SdlIoStream> src) {
   final imgLoadTgaIoLookupFunction = libSdl3Image.lookupFunction<
-      Pointer<SdlSurface> Function(Pointer<SdlIoStream> src),
-      Pointer<SdlSurface> Function(Pointer<SdlIoStream> src)>('IMG_LoadTGA_IO');
+    Pointer<SdlSurface> Function(Pointer<SdlIoStream> src),
+    Pointer<SdlSurface> Function(Pointer<SdlIoStream> src)
+  >('IMG_LoadTGA_IO');
   return imgLoadTgaIoLookupFunction(src);
 }
 
@@ -1944,8 +2020,9 @@ Pointer<SdlSurface> imgLoadTgaIo(Pointer<SdlIoStream> src) {
 /// ```
 Pointer<SdlSurface> imgLoadTifIo(Pointer<SdlIoStream> src) {
   final imgLoadTifIoLookupFunction = libSdl3Image.lookupFunction<
-      Pointer<SdlSurface> Function(Pointer<SdlIoStream> src),
-      Pointer<SdlSurface> Function(Pointer<SdlIoStream> src)>('IMG_LoadTIF_IO');
+    Pointer<SdlSurface> Function(Pointer<SdlIoStream> src),
+    Pointer<SdlSurface> Function(Pointer<SdlIoStream> src)
+  >('IMG_LoadTIF_IO');
   return imgLoadTifIoLookupFunction(src);
 }
 
@@ -1986,8 +2063,9 @@ Pointer<SdlSurface> imgLoadTifIo(Pointer<SdlIoStream> src) {
 /// ```
 Pointer<SdlSurface> imgLoadXcfIo(Pointer<SdlIoStream> src) {
   final imgLoadXcfIoLookupFunction = libSdl3Image.lookupFunction<
-      Pointer<SdlSurface> Function(Pointer<SdlIoStream> src),
-      Pointer<SdlSurface> Function(Pointer<SdlIoStream> src)>('IMG_LoadXCF_IO');
+    Pointer<SdlSurface> Function(Pointer<SdlIoStream> src),
+    Pointer<SdlSurface> Function(Pointer<SdlIoStream> src)
+  >('IMG_LoadXCF_IO');
   return imgLoadXcfIoLookupFunction(src);
 }
 
@@ -2028,8 +2106,9 @@ Pointer<SdlSurface> imgLoadXcfIo(Pointer<SdlIoStream> src) {
 /// ```
 Pointer<SdlSurface> imgLoadXpmIo(Pointer<SdlIoStream> src) {
   final imgLoadXpmIoLookupFunction = libSdl3Image.lookupFunction<
-      Pointer<SdlSurface> Function(Pointer<SdlIoStream> src),
-      Pointer<SdlSurface> Function(Pointer<SdlIoStream> src)>('IMG_LoadXPM_IO');
+    Pointer<SdlSurface> Function(Pointer<SdlIoStream> src),
+    Pointer<SdlSurface> Function(Pointer<SdlIoStream> src)
+  >('IMG_LoadXPM_IO');
   return imgLoadXpmIoLookupFunction(src);
 }
 
@@ -2070,8 +2149,9 @@ Pointer<SdlSurface> imgLoadXpmIo(Pointer<SdlIoStream> src) {
 /// ```
 Pointer<SdlSurface> imgLoadXvIo(Pointer<SdlIoStream> src) {
   final imgLoadXvIoLookupFunction = libSdl3Image.lookupFunction<
-      Pointer<SdlSurface> Function(Pointer<SdlIoStream> src),
-      Pointer<SdlSurface> Function(Pointer<SdlIoStream> src)>('IMG_LoadXV_IO');
+    Pointer<SdlSurface> Function(Pointer<SdlIoStream> src),
+    Pointer<SdlSurface> Function(Pointer<SdlIoStream> src)
+  >('IMG_LoadXV_IO');
   return imgLoadXvIoLookupFunction(src);
 }
 
@@ -2112,9 +2192,9 @@ Pointer<SdlSurface> imgLoadXvIo(Pointer<SdlIoStream> src) {
 /// ```
 Pointer<SdlSurface> imgLoadWebpIo(Pointer<SdlIoStream> src) {
   final imgLoadWebpIoLookupFunction = libSdl3Image.lookupFunction<
-      Pointer<SdlSurface> Function(Pointer<SdlIoStream> src),
-      Pointer<SdlSurface> Function(
-          Pointer<SdlIoStream> src)>('IMG_LoadWEBP_IO');
+    Pointer<SdlSurface> Function(Pointer<SdlIoStream> src),
+    Pointer<SdlSurface> Function(Pointer<SdlIoStream> src)
+  >('IMG_LoadWEBP_IO');
   return imgLoadWebpIoLookupFunction(src);
 }
 
@@ -2141,12 +2221,22 @@ Pointer<SdlSurface> imgLoadWebpIo(Pointer<SdlIoStream> src) {
 /// extern SDL_DECLSPEC SDL_Surface * SDLCALL IMG_LoadSizedSVG_IO(SDL_IOStream *src, int width, int height)
 /// ```
 Pointer<SdlSurface> imgLoadSizedSvgIo(
-    Pointer<SdlIoStream> src, int width, int height) {
+  Pointer<SdlIoStream> src,
+  int width,
+  int height,
+) {
   final imgLoadSizedSvgIoLookupFunction = libSdl3Image.lookupFunction<
-      Pointer<SdlSurface> Function(
-          Pointer<SdlIoStream> src, Int32 width, Int32 height),
-      Pointer<SdlSurface> Function(Pointer<SdlIoStream> src, int width,
-          int height)>('IMG_LoadSizedSVG_IO');
+    Pointer<SdlSurface> Function(
+      Pointer<SdlIoStream> src,
+      Int32 width,
+      Int32 height,
+    ),
+    Pointer<SdlSurface> Function(
+      Pointer<SdlIoStream> src,
+      int width,
+      int height,
+    )
+  >('IMG_LoadSizedSVG_IO');
   return imgLoadSizedSvgIoLookupFunction(src, width, height);
 }
 
@@ -2172,9 +2262,9 @@ Pointer<SdlSurface> imgLoadSizedSvgIo(
 /// ```
 Pointer<SdlSurface> imgReadXpmFromArray(Pointer<Pointer<Int8>> xpm) {
   final imgReadXpmFromArrayLookupFunction = libSdl3Image.lookupFunction<
-      Pointer<SdlSurface> Function(Pointer<Pointer<Int8>> xpm),
-      Pointer<SdlSurface> Function(
-          Pointer<Pointer<Int8>> xpm)>('IMG_ReadXPMFromArray');
+    Pointer<SdlSurface> Function(Pointer<Pointer<Int8>> xpm),
+    Pointer<SdlSurface> Function(Pointer<Pointer<Int8>> xpm)
+  >('IMG_ReadXPMFromArray');
   return imgReadXpmFromArrayLookupFunction(xpm);
 }
 
@@ -2200,9 +2290,9 @@ Pointer<SdlSurface> imgReadXpmFromArray(Pointer<Pointer<Int8>> xpm) {
 /// ```
 Pointer<SdlSurface> imgReadXpmFromArrayToRgb888(Pointer<Pointer<Int8>> xpm) {
   final imgReadXpmFromArrayToRgb888LookupFunction = libSdl3Image.lookupFunction<
-      Pointer<SdlSurface> Function(Pointer<Pointer<Int8>> xpm),
-      Pointer<SdlSurface> Function(
-          Pointer<Pointer<Int8>> xpm)>('IMG_ReadXPMFromArrayToRGB888');
+    Pointer<SdlSurface> Function(Pointer<Pointer<Int8>> xpm),
+    Pointer<SdlSurface> Function(Pointer<Pointer<Int8>> xpm)
+  >('IMG_ReadXPMFromArrayToRGB888');
   return imgReadXpmFromArrayToRgb888LookupFunction(xpm);
 }
 
@@ -2227,10 +2317,13 @@ Pointer<SdlSurface> imgReadXpmFromArrayToRgb888(Pointer<Pointer<Int8>> xpm) {
 /// ```
 bool imgSaveAvif(Pointer<SdlSurface> surface, String? file, int quality) {
   final imgSaveAvifLookupFunction = libSdl3Image.lookupFunction<
-      Uint8 Function(
-          Pointer<SdlSurface> surface, Pointer<Utf8> file, Int32 quality),
-      int Function(Pointer<SdlSurface> surface, Pointer<Utf8> file,
-          int quality)>('IMG_SaveAVIF');
+    Uint8 Function(
+      Pointer<SdlSurface> surface,
+      Pointer<Utf8> file,
+      Int32 quality,
+    ),
+    int Function(Pointer<SdlSurface> surface, Pointer<Utf8> file, int quality)
+  >('IMG_SaveAVIF');
   final filePointer = file != null ? file.toNativeUtf8() : nullptr;
   final result = imgSaveAvifLookupFunction(surface, filePointer, quality) == 1;
   calloc.free(filePointer);
@@ -2261,13 +2354,26 @@ bool imgSaveAvif(Pointer<SdlSurface> surface, String? file, int quality) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL IMG_SaveAVIF_IO(SDL_Surface *surface, SDL_IOStream *dst, bool closeio, int quality)
 /// ```
-bool imgSaveAvifIo(Pointer<SdlSurface> surface, Pointer<SdlIoStream> dst,
-    bool closeio, int quality) {
+bool imgSaveAvifIo(
+  Pointer<SdlSurface> surface,
+  Pointer<SdlIoStream> dst,
+  bool closeio,
+  int quality,
+) {
   final imgSaveAvifIoLookupFunction = libSdl3Image.lookupFunction<
-      Uint8 Function(Pointer<SdlSurface> surface, Pointer<SdlIoStream> dst,
-          Uint8 closeio, Int32 quality),
-      int Function(Pointer<SdlSurface> surface, Pointer<SdlIoStream> dst,
-          int closeio, int quality)>('IMG_SaveAVIF_IO');
+    Uint8 Function(
+      Pointer<SdlSurface> surface,
+      Pointer<SdlIoStream> dst,
+      Uint8 closeio,
+      Int32 quality,
+    ),
+    int Function(
+      Pointer<SdlSurface> surface,
+      Pointer<SdlIoStream> dst,
+      int closeio,
+      int quality,
+    )
+  >('IMG_SaveAVIF_IO');
   return imgSaveAvifIoLookupFunction(surface, dst, closeio ? 1 : 0, quality) ==
       1;
 }
@@ -2291,9 +2397,9 @@ bool imgSaveAvifIo(Pointer<SdlSurface> surface, Pointer<SdlIoStream> dst,
 /// ```
 bool imgSavePng(Pointer<SdlSurface> surface, String? file) {
   final imgSavePngLookupFunction = libSdl3Image.lookupFunction<
-      Uint8 Function(Pointer<SdlSurface> surface, Pointer<Utf8> file),
-      int Function(
-          Pointer<SdlSurface> surface, Pointer<Utf8> file)>('IMG_SavePNG');
+    Uint8 Function(Pointer<SdlSurface> surface, Pointer<Utf8> file),
+    int Function(Pointer<SdlSurface> surface, Pointer<Utf8> file)
+  >('IMG_SavePNG');
   final filePointer = file != null ? file.toNativeUtf8() : nullptr;
   final result = imgSavePngLookupFunction(surface, filePointer) == 1;
   calloc.free(filePointer);
@@ -2323,12 +2429,22 @@ bool imgSavePng(Pointer<SdlSurface> surface, String? file) {
 /// extern SDL_DECLSPEC bool SDLCALL IMG_SavePNG_IO(SDL_Surface *surface, SDL_IOStream *dst, bool closeio)
 /// ```
 bool imgSavePngIo(
-    Pointer<SdlSurface> surface, Pointer<SdlIoStream> dst, bool closeio) {
+  Pointer<SdlSurface> surface,
+  Pointer<SdlIoStream> dst,
+  bool closeio,
+) {
   final imgSavePngIoLookupFunction = libSdl3Image.lookupFunction<
-      Uint8 Function(
-          Pointer<SdlSurface> surface, Pointer<SdlIoStream> dst, Uint8 closeio),
-      int Function(Pointer<SdlSurface> surface, Pointer<SdlIoStream> dst,
-          int closeio)>('IMG_SavePNG_IO');
+    Uint8 Function(
+      Pointer<SdlSurface> surface,
+      Pointer<SdlIoStream> dst,
+      Uint8 closeio,
+    ),
+    int Function(
+      Pointer<SdlSurface> surface,
+      Pointer<SdlIoStream> dst,
+      int closeio,
+    )
+  >('IMG_SavePNG_IO');
   return imgSavePngIoLookupFunction(surface, dst, closeio ? 1 : 0) == 1;
 }
 
@@ -2353,10 +2469,13 @@ bool imgSavePngIo(
 /// ```
 bool imgSaveJpg(Pointer<SdlSurface> surface, String? file, int quality) {
   final imgSaveJpgLookupFunction = libSdl3Image.lookupFunction<
-      Uint8 Function(
-          Pointer<SdlSurface> surface, Pointer<Utf8> file, Int32 quality),
-      int Function(Pointer<SdlSurface> surface, Pointer<Utf8> file,
-          int quality)>('IMG_SaveJPG');
+    Uint8 Function(
+      Pointer<SdlSurface> surface,
+      Pointer<Utf8> file,
+      Int32 quality,
+    ),
+    int Function(Pointer<SdlSurface> surface, Pointer<Utf8> file, int quality)
+  >('IMG_SaveJPG');
   final filePointer = file != null ? file.toNativeUtf8() : nullptr;
   final result = imgSaveJpgLookupFunction(surface, filePointer, quality) == 1;
   calloc.free(filePointer);
@@ -2387,13 +2506,26 @@ bool imgSaveJpg(Pointer<SdlSurface> surface, String? file, int quality) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL IMG_SaveJPG_IO(SDL_Surface *surface, SDL_IOStream *dst, bool closeio, int quality)
 /// ```
-bool imgSaveJpgIo(Pointer<SdlSurface> surface, Pointer<SdlIoStream> dst,
-    bool closeio, int quality) {
+bool imgSaveJpgIo(
+  Pointer<SdlSurface> surface,
+  Pointer<SdlIoStream> dst,
+  bool closeio,
+  int quality,
+) {
   final imgSaveJpgIoLookupFunction = libSdl3Image.lookupFunction<
-      Uint8 Function(Pointer<SdlSurface> surface, Pointer<SdlIoStream> dst,
-          Uint8 closeio, Int32 quality),
-      int Function(Pointer<SdlSurface> surface, Pointer<SdlIoStream> dst,
-          int closeio, int quality)>('IMG_SaveJPG_IO');
+    Uint8 Function(
+      Pointer<SdlSurface> surface,
+      Pointer<SdlIoStream> dst,
+      Uint8 closeio,
+      Int32 quality,
+    ),
+    int Function(
+      Pointer<SdlSurface> surface,
+      Pointer<SdlIoStream> dst,
+      int closeio,
+      int quality,
+    )
+  >('IMG_SaveJPG_IO');
   return imgSaveJpgIoLookupFunction(surface, dst, closeio ? 1 : 0, quality) ==
       1;
 }
@@ -2416,8 +2548,9 @@ bool imgSaveJpgIo(Pointer<SdlSurface> surface, Pointer<SdlIoStream> dst,
 /// ```
 Pointer<ImgAnimation> imgLoadAnimation(String? file) {
   final imgLoadAnimationLookupFunction = libSdl3Image.lookupFunction<
-      Pointer<ImgAnimation> Function(Pointer<Utf8> file),
-      Pointer<ImgAnimation> Function(Pointer<Utf8> file)>('IMG_LoadAnimation');
+    Pointer<ImgAnimation> Function(Pointer<Utf8> file),
+    Pointer<ImgAnimation> Function(Pointer<Utf8> file)
+  >('IMG_LoadAnimation');
   final filePointer = file != null ? file.toNativeUtf8() : nullptr;
   final result = imgLoadAnimationLookupFunction(filePointer);
   calloc.free(filePointer);
@@ -2447,11 +2580,13 @@ Pointer<ImgAnimation> imgLoadAnimation(String? file) {
 /// extern SDL_DECLSPEC IMG_Animation * SDLCALL IMG_LoadAnimation_IO(SDL_IOStream *src, bool closeio)
 /// ```
 Pointer<ImgAnimation> imgLoadAnimationIo(
-    Pointer<SdlIoStream> src, bool closeio) {
+  Pointer<SdlIoStream> src,
+  bool closeio,
+) {
   final imgLoadAnimationIoLookupFunction = libSdl3Image.lookupFunction<
-      Pointer<ImgAnimation> Function(Pointer<SdlIoStream> src, Uint8 closeio),
-      Pointer<ImgAnimation> Function(
-          Pointer<SdlIoStream> src, int closeio)>('IMG_LoadAnimation_IO');
+    Pointer<ImgAnimation> Function(Pointer<SdlIoStream> src, Uint8 closeio),
+    Pointer<ImgAnimation> Function(Pointer<SdlIoStream> src, int closeio)
+  >('IMG_LoadAnimation_IO');
   return imgLoadAnimationIoLookupFunction(src, closeio ? 1 : 0);
 }
 
@@ -2487,15 +2622,28 @@ Pointer<ImgAnimation> imgLoadAnimationIo(
 /// extern SDL_DECLSPEC IMG_Animation * SDLCALL IMG_LoadAnimationTyped_IO(SDL_IOStream *src, bool closeio, const char *type)
 /// ```
 Pointer<ImgAnimation> imgLoadAnimationTypedIo(
-    Pointer<SdlIoStream> src, bool closeio, String? type) {
+  Pointer<SdlIoStream> src,
+  bool closeio,
+  String? type,
+) {
   final imgLoadAnimationTypedIoLookupFunction = libSdl3Image.lookupFunction<
-      Pointer<ImgAnimation> Function(
-          Pointer<SdlIoStream> src, Uint8 closeio, Pointer<Utf8> type),
-      Pointer<ImgAnimation> Function(Pointer<SdlIoStream> src, int closeio,
-          Pointer<Utf8> type)>('IMG_LoadAnimationTyped_IO');
+    Pointer<ImgAnimation> Function(
+      Pointer<SdlIoStream> src,
+      Uint8 closeio,
+      Pointer<Utf8> type,
+    ),
+    Pointer<ImgAnimation> Function(
+      Pointer<SdlIoStream> src,
+      int closeio,
+      Pointer<Utf8> type,
+    )
+  >('IMG_LoadAnimationTyped_IO');
   final typePointer = type != null ? type.toNativeUtf8() : nullptr;
-  final result =
-      imgLoadAnimationTypedIoLookupFunction(src, closeio ? 1 : 0, typePointer);
+  final result = imgLoadAnimationTypedIoLookupFunction(
+    src,
+    closeio ? 1 : 0,
+    typePointer,
+  );
   calloc.free(typePointer);
   return result;
 }
@@ -2518,8 +2666,9 @@ Pointer<ImgAnimation> imgLoadAnimationTypedIo(
 /// ```
 void imgFreeAnimation(Pointer<ImgAnimation> anim) {
   final imgFreeAnimationLookupFunction = libSdl3Image.lookupFunction<
-      Void Function(Pointer<ImgAnimation> anim),
-      void Function(Pointer<ImgAnimation> anim)>('IMG_FreeAnimation');
+    Void Function(Pointer<ImgAnimation> anim),
+    void Function(Pointer<ImgAnimation> anim)
+  >('IMG_FreeAnimation');
   return imgFreeAnimationLookupFunction(anim);
 }
 
@@ -2546,9 +2695,9 @@ void imgFreeAnimation(Pointer<ImgAnimation> anim) {
 /// ```
 Pointer<ImgAnimation> imgLoadGifAnimationIo(Pointer<SdlIoStream> src) {
   final imgLoadGifAnimationIoLookupFunction = libSdl3Image.lookupFunction<
-      Pointer<ImgAnimation> Function(Pointer<SdlIoStream> src),
-      Pointer<ImgAnimation> Function(
-          Pointer<SdlIoStream> src)>('IMG_LoadGIFAnimation_IO');
+    Pointer<ImgAnimation> Function(Pointer<SdlIoStream> src),
+    Pointer<ImgAnimation> Function(Pointer<SdlIoStream> src)
+  >('IMG_LoadGIFAnimation_IO');
   return imgLoadGifAnimationIoLookupFunction(src);
 }
 
@@ -2575,8 +2724,8 @@ Pointer<ImgAnimation> imgLoadGifAnimationIo(Pointer<SdlIoStream> src) {
 /// ```
 Pointer<ImgAnimation> imgLoadWebpAnimationIo(Pointer<SdlIoStream> src) {
   final imgLoadWebpAnimationIoLookupFunction = libSdl3Image.lookupFunction<
-      Pointer<ImgAnimation> Function(Pointer<SdlIoStream> src),
-      Pointer<ImgAnimation> Function(
-          Pointer<SdlIoStream> src)>('IMG_LoadWEBPAnimation_IO');
+    Pointer<ImgAnimation> Function(Pointer<SdlIoStream> src),
+    Pointer<ImgAnimation> Function(Pointer<SdlIoStream> src)
+  >('IMG_LoadWEBPAnimation_IO');
   return imgLoadWebpAnimationIoLookupFunction(src);
 }

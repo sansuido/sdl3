@@ -24,11 +24,19 @@ int main() {
   }
   // blend mode as SDL_BLENDMODE_ADD, imported from a file or something
   var lightsLayer = renderer.createTexture(
-      SdlkPixelformat.rgba8888, SdlkTextureaccess.target, 640, 480);
+    SdlkPixelformat.rgba8888,
+    SdlkTextureaccess.target,
+    640,
+    480,
+  );
   lightsLayer.setBlendMode(SdlkBlendmode.add);
   // blend mode as SDL_BLENDMODE_MOD, should be created with SDL_CreateTexture with SDL_TEXTUREACCESS_TARGET
   var shadowLayer = renderer.createTexture(
-      SdlkPixelformat.rgba8888, SdlkTextureaccess.target, 640, 480);
+    SdlkPixelformat.rgba8888,
+    SdlkTextureaccess.target,
+    640,
+    480,
+  );
   shadowLayer.setBlendMode(SdlkBlendmode.mod);
   // "game" graphics rendered
   var bgSurface = imgLoad('assets/jap/gate.png');
@@ -71,8 +79,11 @@ int main() {
       renderer.clear();
       var size = math.Point<double>(200, 200);
       var position = PointEx.getMousePosition();
-      renderer.textureRotated(lightTexture,
-          dstrect: RectangleEx.fromCenter(position, size), angle: angle);
+      renderer.textureRotated(
+        lightTexture,
+        dstrect: RectangleEx.fromCenter(position, size),
+        angle: angle,
+      );
       angle += 0.1;
       renderer.setTarget(nullptr);
     }

@@ -22,9 +22,9 @@ import 'struct_sdl.dart';
 /// ```
 bool sdlGpuSupportsShaderFormats(int formatFlags, String? name) {
   final sdlGpuSupportsShaderFormatsLookupFunction = libSdl3.lookupFunction<
-      Uint8 Function(Uint32 formatFlags, Pointer<Utf8> name),
-      int Function(
-          int formatFlags, Pointer<Utf8> name)>('SDL_GPUSupportsShaderFormats');
+    Uint8 Function(Uint32 formatFlags, Pointer<Utf8> name),
+    int Function(int formatFlags, Pointer<Utf8> name)
+  >('SDL_GPUSupportsShaderFormats');
   final namePointer = name != null ? name.toNativeUtf8() : nullptr;
   final result =
       sdlGpuSupportsShaderFormatsLookupFunction(formatFlags, namePointer) == 1;
@@ -46,9 +46,10 @@ bool sdlGpuSupportsShaderFormats(int formatFlags, String? name) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GPUSupportsProperties( SDL_PropertiesID props)
 /// ```
 bool sdlGpuSupportsProperties(int props) {
-  final sdlGpuSupportsPropertiesLookupFunction = libSdl3.lookupFunction<
-      Uint8 Function(Uint32 props),
-      int Function(int props)>('SDL_GPUSupportsProperties');
+  final sdlGpuSupportsPropertiesLookupFunction = libSdl3
+      .lookupFunction<Uint8 Function(Uint32 props), int Function(int props)>(
+        'SDL_GPUSupportsProperties',
+      );
   return sdlGpuSupportsPropertiesLookupFunction(props) == 1;
 }
 
@@ -74,15 +75,28 @@ bool sdlGpuSupportsProperties(int props) {
 /// extern SDL_DECLSPEC SDL_GPUDevice * SDLCALL SDL_CreateGPUDevice( SDL_GPUShaderFormat format_flags, bool debug_mode, const char *name)
 /// ```
 Pointer<SdlGpuDevice> sdlCreateGpuDevice(
-    int formatFlags, bool debugMode, String? name) {
+  int formatFlags,
+  bool debugMode,
+  String? name,
+) {
   final sdlCreateGpuDeviceLookupFunction = libSdl3.lookupFunction<
-      Pointer<SdlGpuDevice> Function(
-          Uint32 formatFlags, Uint8 debugMode, Pointer<Utf8> name),
-      Pointer<SdlGpuDevice> Function(int formatFlags, int debugMode,
-          Pointer<Utf8> name)>('SDL_CreateGPUDevice');
+    Pointer<SdlGpuDevice> Function(
+      Uint32 formatFlags,
+      Uint8 debugMode,
+      Pointer<Utf8> name,
+    ),
+    Pointer<SdlGpuDevice> Function(
+      int formatFlags,
+      int debugMode,
+      Pointer<Utf8> name,
+    )
+  >('SDL_CreateGPUDevice');
   final namePointer = name != null ? name.toNativeUtf8() : nullptr;
   final result = sdlCreateGpuDeviceLookupFunction(
-      formatFlags, debugMode ? 1 : 0, namePointer);
+    formatFlags,
+    debugMode ? 1 : 0,
+    namePointer,
+  );
   calloc.free(namePointer);
   return result;
 }
@@ -135,9 +149,9 @@ Pointer<SdlGpuDevice> sdlCreateGpuDevice(
 /// ```
 Pointer<SdlGpuDevice> sdlCreateGpuDeviceWithProperties(int props) {
   final sdlCreateGpuDeviceWithPropertiesLookupFunction = libSdl3.lookupFunction<
-      Pointer<SdlGpuDevice> Function(Uint32 props),
-      Pointer<SdlGpuDevice> Function(
-          int props)>('SDL_CreateGPUDeviceWithProperties');
+    Pointer<SdlGpuDevice> Function(Uint32 props),
+    Pointer<SdlGpuDevice> Function(int props)
+  >('SDL_CreateGPUDeviceWithProperties');
   return sdlCreateGpuDeviceWithPropertiesLookupFunction(props);
 }
 
@@ -155,8 +169,9 @@ Pointer<SdlGpuDevice> sdlCreateGpuDeviceWithProperties(int props) {
 /// ```
 void sdlDestroyGpuDevice(Pointer<SdlGpuDevice> device) {
   final sdlDestroyGpuDeviceLookupFunction = libSdl3.lookupFunction<
-      Void Function(Pointer<SdlGpuDevice> device),
-      void Function(Pointer<SdlGpuDevice> device)>('SDL_DestroyGPUDevice');
+    Void Function(Pointer<SdlGpuDevice> device),
+    void Function(Pointer<SdlGpuDevice> device)
+  >('SDL_DestroyGPUDevice');
   return sdlDestroyGpuDeviceLookupFunction(device);
 }
 
@@ -200,8 +215,9 @@ int sdlGetNumGpuDrivers() {
 /// ```
 String? sdlGetGpuDriver(int index) {
   final sdlGetGpuDriverLookupFunction = libSdl3.lookupFunction<
-      Pointer<Utf8> Function(Int32 index),
-      Pointer<Utf8> Function(int index)>('SDL_GetGPUDriver');
+    Pointer<Utf8> Function(Int32 index),
+    Pointer<Utf8> Function(int index)
+  >('SDL_GetGPUDriver');
   final result = sdlGetGpuDriverLookupFunction(index);
   if (result == nullptr) {
     return null;
@@ -222,9 +238,9 @@ String? sdlGetGpuDriver(int index) {
 /// ```
 String? sdlGetGpuDeviceDriver(Pointer<SdlGpuDevice> device) {
   final sdlGetGpuDeviceDriverLookupFunction = libSdl3.lookupFunction<
-      Pointer<Utf8> Function(Pointer<SdlGpuDevice> device),
-      Pointer<Utf8> Function(
-          Pointer<SdlGpuDevice> device)>('SDL_GetGPUDeviceDriver');
+    Pointer<Utf8> Function(Pointer<SdlGpuDevice> device),
+    Pointer<Utf8> Function(Pointer<SdlGpuDevice> device)
+  >('SDL_GetGPUDeviceDriver');
   final result = sdlGetGpuDeviceDriverLookupFunction(device);
   if (result == nullptr) {
     return null;
@@ -246,8 +262,9 @@ String? sdlGetGpuDeviceDriver(Pointer<SdlGpuDevice> device) {
 /// ```
 int sdlGetGpuShaderFormats(Pointer<SdlGpuDevice> device) {
   final sdlGetGpuShaderFormatsLookupFunction = libSdl3.lookupFunction<
-      Uint32 Function(Pointer<SdlGpuDevice> device),
-      int Function(Pointer<SdlGpuDevice> device)>('SDL_GetGPUShaderFormats');
+    Uint32 Function(Pointer<SdlGpuDevice> device),
+    int Function(Pointer<SdlGpuDevice> device)
+  >('SDL_GetGPUShaderFormats');
   return sdlGetGpuShaderFormatsLookupFunction(device);
 }
 
@@ -300,14 +317,19 @@ int sdlGetGpuShaderFormats(Pointer<SdlGpuDevice> device) {
 /// extern SDL_DECLSPEC SDL_GPUComputePipeline * SDLCALL SDL_CreateGPUComputePipeline( SDL_GPUDevice *device, const SDL_GPUComputePipelineCreateInfo *createinfo)
 /// ```
 Pointer<SdlGpuComputePipeline> sdlCreateGpuComputePipeline(
-    Pointer<SdlGpuDevice> device,
-    Pointer<SdlGpuComputePipelineCreateInfo> createinfo) {
+  Pointer<SdlGpuDevice> device,
+  Pointer<SdlGpuComputePipelineCreateInfo> createinfo,
+) {
   final sdlCreateGpuComputePipelineLookupFunction = libSdl3.lookupFunction<
-          Pointer<SdlGpuComputePipeline> Function(Pointer<SdlGpuDevice> device,
-              Pointer<SdlGpuComputePipelineCreateInfo> createinfo),
-          Pointer<SdlGpuComputePipeline> Function(Pointer<SdlGpuDevice> device,
-              Pointer<SdlGpuComputePipelineCreateInfo> createinfo)>(
-      'SDL_CreateGPUComputePipeline');
+    Pointer<SdlGpuComputePipeline> Function(
+      Pointer<SdlGpuDevice> device,
+      Pointer<SdlGpuComputePipelineCreateInfo> createinfo,
+    ),
+    Pointer<SdlGpuComputePipeline> Function(
+      Pointer<SdlGpuDevice> device,
+      Pointer<SdlGpuComputePipelineCreateInfo> createinfo,
+    )
+  >('SDL_CreateGPUComputePipeline');
   return sdlCreateGpuComputePipelineLookupFunction(device, createinfo);
 }
 
@@ -336,14 +358,19 @@ Pointer<SdlGpuComputePipeline> sdlCreateGpuComputePipeline(
 /// extern SDL_DECLSPEC SDL_GPUGraphicsPipeline * SDLCALL SDL_CreateGPUGraphicsPipeline( SDL_GPUDevice *device, const SDL_GPUGraphicsPipelineCreateInfo *createinfo)
 /// ```
 Pointer<SdlGpuGraphicsPipeline> sdlCreateGpuGraphicsPipeline(
-    Pointer<SdlGpuDevice> device,
-    Pointer<SdlGpuGraphicsPipelineCreateInfo> createinfo) {
+  Pointer<SdlGpuDevice> device,
+  Pointer<SdlGpuGraphicsPipelineCreateInfo> createinfo,
+) {
   final sdlCreateGpuGraphicsPipelineLookupFunction = libSdl3.lookupFunction<
-          Pointer<SdlGpuGraphicsPipeline> Function(Pointer<SdlGpuDevice> device,
-              Pointer<SdlGpuGraphicsPipelineCreateInfo> createinfo),
-          Pointer<SdlGpuGraphicsPipeline> Function(Pointer<SdlGpuDevice> device,
-              Pointer<SdlGpuGraphicsPipelineCreateInfo> createinfo)>(
-      'SDL_CreateGPUGraphicsPipeline');
+    Pointer<SdlGpuGraphicsPipeline> Function(
+      Pointer<SdlGpuDevice> device,
+      Pointer<SdlGpuGraphicsPipelineCreateInfo> createinfo,
+    ),
+    Pointer<SdlGpuGraphicsPipeline> Function(
+      Pointer<SdlGpuDevice> device,
+      Pointer<SdlGpuGraphicsPipelineCreateInfo> createinfo,
+    )
+  >('SDL_CreateGPUGraphicsPipeline');
   return sdlCreateGpuGraphicsPipelineLookupFunction(device, createinfo);
 }
 
@@ -372,12 +399,19 @@ Pointer<SdlGpuGraphicsPipeline> sdlCreateGpuGraphicsPipeline(
 /// extern SDL_DECLSPEC SDL_GPUSampler * SDLCALL SDL_CreateGPUSampler( SDL_GPUDevice *device, const SDL_GPUSamplerCreateInfo *createinfo)
 /// ```
 Pointer<SdlGpuSampler> sdlCreateGpuSampler(
-    Pointer<SdlGpuDevice> device, Pointer<SdlGpuSamplerCreateInfo> createinfo) {
+  Pointer<SdlGpuDevice> device,
+  Pointer<SdlGpuSamplerCreateInfo> createinfo,
+) {
   final sdlCreateGpuSamplerLookupFunction = libSdl3.lookupFunction<
-      Pointer<SdlGpuSampler> Function(Pointer<SdlGpuDevice> device,
-          Pointer<SdlGpuSamplerCreateInfo> createinfo),
-      Pointer<SdlGpuSampler> Function(Pointer<SdlGpuDevice> device,
-          Pointer<SdlGpuSamplerCreateInfo> createinfo)>('SDL_CreateGPUSampler');
+    Pointer<SdlGpuSampler> Function(
+      Pointer<SdlGpuDevice> device,
+      Pointer<SdlGpuSamplerCreateInfo> createinfo,
+    ),
+    Pointer<SdlGpuSampler> Function(
+      Pointer<SdlGpuDevice> device,
+      Pointer<SdlGpuSamplerCreateInfo> createinfo,
+    )
+  >('SDL_CreateGPUSampler');
   return sdlCreateGpuSamplerLookupFunction(device, createinfo);
 }
 
@@ -458,12 +492,19 @@ Pointer<SdlGpuSampler> sdlCreateGpuSampler(
 /// extern SDL_DECLSPEC SDL_GPUShader * SDLCALL SDL_CreateGPUShader( SDL_GPUDevice *device, const SDL_GPUShaderCreateInfo *createinfo)
 /// ```
 Pointer<SdlGpuShader> sdlCreateGpuShader(
-    Pointer<SdlGpuDevice> device, Pointer<SdlGpuShaderCreateInfo> createinfo) {
+  Pointer<SdlGpuDevice> device,
+  Pointer<SdlGpuShaderCreateInfo> createinfo,
+) {
   final sdlCreateGpuShaderLookupFunction = libSdl3.lookupFunction<
-      Pointer<SdlGpuShader> Function(Pointer<SdlGpuDevice> device,
-          Pointer<SdlGpuShaderCreateInfo> createinfo),
-      Pointer<SdlGpuShader> Function(Pointer<SdlGpuDevice> device,
-          Pointer<SdlGpuShaderCreateInfo> createinfo)>('SDL_CreateGPUShader');
+    Pointer<SdlGpuShader> Function(
+      Pointer<SdlGpuDevice> device,
+      Pointer<SdlGpuShaderCreateInfo> createinfo,
+    ),
+    Pointer<SdlGpuShader> Function(
+      Pointer<SdlGpuDevice> device,
+      Pointer<SdlGpuShaderCreateInfo> createinfo,
+    )
+  >('SDL_CreateGPUShader');
   return sdlCreateGpuShaderLookupFunction(device, createinfo);
 }
 
@@ -526,12 +567,19 @@ Pointer<SdlGpuShader> sdlCreateGpuShader(
 /// extern SDL_DECLSPEC SDL_GPUTexture * SDLCALL SDL_CreateGPUTexture( SDL_GPUDevice *device, const SDL_GPUTextureCreateInfo *createinfo)
 /// ```
 Pointer<SdlGpuTexture> sdlCreateGpuTexture(
-    Pointer<SdlGpuDevice> device, Pointer<SdlGpuTextureCreateInfo> createinfo) {
+  Pointer<SdlGpuDevice> device,
+  Pointer<SdlGpuTextureCreateInfo> createinfo,
+) {
   final sdlCreateGpuTextureLookupFunction = libSdl3.lookupFunction<
-      Pointer<SdlGpuTexture> Function(Pointer<SdlGpuDevice> device,
-          Pointer<SdlGpuTextureCreateInfo> createinfo),
-      Pointer<SdlGpuTexture> Function(Pointer<SdlGpuDevice> device,
-          Pointer<SdlGpuTextureCreateInfo> createinfo)>('SDL_CreateGPUTexture');
+    Pointer<SdlGpuTexture> Function(
+      Pointer<SdlGpuDevice> device,
+      Pointer<SdlGpuTextureCreateInfo> createinfo,
+    ),
+    Pointer<SdlGpuTexture> Function(
+      Pointer<SdlGpuDevice> device,
+      Pointer<SdlGpuTextureCreateInfo> createinfo,
+    )
+  >('SDL_CreateGPUTexture');
   return sdlCreateGpuTextureLookupFunction(device, createinfo);
 }
 
@@ -583,12 +631,19 @@ Pointer<SdlGpuTexture> sdlCreateGpuTexture(
 /// extern SDL_DECLSPEC SDL_GPUBuffer * SDLCALL SDL_CreateGPUBuffer( SDL_GPUDevice *device, const SDL_GPUBufferCreateInfo *createinfo)
 /// ```
 Pointer<SdlGpuBuffer> sdlCreateGpuBuffer(
-    Pointer<SdlGpuDevice> device, Pointer<SdlGpuBufferCreateInfo> createinfo) {
+  Pointer<SdlGpuDevice> device,
+  Pointer<SdlGpuBufferCreateInfo> createinfo,
+) {
   final sdlCreateGpuBufferLookupFunction = libSdl3.lookupFunction<
-      Pointer<SdlGpuBuffer> Function(Pointer<SdlGpuDevice> device,
-          Pointer<SdlGpuBufferCreateInfo> createinfo),
-      Pointer<SdlGpuBuffer> Function(Pointer<SdlGpuDevice> device,
-          Pointer<SdlGpuBufferCreateInfo> createinfo)>('SDL_CreateGPUBuffer');
+    Pointer<SdlGpuBuffer> Function(
+      Pointer<SdlGpuDevice> device,
+      Pointer<SdlGpuBufferCreateInfo> createinfo,
+    ),
+    Pointer<SdlGpuBuffer> Function(
+      Pointer<SdlGpuDevice> device,
+      Pointer<SdlGpuBufferCreateInfo> createinfo,
+    )
+  >('SDL_CreateGPUBuffer');
   return sdlCreateGpuBufferLookupFunction(device, createinfo);
 }
 
@@ -623,14 +678,19 @@ Pointer<SdlGpuBuffer> sdlCreateGpuBuffer(
 /// extern SDL_DECLSPEC SDL_GPUTransferBuffer * SDLCALL SDL_CreateGPUTransferBuffer( SDL_GPUDevice *device, const SDL_GPUTransferBufferCreateInfo *createinfo)
 /// ```
 Pointer<SdlGpuTransferBuffer> sdlCreateGpuTransferBuffer(
-    Pointer<SdlGpuDevice> device,
-    Pointer<SdlGpuTransferBufferCreateInfo> createinfo) {
+  Pointer<SdlGpuDevice> device,
+  Pointer<SdlGpuTransferBufferCreateInfo> createinfo,
+) {
   final sdlCreateGpuTransferBufferLookupFunction = libSdl3.lookupFunction<
-          Pointer<SdlGpuTransferBuffer> Function(Pointer<SdlGpuDevice> device,
-              Pointer<SdlGpuTransferBufferCreateInfo> createinfo),
-          Pointer<SdlGpuTransferBuffer> Function(Pointer<SdlGpuDevice> device,
-              Pointer<SdlGpuTransferBufferCreateInfo> createinfo)>(
-      'SDL_CreateGPUTransferBuffer');
+    Pointer<SdlGpuTransferBuffer> Function(
+      Pointer<SdlGpuDevice> device,
+      Pointer<SdlGpuTransferBufferCreateInfo> createinfo,
+    ),
+    Pointer<SdlGpuTransferBuffer> Function(
+      Pointer<SdlGpuDevice> device,
+      Pointer<SdlGpuTransferBufferCreateInfo> createinfo,
+    )
+  >('SDL_CreateGPUTransferBuffer');
   return sdlCreateGpuTransferBufferLookupFunction(device, createinfo);
 }
 
@@ -655,12 +715,22 @@ Pointer<SdlGpuTransferBuffer> sdlCreateGpuTransferBuffer(
 /// extern SDL_DECLSPEC void SDLCALL SDL_SetGPUBufferName( SDL_GPUDevice *device, SDL_GPUBuffer *buffer, const char *text)
 /// ```
 void sdlSetGpuBufferName(
-    Pointer<SdlGpuDevice> device, Pointer<SdlGpuBuffer> buffer, String? text) {
+  Pointer<SdlGpuDevice> device,
+  Pointer<SdlGpuBuffer> buffer,
+  String? text,
+) {
   final sdlSetGpuBufferNameLookupFunction = libSdl3.lookupFunction<
-      Void Function(Pointer<SdlGpuDevice> device, Pointer<SdlGpuBuffer> buffer,
-          Pointer<Utf8> text),
-      void Function(Pointer<SdlGpuDevice> device, Pointer<SdlGpuBuffer> buffer,
-          Pointer<Utf8> text)>('SDL_SetGPUBufferName');
+    Void Function(
+      Pointer<SdlGpuDevice> device,
+      Pointer<SdlGpuBuffer> buffer,
+      Pointer<Utf8> text,
+    ),
+    void Function(
+      Pointer<SdlGpuDevice> device,
+      Pointer<SdlGpuBuffer> buffer,
+      Pointer<Utf8> text,
+    )
+  >('SDL_SetGPUBufferName');
   final textPointer = text != null ? text.toNativeUtf8() : nullptr;
   final result = sdlSetGpuBufferNameLookupFunction(device, buffer, textPointer);
   calloc.free(textPointer);
@@ -688,18 +758,29 @@ void sdlSetGpuBufferName(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_SetGPUTextureName( SDL_GPUDevice *device, SDL_GPUTexture *texture, const char *text)
 /// ```
-void sdlSetGpuTextureName(Pointer<SdlGpuDevice> device,
-    Pointer<SdlGpuTexture> texture, String? text) {
+void sdlSetGpuTextureName(
+  Pointer<SdlGpuDevice> device,
+  Pointer<SdlGpuTexture> texture,
+  String? text,
+) {
   final sdlSetGpuTextureNameLookupFunction = libSdl3.lookupFunction<
-      Void Function(Pointer<SdlGpuDevice> device,
-          Pointer<SdlGpuTexture> texture, Pointer<Utf8> text),
-      void Function(
-          Pointer<SdlGpuDevice> device,
-          Pointer<SdlGpuTexture> texture,
-          Pointer<Utf8> text)>('SDL_SetGPUTextureName');
+    Void Function(
+      Pointer<SdlGpuDevice> device,
+      Pointer<SdlGpuTexture> texture,
+      Pointer<Utf8> text,
+    ),
+    void Function(
+      Pointer<SdlGpuDevice> device,
+      Pointer<SdlGpuTexture> texture,
+      Pointer<Utf8> text,
+    )
+  >('SDL_SetGPUTextureName');
   final textPointer = text != null ? text.toNativeUtf8() : nullptr;
-  final result =
-      sdlSetGpuTextureNameLookupFunction(device, texture, textPointer);
+  final result = sdlSetGpuTextureNameLookupFunction(
+    device,
+    texture,
+    textPointer,
+  );
   calloc.free(textPointer);
   return result;
 }
@@ -718,15 +799,24 @@ void sdlSetGpuTextureName(Pointer<SdlGpuDevice> device,
 /// extern SDL_DECLSPEC void SDLCALL SDL_InsertGPUDebugLabel( SDL_GPUCommandBuffer *command_buffer, const char *text)
 /// ```
 void sdlInsertGpuDebugLabel(
-    Pointer<SdlGpuCommandBuffer> commandBuffer, String? text) {
+  Pointer<SdlGpuCommandBuffer> commandBuffer,
+  String? text,
+) {
   final sdlInsertGpuDebugLabelLookupFunction = libSdl3.lookupFunction<
-      Void Function(
-          Pointer<SdlGpuCommandBuffer> commandBuffer, Pointer<Utf8> text),
-      void Function(Pointer<SdlGpuCommandBuffer> commandBuffer,
-          Pointer<Utf8> text)>('SDL_InsertGPUDebugLabel');
+    Void Function(
+      Pointer<SdlGpuCommandBuffer> commandBuffer,
+      Pointer<Utf8> text,
+    ),
+    void Function(
+      Pointer<SdlGpuCommandBuffer> commandBuffer,
+      Pointer<Utf8> text,
+    )
+  >('SDL_InsertGPUDebugLabel');
   final textPointer = text != null ? text.toNativeUtf8() : nullptr;
-  final result =
-      sdlInsertGpuDebugLabelLookupFunction(commandBuffer, textPointer);
+  final result = sdlInsertGpuDebugLabelLookupFunction(
+    commandBuffer,
+    textPointer,
+  );
   calloc.free(textPointer);
   return result;
 }
@@ -756,12 +846,19 @@ void sdlInsertGpuDebugLabel(
 /// extern SDL_DECLSPEC void SDLCALL SDL_PushGPUDebugGroup( SDL_GPUCommandBuffer *command_buffer, const char *name)
 /// ```
 void sdlPushGpuDebugGroup(
-    Pointer<SdlGpuCommandBuffer> commandBuffer, String? name) {
+  Pointer<SdlGpuCommandBuffer> commandBuffer,
+  String? name,
+) {
   final sdlPushGpuDebugGroupLookupFunction = libSdl3.lookupFunction<
-      Void Function(
-          Pointer<SdlGpuCommandBuffer> commandBuffer, Pointer<Utf8> name),
-      void Function(Pointer<SdlGpuCommandBuffer> commandBuffer,
-          Pointer<Utf8> name)>('SDL_PushGPUDebugGroup');
+    Void Function(
+      Pointer<SdlGpuCommandBuffer> commandBuffer,
+      Pointer<Utf8> name,
+    ),
+    void Function(
+      Pointer<SdlGpuCommandBuffer> commandBuffer,
+      Pointer<Utf8> name,
+    )
+  >('SDL_PushGPUDebugGroup');
   final namePointer = name != null ? name.toNativeUtf8() : nullptr;
   final result = sdlPushGpuDebugGroupLookupFunction(commandBuffer, namePointer);
   calloc.free(namePointer);
@@ -782,9 +879,9 @@ void sdlPushGpuDebugGroup(
 /// ```
 void sdlPopGpuDebugGroup(Pointer<SdlGpuCommandBuffer> commandBuffer) {
   final sdlPopGpuDebugGroupLookupFunction = libSdl3.lookupFunction<
-      Void Function(Pointer<SdlGpuCommandBuffer> commandBuffer),
-      void Function(
-          Pointer<SdlGpuCommandBuffer> commandBuffer)>('SDL_PopGPUDebugGroup');
+    Void Function(Pointer<SdlGpuCommandBuffer> commandBuffer),
+    void Function(Pointer<SdlGpuCommandBuffer> commandBuffer)
+  >('SDL_PopGPUDebugGroup');
   return sdlPopGpuDebugGroupLookupFunction(commandBuffer);
 }
 
@@ -802,12 +899,13 @@ void sdlPopGpuDebugGroup(Pointer<SdlGpuCommandBuffer> commandBuffer) {
 /// extern SDL_DECLSPEC void SDLCALL SDL_ReleaseGPUTexture( SDL_GPUDevice *device, SDL_GPUTexture *texture)
 /// ```
 void sdlReleaseGpuTexture(
-    Pointer<SdlGpuDevice> device, Pointer<SdlGpuTexture> texture) {
+  Pointer<SdlGpuDevice> device,
+  Pointer<SdlGpuTexture> texture,
+) {
   final sdlReleaseGpuTextureLookupFunction = libSdl3.lookupFunction<
-      Void Function(
-          Pointer<SdlGpuDevice> device, Pointer<SdlGpuTexture> texture),
-      void Function(Pointer<SdlGpuDevice> device,
-          Pointer<SdlGpuTexture> texture)>('SDL_ReleaseGPUTexture');
+    Void Function(Pointer<SdlGpuDevice> device, Pointer<SdlGpuTexture> texture),
+    void Function(Pointer<SdlGpuDevice> device, Pointer<SdlGpuTexture> texture)
+  >('SDL_ReleaseGPUTexture');
   return sdlReleaseGpuTextureLookupFunction(device, texture);
 }
 
@@ -825,12 +923,13 @@ void sdlReleaseGpuTexture(
 /// extern SDL_DECLSPEC void SDLCALL SDL_ReleaseGPUSampler( SDL_GPUDevice *device, SDL_GPUSampler *sampler)
 /// ```
 void sdlReleaseGpuSampler(
-    Pointer<SdlGpuDevice> device, Pointer<SdlGpuSampler> sampler) {
+  Pointer<SdlGpuDevice> device,
+  Pointer<SdlGpuSampler> sampler,
+) {
   final sdlReleaseGpuSamplerLookupFunction = libSdl3.lookupFunction<
-      Void Function(
-          Pointer<SdlGpuDevice> device, Pointer<SdlGpuSampler> sampler),
-      void Function(Pointer<SdlGpuDevice> device,
-          Pointer<SdlGpuSampler> sampler)>('SDL_ReleaseGPUSampler');
+    Void Function(Pointer<SdlGpuDevice> device, Pointer<SdlGpuSampler> sampler),
+    void Function(Pointer<SdlGpuDevice> device, Pointer<SdlGpuSampler> sampler)
+  >('SDL_ReleaseGPUSampler');
   return sdlReleaseGpuSamplerLookupFunction(device, sampler);
 }
 
@@ -848,11 +947,13 @@ void sdlReleaseGpuSampler(
 /// extern SDL_DECLSPEC void SDLCALL SDL_ReleaseGPUBuffer( SDL_GPUDevice *device, SDL_GPUBuffer *buffer)
 /// ```
 void sdlReleaseGpuBuffer(
-    Pointer<SdlGpuDevice> device, Pointer<SdlGpuBuffer> buffer) {
+  Pointer<SdlGpuDevice> device,
+  Pointer<SdlGpuBuffer> buffer,
+) {
   final sdlReleaseGpuBufferLookupFunction = libSdl3.lookupFunction<
-      Void Function(Pointer<SdlGpuDevice> device, Pointer<SdlGpuBuffer> buffer),
-      void Function(Pointer<SdlGpuDevice> device,
-          Pointer<SdlGpuBuffer> buffer)>('SDL_ReleaseGPUBuffer');
+    Void Function(Pointer<SdlGpuDevice> device, Pointer<SdlGpuBuffer> buffer),
+    void Function(Pointer<SdlGpuDevice> device, Pointer<SdlGpuBuffer> buffer)
+  >('SDL_ReleaseGPUBuffer');
   return sdlReleaseGpuBufferLookupFunction(device, buffer);
 }
 
@@ -869,14 +970,20 @@ void sdlReleaseGpuBuffer(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_ReleaseGPUTransferBuffer( SDL_GPUDevice *device, SDL_GPUTransferBuffer *transfer_buffer)
 /// ```
-void sdlReleaseGpuTransferBuffer(Pointer<SdlGpuDevice> device,
-    Pointer<SdlGpuTransferBuffer> transferBuffer) {
+void sdlReleaseGpuTransferBuffer(
+  Pointer<SdlGpuDevice> device,
+  Pointer<SdlGpuTransferBuffer> transferBuffer,
+) {
   final sdlReleaseGpuTransferBufferLookupFunction = libSdl3.lookupFunction<
-          Void Function(Pointer<SdlGpuDevice> device,
-              Pointer<SdlGpuTransferBuffer> transferBuffer),
-          void Function(Pointer<SdlGpuDevice> device,
-              Pointer<SdlGpuTransferBuffer> transferBuffer)>(
-      'SDL_ReleaseGPUTransferBuffer');
+    Void Function(
+      Pointer<SdlGpuDevice> device,
+      Pointer<SdlGpuTransferBuffer> transferBuffer,
+    ),
+    void Function(
+      Pointer<SdlGpuDevice> device,
+      Pointer<SdlGpuTransferBuffer> transferBuffer,
+    )
+  >('SDL_ReleaseGPUTransferBuffer');
   return sdlReleaseGpuTransferBufferLookupFunction(device, transferBuffer);
 }
 
@@ -893,14 +1000,20 @@ void sdlReleaseGpuTransferBuffer(Pointer<SdlGpuDevice> device,
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_ReleaseGPUComputePipeline( SDL_GPUDevice *device, SDL_GPUComputePipeline *compute_pipeline)
 /// ```
-void sdlReleaseGpuComputePipeline(Pointer<SdlGpuDevice> device,
-    Pointer<SdlGpuComputePipeline> computePipeline) {
+void sdlReleaseGpuComputePipeline(
+  Pointer<SdlGpuDevice> device,
+  Pointer<SdlGpuComputePipeline> computePipeline,
+) {
   final sdlReleaseGpuComputePipelineLookupFunction = libSdl3.lookupFunction<
-          Void Function(Pointer<SdlGpuDevice> device,
-              Pointer<SdlGpuComputePipeline> computePipeline),
-          void Function(Pointer<SdlGpuDevice> device,
-              Pointer<SdlGpuComputePipeline> computePipeline)>(
-      'SDL_ReleaseGPUComputePipeline');
+    Void Function(
+      Pointer<SdlGpuDevice> device,
+      Pointer<SdlGpuComputePipeline> computePipeline,
+    ),
+    void Function(
+      Pointer<SdlGpuDevice> device,
+      Pointer<SdlGpuComputePipeline> computePipeline,
+    )
+  >('SDL_ReleaseGPUComputePipeline');
   return sdlReleaseGpuComputePipelineLookupFunction(device, computePipeline);
 }
 
@@ -918,11 +1031,13 @@ void sdlReleaseGpuComputePipeline(Pointer<SdlGpuDevice> device,
 /// extern SDL_DECLSPEC void SDLCALL SDL_ReleaseGPUShader( SDL_GPUDevice *device, SDL_GPUShader *shader)
 /// ```
 void sdlReleaseGpuShader(
-    Pointer<SdlGpuDevice> device, Pointer<SdlGpuShader> shader) {
+  Pointer<SdlGpuDevice> device,
+  Pointer<SdlGpuShader> shader,
+) {
   final sdlReleaseGpuShaderLookupFunction = libSdl3.lookupFunction<
-      Void Function(Pointer<SdlGpuDevice> device, Pointer<SdlGpuShader> shader),
-      void Function(Pointer<SdlGpuDevice> device,
-          Pointer<SdlGpuShader> shader)>('SDL_ReleaseGPUShader');
+    Void Function(Pointer<SdlGpuDevice> device, Pointer<SdlGpuShader> shader),
+    void Function(Pointer<SdlGpuDevice> device, Pointer<SdlGpuShader> shader)
+  >('SDL_ReleaseGPUShader');
   return sdlReleaseGpuShaderLookupFunction(device, shader);
 }
 
@@ -939,14 +1054,20 @@ void sdlReleaseGpuShader(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_ReleaseGPUGraphicsPipeline( SDL_GPUDevice *device, SDL_GPUGraphicsPipeline *graphics_pipeline)
 /// ```
-void sdlReleaseGpuGraphicsPipeline(Pointer<SdlGpuDevice> device,
-    Pointer<SdlGpuGraphicsPipeline> graphicsPipeline) {
+void sdlReleaseGpuGraphicsPipeline(
+  Pointer<SdlGpuDevice> device,
+  Pointer<SdlGpuGraphicsPipeline> graphicsPipeline,
+) {
   final sdlReleaseGpuGraphicsPipelineLookupFunction = libSdl3.lookupFunction<
-          Void Function(Pointer<SdlGpuDevice> device,
-              Pointer<SdlGpuGraphicsPipeline> graphicsPipeline),
-          void Function(Pointer<SdlGpuDevice> device,
-              Pointer<SdlGpuGraphicsPipeline> graphicsPipeline)>(
-      'SDL_ReleaseGPUGraphicsPipeline');
+    Void Function(
+      Pointer<SdlGpuDevice> device,
+      Pointer<SdlGpuGraphicsPipeline> graphicsPipeline,
+    ),
+    void Function(
+      Pointer<SdlGpuDevice> device,
+      Pointer<SdlGpuGraphicsPipeline> graphicsPipeline,
+    )
+  >('SDL_ReleaseGPUGraphicsPipeline');
   return sdlReleaseGpuGraphicsPipelineLookupFunction(device, graphicsPipeline);
 }
 
@@ -978,11 +1099,12 @@ void sdlReleaseGpuGraphicsPipeline(Pointer<SdlGpuDevice> device,
 /// extern SDL_DECLSPEC SDL_GPUCommandBuffer * SDLCALL SDL_AcquireGPUCommandBuffer( SDL_GPUDevice *device)
 /// ```
 Pointer<SdlGpuCommandBuffer> sdlAcquireGpuCommandBuffer(
-    Pointer<SdlGpuDevice> device) {
+  Pointer<SdlGpuDevice> device,
+) {
   final sdlAcquireGpuCommandBufferLookupFunction = libSdl3.lookupFunction<
-      Pointer<SdlGpuCommandBuffer> Function(Pointer<SdlGpuDevice> device),
-      Pointer<SdlGpuCommandBuffer> Function(
-          Pointer<SdlGpuDevice> device)>('SDL_AcquireGPUCommandBuffer');
+    Pointer<SdlGpuCommandBuffer> Function(Pointer<SdlGpuDevice> device),
+    Pointer<SdlGpuCommandBuffer> Function(Pointer<SdlGpuDevice> device)
+  >('SDL_AcquireGPUCommandBuffer');
   return sdlAcquireGpuCommandBufferLookupFunction(device);
 }
 
@@ -1005,18 +1127,32 @@ Pointer<SdlGpuCommandBuffer> sdlAcquireGpuCommandBuffer(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_PushGPUVertexUniformData( SDL_GPUCommandBuffer *command_buffer, Uint32 slot_index, const void *data, Uint32 length)
 /// ```
-void sdlPushGpuVertexUniformData(Pointer<SdlGpuCommandBuffer> commandBuffer,
-    int slotIndex, Pointer<NativeType> data, int length) {
+void sdlPushGpuVertexUniformData(
+  Pointer<SdlGpuCommandBuffer> commandBuffer,
+  int slotIndex,
+  Pointer<NativeType> data,
+  int length,
+) {
   final sdlPushGpuVertexUniformDataLookupFunction = libSdl3.lookupFunction<
-      Void Function(Pointer<SdlGpuCommandBuffer> commandBuffer,
-          Uint32 slotIndex, Pointer<NativeType> data, Uint32 length),
-      void Function(
-          Pointer<SdlGpuCommandBuffer> commandBuffer,
-          int slotIndex,
-          Pointer<NativeType> data,
-          int length)>('SDL_PushGPUVertexUniformData');
+    Void Function(
+      Pointer<SdlGpuCommandBuffer> commandBuffer,
+      Uint32 slotIndex,
+      Pointer<NativeType> data,
+      Uint32 length,
+    ),
+    void Function(
+      Pointer<SdlGpuCommandBuffer> commandBuffer,
+      int slotIndex,
+      Pointer<NativeType> data,
+      int length,
+    )
+  >('SDL_PushGPUVertexUniformData');
   return sdlPushGpuVertexUniformDataLookupFunction(
-      commandBuffer, slotIndex, data, length);
+    commandBuffer,
+    slotIndex,
+    data,
+    length,
+  );
 }
 
 ///
@@ -1038,18 +1174,32 @@ void sdlPushGpuVertexUniformData(Pointer<SdlGpuCommandBuffer> commandBuffer,
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_PushGPUFragmentUniformData( SDL_GPUCommandBuffer *command_buffer, Uint32 slot_index, const void *data, Uint32 length)
 /// ```
-void sdlPushGpuFragmentUniformData(Pointer<SdlGpuCommandBuffer> commandBuffer,
-    int slotIndex, Pointer<NativeType> data, int length) {
+void sdlPushGpuFragmentUniformData(
+  Pointer<SdlGpuCommandBuffer> commandBuffer,
+  int slotIndex,
+  Pointer<NativeType> data,
+  int length,
+) {
   final sdlPushGpuFragmentUniformDataLookupFunction = libSdl3.lookupFunction<
-      Void Function(Pointer<SdlGpuCommandBuffer> commandBuffer,
-          Uint32 slotIndex, Pointer<NativeType> data, Uint32 length),
-      void Function(
-          Pointer<SdlGpuCommandBuffer> commandBuffer,
-          int slotIndex,
-          Pointer<NativeType> data,
-          int length)>('SDL_PushGPUFragmentUniformData');
+    Void Function(
+      Pointer<SdlGpuCommandBuffer> commandBuffer,
+      Uint32 slotIndex,
+      Pointer<NativeType> data,
+      Uint32 length,
+    ),
+    void Function(
+      Pointer<SdlGpuCommandBuffer> commandBuffer,
+      int slotIndex,
+      Pointer<NativeType> data,
+      int length,
+    )
+  >('SDL_PushGPUFragmentUniformData');
   return sdlPushGpuFragmentUniformDataLookupFunction(
-      commandBuffer, slotIndex, data, length);
+    commandBuffer,
+    slotIndex,
+    data,
+    length,
+  );
 }
 
 ///
@@ -1071,18 +1221,32 @@ void sdlPushGpuFragmentUniformData(Pointer<SdlGpuCommandBuffer> commandBuffer,
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_PushGPUComputeUniformData( SDL_GPUCommandBuffer *command_buffer, Uint32 slot_index, const void *data, Uint32 length)
 /// ```
-void sdlPushGpuComputeUniformData(Pointer<SdlGpuCommandBuffer> commandBuffer,
-    int slotIndex, Pointer<NativeType> data, int length) {
+void sdlPushGpuComputeUniformData(
+  Pointer<SdlGpuCommandBuffer> commandBuffer,
+  int slotIndex,
+  Pointer<NativeType> data,
+  int length,
+) {
   final sdlPushGpuComputeUniformDataLookupFunction = libSdl3.lookupFunction<
-      Void Function(Pointer<SdlGpuCommandBuffer> commandBuffer,
-          Uint32 slotIndex, Pointer<NativeType> data, Uint32 length),
-      void Function(
-          Pointer<SdlGpuCommandBuffer> commandBuffer,
-          int slotIndex,
-          Pointer<NativeType> data,
-          int length)>('SDL_PushGPUComputeUniformData');
+    Void Function(
+      Pointer<SdlGpuCommandBuffer> commandBuffer,
+      Uint32 slotIndex,
+      Pointer<NativeType> data,
+      Uint32 length,
+    ),
+    void Function(
+      Pointer<SdlGpuCommandBuffer> commandBuffer,
+      int slotIndex,
+      Pointer<NativeType> data,
+      int length,
+    )
+  >('SDL_PushGPUComputeUniformData');
   return sdlPushGpuComputeUniformDataLookupFunction(
-      commandBuffer, slotIndex, data, length);
+    commandBuffer,
+    slotIndex,
+    data,
+    length,
+  );
 }
 
 ///
@@ -1114,24 +1278,31 @@ void sdlPushGpuComputeUniformData(Pointer<SdlGpuCommandBuffer> commandBuffer,
 /// extern SDL_DECLSPEC SDL_GPURenderPass * SDLCALL SDL_BeginGPURenderPass( SDL_GPUCommandBuffer *command_buffer, const SDL_GPUColorTargetInfo *color_target_infos, Uint32 num_color_targets, const SDL_GPUDepthStencilTargetInfo *depth_stencil_target_info)
 /// ```
 Pointer<SdlGpuRenderPass> sdlBeginGpuRenderPass(
-    Pointer<SdlGpuCommandBuffer> commandBuffer,
-    Pointer<SdlGpuColorTargetInfo> colorTargetInfos,
-    int numColorTargets,
-    Pointer<SdlGpuDepthStencilTargetInfo> depthStencilTargetInfo) {
+  Pointer<SdlGpuCommandBuffer> commandBuffer,
+  Pointer<SdlGpuColorTargetInfo> colorTargetInfos,
+  int numColorTargets,
+  Pointer<SdlGpuDepthStencilTargetInfo> depthStencilTargetInfo,
+) {
   final sdlBeginGpuRenderPassLookupFunction = libSdl3.lookupFunction<
-          Pointer<SdlGpuRenderPass> Function(
-              Pointer<SdlGpuCommandBuffer> commandBuffer,
-              Pointer<SdlGpuColorTargetInfo> colorTargetInfos,
-              Uint32 numColorTargets,
-              Pointer<SdlGpuDepthStencilTargetInfo> depthStencilTargetInfo),
-          Pointer<SdlGpuRenderPass> Function(
-              Pointer<SdlGpuCommandBuffer> commandBuffer,
-              Pointer<SdlGpuColorTargetInfo> colorTargetInfos,
-              int numColorTargets,
-              Pointer<SdlGpuDepthStencilTargetInfo> depthStencilTargetInfo)>(
-      'SDL_BeginGPURenderPass');
+    Pointer<SdlGpuRenderPass> Function(
+      Pointer<SdlGpuCommandBuffer> commandBuffer,
+      Pointer<SdlGpuColorTargetInfo> colorTargetInfos,
+      Uint32 numColorTargets,
+      Pointer<SdlGpuDepthStencilTargetInfo> depthStencilTargetInfo,
+    ),
+    Pointer<SdlGpuRenderPass> Function(
+      Pointer<SdlGpuCommandBuffer> commandBuffer,
+      Pointer<SdlGpuColorTargetInfo> colorTargetInfos,
+      int numColorTargets,
+      Pointer<SdlGpuDepthStencilTargetInfo> depthStencilTargetInfo,
+    )
+  >('SDL_BeginGPURenderPass');
   return sdlBeginGpuRenderPassLookupFunction(
-      commandBuffer, colorTargetInfos, numColorTargets, depthStencilTargetInfo);
+    commandBuffer,
+    colorTargetInfos,
+    numColorTargets,
+    depthStencilTargetInfo,
+  );
 }
 
 ///
@@ -1147,14 +1318,20 @@ Pointer<SdlGpuRenderPass> sdlBeginGpuRenderPass(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_BindGPUGraphicsPipeline( SDL_GPURenderPass *render_pass, SDL_GPUGraphicsPipeline *graphics_pipeline)
 /// ```
-void sdlBindGpuGraphicsPipeline(Pointer<SdlGpuRenderPass> renderPass,
-    Pointer<SdlGpuGraphicsPipeline> graphicsPipeline) {
+void sdlBindGpuGraphicsPipeline(
+  Pointer<SdlGpuRenderPass> renderPass,
+  Pointer<SdlGpuGraphicsPipeline> graphicsPipeline,
+) {
   final sdlBindGpuGraphicsPipelineLookupFunction = libSdl3.lookupFunction<
-          Void Function(Pointer<SdlGpuRenderPass> renderPass,
-              Pointer<SdlGpuGraphicsPipeline> graphicsPipeline),
-          void Function(Pointer<SdlGpuRenderPass> renderPass,
-              Pointer<SdlGpuGraphicsPipeline> graphicsPipeline)>(
-      'SDL_BindGPUGraphicsPipeline');
+    Void Function(
+      Pointer<SdlGpuRenderPass> renderPass,
+      Pointer<SdlGpuGraphicsPipeline> graphicsPipeline,
+    ),
+    void Function(
+      Pointer<SdlGpuRenderPass> renderPass,
+      Pointer<SdlGpuGraphicsPipeline> graphicsPipeline,
+    )
+  >('SDL_BindGPUGraphicsPipeline');
   return sdlBindGpuGraphicsPipelineLookupFunction(renderPass, graphicsPipeline);
 }
 
@@ -1170,12 +1347,19 @@ void sdlBindGpuGraphicsPipeline(Pointer<SdlGpuRenderPass> renderPass,
 /// extern SDL_DECLSPEC void SDLCALL SDL_SetGPUViewport( SDL_GPURenderPass *render_pass, const SDL_GPUViewport *viewport)
 /// ```
 void sdlSetGpuViewport(
-    Pointer<SdlGpuRenderPass> renderPass, Pointer<SdlGpuViewport> viewport) {
+  Pointer<SdlGpuRenderPass> renderPass,
+  Pointer<SdlGpuViewport> viewport,
+) {
   final sdlSetGpuViewportLookupFunction = libSdl3.lookupFunction<
-      Void Function(Pointer<SdlGpuRenderPass> renderPass,
-          Pointer<SdlGpuViewport> viewport),
-      void Function(Pointer<SdlGpuRenderPass> renderPass,
-          Pointer<SdlGpuViewport> viewport)>('SDL_SetGPUViewport');
+    Void Function(
+      Pointer<SdlGpuRenderPass> renderPass,
+      Pointer<SdlGpuViewport> viewport,
+    ),
+    void Function(
+      Pointer<SdlGpuRenderPass> renderPass,
+      Pointer<SdlGpuViewport> viewport,
+    )
+  >('SDL_SetGPUViewport');
   return sdlSetGpuViewportLookupFunction(renderPass, viewport);
 }
 
@@ -1191,12 +1375,19 @@ void sdlSetGpuViewport(
 /// extern SDL_DECLSPEC void SDLCALL SDL_SetGPUScissor( SDL_GPURenderPass *render_pass, const SDL_Rect *scissor)
 /// ```
 void sdlSetGpuScissor(
-    Pointer<SdlGpuRenderPass> renderPass, Pointer<SdlRect> scissor) {
+  Pointer<SdlGpuRenderPass> renderPass,
+  Pointer<SdlRect> scissor,
+) {
   final sdlSetGpuScissorLookupFunction = libSdl3.lookupFunction<
-      Void Function(
-          Pointer<SdlGpuRenderPass> renderPass, Pointer<SdlRect> scissor),
-      void Function(Pointer<SdlGpuRenderPass> renderPass,
-          Pointer<SdlRect> scissor)>('SDL_SetGPUScissor');
+    Void Function(
+      Pointer<SdlGpuRenderPass> renderPass,
+      Pointer<SdlRect> scissor,
+    ),
+    void Function(
+      Pointer<SdlGpuRenderPass> renderPass,
+      Pointer<SdlRect> scissor,
+    )
+  >('SDL_SetGPUScissor');
   return sdlSetGpuScissorLookupFunction(renderPass, scissor);
 }
 
@@ -1215,11 +1406,13 @@ void sdlSetGpuScissor(
 /// extern SDL_DECLSPEC void SDLCALL SDL_SetGPUBlendConstants( SDL_GPURenderPass *render_pass, SDL_FColor blend_constants)
 /// ```
 void sdlSetGpuBlendConstants(
-    Pointer<SdlGpuRenderPass> renderPass, SdlFColor blendAnts) {
+  Pointer<SdlGpuRenderPass> renderPass,
+  SdlFColor blendAnts,
+) {
   final sdlSetGpuBlendConstantsLookupFunction = libSdl3.lookupFunction<
-      Void Function(Pointer<SdlGpuRenderPass> renderPass, SdlFColor blendAnts),
-      void Function(Pointer<SdlGpuRenderPass> renderPass,
-          SdlFColor blendAnts)>('SDL_SetGPUBlendConstants');
+    Void Function(Pointer<SdlGpuRenderPass> renderPass, SdlFColor blendAnts),
+    void Function(Pointer<SdlGpuRenderPass> renderPass, SdlFColor blendAnts)
+  >('SDL_SetGPUBlendConstants');
   return sdlSetGpuBlendConstantsLookupFunction(renderPass, blendAnts);
 }
 
@@ -1235,11 +1428,13 @@ void sdlSetGpuBlendConstants(
 /// extern SDL_DECLSPEC void SDLCALL SDL_SetGPUStencilReference( SDL_GPURenderPass *render_pass, Uint8 reference)
 /// ```
 void sdlSetGpuStencilReference(
-    Pointer<SdlGpuRenderPass> renderPass, int reference) {
+  Pointer<SdlGpuRenderPass> renderPass,
+  int reference,
+) {
   final sdlSetGpuStencilReferenceLookupFunction = libSdl3.lookupFunction<
-      Void Function(Pointer<SdlGpuRenderPass> renderPass, Uint8 reference),
-      void Function(Pointer<SdlGpuRenderPass> renderPass,
-          int reference)>('SDL_SetGPUStencilReference');
+    Void Function(Pointer<SdlGpuRenderPass> renderPass, Uint8 reference),
+    void Function(Pointer<SdlGpuRenderPass> renderPass, int reference)
+  >('SDL_SetGPUStencilReference');
   return sdlSetGpuStencilReferenceLookupFunction(renderPass, reference);
 }
 
@@ -1258,18 +1453,32 @@ void sdlSetGpuStencilReference(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_BindGPUVertexBuffers( SDL_GPURenderPass *render_pass, Uint32 first_slot, const SDL_GPUBufferBinding *bindings, Uint32 num_bindings)
 /// ```
-void sdlBindGpuVertexBuffers(Pointer<SdlGpuRenderPass> renderPass,
-    int firstSlot, Pointer<SdlGpuBufferBinding> bindings, int numBindings) {
+void sdlBindGpuVertexBuffers(
+  Pointer<SdlGpuRenderPass> renderPass,
+  int firstSlot,
+  Pointer<SdlGpuBufferBinding> bindings,
+  int numBindings,
+) {
   final sdlBindGpuVertexBuffersLookupFunction = libSdl3.lookupFunction<
-      Void Function(Pointer<SdlGpuRenderPass> renderPass, Uint32 firstSlot,
-          Pointer<SdlGpuBufferBinding> bindings, Uint32 numBindings),
-      void Function(
-          Pointer<SdlGpuRenderPass> renderPass,
-          int firstSlot,
-          Pointer<SdlGpuBufferBinding> bindings,
-          int numBindings)>('SDL_BindGPUVertexBuffers');
+    Void Function(
+      Pointer<SdlGpuRenderPass> renderPass,
+      Uint32 firstSlot,
+      Pointer<SdlGpuBufferBinding> bindings,
+      Uint32 numBindings,
+    ),
+    void Function(
+      Pointer<SdlGpuRenderPass> renderPass,
+      int firstSlot,
+      Pointer<SdlGpuBufferBinding> bindings,
+      int numBindings,
+    )
+  >('SDL_BindGPUVertexBuffers');
   return sdlBindGpuVertexBuffersLookupFunction(
-      renderPass, firstSlot, bindings, numBindings);
+    renderPass,
+    firstSlot,
+    bindings,
+    numBindings,
+  );
 }
 
 ///
@@ -1286,17 +1495,28 @@ void sdlBindGpuVertexBuffers(Pointer<SdlGpuRenderPass> renderPass,
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_BindGPUIndexBuffer( SDL_GPURenderPass *render_pass, const SDL_GPUBufferBinding *binding, SDL_GPUIndexElementSize index_element_size)
 /// ```
-void sdlBindGpuIndexBuffer(Pointer<SdlGpuRenderPass> renderPass,
-    Pointer<SdlGpuBufferBinding> binding, int indexElementSize) {
+void sdlBindGpuIndexBuffer(
+  Pointer<SdlGpuRenderPass> renderPass,
+  Pointer<SdlGpuBufferBinding> binding,
+  int indexElementSize,
+) {
   final sdlBindGpuIndexBufferLookupFunction = libSdl3.lookupFunction<
-      Void Function(Pointer<SdlGpuRenderPass> renderPass,
-          Pointer<SdlGpuBufferBinding> binding, Int32 indexElementSize),
-      void Function(
-          Pointer<SdlGpuRenderPass> renderPass,
-          Pointer<SdlGpuBufferBinding> binding,
-          int indexElementSize)>('SDL_BindGPUIndexBuffer');
+    Void Function(
+      Pointer<SdlGpuRenderPass> renderPass,
+      Pointer<SdlGpuBufferBinding> binding,
+      Int32 indexElementSize,
+    ),
+    void Function(
+      Pointer<SdlGpuRenderPass> renderPass,
+      Pointer<SdlGpuBufferBinding> binding,
+      int indexElementSize,
+    )
+  >('SDL_BindGPUIndexBuffer');
   return sdlBindGpuIndexBufferLookupFunction(
-      renderPass, binding, indexElementSize);
+    renderPass,
+    binding,
+    indexElementSize,
+  );
 }
 
 ///
@@ -1322,23 +1542,31 @@ void sdlBindGpuIndexBuffer(Pointer<SdlGpuRenderPass> renderPass,
 /// extern SDL_DECLSPEC void SDLCALL SDL_BindGPUVertexSamplers( SDL_GPURenderPass *render_pass, Uint32 first_slot, const SDL_GPUTextureSamplerBinding *texture_sampler_bindings, Uint32 num_bindings)
 /// ```
 void sdlBindGpuVertexSamplers(
-    Pointer<SdlGpuRenderPass> renderPass,
-    int firstSlot,
-    Pointer<SdlGpuTextureSamplerBinding> textureSamplerBindings,
-    int numBindings) {
+  Pointer<SdlGpuRenderPass> renderPass,
+  int firstSlot,
+  Pointer<SdlGpuTextureSamplerBinding> textureSamplerBindings,
+  int numBindings,
+) {
   final sdlBindGpuVertexSamplersLookupFunction = libSdl3.lookupFunction<
-      Void Function(
-          Pointer<SdlGpuRenderPass> renderPass,
-          Uint32 firstSlot,
-          Pointer<SdlGpuTextureSamplerBinding> textureSamplerBindings,
-          Uint32 numBindings),
-      void Function(
-          Pointer<SdlGpuRenderPass> renderPass,
-          int firstSlot,
-          Pointer<SdlGpuTextureSamplerBinding> textureSamplerBindings,
-          int numBindings)>('SDL_BindGPUVertexSamplers');
+    Void Function(
+      Pointer<SdlGpuRenderPass> renderPass,
+      Uint32 firstSlot,
+      Pointer<SdlGpuTextureSamplerBinding> textureSamplerBindings,
+      Uint32 numBindings,
+    ),
+    void Function(
+      Pointer<SdlGpuRenderPass> renderPass,
+      int firstSlot,
+      Pointer<SdlGpuTextureSamplerBinding> textureSamplerBindings,
+      int numBindings,
+    )
+  >('SDL_BindGPUVertexSamplers');
   return sdlBindGpuVertexSamplersLookupFunction(
-      renderPass, firstSlot, textureSamplerBindings, numBindings);
+    renderPass,
+    firstSlot,
+    textureSamplerBindings,
+    numBindings,
+  );
 }
 
 ///
@@ -1363,20 +1591,31 @@ void sdlBindGpuVertexSamplers(
 /// extern SDL_DECLSPEC void SDLCALL SDL_BindGPUVertexStorageTextures( SDL_GPURenderPass *render_pass, Uint32 first_slot, SDL_GPUTexture *const *storage_textures, Uint32 num_bindings)
 /// ```
 void sdlBindGpuVertexStorageTextures(
-    Pointer<SdlGpuRenderPass> renderPass,
-    int firstSlot,
-    Pointer<Pointer<SdlGpuTexture>> storageTextures,
-    int numBindings) {
+  Pointer<SdlGpuRenderPass> renderPass,
+  int firstSlot,
+  Pointer<Pointer<SdlGpuTexture>> storageTextures,
+  int numBindings,
+) {
   final sdlBindGpuVertexStorageTexturesLookupFunction = libSdl3.lookupFunction<
-      Void Function(Pointer<SdlGpuRenderPass> renderPass, Uint32 firstSlot,
-          Pointer<Pointer<SdlGpuTexture>> storageTextures, Uint32 numBindings),
-      void Function(
-          Pointer<SdlGpuRenderPass> renderPass,
-          int firstSlot,
-          Pointer<Pointer<SdlGpuTexture>> storageTextures,
-          int numBindings)>('SDL_BindGPUVertexStorageTextures');
+    Void Function(
+      Pointer<SdlGpuRenderPass> renderPass,
+      Uint32 firstSlot,
+      Pointer<Pointer<SdlGpuTexture>> storageTextures,
+      Uint32 numBindings,
+    ),
+    void Function(
+      Pointer<SdlGpuRenderPass> renderPass,
+      int firstSlot,
+      Pointer<Pointer<SdlGpuTexture>> storageTextures,
+      int numBindings,
+    )
+  >('SDL_BindGPUVertexStorageTextures');
   return sdlBindGpuVertexStorageTexturesLookupFunction(
-      renderPass, firstSlot, storageTextures, numBindings);
+    renderPass,
+    firstSlot,
+    storageTextures,
+    numBindings,
+  );
 }
 
 ///
@@ -1401,20 +1640,31 @@ void sdlBindGpuVertexStorageTextures(
 /// extern SDL_DECLSPEC void SDLCALL SDL_BindGPUVertexStorageBuffers( SDL_GPURenderPass *render_pass, Uint32 first_slot, SDL_GPUBuffer *const *storage_buffers, Uint32 num_bindings)
 /// ```
 void sdlBindGpuVertexStorageBuffers(
-    Pointer<SdlGpuRenderPass> renderPass,
-    int firstSlot,
-    Pointer<Pointer<SdlGpuBuffer>> storageBuffers,
-    int numBindings) {
+  Pointer<SdlGpuRenderPass> renderPass,
+  int firstSlot,
+  Pointer<Pointer<SdlGpuBuffer>> storageBuffers,
+  int numBindings,
+) {
   final sdlBindGpuVertexStorageBuffersLookupFunction = libSdl3.lookupFunction<
-      Void Function(Pointer<SdlGpuRenderPass> renderPass, Uint32 firstSlot,
-          Pointer<Pointer<SdlGpuBuffer>> storageBuffers, Uint32 numBindings),
-      void Function(
-          Pointer<SdlGpuRenderPass> renderPass,
-          int firstSlot,
-          Pointer<Pointer<SdlGpuBuffer>> storageBuffers,
-          int numBindings)>('SDL_BindGPUVertexStorageBuffers');
+    Void Function(
+      Pointer<SdlGpuRenderPass> renderPass,
+      Uint32 firstSlot,
+      Pointer<Pointer<SdlGpuBuffer>> storageBuffers,
+      Uint32 numBindings,
+    ),
+    void Function(
+      Pointer<SdlGpuRenderPass> renderPass,
+      int firstSlot,
+      Pointer<Pointer<SdlGpuBuffer>> storageBuffers,
+      int numBindings,
+    )
+  >('SDL_BindGPUVertexStorageBuffers');
   return sdlBindGpuVertexStorageBuffersLookupFunction(
-      renderPass, firstSlot, storageBuffers, numBindings);
+    renderPass,
+    firstSlot,
+    storageBuffers,
+    numBindings,
+  );
 }
 
 ///
@@ -1440,23 +1690,31 @@ void sdlBindGpuVertexStorageBuffers(
 /// extern SDL_DECLSPEC void SDLCALL SDL_BindGPUFragmentSamplers( SDL_GPURenderPass *render_pass, Uint32 first_slot, const SDL_GPUTextureSamplerBinding *texture_sampler_bindings, Uint32 num_bindings)
 /// ```
 void sdlBindGpuFragmentSamplers(
-    Pointer<SdlGpuRenderPass> renderPass,
-    int firstSlot,
-    Pointer<SdlGpuTextureSamplerBinding> textureSamplerBindings,
-    int numBindings) {
+  Pointer<SdlGpuRenderPass> renderPass,
+  int firstSlot,
+  Pointer<SdlGpuTextureSamplerBinding> textureSamplerBindings,
+  int numBindings,
+) {
   final sdlBindGpuFragmentSamplersLookupFunction = libSdl3.lookupFunction<
-      Void Function(
-          Pointer<SdlGpuRenderPass> renderPass,
-          Uint32 firstSlot,
-          Pointer<SdlGpuTextureSamplerBinding> textureSamplerBindings,
-          Uint32 numBindings),
-      void Function(
-          Pointer<SdlGpuRenderPass> renderPass,
-          int firstSlot,
-          Pointer<SdlGpuTextureSamplerBinding> textureSamplerBindings,
-          int numBindings)>('SDL_BindGPUFragmentSamplers');
+    Void Function(
+      Pointer<SdlGpuRenderPass> renderPass,
+      Uint32 firstSlot,
+      Pointer<SdlGpuTextureSamplerBinding> textureSamplerBindings,
+      Uint32 numBindings,
+    ),
+    void Function(
+      Pointer<SdlGpuRenderPass> renderPass,
+      int firstSlot,
+      Pointer<SdlGpuTextureSamplerBinding> textureSamplerBindings,
+      int numBindings,
+    )
+  >('SDL_BindGPUFragmentSamplers');
   return sdlBindGpuFragmentSamplersLookupFunction(
-      renderPass, firstSlot, textureSamplerBindings, numBindings);
+    renderPass,
+    firstSlot,
+    textureSamplerBindings,
+    numBindings,
+  );
 }
 
 ///
@@ -1481,24 +1739,32 @@ void sdlBindGpuFragmentSamplers(
 /// extern SDL_DECLSPEC void SDLCALL SDL_BindGPUFragmentStorageTextures( SDL_GPURenderPass *render_pass, Uint32 first_slot, SDL_GPUTexture *const *storage_textures, Uint32 num_bindings)
 /// ```
 void sdlBindGpuFragmentStorageTextures(
-    Pointer<SdlGpuRenderPass> renderPass,
-    int firstSlot,
-    Pointer<Pointer<SdlGpuTexture>> storageTextures,
-    int numBindings) {
-  final sdlBindGpuFragmentStorageTexturesLookupFunction =
-      libSdl3.lookupFunction<
-          Void Function(
-              Pointer<SdlGpuRenderPass> renderPass,
-              Uint32 firstSlot,
-              Pointer<Pointer<SdlGpuTexture>> storageTextures,
-              Uint32 numBindings),
-          void Function(
-              Pointer<SdlGpuRenderPass> renderPass,
-              int firstSlot,
-              Pointer<Pointer<SdlGpuTexture>> storageTextures,
-              int numBindings)>('SDL_BindGPUFragmentStorageTextures');
+  Pointer<SdlGpuRenderPass> renderPass,
+  int firstSlot,
+  Pointer<Pointer<SdlGpuTexture>> storageTextures,
+  int numBindings,
+) {
+  final sdlBindGpuFragmentStorageTexturesLookupFunction = libSdl3
+      .lookupFunction<
+        Void Function(
+          Pointer<SdlGpuRenderPass> renderPass,
+          Uint32 firstSlot,
+          Pointer<Pointer<SdlGpuTexture>> storageTextures,
+          Uint32 numBindings,
+        ),
+        void Function(
+          Pointer<SdlGpuRenderPass> renderPass,
+          int firstSlot,
+          Pointer<Pointer<SdlGpuTexture>> storageTextures,
+          int numBindings,
+        )
+      >('SDL_BindGPUFragmentStorageTextures');
   return sdlBindGpuFragmentStorageTexturesLookupFunction(
-      renderPass, firstSlot, storageTextures, numBindings);
+    renderPass,
+    firstSlot,
+    storageTextures,
+    numBindings,
+  );
 }
 
 ///
@@ -1523,20 +1789,31 @@ void sdlBindGpuFragmentStorageTextures(
 /// extern SDL_DECLSPEC void SDLCALL SDL_BindGPUFragmentStorageBuffers( SDL_GPURenderPass *render_pass, Uint32 first_slot, SDL_GPUBuffer *const *storage_buffers, Uint32 num_bindings)
 /// ```
 void sdlBindGpuFragmentStorageBuffers(
-    Pointer<SdlGpuRenderPass> renderPass,
-    int firstSlot,
-    Pointer<Pointer<SdlGpuBuffer>> storageBuffers,
-    int numBindings) {
+  Pointer<SdlGpuRenderPass> renderPass,
+  int firstSlot,
+  Pointer<Pointer<SdlGpuBuffer>> storageBuffers,
+  int numBindings,
+) {
   final sdlBindGpuFragmentStorageBuffersLookupFunction = libSdl3.lookupFunction<
-      Void Function(Pointer<SdlGpuRenderPass> renderPass, Uint32 firstSlot,
-          Pointer<Pointer<SdlGpuBuffer>> storageBuffers, Uint32 numBindings),
-      void Function(
-          Pointer<SdlGpuRenderPass> renderPass,
-          int firstSlot,
-          Pointer<Pointer<SdlGpuBuffer>> storageBuffers,
-          int numBindings)>('SDL_BindGPUFragmentStorageBuffers');
+    Void Function(
+      Pointer<SdlGpuRenderPass> renderPass,
+      Uint32 firstSlot,
+      Pointer<Pointer<SdlGpuBuffer>> storageBuffers,
+      Uint32 numBindings,
+    ),
+    void Function(
+      Pointer<SdlGpuRenderPass> renderPass,
+      int firstSlot,
+      Pointer<Pointer<SdlGpuBuffer>> storageBuffers,
+      int numBindings,
+    )
+  >('SDL_BindGPUFragmentStorageBuffers');
   return sdlBindGpuFragmentStorageBuffersLookupFunction(
-      renderPass, firstSlot, storageBuffers, numBindings);
+    renderPass,
+    firstSlot,
+    storageBuffers,
+    numBindings,
+  );
 }
 
 ///
@@ -1566,29 +1843,39 @@ void sdlBindGpuFragmentStorageBuffers(
 /// extern SDL_DECLSPEC void SDLCALL SDL_DrawGPUIndexedPrimitives( SDL_GPURenderPass *render_pass, Uint32 num_indices, Uint32 num_instances, Uint32 first_index, Sint32 vertex_offset, Uint32 first_instance)
 /// ```
 void sdlDrawGpuIndexedPrimitives(
-    Pointer<SdlGpuRenderPass> renderPass,
-    int numIndices,
-    int numInstances,
-    int firstIndex,
-    int vertexOffset,
-    int firstInstance) {
+  Pointer<SdlGpuRenderPass> renderPass,
+  int numIndices,
+  int numInstances,
+  int firstIndex,
+  int vertexOffset,
+  int firstInstance,
+) {
   final sdlDrawGpuIndexedPrimitivesLookupFunction = libSdl3.lookupFunction<
-      Void Function(
-          Pointer<SdlGpuRenderPass> renderPass,
-          Uint32 numIndices,
-          Uint32 numInstances,
-          Uint32 firstIndex,
-          Int32 vertexOffset,
-          Uint32 firstInstance),
-      void Function(
-          Pointer<SdlGpuRenderPass> renderPass,
-          int numIndices,
-          int numInstances,
-          int firstIndex,
-          int vertexOffset,
-          int firstInstance)>('SDL_DrawGPUIndexedPrimitives');
-  return sdlDrawGpuIndexedPrimitivesLookupFunction(renderPass, numIndices,
-      numInstances, firstIndex, vertexOffset, firstInstance);
+    Void Function(
+      Pointer<SdlGpuRenderPass> renderPass,
+      Uint32 numIndices,
+      Uint32 numInstances,
+      Uint32 firstIndex,
+      Int32 vertexOffset,
+      Uint32 firstInstance,
+    ),
+    void Function(
+      Pointer<SdlGpuRenderPass> renderPass,
+      int numIndices,
+      int numInstances,
+      int firstIndex,
+      int vertexOffset,
+      int firstInstance,
+    )
+  >('SDL_DrawGPUIndexedPrimitives');
+  return sdlDrawGpuIndexedPrimitivesLookupFunction(
+    renderPass,
+    numIndices,
+    numInstances,
+    firstIndex,
+    vertexOffset,
+    firstInstance,
+  );
 }
 
 ///
@@ -1614,19 +1901,36 @@ void sdlDrawGpuIndexedPrimitives(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_DrawGPUPrimitives( SDL_GPURenderPass *render_pass, Uint32 num_vertices, Uint32 num_instances, Uint32 first_vertex, Uint32 first_instance)
 /// ```
-void sdlDrawGpuPrimitives(Pointer<SdlGpuRenderPass> renderPass, int numVertices,
-    int numInstances, int firstVertex, int firstInstance) {
+void sdlDrawGpuPrimitives(
+  Pointer<SdlGpuRenderPass> renderPass,
+  int numVertices,
+  int numInstances,
+  int firstVertex,
+  int firstInstance,
+) {
   final sdlDrawGpuPrimitivesLookupFunction = libSdl3.lookupFunction<
-      Void Function(Pointer<SdlGpuRenderPass> renderPass, Uint32 numVertices,
-          Uint32 numInstances, Uint32 firstVertex, Uint32 firstInstance),
-      void Function(
-          Pointer<SdlGpuRenderPass> renderPass,
-          int numVertices,
-          int numInstances,
-          int firstVertex,
-          int firstInstance)>('SDL_DrawGPUPrimitives');
+    Void Function(
+      Pointer<SdlGpuRenderPass> renderPass,
+      Uint32 numVertices,
+      Uint32 numInstances,
+      Uint32 firstVertex,
+      Uint32 firstInstance,
+    ),
+    void Function(
+      Pointer<SdlGpuRenderPass> renderPass,
+      int numVertices,
+      int numInstances,
+      int firstVertex,
+      int firstInstance,
+    )
+  >('SDL_DrawGPUPrimitives');
   return sdlDrawGpuPrimitivesLookupFunction(
-      renderPass, numVertices, numInstances, firstVertex, firstInstance);
+    renderPass,
+    numVertices,
+    numInstances,
+    firstVertex,
+    firstInstance,
+  );
 }
 
 ///
@@ -1648,18 +1952,32 @@ void sdlDrawGpuPrimitives(Pointer<SdlGpuRenderPass> renderPass, int numVertices,
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_DrawGPUPrimitivesIndirect( SDL_GPURenderPass *render_pass, SDL_GPUBuffer *buffer, Uint32 offset, Uint32 draw_count)
 /// ```
-void sdlDrawGpuPrimitivesIndirect(Pointer<SdlGpuRenderPass> renderPass,
-    Pointer<SdlGpuBuffer> buffer, int offset, int drawCount) {
+void sdlDrawGpuPrimitivesIndirect(
+  Pointer<SdlGpuRenderPass> renderPass,
+  Pointer<SdlGpuBuffer> buffer,
+  int offset,
+  int drawCount,
+) {
   final sdlDrawGpuPrimitivesIndirectLookupFunction = libSdl3.lookupFunction<
-      Void Function(Pointer<SdlGpuRenderPass> renderPass,
-          Pointer<SdlGpuBuffer> buffer, Uint32 offset, Uint32 drawCount),
-      void Function(
-          Pointer<SdlGpuRenderPass> renderPass,
-          Pointer<SdlGpuBuffer> buffer,
-          int offset,
-          int drawCount)>('SDL_DrawGPUPrimitivesIndirect');
+    Void Function(
+      Pointer<SdlGpuRenderPass> renderPass,
+      Pointer<SdlGpuBuffer> buffer,
+      Uint32 offset,
+      Uint32 drawCount,
+    ),
+    void Function(
+      Pointer<SdlGpuRenderPass> renderPass,
+      Pointer<SdlGpuBuffer> buffer,
+      int offset,
+      int drawCount,
+    )
+  >('SDL_DrawGPUPrimitivesIndirect');
   return sdlDrawGpuPrimitivesIndirectLookupFunction(
-      renderPass, buffer, offset, drawCount);
+    renderPass,
+    buffer,
+    offset,
+    drawCount,
+  );
 }
 
 ///
@@ -1681,19 +1999,33 @@ void sdlDrawGpuPrimitivesIndirect(Pointer<SdlGpuRenderPass> renderPass,
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_DrawGPUIndexedPrimitivesIndirect( SDL_GPURenderPass *render_pass, SDL_GPUBuffer *buffer, Uint32 offset, Uint32 draw_count)
 /// ```
-void sdlDrawGpuIndexedPrimitivesIndirect(Pointer<SdlGpuRenderPass> renderPass,
-    Pointer<SdlGpuBuffer> buffer, int offset, int drawCount) {
-  final sdlDrawGpuIndexedPrimitivesIndirectLookupFunction =
-      libSdl3.lookupFunction<
-          Void Function(Pointer<SdlGpuRenderPass> renderPass,
-              Pointer<SdlGpuBuffer> buffer, Uint32 offset, Uint32 drawCount),
-          void Function(
-              Pointer<SdlGpuRenderPass> renderPass,
-              Pointer<SdlGpuBuffer> buffer,
-              int offset,
-              int drawCount)>('SDL_DrawGPUIndexedPrimitivesIndirect');
+void sdlDrawGpuIndexedPrimitivesIndirect(
+  Pointer<SdlGpuRenderPass> renderPass,
+  Pointer<SdlGpuBuffer> buffer,
+  int offset,
+  int drawCount,
+) {
+  final sdlDrawGpuIndexedPrimitivesIndirectLookupFunction = libSdl3
+      .lookupFunction<
+        Void Function(
+          Pointer<SdlGpuRenderPass> renderPass,
+          Pointer<SdlGpuBuffer> buffer,
+          Uint32 offset,
+          Uint32 drawCount,
+        ),
+        void Function(
+          Pointer<SdlGpuRenderPass> renderPass,
+          Pointer<SdlGpuBuffer> buffer,
+          int offset,
+          int drawCount,
+        )
+      >('SDL_DrawGPUIndexedPrimitivesIndirect');
   return sdlDrawGpuIndexedPrimitivesIndirectLookupFunction(
-      renderPass, buffer, offset, drawCount);
+    renderPass,
+    buffer,
+    offset,
+    drawCount,
+  );
 }
 
 ///
@@ -1711,9 +2043,9 @@ void sdlDrawGpuIndexedPrimitivesIndirect(Pointer<SdlGpuRenderPass> renderPass,
 /// ```
 void sdlEndGpuRenderPass(Pointer<SdlGpuRenderPass> renderPass) {
   final sdlEndGpuRenderPassLookupFunction = libSdl3.lookupFunction<
-      Void Function(Pointer<SdlGpuRenderPass> renderPass),
-      void Function(
-          Pointer<SdlGpuRenderPass> renderPass)>('SDL_EndGPURenderPass');
+    Void Function(Pointer<SdlGpuRenderPass> renderPass),
+    void Function(Pointer<SdlGpuRenderPass> renderPass)
+  >('SDL_EndGPURenderPass');
   return sdlEndGpuRenderPassLookupFunction(renderPass);
 }
 
@@ -1758,30 +2090,35 @@ void sdlEndGpuRenderPass(Pointer<SdlGpuRenderPass> renderPass) {
 /// extern SDL_DECLSPEC SDL_GPUComputePass * SDLCALL SDL_BeginGPUComputePass( SDL_GPUCommandBuffer *command_buffer, const SDL_GPUStorageTextureReadWriteBinding *storage_texture_bindings, Uint32 num_storage_texture_bindings, const SDL_GPUStorageBufferReadWriteBinding *storage_buffer_bindings, Uint32 num_storage_buffer_bindings)
 /// ```
 Pointer<SdlGpuComputePass> sdlBeginGpuComputePass(
-    Pointer<SdlGpuCommandBuffer> commandBuffer,
-    Pointer<SdlGpuStorageTextureReadWriteBinding> storageTextureBindings,
-    int numStorageTextureBindings,
-    Pointer<SdlGpuStorageBufferReadWriteBinding> storageBufferBindings,
-    int numStorageBufferBindings) {
+  Pointer<SdlGpuCommandBuffer> commandBuffer,
+  Pointer<SdlGpuStorageTextureReadWriteBinding> storageTextureBindings,
+  int numStorageTextureBindings,
+  Pointer<SdlGpuStorageBufferReadWriteBinding> storageBufferBindings,
+  int numStorageBufferBindings,
+) {
   final sdlBeginGpuComputePassLookupFunction = libSdl3.lookupFunction<
-      Pointer<SdlGpuComputePass> Function(
-          Pointer<SdlGpuCommandBuffer> commandBuffer,
-          Pointer<SdlGpuStorageTextureReadWriteBinding> storageTextureBindings,
-          Uint32 numStorageTextureBindings,
-          Pointer<SdlGpuStorageBufferReadWriteBinding> storageBufferBindings,
-          Uint32 numStorageBufferBindings),
-      Pointer<SdlGpuComputePass> Function(
-          Pointer<SdlGpuCommandBuffer> commandBuffer,
-          Pointer<SdlGpuStorageTextureReadWriteBinding> storageTextureBindings,
-          int numStorageTextureBindings,
-          Pointer<SdlGpuStorageBufferReadWriteBinding> storageBufferBindings,
-          int numStorageBufferBindings)>('SDL_BeginGPUComputePass');
+    Pointer<SdlGpuComputePass> Function(
+      Pointer<SdlGpuCommandBuffer> commandBuffer,
+      Pointer<SdlGpuStorageTextureReadWriteBinding> storageTextureBindings,
+      Uint32 numStorageTextureBindings,
+      Pointer<SdlGpuStorageBufferReadWriteBinding> storageBufferBindings,
+      Uint32 numStorageBufferBindings,
+    ),
+    Pointer<SdlGpuComputePass> Function(
+      Pointer<SdlGpuCommandBuffer> commandBuffer,
+      Pointer<SdlGpuStorageTextureReadWriteBinding> storageTextureBindings,
+      int numStorageTextureBindings,
+      Pointer<SdlGpuStorageBufferReadWriteBinding> storageBufferBindings,
+      int numStorageBufferBindings,
+    )
+  >('SDL_BeginGPUComputePass');
   return sdlBeginGpuComputePassLookupFunction(
-      commandBuffer,
-      storageTextureBindings,
-      numStorageTextureBindings,
-      storageBufferBindings,
-      numStorageBufferBindings);
+    commandBuffer,
+    storageTextureBindings,
+    numStorageTextureBindings,
+    storageBufferBindings,
+    numStorageBufferBindings,
+  );
 }
 
 ///
@@ -1795,14 +2132,20 @@ Pointer<SdlGpuComputePass> sdlBeginGpuComputePass(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_BindGPUComputePipeline( SDL_GPUComputePass *compute_pass, SDL_GPUComputePipeline *compute_pipeline)
 /// ```
-void sdlBindGpuComputePipeline(Pointer<SdlGpuComputePass> computePass,
-    Pointer<SdlGpuComputePipeline> computePipeline) {
+void sdlBindGpuComputePipeline(
+  Pointer<SdlGpuComputePass> computePass,
+  Pointer<SdlGpuComputePipeline> computePipeline,
+) {
   final sdlBindGpuComputePipelineLookupFunction = libSdl3.lookupFunction<
-          Void Function(Pointer<SdlGpuComputePass> computePass,
-              Pointer<SdlGpuComputePipeline> computePipeline),
-          void Function(Pointer<SdlGpuComputePass> computePass,
-              Pointer<SdlGpuComputePipeline> computePipeline)>(
-      'SDL_BindGPUComputePipeline');
+    Void Function(
+      Pointer<SdlGpuComputePass> computePass,
+      Pointer<SdlGpuComputePipeline> computePipeline,
+    ),
+    void Function(
+      Pointer<SdlGpuComputePass> computePass,
+      Pointer<SdlGpuComputePipeline> computePipeline,
+    )
+  >('SDL_BindGPUComputePipeline');
   return sdlBindGpuComputePipelineLookupFunction(computePass, computePipeline);
 }
 
@@ -1829,23 +2172,31 @@ void sdlBindGpuComputePipeline(Pointer<SdlGpuComputePass> computePass,
 /// extern SDL_DECLSPEC void SDLCALL SDL_BindGPUComputeSamplers( SDL_GPUComputePass *compute_pass, Uint32 first_slot, const SDL_GPUTextureSamplerBinding *texture_sampler_bindings, Uint32 num_bindings)
 /// ```
 void sdlBindGpuComputeSamplers(
-    Pointer<SdlGpuComputePass> computePass,
-    int firstSlot,
-    Pointer<SdlGpuTextureSamplerBinding> textureSamplerBindings,
-    int numBindings) {
+  Pointer<SdlGpuComputePass> computePass,
+  int firstSlot,
+  Pointer<SdlGpuTextureSamplerBinding> textureSamplerBindings,
+  int numBindings,
+) {
   final sdlBindGpuComputeSamplersLookupFunction = libSdl3.lookupFunction<
-      Void Function(
-          Pointer<SdlGpuComputePass> computePass,
-          Uint32 firstSlot,
-          Pointer<SdlGpuTextureSamplerBinding> textureSamplerBindings,
-          Uint32 numBindings),
-      void Function(
-          Pointer<SdlGpuComputePass> computePass,
-          int firstSlot,
-          Pointer<SdlGpuTextureSamplerBinding> textureSamplerBindings,
-          int numBindings)>('SDL_BindGPUComputeSamplers');
+    Void Function(
+      Pointer<SdlGpuComputePass> computePass,
+      Uint32 firstSlot,
+      Pointer<SdlGpuTextureSamplerBinding> textureSamplerBindings,
+      Uint32 numBindings,
+    ),
+    void Function(
+      Pointer<SdlGpuComputePass> computePass,
+      int firstSlot,
+      Pointer<SdlGpuTextureSamplerBinding> textureSamplerBindings,
+      int numBindings,
+    )
+  >('SDL_BindGPUComputeSamplers');
   return sdlBindGpuComputeSamplersLookupFunction(
-      computePass, firstSlot, textureSamplerBindings, numBindings);
+    computePass,
+    firstSlot,
+    textureSamplerBindings,
+    numBindings,
+  );
 }
 
 ///
@@ -1870,20 +2221,31 @@ void sdlBindGpuComputeSamplers(
 /// extern SDL_DECLSPEC void SDLCALL SDL_BindGPUComputeStorageTextures( SDL_GPUComputePass *compute_pass, Uint32 first_slot, SDL_GPUTexture *const *storage_textures, Uint32 num_bindings)
 /// ```
 void sdlBindGpuComputeStorageTextures(
-    Pointer<SdlGpuComputePass> computePass,
-    int firstSlot,
-    Pointer<Pointer<SdlGpuTexture>> storageTextures,
-    int numBindings) {
+  Pointer<SdlGpuComputePass> computePass,
+  int firstSlot,
+  Pointer<Pointer<SdlGpuTexture>> storageTextures,
+  int numBindings,
+) {
   final sdlBindGpuComputeStorageTexturesLookupFunction = libSdl3.lookupFunction<
-      Void Function(Pointer<SdlGpuComputePass> computePass, Uint32 firstSlot,
-          Pointer<Pointer<SdlGpuTexture>> storageTextures, Uint32 numBindings),
-      void Function(
-          Pointer<SdlGpuComputePass> computePass,
-          int firstSlot,
-          Pointer<Pointer<SdlGpuTexture>> storageTextures,
-          int numBindings)>('SDL_BindGPUComputeStorageTextures');
+    Void Function(
+      Pointer<SdlGpuComputePass> computePass,
+      Uint32 firstSlot,
+      Pointer<Pointer<SdlGpuTexture>> storageTextures,
+      Uint32 numBindings,
+    ),
+    void Function(
+      Pointer<SdlGpuComputePass> computePass,
+      int firstSlot,
+      Pointer<Pointer<SdlGpuTexture>> storageTextures,
+      int numBindings,
+    )
+  >('SDL_BindGPUComputeStorageTextures');
   return sdlBindGpuComputeStorageTexturesLookupFunction(
-      computePass, firstSlot, storageTextures, numBindings);
+    computePass,
+    firstSlot,
+    storageTextures,
+    numBindings,
+  );
 }
 
 ///
@@ -1908,20 +2270,31 @@ void sdlBindGpuComputeStorageTextures(
 /// extern SDL_DECLSPEC void SDLCALL SDL_BindGPUComputeStorageBuffers( SDL_GPUComputePass *compute_pass, Uint32 first_slot, SDL_GPUBuffer *const *storage_buffers, Uint32 num_bindings)
 /// ```
 void sdlBindGpuComputeStorageBuffers(
-    Pointer<SdlGpuComputePass> computePass,
-    int firstSlot,
-    Pointer<Pointer<SdlGpuBuffer>> storageBuffers,
-    int numBindings) {
+  Pointer<SdlGpuComputePass> computePass,
+  int firstSlot,
+  Pointer<Pointer<SdlGpuBuffer>> storageBuffers,
+  int numBindings,
+) {
   final sdlBindGpuComputeStorageBuffersLookupFunction = libSdl3.lookupFunction<
-      Void Function(Pointer<SdlGpuComputePass> computePass, Uint32 firstSlot,
-          Pointer<Pointer<SdlGpuBuffer>> storageBuffers, Uint32 numBindings),
-      void Function(
-          Pointer<SdlGpuComputePass> computePass,
-          int firstSlot,
-          Pointer<Pointer<SdlGpuBuffer>> storageBuffers,
-          int numBindings)>('SDL_BindGPUComputeStorageBuffers');
+    Void Function(
+      Pointer<SdlGpuComputePass> computePass,
+      Uint32 firstSlot,
+      Pointer<Pointer<SdlGpuBuffer>> storageBuffers,
+      Uint32 numBindings,
+    ),
+    void Function(
+      Pointer<SdlGpuComputePass> computePass,
+      int firstSlot,
+      Pointer<Pointer<SdlGpuBuffer>> storageBuffers,
+      int numBindings,
+    )
+  >('SDL_BindGPUComputeStorageBuffers');
   return sdlBindGpuComputeStorageBuffersLookupFunction(
-      computePass, firstSlot, storageBuffers, numBindings);
+    computePass,
+    firstSlot,
+    storageBuffers,
+    numBindings,
+  );
 }
 
 ///
@@ -1947,15 +2320,32 @@ void sdlBindGpuComputeStorageBuffers(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_DispatchGPUCompute( SDL_GPUComputePass *compute_pass, Uint32 groupcount_x, Uint32 groupcount_y, Uint32 groupcount_z)
 /// ```
-void sdlDispatchGpuCompute(Pointer<SdlGpuComputePass> computePass,
-    int groupcountX, int groupcountY, int groupcountZ) {
+void sdlDispatchGpuCompute(
+  Pointer<SdlGpuComputePass> computePass,
+  int groupcountX,
+  int groupcountY,
+  int groupcountZ,
+) {
   final sdlDispatchGpuComputeLookupFunction = libSdl3.lookupFunction<
-      Void Function(Pointer<SdlGpuComputePass> computePass, Uint32 groupcountX,
-          Uint32 groupcountY, Uint32 groupcountZ),
-      void Function(Pointer<SdlGpuComputePass> computePass, int groupcountX,
-          int groupcountY, int groupcountZ)>('SDL_DispatchGPUCompute');
+    Void Function(
+      Pointer<SdlGpuComputePass> computePass,
+      Uint32 groupcountX,
+      Uint32 groupcountY,
+      Uint32 groupcountZ,
+    ),
+    void Function(
+      Pointer<SdlGpuComputePass> computePass,
+      int groupcountX,
+      int groupcountY,
+      int groupcountZ,
+    )
+  >('SDL_DispatchGPUCompute');
   return sdlDispatchGpuComputeLookupFunction(
-      computePass, groupcountX, groupcountY, groupcountZ);
+    computePass,
+    groupcountX,
+    groupcountY,
+    groupcountZ,
+  );
 }
 
 ///
@@ -1979,17 +2369,28 @@ void sdlDispatchGpuCompute(Pointer<SdlGpuComputePass> computePass,
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_DispatchGPUComputeIndirect( SDL_GPUComputePass *compute_pass, SDL_GPUBuffer *buffer, Uint32 offset)
 /// ```
-void sdlDispatchGpuComputeIndirect(Pointer<SdlGpuComputePass> computePass,
-    Pointer<SdlGpuBuffer> buffer, int offset) {
+void sdlDispatchGpuComputeIndirect(
+  Pointer<SdlGpuComputePass> computePass,
+  Pointer<SdlGpuBuffer> buffer,
+  int offset,
+) {
   final sdlDispatchGpuComputeIndirectLookupFunction = libSdl3.lookupFunction<
-      Void Function(Pointer<SdlGpuComputePass> computePass,
-          Pointer<SdlGpuBuffer> buffer, Uint32 offset),
-      void Function(
-          Pointer<SdlGpuComputePass> computePass,
-          Pointer<SdlGpuBuffer> buffer,
-          int offset)>('SDL_DispatchGPUComputeIndirect');
+    Void Function(
+      Pointer<SdlGpuComputePass> computePass,
+      Pointer<SdlGpuBuffer> buffer,
+      Uint32 offset,
+    ),
+    void Function(
+      Pointer<SdlGpuComputePass> computePass,
+      Pointer<SdlGpuBuffer> buffer,
+      int offset,
+    )
+  >('SDL_DispatchGPUComputeIndirect');
   return sdlDispatchGpuComputeIndirectLookupFunction(
-      computePass, buffer, offset);
+    computePass,
+    buffer,
+    offset,
+  );
 }
 
 ///
@@ -2007,9 +2408,9 @@ void sdlDispatchGpuComputeIndirect(Pointer<SdlGpuComputePass> computePass,
 /// ```
 void sdlEndGpuComputePass(Pointer<SdlGpuComputePass> computePass) {
   final sdlEndGpuComputePassLookupFunction = libSdl3.lookupFunction<
-      Void Function(Pointer<SdlGpuComputePass> computePass),
-      void Function(
-          Pointer<SdlGpuComputePass> computePass)>('SDL_EndGPUComputePass');
+    Void Function(Pointer<SdlGpuComputePass> computePass),
+    void Function(Pointer<SdlGpuComputePass> computePass)
+  >('SDL_EndGPUComputePass');
   return sdlEndGpuComputePassLookupFunction(computePass);
 }
 
@@ -2031,17 +2432,28 @@ void sdlEndGpuComputePass(Pointer<SdlGpuComputePass> computePass) {
 /// ```c
 /// extern SDL_DECLSPEC void * SDLCALL SDL_MapGPUTransferBuffer( SDL_GPUDevice *device, SDL_GPUTransferBuffer *transfer_buffer, bool cycle)
 /// ```
-Pointer<NativeType> sdlMapGpuTransferBuffer(Pointer<SdlGpuDevice> device,
-    Pointer<SdlGpuTransferBuffer> transferBuffer, bool cycle) {
+Pointer<NativeType> sdlMapGpuTransferBuffer(
+  Pointer<SdlGpuDevice> device,
+  Pointer<SdlGpuTransferBuffer> transferBuffer,
+  bool cycle,
+) {
   final sdlMapGpuTransferBufferLookupFunction = libSdl3.lookupFunction<
-      Pointer<NativeType> Function(Pointer<SdlGpuDevice> device,
-          Pointer<SdlGpuTransferBuffer> transferBuffer, Uint8 cycle),
-      Pointer<NativeType> Function(
-          Pointer<SdlGpuDevice> device,
-          Pointer<SdlGpuTransferBuffer> transferBuffer,
-          int cycle)>('SDL_MapGPUTransferBuffer');
+    Pointer<NativeType> Function(
+      Pointer<SdlGpuDevice> device,
+      Pointer<SdlGpuTransferBuffer> transferBuffer,
+      Uint8 cycle,
+    ),
+    Pointer<NativeType> Function(
+      Pointer<SdlGpuDevice> device,
+      Pointer<SdlGpuTransferBuffer> transferBuffer,
+      int cycle,
+    )
+  >('SDL_MapGPUTransferBuffer');
   return sdlMapGpuTransferBufferLookupFunction(
-      device, transferBuffer, cycle ? 1 : 0);
+    device,
+    transferBuffer,
+    cycle ? 1 : 0,
+  );
 }
 
 ///
@@ -2055,14 +2467,20 @@ Pointer<NativeType> sdlMapGpuTransferBuffer(Pointer<SdlGpuDevice> device,
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_UnmapGPUTransferBuffer( SDL_GPUDevice *device, SDL_GPUTransferBuffer *transfer_buffer)
 /// ```
-void sdlUnmapGpuTransferBuffer(Pointer<SdlGpuDevice> device,
-    Pointer<SdlGpuTransferBuffer> transferBuffer) {
+void sdlUnmapGpuTransferBuffer(
+  Pointer<SdlGpuDevice> device,
+  Pointer<SdlGpuTransferBuffer> transferBuffer,
+) {
   final sdlUnmapGpuTransferBufferLookupFunction = libSdl3.lookupFunction<
-          Void Function(Pointer<SdlGpuDevice> device,
-              Pointer<SdlGpuTransferBuffer> transferBuffer),
-          void Function(Pointer<SdlGpuDevice> device,
-              Pointer<SdlGpuTransferBuffer> transferBuffer)>(
-      'SDL_UnmapGPUTransferBuffer');
+    Void Function(
+      Pointer<SdlGpuDevice> device,
+      Pointer<SdlGpuTransferBuffer> transferBuffer,
+    ),
+    void Function(
+      Pointer<SdlGpuDevice> device,
+      Pointer<SdlGpuTransferBuffer> transferBuffer,
+    )
+  >('SDL_UnmapGPUTransferBuffer');
   return sdlUnmapGpuTransferBufferLookupFunction(device, transferBuffer);
 }
 
@@ -2082,12 +2500,14 @@ void sdlUnmapGpuTransferBuffer(Pointer<SdlGpuDevice> device,
 /// extern SDL_DECLSPEC SDL_GPUCopyPass * SDLCALL SDL_BeginGPUCopyPass( SDL_GPUCommandBuffer *command_buffer)
 /// ```
 Pointer<SdlGpuCopyPass> sdlBeginGpuCopyPass(
-    Pointer<SdlGpuCommandBuffer> commandBuffer) {
+  Pointer<SdlGpuCommandBuffer> commandBuffer,
+) {
   final sdlBeginGpuCopyPassLookupFunction = libSdl3.lookupFunction<
-      Pointer<SdlGpuCopyPass> Function(
-          Pointer<SdlGpuCommandBuffer> commandBuffer),
-      Pointer<SdlGpuCopyPass> Function(
-          Pointer<SdlGpuCommandBuffer> commandBuffer)>('SDL_BeginGPUCopyPass');
+    Pointer<SdlGpuCopyPass> Function(
+      Pointer<SdlGpuCommandBuffer> commandBuffer,
+    ),
+    Pointer<SdlGpuCopyPass> Function(Pointer<SdlGpuCommandBuffer> commandBuffer)
+  >('SDL_BeginGPUCopyPass');
   return sdlBeginGpuCopyPassLookupFunction(commandBuffer);
 }
 
@@ -2112,23 +2532,31 @@ Pointer<SdlGpuCopyPass> sdlBeginGpuCopyPass(
 /// extern SDL_DECLSPEC void SDLCALL SDL_UploadToGPUTexture( SDL_GPUCopyPass *copy_pass, const SDL_GPUTextureTransferInfo *source, const SDL_GPUTextureRegion *destination, bool cycle)
 /// ```
 void sdlUploadToGpuTexture(
-    Pointer<SdlGpuCopyPass> copyPass,
-    Pointer<SdlGpuTextureTransferInfo> source,
-    Pointer<SdlGpuTextureRegion> destination,
-    bool cycle) {
+  Pointer<SdlGpuCopyPass> copyPass,
+  Pointer<SdlGpuTextureTransferInfo> source,
+  Pointer<SdlGpuTextureRegion> destination,
+  bool cycle,
+) {
   final sdlUploadToGpuTextureLookupFunction = libSdl3.lookupFunction<
-      Void Function(
-          Pointer<SdlGpuCopyPass> copyPass,
-          Pointer<SdlGpuTextureTransferInfo> source,
-          Pointer<SdlGpuTextureRegion> destination,
-          Uint8 cycle),
-      void Function(
-          Pointer<SdlGpuCopyPass> copyPass,
-          Pointer<SdlGpuTextureTransferInfo> source,
-          Pointer<SdlGpuTextureRegion> destination,
-          int cycle)>('SDL_UploadToGPUTexture');
+    Void Function(
+      Pointer<SdlGpuCopyPass> copyPass,
+      Pointer<SdlGpuTextureTransferInfo> source,
+      Pointer<SdlGpuTextureRegion> destination,
+      Uint8 cycle,
+    ),
+    void Function(
+      Pointer<SdlGpuCopyPass> copyPass,
+      Pointer<SdlGpuTextureTransferInfo> source,
+      Pointer<SdlGpuTextureRegion> destination,
+      int cycle,
+    )
+  >('SDL_UploadToGPUTexture');
   return sdlUploadToGpuTextureLookupFunction(
-      copyPass, source, destination, cycle ? 1 : 0);
+    copyPass,
+    source,
+    destination,
+    cycle ? 1 : 0,
+  );
 }
 
 ///
@@ -2149,23 +2577,31 @@ void sdlUploadToGpuTexture(
 /// extern SDL_DECLSPEC void SDLCALL SDL_UploadToGPUBuffer( SDL_GPUCopyPass *copy_pass, const SDL_GPUTransferBufferLocation *source, const SDL_GPUBufferRegion *destination, bool cycle)
 /// ```
 void sdlUploadToGpuBuffer(
-    Pointer<SdlGpuCopyPass> copyPass,
-    Pointer<SdlGpuTransferBufferLocation> source,
-    Pointer<SdlGpuBufferRegion> destination,
-    bool cycle) {
+  Pointer<SdlGpuCopyPass> copyPass,
+  Pointer<SdlGpuTransferBufferLocation> source,
+  Pointer<SdlGpuBufferRegion> destination,
+  bool cycle,
+) {
   final sdlUploadToGpuBufferLookupFunction = libSdl3.lookupFunction<
-      Void Function(
-          Pointer<SdlGpuCopyPass> copyPass,
-          Pointer<SdlGpuTransferBufferLocation> source,
-          Pointer<SdlGpuBufferRegion> destination,
-          Uint8 cycle),
-      void Function(
-          Pointer<SdlGpuCopyPass> copyPass,
-          Pointer<SdlGpuTransferBufferLocation> source,
-          Pointer<SdlGpuBufferRegion> destination,
-          int cycle)>('SDL_UploadToGPUBuffer');
+    Void Function(
+      Pointer<SdlGpuCopyPass> copyPass,
+      Pointer<SdlGpuTransferBufferLocation> source,
+      Pointer<SdlGpuBufferRegion> destination,
+      Uint8 cycle,
+    ),
+    void Function(
+      Pointer<SdlGpuCopyPass> copyPass,
+      Pointer<SdlGpuTransferBufferLocation> source,
+      Pointer<SdlGpuBufferRegion> destination,
+      int cycle,
+    )
+  >('SDL_UploadToGPUBuffer');
   return sdlUploadToGpuBufferLookupFunction(
-      copyPass, source, destination, cycle ? 1 : 0);
+    copyPass,
+    source,
+    destination,
+    cycle ? 1 : 0,
+  );
 }
 
 ///
@@ -2189,32 +2625,43 @@ void sdlUploadToGpuBuffer(
 /// extern SDL_DECLSPEC void SDLCALL SDL_CopyGPUTextureToTexture( SDL_GPUCopyPass *copy_pass, const SDL_GPUTextureLocation *source, const SDL_GPUTextureLocation *destination, Uint32 w, Uint32 h, Uint32 d, bool cycle)
 /// ```
 void sdlCopyGpuTextureToTexture(
-    Pointer<SdlGpuCopyPass> copyPass,
-    Pointer<SdlGpuTextureLocation> source,
-    Pointer<SdlGpuTextureLocation> destination,
-    int w,
-    int h,
-    int d,
-    bool cycle) {
+  Pointer<SdlGpuCopyPass> copyPass,
+  Pointer<SdlGpuTextureLocation> source,
+  Pointer<SdlGpuTextureLocation> destination,
+  int w,
+  int h,
+  int d,
+  bool cycle,
+) {
   final sdlCopyGpuTextureToTextureLookupFunction = libSdl3.lookupFunction<
-      Void Function(
-          Pointer<SdlGpuCopyPass> copyPass,
-          Pointer<SdlGpuTextureLocation> source,
-          Pointer<SdlGpuTextureLocation> destination,
-          Uint32 w,
-          Uint32 h,
-          Uint32 d,
-          Uint8 cycle),
-      void Function(
-          Pointer<SdlGpuCopyPass> copyPass,
-          Pointer<SdlGpuTextureLocation> source,
-          Pointer<SdlGpuTextureLocation> destination,
-          int w,
-          int h,
-          int d,
-          int cycle)>('SDL_CopyGPUTextureToTexture');
+    Void Function(
+      Pointer<SdlGpuCopyPass> copyPass,
+      Pointer<SdlGpuTextureLocation> source,
+      Pointer<SdlGpuTextureLocation> destination,
+      Uint32 w,
+      Uint32 h,
+      Uint32 d,
+      Uint8 cycle,
+    ),
+    void Function(
+      Pointer<SdlGpuCopyPass> copyPass,
+      Pointer<SdlGpuTextureLocation> source,
+      Pointer<SdlGpuTextureLocation> destination,
+      int w,
+      int h,
+      int d,
+      int cycle,
+    )
+  >('SDL_CopyGPUTextureToTexture');
   return sdlCopyGpuTextureToTextureLookupFunction(
-      copyPass, source, destination, w, h, d, cycle ? 1 : 0);
+    copyPass,
+    source,
+    destination,
+    w,
+    h,
+    d,
+    cycle ? 1 : 0,
+  );
 }
 
 ///
@@ -2236,26 +2683,35 @@ void sdlCopyGpuTextureToTexture(
 /// extern SDL_DECLSPEC void SDLCALL SDL_CopyGPUBufferToBuffer( SDL_GPUCopyPass *copy_pass, const SDL_GPUBufferLocation *source, const SDL_GPUBufferLocation *destination, Uint32 size, bool cycle)
 /// ```
 void sdlCopyGpuBufferToBuffer(
-    Pointer<SdlGpuCopyPass> copyPass,
-    Pointer<SdlGpuBufferLocation> source,
-    Pointer<SdlGpuBufferLocation> destination,
-    int size,
-    bool cycle) {
+  Pointer<SdlGpuCopyPass> copyPass,
+  Pointer<SdlGpuBufferLocation> source,
+  Pointer<SdlGpuBufferLocation> destination,
+  int size,
+  bool cycle,
+) {
   final sdlCopyGpuBufferToBufferLookupFunction = libSdl3.lookupFunction<
-      Void Function(
-          Pointer<SdlGpuCopyPass> copyPass,
-          Pointer<SdlGpuBufferLocation> source,
-          Pointer<SdlGpuBufferLocation> destination,
-          Uint32 size,
-          Uint8 cycle),
-      void Function(
-          Pointer<SdlGpuCopyPass> copyPass,
-          Pointer<SdlGpuBufferLocation> source,
-          Pointer<SdlGpuBufferLocation> destination,
-          int size,
-          int cycle)>('SDL_CopyGPUBufferToBuffer');
+    Void Function(
+      Pointer<SdlGpuCopyPass> copyPass,
+      Pointer<SdlGpuBufferLocation> source,
+      Pointer<SdlGpuBufferLocation> destination,
+      Uint32 size,
+      Uint8 cycle,
+    ),
+    void Function(
+      Pointer<SdlGpuCopyPass> copyPass,
+      Pointer<SdlGpuBufferLocation> source,
+      Pointer<SdlGpuBufferLocation> destination,
+      int size,
+      int cycle,
+    )
+  >('SDL_CopyGPUBufferToBuffer');
   return sdlCopyGpuBufferToBufferLookupFunction(
-      copyPass, source, destination, size, cycle ? 1 : 0);
+    copyPass,
+    source,
+    destination,
+    size,
+    cycle ? 1 : 0,
+  );
 }
 
 ///
@@ -2275,19 +2731,22 @@ void sdlCopyGpuBufferToBuffer(
 /// extern SDL_DECLSPEC void SDLCALL SDL_DownloadFromGPUTexture( SDL_GPUCopyPass *copy_pass, const SDL_GPUTextureRegion *source, const SDL_GPUTextureTransferInfo *destination)
 /// ```
 void sdlDownloadFromGpuTexture(
-    Pointer<SdlGpuCopyPass> copyPass,
-    Pointer<SdlGpuTextureRegion> source,
-    Pointer<SdlGpuTextureTransferInfo> destination) {
+  Pointer<SdlGpuCopyPass> copyPass,
+  Pointer<SdlGpuTextureRegion> source,
+  Pointer<SdlGpuTextureTransferInfo> destination,
+) {
   final sdlDownloadFromGpuTextureLookupFunction = libSdl3.lookupFunction<
-          Void Function(
-              Pointer<SdlGpuCopyPass> copyPass,
-              Pointer<SdlGpuTextureRegion> source,
-              Pointer<SdlGpuTextureTransferInfo> destination),
-          void Function(
-              Pointer<SdlGpuCopyPass> copyPass,
-              Pointer<SdlGpuTextureRegion> source,
-              Pointer<SdlGpuTextureTransferInfo> destination)>(
-      'SDL_DownloadFromGPUTexture');
+    Void Function(
+      Pointer<SdlGpuCopyPass> copyPass,
+      Pointer<SdlGpuTextureRegion> source,
+      Pointer<SdlGpuTextureTransferInfo> destination,
+    ),
+    void Function(
+      Pointer<SdlGpuCopyPass> copyPass,
+      Pointer<SdlGpuTextureRegion> source,
+      Pointer<SdlGpuTextureTransferInfo> destination,
+    )
+  >('SDL_DownloadFromGPUTexture');
   return sdlDownloadFromGpuTextureLookupFunction(copyPass, source, destination);
 }
 
@@ -2307,19 +2766,22 @@ void sdlDownloadFromGpuTexture(
 /// extern SDL_DECLSPEC void SDLCALL SDL_DownloadFromGPUBuffer( SDL_GPUCopyPass *copy_pass, const SDL_GPUBufferRegion *source, const SDL_GPUTransferBufferLocation *destination)
 /// ```
 void sdlDownloadFromGpuBuffer(
-    Pointer<SdlGpuCopyPass> copyPass,
-    Pointer<SdlGpuBufferRegion> source,
-    Pointer<SdlGpuTransferBufferLocation> destination) {
+  Pointer<SdlGpuCopyPass> copyPass,
+  Pointer<SdlGpuBufferRegion> source,
+  Pointer<SdlGpuTransferBufferLocation> destination,
+) {
   final sdlDownloadFromGpuBufferLookupFunction = libSdl3.lookupFunction<
-          Void Function(
-              Pointer<SdlGpuCopyPass> copyPass,
-              Pointer<SdlGpuBufferRegion> source,
-              Pointer<SdlGpuTransferBufferLocation> destination),
-          void Function(
-              Pointer<SdlGpuCopyPass> copyPass,
-              Pointer<SdlGpuBufferRegion> source,
-              Pointer<SdlGpuTransferBufferLocation> destination)>(
-      'SDL_DownloadFromGPUBuffer');
+    Void Function(
+      Pointer<SdlGpuCopyPass> copyPass,
+      Pointer<SdlGpuBufferRegion> source,
+      Pointer<SdlGpuTransferBufferLocation> destination,
+    ),
+    void Function(
+      Pointer<SdlGpuCopyPass> copyPass,
+      Pointer<SdlGpuBufferRegion> source,
+      Pointer<SdlGpuTransferBufferLocation> destination,
+    )
+  >('SDL_DownloadFromGPUBuffer');
   return sdlDownloadFromGpuBufferLookupFunction(copyPass, source, destination);
 }
 
@@ -2335,8 +2797,9 @@ void sdlDownloadFromGpuBuffer(
 /// ```
 void sdlEndGpuCopyPass(Pointer<SdlGpuCopyPass> copyPass) {
   final sdlEndGpuCopyPassLookupFunction = libSdl3.lookupFunction<
-      Void Function(Pointer<SdlGpuCopyPass> copyPass),
-      void Function(Pointer<SdlGpuCopyPass> copyPass)>('SDL_EndGPUCopyPass');
+    Void Function(Pointer<SdlGpuCopyPass> copyPass),
+    void Function(Pointer<SdlGpuCopyPass> copyPass)
+  >('SDL_EndGPUCopyPass');
   return sdlEndGpuCopyPassLookupFunction(copyPass);
 }
 
@@ -2353,13 +2816,20 @@ void sdlEndGpuCopyPass(Pointer<SdlGpuCopyPass> copyPass) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_GenerateMipmapsForGPUTexture( SDL_GPUCommandBuffer *command_buffer, SDL_GPUTexture *texture)
 /// ```
-void sdlGenerateMipmapsForGpuTexture(Pointer<SdlGpuCommandBuffer> commandBuffer,
-    Pointer<SdlGpuTexture> texture) {
+void sdlGenerateMipmapsForGpuTexture(
+  Pointer<SdlGpuCommandBuffer> commandBuffer,
+  Pointer<SdlGpuTexture> texture,
+) {
   final sdlGenerateMipmapsForGpuTextureLookupFunction = libSdl3.lookupFunction<
-      Void Function(Pointer<SdlGpuCommandBuffer> commandBuffer,
-          Pointer<SdlGpuTexture> texture),
-      void Function(Pointer<SdlGpuCommandBuffer> commandBuffer,
-          Pointer<SdlGpuTexture> texture)>('SDL_GenerateMipmapsForGPUTexture');
+    Void Function(
+      Pointer<SdlGpuCommandBuffer> commandBuffer,
+      Pointer<SdlGpuTexture> texture,
+    ),
+    void Function(
+      Pointer<SdlGpuCommandBuffer> commandBuffer,
+      Pointer<SdlGpuTexture> texture,
+    )
+  >('SDL_GenerateMipmapsForGPUTexture');
   return sdlGenerateMipmapsForGpuTextureLookupFunction(commandBuffer, texture);
 }
 
@@ -2377,12 +2847,19 @@ void sdlGenerateMipmapsForGpuTexture(Pointer<SdlGpuCommandBuffer> commandBuffer,
 /// extern SDL_DECLSPEC void SDLCALL SDL_BlitGPUTexture( SDL_GPUCommandBuffer *command_buffer, const SDL_GPUBlitInfo *info)
 /// ```
 void sdlBlitGpuTexture(
-    Pointer<SdlGpuCommandBuffer> commandBuffer, Pointer<SdlGpuBlitInfo> info) {
+  Pointer<SdlGpuCommandBuffer> commandBuffer,
+  Pointer<SdlGpuBlitInfo> info,
+) {
   final sdlBlitGpuTextureLookupFunction = libSdl3.lookupFunction<
-      Void Function(Pointer<SdlGpuCommandBuffer> commandBuffer,
-          Pointer<SdlGpuBlitInfo> info),
-      void Function(Pointer<SdlGpuCommandBuffer> commandBuffer,
-          Pointer<SdlGpuBlitInfo> info)>('SDL_BlitGPUTexture');
+    Void Function(
+      Pointer<SdlGpuCommandBuffer> commandBuffer,
+      Pointer<SdlGpuBlitInfo> info,
+    ),
+    void Function(
+      Pointer<SdlGpuCommandBuffer> commandBuffer,
+      Pointer<SdlGpuBlitInfo> info,
+    )
+  >('SDL_BlitGPUTexture');
   return sdlBlitGpuTextureLookupFunction(commandBuffer, info);
 }
 
@@ -2403,17 +2880,29 @@ void sdlBlitGpuTexture(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_WindowSupportsGPUSwapchainComposition( SDL_GPUDevice *device, SDL_Window *window, SDL_GPUSwapchainComposition swapchain_composition)
 /// ```
-bool sdlWindowSupportsGpuSwapchainComposition(Pointer<SdlGpuDevice> device,
-    Pointer<SdlWindow> window, int swapchainComposition) {
-  final sdlWindowSupportsGpuSwapchainCompositionLookupFunction =
-      libSdl3.lookupFunction<
-              Uint8 Function(Pointer<SdlGpuDevice> device,
-                  Pointer<SdlWindow> window, Int32 swapchainComposition),
-              int Function(Pointer<SdlGpuDevice> device,
-                  Pointer<SdlWindow> window, int swapchainComposition)>(
-          'SDL_WindowSupportsGPUSwapchainComposition');
+bool sdlWindowSupportsGpuSwapchainComposition(
+  Pointer<SdlGpuDevice> device,
+  Pointer<SdlWindow> window,
+  int swapchainComposition,
+) {
+  final sdlWindowSupportsGpuSwapchainCompositionLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<SdlGpuDevice> device,
+          Pointer<SdlWindow> window,
+          Int32 swapchainComposition,
+        ),
+        int Function(
+          Pointer<SdlGpuDevice> device,
+          Pointer<SdlWindow> window,
+          int swapchainComposition,
+        )
+      >('SDL_WindowSupportsGPUSwapchainComposition');
   return sdlWindowSupportsGpuSwapchainCompositionLookupFunction(
-          device, window, swapchainComposition) ==
+        device,
+        window,
+        swapchainComposition,
+      ) ==
       1;
 }
 
@@ -2435,14 +2924,27 @@ bool sdlWindowSupportsGpuSwapchainComposition(Pointer<SdlGpuDevice> device,
 /// extern SDL_DECLSPEC bool SDLCALL SDL_WindowSupportsGPUPresentMode( SDL_GPUDevice *device, SDL_Window *window, SDL_GPUPresentMode present_mode)
 /// ```
 bool sdlWindowSupportsGpuPresentMode(
-    Pointer<SdlGpuDevice> device, Pointer<SdlWindow> window, int presentMode) {
+  Pointer<SdlGpuDevice> device,
+  Pointer<SdlWindow> window,
+  int presentMode,
+) {
   final sdlWindowSupportsGpuPresentModeLookupFunction = libSdl3.lookupFunction<
-      Uint8 Function(Pointer<SdlGpuDevice> device, Pointer<SdlWindow> window,
-          Int32 presentMode),
-      int Function(Pointer<SdlGpuDevice> device, Pointer<SdlWindow> window,
-          int presentMode)>('SDL_WindowSupportsGPUPresentMode');
+    Uint8 Function(
+      Pointer<SdlGpuDevice> device,
+      Pointer<SdlWindow> window,
+      Int32 presentMode,
+    ),
+    int Function(
+      Pointer<SdlGpuDevice> device,
+      Pointer<SdlWindow> window,
+      int presentMode,
+    )
+  >('SDL_WindowSupportsGPUPresentMode');
   return sdlWindowSupportsGpuPresentModeLookupFunction(
-          device, window, presentMode) ==
+        device,
+        window,
+        presentMode,
+      ) ==
       1;
 }
 
@@ -2477,11 +2979,13 @@ bool sdlWindowSupportsGpuPresentMode(
 /// extern SDL_DECLSPEC bool SDLCALL SDL_ClaimWindowForGPUDevice( SDL_GPUDevice *device, SDL_Window *window)
 /// ```
 bool sdlClaimWindowForGpuDevice(
-    Pointer<SdlGpuDevice> device, Pointer<SdlWindow> window) {
+  Pointer<SdlGpuDevice> device,
+  Pointer<SdlWindow> window,
+) {
   final sdlClaimWindowForGpuDeviceLookupFunction = libSdl3.lookupFunction<
-      Uint8 Function(Pointer<SdlGpuDevice> device, Pointer<SdlWindow> window),
-      int Function(Pointer<SdlGpuDevice> device,
-          Pointer<SdlWindow> window)>('SDL_ClaimWindowForGPUDevice');
+    Uint8 Function(Pointer<SdlGpuDevice> device, Pointer<SdlWindow> window),
+    int Function(Pointer<SdlGpuDevice> device, Pointer<SdlWindow> window)
+  >('SDL_ClaimWindowForGPUDevice');
   return sdlClaimWindowForGpuDeviceLookupFunction(device, window) == 1;
 }
 
@@ -2499,11 +3003,13 @@ bool sdlClaimWindowForGpuDevice(
 /// extern SDL_DECLSPEC void SDLCALL SDL_ReleaseWindowFromGPUDevice( SDL_GPUDevice *device, SDL_Window *window)
 /// ```
 void sdlReleaseWindowFromGpuDevice(
-    Pointer<SdlGpuDevice> device, Pointer<SdlWindow> window) {
+  Pointer<SdlGpuDevice> device,
+  Pointer<SdlWindow> window,
+) {
   final sdlReleaseWindowFromGpuDeviceLookupFunction = libSdl3.lookupFunction<
-      Void Function(Pointer<SdlGpuDevice> device, Pointer<SdlWindow> window),
-      void Function(Pointer<SdlGpuDevice> device,
-          Pointer<SdlWindow> window)>('SDL_ReleaseWindowFromGPUDevice');
+    Void Function(Pointer<SdlGpuDevice> device, Pointer<SdlWindow> window),
+    void Function(Pointer<SdlGpuDevice> device, Pointer<SdlWindow> window)
+  >('SDL_ReleaseWindowFromGPUDevice');
   return sdlReleaseWindowFromGpuDeviceLookupFunction(device, window);
 }
 
@@ -2533,18 +3039,32 @@ void sdlReleaseWindowFromGpuDevice(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetGPUSwapchainParameters( SDL_GPUDevice *device, SDL_Window *window, SDL_GPUSwapchainComposition swapchain_composition, SDL_GPUPresentMode present_mode)
 /// ```
-bool sdlSetGpuSwapchainParameters(Pointer<SdlGpuDevice> device,
-    Pointer<SdlWindow> window, int swapchainComposition, int presentMode) {
+bool sdlSetGpuSwapchainParameters(
+  Pointer<SdlGpuDevice> device,
+  Pointer<SdlWindow> window,
+  int swapchainComposition,
+  int presentMode,
+) {
   final sdlSetGpuSwapchainParametersLookupFunction = libSdl3.lookupFunction<
-      Uint8 Function(Pointer<SdlGpuDevice> device, Pointer<SdlWindow> window,
-          Int32 swapchainComposition, Int32 presentMode),
-      int Function(
-          Pointer<SdlGpuDevice> device,
-          Pointer<SdlWindow> window,
-          int swapchainComposition,
-          int presentMode)>('SDL_SetGPUSwapchainParameters');
+    Uint8 Function(
+      Pointer<SdlGpuDevice> device,
+      Pointer<SdlWindow> window,
+      Int32 swapchainComposition,
+      Int32 presentMode,
+    ),
+    int Function(
+      Pointer<SdlGpuDevice> device,
+      Pointer<SdlWindow> window,
+      int swapchainComposition,
+      int presentMode,
+    )
+  >('SDL_SetGPUSwapchainParameters');
   return sdlSetGpuSwapchainParametersLookupFunction(
-          device, window, swapchainComposition, presentMode) ==
+        device,
+        window,
+        swapchainComposition,
+        presentMode,
+      ) ==
       1;
 }
 
@@ -2577,14 +3097,17 @@ bool sdlSetGpuSwapchainParameters(Pointer<SdlGpuDevice> device,
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetGPUAllowedFramesInFlight( SDL_GPUDevice *device, Uint32 allowed_frames_in_flight)
 /// ```
 bool sdlSetGpuAllowedFramesInFlight(
-    Pointer<SdlGpuDevice> device, int allowedFramesInFlight) {
+  Pointer<SdlGpuDevice> device,
+  int allowedFramesInFlight,
+) {
   final sdlSetGpuAllowedFramesInFlightLookupFunction = libSdl3.lookupFunction<
-      Uint8 Function(
-          Pointer<SdlGpuDevice> device, Uint32 allowedFramesInFlight),
-      int Function(Pointer<SdlGpuDevice> device,
-          int allowedFramesInFlight)>('SDL_SetGPUAllowedFramesInFlight');
+    Uint8 Function(Pointer<SdlGpuDevice> device, Uint32 allowedFramesInFlight),
+    int Function(Pointer<SdlGpuDevice> device, int allowedFramesInFlight)
+  >('SDL_SetGPUAllowedFramesInFlight');
   return sdlSetGpuAllowedFramesInFlightLookupFunction(
-          device, allowedFramesInFlight) ==
+        device,
+        allowedFramesInFlight,
+      ) ==
       1;
 }
 
@@ -2603,11 +3126,13 @@ bool sdlSetGpuAllowedFramesInFlight(
 /// extern SDL_DECLSPEC SDL_GPUTextureFormat SDLCALL SDL_GetGPUSwapchainTextureFormat( SDL_GPUDevice *device, SDL_Window *window)
 /// ```
 int sdlGetGpuSwapchainTextureFormat(
-    Pointer<SdlGpuDevice> device, Pointer<SdlWindow> window) {
+  Pointer<SdlGpuDevice> device,
+  Pointer<SdlWindow> window,
+) {
   final sdlGetGpuSwapchainTextureFormatLookupFunction = libSdl3.lookupFunction<
-      Int32 Function(Pointer<SdlGpuDevice> device, Pointer<SdlWindow> window),
-      int Function(Pointer<SdlGpuDevice> device,
-          Pointer<SdlWindow> window)>('SDL_GetGPUSwapchainTextureFormat');
+    Int32 Function(Pointer<SdlGpuDevice> device, Pointer<SdlWindow> window),
+    int Function(Pointer<SdlGpuDevice> device, Pointer<SdlWindow> window)
+  >('SDL_GetGPUSwapchainTextureFormat');
   return sdlGetGpuSwapchainTextureFormatLookupFunction(device, window);
 }
 
@@ -2661,27 +3186,35 @@ int sdlGetGpuSwapchainTextureFormat(
 /// extern SDL_DECLSPEC bool SDLCALL SDL_AcquireGPUSwapchainTexture( SDL_GPUCommandBuffer *command_buffer, SDL_Window *window, SDL_GPUTexture **swapchain_texture, Uint32 *swapchain_texture_width, Uint32 *swapchain_texture_height)
 /// ```
 bool sdlAcquireGpuSwapchainTexture(
-    Pointer<SdlGpuCommandBuffer> commandBuffer,
-    Pointer<SdlWindow> window,
-    Pointer<Pointer<SdlGpuTexture>> swapchainTexture,
-    Pointer<Uint32> swapchainTextureWidth,
-    Pointer<Uint32> swapchainTextureHeight) {
+  Pointer<SdlGpuCommandBuffer> commandBuffer,
+  Pointer<SdlWindow> window,
+  Pointer<Pointer<SdlGpuTexture>> swapchainTexture,
+  Pointer<Uint32> swapchainTextureWidth,
+  Pointer<Uint32> swapchainTextureHeight,
+) {
   final sdlAcquireGpuSwapchainTextureLookupFunction = libSdl3.lookupFunction<
-          Uint8 Function(
-              Pointer<SdlGpuCommandBuffer> commandBuffer,
-              Pointer<SdlWindow> window,
-              Pointer<Pointer<SdlGpuTexture>> swapchainTexture,
-              Pointer<Uint32> swapchainTextureWidth,
-              Pointer<Uint32> swapchainTextureHeight),
-          int Function(
-              Pointer<SdlGpuCommandBuffer> commandBuffer,
-              Pointer<SdlWindow> window,
-              Pointer<Pointer<SdlGpuTexture>> swapchainTexture,
-              Pointer<Uint32> swapchainTextureWidth,
-              Pointer<Uint32> swapchainTextureHeight)>(
-      'SDL_AcquireGPUSwapchainTexture');
-  return sdlAcquireGpuSwapchainTextureLookupFunction(commandBuffer, window,
-          swapchainTexture, swapchainTextureWidth, swapchainTextureHeight) ==
+    Uint8 Function(
+      Pointer<SdlGpuCommandBuffer> commandBuffer,
+      Pointer<SdlWindow> window,
+      Pointer<Pointer<SdlGpuTexture>> swapchainTexture,
+      Pointer<Uint32> swapchainTextureWidth,
+      Pointer<Uint32> swapchainTextureHeight,
+    ),
+    int Function(
+      Pointer<SdlGpuCommandBuffer> commandBuffer,
+      Pointer<SdlWindow> window,
+      Pointer<Pointer<SdlGpuTexture>> swapchainTexture,
+      Pointer<Uint32> swapchainTextureWidth,
+      Pointer<Uint32> swapchainTextureHeight,
+    )
+  >('SDL_AcquireGPUSwapchainTexture');
+  return sdlAcquireGpuSwapchainTextureLookupFunction(
+        commandBuffer,
+        window,
+        swapchainTexture,
+        swapchainTextureWidth,
+        swapchainTextureHeight,
+      ) ==
       1;
 }
 
@@ -2706,11 +3239,13 @@ bool sdlAcquireGpuSwapchainTexture(
 /// extern SDL_DECLSPEC bool SDLCALL SDL_WaitForGPUSwapchain( SDL_GPUDevice *device, SDL_Window *window)
 /// ```
 bool sdlWaitForGpuSwapchain(
-    Pointer<SdlGpuDevice> device, Pointer<SdlWindow> window) {
+  Pointer<SdlGpuDevice> device,
+  Pointer<SdlWindow> window,
+) {
   final sdlWaitForGpuSwapchainLookupFunction = libSdl3.lookupFunction<
-      Uint8 Function(Pointer<SdlGpuDevice> device, Pointer<SdlWindow> window),
-      int Function(Pointer<SdlGpuDevice> device,
-          Pointer<SdlWindow> window)>('SDL_WaitForGPUSwapchain');
+    Uint8 Function(Pointer<SdlGpuDevice> device, Pointer<SdlWindow> window),
+    int Function(Pointer<SdlGpuDevice> device, Pointer<SdlWindow> window)
+  >('SDL_WaitForGPUSwapchain');
   return sdlWaitForGpuSwapchainLookupFunction(device, window) == 1;
 }
 
@@ -2756,32 +3291,36 @@ bool sdlWaitForGpuSwapchain(
 /// extern SDL_DECLSPEC bool SDLCALL SDL_WaitAndAcquireGPUSwapchainTexture( SDL_GPUCommandBuffer *command_buffer, SDL_Window *window, SDL_GPUTexture **swapchain_texture, Uint32 *swapchain_texture_width, Uint32 *swapchain_texture_height)
 /// ```
 bool sdlWaitAndAcquireGpuSwapchainTexture(
-    Pointer<SdlGpuCommandBuffer> commandBuffer,
-    Pointer<SdlWindow> window,
-    Pointer<Pointer<SdlGpuTexture>> swapchainTexture,
-    Pointer<Uint32> swapchainTextureWidth,
-    Pointer<Uint32> swapchainTextureHeight) {
-  final sdlWaitAndAcquireGpuSwapchainTextureLookupFunction =
-      libSdl3.lookupFunction<
-              Uint8 Function(
-                  Pointer<SdlGpuCommandBuffer> commandBuffer,
-                  Pointer<SdlWindow> window,
-                  Pointer<Pointer<SdlGpuTexture>> swapchainTexture,
-                  Pointer<Uint32> swapchainTextureWidth,
-                  Pointer<Uint32> swapchainTextureHeight),
-              int Function(
-                  Pointer<SdlGpuCommandBuffer> commandBuffer,
-                  Pointer<SdlWindow> window,
-                  Pointer<Pointer<SdlGpuTexture>> swapchainTexture,
-                  Pointer<Uint32> swapchainTextureWidth,
-                  Pointer<Uint32> swapchainTextureHeight)>(
-          'SDL_WaitAndAcquireGPUSwapchainTexture');
+  Pointer<SdlGpuCommandBuffer> commandBuffer,
+  Pointer<SdlWindow> window,
+  Pointer<Pointer<SdlGpuTexture>> swapchainTexture,
+  Pointer<Uint32> swapchainTextureWidth,
+  Pointer<Uint32> swapchainTextureHeight,
+) {
+  final sdlWaitAndAcquireGpuSwapchainTextureLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<SdlGpuCommandBuffer> commandBuffer,
+          Pointer<SdlWindow> window,
+          Pointer<Pointer<SdlGpuTexture>> swapchainTexture,
+          Pointer<Uint32> swapchainTextureWidth,
+          Pointer<Uint32> swapchainTextureHeight,
+        ),
+        int Function(
+          Pointer<SdlGpuCommandBuffer> commandBuffer,
+          Pointer<SdlWindow> window,
+          Pointer<Pointer<SdlGpuTexture>> swapchainTexture,
+          Pointer<Uint32> swapchainTextureWidth,
+          Pointer<Uint32> swapchainTextureHeight,
+        )
+      >('SDL_WaitAndAcquireGPUSwapchainTexture');
   return sdlWaitAndAcquireGpuSwapchainTextureLookupFunction(
-          commandBuffer,
-          window,
-          swapchainTexture,
-          swapchainTextureWidth,
-          swapchainTextureHeight) ==
+        commandBuffer,
+        window,
+        swapchainTexture,
+        swapchainTextureWidth,
+        swapchainTextureHeight,
+      ) ==
       1;
 }
 
@@ -2811,9 +3350,9 @@ bool sdlWaitAndAcquireGpuSwapchainTexture(
 /// ```
 bool sdlSubmitGpuCommandBuffer(Pointer<SdlGpuCommandBuffer> commandBuffer) {
   final sdlSubmitGpuCommandBufferLookupFunction = libSdl3.lookupFunction<
-          Uint8 Function(Pointer<SdlGpuCommandBuffer> commandBuffer),
-          int Function(Pointer<SdlGpuCommandBuffer> commandBuffer)>(
-      'SDL_SubmitGPUCommandBuffer');
+    Uint8 Function(Pointer<SdlGpuCommandBuffer> commandBuffer),
+    int Function(Pointer<SdlGpuCommandBuffer> commandBuffer)
+  >('SDL_SubmitGPUCommandBuffer');
   return sdlSubmitGpuCommandBufferLookupFunction(commandBuffer) == 1;
 }
 
@@ -2845,14 +3384,17 @@ bool sdlSubmitGpuCommandBuffer(Pointer<SdlGpuCommandBuffer> commandBuffer) {
 /// extern SDL_DECLSPEC SDL_GPUFence * SDLCALL SDL_SubmitGPUCommandBufferAndAcquireFence( SDL_GPUCommandBuffer *command_buffer)
 /// ```
 Pointer<SdlGpuFence> sdlSubmitGpuCommandBufferAndAcquireFence(
-    Pointer<SdlGpuCommandBuffer> commandBuffer) {
-  final sdlSubmitGpuCommandBufferAndAcquireFenceLookupFunction =
-      libSdl3.lookupFunction<
-              Pointer<SdlGpuFence> Function(
-                  Pointer<SdlGpuCommandBuffer> commandBuffer),
-              Pointer<SdlGpuFence> Function(
-                  Pointer<SdlGpuCommandBuffer> commandBuffer)>(
-          'SDL_SubmitGPUCommandBufferAndAcquireFence');
+  Pointer<SdlGpuCommandBuffer> commandBuffer,
+) {
+  final sdlSubmitGpuCommandBufferAndAcquireFenceLookupFunction = libSdl3
+      .lookupFunction<
+        Pointer<SdlGpuFence> Function(
+          Pointer<SdlGpuCommandBuffer> commandBuffer,
+        ),
+        Pointer<SdlGpuFence> Function(
+          Pointer<SdlGpuCommandBuffer> commandBuffer,
+        )
+      >('SDL_SubmitGPUCommandBufferAndAcquireFence');
   return sdlSubmitGpuCommandBufferAndAcquireFenceLookupFunction(commandBuffer);
 }
 
@@ -2883,9 +3425,9 @@ Pointer<SdlGpuFence> sdlSubmitGpuCommandBufferAndAcquireFence(
 /// ```
 bool sdlCancelGpuCommandBuffer(Pointer<SdlGpuCommandBuffer> commandBuffer) {
   final sdlCancelGpuCommandBufferLookupFunction = libSdl3.lookupFunction<
-          Uint8 Function(Pointer<SdlGpuCommandBuffer> commandBuffer),
-          int Function(Pointer<SdlGpuCommandBuffer> commandBuffer)>(
-      'SDL_CancelGPUCommandBuffer');
+    Uint8 Function(Pointer<SdlGpuCommandBuffer> commandBuffer),
+    int Function(Pointer<SdlGpuCommandBuffer> commandBuffer)
+  >('SDL_CancelGPUCommandBuffer');
   return sdlCancelGpuCommandBufferLookupFunction(commandBuffer) == 1;
 }
 
@@ -2905,8 +3447,9 @@ bool sdlCancelGpuCommandBuffer(Pointer<SdlGpuCommandBuffer> commandBuffer) {
 /// ```
 bool sdlWaitForGpuIdle(Pointer<SdlGpuDevice> device) {
   final sdlWaitForGpuIdleLookupFunction = libSdl3.lookupFunction<
-      Uint8 Function(Pointer<SdlGpuDevice> device),
-      int Function(Pointer<SdlGpuDevice> device)>('SDL_WaitForGPUIdle');
+    Uint8 Function(Pointer<SdlGpuDevice> device),
+    int Function(Pointer<SdlGpuDevice> device)
+  >('SDL_WaitForGPUIdle');
   return sdlWaitForGpuIdleLookupFunction(device) == 1;
 }
 
@@ -2929,18 +3472,32 @@ bool sdlWaitForGpuIdle(Pointer<SdlGpuDevice> device) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_WaitForGPUFences( SDL_GPUDevice *device, bool wait_all, SDL_GPUFence *const *fences, Uint32 num_fences)
 /// ```
-bool sdlWaitForGpuFences(Pointer<SdlGpuDevice> device, bool waitAll,
-    Pointer<Pointer<SdlGpuFence>> fences, int numFences) {
+bool sdlWaitForGpuFences(
+  Pointer<SdlGpuDevice> device,
+  bool waitAll,
+  Pointer<Pointer<SdlGpuFence>> fences,
+  int numFences,
+) {
   final sdlWaitForGpuFencesLookupFunction = libSdl3.lookupFunction<
-      Uint8 Function(Pointer<SdlGpuDevice> device, Uint8 waitAll,
-          Pointer<Pointer<SdlGpuFence>> fences, Uint32 numFences),
-      int Function(
-          Pointer<SdlGpuDevice> device,
-          int waitAll,
-          Pointer<Pointer<SdlGpuFence>> fences,
-          int numFences)>('SDL_WaitForGPUFences');
+    Uint8 Function(
+      Pointer<SdlGpuDevice> device,
+      Uint8 waitAll,
+      Pointer<Pointer<SdlGpuFence>> fences,
+      Uint32 numFences,
+    ),
+    int Function(
+      Pointer<SdlGpuDevice> device,
+      int waitAll,
+      Pointer<Pointer<SdlGpuFence>> fences,
+      int numFences,
+    )
+  >('SDL_WaitForGPUFences');
   return sdlWaitForGpuFencesLookupFunction(
-          device, waitAll ? 1 : 0, fences, numFences) ==
+        device,
+        waitAll ? 1 : 0,
+        fences,
+        numFences,
+      ) ==
       1;
 }
 
@@ -2959,11 +3516,13 @@ bool sdlWaitForGpuFences(Pointer<SdlGpuDevice> device, bool waitAll,
 /// extern SDL_DECLSPEC bool SDLCALL SDL_QueryGPUFence( SDL_GPUDevice *device, SDL_GPUFence *fence)
 /// ```
 bool sdlQueryGpuFence(
-    Pointer<SdlGpuDevice> device, Pointer<SdlGpuFence> fence) {
+  Pointer<SdlGpuDevice> device,
+  Pointer<SdlGpuFence> fence,
+) {
   final sdlQueryGpuFenceLookupFunction = libSdl3.lookupFunction<
-      Uint8 Function(Pointer<SdlGpuDevice> device, Pointer<SdlGpuFence> fence),
-      int Function(Pointer<SdlGpuDevice> device,
-          Pointer<SdlGpuFence> fence)>('SDL_QueryGPUFence');
+    Uint8 Function(Pointer<SdlGpuDevice> device, Pointer<SdlGpuFence> fence),
+    int Function(Pointer<SdlGpuDevice> device, Pointer<SdlGpuFence> fence)
+  >('SDL_QueryGPUFence');
   return sdlQueryGpuFenceLookupFunction(device, fence) == 1;
 }
 
@@ -2983,11 +3542,13 @@ bool sdlQueryGpuFence(
 /// extern SDL_DECLSPEC void SDLCALL SDL_ReleaseGPUFence( SDL_GPUDevice *device, SDL_GPUFence *fence)
 /// ```
 void sdlReleaseGpuFence(
-    Pointer<SdlGpuDevice> device, Pointer<SdlGpuFence> fence) {
+  Pointer<SdlGpuDevice> device,
+  Pointer<SdlGpuFence> fence,
+) {
   final sdlReleaseGpuFenceLookupFunction = libSdl3.lookupFunction<
-      Void Function(Pointer<SdlGpuDevice> device, Pointer<SdlGpuFence> fence),
-      void Function(Pointer<SdlGpuDevice> device,
-          Pointer<SdlGpuFence> fence)>('SDL_ReleaseGPUFence');
+    Void Function(Pointer<SdlGpuDevice> device, Pointer<SdlGpuFence> fence),
+    void Function(Pointer<SdlGpuDevice> device, Pointer<SdlGpuFence> fence)
+  >('SDL_ReleaseGPUFence');
   return sdlReleaseGpuFenceLookupFunction(device, fence);
 }
 
@@ -3007,7 +3568,8 @@ void sdlReleaseGpuFence(
 int sdlGpuTextureFormatTexelBlockSize(int format) {
   final sdlGpuTextureFormatTexelBlockSizeLookupFunction = libSdl3
       .lookupFunction<Uint32 Function(Int32 format), int Function(int format)>(
-          'SDL_GPUTextureFormatTexelBlockSize');
+        'SDL_GPUTextureFormatTexelBlockSize',
+      );
   return sdlGpuTextureFormatTexelBlockSizeLookupFunction(format);
 }
 
@@ -3027,14 +3589,26 @@ int sdlGpuTextureFormatTexelBlockSize(int format) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GPUTextureSupportsFormat( SDL_GPUDevice *device, SDL_GPUTextureFormat format, SDL_GPUTextureType type, SDL_GPUTextureUsageFlags usage)
 /// ```
 bool sdlGpuTextureSupportsFormat(
-    Pointer<SdlGpuDevice> device, int format, int type, int usage) {
+  Pointer<SdlGpuDevice> device,
+  int format,
+  int type,
+  int usage,
+) {
   final sdlGpuTextureSupportsFormatLookupFunction = libSdl3.lookupFunction<
-      Uint8 Function(
-          Pointer<SdlGpuDevice> device, Int32 format, Int32 type, Uint32 usage),
-      int Function(Pointer<SdlGpuDevice> device, int format, int type,
-          int usage)>('SDL_GPUTextureSupportsFormat');
+    Uint8 Function(
+      Pointer<SdlGpuDevice> device,
+      Int32 format,
+      Int32 type,
+      Uint32 usage,
+    ),
+    int Function(Pointer<SdlGpuDevice> device, int format, int type, int usage)
+  >('SDL_GPUTextureSupportsFormat');
   return sdlGpuTextureSupportsFormatLookupFunction(
-          device, format, type, usage) ==
+        device,
+        format,
+        type,
+        usage,
+      ) ==
       1;
 }
 
@@ -3052,14 +3626,23 @@ bool sdlGpuTextureSupportsFormat(
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GPUTextureSupportsSampleCount( SDL_GPUDevice *device, SDL_GPUTextureFormat format, SDL_GPUSampleCount sample_count)
 /// ```
 bool sdlGpuTextureSupportsSampleCount(
-    Pointer<SdlGpuDevice> device, int format, int sampleCount) {
+  Pointer<SdlGpuDevice> device,
+  int format,
+  int sampleCount,
+) {
   final sdlGpuTextureSupportsSampleCountLookupFunction = libSdl3.lookupFunction<
-      Uint8 Function(
-          Pointer<SdlGpuDevice> device, Int32 format, Int32 sampleCount),
-      int Function(Pointer<SdlGpuDevice> device, int format,
-          int sampleCount)>('SDL_GPUTextureSupportsSampleCount');
+    Uint8 Function(
+      Pointer<SdlGpuDevice> device,
+      Int32 format,
+      Int32 sampleCount,
+    ),
+    int Function(Pointer<SdlGpuDevice> device, int format, int sampleCount)
+  >('SDL_GPUTextureSupportsSampleCount');
   return sdlGpuTextureSupportsSampleCountLookupFunction(
-          device, format, sampleCount) ==
+        device,
+        format,
+        sampleCount,
+      ) ==
       1;
 }
 
@@ -3078,14 +3661,26 @@ bool sdlGpuTextureSupportsSampleCount(
 /// extern SDL_DECLSPEC Uint32 SDLCALL SDL_CalculateGPUTextureFormatSize( SDL_GPUTextureFormat format, Uint32 width, Uint32 height, Uint32 depth_or_layer_count)
 /// ```
 int sdlCalculateGpuTextureFormatSize(
-    int format, int width, int height, int depthOrLayerCount) {
+  int format,
+  int width,
+  int height,
+  int depthOrLayerCount,
+) {
   final sdlCalculateGpuTextureFormatSizeLookupFunction = libSdl3.lookupFunction<
-      Uint32 Function(
-          Int32 format, Uint32 width, Uint32 height, Uint32 depthOrLayerCount),
-      int Function(int format, int width, int height,
-          int depthOrLayerCount)>('SDL_CalculateGPUTextureFormatSize');
+    Uint32 Function(
+      Int32 format,
+      Uint32 width,
+      Uint32 height,
+      Uint32 depthOrLayerCount,
+    ),
+    int Function(int format, int width, int height, int depthOrLayerCount)
+  >('SDL_CalculateGPUTextureFormatSize');
   return sdlCalculateGpuTextureFormatSizeLookupFunction(
-      format, width, height, depthOrLayerCount);
+    format,
+    width,
+    height,
+    depthOrLayerCount,
+  );
 }
 
 ///
@@ -3106,8 +3701,9 @@ int sdlCalculateGpuTextureFormatSize(
 /// ```
 void sdlGdkSuspendGpu(Pointer<SdlGpuDevice> device) {
   final sdlGdkSuspendGpuLookupFunction = libSdl3.lookupFunction<
-      Void Function(Pointer<SdlGpuDevice> device),
-      void Function(Pointer<SdlGpuDevice> device)>('SDL_GDKSuspendGPU');
+    Void Function(Pointer<SdlGpuDevice> device),
+    void Function(Pointer<SdlGpuDevice> device)
+  >('SDL_GDKSuspendGPU');
   return sdlGdkSuspendGpuLookupFunction(device);
 }
 
@@ -3129,7 +3725,8 @@ void sdlGdkSuspendGpu(Pointer<SdlGpuDevice> device) {
 /// ```
 void sdlGdkResumeGpu(Pointer<SdlGpuDevice> device) {
   final sdlGdkResumeGpuLookupFunction = libSdl3.lookupFunction<
-      Void Function(Pointer<SdlGpuDevice> device),
-      void Function(Pointer<SdlGpuDevice> device)>('SDL_GDKResumeGPU');
+    Void Function(Pointer<SdlGpuDevice> device),
+    void Function(Pointer<SdlGpuDevice> device)
+  >('SDL_GDKResumeGPU');
   return sdlGdkResumeGpuLookupFunction(device);
 }

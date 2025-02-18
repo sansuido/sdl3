@@ -47,26 +47,33 @@ const gReverbSnareSound = 'assets/claps-and-snares/dubstep-reverb-snare.ogg';
 int main() {
   // Initialize SDL
   if (sdlInit(SDL_INIT_VIDEO | SDL_INIT_AUDIO) == false) {
-    print('SDL could not be initialized!\n'
-        'SDL_Error: ${sdlGetError()}\n');
+    print(
+      'SDL could not be initialized!\n'
+      'SDL_Error: ${sdlGetError()}\n',
+    );
     return 0;
   }
   sdlSetHint(SDL_HINT_RENDER_VSYNC, '1');
   //Initialize SDL3_mixer
   if (mixOpenAudio(SDL_AUDIO_DEVICE_DEFAULT_OUTPUT, nullptr) == false) {
-    print('SDL3_mixer could not be initialized!\n'
-        'SDL_Error: ${sdlGetError()}%s\n');
+    print(
+      'SDL3_mixer could not be initialized!\n'
+      'SDL_Error: ${sdlGetError()}%s\n',
+    );
     sdlQuit();
     return 0;
   }
   // Create window
   var window = SdlWindowEx.create(
-      title: 'SDL3 audio sample (Press SPACE to pause/play)',
-      w: gScreenWidth,
-      h: gScreenHeight);
+    title: 'SDL3 audio sample (Press SPACE to pause/play)',
+    w: gScreenWidth,
+    h: gScreenHeight,
+  );
   if (window == nullptr) {
-    print('Window could not be created!\n'
-        'SDL_Error: ${sdlGetError()}\n');
+    print(
+      'Window could not be created!\n'
+      'SDL_Error: ${sdlGetError()}\n',
+    );
     window.destroy();
     mixCloseAudio();
     sdlQuit();
@@ -75,8 +82,10 @@ int main() {
   // Create renderer
   var renderer = window.createRenderer();
   if (renderer == nullptr) {
-    print('Renderer could not be created!\n'
-        'SDL_Error: ${sdlGetError()}\n');
+    print(
+      'Renderer could not be created!\n'
+      'SDL_Error: ${sdlGetError()}\n',
+    );
     window.destroy();
     mixCloseAudio();
     sdlQuit();
@@ -92,12 +101,17 @@ int main() {
   // Declare rect of square
   var bar = min(gScreenWidth, gScreenHeight) / 2;
   var squareRect = Rectangle(
-      gScreenWidth / 2 - bar / 2, gScreenHeight / 2 - bar / 2, bar, bar);
+    gScreenWidth / 2 - bar / 2,
+    gScreenHeight / 2 - bar / 2,
+    bar,
+    bar,
+  );
   var pauseRect1 = Rectangle<double>(
-      squareRect.left + (squareRect.width - 40 * 3) / 2,
-      squareRect.top + squareRect.height / 4,
-      40,
-      squareRect.height / 2);
+    squareRect.left + (squareRect.width - 40 * 3) / 2,
+    squareRect.top + squareRect.height / 4,
+    40,
+    squareRect.height / 2,
+  );
   var pauseRect2 = pauseRect1.shift(Point(40 * 2, 0));
 
   var event = calloc<SdlEvent>();
