@@ -3268,6 +3268,9 @@ bool sdlWaitForGpuSwapchain(
 /// freed by the user. You MUST NOT call this function from any thread other
 /// than the one that created the window.
 ///
+/// The swapchain texture is write-only and cannot be used as a sampler or for
+/// another reading operation.
+///
 /// \param command_buffer a command buffer.
 /// \param window a window that has been claimed.
 /// \param swapchain_texture a pointer filled in with a swapchain texture
@@ -3286,6 +3289,7 @@ bool sdlWaitForGpuSwapchain(
 ///
 /// \sa SDL_SubmitGPUCommandBuffer
 /// \sa SDL_SubmitGPUCommandBufferAndAcquireFence
+/// \sa SDL_AcquireGPUSwapchainTexture
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_WaitAndAcquireGPUSwapchainTexture( SDL_GPUCommandBuffer *command_buffer, SDL_Window *window, SDL_GPUTexture **swapchain_texture, Uint32 *swapchain_texture_width, Uint32 *swapchain_texture_height)

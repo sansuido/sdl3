@@ -779,25 +779,29 @@ int ttfGetFontHinting(Pointer<TtfFont> font) {
 ///
 /// Enable Signed Distance Field rendering for a font.
 ///
-/// SDF is a technique that helps fonts look sharp even when scaling and rotating, and requires special shader support for display.
+/// SDF is a technique that helps fonts look sharp even when scaling and
+/// rotating, and requires special shader support for display.
 ///
-/// This works with Blended APIs, and generates the raw signed distance values in the alpha channel of the resulting texture.
+/// This works with Blended APIs, and generates the raw signed distance values
+/// in the alpha channel of the resulting texture.
 ///
-/// This updates any TTF_Text objects using this font, and clears already-generated glyphs, if any, from the cache.
+/// This updates any TTF_Text objects using this font, and clears
+/// already-generated glyphs, if any, from the cache.
 ///
 /// \param font the font to set SDF support on.
 /// \param enabled true to enable SDF, false to disable.
-/// \returns true on success or false on failure; call SDL_GetError()
-/// for more information.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
-/// \threadsafety This function should be called on the thread that created the font.
+/// \threadsafety This function should be called on the thread that created the
+/// font.
 ///
 /// \since This function is available since SDL_ttf 3.0.0.
 ///
 /// \sa TTF_GetFontSDF
 ///
 /// ```c
-/// extern SDL_DECLSPEC bool TTF_SetFontSDF(TTF_Font *font, bool enabled)
+/// extern SDL_DECLSPEC bool SDLCALL TTF_SetFontSDF(TTF_Font *font, bool enabled)
 /// ```
 bool ttfSetFontSdf(Pointer<TtfFont> font, bool enabled) {
   final ttfSetFontSdfLookupFunction = libSdl3Ttf.lookupFunction<
@@ -810,8 +814,7 @@ bool ttfSetFontSdf(Pointer<TtfFont> font, bool enabled) {
 ///
 /// Query whether Signed Distance Field rendering is enabled for a font.
 ///
-/// \param font the font to query
-///
+/// \param font the font to query.
 /// \returns true if enabled, false otherwise.
 ///
 /// \threadsafety It is safe to call this function from any thread.
@@ -821,7 +824,7 @@ bool ttfSetFontSdf(Pointer<TtfFont> font, bool enabled) {
 /// \sa TTF_SetFontSDF
 ///
 /// ```c
-/// extern SDL_DECLSPEC bool TTF_GetFontSDF(const TTF_Font *font)
+/// extern SDL_DECLSPEC bool SDLCALL TTF_GetFontSDF(const TTF_Font *font)
 /// ```
 bool ttfGetFontSdf(Pointer<TtfFont> font) {
   final ttfGetFontSdfLookupFunction = libSdl3Ttf.lookupFunction<
@@ -1084,8 +1087,7 @@ bool ttfFontIsFixedWidth(Pointer<TtfFont> font) {
 ///
 /// Scalability lets us distinguish between outline and bitmap fonts.
 ///
-/// \param font the font to query
-///
+/// \param font the font to query.
 /// \returns true if the font is scalable, false otherwise.
 ///
 /// \threadsafety It is safe to call this function from any thread.
@@ -1095,7 +1097,7 @@ bool ttfFontIsFixedWidth(Pointer<TtfFont> font) {
 /// \sa TTF_SetFontSDF
 ///
 /// ```c
-/// extern SDL_DECLSPEC bool TTF_FontIsScalable(const TTF_Font *font)
+/// extern SDL_DECLSPEC bool SDLCALL TTF_FontIsScalable(const TTF_Font *font)
 /// ```
 bool ttfFontIsScalable(Pointer<TtfFont> font) {
   final ttfFontIsScalableLookupFunction = libSdl3Ttf.lookupFunction<
@@ -1359,21 +1361,24 @@ int ttfGetGlyphScript(int ch) {
 ///
 /// Set language to be used for text shaping by a font.
 ///
-/// If SDL_ttf was not built with HarfBuzz support, this function returns false.
+/// If SDL_ttf was not built with HarfBuzz support, this function returns
+/// false.
 ///
 /// This updates any TTF_Text objects using this font.
 ///
 /// \param font the font to specify a language for.
-/// \param language_bcp47 a null-terminated string containing the desired language's BCP47 code. Or null to reset the value.
-/// \returns true on success or false on failure; call SDL_GetError()
-/// for more information.
+/// \param language_bcp47 a null-terminated string containing the desired
+/// language's BCP47 code. Or null to reset the value.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
-/// \threadsafety This function should be called on the thread that created the font.
+/// \threadsafety This function should be called on the thread that created the
+/// font.
 ///
 /// \since This function is available since SDL_ttf 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC bool TTF_SetFontLanguage(TTF_Font *font, const char *language_bcp47)
+/// extern SDL_DECLSPEC bool SDLCALL TTF_SetFontLanguage(TTF_Font *font, const char *language_bcp47)
 /// ```
 bool ttfSetFontLanguage(Pointer<TtfFont> font, String? languageBcp47) {
   final ttfSetFontLanguageLookupFunction = libSdl3Ttf.lookupFunction<
@@ -1569,16 +1574,18 @@ bool ttfGetGlyphMetrics(
 /// \param font the font to query.
 /// \param previous_ch the previous codepoint.
 /// \param ch the current codepoint.
-/// \param kerning a pointer filled in with the kerning size between the two glyphs, in pixels, may be NULL.
-/// \returns true on success or false on failure; call SDL_GetError()
-/// for more information.
+/// \param kerning a pointer filled in with the kerning size between the two
+/// glyphs, in pixels, may be NULL.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
-/// \threadsafety This function should be called on the thread that created the font.
+/// \threadsafety This function should be called on the thread that created the
+/// font.
 ///
 /// \since This function is available since SDL_ttf 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC bool TTF_GetGlyphKerning(TTF_Font *font, Uint32 previous_ch, Uint32 ch, int *kerning)
+/// extern SDL_DECLSPEC bool SDLCALL TTF_GetGlyphKerning(TTF_Font *font, Uint32 previous_ch, Uint32 ch, int *kerning)
 /// ```
 bool ttfGetGlyphKerning(
   Pointer<TtfFont> font,
