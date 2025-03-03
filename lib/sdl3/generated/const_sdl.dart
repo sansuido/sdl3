@@ -845,6 +845,7 @@ const SDL_HINT_JOYSTICK_WHEEL_DEVICES_EXCLUDED =
     'SDL_JOYSTICK_WHEEL_DEVICES_EXCLUDED';
 const SDL_HINT_JOYSTICK_ZERO_CENTERED_DEVICES =
     'SDL_JOYSTICK_ZERO_CENTERED_DEVICES';
+const SDL_HINT_JOYSTICK_HAPTIC_AXES = 'SDL_JOYSTICK_HAPTIC_AXES';
 const SDL_HINT_KEYCODE_OPTIONS = 'SDL_KEYCODE_OPTIONS';
 const SDL_HINT_KMSDRM_DEVICE_INDEX = 'SDL_KMSDRM_DEVICE_INDEX';
 const SDL_HINT_KMSDRM_REQUIRE_DRM_MASTER = 'SDL_KMSDRM_REQUIRE_DRM_MASTER';
@@ -1952,7 +1953,8 @@ const SDL_RENDERER_VSYNC_DISABLED = 0;
 const SDL_RENDERER_VSYNC_ADAPTIVE = (-1);
 const SDL_DEBUG_TEXT_FONT_CHARACTER_SIZE = 8;
 //const SDL_revision_h_ = ;
-const SDL_REVISION = 'Some arbitrary string decided at SDL build time';
+const SDL_REVISION =
+    'SDL3-3.3.0-release-3.2.6-4-gb0d2a4f35 (" SDL_VENDOR_INFO ")';
 //const SDL_scancode_h_ = ;
 const SDL_SCANCODE_UNKNOWN = 0;
 const SDL_SCANCODE_A = 4;
@@ -2410,8 +2412,8 @@ const SDL_TRAYENTRY_DISABLED = 0x80000000;
 const SDL_TRAYENTRY_CHECKED = 0x40000000;
 //const SDL_version_h_ = ;
 const SDL_MAJOR_VERSION = 3;
-const SDL_MINOR_VERSION = 2;
-const SDL_MICRO_VERSION = 5;
+const SDL_MINOR_VERSION = 3;
+const SDL_MICRO_VERSION = 0;
 //const SDL_VERSIONNUM = (major, minor, patch) ((major) * 1000000 + (minor) * 1000 + (patch));
 //const SDL_VERSIONNUM_MAJOR = (version) ((version) / 1000000);
 //const SDL_VERSIONNUM_MINOR = (version) (((version) / 1000) % 1000);
@@ -3445,6 +3447,7 @@ class SdlkHint {
       SDL_HINT_JOYSTICK_WHEEL_DEVICES_EXCLUDED;
   static const joystickZeroCenteredDevices =
       SDL_HINT_JOYSTICK_ZERO_CENTERED_DEVICES;
+  static const joystickHapticAxes = SDL_HINT_JOYSTICK_HAPTIC_AXES;
   static const keycodeOptions = SDL_HINT_KEYCODE_OPTIONS;
   static const kmsdrmDeviceIndex = SDL_HINT_KMSDRM_DEVICE_INDEX;
   static const kmsdrmRequireDrmMaster = SDL_HINT_KMSDRM_REQUIRE_DRM_MASTER;

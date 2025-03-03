@@ -3,7 +3,7 @@ SDL3 for Dart
 
 # Requirement
 
-* ffi ^2.1.3
+* ffi ^2.1.4
 
 This library is limited to 64bit.  
 Since ffi is used, a dynamic library suitable for various environments is required.  
@@ -64,7 +64,7 @@ Windows 64bit & Linux (Tested under Windows 10 WSL2 environment)
 
 Currently, we are providing it on an experimental basis using the dll compiled below.
 
-https://github.com/sansuido/msbuild-sdl3
+https://github.com/sansuido/build-sdl3
 
 # Author
 

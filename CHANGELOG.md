@@ -1,3 +1,8 @@
+## 1.4.0
+- SDL3-2025-03-02
+- [changed] Changed the site that provides the dll.
+- [update] Support ffi ^2.1.4.
+
 ## 1.3.6
 - SDL3-2025-02-23
 
