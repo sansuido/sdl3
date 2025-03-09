@@ -1,3 +1,7 @@
+## 1.4.1
+- SDL3-2025-03-09
+-- [add] add functions(sdlSetRelativeMouseTransform, sdlRenderTexture9GridTiled and etc..)
+
 ## 1.4.0
 - SDL3-2025-03-02
 - [changed] Changed the site that provides the dll.

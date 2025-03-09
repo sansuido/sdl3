@@ -3331,6 +3331,97 @@ bool sdlRenderTexture9Grid(
 }
 
 ///
+/// Perform a scaled copy using the 9-grid algorithm to the current rendering
+/// target at subpixel precision.
+///
+/// The pixels in the texture are split into a 3x3 grid, using the different
+/// corner sizes for each corner, and the sides and center making up the
+/// remaining pixels. The corners are then scaled using `scale` and fit into
+/// the corners of the destination rectangle. The sides and center are then
+/// tiled into place to cover the remaining destination rectangle.
+///
+/// \param renderer the renderer which should copy parts of a texture.
+/// \param texture the source texture.
+/// \param srcrect the SDL_Rect structure representing the rectangle to be used
+/// for the 9-grid, or NULL to use the entire texture.
+/// \param left_width the width, in pixels, of the left corners in `srcrect`.
+/// \param right_width the width, in pixels, of the right corners in `srcrect`.
+/// \param top_height the height, in pixels, of the top corners in `srcrect`.
+/// \param bottom_height the height, in pixels, of the bottom corners in
+/// `srcrect`.
+/// \param scale the scale used to transform the corner of `srcrect` into the
+/// corner of `dstrect`, or 0.0f for an unscaled copy.
+/// \param dstrect a pointer to the destination rectangle, or NULL for the
+/// entire rendering target.
+/// \param tileScale the scale used to transform the borders and center of
+/// `srcrect` into the borders and middle of `dstrect`, or
+/// 1.0f for an unscaled copy.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety This function should only be called on the main thread.
+///
+/// \since This function is available since SDL 3.4.0.
+///
+/// \sa SDL_RenderTexture
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL SDL_RenderTexture9GridTiled(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_FRect *srcrect, float left_width, float right_width, float top_height, float bottom_height, float scale, const SDL_FRect *dstrect, float tileScale)
+/// ```
+bool sdlRenderTexture9GridTiled(
+  Pointer<SdlRenderer> renderer,
+  Pointer<SdlTexture> texture,
+  Pointer<SdlFRect> srcrect,
+  double leftWidth,
+  double rightWidth,
+  double topHeight,
+  double bottomHeight,
+  double scale,
+  Pointer<SdlFRect> dstrect,
+  double tileScale,
+) {
+  final sdlRenderTexture9GridTiledLookupFunction = libSdl3.lookupFunction<
+    Uint8 Function(
+      Pointer<SdlRenderer> renderer,
+      Pointer<SdlTexture> texture,
+      Pointer<SdlFRect> srcrect,
+      Float leftWidth,
+      Float rightWidth,
+      Float topHeight,
+      Float bottomHeight,
+      Float scale,
+      Pointer<SdlFRect> dstrect,
+      Float tileScale,
+    ),
+    int Function(
+      Pointer<SdlRenderer> renderer,
+      Pointer<SdlTexture> texture,
+      Pointer<SdlFRect> srcrect,
+      double leftWidth,
+      double rightWidth,
+      double topHeight,
+      double bottomHeight,
+      double scale,
+      Pointer<SdlFRect> dstrect,
+      double tileScale,
+    )
+  >('SDL_RenderTexture9GridTiled');
+  return sdlRenderTexture9GridTiledLookupFunction(
+        renderer,
+        texture,
+        srcrect,
+        leftWidth,
+        rightWidth,
+        topHeight,
+        bottomHeight,
+        scale,
+        dstrect,
+        tileScale,
+      ) ==
+      1;
+}
+
+///
 /// Render a list of triangles, optionally using a texture and indices into the
 /// vertex array Color and alpha modulation is done per vertex
 /// (SDL_SetTextureColorMod and SDL_SetTextureAlphaMod are ignored).
@@ -3552,8 +3643,7 @@ Pointer<SdlSurface> sdlRenderReadPixels(
 /// should not be done; you are only required to change back the rendering
 /// target to default via `SDL_SetRenderTarget(renderer, NULL)` afterwards, as
 /// textures by themselves do not have a concept of backbuffers. Calling
-/// SDL_RenderPresent while rendering to a texture will still update the screen
-/// with any current drawing that has been done _to the window itself_.
+/// SDL_RenderPresent while rendering to a texture will fail.
 ///
 /// \param renderer the rendering context.
 /// \returns true on success or false on failure; call SDL_GetError() for more
@@ -3984,4 +4074,64 @@ bool sdlRenderDebugTextFormat(
       sdlRenderDebugTextFormatLookupFunction(renderer, x, y, fmtPointer) == 1;
   calloc.free(fmtPointer);
   return result;
+}
+
+///
+/// Set default scale mode for new textures for given renderer.
+///
+/// When a renderer is created, scale_mode defaults to SDL_SCALEMODE_LINEAR.
+///
+/// \param renderer the renderer to update.
+/// \param scale_mode the scale mode to change to for new textures.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety This function should only be called on the main thread.
+///
+/// \since This function is available since SDL 3.4.0.
+///
+/// \sa SDL_GetDefaultTextureScaleMode
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetDefaultTextureScaleMode(SDL_Renderer *renderer, SDL_ScaleMode scale_mode)
+/// ```
+bool sdlSetDefaultTextureScaleMode(
+  Pointer<SdlRenderer> renderer,
+  int scaleMode,
+) {
+  final sdlSetDefaultTextureScaleModeLookupFunction = libSdl3.lookupFunction<
+    Uint8 Function(Pointer<SdlRenderer> renderer, Int32 scaleMode),
+    int Function(Pointer<SdlRenderer> renderer, int scaleMode)
+  >('SDL_SetDefaultTextureScaleMode');
+  return sdlSetDefaultTextureScaleModeLookupFunction(renderer, scaleMode) == 1;
+}
+
+///
+/// Get default texture scale mode of the given renderer.
+///
+/// \param renderer the renderer to get data from.
+/// \param scale_mode a SDL_ScaleMode filled with current default scale mode.
+/// See SDL_SetDefaultTextureScaleMode() for the meaning of
+/// the value.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety This function should only be called on the main thread.
+///
+/// \since This function is available since SDL 3.4.0.
+///
+/// \sa SDL_SetDefaultTextureScaleMode
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GetDefaultTextureScaleMode(SDL_Renderer *renderer, SDL_ScaleMode *scale_mode)
+/// ```
+bool sdlGetDefaultTextureScaleMode(
+  Pointer<SdlRenderer> renderer,
+  Pointer<Int32> scaleMode,
+) {
+  final sdlGetDefaultTextureScaleModeLookupFunction = libSdl3.lookupFunction<
+    Uint8 Function(Pointer<SdlRenderer> renderer, Pointer<Int32> scaleMode),
+    int Function(Pointer<SdlRenderer> renderer, Pointer<Int32> scaleMode)
+  >('SDL_GetDefaultTextureScaleMode');
+  return sdlGetDefaultTextureScaleModeLookupFunction(renderer, scaleMode) == 1;
 }

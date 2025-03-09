@@ -304,6 +304,42 @@ bool sdlWarpMouseGlobal(double x, double y) {
 }
 
 ///
+/// Set a user-defined function by which to transform relative mouse inputs.
+///
+/// This overrides the relative system scale and relative speed scale hints.
+/// Should be called prior to enabling relative mouse mode, fails otherwise.
+///
+/// \param callback a callback used to transform relative mouse motion, or NULL
+/// for default behavior.
+/// \param userdata a pointer that will be passed to `callback`.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety This function should only be called on the main thread.
+///
+/// \since This function is available since SDL 3.4.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetRelativeMouseTransform(SDL_MouseMotionTransformCallback callback, void *userdata)
+/// ```
+bool sdlSetRelativeMouseTransform(
+  Pointer<NativeFunction<SdlMouseMotionTransformCallback>> callback,
+  Pointer<NativeType> userdata,
+) {
+  final sdlSetRelativeMouseTransformLookupFunction = libSdl3.lookupFunction<
+    Uint8 Function(
+      Pointer<NativeFunction<SdlMouseMotionTransformCallback>> callback,
+      Pointer<NativeType> userdata,
+    ),
+    int Function(
+      Pointer<NativeFunction<SdlMouseMotionTransformCallback>> callback,
+      Pointer<NativeType> userdata,
+    )
+  >('SDL_SetRelativeMouseTransform');
+  return sdlSetRelativeMouseTransformLookupFunction(callback, userdata) == 1;
+}
+
+///
 /// Set relative mouse mode for a window.
 ///
 /// While the window has focus and relative mouse mode is enabled, the cursor

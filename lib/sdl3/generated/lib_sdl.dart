@@ -172,6 +172,26 @@ typedef SdlLogOutputFunction =
 typedef SdlMainFuncDart = int Function(int argc, Pointer<Pointer<Int8>> argv);
 typedef SdlMainFunc = Int32 Function(Int32 argc, Pointer<Pointer<Int8>> argv);
 
+// typedef void (SDLCALL *SDL_MouseMotionTransformCallback)( void *userdata, Uint64 timestamp, SDL_Window *window, SDL_MouseID mouseID, float *x, float *y )
+typedef SdlMouseMotionTransformCallbackDart =
+    void Function(
+      Pointer<NativeType> userdata,
+      int timestamp,
+      Pointer<SdlWindow> window,
+      int mouseId,
+      Pointer<Float> x,
+      Pointer<Float> y,
+    );
+typedef SdlMouseMotionTransformCallback =
+    Void Function(
+      Pointer<NativeType> userdata,
+      Uint64 timestamp,
+      Pointer<SdlWindow> window,
+      Uint32 mouseId,
+      Pointer<Float> x,
+      Pointer<Float> y,
+    );
+
 // typedef void (SDLCALL *SDL_CleanupPropertyCallback)(void *userdata, void *value)
 typedef SdlCleanupPropertyCallbackDart =
     void Function(Pointer<NativeType> userdata, Pointer<NativeType> value);
