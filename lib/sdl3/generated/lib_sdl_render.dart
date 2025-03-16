@@ -4135,3 +4135,151 @@ bool sdlGetDefaultTextureScaleMode(
   >('SDL_GetDefaultTextureScaleMode');
   return sdlGetDefaultTextureScaleModeLookupFunction(renderer, scaleMode) == 1;
 }
+
+///
+/// Create custom GPU render state.
+///
+/// \param renderer the renderer to use.
+/// \param desc GPU render state description, initialized using
+/// SDL_INIT_INTERFACE().
+/// \returns a custom GPU render state or NULL on failure; call SDL_GetError()
+/// for more information.
+///
+/// \threadsafety This function should be called on the thread that created the
+/// renderer.
+///
+/// \since This function is available since SDL 3.4.0.
+///
+/// \sa SDL_SetGPURenderStateFragmentUniforms
+/// \sa SDL_SetRenderGPUState
+/// \sa SDL_DestroyGPURenderState
+///
+/// ```c
+/// extern SDL_DECLSPEC SDL_GPURenderState * SDLCALL SDL_CreateGPURenderState(SDL_Renderer *renderer, SDL_GPURenderStateDesc *desc)
+/// ```
+Pointer<SdlGpuRenderState> sdlCreateGpuRenderState(
+  Pointer<SdlRenderer> renderer,
+  Pointer<SdlGpuRenderStateDesc> desc,
+) {
+  final sdlCreateGpuRenderStateLookupFunction = libSdl3.lookupFunction<
+    Pointer<SdlGpuRenderState> Function(
+      Pointer<SdlRenderer> renderer,
+      Pointer<SdlGpuRenderStateDesc> desc,
+    ),
+    Pointer<SdlGpuRenderState> Function(
+      Pointer<SdlRenderer> renderer,
+      Pointer<SdlGpuRenderStateDesc> desc,
+    )
+  >('SDL_CreateGPURenderState');
+  return sdlCreateGpuRenderStateLookupFunction(renderer, desc);
+}
+
+///
+/// Set fragment shader uniform variables in a custom GPU render state.
+///
+/// The data is copied and will be pushed using
+/// SDL_PushGPUFragmentUniformData() during draw call execution.
+///
+/// \param state the state to modify.
+/// \param slot_index the fragment uniform slot to push data to.
+/// \param data client data to write.
+/// \param length the length of the data to write.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety This function should be called on the thread that created the
+/// renderer.
+///
+/// \since This function is available since SDL 3.4.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetGPURenderStateFragmentUniforms(SDL_GPURenderState *state, Uint32 slot_index, const void *data, Uint32 length)
+/// ```
+bool sdlSetGpuRenderStateFragmentUniforms(
+  Pointer<SdlGpuRenderState> state,
+  int slotIndex,
+  Pointer<NativeType> data,
+  int length,
+) {
+  final sdlSetGpuRenderStateFragmentUniformsLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<SdlGpuRenderState> state,
+          Uint32 slotIndex,
+          Pointer<NativeType> data,
+          Uint32 length,
+        ),
+        int Function(
+          Pointer<SdlGpuRenderState> state,
+          int slotIndex,
+          Pointer<NativeType> data,
+          int length,
+        )
+      >('SDL_SetGPURenderStateFragmentUniforms');
+  return sdlSetGpuRenderStateFragmentUniformsLookupFunction(
+        state,
+        slotIndex,
+        data,
+        length,
+      ) ==
+      1;
+}
+
+///
+/// Set custom GPU render state.
+///
+/// This function sets custom GPU render state for subsequent draw calls. This
+/// allows using custom shaders with the GPU renderer.
+///
+/// \param renderer the renderer to use.
+/// \param state the state to to use, or NULL to clear custom GPU render state.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety This function should be called on the thread that created the
+/// renderer.
+///
+/// \since This function is available since SDL 3.4.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetRenderGPUState(SDL_Renderer *renderer, SDL_GPURenderState *state)
+/// ```
+bool sdlSetRenderGpuState(
+  Pointer<SdlRenderer> renderer,
+  Pointer<SdlGpuRenderState> state,
+) {
+  final sdlSetRenderGpuStateLookupFunction = libSdl3.lookupFunction<
+    Uint8 Function(
+      Pointer<SdlRenderer> renderer,
+      Pointer<SdlGpuRenderState> state,
+    ),
+    int Function(
+      Pointer<SdlRenderer> renderer,
+      Pointer<SdlGpuRenderState> state,
+    )
+  >('SDL_SetRenderGPUState');
+  return sdlSetRenderGpuStateLookupFunction(renderer, state) == 1;
+}
+
+///
+/// Destroy custom GPU render state.
+///
+/// \param state the state to destroy.
+///
+/// \threadsafety This function should be called on the thread that created the
+/// renderer.
+///
+/// \since This function is available since SDL 3.4.0.
+///
+/// \sa SDL_CreateGPURenderState
+///
+/// ```c
+/// extern SDL_DECLSPEC void SDLCALL SDL_DestroyGPURenderState(SDL_GPURenderState *state)
+/// ```
+void sdlDestroyGpuRenderState(Pointer<SdlGpuRenderState> state) {
+  final sdlDestroyGpuRenderStateLookupFunction = libSdl3.lookupFunction<
+    Void Function(Pointer<SdlGpuRenderState> state),
+    void Function(Pointer<SdlGpuRenderState> state)
+  >('SDL_DestroyGPURenderState');
+  return sdlDestroyGpuRenderStateLookupFunction(state);
+}

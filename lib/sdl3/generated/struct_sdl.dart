@@ -3286,6 +3286,45 @@ final class SdlTexture extends Struct {
   external int refcount;
 }
 
+// SDL_GPURenderStateDesc
+final class SdlGpuRenderStateDesc extends Struct {
+  // [0]+(4)
+  @Uint32()
+  external int version;
+  // [] +(4)
+  @Uint32()
+  external int blank_1;
+  // [8]+(8)
+  external Pointer<SdlGpuShader> fragmentShader;
+  // [16]+(4)
+  @Int32()
+  external int numSamplerBindings;
+  // [] +(4)
+  @Uint32()
+  external int blank_2;
+  // [24]+(8)
+  external Pointer<SdlGpuTextureSamplerBinding> samplerBindings;
+  // [32]+(4)
+  @Int32()
+  external int numStorageTextures;
+  // [] +(4)
+  @Uint32()
+  external int blank_3;
+  // [40]+(8)
+  external Pointer<Pointer<SdlGpuTexture>> storageTextures;
+  // [48]+(4)
+  @Int32()
+  external int numStorageBuffers;
+  // [] +(4)
+  @Uint32()
+  external int blank_4;
+  // [56]+(8)
+  external Pointer<Pointer<SdlGpuBuffer>> storageBuffers;
+}
+
+// SDL_GPURenderState
+final class SdlGpuRenderState extends Opaque {}
+
 // SDL_Sensor
 final class SdlSensor extends Opaque {}
 

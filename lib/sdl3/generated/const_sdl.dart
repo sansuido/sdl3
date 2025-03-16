@@ -919,6 +919,8 @@ const SDL_HINT_VIDEO_FORCE_EGL = 'SDL_VIDEO_FORCE_EGL';
 const SDL_HINT_VIDEO_MAC_FULLSCREEN_SPACES = 'SDL_VIDEO_MAC_FULLSCREEN_SPACES';
 const SDL_HINT_VIDEO_MAC_FULLSCREEN_MENU_VISIBILITY =
     'SDL_VIDEO_MAC_FULLSCREEN_MENU_VISIBILITY';
+const SDL_HINT_VIDEO_MATCH_EXCLUSIVE_MODE_ON_MOVE =
+    'SDL_VIDEO_MATCH_EXCLUSIVE_MODE_ON_MOVE';
 const SDL_HINT_VIDEO_MINIMIZE_ON_FOCUS_LOSS =
     'SDL_VIDEO_MINIMIZE_ON_FOCUS_LOSS';
 const SDL_HINT_VIDEO_OFFSCREEN_SAVE_FRAMES = 'SDL_VIDEO_OFFSCREEN_SAVE_FRAMES';
@@ -1956,7 +1958,7 @@ const SDL_RENDERER_VSYNC_ADAPTIVE = (-1);
 const SDL_DEBUG_TEXT_FONT_CHARACTER_SIZE = 8;
 //const SDL_revision_h_ = ;
 const SDL_REVISION =
-    'SDL3-3.3.0-release-3.2.6-65-g65cd2256c (" SDL_VENDOR_INFO ")';
+    'SDL3-3.3.0-release-3.2.6-110-g18185e30e (" SDL_VENDOR_INFO ")';
 //const SDL_scancode_h_ = ;
 const SDL_SCANCODE_UNKNOWN = 0;
 const SDL_SCANCODE_A = 4;
@@ -2348,6 +2350,7 @@ const SDL_SURFACE_SIMD_ALIGNED = 0x00000008;
 const SDL_SCALEMODE_INVALID = -1;
 const SDL_SCALEMODE_NEAREST = -1 + 1;
 const SDL_SCALEMODE_LINEAR = -1 + 2;
+const SDL_SCALEMODE_PIXELART = -1 + 3;
 const SDL_FLIP_NONE = 0;
 const SDL_FLIP_HORIZONTAL = 1;
 const SDL_FLIP_VERTICAL = 2;
@@ -2560,6 +2563,10 @@ const SDL_PROP_WINDOW_CREATE_WIN32_HWND_POINTER =
 const SDL_PROP_WINDOW_CREATE_WIN32_PIXEL_FORMAT_HWND_POINTER =
     'SDL.window.create.win32.pixel_format_hwnd';
 const SDL_PROP_WINDOW_CREATE_X11_WINDOW_NUMBER = 'SDL.window.create.x11.window';
+const SDL_PROP_WINDOW_CREATE_EMSCRIPTEN_CANVAS_ID =
+    'SDL.window.create.emscripten.canvas_id';
+const SDL_PROP_WINDOW_CREATE_EMSCRIPTEN_KEYBOARD_ELEMENT =
+    'SDL.window.create.emscripten.keyboard_element';
 const SDL_PROP_WINDOW_SHAPE_POINTER = 'SDL.window.shape';
 const SDL_PROP_WINDOW_HDR_ENABLED_BOOLEAN = 'SDL.window.HDR_enabled';
 const SDL_PROP_WINDOW_SDR_WHITE_LEVEL_FLOAT = 'SDL.window.SDR_white_level';
@@ -3524,6 +3531,8 @@ class SdlkHint {
   static const videoMacFullscreenSpaces = SDL_HINT_VIDEO_MAC_FULLSCREEN_SPACES;
   static const videoMacFullscreenMenuVisibility =
       SDL_HINT_VIDEO_MAC_FULLSCREEN_MENU_VISIBILITY;
+  static const videoMatchExclusiveModeOnMove =
+      SDL_HINT_VIDEO_MATCH_EXCLUSIVE_MODE_ON_MOVE;
   static const videoMinimizeOnFocusLoss = SDL_HINT_VIDEO_MINIMIZE_ON_FOCUS_LOSS;
   static const videoOffscreenSaveFrames = SDL_HINT_VIDEO_OFFSCREEN_SAVE_FRAMES;
   static const videoSyncWindowOperations =
@@ -4626,6 +4635,7 @@ class SdlkScalemode {
   static const invalid = SDL_SCALEMODE_INVALID;
   static const nearest = SDL_SCALEMODE_NEAREST;
   static const linear = SDL_SCALEMODE_LINEAR;
+  static const pixelart = SDL_SCALEMODE_PIXELART;
 }
 
 class SdlkFlip {

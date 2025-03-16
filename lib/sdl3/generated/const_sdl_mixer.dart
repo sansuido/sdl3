@@ -27,12 +27,10 @@ const MUS_MOD = 2;
 const MUS_MID = 3;
 const MUS_OGG = 4;
 const MUS_MP3 = 5;
-const MUS_MP3_MAD_UNUSED = 6;
-const MUS_FLAC = 7;
-const MUS_MODPLUG_UNUSED = 8;
-const MUS_OPUS = 9;
-const MUS_WAVPACK = 10;
-const MUS_GME = 11;
+const MUS_FLAC = 6;
+const MUS_OPUS = 7;
+const MUS_WAVPACK = 8;
+const MUS_GME = 9;
 const MIX_CHANNEL_POST = (-2);
 const MIX_EFFECTSMAXSPEED = 'MIX_EFFECTSMAXSPEED';
 
@@ -53,9 +51,7 @@ class Mus {
   static const mid = MUS_MID;
   static const ogg = MUS_OGG;
   static const mp3 = MUS_MP3;
-  static const mp3MadUnused = MUS_MP3_MAD_UNUSED;
   static const flac = MUS_FLAC;
-  static const modplugUnused = MUS_MODPLUG_UNUSED;
   static const opus = MUS_OPUS;
   static const wavpack = MUS_WAVPACK;
   static const gme = MUS_GME;

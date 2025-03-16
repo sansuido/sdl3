@@ -1,6 +1,10 @@
+## 1.4.2
+- SDL3-2025-03-16
+-- [add] Added sdlCreateGpuRenderState function AND scale mode `PIXELART`.
+
 ## 1.4.1
 - SDL3-2025-03-09
--- [add] add functions(sdlSetRelativeMouseTransform, sdlRenderTexture9GridTiled and etc..)
+-- [add] Added functions(sdlSetRelativeMouseTransform, sdlRenderTexture9GridTiled and etc..)
 
 ## 1.4.0
 - SDL3-2025-03-02
