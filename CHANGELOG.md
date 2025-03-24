@@ -1,3 +1,7 @@
+## 1.4.3
+- SDL3-2025-03-23
+-- [add] Added functions(sdlSetWindowProgressState AND sdlSetWindowProgressValue).
+
 ## 1.4.2
 - SDL3-2025-03-16
 -- [add] Added sdlCreateGpuRenderState function AND scale mode `PIXELART`.

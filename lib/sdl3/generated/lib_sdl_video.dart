@@ -3165,6 +3165,52 @@ bool sdlFlashWindow(Pointer<SdlWindow> window, int operation) {
 }
 
 ///
+/// Sets the state of the progress bar for the given windowâs taskbar icon.
+///
+/// \param window the window whose progress state is to be modified.
+/// \param state the progress state.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety This function should only be called on the main thread.
+///
+/// \since This function is available since SDL 3.4.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowProgressState(SDL_Window *window, SDL_ProgressState state)
+/// ```
+bool sdlSetWindowProgressState(Pointer<SdlWindow> window, int state) {
+  final sdlSetWindowProgressStateLookupFunction = libSdl3.lookupFunction<
+    Uint8 Function(Pointer<SdlWindow> window, Int32 state),
+    int Function(Pointer<SdlWindow> window, int state)
+  >('SDL_SetWindowProgressState');
+  return sdlSetWindowProgressStateLookupFunction(window, state) == 1;
+}
+
+///
+/// Sets the value of the progress bar for the given windowâs taskbar icon.
+///
+/// \param window the window whose progress value is to be modified.
+/// \param value the progress value (0.0f - start, 1.0f - end).
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety This function should only be called on the main thread.
+///
+/// \since This function is available since SDL 3.4.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowProgressValue(SDL_Window *window, float value)
+/// ```
+bool sdlSetWindowProgressValue(Pointer<SdlWindow> window, double value) {
+  final sdlSetWindowProgressValueLookupFunction = libSdl3.lookupFunction<
+    Uint8 Function(Pointer<SdlWindow> window, Float value),
+    int Function(Pointer<SdlWindow> window, double value)
+  >('SDL_SetWindowProgressValue');
+  return sdlSetWindowProgressValueLookupFunction(window, value) == 1;
+}
+
+///
 /// Destroy a window.
 ///
 /// Any child windows owned by the window will be recursively destroyed as

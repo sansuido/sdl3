@@ -26,11 +26,12 @@ const TTF_STYLE_BOLD = 0x01;
 const TTF_STYLE_ITALIC = 0x02;
 const TTF_STYLE_UNDERLINE = 0x04;
 const TTF_STYLE_STRIKETHROUGH = 0x08;
-const TTF_HINTING_NORMAL = 0;
-const TTF_HINTING_LIGHT = 0 + 1;
-const TTF_HINTING_MONO = 0 + 2;
-const TTF_HINTING_NONE = 0 + 3;
-const TTF_HINTING_LIGHT_SUBPIXEL = 0 + 4;
+const TTF_HINTING_INVALID = -1;
+const TTF_HINTING_NORMAL = -1 + 1;
+const TTF_HINTING_LIGHT = -1 + 2;
+const TTF_HINTING_MONO = -1 + 3;
+const TTF_HINTING_NONE = -1 + 4;
+const TTF_HINTING_LIGHT_SUBPIXEL = -1 + 5;
 const TTF_HORIZONTAL_ALIGN_INVALID = -1;
 const TTF_HORIZONTAL_ALIGN_LEFT = -1 + 1;
 const TTF_HORIZONTAL_ALIGN_CENTER = -1 + 2;
@@ -89,6 +90,7 @@ class TtfkStyle {
 }
 
 class TtfkHinting {
+  static const invalid = TTF_HINTING_INVALID;
   static const normal = TTF_HINTING_NORMAL;
   static const light = TTF_HINTING_LIGHT;
   static const mono = TTF_HINTING_MONO;
