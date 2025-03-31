@@ -1,3 +1,7 @@
+## 1.4.4
+- SDL3-2025-03-30
+-- [add] Added functions(sdlGetWindowProgressState AND sdlGetWindowProgressValue).
+
 ## 1.4.3
 - SDL3-2025-03-23
 -- [add] Added functions(sdlSetWindowProgressState AND sdlSetWindowProgressValue).

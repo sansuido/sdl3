@@ -3442,6 +3442,7 @@ bool sdlRenderTexture9GridTiled(
 /// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_RenderGeometryRaw
+/// \sa SDL_SetRenderTextureAddressMode
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderGeometry(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_Vertex *vertices, int num_vertices, const int *indices, int num_indices)
@@ -3509,6 +3510,7 @@ bool sdlRenderGeometry(
 /// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_RenderGeometry
+/// \sa SDL_SetRenderTextureAddressMode
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderGeometryRaw(SDL_Renderer *renderer, SDL_Texture *texture, const float *xy, int xy_stride, const SDL_FColor *color, int color_stride, const float *uv, int uv_stride, int num_vertices, const void *indices, int num_indices, int size_indices)
@@ -3571,6 +3573,80 @@ bool sdlRenderGeometryRaw(
         numIndices,
         sizeIndices,
       ) ==
+      1;
+}
+
+///
+/// Set the texture addressing mode used in SDL_RenderGeometry().
+///
+/// \param renderer the rendering context.
+/// \param u_mode the SDL_TextureAddressMode to use for horizontal texture
+/// coordinates in SDL_RenderGeometry().
+/// \param v_mode the SDL_TextureAddressMode to use for vertical texture
+/// coordinates in SDL_RenderGeometry().
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \since This function is available since SDL 3.4.0.
+///
+/// \sa SDL_RenderGeometry
+/// \sa SDL_RenderGeometryRaw
+/// \sa SDL_GetRenderTextureAddressMode
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetRenderTextureAddressMode(SDL_Renderer *renderer, SDL_TextureAddressMode u_mode, SDL_TextureAddressMode v_mode)
+/// ```
+bool sdlSetRenderTextureAddressMode(
+  Pointer<SdlRenderer> renderer,
+  int uMode,
+  int vMode,
+) {
+  final sdlSetRenderTextureAddressModeLookupFunction = libSdl3.lookupFunction<
+    Uint8 Function(Pointer<SdlRenderer> renderer, Int32 uMode, Int32 vMode),
+    int Function(Pointer<SdlRenderer> renderer, int uMode, int vMode)
+  >('SDL_SetRenderTextureAddressMode');
+  return sdlSetRenderTextureAddressModeLookupFunction(renderer, uMode, vMode) ==
+      1;
+}
+
+///
+/// Get the texture addressing mode used in SDL_RenderGeometry().
+///
+/// \param renderer the rendering context.
+/// \param u_mode a pointer filled in with the SDL_TextureAddressMode to use
+/// for horizontal texture coordinates in SDL_RenderGeometry(),
+/// may be NULL.
+/// \param v_mode a pointer filled in with the SDL_TextureAddressMode to use
+/// for vertical texture coordinates in SDL_RenderGeometry(), may
+/// be NULL.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \since This function is available since SDL 3.4.0.
+///
+/// \sa SDL_SetRenderTextureAddressMode
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderTextureAddressMode(SDL_Renderer *renderer, SDL_TextureAddressMode *u_mode, SDL_TextureAddressMode *v_mode)
+/// ```
+bool sdlGetRenderTextureAddressMode(
+  Pointer<SdlRenderer> renderer,
+  Pointer<Int32> uMode,
+  Pointer<Int32> vMode,
+) {
+  final sdlGetRenderTextureAddressModeLookupFunction = libSdl3.lookupFunction<
+    Uint8 Function(
+      Pointer<SdlRenderer> renderer,
+      Pointer<Int32> uMode,
+      Pointer<Int32> vMode,
+    ),
+    int Function(
+      Pointer<SdlRenderer> renderer,
+      Pointer<Int32> uMode,
+      Pointer<Int32> vMode,
+    )
+  >('SDL_GetRenderTextureAddressMode');
+  return sdlGetRenderTextureAddressModeLookupFunction(renderer, uMode, vMode) ==
       1;
 }
 

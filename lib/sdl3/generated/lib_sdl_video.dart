@@ -175,6 +175,11 @@ int sdlGetPrimaryDisplay() {
 /// responsible for any coordinate transformations needed to conform to the
 /// requested display orientation.
 ///
+/// On Wayland:
+///
+/// - `SDL_PROP_DISPLAY_WAYLAND_WL_OUTPUT_POINTER`: the wl_output associated
+/// with the display
+///
 /// \param displayID the instance ID of the display to query.
 /// \returns a valid property ID on success or 0 on failure; call
 /// SDL_GetError() for more information.
@@ -3168,7 +3173,8 @@ bool sdlFlashWindow(Pointer<SdlWindow> window, int operation) {
 /// Sets the state of the progress bar for the given windowâs taskbar icon.
 ///
 /// \param window the window whose progress state is to be modified.
-/// \param state the progress state.
+/// \param state the progress state. `SDL_PROGRESS_STATE_NONE` stops displaying
+/// the progress bar.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
@@ -3188,10 +3194,33 @@ bool sdlSetWindowProgressState(Pointer<SdlWindow> window, int state) {
 }
 
 ///
+/// Get the state of the progress bar for the given windowâs taskbar icon.
+///
+/// \param window the window to get the current progress state from.
+/// \returns the progress state, or `SDL_PROGRESS_STATE_INVALID` on failure;
+/// call SDL_GetError() for more information.
+///
+/// \threadsafety This function should only be called on the main thread.
+///
+/// \since This function is available since SDL 3.4.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC SDL_ProgressState SDLCALL SDL_GetWindowProgressState(SDL_Window *window)
+/// ```
+int sdlGetWindowProgressState(Pointer<SdlWindow> window) {
+  final sdlGetWindowProgressStateLookupFunction = libSdl3.lookupFunction<
+    Int32 Function(Pointer<SdlWindow> window),
+    int Function(Pointer<SdlWindow> window)
+  >('SDL_GetWindowProgressState');
+  return sdlGetWindowProgressStateLookupFunction(window);
+}
+
+///
 /// Sets the value of the progress bar for the given windowâs taskbar icon.
 ///
 /// \param window the window whose progress value is to be modified.
-/// \param value the progress value (0.0f - start, 1.0f - end).
+/// \param value the progress value in the range of [0.0f - 1.0f]. If the value
+/// is outside the valid range, it gets clamped.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
@@ -3208,6 +3237,28 @@ bool sdlSetWindowProgressValue(Pointer<SdlWindow> window, double value) {
     int Function(Pointer<SdlWindow> window, double value)
   >('SDL_SetWindowProgressValue');
   return sdlSetWindowProgressValueLookupFunction(window, value) == 1;
+}
+
+///
+/// Get the value of the progress bar for the given windowâs taskbar icon.
+///
+/// \param window the window to get the current progress value from.
+/// \returns the progress value in the range of [0.0f - 1.0f], or -1.0f on
+/// failure; call SDL_GetError() for more information.
+///
+/// \threadsafety This function should only be called on the main thread.
+///
+/// \since This function is available since SDL 3.4.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC float SDLCALL SDL_GetWindowProgressValue(SDL_Window *window)
+/// ```
+double sdlGetWindowProgressValue(Pointer<SdlWindow> window) {
+  final sdlGetWindowProgressValueLookupFunction = libSdl3.lookupFunction<
+    Float Function(Pointer<SdlWindow> window),
+    double Function(Pointer<SdlWindow> window)
+  >('SDL_GetWindowProgressValue');
+  return sdlGetWindowProgressValueLookupFunction(window);
 }
 
 ///

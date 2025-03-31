@@ -1761,6 +1761,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_RenderGeometryRaw
+  /// \sa SDL_SetRenderTextureAddressMode
   ///
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderGeometry(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_Vertex *vertices, int num_vertices, const int *indices, int num_indices)
@@ -1808,6 +1809,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_RenderGeometry
+  /// \sa SDL_SetRenderTextureAddressMode
   ///
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderGeometryRaw(SDL_Renderer *renderer, SDL_Texture *texture, const float *xy, int xy_stride, const SDL_FColor *color, int color_stride, const float *uv, int uv_stride, int num_vertices, const void *indices, int num_indices, int size_indices)

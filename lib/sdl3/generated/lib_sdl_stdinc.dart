@@ -12,8 +12,11 @@ import 'struct_sdl.dart';
 ///
 /// If `size` is 0, it will be set to 1.
 ///
-/// If you want to allocate memory aligned to a specific alignment, consider
-/// using SDL_aligned_alloc().
+/// If the allocation is successful, the returned pointer is guaranteed to be
+/// aligned to either the *fundamental alignment* (`alignof(max_align_t)` in
+/// C11 and later) or `2 * sizeof(void *)`, whichever is smaller. Use
+/// SDL_aligned_alloc() if you need to allocate memory aligned to an alignment
+/// greater than this guarantee.
 ///
 /// \param size the size to allocate.
 /// \returns a pointer to the allocated memory, or NULL if allocation failed.
