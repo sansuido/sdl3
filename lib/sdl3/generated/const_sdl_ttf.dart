@@ -32,6 +32,16 @@ const TTF_HINTING_LIGHT = -1 + 2;
 const TTF_HINTING_MONO = -1 + 3;
 const TTF_HINTING_NONE = -1 + 4;
 const TTF_HINTING_LIGHT_SUBPIXEL = -1 + 5;
+const TTF_FONT_WEIGHT_THIN = 100;
+const TTF_FONT_WEIGHT_EXTRA_LIGHT = 200;
+const TTF_FONT_WEIGHT_LIGHT = 300;
+const TTF_FONT_WEIGHT_NORMAL = 400;
+const TTF_FONT_WEIGHT_MEDIUM = 500;
+const TTF_FONT_WEIGHT_SEMI_BOLD = 600;
+const TTF_FONT_WEIGHT_BOLD = 700;
+const TTF_FONT_WEIGHT_EXTRA_BOLD = 800;
+const TTF_FONT_WEIGHT_BLACK = 900;
+const TTF_FONT_WEIGHT_EXTRA_BLACK = 950;
 const TTF_HORIZONTAL_ALIGN_INVALID = -1;
 const TTF_HORIZONTAL_ALIGN_LEFT = -1 + 1;
 const TTF_HORIZONTAL_ALIGN_CENTER = -1 + 2;
@@ -98,6 +108,19 @@ class TtfkHinting {
   static const lightSubpixel = TTF_HINTING_LIGHT_SUBPIXEL;
 }
 
+class TtfkFontWeight {
+  static const thin = TTF_FONT_WEIGHT_THIN;
+  static const extraLight = TTF_FONT_WEIGHT_EXTRA_LIGHT;
+  static const light = TTF_FONT_WEIGHT_LIGHT;
+  static const normal = TTF_FONT_WEIGHT_NORMAL;
+  static const medium = TTF_FONT_WEIGHT_MEDIUM;
+  static const semiBold = TTF_FONT_WEIGHT_SEMI_BOLD;
+  static const bold = TTF_FONT_WEIGHT_BOLD;
+  static const extraBold = TTF_FONT_WEIGHT_EXTRA_BOLD;
+  static const black = TTF_FONT_WEIGHT_BLACK;
+  static const extraBlack = TTF_FONT_WEIGHT_EXTRA_BLACK;
+}
+
 class TtfkHorizontalAlign {
   static const invalid = TTF_HORIZONTAL_ALIGN_INVALID;
   static const left = TTF_HORIZONTAL_ALIGN_LEFT;
@@ -111,4 +134,54 @@ class TtfkDirection {
   static const rtl = TTF_DIRECTION_RTL;
   static const ttb = TTF_DIRECTION_TTB;
   static const btt = TTF_DIRECTION_BTT;
+}
+
+class TtfkImage {
+  static const invalid = TTF_IMAGE_INVALID;
+  static const alpha = TTF_IMAGE_ALPHA;
+  static const color = TTF_IMAGE_COLOR;
+  static const sdf = TTF_IMAGE_SDF;
+}
+
+class TtfkProp {
+  static const fontCreateFilenameString = TTF_PROP_FONT_CREATE_FILENAME_STRING;
+  static const fontCreateIostreamPointer =
+      TTF_PROP_FONT_CREATE_IOSTREAM_POINTER;
+  static const fontCreateIostreamOffsetNumber =
+      TTF_PROP_FONT_CREATE_IOSTREAM_OFFSET_NUMBER;
+  static const fontCreateIostreamAutocloseBoolean =
+      TTF_PROP_FONT_CREATE_IOSTREAM_AUTOCLOSE_BOOLEAN;
+  static const fontCreateSizeFloat = TTF_PROP_FONT_CREATE_SIZE_FLOAT;
+  static const fontCreateFaceNumber = TTF_PROP_FONT_CREATE_FACE_NUMBER;
+  static const fontCreateHorizontalDpiNumber =
+      TTF_PROP_FONT_CREATE_HORIZONTAL_DPI_NUMBER;
+  static const fontCreateVerticalDpiNumber =
+      TTF_PROP_FONT_CREATE_VERTICAL_DPI_NUMBER;
+  static const fontCreateExistingFont = TTF_PROP_FONT_CREATE_EXISTING_FONT;
+  static const fontOutlineLineCapNumber = TTF_PROP_FONT_OUTLINE_LINE_CAP_NUMBER;
+  static const fontOutlineLineJoinNumber =
+      TTF_PROP_FONT_OUTLINE_LINE_JOIN_NUMBER;
+  static const fontOutlineMiterLimitNumber =
+      TTF_PROP_FONT_OUTLINE_MITER_LIMIT_NUMBER;
+  static const rendererTextEngineRenderer =
+      TTF_PROP_RENDERER_TEXT_ENGINE_RENDERER;
+  static const rendererTextEngineAtlasTextureSize =
+      TTF_PROP_RENDERER_TEXT_ENGINE_ATLAS_TEXTURE_SIZE;
+  static const gpuTextEngineDevice = TTF_PROP_GPU_TEXT_ENGINE_DEVICE;
+  static const gpuTextEngineAtlasTextureSize =
+      TTF_PROP_GPU_TEXT_ENGINE_ATLAS_TEXTURE_SIZE;
+}
+
+class TtfkGpuTextengineWinding {
+  static const invalid = TTF_GPU_TEXTENGINE_WINDING_INVALID;
+  static const clockwise = TTF_GPU_TEXTENGINE_WINDING_CLOCKWISE;
+  static const counterClockwise = TTF_GPU_TEXTENGINE_WINDING_COUNTER_CLOCKWISE;
+}
+
+class TtfkSubstring {
+  static const directionMask = TTF_SUBSTRING_DIRECTION_MASK;
+  static const textStart = TTF_SUBSTRING_TEXT_START;
+  static const lineStart = TTF_SUBSTRING_LINE_START;
+  static const lineEnd = TTF_SUBSTRING_LINE_END;
+  static const textEnd = TTF_SUBSTRING_TEXT_END;
 }

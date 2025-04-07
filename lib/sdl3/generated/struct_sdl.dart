@@ -1912,7 +1912,7 @@ final class SdlGpuMultisampleState extends Struct {
   external int enableMask;
   // [9]+(1)
   @Uint8()
-  external int padding1;
+  external int enableAlphaToCoverage;
   // [10]+(1)
   @Uint8()
   external int padding2;

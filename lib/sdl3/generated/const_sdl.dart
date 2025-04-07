@@ -617,6 +617,8 @@ const SDL_PROP_GPU_DEVICE_CREATE_DEBUGMODE_BOOLEAN =
     'SDL.gpu.device.create.debugmode';
 const SDL_PROP_GPU_DEVICE_CREATE_PREFERLOWPOWER_BOOLEAN =
     'SDL.gpu.device.create.preferlowpower';
+const SDL_PROP_GPU_DEVICE_CREATE_VERBOSE_BOOLEAN =
+    'SDL.gpu.device.create.verbose';
 const SDL_PROP_GPU_DEVICE_CREATE_NAME_STRING = 'SDL.gpu.device.create.name';
 const SDL_PROP_GPU_DEVICE_CREATE_SHADERS_PRIVATE_BOOLEAN =
     'SDL.gpu.device.create.shaders.private';
@@ -632,6 +634,11 @@ const SDL_PROP_GPU_DEVICE_CREATE_SHADERS_METALLIB_BOOLEAN =
     'SDL.gpu.device.create.shaders.metallib';
 const SDL_PROP_GPU_DEVICE_CREATE_D3D12_SEMANTIC_NAME_STRING =
     'SDL.gpu.device.create.d3d12.semantic';
+const SDL_PROP_GPU_DEVICE_NAME_STRING = 'SDL.gpu.device.name';
+const SDL_PROP_GPU_DEVICE_DRIVER_NAME_STRING = 'SDL.gpu.device.driver_name';
+const SDL_PROP_GPU_DEVICE_DRIVER_VERSION_STRING =
+    'SDL.gpu.device.driver_version';
+const SDL_PROP_GPU_DEVICE_DRIVER_INFO_STRING = 'SDL.gpu.device.driver_info';
 const SDL_PROP_GPU_COMPUTEPIPELINE_CREATE_NAME_STRING =
     'SDL.gpu.computepipeline.create.name';
 const SDL_PROP_GPU_GRAPHICSPIPELINE_CREATE_NAME_STRING =
@@ -806,6 +813,7 @@ const SDL_HINT_JOYSTICK_HIDAPI_STEAM_HOME_LED =
 const SDL_HINT_JOYSTICK_HIDAPI_STEAMDECK = 'SDL_JOYSTICK_HIDAPI_STEAMDECK';
 const SDL_HINT_JOYSTICK_HIDAPI_STEAM_HORI = 'SDL_JOYSTICK_HIDAPI_STEAM_HORI';
 const SDL_HINT_JOYSTICK_HIDAPI_LG4FF = 'SDL_JOYSTICK_HIDAPI_LG4FF';
+const SDL_HINT_JOYSTICK_HIDAPI_8BITDO = 'SDL_JOYSTICK_HIDAPI_8BITDO';
 const SDL_HINT_JOYSTICK_HIDAPI_SWITCH = 'SDL_JOYSTICK_HIDAPI_SWITCH';
 const SDL_HINT_JOYSTICK_HIDAPI_SWITCH_HOME_LED =
     'SDL_JOYSTICK_HIDAPI_SWITCH_HOME_LED';
@@ -1965,7 +1973,7 @@ const SDL_RENDERER_VSYNC_ADAPTIVE = (-1);
 const SDL_DEBUG_TEXT_FONT_CHARACTER_SIZE = 8;
 //const SDL_revision_h_ = ;
 const SDL_REVISION =
-    'SDL3-3.3.0-release-3.2.6-230-g210b317d8 (" SDL_VENDOR_INFO ")';
+    'SDL3-3.3.0-release-3.2.6-303-g646f1f243 (" SDL_VENDOR_INFO ")';
 //const SDL_scancode_h_ = ;
 const SDL_SCANCODE_UNKNOWN = 0;
 const SDL_SCANCODE_A = 4;
@@ -2578,9 +2586,9 @@ const SDL_PROP_WINDOW_CREATE_WIN32_HWND_POINTER =
 const SDL_PROP_WINDOW_CREATE_WIN32_PIXEL_FORMAT_HWND_POINTER =
     'SDL.window.create.win32.pixel_format_hwnd';
 const SDL_PROP_WINDOW_CREATE_X11_WINDOW_NUMBER = 'SDL.window.create.x11.window';
-const SDL_PROP_WINDOW_CREATE_EMSCRIPTEN_CANVAS_ID =
+const SDL_PROP_WINDOW_CREATE_EMSCRIPTEN_CANVAS_ID_STRING =
     'SDL.window.create.emscripten.canvas_id';
-const SDL_PROP_WINDOW_CREATE_EMSCRIPTEN_KEYBOARD_ELEMENT =
+const SDL_PROP_WINDOW_CREATE_EMSCRIPTEN_KEYBOARD_ELEMENT_STRING =
     'SDL.window.create.emscripten.keyboard_element';
 const SDL_PROP_WINDOW_SHAPE_POINTER = 'SDL.window.shape';
 const SDL_PROP_WINDOW_HDR_ENABLED_BOOLEAN = 'SDL.window.HDR_enabled';
@@ -2629,6 +2637,10 @@ const SDL_PROP_WINDOW_WAYLAND_XDG_POSITIONER_POINTER =
 const SDL_PROP_WINDOW_X11_DISPLAY_POINTER = 'SDL.window.x11.display';
 const SDL_PROP_WINDOW_X11_SCREEN_NUMBER = 'SDL.window.x11.screen';
 const SDL_PROP_WINDOW_X11_WINDOW_NUMBER = 'SDL.window.x11.window';
+const SDL_PROP_WINDOW_EMSCRIPTEN_CANVAS_ID_STRING =
+    'SDL.window.emscripten.canvas_id';
+const SDL_PROP_WINDOW_EMSCRIPTEN_KEYBOARD_ELEMENT_STRING =
+    'SDL.window.emscripten.keyboard_element';
 const SDL_WINDOW_SURFACE_VSYNC_DISABLED = 0;
 const SDL_WINDOW_SURFACE_VSYNC_ADAPTIVE = (-1);
 const SDL_HITTEST_NORMAL = 0;
@@ -2652,6 +2664,15 @@ class SdlkAssertion {
   static const abort = SDL_ASSERTION_ABORT;
   static const ignore = SDL_ASSERTION_IGNORE;
   static const alwaysIgnore = SDL_ASSERTION_ALWAYS_IGNORE;
+}
+
+class SdlkAsyncio {
+  static const taskRead = SDL_ASYNCIO_TASK_READ;
+  static const taskWrite = SDL_ASYNCIO_TASK_WRITE;
+  static const taskClose = SDL_ASYNCIO_TASK_CLOSE;
+  static const complete = SDL_ASYNCIO_COMPLETE;
+  static const failure = SDL_ASYNCIO_FAILURE;
+  static const canceled = SDL_ASYNCIO_CANCELED;
 }
 
 class SdlkAudio {
@@ -2702,6 +2723,23 @@ class SdlkCameraPosition {
   static const unknown = SDL_CAMERA_POSITION_UNKNOWN;
   static const frontFacing = SDL_CAMERA_POSITION_FRONT_FACING;
   static const backFacing = SDL_CAMERA_POSITION_BACK_FACING;
+}
+
+class SdlkFiledialog {
+  static const openfile = SDL_FILEDIALOG_OPENFILE;
+  static const savefile = SDL_FILEDIALOG_SAVEFILE;
+  static const openfolder = SDL_FILEDIALOG_OPENFOLDER;
+}
+
+class SdlkPropFileDialog {
+  static const filtersPointer = SDL_PROP_FILE_DIALOG_FILTERS_POINTER;
+  static const nfiltersNumber = SDL_PROP_FILE_DIALOG_NFILTERS_NUMBER;
+  static const windowPointer = SDL_PROP_FILE_DIALOG_WINDOW_POINTER;
+  static const locationString = SDL_PROP_FILE_DIALOG_LOCATION_STRING;
+  static const manyBoolean = SDL_PROP_FILE_DIALOG_MANY_BOOLEAN;
+  static const titleString = SDL_PROP_FILE_DIALOG_TITLE_STRING;
+  static const acceptString = SDL_PROP_FILE_DIALOG_ACCEPT_STRING;
+  static const cancelString = SDL_PROP_FILE_DIALOG_CANCEL_STRING;
 }
 
 class SdlkEvent {
@@ -3278,6 +3316,59 @@ class SdlkGpuSwapchaincomposition {
   static const hdr10St2084 = SDL_GPU_SWAPCHAINCOMPOSITION_HDR10_ST2084;
 }
 
+class SdlkPropGpu {
+  static const deviceCreateDebugmodeBoolean =
+      SDL_PROP_GPU_DEVICE_CREATE_DEBUGMODE_BOOLEAN;
+  static const deviceCreatePreferlowpowerBoolean =
+      SDL_PROP_GPU_DEVICE_CREATE_PREFERLOWPOWER_BOOLEAN;
+  static const deviceCreateVerboseBoolean =
+      SDL_PROP_GPU_DEVICE_CREATE_VERBOSE_BOOLEAN;
+  static const deviceCreateNameString = SDL_PROP_GPU_DEVICE_CREATE_NAME_STRING;
+  static const deviceCreateShadersPrivateBoolean =
+      SDL_PROP_GPU_DEVICE_CREATE_SHADERS_PRIVATE_BOOLEAN;
+  static const deviceCreateShadersSpirvBoolean =
+      SDL_PROP_GPU_DEVICE_CREATE_SHADERS_SPIRV_BOOLEAN;
+  static const deviceCreateShadersDxbcBoolean =
+      SDL_PROP_GPU_DEVICE_CREATE_SHADERS_DXBC_BOOLEAN;
+  static const deviceCreateShadersDxilBoolean =
+      SDL_PROP_GPU_DEVICE_CREATE_SHADERS_DXIL_BOOLEAN;
+  static const deviceCreateShadersMslBoolean =
+      SDL_PROP_GPU_DEVICE_CREATE_SHADERS_MSL_BOOLEAN;
+  static const deviceCreateShadersMetallibBoolean =
+      SDL_PROP_GPU_DEVICE_CREATE_SHADERS_METALLIB_BOOLEAN;
+  static const deviceCreateD3D12SemanticNameString =
+      SDL_PROP_GPU_DEVICE_CREATE_D3D12_SEMANTIC_NAME_STRING;
+  static const deviceNameString = SDL_PROP_GPU_DEVICE_NAME_STRING;
+  static const deviceDriverNameString = SDL_PROP_GPU_DEVICE_DRIVER_NAME_STRING;
+  static const deviceDriverVersionString =
+      SDL_PROP_GPU_DEVICE_DRIVER_VERSION_STRING;
+  static const deviceDriverInfoString = SDL_PROP_GPU_DEVICE_DRIVER_INFO_STRING;
+  static const computepipelineCreateNameString =
+      SDL_PROP_GPU_COMPUTEPIPELINE_CREATE_NAME_STRING;
+  static const graphicspipelineCreateNameString =
+      SDL_PROP_GPU_GRAPHICSPIPELINE_CREATE_NAME_STRING;
+  static const samplerCreateNameString =
+      SDL_PROP_GPU_SAMPLER_CREATE_NAME_STRING;
+  static const shaderCreateNameString = SDL_PROP_GPU_SHADER_CREATE_NAME_STRING;
+  static const textureCreateD3D12ClearRFloat =
+      SDL_PROP_GPU_TEXTURE_CREATE_D3D12_CLEAR_R_FLOAT;
+  static const textureCreateD3D12ClearGFloat =
+      SDL_PROP_GPU_TEXTURE_CREATE_D3D12_CLEAR_G_FLOAT;
+  static const textureCreateD3D12ClearBFloat =
+      SDL_PROP_GPU_TEXTURE_CREATE_D3D12_CLEAR_B_FLOAT;
+  static const textureCreateD3D12ClearAFloat =
+      SDL_PROP_GPU_TEXTURE_CREATE_D3D12_CLEAR_A_FLOAT;
+  static const textureCreateD3D12ClearDepthFloat =
+      SDL_PROP_GPU_TEXTURE_CREATE_D3D12_CLEAR_DEPTH_FLOAT;
+  static const textureCreateD3D12ClearStencilUint8 =
+      SDL_PROP_GPU_TEXTURE_CREATE_D3D12_CLEAR_STENCIL_UINT8;
+  static const textureCreateNameString =
+      SDL_PROP_GPU_TEXTURE_CREATE_NAME_STRING;
+  static const bufferCreateNameString = SDL_PROP_GPU_BUFFER_CREATE_NAME_STRING;
+  static const transferbufferCreateNameString =
+      SDL_PROP_GPU_TRANSFERBUFFER_CREATE_NAME_STRING;
+}
+
 class SdlkHaptic {
   static const constant = SDL_HAPTIC_CONSTANT;
   static const sine = SDL_HAPTIC_SINE;
@@ -3433,6 +3524,7 @@ class SdlkHint {
   static const joystickHidapiSteamdeck = SDL_HINT_JOYSTICK_HIDAPI_STEAMDECK;
   static const joystickHidapiSteamHori = SDL_HINT_JOYSTICK_HIDAPI_STEAM_HORI;
   static const joystickHidapiLg4Ff = SDL_HINT_JOYSTICK_HIDAPI_LG4FF;
+  static const joystickHidapi8Bitdo = SDL_HINT_JOYSTICK_HIDAPI_8BITDO;
   static const joystickHidapiSwitch = SDL_HINT_JOYSTICK_HIDAPI_SWITCH;
   static const joystickHidapiSwitchHomeLed =
       SDL_HINT_JOYSTICK_HIDAPI_SWITCH_HOME_LED;
@@ -3634,6 +3726,16 @@ class SdlkApp {
   static const failure = SDL_APP_FAILURE;
 }
 
+class SdlkPropAppMetadata {
+  static const nameString = SDL_PROP_APP_METADATA_NAME_STRING;
+  static const versionString = SDL_PROP_APP_METADATA_VERSION_STRING;
+  static const identifierString = SDL_PROP_APP_METADATA_IDENTIFIER_STRING;
+  static const creatorString = SDL_PROP_APP_METADATA_CREATOR_STRING;
+  static const copyrightString = SDL_PROP_APP_METADATA_COPYRIGHT_STRING;
+  static const urlString = SDL_PROP_APP_METADATA_URL_STRING;
+  static const typeString = SDL_PROP_APP_METADATA_TYPE_STRING;
+}
+
 class SdlkIoStatus {
   static const ready = SDL_IO_STATUS_READY;
   static const error = SDL_IO_STATUS_ERROR;
@@ -3647,6 +3749,18 @@ class SdlkIoSeek {
   static const set = SDL_IO_SEEK_SET;
   static const cur = SDL_IO_SEEK_CUR;
   static const end = SDL_IO_SEEK_END;
+}
+
+class SdlkPropIostream {
+  static const windowsHandlePointer = SDL_PROP_IOSTREAM_WINDOWS_HANDLE_POINTER;
+  static const stdioFilePointer = SDL_PROP_IOSTREAM_STDIO_FILE_POINTER;
+  static const fileDescriptorNumber = SDL_PROP_IOSTREAM_FILE_DESCRIPTOR_NUMBER;
+  static const androidAassetPointer = SDL_PROP_IOSTREAM_ANDROID_AASSET_POINTER;
+  static const memoryPointer = SDL_PROP_IOSTREAM_MEMORY_POINTER;
+  static const memorySizeNumber = SDL_PROP_IOSTREAM_MEMORY_SIZE_NUMBER;
+  static const dynamicMemoryPointer = SDL_PROP_IOSTREAM_DYNAMIC_MEMORY_POINTER;
+  static const dynamicChunksizeNumber =
+      SDL_PROP_IOSTREAM_DYNAMIC_CHUNKSIZE_NUMBER;
 }
 
 class SdlkJoystickType {
@@ -3673,6 +3787,15 @@ class SdlkJoystickConnection {
 class SdlkJoystickAxis {
   static const max = SDL_JOYSTICK_AXIS_MAX;
   static const min = SDL_JOYSTICK_AXIS_MIN;
+}
+
+class SdlkPropJoystickCap {
+  static const monoLedBoolean = SDL_PROP_JOYSTICK_CAP_MONO_LED_BOOLEAN;
+  static const rgbLedBoolean = SDL_PROP_JOYSTICK_CAP_RGB_LED_BOOLEAN;
+  static const playerLedBoolean = SDL_PROP_JOYSTICK_CAP_PLAYER_LED_BOOLEAN;
+  static const rumbleBoolean = SDL_PROP_JOYSTICK_CAP_RUMBLE_BOOLEAN;
+  static const triggerRumbleBoolean =
+      SDL_PROP_JOYSTICK_CAP_TRIGGER_RUMBLE_BOOLEAN;
 }
 
 class SdlkHat {
@@ -3705,6 +3828,15 @@ class SdlkCapitalize {
   static const sentences = SDL_CAPITALIZE_SENTENCES;
   static const words = SDL_CAPITALIZE_WORDS;
   static const letters = SDL_CAPITALIZE_LETTERS;
+}
+
+class SdlkPropTextinput {
+  static const typeNumber = SDL_PROP_TEXTINPUT_TYPE_NUMBER;
+  static const capitalizationNumber = SDL_PROP_TEXTINPUT_CAPITALIZATION_NUMBER;
+  static const autocorrectBoolean = SDL_PROP_TEXTINPUT_AUTOCORRECT_BOOLEAN;
+  static const multilineBoolean = SDL_PROP_TEXTINPUT_MULTILINE_BOOLEAN;
+  static const androidInputtypeNumber =
+      SDL_PROP_TEXTINPUT_ANDROID_INPUTTYPE_NUMBER;
 }
 
 class Sdlk {
@@ -4349,6 +4481,29 @@ class SdlkProcessStdio {
   static const redirect = SDL_PROCESS_STDIO_REDIRECT;
 }
 
+class SdlkPropProcess {
+  static const createArgsPointer = SDL_PROP_PROCESS_CREATE_ARGS_POINTER;
+  static const createEnvironmentPointer =
+      SDL_PROP_PROCESS_CREATE_ENVIRONMENT_POINTER;
+  static const createWorkingDirectoryString =
+      SDL_PROP_PROCESS_CREATE_WORKING_DIRECTORY_STRING;
+  static const createStdinNumber = SDL_PROP_PROCESS_CREATE_STDIN_NUMBER;
+  static const createStdinPointer = SDL_PROP_PROCESS_CREATE_STDIN_POINTER;
+  static const createStdoutNumber = SDL_PROP_PROCESS_CREATE_STDOUT_NUMBER;
+  static const createStdoutPointer = SDL_PROP_PROCESS_CREATE_STDOUT_POINTER;
+  static const createStderrNumber = SDL_PROP_PROCESS_CREATE_STDERR_NUMBER;
+  static const createStderrPointer = SDL_PROP_PROCESS_CREATE_STDERR_POINTER;
+  static const createStderrToStdoutBoolean =
+      SDL_PROP_PROCESS_CREATE_STDERR_TO_STDOUT_BOOLEAN;
+  static const createBackgroundBoolean =
+      SDL_PROP_PROCESS_CREATE_BACKGROUND_BOOLEAN;
+  static const pidNumber = SDL_PROP_PROCESS_PID_NUMBER;
+  static const stdinPointer = SDL_PROP_PROCESS_STDIN_POINTER;
+  static const stdoutPointer = SDL_PROP_PROCESS_STDOUT_POINTER;
+  static const stderrPointer = SDL_PROP_PROCESS_STDERR_POINTER;
+  static const backgroundBoolean = SDL_PROP_PROCESS_BACKGROUND_BOOLEAN;
+}
+
 class SdlkPropertyType {
   static const invalid = SDL_PROPERTY_TYPE_INVALID;
   static const pointer = SDL_PROPERTY_TYPE_POINTER;
@@ -4364,12 +4519,153 @@ class SdlkTextureaccess {
   static const target = SDL_TEXTUREACCESS_TARGET;
 }
 
+class SdlkTextureAddress {
+  static const invalid = SDL_TEXTURE_ADDRESS_INVALID;
+  static const auto = SDL_TEXTURE_ADDRESS_AUTO;
+  static const clamp = SDL_TEXTURE_ADDRESS_CLAMP;
+  static const wrap = SDL_TEXTURE_ADDRESS_WRAP;
+}
+
 class SdlkLogicalPresentation {
   static const disabled = SDL_LOGICAL_PRESENTATION_DISABLED;
   static const stretch = SDL_LOGICAL_PRESENTATION_STRETCH;
   static const letterbox = SDL_LOGICAL_PRESENTATION_LETTERBOX;
   static const overscan = SDL_LOGICAL_PRESENTATION_OVERSCAN;
   static const integerScale = SDL_LOGICAL_PRESENTATION_INTEGER_SCALE;
+}
+
+class SdlkPropRenderer {
+  static const createNameString = SDL_PROP_RENDERER_CREATE_NAME_STRING;
+  static const createWindowPointer = SDL_PROP_RENDERER_CREATE_WINDOW_POINTER;
+  static const createSurfacePointer = SDL_PROP_RENDERER_CREATE_SURFACE_POINTER;
+  static const createOutputColorspaceNumber =
+      SDL_PROP_RENDERER_CREATE_OUTPUT_COLORSPACE_NUMBER;
+  static const createPresentVsyncNumber =
+      SDL_PROP_RENDERER_CREATE_PRESENT_VSYNC_NUMBER;
+  static const createVulkanInstancePointer =
+      SDL_PROP_RENDERER_CREATE_VULKAN_INSTANCE_POINTER;
+  static const createVulkanSurfaceNumber =
+      SDL_PROP_RENDERER_CREATE_VULKAN_SURFACE_NUMBER;
+  static const createVulkanPhysicalDevicePointer =
+      SDL_PROP_RENDERER_CREATE_VULKAN_PHYSICAL_DEVICE_POINTER;
+  static const createVulkanDevicePointer =
+      SDL_PROP_RENDERER_CREATE_VULKAN_DEVICE_POINTER;
+  static const createVulkanGraphicsQueueFamilyIndexNumber =
+      SDL_PROP_RENDERER_CREATE_VULKAN_GRAPHICS_QUEUE_FAMILY_INDEX_NUMBER;
+  static const createVulkanPresentQueueFamilyIndexNumber =
+      SDL_PROP_RENDERER_CREATE_VULKAN_PRESENT_QUEUE_FAMILY_INDEX_NUMBER;
+  static const nameString = SDL_PROP_RENDERER_NAME_STRING;
+  static const windowPointer = SDL_PROP_RENDERER_WINDOW_POINTER;
+  static const surfacePointer = SDL_PROP_RENDERER_SURFACE_POINTER;
+  static const vsyncNumber = SDL_PROP_RENDERER_VSYNC_NUMBER;
+  static const maxTextureSizeNumber = SDL_PROP_RENDERER_MAX_TEXTURE_SIZE_NUMBER;
+  static const textureFormatsPointer =
+      SDL_PROP_RENDERER_TEXTURE_FORMATS_POINTER;
+  static const outputColorspaceNumber =
+      SDL_PROP_RENDERER_OUTPUT_COLORSPACE_NUMBER;
+  static const hdrEnabledBoolean = SDL_PROP_RENDERER_HDR_ENABLED_BOOLEAN;
+  static const sdrWhitePointFloat = SDL_PROP_RENDERER_SDR_WHITE_POINT_FLOAT;
+  static const hdrHeadroomFloat = SDL_PROP_RENDERER_HDR_HEADROOM_FLOAT;
+  static const d3D9DevicePointer = SDL_PROP_RENDERER_D3D9_DEVICE_POINTER;
+  static const d3D11DevicePointer = SDL_PROP_RENDERER_D3D11_DEVICE_POINTER;
+  static const d3D11SwapchainPointer =
+      SDL_PROP_RENDERER_D3D11_SWAPCHAIN_POINTER;
+  static const d3D12DevicePointer = SDL_PROP_RENDERER_D3D12_DEVICE_POINTER;
+  static const d3D12SwapchainPointer =
+      SDL_PROP_RENDERER_D3D12_SWAPCHAIN_POINTER;
+  static const d3D12CommandQueuePointer =
+      SDL_PROP_RENDERER_D3D12_COMMAND_QUEUE_POINTER;
+  static const vulkanInstancePointer =
+      SDL_PROP_RENDERER_VULKAN_INSTANCE_POINTER;
+  static const vulkanSurfaceNumber = SDL_PROP_RENDERER_VULKAN_SURFACE_NUMBER;
+  static const vulkanPhysicalDevicePointer =
+      SDL_PROP_RENDERER_VULKAN_PHYSICAL_DEVICE_POINTER;
+  static const vulkanDevicePointer = SDL_PROP_RENDERER_VULKAN_DEVICE_POINTER;
+  static const vulkanGraphicsQueueFamilyIndexNumber =
+      SDL_PROP_RENDERER_VULKAN_GRAPHICS_QUEUE_FAMILY_INDEX_NUMBER;
+  static const vulkanPresentQueueFamilyIndexNumber =
+      SDL_PROP_RENDERER_VULKAN_PRESENT_QUEUE_FAMILY_INDEX_NUMBER;
+  static const vulkanSwapchainImageCountNumber =
+      SDL_PROP_RENDERER_VULKAN_SWAPCHAIN_IMAGE_COUNT_NUMBER;
+  static const gpuDevicePointer = SDL_PROP_RENDERER_GPU_DEVICE_POINTER;
+}
+
+class SdlkPropTexture {
+  static const createColorspaceNumber =
+      SDL_PROP_TEXTURE_CREATE_COLORSPACE_NUMBER;
+  static const createFormatNumber = SDL_PROP_TEXTURE_CREATE_FORMAT_NUMBER;
+  static const createAccessNumber = SDL_PROP_TEXTURE_CREATE_ACCESS_NUMBER;
+  static const createWidthNumber = SDL_PROP_TEXTURE_CREATE_WIDTH_NUMBER;
+  static const createHeightNumber = SDL_PROP_TEXTURE_CREATE_HEIGHT_NUMBER;
+  static const createSdrWhitePointFloat =
+      SDL_PROP_TEXTURE_CREATE_SDR_WHITE_POINT_FLOAT;
+  static const createHdrHeadroomFloat =
+      SDL_PROP_TEXTURE_CREATE_HDR_HEADROOM_FLOAT;
+  static const createD3D11TexturePointer =
+      SDL_PROP_TEXTURE_CREATE_D3D11_TEXTURE_POINTER;
+  static const createD3D11TextureUPointer =
+      SDL_PROP_TEXTURE_CREATE_D3D11_TEXTURE_U_POINTER;
+  static const createD3D11TextureVPointer =
+      SDL_PROP_TEXTURE_CREATE_D3D11_TEXTURE_V_POINTER;
+  static const createD3D12TexturePointer =
+      SDL_PROP_TEXTURE_CREATE_D3D12_TEXTURE_POINTER;
+  static const createD3D12TextureUPointer =
+      SDL_PROP_TEXTURE_CREATE_D3D12_TEXTURE_U_POINTER;
+  static const createD3D12TextureVPointer =
+      SDL_PROP_TEXTURE_CREATE_D3D12_TEXTURE_V_POINTER;
+  static const createMetalPixelbufferPointer =
+      SDL_PROP_TEXTURE_CREATE_METAL_PIXELBUFFER_POINTER;
+  static const createOpenglTextureNumber =
+      SDL_PROP_TEXTURE_CREATE_OPENGL_TEXTURE_NUMBER;
+  static const createOpenglTextureUvNumber =
+      SDL_PROP_TEXTURE_CREATE_OPENGL_TEXTURE_UV_NUMBER;
+  static const createOpenglTextureUNumber =
+      SDL_PROP_TEXTURE_CREATE_OPENGL_TEXTURE_U_NUMBER;
+  static const createOpenglTextureVNumber =
+      SDL_PROP_TEXTURE_CREATE_OPENGL_TEXTURE_V_NUMBER;
+  static const createOpengles2TextureNumber =
+      SDL_PROP_TEXTURE_CREATE_OPENGLES2_TEXTURE_NUMBER;
+  static const createOpengles2TextureUvNumber =
+      SDL_PROP_TEXTURE_CREATE_OPENGLES2_TEXTURE_UV_NUMBER;
+  static const createOpengles2TextureUNumber =
+      SDL_PROP_TEXTURE_CREATE_OPENGLES2_TEXTURE_U_NUMBER;
+  static const createOpengles2TextureVNumber =
+      SDL_PROP_TEXTURE_CREATE_OPENGLES2_TEXTURE_V_NUMBER;
+  static const createVulkanTextureNumber =
+      SDL_PROP_TEXTURE_CREATE_VULKAN_TEXTURE_NUMBER;
+  static const colorspaceNumber = SDL_PROP_TEXTURE_COLORSPACE_NUMBER;
+  static const formatNumber = SDL_PROP_TEXTURE_FORMAT_NUMBER;
+  static const accessNumber = SDL_PROP_TEXTURE_ACCESS_NUMBER;
+  static const widthNumber = SDL_PROP_TEXTURE_WIDTH_NUMBER;
+  static const heightNumber = SDL_PROP_TEXTURE_HEIGHT_NUMBER;
+  static const sdrWhitePointFloat = SDL_PROP_TEXTURE_SDR_WHITE_POINT_FLOAT;
+  static const hdrHeadroomFloat = SDL_PROP_TEXTURE_HDR_HEADROOM_FLOAT;
+  static const d3D11TexturePointer = SDL_PROP_TEXTURE_D3D11_TEXTURE_POINTER;
+  static const d3D11TextureUPointer = SDL_PROP_TEXTURE_D3D11_TEXTURE_U_POINTER;
+  static const d3D11TextureVPointer = SDL_PROP_TEXTURE_D3D11_TEXTURE_V_POINTER;
+  static const d3D12TexturePointer = SDL_PROP_TEXTURE_D3D12_TEXTURE_POINTER;
+  static const d3D12TextureUPointer = SDL_PROP_TEXTURE_D3D12_TEXTURE_U_POINTER;
+  static const d3D12TextureVPointer = SDL_PROP_TEXTURE_D3D12_TEXTURE_V_POINTER;
+  static const openglTextureNumber = SDL_PROP_TEXTURE_OPENGL_TEXTURE_NUMBER;
+  static const openglTextureUvNumber =
+      SDL_PROP_TEXTURE_OPENGL_TEXTURE_UV_NUMBER;
+  static const openglTextureUNumber = SDL_PROP_TEXTURE_OPENGL_TEXTURE_U_NUMBER;
+  static const openglTextureVNumber = SDL_PROP_TEXTURE_OPENGL_TEXTURE_V_NUMBER;
+  static const openglTextureTargetNumber =
+      SDL_PROP_TEXTURE_OPENGL_TEXTURE_TARGET_NUMBER;
+  static const openglTexWFloat = SDL_PROP_TEXTURE_OPENGL_TEX_W_FLOAT;
+  static const openglTexHFloat = SDL_PROP_TEXTURE_OPENGL_TEX_H_FLOAT;
+  static const opengles2TextureNumber =
+      SDL_PROP_TEXTURE_OPENGLES2_TEXTURE_NUMBER;
+  static const opengles2TextureUvNumber =
+      SDL_PROP_TEXTURE_OPENGLES2_TEXTURE_UV_NUMBER;
+  static const opengles2TextureUNumber =
+      SDL_PROP_TEXTURE_OPENGLES2_TEXTURE_U_NUMBER;
+  static const opengles2TextureVNumber =
+      SDL_PROP_TEXTURE_OPENGLES2_TEXTURE_V_NUMBER;
+  static const opengles2TextureTargetNumber =
+      SDL_PROP_TEXTURE_OPENGLES2_TEXTURE_TARGET_NUMBER;
+  static const vulkanTextureNumber = SDL_PROP_TEXTURE_VULKAN_TEXTURE_NUMBER;
 }
 
 class SdlkRendererVsync {
@@ -4660,9 +4956,25 @@ class SdlkFlip {
   static const vertical = SDL_FLIP_VERTICAL;
 }
 
+class SdlkPropSurface {
+  static const sdrWhitePointFloat = SDL_PROP_SURFACE_SDR_WHITE_POINT_FLOAT;
+  static const hdrHeadroomFloat = SDL_PROP_SURFACE_HDR_HEADROOM_FLOAT;
+  static const tonemapOperatorString = SDL_PROP_SURFACE_TONEMAP_OPERATOR_STRING;
+  static const hotspotXNumber = SDL_PROP_SURFACE_HOTSPOT_X_NUMBER;
+  static const hotspotYNumber = SDL_PROP_SURFACE_HOTSPOT_Y_NUMBER;
+}
+
 class SdlkAndroidExternalStorage {
   static const read = SDL_ANDROID_EXTERNAL_STORAGE_READ;
   static const write = SDL_ANDROID_EXTERNAL_STORAGE_WRITE;
+}
+
+class SdlkSandbox {
+  static const none = SDL_SANDBOX_NONE;
+  static const unknownContainer = SDL_SANDBOX_UNKNOWN_CONTAINER;
+  static const flatpak = SDL_SANDBOX_FLATPAK;
+  static const snap = SDL_SANDBOX_SNAP;
+  static const macos = SDL_SANDBOX_MACOS;
 }
 
 class SdlkThreadPriority {
@@ -4670,6 +4982,25 @@ class SdlkThreadPriority {
   static const normal = SDL_THREAD_PRIORITY_NORMAL;
   static const high = SDL_THREAD_PRIORITY_HIGH;
   static const timeCritical = SDL_THREAD_PRIORITY_TIME_CRITICAL;
+}
+
+class SdlkThread {
+  static const priorityLow = SDL_THREAD_PRIORITY_LOW;
+  static const priorityNormal = SDL_THREAD_PRIORITY_NORMAL;
+  static const priorityHigh = SDL_THREAD_PRIORITY_HIGH;
+  static const priorityTimeCritical = SDL_THREAD_PRIORITY_TIME_CRITICAL;
+  static const unknown = SDL_THREAD_UNKNOWN;
+  static const alive = SDL_THREAD_ALIVE;
+  static const detached = SDL_THREAD_DETACHED;
+  static const complete = SDL_THREAD_COMPLETE;
+}
+
+class SdlkPropThread {
+  static const createEntryFunctionPointer =
+      SDL_PROP_THREAD_CREATE_ENTRY_FUNCTION_POINTER;
+  static const createNameString = SDL_PROP_THREAD_CREATE_NAME_STRING;
+  static const createUserdataPointer = SDL_PROP_THREAD_CREATE_USERDATA_POINTER;
+  static const createStacksizeNumber = SDL_PROP_THREAD_CREATE_STACKSIZE_NUMBER;
 }
 
 class SdlkDateFormat {
@@ -4688,6 +5019,14 @@ class SdlkTouchDevice {
   static const direct = SDL_TOUCH_DEVICE_DIRECT;
   static const indirectAbsolute = SDL_TOUCH_DEVICE_INDIRECT_ABSOLUTE;
   static const indirectRelative = SDL_TOUCH_DEVICE_INDIRECT_RELATIVE;
+}
+
+class SdlkTrayentry {
+  static const button = SDL_TRAYENTRY_BUTTON;
+  static const checkbox = SDL_TRAYENTRY_CHECKBOX;
+  static const submenu = SDL_TRAYENTRY_SUBMENU;
+  static const disabled = SDL_TRAYENTRY_DISABLED;
+  static const checked = SDL_TRAYENTRY_CHECKED;
 }
 
 class SdlkSystemTheme {
@@ -4740,6 +5079,15 @@ class SdlkFlash {
   static const untilFocused = SDL_FLASH_UNTIL_FOCUSED;
 }
 
+class SdlkProgressState {
+  static const invalid = SDL_PROGRESS_STATE_INVALID;
+  static const none = SDL_PROGRESS_STATE_NONE;
+  static const indeterminate = SDL_PROGRESS_STATE_INDETERMINATE;
+  static const normal = SDL_PROGRESS_STATE_NORMAL;
+  static const paused = SDL_PROGRESS_STATE_PAUSED;
+  static const error = SDL_PROGRESS_STATE_ERROR;
+}
+
 class SdlkGl {
   static const redSize = SDL_GL_RED_SIZE;
   static const greenSize = SDL_GL_GREEN_SIZE;
@@ -4785,6 +5133,126 @@ class SdlkGl {
   static const contextResetNoNotification =
       SDL_GL_CONTEXT_RESET_NO_NOTIFICATION;
   static const contextResetLoseContext = SDL_GL_CONTEXT_RESET_LOSE_CONTEXT;
+}
+
+class SdlkPropDisplay {
+  static const hdrEnabledBoolean = SDL_PROP_DISPLAY_HDR_ENABLED_BOOLEAN;
+  static const kmsdrmPanelOrientationNumber =
+      SDL_PROP_DISPLAY_KMSDRM_PANEL_ORIENTATION_NUMBER;
+  static const waylandWlOutputPointer =
+      SDL_PROP_DISPLAY_WAYLAND_WL_OUTPUT_POINTER;
+}
+
+class SdlkPropWindow {
+  static const createAlwaysOnTopBoolean =
+      SDL_PROP_WINDOW_CREATE_ALWAYS_ON_TOP_BOOLEAN;
+  static const createBorderlessBoolean =
+      SDL_PROP_WINDOW_CREATE_BORDERLESS_BOOLEAN;
+  static const createFocusableBoolean =
+      SDL_PROP_WINDOW_CREATE_FOCUSABLE_BOOLEAN;
+  static const createExternalGraphicsContextBoolean =
+      SDL_PROP_WINDOW_CREATE_EXTERNAL_GRAPHICS_CONTEXT_BOOLEAN;
+  static const createFlagsNumber = SDL_PROP_WINDOW_CREATE_FLAGS_NUMBER;
+  static const createFullscreenBoolean =
+      SDL_PROP_WINDOW_CREATE_FULLSCREEN_BOOLEAN;
+  static const createHeightNumber = SDL_PROP_WINDOW_CREATE_HEIGHT_NUMBER;
+  static const createHiddenBoolean = SDL_PROP_WINDOW_CREATE_HIDDEN_BOOLEAN;
+  static const createHighPixelDensityBoolean =
+      SDL_PROP_WINDOW_CREATE_HIGH_PIXEL_DENSITY_BOOLEAN;
+  static const createMaximizedBoolean =
+      SDL_PROP_WINDOW_CREATE_MAXIMIZED_BOOLEAN;
+  static const createMenuBoolean = SDL_PROP_WINDOW_CREATE_MENU_BOOLEAN;
+  static const createMetalBoolean = SDL_PROP_WINDOW_CREATE_METAL_BOOLEAN;
+  static const createMinimizedBoolean =
+      SDL_PROP_WINDOW_CREATE_MINIMIZED_BOOLEAN;
+  static const createModalBoolean = SDL_PROP_WINDOW_CREATE_MODAL_BOOLEAN;
+  static const createMouseGrabbedBoolean =
+      SDL_PROP_WINDOW_CREATE_MOUSE_GRABBED_BOOLEAN;
+  static const createOpenglBoolean = SDL_PROP_WINDOW_CREATE_OPENGL_BOOLEAN;
+  static const createParentPointer = SDL_PROP_WINDOW_CREATE_PARENT_POINTER;
+  static const createResizableBoolean =
+      SDL_PROP_WINDOW_CREATE_RESIZABLE_BOOLEAN;
+  static const createTitleString = SDL_PROP_WINDOW_CREATE_TITLE_STRING;
+  static const createTransparentBoolean =
+      SDL_PROP_WINDOW_CREATE_TRANSPARENT_BOOLEAN;
+  static const createTooltipBoolean = SDL_PROP_WINDOW_CREATE_TOOLTIP_BOOLEAN;
+  static const createUtilityBoolean = SDL_PROP_WINDOW_CREATE_UTILITY_BOOLEAN;
+  static const createVulkanBoolean = SDL_PROP_WINDOW_CREATE_VULKAN_BOOLEAN;
+  static const createWidthNumber = SDL_PROP_WINDOW_CREATE_WIDTH_NUMBER;
+  static const createXNumber = SDL_PROP_WINDOW_CREATE_X_NUMBER;
+  static const createYNumber = SDL_PROP_WINDOW_CREATE_Y_NUMBER;
+  static const createCocoaWindowPointer =
+      SDL_PROP_WINDOW_CREATE_COCOA_WINDOW_POINTER;
+  static const createCocoaViewPointer =
+      SDL_PROP_WINDOW_CREATE_COCOA_VIEW_POINTER;
+  static const createWaylandSurfaceRoleCustomBoolean =
+      SDL_PROP_WINDOW_CREATE_WAYLAND_SURFACE_ROLE_CUSTOM_BOOLEAN;
+  static const createWaylandCreateEglWindowBoolean =
+      SDL_PROP_WINDOW_CREATE_WAYLAND_CREATE_EGL_WINDOW_BOOLEAN;
+  static const createWaylandWlSurfacePointer =
+      SDL_PROP_WINDOW_CREATE_WAYLAND_WL_SURFACE_POINTER;
+  static const createWin32HwndPointer =
+      SDL_PROP_WINDOW_CREATE_WIN32_HWND_POINTER;
+  static const createWin32PixelFormatHwndPointer =
+      SDL_PROP_WINDOW_CREATE_WIN32_PIXEL_FORMAT_HWND_POINTER;
+  static const createX11WindowNumber = SDL_PROP_WINDOW_CREATE_X11_WINDOW_NUMBER;
+  static const createEmscriptenCanvasIdString =
+      SDL_PROP_WINDOW_CREATE_EMSCRIPTEN_CANVAS_ID_STRING;
+  static const createEmscriptenKeyboardElementString =
+      SDL_PROP_WINDOW_CREATE_EMSCRIPTEN_KEYBOARD_ELEMENT_STRING;
+  static const shapePointer = SDL_PROP_WINDOW_SHAPE_POINTER;
+  static const hdrEnabledBoolean = SDL_PROP_WINDOW_HDR_ENABLED_BOOLEAN;
+  static const sdrWhiteLevelFloat = SDL_PROP_WINDOW_SDR_WHITE_LEVEL_FLOAT;
+  static const hdrHeadroomFloat = SDL_PROP_WINDOW_HDR_HEADROOM_FLOAT;
+  static const androidWindowPointer = SDL_PROP_WINDOW_ANDROID_WINDOW_POINTER;
+  static const androidSurfacePointer = SDL_PROP_WINDOW_ANDROID_SURFACE_POINTER;
+  static const uikitWindowPointer = SDL_PROP_WINDOW_UIKIT_WINDOW_POINTER;
+  static const uikitMetalViewTagNumber =
+      SDL_PROP_WINDOW_UIKIT_METAL_VIEW_TAG_NUMBER;
+  static const uikitOpenglFramebufferNumber =
+      SDL_PROP_WINDOW_UIKIT_OPENGL_FRAMEBUFFER_NUMBER;
+  static const uikitOpenglRenderbufferNumber =
+      SDL_PROP_WINDOW_UIKIT_OPENGL_RENDERBUFFER_NUMBER;
+  static const uikitOpenglResolveFramebufferNumber =
+      SDL_PROP_WINDOW_UIKIT_OPENGL_RESOLVE_FRAMEBUFFER_NUMBER;
+  static const kmsdrmDeviceIndexNumber =
+      SDL_PROP_WINDOW_KMSDRM_DEVICE_INDEX_NUMBER;
+  static const kmsdrmDrmFdNumber = SDL_PROP_WINDOW_KMSDRM_DRM_FD_NUMBER;
+  static const kmsdrmGbmDevicePointer =
+      SDL_PROP_WINDOW_KMSDRM_GBM_DEVICE_POINTER;
+  static const cocoaWindowPointer = SDL_PROP_WINDOW_COCOA_WINDOW_POINTER;
+  static const cocoaMetalViewTagNumber =
+      SDL_PROP_WINDOW_COCOA_METAL_VIEW_TAG_NUMBER;
+  static const openvrOverlayId = SDL_PROP_WINDOW_OPENVR_OVERLAY_ID;
+  static const vivanteDisplayPointer = SDL_PROP_WINDOW_VIVANTE_DISPLAY_POINTER;
+  static const vivanteWindowPointer = SDL_PROP_WINDOW_VIVANTE_WINDOW_POINTER;
+  static const vivanteSurfacePointer = SDL_PROP_WINDOW_VIVANTE_SURFACE_POINTER;
+  static const win32HwndPointer = SDL_PROP_WINDOW_WIN32_HWND_POINTER;
+  static const win32HdcPointer = SDL_PROP_WINDOW_WIN32_HDC_POINTER;
+  static const win32InstancePointer = SDL_PROP_WINDOW_WIN32_INSTANCE_POINTER;
+  static const waylandDisplayPointer = SDL_PROP_WINDOW_WAYLAND_DISPLAY_POINTER;
+  static const waylandSurfacePointer = SDL_PROP_WINDOW_WAYLAND_SURFACE_POINTER;
+  static const waylandViewportPointer =
+      SDL_PROP_WINDOW_WAYLAND_VIEWPORT_POINTER;
+  static const waylandEglWindowPointer =
+      SDL_PROP_WINDOW_WAYLAND_EGL_WINDOW_POINTER;
+  static const waylandXdgSurfacePointer =
+      SDL_PROP_WINDOW_WAYLAND_XDG_SURFACE_POINTER;
+  static const waylandXdgToplevelPointer =
+      SDL_PROP_WINDOW_WAYLAND_XDG_TOPLEVEL_POINTER;
+  static const waylandXdgToplevelExportHandleString =
+      SDL_PROP_WINDOW_WAYLAND_XDG_TOPLEVEL_EXPORT_HANDLE_STRING;
+  static const waylandXdgPopupPointer =
+      SDL_PROP_WINDOW_WAYLAND_XDG_POPUP_POINTER;
+  static const waylandXdgPositionerPointer =
+      SDL_PROP_WINDOW_WAYLAND_XDG_POSITIONER_POINTER;
+  static const x11DisplayPointer = SDL_PROP_WINDOW_X11_DISPLAY_POINTER;
+  static const x11ScreenNumber = SDL_PROP_WINDOW_X11_SCREEN_NUMBER;
+  static const x11WindowNumber = SDL_PROP_WINDOW_X11_WINDOW_NUMBER;
+  static const emscriptenCanvasIdString =
+      SDL_PROP_WINDOW_EMSCRIPTEN_CANVAS_ID_STRING;
+  static const emscriptenKeyboardElementString =
+      SDL_PROP_WINDOW_EMSCRIPTEN_KEYBOARD_ELEMENT_STRING;
 }
 
 class SdlkWindowSurfaceVsync {

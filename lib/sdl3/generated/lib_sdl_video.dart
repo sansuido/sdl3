@@ -845,6 +845,10 @@ Pointer<Pointer<SdlWindow>> sdlGetWindows(Pointer<Int32> count) {
 ///
 /// Create a window with the specified dimensions and flags.
 ///
+/// The window size is a request and may be different than expected based on
+/// the desktop layout and window manager policies. Your application should be
+/// prepared to handle a window of any size.
+///
 /// `flags` may be any of the following OR'd together:
 ///
 /// - `SDL_WINDOW_FULLSCREEN`: fullscreen window at desktop resolution
@@ -948,6 +952,10 @@ Pointer<SdlWindow> sdlCreateWindow(String? title, int w, int h, int flags) {
 ///
 /// Create a child popup window of the specified parent window.
 ///
+/// The window size is a request and may be different than expected based on
+/// the desktop layout and window manager policies. Your application should be
+/// prepared to handle a window of any size.
+///
 /// The flags parameter **must** contain at least one of the following:
 ///
 /// - `SDL_WINDOW_TOOLTIP`: The popup window is a tooltip and will not pass any
@@ -1047,6 +1055,10 @@ Pointer<SdlWindow> sdlCreatePopupWindow(
 ///
 /// Create a window with the specified properties.
 ///
+/// The window size is a request and may be different than expected based on
+/// the desktop layout and window manager policies. Your application should be
+/// prepared to handle a window of any size.
+///
 /// These are the supported properties:
 ///
 /// - `SDL_PROP_WINDOW_CREATE_ALWAYS_ON_TOP_BOOLEAN`: true if the window should
@@ -1140,9 +1152,9 @@ Pointer<SdlWindow> sdlCreatePopupWindow(
 ///
 /// These are additional supported properties with Emscripten:
 ///
-/// - `SDL_PROP_WINDOW_CREATE_EMSCRIPTEN_CANVAS_ID`: the id given to the canvas
-/// element. This should start with a '#' sign
-/// - `SDL_PROP_WINDOW_CREATE_EMSCRIPTEN_KEYBOARD_ELEMENT`: override the
+/// - `SDL_PROP_WINDOW_CREATE_EMSCRIPTEN_CANVAS_ID_STRING`: the id given to the
+/// canvas element. This should start with a '#' sign
+/// - `SDL_PROP_WINDOW_CREATE_EMSCRIPTEN_KEYBOARD_ELEMENT_STRING`: override the
 /// binding element for keyboard inputs for this canvas. The variable can be
 /// one of:
 /// - "#window": the javascript window object (default)
@@ -1377,6 +1389,13 @@ Pointer<SdlWindow> sdlGetWindowParent(Pointer<SdlWindow> window) {
 /// the window
 /// - `SDL_PROP_WINDOW_X11_WINDOW_NUMBER`: the X11 Window associated with the
 /// window
+///
+/// On Emscripten:
+///
+/// - `SDL_PROP_WINDOW_EMSCRIPTEN_CANVAS_ID_STRING`: the id the canvas element
+/// will have
+/// - `SDL_PROP_WINDOW_EMSCRIPTEN_KEYBOARD_ELEMENT_STRING`: the keyboard
+/// element that associates keyboard events to this window
 ///
 /// \param window the window to query.
 /// \returns a valid property ID on success or 0 on failure; call

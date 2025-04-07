@@ -15,6 +15,10 @@ extension SdlWindowEx on SdlWindow {
   ///
   /// Create a window with the specified dimensions and flags.
   ///
+  /// The window size is a request and may be different than expected based on
+  /// the desktop layout and window manager policies. Your application should be
+  /// prepared to handle a window of any size.
+  ///
   /// `flags` may be any of the following OR'd together:
   ///
   /// - `SDL_WINDOW_FULLSCREEN`: fullscreen window at desktop resolution

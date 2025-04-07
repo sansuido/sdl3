@@ -1,18 +1,22 @@
+## 1.5.0
+- SDL3-2025-04-06
+- [add] Added enum classes. (SdlkPropWindow, TtfkFontWeight, TtfkImage and more)
+
 ## 1.4.4
 - SDL3-2025-03-30
--- [add] Added functions(sdlGetWindowProgressState AND sdlGetWindowProgressValue).
+- [add] Added functions(sdlGetWindowProgressState AND sdlGetWindowProgressValue).
 
 ## 1.4.3
 - SDL3-2025-03-23
--- [add] Added functions(sdlSetWindowProgressState AND sdlSetWindowProgressValue).
+- [add] Added functions(sdlSetWindowProgressState AND sdlSetWindowProgressValue).
 
 ## 1.4.2
 - SDL3-2025-03-16
--- [add] Added sdlCreateGpuRenderState function AND scale mode `PIXELART`.
+- [add] Added sdlCreateGpuRenderState function AND scale mode `PIXELART`.
 
 ## 1.4.1
 - SDL3-2025-03-09
--- [add] Added functions(sdlSetRelativeMouseTransform, sdlRenderTexture9GridTiled and etc..)
+- [add] Added functions(sdlSetRelativeMouseTransform, sdlRenderTexture9GridTiled and etc..)
 
 ## 1.4.0
 - SDL3-2025-03-02

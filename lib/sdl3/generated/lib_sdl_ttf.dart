@@ -166,7 +166,7 @@ Pointer<TtfFont> ttfOpenFont(String? file, double ptsize) {
 /// the last indexed size will be the default.
 ///
 /// If `closeio` is true, `src` will be automatically closed once the font is
-/// closed. Otherwise you should close `src` yourself after closing the font.
+/// closed. Otherwise you should keep `src` open until the font is closed.
 ///
 /// When done with the returned TTF_Font, use TTF_CloseFont() to dispose of it.
 ///
@@ -833,6 +833,28 @@ bool ttfGetFontSdf(Pointer<TtfFont> font) {
     int Function(Pointer<TtfFont> font)
   >('TTF_GetFontSDF');
   return ttfGetFontSdfLookupFunction(font) == 1;
+}
+
+///
+/// Query a font's weight, in terms of the lightness/heaviness of the strokes.
+///
+/// \param font the font to query.
+/// \returns the font's current weight.
+///
+/// \threadsafety This function should be called on the thread that created the
+/// font.
+///
+/// \since This function is available since SDL_ttf 3.2.2.
+///
+/// ```c
+/// extern SDL_DECLSPEC int SDLCALL TTF_GetFontWeight(const TTF_Font *font)
+/// ```
+int ttfGetFontWeight(Pointer<TtfFont> font) {
+  final ttfGetFontWeightLookupFunction = libSdl3Ttf.lookupFunction<
+    Int32 Function(Pointer<TtfFont> font),
+    int Function(Pointer<TtfFont> font)
+  >('TTF_GetFontWeight');
+  return ttfGetFontWeightLookupFunction(font);
 }
 
 ///

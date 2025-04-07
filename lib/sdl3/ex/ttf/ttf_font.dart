@@ -131,7 +131,7 @@ extension TtfFontEx on TtfFont {
   /// the last indexed size will be the default.
   ///
   /// If `closeio` is true, `src` will be automatically closed once the font is
-  /// closed. Otherwise you should close `src` yourself after closing the font.
+  /// closed. Otherwise you should keep `src` open until the font is closed.
   ///
   /// When done with the returned TTF_Font, use TTF_CloseFont() to dispose of it.
   ///
