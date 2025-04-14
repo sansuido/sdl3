@@ -2734,7 +2734,6 @@ bool sdlSetWindowKeyboardGrab(Pointer<SdlWindow> window, bool grabbed) {
 ///
 /// \sa SDL_GetWindowMouseRect
 /// \sa SDL_SetWindowMouseRect
-/// \sa SDL_SetWindowMouseGrab
 /// \sa SDL_SetWindowKeyboardGrab
 ///
 /// ```c

@@ -998,7 +998,6 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   ///
   /// \sa SDL_GetWindowMouseRect
   /// \sa SDL_SetWindowMouseRect
-  /// \sa SDL_SetWindowMouseGrab
   /// \sa SDL_SetWindowKeyboardGrab
   ///
   /// ```c

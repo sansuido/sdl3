@@ -1,3 +1,6 @@
+## 1.5.1
+- SDL3-2025-04-13
+
 ## 1.5.0
 - SDL3-2025-04-06
 - [add] Added enum classes. (SdlkPropWindow, TtfkFontWeight, TtfkImage and more)

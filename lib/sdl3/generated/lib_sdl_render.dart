@@ -209,6 +209,15 @@ Pointer<SdlRenderer> sdlCreateRenderer(
 /// present synchronized with the refresh rate. This property can take any
 /// value that is supported by SDL_SetRenderVSync() for the renderer.
 ///
+/// With the SDL GPU renderer:
+///
+/// - `SDL_PROP_RENDERER_CREATE_GPU_SHADERS_SPIRV_BOOLEAN`: the app is able to
+/// provide SPIR-V shaders to SDL_GPURenderState, optional.
+/// - `SDL_PROP_RENDERER_CREATE_GPU_SHADERS_DXIL_BOOLEAN`: the app is able to
+/// provide DXIL shaders to SDL_GPURenderState, optional.
+/// - `SDL_PROP_RENDERER_CREATE_GPU_SHADERS_MSL_BOOLEAN`: the app is able to
+/// provide MSL shaders to SDL_GPURenderState, optional.
+///
 /// With the vulkan renderer:
 ///
 /// - `SDL_PROP_RENDERER_CREATE_VULKAN_INSTANCE_POINTER`: the VkInstance to use
@@ -247,6 +256,58 @@ Pointer<SdlRenderer> sdlCreateRendererWithProperties(int props) {
     Pointer<SdlRenderer> Function(int props)
   >('SDL_CreateRendererWithProperties');
   return sdlCreateRendererWithPropertiesLookupFunction(props);
+}
+
+///
+/// Create a 2D GPU rendering context for a window, with support for the
+/// specified shader format.
+///
+/// This is a convenience function to create a SDL GPU backed renderer,
+/// intended to be used with SDL_GPURenderState. The resulting renderer will
+/// support shaders in one of the specified shader formats.
+///
+/// If no available GPU driver supports any of the specified shader formats,
+/// this function will fail.
+///
+/// \param window the window where rendering is displayed.
+/// \param format_flags a bitflag indicating which shader formats the app is
+/// able to provide.
+/// \param device a pointer filled with the associated GPU device, or NULL on
+/// error.
+/// \returns a valid rendering context or NULL if there was an error; call
+/// SDL_GetError() for more information.
+///
+/// \threadsafety This function should only be called on the main thread.
+///
+/// \since This function is available since SDL 3.4.0.
+///
+/// \sa SDL_CreateRendererWithProperties
+/// \sa SDL_GetGPUShaderFormats
+/// \sa SDL_CreateGPUShader
+/// \sa SDL_CreateGPURenderState
+/// \sa SDL_SetRenderGPUState
+///
+/// ```c
+/// extern SDL_DECLSPEC SDL_Renderer * SDLCALL SDL_CreateGPURenderer(SDL_Window *window, SDL_GPUShaderFormat format_flags, SDL_GPUDevice **device)
+/// ```
+Pointer<SdlRenderer> sdlCreateGpuRenderer(
+  Pointer<SdlWindow> window,
+  int formatFlags,
+  Pointer<Pointer<SdlGpuDevice>> device,
+) {
+  final sdlCreateGpuRendererLookupFunction = libSdl3.lookupFunction<
+    Pointer<SdlRenderer> Function(
+      Pointer<SdlWindow> window,
+      Uint32 formatFlags,
+      Pointer<Pointer<SdlGpuDevice>> device,
+    ),
+    Pointer<SdlRenderer> Function(
+      Pointer<SdlWindow> window,
+      int formatFlags,
+      Pointer<Pointer<SdlGpuDevice>> device,
+    )
+  >('SDL_CreateGPURenderer');
+  return sdlCreateGpuRendererLookupFunction(window, formatFlags, device);
 }
 
 ///

@@ -1846,6 +1846,12 @@ const SDL_PROP_RENDERER_CREATE_OUTPUT_COLORSPACE_NUMBER =
     'SDL.renderer.create.output_colorspace';
 const SDL_PROP_RENDERER_CREATE_PRESENT_VSYNC_NUMBER =
     'SDL.renderer.create.present_vsync';
+const SDL_PROP_RENDERER_CREATE_GPU_SHADERS_SPIRV_BOOLEAN =
+    'SDL.renderer.create.gpu.shaders_spirv';
+const SDL_PROP_RENDERER_CREATE_GPU_SHADERS_DXIL_BOOLEAN =
+    'SDL.renderer.create.gpu.shaders_dxil';
+const SDL_PROP_RENDERER_CREATE_GPU_SHADERS_MSL_BOOLEAN =
+    'SDL.renderer.create.gpu.shaders_msl';
 const SDL_PROP_RENDERER_CREATE_VULKAN_INSTANCE_POINTER =
     'SDL.renderer.create.vulkan.instance';
 const SDL_PROP_RENDERER_CREATE_VULKAN_SURFACE_NUMBER =
@@ -1973,7 +1979,7 @@ const SDL_RENDERER_VSYNC_ADAPTIVE = (-1);
 const SDL_DEBUG_TEXT_FONT_CHARACTER_SIZE = 8;
 //const SDL_revision_h_ = ;
 const SDL_REVISION =
-    'SDL3-3.3.0-release-3.2.6-303-g646f1f243 (" SDL_VENDOR_INFO ")';
+    'SDL3-3.3.0-release-3.2.6-336-g113475acb (" SDL_VENDOR_INFO ")';
 //const SDL_scancode_h_ = ;
 const SDL_SCANCODE_UNKNOWN = 0;
 const SDL_SCANCODE_A = 4;
@@ -4542,6 +4548,12 @@ class SdlkPropRenderer {
       SDL_PROP_RENDERER_CREATE_OUTPUT_COLORSPACE_NUMBER;
   static const createPresentVsyncNumber =
       SDL_PROP_RENDERER_CREATE_PRESENT_VSYNC_NUMBER;
+  static const createGpuShadersSpirvBoolean =
+      SDL_PROP_RENDERER_CREATE_GPU_SHADERS_SPIRV_BOOLEAN;
+  static const createGpuShadersDxilBoolean =
+      SDL_PROP_RENDERER_CREATE_GPU_SHADERS_DXIL_BOOLEAN;
+  static const createGpuShadersMslBoolean =
+      SDL_PROP_RENDERER_CREATE_GPU_SHADERS_MSL_BOOLEAN;
   static const createVulkanInstancePointer =
       SDL_PROP_RENDERER_CREATE_VULKAN_INSTANCE_POINTER;
   static const createVulkanSurfaceNumber =
