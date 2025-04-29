@@ -1,3 +1,7 @@
+## 1.5.3
+- SDL3-2025-04-27
+- [add] Added functions(sdlGetEventDescription, sdlPutAudioStreamPlanarData AND sdlSetAudioIterationCallbacks).
+
 ## 1.5.2
 - SDL3-2025-04-20
 

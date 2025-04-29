@@ -56,6 +56,13 @@ bool sdlGpuSupportsProperties(int props) {
 ///
 /// Creates a GPU context.
 ///
+/// The GPU driver name can be one of the following:
+///
+/// - "vulkan": [Vulkan](CategoryGPU#vulkan)
+/// - "direct3d12": [D3D12](CategoryGPU#d3d12)
+/// - "metal": [Metal](CategoryGPU#metal)
+/// - NULL: let SDL pick the optimal driver
+///
 /// \param format_flags a bitflag indicating which shader formats the app is
 /// able to provide.
 /// \param debug_mode enable debug mode properties and validations.
@@ -66,6 +73,7 @@ bool sdlGpuSupportsProperties(int props) {
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
+/// \sa SDL_CreateGPUDeviceWithProperties
 /// \sa SDL_GetGPUShaderFormats
 /// \sa SDL_GetGPUDeviceDriver
 /// \sa SDL_DestroyGPUDevice
@@ -654,9 +662,9 @@ Pointer<SdlGpuShader> sdlCreateGpuShader(
 /// - `SDL_PROP_GPU_TEXTURE_CREATE_D3D12_CLEAR_DEPTH_FLOAT`: (Direct3D 12 only)
 /// if the texture usage is SDL_GPU_TEXTUREUSAGE_DEPTH_STENCIL_TARGET, clear
 /// the texture to a depth of this value. Defaults to zero.
-/// - `SDL_PROP_GPU_TEXTURE_CREATE_D3D12_CLEAR_STENCIL_UINT8`: (Direct3D 12
+/// - `SDL_PROP_GPU_TEXTURE_CREATE_D3D12_CLEAR_STENCIL_NUMBER`: (Direct3D 12
 /// only) if the texture usage is SDL_GPU_TEXTUREUSAGE_DEPTH_STENCIL_TARGET,
-/// clear the texture to a stencil of this value. Defaults to zero.
+/// clear the texture to a stencil of this Uint8 value. Defaults to zero.
 /// - `SDL_PROP_GPU_TEXTURE_CREATE_NAME_STRING`: a name that can be displayed
 /// in debugging tools.
 ///
@@ -3136,7 +3144,7 @@ void sdlReleaseWindowFromGpuDevice(
 /// supported via SDL_WindowSupportsGPUPresentMode /
 /// SDL_WindowSupportsGPUSwapchainComposition prior to calling this function.
 ///
-/// SDL_GPU_PRESENTMODE_VSYNC and SDL_GPU_SWAPCHAINCOMPOSITION_SDR are always
+/// SDL_GPU_PRESENTMODE_VSYNC with SDL_GPU_SWAPCHAINCOMPOSITION_SDR are always
 /// supported.
 ///
 /// \param device a GPU context.

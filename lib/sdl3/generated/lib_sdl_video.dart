@@ -1337,8 +1337,8 @@ Pointer<SdlWindow> sdlGetWindowParent(Pointer<SdlWindow> window) {
 ///
 /// On OpenVR:
 ///
-/// - `SDL_PROP_WINDOW_OPENVR_OVERLAY_ID`: the OpenVR Overlay Handle ID for the
-/// associated overlay window.
+/// - `SDL_PROP_WINDOW_OPENVR_OVERLAY_ID_NUMBER`: the OpenVR Overlay Handle ID
+/// for the associated overlay window.
 ///
 /// On Vivante:
 ///

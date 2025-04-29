@@ -655,7 +655,7 @@ const SDL_PROP_GPU_TEXTURE_CREATE_D3D12_CLEAR_A_FLOAT =
     'SDL.gpu.texture.create.d3d12.clear.a';
 const SDL_PROP_GPU_TEXTURE_CREATE_D3D12_CLEAR_DEPTH_FLOAT =
     'SDL.gpu.texture.create.d3d12.clear.depth';
-const SDL_PROP_GPU_TEXTURE_CREATE_D3D12_CLEAR_STENCIL_UINT8 =
+const SDL_PROP_GPU_TEXTURE_CREATE_D3D12_CLEAR_STENCIL_NUMBER =
     'SDL.gpu.texture.create.d3d12.clear.stencil';
 const SDL_PROP_GPU_TEXTURE_CREATE_NAME_STRING = 'SDL.gpu.texture.create.name';
 const SDL_PROP_GPU_BUFFER_CREATE_NAME_STRING = 'SDL.gpu.buffer.create.name';
@@ -663,6 +663,7 @@ const SDL_PROP_GPU_TRANSFERBUFFER_CREATE_NAME_STRING =
     'SDL.gpu.transferbuffer.create.name';
 //const SDL_guid_h_ = ;
 //const SDL_haptic_h_ = ;
+const SDL_HAPTIC_INFINITY = 4294967295;
 const SDL_HAPTIC_CONSTANT = (1 << 0);
 const SDL_HAPTIC_SINE = (1 << 1);
 const SDL_HAPTIC_SQUARE = (1 << 2);
@@ -687,7 +688,6 @@ const SDL_HAPTIC_POLAR = 0;
 const SDL_HAPTIC_CARTESIAN = 1;
 const SDL_HAPTIC_SPHERICAL = 2;
 const SDL_HAPTIC_STEERING_AXIS = 3;
-const SDL_HAPTIC_INFINITY = 4294967295;
 //const SDL_hidapi_h_ = ;
 const SDL_HID_API_BUS_UNKNOWN = 0x00;
 const SDL_HID_API_BUS_USB = 0x01;
@@ -1979,7 +1979,7 @@ const SDL_RENDERER_VSYNC_ADAPTIVE = (-1);
 const SDL_DEBUG_TEXT_FONT_CHARACTER_SIZE = 8;
 //const SDL_revision_h_ = ;
 const SDL_REVISION =
-    'SDL3-3.3.0-release-3.2.6-340-g8e0b39f46 (" SDL_VENDOR_INFO ")';
+    'SDL3-3.3.0-release-3.2.6-407-g8c733d1f7 (" SDL_VENDOR_INFO ")';
 //const SDL_scancode_h_ = ;
 const SDL_SCANCODE_UNKNOWN = 0;
 const SDL_SCANCODE_A = 4;
@@ -2618,7 +2618,7 @@ const SDL_PROP_WINDOW_KMSDRM_GBM_DEVICE_POINTER = 'SDL.window.kmsdrm.gbm_dev';
 const SDL_PROP_WINDOW_COCOA_WINDOW_POINTER = 'SDL.window.cocoa.window';
 const SDL_PROP_WINDOW_COCOA_METAL_VIEW_TAG_NUMBER =
     'SDL.window.cocoa.metal_view_tag';
-const SDL_PROP_WINDOW_OPENVR_OVERLAY_ID = 'SDL.window.openvr.overlay_id';
+const SDL_PROP_WINDOW_OPENVR_OVERLAY_ID_NUMBER = 'SDL.window.openvr.overlay_id';
 const SDL_PROP_WINDOW_VIVANTE_DISPLAY_POINTER = 'SDL.window.vivante.display';
 const SDL_PROP_WINDOW_VIVANTE_WINDOW_POINTER = 'SDL.window.vivante.window';
 const SDL_PROP_WINDOW_VIVANTE_SURFACE_POINTER = 'SDL.window.vivante.surface';
@@ -3366,8 +3366,8 @@ class SdlkPropGpu {
       SDL_PROP_GPU_TEXTURE_CREATE_D3D12_CLEAR_A_FLOAT;
   static const textureCreateD3D12ClearDepthFloat =
       SDL_PROP_GPU_TEXTURE_CREATE_D3D12_CLEAR_DEPTH_FLOAT;
-  static const textureCreateD3D12ClearStencilUint8 =
-      SDL_PROP_GPU_TEXTURE_CREATE_D3D12_CLEAR_STENCIL_UINT8;
+  static const textureCreateD3D12ClearStencilNumber =
+      SDL_PROP_GPU_TEXTURE_CREATE_D3D12_CLEAR_STENCIL_NUMBER;
   static const textureCreateNameString =
       SDL_PROP_GPU_TEXTURE_CREATE_NAME_STRING;
   static const bufferCreateNameString = SDL_PROP_GPU_BUFFER_CREATE_NAME_STRING;
@@ -3376,6 +3376,7 @@ class SdlkPropGpu {
 }
 
 class SdlkHaptic {
+  static const infinity = SDL_HAPTIC_INFINITY;
   static const constant = SDL_HAPTIC_CONSTANT;
   static const sine = SDL_HAPTIC_SINE;
   static const square = SDL_HAPTIC_SQUARE;
@@ -3400,7 +3401,6 @@ class SdlkHaptic {
   static const cartesian = SDL_HAPTIC_CARTESIAN;
   static const spherical = SDL_HAPTIC_SPHERICAL;
   static const steeringAxis = SDL_HAPTIC_STEERING_AXIS;
-  static const infinity = SDL_HAPTIC_INFINITY;
 }
 
 class SdlkHidApiBus {
@@ -5235,7 +5235,7 @@ class SdlkPropWindow {
   static const cocoaWindowPointer = SDL_PROP_WINDOW_COCOA_WINDOW_POINTER;
   static const cocoaMetalViewTagNumber =
       SDL_PROP_WINDOW_COCOA_METAL_VIEW_TAG_NUMBER;
-  static const openvrOverlayId = SDL_PROP_WINDOW_OPENVR_OVERLAY_ID;
+  static const openvrOverlayIdNumber = SDL_PROP_WINDOW_OPENVR_OVERLAY_ID_NUMBER;
   static const vivanteDisplayPointer = SDL_PROP_WINDOW_VIVANTE_DISPLAY_POINTER;
   static const vivanteWindowPointer = SDL_PROP_WINDOW_VIVANTE_WINDOW_POINTER;
   static const vivanteSurfacePointer = SDL_PROP_WINDOW_VIVANTE_SURFACE_POINTER;

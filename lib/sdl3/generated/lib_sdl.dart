@@ -32,6 +32,12 @@ typedef SdlAudioStreamCallback =
       Int32 totalAmount,
     );
 
+// typedef void (SDLCALL *SDL_AudioIterationCallback)(void *userdata, SDL_AudioDeviceID devid, bool start)
+typedef SdlAudioIterationCallbackDart =
+    void Function(Pointer<NativeType> userdata, int devid, int start);
+typedef SdlAudioIterationCallback =
+    Void Function(Pointer<NativeType> userdata, Uint32 devid, Uint8 start);
+
 // typedef void (SDLCALL *SDL_AudioPostmixCallback)(void *userdata, const SDL_AudioSpec *spec, float *buffer, int buflen)
 typedef SdlAudioPostmixCallbackDart =
     void Function(

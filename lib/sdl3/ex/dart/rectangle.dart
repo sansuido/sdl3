@@ -80,16 +80,28 @@ extension RectangleEx on math.Rectangle<double> {
     );
   }
 
-  math.Rectangle<double> union(math.Rectangle<double> b) {
-    var aPointer = callocInt();
-    var bPointer = b.callocInt();
-    var resultPointer = ffi.calloc<SdlRect>();
-    aPointer.union(bPointer, resultPointer);
+  bool hasIntersection(math.Rectangle<double> b) {
+    var aPointer = calloc();
+    var bPointer = b.calloc();
+    var result = aPointer.hasIntersection(bPointer);
+    ffi.calloc.free(aPointer);
+    ffi.calloc.free(bPointer);
+    return result;
+  }
+
+  math.Rectangle<double>? getUnion(math.Rectangle<double> b) {
+    var aPointer = calloc();
+    var bPointer = b.calloc();
+    var resultPointer = ffi.calloc<SdlFRect>();
+    var bl = aPointer.getUnion(bPointer, resultPointer);
     var result = resultPointer.create();
     ffi.calloc.free(aPointer);
     ffi.calloc.free(bPointer);
     ffi.calloc.free(resultPointer);
-    return result;
+    if (bl) {
+      return result;
+    }
+    return null;
   }
 
   static math.Rectangle<double> fromCenter(

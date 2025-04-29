@@ -411,7 +411,7 @@ bool sdlHapticEffectSupported(
 /// \sa SDL_UpdateHapticEffect
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_CreateHapticEffect(SDL_Haptic *haptic, const SDL_HapticEffect *effect)
+/// extern SDL_DECLSPEC SDL_HapticEffectID SDLCALL SDL_CreateHapticEffect(SDL_Haptic *haptic, const SDL_HapticEffect *effect)
 /// ```
 int sdlCreateHapticEffect(
   Pointer<SdlHaptic> haptic,
@@ -445,7 +445,7 @@ int sdlCreateHapticEffect(
 /// \sa SDL_RunHapticEffect
 ///
 /// ```c
-/// extern SDL_DECLSPEC bool SDLCALL SDL_UpdateHapticEffect(SDL_Haptic *haptic, int effect, const SDL_HapticEffect *data)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_UpdateHapticEffect(SDL_Haptic *haptic, SDL_HapticEffectID effect, const SDL_HapticEffect *data)
 /// ```
 bool sdlUpdateHapticEffect(
   Pointer<SdlHaptic> haptic,
@@ -490,7 +490,7 @@ bool sdlUpdateHapticEffect(
 /// \sa SDL_StopHapticEffects
 ///
 /// ```c
-/// extern SDL_DECLSPEC bool SDLCALL SDL_RunHapticEffect(SDL_Haptic *haptic, int effect, Uint32 iterations)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_RunHapticEffect(SDL_Haptic *haptic, SDL_HapticEffectID effect, Uint32 iterations)
 /// ```
 bool sdlRunHapticEffect(Pointer<SdlHaptic> haptic, int effect, int iterations) {
   final sdlRunHapticEffectLookupFunction = libSdl3.lookupFunction<
@@ -514,7 +514,7 @@ bool sdlRunHapticEffect(Pointer<SdlHaptic> haptic, int effect, int iterations) {
 /// \sa SDL_StopHapticEffects
 ///
 /// ```c
-/// extern SDL_DECLSPEC bool SDLCALL SDL_StopHapticEffect(SDL_Haptic *haptic, int effect)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_StopHapticEffect(SDL_Haptic *haptic, SDL_HapticEffectID effect)
 /// ```
 bool sdlStopHapticEffect(Pointer<SdlHaptic> haptic, int effect) {
   final sdlStopHapticEffectLookupFunction = libSdl3.lookupFunction<
@@ -538,7 +538,7 @@ bool sdlStopHapticEffect(Pointer<SdlHaptic> haptic, int effect) {
 /// \sa SDL_CreateHapticEffect
 ///
 /// ```c
-/// extern SDL_DECLSPEC void SDLCALL SDL_DestroyHapticEffect(SDL_Haptic *haptic, int effect)
+/// extern SDL_DECLSPEC void SDLCALL SDL_DestroyHapticEffect(SDL_Haptic *haptic, SDL_HapticEffectID effect)
 /// ```
 void sdlDestroyHapticEffect(Pointer<SdlHaptic> haptic, int effect) {
   final sdlDestroyHapticEffectLookupFunction = libSdl3.lookupFunction<
@@ -563,7 +563,7 @@ void sdlDestroyHapticEffect(Pointer<SdlHaptic> haptic, int effect) {
 /// \sa SDL_GetHapticFeatures
 ///
 /// ```c
-/// extern SDL_DECLSPEC bool SDLCALL SDL_GetHapticEffectStatus(SDL_Haptic *haptic, int effect)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GetHapticEffectStatus(SDL_Haptic *haptic, SDL_HapticEffectID effect)
 /// ```
 bool sdlGetHapticEffectStatus(Pointer<SdlHaptic> haptic, int effect) {
   final sdlGetHapticEffectStatusLookupFunction = libSdl3.lookupFunction<
