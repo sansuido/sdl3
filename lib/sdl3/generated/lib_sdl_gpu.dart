@@ -3144,7 +3144,7 @@ void sdlReleaseWindowFromGpuDevice(
 /// supported via SDL_WindowSupportsGPUPresentMode /
 /// SDL_WindowSupportsGPUSwapchainComposition prior to calling this function.
 ///
-/// SDL_GPU_PRESENTMODE_VSYNC with SDL_GPU_SWAPCHAINCOMPOSITION_SDR are always
+/// SDL_GPU_PRESENTMODE_VSYNC with SDL_GPU_SWAPCHAINCOMPOSITION_SDR is always
 /// supported.
 ///
 /// \param device a GPU context.

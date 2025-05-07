@@ -303,7 +303,8 @@ const SDL_GAMEPAD_TYPE_NINTENDO_SWITCH_PRO = 0 + 7;
 const SDL_GAMEPAD_TYPE_NINTENDO_SWITCH_JOYCON_LEFT = 0 + 8;
 const SDL_GAMEPAD_TYPE_NINTENDO_SWITCH_JOYCON_RIGHT = 0 + 9;
 const SDL_GAMEPAD_TYPE_NINTENDO_SWITCH_JOYCON_PAIR = 0 + 10;
-const SDL_GAMEPAD_TYPE_COUNT = 0 + 11;
+const SDL_GAMEPAD_TYPE_GAMECUBE = 0 + 11;
+const SDL_GAMEPAD_TYPE_COUNT = 0 + 12;
 const SDL_GAMEPAD_BUTTON_INVALID = -1;
 const SDL_GAMEPAD_BUTTON_SOUTH = -1 + 1;
 const SDL_GAMEPAD_BUTTON_EAST = -1 + 2;
@@ -833,6 +834,9 @@ const SDL_HINT_JOYSTICK_HIDAPI_XBOX_360_WIRELESS =
 const SDL_HINT_JOYSTICK_HIDAPI_XBOX_ONE = 'SDL_JOYSTICK_HIDAPI_XBOX_ONE';
 const SDL_HINT_JOYSTICK_HIDAPI_XBOX_ONE_HOME_LED =
     'SDL_JOYSTICK_HIDAPI_XBOX_ONE_HOME_LED';
+const SDL_HINT_JOYSTICK_HIDAPI_GIP = 'SDL_JOYSTICK_HIDAPI_GIP';
+const SDL_HINT_JOYSTICK_HIDAPI_GIP_RESET_FOR_METADATA =
+    'SDL_JOYSTICK_HIDAPI_GIP_RESET_FOR_METADATA';
 const SDL_HINT_JOYSTICK_IOKIT = 'SDL_JOYSTICK_IOKIT';
 const SDL_HINT_JOYSTICK_LINUX_CLASSIC = 'SDL_JOYSTICK_LINUX_CLASSIC';
 const SDL_HINT_JOYSTICK_LINUX_DEADZONES = 'SDL_JOYSTICK_LINUX_DEADZONES';
@@ -1979,7 +1983,7 @@ const SDL_RENDERER_VSYNC_ADAPTIVE = (-1);
 const SDL_DEBUG_TEXT_FONT_CHARACTER_SIZE = 8;
 //const SDL_revision_h_ = ;
 const SDL_REVISION =
-    'SDL3-3.3.0-release-3.2.6-407-g8c733d1f7 (" SDL_VENDOR_INFO ")';
+    'SDL3-3.3.0-release-3.2.6-452-g15c6acf74 (" SDL_VENDOR_INFO ")';
 //const SDL_scancode_h_ = ;
 const SDL_SCANCODE_UNKNOWN = 0;
 const SDL_SCANCODE_A = 4;
@@ -2548,6 +2552,8 @@ const SDL_PROP_WINDOW_CREATE_ALWAYS_ON_TOP_BOOLEAN =
     'SDL.window.create.always_on_top';
 const SDL_PROP_WINDOW_CREATE_BORDERLESS_BOOLEAN =
     'SDL.window.create.borderless';
+const SDL_PROP_WINDOW_CREATE_CONSTRAIN_POPUP_BOOLEAN =
+    'SDL.window.create.constrain_popup';
 const SDL_PROP_WINDOW_CREATE_FOCUSABLE_BOOLEAN = 'SDL.window.create.focusable';
 const SDL_PROP_WINDOW_CREATE_EXTERNAL_GRAPHICS_CONTEXT_BOOLEAN =
     'SDL.window.create.external_graphics_context';
@@ -2917,6 +2923,7 @@ class SdlkGamepadType {
       SDL_GAMEPAD_TYPE_NINTENDO_SWITCH_JOYCON_RIGHT;
   static const nintendoSwitchJoyconPair =
       SDL_GAMEPAD_TYPE_NINTENDO_SWITCH_JOYCON_PAIR;
+  static const gamecube = SDL_GAMEPAD_TYPE_GAMECUBE;
   static const count = SDL_GAMEPAD_TYPE_COUNT;
 }
 
@@ -3550,6 +3557,9 @@ class SdlkHint {
   static const joystickHidapiXboxOne = SDL_HINT_JOYSTICK_HIDAPI_XBOX_ONE;
   static const joystickHidapiXboxOneHomeLed =
       SDL_HINT_JOYSTICK_HIDAPI_XBOX_ONE_HOME_LED;
+  static const joystickHidapiGip = SDL_HINT_JOYSTICK_HIDAPI_GIP;
+  static const joystickHidapiGipResetForMetadata =
+      SDL_HINT_JOYSTICK_HIDAPI_GIP_RESET_FOR_METADATA;
   static const joystickIokit = SDL_HINT_JOYSTICK_IOKIT;
   static const joystickLinuxClassic = SDL_HINT_JOYSTICK_LINUX_CLASSIC;
   static const joystickLinuxDeadzones = SDL_HINT_JOYSTICK_LINUX_DEADZONES;
@@ -5160,6 +5170,8 @@ class SdlkPropWindow {
       SDL_PROP_WINDOW_CREATE_ALWAYS_ON_TOP_BOOLEAN;
   static const createBorderlessBoolean =
       SDL_PROP_WINDOW_CREATE_BORDERLESS_BOOLEAN;
+  static const createConstrainPopupBoolean =
+      SDL_PROP_WINDOW_CREATE_CONSTRAIN_POPUP_BOOLEAN;
   static const createFocusableBoolean =
       SDL_PROP_WINDOW_CREATE_FOCUSABLE_BOOLEAN;
   static const createExternalGraphicsContextBoolean =

@@ -474,6 +474,12 @@ final class SdlMouseWheelEvent extends Struct {
   // [40]+(4)
   @Float()
   external double mouseY;
+  // [44]+(4)
+  @Int32()
+  external int integerX;
+  // [48]+(4)
+  @Int32()
+  external int integerY;
   // [] +(4)
   @Uint32()
   external int blank_1;
