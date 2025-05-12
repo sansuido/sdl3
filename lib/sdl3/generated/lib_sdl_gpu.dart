@@ -1240,6 +1240,9 @@ Pointer<SdlGpuCommandBuffer> sdlAcquireGpuCommandBuffer(
 /// terms this means you must ensure that vec3 and vec4 fields are 16-byte
 /// aligned.
 ///
+/// For detailed information about accessing uniform data from a shader, please
+/// refer to SDL_CreateGPUShader.
+///
 /// \param command_buffer a command buffer.
 /// \param slot_index the vertex uniform slot to push data to.
 /// \param data client data to write.
@@ -3268,7 +3271,9 @@ int sdlGetGpuSwapchainTextureFormat(
 /// buffer used to acquire it.
 ///
 /// This function will fill the swapchain texture handle with NULL if too many
-/// frames are in flight. This is not an error.
+/// frames are in flight. This is not an error. This NULL pointer should not be
+/// passed back into SDL. Instead, it should be considered as an indication to
+/// wait until the swapchain is available.
 ///
 /// If you use this function, it is possible to create a situation where many
 /// command buffers are allocated while the rendering context waits for the GPU

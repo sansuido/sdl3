@@ -1,22 +1,22 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 import 'dart:ffi';
 
-// SDLNet_Address
-final class SdlNetAddress extends Opaque {}
+// NET_Address
+final class NetAddress extends Opaque {}
 
-// SDLNet_StreamSocket
-final class SdlNetStreamSocket extends Opaque {}
+// NET_StreamSocket
+final class NetStreamSocket extends Opaque {}
 
-// SDLNet_Server
-final class SdlNetServer extends Opaque {}
+// NET_Server
+final class NetServer extends Opaque {}
 
-// SDLNet_DatagramSocket
-final class SdlNetDatagramSocket extends Opaque {}
+// NET_DatagramSocket
+final class NetDatagramSocket extends Opaque {}
 
-// SDLNet_Datagram
-final class SdlNetDatagram extends Struct {
+// NET_Datagram
+final class NetDatagram extends Struct {
   // [0]+(8)
-  external Pointer<SdlNetAddress> addr;
+  external Pointer<NetAddress> addr;
   // [8]+(2)
   @Uint16()
   external int port;
