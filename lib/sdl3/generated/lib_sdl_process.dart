@@ -97,6 +97,12 @@ Pointer<SdlProcess> sdlCreateProcess(
 /// run in the background. In this case the default input and output is
 /// `SDL_PROCESS_STDIO_NULL` and the exitcode of the process is not
 /// available, and will always be 0.
+/// - `SDL_PROP_PROCESS_CREATE_CMDLINE_STRING`: a string containing the program
+/// to run and any parameters. This string is passed directly to
+/// `CreateProcess` on Windows, and does nothing on other platforms. This
+/// property is only important if you want to start programs that does
+/// non-standard command-line processing, and in most cases using
+/// `SDL_PROP_PROCESS_CREATE_ARGS_POINTER` is sufficient.
 ///
 /// On POSIX platforms, wait() and waitpid(-1, ...) should not be called, and
 /// SIGCHLD should not be ignored or handled because those would prevent SDL

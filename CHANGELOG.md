@@ -1,3 +1,6 @@
+## 1.5.6
+- SDL3-2025-05-18
+
 ## 1.5.5
 - SDL3-2025-05-11
 - [changed] The SDL tag has been removed from SDL_net.

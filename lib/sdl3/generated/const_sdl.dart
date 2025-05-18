@@ -635,6 +635,14 @@ const SDL_PROP_GPU_DEVICE_CREATE_SHADERS_METALLIB_BOOLEAN =
     'SDL.gpu.device.create.shaders.metallib';
 const SDL_PROP_GPU_DEVICE_CREATE_D3D12_SEMANTIC_NAME_STRING =
     'SDL.gpu.device.create.d3d12.semantic';
+const SDL_PROP_GPU_DEVICE_CREATE_VULKAN_SHADERCLIPDISTANCE_BOOLEAN =
+    'SDL.gpu.device.create.vulkan.shaderclipdistance';
+const SDL_PROP_GPU_DEVICE_CREATE_VULKAN_DEPTHCLAMP_BOOLEAN =
+    'SDL.gpu.device.create.vulkan.depthclamp';
+const SDL_PROP_GPU_DEVICE_CREATE_VULKAN_DRAWINDIRECTFIRST_BOOLEAN =
+    'SDL.gpu.device.create.vulkan.drawindirectfirstinstance';
+const SDL_PROP_GPU_DEVICE_CREATE_VULKAN_SAMPLERANISOTROPY_BOOLEAN =
+    'SDL.gpu.device.create.vulkan.sampleranisotropy';
 const SDL_PROP_GPU_DEVICE_NAME_STRING = 'SDL.gpu.device.name';
 const SDL_PROP_GPU_DEVICE_DRIVER_NAME_STRING = 'SDL.gpu.device.driver_name';
 const SDL_PROP_GPU_DEVICE_DRIVER_VERSION_STRING =
@@ -1816,6 +1824,7 @@ const SDL_PROP_PROCESS_CREATE_STDERR_TO_STDOUT_BOOLEAN =
     'SDL.process.create.stderr_to_stdout';
 const SDL_PROP_PROCESS_CREATE_BACKGROUND_BOOLEAN =
     'SDL.process.create.background';
+const SDL_PROP_PROCESS_CREATE_CMDLINE_STRING = 'SDL.process.create.cmdline';
 const SDL_PROP_PROCESS_PID_NUMBER = 'SDL.process.pid';
 const SDL_PROP_PROCESS_STDIN_POINTER = 'SDL.process.stdin';
 const SDL_PROP_PROCESS_STDOUT_POINTER = 'SDL.process.stdout';
@@ -1983,7 +1992,7 @@ const SDL_RENDERER_VSYNC_ADAPTIVE = (-1);
 const SDL_DEBUG_TEXT_FONT_CHARACTER_SIZE = 8;
 //const SDL_revision_h_ = ;
 const SDL_REVISION =
-    'SDL3-3.3.0-release-3.2.6-505-g84308e7fb (" SDL_VENDOR_INFO ")';
+    'SDL3-3.3.0-release-3.2.6-536-g514d96de0 (" SDL_VENDOR_INFO ")';
 //const SDL_scancode_h_ = ;
 const SDL_SCANCODE_UNKNOWN = 0;
 const SDL_SCANCODE_A = 4;
@@ -3351,6 +3360,14 @@ class SdlkPropGpu {
       SDL_PROP_GPU_DEVICE_CREATE_SHADERS_METALLIB_BOOLEAN;
   static const deviceCreateD3D12SemanticNameString =
       SDL_PROP_GPU_DEVICE_CREATE_D3D12_SEMANTIC_NAME_STRING;
+  static const deviceCreateVulkanShaderclipdistanceBoolean =
+      SDL_PROP_GPU_DEVICE_CREATE_VULKAN_SHADERCLIPDISTANCE_BOOLEAN;
+  static const deviceCreateVulkanDepthclampBoolean =
+      SDL_PROP_GPU_DEVICE_CREATE_VULKAN_DEPTHCLAMP_BOOLEAN;
+  static const deviceCreateVulkanDrawindirectfirstBoolean =
+      SDL_PROP_GPU_DEVICE_CREATE_VULKAN_DRAWINDIRECTFIRST_BOOLEAN;
+  static const deviceCreateVulkanSampleranisotropyBoolean =
+      SDL_PROP_GPU_DEVICE_CREATE_VULKAN_SAMPLERANISOTROPY_BOOLEAN;
   static const deviceNameString = SDL_PROP_GPU_DEVICE_NAME_STRING;
   static const deviceDriverNameString = SDL_PROP_GPU_DEVICE_DRIVER_NAME_STRING;
   static const deviceDriverVersionString =
@@ -4513,6 +4530,7 @@ class SdlkPropProcess {
       SDL_PROP_PROCESS_CREATE_STDERR_TO_STDOUT_BOOLEAN;
   static const createBackgroundBoolean =
       SDL_PROP_PROCESS_CREATE_BACKGROUND_BOOLEAN;
+  static const createCmdlineString = SDL_PROP_PROCESS_CREATE_CMDLINE_STRING;
   static const pidNumber = SDL_PROP_PROCESS_PID_NUMBER;
   static const stdinPointer = SDL_PROP_PROCESS_STDIN_POINTER;
   static const stdoutPointer = SDL_PROP_PROCESS_STDOUT_POINTER;
