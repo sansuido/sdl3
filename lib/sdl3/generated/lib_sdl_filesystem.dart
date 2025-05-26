@@ -115,10 +115,11 @@ String? sdlGetBasePath() {
 /// extern SDL_DECLSPEC char * SDLCALL SDL_GetPrefPath(const char *org, const char *app)
 /// ```
 Pointer<Int8> sdlGetPrefPath(String? org, String? app) {
-  final sdlGetPrefPathLookupFunction = libSdl3.lookupFunction<
-    Pointer<Int8> Function(Pointer<Utf8> org, Pointer<Utf8> app),
-    Pointer<Int8> Function(Pointer<Utf8> org, Pointer<Utf8> app)
-  >('SDL_GetPrefPath');
+  final sdlGetPrefPathLookupFunction = libSdl3
+      .lookupFunction<
+        Pointer<Int8> Function(Pointer<Utf8> org, Pointer<Utf8> app),
+        Pointer<Int8> Function(Pointer<Utf8> org, Pointer<Utf8> app)
+      >('SDL_GetPrefPath');
   final orgPointer = org != null ? org.toNativeUtf8() : nullptr;
   final appPointer = app != null ? app.toNativeUtf8() : nullptr;
   final result = sdlGetPrefPathLookupFunction(orgPointer, appPointer);
@@ -154,10 +155,11 @@ Pointer<Int8> sdlGetPrefPath(String? org, String? app) {
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetUserFolder(SDL_Folder folder)
 /// ```
 String? sdlGetUserFolder(int folder) {
-  final sdlGetUserFolderLookupFunction = libSdl3.lookupFunction<
-    Pointer<Utf8> Function(Int32 folder),
-    Pointer<Utf8> Function(int folder)
-  >('SDL_GetUserFolder');
+  final sdlGetUserFolderLookupFunction = libSdl3
+      .lookupFunction<
+        Pointer<Utf8> Function(Int32 folder),
+        Pointer<Utf8> Function(int folder)
+      >('SDL_GetUserFolder');
   final result = sdlGetUserFolderLookupFunction(folder);
   if (result == nullptr) {
     return null;
@@ -183,10 +185,11 @@ String? sdlGetUserFolder(int folder) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_CreateDirectory(const char *path)
 /// ```
 bool sdlCreateDirectory(String? path) {
-  final sdlCreateDirectoryLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Pointer<Utf8> path),
-    int Function(Pointer<Utf8> path)
-  >('SDL_CreateDirectory');
+  final sdlCreateDirectoryLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(Pointer<Utf8> path),
+        int Function(Pointer<Utf8> path)
+      >('SDL_CreateDirectory');
   final pathPointer = path != null ? path.toNativeUtf8() : nullptr;
   final result = sdlCreateDirectoryLookupFunction(pathPointer) == 1;
   calloc.free(pathPointer);
@@ -222,18 +225,19 @@ bool sdlEnumerateDirectory(
   Pointer<NativeFunction<SdlEnumerateDirectoryCallback>> callback,
   Pointer<NativeType> userdata,
 ) {
-  final sdlEnumerateDirectoryLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(
-      Pointer<Utf8> path,
-      Pointer<NativeFunction<SdlEnumerateDirectoryCallback>> callback,
-      Pointer<NativeType> userdata,
-    ),
-    int Function(
-      Pointer<Utf8> path,
-      Pointer<NativeFunction<SdlEnumerateDirectoryCallback>> callback,
-      Pointer<NativeType> userdata,
-    )
-  >('SDL_EnumerateDirectory');
+  final sdlEnumerateDirectoryLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<Utf8> path,
+          Pointer<NativeFunction<SdlEnumerateDirectoryCallback>> callback,
+          Pointer<NativeType> userdata,
+        ),
+        int Function(
+          Pointer<Utf8> path,
+          Pointer<NativeFunction<SdlEnumerateDirectoryCallback>> callback,
+          Pointer<NativeType> userdata,
+        )
+      >('SDL_EnumerateDirectory');
   final pathPointer = path != null ? path.toNativeUtf8() : nullptr;
   final result =
       sdlEnumerateDirectoryLookupFunction(pathPointer, callback, userdata) == 1;
@@ -257,10 +261,11 @@ bool sdlEnumerateDirectory(
 /// extern SDL_DECLSPEC bool SDLCALL SDL_RemovePath(const char *path)
 /// ```
 bool sdlRemovePath(String? path) {
-  final sdlRemovePathLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Pointer<Utf8> path),
-    int Function(Pointer<Utf8> path)
-  >('SDL_RemovePath');
+  final sdlRemovePathLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(Pointer<Utf8> path),
+        int Function(Pointer<Utf8> path)
+      >('SDL_RemovePath');
   final pathPointer = path != null ? path.toNativeUtf8() : nullptr;
   final result = sdlRemovePathLookupFunction(pathPointer) == 1;
   calloc.free(pathPointer);
@@ -292,10 +297,11 @@ bool sdlRemovePath(String? path) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_RenamePath(const char *oldpath, const char *newpath)
 /// ```
 bool sdlRenamePath(String? oldpath, String? newpath) {
-  final sdlRenamePathLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Pointer<Utf8> oldpath, Pointer<Utf8> newpath),
-    int Function(Pointer<Utf8> oldpath, Pointer<Utf8> newpath)
-  >('SDL_RenamePath');
+  final sdlRenamePathLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(Pointer<Utf8> oldpath, Pointer<Utf8> newpath),
+        int Function(Pointer<Utf8> oldpath, Pointer<Utf8> newpath)
+      >('SDL_RenamePath');
   final oldpathPointer = oldpath != null ? oldpath.toNativeUtf8() : nullptr;
   final newpathPointer = newpath != null ? newpath.toNativeUtf8() : nullptr;
   final result =
@@ -347,10 +353,11 @@ bool sdlRenamePath(String? oldpath, String? newpath) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_CopyFile(const char *oldpath, const char *newpath)
 /// ```
 bool sdlCopyFile(String? oldpath, String? newpath) {
-  final sdlCopyFileLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Pointer<Utf8> oldpath, Pointer<Utf8> newpath),
-    int Function(Pointer<Utf8> oldpath, Pointer<Utf8> newpath)
-  >('SDL_CopyFile');
+  final sdlCopyFileLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(Pointer<Utf8> oldpath, Pointer<Utf8> newpath),
+        int Function(Pointer<Utf8> oldpath, Pointer<Utf8> newpath)
+      >('SDL_CopyFile');
   final oldpathPointer = oldpath != null ? oldpath.toNativeUtf8() : nullptr;
   final newpathPointer = newpath != null ? newpath.toNativeUtf8() : nullptr;
   final result = sdlCopyFileLookupFunction(oldpathPointer, newpathPointer) == 1;
@@ -374,10 +381,11 @@ bool sdlCopyFile(String? oldpath, String? newpath) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetPathInfo(const char *path, SDL_PathInfo *info)
 /// ```
 bool sdlGetPathInfo(String? path, Pointer<SdlPathInfo> info) {
-  final sdlGetPathInfoLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Pointer<Utf8> path, Pointer<SdlPathInfo> info),
-    int Function(Pointer<Utf8> path, Pointer<SdlPathInfo> info)
-  >('SDL_GetPathInfo');
+  final sdlGetPathInfoLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(Pointer<Utf8> path, Pointer<SdlPathInfo> info),
+        int Function(Pointer<Utf8> path, Pointer<SdlPathInfo> info)
+      >('SDL_GetPathInfo');
   final pathPointer = path != null ? path.toNativeUtf8() : nullptr;
   final result = sdlGetPathInfoLookupFunction(pathPointer, info) == 1;
   calloc.free(pathPointer);
@@ -424,20 +432,21 @@ Pointer<Pointer<Int8>> sdlGlobDirectory(
   int flags,
   Pointer<Int32> count,
 ) {
-  final sdlGlobDirectoryLookupFunction = libSdl3.lookupFunction<
-    Pointer<Pointer<Int8>> Function(
-      Pointer<Utf8> path,
-      Pointer<Utf8> pattern,
-      Uint32 flags,
-      Pointer<Int32> count,
-    ),
-    Pointer<Pointer<Int8>> Function(
-      Pointer<Utf8> path,
-      Pointer<Utf8> pattern,
-      int flags,
-      Pointer<Int32> count,
-    )
-  >('SDL_GlobDirectory');
+  final sdlGlobDirectoryLookupFunction = libSdl3
+      .lookupFunction<
+        Pointer<Pointer<Int8>> Function(
+          Pointer<Utf8> path,
+          Pointer<Utf8> pattern,
+          Uint32 flags,
+          Pointer<Int32> count,
+        ),
+        Pointer<Pointer<Int8>> Function(
+          Pointer<Utf8> path,
+          Pointer<Utf8> pattern,
+          int flags,
+          Pointer<Int32> count,
+        )
+      >('SDL_GlobDirectory');
   final pathPointer = path != null ? path.toNativeUtf8() : nullptr;
   final patternPointer = pattern != null ? pattern.toNativeUtf8() : nullptr;
   final result = sdlGlobDirectoryLookupFunction(

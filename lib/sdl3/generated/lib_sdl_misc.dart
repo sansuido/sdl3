@@ -36,10 +36,11 @@ import 'lib_sdl.dart';
 /// extern SDL_DECLSPEC bool SDLCALL SDL_OpenURL(const char *url)
 /// ```
 bool sdlOpenUrl(String? url) {
-  final sdlOpenUrlLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Pointer<Utf8> url),
-    int Function(Pointer<Utf8> url)
-  >('SDL_OpenURL');
+  final sdlOpenUrlLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(Pointer<Utf8> url),
+        int Function(Pointer<Utf8> url)
+      >('SDL_OpenURL');
   final urlPointer = url != null ? url.toNativeUtf8() : nullptr;
   final result = sdlOpenUrlLookupFunction(urlPointer) == 1;
   calloc.free(urlPointer);

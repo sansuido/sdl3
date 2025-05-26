@@ -62,10 +62,11 @@ int sdlGetNumAudioDrivers() {
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetAudioDriver(int index)
 /// ```
 String? sdlGetAudioDriver(int index) {
-  final sdlGetAudioDriverLookupFunction = libSdl3.lookupFunction<
-    Pointer<Utf8> Function(Int32 index),
-    Pointer<Utf8> Function(int index)
-  >('SDL_GetAudioDriver');
+  final sdlGetAudioDriverLookupFunction = libSdl3
+      .lookupFunction<
+        Pointer<Utf8> Function(Int32 index),
+        Pointer<Utf8> Function(int index)
+      >('SDL_GetAudioDriver');
   final result = sdlGetAudioDriverLookupFunction(index);
   if (result == nullptr) {
     return null;
@@ -133,10 +134,11 @@ String? sdlGetCurrentAudioDriver() {
 /// extern SDL_DECLSPEC SDL_AudioDeviceID * SDLCALL SDL_GetAudioPlaybackDevices(int *count)
 /// ```
 Pointer<Uint32> sdlGetAudioPlaybackDevices(Pointer<Int32> count) {
-  final sdlGetAudioPlaybackDevicesLookupFunction = libSdl3.lookupFunction<
-    Pointer<Uint32> Function(Pointer<Int32> count),
-    Pointer<Uint32> Function(Pointer<Int32> count)
-  >('SDL_GetAudioPlaybackDevices');
+  final sdlGetAudioPlaybackDevicesLookupFunction = libSdl3
+      .lookupFunction<
+        Pointer<Uint32> Function(Pointer<Int32> count),
+        Pointer<Uint32> Function(Pointer<Int32> count)
+      >('SDL_GetAudioPlaybackDevices');
   return sdlGetAudioPlaybackDevicesLookupFunction(count);
 }
 
@@ -171,10 +173,11 @@ Pointer<Uint32> sdlGetAudioPlaybackDevices(Pointer<Int32> count) {
 /// extern SDL_DECLSPEC SDL_AudioDeviceID * SDLCALL SDL_GetAudioRecordingDevices(int *count)
 /// ```
 Pointer<Uint32> sdlGetAudioRecordingDevices(Pointer<Int32> count) {
-  final sdlGetAudioRecordingDevicesLookupFunction = libSdl3.lookupFunction<
-    Pointer<Uint32> Function(Pointer<Int32> count),
-    Pointer<Uint32> Function(Pointer<Int32> count)
-  >('SDL_GetAudioRecordingDevices');
+  final sdlGetAudioRecordingDevicesLookupFunction = libSdl3
+      .lookupFunction<
+        Pointer<Uint32> Function(Pointer<Int32> count),
+        Pointer<Uint32> Function(Pointer<Int32> count)
+      >('SDL_GetAudioRecordingDevices');
   return sdlGetAudioRecordingDevicesLookupFunction(count);
 }
 
@@ -196,10 +199,11 @@ Pointer<Uint32> sdlGetAudioRecordingDevices(Pointer<Int32> count) {
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetAudioDeviceName(SDL_AudioDeviceID devid)
 /// ```
 String? sdlGetAudioDeviceName(int devid) {
-  final sdlGetAudioDeviceNameLookupFunction = libSdl3.lookupFunction<
-    Pointer<Utf8> Function(Uint32 devid),
-    Pointer<Utf8> Function(int devid)
-  >('SDL_GetAudioDeviceName');
+  final sdlGetAudioDeviceNameLookupFunction = libSdl3
+      .lookupFunction<
+        Pointer<Utf8> Function(Uint32 devid),
+        Pointer<Utf8> Function(int devid)
+      >('SDL_GetAudioDeviceName');
   final result = sdlGetAudioDeviceNameLookupFunction(devid);
   if (result == nullptr) {
     return null;
@@ -248,18 +252,19 @@ bool sdlGetAudioDeviceFormat(
   Pointer<SdlAudioSpec> spec,
   Pointer<Int32> sampleFrames,
 ) {
-  final sdlGetAudioDeviceFormatLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(
-      Uint32 devid,
-      Pointer<SdlAudioSpec> spec,
-      Pointer<Int32> sampleFrames,
-    ),
-    int Function(
-      int devid,
-      Pointer<SdlAudioSpec> spec,
-      Pointer<Int32> sampleFrames,
-    )
-  >('SDL_GetAudioDeviceFormat');
+  final sdlGetAudioDeviceFormatLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(
+          Uint32 devid,
+          Pointer<SdlAudioSpec> spec,
+          Pointer<Int32> sampleFrames,
+        ),
+        int Function(
+          int devid,
+          Pointer<SdlAudioSpec> spec,
+          Pointer<Int32> sampleFrames,
+        )
+      >('SDL_GetAudioDeviceFormat');
   return sdlGetAudioDeviceFormatLookupFunction(devid, spec, sampleFrames) == 1;
 }
 
@@ -288,10 +293,11 @@ bool sdlGetAudioDeviceFormat(
 /// extern SDL_DECLSPEC int * SDLCALL SDL_GetAudioDeviceChannelMap(SDL_AudioDeviceID devid, int *count)
 /// ```
 Pointer<Int32> sdlGetAudioDeviceChannelMap(int devid, Pointer<Int32> count) {
-  final sdlGetAudioDeviceChannelMapLookupFunction = libSdl3.lookupFunction<
-    Pointer<Int32> Function(Uint32 devid, Pointer<Int32> count),
-    Pointer<Int32> Function(int devid, Pointer<Int32> count)
-  >('SDL_GetAudioDeviceChannelMap');
+  final sdlGetAudioDeviceChannelMapLookupFunction = libSdl3
+      .lookupFunction<
+        Pointer<Int32> Function(Uint32 devid, Pointer<Int32> count),
+        Pointer<Int32> Function(int devid, Pointer<Int32> count)
+      >('SDL_GetAudioDeviceChannelMap');
   return sdlGetAudioDeviceChannelMapLookupFunction(devid, count);
 }
 
@@ -373,10 +379,11 @@ Pointer<Int32> sdlGetAudioDeviceChannelMap(int devid, Pointer<Int32> count) {
 /// extern SDL_DECLSPEC SDL_AudioDeviceID SDLCALL SDL_OpenAudioDevice(SDL_AudioDeviceID devid, const SDL_AudioSpec *spec)
 /// ```
 int sdlOpenAudioDevice(int devid, Pointer<SdlAudioSpec> spec) {
-  final sdlOpenAudioDeviceLookupFunction = libSdl3.lookupFunction<
-    Uint32 Function(Uint32 devid, Pointer<SdlAudioSpec> spec),
-    int Function(int devid, Pointer<SdlAudioSpec> spec)
-  >('SDL_OpenAudioDevice');
+  final sdlOpenAudioDeviceLookupFunction = libSdl3
+      .lookupFunction<
+        Uint32 Function(Uint32 devid, Pointer<SdlAudioSpec> spec),
+        int Function(int devid, Pointer<SdlAudioSpec> spec)
+      >('SDL_OpenAudioDevice');
   return sdlOpenAudioDeviceLookupFunction(devid, spec);
 }
 
@@ -614,10 +621,11 @@ double sdlGetAudioDeviceGain(int devid) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetAudioDeviceGain(SDL_AudioDeviceID devid, float gain)
 /// ```
 bool sdlSetAudioDeviceGain(int devid, double gain) {
-  final sdlSetAudioDeviceGainLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Uint32 devid, Float gain),
-    int Function(int devid, double gain)
-  >('SDL_SetAudioDeviceGain');
+  final sdlSetAudioDeviceGainLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(Uint32 devid, Float gain),
+        int Function(int devid, double gain)
+      >('SDL_SetAudioDeviceGain');
   return sdlSetAudioDeviceGainLookupFunction(devid, gain) == 1;
 }
 
@@ -694,18 +702,19 @@ bool sdlBindAudioStreams(
   Pointer<Pointer<SdlAudioStream>> streams,
   int numStreams,
 ) {
-  final sdlBindAudioStreamsLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(
-      Uint32 devid,
-      Pointer<Pointer<SdlAudioStream>> streams,
-      Int32 numStreams,
-    ),
-    int Function(
-      int devid,
-      Pointer<Pointer<SdlAudioStream>> streams,
-      int numStreams,
-    )
-  >('SDL_BindAudioStreams');
+  final sdlBindAudioStreamsLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(
+          Uint32 devid,
+          Pointer<Pointer<SdlAudioStream>> streams,
+          Int32 numStreams,
+        ),
+        int Function(
+          int devid,
+          Pointer<Pointer<SdlAudioStream>> streams,
+          int numStreams,
+        )
+      >('SDL_BindAudioStreams');
   return sdlBindAudioStreamsLookupFunction(devid, streams, numStreams) == 1;
 }
 
@@ -732,10 +741,11 @@ bool sdlBindAudioStreams(
 /// extern SDL_DECLSPEC bool SDLCALL SDL_BindAudioStream(SDL_AudioDeviceID devid, SDL_AudioStream *stream)
 /// ```
 bool sdlBindAudioStream(int devid, Pointer<SdlAudioStream> stream) {
-  final sdlBindAudioStreamLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Uint32 devid, Pointer<SdlAudioStream> stream),
-    int Function(int devid, Pointer<SdlAudioStream> stream)
-  >('SDL_BindAudioStream');
+  final sdlBindAudioStreamLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(Uint32 devid, Pointer<SdlAudioStream> stream),
+        int Function(int devid, Pointer<SdlAudioStream> stream)
+      >('SDL_BindAudioStream');
   return sdlBindAudioStreamLookupFunction(devid, stream) == 1;
 }
 
@@ -765,10 +775,14 @@ void sdlUnbindAudioStreams(
   Pointer<Pointer<SdlAudioStream>> streams,
   int numStreams,
 ) {
-  final sdlUnbindAudioStreamsLookupFunction = libSdl3.lookupFunction<
-    Void Function(Pointer<Pointer<SdlAudioStream>> streams, Int32 numStreams),
-    void Function(Pointer<Pointer<SdlAudioStream>> streams, int numStreams)
-  >('SDL_UnbindAudioStreams');
+  final sdlUnbindAudioStreamsLookupFunction = libSdl3
+      .lookupFunction<
+        Void Function(
+          Pointer<Pointer<SdlAudioStream>> streams,
+          Int32 numStreams,
+        ),
+        void Function(Pointer<Pointer<SdlAudioStream>> streams, int numStreams)
+      >('SDL_UnbindAudioStreams');
   return sdlUnbindAudioStreamsLookupFunction(streams, numStreams);
 }
 
@@ -790,10 +804,11 @@ void sdlUnbindAudioStreams(
 /// extern SDL_DECLSPEC void SDLCALL SDL_UnbindAudioStream(SDL_AudioStream *stream)
 /// ```
 void sdlUnbindAudioStream(Pointer<SdlAudioStream> stream) {
-  final sdlUnbindAudioStreamLookupFunction = libSdl3.lookupFunction<
-    Void Function(Pointer<SdlAudioStream> stream),
-    void Function(Pointer<SdlAudioStream> stream)
-  >('SDL_UnbindAudioStream');
+  final sdlUnbindAudioStreamLookupFunction = libSdl3
+      .lookupFunction<
+        Void Function(Pointer<SdlAudioStream> stream),
+        void Function(Pointer<SdlAudioStream> stream)
+      >('SDL_UnbindAudioStream');
   return sdlUnbindAudioStreamLookupFunction(stream);
 }
 
@@ -819,10 +834,11 @@ void sdlUnbindAudioStream(Pointer<SdlAudioStream> stream) {
 /// extern SDL_DECLSPEC SDL_AudioDeviceID SDLCALL SDL_GetAudioStreamDevice(SDL_AudioStream *stream)
 /// ```
 int sdlGetAudioStreamDevice(Pointer<SdlAudioStream> stream) {
-  final sdlGetAudioStreamDeviceLookupFunction = libSdl3.lookupFunction<
-    Uint32 Function(Pointer<SdlAudioStream> stream),
-    int Function(Pointer<SdlAudioStream> stream)
-  >('SDL_GetAudioStreamDevice');
+  final sdlGetAudioStreamDeviceLookupFunction = libSdl3
+      .lookupFunction<
+        Uint32 Function(Pointer<SdlAudioStream> stream),
+        int Function(Pointer<SdlAudioStream> stream)
+      >('SDL_GetAudioStreamDevice');
   return sdlGetAudioStreamDeviceLookupFunction(stream);
 }
 
@@ -853,16 +869,17 @@ Pointer<SdlAudioStream> sdlCreateAudioStream(
   Pointer<SdlAudioSpec> srcSpec,
   Pointer<SdlAudioSpec> dstSpec,
 ) {
-  final sdlCreateAudioStreamLookupFunction = libSdl3.lookupFunction<
-    Pointer<SdlAudioStream> Function(
-      Pointer<SdlAudioSpec> srcSpec,
-      Pointer<SdlAudioSpec> dstSpec,
-    ),
-    Pointer<SdlAudioStream> Function(
-      Pointer<SdlAudioSpec> srcSpec,
-      Pointer<SdlAudioSpec> dstSpec,
-    )
-  >('SDL_CreateAudioStream');
+  final sdlCreateAudioStreamLookupFunction = libSdl3
+      .lookupFunction<
+        Pointer<SdlAudioStream> Function(
+          Pointer<SdlAudioSpec> srcSpec,
+          Pointer<SdlAudioSpec> dstSpec,
+        ),
+        Pointer<SdlAudioStream> Function(
+          Pointer<SdlAudioSpec> srcSpec,
+          Pointer<SdlAudioSpec> dstSpec,
+        )
+      >('SDL_CreateAudioStream');
   return sdlCreateAudioStreamLookupFunction(srcSpec, dstSpec);
 }
 
@@ -881,10 +898,11 @@ Pointer<SdlAudioStream> sdlCreateAudioStream(
 /// extern SDL_DECLSPEC SDL_PropertiesID SDLCALL SDL_GetAudioStreamProperties(SDL_AudioStream *stream)
 /// ```
 int sdlGetAudioStreamProperties(Pointer<SdlAudioStream> stream) {
-  final sdlGetAudioStreamPropertiesLookupFunction = libSdl3.lookupFunction<
-    Uint32 Function(Pointer<SdlAudioStream> stream),
-    int Function(Pointer<SdlAudioStream> stream)
-  >('SDL_GetAudioStreamProperties');
+  final sdlGetAudioStreamPropertiesLookupFunction = libSdl3
+      .lookupFunction<
+        Uint32 Function(Pointer<SdlAudioStream> stream),
+        int Function(Pointer<SdlAudioStream> stream)
+      >('SDL_GetAudioStreamProperties');
   return sdlGetAudioStreamPropertiesLookupFunction(stream);
 }
 
@@ -912,18 +930,19 @@ bool sdlGetAudioStreamFormat(
   Pointer<SdlAudioSpec> srcSpec,
   Pointer<SdlAudioSpec> dstSpec,
 ) {
-  final sdlGetAudioStreamFormatLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(
-      Pointer<SdlAudioStream> stream,
-      Pointer<SdlAudioSpec> srcSpec,
-      Pointer<SdlAudioSpec> dstSpec,
-    ),
-    int Function(
-      Pointer<SdlAudioStream> stream,
-      Pointer<SdlAudioSpec> srcSpec,
-      Pointer<SdlAudioSpec> dstSpec,
-    )
-  >('SDL_GetAudioStreamFormat');
+  final sdlGetAudioStreamFormatLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<SdlAudioStream> stream,
+          Pointer<SdlAudioSpec> srcSpec,
+          Pointer<SdlAudioSpec> dstSpec,
+        ),
+        int Function(
+          Pointer<SdlAudioStream> stream,
+          Pointer<SdlAudioSpec> srcSpec,
+          Pointer<SdlAudioSpec> dstSpec,
+        )
+      >('SDL_GetAudioStreamFormat');
   return sdlGetAudioStreamFormatLookupFunction(stream, srcSpec, dstSpec) == 1;
 }
 
@@ -970,18 +989,19 @@ bool sdlSetAudioStreamFormat(
   Pointer<SdlAudioSpec> srcSpec,
   Pointer<SdlAudioSpec> dstSpec,
 ) {
-  final sdlSetAudioStreamFormatLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(
-      Pointer<SdlAudioStream> stream,
-      Pointer<SdlAudioSpec> srcSpec,
-      Pointer<SdlAudioSpec> dstSpec,
-    ),
-    int Function(
-      Pointer<SdlAudioStream> stream,
-      Pointer<SdlAudioSpec> srcSpec,
-      Pointer<SdlAudioSpec> dstSpec,
-    )
-  >('SDL_SetAudioStreamFormat');
+  final sdlSetAudioStreamFormatLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<SdlAudioStream> stream,
+          Pointer<SdlAudioSpec> srcSpec,
+          Pointer<SdlAudioSpec> dstSpec,
+        ),
+        int Function(
+          Pointer<SdlAudioStream> stream,
+          Pointer<SdlAudioSpec> srcSpec,
+          Pointer<SdlAudioSpec> dstSpec,
+        )
+      >('SDL_SetAudioStreamFormat');
   return sdlSetAudioStreamFormatLookupFunction(stream, srcSpec, dstSpec) == 1;
 }
 
@@ -1003,10 +1023,11 @@ bool sdlSetAudioStreamFormat(
 /// extern SDL_DECLSPEC float SDLCALL SDL_GetAudioStreamFrequencyRatio(SDL_AudioStream *stream)
 /// ```
 double sdlGetAudioStreamFrequencyRatio(Pointer<SdlAudioStream> stream) {
-  final sdlGetAudioStreamFrequencyRatioLookupFunction = libSdl3.lookupFunction<
-    Float Function(Pointer<SdlAudioStream> stream),
-    double Function(Pointer<SdlAudioStream> stream)
-  >('SDL_GetAudioStreamFrequencyRatio');
+  final sdlGetAudioStreamFrequencyRatioLookupFunction = libSdl3
+      .lookupFunction<
+        Float Function(Pointer<SdlAudioStream> stream),
+        double Function(Pointer<SdlAudioStream> stream)
+      >('SDL_GetAudioStreamFrequencyRatio');
   return sdlGetAudioStreamFrequencyRatioLookupFunction(stream);
 }
 
@@ -1043,10 +1064,11 @@ bool sdlSetAudioStreamFrequencyRatio(
   Pointer<SdlAudioStream> stream,
   double ratio,
 ) {
-  final sdlSetAudioStreamFrequencyRatioLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Pointer<SdlAudioStream> stream, Float ratio),
-    int Function(Pointer<SdlAudioStream> stream, double ratio)
-  >('SDL_SetAudioStreamFrequencyRatio');
+  final sdlSetAudioStreamFrequencyRatioLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(Pointer<SdlAudioStream> stream, Float ratio),
+        int Function(Pointer<SdlAudioStream> stream, double ratio)
+      >('SDL_SetAudioStreamFrequencyRatio');
   return sdlSetAudioStreamFrequencyRatioLookupFunction(stream, ratio) == 1;
 }
 
@@ -1073,10 +1095,11 @@ bool sdlSetAudioStreamFrequencyRatio(
 /// extern SDL_DECLSPEC float SDLCALL SDL_GetAudioStreamGain(SDL_AudioStream *stream)
 /// ```
 double sdlGetAudioStreamGain(Pointer<SdlAudioStream> stream) {
-  final sdlGetAudioStreamGainLookupFunction = libSdl3.lookupFunction<
-    Float Function(Pointer<SdlAudioStream> stream),
-    double Function(Pointer<SdlAudioStream> stream)
-  >('SDL_GetAudioStreamGain');
+  final sdlGetAudioStreamGainLookupFunction = libSdl3
+      .lookupFunction<
+        Float Function(Pointer<SdlAudioStream> stream),
+        double Function(Pointer<SdlAudioStream> stream)
+      >('SDL_GetAudioStreamGain');
   return sdlGetAudioStreamGainLookupFunction(stream);
 }
 
@@ -1107,10 +1130,11 @@ double sdlGetAudioStreamGain(Pointer<SdlAudioStream> stream) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetAudioStreamGain(SDL_AudioStream *stream, float gain)
 /// ```
 bool sdlSetAudioStreamGain(Pointer<SdlAudioStream> stream, double gain) {
-  final sdlSetAudioStreamGainLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Pointer<SdlAudioStream> stream, Float gain),
-    int Function(Pointer<SdlAudioStream> stream, double gain)
-  >('SDL_SetAudioStreamGain');
+  final sdlSetAudioStreamGainLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(Pointer<SdlAudioStream> stream, Float gain),
+        int Function(Pointer<SdlAudioStream> stream, double gain)
+      >('SDL_SetAudioStreamGain');
   return sdlSetAudioStreamGainLookupFunction(stream, gain) == 1;
 }
 
@@ -1143,16 +1167,17 @@ Pointer<Int32> sdlGetAudioStreamInputChannelMap(
   Pointer<SdlAudioStream> stream,
   Pointer<Int32> count,
 ) {
-  final sdlGetAudioStreamInputChannelMapLookupFunction = libSdl3.lookupFunction<
-    Pointer<Int32> Function(
-      Pointer<SdlAudioStream> stream,
-      Pointer<Int32> count,
-    ),
-    Pointer<Int32> Function(
-      Pointer<SdlAudioStream> stream,
-      Pointer<Int32> count,
-    )
-  >('SDL_GetAudioStreamInputChannelMap');
+  final sdlGetAudioStreamInputChannelMapLookupFunction = libSdl3
+      .lookupFunction<
+        Pointer<Int32> Function(
+          Pointer<SdlAudioStream> stream,
+          Pointer<Int32> count,
+        ),
+        Pointer<Int32> Function(
+          Pointer<SdlAudioStream> stream,
+          Pointer<Int32> count,
+        )
+      >('SDL_GetAudioStreamInputChannelMap');
   return sdlGetAudioStreamInputChannelMapLookupFunction(stream, count);
 }
 
@@ -1265,18 +1290,19 @@ bool sdlSetAudioStreamInputChannelMap(
   Pointer<Int32> chmap,
   int count,
 ) {
-  final sdlSetAudioStreamInputChannelMapLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(
-      Pointer<SdlAudioStream> stream,
-      Pointer<Int32> chmap,
-      Int32 count,
-    ),
-    int Function(
-      Pointer<SdlAudioStream> stream,
-      Pointer<Int32> chmap,
-      int count,
-    )
-  >('SDL_SetAudioStreamInputChannelMap');
+  final sdlSetAudioStreamInputChannelMapLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<SdlAudioStream> stream,
+          Pointer<Int32> chmap,
+          Int32 count,
+        ),
+        int Function(
+          Pointer<SdlAudioStream> stream,
+          Pointer<Int32> chmap,
+          int count,
+        )
+      >('SDL_SetAudioStreamInputChannelMap');
   return sdlSetAudioStreamInputChannelMapLookupFunction(stream, chmap, count) ==
       1;
 }
@@ -1402,18 +1428,19 @@ bool sdlPutAudioStreamData(
   Pointer<NativeType> buf,
   int len,
 ) {
-  final sdlPutAudioStreamDataLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(
-      Pointer<SdlAudioStream> stream,
-      Pointer<NativeType> buf,
-      Int32 len,
-    ),
-    int Function(
-      Pointer<SdlAudioStream> stream,
-      Pointer<NativeType> buf,
-      int len,
-    )
-  >('SDL_PutAudioStreamData');
+  final sdlPutAudioStreamDataLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<SdlAudioStream> stream,
+          Pointer<NativeType> buf,
+          Int32 len,
+        ),
+        int Function(
+          Pointer<SdlAudioStream> stream,
+          Pointer<NativeType> buf,
+          int len,
+        )
+      >('SDL_PutAudioStreamData');
   return sdlPutAudioStreamDataLookupFunction(stream, buf, len) == 1;
 }
 
@@ -1477,20 +1504,21 @@ bool sdlPutAudioStreamPlanarData(
   int numChannels,
   int numSamples,
 ) {
-  final sdlPutAudioStreamPlanarDataLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(
-      Pointer<SdlAudioStream> stream,
-      Pointer<Pointer<NativeType>> channelBuffers,
-      Int32 numChannels,
-      Int32 numSamples,
-    ),
-    int Function(
-      Pointer<SdlAudioStream> stream,
-      Pointer<Pointer<NativeType>> channelBuffers,
-      int numChannels,
-      int numSamples,
-    )
-  >('SDL_PutAudioStreamPlanarData');
+  final sdlPutAudioStreamPlanarDataLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<SdlAudioStream> stream,
+          Pointer<Pointer<NativeType>> channelBuffers,
+          Int32 numChannels,
+          Int32 numSamples,
+        ),
+        int Function(
+          Pointer<SdlAudioStream> stream,
+          Pointer<Pointer<NativeType>> channelBuffers,
+          int numChannels,
+          int numSamples,
+        )
+      >('SDL_PutAudioStreamPlanarData');
   return sdlPutAudioStreamPlanarDataLookupFunction(
         stream,
         channelBuffers,
@@ -1536,18 +1564,19 @@ int sdlGetAudioStreamData(
   Pointer<NativeType> buf,
   int len,
 ) {
-  final sdlGetAudioStreamDataLookupFunction = libSdl3.lookupFunction<
-    Int32 Function(
-      Pointer<SdlAudioStream> stream,
-      Pointer<NativeType> buf,
-      Int32 len,
-    ),
-    int Function(
-      Pointer<SdlAudioStream> stream,
-      Pointer<NativeType> buf,
-      int len,
-    )
-  >('SDL_GetAudioStreamData');
+  final sdlGetAudioStreamDataLookupFunction = libSdl3
+      .lookupFunction<
+        Int32 Function(
+          Pointer<SdlAudioStream> stream,
+          Pointer<NativeType> buf,
+          Int32 len,
+        ),
+        int Function(
+          Pointer<SdlAudioStream> stream,
+          Pointer<NativeType> buf,
+          int len,
+        )
+      >('SDL_GetAudioStreamData');
   return sdlGetAudioStreamDataLookupFunction(stream, buf, len);
 }
 
@@ -1579,10 +1608,11 @@ int sdlGetAudioStreamData(
 /// extern SDL_DECLSPEC int SDLCALL SDL_GetAudioStreamAvailable(SDL_AudioStream *stream)
 /// ```
 int sdlGetAudioStreamAvailable(Pointer<SdlAudioStream> stream) {
-  final sdlGetAudioStreamAvailableLookupFunction = libSdl3.lookupFunction<
-    Int32 Function(Pointer<SdlAudioStream> stream),
-    int Function(Pointer<SdlAudioStream> stream)
-  >('SDL_GetAudioStreamAvailable');
+  final sdlGetAudioStreamAvailableLookupFunction = libSdl3
+      .lookupFunction<
+        Int32 Function(Pointer<SdlAudioStream> stream),
+        int Function(Pointer<SdlAudioStream> stream)
+      >('SDL_GetAudioStreamAvailable');
   return sdlGetAudioStreamAvailableLookupFunction(stream);
 }
 
@@ -1626,10 +1656,11 @@ int sdlGetAudioStreamAvailable(Pointer<SdlAudioStream> stream) {
 /// extern SDL_DECLSPEC int SDLCALL SDL_GetAudioStreamQueued(SDL_AudioStream *stream)
 /// ```
 int sdlGetAudioStreamQueued(Pointer<SdlAudioStream> stream) {
-  final sdlGetAudioStreamQueuedLookupFunction = libSdl3.lookupFunction<
-    Int32 Function(Pointer<SdlAudioStream> stream),
-    int Function(Pointer<SdlAudioStream> stream)
-  >('SDL_GetAudioStreamQueued');
+  final sdlGetAudioStreamQueuedLookupFunction = libSdl3
+      .lookupFunction<
+        Int32 Function(Pointer<SdlAudioStream> stream),
+        int Function(Pointer<SdlAudioStream> stream)
+      >('SDL_GetAudioStreamQueued');
   return sdlGetAudioStreamQueuedLookupFunction(stream);
 }
 
@@ -1655,10 +1686,11 @@ int sdlGetAudioStreamQueued(Pointer<SdlAudioStream> stream) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_FlushAudioStream(SDL_AudioStream *stream)
 /// ```
 bool sdlFlushAudioStream(Pointer<SdlAudioStream> stream) {
-  final sdlFlushAudioStreamLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Pointer<SdlAudioStream> stream),
-    int Function(Pointer<SdlAudioStream> stream)
-  >('SDL_FlushAudioStream');
+  final sdlFlushAudioStreamLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(Pointer<SdlAudioStream> stream),
+        int Function(Pointer<SdlAudioStream> stream)
+      >('SDL_FlushAudioStream');
   return sdlFlushAudioStreamLookupFunction(stream) == 1;
 }
 
@@ -1685,10 +1717,11 @@ bool sdlFlushAudioStream(Pointer<SdlAudioStream> stream) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_ClearAudioStream(SDL_AudioStream *stream)
 /// ```
 bool sdlClearAudioStream(Pointer<SdlAudioStream> stream) {
-  final sdlClearAudioStreamLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Pointer<SdlAudioStream> stream),
-    int Function(Pointer<SdlAudioStream> stream)
-  >('SDL_ClearAudioStream');
+  final sdlClearAudioStreamLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(Pointer<SdlAudioStream> stream),
+        int Function(Pointer<SdlAudioStream> stream)
+      >('SDL_ClearAudioStream');
   return sdlClearAudioStreamLookupFunction(stream) == 1;
 }
 
@@ -1718,10 +1751,11 @@ bool sdlClearAudioStream(Pointer<SdlAudioStream> stream) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_PauseAudioStreamDevice(SDL_AudioStream *stream)
 /// ```
 bool sdlPauseAudioStreamDevice(Pointer<SdlAudioStream> stream) {
-  final sdlPauseAudioStreamDeviceLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Pointer<SdlAudioStream> stream),
-    int Function(Pointer<SdlAudioStream> stream)
-  >('SDL_PauseAudioStreamDevice');
+  final sdlPauseAudioStreamDeviceLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(Pointer<SdlAudioStream> stream),
+        int Function(Pointer<SdlAudioStream> stream)
+      >('SDL_PauseAudioStreamDevice');
   return sdlPauseAudioStreamDeviceLookupFunction(stream) == 1;
 }
 
@@ -1750,10 +1784,11 @@ bool sdlPauseAudioStreamDevice(Pointer<SdlAudioStream> stream) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_ResumeAudioStreamDevice(SDL_AudioStream *stream)
 /// ```
 bool sdlResumeAudioStreamDevice(Pointer<SdlAudioStream> stream) {
-  final sdlResumeAudioStreamDeviceLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Pointer<SdlAudioStream> stream),
-    int Function(Pointer<SdlAudioStream> stream)
-  >('SDL_ResumeAudioStreamDevice');
+  final sdlResumeAudioStreamDeviceLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(Pointer<SdlAudioStream> stream),
+        int Function(Pointer<SdlAudioStream> stream)
+      >('SDL_ResumeAudioStreamDevice');
   return sdlResumeAudioStreamDeviceLookupFunction(stream) == 1;
 }
 
@@ -1778,10 +1813,11 @@ bool sdlResumeAudioStreamDevice(Pointer<SdlAudioStream> stream) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_AudioStreamDevicePaused(SDL_AudioStream *stream)
 /// ```
 bool sdlAudioStreamDevicePaused(Pointer<SdlAudioStream> stream) {
-  final sdlAudioStreamDevicePausedLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Pointer<SdlAudioStream> stream),
-    int Function(Pointer<SdlAudioStream> stream)
-  >('SDL_AudioStreamDevicePaused');
+  final sdlAudioStreamDevicePausedLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(Pointer<SdlAudioStream> stream),
+        int Function(Pointer<SdlAudioStream> stream)
+      >('SDL_AudioStreamDevicePaused');
   return sdlAudioStreamDevicePausedLookupFunction(stream) == 1;
 }
 
@@ -1815,10 +1851,11 @@ bool sdlAudioStreamDevicePaused(Pointer<SdlAudioStream> stream) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_LockAudioStream(SDL_AudioStream *stream)
 /// ```
 bool sdlLockAudioStream(Pointer<SdlAudioStream> stream) {
-  final sdlLockAudioStreamLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Pointer<SdlAudioStream> stream),
-    int Function(Pointer<SdlAudioStream> stream)
-  >('SDL_LockAudioStream');
+  final sdlLockAudioStreamLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(Pointer<SdlAudioStream> stream),
+        int Function(Pointer<SdlAudioStream> stream)
+      >('SDL_LockAudioStream');
   return sdlLockAudioStreamLookupFunction(stream) == 1;
 }
 
@@ -1842,10 +1879,11 @@ bool sdlLockAudioStream(Pointer<SdlAudioStream> stream) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_UnlockAudioStream(SDL_AudioStream *stream)
 /// ```
 bool sdlUnlockAudioStream(Pointer<SdlAudioStream> stream) {
-  final sdlUnlockAudioStreamLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Pointer<SdlAudioStream> stream),
-    int Function(Pointer<SdlAudioStream> stream)
-  >('SDL_UnlockAudioStream');
+  final sdlUnlockAudioStreamLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(Pointer<SdlAudioStream> stream),
+        int Function(Pointer<SdlAudioStream> stream)
+      >('SDL_UnlockAudioStream');
   return sdlUnlockAudioStreamLookupFunction(stream) == 1;
 }
 
@@ -1901,18 +1939,19 @@ bool sdlSetAudioStreamGetCallback(
   Pointer<NativeFunction<SdlAudioStreamCallback>> callback,
   Pointer<NativeType> userdata,
 ) {
-  final sdlSetAudioStreamGetCallbackLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(
-      Pointer<SdlAudioStream> stream,
-      Pointer<NativeFunction<SdlAudioStreamCallback>> callback,
-      Pointer<NativeType> userdata,
-    ),
-    int Function(
-      Pointer<SdlAudioStream> stream,
-      Pointer<NativeFunction<SdlAudioStreamCallback>> callback,
-      Pointer<NativeType> userdata,
-    )
-  >('SDL_SetAudioStreamGetCallback');
+  final sdlSetAudioStreamGetCallbackLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<SdlAudioStream> stream,
+          Pointer<NativeFunction<SdlAudioStreamCallback>> callback,
+          Pointer<NativeType> userdata,
+        ),
+        int Function(
+          Pointer<SdlAudioStream> stream,
+          Pointer<NativeFunction<SdlAudioStreamCallback>> callback,
+          Pointer<NativeType> userdata,
+        )
+      >('SDL_SetAudioStreamGetCallback');
   return sdlSetAudioStreamGetCallbackLookupFunction(
         stream,
         callback,
@@ -1976,18 +2015,19 @@ bool sdlSetAudioStreamPutCallback(
   Pointer<NativeFunction<SdlAudioStreamCallback>> callback,
   Pointer<NativeType> userdata,
 ) {
-  final sdlSetAudioStreamPutCallbackLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(
-      Pointer<SdlAudioStream> stream,
-      Pointer<NativeFunction<SdlAudioStreamCallback>> callback,
-      Pointer<NativeType> userdata,
-    ),
-    int Function(
-      Pointer<SdlAudioStream> stream,
-      Pointer<NativeFunction<SdlAudioStreamCallback>> callback,
-      Pointer<NativeType> userdata,
-    )
-  >('SDL_SetAudioStreamPutCallback');
+  final sdlSetAudioStreamPutCallbackLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<SdlAudioStream> stream,
+          Pointer<NativeFunction<SdlAudioStreamCallback>> callback,
+          Pointer<NativeType> userdata,
+        ),
+        int Function(
+          Pointer<SdlAudioStream> stream,
+          Pointer<NativeFunction<SdlAudioStreamCallback>> callback,
+          Pointer<NativeType> userdata,
+        )
+      >('SDL_SetAudioStreamPutCallback');
   return sdlSetAudioStreamPutCallbackLookupFunction(
         stream,
         callback,
@@ -2019,10 +2059,11 @@ bool sdlSetAudioStreamPutCallback(
 /// extern SDL_DECLSPEC void SDLCALL SDL_DestroyAudioStream(SDL_AudioStream *stream)
 /// ```
 void sdlDestroyAudioStream(Pointer<SdlAudioStream> stream) {
-  final sdlDestroyAudioStreamLookupFunction = libSdl3.lookupFunction<
-    Void Function(Pointer<SdlAudioStream> stream),
-    void Function(Pointer<SdlAudioStream> stream)
-  >('SDL_DestroyAudioStream');
+  final sdlDestroyAudioStreamLookupFunction = libSdl3
+      .lookupFunction<
+        Void Function(Pointer<SdlAudioStream> stream),
+        void Function(Pointer<SdlAudioStream> stream)
+      >('SDL_DestroyAudioStream');
   return sdlDestroyAudioStreamLookupFunction(stream);
 }
 
@@ -2042,7 +2083,7 @@ void sdlDestroyAudioStream(Pointer<SdlAudioStream> stream) {
 /// Also unlike other functions, the audio device begins paused. This is to map
 /// more closely to SDL2-style behavior, since there is no extra step here to
 /// bind a stream to begin audio flowing. The audio device should be resumed
-/// with `SDL_ResumeAudioStreamDevice(stream);`
+/// with SDL_ResumeAudioStreamDevice().
 ///
 /// This function works with both playback and recording devices.
 ///
@@ -2095,20 +2136,21 @@ Pointer<SdlAudioStream> sdlOpenAudioDeviceStream(
   Pointer<NativeFunction<SdlAudioStreamCallback>> callback,
   Pointer<NativeType> userdata,
 ) {
-  final sdlOpenAudioDeviceStreamLookupFunction = libSdl3.lookupFunction<
-    Pointer<SdlAudioStream> Function(
-      Uint32 devid,
-      Pointer<SdlAudioSpec> spec,
-      Pointer<NativeFunction<SdlAudioStreamCallback>> callback,
-      Pointer<NativeType> userdata,
-    ),
-    Pointer<SdlAudioStream> Function(
-      int devid,
-      Pointer<SdlAudioSpec> spec,
-      Pointer<NativeFunction<SdlAudioStreamCallback>> callback,
-      Pointer<NativeType> userdata,
-    )
-  >('SDL_OpenAudioDeviceStream');
+  final sdlOpenAudioDeviceStreamLookupFunction = libSdl3
+      .lookupFunction<
+        Pointer<SdlAudioStream> Function(
+          Uint32 devid,
+          Pointer<SdlAudioSpec> spec,
+          Pointer<NativeFunction<SdlAudioStreamCallback>> callback,
+          Pointer<NativeType> userdata,
+        ),
+        Pointer<SdlAudioStream> Function(
+          int devid,
+          Pointer<SdlAudioSpec> spec,
+          Pointer<NativeFunction<SdlAudioStreamCallback>> callback,
+          Pointer<NativeType> userdata,
+        )
+      >('SDL_OpenAudioDeviceStream');
   return sdlOpenAudioDeviceStreamLookupFunction(
     devid,
     spec,
@@ -2170,20 +2212,21 @@ bool sdlSetAudioIterationCallbacks(
   Pointer<NativeFunction<SdlAudioIterationCallback>> end,
   Pointer<NativeType> userdata,
 ) {
-  final sdlSetAudioIterationCallbacksLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(
-      Uint32 devid,
-      Pointer<NativeFunction<SdlAudioIterationCallback>> start,
-      Pointer<NativeFunction<SdlAudioIterationCallback>> end,
-      Pointer<NativeType> userdata,
-    ),
-    int Function(
-      int devid,
-      Pointer<NativeFunction<SdlAudioIterationCallback>> start,
-      Pointer<NativeFunction<SdlAudioIterationCallback>> end,
-      Pointer<NativeType> userdata,
-    )
-  >('SDL_SetAudioIterationCallbacks');
+  final sdlSetAudioIterationCallbacksLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(
+          Uint32 devid,
+          Pointer<NativeFunction<SdlAudioIterationCallback>> start,
+          Pointer<NativeFunction<SdlAudioIterationCallback>> end,
+          Pointer<NativeType> userdata,
+        ),
+        int Function(
+          int devid,
+          Pointer<NativeFunction<SdlAudioIterationCallback>> start,
+          Pointer<NativeFunction<SdlAudioIterationCallback>> end,
+          Pointer<NativeType> userdata,
+        )
+      >('SDL_SetAudioIterationCallbacks');
   return sdlSetAudioIterationCallbacksLookupFunction(
         devid,
         start,
@@ -2253,18 +2296,19 @@ bool sdlSetAudioPostmixCallback(
   Pointer<NativeFunction<SdlAudioPostmixCallback>> callback,
   Pointer<NativeType> userdata,
 ) {
-  final sdlSetAudioPostmixCallbackLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(
-      Uint32 devid,
-      Pointer<NativeFunction<SdlAudioPostmixCallback>> callback,
-      Pointer<NativeType> userdata,
-    ),
-    int Function(
-      int devid,
-      Pointer<NativeFunction<SdlAudioPostmixCallback>> callback,
-      Pointer<NativeType> userdata,
-    )
-  >('SDL_SetAudioPostmixCallback');
+  final sdlSetAudioPostmixCallbackLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(
+          Uint32 devid,
+          Pointer<NativeFunction<SdlAudioPostmixCallback>> callback,
+          Pointer<NativeType> userdata,
+        ),
+        int Function(
+          int devid,
+          Pointer<NativeFunction<SdlAudioPostmixCallback>> callback,
+          Pointer<NativeType> userdata,
+        )
+      >('SDL_SetAudioPostmixCallback');
   return sdlSetAudioPostmixCallbackLookupFunction(devid, callback, userdata) ==
       1;
 }
@@ -2357,22 +2401,23 @@ bool sdlLoadWavIo(
   Pointer<Pointer<Uint8>> audioBuf,
   Pointer<Uint32> audioLen,
 ) {
-  final sdlLoadWavIoLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(
-      Pointer<SdlIoStream> src,
-      Uint8 closeio,
-      Pointer<SdlAudioSpec> spec,
-      Pointer<Pointer<Uint8>> audioBuf,
-      Pointer<Uint32> audioLen,
-    ),
-    int Function(
-      Pointer<SdlIoStream> src,
-      int closeio,
-      Pointer<SdlAudioSpec> spec,
-      Pointer<Pointer<Uint8>> audioBuf,
-      Pointer<Uint32> audioLen,
-    )
-  >('SDL_LoadWAV_IO');
+  final sdlLoadWavIoLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<SdlIoStream> src,
+          Uint8 closeio,
+          Pointer<SdlAudioSpec> spec,
+          Pointer<Pointer<Uint8>> audioBuf,
+          Pointer<Uint32> audioLen,
+        ),
+        int Function(
+          Pointer<SdlIoStream> src,
+          int closeio,
+          Pointer<SdlAudioSpec> spec,
+          Pointer<Pointer<Uint8>> audioBuf,
+          Pointer<Uint32> audioLen,
+        )
+      >('SDL_LoadWAV_IO');
   return sdlLoadWavIoLookupFunction(
         src,
         closeio ? 1 : 0,
@@ -2426,20 +2471,21 @@ bool sdlLoadWav(
   Pointer<Pointer<Uint8>> audioBuf,
   Pointer<Uint32> audioLen,
 ) {
-  final sdlLoadWavLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(
-      Pointer<Utf8> path,
-      Pointer<SdlAudioSpec> spec,
-      Pointer<Pointer<Uint8>> audioBuf,
-      Pointer<Uint32> audioLen,
-    ),
-    int Function(
-      Pointer<Utf8> path,
-      Pointer<SdlAudioSpec> spec,
-      Pointer<Pointer<Uint8>> audioBuf,
-      Pointer<Uint32> audioLen,
-    )
-  >('SDL_LoadWAV');
+  final sdlLoadWavLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<Utf8> path,
+          Pointer<SdlAudioSpec> spec,
+          Pointer<Pointer<Uint8>> audioBuf,
+          Pointer<Uint32> audioLen,
+        ),
+        int Function(
+          Pointer<Utf8> path,
+          Pointer<SdlAudioSpec> spec,
+          Pointer<Pointer<Uint8>> audioBuf,
+          Pointer<Uint32> audioLen,
+        )
+      >('SDL_LoadWAV');
   final pathPointer = path != null ? path.toNativeUtf8() : nullptr;
   final result =
       sdlLoadWavLookupFunction(pathPointer, spec, audioBuf, audioLen) == 1;
@@ -2491,22 +2537,23 @@ bool sdlMixAudio(
   int len,
   double volume,
 ) {
-  final sdlMixAudioLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(
-      Pointer<Uint8> dst,
-      Pointer<Uint8> src,
-      Int32 format,
-      Uint32 len,
-      Float volume,
-    ),
-    int Function(
-      Pointer<Uint8> dst,
-      Pointer<Uint8> src,
-      int format,
-      int len,
-      double volume,
-    )
-  >('SDL_MixAudio');
+  final sdlMixAudioLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<Uint8> dst,
+          Pointer<Uint8> src,
+          Int32 format,
+          Uint32 len,
+          Float volume,
+        ),
+        int Function(
+          Pointer<Uint8> dst,
+          Pointer<Uint8> src,
+          int format,
+          int len,
+          double volume,
+        )
+      >('SDL_MixAudio');
   return sdlMixAudioLookupFunction(dst, src, format, len, volume) == 1;
 }
 
@@ -2549,24 +2596,25 @@ bool sdlConvertAudioSamples(
   Pointer<Pointer<Uint8>> dstData,
   Pointer<Int32> dstLen,
 ) {
-  final sdlConvertAudioSamplesLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(
-      Pointer<SdlAudioSpec> srcSpec,
-      Pointer<Uint8> srcData,
-      Int32 srcLen,
-      Pointer<SdlAudioSpec> dstSpec,
-      Pointer<Pointer<Uint8>> dstData,
-      Pointer<Int32> dstLen,
-    ),
-    int Function(
-      Pointer<SdlAudioSpec> srcSpec,
-      Pointer<Uint8> srcData,
-      int srcLen,
-      Pointer<SdlAudioSpec> dstSpec,
-      Pointer<Pointer<Uint8>> dstData,
-      Pointer<Int32> dstLen,
-    )
-  >('SDL_ConvertAudioSamples');
+  final sdlConvertAudioSamplesLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<SdlAudioSpec> srcSpec,
+          Pointer<Uint8> srcData,
+          Int32 srcLen,
+          Pointer<SdlAudioSpec> dstSpec,
+          Pointer<Pointer<Uint8>> dstData,
+          Pointer<Int32> dstLen,
+        ),
+        int Function(
+          Pointer<SdlAudioSpec> srcSpec,
+          Pointer<Uint8> srcData,
+          int srcLen,
+          Pointer<SdlAudioSpec> dstSpec,
+          Pointer<Pointer<Uint8>> dstData,
+          Pointer<Int32> dstLen,
+        )
+      >('SDL_ConvertAudioSamples');
   return sdlConvertAudioSamplesLookupFunction(
         srcSpec,
         srcData,
@@ -2593,10 +2641,11 @@ bool sdlConvertAudioSamples(
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetAudioFormatName(SDL_AudioFormat format)
 /// ```
 String? sdlGetAudioFormatName(int format) {
-  final sdlGetAudioFormatNameLookupFunction = libSdl3.lookupFunction<
-    Pointer<Utf8> Function(Int32 format),
-    Pointer<Utf8> Function(int format)
-  >('SDL_GetAudioFormatName');
+  final sdlGetAudioFormatNameLookupFunction = libSdl3
+      .lookupFunction<
+        Pointer<Utf8> Function(Int32 format),
+        Pointer<Utf8> Function(int format)
+      >('SDL_GetAudioFormatName');
   final result = sdlGetAudioFormatNameLookupFunction(format);
   if (result == nullptr) {
     return null;

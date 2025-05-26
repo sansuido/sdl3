@@ -38,9 +38,10 @@ import 'lib_sdl.dart';
 /// extern SDL_DECLSPEC SDL_PowerState SDLCALL SDL_GetPowerInfo(int *seconds, int *percent)
 /// ```
 int sdlGetPowerInfo(Pointer<Int32> seconds, Pointer<Int32> percent) {
-  final sdlGetPowerInfoLookupFunction = libSdl3.lookupFunction<
-    Int32 Function(Pointer<Int32> seconds, Pointer<Int32> percent),
-    int Function(Pointer<Int32> seconds, Pointer<Int32> percent)
-  >('SDL_GetPowerInfo');
+  final sdlGetPowerInfoLookupFunction = libSdl3
+      .lookupFunction<
+        Int32 Function(Pointer<Int32> seconds, Pointer<Int32> percent),
+        int Function(Pointer<Int32> seconds, Pointer<Int32> percent)
+      >('SDL_GetPowerInfo');
   return sdlGetPowerInfoLookupFunction(seconds, percent);
 }

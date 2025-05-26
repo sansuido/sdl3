@@ -100,24 +100,25 @@ int sdlComposeCustomBlendMode(
   int dstAlphaFactor,
   int alphaOperation,
 ) {
-  final sdlComposeCustomBlendModeLookupFunction = libSdl3.lookupFunction<
-    Uint32 Function(
-      Int32 srcColorFactor,
-      Int32 dstColorFactor,
-      Int32 colorOperation,
-      Int32 srcAlphaFactor,
-      Int32 dstAlphaFactor,
-      Int32 alphaOperation,
-    ),
-    int Function(
-      int srcColorFactor,
-      int dstColorFactor,
-      int colorOperation,
-      int srcAlphaFactor,
-      int dstAlphaFactor,
-      int alphaOperation,
-    )
-  >('SDL_ComposeCustomBlendMode');
+  final sdlComposeCustomBlendModeLookupFunction = libSdl3
+      .lookupFunction<
+        Uint32 Function(
+          Int32 srcColorFactor,
+          Int32 dstColorFactor,
+          Int32 colorOperation,
+          Int32 srcAlphaFactor,
+          Int32 dstAlphaFactor,
+          Int32 alphaOperation,
+        ),
+        int Function(
+          int srcColorFactor,
+          int dstColorFactor,
+          int colorOperation,
+          int srcAlphaFactor,
+          int dstAlphaFactor,
+          int alphaOperation,
+        )
+      >('SDL_ComposeCustomBlendMode');
   return sdlComposeCustomBlendModeLookupFunction(
     srcColorFactor,
     dstColorFactor,

@@ -1572,7 +1572,7 @@ bool arcRgba(
       if ((oct % 2) != 0) {
         drawoct |=
             (1 <<
-                oct); /* this is basically like saying drawoct[oct] = true, if drawoct were a bool array */
+            oct); /* this is basically like saying drawoct[oct] = true, if drawoct were a bool array */
       } else {
         drawoct &=
             255 -

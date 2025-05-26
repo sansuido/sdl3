@@ -17,22 +17,20 @@ extension RectangleEx on math.Rectangle<double> {
 
   // dependence package:ffi
   Pointer<SdlFRect> calloc() {
-    var result =
-        ffi.calloc<SdlFRect>()
-          ..ref.x = left
-          ..ref.y = top
-          ..ref.w = width
-          ..ref.h = height;
+    var result = ffi.calloc<SdlFRect>()
+      ..ref.x = left
+      ..ref.y = top
+      ..ref.w = width
+      ..ref.h = height;
     return result;
   }
 
   Pointer<SdlRect> callocInt() {
-    var result =
-        ffi.calloc<SdlRect>()
-          ..ref.x = left.toInt()
-          ..ref.y = top.toInt()
-          ..ref.w = width.toInt()
-          ..ref.h = height.toInt();
+    var result = ffi.calloc<SdlRect>()
+      ..ref.x = left.toInt()
+      ..ref.y = top.toInt()
+      ..ref.w = width.toInt()
+      ..ref.h = height.toInt();
     return result;
   }
 

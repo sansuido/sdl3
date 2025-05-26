@@ -1,15 +1,15 @@
 name: sdl3
 description: A Dart library for accessing common SDL3 (and SDL3_image, SDL3_mixer, SDL3_net, SDL3_ttf, SDL3_gfx) APIs using, FFI.
-version: 1.5.6
+version: 1.6.0
 homepage: https://github.com/sansuido/sdl3
 repository: https://github.com/sansuido/sdl3
 
 environment:
-  sdk: '>=3.7.3 <4.0.0'
+  sdk: '>=3.8.0 <4.0.0'
 
 dependencies:
   ffi: ^2.1.4
 
 dev_dependencies:
-  lints: ^5.1.1
+  lints: ^6.0.0
   change_case: ^2.2.0

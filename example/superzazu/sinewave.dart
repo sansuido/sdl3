@@ -5,11 +5,10 @@ import 'package:ffi/ffi.dart';
 import 'package:sdl3/sdl3.dart';
 
 void sinewave() {
-  var audioSpec =
-      calloc<SdlAudioSpec>()
-        ..ref.freq = 44100
-        ..ref.format = SDL_AUDIO_S16LE
-        ..ref.channels = 1;
+  var audioSpec = calloc<SdlAudioSpec>()
+    ..ref.freq = 44100
+    ..ref.format = SDL_AUDIO_S16LE
+    ..ref.channels = 1;
   var stream = sdlOpenAudioDeviceStream(
     SDL_AUDIO_DEVICE_DEFAULT_OUTPUT,
     audioSpec,

@@ -22,10 +22,11 @@ import 'struct_sdl.dart';
 /// extern SDL_DECLSPEC bool SDLCALL SDL_HasRectIntersection(const SDL_Rect *A, const SDL_Rect *B)
 /// ```
 bool sdlHasRectIntersection(Pointer<SdlRect> a, Pointer<SdlRect> b) {
-  final sdlHasRectIntersectionLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Pointer<SdlRect> a, Pointer<SdlRect> b),
-    int Function(Pointer<SdlRect> a, Pointer<SdlRect> b)
-  >('SDL_HasRectIntersection');
+  final sdlHasRectIntersectionLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(Pointer<SdlRect> a, Pointer<SdlRect> b),
+        int Function(Pointer<SdlRect> a, Pointer<SdlRect> b)
+      >('SDL_HasRectIntersection');
   return sdlHasRectIntersectionLookupFunction(a, b) == 1;
 }
 
@@ -52,18 +53,19 @@ bool sdlGetRectIntersection(
   Pointer<SdlRect> b,
   Pointer<SdlRect> result,
 ) {
-  final sdlGetRectIntersectionLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(
-      Pointer<SdlRect> a,
-      Pointer<SdlRect> b,
-      Pointer<SdlRect> result,
-    ),
-    int Function(
-      Pointer<SdlRect> a,
-      Pointer<SdlRect> b,
-      Pointer<SdlRect> result,
-    )
-  >('SDL_GetRectIntersection');
+  final sdlGetRectIntersectionLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<SdlRect> a,
+          Pointer<SdlRect> b,
+          Pointer<SdlRect> result,
+        ),
+        int Function(
+          Pointer<SdlRect> a,
+          Pointer<SdlRect> b,
+          Pointer<SdlRect> result,
+        )
+      >('SDL_GetRectIntersection');
   return sdlGetRectIntersectionLookupFunction(a, b, result) == 1;
 }
 
@@ -87,18 +89,19 @@ bool sdlGetRectUnion(
   Pointer<SdlRect> b,
   Pointer<SdlRect> result,
 ) {
-  final sdlGetRectUnionLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(
-      Pointer<SdlRect> a,
-      Pointer<SdlRect> b,
-      Pointer<SdlRect> result,
-    ),
-    int Function(
-      Pointer<SdlRect> a,
-      Pointer<SdlRect> b,
-      Pointer<SdlRect> result,
-    )
-  >('SDL_GetRectUnion');
+  final sdlGetRectUnionLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<SdlRect> a,
+          Pointer<SdlRect> b,
+          Pointer<SdlRect> result,
+        ),
+        int Function(
+          Pointer<SdlRect> a,
+          Pointer<SdlRect> b,
+          Pointer<SdlRect> result,
+        )
+      >('SDL_GetRectUnion');
   return sdlGetRectUnionLookupFunction(a, b, result) == 1;
 }
 
@@ -128,20 +131,21 @@ bool sdlGetRectEnclosingPoints(
   Pointer<SdlRect> clip,
   Pointer<SdlRect> result,
 ) {
-  final sdlGetRectEnclosingPointsLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(
-      Pointer<SdlPoint> points,
-      Int32 count,
-      Pointer<SdlRect> clip,
-      Pointer<SdlRect> result,
-    ),
-    int Function(
-      Pointer<SdlPoint> points,
-      int count,
-      Pointer<SdlRect> clip,
-      Pointer<SdlRect> result,
-    )
-  >('SDL_GetRectEnclosingPoints');
+  final sdlGetRectEnclosingPointsLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<SdlPoint> points,
+          Int32 count,
+          Pointer<SdlRect> clip,
+          Pointer<SdlRect> result,
+        ),
+        int Function(
+          Pointer<SdlPoint> points,
+          int count,
+          Pointer<SdlRect> clip,
+          Pointer<SdlRect> result,
+        )
+      >('SDL_GetRectEnclosingPoints');
   return sdlGetRectEnclosingPointsLookupFunction(points, count, clip, result) ==
       1;
 }
@@ -174,22 +178,23 @@ bool sdlGetRectAndLineIntersection(
   Pointer<Int32> x2,
   Pointer<Int32> y2,
 ) {
-  final sdlGetRectAndLineIntersectionLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(
-      Pointer<SdlRect> rect,
-      Pointer<Int32> x1,
-      Pointer<Int32> y1,
-      Pointer<Int32> x2,
-      Pointer<Int32> y2,
-    ),
-    int Function(
-      Pointer<SdlRect> rect,
-      Pointer<Int32> x1,
-      Pointer<Int32> y1,
-      Pointer<Int32> x2,
-      Pointer<Int32> y2,
-    )
-  >('SDL_GetRectAndLineIntersection');
+  final sdlGetRectAndLineIntersectionLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<SdlRect> rect,
+          Pointer<Int32> x1,
+          Pointer<Int32> y1,
+          Pointer<Int32> x2,
+          Pointer<Int32> y2,
+        ),
+        int Function(
+          Pointer<SdlRect> rect,
+          Pointer<Int32> x1,
+          Pointer<Int32> y1,
+          Pointer<Int32> x2,
+          Pointer<Int32> y2,
+        )
+      >('SDL_GetRectAndLineIntersection');
   return sdlGetRectAndLineIntersectionLookupFunction(rect, x1, y1, x2, y2) == 1;
 }
 
@@ -210,10 +215,11 @@ bool sdlGetRectAndLineIntersection(
 /// extern SDL_DECLSPEC bool SDLCALL SDL_HasRectIntersectionFloat(const SDL_FRect *A, const SDL_FRect *B)
 /// ```
 bool sdlHasRectIntersectionFloat(Pointer<SdlFRect> a, Pointer<SdlFRect> b) {
-  final sdlHasRectIntersectionFloatLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Pointer<SdlFRect> a, Pointer<SdlFRect> b),
-    int Function(Pointer<SdlFRect> a, Pointer<SdlFRect> b)
-  >('SDL_HasRectIntersectionFloat');
+  final sdlHasRectIntersectionFloatLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(Pointer<SdlFRect> a, Pointer<SdlFRect> b),
+        int Function(Pointer<SdlFRect> a, Pointer<SdlFRect> b)
+      >('SDL_HasRectIntersectionFloat');
   return sdlHasRectIntersectionFloatLookupFunction(a, b) == 1;
 }
 
@@ -240,18 +246,19 @@ bool sdlGetRectIntersectionFloat(
   Pointer<SdlFRect> b,
   Pointer<SdlFRect> result,
 ) {
-  final sdlGetRectIntersectionFloatLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(
-      Pointer<SdlFRect> a,
-      Pointer<SdlFRect> b,
-      Pointer<SdlFRect> result,
-    ),
-    int Function(
-      Pointer<SdlFRect> a,
-      Pointer<SdlFRect> b,
-      Pointer<SdlFRect> result,
-    )
-  >('SDL_GetRectIntersectionFloat');
+  final sdlGetRectIntersectionFloatLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<SdlFRect> a,
+          Pointer<SdlFRect> b,
+          Pointer<SdlFRect> result,
+        ),
+        int Function(
+          Pointer<SdlFRect> a,
+          Pointer<SdlFRect> b,
+          Pointer<SdlFRect> result,
+        )
+      >('SDL_GetRectIntersectionFloat');
   return sdlGetRectIntersectionFloatLookupFunction(a, b, result) == 1;
 }
 
@@ -275,18 +282,19 @@ bool sdlGetRectUnionFloat(
   Pointer<SdlFRect> b,
   Pointer<SdlFRect> result,
 ) {
-  final sdlGetRectUnionFloatLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(
-      Pointer<SdlFRect> a,
-      Pointer<SdlFRect> b,
-      Pointer<SdlFRect> result,
-    ),
-    int Function(
-      Pointer<SdlFRect> a,
-      Pointer<SdlFRect> b,
-      Pointer<SdlFRect> result,
-    )
-  >('SDL_GetRectUnionFloat');
+  final sdlGetRectUnionFloatLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<SdlFRect> a,
+          Pointer<SdlFRect> b,
+          Pointer<SdlFRect> result,
+        ),
+        int Function(
+          Pointer<SdlFRect> a,
+          Pointer<SdlFRect> b,
+          Pointer<SdlFRect> result,
+        )
+      >('SDL_GetRectUnionFloat');
   return sdlGetRectUnionFloatLookupFunction(a, b, result) == 1;
 }
 
@@ -317,20 +325,21 @@ bool sdlGetRectEnclosingPointsFloat(
   Pointer<SdlFRect> clip,
   Pointer<SdlFRect> result,
 ) {
-  final sdlGetRectEnclosingPointsFloatLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(
-      Pointer<SdlFPoint> points,
-      Int32 count,
-      Pointer<SdlFRect> clip,
-      Pointer<SdlFRect> result,
-    ),
-    int Function(
-      Pointer<SdlFPoint> points,
-      int count,
-      Pointer<SdlFRect> clip,
-      Pointer<SdlFRect> result,
-    )
-  >('SDL_GetRectEnclosingPointsFloat');
+  final sdlGetRectEnclosingPointsFloatLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<SdlFPoint> points,
+          Int32 count,
+          Pointer<SdlFRect> clip,
+          Pointer<SdlFRect> result,
+        ),
+        int Function(
+          Pointer<SdlFPoint> points,
+          int count,
+          Pointer<SdlFRect> clip,
+          Pointer<SdlFRect> result,
+        )
+      >('SDL_GetRectEnclosingPointsFloat');
   return sdlGetRectEnclosingPointsFloatLookupFunction(
         points,
         count,

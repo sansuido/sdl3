@@ -16,7 +16,8 @@ const TTF_PROP_FONT_CREATE_SIZE_FLOAT = 'SDL_ttf.font.create.size';
 const TTF_PROP_FONT_CREATE_FACE_NUMBER = 'SDL_ttf.font.create.face';
 const TTF_PROP_FONT_CREATE_HORIZONTAL_DPI_NUMBER = 'SDL_ttf.font.create.hdpi';
 const TTF_PROP_FONT_CREATE_VERTICAL_DPI_NUMBER = 'SDL_ttf.font.create.vdpi';
-const TTF_PROP_FONT_CREATE_EXISTING_FONT = 'SDL_ttf.font.create.existing_font';
+const TTF_PROP_FONT_CREATE_EXISTING_FONT_POINTER =
+    'SDL_ttf.font.create.existing_font';
 const TTF_PROP_FONT_OUTLINE_LINE_CAP_NUMBER = 'SDL_ttf.font.outline.line_cap';
 const TTF_PROP_FONT_OUTLINE_LINE_JOIN_NUMBER = 'SDL_ttf.font.outline.line_join';
 const TTF_PROP_FONT_OUTLINE_MITER_LIMIT_NUMBER =
@@ -55,12 +56,13 @@ const TTF_IMAGE_INVALID = 0;
 const TTF_IMAGE_ALPHA = 1;
 const TTF_IMAGE_COLOR = 2;
 const TTF_IMAGE_SDF = 3;
-const TTF_PROP_RENDERER_TEXT_ENGINE_RENDERER =
+const TTF_PROP_RENDERER_TEXT_ENGINE_RENDERER_POINTER =
     'SDL_ttf.renderer_text_engine.create.renderer';
-const TTF_PROP_RENDERER_TEXT_ENGINE_ATLAS_TEXTURE_SIZE =
+const TTF_PROP_RENDERER_TEXT_ENGINE_ATLAS_TEXTURE_SIZE_NUMBER =
     'SDL_ttf.renderer_text_engine.create.atlas_texture_size';
-const TTF_PROP_GPU_TEXT_ENGINE_DEVICE = 'SDL_ttf.gpu_text_engine.create.device';
-const TTF_PROP_GPU_TEXT_ENGINE_ATLAS_TEXTURE_SIZE =
+const TTF_PROP_GPU_TEXT_ENGINE_DEVICE_POINTER =
+    'SDL_ttf.gpu_text_engine.create.device';
+const TTF_PROP_GPU_TEXT_ENGINE_ATLAS_TEXTURE_SIZE_NUMBER =
     'SDL_ttf.gpu_text_engine.create.atlas_texture_size';
 const TTF_GPU_TEXTENGINE_WINDING_INVALID = -1;
 const TTF_GPU_TEXTENGINE_WINDING_CLOCKWISE = -1 + 1;
@@ -84,7 +86,8 @@ class TtfkPropFont {
       TTF_PROP_FONT_CREATE_HORIZONTAL_DPI_NUMBER;
   static const createVerticalDpiNumber =
       TTF_PROP_FONT_CREATE_VERTICAL_DPI_NUMBER;
-  static const createExistingFont = TTF_PROP_FONT_CREATE_EXISTING_FONT;
+  static const createExistingFontPointer =
+      TTF_PROP_FONT_CREATE_EXISTING_FONT_POINTER;
   static const outlineLineCapNumber = TTF_PROP_FONT_OUTLINE_LINE_CAP_NUMBER;
   static const outlineLineJoinNumber = TTF_PROP_FONT_OUTLINE_LINE_JOIN_NUMBER;
   static const outlineMiterLimitNumber =
@@ -157,19 +160,21 @@ class TtfkProp {
       TTF_PROP_FONT_CREATE_HORIZONTAL_DPI_NUMBER;
   static const fontCreateVerticalDpiNumber =
       TTF_PROP_FONT_CREATE_VERTICAL_DPI_NUMBER;
-  static const fontCreateExistingFont = TTF_PROP_FONT_CREATE_EXISTING_FONT;
+  static const fontCreateExistingFontPointer =
+      TTF_PROP_FONT_CREATE_EXISTING_FONT_POINTER;
   static const fontOutlineLineCapNumber = TTF_PROP_FONT_OUTLINE_LINE_CAP_NUMBER;
   static const fontOutlineLineJoinNumber =
       TTF_PROP_FONT_OUTLINE_LINE_JOIN_NUMBER;
   static const fontOutlineMiterLimitNumber =
       TTF_PROP_FONT_OUTLINE_MITER_LIMIT_NUMBER;
-  static const rendererTextEngineRenderer =
-      TTF_PROP_RENDERER_TEXT_ENGINE_RENDERER;
-  static const rendererTextEngineAtlasTextureSize =
-      TTF_PROP_RENDERER_TEXT_ENGINE_ATLAS_TEXTURE_SIZE;
-  static const gpuTextEngineDevice = TTF_PROP_GPU_TEXT_ENGINE_DEVICE;
-  static const gpuTextEngineAtlasTextureSize =
-      TTF_PROP_GPU_TEXT_ENGINE_ATLAS_TEXTURE_SIZE;
+  static const rendererTextEngineRendererPointer =
+      TTF_PROP_RENDERER_TEXT_ENGINE_RENDERER_POINTER;
+  static const rendererTextEngineAtlasTextureSizeNumber =
+      TTF_PROP_RENDERER_TEXT_ENGINE_ATLAS_TEXTURE_SIZE_NUMBER;
+  static const gpuTextEngineDevicePointer =
+      TTF_PROP_GPU_TEXT_ENGINE_DEVICE_POINTER;
+  static const gpuTextEngineAtlasTextureSizeNumber =
+      TTF_PROP_GPU_TEXT_ENGINE_ATLAS_TEXTURE_SIZE_NUMBER;
 }
 
 class TtfkGpuTextengineWinding {

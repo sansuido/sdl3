@@ -62,10 +62,11 @@ int sdlGetNumCameraDrivers() {
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetCameraDriver(int index)
 /// ```
 String? sdlGetCameraDriver(int index) {
-  final sdlGetCameraDriverLookupFunction = libSdl3.lookupFunction<
-    Pointer<Utf8> Function(Int32 index),
-    Pointer<Utf8> Function(int index)
-  >('SDL_GetCameraDriver');
+  final sdlGetCameraDriverLookupFunction = libSdl3
+      .lookupFunction<
+        Pointer<Utf8> Function(Int32 index),
+        Pointer<Utf8> Function(int index)
+      >('SDL_GetCameraDriver');
   final result = sdlGetCameraDriverLookupFunction(index);
   if (result == nullptr) {
     return null;
@@ -121,10 +122,11 @@ String? sdlGetCurrentCameraDriver() {
 /// extern SDL_DECLSPEC SDL_CameraID * SDLCALL SDL_GetCameras(int *count)
 /// ```
 Pointer<Uint32> sdlGetCameras(Pointer<Int32> count) {
-  final sdlGetCamerasLookupFunction = libSdl3.lookupFunction<
-    Pointer<Uint32> Function(Pointer<Int32> count),
-    Pointer<Uint32> Function(Pointer<Int32> count)
-  >('SDL_GetCameras');
+  final sdlGetCamerasLookupFunction = libSdl3
+      .lookupFunction<
+        Pointer<Uint32> Function(Pointer<Int32> count),
+        Pointer<Uint32> Function(Pointer<Int32> count)
+      >('SDL_GetCameras');
   return sdlGetCamerasLookupFunction(count);
 }
 
@@ -172,16 +174,17 @@ Pointer<Pointer<SdlCameraSpec>> sdlGetCameraSupportedFormats(
   int instanceId,
   Pointer<Int32> count,
 ) {
-  final sdlGetCameraSupportedFormatsLookupFunction = libSdl3.lookupFunction<
-    Pointer<Pointer<SdlCameraSpec>> Function(
-      Uint32 instanceId,
-      Pointer<Int32> count,
-    ),
-    Pointer<Pointer<SdlCameraSpec>> Function(
-      int instanceId,
-      Pointer<Int32> count,
-    )
-  >('SDL_GetCameraSupportedFormats');
+  final sdlGetCameraSupportedFormatsLookupFunction = libSdl3
+      .lookupFunction<
+        Pointer<Pointer<SdlCameraSpec>> Function(
+          Uint32 instanceId,
+          Pointer<Int32> count,
+        ),
+        Pointer<Pointer<SdlCameraSpec>> Function(
+          int instanceId,
+          Pointer<Int32> count,
+        )
+      >('SDL_GetCameraSupportedFormats');
   return sdlGetCameraSupportedFormatsLookupFunction(instanceId, count);
 }
 
@@ -202,10 +205,11 @@ Pointer<Pointer<SdlCameraSpec>> sdlGetCameraSupportedFormats(
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetCameraName(SDL_CameraID instance_id)
 /// ```
 String? sdlGetCameraName(int instanceId) {
-  final sdlGetCameraNameLookupFunction = libSdl3.lookupFunction<
-    Pointer<Utf8> Function(Uint32 instanceId),
-    Pointer<Utf8> Function(int instanceId)
-  >('SDL_GetCameraName');
+  final sdlGetCameraNameLookupFunction = libSdl3
+      .lookupFunction<
+        Pointer<Utf8> Function(Uint32 instanceId),
+        Pointer<Utf8> Function(int instanceId)
+      >('SDL_GetCameraName');
   final result = sdlGetCameraNameLookupFunction(instanceId);
   if (result == nullptr) {
     return null;
@@ -234,10 +238,11 @@ String? sdlGetCameraName(int instanceId) {
 /// extern SDL_DECLSPEC SDL_CameraPosition SDLCALL SDL_GetCameraPosition(SDL_CameraID instance_id)
 /// ```
 int sdlGetCameraPosition(int instanceId) {
-  final sdlGetCameraPositionLookupFunction = libSdl3.lookupFunction<
-    Int32 Function(Uint32 instanceId),
-    int Function(int instanceId)
-  >('SDL_GetCameraPosition');
+  final sdlGetCameraPositionLookupFunction = libSdl3
+      .lookupFunction<
+        Int32 Function(Uint32 instanceId),
+        int Function(int instanceId)
+      >('SDL_GetCameraPosition');
   return sdlGetCameraPositionLookupFunction(instanceId);
 }
 
@@ -290,10 +295,14 @@ int sdlGetCameraPosition(int instanceId) {
 /// extern SDL_DECLSPEC SDL_Camera * SDLCALL SDL_OpenCamera(SDL_CameraID instance_id, const SDL_CameraSpec *spec)
 /// ```
 Pointer<SdlCamera> sdlOpenCamera(int instanceId, Pointer<SdlCameraSpec> spec) {
-  final sdlOpenCameraLookupFunction = libSdl3.lookupFunction<
-    Pointer<SdlCamera> Function(Uint32 instanceId, Pointer<SdlCameraSpec> spec),
-    Pointer<SdlCamera> Function(int instanceId, Pointer<SdlCameraSpec> spec)
-  >('SDL_OpenCamera');
+  final sdlOpenCameraLookupFunction = libSdl3
+      .lookupFunction<
+        Pointer<SdlCamera> Function(
+          Uint32 instanceId,
+          Pointer<SdlCameraSpec> spec,
+        ),
+        Pointer<SdlCamera> Function(int instanceId, Pointer<SdlCameraSpec> spec)
+      >('SDL_OpenCamera');
   return sdlOpenCameraLookupFunction(instanceId, spec);
 }
 
@@ -332,10 +341,11 @@ Pointer<SdlCamera> sdlOpenCamera(int instanceId, Pointer<SdlCameraSpec> spec) {
 /// extern SDL_DECLSPEC int SDLCALL SDL_GetCameraPermissionState(SDL_Camera *camera)
 /// ```
 int sdlGetCameraPermissionState(Pointer<SdlCamera> camera) {
-  final sdlGetCameraPermissionStateLookupFunction = libSdl3.lookupFunction<
-    Int32 Function(Pointer<SdlCamera> camera),
-    int Function(Pointer<SdlCamera> camera)
-  >('SDL_GetCameraPermissionState');
+  final sdlGetCameraPermissionStateLookupFunction = libSdl3
+      .lookupFunction<
+        Int32 Function(Pointer<SdlCamera> camera),
+        int Function(Pointer<SdlCamera> camera)
+      >('SDL_GetCameraPermissionState');
   return sdlGetCameraPermissionStateLookupFunction(camera);
 }
 
@@ -356,10 +366,11 @@ int sdlGetCameraPermissionState(Pointer<SdlCamera> camera) {
 /// extern SDL_DECLSPEC SDL_CameraID SDLCALL SDL_GetCameraID(SDL_Camera *camera)
 /// ```
 int sdlGetCameraId(Pointer<SdlCamera> camera) {
-  final sdlGetCameraIdLookupFunction = libSdl3.lookupFunction<
-    Uint32 Function(Pointer<SdlCamera> camera),
-    int Function(Pointer<SdlCamera> camera)
-  >('SDL_GetCameraID');
+  final sdlGetCameraIdLookupFunction = libSdl3
+      .lookupFunction<
+        Uint32 Function(Pointer<SdlCamera> camera),
+        int Function(Pointer<SdlCamera> camera)
+      >('SDL_GetCameraID');
   return sdlGetCameraIdLookupFunction(camera);
 }
 
@@ -378,10 +389,11 @@ int sdlGetCameraId(Pointer<SdlCamera> camera) {
 /// extern SDL_DECLSPEC SDL_PropertiesID SDLCALL SDL_GetCameraProperties(SDL_Camera *camera)
 /// ```
 int sdlGetCameraProperties(Pointer<SdlCamera> camera) {
-  final sdlGetCameraPropertiesLookupFunction = libSdl3.lookupFunction<
-    Uint32 Function(Pointer<SdlCamera> camera),
-    int Function(Pointer<SdlCamera> camera)
-  >('SDL_GetCameraProperties');
+  final sdlGetCameraPropertiesLookupFunction = libSdl3
+      .lookupFunction<
+        Uint32 Function(Pointer<SdlCamera> camera),
+        int Function(Pointer<SdlCamera> camera)
+      >('SDL_GetCameraProperties');
   return sdlGetCameraPropertiesLookupFunction(camera);
 }
 
@@ -416,10 +428,11 @@ bool sdlGetCameraFormat(
   Pointer<SdlCamera> camera,
   Pointer<SdlCameraSpec> spec,
 ) {
-  final sdlGetCameraFormatLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Pointer<SdlCamera> camera, Pointer<SdlCameraSpec> spec),
-    int Function(Pointer<SdlCamera> camera, Pointer<SdlCameraSpec> spec)
-  >('SDL_GetCameraFormat');
+  final sdlGetCameraFormatLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(Pointer<SdlCamera> camera, Pointer<SdlCameraSpec> spec),
+        int Function(Pointer<SdlCamera> camera, Pointer<SdlCameraSpec> spec)
+      >('SDL_GetCameraFormat');
   return sdlGetCameraFormatLookupFunction(camera, spec) == 1;
 }
 
@@ -471,16 +484,17 @@ Pointer<SdlSurface> sdlAcquireCameraFrame(
   Pointer<SdlCamera> camera,
   Pointer<Uint64> timestampNs,
 ) {
-  final sdlAcquireCameraFrameLookupFunction = libSdl3.lookupFunction<
-    Pointer<SdlSurface> Function(
-      Pointer<SdlCamera> camera,
-      Pointer<Uint64> timestampNs,
-    ),
-    Pointer<SdlSurface> Function(
-      Pointer<SdlCamera> camera,
-      Pointer<Uint64> timestampNs,
-    )
-  >('SDL_AcquireCameraFrame');
+  final sdlAcquireCameraFrameLookupFunction = libSdl3
+      .lookupFunction<
+        Pointer<SdlSurface> Function(
+          Pointer<SdlCamera> camera,
+          Pointer<Uint64> timestampNs,
+        ),
+        Pointer<SdlSurface> Function(
+          Pointer<SdlCamera> camera,
+          Pointer<Uint64> timestampNs,
+        )
+      >('SDL_AcquireCameraFrame');
   return sdlAcquireCameraFrameLookupFunction(camera, timestampNs);
 }
 
@@ -517,10 +531,11 @@ void sdlReleaseCameraFrame(
   Pointer<SdlCamera> camera,
   Pointer<SdlSurface> frame,
 ) {
-  final sdlReleaseCameraFrameLookupFunction = libSdl3.lookupFunction<
-    Void Function(Pointer<SdlCamera> camera, Pointer<SdlSurface> frame),
-    void Function(Pointer<SdlCamera> camera, Pointer<SdlSurface> frame)
-  >('SDL_ReleaseCameraFrame');
+  final sdlReleaseCameraFrameLookupFunction = libSdl3
+      .lookupFunction<
+        Void Function(Pointer<SdlCamera> camera, Pointer<SdlSurface> frame),
+        void Function(Pointer<SdlCamera> camera, Pointer<SdlSurface> frame)
+      >('SDL_ReleaseCameraFrame');
   return sdlReleaseCameraFrameLookupFunction(camera, frame);
 }
 
@@ -541,9 +556,10 @@ void sdlReleaseCameraFrame(
 /// extern SDL_DECLSPEC void SDLCALL SDL_CloseCamera(SDL_Camera *camera)
 /// ```
 void sdlCloseCamera(Pointer<SdlCamera> camera) {
-  final sdlCloseCameraLookupFunction = libSdl3.lookupFunction<
-    Void Function(Pointer<SdlCamera> camera),
-    void Function(Pointer<SdlCamera> camera)
-  >('SDL_CloseCamera');
+  final sdlCloseCameraLookupFunction = libSdl3
+      .lookupFunction<
+        Void Function(Pointer<SdlCamera> camera),
+        void Function(Pointer<SdlCamera> camera)
+      >('SDL_CloseCamera');
   return sdlCloseCameraLookupFunction(camera);
 }

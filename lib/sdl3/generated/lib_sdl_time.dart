@@ -27,10 +27,11 @@ bool sdlGetDateTimeLocalePreferences(
   Pointer<Int32> dateFormat,
   Pointer<Int32> timeFormat,
 ) {
-  final sdlGetDateTimeLocalePreferencesLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Pointer<Int32> dateFormat, Pointer<Int32> timeFormat),
-    int Function(Pointer<Int32> dateFormat, Pointer<Int32> timeFormat)
-  >('SDL_GetDateTimeLocalePreferences');
+  final sdlGetDateTimeLocalePreferencesLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(Pointer<Int32> dateFormat, Pointer<Int32> timeFormat),
+        int Function(Pointer<Int32> dateFormat, Pointer<Int32> timeFormat)
+      >('SDL_GetDateTimeLocalePreferences');
   return sdlGetDateTimeLocalePreferencesLookupFunction(
         dateFormat,
         timeFormat,
@@ -52,10 +53,11 @@ bool sdlGetDateTimeLocalePreferences(
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetCurrentTime(SDL_Time *ticks)
 /// ```
 bool sdlGetCurrentTime(Pointer<Int64> ticks) {
-  final sdlGetCurrentTimeLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Pointer<Int64> ticks),
-    int Function(Pointer<Int64> ticks)
-  >('SDL_GetCurrentTime');
+  final sdlGetCurrentTimeLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(Pointer<Int64> ticks),
+        int Function(Pointer<Int64> ticks)
+      >('SDL_GetCurrentTime');
   return sdlGetCurrentTimeLookupFunction(ticks) == 1;
 }
 
@@ -77,10 +79,11 @@ bool sdlGetCurrentTime(Pointer<Int64> ticks) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_TimeToDateTime(SDL_Time ticks, SDL_DateTime *dt, bool localTime)
 /// ```
 bool sdlTimeToDateTime(int ticks, Pointer<SdlDateTime> dt, bool localTime) {
-  final sdlTimeToDateTimeLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Int64 ticks, Pointer<SdlDateTime> dt, Uint8 localTime),
-    int Function(int ticks, Pointer<SdlDateTime> dt, int localTime)
-  >('SDL_TimeToDateTime');
+  final sdlTimeToDateTimeLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(Int64 ticks, Pointer<SdlDateTime> dt, Uint8 localTime),
+        int Function(int ticks, Pointer<SdlDateTime> dt, int localTime)
+      >('SDL_TimeToDateTime');
   return sdlTimeToDateTimeLookupFunction(ticks, dt, localTime ? 1 : 0) == 1;
 }
 
@@ -101,10 +104,11 @@ bool sdlTimeToDateTime(int ticks, Pointer<SdlDateTime> dt, bool localTime) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_DateTimeToTime(const SDL_DateTime *dt, SDL_Time *ticks)
 /// ```
 bool sdlDateTimeToTime(Pointer<SdlDateTime> dt, Pointer<Int64> ticks) {
-  final sdlDateTimeToTimeLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Pointer<SdlDateTime> dt, Pointer<Int64> ticks),
-    int Function(Pointer<SdlDateTime> dt, Pointer<Int64> ticks)
-  >('SDL_DateTimeToTime');
+  final sdlDateTimeToTimeLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(Pointer<SdlDateTime> dt, Pointer<Int64> ticks),
+        int Function(Pointer<SdlDateTime> dt, Pointer<Int64> ticks)
+      >('SDL_DateTimeToTime');
   return sdlDateTimeToTimeLookupFunction(dt, ticks) == 1;
 }
 
@@ -130,18 +134,19 @@ void sdlTimeToWindows(
   Pointer<Uint32> dwLowDateTime,
   Pointer<Uint32> dwHighDateTime,
 ) {
-  final sdlTimeToWindowsLookupFunction = libSdl3.lookupFunction<
-    Void Function(
-      Int64 ticks,
-      Pointer<Uint32> dwLowDateTime,
-      Pointer<Uint32> dwHighDateTime,
-    ),
-    void Function(
-      int ticks,
-      Pointer<Uint32> dwLowDateTime,
-      Pointer<Uint32> dwHighDateTime,
-    )
-  >('SDL_TimeToWindows');
+  final sdlTimeToWindowsLookupFunction = libSdl3
+      .lookupFunction<
+        Void Function(
+          Int64 ticks,
+          Pointer<Uint32> dwLowDateTime,
+          Pointer<Uint32> dwHighDateTime,
+        ),
+        void Function(
+          int ticks,
+          Pointer<Uint32> dwLowDateTime,
+          Pointer<Uint32> dwHighDateTime,
+        )
+      >('SDL_TimeToWindows');
   return sdlTimeToWindowsLookupFunction(ticks, dwLowDateTime, dwHighDateTime);
 }
 
@@ -162,10 +167,11 @@ void sdlTimeToWindows(
 /// extern SDL_DECLSPEC SDL_Time SDLCALL SDL_TimeFromWindows(Uint32 dwLowDateTime, Uint32 dwHighDateTime)
 /// ```
 int sdlTimeFromWindows(int dwLowDateTime, int dwHighDateTime) {
-  final sdlTimeFromWindowsLookupFunction = libSdl3.lookupFunction<
-    Int64 Function(Uint32 dwLowDateTime, Uint32 dwHighDateTime),
-    int Function(int dwLowDateTime, int dwHighDateTime)
-  >('SDL_TimeFromWindows');
+  final sdlTimeFromWindowsLookupFunction = libSdl3
+      .lookupFunction<
+        Int64 Function(Uint32 dwLowDateTime, Uint32 dwHighDateTime),
+        int Function(int dwLowDateTime, int dwHighDateTime)
+      >('SDL_TimeFromWindows');
   return sdlTimeFromWindowsLookupFunction(dwLowDateTime, dwHighDateTime);
 }
 
@@ -183,10 +189,11 @@ int sdlTimeFromWindows(int dwLowDateTime, int dwHighDateTime) {
 /// extern SDL_DECLSPEC int SDLCALL SDL_GetDaysInMonth(int year, int month)
 /// ```
 int sdlGetDaysInMonth(int year, int month) {
-  final sdlGetDaysInMonthLookupFunction = libSdl3.lookupFunction<
-    Int32 Function(Int32 year, Int32 month),
-    int Function(int year, int month)
-  >('SDL_GetDaysInMonth');
+  final sdlGetDaysInMonthLookupFunction = libSdl3
+      .lookupFunction<
+        Int32 Function(Int32 year, Int32 month),
+        int Function(int year, int month)
+      >('SDL_GetDaysInMonth');
   return sdlGetDaysInMonthLookupFunction(year, month);
 }
 
@@ -205,10 +212,11 @@ int sdlGetDaysInMonth(int year, int month) {
 /// extern SDL_DECLSPEC int SDLCALL SDL_GetDayOfYear(int year, int month, int day)
 /// ```
 int sdlGetDayOfYear(int year, int month, int day) {
-  final sdlGetDayOfYearLookupFunction = libSdl3.lookupFunction<
-    Int32 Function(Int32 year, Int32 month, Int32 day),
-    int Function(int year, int month, int day)
-  >('SDL_GetDayOfYear');
+  final sdlGetDayOfYearLookupFunction = libSdl3
+      .lookupFunction<
+        Int32 Function(Int32 year, Int32 month, Int32 day),
+        int Function(int year, int month, int day)
+      >('SDL_GetDayOfYear');
   return sdlGetDayOfYearLookupFunction(year, month, day);
 }
 
@@ -227,9 +235,10 @@ int sdlGetDayOfYear(int year, int month, int day) {
 /// extern SDL_DECLSPEC int SDLCALL SDL_GetDayOfWeek(int year, int month, int day)
 /// ```
 int sdlGetDayOfWeek(int year, int month, int day) {
-  final sdlGetDayOfWeekLookupFunction = libSdl3.lookupFunction<
-    Int32 Function(Int32 year, Int32 month, Int32 day),
-    int Function(int year, int month, int day)
-  >('SDL_GetDayOfWeek');
+  final sdlGetDayOfWeekLookupFunction = libSdl3
+      .lookupFunction<
+        Int32 Function(Int32 year, Int32 month, Int32 day),
+        int Function(int year, int month, int day)
+      >('SDL_GetDayOfWeek');
   return sdlGetDayOfWeekLookupFunction(year, month, day);
 }

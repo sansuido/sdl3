@@ -19,10 +19,11 @@ import 'struct_sdl.dart';
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetPixelFormatName(SDL_PixelFormat format)
 /// ```
 String? sdlGetPixelFormatName(int format) {
-  final sdlGetPixelFormatNameLookupFunction = libSdl3.lookupFunction<
-    Pointer<Utf8> Function(Int32 format),
-    Pointer<Utf8> Function(int format)
-  >('SDL_GetPixelFormatName');
+  final sdlGetPixelFormatNameLookupFunction = libSdl3
+      .lookupFunction<
+        Pointer<Utf8> Function(Int32 format),
+        Pointer<Utf8> Function(int format)
+      >('SDL_GetPixelFormatName');
   final result = sdlGetPixelFormatNameLookupFunction(format);
   if (result == nullptr) {
     return null;
@@ -59,24 +60,25 @@ bool sdlGetMasksForPixelFormat(
   Pointer<Uint32> bmask,
   Pointer<Uint32> amask,
 ) {
-  final sdlGetMasksForPixelFormatLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(
-      Int32 format,
-      Pointer<Int32> bpp,
-      Pointer<Uint32> rmask,
-      Pointer<Uint32> gmask,
-      Pointer<Uint32> bmask,
-      Pointer<Uint32> amask,
-    ),
-    int Function(
-      int format,
-      Pointer<Int32> bpp,
-      Pointer<Uint32> rmask,
-      Pointer<Uint32> gmask,
-      Pointer<Uint32> bmask,
-      Pointer<Uint32> amask,
-    )
-  >('SDL_GetMasksForPixelFormat');
+  final sdlGetMasksForPixelFormatLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(
+          Int32 format,
+          Pointer<Int32> bpp,
+          Pointer<Uint32> rmask,
+          Pointer<Uint32> gmask,
+          Pointer<Uint32> bmask,
+          Pointer<Uint32> amask,
+        ),
+        int Function(
+          int format,
+          Pointer<Int32> bpp,
+          Pointer<Uint32> rmask,
+          Pointer<Uint32> gmask,
+          Pointer<Uint32> bmask,
+          Pointer<Uint32> amask,
+        )
+      >('SDL_GetMasksForPixelFormat');
   return sdlGetMasksForPixelFormatLookupFunction(
         format,
         bpp,
@@ -118,16 +120,17 @@ int sdlGetPixelFormatForMasks(
   int bmask,
   int amask,
 ) {
-  final sdlGetPixelFormatForMasksLookupFunction = libSdl3.lookupFunction<
-    Int32 Function(
-      Int32 bpp,
-      Uint32 rmask,
-      Uint32 gmask,
-      Uint32 bmask,
-      Uint32 amask,
-    ),
-    int Function(int bpp, int rmask, int gmask, int bmask, int amask)
-  >('SDL_GetPixelFormatForMasks');
+  final sdlGetPixelFormatForMasksLookupFunction = libSdl3
+      .lookupFunction<
+        Int32 Function(
+          Int32 bpp,
+          Uint32 rmask,
+          Uint32 gmask,
+          Uint32 bmask,
+          Uint32 amask,
+        ),
+        int Function(int bpp, int rmask, int gmask, int bmask, int amask)
+      >('SDL_GetPixelFormatForMasks');
   return sdlGetPixelFormatForMasksLookupFunction(
     bpp,
     rmask,
@@ -156,10 +159,11 @@ int sdlGetPixelFormatForMasks(
 /// extern SDL_DECLSPEC const SDL_PixelFormatDetails * SDLCALL SDL_GetPixelFormatDetails(SDL_PixelFormat format)
 /// ```
 Pointer<SdlPixelFormatDetails> sdlGetPixelFormatDetails(int format) {
-  final sdlGetPixelFormatDetailsLookupFunction = libSdl3.lookupFunction<
-    Pointer<SdlPixelFormatDetails> Function(Int32 format),
-    Pointer<SdlPixelFormatDetails> Function(int format)
-  >('SDL_GetPixelFormatDetails');
+  final sdlGetPixelFormatDetailsLookupFunction = libSdl3
+      .lookupFunction<
+        Pointer<SdlPixelFormatDetails> Function(Int32 format),
+        Pointer<SdlPixelFormatDetails> Function(int format)
+      >('SDL_GetPixelFormatDetails');
   return sdlGetPixelFormatDetailsLookupFunction(format);
 }
 
@@ -185,10 +189,11 @@ Pointer<SdlPixelFormatDetails> sdlGetPixelFormatDetails(int format) {
 /// extern SDL_DECLSPEC SDL_Palette * SDLCALL SDL_CreatePalette(int ncolors)
 /// ```
 Pointer<SdlPalette> sdlCreatePalette(int ncolors) {
-  final sdlCreatePaletteLookupFunction = libSdl3.lookupFunction<
-    Pointer<SdlPalette> Function(Int32 ncolors),
-    Pointer<SdlPalette> Function(int ncolors)
-  >('SDL_CreatePalette');
+  final sdlCreatePaletteLookupFunction = libSdl3
+      .lookupFunction<
+        Pointer<SdlPalette> Function(Int32 ncolors),
+        Pointer<SdlPalette> Function(int ncolors)
+      >('SDL_CreatePalette');
   return sdlCreatePaletteLookupFunction(ncolors);
 }
 
@@ -216,20 +221,21 @@ bool sdlSetPaletteColors(
   int firstcolor,
   int ncolors,
 ) {
-  final sdlSetPaletteColorsLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(
-      Pointer<SdlPalette> palette,
-      Pointer<SdlColor> colors,
-      Int32 firstcolor,
-      Int32 ncolors,
-    ),
-    int Function(
-      Pointer<SdlPalette> palette,
-      Pointer<SdlColor> colors,
-      int firstcolor,
-      int ncolors,
-    )
-  >('SDL_SetPaletteColors');
+  final sdlSetPaletteColorsLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<SdlPalette> palette,
+          Pointer<SdlColor> colors,
+          Int32 firstcolor,
+          Int32 ncolors,
+        ),
+        int Function(
+          Pointer<SdlPalette> palette,
+          Pointer<SdlColor> colors,
+          int firstcolor,
+          int ncolors,
+        )
+      >('SDL_SetPaletteColors');
   return sdlSetPaletteColorsLookupFunction(
         palette,
         colors,
@@ -255,10 +261,11 @@ bool sdlSetPaletteColors(
 /// extern SDL_DECLSPEC void SDLCALL SDL_DestroyPalette(SDL_Palette *palette)
 /// ```
 void sdlDestroyPalette(Pointer<SdlPalette> palette) {
-  final sdlDestroyPaletteLookupFunction = libSdl3.lookupFunction<
-    Void Function(Pointer<SdlPalette> palette),
-    void Function(Pointer<SdlPalette> palette)
-  >('SDL_DestroyPalette');
+  final sdlDestroyPaletteLookupFunction = libSdl3
+      .lookupFunction<
+        Void Function(Pointer<SdlPalette> palette),
+        void Function(Pointer<SdlPalette> palette)
+      >('SDL_DestroyPalette');
   return sdlDestroyPaletteLookupFunction(palette);
 }
 
@@ -308,22 +315,23 @@ int sdlMapRgb(
   int g,
   int b,
 ) {
-  final sdlMapRgbLookupFunction = libSdl3.lookupFunction<
-    Uint32 Function(
-      Pointer<SdlPixelFormatDetails> format,
-      Pointer<SdlPalette> palette,
-      Uint8 r,
-      Uint8 g,
-      Uint8 b,
-    ),
-    int Function(
-      Pointer<SdlPixelFormatDetails> format,
-      Pointer<SdlPalette> palette,
-      int r,
-      int g,
-      int b,
-    )
-  >('SDL_MapRGB');
+  final sdlMapRgbLookupFunction = libSdl3
+      .lookupFunction<
+        Uint32 Function(
+          Pointer<SdlPixelFormatDetails> format,
+          Pointer<SdlPalette> palette,
+          Uint8 r,
+          Uint8 g,
+          Uint8 b,
+        ),
+        int Function(
+          Pointer<SdlPixelFormatDetails> format,
+          Pointer<SdlPalette> palette,
+          int r,
+          int g,
+          int b,
+        )
+      >('SDL_MapRGB');
   return sdlMapRgbLookupFunction(format, palette, r, g, b);
 }
 
@@ -375,24 +383,25 @@ int sdlMapRgba(
   int b,
   int a,
 ) {
-  final sdlMapRgbaLookupFunction = libSdl3.lookupFunction<
-    Uint32 Function(
-      Pointer<SdlPixelFormatDetails> format,
-      Pointer<SdlPalette> palette,
-      Uint8 r,
-      Uint8 g,
-      Uint8 b,
-      Uint8 a,
-    ),
-    int Function(
-      Pointer<SdlPixelFormatDetails> format,
-      Pointer<SdlPalette> palette,
-      int r,
-      int g,
-      int b,
-      int a,
-    )
-  >('SDL_MapRGBA');
+  final sdlMapRgbaLookupFunction = libSdl3
+      .lookupFunction<
+        Uint32 Function(
+          Pointer<SdlPixelFormatDetails> format,
+          Pointer<SdlPalette> palette,
+          Uint8 r,
+          Uint8 g,
+          Uint8 b,
+          Uint8 a,
+        ),
+        int Function(
+          Pointer<SdlPixelFormatDetails> format,
+          Pointer<SdlPalette> palette,
+          int r,
+          int g,
+          int b,
+          int a,
+        )
+      >('SDL_MapRGBA');
   return sdlMapRgbaLookupFunction(format, palette, r, g, b, a);
 }
 
@@ -433,24 +442,25 @@ void sdlGetRgb(
   Pointer<Uint8> g,
   Pointer<Uint8> b,
 ) {
-  final sdlGetRgbLookupFunction = libSdl3.lookupFunction<
-    Void Function(
-      Uint32 pixelvalue,
-      Pointer<SdlPixelFormatDetails> format,
-      Pointer<SdlPalette> palette,
-      Pointer<Uint8> r,
-      Pointer<Uint8> g,
-      Pointer<Uint8> b,
-    ),
-    void Function(
-      int pixelvalue,
-      Pointer<SdlPixelFormatDetails> format,
-      Pointer<SdlPalette> palette,
-      Pointer<Uint8> r,
-      Pointer<Uint8> g,
-      Pointer<Uint8> b,
-    )
-  >('SDL_GetRGB');
+  final sdlGetRgbLookupFunction = libSdl3
+      .lookupFunction<
+        Void Function(
+          Uint32 pixelvalue,
+          Pointer<SdlPixelFormatDetails> format,
+          Pointer<SdlPalette> palette,
+          Pointer<Uint8> r,
+          Pointer<Uint8> g,
+          Pointer<Uint8> b,
+        ),
+        void Function(
+          int pixelvalue,
+          Pointer<SdlPixelFormatDetails> format,
+          Pointer<SdlPalette> palette,
+          Pointer<Uint8> r,
+          Pointer<Uint8> g,
+          Pointer<Uint8> b,
+        )
+      >('SDL_GetRGB');
   return sdlGetRgbLookupFunction(pixelvalue, format, palette, r, g, b);
 }
 
@@ -496,25 +506,26 @@ void sdlGetRgba(
   Pointer<Uint8> b,
   Pointer<Uint8> a,
 ) {
-  final sdlGetRgbaLookupFunction = libSdl3.lookupFunction<
-    Void Function(
-      Uint32 pixelvalue,
-      Pointer<SdlPixelFormatDetails> format,
-      Pointer<SdlPalette> palette,
-      Pointer<Uint8> r,
-      Pointer<Uint8> g,
-      Pointer<Uint8> b,
-      Pointer<Uint8> a,
-    ),
-    void Function(
-      int pixelvalue,
-      Pointer<SdlPixelFormatDetails> format,
-      Pointer<SdlPalette> palette,
-      Pointer<Uint8> r,
-      Pointer<Uint8> g,
-      Pointer<Uint8> b,
-      Pointer<Uint8> a,
-    )
-  >('SDL_GetRGBA');
+  final sdlGetRgbaLookupFunction = libSdl3
+      .lookupFunction<
+        Void Function(
+          Uint32 pixelvalue,
+          Pointer<SdlPixelFormatDetails> format,
+          Pointer<SdlPalette> palette,
+          Pointer<Uint8> r,
+          Pointer<Uint8> g,
+          Pointer<Uint8> b,
+          Pointer<Uint8> a,
+        ),
+        void Function(
+          int pixelvalue,
+          Pointer<SdlPixelFormatDetails> format,
+          Pointer<SdlPalette> palette,
+          Pointer<Uint8> r,
+          Pointer<Uint8> g,
+          Pointer<Uint8> b,
+          Pointer<Uint8> a,
+        )
+      >('SDL_GetRGBA');
   return sdlGetRgbaLookupFunction(pixelvalue, format, palette, r, g, b, a);
 }

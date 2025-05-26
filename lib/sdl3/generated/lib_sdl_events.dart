@@ -84,22 +84,23 @@ int sdlPeepEvents(
   int minType,
   int maxType,
 ) {
-  final sdlPeepEventsLookupFunction = libSdl3.lookupFunction<
-    Int32 Function(
-      Pointer<SdlEvent> events,
-      Int32 numevents,
-      Int32 action,
-      Uint32 minType,
-      Uint32 maxType,
-    ),
-    int Function(
-      Pointer<SdlEvent> events,
-      int numevents,
-      int action,
-      int minType,
-      int maxType,
-    )
-  >('SDL_PeepEvents');
+  final sdlPeepEventsLookupFunction = libSdl3
+      .lookupFunction<
+        Int32 Function(
+          Pointer<SdlEvent> events,
+          Int32 numevents,
+          Int32 action,
+          Uint32 minType,
+          Uint32 maxType,
+        ),
+        int Function(
+          Pointer<SdlEvent> events,
+          int numevents,
+          int action,
+          int minType,
+          int maxType,
+        )
+      >('SDL_PeepEvents');
   return sdlPeepEventsLookupFunction(
     events,
     numevents,
@@ -158,10 +159,11 @@ bool sdlHasEvent(int type) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_HasEvents(Uint32 minType, Uint32 maxType)
 /// ```
 bool sdlHasEvents(int minType, int maxType) {
-  final sdlHasEventsLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Uint32 minType, Uint32 maxType),
-    int Function(int minType, int maxType)
-  >('SDL_HasEvents');
+  final sdlHasEventsLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(Uint32 minType, Uint32 maxType),
+        int Function(int minType, int maxType)
+      >('SDL_HasEvents');
   return sdlHasEventsLookupFunction(minType, maxType) == 1;
 }
 
@@ -231,10 +233,11 @@ void sdlFlushEvent(int type) {
 /// extern SDL_DECLSPEC void SDLCALL SDL_FlushEvents(Uint32 minType, Uint32 maxType)
 /// ```
 void sdlFlushEvents(int minType, int maxType) {
-  final sdlFlushEventsLookupFunction = libSdl3.lookupFunction<
-    Void Function(Uint32 minType, Uint32 maxType),
-    void Function(int minType, int maxType)
-  >('SDL_FlushEvents');
+  final sdlFlushEventsLookupFunction = libSdl3
+      .lookupFunction<
+        Void Function(Uint32 minType, Uint32 maxType),
+        void Function(int minType, int maxType)
+      >('SDL_FlushEvents');
   return sdlFlushEventsLookupFunction(minType, maxType);
 }
 
@@ -286,10 +289,11 @@ void sdlFlushEvents(int minType, int maxType) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_PollEvent(SDL_Event *event)
 /// ```
 bool sdlPollEvent(Pointer<SdlEvent> event) {
-  final sdlPollEventLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Pointer<SdlEvent> event),
-    int Function(Pointer<SdlEvent> event)
-  >('SDL_PollEvent');
+  final sdlPollEventLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(Pointer<SdlEvent> event),
+        int Function(Pointer<SdlEvent> event)
+      >('SDL_PollEvent');
   return sdlPollEventLookupFunction(event) == 1;
 }
 
@@ -319,10 +323,11 @@ bool sdlPollEvent(Pointer<SdlEvent> event) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_WaitEvent(SDL_Event *event)
 /// ```
 bool sdlWaitEvent(Pointer<SdlEvent> event) {
-  final sdlWaitEventLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Pointer<SdlEvent> event),
-    int Function(Pointer<SdlEvent> event)
-  >('SDL_WaitEvent');
+  final sdlWaitEventLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(Pointer<SdlEvent> event),
+        int Function(Pointer<SdlEvent> event)
+      >('SDL_WaitEvent');
   return sdlWaitEventLookupFunction(event) == 1;
 }
 
@@ -358,10 +363,11 @@ bool sdlWaitEvent(Pointer<SdlEvent> event) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_WaitEventTimeout(SDL_Event *event, Sint32 timeoutMS)
 /// ```
 bool sdlWaitEventTimeout(Pointer<SdlEvent> event, int timeoutMs) {
-  final sdlWaitEventTimeoutLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Pointer<SdlEvent> event, Int32 timeoutMs),
-    int Function(Pointer<SdlEvent> event, int timeoutMs)
-  >('SDL_WaitEventTimeout');
+  final sdlWaitEventTimeoutLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(Pointer<SdlEvent> event, Int32 timeoutMs),
+        int Function(Pointer<SdlEvent> event, int timeoutMs)
+      >('SDL_WaitEventTimeout');
   return sdlWaitEventTimeoutLookupFunction(event, timeoutMs) == 1;
 }
 
@@ -401,10 +407,11 @@ bool sdlWaitEventTimeout(Pointer<SdlEvent> event, int timeoutMs) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_PushEvent(SDL_Event *event)
 /// ```
 bool sdlPushEvent(Pointer<SdlEvent> event) {
-  final sdlPushEventLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Pointer<SdlEvent> event),
-    int Function(Pointer<SdlEvent> event)
-  >('SDL_PushEvent');
+  final sdlPushEventLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(Pointer<SdlEvent> event),
+        int Function(Pointer<SdlEvent> event)
+      >('SDL_PushEvent');
   return sdlPushEventLookupFunction(event) == 1;
 }
 
@@ -454,16 +461,17 @@ void sdlSetEventFilter(
   Pointer<NativeFunction<SdlEventFilter>> filter,
   Pointer<NativeType> userdata,
 ) {
-  final sdlSetEventFilterLookupFunction = libSdl3.lookupFunction<
-    Void Function(
-      Pointer<NativeFunction<SdlEventFilter>> filter,
-      Pointer<NativeType> userdata,
-    ),
-    void Function(
-      Pointer<NativeFunction<SdlEventFilter>> filter,
-      Pointer<NativeType> userdata,
-    )
-  >('SDL_SetEventFilter');
+  final sdlSetEventFilterLookupFunction = libSdl3
+      .lookupFunction<
+        Void Function(
+          Pointer<NativeFunction<SdlEventFilter>> filter,
+          Pointer<NativeType> userdata,
+        ),
+        void Function(
+          Pointer<NativeFunction<SdlEventFilter>> filter,
+          Pointer<NativeType> userdata,
+        )
+      >('SDL_SetEventFilter');
   return sdlSetEventFilterLookupFunction(filter, userdata);
 }
 
@@ -491,16 +499,17 @@ bool sdlGetEventFilter(
   Pointer<Pointer<NativeFunction<SdlEventFilter>>> filter,
   Pointer<Pointer<NativeType>> userdata,
 ) {
-  final sdlGetEventFilterLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(
-      Pointer<Pointer<NativeFunction<SdlEventFilter>>> filter,
-      Pointer<Pointer<NativeType>> userdata,
-    ),
-    int Function(
-      Pointer<Pointer<NativeFunction<SdlEventFilter>>> filter,
-      Pointer<Pointer<NativeType>> userdata,
-    )
-  >('SDL_GetEventFilter');
+  final sdlGetEventFilterLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<Pointer<NativeFunction<SdlEventFilter>>> filter,
+          Pointer<Pointer<NativeType>> userdata,
+        ),
+        int Function(
+          Pointer<Pointer<NativeFunction<SdlEventFilter>>> filter,
+          Pointer<Pointer<NativeType>> userdata,
+        )
+      >('SDL_GetEventFilter');
   return sdlGetEventFilterLookupFunction(filter, userdata) == 1;
 }
 
@@ -541,16 +550,17 @@ bool sdlAddEventWatch(
   Pointer<NativeFunction<SdlEventFilter>> filter,
   Pointer<NativeType> userdata,
 ) {
-  final sdlAddEventWatchLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(
-      Pointer<NativeFunction<SdlEventFilter>> filter,
-      Pointer<NativeType> userdata,
-    ),
-    int Function(
-      Pointer<NativeFunction<SdlEventFilter>> filter,
-      Pointer<NativeType> userdata,
-    )
-  >('SDL_AddEventWatch');
+  final sdlAddEventWatchLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<NativeFunction<SdlEventFilter>> filter,
+          Pointer<NativeType> userdata,
+        ),
+        int Function(
+          Pointer<NativeFunction<SdlEventFilter>> filter,
+          Pointer<NativeType> userdata,
+        )
+      >('SDL_AddEventWatch');
   return sdlAddEventWatchLookupFunction(filter, userdata) == 1;
 }
 
@@ -576,16 +586,17 @@ void sdlRemoveEventWatch(
   Pointer<NativeFunction<SdlEventFilter>> filter,
   Pointer<NativeType> userdata,
 ) {
-  final sdlRemoveEventWatchLookupFunction = libSdl3.lookupFunction<
-    Void Function(
-      Pointer<NativeFunction<SdlEventFilter>> filter,
-      Pointer<NativeType> userdata,
-    ),
-    void Function(
-      Pointer<NativeFunction<SdlEventFilter>> filter,
-      Pointer<NativeType> userdata,
-    )
-  >('SDL_RemoveEventWatch');
+  final sdlRemoveEventWatchLookupFunction = libSdl3
+      .lookupFunction<
+        Void Function(
+          Pointer<NativeFunction<SdlEventFilter>> filter,
+          Pointer<NativeType> userdata,
+        ),
+        void Function(
+          Pointer<NativeFunction<SdlEventFilter>> filter,
+          Pointer<NativeType> userdata,
+        )
+      >('SDL_RemoveEventWatch');
   return sdlRemoveEventWatchLookupFunction(filter, userdata);
 }
 
@@ -614,16 +625,17 @@ void sdlFilterEvents(
   Pointer<NativeFunction<SdlEventFilter>> filter,
   Pointer<NativeType> userdata,
 ) {
-  final sdlFilterEventsLookupFunction = libSdl3.lookupFunction<
-    Void Function(
-      Pointer<NativeFunction<SdlEventFilter>> filter,
-      Pointer<NativeType> userdata,
-    ),
-    void Function(
-      Pointer<NativeFunction<SdlEventFilter>> filter,
-      Pointer<NativeType> userdata,
-    )
-  >('SDL_FilterEvents');
+  final sdlFilterEventsLookupFunction = libSdl3
+      .lookupFunction<
+        Void Function(
+          Pointer<NativeFunction<SdlEventFilter>> filter,
+          Pointer<NativeType> userdata,
+        ),
+        void Function(
+          Pointer<NativeFunction<SdlEventFilter>> filter,
+          Pointer<NativeType> userdata,
+        )
+      >('SDL_FilterEvents');
   return sdlFilterEventsLookupFunction(filter, userdata);
 }
 
@@ -643,10 +655,11 @@ void sdlFilterEvents(
 /// extern SDL_DECLSPEC void SDLCALL SDL_SetEventEnabled(Uint32 type, bool enabled)
 /// ```
 void sdlSetEventEnabled(int type, bool enabled) {
-  final sdlSetEventEnabledLookupFunction = libSdl3.lookupFunction<
-    Void Function(Uint32 type, Uint8 enabled),
-    void Function(int type, int enabled)
-  >('SDL_SetEventEnabled');
+  final sdlSetEventEnabledLookupFunction = libSdl3
+      .lookupFunction<
+        Void Function(Uint32 type, Uint8 enabled),
+        void Function(int type, int enabled)
+      >('SDL_SetEventEnabled');
   return sdlSetEventEnabledLookupFunction(type, enabled ? 1 : 0);
 }
 
@@ -691,10 +704,11 @@ bool sdlEventEnabled(int type) {
 /// extern SDL_DECLSPEC Uint32 SDLCALL SDL_RegisterEvents(int numevents)
 /// ```
 int sdlRegisterEvents(int numevents) {
-  final sdlRegisterEventsLookupFunction = libSdl3.lookupFunction<
-    Uint32 Function(Int32 numevents),
-    int Function(int numevents)
-  >('SDL_RegisterEvents');
+  final sdlRegisterEventsLookupFunction = libSdl3
+      .lookupFunction<
+        Uint32 Function(Int32 numevents),
+        int Function(int numevents)
+      >('SDL_RegisterEvents');
   return sdlRegisterEventsLookupFunction(numevents);
 }
 
@@ -716,10 +730,11 @@ int sdlRegisterEvents(int numevents) {
 /// extern SDL_DECLSPEC SDL_Window * SDLCALL SDL_GetWindowFromEvent(const SDL_Event *event)
 /// ```
 Pointer<SdlWindow> sdlGetWindowFromEvent(Pointer<SdlEvent> event) {
-  final sdlGetWindowFromEventLookupFunction = libSdl3.lookupFunction<
-    Pointer<SdlWindow> Function(Pointer<SdlEvent> event),
-    Pointer<SdlWindow> Function(Pointer<SdlEvent> event)
-  >('SDL_GetWindowFromEvent');
+  final sdlGetWindowFromEventLookupFunction = libSdl3
+      .lookupFunction<
+        Pointer<SdlWindow> Function(Pointer<SdlEvent> event),
+        Pointer<SdlWindow> Function(Pointer<SdlEvent> event)
+      >('SDL_GetWindowFromEvent');
   return sdlGetWindowFromEventLookupFunction(event);
 }
 
@@ -761,9 +776,14 @@ int sdlGetEventDescription(
   Pointer<Int8> buf,
   int buflen,
 ) {
-  final sdlGetEventDescriptionLookupFunction = libSdl3.lookupFunction<
-    Int32 Function(Pointer<SdlEvent> event, Pointer<Int8> buf, Int32 buflen),
-    int Function(Pointer<SdlEvent> event, Pointer<Int8> buf, int buflen)
-  >('SDL_GetEventDescription');
+  final sdlGetEventDescriptionLookupFunction = libSdl3
+      .lookupFunction<
+        Int32 Function(
+          Pointer<SdlEvent> event,
+          Pointer<Int8> buf,
+          Int32 buflen,
+        ),
+        int Function(Pointer<SdlEvent> event, Pointer<Int8> buf, int buflen)
+      >('SDL_GetEventDescription');
   return sdlGetEventDescriptionLookupFunction(event, buf, buflen);
 }

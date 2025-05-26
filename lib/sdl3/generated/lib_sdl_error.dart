@@ -34,10 +34,11 @@ import 'lib_sdl.dart';
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetError(SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(1)
 /// ```
 bool sdlSetError(String? fmt) {
-  final sdlSetErrorLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Pointer<Utf8> fmt),
-    int Function(Pointer<Utf8> fmt)
-  >('SDL_SetError');
+  final sdlSetErrorLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(Pointer<Utf8> fmt),
+        int Function(Pointer<Utf8> fmt)
+      >('SDL_SetError');
   final fmtPointer = fmt != null ? fmt.toNativeUtf8() : nullptr;
   final result = sdlSetErrorLookupFunction(fmtPointer) == 1;
   calloc.free(fmtPointer);
@@ -65,10 +66,11 @@ bool sdlSetError(String? fmt) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetErrorV(SDL_PRINTF_FORMAT_STRING const char *fmt, va_list ap) SDL_PRINTF_VARARG_FUNCV(1)
 /// ```
 bool sdlSetErrorV(String? fmt) {
-  final sdlSetErrorVLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Pointer<Utf8> fmt),
-    int Function(Pointer<Utf8> fmt)
-  >('SDL_SetErrorV');
+  final sdlSetErrorVLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(Pointer<Utf8> fmt),
+        int Function(Pointer<Utf8> fmt)
+      >('SDL_SetErrorV');
   final fmtPointer = fmt != null ? fmt.toNativeUtf8() : nullptr;
   final result = sdlSetErrorVLookupFunction(fmtPointer) == 1;
   calloc.free(fmtPointer);

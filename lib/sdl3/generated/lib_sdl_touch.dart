@@ -23,10 +23,11 @@ import 'struct_sdl.dart';
 /// extern SDL_DECLSPEC SDL_TouchID * SDLCALL SDL_GetTouchDevices(int *count)
 /// ```
 Pointer<Uint64> sdlGetTouchDevices(Pointer<Int32> count) {
-  final sdlGetTouchDevicesLookupFunction = libSdl3.lookupFunction<
-    Pointer<Uint64> Function(Pointer<Int32> count),
-    Pointer<Uint64> Function(Pointer<Int32> count)
-  >('SDL_GetTouchDevices');
+  final sdlGetTouchDevicesLookupFunction = libSdl3
+      .lookupFunction<
+        Pointer<Uint64> Function(Pointer<Int32> count),
+        Pointer<Uint64> Function(Pointer<Int32> count)
+      >('SDL_GetTouchDevices');
   return sdlGetTouchDevicesLookupFunction(count);
 }
 
@@ -43,10 +44,11 @@ Pointer<Uint64> sdlGetTouchDevices(Pointer<Int32> count) {
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetTouchDeviceName(SDL_TouchID touchID)
 /// ```
 String? sdlGetTouchDeviceName(int touchId) {
-  final sdlGetTouchDeviceNameLookupFunction = libSdl3.lookupFunction<
-    Pointer<Utf8> Function(Uint64 touchId),
-    Pointer<Utf8> Function(int touchId)
-  >('SDL_GetTouchDeviceName');
+  final sdlGetTouchDeviceNameLookupFunction = libSdl3
+      .lookupFunction<
+        Pointer<Utf8> Function(Uint64 touchId),
+        Pointer<Utf8> Function(int touchId)
+      >('SDL_GetTouchDeviceName');
   final result = sdlGetTouchDeviceNameLookupFunction(touchId);
   if (result == nullptr) {
     return null;
@@ -66,10 +68,11 @@ String? sdlGetTouchDeviceName(int touchId) {
 /// extern SDL_DECLSPEC SDL_TouchDeviceType SDLCALL SDL_GetTouchDeviceType(SDL_TouchID touchID)
 /// ```
 int sdlGetTouchDeviceType(int touchId) {
-  final sdlGetTouchDeviceTypeLookupFunction = libSdl3.lookupFunction<
-    Int32 Function(Uint64 touchId),
-    int Function(int touchId)
-  >('SDL_GetTouchDeviceType');
+  final sdlGetTouchDeviceTypeLookupFunction = libSdl3
+      .lookupFunction<
+        Int32 Function(Uint64 touchId),
+        int Function(int touchId)
+      >('SDL_GetTouchDeviceType');
   return sdlGetTouchDeviceTypeLookupFunction(touchId);
 }
 
@@ -93,9 +96,13 @@ Pointer<Pointer<SdlFinger>> sdlGetTouchFingers(
   int touchId,
   Pointer<Int32> count,
 ) {
-  final sdlGetTouchFingersLookupFunction = libSdl3.lookupFunction<
-    Pointer<Pointer<SdlFinger>> Function(Uint64 touchId, Pointer<Int32> count),
-    Pointer<Pointer<SdlFinger>> Function(int touchId, Pointer<Int32> count)
-  >('SDL_GetTouchFingers');
+  final sdlGetTouchFingersLookupFunction = libSdl3
+      .lookupFunction<
+        Pointer<Pointer<SdlFinger>> Function(
+          Uint64 touchId,
+          Pointer<Int32> count,
+        ),
+        Pointer<Pointer<SdlFinger>> Function(int touchId, Pointer<Int32> count)
+      >('SDL_GetTouchFingers');
   return sdlGetTouchFingersLookupFunction(touchId, count);
 }

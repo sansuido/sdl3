@@ -10,18 +10,16 @@ import '../../generated/struct_sdl.dart';
 extension PointEx on math.Point<double> {
   // dependence package:ffi
   Pointer<SdlFPoint> calloc() {
-    var result =
-        ffi.calloc<SdlFPoint>()
-          ..ref.x = x
-          ..ref.y = y;
+    var result = ffi.calloc<SdlFPoint>()
+      ..ref.x = x
+      ..ref.y = y;
     return result;
   }
 
   Pointer<SdlPoint> callocInt() {
-    var result =
-        ffi.calloc<SdlPoint>()
-          ..ref.x = x.toInt()
-          ..ref.y = y.toInt();
+    var result = ffi.calloc<SdlPoint>()
+      ..ref.x = x.toInt()
+      ..ref.y = y.toInt();
     return result;
   }
 

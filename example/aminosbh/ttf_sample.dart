@@ -92,8 +92,8 @@ int main() {
         return 0;
       }
       var textColor = calloc<SdlColor>()..setRgba(0, 0, 0, SDL_ALPHA_OPAQUE);
-      var backgroundColor =
-          calloc<SdlColor>()..setRgba(255, 255, 255, SDL_ALPHA_OPAQUE);
+      var backgroundColor = calloc<SdlColor>()
+        ..setRgba(255, 255, 255, SDL_ALPHA_OPAQUE);
       Pointer<SdlTexture> text = nullptr;
       late Rectangle<double> textRect;
       var textSurface = font.renderTextShaded(

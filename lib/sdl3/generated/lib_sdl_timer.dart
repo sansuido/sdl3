@@ -215,18 +215,19 @@ int sdlAddTimer(
   Pointer<NativeFunction<SdlTimerCallback>> callback,
   Pointer<NativeType> userdata,
 ) {
-  final sdlAddTimerLookupFunction = libSdl3.lookupFunction<
-    Uint32 Function(
-      Uint32 interval,
-      Pointer<NativeFunction<SdlTimerCallback>> callback,
-      Pointer<NativeType> userdata,
-    ),
-    int Function(
-      int interval,
-      Pointer<NativeFunction<SdlTimerCallback>> callback,
-      Pointer<NativeType> userdata,
-    )
-  >('SDL_AddTimer');
+  final sdlAddTimerLookupFunction = libSdl3
+      .lookupFunction<
+        Uint32 Function(
+          Uint32 interval,
+          Pointer<NativeFunction<SdlTimerCallback>> callback,
+          Pointer<NativeType> userdata,
+        ),
+        int Function(
+          int interval,
+          Pointer<NativeFunction<SdlTimerCallback>> callback,
+          Pointer<NativeType> userdata,
+        )
+      >('SDL_AddTimer');
   return sdlAddTimerLookupFunction(interval, callback, userdata);
 }
 
@@ -272,18 +273,19 @@ int sdlAddTimerNs(
   Pointer<NativeFunction<SdlNsTimerCallback>> callback,
   Pointer<NativeType> userdata,
 ) {
-  final sdlAddTimerNsLookupFunction = libSdl3.lookupFunction<
-    Uint32 Function(
-      Uint64 interval,
-      Pointer<NativeFunction<SdlNsTimerCallback>> callback,
-      Pointer<NativeType> userdata,
-    ),
-    int Function(
-      int interval,
-      Pointer<NativeFunction<SdlNsTimerCallback>> callback,
-      Pointer<NativeType> userdata,
-    )
-  >('SDL_AddTimerNS');
+  final sdlAddTimerNsLookupFunction = libSdl3
+      .lookupFunction<
+        Uint32 Function(
+          Uint64 interval,
+          Pointer<NativeFunction<SdlNsTimerCallback>> callback,
+          Pointer<NativeType> userdata,
+        ),
+        int Function(
+          int interval,
+          Pointer<NativeFunction<SdlNsTimerCallback>> callback,
+          Pointer<NativeType> userdata,
+        )
+      >('SDL_AddTimerNS');
   return sdlAddTimerNsLookupFunction(interval, callback, userdata);
 }
 

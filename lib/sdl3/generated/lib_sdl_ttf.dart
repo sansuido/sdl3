@@ -48,18 +48,19 @@ void ttfGetFreeTypeVersion(
   Pointer<Int32> minor,
   Pointer<Int32> patch,
 ) {
-  final ttfGetFreeTypeVersionLookupFunction = libSdl3Ttf.lookupFunction<
-    Void Function(
-      Pointer<Int32> major,
-      Pointer<Int32> minor,
-      Pointer<Int32> patch,
-    ),
-    void Function(
-      Pointer<Int32> major,
-      Pointer<Int32> minor,
-      Pointer<Int32> patch,
-    )
-  >('TTF_GetFreeTypeVersion');
+  final ttfGetFreeTypeVersionLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Void Function(
+          Pointer<Int32> major,
+          Pointer<Int32> minor,
+          Pointer<Int32> patch,
+        ),
+        void Function(
+          Pointer<Int32> major,
+          Pointer<Int32> minor,
+          Pointer<Int32> patch,
+        )
+      >('TTF_GetFreeTypeVersion');
   return ttfGetFreeTypeVersionLookupFunction(major, minor, patch);
 }
 
@@ -84,18 +85,19 @@ void ttfGetHarfBuzzVersion(
   Pointer<Int32> minor,
   Pointer<Int32> patch,
 ) {
-  final ttfGetHarfBuzzVersionLookupFunction = libSdl3Ttf.lookupFunction<
-    Void Function(
-      Pointer<Int32> major,
-      Pointer<Int32> minor,
-      Pointer<Int32> patch,
-    ),
-    void Function(
-      Pointer<Int32> major,
-      Pointer<Int32> minor,
-      Pointer<Int32> patch,
-    )
-  >('TTF_GetHarfBuzzVersion');
+  final ttfGetHarfBuzzVersionLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Void Function(
+          Pointer<Int32> major,
+          Pointer<Int32> minor,
+          Pointer<Int32> patch,
+        ),
+        void Function(
+          Pointer<Int32> major,
+          Pointer<Int32> minor,
+          Pointer<Int32> patch,
+        )
+      >('TTF_GetHarfBuzzVersion');
   return ttfGetHarfBuzzVersionLookupFunction(major, minor, patch);
 }
 
@@ -148,10 +150,11 @@ bool ttfInit() {
 /// extern SDL_DECLSPEC TTF_Font * SDLCALL TTF_OpenFont(const char *file, float ptsize)
 /// ```
 Pointer<TtfFont> ttfOpenFont(String? file, double ptsize) {
-  final ttfOpenFontLookupFunction = libSdl3Ttf.lookupFunction<
-    Pointer<TtfFont> Function(Pointer<Utf8> file, Float ptsize),
-    Pointer<TtfFont> Function(Pointer<Utf8> file, double ptsize)
-  >('TTF_OpenFont');
+  final ttfOpenFontLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Pointer<TtfFont> Function(Pointer<Utf8> file, Float ptsize),
+        Pointer<TtfFont> Function(Pointer<Utf8> file, double ptsize)
+      >('TTF_OpenFont');
   final filePointer = file != null ? file.toNativeUtf8() : nullptr;
   final result = ttfOpenFontLookupFunction(filePointer, ptsize);
   calloc.free(filePointer);
@@ -191,18 +194,19 @@ Pointer<TtfFont> ttfOpenFontIo(
   bool closeio,
   double ptsize,
 ) {
-  final ttfOpenFontIoLookupFunction = libSdl3Ttf.lookupFunction<
-    Pointer<TtfFont> Function(
-      Pointer<SdlIoStream> src,
-      Uint8 closeio,
-      Float ptsize,
-    ),
-    Pointer<TtfFont> Function(
-      Pointer<SdlIoStream> src,
-      int closeio,
-      double ptsize,
-    )
-  >('TTF_OpenFontIO');
+  final ttfOpenFontIoLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Pointer<TtfFont> Function(
+          Pointer<SdlIoStream> src,
+          Uint8 closeio,
+          Float ptsize,
+        ),
+        Pointer<TtfFont> Function(
+          Pointer<SdlIoStream> src,
+          int closeio,
+          double ptsize,
+        )
+      >('TTF_OpenFontIO');
   return ttfOpenFontIoLookupFunction(src, closeio ? 1 : 0, ptsize);
 }
 
@@ -214,11 +218,11 @@ Pointer<TtfFont> ttfOpenFontIo(
 /// - `TTF_PROP_FONT_CREATE_FILENAME_STRING`: the font file to open, if an
 /// SDL_IOStream isn't being used. This is required if
 /// `TTF_PROP_FONT_CREATE_IOSTREAM_POINTER` and
-/// `TTF_PROP_FONT_CREATE_EXISTING_FONT` aren't set.
+/// `TTF_PROP_FONT_CREATE_EXISTING_FONT_POINTER` aren't set.
 /// - `TTF_PROP_FONT_CREATE_IOSTREAM_POINTER`: an SDL_IOStream containing the
 /// font to be opened. This should not be closed until the font is closed.
 /// This is required if `TTF_PROP_FONT_CREATE_FILENAME_STRING` and
-/// `TTF_PROP_FONT_CREATE_EXISTING_FONT` aren't set.
+/// `TTF_PROP_FONT_CREATE_EXISTING_FONT_POINTER` aren't set.
 /// - `TTF_PROP_FONT_CREATE_IOSTREAM_OFFSET_NUMBER`: the offset in the iostream
 /// for the beginning of the font, defaults to 0.
 /// - `TTF_PROP_FONT_CREATE_IOSTREAM_AUTOCLOSE_BOOLEAN`: true if closing the
@@ -235,9 +239,9 @@ Pointer<TtfFont> ttfOpenFontIo(
 /// - `TTF_PROP_FONT_CREATE_VERTICAL_DPI_NUMBER`: the vertical DPI to use for
 /// font rendering, defaults to `TTF_PROP_FONT_CREATE_HORIZONTAL_DPI_NUMBER`
 /// if set, or 72 otherwise.
-/// - `TTF_PROP_FONT_CREATE_EXISTING_FONT`: an optional TTF_Font that, if set,
-/// will be used as the font data source and the initial size and style of
-/// the new font.
+/// - `TTF_PROP_FONT_CREATE_EXISTING_FONT_POINTER`: an optional TTF_Font that,
+/// if set, will be used as the font data source and the initial size and
+/// style of the new font.
 ///
 /// \param props the properties to use.
 /// \returns a valid TTF_Font, or NULL on failure; call SDL_GetError() for more
@@ -253,10 +257,11 @@ Pointer<TtfFont> ttfOpenFontIo(
 /// extern SDL_DECLSPEC TTF_Font * SDLCALL TTF_OpenFontWithProperties(SDL_PropertiesID props)
 /// ```
 Pointer<TtfFont> ttfOpenFontWithProperties(int props) {
-  final ttfOpenFontWithPropertiesLookupFunction = libSdl3Ttf.lookupFunction<
-    Pointer<TtfFont> Function(Uint32 props),
-    Pointer<TtfFont> Function(int props)
-  >('TTF_OpenFontWithProperties');
+  final ttfOpenFontWithPropertiesLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Pointer<TtfFont> Function(Uint32 props),
+        Pointer<TtfFont> Function(int props)
+      >('TTF_OpenFontWithProperties');
   return ttfOpenFontWithPropertiesLookupFunction(props);
 }
 
@@ -283,10 +288,11 @@ Pointer<TtfFont> ttfOpenFontWithProperties(int props) {
 /// extern SDL_DECLSPEC TTF_Font * SDLCALL TTF_CopyFont(TTF_Font *existing_font)
 /// ```
 Pointer<TtfFont> ttfCopyFont(Pointer<TtfFont> existingFont) {
-  final ttfCopyFontLookupFunction = libSdl3Ttf.lookupFunction<
-    Pointer<TtfFont> Function(Pointer<TtfFont> existingFont),
-    Pointer<TtfFont> Function(Pointer<TtfFont> existingFont)
-  >('TTF_CopyFont');
+  final ttfCopyFontLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Pointer<TtfFont> Function(Pointer<TtfFont> existingFont),
+        Pointer<TtfFont> Function(Pointer<TtfFont> existingFont)
+      >('TTF_CopyFont');
   return ttfCopyFontLookupFunction(existingFont);
 }
 
@@ -316,10 +322,11 @@ Pointer<TtfFont> ttfCopyFont(Pointer<TtfFont> existingFont) {
 /// extern SDL_DECLSPEC SDL_PropertiesID SDLCALL TTF_GetFontProperties(TTF_Font *font)
 /// ```
 int ttfGetFontProperties(Pointer<TtfFont> font) {
-  final ttfGetFontPropertiesLookupFunction = libSdl3Ttf.lookupFunction<
-    Uint32 Function(Pointer<TtfFont> font),
-    int Function(Pointer<TtfFont> font)
-  >('TTF_GetFontProperties');
+  final ttfGetFontPropertiesLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Uint32 Function(Pointer<TtfFont> font),
+        int Function(Pointer<TtfFont> font)
+      >('TTF_GetFontProperties');
   return ttfGetFontPropertiesLookupFunction(font);
 }
 
@@ -342,10 +349,11 @@ int ttfGetFontProperties(Pointer<TtfFont> font) {
 /// extern SDL_DECLSPEC Uint32 SDLCALL TTF_GetFontGeneration(TTF_Font *font)
 /// ```
 int ttfGetFontGeneration(Pointer<TtfFont> font) {
-  final ttfGetFontGenerationLookupFunction = libSdl3Ttf.lookupFunction<
-    Uint32 Function(Pointer<TtfFont> font),
-    int Function(Pointer<TtfFont> font)
-  >('TTF_GetFontGeneration');
+  final ttfGetFontGenerationLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Uint32 Function(Pointer<TtfFont> font),
+        int Function(Pointer<TtfFont> font)
+      >('TTF_GetFontGeneration');
   return ttfGetFontGenerationLookupFunction(font);
 }
 
@@ -376,10 +384,11 @@ int ttfGetFontGeneration(Pointer<TtfFont> font) {
 /// extern SDL_DECLSPEC bool SDLCALL TTF_AddFallbackFont(TTF_Font *font, TTF_Font *fallback)
 /// ```
 bool ttfAddFallbackFont(Pointer<TtfFont> font, Pointer<TtfFont> fallback) {
-  final ttfAddFallbackFontLookupFunction = libSdl3Ttf.lookupFunction<
-    Uint8 Function(Pointer<TtfFont> font, Pointer<TtfFont> fallback),
-    int Function(Pointer<TtfFont> font, Pointer<TtfFont> fallback)
-  >('TTF_AddFallbackFont');
+  final ttfAddFallbackFontLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Uint8 Function(Pointer<TtfFont> font, Pointer<TtfFont> fallback),
+        int Function(Pointer<TtfFont> font, Pointer<TtfFont> fallback)
+      >('TTF_AddFallbackFont');
   return ttfAddFallbackFontLookupFunction(font, fallback) == 1;
 }
 
@@ -403,10 +412,11 @@ bool ttfAddFallbackFont(Pointer<TtfFont> font, Pointer<TtfFont> fallback) {
 /// extern SDL_DECLSPEC void SDLCALL TTF_RemoveFallbackFont(TTF_Font *font, TTF_Font *fallback)
 /// ```
 void ttfRemoveFallbackFont(Pointer<TtfFont> font, Pointer<TtfFont> fallback) {
-  final ttfRemoveFallbackFontLookupFunction = libSdl3Ttf.lookupFunction<
-    Void Function(Pointer<TtfFont> font, Pointer<TtfFont> fallback),
-    void Function(Pointer<TtfFont> font, Pointer<TtfFont> fallback)
-  >('TTF_RemoveFallbackFont');
+  final ttfRemoveFallbackFontLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Void Function(Pointer<TtfFont> font, Pointer<TtfFont> fallback),
+        void Function(Pointer<TtfFont> font, Pointer<TtfFont> fallback)
+      >('TTF_RemoveFallbackFont');
   return ttfRemoveFallbackFontLookupFunction(font, fallback);
 }
 
@@ -429,10 +439,11 @@ void ttfRemoveFallbackFont(Pointer<TtfFont> font, Pointer<TtfFont> fallback) {
 /// extern SDL_DECLSPEC void SDLCALL TTF_ClearFallbackFonts(TTF_Font *font)
 /// ```
 void ttfClearFallbackFonts(Pointer<TtfFont> font) {
-  final ttfClearFallbackFontsLookupFunction = libSdl3Ttf.lookupFunction<
-    Void Function(Pointer<TtfFont> font),
-    void Function(Pointer<TtfFont> font)
-  >('TTF_ClearFallbackFonts');
+  final ttfClearFallbackFontsLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Void Function(Pointer<TtfFont> font),
+        void Function(Pointer<TtfFont> font)
+      >('TTF_ClearFallbackFonts');
   return ttfClearFallbackFontsLookupFunction(font);
 }
 
@@ -458,10 +469,11 @@ void ttfClearFallbackFonts(Pointer<TtfFont> font) {
 /// extern SDL_DECLSPEC bool SDLCALL TTF_SetFontSize(TTF_Font *font, float ptsize)
 /// ```
 bool ttfSetFontSize(Pointer<TtfFont> font, double ptsize) {
-  final ttfSetFontSizeLookupFunction = libSdl3Ttf.lookupFunction<
-    Uint8 Function(Pointer<TtfFont> font, Float ptsize),
-    int Function(Pointer<TtfFont> font, double ptsize)
-  >('TTF_SetFontSize');
+  final ttfSetFontSizeLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Uint8 Function(Pointer<TtfFont> font, Float ptsize),
+        int Function(Pointer<TtfFont> font, double ptsize)
+      >('TTF_SetFontSize');
   return ttfSetFontSizeLookupFunction(font, ptsize) == 1;
 }
 
@@ -495,10 +507,16 @@ bool ttfSetFontSizeDpi(
   int hdpi,
   int vdpi,
 ) {
-  final ttfSetFontSizeDpiLookupFunction = libSdl3Ttf.lookupFunction<
-    Uint8 Function(Pointer<TtfFont> font, Float ptsize, Int32 hdpi, Int32 vdpi),
-    int Function(Pointer<TtfFont> font, double ptsize, int hdpi, int vdpi)
-  >('TTF_SetFontSizeDPI');
+  final ttfSetFontSizeDpiLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<TtfFont> font,
+          Float ptsize,
+          Int32 hdpi,
+          Int32 vdpi,
+        ),
+        int Function(Pointer<TtfFont> font, double ptsize, int hdpi, int vdpi)
+      >('TTF_SetFontSizeDPI');
   return ttfSetFontSizeDpiLookupFunction(font, ptsize, hdpi, vdpi) == 1;
 }
 
@@ -521,10 +539,11 @@ bool ttfSetFontSizeDpi(
 /// extern SDL_DECLSPEC float SDLCALL TTF_GetFontSize(TTF_Font *font)
 /// ```
 double ttfGetFontSize(Pointer<TtfFont> font) {
-  final ttfGetFontSizeLookupFunction = libSdl3Ttf.lookupFunction<
-    Float Function(Pointer<TtfFont> font),
-    double Function(Pointer<TtfFont> font)
-  >('TTF_GetFontSize');
+  final ttfGetFontSizeLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Float Function(Pointer<TtfFont> font),
+        double Function(Pointer<TtfFont> font)
+      >('TTF_GetFontSize');
   return ttfGetFontSizeLookupFunction(font);
 }
 
@@ -552,18 +571,19 @@ bool ttfGetFontDpi(
   Pointer<Int32> hdpi,
   Pointer<Int32> vdpi,
 ) {
-  final ttfGetFontDpiLookupFunction = libSdl3Ttf.lookupFunction<
-    Uint8 Function(
-      Pointer<TtfFont> font,
-      Pointer<Int32> hdpi,
-      Pointer<Int32> vdpi,
-    ),
-    int Function(
-      Pointer<TtfFont> font,
-      Pointer<Int32> hdpi,
-      Pointer<Int32> vdpi,
-    )
-  >('TTF_GetFontDPI');
+  final ttfGetFontDpiLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<TtfFont> font,
+          Pointer<Int32> hdpi,
+          Pointer<Int32> vdpi,
+        ),
+        int Function(
+          Pointer<TtfFont> font,
+          Pointer<Int32> hdpi,
+          Pointer<Int32> vdpi,
+        )
+      >('TTF_GetFontDPI');
   return ttfGetFontDpiLookupFunction(font, hdpi, vdpi) == 1;
 }
 
@@ -595,10 +615,11 @@ bool ttfGetFontDpi(
 /// extern SDL_DECLSPEC void SDLCALL TTF_SetFontStyle(TTF_Font *font, TTF_FontStyleFlags style)
 /// ```
 void ttfSetFontStyle(Pointer<TtfFont> font, int style) {
-  final ttfSetFontStyleLookupFunction = libSdl3Ttf.lookupFunction<
-    Void Function(Pointer<TtfFont> font, Uint32 style),
-    void Function(Pointer<TtfFont> font, int style)
-  >('TTF_SetFontStyle');
+  final ttfSetFontStyleLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Void Function(Pointer<TtfFont> font, Uint32 style),
+        void Function(Pointer<TtfFont> font, int style)
+      >('TTF_SetFontStyle');
   return ttfSetFontStyleLookupFunction(font, style);
 }
 
@@ -626,10 +647,11 @@ void ttfSetFontStyle(Pointer<TtfFont> font, int style) {
 /// extern SDL_DECLSPEC TTF_FontStyleFlags SDLCALL TTF_GetFontStyle(const TTF_Font *font)
 /// ```
 int ttfGetFontStyle(Pointer<TtfFont> font) {
-  final ttfGetFontStyleLookupFunction = libSdl3Ttf.lookupFunction<
-    Uint32 Function(Pointer<TtfFont> font),
-    int Function(Pointer<TtfFont> font)
-  >('TTF_GetFontStyle');
+  final ttfGetFontStyleLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Uint32 Function(Pointer<TtfFont> font),
+        int Function(Pointer<TtfFont> font)
+      >('TTF_GetFontStyle');
   return ttfGetFontStyleLookupFunction(font);
 }
 
@@ -659,10 +681,11 @@ int ttfGetFontStyle(Pointer<TtfFont> font) {
 /// extern SDL_DECLSPEC bool SDLCALL TTF_SetFontOutline(TTF_Font *font, int outline)
 /// ```
 bool ttfSetFontOutline(Pointer<TtfFont> font, int outline) {
-  final ttfSetFontOutlineLookupFunction = libSdl3Ttf.lookupFunction<
-    Uint8 Function(Pointer<TtfFont> font, Int32 outline),
-    int Function(Pointer<TtfFont> font, int outline)
-  >('TTF_SetFontOutline');
+  final ttfSetFontOutlineLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Uint8 Function(Pointer<TtfFont> font, Int32 outline),
+        int Function(Pointer<TtfFont> font, int outline)
+      >('TTF_SetFontOutline');
   return ttfSetFontOutlineLookupFunction(font, outline) == 1;
 }
 
@@ -682,10 +705,11 @@ bool ttfSetFontOutline(Pointer<TtfFont> font, int outline) {
 /// extern SDL_DECLSPEC int SDLCALL TTF_GetFontOutline(const TTF_Font *font)
 /// ```
 int ttfGetFontOutline(Pointer<TtfFont> font) {
-  final ttfGetFontOutlineLookupFunction = libSdl3Ttf.lookupFunction<
-    Int32 Function(Pointer<TtfFont> font),
-    int Function(Pointer<TtfFont> font)
-  >('TTF_GetFontOutline');
+  final ttfGetFontOutlineLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Int32 Function(Pointer<TtfFont> font),
+        int Function(Pointer<TtfFont> font)
+      >('TTF_GetFontOutline');
   return ttfGetFontOutlineLookupFunction(font);
 }
 
@@ -717,10 +741,11 @@ int ttfGetFontOutline(Pointer<TtfFont> font) {
 /// extern SDL_DECLSPEC void SDLCALL TTF_SetFontHinting(TTF_Font *font, TTF_HintingFlags hinting)
 /// ```
 void ttfSetFontHinting(Pointer<TtfFont> font, int hinting) {
-  final ttfSetFontHintingLookupFunction = libSdl3Ttf.lookupFunction<
-    Void Function(Pointer<TtfFont> font, Int32 hinting),
-    void Function(Pointer<TtfFont> font, int hinting)
-  >('TTF_SetFontHinting');
+  final ttfSetFontHintingLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Void Function(Pointer<TtfFont> font, Int32 hinting),
+        void Function(Pointer<TtfFont> font, int hinting)
+      >('TTF_SetFontHinting');
   return ttfSetFontHintingLookupFunction(font, hinting);
 }
 
@@ -738,10 +763,11 @@ void ttfSetFontHinting(Pointer<TtfFont> font, int hinting) {
 /// extern SDL_DECLSPEC int SDLCALL TTF_GetNumFontFaces(const TTF_Font *font)
 /// ```
 int ttfGetNumFontFaces(Pointer<TtfFont> font) {
-  final ttfGetNumFontFacesLookupFunction = libSdl3Ttf.lookupFunction<
-    Int32 Function(Pointer<TtfFont> font),
-    int Function(Pointer<TtfFont> font)
-  >('TTF_GetNumFontFaces');
+  final ttfGetNumFontFacesLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Int32 Function(Pointer<TtfFont> font),
+        int Function(Pointer<TtfFont> font)
+      >('TTF_GetNumFontFaces');
   return ttfGetNumFontFacesLookupFunction(font);
 }
 
@@ -770,10 +796,11 @@ int ttfGetNumFontFaces(Pointer<TtfFont> font) {
 /// extern SDL_DECLSPEC TTF_HintingFlags SDLCALL TTF_GetFontHinting(const TTF_Font *font)
 /// ```
 int ttfGetFontHinting(Pointer<TtfFont> font) {
-  final ttfGetFontHintingLookupFunction = libSdl3Ttf.lookupFunction<
-    Int32 Function(Pointer<TtfFont> font),
-    int Function(Pointer<TtfFont> font)
-  >('TTF_GetFontHinting');
+  final ttfGetFontHintingLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Int32 Function(Pointer<TtfFont> font),
+        int Function(Pointer<TtfFont> font)
+      >('TTF_GetFontHinting');
   return ttfGetFontHintingLookupFunction(font);
 }
 
@@ -805,10 +832,11 @@ int ttfGetFontHinting(Pointer<TtfFont> font) {
 /// extern SDL_DECLSPEC bool SDLCALL TTF_SetFontSDF(TTF_Font *font, bool enabled)
 /// ```
 bool ttfSetFontSdf(Pointer<TtfFont> font, bool enabled) {
-  final ttfSetFontSdfLookupFunction = libSdl3Ttf.lookupFunction<
-    Uint8 Function(Pointer<TtfFont> font, Uint8 enabled),
-    int Function(Pointer<TtfFont> font, int enabled)
-  >('TTF_SetFontSDF');
+  final ttfSetFontSdfLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Uint8 Function(Pointer<TtfFont> font, Uint8 enabled),
+        int Function(Pointer<TtfFont> font, int enabled)
+      >('TTF_SetFontSDF');
   return ttfSetFontSdfLookupFunction(font, enabled ? 1 : 0) == 1;
 }
 
@@ -828,10 +856,11 @@ bool ttfSetFontSdf(Pointer<TtfFont> font, bool enabled) {
 /// extern SDL_DECLSPEC bool SDLCALL TTF_GetFontSDF(const TTF_Font *font)
 /// ```
 bool ttfGetFontSdf(Pointer<TtfFont> font) {
-  final ttfGetFontSdfLookupFunction = libSdl3Ttf.lookupFunction<
-    Uint8 Function(Pointer<TtfFont> font),
-    int Function(Pointer<TtfFont> font)
-  >('TTF_GetFontSDF');
+  final ttfGetFontSdfLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Uint8 Function(Pointer<TtfFont> font),
+        int Function(Pointer<TtfFont> font)
+      >('TTF_GetFontSDF');
   return ttfGetFontSdfLookupFunction(font) == 1;
 }
 
@@ -850,10 +879,11 @@ bool ttfGetFontSdf(Pointer<TtfFont> font) {
 /// extern SDL_DECLSPEC int SDLCALL TTF_GetFontWeight(const TTF_Font *font)
 /// ```
 int ttfGetFontWeight(Pointer<TtfFont> font) {
-  final ttfGetFontWeightLookupFunction = libSdl3Ttf.lookupFunction<
-    Int32 Function(Pointer<TtfFont> font),
-    int Function(Pointer<TtfFont> font)
-  >('TTF_GetFontWeight');
+  final ttfGetFontWeightLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Int32 Function(Pointer<TtfFont> font),
+        int Function(Pointer<TtfFont> font)
+      >('TTF_GetFontWeight');
   return ttfGetFontWeightLookupFunction(font);
 }
 
@@ -876,10 +906,11 @@ int ttfGetFontWeight(Pointer<TtfFont> font) {
 /// extern SDL_DECLSPEC void SDLCALL TTF_SetFontWrapAlignment(TTF_Font *font, TTF_HorizontalAlignment align)
 /// ```
 void ttfSetFontWrapAlignment(Pointer<TtfFont> font, int align) {
-  final ttfSetFontWrapAlignmentLookupFunction = libSdl3Ttf.lookupFunction<
-    Void Function(Pointer<TtfFont> font, Int32 align),
-    void Function(Pointer<TtfFont> font, int align)
-  >('TTF_SetFontWrapAlignment');
+  final ttfSetFontWrapAlignmentLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Void Function(Pointer<TtfFont> font, Int32 align),
+        void Function(Pointer<TtfFont> font, int align)
+      >('TTF_SetFontWrapAlignment');
   return ttfSetFontWrapAlignmentLookupFunction(font, align);
 }
 
@@ -899,10 +930,11 @@ void ttfSetFontWrapAlignment(Pointer<TtfFont> font, int align) {
 /// extern SDL_DECLSPEC TTF_HorizontalAlignment SDLCALL TTF_GetFontWrapAlignment(const TTF_Font *font)
 /// ```
 int ttfGetFontWrapAlignment(Pointer<TtfFont> font) {
-  final ttfGetFontWrapAlignmentLookupFunction = libSdl3Ttf.lookupFunction<
-    Int32 Function(Pointer<TtfFont> font),
-    int Function(Pointer<TtfFont> font)
-  >('TTF_GetFontWrapAlignment');
+  final ttfGetFontWrapAlignmentLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Int32 Function(Pointer<TtfFont> font),
+        int Function(Pointer<TtfFont> font)
+      >('TTF_GetFontWrapAlignment');
   return ttfGetFontWrapAlignmentLookupFunction(font);
 }
 
@@ -922,10 +954,11 @@ int ttfGetFontWrapAlignment(Pointer<TtfFont> font) {
 /// extern SDL_DECLSPEC int SDLCALL TTF_GetFontHeight(const TTF_Font *font)
 /// ```
 int ttfGetFontHeight(Pointer<TtfFont> font) {
-  final ttfGetFontHeightLookupFunction = libSdl3Ttf.lookupFunction<
-    Int32 Function(Pointer<TtfFont> font),
-    int Function(Pointer<TtfFont> font)
-  >('TTF_GetFontHeight');
+  final ttfGetFontHeightLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Int32 Function(Pointer<TtfFont> font),
+        int Function(Pointer<TtfFont> font)
+      >('TTF_GetFontHeight');
   return ttfGetFontHeightLookupFunction(font);
 }
 
@@ -945,10 +978,11 @@ int ttfGetFontHeight(Pointer<TtfFont> font) {
 /// extern SDL_DECLSPEC int SDLCALL TTF_GetFontAscent(const TTF_Font *font)
 /// ```
 int ttfGetFontAscent(Pointer<TtfFont> font) {
-  final ttfGetFontAscentLookupFunction = libSdl3Ttf.lookupFunction<
-    Int32 Function(Pointer<TtfFont> font),
-    int Function(Pointer<TtfFont> font)
-  >('TTF_GetFontAscent');
+  final ttfGetFontAscentLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Int32 Function(Pointer<TtfFont> font),
+        int Function(Pointer<TtfFont> font)
+      >('TTF_GetFontAscent');
   return ttfGetFontAscentLookupFunction(font);
 }
 
@@ -968,10 +1002,11 @@ int ttfGetFontAscent(Pointer<TtfFont> font) {
 /// extern SDL_DECLSPEC int SDLCALL TTF_GetFontDescent(const TTF_Font *font)
 /// ```
 int ttfGetFontDescent(Pointer<TtfFont> font) {
-  final ttfGetFontDescentLookupFunction = libSdl3Ttf.lookupFunction<
-    Int32 Function(Pointer<TtfFont> font),
-    int Function(Pointer<TtfFont> font)
-  >('TTF_GetFontDescent');
+  final ttfGetFontDescentLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Int32 Function(Pointer<TtfFont> font),
+        int Function(Pointer<TtfFont> font)
+      >('TTF_GetFontDescent');
   return ttfGetFontDescentLookupFunction(font);
 }
 
@@ -994,10 +1029,11 @@ int ttfGetFontDescent(Pointer<TtfFont> font) {
 /// extern SDL_DECLSPEC void SDLCALL TTF_SetFontLineSkip(TTF_Font *font, int lineskip)
 /// ```
 void ttfSetFontLineSkip(Pointer<TtfFont> font, int lineskip) {
-  final ttfSetFontLineSkipLookupFunction = libSdl3Ttf.lookupFunction<
-    Void Function(Pointer<TtfFont> font, Int32 lineskip),
-    void Function(Pointer<TtfFont> font, int lineskip)
-  >('TTF_SetFontLineSkip');
+  final ttfSetFontLineSkipLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Void Function(Pointer<TtfFont> font, Int32 lineskip),
+        void Function(Pointer<TtfFont> font, int lineskip)
+      >('TTF_SetFontLineSkip');
   return ttfSetFontLineSkipLookupFunction(font, lineskip);
 }
 
@@ -1017,10 +1053,11 @@ void ttfSetFontLineSkip(Pointer<TtfFont> font, int lineskip) {
 /// extern SDL_DECLSPEC int SDLCALL TTF_GetFontLineSkip(const TTF_Font *font)
 /// ```
 int ttfGetFontLineSkip(Pointer<TtfFont> font) {
-  final ttfGetFontLineSkipLookupFunction = libSdl3Ttf.lookupFunction<
-    Int32 Function(Pointer<TtfFont> font),
-    int Function(Pointer<TtfFont> font)
-  >('TTF_GetFontLineSkip');
+  final ttfGetFontLineSkipLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Int32 Function(Pointer<TtfFont> font),
+        int Function(Pointer<TtfFont> font)
+      >('TTF_GetFontLineSkip');
   return ttfGetFontLineSkipLookupFunction(font);
 }
 
@@ -1048,10 +1085,11 @@ int ttfGetFontLineSkip(Pointer<TtfFont> font) {
 /// extern SDL_DECLSPEC void SDLCALL TTF_SetFontKerning(TTF_Font *font, bool enabled)
 /// ```
 void ttfSetFontKerning(Pointer<TtfFont> font, bool enabled) {
-  final ttfSetFontKerningLookupFunction = libSdl3Ttf.lookupFunction<
-    Void Function(Pointer<TtfFont> font, Uint8 enabled),
-    void Function(Pointer<TtfFont> font, int enabled)
-  >('TTF_SetFontKerning');
+  final ttfSetFontKerningLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Void Function(Pointer<TtfFont> font, Uint8 enabled),
+        void Function(Pointer<TtfFont> font, int enabled)
+      >('TTF_SetFontKerning');
   return ttfSetFontKerningLookupFunction(font, enabled ? 1 : 0);
 }
 
@@ -1071,10 +1109,11 @@ void ttfSetFontKerning(Pointer<TtfFont> font, bool enabled) {
 /// extern SDL_DECLSPEC bool SDLCALL TTF_GetFontKerning(const TTF_Font *font)
 /// ```
 bool ttfGetFontKerning(Pointer<TtfFont> font) {
-  final ttfGetFontKerningLookupFunction = libSdl3Ttf.lookupFunction<
-    Uint8 Function(Pointer<TtfFont> font),
-    int Function(Pointer<TtfFont> font)
-  >('TTF_GetFontKerning');
+  final ttfGetFontKerningLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Uint8 Function(Pointer<TtfFont> font),
+        int Function(Pointer<TtfFont> font)
+      >('TTF_GetFontKerning');
   return ttfGetFontKerningLookupFunction(font) == 1;
 }
 
@@ -1098,10 +1137,11 @@ bool ttfGetFontKerning(Pointer<TtfFont> font) {
 /// extern SDL_DECLSPEC bool SDLCALL TTF_FontIsFixedWidth(const TTF_Font *font)
 /// ```
 bool ttfFontIsFixedWidth(Pointer<TtfFont> font) {
-  final ttfFontIsFixedWidthLookupFunction = libSdl3Ttf.lookupFunction<
-    Uint8 Function(Pointer<TtfFont> font),
-    int Function(Pointer<TtfFont> font)
-  >('TTF_FontIsFixedWidth');
+  final ttfFontIsFixedWidthLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Uint8 Function(Pointer<TtfFont> font),
+        int Function(Pointer<TtfFont> font)
+      >('TTF_FontIsFixedWidth');
   return ttfFontIsFixedWidthLookupFunction(font) == 1;
 }
 
@@ -1123,10 +1163,11 @@ bool ttfFontIsFixedWidth(Pointer<TtfFont> font) {
 /// extern SDL_DECLSPEC bool SDLCALL TTF_FontIsScalable(const TTF_Font *font)
 /// ```
 bool ttfFontIsScalable(Pointer<TtfFont> font) {
-  final ttfFontIsScalableLookupFunction = libSdl3Ttf.lookupFunction<
-    Uint8 Function(Pointer<TtfFont> font),
-    int Function(Pointer<TtfFont> font)
-  >('TTF_FontIsScalable');
+  final ttfFontIsScalableLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Uint8 Function(Pointer<TtfFont> font),
+        int Function(Pointer<TtfFont> font)
+      >('TTF_FontIsScalable');
   return ttfFontIsScalableLookupFunction(font) == 1;
 }
 
@@ -1150,10 +1191,11 @@ bool ttfFontIsScalable(Pointer<TtfFont> font) {
 /// extern SDL_DECLSPEC const char * SDLCALL TTF_GetFontFamilyName(const TTF_Font *font)
 /// ```
 String? ttfGetFontFamilyName(Pointer<TtfFont> font) {
-  final ttfGetFontFamilyNameLookupFunction = libSdl3Ttf.lookupFunction<
-    Pointer<Utf8> Function(Pointer<TtfFont> font),
-    Pointer<Utf8> Function(Pointer<TtfFont> font)
-  >('TTF_GetFontFamilyName');
+  final ttfGetFontFamilyNameLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Pointer<Utf8> Function(Pointer<TtfFont> font),
+        Pointer<Utf8> Function(Pointer<TtfFont> font)
+      >('TTF_GetFontFamilyName');
   final result = ttfGetFontFamilyNameLookupFunction(font);
   if (result == nullptr) {
     return null;
@@ -1181,10 +1223,11 @@ String? ttfGetFontFamilyName(Pointer<TtfFont> font) {
 /// extern SDL_DECLSPEC const char * SDLCALL TTF_GetFontStyleName(const TTF_Font *font)
 /// ```
 String? ttfGetFontStyleName(Pointer<TtfFont> font) {
-  final ttfGetFontStyleNameLookupFunction = libSdl3Ttf.lookupFunction<
-    Pointer<Utf8> Function(Pointer<TtfFont> font),
-    Pointer<Utf8> Function(Pointer<TtfFont> font)
-  >('TTF_GetFontStyleName');
+  final ttfGetFontStyleNameLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Pointer<Utf8> Function(Pointer<TtfFont> font),
+        Pointer<Utf8> Function(Pointer<TtfFont> font)
+      >('TTF_GetFontStyleName');
   final result = ttfGetFontStyleNameLookupFunction(font);
   if (result == nullptr) {
     return null;
@@ -1214,10 +1257,11 @@ String? ttfGetFontStyleName(Pointer<TtfFont> font) {
 /// extern SDL_DECLSPEC bool SDLCALL TTF_SetFontDirection(TTF_Font *font, TTF_Direction direction)
 /// ```
 bool ttfSetFontDirection(Pointer<TtfFont> font, int direction) {
-  final ttfSetFontDirectionLookupFunction = libSdl3Ttf.lookupFunction<
-    Uint8 Function(Pointer<TtfFont> font, Int32 direction),
-    int Function(Pointer<TtfFont> font, int direction)
-  >('TTF_SetFontDirection');
+  final ttfSetFontDirectionLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Uint8 Function(Pointer<TtfFont> font, Int32 direction),
+        int Function(Pointer<TtfFont> font, int direction)
+      >('TTF_SetFontDirection');
   return ttfSetFontDirectionLookupFunction(font, direction) == 1;
 }
 
@@ -1238,10 +1282,11 @@ bool ttfSetFontDirection(Pointer<TtfFont> font, int direction) {
 /// extern SDL_DECLSPEC TTF_Direction SDLCALL TTF_GetFontDirection(TTF_Font *font)
 /// ```
 int ttfGetFontDirection(Pointer<TtfFont> font) {
-  final ttfGetFontDirectionLookupFunction = libSdl3Ttf.lookupFunction<
-    Int32 Function(Pointer<TtfFont> font),
-    int Function(Pointer<TtfFont> font)
-  >('TTF_GetFontDirection');
+  final ttfGetFontDirectionLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Int32 Function(Pointer<TtfFont> font),
+        int Function(Pointer<TtfFont> font)
+      >('TTF_GetFontDirection');
   return ttfGetFontDirectionLookupFunction(font);
 }
 
@@ -1261,10 +1306,11 @@ int ttfGetFontDirection(Pointer<TtfFont> font) {
 /// extern SDL_DECLSPEC Uint32 SDLCALL TTF_StringToTag(const char *string)
 /// ```
 int ttfStringToTag(String? string) {
-  final ttfStringToTagLookupFunction = libSdl3Ttf.lookupFunction<
-    Uint32 Function(Pointer<Utf8> string),
-    int Function(Pointer<Utf8> string)
-  >('TTF_StringToTag');
+  final ttfStringToTagLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Uint32 Function(Pointer<Utf8> string),
+        int Function(Pointer<Utf8> string)
+      >('TTF_StringToTag');
   final stringPointer = string != null ? string.toNativeUtf8() : nullptr;
   final result = ttfStringToTagLookupFunction(stringPointer);
   calloc.free(stringPointer);
@@ -1290,10 +1336,11 @@ int ttfStringToTag(String? string) {
 /// extern SDL_DECLSPEC void SDLCALL TTF_TagToString(Uint32 tag, char *string, size_t size)
 /// ```
 void ttfTagToString(int tag, Pointer<Int8> string, int size) {
-  final ttfTagToStringLookupFunction = libSdl3Ttf.lookupFunction<
-    Void Function(Uint32 tag, Pointer<Int8> string, Uint32 size),
-    void Function(int tag, Pointer<Int8> string, int size)
-  >('TTF_TagToString');
+  final ttfTagToStringLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Void Function(Uint32 tag, Pointer<Int8> string, Uint32 size),
+        void Function(int tag, Pointer<Int8> string, int size)
+      >('TTF_TagToString');
   return ttfTagToStringLookupFunction(tag, string, size);
 }
 
@@ -1322,10 +1369,11 @@ void ttfTagToString(int tag, Pointer<Int8> string, int size) {
 /// extern SDL_DECLSPEC bool SDLCALL TTF_SetFontScript(TTF_Font *font, Uint32 script)
 /// ```
 bool ttfSetFontScript(Pointer<TtfFont> font, int script) {
-  final ttfSetFontScriptLookupFunction = libSdl3Ttf.lookupFunction<
-    Uint8 Function(Pointer<TtfFont> font, Uint32 script),
-    int Function(Pointer<TtfFont> font, int script)
-  >('TTF_SetFontScript');
+  final ttfSetFontScriptLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Uint8 Function(Pointer<TtfFont> font, Uint32 script),
+        int Function(Pointer<TtfFont> font, int script)
+      >('TTF_SetFontScript');
   return ttfSetFontScriptLookupFunction(font, script) == 1;
 }
 
@@ -1348,10 +1396,11 @@ bool ttfSetFontScript(Pointer<TtfFont> font, int script) {
 /// extern SDL_DECLSPEC Uint32 SDLCALL TTF_GetFontScript(TTF_Font *font)
 /// ```
 int ttfGetFontScript(Pointer<TtfFont> font) {
-  final ttfGetFontScriptLookupFunction = libSdl3Ttf.lookupFunction<
-    Uint32 Function(Pointer<TtfFont> font),
-    int Function(Pointer<TtfFont> font)
-  >('TTF_GetFontScript');
+  final ttfGetFontScriptLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Uint32 Function(Pointer<TtfFont> font),
+        int Function(Pointer<TtfFont> font)
+      >('TTF_GetFontScript');
   return ttfGetFontScriptLookupFunction(font);
 }
 
@@ -1404,12 +1453,14 @@ int ttfGetGlyphScript(int ch) {
 /// extern SDL_DECLSPEC bool SDLCALL TTF_SetFontLanguage(TTF_Font *font, const char *language_bcp47)
 /// ```
 bool ttfSetFontLanguage(Pointer<TtfFont> font, String? languageBcp47) {
-  final ttfSetFontLanguageLookupFunction = libSdl3Ttf.lookupFunction<
-    Uint8 Function(Pointer<TtfFont> font, Pointer<Utf8> languageBcp47),
-    int Function(Pointer<TtfFont> font, Pointer<Utf8> languageBcp47)
-  >('TTF_SetFontLanguage');
-  final languageBcp47Pointer =
-      languageBcp47 != null ? languageBcp47.toNativeUtf8() : nullptr;
+  final ttfSetFontLanguageLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Uint8 Function(Pointer<TtfFont> font, Pointer<Utf8> languageBcp47),
+        int Function(Pointer<TtfFont> font, Pointer<Utf8> languageBcp47)
+      >('TTF_SetFontLanguage');
+  final languageBcp47Pointer = languageBcp47 != null
+      ? languageBcp47.toNativeUtf8()
+      : nullptr;
   final result =
       ttfSetFontLanguageLookupFunction(font, languageBcp47Pointer) == 1;
   calloc.free(languageBcp47Pointer);
@@ -1432,10 +1483,11 @@ bool ttfSetFontLanguage(Pointer<TtfFont> font, String? languageBcp47) {
 /// extern SDL_DECLSPEC bool SDLCALL TTF_FontHasGlyph(TTF_Font *font, Uint32 ch)
 /// ```
 bool ttfFontHasGlyph(Pointer<TtfFont> font, int ch) {
-  final ttfFontHasGlyphLookupFunction = libSdl3Ttf.lookupFunction<
-    Uint8 Function(Pointer<TtfFont> font, Uint32 ch),
-    int Function(Pointer<TtfFont> font, int ch)
-  >('TTF_FontHasGlyph');
+  final ttfFontHasGlyphLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Uint8 Function(Pointer<TtfFont> font, Uint32 ch),
+        int Function(Pointer<TtfFont> font, int ch)
+      >('TTF_FontHasGlyph');
   return ttfFontHasGlyphLookupFunction(font, ch) == 1;
 }
 
@@ -1462,18 +1514,19 @@ Pointer<SdlSurface> ttfGetGlyphImage(
   int ch,
   Pointer<Int32> imageType,
 ) {
-  final ttfGetGlyphImageLookupFunction = libSdl3Ttf.lookupFunction<
-    Pointer<SdlSurface> Function(
-      Pointer<TtfFont> font,
-      Uint32 ch,
-      Pointer<Int32> imageType,
-    ),
-    Pointer<SdlSurface> Function(
-      Pointer<TtfFont> font,
-      int ch,
-      Pointer<Int32> imageType,
-    )
-  >('TTF_GetGlyphImage');
+  final ttfGetGlyphImageLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Pointer<SdlSurface> Function(
+          Pointer<TtfFont> font,
+          Uint32 ch,
+          Pointer<Int32> imageType,
+        ),
+        Pointer<SdlSurface> Function(
+          Pointer<TtfFont> font,
+          int ch,
+          Pointer<Int32> imageType,
+        )
+      >('TTF_GetGlyphImage');
   return ttfGetGlyphImageLookupFunction(font, ch, imageType);
 }
 
@@ -1503,18 +1556,19 @@ Pointer<SdlSurface> ttfGetGlyphImageForIndex(
   int glyphIndex,
   Pointer<Int32> imageType,
 ) {
-  final ttfGetGlyphImageForIndexLookupFunction = libSdl3Ttf.lookupFunction<
-    Pointer<SdlSurface> Function(
-      Pointer<TtfFont> font,
-      Uint32 glyphIndex,
-      Pointer<Int32> imageType,
-    ),
-    Pointer<SdlSurface> Function(
-      Pointer<TtfFont> font,
-      int glyphIndex,
-      Pointer<Int32> imageType,
-    )
-  >('TTF_GetGlyphImageForIndex');
+  final ttfGetGlyphImageForIndexLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Pointer<SdlSurface> Function(
+          Pointer<TtfFont> font,
+          Uint32 glyphIndex,
+          Pointer<Int32> imageType,
+        ),
+        Pointer<SdlSurface> Function(
+          Pointer<TtfFont> font,
+          int glyphIndex,
+          Pointer<Int32> imageType,
+        )
+      >('TTF_GetGlyphImageForIndex');
   return ttfGetGlyphImageForIndexLookupFunction(font, glyphIndex, imageType);
 }
 
@@ -1559,26 +1613,27 @@ bool ttfGetGlyphMetrics(
   Pointer<Int32> maxy,
   Pointer<Int32> advance,
 ) {
-  final ttfGetGlyphMetricsLookupFunction = libSdl3Ttf.lookupFunction<
-    Uint8 Function(
-      Pointer<TtfFont> font,
-      Uint32 ch,
-      Pointer<Int32> minx,
-      Pointer<Int32> maxx,
-      Pointer<Int32> miny,
-      Pointer<Int32> maxy,
-      Pointer<Int32> advance,
-    ),
-    int Function(
-      Pointer<TtfFont> font,
-      int ch,
-      Pointer<Int32> minx,
-      Pointer<Int32> maxx,
-      Pointer<Int32> miny,
-      Pointer<Int32> maxy,
-      Pointer<Int32> advance,
-    )
-  >('TTF_GetGlyphMetrics');
+  final ttfGetGlyphMetricsLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<TtfFont> font,
+          Uint32 ch,
+          Pointer<Int32> minx,
+          Pointer<Int32> maxx,
+          Pointer<Int32> miny,
+          Pointer<Int32> maxy,
+          Pointer<Int32> advance,
+        ),
+        int Function(
+          Pointer<TtfFont> font,
+          int ch,
+          Pointer<Int32> minx,
+          Pointer<Int32> maxx,
+          Pointer<Int32> miny,
+          Pointer<Int32> maxy,
+          Pointer<Int32> advance,
+        )
+      >('TTF_GetGlyphMetrics');
   return ttfGetGlyphMetricsLookupFunction(
         font,
         ch,
@@ -1616,20 +1671,21 @@ bool ttfGetGlyphKerning(
   int ch,
   Pointer<Int32> kerning,
 ) {
-  final ttfGetGlyphKerningLookupFunction = libSdl3Ttf.lookupFunction<
-    Uint8 Function(
-      Pointer<TtfFont> font,
-      Uint32 previousCh,
-      Uint32 ch,
-      Pointer<Int32> kerning,
-    ),
-    int Function(
-      Pointer<TtfFont> font,
-      int previousCh,
-      int ch,
-      Pointer<Int32> kerning,
-    )
-  >('TTF_GetGlyphKerning');
+  final ttfGetGlyphKerningLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<TtfFont> font,
+          Uint32 previousCh,
+          Uint32 ch,
+          Pointer<Int32> kerning,
+        ),
+        int Function(
+          Pointer<TtfFont> font,
+          int previousCh,
+          int ch,
+          Pointer<Int32> kerning,
+        )
+      >('TTF_GetGlyphKerning');
   return ttfGetGlyphKerningLookupFunction(font, previousCh, ch, kerning) == 1;
 }
 
@@ -1663,22 +1719,23 @@ bool ttfGetStringSize(
   Pointer<Int32> w,
   Pointer<Int32> h,
 ) {
-  final ttfGetStringSizeLookupFunction = libSdl3Ttf.lookupFunction<
-    Uint8 Function(
-      Pointer<TtfFont> font,
-      Pointer<Utf8> text,
-      Uint32 length,
-      Pointer<Int32> w,
-      Pointer<Int32> h,
-    ),
-    int Function(
-      Pointer<TtfFont> font,
-      Pointer<Utf8> text,
-      int length,
-      Pointer<Int32> w,
-      Pointer<Int32> h,
-    )
-  >('TTF_GetStringSize');
+  final ttfGetStringSizeLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<TtfFont> font,
+          Pointer<Utf8> text,
+          Uint32 length,
+          Pointer<Int32> w,
+          Pointer<Int32> h,
+        ),
+        int Function(
+          Pointer<TtfFont> font,
+          Pointer<Utf8> text,
+          int length,
+          Pointer<Int32> w,
+          Pointer<Int32> h,
+        )
+      >('TTF_GetStringSize');
   final textPointer = text != null ? text.toNativeUtf8() : nullptr;
   final result =
       ttfGetStringSizeLookupFunction(font, textPointer, length, w, h) == 1;
@@ -1723,24 +1780,25 @@ bool ttfGetStringSizeWrapped(
   Pointer<Int32> w,
   Pointer<Int32> h,
 ) {
-  final ttfGetStringSizeWrappedLookupFunction = libSdl3Ttf.lookupFunction<
-    Uint8 Function(
-      Pointer<TtfFont> font,
-      Pointer<Utf8> text,
-      Uint32 length,
-      Int32 wrapWidth,
-      Pointer<Int32> w,
-      Pointer<Int32> h,
-    ),
-    int Function(
-      Pointer<TtfFont> font,
-      Pointer<Utf8> text,
-      int length,
-      int wrapWidth,
-      Pointer<Int32> w,
-      Pointer<Int32> h,
-    )
-  >('TTF_GetStringSizeWrapped');
+  final ttfGetStringSizeWrappedLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<TtfFont> font,
+          Pointer<Utf8> text,
+          Uint32 length,
+          Int32 wrapWidth,
+          Pointer<Int32> w,
+          Pointer<Int32> h,
+        ),
+        int Function(
+          Pointer<TtfFont> font,
+          Pointer<Utf8> text,
+          int length,
+          int wrapWidth,
+          Pointer<Int32> w,
+          Pointer<Int32> h,
+        )
+      >('TTF_GetStringSizeWrapped');
   final textPointer = text != null ? text.toNativeUtf8() : nullptr;
   final result =
       ttfGetStringSizeWrappedLookupFunction(
@@ -1793,24 +1851,25 @@ bool ttfMeasureString(
   Pointer<Int32> measuredWidth,
   Pointer<Uint32> measuredLength,
 ) {
-  final ttfMeasureStringLookupFunction = libSdl3Ttf.lookupFunction<
-    Uint8 Function(
-      Pointer<TtfFont> font,
-      Pointer<Utf8> text,
-      Uint32 length,
-      Int32 maxWidth,
-      Pointer<Int32> measuredWidth,
-      Pointer<Uint32> measuredLength,
-    ),
-    int Function(
-      Pointer<TtfFont> font,
-      Pointer<Utf8> text,
-      int length,
-      int maxWidth,
-      Pointer<Int32> measuredWidth,
-      Pointer<Uint32> measuredLength,
-    )
-  >('TTF_MeasureString');
+  final ttfMeasureStringLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<TtfFont> font,
+          Pointer<Utf8> text,
+          Uint32 length,
+          Int32 maxWidth,
+          Pointer<Int32> measuredWidth,
+          Pointer<Uint32> measuredLength,
+        ),
+        int Function(
+          Pointer<TtfFont> font,
+          Pointer<Utf8> text,
+          int length,
+          int maxWidth,
+          Pointer<Int32> measuredWidth,
+          Pointer<Uint32> measuredLength,
+        )
+      >('TTF_MeasureString');
   final textPointer = text != null ? text.toNativeUtf8() : nullptr;
   final result =
       ttfMeasureStringLookupFunction(
@@ -1870,20 +1929,21 @@ Pointer<SdlSurface> ttfRenderTextSolid(
   int length,
   SdlColor fg,
 ) {
-  final ttfRenderTextSolidLookupFunction = libSdl3Ttf.lookupFunction<
-    Pointer<SdlSurface> Function(
-      Pointer<TtfFont> font,
-      Pointer<Utf8> text,
-      Uint32 length,
-      SdlColor fg,
-    ),
-    Pointer<SdlSurface> Function(
-      Pointer<TtfFont> font,
-      Pointer<Utf8> text,
-      int length,
-      SdlColor fg,
-    )
-  >('TTF_RenderText_Solid');
+  final ttfRenderTextSolidLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Pointer<SdlSurface> Function(
+          Pointer<TtfFont> font,
+          Pointer<Utf8> text,
+          Uint32 length,
+          SdlColor fg,
+        ),
+        Pointer<SdlSurface> Function(
+          Pointer<TtfFont> font,
+          Pointer<Utf8> text,
+          int length,
+          SdlColor fg,
+        )
+      >('TTF_RenderText_Solid');
   final textPointer = text != null ? text.toNativeUtf8() : nullptr;
   final result = ttfRenderTextSolidLookupFunction(
     font,
@@ -1939,22 +1999,23 @@ Pointer<SdlSurface> ttfRenderTextSolidWrapped(
   SdlColor fg,
   int wrapLength,
 ) {
-  final ttfRenderTextSolidWrappedLookupFunction = libSdl3Ttf.lookupFunction<
-    Pointer<SdlSurface> Function(
-      Pointer<TtfFont> font,
-      Pointer<Utf8> text,
-      Uint32 length,
-      SdlColor fg,
-      Int32 wrapLength,
-    ),
-    Pointer<SdlSurface> Function(
-      Pointer<TtfFont> font,
-      Pointer<Utf8> text,
-      int length,
-      SdlColor fg,
-      int wrapLength,
-    )
-  >('TTF_RenderText_Solid_Wrapped');
+  final ttfRenderTextSolidWrappedLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Pointer<SdlSurface> Function(
+          Pointer<TtfFont> font,
+          Pointer<Utf8> text,
+          Uint32 length,
+          SdlColor fg,
+          Int32 wrapLength,
+        ),
+        Pointer<SdlSurface> Function(
+          Pointer<TtfFont> font,
+          Pointer<Utf8> text,
+          int length,
+          SdlColor fg,
+          int wrapLength,
+        )
+      >('TTF_RenderText_Solid_Wrapped');
   final textPointer = text != null ? text.toNativeUtf8() : nullptr;
   final result = ttfRenderTextSolidWrappedLookupFunction(
     font,
@@ -2002,10 +2063,15 @@ Pointer<SdlSurface> ttfRenderGlyphSolid(
   int ch,
   SdlColor fg,
 ) {
-  final ttfRenderGlyphSolidLookupFunction = libSdl3Ttf.lookupFunction<
-    Pointer<SdlSurface> Function(Pointer<TtfFont> font, Uint32 ch, SdlColor fg),
-    Pointer<SdlSurface> Function(Pointer<TtfFont> font, int ch, SdlColor fg)
-  >('TTF_RenderGlyph_Solid');
+  final ttfRenderGlyphSolidLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Pointer<SdlSurface> Function(
+          Pointer<TtfFont> font,
+          Uint32 ch,
+          SdlColor fg,
+        ),
+        Pointer<SdlSurface> Function(Pointer<TtfFont> font, int ch, SdlColor fg)
+      >('TTF_RenderGlyph_Solid');
   return ttfRenderGlyphSolidLookupFunction(font, ch, fg);
 }
 
@@ -2055,22 +2121,23 @@ Pointer<SdlSurface> ttfRenderTextShaded(
   SdlColor fg,
   SdlColor bg,
 ) {
-  final ttfRenderTextShadedLookupFunction = libSdl3Ttf.lookupFunction<
-    Pointer<SdlSurface> Function(
-      Pointer<TtfFont> font,
-      Pointer<Utf8> text,
-      Uint32 length,
-      SdlColor fg,
-      SdlColor bg,
-    ),
-    Pointer<SdlSurface> Function(
-      Pointer<TtfFont> font,
-      Pointer<Utf8> text,
-      int length,
-      SdlColor fg,
-      SdlColor bg,
-    )
-  >('TTF_RenderText_Shaded');
+  final ttfRenderTextShadedLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Pointer<SdlSurface> Function(
+          Pointer<TtfFont> font,
+          Pointer<Utf8> text,
+          Uint32 length,
+          SdlColor fg,
+          SdlColor bg,
+        ),
+        Pointer<SdlSurface> Function(
+          Pointer<TtfFont> font,
+          Pointer<Utf8> text,
+          int length,
+          SdlColor fg,
+          SdlColor bg,
+        )
+      >('TTF_RenderText_Shaded');
   final textPointer = text != null ? text.toNativeUtf8() : nullptr;
   final result = ttfRenderTextShadedLookupFunction(
     font,
@@ -2130,24 +2197,25 @@ Pointer<SdlSurface> ttfRenderTextShadedWrapped(
   SdlColor bg,
   int wrapWidth,
 ) {
-  final ttfRenderTextShadedWrappedLookupFunction = libSdl3Ttf.lookupFunction<
-    Pointer<SdlSurface> Function(
-      Pointer<TtfFont> font,
-      Pointer<Utf8> text,
-      Uint32 length,
-      SdlColor fg,
-      SdlColor bg,
-      Int32 wrapWidth,
-    ),
-    Pointer<SdlSurface> Function(
-      Pointer<TtfFont> font,
-      Pointer<Utf8> text,
-      int length,
-      SdlColor fg,
-      SdlColor bg,
-      int wrapWidth,
-    )
-  >('TTF_RenderText_Shaded_Wrapped');
+  final ttfRenderTextShadedWrappedLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Pointer<SdlSurface> Function(
+          Pointer<TtfFont> font,
+          Pointer<Utf8> text,
+          Uint32 length,
+          SdlColor fg,
+          SdlColor bg,
+          Int32 wrapWidth,
+        ),
+        Pointer<SdlSurface> Function(
+          Pointer<TtfFont> font,
+          Pointer<Utf8> text,
+          int length,
+          SdlColor fg,
+          SdlColor bg,
+          int wrapWidth,
+        )
+      >('TTF_RenderText_Shaded_Wrapped');
   final textPointer = text != null ? text.toNativeUtf8() : nullptr;
   final result = ttfRenderTextShadedWrappedLookupFunction(
     font,
@@ -2199,20 +2267,21 @@ Pointer<SdlSurface> ttfRenderGlyphShaded(
   SdlColor fg,
   SdlColor bg,
 ) {
-  final ttfRenderGlyphShadedLookupFunction = libSdl3Ttf.lookupFunction<
-    Pointer<SdlSurface> Function(
-      Pointer<TtfFont> font,
-      Uint32 ch,
-      SdlColor fg,
-      SdlColor bg,
-    ),
-    Pointer<SdlSurface> Function(
-      Pointer<TtfFont> font,
-      int ch,
-      SdlColor fg,
-      SdlColor bg,
-    )
-  >('TTF_RenderGlyph_Shaded');
+  final ttfRenderGlyphShadedLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Pointer<SdlSurface> Function(
+          Pointer<TtfFont> font,
+          Uint32 ch,
+          SdlColor fg,
+          SdlColor bg,
+        ),
+        Pointer<SdlSurface> Function(
+          Pointer<TtfFont> font,
+          int ch,
+          SdlColor fg,
+          SdlColor bg,
+        )
+      >('TTF_RenderGlyph_Shaded');
   return ttfRenderGlyphShadedLookupFunction(font, ch, fg, bg);
 }
 
@@ -2259,20 +2328,21 @@ Pointer<SdlSurface> ttfRenderTextBlended(
   int length,
   SdlColor fg,
 ) {
-  final ttfRenderTextBlendedLookupFunction = libSdl3Ttf.lookupFunction<
-    Pointer<SdlSurface> Function(
-      Pointer<TtfFont> font,
-      Pointer<Utf8> text,
-      Uint32 length,
-      SdlColor fg,
-    ),
-    Pointer<SdlSurface> Function(
-      Pointer<TtfFont> font,
-      Pointer<Utf8> text,
-      int length,
-      SdlColor fg,
-    )
-  >('TTF_RenderText_Blended');
+  final ttfRenderTextBlendedLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Pointer<SdlSurface> Function(
+          Pointer<TtfFont> font,
+          Pointer<Utf8> text,
+          Uint32 length,
+          SdlColor fg,
+        ),
+        Pointer<SdlSurface> Function(
+          Pointer<TtfFont> font,
+          Pointer<Utf8> text,
+          int length,
+          SdlColor fg,
+        )
+      >('TTF_RenderText_Blended');
   final textPointer = text != null ? text.toNativeUtf8() : nullptr;
   final result = ttfRenderTextBlendedLookupFunction(
     font,
@@ -2328,22 +2398,23 @@ Pointer<SdlSurface> ttfRenderTextBlendedWrapped(
   SdlColor fg,
   int wrapWidth,
 ) {
-  final ttfRenderTextBlendedWrappedLookupFunction = libSdl3Ttf.lookupFunction<
-    Pointer<SdlSurface> Function(
-      Pointer<TtfFont> font,
-      Pointer<Utf8> text,
-      Uint32 length,
-      SdlColor fg,
-      Int32 wrapWidth,
-    ),
-    Pointer<SdlSurface> Function(
-      Pointer<TtfFont> font,
-      Pointer<Utf8> text,
-      int length,
-      SdlColor fg,
-      int wrapWidth,
-    )
-  >('TTF_RenderText_Blended_Wrapped');
+  final ttfRenderTextBlendedWrappedLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Pointer<SdlSurface> Function(
+          Pointer<TtfFont> font,
+          Pointer<Utf8> text,
+          Uint32 length,
+          SdlColor fg,
+          Int32 wrapWidth,
+        ),
+        Pointer<SdlSurface> Function(
+          Pointer<TtfFont> font,
+          Pointer<Utf8> text,
+          int length,
+          SdlColor fg,
+          int wrapWidth,
+        )
+      >('TTF_RenderText_Blended_Wrapped');
   final textPointer = text != null ? text.toNativeUtf8() : nullptr;
   final result = ttfRenderTextBlendedWrappedLookupFunction(
     font,
@@ -2391,10 +2462,15 @@ Pointer<SdlSurface> ttfRenderGlyphBlended(
   int ch,
   SdlColor fg,
 ) {
-  final ttfRenderGlyphBlendedLookupFunction = libSdl3Ttf.lookupFunction<
-    Pointer<SdlSurface> Function(Pointer<TtfFont> font, Uint32 ch, SdlColor fg),
-    Pointer<SdlSurface> Function(Pointer<TtfFont> font, int ch, SdlColor fg)
-  >('TTF_RenderGlyph_Blended');
+  final ttfRenderGlyphBlendedLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Pointer<SdlSurface> Function(
+          Pointer<TtfFont> font,
+          Uint32 ch,
+          SdlColor fg,
+        ),
+        Pointer<SdlSurface> Function(Pointer<TtfFont> font, int ch, SdlColor fg)
+      >('TTF_RenderGlyph_Blended');
   return ttfRenderGlyphBlendedLookupFunction(font, ch, fg);
 }
 
@@ -2443,22 +2519,23 @@ Pointer<SdlSurface> ttfRenderTextLcd(
   SdlColor fg,
   SdlColor bg,
 ) {
-  final ttfRenderTextLcdLookupFunction = libSdl3Ttf.lookupFunction<
-    Pointer<SdlSurface> Function(
-      Pointer<TtfFont> font,
-      Pointer<Utf8> text,
-      Uint32 length,
-      SdlColor fg,
-      SdlColor bg,
-    ),
-    Pointer<SdlSurface> Function(
-      Pointer<TtfFont> font,
-      Pointer<Utf8> text,
-      int length,
-      SdlColor fg,
-      SdlColor bg,
-    )
-  >('TTF_RenderText_LCD');
+  final ttfRenderTextLcdLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Pointer<SdlSurface> Function(
+          Pointer<TtfFont> font,
+          Pointer<Utf8> text,
+          Uint32 length,
+          SdlColor fg,
+          SdlColor bg,
+        ),
+        Pointer<SdlSurface> Function(
+          Pointer<TtfFont> font,
+          Pointer<Utf8> text,
+          int length,
+          SdlColor fg,
+          SdlColor bg,
+        )
+      >('TTF_RenderText_LCD');
   final textPointer = text != null ? text.toNativeUtf8() : nullptr;
   final result = ttfRenderTextLcdLookupFunction(
     font,
@@ -2518,24 +2595,25 @@ Pointer<SdlSurface> ttfRenderTextLcdWrapped(
   SdlColor bg,
   int wrapWidth,
 ) {
-  final ttfRenderTextLcdWrappedLookupFunction = libSdl3Ttf.lookupFunction<
-    Pointer<SdlSurface> Function(
-      Pointer<TtfFont> font,
-      Pointer<Utf8> text,
-      Uint32 length,
-      SdlColor fg,
-      SdlColor bg,
-      Int32 wrapWidth,
-    ),
-    Pointer<SdlSurface> Function(
-      Pointer<TtfFont> font,
-      Pointer<Utf8> text,
-      int length,
-      SdlColor fg,
-      SdlColor bg,
-      int wrapWidth,
-    )
-  >('TTF_RenderText_LCD_Wrapped');
+  final ttfRenderTextLcdWrappedLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Pointer<SdlSurface> Function(
+          Pointer<TtfFont> font,
+          Pointer<Utf8> text,
+          Uint32 length,
+          SdlColor fg,
+          SdlColor bg,
+          Int32 wrapWidth,
+        ),
+        Pointer<SdlSurface> Function(
+          Pointer<TtfFont> font,
+          Pointer<Utf8> text,
+          int length,
+          SdlColor fg,
+          SdlColor bg,
+          int wrapWidth,
+        )
+      >('TTF_RenderText_LCD_Wrapped');
   final textPointer = text != null ? text.toNativeUtf8() : nullptr;
   final result = ttfRenderTextLcdWrappedLookupFunction(
     font,
@@ -2587,20 +2665,21 @@ Pointer<SdlSurface> ttfRenderGlyphLcd(
   SdlColor fg,
   SdlColor bg,
 ) {
-  final ttfRenderGlyphLcdLookupFunction = libSdl3Ttf.lookupFunction<
-    Pointer<SdlSurface> Function(
-      Pointer<TtfFont> font,
-      Uint32 ch,
-      SdlColor fg,
-      SdlColor bg,
-    ),
-    Pointer<SdlSurface> Function(
-      Pointer<TtfFont> font,
-      int ch,
-      SdlColor fg,
-      SdlColor bg,
-    )
-  >('TTF_RenderGlyph_LCD');
+  final ttfRenderGlyphLcdLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Pointer<SdlSurface> Function(
+          Pointer<TtfFont> font,
+          Uint32 ch,
+          SdlColor fg,
+          SdlColor bg,
+        ),
+        Pointer<SdlSurface> Function(
+          Pointer<TtfFont> font,
+          int ch,
+          SdlColor fg,
+          SdlColor bg,
+        )
+      >('TTF_RenderGlyph_LCD');
   return ttfRenderGlyphLcdLookupFunction(font, ch, fg, bg);
 }
 
@@ -2621,10 +2700,11 @@ Pointer<SdlSurface> ttfRenderGlyphLcd(
 /// extern SDL_DECLSPEC TTF_TextEngine * SDLCALL TTF_CreateSurfaceTextEngine(void)
 /// ```
 Pointer<TtfTextEngine> ttfCreateSurfaceTextEngine() {
-  final ttfCreateSurfaceTextEngineLookupFunction = libSdl3Ttf.lookupFunction<
-    Pointer<TtfTextEngine> Function(),
-    Pointer<TtfTextEngine> Function()
-  >('TTF_CreateSurfaceTextEngine');
+  final ttfCreateSurfaceTextEngineLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Pointer<TtfTextEngine> Function(),
+        Pointer<TtfTextEngine> Function()
+      >('TTF_CreateSurfaceTextEngine');
   return ttfCreateSurfaceTextEngineLookupFunction();
 }
 
@@ -2660,20 +2740,21 @@ bool ttfDrawSurfaceText(
   int y,
   Pointer<SdlSurface> surface,
 ) {
-  final ttfDrawSurfaceTextLookupFunction = libSdl3Ttf.lookupFunction<
-    Uint8 Function(
-      Pointer<TtfText> text,
-      Int32 x,
-      Int32 y,
-      Pointer<SdlSurface> surface,
-    ),
-    int Function(
-      Pointer<TtfText> text,
-      int x,
-      int y,
-      Pointer<SdlSurface> surface,
-    )
-  >('TTF_DrawSurfaceText');
+  final ttfDrawSurfaceTextLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<TtfText> text,
+          Int32 x,
+          Int32 y,
+          Pointer<SdlSurface> surface,
+        ),
+        int Function(
+          Pointer<TtfText> text,
+          int x,
+          int y,
+          Pointer<SdlSurface> surface,
+        )
+      >('TTF_DrawSurfaceText');
   return ttfDrawSurfaceTextLookupFunction(text, x, y, surface) == 1;
 }
 
@@ -2697,10 +2778,11 @@ bool ttfDrawSurfaceText(
 /// extern SDL_DECLSPEC void SDLCALL TTF_DestroySurfaceTextEngine(TTF_TextEngine *engine)
 /// ```
 void ttfDestroySurfaceTextEngine(Pointer<TtfTextEngine> engine) {
-  final ttfDestroySurfaceTextEngineLookupFunction = libSdl3Ttf.lookupFunction<
-    Void Function(Pointer<TtfTextEngine> engine),
-    void Function(Pointer<TtfTextEngine> engine)
-  >('TTF_DestroySurfaceTextEngine');
+  final ttfDestroySurfaceTextEngineLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Void Function(Pointer<TtfTextEngine> engine),
+        void Function(Pointer<TtfTextEngine> engine)
+      >('TTF_DestroySurfaceTextEngine');
   return ttfDestroySurfaceTextEngineLookupFunction(engine);
 }
 
@@ -2726,10 +2808,11 @@ void ttfDestroySurfaceTextEngine(Pointer<TtfTextEngine> engine) {
 Pointer<TtfTextEngine> ttfCreateRendererTextEngine(
   Pointer<SdlRenderer> renderer,
 ) {
-  final ttfCreateRendererTextEngineLookupFunction = libSdl3Ttf.lookupFunction<
-    Pointer<TtfTextEngine> Function(Pointer<SdlRenderer> renderer),
-    Pointer<TtfTextEngine> Function(Pointer<SdlRenderer> renderer)
-  >('TTF_CreateRendererTextEngine');
+  final ttfCreateRendererTextEngineLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Pointer<TtfTextEngine> Function(Pointer<SdlRenderer> renderer),
+        Pointer<TtfTextEngine> Function(Pointer<SdlRenderer> renderer)
+      >('TTF_CreateRendererTextEngine');
   return ttfCreateRendererTextEngineLookupFunction(renderer);
 }
 
@@ -2739,10 +2822,10 @@ Pointer<TtfTextEngine> ttfCreateRendererTextEngine(
 ///
 /// These are the supported properties:
 ///
-/// - `TTF_PROP_RENDERER_TEXT_ENGINE_RENDERER`: the renderer to use for
+/// - `TTF_PROP_RENDERER_TEXT_ENGINE_RENDERER_POINTER`: the renderer to use for
 /// creating textures and drawing text
-/// - `TTF_PROP_RENDERER_TEXT_ENGINE_ATLAS_TEXTURE_SIZE`: the size of the
-/// texture atlas
+/// - `TTF_PROP_RENDERER_TEXT_ENGINE_ATLAS_TEXTURE_SIZE_NUMBER`: the size of
+/// the texture atlas
 ///
 /// \param props the properties to use.
 /// \returns a TTF_TextEngine object or NULL on failure; call SDL_GetError()
@@ -2796,10 +2879,11 @@ Pointer<TtfTextEngine> ttfCreateRendererTextEngineWithProperties(int props) {
 /// extern SDL_DECLSPEC bool SDLCALL TTF_DrawRendererText(TTF_Text *text, float x, float y)
 /// ```
 bool ttfDrawRendererText(Pointer<TtfText> text, double x, double y) {
-  final ttfDrawRendererTextLookupFunction = libSdl3Ttf.lookupFunction<
-    Uint8 Function(Pointer<TtfText> text, Float x, Float y),
-    int Function(Pointer<TtfText> text, double x, double y)
-  >('TTF_DrawRendererText');
+  final ttfDrawRendererTextLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Uint8 Function(Pointer<TtfText> text, Float x, Float y),
+        int Function(Pointer<TtfText> text, double x, double y)
+      >('TTF_DrawRendererText');
   return ttfDrawRendererTextLookupFunction(text, x, y) == 1;
 }
 
@@ -2823,10 +2907,11 @@ bool ttfDrawRendererText(Pointer<TtfText> text, double x, double y) {
 /// extern SDL_DECLSPEC void SDLCALL TTF_DestroyRendererTextEngine(TTF_TextEngine *engine)
 /// ```
 void ttfDestroyRendererTextEngine(Pointer<TtfTextEngine> engine) {
-  final ttfDestroyRendererTextEngineLookupFunction = libSdl3Ttf.lookupFunction<
-    Void Function(Pointer<TtfTextEngine> engine),
-    void Function(Pointer<TtfTextEngine> engine)
-  >('TTF_DestroyRendererTextEngine');
+  final ttfDestroyRendererTextEngineLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Void Function(Pointer<TtfTextEngine> engine),
+        void Function(Pointer<TtfTextEngine> engine)
+      >('TTF_DestroyRendererTextEngine');
   return ttfDestroyRendererTextEngineLookupFunction(engine);
 }
 
@@ -2851,10 +2936,11 @@ void ttfDestroyRendererTextEngine(Pointer<TtfTextEngine> engine) {
 /// extern SDL_DECLSPEC TTF_TextEngine * SDLCALL TTF_CreateGPUTextEngine(SDL_GPUDevice *device)
 /// ```
 Pointer<TtfTextEngine> ttfCreateGpuTextEngine(Pointer<SdlGpuDevice> device) {
-  final ttfCreateGpuTextEngineLookupFunction = libSdl3Ttf.lookupFunction<
-    Pointer<TtfTextEngine> Function(Pointer<SdlGpuDevice> device),
-    Pointer<TtfTextEngine> Function(Pointer<SdlGpuDevice> device)
-  >('TTF_CreateGPUTextEngine');
+  final ttfCreateGpuTextEngineLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Pointer<TtfTextEngine> Function(Pointer<SdlGpuDevice> device),
+        Pointer<TtfTextEngine> Function(Pointer<SdlGpuDevice> device)
+      >('TTF_CreateGPUTextEngine');
   return ttfCreateGpuTextEngineLookupFunction(device);
 }
 
@@ -2864,10 +2950,10 @@ Pointer<TtfTextEngine> ttfCreateGpuTextEngine(Pointer<SdlGpuDevice> device) {
 ///
 /// These are the supported properties:
 ///
-/// - `TTF_PROP_GPU_TEXT_ENGINE_DEVICE`: the SDL_GPUDevice to use for creating
-/// textures and drawing text.
-/// - `TTF_PROP_GPU_TEXT_ENGINE_ATLAS_TEXTURE_SIZE`: the size of the texture
-/// atlas
+/// - `TTF_PROP_GPU_TEXT_ENGINE_DEVICE_POINTER`: the SDL_GPUDevice to use for
+/// creating textures and drawing text.
+/// - `TTF_PROP_GPU_TEXT_ENGINE_ATLAS_TEXTURE_SIZE_NUMBER`: the size of the
+/// texture atlas
 ///
 /// \param props the properties to use.
 /// \returns a TTF_TextEngine object or NULL on failure; call SDL_GetError()
@@ -2925,10 +3011,11 @@ Pointer<TtfTextEngine> ttfCreateGpuTextEngineWithProperties(int props) {
 /// extern SDL_DECLSPEC TTF_GPUAtlasDrawSequence * SDLCALL TTF_GetGPUTextDrawData(TTF_Text *text)
 /// ```
 Pointer<TtfGpuAtlasDrawSequence> ttfGetGpuTextDrawData(Pointer<TtfText> text) {
-  final ttfGetGpuTextDrawDataLookupFunction = libSdl3Ttf.lookupFunction<
-    Pointer<TtfGpuAtlasDrawSequence> Function(Pointer<TtfText> text),
-    Pointer<TtfGpuAtlasDrawSequence> Function(Pointer<TtfText> text)
-  >('TTF_GetGPUTextDrawData');
+  final ttfGetGpuTextDrawDataLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Pointer<TtfGpuAtlasDrawSequence> Function(Pointer<TtfText> text),
+        Pointer<TtfGpuAtlasDrawSequence> Function(Pointer<TtfText> text)
+      >('TTF_GetGPUTextDrawData');
   return ttfGetGpuTextDrawDataLookupFunction(text);
 }
 
@@ -2952,10 +3039,11 @@ Pointer<TtfGpuAtlasDrawSequence> ttfGetGpuTextDrawData(Pointer<TtfText> text) {
 /// extern SDL_DECLSPEC void SDLCALL TTF_DestroyGPUTextEngine(TTF_TextEngine *engine)
 /// ```
 void ttfDestroyGpuTextEngine(Pointer<TtfTextEngine> engine) {
-  final ttfDestroyGpuTextEngineLookupFunction = libSdl3Ttf.lookupFunction<
-    Void Function(Pointer<TtfTextEngine> engine),
-    void Function(Pointer<TtfTextEngine> engine)
-  >('TTF_DestroyGPUTextEngine');
+  final ttfDestroyGpuTextEngineLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Void Function(Pointer<TtfTextEngine> engine),
+        void Function(Pointer<TtfTextEngine> engine)
+      >('TTF_DestroyGPUTextEngine');
   return ttfDestroyGpuTextEngineLookupFunction(engine);
 }
 
@@ -2978,10 +3066,11 @@ void ttfDestroyGpuTextEngine(Pointer<TtfTextEngine> engine) {
 /// extern SDL_DECLSPEC void SDLCALL TTF_SetGPUTextEngineWinding(TTF_TextEngine *engine, TTF_GPUTextEngineWinding winding)
 /// ```
 void ttfSetGpuTextEngineWinding(Pointer<TtfTextEngine> engine, int winding) {
-  final ttfSetGpuTextEngineWindingLookupFunction = libSdl3Ttf.lookupFunction<
-    Void Function(Pointer<TtfTextEngine> engine, Int32 winding),
-    void Function(Pointer<TtfTextEngine> engine, int winding)
-  >('TTF_SetGPUTextEngineWinding');
+  final ttfSetGpuTextEngineWindingLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Void Function(Pointer<TtfTextEngine> engine, Int32 winding),
+        void Function(Pointer<TtfTextEngine> engine, int winding)
+      >('TTF_SetGPUTextEngineWinding');
   return ttfSetGpuTextEngineWindingLookupFunction(engine, winding);
 }
 
@@ -3005,10 +3094,11 @@ void ttfSetGpuTextEngineWinding(Pointer<TtfTextEngine> engine, int winding) {
 /// extern SDL_DECLSPEC TTF_GPUTextEngineWinding SDLCALL TTF_GetGPUTextEngineWinding(const TTF_TextEngine *engine)
 /// ```
 int ttfGetGpuTextEngineWinding(Pointer<TtfTextEngine> engine) {
-  final ttfGetGpuTextEngineWindingLookupFunction = libSdl3Ttf.lookupFunction<
-    Int32 Function(Pointer<TtfTextEngine> engine),
-    int Function(Pointer<TtfTextEngine> engine)
-  >('TTF_GetGPUTextEngineWinding');
+  final ttfGetGpuTextEngineWindingLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Int32 Function(Pointer<TtfTextEngine> engine),
+        int Function(Pointer<TtfTextEngine> engine)
+      >('TTF_GetGPUTextEngineWinding');
   return ttfGetGpuTextEngineWindingLookupFunction(engine);
 }
 
@@ -3040,20 +3130,21 @@ Pointer<TtfText> ttfCreateText(
   String? text,
   int length,
 ) {
-  final ttfCreateTextLookupFunction = libSdl3Ttf.lookupFunction<
-    Pointer<TtfText> Function(
-      Pointer<TtfTextEngine> engine,
-      Pointer<TtfFont> font,
-      Pointer<Utf8> text,
-      Uint32 length,
-    ),
-    Pointer<TtfText> Function(
-      Pointer<TtfTextEngine> engine,
-      Pointer<TtfFont> font,
-      Pointer<Utf8> text,
-      int length,
-    )
-  >('TTF_CreateText');
+  final ttfCreateTextLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Pointer<TtfText> Function(
+          Pointer<TtfTextEngine> engine,
+          Pointer<TtfFont> font,
+          Pointer<Utf8> text,
+          Uint32 length,
+        ),
+        Pointer<TtfText> Function(
+          Pointer<TtfTextEngine> engine,
+          Pointer<TtfFont> font,
+          Pointer<Utf8> text,
+          int length,
+        )
+      >('TTF_CreateText');
   final textPointer = text != null ? text.toNativeUtf8() : nullptr;
   final result = ttfCreateTextLookupFunction(engine, font, textPointer, length);
   calloc.free(textPointer);
@@ -3076,10 +3167,11 @@ Pointer<TtfText> ttfCreateText(
 /// extern SDL_DECLSPEC SDL_PropertiesID SDLCALL TTF_GetTextProperties(TTF_Text *text)
 /// ```
 int ttfGetTextProperties(Pointer<TtfText> text) {
-  final ttfGetTextPropertiesLookupFunction = libSdl3Ttf.lookupFunction<
-    Uint32 Function(Pointer<TtfText> text),
-    int Function(Pointer<TtfText> text)
-  >('TTF_GetTextProperties');
+  final ttfGetTextPropertiesLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Uint32 Function(Pointer<TtfText> text),
+        int Function(Pointer<TtfText> text)
+      >('TTF_GetTextProperties');
   return ttfGetTextPropertiesLookupFunction(text);
 }
 
@@ -3104,10 +3196,11 @@ int ttfGetTextProperties(Pointer<TtfText> text) {
 /// extern SDL_DECLSPEC bool SDLCALL TTF_SetTextEngine(TTF_Text *text, TTF_TextEngine *engine)
 /// ```
 bool ttfSetTextEngine(Pointer<TtfText> text, Pointer<TtfTextEngine> engine) {
-  final ttfSetTextEngineLookupFunction = libSdl3Ttf.lookupFunction<
-    Uint8 Function(Pointer<TtfText> text, Pointer<TtfTextEngine> engine),
-    int Function(Pointer<TtfText> text, Pointer<TtfTextEngine> engine)
-  >('TTF_SetTextEngine');
+  final ttfSetTextEngineLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Uint8 Function(Pointer<TtfText> text, Pointer<TtfTextEngine> engine),
+        int Function(Pointer<TtfText> text, Pointer<TtfTextEngine> engine)
+      >('TTF_SetTextEngine');
   return ttfSetTextEngineLookupFunction(text, engine) == 1;
 }
 
@@ -3129,10 +3222,11 @@ bool ttfSetTextEngine(Pointer<TtfText> text, Pointer<TtfTextEngine> engine) {
 /// extern SDL_DECLSPEC TTF_TextEngine * SDLCALL TTF_GetTextEngine(TTF_Text *text)
 /// ```
 Pointer<TtfTextEngine> ttfGetTextEngine(Pointer<TtfText> text) {
-  final ttfGetTextEngineLookupFunction = libSdl3Ttf.lookupFunction<
-    Pointer<TtfTextEngine> Function(Pointer<TtfText> text),
-    Pointer<TtfTextEngine> Function(Pointer<TtfText> text)
-  >('TTF_GetTextEngine');
+  final ttfGetTextEngineLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Pointer<TtfTextEngine> Function(Pointer<TtfText> text),
+        Pointer<TtfTextEngine> Function(Pointer<TtfText> text)
+      >('TTF_GetTextEngine');
   return ttfGetTextEngineLookupFunction(text);
 }
 
@@ -3161,10 +3255,11 @@ Pointer<TtfTextEngine> ttfGetTextEngine(Pointer<TtfText> text) {
 /// extern SDL_DECLSPEC bool SDLCALL TTF_SetTextFont(TTF_Text *text, TTF_Font *font)
 /// ```
 bool ttfSetTextFont(Pointer<TtfText> text, Pointer<TtfFont> font) {
-  final ttfSetTextFontLookupFunction = libSdl3Ttf.lookupFunction<
-    Uint8 Function(Pointer<TtfText> text, Pointer<TtfFont> font),
-    int Function(Pointer<TtfText> text, Pointer<TtfFont> font)
-  >('TTF_SetTextFont');
+  final ttfSetTextFontLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Uint8 Function(Pointer<TtfText> text, Pointer<TtfFont> font),
+        int Function(Pointer<TtfText> text, Pointer<TtfFont> font)
+      >('TTF_SetTextFont');
   return ttfSetTextFontLookupFunction(text, font) == 1;
 }
 
@@ -3186,10 +3281,11 @@ bool ttfSetTextFont(Pointer<TtfText> text, Pointer<TtfFont> font) {
 /// extern SDL_DECLSPEC TTF_Font * SDLCALL TTF_GetTextFont(TTF_Text *text)
 /// ```
 Pointer<TtfFont> ttfGetTextFont(Pointer<TtfText> text) {
-  final ttfGetTextFontLookupFunction = libSdl3Ttf.lookupFunction<
-    Pointer<TtfFont> Function(Pointer<TtfText> text),
-    Pointer<TtfFont> Function(Pointer<TtfText> text)
-  >('TTF_GetTextFont');
+  final ttfGetTextFontLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Pointer<TtfFont> Function(Pointer<TtfText> text),
+        Pointer<TtfFont> Function(Pointer<TtfText> text)
+      >('TTF_GetTextFont');
   return ttfGetTextFontLookupFunction(text);
 }
 
@@ -3213,10 +3309,11 @@ Pointer<TtfFont> ttfGetTextFont(Pointer<TtfText> text) {
 /// extern SDL_DECLSPEC bool SDLCALL TTF_SetTextDirection(TTF_Text *text, TTF_Direction direction)
 /// ```
 bool ttfSetTextDirection(Pointer<TtfText> text, int direction) {
-  final ttfSetTextDirectionLookupFunction = libSdl3Ttf.lookupFunction<
-    Uint8 Function(Pointer<TtfText> text, Int32 direction),
-    int Function(Pointer<TtfText> text, int direction)
-  >('TTF_SetTextDirection');
+  final ttfSetTextDirectionLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Uint8 Function(Pointer<TtfText> text, Int32 direction),
+        int Function(Pointer<TtfText> text, int direction)
+      >('TTF_SetTextDirection');
   return ttfSetTextDirectionLookupFunction(text, direction) == 1;
 }
 
@@ -3237,10 +3334,11 @@ bool ttfSetTextDirection(Pointer<TtfText> text, int direction) {
 /// extern SDL_DECLSPEC TTF_Direction SDLCALL TTF_GetTextDirection(TTF_Text *text)
 /// ```
 int ttfGetTextDirection(Pointer<TtfText> text) {
-  final ttfGetTextDirectionLookupFunction = libSdl3Ttf.lookupFunction<
-    Int32 Function(Pointer<TtfText> text),
-    int Function(Pointer<TtfText> text)
-  >('TTF_GetTextDirection');
+  final ttfGetTextDirectionLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Int32 Function(Pointer<TtfText> text),
+        int Function(Pointer<TtfText> text)
+      >('TTF_GetTextDirection');
   return ttfGetTextDirectionLookupFunction(text);
 }
 
@@ -3267,10 +3365,11 @@ int ttfGetTextDirection(Pointer<TtfText> text) {
 /// extern SDL_DECLSPEC bool SDLCALL TTF_SetTextScript(TTF_Text *text, Uint32 script)
 /// ```
 bool ttfSetTextScript(Pointer<TtfText> text, int script) {
-  final ttfSetTextScriptLookupFunction = libSdl3Ttf.lookupFunction<
-    Uint8 Function(Pointer<TtfText> text, Uint32 script),
-    int Function(Pointer<TtfText> text, int script)
-  >('TTF_SetTextScript');
+  final ttfSetTextScriptLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Uint8 Function(Pointer<TtfText> text, Uint32 script),
+        int Function(Pointer<TtfText> text, int script)
+      >('TTF_SetTextScript');
   return ttfSetTextScriptLookupFunction(text, script) == 1;
 }
 
@@ -3296,10 +3395,11 @@ bool ttfSetTextScript(Pointer<TtfText> text, int script) {
 /// extern SDL_DECLSPEC Uint32 SDLCALL TTF_GetTextScript(TTF_Text *text)
 /// ```
 int ttfGetTextScript(Pointer<TtfText> text) {
-  final ttfGetTextScriptLookupFunction = libSdl3Ttf.lookupFunction<
-    Uint32 Function(Pointer<TtfText> text),
-    int Function(Pointer<TtfText> text)
-  >('TTF_GetTextScript');
+  final ttfGetTextScriptLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Uint32 Function(Pointer<TtfText> text),
+        int Function(Pointer<TtfText> text)
+      >('TTF_GetTextScript');
   return ttfGetTextScriptLookupFunction(text);
 }
 
@@ -3328,10 +3428,17 @@ int ttfGetTextScript(Pointer<TtfText> text) {
 /// extern SDL_DECLSPEC bool SDLCALL TTF_SetTextColor(TTF_Text *text, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 /// ```
 bool ttfSetTextColor(Pointer<TtfText> text, int r, int g, int b, int a) {
-  final ttfSetTextColorLookupFunction = libSdl3Ttf.lookupFunction<
-    Uint8 Function(Pointer<TtfText> text, Uint8 r, Uint8 g, Uint8 b, Uint8 a),
-    int Function(Pointer<TtfText> text, int r, int g, int b, int a)
-  >('TTF_SetTextColor');
+  final ttfSetTextColorLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<TtfText> text,
+          Uint8 r,
+          Uint8 g,
+          Uint8 b,
+          Uint8 a,
+        ),
+        int Function(Pointer<TtfText> text, int r, int g, int b, int a)
+      >('TTF_SetTextColor');
   return ttfSetTextColorLookupFunction(text, r, g, b, a) == 1;
 }
 
@@ -3366,10 +3473,23 @@ bool ttfSetTextColorFloat(
   double b,
   double a,
 ) {
-  final ttfSetTextColorFloatLookupFunction = libSdl3Ttf.lookupFunction<
-    Uint8 Function(Pointer<TtfText> text, Float r, Float g, Float b, Float a),
-    int Function(Pointer<TtfText> text, double r, double g, double b, double a)
-  >('TTF_SetTextColorFloat');
+  final ttfSetTextColorFloatLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<TtfText> text,
+          Float r,
+          Float g,
+          Float b,
+          Float a,
+        ),
+        int Function(
+          Pointer<TtfText> text,
+          double r,
+          double g,
+          double b,
+          double a,
+        )
+      >('TTF_SetTextColorFloat');
   return ttfSetTextColorFloatLookupFunction(text, r, g, b, a) == 1;
 }
 
@@ -3406,22 +3526,23 @@ bool ttfGetTextColor(
   Pointer<Uint8> b,
   Pointer<Uint8> a,
 ) {
-  final ttfGetTextColorLookupFunction = libSdl3Ttf.lookupFunction<
-    Uint8 Function(
-      Pointer<TtfText> text,
-      Pointer<Uint8> r,
-      Pointer<Uint8> g,
-      Pointer<Uint8> b,
-      Pointer<Uint8> a,
-    ),
-    int Function(
-      Pointer<TtfText> text,
-      Pointer<Uint8> r,
-      Pointer<Uint8> g,
-      Pointer<Uint8> b,
-      Pointer<Uint8> a,
-    )
-  >('TTF_GetTextColor');
+  final ttfGetTextColorLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<TtfText> text,
+          Pointer<Uint8> r,
+          Pointer<Uint8> g,
+          Pointer<Uint8> b,
+          Pointer<Uint8> a,
+        ),
+        int Function(
+          Pointer<TtfText> text,
+          Pointer<Uint8> r,
+          Pointer<Uint8> g,
+          Pointer<Uint8> b,
+          Pointer<Uint8> a,
+        )
+      >('TTF_GetTextColor');
   return ttfGetTextColorLookupFunction(text, r, g, b, a) == 1;
 }
 
@@ -3458,22 +3579,23 @@ bool ttfGetTextColorFloat(
   Pointer<Float> b,
   Pointer<Float> a,
 ) {
-  final ttfGetTextColorFloatLookupFunction = libSdl3Ttf.lookupFunction<
-    Uint8 Function(
-      Pointer<TtfText> text,
-      Pointer<Float> r,
-      Pointer<Float> g,
-      Pointer<Float> b,
-      Pointer<Float> a,
-    ),
-    int Function(
-      Pointer<TtfText> text,
-      Pointer<Float> r,
-      Pointer<Float> g,
-      Pointer<Float> b,
-      Pointer<Float> a,
-    )
-  >('TTF_GetTextColorFloat');
+  final ttfGetTextColorFloatLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<TtfText> text,
+          Pointer<Float> r,
+          Pointer<Float> g,
+          Pointer<Float> b,
+          Pointer<Float> a,
+        ),
+        int Function(
+          Pointer<TtfText> text,
+          Pointer<Float> r,
+          Pointer<Float> g,
+          Pointer<Float> b,
+          Pointer<Float> a,
+        )
+      >('TTF_GetTextColorFloat');
   return ttfGetTextColorFloatLookupFunction(text, r, g, b, a) == 1;
 }
 
@@ -3500,10 +3622,11 @@ bool ttfGetTextColorFloat(
 /// extern SDL_DECLSPEC bool SDLCALL TTF_SetTextPosition(TTF_Text *text, int x, int y)
 /// ```
 bool ttfSetTextPosition(Pointer<TtfText> text, int x, int y) {
-  final ttfSetTextPositionLookupFunction = libSdl3Ttf.lookupFunction<
-    Uint8 Function(Pointer<TtfText> text, Int32 x, Int32 y),
-    int Function(Pointer<TtfText> text, int x, int y)
-  >('TTF_SetTextPosition');
+  final ttfSetTextPositionLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Uint8 Function(Pointer<TtfText> text, Int32 x, Int32 y),
+        int Function(Pointer<TtfText> text, int x, int y)
+      >('TTF_SetTextPosition');
   return ttfSetTextPositionLookupFunction(text, x, y) == 1;
 }
 
@@ -3531,10 +3654,15 @@ bool ttfGetTextPosition(
   Pointer<Int32> x,
   Pointer<Int32> y,
 ) {
-  final ttfGetTextPositionLookupFunction = libSdl3Ttf.lookupFunction<
-    Uint8 Function(Pointer<TtfText> text, Pointer<Int32> x, Pointer<Int32> y),
-    int Function(Pointer<TtfText> text, Pointer<Int32> x, Pointer<Int32> y)
-  >('TTF_GetTextPosition');
+  final ttfGetTextPositionLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<TtfText> text,
+          Pointer<Int32> x,
+          Pointer<Int32> y,
+        ),
+        int Function(Pointer<TtfText> text, Pointer<Int32> x, Pointer<Int32> y)
+      >('TTF_GetTextPosition');
   return ttfGetTextPositionLookupFunction(text, x, y) == 1;
 }
 
@@ -3560,10 +3688,11 @@ bool ttfGetTextPosition(
 /// extern SDL_DECLSPEC bool SDLCALL TTF_SetTextWrapWidth(TTF_Text *text, int wrap_width)
 /// ```
 bool ttfSetTextWrapWidth(Pointer<TtfText> text, int wrapWidth) {
-  final ttfSetTextWrapWidthLookupFunction = libSdl3Ttf.lookupFunction<
-    Uint8 Function(Pointer<TtfText> text, Int32 wrapWidth),
-    int Function(Pointer<TtfText> text, int wrapWidth)
-  >('TTF_SetTextWrapWidth');
+  final ttfSetTextWrapWidthLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Uint8 Function(Pointer<TtfText> text, Int32 wrapWidth),
+        int Function(Pointer<TtfText> text, int wrapWidth)
+      >('TTF_SetTextWrapWidth');
   return ttfSetTextWrapWidthLookupFunction(text, wrapWidth) == 1;
 }
 
@@ -3587,10 +3716,11 @@ bool ttfSetTextWrapWidth(Pointer<TtfText> text, int wrapWidth) {
 /// extern SDL_DECLSPEC bool SDLCALL TTF_GetTextWrapWidth(TTF_Text *text, int *wrap_width)
 /// ```
 bool ttfGetTextWrapWidth(Pointer<TtfText> text, Pointer<Int32> wrapWidth) {
-  final ttfGetTextWrapWidthLookupFunction = libSdl3Ttf.lookupFunction<
-    Uint8 Function(Pointer<TtfText> text, Pointer<Int32> wrapWidth),
-    int Function(Pointer<TtfText> text, Pointer<Int32> wrapWidth)
-  >('TTF_GetTextWrapWidth');
+  final ttfGetTextWrapWidthLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Uint8 Function(Pointer<TtfText> text, Pointer<Int32> wrapWidth),
+        int Function(Pointer<TtfText> text, Pointer<Int32> wrapWidth)
+      >('TTF_GetTextWrapWidth');
   return ttfGetTextWrapWidthLookupFunction(text, wrapWidth) == 1;
 }
 
@@ -3648,10 +3778,11 @@ bool ttfSetTextWrapWhitespaceVisible(Pointer<TtfText> text, bool visible) {
 /// extern SDL_DECLSPEC bool SDLCALL TTF_TextWrapWhitespaceVisible(TTF_Text *text)
 /// ```
 bool ttfTextWrapWhitespaceVisible(Pointer<TtfText> text) {
-  final ttfTextWrapWhitespaceVisibleLookupFunction = libSdl3Ttf.lookupFunction<
-    Uint8 Function(Pointer<TtfText> text),
-    int Function(Pointer<TtfText> text)
-  >('TTF_TextWrapWhitespaceVisible');
+  final ttfTextWrapWhitespaceVisibleLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Uint8 Function(Pointer<TtfText> text),
+        int Function(Pointer<TtfText> text)
+      >('TTF_TextWrapWhitespaceVisible');
   return ttfTextWrapWhitespaceVisibleLookupFunction(text) == 1;
 }
 
@@ -3680,10 +3811,15 @@ bool ttfTextWrapWhitespaceVisible(Pointer<TtfText> text) {
 /// extern SDL_DECLSPEC bool SDLCALL TTF_SetTextString(TTF_Text *text, const char *string, size_t length)
 /// ```
 bool ttfSetTextString(Pointer<TtfText> text, String? string, int length) {
-  final ttfSetTextStringLookupFunction = libSdl3Ttf.lookupFunction<
-    Uint8 Function(Pointer<TtfText> text, Pointer<Utf8> string, Uint32 length),
-    int Function(Pointer<TtfText> text, Pointer<Utf8> string, int length)
-  >('TTF_SetTextString');
+  final ttfSetTextStringLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<TtfText> text,
+          Pointer<Utf8> string,
+          Uint32 length,
+        ),
+        int Function(Pointer<TtfText> text, Pointer<Utf8> string, int length)
+      >('TTF_SetTextString');
   final stringPointer = string != null ? string.toNativeUtf8() : nullptr;
   final result =
       ttfSetTextStringLookupFunction(text, stringPointer, length) == 1;
@@ -3725,20 +3861,21 @@ bool ttfInsertTextString(
   String? string,
   int length,
 ) {
-  final ttfInsertTextStringLookupFunction = libSdl3Ttf.lookupFunction<
-    Uint8 Function(
-      Pointer<TtfText> text,
-      Int32 offset,
-      Pointer<Utf8> string,
-      Uint32 length,
-    ),
-    int Function(
-      Pointer<TtfText> text,
-      int offset,
-      Pointer<Utf8> string,
-      int length,
-    )
-  >('TTF_InsertTextString');
+  final ttfInsertTextStringLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<TtfText> text,
+          Int32 offset,
+          Pointer<Utf8> string,
+          Uint32 length,
+        ),
+        int Function(
+          Pointer<TtfText> text,
+          int offset,
+          Pointer<Utf8> string,
+          int length,
+        )
+      >('TTF_InsertTextString');
   final stringPointer = string != null ? string.toNativeUtf8() : nullptr;
   final result =
       ttfInsertTextStringLookupFunction(text, offset, stringPointer, length) ==
@@ -3772,10 +3909,15 @@ bool ttfInsertTextString(
 /// extern SDL_DECLSPEC bool SDLCALL TTF_AppendTextString(TTF_Text *text, const char *string, size_t length)
 /// ```
 bool ttfAppendTextString(Pointer<TtfText> text, String? string, int length) {
-  final ttfAppendTextStringLookupFunction = libSdl3Ttf.lookupFunction<
-    Uint8 Function(Pointer<TtfText> text, Pointer<Utf8> string, Uint32 length),
-    int Function(Pointer<TtfText> text, Pointer<Utf8> string, int length)
-  >('TTF_AppendTextString');
+  final ttfAppendTextStringLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<TtfText> text,
+          Pointer<Utf8> string,
+          Uint32 length,
+        ),
+        int Function(Pointer<TtfText> text, Pointer<Utf8> string, int length)
+      >('TTF_AppendTextString');
   final stringPointer = string != null ? string.toNativeUtf8() : nullptr;
   final result =
       ttfAppendTextStringLookupFunction(text, stringPointer, length) == 1;
@@ -3811,10 +3953,11 @@ bool ttfAppendTextString(Pointer<TtfText> text, String? string, int length) {
 /// extern SDL_DECLSPEC bool SDLCALL TTF_DeleteTextString(TTF_Text *text, int offset, int length)
 /// ```
 bool ttfDeleteTextString(Pointer<TtfText> text, int offset, int length) {
-  final ttfDeleteTextStringLookupFunction = libSdl3Ttf.lookupFunction<
-    Uint8 Function(Pointer<TtfText> text, Int32 offset, Int32 length),
-    int Function(Pointer<TtfText> text, int offset, int length)
-  >('TTF_DeleteTextString');
+  final ttfDeleteTextStringLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Uint8 Function(Pointer<TtfText> text, Int32 offset, Int32 length),
+        int Function(Pointer<TtfText> text, int offset, int length)
+      >('TTF_DeleteTextString');
   return ttfDeleteTextStringLookupFunction(text, offset, length) == 1;
 }
 
@@ -3841,10 +3984,15 @@ bool ttfDeleteTextString(Pointer<TtfText> text, int offset, int length) {
 /// extern SDL_DECLSPEC bool SDLCALL TTF_GetTextSize(TTF_Text *text, int *w, int *h)
 /// ```
 bool ttfGetTextSize(Pointer<TtfText> text, Pointer<Int32> w, Pointer<Int32> h) {
-  final ttfGetTextSizeLookupFunction = libSdl3Ttf.lookupFunction<
-    Uint8 Function(Pointer<TtfText> text, Pointer<Int32> w, Pointer<Int32> h),
-    int Function(Pointer<TtfText> text, Pointer<Int32> w, Pointer<Int32> h)
-  >('TTF_GetTextSize');
+  final ttfGetTextSizeLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<TtfText> text,
+          Pointer<Int32> w,
+          Pointer<Int32> h,
+        ),
+        int Function(Pointer<TtfText> text, Pointer<Int32> w, Pointer<Int32> h)
+      >('TTF_GetTextSize');
   return ttfGetTextSizeLookupFunction(text, w, h) == 1;
 }
 
@@ -3877,18 +4025,19 @@ bool ttfGetTextSubString(
   int offset,
   Pointer<TtfSubString> substring,
 ) {
-  final ttfGetTextSubStringLookupFunction = libSdl3Ttf.lookupFunction<
-    Uint8 Function(
-      Pointer<TtfText> text,
-      Int32 offset,
-      Pointer<TtfSubString> substring,
-    ),
-    int Function(
-      Pointer<TtfText> text,
-      int offset,
-      Pointer<TtfSubString> substring,
-    )
-  >('TTF_GetTextSubString');
+  final ttfGetTextSubStringLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<TtfText> text,
+          Int32 offset,
+          Pointer<TtfSubString> substring,
+        ),
+        int Function(
+          Pointer<TtfText> text,
+          int offset,
+          Pointer<TtfSubString> substring,
+        )
+      >('TTF_GetTextSubString');
   return ttfGetTextSubStringLookupFunction(text, offset, substring) == 1;
 }
 
@@ -3921,18 +4070,19 @@ bool ttfGetTextSubStringForLine(
   int line,
   Pointer<TtfSubString> substring,
 ) {
-  final ttfGetTextSubStringForLineLookupFunction = libSdl3Ttf.lookupFunction<
-    Uint8 Function(
-      Pointer<TtfText> text,
-      Int32 line,
-      Pointer<TtfSubString> substring,
-    ),
-    int Function(
-      Pointer<TtfText> text,
-      int line,
-      Pointer<TtfSubString> substring,
-    )
-  >('TTF_GetTextSubStringForLine');
+  final ttfGetTextSubStringForLineLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<TtfText> text,
+          Int32 line,
+          Pointer<TtfSubString> substring,
+        ),
+        int Function(
+          Pointer<TtfText> text,
+          int line,
+          Pointer<TtfSubString> substring,
+        )
+      >('TTF_GetTextSubStringForLine');
   return ttfGetTextSubStringForLineLookupFunction(text, line, substring) == 1;
 }
 
@@ -3964,20 +4114,21 @@ Pointer<Pointer<TtfSubString>> ttfGetTextSubStringsForRange(
   int length,
   Pointer<Int32> count,
 ) {
-  final ttfGetTextSubStringsForRangeLookupFunction = libSdl3Ttf.lookupFunction<
-    Pointer<Pointer<TtfSubString>> Function(
-      Pointer<TtfText> text,
-      Int32 offset,
-      Int32 length,
-      Pointer<Int32> count,
-    ),
-    Pointer<Pointer<TtfSubString>> Function(
-      Pointer<TtfText> text,
-      int offset,
-      int length,
-      Pointer<Int32> count,
-    )
-  >('TTF_GetTextSubStringsForRange');
+  final ttfGetTextSubStringsForRangeLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Pointer<Pointer<TtfSubString>> Function(
+          Pointer<TtfText> text,
+          Int32 offset,
+          Int32 length,
+          Pointer<Int32> count,
+        ),
+        Pointer<Pointer<TtfSubString>> Function(
+          Pointer<TtfText> text,
+          int offset,
+          int length,
+          Pointer<Int32> count,
+        )
+      >('TTF_GetTextSubStringsForRange');
   return ttfGetTextSubStringsForRangeLookupFunction(
     text,
     offset,
@@ -4015,20 +4166,21 @@ bool ttfGetTextSubStringForPoint(
   int y,
   Pointer<TtfSubString> substring,
 ) {
-  final ttfGetTextSubStringForPointLookupFunction = libSdl3Ttf.lookupFunction<
-    Uint8 Function(
-      Pointer<TtfText> text,
-      Int32 x,
-      Int32 y,
-      Pointer<TtfSubString> substring,
-    ),
-    int Function(
-      Pointer<TtfText> text,
-      int x,
-      int y,
-      Pointer<TtfSubString> substring,
-    )
-  >('TTF_GetTextSubStringForPoint');
+  final ttfGetTextSubStringForPointLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<TtfText> text,
+          Int32 x,
+          Int32 y,
+          Pointer<TtfSubString> substring,
+        ),
+        int Function(
+          Pointer<TtfText> text,
+          int x,
+          int y,
+          Pointer<TtfSubString> substring,
+        )
+      >('TTF_GetTextSubStringForPoint');
   return ttfGetTextSubStringForPointLookupFunction(text, x, y, substring) == 1;
 }
 
@@ -4056,18 +4208,19 @@ bool ttfGetPreviousTextSubString(
   Pointer<TtfSubString> substring,
   Pointer<TtfSubString> previous,
 ) {
-  final ttfGetPreviousTextSubStringLookupFunction = libSdl3Ttf.lookupFunction<
-    Uint8 Function(
-      Pointer<TtfText> text,
-      Pointer<TtfSubString> substring,
-      Pointer<TtfSubString> previous,
-    ),
-    int Function(
-      Pointer<TtfText> text,
-      Pointer<TtfSubString> substring,
-      Pointer<TtfSubString> previous,
-    )
-  >('TTF_GetPreviousTextSubString');
+  final ttfGetPreviousTextSubStringLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<TtfText> text,
+          Pointer<TtfSubString> substring,
+          Pointer<TtfSubString> previous,
+        ),
+        int Function(
+          Pointer<TtfText> text,
+          Pointer<TtfSubString> substring,
+          Pointer<TtfSubString> previous,
+        )
+      >('TTF_GetPreviousTextSubString');
   return ttfGetPreviousTextSubStringLookupFunction(text, substring, previous) ==
       1;
 }
@@ -4097,18 +4250,19 @@ bool ttfGetNextTextSubString(
   Pointer<TtfSubString> substring,
   Pointer<TtfSubString> next,
 ) {
-  final ttfGetNextTextSubStringLookupFunction = libSdl3Ttf.lookupFunction<
-    Uint8 Function(
-      Pointer<TtfText> text,
-      Pointer<TtfSubString> substring,
-      Pointer<TtfSubString> next,
-    ),
-    int Function(
-      Pointer<TtfText> text,
-      Pointer<TtfSubString> substring,
-      Pointer<TtfSubString> next,
-    )
-  >('TTF_GetNextTextSubString');
+  final ttfGetNextTextSubStringLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<TtfText> text,
+          Pointer<TtfSubString> substring,
+          Pointer<TtfSubString> next,
+        ),
+        int Function(
+          Pointer<TtfText> text,
+          Pointer<TtfSubString> substring,
+          Pointer<TtfSubString> next,
+        )
+      >('TTF_GetNextTextSubString');
   return ttfGetNextTextSubStringLookupFunction(text, substring, next) == 1;
 }
 
@@ -4132,10 +4286,11 @@ bool ttfGetNextTextSubString(
 /// extern SDL_DECLSPEC bool SDLCALL TTF_UpdateText(TTF_Text *text)
 /// ```
 bool ttfUpdateText(Pointer<TtfText> text) {
-  final ttfUpdateTextLookupFunction = libSdl3Ttf.lookupFunction<
-    Uint8 Function(Pointer<TtfText> text),
-    int Function(Pointer<TtfText> text)
-  >('TTF_UpdateText');
+  final ttfUpdateTextLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Uint8 Function(Pointer<TtfText> text),
+        int Function(Pointer<TtfText> text)
+      >('TTF_UpdateText');
   return ttfUpdateTextLookupFunction(text) == 1;
 }
 
@@ -4155,10 +4310,11 @@ bool ttfUpdateText(Pointer<TtfText> text) {
 /// extern SDL_DECLSPEC void SDLCALL TTF_DestroyText(TTF_Text *text)
 /// ```
 void ttfDestroyText(Pointer<TtfText> text) {
-  final ttfDestroyTextLookupFunction = libSdl3Ttf.lookupFunction<
-    Void Function(Pointer<TtfText> text),
-    void Function(Pointer<TtfText> text)
-  >('TTF_DestroyText');
+  final ttfDestroyTextLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Void Function(Pointer<TtfText> text),
+        void Function(Pointer<TtfText> text)
+      >('TTF_DestroyText');
   return ttfDestroyTextLookupFunction(text);
 }
 
@@ -4188,10 +4344,11 @@ void ttfDestroyText(Pointer<TtfText> text) {
 /// extern SDL_DECLSPEC void SDLCALL TTF_CloseFont(TTF_Font *font)
 /// ```
 void ttfCloseFont(Pointer<TtfFont> font) {
-  final ttfCloseFontLookupFunction = libSdl3Ttf.lookupFunction<
-    Void Function(Pointer<TtfFont> font),
-    void Function(Pointer<TtfFont> font)
-  >('TTF_CloseFont');
+  final ttfCloseFontLookupFunction = libSdl3Ttf
+      .lookupFunction<
+        Void Function(Pointer<TtfFont> font),
+        void Function(Pointer<TtfFont> font)
+      >('TTF_CloseFont');
   return ttfCloseFontLookupFunction(font);
 }
 

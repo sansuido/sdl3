@@ -49,10 +49,11 @@ int sdlGetNumVideoDrivers() {
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetVideoDriver(int index)
 /// ```
 String? sdlGetVideoDriver(int index) {
-  final sdlGetVideoDriverLookupFunction = libSdl3.lookupFunction<
-    Pointer<Utf8> Function(Int32 index),
-    Pointer<Utf8> Function(int index)
-  >('SDL_GetVideoDriver');
+  final sdlGetVideoDriverLookupFunction = libSdl3
+      .lookupFunction<
+        Pointer<Utf8> Function(Int32 index),
+        Pointer<Utf8> Function(int index)
+      >('SDL_GetVideoDriver');
   final result = sdlGetVideoDriverLookupFunction(index);
   if (result == nullptr) {
     return null;
@@ -127,10 +128,11 @@ int sdlGetSystemTheme() {
 /// extern SDL_DECLSPEC SDL_DisplayID * SDLCALL SDL_GetDisplays(int *count)
 /// ```
 Pointer<Uint32> sdlGetDisplays(Pointer<Int32> count) {
-  final sdlGetDisplaysLookupFunction = libSdl3.lookupFunction<
-    Pointer<Uint32> Function(Pointer<Int32> count),
-    Pointer<Uint32> Function(Pointer<Int32> count)
-  >('SDL_GetDisplays');
+  final sdlGetDisplaysLookupFunction = libSdl3
+      .lookupFunction<
+        Pointer<Uint32> Function(Pointer<Int32> count),
+        Pointer<Uint32> Function(Pointer<Int32> count)
+      >('SDL_GetDisplays');
   return sdlGetDisplaysLookupFunction(count);
 }
 
@@ -192,10 +194,11 @@ int sdlGetPrimaryDisplay() {
 /// extern SDL_DECLSPEC SDL_PropertiesID SDLCALL SDL_GetDisplayProperties(SDL_DisplayID displayID)
 /// ```
 int sdlGetDisplayProperties(int displayId) {
-  final sdlGetDisplayPropertiesLookupFunction = libSdl3.lookupFunction<
-    Uint32 Function(Uint32 displayId),
-    int Function(int displayId)
-  >('SDL_GetDisplayProperties');
+  final sdlGetDisplayPropertiesLookupFunction = libSdl3
+      .lookupFunction<
+        Uint32 Function(Uint32 displayId),
+        int Function(int displayId)
+      >('SDL_GetDisplayProperties');
   return sdlGetDisplayPropertiesLookupFunction(displayId);
 }
 
@@ -216,10 +219,11 @@ int sdlGetDisplayProperties(int displayId) {
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetDisplayName(SDL_DisplayID displayID)
 /// ```
 String? sdlGetDisplayName(int displayId) {
-  final sdlGetDisplayNameLookupFunction = libSdl3.lookupFunction<
-    Pointer<Utf8> Function(Uint32 displayId),
-    Pointer<Utf8> Function(int displayId)
-  >('SDL_GetDisplayName');
+  final sdlGetDisplayNameLookupFunction = libSdl3
+      .lookupFunction<
+        Pointer<Utf8> Function(Uint32 displayId),
+        Pointer<Utf8> Function(int displayId)
+      >('SDL_GetDisplayName');
   final result = sdlGetDisplayNameLookupFunction(displayId);
   if (result == nullptr) {
     return null;
@@ -249,10 +253,11 @@ String? sdlGetDisplayName(int displayId) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetDisplayBounds(SDL_DisplayID displayID, SDL_Rect *rect)
 /// ```
 bool sdlGetDisplayBounds(int displayId, Pointer<SdlRect> rect) {
-  final sdlGetDisplayBoundsLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Uint32 displayId, Pointer<SdlRect> rect),
-    int Function(int displayId, Pointer<SdlRect> rect)
-  >('SDL_GetDisplayBounds');
+  final sdlGetDisplayBoundsLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(Uint32 displayId, Pointer<SdlRect> rect),
+        int Function(int displayId, Pointer<SdlRect> rect)
+      >('SDL_GetDisplayBounds');
   return sdlGetDisplayBoundsLookupFunction(displayId, rect) == 1;
 }
 
@@ -284,10 +289,11 @@ bool sdlGetDisplayBounds(int displayId, Pointer<SdlRect> rect) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetDisplayUsableBounds(SDL_DisplayID displayID, SDL_Rect *rect)
 /// ```
 bool sdlGetDisplayUsableBounds(int displayId, Pointer<SdlRect> rect) {
-  final sdlGetDisplayUsableBoundsLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Uint32 displayId, Pointer<SdlRect> rect),
-    int Function(int displayId, Pointer<SdlRect> rect)
-  >('SDL_GetDisplayUsableBounds');
+  final sdlGetDisplayUsableBoundsLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(Uint32 displayId, Pointer<SdlRect> rect),
+        int Function(int displayId, Pointer<SdlRect> rect)
+      >('SDL_GetDisplayUsableBounds');
   return sdlGetDisplayUsableBoundsLookupFunction(displayId, rect) == 1;
 }
 
@@ -308,10 +314,11 @@ bool sdlGetDisplayUsableBounds(int displayId, Pointer<SdlRect> rect) {
 /// extern SDL_DECLSPEC SDL_DisplayOrientation SDLCALL SDL_GetNaturalDisplayOrientation(SDL_DisplayID displayID)
 /// ```
 int sdlGetNaturalDisplayOrientation(int displayId) {
-  final sdlGetNaturalDisplayOrientationLookupFunction = libSdl3.lookupFunction<
-    Int32 Function(Uint32 displayId),
-    int Function(int displayId)
-  >('SDL_GetNaturalDisplayOrientation');
+  final sdlGetNaturalDisplayOrientationLookupFunction = libSdl3
+      .lookupFunction<
+        Int32 Function(Uint32 displayId),
+        int Function(int displayId)
+      >('SDL_GetNaturalDisplayOrientation');
   return sdlGetNaturalDisplayOrientationLookupFunction(displayId);
 }
 
@@ -332,10 +339,11 @@ int sdlGetNaturalDisplayOrientation(int displayId) {
 /// extern SDL_DECLSPEC SDL_DisplayOrientation SDLCALL SDL_GetCurrentDisplayOrientation(SDL_DisplayID displayID)
 /// ```
 int sdlGetCurrentDisplayOrientation(int displayId) {
-  final sdlGetCurrentDisplayOrientationLookupFunction = libSdl3.lookupFunction<
-    Int32 Function(Uint32 displayId),
-    int Function(int displayId)
-  >('SDL_GetCurrentDisplayOrientation');
+  final sdlGetCurrentDisplayOrientationLookupFunction = libSdl3
+      .lookupFunction<
+        Int32 Function(Uint32 displayId),
+        int Function(int displayId)
+      >('SDL_GetCurrentDisplayOrientation');
   return sdlGetCurrentDisplayOrientationLookupFunction(displayId);
 }
 
@@ -368,10 +376,11 @@ int sdlGetCurrentDisplayOrientation(int displayId) {
 /// extern SDL_DECLSPEC float SDLCALL SDL_GetDisplayContentScale(SDL_DisplayID displayID)
 /// ```
 double sdlGetDisplayContentScale(int displayId) {
-  final sdlGetDisplayContentScaleLookupFunction = libSdl3.lookupFunction<
-    Float Function(Uint32 displayId),
-    double Function(int displayId)
-  >('SDL_GetDisplayContentScale');
+  final sdlGetDisplayContentScaleLookupFunction = libSdl3
+      .lookupFunction<
+        Float Function(Uint32 displayId),
+        double Function(int displayId)
+      >('SDL_GetDisplayContentScale');
   return sdlGetDisplayContentScaleLookupFunction(displayId);
 }
 
@@ -408,16 +417,17 @@ Pointer<Pointer<SdlDisplayMode>> sdlGetFullscreenDisplayModes(
   int displayId,
   Pointer<Int32> count,
 ) {
-  final sdlGetFullscreenDisplayModesLookupFunction = libSdl3.lookupFunction<
-    Pointer<Pointer<SdlDisplayMode>> Function(
-      Uint32 displayId,
-      Pointer<Int32> count,
-    ),
-    Pointer<Pointer<SdlDisplayMode>> Function(
-      int displayId,
-      Pointer<Int32> count,
-    )
-  >('SDL_GetFullscreenDisplayModes');
+  final sdlGetFullscreenDisplayModesLookupFunction = libSdl3
+      .lookupFunction<
+        Pointer<Pointer<SdlDisplayMode>> Function(
+          Uint32 displayId,
+          Pointer<Int32> count,
+        ),
+        Pointer<Pointer<SdlDisplayMode>> Function(
+          int displayId,
+          Pointer<Int32> count,
+        )
+      >('SDL_GetFullscreenDisplayModes');
   return sdlGetFullscreenDisplayModesLookupFunction(displayId, count);
 }
 
@@ -514,10 +524,11 @@ bool sdlGetClosestFullscreenDisplayMode(
 /// extern SDL_DECLSPEC const SDL_DisplayMode * SDLCALL SDL_GetDesktopDisplayMode(SDL_DisplayID displayID)
 /// ```
 Pointer<SdlDisplayMode> sdlGetDesktopDisplayMode(int displayId) {
-  final sdlGetDesktopDisplayModeLookupFunction = libSdl3.lookupFunction<
-    Pointer<SdlDisplayMode> Function(Uint32 displayId),
-    Pointer<SdlDisplayMode> Function(int displayId)
-  >('SDL_GetDesktopDisplayMode');
+  final sdlGetDesktopDisplayModeLookupFunction = libSdl3
+      .lookupFunction<
+        Pointer<SdlDisplayMode> Function(Uint32 displayId),
+        Pointer<SdlDisplayMode> Function(int displayId)
+      >('SDL_GetDesktopDisplayMode');
   return sdlGetDesktopDisplayModeLookupFunction(displayId);
 }
 
@@ -544,10 +555,11 @@ Pointer<SdlDisplayMode> sdlGetDesktopDisplayMode(int displayId) {
 /// extern SDL_DECLSPEC const SDL_DisplayMode * SDLCALL SDL_GetCurrentDisplayMode(SDL_DisplayID displayID)
 /// ```
 Pointer<SdlDisplayMode> sdlGetCurrentDisplayMode(int displayId) {
-  final sdlGetCurrentDisplayModeLookupFunction = libSdl3.lookupFunction<
-    Pointer<SdlDisplayMode> Function(Uint32 displayId),
-    Pointer<SdlDisplayMode> Function(int displayId)
-  >('SDL_GetCurrentDisplayMode');
+  final sdlGetCurrentDisplayModeLookupFunction = libSdl3
+      .lookupFunction<
+        Pointer<SdlDisplayMode> Function(Uint32 displayId),
+        Pointer<SdlDisplayMode> Function(int displayId)
+      >('SDL_GetCurrentDisplayMode');
   return sdlGetCurrentDisplayModeLookupFunction(displayId);
 }
 
@@ -569,10 +581,11 @@ Pointer<SdlDisplayMode> sdlGetCurrentDisplayMode(int displayId) {
 /// extern SDL_DECLSPEC SDL_DisplayID SDLCALL SDL_GetDisplayForPoint(const SDL_Point *point)
 /// ```
 int sdlGetDisplayForPoint(Pointer<SdlPoint> point) {
-  final sdlGetDisplayForPointLookupFunction = libSdl3.lookupFunction<
-    Uint32 Function(Pointer<SdlPoint> point),
-    int Function(Pointer<SdlPoint> point)
-  >('SDL_GetDisplayForPoint');
+  final sdlGetDisplayForPointLookupFunction = libSdl3
+      .lookupFunction<
+        Uint32 Function(Pointer<SdlPoint> point),
+        int Function(Pointer<SdlPoint> point)
+      >('SDL_GetDisplayForPoint');
   return sdlGetDisplayForPointLookupFunction(point);
 }
 
@@ -595,10 +608,11 @@ int sdlGetDisplayForPoint(Pointer<SdlPoint> point) {
 /// extern SDL_DECLSPEC SDL_DisplayID SDLCALL SDL_GetDisplayForRect(const SDL_Rect *rect)
 /// ```
 int sdlGetDisplayForRect(Pointer<SdlRect> rect) {
-  final sdlGetDisplayForRectLookupFunction = libSdl3.lookupFunction<
-    Uint32 Function(Pointer<SdlRect> rect),
-    int Function(Pointer<SdlRect> rect)
-  >('SDL_GetDisplayForRect');
+  final sdlGetDisplayForRectLookupFunction = libSdl3
+      .lookupFunction<
+        Uint32 Function(Pointer<SdlRect> rect),
+        int Function(Pointer<SdlRect> rect)
+      >('SDL_GetDisplayForRect');
   return sdlGetDisplayForRectLookupFunction(rect);
 }
 
@@ -621,10 +635,11 @@ int sdlGetDisplayForRect(Pointer<SdlRect> rect) {
 /// extern SDL_DECLSPEC SDL_DisplayID SDLCALL SDL_GetDisplayForWindow(SDL_Window *window)
 /// ```
 int sdlGetDisplayForWindow(Pointer<SdlWindow> window) {
-  final sdlGetDisplayForWindowLookupFunction = libSdl3.lookupFunction<
-    Uint32 Function(Pointer<SdlWindow> window),
-    int Function(Pointer<SdlWindow> window)
-  >('SDL_GetDisplayForWindow');
+  final sdlGetDisplayForWindowLookupFunction = libSdl3
+      .lookupFunction<
+        Uint32 Function(Pointer<SdlWindow> window),
+        int Function(Pointer<SdlWindow> window)
+      >('SDL_GetDisplayForWindow');
   return sdlGetDisplayForWindowLookupFunction(window);
 }
 
@@ -649,10 +664,11 @@ int sdlGetDisplayForWindow(Pointer<SdlWindow> window) {
 /// extern SDL_DECLSPEC float SDLCALL SDL_GetWindowPixelDensity(SDL_Window *window)
 /// ```
 double sdlGetWindowPixelDensity(Pointer<SdlWindow> window) {
-  final sdlGetWindowPixelDensityLookupFunction = libSdl3.lookupFunction<
-    Float Function(Pointer<SdlWindow> window),
-    double Function(Pointer<SdlWindow> window)
-  >('SDL_GetWindowPixelDensity');
+  final sdlGetWindowPixelDensityLookupFunction = libSdl3
+      .lookupFunction<
+        Float Function(Pointer<SdlWindow> window),
+        double Function(Pointer<SdlWindow> window)
+      >('SDL_GetWindowPixelDensity');
   return sdlGetWindowPixelDensityLookupFunction(window);
 }
 
@@ -682,10 +698,11 @@ double sdlGetWindowPixelDensity(Pointer<SdlWindow> window) {
 /// extern SDL_DECLSPEC float SDLCALL SDL_GetWindowDisplayScale(SDL_Window *window)
 /// ```
 double sdlGetWindowDisplayScale(Pointer<SdlWindow> window) {
-  final sdlGetWindowDisplayScaleLookupFunction = libSdl3.lookupFunction<
-    Float Function(Pointer<SdlWindow> window),
-    double Function(Pointer<SdlWindow> window)
-  >('SDL_GetWindowDisplayScale');
+  final sdlGetWindowDisplayScaleLookupFunction = libSdl3
+      .lookupFunction<
+        Float Function(Pointer<SdlWindow> window),
+        double Function(Pointer<SdlWindow> window)
+      >('SDL_GetWindowDisplayScale');
   return sdlGetWindowDisplayScaleLookupFunction(window);
 }
 
@@ -729,10 +746,11 @@ bool sdlSetWindowFullscreenMode(
   Pointer<SdlWindow> window,
   Pointer<SdlDisplayMode> mode,
 ) {
-  final sdlSetWindowFullscreenModeLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Pointer<SdlWindow> window, Pointer<SdlDisplayMode> mode),
-    int Function(Pointer<SdlWindow> window, Pointer<SdlDisplayMode> mode)
-  >('SDL_SetWindowFullscreenMode');
+  final sdlSetWindowFullscreenModeLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(Pointer<SdlWindow> window, Pointer<SdlDisplayMode> mode),
+        int Function(Pointer<SdlWindow> window, Pointer<SdlDisplayMode> mode)
+      >('SDL_SetWindowFullscreenMode');
   return sdlSetWindowFullscreenModeLookupFunction(window, mode) == 1;
 }
 
@@ -754,10 +772,11 @@ bool sdlSetWindowFullscreenMode(
 /// extern SDL_DECLSPEC const SDL_DisplayMode * SDLCALL SDL_GetWindowFullscreenMode(SDL_Window *window)
 /// ```
 Pointer<SdlDisplayMode> sdlGetWindowFullscreenMode(Pointer<SdlWindow> window) {
-  final sdlGetWindowFullscreenModeLookupFunction = libSdl3.lookupFunction<
-    Pointer<SdlDisplayMode> Function(Pointer<SdlWindow> window),
-    Pointer<SdlDisplayMode> Function(Pointer<SdlWindow> window)
-  >('SDL_GetWindowFullscreenMode');
+  final sdlGetWindowFullscreenModeLookupFunction = libSdl3
+      .lookupFunction<
+        Pointer<SdlDisplayMode> Function(Pointer<SdlWindow> window),
+        Pointer<SdlDisplayMode> Function(Pointer<SdlWindow> window)
+      >('SDL_GetWindowFullscreenMode');
   return sdlGetWindowFullscreenModeLookupFunction(window);
 }
 
@@ -781,16 +800,17 @@ Pointer<NativeType> sdlGetWindowIccProfile(
   Pointer<SdlWindow> window,
   Pointer<Uint32> size,
 ) {
-  final sdlGetWindowIccProfileLookupFunction = libSdl3.lookupFunction<
-    Pointer<NativeType> Function(
-      Pointer<SdlWindow> window,
-      Pointer<Uint32> size,
-    ),
-    Pointer<NativeType> Function(
-      Pointer<SdlWindow> window,
-      Pointer<Uint32> size,
-    )
-  >('SDL_GetWindowICCProfile');
+  final sdlGetWindowIccProfileLookupFunction = libSdl3
+      .lookupFunction<
+        Pointer<NativeType> Function(
+          Pointer<SdlWindow> window,
+          Pointer<Uint32> size,
+        ),
+        Pointer<NativeType> Function(
+          Pointer<SdlWindow> window,
+          Pointer<Uint32> size,
+        )
+      >('SDL_GetWindowICCProfile');
   return sdlGetWindowIccProfileLookupFunction(window, size);
 }
 
@@ -810,10 +830,11 @@ Pointer<NativeType> sdlGetWindowIccProfile(
 /// extern SDL_DECLSPEC SDL_PixelFormat SDLCALL SDL_GetWindowPixelFormat(SDL_Window *window)
 /// ```
 int sdlGetWindowPixelFormat(Pointer<SdlWindow> window) {
-  final sdlGetWindowPixelFormatLookupFunction = libSdl3.lookupFunction<
-    Int32 Function(Pointer<SdlWindow> window),
-    int Function(Pointer<SdlWindow> window)
-  >('SDL_GetWindowPixelFormat');
+  final sdlGetWindowPixelFormatLookupFunction = libSdl3
+      .lookupFunction<
+        Int32 Function(Pointer<SdlWindow> window),
+        int Function(Pointer<SdlWindow> window)
+      >('SDL_GetWindowPixelFormat');
   return sdlGetWindowPixelFormatLookupFunction(window);
 }
 
@@ -835,10 +856,11 @@ int sdlGetWindowPixelFormat(Pointer<SdlWindow> window) {
 /// extern SDL_DECLSPEC SDL_Window ** SDLCALL SDL_GetWindows(int *count)
 /// ```
 Pointer<Pointer<SdlWindow>> sdlGetWindows(Pointer<Int32> count) {
-  final sdlGetWindowsLookupFunction = libSdl3.lookupFunction<
-    Pointer<Pointer<SdlWindow>> Function(Pointer<Int32> count),
-    Pointer<Pointer<SdlWindow>> Function(Pointer<Int32> count)
-  >('SDL_GetWindows');
+  final sdlGetWindowsLookupFunction = libSdl3
+      .lookupFunction<
+        Pointer<Pointer<SdlWindow>> Function(Pointer<Int32> count),
+        Pointer<Pointer<SdlWindow>> Function(Pointer<Int32> count)
+      >('SDL_GetWindows');
   return sdlGetWindowsLookupFunction(count);
 }
 
@@ -934,15 +956,21 @@ Pointer<Pointer<SdlWindow>> sdlGetWindows(Pointer<Int32> count) {
 /// extern SDL_DECLSPEC SDL_Window * SDLCALL SDL_CreateWindow(const char *title, int w, int h, SDL_WindowFlags flags)
 /// ```
 Pointer<SdlWindow> sdlCreateWindow(String? title, int w, int h, int flags) {
-  final sdlCreateWindowLookupFunction = libSdl3.lookupFunction<
-    Pointer<SdlWindow> Function(
-      Pointer<Utf8> title,
-      Int32 w,
-      Int32 h,
-      Uint64 flags,
-    ),
-    Pointer<SdlWindow> Function(Pointer<Utf8> title, int w, int h, int flags)
-  >('SDL_CreateWindow');
+  final sdlCreateWindowLookupFunction = libSdl3
+      .lookupFunction<
+        Pointer<SdlWindow> Function(
+          Pointer<Utf8> title,
+          Int32 w,
+          Int32 h,
+          Uint64 flags,
+        ),
+        Pointer<SdlWindow> Function(
+          Pointer<Utf8> title,
+          int w,
+          int h,
+          int flags,
+        )
+      >('SDL_CreateWindow');
   final titlePointer = title != null ? title.toNativeUtf8() : nullptr;
   final result = sdlCreateWindowLookupFunction(titlePointer, w, h, flags);
   calloc.free(titlePointer);
@@ -1034,24 +1062,25 @@ Pointer<SdlWindow> sdlCreatePopupWindow(
   int h,
   int flags,
 ) {
-  final sdlCreatePopupWindowLookupFunction = libSdl3.lookupFunction<
-    Pointer<SdlWindow> Function(
-      Pointer<SdlWindow> parent,
-      Int32 offsetX,
-      Int32 offsetY,
-      Int32 w,
-      Int32 h,
-      Uint64 flags,
-    ),
-    Pointer<SdlWindow> Function(
-      Pointer<SdlWindow> parent,
-      int offsetX,
-      int offsetY,
-      int w,
-      int h,
-      int flags,
-    )
-  >('SDL_CreatePopupWindow');
+  final sdlCreatePopupWindowLookupFunction = libSdl3
+      .lookupFunction<
+        Pointer<SdlWindow> Function(
+          Pointer<SdlWindow> parent,
+          Int32 offsetX,
+          Int32 offsetY,
+          Int32 w,
+          Int32 h,
+          Uint64 flags,
+        ),
+        Pointer<SdlWindow> Function(
+          Pointer<SdlWindow> parent,
+          int offsetX,
+          int offsetY,
+          int w,
+          int h,
+          int flags,
+        )
+      >('SDL_CreatePopupWindow');
   return sdlCreatePopupWindowLookupFunction(
     parent,
     offsetX,
@@ -1207,10 +1236,11 @@ Pointer<SdlWindow> sdlCreatePopupWindow(
 /// extern SDL_DECLSPEC SDL_Window * SDLCALL SDL_CreateWindowWithProperties(SDL_PropertiesID props)
 /// ```
 Pointer<SdlWindow> sdlCreateWindowWithProperties(int props) {
-  final sdlCreateWindowWithPropertiesLookupFunction = libSdl3.lookupFunction<
-    Pointer<SdlWindow> Function(Uint32 props),
-    Pointer<SdlWindow> Function(int props)
-  >('SDL_CreateWindowWithProperties');
+  final sdlCreateWindowWithPropertiesLookupFunction = libSdl3
+      .lookupFunction<
+        Pointer<SdlWindow> Function(Uint32 props),
+        Pointer<SdlWindow> Function(int props)
+      >('SDL_CreateWindowWithProperties');
   return sdlCreateWindowWithPropertiesLookupFunction(props);
 }
 
@@ -1234,10 +1264,11 @@ Pointer<SdlWindow> sdlCreateWindowWithProperties(int props) {
 /// extern SDL_DECLSPEC SDL_WindowID SDLCALL SDL_GetWindowID(SDL_Window *window)
 /// ```
 int sdlGetWindowId(Pointer<SdlWindow> window) {
-  final sdlGetWindowIdLookupFunction = libSdl3.lookupFunction<
-    Uint32 Function(Pointer<SdlWindow> window),
-    int Function(Pointer<SdlWindow> window)
-  >('SDL_GetWindowID');
+  final sdlGetWindowIdLookupFunction = libSdl3
+      .lookupFunction<
+        Uint32 Function(Pointer<SdlWindow> window),
+        int Function(Pointer<SdlWindow> window)
+      >('SDL_GetWindowID');
   return sdlGetWindowIdLookupFunction(window);
 }
 
@@ -1261,10 +1292,11 @@ int sdlGetWindowId(Pointer<SdlWindow> window) {
 /// extern SDL_DECLSPEC SDL_Window * SDLCALL SDL_GetWindowFromID(SDL_WindowID id)
 /// ```
 Pointer<SdlWindow> sdlGetWindowFromId(int id) {
-  final sdlGetWindowFromIdLookupFunction = libSdl3.lookupFunction<
-    Pointer<SdlWindow> Function(Uint32 id),
-    Pointer<SdlWindow> Function(int id)
-  >('SDL_GetWindowFromID');
+  final sdlGetWindowFromIdLookupFunction = libSdl3
+      .lookupFunction<
+        Pointer<SdlWindow> Function(Uint32 id),
+        Pointer<SdlWindow> Function(int id)
+      >('SDL_GetWindowFromID');
   return sdlGetWindowFromIdLookupFunction(id);
 }
 
@@ -1285,10 +1317,11 @@ Pointer<SdlWindow> sdlGetWindowFromId(int id) {
 /// extern SDL_DECLSPEC SDL_Window * SDLCALL SDL_GetWindowParent(SDL_Window *window)
 /// ```
 Pointer<SdlWindow> sdlGetWindowParent(Pointer<SdlWindow> window) {
-  final sdlGetWindowParentLookupFunction = libSdl3.lookupFunction<
-    Pointer<SdlWindow> Function(Pointer<SdlWindow> window),
-    Pointer<SdlWindow> Function(Pointer<SdlWindow> window)
-  >('SDL_GetWindowParent');
+  final sdlGetWindowParentLookupFunction = libSdl3
+      .lookupFunction<
+        Pointer<SdlWindow> Function(Pointer<SdlWindow> window),
+        Pointer<SdlWindow> Function(Pointer<SdlWindow> window)
+      >('SDL_GetWindowParent');
   return sdlGetWindowParentLookupFunction(window);
 }
 
@@ -1423,10 +1456,11 @@ Pointer<SdlWindow> sdlGetWindowParent(Pointer<SdlWindow> window) {
 /// extern SDL_DECLSPEC SDL_PropertiesID SDLCALL SDL_GetWindowProperties(SDL_Window *window)
 /// ```
 int sdlGetWindowProperties(Pointer<SdlWindow> window) {
-  final sdlGetWindowPropertiesLookupFunction = libSdl3.lookupFunction<
-    Uint32 Function(Pointer<SdlWindow> window),
-    int Function(Pointer<SdlWindow> window)
-  >('SDL_GetWindowProperties');
+  final sdlGetWindowPropertiesLookupFunction = libSdl3
+      .lookupFunction<
+        Uint32 Function(Pointer<SdlWindow> window),
+        int Function(Pointer<SdlWindow> window)
+      >('SDL_GetWindowProperties');
   return sdlGetWindowPropertiesLookupFunction(window);
 }
 
@@ -1452,10 +1486,11 @@ int sdlGetWindowProperties(Pointer<SdlWindow> window) {
 /// extern SDL_DECLSPEC SDL_WindowFlags SDLCALL SDL_GetWindowFlags(SDL_Window *window)
 /// ```
 int sdlGetWindowFlags(Pointer<SdlWindow> window) {
-  final sdlGetWindowFlagsLookupFunction = libSdl3.lookupFunction<
-    Uint64 Function(Pointer<SdlWindow> window),
-    int Function(Pointer<SdlWindow> window)
-  >('SDL_GetWindowFlags');
+  final sdlGetWindowFlagsLookupFunction = libSdl3
+      .lookupFunction<
+        Uint64 Function(Pointer<SdlWindow> window),
+        int Function(Pointer<SdlWindow> window)
+      >('SDL_GetWindowFlags');
   return sdlGetWindowFlagsLookupFunction(window);
 }
 
@@ -1479,10 +1514,11 @@ int sdlGetWindowFlags(Pointer<SdlWindow> window) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowTitle(SDL_Window *window, const char *title)
 /// ```
 bool sdlSetWindowTitle(Pointer<SdlWindow> window, String? title) {
-  final sdlSetWindowTitleLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Pointer<SdlWindow> window, Pointer<Utf8> title),
-    int Function(Pointer<SdlWindow> window, Pointer<Utf8> title)
-  >('SDL_SetWindowTitle');
+  final sdlSetWindowTitleLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(Pointer<SdlWindow> window, Pointer<Utf8> title),
+        int Function(Pointer<SdlWindow> window, Pointer<Utf8> title)
+      >('SDL_SetWindowTitle');
   final titlePointer = title != null ? title.toNativeUtf8() : nullptr;
   final result = sdlSetWindowTitleLookupFunction(window, titlePointer) == 1;
   calloc.free(titlePointer);
@@ -1506,10 +1542,11 @@ bool sdlSetWindowTitle(Pointer<SdlWindow> window, String? title) {
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetWindowTitle(SDL_Window *window)
 /// ```
 String? sdlGetWindowTitle(Pointer<SdlWindow> window) {
-  final sdlGetWindowTitleLookupFunction = libSdl3.lookupFunction<
-    Pointer<Utf8> Function(Pointer<SdlWindow> window),
-    Pointer<Utf8> Function(Pointer<SdlWindow> window)
-  >('SDL_GetWindowTitle');
+  final sdlGetWindowTitleLookupFunction = libSdl3
+      .lookupFunction<
+        Pointer<Utf8> Function(Pointer<SdlWindow> window),
+        Pointer<Utf8> Function(Pointer<SdlWindow> window)
+      >('SDL_GetWindowTitle');
   final result = sdlGetWindowTitleLookupFunction(window);
   if (result == nullptr) {
     return null;
@@ -1543,10 +1580,11 @@ String? sdlGetWindowTitle(Pointer<SdlWindow> window) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowIcon(SDL_Window *window, SDL_Surface *icon)
 /// ```
 bool sdlSetWindowIcon(Pointer<SdlWindow> window, Pointer<SdlSurface> icon) {
-  final sdlSetWindowIconLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Pointer<SdlWindow> window, Pointer<SdlSurface> icon),
-    int Function(Pointer<SdlWindow> window, Pointer<SdlSurface> icon)
-  >('SDL_SetWindowIcon');
+  final sdlSetWindowIconLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(Pointer<SdlWindow> window, Pointer<SdlSurface> icon),
+        int Function(Pointer<SdlWindow> window, Pointer<SdlSurface> icon)
+      >('SDL_SetWindowIcon');
   return sdlSetWindowIconLookupFunction(window, icon) == 1;
 }
 
@@ -1593,10 +1631,11 @@ bool sdlSetWindowIcon(Pointer<SdlWindow> window, Pointer<SdlSurface> icon) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowPosition(SDL_Window *window, int x, int y)
 /// ```
 bool sdlSetWindowPosition(Pointer<SdlWindow> window, int x, int y) {
-  final sdlSetWindowPositionLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Pointer<SdlWindow> window, Int32 x, Int32 y),
-    int Function(Pointer<SdlWindow> window, int x, int y)
-  >('SDL_SetWindowPosition');
+  final sdlSetWindowPositionLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(Pointer<SdlWindow> window, Int32 x, Int32 y),
+        int Function(Pointer<SdlWindow> window, int x, int y)
+      >('SDL_SetWindowPosition');
   return sdlSetWindowPositionLookupFunction(window, x, y) == 1;
 }
 
@@ -1631,14 +1670,19 @@ bool sdlGetWindowPosition(
   Pointer<Int32> x,
   Pointer<Int32> y,
 ) {
-  final sdlGetWindowPositionLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(
-      Pointer<SdlWindow> window,
-      Pointer<Int32> x,
-      Pointer<Int32> y,
-    ),
-    int Function(Pointer<SdlWindow> window, Pointer<Int32> x, Pointer<Int32> y)
-  >('SDL_GetWindowPosition');
+  final sdlGetWindowPositionLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<SdlWindow> window,
+          Pointer<Int32> x,
+          Pointer<Int32> y,
+        ),
+        int Function(
+          Pointer<SdlWindow> window,
+          Pointer<Int32> x,
+          Pointer<Int32> y,
+        )
+      >('SDL_GetWindowPosition');
   return sdlGetWindowPositionLookupFunction(window, x, y) == 1;
 }
 
@@ -1681,10 +1725,11 @@ bool sdlGetWindowPosition(
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowSize(SDL_Window *window, int w, int h)
 /// ```
 bool sdlSetWindowSize(Pointer<SdlWindow> window, int w, int h) {
-  final sdlSetWindowSizeLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Pointer<SdlWindow> window, Int32 w, Int32 h),
-    int Function(Pointer<SdlWindow> window, int w, int h)
-  >('SDL_SetWindowSize');
+  final sdlSetWindowSizeLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(Pointer<SdlWindow> window, Int32 w, Int32 h),
+        int Function(Pointer<SdlWindow> window, int w, int h)
+      >('SDL_SetWindowSize');
   return sdlSetWindowSizeLookupFunction(window, w, h) == 1;
 }
 
@@ -1717,14 +1762,19 @@ bool sdlGetWindowSize(
   Pointer<Int32> w,
   Pointer<Int32> h,
 ) {
-  final sdlGetWindowSizeLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(
-      Pointer<SdlWindow> window,
-      Pointer<Int32> w,
-      Pointer<Int32> h,
-    ),
-    int Function(Pointer<SdlWindow> window, Pointer<Int32> w, Pointer<Int32> h)
-  >('SDL_GetWindowSize');
+  final sdlGetWindowSizeLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<SdlWindow> window,
+          Pointer<Int32> w,
+          Pointer<Int32> h,
+        ),
+        int Function(
+          Pointer<SdlWindow> window,
+          Pointer<Int32> w,
+          Pointer<Int32> h,
+        )
+      >('SDL_GetWindowSize');
   return sdlGetWindowSizeLookupFunction(window, w, h) == 1;
 }
 
@@ -1752,10 +1802,11 @@ bool sdlGetWindowSize(
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowSafeArea(SDL_Window *window, SDL_Rect *rect)
 /// ```
 bool sdlGetWindowSafeArea(Pointer<SdlWindow> window, Pointer<SdlRect> rect) {
-  final sdlGetWindowSafeAreaLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Pointer<SdlWindow> window, Pointer<SdlRect> rect),
-    int Function(Pointer<SdlWindow> window, Pointer<SdlRect> rect)
-  >('SDL_GetWindowSafeArea');
+  final sdlGetWindowSafeAreaLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(Pointer<SdlWindow> window, Pointer<SdlRect> rect),
+        int Function(Pointer<SdlWindow> window, Pointer<SdlRect> rect)
+      >('SDL_GetWindowSafeArea');
   return sdlGetWindowSafeAreaLookupFunction(window, rect) == 1;
 }
 
@@ -1806,10 +1857,19 @@ bool sdlSetWindowAspectRatio(
   double minAspect,
   double maxAspect,
 ) {
-  final sdlSetWindowAspectRatioLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Pointer<SdlWindow> window, Float minAspect, Float maxAspect),
-    int Function(Pointer<SdlWindow> window, double minAspect, double maxAspect)
-  >('SDL_SetWindowAspectRatio');
+  final sdlSetWindowAspectRatioLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<SdlWindow> window,
+          Float minAspect,
+          Float maxAspect,
+        ),
+        int Function(
+          Pointer<SdlWindow> window,
+          double minAspect,
+          double maxAspect,
+        )
+      >('SDL_SetWindowAspectRatio');
   return sdlSetWindowAspectRatioLookupFunction(window, minAspect, maxAspect) ==
       1;
 }
@@ -1839,18 +1899,19 @@ bool sdlGetWindowAspectRatio(
   Pointer<Float> minAspect,
   Pointer<Float> maxAspect,
 ) {
-  final sdlGetWindowAspectRatioLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(
-      Pointer<SdlWindow> window,
-      Pointer<Float> minAspect,
-      Pointer<Float> maxAspect,
-    ),
-    int Function(
-      Pointer<SdlWindow> window,
-      Pointer<Float> minAspect,
-      Pointer<Float> maxAspect,
-    )
-  >('SDL_GetWindowAspectRatio');
+  final sdlGetWindowAspectRatioLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<SdlWindow> window,
+          Pointer<Float> minAspect,
+          Pointer<Float> maxAspect,
+        ),
+        int Function(
+          Pointer<SdlWindow> window,
+          Pointer<Float> minAspect,
+          Pointer<Float> maxAspect,
+        )
+      >('SDL_GetWindowAspectRatio');
   return sdlGetWindowAspectRatioLookupFunction(window, minAspect, maxAspect) ==
       1;
 }
@@ -1900,22 +1961,23 @@ bool sdlGetWindowBordersSize(
   Pointer<Int32> bottom,
   Pointer<Int32> right,
 ) {
-  final sdlGetWindowBordersSizeLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(
-      Pointer<SdlWindow> window,
-      Pointer<Int32> top,
-      Pointer<Int32> left,
-      Pointer<Int32> bottom,
-      Pointer<Int32> right,
-    ),
-    int Function(
-      Pointer<SdlWindow> window,
-      Pointer<Int32> top,
-      Pointer<Int32> left,
-      Pointer<Int32> bottom,
-      Pointer<Int32> right,
-    )
-  >('SDL_GetWindowBordersSize');
+  final sdlGetWindowBordersSizeLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<SdlWindow> window,
+          Pointer<Int32> top,
+          Pointer<Int32> left,
+          Pointer<Int32> bottom,
+          Pointer<Int32> right,
+        ),
+        int Function(
+          Pointer<SdlWindow> window,
+          Pointer<Int32> top,
+          Pointer<Int32> left,
+          Pointer<Int32> bottom,
+          Pointer<Int32> right,
+        )
+      >('SDL_GetWindowBordersSize');
   return sdlGetWindowBordersSizeLookupFunction(
         window,
         top,
@@ -1952,14 +2014,19 @@ bool sdlGetWindowSizeInPixels(
   Pointer<Int32> w,
   Pointer<Int32> h,
 ) {
-  final sdlGetWindowSizeInPixelsLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(
-      Pointer<SdlWindow> window,
-      Pointer<Int32> w,
-      Pointer<Int32> h,
-    ),
-    int Function(Pointer<SdlWindow> window, Pointer<Int32> w, Pointer<Int32> h)
-  >('SDL_GetWindowSizeInPixels');
+  final sdlGetWindowSizeInPixelsLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<SdlWindow> window,
+          Pointer<Int32> w,
+          Pointer<Int32> h,
+        ),
+        int Function(
+          Pointer<SdlWindow> window,
+          Pointer<Int32> w,
+          Pointer<Int32> h,
+        )
+      >('SDL_GetWindowSizeInPixels');
   return sdlGetWindowSizeInPixelsLookupFunction(window, w, h) == 1;
 }
 
@@ -1983,10 +2050,11 @@ bool sdlGetWindowSizeInPixels(
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowMinimumSize(SDL_Window *window, int min_w, int min_h)
 /// ```
 bool sdlSetWindowMinimumSize(Pointer<SdlWindow> window, int minW, int minH) {
-  final sdlSetWindowMinimumSizeLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Pointer<SdlWindow> window, Int32 minW, Int32 minH),
-    int Function(Pointer<SdlWindow> window, int minW, int minH)
-  >('SDL_SetWindowMinimumSize');
+  final sdlSetWindowMinimumSizeLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(Pointer<SdlWindow> window, Int32 minW, Int32 minH),
+        int Function(Pointer<SdlWindow> window, int minW, int minH)
+      >('SDL_SetWindowMinimumSize');
   return sdlSetWindowMinimumSizeLookupFunction(window, minW, minH) == 1;
 }
 
@@ -2016,14 +2084,19 @@ bool sdlGetWindowMinimumSize(
   Pointer<Int32> w,
   Pointer<Int32> h,
 ) {
-  final sdlGetWindowMinimumSizeLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(
-      Pointer<SdlWindow> window,
-      Pointer<Int32> w,
-      Pointer<Int32> h,
-    ),
-    int Function(Pointer<SdlWindow> window, Pointer<Int32> w, Pointer<Int32> h)
-  >('SDL_GetWindowMinimumSize');
+  final sdlGetWindowMinimumSizeLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<SdlWindow> window,
+          Pointer<Int32> w,
+          Pointer<Int32> h,
+        ),
+        int Function(
+          Pointer<SdlWindow> window,
+          Pointer<Int32> w,
+          Pointer<Int32> h,
+        )
+      >('SDL_GetWindowMinimumSize');
   return sdlGetWindowMinimumSizeLookupFunction(window, w, h) == 1;
 }
 
@@ -2047,10 +2120,11 @@ bool sdlGetWindowMinimumSize(
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowMaximumSize(SDL_Window *window, int max_w, int max_h)
 /// ```
 bool sdlSetWindowMaximumSize(Pointer<SdlWindow> window, int maxW, int maxH) {
-  final sdlSetWindowMaximumSizeLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Pointer<SdlWindow> window, Int32 maxW, Int32 maxH),
-    int Function(Pointer<SdlWindow> window, int maxW, int maxH)
-  >('SDL_SetWindowMaximumSize');
+  final sdlSetWindowMaximumSizeLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(Pointer<SdlWindow> window, Int32 maxW, Int32 maxH),
+        int Function(Pointer<SdlWindow> window, int maxW, int maxH)
+      >('SDL_SetWindowMaximumSize');
   return sdlSetWindowMaximumSizeLookupFunction(window, maxW, maxH) == 1;
 }
 
@@ -2080,14 +2154,19 @@ bool sdlGetWindowMaximumSize(
   Pointer<Int32> w,
   Pointer<Int32> h,
 ) {
-  final sdlGetWindowMaximumSizeLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(
-      Pointer<SdlWindow> window,
-      Pointer<Int32> w,
-      Pointer<Int32> h,
-    ),
-    int Function(Pointer<SdlWindow> window, Pointer<Int32> w, Pointer<Int32> h)
-  >('SDL_GetWindowMaximumSize');
+  final sdlGetWindowMaximumSizeLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<SdlWindow> window,
+          Pointer<Int32> w,
+          Pointer<Int32> h,
+        ),
+        int Function(
+          Pointer<SdlWindow> window,
+          Pointer<Int32> w,
+          Pointer<Int32> h,
+        )
+      >('SDL_GetWindowMaximumSize');
   return sdlGetWindowMaximumSizeLookupFunction(window, w, h) == 1;
 }
 
@@ -2115,10 +2194,11 @@ bool sdlGetWindowMaximumSize(
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowBordered(SDL_Window *window, bool bordered)
 /// ```
 bool sdlSetWindowBordered(Pointer<SdlWindow> window, bool bordered) {
-  final sdlSetWindowBorderedLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Pointer<SdlWindow> window, Uint8 bordered),
-    int Function(Pointer<SdlWindow> window, int bordered)
-  >('SDL_SetWindowBordered');
+  final sdlSetWindowBorderedLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(Pointer<SdlWindow> window, Uint8 bordered),
+        int Function(Pointer<SdlWindow> window, int bordered)
+      >('SDL_SetWindowBordered');
   return sdlSetWindowBorderedLookupFunction(window, bordered ? 1 : 0) == 1;
 }
 
@@ -2146,10 +2226,11 @@ bool sdlSetWindowBordered(Pointer<SdlWindow> window, bool bordered) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowResizable(SDL_Window *window, bool resizable)
 /// ```
 bool sdlSetWindowResizable(Pointer<SdlWindow> window, bool resizable) {
-  final sdlSetWindowResizableLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Pointer<SdlWindow> window, Uint8 resizable),
-    int Function(Pointer<SdlWindow> window, int resizable)
-  >('SDL_SetWindowResizable');
+  final sdlSetWindowResizableLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(Pointer<SdlWindow> window, Uint8 resizable),
+        int Function(Pointer<SdlWindow> window, int resizable)
+      >('SDL_SetWindowResizable');
   return sdlSetWindowResizableLookupFunction(window, resizable ? 1 : 0) == 1;
 }
 
@@ -2174,10 +2255,11 @@ bool sdlSetWindowResizable(Pointer<SdlWindow> window, bool resizable) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowAlwaysOnTop(SDL_Window *window, bool on_top)
 /// ```
 bool sdlSetWindowAlwaysOnTop(Pointer<SdlWindow> window, bool onTop) {
-  final sdlSetWindowAlwaysOnTopLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Pointer<SdlWindow> window, Uint8 onTop),
-    int Function(Pointer<SdlWindow> window, int onTop)
-  >('SDL_SetWindowAlwaysOnTop');
+  final sdlSetWindowAlwaysOnTopLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(Pointer<SdlWindow> window, Uint8 onTop),
+        int Function(Pointer<SdlWindow> window, int onTop)
+      >('SDL_SetWindowAlwaysOnTop');
   return sdlSetWindowAlwaysOnTopLookupFunction(window, onTop ? 1 : 0) == 1;
 }
 
@@ -2199,10 +2281,11 @@ bool sdlSetWindowAlwaysOnTop(Pointer<SdlWindow> window, bool onTop) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_ShowWindow(SDL_Window *window)
 /// ```
 bool sdlShowWindow(Pointer<SdlWindow> window) {
-  final sdlShowWindowLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Pointer<SdlWindow> window),
-    int Function(Pointer<SdlWindow> window)
-  >('SDL_ShowWindow');
+  final sdlShowWindowLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(Pointer<SdlWindow> window),
+        int Function(Pointer<SdlWindow> window)
+      >('SDL_ShowWindow');
   return sdlShowWindowLookupFunction(window) == 1;
 }
 
@@ -2224,10 +2307,11 @@ bool sdlShowWindow(Pointer<SdlWindow> window) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_HideWindow(SDL_Window *window)
 /// ```
 bool sdlHideWindow(Pointer<SdlWindow> window) {
-  final sdlHideWindowLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Pointer<SdlWindow> window),
-    int Function(Pointer<SdlWindow> window)
-  >('SDL_HideWindow');
+  final sdlHideWindowLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(Pointer<SdlWindow> window),
+        int Function(Pointer<SdlWindow> window)
+      >('SDL_HideWindow');
   return sdlHideWindowLookupFunction(window) == 1;
 }
 
@@ -2253,10 +2337,11 @@ bool sdlHideWindow(Pointer<SdlWindow> window) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_RaiseWindow(SDL_Window *window)
 /// ```
 bool sdlRaiseWindow(Pointer<SdlWindow> window) {
-  final sdlRaiseWindowLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Pointer<SdlWindow> window),
-    int Function(Pointer<SdlWindow> window)
-  >('SDL_RaiseWindow');
+  final sdlRaiseWindowLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(Pointer<SdlWindow> window),
+        int Function(Pointer<SdlWindow> window)
+      >('SDL_RaiseWindow');
   return sdlRaiseWindowLookupFunction(window) == 1;
 }
 
@@ -2296,10 +2381,11 @@ bool sdlRaiseWindow(Pointer<SdlWindow> window) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_MaximizeWindow(SDL_Window *window)
 /// ```
 bool sdlMaximizeWindow(Pointer<SdlWindow> window) {
-  final sdlMaximizeWindowLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Pointer<SdlWindow> window),
-    int Function(Pointer<SdlWindow> window)
-  >('SDL_MaximizeWindow');
+  final sdlMaximizeWindowLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(Pointer<SdlWindow> window),
+        int Function(Pointer<SdlWindow> window)
+      >('SDL_MaximizeWindow');
   return sdlMaximizeWindowLookupFunction(window) == 1;
 }
 
@@ -2334,10 +2420,11 @@ bool sdlMaximizeWindow(Pointer<SdlWindow> window) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_MinimizeWindow(SDL_Window *window)
 /// ```
 bool sdlMinimizeWindow(Pointer<SdlWindow> window) {
-  final sdlMinimizeWindowLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Pointer<SdlWindow> window),
-    int Function(Pointer<SdlWindow> window)
-  >('SDL_MinimizeWindow');
+  final sdlMinimizeWindowLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(Pointer<SdlWindow> window),
+        int Function(Pointer<SdlWindow> window)
+      >('SDL_MinimizeWindow');
   return sdlMinimizeWindowLookupFunction(window) == 1;
 }
 
@@ -2373,10 +2460,11 @@ bool sdlMinimizeWindow(Pointer<SdlWindow> window) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_RestoreWindow(SDL_Window *window)
 /// ```
 bool sdlRestoreWindow(Pointer<SdlWindow> window) {
-  final sdlRestoreWindowLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Pointer<SdlWindow> window),
-    int Function(Pointer<SdlWindow> window)
-  >('SDL_RestoreWindow');
+  final sdlRestoreWindowLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(Pointer<SdlWindow> window),
+        int Function(Pointer<SdlWindow> window)
+      >('SDL_RestoreWindow');
   return sdlRestoreWindowLookupFunction(window) == 1;
 }
 
@@ -2414,10 +2502,11 @@ bool sdlRestoreWindow(Pointer<SdlWindow> window) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowFullscreen(SDL_Window *window, bool fullscreen)
 /// ```
 bool sdlSetWindowFullscreen(Pointer<SdlWindow> window, bool fullscreen) {
-  final sdlSetWindowFullscreenLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Pointer<SdlWindow> window, Uint8 fullscreen),
-    int Function(Pointer<SdlWindow> window, int fullscreen)
-  >('SDL_SetWindowFullscreen');
+  final sdlSetWindowFullscreenLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(Pointer<SdlWindow> window, Uint8 fullscreen),
+        int Function(Pointer<SdlWindow> window, int fullscreen)
+      >('SDL_SetWindowFullscreen');
   return sdlSetWindowFullscreenLookupFunction(window, fullscreen ? 1 : 0) == 1;
 }
 
@@ -2454,10 +2543,11 @@ bool sdlSetWindowFullscreen(Pointer<SdlWindow> window, bool fullscreen) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SyncWindow(SDL_Window *window)
 /// ```
 bool sdlSyncWindow(Pointer<SdlWindow> window) {
-  final sdlSyncWindowLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Pointer<SdlWindow> window),
-    int Function(Pointer<SdlWindow> window)
-  >('SDL_SyncWindow');
+  final sdlSyncWindowLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(Pointer<SdlWindow> window),
+        int Function(Pointer<SdlWindow> window)
+      >('SDL_SyncWindow');
   return sdlSyncWindowLookupFunction(window) == 1;
 }
 
@@ -2478,10 +2568,11 @@ bool sdlSyncWindow(Pointer<SdlWindow> window) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_WindowHasSurface(SDL_Window *window)
 /// ```
 bool sdlWindowHasSurface(Pointer<SdlWindow> window) {
-  final sdlWindowHasSurfaceLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Pointer<SdlWindow> window),
-    int Function(Pointer<SdlWindow> window)
-  >('SDL_WindowHasSurface');
+  final sdlWindowHasSurfaceLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(Pointer<SdlWindow> window),
+        int Function(Pointer<SdlWindow> window)
+      >('SDL_WindowHasSurface');
   return sdlWindowHasSurfaceLookupFunction(window) == 1;
 }
 
@@ -2516,10 +2607,11 @@ bool sdlWindowHasSurface(Pointer<SdlWindow> window) {
 /// extern SDL_DECLSPEC SDL_Surface * SDLCALL SDL_GetWindowSurface(SDL_Window *window)
 /// ```
 Pointer<SdlSurface> sdlGetWindowSurface(Pointer<SdlWindow> window) {
-  final sdlGetWindowSurfaceLookupFunction = libSdl3.lookupFunction<
-    Pointer<SdlSurface> Function(Pointer<SdlWindow> window),
-    Pointer<SdlSurface> Function(Pointer<SdlWindow> window)
-  >('SDL_GetWindowSurface');
+  final sdlGetWindowSurfaceLookupFunction = libSdl3
+      .lookupFunction<
+        Pointer<SdlSurface> Function(Pointer<SdlWindow> window),
+        Pointer<SdlSurface> Function(Pointer<SdlWindow> window)
+      >('SDL_GetWindowSurface');
   return sdlGetWindowSurfaceLookupFunction(window);
 }
 
@@ -2551,10 +2643,11 @@ Pointer<SdlSurface> sdlGetWindowSurface(Pointer<SdlWindow> window) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowSurfaceVSync(SDL_Window *window, int vsync)
 /// ```
 bool sdlSetWindowSurfaceVSync(Pointer<SdlWindow> window, int vsync) {
-  final sdlSetWindowSurfaceVSyncLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Pointer<SdlWindow> window, Int32 vsync),
-    int Function(Pointer<SdlWindow> window, int vsync)
-  >('SDL_SetWindowSurfaceVSync');
+  final sdlSetWindowSurfaceVSyncLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(Pointer<SdlWindow> window, Int32 vsync),
+        int Function(Pointer<SdlWindow> window, int vsync)
+      >('SDL_SetWindowSurfaceVSync');
   return sdlSetWindowSurfaceVSyncLookupFunction(window, vsync) == 1;
 }
 
@@ -2577,10 +2670,11 @@ bool sdlSetWindowSurfaceVSync(Pointer<SdlWindow> window, int vsync) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowSurfaceVSync(SDL_Window *window, int *vsync)
 /// ```
 bool sdlGetWindowSurfaceVSync(Pointer<SdlWindow> window, Pointer<Int32> vsync) {
-  final sdlGetWindowSurfaceVSyncLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Pointer<SdlWindow> window, Pointer<Int32> vsync),
-    int Function(Pointer<SdlWindow> window, Pointer<Int32> vsync)
-  >('SDL_GetWindowSurfaceVSync');
+  final sdlGetWindowSurfaceVSyncLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(Pointer<SdlWindow> window, Pointer<Int32> vsync),
+        int Function(Pointer<SdlWindow> window, Pointer<Int32> vsync)
+      >('SDL_GetWindowSurfaceVSync');
   return sdlGetWindowSurfaceVSyncLookupFunction(window, vsync) == 1;
 }
 
@@ -2607,10 +2701,11 @@ bool sdlGetWindowSurfaceVSync(Pointer<SdlWindow> window, Pointer<Int32> vsync) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_UpdateWindowSurface(SDL_Window *window)
 /// ```
 bool sdlUpdateWindowSurface(Pointer<SdlWindow> window) {
-  final sdlUpdateWindowSurfaceLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Pointer<SdlWindow> window),
-    int Function(Pointer<SdlWindow> window)
-  >('SDL_UpdateWindowSurface');
+  final sdlUpdateWindowSurfaceLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(Pointer<SdlWindow> window),
+        int Function(Pointer<SdlWindow> window)
+      >('SDL_UpdateWindowSurface');
   return sdlUpdateWindowSurfaceLookupFunction(window) == 1;
 }
 
@@ -2649,18 +2744,19 @@ bool sdlUpdateWindowSurfaceRects(
   Pointer<SdlRect> rects,
   int numrects,
 ) {
-  final sdlUpdateWindowSurfaceRectsLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(
-      Pointer<SdlWindow> window,
-      Pointer<SdlRect> rects,
-      Int32 numrects,
-    ),
-    int Function(
-      Pointer<SdlWindow> window,
-      Pointer<SdlRect> rects,
-      int numrects,
-    )
-  >('SDL_UpdateWindowSurfaceRects');
+  final sdlUpdateWindowSurfaceRectsLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<SdlWindow> window,
+          Pointer<SdlRect> rects,
+          Int32 numrects,
+        ),
+        int Function(
+          Pointer<SdlWindow> window,
+          Pointer<SdlRect> rects,
+          int numrects,
+        )
+      >('SDL_UpdateWindowSurfaceRects');
   return sdlUpdateWindowSurfaceRectsLookupFunction(window, rects, numrects) ==
       1;
 }
@@ -2683,10 +2779,11 @@ bool sdlUpdateWindowSurfaceRects(
 /// extern SDL_DECLSPEC bool SDLCALL SDL_DestroyWindowSurface(SDL_Window *window)
 /// ```
 bool sdlDestroyWindowSurface(Pointer<SdlWindow> window) {
-  final sdlDestroyWindowSurfaceLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Pointer<SdlWindow> window),
-    int Function(Pointer<SdlWindow> window)
-  >('SDL_DestroyWindowSurface');
+  final sdlDestroyWindowSurfaceLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(Pointer<SdlWindow> window),
+        int Function(Pointer<SdlWindow> window)
+      >('SDL_DestroyWindowSurface');
   return sdlDestroyWindowSurfaceLookupFunction(window) == 1;
 }
 
@@ -2725,10 +2822,11 @@ bool sdlDestroyWindowSurface(Pointer<SdlWindow> window) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowKeyboardGrab(SDL_Window *window, bool grabbed)
 /// ```
 bool sdlSetWindowKeyboardGrab(Pointer<SdlWindow> window, bool grabbed) {
-  final sdlSetWindowKeyboardGrabLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Pointer<SdlWindow> window, Uint8 grabbed),
-    int Function(Pointer<SdlWindow> window, int grabbed)
-  >('SDL_SetWindowKeyboardGrab');
+  final sdlSetWindowKeyboardGrabLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(Pointer<SdlWindow> window, Uint8 grabbed),
+        int Function(Pointer<SdlWindow> window, int grabbed)
+      >('SDL_SetWindowKeyboardGrab');
   return sdlSetWindowKeyboardGrabLookupFunction(window, grabbed ? 1 : 0) == 1;
 }
 
@@ -2754,10 +2852,11 @@ bool sdlSetWindowKeyboardGrab(Pointer<SdlWindow> window, bool grabbed) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowMouseGrab(SDL_Window *window, bool grabbed)
 /// ```
 bool sdlSetWindowMouseGrab(Pointer<SdlWindow> window, bool grabbed) {
-  final sdlSetWindowMouseGrabLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Pointer<SdlWindow> window, Uint8 grabbed),
-    int Function(Pointer<SdlWindow> window, int grabbed)
-  >('SDL_SetWindowMouseGrab');
+  final sdlSetWindowMouseGrabLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(Pointer<SdlWindow> window, Uint8 grabbed),
+        int Function(Pointer<SdlWindow> window, int grabbed)
+      >('SDL_SetWindowMouseGrab');
   return sdlSetWindowMouseGrabLookupFunction(window, grabbed ? 1 : 0) == 1;
 }
 
@@ -2777,10 +2876,11 @@ bool sdlSetWindowMouseGrab(Pointer<SdlWindow> window, bool grabbed) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowKeyboardGrab(SDL_Window *window)
 /// ```
 bool sdlGetWindowKeyboardGrab(Pointer<SdlWindow> window) {
-  final sdlGetWindowKeyboardGrabLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Pointer<SdlWindow> window),
-    int Function(Pointer<SdlWindow> window)
-  >('SDL_GetWindowKeyboardGrab');
+  final sdlGetWindowKeyboardGrabLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(Pointer<SdlWindow> window),
+        int Function(Pointer<SdlWindow> window)
+      >('SDL_GetWindowKeyboardGrab');
   return sdlGetWindowKeyboardGrabLookupFunction(window) == 1;
 }
 
@@ -2803,10 +2903,11 @@ bool sdlGetWindowKeyboardGrab(Pointer<SdlWindow> window) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowMouseGrab(SDL_Window *window)
 /// ```
 bool sdlGetWindowMouseGrab(Pointer<SdlWindow> window) {
-  final sdlGetWindowMouseGrabLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Pointer<SdlWindow> window),
-    int Function(Pointer<SdlWindow> window)
-  >('SDL_GetWindowMouseGrab');
+  final sdlGetWindowMouseGrabLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(Pointer<SdlWindow> window),
+        int Function(Pointer<SdlWindow> window)
+      >('SDL_GetWindowMouseGrab');
   return sdlGetWindowMouseGrabLookupFunction(window) == 1;
 }
 
@@ -2826,10 +2927,11 @@ bool sdlGetWindowMouseGrab(Pointer<SdlWindow> window) {
 /// extern SDL_DECLSPEC SDL_Window * SDLCALL SDL_GetGrabbedWindow(void)
 /// ```
 Pointer<SdlWindow> sdlGetGrabbedWindow() {
-  final sdlGetGrabbedWindowLookupFunction = libSdl3.lookupFunction<
-    Pointer<SdlWindow> Function(),
-    Pointer<SdlWindow> Function()
-  >('SDL_GetGrabbedWindow');
+  final sdlGetGrabbedWindowLookupFunction = libSdl3
+      .lookupFunction<
+        Pointer<SdlWindow> Function(),
+        Pointer<SdlWindow> Function()
+      >('SDL_GetGrabbedWindow');
   return sdlGetGrabbedWindowLookupFunction();
 }
 
@@ -2857,10 +2959,11 @@ Pointer<SdlWindow> sdlGetGrabbedWindow() {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowMouseRect(SDL_Window *window, const SDL_Rect *rect)
 /// ```
 bool sdlSetWindowMouseRect(Pointer<SdlWindow> window, Pointer<SdlRect> rect) {
-  final sdlSetWindowMouseRectLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Pointer<SdlWindow> window, Pointer<SdlRect> rect),
-    int Function(Pointer<SdlWindow> window, Pointer<SdlRect> rect)
-  >('SDL_SetWindowMouseRect');
+  final sdlSetWindowMouseRectLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(Pointer<SdlWindow> window, Pointer<SdlRect> rect),
+        int Function(Pointer<SdlWindow> window, Pointer<SdlRect> rect)
+      >('SDL_SetWindowMouseRect');
   return sdlSetWindowMouseRectLookupFunction(window, rect) == 1;
 }
 
@@ -2883,10 +2986,11 @@ bool sdlSetWindowMouseRect(Pointer<SdlWindow> window, Pointer<SdlRect> rect) {
 /// extern SDL_DECLSPEC const SDL_Rect * SDLCALL SDL_GetWindowMouseRect(SDL_Window *window)
 /// ```
 Pointer<SdlRect> sdlGetWindowMouseRect(Pointer<SdlWindow> window) {
-  final sdlGetWindowMouseRectLookupFunction = libSdl3.lookupFunction<
-    Pointer<SdlRect> Function(Pointer<SdlWindow> window),
-    Pointer<SdlRect> Function(Pointer<SdlWindow> window)
-  >('SDL_GetWindowMouseRect');
+  final sdlGetWindowMouseRectLookupFunction = libSdl3
+      .lookupFunction<
+        Pointer<SdlRect> Function(Pointer<SdlWindow> window),
+        Pointer<SdlRect> Function(Pointer<SdlWindow> window)
+      >('SDL_GetWindowMouseRect');
   return sdlGetWindowMouseRectLookupFunction(window);
 }
 
@@ -2913,10 +3017,11 @@ Pointer<SdlRect> sdlGetWindowMouseRect(Pointer<SdlWindow> window) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowOpacity(SDL_Window *window, float opacity)
 /// ```
 bool sdlSetWindowOpacity(Pointer<SdlWindow> window, double opacity) {
-  final sdlSetWindowOpacityLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Pointer<SdlWindow> window, Float opacity),
-    int Function(Pointer<SdlWindow> window, double opacity)
-  >('SDL_SetWindowOpacity');
+  final sdlSetWindowOpacityLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(Pointer<SdlWindow> window, Float opacity),
+        int Function(Pointer<SdlWindow> window, double opacity)
+      >('SDL_SetWindowOpacity');
   return sdlSetWindowOpacityLookupFunction(window, opacity) == 1;
 }
 
@@ -2940,10 +3045,11 @@ bool sdlSetWindowOpacity(Pointer<SdlWindow> window, double opacity) {
 /// extern SDL_DECLSPEC float SDLCALL SDL_GetWindowOpacity(SDL_Window *window)
 /// ```
 double sdlGetWindowOpacity(Pointer<SdlWindow> window) {
-  final sdlGetWindowOpacityLookupFunction = libSdl3.lookupFunction<
-    Float Function(Pointer<SdlWindow> window),
-    double Function(Pointer<SdlWindow> window)
-  >('SDL_GetWindowOpacity');
+  final sdlGetWindowOpacityLookupFunction = libSdl3
+      .lookupFunction<
+        Float Function(Pointer<SdlWindow> window),
+        double Function(Pointer<SdlWindow> window)
+      >('SDL_GetWindowOpacity');
   return sdlGetWindowOpacityLookupFunction(window);
 }
 
@@ -2983,10 +3089,11 @@ double sdlGetWindowOpacity(Pointer<SdlWindow> window) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowParent(SDL_Window *window, SDL_Window *parent)
 /// ```
 bool sdlSetWindowParent(Pointer<SdlWindow> window, Pointer<SdlWindow> parent) {
-  final sdlSetWindowParentLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Pointer<SdlWindow> window, Pointer<SdlWindow> parent),
-    int Function(Pointer<SdlWindow> window, Pointer<SdlWindow> parent)
-  >('SDL_SetWindowParent');
+  final sdlSetWindowParentLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(Pointer<SdlWindow> window, Pointer<SdlWindow> parent),
+        int Function(Pointer<SdlWindow> window, Pointer<SdlWindow> parent)
+      >('SDL_SetWindowParent');
   return sdlSetWindowParentLookupFunction(window, parent) == 1;
 }
 
@@ -3012,10 +3119,11 @@ bool sdlSetWindowParent(Pointer<SdlWindow> window, Pointer<SdlWindow> parent) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowModal(SDL_Window *window, bool modal)
 /// ```
 bool sdlSetWindowModal(Pointer<SdlWindow> window, bool modal) {
-  final sdlSetWindowModalLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Pointer<SdlWindow> window, Uint8 modal),
-    int Function(Pointer<SdlWindow> window, int modal)
-  >('SDL_SetWindowModal');
+  final sdlSetWindowModalLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(Pointer<SdlWindow> window, Uint8 modal),
+        int Function(Pointer<SdlWindow> window, int modal)
+      >('SDL_SetWindowModal');
   return sdlSetWindowModalLookupFunction(window, modal ? 1 : 0) == 1;
 }
 
@@ -3035,10 +3143,11 @@ bool sdlSetWindowModal(Pointer<SdlWindow> window, bool modal) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowFocusable(SDL_Window *window, bool focusable)
 /// ```
 bool sdlSetWindowFocusable(Pointer<SdlWindow> window, bool focusable) {
-  final sdlSetWindowFocusableLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Pointer<SdlWindow> window, Uint8 focusable),
-    int Function(Pointer<SdlWindow> window, int focusable)
-  >('SDL_SetWindowFocusable');
+  final sdlSetWindowFocusableLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(Pointer<SdlWindow> window, Uint8 focusable),
+        int Function(Pointer<SdlWindow> window, int focusable)
+      >('SDL_SetWindowFocusable');
   return sdlSetWindowFocusableLookupFunction(window, focusable ? 1 : 0) == 1;
 }
 
@@ -3069,10 +3178,11 @@ bool sdlSetWindowFocusable(Pointer<SdlWindow> window, bool focusable) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_ShowWindowSystemMenu(SDL_Window *window, int x, int y)
 /// ```
 bool sdlShowWindowSystemMenu(Pointer<SdlWindow> window, int x, int y) {
-  final sdlShowWindowSystemMenuLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Pointer<SdlWindow> window, Int32 x, Int32 y),
-    int Function(Pointer<SdlWindow> window, int x, int y)
-  >('SDL_ShowWindowSystemMenu');
+  final sdlShowWindowSystemMenuLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(Pointer<SdlWindow> window, Int32 x, Int32 y),
+        int Function(Pointer<SdlWindow> window, int x, int y)
+      >('SDL_ShowWindowSystemMenu');
   return sdlShowWindowSystemMenuLookupFunction(window, x, y) == 1;
 }
 
@@ -3126,18 +3236,19 @@ bool sdlSetWindowHitTest(
   Pointer<NativeFunction<SdlHitTest>> callback,
   Pointer<NativeType> callbackData,
 ) {
-  final sdlSetWindowHitTestLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(
-      Pointer<SdlWindow> window,
-      Pointer<NativeFunction<SdlHitTest>> callback,
-      Pointer<NativeType> callbackData,
-    ),
-    int Function(
-      Pointer<SdlWindow> window,
-      Pointer<NativeFunction<SdlHitTest>> callback,
-      Pointer<NativeType> callbackData,
-    )
-  >('SDL_SetWindowHitTest');
+  final sdlSetWindowHitTestLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<SdlWindow> window,
+          Pointer<NativeFunction<SdlHitTest>> callback,
+          Pointer<NativeType> callbackData,
+        ),
+        int Function(
+          Pointer<SdlWindow> window,
+          Pointer<NativeFunction<SdlHitTest>> callback,
+          Pointer<NativeType> callbackData,
+        )
+      >('SDL_SetWindowHitTest');
   return sdlSetWindowHitTestLookupFunction(window, callback, callbackData) == 1;
 }
 
@@ -3171,10 +3282,11 @@ bool sdlSetWindowHitTest(
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowShape(SDL_Window *window, SDL_Surface *shape)
 /// ```
 bool sdlSetWindowShape(Pointer<SdlWindow> window, Pointer<SdlSurface> shape) {
-  final sdlSetWindowShapeLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Pointer<SdlWindow> window, Pointer<SdlSurface> shape),
-    int Function(Pointer<SdlWindow> window, Pointer<SdlSurface> shape)
-  >('SDL_SetWindowShape');
+  final sdlSetWindowShapeLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(Pointer<SdlWindow> window, Pointer<SdlSurface> shape),
+        int Function(Pointer<SdlWindow> window, Pointer<SdlSurface> shape)
+      >('SDL_SetWindowShape');
   return sdlSetWindowShapeLookupFunction(window, shape) == 1;
 }
 
@@ -3194,10 +3306,11 @@ bool sdlSetWindowShape(Pointer<SdlWindow> window, Pointer<SdlSurface> shape) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_FlashWindow(SDL_Window *window, SDL_FlashOperation operation)
 /// ```
 bool sdlFlashWindow(Pointer<SdlWindow> window, int operation) {
-  final sdlFlashWindowLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Pointer<SdlWindow> window, Int32 operation),
-    int Function(Pointer<SdlWindow> window, int operation)
-  >('SDL_FlashWindow');
+  final sdlFlashWindowLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(Pointer<SdlWindow> window, Int32 operation),
+        int Function(Pointer<SdlWindow> window, int operation)
+      >('SDL_FlashWindow');
   return sdlFlashWindowLookupFunction(window, operation) == 1;
 }
 
@@ -3218,10 +3331,11 @@ bool sdlFlashWindow(Pointer<SdlWindow> window, int operation) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowProgressState(SDL_Window *window, SDL_ProgressState state)
 /// ```
 bool sdlSetWindowProgressState(Pointer<SdlWindow> window, int state) {
-  final sdlSetWindowProgressStateLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Pointer<SdlWindow> window, Int32 state),
-    int Function(Pointer<SdlWindow> window, int state)
-  >('SDL_SetWindowProgressState');
+  final sdlSetWindowProgressStateLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(Pointer<SdlWindow> window, Int32 state),
+        int Function(Pointer<SdlWindow> window, int state)
+      >('SDL_SetWindowProgressState');
   return sdlSetWindowProgressStateLookupFunction(window, state) == 1;
 }
 
@@ -3240,10 +3354,11 @@ bool sdlSetWindowProgressState(Pointer<SdlWindow> window, int state) {
 /// extern SDL_DECLSPEC SDL_ProgressState SDLCALL SDL_GetWindowProgressState(SDL_Window *window)
 /// ```
 int sdlGetWindowProgressState(Pointer<SdlWindow> window) {
-  final sdlGetWindowProgressStateLookupFunction = libSdl3.lookupFunction<
-    Int32 Function(Pointer<SdlWindow> window),
-    int Function(Pointer<SdlWindow> window)
-  >('SDL_GetWindowProgressState');
+  final sdlGetWindowProgressStateLookupFunction = libSdl3
+      .lookupFunction<
+        Int32 Function(Pointer<SdlWindow> window),
+        int Function(Pointer<SdlWindow> window)
+      >('SDL_GetWindowProgressState');
   return sdlGetWindowProgressStateLookupFunction(window);
 }
 
@@ -3264,10 +3379,11 @@ int sdlGetWindowProgressState(Pointer<SdlWindow> window) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowProgressValue(SDL_Window *window, float value)
 /// ```
 bool sdlSetWindowProgressValue(Pointer<SdlWindow> window, double value) {
-  final sdlSetWindowProgressValueLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Pointer<SdlWindow> window, Float value),
-    int Function(Pointer<SdlWindow> window, double value)
-  >('SDL_SetWindowProgressValue');
+  final sdlSetWindowProgressValueLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(Pointer<SdlWindow> window, Float value),
+        int Function(Pointer<SdlWindow> window, double value)
+      >('SDL_SetWindowProgressValue');
   return sdlSetWindowProgressValueLookupFunction(window, value) == 1;
 }
 
@@ -3286,10 +3402,11 @@ bool sdlSetWindowProgressValue(Pointer<SdlWindow> window, double value) {
 /// extern SDL_DECLSPEC float SDLCALL SDL_GetWindowProgressValue(SDL_Window *window)
 /// ```
 double sdlGetWindowProgressValue(Pointer<SdlWindow> window) {
-  final sdlGetWindowProgressValueLookupFunction = libSdl3.lookupFunction<
-    Float Function(Pointer<SdlWindow> window),
-    double Function(Pointer<SdlWindow> window)
-  >('SDL_GetWindowProgressValue');
+  final sdlGetWindowProgressValueLookupFunction = libSdl3
+      .lookupFunction<
+        Float Function(Pointer<SdlWindow> window),
+        double Function(Pointer<SdlWindow> window)
+      >('SDL_GetWindowProgressValue');
   return sdlGetWindowProgressValueLookupFunction(window);
 }
 
@@ -3317,10 +3434,11 @@ double sdlGetWindowProgressValue(Pointer<SdlWindow> window) {
 /// extern SDL_DECLSPEC void SDLCALL SDL_DestroyWindow(SDL_Window *window)
 /// ```
 void sdlDestroyWindow(Pointer<SdlWindow> window) {
-  final sdlDestroyWindowLookupFunction = libSdl3.lookupFunction<
-    Void Function(Pointer<SdlWindow> window),
-    void Function(Pointer<SdlWindow> window)
-  >('SDL_DestroyWindow');
+  final sdlDestroyWindowLookupFunction = libSdl3
+      .lookupFunction<
+        Void Function(Pointer<SdlWindow> window),
+        void Function(Pointer<SdlWindow> window)
+      >('SDL_DestroyWindow');
   return sdlDestroyWindowLookupFunction(window);
 }
 
@@ -3431,10 +3549,11 @@ bool sdlDisableScreenSaver() {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GL_LoadLibrary(const char *path)
 /// ```
 bool sdlGlLoadLibrary(String? path) {
-  final sdlGlLoadLibraryLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Pointer<Utf8> path),
-    int Function(Pointer<Utf8> path)
-  >('SDL_GL_LoadLibrary');
+  final sdlGlLoadLibraryLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(Pointer<Utf8> path),
+        int Function(Pointer<Utf8> path)
+      >('SDL_GL_LoadLibrary');
   final pathPointer = path != null ? path.toNativeUtf8() : nullptr;
   final result = sdlGlLoadLibraryLookupFunction(pathPointer) == 1;
   calloc.free(pathPointer);
@@ -3498,10 +3617,11 @@ bool sdlGlLoadLibrary(String? path) {
 /// extern SDL_DECLSPEC SDL_FunctionPointer SDLCALL SDL_GL_GetProcAddress(const char *proc)
 /// ```
 Pointer<NativeType> sdlGlGetProcAddress(String? proc) {
-  final sdlGlGetProcAddressLookupFunction = libSdl3.lookupFunction<
-    Pointer<NativeType> Function(Pointer<Utf8> proc),
-    Pointer<NativeType> Function(Pointer<Utf8> proc)
-  >('SDL_GL_GetProcAddress');
+  final sdlGlGetProcAddressLookupFunction = libSdl3
+      .lookupFunction<
+        Pointer<NativeType> Function(Pointer<Utf8> proc),
+        Pointer<NativeType> Function(Pointer<Utf8> proc)
+      >('SDL_GL_GetProcAddress');
   final procPointer = proc != null ? proc.toNativeUtf8() : nullptr;
   final result = sdlGlGetProcAddressLookupFunction(procPointer);
   calloc.free(procPointer);
@@ -3529,10 +3649,11 @@ Pointer<NativeType> sdlGlGetProcAddress(String? proc) {
 /// extern SDL_DECLSPEC SDL_FunctionPointer SDLCALL SDL_EGL_GetProcAddress(const char *proc)
 /// ```
 Pointer<NativeType> sdlEglGetProcAddress(String? proc) {
-  final sdlEglGetProcAddressLookupFunction = libSdl3.lookupFunction<
-    Pointer<NativeType> Function(Pointer<Utf8> proc),
-    Pointer<NativeType> Function(Pointer<Utf8> proc)
-  >('SDL_EGL_GetProcAddress');
+  final sdlEglGetProcAddressLookupFunction = libSdl3
+      .lookupFunction<
+        Pointer<NativeType> Function(Pointer<Utf8> proc),
+        Pointer<NativeType> Function(Pointer<Utf8> proc)
+      >('SDL_EGL_GetProcAddress');
   final procPointer = proc != null ? proc.toNativeUtf8() : nullptr;
   final result = sdlEglGetProcAddressLookupFunction(procPointer);
   calloc.free(procPointer);
@@ -3582,12 +3703,14 @@ void sdlGlUnloadLibrary() {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GL_ExtensionSupported(const char *extension)
 /// ```
 bool sdlGlExtensionSupported(String? extension) {
-  final sdlGlExtensionSupportedLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Pointer<Utf8> extension),
-    int Function(Pointer<Utf8> extension)
-  >('SDL_GL_ExtensionSupported');
-  final extensionPointer =
-      extension != null ? extension.toNativeUtf8() : nullptr;
+  final sdlGlExtensionSupportedLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(Pointer<Utf8> extension),
+        int Function(Pointer<Utf8> extension)
+      >('SDL_GL_ExtensionSupported');
+  final extensionPointer = extension != null
+      ? extension.toNativeUtf8()
+      : nullptr;
   final result = sdlGlExtensionSupportedLookupFunction(extensionPointer) == 1;
   calloc.free(extensionPointer);
   return result;
@@ -3639,10 +3762,11 @@ void sdlGlResetAttributes() {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GL_SetAttribute(SDL_GLAttr attr, int value)
 /// ```
 bool sdlGlSetAttribute(int attr, int value) {
-  final sdlGlSetAttributeLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Int32 attr, Int32 value),
-    int Function(int attr, int value)
-  >('SDL_GL_SetAttribute');
+  final sdlGlSetAttributeLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(Int32 attr, Int32 value),
+        int Function(int attr, int value)
+      >('SDL_GL_SetAttribute');
   return sdlGlSetAttributeLookupFunction(attr, value) == 1;
 }
 
@@ -3666,10 +3790,11 @@ bool sdlGlSetAttribute(int attr, int value) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GL_GetAttribute(SDL_GLAttr attr, int *value)
 /// ```
 bool sdlGlGetAttribute(int attr, Pointer<Int32> value) {
-  final sdlGlGetAttributeLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Int32 attr, Pointer<Int32> value),
-    int Function(int attr, Pointer<Int32> value)
-  >('SDL_GL_GetAttribute');
+  final sdlGlGetAttributeLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(Int32 attr, Pointer<Int32> value),
+        int Function(int attr, Pointer<Int32> value)
+      >('SDL_GL_GetAttribute');
   return sdlGlGetAttributeLookupFunction(attr, value) == 1;
 }
 
@@ -3699,10 +3824,11 @@ bool sdlGlGetAttribute(int attr, Pointer<Int32> value) {
 /// extern SDL_DECLSPEC SDL_GLContext SDLCALL SDL_GL_CreateContext(SDL_Window *window)
 /// ```
 Pointer<SdlGlContext> sdlGlCreateContext(Pointer<SdlWindow> window) {
-  final sdlGlCreateContextLookupFunction = libSdl3.lookupFunction<
-    Pointer<SdlGlContext> Function(Pointer<SdlWindow> window),
-    Pointer<SdlGlContext> Function(Pointer<SdlWindow> window)
-  >('SDL_GL_CreateContext');
+  final sdlGlCreateContextLookupFunction = libSdl3
+      .lookupFunction<
+        Pointer<SdlGlContext> Function(Pointer<SdlWindow> window),
+        Pointer<SdlGlContext> Function(Pointer<SdlWindow> window)
+      >('SDL_GL_CreateContext');
   return sdlGlCreateContextLookupFunction(window);
 }
 
@@ -3729,10 +3855,14 @@ bool sdlGlMakeCurrent(
   Pointer<SdlWindow> window,
   Pointer<SdlGlContext> context,
 ) {
-  final sdlGlMakeCurrentLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Pointer<SdlWindow> window, Pointer<SdlGlContext> context),
-    int Function(Pointer<SdlWindow> window, Pointer<SdlGlContext> context)
-  >('SDL_GL_MakeCurrent');
+  final sdlGlMakeCurrentLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<SdlWindow> window,
+          Pointer<SdlGlContext> context,
+        ),
+        int Function(Pointer<SdlWindow> window, Pointer<SdlGlContext> context)
+      >('SDL_GL_MakeCurrent');
   return sdlGlMakeCurrentLookupFunction(window, context) == 1;
 }
 
@@ -3750,10 +3880,11 @@ bool sdlGlMakeCurrent(
 /// extern SDL_DECLSPEC SDL_Window * SDLCALL SDL_GL_GetCurrentWindow(void)
 /// ```
 Pointer<SdlWindow> sdlGlGetCurrentWindow() {
-  final sdlGlGetCurrentWindowLookupFunction = libSdl3.lookupFunction<
-    Pointer<SdlWindow> Function(),
-    Pointer<SdlWindow> Function()
-  >('SDL_GL_GetCurrentWindow');
+  final sdlGlGetCurrentWindowLookupFunction = libSdl3
+      .lookupFunction<
+        Pointer<SdlWindow> Function(),
+        Pointer<SdlWindow> Function()
+      >('SDL_GL_GetCurrentWindow');
   return sdlGlGetCurrentWindowLookupFunction();
 }
 
@@ -3773,10 +3904,11 @@ Pointer<SdlWindow> sdlGlGetCurrentWindow() {
 /// extern SDL_DECLSPEC SDL_GLContext SDLCALL SDL_GL_GetCurrentContext(void)
 /// ```
 Pointer<SdlGlContext> sdlGlGetCurrentContext() {
-  final sdlGlGetCurrentContextLookupFunction = libSdl3.lookupFunction<
-    Pointer<SdlGlContext> Function(),
-    Pointer<SdlGlContext> Function()
-  >('SDL_GL_GetCurrentContext');
+  final sdlGlGetCurrentContextLookupFunction = libSdl3
+      .lookupFunction<
+        Pointer<SdlGlContext> Function(),
+        Pointer<SdlGlContext> Function()
+      >('SDL_GL_GetCurrentContext');
   return sdlGlGetCurrentContextLookupFunction();
 }
 
@@ -3794,10 +3926,11 @@ Pointer<SdlGlContext> sdlGlGetCurrentContext() {
 /// extern SDL_DECLSPEC SDL_EGLDisplay SDLCALL SDL_EGL_GetCurrentDisplay(void)
 /// ```
 Pointer<NativeType> sdlEglGetCurrentDisplay() {
-  final sdlEglGetCurrentDisplayLookupFunction = libSdl3.lookupFunction<
-    Pointer<NativeType> Function(),
-    Pointer<NativeType> Function()
-  >('SDL_EGL_GetCurrentDisplay');
+  final sdlEglGetCurrentDisplayLookupFunction = libSdl3
+      .lookupFunction<
+        Pointer<NativeType> Function(),
+        Pointer<NativeType> Function()
+      >('SDL_EGL_GetCurrentDisplay');
   return sdlEglGetCurrentDisplayLookupFunction();
 }
 
@@ -3815,10 +3948,11 @@ Pointer<NativeType> sdlEglGetCurrentDisplay() {
 /// extern SDL_DECLSPEC SDL_EGLConfig SDLCALL SDL_EGL_GetCurrentConfig(void)
 /// ```
 Pointer<NativeType> sdlEglGetCurrentConfig() {
-  final sdlEglGetCurrentConfigLookupFunction = libSdl3.lookupFunction<
-    Pointer<NativeType> Function(),
-    Pointer<NativeType> Function()
-  >('SDL_EGL_GetCurrentConfig');
+  final sdlEglGetCurrentConfigLookupFunction = libSdl3
+      .lookupFunction<
+        Pointer<NativeType> Function(),
+        Pointer<NativeType> Function()
+      >('SDL_EGL_GetCurrentConfig');
   return sdlEglGetCurrentConfigLookupFunction();
 }
 
@@ -3837,10 +3971,11 @@ Pointer<NativeType> sdlEglGetCurrentConfig() {
 /// extern SDL_DECLSPEC SDL_EGLSurface SDLCALL SDL_EGL_GetWindowSurface(SDL_Window *window)
 /// ```
 Pointer<NativeType> sdlEglGetWindowSurface(Pointer<SdlWindow> window) {
-  final sdlEglGetWindowSurfaceLookupFunction = libSdl3.lookupFunction<
-    Pointer<NativeType> Function(Pointer<SdlWindow> window),
-    Pointer<NativeType> Function(Pointer<SdlWindow> window)
-  >('SDL_EGL_GetWindowSurface');
+  final sdlEglGetWindowSurfaceLookupFunction = libSdl3
+      .lookupFunction<
+        Pointer<NativeType> Function(Pointer<SdlWindow> window),
+        Pointer<NativeType> Function(Pointer<SdlWindow> window)
+      >('SDL_EGL_GetWindowSurface');
   return sdlEglGetWindowSurfaceLookupFunction(window);
 }
 
@@ -3873,20 +4008,23 @@ void sdlEglSetAttributeCallbacks(
   Pointer<NativeFunction<SdlEglIntArrayCallback>> contextAttribCallback,
   Pointer<NativeType> userdata,
 ) {
-  final sdlEglSetAttributeCallbacksLookupFunction = libSdl3.lookupFunction<
-    Void Function(
-      Pointer<NativeFunction<SdlEglAttribArrayCallback>> platformAttribCallback,
-      Pointer<NativeFunction<SdlEglIntArrayCallback>> surfaceAttribCallback,
-      Pointer<NativeFunction<SdlEglIntArrayCallback>> contextAttribCallback,
-      Pointer<NativeType> userdata,
-    ),
-    void Function(
-      Pointer<NativeFunction<SdlEglAttribArrayCallback>> platformAttribCallback,
-      Pointer<NativeFunction<SdlEglIntArrayCallback>> surfaceAttribCallback,
-      Pointer<NativeFunction<SdlEglIntArrayCallback>> contextAttribCallback,
-      Pointer<NativeType> userdata,
-    )
-  >('SDL_EGL_SetAttributeCallbacks');
+  final sdlEglSetAttributeCallbacksLookupFunction = libSdl3
+      .lookupFunction<
+        Void Function(
+          Pointer<NativeFunction<SdlEglAttribArrayCallback>>
+          platformAttribCallback,
+          Pointer<NativeFunction<SdlEglIntArrayCallback>> surfaceAttribCallback,
+          Pointer<NativeFunction<SdlEglIntArrayCallback>> contextAttribCallback,
+          Pointer<NativeType> userdata,
+        ),
+        void Function(
+          Pointer<NativeFunction<SdlEglAttribArrayCallback>>
+          platformAttribCallback,
+          Pointer<NativeFunction<SdlEglIntArrayCallback>> surfaceAttribCallback,
+          Pointer<NativeFunction<SdlEglIntArrayCallback>> contextAttribCallback,
+          Pointer<NativeType> userdata,
+        )
+      >('SDL_EGL_SetAttributeCallbacks');
   return sdlEglSetAttributeCallbacksLookupFunction(
     platformAttribCallback,
     surfaceAttribCallback,
@@ -3928,10 +4066,11 @@ void sdlEglSetAttributeCallbacks(
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GL_SetSwapInterval(int interval)
 /// ```
 bool sdlGlSetSwapInterval(int interval) {
-  final sdlGlSetSwapIntervalLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Int32 interval),
-    int Function(int interval)
-  >('SDL_GL_SetSwapInterval');
+  final sdlGlSetSwapIntervalLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(Int32 interval),
+        int Function(int interval)
+      >('SDL_GL_SetSwapInterval');
   return sdlGlSetSwapIntervalLookupFunction(interval) == 1;
 }
 
@@ -3958,10 +4097,11 @@ bool sdlGlSetSwapInterval(int interval) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GL_GetSwapInterval(int *interval)
 /// ```
 bool sdlGlGetSwapInterval(Pointer<Int32> interval) {
-  final sdlGlGetSwapIntervalLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Pointer<Int32> interval),
-    int Function(Pointer<Int32> interval)
-  >('SDL_GL_GetSwapInterval');
+  final sdlGlGetSwapIntervalLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(Pointer<Int32> interval),
+        int Function(Pointer<Int32> interval)
+      >('SDL_GL_GetSwapInterval');
   return sdlGlGetSwapIntervalLookupFunction(interval) == 1;
 }
 
@@ -3987,10 +4127,11 @@ bool sdlGlGetSwapInterval(Pointer<Int32> interval) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GL_SwapWindow(SDL_Window *window)
 /// ```
 bool sdlGlSwapWindow(Pointer<SdlWindow> window) {
-  final sdlGlSwapWindowLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Pointer<SdlWindow> window),
-    int Function(Pointer<SdlWindow> window)
-  >('SDL_GL_SwapWindow');
+  final sdlGlSwapWindowLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(Pointer<SdlWindow> window),
+        int Function(Pointer<SdlWindow> window)
+      >('SDL_GL_SwapWindow');
   return sdlGlSwapWindowLookupFunction(window) == 1;
 }
 
@@ -4011,9 +4152,10 @@ bool sdlGlSwapWindow(Pointer<SdlWindow> window) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GL_DestroyContext(SDL_GLContext context)
 /// ```
 bool sdlGlDestroyContext(Pointer<SdlGlContext> context) {
-  final sdlGlDestroyContextLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Pointer<SdlGlContext> context),
-    int Function(Pointer<SdlGlContext> context)
-  >('SDL_GL_DestroyContext');
+  final sdlGlDestroyContextLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(Pointer<SdlGlContext> context),
+        int Function(Pointer<SdlGlContext> context)
+      >('SDL_GL_DestroyContext');
   return sdlGlDestroyContextLookupFunction(context) == 1;
 }

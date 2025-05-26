@@ -65,28 +65,30 @@ void sdlShowOpenFileDialog(
   String? defaultLocation,
   bool allowMany,
 ) {
-  final sdlShowOpenFileDialogLookupFunction = libSdl3.lookupFunction<
-    Void Function(
-      Pointer<NativeFunction<SdlDialogFileCallback>> callback,
-      Pointer<NativeType> userdata,
-      Pointer<SdlWindow> window,
-      Pointer<SdlDialogFileFilter> filters,
-      Int32 nfilters,
-      Pointer<Utf8> defaultLocation,
-      Uint8 allowMany,
-    ),
-    void Function(
-      Pointer<NativeFunction<SdlDialogFileCallback>> callback,
-      Pointer<NativeType> userdata,
-      Pointer<SdlWindow> window,
-      Pointer<SdlDialogFileFilter> filters,
-      int nfilters,
-      Pointer<Utf8> defaultLocation,
-      int allowMany,
-    )
-  >('SDL_ShowOpenFileDialog');
-  final defaultLocationPointer =
-      defaultLocation != null ? defaultLocation.toNativeUtf8() : nullptr;
+  final sdlShowOpenFileDialogLookupFunction = libSdl3
+      .lookupFunction<
+        Void Function(
+          Pointer<NativeFunction<SdlDialogFileCallback>> callback,
+          Pointer<NativeType> userdata,
+          Pointer<SdlWindow> window,
+          Pointer<SdlDialogFileFilter> filters,
+          Int32 nfilters,
+          Pointer<Utf8> defaultLocation,
+          Uint8 allowMany,
+        ),
+        void Function(
+          Pointer<NativeFunction<SdlDialogFileCallback>> callback,
+          Pointer<NativeType> userdata,
+          Pointer<SdlWindow> window,
+          Pointer<SdlDialogFileFilter> filters,
+          int nfilters,
+          Pointer<Utf8> defaultLocation,
+          int allowMany,
+        )
+      >('SDL_ShowOpenFileDialog');
+  final defaultLocationPointer = defaultLocation != null
+      ? defaultLocation.toNativeUtf8()
+      : nullptr;
   final result = sdlShowOpenFileDialogLookupFunction(
     callback,
     userdata,
@@ -158,26 +160,28 @@ void sdlShowSaveFileDialog(
   int nfilters,
   String? defaultLocation,
 ) {
-  final sdlShowSaveFileDialogLookupFunction = libSdl3.lookupFunction<
-    Void Function(
-      Pointer<NativeFunction<SdlDialogFileCallback>> callback,
-      Pointer<NativeType> userdata,
-      Pointer<SdlWindow> window,
-      Pointer<SdlDialogFileFilter> filters,
-      Int32 nfilters,
-      Pointer<Utf8> defaultLocation,
-    ),
-    void Function(
-      Pointer<NativeFunction<SdlDialogFileCallback>> callback,
-      Pointer<NativeType> userdata,
-      Pointer<SdlWindow> window,
-      Pointer<SdlDialogFileFilter> filters,
-      int nfilters,
-      Pointer<Utf8> defaultLocation,
-    )
-  >('SDL_ShowSaveFileDialog');
-  final defaultLocationPointer =
-      defaultLocation != null ? defaultLocation.toNativeUtf8() : nullptr;
+  final sdlShowSaveFileDialogLookupFunction = libSdl3
+      .lookupFunction<
+        Void Function(
+          Pointer<NativeFunction<SdlDialogFileCallback>> callback,
+          Pointer<NativeType> userdata,
+          Pointer<SdlWindow> window,
+          Pointer<SdlDialogFileFilter> filters,
+          Int32 nfilters,
+          Pointer<Utf8> defaultLocation,
+        ),
+        void Function(
+          Pointer<NativeFunction<SdlDialogFileCallback>> callback,
+          Pointer<NativeType> userdata,
+          Pointer<SdlWindow> window,
+          Pointer<SdlDialogFileFilter> filters,
+          int nfilters,
+          Pointer<Utf8> defaultLocation,
+        )
+      >('SDL_ShowSaveFileDialog');
+  final defaultLocationPointer = defaultLocation != null
+      ? defaultLocation.toNativeUtf8()
+      : nullptr;
   final result = sdlShowSaveFileDialogLookupFunction(
     callback,
     userdata,
@@ -243,24 +247,26 @@ void sdlShowOpenFolderDialog(
   String? defaultLocation,
   bool allowMany,
 ) {
-  final sdlShowOpenFolderDialogLookupFunction = libSdl3.lookupFunction<
-    Void Function(
-      Pointer<NativeFunction<SdlDialogFileCallback>> callback,
-      Pointer<NativeType> userdata,
-      Pointer<SdlWindow> window,
-      Pointer<Utf8> defaultLocation,
-      Uint8 allowMany,
-    ),
-    void Function(
-      Pointer<NativeFunction<SdlDialogFileCallback>> callback,
-      Pointer<NativeType> userdata,
-      Pointer<SdlWindow> window,
-      Pointer<Utf8> defaultLocation,
-      int allowMany,
-    )
-  >('SDL_ShowOpenFolderDialog');
-  final defaultLocationPointer =
-      defaultLocation != null ? defaultLocation.toNativeUtf8() : nullptr;
+  final sdlShowOpenFolderDialogLookupFunction = libSdl3
+      .lookupFunction<
+        Void Function(
+          Pointer<NativeFunction<SdlDialogFileCallback>> callback,
+          Pointer<NativeType> userdata,
+          Pointer<SdlWindow> window,
+          Pointer<Utf8> defaultLocation,
+          Uint8 allowMany,
+        ),
+        void Function(
+          Pointer<NativeFunction<SdlDialogFileCallback>> callback,
+          Pointer<NativeType> userdata,
+          Pointer<SdlWindow> window,
+          Pointer<Utf8> defaultLocation,
+          int allowMany,
+        )
+      >('SDL_ShowOpenFolderDialog');
+  final defaultLocationPointer = defaultLocation != null
+      ? defaultLocation.toNativeUtf8()
+      : nullptr;
   final result = sdlShowOpenFolderDialogLookupFunction(
     callback,
     userdata,
@@ -328,20 +334,21 @@ void sdlShowFileDialogWithProperties(
   Pointer<NativeType> userdata,
   int props,
 ) {
-  final sdlShowFileDialogWithPropertiesLookupFunction = libSdl3.lookupFunction<
-    Void Function(
-      Int32 type,
-      Pointer<NativeFunction<SdlDialogFileCallback>> callback,
-      Pointer<NativeType> userdata,
-      Uint32 props,
-    ),
-    void Function(
-      int type,
-      Pointer<NativeFunction<SdlDialogFileCallback>> callback,
-      Pointer<NativeType> userdata,
-      int props,
-    )
-  >('SDL_ShowFileDialogWithProperties');
+  final sdlShowFileDialogWithPropertiesLookupFunction = libSdl3
+      .lookupFunction<
+        Void Function(
+          Int32 type,
+          Pointer<NativeFunction<SdlDialogFileCallback>> callback,
+          Pointer<NativeType> userdata,
+          Uint32 props,
+        ),
+        void Function(
+          int type,
+          Pointer<NativeFunction<SdlDialogFileCallback>> callback,
+          Pointer<NativeType> userdata,
+          int props,
+        )
+      >('SDL_ShowFileDialogWithProperties');
   return sdlShowFileDialogWithPropertiesLookupFunction(
     type,
     callback,

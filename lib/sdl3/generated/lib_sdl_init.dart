@@ -226,18 +226,19 @@ bool sdlRunOnMainThread(
   Pointer<NativeType> userdata,
   bool waitComplete,
 ) {
-  final sdlRunOnMainThreadLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(
-      Pointer<NativeFunction<SdlMainThreadCallback>> callback,
-      Pointer<NativeType> userdata,
-      Uint8 waitComplete,
-    ),
-    int Function(
-      Pointer<NativeFunction<SdlMainThreadCallback>> callback,
-      Pointer<NativeType> userdata,
-      int waitComplete,
-    )
-  >('SDL_RunOnMainThread');
+  final sdlRunOnMainThreadLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<NativeFunction<SdlMainThreadCallback>> callback,
+          Pointer<NativeType> userdata,
+          Uint8 waitComplete,
+        ),
+        int Function(
+          Pointer<NativeFunction<SdlMainThreadCallback>> callback,
+          Pointer<NativeType> userdata,
+          int waitComplete,
+        )
+      >('SDL_RunOnMainThread');
   return sdlRunOnMainThreadLookupFunction(
         callback,
         userdata,
@@ -290,23 +291,26 @@ bool sdlSetAppMetadata(
   String? appversion,
   String? appidentifier,
 ) {
-  final sdlSetAppMetadataLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(
-      Pointer<Utf8> appname,
-      Pointer<Utf8> appversion,
-      Pointer<Utf8> appidentifier,
-    ),
-    int Function(
-      Pointer<Utf8> appname,
-      Pointer<Utf8> appversion,
-      Pointer<Utf8> appidentifier,
-    )
-  >('SDL_SetAppMetadata');
+  final sdlSetAppMetadataLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<Utf8> appname,
+          Pointer<Utf8> appversion,
+          Pointer<Utf8> appidentifier,
+        ),
+        int Function(
+          Pointer<Utf8> appname,
+          Pointer<Utf8> appversion,
+          Pointer<Utf8> appidentifier,
+        )
+      >('SDL_SetAppMetadata');
   final appnamePointer = appname != null ? appname.toNativeUtf8() : nullptr;
-  final appversionPointer =
-      appversion != null ? appversion.toNativeUtf8() : nullptr;
-  final appidentifierPointer =
-      appidentifier != null ? appidentifier.toNativeUtf8() : nullptr;
+  final appversionPointer = appversion != null
+      ? appversion.toNativeUtf8()
+      : nullptr;
+  final appidentifierPointer = appidentifier != null
+      ? appidentifier.toNativeUtf8()
+      : nullptr;
   final result =
       sdlSetAppMetadataLookupFunction(
         appnamePointer,
@@ -385,10 +389,11 @@ bool sdlSetAppMetadata(
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetAppMetadataProperty(const char *name, const char *value)
 /// ```
 bool sdlSetAppMetadataProperty(String? name, String? value) {
-  final sdlSetAppMetadataPropertyLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(Pointer<Utf8> name, Pointer<Utf8> value),
-    int Function(Pointer<Utf8> name, Pointer<Utf8> value)
-  >('SDL_SetAppMetadataProperty');
+  final sdlSetAppMetadataPropertyLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(Pointer<Utf8> name, Pointer<Utf8> value),
+        int Function(Pointer<Utf8> name, Pointer<Utf8> value)
+      >('SDL_SetAppMetadataProperty');
   final namePointer = name != null ? name.toNativeUtf8() : nullptr;
   final valuePointer = value != null ? value.toNativeUtf8() : nullptr;
   final result =
@@ -423,10 +428,11 @@ bool sdlSetAppMetadataProperty(String? name, String? value) {
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetAppMetadataProperty(const char *name)
 /// ```
 String? sdlGetAppMetadataProperty(String? name) {
-  final sdlGetAppMetadataPropertyLookupFunction = libSdl3.lookupFunction<
-    Pointer<Utf8> Function(Pointer<Utf8> name),
-    Pointer<Utf8> Function(Pointer<Utf8> name)
-  >('SDL_GetAppMetadataProperty');
+  final sdlGetAppMetadataPropertyLookupFunction = libSdl3
+      .lookupFunction<
+        Pointer<Utf8> Function(Pointer<Utf8> name),
+        Pointer<Utf8> Function(Pointer<Utf8> name)
+      >('SDL_GetAppMetadataProperty');
   final namePointer = name != null ? name.toNativeUtf8() : nullptr;
   final result = sdlGetAppMetadataPropertyLookupFunction(namePointer);
   calloc.free(namePointer);

@@ -45,16 +45,17 @@ bool sdlShowMessageBox(
   Pointer<SdlMessageBoxData> messageboxdata,
   Pointer<Int32> buttonid,
 ) {
-  final sdlShowMessageBoxLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(
-      Pointer<SdlMessageBoxData> messageboxdata,
-      Pointer<Int32> buttonid,
-    ),
-    int Function(
-      Pointer<SdlMessageBoxData> messageboxdata,
-      Pointer<Int32> buttonid,
-    )
-  >('SDL_ShowMessageBox');
+  final sdlShowMessageBoxLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<SdlMessageBoxData> messageboxdata,
+          Pointer<Int32> buttonid,
+        ),
+        int Function(
+          Pointer<SdlMessageBoxData> messageboxdata,
+          Pointer<Int32> buttonid,
+        )
+      >('SDL_ShowMessageBox');
   return sdlShowMessageBoxLookupFunction(messageboxdata, buttonid) == 1;
 }
 
@@ -107,20 +108,21 @@ bool sdlShowSimpleMessageBox(
   String? message,
   Pointer<SdlWindow> window,
 ) {
-  final sdlShowSimpleMessageBoxLookupFunction = libSdl3.lookupFunction<
-    Uint8 Function(
-      Uint32 flags,
-      Pointer<Utf8> title,
-      Pointer<Utf8> message,
-      Pointer<SdlWindow> window,
-    ),
-    int Function(
-      int flags,
-      Pointer<Utf8> title,
-      Pointer<Utf8> message,
-      Pointer<SdlWindow> window,
-    )
-  >('SDL_ShowSimpleMessageBox');
+  final sdlShowSimpleMessageBoxLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(
+          Uint32 flags,
+          Pointer<Utf8> title,
+          Pointer<Utf8> message,
+          Pointer<SdlWindow> window,
+        ),
+        int Function(
+          int flags,
+          Pointer<Utf8> title,
+          Pointer<Utf8> message,
+          Pointer<SdlWindow> window,
+        )
+      >('SDL_ShowSimpleMessageBox');
   final titlePointer = title != null ? title.toNativeUtf8() : nullptr;
   final messagePointer = message != null ? message.toNativeUtf8() : nullptr;
   final result =

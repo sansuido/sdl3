@@ -1,3 +1,7 @@
+## 1.6.0
+- SDL3-2025-05-25
+- [update] New formatting style. (Dart 3.8.0)
+
 ## 1.5.6
 - SDL3-2025-05-18
 
