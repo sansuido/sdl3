@@ -16,6 +16,20 @@ typedef SdlAssertionHandler =
 typedef SdlKernelMemoryBarrierFuncDart = void Function();
 typedef SdlKernelMemoryBarrierFunc = Void Function();
 
+// typedef void (SDLCALL *SDL_AudioStreamDataCompleteCallback)(void *userdata, const void *buf, int buflen)
+typedef SdlAudioStreamDataCompleteCallbackDart =
+    void Function(
+      Pointer<NativeType> userdata,
+      Pointer<NativeType> buf,
+      int buflen,
+    );
+typedef SdlAudioStreamDataCompleteCallback =
+    Void Function(
+      Pointer<NativeType> userdata,
+      Pointer<NativeType> buf,
+      Int32 buflen,
+    );
+
 // typedef void (SDLCALL *SDL_AudioStreamCallback)(void *userdata, SDL_AudioStream *stream, int additional_amount, int total_amount)
 typedef SdlAudioStreamCallbackDart =
     void Function(

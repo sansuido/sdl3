@@ -76,9 +76,24 @@ bool pixel(Pointer<SdlRenderer> renderer, double x, double y) {
 
 \returns Returns 0 on success, -1 on failure.
 */
-bool pixelColor(Pointer<SdlRenderer> renderer, double x, double y, int color) {
+bool pixelColor(
+  Pointer<SdlRenderer> renderer,
+  double x,
+  double y,
+  int color, {
+  int blendMode = SDL_BLENDMODE_BLEND,
+}) {
   var co = Uint32List.fromList([color]).buffer.asUint8List();
-  return pixelRgba(renderer, x, y, co[0], co[1], co[2], co[3]);
+  return pixelRgba(
+    renderer,
+    x,
+    y,
+    co[0],
+    co[1],
+    co[2],
+    co[3],
+    blendMode: blendMode,
+  );
 }
 
 /*!
@@ -101,14 +116,12 @@ bool pixelRgba(
   int r,
   int g,
   int b,
-  int a,
-) {
+  int a, {
+  int blendMode = SDL_BLENDMODE_BLEND,
+}) {
   bool result = true;
   if (result) {
-    result = sdlSetRenderDrawBlendMode(
-      renderer,
-      (a == 255) ? SDL_BLENDMODE_NONE : SDL_BLENDMODE_BLEND,
-    );
+    result = sdlSetRenderDrawBlendMode(renderer, blendMode);
   }
   if (result) {
     result = sdlSetRenderDrawColor(renderer, r, g, b, a);
@@ -141,8 +154,9 @@ bool pixelRgbaWeight(
   int g,
   int b,
   int a,
-  int weight,
-) {
+  int weight, {
+  int blendMode = SDL_BLENDMODE_BLEND,
+}) {
   /*
 	* Modify Alpha by weight 
 	*/
@@ -153,7 +167,7 @@ bool pixelRgbaWeight(
   } else {
     a = ax & 0x000000ff;
   }
-  return pixelRgba(renderer, x, y, r, g, b, a);
+  return pixelRgba(renderer, x, y, r, g, b, a, blendMode: blendMode);
 }
 
 /* ---- Hline */
@@ -188,10 +202,21 @@ bool hlineColor(
   double x1,
   double x2,
   double y,
-  int color,
-) {
+  int color, {
+  int blendMode = SDL_BLENDMODE_BLEND,
+}) {
   var co = Uint32List.fromList([color]).buffer.asUint8List();
-  return hlineRgba(renderer, x1, x2, y, co[0], co[1], co[2], co[3]);
+  return hlineRgba(
+    renderer,
+    x1,
+    x2,
+    y,
+    co[0],
+    co[1],
+    co[2],
+    co[3],
+    blendMode: blendMode,
+  );
 }
 
 /*!
@@ -216,14 +241,12 @@ bool hlineRgba(
   int r,
   int g,
   int b,
-  int a,
-) {
+  int a, {
+  int blendMode = SDL_BLENDMODE_BLEND,
+}) {
   bool result = true;
   if (result) {
-    result = sdlSetRenderDrawBlendMode(
-      renderer,
-      (a == 255) ? SDL_BLENDMODE_NONE : SDL_BLENDMODE_BLEND,
-    );
+    result = sdlSetRenderDrawBlendMode(renderer, blendMode);
   }
   if (result) {
     result = sdlSetRenderDrawColor(renderer, r, g, b, a);
@@ -266,10 +289,21 @@ bool vlineColor(
   double x,
   double y1,
   double y2,
-  int color,
-) {
+  int color, {
+  int blendMode = SDL_BLENDMODE_BLEND,
+}) {
   var co = Uint32List.fromList([color]).buffer.asUint8List();
-  return vlineRgba(renderer, x, y1, y2, co[0], co[1], co[2], co[3]);
+  return vlineRgba(
+    renderer,
+    x,
+    y1,
+    y2,
+    co[0],
+    co[1],
+    co[2],
+    co[3],
+    blendMode: blendMode,
+  );
 }
 
 /*!
@@ -294,14 +328,12 @@ bool vlineRgba(
   int r,
   int g,
   int b,
-  int a,
-) {
+  int a, {
+  int blendMode = SDL_BLENDMODE_BLEND,
+}) {
   bool result = true;
   if (result) {
-    result = sdlSetRenderDrawBlendMode(
-      renderer,
-      (a == 255) ? SDL_BLENDMODE_NONE : SDL_BLENDMODE_BLEND,
-    );
+    result = sdlSetRenderDrawBlendMode(renderer, blendMode);
   }
   if (result) {
     result = sdlSetRenderDrawColor(renderer, r, g, b, a);
@@ -332,10 +364,22 @@ bool rectangleColor(
   double y1,
   double x2,
   double y2,
-  int color,
-) {
+  int color, {
+  int blendMode = SDL_BLENDMODE_BLEND,
+}) {
   var co = Uint32List.fromList([color]).buffer.asUint8List();
-  return rectangleRgba(renderer, x1, y1, x2, y2, co[0], co[1], co[2], co[3]);
+  return rectangleRgba(
+    renderer,
+    x1,
+    y1,
+    x2,
+    y2,
+    co[0],
+    co[1],
+    co[2],
+    co[3],
+    blendMode: blendMode,
+  );
 }
 
 /*!
@@ -362,8 +406,9 @@ bool rectangleRgba(
   int r,
   int g,
   int b,
-  int a,
-) {
+  int a, {
+  int blendMode = SDL_BLENDMODE_BLEND,
+}) {
   bool result = true;
   double tmp;
 
@@ -372,13 +417,13 @@ bool rectangleRgba(
 	*/
   if (x1 == x2) {
     if (y1 == y2) {
-      return pixelRgba(renderer, x1, y1, r, g, b, a);
+      return pixelRgba(renderer, x1, y1, r, g, b, a, blendMode: blendMode);
     } else {
-      return vlineRgba(renderer, x1, y1, y2, r, g, b, a);
+      return vlineRgba(renderer, x1, y1, y2, r, g, b, a, blendMode: blendMode);
     }
   } else {
     if (y1 == y2) {
-      return hlineRgba(renderer, x1, x2, y1, r, g, b, a);
+      return hlineRgba(renderer, x1, x2, y1, r, g, b, a, blendMode: blendMode);
     }
   }
 
@@ -414,10 +459,7 @@ bool rectangleRgba(
 	*/
   result = true;
   if (result) {
-    result = sdlSetRenderDrawBlendMode(
-      renderer,
-      (a == 255) ? SDL_BLENDMODE_NONE : SDL_BLENDMODE_BLEND,
-    );
+    result = sdlSetRenderDrawBlendMode(renderer, blendMode);
   }
   if (result) {
     result = sdlSetRenderDrawColor(renderer, r, g, b, a);
@@ -451,8 +493,9 @@ bool roundedRectangleColor(
   double x2,
   double y2,
   double rad,
-  int color,
-) {
+  int color, {
+  int blendMode = SDL_BLENDMODE_BLEND,
+}) {
   var co = Uint32List.fromList([color]).buffer.asUint8List();
   return roundedRectangleRgba(
     renderer,
@@ -465,6 +508,7 @@ bool roundedRectangleColor(
     co[1],
     co[2],
     co[3],
+    blendMode: blendMode,
   );
 }
 
@@ -494,8 +538,9 @@ bool roundedRectangleRgba(
   int r,
   int g,
   int b,
-  int a,
-) {
+  int a, {
+  int blendMode = SDL_BLENDMODE_BLEND,
+}) {
   bool result = true;
   double tmp;
   double w, h;
@@ -520,7 +565,18 @@ bool roundedRectangleRgba(
 	* Special case - no rounding
 	*/
   if (rad <= 1) {
-    return rectangleRgba(renderer, x1, y1, x2, y2, r, g, b, a);
+    return rectangleRgba(
+      renderer,
+      x1,
+      y1,
+      x2,
+      y2,
+      r,
+      g,
+      b,
+      a,
+      blendMode: blendMode,
+    );
   }
 
   /*
@@ -528,13 +584,13 @@ bool roundedRectangleRgba(
 	*/
   if (x1 == x2) {
     if (y1 == y2) {
-      return pixelRgba(renderer, x1, y1, r, g, b, a);
+      return pixelRgba(renderer, x1, y1, r, g, b, a, blendMode: blendMode);
     } else {
-      return vlineRgba(renderer, x1, y1, y2, r, g, b, a);
+      return vlineRgba(renderer, x1, y1, y2, r, g, b, a, blendMode: blendMode);
     }
   } else {
     if (y1 == y2) {
-      return hlineRgba(renderer, x1, x2, y1, r, g, b, a);
+      return hlineRgba(renderer, x1, x2, y1, r, g, b, a, blendMode: blendMode);
     }
   }
 
@@ -580,16 +636,64 @@ bool roundedRectangleRgba(
   yy1 = y1 + rad;
   yy2 = y2 - rad;
   if (result) {
-    result = arcRgba(renderer, xx1, yy1, rad, 180, 270, r, g, b, a);
+    result = arcRgba(
+      renderer,
+      xx1,
+      yy1,
+      rad,
+      180,
+      270,
+      r,
+      g,
+      b,
+      a,
+      blendMode: blendMode,
+    );
   }
   if (result) {
-    result = arcRgba(renderer, xx2, yy1, rad, 270, 360, r, g, b, a);
+    result = arcRgba(
+      renderer,
+      xx2,
+      yy1,
+      rad,
+      270,
+      360,
+      r,
+      g,
+      b,
+      a,
+      blendMode: blendMode,
+    );
   }
   if (result) {
-    result = arcRgba(renderer, xx1, yy2, rad, 90, 180, r, g, b, a);
+    result = arcRgba(
+      renderer,
+      xx1,
+      yy2,
+      rad,
+      90,
+      180,
+      r,
+      g,
+      b,
+      a,
+      blendMode: blendMode,
+    );
   }
   if (result) {
-    result = arcRgba(renderer, xx2, yy2, rad, 0, 90, r, g, b, a);
+    result = arcRgba(
+      renderer,
+      xx2,
+      yy2,
+      rad,
+      0,
+      90,
+      r,
+      g,
+      b,
+      a,
+      blendMode: blendMode,
+    );
   }
 
   /*
@@ -597,18 +701,58 @@ bool roundedRectangleRgba(
 	*/
   if (xx1 <= xx2) {
     if (result) {
-      result = hlineRgba(renderer, xx1, xx2, y1, r, g, b, a);
+      result = hlineRgba(
+        renderer,
+        xx1,
+        xx2,
+        y1,
+        r,
+        g,
+        b,
+        a,
+        blendMode: blendMode,
+      );
     }
     if (result) {
-      result = hlineRgba(renderer, xx1, xx2, y2, r, g, b, a);
+      result = hlineRgba(
+        renderer,
+        xx1,
+        xx2,
+        y2,
+        r,
+        g,
+        b,
+        a,
+        blendMode: blendMode,
+      );
     }
   }
   if (yy1 <= yy2) {
     if (result) {
-      result = vlineRgba(renderer, x1, yy1, yy2, r, g, b, a);
+      result = vlineRgba(
+        renderer,
+        x1,
+        yy1,
+        yy2,
+        r,
+        g,
+        b,
+        a,
+        blendMode: blendMode,
+      );
     }
     if (result) {
-      result = vlineRgba(renderer, x2, yy1, yy2, r, g, b, a);
+      result = vlineRgba(
+        renderer,
+        x2,
+        yy1,
+        yy2,
+        r,
+        g,
+        b,
+        a,
+        blendMode: blendMode,
+      );
     }
   }
   return result;
@@ -636,8 +780,9 @@ bool roundedBoxColor(
   double x2,
   double y2,
   double rad,
-  int color,
-) {
+  int color, {
+  int blendMode = SDL_BLENDMODE_BLEND,
+}) {
   var co = Uint32List.fromList([color]).buffer.asUint8List();
   return roundedBoxRgba(
     renderer,
@@ -650,6 +795,7 @@ bool roundedBoxColor(
     co[1],
     co[2],
     co[3],
+    blendMode: blendMode,
   );
 }
 
@@ -679,8 +825,9 @@ bool roundedBoxRgba(
   int r,
   int g,
   int b,
-  int a,
-) {
+  int a, {
+  int blendMode = SDL_BLENDMODE_BLEND,
+}) {
   bool result = true;
   double w, h, r2, tmp;
   double cx = 0;
@@ -712,7 +859,7 @@ bool roundedBoxRgba(
 	* Special case - no rounding
 	*/
   if (rad <= 1) {
-    return boxRgba(renderer, x1, y1, x2, y2, r, g, b, a);
+    return boxRgba(renderer, x1, y1, x2, y2, r, g, b, a, blendMode: blendMode);
   }
 
   /*
@@ -720,13 +867,13 @@ bool roundedBoxRgba(
 	*/
   if (x1 == x2) {
     if (y1 == y2) {
-      return pixelRgba(renderer, x1, y1, r, g, b, a);
+      return pixelRgba(renderer, x1, y1, r, g, b, a, blendMode: blendMode);
     } else {
-      return vlineRgba(renderer, x1, y1, y2, r, g, b, a);
+      return vlineRgba(renderer, x1, y1, y2, r, g, b, a, blendMode: blendMode);
     }
   } else {
     if (y1 == y2) {
-      return hlineRgba(renderer, x1, x2, y1, r, g, b, a);
+      return hlineRgba(renderer, x1, x2, y1, r, g, b, a, blendMode: blendMode);
     }
   }
 
@@ -777,10 +924,7 @@ bool roundedBoxRgba(
 	*/
   result = true;
   if (result) {
-    result = sdlSetRenderDrawBlendMode(
-      renderer,
-      (a == 255) ? SDL_BLENDMODE_NONE : SDL_BLENDMODE_BLEND,
-    );
+    result = sdlSetRenderDrawBlendMode(renderer, blendMode);
   }
   if (result) {
     result = sdlSetRenderDrawColor(renderer, r, g, b, a);
@@ -850,10 +994,21 @@ bool roundedBoxRgba(
   /* Inside */
   if (dx > 0 && dy > 0) {
     if (result) {
-      result = boxRgba(renderer, x1, y1 + rad + 1, x2, y2 - rad, r, g, b, a);
+      result = boxRgba(
+        renderer,
+        x1,
+        y1 + rad + 1,
+        x2,
+        y2 - rad,
+        r,
+        g,
+        b,
+        a,
+        blendMode: blendMode,
+      );
     }
   }
-  return (result);
+  return result;
 }
 
 /* ---- Box */
@@ -876,10 +1031,22 @@ bool boxColor(
   double y1,
   double x2,
   double y2,
-  int color,
-) {
+  int color, {
+  int blendMode = SDL_BLENDMODE_BLEND,
+}) {
   var co = Uint32List.fromList([color]).buffer.asUint8List();
-  return boxRgba(renderer, x1, y1, x2, y2, co[0], co[1], co[2], co[3]);
+  return boxRgba(
+    renderer,
+    x1,
+    y1,
+    x2,
+    y2,
+    co[0],
+    co[1],
+    co[2],
+    co[3],
+    blendMode: blendMode,
+  );
 }
 
 /*!
@@ -906,8 +1073,9 @@ bool boxRgba(
   int r,
   int g,
   int b,
-  int a,
-) {
+  int a, {
+  int blendMode = SDL_BLENDMODE_BLEND,
+}) {
   bool result = true;
   double tmp;
 
@@ -916,13 +1084,13 @@ bool boxRgba(
 	*/
   if (x1 == x2) {
     if (y1 == y2) {
-      return pixelRgba(renderer, x1, y1, r, g, b, a);
+      return pixelRgba(renderer, x1, y1, r, g, b, a, blendMode: blendMode);
     } else {
-      return vlineRgba(renderer, x1, y1, y2, r, g, b, a);
+      return vlineRgba(renderer, x1, y1, y2, r, g, b, a, blendMode: blendMode);
     }
   } else {
     if (y1 == y2) {
-      return hlineRgba(renderer, x1, x2, y1, r, g, b, a);
+      return hlineRgba(renderer, x1, x2, y1, r, g, b, a, blendMode: blendMode);
     }
   }
 
@@ -958,10 +1126,7 @@ bool boxRgba(
 	*/
   result = true;
   if (result) {
-    result = sdlSetRenderDrawBlendMode(
-      renderer,
-      (a == 255) ? SDL_BLENDMODE_NONE : SDL_BLENDMODE_BLEND,
-    );
+    result = sdlSetRenderDrawBlendMode(renderer, blendMode);
   }
   if (result) {
     result = sdlSetRenderDrawColor(renderer, r, g, b, a);
@@ -1017,10 +1182,22 @@ bool lineColor(
   double y1,
   double x2,
   double y2,
-  int color,
-) {
+  int color, {
+  int blendMode = SDL_BLENDMODE_BLEND,
+}) {
   var co = Uint32List.fromList([color]).buffer.asUint8List();
-  return lineRgba(renderer, x1, y1, x2, y2, co[0], co[1], co[2], co[3]);
+  return lineRgba(
+    renderer,
+    x1,
+    y1,
+    x2,
+    y2,
+    co[0],
+    co[1],
+    co[2],
+    co[3],
+    blendMode: blendMode,
+  );
 }
 
 /*!
@@ -1047,17 +1224,15 @@ bool lineRgba(
   int r,
   int g,
   int b,
-  int a,
-) {
+  int a, {
+  int blendMode = SDL_BLENDMODE_BLEND,
+}) {
   /*
 	* Draw
 	*/
   bool result = true;
   if (result) {
-    result = sdlSetRenderDrawBlendMode(
-      renderer,
-      (a == 255) ? SDL_BLENDMODE_NONE : SDL_BLENDMODE_BLEND,
-    );
+    result = sdlSetRenderDrawBlendMode(renderer, blendMode);
   }
   if (result) {
     result = sdlSetRenderDrawColor(renderer, r, g, b, a);
@@ -1101,8 +1276,9 @@ bool _aalineRgba(
   int g,
   int b,
   int a,
-  int drawEndpoint,
-) {
+  int drawEndpoint, {
+  int blendMode = SDL_BLENDMODE_BLEND,
+}) {
   double xx0, yy0, xx1, yy1;
   bool result = true;
   double erracc, erradj;
@@ -1153,12 +1329,22 @@ bool _aalineRgba(
 		* Vertical line 
 		*/
     if (drawEndpoint != 0) {
-      return vlineRgba(renderer, x1, y1, y2, r, g, b, a);
+      return vlineRgba(renderer, x1, y1, y2, r, g, b, a, blendMode: blendMode);
     } else {
       if (dy > 0) {
-        return vlineRgba(renderer, x1, yy0, yy0 + dy, r, g, b, a);
+        return vlineRgba(
+          renderer,
+          x1,
+          yy0,
+          yy0 + dy,
+          r,
+          g,
+          b,
+          a,
+          blendMode: blendMode,
+        );
       } else {
-        return pixelRgba(renderer, x1, y1, r, g, b, a);
+        return pixelRgba(renderer, x1, y1, r, g, b, a, blendMode: blendMode);
       }
     }
   } else if (dy == 0) {
@@ -1166,19 +1352,29 @@ bool _aalineRgba(
 		* Horizontal line 
 		*/
     if (drawEndpoint != 0) {
-      return hlineRgba(renderer, x1, x2, y1, r, g, b, a);
+      return hlineRgba(renderer, x1, x2, y1, r, g, b, a, blendMode: blendMode);
     } else {
       if (dx > 0) {
-        return hlineRgba(renderer, xx0, xx0 + (xdir * dx), y1, r, g, b, a);
+        return hlineRgba(
+          renderer,
+          xx0,
+          xx0 + (xdir * dx),
+          y1,
+          r,
+          g,
+          b,
+          a,
+          blendMode: blendMode,
+        );
       } else {
-        return pixelRgba(renderer, x1, y1, r, g, b, a);
+        return pixelRgba(renderer, x1, y1, r, g, b, a, blendMode: blendMode);
       }
     }
   } else if ((dx == dy) && (drawEndpoint != 0)) {
     /*
 		* Diagonal line (with endpoint)
 		*/
-    return lineRgba(renderer, x1, y1, x2, y2, r, g, b, a);
+    return lineRgba(renderer, x1, y1, x2, y2, r, g, b, a, blendMode: blendMode);
   }
 
   /*
@@ -1203,7 +1399,7 @@ bool _aalineRgba(
 	* Draw the initial pixel in the foreground color 
 	*/
   if (result) {
-    result = pixelRgba(renderer, x1, y1, r, g, b, a);
+    result = pixelRgba(renderer, x1, y1, r, g, b, a, blendMode: blendMode);
   }
 
   /*
@@ -1250,10 +1446,30 @@ bool _aalineRgba(
 			*/
       wgt = (erracc * 256).toInt() & 255;
       if (result) {
-        result = pixelRgbaWeight(renderer, xx0, yy0, r, g, b, a, 255 - wgt);
+        result = pixelRgbaWeight(
+          renderer,
+          xx0,
+          yy0,
+          r,
+          g,
+          b,
+          a,
+          255 - wgt,
+          blendMode: blendMode,
+        );
       }
       if (result) {
-        result = pixelRgbaWeight(renderer, x0pxdir, yy0, r, g, b, a, wgt);
+        result = pixelRgbaWeight(
+          renderer,
+          x0pxdir,
+          yy0,
+          r,
+          g,
+          b,
+          a,
+          wgt,
+          blendMode: blendMode,
+        );
       }
     }
   } else {
@@ -1286,10 +1502,30 @@ bool _aalineRgba(
 			*/
       wgt = (erracc * 256).toInt() & 255;
       if (result) {
-        result = pixelRgbaWeight(renderer, xx0, yy0, r, g, b, a, 255 - wgt);
+        result = pixelRgbaWeight(
+          renderer,
+          xx0,
+          yy0,
+          r,
+          g,
+          b,
+          a,
+          255 - wgt,
+          blendMode: blendMode,
+        );
       }
       if (result) {
-        result = pixelRgbaWeight(renderer, xx0, y0p1, r, g, b, a, wgt);
+        result = pixelRgbaWeight(
+          renderer,
+          xx0,
+          y0p1,
+          r,
+          g,
+          b,
+          a,
+          wgt,
+          blendMode: blendMode,
+        );
       }
     }
   }
@@ -1303,7 +1539,7 @@ bool _aalineRgba(
 		* need to be weighted. 
 		*/
     if (result) {
-      result = pixelRgba(renderer, x2, y2, r, g, b, a);
+      result = pixelRgba(renderer, x2, y2, r, g, b, a, blendMode: blendMode);
     }
   }
 
@@ -1328,10 +1564,23 @@ bool aalineColor(
   double y1,
   double x2,
   double y2,
-  int color,
-) {
+  int color, {
+  int blendMode = SDL_BLENDMODE_BLEND,
+}) {
   var co = Uint32List.fromList([color]).buffer.asUint8List();
-  return _aalineRgba(renderer, x1, y1, x2, y2, co[0], co[1], co[2], co[3], 1);
+  return _aalineRgba(
+    renderer,
+    x1,
+    y1,
+    x2,
+    y2,
+    co[0],
+    co[1],
+    co[2],
+    co[3],
+    1,
+    blendMode: blendMode,
+  );
 }
 
 /*!
@@ -1358,9 +1607,22 @@ bool aalineRgba(
   int r,
   int g,
   int b,
-  int a,
-) {
-  return _aalineRgba(renderer, x1, y1, x2, y2, r, g, b, a, 1);
+  int a, {
+  int blendMode = SDL_BLENDMODE_BLEND,
+}) {
+  return _aalineRgba(
+    renderer,
+    x1,
+    y1,
+    x2,
+    y2,
+    r,
+    g,
+    b,
+    a,
+    1,
+    blendMode: blendMode,
+  );
 }
 
 /* ----- Circle */
@@ -1381,10 +1643,22 @@ bool circleColor(
   double x,
   double y,
   double rad,
-  int color,
-) {
+  int color, {
+  int blendMode = SDL_BLENDMODE_BLEND,
+}) {
   var co = Uint32List.fromList([color]).buffer.asUint8List();
-  return ellipseRgba(renderer, x, y, rad, rad, co[0], co[1], co[2], co[3]);
+  return ellipseRgba(
+    renderer,
+    x,
+    y,
+    rad,
+    rad,
+    co[0],
+    co[1],
+    co[2],
+    co[3],
+    blendMode: blendMode,
+  );
 }
 
 /*!
@@ -1409,9 +1683,21 @@ bool circleRgba(
   int r,
   int g,
   int b,
-  int a,
-) {
-  return ellipseRgba(renderer, x, y, rad, rad, r, g, b, a);
+  int a, {
+  int blendMode = SDL_BLENDMODE_BLEND,
+}) {
+  return ellipseRgba(
+    renderer,
+    x,
+    y,
+    rad,
+    rad,
+    r,
+    g,
+    b,
+    a,
+    blendMode: blendMode,
+  );
 }
 
 /* ----- Arc */
@@ -1436,10 +1722,23 @@ bool arcColor(
   double rad,
   double start,
   double end,
-  int color,
-) {
+  int color, {
+  int blendMode = SDL_BLENDMODE_BLEND,
+}) {
   var co = Uint32List.fromList([color]).buffer.asUint8List();
-  return arcRgba(renderer, x, y, rad, start, end, co[0], co[1], co[2], co[3]);
+  return arcRgba(
+    renderer,
+    x,
+    y,
+    rad,
+    start,
+    end,
+    co[0],
+    co[1],
+    co[2],
+    co[3],
+    blendMode: blendMode,
+  );
 }
 
 /*!
@@ -1468,8 +1767,9 @@ bool arcRgba(
   int r,
   int g,
   int b,
-  int a,
-) {
+  int a, {
+  int blendMode = SDL_BLENDMODE_BLEND,
+}) {
   bool result = true;
   double cx = 0;
   double cy = rad;
@@ -1493,7 +1793,7 @@ bool arcRgba(
 	* Special case for rad=0 - draw a point 
 	*/
   if (rad == 0) {
-    return pixelRgba(renderer, x, y, r, g, b, a);
+    return pixelRgba(renderer, x, y, r, g, b, a, blendMode: blendMode);
   }
 
   /*
@@ -1632,10 +1932,7 @@ bool arcRgba(
 	*/
   result = true;
   if (result) {
-    result = sdlSetRenderDrawBlendMode(
-      renderer,
-      (a == 255) ? SDL_BLENDMODE_NONE : SDL_BLENDMODE_BLEND,
-    );
+    result = sdlSetRenderDrawBlendMode(renderer, blendMode);
   }
   if (result) {
     result = sdlSetRenderDrawColor(renderer, r, g, b, a);
@@ -1778,10 +2075,22 @@ bool aacircleColor(
   double x,
   double y,
   double rad,
-  int color,
-) {
+  int color, {
+  int blendMode = SDL_BLENDMODE_BLEND,
+}) {
   var co = Uint32List.fromList([color]).buffer.asUint8List();
-  return aaellipseRgba(renderer, x, y, rad, rad, co[0], co[1], co[2], co[3]);
+  return aaellipseRgba(
+    renderer,
+    x,
+    y,
+    rad,
+    rad,
+    co[0],
+    co[1],
+    co[2],
+    co[3],
+    blendMode: blendMode,
+  );
 }
 
 /*!
@@ -1806,12 +2115,24 @@ bool aacircleRgba(
   int r,
   int g,
   int b,
-  int a,
-) {
+  int a, {
+  int blendMode = SDL_BLENDMODE_BLEND,
+}) {
   /*
 	* Draw 
 	*/
-  return aaellipseRgba(renderer, x, y, rad, rad, r, g, b, a);
+  return aaellipseRgba(
+    renderer,
+    x,
+    y,
+    rad,
+    rad,
+    r,
+    g,
+    b,
+    a,
+    blendMode: blendMode,
+  );
 }
 
 /* ----- Ellipse */
@@ -1917,8 +2238,9 @@ bool _ellipseRgba(
   int g,
   int b,
   int a,
-  int f,
-) {
+  int f, {
+  int blendMode = SDL_BLENDMODE_BLEND,
+}) {
   bool result = true;
   int rxi, ryi;
   int rx2, ry2, rx22, ry22;
@@ -1940,10 +2262,7 @@ bool _ellipseRgba(
 	*/
   result = true;
   if (result) {
-    result = sdlSetRenderDrawBlendMode(
-      renderer,
-      (a == 255) ? SDL_BLENDMODE_NONE : SDL_BLENDMODE_BLEND,
-    );
+    result = sdlSetRenderDrawBlendMode(renderer, blendMode);
   }
   if (result) {
     result = sdlSetRenderDrawColor(renderer, r, g, b, a);
@@ -2113,10 +2432,23 @@ bool ellipseColor(
   double y,
   double rx,
   double ry,
-  int color,
-) {
+  int color, {
+  int blendMode = SDL_BLENDMODE_BLEND,
+}) {
   var co = Uint32List.fromList([color]).buffer.asUint8List();
-  return _ellipseRgba(renderer, x, y, rx, ry, co[0], co[1], co[2], co[3], 0);
+  return _ellipseRgba(
+    renderer,
+    x,
+    y,
+    rx,
+    ry,
+    co[0],
+    co[1],
+    co[2],
+    co[3],
+    0,
+    blendMode: blendMode,
+  );
 }
 
 /*!
@@ -2143,9 +2475,22 @@ bool ellipseRgba(
   int r,
   int g,
   int b,
-  int a,
-) {
-  return _ellipseRgba(renderer, x, y, rx, ry, r, g, b, a, 0);
+  int a, {
+  int blendMode = SDL_BLENDMODE_BLEND,
+}) {
+  return _ellipseRgba(
+    renderer,
+    x,
+    y,
+    rx,
+    ry,
+    r,
+    g,
+    b,
+    a,
+    0,
+    blendMode: blendMode,
+  );
 }
 
 /* ----- Filled Circle */
@@ -2166,8 +2511,9 @@ bool filledCircleColor(
   double x,
   double y,
   double rad,
-  int color,
-) {
+  int color, {
+  int blendMode = SDL_BLENDMODE_BLEND,
+}) {
   var co = Uint32List.fromList([color]).buffer.asUint8List();
   return filledEllipseRgba(
     renderer,
@@ -2179,6 +2525,7 @@ bool filledCircleColor(
     co[1],
     co[2],
     co[3],
+    blendMode: blendMode,
   );
 }
 
@@ -2204,9 +2551,22 @@ bool filledCircleRgba(
   int r,
   int g,
   int b,
-  int a,
-) {
-  return _ellipseRgba(renderer, x, y, rad, rad, r, g, b, a, 1);
+  int a, {
+  int blendMode = SDL_BLENDMODE_BLEND,
+}) {
+  return _ellipseRgba(
+    renderer,
+    x,
+    y,
+    rad,
+    rad,
+    r,
+    g,
+    b,
+    a,
+    1,
+    blendMode: blendMode,
+  );
 }
 
 /*!
@@ -2227,10 +2587,22 @@ bool aaellipseColor(
   double y,
   double rx,
   double ry,
-  int color,
-) {
+  int color, {
+  int blendMode = SDL_BLENDMODE_BLEND,
+}) {
   var co = Uint32List.fromList([color]).buffer.asUint8List();
-  return aaellipseRgba(renderer, x, y, rx, ry, co[0], co[1], co[2], co[3]);
+  return aaellipseRgba(
+    renderer,
+    x,
+    y,
+    rx,
+    ry,
+    co[0],
+    co[1],
+    co[2],
+    co[3],
+    blendMode: blendMode,
+  );
 }
 
 /*!
@@ -2257,8 +2629,9 @@ bool aaellipseRgba(
   int r,
   int g,
   int b,
-  int a,
-) {
+  int a, {
+  int blendMode = SDL_BLENDMODE_BLEND,
+}) {
   bool result = true;
   int i;
   double a2, b2, ds, dt, dxt, t, s, d;
@@ -2279,13 +2652,33 @@ bool aaellipseRgba(
 	*/
   if (rx == 0) {
     if (ry == 0) {
-      return pixelRgba(renderer, x, y, r, g, b, a);
+      return pixelRgba(renderer, x, y, r, g, b, a, blendMode: blendMode);
     } else {
-      return vlineRgba(renderer, x, y - ry, y + ry, r, g, b, a);
+      return vlineRgba(
+        renderer,
+        x,
+        y - ry,
+        y + ry,
+        r,
+        g,
+        b,
+        a,
+        blendMode: blendMode,
+      );
     }
   } else {
     if (ry == 0) {
-      return hlineRgba(renderer, x - rx, x + rx, y, r, g, b, a);
+      return hlineRgba(
+        renderer,
+        x - rx,
+        x + rx,
+        y,
+        r,
+        g,
+        b,
+        a,
+        blendMode: blendMode,
+      );
     }
   }
 
@@ -2313,24 +2706,48 @@ bool aaellipseRgba(
   /* Draw */
   result = true;
   if (result) {
-    result = sdlSetRenderDrawBlendMode(
-      renderer,
-      (a == 255) ? SDL_BLENDMODE_NONE : SDL_BLENDMODE_BLEND,
-    );
+    result = sdlSetRenderDrawBlendMode(renderer, blendMode);
   }
 
   /* "End points" */
   if (result) {
-    result = pixelRgba(renderer, xp, yp, r, g, b, a);
+    result = pixelRgba(renderer, xp, yp, r, g, b, a, blendMode: blendMode);
   }
   if (result) {
-    result = pixelRgba(renderer, xc2 - xp, yp, r, g, b, a);
+    result = pixelRgba(
+      renderer,
+      xc2 - xp,
+      yp,
+      r,
+      g,
+      b,
+      a,
+      blendMode: blendMode,
+    );
   }
   if (result) {
-    result = pixelRgba(renderer, xp, yc2 - yp, r, g, b, a);
+    result = pixelRgba(
+      renderer,
+      xp,
+      yc2 - yp,
+      r,
+      g,
+      b,
+      a,
+      blendMode: blendMode,
+    );
   }
   if (result) {
-    result = pixelRgba(renderer, xc2 - xp, yc2 - yp, r, g, b, a);
+    result = pixelRgba(
+      renderer,
+      xc2 - xp,
+      yc2 - yp,
+      r,
+      g,
+      b,
+      a,
+      blendMode: blendMode,
+    );
   }
 
   for (i = 1; i <= dxt; i++) {
@@ -2374,34 +2791,114 @@ bool aaellipseRgba(
     /* Upper half */
     xx = xc2 - xp;
     if (result) {
-      result = pixelRgbaWeight(renderer, xp, yp, r, g, b, a, iweight);
+      result = pixelRgbaWeight(
+        renderer,
+        xp,
+        yp,
+        r,
+        g,
+        b,
+        a,
+        iweight,
+        blendMode: blendMode,
+      );
     }
     if (result) {
-      result = pixelRgbaWeight(renderer, xx, yp, r, g, b, a, iweight);
+      result = pixelRgbaWeight(
+        renderer,
+        xx,
+        yp,
+        r,
+        g,
+        b,
+        a,
+        iweight,
+        blendMode: blendMode,
+      );
     }
 
     if (result) {
-      result = pixelRgbaWeight(renderer, xp, ys, r, g, b, a, weight);
+      result = pixelRgbaWeight(
+        renderer,
+        xp,
+        ys,
+        r,
+        g,
+        b,
+        a,
+        weight,
+        blendMode: blendMode,
+      );
     }
     if (result) {
-      result = pixelRgbaWeight(renderer, xx, ys, r, g, b, a, weight);
+      result = pixelRgbaWeight(
+        renderer,
+        xx,
+        ys,
+        r,
+        g,
+        b,
+        a,
+        weight,
+        blendMode: blendMode,
+      );
     }
 
     /* Lower half */
     yy = yc2 - yp;
     if (result) {
-      result = pixelRgbaWeight(renderer, xp, yy, r, g, b, a, iweight);
+      result = pixelRgbaWeight(
+        renderer,
+        xp,
+        yy,
+        r,
+        g,
+        b,
+        a,
+        iweight,
+        blendMode: blendMode,
+      );
     }
     if (result) {
-      result = pixelRgbaWeight(renderer, xx, yy, r, g, b, a, iweight);
+      result = pixelRgbaWeight(
+        renderer,
+        xx,
+        yy,
+        r,
+        g,
+        b,
+        a,
+        iweight,
+        blendMode: blendMode,
+      );
     }
 
     yy = yc2 - ys;
     if (result) {
-      result = pixelRgbaWeight(renderer, xp, yy, r, g, b, a, weight);
+      result = pixelRgbaWeight(
+        renderer,
+        xp,
+        yy,
+        r,
+        g,
+        b,
+        a,
+        weight,
+        blendMode: blendMode,
+      );
     }
     if (result) {
-      result = pixelRgbaWeight(renderer, xx, yy, r, g, b, a, weight);
+      result = pixelRgbaWeight(
+        renderer,
+        xx,
+        yy,
+        r,
+        g,
+        b,
+        a,
+        weight,
+        blendMode: blendMode,
+      );
     }
   }
 
@@ -2449,33 +2946,113 @@ bool aaellipseRgba(
     xx = xc2 - xp;
     yy = yc2 - yp;
     if (result) {
-      result = pixelRgbaWeight(renderer, xp, yp, r, g, b, a, iweight);
+      result = pixelRgbaWeight(
+        renderer,
+        xp,
+        yp,
+        r,
+        g,
+        b,
+        a,
+        iweight,
+        blendMode: blendMode,
+      );
     }
     if (result) {
-      result = pixelRgbaWeight(renderer, xx, yp, r, g, b, a, iweight);
+      result = pixelRgbaWeight(
+        renderer,
+        xx,
+        yp,
+        r,
+        g,
+        b,
+        a,
+        iweight,
+        blendMode: blendMode,
+      );
     }
 
     if (result) {
-      result = pixelRgbaWeight(renderer, xp, yy, r, g, b, a, iweight);
+      result = pixelRgbaWeight(
+        renderer,
+        xp,
+        yy,
+        r,
+        g,
+        b,
+        a,
+        iweight,
+        blendMode: blendMode,
+      );
     }
     if (result) {
-      result = pixelRgbaWeight(renderer, xx, yy, r, g, b, a, iweight);
+      result = pixelRgbaWeight(
+        renderer,
+        xx,
+        yy,
+        r,
+        g,
+        b,
+        a,
+        iweight,
+        blendMode: blendMode,
+      );
     }
 
     /* Right half */
     xx = xc2 - xs;
     if (result) {
-      result = pixelRgbaWeight(renderer, xs, yp, r, g, b, a, weight);
+      result = pixelRgbaWeight(
+        renderer,
+        xs,
+        yp,
+        r,
+        g,
+        b,
+        a,
+        weight,
+        blendMode: blendMode,
+      );
     }
     if (result) {
-      result = pixelRgbaWeight(renderer, xx, yp, r, g, b, a, weight);
+      result = pixelRgbaWeight(
+        renderer,
+        xx,
+        yp,
+        r,
+        g,
+        b,
+        a,
+        weight,
+        blendMode: blendMode,
+      );
     }
 
     if (result) {
-      result = pixelRgbaWeight(renderer, xs, yy, r, g, b, a, weight);
+      result = pixelRgbaWeight(
+        renderer,
+        xs,
+        yy,
+        r,
+        g,
+        b,
+        a,
+        weight,
+        blendMode: blendMode,
+      );
     }
     if (result) {
-      result = pixelRgbaWeight(renderer, xx, yy, r, g, b, a, weight);
+      result = pixelRgbaWeight(
+        renderer,
+        xx,
+        yy,
+        r,
+        g,
+        b,
+        a,
+        weight,
+        blendMode: blendMode,
+      );
     }
   }
   return result;
@@ -2501,10 +3078,23 @@ bool filledEllipseColor(
   double y,
   double rx,
   double ry,
-  int color,
-) {
+  int color, {
+  int blendMode = SDL_BLENDMODE_BLEND,
+}) {
   var co = Uint32List.fromList([color]).buffer.asUint8List();
-  return _ellipseRgba(renderer, x, y, rx, ry, co[0], co[1], co[2], co[3], 1);
+  return _ellipseRgba(
+    renderer,
+    x,
+    y,
+    rx,
+    ry,
+    co[0],
+    co[1],
+    co[2],
+    co[3],
+    1,
+    blendMode: blendMode,
+  );
 }
 
 /*!
@@ -2531,9 +3121,22 @@ bool filledEllipseRgba(
   int r,
   int g,
   int b,
-  int a,
-) {
-  return _ellipseRgba(renderer, x, y, rx, ry, r, g, b, a, 1);
+  int a, {
+  int blendMode = SDL_BLENDMODE_BLEND,
+}) {
+  return _ellipseRgba(
+    renderer,
+    x,
+    y,
+    rx,
+    ry,
+    r,
+    g,
+    b,
+    a,
+    1,
+    blendMode: blendMode,
+  );
 }
 
 /* ----- Pie */
@@ -2568,8 +3171,9 @@ bool _pieRgba(
   int g,
   int b,
   int a,
-  int filled,
-) {
+  int filled, {
+  int blendMode = SDL_BLENDMODE_BLEND,
+}) {
   bool result = true;
   double angle, startAngle, endAngle;
   double deltaAngle;
@@ -2593,7 +3197,7 @@ bool _pieRgba(
 	* Special case for rad=0 - draw a point 
 	*/
   if (rad == 0) {
-    return pixelRgba(renderer, x, y, r, g, b, a);
+    return pixelRgba(renderer, x, y, r, g, b, a, blendMode: blendMode);
   }
 
   /*
@@ -2643,6 +3247,7 @@ bool _pieRgba(
       g,
       b,
       a,
+      blendMode: blendMode,
     );
   } else {
     /* Calculate other vertices */
@@ -2660,9 +3265,29 @@ bool _pieRgba(
 
     /* Draw */
     if (filled != 0) {
-      result = filledPolygonRgba(renderer, vx, vy, numpoints, r, g, b, a);
+      result = filledPolygonRgba(
+        renderer,
+        vx,
+        vy,
+        numpoints,
+        r,
+        g,
+        b,
+        a,
+        blendMode: blendMode,
+      );
     } else {
-      result = polygonRgba(renderer, vx, vy, numpoints, r, g, b, a);
+      result = polygonRgba(
+        renderer,
+        vx,
+        vy,
+        numpoints,
+        r,
+        g,
+        b,
+        a,
+        blendMode: blendMode,
+      );
     }
   }
 
@@ -2671,7 +3296,7 @@ bool _pieRgba(
   calloc.free(vx);
   calloc.free(vy);
 
-  return (result);
+  return result;
 }
 
 /*!
@@ -2694,8 +3319,9 @@ bool pieColor(
   double rad,
   double start,
   double end,
-  int color,
-) {
+  int color, {
+  int blendMode = SDL_BLENDMODE_BLEND,
+}) {
   var co = Uint32List.fromList([color]).buffer.asUint8List();
   return _pieRgba(
     renderer,
@@ -2709,6 +3335,7 @@ bool pieColor(
     co[2],
     co[3],
     0,
+    blendMode: blendMode,
   );
 }
 
@@ -2738,9 +3365,23 @@ bool pieRgba(
   int r,
   int g,
   int b,
-  int a,
-) {
-  return _pieRgba(renderer, x, y, rad, start, end, r, g, b, a, 0);
+  int a, {
+  int blendMode = SDL_BLENDMODE_BLEND,
+}) {
+  return _pieRgba(
+    renderer,
+    x,
+    y,
+    rad,
+    start,
+    end,
+    r,
+    g,
+    b,
+    a,
+    0,
+    blendMode: blendMode,
+  );
 }
 
 /*!
@@ -2763,8 +3404,9 @@ bool filledPieColor(
   double rad,
   double start,
   double end,
-  int color,
-) {
+  int color, {
+  int blendMode = SDL_BLENDMODE_BLEND,
+}) {
   var co = Uint32List.fromList([color]).buffer.asUint8List();
   return _pieRgba(
     renderer,
@@ -2778,6 +3420,7 @@ bool filledPieColor(
     co[2],
     co[3],
     1,
+    blendMode: blendMode,
   );
 }
 
@@ -2807,9 +3450,23 @@ bool filledPieRgba(
   int r,
   int g,
   int b,
-  int a,
-) {
-  return _pieRgba(renderer, x, y, rad, start, end, r, g, b, a, 1);
+  int a, {
+  int blendMode = SDL_BLENDMODE_BLEND,
+}) {
+  return _pieRgba(
+    renderer,
+    x,
+    y,
+    rad,
+    start,
+    end,
+    r,
+    g,
+    b,
+    a,
+    1,
+    blendMode: blendMode,
+  );
 }
 
 /* ------ Trigon */
@@ -2838,8 +3495,9 @@ bool trigonColor(
   double y2,
   double x3,
   double y3,
-  int color,
-) {
+  int color, {
+  int blendMode = SDL_BLENDMODE_BLEND,
+}) {
   var vx = calloc<Int16>(3);
   var vy = calloc<Int16>(3);
 
@@ -2850,7 +3508,7 @@ bool trigonColor(
   vy[1] = y2.toInt();
   vy[2] = y3.toInt();
 
-  var result = polygonColor(renderer, vx, vy, 3, color);
+  var result = polygonColor(renderer, vx, vy, 3, color, blendMode: blendMode);
   calloc.free(vx);
   calloc.free(vy);
 
@@ -2885,8 +3543,9 @@ bool trigonRgba(
   int r,
   int g,
   int b,
-  int a,
-) {
+  int a, {
+  int blendMode = SDL_BLENDMODE_BLEND,
+}) {
   var vx = calloc<Int16>(3);
   var vy = calloc<Int16>(3);
 
@@ -2897,7 +3556,17 @@ bool trigonRgba(
   vy[1] = y2.toInt();
   vy[2] = y3.toInt();
 
-  var result = polygonRgba(renderer, vx, vy, 3, r, g, b, a);
+  var result = polygonRgba(
+    renderer,
+    vx,
+    vy,
+    3,
+    r,
+    g,
+    b,
+    a,
+    blendMode: blendMode,
+  );
   calloc.free(vx);
   calloc.free(vy);
 
@@ -2930,8 +3599,9 @@ bool aatrigonColor(
   double y2,
   double x3,
   double y3,
-  int color,
-) {
+  int color, {
+  int blendMode = SDL_BLENDMODE_BLEND,
+}) {
   var vx = calloc<Int16>(3);
   var vy = calloc<Int16>(3);
 
@@ -2942,7 +3612,7 @@ bool aatrigonColor(
   vy[1] = y2.toInt();
   vy[2] = y3.toInt();
 
-  var result = aapolygonColor(renderer, vx, vy, 3, color);
+  var result = aapolygonColor(renderer, vx, vy, 3, color, blendMode: blendMode);
   calloc.free(vx);
   calloc.free(vy);
 
@@ -2977,8 +3647,9 @@ bool aatrigonRgba(
   int r,
   int g,
   int b,
-  int a,
-) {
+  int a, {
+  int blendMode = SDL_BLENDMODE_BLEND,
+}) {
   var vx = calloc<Int16>(3);
   var vy = calloc<Int16>(3);
 
@@ -2989,7 +3660,17 @@ bool aatrigonRgba(
   vy[1] = y2.toInt();
   vy[2] = y3.toInt();
 
-  var result = aapolygonRgba(renderer, vx, vy, 3, r, g, b, a);
+  var result = aapolygonRgba(
+    renderer,
+    vx,
+    vy,
+    3,
+    r,
+    g,
+    b,
+    a,
+    blendMode: blendMode,
+  );
   calloc.free(vx);
   calloc.free(vy);
 
@@ -3022,8 +3703,9 @@ bool filledTrigonColor(
   double y2,
   double x3,
   double y3,
-  int color,
-) {
+  int color, {
+  int blendMode = SDL_BLENDMODE_BLEND,
+}) {
   var vx = calloc<Int16>(3);
   var vy = calloc<Int16>(3);
 
@@ -3034,7 +3716,14 @@ bool filledTrigonColor(
   vy[1] = y2.toInt();
   vy[2] = y3.toInt();
 
-  var result = filledPolygonColor(renderer, vx, vy, 3, color);
+  var result = filledPolygonColor(
+    renderer,
+    vx,
+    vy,
+    3,
+    color,
+    blendMode: blendMode,
+  );
   calloc.free(vx);
   calloc.free(vy);
 
@@ -3071,8 +3760,9 @@ bool filledTrigonRgba(
   int r,
   int g,
   int b,
-  int a,
-) {
+  int a, {
+  int blendMode = SDL_BLENDMODE_BLEND,
+}) {
   var vx = calloc<Int16>(3);
   var vy = calloc<Int16>(3);
 
@@ -3083,7 +3773,17 @@ bool filledTrigonRgba(
   vy[1] = y2.toInt();
   vy[2] = y3.toInt();
 
-  var result = filledPolygonRgba(renderer, vx, vy, 3, r, g, b, a);
+  var result = filledPolygonRgba(
+    renderer,
+    vx,
+    vy,
+    3,
+    r,
+    g,
+    b,
+    a,
+    blendMode: blendMode,
+  );
   calloc.free(vx);
   calloc.free(vy);
 
@@ -3108,10 +3808,21 @@ bool polygonColor(
   Pointer<Int16> vx,
   Pointer<Int16> vy,
   int n,
-  int color,
-) {
+  int color, {
+  int blendMode = SDL_BLENDMODE_BLEND,
+}) {
   var co = Uint32List.fromList([color]).buffer.asUint8List();
-  return polygonRgba(renderer, vx, vy, n, co[0], co[1], co[2], co[3]);
+  return polygonRgba(
+    renderer,
+    vx,
+    vy,
+    n,
+    co[0],
+    co[1],
+    co[2],
+    co[3],
+    blendMode: blendMode,
+  );
 }
 
 /*!
@@ -3202,8 +3913,9 @@ bool polygonRgba(
   int r,
   int g,
   int b,
-  int a,
-) {
+  int a, {
+  int blendMode = SDL_BLENDMODE_BLEND,
+}) {
   /*
 	* Draw 
 	*/
@@ -3235,10 +3947,7 @@ bool polygonRgba(
 	*/
   result = true;
   if (result) {
-    result = sdlSetRenderDrawBlendMode(
-      renderer,
-      (a == 255) ? SDL_BLENDMODE_NONE : SDL_BLENDMODE_BLEND,
-    );
+    result = sdlSetRenderDrawBlendMode(renderer, blendMode);
   }
   if (result) {
     result = sdlSetRenderDrawColor(renderer, r, g, b, a);
@@ -3272,10 +3981,21 @@ bool aapolygonColor(
   Pointer<Int16> vx,
   Pointer<Int16> vy,
   int n,
-  int color,
-) {
+  int color, {
+  int blendMode = SDL_BLENDMODE_BLEND,
+}) {
   var co = Uint32List.fromList([color]).buffer.asUint8List();
-  return aapolygonRgba(renderer, vx, vy, n, co[0], co[1], co[2], co[3]);
+  return aapolygonRgba(
+    renderer,
+    vx,
+    vy,
+    n,
+    co[0],
+    co[1],
+    co[2],
+    co[3],
+    blendMode: blendMode,
+  );
 }
 
 /*!
@@ -3300,8 +4020,9 @@ bool aapolygonRgba(
   int r,
   int g,
   int b,
-  int a,
-) {
+  int a, {
+  int blendMode = SDL_BLENDMODE_BLEND,
+}) {
   bool result = true;
   int i;
 
@@ -3343,6 +4064,7 @@ bool aapolygonRgba(
         b,
         a,
         0,
+        blendMode: blendMode,
       );
     }
   }
@@ -3358,6 +4080,7 @@ bool aapolygonRgba(
       b,
       a,
       0,
+      blendMode: blendMode,
     );
   }
 
@@ -3390,8 +4113,9 @@ bool filledPolygonRgbaMt(
   int r,
   int g,
   int b,
-  int a,
-) {
+  int a, {
+  int blendMode = SDL_BLENDMODE_BLEND,
+}) {
   bool result = true;
   int i;
   int y, xa, xb;
@@ -3467,10 +4191,7 @@ bool filledPolygonRgbaMt(
 		*/
     result = true;
     if (result) {
-      result = sdlSetRenderDrawBlendMode(
-        renderer,
-        (a == 255) ? SDL_BLENDMODE_NONE : SDL_BLENDMODE_BLEND,
-      );
+      result = sdlSetRenderDrawBlendMode(renderer, blendMode);
     }
     if (result) {
       result = sdlSetRenderDrawColor(renderer, r, g, b, a);
@@ -3504,10 +4225,21 @@ bool filledPolygonColor(
   Pointer<Int16> vx,
   Pointer<Int16> vy,
   int n,
-  int color,
-) {
+  int color, {
+  int blendMode = SDL_BLENDMODE_BLEND,
+}) {
   var co = Uint32List.fromList([color]).buffer.asUint8List();
-  return filledPolygonRgbaMt(renderer, vx, vy, n, co[0], co[1], co[2], co[3]);
+  return filledPolygonRgbaMt(
+    renderer,
+    vx,
+    vy,
+    n,
+    co[0],
+    co[1],
+    co[2],
+    co[3],
+    blendMode: blendMode,
+  );
 }
 
 /*!
@@ -3532,9 +4264,20 @@ bool filledPolygonRgba(
   int r,
   int g,
   int b,
-  int a,
-) {
-  return filledPolygonRgbaMt(renderer, vx, vy, n, r, g, b, a);
+  int a, {
+  int blendMode = SDL_BLENDMODE_BLEND,
+}) {
+  return filledPolygonRgbaMt(
+    renderer,
+    vx,
+    vy,
+    n,
+    r,
+    g,
+    b,
+    a,
+    blendMode: blendMode,
+  );
 }
 
 /* ---- Textured Polygon */
@@ -4242,7 +4985,7 @@ double _evaluateBezier(List<double> data, int ndata, double t) {
     result += data[k] * blend;
   }
 
-  return (result);
+  return result;
 }
 
 /*!
@@ -4263,10 +5006,22 @@ bool bezierColor(
   Pointer<Int16> vy,
   int n,
   int s,
-  int color,
-) {
+  int color, {
+  int blendMode = SDL_BLENDMODE_BLEND,
+}) {
   var co = Uint32List.fromList([color]).buffer.asUint8List();
-  return bezierRgba(renderer, vx, vy, n, s, co[0], co[1], co[2], co[3]);
+  return bezierRgba(
+    renderer,
+    vx,
+    vy,
+    n,
+    s,
+    co[0],
+    co[1],
+    co[2],
+    co[3],
+    blendMode: blendMode,
+  );
 }
 
 /*!
@@ -4293,8 +5048,9 @@ bool bezierRgba(
   int r,
   int g,
   int b,
-  int a,
-) {
+  int a, {
+  int blendMode = SDL_BLENDMODE_BLEND,
+}) {
   bool result = true;
   int i;
   double t, stepsize;
@@ -4330,10 +5086,7 @@ bool bezierRgba(
 	*/
   result = true;
   if (result) {
-    result = sdlSetRenderDrawBlendMode(
-      renderer,
-      (a == 255) ? SDL_BLENDMODE_NONE : SDL_BLENDMODE_BLEND,
-    );
+    result = sdlSetRenderDrawBlendMode(renderer, blendMode);
   }
   if (result) {
     result = sdlSetRenderDrawColor(renderer, r, g, b, a);
@@ -4389,8 +5142,9 @@ bool thickLineColor(
   double x2,
   double y2,
   double width,
-  int color,
-) {
+  int color, {
+  int blendMode = SDL_BLENDMODE_BLEND,
+}) {
   var co = Uint32List.fromList([color]).buffer.asUint8List();
   return thickLineRgba(
     renderer,
@@ -4403,6 +5157,7 @@ bool thickLineColor(
     co[1],
     co[2],
     co[3],
+    blendMode: blendMode,
   );
 }
 
@@ -4432,8 +5187,9 @@ bool thickLineRgba(
   int r,
   int g,
   int b,
-  int a,
-) {
+  int a, {
+  int blendMode = SDL_BLENDMODE_BLEND,
+}) {
   int wh;
   double dx, dy, dx1, dy1, dx2, dy2;
   double l, wl2, nx, ny, ang, adj;
@@ -4466,7 +5222,7 @@ bool thickLineRgba(
 
   /* Special case: width == 1 */
   if (width == 1) {
-    return lineRgba(renderer, x1, y1, x2, y2, r, g, b, a);
+    return lineRgba(renderer, x1, y1, x2, y2, r, g, b, a, blendMode: blendMode);
   }
 
   /* Calculate offsets for sides */
@@ -4494,7 +5250,17 @@ bool thickLineRgba(
   py[3] = (dy2 - nx).toInt();
 
   /* Draw polygon */
-  var result = filledPolygonRgba(renderer, px, py, 4, r, g, b, a);
+  var result = filledPolygonRgba(
+    renderer,
+    px,
+    py,
+    4,
+    r,
+    g,
+    b,
+    a,
+    blendMode: blendMode,
+  );
   calloc.free(px);
   calloc.free(py);
 

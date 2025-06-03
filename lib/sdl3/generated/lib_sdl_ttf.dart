@@ -4192,6 +4192,8 @@ bool ttfGetTextSubStringForPoint(
 ///
 /// \param text the TTF_Text to query.
 /// \param substring the TTF_SubString to query.
+/// \param previous a pointer filled in with the previous substring in the text
+/// object.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///

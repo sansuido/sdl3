@@ -1445,6 +1445,88 @@ bool sdlPutAudioStreamData(
 }
 
 ///
+/// Add external data to an audio stream without copying it.
+///
+/// Unlike SDL_PutAudioStreamData(), this function does not make a copy of the
+/// provided data, instead storing the provided pointer. This means that the
+/// put operation does not need to allocate and copy the data, but the original
+/// data must remain available until the stream is done with it, either by
+/// being read from the stream in its entirety, or a call to
+/// SDL_ClearAudioStream() or SDL_DestroyAudioStream().
+///
+/// The data must match the format/channels/samplerate specified in the latest
+/// call to SDL_SetAudioStreamFormat, or the format specified when creating the
+/// stream if it hasn't been changed.
+///
+/// An optional callback may be provided, which is called when the stream no
+/// longer needs the data. Once this callback fires, the stream will not access
+/// the data again. This callback will fire for any reason the data is no
+/// longer needed, including clearing or destroying the stream.
+///
+/// Note that there is still an allocation to store tracking information, so
+/// this function is more efficient for larger blocks of data. If you're
+/// planning to put a few samples at a time, it will be more efficient to use
+/// SDL_PutAudioStreamData(), which allocates and buffers in blocks.
+///
+/// \param stream the stream the audio data is being added to.
+/// \param buf a pointer to the audio data to add.
+/// \param len the number of bytes to add to the stream.
+/// \param callback the callback function to call when the data is no longer
+/// needed by the stream. May be NULL.
+/// \param userdata an opaque pointer provided to the callback for its own
+/// personal use.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety It is safe to call this function from any thread, but if the
+/// stream has a callback set, the caller might need to manage
+/// extra locking.
+///
+/// \since This function is available since SDL 3.4.0.
+///
+/// \sa SDL_ClearAudioStream
+/// \sa SDL_FlushAudioStream
+/// \sa SDL_GetAudioStreamData
+/// \sa SDL_GetAudioStreamQueued
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL SDL_PutAudioStreamDataNoCopy(SDL_AudioStream *stream, const void *buf, int len, SDL_AudioStreamDataCompleteCallback callback, void *userdata)
+/// ```
+bool sdlPutAudioStreamDataNoCopy(
+  Pointer<SdlAudioStream> stream,
+  Pointer<NativeType> buf,
+  int len,
+  Pointer<NativeFunction<SdlAudioStreamDataCompleteCallback>> callback,
+  Pointer<NativeType> userdata,
+) {
+  final sdlPutAudioStreamDataNoCopyLookupFunction = libSdl3
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<SdlAudioStream> stream,
+          Pointer<NativeType> buf,
+          Int32 len,
+          Pointer<NativeFunction<SdlAudioStreamDataCompleteCallback>> callback,
+          Pointer<NativeType> userdata,
+        ),
+        int Function(
+          Pointer<SdlAudioStream> stream,
+          Pointer<NativeType> buf,
+          int len,
+          Pointer<NativeFunction<SdlAudioStreamDataCompleteCallback>> callback,
+          Pointer<NativeType> userdata,
+        )
+      >('SDL_PutAudioStreamDataNoCopy');
+  return sdlPutAudioStreamDataNoCopyLookupFunction(
+        stream,
+        buf,
+        len,
+        callback,
+        userdata,
+      ) ==
+      1;
+}
+
+///
 /// Add data to the stream with each channel in a separate array.
 ///
 /// This data must match the format/channels/samplerate specified in the latest

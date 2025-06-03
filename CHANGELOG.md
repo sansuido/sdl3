@@ -1,3 +1,8 @@
+## 1.6.1
+- SDL3-2025-06-01
+- [update] Added support for blend modes in gfx(default mode is SDL_BLENDMODE_BLEND).
+- [add] Added functions(sdlPutAudioStreamDataNoCopy and callback).
+
 ## 1.6.0
 - SDL3-2025-05-25
 - [update] New formatting style. (Dart 3.8.0)
