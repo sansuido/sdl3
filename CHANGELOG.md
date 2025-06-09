@@ -1,3 +1,6 @@
+## 1.6.2
+- SDL3-2025-06-08
+
 ## 1.6.1
 - SDL3-2025-06-01
 - [update] Added support for blend modes in gfx(default mode is SDL_BLENDMODE_BLEND).
