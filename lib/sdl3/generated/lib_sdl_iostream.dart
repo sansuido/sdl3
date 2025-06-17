@@ -1,4 +1,5 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
+// ignore_for_file: avoid_positional_boolean_parameters
 import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'lib_sdl.dart';
@@ -98,8 +99,9 @@ Pointer<SdlIoStream> sdlIoFromFile(String? file, String? mode) {
   final filePointer = file != null ? file.toNativeUtf8() : nullptr;
   final modePointer = mode != null ? mode.toNativeUtf8() : nullptr;
   final result = sdlIoFromFileLookupFunction(filePointer, modePointer);
-  calloc.free(filePointer);
-  calloc.free(modePointer);
+  calloc
+    ..free(filePointer)
+    ..free(modePointer);
   return result;
 }
 

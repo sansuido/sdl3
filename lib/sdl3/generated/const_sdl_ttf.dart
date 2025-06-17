@@ -1,5 +1,5 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-// ignore_for_file: constant_identifier_names
+// ignore_for_file: constant_identifier_names, specify_nonobvious_property_types
 //const SDL_TTF_H_ = ;
 const SDL_TTF_MAJOR_VERSION = 3;
 const SDL_TTF_MINOR_VERSION = 3;

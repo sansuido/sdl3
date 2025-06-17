@@ -1,8 +1,10 @@
 import 'dart:ffi';
 import 'dart:math' show Point;
+
 import 'package:ffi/ffi.dart';
-import '../../generated/struct_sdl.dart';
+
 import '../../generated/lib_sdl_render.dart';
+import '../../generated/struct_sdl.dart';
 
 extension SdlTexturePointerEx on Pointer<SdlTexture> {
   // lib_sdl_renderer.dart
@@ -27,13 +29,14 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// ```
   Point<double>? getSize() {
     Point<double>? result;
-    var wPointer = calloc<Float>();
-    var hPointer = calloc<Float>();
-    if (sdlGetTextureSize(this, wPointer, hPointer) == true) {
-      result = Point(wPointer.value.toDouble(), hPointer.value.toDouble());
+    final wPointer = calloc<Float>();
+    final hPointer = calloc<Float>();
+    if (sdlGetTextureSize(this, wPointer, hPointer)) {
+      result = Point(wPointer.value, hPointer.value);
     }
-    calloc.free(wPointer);
-    calloc.free(hPointer);
+    calloc
+      ..free(wPointer)
+      ..free(hPointer);
     return result;
   }
 
@@ -67,9 +70,7 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetTextureColorMod(SDL_Texture *texture, Uint8 r, Uint8 g, Uint8 b)
   /// ```
-  bool setColorMod(int r, int g, int b) {
-    return sdlSetTextureColorMod(this, r, g, b);
-  }
+  bool setColorMod(int r, int g, int b) => sdlSetTextureColorMod(this, r, g, b);
 
   ///
   /// Get the additional color value multiplied into render copy operations.
@@ -94,18 +95,19 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// ```
   int? getColorMod() {
     int? result;
-    var rPointer = calloc<Uint8>();
-    var gPointer = calloc<Uint8>();
-    var bPointer = calloc<Uint8>();
-    if (sdlGetTextureColorMod(this, rPointer, gPointer, bPointer) == true) {
+    final rPointer = calloc<Uint8>();
+    final gPointer = calloc<Uint8>();
+    final bPointer = calloc<Uint8>();
+    if (sdlGetTextureColorMod(this, rPointer, gPointer, bPointer)) {
       result = 0;
       result += rPointer.value << 16;
       result += gPointer.value << 8;
       result += bPointer.value << 0;
     }
-    calloc.free(rPointer);
-    calloc.free(gPointer);
-    calloc.free(bPointer);
+    calloc
+      ..free(rPointer)
+      ..free(gPointer)
+      ..free(bPointer);
     return result;
   }
 
@@ -136,9 +138,7 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetTextureAlphaMod(SDL_Texture *texture, Uint8 alpha)
   /// ```
-  bool setAlphaMod(int alpha) {
-    return sdlSetTextureAlphaMod(this, alpha);
-  }
+  bool setAlphaMod(int alpha) => sdlSetTextureAlphaMod(this, alpha);
 
   ///
   /// Get the additional alpha value multiplied into render copy operations.
@@ -161,8 +161,8 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// ```
   int? getAlphaMod() {
     int? result;
-    var alphaPointer = calloc<Uint8>();
-    if (sdlGetTextureAlphaMod(this, alphaPointer) == true) {
+    final alphaPointer = calloc<Uint8>();
+    if (sdlGetTextureAlphaMod(this, alphaPointer)) {
       result = alphaPointer.value;
     }
     calloc.free(alphaPointer);
@@ -189,9 +189,7 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetTextureBlendMode(SDL_Texture *texture, SDL_BlendMode blendMode)
   /// ```
-  bool setBlendMode(int blendMode) {
-    return sdlSetTextureBlendMode(this, blendMode);
-  }
+  bool setBlendMode(int blendMode) => sdlSetTextureBlendMode(this, blendMode);
 
   ///
   /// Get the blend mode used for texture copy operations.
@@ -212,8 +210,8 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// ```
   int? getBlendMode() {
     int? result;
-    var blendModePointer = calloc<Uint32>();
-    if (sdlGetTextureBlendMode(this, blendModePointer) == true) {
+    final blendModePointer = calloc<Uint32>();
+    if (sdlGetTextureBlendMode(this, blendModePointer)) {
       result = blendModePointer.value;
     }
     calloc.free(blendModePointer);
@@ -241,9 +239,7 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetTextureScaleMode(SDL_Texture *texture, SDL_ScaleMode scaleMode)
   /// ```
-  bool setScaleMode(int scaleMode) {
-    return sdlSetTextureScaleMode(this, scaleMode);
-  }
+  bool setScaleMode(int scaleMode) => sdlSetTextureScaleMode(this, scaleMode);
 
   ///
   /// Get the scale mode used for texture scale operations.
@@ -264,8 +260,8 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// ```
   int? getScaleMode() {
     int? result;
-    var scaleModePointer = calloc<Int32>();
-    if (sdlGetTextureScaleMode(this, scaleModePointer) == true) {
+    final scaleModePointer = calloc<Int32>();
+    if (sdlGetTextureScaleMode(this, scaleModePointer)) {
       result = scaleModePointer.value;
     }
     calloc.free(scaleModePointer);
@@ -307,9 +303,8 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_UpdateTexture(SDL_Texture *texture, const SDL_Rect *rect, const void *pixels, int pitch)
   /// ```
-  bool update(Pointer<SdlRect> rect, Pointer<NativeType> pixels, int pitch) {
-    return sdlUpdateTexture(this, rect, pixels, pitch);
-  }
+  bool update(Pointer<SdlRect> rect, Pointer<NativeType> pixels, int pitch) =>
+      sdlUpdateTexture(this, rect, pixels, pitch);
 
   ///
   /// Update a rectangle within a planar YV12 or IYUV texture with new pixel
@@ -352,18 +347,16 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
     int upitch,
     Pointer<Uint8> vplane,
     int vpitch,
-  ) {
-    return sdlUpdateYuvTexture(
-      this,
-      rect,
-      yplane,
-      ypitch,
-      uplane,
-      upitch,
-      vplane,
-      vpitch,
-    );
-  }
+  ) => sdlUpdateYuvTexture(
+    this,
+    rect,
+    yplane,
+    ypitch,
+    uplane,
+    upitch,
+    vplane,
+    vpitch,
+  );
 
   ///
   /// Update a rectangle within a planar NV12 or NV21 texture with new pixels.
@@ -400,9 +393,7 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
     int ypitch,
     Pointer<Uint8> uVplane,
     int uVpitch,
-  ) {
-    return sdlUpdateNvTexture(this, rect, yplane, ypitch, uVplane, uVpitch);
-  }
+  ) => sdlUpdateNvTexture(this, rect, yplane, ypitch, uVplane, uVpitch);
 
   ///
   /// Lock a portion of the texture for **write-only** pixel access.
@@ -441,9 +432,7 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
     Pointer<SdlRect> rect,
     Pointer<Pointer<NativeType>> pixels,
     Pointer<Int32> pitch,
-  ) {
-    return sdlLockTexture(this, rect, pixels, pitch);
-  }
+  ) => sdlLockTexture(this, rect, pixels, pitch);
 
   ///
   /// Lock a portion of the texture for **write-only** pixel access, and expose
@@ -485,9 +474,7 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   bool lockToSurface(
     Pointer<SdlRect> rect,
     Pointer<Pointer<SdlSurface>> surface,
-  ) {
-    return sdlLockTextureToSurface(this, rect, surface);
-  }
+  ) => sdlLockTextureToSurface(this, rect, surface);
 
   ///
   /// Unlock a texture, uploading the changes to video memory, if needed.

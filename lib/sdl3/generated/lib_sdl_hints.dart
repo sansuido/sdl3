@@ -1,4 +1,5 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
+// ignore_for_file: avoid_positional_boolean_parameters
 import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'lib_sdl.dart';
@@ -42,8 +43,9 @@ bool sdlSetHintWithPriority(String? name, String? value, int priority) {
         priority,
       ) ==
       1;
-  calloc.free(namePointer);
-  calloc.free(valuePointer);
+  calloc
+    ..free(namePointer)
+    ..free(valuePointer);
   return result;
 }
 
@@ -79,8 +81,9 @@ bool sdlSetHint(String? name, String? value) {
   final namePointer = name != null ? name.toNativeUtf8() : nullptr;
   final valuePointer = value != null ? value.toNativeUtf8() : nullptr;
   final result = sdlSetHintLookupFunction(namePointer, valuePointer) == 1;
-  calloc.free(namePointer);
-  calloc.free(valuePointer);
+  calloc
+    ..free(namePointer)
+    ..free(valuePointer);
   return result;
 }
 

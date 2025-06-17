@@ -1,4 +1,5 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
+// ignore_for_file: avoid_positional_boolean_parameters
 import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'lib_sdl.dart';
@@ -273,8 +274,9 @@ bool sdlSetStringProperty(int props, String? name, String? value) {
   final valuePointer = value != null ? value.toNativeUtf8() : nullptr;
   final result =
       sdlSetStringPropertyLookupFunction(props, namePointer, valuePointer) == 1;
-  calloc.free(namePointer);
-  calloc.free(valuePointer);
+  calloc
+    ..free(namePointer)
+    ..free(valuePointer);
   return result;
 }
 
@@ -539,8 +541,9 @@ String? sdlGetStringProperty(int props, String? name, String? defaultValue) {
     namePointer,
     defaultValuePointer,
   );
-  calloc.free(namePointer);
-  calloc.free(defaultValuePointer);
+  calloc
+    ..free(namePointer)
+    ..free(defaultValuePointer);
   if (result == nullptr) {
     return null;
   }

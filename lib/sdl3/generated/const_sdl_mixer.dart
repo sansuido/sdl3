@@ -1,5 +1,5 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-// ignore_for_file: constant_identifier_names
+// ignore_for_file: constant_identifier_names, specify_nonobvious_property_types
 //const SDL_MIXER_H_ = ;
 const SDL_MIXER_MAJOR_VERSION = 3;
 const SDL_MIXER_MINOR_VERSION = 0;
@@ -31,7 +31,7 @@ const MUS_FLAC = 6;
 const MUS_OPUS = 7;
 const MUS_WAVPACK = 8;
 const MUS_GME = 9;
-const MIX_CHANNEL_POST = (-2);
+const MIX_CHANNEL_POST = -2;
 const MIX_EFFECTSMAXSPEED = 'MIX_EFFECTSMAXSPEED';
 
 class MixkInit {

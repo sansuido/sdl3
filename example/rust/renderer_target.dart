@@ -5,12 +5,12 @@ import 'package:ffi/ffi.dart';
 import 'package:sdl3/sdl3.dart';
 
 int main() {
-  if (sdlInit(SDL_INIT_VIDEO) == false) {
+  if (!sdlInit(SDL_INIT_VIDEO)) {
     print(sdlGetError());
     return -1;
   }
   sdlSetHint(SDL_HINT_RENDER_VSYNC, '1');
-  var window = SdlWindowEx.create(
+  final window = SdlWindowEx.create(
     title: 'rust-sdl2 resource-manager demo',
     w: 800,
     h: 600,
@@ -20,20 +20,20 @@ int main() {
     sdlQuit();
     return -1;
   }
-  var renderer = window.createRenderer();
+  final renderer = window.createRenderer();
   if (renderer == nullptr) {
     print(sdlGetError());
     window.destroy();
     sdlQuit();
     return -1;
   }
-  var texture = renderer.createTexture(
+  final texture = renderer.createTexture(
     SDL_PIXELFORMAT_RGBA8888,
     SDL_TEXTUREACCESS_TARGET,
     400,
     300,
   );
-  var event = calloc<SdlEvent>();
+  final event = calloc<SdlEvent>();
   var running = true;
   var angle = 0.0;
   while (running) {
@@ -41,18 +41,16 @@ int main() {
       switch (event.type) {
         case SDL_EVENT_QUIT:
           running = false;
-          break;
         case SDL_EVENT_KEY_DOWN:
           if (event.key.ref.key == SDLK_ESCAPE) {
             running = false;
           }
-          break;
         default:
           break;
       }
     }
     angle += 0.5;
-    var dstrect = Rectangle<double>(0, 0, 400, 300);
+    const dstrect = Rectangle<double>(0, 0, 400, 300);
     renderer
       ..setTarget(texture)
       ..clear()
@@ -65,7 +63,7 @@ int main() {
         texture,
         dstrect: dstrect,
         angle: angle,
-        center: Point(400, 300),
+        center: const Point(400, 300),
       )
       ..present();
   }

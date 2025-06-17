@@ -1,4 +1,5 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
+// ignore_for_file: avoid_positional_boolean_parameters
 import 'dart:ffi';
 import 'lib_sdl.dart';
 import 'struct_sdl.dart';
@@ -744,9 +745,9 @@ Pointer<SdlWindow> sdlGetWindowFromEvent(Pointer<SdlEvent> event) {
 /// This will fill `buf` with a null-terminated string that might look
 /// something like this:
 ///
-/// ```
+/// ===
 /// SDL_EVENT_MOUSE_MOTION (timestamp=1140256324 windowid=2 which=0 state=0 x=492.99 y=139.09 xrel=52 yrel=6)
-/// ```
+/// ===
 ///
 /// The exact format of the string is not guaranteed; it is intended for
 /// logging purposes, to be read by a human, and not parsed by a computer.

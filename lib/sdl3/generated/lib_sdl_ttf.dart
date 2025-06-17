@@ -1,11 +1,14 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
+// ignore_for_file: avoid_positional_boolean_parameters
 import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import '../dylib.dart' as dylib;
 import 'struct_sdl.dart';
 import 'struct_sdl_ttf.dart';
 
-final libSdl3Ttf = dylib.SdlDynamicLibraryService().open('SDL3_ttf');
+final DynamicLibrary libSdl3Ttf = dylib.SdlDynamicLibraryService().open(
+  'SDL3_ttf',
+);
 
 ///
 /// This function gets the version of the dynamically linked SDL_ttf library.

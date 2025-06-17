@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_positional_boolean_parameters
+
 import 'dart:ffi';
 import '../../generated/lib_sdl_mixer.dart';
 import '../../generated/struct_sdl.dart';
@@ -37,9 +39,7 @@ extension MixMusicEx on MixMusic {
   /// ```c
   /// extern SDL_DECLSPEC Mix_Music * SDLCALL Mix_LoadMUS(const char *file)
   /// ```
-  static Pointer<MixMusic> load(String? file) {
-    return mixLoadMus(file);
-  }
+  static Pointer<MixMusic> load(String? file) => mixLoadMus(file);
 
   ///
   /// Load a supported audio format into a music object.
@@ -86,9 +86,8 @@ extension MixMusicEx on MixMusic {
   /// ```c
   /// extern SDL_DECLSPEC Mix_Music * SDLCALL Mix_LoadMUS_IO(SDL_IOStream *src, bool closeio)
   /// ```
-  static Pointer<MixMusic> loadIo(Pointer<SdlIoStream> src, bool closeio) {
-    return mixLoadMusIo(src, closeio);
-  }
+  static Pointer<MixMusic> loadIo(Pointer<SdlIoStream> src, bool closeio) =>
+      mixLoadMusIo(src, closeio);
 
   ///
   /// Load an audio format into a music object, assuming a specific format.
@@ -152,9 +151,7 @@ extension MixMusicEx on MixMusic {
     Pointer<SdlIoStream> src,
     int type,
     bool closeio,
-  ) {
-    return mixLoadMusTypeIo(src, type, closeio);
-  }
+  ) => mixLoadMusTypeIo(src, type, closeio);
 
   ///
   /// Get a list of music decoders that this build of SDL_mixer provides.
@@ -181,9 +178,7 @@ extension MixMusicEx on MixMusic {
   /// ```c
   /// extern SDL_DECLSPEC int SDLCALL Mix_GetNumMusicDecoders(void)
   /// ```
-  static int getNumDecoders() {
-    return mixGetNumMusicDecoders();
-  }
+  static int getNumDecoders() => mixGetNumMusicDecoders();
 
   ///
   /// Get a music decoder's name.
@@ -207,9 +202,7 @@ extension MixMusicEx on MixMusic {
   /// ```c
   /// extern SDL_DECLSPEC const char * SDLCALL Mix_GetMusicDecoder(int index)
   /// ```
-  static String? getDecoder(int index) {
-    return mixGetMusicDecoder(index);
-  }
+  static String? getDecoder(int index) => mixGetMusicDecoder(index);
 
   ///
   /// Check if a music decoder is available by name.
@@ -234,9 +227,7 @@ extension MixMusicEx on MixMusic {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL Mix_HasMusicDecoder(const char *name)
   /// ```
-  static bool hasDecoder(String? name) {
-    return mixHasMusicDecoder(name);
-  }
+  static bool hasDecoder(String? name) => mixHasMusicDecoder(name);
 }
 
 extension MixMusicPointerEx on Pointer<MixMusic> {
@@ -281,9 +272,7 @@ extension MixMusicPointerEx on Pointer<MixMusic> {
   /// ```c
   /// extern SDL_DECLSPEC Mix_MusicType SDLCALL Mix_GetMusicType(const Mix_Music *music)
   /// ```
-  int getType() {
-    return mixGetMusicType(this);
-  }
+  int getType() => mixGetMusicType(this);
 
   ///
   /// Get the title for a music object, or its filename.
@@ -316,9 +305,7 @@ extension MixMusicPointerEx on Pointer<MixMusic> {
   /// ```c
   /// extern SDL_DECLSPEC const char *SDLCALL Mix_GetMusicTitle(const Mix_Music *music)
   /// ```
-  String? getTitle() {
-    return mixGetMusicTitle(this);
-  }
+  String? getTitle() => mixGetMusicTitle(this);
 
   ///
   /// Get the title for a music object.
@@ -348,9 +335,7 @@ extension MixMusicPointerEx on Pointer<MixMusic> {
   /// ```c
   /// extern SDL_DECLSPEC const char *SDLCALL Mix_GetMusicTitleTag(const Mix_Music *music)
   /// ```
-  String? getTitleTag() {
-    return mixGetMusicTitleTag(this);
-  }
+  String? getTitleTag() => mixGetMusicTitleTag(this);
 
   ///
   /// Get the artist name for a music object.
@@ -375,9 +360,7 @@ extension MixMusicPointerEx on Pointer<MixMusic> {
   /// ```c
   /// extern SDL_DECLSPEC const char *SDLCALL Mix_GetMusicArtistTag(const Mix_Music *music)
   /// ```
-  String? getArtistTag() {
-    return mixGetMusicArtistTag(this);
-  }
+  String? getArtistTag() => mixGetMusicArtistTag(this);
 
   ///
   /// Get the album name for a music object.
@@ -402,9 +385,7 @@ extension MixMusicPointerEx on Pointer<MixMusic> {
   /// ```c
   /// extern SDL_DECLSPEC const char *SDLCALL Mix_GetMusicAlbumTag(const Mix_Music *music)
   /// ```
-  String? getAlbumTag() {
-    return mixGetMusicAlbumTag(this);
-  }
+  String? getAlbumTag() => mixGetMusicAlbumTag(this);
 
   ///
   /// Get the copyright text for a music object.
@@ -429,9 +410,7 @@ extension MixMusicPointerEx on Pointer<MixMusic> {
   /// ```c
   /// extern SDL_DECLSPEC const char *SDLCALL Mix_GetMusicCopyrightTag(const Mix_Music *music)
   /// ```
-  String? getCopyrightTag() {
-    return mixGetMusicCopyrightTag(this);
-  }
+  String? getCopyrightTag() => mixGetMusicCopyrightTag(this);
 
   ///
   /// Play a new music object.
@@ -458,9 +437,7 @@ extension MixMusicPointerEx on Pointer<MixMusic> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL Mix_PlayMusic(Mix_Music *music, int loops)
   /// ```
-  bool play(int loops) {
-    return mixPlayMusic(this, loops);
-  }
+  bool play(int loops) => mixPlayMusic(this, loops);
 
   ///
   /// Play a new music object, fading in the audio.
@@ -491,9 +468,7 @@ extension MixMusicPointerEx on Pointer<MixMusic> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL Mix_FadeInMusic(Mix_Music *music, int loops, int ms)
   /// ```
-  bool fadeIn(int loops, int ms) {
-    return mixFadeInMusic(this, loops, ms);
-  }
+  bool fadeIn(int loops, int ms) => mixFadeInMusic(this, loops, ms);
 
   ///
   /// Play a new music object, fading in the audio, from a starting position.
@@ -536,9 +511,8 @@ extension MixMusicPointerEx on Pointer<MixMusic> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL Mix_FadeInMusicPos(Mix_Music *music, int loops, int ms, double position)
   /// ```
-  bool fadeInPos(int loops, int ms, double position) {
-    return mixFadeInMusicPos(this, loops, ms, position);
-  }
+  bool fadeInPos(int loops, int ms, double position) =>
+      mixFadeInMusicPos(this, loops, ms, position);
 
   ///
   /// Set the volume for the music channel.
@@ -562,9 +536,7 @@ extension MixMusicPointerEx on Pointer<MixMusic> {
   /// ```c
   /// extern SDL_DECLSPEC int SDLCALL Mix_VolumeMusic(int volume)
   /// ```
-  int setVolume(int volume) {
-    return mixVolumeMusic(volume);
-  }
+  int setVolume(int volume) => mixVolumeMusic(volume);
 
   ///
   /// Query the current volume value for a music object.
@@ -577,9 +549,7 @@ extension MixMusicPointerEx on Pointer<MixMusic> {
   /// ```c
   /// extern SDL_DECLSPEC int SDLCALL Mix_GetMusicVolume(Mix_Music *music)
   /// ```
-  int getVolume() {
-    return mixGetMusicVolume(this);
-  }
+  int getVolume() => mixGetMusicVolume(this);
 
   ///
   /// Halt playing of the music stream.
@@ -625,9 +595,7 @@ extension MixMusicPointerEx on Pointer<MixMusic> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL Mix_FadeOutMusic(int ms)
   /// ```
-  bool fadeOut(int ms) {
-    return mixFadeOutMusic(ms);
-  }
+  bool fadeOut(int ms) => mixFadeOutMusic(ms);
 
   ///
   /// Query the fading status of the music stream.
@@ -647,9 +615,7 @@ extension MixMusicPointerEx on Pointer<MixMusic> {
   /// ```c
   /// extern SDL_DECLSPEC Mix_Fading SDLCALL Mix_FadingMusic(void)
   /// ```
-  int fading() {
-    return mixFadingMusic();
-  }
+  int fading() => mixFadingMusic();
 
   ///
   /// Pause the music stream.
@@ -717,9 +683,7 @@ extension MixMusicPointerEx on Pointer<MixMusic> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL Mix_PausedMusic(void)
   /// ```
-  bool paused() {
-    return mixPausedMusic();
-  }
+  bool paused() => mixPausedMusic();
 
   ///
   /// Jump to a given order in mod music.
@@ -735,9 +699,7 @@ extension MixMusicPointerEx on Pointer<MixMusic> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL Mix_ModMusicJumpToOrder(int order)
   /// ```
-  bool modJumpToOrder(int order) {
-    return mixModMusicJumpToOrder(order);
-  }
+  bool modJumpToOrder(int order) => mixModMusicJumpToOrder(order);
 
   ///
   /// Start a track in music object.
@@ -754,9 +716,7 @@ extension MixMusicPointerEx on Pointer<MixMusic> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL Mix_StartTrack(Mix_Music *music, int track)
   /// ```
-  bool startTrack(int track) {
-    return mixStartTrack(this, track);
-  }
+  bool startTrack(int track) => mixStartTrack(this, track);
 
   ///
   /// Get number of tracks in music object.
@@ -772,9 +732,7 @@ extension MixMusicPointerEx on Pointer<MixMusic> {
   /// ```c
   /// extern SDL_DECLSPEC int SDLCALL Mix_GetNumTracks(Mix_Music *music)
   /// ```
-  int getNumTracks() {
-    return mixGetNumTracks(this);
-  }
+  int getNumTracks() => mixGetNumTracks(this);
 
   ///
   /// Set the current position in the music stream, in seconds.
@@ -793,9 +751,7 @@ extension MixMusicPointerEx on Pointer<MixMusic> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL Mix_SetMusicPosition(double position)
   /// ```
-  bool setPosition(double position) {
-    return mixSetMusicPosition(position);
-  }
+  bool setPosition(double position) => mixSetMusicPosition(position);
 
   ///
   /// Get the time current position of music stream, in seconds.
@@ -810,9 +766,7 @@ extension MixMusicPointerEx on Pointer<MixMusic> {
   /// ```c
   /// extern SDL_DECLSPEC double SDLCALL Mix_GetMusicPosition(Mix_Music *music)
   /// ```
-  double getPosition() {
-    return mixGetMusicPosition(this);
-  }
+  double getPosition() => mixGetMusicPosition(this);
 
   ///
   /// Get a music object's duration, in seconds.
@@ -829,9 +783,7 @@ extension MixMusicPointerEx on Pointer<MixMusic> {
   /// ```c
   /// extern SDL_DECLSPEC double SDLCALL Mix_MusicDuration(Mix_Music *music)
   /// ```
-  double duration() {
-    return mixMusicDuration(this);
-  }
+  double duration() => mixMusicDuration(this);
 
   ///
   /// Get the loop start time position of music stream, in seconds.
@@ -849,9 +801,7 @@ extension MixMusicPointerEx on Pointer<MixMusic> {
   /// ```c
   /// extern SDL_DECLSPEC double SDLCALL Mix_GetMusicLoopStartTime(Mix_Music *music)
   /// ```
-  double getLoopStartTime() {
-    return mixGetMusicLoopStartTime(this);
-  }
+  double getLoopStartTime() => mixGetMusicLoopStartTime(this);
 
   ///
   /// Get the loop end time position of music stream, in seconds.
@@ -869,9 +819,7 @@ extension MixMusicPointerEx on Pointer<MixMusic> {
   /// ```c
   /// extern SDL_DECLSPEC double SDLCALL Mix_GetMusicLoopEndTime(Mix_Music *music)
   /// ```
-  double getLoopEndTime() {
-    return mixGetMusicLoopEndTime(this);
-  }
+  double getLoopEndTime() => mixGetMusicLoopEndTime(this);
 
   ///
   /// Get the loop time length of music stream, in seconds.
@@ -889,9 +837,7 @@ extension MixMusicPointerEx on Pointer<MixMusic> {
   /// ```c
   /// extern SDL_DECLSPEC double SDLCALL Mix_GetMusicLoopLengthTime(Mix_Music *music)
   /// ```
-  double getLoopLengthTime() {
-    return mixGetMusicLoopLengthTime(this);
-  }
+  double getLoopLengthTime() => mixGetMusicLoopLengthTime(this);
 
   ///
   /// Check the playing status of the music stream.
@@ -909,7 +855,5 @@ extension MixMusicPointerEx on Pointer<MixMusic> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL Mix_PlayingMusic(void)
   /// ```
-  bool playing() {
-    return mixPlayingMusic();
-  }
+  bool playing() => mixPlayingMusic();
 }

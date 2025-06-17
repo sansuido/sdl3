@@ -1,4 +1,5 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
+// ignore_for_file: avoid_positional_boolean_parameters
 import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'lib_sdl.dart';
@@ -500,8 +501,9 @@ bool sdlSetEnvironmentVariable(
         overwrite ? 1 : 0,
       ) ==
       1;
-  calloc.free(namePointer);
-  calloc.free(valuePointer);
+  calloc
+    ..free(namePointer)
+    ..free(valuePointer);
   return result;
 }
 
@@ -666,8 +668,9 @@ int sdlSetenvUnsafe(String? name, String? value, int overwrite) {
     valuePointer,
     overwrite,
   );
-  calloc.free(namePointer);
-  calloc.free(valuePointer);
+  calloc
+    ..free(namePointer)
+    ..free(valuePointer);
   return result;
 }
 
@@ -2603,8 +2606,9 @@ Pointer<Int8> sdlStrstr(String? haystack, String? needle) {
   final haystackPointer = haystack != null ? haystack.toNativeUtf8() : nullptr;
   final needlePointer = needle != null ? needle.toNativeUtf8() : nullptr;
   final result = sdlStrstrLookupFunction(haystackPointer, needlePointer);
-  calloc.free(haystackPointer);
-  calloc.free(needlePointer);
+  calloc
+    ..free(haystackPointer)
+    ..free(needlePointer);
   return result;
 }
 
@@ -2653,8 +2657,9 @@ Pointer<Int8> sdlStrnstr(String? haystack, String? needle, int maxlen) {
     needlePointer,
     maxlen,
   );
-  calloc.free(haystackPointer);
-  calloc.free(needlePointer);
+  calloc
+    ..free(haystackPointer)
+    ..free(needlePointer);
   return result;
 }
 
@@ -2696,8 +2701,9 @@ Pointer<Int8> sdlStrcasestr(String? haystack, String? needle) {
   final haystackPointer = haystack != null ? haystack.toNativeUtf8() : nullptr;
   final needlePointer = needle != null ? needle.toNativeUtf8() : nullptr;
   final result = sdlStrcasestrLookupFunction(haystackPointer, needlePointer);
-  calloc.free(haystackPointer);
-  calloc.free(needlePointer);
+  calloc
+    ..free(haystackPointer)
+    ..free(needlePointer);
   return result;
 }
 
@@ -3455,8 +3461,9 @@ int sdlStrcmp(String? str1, String? str2) {
   final str1Pointer = str1 != null ? str1.toNativeUtf8() : nullptr;
   final str2Pointer = str2 != null ? str2.toNativeUtf8() : nullptr;
   final result = sdlStrcmpLookupFunction(str1Pointer, str2Pointer);
-  calloc.free(str1Pointer);
-  calloc.free(str2Pointer);
+  calloc
+    ..free(str1Pointer)
+    ..free(str2Pointer);
   return result;
 }
 
@@ -3500,8 +3507,9 @@ int sdlStrncmp(String? str1, String? str2, int maxlen) {
   final str1Pointer = str1 != null ? str1.toNativeUtf8() : nullptr;
   final str2Pointer = str2 != null ? str2.toNativeUtf8() : nullptr;
   final result = sdlStrncmpLookupFunction(str1Pointer, str2Pointer, maxlen);
-  calloc.free(str1Pointer);
-  calloc.free(str2Pointer);
+  calloc
+    ..free(str1Pointer)
+    ..free(str2Pointer);
   return result;
 }
 
@@ -3543,8 +3551,9 @@ int sdlStrcasecmp(String? str1, String? str2) {
   final str1Pointer = str1 != null ? str1.toNativeUtf8() : nullptr;
   final str2Pointer = str2 != null ? str2.toNativeUtf8() : nullptr;
   final result = sdlStrcasecmpLookupFunction(str1Pointer, str2Pointer);
-  calloc.free(str1Pointer);
-  calloc.free(str2Pointer);
+  calloc
+    ..free(str1Pointer)
+    ..free(str2Pointer);
   return result;
 }
 
@@ -3597,8 +3606,9 @@ int sdlStrncasecmp(String? str1, String? str2, int maxlen) {
   final str1Pointer = str1 != null ? str1.toNativeUtf8() : nullptr;
   final str2Pointer = str2 != null ? str2.toNativeUtf8() : nullptr;
   final result = sdlStrncasecmpLookupFunction(str1Pointer, str2Pointer, maxlen);
-  calloc.free(str1Pointer);
-  calloc.free(str2Pointer);
+  calloc
+    ..free(str1Pointer)
+    ..free(str2Pointer);
   return result;
 }
 
@@ -3630,8 +3640,9 @@ Pointer<Int8> sdlStrpbrk(String? str, String? breakset) {
   final strPointer = str != null ? str.toNativeUtf8() : nullptr;
   final breaksetPointer = breakset != null ? breakset.toNativeUtf8() : nullptr;
   final result = sdlStrpbrkLookupFunction(strPointer, breaksetPointer);
-  calloc.free(strPointer);
-  calloc.free(breaksetPointer);
+  calloc
+    ..free(strPointer)
+    ..free(breaksetPointer);
   return result;
 }
 
@@ -3800,8 +3811,9 @@ int sdlSscanf(String? text, String? fmt) {
   final textPointer = text != null ? text.toNativeUtf8() : nullptr;
   final fmtPointer = fmt != null ? fmt.toNativeUtf8() : nullptr;
   final result = sdlSscanfLookupFunction(textPointer, fmtPointer);
-  calloc.free(textPointer);
-  calloc.free(fmtPointer);
+  calloc
+    ..free(textPointer)
+    ..free(fmtPointer);
   return result;
 }
 
@@ -3834,8 +3846,9 @@ int sdlVsscanf(String? text, String? fmt) {
   final textPointer = text != null ? text.toNativeUtf8() : nullptr;
   final fmtPointer = fmt != null ? fmt.toNativeUtf8() : nullptr;
   final result = sdlVsscanfLookupFunction(textPointer, fmtPointer);
-  calloc.free(textPointer);
-  calloc.free(fmtPointer);
+  calloc
+    ..free(textPointer)
+    ..free(fmtPointer);
   return result;
 }
 
@@ -6065,8 +6078,9 @@ Pointer<SdlIconvT> sdlIconvOpen(String? tocode, String? fromcode) {
   final tocodePointer = tocode != null ? tocode.toNativeUtf8() : nullptr;
   final fromcodePointer = fromcode != null ? fromcode.toNativeUtf8() : nullptr;
   final result = sdlIconvOpenLookupFunction(tocodePointer, fromcodePointer);
-  calloc.free(tocodePointer);
-  calloc.free(fromcodePointer);
+  calloc
+    ..free(tocodePointer)
+    ..free(fromcodePointer);
   return result;
 }
 
@@ -6218,8 +6232,9 @@ Pointer<Int8> sdlIconvString(
     inbufPointer,
     inbytesleft,
   );
-  calloc.free(tocodePointer);
-  calloc.free(fromcodePointer);
-  calloc.free(inbufPointer);
+  calloc
+    ..free(tocodePointer)
+    ..free(fromcodePointer)
+    ..free(inbufPointer);
   return result;
 }

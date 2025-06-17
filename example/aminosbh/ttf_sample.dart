@@ -42,7 +42,7 @@ const gFontPath = 'assets/SourceHanCodeJP.ttc';
 
 int main() {
   // Initialize SDL3
-  if (sdlInit(SDL_INIT_VIDEO) == false) {
+  if (!sdlInit(SDL_INIT_VIDEO)) {
     print(
       'SDL3 could not be initialized!\n'
       'SDL3 s: ${sdlGetError()}\n',
@@ -53,7 +53,7 @@ int main() {
   // Initialize SDL3_ttf
   ttfInit();
   // Create window
-  Pointer<SdlWindow> window = SdlWindowEx.create(
+  final window = SdlWindowEx.create(
     title: 'SDL3_ttf sample',
     w: gScreenWidth,
     h: gScreenHeight,
@@ -65,7 +65,7 @@ int main() {
     );
   } else {
     // Create renderer
-    var renderer = window.createRenderer();
+    final renderer = window.createRenderer();
     if (renderer == nullptr) {
       print(
         'Renderer could not be created!\n'
@@ -75,7 +75,7 @@ int main() {
       // Declare rect of square
       // Square dimensions: Half of the min(gScreenWidth, gScreenHeight)
       // Square position: In the middle of the screen
-      var squareRect = Rectangle<double>(
+      const squareRect = Rectangle<double>(
         gScreenWidth / 2 - gScreenHeight / 2 / 2,
         gScreenHeight / 2 - gScreenHeight / 2 / 2,
         gScreenHeight / 2,
@@ -86,17 +86,17 @@ int main() {
       //var font = ttfOpenFont(gFontPath, 40);
       if (font == nullptr) {
         print(
-          'Unable to load font: \'$gFontPath\'!\n'
+          "Unable to load font: '$gFontPath'!\n"
           'SDL3_ttf Error: ${ttfGetError()}\n',
         );
         return 0;
       }
-      var textColor = calloc<SdlColor>()..setRgba(0, 0, 0, SDL_ALPHA_OPAQUE);
-      var backgroundColor = calloc<SdlColor>()
+      final textColor = calloc<SdlColor>()..setRgba(0, 0, 0, SDL_ALPHA_OPAQUE);
+      final backgroundColor = calloc<SdlColor>()
         ..setRgba(255, 255, 255, SDL_ALPHA_OPAQUE);
       Pointer<SdlTexture> text = nullptr;
       late Rectangle<double> textRect;
-      var textSurface = font.renderTextShaded(
+      final textSurface = font.renderTextShaded(
         '赤い四角/Red square',
         textColor.ref,
         backgroundColor.ref,
@@ -132,25 +132,26 @@ int main() {
       var quit = false;
       // Event loop
       while (!quit) {
-        var event = calloc<SdlEvent>();
-        // Wait indefinitely for the next available event
-        event.wait();
+        final event = calloc<SdlEvent>()
+          // Wait indefinitely for the next available event
+          ..wait();
         // User requests quit
         if (event.type == SDL_EVENT_QUIT) {
           quit = true;
         }
         // Initialize renderer color white for the background
-        renderer.setDrawColor(0xff, 0xff, 0xff, SDL_ALPHA_OPAQUE);
-        // Clear screen
-        renderer.clear();
-        // Set renderer color red to draw the square
-        renderer.setDrawColor(0xff, 0x00, 0x00, SDL_ALPHA_OPAQUE);
-        // Draw filled square
-        renderer.fillRect(squareRect);
-        // Draw text
-        renderer.texture(text, dstrect: textRect);
-        // Update screen
-        renderer.present();
+        renderer
+          ..setDrawColor(0xff, 0xff, 0xff, SDL_ALPHA_OPAQUE)
+          // Clear screen
+          ..clear()
+          // Set renderer color red to draw the square
+          ..setDrawColor(0xff, 0x00, 0x00, SDL_ALPHA_OPAQUE)
+          // Draw filled square
+          ..fillRect(squareRect)
+          // Draw text
+          ..texture(text, dstrect: textRect)
+          // Update screen
+          ..present();
         event.callocFree();
       }
       // Destroy renderer

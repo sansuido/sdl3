@@ -5,9 +5,8 @@ import '../../generated/lib_sdl_rect.dart';
 import '../../generated/struct_sdl.dart';
 
 extension SdlFRectPointerEx on Pointer<SdlFRect> {
-  math.Rectangle<double> create() {
-    return math.Rectangle<double>(ref.x, ref.y, ref.w, ref.h);
-  }
+  math.Rectangle<double> create() =>
+      math.Rectangle<double>(ref.x, ref.y, ref.w, ref.h);
 
   ///
   /// Determine whether two rectangles intersect with float precision.
@@ -25,9 +24,8 @@ extension SdlFRectPointerEx on Pointer<SdlFRect> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_HasRectIntersectionFloat(const SDL_FRect *A, const SDL_FRect *B)
   /// ```
-  bool hasIntersection(Pointer<SdlFRect> b) {
-    return sdlHasRectIntersectionFloat(this, b);
-  }
+  bool hasIntersection(Pointer<SdlFRect> b) =>
+      sdlHasRectIntersectionFloat(this, b);
 
   ///
   /// Calculate the intersection of two rectangles with float precision.
@@ -47,9 +45,8 @@ extension SdlFRectPointerEx on Pointer<SdlFRect> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRectIntersectionFloat(const SDL_FRect *A, const SDL_FRect *B, SDL_FRect *result)
   /// ```
-  bool getIntersection(Pointer<SdlFRect> b, Pointer<SdlFRect> result) {
-    return sdlGetRectIntersectionFloat(this, b, result);
-  }
+  bool getIntersection(Pointer<SdlFRect> b, Pointer<SdlFRect> result) =>
+      sdlGetRectIntersectionFloat(this, b, result);
 
   ///
   /// Calculate the union of two rectangles with float precision.
@@ -66,9 +63,8 @@ extension SdlFRectPointerEx on Pointer<SdlFRect> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRectUnionFloat(const SDL_FRect *A, const SDL_FRect *B, SDL_FRect *result)
   /// ```
-  bool getUnion(Pointer<SdlFRect> b, Pointer<SdlFRect> result) {
-    return sdlGetRectUnionFloat(this, b, result);
-  }
+  bool getUnion(Pointer<SdlFRect> b, Pointer<SdlFRect> result) =>
+      sdlGetRectUnionFloat(this, b, result);
 
   ///
   /// Calculate the intersection of a rectangle and line segment with float
@@ -97,20 +93,16 @@ extension SdlFRectPointerEx on Pointer<SdlFRect> {
     Pointer<Float> y1,
     Pointer<Float> x2,
     Pointer<Float> y2,
-  ) {
-    return sdlGetRectAndLineIntersectionFloat(this, x1, y1, x2, y2);
-  }
+  ) => sdlGetRectAndLineIntersectionFloat(this, x1, y1, x2, y2);
 }
 
 extension SdlRectPointerEx on Pointer<SdlRect> {
-  math.Rectangle<double> create() {
-    return math.Rectangle<double>(
-      ref.x.toDouble(),
-      ref.y.toDouble(),
-      ref.w.toDouble(),
-      ref.h.toDouble(),
-    );
-  }
+  math.Rectangle<double> create() => math.Rectangle<double>(
+    ref.x.toDouble(),
+    ref.y.toDouble(),
+    ref.w.toDouble(),
+    ref.h.toDouble(),
+  );
 
   ///
   /// Determine whether two rectangles intersect.
@@ -130,9 +122,7 @@ extension SdlRectPointerEx on Pointer<SdlRect> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_HasRectIntersection(const SDL_Rect *A, const SDL_Rect *B)
   /// ```
-  bool hasIntersection(Pointer<SdlRect> b) {
-    return sdlHasRectIntersection(this, b);
-  }
+  bool hasIntersection(Pointer<SdlRect> b) => sdlHasRectIntersection(this, b);
 
   ///
   /// Calculate the intersection of two rectangles.
@@ -152,9 +142,8 @@ extension SdlRectPointerEx on Pointer<SdlRect> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRectIntersection(const SDL_Rect *A, const SDL_Rect *B, SDL_Rect *result)
   /// ```
-  bool getIntersection(Pointer<SdlRect> b, Pointer<SdlRect> result) {
-    return sdlGetRectIntersection(this, b, result);
-  }
+  bool getIntersection(Pointer<SdlRect> b, Pointer<SdlRect> result) =>
+      sdlGetRectIntersection(this, b, result);
 
   ///
   /// Calculate the union of two rectangles.
@@ -171,9 +160,8 @@ extension SdlRectPointerEx on Pointer<SdlRect> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRectUnion(const SDL_Rect *A, const SDL_Rect *B, SDL_Rect *result)
   /// ```
-  bool getUnion(Pointer<SdlRect> b, Pointer<SdlRect> result) {
-    return sdlGetRectUnion(this, b, result);
-  }
+  bool getUnion(Pointer<SdlRect> b, Pointer<SdlRect> result) =>
+      sdlGetRectUnion(this, b, result);
 
   ///
   /// Calculate the intersection of a rectangle and line segment.
@@ -201,7 +189,5 @@ extension SdlRectPointerEx on Pointer<SdlRect> {
     Pointer<Int32> y1,
     Pointer<Int32> x2,
     Pointer<Int32> y2,
-  ) {
-    return sdlGetRectAndLineIntersection(this, x1, y1, x2, y2);
-  }
+  ) => sdlGetRectAndLineIntersection(this, x1, y1, x2, y2);
 }

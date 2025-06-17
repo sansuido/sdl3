@@ -8,7 +8,7 @@ int main() {
   Pointer<SdlTexture> texture = nullptr;
   double width = 50;
   double height = 50;
-  if (sdlInit(SDL_INIT_VIDEO) == false) {
+  if (!sdlInit(SDL_INIT_VIDEO)) {
     return -1;
   }
   window = sdlCreateWindow('texture9grid demo', 640, 320, SDL_WINDOW_RESIZABLE);
@@ -23,28 +23,23 @@ int main() {
   }
   sdlSetHint(SDL_HINT_RENDER_VSYNC, '1');
   texture = renderer.loadTexture('assets/jap/gate.png');
-  bool done = true;
-  var event = calloc<SdlEvent>();
+  var done = true;
+  final event = calloc<SdlEvent>();
   while (done) {
     while (sdlPollEvent(event)) {
       switch (event.type) {
         case SDL_EVENT_QUIT:
           done = false;
-          break;
         case SDL_EVENT_KEY_DOWN:
           switch (event.key.ref.key) {
             case SDLK_LEFT:
               width += 1;
-              break;
             case SDLK_RIGHT:
               width -= 1;
-              break;
             case SDLK_UP:
               height += 1;
-              break;
             case SDLK_DOWN:
               height -= 1;
-              break;
           }
         default:
           break;
@@ -59,7 +54,7 @@ int main() {
       width,
       height,
       height,
-      1.0,
+      1,
       nullptr,
     );
     sdlSetRenderDrawColor(renderer, 255, 255, 255, 255);

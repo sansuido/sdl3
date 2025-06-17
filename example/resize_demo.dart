@@ -6,8 +6,8 @@ int main() {
   Pointer<SdlWindow> window = nullptr;
   Pointer<SdlRenderer> renderer = nullptr;
   Pointer<SdlTexture> texture = nullptr;
-  int resizeCount = 0;
-  if (sdlInit(SDL_INIT_VIDEO) == false) {
+  var resizeCount = 0;
+  if (!sdlInit(SDL_INIT_VIDEO)) {
     return -1;
   }
   window = sdlCreateWindow('resize demo', 640, 320, SDL_WINDOW_RESIZABLE);
@@ -23,7 +23,7 @@ int main() {
   sdlSetHint(SDL_HINT_RENDER_VSYNC, '1');
   texture = renderer.loadTexture('assets/jap/gate.png');
   if (texture != nullptr) {
-    var size = texture.getSize();
+    final size = texture.getSize();
     if (size != null) {
       renderer.setLogicalPresentation(
         size.x.toInt(),
@@ -32,14 +32,13 @@ int main() {
       );
     }
   }
-  bool done = true;
-  var event = calloc<SdlEvent>();
+  var done = true;
+  final event = calloc<SdlEvent>();
   while (done) {
     while (sdlPollEvent(event)) {
       switch (event.type) {
         case SDL_EVENT_QUIT:
           done = false;
-          break;
         case SDL_EVENT_WINDOW_RESIZED:
           //resizeCount = 2;
           break;

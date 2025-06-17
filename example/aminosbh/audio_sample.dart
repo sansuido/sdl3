@@ -44,14 +44,14 @@ class WavExample {
   int get device => sdlGetAudioStreamDevice(stream);
 
   bool load(String filename) {
-    bool stat = true;
-    var rwops = sdlIoFromFile(filename, 'rb');
+    var stat = true;
+    final rwops = sdlIoFromFile(filename, 'rb');
     if (rwops != nullptr) {
-      var wavSpec = calloc<SdlAudioSpec>();
-      var wavLength = calloc<Uint32>();
-      var wavBuffer = calloc<Pointer<Uint8>>();
+      final wavSpec = calloc<SdlAudioSpec>();
+      final wavLength = calloc<Uint32>();
+      final wavBuffer = calloc<Pointer<Uint8>>();
       stat = sdlLoadWavIo(rwops, true, wavSpec, wavBuffer, wavLength);
-      if (stat == true) {
+      if (stat) {
         stream = sdlOpenAudioDeviceStream(
           SDL_AUDIO_DEVICE_DEFAULT_OUTPUT,
           wavSpec,
@@ -78,20 +78,14 @@ class WavExample {
     return stat;
   }
 
-  bool paused() {
-    return sdlAudioDevicePaused(device);
-  }
+  bool paused() => sdlAudioDevicePaused(device);
 
-  bool resume() {
-    return sdlResumeAudioDevice(device);
-  }
+  bool resume() => sdlResumeAudioDevice(device);
 
-  bool pause() {
-    return sdlPauseAudioDevice(device);
-  }
+  bool pause() => sdlPauseAudioDevice(device);
 
   void destroy() {
-    if (paused() == false) {
+    if (!paused()) {
       pause();
     }
     sdlCloseAudioDevice(device);
@@ -103,7 +97,7 @@ class WavExample {
 
 int main() {
   // Initialize SDL
-  if (sdlInit(SDL_INIT_VIDEO | SDL_INIT_AUDIO) == false) {
+  if (!sdlInit(SDL_INIT_VIDEO | SDL_INIT_AUDIO)) {
     print(
       'SDL could not be initialized!\n'
       'SDL_Error: ${sdlGetError()}%s\n',
@@ -112,7 +106,7 @@ int main() {
   }
   sdlSetHint(SDL_HINT_RENDER_VSYNC, '1');
   // Create window
-  var window = SdlWindowEx.create(
+  final window = SdlWindowEx.create(
     title: 'SDL3 audio sample (Press SPACE to pause/play)',
     w: gScreenWidth,
     h: gScreenHeight,
@@ -126,7 +120,7 @@ int main() {
     return 0;
   }
   // Create renderer
-  var renderer = window.createRenderer();
+  final renderer = window.createRenderer();
   if (renderer == nullptr) {
     print(
       'Renderer could not be created!\n'
@@ -137,36 +131,35 @@ int main() {
     return 0;
   }
   // Load .WAV sound
-  var wav = WavExample();
-  if (wav.load(gWavesSound) == false) {
+  final wav = WavExample();
+  if (!wav.load(gWavesSound)) {
     print(
-      '.WAV sound \'$gWavesSound\' could not be loaded!\n'
+      ".WAV sound '$gWavesSound' could not be loaded!\n"
       'SDL_Error: ${sdlGetError()}\n',
     );
   } else {
     wav.resume();
-    var bar = math.min(gScreenWidth, gScreenHeight) / 2;
-    var squareRect = math.Rectangle<double>(
+    final bar = math.min(gScreenWidth, gScreenHeight) / 2;
+    final squareRect = math.Rectangle<double>(
       gScreenWidth / 2 - bar / 2,
       gScreenHeight / 2 - bar / 2,
       bar,
       bar,
     );
-    var pauseRect1 = math.Rectangle<double>(
+    final pauseRect1 = math.Rectangle<double>(
       squareRect.left + (squareRect.width - 40 * 3) / 2,
       squareRect.top + squareRect.height / 4,
       40,
       squareRect.height / 2,
     );
-    var pauseRect2 = pauseRect1.shift(math.Point(40 * 2, 0));
-    var event = calloc<SdlEvent>();
+    final pauseRect2 = pauseRect1.shift(const math.Point(40 * 2, 0));
+    final event = calloc<SdlEvent>();
     var running = true;
     while (running) {
       while (event.poll()) {
         switch (event.type) {
           case SDL_EVENT_QUIT:
             running = false;
-            break;
           case SDL_EVENT_KEY_DOWN:
             if (event.key.ref.key == SDLK_ESCAPE) {
               running = false;
@@ -177,7 +170,6 @@ int main() {
                 wav.pause();
               }
             }
-            break;
           default:
             break;
         }

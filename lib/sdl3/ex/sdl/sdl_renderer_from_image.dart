@@ -1,6 +1,9 @@
+// ignore_for_file: avoid_positional_boolean_parameters
+
 import 'dart:ffi';
-import '../../generated/struct_sdl.dart';
+
 import '../../generated/lib_sdl_image.dart';
+import '../../generated/struct_sdl.dart';
 
 extension SdlRendererFromImagePointerEx on Pointer<SdlRenderer> {
   // lib_sdl_image.dart
@@ -41,9 +44,7 @@ extension SdlRendererFromImagePointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Texture * SDLCALL IMG_LoadTexture(SDL_Renderer *renderer, const char *file)
   /// ```
-  Pointer<SdlTexture> loadTexture(String file) {
-    return imgLoadTexture(this, file);
-  }
+  Pointer<SdlTexture> loadTexture(String file) => imgLoadTexture(this, file);
 
   ///
   /// Load an image from an SDL data source into a GPU texture.
@@ -93,9 +94,8 @@ extension SdlRendererFromImagePointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Texture * SDLCALL IMG_LoadTexture_IO(SDL_Renderer *renderer, SDL_IOStream *src, bool closeio)
   /// ```
-  Pointer<SdlTexture> loadTextureIo(Pointer<SdlIoStream> src, bool freesrc) {
-    return imgLoadTextureIo(this, src, freesrc);
-  }
+  Pointer<SdlTexture> loadTextureIo(Pointer<SdlIoStream> src, bool freesrc) =>
+      imgLoadTextureIo(this, src, freesrc);
 
   ///
   /// Load an image from an SDL data source into a GPU texture.
@@ -157,7 +157,5 @@ extension SdlRendererFromImagePointerEx on Pointer<SdlRenderer> {
     Pointer<SdlIoStream> src,
     bool freesrc,
     String type,
-  ) {
-    return imgLoadTextureTypedIo(this, src, freesrc, type);
-  }
+  ) => imgLoadTextureTypedIo(this, src, freesrc, type);
 }

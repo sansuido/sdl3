@@ -1,4 +1,6 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
+// ignore_for_file: avoid_positional_boolean_parameters
+// ignore_for_file: comment_references
 import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'lib_sdl.dart';
@@ -391,12 +393,12 @@ int sdlGetGpuShaderFormats(Pointer<SdlGpuDevice> device) {
 /// This string has also been observed to be a multiline string (which has a
 /// trailing newline):
 ///
-/// ```
+/// ===
 /// Driver Build: 85da404, I46ff5fc46f, 1606794520
 /// Date: 11/30/20
 /// Compiler Version: EV031.31.04.01
 /// Driver Branch: promo490_3_Google
-/// ```
+/// ===
 ///
 /// \param device a GPU context to query.
 /// \returns a valid property ID on success or 0 on failure; call

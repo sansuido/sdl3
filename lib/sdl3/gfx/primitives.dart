@@ -46,7 +46,7 @@ var charHeight = 8;
 var charWidthLocal = 8;
 var charHeightLocal = 8;
 var charPitch = 1;
-var currentFontdata = gfxPrimitivesFontdata;
+List<int> currentFontdata = gfxPrimitivesFontdata;
 const aaLevels = 256;
 const aaBits = 8;
 const defaultEllipseOverscan = 4;
@@ -62,9 +62,8 @@ const defaultEllipseOverscan = 4;
 
 \returns Returns 0 on success, -1 on failure.
 */
-bool pixel(Pointer<SdlRenderer> renderer, double x, double y) {
-  return sdlRenderPoint(renderer, x, y);
-}
+bool pixel(Pointer<SdlRenderer> renderer, double x, double y) =>
+    sdlRenderPoint(renderer, x, y);
 
 /*!
 \brief Draw pixel with blending enabled if a<255.
@@ -83,7 +82,7 @@ bool pixelColor(
   int color, {
   int blendMode = SDL_BLENDMODE_BLEND,
 }) {
-  var co = Uint32List.fromList([color]).buffer.asUint8List();
+  final co = Uint32List.fromList([color]).buffer.asUint8List();
   return pixelRgba(
     renderer,
     x,
@@ -119,7 +118,7 @@ bool pixelRgba(
   int a, {
   int blendMode = SDL_BLENDMODE_BLEND,
 }) {
-  bool result = true;
+  var result = true;
   if (result) {
     result = sdlSetRenderDrawBlendMode(renderer, blendMode);
   }
@@ -160,14 +159,15 @@ bool pixelRgbaWeight(
   /*
 	* Modify Alpha by weight 
 	*/
-  int ax = a;
-  ax = ((ax * weight) >> 8);
+  var alpha = a;
+  var ax = a;
+  ax = (ax * weight) >> 8;
   if (ax > 255) {
-    a = 255;
+    alpha = 255;
   } else {
-    a = ax & 0x000000ff;
+    alpha = ax & 0x000000ff;
   }
-  return pixelRgba(renderer, x, y, r, g, b, a, blendMode: blendMode);
+  return pixelRgba(renderer, x, y, r, g, b, alpha, blendMode: blendMode);
 }
 
 /* ---- Hline */
@@ -182,9 +182,8 @@ bool pixelRgbaWeight(
 
 \returns Returns 0 on success, -1 on failure.
 */
-bool hline(Pointer<SdlRenderer> renderer, double x1, double x2, double y) {
-  return sdlRenderLine(renderer, x1, y, x2, y);
-}
+bool hline(Pointer<SdlRenderer> renderer, double x1, double x2, double y) =>
+    sdlRenderLine(renderer, x1, y, x2, y);
 
 /*!
 \brief Draw horizontal line with blending.
@@ -205,7 +204,7 @@ bool hlineColor(
   int color, {
   int blendMode = SDL_BLENDMODE_BLEND,
 }) {
-  var co = Uint32List.fromList([color]).buffer.asUint8List();
+  final co = Uint32List.fromList([color]).buffer.asUint8List();
   return hlineRgba(
     renderer,
     x1,
@@ -244,7 +243,7 @@ bool hlineRgba(
   int a, {
   int blendMode = SDL_BLENDMODE_BLEND,
 }) {
-  bool result = true;
+  var result = true;
   if (result) {
     result = sdlSetRenderDrawBlendMode(renderer, blendMode);
   }
@@ -269,9 +268,8 @@ bool hlineRgba(
 
 \returns Returns 0 on success, -1 on failure.
 */
-bool vline(Pointer<SdlRenderer> renderer, double x, double y1, double y2) {
-  return sdlRenderLine(renderer, x, y1, x, y2);
-}
+bool vline(Pointer<SdlRenderer> renderer, double x, double y1, double y2) =>
+    sdlRenderLine(renderer, x, y1, x, y2);
 
 /*!
 \brief Draw vertical line with blending.
@@ -292,7 +290,7 @@ bool vlineColor(
   int color, {
   int blendMode = SDL_BLENDMODE_BLEND,
 }) {
-  var co = Uint32List.fromList([color]).buffer.asUint8List();
+  final co = Uint32List.fromList([color]).buffer.asUint8List();
   return vlineRgba(
     renderer,
     x,
@@ -331,7 +329,7 @@ bool vlineRgba(
   int a, {
   int blendMode = SDL_BLENDMODE_BLEND,
 }) {
-  bool result = true;
+  var result = true;
   if (result) {
     result = sdlSetRenderDrawBlendMode(renderer, blendMode);
   }
@@ -367,7 +365,7 @@ bool rectangleColor(
   int color, {
   int blendMode = SDL_BLENDMODE_BLEND,
 }) {
-  var co = Uint32List.fromList([color]).buffer.asUint8List();
+  final co = Uint32List.fromList([color]).buffer.asUint8List();
   return rectangleRgba(
     renderer,
     x1,
@@ -409,50 +407,74 @@ bool rectangleRgba(
   int a, {
   int blendMode = SDL_BLENDMODE_BLEND,
 }) {
-  bool result = true;
+  var x10 = x1;
+  var y10 = y1;
+  var x20 = x2;
+  var y20 = y2;
+  var result = true;
   double tmp;
 
   /*
 	* Test for special cases of straight lines or single point 
 	*/
-  if (x1 == x2) {
-    if (y1 == y2) {
-      return pixelRgba(renderer, x1, y1, r, g, b, a, blendMode: blendMode);
+  if (x10 == x20) {
+    if (y10 == y20) {
+      return pixelRgba(renderer, x10, y10, r, g, b, a, blendMode: blendMode);
     } else {
-      return vlineRgba(renderer, x1, y1, y2, r, g, b, a, blendMode: blendMode);
+      return vlineRgba(
+        renderer,
+        x10,
+        y10,
+        y20,
+        r,
+        g,
+        b,
+        a,
+        blendMode: blendMode,
+      );
     }
   } else {
-    if (y1 == y2) {
-      return hlineRgba(renderer, x1, x2, y1, r, g, b, a, blendMode: blendMode);
+    if (y10 == y20) {
+      return hlineRgba(
+        renderer,
+        x10,
+        x20,
+        y10,
+        r,
+        g,
+        b,
+        a,
+        blendMode: blendMode,
+      );
     }
   }
 
   /*
-	* Swap x1, x2 if required 
+	* Swap x10, x20 if required 
 	*/
-  if (x1 > x2) {
-    tmp = x1;
-    x1 = x2;
-    x2 = tmp;
+  if (x10 > x20) {
+    tmp = x10;
+    x10 = x20;
+    x20 = tmp;
   }
 
   /*
-	* Swap y1, y2 if required 
+	* Swap y10, y20 if required 
 	*/
-  if (y1 > y2) {
-    tmp = y1;
-    y1 = y2;
-    y2 = tmp;
+  if (y10 > y20) {
+    tmp = y10;
+    y10 = y20;
+    y20 = tmp;
   }
 
   /* 
 	* Create destination rect
 	*/
-  var rect = calloc<SdlFRect>();
-  rect.ref.x = x1;
-  rect.ref.y = y1;
-  rect.ref.w = x2 - x1;
-  rect.ref.h = y2 - y1;
+  final rect = calloc<SdlFRect>();
+  rect.ref.x = x10;
+  rect.ref.y = y10;
+  rect.ref.w = x20 - x10;
+  rect.ref.h = y20 - y10;
 
   /*
 	* Draw
@@ -496,7 +518,7 @@ bool roundedRectangleColor(
   int color, {
   int blendMode = SDL_BLENDMODE_BLEND,
 }) {
-  var co = Uint32List.fromList([color]).buffer.asUint8List();
+  final co = Uint32List.fromList([color]).buffer.asUint8List();
   return roundedRectangleRgba(
     renderer,
     x1,
@@ -541,11 +563,19 @@ bool roundedRectangleRgba(
   int a, {
   int blendMode = SDL_BLENDMODE_BLEND,
 }) {
-  bool result = true;
+  var result = true;
+  var x10 = x1;
+  var y10 = y1;
+  var x20 = x2;
+  var y20 = y2;
+  var rad0 = rad;
   double tmp;
-  double w, h;
-  double xx1, xx2;
-  double yy1, yy2;
+  double w;
+  double h;
+  double xx1;
+  double xx2;
+  double yy1;
+  double yy2;
 
   /*
 	* Check renderer
@@ -557,20 +587,20 @@ bool roundedRectangleRgba(
   /*
 	* Check radius vor valid range
 	*/
-  if (rad < 0) {
+  if (rad0 < 0) {
     return false;
   }
 
   /*
 	* Special case - no rounding
 	*/
-  if (rad <= 1) {
+  if (rad0 <= 1) {
     return rectangleRgba(
       renderer,
-      x1,
-      y1,
-      x2,
-      y2,
+      x10,
+      y10,
+      x20,
+      y20,
       r,
       g,
       b,
@@ -582,65 +612,85 @@ bool roundedRectangleRgba(
   /*
 	* Test for special cases of straight lines or single point 
 	*/
-  if (x1 == x2) {
-    if (y1 == y2) {
-      return pixelRgba(renderer, x1, y1, r, g, b, a, blendMode: blendMode);
+  if (x10 == x20) {
+    if (y10 == y20) {
+      return pixelRgba(renderer, x10, y10, r, g, b, a, blendMode: blendMode);
     } else {
-      return vlineRgba(renderer, x1, y1, y2, r, g, b, a, blendMode: blendMode);
+      return vlineRgba(
+        renderer,
+        x10,
+        y10,
+        y20,
+        r,
+        g,
+        b,
+        a,
+        blendMode: blendMode,
+      );
     }
   } else {
-    if (y1 == y2) {
-      return hlineRgba(renderer, x1, x2, y1, r, g, b, a, blendMode: blendMode);
+    if (y10 == y20) {
+      return hlineRgba(
+        renderer,
+        x10,
+        x20,
+        y10,
+        r,
+        g,
+        b,
+        a,
+        blendMode: blendMode,
+      );
     }
   }
 
   /*
-	* Swap x1, x2 if required 
+	* Swap x10, x20 if required 
 	*/
-  if (x1 > x2) {
-    tmp = x1;
-    x1 = x2;
-    x2 = tmp;
+  if (x10 > x20) {
+    tmp = x10;
+    x10 = x20;
+    x20 = tmp;
   }
 
   /*
-	* Swap y1, y2 if required 
+	* Swap y10, y20 if required 
 	*/
-  if (y1 > y2) {
-    tmp = y1;
-    y1 = y2;
-    y2 = tmp;
+  if (y10 > y20) {
+    tmp = y10;
+    y10 = y20;
+    y20 = tmp;
   }
 
   /*
 	* Calculate width&height 
 	*/
-  w = x2 - x1;
-  h = y2 - y1;
+  w = x20 - x10;
+  h = y20 - y10;
 
   /*
 	* Maybe adjust radius
 	*/
-  if ((rad * 2) > w) {
-    rad = w / 2;
+  if ((rad0 * 2) > w) {
+    rad0 = w / 2;
   }
-  if ((rad * 2) > h) {
-    rad = h / 2;
+  if ((rad0 * 2) > h) {
+    rad0 = h / 2;
   }
 
   /*
 	* Draw corners
 	*/
-  xx1 = x1 + rad;
-  xx2 = x2 - rad;
-  yy1 = y1 + rad;
-  yy2 = y2 - rad;
+  xx1 = x10 + rad0;
+  xx2 = x20 - rad0;
+  yy1 = y10 + rad0;
+  yy2 = y20 - rad0;
   if (result) {
     result = arcRgba(
       renderer,
       xx1,
       yy1,
-      rad,
+      rad0,
       180,
       270,
       r,
@@ -655,7 +705,7 @@ bool roundedRectangleRgba(
       renderer,
       xx2,
       yy1,
-      rad,
+      rad0,
       270,
       360,
       r,
@@ -670,7 +720,7 @@ bool roundedRectangleRgba(
       renderer,
       xx1,
       yy2,
-      rad,
+      rad0,
       90,
       180,
       r,
@@ -685,7 +735,7 @@ bool roundedRectangleRgba(
       renderer,
       xx2,
       yy2,
-      rad,
+      rad0,
       0,
       90,
       r,
@@ -705,7 +755,7 @@ bool roundedRectangleRgba(
         renderer,
         xx1,
         xx2,
-        y1,
+        y10,
         r,
         g,
         b,
@@ -718,7 +768,7 @@ bool roundedRectangleRgba(
         renderer,
         xx1,
         xx2,
-        y2,
+        y20,
         r,
         g,
         b,
@@ -731,7 +781,7 @@ bool roundedRectangleRgba(
     if (result) {
       result = vlineRgba(
         renderer,
-        x1,
+        x10,
         yy1,
         yy2,
         r,
@@ -744,7 +794,7 @@ bool roundedRectangleRgba(
     if (result) {
       result = vlineRgba(
         renderer,
-        x2,
+        x20,
         yy1,
         yy2,
         r,
@@ -783,7 +833,7 @@ bool roundedBoxColor(
   int color, {
   int blendMode = SDL_BLENDMODE_BLEND,
 }) {
-  var co = Uint32List.fromList([color]).buffer.asUint8List();
+  final co = Uint32List.fromList([color]).buffer.asUint8List();
   return roundedBoxRgba(
     renderer,
     x1,
@@ -828,18 +878,35 @@ bool roundedBoxRgba(
   int a, {
   int blendMode = SDL_BLENDMODE_BLEND,
 }) {
-  bool result = true;
-  double w, h, r2, tmp;
+  var result = true;
+  var x10 = x1;
+  var y10 = y1;
+  var x20 = x2;
+  var y20 = y2;
+  var rad0 = rad;
+  double w;
+  double h;
+  double r2;
+  double tmp;
   double cx = 0;
-  double cy = rad;
+  var cy = rad0;
   double ocx = 0xffff;
   double ocy = 0xffff;
-  double df = 1 - rad;
+  var df = 1 - rad0;
   double dE = 3;
-  double dSe = -2 * rad + 5;
-  double xpcx, xmcx, xpcy, xmcy;
-  double ypcy, ymcy, ypcx, ymcx;
-  double x, y, dx, dy;
+  var dSe = -2 * rad0 + 5;
+  double xpcx;
+  double xmcx;
+  double xpcy;
+  double xmcy;
+  double ypcy;
+  double ymcy;
+  double ypcx;
+  double ymcx;
+  double x;
+  double y;
+  double dx;
+  double dy;
 
   /* 
 	* Check destination renderer 
@@ -851,73 +918,104 @@ bool roundedBoxRgba(
   /*
 	* Check radius vor valid range
 	*/
-  if (rad < 0) {
+  if (rad0 < 0) {
     return false;
   }
 
   /*
 	* Special case - no rounding
 	*/
-  if (rad <= 1) {
-    return boxRgba(renderer, x1, y1, x2, y2, r, g, b, a, blendMode: blendMode);
+  if (rad0 <= 1) {
+    return boxRgba(
+      renderer,
+      x10,
+      y10,
+      x20,
+      y20,
+      r,
+      g,
+      b,
+      a,
+      blendMode: blendMode,
+    );
   }
 
   /*
 	* Test for special cases of straight lines or single point 
 	*/
-  if (x1 == x2) {
-    if (y1 == y2) {
-      return pixelRgba(renderer, x1, y1, r, g, b, a, blendMode: blendMode);
+  if (x10 == x20) {
+    if (y10 == y20) {
+      return pixelRgba(renderer, x10, y10, r, g, b, a, blendMode: blendMode);
     } else {
-      return vlineRgba(renderer, x1, y1, y2, r, g, b, a, blendMode: blendMode);
+      return vlineRgba(
+        renderer,
+        x10,
+        y10,
+        y20,
+        r,
+        g,
+        b,
+        a,
+        blendMode: blendMode,
+      );
     }
   } else {
-    if (y1 == y2) {
-      return hlineRgba(renderer, x1, x2, y1, r, g, b, a, blendMode: blendMode);
+    if (y10 == y20) {
+      return hlineRgba(
+        renderer,
+        x10,
+        x20,
+        y10,
+        r,
+        g,
+        b,
+        a,
+        blendMode: blendMode,
+      );
     }
   }
 
   /*
-	* Swap x1, x2 if required 
+	* Swap x10, x20 if required 
 	*/
-  if (x1 > x2) {
-    tmp = x1;
-    x1 = x2;
-    x2 = tmp;
+  if (x10 > x20) {
+    tmp = x10;
+    x10 = x20;
+    x20 = tmp;
   }
 
   /*
-	* Swap y1, y2 if required 
+	* Swap y10, y20 if required 
 	*/
-  if (y1 > y2) {
-    tmp = y1;
-    y1 = y2;
-    y2 = tmp;
+  if (y10 > y20) {
+    tmp = y10;
+    y10 = y20;
+    y20 = tmp;
   }
 
   /*
 	* Calculate width&height 
 	*/
-  w = x2 - x1 + 1;
-  h = y2 - y1 + 1;
+  w = x20 - x10 + 1;
+  h = y20 - y10 + 1;
 
   /*
 	* Maybe adjust radius
 	*/
-  r2 = rad + rad;
+  r2 = rad0 + rad0;
   if (r2 > w) {
-    rad = w / 2;
-    r2 = rad + rad;
+    rad0 = w / 2;
+    r2 = rad0 + rad0;
   }
   if (r2 > h) {
-    rad = h / 2;
+    rad0 = h / 2;
   }
 
   /* Setup filled circle drawing for corners */
-  x = x1 + rad;
-  y = y1 + rad;
-  dx = x2 - x1 - rad - rad;
-  dy = y2 - y1 - rad - rad;
+  x = x10 + rad0;
+  y = y10 + rad0;
+  dx = x20 - x10 - rad0 - rad0;
+  dy = y20 - y10 - rad0 - rad0;
 
   /*
 	* Set color
@@ -996,10 +1094,10 @@ bool roundedBoxRgba(
     if (result) {
       result = boxRgba(
         renderer,
-        x1,
-        y1 + rad + 1,
-        x2,
-        y2 - rad,
+        x10,
+        y10 + rad0 + 1,
+        x20,
+        y20 - rad0,
         r,
         g,
         b,
@@ -1034,7 +1132,7 @@ bool boxColor(
   int color, {
   int blendMode = SDL_BLENDMODE_BLEND,
 }) {
-  var co = Uint32List.fromList([color]).buffer.asUint8List();
+  final co = Uint32List.fromList([color]).buffer.asUint8List();
   return boxRgba(
     renderer,
     x1,
@@ -1076,50 +1174,74 @@ bool boxRgba(
   int a, {
   int blendMode = SDL_BLENDMODE_BLEND,
 }) {
-  bool result = true;
+  var x10 = x1;
+  var x20 = x2;
+  var y10 = y1;
+  var y20 = y2;
+  var result = true;
   double tmp;
 
   /*
 	* Test for special cases of straight lines or single point 
 	*/
-  if (x1 == x2) {
-    if (y1 == y2) {
-      return pixelRgba(renderer, x1, y1, r, g, b, a, blendMode: blendMode);
+  if (x10 == x20) {
+    if (y10 == y20) {
+      return pixelRgba(renderer, x10, y10, r, g, b, a, blendMode: blendMode);
     } else {
-      return vlineRgba(renderer, x1, y1, y2, r, g, b, a, blendMode: blendMode);
+      return vlineRgba(
+        renderer,
+        x10,
+        y10,
+        y20,
+        r,
+        g,
+        b,
+        a,
+        blendMode: blendMode,
+      );
     }
   } else {
-    if (y1 == y2) {
-      return hlineRgba(renderer, x1, x2, y1, r, g, b, a, blendMode: blendMode);
+    if (y10 == y20) {
+      return hlineRgba(
+        renderer,
+        x10,
+        x20,
+        y10,
+        r,
+        g,
+        b,
+        a,
+        blendMode: blendMode,
+      );
     }
   }
 
   /*
 	* Swap x1, x2 if required 
 	*/
-  if (x1 > x2) {
-    tmp = x1;
-    x1 = x2;
-    x2 = tmp;
+  if (x10 > x20) {
+    tmp = x10;
+    x10 = x20;
+    x20 = tmp;
   }
 
   /*
 	* Swap y1, y2 if required 
 	*/
-  if (y1 > y2) {
-    tmp = y1;
-    y1 = y2;
-    y2 = tmp;
+  if (y10 > y20) {
+    tmp = y10;
+    y10 = y20;
+    y20 = tmp;
   }
 
   /* 
 	* Create destination rect
 	*/
-  var rect = calloc<SdlFRect>();
-  rect.ref.x = x1;
-  rect.ref.y = y1;
-  rect.ref.w = x2 - x1 + 1;
-  rect.ref.h = y2 - y1 + 1;
+  final rect = calloc<SdlFRect>();
+  rect.ref.x = x10;
+  rect.ref.y = y10;
+  rect.ref.w = x20 - x10 + 1;
+  rect.ref.h = y20 - y10 + 1;
 
   /*
 	* Draw
@@ -1157,12 +1279,7 @@ bool line(
   double y1,
   double x2,
   double y2,
-) {
-  /*
-	* Draw
-	*/
-  return sdlRenderLine(renderer, x1, y1, x2, y2);
-}
+) => sdlRenderLine(renderer, x1, y1, x2, y2);
 
 /*!
 \brief Draw line with alpha blending.
@@ -1185,7 +1302,7 @@ bool lineColor(
   int color, {
   int blendMode = SDL_BLENDMODE_BLEND,
 }) {
-  var co = Uint32List.fromList([color]).buffer.asUint8List();
+  final co = Uint32List.fromList([color]).buffer.asUint8List();
   return lineRgba(
     renderer,
     x1,
@@ -1230,7 +1347,7 @@ bool lineRgba(
   /*
 	* Draw
 	*/
-  bool result = true;
+  var result = true;
   if (result) {
     result = sdlSetRenderDrawBlendMode(renderer, blendMode);
   }
@@ -1279,11 +1396,20 @@ bool _aalineRgba(
   int drawEndpoint, {
   int blendMode = SDL_BLENDMODE_BLEND,
 }) {
-  double xx0, yy0, xx1, yy1;
-  bool result = true;
-  double erracc, erradj;
+  double xx0;
+  double yy0;
+  double xx1;
+  double yy1;
+  var result = true;
+  double erracc;
+  double erradj;
   int wgt;
-  double dx, dy, tmp, xdir, y0p1, x0pxdir;
+  double dx;
+  double dy;
+  double tmp;
+  double xdir;
+  double y0p1;
+  double x0pxdir;
 
   /*
 	* Keep on working with 32bit numbers 
@@ -1318,7 +1444,7 @@ bool _aalineRgba(
     xdir = 1;
   } else {
     xdir = -1;
-    dx = (-dx);
+    dx = -dx;
   }
 
   /*
@@ -1567,7 +1693,7 @@ bool aalineColor(
   int color, {
   int blendMode = SDL_BLENDMODE_BLEND,
 }) {
-  var co = Uint32List.fromList([color]).buffer.asUint8List();
+  final co = Uint32List.fromList([color]).buffer.asUint8List();
   return _aalineRgba(
     renderer,
     x1,
@@ -1609,21 +1735,8 @@ bool aalineRgba(
   int b,
   int a, {
   int blendMode = SDL_BLENDMODE_BLEND,
-}) {
-  return _aalineRgba(
-    renderer,
-    x1,
-    y1,
-    x2,
-    y2,
-    r,
-    g,
-    b,
-    a,
-    1,
-    blendMode: blendMode,
-  );
-}
+}) =>
+    _aalineRgba(renderer, x1, y1, x2, y2, r, g, b, a, 1, blendMode: blendMode);
 
 /* ----- Circle */
 
@@ -1646,7 +1759,7 @@ bool circleColor(
   int color, {
   int blendMode = SDL_BLENDMODE_BLEND,
 }) {
-  var co = Uint32List.fromList([color]).buffer.asUint8List();
+  final co = Uint32List.fromList([color]).buffer.asUint8List();
   return ellipseRgba(
     renderer,
     x,
@@ -1685,20 +1798,7 @@ bool circleRgba(
   int b,
   int a, {
   int blendMode = SDL_BLENDMODE_BLEND,
-}) {
-  return ellipseRgba(
-    renderer,
-    x,
-    y,
-    rad,
-    rad,
-    r,
-    g,
-    b,
-    a,
-    blendMode: blendMode,
-  );
-}
+}) => ellipseRgba(renderer, x, y, rad, rad, r, g, b, a, blendMode: blendMode);
 
 /* ----- Arc */
 
@@ -1725,7 +1825,7 @@ bool arcColor(
   int color, {
   int blendMode = SDL_BLENDMODE_BLEND,
 }) {
-  var co = Uint32List.fromList([color]).buffer.asUint8List();
+  final co = Uint32List.fromList([color]).buffer.asUint8List();
   return arcRgba(
     renderer,
     x,
@@ -1770,17 +1870,31 @@ bool arcRgba(
   int a, {
   int blendMode = SDL_BLENDMODE_BLEND,
 }) {
-  bool result = true;
+  var start0 = start;
+  var end0 = end;
+  var result = true;
   double cx = 0;
-  double cy = rad;
-  double df = 1 - rad;
+  var cy = rad;
+  var df = 1 - rad;
   double dE = 3;
-  double dSe = -2 * rad + 5;
-  double xpcx, xmcx, xpcy, xmcy;
-  double ypcy, ymcy, ypcx, ymcx;
+  var dSe = -2 * rad + 5;
+  double xpcx;
+  double xmcx;
+  double xpcy;
+  double xmcy;
+  double ypcy;
+  double ymcy;
+  double ypcx;
+  double ymcx;
   int drawoct;
-  int startoct, endoct, oct, stopvalStart = 0, stopvalEnd = 0;
-  double dstart, dend, temp = 0.0;
+  int startoct;
+  int endoct;
+  int oct;
+  var stopvalStart = 0;
+  var stopvalEnd = 0;
+  double dstart;
+  double dend;
+  double temp = 0;
 
   /*
 	* Sanity check radius 
@@ -1819,21 +1933,21 @@ bool arcRgba(
   /*
 	* Fixup angles
 	*/
-  start %= 360;
-  end %= 360;
+  start0 %= 360;
+  end0 %= 360;
   /* 0 <= start & end < 360; note that sometimes start > end - if so, arc goes back through 0. */
-  while (start < 0) {
-    start += 360;
+  while (start0 < 0) {
+    start0 += 360;
   }
-  while (end < 0) {
-    end += 360;
+  while (end0 < 0) {
+    end0 += 360;
   }
-  start %= 360;
-  end %= 360;
+  start0 %= 360;
+  end0 %= 360;
 
   /* now, we find which octants we're drawing in. */
-  startoct = start ~/ 45;
-  endoct = end ~/ 45;
+  startoct = start0 ~/ 45;
+  endoct = end0 ~/ 45;
   oct = startoct - 1;
 
   /* stopvalStart, stopvalEnd; what values of cx to stop at. */
@@ -1842,24 +1956,20 @@ bool arcRgba(
 
     if (oct == startoct) {
       /* need to compute stopvalStart for this octant.  Look at picture above if this is unclear */
-      dstart = start.toDouble();
+      dstart = start;
       switch (oct) {
         case 0:
         case 3:
           temp = math.sin(dstart * math.pi / 180.0);
-          break;
         case 1:
         case 6:
           temp = math.cos(dstart * math.pi / 180.0);
-          break;
         case 2:
         case 5:
           temp = -math.cos(dstart * math.pi / 180.0);
-          break;
         case 4:
         case 7:
           temp = -math.sin(dstart * math.pi / 180.0);
-          break;
       }
       temp *= rad;
       stopvalStart = temp.toInt();
@@ -1871,8 +1981,8 @@ bool arcRgba(
 			*/
       if ((oct % 2) != 0) {
         drawoct |=
-            (1 <<
-            oct); /* this is basically like saying drawoct[oct] = true, if drawoct were a bool array */
+            1 <<
+            oct; /* this is basically like saying drawoct[oct] = true, if drawoct were a bool array */
       } else {
         drawoct &=
             255 -
@@ -1881,24 +1991,20 @@ bool arcRgba(
     }
     if (oct == endoct) {
       /* need to compute stopvalEnd for this octant */
-      dend = end.toDouble();
+      dend = end;
       switch (oct) {
         case 0:
         case 3:
           temp = math.sin(dend * math.pi / 180);
-          break;
         case 1:
         case 6:
           temp = math.cos(dend * math.pi / 180);
-          break;
         case 2:
         case 5:
           temp = -math.cos(dend * math.pi / 180);
-          break;
         case 4:
         case 7:
           temp = -math.sin(dend * math.pi / 180);
-          break;
       }
       temp *= rad;
       stopvalEnd = temp.toInt();
@@ -1907,7 +2013,7 @@ bool arcRgba(
       if (startoct == endoct) {
         /* note:      we start drawing, stop, then start again in this case */
         /* otherwise: we only draw in this octant, so initialize it to false, it will get set back to true */
-        if (start > end) {
+        if (start0 > end0) {
           /* unfortunately, if we're in the same octant and need to draw over the whole circle, */
           /* we need to set the rest to true, because the while loop will end at the bottom. */
           drawoct = 255;
@@ -1917,11 +2023,11 @@ bool arcRgba(
       } else if ((oct % 2) != 0) {
         drawoct &= 255 - (1 << oct);
       } else {
-        drawoct |= (1 << oct);
+        drawoct |= 1 << oct;
       }
     } else if (oct != startoct) {
       /* already verified that it's != endoct */
-      drawoct |= (1 << oct); /* draw this entire segment */
+      drawoct |= 1 << oct; /* draw this entire segment */
     }
   } while (oct != endoct);
 
@@ -2028,14 +2134,14 @@ bool arcRgba(
       if ((drawoct & (1 << startoct)) != 0) {
         drawoct &= 255 - (1 << startoct);
       } else {
-        drawoct |= (1 << startoct);
+        drawoct |= 1 << startoct;
       }
     }
     if (stopvalEnd == cx) {
       if ((drawoct & (1 << endoct)) != 0) {
         drawoct &= 255 - (1 << endoct);
       } else {
-        drawoct |= (1 << endoct);
+        drawoct |= 1 << endoct;
       }
     }
 
@@ -2078,7 +2184,7 @@ bool aacircleColor(
   int color, {
   int blendMode = SDL_BLENDMODE_BLEND,
 }) {
-  var co = Uint32List.fromList([color]).buffer.asUint8List();
+  final co = Uint32List.fromList([color]).buffer.asUint8List();
   return aaellipseRgba(
     renderer,
     x,
@@ -2117,23 +2223,7 @@ bool aacircleRgba(
   int b,
   int a, {
   int blendMode = SDL_BLENDMODE_BLEND,
-}) {
-  /*
-	* Draw 
-	*/
-  return aaellipseRgba(
-    renderer,
-    x,
-    y,
-    rad,
-    rad,
-    r,
-    g,
-    b,
-    a,
-    blendMode: blendMode,
-  );
-}
+}) => aaellipseRgba(renderer, x, y, rad, rad, r, g, b, a, blendMode: blendMode);
 
 /* ----- Ellipse */
 
@@ -2157,9 +2247,11 @@ bool _drawQuadrants(
   double dy,
   int f,
 ) {
-  bool result = true;
-  double xpdx, xmdx;
-  double ypdy, ymdy;
+  var result = true;
+  double xpdx;
+  double xmdx;
+  double ypdy;
+  double ymdy;
 
   if (dx == 0) {
     if (dy == 0) {
@@ -2241,13 +2333,24 @@ bool _ellipseRgba(
   int f, {
   int blendMode = SDL_BLENDMODE_BLEND,
 }) {
-  bool result = true;
-  int rxi, ryi;
-  int rx2, ry2, rx22, ry22;
+  var result = true;
+  int rxi;
+  int ryi;
+  int rx2;
+  int ry2;
+  int rx22;
+  int ry22;
   int error;
-  int curX, curY, curXp1, curYm1;
-  int scrX, scrY, oldX, oldY;
-  int deltaX, deltaY;
+  int curX;
+  int curY;
+  int curXp1;
+  int curYm1;
+  int scrX;
+  int scrY;
+  int oldX;
+  int oldY;
+  int deltaX;
+  int deltaY;
   int ellipseOverscan;
 
   /*
@@ -2435,7 +2538,7 @@ bool ellipseColor(
   int color, {
   int blendMode = SDL_BLENDMODE_BLEND,
 }) {
-  var co = Uint32List.fromList([color]).buffer.asUint8List();
+  final co = Uint32List.fromList([color]).buffer.asUint8List();
   return _ellipseRgba(
     renderer,
     x,
@@ -2477,21 +2580,7 @@ bool ellipseRgba(
   int b,
   int a, {
   int blendMode = SDL_BLENDMODE_BLEND,
-}) {
-  return _ellipseRgba(
-    renderer,
-    x,
-    y,
-    rx,
-    ry,
-    r,
-    g,
-    b,
-    a,
-    0,
-    blendMode: blendMode,
-  );
-}
+}) => _ellipseRgba(renderer, x, y, rx, ry, r, g, b, a, 0, blendMode: blendMode);
 
 /* ----- Filled Circle */
 
@@ -2514,7 +2603,7 @@ bool filledCircleColor(
   int color, {
   int blendMode = SDL_BLENDMODE_BLEND,
 }) {
-  var co = Uint32List.fromList([color]).buffer.asUint8List();
+  final co = Uint32List.fromList([color]).buffer.asUint8List();
   return filledEllipseRgba(
     renderer,
     x,
@@ -2553,21 +2642,8 @@ bool filledCircleRgba(
   int b,
   int a, {
   int blendMode = SDL_BLENDMODE_BLEND,
-}) {
-  return _ellipseRgba(
-    renderer,
-    x,
-    y,
-    rad,
-    rad,
-    r,
-    g,
-    b,
-    a,
-    1,
-    blendMode: blendMode,
-  );
-}
+}) =>
+    _ellipseRgba(renderer, x, y, rad, rad, r, g, b, a, 1, blendMode: blendMode);
 
 /*!
 \brief Draw anti-aliased ellipse with blending.
@@ -2590,7 +2666,7 @@ bool aaellipseColor(
   int color, {
   int blendMode = SDL_BLENDMODE_BLEND,
 }) {
-  var co = Uint32List.fromList([color]).buffer.asUint8List();
+  final co = Uint32List.fromList([color]).buffer.asUint8List();
   return aaellipseRgba(
     renderer,
     x,
@@ -2632,13 +2708,30 @@ bool aaellipseRgba(
   int a, {
   int blendMode = SDL_BLENDMODE_BLEND,
 }) {
-  bool result = true;
+  var result = true;
   int i;
-  double a2, b2, ds, dt, dxt, t, s, d;
-  double xp, yp, xs, ys, dyt, od, xx, yy, xc2, yc2;
+  double a2;
+  double b2;
+  double ds;
+  double dt;
+  double dxt;
+  double t;
+  double s;
+  double d;
+  double xp;
+  double yp;
+  double xs;
+  double ys;
+  double dyt;
+  double od;
+  double xx;
+  double yy;
+  double xc2;
+  double yc2;
   double cp;
   double sab;
-  int weight, iweight;
+  int weight;
+  int iweight;
 
   /*
 	* Sanity check radii 
@@ -3081,7 +3174,7 @@ bool filledEllipseColor(
   int color, {
   int blendMode = SDL_BLENDMODE_BLEND,
 }) {
-  var co = Uint32List.fromList([color]).buffer.asUint8List();
+  final co = Uint32List.fromList([color]).buffer.asUint8List();
   return _ellipseRgba(
     renderer,
     x,
@@ -3123,21 +3216,7 @@ bool filledEllipseRgba(
   int b,
   int a, {
   int blendMode = SDL_BLENDMODE_BLEND,
-}) {
-  return _ellipseRgba(
-    renderer,
-    x,
-    y,
-    rx,
-    ry,
-    r,
-    g,
-    b,
-    a,
-    1,
-    blendMode: blendMode,
-  );
-}
+}) => _ellipseRgba(renderer, x, y, rx, ry, r, g, b, a, 1, blendMode: blendMode);
 
 /* ----- Pie */
 
@@ -3174,11 +3253,16 @@ bool _pieRgba(
   int filled, {
   int blendMode = SDL_BLENDMODE_BLEND,
 }) {
-  bool result = true;
-  double angle, startAngle, endAngle;
+  var start0 = start;
+  var end0 = end;
+  var result = true;
+  double angle;
+  double startAngle;
+  double endAngle;
   double deltaAngle;
   double dr;
-  int numpoints, i;
+  int numpoints;
+  int i;
 
   /*
 	* Sanity check radii 
@@ -3190,8 +3274,8 @@ bool _pieRgba(
   /*
 	* Fixup angles
 	*/
-  start = start % 360;
-  end = end % 360;
+  start0 = start0 % 360;
+  end0 = end0 % 360;
 
   /*
 	* Special case for rad=0 - draw a point 
@@ -3203,12 +3287,12 @@ bool _pieRgba(
   /*
 	* Variable setup 
 	*/
-  dr = rad.toDouble();
+  dr = rad;
   deltaAngle = 3.0 / dr;
-  startAngle = start.toDouble() * (2.0 * math.pi / 360.0);
-  endAngle = end.toDouble() * (2.0 * math.pi / 360.0);
-  if (start > end) {
-    endAngle += (2.0 * math.pi);
+  startAngle = start0 * (2.0 * math.pi / 360.0);
+  endAngle = end0 * (2.0 * math.pi / 360.0);
+  if (start0 > end0) {
+    endAngle += 2.0 * math.pi;
   }
 
   /* We will always have at least 2 points */
@@ -3222,8 +3306,8 @@ bool _pieRgba(
   }
 
   /* Allocate combined vertex array */
-  var vx = calloc<Int16>(numpoints);
-  var vy = calloc<Int16>(numpoints);
+  final vx = calloc<Int16>(numpoints);
+  final vy = calloc<Int16>(numpoints);
 
   /* Update point to start of vy */
 
@@ -3293,8 +3377,9 @@ bool _pieRgba(
 
   /* Free combined vertex array */
   //free(vx);
-  calloc.free(vx);
-  calloc.free(vy);
+  calloc
+    ..free(vx)
+    ..free(vy);
 
   return result;
 }
@@ -3322,7 +3407,7 @@ bool pieColor(
   int color, {
   int blendMode = SDL_BLENDMODE_BLEND,
 }) {
-  var co = Uint32List.fromList([color]).buffer.asUint8List();
+  final co = Uint32List.fromList([color]).buffer.asUint8List();
   return _pieRgba(
     renderer,
     x,
@@ -3367,22 +3452,20 @@ bool pieRgba(
   int b,
   int a, {
   int blendMode = SDL_BLENDMODE_BLEND,
-}) {
-  return _pieRgba(
-    renderer,
-    x,
-    y,
-    rad,
-    start,
-    end,
-    r,
-    g,
-    b,
-    a,
-    0,
-    blendMode: blendMode,
-  );
-}
+}) => _pieRgba(
+  renderer,
+  x,
+  y,
+  rad,
+  start,
+  end,
+  r,
+  g,
+  b,
+  a,
+  0,
+  blendMode: blendMode,
+);
 
 /*!
 \brief Draw filled pie with alpha blending.
@@ -3407,7 +3490,7 @@ bool filledPieColor(
   int color, {
   int blendMode = SDL_BLENDMODE_BLEND,
 }) {
-  var co = Uint32List.fromList([color]).buffer.asUint8List();
+  final co = Uint32List.fromList([color]).buffer.asUint8List();
   return _pieRgba(
     renderer,
     x,
@@ -3452,22 +3535,20 @@ bool filledPieRgba(
   int b,
   int a, {
   int blendMode = SDL_BLENDMODE_BLEND,
-}) {
-  return _pieRgba(
-    renderer,
-    x,
-    y,
-    rad,
-    start,
-    end,
-    r,
-    g,
-    b,
-    a,
-    1,
-    blendMode: blendMode,
-  );
-}
+}) => _pieRgba(
+  renderer,
+  x,
+  y,
+  rad,
+  start,
+  end,
+  r,
+  g,
+  b,
+  a,
+  1,
+  blendMode: blendMode,
+);
 
 /* ------ Trigon */
 
@@ -3498,8 +3579,8 @@ bool trigonColor(
   int color, {
   int blendMode = SDL_BLENDMODE_BLEND,
 }) {
-  var vx = calloc<Int16>(3);
-  var vy = calloc<Int16>(3);
+  final vx = calloc<Int16>(3);
+  final vy = calloc<Int16>(3);
 
   vx[0] = x1.toInt();
   vx[1] = x2.toInt();
@@ -3508,9 +3589,10 @@ bool trigonColor(
   vy[1] = y2.toInt();
   vy[2] = y3.toInt();
 
-  var result = polygonColor(renderer, vx, vy, 3, color, blendMode: blendMode);
-  calloc.free(vx);
-  calloc.free(vy);
+  final result = polygonColor(renderer, vx, vy, 3, color, blendMode: blendMode);
+  calloc
+    ..free(vx)
+    ..free(vy);
 
   return result;
 }
@@ -3546,8 +3628,8 @@ bool trigonRgba(
   int a, {
   int blendMode = SDL_BLENDMODE_BLEND,
 }) {
-  var vx = calloc<Int16>(3);
-  var vy = calloc<Int16>(3);
+  final vx = calloc<Int16>(3);
+  final vy = calloc<Int16>(3);
 
   vx[0] = x1.toInt();
   vx[1] = x2.toInt();
@@ -3556,7 +3638,7 @@ bool trigonRgba(
   vy[1] = y2.toInt();
   vy[2] = y3.toInt();
 
-  var result = polygonRgba(
+  final result = polygonRgba(
     renderer,
     vx,
     vy,
@@ -3567,8 +3649,9 @@ bool trigonRgba(
     a,
     blendMode: blendMode,
   );
-  calloc.free(vx);
-  calloc.free(vy);
+  calloc
+    ..free(vx)
+    ..free(vy);
 
   return result;
 }
@@ -3602,8 +3685,8 @@ bool aatrigonColor(
   int color, {
   int blendMode = SDL_BLENDMODE_BLEND,
 }) {
-  var vx = calloc<Int16>(3);
-  var vy = calloc<Int16>(3);
+  final vx = calloc<Int16>(3);
+  final vy = calloc<Int16>(3);
 
   vx[0] = x1.toInt();
   vx[1] = x2.toInt();
@@ -3612,9 +3695,17 @@ bool aatrigonColor(
   vy[1] = y2.toInt();
   vy[2] = y3.toInt();
 
-  var result = aapolygonColor(renderer, vx, vy, 3, color, blendMode: blendMode);
-  calloc.free(vx);
-  calloc.free(vy);
+  final result = aapolygonColor(
+    renderer,
+    vx,
+    vy,
+    3,
+    color,
+    blendMode: blendMode,
+  );
+  calloc
+    ..free(vx)
+    ..free(vy);
 
   return result;
 }
@@ -3650,8 +3741,8 @@ bool aatrigonRgba(
   int a, {
   int blendMode = SDL_BLENDMODE_BLEND,
 }) {
-  var vx = calloc<Int16>(3);
-  var vy = calloc<Int16>(3);
+  final vx = calloc<Int16>(3);
+  final vy = calloc<Int16>(3);
 
   vx[0] = x1.toInt();
   vx[1] = x2.toInt();
@@ -3660,7 +3751,7 @@ bool aatrigonRgba(
   vy[1] = y2.toInt();
   vy[2] = y3.toInt();
 
-  var result = aapolygonRgba(
+  final result = aapolygonRgba(
     renderer,
     vx,
     vy,
@@ -3671,8 +3762,9 @@ bool aatrigonRgba(
     a,
     blendMode: blendMode,
   );
-  calloc.free(vx);
-  calloc.free(vy);
+  calloc
+    ..free(vx)
+    ..free(vy);
 
   return result;
 }
@@ -3706,8 +3798,8 @@ bool filledTrigonColor(
   int color, {
   int blendMode = SDL_BLENDMODE_BLEND,
 }) {
-  var vx = calloc<Int16>(3);
-  var vy = calloc<Int16>(3);
+  final vx = calloc<Int16>(3);
+  final vy = calloc<Int16>(3);
 
   vx[0] = x1.toInt();
   vx[1] = x2.toInt();
@@ -3716,7 +3808,7 @@ bool filledTrigonColor(
   vy[1] = y2.toInt();
   vy[2] = y3.toInt();
 
-  var result = filledPolygonColor(
+  final result = filledPolygonColor(
     renderer,
     vx,
     vy,
@@ -3724,8 +3816,9 @@ bool filledTrigonColor(
     color,
     blendMode: blendMode,
   );
-  calloc.free(vx);
-  calloc.free(vy);
+  calloc
+    ..free(vx)
+    ..free(vy);
 
   return result;
 }
@@ -3763,8 +3856,8 @@ bool filledTrigonRgba(
   int a, {
   int blendMode = SDL_BLENDMODE_BLEND,
 }) {
-  var vx = calloc<Int16>(3);
-  var vy = calloc<Int16>(3);
+  final vx = calloc<Int16>(3);
+  final vy = calloc<Int16>(3);
 
   vx[0] = x1.toInt();
   vx[1] = x2.toInt();
@@ -3773,7 +3866,7 @@ bool filledTrigonRgba(
   vy[1] = y2.toInt();
   vy[2] = y3.toInt();
 
-  var result = filledPolygonRgba(
+  final result = filledPolygonRgba(
     renderer,
     vx,
     vy,
@@ -3784,8 +3877,9 @@ bool filledTrigonRgba(
     a,
     blendMode: blendMode,
   );
-  calloc.free(vx);
-  calloc.free(vy);
+  calloc
+    ..free(vx)
+    ..free(vy);
 
   return result;
 }
@@ -3811,7 +3905,7 @@ bool polygonColor(
   int color, {
   int blendMode = SDL_BLENDMODE_BLEND,
 }) {
-  var co = Uint32List.fromList([color]).buffer.asUint8List();
+  final co = Uint32List.fromList([color]).buffer.asUint8List();
   return polygonRgba(
     renderer,
     vx,
@@ -3844,8 +3938,9 @@ bool polygon(
   /*
 	* Draw 
 	*/
-  bool result = true;
-  int i, nn;
+  var result = true;
+  int i;
+  int nn;
 
   /*
 	* Vertex array NULL check 
@@ -3868,7 +3963,7 @@ bool polygon(
 	* Create array of points
 	*/
   nn = n + 1;
-  var points = calloc<SdlFPoint>(nn);
+  final points = calloc<SdlFPoint>(nn);
   //	points = (SDL_Point*)malloc(sizeof(SDL_Point) * nn);
   if (points == nullptr) {
     return false;
@@ -3919,7 +4014,7 @@ bool polygonRgba(
   /*
 	* Draw 
 	*/
-  bool result = true;
+  var result = true;
 
   /*
 	* Vertex array NULL check 
@@ -3984,7 +4079,7 @@ bool aapolygonColor(
   int color, {
   int blendMode = SDL_BLENDMODE_BLEND,
 }) {
-  var co = Uint32List.fromList([color]).buffer.asUint8List();
+  final co = Uint32List.fromList([color]).buffer.asUint8List();
   return aapolygonRgba(
     renderer,
     vx,
@@ -4023,7 +4118,7 @@ bool aapolygonRgba(
   int a, {
   int blendMode = SDL_BLENDMODE_BLEND,
 }) {
-  bool result = true;
+  var result = true;
   int i;
 
   /*
@@ -4116,14 +4211,20 @@ bool filledPolygonRgbaMt(
   int a, {
   int blendMode = SDL_BLENDMODE_BLEND,
 }) {
-  bool result = true;
+  var result = true;
   int i;
-  int y, xa, xb;
-  int miny, maxy;
-  int x1, y1;
-  int x2, y2;
-  int ind1, ind2;
-  var gfxPrimitivesPolyInts = <int>[];
+  int y;
+  int xa;
+  int xb;
+  int miny;
+  int maxy;
+  int x1;
+  int y1;
+  int x2;
+  int y2;
+  int ind1;
+  int ind2;
+  final gfxPrimitivesPolyInts = <int>[];
 
   /*
 	* Vertex array NULL check 
@@ -4228,7 +4329,7 @@ bool filledPolygonColor(
   int color, {
   int blendMode = SDL_BLENDMODE_BLEND,
 }) {
-  var co = Uint32List.fromList([color]).buffer.asUint8List();
+  final co = Uint32List.fromList([color]).buffer.asUint8List();
   return filledPolygonRgbaMt(
     renderer,
     vx,
@@ -4266,19 +4367,8 @@ bool filledPolygonRgba(
   int b,
   int a, {
   int blendMode = SDL_BLENDMODE_BLEND,
-}) {
-  return filledPolygonRgbaMt(
-    renderer,
-    vx,
-    vy,
-    n,
-    r,
-    g,
-    b,
-    a,
-    blendMode: blendMode,
-  );
-}
+}) =>
+    filledPolygonRgbaMt(renderer, vx, vy, n, r, g, b, a, blendMode: blendMode);
 
 /* ---- Textured Polygon */
 
@@ -4308,31 +4398,34 @@ bool _hLineTextured(
   int textureDx,
   int textureDy,
 ) {
+  var x10 = x1;
+  var x20 = x2;
   double w;
   double xtmp;
-  bool result = true;
+  var result = true;
   double textureXWalker;
   double textureYStart;
-  double pixelsWritten, writeWidth;
+  double pixelsWritten;
+  double writeWidth;
 
   /*
 	* Swap x1, x2 if required to ensure x1<=x2
 	*/
-  if (x1 > x2) {
-    xtmp = x1;
-    x1 = x2;
-    x2 = xtmp;
+  if (x10 > x20) {
+    xtmp = x10;
+    x10 = x20;
+    x20 = xtmp;
   }
 
   /*
 	* Calculate width to draw
 	*/
-  w = x2 - x1 + 1;
+  w = x20 - SDL_PIXELFORMAT_XRGB2101010 + 1;
 
   /*
 	* Determine where in the texture we start drawing
 	*/
-  textureXWalker = (x1 - textureDx) % textureW;
+  textureXWalker = (x10 - textureDx) % textureW;
   if (textureXWalker < 0) {
     textureXWalker = textureW + textureXWalker;
   }
@@ -4343,13 +4436,13 @@ bool _hLineTextured(
   }
 
   /* setup the source rectangle; we are only drawing one horizontal line */
-  var sourceRect = calloc<SdlFRect>();
+  final sourceRect = calloc<SdlFRect>();
   sourceRect.ref.y = textureYStart;
   sourceRect.ref.x = textureXWalker;
   sourceRect.ref.h = 1;
 
   /* we will draw to the current y */
-  var dstRect = calloc<SdlFRect>();
+  final dstRect = calloc<SdlFRect>();
   dstRect.ref.y = y;
   dstRect.ref.h = 1;
 
@@ -4358,7 +4451,7 @@ bool _hLineTextured(
   if (w <= textureW - textureXWalker) {
     sourceRect.ref.w = w;
     sourceRect.ref.x = textureXWalker;
-    dstRect.ref.x = x1;
+    dstRect.ref.x = x10;
     dstRect.ref.w = sourceRect.ref.w;
     result = sdlRenderTexture(renderer, texture, sourceRect, dstRect);
   } else {
@@ -4367,7 +4460,7 @@ bool _hLineTextured(
     pixelsWritten = textureW - textureXWalker;
     sourceRect.ref.w = pixelsWritten;
     sourceRect.ref.x = textureXWalker;
-    dstRect.ref.x = x1;
+    dstRect.ref.x = x10;
     dstRect.ref.w = sourceRect.ref.w;
     if (result) {
       result = sdlRenderTexture(renderer, texture, sourceRect, dstRect);
@@ -4382,7 +4475,7 @@ bool _hLineTextured(
         writeWidth = w - pixelsWritten;
       }
       sourceRect.ref.w = writeWidth;
-      dstRect.ref.x = x1 + pixelsWritten;
+      dstRect.ref.x = x10 + pixelsWritten;
       dstRect.ref.w = sourceRect.ref.w;
       if (result) {
         result = sdlRenderTexture(renderer, texture, sourceRect, dstRect);
@@ -4390,8 +4483,9 @@ bool _hLineTextured(
       pixelsWritten += writeWidth;
     }
   }
-  calloc.free(sourceRect);
-  calloc.free(dstRect);
+  calloc
+    ..free(sourceRect)
+    ..free(dstRect);
   return result;
 }
 
@@ -4420,14 +4514,22 @@ bool texturedPolygonMt(
   int textureDx,
   int textureDy,
 ) {
-  bool result = true;
+  var result = true;
   int i;
-  int y, xa, xb;
-  int minx, maxx, miny, maxy;
-  int x1, y1;
-  int x2, y2;
-  int ind1, ind2;
-  var gfxPrimitivesPolyInts = <int>[];
+  int y;
+  int xa;
+  int xb;
+  int minx;
+  int maxx;
+  int miny;
+  int maxy;
+  int x1;
+  int y1;
+  int x2;
+  int y2;
+  int ind1;
+  int ind2;
+  final gfxPrimitivesPolyInts = <int>[];
   Pointer<SdlTexture> textureAsTexture;
 
   /*
@@ -4543,7 +4645,7 @@ bool texturedPolygonMt(
   sdlRenderPresent(renderer);
   sdlDestroyTexture(textureAsTexture);
 
-  return (result);
+  return result;
 }
 
 /*!
@@ -4570,12 +4672,7 @@ bool texturedPolygon(
   Pointer<SdlSurface> texture,
   int textureDx,
   int textureDy,
-) {
-  /*
-	* Draw
-	*/
-  return texturedPolygonMt(renderer, vx, vy, n, texture, textureDx, textureDy);
-}
+) => texturedPolygonMt(renderer, vx, vy, n, texture, textureDx, textureDy);
 
 /*!
 \brief Sets or resets the current global font data.
@@ -4634,11 +4731,11 @@ Changing the rotation, will reset the character cache.
 */
 void gfxPrimitivesSetFontRotation(int rotation) {
   int i;
-
-  rotation = rotation & 3;
-  if (charRotation != rotation) {
+  var rotation0 = rotation;
+  rotation0 = rotation0 & 3;
+  if (charRotation != rotation0) {
     /* Store rotation */
-    charRotation = rotation;
+    charRotation = rotation0;
 
     /* Maybe flip width/height for rendering */
     if ((charRotation == 1) || (charRotation == 3)) {
@@ -4663,7 +4760,8 @@ Pointer<SdlSurface> createCharacterSurface(int c, int rotation) {
   Pointer<SdlSurface> rotatedCharacter;
   Pointer<SdlSurface> character;
   Pointer<Uint32> pixels;
-  int ix, iy;
+  int ix;
+  int iy;
   int patt;
   int linepos;
   /*
@@ -4673,7 +4771,7 @@ Pointer<SdlSurface> createCharacterSurface(int c, int rotation) {
   if (character == nullptr) {
     return nullptr;
   }
-  var charpos = c * charSize;
+  final charpos = c * charSize;
   pixels = character.ref.pixels.cast<Uint32>();
   /*
   * Drawing loop 
@@ -4683,7 +4781,7 @@ Pointer<SdlSurface> createCharacterSurface(int c, int rotation) {
   for (iy = 0; iy < charHeight; iy++) {
     patt = currentFontdata[charpos + iy];
     for (ix = 0; ix < charWidth; ix++) {
-      var pixel = pixels + linepos;
+      final pixel = pixels + linepos;
       if (patt & 0x80 != 0) {
         pixel.value = 0xffffffff;
       } else {
@@ -4726,10 +4824,11 @@ bool characterRgba(
   int b,
   int a,
 ) {
-  Pointer<SdlFRect> srect = calloc<SdlFRect>();
-  Pointer<SdlFRect> drect = calloc<SdlFRect>();
-  bool result = true;
-  int ix, iy;
+  final srect = calloc<SdlFRect>();
+  final drect = calloc<SdlFRect>();
+  var result = true;
+  int ix;
+  int iy;
   int patt;
   Pointer<Uint32> pixels;
   int linepos;
@@ -4754,7 +4853,7 @@ bool characterRgba(
     if (character == nullptr) {
       return false;
     }
-    var charpos = ci * charSize;
+    final charpos = ci * charSize;
     pixels = character.ref.pixels.cast<Uint32>();
     /*
 		* Drawing loop 
@@ -4764,7 +4863,7 @@ bool characterRgba(
     for (iy = 0; iy < charHeight; iy++) {
       patt = currentFontdata[charpos + iy];
       for (ix = 0; ix < charWidth; ix++) {
-        var pixel = pixels + linepos;
+        final pixel = pixels + linepos;
         if (patt & 0x80 != 0) {
           pixel.value = 0xffffffff;
         } else {
@@ -4820,8 +4919,9 @@ bool characterRgba(
   if (result) {
     result = sdlRenderTexture(renderer, gfxPrimitivesFont[ci], srect, drect);
   }
-  calloc.free(srect);
-  calloc.free(drect);
+  calloc
+    ..free(srect)
+    ..free(drect);
   return result;
 }
 
@@ -4843,7 +4943,7 @@ bool characterColor(
   int c,
   int color,
 ) {
-  var co = Uint32List.fromList([color]).buffer.asUint8List();
+  final co = Uint32List.fromList([color]).buffer.asUint8List();
   return characterRgba(renderer, x, y, c, co[0], co[1], co[2], co[3]);
 }
 
@@ -4868,7 +4968,7 @@ bool stringColor(
   String s,
   int color,
 ) {
-  var co = Uint32List.fromList([color]).buffer.asUint8List();
+  final co = Uint32List.fromList([color]).buffer.asUint8List();
   return stringRgba(renderer, x, y, s, co[0], co[1], co[2], co[3]);
 }
 
@@ -4896,11 +4996,11 @@ bool stringRgba(
   int b,
   int a,
 ) {
-  bool result = true;
-  double curx = x;
-  double cury = y;
+  var result = true;
+  var curx = x;
+  var cury = y;
   for (var i = 0; i < s.length; i++) {
-    var curchar = s[i];
+    final curchar = s[i];
     if (result) {
       result = characterRgba(
         renderer,
@@ -4916,16 +5016,12 @@ bool stringRgba(
     switch (charRotation) {
       case 0:
         curx += charWidthLocal;
-        break;
       case 2:
         curx -= charWidthLocal;
-        break;
       case 1:
         cury += charHeightLocal;
-        break;
       case 3:
         cury -= charHeightLocal;
-        break;
     }
   }
   return result;
@@ -4943,16 +5039,23 @@ bool stringRgba(
 \returns Interpolated value at position t, value[0] when t<0, value[n-1] when t>n.
 */
 double _evaluateBezier(List<double> data, int ndata, double t) {
-  double mu, result;
-  int n, k, kn, nn, nkn;
-  double blend, muk, munk;
+  double mu;
+  double result;
+  int n;
+  int k;
+  int kn;
+  int nn;
+  int nkn;
+  double blend;
+  double muk;
+  double munk;
 
   /* Sanity check bounds */
   if (t < 0.0) {
-    return (data[0]);
+    return data[0];
   }
   if (t >= ndata.toDouble()) {
-    return (data[ndata - 1]);
+    return data[ndata - 1];
   }
 
   /* Adjust t to the range 0.0 to 1.0 */
@@ -4962,14 +5065,14 @@ double _evaluateBezier(List<double> data, int ndata, double t) {
   n = ndata - 1;
   result = 0.0;
   muk = 1;
-  munk = sdlPow((1 - mu).toDouble(), n.toDouble());
+  munk = sdlPow(1 - mu, n.toDouble());
   for (k = 0; k <= n; k++) {
     nn = n;
     kn = k;
     nkn = n - k;
     blend = muk * munk;
     muk *= mu;
-    munk /= (1 - mu);
+    munk /= 1 - mu;
     while (nn >= 1) {
       blend *= nn;
       nn--;
@@ -5009,7 +5112,7 @@ bool bezierColor(
   int color, {
   int blendMode = SDL_BLENDMODE_BLEND,
 }) {
-  var co = Uint32List.fromList([color]).buffer.asUint8List();
+  final co = Uint32List.fromList([color]).buffer.asUint8List();
   return bezierRgba(
     renderer,
     vx,
@@ -5051,12 +5154,16 @@ bool bezierRgba(
   int a, {
   int blendMode = SDL_BLENDMODE_BLEND,
 }) {
-  bool result = true;
+  var result = true;
   int i;
-  double t, stepsize;
-  List<double> x = [];
-  List<double> y = [];
-  int x1, y1, x2, y2;
+  double t;
+  double stepsize;
+  final x = <double>[];
+  final y = <double>[];
+  int x1;
+  int y1;
+  int x2;
+  int y2;
 
   /*
 	* Sanity check 
@@ -5145,7 +5252,7 @@ bool thickLineColor(
   int color, {
   int blendMode = SDL_BLENDMODE_BLEND,
 }) {
-  var co = Uint32List.fromList([color]).buffer.asUint8List();
+  final co = Uint32List.fromList([color]).buffer.asUint8List();
   return thickLineRgba(
     renderer,
     x1,
@@ -5191,10 +5298,20 @@ bool thickLineRgba(
   int blendMode = SDL_BLENDMODE_BLEND,
 }) {
   int wh;
-  double dx, dy, dx1, dy1, dx2, dy2;
-  double l, wl2, nx, ny, ang, adj;
-  var px = calloc<Int16>(4);
-  var py = calloc<Int16>(4);
+  double dx;
+  double dy;
+  double dx1;
+  double dy1;
+  double dx2;
+  double dy2;
+  double l;
+  double wl2;
+  double nx;
+  double ny;
+  double ang;
+  double adj;
+  final px = calloc<Int16>(4);
+  final py = calloc<Int16>(4);
 
   if (renderer == nullptr) {
     return false;
@@ -5226,20 +5343,20 @@ bool thickLineRgba(
   }
 
   /* Calculate offsets for sides */
-  dx = (x2 - x1).toDouble();
-  dy = (y2 - y1).toDouble();
+  dx = x2 - x1;
+  dy = y2 - y1;
   l = sdlSqrt(dx * dx + dy * dy);
   ang = sdlAtan2(dx, dy);
   adj = 0.1 + 0.9 * sdlFabs(sdlCos(2.0 * ang));
-  wl2 = (width.toDouble() - adj) / (2.0 * l);
+  wl2 = (width - adj) / (2.0 * l);
   nx = dx * wl2;
   ny = dy * wl2;
 
   /* Build polygon */
-  dx1 = x1.toDouble();
-  dy1 = y1.toDouble();
-  dx2 = x2.toDouble();
-  dy2 = y2.toDouble();
+  dx1 = x1;
+  dy1 = y1;
+  dx2 = x2;
+  dy2 = y2;
   px[0] = (dx1 + ny).toInt();
   px[1] = (dx1 - ny).toInt();
   px[2] = (dx2 - ny).toInt();
@@ -5250,7 +5367,7 @@ bool thickLineRgba(
   py[3] = (dy2 - nx).toInt();
 
   /* Draw polygon */
-  var result = filledPolygonRgba(
+  final result = filledPolygonRgba(
     renderer,
     px,
     py,
@@ -5261,8 +5378,9 @@ bool thickLineRgba(
     a,
     blendMode: blendMode,
   );
-  calloc.free(px);
-  calloc.free(py);
+  calloc
+    ..free(px)
+    ..free(py);
 
   return result;
 }

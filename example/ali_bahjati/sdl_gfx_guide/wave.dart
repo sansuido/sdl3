@@ -9,12 +9,12 @@ const gHeight = 400;
 const gMaxN = 2000;
 
 int main() {
-  if (sdlInit(SDL_INIT_VIDEO) == false) {
+  if (!sdlInit(SDL_INIT_VIDEO)) {
     print('SDL_Init Error: ${sdlGetError()}');
     return 1;
   }
   sdlSetHint(SDL_HINT_RENDER_VSYNC, '1');
-  var window = SdlWindowEx.create(
+  final window = SdlWindowEx.create(
     title: 'Wave test',
     w: gWidth,
     h: gHeight,
@@ -25,25 +25,25 @@ int main() {
     sdlQuit();
     return 2;
   }
-  var renderer = window.createRenderer();
+  final renderer = window.createRenderer();
   if (renderer == nullptr) {
     print('SDL_CreateRenderer Error: ${sdlGetError()}');
     window.destroy();
     sdlQuit();
     return 3;
   }
-  double baseX = 100;
-  double baseY = 240;
-  var event = calloc<SdlEvent>();
-  var points = <Point<double>>[];
-  var dx = 3.0;
+  const double baseX = 100;
+  const double baseY = 240;
+  final event = calloc<SdlEvent>();
+  final points = <Point<double>>[];
+  const dx = 3.0;
   var zY = 1 / 10.0;
   var coY = 30;
   var tot = 0;
   var t = 0.0;
   var fun = 5;
   for (var i = 0; i < gMaxN; i++) {
-    points.add(Point(0, 0));
+    points.add(const Point(0, 0));
   }
   var running = true;
   while (running) {
@@ -51,34 +51,26 @@ int main() {
       switch (event.type) {
         case SDL_EVENT_QUIT:
           running = false;
-          break;
         case SDL_EVENT_KEY_DOWN:
           switch (event.key.ref.key) {
             case SDLK_UP:
               coY++;
-              break;
             case SDLK_DOWN:
               coY--;
-              break;
             case SDLK_LEFT:
               zY -= 0.01;
-              break;
             case SDLK_RIGHT:
               zY += 0.01;
-              break;
             case SDLK_Z:
               fun++;
-              break;
             case SDLK_X:
               fun--;
               if (fun == 0) {
                 fun = 1;
               }
-              break;
             default:
               break;
           }
-          break;
         default:
           break;
       }
@@ -90,7 +82,7 @@ int main() {
       points[i] = Point(points[i - 1].x, points[i - 1].y);
     }
     t += zY;
-    points[0] = Point(baseX.toDouble(), baseY + coY * cos(t));
+    points[0] = Point(baseX, baseY + coY * cos(t));
     tot++;
     if (tot > gMaxN) {
       tot--;
@@ -120,7 +112,7 @@ int main() {
     }
     renderer
       ..stringColor(
-        Point(10, 10),
+        const Point(10, 10),
         'coY:$coY zY:$zY fun:$fun',
         SdlColorEx.rgbaToU32(0x00, 0xff, 0x00, 0xff),
       )

@@ -52,8 +52,12 @@ Pointer<SdlSurface> rotateSurface90Degrees(
   Pointer<SdlSurface> src,
   int numClockwiseTurns,
 ) {
-  int row, col, newWidth, newHeight;
-  int bpp, bpr;
+  int row;
+  int col;
+  int newWidth;
+  int newHeight;
+  int bpp;
+  int bpr;
   Pointer<SdlSurface> dst;
   int normalizedClockwiseTurns;
   /* Has to be a valid surface pointer and be a Nbit surface where n is divisible by 8 */
@@ -61,7 +65,7 @@ Pointer<SdlSurface> rotateSurface90Degrees(
     print('NULL source surface');
     return nullptr;
   }
-  var details = sdlGetPixelFormatDetails(src.ref.format);
+  final details = sdlGetPixelFormatDetails(src.ref.format);
   if (details == nullptr) {
     print('NULL source surface format');
     return nullptr;
@@ -73,7 +77,7 @@ Pointer<SdlSurface> rotateSurface90Degrees(
   }
 
   /* normalize numClockwiseTurns */
-  normalizedClockwiseTurns = (numClockwiseTurns % 4);
+  normalizedClockwiseTurns = numClockwiseTurns % 4;
   if (normalizedClockwiseTurns < 0) {
     normalizedClockwiseTurns += 4;
   }
@@ -112,8 +116,8 @@ Pointer<SdlSurface> rotateSurface90Degrees(
   bpp = details.ref.bitsPerPixel ~/ 8;
   //  bpp = src.ref.format.ref.bitsPerPixel ~/ 8;
 
-  Pointer<Pointer<Uint8>> srcBuf = calloc<Pointer<Uint8>>();
-  Pointer<Pointer<Uint8>> dstBuf = calloc<Pointer<Uint8>>();
+  final srcBuf = calloc<Pointer<Uint8>>();
+  final dstBuf = calloc<Pointer<Uint8>>();
 
   print(normalizedClockwiseTurns);
   switch (normalizedClockwiseTurns) {
@@ -124,11 +128,7 @@ Pointer<SdlSurface> rotateSurface90Degrees(
 
         if (src.ref.pitch == dst.ref.pitch) {
           /* If the pitch is the same for both surfaces, the memory can be copied all at once. */
-          sdlMemcpy(
-            dst.ref.pixels,
-            src.ref.pixels,
-            (src.ref.h * src.ref.pitch),
-          );
+          sdlMemcpy(dst.ref.pixels, src.ref.pixels, src.ref.h * src.ref.pitch);
         } else {
           /* If the pitch differs, copy each row separately */
           srcBuf.value = src.ref.pixels.cast<Uint8>();
@@ -141,16 +141,17 @@ Pointer<SdlSurface> rotateSurface90Degrees(
           }
         }
       }
-      break;
 
     /* rotate clockwise */
     case 1: /* rotated 90 degrees clockwise */
       {
         for (row = 0; row < src.ref.h; ++row) {
-          srcBuf.value = src.ref.pixels.cast<Uint8>();
-          srcBuf.value = srcBuf.value + row * src.ref.pitch;
-          dstBuf.value = dst.ref.pixels.cast<Uint8>();
-          dstBuf.value = dstBuf.value + (dst.ref.w - row - 1) * bpp;
+          srcBuf
+            ..value = src.ref.pixels.cast<Uint8>()
+            ..value = srcBuf.value + row * src.ref.pitch;
+          dstBuf
+            ..value = dst.ref.pixels.cast<Uint8>()
+            ..value = dstBuf.value + (dst.ref.w - row - 1) * bpp;
           for (col = 0; col < src.ref.w; ++col) {
             sdlMemcpy(dstBuf.value, srcBuf.value, bpp);
             srcBuf.value = srcBuf.value + bpp;
@@ -158,18 +159,19 @@ Pointer<SdlSurface> rotateSurface90Degrees(
           }
         }
       }
-      break;
 
     case 2: /* rotated 180 degrees clockwise */
       {
         for (row = 0; row < src.ref.h; ++row) {
-          srcBuf.value = src.ref.pixels.cast<Uint8>();
-          srcBuf.value = srcBuf.value + row * src.ref.pitch;
-          dstBuf.value = dst.ref.pixels.cast<Uint8>();
-          dstBuf.value =
-              dstBuf.value +
-              (dst.ref.h - row - 1) * dst.ref.pitch +
-              (dst.ref.w - 1) * bpp;
+          srcBuf
+            ..value = src.ref.pixels.cast<Uint8>()
+            ..value = srcBuf.value + row * src.ref.pitch;
+          dstBuf
+            ..value = dst.ref.pixels.cast<Uint8>()
+            ..value =
+                dstBuf.value +
+                (dst.ref.h - row - 1) * dst.ref.pitch +
+                (dst.ref.w - 1) * bpp;
           for (col = 0; col < src.ref.w; ++col) {
             sdlMemcpy(dstBuf.value, srcBuf.value, bpp);
             srcBuf.value = srcBuf.value + bpp;
@@ -177,16 +179,17 @@ Pointer<SdlSurface> rotateSurface90Degrees(
           }
         }
       }
-      break;
 
     case 3: /* rotated 270 degrees clockwise */
       {
         for (row = 0; row < src.ref.h; ++row) {
-          srcBuf.value = src.ref.pixels.cast<Uint8>();
-          srcBuf.value = srcBuf.value + row * src.ref.pitch;
-          dstBuf.value = dst.ref.pixels.cast<Uint8>();
-          dstBuf.value =
-              dstBuf.value + (row * bpp) + ((dst.ref.h - 1) * dst.ref.pitch);
+          srcBuf
+            ..value = src.ref.pixels.cast<Uint8>()
+            ..value = srcBuf.value + row * src.ref.pitch;
+          dstBuf
+            ..value = dst.ref.pixels.cast<Uint8>()
+            ..value =
+                dstBuf.value + (row * bpp) + ((dst.ref.h - 1) * dst.ref.pitch);
           for (col = 0; col < src.ref.w; ++col) {
             sdlMemcpy(dstBuf.value, srcBuf.value, bpp);
             srcBuf.value = srcBuf.value + bpp;
@@ -194,7 +197,6 @@ Pointer<SdlSurface> rotateSurface90Degrees(
           }
         }
       }
-      break;
   }
   /* end switch */
 
@@ -204,7 +206,8 @@ Pointer<SdlSurface> rotateSurface90Degrees(
   //if (SDL_MUSTLOCK(dst)) {
   sdlUnlockSurface(dst);
   //}
-  calloc.free(srcBuf);
-  calloc.free(dstBuf);
+  calloc
+    ..free(srcBuf)
+    ..free(dstBuf);
   return dst;
 }

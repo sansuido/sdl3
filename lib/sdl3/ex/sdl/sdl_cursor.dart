@@ -1,7 +1,8 @@
 import 'dart:ffi';
+
+import '../../generated/lib_sdl_mouse.dart';
 //import '../../generated/const_sdl.dart';
 import '../../generated/struct_sdl.dart';
-import '../../generated/lib_sdl_mouse.dart';
 
 extension SdlCursorEx on SdlCursor {
   // lib_sdl_mouse.dart
@@ -60,9 +61,7 @@ extension SdlCursorEx on SdlCursor {
     int h,
     int hotX,
     int hotY,
-  ) {
-    return sdlCreateCursor(data, mask, w, h, hotX, hotY);
-  }
+  ) => sdlCreateCursor(data, mask, w, h, hotX, hotY);
 
   ///
   /// Create a color cursor.
@@ -101,9 +100,7 @@ extension SdlCursorEx on SdlCursor {
     Pointer<SdlSurface> surface,
     int hotX,
     int hotY,
-  ) {
-    return sdlCreateColorCursor(surface, hotX, hotY);
-  }
+  ) => sdlCreateColorCursor(surface, hotX, hotY);
 
   ///
   /// Create a system cursor.
@@ -121,9 +118,7 @@ extension SdlCursorEx on SdlCursor {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Cursor * SDLCALL SDL_CreateSystemCursor(SDL_SystemCursor id)
   /// ```
-  static Pointer<SdlCursor> createSystem(int id) {
-    return sdlCreateSystemCursor(id);
-  }
+  static Pointer<SdlCursor> createSystem(int id) => sdlCreateSystemCursor(id);
 
   ///
   /// Get the active cursor.
@@ -142,9 +137,7 @@ extension SdlCursorEx on SdlCursor {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Cursor * SDLCALL SDL_GetCursor(void)
   /// ```
-  static Pointer<SdlCursor> get() {
-    return sdlGetCursor();
-  }
+  static Pointer<SdlCursor> get() => sdlGetCursor();
 
   ///
   /// Get the default cursor.
@@ -162,9 +155,7 @@ extension SdlCursorEx on SdlCursor {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Cursor * SDLCALL SDL_GetDefaultCursor(void)
   /// ```
-  static Pointer<SdlCursor> getDefault() {
-    return sdlGetDefaultCursor();
-  }
+  static Pointer<SdlCursor> getDefault() => sdlGetDefaultCursor();
 
   ///
   /// Show the cursor.
@@ -182,9 +173,7 @@ extension SdlCursorEx on SdlCursor {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_ShowCursor(void)
   /// ```
-  static bool show() {
-    return sdlShowCursor();
-  }
+  static bool show() => sdlShowCursor();
 
   ///
   /// Hide the cursor.
@@ -202,9 +191,7 @@ extension SdlCursorEx on SdlCursor {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_HideCursor(void)
   /// ```
-  static bool hide() {
-    return sdlHideCursor();
-  }
+  static bool hide() => sdlHideCursor();
 }
 
 extension SdlCursorPointerEx on Pointer<SdlCursor> {
@@ -231,9 +218,7 @@ extension SdlCursorPointerEx on Pointer<SdlCursor> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetCursor(SDL_Cursor *cursor)
   /// ```
-  bool set() {
-    return sdlSetCursor(this);
-  }
+  bool set() => sdlSetCursor(this);
 
   ///
   /// Free a previously-created cursor.

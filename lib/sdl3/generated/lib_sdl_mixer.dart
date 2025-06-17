@@ -1,11 +1,14 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
+// ignore_for_file: avoid_positional_boolean_parameters
 import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import '../dylib.dart' as dylib;
 import 'struct_sdl.dart';
 import 'struct_sdl_mixer.dart';
 
-final libSdl3Mixer = dylib.SdlDynamicLibraryService().open('SDL3_mixer');
+final DynamicLibrary libSdl3Mixer = dylib.SdlDynamicLibraryService().open(
+  'SDL3_mixer',
+);
 
 // typedef void (SDLCALL *Mix_MixCallback)(void *udata, Uint8 *stream, int len)
 typedef MixMixCallbackDart =

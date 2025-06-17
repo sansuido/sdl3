@@ -17,14 +17,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.4"
-  lints:
+  halildurmus_lints:
     dependency: "direct dev"
     description:
-      name: lints
-      sha256: a5e2b223cb7c9c8efdc663ef484fdd95bb243bff242ef5b13e26883547fce9a0
+      name: halildurmus_lints
+      sha256: e53fb1a654c2ed5a4e04b024c0b129fa6c86cadfa6d6218ed66fa35c74587af7
       url: "https://pub.dev"
     source: hosted
-    version: "6.0.0"
+    version: "1.0.1"
   meta:
     dependency: transitive
     description:
@@ -34,4 +34,4 @@ packages:
     source: hosted
     version: "1.17.0"
 sdks:
-  dart: ">=3.8.0 <4.0.0"
+  dart: ">=3.8.1 <4.0.0"

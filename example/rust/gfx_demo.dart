@@ -9,12 +9,12 @@ const gScreenWidth = 800;
 const gScreenHeight = 600;
 
 int main() {
-  if (sdlInit(SDL_INIT_VIDEO) == false) {
+  if (!sdlInit(SDL_INIT_VIDEO)) {
     print(sdlGetError());
     return -1;
   }
   sdlSetHint(SDL_HINT_RENDER_VSYNC, '1');
-  var window = SdlWindowEx.create(
+  final window = SdlWindowEx.create(
     title: 'rust-sdl2_gfx: draw line & FPSManager',
     w: gScreenWidth,
     h: gScreenHeight,
@@ -25,44 +25,38 @@ int main() {
     sdlQuit();
     return -1;
   }
-  var renderer = window.createRenderer();
+  final renderer = window.createRenderer();
   if (renderer == nullptr) {
     print(sdlGetError());
     window.destroy();
     sdlQuit();
     return -1;
   }
-  var fpsManager = gfx.FpsManager();
-  var event = calloc<SdlEvent>();
-  List<Point<double>> clickPoints = [];
+  final fpsManager = gfx.FpsManager();
+  final event = calloc<SdlEvent>();
+  final clickPoints = <Point<double>>[];
   var running = true;
   while (running) {
     while (event.poll()) {
       switch (event.type) {
         case SDL_EVENT_QUIT:
           running = false;
-          break;
         case SDL_EVENT_KEY_DOWN:
           switch (event.key.ref.key) {
             case SDLK_ESCAPE:
               running = false;
-              break;
           }
-          break;
         case SDL_EVENT_MOUSE_BUTTON_DOWN:
           switch (event.button.ref.button) {
             case SDL_BUTTON_LEFT:
               clickPoints.add(PointEx.getMousePosition());
-              break;
             case SDL_BUTTON_RIGHT:
               if (clickPoints.isNotEmpty) {
                 clickPoints.removeLast();
               }
-              break;
             default:
               break;
           }
-          break;
         default:
           break;
       }

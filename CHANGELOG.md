@@ -1,3 +1,7 @@
+## 1.6.3
+- SDL3-2025-06-15
+- [changed] Changed to `halildurmus_lints` from `lints`.
+
 ## 1.6.2
 - SDL3-2025-06-08
 

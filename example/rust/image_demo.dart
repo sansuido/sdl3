@@ -4,12 +4,12 @@ import 'package:ffi/ffi.dart';
 import 'package:sdl3/sdl3.dart';
 
 int main() {
-  if (sdlInit(SDL_INIT_VIDEO) == false) {
+  if (!sdlInit(SDL_INIT_VIDEO)) {
     print(sdlGetError());
     return -1;
   }
   sdlSetHint(SDL_HINT_RENDER_VSYNC, '1');
-  var window = SdlWindowEx.create(
+  final window = SdlWindowEx.create(
     title: 'rust-sdl2 demo: Video [usage: drag and drop file.(png|jpg|bmp)]',
     w: 800,
     h: 600,
@@ -21,14 +21,14 @@ int main() {
     return -1;
   }
   sdlSetEventEnabled(SDL_EVENT_DROP_FILE, true);
-  var renderer = window.createRenderer();
+  final renderer = window.createRenderer();
   if (renderer == nullptr) {
     print(sdlGetError());
     window.destroy();
     sdlQuit();
     return -1;
   }
-  var event = calloc<SdlEvent>();
+  final event = calloc<SdlEvent>();
   Pointer<SdlTexture> texture = nullptr;
   var running = true;
   while (running) {
@@ -36,30 +36,27 @@ int main() {
       switch (event.type) {
         case SDL_EVENT_QUIT:
           running = false;
-          break;
         case SDL_EVENT_KEY_DOWN:
           if (event.key.ref.key == SDLK_ESCAPE) {
             running = false;
           }
-          break;
         case SDL_EVENT_DROP_FILE:
-          var data = event.drop.ref.data.cast<Utf8>().toDartString();
+          final data = event.drop.ref.data.cast<Utf8>().toDartString();
           print(data);
-          var loadTexture = renderer.loadTexture(data);
+          final loadTexture = renderer.loadTexture(data);
           if (loadTexture != nullptr) {
             if (texture != nullptr) {
               texture.destroy();
               texture = nullptr;
             }
             texture = loadTexture;
-            var size = loadTexture.getSize();
+            final size = loadTexture.getSize();
             if (size != null) {
               print('X=${size.x} Y=${size.y}');
             }
           } else {
             sdlShowSimpleMessageBox(0, 'imgGetError', imgGetError(), window);
           }
-          break;
         default:
           break;
       }

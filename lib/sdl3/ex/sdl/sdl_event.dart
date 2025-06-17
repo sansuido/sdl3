@@ -1,6 +1,7 @@
 import 'dart:ffi';
-import '../../generated/struct_sdl.dart';
+
 import '../../generated/lib_sdl_events.dart';
+import '../../generated/struct_sdl.dart';
 
 extension SdlEventEx on SdlEvent {
   // lib_sdl_events.dart
@@ -51,9 +52,7 @@ extension SdlEventEx on SdlEvent {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_HasEvent(Uint32 type)
   /// ```
-  static bool have(int type) {
-    return sdlHasEvent(type);
-  }
+  static bool have(int type) => sdlHasEvent(type);
 
   ///
   /// Check for the existence of certain event types in the event queue.
@@ -76,9 +75,7 @@ extension SdlEventEx on SdlEvent {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_HasEvents(Uint32 minType, Uint32 maxType)
   /// ```
-  static bool has(int minType, int maxType) {
-    return sdlHasEvents(minType, maxType);
-  }
+  static bool has(int minType, int maxType) => sdlHasEvents(minType, maxType);
 
   ///
   /// Clear events of a specific type from the event queue.
@@ -196,9 +193,8 @@ extension SdlEventPointerEx on Pointer<SdlEvent> {
   /// ```c
   /// extern SDL_DECLSPEC int SDLCALL SDL_PeepEvents(SDL_Event *events, int numevents, SDL_EventAction action, Uint32 minType, Uint32 maxType)
   /// ```
-  int peeps(int numevents, int action, int minType, int maxType) {
-    return sdlPeepEvents(this, numevents, action, minType, maxType);
-  }
+  int peeps(int numevents, int action, int minType, int maxType) =>
+      sdlPeepEvents(this, numevents, action, minType, maxType);
 
   ///
   /// Poll for currently pending events.
@@ -247,9 +243,7 @@ extension SdlEventPointerEx on Pointer<SdlEvent> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_PollEvent(SDL_Event *event)
   /// ```
-  bool poll() {
-    return sdlPollEvent(this);
-  }
+  bool poll() => sdlPollEvent(this);
 
   ///
   /// Wait indefinitely for the next available event.
@@ -276,9 +270,7 @@ extension SdlEventPointerEx on Pointer<SdlEvent> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_WaitEvent(SDL_Event *event)
   /// ```
-  bool wait() {
-    return sdlWaitEvent(this);
-  }
+  bool wait() => sdlWaitEvent(this);
 
   ///
   /// Wait until the specified timeout (in milliseconds) for the next available
@@ -311,9 +303,7 @@ extension SdlEventPointerEx on Pointer<SdlEvent> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_WaitEventTimeout(SDL_Event *event, Sint32 timeoutMS)
   /// ```
-  bool waitTimeout(int timeout) {
-    return sdlWaitEventTimeout(this, timeout);
-  }
+  bool waitTimeout(int timeout) => sdlWaitEventTimeout(this, timeout);
 
   ///
   /// Add an event to the event queue.
@@ -350,9 +340,7 @@ extension SdlEventPointerEx on Pointer<SdlEvent> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_PushEvent(SDL_Event *event)
   /// ```
-  bool push() {
-    return sdlPushEvent(this);
-  }
+  bool push() => sdlPushEvent(this);
 
   // sdlSetEventFilter
   // sdlGetEventFilter

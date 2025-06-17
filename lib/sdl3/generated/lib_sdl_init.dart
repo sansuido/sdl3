@@ -1,4 +1,5 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
+// ignore_for_file: avoid_positional_boolean_parameters
 import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'lib_sdl.dart';
@@ -318,9 +319,10 @@ bool sdlSetAppMetadata(
         appidentifierPointer,
       ) ==
       1;
-  calloc.free(appnamePointer);
-  calloc.free(appversionPointer);
-  calloc.free(appidentifierPointer);
+  calloc
+    ..free(appnamePointer)
+    ..free(appversionPointer)
+    ..free(appidentifierPointer);
   return result;
 }
 
@@ -398,8 +400,9 @@ bool sdlSetAppMetadataProperty(String? name, String? value) {
   final valuePointer = value != null ? value.toNativeUtf8() : nullptr;
   final result =
       sdlSetAppMetadataPropertyLookupFunction(namePointer, valuePointer) == 1;
-  calloc.free(namePointer);
-  calloc.free(valuePointer);
+  calloc
+    ..free(namePointer)
+    ..free(valuePointer);
   return result;
 }
 

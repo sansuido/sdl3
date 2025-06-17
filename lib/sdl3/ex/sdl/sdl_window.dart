@@ -1,11 +1,14 @@
+// ignore_for_file: avoid_positional_boolean_parameters
+
 import 'dart:ffi';
 import 'dart:math' as math;
+
 import 'package:ffi/ffi.dart';
 
 import '../../generated/lib_sdl.dart';
-import '../../generated/struct_sdl.dart';
 import '../../generated/lib_sdl_render.dart';
 import '../../generated/lib_sdl_video.dart';
+import '../../generated/struct_sdl.dart';
 import '../dart/rectangle.dart';
 import 'sdl_rect.dart';
 
@@ -108,9 +111,7 @@ extension SdlWindowEx on SdlWindow {
     required int w,
     required int h,
     int flags = 0,
-  }) {
-    return sdlCreateWindow(title, w, h, flags);
-  }
+  }) => sdlCreateWindow(title, w, h, flags);
 }
 
 extension SdlWindowPointerEx on Pointer<SdlWindow> {
@@ -137,9 +138,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_WindowID SDLCALL SDL_GetWindowID(SDL_Window *window)
   /// ```
-  int getId() {
-    return sdlGetWindowId(this);
-  }
+  int getId() => sdlGetWindowId(this);
 
   // sdlGetWindowFromId
 
@@ -164,9 +163,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_WindowFlags SDLCALL SDL_GetWindowFlags(SDL_Window *window)
   /// ```
-  int getFlags() {
-    return sdlGetWindowFlags(this);
-  }
+  int getFlags() => sdlGetWindowFlags(this);
 
   ///
   /// Set the title of a window.
@@ -187,9 +184,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowTitle(SDL_Window *window, const char *title)
   /// ```
-  bool setTitle(String title) {
-    return sdlSetWindowTitle(this, title);
-  }
+  bool setTitle(String title) => sdlSetWindowTitle(this, title);
 
   ///
   /// Get the title of a window.
@@ -207,9 +202,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetWindowTitle(SDL_Window *window)
   /// ```
-  String? getTitle() {
-    return sdlGetWindowTitle(this);
-  }
+  String? getTitle() => sdlGetWindowTitle(this);
 
   ///
   /// Set the icon for a window.
@@ -239,9 +232,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowIcon(SDL_Window *window, SDL_Surface *icon)
   /// ```
-  bool setIcon(Pointer<SdlSurface> icon) {
-    return sdlSetWindowIcon(this, icon);
-  }
+  bool setIcon(Pointer<SdlSurface> icon) => sdlSetWindowIcon(this, icon);
 
   ///
   /// Request that the window's position be set.
@@ -285,9 +276,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowPosition(SDL_Window *window, int x, int y)
   /// ```
-  bool setPosition(int x, int y) {
-    return sdlSetWindowPosition(this, x, y);
-  }
+  bool setPosition(int x, int y) => sdlSetWindowPosition(this, x, y);
 
   ///
   /// Get the position of a window.
@@ -316,12 +305,13 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowPosition(SDL_Window *window, int *x, int *y)
   /// ```
   math.Point<double> getPosition() {
-    var x = calloc<Int32>();
-    var y = calloc<Int32>();
+    final x = calloc<Int32>();
+    final y = calloc<Int32>();
     sdlGetWindowPosition(this, x, y);
-    var result = math.Point<double>(x.value.toDouble(), y.value.toDouble());
-    calloc.free(x);
-    calloc.free(y);
+    final result = math.Point<double>(x.value.toDouble(), y.value.toDouble());
+    calloc
+      ..free(x)
+      ..free(y);
     return result;
   }
 
@@ -363,9 +353,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowSize(SDL_Window *window, int w, int h)
   /// ```
-  bool setSize(int w, int h) {
-    return sdlSetWindowSize(this, w, h);
-  }
+  bool setSize(int w, int h) => sdlSetWindowSize(this, w, h);
 
   ///
   /// Get the size of a window's client area.
@@ -392,12 +380,13 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowSize(SDL_Window *window, int *w, int *h)
   /// ```
   math.Point<double> getSize() {
-    var w = calloc<Int32>();
-    var h = calloc<Int32>();
+    final w = calloc<Int32>();
+    final h = calloc<Int32>();
     sdlGetWindowSize(this, w, h);
-    var result = math.Point<double>(w.value.toDouble(), h.value.toDouble());
-    calloc.free(w);
-    calloc.free(h);
+    final result = math.Point<double>(w.value.toDouble(), h.value.toDouble());
+    calloc
+      ..free(w)
+      ..free(h);
     return result;
   }
 
@@ -440,21 +429,22 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowBordersSize(SDL_Window *window, int *top, int *left, int *bottom, int *right)
   /// ```
   math.Rectangle<double> getBordersSize() {
-    var top = calloc<Int32>();
-    var left = calloc<Int32>();
-    var bottom = calloc<Int32>();
-    var right = calloc<Int32>();
+    final top = calloc<Int32>();
+    final left = calloc<Int32>();
+    final bottom = calloc<Int32>();
+    final right = calloc<Int32>();
     sdlGetWindowBordersSize(this, top, left, bottom, right);
-    var result = math.Rectangle<double>(
+    final result = math.Rectangle<double>(
       top.value.toDouble(),
       left.value.toDouble(),
       bottom.value.toDouble(),
       right.value.toDouble(),
     );
-    calloc.free(top);
-    calloc.free(left);
-    calloc.free(bottom);
-    calloc.free(right);
+    calloc
+      ..free(top)
+      ..free(left)
+      ..free(bottom)
+      ..free(right);
     return result;
   }
 
@@ -480,12 +470,13 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowSizeInPixels(SDL_Window *window, int *w, int *h)
   /// ```
   math.Point<double> getSizeInPixels() {
-    var w = calloc<Int32>();
-    var h = calloc<Int32>();
+    final w = calloc<Int32>();
+    final h = calloc<Int32>();
     sdlGetWindowSizeInPixels(this, w, h);
-    var result = math.Point<double>(w.value.toDouble(), h.value.toDouble());
-    calloc.free(w);
-    calloc.free(h);
+    final result = math.Point<double>(w.value.toDouble(), h.value.toDouble());
+    calloc
+      ..free(w)
+      ..free(h);
     return result;
   }
 
@@ -508,9 +499,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowMinimumSize(SDL_Window *window, int min_w, int min_h)
   /// ```
-  bool setMinimumSize(int w, int h) {
-    return sdlSetWindowMinimumSize(this, w, h);
-  }
+  bool setMinimumSize(int w, int h) => sdlSetWindowMinimumSize(this, w, h);
 
   ///
   /// Get the minimum size of a window's client area.
@@ -534,12 +523,13 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowMinimumSize(SDL_Window *window, int *w, int *h)
   /// ```
   math.Point<double> getMinimumSize() {
-    var w = calloc<Int32>();
-    var h = calloc<Int32>();
+    final w = calloc<Int32>();
+    final h = calloc<Int32>();
     sdlGetWindowMinimumSize(this, w, h);
-    var result = math.Point<double>(w.value.toDouble(), h.value.toDouble());
-    calloc.free(w);
-    calloc.free(h);
+    final result = math.Point<double>(w.value.toDouble(), h.value.toDouble());
+    calloc
+      ..free(w)
+      ..free(h);
     return result;
   }
 
@@ -562,9 +552,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowMaximumSize(SDL_Window *window, int max_w, int max_h)
   /// ```
-  bool setMaximumSize(int w, int h) {
-    return sdlSetWindowMaximumSize(this, w, h);
-  }
+  bool setMaximumSize(int w, int h) => sdlSetWindowMaximumSize(this, w, h);
 
   ///
   /// Get the maximum size of a window's client area.
@@ -588,12 +576,13 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowMaximumSize(SDL_Window *window, int *w, int *h)
   /// ```
   math.Point<double> getMaximumSize() {
-    var w = calloc<Int32>();
-    var h = calloc<Int32>();
+    final w = calloc<Int32>();
+    final h = calloc<Int32>();
     sdlGetWindowMaximumSize(this, w, h);
-    var result = math.Point<double>(w.value.toDouble(), h.value.toDouble());
-    calloc.free(w);
-    calloc.free(h);
+    final result = math.Point<double>(w.value.toDouble(), h.value.toDouble());
+    calloc
+      ..free(w)
+      ..free(h);
     return result;
   }
 
@@ -620,9 +609,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowBordered(SDL_Window *window, bool bordered)
   /// ```
-  bool setBordered(bool bordered) {
-    return sdlSetWindowBordered(this, bordered);
-  }
+  bool setBordered(bool bordered) => sdlSetWindowBordered(this, bordered);
 
   ///
   /// Set the user-resizable state of a window.
@@ -647,9 +634,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowResizable(SDL_Window *window, bool resizable)
   /// ```
-  bool setResizable(bool resizable) {
-    return sdlSetWindowResizable(this, resizable);
-  }
+  bool setResizable(bool resizable) => sdlSetWindowResizable(this, resizable);
 
   ///
   /// Set the window to always be above the others.
@@ -671,9 +656,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowAlwaysOnTop(SDL_Window *window, bool on_top)
   /// ```
-  bool setAlwaysOnTop(bool onTop) {
-    return sdlSetWindowAlwaysOnTop(this, onTop);
-  }
+  bool setAlwaysOnTop(bool onTop) => sdlSetWindowAlwaysOnTop(this, onTop);
 
   ///
   /// Show a window.
@@ -692,9 +675,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_ShowWindow(SDL_Window *window)
   /// ```
-  bool show() {
-    return sdlShowWindow(this);
-  }
+  bool show() => sdlShowWindow(this);
 
   ///
   /// Hide a window.
@@ -713,9 +694,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_HideWindow(SDL_Window *window)
   /// ```
-  bool hide() {
-    return sdlHideWindow(this);
-  }
+  bool hide() => sdlHideWindow(this);
 
   ///
   /// Request that a window be raised above other windows and gain the input
@@ -738,9 +717,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_RaiseWindow(SDL_Window *window)
   /// ```
-  bool raise() {
-    return sdlRaiseWindow(this);
-  }
+  bool raise() => sdlRaiseWindow(this);
 
   ///
   /// Request that the window be made as large as possible.
@@ -777,9 +754,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_MaximizeWindow(SDL_Window *window)
   /// ```
-  bool maximize() {
-    return sdlMaximizeWindow(this);
-  }
+  bool maximize() => sdlMaximizeWindow(this);
 
   ///
   /// Request that the window be minimized to an iconic representation.
@@ -811,9 +786,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_MinimizeWindow(SDL_Window *window)
   /// ```
-  bool minimize() {
-    return sdlMinimizeWindow(this);
-  }
+  bool minimize() => sdlMinimizeWindow(this);
 
   ///
   /// Request that the size and position of a minimized or maximized window be
@@ -846,9 +819,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_RestoreWindow(SDL_Window *window)
   /// ```
-  bool restore() {
-    return sdlRestoreWindow(this);
-  }
+  bool restore() => sdlRestoreWindow(this);
 
   ///
   /// Get the SDL surface associated with the window.
@@ -880,9 +851,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Surface * SDLCALL SDL_GetWindowSurface(SDL_Window *window)
   /// ```
-  Pointer<SdlSurface> getSurface() {
-    return sdlGetWindowSurface(this);
-  }
+  Pointer<SdlSurface> getSurface() => sdlGetWindowSurface(this);
 
   ///
   /// Copy the window surface to the screen.
@@ -906,9 +875,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_UpdateWindowSurface(SDL_Window *window)
   /// ```
-  bool updateSurface() {
-    return sdlUpdateWindowSurface(this);
-  }
+  bool updateSurface() => sdlUpdateWindowSurface(this);
 
   ///
   /// Copy areas of the window surface to the screen.
@@ -941,8 +908,12 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// extern SDL_DECLSPEC bool SDLCALL SDL_UpdateWindowSurfaceRects(SDL_Window *window, const SDL_Rect *rects, int numrects)
   /// ```
   bool updateSurfaceRects(List<math.Rectangle<double>> rects) {
-    var rectsPointer = rects.callocInt();
-    var result = sdlUpdateWindowSurfaceRects(this, rectsPointer, rects.length);
+    final rectsPointer = rects.callocInt();
+    final result = sdlUpdateWindowSurfaceRects(
+      this,
+      rectsPointer,
+      rects.length,
+    );
     calloc.free(rectsPointer);
     return result;
   }
@@ -981,9 +952,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowKeyboardGrab(SDL_Window *window, bool grabbed)
   /// ```
-  bool setKeyboardGrab(bool grabbed) {
-    return sdlSetWindowKeyboardGrab(this, grabbed);
-  }
+  bool setKeyboardGrab(bool grabbed) => sdlSetWindowKeyboardGrab(this, grabbed);
 
   ///
   /// Set a window's mouse grab mode.
@@ -1006,9 +975,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowMouseGrab(SDL_Window *window, bool grabbed)
   /// ```
-  bool setMouseGrab(bool grabbed) {
-    return sdlSetWindowMouseGrab(this, grabbed);
-  }
+  bool setMouseGrab(bool grabbed) => sdlSetWindowMouseGrab(this, grabbed);
 
   ///
   /// Get a window's keyboard grab mode.
@@ -1025,9 +992,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowKeyboardGrab(SDL_Window *window)
   /// ```
-  bool getKeyboardGrab() {
-    return sdlGetWindowKeyboardGrab(this);
-  }
+  bool getKeyboardGrab() => sdlGetWindowKeyboardGrab(this);
 
   ///
   /// Get a window's mouse grab mode.
@@ -1047,9 +1012,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowMouseGrab(SDL_Window *window)
   /// ```
-  bool getMouseGrab() {
-    return sdlGetWindowMouseGrab(this);
-  }
+  bool getMouseGrab() => sdlGetWindowMouseGrab(this);
 
   // sdlGetGrabbedWindow
 
@@ -1077,8 +1040,8 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowMouseRect(SDL_Window *window, const SDL_Rect *rect)
   /// ```
   bool setMouseRect(math.Rectangle<double> rect) {
-    var rectPointer = rect.callocInt();
-    var result = sdlSetWindowMouseRect(this, rectPointer);
+    final rectPointer = rect.callocInt();
+    final result = sdlSetWindowMouseRect(this, rectPointer);
     calloc.free(rectPointer);
     return result;
   }
@@ -1103,7 +1066,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```
   math.Rectangle<double>? getMouseRect() {
     math.Rectangle<double>? result;
-    var rectPointer = sdlGetWindowMouseRect(this);
+    final rectPointer = sdlGetWindowMouseRect(this);
     if (rectPointer != nullptr) {
       result = rectPointer.create();
     }
@@ -1132,9 +1095,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowOpacity(SDL_Window *window, float opacity)
   /// ```
-  bool setOpacity(double opacity) {
-    return sdlSetWindowOpacity(this, opacity);
-  }
+  bool setOpacity(double opacity) => sdlSetWindowOpacity(this, opacity);
 
   ///
   /// Get the opacity of a window.
@@ -1155,9 +1116,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC float SDLCALL SDL_GetWindowOpacity(SDL_Window *window)
   /// ```
-  double? getOpacity() {
-    return sdlGetWindowOpacity(this);
-  }
+  double? getOpacity() => sdlGetWindowOpacity(this);
 
   ///
   /// Set the window as a child of a parent window.
@@ -1194,9 +1153,8 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowParent(SDL_Window *window, SDL_Window *parent)
   /// ```
-  bool setWindowParent(Pointer<SdlWindow> parent) {
-    return sdlSetWindowParent(this, parent);
-  }
+  bool setWindowParent(Pointer<SdlWindow> parent) =>
+      sdlSetWindowParent(this, parent);
 
   ///
   /// Toggle the state of the window as modal.
@@ -1219,9 +1177,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowModal(SDL_Window *window, bool modal)
   /// ```
-  bool setWindowModal(bool modal) {
-    return sdlSetWindowModal(this, modal);
-  }
+  bool setWindowModal(bool modal) => sdlSetWindowModal(this, modal);
 
   ///
   /// Set whether the window may have input focus.
@@ -1238,9 +1194,8 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowFocusable(SDL_Window *window, bool focusable)
   /// ```
-  bool setWindowFocasable(bool focusable) {
-    return sdlSetWindowFocusable(this, focusable);
-  }
+  bool setWindowFocasable(bool focusable) =>
+      sdlSetWindowFocusable(this, focusable);
 
   ///
   /// Display the system-level window menu.
@@ -1268,9 +1223,8 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_ShowWindowSystemMenu(SDL_Window *window, int x, int y)
   /// ```
-  bool showWindowSystemMenu(int x, int y) {
-    return sdlShowWindowSystemMenu(this, x, y);
-  }
+  bool showWindowSystemMenu(int x, int y) =>
+      sdlShowWindowSystemMenu(this, x, y);
 
   // sdlSetWindowGammaRamp
   // sdlGetWindowGammaRamp
@@ -1323,9 +1277,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   bool setHitTest(
     Pointer<NativeFunction<SdlHitTest>> callback,
     Pointer<NativeType> callbackData,
-  ) {
-    return sdlSetWindowHitTest(this, callback, callbackData);
-  }
+  ) => sdlSetWindowHitTest(this, callback, callbackData);
 
   ///
   /// Request a window to demand attention from the user.
@@ -1342,9 +1294,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_FlashWindow(SDL_Window *window, SDL_FlashOperation operation)
   /// ```
-  bool flash(int operation) {
-    return sdlFlashWindow(this, operation);
-  }
+  bool flash(int operation) => sdlFlashWindow(this, operation);
 
   ///
   /// Destroy a window.
@@ -1402,9 +1352,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_GLContext SDLCALL SDL_GL_CreateContext(SDL_Window *window)
   /// ```
-  Pointer<SdlGlContext> glCreateContext() {
-    return sdlGlCreateContext(this);
-  }
+  Pointer<SdlGlContext> glCreateContext() => sdlGlCreateContext(this);
 
   ///
   /// Get the display associated with a window.
@@ -1424,9 +1372,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_DisplayID SDLCALL SDL_GetDisplayForWindow(SDL_Window *window)
   /// ```
-  int getDisplayFor() {
-    return sdlGetDisplayForWindow(this);
-  }
+  int getDisplayFor() => sdlGetDisplayForWindow(this);
 
   // lib_sdl_renderer.dart
 
@@ -1466,9 +1412,8 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Renderer * SDLCALL SDL_CreateRenderer(SDL_Window *window, const char *name)
   /// ```
-  Pointer<SdlRenderer> createRenderer({String? name}) {
-    return sdlCreateRenderer(this, name);
-  }
+  Pointer<SdlRenderer> createRenderer({String? name}) =>
+      sdlCreateRenderer(this, name);
 
   ///
   /// Get the renderer associated with a window.
@@ -1484,7 +1429,5 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Renderer * SDLCALL SDL_GetRenderer(SDL_Window *window)
   /// ```
-  Pointer<SdlRenderer> getRenderer() {
-    return sdlGetRenderer(this);
-  }
+  Pointer<SdlRenderer> getRenderer() => sdlGetRenderer(this);
 }

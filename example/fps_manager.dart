@@ -12,12 +12,12 @@ void setTitle(Pointer<SdlWindow> window, gfx.FpsManager fpsManager) {
 }
 
 int main() {
-  if (sdlInit(SDL_INIT_VIDEO) == false) {
+  if (!sdlInit(SDL_INIT_VIDEO)) {
     print(sdlGetError());
     return -1;
   }
   sdlSetHint(SDL_HINT_RENDER_VSYNC, '1');
-  var window = SdlWindowEx.create(
+  final window = SdlWindowEx.create(
     title: '',
     w: gWindowWidth,
     h: gWindowHeight,
@@ -28,16 +28,16 @@ int main() {
     sdlQuit();
     return -1;
   }
-  var renderer = window.createRenderer();
+  final renderer = window.createRenderer();
   if (renderer == nullptr) {
     print(sdlGetError());
     window.destroy();
     sdlQuit();
     return -1;
   }
-  var fpsManager = gfx.FpsManager();
+  final fpsManager = gfx.FpsManager();
   setTitle(window, fpsManager);
-  var event = calloc<SdlEvent>();
+  final event = calloc<SdlEvent>();
   var time = sdlGetTicks();
   var frameRate = 0;
   var frameCount = 0;
@@ -47,21 +47,17 @@ int main() {
       switch (event.type) {
         case SDL_EVENT_QUIT:
           running = false;
-          break;
         case SDL_EVENT_KEY_DOWN:
           switch (event.key.ref.key) {
             case SDLK_UP:
               fpsManager.setFramerate(fpsManager.getFramerate() + 1);
               setTitle(window, fpsManager);
-              break;
             case SDLK_DOWN:
               fpsManager.setFramerate(fpsManager.getFramerate() - 1);
               setTitle(window, fpsManager);
-              break;
             default:
               break;
           }
-          break;
         default:
           break;
       }
@@ -78,7 +74,7 @@ int main() {
       ..setDrawColor(0, 0, 0, 0)
       ..clear()
       ..stringColor(
-        Point(15, 15),
+        const Point(15, 15),
         'FPS:$frameRate',
         SdlColorEx.rgbaToU32(0, 255, 0, 255),
       )

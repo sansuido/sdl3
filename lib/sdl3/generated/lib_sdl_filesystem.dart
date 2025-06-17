@@ -123,8 +123,9 @@ Pointer<Int8> sdlGetPrefPath(String? org, String? app) {
   final orgPointer = org != null ? org.toNativeUtf8() : nullptr;
   final appPointer = app != null ? app.toNativeUtf8() : nullptr;
   final result = sdlGetPrefPathLookupFunction(orgPointer, appPointer);
-  calloc.free(orgPointer);
-  calloc.free(appPointer);
+  calloc
+    ..free(orgPointer)
+    ..free(appPointer);
   return result;
 }
 
@@ -306,8 +307,9 @@ bool sdlRenamePath(String? oldpath, String? newpath) {
   final newpathPointer = newpath != null ? newpath.toNativeUtf8() : nullptr;
   final result =
       sdlRenamePathLookupFunction(oldpathPointer, newpathPointer) == 1;
-  calloc.free(oldpathPointer);
-  calloc.free(newpathPointer);
+  calloc
+    ..free(oldpathPointer)
+    ..free(newpathPointer);
   return result;
 }
 
@@ -361,8 +363,9 @@ bool sdlCopyFile(String? oldpath, String? newpath) {
   final oldpathPointer = oldpath != null ? oldpath.toNativeUtf8() : nullptr;
   final newpathPointer = newpath != null ? newpath.toNativeUtf8() : nullptr;
   final result = sdlCopyFileLookupFunction(oldpathPointer, newpathPointer) == 1;
-  calloc.free(oldpathPointer);
-  calloc.free(newpathPointer);
+  calloc
+    ..free(oldpathPointer)
+    ..free(newpathPointer);
   return result;
 }
 
@@ -455,8 +458,9 @@ Pointer<Pointer<Int8>> sdlGlobDirectory(
     flags,
     count,
   );
-  calloc.free(pathPointer);
-  calloc.free(patternPointer);
+  calloc
+    ..free(pathPointer)
+    ..free(patternPointer);
   return result;
 }
 

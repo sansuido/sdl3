@@ -24,7 +24,7 @@ var gMapData = [
 ];
 
 bool init() {
-  if (sdlInit(SDL_INIT_VIDEO) == false) {
+  if (!sdlInit(SDL_INIT_VIDEO)) {
     print(sdlGetError());
     return false;
   }
@@ -54,12 +54,11 @@ void close() {
 
 bool handleEvents() {
   var quit = false;
-  var event = calloc<SdlEvent>();
+  final event = calloc<SdlEvent>();
   while (event.poll()) {
     switch (event.type) {
       case SDL_EVENT_QUIT:
         quit = true;
-        break;
       default:
         break;
     }
@@ -72,10 +71,10 @@ void render() {
   // init
   gRenderer
     ..setDrawColor(0xff, 0xff, 0xff, SDL_ALPHA_OPAQUE)
-    ..clear();
-  // map
-  gRenderer.setDrawColor(0xff, 0x00, 0x00, SDL_ALPHA_OPAQUE);
-  var rects = <Rectangle<double>>[];
+    ..clear()
+    // map
+    ..setDrawColor(0xff, 0x00, 0x00, SDL_ALPHA_OPAQUE);
+  final rects = <Rectangle<double>>[];
   for (var y = 0; y < gMapData.length; y++) {
     for (var x = 0; x < gMapData[y].length; x++) {
       if (gMapData[y][x] != 0) {

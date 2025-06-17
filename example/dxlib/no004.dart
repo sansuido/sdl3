@@ -10,16 +10,18 @@ const gTitle = 'DXLIB Tutorial 04';
 const gScreenWidth = 640;
 const gScreenHeight = 480;
 const gMapSize = 64;
-const gMoveFrame = 32 ~/ 4;
+const int gMoveFrame = 32 ~/ 4;
 
 Pointer<SdlWindow> gWindow = nullptr;
 Pointer<SdlRenderer> gRenderer = nullptr;
 var gPlayerX = 2;
 var gPlayerY = 2;
-var gMoveX = 0, gMoveY = 0;
+var gMoveX = 0;
+var gMoveY = 0;
 var gMove = 0;
 var gMoveCounter = 0;
-double gScrollX = 0, gScrollY = 0;
+double gScrollX = 0;
+double gScrollY = 0;
 var gMapData = [
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
@@ -40,7 +42,7 @@ var gMapData = [
 ];
 
 bool init() {
-  if (sdlInit(SDL_INIT_VIDEO) == false) {
+  if (!sdlInit(SDL_INIT_VIDEO)) {
     print(sdlGetError());
     return false;
   }
@@ -70,7 +72,7 @@ void close() {
 
 void update() {
   if (gMove == 0) {
-    var keys = sdlGetKeyboardState(nullptr);
+    final keys = sdlGetKeyboardState(nullptr);
     if (keys[SDL_SCANCODE_UP] != 0) {
       gMove = 1;
       gMoveX = 0;
@@ -118,12 +120,11 @@ void update() {
 
 bool handleEvents() {
   var quit = false;
-  var event = calloc<SdlEvent>();
+  final event = calloc<SdlEvent>();
   while (event.poll()) {
     switch (event.type) {
       case SDL_EVENT_QUIT:
         quit = true;
-        break;
       default:
         break;
     }
@@ -134,10 +135,10 @@ bool handleEvents() {
 
 void render() {
   // calc
-  var drawMapChipNumX = gScreenWidth ~/ gMapSize + 1;
-  var drawMapChipNumY = gScreenHeight ~/ gMapSize + 1;
-  var mapDrawPointX = gPlayerX - drawMapChipNumX ~/ 2;
-  var mapDrawPointY = gPlayerY - drawMapChipNumY ~/ 2;
+  const drawMapChipNumX = gScreenWidth ~/ gMapSize + 1;
+  const drawMapChipNumY = gScreenHeight ~/ gMapSize + 1;
+  final mapDrawPointX = gPlayerX - drawMapChipNumX ~/ 2;
+  final mapDrawPointY = gPlayerY - drawMapChipNumY ~/ 2;
   // init
   gRenderer
     ..setDrawColor(0x00, 0x00, 0x00, SDL_ALPHA_OPAQUE)
@@ -145,12 +146,12 @@ void render() {
     // map
     ..setDrawColor(0xff, 0x00, 0x00, SDL_ALPHA_OPAQUE);
   for (var y = 0; y < gMapData.length; y++) {
-    var drawY = y + mapDrawPointY;
+    final drawY = y + mapDrawPointY;
     if (drawY < 0 || drawY >= gMapData.length) {
       continue;
     }
     for (var x = 0; x < gMapData[y].length; x++) {
-      var drawX = x + mapDrawPointX;
+      final drawX = x + mapDrawPointX;
       if (drawX < 0 || drawX >= gMapData[y].length) {
         continue;
       }

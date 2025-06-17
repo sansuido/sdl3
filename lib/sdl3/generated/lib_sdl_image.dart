@@ -1,11 +1,14 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
+// ignore_for_file: avoid_positional_boolean_parameters
 import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import '../dylib.dart' as dylib;
 import 'struct_sdl.dart';
 import 'struct_sdl_image.dart';
 
-final libSdl3Image = dylib.SdlDynamicLibraryService().open('SDL3_image');
+final DynamicLibrary libSdl3Image = dylib.SdlDynamicLibraryService().open(
+  'SDL3_image',
+);
 
 ///
 /// This function gets the version of the dynamically linked SDL_image library.

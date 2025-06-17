@@ -4,22 +4,21 @@ import 'package:ffi/ffi.dart';
 import 'package:sdl3/sdl3.dart';
 
 int main() {
-  if (sdlInit(SDL_INIT_VIDEO) == true) {
+  if (sdlInit(SDL_INIT_VIDEO)) {
     sdlSetHint(SDL_HINT_RENDER_VSYNC, '1');
-    var window = calloc<Pointer<SdlWindow>>();
-    var renderer = calloc<Pointer<SdlRenderer>>();
+    final window = calloc<Pointer<SdlWindow>>();
+    final renderer = calloc<Pointer<SdlRenderer>>();
     if (sdlCreateWindowAndRenderer(
-          'Draw Line',
-          640,
-          480,
-          0,
-          window,
-          renderer,
-        ) ==
-        true) {
+      'Draw Line',
+      640,
+      480,
+      0,
+      window,
+      renderer,
+    )) {
       var done = true;
       while (done) {
-        var event = calloc<SdlEvent>();
+        final event = calloc<SdlEvent>();
         sdlSetRenderDrawColor(renderer.value, 0, 0, 0, SDL_ALPHA_OPAQUE);
         sdlRenderClear(renderer.value);
         sdlSetRenderDrawColor(renderer.value, 255, 255, 255, SDL_ALPHA_OPAQUE);
@@ -37,8 +36,9 @@ int main() {
       sdlDestroyRenderer(renderer.value);
       sdlDestroyWindow(window.value);
     } else {}
-    calloc.free(window);
-    calloc.free(renderer);
+    calloc
+      ..free(window)
+      ..free(renderer);
     sdlQuit();
   }
   return 0;

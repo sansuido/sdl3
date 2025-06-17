@@ -1,4 +1,5 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
+// ignore_for_file: avoid_positional_boolean_parameters
 import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'lib_sdl.dart';
@@ -1721,7 +1722,7 @@ bool sdlFillSurfaceRects(
 /// The blit semantics for surfaces with and without blending and colorkey are
 /// defined as follows:
 ///
-/// ```
+/// ===
 /// RGBA->RGB:
 /// Source surface blend mode set to SDL_BLENDMODE_BLEND:
 /// alpha-blend (using the source alpha-channel and per-surface alpha)
@@ -1759,7 +1760,7 @@ bool sdlFillSurfaceRects(
 /// both:
 /// if SDL_SRCCOLORKEY set, only copy the pixels that do not match the
 /// source color key.
-/// ```
+/// ===
 ///
 /// \param src the SDL_Surface structure to be copied from.
 /// \param srcrect the SDL_Rect structure representing the rectangle to be

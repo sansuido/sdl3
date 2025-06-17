@@ -17,7 +17,7 @@ import 'package:ffi/ffi.dart';
 import 'package:sdl3/sdl3.dart';
 
 int myEventFilter(Pointer<NativeType> bluePrev, Pointer<SdlEvent> event) {
-  var blue = bluePrev.cast<Uint8>();
+  final blue = bluePrev.cast<Uint8>();
   switch (event.type) {
     case SDL_EVENT_KEY_DOWN:
       switch (event.key.ref.key) {
@@ -27,42 +27,39 @@ int myEventFilter(Pointer<NativeType> bluePrev, Pointer<SdlEvent> event) {
           } else {
             blue.value = 0;
           }
-          break;
       }
-      break;
   }
   return 1;
 }
 
 int main() {
-  if (sdlInit(SDL_INIT_VIDEO) == false) {
+  if (!sdlInit(SDL_INIT_VIDEO)) {
     print(sdlGetError());
     return -1;
   }
   sdlSetHint(SDL_HINT_RENDER_VSYNC, '1');
-  var window = SdlWindowEx.create(title: 'Hello SDL', w: 640, h: 480);
+  final window = SdlWindowEx.create(title: 'Hello SDL', w: 640, h: 480);
   if (window == nullptr) {
     print(sdlGetError());
     sdlQuit();
     return -1;
   }
-  var renderer = window.createRenderer();
+  final renderer = window.createRenderer();
   if (renderer == nullptr) {
     print(sdlGetError());
     window.destroy();
     sdlQuit();
     return -1;
   }
-  var blue = calloc<Uint8>();
+  final blue = calloc<Uint8>();
   sdlSetEventFilter(Pointer.fromFunction(myEventFilter, 0), blue);
-  var event = calloc<SdlEvent>();
+  final event = calloc<SdlEvent>();
   var quit = false;
   while (!quit) {
     while (event.poll()) {
       switch (event.type) {
         case SDL_EVENT_QUIT:
           quit = true;
-          break;
         default:
           break;
       }

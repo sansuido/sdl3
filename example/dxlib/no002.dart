@@ -19,7 +19,7 @@ double gPlayerY = (gScreenHeight - gPlayerHeight) / 2;
 var gJumpPower = 0;
 
 bool init() {
-  if (sdlInit(SDL_INIT_VIDEO) == false) {
+  if (!sdlInit(SDL_INIT_VIDEO)) {
     print(sdlGetError());
     return false;
   }
@@ -48,7 +48,7 @@ void close() {
 }
 
 void update() {
-  var keys = sdlGetKeyboardState(nullptr);
+  final keys = sdlGetKeyboardState(nullptr);
   if (keys[SDL_SCANCODE_UP] != 0) {
     gPlayerY -= gPlayerHeight ~/ 4;
   }
@@ -76,12 +76,11 @@ void update() {
 
 bool handleEvents() {
   var quit = false;
-  var event = calloc<SdlEvent>();
+  final event = calloc<SdlEvent>();
   while (event.poll()) {
     switch (event.type) {
       case SDL_EVENT_QUIT:
         quit = true;
-        break;
       default:
         break;
     }

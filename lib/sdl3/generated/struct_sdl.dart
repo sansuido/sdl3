@@ -3025,7 +3025,7 @@ final class SdlMessageBoxColorScheme extends Struct {
 extension SdlMessageBoxColorSchemeExtension
     on Pointer<SdlMessageBoxColorScheme> {
   List<SdlMessageBoxColor> get colors {
-    var list = <SdlMessageBoxColor>[];
+    final list = <SdlMessageBoxColor>[];
     for (var i = 0; i < 5; i++) {
       list.add((cast<Uint8>() + 0 + i * 8).cast<SdlMessageBoxColor>().ref);
     }

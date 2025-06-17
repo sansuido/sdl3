@@ -1,8 +1,12 @@
+// ignore_for_file: avoid_positional_boolean_parameters
+
 import 'dart:ffi';
+
 import 'package:ffi/ffi.dart';
+
+import '../../generated/lib_sdl_ttf.dart';
 import '../../generated/struct_sdl.dart';
 import '../../generated/struct_sdl_ttf.dart';
-import '../../generated/lib_sdl_ttf.dart';
 
 extension TtfFontEx on TtfFont {
   // lib_sdl_ttf.dart
@@ -19,9 +23,7 @@ extension TtfFontEx on TtfFont {
   /// ```c
   /// extern SDL_DECLSPEC int SDLCALL TTF_Version(void)
   /// ```
-  static int version() {
-    return ttfVersion();
-  }
+  static int version() => ttfVersion();
 
   ///
   /// Query the version of the FreeType library in use.
@@ -69,9 +71,7 @@ extension TtfFontEx on TtfFont {
     Pointer<Int32> major,
     Pointer<Int32> minor,
     Pointer<Int32> patch,
-  ) {
-    return ttfGetHarfBuzzVersion(major, minor, patch);
-  }
+  ) => ttfGetHarfBuzzVersion(major, minor, patch);
 
   ///
   /// Initialize SDL_ttf.
@@ -92,9 +92,7 @@ extension TtfFontEx on TtfFont {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL TTF_Init(void)
   /// ```
-  static bool init() {
-    return ttfInit();
-  }
+  static bool init() => ttfInit();
 
   ///
   /// Create a font from a file, using a specified point size.
@@ -119,9 +117,8 @@ extension TtfFontEx on TtfFont {
   /// ```c
   /// extern SDL_DECLSPEC TTF_Font * SDLCALL TTF_OpenFont(const char *file, float ptsize)
   /// ```
-  static Pointer<TtfFont> open(String file, double ptsize) {
-    return ttfOpenFont(file, ptsize);
-  }
+  static Pointer<TtfFont> open(String file, double ptsize) =>
+      ttfOpenFont(file, ptsize);
 
   ///
   /// Create a font from an SDL_IOStream, using a specified point size.
@@ -155,9 +152,7 @@ extension TtfFontEx on TtfFont {
     Pointer<SdlIoStream> src,
     bool closeio,
     double ptsize,
-  ) {
-    return ttfOpenFontIo(src, closeio, ptsize);
-  }
+  ) => ttfOpenFontIo(src, closeio, ptsize);
 
   ///
   /// Create a font with the specified properties.
@@ -205,9 +200,8 @@ extension TtfFontEx on TtfFont {
   /// ```c
   /// extern SDL_DECLSPEC TTF_Font * SDLCALL TTF_OpenFontWithProperties(SDL_PropertiesID props)
   /// ```
-  static Pointer<TtfFont> openWithProperties(int props) {
-    return ttfOpenFontWithProperties(props);
-  }
+  static Pointer<TtfFont> openWithProperties(int props) =>
+      ttfOpenFontWithProperties(props);
 
   ///
   /// Get the script used by a 32-bit codepoint.
@@ -227,9 +221,7 @@ extension TtfFontEx on TtfFont {
   /// ```c
   /// extern SDL_DECLSPEC Uint32 SDLCALL TTF_GetGlyphScript(Uint32 ch)
   /// ```
-  static int getGlyphScript(int ch) {
-    return ttfGetGlyphScript(ch);
-  }
+  static int getGlyphScript(int ch) => ttfGetGlyphScript(ch);
 
   ///
   /// Deinitialize SDL_ttf.
@@ -254,9 +246,7 @@ extension TtfFontEx on TtfFont {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL TTF_Quit(void)
   /// ```
-  static void quit() {
-    return ttfQuit();
-  }
+  static void quit() => ttfQuit();
 
   ///
   /// Check if SDL_ttf is initialized.
@@ -283,9 +273,7 @@ extension TtfFontEx on TtfFont {
   /// ```c
   /// extern SDL_DECLSPEC int SDLCALL TTF_WasInit(void)
   /// ```
-  static int wasInit() {
-    return ttfWasInit();
-  }
+  static int wasInit() => ttfWasInit();
 }
 
 extension TtfFontPointerEx on Pointer<TtfFont> {
@@ -316,9 +304,7 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_PropertiesID SDLCALL TTF_GetFontProperties(TTF_Font *font)
   /// ```
-  int getFontProperties() {
-    return ttfGetFontProperties(this);
-  }
+  int getFontProperties() => ttfGetFontProperties(this);
 
   ///
   /// Set a font's size dynamically.
@@ -341,9 +327,7 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL TTF_SetFontSize(TTF_Font *font, float ptsize)
   /// ```
-  bool setSize(double ptsize) {
-    return ttfSetFontSize(this, ptsize);
-  }
+  bool setSize(double ptsize) => ttfSetFontSize(this, ptsize);
 
   ///
   /// Set font size dynamically with target resolutions, in dots per inch.
@@ -369,9 +353,8 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL TTF_SetFontSizeDPI(TTF_Font *font, float ptsize, int hdpi, int vdpi)
   /// ```
-  bool setSizeDpi(double ptsize, int hdpi, int vdpi) {
-    return ttfSetFontSizeDpi(this, ptsize, hdpi, vdpi);
-  }
+  bool setSizeDpi(double ptsize, int hdpi, int vdpi) =>
+      ttfSetFontSizeDpi(this, ptsize, hdpi, vdpi);
 
   ///
   /// Set a font's current style.
@@ -427,9 +410,7 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC TTF_FontStyleFlags SDLCALL TTF_GetFontStyle(const TTF_Font *font)
   /// ```
-  int getStyle() {
-    return ttfGetFontStyle(this);
-  }
+  int getStyle() => ttfGetFontStyle(this);
 
   ///
   /// Set a font's current outline.
@@ -456,9 +437,7 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL TTF_SetFontOutline(TTF_Font *font, int outline)
   /// ```
-  bool setOutline(int outline) {
-    return ttfSetFontOutline(this, outline);
-  }
+  bool setOutline(int outline) => ttfSetFontOutline(this, outline);
 
   ///
   /// Query a font's current outline.
@@ -475,9 +454,7 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC int SDLCALL TTF_GetFontOutline(const TTF_Font *font)
   /// ```
-  int getOutline() {
-    return ttfGetFontOutline(this);
-  }
+  int getOutline() => ttfGetFontOutline(this);
 
   ///
   /// Set a font's current hinter setting.
@@ -534,9 +511,7 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC TTF_HintingFlags SDLCALL TTF_GetFontHinting(const TTF_Font *font)
   /// ```
-  int getHinting() {
-    return ttfGetFontHinting(this);
-  }
+  int getHinting() => ttfGetFontHinting(this);
 
   ///
   /// Enable Signed Distance Field rendering for a font.
@@ -565,9 +540,7 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL TTF_SetFontSDF(TTF_Font *font, bool enabled)
   /// ```
-  bool setSdf(bool enabled) {
-    return ttfSetFontSdf(this, enabled);
-  }
+  bool setSdf(bool enabled) => ttfSetFontSdf(this, enabled);
 
   ///
   /// Query whether Signed Distance Field rendering is enabled for a font.
@@ -584,9 +557,7 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL TTF_GetFontSDF(const TTF_Font *font)
   /// ```
-  bool getSdf() {
-    return ttfGetFontSdf(this);
-  }
+  bool getSdf() => ttfGetFontSdf(this);
 
   ///
   /// Set a font's current wrap alignment option.
@@ -625,9 +596,7 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC TTF_HorizontalAlignment SDLCALL TTF_GetFontWrapAlignment(const TTF_Font *font)
   /// ```
-  int getWrapAlignment() {
-    return ttfGetFontWrapAlignment(this);
-  }
+  int getWrapAlignment() => ttfGetFontWrapAlignment(this);
 
   ///
   /// Query the total height of a font.
@@ -644,9 +613,7 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC int SDLCALL TTF_GetFontHeight(const TTF_Font *font)
   /// ```
-  int getHeight() {
-    return ttfGetFontHeight(this);
-  }
+  int getHeight() => ttfGetFontHeight(this);
 
   ///
   /// Query the offset from the baseline to the top of a font.
@@ -663,9 +630,7 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC int SDLCALL TTF_GetFontAscent(const TTF_Font *font)
   /// ```
-  int getAscent() {
-    return ttfGetFontAscent(this);
-  }
+  int getAscent() => ttfGetFontAscent(this);
 
   ///
   /// Query the offset from the baseline to the bottom of a font.
@@ -682,9 +647,7 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC int SDLCALL TTF_GetFontDescent(const TTF_Font *font)
   /// ```
-  int getDescent() {
-    return ttfGetFontDescent(this);
-  }
+  int getDescent() => ttfGetFontDescent(this);
 
   ///
   /// Query the spacing between lines of text for a font.
@@ -701,9 +664,7 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC int SDLCALL TTF_GetFontLineSkip(const TTF_Font *font)
   /// ```
-  int getLineSkip() {
-    return ttfGetFontLineSkip(this);
-  }
+  int getLineSkip() => ttfGetFontLineSkip(this);
 
   ///
   /// Set the spacing between lines of text for a font.
@@ -742,9 +703,7 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL TTF_GetFontKerning(const TTF_Font *font)
   /// ```
-  bool getKerning() {
-    return ttfGetFontKerning(this);
-  }
+  bool getKerning() => ttfGetFontKerning(this);
 
   ///
   /// Set if kerning is enabled for a font.
@@ -792,9 +751,7 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL TTF_FontIsFixedWidth(const TTF_Font *font)
   /// ```
-  bool faceIsFixedWidth() {
-    return ttfFontIsFixedWidth(this);
-  }
+  bool faceIsFixedWidth() => ttfFontIsFixedWidth(this);
 
   ///
   /// Query whether a font is scalable or not.
@@ -813,9 +770,7 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL TTF_FontIsScalable(const TTF_Font *font)
   /// ```
-  bool isScalable() {
-    return ttfFontIsScalable(this);
-  }
+  bool isScalable() => ttfFontIsScalable(this);
 
   ///
   /// Query a font's family name.
@@ -836,9 +791,7 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC const char * SDLCALL TTF_GetFontFamilyName(const TTF_Font *font)
   /// ```
-  String? getFamilyName() {
-    return ttfGetFontFamilyName(this);
-  }
+  String? getFamilyName() => ttfGetFontFamilyName(this);
 
   ///
   /// Query a font's style name.
@@ -859,9 +812,7 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC const char * SDLCALL TTF_GetFontStyleName(const TTF_Font *font)
   /// ```
-  String? getStyleName() {
-    return ttfGetFontStyleName(this);
-  }
+  String? getStyleName() => ttfGetFontStyleName(this);
 
   ///
   /// Set the direction to be used for text shaping by a font.
@@ -884,9 +835,7 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL TTF_SetFontDirection(TTF_Font *font, TTF_Direction direction)
   /// ```
-  bool setDirection(int direction) {
-    return ttfSetFontDirection(this, direction);
-  }
+  bool setDirection(int direction) => ttfSetFontDirection(this, direction);
 
   ///
   /// Set the script to be used for text shaping by a font.
@@ -912,9 +861,7 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL TTF_SetFontScript(TTF_Font *font, Uint32 script)
   /// ```
-  bool setScript(int script) {
-    return ttfSetFontScript(this, script);
-  }
+  bool setScript(int script) => ttfSetFontScript(this, script);
 
   ///
   /// Set language to be used for text shaping by a font.
@@ -938,9 +885,8 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL TTF_SetFontLanguage(TTF_Font *font, const char *language_bcp47)
   /// ```
-  bool setLanguage(String? languageBcp47) {
-    return ttfSetFontLanguage(this, languageBcp47);
-  }
+  bool setLanguage(String? languageBcp47) =>
+      ttfSetFontLanguage(this, languageBcp47);
 
   ///
   /// Check whether a glyph is provided by the font for a UNICODE codepoint.
@@ -957,9 +903,7 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL TTF_FontHasGlyph(TTF_Font *font, Uint32 ch)
   /// ```
-  bool hasGlyph(int ch) {
-    return ttfFontHasGlyph(this, ch);
-  }
+  bool hasGlyph(int ch) => ttfFontHasGlyph(this, ch);
 
   ///
   /// Query the metrics (dimensions) of a font's glyph for a UNICODE codepoint.
@@ -1000,9 +944,7 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
     Pointer<Int32> miny,
     Pointer<Int32> maxy,
     Pointer<Int32> advance,
-  ) {
-    return ttfGetGlyphMetrics(this, ch, minx, maxx, miny, maxy, advance);
-  }
+  ) => ttfGetGlyphMetrics(this, ch, minx, maxx, miny, maxy, advance);
 
   ///
   /// Query the kerning size between the glyphs of two UNICODE codepoints.
@@ -1023,9 +965,8 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL TTF_GetGlyphKerning(TTF_Font *font, Uint32 previous_ch, Uint32 ch, int *kerning)
   /// ```
-  bool getGlyphKerning(int previousCh, int ch, Pointer<Int32> kerning) {
-    return ttfGetGlyphKerning(this, previousCh, ch, kerning);
-  }
+  bool getGlyphKerning(int previousCh, int ch, Pointer<Int32> kerning) =>
+      ttfGetGlyphKerning(this, previousCh, ch, kerning);
 
   ///
   /// Render UTF-8 text at high quality to a new 8-bit surface.
@@ -1069,7 +1010,7 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   Pointer<SdlSurface> renderTextShaded(String? text, SdlColor fg, SdlColor bg) {
     var length = 0;
     if (text != null) {
-      var pointer = text.toNativeUtf8();
+      final pointer = text.toNativeUtf8();
       length = pointer.length;
       calloc.free(pointer);
     }
@@ -1123,7 +1064,7 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   ) {
     var length = 0;
     if (text != null) {
-      var pointer = text.toNativeUtf8();
+      final pointer = text.toNativeUtf8();
       length = pointer.length;
       calloc.free(pointer);
     }
@@ -1162,9 +1103,8 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Surface * SDLCALL TTF_RenderGlyph_Shaded(TTF_Font *font, Uint32 ch, SDL_Color fg, SDL_Color bg)
   /// ```
-  Pointer<SdlSurface> renderGlyphShaded(int ch, SdlColor fg, SdlColor bg) {
-    return ttfRenderGlyphShaded(this, ch, fg, bg);
-  }
+  Pointer<SdlSurface> renderGlyphShaded(int ch, SdlColor fg, SdlColor bg) =>
+      ttfRenderGlyphShaded(this, ch, fg, bg);
 
   ///
   /// Render UTF-8 text at high quality to a new ARGB surface.
@@ -1206,7 +1146,7 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   Pointer<SdlSurface> renderTextBlended(String? text, SdlColor fg) {
     var length = 0;
     if (text != null) {
-      var pointer = text.toNativeUtf8();
+      final pointer = text.toNativeUtf8();
       length = pointer.length;
       calloc.free(pointer);
     }
@@ -1257,7 +1197,7 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   ) {
     var length = 0;
     if (text != null) {
-      var pointer = text.toNativeUtf8();
+      final pointer = text.toNativeUtf8();
       length = pointer.length;
       calloc.free(pointer);
     }
@@ -1294,9 +1234,8 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Surface * SDLCALL TTF_RenderGlyph_Blended(TTF_Font *font, Uint32 ch, SDL_Color fg)
   /// ```
-  Pointer<SdlSurface> renderGlyphBlended(int ch, SdlColor fg) {
-    return ttfRenderGlyphBlended(this, ch, fg);
-  }
+  Pointer<SdlSurface> renderGlyphBlended(int ch, SdlColor fg) =>
+      ttfRenderGlyphBlended(this, ch, fg);
 
   ///
   /// Render UTF-8 text at LCD subpixel quality to a new ARGB surface.
@@ -1344,7 +1283,7 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   ) {
     var length = 0;
     if (text != null) {
-      var pointer = text.toNativeUtf8();
+      final pointer = text.toNativeUtf8();
       length = pointer.length;
       calloc.free(pointer);
     }
@@ -1399,7 +1338,7 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   ) {
     var length = 0;
     if (text != null) {
-      var pointer = text.toNativeUtf8();
+      final pointer = text.toNativeUtf8();
       length = pointer.length;
       calloc.free(pointer);
     }
@@ -1438,9 +1377,8 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Surface * SDLCALL TTF_RenderGlyph_LCD(TTF_Font *font, Uint32 ch, SDL_Color fg, SDL_Color bg)
   /// ```
-  Pointer<SdlSurface> renderGlyphLcd(int ch, SdlColor fg, SdlColor bg) {
-    return ttfRenderGlyphLcd(this, ch, fg, bg);
-  }
+  Pointer<SdlSurface> renderGlyphLcd(int ch, SdlColor fg, SdlColor bg) =>
+      ttfRenderGlyphLcd(this, ch, fg, bg);
 
   ///
   /// Dispose of a previously-created font.

@@ -46,7 +46,7 @@ const gReverbSnareSound = 'assets/claps-and-snares/dubstep-reverb-snare.ogg';
 
 int main() {
   // Initialize SDL
-  if (sdlInit(SDL_INIT_VIDEO | SDL_INIT_AUDIO) == false) {
+  if (!sdlInit(SDL_INIT_VIDEO | SDL_INIT_AUDIO)) {
     print(
       'SDL could not be initialized!\n'
       'SDL_Error: ${sdlGetError()}\n',
@@ -55,7 +55,7 @@ int main() {
   }
   sdlSetHint(SDL_HINT_RENDER_VSYNC, '1');
   //Initialize SDL3_mixer
-  if (mixOpenAudio(SDL_AUDIO_DEVICE_DEFAULT_OUTPUT, nullptr) == false) {
+  if (!mixOpenAudio(SDL_AUDIO_DEVICE_DEFAULT_OUTPUT, nullptr)) {
     print(
       'SDL3_mixer could not be initialized!\n'
       'SDL_Error: ${sdlGetError()}%s\n',
@@ -64,7 +64,7 @@ int main() {
     return 0;
   }
   // Create window
-  var window = SdlWindowEx.create(
+  final window = SdlWindowEx.create(
     title: 'SDL3 audio sample (Press SPACE to pause/play)',
     w: gScreenWidth,
     h: gScreenHeight,
@@ -80,7 +80,7 @@ int main() {
     return 0;
   }
   // Create renderer
-  var renderer = window.createRenderer();
+  final renderer = window.createRenderer();
   if (renderer == nullptr) {
     print(
       'Renderer could not be created!\n'
@@ -92,52 +92,47 @@ int main() {
     return 0;
   }
 
-  var sounds = <Pointer<MixChunk>>[];
-  sounds.add(mixLoadWav(gWavesSound));
-  sounds.add(mixLoadWav(gClapSound));
-  sounds.add(mixLoadWav(gSnareSound));
-  sounds.add(mixLoadWav(gTechnoClapSnareSound));
-  sounds.add(mixLoadWav(gReverbSnareSound));
+  final sounds = <Pointer<MixChunk>>[
+    mixLoadWav(gWavesSound),
+    mixLoadWav(gClapSound),
+    mixLoadWav(gSnareSound),
+    mixLoadWav(gTechnoClapSnareSound),
+    mixLoadWav(gReverbSnareSound),
+  ];
   // Declare rect of square
-  var bar = min(gScreenWidth, gScreenHeight) / 2;
-  var squareRect = Rectangle(
+  final bar = min(gScreenWidth, gScreenHeight) / 2;
+  final squareRect = Rectangle(
     gScreenWidth / 2 - bar / 2,
     gScreenHeight / 2 - bar / 2,
     bar,
     bar,
   );
-  var pauseRect1 = Rectangle<double>(
+  final pauseRect1 = Rectangle<double>(
     squareRect.left + (squareRect.width - 40 * 3) / 2,
     squareRect.top + squareRect.height / 4,
     40,
     squareRect.height / 2,
   );
-  var pauseRect2 = pauseRect1.shift(Point(40 * 2, 0));
+  final pauseRect2 = pauseRect1.shift(const Point(40 * 2, 0));
 
-  var event = calloc<SdlEvent>();
+  final event = calloc<SdlEvent>();
   var running = true;
   while (running) {
     while (event.poll()) {
       switch (event.type) {
         case SDL_EVENT_QUIT:
           running = false;
-          break;
         case SDL_EVENT_KEY_DOWN:
           switch (event.key.ref.key) {
             case SDLK_RIGHT:
               sounds[1].playChannel(-1, 0);
-              break;
             case SDLK_LEFT:
               sounds[2].playChannel(-1, 0);
-              break;
             case SDLK_UP:
               sounds[3].playChannel(-1, 0);
-              break;
             case SDLK_DOWN:
               sounds[4].playChannel(-1, 0);
-              break;
           }
-          break;
         default:
           break;
       }
@@ -161,7 +156,7 @@ int main() {
     renderer.present();
   }
   event.callocFree();
-  for (var sound in sounds) {
+  for (final sound in sounds) {
     sound.free();
   }
   renderer.destroy();

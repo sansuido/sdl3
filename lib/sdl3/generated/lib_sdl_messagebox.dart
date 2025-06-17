@@ -133,7 +133,8 @@ bool sdlShowSimpleMessageBox(
         window,
       ) ==
       1;
-  calloc.free(titlePointer);
-  calloc.free(messagePointer);
+  calloc
+    ..free(titlePointer)
+    ..free(messagePointer);
   return result;
 }

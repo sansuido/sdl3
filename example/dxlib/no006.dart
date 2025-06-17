@@ -25,9 +25,6 @@ const gString =
     'プログラマーに聞くなどするしか方法がなく大変厄介である。B'
     'というかそのせいでゲームプログラムの敷居は高くなっているといえる。BE';
 
-final gTextColor = SdlColorEx.rgbaToU32(0, 0, 0, 255);
-final gAlertColor = SdlColorEx.rgbaToU32(255, 0, 0, 255);
-
 class Game {
   Pointer<SdlWindow> window = nullptr;
   Pointer<SdlRenderer> renderer = nullptr;
@@ -40,11 +37,11 @@ class Game {
   var tick = 0;
 
   bool init() {
-    if (sdlInit(SDL_INIT_VIDEO) == false) {
+    if (!sdlInit(SDL_INIT_VIDEO)) {
       return false;
     }
     sdlSetHint(SDL_HINT_RENDER_VSYNC, '1');
-    if (ttfInit() == false) {
+    if (!ttfInit()) {
       return false;
     }
     window = SdlWindowEx.create(
@@ -64,17 +61,17 @@ class Game {
   }
 
   bool loadCharaTextures() {
-    var font = TtfFontEx.open(gFontPath, gFontSize);
+    final font = TtfFontEx.open(gFontPath, gFontSize);
     if (font == nullptr) {
       return false;
     }
     for (var n = 0; n < gString.length; n++) {
-      var chara = gString[n];
-      if (charaTextures.containsKey(chara) == false) {
-        var textColor = calloc<SdlColor>()..setRgba(0, 0, 0, 255);
-        var surface = font.renderTextBlended(chara, textColor.ref);
+      final chara = gString[n];
+      if (!charaTextures.containsKey(chara)) {
+        final textColor = calloc<SdlColor>()..setRgba(0, 0, 0, 255);
+        final surface = font.renderTextBlended(chara, textColor.ref);
         if (surface != nullptr) {
-          var texture = renderer.createTextureFromSurface(surface);
+          final texture = renderer.createTextureFromSurface(surface);
           charaTextures[chara] = texture;
           surface.destroy();
         }
@@ -86,14 +83,14 @@ class Game {
   }
 
   bool loadPressAnyKeyTexture() {
-    var font = TtfFontEx.open(gFontPath, gFontSize);
+    final font = TtfFontEx.open(gFontPath, gFontSize);
     if (font == nullptr) {
       return false;
     }
-    var textColor = calloc<SdlColor>()..setRgba(0, 0, 0, 255);
-    var alertColor = calloc<SdlColor>()..setRgba(255, 0, 0, 255);
+    final textColor = calloc<SdlColor>()..setRgba(0, 0, 0, 255);
+    final alertColor = calloc<SdlColor>()..setRgba(255, 0, 0, 255);
 
-    var surface = font.renderTextShaded(
+    final surface = font.renderTextShaded(
       '[PRESS ANY KEY]',
       textColor.ref,
       alertColor.ref,
@@ -109,17 +106,15 @@ class Game {
   }
 
   void handleEvents() {
-    var event = calloc<SdlEvent>();
+    final event = calloc<SdlEvent>();
     while (event.poll()) {
       switch (event.type) {
         case SDL_EVENT_QUIT:
           running = false;
-          break;
         case SDL_EVENT_KEY_DOWN:
           if (buttonWait) {
             buttonWait = false;
           }
-          break;
         default:
           break;
       }
@@ -128,26 +123,22 @@ class Game {
   }
 
   void update() {
-    if (buttonWait == false) {
+    if (!buttonWait) {
       if (tick > 2) {
         if (displayPos < gString.length) {
           switch (gString[displayPos]) {
             // ボタン押し待ち
             case 'B':
               buttonWait = true;
-              break;
             // クリア文字
             case 'C':
               displayString = '';
-              break;
             // 終了文字
             case 'E':
               running = false;
-              break;
             // その他
             default:
               displayString += gString[displayPos];
-              break;
           }
           displayPos++;
         }
@@ -158,13 +149,14 @@ class Game {
   }
 
   void render() {
-    renderer.setDrawColor(255, 255, 255, 255);
-    renderer.clear();
+    renderer
+      ..setDrawColor(255, 255, 255, 255)
+      ..clear();
     var drawX = 0;
     var drawY = 0;
     var height = 0;
     for (var n = 0; n < displayString.length; n++) {
-      var chara = displayString[n];
+      final chara = displayString[n];
       switch (chara) {
         // 改行文字
         case '@':
@@ -173,11 +165,10 @@ class Game {
             drawY += height;
             height = 0;
           }
-          break;
         default:
-          var texture = charaTextures[chara];
+          final texture = charaTextures[chara];
           if (texture != nullptr) {
-            var size = texture!.getSize()!;
+            final size = texture!.getSize()!;
             if (chara != '。' &&
                 chara != '、' &&
                 (drawX + size.x) > window.getSize().x) {
@@ -190,18 +181,17 @@ class Game {
               dstrect: Rectangle<double>(
                 drawX.toDouble(),
                 drawY.toDouble(),
-                size.x.toDouble(),
-                size.y.toDouble(),
+                size.x,
+                size.y,
               ),
             );
             drawX += size.x.toInt();
             height = size.y.toInt() > height ? size.y.toInt() : height;
           }
-          break;
       }
     }
     if (buttonWait) {
-      var size = pressAnyKeyTexture.getSize()!;
+      final size = pressAnyKeyTexture.getSize()!;
       drawX = 0;
       drawY += height;
       renderer.texture(
@@ -209,8 +199,8 @@ class Game {
         dstrect: Rectangle<double>(
           drawX.toDouble(),
           drawY.toDouble(),
-          size.x.toDouble(),
-          size.y.toDouble(),
+          size.x,
+          size.y,
         ),
       );
     }
@@ -239,8 +229,8 @@ class Game {
 }
 
 int main() {
-  var game = Game();
-  if (game.init() == true) {
+  final game = Game();
+  if (game.init()) {
     game.run();
   } else {
     print(sdlGetError());

@@ -9,7 +9,7 @@ import 'lib_sdl_ex.dart';
 /// ```c
 /// const SDL_TTF_COMPILEDVERSION = \ SDL_VERSIONNUM(SDL_TTF_MAJOR_VERSION, SDL_TTF_MINOR_VERSION, SDL_TTF_PATCHLEVEL);
 /// ```
-final SDL_TTF_COMPILEDVERSION = sdlVersionnum(
+final int SDL_TTF_COMPILEDVERSION = sdlVersionnum(
   SDL_TTF_MAJOR_VERSION,
   SDL_TTF_MINOR_VERSION,
   SDL_TTF_MICRO_VERSION,
@@ -18,9 +18,8 @@ final SDL_TTF_COMPILEDVERSION = sdlVersionnum(
 /// ```c
 /// const SDL_TTF_VERSION_ATLEAST = (X, Y, Z) \ (SDL_TTF_COMPILEDVERSION >= SDL_VERSIONNUM(X, Y, Z));
 /// ```
-bool sdlTtfVersionAtleast(int x, int y, int z) {
-  return SDL_TTF_COMPILEDVERSION >= sdlVersionnum(x, y, z);
-}
+bool sdlTtfVersionAtleast(int x, int y, int z) =>
+    SDL_TTF_COMPILEDVERSION >= sdlVersionnum(x, y, z);
 
 ///// ```c
 ///// const TTF_RenderText = (font, text, fg, bg) \ TTF_RenderText_Shaded(font, text, fg, bg);
@@ -49,13 +48,9 @@ bool sdlTtfVersionAtleast(int x, int y, int z) {
 /// ```c
 /// const TTF_SetError = SDL_SetError;
 /// ```
-bool ttfSetError(String fmt) {
-  return sdlSetError(fmt);
-}
+bool ttfSetError(String fmt) => sdlSetError(fmt);
 
 /// ```c
 /// const TTF_GetError = SDL_GetError;
 /// ```
-String? ttfGetError() {
-  return sdlGetError();
-}
+String? ttfGetError() => sdlGetError();

@@ -55,9 +55,7 @@ const SDL_AUDIO_DEVICE_DEFAULT_CAPTURE = 0xFFFFFFFE;
 // ```c
 // const SDL_SCANCODE_TO_KEYCODE = (X) (X | SDLK_SCANCODE_MASK);
 // ```
-int sdlScancodeToKeycode(int x) {
-  return x | SDLK_SCANCODE_MASK;
-}
+int sdlScancodeToKeycode(int x) => x | SDLK_SCANCODE_MASK;
 
 //const SDLK_CAPSLOCK = SDL_SCANCODE_CAPSLOCK | SDLK_SCANCODE_MASK;
 //const SDLK_F1 = SDL_SCANCODE_F1 | SDLK_SCANCODE_MASK;
@@ -233,9 +231,7 @@ int sdlScancodeToKeycode(int x) {
 /// ```c
 /// const SDL_BUTTON = (X) (1 << ((X)-1));
 /// ```
-int sdlButton(int x) {
-  return 1 << (x - 1);
-}
+int sdlButton(int x) => 1 << (x - 1);
 
 /// ```c
 /// const SDL_BUTTON_LMASK = SDL_BUTTON(SDL_BUTTON_LEFT);
@@ -274,14 +270,13 @@ int sdlDefinePixcelFormat(
   int layout,
   int bits,
   int bytes,
-) {
-  return (1 << 28) |
-      ((type) << 24) |
-      ((order) << 20) |
-      ((layout) << 16) |
-      ((bits) << 8) |
-      ((bytes) << 0);
-}
+) =>
+    (1 << 28) |
+    (type << 24) |
+    (order << 20) |
+    (layout << 16) |
+    (bits << 8) |
+    (bytes << 0);
 
 //final SDL_PIXELFORMAT_INDEX1LSB =
 //    sdlDefinePixcelFormat(SDL_PIXELTYPE_INDEX1, SDL_BITMAPORDER_4321, 0, 1, 0);
@@ -401,33 +396,28 @@ int sdlDefinePixcelFormat(
 /// ```c
 /// const SDL_iconv_utf8_locale = (S) SDL_iconv_string('', 'UTF-8', S, SDL_strlen(S)+1);
 /// ```
-Pointer<Int8> sdlIconvUtf8Locate(String s) {
-  return sdlIconvString('', 'UTF-8', s, sdlStrlen(s) + 1);
-}
+Pointer<Int8> sdlIconvUtf8Locate(String s) =>
+    sdlIconvString('', 'UTF-8', s, sdlStrlen(s) + 1);
 
 /// ```c
 /// const SDL_iconv_utf8_ucs2 = (S) (Uint16 *)SDL_iconv_string('UCS-2-INTERNAL', 'UTF-8', S, SDL_strlen(S)+1);
 /// ```
-Pointer<Uint16> sdlIconvUtf8Ucs2(String s) {
-  return sdlIconvString(
-    'UCS-2-INTERNAL',
-    'UTF-8',
-    s,
-    sdlStrlen(s) + 1,
-  ).cast<Uint16>();
-}
+Pointer<Uint16> sdlIconvUtf8Ucs2(String s) => sdlIconvString(
+  'UCS-2-INTERNAL',
+  'UTF-8',
+  s,
+  sdlStrlen(s) + 1,
+).cast<Uint16>();
 
 /// ```c
 /// const SDL_iconv_utf8_ucs4 = (S) (Uint32 *)SDL_iconv_string('UCS-4-INTERNAL', 'UTF-8', S, SDL_strlen(S)+1);
 /// ```
-Pointer<Uint32> sdlIconvUtf8Ucs4(String s) {
-  return sdlIconvString(
-    'UCS-4-INTERNAL',
-    'UTF-8',
-    s,
-    sdlStrlen(s) + 1,
-  ).cast<Uint32>();
-}
+Pointer<Uint32> sdlIconvUtf8Ucs4(String s) => sdlIconvString(
+  'UCS-4-INTERNAL',
+  'UTF-8',
+  s,
+  sdlStrlen(s) + 1,
+).cast<Uint32>();
 
 //const SDL_MUSTLOCK = (S) (((S)->flags & SDL_RLEACCEL) != 0);
 
@@ -446,14 +436,12 @@ Pointer<Uint32> sdlIconvUtf8Ucs4(String s) {
 /// ```c
 /// const SDL_VERSIONNUM = (X, Y, Z) \ ((X)*1000 + (Y)*100 + (Z));
 /// ```
-int sdlVersionnum(int x, int y, int z) {
-  return x * 1000 + y * 100 + z;
-}
+int sdlVersionnum(int x, int y, int z) => x * 1000 + y * 100 + z;
 
 /// ```c
 /// const SDL_COMPILEDVERSION = \ SDL_VERSIONNUM(SDL_MAJOR_VERSION, SDL_MINOR_VERSION, SDL_PATCHLEVEL);
 /// ```
-final SDL_COMPILEDVERSION = sdlVersionnum(
+final int SDL_COMPILEDVERSION = sdlVersionnum(
   SDL_MAJOR_VERSION,
   SDL_MINOR_VERSION,
   SDL_MICRO_VERSION,
@@ -462,44 +450,37 @@ final SDL_COMPILEDVERSION = sdlVersionnum(
 /// ```c
 /// const SDL_VERSION_ATLEAST = (X, Y, Z) \ (SDL_COMPILEDVERSION >= SDL_VERSIONNUM(X, Y, Z));
 /// ```
-bool sdlVersionAtleast(int x, int y, int z) {
-  return SDL_COMPILEDVERSION >= sdlVersionnum(x, y, z);
-}
+bool sdlVersionAtleast(int x, int y, int z) =>
+    SDL_COMPILEDVERSION >= sdlVersionnum(x, y, z);
 
 /// ```c
 /// SDL_WINDOWPOS_UNDEFINED_DISPLAY = (X) (SDL_WINDOWPOS_UNDEFINED_MASK|(X));
 /// ```
-int sdlWindowposUndefinedDisplay(int x) {
-  return SDL_WINDOWPOS_UNDEFINED_MASK | x;
-}
+int sdlWindowposUndefinedDisplay(int x) => SDL_WINDOWPOS_UNDEFINED_MASK | x;
 
 /// ```c
 /// const SDL_WINDOWPOS_UNDEFINED = SDL_WINDOWPOS_UNDEFINED_DISPLAY(0);
 /// ```
-final SDL_WINDOWPOS_UNDEFINED = sdlWindowposUndefinedDisplay(0);
+final int SDL_WINDOWPOS_UNDEFINED = sdlWindowposUndefinedDisplay(0);
 
 /// ```c
 /// const SDL_WINDOWPOS_ISUNDEFINED = (X) \ (((X)&0xFFFF0000) == SDL_WINDOWPOS_UNDEFINED_MASK);
 /// ```
-bool sdlWindowposIsundefined(int x) {
-  return x & 0xFFFF0000 == SDL_WINDOWPOS_UNDEFINED_MASK;
-}
+bool sdlWindowposIsundefined(int x) =>
+    x & 0xFFFF0000 == SDL_WINDOWPOS_UNDEFINED_MASK;
 
 /// ```c
 /// const SDL_WINDOWPOS_CENTERED_DISPLAY = (X) (SDL_WINDOWPOS_CENTERED_MASK|(X));
 /// ```
-int sdlWindowposCenteredDisplay(int x) {
-  return SDL_WINDOWPOS_CENTERED_MASK | x;
-}
+int sdlWindowposCenteredDisplay(int x) => SDL_WINDOWPOS_CENTERED_MASK | x;
 
 /// ```c
 /// const SDL_WINDOWPOS_CENTERED = SDL_WINDOWPOS_CENTERED_DISPLAY(0);
 /// ```
-final SDL_WINDOWPOS_CENTERED = sdlWindowposCenteredDisplay(0);
+final int SDL_WINDOWPOS_CENTERED = sdlWindowposCenteredDisplay(0);
 
 /// ```c
 /// const SDL_WINDOWPOS_ISCENTERED = (X) \ (((X)&0xFFFF0000) == SDL_WINDOWPOS_CENTERED_MASK);
 /// ```
-bool sdlWindowposIscentered(int x) {
-  return x & 0xFFFF0000 == SDL_WINDOWPOS_CENTERED_MASK;
-}
+bool sdlWindowposIscentered(int x) =>
+    x & 0xFFFF0000 == SDL_WINDOWPOS_CENTERED_MASK;

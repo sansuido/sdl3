@@ -7,7 +7,7 @@ import 'lib_sdl_ex.dart';
 /// ```c
 /// const SDL_MIXER_COMPILEDVERSION = \ SDL_VERSIONNUM(SDL_MIXER_MAJOR_VERSION, SDL_MIXER_MINOR_VERSION, SDL_MIXER_PATCHLEVEL);
 /// ```
-final SDL_MIXER_COMPILEDVERSION = sdlVersionnum(
+final int SDL_MIXER_COMPILEDVERSION = sdlVersionnum(
   SDL_MIXER_MAJOR_VERSION,
   SDL_MIXER_MINOR_VERSION,
   SDL_MIXER_MICRO_VERSION,
@@ -16,9 +16,8 @@ final SDL_MIXER_COMPILEDVERSION = sdlVersionnum(
 /// ```c
 /// const SDL_MIXER_VERSION_ATLEAST = (X, Y, Z) \ (SDL_MIXER_COMPILEDVERSION >= SDL_VERSIONNUM(X, Y, Z));
 /// ```
-bool sdlMixerVersionAtleast(int x, int y, int z) {
-  return SDL_MIXER_COMPILEDVERSION >= sdlVersionnum(x, y, z);
-}
+bool sdlMixerVersionAtleast(int x, int y, int z) =>
+    SDL_MIXER_COMPILEDVERSION >= sdlVersionnum(x, y, z);
 
 /// ```c
 /// const MIX_MAX_VOLUME = SDL_MIX_MAXVOLUME;
@@ -28,20 +27,14 @@ bool sdlMixerVersionAtleast(int x, int y, int z) {
 /// ```c
 /// const Mix_SetError = SDL_SetError;
 /// ```
-bool mixSetError(String fmt) {
-  return sdlSetError(fmt);
-}
+bool mixSetError(String fmt) => sdlSetError(fmt);
 
 /// ```c
 /// const Mix_GetError = SDL_GetError;
 /// ```
-String? mixGetError() {
-  return sdlGetError();
-}
+String? mixGetError() => sdlGetError();
 
 /// ```c
 /// const Mix_ClearError = SDL_ClearError;
 /// ```
-bool mixClearError() {
-  return sdlClearError();
-}
+bool mixClearError() => sdlClearError();

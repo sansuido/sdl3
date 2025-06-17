@@ -30,21 +30,20 @@ import '../generated/lib_sdl_timer.dart';
 import 'const.dart';
 
 class FpsManager {
-  int _framecount = 0;
-  double _rateticks = 0;
-  double _baseticks = 0;
-  double _lastticks = 0;
-  int _rate = 0;
-  double _measticks = 0;
-  int _measrate = 0;
-  int _meascount = 0;
-
   FpsManager() {
     init();
   }
+  var _framecount = 0;
+  double _rateticks = 0;
+  double _baseticks = 0;
+  double _lastticks = 0;
+  var _rate = 0;
+  double _measticks = 0;
+  var _measrate = 0;
+  var _meascount = 0;
 
   double _getTicks() {
-    var ticks = sdlGetTicks().toDouble();
+    final ticks = sdlGetTicks().toDouble();
     if (ticks == 0) {
       return 1;
     } else {
@@ -77,17 +76,11 @@ class FpsManager {
     }
   }
 
-  int getFramerate() {
-    return _rate;
-  }
+  int getFramerate() => _rate;
 
-  int getMeasFramerate() {
-    return _measrate;
-  }
+  int getMeasFramerate() => _measrate;
 
-  int getFramecount() {
-    return _framecount;
-  }
+  int getFramecount() => _framecount;
 
   int delay() {
     double currentTicks;
@@ -101,7 +94,7 @@ class FpsManager {
     _framecount++;
     currentTicks = _getTicks();
     timePassed = currentTicks - _lastticks;
-    _lastticks = currentTicks.toDouble();
+    _lastticks = currentTicks;
     targetTicks = _baseticks + _framecount.toDouble() * _rateticks;
     if (currentTicks <= targetTicks) {
       theDelay = targetTicks - currentTicks;
@@ -132,7 +125,7 @@ class FpsManager {
     _framecount++;
     currentTicks = _getTicks();
     timePassed = currentTicks - _lastticks;
-    _lastticks = currentTicks.toDouble();
+    _lastticks = currentTicks;
     targetTicks = _baseticks + _framecount.toDouble() * _rateticks;
     if (currentTicks <= targetTicks) {
       theDelay = targetTicks - currentTicks;

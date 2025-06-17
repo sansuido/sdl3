@@ -7,12 +7,12 @@ const gScreenWidth = 800;
 const gScreenHeight = 600;
 
 int main() {
-  if (sdlInit(SDL_INIT_VIDEO | SDL_INIT_GAMEPAD | SDL_INIT_JOYSTICK) == false) {
+  if (!sdlInit(SDL_INIT_VIDEO | SDL_INIT_GAMEPAD | SDL_INIT_JOYSTICK)) {
     print(sdlGetError());
     return -1;
   }
   sdlSetHint(SDL_HINT_RENDER_VSYNC, '1');
-  var window = SdlWindowEx.create(
+  final window = SdlWindowEx.create(
     title: 'Gamepad',
     w: gScreenWidth,
     h: gScreenHeight,
@@ -23,14 +23,14 @@ int main() {
     sdlQuit();
     return -1;
   }
-  var renderer = window.createRenderer();
+  final renderer = window.createRenderer();
   if (renderer == nullptr) {
     print(sdlGetError());
     window.destroy();
     sdlQuit();
     return -1;
   }
-  var gameController = SdlGamepadEx.open(0);
+  final gameController = SdlGamepadEx.open(0);
   if (gameController == nullptr) {
     print(sdlGetError());
     renderer.destroy();
@@ -39,7 +39,7 @@ int main() {
     return -1;
   }
   window.setTitle(SdlGamepadEx.getNameForId(0)!);
-  var buttonNames = [
+  final buttonNames = [
     'A',
     'B',
     'X',
@@ -62,30 +62,26 @@ int main() {
     'PADDLE4',
     'TOUCHPAD',
   ];
-  var buttonEnables = <bool>[];
+  final buttonEnables = <bool>[];
   for (var n = 0; n < SDL_GAMEPAD_BUTTON_COUNT; n++) {
     buttonEnables.add(false);
   }
-  var event = calloc<SdlEvent>();
+  final event = calloc<SdlEvent>();
   var running = true;
   while (running) {
     while (event.poll()) {
       switch (event.type) {
         case SDL_EVENT_QUIT:
           running = false;
-          break;
         case SDL_EVENT_KEY_DOWN:
           if (event.key.ref.key == SDLK_ESCAPE) {
             running = false;
             break;
           }
-          break;
         case SDL_EVENT_GAMEPAD_BUTTON_DOWN:
           buttonEnables[event.gbutton.ref.button] = true;
-          break;
         case SDL_EVENT_GAMEPAD_BUTTON_UP:
           buttonEnables[event.gbutton.ref.button] = false;
-          break;
         default:
           break;
       }
@@ -94,7 +90,7 @@ int main() {
         ..clear();
       for (var n = 0; n < buttonEnables.length; n++) {
         var color = SdlColorEx.rgbaToU32(255, 0, 0, SDL_ALPHA_OPAQUE);
-        if (buttonEnables[n] == true) {
+        if (buttonEnables[n]) {
           color = SdlColorEx.rgbaToU32(0, 255, 0, SDL_ALPHA_OPAQUE);
         }
         renderer

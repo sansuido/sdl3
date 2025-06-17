@@ -5,20 +5,20 @@ import 'package:ffi/ffi.dart';
 import 'package:sdl3/sdl3.dart';
 
 void sinewave() {
-  var audioSpec = calloc<SdlAudioSpec>()
+  final audioSpec = calloc<SdlAudioSpec>()
     ..ref.freq = 44100
     ..ref.format = SDL_AUDIO_S16LE
     ..ref.channels = 1;
-  var stream = sdlOpenAudioDeviceStream(
+  final stream = sdlOpenAudioDeviceStream(
     SDL_AUDIO_DEVICE_DEFAULT_OUTPUT,
     audioSpec,
     nullptr,
     nullptr,
   );
-  var audioDevice = sdlGetAudioStreamDevice(stream);
+  final audioDevice = sdlGetAudioStreamDevice(stream);
   sdlResumeAudioDevice(audioDevice);
   var x = 0.0;
-  var sample = calloc<Int16>();
+  final sample = calloc<Int16>();
   for (var i = 0; i < audioSpec.ref.freq * 3; i++) {
     x += 0.10;
     sample.value = (math.sin(x * 4) * 5000).toInt();
@@ -34,7 +34,7 @@ void sinewave() {
 }
 
 int main() {
-  if (sdlInit(SDL_INIT_AUDIO) == false) {
+  if (!sdlInit(SDL_INIT_AUDIO)) {
     return -1;
   }
   sinewave();

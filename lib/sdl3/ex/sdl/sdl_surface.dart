@@ -1,9 +1,13 @@
+// ignore_for_file: avoid_positional_boolean_parameters
+
 import 'dart:ffi';
 import 'dart:math' as math show Rectangle;
+
 import 'package:ffi/ffi.dart';
+
 import '../../generated/lib_sdl_mouse.dart';
-import '../../generated/struct_sdl.dart';
 import '../../generated/lib_sdl_surface.dart';
+import '../../generated/struct_sdl.dart';
 import '../dart/rectangle.dart';
 import 'sdl_rect.dart';
 
@@ -29,9 +33,7 @@ extension SdlSurfaceEx on SdlSurface {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Surface * SDLCALL SDL_LoadBMP(const char *file)
   /// ```
-  static Pointer<SdlSurface> loadBmp(String file) {
-    return sdlLoadBmp(file);
-  }
+  static Pointer<SdlSurface> loadBmp(String file) => sdlLoadBmp(file);
 }
 
 extension SdlSurfacePointerEx on Pointer<SdlSurface> {
@@ -70,9 +72,8 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Cursor * SDLCALL SDL_CreateColorCursor(SDL_Surface *surface, int hot_x, int hot_y)
   /// ```
-  Pointer<SdlCursor> createColorCursor(int hotX, int hotY) {
-    return sdlCreateColorCursor(this, hotX, hotY);
-  }
+  Pointer<SdlCursor> createColorCursor(int hotX, int hotY) =>
+      sdlCreateColorCursor(this, hotX, hotY);
 
   // lib_sdl_surface.dart
 
@@ -126,9 +127,8 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetSurfacePalette(SDL_Surface *surface, SDL_Palette *palette)
   /// ```
-  bool setPalette(Pointer<SdlPalette> palette) {
-    return sdlSetSurfacePalette(this, palette);
-  }
+  bool setPalette(Pointer<SdlPalette> palette) =>
+      sdlSetSurfacePalette(this, palette);
 
   ///
   /// Set up a surface for directly accessing the pixels.
@@ -158,9 +158,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_LockSurface(SDL_Surface *surface)
   /// ```
-  bool lock() {
-    return sdlLockSurface(this);
-  }
+  bool lock() => sdlLockSurface(this);
 
   ///
   /// Release a surface after directly accessing the pixels.
@@ -205,9 +203,8 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Surface * SDLCALL SDL_LoadBMP_IO(SDL_IOStream *src, bool closeio)
   /// ```
-  Pointer<SdlSurface> loadBmpIo(Pointer<SdlIoStream> src, bool freesrc) {
-    return sdlLoadBmpIo(src, freesrc);
-  }
+  Pointer<SdlSurface> loadBmpIo(Pointer<SdlIoStream> src, bool freesrc) =>
+      sdlLoadBmpIo(src, freesrc);
 
   ///
   /// Save a surface to a seekable SDL data stream in BMP format.
@@ -235,9 +232,8 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SaveBMP_IO(SDL_Surface *surface, SDL_IOStream *dst, bool closeio)
   /// ```
-  bool saveBmpIo(Pointer<SdlIoStream> dst, bool freedst) {
-    return sdlSaveBmpIo(this, dst, freedst);
-  }
+  bool saveBmpIo(Pointer<SdlIoStream> dst, bool freedst) =>
+      sdlSaveBmpIo(this, dst, freedst);
 
   ///
   /// Set the RLE acceleration hint for a surface.
@@ -261,9 +257,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetSurfaceRLE(SDL_Surface *surface, bool enabled)
   /// ```
-  bool setRre(bool enabled) {
-    return sdlSetSurfaceRle(this, enabled);
-  }
+  bool setRre(bool enabled) => sdlSetSurfaceRle(this, enabled);
 
   ///
   /// Returns whether the surface is RLE enabled.
@@ -282,9 +276,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SurfaceHasRLE(SDL_Surface *surface)
   /// ```
-  bool hasRre() {
-    return sdlSurfaceHasRle(this);
-  }
+  bool hasRre() => sdlSurfaceHasRle(this);
 
   ///
   /// Set the color key (transparent pixel) in a surface.
@@ -313,9 +305,8 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetSurfaceColorKey(SDL_Surface *surface, bool enabled, Uint32 key)
   /// ```
-  bool setColorKey(bool enabled, int key) {
-    return sdlSetSurfaceColorKey(this, enabled, key);
-  }
+  bool setColorKey(bool enabled, int key) =>
+      sdlSetSurfaceColorKey(this, enabled, key);
 
   ///
   /// Returns whether the surface has a color key.
@@ -335,9 +326,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SurfaceHasColorKey(SDL_Surface *surface)
   /// ```
-  bool hadColorKey() {
-    return sdlSurfaceHasColorKey(this);
-  }
+  bool hadColorKey() => sdlSurfaceHasColorKey(this);
 
   ///
   /// Get the color key (transparent pixel) for a surface.
@@ -364,8 +353,8 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// ```
   int? getColorKey() {
     int? result;
-    var keyPointer = calloc<Uint32>();
-    if (sdlGetSurfaceColorKey(this, keyPointer) == true) {
+    final keyPointer = calloc<Uint32>();
+    if (sdlGetSurfaceColorKey(this, keyPointer)) {
       result = keyPointer.value;
     }
     calloc.free(keyPointer);
@@ -398,9 +387,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetSurfaceColorMod(SDL_Surface *surface, Uint8 r, Uint8 g, Uint8 b)
   /// ```
-  bool setColorMod(int r, int g, int b) {
-    return sdlSetSurfaceColorMod(this, r, g, b);
-  }
+  bool setColorMod(int r, int g, int b) => sdlSetSurfaceColorMod(this, r, g, b);
 
   ///
   /// Get the additional color value multiplied into blit operations.
@@ -424,18 +411,19 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// ```
   int? getColorMod() {
     int? result;
-    var rPointer = calloc<Uint8>();
-    var gPointer = calloc<Uint8>();
-    var bPointer = calloc<Uint8>();
-    if (sdlGetSurfaceColorMod(this, rPointer, gPointer, bPointer) == true) {
+    final rPointer = calloc<Uint8>();
+    final gPointer = calloc<Uint8>();
+    final bPointer = calloc<Uint8>();
+    if (sdlGetSurfaceColorMod(this, rPointer, gPointer, bPointer)) {
       result = 0;
       result += rPointer.value << 16;
       result += gPointer.value << 8;
       result += bPointer.value << 0;
     }
-    calloc.free(rPointer);
-    calloc.free(gPointer);
-    calloc.free(bPointer);
+    calloc
+      ..free(rPointer)
+      ..free(gPointer)
+      ..free(bPointer);
     return result;
   }
 
@@ -462,9 +450,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetSurfaceAlphaMod(SDL_Surface *surface, Uint8 alpha)
   /// ```
-  bool setAlphaMod(int alpha) {
-    return sdlSetSurfaceAlphaMod(this, alpha);
-  }
+  bool setAlphaMod(int alpha) => sdlSetSurfaceAlphaMod(this, alpha);
 
   ///
   /// Get the additional alpha value used in blit operations.
@@ -486,8 +472,8 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// ```
   int? getAlphaMod() {
     int? result;
-    var alphaPointer = calloc<Uint8>();
-    if (sdlGetSurfaceAlphaMod(this, alphaPointer) == true) {
+    final alphaPointer = calloc<Uint8>();
+    if (sdlGetSurfaceAlphaMod(this, alphaPointer)) {
       result = alphaPointer.value;
     }
     calloc.free(alphaPointer);
@@ -515,9 +501,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetSurfaceBlendMode(SDL_Surface *surface, SDL_BlendMode blendMode)
   /// ```
-  bool setBlendMode(int blendMode) {
-    return sdlSetSurfaceBlendMode(this, blendMode);
-  }
+  bool setBlendMode(int blendMode) => sdlSetSurfaceBlendMode(this, blendMode);
 
   ///
   /// Get the blend mode used for blit operations.
@@ -538,8 +522,8 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// ```
   int? getBlendMode() {
     int? result;
-    var blendModePointer = calloc<Uint32>();
-    if (sdlGetSurfaceBlendMode(this, blendModePointer) == true) {
+    final blendModePointer = calloc<Uint32>();
+    if (sdlGetSurfaceBlendMode(this, blendModePointer)) {
       result = blendModePointer.value;
     }
     calloc.free(blendModePointer);
@@ -575,7 +559,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
     if (rect != null) {
       rectPointer = rect.callocInt();
     }
-    var result = sdlSetSurfaceClipRect(this, rectPointer);
+    final result = sdlSetSurfaceClipRect(this, rectPointer);
     calloc.free(rectPointer);
     return result;
   }
@@ -603,9 +587,9 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetSurfaceClipRect(SDL_Surface *surface, SDL_Rect *rect)
   /// ```
   math.Rectangle<double> getClipRect() {
-    var rectPointer = calloc<SdlRect>();
+    final rectPointer = calloc<SdlRect>();
     sdlGetSurfaceClipRect(this, rectPointer);
-    var result = rectPointer.create();
+    final result = rectPointer.create();
     calloc.free(rectPointer);
     return result;
   }
@@ -631,9 +615,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Surface * SDLCALL SDL_DuplicateSurface(SDL_Surface *surface)
   /// ```
-  Pointer<SdlSurface> duplicate() {
-    return sdlDuplicateSurface(this);
-  }
+  Pointer<SdlSurface> duplicate() => sdlDuplicateSurface(this);
 
   // sdlConvertPixels
   // sdlPremultiplyAlpha
@@ -671,7 +653,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
     if (rect != null) {
       rectPointer = rect.callocInt();
     }
-    var result = sdlFillSurfaceRect(this, rectPointer, color);
+    final result = sdlFillSurfaceRect(this, rectPointer, color);
     calloc.free(rectPointer);
     return result;
   }
@@ -705,8 +687,8 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// extern SDL_DECLSPEC bool SDLCALL SDL_FillSurfaceRects(SDL_Surface *dst, const SDL_Rect *rects, int count, Uint32 color)
   /// ```
   bool fillRects(List<math.Rectangle<double>> rects, int color) {
-    var rectsPointer = rects.callocInt();
-    var result = sdlFillSurfaceRects(this, rectsPointer, rects.length, color);
+    final rectsPointer = rects.callocInt();
+    final result = sdlFillSurfaceRects(this, rectsPointer, rects.length, color);
     calloc.free(rectsPointer);
     return result;
   }
@@ -723,7 +705,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// The blit semantics for surfaces with and without blending and colorkey are
   /// defined as follows:
   ///
-  /// ```
+  /// ===
   /// RGBA->RGB:
   /// Source surface blend mode set to SDL_BLENDMODE_BLEND:
   /// alpha-blend (using the source alpha-channel and per-surface alpha)
@@ -761,7 +743,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// both:
   /// if SDL_SRCCOLORKEY set, only copy the pixels that do not match the
   /// source color key.
-  /// ```
+  /// ===
   ///
   /// \param src the SDL_Surface structure to be copied from.
   /// \param srcrect the SDL_Rect structure representing the rectangle to be
@@ -798,9 +780,10 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
     if (dstrect != null) {
       dstrectPointer = dstrect.callocInt();
     }
-    var result = sdlBlitSurface(this, srcrectPointer, dst, dstrectPointer);
-    calloc.free(srcrectPointer);
-    calloc.free(dstrectPointer);
+    final result = sdlBlitSurface(this, srcrectPointer, dst, dstrectPointer);
+    calloc
+      ..free(srcrectPointer)
+      ..free(dstrectPointer);
     return result;
   }
 
@@ -842,14 +825,15 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
     if (dstrect != null) {
       dstrectPointer = dstrect.callocInt();
     }
-    var result = sdlBlitSurfaceUnchecked(
+    final result = sdlBlitSurfaceUnchecked(
       this,
       srcrectPointer,
       dst,
       dstrectPointer,
     );
-    calloc.free(srcrectPointer);
-    calloc.free(dstrectPointer);
+    calloc
+      ..free(srcrectPointer)
+      ..free(dstrectPointer);
     return result;
   }
 
@@ -892,15 +876,16 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
     if (dstrect != null) {
       dstrectPointer = dstrect.callocInt();
     }
-    var result = sdlBlitSurfaceScaled(
+    final result = sdlBlitSurfaceScaled(
       this,
       srcrectPointer,
       dst,
       dstrectPointer,
       scaleMode,
     );
-    calloc.free(srcrectPointer);
-    calloc.free(dstrectPointer);
+    calloc
+      ..free(srcrectPointer)
+      ..free(dstrectPointer);
     return result;
   }
 
@@ -944,15 +929,16 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
     if (dstrect != null) {
       dstrectPointer = dstrect.callocInt();
     }
-    var result = sdlBlitSurfaceUncheckedScaled(
+    final result = sdlBlitSurfaceUncheckedScaled(
       this,
       srcrectPointer,
       dst,
       dstrectPointer,
       scaleMode,
     );
-    calloc.free(srcrectPointer);
-    calloc.free(dstrectPointer);
+    calloc
+      ..free(srcrectPointer)
+      ..free(dstrectPointer);
     return result;
   }
 
@@ -989,23 +975,17 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SaveBMP(SDL_Surface *surface, const char *file)
   /// ```
-  bool saveBmp(String file) {
-    return sdlSaveBmp(this, file);
-  }
+  bool saveBmp(String file) => sdlSaveBmp(this, file);
 
   bool blit(
     Pointer<SdlSurface> dst, {
     math.Rectangle<double>? srcrect,
     math.Rectangle<double>? dstrect,
-  }) {
-    return upperBlit(dst, srcrect: srcrect, dstrect: dstrect);
-  }
+  }) => upperBlit(dst, srcrect: srcrect, dstrect: dstrect);
 
   bool blitScaled(
     Pointer<SdlSurface> dst, {
     math.Rectangle<double>? srcrect,
     math.Rectangle<double>? dstrect,
-  }) {
-    return upperBlitScaled(dst, srcrect: srcrect, dstrect: dstrect);
-  }
+  }) => upperBlitScaled(dst, srcrect: srcrect, dstrect: dstrect);
 }

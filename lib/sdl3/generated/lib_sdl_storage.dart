@@ -86,8 +86,9 @@ Pointer<SdlStorage> sdlOpenUserStorage(String? org, String? app, int props) {
     appPointer,
     props,
   );
-  calloc.free(orgPointer);
-  calloc.free(appPointer);
+  calloc
+    ..free(orgPointer)
+    ..free(appPointer);
   return result;
 }
 
@@ -539,8 +540,9 @@ bool sdlRenameStoragePath(
         newpathPointer,
       ) ==
       1;
-  calloc.free(oldpathPointer);
-  calloc.free(newpathPointer);
+  calloc
+    ..free(oldpathPointer)
+    ..free(newpathPointer);
   return result;
 }
 
@@ -587,8 +589,9 @@ bool sdlCopyStorageFile(
         newpathPointer,
       ) ==
       1;
-  calloc.free(oldpathPointer);
-  calloc.free(newpathPointer);
+  calloc
+    ..free(oldpathPointer)
+    ..free(newpathPointer);
   return result;
 }
 
@@ -731,7 +734,8 @@ Pointer<Pointer<Int8>> sdlGlobStorageDirectory(
     flags,
     count,
   );
-  calloc.free(pathPointer);
-  calloc.free(patternPointer);
+  calloc
+    ..free(pathPointer)
+    ..free(patternPointer);
   return result;
 }

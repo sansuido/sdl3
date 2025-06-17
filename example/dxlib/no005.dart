@@ -17,12 +17,12 @@ var gPlayer = Position();
 var gShotList = <Position>[];
 
 class Position {
-  int x = 0;
-  int y = 0;
+  var x = 0;
+  var y = 0;
 }
 
 bool init() {
-  if (sdlInit(SDL_INIT_VIDEO) == false) {
+  if (!sdlInit(SDL_INIT_VIDEO)) {
     print(sdlGetError());
     return false;
   }
@@ -53,7 +53,7 @@ void close() {
 }
 
 void update() {
-  var keys = sdlGetKeyboardState(nullptr);
+  final keys = sdlGetKeyboardState(nullptr);
   if (keys[SDL_SCANCODE_LEFT] != 0) {
     gPlayer.x -= 3;
   }
@@ -80,12 +80,11 @@ void update() {
 
 bool handleEvents() {
   var quit = false;
-  var event = calloc<SdlEvent>();
+  final event = calloc<SdlEvent>();
   while (event.poll()) {
     switch (event.type) {
       case SDL_EVENT_QUIT:
         quit = true;
-        break;
       default:
         break;
     }
@@ -104,7 +103,7 @@ void renderer() {
     ..fillRect(Rectangle(gPlayer.x - 24, gPlayer.y - 24, 48, 48))
     // shot
     ..setDrawColor(0xff, 0xff, 0xff, SDL_ALPHA_OPAQUE);
-  for (var shot in gShotList) {
+  for (final shot in gShotList) {
     gRenderer.fillRect(Rectangle(shot.x - 8, shot.y - 8, 16, 16));
   }
   // term

@@ -2,7 +2,7 @@
 import './generated/const_sdl_net.dart';
 import 'lib_sdl_ex.dart';
 
-final SDL_NET_COMPILEDVERSION = sdlVersionnum(
+final int SDL_NET_COMPILEDVERSION = sdlVersionnum(
   SDL_NET_MAJOR_VERSION,
   SDL_NET_MINOR_VERSION,
   SDL_NET_MICRO_VERSION,

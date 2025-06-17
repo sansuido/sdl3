@@ -9,27 +9,27 @@ const gWinHeight = 144;
 
 int main() {
   // SDL init
-  if (sdlInit(SDL_INIT_VIDEO) == false) {
+  if (!sdlInit(SDL_INIT_VIDEO)) {
     print('Unable to initialize SDL: ${sdlGetError()}');
     return 1;
   }
   sdlSetHint(SDL_HINT_RENDER_VSYNC, '1');
   // create SDL window
-  var window = SdlWindowEx.create(
+  final window = SdlWindowEx.create(
     title: 'sdl2_pixelbuffer',
     w: gWinWidth * 4,
     h: gWinHeight * 4,
     flags: SDL_WINDOW_RESIZABLE,
   );
   if (window == nullptr) {
-    print("Unable to create window: ${sdlGetError()}");
+    print('Unable to create window: ${sdlGetError()}');
     sdlQuit();
     return 1;
   }
   // create renderer
-  var renderer = window.createRenderer();
+  final renderer = window.createRenderer();
   if (renderer == nullptr) {
-    print("Unable to create renderer: ${sdlGetError()}");
+    print('Unable to create renderer: ${sdlGetError()}');
     window.destroy();
     sdlQuit();
     return 1;
@@ -41,7 +41,7 @@ int main() {
     SDL_LOGICAL_PRESENTATION_STRETCH,
   );
   // create texture
-  var texture = renderer.createTexture(
+  final texture = renderer.createTexture(
     SDL_PIXELFORMAT_RGBA8888,
     SDL_TEXTUREACCESS_STREAMING,
     gWinWidth,
@@ -54,8 +54,8 @@ int main() {
     sdlQuit();
   }
   // array of pixels
-  var texturePixels = calloc<Pointer<Uint32>>();
-  var texturePitch = calloc<Int32>();
+  final texturePixels = calloc<Pointer<Uint32>>();
+  final texturePitch = calloc<Int32>();
   texture.lock(nullptr, texturePixels, texturePitch);
   // update texture with new data
   texturePixels.value.value = ByteData.view(
@@ -68,14 +68,13 @@ int main() {
   ).getUint32(0);
   texture.unlock();
   // main loop
-  var event = calloc<SdlEvent>();
+  final event = calloc<SdlEvent>();
   var running = true;
   while (running) {
     while (event.poll()) {
       switch (event.type) {
         case SDL_EVENT_QUIT:
           running = false;
-          break;
         default:
           break;
       }
