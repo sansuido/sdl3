@@ -1,7 +1,5 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-import 'dart:ffi';
-import 'package:ffi/ffi.dart';
-import 'lib_sdl.dart';
+part of '../sdl.dart';
 
 ///
 /// Open a URL/URI in the browser or other appropriate external application.
@@ -36,7 +34,7 @@ import 'lib_sdl.dart';
 /// extern SDL_DECLSPEC bool SDLCALL SDL_OpenURL(const char *url)
 /// ```
 bool sdlOpenUrl(String? url) {
-  final sdlOpenUrlLookupFunction = libSdl3
+  final sdlOpenUrlLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(Pointer<Utf8> url),
         int Function(Pointer<Utf8> url)

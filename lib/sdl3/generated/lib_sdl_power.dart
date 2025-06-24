@@ -1,6 +1,5 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-import 'dart:ffi';
-import 'lib_sdl.dart';
+part of '../sdl.dart';
 
 ///
 /// Get the current power supply details.
@@ -38,7 +37,7 @@ import 'lib_sdl.dart';
 /// extern SDL_DECLSPEC SDL_PowerState SDLCALL SDL_GetPowerInfo(int *seconds, int *percent)
 /// ```
 int sdlGetPowerInfo(Pointer<Int32> seconds, Pointer<Int32> percent) {
-  final sdlGetPowerInfoLookupFunction = libSdl3
+  final sdlGetPowerInfoLookupFunction = _libSdl
       .lookupFunction<
         Int32 Function(Pointer<Int32> seconds, Pointer<Int32> percent),
         int Function(Pointer<Int32> seconds, Pointer<Int32> percent)

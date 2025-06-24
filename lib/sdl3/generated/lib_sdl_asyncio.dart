@@ -1,9 +1,6 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 // ignore_for_file: avoid_positional_boolean_parameters
-import 'dart:ffi';
-import 'package:ffi/ffi.dart';
-import 'lib_sdl.dart';
-import 'struct_sdl.dart';
+part of '../sdl.dart';
 
 ///
 /// Use this function to create a new SDL_AsyncIO object for reading from
@@ -46,7 +43,7 @@ import 'struct_sdl.dart';
 /// extern SDL_DECLSPEC SDL_AsyncIO * SDLCALL SDL_AsyncIOFromFile(const char *file, const char *mode)
 /// ```
 Pointer<SdlAsyncIo> sdlAsyncIoFromFile(String? file, String? mode) {
-  final sdlAsyncIoFromFileLookupFunction = libSdl3
+  final sdlAsyncIoFromFileLookupFunction = _libSdl
       .lookupFunction<
         Pointer<SdlAsyncIo> Function(Pointer<Utf8> file, Pointer<Utf8> mode),
         Pointer<SdlAsyncIo> Function(Pointer<Utf8> file, Pointer<Utf8> mode)
@@ -79,7 +76,7 @@ Pointer<SdlAsyncIo> sdlAsyncIoFromFile(String? file, String? mode) {
 /// extern SDL_DECLSPEC Sint64 SDLCALL SDL_GetAsyncIOSize(SDL_AsyncIO *asyncio)
 /// ```
 int sdlGetAsyncIoSize(Pointer<SdlAsyncIo> asyncio) {
-  final sdlGetAsyncIoSizeLookupFunction = libSdl3
+  final sdlGetAsyncIoSizeLookupFunction = _libSdl
       .lookupFunction<
         Int64 Function(Pointer<SdlAsyncIo> asyncio),
         int Function(Pointer<SdlAsyncIo> asyncio)
@@ -134,7 +131,7 @@ bool sdlReadAsyncIo(
   Pointer<SdlAsyncIoQueue> queue,
   Pointer<NativeType> userdata,
 ) {
-  final sdlReadAsyncIoLookupFunction = libSdl3
+  final sdlReadAsyncIoLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(
           Pointer<SdlAsyncIo> asyncio,
@@ -210,7 +207,7 @@ bool sdlWriteAsyncIo(
   Pointer<SdlAsyncIoQueue> queue,
   Pointer<NativeType> userdata,
 ) {
-  final sdlWriteAsyncIoLookupFunction = libSdl3
+  final sdlWriteAsyncIoLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(
           Pointer<SdlAsyncIo> asyncio,
@@ -296,7 +293,7 @@ bool sdlCloseAsyncIo(
   Pointer<SdlAsyncIoQueue> queue,
   Pointer<NativeType> userdata,
 ) {
-  final sdlCloseAsyncIoLookupFunction = libSdl3
+  final sdlCloseAsyncIoLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(
           Pointer<SdlAsyncIo> asyncio,
@@ -341,7 +338,7 @@ bool sdlCloseAsyncIo(
 /// extern SDL_DECLSPEC SDL_AsyncIOQueue * SDLCALL SDL_CreateAsyncIOQueue(void)
 /// ```
 Pointer<SdlAsyncIoQueue> sdlCreateAsyncIoQueue() {
-  final sdlCreateAsyncIoQueueLookupFunction = libSdl3
+  final sdlCreateAsyncIoQueueLookupFunction = _libSdl
       .lookupFunction<
         Pointer<SdlAsyncIoQueue> Function(),
         Pointer<SdlAsyncIoQueue> Function()
@@ -381,7 +378,7 @@ Pointer<SdlAsyncIoQueue> sdlCreateAsyncIoQueue() {
 /// extern SDL_DECLSPEC void SDLCALL SDL_DestroyAsyncIOQueue(SDL_AsyncIOQueue *queue)
 /// ```
 void sdlDestroyAsyncIoQueue(Pointer<SdlAsyncIoQueue> queue) {
-  final sdlDestroyAsyncIoQueueLookupFunction = libSdl3
+  final sdlDestroyAsyncIoQueueLookupFunction = _libSdl
       .lookupFunction<
         Void Function(Pointer<SdlAsyncIoQueue> queue),
         void Function(Pointer<SdlAsyncIoQueue> queue)
@@ -420,7 +417,7 @@ bool sdlGetAsyncIoResult(
   Pointer<SdlAsyncIoQueue> queue,
   Pointer<SdlAsyncIoOutcome> outcome,
 ) {
-  final sdlGetAsyncIoResultLookupFunction = libSdl3
+  final sdlGetAsyncIoResultLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(
           Pointer<SdlAsyncIoQueue> queue,
@@ -484,7 +481,7 @@ bool sdlWaitAsyncIoResult(
   Pointer<SdlAsyncIoOutcome> outcome,
   int timeoutMs,
 ) {
-  final sdlWaitAsyncIoResultLookupFunction = libSdl3
+  final sdlWaitAsyncIoResultLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(
           Pointer<SdlAsyncIoQueue> queue,
@@ -526,7 +523,7 @@ bool sdlWaitAsyncIoResult(
 /// extern SDL_DECLSPEC void SDLCALL SDL_SignalAsyncIOQueue(SDL_AsyncIOQueue *queue)
 /// ```
 void sdlSignalAsyncIoQueue(Pointer<SdlAsyncIoQueue> queue) {
-  final sdlSignalAsyncIoQueueLookupFunction = libSdl3
+  final sdlSignalAsyncIoQueueLookupFunction = _libSdl
       .lookupFunction<
         Void Function(Pointer<SdlAsyncIoQueue> queue),
         void Function(Pointer<SdlAsyncIoQueue> queue)
@@ -572,7 +569,7 @@ bool sdlLoadFileAsync(
   Pointer<SdlAsyncIoQueue> queue,
   Pointer<NativeType> userdata,
 ) {
-  final sdlLoadFileAsyncLookupFunction = libSdl3
+  final sdlLoadFileAsyncLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(
           Pointer<Utf8> file,

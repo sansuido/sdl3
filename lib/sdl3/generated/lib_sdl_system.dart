@@ -1,9 +1,6 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 // ignore_for_file: avoid_positional_boolean_parameters
-import 'dart:ffi';
-import 'package:ffi/ffi.dart';
-import 'lib_sdl.dart';
-import 'struct_sdl.dart';
+part of '../sdl.dart';
 
 ///
 /// Set a callback for every Windows message, run before TranslateMessage().
@@ -26,7 +23,7 @@ void sdlSetWindowsMessageHook(
   Pointer<NativeFunction<SdlWindowsMessageHook>> callback,
   Pointer<NativeType> userdata,
 ) {
-  final sdlSetWindowsMessageHookLookupFunction = libSdl3
+  final sdlSetWindowsMessageHookLookupFunction = _libSdl
       .lookupFunction<
         Void Function(
           Pointer<NativeFunction<SdlWindowsMessageHook>> callback,
@@ -56,7 +53,7 @@ void sdlSetWindowsMessageHook(
 /// extern SDL_DECLSPEC int SDLCALL SDL_GetDirect3D9AdapterIndex(SDL_DisplayID displayID)
 /// ```
 int sdlGetDirect3D9AdapterIndex(int displayId) {
-  final sdlGetDirect3D9AdapterIndexLookupFunction = libSdl3
+  final sdlGetDirect3D9AdapterIndexLookupFunction = _libSdl
       .lookupFunction<
         Int32 Function(Uint32 displayId),
         int Function(int displayId)
@@ -87,7 +84,7 @@ bool sdlGetDxgiOutputInfo(
   Pointer<Int32> adapterIndex,
   Pointer<Int32> outputIndex,
 ) {
-  final sdlGetDxgiOutputInfoLookupFunction = libSdl3
+  final sdlGetDxgiOutputInfoLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(
           Uint32 displayId,
@@ -126,7 +123,7 @@ void sdlSetX11EventHook(
   Pointer<NativeFunction<SdlX11EventHook>> callback,
   Pointer<NativeType> userdata,
 ) {
-  final sdlSetX11EventHookLookupFunction = libSdl3
+  final sdlSetX11EventHookLookupFunction = _libSdl
       .lookupFunction<
         Void Function(
           Pointer<NativeFunction<SdlX11EventHook>> callback,
@@ -156,7 +153,7 @@ void sdlSetX11EventHook(
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetLinuxThreadPriority(Sint64 threadID, int priority)
 /// ```
 bool sdlSetLinuxThreadPriority(int threadId, int priority) {
-  final sdlSetLinuxThreadPriorityLookupFunction = libSdl3
+  final sdlSetLinuxThreadPriorityLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(Int64 threadId, Int32 priority),
         int Function(int threadId, int priority)
@@ -186,7 +183,7 @@ bool sdlSetLinuxThreadPriorityAndPolicy(
   int sdlPriority,
   int schedPolicy,
 ) {
-  final sdlSetLinuxThreadPriorityAndPolicyLookupFunction = libSdl3
+  final sdlSetLinuxThreadPriorityAndPolicyLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(Int64 threadId, Int32 sdlPriority, Int32 schedPolicy),
         int Function(int threadId, int sdlPriority, int schedPolicy)
@@ -245,7 +242,7 @@ bool sdlSetiOsAnimationCallback(
   Pointer<NativeFunction<SdlIOsAnimationCallback>> callback,
   Pointer<NativeType> callbackParam,
 ) {
-  final sdlSetiOsAnimationCallbackLookupFunction = libSdl3
+  final sdlSetiOsAnimationCallbackLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(
           Pointer<SdlWindow> window,
@@ -284,7 +281,7 @@ bool sdlSetiOsAnimationCallback(
 /// extern SDL_DECLSPEC void SDLCALL SDL_SetiOSEventPump(bool enabled)
 /// ```
 void sdlSetiOsEventPump(bool enabled) {
-  final sdlSetiOsEventPumpLookupFunction = libSdl3
+  final sdlSetiOsEventPumpLookupFunction = _libSdl
       .lookupFunction<Void Function(Uint8 enabled), void Function(int enabled)>(
         'SDL_SetiOSEventPump',
       );
@@ -315,7 +312,7 @@ void sdlSetiOsEventPump(bool enabled) {
 /// extern SDL_DECLSPEC void * SDLCALL SDL_GetAndroidJNIEnv(void)
 /// ```
 Pointer<NativeType> sdlGetAndroidJniEnv() {
-  final sdlGetAndroidJniEnvLookupFunction = libSdl3
+  final sdlGetAndroidJniEnvLookupFunction = _libSdl
       .lookupFunction<
         Pointer<NativeType> Function(),
         Pointer<NativeType> Function()
@@ -350,7 +347,7 @@ Pointer<NativeType> sdlGetAndroidJniEnv() {
 /// extern SDL_DECLSPEC void * SDLCALL SDL_GetAndroidActivity(void)
 /// ```
 Pointer<NativeType> sdlGetAndroidActivity() {
-  final sdlGetAndroidActivityLookupFunction = libSdl3
+  final sdlGetAndroidActivityLookupFunction = _libSdl
       .lookupFunction<
         Pointer<NativeType> Function(),
         Pointer<NativeType> Function()
@@ -396,7 +393,7 @@ Pointer<NativeType> sdlGetAndroidActivity() {
 /// extern SDL_DECLSPEC int SDLCALL SDL_GetAndroidSDKVersion(void)
 /// ```
 int sdlGetAndroidSdkVersion() {
-  final sdlGetAndroidSdkVersionLookupFunction = libSdl3
+  final sdlGetAndroidSdkVersionLookupFunction = _libSdl
       .lookupFunction<Int32 Function(), int Function()>(
         'SDL_GetAndroidSDKVersion',
       );
@@ -414,7 +411,7 @@ int sdlGetAndroidSdkVersion() {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_IsChromebook(void)
 /// ```
 bool sdlIsChromebook() {
-  final sdlIsChromebookLookupFunction = libSdl3
+  final sdlIsChromebookLookupFunction = _libSdl
       .lookupFunction<Uint8 Function(), int Function()>('SDL_IsChromebook');
   return sdlIsChromebookLookupFunction() == 1;
 }
@@ -430,7 +427,7 @@ bool sdlIsChromebook() {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_IsDeXMode(void)
 /// ```
 bool sdlIsDeXMode() {
-  final sdlIsDeXModeLookupFunction = libSdl3
+  final sdlIsDeXModeLookupFunction = _libSdl
       .lookupFunction<Uint8 Function(), int Function()>('SDL_IsDeXMode');
   return sdlIsDeXModeLookupFunction() == 1;
 }
@@ -446,7 +443,7 @@ bool sdlIsDeXMode() {
 /// extern SDL_DECLSPEC void SDLCALL SDL_SendAndroidBackButton(void)
 /// ```
 void sdlSendAndroidBackButton() {
-  final sdlSendAndroidBackButtonLookupFunction = libSdl3
+  final sdlSendAndroidBackButtonLookupFunction = _libSdl
       .lookupFunction<Void Function(), void Function()>(
         'SDL_SendAndroidBackButton',
       );
@@ -478,7 +475,7 @@ void sdlSendAndroidBackButton() {
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetAndroidInternalStoragePath(void)
 /// ```
 String? sdlGetAndroidInternalStoragePath() {
-  final sdlGetAndroidInternalStoragePathLookupFunction = libSdl3
+  final sdlGetAndroidInternalStoragePathLookupFunction = _libSdl
       .lookupFunction<Pointer<Utf8> Function(), Pointer<Utf8> Function()>(
         'SDL_GetAndroidInternalStoragePath',
       );
@@ -508,7 +505,7 @@ String? sdlGetAndroidInternalStoragePath() {
 /// extern SDL_DECLSPEC Uint32 SDLCALL SDL_GetAndroidExternalStorageState(void)
 /// ```
 int sdlGetAndroidExternalStorageState() {
-  final sdlGetAndroidExternalStorageStateLookupFunction = libSdl3
+  final sdlGetAndroidExternalStorageStateLookupFunction = _libSdl
       .lookupFunction<Uint32 Function(), int Function()>(
         'SDL_GetAndroidExternalStorageState',
       );
@@ -541,7 +538,7 @@ int sdlGetAndroidExternalStorageState() {
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetAndroidExternalStoragePath(void)
 /// ```
 String? sdlGetAndroidExternalStoragePath() {
-  final sdlGetAndroidExternalStoragePathLookupFunction = libSdl3
+  final sdlGetAndroidExternalStoragePathLookupFunction = _libSdl
       .lookupFunction<Pointer<Utf8> Function(), Pointer<Utf8> Function()>(
         'SDL_GetAndroidExternalStoragePath',
       );
@@ -576,7 +573,7 @@ String? sdlGetAndroidExternalStoragePath() {
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetAndroidCachePath(void)
 /// ```
 String? sdlGetAndroidCachePath() {
-  final sdlGetAndroidCachePathLookupFunction = libSdl3
+  final sdlGetAndroidCachePathLookupFunction = _libSdl
       .lookupFunction<Pointer<Utf8> Function(), Pointer<Utf8> Function()>(
         'SDL_GetAndroidCachePath',
       );
@@ -629,7 +626,7 @@ bool sdlRequestAndroidPermission(
   Pointer<NativeFunction<SdlRequestAndroidPermissionCallback>> cb,
   Pointer<NativeType> userdata,
 ) {
-  final sdlRequestAndroidPermissionLookupFunction = libSdl3
+  final sdlRequestAndroidPermissionLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(
           Pointer<Utf8> permission,
@@ -692,7 +689,7 @@ bool sdlShowAndroidToast(
   int xoffset,
   int yoffset,
 ) {
-  final sdlShowAndroidToastLookupFunction = libSdl3
+  final sdlShowAndroidToastLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(
           Pointer<Utf8> message,
@@ -741,7 +738,7 @@ bool sdlShowAndroidToast(
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SendAndroidMessage(Uint32 command, int param)
 /// ```
 bool sdlSendAndroidMessage(int command, int param) {
-  final sdlSendAndroidMessageLookupFunction = libSdl3
+  final sdlSendAndroidMessageLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(Uint32 command, Int32 param),
         int Function(int command, int param)
@@ -762,7 +759,7 @@ bool sdlSendAndroidMessage(int command, int param) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_IsTablet(void)
 /// ```
 bool sdlIsTablet() {
-  final sdlIsTabletLookupFunction = libSdl3
+  final sdlIsTabletLookupFunction = _libSdl
       .lookupFunction<Uint8 Function(), int Function()>('SDL_IsTablet');
   return sdlIsTabletLookupFunction() == 1;
 }
@@ -780,7 +777,7 @@ bool sdlIsTablet() {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_IsTV(void)
 /// ```
 bool sdlIsTv() {
-  final sdlIsTvLookupFunction = libSdl3
+  final sdlIsTvLookupFunction = _libSdl
       .lookupFunction<Uint8 Function(), int Function()>('SDL_IsTV');
   return sdlIsTvLookupFunction() == 1;
 }
@@ -797,7 +794,7 @@ bool sdlIsTv() {
 /// extern SDL_DECLSPEC SDL_Sandbox SDLCALL SDL_GetSandbox(void)
 /// ```
 int sdlGetSandbox() {
-  final sdlGetSandboxLookupFunction = libSdl3
+  final sdlGetSandboxLookupFunction = _libSdl
       .lookupFunction<Int32 Function(), int Function()>('SDL_GetSandbox');
   return sdlGetSandboxLookupFunction();
 }
@@ -821,7 +818,7 @@ int sdlGetSandbox() {
 /// extern SDL_DECLSPEC void SDLCALL SDL_OnApplicationWillTerminate(void)
 /// ```
 void sdlOnApplicationWillTerminate() {
-  final sdlOnApplicationWillTerminateLookupFunction = libSdl3
+  final sdlOnApplicationWillTerminateLookupFunction = _libSdl
       .lookupFunction<Void Function(), void Function()>(
         'SDL_OnApplicationWillTerminate',
       );
@@ -847,7 +844,7 @@ void sdlOnApplicationWillTerminate() {
 /// extern SDL_DECLSPEC void SDLCALL SDL_OnApplicationDidReceiveMemoryWarning(void)
 /// ```
 void sdlOnApplicationDidReceiveMemoryWarning() {
-  final sdlOnApplicationDidReceiveMemoryWarningLookupFunction = libSdl3
+  final sdlOnApplicationDidReceiveMemoryWarningLookupFunction = _libSdl
       .lookupFunction<Void Function(), void Function()>(
         'SDL_OnApplicationDidReceiveMemoryWarning',
       );
@@ -873,7 +870,7 @@ void sdlOnApplicationDidReceiveMemoryWarning() {
 /// extern SDL_DECLSPEC void SDLCALL SDL_OnApplicationWillEnterBackground(void)
 /// ```
 void sdlOnApplicationWillEnterBackground() {
-  final sdlOnApplicationWillEnterBackgroundLookupFunction = libSdl3
+  final sdlOnApplicationWillEnterBackgroundLookupFunction = _libSdl
       .lookupFunction<Void Function(), void Function()>(
         'SDL_OnApplicationWillEnterBackground',
       );
@@ -899,7 +896,7 @@ void sdlOnApplicationWillEnterBackground() {
 /// extern SDL_DECLSPEC void SDLCALL SDL_OnApplicationDidEnterBackground(void)
 /// ```
 void sdlOnApplicationDidEnterBackground() {
-  final sdlOnApplicationDidEnterBackgroundLookupFunction = libSdl3
+  final sdlOnApplicationDidEnterBackgroundLookupFunction = _libSdl
       .lookupFunction<Void Function(), void Function()>(
         'SDL_OnApplicationDidEnterBackground',
       );
@@ -925,7 +922,7 @@ void sdlOnApplicationDidEnterBackground() {
 /// extern SDL_DECLSPEC void SDLCALL SDL_OnApplicationWillEnterForeground(void)
 /// ```
 void sdlOnApplicationWillEnterForeground() {
-  final sdlOnApplicationWillEnterForegroundLookupFunction = libSdl3
+  final sdlOnApplicationWillEnterForegroundLookupFunction = _libSdl
       .lookupFunction<Void Function(), void Function()>(
         'SDL_OnApplicationWillEnterForeground',
       );
@@ -951,7 +948,7 @@ void sdlOnApplicationWillEnterForeground() {
 /// extern SDL_DECLSPEC void SDLCALL SDL_OnApplicationDidEnterForeground(void)
 /// ```
 void sdlOnApplicationDidEnterForeground() {
-  final sdlOnApplicationDidEnterForegroundLookupFunction = libSdl3
+  final sdlOnApplicationDidEnterForegroundLookupFunction = _libSdl
       .lookupFunction<Void Function(), void Function()>(
         'SDL_OnApplicationDidEnterForeground',
       );
@@ -977,7 +974,7 @@ void sdlOnApplicationDidEnterForeground() {
 /// extern SDL_DECLSPEC void SDLCALL SDL_OnApplicationDidChangeStatusBarOrientation(void)
 /// ```
 void sdlOnApplicationDidChangeStatusBarOrientation() {
-  final sdlOnApplicationDidChangeStatusBarOrientationLookupFunction = libSdl3
+  final sdlOnApplicationDidChangeStatusBarOrientationLookupFunction = _libSdl
       .lookupFunction<Void Function(), void Function()>(
         'SDL_OnApplicationDidChangeStatusBarOrientation',
       );
@@ -1002,7 +999,7 @@ void sdlOnApplicationDidChangeStatusBarOrientation() {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetGDKTaskQueue(XTaskQueueHandle *outTaskQueue)
 /// ```
 bool sdlGetGdkTaskQueue(Pointer<XTaskQueueHandle> outTaskQueue) {
-  final sdlGetGdkTaskQueueLookupFunction = libSdl3
+  final sdlGetGdkTaskQueueLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(Pointer<XTaskQueueHandle> outTaskQueue),
         int Function(Pointer<XTaskQueueHandle> outTaskQueue)
@@ -1027,7 +1024,7 @@ bool sdlGetGdkTaskQueue(Pointer<XTaskQueueHandle> outTaskQueue) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetGDKDefaultUser(XUserHandle *outUserHandle)
 /// ```
 bool sdlGetGdkDefaultUser(Pointer<XUserHandle> outUserHandle) {
-  final sdlGetGdkDefaultUserLookupFunction = libSdl3
+  final sdlGetGdkDefaultUserLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(Pointer<XUserHandle> outUserHandle),
         int Function(Pointer<XUserHandle> outUserHandle)

@@ -1,8 +1,4 @@
-import 'dart:ffi';
-
-import '../../generated/lib_sdl.dart';
-import '../../generated/lib_sdl_audio.dart';
-import '../../generated/struct_sdl.dart';
+part of '../../sdl.dart';
 
 extension SdlAudioStreamEx on SdlAudioStream {
   // lib_sdl_audio.dart
@@ -180,7 +176,8 @@ extension SdlAudioStreamPointerEx on Pointer<SdlAudioStream> {
   ///
   /// Query an audio stream for its currently-bound device.
   ///
-  /// This reports the audio device that an audio stream is currently bound to.
+  /// This reports the logical audio device that an audio stream is currently
+  /// bound to.
   ///
   /// If not bound, or invalid, this returns zero, which is not a valid device
   /// ID.
@@ -307,14 +304,14 @@ extension SdlAudioStreamPointerEx on Pointer<SdlAudioStream> {
   ///
   /// The frequency ratio is used to adjust the rate at which input data is
   /// consumed. Changing this effectively modifies the speed and pitch of the
-  /// audio. A value greater than 1.0 will play the audio faster, and at a higher
-  /// pitch. A value less than 1.0 will play the audio slower, and at a lower
-  /// pitch.
+  /// audio. A value greater than 1.0f will play the audio faster, and at a
+  /// higher pitch. A value less than 1.0f will play the audio slower, and at a
+  /// lower pitch. 1.0f means play at normal speed.
   ///
   /// This is applied during SDL_GetAudioStreamData, and can be continuously
   /// changed to create various effects.
   ///
-  /// \param stream the stream the frequency ratio is being changed.
+  /// \param stream the stream on which the frequency ratio is being changed.
   /// \param ratio the frequency ratio. 1.0 is normal speed. Must be between 0.01
   /// and 100.
   /// \returns true on success or false on failure; call SDL_GetError() for more
@@ -484,7 +481,7 @@ extension SdlAudioStreamPointerEx on Pointer<SdlAudioStream> {
   /// Channel maps are optional; most things do not need them, instead passing
   /// data in the [order that SDL expects](CategoryAudio#channel-layouts).
   ///
-  /// The output channel map reorders data that leaving a stream via
+  /// The output channel map reorders data that is leaving a stream via
   /// SDL_GetAudioStreamData.
   ///
   /// Each item in the array represents an input channel, and its value is the

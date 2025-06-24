@@ -1,10 +1,4 @@
-import 'dart:ffi';
-import 'dart:math' as math show Point, Rectangle;
-
-import 'package:ffi/ffi.dart' as ffi;
-
-import '../../generated/struct_sdl.dart';
-import '../sdl/sdl_rect.dart';
+part of '../../sdl_dart.dart';
 
 extension RectangleEx on math.Rectangle<double> {
   double get widthIn => width - 1;

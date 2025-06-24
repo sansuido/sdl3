@@ -1,6 +1,5 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-import 'dart:ffi';
-import 'struct_sdl.dart';
+part of '../sdl_image.dart';
 
 // IMG_Animation
 final class ImgAnimation extends Struct {

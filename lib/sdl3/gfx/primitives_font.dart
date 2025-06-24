@@ -1,3 +1,5 @@
+part of '../sdl_gfx.dart';
+
 /*
 
 SDL2_gfxPrimitives_font.h: 8x8 font definition
@@ -26,8 +28,6 @@ distribution.
 Andreas Schiffler -- aschiffler at ferzkopp dot net
 
 */
-import 'dart:ffi';
-import '../generated/struct_sdl.dart';
 
 var gfxPrimitivesFont = List<Pointer<SdlTexture>>.generate(
   256,

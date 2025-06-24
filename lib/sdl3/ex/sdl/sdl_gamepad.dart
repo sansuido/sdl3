@@ -1,9 +1,5 @@
 // ignore_for_file: avoid_positional_boolean_parameters
-
-import 'dart:ffi';
-
-import '../../generated/lib_sdl_gamepad.dart';
-import '../../generated/struct_sdl.dart';
+part of '../../sdl.dart';
 
 extension SdlGamepadEx on SdlGamepad {
   // lib_sdl_gamepad.dart

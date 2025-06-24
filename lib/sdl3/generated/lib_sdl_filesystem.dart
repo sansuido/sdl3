@@ -1,8 +1,5 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-import 'dart:ffi';
-import 'package:ffi/ffi.dart';
-import 'lib_sdl.dart';
-import 'struct_sdl.dart';
+part of '../sdl.dart';
 
 ///
 /// Get the directory where the application was run from.
@@ -47,7 +44,7 @@ import 'struct_sdl.dart';
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetBasePath(void)
 /// ```
 String? sdlGetBasePath() {
-  final sdlGetBasePathLookupFunction = libSdl3
+  final sdlGetBasePathLookupFunction = _libSdl
       .lookupFunction<Pointer<Utf8> Function(), Pointer<Utf8> Function()>(
         'SDL_GetBasePath',
       );
@@ -115,7 +112,7 @@ String? sdlGetBasePath() {
 /// extern SDL_DECLSPEC char * SDLCALL SDL_GetPrefPath(const char *org, const char *app)
 /// ```
 Pointer<Int8> sdlGetPrefPath(String? org, String? app) {
-  final sdlGetPrefPathLookupFunction = libSdl3
+  final sdlGetPrefPathLookupFunction = _libSdl
       .lookupFunction<
         Pointer<Int8> Function(Pointer<Utf8> org, Pointer<Utf8> app),
         Pointer<Int8> Function(Pointer<Utf8> org, Pointer<Utf8> app)
@@ -156,7 +153,7 @@ Pointer<Int8> sdlGetPrefPath(String? org, String? app) {
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetUserFolder(SDL_Folder folder)
 /// ```
 String? sdlGetUserFolder(int folder) {
-  final sdlGetUserFolderLookupFunction = libSdl3
+  final sdlGetUserFolderLookupFunction = _libSdl
       .lookupFunction<
         Pointer<Utf8> Function(Int32 folder),
         Pointer<Utf8> Function(int folder)
@@ -186,7 +183,7 @@ String? sdlGetUserFolder(int folder) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_CreateDirectory(const char *path)
 /// ```
 bool sdlCreateDirectory(String? path) {
-  final sdlCreateDirectoryLookupFunction = libSdl3
+  final sdlCreateDirectoryLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(Pointer<Utf8> path),
         int Function(Pointer<Utf8> path)
@@ -226,7 +223,7 @@ bool sdlEnumerateDirectory(
   Pointer<NativeFunction<SdlEnumerateDirectoryCallback>> callback,
   Pointer<NativeType> userdata,
 ) {
-  final sdlEnumerateDirectoryLookupFunction = libSdl3
+  final sdlEnumerateDirectoryLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(
           Pointer<Utf8> path,
@@ -262,7 +259,7 @@ bool sdlEnumerateDirectory(
 /// extern SDL_DECLSPEC bool SDLCALL SDL_RemovePath(const char *path)
 /// ```
 bool sdlRemovePath(String? path) {
-  final sdlRemovePathLookupFunction = libSdl3
+  final sdlRemovePathLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(Pointer<Utf8> path),
         int Function(Pointer<Utf8> path)
@@ -298,7 +295,7 @@ bool sdlRemovePath(String? path) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_RenamePath(const char *oldpath, const char *newpath)
 /// ```
 bool sdlRenamePath(String? oldpath, String? newpath) {
-  final sdlRenamePathLookupFunction = libSdl3
+  final sdlRenamePathLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(Pointer<Utf8> oldpath, Pointer<Utf8> newpath),
         int Function(Pointer<Utf8> oldpath, Pointer<Utf8> newpath)
@@ -355,7 +352,7 @@ bool sdlRenamePath(String? oldpath, String? newpath) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_CopyFile(const char *oldpath, const char *newpath)
 /// ```
 bool sdlCopyFile(String? oldpath, String? newpath) {
-  final sdlCopyFileLookupFunction = libSdl3
+  final sdlCopyFileLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(Pointer<Utf8> oldpath, Pointer<Utf8> newpath),
         int Function(Pointer<Utf8> oldpath, Pointer<Utf8> newpath)
@@ -384,7 +381,7 @@ bool sdlCopyFile(String? oldpath, String? newpath) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetPathInfo(const char *path, SDL_PathInfo *info)
 /// ```
 bool sdlGetPathInfo(String? path, Pointer<SdlPathInfo> info) {
-  final sdlGetPathInfoLookupFunction = libSdl3
+  final sdlGetPathInfoLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(Pointer<Utf8> path, Pointer<SdlPathInfo> info),
         int Function(Pointer<Utf8> path, Pointer<SdlPathInfo> info)
@@ -435,7 +432,7 @@ Pointer<Pointer<Int8>> sdlGlobDirectory(
   int flags,
   Pointer<Int32> count,
 ) {
-  final sdlGlobDirectoryLookupFunction = libSdl3
+  final sdlGlobDirectoryLookupFunction = _libSdl
       .lookupFunction<
         Pointer<Pointer<Int8>> Function(
           Pointer<Utf8> path,
@@ -487,7 +484,7 @@ Pointer<Pointer<Int8>> sdlGlobDirectory(
 /// extern SDL_DECLSPEC char * SDLCALL SDL_GetCurrentDirectory(void)
 /// ```
 Pointer<Int8> sdlGetCurrentDirectory() {
-  final sdlGetCurrentDirectoryLookupFunction = libSdl3
+  final sdlGetCurrentDirectoryLookupFunction = _libSdl
       .lookupFunction<Pointer<Int8> Function(), Pointer<Int8> Function()>(
         'SDL_GetCurrentDirectory',
       );

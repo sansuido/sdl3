@@ -1,9 +1,5 @@
 // ignore_for_file: avoid_positional_boolean_parameters
-
-import 'dart:ffi';
-import '../../generated/lib_sdl_mixer.dart';
-import '../../generated/struct_sdl.dart';
-import '../../generated/struct_sdl_mixer.dart';
+part of '../../sdl_mixer.dart';
 
 extension MixMusicEx on MixMusic {
   // lib_sdl_mxer.dart

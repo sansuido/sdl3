@@ -1,9 +1,6 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 // ignore_for_file: avoid_positional_boolean_parameters
-import 'dart:ffi';
-import 'package:ffi/ffi.dart';
-import 'lib_sdl.dart';
-import 'struct_sdl.dart';
+part of '../sdl.dart';
 
 ///
 /// Allocate a new surface with a specific pixel format.
@@ -27,7 +24,7 @@ import 'struct_sdl.dart';
 /// extern SDL_DECLSPEC SDL_Surface * SDLCALL SDL_CreateSurface(int width, int height, SDL_PixelFormat format)
 /// ```
 Pointer<SdlSurface> sdlCreateSurface(int width, int height, int format) {
-  final sdlCreateSurfaceLookupFunction = libSdl3
+  final sdlCreateSurfaceLookupFunction = _libSdl
       .lookupFunction<
         Pointer<SdlSurface> Function(Int32 width, Int32 height, Int32 format),
         Pointer<SdlSurface> Function(int width, int height, int format)
@@ -73,7 +70,7 @@ Pointer<SdlSurface> sdlCreateSurfaceFrom(
   Pointer<NativeType> pixels,
   int pitch,
 ) {
-  final sdlCreateSurfaceFromLookupFunction = libSdl3
+  final sdlCreateSurfaceFromLookupFunction = _libSdl
       .lookupFunction<
         Pointer<SdlSurface> Function(
           Int32 width,
@@ -117,7 +114,7 @@ Pointer<SdlSurface> sdlCreateSurfaceFrom(
 /// extern SDL_DECLSPEC void SDLCALL SDL_DestroySurface(SDL_Surface *surface)
 /// ```
 void sdlDestroySurface(Pointer<SdlSurface> surface) {
-  final sdlDestroySurfaceLookupFunction = libSdl3
+  final sdlDestroySurfaceLookupFunction = _libSdl
       .lookupFunction<
         Void Function(Pointer<SdlSurface> surface),
         void Function(Pointer<SdlSurface> surface)
@@ -161,7 +158,7 @@ void sdlDestroySurface(Pointer<SdlSurface> surface) {
 /// extern SDL_DECLSPEC SDL_PropertiesID SDLCALL SDL_GetSurfaceProperties(SDL_Surface *surface)
 /// ```
 int sdlGetSurfaceProperties(Pointer<SdlSurface> surface) {
-  final sdlGetSurfacePropertiesLookupFunction = libSdl3
+  final sdlGetSurfacePropertiesLookupFunction = _libSdl
       .lookupFunction<
         Uint32 Function(Pointer<SdlSurface> surface),
         int Function(Pointer<SdlSurface> surface)
@@ -191,7 +188,7 @@ int sdlGetSurfaceProperties(Pointer<SdlSurface> surface) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetSurfaceColorspace(SDL_Surface *surface, SDL_Colorspace colorspace)
 /// ```
 bool sdlSetSurfaceColorspace(Pointer<SdlSurface> surface, int colorspace) {
-  final sdlSetSurfaceColorspaceLookupFunction = libSdl3
+  final sdlSetSurfaceColorspaceLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(Pointer<SdlSurface> surface, Int32 colorspace),
         int Function(Pointer<SdlSurface> surface, int colorspace)
@@ -220,7 +217,7 @@ bool sdlSetSurfaceColorspace(Pointer<SdlSurface> surface, int colorspace) {
 /// extern SDL_DECLSPEC SDL_Colorspace SDLCALL SDL_GetSurfaceColorspace(SDL_Surface *surface)
 /// ```
 int sdlGetSurfaceColorspace(Pointer<SdlSurface> surface) {
-  final sdlGetSurfaceColorspaceLookupFunction = libSdl3
+  final sdlGetSurfaceColorspaceLookupFunction = _libSdl
       .lookupFunction<
         Int32 Function(Pointer<SdlSurface> surface),
         int Function(Pointer<SdlSurface> surface)
@@ -260,7 +257,7 @@ int sdlGetSurfaceColorspace(Pointer<SdlSurface> surface) {
 /// extern SDL_DECLSPEC SDL_Palette * SDLCALL SDL_CreateSurfacePalette(SDL_Surface *surface)
 /// ```
 Pointer<SdlPalette> sdlCreateSurfacePalette(Pointer<SdlSurface> surface) {
-  final sdlCreateSurfacePaletteLookupFunction = libSdl3
+  final sdlCreateSurfacePaletteLookupFunction = _libSdl
       .lookupFunction<
         Pointer<SdlPalette> Function(Pointer<SdlSurface> surface),
         Pointer<SdlPalette> Function(Pointer<SdlSurface> surface)
@@ -292,7 +289,7 @@ bool sdlSetSurfacePalette(
   Pointer<SdlSurface> surface,
   Pointer<SdlPalette> palette,
 ) {
-  final sdlSetSurfacePaletteLookupFunction = libSdl3
+  final sdlSetSurfacePaletteLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(
           Pointer<SdlSurface> surface,
@@ -320,7 +317,7 @@ bool sdlSetSurfacePalette(
 /// extern SDL_DECLSPEC SDL_Palette * SDLCALL SDL_GetSurfacePalette(SDL_Surface *surface)
 /// ```
 Pointer<SdlPalette> sdlGetSurfacePalette(Pointer<SdlSurface> surface) {
-  final sdlGetSurfacePaletteLookupFunction = libSdl3
+  final sdlGetSurfacePaletteLookupFunction = _libSdl
       .lookupFunction<
         Pointer<SdlPalette> Function(Pointer<SdlSurface> surface),
         Pointer<SdlPalette> Function(Pointer<SdlSurface> surface)
@@ -360,7 +357,7 @@ bool sdlAddSurfaceAlternateImage(
   Pointer<SdlSurface> surface,
   Pointer<SdlSurface> image,
 ) {
-  final sdlAddSurfaceAlternateImageLookupFunction = libSdl3
+  final sdlAddSurfaceAlternateImageLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(Pointer<SdlSurface> surface, Pointer<SdlSurface> image),
         int Function(Pointer<SdlSurface> surface, Pointer<SdlSurface> image)
@@ -386,7 +383,7 @@ bool sdlAddSurfaceAlternateImage(
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SurfaceHasAlternateImages(SDL_Surface *surface)
 /// ```
 bool sdlSurfaceHasAlternateImages(Pointer<SdlSurface> surface) {
-  final sdlSurfaceHasAlternateImagesLookupFunction = libSdl3
+  final sdlSurfaceHasAlternateImagesLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(Pointer<SdlSurface> surface),
         int Function(Pointer<SdlSurface> surface)
@@ -426,7 +423,7 @@ Pointer<Pointer<SdlSurface>> sdlGetSurfaceImages(
   Pointer<SdlSurface> surface,
   Pointer<Int32> count,
 ) {
-  final sdlGetSurfaceImagesLookupFunction = libSdl3
+  final sdlGetSurfaceImagesLookupFunction = _libSdl
       .lookupFunction<
         Pointer<Pointer<SdlSurface>> Function(
           Pointer<SdlSurface> surface,
@@ -460,7 +457,7 @@ Pointer<Pointer<SdlSurface>> sdlGetSurfaceImages(
 /// extern SDL_DECLSPEC void SDLCALL SDL_RemoveSurfaceAlternateImages(SDL_Surface *surface)
 /// ```
 void sdlRemoveSurfaceAlternateImages(Pointer<SdlSurface> surface) {
-  final sdlRemoveSurfaceAlternateImagesLookupFunction = libSdl3
+  final sdlRemoveSurfaceAlternateImagesLookupFunction = _libSdl
       .lookupFunction<
         Void Function(Pointer<SdlSurface> surface),
         void Function(Pointer<SdlSurface> surface)
@@ -497,7 +494,7 @@ void sdlRemoveSurfaceAlternateImages(Pointer<SdlSurface> surface) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_LockSurface(SDL_Surface *surface)
 /// ```
 bool sdlLockSurface(Pointer<SdlSurface> surface) {
-  final sdlLockSurfaceLookupFunction = libSdl3
+  final sdlLockSurfaceLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(Pointer<SdlSurface> surface),
         int Function(Pointer<SdlSurface> surface)
@@ -522,7 +519,7 @@ bool sdlLockSurface(Pointer<SdlSurface> surface) {
 /// extern SDL_DECLSPEC void SDLCALL SDL_UnlockSurface(SDL_Surface *surface)
 /// ```
 void sdlUnlockSurface(Pointer<SdlSurface> surface) {
-  final sdlUnlockSurfaceLookupFunction = libSdl3
+  final sdlUnlockSurfaceLookupFunction = _libSdl
       .lookupFunction<
         Void Function(Pointer<SdlSurface> surface),
         void Function(Pointer<SdlSurface> surface)
@@ -554,7 +551,7 @@ void sdlUnlockSurface(Pointer<SdlSurface> surface) {
 /// extern SDL_DECLSPEC SDL_Surface * SDLCALL SDL_LoadBMP_IO(SDL_IOStream *src, bool closeio)
 /// ```
 Pointer<SdlSurface> sdlLoadBmpIo(Pointer<SdlIoStream> src, bool closeio) {
-  final sdlLoadBmpIoLookupFunction = libSdl3
+  final sdlLoadBmpIoLookupFunction = _libSdl
       .lookupFunction<
         Pointer<SdlSurface> Function(Pointer<SdlIoStream> src, Uint8 closeio),
         Pointer<SdlSurface> Function(Pointer<SdlIoStream> src, int closeio)
@@ -584,7 +581,7 @@ Pointer<SdlSurface> sdlLoadBmpIo(Pointer<SdlIoStream> src, bool closeio) {
 /// extern SDL_DECLSPEC SDL_Surface * SDLCALL SDL_LoadBMP(const char *file)
 /// ```
 Pointer<SdlSurface> sdlLoadBmp(String? file) {
-  final sdlLoadBmpLookupFunction = libSdl3
+  final sdlLoadBmpLookupFunction = _libSdl
       .lookupFunction<
         Pointer<SdlSurface> Function(Pointer<Utf8> file),
         Pointer<SdlSurface> Function(Pointer<Utf8> file)
@@ -626,7 +623,7 @@ bool sdlSaveBmpIo(
   Pointer<SdlIoStream> dst,
   bool closeio,
 ) {
-  final sdlSaveBmpIoLookupFunction = libSdl3
+  final sdlSaveBmpIoLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(
           Pointer<SdlSurface> surface,
@@ -667,7 +664,7 @@ bool sdlSaveBmpIo(
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SaveBMP(SDL_Surface *surface, const char *file)
 /// ```
 bool sdlSaveBmp(Pointer<SdlSurface> surface, String? file) {
-  final sdlSaveBmpLookupFunction = libSdl3
+  final sdlSaveBmpLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(Pointer<SdlSurface> surface, Pointer<Utf8> file),
         int Function(Pointer<SdlSurface> surface, Pointer<Utf8> file)
@@ -701,7 +698,7 @@ bool sdlSaveBmp(Pointer<SdlSurface> surface, String? file) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetSurfaceRLE(SDL_Surface *surface, bool enabled)
 /// ```
 bool sdlSetSurfaceRle(Pointer<SdlSurface> surface, bool enabled) {
-  final sdlSetSurfaceRleLookupFunction = libSdl3
+  final sdlSetSurfaceRleLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(Pointer<SdlSurface> surface, Uint8 enabled),
         int Function(Pointer<SdlSurface> surface, int enabled)
@@ -727,7 +724,7 @@ bool sdlSetSurfaceRle(Pointer<SdlSurface> surface, bool enabled) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SurfaceHasRLE(SDL_Surface *surface)
 /// ```
 bool sdlSurfaceHasRle(Pointer<SdlSurface> surface) {
-  final sdlSurfaceHasRleLookupFunction = libSdl3
+  final sdlSurfaceHasRleLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(Pointer<SdlSurface> surface),
         int Function(Pointer<SdlSurface> surface)
@@ -763,7 +760,7 @@ bool sdlSurfaceHasRle(Pointer<SdlSurface> surface) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetSurfaceColorKey(SDL_Surface *surface, bool enabled, Uint32 key)
 /// ```
 bool sdlSetSurfaceColorKey(Pointer<SdlSurface> surface, bool enabled, int key) {
-  final sdlSetSurfaceColorKeyLookupFunction = libSdl3
+  final sdlSetSurfaceColorKeyLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(Pointer<SdlSurface> surface, Uint8 enabled, Uint32 key),
         int Function(Pointer<SdlSurface> surface, int enabled, int key)
@@ -791,7 +788,7 @@ bool sdlSetSurfaceColorKey(Pointer<SdlSurface> surface, bool enabled, int key) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SurfaceHasColorKey(SDL_Surface *surface)
 /// ```
 bool sdlSurfaceHasColorKey(Pointer<SdlSurface> surface) {
-  final sdlSurfaceHasColorKeyLookupFunction = libSdl3
+  final sdlSurfaceHasColorKeyLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(Pointer<SdlSurface> surface),
         int Function(Pointer<SdlSurface> surface)
@@ -823,7 +820,7 @@ bool sdlSurfaceHasColorKey(Pointer<SdlSurface> surface) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetSurfaceColorKey(SDL_Surface *surface, Uint32 *key)
 /// ```
 bool sdlGetSurfaceColorKey(Pointer<SdlSurface> surface, Pointer<Uint32> key) {
-  final sdlGetSurfaceColorKeyLookupFunction = libSdl3
+  final sdlGetSurfaceColorKeyLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(Pointer<SdlSurface> surface, Pointer<Uint32> key),
         int Function(Pointer<SdlSurface> surface, Pointer<Uint32> key)
@@ -858,7 +855,7 @@ bool sdlGetSurfaceColorKey(Pointer<SdlSurface> surface, Pointer<Uint32> key) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetSurfaceColorMod(SDL_Surface *surface, Uint8 r, Uint8 g, Uint8 b)
 /// ```
 bool sdlSetSurfaceColorMod(Pointer<SdlSurface> surface, int r, int g, int b) {
-  final sdlSetSurfaceColorModLookupFunction = libSdl3
+  final sdlSetSurfaceColorModLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(Pointer<SdlSurface> surface, Uint8 r, Uint8 g, Uint8 b),
         int Function(Pointer<SdlSurface> surface, int r, int g, int b)
@@ -892,7 +889,7 @@ bool sdlGetSurfaceColorMod(
   Pointer<Uint8> g,
   Pointer<Uint8> b,
 ) {
-  final sdlGetSurfaceColorModLookupFunction = libSdl3
+  final sdlGetSurfaceColorModLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(
           Pointer<SdlSurface> surface,
@@ -934,7 +931,7 @@ bool sdlGetSurfaceColorMod(
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetSurfaceAlphaMod(SDL_Surface *surface, Uint8 alpha)
 /// ```
 bool sdlSetSurfaceAlphaMod(Pointer<SdlSurface> surface, int alpha) {
-  final sdlSetSurfaceAlphaModLookupFunction = libSdl3
+  final sdlSetSurfaceAlphaModLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(Pointer<SdlSurface> surface, Uint8 alpha),
         int Function(Pointer<SdlSurface> surface, int alpha)
@@ -961,7 +958,7 @@ bool sdlSetSurfaceAlphaMod(Pointer<SdlSurface> surface, int alpha) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetSurfaceAlphaMod(SDL_Surface *surface, Uint8 *alpha)
 /// ```
 bool sdlGetSurfaceAlphaMod(Pointer<SdlSurface> surface, Pointer<Uint8> alpha) {
-  final sdlGetSurfaceAlphaModLookupFunction = libSdl3
+  final sdlGetSurfaceAlphaModLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(Pointer<SdlSurface> surface, Pointer<Uint8> alpha),
         int Function(Pointer<SdlSurface> surface, Pointer<Uint8> alpha)
@@ -991,7 +988,7 @@ bool sdlGetSurfaceAlphaMod(Pointer<SdlSurface> surface, Pointer<Uint8> alpha) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetSurfaceBlendMode(SDL_Surface *surface, SDL_BlendMode blendMode)
 /// ```
 bool sdlSetSurfaceBlendMode(Pointer<SdlSurface> surface, int blendMode) {
-  final sdlSetSurfaceBlendModeLookupFunction = libSdl3
+  final sdlSetSurfaceBlendModeLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(Pointer<SdlSurface> surface, Uint32 blendMode),
         int Function(Pointer<SdlSurface> surface, int blendMode)
@@ -1020,7 +1017,7 @@ bool sdlGetSurfaceBlendMode(
   Pointer<SdlSurface> surface,
   Pointer<Uint32> blendMode,
 ) {
-  final sdlGetSurfaceBlendModeLookupFunction = libSdl3
+  final sdlGetSurfaceBlendModeLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(Pointer<SdlSurface> surface, Pointer<Uint32> blendMode),
         int Function(Pointer<SdlSurface> surface, Pointer<Uint32> blendMode)
@@ -1053,7 +1050,7 @@ bool sdlGetSurfaceBlendMode(
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetSurfaceClipRect(SDL_Surface *surface, const SDL_Rect *rect)
 /// ```
 bool sdlSetSurfaceClipRect(Pointer<SdlSurface> surface, Pointer<SdlRect> rect) {
-  final sdlSetSurfaceClipRectLookupFunction = libSdl3
+  final sdlSetSurfaceClipRectLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(Pointer<SdlSurface> surface, Pointer<SdlRect> rect),
         int Function(Pointer<SdlSurface> surface, Pointer<SdlRect> rect)
@@ -1084,7 +1081,7 @@ bool sdlSetSurfaceClipRect(Pointer<SdlSurface> surface, Pointer<SdlRect> rect) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetSurfaceClipRect(SDL_Surface *surface, SDL_Rect *rect)
 /// ```
 bool sdlGetSurfaceClipRect(Pointer<SdlSurface> surface, Pointer<SdlRect> rect) {
-  final sdlGetSurfaceClipRectLookupFunction = libSdl3
+  final sdlGetSurfaceClipRectLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(Pointer<SdlSurface> surface, Pointer<SdlRect> rect),
         int Function(Pointer<SdlSurface> surface, Pointer<SdlRect> rect)
@@ -1108,7 +1105,7 @@ bool sdlGetSurfaceClipRect(Pointer<SdlSurface> surface, Pointer<SdlRect> rect) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_FlipSurface(SDL_Surface *surface, SDL_FlipMode flip)
 /// ```
 bool sdlFlipSurface(Pointer<SdlSurface> surface, int flip) {
-  final sdlFlipSurfaceLookupFunction = libSdl3
+  final sdlFlipSurfaceLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(Pointer<SdlSurface> surface, Int32 flip),
         int Function(Pointer<SdlSurface> surface, int flip)
@@ -1138,7 +1135,7 @@ bool sdlFlipSurface(Pointer<SdlSurface> surface, int flip) {
 /// extern SDL_DECLSPEC SDL_Surface * SDLCALL SDL_DuplicateSurface(SDL_Surface *surface)
 /// ```
 Pointer<SdlSurface> sdlDuplicateSurface(Pointer<SdlSurface> surface) {
-  final sdlDuplicateSurfaceLookupFunction = libSdl3
+  final sdlDuplicateSurfaceLookupFunction = _libSdl
       .lookupFunction<
         Pointer<SdlSurface> Function(Pointer<SdlSurface> surface),
         Pointer<SdlSurface> Function(Pointer<SdlSurface> surface)
@@ -1174,7 +1171,7 @@ Pointer<SdlSurface> sdlScaleSurface(
   int height,
   int scaleMode,
 ) {
-  final sdlScaleSurfaceLookupFunction = libSdl3
+  final sdlScaleSurfaceLookupFunction = _libSdl
       .lookupFunction<
         Pointer<SdlSurface> Function(
           Pointer<SdlSurface> surface,
@@ -1222,7 +1219,7 @@ Pointer<SdlSurface> sdlScaleSurface(
 /// extern SDL_DECLSPEC SDL_Surface * SDLCALL SDL_ConvertSurface(SDL_Surface *surface, SDL_PixelFormat format)
 /// ```
 Pointer<SdlSurface> sdlConvertSurface(Pointer<SdlSurface> surface, int format) {
-  final sdlConvertSurfaceLookupFunction = libSdl3
+  final sdlConvertSurfaceLookupFunction = _libSdl
       .lookupFunction<
         Pointer<SdlSurface> Function(Pointer<SdlSurface> surface, Int32 format),
         Pointer<SdlSurface> Function(Pointer<SdlSurface> surface, int format)
@@ -1266,7 +1263,7 @@ Pointer<SdlSurface> sdlConvertSurfaceAndColorspace(
   int colorspace,
   int props,
 ) {
-  final sdlConvertSurfaceAndColorspaceLookupFunction = libSdl3
+  final sdlConvertSurfaceAndColorspaceLookupFunction = _libSdl
       .lookupFunction<
         Pointer<SdlSurface> Function(
           Pointer<SdlSurface> surface,
@@ -1327,7 +1324,7 @@ bool sdlConvertPixels(
   Pointer<NativeType> dst,
   int dstPitch,
 ) {
-  final sdlConvertPixelsLookupFunction = libSdl3
+  final sdlConvertPixelsLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(
           Int32 width,
@@ -1411,7 +1408,7 @@ bool sdlConvertPixelsAndColorspace(
   Pointer<NativeType> dst,
   int dstPitch,
 ) {
-  final sdlConvertPixelsAndColorspaceLookupFunction = libSdl3
+  final sdlConvertPixelsAndColorspaceLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(
           Int32 width,
@@ -1497,7 +1494,7 @@ bool sdlPremultiplyAlpha(
   int dstPitch,
   bool linear,
 ) {
-  final sdlPremultiplyAlphaLookupFunction = libSdl3
+  final sdlPremultiplyAlphaLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(
           Int32 width,
@@ -1555,7 +1552,7 @@ bool sdlPremultiplyAlpha(
 /// extern SDL_DECLSPEC bool SDLCALL SDL_PremultiplySurfaceAlpha(SDL_Surface *surface, bool linear)
 /// ```
 bool sdlPremultiplySurfaceAlpha(Pointer<SdlSurface> surface, bool linear) {
-  final sdlPremultiplySurfaceAlphaLookupFunction = libSdl3
+  final sdlPremultiplySurfaceAlphaLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(Pointer<SdlSurface> surface, Uint8 linear),
         int Function(Pointer<SdlSurface> surface, int linear)
@@ -1593,7 +1590,7 @@ bool sdlClearSurface(
   double b,
   double a,
 ) {
-  final sdlClearSurfaceLookupFunction = libSdl3
+  final sdlClearSurfaceLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(
           Pointer<SdlSurface> surface,
@@ -1646,7 +1643,7 @@ bool sdlFillSurfaceRect(
   Pointer<SdlRect> rect,
   int color,
 ) {
-  final sdlFillSurfaceRectLookupFunction = libSdl3
+  final sdlFillSurfaceRectLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(
           Pointer<SdlSurface> dst,
@@ -1692,7 +1689,7 @@ bool sdlFillSurfaceRects(
   int count,
   int color,
 ) {
-  final sdlFillSurfaceRectsLookupFunction = libSdl3
+  final sdlFillSurfaceRectsLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(
           Pointer<SdlSurface> dst,
@@ -1790,7 +1787,7 @@ bool sdlBlitSurface(
   Pointer<SdlSurface> dst,
   Pointer<SdlRect> dstrect,
 ) {
-  final sdlBlitSurfaceLookupFunction = libSdl3
+  final sdlBlitSurfaceLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(
           Pointer<SdlSurface> src,
@@ -1839,7 +1836,7 @@ bool sdlBlitSurfaceUnchecked(
   Pointer<SdlSurface> dst,
   Pointer<SdlRect> dstrect,
 ) {
-  final sdlBlitSurfaceUncheckedLookupFunction = libSdl3
+  final sdlBlitSurfaceUncheckedLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(
           Pointer<SdlSurface> src,
@@ -1889,7 +1886,7 @@ bool sdlBlitSurfaceScaled(
   Pointer<SdlRect> dstrect,
   int scaleMode,
 ) {
-  final sdlBlitSurfaceScaledLookupFunction = libSdl3
+  final sdlBlitSurfaceScaledLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(
           Pointer<SdlSurface> src,
@@ -1949,7 +1946,7 @@ bool sdlBlitSurfaceUncheckedScaled(
   Pointer<SdlRect> dstrect,
   int scaleMode,
 ) {
-  final sdlBlitSurfaceUncheckedScaledLookupFunction = libSdl3
+  final sdlBlitSurfaceUncheckedScaledLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(
           Pointer<SdlSurface> src,
@@ -2007,7 +2004,7 @@ bool sdlStretchSurface(
   Pointer<SdlRect> dstrect,
   int scaleMode,
 ) {
-  final sdlStretchSurfaceLookupFunction = libSdl3
+  final sdlStretchSurfaceLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(
           Pointer<SdlSurface> src,
@@ -2066,7 +2063,7 @@ bool sdlBlitSurfaceTiled(
   Pointer<SdlSurface> dst,
   Pointer<SdlRect> dstrect,
 ) {
-  final sdlBlitSurfaceTiledLookupFunction = libSdl3
+  final sdlBlitSurfaceTiledLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(
           Pointer<SdlSurface> src,
@@ -2122,7 +2119,7 @@ bool sdlBlitSurfaceTiledWithScale(
   Pointer<SdlSurface> dst,
   Pointer<SdlRect> dstrect,
 ) {
-  final sdlBlitSurfaceTiledWithScaleLookupFunction = libSdl3
+  final sdlBlitSurfaceTiledWithScaleLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(
           Pointer<SdlSurface> src,
@@ -2201,7 +2198,7 @@ bool sdlBlitSurface9Grid(
   Pointer<SdlSurface> dst,
   Pointer<SdlRect> dstrect,
 ) {
-  final sdlBlitSurface9GridLookupFunction = libSdl3
+  final sdlBlitSurface9GridLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(
           Pointer<SdlSurface> src,
@@ -2277,7 +2274,7 @@ bool sdlBlitSurface9Grid(
 /// extern SDL_DECLSPEC Uint32 SDLCALL SDL_MapSurfaceRGB(SDL_Surface *surface, Uint8 r, Uint8 g, Uint8 b)
 /// ```
 int sdlMapSurfaceRgb(Pointer<SdlSurface> surface, int r, int g, int b) {
-  final sdlMapSurfaceRgbLookupFunction = libSdl3
+  final sdlMapSurfaceRgbLookupFunction = _libSdl
       .lookupFunction<
         Uint32 Function(Pointer<SdlSurface> surface, Uint8 r, Uint8 g, Uint8 b),
         int Function(Pointer<SdlSurface> surface, int r, int g, int b)
@@ -2320,7 +2317,7 @@ int sdlMapSurfaceRgb(Pointer<SdlSurface> surface, int r, int g, int b) {
 /// extern SDL_DECLSPEC Uint32 SDLCALL SDL_MapSurfaceRGBA(SDL_Surface *surface, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 /// ```
 int sdlMapSurfaceRgba(Pointer<SdlSurface> surface, int r, int g, int b, int a) {
-  final sdlMapSurfaceRgbaLookupFunction = libSdl3
+  final sdlMapSurfaceRgbaLookupFunction = _libSdl
       .lookupFunction<
         Uint32 Function(
           Pointer<SdlSurface> surface,
@@ -2373,7 +2370,7 @@ bool sdlReadSurfacePixel(
   Pointer<Uint8> b,
   Pointer<Uint8> a,
 ) {
-  final sdlReadSurfacePixelLookupFunction = libSdl3
+  final sdlReadSurfacePixelLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(
           Pointer<SdlSurface> surface,
@@ -2433,7 +2430,7 @@ bool sdlReadSurfacePixelFloat(
   Pointer<Float> b,
   Pointer<Float> a,
 ) {
-  final sdlReadSurfacePixelFloatLookupFunction = libSdl3
+  final sdlReadSurfacePixelFloatLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(
           Pointer<SdlSurface> surface,
@@ -2492,7 +2489,7 @@ bool sdlWriteSurfacePixel(
   int b,
   int a,
 ) {
-  final sdlWriteSurfacePixelLookupFunction = libSdl3
+  final sdlWriteSurfacePixelLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(
           Pointer<SdlSurface> surface,
@@ -2548,7 +2545,7 @@ bool sdlWriteSurfacePixelFloat(
   double b,
   double a,
 ) {
-  final sdlWriteSurfacePixelFloatLookupFunction = libSdl3
+  final sdlWriteSurfacePixelFloatLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(
           Pointer<SdlSurface> surface,

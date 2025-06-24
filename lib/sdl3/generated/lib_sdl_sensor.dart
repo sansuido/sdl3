@@ -1,8 +1,5 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-import 'dart:ffi';
-import 'package:ffi/ffi.dart';
-import 'lib_sdl.dart';
-import 'struct_sdl.dart';
+part of '../sdl.dart';
 
 ///
 /// Get a list of currently connected sensors.
@@ -19,7 +16,7 @@ import 'struct_sdl.dart';
 /// extern SDL_DECLSPEC SDL_SensorID * SDLCALL SDL_GetSensors(int *count)
 /// ```
 Pointer<Uint32> sdlGetSensors(Pointer<Int32> count) {
-  final sdlGetSensorsLookupFunction = libSdl3
+  final sdlGetSensorsLookupFunction = _libSdl
       .lookupFunction<
         Pointer<Uint32> Function(Pointer<Int32> count),
         Pointer<Uint32> Function(Pointer<Int32> count)
@@ -41,7 +38,7 @@ Pointer<Uint32> sdlGetSensors(Pointer<Int32> count) {
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetSensorNameForID(SDL_SensorID instance_id)
 /// ```
 String? sdlGetSensorNameForId(int instanceId) {
-  final sdlGetSensorNameForIdLookupFunction = libSdl3
+  final sdlGetSensorNameForIdLookupFunction = _libSdl
       .lookupFunction<
         Pointer<Utf8> Function(Uint32 instanceId),
         Pointer<Utf8> Function(int instanceId)
@@ -68,7 +65,7 @@ String? sdlGetSensorNameForId(int instanceId) {
 /// extern SDL_DECLSPEC SDL_SensorType SDLCALL SDL_GetSensorTypeForID(SDL_SensorID instance_id)
 /// ```
 int sdlGetSensorTypeForId(int instanceId) {
-  final sdlGetSensorTypeForIdLookupFunction = libSdl3
+  final sdlGetSensorTypeForIdLookupFunction = _libSdl
       .lookupFunction<
         Int32 Function(Uint32 instanceId),
         int Function(int instanceId)
@@ -91,7 +88,7 @@ int sdlGetSensorTypeForId(int instanceId) {
 /// extern SDL_DECLSPEC int SDLCALL SDL_GetSensorNonPortableTypeForID(SDL_SensorID instance_id)
 /// ```
 int sdlGetSensorNonPortableTypeForId(int instanceId) {
-  final sdlGetSensorNonPortableTypeForIdLookupFunction = libSdl3
+  final sdlGetSensorNonPortableTypeForIdLookupFunction = _libSdl
       .lookupFunction<
         Int32 Function(Uint32 instanceId),
         int Function(int instanceId)
@@ -112,7 +109,7 @@ int sdlGetSensorNonPortableTypeForId(int instanceId) {
 /// extern SDL_DECLSPEC SDL_Sensor * SDLCALL SDL_OpenSensor(SDL_SensorID instance_id)
 /// ```
 Pointer<SdlSensor> sdlOpenSensor(int instanceId) {
-  final sdlOpenSensorLookupFunction = libSdl3
+  final sdlOpenSensorLookupFunction = _libSdl
       .lookupFunction<
         Pointer<SdlSensor> Function(Uint32 instanceId),
         Pointer<SdlSensor> Function(int instanceId)
@@ -133,7 +130,7 @@ Pointer<SdlSensor> sdlOpenSensor(int instanceId) {
 /// extern SDL_DECLSPEC SDL_Sensor * SDLCALL SDL_GetSensorFromID(SDL_SensorID instance_id)
 /// ```
 Pointer<SdlSensor> sdlGetSensorFromId(int instanceId) {
-  final sdlGetSensorFromIdLookupFunction = libSdl3
+  final sdlGetSensorFromIdLookupFunction = _libSdl
       .lookupFunction<
         Pointer<SdlSensor> Function(Uint32 instanceId),
         Pointer<SdlSensor> Function(int instanceId)
@@ -154,7 +151,7 @@ Pointer<SdlSensor> sdlGetSensorFromId(int instanceId) {
 /// extern SDL_DECLSPEC SDL_PropertiesID SDLCALL SDL_GetSensorProperties(SDL_Sensor *sensor)
 /// ```
 int sdlGetSensorProperties(Pointer<SdlSensor> sensor) {
-  final sdlGetSensorPropertiesLookupFunction = libSdl3
+  final sdlGetSensorPropertiesLookupFunction = _libSdl
       .lookupFunction<
         Uint32 Function(Pointer<SdlSensor> sensor),
         int Function(Pointer<SdlSensor> sensor)
@@ -175,7 +172,7 @@ int sdlGetSensorProperties(Pointer<SdlSensor> sensor) {
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetSensorName(SDL_Sensor *sensor)
 /// ```
 String? sdlGetSensorName(Pointer<SdlSensor> sensor) {
-  final sdlGetSensorNameLookupFunction = libSdl3
+  final sdlGetSensorNameLookupFunction = _libSdl
       .lookupFunction<
         Pointer<Utf8> Function(Pointer<SdlSensor> sensor),
         Pointer<Utf8> Function(Pointer<SdlSensor> sensor)
@@ -200,7 +197,7 @@ String? sdlGetSensorName(Pointer<SdlSensor> sensor) {
 /// extern SDL_DECLSPEC SDL_SensorType SDLCALL SDL_GetSensorType(SDL_Sensor *sensor)
 /// ```
 int sdlGetSensorType(Pointer<SdlSensor> sensor) {
-  final sdlGetSensorTypeLookupFunction = libSdl3
+  final sdlGetSensorTypeLookupFunction = _libSdl
       .lookupFunction<
         Int32 Function(Pointer<SdlSensor> sensor),
         int Function(Pointer<SdlSensor> sensor)
@@ -220,7 +217,7 @@ int sdlGetSensorType(Pointer<SdlSensor> sensor) {
 /// extern SDL_DECLSPEC int SDLCALL SDL_GetSensorNonPortableType(SDL_Sensor *sensor)
 /// ```
 int sdlGetSensorNonPortableType(Pointer<SdlSensor> sensor) {
-  final sdlGetSensorNonPortableTypeLookupFunction = libSdl3
+  final sdlGetSensorNonPortableTypeLookupFunction = _libSdl
       .lookupFunction<
         Int32 Function(Pointer<SdlSensor> sensor),
         int Function(Pointer<SdlSensor> sensor)
@@ -241,7 +238,7 @@ int sdlGetSensorNonPortableType(Pointer<SdlSensor> sensor) {
 /// extern SDL_DECLSPEC SDL_SensorID SDLCALL SDL_GetSensorID(SDL_Sensor *sensor)
 /// ```
 int sdlGetSensorId(Pointer<SdlSensor> sensor) {
-  final sdlGetSensorIdLookupFunction = libSdl3
+  final sdlGetSensorIdLookupFunction = _libSdl
       .lookupFunction<
         Uint32 Function(Pointer<SdlSensor> sensor),
         int Function(Pointer<SdlSensor> sensor)
@@ -270,7 +267,7 @@ bool sdlGetSensorData(
   Pointer<Float> data,
   int numValues,
 ) {
-  final sdlGetSensorDataLookupFunction = libSdl3
+  final sdlGetSensorDataLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(
           Pointer<SdlSensor> sensor,
@@ -297,7 +294,7 @@ bool sdlGetSensorData(
 /// extern SDL_DECLSPEC void SDLCALL SDL_CloseSensor(SDL_Sensor *sensor)
 /// ```
 void sdlCloseSensor(Pointer<SdlSensor> sensor) {
-  final sdlCloseSensorLookupFunction = libSdl3
+  final sdlCloseSensorLookupFunction = _libSdl
       .lookupFunction<
         Void Function(Pointer<SdlSensor> sensor),
         void Function(Pointer<SdlSensor> sensor)
@@ -320,7 +317,7 @@ void sdlCloseSensor(Pointer<SdlSensor> sensor) {
 /// extern SDL_DECLSPEC void SDLCALL SDL_UpdateSensors(void)
 /// ```
 void sdlUpdateSensors() {
-  final sdlUpdateSensorsLookupFunction = libSdl3
+  final sdlUpdateSensorsLookupFunction = _libSdl
       .lookupFunction<Void Function(), void Function()>('SDL_UpdateSensors');
   return sdlUpdateSensorsLookupFunction();
 }

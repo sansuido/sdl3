@@ -1,5 +1,7 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 // ignore_for_file: constant_identifier_names, specify_nonobvious_property_types
+part of '../sdl.dart';
+
 //const SDL_h_ = ;
 //const SDL_assert_h_ = ;
 //const SDL_ASSERT_LEVEL = SomeNumberBasedOnVariousFactors;
@@ -1995,7 +1997,7 @@ const SDL_RENDERER_VSYNC_ADAPTIVE = -1;
 const SDL_DEBUG_TEXT_FONT_CHARACTER_SIZE = 8;
 //const SDL_revision_h_ = ;
 const SDL_REVISION =
-    'SDL3-3.3.0-release-3.2.6-661-gf5d1402c2 (" SDL_VENDOR_INFO ")';
+    'SDL3-3.3.0-release-3.2.6-688-ge6c2649af (" SDL_VENDOR_INFO ")';
 //const SDL_scancode_h_ = ;
 const SDL_SCANCODE_UNKNOWN = 0;
 const SDL_SCANCODE_A = 4;

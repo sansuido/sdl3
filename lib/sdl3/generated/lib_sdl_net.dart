@@ -1,12 +1,5 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-import 'dart:ffi';
-import 'package:ffi/ffi.dart';
-import '../dylib.dart' as dylib;
-import 'struct_sdl_net.dart';
-
-final DynamicLibrary libSdl3Net = dylib.SdlDynamicLibraryService().open(
-  'SDL3_net',
-);
+part of '../sdl_net.dart';
 
 ///
 /// This function gets the version of the dynamically linked SDL_net library.
@@ -19,7 +12,7 @@ final DynamicLibrary libSdl3Net = dylib.SdlDynamicLibraryService().open(
 /// extern SDL_DECLSPEC int SDLCALL NET_GetVersion(void)
 /// ```
 int netGetVersion() {
-  final netGetVersionLookupFunction = libSdl3Net
+  final netGetVersionLookupFunction = _libNet
       .lookupFunction<Int32 Function(), int Function()>('NET_GetVersion');
   return netGetVersionLookupFunction();
 }
@@ -46,7 +39,7 @@ int netGetVersion() {
 /// extern SDL_DECLSPEC bool SDLCALL NET_Init(void)
 /// ```
 bool netInit() {
-  final netInitLookupFunction = libSdl3Net
+  final netInitLookupFunction = _libNet
       .lookupFunction<Uint8 Function(), int Function()>('NET_Init');
   return netInitLookupFunction() == 1;
 }
@@ -74,7 +67,7 @@ bool netInit() {
 /// extern SDL_DECLSPEC void SDLCALL NET_Quit(void)
 /// ```
 void netQuit() {
-  final netQuitLookupFunction = libSdl3Net
+  final netQuitLookupFunction = _libNet
       .lookupFunction<Void Function(), void Function()>('NET_Quit');
   return netQuitLookupFunction();
 }
@@ -120,7 +113,7 @@ void netQuit() {
 /// extern SDL_DECLSPEC NET_Address * SDLCALL NET_ResolveHostname(const char *host)
 /// ```
 Pointer<NetAddress> netResolveHostname(String? host) {
-  final netResolveHostnameLookupFunction = libSdl3Net
+  final netResolveHostnameLookupFunction = _libNet
       .lookupFunction<
         Pointer<NetAddress> Function(Pointer<Utf8> host),
         Pointer<NetAddress> Function(Pointer<Utf8> host)
@@ -175,7 +168,7 @@ Pointer<NetAddress> netResolveHostname(String? host) {
 /// extern SDL_DECLSPEC int SDLCALL NET_WaitUntilResolved(NET_Address *address, Sint32 timeout)
 /// ```
 int netWaitUntilResolved(Pointer<NetAddress> address, int timeout) {
-  final netWaitUntilResolvedLookupFunction = libSdl3Net
+  final netWaitUntilResolvedLookupFunction = _libNet
       .lookupFunction<
         Int32 Function(Pointer<NetAddress> address, Int32 timeout),
         int Function(Pointer<NetAddress> address, int timeout)
@@ -214,7 +207,7 @@ int netWaitUntilResolved(Pointer<NetAddress> address, int timeout) {
 /// extern SDL_DECLSPEC int SDLCALL NET_GetAddressStatus(NET_Address *address)
 /// ```
 int netGetAddressStatus(Pointer<NetAddress> address) {
-  final netGetAddressStatusLookupFunction = libSdl3Net
+  final netGetAddressStatusLookupFunction = _libNet
       .lookupFunction<
         Int32 Function(Pointer<NetAddress> address),
         int Function(Pointer<NetAddress> address)
@@ -253,7 +246,7 @@ int netGetAddressStatus(Pointer<NetAddress> address) {
 /// extern SDL_DECLSPEC const char * SDLCALL NET_GetAddressString(NET_Address *address)
 /// ```
 String? netGetAddressString(Pointer<NetAddress> address) {
-  final netGetAddressStringLookupFunction = libSdl3Net
+  final netGetAddressStringLookupFunction = _libNet
       .lookupFunction<
         Pointer<Utf8> Function(Pointer<NetAddress> address),
         Pointer<Utf8> Function(Pointer<NetAddress> address)
@@ -305,7 +298,7 @@ String? netGetAddressString(Pointer<NetAddress> address) {
 /// extern SDL_DECLSPEC NET_Address *SDLCALL NET_RefAddress(NET_Address *address)
 /// ```
 Pointer<NetAddress> netRefAddress(Pointer<NetAddress> address) {
-  final netRefAddressLookupFunction = libSdl3Net
+  final netRefAddressLookupFunction = _libNet
       .lookupFunction<
         Pointer<NetAddress> Function(Pointer<NetAddress> address),
         Pointer<NetAddress> Function(Pointer<NetAddress> address)
@@ -340,7 +333,7 @@ Pointer<NetAddress> netRefAddress(Pointer<NetAddress> address) {
 /// extern SDL_DECLSPEC void SDLCALL NET_UnrefAddress(NET_Address *address)
 /// ```
 void netUnrefAddress(Pointer<NetAddress> address) {
-  final netUnrefAddressLookupFunction = libSdl3Net
+  final netUnrefAddressLookupFunction = _libNet
       .lookupFunction<
         Void Function(Pointer<NetAddress> address),
         void Function(Pointer<NetAddress> address)
@@ -381,7 +374,7 @@ void netUnrefAddress(Pointer<NetAddress> address) {
 /// extern SDL_DECLSPEC void SDLCALL NET_SimulateAddressResolutionLoss(int percent_loss)
 /// ```
 void netSimulateAddressResolutionLoss(int percentLoss) {
-  final netSimulateAddressResolutionLossLookupFunction = libSdl3Net
+  final netSimulateAddressResolutionLossLookupFunction = _libNet
       .lookupFunction<
         Void Function(Int32 percentLoss),
         void Function(int percentLoss)
@@ -407,7 +400,7 @@ void netSimulateAddressResolutionLoss(int percentLoss) {
 /// extern SDL_DECLSPEC int SDLCALL NET_CompareAddresses(const NET_Address *a, const NET_Address *b)
 /// ```
 int netCompareAddresses(Pointer<NetAddress> a, Pointer<NetAddress> b) {
-  final netCompareAddressesLookupFunction = libSdl3Net
+  final netCompareAddressesLookupFunction = _libNet
       .lookupFunction<
         Int32 Function(Pointer<NetAddress> a, Pointer<NetAddress> b),
         int Function(Pointer<NetAddress> a, Pointer<NetAddress> b)
@@ -452,7 +445,7 @@ int netCompareAddresses(Pointer<NetAddress> a, Pointer<NetAddress> b) {
 /// extern SDL_DECLSPEC NET_Address **SDLCALL NET_GetLocalAddresses(int *num_addresses)
 /// ```
 Pointer<Pointer<NetAddress>> netGetLocalAddresses(Pointer<Int32> numAddresses) {
-  final netGetLocalAddressesLookupFunction = libSdl3Net
+  final netGetLocalAddressesLookupFunction = _libNet
       .lookupFunction<
         Pointer<Pointer<NetAddress>> Function(Pointer<Int32> numAddresses),
         Pointer<Pointer<NetAddress>> Function(Pointer<Int32> numAddresses)
@@ -481,7 +474,7 @@ Pointer<Pointer<NetAddress>> netGetLocalAddresses(Pointer<Int32> numAddresses) {
 /// extern SDL_DECLSPEC void SDLCALL NET_FreeLocalAddresses(NET_Address **addresses)
 /// ```
 void netFreeLocalAddresses(Pointer<Pointer<NetAddress>> addresses) {
-  final netFreeLocalAddressesLookupFunction = libSdl3Net
+  final netFreeLocalAddressesLookupFunction = _libNet
       .lookupFunction<
         Void Function(Pointer<Pointer<NetAddress>> addresses),
         void Function(Pointer<Pointer<NetAddress>> addresses)
@@ -547,7 +540,7 @@ Pointer<NetStreamSocket> netCreateClient(
   Pointer<NetAddress> address,
   int port,
 ) {
-  final netCreateClientLookupFunction = libSdl3Net
+  final netCreateClientLookupFunction = _libNet
       .lookupFunction<
         Pointer<NetStreamSocket> Function(
           Pointer<NetAddress> address,
@@ -605,7 +598,7 @@ Pointer<NetStreamSocket> netCreateClient(
 /// extern SDL_DECLSPEC int SDLCALL NET_WaitUntilConnected(NET_StreamSocket *sock, Sint32 timeout)
 /// ```
 int netWaitUntilConnected(Pointer<NetStreamSocket> sock, int timeout) {
-  final netWaitUntilConnectedLookupFunction = libSdl3Net
+  final netWaitUntilConnectedLookupFunction = _libNet
       .lookupFunction<
         Int32 Function(Pointer<NetStreamSocket> sock, Int32 timeout),
         int Function(Pointer<NetStreamSocket> sock, int timeout)
@@ -663,7 +656,7 @@ int netWaitUntilConnected(Pointer<NetStreamSocket> sock, int timeout) {
 /// extern SDL_DECLSPEC NET_Server * SDLCALL NET_CreateServer(NET_Address *addr, Uint16 port)
 /// ```
 Pointer<NetServer> netCreateServer(Pointer<NetAddress> addr, int port) {
-  final netCreateServerLookupFunction = libSdl3Net
+  final netCreateServerLookupFunction = _libNet
       .lookupFunction<
         Pointer<NetServer> Function(Pointer<NetAddress> addr, Uint16 port),
         Pointer<NetServer> Function(Pointer<NetAddress> addr, int port)
@@ -718,7 +711,7 @@ bool netAcceptClient(
   Pointer<NetServer> server,
   Pointer<Pointer<NetStreamSocket>> clientStream,
 ) {
-  final netAcceptClientLookupFunction = libSdl3Net
+  final netAcceptClientLookupFunction = _libNet
       .lookupFunction<
         Uint8 Function(
           Pointer<NetServer> server,
@@ -756,7 +749,7 @@ bool netAcceptClient(
 /// extern SDL_DECLSPEC void SDLCALL NET_DestroyServer(NET_Server *server)
 /// ```
 void netDestroyServer(Pointer<NetServer> server) {
-  final netDestroyServerLookupFunction = libSdl3Net
+  final netDestroyServerLookupFunction = _libNet
       .lookupFunction<
         Void Function(Pointer<NetServer> server),
         void Function(Pointer<NetServer> server)
@@ -785,7 +778,7 @@ void netDestroyServer(Pointer<NetServer> server) {
 /// extern SDL_DECLSPEC NET_Address * SDLCALL NET_GetStreamSocketAddress(NET_StreamSocket *sock)
 /// ```
 Pointer<NetAddress> netGetStreamSocketAddress(Pointer<NetStreamSocket> sock) {
-  final netGetStreamSocketAddressLookupFunction = libSdl3Net
+  final netGetStreamSocketAddressLookupFunction = _libNet
       .lookupFunction<
         Pointer<NetAddress> Function(Pointer<NetStreamSocket> sock),
         Pointer<NetAddress> Function(Pointer<NetStreamSocket> sock)
@@ -832,7 +825,7 @@ Pointer<NetAddress> netGetStreamSocketAddress(Pointer<NetStreamSocket> sock) {
 /// extern SDL_DECLSPEC int SDLCALL NET_GetConnectionStatus(NET_StreamSocket *sock)
 /// ```
 int netGetConnectionStatus(Pointer<NetStreamSocket> sock) {
-  final netGetConnectionStatusLookupFunction = libSdl3Net
+  final netGetConnectionStatusLookupFunction = _libNet
       .lookupFunction<
         Int32 Function(Pointer<NetStreamSocket> sock),
         int Function(Pointer<NetStreamSocket> sock)
@@ -893,7 +886,7 @@ bool netWriteToStreamSocket(
   Pointer<NativeType> buf,
   int buflen,
 ) {
-  final netWriteToStreamSocketLookupFunction = libSdl3Net
+  final netWriteToStreamSocketLookupFunction = _libNet
       .lookupFunction<
         Uint8 Function(
           Pointer<NetStreamSocket> sock,
@@ -943,7 +936,7 @@ bool netWriteToStreamSocket(
 /// extern SDL_DECLSPEC int SDLCALL NET_GetStreamSocketPendingWrites(NET_StreamSocket *sock)
 /// ```
 int netGetStreamSocketPendingWrites(Pointer<NetStreamSocket> sock) {
-  final netGetStreamSocketPendingWritesLookupFunction = libSdl3Net
+  final netGetStreamSocketPendingWritesLookupFunction = _libNet
       .lookupFunction<
         Int32 Function(Pointer<NetStreamSocket> sock),
         int Function(Pointer<NetStreamSocket> sock)
@@ -997,7 +990,7 @@ int netWaitUntilStreamSocketDrained(
   Pointer<NetStreamSocket> sock,
   int timeout,
 ) {
-  final netWaitUntilStreamSocketDrainedLookupFunction = libSdl3Net
+  final netWaitUntilStreamSocketDrainedLookupFunction = _libNet
       .lookupFunction<
         Int32 Function(Pointer<NetStreamSocket> sock, Int32 timeout),
         int Function(Pointer<NetStreamSocket> sock, int timeout)
@@ -1061,7 +1054,7 @@ int netReadFromStreamSocket(
   Pointer<NativeType> buf,
   int buflen,
 ) {
-  final netReadFromStreamSocketLookupFunction = libSdl3Net
+  final netReadFromStreamSocketLookupFunction = _libNet
       .lookupFunction<
         Int32 Function(
           Pointer<NetStreamSocket> sock,
@@ -1121,7 +1114,7 @@ void netSimulateStreamPacketLoss(
   Pointer<NetStreamSocket> sock,
   int percentLoss,
 ) {
-  final netSimulateStreamPacketLossLookupFunction = libSdl3Net
+  final netSimulateStreamPacketLossLookupFunction = _libNet
       .lookupFunction<
         Void Function(Pointer<NetStreamSocket> sock, Int32 percentLoss),
         void Function(Pointer<NetStreamSocket> sock, int percentLoss)
@@ -1160,7 +1153,7 @@ void netSimulateStreamPacketLoss(
 /// extern SDL_DECLSPEC void SDLCALL NET_DestroyStreamSocket(NET_StreamSocket *sock)
 /// ```
 void netDestroyStreamSocket(Pointer<NetStreamSocket> sock) {
-  final netDestroyStreamSocketLookupFunction = libSdl3Net
+  final netDestroyStreamSocketLookupFunction = _libNet
       .lookupFunction<
         Void Function(Pointer<NetStreamSocket> sock),
         void Function(Pointer<NetStreamSocket> sock)
@@ -1233,7 +1226,7 @@ Pointer<NetDatagramSocket> netCreateDatagramSocket(
   Pointer<NetAddress> addr,
   int port,
 ) {
-  final netCreateDatagramSocketLookupFunction = libSdl3Net
+  final netCreateDatagramSocketLookupFunction = _libNet
       .lookupFunction<
         Pointer<NetDatagramSocket> Function(
           Pointer<NetAddress> addr,
@@ -1304,7 +1297,7 @@ bool netSendDatagram(
   Pointer<NativeType> buf,
   int buflen,
 ) {
-  final netSendDatagramLookupFunction = libSdl3Net
+  final netSendDatagramLookupFunction = _libNet
       .lookupFunction<
         Uint8 Function(
           Pointer<NetDatagramSocket> sock,
@@ -1377,7 +1370,7 @@ bool netReceiveDatagram(
   Pointer<NetDatagramSocket> sock,
   Pointer<Pointer<NetDatagram>> dgram,
 ) {
-  final netReceiveDatagramLookupFunction = libSdl3Net
+  final netReceiveDatagramLookupFunction = _libNet
       .lookupFunction<
         Uint8 Function(
           Pointer<NetDatagramSocket> sock,
@@ -1415,7 +1408,7 @@ bool netReceiveDatagram(
 /// extern SDL_DECLSPEC void SDLCALL NET_DestroyDatagram(NET_Datagram *dgram)
 /// ```
 void netDestroyDatagram(Pointer<NetDatagram> dgram) {
-  final netDestroyDatagramLookupFunction = libSdl3Net
+  final netDestroyDatagramLookupFunction = _libNet
       .lookupFunction<
         Void Function(Pointer<NetDatagram> dgram),
         void Function(Pointer<NetDatagram> dgram)
@@ -1460,7 +1453,7 @@ void netSimulateDatagramPacketLoss(
   Pointer<NetDatagramSocket> sock,
   int percentLoss,
 ) {
-  final netSimulateDatagramPacketLossLookupFunction = libSdl3Net
+  final netSimulateDatagramPacketLossLookupFunction = _libNet
       .lookupFunction<
         Void Function(Pointer<NetDatagramSocket> sock, Int32 percentLoss),
         void Function(Pointer<NetDatagramSocket> sock, int percentLoss)
@@ -1497,7 +1490,7 @@ void netSimulateDatagramPacketLoss(
 /// extern SDL_DECLSPEC void SDLCALL NET_DestroyDatagramSocket(NET_DatagramSocket *sock)
 /// ```
 void netDestroyDatagramSocket(Pointer<NetDatagramSocket> sock) {
-  final netDestroyDatagramSocketLookupFunction = libSdl3Net
+  final netDestroyDatagramSocketLookupFunction = _libNet
       .lookupFunction<
         Void Function(Pointer<NetDatagramSocket> sock),
         void Function(Pointer<NetDatagramSocket> sock)
@@ -1562,7 +1555,7 @@ int netWaitUntilInputAvailable(
   int numsockets,
   int timeout,
 ) {
-  final netWaitUntilInputAvailableLookupFunction = libSdl3Net
+  final netWaitUntilInputAvailableLookupFunction = _libNet
       .lookupFunction<
         Int32 Function(
           Pointer<Pointer<NativeType>> vsockets,

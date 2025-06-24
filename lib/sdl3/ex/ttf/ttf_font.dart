@@ -1,12 +1,5 @@
 // ignore_for_file: avoid_positional_boolean_parameters
-
-import 'dart:ffi';
-
-import 'package:ffi/ffi.dart';
-
-import '../../generated/lib_sdl_ttf.dart';
-import '../../generated/struct_sdl.dart';
-import '../../generated/struct_sdl_ttf.dart';
+part of '../../sdl_ttf.dart';
 
 extension TtfFontEx on TtfFont {
   // lib_sdl_ttf.dart

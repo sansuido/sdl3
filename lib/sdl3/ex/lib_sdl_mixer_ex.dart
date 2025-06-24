@@ -1,8 +1,5 @@
 // ignore_for_file: constant_identifier_names, non_constant_identifier_names
-//import './generated/const_sdl.dart';
-import './generated/const_sdl_mixer.dart';
-import './generated/lib_sdl_error.dart';
-import 'lib_sdl_ex.dart';
+part of '../sdl_mixer.dart';
 
 /// ```c
 /// const SDL_MIXER_COMPILEDVERSION = \ SDL_VERSIONNUM(SDL_MIXER_MAJOR_VERSION, SDL_MIXER_MINOR_VERSION, SDL_MIXER_PATCHLEVEL);

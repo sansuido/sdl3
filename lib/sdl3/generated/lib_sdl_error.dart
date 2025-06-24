@@ -1,7 +1,5 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-import 'dart:ffi';
-import 'package:ffi/ffi.dart';
-import 'lib_sdl.dart';
+part of '../sdl.dart';
 
 ///
 /// Set the SDL error message for the current thread.
@@ -34,7 +32,7 @@ import 'lib_sdl.dart';
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetError(SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(1)
 /// ```
 bool sdlSetError(String? fmt) {
-  final sdlSetErrorLookupFunction = libSdl3
+  final sdlSetErrorLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(Pointer<Utf8> fmt),
         int Function(Pointer<Utf8> fmt)
@@ -66,7 +64,7 @@ bool sdlSetError(String? fmt) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetErrorV(SDL_PRINTF_FORMAT_STRING const char *fmt, va_list ap) SDL_PRINTF_VARARG_FUNCV(1)
 /// ```
 bool sdlSetErrorV(String? fmt) {
-  final sdlSetErrorVLookupFunction = libSdl3
+  final sdlSetErrorVLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(Pointer<Utf8> fmt),
         int Function(Pointer<Utf8> fmt)
@@ -92,7 +90,7 @@ bool sdlSetErrorV(String? fmt) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_OutOfMemory(void)
 /// ```
 bool sdlOutOfMemory() {
-  final sdlOutOfMemoryLookupFunction = libSdl3
+  final sdlOutOfMemoryLookupFunction = _libSdl
       .lookupFunction<Uint8 Function(), int Function()>('SDL_OutOfMemory');
   return sdlOutOfMemoryLookupFunction() == 1;
 }
@@ -136,7 +134,7 @@ bool sdlOutOfMemory() {
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetError(void)
 /// ```
 String? sdlGetError() {
-  final sdlGetErrorLookupFunction = libSdl3
+  final sdlGetErrorLookupFunction = _libSdl
       .lookupFunction<Pointer<Utf8> Function(), Pointer<Utf8> Function()>(
         'SDL_GetError',
       );
@@ -163,7 +161,7 @@ String? sdlGetError() {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_ClearError(void)
 /// ```
 bool sdlClearError() {
-  final sdlClearErrorLookupFunction = libSdl3
+  final sdlClearErrorLookupFunction = _libSdl
       .lookupFunction<Uint8 Function(), int Function()>('SDL_ClearError');
   return sdlClearErrorLookupFunction() == 1;
 }

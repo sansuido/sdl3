@@ -1,3 +1,5 @@
+part of '../sdl_gfx.dart';
+
 // ignore_for_file: constant_identifier_names
 const FPS_UPPER_LIMIT = 200;
 const FPS_LOWER_LIMIT = 1;

@@ -1,6 +1,5 @@
 // ignore_for_file: constant_identifier_names, non_constant_identifier_names
-import './generated/const_sdl_net.dart';
-import 'lib_sdl_ex.dart';
+part of '../sdl_net.dart';
 
 final int SDL_NET_COMPILEDVERSION = sdlVersionnum(
   SDL_NET_MAJOR_VERSION,

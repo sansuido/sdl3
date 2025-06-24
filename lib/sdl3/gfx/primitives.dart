@@ -1,3 +1,5 @@
+part of '../sdl_gfx.dart';
+
 /* 
 
 SDL2_gfxPrimitives.c: graphics primitives for SDL2 renderers
@@ -26,18 +28,6 @@ distribution.
 Andreas Schiffler -- aschiffler at ferzkopp dot net
 
 */
-import 'dart:ffi';
-import 'dart:math' as math;
-import 'dart:typed_data';
-import 'package:ffi/ffi.dart';
-import '../generated/const_sdl.dart';
-import '../generated/lib_sdl_render.dart';
-import '../generated/lib_sdl_stdinc.dart';
-import '../generated/lib_sdl_surface.dart';
-import '../generated/struct_sdl.dart';
-//import '../lib_sdl_ex.dart';
-import 'primitives_font.dart';
-import 'rotozoom.dart';
 
 var charRotation = 0;
 var charSize = 8;

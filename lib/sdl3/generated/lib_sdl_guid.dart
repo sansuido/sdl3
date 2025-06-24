@@ -1,8 +1,5 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-import 'dart:ffi';
-import 'package:ffi/ffi.dart';
-import 'lib_sdl.dart';
-import 'struct_sdl.dart';
+part of '../sdl.dart';
 
 ///
 /// Get an ASCII string representation for a given SDL_GUID.
@@ -21,7 +18,7 @@ import 'struct_sdl.dart';
 /// extern SDL_DECLSPEC void SDLCALL SDL_GUIDToString(SDL_GUID guid, char *pszGUID, int cbGUID)
 /// ```
 void sdlGuidToString(SdlGuid guid, Pointer<Int8> pszGuid, int cbGuid) {
-  final sdlGuidToStringLookupFunction = libSdl3
+  final sdlGuidToStringLookupFunction = _libSdl
       .lookupFunction<
         Void Function(SdlGuid guid, Pointer<Int8> pszGuid, Int32 cbGuid),
         void Function(SdlGuid guid, Pointer<Int8> pszGuid, int cbGuid)
@@ -49,7 +46,7 @@ void sdlGuidToString(SdlGuid guid, Pointer<Int8> pszGuid, int cbGuid) {
 /// extern SDL_DECLSPEC SDL_GUID SDLCALL SDL_StringToGUID(const char *pchGUID)
 /// ```
 SdlGuid sdlStringToGuid(String? pchGuid) {
-  final sdlStringToGuidLookupFunction = libSdl3
+  final sdlStringToGuidLookupFunction = _libSdl
       .lookupFunction<
         SdlGuid Function(Pointer<Utf8> pchGuid),
         SdlGuid Function(Pointer<Utf8> pchGuid)

@@ -1,4 +1,1 @@
 include: package:halildurmus_lints/dart.yaml
-linter:
-  rules:
-    unnecessary_library_directive: false

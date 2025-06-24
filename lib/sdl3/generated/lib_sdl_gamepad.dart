@@ -1,9 +1,6 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 // ignore_for_file: avoid_positional_boolean_parameters
-import 'dart:ffi';
-import 'package:ffi/ffi.dart';
-import 'lib_sdl.dart';
-import 'struct_sdl.dart';
+part of '../sdl.dart';
 
 ///
 /// Add support for gamepads that SDL is unaware of or change the binding of an
@@ -50,7 +47,7 @@ import 'struct_sdl.dart';
 /// extern SDL_DECLSPEC int SDLCALL SDL_AddGamepadMapping(const char *mapping)
 /// ```
 int sdlAddGamepadMapping(String? mapping) {
-  final sdlAddGamepadMappingLookupFunction = libSdl3
+  final sdlAddGamepadMappingLookupFunction = _libSdl
       .lookupFunction<
         Int32 Function(Pointer<Utf8> mapping),
         int Function(Pointer<Utf8> mapping)
@@ -103,7 +100,7 @@ int sdlAddGamepadMapping(String? mapping) {
 /// extern SDL_DECLSPEC int SDLCALL SDL_AddGamepadMappingsFromIO(SDL_IOStream *src, bool closeio)
 /// ```
 int sdlAddGamepadMappingsFromIo(Pointer<SdlIoStream> src, bool closeio) {
-  final sdlAddGamepadMappingsFromIoLookupFunction = libSdl3
+  final sdlAddGamepadMappingsFromIoLookupFunction = _libSdl
       .lookupFunction<
         Int32 Function(Pointer<SdlIoStream> src, Uint8 closeio),
         int Function(Pointer<SdlIoStream> src, int closeio)
@@ -147,7 +144,7 @@ int sdlAddGamepadMappingsFromIo(Pointer<SdlIoStream> src, bool closeio) {
 /// extern SDL_DECLSPEC int SDLCALL SDL_AddGamepadMappingsFromFile(const char *file)
 /// ```
 int sdlAddGamepadMappingsFromFile(String? file) {
-  final sdlAddGamepadMappingsFromFileLookupFunction = libSdl3
+  final sdlAddGamepadMappingsFromFileLookupFunction = _libSdl
       .lookupFunction<
         Int32 Function(Pointer<Utf8> file),
         int Function(Pointer<Utf8> file)
@@ -172,7 +169,7 @@ int sdlAddGamepadMappingsFromFile(String? file) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_ReloadGamepadMappings(void)
 /// ```
 bool sdlReloadGamepadMappings() {
-  final sdlReloadGamepadMappingsLookupFunction = libSdl3
+  final sdlReloadGamepadMappingsLookupFunction = _libSdl
       .lookupFunction<Uint8 Function(), int Function()>(
         'SDL_ReloadGamepadMappings',
       );
@@ -195,7 +192,7 @@ bool sdlReloadGamepadMappings() {
 /// extern SDL_DECLSPEC char ** SDLCALL SDL_GetGamepadMappings(int *count)
 /// ```
 Pointer<Pointer<Int8>> sdlGetGamepadMappings(Pointer<Int32> count) {
-  final sdlGetGamepadMappingsLookupFunction = libSdl3
+  final sdlGetGamepadMappingsLookupFunction = _libSdl
       .lookupFunction<
         Pointer<Pointer<Int8>> Function(Pointer<Int32> count),
         Pointer<Pointer<Int8>> Function(Pointer<Int32> count)
@@ -220,7 +217,7 @@ Pointer<Pointer<Int8>> sdlGetGamepadMappings(Pointer<Int32> count) {
 /// extern SDL_DECLSPEC char * SDLCALL SDL_GetGamepadMappingForGUID(SDL_GUID guid)
 /// ```
 Pointer<Int8> sdlGetGamepadMappingForGuid(SdlGuid guid) {
-  final sdlGetGamepadMappingForGuidLookupFunction = libSdl3
+  final sdlGetGamepadMappingForGuidLookupFunction = _libSdl
       .lookupFunction<
         Pointer<Int8> Function(SdlGuid guid),
         Pointer<Int8> Function(SdlGuid guid)
@@ -249,7 +246,7 @@ Pointer<Int8> sdlGetGamepadMappingForGuid(SdlGuid guid) {
 /// extern SDL_DECLSPEC char * SDLCALL SDL_GetGamepadMapping(SDL_Gamepad *gamepad)
 /// ```
 Pointer<Int8> sdlGetGamepadMapping(Pointer<SdlGamepad> gamepad) {
-  final sdlGetGamepadMappingLookupFunction = libSdl3
+  final sdlGetGamepadMappingLookupFunction = _libSdl
       .lookupFunction<
         Pointer<Int8> Function(Pointer<SdlGamepad> gamepad),
         Pointer<Int8> Function(Pointer<SdlGamepad> gamepad)
@@ -277,7 +274,7 @@ Pointer<Int8> sdlGetGamepadMapping(Pointer<SdlGamepad> gamepad) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetGamepadMapping(SDL_JoystickID instance_id, const char *mapping)
 /// ```
 bool sdlSetGamepadMapping(int instanceId, String? mapping) {
-  final sdlSetGamepadMappingLookupFunction = libSdl3
+  final sdlSetGamepadMappingLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(Uint32 instanceId, Pointer<Utf8> mapping),
         int Function(int instanceId, Pointer<Utf8> mapping)
@@ -302,7 +299,7 @@ bool sdlSetGamepadMapping(int instanceId, String? mapping) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_HasGamepad(void)
 /// ```
 bool sdlHasGamepad() {
-  final sdlHasGamepadLookupFunction = libSdl3
+  final sdlHasGamepadLookupFunction = _libSdl
       .lookupFunction<Uint8 Function(), int Function()>('SDL_HasGamepad');
   return sdlHasGamepadLookupFunction() == 1;
 }
@@ -325,7 +322,7 @@ bool sdlHasGamepad() {
 /// extern SDL_DECLSPEC SDL_JoystickID * SDLCALL SDL_GetGamepads(int *count)
 /// ```
 Pointer<Uint32> sdlGetGamepads(Pointer<Int32> count) {
-  final sdlGetGamepadsLookupFunction = libSdl3
+  final sdlGetGamepadsLookupFunction = _libSdl
       .lookupFunction<
         Pointer<Uint32> Function(Pointer<Int32> count),
         Pointer<Uint32> Function(Pointer<Int32> count)
@@ -349,7 +346,7 @@ Pointer<Uint32> sdlGetGamepads(Pointer<Int32> count) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_IsGamepad(SDL_JoystickID instance_id)
 /// ```
 bool sdlIsGamepad(int instanceId) {
-  final sdlIsGamepadLookupFunction = libSdl3
+  final sdlIsGamepadLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(Uint32 instanceId),
         int Function(int instanceId)
@@ -375,7 +372,7 @@ bool sdlIsGamepad(int instanceId) {
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetGamepadNameForID(SDL_JoystickID instance_id)
 /// ```
 String? sdlGetGamepadNameForId(int instanceId) {
-  final sdlGetGamepadNameForIdLookupFunction = libSdl3
+  final sdlGetGamepadNameForIdLookupFunction = _libSdl
       .lookupFunction<
         Pointer<Utf8> Function(Uint32 instanceId),
         Pointer<Utf8> Function(int instanceId)
@@ -405,7 +402,7 @@ String? sdlGetGamepadNameForId(int instanceId) {
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetGamepadPathForID(SDL_JoystickID instance_id)
 /// ```
 String? sdlGetGamepadPathForId(int instanceId) {
-  final sdlGetGamepadPathForIdLookupFunction = libSdl3
+  final sdlGetGamepadPathForIdLookupFunction = _libSdl
       .lookupFunction<
         Pointer<Utf8> Function(Uint32 instanceId),
         Pointer<Utf8> Function(int instanceId)
@@ -434,7 +431,7 @@ String? sdlGetGamepadPathForId(int instanceId) {
 /// extern SDL_DECLSPEC int SDLCALL SDL_GetGamepadPlayerIndexForID(SDL_JoystickID instance_id)
 /// ```
 int sdlGetGamepadPlayerIndexForId(int instanceId) {
-  final sdlGetGamepadPlayerIndexForIdLookupFunction = libSdl3
+  final sdlGetGamepadPlayerIndexForIdLookupFunction = _libSdl
       .lookupFunction<
         Int32 Function(Uint32 instanceId),
         int Function(int instanceId)
@@ -460,7 +457,7 @@ int sdlGetGamepadPlayerIndexForId(int instanceId) {
 /// extern SDL_DECLSPEC SDL_GUID SDLCALL SDL_GetGamepadGUIDForID(SDL_JoystickID instance_id)
 /// ```
 SdlGuid sdlGetGamepadGuidForId(int instanceId) {
-  final sdlGetGamepadGuidForIdLookupFunction = libSdl3
+  final sdlGetGamepadGuidForIdLookupFunction = _libSdl
       .lookupFunction<
         SdlGuid Function(Uint32 instanceId),
         SdlGuid Function(int instanceId)
@@ -487,7 +484,7 @@ SdlGuid sdlGetGamepadGuidForId(int instanceId) {
 /// extern SDL_DECLSPEC Uint16 SDLCALL SDL_GetGamepadVendorForID(SDL_JoystickID instance_id)
 /// ```
 int sdlGetGamepadVendorForId(int instanceId) {
-  final sdlGetGamepadVendorForIdLookupFunction = libSdl3
+  final sdlGetGamepadVendorForIdLookupFunction = _libSdl
       .lookupFunction<
         Uint16 Function(Uint32 instanceId),
         int Function(int instanceId)
@@ -514,7 +511,7 @@ int sdlGetGamepadVendorForId(int instanceId) {
 /// extern SDL_DECLSPEC Uint16 SDLCALL SDL_GetGamepadProductForID(SDL_JoystickID instance_id)
 /// ```
 int sdlGetGamepadProductForId(int instanceId) {
-  final sdlGetGamepadProductForIdLookupFunction = libSdl3
+  final sdlGetGamepadProductForIdLookupFunction = _libSdl
       .lookupFunction<
         Uint16 Function(Uint32 instanceId),
         int Function(int instanceId)
@@ -541,7 +538,7 @@ int sdlGetGamepadProductForId(int instanceId) {
 /// extern SDL_DECLSPEC Uint16 SDLCALL SDL_GetGamepadProductVersionForID(SDL_JoystickID instance_id)
 /// ```
 int sdlGetGamepadProductVersionForId(int instanceId) {
-  final sdlGetGamepadProductVersionForIdLookupFunction = libSdl3
+  final sdlGetGamepadProductVersionForIdLookupFunction = _libSdl
       .lookupFunction<
         Uint16 Function(Uint32 instanceId),
         int Function(int instanceId)
@@ -567,7 +564,7 @@ int sdlGetGamepadProductVersionForId(int instanceId) {
 /// extern SDL_DECLSPEC SDL_GamepadType SDLCALL SDL_GetGamepadTypeForID(SDL_JoystickID instance_id)
 /// ```
 int sdlGetGamepadTypeForId(int instanceId) {
-  final sdlGetGamepadTypeForIdLookupFunction = libSdl3
+  final sdlGetGamepadTypeForIdLookupFunction = _libSdl
       .lookupFunction<
         Int32 Function(Uint32 instanceId),
         int Function(int instanceId)
@@ -593,7 +590,7 @@ int sdlGetGamepadTypeForId(int instanceId) {
 /// extern SDL_DECLSPEC SDL_GamepadType SDLCALL SDL_GetRealGamepadTypeForID(SDL_JoystickID instance_id)
 /// ```
 int sdlGetRealGamepadTypeForId(int instanceId) {
-  final sdlGetRealGamepadTypeForIdLookupFunction = libSdl3
+  final sdlGetRealGamepadTypeForIdLookupFunction = _libSdl
       .lookupFunction<
         Int32 Function(Uint32 instanceId),
         int Function(int instanceId)
@@ -619,7 +616,7 @@ int sdlGetRealGamepadTypeForId(int instanceId) {
 /// extern SDL_DECLSPEC char * SDLCALL SDL_GetGamepadMappingForID(SDL_JoystickID instance_id)
 /// ```
 Pointer<Int8> sdlGetGamepadMappingForId(int instanceId) {
-  final sdlGetGamepadMappingForIdLookupFunction = libSdl3
+  final sdlGetGamepadMappingForIdLookupFunction = _libSdl
       .lookupFunction<
         Pointer<Int8> Function(Uint32 instanceId),
         Pointer<Int8> Function(int instanceId)
@@ -643,7 +640,7 @@ Pointer<Int8> sdlGetGamepadMappingForId(int instanceId) {
 /// extern SDL_DECLSPEC SDL_Gamepad * SDLCALL SDL_OpenGamepad(SDL_JoystickID instance_id)
 /// ```
 Pointer<SdlGamepad> sdlOpenGamepad(int instanceId) {
-  final sdlOpenGamepadLookupFunction = libSdl3
+  final sdlOpenGamepadLookupFunction = _libSdl
       .lookupFunction<
         Pointer<SdlGamepad> Function(Uint32 instanceId),
         Pointer<SdlGamepad> Function(int instanceId)
@@ -665,7 +662,7 @@ Pointer<SdlGamepad> sdlOpenGamepad(int instanceId) {
 /// extern SDL_DECLSPEC SDL_Gamepad * SDLCALL SDL_GetGamepadFromID(SDL_JoystickID instance_id)
 /// ```
 Pointer<SdlGamepad> sdlGetGamepadFromId(int instanceId) {
-  final sdlGetGamepadFromIdLookupFunction = libSdl3
+  final sdlGetGamepadFromIdLookupFunction = _libSdl
       .lookupFunction<
         Pointer<SdlGamepad> Function(Uint32 instanceId),
         Pointer<SdlGamepad> Function(int instanceId)
@@ -688,7 +685,7 @@ Pointer<SdlGamepad> sdlGetGamepadFromId(int instanceId) {
 /// extern SDL_DECLSPEC SDL_Gamepad * SDLCALL SDL_GetGamepadFromPlayerIndex(int player_index)
 /// ```
 Pointer<SdlGamepad> sdlGetGamepadFromPlayerIndex(int playerIndex) {
-  final sdlGetGamepadFromPlayerIndexLookupFunction = libSdl3
+  final sdlGetGamepadFromPlayerIndexLookupFunction = _libSdl
       .lookupFunction<
         Pointer<SdlGamepad> Function(Int32 playerIndex),
         Pointer<SdlGamepad> Function(int playerIndex)
@@ -725,7 +722,7 @@ Pointer<SdlGamepad> sdlGetGamepadFromPlayerIndex(int playerIndex) {
 /// extern SDL_DECLSPEC SDL_PropertiesID SDLCALL SDL_GetGamepadProperties(SDL_Gamepad *gamepad)
 /// ```
 int sdlGetGamepadProperties(Pointer<SdlGamepad> gamepad) {
-  final sdlGetGamepadPropertiesLookupFunction = libSdl3
+  final sdlGetGamepadPropertiesLookupFunction = _libSdl
       .lookupFunction<
         Uint32 Function(Pointer<SdlGamepad> gamepad),
         int Function(Pointer<SdlGamepad> gamepad)
@@ -747,7 +744,7 @@ int sdlGetGamepadProperties(Pointer<SdlGamepad> gamepad) {
 /// extern SDL_DECLSPEC SDL_JoystickID SDLCALL SDL_GetGamepadID(SDL_Gamepad *gamepad)
 /// ```
 int sdlGetGamepadId(Pointer<SdlGamepad> gamepad) {
-  final sdlGetGamepadIdLookupFunction = libSdl3
+  final sdlGetGamepadIdLookupFunction = _libSdl
       .lookupFunction<
         Uint32 Function(Pointer<SdlGamepad> gamepad),
         int Function(Pointer<SdlGamepad> gamepad)
@@ -771,7 +768,7 @@ int sdlGetGamepadId(Pointer<SdlGamepad> gamepad) {
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetGamepadName(SDL_Gamepad *gamepad)
 /// ```
 String? sdlGetGamepadName(Pointer<SdlGamepad> gamepad) {
-  final sdlGetGamepadNameLookupFunction = libSdl3
+  final sdlGetGamepadNameLookupFunction = _libSdl
       .lookupFunction<
         Pointer<Utf8> Function(Pointer<SdlGamepad> gamepad),
         Pointer<Utf8> Function(Pointer<SdlGamepad> gamepad)
@@ -799,7 +796,7 @@ String? sdlGetGamepadName(Pointer<SdlGamepad> gamepad) {
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetGamepadPath(SDL_Gamepad *gamepad)
 /// ```
 String? sdlGetGamepadPath(Pointer<SdlGamepad> gamepad) {
-  final sdlGetGamepadPathLookupFunction = libSdl3
+  final sdlGetGamepadPathLookupFunction = _libSdl
       .lookupFunction<
         Pointer<Utf8> Function(Pointer<SdlGamepad> gamepad),
         Pointer<Utf8> Function(Pointer<SdlGamepad> gamepad)
@@ -826,7 +823,7 @@ String? sdlGetGamepadPath(Pointer<SdlGamepad> gamepad) {
 /// extern SDL_DECLSPEC SDL_GamepadType SDLCALL SDL_GetGamepadType(SDL_Gamepad *gamepad)
 /// ```
 int sdlGetGamepadType(Pointer<SdlGamepad> gamepad) {
-  final sdlGetGamepadTypeLookupFunction = libSdl3
+  final sdlGetGamepadTypeLookupFunction = _libSdl
       .lookupFunction<
         Int32 Function(Pointer<SdlGamepad> gamepad),
         int Function(Pointer<SdlGamepad> gamepad)
@@ -849,7 +846,7 @@ int sdlGetGamepadType(Pointer<SdlGamepad> gamepad) {
 /// extern SDL_DECLSPEC SDL_GamepadType SDLCALL SDL_GetRealGamepadType(SDL_Gamepad *gamepad)
 /// ```
 int sdlGetRealGamepadType(Pointer<SdlGamepad> gamepad) {
-  final sdlGetRealGamepadTypeLookupFunction = libSdl3
+  final sdlGetRealGamepadTypeLookupFunction = _libSdl
       .lookupFunction<
         Int32 Function(Pointer<SdlGamepad> gamepad),
         int Function(Pointer<SdlGamepad> gamepad)
@@ -873,7 +870,7 @@ int sdlGetRealGamepadType(Pointer<SdlGamepad> gamepad) {
 /// extern SDL_DECLSPEC int SDLCALL SDL_GetGamepadPlayerIndex(SDL_Gamepad *gamepad)
 /// ```
 int sdlGetGamepadPlayerIndex(Pointer<SdlGamepad> gamepad) {
-  final sdlGetGamepadPlayerIndexLookupFunction = libSdl3
+  final sdlGetGamepadPlayerIndexLookupFunction = _libSdl
       .lookupFunction<
         Int32 Function(Pointer<SdlGamepad> gamepad),
         int Function(Pointer<SdlGamepad> gamepad)
@@ -898,7 +895,7 @@ int sdlGetGamepadPlayerIndex(Pointer<SdlGamepad> gamepad) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetGamepadPlayerIndex(SDL_Gamepad *gamepad, int player_index)
 /// ```
 bool sdlSetGamepadPlayerIndex(Pointer<SdlGamepad> gamepad, int playerIndex) {
-  final sdlSetGamepadPlayerIndexLookupFunction = libSdl3
+  final sdlSetGamepadPlayerIndexLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(Pointer<SdlGamepad> gamepad, Int32 playerIndex),
         int Function(Pointer<SdlGamepad> gamepad, int playerIndex)
@@ -922,7 +919,7 @@ bool sdlSetGamepadPlayerIndex(Pointer<SdlGamepad> gamepad, int playerIndex) {
 /// extern SDL_DECLSPEC Uint16 SDLCALL SDL_GetGamepadVendor(SDL_Gamepad *gamepad)
 /// ```
 int sdlGetGamepadVendor(Pointer<SdlGamepad> gamepad) {
-  final sdlGetGamepadVendorLookupFunction = libSdl3
+  final sdlGetGamepadVendorLookupFunction = _libSdl
       .lookupFunction<
         Uint16 Function(Pointer<SdlGamepad> gamepad),
         int Function(Pointer<SdlGamepad> gamepad)
@@ -946,7 +943,7 @@ int sdlGetGamepadVendor(Pointer<SdlGamepad> gamepad) {
 /// extern SDL_DECLSPEC Uint16 SDLCALL SDL_GetGamepadProduct(SDL_Gamepad *gamepad)
 /// ```
 int sdlGetGamepadProduct(Pointer<SdlGamepad> gamepad) {
-  final sdlGetGamepadProductLookupFunction = libSdl3
+  final sdlGetGamepadProductLookupFunction = _libSdl
       .lookupFunction<
         Uint16 Function(Pointer<SdlGamepad> gamepad),
         int Function(Pointer<SdlGamepad> gamepad)
@@ -970,7 +967,7 @@ int sdlGetGamepadProduct(Pointer<SdlGamepad> gamepad) {
 /// extern SDL_DECLSPEC Uint16 SDLCALL SDL_GetGamepadProductVersion(SDL_Gamepad *gamepad)
 /// ```
 int sdlGetGamepadProductVersion(Pointer<SdlGamepad> gamepad) {
-  final sdlGetGamepadProductVersionLookupFunction = libSdl3
+  final sdlGetGamepadProductVersionLookupFunction = _libSdl
       .lookupFunction<
         Uint16 Function(Pointer<SdlGamepad> gamepad),
         int Function(Pointer<SdlGamepad> gamepad)
@@ -992,7 +989,7 @@ int sdlGetGamepadProductVersion(Pointer<SdlGamepad> gamepad) {
 /// extern SDL_DECLSPEC Uint16 SDLCALL SDL_GetGamepadFirmwareVersion(SDL_Gamepad *gamepad)
 /// ```
 int sdlGetGamepadFirmwareVersion(Pointer<SdlGamepad> gamepad) {
-  final sdlGetGamepadFirmwareVersionLookupFunction = libSdl3
+  final sdlGetGamepadFirmwareVersionLookupFunction = _libSdl
       .lookupFunction<
         Uint16 Function(Pointer<SdlGamepad> gamepad),
         int Function(Pointer<SdlGamepad> gamepad)
@@ -1014,7 +1011,7 @@ int sdlGetGamepadFirmwareVersion(Pointer<SdlGamepad> gamepad) {
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetGamepadSerial(SDL_Gamepad *gamepad)
 /// ```
 String? sdlGetGamepadSerial(Pointer<SdlGamepad> gamepad) {
-  final sdlGetGamepadSerialLookupFunction = libSdl3
+  final sdlGetGamepadSerialLookupFunction = _libSdl
       .lookupFunction<
         Pointer<Utf8> Function(Pointer<SdlGamepad> gamepad),
         Pointer<Utf8> Function(Pointer<SdlGamepad> gamepad)
@@ -1041,7 +1038,7 @@ String? sdlGetGamepadSerial(Pointer<SdlGamepad> gamepad) {
 /// extern SDL_DECLSPEC Uint64 SDLCALL SDL_GetGamepadSteamHandle(SDL_Gamepad *gamepad)
 /// ```
 int sdlGetGamepadSteamHandle(Pointer<SdlGamepad> gamepad) {
-  final sdlGetGamepadSteamHandleLookupFunction = libSdl3
+  final sdlGetGamepadSteamHandleLookupFunction = _libSdl
       .lookupFunction<
         Uint64 Function(Pointer<SdlGamepad> gamepad),
         int Function(Pointer<SdlGamepad> gamepad)
@@ -1063,7 +1060,7 @@ int sdlGetGamepadSteamHandle(Pointer<SdlGamepad> gamepad) {
 /// extern SDL_DECLSPEC SDL_JoystickConnectionState SDLCALL SDL_GetGamepadConnectionState(SDL_Gamepad *gamepad)
 /// ```
 int sdlGetGamepadConnectionState(Pointer<SdlGamepad> gamepad) {
-  final sdlGetGamepadConnectionStateLookupFunction = libSdl3
+  final sdlGetGamepadConnectionStateLookupFunction = _libSdl
       .lookupFunction<
         Int32 Function(Pointer<SdlGamepad> gamepad),
         int Function(Pointer<SdlGamepad> gamepad)
@@ -1096,7 +1093,7 @@ int sdlGetGamepadPowerInfo(
   Pointer<SdlGamepad> gamepad,
   Pointer<Int32> percent,
 ) {
-  final sdlGetGamepadPowerInfoLookupFunction = libSdl3
+  final sdlGetGamepadPowerInfoLookupFunction = _libSdl
       .lookupFunction<
         Int32 Function(Pointer<SdlGamepad> gamepad, Pointer<Int32> percent),
         int Function(Pointer<SdlGamepad> gamepad, Pointer<Int32> percent)
@@ -1118,7 +1115,7 @@ int sdlGetGamepadPowerInfo(
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GamepadConnected(SDL_Gamepad *gamepad)
 /// ```
 bool sdlGamepadConnected(Pointer<SdlGamepad> gamepad) {
-  final sdlGamepadConnectedLookupFunction = libSdl3
+  final sdlGamepadConnectedLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(Pointer<SdlGamepad> gamepad),
         int Function(Pointer<SdlGamepad> gamepad)
@@ -1148,7 +1145,7 @@ bool sdlGamepadConnected(Pointer<SdlGamepad> gamepad) {
 /// extern SDL_DECLSPEC SDL_Joystick * SDLCALL SDL_GetGamepadJoystick(SDL_Gamepad *gamepad)
 /// ```
 Pointer<SdlJoystick> sdlGetGamepadJoystick(Pointer<SdlGamepad> gamepad) {
-  final sdlGetGamepadJoystickLookupFunction = libSdl3
+  final sdlGetGamepadJoystickLookupFunction = _libSdl
       .lookupFunction<
         Pointer<SdlJoystick> Function(Pointer<SdlGamepad> gamepad),
         Pointer<SdlJoystick> Function(Pointer<SdlGamepad> gamepad)
@@ -1173,7 +1170,7 @@ Pointer<SdlJoystick> sdlGetGamepadJoystick(Pointer<SdlGamepad> gamepad) {
 /// extern SDL_DECLSPEC void SDLCALL SDL_SetGamepadEventsEnabled(bool enabled)
 /// ```
 void sdlSetGamepadEventsEnabled(bool enabled) {
-  final sdlSetGamepadEventsEnabledLookupFunction = libSdl3
+  final sdlSetGamepadEventsEnabledLookupFunction = _libSdl
       .lookupFunction<Void Function(Uint8 enabled), void Function(int enabled)>(
         'SDL_SetGamepadEventsEnabled',
       );
@@ -1196,7 +1193,7 @@ void sdlSetGamepadEventsEnabled(bool enabled) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GamepadEventsEnabled(void)
 /// ```
 bool sdlGamepadEventsEnabled() {
-  final sdlGamepadEventsEnabledLookupFunction = libSdl3
+  final sdlGamepadEventsEnabledLookupFunction = _libSdl
       .lookupFunction<Uint8 Function(), int Function()>(
         'SDL_GamepadEventsEnabled',
       );
@@ -1222,7 +1219,7 @@ Pointer<Pointer<SdlGamepadBinding>> sdlGetGamepadBindings(
   Pointer<SdlGamepad> gamepad,
   Pointer<Int32> count,
 ) {
-  final sdlGetGamepadBindingsLookupFunction = libSdl3
+  final sdlGetGamepadBindingsLookupFunction = _libSdl
       .lookupFunction<
         Pointer<Pointer<SdlGamepadBinding>> Function(
           Pointer<SdlGamepad> gamepad,
@@ -1249,7 +1246,7 @@ Pointer<Pointer<SdlGamepadBinding>> sdlGetGamepadBindings(
 /// extern SDL_DECLSPEC void SDLCALL SDL_UpdateGamepads(void)
 /// ```
 void sdlUpdateGamepads() {
-  final sdlUpdateGamepadsLookupFunction = libSdl3
+  final sdlUpdateGamepadsLookupFunction = _libSdl
       .lookupFunction<Void Function(), void Function()>('SDL_UpdateGamepads');
   return sdlUpdateGamepadsLookupFunction();
 }
@@ -1274,7 +1271,7 @@ void sdlUpdateGamepads() {
 /// extern SDL_DECLSPEC SDL_GamepadType SDLCALL SDL_GetGamepadTypeFromString(const char *str)
 /// ```
 int sdlGetGamepadTypeFromString(String? str) {
-  final sdlGetGamepadTypeFromStringLookupFunction = libSdl3
+  final sdlGetGamepadTypeFromStringLookupFunction = _libSdl
       .lookupFunction<
         Int32 Function(Pointer<Utf8> str),
         int Function(Pointer<Utf8> str)
@@ -1301,7 +1298,7 @@ int sdlGetGamepadTypeFromString(String? str) {
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetGamepadStringForType(SDL_GamepadType type)
 /// ```
 String? sdlGetGamepadStringForType(int type) {
-  final sdlGetGamepadStringForTypeLookupFunction = libSdl3
+  final sdlGetGamepadStringForTypeLookupFunction = _libSdl
       .lookupFunction<
         Pointer<Utf8> Function(Int32 type),
         Pointer<Utf8> Function(int type)
@@ -1337,7 +1334,7 @@ String? sdlGetGamepadStringForType(int type) {
 /// extern SDL_DECLSPEC SDL_GamepadAxis SDLCALL SDL_GetGamepadAxisFromString(const char *str)
 /// ```
 int sdlGetGamepadAxisFromString(String? str) {
-  final sdlGetGamepadAxisFromStringLookupFunction = libSdl3
+  final sdlGetGamepadAxisFromStringLookupFunction = _libSdl
       .lookupFunction<
         Int32 Function(Pointer<Utf8> str),
         int Function(Pointer<Utf8> str)
@@ -1364,7 +1361,7 @@ int sdlGetGamepadAxisFromString(String? str) {
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetGamepadStringForAxis(SDL_GamepadAxis axis)
 /// ```
 String? sdlGetGamepadStringForAxis(int axis) {
-  final sdlGetGamepadStringForAxisLookupFunction = libSdl3
+  final sdlGetGamepadStringForAxisLookupFunction = _libSdl
       .lookupFunction<
         Pointer<Utf8> Function(Int32 axis),
         Pointer<Utf8> Function(int axis)
@@ -1395,7 +1392,7 @@ String? sdlGetGamepadStringForAxis(int axis) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GamepadHasAxis(SDL_Gamepad *gamepad, SDL_GamepadAxis axis)
 /// ```
 bool sdlGamepadHasAxis(Pointer<SdlGamepad> gamepad, int axis) {
-  final sdlGamepadHasAxisLookupFunction = libSdl3
+  final sdlGamepadHasAxisLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(Pointer<SdlGamepad> gamepad, Int32 axis),
         int Function(Pointer<SdlGamepad> gamepad, int axis)
@@ -1431,7 +1428,7 @@ bool sdlGamepadHasAxis(Pointer<SdlGamepad> gamepad, int axis) {
 /// extern SDL_DECLSPEC Sint16 SDLCALL SDL_GetGamepadAxis(SDL_Gamepad *gamepad, SDL_GamepadAxis axis)
 /// ```
 int sdlGetGamepadAxis(Pointer<SdlGamepad> gamepad, int axis) {
-  final sdlGetGamepadAxisLookupFunction = libSdl3
+  final sdlGetGamepadAxisLookupFunction = _libSdl
       .lookupFunction<
         Int16 Function(Pointer<SdlGamepad> gamepad, Int32 axis),
         int Function(Pointer<SdlGamepad> gamepad, int axis)
@@ -1459,7 +1456,7 @@ int sdlGetGamepadAxis(Pointer<SdlGamepad> gamepad, int axis) {
 /// extern SDL_DECLSPEC SDL_GamepadButton SDLCALL SDL_GetGamepadButtonFromString(const char *str)
 /// ```
 int sdlGetGamepadButtonFromString(String? str) {
-  final sdlGetGamepadButtonFromStringLookupFunction = libSdl3
+  final sdlGetGamepadButtonFromStringLookupFunction = _libSdl
       .lookupFunction<
         Int32 Function(Pointer<Utf8> str),
         int Function(Pointer<Utf8> str)
@@ -1486,7 +1483,7 @@ int sdlGetGamepadButtonFromString(String? str) {
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetGamepadStringForButton(SDL_GamepadButton button)
 /// ```
 String? sdlGetGamepadStringForButton(int button) {
-  final sdlGetGamepadStringForButtonLookupFunction = libSdl3
+  final sdlGetGamepadStringForButtonLookupFunction = _libSdl
       .lookupFunction<
         Pointer<Utf8> Function(Int32 button),
         Pointer<Utf8> Function(int button)
@@ -1516,7 +1513,7 @@ String? sdlGetGamepadStringForButton(int button) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GamepadHasButton(SDL_Gamepad *gamepad, SDL_GamepadButton button)
 /// ```
 bool sdlGamepadHasButton(Pointer<SdlGamepad> gamepad, int button) {
-  final sdlGamepadHasButtonLookupFunction = libSdl3
+  final sdlGamepadHasButtonLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(Pointer<SdlGamepad> gamepad, Int32 button),
         int Function(Pointer<SdlGamepad> gamepad, int button)
@@ -1540,7 +1537,7 @@ bool sdlGamepadHasButton(Pointer<SdlGamepad> gamepad, int button) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetGamepadButton(SDL_Gamepad *gamepad, SDL_GamepadButton button)
 /// ```
 bool sdlGetGamepadButton(Pointer<SdlGamepad> gamepad, int button) {
-  final sdlGetGamepadButtonLookupFunction = libSdl3
+  final sdlGetGamepadButtonLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(Pointer<SdlGamepad> gamepad, Int32 button),
         int Function(Pointer<SdlGamepad> gamepad, int button)
@@ -1563,7 +1560,7 @@ bool sdlGetGamepadButton(Pointer<SdlGamepad> gamepad, int button) {
 /// extern SDL_DECLSPEC SDL_GamepadButtonLabel SDLCALL SDL_GetGamepadButtonLabelForType(SDL_GamepadType type, SDL_GamepadButton button)
 /// ```
 int sdlGetGamepadButtonLabelForType(int type, int button) {
-  final sdlGetGamepadButtonLabelForTypeLookupFunction = libSdl3
+  final sdlGetGamepadButtonLabelForTypeLookupFunction = _libSdl
       .lookupFunction<
         Int32 Function(Int32 type, Int32 button),
         int Function(int type, int button)
@@ -1586,7 +1583,7 @@ int sdlGetGamepadButtonLabelForType(int type, int button) {
 /// extern SDL_DECLSPEC SDL_GamepadButtonLabel SDLCALL SDL_GetGamepadButtonLabel(SDL_Gamepad *gamepad, SDL_GamepadButton button)
 /// ```
 int sdlGetGamepadButtonLabel(Pointer<SdlGamepad> gamepad, int button) {
-  final sdlGetGamepadButtonLabelLookupFunction = libSdl3
+  final sdlGetGamepadButtonLabelLookupFunction = _libSdl
       .lookupFunction<
         Int32 Function(Pointer<SdlGamepad> gamepad, Int32 button),
         int Function(Pointer<SdlGamepad> gamepad, int button)
@@ -1608,7 +1605,7 @@ int sdlGetGamepadButtonLabel(Pointer<SdlGamepad> gamepad, int button) {
 /// extern SDL_DECLSPEC int SDLCALL SDL_GetNumGamepadTouchpads(SDL_Gamepad *gamepad)
 /// ```
 int sdlGetNumGamepadTouchpads(Pointer<SdlGamepad> gamepad) {
-  final sdlGetNumGamepadTouchpadsLookupFunction = libSdl3
+  final sdlGetNumGamepadTouchpadsLookupFunction = _libSdl
       .lookupFunction<
         Int32 Function(Pointer<SdlGamepad> gamepad),
         int Function(Pointer<SdlGamepad> gamepad)
@@ -1633,7 +1630,7 @@ int sdlGetNumGamepadTouchpads(Pointer<SdlGamepad> gamepad) {
 /// extern SDL_DECLSPEC int SDLCALL SDL_GetNumGamepadTouchpadFingers(SDL_Gamepad *gamepad, int touchpad)
 /// ```
 int sdlGetNumGamepadTouchpadFingers(Pointer<SdlGamepad> gamepad, int touchpad) {
-  final sdlGetNumGamepadTouchpadFingersLookupFunction = libSdl3
+  final sdlGetNumGamepadTouchpadFingersLookupFunction = _libSdl
       .lookupFunction<
         Int32 Function(Pointer<SdlGamepad> gamepad, Int32 touchpad),
         int Function(Pointer<SdlGamepad> gamepad, int touchpad)
@@ -1673,7 +1670,7 @@ bool sdlGetGamepadTouchpadFinger(
   Pointer<Float> y,
   Pointer<Float> pressure,
 ) {
-  final sdlGetGamepadTouchpadFingerLookupFunction = libSdl3
+  final sdlGetGamepadTouchpadFingerLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(
           Pointer<SdlGamepad> gamepad,
@@ -1723,7 +1720,7 @@ bool sdlGetGamepadTouchpadFinger(
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GamepadHasSensor(SDL_Gamepad *gamepad, SDL_SensorType type)
 /// ```
 bool sdlGamepadHasSensor(Pointer<SdlGamepad> gamepad, int type) {
-  final sdlGamepadHasSensorLookupFunction = libSdl3
+  final sdlGamepadHasSensorLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(Pointer<SdlGamepad> gamepad, Int32 type),
         int Function(Pointer<SdlGamepad> gamepad, int type)
@@ -1753,7 +1750,7 @@ bool sdlSetGamepadSensorEnabled(
   int type,
   bool enabled,
 ) {
-  final sdlSetGamepadSensorEnabledLookupFunction = libSdl3
+  final sdlSetGamepadSensorEnabledLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(Pointer<SdlGamepad> gamepad, Int32 type, Uint8 enabled),
         int Function(Pointer<SdlGamepad> gamepad, int type, int enabled)
@@ -1781,7 +1778,7 @@ bool sdlSetGamepadSensorEnabled(
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GamepadSensorEnabled(SDL_Gamepad *gamepad, SDL_SensorType type)
 /// ```
 bool sdlGamepadSensorEnabled(Pointer<SdlGamepad> gamepad, int type) {
-  final sdlGamepadSensorEnabledLookupFunction = libSdl3
+  final sdlGamepadSensorEnabledLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(Pointer<SdlGamepad> gamepad, Int32 type),
         int Function(Pointer<SdlGamepad> gamepad, int type)
@@ -1802,7 +1799,7 @@ bool sdlGamepadSensorEnabled(Pointer<SdlGamepad> gamepad, int type) {
 /// extern SDL_DECLSPEC float SDLCALL SDL_GetGamepadSensorDataRate(SDL_Gamepad *gamepad, SDL_SensorType type)
 /// ```
 double sdlGetGamepadSensorDataRate(Pointer<SdlGamepad> gamepad, int type) {
-  final sdlGetGamepadSensorDataRateLookupFunction = libSdl3
+  final sdlGetGamepadSensorDataRateLookupFunction = _libSdl
       .lookupFunction<
         Float Function(Pointer<SdlGamepad> gamepad, Int32 type),
         double Function(Pointer<SdlGamepad> gamepad, int type)
@@ -1834,7 +1831,7 @@ bool sdlGetGamepadSensorData(
   Pointer<Float> data,
   int numValues,
 ) {
-  final sdlGetGamepadSensorDataLookupFunction = libSdl3
+  final sdlGetGamepadSensorDataLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(
           Pointer<SdlGamepad> gamepad,
@@ -1887,7 +1884,7 @@ bool sdlRumbleGamepad(
   int highFrequencyRumble,
   int durationMs,
 ) {
-  final sdlRumbleGamepadLookupFunction = libSdl3
+  final sdlRumbleGamepadLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(
           Pointer<SdlGamepad> gamepad,
@@ -1946,7 +1943,7 @@ bool sdlRumbleGamepadTriggers(
   int rightRumble,
   int durationMs,
 ) {
-  final sdlRumbleGamepadTriggersLookupFunction = libSdl3
+  final sdlRumbleGamepadTriggersLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(
           Pointer<SdlGamepad> gamepad,
@@ -1997,7 +1994,7 @@ bool sdlSetGamepadLed(
   int green,
   int blue,
 ) {
-  final sdlSetGamepadLedLookupFunction = libSdl3
+  final sdlSetGamepadLedLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(
           Pointer<SdlGamepad> gamepad,
@@ -2029,7 +2026,7 @@ bool sdlSendGamepadEffect(
   Pointer<NativeType> data,
   int size,
 ) {
-  final sdlSendGamepadEffectLookupFunction = libSdl3
+  final sdlSendGamepadEffectLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(
           Pointer<SdlGamepad> gamepad,
@@ -2059,7 +2056,7 @@ bool sdlSendGamepadEffect(
 /// extern SDL_DECLSPEC void SDLCALL SDL_CloseGamepad(SDL_Gamepad *gamepad)
 /// ```
 void sdlCloseGamepad(Pointer<SdlGamepad> gamepad) {
-  final sdlCloseGamepadLookupFunction = libSdl3
+  final sdlCloseGamepadLookupFunction = _libSdl
       .lookupFunction<
         Void Function(Pointer<SdlGamepad> gamepad),
         void Function(Pointer<SdlGamepad> gamepad)
@@ -2086,7 +2083,7 @@ String? sdlGetGamepadAppleSfSymbolsNameForButton(
   Pointer<SdlGamepad> gamepad,
   int button,
 ) {
-  final sdlGetGamepadAppleSfSymbolsNameForButtonLookupFunction = libSdl3
+  final sdlGetGamepadAppleSfSymbolsNameForButtonLookupFunction = _libSdl
       .lookupFunction<
         Pointer<Utf8> Function(Pointer<SdlGamepad> gamepad, Int32 button),
         Pointer<Utf8> Function(Pointer<SdlGamepad> gamepad, int button)
@@ -2119,7 +2116,7 @@ String? sdlGetGamepadAppleSfSymbolsNameForAxis(
   Pointer<SdlGamepad> gamepad,
   int axis,
 ) {
-  final sdlGetGamepadAppleSfSymbolsNameForAxisLookupFunction = libSdl3
+  final sdlGetGamepadAppleSfSymbolsNameForAxisLookupFunction = _libSdl
       .lookupFunction<
         Pointer<Utf8> Function(Pointer<SdlGamepad> gamepad, Int32 axis),
         Pointer<Utf8> Function(Pointer<SdlGamepad> gamepad, int axis)

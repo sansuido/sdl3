@@ -1,8 +1,6 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 // ignore_for_file: avoid_positional_boolean_parameters
-import 'dart:ffi';
-import 'package:ffi/ffi.dart';
-import 'lib_sdl.dart';
+part of '../sdl.dart';
 
 ///
 /// Initialize the SDL library.
@@ -63,7 +61,7 @@ import 'lib_sdl.dart';
 /// extern SDL_DECLSPEC bool SDLCALL SDL_Init(SDL_InitFlags flags)
 /// ```
 bool sdlInit(int flags) {
-  final sdlInitLookupFunction = libSdl3
+  final sdlInitLookupFunction = _libSdl
       .lookupFunction<Uint8 Function(Uint32 flags), int Function(int flags)>(
         'SDL_Init',
       );
@@ -89,7 +87,7 @@ bool sdlInit(int flags) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_InitSubSystem(SDL_InitFlags flags)
 /// ```
 bool sdlInitSubSystem(int flags) {
-  final sdlInitSubSystemLookupFunction = libSdl3
+  final sdlInitSubSystemLookupFunction = _libSdl
       .lookupFunction<Uint8 Function(Uint32 flags), int Function(int flags)>(
         'SDL_InitSubSystem',
       );
@@ -113,7 +111,7 @@ bool sdlInitSubSystem(int flags) {
 /// extern SDL_DECLSPEC void SDLCALL SDL_QuitSubSystem(SDL_InitFlags flags)
 /// ```
 void sdlQuitSubSystem(int flags) {
-  final sdlQuitSubSystemLookupFunction = libSdl3
+  final sdlQuitSubSystemLookupFunction = _libSdl
       .lookupFunction<Void Function(Uint32 flags), void Function(int flags)>(
         'SDL_QuitSubSystem',
       );
@@ -136,7 +134,7 @@ void sdlQuitSubSystem(int flags) {
 /// extern SDL_DECLSPEC SDL_InitFlags SDLCALL SDL_WasInit(SDL_InitFlags flags)
 /// ```
 int sdlWasInit(int flags) {
-  final sdlWasInitLookupFunction = libSdl3
+  final sdlWasInitLookupFunction = _libSdl
       .lookupFunction<Uint32 Function(Uint32 flags), int Function(int flags)>(
         'SDL_WasInit',
       );
@@ -163,7 +161,7 @@ int sdlWasInit(int flags) {
 /// extern SDL_DECLSPEC void SDLCALL SDL_Quit(void)
 /// ```
 void sdlQuit() {
-  final sdlQuitLookupFunction = libSdl3
+  final sdlQuitLookupFunction = _libSdl
       .lookupFunction<Void Function(), void Function()>('SDL_Quit');
   return sdlQuitLookupFunction();
 }
@@ -190,7 +188,7 @@ void sdlQuit() {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_IsMainThread(void)
 /// ```
 bool sdlIsMainThread() {
-  final sdlIsMainThreadLookupFunction = libSdl3
+  final sdlIsMainThreadLookupFunction = _libSdl
       .lookupFunction<Uint8 Function(), int Function()>('SDL_IsMainThread');
   return sdlIsMainThreadLookupFunction() == 1;
 }
@@ -227,7 +225,7 @@ bool sdlRunOnMainThread(
   Pointer<NativeType> userdata,
   bool waitComplete,
 ) {
-  final sdlRunOnMainThreadLookupFunction = libSdl3
+  final sdlRunOnMainThreadLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(
           Pointer<NativeFunction<SdlMainThreadCallback>> callback,
@@ -292,7 +290,7 @@ bool sdlSetAppMetadata(
   String? appversion,
   String? appidentifier,
 ) {
-  final sdlSetAppMetadataLookupFunction = libSdl3
+  final sdlSetAppMetadataLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(
           Pointer<Utf8> appname,
@@ -391,7 +389,7 @@ bool sdlSetAppMetadata(
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetAppMetadataProperty(const char *name, const char *value)
 /// ```
 bool sdlSetAppMetadataProperty(String? name, String? value) {
-  final sdlSetAppMetadataPropertyLookupFunction = libSdl3
+  final sdlSetAppMetadataPropertyLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(Pointer<Utf8> name, Pointer<Utf8> value),
         int Function(Pointer<Utf8> name, Pointer<Utf8> value)
@@ -431,7 +429,7 @@ bool sdlSetAppMetadataProperty(String? name, String? value) {
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetAppMetadataProperty(const char *name)
 /// ```
 String? sdlGetAppMetadataProperty(String? name) {
-  final sdlGetAppMetadataPropertyLookupFunction = libSdl3
+  final sdlGetAppMetadataPropertyLookupFunction = _libSdl
       .lookupFunction<
         Pointer<Utf8> Function(Pointer<Utf8> name),
         Pointer<Utf8> Function(Pointer<Utf8> name)

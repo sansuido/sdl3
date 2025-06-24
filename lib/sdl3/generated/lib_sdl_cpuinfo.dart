@@ -1,6 +1,5 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-import 'dart:ffi';
-import 'lib_sdl.dart';
+part of '../sdl.dart';
 
 ///
 /// Get the number of logical CPU cores available.
@@ -17,7 +16,7 @@ import 'lib_sdl.dart';
 /// extern SDL_DECLSPEC int SDLCALL SDL_GetNumLogicalCPUCores(void)
 /// ```
 int sdlGetNumLogicalCpuCores() {
-  final sdlGetNumLogicalCpuCoresLookupFunction = libSdl3
+  final sdlGetNumLogicalCpuCoresLookupFunction = _libSdl
       .lookupFunction<Int32 Function(), int Function()>(
         'SDL_GetNumLogicalCPUCores',
       );
@@ -40,7 +39,7 @@ int sdlGetNumLogicalCpuCores() {
 /// extern SDL_DECLSPEC int SDLCALL SDL_GetCPUCacheLineSize(void)
 /// ```
 int sdlGetCpuCacheLineSize() {
-  final sdlGetCpuCacheLineSizeLookupFunction = libSdl3
+  final sdlGetCpuCacheLineSizeLookupFunction = _libSdl
       .lookupFunction<Int32 Function(), int Function()>(
         'SDL_GetCPUCacheLineSize',
       );
@@ -63,7 +62,7 @@ int sdlGetCpuCacheLineSize() {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_HasAltiVec(void)
 /// ```
 bool sdlHasAltiVec() {
-  final sdlHasAltiVecLookupFunction = libSdl3
+  final sdlHasAltiVecLookupFunction = _libSdl
       .lookupFunction<Uint8 Function(), int Function()>('SDL_HasAltiVec');
   return sdlHasAltiVecLookupFunction() == 1;
 }
@@ -83,7 +82,7 @@ bool sdlHasAltiVec() {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_HasMMX(void)
 /// ```
 bool sdlHasMmx() {
-  final sdlHasMmxLookupFunction = libSdl3
+  final sdlHasMmxLookupFunction = _libSdl
       .lookupFunction<Uint8 Function(), int Function()>('SDL_HasMMX');
   return sdlHasMmxLookupFunction() == 1;
 }
@@ -108,7 +107,7 @@ bool sdlHasMmx() {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_HasSSE(void)
 /// ```
 bool sdlHasSse() {
-  final sdlHasSseLookupFunction = libSdl3
+  final sdlHasSseLookupFunction = _libSdl
       .lookupFunction<Uint8 Function(), int Function()>('SDL_HasSSE');
   return sdlHasSseLookupFunction() == 1;
 }
@@ -133,7 +132,7 @@ bool sdlHasSse() {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_HasSSE2(void)
 /// ```
 bool sdlHasSse2() {
-  final sdlHasSse2LookupFunction = libSdl3
+  final sdlHasSse2LookupFunction = _libSdl
       .lookupFunction<Uint8 Function(), int Function()>('SDL_HasSSE2');
   return sdlHasSse2LookupFunction() == 1;
 }
@@ -158,7 +157,7 @@ bool sdlHasSse2() {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_HasSSE3(void)
 /// ```
 bool sdlHasSse3() {
-  final sdlHasSse3LookupFunction = libSdl3
+  final sdlHasSse3LookupFunction = _libSdl
       .lookupFunction<Uint8 Function(), int Function()>('SDL_HasSSE3');
   return sdlHasSse3LookupFunction() == 1;
 }
@@ -183,7 +182,7 @@ bool sdlHasSse3() {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_HasSSE41(void)
 /// ```
 bool sdlHasSse41() {
-  final sdlHasSse41LookupFunction = libSdl3
+  final sdlHasSse41LookupFunction = _libSdl
       .lookupFunction<Uint8 Function(), int Function()>('SDL_HasSSE41');
   return sdlHasSse41LookupFunction() == 1;
 }
@@ -208,7 +207,7 @@ bool sdlHasSse41() {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_HasSSE42(void)
 /// ```
 bool sdlHasSse42() {
-  final sdlHasSse42LookupFunction = libSdl3
+  final sdlHasSse42LookupFunction = _libSdl
       .lookupFunction<Uint8 Function(), int Function()>('SDL_HasSSE42');
   return sdlHasSse42LookupFunction() == 1;
 }
@@ -231,7 +230,7 @@ bool sdlHasSse42() {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_HasAVX(void)
 /// ```
 bool sdlHasAvx() {
-  final sdlHasAvxLookupFunction = libSdl3
+  final sdlHasAvxLookupFunction = _libSdl
       .lookupFunction<Uint8 Function(), int Function()>('SDL_HasAVX');
   return sdlHasAvxLookupFunction() == 1;
 }
@@ -254,7 +253,7 @@ bool sdlHasAvx() {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_HasAVX2(void)
 /// ```
 bool sdlHasAvx2() {
-  final sdlHasAvx2LookupFunction = libSdl3
+  final sdlHasAvx2LookupFunction = _libSdl
       .lookupFunction<Uint8 Function(), int Function()>('SDL_HasAVX2');
   return sdlHasAvx2LookupFunction() == 1;
 }
@@ -277,7 +276,7 @@ bool sdlHasAvx2() {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_HasAVX512F(void)
 /// ```
 bool sdlHasAvx512F() {
-  final sdlHasAvx512FLookupFunction = libSdl3
+  final sdlHasAvx512FLookupFunction = _libSdl
       .lookupFunction<Uint8 Function(), int Function()>('SDL_HasAVX512F');
   return sdlHasAvx512FLookupFunction() == 1;
 }
@@ -301,7 +300,7 @@ bool sdlHasAvx512F() {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_HasARMSIMD(void)
 /// ```
 bool sdlHasArmsimd() {
-  final sdlHasArmsimdLookupFunction = libSdl3
+  final sdlHasArmsimdLookupFunction = _libSdl
       .lookupFunction<Uint8 Function(), int Function()>('SDL_HasARMSIMD');
   return sdlHasArmsimdLookupFunction() == 1;
 }
@@ -321,7 +320,7 @@ bool sdlHasArmsimd() {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_HasNEON(void)
 /// ```
 bool sdlHasNeon() {
-  final sdlHasNeonLookupFunction = libSdl3
+  final sdlHasNeonLookupFunction = _libSdl
       .lookupFunction<Uint8 Function(), int Function()>('SDL_HasNEON');
   return sdlHasNeonLookupFunction() == 1;
 }
@@ -342,7 +341,7 @@ bool sdlHasNeon() {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_HasLSX(void)
 /// ```
 bool sdlHasLsx() {
-  final sdlHasLsxLookupFunction = libSdl3
+  final sdlHasLsxLookupFunction = _libSdl
       .lookupFunction<Uint8 Function(), int Function()>('SDL_HasLSX');
   return sdlHasLsxLookupFunction() == 1;
 }
@@ -363,7 +362,7 @@ bool sdlHasLsx() {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_HasLASX(void)
 /// ```
 bool sdlHasLasx() {
-  final sdlHasLasxLookupFunction = libSdl3
+  final sdlHasLasxLookupFunction = _libSdl
       .lookupFunction<Uint8 Function(), int Function()>('SDL_HasLASX');
   return sdlHasLasxLookupFunction() == 1;
 }
@@ -381,7 +380,7 @@ bool sdlHasLasx() {
 /// extern SDL_DECLSPEC int SDLCALL SDL_GetSystemRAM(void)
 /// ```
 int sdlGetSystemRam() {
-  final sdlGetSystemRamLookupFunction = libSdl3
+  final sdlGetSystemRamLookupFunction = _libSdl
       .lookupFunction<Int32 Function(), int Function()>('SDL_GetSystemRAM');
   return sdlGetSystemRamLookupFunction();
 }
@@ -412,7 +411,7 @@ int sdlGetSystemRam() {
 /// extern SDL_DECLSPEC size_t SDLCALL SDL_GetSIMDAlignment(void)
 /// ```
 int sdlGetSimdAlignment() {
-  final sdlGetSimdAlignmentLookupFunction = libSdl3
+  final sdlGetSimdAlignmentLookupFunction = _libSdl
       .lookupFunction<Uint32 Function(), int Function()>(
         'SDL_GetSIMDAlignment',
       );

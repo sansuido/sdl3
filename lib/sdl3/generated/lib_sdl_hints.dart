@@ -1,8 +1,6 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 // ignore_for_file: avoid_positional_boolean_parameters
-import 'dart:ffi';
-import 'package:ffi/ffi.dart';
-import 'lib_sdl.dart';
+part of '../sdl.dart';
 
 ///
 /// Set a hint with a specific priority.
@@ -29,7 +27,7 @@ import 'lib_sdl.dart';
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetHintWithPriority(const char *name, const char *value, SDL_HintPriority priority)
 /// ```
 bool sdlSetHintWithPriority(String? name, String? value, int priority) {
-  final sdlSetHintWithPriorityLookupFunction = libSdl3
+  final sdlSetHintWithPriorityLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(Pointer<Utf8> name, Pointer<Utf8> value, Int32 priority),
         int Function(Pointer<Utf8> name, Pointer<Utf8> value, int priority)
@@ -73,7 +71,7 @@ bool sdlSetHintWithPriority(String? name, String? value, int priority) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetHint(const char *name, const char *value)
 /// ```
 bool sdlSetHint(String? name, String? value) {
-  final sdlSetHintLookupFunction = libSdl3
+  final sdlSetHintLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(Pointer<Utf8> name, Pointer<Utf8> value),
         int Function(Pointer<Utf8> name, Pointer<Utf8> value)
@@ -109,7 +107,7 @@ bool sdlSetHint(String? name, String? value) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_ResetHint(const char *name)
 /// ```
 bool sdlResetHint(String? name) {
-  final sdlResetHintLookupFunction = libSdl3
+  final sdlResetHintLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(Pointer<Utf8> name),
         int Function(Pointer<Utf8> name)
@@ -137,7 +135,7 @@ bool sdlResetHint(String? name) {
 /// extern SDL_DECLSPEC void SDLCALL SDL_ResetHints(void)
 /// ```
 void sdlResetHints() {
-  final sdlResetHintsLookupFunction = libSdl3
+  final sdlResetHintsLookupFunction = _libSdl
       .lookupFunction<Void Function(), void Function()>('SDL_ResetHints');
   return sdlResetHintsLookupFunction();
 }
@@ -164,7 +162,7 @@ void sdlResetHints() {
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetHint(const char *name)
 /// ```
 String? sdlGetHint(String? name) {
-  final sdlGetHintLookupFunction = libSdl3
+  final sdlGetHintLookupFunction = _libSdl
       .lookupFunction<
         Pointer<Utf8> Function(Pointer<Utf8> name),
         Pointer<Utf8> Function(Pointer<Utf8> name)
@@ -197,7 +195,7 @@ String? sdlGetHint(String? name) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetHintBoolean(const char *name, bool default_value)
 /// ```
 bool sdlGetHintBoolean(String? name, bool defaultValue) {
-  final sdlGetHintBooleanLookupFunction = libSdl3
+  final sdlGetHintBooleanLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(Pointer<Utf8> name, Uint8 defaultValue),
         int Function(Pointer<Utf8> name, int defaultValue)
@@ -236,7 +234,7 @@ bool sdlAddHintCallback(
   Pointer<NativeFunction<SdlHintCallback>> callback,
   Pointer<NativeType> userdata,
 ) {
-  final sdlAddHintCallbackLookupFunction = libSdl3
+  final sdlAddHintCallbackLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(
           Pointer<Utf8> name,
@@ -278,7 +276,7 @@ void sdlRemoveHintCallback(
   Pointer<NativeFunction<SdlHintCallback>> callback,
   Pointer<NativeType> userdata,
 ) {
-  final sdlRemoveHintCallbackLookupFunction = libSdl3
+  final sdlRemoveHintCallbackLookupFunction = _libSdl
       .lookupFunction<
         Void Function(
           Pointer<Utf8> name,

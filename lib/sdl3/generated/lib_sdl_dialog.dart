@@ -1,9 +1,6 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 // ignore_for_file: avoid_positional_boolean_parameters
-import 'dart:ffi';
-import 'package:ffi/ffi.dart';
-import 'lib_sdl.dart';
-import 'struct_sdl.dart';
+part of '../sdl.dart';
 
 ///
 /// Displays a dialog that lets the user select a file on their filesystem.
@@ -66,7 +63,7 @@ void sdlShowOpenFileDialog(
   String? defaultLocation,
   bool allowMany,
 ) {
-  final sdlShowOpenFileDialogLookupFunction = libSdl3
+  final sdlShowOpenFileDialogLookupFunction = _libSdl
       .lookupFunction<
         Void Function(
           Pointer<NativeFunction<SdlDialogFileCallback>> callback,
@@ -161,7 +158,7 @@ void sdlShowSaveFileDialog(
   int nfilters,
   String? defaultLocation,
 ) {
-  final sdlShowSaveFileDialogLookupFunction = libSdl3
+  final sdlShowSaveFileDialogLookupFunction = _libSdl
       .lookupFunction<
         Void Function(
           Pointer<NativeFunction<SdlDialogFileCallback>> callback,
@@ -248,7 +245,7 @@ void sdlShowOpenFolderDialog(
   String? defaultLocation,
   bool allowMany,
 ) {
-  final sdlShowOpenFolderDialogLookupFunction = libSdl3
+  final sdlShowOpenFolderDialogLookupFunction = _libSdl
       .lookupFunction<
         Void Function(
           Pointer<NativeFunction<SdlDialogFileCallback>> callback,
@@ -335,7 +332,7 @@ void sdlShowFileDialogWithProperties(
   Pointer<NativeType> userdata,
   int props,
 ) {
-  final sdlShowFileDialogWithPropertiesLookupFunction = libSdl3
+  final sdlShowFileDialogWithPropertiesLookupFunction = _libSdl
       .lookupFunction<
         Void Function(
           Int32 type,

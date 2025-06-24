@@ -1,6 +1,5 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-import 'dart:ffi';
-import 'lib_sdl.dart';
+part of '../sdl.dart';
 
 ///
 /// Compose a custom blend mode for renderers.
@@ -100,7 +99,7 @@ int sdlComposeCustomBlendMode(
   int dstAlphaFactor,
   int alphaOperation,
 ) {
-  final sdlComposeCustomBlendModeLookupFunction = libSdl3
+  final sdlComposeCustomBlendModeLookupFunction = _libSdl
       .lookupFunction<
         Uint32 Function(
           Int32 srcColorFactor,

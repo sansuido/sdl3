@@ -1,5 +1,5 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-import 'dart:ffi';
+part of '../sdl_mixer.dart';
 
 // Mix_Chunk
 final class MixChunk extends Struct {

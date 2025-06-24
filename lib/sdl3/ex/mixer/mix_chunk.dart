@@ -1,7 +1,4 @@
-import 'dart:ffi';
-import '../../generated/lib_sdl_mixer.dart';
-import '../../generated/struct_sdl.dart';
-import '../../generated/struct_sdl_mixer.dart';
+part of '../../sdl_mixer.dart';
 
 extension MixChunkEx on MixChunk {
   // lib_sdl_mxer.dart

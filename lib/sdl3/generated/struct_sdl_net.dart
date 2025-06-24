@@ -1,5 +1,5 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-import 'dart:ffi';
+part of '../sdl_net.dart';
 
 // NET_Address
 final class NetAddress extends Opaque {}

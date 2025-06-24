@@ -1,8 +1,5 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-import 'dart:ffi';
-import 'package:ffi/ffi.dart';
-import 'lib_sdl.dart';
-import 'struct_sdl.dart';
+part of '../sdl.dart';
 
 ///
 /// Create a modal message box.
@@ -45,7 +42,7 @@ bool sdlShowMessageBox(
   Pointer<SdlMessageBoxData> messageboxdata,
   Pointer<Int32> buttonid,
 ) {
-  final sdlShowMessageBoxLookupFunction = libSdl3
+  final sdlShowMessageBoxLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(
           Pointer<SdlMessageBoxData> messageboxdata,
@@ -108,7 +105,7 @@ bool sdlShowSimpleMessageBox(
   String? message,
   Pointer<SdlWindow> window,
 ) {
-  final sdlShowSimpleMessageBoxLookupFunction = libSdl3
+  final sdlShowSimpleMessageBoxLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(
           Uint32 flags,

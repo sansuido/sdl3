@@ -1,16 +1,5 @@
 // ignore_for_file: avoid_positional_boolean_parameters
-
-import 'dart:ffi';
-import 'dart:math' as math;
-
-import 'package:ffi/ffi.dart';
-
-import '../../generated/lib_sdl.dart';
-import '../../generated/lib_sdl_render.dart';
-import '../../generated/lib_sdl_video.dart';
-import '../../generated/struct_sdl.dart';
-import '../dart/rectangle.dart';
-import 'sdl_rect.dart';
+part of '../../sdl.dart';
 
 extension SdlWindowEx on SdlWindow {
   // lib_sdl_video.dart

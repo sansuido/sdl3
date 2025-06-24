@@ -1,8 +1,6 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 // ignore_for_file: avoid_positional_boolean_parameters
-import 'dart:ffi';
-import 'lib_sdl.dart';
-import 'struct_sdl.dart';
+part of '../sdl.dart';
 
 ///
 /// Create a new process.
@@ -51,7 +49,7 @@ Pointer<SdlProcess> sdlCreateProcess(
   Pointer<Pointer<Int8>> args,
   bool pipeStdio,
 ) {
-  final sdlCreateProcessLookupFunction = libSdl3
+  final sdlCreateProcessLookupFunction = _libSdl
       .lookupFunction<
         Pointer<SdlProcess> Function(
           Pointer<Pointer<Int8>> args,
@@ -135,7 +133,7 @@ Pointer<SdlProcess> sdlCreateProcess(
 /// extern SDL_DECLSPEC SDL_Process * SDLCALL SDL_CreateProcessWithProperties(SDL_PropertiesID props)
 /// ```
 Pointer<SdlProcess> sdlCreateProcessWithProperties(int props) {
-  final sdlCreateProcessWithPropertiesLookupFunction = libSdl3
+  final sdlCreateProcessWithPropertiesLookupFunction = _libSdl
       .lookupFunction<
         Pointer<SdlProcess> Function(Uint32 props),
         Pointer<SdlProcess> Function(int props)
@@ -176,7 +174,7 @@ Pointer<SdlProcess> sdlCreateProcessWithProperties(int props) {
 /// extern SDL_DECLSPEC SDL_PropertiesID SDLCALL SDL_GetProcessProperties(SDL_Process *process)
 /// ```
 int sdlGetProcessProperties(Pointer<SdlProcess> process) {
-  final sdlGetProcessPropertiesLookupFunction = libSdl3
+  final sdlGetProcessPropertiesLookupFunction = _libSdl
       .lookupFunction<
         Uint32 Function(Pointer<SdlProcess> process),
         int Function(Pointer<SdlProcess> process)
@@ -221,7 +219,7 @@ Pointer<NativeType> sdlReadProcess(
   Pointer<Uint32> datasize,
   Pointer<Int32> exitcode,
 ) {
-  final sdlReadProcessLookupFunction = libSdl3
+  final sdlReadProcessLookupFunction = _libSdl
       .lookupFunction<
         Pointer<NativeType> Function(
           Pointer<SdlProcess> process,
@@ -265,7 +263,7 @@ Pointer<NativeType> sdlReadProcess(
 /// extern SDL_DECLSPEC SDL_IOStream * SDLCALL SDL_GetProcessInput(SDL_Process *process)
 /// ```
 Pointer<SdlIoStream> sdlGetProcessInput(Pointer<SdlProcess> process) {
-  final sdlGetProcessInputLookupFunction = libSdl3
+  final sdlGetProcessInputLookupFunction = _libSdl
       .lookupFunction<
         Pointer<SdlIoStream> Function(Pointer<SdlProcess> process),
         Pointer<SdlIoStream> Function(Pointer<SdlProcess> process)
@@ -299,7 +297,7 @@ Pointer<SdlIoStream> sdlGetProcessInput(Pointer<SdlProcess> process) {
 /// extern SDL_DECLSPEC SDL_IOStream * SDLCALL SDL_GetProcessOutput(SDL_Process *process)
 /// ```
 Pointer<SdlIoStream> sdlGetProcessOutput(Pointer<SdlProcess> process) {
-  final sdlGetProcessOutputLookupFunction = libSdl3
+  final sdlGetProcessOutputLookupFunction = _libSdl
       .lookupFunction<
         Pointer<SdlIoStream> Function(Pointer<SdlProcess> process),
         Pointer<SdlIoStream> Function(Pointer<SdlProcess> process)
@@ -332,7 +330,7 @@ Pointer<SdlIoStream> sdlGetProcessOutput(Pointer<SdlProcess> process) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_KillProcess(SDL_Process *process, bool force)
 /// ```
 bool sdlKillProcess(Pointer<SdlProcess> process, bool force) {
-  final sdlKillProcessLookupFunction = libSdl3
+  final sdlKillProcessLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(Pointer<SdlProcess> process, Uint8 force),
         int Function(Pointer<SdlProcess> process, int force)
@@ -379,7 +377,7 @@ bool sdlWaitProcess(
   bool block,
   Pointer<Int32> exitcode,
 ) {
-  final sdlWaitProcessLookupFunction = libSdl3
+  final sdlWaitProcessLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(
           Pointer<SdlProcess> process,
@@ -416,7 +414,7 @@ bool sdlWaitProcess(
 /// extern SDL_DECLSPEC void SDLCALL SDL_DestroyProcess(SDL_Process *process)
 /// ```
 void sdlDestroyProcess(Pointer<SdlProcess> process) {
-  final sdlDestroyProcessLookupFunction = libSdl3
+  final sdlDestroyProcessLookupFunction = _libSdl
       .lookupFunction<
         Void Function(Pointer<SdlProcess> process),
         void Function(Pointer<SdlProcess> process)

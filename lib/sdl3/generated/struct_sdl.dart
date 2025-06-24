@@ -1,6 +1,5 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-import 'dart:ffi';
-import 'package:ffi/ffi.dart';
+part of '../sdl.dart';
 
 // SDL_AssertData
 final class SdlAssertData extends Struct {

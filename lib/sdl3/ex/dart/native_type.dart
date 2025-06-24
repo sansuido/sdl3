@@ -1,5 +1,4 @@
-import 'dart:ffi';
-import 'package:ffi/ffi.dart' as ffi;
+part of '../../sdl_dart.dart';
 
 extension NativeTypePointerEx on Pointer<NativeType> {
   bool callocFree() {

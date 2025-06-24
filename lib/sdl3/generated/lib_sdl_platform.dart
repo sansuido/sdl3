@@ -1,7 +1,5 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-import 'dart:ffi';
-import 'package:ffi/ffi.dart';
-import 'lib_sdl.dart';
+part of '../sdl.dart';
 
 ///
 /// Get the name of the platform.
@@ -23,7 +21,7 @@ import 'lib_sdl.dart';
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetPlatform(void)
 /// ```
 String? sdlGetPlatform() {
-  final sdlGetPlatformLookupFunction = libSdl3
+  final sdlGetPlatformLookupFunction = _libSdl
       .lookupFunction<Pointer<Utf8> Function(), Pointer<Utf8> Function()>(
         'SDL_GetPlatform',
       );

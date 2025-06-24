@@ -1,8 +1,4 @@
-import 'dart:ffi';
-
-import '../../generated/lib_sdl_mouse.dart';
-//import '../../generated/const_sdl.dart';
-import '../../generated/struct_sdl.dart';
+part of '../../sdl.dart';
 
 extension SdlCursorEx on SdlCursor {
   // lib_sdl_mouse.dart

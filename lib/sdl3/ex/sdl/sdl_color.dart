@@ -1,6 +1,4 @@
-import 'dart:ffi';
-import 'dart:typed_data';
-import '../../generated/struct_sdl.dart';
+part of '../../sdl.dart';
 
 extension SdlColorEx on SdlColor {
   // utirity

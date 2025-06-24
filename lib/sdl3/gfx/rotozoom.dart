@@ -1,3 +1,5 @@
+part of '../sdl_gfx.dart';
+
 /*  
 
 SDL2_rotozoom.c: rotozoomer, zoomer and shrinker for 32bit or 8bit surfaces
@@ -26,14 +28,6 @@ distribution.
 Andreas Schiffler -- aschiffler at ferzkopp dot net
 
 */
-
-import 'dart:ffi';
-import 'package:ffi/ffi.dart';
-
-import '../generated/lib_sdl_pixels.dart';
-import '../generated/lib_sdl_stdinc.dart';
-import '../generated/lib_sdl_surface.dart';
-import '../generated/struct_sdl.dart';
 
 /*!
 \brief Rotates a 8/16/24/32 bit surface in increments of 90 degrees.

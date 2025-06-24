@@ -1,3 +1,4 @@
+part of '../sdl_gfx.dart';
 /*
 
 SDL2_framerate.c: framerate manager
@@ -26,8 +27,6 @@ distribution.
 Andreas Schiffler -- aschiffler at ferzkopp dot net
 
 */
-import '../generated/lib_sdl_timer.dart';
-import 'const.dart';
 
 class FpsManager {
   FpsManager() {

@@ -1,7 +1,5 @@
 // ignore_for_file: constant_identifier_names, non_constant_identifier_names
-import 'dart:ffi';
-import './generated/const_sdl.dart';
-import './generated/lib_sdl_stdinc.dart';
+part of '../sdl.dart';
 
 //const SDL_INIT_EVERYTHING = ( \ SDL_INIT_TIMER | SDL_INIT_AUDIO | SDL_INIT_VIDEO | SDL_INIT_EVENTS | \ SDL_INIT_JOYSTICK | SDL_INIT_HAPTIC | SDL_INIT_GAMECONTROLLER \ );
 //const SDL_ASSERT_LEVEL = SDL_DEFAULT_ASSERT_LEVEL;

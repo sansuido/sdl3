@@ -1,10 +1,5 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-import 'dart:ffi';
-import 'package:ffi/ffi.dart';
-import '../dylib.dart' as dylib;
-import 'struct_sdl.dart';
-
-final DynamicLibrary libSdl3 = dylib.SdlDynamicLibraryService().open('SDL3');
+part of '../sdl.dart';
 
 // typedef SDL_AssertState (SDLCALL *SDL_AssertionHandler)( const SDL_AssertData *data, void *userdata)
 typedef SdlAssertionHandlerDart =

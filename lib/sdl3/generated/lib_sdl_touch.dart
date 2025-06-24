@@ -1,8 +1,5 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-import 'dart:ffi';
-import 'package:ffi/ffi.dart';
-import 'lib_sdl.dart';
-import 'struct_sdl.dart';
+part of '../sdl.dart';
 
 ///
 /// Get a list of registered touch devices.
@@ -23,7 +20,7 @@ import 'struct_sdl.dart';
 /// extern SDL_DECLSPEC SDL_TouchID * SDLCALL SDL_GetTouchDevices(int *count)
 /// ```
 Pointer<Uint64> sdlGetTouchDevices(Pointer<Int32> count) {
-  final sdlGetTouchDevicesLookupFunction = libSdl3
+  final sdlGetTouchDevicesLookupFunction = _libSdl
       .lookupFunction<
         Pointer<Uint64> Function(Pointer<Int32> count),
         Pointer<Uint64> Function(Pointer<Int32> count)
@@ -44,7 +41,7 @@ Pointer<Uint64> sdlGetTouchDevices(Pointer<Int32> count) {
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetTouchDeviceName(SDL_TouchID touchID)
 /// ```
 String? sdlGetTouchDeviceName(int touchId) {
-  final sdlGetTouchDeviceNameLookupFunction = libSdl3
+  final sdlGetTouchDeviceNameLookupFunction = _libSdl
       .lookupFunction<
         Pointer<Utf8> Function(Uint64 touchId),
         Pointer<Utf8> Function(int touchId)
@@ -68,7 +65,7 @@ String? sdlGetTouchDeviceName(int touchId) {
 /// extern SDL_DECLSPEC SDL_TouchDeviceType SDLCALL SDL_GetTouchDeviceType(SDL_TouchID touchID)
 /// ```
 int sdlGetTouchDeviceType(int touchId) {
-  final sdlGetTouchDeviceTypeLookupFunction = libSdl3
+  final sdlGetTouchDeviceTypeLookupFunction = _libSdl
       .lookupFunction<
         Int32 Function(Uint64 touchId),
         int Function(int touchId)
@@ -96,7 +93,7 @@ Pointer<Pointer<SdlFinger>> sdlGetTouchFingers(
   int touchId,
   Pointer<Int32> count,
 ) {
-  final sdlGetTouchFingersLookupFunction = libSdl3
+  final sdlGetTouchFingersLookupFunction = _libSdl
       .lookupFunction<
         Pointer<Pointer<SdlFinger>> Function(
           Uint64 touchId,

@@ -1,4 +1,4 @@
-import 'dart:math' as math;
+part of '../sdl_gfx.dart';
 
 List<List<int>> stackLine(List<int> p1, List<int> p2) {
   final stack = <List<int>>[];

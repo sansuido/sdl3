@@ -1,8 +1,4 @@
-import 'dart:ffi';
-import 'dart:math' as math show Rectangle;
-
-import '../../generated/lib_sdl_rect.dart';
-import '../../generated/struct_sdl.dart';
+part of '../../sdl.dart';
 
 extension SdlFRectPointerEx on Pointer<SdlFRect> {
   math.Rectangle<double> create() =>

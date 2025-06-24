@@ -1,10 +1,4 @@
-import 'dart:ffi';
-import 'dart:math' show Point;
-
-import 'package:ffi/ffi.dart';
-
-import '../../generated/lib_sdl_render.dart';
-import '../../generated/struct_sdl.dart';
+part of '../../sdl.dart';
 
 extension SdlTexturePointerEx on Pointer<SdlTexture> {
   // lib_sdl_renderer.dart
@@ -27,12 +21,12 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetTextureSize(SDL_Texture *texture, float *w, float *h)
   /// ```
-  Point<double>? getSize() {
-    Point<double>? result;
+  math.Point<double>? getSize() {
+    math.Point<double>? result;
     final wPointer = calloc<Float>();
     final hPointer = calloc<Float>();
     if (sdlGetTextureSize(this, wPointer, hPointer)) {
-      result = Point(wPointer.value, hPointer.value);
+      result = math.Point(wPointer.value, hPointer.value);
     }
     calloc
       ..free(wPointer)

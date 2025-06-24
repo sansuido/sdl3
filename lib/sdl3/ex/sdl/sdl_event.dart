@@ -1,7 +1,4 @@
-import 'dart:ffi';
-
-import '../../generated/lib_sdl_events.dart';
-import '../../generated/struct_sdl.dart';
+part of '../../sdl.dart';
 
 extension SdlEventEx on SdlEvent {
   // lib_sdl_events.dart

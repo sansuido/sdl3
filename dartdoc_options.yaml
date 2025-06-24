@@ -1,0 +1,2 @@
+dartdoc:
+  nodoc: ['lib/sdl3*.dart']

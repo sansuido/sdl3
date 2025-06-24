@@ -1,13 +1,4 @@
-import 'dart:ffi';
-import 'dart:math' as math show Point, Rectangle;
-
-import 'package:ffi/ffi.dart' as ffi;
-
-import '../../generated/lib_sdl_mouse.dart';
-import '../../generated/lib_sdl_rect.dart';
-import '../../generated/struct_sdl.dart';
-import '../sdl/sdl_rect.dart';
-import 'rectangle.dart';
+part of '../../sdl_dart.dart';
 
 extension PointEx on math.Point<double> {
   // dependence package:ffi

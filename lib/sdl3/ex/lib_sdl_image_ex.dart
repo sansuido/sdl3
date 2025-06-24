@@ -1,7 +1,5 @@
 // ignore_for_file: non_constant_identifier_names
-import './generated/const_sdl_image.dart';
-import './generated/lib_sdl_error.dart';
-import 'lib_sdl_ex.dart';
+part of '../sdl_image.dart';
 
 /// ```c
 /// const SDL_IMAGE_COMPILEDVERSION = \ SDL_VERSIONNUM(SDL_IMAGE_MAJOR_VERSION, SDL_IMAGE_MINOR_VERSION, SDL_IMAGE_PATCHLEVEL);

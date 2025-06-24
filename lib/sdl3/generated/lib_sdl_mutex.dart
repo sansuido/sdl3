@@ -1,8 +1,6 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 // ignore_for_file: avoid_positional_boolean_parameters
-import 'dart:ffi';
-import 'lib_sdl.dart';
-import 'struct_sdl.dart';
+part of '../sdl.dart';
 
 ///
 /// Create a new mutex.
@@ -28,7 +26,7 @@ import 'struct_sdl.dart';
 /// extern SDL_DECLSPEC SDL_Mutex * SDLCALL SDL_CreateMutex(void)
 /// ```
 Pointer<SdlMutex> sdlCreateMutex() {
-  final sdlCreateMutexLookupFunction = libSdl3
+  final sdlCreateMutexLookupFunction = _libSdl
       .lookupFunction<
         Pointer<SdlMutex> Function(),
         Pointer<SdlMutex> Function()
@@ -62,7 +60,7 @@ Pointer<SdlMutex> sdlCreateMutex() {
 /// extern SDL_DECLSPEC void SDLCALL SDL_LockMutex(SDL_Mutex *mutex) SDL_ACQUIRE(mutex)
 /// ```
 void sdlLockMutex(Pointer<NativeType> arg0) {
-  final sdlLockMutexLookupFunction = libSdl3
+  final sdlLockMutexLookupFunction = _libSdl
       .lookupFunction<
         Void Function(Pointer<NativeType> arg0),
         void Function(Pointer<NativeType> arg0)
@@ -93,7 +91,7 @@ void sdlLockMutex(Pointer<NativeType> arg0) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_TryLockMutex(SDL_Mutex *mutex) SDL_TRY_ACQUIRE(0, mutex)
 /// ```
 bool sdlTryLockMutex(Pointer<NativeType> arg0, Pointer<NativeType> arg1) {
-  final sdlTryLockMutexLookupFunction = libSdl3
+  final sdlTryLockMutexLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(Pointer<NativeType> arg0, Pointer<NativeType> arg1),
         int Function(Pointer<NativeType> arg0, Pointer<NativeType> arg1)
@@ -122,7 +120,7 @@ bool sdlTryLockMutex(Pointer<NativeType> arg0, Pointer<NativeType> arg1) {
 /// extern SDL_DECLSPEC void SDLCALL SDL_UnlockMutex(SDL_Mutex *mutex) SDL_RELEASE(mutex)
 /// ```
 void sdlUnlockMutex(Pointer<NativeType> arg0) {
-  final sdlUnlockMutexLookupFunction = libSdl3
+  final sdlUnlockMutexLookupFunction = _libSdl
       .lookupFunction<
         Void Function(Pointer<NativeType> arg0),
         void Function(Pointer<NativeType> arg0)
@@ -149,7 +147,7 @@ void sdlUnlockMutex(Pointer<NativeType> arg0) {
 /// extern SDL_DECLSPEC void SDLCALL SDL_DestroyMutex(SDL_Mutex *mutex)
 /// ```
 void sdlDestroyMutex(Pointer<SdlMutex> mutex) {
-  final sdlDestroyMutexLookupFunction = libSdl3
+  final sdlDestroyMutexLookupFunction = _libSdl
       .lookupFunction<
         Void Function(Pointer<SdlMutex> mutex),
         void Function(Pointer<SdlMutex> mutex)
@@ -201,7 +199,7 @@ void sdlDestroyMutex(Pointer<SdlMutex> mutex) {
 /// extern SDL_DECLSPEC SDL_RWLock * SDLCALL SDL_CreateRWLock(void)
 /// ```
 Pointer<SdlRwLock> sdlCreateRwLock() {
-  final sdlCreateRwLockLookupFunction = libSdl3
+  final sdlCreateRwLockLookupFunction = _libSdl
       .lookupFunction<
         Pointer<SdlRwLock> Function(),
         Pointer<SdlRwLock> Function()
@@ -248,7 +246,7 @@ Pointer<SdlRwLock> sdlCreateRwLock() {
 /// extern SDL_DECLSPEC void SDLCALL SDL_LockRWLockForReading(SDL_RWLock *rwlock) SDL_ACQUIRE_SHARED(rwlock)
 /// ```
 void sdlLockRwLockForReading(Pointer<NativeType> arg0) {
-  final sdlLockRwLockForReadingLookupFunction = libSdl3
+  final sdlLockRwLockForReadingLookupFunction = _libSdl
       .lookupFunction<
         Void Function(Pointer<NativeType> arg0),
         void Function(Pointer<NativeType> arg0)
@@ -289,7 +287,7 @@ void sdlLockRwLockForReading(Pointer<NativeType> arg0) {
 /// extern SDL_DECLSPEC void SDLCALL SDL_LockRWLockForWriting(SDL_RWLock *rwlock) SDL_ACQUIRE(rwlock)
 /// ```
 void sdlLockRwLockForWriting(Pointer<NativeType> arg0) {
-  final sdlLockRwLockForWritingLookupFunction = libSdl3
+  final sdlLockRwLockForWritingLookupFunction = _libSdl
       .lookupFunction<
         Void Function(Pointer<NativeType> arg0),
         void Function(Pointer<NativeType> arg0)
@@ -327,7 +325,7 @@ bool sdlTryLockRwLockForReading(
   Pointer<NativeType> arg0,
   Pointer<NativeType> arg1,
 ) {
-  final sdlTryLockRwLockForReadingLookupFunction = libSdl3
+  final sdlTryLockRwLockForReadingLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(Pointer<NativeType> arg0, Pointer<NativeType> arg1),
         int Function(Pointer<NativeType> arg0, Pointer<NativeType> arg1)
@@ -370,7 +368,7 @@ bool sdlTryLockRwLockForWriting(
   Pointer<NativeType> arg0,
   Pointer<NativeType> arg1,
 ) {
-  final sdlTryLockRwLockForWritingLookupFunction = libSdl3
+  final sdlTryLockRwLockForWritingLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(Pointer<NativeType> arg0, Pointer<NativeType> arg1),
         int Function(Pointer<NativeType> arg0, Pointer<NativeType> arg1)
@@ -405,7 +403,7 @@ bool sdlTryLockRwLockForWriting(
 /// extern SDL_DECLSPEC void SDLCALL SDL_UnlockRWLock(SDL_RWLock *rwlock) SDL_RELEASE_GENERIC(rwlock)
 /// ```
 void sdlUnlockRwLock(Pointer<NativeType> arg0) {
-  final sdlUnlockRwLockLookupFunction = libSdl3
+  final sdlUnlockRwLockLookupFunction = _libSdl
       .lookupFunction<
         Void Function(Pointer<NativeType> arg0),
         void Function(Pointer<NativeType> arg0)
@@ -432,7 +430,7 @@ void sdlUnlockRwLock(Pointer<NativeType> arg0) {
 /// extern SDL_DECLSPEC void SDLCALL SDL_DestroyRWLock(SDL_RWLock *rwlock)
 /// ```
 void sdlDestroyRwLock(Pointer<SdlRwLock> rwlock) {
-  final sdlDestroyRwLockLookupFunction = libSdl3
+  final sdlDestroyRwLockLookupFunction = _libSdl
       .lookupFunction<
         Void Function(Pointer<SdlRwLock> rwlock),
         void Function(Pointer<SdlRwLock> rwlock)
@@ -466,7 +464,7 @@ void sdlDestroyRwLock(Pointer<SdlRwLock> rwlock) {
 /// extern SDL_DECLSPEC SDL_Semaphore * SDLCALL SDL_CreateSemaphore(Uint32 initial_value)
 /// ```
 Pointer<SdlSemaphore> sdlCreateSemaphore(int initialValue) {
-  final sdlCreateSemaphoreLookupFunction = libSdl3
+  final sdlCreateSemaphoreLookupFunction = _libSdl
       .lookupFunction<
         Pointer<SdlSemaphore> Function(Uint32 initialValue),
         Pointer<SdlSemaphore> Function(int initialValue)
@@ -490,7 +488,7 @@ Pointer<SdlSemaphore> sdlCreateSemaphore(int initialValue) {
 /// extern SDL_DECLSPEC void SDLCALL SDL_DestroySemaphore(SDL_Semaphore *sem)
 /// ```
 void sdlDestroySemaphore(Pointer<SdlSemaphore> sem) {
-  final sdlDestroySemaphoreLookupFunction = libSdl3
+  final sdlDestroySemaphoreLookupFunction = _libSdl
       .lookupFunction<
         Void Function(Pointer<SdlSemaphore> sem),
         void Function(Pointer<SdlSemaphore> sem)
@@ -520,7 +518,7 @@ void sdlDestroySemaphore(Pointer<SdlSemaphore> sem) {
 /// extern SDL_DECLSPEC void SDLCALL SDL_WaitSemaphore(SDL_Semaphore *sem)
 /// ```
 void sdlWaitSemaphore(Pointer<SdlSemaphore> sem) {
-  final sdlWaitSemaphoreLookupFunction = libSdl3
+  final sdlWaitSemaphoreLookupFunction = _libSdl
       .lookupFunction<
         Void Function(Pointer<SdlSemaphore> sem),
         void Function(Pointer<SdlSemaphore> sem)
@@ -549,7 +547,7 @@ void sdlWaitSemaphore(Pointer<SdlSemaphore> sem) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_TryWaitSemaphore(SDL_Semaphore *sem)
 /// ```
 bool sdlTryWaitSemaphore(Pointer<SdlSemaphore> sem) {
-  final sdlTryWaitSemaphoreLookupFunction = libSdl3
+  final sdlTryWaitSemaphoreLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(Pointer<SdlSemaphore> sem),
         int Function(Pointer<SdlSemaphore> sem)
@@ -579,7 +577,7 @@ bool sdlTryWaitSemaphore(Pointer<SdlSemaphore> sem) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_WaitSemaphoreTimeout(SDL_Semaphore *sem, Sint32 timeoutMS)
 /// ```
 bool sdlWaitSemaphoreTimeout(Pointer<SdlSemaphore> sem, int timeoutMs) {
-  final sdlWaitSemaphoreTimeoutLookupFunction = libSdl3
+  final sdlWaitSemaphoreTimeoutLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(Pointer<SdlSemaphore> sem, Int32 timeoutMs),
         int Function(Pointer<SdlSemaphore> sem, int timeoutMs)
@@ -602,7 +600,7 @@ bool sdlWaitSemaphoreTimeout(Pointer<SdlSemaphore> sem, int timeoutMs) {
 /// extern SDL_DECLSPEC void SDLCALL SDL_SignalSemaphore(SDL_Semaphore *sem)
 /// ```
 void sdlSignalSemaphore(Pointer<SdlSemaphore> sem) {
-  final sdlSignalSemaphoreLookupFunction = libSdl3
+  final sdlSignalSemaphoreLookupFunction = _libSdl
       .lookupFunction<
         Void Function(Pointer<SdlSemaphore> sem),
         void Function(Pointer<SdlSemaphore> sem)
@@ -622,7 +620,7 @@ void sdlSignalSemaphore(Pointer<SdlSemaphore> sem) {
 /// extern SDL_DECLSPEC Uint32 SDLCALL SDL_GetSemaphoreValue(SDL_Semaphore *sem)
 /// ```
 int sdlGetSemaphoreValue(Pointer<SdlSemaphore> sem) {
-  final sdlGetSemaphoreValueLookupFunction = libSdl3
+  final sdlGetSemaphoreValueLookupFunction = _libSdl
       .lookupFunction<
         Uint32 Function(Pointer<SdlSemaphore> sem),
         int Function(Pointer<SdlSemaphore> sem)
@@ -648,7 +646,7 @@ int sdlGetSemaphoreValue(Pointer<SdlSemaphore> sem) {
 /// extern SDL_DECLSPEC SDL_Condition * SDLCALL SDL_CreateCondition(void)
 /// ```
 Pointer<SdlCondition> sdlCreateCondition() {
-  final sdlCreateConditionLookupFunction = libSdl3
+  final sdlCreateConditionLookupFunction = _libSdl
       .lookupFunction<
         Pointer<SdlCondition> Function(),
         Pointer<SdlCondition> Function()
@@ -669,7 +667,7 @@ Pointer<SdlCondition> sdlCreateCondition() {
 /// extern SDL_DECLSPEC void SDLCALL SDL_DestroyCondition(SDL_Condition *cond)
 /// ```
 void sdlDestroyCondition(Pointer<SdlCondition> cond) {
-  final sdlDestroyConditionLookupFunction = libSdl3
+  final sdlDestroyConditionLookupFunction = _libSdl
       .lookupFunction<
         Void Function(Pointer<SdlCondition> cond),
         void Function(Pointer<SdlCondition> cond)
@@ -694,7 +692,7 @@ void sdlDestroyCondition(Pointer<SdlCondition> cond) {
 /// extern SDL_DECLSPEC void SDLCALL SDL_SignalCondition(SDL_Condition *cond)
 /// ```
 void sdlSignalCondition(Pointer<SdlCondition> cond) {
-  final sdlSignalConditionLookupFunction = libSdl3
+  final sdlSignalConditionLookupFunction = _libSdl
       .lookupFunction<
         Void Function(Pointer<SdlCondition> cond),
         void Function(Pointer<SdlCondition> cond)
@@ -719,7 +717,7 @@ void sdlSignalCondition(Pointer<SdlCondition> cond) {
 /// extern SDL_DECLSPEC void SDLCALL SDL_BroadcastCondition(SDL_Condition *cond)
 /// ```
 void sdlBroadcastCondition(Pointer<SdlCondition> cond) {
-  final sdlBroadcastConditionLookupFunction = libSdl3
+  final sdlBroadcastConditionLookupFunction = _libSdl
       .lookupFunction<
         Void Function(Pointer<SdlCondition> cond),
         void Function(Pointer<SdlCondition> cond)
@@ -757,7 +755,7 @@ void sdlBroadcastCondition(Pointer<SdlCondition> cond) {
 /// extern SDL_DECLSPEC void SDLCALL SDL_WaitCondition(SDL_Condition *cond, SDL_Mutex *mutex)
 /// ```
 void sdlWaitCondition(Pointer<SdlCondition> cond, Pointer<SdlMutex> mutex) {
-  final sdlWaitConditionLookupFunction = libSdl3
+  final sdlWaitConditionLookupFunction = _libSdl
       .lookupFunction<
         Void Function(Pointer<SdlCondition> cond, Pointer<SdlMutex> mutex),
         void Function(Pointer<SdlCondition> cond, Pointer<SdlMutex> mutex)
@@ -801,7 +799,7 @@ bool sdlWaitConditionTimeout(
   Pointer<SdlMutex> mutex,
   int timeoutMs,
 ) {
-  final sdlWaitConditionTimeoutLookupFunction = libSdl3
+  final sdlWaitConditionTimeoutLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(
           Pointer<SdlCondition> cond,
@@ -842,7 +840,7 @@ bool sdlWaitConditionTimeout(
 /// extern SDL_DECLSPEC bool SDLCALL SDL_ShouldInit(SDL_InitState *state)
 /// ```
 bool sdlShouldInit(Pointer<SdlInitState> state) {
-  final sdlShouldInitLookupFunction = libSdl3
+  final sdlShouldInitLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(Pointer<SdlInitState> state),
         int Function(Pointer<SdlInitState> state)
@@ -873,7 +871,7 @@ bool sdlShouldInit(Pointer<SdlInitState> state) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_ShouldQuit(SDL_InitState *state)
 /// ```
 bool sdlShouldQuit(Pointer<SdlInitState> state) {
-  final sdlShouldQuitLookupFunction = libSdl3
+  final sdlShouldQuitLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(Pointer<SdlInitState> state),
         int Function(Pointer<SdlInitState> state)
@@ -902,7 +900,7 @@ bool sdlShouldQuit(Pointer<SdlInitState> state) {
 /// extern SDL_DECLSPEC void SDLCALL SDL_SetInitialized(SDL_InitState *state, bool initialized)
 /// ```
 void sdlSetInitialized(Pointer<SdlInitState> state, bool initialized) {
-  final sdlSetInitializedLookupFunction = libSdl3
+  final sdlSetInitializedLookupFunction = _libSdl
       .lookupFunction<
         Void Function(Pointer<SdlInitState> state, Uint8 initialized),
         void Function(Pointer<SdlInitState> state, int initialized)

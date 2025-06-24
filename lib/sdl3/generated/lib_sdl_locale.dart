@@ -1,7 +1,5 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-import 'dart:ffi';
-import 'lib_sdl.dart';
-import 'struct_sdl.dart';
+part of '../sdl.dart';
 
 ///
 /// Report the user's preferred locale.
@@ -48,7 +46,7 @@ import 'struct_sdl.dart';
 /// extern SDL_DECLSPEC SDL_Locale ** SDLCALL SDL_GetPreferredLocales(int *count)
 /// ```
 Pointer<Pointer<SdlLocale>> sdlGetPreferredLocales(Pointer<Int32> count) {
-  final sdlGetPreferredLocalesLookupFunction = libSdl3
+  final sdlGetPreferredLocalesLookupFunction = _libSdl
       .lookupFunction<
         Pointer<Pointer<SdlLocale>> Function(Pointer<Int32> count),
         Pointer<Pointer<SdlLocale>> Function(Pointer<Int32> count)

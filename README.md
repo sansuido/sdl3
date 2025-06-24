@@ -9,10 +9,12 @@ This library is limited to 64bit.
 Since ffi is used, a dynamic library suitable for various environments is required.  
 image, mixer, net, and ttf are optional. Please include it if necessary.  
 Since sdl3gfx is included in the source, a dynamic library is not required.  
+For OpenGL, call require separately.  
 
 ```dart
 import 'package:sdl3/sdl3.dart'; // SDL3, SDL3_image, SDL3_mixer, SDL3_net, SDL3_ttf
 import 'package:sdl3/sdl3gfx.dart'; // SDL3_gfx
+import 'package:sdl3/sdl3opengl.dart'; // OpenGL
 ```
 
 ## Windows requires dll files.
@@ -22,6 +24,8 @@ SDL3_image.dll
 SDL3_mixer.dll  
 SDL3_net.dll  
 SDL3_ttf.dll  
+opengl32.dll  
+(This's no need to call out specifically! Find this in the following path: C:\Windows\System32\opengl32.dll)  
 
 ## Linux (or Android, Fuchsia) requires so files.
 
@@ -30,6 +34,7 @@ libSDL3_image.so
 libSDL3_mixer.so  
 libSDL3_net.so  
 libSDL3_ttf.so  
+libGL.so  
 
 ## MacOS (or iOS) requires dylib files.
 
@@ -38,17 +43,19 @@ libSDL3_image.dylib
 libSDL3_mixer.dylib  
 libSDL3_net.dylib  
 libSDL3_ttf.dylib  
+libGL.dylib  
 
 ## And more.
 
-If you want to add a library under special circumstances (example: dylib), do the following:  
+If you want to set a library under special circumstances (example: dylib), do the following:  
 
 ```dart
-SdlDynamicLibraryService().add('SDL3', DynamicLibrary.open('YOUR_SDL3_ENVIONMENT.dylib'));
-SdlDynamicLibraryService().add('SDL3_image', DynamicLibrary.open('YOUR_SDL3_image_ENVIONMENT.dylib'));
-SdlDynamicLibraryService().add('SDL3_mixer', DynamicLibrary.open('YOUR_SDL3_mixer_ENVIONMENT.dylib'));
-SdlDynamicLibraryService().add('SDL3_net', DynamicLibrary.open('YOUR_SDL3_net_ENVIONMENT.dylib'));
-SdlDynamicLibraryService().add('SDL3_ttf', DynamicLibrary.open('YOUR_SDL3_ttf_ENVIONMENT.dylib'));
+SdlDynamicLibraryService().set('sdl', 'YOUR_SDL3_ENVIONMENT.dylib');
+SdlDynamicLibraryService().set('image', 'YOUR_SDL3_image_ENVIONMENT.dylib');
+SdlDynamicLibraryService().set('mixer', 'YOUR_SDL3_mixer_ENVIONMENT.dylib');
+SdlDynamicLibraryService().set('net', 'YOUR_SDL3_net_ENVIONMENT.dylib');
+SdlDynamicLibraryService().set('ttf', 'YOUR_SDL3_ttf_ENVIONMENT.dylib');
+SdlDynamicLibraryService().set('opengl', 'YOUR_opengl_ENVIONMENT.dylib');
 if (sdlInit(SDL_INIT_VIDEO)) {
   // success
 }

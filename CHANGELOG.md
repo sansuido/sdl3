@@ -1,3 +1,8 @@
+## 2.0.0
+- SDL3-2025-06-22
+- [update] Updated SdlDynamicLibraryService class. Added OpenGL support.
+- [update] Looked into doc dramatically.
+
 ## 1.6.3
 - SDL3-2025-06-15
 - [changed] Changed to `halildurmus_lints` from `lints`.

@@ -1,7 +1,5 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-import 'dart:ffi';
-import 'lib_sdl.dart';
-import 'struct_sdl.dart';
+part of '../sdl.dart';
 
 ///
 /// Try to lock a spin lock by setting it to a non-zero value.
@@ -23,7 +21,7 @@ import 'struct_sdl.dart';
 /// extern SDL_DECLSPEC bool SDLCALL SDL_TryLockSpinlock(SDL_SpinLock *lock)
 /// ```
 bool sdlTryLockSpinlock(Pointer<Int32> lock) {
-  final sdlTryLockSpinlockLookupFunction = libSdl3
+  final sdlTryLockSpinlockLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(Pointer<Int32> lock),
         int Function(Pointer<Int32> lock)
@@ -50,7 +48,7 @@ bool sdlTryLockSpinlock(Pointer<Int32> lock) {
 /// extern SDL_DECLSPEC void SDLCALL SDL_LockSpinlock(SDL_SpinLock *lock)
 /// ```
 void sdlLockSpinlock(Pointer<Int32> lock) {
-  final sdlLockSpinlockLookupFunction = libSdl3
+  final sdlLockSpinlockLookupFunction = _libSdl
       .lookupFunction<
         Void Function(Pointer<Int32> lock),
         void Function(Pointer<Int32> lock)
@@ -79,7 +77,7 @@ void sdlLockSpinlock(Pointer<Int32> lock) {
 /// extern SDL_DECLSPEC void SDLCALL SDL_UnlockSpinlock(SDL_SpinLock *lock)
 /// ```
 void sdlUnlockSpinlock(Pointer<Int32> lock) {
-  final sdlUnlockSpinlockLookupFunction = libSdl3
+  final sdlUnlockSpinlockLookupFunction = _libSdl
       .lookupFunction<
         Void Function(Pointer<Int32> lock),
         void Function(Pointer<Int32> lock)
@@ -109,7 +107,7 @@ void sdlUnlockSpinlock(Pointer<Int32> lock) {
 /// extern SDL_DECLSPEC void SDLCALL SDL_MemoryBarrierReleaseFunction(void)
 /// ```
 void sdlMemoryBarrierReleaseFunction() {
-  final sdlMemoryBarrierReleaseFunctionLookupFunction = libSdl3
+  final sdlMemoryBarrierReleaseFunctionLookupFunction = _libSdl
       .lookupFunction<Void Function(), void Function()>(
         'SDL_MemoryBarrierReleaseFunction',
       );
@@ -138,7 +136,7 @@ void sdlMemoryBarrierReleaseFunction() {
 /// extern SDL_DECLSPEC void SDLCALL SDL_MemoryBarrierAcquireFunction(void)
 /// ```
 void sdlMemoryBarrierAcquireFunction() {
-  final sdlMemoryBarrierAcquireFunctionLookupFunction = libSdl3
+  final sdlMemoryBarrierAcquireFunctionLookupFunction = _libSdl
       .lookupFunction<Void Function(), void Function()>(
         'SDL_MemoryBarrierAcquireFunction',
       );
@@ -171,7 +169,7 @@ bool sdlCompareAndSwapAtomicInt(
   int oldval,
   int newval,
 ) {
-  final sdlCompareAndSwapAtomicIntLookupFunction = libSdl3
+  final sdlCompareAndSwapAtomicIntLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(Pointer<SdlAtomicInt> a, Int32 oldval, Int32 newval),
         int Function(Pointer<SdlAtomicInt> a, int oldval, int newval)
@@ -201,7 +199,7 @@ bool sdlCompareAndSwapAtomicInt(
 /// extern SDL_DECLSPEC int SDLCALL SDL_SetAtomicInt(SDL_AtomicInt *a, int v)
 /// ```
 int sdlSetAtomicInt(Pointer<SdlAtomicInt> a, int v) {
-  final sdlSetAtomicIntLookupFunction = libSdl3
+  final sdlSetAtomicIntLookupFunction = _libSdl
       .lookupFunction<
         Int32 Function(Pointer<SdlAtomicInt> a, Int32 v),
         int Function(Pointer<SdlAtomicInt> a, int v)
@@ -228,7 +226,7 @@ int sdlSetAtomicInt(Pointer<SdlAtomicInt> a, int v) {
 /// extern SDL_DECLSPEC int SDLCALL SDL_GetAtomicInt(SDL_AtomicInt *a)
 /// ```
 int sdlGetAtomicInt(Pointer<SdlAtomicInt> a) {
-  final sdlGetAtomicIntLookupFunction = libSdl3
+  final sdlGetAtomicIntLookupFunction = _libSdl
       .lookupFunction<
         Int32 Function(Pointer<SdlAtomicInt> a),
         int Function(Pointer<SdlAtomicInt> a)
@@ -259,7 +257,7 @@ int sdlGetAtomicInt(Pointer<SdlAtomicInt> a) {
 /// extern SDL_DECLSPEC int SDLCALL SDL_AddAtomicInt(SDL_AtomicInt *a, int v)
 /// ```
 int sdlAddAtomicInt(Pointer<SdlAtomicInt> a, int v) {
-  final sdlAddAtomicIntLookupFunction = libSdl3
+  final sdlAddAtomicIntLookupFunction = _libSdl
       .lookupFunction<
         Int32 Function(Pointer<SdlAtomicInt> a, Int32 v),
         int Function(Pointer<SdlAtomicInt> a, int v)
@@ -293,7 +291,7 @@ bool sdlCompareAndSwapAtomicU32(
   int oldval,
   int newval,
 ) {
-  final sdlCompareAndSwapAtomicU32LookupFunction = libSdl3
+  final sdlCompareAndSwapAtomicU32LookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(Pointer<SdlAtomicU32> a, Uint32 oldval, Uint32 newval),
         int Function(Pointer<SdlAtomicU32> a, int oldval, int newval)
@@ -323,7 +321,7 @@ bool sdlCompareAndSwapAtomicU32(
 /// extern SDL_DECLSPEC Uint32 SDLCALL SDL_SetAtomicU32(SDL_AtomicU32 *a, Uint32 v)
 /// ```
 int sdlSetAtomicU32(Pointer<SdlAtomicU32> a, int v) {
-  final sdlSetAtomicU32LookupFunction = libSdl3
+  final sdlSetAtomicU32LookupFunction = _libSdl
       .lookupFunction<
         Uint32 Function(Pointer<SdlAtomicU32> a, Uint32 v),
         int Function(Pointer<SdlAtomicU32> a, int v)
@@ -350,7 +348,7 @@ int sdlSetAtomicU32(Pointer<SdlAtomicU32> a, int v) {
 /// extern SDL_DECLSPEC Uint32 SDLCALL SDL_GetAtomicU32(SDL_AtomicU32 *a)
 /// ```
 int sdlGetAtomicU32(Pointer<SdlAtomicU32> a) {
-  final sdlGetAtomicU32LookupFunction = libSdl3
+  final sdlGetAtomicU32LookupFunction = _libSdl
       .lookupFunction<
         Uint32 Function(Pointer<SdlAtomicU32> a),
         int Function(Pointer<SdlAtomicU32> a)
@@ -385,7 +383,7 @@ bool sdlCompareAndSwapAtomicPointer(
   Pointer<NativeType> oldval,
   Pointer<NativeType> newval,
 ) {
-  final sdlCompareAndSwapAtomicPointerLookupFunction = libSdl3
+  final sdlCompareAndSwapAtomicPointerLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(
           Pointer<Pointer<NativeType>> a,
@@ -425,7 +423,7 @@ Pointer<NativeType> sdlSetAtomicPointer(
   Pointer<Pointer<NativeType>> a,
   Pointer<NativeType> v,
 ) {
-  final sdlSetAtomicPointerLookupFunction = libSdl3
+  final sdlSetAtomicPointerLookupFunction = _libSdl
       .lookupFunction<
         Pointer<NativeType> Function(
           Pointer<Pointer<NativeType>> a,
@@ -459,7 +457,7 @@ Pointer<NativeType> sdlSetAtomicPointer(
 /// extern SDL_DECLSPEC void * SDLCALL SDL_GetAtomicPointer(void **a)
 /// ```
 Pointer<NativeType> sdlGetAtomicPointer(Pointer<Pointer<NativeType>> a) {
-  final sdlGetAtomicPointerLookupFunction = libSdl3
+  final sdlGetAtomicPointerLookupFunction = _libSdl
       .lookupFunction<
         Pointer<NativeType> Function(Pointer<Pointer<NativeType>> a),
         Pointer<NativeType> Function(Pointer<Pointer<NativeType>> a)

@@ -1,14 +1,6 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 // ignore_for_file: avoid_positional_boolean_parameters
-import 'dart:ffi';
-import 'package:ffi/ffi.dart';
-import '../dylib.dart' as dylib;
-import 'struct_sdl.dart';
-import 'struct_sdl_mixer.dart';
-
-final DynamicLibrary libSdl3Mixer = dylib.SdlDynamicLibraryService().open(
-  'SDL3_mixer',
-);
+part of '../sdl_mixer.dart';
 
 // typedef void (SDLCALL *Mix_MixCallback)(void *udata, Uint8 *stream, int len)
 typedef MixMixCallbackDart =
@@ -61,7 +53,7 @@ typedef MixEachSoundFontCallback =
 /// extern SDL_DECLSPEC int SDLCALL Mix_Version(void)
 /// ```
 int mixVersion() {
-  final mixVersionLookupFunction = libSdl3Mixer
+  final mixVersionLookupFunction = _libMixer
       .lookupFunction<Int32 Function(), int Function()>('Mix_Version');
   return mixVersionLookupFunction();
 }
@@ -137,7 +129,7 @@ int mixVersion() {
 /// extern SDL_DECLSPEC MIX_InitFlags SDLCALL Mix_Init(MIX_InitFlags flags)
 /// ```
 int mixInit(int flags) {
-  final mixInitLookupFunction = libSdl3Mixer
+  final mixInitLookupFunction = _libMixer
       .lookupFunction<Uint32 Function(Uint32 flags), int Function(int flags)>(
         'Mix_Init',
       );
@@ -171,7 +163,7 @@ int mixInit(int flags) {
 /// extern SDL_DECLSPEC void SDLCALL Mix_Quit(void)
 /// ```
 void mixQuit() {
-  final mixQuitLookupFunction = libSdl3Mixer
+  final mixQuitLookupFunction = _libMixer
       .lookupFunction<Void Function(), void Function()>('Mix_Quit');
   return mixQuitLookupFunction();
 }
@@ -234,7 +226,7 @@ void mixQuit() {
 /// extern SDL_DECLSPEC bool SDLCALL Mix_OpenAudio(SDL_AudioDeviceID devid, const SDL_AudioSpec *spec)
 /// ```
 bool mixOpenAudio(int devid, Pointer<SdlAudioSpec> spec) {
-  final mixOpenAudioLookupFunction = libSdl3Mixer
+  final mixOpenAudioLookupFunction = _libMixer
       .lookupFunction<
         Uint8 Function(Uint32 devid, Pointer<SdlAudioSpec> spec),
         int Function(int devid, Pointer<SdlAudioSpec> spec)
@@ -253,7 +245,7 @@ bool mixOpenAudio(int devid, Pointer<SdlAudioSpec> spec) {
 /// extern SDL_DECLSPEC void SDLCALL Mix_PauseAudio(int pause_on)
 /// ```
 void mixPauseAudio(int pauseOn) {
-  final mixPauseAudioLookupFunction = libSdl3Mixer
+  final mixPauseAudioLookupFunction = _libMixer
       .lookupFunction<Void Function(Int32 pauseOn), void Function(int pauseOn)>(
         'Mix_PauseAudio',
       );
@@ -289,7 +281,7 @@ bool mixQuerySpec(
   Pointer<Int32> format,
   Pointer<Int32> channels,
 ) {
-  final mixQuerySpecLookupFunction = libSdl3Mixer
+  final mixQuerySpecLookupFunction = _libMixer
       .lookupFunction<
         Uint8 Function(
           Pointer<Int32> frequency,
@@ -339,7 +331,7 @@ bool mixQuerySpec(
 /// extern SDL_DECLSPEC int SDLCALL Mix_AllocateChannels(int numchans)
 /// ```
 int mixAllocateChannels(int numchans) {
-  final mixAllocateChannelsLookupFunction = libSdl3Mixer
+  final mixAllocateChannelsLookupFunction = _libMixer
       .lookupFunction<
         Int32 Function(Int32 numchans),
         int Function(int numchans)
@@ -391,7 +383,7 @@ int mixAllocateChannels(int numchans) {
 /// extern SDL_DECLSPEC Mix_Chunk * SDLCALL Mix_LoadWAV_IO(SDL_IOStream *src, bool closeio)
 /// ```
 Pointer<MixChunk> mixLoadWavIo(Pointer<SdlIoStream> src, bool closeio) {
-  final mixLoadWavIoLookupFunction = libSdl3Mixer
+  final mixLoadWavIoLookupFunction = _libMixer
       .lookupFunction<
         Pointer<MixChunk> Function(Pointer<SdlIoStream> src, Uint8 closeio),
         Pointer<MixChunk> Function(Pointer<SdlIoStream> src, int closeio)
@@ -442,7 +434,7 @@ Pointer<MixChunk> mixLoadWavIo(Pointer<SdlIoStream> src, bool closeio) {
 /// extern SDL_DECLSPEC Mix_Chunk * SDLCALL Mix_LoadWAV(const char *file)
 /// ```
 Pointer<MixChunk> mixLoadWav(String? file) {
-  final mixLoadWavLookupFunction = libSdl3Mixer
+  final mixLoadWavLookupFunction = _libMixer
       .lookupFunction<
         Pointer<MixChunk> Function(Pointer<Utf8> file),
         Pointer<MixChunk> Function(Pointer<Utf8> file)
@@ -485,7 +477,7 @@ Pointer<MixChunk> mixLoadWav(String? file) {
 /// extern SDL_DECLSPEC Mix_Music * SDLCALL Mix_LoadMUS(const char *file)
 /// ```
 Pointer<MixMusic> mixLoadMus(String? file) {
-  final mixLoadMusLookupFunction = libSdl3Mixer
+  final mixLoadMusLookupFunction = _libMixer
       .lookupFunction<
         Pointer<MixMusic> Function(Pointer<Utf8> file),
         Pointer<MixMusic> Function(Pointer<Utf8> file)
@@ -542,7 +534,7 @@ Pointer<MixMusic> mixLoadMus(String? file) {
 /// extern SDL_DECLSPEC Mix_Music * SDLCALL Mix_LoadMUS_IO(SDL_IOStream *src, bool closeio)
 /// ```
 Pointer<MixMusic> mixLoadMusIo(Pointer<SdlIoStream> src, bool closeio) {
-  final mixLoadMusIoLookupFunction = libSdl3Mixer
+  final mixLoadMusIoLookupFunction = _libMixer
       .lookupFunction<
         Pointer<MixMusic> Function(Pointer<SdlIoStream> src, Uint8 closeio),
         Pointer<MixMusic> Function(Pointer<SdlIoStream> src, int closeio)
@@ -613,7 +605,7 @@ Pointer<MixMusic> mixLoadMusTypeIo(
   int type,
   bool closeio,
 ) {
-  final mixLoadMusTypeIoLookupFunction = libSdl3Mixer
+  final mixLoadMusTypeIoLookupFunction = _libMixer
       .lookupFunction<
         Pointer<MixMusic> Function(
           Pointer<SdlIoStream> src,
@@ -666,7 +658,7 @@ Pointer<MixMusic> mixLoadMusTypeIo(
 /// extern SDL_DECLSPEC Mix_Chunk * SDLCALL Mix_QuickLoad_WAV(Uint8 *mem)
 /// ```
 Pointer<MixChunk> mixQuickLoadWav(Pointer<Uint8> mem) {
-  final mixQuickLoadWavLookupFunction = libSdl3Mixer
+  final mixQuickLoadWavLookupFunction = _libMixer
       .lookupFunction<
         Pointer<MixChunk> Function(Pointer<Uint8> mem),
         Pointer<MixChunk> Function(Pointer<Uint8> mem)
@@ -696,7 +688,7 @@ Pointer<MixChunk> mixQuickLoadWav(Pointer<Uint8> mem) {
 /// extern SDL_DECLSPEC Mix_Chunk * SDLCALL Mix_QuickLoad_RAW(Uint8 *mem, Uint32 len)
 /// ```
 Pointer<MixChunk> mixQuickLoadRaw(Pointer<Uint8> mem, int len) {
-  final mixQuickLoadRawLookupFunction = libSdl3Mixer
+  final mixQuickLoadRawLookupFunction = _libMixer
       .lookupFunction<
         Pointer<MixChunk> Function(Pointer<Uint8> mem, Uint32 len),
         Pointer<MixChunk> Function(Pointer<Uint8> mem, int len)
@@ -727,7 +719,7 @@ Pointer<MixChunk> mixQuickLoadRaw(Pointer<Uint8> mem, int len) {
 /// extern SDL_DECLSPEC void SDLCALL Mix_FreeChunk(Mix_Chunk *chunk)
 /// ```
 void mixFreeChunk(Pointer<MixChunk> chunk) {
-  final mixFreeChunkLookupFunction = libSdl3Mixer
+  final mixFreeChunkLookupFunction = _libMixer
       .lookupFunction<
         Void Function(Pointer<MixChunk> chunk),
         void Function(Pointer<MixChunk> chunk)
@@ -756,7 +748,7 @@ void mixFreeChunk(Pointer<MixChunk> chunk) {
 /// extern SDL_DECLSPEC void SDLCALL Mix_FreeMusic(Mix_Music *music)
 /// ```
 void mixFreeMusic(Pointer<MixMusic> music) {
-  final mixFreeMusicLookupFunction = libSdl3Mixer
+  final mixFreeMusicLookupFunction = _libMixer
       .lookupFunction<
         Void Function(Pointer<MixMusic> music),
         void Function(Pointer<MixMusic> music)
@@ -790,7 +782,7 @@ void mixFreeMusic(Pointer<MixMusic> music) {
 /// extern SDL_DECLSPEC int SDLCALL Mix_GetNumChunkDecoders(void)
 /// ```
 int mixGetNumChunkDecoders() {
-  final mixGetNumChunkDecodersLookupFunction = libSdl3Mixer
+  final mixGetNumChunkDecodersLookupFunction = _libMixer
       .lookupFunction<Int32 Function(), int Function()>(
         'Mix_GetNumChunkDecoders',
       );
@@ -820,7 +812,7 @@ int mixGetNumChunkDecoders() {
 /// extern SDL_DECLSPEC const char * SDLCALL Mix_GetChunkDecoder(int index)
 /// ```
 String? mixGetChunkDecoder(int index) {
-  final mixGetChunkDecoderLookupFunction = libSdl3Mixer
+  final mixGetChunkDecoderLookupFunction = _libMixer
       .lookupFunction<
         Pointer<Utf8> Function(Int32 index),
         Pointer<Utf8> Function(int index)
@@ -856,7 +848,7 @@ String? mixGetChunkDecoder(int index) {
 /// extern SDL_DECLSPEC bool SDLCALL Mix_HasChunkDecoder(const char *name)
 /// ```
 bool mixHasChunkDecoder(String? name) {
-  final mixHasChunkDecoderLookupFunction = libSdl3Mixer
+  final mixHasChunkDecoderLookupFunction = _libMixer
       .lookupFunction<
         Uint8 Function(Pointer<Utf8> name),
         int Function(Pointer<Utf8> name)
@@ -893,7 +885,7 @@ bool mixHasChunkDecoder(String? name) {
 /// extern SDL_DECLSPEC int SDLCALL Mix_GetNumMusicDecoders(void)
 /// ```
 int mixGetNumMusicDecoders() {
-  final mixGetNumMusicDecodersLookupFunction = libSdl3Mixer
+  final mixGetNumMusicDecodersLookupFunction = _libMixer
       .lookupFunction<Int32 Function(), int Function()>(
         'Mix_GetNumMusicDecoders',
       );
@@ -923,7 +915,7 @@ int mixGetNumMusicDecoders() {
 /// extern SDL_DECLSPEC const char * SDLCALL Mix_GetMusicDecoder(int index)
 /// ```
 String? mixGetMusicDecoder(int index) {
-  final mixGetMusicDecoderLookupFunction = libSdl3Mixer
+  final mixGetMusicDecoderLookupFunction = _libMixer
       .lookupFunction<
         Pointer<Utf8> Function(Int32 index),
         Pointer<Utf8> Function(int index)
@@ -959,7 +951,7 @@ String? mixGetMusicDecoder(int index) {
 /// extern SDL_DECLSPEC bool SDLCALL Mix_HasMusicDecoder(const char *name)
 /// ```
 bool mixHasMusicDecoder(String? name) {
-  final mixHasMusicDecoderLookupFunction = libSdl3Mixer
+  final mixHasMusicDecoderLookupFunction = _libMixer
       .lookupFunction<
         Uint8 Function(Pointer<Utf8> name),
         int Function(Pointer<Utf8> name)
@@ -986,7 +978,7 @@ bool mixHasMusicDecoder(String? name) {
 /// extern SDL_DECLSPEC Mix_MusicType SDLCALL Mix_GetMusicType(const Mix_Music *music)
 /// ```
 int mixGetMusicType(Pointer<MixMusic> music) {
-  final mixGetMusicTypeLookupFunction = libSdl3Mixer
+  final mixGetMusicTypeLookupFunction = _libMixer
       .lookupFunction<
         Int32 Function(Pointer<MixMusic> music),
         int Function(Pointer<MixMusic> music)
@@ -1026,7 +1018,7 @@ int mixGetMusicType(Pointer<MixMusic> music) {
 /// extern SDL_DECLSPEC const char *SDLCALL Mix_GetMusicTitle(const Mix_Music *music)
 /// ```
 String? mixGetMusicTitle(Pointer<MixMusic> music) {
-  final mixGetMusicTitleLookupFunction = libSdl3Mixer
+  final mixGetMusicTitleLookupFunction = _libMixer
       .lookupFunction<
         Pointer<Utf8> Function(Pointer<MixMusic> music),
         Pointer<Utf8> Function(Pointer<MixMusic> music)
@@ -1067,7 +1059,7 @@ String? mixGetMusicTitle(Pointer<MixMusic> music) {
 /// extern SDL_DECLSPEC const char *SDLCALL Mix_GetMusicTitleTag(const Mix_Music *music)
 /// ```
 String? mixGetMusicTitleTag(Pointer<MixMusic> music) {
-  final mixGetMusicTitleTagLookupFunction = libSdl3Mixer
+  final mixGetMusicTitleTagLookupFunction = _libMixer
       .lookupFunction<
         Pointer<Utf8> Function(Pointer<MixMusic> music),
         Pointer<Utf8> Function(Pointer<MixMusic> music)
@@ -1103,7 +1095,7 @@ String? mixGetMusicTitleTag(Pointer<MixMusic> music) {
 /// extern SDL_DECLSPEC const char *SDLCALL Mix_GetMusicArtistTag(const Mix_Music *music)
 /// ```
 String? mixGetMusicArtistTag(Pointer<MixMusic> music) {
-  final mixGetMusicArtistTagLookupFunction = libSdl3Mixer
+  final mixGetMusicArtistTagLookupFunction = _libMixer
       .lookupFunction<
         Pointer<Utf8> Function(Pointer<MixMusic> music),
         Pointer<Utf8> Function(Pointer<MixMusic> music)
@@ -1139,7 +1131,7 @@ String? mixGetMusicArtistTag(Pointer<MixMusic> music) {
 /// extern SDL_DECLSPEC const char *SDLCALL Mix_GetMusicAlbumTag(const Mix_Music *music)
 /// ```
 String? mixGetMusicAlbumTag(Pointer<MixMusic> music) {
-  final mixGetMusicAlbumTagLookupFunction = libSdl3Mixer
+  final mixGetMusicAlbumTagLookupFunction = _libMixer
       .lookupFunction<
         Pointer<Utf8> Function(Pointer<MixMusic> music),
         Pointer<Utf8> Function(Pointer<MixMusic> music)
@@ -1175,7 +1167,7 @@ String? mixGetMusicAlbumTag(Pointer<MixMusic> music) {
 /// extern SDL_DECLSPEC const char *SDLCALL Mix_GetMusicCopyrightTag(const Mix_Music *music)
 /// ```
 String? mixGetMusicCopyrightTag(Pointer<MixMusic> music) {
-  final mixGetMusicCopyrightTagLookupFunction = libSdl3Mixer
+  final mixGetMusicCopyrightTagLookupFunction = _libMixer
       .lookupFunction<
         Pointer<Utf8> Function(Pointer<MixMusic> music),
         Pointer<Utf8> Function(Pointer<MixMusic> music)
@@ -1230,7 +1222,7 @@ void mixSetPostMix(
   Pointer<NativeFunction<MixMixCallback>> mixFunc,
   Pointer<NativeType> arg,
 ) {
-  final mixSetPostMixLookupFunction = libSdl3Mixer
+  final mixSetPostMixLookupFunction = _libMixer
       .lookupFunction<
         Void Function(
           Pointer<NativeFunction<MixMixCallback>> mixFunc,
@@ -1295,7 +1287,7 @@ void mixHookMusic(
   Pointer<NativeFunction<MixMixCallback>> mixFunc,
   Pointer<NativeType> arg,
 ) {
-  final mixHookMusicLookupFunction = libSdl3Mixer
+  final mixHookMusicLookupFunction = _libMixer
       .lookupFunction<
         Void Function(
           Pointer<NativeFunction<MixMixCallback>> mixFunc,
@@ -1334,7 +1326,7 @@ void mixHookMusic(
 void mixHookMusicFinished(
   Pointer<NativeFunction<MixMusicFinishedCallback>> musicFinished,
 ) {
-  final mixHookMusicFinishedLookupFunction = libSdl3Mixer
+  final mixHookMusicFinishedLookupFunction = _libMixer
       .lookupFunction<
         Void Function(
           Pointer<NativeFunction<MixMusicFinishedCallback>> musicFinished,
@@ -1360,7 +1352,7 @@ void mixHookMusicFinished(
 /// extern SDL_DECLSPEC void * SDLCALL Mix_GetMusicHookData(void)
 /// ```
 Pointer<NativeType> mixGetMusicHookData() {
-  final mixGetMusicHookDataLookupFunction = libSdl3Mixer
+  final mixGetMusicHookDataLookupFunction = _libMixer
       .lookupFunction<
         Pointer<NativeType> Function(),
         Pointer<NativeType> Function()
@@ -1390,7 +1382,7 @@ Pointer<NativeType> mixGetMusicHookData() {
 void mixChannelFinished(
   Pointer<NativeFunction<MixChannelFinishedCallback>> channelFinished,
 ) {
-  final mixChannelFinishedLookupFunction = libSdl3Mixer
+  final mixChannelFinishedLookupFunction = _libMixer
       .lookupFunction<
         Void Function(
           Pointer<NativeFunction<MixChannelFinishedCallback>> channelFinished,
@@ -1468,7 +1460,7 @@ bool mixRegisterEffect(
   Pointer<NativeFunction<MixEffectDoneT>> d,
   Pointer<NativeType> arg,
 ) {
-  final mixRegisterEffectLookupFunction = libSdl3Mixer
+  final mixRegisterEffectLookupFunction = _libMixer
       .lookupFunction<
         Uint8 Function(
           Int32 chan,
@@ -1511,7 +1503,7 @@ bool mixUnregisterEffect(
   int channel,
   Pointer<NativeFunction<MixEffectFuncT>> f,
 ) {
-  final mixUnregisterEffectLookupFunction = libSdl3Mixer
+  final mixUnregisterEffectLookupFunction = _libMixer
       .lookupFunction<
         Uint8 Function(
           Int32 channel,
@@ -1546,7 +1538,7 @@ bool mixUnregisterEffect(
 /// extern SDL_DECLSPEC bool SDLCALL Mix_UnregisterAllEffects(int channel)
 /// ```
 bool mixUnregisterAllEffects(int channel) {
-  final mixUnregisterAllEffectsLookupFunction = libSdl3Mixer
+  final mixUnregisterAllEffectsLookupFunction = _libMixer
       .lookupFunction<Uint8 Function(Int32 channel), int Function(int channel)>(
         'Mix_UnregisterAllEffects',
       );
@@ -1597,7 +1589,7 @@ bool mixUnregisterAllEffects(int channel) {
 /// extern SDL_DECLSPEC bool SDLCALL Mix_SetPanning(int channel, Uint8 left, Uint8 right)
 /// ```
 bool mixSetPanning(int channel, int left, int right) {
-  final mixSetPanningLookupFunction = libSdl3Mixer
+  final mixSetPanningLookupFunction = _libMixer
       .lookupFunction<
         Uint8 Function(Int32 channel, Uint8 left, Uint8 right),
         int Function(int channel, int left, int right)
@@ -1652,7 +1644,7 @@ bool mixSetPanning(int channel, int left, int right) {
 /// extern SDL_DECLSPEC bool SDLCALL Mix_SetPosition(int channel, Sint16 angle, Uint8 distance)
 /// ```
 bool mixSetPosition(int channel, int angle, int distance) {
-  final mixSetPositionLookupFunction = libSdl3Mixer
+  final mixSetPositionLookupFunction = _libMixer
       .lookupFunction<
         Uint8 Function(Int32 channel, Int16 angle, Uint8 distance),
         int Function(int channel, int angle, int distance)
@@ -1694,7 +1686,7 @@ bool mixSetPosition(int channel, int angle, int distance) {
 /// extern SDL_DECLSPEC bool SDLCALL Mix_SetDistance(int channel, Uint8 distance)
 /// ```
 bool mixSetDistance(int channel, int distance) {
-  final mixSetDistanceLookupFunction = libSdl3Mixer
+  final mixSetDistanceLookupFunction = _libMixer
       .lookupFunction<
         Uint8 Function(Int32 channel, Uint8 distance),
         int Function(int channel, int distance)
@@ -1732,7 +1724,7 @@ bool mixSetDistance(int channel, int distance) {
 /// extern SDL_DECLSPEC bool SDLCALL Mix_SetReverseStereo(int channel, int flip)
 /// ```
 bool mixSetReverseStereo(int channel, int flip) {
-  final mixSetReverseStereoLookupFunction = libSdl3Mixer
+  final mixSetReverseStereoLookupFunction = _libMixer
       .lookupFunction<
         Uint8 Function(Int32 channel, Int32 flip),
         int Function(int channel, int flip)
@@ -1767,7 +1759,7 @@ bool mixSetReverseStereo(int channel, int flip) {
 /// extern SDL_DECLSPEC int SDLCALL Mix_ReserveChannels(int num)
 /// ```
 int mixReserveChannels(int num) {
-  final mixReserveChannelsLookupFunction = libSdl3Mixer
+  final mixReserveChannelsLookupFunction = _libMixer
       .lookupFunction<Int32 Function(Int32 num), int Function(int num)>(
         'Mix_ReserveChannels',
       );
@@ -1799,7 +1791,7 @@ int mixReserveChannels(int num) {
 /// extern SDL_DECLSPEC bool SDLCALL Mix_GroupChannel(int which, int tag)
 /// ```
 bool mixGroupChannel(int which, int tag) {
-  final mixGroupChannelLookupFunction = libSdl3Mixer
+  final mixGroupChannelLookupFunction = _libMixer
       .lookupFunction<
         Uint8 Function(Int32 which, Int32 tag),
         int Function(int which, int tag)
@@ -1836,7 +1828,7 @@ bool mixGroupChannel(int which, int tag) {
 /// extern SDL_DECLSPEC bool SDLCALL Mix_GroupChannels(int from, int to, int tag)
 /// ```
 bool mixGroupChannels(int from, int to, int tag) {
-  final mixGroupChannelsLookupFunction = libSdl3Mixer
+  final mixGroupChannelsLookupFunction = _libMixer
       .lookupFunction<
         Uint8 Function(Int32 from, Int32 to, Int32 tag),
         int Function(int from, int to, int tag)
@@ -1864,7 +1856,7 @@ bool mixGroupChannels(int from, int to, int tag) {
 /// extern SDL_DECLSPEC int SDLCALL Mix_GroupAvailable(int tag)
 /// ```
 int mixGroupAvailable(int tag) {
-  final mixGroupAvailableLookupFunction = libSdl3Mixer
+  final mixGroupAvailableLookupFunction = _libMixer
       .lookupFunction<Int32 Function(Int32 tag), int Function(int tag)>(
         'Mix_GroupAvailable',
       );
@@ -1886,7 +1878,7 @@ int mixGroupAvailable(int tag) {
 /// extern SDL_DECLSPEC int SDLCALL Mix_GroupCount(int tag)
 /// ```
 int mixGroupCount(int tag) {
-  final mixGroupCountLookupFunction = libSdl3Mixer
+  final mixGroupCountLookupFunction = _libMixer
       .lookupFunction<Int32 Function(Int32 tag), int Function(int tag)>(
         'Mix_GroupCount',
       );
@@ -1913,7 +1905,7 @@ int mixGroupCount(int tag) {
 /// extern SDL_DECLSPEC int SDLCALL Mix_GroupOldest(int tag)
 /// ```
 int mixGroupOldest(int tag) {
-  final mixGroupOldestLookupFunction = libSdl3Mixer
+  final mixGroupOldestLookupFunction = _libMixer
       .lookupFunction<Int32 Function(Int32 tag), int Function(int tag)>(
         'Mix_GroupOldest',
       );
@@ -1940,7 +1932,7 @@ int mixGroupOldest(int tag) {
 /// extern SDL_DECLSPEC int SDLCALL Mix_GroupNewer(int tag)
 /// ```
 int mixGroupNewer(int tag) {
-  final mixGroupNewerLookupFunction = libSdl3Mixer
+  final mixGroupNewerLookupFunction = _libMixer
       .lookupFunction<Int32 Function(Int32 tag), int Function(int tag)>(
         'Mix_GroupNewer',
       );
@@ -1979,7 +1971,7 @@ int mixGroupNewer(int tag) {
 /// extern SDL_DECLSPEC int SDLCALL Mix_PlayChannel(int channel, Mix_Chunk *chunk, int loops)
 /// ```
 int mixPlayChannel(int channel, Pointer<MixChunk> chunk, int loops) {
-  final mixPlayChannelLookupFunction = libSdl3Mixer
+  final mixPlayChannelLookupFunction = _libMixer
       .lookupFunction<
         Int32 Function(Int32 channel, Pointer<MixChunk> chunk, Int32 loops),
         int Function(int channel, Pointer<MixChunk> chunk, int loops)
@@ -2027,7 +2019,7 @@ int mixPlayChannelTimed(
   int loops,
   int ticks,
 ) {
-  final mixPlayChannelTimedLookupFunction = libSdl3Mixer
+  final mixPlayChannelTimedLookupFunction = _libMixer
       .lookupFunction<
         Int32 Function(
           Int32 channel,
@@ -2066,7 +2058,7 @@ int mixPlayChannelTimed(
 /// extern SDL_DECLSPEC bool SDLCALL Mix_PlayMusic(Mix_Music *music, int loops)
 /// ```
 bool mixPlayMusic(Pointer<MixMusic> music, int loops) {
-  final mixPlayMusicLookupFunction = libSdl3Mixer
+  final mixPlayMusicLookupFunction = _libMixer
       .lookupFunction<
         Uint8 Function(Pointer<MixMusic> music, Int32 loops),
         int Function(Pointer<MixMusic> music, int loops)
@@ -2104,7 +2096,7 @@ bool mixPlayMusic(Pointer<MixMusic> music, int loops) {
 /// extern SDL_DECLSPEC bool SDLCALL Mix_FadeInMusic(Mix_Music *music, int loops, int ms)
 /// ```
 bool mixFadeInMusic(Pointer<MixMusic> music, int loops, int ms) {
-  final mixFadeInMusicLookupFunction = libSdl3Mixer
+  final mixFadeInMusicLookupFunction = _libMixer
       .lookupFunction<
         Uint8 Function(Pointer<MixMusic> music, Int32 loops, Int32 ms),
         int Function(Pointer<MixMusic> music, int loops, int ms)
@@ -2159,7 +2151,7 @@ bool mixFadeInMusicPos(
   int ms,
   double position,
 ) {
-  final mixFadeInMusicPosLookupFunction = libSdl3Mixer
+  final mixFadeInMusicPosLookupFunction = _libMixer
       .lookupFunction<
         Uint8 Function(
           Pointer<MixMusic> music,
@@ -2219,7 +2211,7 @@ bool mixFadeInMusicPos(
 /// extern SDL_DECLSPEC int SDLCALL Mix_FadeInChannel(int channel, Mix_Chunk *chunk, int loops, int ms)
 /// ```
 int mixFadeInChannel(int channel, Pointer<MixChunk> chunk, int loops, int ms) {
-  final mixFadeInChannelLookupFunction = libSdl3Mixer
+  final mixFadeInChannelLookupFunction = _libMixer
       .lookupFunction<
         Int32 Function(
           Int32 channel,
@@ -2284,7 +2276,7 @@ int mixFadeInChannelTimed(
   int ms,
   int ticks,
 ) {
-  final mixFadeInChannelTimedLookupFunction = libSdl3Mixer
+  final mixFadeInChannelTimedLookupFunction = _libMixer
       .lookupFunction<
         Int32 Function(
           Int32 channel,
@@ -2334,7 +2326,7 @@ int mixFadeInChannelTimed(
 /// extern SDL_DECLSPEC int SDLCALL Mix_Volume(int channel, int volume)
 /// ```
 int mixVolume(int channel, int volume) {
-  final mixVolumeLookupFunction = libSdl3Mixer
+  final mixVolumeLookupFunction = _libMixer
       .lookupFunction<
         Int32 Function(Int32 channel, Int32 volume),
         int Function(int channel, int volume)
@@ -2372,7 +2364,7 @@ int mixVolume(int channel, int volume) {
 /// extern SDL_DECLSPEC int SDLCALL Mix_VolumeChunk(Mix_Chunk *chunk, int volume)
 /// ```
 int mixVolumeChunk(Pointer<MixChunk> chunk, int volume) {
-  final mixVolumeChunkLookupFunction = libSdl3Mixer
+  final mixVolumeChunkLookupFunction = _libMixer
       .lookupFunction<
         Int32 Function(Pointer<MixChunk> chunk, Int32 volume),
         int Function(Pointer<MixChunk> chunk, int volume)
@@ -2403,7 +2395,7 @@ int mixVolumeChunk(Pointer<MixChunk> chunk, int volume) {
 /// extern SDL_DECLSPEC int SDLCALL Mix_VolumeMusic(int volume)
 /// ```
 int mixVolumeMusic(int volume) {
-  final mixVolumeMusicLookupFunction = libSdl3Mixer
+  final mixVolumeMusicLookupFunction = _libMixer
       .lookupFunction<Int32 Function(Int32 volume), int Function(int volume)>(
         'Mix_VolumeMusic',
       );
@@ -2422,7 +2414,7 @@ int mixVolumeMusic(int volume) {
 /// extern SDL_DECLSPEC int SDLCALL Mix_GetMusicVolume(Mix_Music *music)
 /// ```
 int mixGetMusicVolume(Pointer<MixMusic> music) {
-  final mixGetMusicVolumeLookupFunction = libSdl3Mixer
+  final mixGetMusicVolumeLookupFunction = _libMixer
       .lookupFunction<
         Int32 Function(Pointer<MixMusic> music),
         int Function(Pointer<MixMusic> music)
@@ -2458,7 +2450,7 @@ int mixGetMusicVolume(Pointer<MixMusic> music) {
 /// extern SDL_DECLSPEC int SDLCALL Mix_MasterVolume(int volume)
 /// ```
 int mixMasterVolume(int volume) {
-  final mixMasterVolumeLookupFunction = libSdl3Mixer
+  final mixMasterVolumeLookupFunction = _libMixer
       .lookupFunction<Int32 Function(Int32 volume), int Function(int volume)>(
         'Mix_MasterVolume',
       );
@@ -2488,7 +2480,7 @@ int mixMasterVolume(int volume) {
 /// extern SDL_DECLSPEC void SDLCALL Mix_HaltChannel(int channel)
 /// ```
 void mixHaltChannel(int channel) {
-  final mixHaltChannelLookupFunction = libSdl3Mixer
+  final mixHaltChannelLookupFunction = _libMixer
       .lookupFunction<Void Function(Int32 channel), void Function(int channel)>(
         'Mix_HaltChannel',
       );
@@ -2518,7 +2510,7 @@ void mixHaltChannel(int channel) {
 /// extern SDL_DECLSPEC void SDLCALL Mix_HaltGroup(int tag)
 /// ```
 void mixHaltGroup(int tag) {
-  final mixHaltGroupLookupFunction = libSdl3Mixer
+  final mixHaltGroupLookupFunction = _libMixer
       .lookupFunction<Void Function(Int32 tag), void Function(int tag)>(
         'Mix_HaltGroup',
       );
@@ -2540,7 +2532,7 @@ void mixHaltGroup(int tag) {
 /// extern SDL_DECLSPEC void SDLCALL Mix_HaltMusic(void)
 /// ```
 void mixHaltMusic() {
-  final mixHaltMusicLookupFunction = libSdl3Mixer
+  final mixHaltMusicLookupFunction = _libMixer
       .lookupFunction<Void Function(), void Function()>('Mix_HaltMusic');
   return mixHaltMusicLookupFunction();
 }
@@ -2575,7 +2567,7 @@ void mixHaltMusic() {
 /// extern SDL_DECLSPEC int SDLCALL Mix_ExpireChannel(int channel, int ticks)
 /// ```
 int mixExpireChannel(int channel, int ticks) {
-  final mixExpireChannelLookupFunction = libSdl3Mixer
+  final mixExpireChannelLookupFunction = _libMixer
       .lookupFunction<
         Int32 Function(Int32 channel, Int32 ticks),
         int Function(int channel, int ticks)
@@ -2611,7 +2603,7 @@ int mixExpireChannel(int channel, int ticks) {
 /// extern SDL_DECLSPEC int SDLCALL Mix_FadeOutChannel(int which, int ms)
 /// ```
 int mixFadeOutChannel(int which, int ms) {
-  final mixFadeOutChannelLookupFunction = libSdl3Mixer
+  final mixFadeOutChannelLookupFunction = _libMixer
       .lookupFunction<
         Int32 Function(Int32 which, Int32 ms),
         int Function(int which, int ms)
@@ -2654,7 +2646,7 @@ int mixFadeOutChannel(int which, int ms) {
 /// extern SDL_DECLSPEC int SDLCALL Mix_FadeOutGroup(int tag, int ms)
 /// ```
 int mixFadeOutGroup(int tag, int ms) {
-  final mixFadeOutGroupLookupFunction = libSdl3Mixer
+  final mixFadeOutGroupLookupFunction = _libMixer
       .lookupFunction<
         Int32 Function(Int32 tag, Int32 ms),
         int Function(int tag, int ms)
@@ -2689,7 +2681,7 @@ int mixFadeOutGroup(int tag, int ms) {
 /// extern SDL_DECLSPEC bool SDLCALL Mix_FadeOutMusic(int ms)
 /// ```
 bool mixFadeOutMusic(int ms) {
-  final mixFadeOutMusicLookupFunction = libSdl3Mixer
+  final mixFadeOutMusicLookupFunction = _libMixer
       .lookupFunction<Uint8 Function(Int32 ms), int Function(int ms)>(
         'Mix_FadeOutMusic',
       );
@@ -2715,7 +2707,7 @@ bool mixFadeOutMusic(int ms) {
 /// extern SDL_DECLSPEC Mix_Fading SDLCALL Mix_FadingMusic(void)
 /// ```
 int mixFadingMusic() {
-  final mixFadingMusicLookupFunction = libSdl3Mixer
+  final mixFadingMusicLookupFunction = _libMixer
       .lookupFunction<Int32 Function(), int Function()>('Mix_FadingMusic');
   return mixFadingMusicLookupFunction();
 }
@@ -2746,7 +2738,7 @@ int mixFadingMusic() {
 /// extern SDL_DECLSPEC Mix_Fading SDLCALL Mix_FadingChannel(int which)
 /// ```
 int mixFadingChannel(int which) {
-  final mixFadingChannelLookupFunction = libSdl3Mixer
+  final mixFadingChannelLookupFunction = _libMixer
       .lookupFunction<Int32 Function(Int32 which), int Function(int which)>(
         'Mix_FadingChannel',
       );
@@ -2781,7 +2773,7 @@ int mixFadingChannel(int which) {
 /// extern SDL_DECLSPEC void SDLCALL Mix_Pause(int channel)
 /// ```
 void mixPause(int channel) {
-  final mixPauseLookupFunction = libSdl3Mixer
+  final mixPauseLookupFunction = _libMixer
       .lookupFunction<Void Function(Int32 channel), void Function(int channel)>(
         'Mix_Pause',
       );
@@ -2814,7 +2806,7 @@ void mixPause(int channel) {
 /// extern SDL_DECLSPEC void SDLCALL Mix_PauseGroup(int tag)
 /// ```
 void mixPauseGroup(int tag) {
-  final mixPauseGroupLookupFunction = libSdl3Mixer
+  final mixPauseGroupLookupFunction = _libMixer
       .lookupFunction<Void Function(Int32 tag), void Function(int tag)>(
         'Mix_PauseGroup',
       );
@@ -2841,7 +2833,7 @@ void mixPauseGroup(int tag) {
 /// extern SDL_DECLSPEC void SDLCALL Mix_Resume(int channel)
 /// ```
 void mixResume(int channel) {
-  final mixResumeLookupFunction = libSdl3Mixer
+  final mixResumeLookupFunction = _libMixer
       .lookupFunction<Void Function(Int32 channel), void Function(int channel)>(
         'Mix_Resume',
       );
@@ -2870,7 +2862,7 @@ void mixResume(int channel) {
 /// extern SDL_DECLSPEC void SDLCALL Mix_ResumeGroup(int tag)
 /// ```
 void mixResumeGroup(int tag) {
-  final mixResumeGroupLookupFunction = libSdl3Mixer
+  final mixResumeGroupLookupFunction = _libMixer
       .lookupFunction<Void Function(Int32 tag), void Function(int tag)>(
         'Mix_ResumeGroup',
       );
@@ -2892,7 +2884,7 @@ void mixResumeGroup(int tag) {
 /// extern SDL_DECLSPEC int SDLCALL Mix_Paused(int channel)
 /// ```
 int mixPaused(int channel) {
-  final mixPausedLookupFunction = libSdl3Mixer
+  final mixPausedLookupFunction = _libMixer
       .lookupFunction<Int32 Function(Int32 channel), int Function(int channel)>(
         'Mix_Paused',
       );
@@ -2917,7 +2909,7 @@ int mixPaused(int channel) {
 /// extern SDL_DECLSPEC void SDLCALL Mix_PauseMusic(void)
 /// ```
 void mixPauseMusic() {
-  final mixPauseMusicLookupFunction = libSdl3Mixer
+  final mixPauseMusicLookupFunction = _libMixer
       .lookupFunction<Void Function(), void Function()>('Mix_PauseMusic');
   return mixPauseMusicLookupFunction();
 }
@@ -2934,7 +2926,7 @@ void mixPauseMusic() {
 /// extern SDL_DECLSPEC void SDLCALL Mix_ResumeMusic(void)
 /// ```
 void mixResumeMusic() {
-  final mixResumeMusicLookupFunction = libSdl3Mixer
+  final mixResumeMusicLookupFunction = _libMixer
       .lookupFunction<Void Function(), void Function()>('Mix_ResumeMusic');
   return mixResumeMusicLookupFunction();
 }
@@ -2953,7 +2945,7 @@ void mixResumeMusic() {
 /// extern SDL_DECLSPEC void SDLCALL Mix_RewindMusic(void)
 /// ```
 void mixRewindMusic() {
-  final mixRewindMusicLookupFunction = libSdl3Mixer
+  final mixRewindMusicLookupFunction = _libMixer
       .lookupFunction<Void Function(), void Function()>('Mix_RewindMusic');
   return mixRewindMusicLookupFunction();
 }
@@ -2972,7 +2964,7 @@ void mixRewindMusic() {
 /// extern SDL_DECLSPEC bool SDLCALL Mix_PausedMusic(void)
 /// ```
 bool mixPausedMusic() {
-  final mixPausedMusicLookupFunction = libSdl3Mixer
+  final mixPausedMusicLookupFunction = _libMixer
       .lookupFunction<Uint8 Function(), int Function()>('Mix_PausedMusic');
   return mixPausedMusicLookupFunction() == 1;
 }
@@ -2992,7 +2984,7 @@ bool mixPausedMusic() {
 /// extern SDL_DECLSPEC bool SDLCALL Mix_ModMusicJumpToOrder(int order)
 /// ```
 bool mixModMusicJumpToOrder(int order) {
-  final mixModMusicJumpToOrderLookupFunction = libSdl3Mixer
+  final mixModMusicJumpToOrderLookupFunction = _libMixer
       .lookupFunction<Uint8 Function(Int32 order), int Function(int order)>(
         'Mix_ModMusicJumpToOrder',
       );
@@ -3015,7 +3007,7 @@ bool mixModMusicJumpToOrder(int order) {
 /// extern SDL_DECLSPEC bool SDLCALL Mix_StartTrack(Mix_Music *music, int track)
 /// ```
 bool mixStartTrack(Pointer<MixMusic> music, int track) {
-  final mixStartTrackLookupFunction = libSdl3Mixer
+  final mixStartTrackLookupFunction = _libMixer
       .lookupFunction<
         Uint8 Function(Pointer<MixMusic> music, Int32 track),
         int Function(Pointer<MixMusic> music, int track)
@@ -3038,7 +3030,7 @@ bool mixStartTrack(Pointer<MixMusic> music, int track) {
 /// extern SDL_DECLSPEC int SDLCALL Mix_GetNumTracks(Mix_Music *music)
 /// ```
 int mixGetNumTracks(Pointer<MixMusic> music) {
-  final mixGetNumTracksLookupFunction = libSdl3Mixer
+  final mixGetNumTracksLookupFunction = _libMixer
       .lookupFunction<
         Int32 Function(Pointer<MixMusic> music),
         int Function(Pointer<MixMusic> music)
@@ -3064,7 +3056,7 @@ int mixGetNumTracks(Pointer<MixMusic> music) {
 /// extern SDL_DECLSPEC bool SDLCALL Mix_SetMusicPosition(double position)
 /// ```
 bool mixSetMusicPosition(double position) {
-  final mixSetMusicPositionLookupFunction = libSdl3Mixer
+  final mixSetMusicPositionLookupFunction = _libMixer
       .lookupFunction<
         Uint8 Function(Double position),
         int Function(double position)
@@ -3086,7 +3078,7 @@ bool mixSetMusicPosition(double position) {
 /// extern SDL_DECLSPEC double SDLCALL Mix_GetMusicPosition(Mix_Music *music)
 /// ```
 double mixGetMusicPosition(Pointer<MixMusic> music) {
-  final mixGetMusicPositionLookupFunction = libSdl3Mixer
+  final mixGetMusicPositionLookupFunction = _libMixer
       .lookupFunction<
         Double Function(Pointer<MixMusic> music),
         double Function(Pointer<MixMusic> music)
@@ -3110,7 +3102,7 @@ double mixGetMusicPosition(Pointer<MixMusic> music) {
 /// extern SDL_DECLSPEC double SDLCALL Mix_MusicDuration(Mix_Music *music)
 /// ```
 double mixMusicDuration(Pointer<MixMusic> music) {
-  final mixMusicDurationLookupFunction = libSdl3Mixer
+  final mixMusicDurationLookupFunction = _libMixer
       .lookupFunction<
         Double Function(Pointer<MixMusic> music),
         double Function(Pointer<MixMusic> music)
@@ -3135,7 +3127,7 @@ double mixMusicDuration(Pointer<MixMusic> music) {
 /// extern SDL_DECLSPEC double SDLCALL Mix_GetMusicLoopStartTime(Mix_Music *music)
 /// ```
 double mixGetMusicLoopStartTime(Pointer<MixMusic> music) {
-  final mixGetMusicLoopStartTimeLookupFunction = libSdl3Mixer
+  final mixGetMusicLoopStartTimeLookupFunction = _libMixer
       .lookupFunction<
         Double Function(Pointer<MixMusic> music),
         double Function(Pointer<MixMusic> music)
@@ -3160,7 +3152,7 @@ double mixGetMusicLoopStartTime(Pointer<MixMusic> music) {
 /// extern SDL_DECLSPEC double SDLCALL Mix_GetMusicLoopEndTime(Mix_Music *music)
 /// ```
 double mixGetMusicLoopEndTime(Pointer<MixMusic> music) {
-  final mixGetMusicLoopEndTimeLookupFunction = libSdl3Mixer
+  final mixGetMusicLoopEndTimeLookupFunction = _libMixer
       .lookupFunction<
         Double Function(Pointer<MixMusic> music),
         double Function(Pointer<MixMusic> music)
@@ -3185,7 +3177,7 @@ double mixGetMusicLoopEndTime(Pointer<MixMusic> music) {
 /// extern SDL_DECLSPEC double SDLCALL Mix_GetMusicLoopLengthTime(Mix_Music *music)
 /// ```
 double mixGetMusicLoopLengthTime(Pointer<MixMusic> music) {
-  final mixGetMusicLoopLengthTimeLookupFunction = libSdl3Mixer
+  final mixGetMusicLoopLengthTimeLookupFunction = _libMixer
       .lookupFunction<
         Double Function(Pointer<MixMusic> music),
         double Function(Pointer<MixMusic> music)
@@ -3217,7 +3209,7 @@ double mixGetMusicLoopLengthTime(Pointer<MixMusic> music) {
 /// extern SDL_DECLSPEC int SDLCALL Mix_Playing(int channel)
 /// ```
 int mixPlaying(int channel) {
-  final mixPlayingLookupFunction = libSdl3Mixer
+  final mixPlayingLookupFunction = _libMixer
       .lookupFunction<Int32 Function(Int32 channel), int Function(int channel)>(
         'Mix_Playing',
       );
@@ -3241,7 +3233,7 @@ int mixPlaying(int channel) {
 /// extern SDL_DECLSPEC bool SDLCALL Mix_PlayingMusic(void)
 /// ```
 bool mixPlayingMusic() {
-  final mixPlayingMusicLookupFunction = libSdl3Mixer
+  final mixPlayingMusicLookupFunction = _libMixer
       .lookupFunction<Uint8 Function(), int Function()>('Mix_PlayingMusic');
   return mixPlayingMusicLookupFunction() == 1;
 }
@@ -3267,7 +3259,7 @@ bool mixPlayingMusic() {
 /// extern SDL_DECLSPEC bool SDLCALL Mix_SetSoundFonts(const char *paths)
 /// ```
 bool mixSetSoundFonts(String? paths) {
-  final mixSetSoundFontsLookupFunction = libSdl3Mixer
+  final mixSetSoundFontsLookupFunction = _libMixer
       .lookupFunction<
         Uint8 Function(Pointer<Utf8> paths),
         int Function(Pointer<Utf8> paths)
@@ -3307,7 +3299,7 @@ bool mixSetSoundFonts(String? paths) {
 /// extern SDL_DECLSPEC const char* SDLCALL Mix_GetSoundFonts(void)
 /// ```
 String? mixGetSoundFonts() {
-  final mixGetSoundFontsLookupFunction = libSdl3Mixer
+  final mixGetSoundFontsLookupFunction = _libMixer
       .lookupFunction<Pointer<Utf8> Function(), Pointer<Utf8> Function()>(
         'Mix_GetSoundFonts',
       );
@@ -3350,7 +3342,7 @@ bool mixEachSoundFont(
   Pointer<NativeFunction<MixEachSoundFontCallback>> function,
   Pointer<NativeType> data,
 ) {
-  final mixEachSoundFontLookupFunction = libSdl3Mixer
+  final mixEachSoundFontLookupFunction = _libMixer
       .lookupFunction<
         Uint8 Function(
           Pointer<NativeFunction<MixEachSoundFontCallback>> function,
@@ -3382,7 +3374,7 @@ bool mixEachSoundFont(
 /// extern SDL_DECLSPEC bool SDLCALL Mix_SetTimidityCfg(const char *path)
 /// ```
 bool mixSetTimidityCfg(String? path) {
-  final mixSetTimidityCfgLookupFunction = libSdl3Mixer
+  final mixSetTimidityCfgLookupFunction = _libMixer
       .lookupFunction<
         Uint8 Function(Pointer<Utf8> path),
         int Function(Pointer<Utf8> path)
@@ -3413,7 +3405,7 @@ bool mixSetTimidityCfg(String? path) {
 /// extern SDL_DECLSPEC const char* SDLCALL Mix_GetTimidityCfg(void)
 /// ```
 String? mixGetTimidityCfg() {
-  final mixGetTimidityCfgLookupFunction = libSdl3Mixer
+  final mixGetTimidityCfgLookupFunction = _libMixer
       .lookupFunction<Pointer<Utf8> Function(), Pointer<Utf8> Function()>(
         'Mix_GetTimidityCfg',
       );
@@ -3438,7 +3430,7 @@ String? mixGetTimidityCfg() {
 /// extern SDL_DECLSPEC Mix_Chunk * SDLCALL Mix_GetChunk(int channel)
 /// ```
 Pointer<MixChunk> mixGetChunk(int channel) {
-  final mixGetChunkLookupFunction = libSdl3Mixer
+  final mixGetChunkLookupFunction = _libMixer
       .lookupFunction<
         Pointer<MixChunk> Function(Int32 channel),
         Pointer<MixChunk> Function(int channel)
@@ -3489,7 +3481,7 @@ Pointer<MixChunk> mixGetChunk(int channel) {
 /// extern SDL_DECLSPEC void SDLCALL Mix_CloseAudio(void)
 /// ```
 void mixCloseAudio() {
-  final mixCloseAudioLookupFunction = libSdl3Mixer
+  final mixCloseAudioLookupFunction = _libMixer
       .lookupFunction<Void Function(), void Function()>('Mix_CloseAudio');
   return mixCloseAudioLookupFunction();
 }

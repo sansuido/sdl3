@@ -1,7 +1,5 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-import 'dart:ffi';
-import 'package:ffi/ffi.dart';
-import 'lib_sdl.dart';
+part of '../sdl.dart';
 
 ///
 /// Get the version of SDL that is linked against your program.
@@ -23,7 +21,7 @@ import 'lib_sdl.dart';
 /// extern SDL_DECLSPEC int SDLCALL SDL_GetVersion(void)
 /// ```
 int sdlGetVersion() {
-  final sdlGetVersionLookupFunction = libSdl3
+  final sdlGetVersionLookupFunction = _libSdl
       .lookupFunction<Int32 Function(), int Function()>('SDL_GetVersion');
   return sdlGetVersionLookupFunction();
 }
@@ -57,7 +55,7 @@ int sdlGetVersion() {
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetRevision(void)
 /// ```
 String? sdlGetRevision() {
-  final sdlGetRevisionLookupFunction = libSdl3
+  final sdlGetRevisionLookupFunction = _libSdl
       .lookupFunction<Pointer<Utf8> Function(), Pointer<Utf8> Function()>(
         'SDL_GetRevision',
       );

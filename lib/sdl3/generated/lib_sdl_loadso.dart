@@ -1,8 +1,5 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-import 'dart:ffi';
-import 'package:ffi/ffi.dart';
-import 'lib_sdl.dart';
-import 'struct_sdl.dart';
+part of '../sdl.dart';
 
 ///
 /// Dynamically load a shared object.
@@ -22,7 +19,7 @@ import 'struct_sdl.dart';
 /// extern SDL_DECLSPEC SDL_SharedObject * SDLCALL SDL_LoadObject(const char *sofile)
 /// ```
 Pointer<SdlSharedObject> sdlLoadObject(String? sofile) {
-  final sdlLoadObjectLookupFunction = libSdl3
+  final sdlLoadObjectLookupFunction = _libSdl
       .lookupFunction<
         Pointer<SdlSharedObject> Function(Pointer<Utf8> sofile),
         Pointer<SdlSharedObject> Function(Pointer<Utf8> sofile)
@@ -66,7 +63,7 @@ Pointer<NativeType> sdlLoadFunction(
   Pointer<SdlSharedObject> handle,
   String? name,
 ) {
-  final sdlLoadFunctionLookupFunction = libSdl3
+  final sdlLoadFunctionLookupFunction = _libSdl
       .lookupFunction<
         Pointer<NativeType> Function(
           Pointer<SdlSharedObject> handle,
@@ -101,7 +98,7 @@ Pointer<NativeType> sdlLoadFunction(
 /// extern SDL_DECLSPEC void SDLCALL SDL_UnloadObject(SDL_SharedObject *handle)
 /// ```
 void sdlUnloadObject(Pointer<SdlSharedObject> handle) {
-  final sdlUnloadObjectLookupFunction = libSdl3
+  final sdlUnloadObjectLookupFunction = _libSdl
       .lookupFunction<
         Void Function(Pointer<SdlSharedObject> handle),
         void Function(Pointer<SdlSharedObject> handle)

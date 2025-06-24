@@ -1,5 +1,7 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 // ignore_for_file: constant_identifier_names, specify_nonobvious_property_types
+part of '../sdl_mixer.dart';
+
 //const SDL_MIXER_H_ = ;
 const SDL_MIXER_MAJOR_VERSION = 3;
 const SDL_MIXER_MINOR_VERSION = 0;

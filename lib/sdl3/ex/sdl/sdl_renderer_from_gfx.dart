@@ -1,12 +1,4 @@
-import 'dart:ffi';
-import 'dart:math' as math show Point, Rectangle;
-
-import 'package:ffi/ffi.dart';
-
-import '../../generated//const_sdl.dart';
-import '../../generated/struct_sdl.dart';
-import '../../gfx/primitives.dart' as gfx;
-import '../dart/point.dart';
+part of '../../sdl.dart';
 
 extension SdlRendererFromGfxPointerEx on Pointer<SdlRenderer> {
   // lib_sdl_gfx.dart

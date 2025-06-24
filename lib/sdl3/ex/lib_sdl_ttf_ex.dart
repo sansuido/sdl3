@@ -1,10 +1,5 @@
 // ignore_for_file: non_constant_identifier_names
-import './generated/const_sdl_ttf.dart';
-import './generated/lib_sdl_error.dart';
-//import './generated/lib_sdl_ttf.dart';
-//import './generated/struct_sdl.dart';
-//import './generated/struct_sdl_ttf.dart';
-import 'lib_sdl_ex.dart';
+part of '../sdl_ttf.dart';
 
 /// ```c
 /// const SDL_TTF_COMPILEDVERSION = \ SDL_VERSIONNUM(SDL_TTF_MAJOR_VERSION, SDL_TTF_MINOR_VERSION, SDL_TTF_PATCHLEVEL);

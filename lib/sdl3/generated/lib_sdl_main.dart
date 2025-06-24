@@ -1,7 +1,5 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-import 'dart:ffi';
-import 'package:ffi/ffi.dart';
-import 'lib_sdl.dart';
+part of '../sdl.dart';
 
 ///
 /// Circumvent failure of SDL_Init() when not using SDL_main() as an entry
@@ -20,7 +18,7 @@ import 'lib_sdl.dart';
 /// extern SDL_DECLSPEC void SDLCALL SDL_SetMainReady(void)
 /// ```
 void sdlSetMainReady() {
-  final sdlSetMainReadyLookupFunction = libSdl3
+  final sdlSetMainReadyLookupFunction = _libSdl
       .lookupFunction<Void Function(), void Function()>('SDL_SetMainReady');
   return sdlSetMainReadyLookupFunction();
 }
@@ -62,7 +60,7 @@ int sdlRunApp(
   Pointer<NativeFunction<SdlMainFunc>> mainFunction,
   Pointer<NativeType> reserved,
 ) {
-  final sdlRunAppLookupFunction = libSdl3
+  final sdlRunAppLookupFunction = _libSdl
       .lookupFunction<
         Int32 Function(
           Int32 argc,
@@ -116,7 +114,7 @@ int sdlEnterAppMainCallbacks(
   Pointer<NativeFunction<SdlAppEventFunc>> appevent,
   Pointer<NativeFunction<SdlAppQuitFunc>> appquit,
 ) {
-  final sdlEnterAppMainCallbacksLookupFunction = libSdl3
+  final sdlEnterAppMainCallbacksLookupFunction = _libSdl
       .lookupFunction<
         Int32 Function(
           Int32 argc,
@@ -173,7 +171,7 @@ int sdlEnterAppMainCallbacks(
 /// extern SDL_DECLSPEC bool SDLCALL SDL_RegisterApp(const char *name, Uint32 style, void *hInst)
 /// ```
 bool sdlRegisterApp(String? name, int style, Pointer<NativeType> hInst) {
-  final sdlRegisterAppLookupFunction = libSdl3
+  final sdlRegisterAppLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(
           Pointer<Utf8> name,
@@ -207,7 +205,7 @@ bool sdlRegisterApp(String? name, int style, Pointer<NativeType> hInst) {
 /// extern SDL_DECLSPEC void SDLCALL SDL_UnregisterApp(void)
 /// ```
 void sdlUnregisterApp() {
-  final sdlUnregisterAppLookupFunction = libSdl3
+  final sdlUnregisterAppLookupFunction = _libSdl
       .lookupFunction<Void Function(), void Function()>('SDL_UnregisterApp');
   return sdlUnregisterAppLookupFunction();
 }
@@ -224,7 +222,7 @@ void sdlUnregisterApp() {
 /// extern SDL_DECLSPEC void SDLCALL SDL_GDKSuspendComplete(void)
 /// ```
 void sdlGdkSuspendComplete() {
-  final sdlGdkSuspendCompleteLookupFunction = libSdl3
+  final sdlGdkSuspendCompleteLookupFunction = _libSdl
       .lookupFunction<Void Function(), void Function()>(
         'SDL_GDKSuspendComplete',
       );
