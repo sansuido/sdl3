@@ -1,3 +1,9 @@
+## 2.1.0
+- SDL3-2025-06-29
+- [fixed] Fixed a bug that some OpenGL functions were not referenced(`glActiveTexture` and more).
+- [fixed] Changed the type of GLsizeiptr to Uint32* from Uint64.
+- [deprecate] Links to libraries such as opengl32.dll have been removed.
+
 ## 2.0.0
 - SDL3-2025-06-22
 - [update] Updated SdlDynamicLibraryService class. Added OpenGL support.

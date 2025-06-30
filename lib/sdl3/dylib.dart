@@ -25,21 +25,21 @@ class SdlDynamicLibraryService {
       return header + key + extension;
     }
 
-    String getDefaultOpenglFilename() {
-      var filename = '';
-      switch (Platform.operatingSystem) {
-        case 'android':
-        case 'linux':
-        case 'fuchsia':
-          filename = 'libGL.so';
-        case 'ios':
-        case 'macos':
-          filename = 'libGL.dylib';
-        case 'windows':
-          filename = 'opengl32.dll';
-      }
-      return filename;
-    }
+    //    String getDefaultOpenglFilename() {
+    //      var filename = '';
+    //      switch (Platform.operatingSystem) {
+    //        case 'android':
+    //        case 'linux':
+    //        case 'fuchsia':
+    //          filename = 'libGL.so';
+    //        case 'ios':
+    //        case 'macos':
+    //          filename = 'libGL.dylib';
+    //        case 'windows':
+    //          filename = 'opengl32.dll';
+    //      }
+    //      return filename;
+    //    }
 
     entries = {};
     entries['sdl'] = getDefaultSdlFilename('SDL3');
@@ -47,7 +47,7 @@ class SdlDynamicLibraryService {
     entries['mixer'] = getDefaultSdlFilename('SDL3_mixer');
     entries['net'] = getDefaultSdlFilename('SDL3_net');
     entries['ttf'] = getDefaultSdlFilename('SDL3_ttf');
-    entries['opengl'] = getDefaultOpenglFilename();
+    //    entries['opengl'] = getDefaultOpenglFilename();
   }
   late Map<String, String> entries;
 
@@ -59,47 +59,3 @@ class SdlDynamicLibraryService {
 
   DynamicLibrary open(String key) => DynamicLibrary.open(entries[key]!);
 }
-
-//class SdlDynamicLibraryService {
-//  factory SdlDynamicLibraryService() => _instance;
-//
-//  SdlDynamicLibraryService._internal() {
-//    entries = {};
-//  }
-//  late Map<String, DynamicLibrary> entries;
-//
-//  static final _instance = SdlDynamicLibraryService._internal();
-//
-//  void add(String key, DynamicLibrary lib) {
-//    entries[key] = lib;
-//  }
-//
-//  static DynamicLibrary _openByPlatform(String key) {
-//    var header = '';
-//    var extension = '';
-//    switch (Platform.operatingSystem) {
-//      case 'android':
-//      case 'linux':
-//      case 'fuchsia':
-//        header = 'lib';
-//        extension = '.so';
-//      case 'ios':
-//      case 'macos':
-//        header = 'lib';
-//        extension = '.dylib';
-//      case 'windows':
-//        header = '';
-//        extension = '.dll';
-//    }
-//    return DynamicLibrary.open(header + key + extension);
-//  }
-//
-//  DynamicLibrary open(String key) {
-//    if (!entries.containsKey(key)) {
-//      entries[key] = _openByPlatform(key);
-//    }
-//    return entries[key]!;
-//  }
-//}
-//
-//

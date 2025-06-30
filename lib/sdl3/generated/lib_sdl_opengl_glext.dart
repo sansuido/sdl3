@@ -873,20 +873,30 @@ late Pointer<NativeFunction<Void Function()>> _glBufferData;
 /// ```c
 /// GLAPI void APIENTRY glBufferData (GLenum target, GLsizeiptr size, const void *data, GLenum usage)
 /// ```
-void glBufferData(int target, int size, Pointer<NativeType> data, int usage) {
+void glBufferData(
+  int target,
+  Pointer<Uint32> size,
+  Pointer<NativeType> data,
+  int usage,
+) {
   final glBufferDataAsFunction = _glBufferData
       .cast<
         NativeFunction<
           Void Function(
             Uint32 target,
-            Uint64 size,
+            Pointer<Uint32> size,
             Pointer<NativeType> data,
             Uint32 usage,
           )
         >
       >()
       .asFunction<
-        void Function(int target, int size, Pointer<NativeType> data, int usage)
+        void Function(
+          int target,
+          Pointer<Uint32> size,
+          Pointer<NativeType> data,
+          int usage,
+        )
       >();
   return glBufferDataAsFunction(target, size, data, usage);
 }
@@ -900,7 +910,7 @@ late Pointer<NativeFunction<Void Function()>> _glBufferSubData;
 void glBufferSubData(
   int target,
   Pointer<NativeType> offset,
-  int size,
+  Pointer<Uint32> size,
   Pointer<NativeType> data,
 ) {
   final glBufferSubDataAsFunction = _glBufferSubData
@@ -909,7 +919,7 @@ void glBufferSubData(
           Void Function(
             Uint32 target,
             Pointer<NativeType> offset,
-            Uint64 size,
+            Pointer<Uint32> size,
             Pointer<NativeType> data,
           )
         >
@@ -918,7 +928,7 @@ void glBufferSubData(
         void Function(
           int target,
           Pointer<NativeType> offset,
-          int size,
+          Pointer<Uint32> size,
           Pointer<NativeType> data,
         )
       >();
@@ -934,7 +944,7 @@ late Pointer<NativeFunction<Void Function()>> _glGetBufferSubData;
 void glGetBufferSubData(
   int target,
   Pointer<NativeType> offset,
-  int size,
+  Pointer<Uint32> size,
   Pointer<NativeType> data,
 ) {
   final glGetBufferSubDataAsFunction = _glGetBufferSubData
@@ -943,7 +953,7 @@ void glGetBufferSubData(
           Void Function(
             Uint32 target,
             Pointer<NativeType> offset,
-            Uint64 size,
+            Pointer<Uint32> size,
             Pointer<NativeType> data,
           )
         >
@@ -952,7 +962,7 @@ void glGetBufferSubData(
         void Function(
           int target,
           Pointer<NativeType> offset,
-          int size,
+          Pointer<Uint32> size,
           Pointer<NativeType> data,
         )
       >();
@@ -3042,7 +3052,7 @@ void glBindBufferRange(
   int index,
   int buffer,
   Pointer<NativeType> offset,
-  int size,
+  Pointer<Uint32> size,
 ) {
   final glBindBufferRangeAsFunction = _glBindBufferRange
       .cast<
@@ -3052,7 +3062,7 @@ void glBindBufferRange(
             Uint32 index,
             Uint32 buffer,
             Pointer<NativeType> offset,
-            Uint64 size,
+            Pointer<Uint32> size,
           )
         >
       >()
@@ -3062,7 +3072,7 @@ void glBindBufferRange(
           int index,
           int buffer,
           Pointer<NativeType> offset,
-          int size,
+          Pointer<Uint32> size,
         )
       >();
   return glBindBufferRangeAsFunction(target, index, buffer, offset, size);
@@ -4501,7 +4511,7 @@ late Pointer<NativeFunction<Void Function()>> _glMapBufferRange;
 Pointer<NativeType> glMapBufferRange(
   int target,
   Pointer<NativeType> offset,
-  int length,
+  Pointer<Uint32> length,
   int access,
 ) {
   final glMapBufferRangeAsFunction = _glMapBufferRange
@@ -4510,7 +4520,7 @@ Pointer<NativeType> glMapBufferRange(
           Pointer<NativeType> Function(
             Uint32 target,
             Pointer<NativeType> offset,
-            Uint64 length,
+            Pointer<Uint32> length,
             Uint32 access,
           )
         >
@@ -4519,7 +4529,7 @@ Pointer<NativeType> glMapBufferRange(
         Pointer<NativeType> Function(
           int target,
           Pointer<NativeType> offset,
-          int length,
+          Pointer<Uint32> length,
           int access,
         )
       >();
@@ -4535,7 +4545,7 @@ late Pointer<NativeFunction<Void Function()>> _glFlushMappedBufferRange;
 void glFlushMappedBufferRange(
   int target,
   Pointer<NativeType> offset,
-  int length,
+  Pointer<Uint32> length,
 ) {
   final glFlushMappedBufferRangeAsFunction = _glFlushMappedBufferRange
       .cast<
@@ -4543,12 +4553,16 @@ void glFlushMappedBufferRange(
           Void Function(
             Uint32 target,
             Pointer<NativeType> offset,
-            Uint64 length,
+            Pointer<Uint32> length,
           )
         >
       >()
       .asFunction<
-        void Function(int target, Pointer<NativeType> offset, int length)
+        void Function(
+          int target,
+          Pointer<NativeType> offset,
+          Pointer<Uint32> length,
+        )
       >();
   return glFlushMappedBufferRangeAsFunction(target, offset, length);
 }
@@ -4713,7 +4727,7 @@ void glCopyBufferSubData(
   int writeTarget,
   Pointer<NativeType> readOffset,
   Pointer<NativeType> writeOffset,
-  int size,
+  Pointer<Uint32> size,
 ) {
   final glCopyBufferSubDataAsFunction = _glCopyBufferSubData
       .cast<
@@ -4723,7 +4737,7 @@ void glCopyBufferSubData(
             Uint32 writeTarget,
             Pointer<NativeType> readOffset,
             Pointer<NativeType> writeOffset,
-            Uint64 size,
+            Pointer<Uint32> size,
           )
         >
       >()
@@ -4733,7 +4747,7 @@ void glCopyBufferSubData(
           int writeTarget,
           Pointer<NativeType> readOffset,
           Pointer<NativeType> writeOffset,
-          int size,
+          Pointer<Uint32> size,
         )
       >();
   return glCopyBufferSubDataAsFunction(
@@ -10601,7 +10615,7 @@ void glClearBufferSubData(
   int target,
   int internalformat,
   Pointer<NativeType> offset,
-  int size,
+  Pointer<Uint32> size,
   int format,
   int type,
   Pointer<NativeType> data,
@@ -10613,7 +10627,7 @@ void glClearBufferSubData(
             Uint32 target,
             Uint32 internalformat,
             Pointer<NativeType> offset,
-            Uint64 size,
+            Pointer<Uint32> size,
             Uint32 format,
             Uint32 type,
             Pointer<NativeType> data,
@@ -10625,7 +10639,7 @@ void glClearBufferSubData(
           int target,
           int internalformat,
           Pointer<NativeType> offset,
-          int size,
+          Pointer<Uint32> size,
           int format,
           int type,
           Pointer<NativeType> data,
@@ -10911,7 +10925,7 @@ late Pointer<NativeFunction<Void Function()>> _glInvalidateBufferSubData;
 void glInvalidateBufferSubData(
   int buffer,
   Pointer<NativeType> offset,
-  int length,
+  Pointer<Uint32> length,
 ) {
   final glInvalidateBufferSubDataAsFunction = _glInvalidateBufferSubData
       .cast<
@@ -10919,12 +10933,16 @@ void glInvalidateBufferSubData(
           Void Function(
             Uint32 buffer,
             Pointer<NativeType> offset,
-            Uint64 length,
+            Pointer<Uint32> length,
           )
         >
       >()
       .asFunction<
-        void Function(int buffer, Pointer<NativeType> offset, int length)
+        void Function(
+          int buffer,
+          Pointer<NativeType> offset,
+          Pointer<Uint32> length,
+        )
       >();
   return glInvalidateBufferSubDataAsFunction(buffer, offset, length);
 }
@@ -11388,7 +11406,7 @@ void glTexBufferRange(
   int internalformat,
   int buffer,
   Pointer<NativeType> offset,
-  int size,
+  Pointer<Uint32> size,
 ) {
   final glTexBufferRangeAsFunction = _glTexBufferRange
       .cast<
@@ -11398,7 +11416,7 @@ void glTexBufferRange(
             Uint32 internalformat,
             Uint32 buffer,
             Pointer<NativeType> offset,
-            Uint64 size,
+            Pointer<Uint32> size,
           )
         >
       >()
@@ -11408,7 +11426,7 @@ void glTexBufferRange(
           int internalformat,
           int buffer,
           Pointer<NativeType> offset,
-          int size,
+          Pointer<Uint32> size,
         )
       >();
   return glTexBufferRangeAsFunction(
@@ -12105,7 +12123,7 @@ late Pointer<NativeFunction<Void Function()>> _glBufferStorage;
 /// ```
 void glBufferStorage(
   int target,
-  int size,
+  Pointer<Uint32> size,
   Pointer<NativeType> data,
   int flags,
 ) {
@@ -12114,14 +12132,19 @@ void glBufferStorage(
         NativeFunction<
           Void Function(
             Uint32 target,
-            Uint64 size,
+            Pointer<Uint32> size,
             Pointer<NativeType> data,
             Uint32 flags,
           )
         >
       >()
       .asFunction<
-        void Function(int target, int size, Pointer<NativeType> data, int flags)
+        void Function(
+          int target,
+          Pointer<Uint32> size,
+          Pointer<NativeType> data,
+          int flags,
+        )
       >();
   return glBufferStorageAsFunction(target, size, data, flags);
 }
@@ -12271,7 +12294,7 @@ void glBindBuffersRange(
   int count,
   Pointer<Uint32> buffers,
   Pointer<Pointer<NativeType>> offsets,
-  Pointer<Uint64> sizes,
+  Pointer<Pointer<Uint32>> sizes,
 ) {
   final glBindBuffersRangeAsFunction = _glBindBuffersRange
       .cast<
@@ -12282,7 +12305,7 @@ void glBindBuffersRange(
             Uint32 count,
             Pointer<Uint32> buffers,
             Pointer<Pointer<NativeType>> offsets,
-            Pointer<Uint64> sizes,
+            Pointer<Pointer<Uint32>> sizes,
           )
         >
       >()
@@ -12293,7 +12316,7 @@ void glBindBuffersRange(
           int count,
           Pointer<Uint32> buffers,
           Pointer<Pointer<NativeType>> offsets,
-          Pointer<Uint64> sizes,
+          Pointer<Pointer<Uint32>> sizes,
         )
       >();
   return glBindBuffersRangeAsFunction(
@@ -12452,7 +12475,7 @@ void glTransformFeedbackBufferRange(
   int index,
   int buffer,
   Pointer<NativeType> offset,
-  int size,
+  Pointer<Uint32> size,
 ) {
   final glTransformFeedbackBufferRangeAsFunction =
       _glTransformFeedbackBufferRange
@@ -12463,7 +12486,7 @@ void glTransformFeedbackBufferRange(
                 Uint32 index,
                 Uint32 buffer,
                 Pointer<NativeType> offset,
-                Uint64 size,
+                Pointer<Uint32> size,
               )
             >
           >()
@@ -12473,7 +12496,7 @@ void glTransformFeedbackBufferRange(
               int index,
               int buffer,
               Pointer<NativeType> offset,
-              int size,
+              Pointer<Uint32> size,
             )
           >();
   return glTransformFeedbackBufferRangeAsFunction(
@@ -12581,7 +12604,7 @@ late Pointer<NativeFunction<Void Function()>> _glNamedBufferStorage;
 /// ```
 void glNamedBufferStorage(
   int buffer,
-  int size,
+  Pointer<Uint32> size,
   Pointer<NativeType> data,
   int flags,
 ) {
@@ -12590,14 +12613,19 @@ void glNamedBufferStorage(
         NativeFunction<
           Void Function(
             Uint32 buffer,
-            Uint64 size,
+            Pointer<Uint32> size,
             Pointer<NativeType> data,
             Uint32 flags,
           )
         >
       >()
       .asFunction<
-        void Function(int buffer, int size, Pointer<NativeType> data, int flags)
+        void Function(
+          int buffer,
+          Pointer<Uint32> size,
+          Pointer<NativeType> data,
+          int flags,
+        )
       >();
   return glNamedBufferStorageAsFunction(buffer, size, data, flags);
 }
@@ -12610,7 +12638,7 @@ late Pointer<NativeFunction<Void Function()>> _glNamedBufferData;
 /// ```
 void glNamedBufferData(
   int buffer,
-  int size,
+  Pointer<Uint32> size,
   Pointer<NativeType> data,
   int usage,
 ) {
@@ -12619,14 +12647,19 @@ void glNamedBufferData(
         NativeFunction<
           Void Function(
             Uint32 buffer,
-            Uint64 size,
+            Pointer<Uint32> size,
             Pointer<NativeType> data,
             Uint32 usage,
           )
         >
       >()
       .asFunction<
-        void Function(int buffer, int size, Pointer<NativeType> data, int usage)
+        void Function(
+          int buffer,
+          Pointer<Uint32> size,
+          Pointer<NativeType> data,
+          int usage,
+        )
       >();
   return glNamedBufferDataAsFunction(buffer, size, data, usage);
 }
@@ -12640,7 +12673,7 @@ late Pointer<NativeFunction<Void Function()>> _glNamedBufferSubData;
 void glNamedBufferSubData(
   int buffer,
   Pointer<NativeType> offset,
-  int size,
+  Pointer<Uint32> size,
   Pointer<NativeType> data,
 ) {
   final glNamedBufferSubDataAsFunction = _glNamedBufferSubData
@@ -12649,7 +12682,7 @@ void glNamedBufferSubData(
           Void Function(
             Uint32 buffer,
             Pointer<NativeType> offset,
-            Uint64 size,
+            Pointer<Uint32> size,
             Pointer<NativeType> data,
           )
         >
@@ -12658,7 +12691,7 @@ void glNamedBufferSubData(
         void Function(
           int buffer,
           Pointer<NativeType> offset,
-          int size,
+          Pointer<Uint32> size,
           Pointer<NativeType> data,
         )
       >();
@@ -12676,7 +12709,7 @@ void glCopyNamedBufferSubData(
   int writeBuffer,
   Pointer<NativeType> readOffset,
   Pointer<NativeType> writeOffset,
-  int size,
+  Pointer<Uint32> size,
 ) {
   final glCopyNamedBufferSubDataAsFunction = _glCopyNamedBufferSubData
       .cast<
@@ -12686,7 +12719,7 @@ void glCopyNamedBufferSubData(
             Uint32 writeBuffer,
             Pointer<NativeType> readOffset,
             Pointer<NativeType> writeOffset,
-            Uint64 size,
+            Pointer<Uint32> size,
           )
         >
       >()
@@ -12696,7 +12729,7 @@ void glCopyNamedBufferSubData(
           int writeBuffer,
           Pointer<NativeType> readOffset,
           Pointer<NativeType> writeOffset,
-          int size,
+          Pointer<Uint32> size,
         )
       >();
   return glCopyNamedBufferSubDataAsFunction(
@@ -12761,7 +12794,7 @@ void glClearNamedBufferSubData(
   int buffer,
   int internalformat,
   Pointer<NativeType> offset,
-  int size,
+  Pointer<Uint32> size,
   int format,
   int type,
   Pointer<NativeType> data,
@@ -12773,7 +12806,7 @@ void glClearNamedBufferSubData(
             Uint32 buffer,
             Uint32 internalformat,
             Pointer<NativeType> offset,
-            Uint64 size,
+            Pointer<Uint32> size,
             Uint32 format,
             Uint32 type,
             Pointer<NativeType> data,
@@ -12785,7 +12818,7 @@ void glClearNamedBufferSubData(
           int buffer,
           int internalformat,
           Pointer<NativeType> offset,
-          int size,
+          Pointer<Uint32> size,
           int format,
           int type,
           Pointer<NativeType> data,
@@ -12828,7 +12861,7 @@ late Pointer<NativeFunction<Void Function()>> _glMapNamedBufferRange;
 Pointer<NativeType> glMapNamedBufferRange(
   int buffer,
   Pointer<NativeType> offset,
-  int length,
+  Pointer<Uint32> length,
   int access,
 ) {
   final glMapNamedBufferRangeAsFunction = _glMapNamedBufferRange
@@ -12837,7 +12870,7 @@ Pointer<NativeType> glMapNamedBufferRange(
           Pointer<NativeType> Function(
             Uint32 buffer,
             Pointer<NativeType> offset,
-            Uint64 length,
+            Pointer<Uint32> length,
             Uint32 access,
           )
         >
@@ -12846,7 +12879,7 @@ Pointer<NativeType> glMapNamedBufferRange(
         Pointer<NativeType> Function(
           int buffer,
           Pointer<NativeType> offset,
-          int length,
+          Pointer<Uint32> length,
           int access,
         )
       >();
@@ -12875,7 +12908,7 @@ late Pointer<NativeFunction<Void Function()>> _glFlushMappedNamedBufferRange;
 void glFlushMappedNamedBufferRange(
   int buffer,
   Pointer<NativeType> offset,
-  int length,
+  Pointer<Uint32> length,
 ) {
   final glFlushMappedNamedBufferRangeAsFunction = _glFlushMappedNamedBufferRange
       .cast<
@@ -12883,12 +12916,16 @@ void glFlushMappedNamedBufferRange(
           Void Function(
             Uint32 buffer,
             Pointer<NativeType> offset,
-            Uint64 length,
+            Pointer<Uint32> length,
           )
         >
       >()
       .asFunction<
-        void Function(int buffer, Pointer<NativeType> offset, int length)
+        void Function(
+          int buffer,
+          Pointer<NativeType> offset,
+          Pointer<Uint32> length,
+        )
       >();
   return glFlushMappedNamedBufferRangeAsFunction(buffer, offset, length);
 }
@@ -12975,7 +13012,7 @@ late Pointer<NativeFunction<Void Function()>> _glGetNamedBufferSubData;
 void glGetNamedBufferSubData(
   int buffer,
   Pointer<NativeType> offset,
-  int size,
+  Pointer<Uint32> size,
   Pointer<NativeType> data,
 ) {
   final glGetNamedBufferSubDataAsFunction = _glGetNamedBufferSubData
@@ -12984,7 +13021,7 @@ void glGetNamedBufferSubData(
           Void Function(
             Uint32 buffer,
             Pointer<NativeType> offset,
-            Uint64 size,
+            Pointer<Uint32> size,
             Pointer<NativeType> data,
           )
         >
@@ -12993,7 +13030,7 @@ void glGetNamedBufferSubData(
         void Function(
           int buffer,
           Pointer<NativeType> offset,
-          int size,
+          Pointer<Uint32> size,
           Pointer<NativeType> data,
         )
       >();
@@ -13780,7 +13817,7 @@ void glTextureBufferRange(
   int internalformat,
   int buffer,
   Pointer<NativeType> offset,
-  int size,
+  Pointer<Uint32> size,
 ) {
   final glTextureBufferRangeAsFunction = _glTextureBufferRange
       .cast<
@@ -13790,7 +13827,7 @@ void glTextureBufferRange(
             Uint32 internalformat,
             Uint32 buffer,
             Pointer<NativeType> offset,
-            Uint64 size,
+            Pointer<Uint32> size,
           )
         >
       >()
@@ -13800,7 +13837,7 @@ void glTextureBufferRange(
           int internalformat,
           int buffer,
           Pointer<NativeType> offset,
-          int size,
+          Pointer<Uint32> size,
         )
       >();
   return glTextureBufferRangeAsFunction(
@@ -20814,7 +20851,7 @@ late Pointer<NativeFunction<Void Function()>> _glBufferPageCommitmentArb;
 void glBufferPageCommitmentArb(
   int target,
   Pointer<NativeType> offset,
-  int size,
+  Pointer<Uint32> size,
   int commit,
 ) {
   final glBufferPageCommitmentArbAsFunction = _glBufferPageCommitmentArb
@@ -20823,7 +20860,7 @@ void glBufferPageCommitmentArb(
           Void Function(
             Uint32 target,
             Pointer<NativeType> offset,
-            Uint64 size,
+            Pointer<Uint32> size,
             Int32 commit,
           )
         >
@@ -20832,7 +20869,7 @@ void glBufferPageCommitmentArb(
         void Function(
           int target,
           Pointer<NativeType> offset,
-          int size,
+          Pointer<Uint32> size,
           int commit,
         )
       >();
@@ -20848,7 +20885,7 @@ late Pointer<NativeFunction<Void Function()>> _glNamedBufferPageCommitmentExt;
 void glNamedBufferPageCommitmentExt(
   int buffer,
   Pointer<NativeType> offset,
-  int size,
+  Pointer<Uint32> size,
   int commit,
 ) {
   final glNamedBufferPageCommitmentExtAsFunction =
@@ -20858,7 +20895,7 @@ void glNamedBufferPageCommitmentExt(
               Void Function(
                 Uint32 buffer,
                 Pointer<NativeType> offset,
-                Uint64 size,
+                Pointer<Uint32> size,
                 Int32 commit,
               )
             >
@@ -20867,7 +20904,7 @@ void glNamedBufferPageCommitmentExt(
             void Function(
               int buffer,
               Pointer<NativeType> offset,
-              int size,
+              Pointer<Uint32> size,
               int commit,
             )
           >();
@@ -20883,7 +20920,7 @@ late Pointer<NativeFunction<Void Function()>> _glNamedBufferPageCommitmentArb;
 void glNamedBufferPageCommitmentArb(
   int buffer,
   Pointer<NativeType> offset,
-  int size,
+  Pointer<Uint32> size,
   int commit,
 ) {
   final glNamedBufferPageCommitmentArbAsFunction =
@@ -20893,7 +20930,7 @@ void glNamedBufferPageCommitmentArb(
               Void Function(
                 Uint32 buffer,
                 Pointer<NativeType> offset,
-                Uint64 size,
+                Pointer<Uint32> size,
                 Int32 commit,
               )
             >
@@ -20902,7 +20939,7 @@ void glNamedBufferPageCommitmentArb(
             void Function(
               int buffer,
               Pointer<NativeType> offset,
-              int size,
+              Pointer<Uint32> size,
               int commit,
             )
           >();
@@ -27167,16 +27204,24 @@ late Pointer<NativeFunction<Void Function()>> _glFlushMappedBufferRangeApple;
 void glFlushMappedBufferRangeApple(
   int target,
   Pointer<NativeType> offset,
-  int size,
+  Pointer<Uint32> size,
 ) {
   final glFlushMappedBufferRangeAppleAsFunction = _glFlushMappedBufferRangeApple
       .cast<
         NativeFunction<
-          Void Function(Uint32 target, Pointer<NativeType> offset, Uint64 size)
+          Void Function(
+            Uint32 target,
+            Pointer<NativeType> offset,
+            Pointer<Uint32> size,
+          )
         >
       >()
       .asFunction<
-        void Function(int target, Pointer<NativeType> offset, int size)
+        void Function(
+          int target,
+          Pointer<NativeType> offset,
+          Pointer<Uint32> size,
+        )
       >();
   return glFlushMappedBufferRangeAppleAsFunction(target, offset, size);
 }
@@ -34590,7 +34635,7 @@ late Pointer<NativeFunction<Void Function()>> _glNamedBufferDataExt;
 /// ```
 void glNamedBufferDataExt(
   int buffer,
-  int size,
+  Pointer<Uint32> size,
   Pointer<NativeType> data,
   int usage,
 ) {
@@ -34599,14 +34644,19 @@ void glNamedBufferDataExt(
         NativeFunction<
           Void Function(
             Uint32 buffer,
-            Uint64 size,
+            Pointer<Uint32> size,
             Pointer<NativeType> data,
             Uint32 usage,
           )
         >
       >()
       .asFunction<
-        void Function(int buffer, int size, Pointer<NativeType> data, int usage)
+        void Function(
+          int buffer,
+          Pointer<Uint32> size,
+          Pointer<NativeType> data,
+          int usage,
+        )
       >();
   return glNamedBufferDataExtAsFunction(buffer, size, data, usage);
 }
@@ -34620,7 +34670,7 @@ late Pointer<NativeFunction<Void Function()>> _glNamedBufferSubDataExt;
 void glNamedBufferSubDataExt(
   int buffer,
   Pointer<NativeType> offset,
-  int size,
+  Pointer<Uint32> size,
   Pointer<NativeType> data,
 ) {
   final glNamedBufferSubDataExtAsFunction = _glNamedBufferSubDataExt
@@ -34629,7 +34679,7 @@ void glNamedBufferSubDataExt(
           Void Function(
             Uint32 buffer,
             Pointer<NativeType> offset,
-            Uint64 size,
+            Pointer<Uint32> size,
             Pointer<NativeType> data,
           )
         >
@@ -34638,7 +34688,7 @@ void glNamedBufferSubDataExt(
         void Function(
           int buffer,
           Pointer<NativeType> offset,
-          int size,
+          Pointer<Uint32> size,
           Pointer<NativeType> data,
         )
       >();
@@ -34739,7 +34789,7 @@ late Pointer<NativeFunction<Void Function()>> _glGetNamedBufferSubDataExt;
 void glGetNamedBufferSubDataExt(
   int buffer,
   Pointer<NativeType> offset,
-  int size,
+  Pointer<Uint32> size,
   Pointer<NativeType> data,
 ) {
   final glGetNamedBufferSubDataExtAsFunction = _glGetNamedBufferSubDataExt
@@ -34748,7 +34798,7 @@ void glGetNamedBufferSubDataExt(
           Void Function(
             Uint32 buffer,
             Pointer<NativeType> offset,
-            Uint64 size,
+            Pointer<Uint32> size,
             Pointer<NativeType> data,
           )
         >
@@ -34757,7 +34807,7 @@ void glGetNamedBufferSubDataExt(
         void Function(
           int buffer,
           Pointer<NativeType> offset,
-          int size,
+          Pointer<Uint32> size,
           Pointer<NativeType> data,
         )
       >();
@@ -37551,7 +37601,7 @@ void glNamedCopyBufferSubDataExt(
   int writeBuffer,
   Pointer<NativeType> readOffset,
   Pointer<NativeType> writeOffset,
-  int size,
+  Pointer<Uint32> size,
 ) {
   final glNamedCopyBufferSubDataExtAsFunction = _glNamedCopyBufferSubDataExt
       .cast<
@@ -37561,7 +37611,7 @@ void glNamedCopyBufferSubDataExt(
             Uint32 writeBuffer,
             Pointer<NativeType> readOffset,
             Pointer<NativeType> writeOffset,
-            Uint64 size,
+            Pointer<Uint32> size,
           )
         >
       >()
@@ -37571,7 +37621,7 @@ void glNamedCopyBufferSubDataExt(
           int writeBuffer,
           Pointer<NativeType> readOffset,
           Pointer<NativeType> writeOffset,
-          int size,
+          Pointer<Uint32> size,
         )
       >();
   return glNamedCopyBufferSubDataExtAsFunction(
@@ -38432,7 +38482,7 @@ late Pointer<NativeFunction<Void Function()>> _glMapNamedBufferRangeExt;
 Pointer<NativeType> glMapNamedBufferRangeExt(
   int buffer,
   Pointer<NativeType> offset,
-  int length,
+  Pointer<Uint32> length,
   int access,
 ) {
   final glMapNamedBufferRangeExtAsFunction = _glMapNamedBufferRangeExt
@@ -38441,7 +38491,7 @@ Pointer<NativeType> glMapNamedBufferRangeExt(
           Pointer<NativeType> Function(
             Uint32 buffer,
             Pointer<NativeType> offset,
-            Uint64 length,
+            Pointer<Uint32> length,
             Uint32 access,
           )
         >
@@ -38450,7 +38500,7 @@ Pointer<NativeType> glMapNamedBufferRangeExt(
         Pointer<NativeType> Function(
           int buffer,
           Pointer<NativeType> offset,
-          int length,
+          Pointer<Uint32> length,
           int access,
         )
       >();
@@ -38466,7 +38516,7 @@ late Pointer<NativeFunction<Void Function()>> _glFlushMappedNamedBufferRangeExt;
 void glFlushMappedNamedBufferRangeExt(
   int buffer,
   Pointer<NativeType> offset,
-  int length,
+  Pointer<Uint32> length,
 ) {
   final glFlushMappedNamedBufferRangeExtAsFunction =
       _glFlushMappedNamedBufferRangeExt
@@ -38475,12 +38525,16 @@ void glFlushMappedNamedBufferRangeExt(
               Void Function(
                 Uint32 buffer,
                 Pointer<NativeType> offset,
-                Uint64 length,
+                Pointer<Uint32> length,
               )
             >
           >()
           .asFunction<
-            void Function(int buffer, Pointer<NativeType> offset, int length)
+            void Function(
+              int buffer,
+              Pointer<NativeType> offset,
+              Pointer<Uint32> length,
+            )
           >();
   return glFlushMappedNamedBufferRangeExtAsFunction(buffer, offset, length);
 }
@@ -38493,7 +38547,7 @@ late Pointer<NativeFunction<Void Function()>> _glNamedBufferStorageExt;
 /// ```
 void glNamedBufferStorageExt(
   int buffer,
-  int size,
+  Pointer<Uint32> size,
   Pointer<NativeType> data,
   int flags,
 ) {
@@ -38502,14 +38556,19 @@ void glNamedBufferStorageExt(
         NativeFunction<
           Void Function(
             Uint32 buffer,
-            Uint64 size,
+            Pointer<Uint32> size,
             Pointer<NativeType> data,
             Uint32 flags,
           )
         >
       >()
       .asFunction<
-        void Function(int buffer, int size, Pointer<NativeType> data, int flags)
+        void Function(
+          int buffer,
+          Pointer<Uint32> size,
+          Pointer<NativeType> data,
+          int flags,
+        )
       >();
   return glNamedBufferStorageExtAsFunction(buffer, size, data, flags);
 }
@@ -38566,8 +38625,8 @@ late Pointer<NativeFunction<Void Function()>> _glClearNamedBufferSubDataExt;
 void glClearNamedBufferSubDataExt(
   int buffer,
   int internalformat,
-  int offset,
-  int size,
+  Pointer<Uint32> offset,
+  Pointer<Uint32> size,
   int format,
   int type,
   Pointer<NativeType> data,
@@ -38578,8 +38637,8 @@ void glClearNamedBufferSubDataExt(
           Void Function(
             Uint32 buffer,
             Uint32 internalformat,
-            Uint64 offset,
-            Uint64 size,
+            Pointer<Uint32> offset,
+            Pointer<Uint32> size,
             Uint32 format,
             Uint32 type,
             Pointer<NativeType> data,
@@ -38590,8 +38649,8 @@ void glClearNamedBufferSubDataExt(
         void Function(
           int buffer,
           int internalformat,
-          int offset,
-          int size,
+          Pointer<Uint32> offset,
+          Pointer<Uint32> size,
           int format,
           int type,
           Pointer<NativeType> data,
@@ -39305,7 +39364,7 @@ void glTextureBufferRangeExt(
   int internalformat,
   int buffer,
   Pointer<NativeType> offset,
-  int size,
+  Pointer<Uint32> size,
 ) {
   final glTextureBufferRangeExtAsFunction = _glTextureBufferRangeExt
       .cast<
@@ -39316,7 +39375,7 @@ void glTextureBufferRangeExt(
             Uint32 internalformat,
             Uint32 buffer,
             Pointer<NativeType> offset,
-            Uint64 size,
+            Pointer<Uint32> size,
           )
         >
       >()
@@ -39327,7 +39386,7 @@ void glTextureBufferRangeExt(
           int internalformat,
           int buffer,
           Pointer<NativeType> offset,
-          int size,
+          Pointer<Uint32> size,
         )
       >();
   return glTextureBufferRangeExtAsFunction(
@@ -40105,7 +40164,7 @@ late Pointer<NativeFunction<Void Function()>> _glBufferStorageExternalExt;
 void glBufferStorageExternalExt(
   int target,
   Pointer<NativeType> offset,
-  int size,
+  Pointer<Uint32> size,
   Pointer<NativeType> clientBuffer,
   int flags,
 ) {
@@ -40115,7 +40174,7 @@ void glBufferStorageExternalExt(
           Void Function(
             Uint32 target,
             Pointer<NativeType> offset,
-            Uint64 size,
+            Pointer<Uint32> size,
             Pointer<NativeType> clientBuffer,
             Uint32 flags,
           )
@@ -40125,7 +40184,7 @@ void glBufferStorageExternalExt(
         void Function(
           int target,
           Pointer<NativeType> offset,
-          int size,
+          Pointer<Uint32> size,
           Pointer<NativeType> clientBuffer,
           int flags,
         )
@@ -40148,7 +40207,7 @@ late Pointer<NativeFunction<Void Function()>> _glNamedBufferStorageExternalExt;
 void glNamedBufferStorageExternalExt(
   int buffer,
   Pointer<NativeType> offset,
-  int size,
+  Pointer<Uint32> size,
   Pointer<NativeType> clientBuffer,
   int flags,
 ) {
@@ -40159,7 +40218,7 @@ void glNamedBufferStorageExternalExt(
               Void Function(
                 Uint32 buffer,
                 Pointer<NativeType> offset,
-                Uint64 size,
+                Pointer<Uint32> size,
                 Pointer<NativeType> clientBuffer,
                 Uint32 flags,
               )
@@ -40169,7 +40228,7 @@ void glNamedBufferStorageExternalExt(
             void Function(
               int buffer,
               Pointer<NativeType> offset,
-              int size,
+              Pointer<Uint32> size,
               Pointer<NativeType> clientBuffer,
               int flags,
             )
@@ -42059,20 +42118,25 @@ late Pointer<NativeFunction<Void Function()>> _glBufferStorageMemExt;
 /// ```c
 /// GLAPI void APIENTRY glBufferStorageMemEXT (GLenum target, GLsizeiptr size, GLuint memory, GLuint64 offset)
 /// ```
-void glBufferStorageMemExt(int target, int size, int memory, int offset) {
+void glBufferStorageMemExt(
+  int target,
+  Pointer<Uint32> size,
+  int memory,
+  int offset,
+) {
   final glBufferStorageMemExtAsFunction = _glBufferStorageMemExt
       .cast<
         NativeFunction<
           Void Function(
             Uint32 target,
-            Uint64 size,
+            Pointer<Uint32> size,
             Uint32 memory,
             Uint64 offset,
           )
         >
       >()
       .asFunction<
-        void Function(int target, int size, int memory, int offset)
+        void Function(int target, Pointer<Uint32> size, int memory, int offset)
       >();
   return glBufferStorageMemExtAsFunction(target, size, memory, offset);
 }
@@ -42307,20 +42371,25 @@ late Pointer<NativeFunction<Void Function()>> _glNamedBufferStorageMemExt;
 /// ```c
 /// GLAPI void APIENTRY glNamedBufferStorageMemEXT (GLuint buffer, GLsizeiptr size, GLuint memory, GLuint64 offset)
 /// ```
-void glNamedBufferStorageMemExt(int buffer, int size, int memory, int offset) {
+void glNamedBufferStorageMemExt(
+  int buffer,
+  Pointer<Uint32> size,
+  int memory,
+  int offset,
+) {
   final glNamedBufferStorageMemExtAsFunction = _glNamedBufferStorageMemExt
       .cast<
         NativeFunction<
           Void Function(
             Uint32 buffer,
-            Uint64 size,
+            Pointer<Uint32> size,
             Uint32 memory,
             Uint64 offset,
           )
         >
       >()
       .asFunction<
-        void Function(int buffer, int size, int memory, int offset)
+        void Function(int buffer, Pointer<Uint32> size, int memory, int offset)
       >();
   return glNamedBufferStorageMemExtAsFunction(buffer, size, memory, offset);
 }
@@ -44343,7 +44412,7 @@ void glBindBufferRangeExt(
   int index,
   int buffer,
   Pointer<NativeType> offset,
-  int size,
+  Pointer<Uint32> size,
 ) {
   final glBindBufferRangeExtAsFunction = _glBindBufferRangeExt
       .cast<
@@ -44353,7 +44422,7 @@ void glBindBufferRangeExt(
             Uint32 index,
             Uint32 buffer,
             Pointer<NativeType> offset,
-            Uint64 size,
+            Pointer<Uint32> size,
           )
         >
       >()
@@ -44363,7 +44432,7 @@ void glBindBufferRangeExt(
           int index,
           int buffer,
           Pointer<NativeType> offset,
-          int size,
+          Pointer<Uint32> size,
         )
       >();
   return glBindBufferRangeExtAsFunction(target, index, buffer, offset, size);
@@ -47312,7 +47381,7 @@ int glAsyncCopyBufferSubDataNvx(
   int writeBuffer,
   Pointer<NativeType> readOffset,
   Pointer<NativeType> writeOffset,
-  int size,
+  Pointer<Uint32> size,
   int signalSemaphoreCount,
   Pointer<Uint32> signalSemaphoreArray,
   Pointer<Uint64> signalValueArray,
@@ -47330,7 +47399,7 @@ int glAsyncCopyBufferSubDataNvx(
             Uint32 writeBuffer,
             Pointer<NativeType> readOffset,
             Pointer<NativeType> writeOffset,
-            Uint64 size,
+            Pointer<Uint32> size,
             Uint32 signalSemaphoreCount,
             Pointer<Uint32> signalSemaphoreArray,
             Pointer<Uint64> signalValueArray,
@@ -47348,7 +47417,7 @@ int glAsyncCopyBufferSubDataNvx(
           int writeBuffer,
           Pointer<NativeType> readOffset,
           Pointer<NativeType> writeOffset,
-          int size,
+          Pointer<Uint32> size,
           int signalSemaphoreCount,
           Pointer<Uint32> signalSemaphoreArray,
           Pointer<Uint64> signalValueArray,
@@ -47496,7 +47565,7 @@ void glLgpuNamedBufferSubDataNvx(
   int gpuMask,
   int buffer,
   Pointer<NativeType> offset,
-  int size,
+  Pointer<Uint32> size,
   Pointer<NativeType> data,
 ) {
   final glLgpuNamedBufferSubDataNvxAsFunction = _glLgpuNamedBufferSubDataNvx
@@ -47506,7 +47575,7 @@ void glLgpuNamedBufferSubDataNvx(
             Uint32 gpuMask,
             Uint32 buffer,
             Pointer<NativeType> offset,
-            Uint64 size,
+            Pointer<Uint32> size,
             Pointer<NativeType> data,
           )
         >
@@ -47516,7 +47585,7 @@ void glLgpuNamedBufferSubDataNvx(
           int gpuMask,
           int buffer,
           Pointer<NativeType> offset,
-          int size,
+          Pointer<Uint32> size,
           Pointer<NativeType> data,
         )
       >();
@@ -49820,7 +49889,7 @@ void glMulticastBufferSubDataNv(
   int gpuMask,
   int buffer,
   Pointer<NativeType> offset,
-  int size,
+  Pointer<Uint32> size,
   Pointer<NativeType> data,
 ) {
   final glMulticastBufferSubDataNvAsFunction = _glMulticastBufferSubDataNv
@@ -49830,7 +49899,7 @@ void glMulticastBufferSubDataNv(
             Uint32 gpuMask,
             Uint32 buffer,
             Pointer<NativeType> offset,
-            Uint64 size,
+            Pointer<Uint32> size,
             Pointer<NativeType> data,
           )
         >
@@ -49840,7 +49909,7 @@ void glMulticastBufferSubDataNv(
           int gpuMask,
           int buffer,
           Pointer<NativeType> offset,
-          int size,
+          Pointer<Uint32> size,
           Pointer<NativeType> data,
         )
       >();
@@ -49866,7 +49935,7 @@ void glMulticastCopyBufferSubDataNv(
   int writeBuffer,
   Pointer<NativeType> readOffset,
   Pointer<NativeType> writeOffset,
-  int size,
+  Pointer<Uint32> size,
 ) {
   final glMulticastCopyBufferSubDataNvAsFunction =
       _glMulticastCopyBufferSubDataNv
@@ -49879,7 +49948,7 @@ void glMulticastCopyBufferSubDataNv(
                 Uint32 writeBuffer,
                 Pointer<NativeType> readOffset,
                 Pointer<NativeType> writeOffset,
-                Uint64 size,
+                Pointer<Uint32> size,
               )
             >
           >()
@@ -49891,7 +49960,7 @@ void glMulticastCopyBufferSubDataNv(
               int writeBuffer,
               Pointer<NativeType> readOffset,
               Pointer<NativeType> writeOffset,
-              int size,
+              Pointer<Uint32> size,
             )
           >();
   return glMulticastCopyBufferSubDataNvAsFunction(
@@ -51575,7 +51644,7 @@ late Pointer<NativeFunction<Void Function()>> _glBufferPageCommitmentMemNv;
 void glBufferPageCommitmentMemNv(
   int target,
   Pointer<NativeType> offset,
-  int size,
+  Pointer<Uint32> size,
   int memory,
   int memOffset,
   int commit,
@@ -51586,7 +51655,7 @@ void glBufferPageCommitmentMemNv(
           Void Function(
             Uint32 target,
             Pointer<NativeType> offset,
-            Uint64 size,
+            Pointer<Uint32> size,
             Uint32 memory,
             Uint64 memOffset,
             Int32 commit,
@@ -51597,7 +51666,7 @@ void glBufferPageCommitmentMemNv(
         void Function(
           int target,
           Pointer<NativeType> offset,
-          int size,
+          Pointer<Uint32> size,
           int memory,
           int memOffset,
           int commit,
@@ -51693,7 +51762,7 @@ late Pointer<NativeFunction<Void Function()>> _glNamedBufferPageCommitmentMemNv;
 void glNamedBufferPageCommitmentMemNv(
   int buffer,
   Pointer<NativeType> offset,
-  int size,
+  Pointer<Uint32> size,
   int memory,
   int memOffset,
   int commit,
@@ -51705,7 +51774,7 @@ void glNamedBufferPageCommitmentMemNv(
               Void Function(
                 Uint32 buffer,
                 Pointer<NativeType> offset,
-                Uint64 size,
+                Pointer<Uint32> size,
                 Uint32 memory,
                 Uint64 memOffset,
                 Int32 commit,
@@ -51716,7 +51785,7 @@ void glNamedBufferPageCommitmentMemNv(
             void Function(
               int buffer,
               Pointer<NativeType> offset,
-              int size,
+              Pointer<Uint32> size,
               int memory,
               int memOffset,
               int commit,
@@ -53735,7 +53804,7 @@ late Pointer<NativeFunction<Void Function()>> _glPathMemoryGlyphIndexArrayNv;
 int glPathMemoryGlyphIndexArrayNv(
   int firstPathName,
   int fontTarget,
-  int fontSize,
+  Pointer<Uint32> fontSize,
   Pointer<NativeType> fontData,
   int faceIndex,
   int firstGlyphIndex,
@@ -53749,7 +53818,7 @@ int glPathMemoryGlyphIndexArrayNv(
           Uint32 Function(
             Uint32 firstPathName,
             Uint32 fontTarget,
-            Uint64 fontSize,
+            Pointer<Uint32> fontSize,
             Pointer<NativeType> fontData,
             Uint32 faceIndex,
             Uint32 firstGlyphIndex,
@@ -53763,7 +53832,7 @@ int glPathMemoryGlyphIndexArrayNv(
         int Function(
           int firstPathName,
           int fontTarget,
-          int fontSize,
+          Pointer<Uint32> fontSize,
           Pointer<NativeType> fontData,
           int faceIndex,
           int firstGlyphIndex,
@@ -55860,7 +55929,7 @@ void glBindBufferRangeNv(
   int index,
   int buffer,
   Pointer<NativeType> offset,
-  int size,
+  Pointer<Uint32> size,
 ) {
   final glBindBufferRangeNvAsFunction = _glBindBufferRangeNv
       .cast<
@@ -55870,7 +55939,7 @@ void glBindBufferRangeNv(
             Uint32 index,
             Uint32 buffer,
             Pointer<NativeType> offset,
-            Uint64 size,
+            Pointer<Uint32> size,
           )
         >
       >()
@@ -55880,7 +55949,7 @@ void glBindBufferRangeNv(
           int index,
           int buffer,
           Pointer<NativeType> offset,
-          int size,
+          Pointer<Uint32> size,
         )
       >();
   return glBindBufferRangeNvAsFunction(target, index, buffer, offset, size);
@@ -56831,7 +56900,12 @@ late Pointer<NativeFunction<Void Function()>> _glBufferAddressRangeNv;
 /// ```c
 /// GLAPI void APIENTRY glBufferAddressRangeNV (GLenum pname, GLuint index, GLuint64EXT address, GLsizeiptr length)
 /// ```
-void glBufferAddressRangeNv(int pname, int index, int address, int length) {
+void glBufferAddressRangeNv(
+  int pname,
+  int index,
+  int address,
+  Pointer<Uint32> length,
+) {
   final glBufferAddressRangeNvAsFunction = _glBufferAddressRangeNv
       .cast<
         NativeFunction<
@@ -56839,12 +56913,12 @@ void glBufferAddressRangeNv(int pname, int index, int address, int length) {
             Uint32 pname,
             Uint32 index,
             Uint64 address,
-            Uint64 length,
+            Pointer<Uint32> length,
           )
         >
       >()
       .asFunction<
-        void Function(int pname, int index, int address, int length)
+        void Function(int pname, int index, int address, Pointer<Uint32> length)
       >();
   return glBufferAddressRangeNvAsFunction(pname, index, address, length);
 }
@@ -61937,7 +62011,7 @@ void glReplacementCodeuiTexCoord2fColor4fNormal3fVertex3fvSun(
   );
 }
 
-void sdlGlLoader() {
+void _sdlOpenglGlextLoader() {
   _glBlendFuncSeparate = sdlGlGetProcAddressEx('glBlendFuncSeparate');
   _glMultiDrawArrays = sdlGlGetProcAddressEx('glMultiDrawArrays');
   _glMultiDrawElements = sdlGlGetProcAddressEx('glMultiDrawElements');

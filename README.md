@@ -24,8 +24,6 @@ SDL3_image.dll
 SDL3_mixer.dll  
 SDL3_net.dll  
 SDL3_ttf.dll  
-opengl32.dll  
-(This's no need to call out specifically! Find this in the following path: C:\Windows\System32\opengl32.dll)  
 
 ## Linux (or Android, Fuchsia) requires so files.
 
@@ -34,7 +32,6 @@ libSDL3_image.so
 libSDL3_mixer.so  
 libSDL3_net.so  
 libSDL3_ttf.so  
-libGL.so  
 
 ## MacOS (or iOS) requires dylib files.
 
@@ -43,7 +40,6 @@ libSDL3_image.dylib
 libSDL3_mixer.dylib  
 libSDL3_net.dylib  
 libSDL3_ttf.dylib  
-libGL.dylib  
 
 ## And more.
 
@@ -55,7 +51,6 @@ SdlDynamicLibraryService().set('image', 'YOUR_SDL3_image_ENVIONMENT.dylib');
 SdlDynamicLibraryService().set('mixer', 'YOUR_SDL3_mixer_ENVIONMENT.dylib');
 SdlDynamicLibraryService().set('net', 'YOUR_SDL3_net_ENVIONMENT.dylib');
 SdlDynamicLibraryService().set('ttf', 'YOUR_SDL3_ttf_ENVIONMENT.dylib');
-SdlDynamicLibraryService().set('opengl', 'YOUR_opengl_ENVIONMENT.dylib');
 if (sdlInit(SDL_INIT_VIDEO)) {
   // success
 }
@@ -72,6 +67,10 @@ Windows 64bit & Linux (Tested under Windows 10 WSL2 environment)
 Currently, we are providing it on an experimental basis using the dll compiled below.
 
 https://github.com/sansuido/build-sdl3
+
+# Example
+
+https://github.com/sansuido/sdl3_learnopengl/
 
 # Author
 

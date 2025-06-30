@@ -13,6 +13,8 @@ part of '../sdl.dart';
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
+/// \sa SDL_GetTicksNS
+///
 /// ```c
 /// extern SDL_DECLSPEC Uint64 SDLCALL SDL_GetTicks(void)
 /// ```
