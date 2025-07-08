@@ -35,7 +35,8 @@ int sdlGetNumVideoDrivers() {
 /// to be proper names.
 ///
 /// \param index the index of a video driver.
-/// \returns the name of the video driver with the given **index**.
+/// \returns the name of the video driver with the given **index**, or NULL if
+/// index is out of bounds.
 ///
 /// \threadsafety This function should only be called on the main thread.
 ///

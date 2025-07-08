@@ -1,3 +1,6 @@
+## 2.1.1
+- SDL3-2025-07-06
+
 ## 2.1.0
 - SDL3-2025-06-29
 - [fixed] Fixed a bug that some OpenGL functions were not referenced(`glActiveTexture` and more).
