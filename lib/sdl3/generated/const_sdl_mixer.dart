@@ -36,6 +36,7 @@ const MUS_GME = 9;
 const MIX_CHANNEL_POST = -2;
 const MIX_EFFECTSMAXSPEED = 'MIX_EFFECTSMAXSPEED';
 
+/// {@category mixer}
 class MixkInit {
   static const flac = MIX_INIT_FLAC;
   static const mod = MIX_INIT_MOD;
@@ -46,6 +47,7 @@ class MixkInit {
   static const wavpack = MIX_INIT_WAVPACK;
 }
 
+/// {@category mixer}
 class Mus {
   static const none = MUS_NONE;
   static const wav = MUS_WAV;

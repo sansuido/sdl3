@@ -2,6 +2,7 @@
 part of '../sdl.dart';
 
 // SDL_AssertData
+/// {@category assert}
 final class SdlAssertData extends Struct {
   // [0]+(1)
   @Uint8()
@@ -31,9 +32,11 @@ final class SdlAssertData extends Struct {
 }
 
 // SDL_AsyncIO
+/// {@category asyncio}
 final class SdlAsyncIo extends Opaque {}
 
 // SDL_AsyncIOOutcome
+/// {@category asyncio}
 final class SdlAsyncIoOutcome extends Struct {
   // [0]+(8)
   external Pointer<SdlAsyncIo> asyncio;
@@ -59,9 +62,11 @@ final class SdlAsyncIoOutcome extends Struct {
 }
 
 // SDL_AsyncIOQueue
+/// {@category asyncio}
 final class SdlAsyncIoQueue extends Opaque {}
 
 // SDL_AtomicInt
+/// {@category atomic}
 final class SdlAtomicInt extends Struct {
   // [0]+(4)
   @Int32()
@@ -72,6 +77,7 @@ final class SdlAtomicInt extends Struct {
 }
 
 // SDL_AtomicU32
+/// {@category atomic}
 final class SdlAtomicU32 extends Struct {
   // [0]+(4)
   @Uint32()
@@ -82,6 +88,7 @@ final class SdlAtomicU32 extends Struct {
 }
 
 // SDL_AudioSpec
+/// {@category audio}
 final class SdlAudioSpec extends Struct {
   // [0]+(4)
   @Int32()
@@ -98,12 +105,15 @@ final class SdlAudioSpec extends Struct {
 }
 
 // SDL_AudioStream
+/// {@category audio}
 final class SdlAudioStream extends Opaque {}
 
 // SDL_Camera
+/// {@category camera}
 final class SdlCamera extends Opaque {}
 
 // SDL_CameraSpec
+/// {@category camera}
 final class SdlCameraSpec extends Struct {
   // [0]+(4)
   @Int32()
@@ -126,6 +136,7 @@ final class SdlCameraSpec extends Struct {
 }
 
 // SDL_DialogFileFilter
+/// {@category dialog}
 final class SdlDialogFileFilter extends Struct {
   // [0]+(8)
   external Pointer<Utf8> name;
@@ -134,6 +145,7 @@ final class SdlDialogFileFilter extends Struct {
 }
 
 // SDL_CommonEvent
+/// {@category events}
 final class SdlCommonEvent extends Struct {
   // [0]+(4)
   @Uint32()
@@ -147,6 +159,7 @@ final class SdlCommonEvent extends Struct {
 }
 
 // SDL_DisplayEvent
+/// {@category events}
 final class SdlDisplayEvent extends Struct {
   // [0]+(4)
   @Int32()
@@ -172,6 +185,7 @@ final class SdlDisplayEvent extends Struct {
 }
 
 // SDL_WindowEvent
+/// {@category events}
 final class SdlWindowEvent extends Struct {
   // [0]+(4)
   @Int32()
@@ -197,6 +211,7 @@ final class SdlWindowEvent extends Struct {
 }
 
 // SDL_KeyboardDeviceEvent
+/// {@category events}
 final class SdlKeyboardDeviceEvent extends Struct {
   // [0]+(4)
   @Int32()
@@ -216,6 +231,7 @@ final class SdlKeyboardDeviceEvent extends Struct {
 }
 
 // SDL_KeyboardEvent
+/// {@category events}
 final class SdlKeyboardEvent extends Struct {
   // [0]+(4)
   @Int32()
@@ -256,6 +272,7 @@ final class SdlKeyboardEvent extends Struct {
 }
 
 // SDL_TextEditingEvent
+/// {@category events}
 final class SdlTextEditingEvent extends Struct {
   // [0]+(4)
   @Int32()
@@ -283,6 +300,7 @@ final class SdlTextEditingEvent extends Struct {
 }
 
 // SDL_TextEditingCandidatesEvent
+/// {@category events}
 final class SdlTextEditingCandidatesEvent extends Struct {
   // [0]+(4)
   @Int32()
@@ -325,6 +343,7 @@ final class SdlTextEditingCandidatesEvent extends Struct {
 }
 
 // SDL_TextInputEvent
+/// {@category events}
 final class SdlTextInputEvent extends Struct {
   // [0]+(4)
   @Int32()
@@ -346,6 +365,7 @@ final class SdlTextInputEvent extends Struct {
 }
 
 // SDL_MouseDeviceEvent
+/// {@category events}
 final class SdlMouseDeviceEvent extends Struct {
   // [0]+(4)
   @Int32()
@@ -365,6 +385,7 @@ final class SdlMouseDeviceEvent extends Struct {
 }
 
 // SDL_MouseMotionEvent
+/// {@category events}
 final class SdlMouseMotionEvent extends Struct {
   // [0]+(4)
   @Int32()
@@ -402,6 +423,7 @@ final class SdlMouseMotionEvent extends Struct {
 }
 
 // SDL_MouseButtonEvent
+/// {@category events}
 final class SdlMouseButtonEvent extends Struct {
   // [0]+(4)
   @Int32()
@@ -442,6 +464,7 @@ final class SdlMouseButtonEvent extends Struct {
 }
 
 // SDL_MouseWheelEvent
+/// {@category events}
 final class SdlMouseWheelEvent extends Struct {
   // [0]+(4)
   @Int32()
@@ -485,6 +508,7 @@ final class SdlMouseWheelEvent extends Struct {
 }
 
 // SDL_JoyAxisEvent
+/// {@category events}
 final class SdlJoyAxisEvent extends Struct {
   // [0]+(4)
   @Int32()
@@ -522,6 +546,7 @@ final class SdlJoyAxisEvent extends Struct {
 }
 
 // SDL_JoyBallEvent
+/// {@category events}
 final class SdlJoyBallEvent extends Struct {
   // [0]+(4)
   @Int32()
@@ -559,6 +584,7 @@ final class SdlJoyBallEvent extends Struct {
 }
 
 // SDL_JoyHatEvent
+/// {@category events}
 final class SdlJoyHatEvent extends Struct {
   // [0]+(4)
   @Int32()
@@ -587,6 +613,7 @@ final class SdlJoyHatEvent extends Struct {
 }
 
 // SDL_JoyButtonEvent
+/// {@category events}
 final class SdlJoyButtonEvent extends Struct {
   // [0]+(4)
   @Int32()
@@ -615,6 +642,7 @@ final class SdlJoyButtonEvent extends Struct {
 }
 
 // SDL_JoyDeviceEvent
+/// {@category events}
 final class SdlJoyDeviceEvent extends Struct {
   // [0]+(4)
   @Int32()
@@ -634,6 +662,7 @@ final class SdlJoyDeviceEvent extends Struct {
 }
 
 // SDL_JoyBatteryEvent
+/// {@category events}
 final class SdlJoyBatteryEvent extends Struct {
   // [0]+(4)
   @Int32()
@@ -659,6 +688,7 @@ final class SdlJoyBatteryEvent extends Struct {
 }
 
 // SDL_GamepadAxisEvent
+/// {@category events}
 final class SdlGamepadAxisEvent extends Struct {
   // [0]+(4)
   @Int32()
@@ -696,6 +726,7 @@ final class SdlGamepadAxisEvent extends Struct {
 }
 
 // SDL_GamepadButtonEvent
+/// {@category events}
 final class SdlGamepadButtonEvent extends Struct {
   // [0]+(4)
   @Int32()
@@ -724,6 +755,7 @@ final class SdlGamepadButtonEvent extends Struct {
 }
 
 // SDL_GamepadDeviceEvent
+/// {@category events}
 final class SdlGamepadDeviceEvent extends Struct {
   // [0]+(4)
   @Int32()
@@ -743,6 +775,7 @@ final class SdlGamepadDeviceEvent extends Struct {
 }
 
 // SDL_GamepadTouchpadEvent
+/// {@category events}
 final class SdlGamepadTouchpadEvent extends Struct {
   // [0]+(4)
   @Int32()
@@ -774,6 +807,7 @@ final class SdlGamepadTouchpadEvent extends Struct {
 }
 
 // SDL_GamepadSensorEvent
+/// {@category events}
 final class SdlGamepadSensorEvent extends Struct {
   // [0]+(4)
   @Int32()
@@ -806,6 +840,7 @@ final class SdlGamepadSensorEvent extends Struct {
 }
 
 // SDL_AudioDeviceEvent
+/// {@category events}
 final class SdlAudioDeviceEvent extends Struct {
   // [0]+(4)
   @Int32()
@@ -834,6 +869,7 @@ final class SdlAudioDeviceEvent extends Struct {
 }
 
 // SDL_CameraDeviceEvent
+/// {@category events}
 final class SdlCameraDeviceEvent extends Struct {
   // [0]+(4)
   @Int32()
@@ -853,6 +889,7 @@ final class SdlCameraDeviceEvent extends Struct {
 }
 
 // SDL_RenderEvent
+/// {@category events}
 final class SdlRenderEvent extends Struct {
   // [0]+(4)
   @Int32()
@@ -872,6 +909,7 @@ final class SdlRenderEvent extends Struct {
 }
 
 // SDL_TouchFingerEvent
+/// {@category events}
 final class SdlTouchFingerEvent extends Struct {
   // [0]+(4)
   @Int32()
@@ -909,6 +947,7 @@ final class SdlTouchFingerEvent extends Struct {
 }
 
 // SDL_PenProximityEvent
+/// {@category events}
 final class SdlPenProximityEvent extends Struct {
   // [0]+(4)
   @Int32()
@@ -928,6 +967,7 @@ final class SdlPenProximityEvent extends Struct {
 }
 
 // SDL_PenMotionEvent
+/// {@category events}
 final class SdlPenMotionEvent extends Struct {
   // [0]+(4)
   @Int32()
@@ -959,6 +999,7 @@ final class SdlPenMotionEvent extends Struct {
 }
 
 // SDL_PenTouchEvent
+/// {@category events}
 final class SdlPenTouchEvent extends Struct {
   // [0]+(4)
   @Int32()
@@ -996,6 +1037,7 @@ final class SdlPenTouchEvent extends Struct {
 }
 
 // SDL_PenButtonEvent
+/// {@category events}
 final class SdlPenButtonEvent extends Struct {
   // [0]+(4)
   @Int32()
@@ -1033,6 +1075,7 @@ final class SdlPenButtonEvent extends Struct {
 }
 
 // SDL_PenAxisEvent
+/// {@category events}
 final class SdlPenAxisEvent extends Struct {
   // [0]+(4)
   @Int32()
@@ -1070,6 +1113,7 @@ final class SdlPenAxisEvent extends Struct {
 }
 
 // SDL_DropEvent
+/// {@category events}
 final class SdlDropEvent extends Struct {
   // [0]+(4)
   @Int32()
@@ -1099,6 +1143,7 @@ final class SdlDropEvent extends Struct {
 }
 
 // SDL_ClipboardEvent
+/// {@category events}
 final class SdlClipboardEvent extends Struct {
   // [0]+(4)
   @Int32()
@@ -1125,6 +1170,7 @@ final class SdlClipboardEvent extends Struct {
 }
 
 // SDL_SensorEvent
+/// {@category events}
 final class SdlSensorEvent extends Struct {
   // [0]+(4)
   @Int32()
@@ -1160,6 +1206,7 @@ final class SdlSensorEvent extends Struct {
 }
 
 // SDL_QuitEvent
+/// {@category events}
 final class SdlQuitEvent extends Struct {
   // [0]+(4)
   @Int32()
@@ -1173,6 +1220,7 @@ final class SdlQuitEvent extends Struct {
 }
 
 // SDL_UserEvent
+/// {@category events}
 final class SdlUserEvent extends Struct {
   // [0]+(4)
   @Uint32()
@@ -1196,6 +1244,7 @@ final class SdlUserEvent extends Struct {
 }
 
 // SDL_Event
+/// {@category events}
 final class SdlEvent extends Struct {
   // [0]+(128)
   @Uint64()
@@ -1232,6 +1281,7 @@ final class SdlEvent extends Struct {
   external int union_16;
 }
 
+/// {@category events}
 extension SdlEventExtension on Pointer<SdlEvent> {
   int get type => (cast<Uint8>() + 0).cast<Uint32>().value;
   Pointer<SdlCommonEvent> get common =>
@@ -1309,6 +1359,7 @@ extension SdlEventExtension on Pointer<SdlEvent> {
 }
 
 // SDL_PathInfo
+/// {@category filesystem}
 final class SdlPathInfo extends Struct {
   // [0]+(4)
   @Int32()
@@ -1331,9 +1382,11 @@ final class SdlPathInfo extends Struct {
 }
 
 // SDL_Gamepad
+/// {@category gamepad}
 final class SdlGamepad extends Opaque {}
 
 // SDL_GamepadBinding
+/// {@category gamepad}
 final class SdlGamepadBinding extends Struct {
   // [0]+(4)
   @Int32()
@@ -1352,45 +1405,59 @@ final class SdlGamepadBinding extends Struct {
 }
 
 // SDL_GPUDevice
+/// {@category gpu}
 final class SdlGpuDevice extends Opaque {}
 
 // SDL_GPUBuffer
+/// {@category gpu}
 final class SdlGpuBuffer extends Opaque {}
 
 // SDL_GPUTransferBuffer
+/// {@category gpu}
 final class SdlGpuTransferBuffer extends Opaque {}
 
 // SDL_GPUTexture
+/// {@category gpu}
 final class SdlGpuTexture extends Opaque {}
 
 // SDL_GPUSampler
+/// {@category gpu}
 final class SdlGpuSampler extends Opaque {}
 
 // SDL_GPUShader
+/// {@category gpu}
 final class SdlGpuShader extends Opaque {}
 
 // SDL_GPUComputePipeline
+/// {@category gpu}
 final class SdlGpuComputePipeline extends Opaque {}
 
 // SDL_GPUGraphicsPipeline
+/// {@category gpu}
 final class SdlGpuGraphicsPipeline extends Opaque {}
 
 // SDL_GPUCommandBuffer
+/// {@category gpu}
 final class SdlGpuCommandBuffer extends Opaque {}
 
 // SDL_GPURenderPass
+/// {@category gpu}
 final class SdlGpuRenderPass extends Opaque {}
 
 // SDL_GPUComputePass
+/// {@category gpu}
 final class SdlGpuComputePass extends Opaque {}
 
 // SDL_GPUCopyPass
+/// {@category gpu}
 final class SdlGpuCopyPass extends Opaque {}
 
 // SDL_GPUFence
+/// {@category gpu}
 final class SdlGpuFence extends Opaque {}
 
 // SDL_GPUViewport
+/// {@category gpu}
 final class SdlGpuViewport extends Struct {
   // [0]+(4)
   @Float()
@@ -1413,6 +1480,7 @@ final class SdlGpuViewport extends Struct {
 }
 
 // SDL_GPUTextureTransferInfo
+/// {@category gpu}
 final class SdlGpuTextureTransferInfo extends Struct {
   // [0]+(8)
   external Pointer<SdlGpuTransferBuffer> transferBuffer;
@@ -1431,6 +1499,7 @@ final class SdlGpuTextureTransferInfo extends Struct {
 }
 
 // SDL_GPUTransferBufferLocation
+/// {@category gpu}
 final class SdlGpuTransferBufferLocation extends Struct {
   // [0]+(8)
   external Pointer<SdlGpuTransferBuffer> transferBuffer;
@@ -1443,6 +1512,7 @@ final class SdlGpuTransferBufferLocation extends Struct {
 }
 
 // SDL_GPUTextureLocation
+/// {@category gpu}
 final class SdlGpuTextureLocation extends Struct {
   // [0]+(8)
   external Pointer<SdlGpuTexture> texture;
@@ -1467,6 +1537,7 @@ final class SdlGpuTextureLocation extends Struct {
 }
 
 // SDL_GPUTextureRegion
+/// {@category gpu}
 final class SdlGpuTextureRegion extends Struct {
   // [0]+(8)
   external Pointer<SdlGpuTexture> texture;
@@ -1497,6 +1568,7 @@ final class SdlGpuTextureRegion extends Struct {
 }
 
 // SDL_GPUBlitRegion
+/// {@category gpu}
 final class SdlGpuBlitRegion extends Struct {
   // [0]+(8)
   external Pointer<SdlGpuTexture> texture;
@@ -1521,6 +1593,7 @@ final class SdlGpuBlitRegion extends Struct {
 }
 
 // SDL_GPUBufferLocation
+/// {@category gpu}
 final class SdlGpuBufferLocation extends Struct {
   // [0]+(8)
   external Pointer<SdlGpuBuffer> buffer;
@@ -1533,6 +1606,7 @@ final class SdlGpuBufferLocation extends Struct {
 }
 
 // SDL_GPUBufferRegion
+/// {@category gpu}
 final class SdlGpuBufferRegion extends Struct {
   // [0]+(8)
   external Pointer<SdlGpuBuffer> buffer;
@@ -1545,6 +1619,7 @@ final class SdlGpuBufferRegion extends Struct {
 }
 
 // SDL_GPUIndirectDrawCommand
+/// {@category gpu}
 final class SdlGpuIndirectDrawCommand extends Struct {
   // [0]+(4)
   @Uint32()
@@ -1561,6 +1636,7 @@ final class SdlGpuIndirectDrawCommand extends Struct {
 }
 
 // SDL_GPUIndexedIndirectDrawCommand
+/// {@category gpu}
 final class SdlGpuIndexedIndirectDrawCommand extends Struct {
   // [0]+(4)
   @Uint32()
@@ -1583,6 +1659,7 @@ final class SdlGpuIndexedIndirectDrawCommand extends Struct {
 }
 
 // SDL_GPUIndirectDispatchCommand
+/// {@category gpu}
 final class SdlGpuIndirectDispatchCommand extends Struct {
   // [0]+(4)
   @Uint32()
@@ -1599,6 +1676,7 @@ final class SdlGpuIndirectDispatchCommand extends Struct {
 }
 
 // SDL_GPUSamplerCreateInfo
+/// {@category gpu}
 final class SdlGpuSamplerCreateInfo extends Struct {
   // [0]+(4)
   @Int32()
@@ -1654,6 +1732,7 @@ final class SdlGpuSamplerCreateInfo extends Struct {
 }
 
 // SDL_GPUVertexBufferDescription
+/// {@category gpu}
 final class SdlGpuVertexBufferDescription extends Struct {
   // [0]+(4)
   @Uint32()
@@ -1670,6 +1749,7 @@ final class SdlGpuVertexBufferDescription extends Struct {
 }
 
 // SDL_GPUVertexAttribute
+/// {@category gpu}
 final class SdlGpuVertexAttribute extends Struct {
   // [0]+(4)
   @Uint32()
@@ -1686,6 +1766,7 @@ final class SdlGpuVertexAttribute extends Struct {
 }
 
 // SDL_GPUVertexInputState
+/// {@category gpu}
 final class SdlGpuVertexInputState extends Struct {
   // [0]+(8)
   external Pointer<SdlGpuVertexBufferDescription> vertexBufferDescriptions;
@@ -1706,6 +1787,7 @@ final class SdlGpuVertexInputState extends Struct {
 }
 
 // SDL_GPUStencilOpState
+/// {@category gpu}
 final class SdlGpuStencilOpState extends Struct {
   // [0]+(4)
   @Int32()
@@ -1722,6 +1804,7 @@ final class SdlGpuStencilOpState extends Struct {
 }
 
 // SDL_GPUColorTargetBlendState
+/// {@category gpu}
 final class SdlGpuColorTargetBlendState extends Struct {
   // [0]+(4)
   @Int32()
@@ -1764,6 +1847,7 @@ final class SdlGpuColorTargetBlendState extends Struct {
 }
 
 // SDL_GPUShaderCreateInfo
+/// {@category gpu}
 final class SdlGpuShaderCreateInfo extends Struct {
   // [0]+(4)
   @Uint32()
@@ -1802,6 +1886,7 @@ final class SdlGpuShaderCreateInfo extends Struct {
 }
 
 // SDL_GPUTextureCreateInfo
+/// {@category gpu}
 final class SdlGpuTextureCreateInfo extends Struct {
   // [0]+(4)
   @Int32()
@@ -1836,6 +1921,7 @@ final class SdlGpuTextureCreateInfo extends Struct {
 }
 
 // SDL_GPUBufferCreateInfo
+/// {@category gpu}
 final class SdlGpuBufferCreateInfo extends Struct {
   // [0]+(4)
   @Uint32()
@@ -1852,6 +1938,7 @@ final class SdlGpuBufferCreateInfo extends Struct {
 }
 
 // SDL_GPUTransferBufferCreateInfo
+/// {@category gpu}
 final class SdlGpuTransferBufferCreateInfo extends Struct {
   // [0]+(4)
   @Int32()
@@ -1868,6 +1955,7 @@ final class SdlGpuTransferBufferCreateInfo extends Struct {
 }
 
 // SDL_GPURasterizerState
+/// {@category gpu}
 final class SdlGpuRasterizerState extends Struct {
   // [0]+(4)
   @Int32()
@@ -1905,6 +1993,7 @@ final class SdlGpuRasterizerState extends Struct {
 }
 
 // SDL_GPUMultisampleState
+/// {@category gpu}
 final class SdlGpuMultisampleState extends Struct {
   // [0]+(4)
   @Int32()
@@ -1930,6 +2019,7 @@ final class SdlGpuMultisampleState extends Struct {
 }
 
 // SDL_GPUDepthStencilState
+/// {@category gpu}
 final class SdlGpuDepthStencilState extends Struct {
   // [0]+(4)
   @Int32()
@@ -1973,6 +2063,7 @@ final class SdlGpuDepthStencilState extends Struct {
   external int blank_1;
 }
 
+/// {@category gpu}
 extension SdlGpuDepthStencilStateExtension on Pointer<SdlGpuDepthStencilState> {
   Pointer<SdlGpuStencilOpState> get backStencilState =>
       (cast<Uint8>() + 4).cast<SdlGpuStencilOpState>();
@@ -1981,6 +2072,7 @@ extension SdlGpuDepthStencilStateExtension on Pointer<SdlGpuDepthStencilState> {
 }
 
 // SDL_GPUColorTargetDescription
+/// {@category gpu}
 final class SdlGpuColorTargetDescription extends Struct {
   // [0]+(4)
   @Int32()
@@ -1999,6 +2091,7 @@ final class SdlGpuColorTargetDescription extends Struct {
   external int blank_1;
 }
 
+/// {@category gpu}
 extension SdlGpuColorTargetDescriptionExtension
     on Pointer<SdlGpuColorTargetDescription> {
   Pointer<SdlGpuColorTargetBlendState> get blendState =>
@@ -2006,6 +2099,7 @@ extension SdlGpuColorTargetDescriptionExtension
 }
 
 // SDL_GPUGraphicsPipelineTargetInfo
+/// {@category gpu}
 final class SdlGpuGraphicsPipelineTargetInfo extends Struct {
   // [0]+(8)
   external Pointer<SdlGpuColorTargetDescription> colorTargetDescriptions;
@@ -2033,6 +2127,7 @@ final class SdlGpuGraphicsPipelineTargetInfo extends Struct {
 }
 
 // SDL_GPUGraphicsPipelineCreateInfo
+/// {@category gpu}
 final class SdlGpuGraphicsPipelineCreateInfo extends Struct {
   // [0]+(8)
   external Pointer<SdlGpuShader> vertexShader;
@@ -2089,6 +2184,7 @@ final class SdlGpuGraphicsPipelineCreateInfo extends Struct {
   external int props;
 }
 
+/// {@category gpu}
 extension SdlGpuGraphicsPipelineCreateInfoExtension
     on Pointer<SdlGpuGraphicsPipelineCreateInfo> {
   Pointer<SdlGpuVertexInputState> get vertexInputState =>
@@ -2104,6 +2200,7 @@ extension SdlGpuGraphicsPipelineCreateInfoExtension
 }
 
 // SDL_GPUComputePipelineCreateInfo
+/// {@category gpu}
 final class SdlGpuComputePipelineCreateInfo extends Struct {
   // [0]+(4)
   @Uint32()
@@ -2154,6 +2251,7 @@ final class SdlGpuComputePipelineCreateInfo extends Struct {
 }
 
 // SDL_GPUColorTargetInfo
+/// {@category gpu}
 final class SdlGpuColorTargetInfo extends Struct {
   // [0]+(8)
   external Pointer<SdlGpuTexture> texture;
@@ -2199,11 +2297,13 @@ final class SdlGpuColorTargetInfo extends Struct {
   external int blank_1;
 }
 
+/// {@category gpu}
 extension SdlGpuColorTargetInfoExtension on Pointer<SdlGpuColorTargetInfo> {
   Pointer<SdlFColor> get clearColor => (cast<Uint8>() + 16).cast<SdlFColor>();
 }
 
 // SDL_GPUDepthStencilTargetInfo
+/// {@category gpu}
 final class SdlGpuDepthStencilTargetInfo extends Struct {
   // [0]+(8)
   external Pointer<SdlGpuTexture> texture;
@@ -2237,6 +2337,7 @@ final class SdlGpuDepthStencilTargetInfo extends Struct {
 }
 
 // SDL_GPUBlitInfo
+/// {@category gpu}
 final class SdlGpuBlitInfo extends Struct {
   // [0]+(32)
   @Uint64()
@@ -2284,6 +2385,7 @@ final class SdlGpuBlitInfo extends Struct {
   external int padding3;
 }
 
+/// {@category gpu}
 extension SdlGpuBlitInfoExtension on Pointer<SdlGpuBlitInfo> {
   Pointer<SdlGpuBlitRegion> get source =>
       (cast<Uint8>() + 0).cast<SdlGpuBlitRegion>();
@@ -2293,6 +2395,7 @@ extension SdlGpuBlitInfoExtension on Pointer<SdlGpuBlitInfo> {
 }
 
 // SDL_GPUBufferBinding
+/// {@category gpu}
 final class SdlGpuBufferBinding extends Struct {
   // [0]+(8)
   external Pointer<SdlGpuBuffer> buffer;
@@ -2305,6 +2408,7 @@ final class SdlGpuBufferBinding extends Struct {
 }
 
 // SDL_GPUTextureSamplerBinding
+/// {@category gpu}
 final class SdlGpuTextureSamplerBinding extends Struct {
   // [0]+(8)
   external Pointer<SdlGpuTexture> texture;
@@ -2313,6 +2417,7 @@ final class SdlGpuTextureSamplerBinding extends Struct {
 }
 
 // SDL_GPUStorageBufferReadWriteBinding
+/// {@category gpu}
 final class SdlGpuStorageBufferReadWriteBinding extends Struct {
   // [0]+(8)
   external Pointer<SdlGpuBuffer> buffer;
@@ -2334,6 +2439,7 @@ final class SdlGpuStorageBufferReadWriteBinding extends Struct {
 }
 
 // SDL_GPUStorageTextureReadWriteBinding
+/// {@category gpu}
 final class SdlGpuStorageTextureReadWriteBinding extends Struct {
   // [0]+(8)
   external Pointer<SdlGpuTexture> texture;
@@ -2361,6 +2467,7 @@ final class SdlGpuStorageTextureReadWriteBinding extends Struct {
 }
 
 // SDL_GUID
+/// {@category guid}
 final class SdlGuid extends Struct {
   // [0]+(1*16)
   @Uint8()
@@ -2398,9 +2505,11 @@ final class SdlGuid extends Struct {
 }
 
 // SDL_Haptic
+/// {@category haptic}
 final class SdlHaptic extends Opaque {}
 
 // SDL_HapticDirection
+/// {@category haptic}
 final class SdlHapticDirection extends Struct {
   // [0]+(1)
   @Uint8()
@@ -2420,6 +2529,7 @@ final class SdlHapticDirection extends Struct {
 }
 
 // SDL_HapticConstant
+/// {@category haptic}
 final class SdlHapticConstant extends Struct {
   // [0]+(2)
   @Uint16()
@@ -2461,12 +2571,14 @@ final class SdlHapticConstant extends Struct {
   external int fadeLevel;
 }
 
+/// {@category haptic}
 extension SdlHapticConstantExtension on Pointer<SdlHapticConstant> {
   Pointer<SdlHapticDirection> get direction =>
       (cast<Uint8>() + 2).cast<SdlHapticDirection>();
 }
 
 // SDL_HapticPeriodic
+/// {@category haptic}
 final class SdlHapticPeriodic extends Struct {
   // [0]+(2)
   @Uint16()
@@ -2520,12 +2632,14 @@ final class SdlHapticPeriodic extends Struct {
   external int blank_2;
 }
 
+/// {@category haptic}
 extension SdlHapticPeriodicExtension on Pointer<SdlHapticPeriodic> {
   Pointer<SdlHapticDirection> get direction =>
       (cast<Uint8>() + 2).cast<SdlHapticDirection>();
 }
 
 // SDL_HapticCondition
+/// {@category haptic}
 final class SdlHapticCondition extends Struct {
   // [0]+(2)
   @Uint16()
@@ -2599,12 +2713,14 @@ final class SdlHapticCondition extends Struct {
   external int blank_3;
 }
 
+/// {@category haptic}
 extension SdlHapticConditionExtension on Pointer<SdlHapticCondition> {
   Pointer<SdlHapticDirection> get direction =>
       (cast<Uint8>() + 2).cast<SdlHapticDirection>();
 }
 
 // SDL_HapticRamp
+/// {@category haptic}
 final class SdlHapticRamp extends Struct {
   // [0]+(2)
   @Uint16()
@@ -2654,12 +2770,14 @@ final class SdlHapticRamp extends Struct {
   external int blank_3;
 }
 
+/// {@category haptic}
 extension SdlHapticRampExtension on Pointer<SdlHapticRamp> {
   Pointer<SdlHapticDirection> get direction =>
       (cast<Uint8>() + 2).cast<SdlHapticDirection>();
 }
 
 // SDL_HapticLeftRight
+/// {@category haptic}
 final class SdlHapticLeftRight extends Struct {
   // [0]+(2)
   @Uint16()
@@ -2682,6 +2800,7 @@ final class SdlHapticLeftRight extends Struct {
 }
 
 // SDL_HapticCustom
+/// {@category haptic}
 final class SdlHapticCustom extends Struct {
   // [0]+(2)
   @Uint16()
@@ -2737,12 +2856,14 @@ final class SdlHapticCustom extends Struct {
   external int fadeLevel;
 }
 
+/// {@category haptic}
 extension SdlHapticCustomExtension on Pointer<SdlHapticCustom> {
   Pointer<SdlHapticDirection> get direction =>
       (cast<Uint8>() + 2).cast<SdlHapticDirection>();
 }
 
 // SDL_HapticEffect
+/// {@category haptic}
 final class SdlHapticEffect extends Struct {
   // [0]+(72)
   @Uint64()
@@ -2765,6 +2886,7 @@ final class SdlHapticEffect extends Struct {
   external int union_9;
 }
 
+/// {@category haptic}
 extension SdlHapticEffectExtension on Pointer<SdlHapticEffect> {
   int get type => (cast<Uint8>() + 0).cast<Uint16>().value;
   Pointer<SdlHapticConstant> get ant =>
@@ -2781,9 +2903,11 @@ extension SdlHapticEffectExtension on Pointer<SdlHapticEffect> {
 }
 
 // SDL_hid_device
+/// {@category hidapi}
 final class SdlHidDevice extends Opaque {}
 
 // SDL_hid_device_info
+/// {@category hidapi}
 final class SdlHidDeviceInfo extends Struct {
   // [0]+(8)
   external Pointer<Int8> path;
@@ -2836,6 +2960,7 @@ final class SdlHidDeviceInfo extends Struct {
 }
 
 // SDL_IOStreamInterface
+/// {@category iostream}
 final class SdlIoStreamInterface extends Struct {
   // [0]+(4)
   @Uint32()
@@ -2858,12 +2983,15 @@ final class SdlIoStreamInterface extends Struct {
 }
 
 // SDL_IOStream
+/// {@category iostream}
 final class SdlIoStream extends Opaque {}
 
 // SDL_Joystick
+/// {@category joystick}
 final class SdlJoystick extends Opaque {}
 
 // SDL_VirtualJoystickTouchpadDesc
+/// {@category joystick}
 final class SdlVirtualJoystickTouchpadDesc extends Struct {
   // [0]+(2)
   @Uint16()
@@ -2878,6 +3006,7 @@ final class SdlVirtualJoystickTouchpadDesc extends Struct {
 }
 
 // SDL_VirtualJoystickSensorDesc
+/// {@category joystick}
 final class SdlVirtualJoystickSensorDesc extends Struct {
   // [0]+(4)
   @Int32()
@@ -2888,6 +3017,7 @@ final class SdlVirtualJoystickSensorDesc extends Struct {
 }
 
 // SDL_VirtualJoystickDesc
+/// {@category joystick}
 final class SdlVirtualJoystickDesc extends Struct {
   // [0]+(4)
   @Uint32()
@@ -2963,9 +3093,11 @@ final class SdlVirtualJoystickDesc extends Struct {
 }
 
 // SDL_SharedObject
+/// {@category loadso}
 final class SdlSharedObject extends Opaque {}
 
 // SDL_Locale
+/// {@category locale}
 final class SdlLocale extends Struct {
   // [0]+(8)
   external Pointer<Utf8> language;
@@ -2974,9 +3106,11 @@ final class SdlLocale extends Struct {
 }
 
 // HINSTANCE
+/// {@category main_impl}
 final class HINSTANCE extends Opaque {}
 
 // SDL_MessageBoxButtonData
+/// {@category messagebox}
 final class SdlMessageBoxButtonData extends Struct {
   // [0]+(4)
   @Uint32()
@@ -2989,6 +3123,7 @@ final class SdlMessageBoxButtonData extends Struct {
 }
 
 // SDL_MessageBoxColor
+/// {@category messagebox}
 final class SdlMessageBoxColor extends Struct {
   // [0]+(1)
   @Uint8()
@@ -3007,6 +3142,7 @@ final class SdlMessageBoxColor extends Struct {
 }
 
 // SDL_MessageBoxColorScheme
+/// {@category messagebox}
 final class SdlMessageBoxColorScheme extends Struct {
   // [0]+(8*5)
   @Uint64()
@@ -3021,6 +3157,7 @@ final class SdlMessageBoxColorScheme extends Struct {
   external int colors_5;
 }
 
+/// {@category messagebox}
 extension SdlMessageBoxColorSchemeExtension
     on Pointer<SdlMessageBoxColorScheme> {
   List<SdlMessageBoxColor> get colors {
@@ -3033,6 +3170,7 @@ extension SdlMessageBoxColorSchemeExtension
 }
 
 // SDL_MessageBoxData
+/// {@category messagebox}
 final class SdlMessageBoxData extends Struct {
   // [0]+(4)
   @Uint32()
@@ -3059,21 +3197,27 @@ final class SdlMessageBoxData extends Struct {
 }
 
 // SDL_Cursor
+/// {@category mouse}
 final class SdlCursor extends Opaque {}
 
 // SDL_Mutex
+/// {@category mutex}
 final class SdlMutex extends Opaque {}
 
 // SDL_RWLock
+/// {@category mutex}
 final class SdlRwLock extends Opaque {}
 
 // SDL_Semaphore
+/// {@category mutex}
 final class SdlSemaphore extends Opaque {}
 
 // SDL_Condition
+/// {@category mutex}
 final class SdlCondition extends Opaque {}
 
 // SDL_InitState
+/// {@category mutex}
 final class SdlInitState extends Struct {
   // [0]+(8)
   @Uint64()
@@ -3085,11 +3229,13 @@ final class SdlInitState extends Struct {
   external Pointer<NativeType> reserved;
 }
 
+/// {@category mutex}
 extension SdlInitStateExtension on Pointer<SdlInitState> {
   Pointer<SdlAtomicInt> get status => (cast<Uint8>() + 0).cast<SdlAtomicInt>();
 }
 
 // SDL_Color
+/// {@category pixels}
 final class SdlColor extends Struct {
   // [0]+(1)
   @Uint8()
@@ -3109,6 +3255,7 @@ final class SdlColor extends Struct {
 }
 
 // SDL_FColor
+/// {@category pixels}
 final class SdlFColor extends Struct {
   // [0]+(4)
   @Float()
@@ -3125,6 +3272,7 @@ final class SdlFColor extends Struct {
 }
 
 // SDL_Palette
+/// {@category pixels}
 final class SdlPalette extends Struct {
   // [0]+(4)
   @Int32()
@@ -3143,6 +3291,7 @@ final class SdlPalette extends Struct {
 }
 
 // SDL_PixelFormatDetails
+/// {@category pixels}
 final class SdlPixelFormatDetails extends Struct {
   // [0]+(4)
   @Int32()
@@ -3197,9 +3346,11 @@ final class SdlPixelFormatDetails extends Struct {
 }
 
 // SDL_Process
+/// {@category process}
 final class SdlProcess extends Opaque {}
 
 // SDL_Point
+/// {@category rect}
 final class SdlPoint extends Struct {
   // [0]+(4)
   @Int32()
@@ -3210,6 +3361,7 @@ final class SdlPoint extends Struct {
 }
 
 // SDL_FPoint
+/// {@category rect}
 final class SdlFPoint extends Struct {
   // [0]+(4)
   @Float()
@@ -3220,6 +3372,7 @@ final class SdlFPoint extends Struct {
 }
 
 // SDL_Rect
+/// {@category rect}
 final class SdlRect extends Struct {
   // [0]+(4)
   @Int32()
@@ -3236,6 +3389,7 @@ final class SdlRect extends Struct {
 }
 
 // SDL_FRect
+/// {@category rect}
 final class SdlFRect extends Struct {
   // [0]+(4)
   @Float()
@@ -3252,6 +3406,7 @@ final class SdlFRect extends Struct {
 }
 
 // SDL_Vertex
+/// {@category render}
 final class SdlVertex extends Struct {
   // [0]+(8)
   @Uint64()
@@ -3266,6 +3421,7 @@ final class SdlVertex extends Struct {
   external int texCoord_1;
 }
 
+/// {@category render}
 extension SdlVertexExtension on Pointer<SdlVertex> {
   Pointer<SdlFPoint> get position => (cast<Uint8>() + 0).cast<SdlFPoint>();
   Pointer<SdlFColor> get color => (cast<Uint8>() + 8).cast<SdlFColor>();
@@ -3273,9 +3429,11 @@ extension SdlVertexExtension on Pointer<SdlVertex> {
 }
 
 // SDL_Renderer
+/// {@category render}
 final class SdlRenderer extends Opaque {}
 
 // SDL_Texture
+/// {@category render}
 final class SdlTexture extends Struct {
   // [0]+(4)
   @Int32()
@@ -3292,6 +3450,7 @@ final class SdlTexture extends Struct {
 }
 
 // SDL_GPURenderStateDesc
+/// {@category render}
 final class SdlGpuRenderStateDesc extends Struct {
   // [0]+(4)
   @Uint32()
@@ -3328,12 +3487,15 @@ final class SdlGpuRenderStateDesc extends Struct {
 }
 
 // SDL_GPURenderState
+/// {@category render}
 final class SdlGpuRenderState extends Opaque {}
 
 // SDL_Sensor
+/// {@category sensor}
 final class SdlSensor extends Opaque {}
 
 // SDL_alignment_test
+/// {@category stdinc}
 final class SdlAlignmentTest extends Struct {
   // [0]+(1)
   @Uint8()
@@ -3350,12 +3512,15 @@ final class SdlAlignmentTest extends Struct {
 }
 
 // SDL_Environment
+/// {@category stdinc}
 final class SdlEnvironment extends Opaque {}
 
 // SDL_iconv_t
+/// {@category stdinc}
 final class SdlIconvT extends Opaque {}
 
 // SDL_StorageInterface
+/// {@category storage}
 final class SdlStorageInterface extends Struct {
   // [0]+(4)
   @Uint32()
@@ -3388,9 +3553,11 @@ final class SdlStorageInterface extends Struct {
 }
 
 // SDL_Storage
+/// {@category storage}
 final class SdlStorage extends Opaque {}
 
 // SDL_Surface
+/// {@category surface}
 final class SdlSurface extends Struct {
   // [0]+(4)
   @Uint32()
@@ -3423,21 +3590,27 @@ final class SdlSurface extends Struct {
 }
 
 // MSG
+/// {@category system}
 final class MSG extends Opaque {}
 
 // XEvent
+/// {@category system}
 final class XEvent extends Opaque {}
 
 // XTaskQueueHandle
+/// {@category system}
 final class XTaskQueueHandle extends Opaque {}
 
 // XUserHandle
+/// {@category system}
 final class XUserHandle extends Opaque {}
 
 // SDL_Thread
+/// {@category thread}
 final class SdlThread extends Opaque {}
 
 // SDL_DateTime
+/// {@category time}
 final class SdlDateTime extends Struct {
   // [0]+(4)
   @Int32()
@@ -3472,6 +3645,7 @@ final class SdlDateTime extends Struct {
 }
 
 // SDL_Finger
+/// {@category touch}
 final class SdlFinger extends Struct {
   // [0]+(8)
   @Uint64()
@@ -3491,18 +3665,23 @@ final class SdlFinger extends Struct {
 }
 
 // SDL_Tray
+/// {@category tray}
 final class SdlTray extends Opaque {}
 
 // SDL_TrayMenu
+/// {@category tray}
 final class SdlTrayMenu extends Opaque {}
 
 // SDL_TrayEntry
+/// {@category tray}
 final class SdlTrayEntry extends Opaque {}
 
 // SDL_DisplayModeData
+/// {@category video}
 final class SdlDisplayModeData extends Opaque {}
 
 // SDL_DisplayMode
+/// {@category video}
 final class SdlDisplayMode extends Struct {
   // [0]+(4)
   @Uint32()
@@ -3533,7 +3712,9 @@ final class SdlDisplayMode extends Struct {
 }
 
 // SDL_Window
+/// {@category video}
 final class SdlWindow extends Opaque {}
 
 // SDL_GLContext
+/// {@category video}
 final class SdlGlContext extends Opaque {}

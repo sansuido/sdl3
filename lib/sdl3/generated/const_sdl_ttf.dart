@@ -75,6 +75,7 @@ const TTF_SUBSTRING_LINE_START = 0x00000200;
 const TTF_SUBSTRING_LINE_END = 0x00000400;
 const TTF_SUBSTRING_TEXT_END = 0x00000800;
 
+/// {@category ttf}
 class TtfkPropFont {
   static const createFilenameString = TTF_PROP_FONT_CREATE_FILENAME_STRING;
   static const createIostreamPointer = TTF_PROP_FONT_CREATE_IOSTREAM_POINTER;
@@ -96,6 +97,7 @@ class TtfkPropFont {
       TTF_PROP_FONT_OUTLINE_MITER_LIMIT_NUMBER;
 }
 
+/// {@category ttf}
 class TtfkStyle {
   static const normal = TTF_STYLE_NORMAL;
   static const bold = TTF_STYLE_BOLD;
@@ -104,6 +106,7 @@ class TtfkStyle {
   static const strikethrough = TTF_STYLE_STRIKETHROUGH;
 }
 
+/// {@category ttf}
 class TtfkHinting {
   static const invalid = TTF_HINTING_INVALID;
   static const normal = TTF_HINTING_NORMAL;
@@ -113,6 +116,7 @@ class TtfkHinting {
   static const lightSubpixel = TTF_HINTING_LIGHT_SUBPIXEL;
 }
 
+/// {@category ttf}
 class TtfkFontWeight {
   static const thin = TTF_FONT_WEIGHT_THIN;
   static const extraLight = TTF_FONT_WEIGHT_EXTRA_LIGHT;
@@ -126,6 +130,7 @@ class TtfkFontWeight {
   static const extraBlack = TTF_FONT_WEIGHT_EXTRA_BLACK;
 }
 
+/// {@category ttf}
 class TtfkHorizontalAlign {
   static const invalid = TTF_HORIZONTAL_ALIGN_INVALID;
   static const left = TTF_HORIZONTAL_ALIGN_LEFT;
@@ -133,6 +138,7 @@ class TtfkHorizontalAlign {
   static const right = TTF_HORIZONTAL_ALIGN_RIGHT;
 }
 
+/// {@category ttf}
 class TtfkDirection {
   static const invalid = TTF_DIRECTION_INVALID;
   static const ltr = TTF_DIRECTION_LTR;
@@ -141,6 +147,7 @@ class TtfkDirection {
   static const btt = TTF_DIRECTION_BTT;
 }
 
+/// {@category ttf}
 class TtfkImage {
   static const invalid = TTF_IMAGE_INVALID;
   static const alpha = TTF_IMAGE_ALPHA;
@@ -148,6 +155,7 @@ class TtfkImage {
   static const sdf = TTF_IMAGE_SDF;
 }
 
+/// {@category ttf}
 class TtfkProp {
   static const fontCreateFilenameString = TTF_PROP_FONT_CREATE_FILENAME_STRING;
   static const fontCreateIostreamPointer =
@@ -179,12 +187,14 @@ class TtfkProp {
       TTF_PROP_GPU_TEXT_ENGINE_ATLAS_TEXTURE_SIZE_NUMBER;
 }
 
+/// {@category ttf}
 class TtfkGpuTextengineWinding {
   static const invalid = TTF_GPU_TEXTENGINE_WINDING_INVALID;
   static const clockwise = TTF_GPU_TEXTENGINE_WINDING_CLOCKWISE;
   static const counterClockwise = TTF_GPU_TEXTENGINE_WINDING_COUNTER_CLOCKWISE;
 }
 
+/// {@category ttf}
 class TtfkSubstring {
   static const directionMask = TTF_SUBSTRING_DIRECTION_MASK;
   static const textStart = TTF_SUBSTRING_TEXT_START;

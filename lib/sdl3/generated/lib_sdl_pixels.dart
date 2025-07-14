@@ -15,6 +15,7 @@ part of '../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetPixelFormatName(SDL_PixelFormat format)
 /// ```
+/// {@category pixels}
 String? sdlGetPixelFormatName(int format) {
   final sdlGetPixelFormatNameLookupFunction = _libSdl
       .lookupFunction<
@@ -49,6 +50,7 @@ String? sdlGetPixelFormatName(int format) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetMasksForPixelFormat(SDL_PixelFormat format, int *bpp, Uint32 *Rmask, Uint32 *Gmask, Uint32 *Bmask, Uint32 *Amask)
 /// ```
+/// {@category pixels}
 bool sdlGetMasksForPixelFormat(
   int format,
   Pointer<Int32> bpp,
@@ -110,6 +112,7 @@ bool sdlGetMasksForPixelFormat(
 /// ```c
 /// extern SDL_DECLSPEC SDL_PixelFormat SDLCALL SDL_GetPixelFormatForMasks(int bpp, Uint32 Rmask, Uint32 Gmask, Uint32 Bmask, Uint32 Amask)
 /// ```
+/// {@category pixels}
 int sdlGetPixelFormatForMasks(
   int bpp,
   int rmask,
@@ -155,6 +158,7 @@ int sdlGetPixelFormatForMasks(
 /// ```c
 /// extern SDL_DECLSPEC const SDL_PixelFormatDetails * SDLCALL SDL_GetPixelFormatDetails(SDL_PixelFormat format)
 /// ```
+/// {@category pixels}
 Pointer<SdlPixelFormatDetails> sdlGetPixelFormatDetails(int format) {
   final sdlGetPixelFormatDetailsLookupFunction = _libSdl
       .lookupFunction<
@@ -185,6 +189,7 @@ Pointer<SdlPixelFormatDetails> sdlGetPixelFormatDetails(int format) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Palette * SDLCALL SDL_CreatePalette(int ncolors)
 /// ```
+/// {@category pixels}
 Pointer<SdlPalette> sdlCreatePalette(int ncolors) {
   final sdlCreatePaletteLookupFunction = _libSdl
       .lookupFunction<
@@ -212,6 +217,7 @@ Pointer<SdlPalette> sdlCreatePalette(int ncolors) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetPaletteColors(SDL_Palette *palette, const SDL_Color *colors, int firstcolor, int ncolors)
 /// ```
+/// {@category pixels}
 bool sdlSetPaletteColors(
   Pointer<SdlPalette> palette,
   Pointer<SdlColor> colors,
@@ -257,6 +263,7 @@ bool sdlSetPaletteColors(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_DestroyPalette(SDL_Palette *palette)
 /// ```
+/// {@category pixels}
 void sdlDestroyPalette(Pointer<SdlPalette> palette) {
   final sdlDestroyPaletteLookupFunction = _libSdl
       .lookupFunction<
@@ -305,6 +312,7 @@ void sdlDestroyPalette(Pointer<SdlPalette> palette) {
 /// ```c
 /// extern SDL_DECLSPEC Uint32 SDLCALL SDL_MapRGB(const SDL_PixelFormatDetails *format, const SDL_Palette *palette, Uint8 r, Uint8 g, Uint8 b)
 /// ```
+/// {@category pixels}
 int sdlMapRgb(
   Pointer<SdlPixelFormatDetails> format,
   Pointer<SdlPalette> palette,
@@ -372,6 +380,7 @@ int sdlMapRgb(
 /// ```c
 /// extern SDL_DECLSPEC Uint32 SDLCALL SDL_MapRGBA(const SDL_PixelFormatDetails *format, const SDL_Palette *palette, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 /// ```
+/// {@category pixels}
 int sdlMapRgba(
   Pointer<SdlPixelFormatDetails> format,
   Pointer<SdlPalette> palette,
@@ -431,6 +440,7 @@ int sdlMapRgba(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_GetRGB(Uint32 pixelvalue, const SDL_PixelFormatDetails *format, const SDL_Palette *palette, Uint8 *r, Uint8 *g, Uint8 *b)
 /// ```
+/// {@category pixels}
 void sdlGetRgb(
   int pixelvalue,
   Pointer<SdlPixelFormatDetails> format,
@@ -494,6 +504,7 @@ void sdlGetRgb(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_GetRGBA(Uint32 pixelvalue, const SDL_PixelFormatDetails *format, const SDL_Palette *palette, Uint8 *r, Uint8 *g, Uint8 *b, Uint8 *a)
 /// ```
+/// {@category pixels}
 void sdlGetRgba(
   int pixelvalue,
   Pointer<SdlPixelFormatDetails> format,

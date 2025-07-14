@@ -20,6 +20,7 @@ extension SdlFRectPointerEx on Pointer<SdlFRect> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_HasRectIntersectionFloat(const SDL_FRect *A, const SDL_FRect *B)
   /// ```
+  /// {@category rect}
   bool hasIntersection(Pointer<SdlFRect> b) =>
       sdlHasRectIntersectionFloat(this, b);
 
@@ -41,6 +42,7 @@ extension SdlFRectPointerEx on Pointer<SdlFRect> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRectIntersectionFloat(const SDL_FRect *A, const SDL_FRect *B, SDL_FRect *result)
   /// ```
+  /// {@category rect}
   bool getIntersection(Pointer<SdlFRect> b, Pointer<SdlFRect> result) =>
       sdlGetRectIntersectionFloat(this, b, result);
 
@@ -59,6 +61,7 @@ extension SdlFRectPointerEx on Pointer<SdlFRect> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRectUnionFloat(const SDL_FRect *A, const SDL_FRect *B, SDL_FRect *result)
   /// ```
+  /// {@category rect}
   bool getUnion(Pointer<SdlFRect> b, Pointer<SdlFRect> result) =>
       sdlGetRectUnionFloat(this, b, result);
 
@@ -84,6 +87,7 @@ extension SdlFRectPointerEx on Pointer<SdlFRect> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRectAndLineIntersectionFloat(const SDL_FRect *rect, float *X1, float *Y1, float *X2, float *Y2)
   /// ```
+  /// {@category rect}
   bool getLineIntersection(
     Pointer<Float> x1,
     Pointer<Float> y1,
@@ -118,6 +122,7 @@ extension SdlRectPointerEx on Pointer<SdlRect> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_HasRectIntersection(const SDL_Rect *A, const SDL_Rect *B)
   /// ```
+  /// {@category rect}
   bool hasIntersection(Pointer<SdlRect> b) => sdlHasRectIntersection(this, b);
 
   ///
@@ -138,6 +143,7 @@ extension SdlRectPointerEx on Pointer<SdlRect> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRectIntersection(const SDL_Rect *A, const SDL_Rect *B, SDL_Rect *result)
   /// ```
+  /// {@category rect}
   bool getIntersection(Pointer<SdlRect> b, Pointer<SdlRect> result) =>
       sdlGetRectIntersection(this, b, result);
 
@@ -156,6 +162,7 @@ extension SdlRectPointerEx on Pointer<SdlRect> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRectUnion(const SDL_Rect *A, const SDL_Rect *B, SDL_Rect *result)
   /// ```
+  /// {@category rect}
   bool getUnion(Pointer<SdlRect> b, Pointer<SdlRect> result) =>
       sdlGetRectUnion(this, b, result);
 
@@ -180,6 +187,7 @@ extension SdlRectPointerEx on Pointer<SdlRect> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRectAndLineIntersection(const SDL_Rect *rect, int *X1, int *Y1, int *X2, int *Y2)
   /// ```
+  /// {@category rect}
   bool getLineIntersection(
     Pointer<Int32> x1,
     Pointer<Int32> y1,

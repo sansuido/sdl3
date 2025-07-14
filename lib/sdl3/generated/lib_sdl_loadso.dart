@@ -18,6 +18,7 @@ part of '../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC SDL_SharedObject * SDLCALL SDL_LoadObject(const char *sofile)
 /// ```
+/// {@category loadso}
 Pointer<SdlSharedObject> sdlLoadObject(String? sofile) {
   final sdlLoadObjectLookupFunction = _libSdl
       .lookupFunction<
@@ -59,6 +60,7 @@ Pointer<SdlSharedObject> sdlLoadObject(String? sofile) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_FunctionPointer SDLCALL SDL_LoadFunction(SDL_SharedObject *handle, const char *name)
 /// ```
+/// {@category loadso}
 Pointer<NativeType> sdlLoadFunction(
   Pointer<SdlSharedObject> handle,
   String? name,
@@ -97,6 +99,7 @@ Pointer<NativeType> sdlLoadFunction(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_UnloadObject(SDL_SharedObject *handle)
 /// ```
+/// {@category loadso}
 void sdlUnloadObject(Pointer<SdlSharedObject> handle) {
   final sdlUnloadObjectLookupFunction = _libSdl
       .lookupFunction<

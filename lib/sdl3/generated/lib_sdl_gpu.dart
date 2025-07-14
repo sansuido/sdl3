@@ -19,6 +19,7 @@ part of '../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GPUSupportsShaderFormats( SDL_GPUShaderFormat format_flags, const char *name)
 /// ```
+/// {@category gpu}
 bool sdlGpuSupportsShaderFormats(int formatFlags, String? name) {
   final sdlGpuSupportsShaderFormatsLookupFunction = _libSdl
       .lookupFunction<
@@ -45,6 +46,7 @@ bool sdlGpuSupportsShaderFormats(int formatFlags, String? name) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GPUSupportsProperties( SDL_PropertiesID props)
 /// ```
+/// {@category gpu}
 bool sdlGpuSupportsProperties(int props) {
   final sdlGpuSupportsPropertiesLookupFunction = _libSdl
       .lookupFunction<Uint8 Function(Uint32 props), int Function(int props)>(
@@ -82,6 +84,7 @@ bool sdlGpuSupportsProperties(int props) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_GPUDevice * SDLCALL SDL_CreateGPUDevice( SDL_GPUShaderFormat format_flags, bool debug_mode, const char *name)
 /// ```
+/// {@category gpu}
 Pointer<SdlGpuDevice> sdlCreateGpuDevice(
   int formatFlags,
   bool debugMode,
@@ -177,6 +180,7 @@ Pointer<SdlGpuDevice> sdlCreateGpuDevice(
 /// ```c
 /// extern SDL_DECLSPEC SDL_GPUDevice * SDLCALL SDL_CreateGPUDeviceWithProperties( SDL_PropertiesID props)
 /// ```
+/// {@category gpu}
 Pointer<SdlGpuDevice> sdlCreateGpuDeviceWithProperties(int props) {
   final sdlCreateGpuDeviceWithPropertiesLookupFunction = _libSdl
       .lookupFunction<
@@ -198,6 +202,7 @@ Pointer<SdlGpuDevice> sdlCreateGpuDeviceWithProperties(int props) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_DestroyGPUDevice(SDL_GPUDevice *device)
 /// ```
+/// {@category gpu}
 void sdlDestroyGpuDevice(Pointer<SdlGpuDevice> device) {
   final sdlDestroyGpuDeviceLookupFunction = _libSdl
       .lookupFunction<
@@ -219,6 +224,7 @@ void sdlDestroyGpuDevice(Pointer<SdlGpuDevice> device) {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_GetNumGPUDrivers(void)
 /// ```
+/// {@category gpu}
 int sdlGetNumGpuDrivers() {
   final sdlGetNumGpuDriversLookupFunction = _libSdl
       .lookupFunction<Int32 Function(), int Function()>('SDL_GetNumGPUDrivers');
@@ -245,6 +251,7 @@ int sdlGetNumGpuDrivers() {
 /// ```c
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetGPUDriver(int index)
 /// ```
+/// {@category gpu}
 String? sdlGetGpuDriver(int index) {
   final sdlGetGpuDriverLookupFunction = _libSdl
       .lookupFunction<
@@ -269,6 +276,7 @@ String? sdlGetGpuDriver(int index) {
 /// ```c
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetGPUDeviceDriver(SDL_GPUDevice *device)
 /// ```
+/// {@category gpu}
 String? sdlGetGpuDeviceDriver(Pointer<SdlGpuDevice> device) {
   final sdlGetGpuDeviceDriverLookupFunction = _libSdl
       .lookupFunction<
@@ -294,6 +302,7 @@ String? sdlGetGpuDeviceDriver(Pointer<SdlGpuDevice> device) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_GPUShaderFormat SDLCALL SDL_GetGPUShaderFormats(SDL_GPUDevice *device)
 /// ```
+/// {@category gpu}
 int sdlGetGpuShaderFormats(Pointer<SdlGpuDevice> device) {
   final sdlGetGpuShaderFormatsLookupFunction = _libSdl
       .lookupFunction<
@@ -408,6 +417,7 @@ int sdlGetGpuShaderFormats(Pointer<SdlGpuDevice> device) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_PropertiesID SDLCALL SDL_GetGPUDeviceProperties(SDL_GPUDevice *device)
 /// ```
+/// {@category gpu}
 int sdlGetGpuDeviceProperties(Pointer<SdlGpuDevice> device) {
   final sdlGetGpuDevicePropertiesLookupFunction = _libSdl
       .lookupFunction<
@@ -465,6 +475,7 @@ int sdlGetGpuDeviceProperties(Pointer<SdlGpuDevice> device) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_GPUComputePipeline * SDLCALL SDL_CreateGPUComputePipeline( SDL_GPUDevice *device, const SDL_GPUComputePipelineCreateInfo *createinfo)
 /// ```
+/// {@category gpu}
 Pointer<SdlGpuComputePipeline> sdlCreateGpuComputePipeline(
   Pointer<SdlGpuDevice> device,
   Pointer<SdlGpuComputePipelineCreateInfo> createinfo,
@@ -507,6 +518,7 @@ Pointer<SdlGpuComputePipeline> sdlCreateGpuComputePipeline(
 /// ```c
 /// extern SDL_DECLSPEC SDL_GPUGraphicsPipeline * SDLCALL SDL_CreateGPUGraphicsPipeline( SDL_GPUDevice *device, const SDL_GPUGraphicsPipelineCreateInfo *createinfo)
 /// ```
+/// {@category gpu}
 Pointer<SdlGpuGraphicsPipeline> sdlCreateGpuGraphicsPipeline(
   Pointer<SdlGpuDevice> device,
   Pointer<SdlGpuGraphicsPipelineCreateInfo> createinfo,
@@ -549,6 +561,7 @@ Pointer<SdlGpuGraphicsPipeline> sdlCreateGpuGraphicsPipeline(
 /// ```c
 /// extern SDL_DECLSPEC SDL_GPUSampler * SDLCALL SDL_CreateGPUSampler( SDL_GPUDevice *device, const SDL_GPUSamplerCreateInfo *createinfo)
 /// ```
+/// {@category gpu}
 Pointer<SdlGpuSampler> sdlCreateGpuSampler(
   Pointer<SdlGpuDevice> device,
   Pointer<SdlGpuSamplerCreateInfo> createinfo,
@@ -643,6 +656,7 @@ Pointer<SdlGpuSampler> sdlCreateGpuSampler(
 /// ```c
 /// extern SDL_DECLSPEC SDL_GPUShader * SDLCALL SDL_CreateGPUShader( SDL_GPUDevice *device, const SDL_GPUShaderCreateInfo *createinfo)
 /// ```
+/// {@category gpu}
 Pointer<SdlGpuShader> sdlCreateGpuShader(
   Pointer<SdlGpuDevice> device,
   Pointer<SdlGpuShaderCreateInfo> createinfo,
@@ -719,6 +733,7 @@ Pointer<SdlGpuShader> sdlCreateGpuShader(
 /// ```c
 /// extern SDL_DECLSPEC SDL_GPUTexture * SDLCALL SDL_CreateGPUTexture( SDL_GPUDevice *device, const SDL_GPUTextureCreateInfo *createinfo)
 /// ```
+/// {@category gpu}
 Pointer<SdlGpuTexture> sdlCreateGpuTexture(
   Pointer<SdlGpuDevice> device,
   Pointer<SdlGpuTextureCreateInfo> createinfo,
@@ -784,6 +799,7 @@ Pointer<SdlGpuTexture> sdlCreateGpuTexture(
 /// ```c
 /// extern SDL_DECLSPEC SDL_GPUBuffer * SDLCALL SDL_CreateGPUBuffer( SDL_GPUDevice *device, const SDL_GPUBufferCreateInfo *createinfo)
 /// ```
+/// {@category gpu}
 Pointer<SdlGpuBuffer> sdlCreateGpuBuffer(
   Pointer<SdlGpuDevice> device,
   Pointer<SdlGpuBufferCreateInfo> createinfo,
@@ -832,6 +848,7 @@ Pointer<SdlGpuBuffer> sdlCreateGpuBuffer(
 /// ```c
 /// extern SDL_DECLSPEC SDL_GPUTransferBuffer * SDLCALL SDL_CreateGPUTransferBuffer( SDL_GPUDevice *device, const SDL_GPUTransferBufferCreateInfo *createinfo)
 /// ```
+/// {@category gpu}
 Pointer<SdlGpuTransferBuffer> sdlCreateGpuTransferBuffer(
   Pointer<SdlGpuDevice> device,
   Pointer<SdlGpuTransferBufferCreateInfo> createinfo,
@@ -870,6 +887,7 @@ Pointer<SdlGpuTransferBuffer> sdlCreateGpuTransferBuffer(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_SetGPUBufferName( SDL_GPUDevice *device, SDL_GPUBuffer *buffer, const char *text)
 /// ```
+/// {@category gpu}
 void sdlSetGpuBufferName(
   Pointer<SdlGpuDevice> device,
   Pointer<SdlGpuBuffer> buffer,
@@ -915,6 +933,7 @@ void sdlSetGpuBufferName(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_SetGPUTextureName( SDL_GPUDevice *device, SDL_GPUTexture *texture, const char *text)
 /// ```
+/// {@category gpu}
 void sdlSetGpuTextureName(
   Pointer<SdlGpuDevice> device,
   Pointer<SdlGpuTexture> texture,
@@ -956,6 +975,7 @@ void sdlSetGpuTextureName(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_InsertGPUDebugLabel( SDL_GPUCommandBuffer *command_buffer, const char *text)
 /// ```
+/// {@category gpu}
 void sdlInsertGpuDebugLabel(
   Pointer<SdlGpuCommandBuffer> commandBuffer,
   String? text,
@@ -1004,6 +1024,7 @@ void sdlInsertGpuDebugLabel(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_PushGPUDebugGroup( SDL_GPUCommandBuffer *command_buffer, const char *name)
 /// ```
+/// {@category gpu}
 void sdlPushGpuDebugGroup(
   Pointer<SdlGpuCommandBuffer> commandBuffer,
   String? name,
@@ -1037,6 +1058,7 @@ void sdlPushGpuDebugGroup(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_PopGPUDebugGroup( SDL_GPUCommandBuffer *command_buffer)
 /// ```
+/// {@category gpu}
 void sdlPopGpuDebugGroup(Pointer<SdlGpuCommandBuffer> commandBuffer) {
   final sdlPopGpuDebugGroupLookupFunction = _libSdl
       .lookupFunction<
@@ -1059,6 +1081,7 @@ void sdlPopGpuDebugGroup(Pointer<SdlGpuCommandBuffer> commandBuffer) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_ReleaseGPUTexture( SDL_GPUDevice *device, SDL_GPUTexture *texture)
 /// ```
+/// {@category gpu}
 void sdlReleaseGpuTexture(
   Pointer<SdlGpuDevice> device,
   Pointer<SdlGpuTexture> texture,
@@ -1090,6 +1113,7 @@ void sdlReleaseGpuTexture(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_ReleaseGPUSampler( SDL_GPUDevice *device, SDL_GPUSampler *sampler)
 /// ```
+/// {@category gpu}
 void sdlReleaseGpuSampler(
   Pointer<SdlGpuDevice> device,
   Pointer<SdlGpuSampler> sampler,
@@ -1121,6 +1145,7 @@ void sdlReleaseGpuSampler(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_ReleaseGPUBuffer( SDL_GPUDevice *device, SDL_GPUBuffer *buffer)
 /// ```
+/// {@category gpu}
 void sdlReleaseGpuBuffer(
   Pointer<SdlGpuDevice> device,
   Pointer<SdlGpuBuffer> buffer,
@@ -1152,6 +1177,7 @@ void sdlReleaseGpuBuffer(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_ReleaseGPUTransferBuffer( SDL_GPUDevice *device, SDL_GPUTransferBuffer *transfer_buffer)
 /// ```
+/// {@category gpu}
 void sdlReleaseGpuTransferBuffer(
   Pointer<SdlGpuDevice> device,
   Pointer<SdlGpuTransferBuffer> transferBuffer,
@@ -1183,6 +1209,7 @@ void sdlReleaseGpuTransferBuffer(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_ReleaseGPUComputePipeline( SDL_GPUDevice *device, SDL_GPUComputePipeline *compute_pipeline)
 /// ```
+/// {@category gpu}
 void sdlReleaseGpuComputePipeline(
   Pointer<SdlGpuDevice> device,
   Pointer<SdlGpuComputePipeline> computePipeline,
@@ -1214,6 +1241,7 @@ void sdlReleaseGpuComputePipeline(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_ReleaseGPUShader( SDL_GPUDevice *device, SDL_GPUShader *shader)
 /// ```
+/// {@category gpu}
 void sdlReleaseGpuShader(
   Pointer<SdlGpuDevice> device,
   Pointer<SdlGpuShader> shader,
@@ -1245,6 +1273,7 @@ void sdlReleaseGpuShader(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_ReleaseGPUGraphicsPipeline( SDL_GPUDevice *device, SDL_GPUGraphicsPipeline *graphics_pipeline)
 /// ```
+/// {@category gpu}
 void sdlReleaseGpuGraphicsPipeline(
   Pointer<SdlGpuDevice> device,
   Pointer<SdlGpuGraphicsPipeline> graphicsPipeline,
@@ -1290,6 +1319,7 @@ void sdlReleaseGpuGraphicsPipeline(
 /// ```c
 /// extern SDL_DECLSPEC SDL_GPUCommandBuffer * SDLCALL SDL_AcquireGPUCommandBuffer( SDL_GPUDevice *device)
 /// ```
+/// {@category gpu}
 Pointer<SdlGpuCommandBuffer> sdlAcquireGpuCommandBuffer(
   Pointer<SdlGpuDevice> device,
 ) {
@@ -1323,6 +1353,7 @@ Pointer<SdlGpuCommandBuffer> sdlAcquireGpuCommandBuffer(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_PushGPUVertexUniformData( SDL_GPUCommandBuffer *command_buffer, Uint32 slot_index, const void *data, Uint32 length)
 /// ```
+/// {@category gpu}
 void sdlPushGpuVertexUniformData(
   Pointer<SdlGpuCommandBuffer> commandBuffer,
   int slotIndex,
@@ -1371,6 +1402,7 @@ void sdlPushGpuVertexUniformData(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_PushGPUFragmentUniformData( SDL_GPUCommandBuffer *command_buffer, Uint32 slot_index, const void *data, Uint32 length)
 /// ```
+/// {@category gpu}
 void sdlPushGpuFragmentUniformData(
   Pointer<SdlGpuCommandBuffer> commandBuffer,
   int slotIndex,
@@ -1419,6 +1451,7 @@ void sdlPushGpuFragmentUniformData(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_PushGPUComputeUniformData( SDL_GPUCommandBuffer *command_buffer, Uint32 slot_index, const void *data, Uint32 length)
 /// ```
+/// {@category gpu}
 void sdlPushGpuComputeUniformData(
   Pointer<SdlGpuCommandBuffer> commandBuffer,
   int slotIndex,
@@ -1476,6 +1509,7 @@ void sdlPushGpuComputeUniformData(
 /// ```c
 /// extern SDL_DECLSPEC SDL_GPURenderPass * SDLCALL SDL_BeginGPURenderPass( SDL_GPUCommandBuffer *command_buffer, const SDL_GPUColorTargetInfo *color_target_infos, Uint32 num_color_targets, const SDL_GPUDepthStencilTargetInfo *depth_stencil_target_info)
 /// ```
+/// {@category gpu}
 Pointer<SdlGpuRenderPass> sdlBeginGpuRenderPass(
   Pointer<SdlGpuCommandBuffer> commandBuffer,
   Pointer<SdlGpuColorTargetInfo> colorTargetInfos,
@@ -1518,6 +1552,7 @@ Pointer<SdlGpuRenderPass> sdlBeginGpuRenderPass(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_BindGPUGraphicsPipeline( SDL_GPURenderPass *render_pass, SDL_GPUGraphicsPipeline *graphics_pipeline)
 /// ```
+/// {@category gpu}
 void sdlBindGpuGraphicsPipeline(
   Pointer<SdlGpuRenderPass> renderPass,
   Pointer<SdlGpuGraphicsPipeline> graphicsPipeline,
@@ -1547,6 +1582,7 @@ void sdlBindGpuGraphicsPipeline(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_SetGPUViewport( SDL_GPURenderPass *render_pass, const SDL_GPUViewport *viewport)
 /// ```
+/// {@category gpu}
 void sdlSetGpuViewport(
   Pointer<SdlGpuRenderPass> renderPass,
   Pointer<SdlGpuViewport> viewport,
@@ -1576,6 +1612,7 @@ void sdlSetGpuViewport(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_SetGPUScissor( SDL_GPURenderPass *render_pass, const SDL_Rect *scissor)
 /// ```
+/// {@category gpu}
 void sdlSetGpuScissor(
   Pointer<SdlGpuRenderPass> renderPass,
   Pointer<SdlRect> scissor,
@@ -1608,6 +1645,7 @@ void sdlSetGpuScissor(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_SetGPUBlendConstants( SDL_GPURenderPass *render_pass, SDL_FColor blend_constants)
 /// ```
+/// {@category gpu}
 void sdlSetGpuBlendConstants(
   Pointer<SdlGpuRenderPass> renderPass,
   SdlFColor blendAnts,
@@ -1634,6 +1672,7 @@ void sdlSetGpuBlendConstants(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_SetGPUStencilReference( SDL_GPURenderPass *render_pass, Uint8 reference)
 /// ```
+/// {@category gpu}
 void sdlSetGpuStencilReference(
   Pointer<SdlGpuRenderPass> renderPass,
   int reference,
@@ -1661,6 +1700,7 @@ void sdlSetGpuStencilReference(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_BindGPUVertexBuffers( SDL_GPURenderPass *render_pass, Uint32 first_slot, const SDL_GPUBufferBinding *bindings, Uint32 num_bindings)
 /// ```
+/// {@category gpu}
 void sdlBindGpuVertexBuffers(
   Pointer<SdlGpuRenderPass> renderPass,
   int firstSlot,
@@ -1704,6 +1744,7 @@ void sdlBindGpuVertexBuffers(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_BindGPUIndexBuffer( SDL_GPURenderPass *render_pass, const SDL_GPUBufferBinding *binding, SDL_GPUIndexElementSize index_element_size)
 /// ```
+/// {@category gpu}
 void sdlBindGpuIndexBuffer(
   Pointer<SdlGpuRenderPass> renderPass,
   Pointer<SdlGpuBufferBinding> binding,
@@ -1751,6 +1792,7 @@ void sdlBindGpuIndexBuffer(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_BindGPUVertexSamplers( SDL_GPURenderPass *render_pass, Uint32 first_slot, const SDL_GPUTextureSamplerBinding *texture_sampler_bindings, Uint32 num_bindings)
 /// ```
+/// {@category gpu}
 void sdlBindGpuVertexSamplers(
   Pointer<SdlGpuRenderPass> renderPass,
   int firstSlot,
@@ -1801,6 +1843,7 @@ void sdlBindGpuVertexSamplers(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_BindGPUVertexStorageTextures( SDL_GPURenderPass *render_pass, Uint32 first_slot, SDL_GPUTexture *const *storage_textures, Uint32 num_bindings)
 /// ```
+/// {@category gpu}
 void sdlBindGpuVertexStorageTextures(
   Pointer<SdlGpuRenderPass> renderPass,
   int firstSlot,
@@ -1851,6 +1894,7 @@ void sdlBindGpuVertexStorageTextures(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_BindGPUVertexStorageBuffers( SDL_GPURenderPass *render_pass, Uint32 first_slot, SDL_GPUBuffer *const *storage_buffers, Uint32 num_bindings)
 /// ```
+/// {@category gpu}
 void sdlBindGpuVertexStorageBuffers(
   Pointer<SdlGpuRenderPass> renderPass,
   int firstSlot,
@@ -1902,6 +1946,7 @@ void sdlBindGpuVertexStorageBuffers(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_BindGPUFragmentSamplers( SDL_GPURenderPass *render_pass, Uint32 first_slot, const SDL_GPUTextureSamplerBinding *texture_sampler_bindings, Uint32 num_bindings)
 /// ```
+/// {@category gpu}
 void sdlBindGpuFragmentSamplers(
   Pointer<SdlGpuRenderPass> renderPass,
   int firstSlot,
@@ -1952,6 +1997,7 @@ void sdlBindGpuFragmentSamplers(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_BindGPUFragmentStorageTextures( SDL_GPURenderPass *render_pass, Uint32 first_slot, SDL_GPUTexture *const *storage_textures, Uint32 num_bindings)
 /// ```
+/// {@category gpu}
 void sdlBindGpuFragmentStorageTextures(
   Pointer<SdlGpuRenderPass> renderPass,
   int firstSlot,
@@ -2002,6 +2048,7 @@ void sdlBindGpuFragmentStorageTextures(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_BindGPUFragmentStorageBuffers( SDL_GPURenderPass *render_pass, Uint32 first_slot, SDL_GPUBuffer *const *storage_buffers, Uint32 num_bindings)
 /// ```
+/// {@category gpu}
 void sdlBindGpuFragmentStorageBuffers(
   Pointer<SdlGpuRenderPass> renderPass,
   int firstSlot,
@@ -2057,6 +2104,7 @@ void sdlBindGpuFragmentStorageBuffers(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_DrawGPUIndexedPrimitives( SDL_GPURenderPass *render_pass, Uint32 num_indices, Uint32 num_instances, Uint32 first_index, Sint32 vertex_offset, Uint32 first_instance)
 /// ```
+/// {@category gpu}
 void sdlDrawGpuIndexedPrimitives(
   Pointer<SdlGpuRenderPass> renderPass,
   int numIndices,
@@ -2117,6 +2165,7 @@ void sdlDrawGpuIndexedPrimitives(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_DrawGPUPrimitives( SDL_GPURenderPass *render_pass, Uint32 num_vertices, Uint32 num_instances, Uint32 first_vertex, Uint32 first_instance)
 /// ```
+/// {@category gpu}
 void sdlDrawGpuPrimitives(
   Pointer<SdlGpuRenderPass> renderPass,
   int numVertices,
@@ -2169,6 +2218,7 @@ void sdlDrawGpuPrimitives(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_DrawGPUPrimitivesIndirect( SDL_GPURenderPass *render_pass, SDL_GPUBuffer *buffer, Uint32 offset, Uint32 draw_count)
 /// ```
+/// {@category gpu}
 void sdlDrawGpuPrimitivesIndirect(
   Pointer<SdlGpuRenderPass> renderPass,
   Pointer<SdlGpuBuffer> buffer,
@@ -2217,6 +2267,7 @@ void sdlDrawGpuPrimitivesIndirect(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_DrawGPUIndexedPrimitivesIndirect( SDL_GPURenderPass *render_pass, SDL_GPUBuffer *buffer, Uint32 offset, Uint32 draw_count)
 /// ```
+/// {@category gpu}
 void sdlDrawGpuIndexedPrimitivesIndirect(
   Pointer<SdlGpuRenderPass> renderPass,
   Pointer<SdlGpuBuffer> buffer,
@@ -2259,6 +2310,7 @@ void sdlDrawGpuIndexedPrimitivesIndirect(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_EndGPURenderPass( SDL_GPURenderPass *render_pass)
 /// ```
+/// {@category gpu}
 void sdlEndGpuRenderPass(Pointer<SdlGpuRenderPass> renderPass) {
   final sdlEndGpuRenderPassLookupFunction = _libSdl
       .lookupFunction<
@@ -2308,6 +2360,7 @@ void sdlEndGpuRenderPass(Pointer<SdlGpuRenderPass> renderPass) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_GPUComputePass * SDLCALL SDL_BeginGPUComputePass( SDL_GPUCommandBuffer *command_buffer, const SDL_GPUStorageTextureReadWriteBinding *storage_texture_bindings, Uint32 num_storage_texture_bindings, const SDL_GPUStorageBufferReadWriteBinding *storage_buffer_bindings, Uint32 num_storage_buffer_bindings)
 /// ```
+/// {@category gpu}
 Pointer<SdlGpuComputePass> sdlBeginGpuComputePass(
   Pointer<SdlGpuCommandBuffer> commandBuffer,
   Pointer<SdlGpuStorageTextureReadWriteBinding> storageTextureBindings,
@@ -2352,6 +2405,7 @@ Pointer<SdlGpuComputePass> sdlBeginGpuComputePass(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_BindGPUComputePipeline( SDL_GPUComputePass *compute_pass, SDL_GPUComputePipeline *compute_pipeline)
 /// ```
+/// {@category gpu}
 void sdlBindGpuComputePipeline(
   Pointer<SdlGpuComputePass> computePass,
   Pointer<SdlGpuComputePipeline> computePipeline,
@@ -2392,6 +2446,7 @@ void sdlBindGpuComputePipeline(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_BindGPUComputeSamplers( SDL_GPUComputePass *compute_pass, Uint32 first_slot, const SDL_GPUTextureSamplerBinding *texture_sampler_bindings, Uint32 num_bindings)
 /// ```
+/// {@category gpu}
 void sdlBindGpuComputeSamplers(
   Pointer<SdlGpuComputePass> computePass,
   int firstSlot,
@@ -2442,6 +2497,7 @@ void sdlBindGpuComputeSamplers(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_BindGPUComputeStorageTextures( SDL_GPUComputePass *compute_pass, Uint32 first_slot, SDL_GPUTexture *const *storage_textures, Uint32 num_bindings)
 /// ```
+/// {@category gpu}
 void sdlBindGpuComputeStorageTextures(
   Pointer<SdlGpuComputePass> computePass,
   int firstSlot,
@@ -2492,6 +2548,7 @@ void sdlBindGpuComputeStorageTextures(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_BindGPUComputeStorageBuffers( SDL_GPUComputePass *compute_pass, Uint32 first_slot, SDL_GPUBuffer *const *storage_buffers, Uint32 num_bindings)
 /// ```
+/// {@category gpu}
 void sdlBindGpuComputeStorageBuffers(
   Pointer<SdlGpuComputePass> computePass,
   int firstSlot,
@@ -2544,6 +2601,7 @@ void sdlBindGpuComputeStorageBuffers(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_DispatchGPUCompute( SDL_GPUComputePass *compute_pass, Uint32 groupcount_x, Uint32 groupcount_y, Uint32 groupcount_z)
 /// ```
+/// {@category gpu}
 void sdlDispatchGpuCompute(
   Pointer<SdlGpuComputePass> computePass,
   int groupcountX,
@@ -2594,6 +2652,7 @@ void sdlDispatchGpuCompute(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_DispatchGPUComputeIndirect( SDL_GPUComputePass *compute_pass, SDL_GPUBuffer *buffer, Uint32 offset)
 /// ```
+/// {@category gpu}
 void sdlDispatchGpuComputeIndirect(
   Pointer<SdlGpuComputePass> computePass,
   Pointer<SdlGpuBuffer> buffer,
@@ -2632,6 +2691,7 @@ void sdlDispatchGpuComputeIndirect(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_EndGPUComputePass( SDL_GPUComputePass *compute_pass)
 /// ```
+/// {@category gpu}
 void sdlEndGpuComputePass(Pointer<SdlGpuComputePass> computePass) {
   final sdlEndGpuComputePassLookupFunction = _libSdl
       .lookupFunction<
@@ -2659,6 +2719,7 @@ void sdlEndGpuComputePass(Pointer<SdlGpuComputePass> computePass) {
 /// ```c
 /// extern SDL_DECLSPEC void * SDLCALL SDL_MapGPUTransferBuffer( SDL_GPUDevice *device, SDL_GPUTransferBuffer *transfer_buffer, bool cycle)
 /// ```
+/// {@category gpu}
 Pointer<NativeType> sdlMapGpuTransferBuffer(
   Pointer<SdlGpuDevice> device,
   Pointer<SdlGpuTransferBuffer> transferBuffer,
@@ -2695,6 +2756,7 @@ Pointer<NativeType> sdlMapGpuTransferBuffer(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_UnmapGPUTransferBuffer( SDL_GPUDevice *device, SDL_GPUTransferBuffer *transfer_buffer)
 /// ```
+/// {@category gpu}
 void sdlUnmapGpuTransferBuffer(
   Pointer<SdlGpuDevice> device,
   Pointer<SdlGpuTransferBuffer> transferBuffer,
@@ -2728,6 +2790,7 @@ void sdlUnmapGpuTransferBuffer(
 /// ```c
 /// extern SDL_DECLSPEC SDL_GPUCopyPass * SDLCALL SDL_BeginGPUCopyPass( SDL_GPUCommandBuffer *command_buffer)
 /// ```
+/// {@category gpu}
 Pointer<SdlGpuCopyPass> sdlBeginGpuCopyPass(
   Pointer<SdlGpuCommandBuffer> commandBuffer,
 ) {
@@ -2763,6 +2826,7 @@ Pointer<SdlGpuCopyPass> sdlBeginGpuCopyPass(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_UploadToGPUTexture( SDL_GPUCopyPass *copy_pass, const SDL_GPUTextureTransferInfo *source, const SDL_GPUTextureRegion *destination, bool cycle)
 /// ```
+/// {@category gpu}
 void sdlUploadToGpuTexture(
   Pointer<SdlGpuCopyPass> copyPass,
   Pointer<SdlGpuTextureTransferInfo> source,
@@ -2809,6 +2873,7 @@ void sdlUploadToGpuTexture(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_UploadToGPUBuffer( SDL_GPUCopyPass *copy_pass, const SDL_GPUTransferBufferLocation *source, const SDL_GPUBufferRegion *destination, bool cycle)
 /// ```
+/// {@category gpu}
 void sdlUploadToGpuBuffer(
   Pointer<SdlGpuCopyPass> copyPass,
   Pointer<SdlGpuTransferBufferLocation> source,
@@ -2858,6 +2923,7 @@ void sdlUploadToGpuBuffer(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_CopyGPUTextureToTexture( SDL_GPUCopyPass *copy_pass, const SDL_GPUTextureLocation *source, const SDL_GPUTextureLocation *destination, Uint32 w, Uint32 h, Uint32 d, bool cycle)
 /// ```
+/// {@category gpu}
 void sdlCopyGpuTextureToTexture(
   Pointer<SdlGpuCopyPass> copyPass,
   Pointer<SdlGpuTextureLocation> source,
@@ -2917,6 +2983,7 @@ void sdlCopyGpuTextureToTexture(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_CopyGPUBufferToBuffer( SDL_GPUCopyPass *copy_pass, const SDL_GPUBufferLocation *source, const SDL_GPUBufferLocation *destination, Uint32 size, bool cycle)
 /// ```
+/// {@category gpu}
 void sdlCopyGpuBufferToBuffer(
   Pointer<SdlGpuCopyPass> copyPass,
   Pointer<SdlGpuBufferLocation> source,
@@ -2966,6 +3033,7 @@ void sdlCopyGpuBufferToBuffer(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_DownloadFromGPUTexture( SDL_GPUCopyPass *copy_pass, const SDL_GPUTextureRegion *source, const SDL_GPUTextureTransferInfo *destination)
 /// ```
+/// {@category gpu}
 void sdlDownloadFromGpuTexture(
   Pointer<SdlGpuCopyPass> copyPass,
   Pointer<SdlGpuTextureRegion> source,
@@ -3002,6 +3070,7 @@ void sdlDownloadFromGpuTexture(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_DownloadFromGPUBuffer( SDL_GPUCopyPass *copy_pass, const SDL_GPUBufferRegion *source, const SDL_GPUTransferBufferLocation *destination)
 /// ```
+/// {@category gpu}
 void sdlDownloadFromGpuBuffer(
   Pointer<SdlGpuCopyPass> copyPass,
   Pointer<SdlGpuBufferRegion> source,
@@ -3033,6 +3102,7 @@ void sdlDownloadFromGpuBuffer(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_EndGPUCopyPass( SDL_GPUCopyPass *copy_pass)
 /// ```
+/// {@category gpu}
 void sdlEndGpuCopyPass(Pointer<SdlGpuCopyPass> copyPass) {
   final sdlEndGpuCopyPassLookupFunction = _libSdl
       .lookupFunction<
@@ -3055,6 +3125,7 @@ void sdlEndGpuCopyPass(Pointer<SdlGpuCopyPass> copyPass) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_GenerateMipmapsForGPUTexture( SDL_GPUCommandBuffer *command_buffer, SDL_GPUTexture *texture)
 /// ```
+/// {@category gpu}
 void sdlGenerateMipmapsForGpuTexture(
   Pointer<SdlGpuCommandBuffer> commandBuffer,
   Pointer<SdlGpuTexture> texture,
@@ -3086,6 +3157,7 @@ void sdlGenerateMipmapsForGpuTexture(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_BlitGPUTexture( SDL_GPUCommandBuffer *command_buffer, const SDL_GPUBlitInfo *info)
 /// ```
+/// {@category gpu}
 void sdlBlitGpuTexture(
   Pointer<SdlGpuCommandBuffer> commandBuffer,
   Pointer<SdlGpuBlitInfo> info,
@@ -3121,6 +3193,7 @@ void sdlBlitGpuTexture(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_WindowSupportsGPUSwapchainComposition( SDL_GPUDevice *device, SDL_Window *window, SDL_GPUSwapchainComposition swapchain_composition)
 /// ```
+/// {@category gpu}
 bool sdlWindowSupportsGpuSwapchainComposition(
   Pointer<SdlGpuDevice> device,
   Pointer<SdlWindow> window,
@@ -3164,6 +3237,7 @@ bool sdlWindowSupportsGpuSwapchainComposition(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_WindowSupportsGPUPresentMode( SDL_GPUDevice *device, SDL_Window *window, SDL_GPUPresentMode present_mode)
 /// ```
+/// {@category gpu}
 bool sdlWindowSupportsGpuPresentMode(
   Pointer<SdlGpuDevice> device,
   Pointer<SdlWindow> window,
@@ -3220,6 +3294,7 @@ bool sdlWindowSupportsGpuPresentMode(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_ClaimWindowForGPUDevice( SDL_GPUDevice *device, SDL_Window *window)
 /// ```
+/// {@category gpu}
 bool sdlClaimWindowForGpuDevice(
   Pointer<SdlGpuDevice> device,
   Pointer<SdlWindow> window,
@@ -3245,6 +3320,7 @@ bool sdlClaimWindowForGpuDevice(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_ReleaseWindowFromGPUDevice( SDL_GPUDevice *device, SDL_Window *window)
 /// ```
+/// {@category gpu}
 void sdlReleaseWindowFromGpuDevice(
   Pointer<SdlGpuDevice> device,
   Pointer<SdlWindow> window,
@@ -3283,6 +3359,7 @@ void sdlReleaseWindowFromGpuDevice(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetGPUSwapchainParameters( SDL_GPUDevice *device, SDL_Window *window, SDL_GPUSwapchainComposition swapchain_composition, SDL_GPUPresentMode present_mode)
 /// ```
+/// {@category gpu}
 bool sdlSetGpuSwapchainParameters(
   Pointer<SdlGpuDevice> device,
   Pointer<SdlWindow> window,
@@ -3341,6 +3418,7 @@ bool sdlSetGpuSwapchainParameters(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetGPUAllowedFramesInFlight( SDL_GPUDevice *device, Uint32 allowed_frames_in_flight)
 /// ```
+/// {@category gpu}
 bool sdlSetGpuAllowedFramesInFlight(
   Pointer<SdlGpuDevice> device,
   int allowedFramesInFlight,
@@ -3374,6 +3452,7 @@ bool sdlSetGpuAllowedFramesInFlight(
 /// ```c
 /// extern SDL_DECLSPEC SDL_GPUTextureFormat SDLCALL SDL_GetGPUSwapchainTextureFormat( SDL_GPUDevice *device, SDL_Window *window)
 /// ```
+/// {@category gpu}
 int sdlGetGpuSwapchainTextureFormat(
   Pointer<SdlGpuDevice> device,
   Pointer<SdlWindow> window,
@@ -3437,6 +3516,7 @@ int sdlGetGpuSwapchainTextureFormat(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_AcquireGPUSwapchainTexture( SDL_GPUCommandBuffer *command_buffer, SDL_Window *window, SDL_GPUTexture **swapchain_texture, Uint32 *swapchain_texture_width, Uint32 *swapchain_texture_height)
 /// ```
+/// {@category gpu}
 bool sdlAcquireGpuSwapchainTexture(
   Pointer<SdlGpuCommandBuffer> commandBuffer,
   Pointer<SdlWindow> window,
@@ -3491,6 +3571,7 @@ bool sdlAcquireGpuSwapchainTexture(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_WaitForGPUSwapchain( SDL_GPUDevice *device, SDL_Window *window)
 /// ```
+/// {@category gpu}
 bool sdlWaitForGpuSwapchain(
   Pointer<SdlGpuDevice> device,
   Pointer<SdlWindow> window,
@@ -3548,6 +3629,7 @@ bool sdlWaitForGpuSwapchain(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_WaitAndAcquireGPUSwapchainTexture( SDL_GPUCommandBuffer *command_buffer, SDL_Window *window, SDL_GPUTexture **swapchain_texture, Uint32 *swapchain_texture_width, Uint32 *swapchain_texture_height)
 /// ```
+/// {@category gpu}
 bool sdlWaitAndAcquireGpuSwapchainTexture(
   Pointer<SdlGpuCommandBuffer> commandBuffer,
   Pointer<SdlWindow> window,
@@ -3606,6 +3688,7 @@ bool sdlWaitAndAcquireGpuSwapchainTexture(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SubmitGPUCommandBuffer( SDL_GPUCommandBuffer *command_buffer)
 /// ```
+/// {@category gpu}
 bool sdlSubmitGpuCommandBuffer(Pointer<SdlGpuCommandBuffer> commandBuffer) {
   final sdlSubmitGpuCommandBufferLookupFunction = _libSdl
       .lookupFunction<
@@ -3642,6 +3725,7 @@ bool sdlSubmitGpuCommandBuffer(Pointer<SdlGpuCommandBuffer> commandBuffer) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_GPUFence * SDLCALL SDL_SubmitGPUCommandBufferAndAcquireFence( SDL_GPUCommandBuffer *command_buffer)
 /// ```
+/// {@category gpu}
 Pointer<SdlGpuFence> sdlSubmitGpuCommandBufferAndAcquireFence(
   Pointer<SdlGpuCommandBuffer> commandBuffer,
 ) {
@@ -3682,6 +3766,7 @@ Pointer<SdlGpuFence> sdlSubmitGpuCommandBufferAndAcquireFence(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_CancelGPUCommandBuffer( SDL_GPUCommandBuffer *command_buffer)
 /// ```
+/// {@category gpu}
 bool sdlCancelGpuCommandBuffer(Pointer<SdlGpuCommandBuffer> commandBuffer) {
   final sdlCancelGpuCommandBufferLookupFunction = _libSdl
       .lookupFunction<
@@ -3705,6 +3790,7 @@ bool sdlCancelGpuCommandBuffer(Pointer<SdlGpuCommandBuffer> commandBuffer) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_WaitForGPUIdle( SDL_GPUDevice *device)
 /// ```
+/// {@category gpu}
 bool sdlWaitForGpuIdle(Pointer<SdlGpuDevice> device) {
   final sdlWaitForGpuIdleLookupFunction = _libSdl
       .lookupFunction<
@@ -3733,6 +3819,7 @@ bool sdlWaitForGpuIdle(Pointer<SdlGpuDevice> device) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_WaitForGPUFences( SDL_GPUDevice *device, bool wait_all, SDL_GPUFence *const *fences, Uint32 num_fences)
 /// ```
+/// {@category gpu}
 bool sdlWaitForGpuFences(
   Pointer<SdlGpuDevice> device,
   bool waitAll,
@@ -3777,6 +3864,7 @@ bool sdlWaitForGpuFences(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_QueryGPUFence( SDL_GPUDevice *device, SDL_GPUFence *fence)
 /// ```
+/// {@category gpu}
 bool sdlQueryGpuFence(
   Pointer<SdlGpuDevice> device,
   Pointer<SdlGpuFence> fence,
@@ -3807,6 +3895,7 @@ bool sdlQueryGpuFence(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_ReleaseGPUFence( SDL_GPUDevice *device, SDL_GPUFence *fence)
 /// ```
+/// {@category gpu}
 void sdlReleaseGpuFence(
   Pointer<SdlGpuDevice> device,
   Pointer<SdlGpuFence> fence,
@@ -3832,6 +3921,7 @@ void sdlReleaseGpuFence(
 /// ```c
 /// extern SDL_DECLSPEC Uint32 SDLCALL SDL_GPUTextureFormatTexelBlockSize( SDL_GPUTextureFormat format)
 /// ```
+/// {@category gpu}
 int sdlGpuTextureFormatTexelBlockSize(int format) {
   final sdlGpuTextureFormatTexelBlockSizeLookupFunction = _libSdl
       .lookupFunction<Uint32 Function(Int32 format), int Function(int format)>(
@@ -3855,6 +3945,7 @@ int sdlGpuTextureFormatTexelBlockSize(int format) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GPUTextureSupportsFormat( SDL_GPUDevice *device, SDL_GPUTextureFormat format, SDL_GPUTextureType type, SDL_GPUTextureUsageFlags usage)
 /// ```
+/// {@category gpu}
 bool sdlGpuTextureSupportsFormat(
   Pointer<SdlGpuDevice> device,
   int format,
@@ -3898,6 +3989,7 @@ bool sdlGpuTextureSupportsFormat(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GPUTextureSupportsSampleCount( SDL_GPUDevice *device, SDL_GPUTextureFormat format, SDL_GPUSampleCount sample_count)
 /// ```
+/// {@category gpu}
 bool sdlGpuTextureSupportsSampleCount(
   Pointer<SdlGpuDevice> device,
   int format,
@@ -3934,6 +4026,7 @@ bool sdlGpuTextureSupportsSampleCount(
 /// ```c
 /// extern SDL_DECLSPEC Uint32 SDLCALL SDL_CalculateGPUTextureFormatSize( SDL_GPUTextureFormat format, Uint32 width, Uint32 height, Uint32 depth_or_layer_count)
 /// ```
+/// {@category gpu}
 int sdlCalculateGpuTextureFormatSize(
   int format,
   int width,
@@ -3974,6 +4067,7 @@ int sdlCalculateGpuTextureFormatSize(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_GDKSuspendGPU(SDL_GPUDevice *device)
 /// ```
+/// {@category gpu}
 void sdlGdkSuspendGpu(Pointer<SdlGpuDevice> device) {
   final sdlGdkSuspendGpuLookupFunction = _libSdl
       .lookupFunction<
@@ -3999,6 +4093,7 @@ void sdlGdkSuspendGpu(Pointer<SdlGpuDevice> device) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_GDKResumeGPU(SDL_GPUDevice *device)
 /// ```
+/// {@category gpu}
 void sdlGdkResumeGpu(Pointer<SdlGpuDevice> device) {
   final sdlGdkResumeGpuLookupFunction = _libSdl
       .lookupFunction<

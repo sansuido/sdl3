@@ -16,6 +16,7 @@ part of '../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_SetLogPriorities(SDL_LogPriority priority)
 /// ```
+/// {@category log}
 void sdlSetLogPriorities(int priority) {
   final sdlSetLogPrioritiesLookupFunction = _libSdl
       .lookupFunction<
@@ -42,6 +43,7 @@ void sdlSetLogPriorities(int priority) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_SetLogPriority(int category, SDL_LogPriority priority)
 /// ```
+/// {@category log}
 void sdlSetLogPriority(int category, int priority) {
   final sdlSetLogPriorityLookupFunction = _libSdl
       .lookupFunction<
@@ -66,6 +68,7 @@ void sdlSetLogPriority(int category, int priority) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_LogPriority SDLCALL SDL_GetLogPriority(int category)
 /// ```
+/// {@category log}
 int sdlGetLogPriority(int category) {
   final sdlGetLogPriorityLookupFunction = _libSdl
       .lookupFunction<
@@ -90,6 +93,7 @@ int sdlGetLogPriority(int category) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_ResetLogPriorities(void)
 /// ```
+/// {@category log}
 void sdlResetLogPriorities() {
   final sdlResetLogPrioritiesLookupFunction = _libSdl
       .lookupFunction<Void Function(), void Function()>(
@@ -124,6 +128,7 @@ void sdlResetLogPriorities() {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetLogPriorityPrefix(SDL_LogPriority priority, const char *prefix)
 /// ```
+/// {@category log}
 bool sdlSetLogPriorityPrefix(int priority, String? prefix) {
   final sdlSetLogPriorityPrefixLookupFunction = _libSdl
       .lookupFunction<
@@ -161,6 +166,7 @@ bool sdlSetLogPriorityPrefix(int priority, String? prefix) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_Log(SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(1)
 /// ```
+/// {@category log}
 void sdlLog(String? fmt) {
   final sdlLogLookupFunction = _libSdl
       .lookupFunction<
@@ -199,6 +205,7 @@ void sdlLog(String? fmt) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_LogTrace(int category, SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(2)
 /// ```
+/// {@category log}
 void sdlLogTrace(int category, String? fmt) {
   final sdlLogTraceLookupFunction = _libSdl
       .lookupFunction<
@@ -235,6 +242,7 @@ void sdlLogTrace(int category, String? fmt) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_LogVerbose(int category, SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(2)
 /// ```
+/// {@category log}
 void sdlLogVerbose(int category, String? fmt) {
   final sdlLogVerboseLookupFunction = _libSdl
       .lookupFunction<
@@ -272,6 +280,7 @@ void sdlLogVerbose(int category, String? fmt) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_LogDebug(int category, SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(2)
 /// ```
+/// {@category log}
 void sdlLogDebug(int category, String? fmt) {
   final sdlLogDebugLookupFunction = _libSdl
       .lookupFunction<
@@ -309,6 +318,7 @@ void sdlLogDebug(int category, String? fmt) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_LogInfo(int category, SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(2)
 /// ```
+/// {@category log}
 void sdlLogInfo(int category, String? fmt) {
   final sdlLogInfoLookupFunction = _libSdl
       .lookupFunction<
@@ -346,6 +356,7 @@ void sdlLogInfo(int category, String? fmt) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_LogWarn(int category, SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(2)
 /// ```
+/// {@category log}
 void sdlLogWarn(int category, String? fmt) {
   final sdlLogWarnLookupFunction = _libSdl
       .lookupFunction<
@@ -383,6 +394,7 @@ void sdlLogWarn(int category, String? fmt) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_LogError(int category, SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(2)
 /// ```
+/// {@category log}
 void sdlLogError(int category, String? fmt) {
   final sdlLogErrorLookupFunction = _libSdl
       .lookupFunction<
@@ -420,6 +432,7 @@ void sdlLogError(int category, String? fmt) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_LogCritical(int category, SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(2)
 /// ```
+/// {@category log}
 void sdlLogCritical(int category, String? fmt) {
   final sdlLogCriticalLookupFunction = _libSdl
       .lookupFunction<
@@ -458,6 +471,7 @@ void sdlLogCritical(int category, String? fmt) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_LogMessage(int category, SDL_LogPriority priority, SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(3)
 /// ```
+/// {@category log}
 void sdlLogMessage(int category, int priority, String? fmt) {
   final sdlLogMessageLookupFunction = _libSdl
       .lookupFunction<
@@ -495,6 +509,7 @@ void sdlLogMessage(int category, int priority, String? fmt) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_LogMessageV(int category, SDL_LogPriority priority, SDL_PRINTF_FORMAT_STRING const char *fmt, va_list ap) SDL_PRINTF_VARARG_FUNCV(3)
 /// ```
+/// {@category log}
 void sdlLogMessageV(int category, int priority, String? fmt) {
   final sdlLogMessageVLookupFunction = _libSdl
       .lookupFunction<
@@ -522,6 +537,7 @@ void sdlLogMessageV(int category, int priority, String? fmt) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_LogOutputFunction SDLCALL SDL_GetDefaultLogOutputFunction(void)
 /// ```
+/// {@category log}
 Pointer<NativeFunction<SdlLogOutputFunction>> sdlGetDefaultLogOutputFunction() {
   final sdlGetDefaultLogOutputFunctionLookupFunction = _libSdl
       .lookupFunction<
@@ -549,6 +565,7 @@ Pointer<NativeFunction<SdlLogOutputFunction>> sdlGetDefaultLogOutputFunction() {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_GetLogOutputFunction(SDL_LogOutputFunction *callback, void **userdata)
 /// ```
+/// {@category log}
 void sdlGetLogOutputFunction(
   Pointer<Pointer<NativeFunction<SdlLogOutputFunction>>> callback,
   Pointer<Pointer<NativeType>> userdata,
@@ -583,6 +600,7 @@ void sdlGetLogOutputFunction(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_SetLogOutputFunction(SDL_LogOutputFunction callback, void *userdata)
 /// ```
+/// {@category log}
 void sdlSetLogOutputFunction(
   Pointer<NativeFunction<SdlLogOutputFunction>> callback,
   Pointer<NativeType> userdata,

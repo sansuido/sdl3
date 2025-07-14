@@ -20,6 +20,7 @@ part of '../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_GetVersion(void)
 /// ```
+/// {@category version}
 int sdlGetVersion() {
   final sdlGetVersionLookupFunction = _libSdl
       .lookupFunction<Int32 Function(), int Function()>('SDL_GetVersion');
@@ -54,6 +55,7 @@ int sdlGetVersion() {
 /// ```c
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetRevision(void)
 /// ```
+/// {@category version}
 String? sdlGetRevision() {
   final sdlGetRevisionLookupFunction = _libSdl
       .lookupFunction<Pointer<Utf8> Function(), Pointer<Utf8> Function()>(

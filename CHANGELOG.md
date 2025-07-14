@@ -1,3 +1,7 @@
+## 2.2.0
+- SDL3-2025-07-13
+- [update] Added a category to doc.
+
 ## 2.1.1
 - SDL3-2025-07-06
 

@@ -31,6 +31,7 @@ part of '../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetError(SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(1)
 /// ```
+/// {@category error}
 bool sdlSetError(String? fmt) {
   final sdlSetErrorLookupFunction = _libSdl
       .lookupFunction<
@@ -63,6 +64,7 @@ bool sdlSetError(String? fmt) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetErrorV(SDL_PRINTF_FORMAT_STRING const char *fmt, va_list ap) SDL_PRINTF_VARARG_FUNCV(1)
 /// ```
+/// {@category error}
 bool sdlSetErrorV(String? fmt) {
   final sdlSetErrorVLookupFunction = _libSdl
       .lookupFunction<
@@ -89,6 +91,7 @@ bool sdlSetErrorV(String? fmt) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_OutOfMemory(void)
 /// ```
+/// {@category error}
 bool sdlOutOfMemory() {
   final sdlOutOfMemoryLookupFunction = _libSdl
       .lookupFunction<Uint8 Function(), int Function()>('SDL_OutOfMemory');
@@ -133,6 +136,7 @@ bool sdlOutOfMemory() {
 /// ```c
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetError(void)
 /// ```
+/// {@category error}
 String? sdlGetError() {
   final sdlGetErrorLookupFunction = _libSdl
       .lookupFunction<Pointer<Utf8> Function(), Pointer<Utf8> Function()>(
@@ -160,6 +164,7 @@ String? sdlGetError() {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_ClearError(void)
 /// ```
+/// {@category error}
 bool sdlClearError() {
   final sdlClearErrorLookupFunction = _libSdl
       .lookupFunction<Uint8 Function(), int Function()>('SDL_ClearError');

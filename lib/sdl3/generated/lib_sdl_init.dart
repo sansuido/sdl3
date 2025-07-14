@@ -60,6 +60,7 @@ part of '../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_Init(SDL_InitFlags flags)
 /// ```
+/// {@category init}
 bool sdlInit(int flags) {
   final sdlInitLookupFunction = _libSdl
       .lookupFunction<Uint8 Function(Uint32 flags), int Function(int flags)>(
@@ -86,6 +87,7 @@ bool sdlInit(int flags) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_InitSubSystem(SDL_InitFlags flags)
 /// ```
+/// {@category init}
 bool sdlInitSubSystem(int flags) {
   final sdlInitSubSystemLookupFunction = _libSdl
       .lookupFunction<Uint8 Function(Uint32 flags), int Function(int flags)>(
@@ -110,6 +112,7 @@ bool sdlInitSubSystem(int flags) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_QuitSubSystem(SDL_InitFlags flags)
 /// ```
+/// {@category init}
 void sdlQuitSubSystem(int flags) {
   final sdlQuitSubSystemLookupFunction = _libSdl
       .lookupFunction<Void Function(Uint32 flags), void Function(int flags)>(
@@ -133,6 +136,7 @@ void sdlQuitSubSystem(int flags) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_InitFlags SDLCALL SDL_WasInit(SDL_InitFlags flags)
 /// ```
+/// {@category init}
 int sdlWasInit(int flags) {
   final sdlWasInitLookupFunction = _libSdl
       .lookupFunction<Uint32 Function(Uint32 flags), int Function(int flags)>(
@@ -160,6 +164,7 @@ int sdlWasInit(int flags) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_Quit(void)
 /// ```
+/// {@category init}
 void sdlQuit() {
   final sdlQuitLookupFunction = _libSdl
       .lookupFunction<Void Function(), void Function()>('SDL_Quit');
@@ -187,6 +192,7 @@ void sdlQuit() {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_IsMainThread(void)
 /// ```
+/// {@category init}
 bool sdlIsMainThread() {
   final sdlIsMainThreadLookupFunction = _libSdl
       .lookupFunction<Uint8 Function(), int Function()>('SDL_IsMainThread');
@@ -220,6 +226,7 @@ bool sdlIsMainThread() {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_RunOnMainThread(SDL_MainThreadCallback callback, void *userdata, bool wait_complete)
 /// ```
+/// {@category init}
 bool sdlRunOnMainThread(
   Pointer<NativeFunction<SdlMainThreadCallback>> callback,
   Pointer<NativeType> userdata,
@@ -285,6 +292,7 @@ bool sdlRunOnMainThread(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetAppMetadata(const char *appname, const char *appversion, const char *appidentifier)
 /// ```
+/// {@category init}
 bool sdlSetAppMetadata(
   String? appname,
   String? appversion,
@@ -388,6 +396,7 @@ bool sdlSetAppMetadata(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetAppMetadataProperty(const char *name, const char *value)
 /// ```
+/// {@category init}
 bool sdlSetAppMetadataProperty(String? name, String? value) {
   final sdlSetAppMetadataPropertyLookupFunction = _libSdl
       .lookupFunction<
@@ -428,6 +437,7 @@ bool sdlSetAppMetadataProperty(String? name, String? value) {
 /// ```c
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetAppMetadataProperty(const char *name)
 /// ```
+/// {@category init}
 String? sdlGetAppMetadataProperty(String? name) {
   final sdlGetAppMetadataPropertyLookupFunction = _libSdl
       .lookupFunction<

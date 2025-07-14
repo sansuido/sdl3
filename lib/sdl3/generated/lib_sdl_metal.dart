@@ -22,6 +22,7 @@ part of '../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC SDL_MetalView SDLCALL SDL_Metal_CreateView(SDL_Window *window)
 /// ```
+/// {@category metal}
 void sdlMetalCreateView(Pointer<SdlWindow> window) {
   final sdlMetalCreateViewLookupFunction = _libSdl
       .lookupFunction<
@@ -46,6 +47,7 @@ void sdlMetalCreateView(Pointer<SdlWindow> window) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_Metal_DestroyView(SDL_MetalView view)
 /// ```
+/// {@category metal}
 void sdlMetalDestroyView() {
   final sdlMetalDestroyViewLookupFunction = _libSdl
       .lookupFunction<Void Function(), void Function()>(
@@ -65,6 +67,7 @@ void sdlMetalDestroyView() {
 /// ```c
 /// extern SDL_DECLSPEC void * SDLCALL SDL_Metal_GetLayer(SDL_MetalView view)
 /// ```
+/// {@category metal}
 Pointer<NativeType> sdlMetalGetLayer() {
   final sdlMetalGetLayerLookupFunction = _libSdl
       .lookupFunction<

@@ -2,6 +2,7 @@
 part of '../sdl_image.dart';
 
 // IMG_Animation
+/// {@category image}
 final class ImgAnimation extends Struct {
   // [0]+(4)
   @Int32()

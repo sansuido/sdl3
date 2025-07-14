@@ -50,6 +50,7 @@ extension SdlCursorEx on SdlCursor {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Cursor * SDLCALL SDL_CreateCursor(const Uint8 *data, const Uint8 *mask, int w, int h, int hot_x, int hot_y)
   /// ```
+  /// {@category mouse}
   static Pointer<SdlCursor> create(
     Pointer<Uint8> data,
     Pointer<Uint8> mask,
@@ -92,6 +93,7 @@ extension SdlCursorEx on SdlCursor {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Cursor * SDLCALL SDL_CreateColorCursor(SDL_Surface *surface, int hot_x, int hot_y)
   /// ```
+  /// {@category mouse}
   static Pointer<SdlCursor> createColor(
     Pointer<SdlSurface> surface,
     int hotX,
@@ -114,6 +116,7 @@ extension SdlCursorEx on SdlCursor {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Cursor * SDLCALL SDL_CreateSystemCursor(SDL_SystemCursor id)
   /// ```
+  /// {@category mouse}
   static Pointer<SdlCursor> createSystem(int id) => sdlCreateSystemCursor(id);
 
   ///
@@ -133,6 +136,7 @@ extension SdlCursorEx on SdlCursor {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Cursor * SDLCALL SDL_GetCursor(void)
   /// ```
+  /// {@category mouse}
   static Pointer<SdlCursor> get() => sdlGetCursor();
 
   ///
@@ -151,6 +155,7 @@ extension SdlCursorEx on SdlCursor {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Cursor * SDLCALL SDL_GetDefaultCursor(void)
   /// ```
+  /// {@category mouse}
   static Pointer<SdlCursor> getDefault() => sdlGetDefaultCursor();
 
   ///
@@ -169,6 +174,7 @@ extension SdlCursorEx on SdlCursor {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_ShowCursor(void)
   /// ```
+  /// {@category mouse}
   static bool show() => sdlShowCursor();
 
   ///
@@ -187,6 +193,7 @@ extension SdlCursorEx on SdlCursor {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_HideCursor(void)
   /// ```
+  /// {@category mouse}
   static bool hide() => sdlHideCursor();
 }
 
@@ -214,6 +221,7 @@ extension SdlCursorPointerEx on Pointer<SdlCursor> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetCursor(SDL_Cursor *cursor)
   /// ```
+  /// {@category mouse}
   bool set() => sdlSetCursor(this);
 
   ///
@@ -235,6 +243,7 @@ extension SdlCursorPointerEx on Pointer<SdlCursor> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_DestroyCursor(SDL_Cursor *cursor)
   /// ```
+  /// {@category mouse}
   void destroy() {
     sdlDestroyCursor(this);
   }

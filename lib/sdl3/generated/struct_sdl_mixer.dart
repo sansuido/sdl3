@@ -2,6 +2,7 @@
 part of '../sdl_mixer.dart';
 
 // Mix_Chunk
+/// {@category mixer}
 final class MixChunk extends Struct {
   // [0]+(4)
   @Int32()
@@ -25,4 +26,5 @@ final class MixChunk extends Struct {
 }
 
 // Mix_Music
+/// {@category mixer}
 final class MixMusic extends Opaque {}

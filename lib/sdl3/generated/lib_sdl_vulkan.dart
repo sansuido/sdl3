@@ -54,6 +54,7 @@ part of '../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_Vulkan_LoadLibrary(const char *path)
 /// ```
+/// {@category vulkan}
 bool sdlVulkanLoadLibrary(String? path) {
   final sdlVulkanLoadLibraryLookupFunction = _libSdl
       .lookupFunction<
@@ -88,6 +89,7 @@ bool sdlVulkanLoadLibrary(String? path) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_FunctionPointer SDLCALL SDL_Vulkan_GetVkGetInstanceProcAddr(void)
 /// ```
+/// {@category vulkan}
 Pointer<NativeType> sdlVulkanGetVkGetInstanceProcAddr() {
   final sdlVulkanGetVkGetInstanceProcAddrLookupFunction = _libSdl
       .lookupFunction<
@@ -120,6 +122,7 @@ Pointer<NativeType> sdlVulkanGetVkGetInstanceProcAddr() {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_Vulkan_UnloadLibrary(void)
 /// ```
+/// {@category vulkan}
 void sdlVulkanUnloadLibrary() {
   final sdlVulkanUnloadLibraryLookupFunction = _libSdl
       .lookupFunction<Void Function(), void Function()>(
@@ -153,6 +156,7 @@ void sdlVulkanUnloadLibrary() {
 /// ```c
 /// extern SDL_DECLSPEC char const * const * SDLCALL SDL_Vulkan_GetInstanceExtensions(Uint32 *count)
 /// ```
+/// {@category vulkan}
 Pointer<Pointer<Int8>> sdlVulkanGetInstanceExtensions(Pointer<Uint32> count) {
   final sdlVulkanGetInstanceExtensionsLookupFunction = _libSdl
       .lookupFunction<
@@ -189,6 +193,7 @@ Pointer<Pointer<Int8>> sdlVulkanGetInstanceExtensions(Pointer<Uint32> count) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_Vulkan_CreateSurface(SDL_Window *window, VkInstance instance, const struct VkAllocationCallbacks *allocator, VkSurfaceKHR *surface)
 /// ```
+/// {@category vulkan}
 bool sdlVulkanCreateSurface(
   Pointer<SdlWindow> window,
   Pointer<NativeType> instance,
@@ -245,6 +250,7 @@ bool sdlVulkanCreateSurface(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_Vulkan_DestroySurface(VkInstance instance, VkSurfaceKHR surface, const struct VkAllocationCallbacks *allocator)
 /// ```
+/// {@category vulkan}
 void sdlVulkanDestroySurface(
   Pointer<NativeType> instance,
   Pointer<NativeType> surface,
@@ -286,6 +292,7 @@ void sdlVulkanDestroySurface(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_Vulkan_GetPresentationSupport(VkInstance instance, VkPhysicalDevice physicalDevice, Uint32 queueFamilyIndex)
 /// ```
+/// {@category vulkan}
 bool sdlVulkanGetPresentationSupport(
   Pointer<NativeType> instance,
   Pointer<NativeType> physicalDevice,

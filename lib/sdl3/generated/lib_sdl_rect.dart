@@ -19,6 +19,7 @@ part of '../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_HasRectIntersection(const SDL_Rect *A, const SDL_Rect *B)
 /// ```
+/// {@category rect}
 bool sdlHasRectIntersection(Pointer<SdlRect> a, Pointer<SdlRect> b) {
   final sdlHasRectIntersectionLookupFunction = _libSdl
       .lookupFunction<
@@ -46,6 +47,7 @@ bool sdlHasRectIntersection(Pointer<SdlRect> a, Pointer<SdlRect> b) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRectIntersection(const SDL_Rect *A, const SDL_Rect *B, SDL_Rect *result)
 /// ```
+/// {@category rect}
 bool sdlGetRectIntersection(
   Pointer<SdlRect> a,
   Pointer<SdlRect> b,
@@ -82,6 +84,7 @@ bool sdlGetRectIntersection(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRectUnion(const SDL_Rect *A, const SDL_Rect *B, SDL_Rect *result)
 /// ```
+/// {@category rect}
 bool sdlGetRectUnion(
   Pointer<SdlRect> a,
   Pointer<SdlRect> b,
@@ -123,6 +126,7 @@ bool sdlGetRectUnion(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRectEnclosingPoints(const SDL_Point *points, int count, const SDL_Rect *clip, SDL_Rect *result)
 /// ```
+/// {@category rect}
 bool sdlGetRectEnclosingPoints(
   Pointer<SdlPoint> points,
   int count,
@@ -169,6 +173,7 @@ bool sdlGetRectEnclosingPoints(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRectAndLineIntersection(const SDL_Rect *rect, int *X1, int *Y1, int *X2, int *Y2)
 /// ```
+/// {@category rect}
 bool sdlGetRectAndLineIntersection(
   Pointer<SdlRect> rect,
   Pointer<Int32> x1,
@@ -212,6 +217,7 @@ bool sdlGetRectAndLineIntersection(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_HasRectIntersectionFloat(const SDL_FRect *A, const SDL_FRect *B)
 /// ```
+/// {@category rect}
 bool sdlHasRectIntersectionFloat(Pointer<SdlFRect> a, Pointer<SdlFRect> b) {
   final sdlHasRectIntersectionFloatLookupFunction = _libSdl
       .lookupFunction<
@@ -239,6 +245,7 @@ bool sdlHasRectIntersectionFloat(Pointer<SdlFRect> a, Pointer<SdlFRect> b) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRectIntersectionFloat(const SDL_FRect *A, const SDL_FRect *B, SDL_FRect *result)
 /// ```
+/// {@category rect}
 bool sdlGetRectIntersectionFloat(
   Pointer<SdlFRect> a,
   Pointer<SdlFRect> b,
@@ -275,6 +282,7 @@ bool sdlGetRectIntersectionFloat(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRectUnionFloat(const SDL_FRect *A, const SDL_FRect *B, SDL_FRect *result)
 /// ```
+/// {@category rect}
 bool sdlGetRectUnionFloat(
   Pointer<SdlFRect> a,
   Pointer<SdlFRect> b,
@@ -317,6 +325,7 @@ bool sdlGetRectUnionFloat(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRectEnclosingPointsFloat(const SDL_FPoint *points, int count, const SDL_FRect *clip, SDL_FRect *result)
 /// ```
+/// {@category rect}
 bool sdlGetRectEnclosingPointsFloat(
   Pointer<SdlFPoint> points,
   int count,
@@ -369,6 +378,7 @@ bool sdlGetRectEnclosingPointsFloat(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRectAndLineIntersectionFloat(const SDL_FRect *rect, float *X1, float *Y1, float *X2, float *Y2)
 /// ```
+/// {@category rect}
 bool sdlGetRectAndLineIntersectionFloat(
   Pointer<SdlFRect> rect,
   Pointer<Float> x1,

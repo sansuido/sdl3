@@ -33,6 +33,7 @@ part of '../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_OpenURL(const char *url)
 /// ```
+/// {@category misc}
 bool sdlOpenUrl(String? url) {
   final sdlOpenUrlLookupFunction = _libSdl
       .lookupFunction<

@@ -16,6 +16,7 @@ part of '../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_GetNumVideoDrivers(void)
 /// ```
+/// {@category video}
 int sdlGetNumVideoDrivers() {
   final sdlGetNumVideoDriversLookupFunction = _libSdl
       .lookupFunction<Int32 Function(), int Function()>(
@@ -47,6 +48,7 @@ int sdlGetNumVideoDrivers() {
 /// ```c
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetVideoDriver(int index)
 /// ```
+/// {@category video}
 String? sdlGetVideoDriver(int index) {
   final sdlGetVideoDriverLookupFunction = _libSdl
       .lookupFunction<
@@ -80,6 +82,7 @@ String? sdlGetVideoDriver(int index) {
 /// ```c
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetCurrentVideoDriver(void)
 /// ```
+/// {@category video}
 String? sdlGetCurrentVideoDriver() {
   final sdlGetCurrentVideoDriverLookupFunction = _libSdl
       .lookupFunction<Pointer<Utf8> Function(), Pointer<Utf8> Function()>(
@@ -104,6 +107,7 @@ String? sdlGetCurrentVideoDriver() {
 /// ```c
 /// extern SDL_DECLSPEC SDL_SystemTheme SDLCALL SDL_GetSystemTheme(void)
 /// ```
+/// {@category video}
 int sdlGetSystemTheme() {
   final sdlGetSystemThemeLookupFunction = _libSdl
       .lookupFunction<Int32 Function(), int Function()>('SDL_GetSystemTheme');
@@ -126,6 +130,7 @@ int sdlGetSystemTheme() {
 /// ```c
 /// extern SDL_DECLSPEC SDL_DisplayID * SDLCALL SDL_GetDisplays(int *count)
 /// ```
+/// {@category video}
 Pointer<Uint32> sdlGetDisplays(Pointer<Int32> count) {
   final sdlGetDisplaysLookupFunction = _libSdl
       .lookupFunction<
@@ -150,6 +155,7 @@ Pointer<Uint32> sdlGetDisplays(Pointer<Int32> count) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_DisplayID SDLCALL SDL_GetPrimaryDisplay(void)
 /// ```
+/// {@category video}
 int sdlGetPrimaryDisplay() {
   final sdlGetPrimaryDisplayLookupFunction = _libSdl
       .lookupFunction<Uint32 Function(), int Function()>(
@@ -192,6 +198,7 @@ int sdlGetPrimaryDisplay() {
 /// ```c
 /// extern SDL_DECLSPEC SDL_PropertiesID SDLCALL SDL_GetDisplayProperties(SDL_DisplayID displayID)
 /// ```
+/// {@category video}
 int sdlGetDisplayProperties(int displayId) {
   final sdlGetDisplayPropertiesLookupFunction = _libSdl
       .lookupFunction<
@@ -217,6 +224,7 @@ int sdlGetDisplayProperties(int displayId) {
 /// ```c
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetDisplayName(SDL_DisplayID displayID)
 /// ```
+/// {@category video}
 String? sdlGetDisplayName(int displayId) {
   final sdlGetDisplayNameLookupFunction = _libSdl
       .lookupFunction<
@@ -251,6 +259,7 @@ String? sdlGetDisplayName(int displayId) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetDisplayBounds(SDL_DisplayID displayID, SDL_Rect *rect)
 /// ```
+/// {@category video}
 bool sdlGetDisplayBounds(int displayId, Pointer<SdlRect> rect) {
   final sdlGetDisplayBoundsLookupFunction = _libSdl
       .lookupFunction<
@@ -287,6 +296,7 @@ bool sdlGetDisplayBounds(int displayId, Pointer<SdlRect> rect) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetDisplayUsableBounds(SDL_DisplayID displayID, SDL_Rect *rect)
 /// ```
+/// {@category video}
 bool sdlGetDisplayUsableBounds(int displayId, Pointer<SdlRect> rect) {
   final sdlGetDisplayUsableBoundsLookupFunction = _libSdl
       .lookupFunction<
@@ -312,6 +322,7 @@ bool sdlGetDisplayUsableBounds(int displayId, Pointer<SdlRect> rect) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_DisplayOrientation SDLCALL SDL_GetNaturalDisplayOrientation(SDL_DisplayID displayID)
 /// ```
+/// {@category video}
 int sdlGetNaturalDisplayOrientation(int displayId) {
   final sdlGetNaturalDisplayOrientationLookupFunction = _libSdl
       .lookupFunction<
@@ -337,6 +348,7 @@ int sdlGetNaturalDisplayOrientation(int displayId) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_DisplayOrientation SDLCALL SDL_GetCurrentDisplayOrientation(SDL_DisplayID displayID)
 /// ```
+/// {@category video}
 int sdlGetCurrentDisplayOrientation(int displayId) {
   final sdlGetCurrentDisplayOrientationLookupFunction = _libSdl
       .lookupFunction<
@@ -374,6 +386,7 @@ int sdlGetCurrentDisplayOrientation(int displayId) {
 /// ```c
 /// extern SDL_DECLSPEC float SDLCALL SDL_GetDisplayContentScale(SDL_DisplayID displayID)
 /// ```
+/// {@category video}
 double sdlGetDisplayContentScale(int displayId) {
   final sdlGetDisplayContentScaleLookupFunction = _libSdl
       .lookupFunction<
@@ -412,6 +425,7 @@ double sdlGetDisplayContentScale(int displayId) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_DisplayMode ** SDLCALL SDL_GetFullscreenDisplayModes(SDL_DisplayID displayID, int *count)
 /// ```
+/// {@category video}
 Pointer<Pointer<SdlDisplayMode>> sdlGetFullscreenDisplayModes(
   int displayId,
   Pointer<Int32> count,
@@ -462,6 +476,7 @@ Pointer<Pointer<SdlDisplayMode>> sdlGetFullscreenDisplayModes(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetClosestFullscreenDisplayMode(SDL_DisplayID displayID, int w, int h, float refresh_rate, bool include_high_density_modes, SDL_DisplayMode *closest)
 /// ```
+/// {@category video}
 bool sdlGetClosestFullscreenDisplayMode(
   int displayId,
   int w,
@@ -522,6 +537,7 @@ bool sdlGetClosestFullscreenDisplayMode(
 /// ```c
 /// extern SDL_DECLSPEC const SDL_DisplayMode * SDLCALL SDL_GetDesktopDisplayMode(SDL_DisplayID displayID)
 /// ```
+/// {@category video}
 Pointer<SdlDisplayMode> sdlGetDesktopDisplayMode(int displayId) {
   final sdlGetDesktopDisplayModeLookupFunction = _libSdl
       .lookupFunction<
@@ -553,6 +569,7 @@ Pointer<SdlDisplayMode> sdlGetDesktopDisplayMode(int displayId) {
 /// ```c
 /// extern SDL_DECLSPEC const SDL_DisplayMode * SDLCALL SDL_GetCurrentDisplayMode(SDL_DisplayID displayID)
 /// ```
+/// {@category video}
 Pointer<SdlDisplayMode> sdlGetCurrentDisplayMode(int displayId) {
   final sdlGetCurrentDisplayModeLookupFunction = _libSdl
       .lookupFunction<
@@ -579,6 +596,7 @@ Pointer<SdlDisplayMode> sdlGetCurrentDisplayMode(int displayId) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_DisplayID SDLCALL SDL_GetDisplayForPoint(const SDL_Point *point)
 /// ```
+/// {@category video}
 int sdlGetDisplayForPoint(Pointer<SdlPoint> point) {
   final sdlGetDisplayForPointLookupFunction = _libSdl
       .lookupFunction<
@@ -606,6 +624,7 @@ int sdlGetDisplayForPoint(Pointer<SdlPoint> point) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_DisplayID SDLCALL SDL_GetDisplayForRect(const SDL_Rect *rect)
 /// ```
+/// {@category video}
 int sdlGetDisplayForRect(Pointer<SdlRect> rect) {
   final sdlGetDisplayForRectLookupFunction = _libSdl
       .lookupFunction<
@@ -633,6 +652,7 @@ int sdlGetDisplayForRect(Pointer<SdlRect> rect) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_DisplayID SDLCALL SDL_GetDisplayForWindow(SDL_Window *window)
 /// ```
+/// {@category video}
 int sdlGetDisplayForWindow(Pointer<SdlWindow> window) {
   final sdlGetDisplayForWindowLookupFunction = _libSdl
       .lookupFunction<
@@ -662,6 +682,7 @@ int sdlGetDisplayForWindow(Pointer<SdlWindow> window) {
 /// ```c
 /// extern SDL_DECLSPEC float SDLCALL SDL_GetWindowPixelDensity(SDL_Window *window)
 /// ```
+/// {@category video}
 double sdlGetWindowPixelDensity(Pointer<SdlWindow> window) {
   final sdlGetWindowPixelDensityLookupFunction = _libSdl
       .lookupFunction<
@@ -696,6 +717,7 @@ double sdlGetWindowPixelDensity(Pointer<SdlWindow> window) {
 /// ```c
 /// extern SDL_DECLSPEC float SDLCALL SDL_GetWindowDisplayScale(SDL_Window *window)
 /// ```
+/// {@category video}
 double sdlGetWindowDisplayScale(Pointer<SdlWindow> window) {
   final sdlGetWindowDisplayScaleLookupFunction = _libSdl
       .lookupFunction<
@@ -741,6 +763,7 @@ double sdlGetWindowDisplayScale(Pointer<SdlWindow> window) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowFullscreenMode(SDL_Window *window, const SDL_DisplayMode *mode)
 /// ```
+/// {@category video}
 bool sdlSetWindowFullscreenMode(
   Pointer<SdlWindow> window,
   Pointer<SdlDisplayMode> mode,
@@ -770,6 +793,7 @@ bool sdlSetWindowFullscreenMode(
 /// ```c
 /// extern SDL_DECLSPEC const SDL_DisplayMode * SDLCALL SDL_GetWindowFullscreenMode(SDL_Window *window)
 /// ```
+/// {@category video}
 Pointer<SdlDisplayMode> sdlGetWindowFullscreenMode(Pointer<SdlWindow> window) {
   final sdlGetWindowFullscreenModeLookupFunction = _libSdl
       .lookupFunction<
@@ -795,6 +819,7 @@ Pointer<SdlDisplayMode> sdlGetWindowFullscreenMode(Pointer<SdlWindow> window) {
 /// ```c
 /// extern SDL_DECLSPEC void * SDLCALL SDL_GetWindowICCProfile(SDL_Window *window, size_t *size)
 /// ```
+/// {@category video}
 Pointer<NativeType> sdlGetWindowIccProfile(
   Pointer<SdlWindow> window,
   Pointer<Uint32> size,
@@ -828,6 +853,7 @@ Pointer<NativeType> sdlGetWindowIccProfile(
 /// ```c
 /// extern SDL_DECLSPEC SDL_PixelFormat SDLCALL SDL_GetWindowPixelFormat(SDL_Window *window)
 /// ```
+/// {@category video}
 int sdlGetWindowPixelFormat(Pointer<SdlWindow> window) {
   final sdlGetWindowPixelFormatLookupFunction = _libSdl
       .lookupFunction<
@@ -854,6 +880,7 @@ int sdlGetWindowPixelFormat(Pointer<SdlWindow> window) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Window ** SDLCALL SDL_GetWindows(int *count)
 /// ```
+/// {@category video}
 Pointer<Pointer<SdlWindow>> sdlGetWindows(Pointer<Int32> count) {
   final sdlGetWindowsLookupFunction = _libSdl
       .lookupFunction<
@@ -954,6 +981,7 @@ Pointer<Pointer<SdlWindow>> sdlGetWindows(Pointer<Int32> count) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Window * SDLCALL SDL_CreateWindow(const char *title, int w, int h, SDL_WindowFlags flags)
 /// ```
+/// {@category video}
 Pointer<SdlWindow> sdlCreateWindow(String? title, int w, int h, int flags) {
   final sdlCreateWindowLookupFunction = _libSdl
       .lookupFunction<
@@ -1053,6 +1081,7 @@ Pointer<SdlWindow> sdlCreateWindow(String? title, int w, int h, int flags) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Window * SDLCALL SDL_CreatePopupWindow(SDL_Window *parent, int offset_x, int offset_y, int w, int h, SDL_WindowFlags flags)
 /// ```
+/// {@category video}
 Pointer<SdlWindow> sdlCreatePopupWindow(
   Pointer<SdlWindow> parent,
   int offsetX,
@@ -1234,6 +1263,7 @@ Pointer<SdlWindow> sdlCreatePopupWindow(
 /// ```c
 /// extern SDL_DECLSPEC SDL_Window * SDLCALL SDL_CreateWindowWithProperties(SDL_PropertiesID props)
 /// ```
+/// {@category video}
 Pointer<SdlWindow> sdlCreateWindowWithProperties(int props) {
   final sdlCreateWindowWithPropertiesLookupFunction = _libSdl
       .lookupFunction<
@@ -1262,6 +1292,7 @@ Pointer<SdlWindow> sdlCreateWindowWithProperties(int props) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_WindowID SDLCALL SDL_GetWindowID(SDL_Window *window)
 /// ```
+/// {@category video}
 int sdlGetWindowId(Pointer<SdlWindow> window) {
   final sdlGetWindowIdLookupFunction = _libSdl
       .lookupFunction<
@@ -1290,6 +1321,7 @@ int sdlGetWindowId(Pointer<SdlWindow> window) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Window * SDLCALL SDL_GetWindowFromID(SDL_WindowID id)
 /// ```
+/// {@category video}
 Pointer<SdlWindow> sdlGetWindowFromId(int id) {
   final sdlGetWindowFromIdLookupFunction = _libSdl
       .lookupFunction<
@@ -1315,6 +1347,7 @@ Pointer<SdlWindow> sdlGetWindowFromId(int id) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Window * SDLCALL SDL_GetWindowParent(SDL_Window *window)
 /// ```
+/// {@category video}
 Pointer<SdlWindow> sdlGetWindowParent(Pointer<SdlWindow> window) {
   final sdlGetWindowParentLookupFunction = _libSdl
       .lookupFunction<
@@ -1454,6 +1487,7 @@ Pointer<SdlWindow> sdlGetWindowParent(Pointer<SdlWindow> window) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_PropertiesID SDLCALL SDL_GetWindowProperties(SDL_Window *window)
 /// ```
+/// {@category video}
 int sdlGetWindowProperties(Pointer<SdlWindow> window) {
   final sdlGetWindowPropertiesLookupFunction = _libSdl
       .lookupFunction<
@@ -1484,6 +1518,7 @@ int sdlGetWindowProperties(Pointer<SdlWindow> window) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_WindowFlags SDLCALL SDL_GetWindowFlags(SDL_Window *window)
 /// ```
+/// {@category video}
 int sdlGetWindowFlags(Pointer<SdlWindow> window) {
   final sdlGetWindowFlagsLookupFunction = _libSdl
       .lookupFunction<
@@ -1512,6 +1547,7 @@ int sdlGetWindowFlags(Pointer<SdlWindow> window) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowTitle(SDL_Window *window, const char *title)
 /// ```
+/// {@category video}
 bool sdlSetWindowTitle(Pointer<SdlWindow> window, String? title) {
   final sdlSetWindowTitleLookupFunction = _libSdl
       .lookupFunction<
@@ -1540,6 +1576,7 @@ bool sdlSetWindowTitle(Pointer<SdlWindow> window, String? title) {
 /// ```c
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetWindowTitle(SDL_Window *window)
 /// ```
+/// {@category video}
 String? sdlGetWindowTitle(Pointer<SdlWindow> window) {
   final sdlGetWindowTitleLookupFunction = _libSdl
       .lookupFunction<
@@ -1581,6 +1618,7 @@ String? sdlGetWindowTitle(Pointer<SdlWindow> window) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowIcon(SDL_Window *window, SDL_Surface *icon)
 /// ```
+/// {@category video}
 bool sdlSetWindowIcon(Pointer<SdlWindow> window, Pointer<SdlSurface> icon) {
   final sdlSetWindowIconLookupFunction = _libSdl
       .lookupFunction<
@@ -1632,6 +1670,7 @@ bool sdlSetWindowIcon(Pointer<SdlWindow> window, Pointer<SdlSurface> icon) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowPosition(SDL_Window *window, int x, int y)
 /// ```
+/// {@category video}
 bool sdlSetWindowPosition(Pointer<SdlWindow> window, int x, int y) {
   final sdlSetWindowPositionLookupFunction = _libSdl
       .lookupFunction<
@@ -1667,6 +1706,7 @@ bool sdlSetWindowPosition(Pointer<SdlWindow> window, int x, int y) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowPosition(SDL_Window *window, int *x, int *y)
 /// ```
+/// {@category video}
 bool sdlGetWindowPosition(
   Pointer<SdlWindow> window,
   Pointer<Int32> x,
@@ -1726,6 +1766,7 @@ bool sdlGetWindowPosition(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowSize(SDL_Window *window, int w, int h)
 /// ```
+/// {@category video}
 bool sdlSetWindowSize(Pointer<SdlWindow> window, int w, int h) {
   final sdlSetWindowSizeLookupFunction = _libSdl
       .lookupFunction<
@@ -1759,6 +1800,7 @@ bool sdlSetWindowSize(Pointer<SdlWindow> window, int w, int h) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowSize(SDL_Window *window, int *w, int *h)
 /// ```
+/// {@category video}
 bool sdlGetWindowSize(
   Pointer<SdlWindow> window,
   Pointer<Int32> w,
@@ -1803,6 +1845,7 @@ bool sdlGetWindowSize(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowSafeArea(SDL_Window *window, SDL_Rect *rect)
 /// ```
+/// {@category video}
 bool sdlGetWindowSafeArea(Pointer<SdlWindow> window, Pointer<SdlRect> rect) {
   final sdlGetWindowSafeAreaLookupFunction = _libSdl
       .lookupFunction<
@@ -1854,6 +1897,7 @@ bool sdlGetWindowSafeArea(Pointer<SdlWindow> window, Pointer<SdlRect> rect) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowAspectRatio(SDL_Window *window, float min_aspect, float max_aspect)
 /// ```
+/// {@category video}
 bool sdlSetWindowAspectRatio(
   Pointer<SdlWindow> window,
   double minAspect,
@@ -1896,6 +1940,7 @@ bool sdlSetWindowAspectRatio(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowAspectRatio(SDL_Window *window, float *min_aspect, float *max_aspect)
 /// ```
+/// {@category video}
 bool sdlGetWindowAspectRatio(
   Pointer<SdlWindow> window,
   Pointer<Float> minAspect,
@@ -1956,6 +2001,7 @@ bool sdlGetWindowAspectRatio(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowBordersSize(SDL_Window *window, int *top, int *left, int *bottom, int *right)
 /// ```
+/// {@category video}
 bool sdlGetWindowBordersSize(
   Pointer<SdlWindow> window,
   Pointer<Int32> top,
@@ -2011,6 +2057,7 @@ bool sdlGetWindowBordersSize(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowSizeInPixels(SDL_Window *window, int *w, int *h)
 /// ```
+/// {@category video}
 bool sdlGetWindowSizeInPixels(
   Pointer<SdlWindow> window,
   Pointer<Int32> w,
@@ -2051,6 +2098,7 @@ bool sdlGetWindowSizeInPixels(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowMinimumSize(SDL_Window *window, int min_w, int min_h)
 /// ```
+/// {@category video}
 bool sdlSetWindowMinimumSize(Pointer<SdlWindow> window, int minW, int minH) {
   final sdlSetWindowMinimumSizeLookupFunction = _libSdl
       .lookupFunction<
@@ -2081,6 +2129,7 @@ bool sdlSetWindowMinimumSize(Pointer<SdlWindow> window, int minW, int minH) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowMinimumSize(SDL_Window *window, int *w, int *h)
 /// ```
+/// {@category video}
 bool sdlGetWindowMinimumSize(
   Pointer<SdlWindow> window,
   Pointer<Int32> w,
@@ -2121,6 +2170,7 @@ bool sdlGetWindowMinimumSize(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowMaximumSize(SDL_Window *window, int max_w, int max_h)
 /// ```
+/// {@category video}
 bool sdlSetWindowMaximumSize(Pointer<SdlWindow> window, int maxW, int maxH) {
   final sdlSetWindowMaximumSizeLookupFunction = _libSdl
       .lookupFunction<
@@ -2151,6 +2201,7 @@ bool sdlSetWindowMaximumSize(Pointer<SdlWindow> window, int maxW, int maxH) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowMaximumSize(SDL_Window *window, int *w, int *h)
 /// ```
+/// {@category video}
 bool sdlGetWindowMaximumSize(
   Pointer<SdlWindow> window,
   Pointer<Int32> w,
@@ -2195,6 +2246,7 @@ bool sdlGetWindowMaximumSize(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowBordered(SDL_Window *window, bool bordered)
 /// ```
+/// {@category video}
 bool sdlSetWindowBordered(Pointer<SdlWindow> window, bool bordered) {
   final sdlSetWindowBorderedLookupFunction = _libSdl
       .lookupFunction<
@@ -2227,6 +2279,7 @@ bool sdlSetWindowBordered(Pointer<SdlWindow> window, bool bordered) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowResizable(SDL_Window *window, bool resizable)
 /// ```
+/// {@category video}
 bool sdlSetWindowResizable(Pointer<SdlWindow> window, bool resizable) {
   final sdlSetWindowResizableLookupFunction = _libSdl
       .lookupFunction<
@@ -2256,6 +2309,7 @@ bool sdlSetWindowResizable(Pointer<SdlWindow> window, bool resizable) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowAlwaysOnTop(SDL_Window *window, bool on_top)
 /// ```
+/// {@category video}
 bool sdlSetWindowAlwaysOnTop(Pointer<SdlWindow> window, bool onTop) {
   final sdlSetWindowAlwaysOnTopLookupFunction = _libSdl
       .lookupFunction<
@@ -2282,6 +2336,7 @@ bool sdlSetWindowAlwaysOnTop(Pointer<SdlWindow> window, bool onTop) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_ShowWindow(SDL_Window *window)
 /// ```
+/// {@category video}
 bool sdlShowWindow(Pointer<SdlWindow> window) {
   final sdlShowWindowLookupFunction = _libSdl
       .lookupFunction<
@@ -2308,6 +2363,7 @@ bool sdlShowWindow(Pointer<SdlWindow> window) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_HideWindow(SDL_Window *window)
 /// ```
+/// {@category video}
 bool sdlHideWindow(Pointer<SdlWindow> window) {
   final sdlHideWindowLookupFunction = _libSdl
       .lookupFunction<
@@ -2338,6 +2394,7 @@ bool sdlHideWindow(Pointer<SdlWindow> window) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_RaiseWindow(SDL_Window *window)
 /// ```
+/// {@category video}
 bool sdlRaiseWindow(Pointer<SdlWindow> window) {
   final sdlRaiseWindowLookupFunction = _libSdl
       .lookupFunction<
@@ -2382,6 +2439,7 @@ bool sdlRaiseWindow(Pointer<SdlWindow> window) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_MaximizeWindow(SDL_Window *window)
 /// ```
+/// {@category video}
 bool sdlMaximizeWindow(Pointer<SdlWindow> window) {
   final sdlMaximizeWindowLookupFunction = _libSdl
       .lookupFunction<
@@ -2421,6 +2479,7 @@ bool sdlMaximizeWindow(Pointer<SdlWindow> window) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_MinimizeWindow(SDL_Window *window)
 /// ```
+/// {@category video}
 bool sdlMinimizeWindow(Pointer<SdlWindow> window) {
   final sdlMinimizeWindowLookupFunction = _libSdl
       .lookupFunction<
@@ -2461,6 +2520,7 @@ bool sdlMinimizeWindow(Pointer<SdlWindow> window) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_RestoreWindow(SDL_Window *window)
 /// ```
+/// {@category video}
 bool sdlRestoreWindow(Pointer<SdlWindow> window) {
   final sdlRestoreWindowLookupFunction = _libSdl
       .lookupFunction<
@@ -2503,6 +2563,7 @@ bool sdlRestoreWindow(Pointer<SdlWindow> window) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowFullscreen(SDL_Window *window, bool fullscreen)
 /// ```
+/// {@category video}
 bool sdlSetWindowFullscreen(Pointer<SdlWindow> window, bool fullscreen) {
   final sdlSetWindowFullscreenLookupFunction = _libSdl
       .lookupFunction<
@@ -2544,6 +2605,7 @@ bool sdlSetWindowFullscreen(Pointer<SdlWindow> window, bool fullscreen) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SyncWindow(SDL_Window *window)
 /// ```
+/// {@category video}
 bool sdlSyncWindow(Pointer<SdlWindow> window) {
   final sdlSyncWindowLookupFunction = _libSdl
       .lookupFunction<
@@ -2569,6 +2631,7 @@ bool sdlSyncWindow(Pointer<SdlWindow> window) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_WindowHasSurface(SDL_Window *window)
 /// ```
+/// {@category video}
 bool sdlWindowHasSurface(Pointer<SdlWindow> window) {
   final sdlWindowHasSurfaceLookupFunction = _libSdl
       .lookupFunction<
@@ -2608,6 +2671,7 @@ bool sdlWindowHasSurface(Pointer<SdlWindow> window) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Surface * SDLCALL SDL_GetWindowSurface(SDL_Window *window)
 /// ```
+/// {@category video}
 Pointer<SdlSurface> sdlGetWindowSurface(Pointer<SdlWindow> window) {
   final sdlGetWindowSurfaceLookupFunction = _libSdl
       .lookupFunction<
@@ -2644,6 +2708,7 @@ Pointer<SdlSurface> sdlGetWindowSurface(Pointer<SdlWindow> window) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowSurfaceVSync(SDL_Window *window, int vsync)
 /// ```
+/// {@category video}
 bool sdlSetWindowSurfaceVSync(Pointer<SdlWindow> window, int vsync) {
   final sdlSetWindowSurfaceVSyncLookupFunction = _libSdl
       .lookupFunction<
@@ -2671,6 +2736,7 @@ bool sdlSetWindowSurfaceVSync(Pointer<SdlWindow> window, int vsync) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowSurfaceVSync(SDL_Window *window, int *vsync)
 /// ```
+/// {@category video}
 bool sdlGetWindowSurfaceVSync(Pointer<SdlWindow> window, Pointer<Int32> vsync) {
   final sdlGetWindowSurfaceVSyncLookupFunction = _libSdl
       .lookupFunction<
@@ -2702,6 +2768,7 @@ bool sdlGetWindowSurfaceVSync(Pointer<SdlWindow> window, Pointer<Int32> vsync) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_UpdateWindowSurface(SDL_Window *window)
 /// ```
+/// {@category video}
 bool sdlUpdateWindowSurface(Pointer<SdlWindow> window) {
   final sdlUpdateWindowSurfaceLookupFunction = _libSdl
       .lookupFunction<
@@ -2741,6 +2808,7 @@ bool sdlUpdateWindowSurface(Pointer<SdlWindow> window) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_UpdateWindowSurfaceRects(SDL_Window *window, const SDL_Rect *rects, int numrects)
 /// ```
+/// {@category video}
 bool sdlUpdateWindowSurfaceRects(
   Pointer<SdlWindow> window,
   Pointer<SdlRect> rects,
@@ -2780,6 +2848,7 @@ bool sdlUpdateWindowSurfaceRects(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_DestroyWindowSurface(SDL_Window *window)
 /// ```
+/// {@category video}
 bool sdlDestroyWindowSurface(Pointer<SdlWindow> window) {
   final sdlDestroyWindowSurfaceLookupFunction = _libSdl
       .lookupFunction<
@@ -2823,6 +2892,7 @@ bool sdlDestroyWindowSurface(Pointer<SdlWindow> window) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowKeyboardGrab(SDL_Window *window, bool grabbed)
 /// ```
+/// {@category video}
 bool sdlSetWindowKeyboardGrab(Pointer<SdlWindow> window, bool grabbed) {
   final sdlSetWindowKeyboardGrabLookupFunction = _libSdl
       .lookupFunction<
@@ -2853,6 +2923,7 @@ bool sdlSetWindowKeyboardGrab(Pointer<SdlWindow> window, bool grabbed) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowMouseGrab(SDL_Window *window, bool grabbed)
 /// ```
+/// {@category video}
 bool sdlSetWindowMouseGrab(Pointer<SdlWindow> window, bool grabbed) {
   final sdlSetWindowMouseGrabLookupFunction = _libSdl
       .lookupFunction<
@@ -2877,6 +2948,7 @@ bool sdlSetWindowMouseGrab(Pointer<SdlWindow> window, bool grabbed) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowKeyboardGrab(SDL_Window *window)
 /// ```
+/// {@category video}
 bool sdlGetWindowKeyboardGrab(Pointer<SdlWindow> window) {
   final sdlGetWindowKeyboardGrabLookupFunction = _libSdl
       .lookupFunction<
@@ -2904,6 +2976,7 @@ bool sdlGetWindowKeyboardGrab(Pointer<SdlWindow> window) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowMouseGrab(SDL_Window *window)
 /// ```
+/// {@category video}
 bool sdlGetWindowMouseGrab(Pointer<SdlWindow> window) {
   final sdlGetWindowMouseGrabLookupFunction = _libSdl
       .lookupFunction<
@@ -2928,6 +3001,7 @@ bool sdlGetWindowMouseGrab(Pointer<SdlWindow> window) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Window * SDLCALL SDL_GetGrabbedWindow(void)
 /// ```
+/// {@category video}
 Pointer<SdlWindow> sdlGetGrabbedWindow() {
   final sdlGetGrabbedWindowLookupFunction = _libSdl
       .lookupFunction<
@@ -2960,6 +3034,7 @@ Pointer<SdlWindow> sdlGetGrabbedWindow() {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowMouseRect(SDL_Window *window, const SDL_Rect *rect)
 /// ```
+/// {@category video}
 bool sdlSetWindowMouseRect(Pointer<SdlWindow> window, Pointer<SdlRect> rect) {
   final sdlSetWindowMouseRectLookupFunction = _libSdl
       .lookupFunction<
@@ -2987,6 +3062,7 @@ bool sdlSetWindowMouseRect(Pointer<SdlWindow> window, Pointer<SdlRect> rect) {
 /// ```c
 /// extern SDL_DECLSPEC const SDL_Rect * SDLCALL SDL_GetWindowMouseRect(SDL_Window *window)
 /// ```
+/// {@category video}
 Pointer<SdlRect> sdlGetWindowMouseRect(Pointer<SdlWindow> window) {
   final sdlGetWindowMouseRectLookupFunction = _libSdl
       .lookupFunction<
@@ -3018,6 +3094,7 @@ Pointer<SdlRect> sdlGetWindowMouseRect(Pointer<SdlWindow> window) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowOpacity(SDL_Window *window, float opacity)
 /// ```
+/// {@category video}
 bool sdlSetWindowOpacity(Pointer<SdlWindow> window, double opacity) {
   final sdlSetWindowOpacityLookupFunction = _libSdl
       .lookupFunction<
@@ -3046,6 +3123,7 @@ bool sdlSetWindowOpacity(Pointer<SdlWindow> window, double opacity) {
 /// ```c
 /// extern SDL_DECLSPEC float SDLCALL SDL_GetWindowOpacity(SDL_Window *window)
 /// ```
+/// {@category video}
 double sdlGetWindowOpacity(Pointer<SdlWindow> window) {
   final sdlGetWindowOpacityLookupFunction = _libSdl
       .lookupFunction<
@@ -3090,6 +3168,7 @@ double sdlGetWindowOpacity(Pointer<SdlWindow> window) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowParent(SDL_Window *window, SDL_Window *parent)
 /// ```
+/// {@category video}
 bool sdlSetWindowParent(Pointer<SdlWindow> window, Pointer<SdlWindow> parent) {
   final sdlSetWindowParentLookupFunction = _libSdl
       .lookupFunction<
@@ -3120,6 +3199,7 @@ bool sdlSetWindowParent(Pointer<SdlWindow> window, Pointer<SdlWindow> parent) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowModal(SDL_Window *window, bool modal)
 /// ```
+/// {@category video}
 bool sdlSetWindowModal(Pointer<SdlWindow> window, bool modal) {
   final sdlSetWindowModalLookupFunction = _libSdl
       .lookupFunction<
@@ -3144,6 +3224,7 @@ bool sdlSetWindowModal(Pointer<SdlWindow> window, bool modal) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowFocusable(SDL_Window *window, bool focusable)
 /// ```
+/// {@category video}
 bool sdlSetWindowFocusable(Pointer<SdlWindow> window, bool focusable) {
   final sdlSetWindowFocusableLookupFunction = _libSdl
       .lookupFunction<
@@ -3179,6 +3260,7 @@ bool sdlSetWindowFocusable(Pointer<SdlWindow> window, bool focusable) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_ShowWindowSystemMenu(SDL_Window *window, int x, int y)
 /// ```
+/// {@category video}
 bool sdlShowWindowSystemMenu(Pointer<SdlWindow> window, int x, int y) {
   final sdlShowWindowSystemMenuLookupFunction = _libSdl
       .lookupFunction<
@@ -3233,6 +3315,7 @@ bool sdlShowWindowSystemMenu(Pointer<SdlWindow> window, int x, int y) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowHitTest(SDL_Window *window, SDL_HitTest callback, void *callback_data)
 /// ```
+/// {@category video}
 bool sdlSetWindowHitTest(
   Pointer<SdlWindow> window,
   Pointer<NativeFunction<SdlHitTest>> callback,
@@ -3283,6 +3366,7 @@ bool sdlSetWindowHitTest(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowShape(SDL_Window *window, SDL_Surface *shape)
 /// ```
+/// {@category video}
 bool sdlSetWindowShape(Pointer<SdlWindow> window, Pointer<SdlSurface> shape) {
   final sdlSetWindowShapeLookupFunction = _libSdl
       .lookupFunction<
@@ -3307,6 +3391,7 @@ bool sdlSetWindowShape(Pointer<SdlWindow> window, Pointer<SdlSurface> shape) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_FlashWindow(SDL_Window *window, SDL_FlashOperation operation)
 /// ```
+/// {@category video}
 bool sdlFlashWindow(Pointer<SdlWindow> window, int operation) {
   final sdlFlashWindowLookupFunction = _libSdl
       .lookupFunction<
@@ -3332,6 +3417,7 @@ bool sdlFlashWindow(Pointer<SdlWindow> window, int operation) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowProgressState(SDL_Window *window, SDL_ProgressState state)
 /// ```
+/// {@category video}
 bool sdlSetWindowProgressState(Pointer<SdlWindow> window, int state) {
   final sdlSetWindowProgressStateLookupFunction = _libSdl
       .lookupFunction<
@@ -3355,6 +3441,7 @@ bool sdlSetWindowProgressState(Pointer<SdlWindow> window, int state) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_ProgressState SDLCALL SDL_GetWindowProgressState(SDL_Window *window)
 /// ```
+/// {@category video}
 int sdlGetWindowProgressState(Pointer<SdlWindow> window) {
   final sdlGetWindowProgressStateLookupFunction = _libSdl
       .lookupFunction<
@@ -3380,6 +3467,7 @@ int sdlGetWindowProgressState(Pointer<SdlWindow> window) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowProgressValue(SDL_Window *window, float value)
 /// ```
+/// {@category video}
 bool sdlSetWindowProgressValue(Pointer<SdlWindow> window, double value) {
   final sdlSetWindowProgressValueLookupFunction = _libSdl
       .lookupFunction<
@@ -3403,6 +3491,7 @@ bool sdlSetWindowProgressValue(Pointer<SdlWindow> window, double value) {
 /// ```c
 /// extern SDL_DECLSPEC float SDLCALL SDL_GetWindowProgressValue(SDL_Window *window)
 /// ```
+/// {@category video}
 double sdlGetWindowProgressValue(Pointer<SdlWindow> window) {
   final sdlGetWindowProgressValueLookupFunction = _libSdl
       .lookupFunction<
@@ -3435,6 +3524,7 @@ double sdlGetWindowProgressValue(Pointer<SdlWindow> window) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_DestroyWindow(SDL_Window *window)
 /// ```
+/// {@category video}
 void sdlDestroyWindow(Pointer<SdlWindow> window) {
   final sdlDestroyWindowLookupFunction = _libSdl
       .lookupFunction<
@@ -3463,6 +3553,7 @@ void sdlDestroyWindow(Pointer<SdlWindow> window) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_ScreenSaverEnabled(void)
 /// ```
+/// {@category video}
 bool sdlScreenSaverEnabled() {
   final sdlScreenSaverEnabledLookupFunction = _libSdl
       .lookupFunction<Uint8 Function(), int Function()>(
@@ -3487,6 +3578,7 @@ bool sdlScreenSaverEnabled() {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_EnableScreenSaver(void)
 /// ```
+/// {@category video}
 bool sdlEnableScreenSaver() {
   final sdlEnableScreenSaverLookupFunction = _libSdl
       .lookupFunction<Uint8 Function(), int Function()>(
@@ -3517,6 +3609,7 @@ bool sdlEnableScreenSaver() {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_DisableScreenSaver(void)
 /// ```
+/// {@category video}
 bool sdlDisableScreenSaver() {
   final sdlDisableScreenSaverLookupFunction = _libSdl
       .lookupFunction<Uint8 Function(), int Function()>(
@@ -3550,6 +3643,7 @@ bool sdlDisableScreenSaver() {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GL_LoadLibrary(const char *path)
 /// ```
+/// {@category video}
 bool sdlGlLoadLibrary(String? path) {
   final sdlGlLoadLibraryLookupFunction = _libSdl
       .lookupFunction<
@@ -3618,6 +3712,7 @@ bool sdlGlLoadLibrary(String? path) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_FunctionPointer SDLCALL SDL_GL_GetProcAddress(const char *proc)
 /// ```
+/// {@category video}
 Pointer<NativeType> sdlGlGetProcAddress(String? proc) {
   final sdlGlGetProcAddressLookupFunction = _libSdl
       .lookupFunction<
@@ -3650,6 +3745,7 @@ Pointer<NativeType> sdlGlGetProcAddress(String? proc) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_FunctionPointer SDLCALL SDL_EGL_GetProcAddress(const char *proc)
 /// ```
+/// {@category video}
 Pointer<NativeType> sdlEglGetProcAddress(String? proc) {
   final sdlEglGetProcAddressLookupFunction = _libSdl
       .lookupFunction<
@@ -3674,6 +3770,7 @@ Pointer<NativeType> sdlEglGetProcAddress(String? proc) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_GL_UnloadLibrary(void)
 /// ```
+/// {@category video}
 void sdlGlUnloadLibrary() {
   final sdlGlUnloadLibraryLookupFunction = _libSdl
       .lookupFunction<Void Function(), void Function()>('SDL_GL_UnloadLibrary');
@@ -3704,6 +3801,7 @@ void sdlGlUnloadLibrary() {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GL_ExtensionSupported(const char *extension)
 /// ```
+/// {@category video}
 bool sdlGlExtensionSupported(String? extension) {
   final sdlGlExtensionSupportedLookupFunction = _libSdl
       .lookupFunction<
@@ -3731,6 +3829,7 @@ bool sdlGlExtensionSupported(String? extension) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_GL_ResetAttributes(void)
 /// ```
+/// {@category video}
 void sdlGlResetAttributes() {
   final sdlGlResetAttributesLookupFunction = _libSdl
       .lookupFunction<Void Function(), void Function()>(
@@ -3763,6 +3862,7 @@ void sdlGlResetAttributes() {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GL_SetAttribute(SDL_GLAttr attr, int value)
 /// ```
+/// {@category video}
 bool sdlGlSetAttribute(int attr, int value) {
   final sdlGlSetAttributeLookupFunction = _libSdl
       .lookupFunction<
@@ -3791,6 +3891,7 @@ bool sdlGlSetAttribute(int attr, int value) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GL_GetAttribute(SDL_GLAttr attr, int *value)
 /// ```
+/// {@category video}
 bool sdlGlGetAttribute(int attr, Pointer<Int32> value) {
   final sdlGlGetAttributeLookupFunction = _libSdl
       .lookupFunction<
@@ -3825,6 +3926,7 @@ bool sdlGlGetAttribute(int attr, Pointer<Int32> value) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_GLContext SDLCALL SDL_GL_CreateContext(SDL_Window *window)
 /// ```
+/// {@category video}
 Pointer<SdlGlContext> sdlGlCreateContext(Pointer<SdlWindow> window) {
   final sdlGlCreateContextLookupFunction = _libSdl
       .lookupFunction<
@@ -3853,6 +3955,7 @@ Pointer<SdlGlContext> sdlGlCreateContext(Pointer<SdlWindow> window) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GL_MakeCurrent(SDL_Window *window, SDL_GLContext context)
 /// ```
+/// {@category video}
 bool sdlGlMakeCurrent(
   Pointer<SdlWindow> window,
   Pointer<SdlGlContext> context,
@@ -3881,6 +3984,7 @@ bool sdlGlMakeCurrent(
 /// ```c
 /// extern SDL_DECLSPEC SDL_Window * SDLCALL SDL_GL_GetCurrentWindow(void)
 /// ```
+/// {@category video}
 Pointer<SdlWindow> sdlGlGetCurrentWindow() {
   final sdlGlGetCurrentWindowLookupFunction = _libSdl
       .lookupFunction<
@@ -3905,6 +4009,7 @@ Pointer<SdlWindow> sdlGlGetCurrentWindow() {
 /// ```c
 /// extern SDL_DECLSPEC SDL_GLContext SDLCALL SDL_GL_GetCurrentContext(void)
 /// ```
+/// {@category video}
 Pointer<SdlGlContext> sdlGlGetCurrentContext() {
   final sdlGlGetCurrentContextLookupFunction = _libSdl
       .lookupFunction<
@@ -3927,6 +4032,7 @@ Pointer<SdlGlContext> sdlGlGetCurrentContext() {
 /// ```c
 /// extern SDL_DECLSPEC SDL_EGLDisplay SDLCALL SDL_EGL_GetCurrentDisplay(void)
 /// ```
+/// {@category video}
 Pointer<NativeType> sdlEglGetCurrentDisplay() {
   final sdlEglGetCurrentDisplayLookupFunction = _libSdl
       .lookupFunction<
@@ -3949,6 +4055,7 @@ Pointer<NativeType> sdlEglGetCurrentDisplay() {
 /// ```c
 /// extern SDL_DECLSPEC SDL_EGLConfig SDLCALL SDL_EGL_GetCurrentConfig(void)
 /// ```
+/// {@category video}
 Pointer<NativeType> sdlEglGetCurrentConfig() {
   final sdlEglGetCurrentConfigLookupFunction = _libSdl
       .lookupFunction<
@@ -3972,6 +4079,7 @@ Pointer<NativeType> sdlEglGetCurrentConfig() {
 /// ```c
 /// extern SDL_DECLSPEC SDL_EGLSurface SDLCALL SDL_EGL_GetWindowSurface(SDL_Window *window)
 /// ```
+/// {@category video}
 void sdlEglGetWindowSurface(Pointer<SdlWindow> window) {
   final sdlEglGetWindowSurfaceLookupFunction = _libSdl
       .lookupFunction<
@@ -4004,6 +4112,7 @@ void sdlEglGetWindowSurface(Pointer<SdlWindow> window) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_EGL_SetAttributeCallbacks(SDL_EGLAttribArrayCallback platformAttribCallback, SDL_EGLIntArrayCallback surfaceAttribCallback, SDL_EGLIntArrayCallback contextAttribCallback, void *userdata)
 /// ```
+/// {@category video}
 void sdlEglSetAttributeCallbacks(
   Pointer<NativeFunction<SdlEglAttribArrayCallback>> platformAttribCallback,
   Pointer<NativeFunction<SdlEglIntArrayCallback>> surfaceAttribCallback,
@@ -4067,6 +4176,7 @@ void sdlEglSetAttributeCallbacks(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GL_SetSwapInterval(int interval)
 /// ```
+/// {@category video}
 bool sdlGlSetSwapInterval(int interval) {
   final sdlGlSetSwapIntervalLookupFunction = _libSdl
       .lookupFunction<
@@ -4098,6 +4208,7 @@ bool sdlGlSetSwapInterval(int interval) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GL_GetSwapInterval(int *interval)
 /// ```
+/// {@category video}
 bool sdlGlGetSwapInterval(Pointer<Int32> interval) {
   final sdlGlGetSwapIntervalLookupFunction = _libSdl
       .lookupFunction<
@@ -4128,6 +4239,7 @@ bool sdlGlGetSwapInterval(Pointer<Int32> interval) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GL_SwapWindow(SDL_Window *window)
 /// ```
+/// {@category video}
 bool sdlGlSwapWindow(Pointer<SdlWindow> window) {
   final sdlGlSwapWindowLookupFunction = _libSdl
       .lookupFunction<
@@ -4153,6 +4265,7 @@ bool sdlGlSwapWindow(Pointer<SdlWindow> window) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GL_DestroyContext(SDL_GLContext context)
 /// ```
+/// {@category video}
 bool sdlGlDestroyContext(Pointer<SdlGlContext> context) {
   final sdlGlDestroyContextLookupFunction = _libSdl
       .lookupFunction<

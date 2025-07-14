@@ -17,6 +17,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Window * SDLCALL SDL_GetRenderWindow(SDL_Renderer *renderer)
   /// ```
+  /// {@category render}
   Pointer<SdlWindow> getWindow() => sdlGetRenderWindow(this);
 
   ///
@@ -106,6 +107,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_PropertiesID SDLCALL SDL_GetRendererProperties(SDL_Renderer *renderer)
   /// ```
+  /// {@category render}
   int getProperties() => sdlGetRendererProperties(this);
 
   ///
@@ -132,6 +134,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderOutputSize(SDL_Renderer *renderer, int *w, int *h)
   /// ```
+  /// {@category render}
   math.Point<double> getOutputSize() {
     final wPointer = calloc<Int32>();
     final hPointer = calloc<Int32>();
@@ -170,6 +173,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetCurrentRenderOutputSize(SDL_Renderer *renderer, int *w, int *h)
   /// ```
+  /// {@category render}
   math.Point<double> getCurrentOutputSize() {
     final wPointer = calloc<Int32>();
     final hPointer = calloc<Int32>();
@@ -210,6 +214,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Texture * SDLCALL SDL_CreateTexture(SDL_Renderer *renderer, SDL_PixelFormat format, SDL_TextureAccess access, int w, int h)
   /// ```
+  /// {@category render}
   Pointer<SdlTexture> createTexture(int format, int access, int w, int h) =>
       sdlCreateTexture(this, format, access, w, h);
 
@@ -242,6 +247,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Texture * SDLCALL SDL_CreateTextureFromSurface(SDL_Renderer *renderer, SDL_Surface *surface)
   /// ```
+  /// {@category render}
   Pointer<SdlTexture> createTextureFromSurface(Pointer<SdlSurface> surface) =>
       sdlCreateTextureFromSurface(this, surface);
 
@@ -358,6 +364,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Texture * SDLCALL SDL_CreateTextureWithProperties(SDL_Renderer *renderer, SDL_PropertiesID props)
   /// ```
+  /// {@category render}
   Pointer<SdlTexture> createTextureWithProperties(int props) =>
       sdlCreateTextureWithProperties(this, props);
 
@@ -389,6 +396,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetRenderTarget(SDL_Renderer *renderer, SDL_Texture *texture)
   /// ```
+  /// {@category render}
   bool setTarget(Pointer<SdlTexture> texture) =>
       sdlSetRenderTarget(this, texture);
 
@@ -410,6 +418,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Texture * SDLCALL SDL_GetRenderTarget(SDL_Renderer *renderer)
   /// ```
+  /// {@category render}
   Pointer<SdlTexture> getTarget() => sdlGetRenderTarget(this);
 
   ///
@@ -468,6 +477,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetRenderLogicalPresentation(SDL_Renderer *renderer, int w, int h, SDL_RendererLogicalPresentation mode)
   /// ```
+  /// {@category render}
   bool setLogicalPresentation(int w, int h, int mode) =>
       sdlSetRenderLogicalPresentation(this, w, h, mode);
 
@@ -496,6 +506,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderLogicalPresentation(SDL_Renderer *renderer, int *w, int *h, SDL_RendererLogicalPresentation *mode)
   /// ```
+  /// {@category render}
   bool getLogicalPresentation(
     Pointer<Int32> w,
     Pointer<Int32> h,
@@ -527,6 +538,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderLogicalPresentation(SDL_Renderer *renderer, int *w, int *h, SDL_RendererLogicalPresentation *mode)
   /// ```
+  /// {@category render}
   math.Point<double> getLogicalSize() {
     final wPointer = calloc<Int32>();
     final hPointer = calloc<Int32>();
@@ -568,6 +580,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderLogicalPresentation(SDL_Renderer *renderer, int *w, int *h, SDL_RendererLogicalPresentation *mode)
   /// ```
+  /// {@category render}
   int getLogicalMode() {
     final wPointer = calloc<Int32>();
     final hPointer = calloc<Int32>();
@@ -609,6 +622,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderCoordinatesFromWindow(SDL_Renderer *renderer, float window_x, float window_y, float *x, float *y)
   /// ```
+  /// {@category render}
   math.Point<double> coordinatesFromWindow(double windowX, double windowY) {
     final xPointer = calloc<Float>();
     final yPointer = calloc<Float>();
@@ -651,6 +665,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderCoordinatesToWindow(SDL_Renderer *renderer, float x, float y, float *window_x, float *window_y)
   /// ```
+  /// {@category render}
   math.Point<double> coordinatesToWindow(double x, double y) {
     final windowXPointer = calloc<Float>();
     final windowYPointer = calloc<Float>();
@@ -702,6 +717,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_ConvertEventToRenderCoordinates(SDL_Renderer *renderer, SDL_Event *event)
   /// ```
+  /// {@category render}
   bool convertEventToCoordinates(Pointer<SdlEvent> event) =>
       sdlConvertEventToRenderCoordinates(this, event);
 
@@ -733,6 +749,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetRenderViewport(SDL_Renderer *renderer, const SDL_Rect *rect)
   /// ```
+  /// {@category render}
   bool setViewport([math.Rectangle<double>? rect]) {
     Pointer<SdlRect> rectPointer = nullptr;
     if (rect != null) {
@@ -764,6 +781,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderViewport(SDL_Renderer *renderer, SDL_Rect *rect)
   /// ```
+  /// {@category render}
   math.Rectangle<double> getViewport() {
     final rectPointer = calloc<SdlRect>();
     sdlGetRenderViewport(this, rectPointer);
@@ -794,6 +812,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetRenderClipRect(SDL_Renderer *renderer, const SDL_Rect *rect)
   /// ```
+  /// {@category render}
   bool setClipRect([math.Rectangle<double>? rect]) {
     Pointer<SdlRect> rectPointer = nullptr;
     if (rect != null) {
@@ -826,6 +845,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderClipRect(SDL_Renderer *renderer, SDL_Rect *rect)
   /// ```
+  /// {@category render}
   math.Rectangle<double> getClipRect() {
     final rectPointer = calloc<SdlRect>();
     sdlGetRenderClipRect(this, rectPointer);
@@ -854,6 +874,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderClipEnabled(SDL_Renderer *renderer)
   /// ```
+  /// {@category render}
   bool clipEnabled() => sdlRenderClipEnabled(this);
 
   ///
@@ -885,6 +906,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetRenderScale(SDL_Renderer *renderer, float scaleX, float scaleY)
   /// ```
+  /// {@category render}
   bool setScale(double scaleX, double scaleY) =>
       sdlSetRenderScale(this, scaleX, scaleY);
 
@@ -909,6 +931,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderScale(SDL_Renderer *renderer, float *scaleX, float *scaleY)
   /// ```
+  /// {@category render}
   math.Point<double> getScale() {
     final scaleXPointer = calloc<Float>();
     final scaleYPointer = calloc<Float>();
@@ -946,6 +969,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetRenderDrawColor(SDL_Renderer *renderer, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
   /// ```
+  /// {@category render}
   bool setDrawColor(int r, int g, int b, int a) =>
       sdlSetRenderDrawColor(this, r, g, b, a);
 
@@ -975,6 +999,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetRenderDrawColorFloat(SDL_Renderer *renderer, float r, float g, float b, float a)
   /// ```
+  /// {@category render}
   bool setDrawColorFloat(double r, double g, double b, double a) =>
       sdlSetRenderDrawColorFloat(this, r, g, b, a);
 
@@ -1003,6 +1028,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderDrawColor(SDL_Renderer *renderer, Uint8 *r, Uint8 *g, Uint8 *b, Uint8 *a)
   /// ```
+  /// {@category render}
   bool getDrawColor(Pointer<SdlColor> color) {
     final rPointer = calloc<Uint8>();
     final gPointer = calloc<Uint8>();
@@ -1052,6 +1078,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderDrawColorFloat(SDL_Renderer *renderer, float *r, float *g, float *b, float *a)
   /// ```
+  /// {@category render}
   bool getDrawColorFloat(Pointer<SdlFColor> color) {
     final rPointer = calloc<Float>();
     final gPointer = calloc<Float>();
@@ -1101,6 +1128,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetRenderColorScale(SDL_Renderer *renderer, float scale)
   /// ```
+  /// {@category render}
   bool setColorScale(double scale) => sdlSetRenderColorScale(this, scale);
 
   ///
@@ -1120,6 +1148,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderColorScale(SDL_Renderer *renderer, float *scale)
   /// ```
+  /// {@category render}
   double getColorScale() {
     final scalePointer = calloc<Float>();
     sdlGetRenderColorScale(this, scalePointer);
@@ -1147,6 +1176,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetRenderDrawBlendMode(SDL_Renderer *renderer, SDL_BlendMode blendMode)
   /// ```
+  /// {@category render}
   bool setDrawBlendMode(int blendMode) =>
       sdlSetRenderDrawBlendMode(this, blendMode);
 
@@ -1167,6 +1197,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderDrawBlendMode(SDL_Renderer *renderer, SDL_BlendMode *blendMode)
   /// ```
+  /// {@category render}
   int getDrawBlendMode() {
     final blendModePointer = calloc<Uint32>();
     sdlGetRenderDrawBlendMode(this, blendModePointer);
@@ -1196,6 +1227,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderClear(SDL_Renderer *renderer)
   /// ```
+  /// {@category render}
   bool clear() => sdlRenderClear(this);
 
   ///
@@ -1216,6 +1248,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderPoint(SDL_Renderer *renderer, float x, float y)
   /// ```
+  /// {@category render}
   bool point(math.Point<double> point) =>
       sdlRenderPoint(this, point.x, point.y);
 
@@ -1237,6 +1270,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderPoints(SDL_Renderer *renderer, const SDL_FPoint *points, int count)
   /// ```
+  /// {@category render}
   bool points(List<math.Point<double>> points) {
     final pointsPointer = points.calloc();
     final result = sdlRenderPoints(this, pointsPointer, points.length);
@@ -1264,6 +1298,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderLine(SDL_Renderer *renderer, float x1, float y1, float x2, float y2)
   /// ```
+  /// {@category render}
   bool line(math.Point<double> p1, math.Point<double> p2) =>
       sdlRenderLine(this, p1.x, p1.y, p2.x, p2.y);
 
@@ -1286,6 +1321,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderLines(SDL_Renderer *renderer, const SDL_FPoint *points, int count)
   /// ```
+  /// {@category render}
   bool lines(List<math.Point<double>> points) {
     final pointsPointer = points.calloc();
     final result = sdlRenderLines(this, pointsPointer, points.length);
@@ -1311,6 +1347,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderRect(SDL_Renderer *renderer, const SDL_FRect *rect)
   /// ```
+  /// {@category render}
   bool rect(math.Rectangle<double>? rect) {
     Pointer<SdlFRect> rectPointer = nullptr;
     if (rect != null) {
@@ -1340,6 +1377,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderRects(SDL_Renderer *renderer, const SDL_FRect *rects, int count)
   /// ```
+  /// {@category render}
   bool rects(List<math.Rectangle<double>> rects) {
     final rectsPointer = rects.calloc();
     final result = sdlRenderRects(this, rectsPointer, rects.length);
@@ -1366,6 +1404,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderFillRect(SDL_Renderer *renderer, const SDL_FRect *rect)
   /// ```
+  /// {@category render}
   bool fillRect([math.Rectangle<double>? rect]) {
     Pointer<SdlFRect> rectPointer = nullptr;
     if (rect != null) {
@@ -1395,6 +1434,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderFillRects(SDL_Renderer *renderer, const SDL_FRect *rects, int count)
   /// ```
+  /// {@category render}
   bool fillRects(List<math.Rectangle<double>> rects) {
     final rectsPointer = rects.calloc();
     final result = sdlRenderFillRects(this, rectsPointer, rects.length);
@@ -1425,6 +1465,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderTexture(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_FRect *srcrect, const SDL_FRect *dstrect)
   /// ```
+  /// {@category render}
   bool texture(
     Pointer<SdlTexture> texture, {
     math.Rectangle<double>? srcrect,
@@ -1479,6 +1520,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderTextureRotated(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_FRect *srcrect, const SDL_FRect *dstrect, double angle, const SDL_FPoint *center, SDL_FlipMode flip)
   /// ```
+  /// {@category render}
   bool textureRotated(
     Pointer<SdlTexture> texture, {
     math.Rectangle<double>? srcrect,
@@ -1544,6 +1586,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderTextureAffine(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_FRect *srcrect, const SDL_FPoint *origin, const SDL_FPoint *right, const SDL_FPoint *down)
   /// ```
+  /// {@category render}
   bool textureAffine(
     Pointer<SdlTexture> texture, {
     math.Rectangle<double>? srcrect,
@@ -1611,6 +1654,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderTextureTiled(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_FRect *srcrect, float scale, const SDL_FRect *dstrect)
   /// ```
+  /// {@category render}
   bool textureTiled(
     Pointer<SdlTexture> texture, {
     math.Rectangle<double>? srcrect,
@@ -1673,6 +1717,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderTexture9Grid(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_FRect *srcrect, float left_width, float right_width, float top_height, float bottom_height, float scale, const SDL_FRect *dstrect)
   /// ```
+  /// {@category render}
   bool texture9Grid(
     Pointer<SdlRenderer> renderer,
     Pointer<SdlTexture> texture, {
@@ -1753,6 +1798,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderGeometry(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_Vertex *vertices, int num_vertices, const int *indices, int num_indices)
   /// ```
+  /// {@category render}
   bool geometry(
     Pointer<SdlVertex> vertices,
     Pointer<SdlTexture> texture,
@@ -1799,6 +1845,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderGeometryRaw(SDL_Renderer *renderer, SDL_Texture *texture, const float *xy, int xy_stride, const SDL_FColor *color, int color_stride, const float *uv, int uv_stride, int num_vertices, const void *indices, int num_indices, int size_indices)
   /// ```
+  /// {@category render}
   bool geometryRaw(
     Pointer<SdlTexture> texture,
     Pointer<Float> xy,
@@ -1854,6 +1901,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Surface * SDLCALL SDL_RenderReadPixels(SDL_Renderer *renderer, const SDL_Rect *rect)
   /// ```
+  /// {@category render}
   Pointer<SdlSurface> readPixels(math.Rectangle<double> rect) {
     final rectPointer = rect.callocInt();
     final result = sdlRenderReadPixels(this, rectPointer);
@@ -1911,6 +1959,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderPresent(SDL_Renderer *renderer)
   /// ```
+  /// {@category render}
   bool present() => sdlRenderPresent(this);
 
   ///
@@ -1930,6 +1979,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_DestroyRenderer(SDL_Renderer *renderer)
   /// ```
+  /// {@category render}
   bool destroy() {
     if (this != nullptr) {
       sdlDestroyRenderer(this);
@@ -1972,6 +2022,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_FlushRenderer(SDL_Renderer *renderer)
   /// ```
+  /// {@category render}
   bool flush() => sdlFlushRenderer(this);
 
   ///
@@ -1993,6 +2044,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC void * SDLCALL SDL_GetRenderMetalLayer(SDL_Renderer *renderer)
   /// ```
+  /// {@category render}
   Pointer<NativeType> getMetalLayer() => sdlGetRenderMetalLayer(this);
 
   ///
@@ -2019,6 +2071,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC void * SDLCALL SDL_GetRenderMetalCommandEncoder(SDL_Renderer *renderer)
   /// ```
+  /// {@category render}
   Pointer<NativeType> getMetalCommandEncoder() =>
       sdlGetRenderMetalCommandEncoder(this);
 
@@ -2053,6 +2106,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_AddVulkanRenderSemaphores(SDL_Renderer *renderer, Uint32 wait_stage_mask, Sint64 wait_semaphore, Sint64 signal_semaphore)
   /// ```
+  /// {@category render}
   bool addVulkanSemaphores(
     int waitStageMask,
     int waitSemaphore,
@@ -2090,6 +2144,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetRenderVSync(SDL_Renderer *renderer, int vsync)
   /// ```
+  /// {@category render}
   bool setVSync(int vsync) => sdlSetRenderVSync(this, vsync);
 
   ///
@@ -2110,6 +2165,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderVSync(SDL_Renderer *renderer, int *vsync)
   /// ```
+  /// {@category render}
   int getVSync() {
     final vSyncPointer = calloc<Int32>();
     sdlGetRenderVSync(this, vSyncPointer);
@@ -2160,6 +2216,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderDebugText(SDL_Renderer *renderer, float x, float y, const char *str)
   /// ```
+  /// {@category render}
   bool debugText(double x, double y, String? str) =>
       sdlRenderDebugText(this, x, y, str);
 }

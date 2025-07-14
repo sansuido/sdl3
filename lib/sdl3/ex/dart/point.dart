@@ -52,6 +52,7 @@ extension PointEx on math.Point<double> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_MouseButtonFlags SDLCALL SDL_GetMouseState(float *x, float *y)
   /// ```
+  /// {@category mouse}
   static math.Point<double> getMousePosition() {
     final xPointer = ffi.calloc<Float>();
     final yPointer = ffi.calloc<Float>();
@@ -100,6 +101,7 @@ extension PointEx on math.Point<double> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_MouseButtonFlags SDLCALL SDL_GetGlobalMouseState(float *x, float *y)
   /// ```
+  /// {@category mouse}
   static math.Point<double> getGlobalMousePosition() {
     final xPointer = ffi.calloc<Float>();
     final yPointer = ffi.calloc<Float>();
@@ -146,6 +148,7 @@ extension PointEx on math.Point<double> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_MouseButtonFlags SDLCALL SDL_GetRelativeMouseState(float *x, float *y)
   /// ```
+  /// {@category mouse}
   static math.Point<double> getRelativeMousePosition() {
     final xPointer = ffi.calloc<Float>();
     final yPointer = ffi.calloc<Float>();
@@ -217,6 +220,7 @@ extension PointsEx on List<math.Point<double>> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRectEnclosingPoints(const SDL_Point *points, int count, const SDL_Rect *clip, SDL_Rect *result)
   /// ```
+  /// {@category rect}
   math.Rectangle<double>? getEncloseRect({math.Rectangle<double>? clip}) {
     math.Rectangle<double>? result;
     final pointsPointer = callocInt();

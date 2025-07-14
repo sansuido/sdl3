@@ -43,6 +43,7 @@ part of '../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetBasePath(void)
 /// ```
+/// {@category filesystem}
 String? sdlGetBasePath() {
   final sdlGetBasePathLookupFunction = _libSdl
       .lookupFunction<Pointer<Utf8> Function(), Pointer<Utf8> Function()>(
@@ -111,6 +112,7 @@ String? sdlGetBasePath() {
 /// ```c
 /// extern SDL_DECLSPEC char * SDLCALL SDL_GetPrefPath(const char *org, const char *app)
 /// ```
+/// {@category filesystem}
 Pointer<Int8> sdlGetPrefPath(String? org, String? app) {
   final sdlGetPrefPathLookupFunction = _libSdl
       .lookupFunction<
@@ -152,6 +154,7 @@ Pointer<Int8> sdlGetPrefPath(String? org, String? app) {
 /// ```c
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetUserFolder(SDL_Folder folder)
 /// ```
+/// {@category filesystem}
 String? sdlGetUserFolder(int folder) {
   final sdlGetUserFolderLookupFunction = _libSdl
       .lookupFunction<
@@ -182,6 +185,7 @@ String? sdlGetUserFolder(int folder) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_CreateDirectory(const char *path)
 /// ```
+/// {@category filesystem}
 bool sdlCreateDirectory(String? path) {
   final sdlCreateDirectoryLookupFunction = _libSdl
       .lookupFunction<
@@ -218,6 +222,7 @@ bool sdlCreateDirectory(String? path) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_EnumerateDirectory(const char *path, SDL_EnumerateDirectoryCallback callback, void *userdata)
 /// ```
+/// {@category filesystem}
 bool sdlEnumerateDirectory(
   String? path,
   Pointer<NativeFunction<SdlEnumerateDirectoryCallback>> callback,
@@ -258,6 +263,7 @@ bool sdlEnumerateDirectory(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_RemovePath(const char *path)
 /// ```
+/// {@category filesystem}
 bool sdlRemovePath(String? path) {
   final sdlRemovePathLookupFunction = _libSdl
       .lookupFunction<
@@ -294,6 +300,7 @@ bool sdlRemovePath(String? path) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_RenamePath(const char *oldpath, const char *newpath)
 /// ```
+/// {@category filesystem}
 bool sdlRenamePath(String? oldpath, String? newpath) {
   final sdlRenamePathLookupFunction = _libSdl
       .lookupFunction<
@@ -351,6 +358,7 @@ bool sdlRenamePath(String? oldpath, String? newpath) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_CopyFile(const char *oldpath, const char *newpath)
 /// ```
+/// {@category filesystem}
 bool sdlCopyFile(String? oldpath, String? newpath) {
   final sdlCopyFileLookupFunction = _libSdl
       .lookupFunction<
@@ -380,6 +388,7 @@ bool sdlCopyFile(String? oldpath, String? newpath) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetPathInfo(const char *path, SDL_PathInfo *info)
 /// ```
+/// {@category filesystem}
 bool sdlGetPathInfo(String? path, Pointer<SdlPathInfo> info) {
   final sdlGetPathInfoLookupFunction = _libSdl
       .lookupFunction<
@@ -426,6 +435,7 @@ bool sdlGetPathInfo(String? path, Pointer<SdlPathInfo> info) {
 /// ```c
 /// extern SDL_DECLSPEC char ** SDLCALL SDL_GlobDirectory(const char *path, const char *pattern, SDL_GlobFlags flags, int *count)
 /// ```
+/// {@category filesystem}
 Pointer<Pointer<Int8>> sdlGlobDirectory(
   String? path,
   String? pattern,
@@ -483,6 +493,7 @@ Pointer<Pointer<Int8>> sdlGlobDirectory(
 /// ```c
 /// extern SDL_DECLSPEC char * SDLCALL SDL_GetCurrentDirectory(void)
 /// ```
+/// {@category filesystem}
 Pointer<Int8> sdlGetCurrentDirectory() {
   final sdlGetCurrentDirectoryLookupFunction = _libSdl
       .lookupFunction<Pointer<Int8> Function(), Pointer<Int8> Function()>(

@@ -35,6 +35,7 @@ extension MixMusicEx on MixMusic {
   /// ```c
   /// extern SDL_DECLSPEC Mix_Music * SDLCALL Mix_LoadMUS(const char *file)
   /// ```
+  /// {@category mixer}
   static Pointer<MixMusic> load(String? file) => mixLoadMus(file);
 
   ///
@@ -82,6 +83,7 @@ extension MixMusicEx on MixMusic {
   /// ```c
   /// extern SDL_DECLSPEC Mix_Music * SDLCALL Mix_LoadMUS_IO(SDL_IOStream *src, bool closeio)
   /// ```
+  /// {@category mixer}
   static Pointer<MixMusic> loadIo(Pointer<SdlIoStream> src, bool closeio) =>
       mixLoadMusIo(src, closeio);
 
@@ -143,6 +145,7 @@ extension MixMusicEx on MixMusic {
   /// ```c
   /// extern SDL_DECLSPEC Mix_Music * SDLCALL Mix_LoadMUSType_IO(SDL_IOStream *src, Mix_MusicType type, bool closeio)
   /// ```
+  /// {@category mixer}
   static Pointer<MixMusic> loadTypeIo(
     Pointer<SdlIoStream> src,
     int type,
@@ -174,6 +177,7 @@ extension MixMusicEx on MixMusic {
   /// ```c
   /// extern SDL_DECLSPEC int SDLCALL Mix_GetNumMusicDecoders(void)
   /// ```
+  /// {@category mixer}
   static int getNumDecoders() => mixGetNumMusicDecoders();
 
   ///
@@ -198,6 +202,7 @@ extension MixMusicEx on MixMusic {
   /// ```c
   /// extern SDL_DECLSPEC const char * SDLCALL Mix_GetMusicDecoder(int index)
   /// ```
+  /// {@category mixer}
   static String? getDecoder(int index) => mixGetMusicDecoder(index);
 
   ///
@@ -223,6 +228,7 @@ extension MixMusicEx on MixMusic {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL Mix_HasMusicDecoder(const char *name)
   /// ```
+  /// {@category mixer}
   static bool hasDecoder(String? name) => mixHasMusicDecoder(name);
 }
 
@@ -249,6 +255,7 @@ extension MixMusicPointerEx on Pointer<MixMusic> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL Mix_FreeMusic(Mix_Music *music)
   /// ```
+  /// {@category mixer}
   void free() {
     mixFreeMusic(this);
   }
@@ -268,6 +275,7 @@ extension MixMusicPointerEx on Pointer<MixMusic> {
   /// ```c
   /// extern SDL_DECLSPEC Mix_MusicType SDLCALL Mix_GetMusicType(const Mix_Music *music)
   /// ```
+  /// {@category mixer}
   int getType() => mixGetMusicType(this);
 
   ///
@@ -301,6 +309,7 @@ extension MixMusicPointerEx on Pointer<MixMusic> {
   /// ```c
   /// extern SDL_DECLSPEC const char *SDLCALL Mix_GetMusicTitle(const Mix_Music *music)
   /// ```
+  /// {@category mixer}
   String? getTitle() => mixGetMusicTitle(this);
 
   ///
@@ -331,6 +340,7 @@ extension MixMusicPointerEx on Pointer<MixMusic> {
   /// ```c
   /// extern SDL_DECLSPEC const char *SDLCALL Mix_GetMusicTitleTag(const Mix_Music *music)
   /// ```
+  /// {@category mixer}
   String? getTitleTag() => mixGetMusicTitleTag(this);
 
   ///
@@ -356,6 +366,7 @@ extension MixMusicPointerEx on Pointer<MixMusic> {
   /// ```c
   /// extern SDL_DECLSPEC const char *SDLCALL Mix_GetMusicArtistTag(const Mix_Music *music)
   /// ```
+  /// {@category mixer}
   String? getArtistTag() => mixGetMusicArtistTag(this);
 
   ///
@@ -381,6 +392,7 @@ extension MixMusicPointerEx on Pointer<MixMusic> {
   /// ```c
   /// extern SDL_DECLSPEC const char *SDLCALL Mix_GetMusicAlbumTag(const Mix_Music *music)
   /// ```
+  /// {@category mixer}
   String? getAlbumTag() => mixGetMusicAlbumTag(this);
 
   ///
@@ -406,6 +418,7 @@ extension MixMusicPointerEx on Pointer<MixMusic> {
   /// ```c
   /// extern SDL_DECLSPEC const char *SDLCALL Mix_GetMusicCopyrightTag(const Mix_Music *music)
   /// ```
+  /// {@category mixer}
   String? getCopyrightTag() => mixGetMusicCopyrightTag(this);
 
   ///
@@ -433,6 +446,7 @@ extension MixMusicPointerEx on Pointer<MixMusic> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL Mix_PlayMusic(Mix_Music *music, int loops)
   /// ```
+  /// {@category mixer}
   bool play(int loops) => mixPlayMusic(this, loops);
 
   ///
@@ -464,6 +478,7 @@ extension MixMusicPointerEx on Pointer<MixMusic> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL Mix_FadeInMusic(Mix_Music *music, int loops, int ms)
   /// ```
+  /// {@category mixer}
   bool fadeIn(int loops, int ms) => mixFadeInMusic(this, loops, ms);
 
   ///
@@ -507,6 +522,7 @@ extension MixMusicPointerEx on Pointer<MixMusic> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL Mix_FadeInMusicPos(Mix_Music *music, int loops, int ms, double position)
   /// ```
+  /// {@category mixer}
   bool fadeInPos(int loops, int ms, double position) =>
       mixFadeInMusicPos(this, loops, ms, position);
 
@@ -532,6 +548,7 @@ extension MixMusicPointerEx on Pointer<MixMusic> {
   /// ```c
   /// extern SDL_DECLSPEC int SDLCALL Mix_VolumeMusic(int volume)
   /// ```
+  /// {@category mixer}
   int setVolume(int volume) => mixVolumeMusic(volume);
 
   ///
@@ -545,6 +562,7 @@ extension MixMusicPointerEx on Pointer<MixMusic> {
   /// ```c
   /// extern SDL_DECLSPEC int SDLCALL Mix_GetMusicVolume(Mix_Music *music)
   /// ```
+  /// {@category mixer}
   int getVolume() => mixGetMusicVolume(this);
 
   ///
@@ -561,6 +579,7 @@ extension MixMusicPointerEx on Pointer<MixMusic> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL Mix_HaltMusic(void)
   /// ```
+  /// {@category mixer}
   void halt() {
     mixHaltMusic();
   }
@@ -591,6 +610,7 @@ extension MixMusicPointerEx on Pointer<MixMusic> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL Mix_FadeOutMusic(int ms)
   /// ```
+  /// {@category mixer}
   bool fadeOut(int ms) => mixFadeOutMusic(ms);
 
   ///
@@ -611,6 +631,7 @@ extension MixMusicPointerEx on Pointer<MixMusic> {
   /// ```c
   /// extern SDL_DECLSPEC Mix_Fading SDLCALL Mix_FadingMusic(void)
   /// ```
+  /// {@category mixer}
   int fading() => mixFadingMusic();
 
   ///
@@ -630,6 +651,7 @@ extension MixMusicPointerEx on Pointer<MixMusic> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL Mix_PauseMusic(void)
   /// ```
+  /// {@category mixer}
   void pause() {
     mixPauseMusic();
   }
@@ -645,6 +667,7 @@ extension MixMusicPointerEx on Pointer<MixMusic> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL Mix_ResumeMusic(void)
   /// ```
+  /// {@category mixer}
   void resume() {
     mixResumeMusic();
   }
@@ -662,6 +685,7 @@ extension MixMusicPointerEx on Pointer<MixMusic> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL Mix_RewindMusic(void)
   /// ```
+  /// {@category mixer}
   void rewind() {
     mixRewindMusic();
   }
@@ -679,6 +703,7 @@ extension MixMusicPointerEx on Pointer<MixMusic> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL Mix_PausedMusic(void)
   /// ```
+  /// {@category mixer}
   bool paused() => mixPausedMusic();
 
   ///
@@ -695,6 +720,7 @@ extension MixMusicPointerEx on Pointer<MixMusic> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL Mix_ModMusicJumpToOrder(int order)
   /// ```
+  /// {@category mixer}
   bool modJumpToOrder(int order) => mixModMusicJumpToOrder(order);
 
   ///
@@ -712,6 +738,7 @@ extension MixMusicPointerEx on Pointer<MixMusic> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL Mix_StartTrack(Mix_Music *music, int track)
   /// ```
+  /// {@category mixer}
   bool startTrack(int track) => mixStartTrack(this, track);
 
   ///
@@ -728,6 +755,7 @@ extension MixMusicPointerEx on Pointer<MixMusic> {
   /// ```c
   /// extern SDL_DECLSPEC int SDLCALL Mix_GetNumTracks(Mix_Music *music)
   /// ```
+  /// {@category mixer}
   int getNumTracks() => mixGetNumTracks(this);
 
   ///
@@ -747,6 +775,7 @@ extension MixMusicPointerEx on Pointer<MixMusic> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL Mix_SetMusicPosition(double position)
   /// ```
+  /// {@category mixer}
   bool setPosition(double position) => mixSetMusicPosition(position);
 
   ///
@@ -762,6 +791,7 @@ extension MixMusicPointerEx on Pointer<MixMusic> {
   /// ```c
   /// extern SDL_DECLSPEC double SDLCALL Mix_GetMusicPosition(Mix_Music *music)
   /// ```
+  /// {@category mixer}
   double getPosition() => mixGetMusicPosition(this);
 
   ///
@@ -779,6 +809,7 @@ extension MixMusicPointerEx on Pointer<MixMusic> {
   /// ```c
   /// extern SDL_DECLSPEC double SDLCALL Mix_MusicDuration(Mix_Music *music)
   /// ```
+  /// {@category mixer}
   double duration() => mixMusicDuration(this);
 
   ///
@@ -797,6 +828,7 @@ extension MixMusicPointerEx on Pointer<MixMusic> {
   /// ```c
   /// extern SDL_DECLSPEC double SDLCALL Mix_GetMusicLoopStartTime(Mix_Music *music)
   /// ```
+  /// {@category mixer}
   double getLoopStartTime() => mixGetMusicLoopStartTime(this);
 
   ///
@@ -815,6 +847,7 @@ extension MixMusicPointerEx on Pointer<MixMusic> {
   /// ```c
   /// extern SDL_DECLSPEC double SDLCALL Mix_GetMusicLoopEndTime(Mix_Music *music)
   /// ```
+  /// {@category mixer}
   double getLoopEndTime() => mixGetMusicLoopEndTime(this);
 
   ///
@@ -833,6 +866,7 @@ extension MixMusicPointerEx on Pointer<MixMusic> {
   /// ```c
   /// extern SDL_DECLSPEC double SDLCALL Mix_GetMusicLoopLengthTime(Mix_Music *music)
   /// ```
+  /// {@category mixer}
   double getLoopLengthTime() => mixGetMusicLoopLengthTime(this);
 
   ///
@@ -851,5 +885,6 @@ extension MixMusicPointerEx on Pointer<MixMusic> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL Mix_PlayingMusic(void)
   /// ```
+  /// {@category mixer}
   bool playing() => mixPlayingMusic();
 }

@@ -17,6 +17,7 @@ part of '../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_SetMainReady(void)
 /// ```
+/// {@category main}
 void sdlSetMainReady() {
   final sdlSetMainReadyLookupFunction = _libSdl
       .lookupFunction<Void Function(), void Function()>('SDL_SetMainReady');
@@ -54,6 +55,7 @@ void sdlSetMainReady() {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_RunApp(int argc, char *argv[], SDL_main_func mainFunction, void *reserved)
 /// ```
+/// {@category main}
 int sdlRunApp(
   int argc,
   Pointer<Pointer<Int8>> argv,
@@ -106,6 +108,7 @@ int sdlRunApp(
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_EnterAppMainCallbacks(int argc, char *argv[], SDL_AppInit_func appinit, SDL_AppIterate_func appiter, SDL_AppEvent_func appevent, SDL_AppQuit_func appquit)
 /// ```
+/// {@category main}
 int sdlEnterAppMainCallbacks(
   int argc,
   Pointer<Pointer<Int8>> argv,
@@ -170,6 +173,7 @@ int sdlEnterAppMainCallbacks(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_RegisterApp(const char *name, Uint32 style, void *hInst)
 /// ```
+/// {@category main}
 bool sdlRegisterApp(String? name, int style, Pointer<NativeType> hInst) {
   final sdlRegisterAppLookupFunction = _libSdl
       .lookupFunction<
@@ -204,6 +208,7 @@ bool sdlRegisterApp(String? name, int style, Pointer<NativeType> hInst) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_UnregisterApp(void)
 /// ```
+/// {@category main}
 void sdlUnregisterApp() {
   final sdlUnregisterAppLookupFunction = _libSdl
       .lookupFunction<Void Function(), void Function()>('SDL_UnregisterApp');
@@ -221,6 +226,7 @@ void sdlUnregisterApp() {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_GDKSuspendComplete(void)
 /// ```
+/// {@category main}
 void sdlGdkSuspendComplete() {
   final sdlGdkSuspendCompleteLookupFunction = _libSdl
       .lookupFunction<Void Function(), void Function()>(

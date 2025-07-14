@@ -95,6 +95,7 @@ extension SdlWindowEx on SdlWindow {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Window * SDLCALL SDL_CreateWindow(const char *title, int w, int h, SDL_WindowFlags flags)
   /// ```
+  /// {@category video}
   static Pointer<SdlWindow> create({
     required String title,
     required int w,
@@ -127,6 +128,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_WindowID SDLCALL SDL_GetWindowID(SDL_Window *window)
   /// ```
+  /// {@category video}
   int getId() => sdlGetWindowId(this);
 
   // sdlGetWindowFromId
@@ -152,6 +154,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_WindowFlags SDLCALL SDL_GetWindowFlags(SDL_Window *window)
   /// ```
+  /// {@category video}
   int getFlags() => sdlGetWindowFlags(this);
 
   ///
@@ -173,6 +176,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowTitle(SDL_Window *window, const char *title)
   /// ```
+  /// {@category video}
   bool setTitle(String title) => sdlSetWindowTitle(this, title);
 
   ///
@@ -191,6 +195,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetWindowTitle(SDL_Window *window)
   /// ```
+  /// {@category video}
   String? getTitle() => sdlGetWindowTitle(this);
 
   ///
@@ -221,6 +226,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowIcon(SDL_Window *window, SDL_Surface *icon)
   /// ```
+  /// {@category video}
   bool setIcon(Pointer<SdlSurface> icon) => sdlSetWindowIcon(this, icon);
 
   ///
@@ -265,6 +271,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowPosition(SDL_Window *window, int x, int y)
   /// ```
+  /// {@category video}
   bool setPosition(int x, int y) => sdlSetWindowPosition(this, x, y);
 
   ///
@@ -293,6 +300,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowPosition(SDL_Window *window, int *x, int *y)
   /// ```
+  /// {@category video}
   math.Point<double> getPosition() {
     final x = calloc<Int32>();
     final y = calloc<Int32>();
@@ -342,6 +350,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowSize(SDL_Window *window, int w, int h)
   /// ```
+  /// {@category video}
   bool setSize(int w, int h) => sdlSetWindowSize(this, w, h);
 
   ///
@@ -368,6 +377,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowSize(SDL_Window *window, int *w, int *h)
   /// ```
+  /// {@category video}
   math.Point<double> getSize() {
     final w = calloc<Int32>();
     final h = calloc<Int32>();
@@ -417,6 +427,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowBordersSize(SDL_Window *window, int *top, int *left, int *bottom, int *right)
   /// ```
+  /// {@category video}
   math.Rectangle<double> getBordersSize() {
     final top = calloc<Int32>();
     final left = calloc<Int32>();
@@ -458,6 +469,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowSizeInPixels(SDL_Window *window, int *w, int *h)
   /// ```
+  /// {@category video}
   math.Point<double> getSizeInPixels() {
     final w = calloc<Int32>();
     final h = calloc<Int32>();
@@ -488,6 +500,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowMinimumSize(SDL_Window *window, int min_w, int min_h)
   /// ```
+  /// {@category video}
   bool setMinimumSize(int w, int h) => sdlSetWindowMinimumSize(this, w, h);
 
   ///
@@ -511,6 +524,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowMinimumSize(SDL_Window *window, int *w, int *h)
   /// ```
+  /// {@category video}
   math.Point<double> getMinimumSize() {
     final w = calloc<Int32>();
     final h = calloc<Int32>();
@@ -541,6 +555,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowMaximumSize(SDL_Window *window, int max_w, int max_h)
   /// ```
+  /// {@category video}
   bool setMaximumSize(int w, int h) => sdlSetWindowMaximumSize(this, w, h);
 
   ///
@@ -564,6 +579,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowMaximumSize(SDL_Window *window, int *w, int *h)
   /// ```
+  /// {@category video}
   math.Point<double> getMaximumSize() {
     final w = calloc<Int32>();
     final h = calloc<Int32>();
@@ -598,6 +614,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowBordered(SDL_Window *window, bool bordered)
   /// ```
+  /// {@category video}
   bool setBordered(bool bordered) => sdlSetWindowBordered(this, bordered);
 
   ///
@@ -623,6 +640,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowResizable(SDL_Window *window, bool resizable)
   /// ```
+  /// {@category video}
   bool setResizable(bool resizable) => sdlSetWindowResizable(this, resizable);
 
   ///
@@ -645,6 +663,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowAlwaysOnTop(SDL_Window *window, bool on_top)
   /// ```
+  /// {@category video}
   bool setAlwaysOnTop(bool onTop) => sdlSetWindowAlwaysOnTop(this, onTop);
 
   ///
@@ -664,6 +683,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_ShowWindow(SDL_Window *window)
   /// ```
+  /// {@category video}
   bool show() => sdlShowWindow(this);
 
   ///
@@ -683,6 +703,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_HideWindow(SDL_Window *window)
   /// ```
+  /// {@category video}
   bool hide() => sdlHideWindow(this);
 
   ///
@@ -706,6 +727,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_RaiseWindow(SDL_Window *window)
   /// ```
+  /// {@category video}
   bool raise() => sdlRaiseWindow(this);
 
   ///
@@ -743,6 +765,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_MaximizeWindow(SDL_Window *window)
   /// ```
+  /// {@category video}
   bool maximize() => sdlMaximizeWindow(this);
 
   ///
@@ -775,6 +798,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_MinimizeWindow(SDL_Window *window)
   /// ```
+  /// {@category video}
   bool minimize() => sdlMinimizeWindow(this);
 
   ///
@@ -808,6 +832,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_RestoreWindow(SDL_Window *window)
   /// ```
+  /// {@category video}
   bool restore() => sdlRestoreWindow(this);
 
   ///
@@ -840,6 +865,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Surface * SDLCALL SDL_GetWindowSurface(SDL_Window *window)
   /// ```
+  /// {@category video}
   Pointer<SdlSurface> getSurface() => sdlGetWindowSurface(this);
 
   ///
@@ -864,6 +890,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_UpdateWindowSurface(SDL_Window *window)
   /// ```
+  /// {@category video}
   bool updateSurface() => sdlUpdateWindowSurface(this);
 
   ///
@@ -896,6 +923,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_UpdateWindowSurfaceRects(SDL_Window *window, const SDL_Rect *rects, int numrects)
   /// ```
+  /// {@category video}
   bool updateSurfaceRects(List<math.Rectangle<double>> rects) {
     final rectsPointer = rects.callocInt();
     final result = sdlUpdateWindowSurfaceRects(
@@ -941,6 +969,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowKeyboardGrab(SDL_Window *window, bool grabbed)
   /// ```
+  /// {@category video}
   bool setKeyboardGrab(bool grabbed) => sdlSetWindowKeyboardGrab(this, grabbed);
 
   ///
@@ -964,6 +993,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowMouseGrab(SDL_Window *window, bool grabbed)
   /// ```
+  /// {@category video}
   bool setMouseGrab(bool grabbed) => sdlSetWindowMouseGrab(this, grabbed);
 
   ///
@@ -981,6 +1011,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowKeyboardGrab(SDL_Window *window)
   /// ```
+  /// {@category video}
   bool getKeyboardGrab() => sdlGetWindowKeyboardGrab(this);
 
   ///
@@ -1001,6 +1032,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowMouseGrab(SDL_Window *window)
   /// ```
+  /// {@category video}
   bool getMouseGrab() => sdlGetWindowMouseGrab(this);
 
   // sdlGetGrabbedWindow
@@ -1028,6 +1060,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowMouseRect(SDL_Window *window, const SDL_Rect *rect)
   /// ```
+  /// {@category video}
   bool setMouseRect(math.Rectangle<double> rect) {
     final rectPointer = rect.callocInt();
     final result = sdlSetWindowMouseRect(this, rectPointer);
@@ -1053,6 +1086,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC const SDL_Rect * SDLCALL SDL_GetWindowMouseRect(SDL_Window *window)
   /// ```
+  /// {@category video}
   math.Rectangle<double>? getMouseRect() {
     math.Rectangle<double>? result;
     final rectPointer = sdlGetWindowMouseRect(this);
@@ -1084,6 +1118,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowOpacity(SDL_Window *window, float opacity)
   /// ```
+  /// {@category video}
   bool setOpacity(double opacity) => sdlSetWindowOpacity(this, opacity);
 
   ///
@@ -1105,6 +1140,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC float SDLCALL SDL_GetWindowOpacity(SDL_Window *window)
   /// ```
+  /// {@category video}
   double? getOpacity() => sdlGetWindowOpacity(this);
 
   ///
@@ -1142,6 +1178,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowParent(SDL_Window *window, SDL_Window *parent)
   /// ```
+  /// {@category video}
   bool setWindowParent(Pointer<SdlWindow> parent) =>
       sdlSetWindowParent(this, parent);
 
@@ -1166,6 +1203,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowModal(SDL_Window *window, bool modal)
   /// ```
+  /// {@category video}
   bool setWindowModal(bool modal) => sdlSetWindowModal(this, modal);
 
   ///
@@ -1183,6 +1221,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowFocusable(SDL_Window *window, bool focusable)
   /// ```
+  /// {@category video}
   bool setWindowFocasable(bool focusable) =>
       sdlSetWindowFocusable(this, focusable);
 
@@ -1212,6 +1251,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_ShowWindowSystemMenu(SDL_Window *window, int x, int y)
   /// ```
+  /// {@category video}
   bool showWindowSystemMenu(int x, int y) =>
       sdlShowWindowSystemMenu(this, x, y);
 
@@ -1263,6 +1303,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowHitTest(SDL_Window *window, SDL_HitTest callback, void *callback_data)
   /// ```
+  /// {@category video}
   bool setHitTest(
     Pointer<NativeFunction<SdlHitTest>> callback,
     Pointer<NativeType> callbackData,
@@ -1283,6 +1324,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_FlashWindow(SDL_Window *window, SDL_FlashOperation operation)
   /// ```
+  /// {@category video}
   bool flash(int operation) => sdlFlashWindow(this, operation);
 
   ///
@@ -1308,6 +1350,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_DestroyWindow(SDL_Window *window)
   /// ```
+  /// {@category video}
   bool destroy() {
     if (this != nullptr) {
       sdlDestroyWindow(this);
@@ -1341,6 +1384,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_GLContext SDLCALL SDL_GL_CreateContext(SDL_Window *window)
   /// ```
+  /// {@category video}
   Pointer<SdlGlContext> glCreateContext() => sdlGlCreateContext(this);
 
   ///
@@ -1361,6 +1405,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_DisplayID SDLCALL SDL_GetDisplayForWindow(SDL_Window *window)
   /// ```
+  /// {@category video}
   int getDisplayFor() => sdlGetDisplayForWindow(this);
 
   // lib_sdl_renderer.dart
@@ -1401,6 +1446,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Renderer * SDLCALL SDL_CreateRenderer(SDL_Window *window, const char *name)
   /// ```
+  /// {@category render}
   Pointer<SdlRenderer> createRenderer({String? name}) =>
       sdlCreateRenderer(this, name);
 
@@ -1418,5 +1464,6 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Renderer * SDLCALL SDL_GetRenderer(SDL_Window *window)
   /// ```
+  /// {@category render}
   Pointer<SdlRenderer> getRenderer() => sdlGetRenderer(this);
 }

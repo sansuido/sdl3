@@ -26,6 +26,7 @@ extension SdlAudioStreamEx on SdlAudioStream {
   /// ```c
   /// extern SDL_DECLSPEC SDL_AudioStream * SDLCALL SDL_CreateAudioStream(const SDL_AudioSpec *src_spec, const SDL_AudioSpec *dst_spec)
   /// ```
+  /// {@category audio}
   static Pointer<SdlAudioStream> create(
     Pointer<SdlAudioSpec> srcSpec,
     Pointer<SdlAudioSpec> dstSpec,
@@ -94,6 +95,7 @@ extension SdlAudioStreamEx on SdlAudioStream {
   /// ```c
   /// extern SDL_DECLSPEC SDL_AudioStream * SDLCALL SDL_OpenAudioDeviceStream(SDL_AudioDeviceID devid, const SDL_AudioSpec *spec, SDL_AudioStreamCallback callback, void *userdata)
   /// ```
+  /// {@category audio}
   static Pointer<SdlAudioStream> open(
     int devid,
     Pointer<SdlAudioSpec> spec,
@@ -122,6 +124,7 @@ extension SdlAudioStreamPointerEx on Pointer<SdlAudioStream> {
   /// ```c
   /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetAudioDeviceName(SDL_AudioDeviceID devid)
   /// ```
+  /// {@category audio}
   String? getName() => sdlGetAudioDeviceName(getDevice());
 
   ///
@@ -147,6 +150,7 @@ extension SdlAudioStreamPointerEx on Pointer<SdlAudioStream> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_AudioDevicePaused(SDL_AudioDeviceID devid)
   /// ```
+  /// {@category audio}
   bool paused() => sdlAudioDevicePaused(getDevice());
 
   ///
@@ -171,6 +175,7 @@ extension SdlAudioStreamPointerEx on Pointer<SdlAudioStream> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_CloseAudioDevice(SDL_AudioDeviceID devid)
   /// ```
+  /// {@category audio}
   void close() => sdlCloseAudioDevice(getDevice());
 
   ///
@@ -195,6 +200,7 @@ extension SdlAudioStreamPointerEx on Pointer<SdlAudioStream> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_AudioDeviceID SDLCALL SDL_GetAudioStreamDevice(SDL_AudioStream *stream)
   /// ```
+  /// {@category audio}
   int getDevice() => sdlGetAudioStreamDevice(this);
 
   ///
@@ -222,6 +228,7 @@ extension SdlAudioStreamPointerEx on Pointer<SdlAudioStream> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_PropertiesID SDLCALL SDL_GetAudioStreamProperties(SDL_AudioStream *stream)
   /// ```
+  /// {@category audio}
   int getProperties() => sdlGetAudioStreamProperties(this);
 
   ///
@@ -243,6 +250,7 @@ extension SdlAudioStreamPointerEx on Pointer<SdlAudioStream> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetAudioStreamFormat(SDL_AudioStream *stream, SDL_AudioSpec *src_spec, SDL_AudioSpec *dst_spec)
   /// ```
+  /// {@category audio}
   bool getFormat(
     Pointer<SdlAudioSpec> srcSpec,
     Pointer<SdlAudioSpec> dstSpec,
@@ -286,6 +294,7 @@ extension SdlAudioStreamPointerEx on Pointer<SdlAudioStream> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetAudioStreamFormat(SDL_AudioStream *stream, const SDL_AudioSpec *src_spec, const SDL_AudioSpec *dst_spec)
   /// ```
+  /// {@category audio}
   bool setFormat(
     Pointer<SdlAudioSpec> srcSpec,
     Pointer<SdlAudioSpec> dstSpec,
@@ -308,6 +317,7 @@ extension SdlAudioStreamPointerEx on Pointer<SdlAudioStream> {
   /// ```c
   /// extern SDL_DECLSPEC float SDLCALL SDL_GetAudioStreamFrequencyRatio(SDL_AudioStream *stream)
   /// ```
+  /// {@category audio}
   double getFrequencyRatio() => sdlGetAudioStreamFrequencyRatio(this);
 
   ///
@@ -339,6 +349,7 @@ extension SdlAudioStreamPointerEx on Pointer<SdlAudioStream> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetAudioStreamFrequencyRatio(SDL_AudioStream *stream, float ratio)
   /// ```
+  /// {@category audio}
   bool setFrequencyRatio(double ratio) =>
       sdlSetAudioStreamFrequencyRatio(this, ratio);
 
@@ -364,6 +375,7 @@ extension SdlAudioStreamPointerEx on Pointer<SdlAudioStream> {
   /// ```c
   /// extern SDL_DECLSPEC float SDLCALL SDL_GetAudioStreamGain(SDL_AudioStream *stream)
   /// ```
+  /// {@category audio}
   double getGain() => sdlGetAudioStreamGain(this);
 
   ///
@@ -392,6 +404,7 @@ extension SdlAudioStreamPointerEx on Pointer<SdlAudioStream> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetAudioStreamGain(SDL_AudioStream *stream, float gain)
   /// ```
+  /// {@category audio}
   bool setGain(double gain) => sdlSetAudioStreamGain(this, gain);
 
   ///
@@ -419,6 +432,7 @@ extension SdlAudioStreamPointerEx on Pointer<SdlAudioStream> {
   /// ```c
   /// extern SDL_DECLSPEC int * SDLCALL SDL_GetAudioStreamInputChannelMap(SDL_AudioStream *stream, int *count)
   /// ```
+  /// {@category audio}
   Pointer<Int32> getInputChannelMap(Pointer<Int32> count) =>
       sdlGetAudioStreamInputChannelMap(this, count);
 
@@ -483,6 +497,7 @@ extension SdlAudioStreamPointerEx on Pointer<SdlAudioStream> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetAudioStreamInputChannelMap(SDL_AudioStream *stream, const int *chmap, int count)
   /// ```
+  /// {@category audio}
   bool setInputChannelMap(Pointer<Int32> chmap, int count) =>
       sdlSetAudioStreamInputChannelMap(this, chmap, count);
 
@@ -545,6 +560,7 @@ extension SdlAudioStreamPointerEx on Pointer<SdlAudioStream> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetAudioStreamOutputChannelMap(SDL_AudioStream *stream, const int *chmap, int count)
   /// ```
+  /// {@category audio}
   bool setOutputChannelMap(Pointer<Int32> chmap, int count) =>
       sdlSetAudioStreamOutputChannelMap(this, chmap, count);
 
@@ -579,6 +595,7 @@ extension SdlAudioStreamPointerEx on Pointer<SdlAudioStream> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_PutAudioStreamData(SDL_AudioStream *stream, const void *buf, int len)
   /// ```
+  /// {@category audio}
   bool putData(Pointer<NativeType> buf, int len) =>
       sdlPutAudioStreamData(this, buf, len);
 
@@ -613,6 +630,7 @@ extension SdlAudioStreamPointerEx on Pointer<SdlAudioStream> {
   /// ```c
   /// extern SDL_DECLSPEC int SDLCALL SDL_GetAudioStreamData(SDL_AudioStream *stream, void *buf, int len)
   /// ```
+  /// {@category audio}
   int getData(Pointer<NativeType> buf, int len) =>
       sdlGetAudioStreamData(this, buf, len);
 
@@ -643,6 +661,7 @@ extension SdlAudioStreamPointerEx on Pointer<SdlAudioStream> {
   /// ```c
   /// extern SDL_DECLSPEC int SDLCALL SDL_GetAudioStreamAvailable(SDL_AudioStream *stream)
   /// ```
+  /// {@category audio}
   int getAvailable() => sdlGetAudioStreamAvailable(this);
 
   ///
@@ -684,6 +703,7 @@ extension SdlAudioStreamPointerEx on Pointer<SdlAudioStream> {
   /// ```c
   /// extern SDL_DECLSPEC int SDLCALL SDL_GetAudioStreamQueued(SDL_AudioStream *stream)
   /// ```
+  /// {@category audio}
   int getQueued() => sdlGetAudioStreamQueued(this);
 
   ///
@@ -707,6 +727,7 @@ extension SdlAudioStreamPointerEx on Pointer<SdlAudioStream> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_FlushAudioStream(SDL_AudioStream *stream)
   /// ```
+  /// {@category audio}
   bool flush() => sdlFlushAudioStream(this);
 
   ///
@@ -731,6 +752,7 @@ extension SdlAudioStreamPointerEx on Pointer<SdlAudioStream> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_ClearAudioStream(SDL_AudioStream *stream)
   /// ```
+  /// {@category audio}
   bool clear() => sdlClearAudioStream(this);
 
   ///
@@ -758,6 +780,7 @@ extension SdlAudioStreamPointerEx on Pointer<SdlAudioStream> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_PauseAudioStreamDevice(SDL_AudioStream *stream)
   /// ```
+  /// {@category audio}
   bool pause() => sdlPauseAudioStreamDevice(this);
 
   ///
@@ -784,6 +807,7 @@ extension SdlAudioStreamPointerEx on Pointer<SdlAudioStream> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_ResumeAudioStreamDevice(SDL_AudioStream *stream)
   /// ```
+  /// {@category audio}
   bool resume() => sdlResumeAudioStreamDevice(this);
 
   ///
@@ -815,6 +839,7 @@ extension SdlAudioStreamPointerEx on Pointer<SdlAudioStream> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_LockAudioStream(SDL_AudioStream *stream)
   /// ```
+  /// {@category audio}
   bool lock() => sdlLockAudioStream(this);
 
   ///
@@ -836,6 +861,7 @@ extension SdlAudioStreamPointerEx on Pointer<SdlAudioStream> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_UnlockAudioStream(SDL_AudioStream *stream)
   /// ```
+  /// {@category audio}
   bool unlock() => sdlUnlockAudioStream(this);
 
   ///
@@ -885,6 +911,7 @@ extension SdlAudioStreamPointerEx on Pointer<SdlAudioStream> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetAudioStreamGetCallback(SDL_AudioStream *stream, SDL_AudioStreamCallback callback, void *userdata)
   /// ```
+  /// {@category audio}
   bool setGetCallback(
     Pointer<NativeFunction<SdlAudioStreamCallback>> callback,
     Pointer<NativeType> userdata,
@@ -940,6 +967,7 @@ extension SdlAudioStreamPointerEx on Pointer<SdlAudioStream> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetAudioStreamPutCallback(SDL_AudioStream *stream, SDL_AudioStreamCallback callback, void *userdata)
   /// ```
+  /// {@category audio}
   bool setPutCallback(
     Pointer<NativeFunction<SdlAudioStreamCallback>> callback,
     Pointer<NativeType> userdata,
@@ -967,5 +995,6 @@ extension SdlAudioStreamPointerEx on Pointer<SdlAudioStream> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_DestroyAudioStream(SDL_AudioStream *stream)
   /// ```
+  /// {@category audio}
   void destroy() => sdlDestroyAudioStream(this);
 }

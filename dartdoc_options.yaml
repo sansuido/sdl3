@@ -1,2 +1,199 @@
 dartdoc:
   nodoc: ['lib/sdl3*.dart']
+  categories:
+    'assert':
+      markdown: doc/assert.md
+    'asyncio':
+      markdown: doc/asyncio.md
+    'atomic':
+      markdown: doc/atomic.md
+    'audio':
+      markdown: doc/audio.md
+    'begin_code':
+      markdown: doc/begin_code.md
+    'bits':
+      markdown: doc/bits.md
+    'blendmode':
+      markdown: doc/blendmode.md
+    'camera':
+      markdown: doc/camera.md
+    'clipboard':
+      markdown: doc/clipboard.md
+    'cpuinfo':
+      markdown: doc/cpuinfo.md
+    'dialog':
+      markdown: doc/dialog.md
+    'endian':
+      markdown: doc/endian.md
+    'error':
+      markdown: doc/error.md
+    'events':
+      markdown: doc/events.md
+    'filesystem':
+      markdown: doc/filesystem.md
+    'gamepad':
+      markdown: doc/gamepad.md
+    'gpu':
+      markdown: doc/gpu.md
+    'guid':
+      markdown: doc/guid.md
+    'haptic':
+      markdown: doc/haptic.md
+    'hidapi':
+      markdown: doc/hidapi.md
+    'hints':
+      markdown: doc/hints.md
+    'image':
+      markdown: doc/image.md
+    'init':
+      markdown: doc/init.md
+    'intrin':
+      markdown: doc/intrin.md
+    'iostream':
+      markdown: doc/iostream.md
+    'joystick':
+      markdown: doc/joystick.md
+    'keyboard':
+      markdown: doc/keyboard.md
+    'keycode':
+      markdown: doc/keycode.md
+    'loadso':
+      markdown: doc/loadso.md
+    'locale':
+      markdown: doc/locale.md
+    'log':
+      markdown: doc/log.md
+    'main':
+      markdown: doc/main.md
+    'messagebox':
+      markdown: doc/messagebox.md
+    'metal':
+      markdown: doc/metal.md
+    'misc':
+      markdown: doc/misc.md
+    'mixer':
+      markdown: doc/mixer.md
+    'mouse':
+      markdown: doc/mouse.md
+    'mutex':
+      markdown: doc/mutex.md
+    'net':
+      markdown: doc/net.md
+    'opengl':
+      markdown: doc/opengl.md
+    'opengl_glext':
+      markdown: doc/opengl_glext.md
+    'pen':
+      markdown: doc/pen.md
+    'pixels':
+      markdown: doc/pixels.md
+    'platform':
+      markdown: doc/platform.md
+    'power':
+      markdown: doc/power.md
+    'process':
+      markdown: doc/process.md
+    'properties':
+      markdown: doc/properties.md
+    'rect':
+      markdown: doc/rect.md
+    'render':
+      markdown: doc/render.md
+    'scancode':
+      markdown: doc/scancode.md
+    'sensor':
+      markdown: doc/sensor.md
+    'stdinc':
+      markdown: doc/stdinc.md
+    'storage':
+      markdown: doc/storage.md
+    'surface':
+      markdown: doc/surface.md
+    'system':
+      markdown: doc/system.md
+    'thread':
+      markdown: doc/thread.md
+    'time':
+      markdown: doc/time.md
+    'timer':
+      markdown: doc/timer.md
+    'touch':
+      markdown: doc/touch.md
+    'tray':
+      markdown: doc/tray.md
+    'ttf':
+      markdown: doc/ttf.md
+    'version':
+      markdown: doc/version.md
+    'video':
+      markdown: doc/video.md
+    'vulkan':
+      markdown: doc/vulkan.md
+  categoryOrder: [
+    'image',
+    'mixer',
+    'net',
+    'ttf',
+    'init',
+    'video',
+
+    'assert',
+    'asyncio',
+    'atomic',
+    'audio',
+    'begin_code',
+    'bits',
+    'blendmode',
+    'camera',
+    'clipboard',
+    'cpuinfo',
+    'dialog',
+    'endian',
+    'error',
+    'events',
+    'filesystem',
+    'gamepad',
+    'gpu',
+    'guid',
+    'haptic',
+    'hidapi',
+    'hints',
+    'intrin',
+    'iostream',
+    'joystick',
+    'keyboard',
+    'keycode',
+    'loadso',
+    'locale',
+    'log',
+    'main',
+    'messagebox',
+    'metal',
+    'misc',
+    'mouse',
+    'mutex',
+    'pen',
+    'opengl',
+    'opengl_glext',
+    'pixels',
+    'platform',
+    'power',
+    'process',
+    'properties',
+    'rect',
+    'render',
+    'scancode',
+    'sensor',
+    'stdinc',
+    'storage',
+    'surface',
+    'system',
+    'thread',
+    'time',
+    'timer',
+    'touch',
+    'tray',
+    'version',
+    'vulkan',
+   ]
+

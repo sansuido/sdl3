@@ -14,6 +14,7 @@ part of '../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_LockJoysticks(void) SDL_ACQUIRE(SDL_joystick_lock)
 /// ```
+/// {@category joystick}
 void sdlLockJoysticks(Pointer<NativeType> arg0) {
   final sdlLockJoysticksLookupFunction = _libSdl
       .lookupFunction<
@@ -31,6 +32,7 @@ void sdlLockJoysticks(Pointer<NativeType> arg0) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_UnlockJoysticks(void) SDL_RELEASE(SDL_joystick_lock)
 /// ```
+/// {@category joystick}
 void sdlUnlockJoysticks(Pointer<NativeType> arg0) {
   final sdlUnlockJoysticksLookupFunction = _libSdl
       .lookupFunction<
@@ -52,6 +54,7 @@ void sdlUnlockJoysticks(Pointer<NativeType> arg0) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_HasJoystick(void)
 /// ```
+/// {@category joystick}
 bool sdlHasJoystick() {
   final sdlHasJoystickLookupFunction = _libSdl
       .lookupFunction<Uint8 Function(), int Function()>('SDL_HasJoystick');
@@ -75,6 +78,7 @@ bool sdlHasJoystick() {
 /// ```c
 /// extern SDL_DECLSPEC SDL_JoystickID * SDLCALL SDL_GetJoysticks(int *count)
 /// ```
+/// {@category joystick}
 Pointer<Uint32> sdlGetJoysticks(Pointer<Int32> count) {
   final sdlGetJoysticksLookupFunction = _libSdl
       .lookupFunction<
@@ -101,6 +105,7 @@ Pointer<Uint32> sdlGetJoysticks(Pointer<Int32> count) {
 /// ```c
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetJoystickNameForID(SDL_JoystickID instance_id)
 /// ```
+/// {@category joystick}
 String? sdlGetJoystickNameForId(int instanceId) {
   final sdlGetJoystickNameForIdLookupFunction = _libSdl
       .lookupFunction<
@@ -131,6 +136,7 @@ String? sdlGetJoystickNameForId(int instanceId) {
 /// ```c
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetJoystickPathForID(SDL_JoystickID instance_id)
 /// ```
+/// {@category joystick}
 String? sdlGetJoystickPathForId(int instanceId) {
   final sdlGetJoystickPathForIdLookupFunction = _libSdl
       .lookupFunction<
@@ -160,6 +166,7 @@ String? sdlGetJoystickPathForId(int instanceId) {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_GetJoystickPlayerIndexForID(SDL_JoystickID instance_id)
 /// ```
+/// {@category joystick}
 int sdlGetJoystickPlayerIndexForId(int instanceId) {
   final sdlGetJoystickPlayerIndexForIdLookupFunction = _libSdl
       .lookupFunction<
@@ -186,6 +193,7 @@ int sdlGetJoystickPlayerIndexForId(int instanceId) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_GUID SDLCALL SDL_GetJoystickGUIDForID(SDL_JoystickID instance_id)
 /// ```
+/// {@category joystick}
 SdlGuid sdlGetJoystickGuidForId(int instanceId) {
   final sdlGetJoystickGuidForIdLookupFunction = _libSdl
       .lookupFunction<
@@ -213,6 +221,7 @@ SdlGuid sdlGetJoystickGuidForId(int instanceId) {
 /// ```c
 /// extern SDL_DECLSPEC Uint16 SDLCALL SDL_GetJoystickVendorForID(SDL_JoystickID instance_id)
 /// ```
+/// {@category joystick}
 int sdlGetJoystickVendorForId(int instanceId) {
   final sdlGetJoystickVendorForIdLookupFunction = _libSdl
       .lookupFunction<
@@ -240,6 +249,7 @@ int sdlGetJoystickVendorForId(int instanceId) {
 /// ```c
 /// extern SDL_DECLSPEC Uint16 SDLCALL SDL_GetJoystickProductForID(SDL_JoystickID instance_id)
 /// ```
+/// {@category joystick}
 int sdlGetJoystickProductForId(int instanceId) {
   final sdlGetJoystickProductForIdLookupFunction = _libSdl
       .lookupFunction<
@@ -267,6 +277,7 @@ int sdlGetJoystickProductForId(int instanceId) {
 /// ```c
 /// extern SDL_DECLSPEC Uint16 SDLCALL SDL_GetJoystickProductVersionForID(SDL_JoystickID instance_id)
 /// ```
+/// {@category joystick}
 int sdlGetJoystickProductVersionForId(int instanceId) {
   final sdlGetJoystickProductVersionForIdLookupFunction = _libSdl
       .lookupFunction<
@@ -294,6 +305,7 @@ int sdlGetJoystickProductVersionForId(int instanceId) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_JoystickType SDLCALL SDL_GetJoystickTypeForID(SDL_JoystickID instance_id)
 /// ```
+/// {@category joystick}
 int sdlGetJoystickTypeForId(int instanceId) {
   final sdlGetJoystickTypeForIdLookupFunction = _libSdl
       .lookupFunction<
@@ -320,6 +332,7 @@ int sdlGetJoystickTypeForId(int instanceId) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Joystick * SDLCALL SDL_OpenJoystick(SDL_JoystickID instance_id)
 /// ```
+/// {@category joystick}
 Pointer<SdlJoystick> sdlOpenJoystick(int instanceId) {
   final sdlOpenJoystickLookupFunction = _libSdl
       .lookupFunction<
@@ -341,6 +354,7 @@ Pointer<SdlJoystick> sdlOpenJoystick(int instanceId) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Joystick * SDLCALL SDL_GetJoystickFromID(SDL_JoystickID instance_id)
 /// ```
+/// {@category joystick}
 Pointer<SdlJoystick> sdlGetJoystickFromId(int instanceId) {
   final sdlGetJoystickFromIdLookupFunction = _libSdl
       .lookupFunction<
@@ -365,6 +379,7 @@ Pointer<SdlJoystick> sdlGetJoystickFromId(int instanceId) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Joystick * SDLCALL SDL_GetJoystickFromPlayerIndex(int player_index)
 /// ```
+/// {@category joystick}
 Pointer<SdlJoystick> sdlGetJoystickFromPlayerIndex(int playerIndex) {
   final sdlGetJoystickFromPlayerIndexLookupFunction = _libSdl
       .lookupFunction<
@@ -388,6 +403,7 @@ Pointer<SdlJoystick> sdlGetJoystickFromPlayerIndex(int playerIndex) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_JoystickID SDLCALL SDL_AttachVirtualJoystick(const SDL_VirtualJoystickDesc *desc)
 /// ```
+/// {@category joystick}
 int sdlAttachVirtualJoystick(Pointer<SdlVirtualJoystickDesc> desc) {
   final sdlAttachVirtualJoystickLookupFunction = _libSdl
       .lookupFunction<
@@ -412,6 +428,7 @@ int sdlAttachVirtualJoystick(Pointer<SdlVirtualJoystickDesc> desc) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_DetachVirtualJoystick(SDL_JoystickID instance_id)
 /// ```
+/// {@category joystick}
 bool sdlDetachVirtualJoystick(int instanceId) {
   final sdlDetachVirtualJoystickLookupFunction = _libSdl
       .lookupFunction<
@@ -432,6 +449,7 @@ bool sdlDetachVirtualJoystick(int instanceId) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_IsJoystickVirtual(SDL_JoystickID instance_id)
 /// ```
+/// {@category joystick}
 bool sdlIsJoystickVirtual(int instanceId) {
   final sdlIsJoystickVirtualLookupFunction = _libSdl
       .lookupFunction<
@@ -465,6 +483,7 @@ bool sdlIsJoystickVirtual(int instanceId) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetJoystickVirtualAxis(SDL_Joystick *joystick, int axis, Sint16 value)
 /// ```
+/// {@category joystick}
 bool sdlSetJoystickVirtualAxis(
   Pointer<SdlJoystick> joystick,
   int axis,
@@ -499,6 +518,7 @@ bool sdlSetJoystickVirtualAxis(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetJoystickVirtualBall(SDL_Joystick *joystick, int ball, Sint16 xrel, Sint16 yrel)
 /// ```
+/// {@category joystick}
 bool sdlSetJoystickVirtualBall(
   Pointer<SdlJoystick> joystick,
   int ball,
@@ -544,6 +564,7 @@ bool sdlSetJoystickVirtualBall(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetJoystickVirtualButton(SDL_Joystick *joystick, int button, bool down)
 /// ```
+/// {@category joystick}
 bool sdlSetJoystickVirtualButton(
   Pointer<SdlJoystick> joystick,
   int button,
@@ -582,6 +603,7 @@ bool sdlSetJoystickVirtualButton(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetJoystickVirtualHat(SDL_Joystick *joystick, int hat, Uint8 value)
 /// ```
+/// {@category joystick}
 bool sdlSetJoystickVirtualHat(
   Pointer<SdlJoystick> joystick,
   int hat,
@@ -622,6 +644,7 @@ bool sdlSetJoystickVirtualHat(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetJoystickVirtualTouchpad(SDL_Joystick *joystick, int touchpad, int finger, bool down, float x, float y, float pressure)
 /// ```
+/// {@category joystick}
 bool sdlSetJoystickVirtualTouchpad(
   Pointer<SdlJoystick> joystick,
   int touchpad,
@@ -687,6 +710,7 @@ bool sdlSetJoystickVirtualTouchpad(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SendJoystickVirtualSensorData(SDL_Joystick *joystick, SDL_SensorType type, Uint64 sensor_timestamp, const float *data, int num_values)
 /// ```
+/// {@category joystick}
 bool sdlSendJoystickVirtualSensorData(
   Pointer<SdlJoystick> joystick,
   int type,
@@ -746,6 +770,7 @@ bool sdlSendJoystickVirtualSensorData(
 /// ```c
 /// extern SDL_DECLSPEC SDL_PropertiesID SDLCALL SDL_GetJoystickProperties(SDL_Joystick *joystick)
 /// ```
+/// {@category joystick}
 int sdlGetJoystickProperties(Pointer<SdlJoystick> joystick) {
   final sdlGetJoystickPropertiesLookupFunction = _libSdl
       .lookupFunction<
@@ -769,6 +794,7 @@ int sdlGetJoystickProperties(Pointer<SdlJoystick> joystick) {
 /// ```c
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetJoystickName(SDL_Joystick *joystick)
 /// ```
+/// {@category joystick}
 String? sdlGetJoystickName(Pointer<SdlJoystick> joystick) {
   final sdlGetJoystickNameLookupFunction = _libSdl
       .lookupFunction<
@@ -796,6 +822,7 @@ String? sdlGetJoystickName(Pointer<SdlJoystick> joystick) {
 /// ```c
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetJoystickPath(SDL_Joystick *joystick)
 /// ```
+/// {@category joystick}
 String? sdlGetJoystickPath(Pointer<SdlJoystick> joystick) {
   final sdlGetJoystickPathLookupFunction = _libSdl
       .lookupFunction<
@@ -825,6 +852,7 @@ String? sdlGetJoystickPath(Pointer<SdlJoystick> joystick) {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_GetJoystickPlayerIndex(SDL_Joystick *joystick)
 /// ```
+/// {@category joystick}
 int sdlGetJoystickPlayerIndex(Pointer<SdlJoystick> joystick) {
   final sdlGetJoystickPlayerIndexLookupFunction = _libSdl
       .lookupFunction<
@@ -850,6 +878,7 @@ int sdlGetJoystickPlayerIndex(Pointer<SdlJoystick> joystick) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetJoystickPlayerIndex(SDL_Joystick *joystick, int player_index)
 /// ```
+/// {@category joystick}
 bool sdlSetJoystickPlayerIndex(Pointer<SdlJoystick> joystick, int playerIndex) {
   final sdlSetJoystickPlayerIndexLookupFunction = _libSdl
       .lookupFunction<
@@ -877,6 +906,7 @@ bool sdlSetJoystickPlayerIndex(Pointer<SdlJoystick> joystick, int playerIndex) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_GUID SDLCALL SDL_GetJoystickGUID(SDL_Joystick *joystick)
 /// ```
+/// {@category joystick}
 SdlGuid sdlGetJoystickGuid(Pointer<SdlJoystick> joystick) {
   final sdlGetJoystickGuidLookupFunction = _libSdl
       .lookupFunction<
@@ -901,6 +931,7 @@ SdlGuid sdlGetJoystickGuid(Pointer<SdlJoystick> joystick) {
 /// ```c
 /// extern SDL_DECLSPEC Uint16 SDLCALL SDL_GetJoystickVendor(SDL_Joystick *joystick)
 /// ```
+/// {@category joystick}
 int sdlGetJoystickVendor(Pointer<SdlJoystick> joystick) {
   final sdlGetJoystickVendorLookupFunction = _libSdl
       .lookupFunction<
@@ -925,6 +956,7 @@ int sdlGetJoystickVendor(Pointer<SdlJoystick> joystick) {
 /// ```c
 /// extern SDL_DECLSPEC Uint16 SDLCALL SDL_GetJoystickProduct(SDL_Joystick *joystick)
 /// ```
+/// {@category joystick}
 int sdlGetJoystickProduct(Pointer<SdlJoystick> joystick) {
   final sdlGetJoystickProductLookupFunction = _libSdl
       .lookupFunction<
@@ -949,6 +981,7 @@ int sdlGetJoystickProduct(Pointer<SdlJoystick> joystick) {
 /// ```c
 /// extern SDL_DECLSPEC Uint16 SDLCALL SDL_GetJoystickProductVersion(SDL_Joystick *joystick)
 /// ```
+/// {@category joystick}
 int sdlGetJoystickProductVersion(Pointer<SdlJoystick> joystick) {
   final sdlGetJoystickProductVersionLookupFunction = _libSdl
       .lookupFunction<
@@ -972,6 +1005,7 @@ int sdlGetJoystickProductVersion(Pointer<SdlJoystick> joystick) {
 /// ```c
 /// extern SDL_DECLSPEC Uint16 SDLCALL SDL_GetJoystickFirmwareVersion(SDL_Joystick *joystick)
 /// ```
+/// {@category joystick}
 int sdlGetJoystickFirmwareVersion(Pointer<SdlJoystick> joystick) {
   final sdlGetJoystickFirmwareVersionLookupFunction = _libSdl
       .lookupFunction<
@@ -995,6 +1029,7 @@ int sdlGetJoystickFirmwareVersion(Pointer<SdlJoystick> joystick) {
 /// ```c
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetJoystickSerial(SDL_Joystick *joystick)
 /// ```
+/// {@category joystick}
 String? sdlGetJoystickSerial(Pointer<SdlJoystick> joystick) {
   final sdlGetJoystickSerialLookupFunction = _libSdl
       .lookupFunction<
@@ -1021,6 +1056,7 @@ String? sdlGetJoystickSerial(Pointer<SdlJoystick> joystick) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_JoystickType SDLCALL SDL_GetJoystickType(SDL_Joystick *joystick)
 /// ```
+/// {@category joystick}
 int sdlGetJoystickType(Pointer<SdlJoystick> joystick) {
   final sdlGetJoystickTypeLookupFunction = _libSdl
       .lookupFunction<
@@ -1050,6 +1086,7 @@ int sdlGetJoystickType(Pointer<SdlJoystick> joystick) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_GetJoystickGUIDInfo(SDL_GUID guid, Uint16 *vendor, Uint16 *product, Uint16 *version, Uint16 *crc16)
 /// ```
+/// {@category joystick}
 void sdlGetJoystickGuidInfo(
   SdlGuid guid,
   Pointer<Uint16> vendor,
@@ -1095,6 +1132,7 @@ void sdlGetJoystickGuidInfo(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_JoystickConnected(SDL_Joystick *joystick)
 /// ```
+/// {@category joystick}
 bool sdlJoystickConnected(Pointer<SdlJoystick> joystick) {
   final sdlJoystickConnectedLookupFunction = _libSdl
       .lookupFunction<
@@ -1116,6 +1154,7 @@ bool sdlJoystickConnected(Pointer<SdlJoystick> joystick) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_JoystickID SDLCALL SDL_GetJoystickID(SDL_Joystick *joystick)
 /// ```
+/// {@category joystick}
 int sdlGetJoystickId(Pointer<SdlJoystick> joystick) {
   final sdlGetJoystickIdLookupFunction = _libSdl
       .lookupFunction<
@@ -1146,6 +1185,7 @@ int sdlGetJoystickId(Pointer<SdlJoystick> joystick) {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_GetNumJoystickAxes(SDL_Joystick *joystick)
 /// ```
+/// {@category joystick}
 int sdlGetNumJoystickAxes(Pointer<SdlJoystick> joystick) {
   final sdlGetNumJoystickAxesLookupFunction = _libSdl
       .lookupFunction<
@@ -1177,6 +1217,7 @@ int sdlGetNumJoystickAxes(Pointer<SdlJoystick> joystick) {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_GetNumJoystickBalls(SDL_Joystick *joystick)
 /// ```
+/// {@category joystick}
 int sdlGetNumJoystickBalls(Pointer<SdlJoystick> joystick) {
   final sdlGetNumJoystickBallsLookupFunction = _libSdl
       .lookupFunction<
@@ -1203,6 +1244,7 @@ int sdlGetNumJoystickBalls(Pointer<SdlJoystick> joystick) {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_GetNumJoystickHats(SDL_Joystick *joystick)
 /// ```
+/// {@category joystick}
 int sdlGetNumJoystickHats(Pointer<SdlJoystick> joystick) {
   final sdlGetNumJoystickHatsLookupFunction = _libSdl
       .lookupFunction<
@@ -1229,6 +1271,7 @@ int sdlGetNumJoystickHats(Pointer<SdlJoystick> joystick) {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_GetNumJoystickButtons(SDL_Joystick *joystick)
 /// ```
+/// {@category joystick}
 int sdlGetNumJoystickButtons(Pointer<SdlJoystick> joystick) {
   final sdlGetNumJoystickButtonsLookupFunction = _libSdl
       .lookupFunction<
@@ -1255,6 +1298,7 @@ int sdlGetNumJoystickButtons(Pointer<SdlJoystick> joystick) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_SetJoystickEventsEnabled(bool enabled)
 /// ```
+/// {@category joystick}
 void sdlSetJoystickEventsEnabled(bool enabled) {
   final sdlSetJoystickEventsEnabledLookupFunction = _libSdl
       .lookupFunction<Void Function(Uint8 enabled), void Function(int enabled)>(
@@ -1279,6 +1323,7 @@ void sdlSetJoystickEventsEnabled(bool enabled) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_JoystickEventsEnabled(void)
 /// ```
+/// {@category joystick}
 bool sdlJoystickEventsEnabled() {
   final sdlJoystickEventsEnabledLookupFunction = _libSdl
       .lookupFunction<Uint8 Function(), int Function()>(
@@ -1298,6 +1343,7 @@ bool sdlJoystickEventsEnabled() {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_UpdateJoysticks(void)
 /// ```
+/// {@category joystick}
 void sdlUpdateJoysticks() {
   final sdlUpdateJoysticksLookupFunction = _libSdl
       .lookupFunction<Void Function(), void Function()>('SDL_UpdateJoysticks');
@@ -1329,6 +1375,7 @@ void sdlUpdateJoysticks() {
 /// ```c
 /// extern SDL_DECLSPEC Sint16 SDLCALL SDL_GetJoystickAxis(SDL_Joystick *joystick, int axis)
 /// ```
+/// {@category joystick}
 int sdlGetJoystickAxis(Pointer<SdlJoystick> joystick, int axis) {
   final sdlGetJoystickAxisLookupFunction = _libSdl
       .lookupFunction<
@@ -1355,6 +1402,7 @@ int sdlGetJoystickAxis(Pointer<SdlJoystick> joystick, int axis) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetJoystickAxisInitialState(SDL_Joystick *joystick, int axis, Sint16 *state)
 /// ```
+/// {@category joystick}
 bool sdlGetJoystickAxisInitialState(
   Pointer<SdlJoystick> joystick,
   int axis,
@@ -1399,6 +1447,7 @@ bool sdlGetJoystickAxisInitialState(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetJoystickBall(SDL_Joystick *joystick, int ball, int *dx, int *dy)
 /// ```
+/// {@category joystick}
 bool sdlGetJoystickBall(
   Pointer<SdlJoystick> joystick,
   int ball,
@@ -1439,6 +1488,7 @@ bool sdlGetJoystickBall(
 /// ```c
 /// extern SDL_DECLSPEC Uint8 SDLCALL SDL_GetJoystickHat(SDL_Joystick *joystick, int hat)
 /// ```
+/// {@category joystick}
 int sdlGetJoystickHat(Pointer<SdlJoystick> joystick, int hat) {
   final sdlGetJoystickHatLookupFunction = _libSdl
       .lookupFunction<
@@ -1463,6 +1513,7 @@ int sdlGetJoystickHat(Pointer<SdlJoystick> joystick, int hat) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetJoystickButton(SDL_Joystick *joystick, int button)
 /// ```
+/// {@category joystick}
 bool sdlGetJoystickButton(Pointer<SdlJoystick> joystick, int button) {
   final sdlGetJoystickButtonLookupFunction = _libSdl
       .lookupFunction<
@@ -1494,6 +1545,7 @@ bool sdlGetJoystickButton(Pointer<SdlJoystick> joystick, int button) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_RumbleJoystick(SDL_Joystick *joystick, Uint16 low_frequency_rumble, Uint16 high_frequency_rumble, Uint32 duration_ms)
 /// ```
+/// {@category joystick}
 bool sdlRumbleJoystick(
   Pointer<SdlJoystick> joystick,
   int lowFrequencyRumble,
@@ -1554,6 +1606,7 @@ bool sdlRumbleJoystick(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_RumbleJoystickTriggers(SDL_Joystick *joystick, Uint16 left_rumble, Uint16 right_rumble, Uint32 duration_ms)
 /// ```
+/// {@category joystick}
 bool sdlRumbleJoystickTriggers(
   Pointer<SdlJoystick> joystick,
   int leftRumble,
@@ -1605,6 +1658,7 @@ bool sdlRumbleJoystickTriggers(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetJoystickLED(SDL_Joystick *joystick, Uint8 red, Uint8 green, Uint8 blue)
 /// ```
+/// {@category joystick}
 bool sdlSetJoystickLed(
   Pointer<SdlJoystick> joystick,
   int red,
@@ -1643,6 +1697,7 @@ bool sdlSetJoystickLed(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SendJoystickEffect(SDL_Joystick *joystick, const void *data, int size)
 /// ```
+/// {@category joystick}
 bool sdlSendJoystickEffect(
   Pointer<SdlJoystick> joystick,
   Pointer<NativeType> data,
@@ -1676,6 +1731,7 @@ bool sdlSendJoystickEffect(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_CloseJoystick(SDL_Joystick *joystick)
 /// ```
+/// {@category joystick}
 void sdlCloseJoystick(Pointer<SdlJoystick> joystick) {
   final sdlCloseJoystickLookupFunction = _libSdl
       .lookupFunction<
@@ -1698,6 +1754,7 @@ void sdlCloseJoystick(Pointer<SdlJoystick> joystick) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_JoystickConnectionState SDLCALL SDL_GetJoystickConnectionState(SDL_Joystick *joystick)
 /// ```
+/// {@category joystick}
 int sdlGetJoystickConnectionState(Pointer<SdlJoystick> joystick) {
   final sdlGetJoystickConnectionStateLookupFunction = _libSdl
       .lookupFunction<
@@ -1729,6 +1786,7 @@ int sdlGetJoystickConnectionState(Pointer<SdlJoystick> joystick) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_PowerState SDLCALL SDL_GetJoystickPowerInfo(SDL_Joystick *joystick, int *percent)
 /// ```
+/// {@category joystick}
 int sdlGetJoystickPowerInfo(
   Pointer<SdlJoystick> joystick,
   Pointer<Int32> percent,

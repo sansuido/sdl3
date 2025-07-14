@@ -2,15 +2,19 @@
 part of '../sdl_ttf.dart';
 
 // TTF_Font
+/// {@category ttf}
 final class TtfFont extends Opaque {}
 
 // TTF_TextEngine
+/// {@category ttf}
 final class TtfTextEngine extends Opaque {}
 
 // TTF_TextData
+/// {@category ttf}
 final class TtfTextData extends Opaque {}
 
 // TTF_Text
+/// {@category ttf}
 final class TtfText extends Struct {
   // [0]+(8)
   external Pointer<Int8> text;
@@ -25,6 +29,7 @@ final class TtfText extends Struct {
 }
 
 // TTF_GPUAtlasDrawSequence
+/// {@category ttf}
 final class TtfGpuAtlasDrawSequence extends Struct {
   // [0]+(8)
   external Pointer<SdlGpuTexture> atlasTexture;
@@ -51,6 +56,7 @@ final class TtfGpuAtlasDrawSequence extends Struct {
 }
 
 // TTF_SubString
+/// {@category ttf}
 final class TtfSubString extends Struct {
   // [0]+(4)
   @Uint32()
@@ -77,6 +83,7 @@ final class TtfSubString extends Struct {
   external int blank_1;
 }
 
+/// {@category ttf}
 extension TtfSubStringExtension on Pointer<TtfSubString> {
   Pointer<SdlRect> get rect => (cast<Uint8>() + 20).cast<SdlRect>();
 }

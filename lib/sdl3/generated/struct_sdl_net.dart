@@ -2,18 +2,23 @@
 part of '../sdl_net.dart';
 
 // NET_Address
+/// {@category net}
 final class NetAddress extends Opaque {}
 
 // NET_StreamSocket
+/// {@category net}
 final class NetStreamSocket extends Opaque {}
 
 // NET_Server
+/// {@category net}
 final class NetServer extends Opaque {}
 
 // NET_DatagramSocket
+/// {@category net}
 final class NetDatagramSocket extends Opaque {}
 
 // NET_Datagram
+/// {@category net}
 final class NetDatagram extends Struct {
   // [0]+(8)
   external Pointer<NetAddress> addr;

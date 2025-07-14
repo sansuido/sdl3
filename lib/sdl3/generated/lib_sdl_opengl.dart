@@ -26594,6 +26594,7 @@ late Pointer<NativeFunction<Void Function()>> _glClearIndex;
 /// ```c
 /// GLAPI void GLAPIENTRY glClearIndex( GLfloat c )
 /// ```
+/// {@category opengl}
 void glClearIndex(double c) {
   final glClearIndexAsFunction = _glClearIndex
       .cast<NativeFunction<Void Function(Float c)>>()
@@ -26607,6 +26608,7 @@ late Pointer<NativeFunction<Void Function()>> _glClearColor;
 /// ```c
 /// GLAPI void GLAPIENTRY glClearColor( GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha )
 /// ```
+/// {@category opengl}
 void glClearColor(double red, double green, double blue, double alpha) {
   final glClearColorAsFunction = _glClearColor
       .cast<
@@ -26626,6 +26628,7 @@ late Pointer<NativeFunction<Void Function()>> _glClear;
 /// ```c
 /// GLAPI void GLAPIENTRY glClear( GLbitfield mask )
 /// ```
+/// {@category opengl}
 void glClear(int mask) {
   final glClearAsFunction = _glClear
       .cast<NativeFunction<Void Function(Uint32 mask)>>()
@@ -26639,6 +26642,7 @@ late Pointer<NativeFunction<Void Function()>> _glIndexMask;
 /// ```c
 /// GLAPI void GLAPIENTRY glIndexMask( GLuint mask )
 /// ```
+/// {@category opengl}
 void glIndexMask(int mask) {
   final glIndexMaskAsFunction = _glIndexMask
       .cast<NativeFunction<Void Function(Uint32 mask)>>()
@@ -26652,6 +26656,7 @@ late Pointer<NativeFunction<Void Function()>> _glColorMask;
 /// ```c
 /// GLAPI void GLAPIENTRY glColorMask( GLboolean red, GLboolean green, GLboolean blue, GLboolean alpha )
 /// ```
+/// {@category opengl}
 void glColorMask(int red, int green, int blue, int alpha) {
   final glColorMaskAsFunction = _glColorMask
       .cast<
@@ -26669,6 +26674,7 @@ late Pointer<NativeFunction<Void Function()>> _glAlphaFunc;
 /// ```c
 /// GLAPI void GLAPIENTRY glAlphaFunc( GLenum func, GLclampf ref )
 /// ```
+/// {@category opengl}
 void glAlphaFunc(int func, double ref) {
   final glAlphaFuncAsFunction = _glAlphaFunc
       .cast<NativeFunction<Void Function(Uint32 func, Float ref)>>()
@@ -26682,6 +26688,7 @@ late Pointer<NativeFunction<Void Function()>> _glBlendFunc;
 /// ```c
 /// GLAPI void GLAPIENTRY glBlendFunc( GLenum sfactor, GLenum dfactor )
 /// ```
+/// {@category opengl}
 void glBlendFunc(int sfactor, int dfactor) {
   final glBlendFuncAsFunction = _glBlendFunc
       .cast<NativeFunction<Void Function(Uint32 sfactor, Uint32 dfactor)>>()
@@ -26695,6 +26702,7 @@ late Pointer<NativeFunction<Void Function()>> _glLogicOp;
 /// ```c
 /// GLAPI void GLAPIENTRY glLogicOp( GLenum opcode )
 /// ```
+/// {@category opengl}
 void glLogicOp(int opcode) {
   final glLogicOpAsFunction = _glLogicOp
       .cast<NativeFunction<Void Function(Uint32 opcode)>>()
@@ -26708,6 +26716,7 @@ late Pointer<NativeFunction<Void Function()>> _glCullFace;
 /// ```c
 /// GLAPI void GLAPIENTRY glCullFace( GLenum mode )
 /// ```
+/// {@category opengl}
 void glCullFace(int mode) {
   final glCullFaceAsFunction = _glCullFace
       .cast<NativeFunction<Void Function(Uint32 mode)>>()
@@ -26721,6 +26730,7 @@ late Pointer<NativeFunction<Void Function()>> _glFrontFace;
 /// ```c
 /// GLAPI void GLAPIENTRY glFrontFace( GLenum mode )
 /// ```
+/// {@category opengl}
 void glFrontFace(int mode) {
   final glFrontFaceAsFunction = _glFrontFace
       .cast<NativeFunction<Void Function(Uint32 mode)>>()
@@ -26734,6 +26744,7 @@ late Pointer<NativeFunction<Void Function()>> _glPointSize;
 /// ```c
 /// GLAPI void GLAPIENTRY glPointSize( GLfloat size )
 /// ```
+/// {@category opengl}
 void glPointSize(double size) {
   final glPointSizeAsFunction = _glPointSize
       .cast<NativeFunction<Void Function(Float size)>>()
@@ -26747,6 +26758,7 @@ late Pointer<NativeFunction<Void Function()>> _glLineWidth;
 /// ```c
 /// GLAPI void GLAPIENTRY glLineWidth( GLfloat width )
 /// ```
+/// {@category opengl}
 void glLineWidth(double width) {
   final glLineWidthAsFunction = _glLineWidth
       .cast<NativeFunction<Void Function(Float width)>>()
@@ -26760,6 +26772,7 @@ late Pointer<NativeFunction<Void Function()>> _glLineStipple;
 /// ```c
 /// GLAPI void GLAPIENTRY glLineStipple( GLint factor, GLushort pattern )
 /// ```
+/// {@category opengl}
 void glLineStipple(int factor, int pattern) {
   final glLineStippleAsFunction = _glLineStipple
       .cast<NativeFunction<Void Function(Int32 factor, Uint16 pattern)>>()
@@ -26773,6 +26786,7 @@ late Pointer<NativeFunction<Void Function()>> _glPolygonMode;
 /// ```c
 /// GLAPI void GLAPIENTRY glPolygonMode( GLenum face, GLenum mode )
 /// ```
+/// {@category opengl}
 void glPolygonMode(int face, int mode) {
   final glPolygonModeAsFunction = _glPolygonMode
       .cast<NativeFunction<Void Function(Uint32 face, Uint32 mode)>>()
@@ -26786,6 +26800,7 @@ late Pointer<NativeFunction<Void Function()>> _glPolygonOffset;
 /// ```c
 /// GLAPI void GLAPIENTRY glPolygonOffset( GLfloat factor, GLfloat units )
 /// ```
+/// {@category opengl}
 void glPolygonOffset(double factor, double units) {
   final glPolygonOffsetAsFunction = _glPolygonOffset
       .cast<NativeFunction<Void Function(Float factor, Float units)>>()
@@ -26799,6 +26814,7 @@ late Pointer<NativeFunction<Void Function()>> _glPolygonStipple;
 /// ```c
 /// GLAPI void GLAPIENTRY glPolygonStipple( const GLubyte *mask )
 /// ```
+/// {@category opengl}
 void glPolygonStipple(Pointer<Uint8> mask) {
   final glPolygonStippleAsFunction = _glPolygonStipple
       .cast<NativeFunction<Void Function(Pointer<Uint8> mask)>>()
@@ -26812,6 +26828,7 @@ late Pointer<NativeFunction<Void Function()>> _glGetPolygonStipple;
 /// ```c
 /// GLAPI void GLAPIENTRY glGetPolygonStipple( GLubyte *mask )
 /// ```
+/// {@category opengl}
 void glGetPolygonStipple(Pointer<Uint8> mask) {
   final glGetPolygonStippleAsFunction = _glGetPolygonStipple
       .cast<NativeFunction<Void Function(Pointer<Uint8> mask)>>()
@@ -26825,6 +26842,7 @@ late Pointer<NativeFunction<Void Function()>> _glEdgeFlag;
 /// ```c
 /// GLAPI void GLAPIENTRY glEdgeFlag( GLboolean flag )
 /// ```
+/// {@category opengl}
 void glEdgeFlag(int flag) {
   final glEdgeFlagAsFunction = _glEdgeFlag
       .cast<NativeFunction<Void Function(Int32 flag)>>()
@@ -26838,6 +26856,7 @@ late Pointer<NativeFunction<Void Function()>> _glEdgeFlagv;
 /// ```c
 /// GLAPI void GLAPIENTRY glEdgeFlagv( const GLboolean *flag )
 /// ```
+/// {@category opengl}
 void glEdgeFlagv(Pointer<Int32> flag) {
   final glEdgeFlagvAsFunction = _glEdgeFlagv
       .cast<NativeFunction<Void Function(Pointer<Int32> flag)>>()
@@ -26851,6 +26870,7 @@ late Pointer<NativeFunction<Void Function()>> _glScissor;
 /// ```c
 /// GLAPI void GLAPIENTRY glScissor( GLint x, GLint y, GLsizei width, GLsizei height)
 /// ```
+/// {@category opengl}
 void glScissor(int x, int y, int width, int height) {
   final glScissorAsFunction = _glScissor
       .cast<
@@ -26868,6 +26888,7 @@ late Pointer<NativeFunction<Void Function()>> _glClipPlane;
 /// ```c
 /// GLAPI void GLAPIENTRY glClipPlane( GLenum plane, const GLdouble *equation )
 /// ```
+/// {@category opengl}
 void glClipPlane(int plane, Pointer<Double> equation) {
   final glClipPlaneAsFunction = _glClipPlane
       .cast<
@@ -26883,6 +26904,7 @@ late Pointer<NativeFunction<Void Function()>> _glGetClipPlane;
 /// ```c
 /// GLAPI void GLAPIENTRY glGetClipPlane( GLenum plane, GLdouble *equation )
 /// ```
+/// {@category opengl}
 void glGetClipPlane(int plane, Pointer<Double> equation) {
   final glGetClipPlaneAsFunction = _glGetClipPlane
       .cast<
@@ -26898,6 +26920,7 @@ late Pointer<NativeFunction<Void Function()>> _glDrawBuffer;
 /// ```c
 /// GLAPI void GLAPIENTRY glDrawBuffer( GLenum mode )
 /// ```
+/// {@category opengl}
 void glDrawBuffer(int mode) {
   final glDrawBufferAsFunction = _glDrawBuffer
       .cast<NativeFunction<Void Function(Uint32 mode)>>()
@@ -26911,6 +26934,7 @@ late Pointer<NativeFunction<Void Function()>> _glReadBuffer;
 /// ```c
 /// GLAPI void GLAPIENTRY glReadBuffer( GLenum mode )
 /// ```
+/// {@category opengl}
 void glReadBuffer(int mode) {
   final glReadBufferAsFunction = _glReadBuffer
       .cast<NativeFunction<Void Function(Uint32 mode)>>()
@@ -26924,6 +26948,7 @@ late Pointer<NativeFunction<Void Function()>> _glEnable;
 /// ```c
 /// GLAPI void GLAPIENTRY glEnable( GLenum cap )
 /// ```
+/// {@category opengl}
 void glEnable(int cap) {
   final glEnableAsFunction = _glEnable
       .cast<NativeFunction<Void Function(Uint32 cap)>>()
@@ -26937,6 +26962,7 @@ late Pointer<NativeFunction<Void Function()>> _glDisable;
 /// ```c
 /// GLAPI void GLAPIENTRY glDisable( GLenum cap )
 /// ```
+/// {@category opengl}
 void glDisable(int cap) {
   final glDisableAsFunction = _glDisable
       .cast<NativeFunction<Void Function(Uint32 cap)>>()
@@ -26950,6 +26976,7 @@ late Pointer<NativeFunction<Void Function()>> _glIsEnabled;
 /// ```c
 /// GLAPI GLboolean GLAPIENTRY glIsEnabled( GLenum cap )
 /// ```
+/// {@category opengl}
 int glIsEnabled(int cap) {
   final glIsEnabledAsFunction = _glIsEnabled
       .cast<NativeFunction<Int32 Function(Uint32 cap)>>()
@@ -26963,6 +26990,7 @@ late Pointer<NativeFunction<Void Function()>> _glEnableClientState;
 /// ```c
 /// GLAPI void GLAPIENTRY glEnableClientState( GLenum cap )
 /// ```
+/// {@category opengl}
 void glEnableClientState(int cap) {
   final glEnableClientStateAsFunction = _glEnableClientState
       .cast<NativeFunction<Void Function(Uint32 cap)>>()
@@ -26976,6 +27004,7 @@ late Pointer<NativeFunction<Void Function()>> _glDisableClientState;
 /// ```c
 /// GLAPI void GLAPIENTRY glDisableClientState( GLenum cap )
 /// ```
+/// {@category opengl}
 void glDisableClientState(int cap) {
   final glDisableClientStateAsFunction = _glDisableClientState
       .cast<NativeFunction<Void Function(Uint32 cap)>>()
@@ -26989,6 +27018,7 @@ late Pointer<NativeFunction<Void Function()>> _glGetBooleanv;
 /// ```c
 /// GLAPI void GLAPIENTRY glGetBooleanv( GLenum pname, GLboolean *params )
 /// ```
+/// {@category opengl}
 void glGetBooleanv(int pname, Pointer<Int32> params) {
   final glGetBooleanvAsFunction = _glGetBooleanv
       .cast<
@@ -27004,6 +27034,7 @@ late Pointer<NativeFunction<Void Function()>> _glGetDoublev;
 /// ```c
 /// GLAPI void GLAPIENTRY glGetDoublev( GLenum pname, GLdouble *params )
 /// ```
+/// {@category opengl}
 void glGetDoublev(int pname, Pointer<Double> params) {
   final glGetDoublevAsFunction = _glGetDoublev
       .cast<
@@ -27019,6 +27050,7 @@ late Pointer<NativeFunction<Void Function()>> _glGetFloatv;
 /// ```c
 /// GLAPI void GLAPIENTRY glGetFloatv( GLenum pname, GLfloat *params )
 /// ```
+/// {@category opengl}
 void glGetFloatv(int pname, Pointer<Float> params) {
   final glGetFloatvAsFunction = _glGetFloatv
       .cast<
@@ -27034,6 +27066,7 @@ late Pointer<NativeFunction<Void Function()>> _glGetIntegerv;
 /// ```c
 /// GLAPI void GLAPIENTRY glGetIntegerv( GLenum pname, GLint *params )
 /// ```
+/// {@category opengl}
 void glGetIntegerv(int pname, Pointer<Int32> params) {
   final glGetIntegervAsFunction = _glGetIntegerv
       .cast<
@@ -27049,6 +27082,7 @@ late Pointer<NativeFunction<Void Function()>> _glPushAttrib;
 /// ```c
 /// GLAPI void GLAPIENTRY glPushAttrib( GLbitfield mask )
 /// ```
+/// {@category opengl}
 void glPushAttrib(int mask) {
   final glPushAttribAsFunction = _glPushAttrib
       .cast<NativeFunction<Void Function(Uint32 mask)>>()
@@ -27062,6 +27096,7 @@ late Pointer<NativeFunction<Void Function()>> _glPopAttrib;
 /// ```c
 /// GLAPI void GLAPIENTRY glPopAttrib( void )
 /// ```
+/// {@category opengl}
 void glPopAttrib() {
   final glPopAttribAsFunction = _glPopAttrib
       .cast<NativeFunction<Void Function()>>()
@@ -27075,6 +27110,7 @@ late Pointer<NativeFunction<Void Function()>> _glPushClientAttrib;
 /// ```c
 /// GLAPI void GLAPIENTRY glPushClientAttrib( GLbitfield mask )
 /// ```
+/// {@category opengl}
 void glPushClientAttrib(int mask) {
   final glPushClientAttribAsFunction = _glPushClientAttrib
       .cast<NativeFunction<Void Function(Uint32 mask)>>()
@@ -27088,6 +27124,7 @@ late Pointer<NativeFunction<Void Function()>> _glPopClientAttrib;
 /// ```c
 /// GLAPI void GLAPIENTRY glPopClientAttrib( void )
 /// ```
+/// {@category opengl}
 void glPopClientAttrib() {
   final glPopClientAttribAsFunction = _glPopClientAttrib
       .cast<NativeFunction<Void Function()>>()
@@ -27101,6 +27138,7 @@ late Pointer<NativeFunction<Void Function()>> _glRenderMode;
 /// ```c
 /// GLAPI GLint GLAPIENTRY glRenderMode( GLenum mode )
 /// ```
+/// {@category opengl}
 int glRenderMode(int mode) {
   final glRenderModeAsFunction = _glRenderMode
       .cast<NativeFunction<Int32 Function(Uint32 mode)>>()
@@ -27114,6 +27152,7 @@ late Pointer<NativeFunction<Void Function()>> _glGetError;
 /// ```c
 /// GLAPI GLenum GLAPIENTRY glGetError( void )
 /// ```
+/// {@category opengl}
 int glGetError() {
   final glGetErrorAsFunction = _glGetError
       .cast<NativeFunction<Uint32 Function()>>()
@@ -27127,6 +27166,7 @@ late Pointer<NativeFunction<Void Function()>> _glGetString;
 /// ```c
 /// GLAPI const GLubyte * GLAPIENTRY glGetString( GLenum name )
 /// ```
+/// {@category opengl}
 Pointer<Uint8> glGetString(int name) {
   final glGetStringAsFunction = _glGetString
       .cast<NativeFunction<Pointer<Uint8> Function(Uint32 name)>>()
@@ -27140,6 +27180,7 @@ late Pointer<NativeFunction<Void Function()>> _glFinish;
 /// ```c
 /// GLAPI void GLAPIENTRY glFinish( void )
 /// ```
+/// {@category opengl}
 void glFinish() {
   final glFinishAsFunction = _glFinish
       .cast<NativeFunction<Void Function()>>()
@@ -27153,6 +27194,7 @@ late Pointer<NativeFunction<Void Function()>> _glFlush;
 /// ```c
 /// GLAPI void GLAPIENTRY glFlush( void )
 /// ```
+/// {@category opengl}
 void glFlush() {
   final glFlushAsFunction = _glFlush
       .cast<NativeFunction<Void Function()>>()
@@ -27166,6 +27208,7 @@ late Pointer<NativeFunction<Void Function()>> _glHint;
 /// ```c
 /// GLAPI void GLAPIENTRY glHint( GLenum target, GLenum mode )
 /// ```
+/// {@category opengl}
 void glHint(int target, int mode) {
   final glHintAsFunction = _glHint
       .cast<NativeFunction<Void Function(Uint32 target, Uint32 mode)>>()
@@ -27179,6 +27222,7 @@ late Pointer<NativeFunction<Void Function()>> _glClearDepth;
 /// ```c
 /// GLAPI void GLAPIENTRY glClearDepth( GLclampd depth )
 /// ```
+/// {@category opengl}
 void glClearDepth(double depth) {
   final glClearDepthAsFunction = _glClearDepth
       .cast<NativeFunction<Void Function(Double depth)>>()
@@ -27192,6 +27236,7 @@ late Pointer<NativeFunction<Void Function()>> _glDepthFunc;
 /// ```c
 /// GLAPI void GLAPIENTRY glDepthFunc( GLenum func )
 /// ```
+/// {@category opengl}
 void glDepthFunc(int func) {
   final glDepthFuncAsFunction = _glDepthFunc
       .cast<NativeFunction<Void Function(Uint32 func)>>()
@@ -27205,6 +27250,7 @@ late Pointer<NativeFunction<Void Function()>> _glDepthMask;
 /// ```c
 /// GLAPI void GLAPIENTRY glDepthMask( GLboolean flag )
 /// ```
+/// {@category opengl}
 void glDepthMask(int flag) {
   final glDepthMaskAsFunction = _glDepthMask
       .cast<NativeFunction<Void Function(Int32 flag)>>()
@@ -27218,6 +27264,7 @@ late Pointer<NativeFunction<Void Function()>> _glDepthRange;
 /// ```c
 /// GLAPI void GLAPIENTRY glDepthRange( GLclampd near_val, GLclampd far_val )
 /// ```
+/// {@category opengl}
 void glDepthRange(double nearVal, double farVal) {
   final glDepthRangeAsFunction = _glDepthRange
       .cast<NativeFunction<Void Function(Double nearVal, Double farVal)>>()
@@ -27231,6 +27278,7 @@ late Pointer<NativeFunction<Void Function()>> _glClearAccum;
 /// ```c
 /// GLAPI void GLAPIENTRY glClearAccum( GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha )
 /// ```
+/// {@category opengl}
 void glClearAccum(double red, double green, double blue, double alpha) {
   final glClearAccumAsFunction = _glClearAccum
       .cast<
@@ -27250,6 +27298,7 @@ late Pointer<NativeFunction<Void Function()>> _glAccum;
 /// ```c
 /// GLAPI void GLAPIENTRY glAccum( GLenum op, GLfloat value )
 /// ```
+/// {@category opengl}
 void glAccum(int op, double value) {
   final glAccumAsFunction = _glAccum
       .cast<NativeFunction<Void Function(Uint32 op, Float value)>>()
@@ -27263,6 +27312,7 @@ late Pointer<NativeFunction<Void Function()>> _glMatrixMode;
 /// ```c
 /// GLAPI void GLAPIENTRY glMatrixMode( GLenum mode )
 /// ```
+/// {@category opengl}
 void glMatrixMode(int mode) {
   final glMatrixModeAsFunction = _glMatrixMode
       .cast<NativeFunction<Void Function(Uint32 mode)>>()
@@ -27276,6 +27326,7 @@ late Pointer<NativeFunction<Void Function()>> _glOrtho;
 /// ```c
 /// GLAPI void GLAPIENTRY glOrtho( GLdouble left, GLdouble right, GLdouble bottom, GLdouble top, GLdouble near_val, GLdouble far_val )
 /// ```
+/// {@category opengl}
 void glOrtho(
   double left,
   double right,
@@ -27316,6 +27367,7 @@ late Pointer<NativeFunction<Void Function()>> _glFrustum;
 /// ```c
 /// GLAPI void GLAPIENTRY glFrustum( GLdouble left, GLdouble right, GLdouble bottom, GLdouble top, GLdouble near_val, GLdouble far_val )
 /// ```
+/// {@category opengl}
 void glFrustum(
   double left,
   double right,
@@ -27356,6 +27408,7 @@ late Pointer<NativeFunction<Void Function()>> _glViewport;
 /// ```c
 /// GLAPI void GLAPIENTRY glViewport( GLint x, GLint y, GLsizei width, GLsizei height )
 /// ```
+/// {@category opengl}
 void glViewport(int x, int y, int width, int height) {
   final glViewportAsFunction = _glViewport
       .cast<
@@ -27373,6 +27426,7 @@ late Pointer<NativeFunction<Void Function()>> _glPushMatrix;
 /// ```c
 /// GLAPI void GLAPIENTRY glPushMatrix( void )
 /// ```
+/// {@category opengl}
 void glPushMatrix() {
   final glPushMatrixAsFunction = _glPushMatrix
       .cast<NativeFunction<Void Function()>>()
@@ -27386,6 +27440,7 @@ late Pointer<NativeFunction<Void Function()>> _glPopMatrix;
 /// ```c
 /// GLAPI void GLAPIENTRY glPopMatrix( void )
 /// ```
+/// {@category opengl}
 void glPopMatrix() {
   final glPopMatrixAsFunction = _glPopMatrix
       .cast<NativeFunction<Void Function()>>()
@@ -27399,6 +27454,7 @@ late Pointer<NativeFunction<Void Function()>> _glLoadIdentity;
 /// ```c
 /// GLAPI void GLAPIENTRY glLoadIdentity( void )
 /// ```
+/// {@category opengl}
 void glLoadIdentity() {
   final glLoadIdentityAsFunction = _glLoadIdentity
       .cast<NativeFunction<Void Function()>>()
@@ -27412,6 +27468,7 @@ late Pointer<NativeFunction<Void Function()>> _glLoadMatrixd;
 /// ```c
 /// GLAPI void GLAPIENTRY glLoadMatrixd( const GLdouble *m )
 /// ```
+/// {@category opengl}
 void glLoadMatrixd(Pointer<Double> m) {
   final glLoadMatrixdAsFunction = _glLoadMatrixd
       .cast<NativeFunction<Void Function(Pointer<Double> m)>>()
@@ -27425,6 +27482,7 @@ late Pointer<NativeFunction<Void Function()>> _glLoadMatrixf;
 /// ```c
 /// GLAPI void GLAPIENTRY glLoadMatrixf( const GLfloat *m )
 /// ```
+/// {@category opengl}
 void glLoadMatrixf(Pointer<Float> m) {
   final glLoadMatrixfAsFunction = _glLoadMatrixf
       .cast<NativeFunction<Void Function(Pointer<Float> m)>>()
@@ -27438,6 +27496,7 @@ late Pointer<NativeFunction<Void Function()>> _glMultMatrixd;
 /// ```c
 /// GLAPI void GLAPIENTRY glMultMatrixd( const GLdouble *m )
 /// ```
+/// {@category opengl}
 void glMultMatrixd(Pointer<Double> m) {
   final glMultMatrixdAsFunction = _glMultMatrixd
       .cast<NativeFunction<Void Function(Pointer<Double> m)>>()
@@ -27451,6 +27510,7 @@ late Pointer<NativeFunction<Void Function()>> _glMultMatrixf;
 /// ```c
 /// GLAPI void GLAPIENTRY glMultMatrixf( const GLfloat *m )
 /// ```
+/// {@category opengl}
 void glMultMatrixf(Pointer<Float> m) {
   final glMultMatrixfAsFunction = _glMultMatrixf
       .cast<NativeFunction<Void Function(Pointer<Float> m)>>()
@@ -27464,6 +27524,7 @@ late Pointer<NativeFunction<Void Function()>> _glRotated;
 /// ```c
 /// GLAPI void GLAPIENTRY glRotated( GLdouble angle, GLdouble x, GLdouble y, GLdouble z )
 /// ```
+/// {@category opengl}
 void glRotated(double angle, double x, double y, double z) {
   final glRotatedAsFunction = _glRotated
       .cast<
@@ -27481,6 +27542,7 @@ late Pointer<NativeFunction<Void Function()>> _glRotatef;
 /// ```c
 /// GLAPI void GLAPIENTRY glRotatef( GLfloat angle, GLfloat x, GLfloat y, GLfloat z )
 /// ```
+/// {@category opengl}
 void glRotatef(double angle, double x, double y, double z) {
   final glRotatefAsFunction = _glRotatef
       .cast<
@@ -27496,6 +27558,7 @@ late Pointer<NativeFunction<Void Function()>> _glScaled;
 /// ```c
 /// GLAPI void GLAPIENTRY glScaled( GLdouble x, GLdouble y, GLdouble z )
 /// ```
+/// {@category opengl}
 void glScaled(double x, double y, double z) {
   final glScaledAsFunction = _glScaled
       .cast<NativeFunction<Void Function(Double x, Double y, Double z)>>()
@@ -27509,6 +27572,7 @@ late Pointer<NativeFunction<Void Function()>> _glScalef;
 /// ```c
 /// GLAPI void GLAPIENTRY glScalef( GLfloat x, GLfloat y, GLfloat z )
 /// ```
+/// {@category opengl}
 void glScalef(double x, double y, double z) {
   final glScalefAsFunction = _glScalef
       .cast<NativeFunction<Void Function(Float x, Float y, Float z)>>()
@@ -27522,6 +27586,7 @@ late Pointer<NativeFunction<Void Function()>> _glTranslated;
 /// ```c
 /// GLAPI void GLAPIENTRY glTranslated( GLdouble x, GLdouble y, GLdouble z )
 /// ```
+/// {@category opengl}
 void glTranslated(double x, double y, double z) {
   final glTranslatedAsFunction = _glTranslated
       .cast<NativeFunction<Void Function(Double x, Double y, Double z)>>()
@@ -27535,6 +27600,7 @@ late Pointer<NativeFunction<Void Function()>> _glTranslatef;
 /// ```c
 /// GLAPI void GLAPIENTRY glTranslatef( GLfloat x, GLfloat y, GLfloat z )
 /// ```
+/// {@category opengl}
 void glTranslatef(double x, double y, double z) {
   final glTranslatefAsFunction = _glTranslatef
       .cast<NativeFunction<Void Function(Float x, Float y, Float z)>>()
@@ -27548,6 +27614,7 @@ late Pointer<NativeFunction<Void Function()>> _glIsList;
 /// ```c
 /// GLAPI GLboolean GLAPIENTRY glIsList( GLuint list )
 /// ```
+/// {@category opengl}
 int glIsList(int list) {
   final glIsListAsFunction = _glIsList
       .cast<NativeFunction<Int32 Function(Uint32 list)>>()
@@ -27561,6 +27628,7 @@ late Pointer<NativeFunction<Void Function()>> _glDeleteLists;
 /// ```c
 /// GLAPI void GLAPIENTRY glDeleteLists( GLuint list, GLsizei range )
 /// ```
+/// {@category opengl}
 void glDeleteLists(int list, int range) {
   final glDeleteListsAsFunction = _glDeleteLists
       .cast<NativeFunction<Void Function(Uint32 list, Uint32 range)>>()
@@ -27574,6 +27642,7 @@ late Pointer<NativeFunction<Void Function()>> _glGenLists;
 /// ```c
 /// GLAPI GLuint GLAPIENTRY glGenLists( GLsizei range )
 /// ```
+/// {@category opengl}
 int glGenLists(int range) {
   final glGenListsAsFunction = _glGenLists
       .cast<NativeFunction<Uint32 Function(Uint32 range)>>()
@@ -27587,6 +27656,7 @@ late Pointer<NativeFunction<Void Function()>> _glNewList;
 /// ```c
 /// GLAPI void GLAPIENTRY glNewList( GLuint list, GLenum mode )
 /// ```
+/// {@category opengl}
 void glNewList(int list, int mode) {
   final glNewListAsFunction = _glNewList
       .cast<NativeFunction<Void Function(Uint32 list, Uint32 mode)>>()
@@ -27600,6 +27670,7 @@ late Pointer<NativeFunction<Void Function()>> _glEndList;
 /// ```c
 /// GLAPI void GLAPIENTRY glEndList( void )
 /// ```
+/// {@category opengl}
 void glEndList() {
   final glEndListAsFunction = _glEndList
       .cast<NativeFunction<Void Function()>>()
@@ -27613,6 +27684,7 @@ late Pointer<NativeFunction<Void Function()>> _glCallList;
 /// ```c
 /// GLAPI void GLAPIENTRY glCallList( GLuint list )
 /// ```
+/// {@category opengl}
 void glCallList(int list) {
   final glCallListAsFunction = _glCallList
       .cast<NativeFunction<Void Function(Uint32 list)>>()
@@ -27626,6 +27698,7 @@ late Pointer<NativeFunction<Void Function()>> _glCallLists;
 /// ```c
 /// GLAPI void GLAPIENTRY glCallLists( GLsizei n, GLenum type, const GLvoid *lists )
 /// ```
+/// {@category opengl}
 void glCallLists(int n, int type, Pointer<NativeType> lists) {
   final glCallListsAsFunction = _glCallLists
       .cast<
@@ -27643,6 +27716,7 @@ late Pointer<NativeFunction<Void Function()>> _glListBase;
 /// ```c
 /// GLAPI void GLAPIENTRY glListBase( GLuint base )
 /// ```
+/// {@category opengl}
 void glListBase(int base) {
   final glListBaseAsFunction = _glListBase
       .cast<NativeFunction<Void Function(Uint32 base)>>()
@@ -27656,6 +27730,7 @@ late Pointer<NativeFunction<Void Function()>> _glBegin;
 /// ```c
 /// GLAPI void GLAPIENTRY glBegin( GLenum mode )
 /// ```
+/// {@category opengl}
 void glBegin(int mode) {
   final glBeginAsFunction = _glBegin
       .cast<NativeFunction<Void Function(Uint32 mode)>>()
@@ -27669,6 +27744,7 @@ late Pointer<NativeFunction<Void Function()>> _glEnd;
 /// ```c
 /// GLAPI void GLAPIENTRY glEnd( void )
 /// ```
+/// {@category opengl}
 void glEnd() {
   final glEndAsFunction = _glEnd
       .cast<NativeFunction<Void Function()>>()
@@ -27682,6 +27758,7 @@ late Pointer<NativeFunction<Void Function()>> _glVertex2d;
 /// ```c
 /// GLAPI void GLAPIENTRY glVertex2d( GLdouble x, GLdouble y )
 /// ```
+/// {@category opengl}
 void glVertex2d(double x, double y) {
   final glVertex2dAsFunction = _glVertex2d
       .cast<NativeFunction<Void Function(Double x, Double y)>>()
@@ -27695,6 +27772,7 @@ late Pointer<NativeFunction<Void Function()>> _glVertex2f;
 /// ```c
 /// GLAPI void GLAPIENTRY glVertex2f( GLfloat x, GLfloat y )
 /// ```
+/// {@category opengl}
 void glVertex2f(double x, double y) {
   final glVertex2fAsFunction = _glVertex2f
       .cast<NativeFunction<Void Function(Float x, Float y)>>()
@@ -27708,6 +27786,7 @@ late Pointer<NativeFunction<Void Function()>> _glVertex2i;
 /// ```c
 /// GLAPI void GLAPIENTRY glVertex2i( GLint x, GLint y )
 /// ```
+/// {@category opengl}
 void glVertex2i(int x, int y) {
   final glVertex2iAsFunction = _glVertex2i
       .cast<NativeFunction<Void Function(Int32 x, Int32 y)>>()
@@ -27721,6 +27800,7 @@ late Pointer<NativeFunction<Void Function()>> _glVertex2s;
 /// ```c
 /// GLAPI void GLAPIENTRY glVertex2s( GLshort x, GLshort y )
 /// ```
+/// {@category opengl}
 void glVertex2s(int x, int y) {
   final glVertex2sAsFunction = _glVertex2s
       .cast<NativeFunction<Void Function(Int16 x, Int16 y)>>()
@@ -27734,6 +27814,7 @@ late Pointer<NativeFunction<Void Function()>> _glVertex3d;
 /// ```c
 /// GLAPI void GLAPIENTRY glVertex3d( GLdouble x, GLdouble y, GLdouble z )
 /// ```
+/// {@category opengl}
 void glVertex3d(double x, double y, double z) {
   final glVertex3dAsFunction = _glVertex3d
       .cast<NativeFunction<Void Function(Double x, Double y, Double z)>>()
@@ -27747,6 +27828,7 @@ late Pointer<NativeFunction<Void Function()>> _glVertex3f;
 /// ```c
 /// GLAPI void GLAPIENTRY glVertex3f( GLfloat x, GLfloat y, GLfloat z )
 /// ```
+/// {@category opengl}
 void glVertex3f(double x, double y, double z) {
   final glVertex3fAsFunction = _glVertex3f
       .cast<NativeFunction<Void Function(Float x, Float y, Float z)>>()
@@ -27760,6 +27842,7 @@ late Pointer<NativeFunction<Void Function()>> _glVertex3i;
 /// ```c
 /// GLAPI void GLAPIENTRY glVertex3i( GLint x, GLint y, GLint z )
 /// ```
+/// {@category opengl}
 void glVertex3i(int x, int y, int z) {
   final glVertex3iAsFunction = _glVertex3i
       .cast<NativeFunction<Void Function(Int32 x, Int32 y, Int32 z)>>()
@@ -27773,6 +27856,7 @@ late Pointer<NativeFunction<Void Function()>> _glVertex3s;
 /// ```c
 /// GLAPI void GLAPIENTRY glVertex3s( GLshort x, GLshort y, GLshort z )
 /// ```
+/// {@category opengl}
 void glVertex3s(int x, int y, int z) {
   final glVertex3sAsFunction = _glVertex3s
       .cast<NativeFunction<Void Function(Int16 x, Int16 y, Int16 z)>>()
@@ -27786,6 +27870,7 @@ late Pointer<NativeFunction<Void Function()>> _glVertex4d;
 /// ```c
 /// GLAPI void GLAPIENTRY glVertex4d( GLdouble x, GLdouble y, GLdouble z, GLdouble w )
 /// ```
+/// {@category opengl}
 void glVertex4d(double x, double y, double z, double w) {
   final glVertex4dAsFunction = _glVertex4d
       .cast<
@@ -27801,6 +27886,7 @@ late Pointer<NativeFunction<Void Function()>> _glVertex4f;
 /// ```c
 /// GLAPI void GLAPIENTRY glVertex4f( GLfloat x, GLfloat y, GLfloat z, GLfloat w )
 /// ```
+/// {@category opengl}
 void glVertex4f(double x, double y, double z, double w) {
   final glVertex4fAsFunction = _glVertex4f
       .cast<NativeFunction<Void Function(Float x, Float y, Float z, Float w)>>()
@@ -27814,6 +27900,7 @@ late Pointer<NativeFunction<Void Function()>> _glVertex4i;
 /// ```c
 /// GLAPI void GLAPIENTRY glVertex4i( GLint x, GLint y, GLint z, GLint w )
 /// ```
+/// {@category opengl}
 void glVertex4i(int x, int y, int z, int w) {
   final glVertex4iAsFunction = _glVertex4i
       .cast<NativeFunction<Void Function(Int32 x, Int32 y, Int32 z, Int32 w)>>()
@@ -27827,6 +27914,7 @@ late Pointer<NativeFunction<Void Function()>> _glVertex4s;
 /// ```c
 /// GLAPI void GLAPIENTRY glVertex4s( GLshort x, GLshort y, GLshort z, GLshort w )
 /// ```
+/// {@category opengl}
 void glVertex4s(int x, int y, int z, int w) {
   final glVertex4sAsFunction = _glVertex4s
       .cast<NativeFunction<Void Function(Int16 x, Int16 y, Int16 z, Int16 w)>>()
@@ -27840,6 +27928,7 @@ late Pointer<NativeFunction<Void Function()>> _glVertex2dv;
 /// ```c
 /// GLAPI void GLAPIENTRY glVertex2dv( const GLdouble *v )
 /// ```
+/// {@category opengl}
 void glVertex2dv(Pointer<Double> v) {
   final glVertex2dvAsFunction = _glVertex2dv
       .cast<NativeFunction<Void Function(Pointer<Double> v)>>()
@@ -27853,6 +27942,7 @@ late Pointer<NativeFunction<Void Function()>> _glVertex2fv;
 /// ```c
 /// GLAPI void GLAPIENTRY glVertex2fv( const GLfloat *v )
 /// ```
+/// {@category opengl}
 void glVertex2fv(Pointer<Float> v) {
   final glVertex2fvAsFunction = _glVertex2fv
       .cast<NativeFunction<Void Function(Pointer<Float> v)>>()
@@ -27866,6 +27956,7 @@ late Pointer<NativeFunction<Void Function()>> _glVertex2iv;
 /// ```c
 /// GLAPI void GLAPIENTRY glVertex2iv( const GLint *v )
 /// ```
+/// {@category opengl}
 void glVertex2iv(Pointer<Int32> v) {
   final glVertex2ivAsFunction = _glVertex2iv
       .cast<NativeFunction<Void Function(Pointer<Int32> v)>>()
@@ -27879,6 +27970,7 @@ late Pointer<NativeFunction<Void Function()>> _glVertex2sv;
 /// ```c
 /// GLAPI void GLAPIENTRY glVertex2sv( const GLshort *v )
 /// ```
+/// {@category opengl}
 void glVertex2sv(Pointer<Int16> v) {
   final glVertex2svAsFunction = _glVertex2sv
       .cast<NativeFunction<Void Function(Pointer<Int16> v)>>()
@@ -27892,6 +27984,7 @@ late Pointer<NativeFunction<Void Function()>> _glVertex3dv;
 /// ```c
 /// GLAPI void GLAPIENTRY glVertex3dv( const GLdouble *v )
 /// ```
+/// {@category opengl}
 void glVertex3dv(Pointer<Double> v) {
   final glVertex3dvAsFunction = _glVertex3dv
       .cast<NativeFunction<Void Function(Pointer<Double> v)>>()
@@ -27905,6 +27998,7 @@ late Pointer<NativeFunction<Void Function()>> _glVertex3fv;
 /// ```c
 /// GLAPI void GLAPIENTRY glVertex3fv( const GLfloat *v )
 /// ```
+/// {@category opengl}
 void glVertex3fv(Pointer<Float> v) {
   final glVertex3fvAsFunction = _glVertex3fv
       .cast<NativeFunction<Void Function(Pointer<Float> v)>>()
@@ -27918,6 +28012,7 @@ late Pointer<NativeFunction<Void Function()>> _glVertex3iv;
 /// ```c
 /// GLAPI void GLAPIENTRY glVertex3iv( const GLint *v )
 /// ```
+/// {@category opengl}
 void glVertex3iv(Pointer<Int32> v) {
   final glVertex3ivAsFunction = _glVertex3iv
       .cast<NativeFunction<Void Function(Pointer<Int32> v)>>()
@@ -27931,6 +28026,7 @@ late Pointer<NativeFunction<Void Function()>> _glVertex3sv;
 /// ```c
 /// GLAPI void GLAPIENTRY glVertex3sv( const GLshort *v )
 /// ```
+/// {@category opengl}
 void glVertex3sv(Pointer<Int16> v) {
   final glVertex3svAsFunction = _glVertex3sv
       .cast<NativeFunction<Void Function(Pointer<Int16> v)>>()
@@ -27944,6 +28040,7 @@ late Pointer<NativeFunction<Void Function()>> _glVertex4dv;
 /// ```c
 /// GLAPI void GLAPIENTRY glVertex4dv( const GLdouble *v )
 /// ```
+/// {@category opengl}
 void glVertex4dv(Pointer<Double> v) {
   final glVertex4dvAsFunction = _glVertex4dv
       .cast<NativeFunction<Void Function(Pointer<Double> v)>>()
@@ -27957,6 +28054,7 @@ late Pointer<NativeFunction<Void Function()>> _glVertex4fv;
 /// ```c
 /// GLAPI void GLAPIENTRY glVertex4fv( const GLfloat *v )
 /// ```
+/// {@category opengl}
 void glVertex4fv(Pointer<Float> v) {
   final glVertex4fvAsFunction = _glVertex4fv
       .cast<NativeFunction<Void Function(Pointer<Float> v)>>()
@@ -27970,6 +28068,7 @@ late Pointer<NativeFunction<Void Function()>> _glVertex4iv;
 /// ```c
 /// GLAPI void GLAPIENTRY glVertex4iv( const GLint *v )
 /// ```
+/// {@category opengl}
 void glVertex4iv(Pointer<Int32> v) {
   final glVertex4ivAsFunction = _glVertex4iv
       .cast<NativeFunction<Void Function(Pointer<Int32> v)>>()
@@ -27983,6 +28082,7 @@ late Pointer<NativeFunction<Void Function()>> _glVertex4sv;
 /// ```c
 /// GLAPI void GLAPIENTRY glVertex4sv( const GLshort *v )
 /// ```
+/// {@category opengl}
 void glVertex4sv(Pointer<Int16> v) {
   final glVertex4svAsFunction = _glVertex4sv
       .cast<NativeFunction<Void Function(Pointer<Int16> v)>>()
@@ -27996,6 +28096,7 @@ late Pointer<NativeFunction<Void Function()>> _glNormal3b;
 /// ```c
 /// GLAPI void GLAPIENTRY glNormal3b( GLbyte nx, GLbyte ny, GLbyte nz )
 /// ```
+/// {@category opengl}
 void glNormal3b(int nx, int ny, int nz) {
   final glNormal3bAsFunction = _glNormal3b
       .cast<NativeFunction<Void Function(Int8 nx, Int8 ny, Int8 nz)>>()
@@ -28009,6 +28110,7 @@ late Pointer<NativeFunction<Void Function()>> _glNormal3d;
 /// ```c
 /// GLAPI void GLAPIENTRY glNormal3d( GLdouble nx, GLdouble ny, GLdouble nz )
 /// ```
+/// {@category opengl}
 void glNormal3d(double nx, double ny, double nz) {
   final glNormal3dAsFunction = _glNormal3d
       .cast<NativeFunction<Void Function(Double nx, Double ny, Double nz)>>()
@@ -28022,6 +28124,7 @@ late Pointer<NativeFunction<Void Function()>> _glNormal3f;
 /// ```c
 /// GLAPI void GLAPIENTRY glNormal3f( GLfloat nx, GLfloat ny, GLfloat nz )
 /// ```
+/// {@category opengl}
 void glNormal3f(double nx, double ny, double nz) {
   final glNormal3fAsFunction = _glNormal3f
       .cast<NativeFunction<Void Function(Float nx, Float ny, Float nz)>>()
@@ -28035,6 +28138,7 @@ late Pointer<NativeFunction<Void Function()>> _glNormal3i;
 /// ```c
 /// GLAPI void GLAPIENTRY glNormal3i( GLint nx, GLint ny, GLint nz )
 /// ```
+/// {@category opengl}
 void glNormal3i(int nx, int ny, int nz) {
   final glNormal3iAsFunction = _glNormal3i
       .cast<NativeFunction<Void Function(Int32 nx, Int32 ny, Int32 nz)>>()
@@ -28048,6 +28152,7 @@ late Pointer<NativeFunction<Void Function()>> _glNormal3s;
 /// ```c
 /// GLAPI void GLAPIENTRY glNormal3s( GLshort nx, GLshort ny, GLshort nz )
 /// ```
+/// {@category opengl}
 void glNormal3s(int nx, int ny, int nz) {
   final glNormal3sAsFunction = _glNormal3s
       .cast<NativeFunction<Void Function(Int16 nx, Int16 ny, Int16 nz)>>()
@@ -28061,6 +28166,7 @@ late Pointer<NativeFunction<Void Function()>> _glNormal3bv;
 /// ```c
 /// GLAPI void GLAPIENTRY glNormal3bv( const GLbyte *v )
 /// ```
+/// {@category opengl}
 void glNormal3bv(String v) {
   final glNormal3bvAsFunction = _glNormal3bv
       .cast<NativeFunction<Void Function(Pointer<Utf8> v)>>()
@@ -28077,6 +28183,7 @@ late Pointer<NativeFunction<Void Function()>> _glNormal3dv;
 /// ```c
 /// GLAPI void GLAPIENTRY glNormal3dv( const GLdouble *v )
 /// ```
+/// {@category opengl}
 void glNormal3dv(Pointer<Double> v) {
   final glNormal3dvAsFunction = _glNormal3dv
       .cast<NativeFunction<Void Function(Pointer<Double> v)>>()
@@ -28090,6 +28197,7 @@ late Pointer<NativeFunction<Void Function()>> _glNormal3fv;
 /// ```c
 /// GLAPI void GLAPIENTRY glNormal3fv( const GLfloat *v )
 /// ```
+/// {@category opengl}
 void glNormal3fv(Pointer<Float> v) {
   final glNormal3fvAsFunction = _glNormal3fv
       .cast<NativeFunction<Void Function(Pointer<Float> v)>>()
@@ -28103,6 +28211,7 @@ late Pointer<NativeFunction<Void Function()>> _glNormal3iv;
 /// ```c
 /// GLAPI void GLAPIENTRY glNormal3iv( const GLint *v )
 /// ```
+/// {@category opengl}
 void glNormal3iv(Pointer<Int32> v) {
   final glNormal3ivAsFunction = _glNormal3iv
       .cast<NativeFunction<Void Function(Pointer<Int32> v)>>()
@@ -28116,6 +28225,7 @@ late Pointer<NativeFunction<Void Function()>> _glNormal3sv;
 /// ```c
 /// GLAPI void GLAPIENTRY glNormal3sv( const GLshort *v )
 /// ```
+/// {@category opengl}
 void glNormal3sv(Pointer<Int16> v) {
   final glNormal3svAsFunction = _glNormal3sv
       .cast<NativeFunction<Void Function(Pointer<Int16> v)>>()
@@ -28129,6 +28239,7 @@ late Pointer<NativeFunction<Void Function()>> _glIndexd;
 /// ```c
 /// GLAPI void GLAPIENTRY glIndexd( GLdouble c )
 /// ```
+/// {@category opengl}
 void glIndexd(double c) {
   final glIndexdAsFunction = _glIndexd
       .cast<NativeFunction<Void Function(Double c)>>()
@@ -28142,6 +28253,7 @@ late Pointer<NativeFunction<Void Function()>> _glIndexf;
 /// ```c
 /// GLAPI void GLAPIENTRY glIndexf( GLfloat c )
 /// ```
+/// {@category opengl}
 void glIndexf(double c) {
   final glIndexfAsFunction = _glIndexf
       .cast<NativeFunction<Void Function(Float c)>>()
@@ -28155,6 +28267,7 @@ late Pointer<NativeFunction<Void Function()>> _glIndexi;
 /// ```c
 /// GLAPI void GLAPIENTRY glIndexi( GLint c )
 /// ```
+/// {@category opengl}
 void glIndexi(int c) {
   final glIndexiAsFunction = _glIndexi
       .cast<NativeFunction<Void Function(Int32 c)>>()
@@ -28168,6 +28281,7 @@ late Pointer<NativeFunction<Void Function()>> _glIndexs;
 /// ```c
 /// GLAPI void GLAPIENTRY glIndexs( GLshort c )
 /// ```
+/// {@category opengl}
 void glIndexs(int c) {
   final glIndexsAsFunction = _glIndexs
       .cast<NativeFunction<Void Function(Int16 c)>>()
@@ -28181,6 +28295,7 @@ late Pointer<NativeFunction<Void Function()>> _glIndexub;
 /// ```c
 /// GLAPI void GLAPIENTRY glIndexub( GLubyte c )
 /// ```
+/// {@category opengl}
 void glIndexub(int c) {
   final glIndexubAsFunction = _glIndexub
       .cast<NativeFunction<Void Function(Uint8 c)>>()
@@ -28194,6 +28309,7 @@ late Pointer<NativeFunction<Void Function()>> _glIndexdv;
 /// ```c
 /// GLAPI void GLAPIENTRY glIndexdv( const GLdouble *c )
 /// ```
+/// {@category opengl}
 void glIndexdv(Pointer<Double> c) {
   final glIndexdvAsFunction = _glIndexdv
       .cast<NativeFunction<Void Function(Pointer<Double> c)>>()
@@ -28207,6 +28323,7 @@ late Pointer<NativeFunction<Void Function()>> _glIndexfv;
 /// ```c
 /// GLAPI void GLAPIENTRY glIndexfv( const GLfloat *c )
 /// ```
+/// {@category opengl}
 void glIndexfv(Pointer<Float> c) {
   final glIndexfvAsFunction = _glIndexfv
       .cast<NativeFunction<Void Function(Pointer<Float> c)>>()
@@ -28220,6 +28337,7 @@ late Pointer<NativeFunction<Void Function()>> _glIndexiv;
 /// ```c
 /// GLAPI void GLAPIENTRY glIndexiv( const GLint *c )
 /// ```
+/// {@category opengl}
 void glIndexiv(Pointer<Int32> c) {
   final glIndexivAsFunction = _glIndexiv
       .cast<NativeFunction<Void Function(Pointer<Int32> c)>>()
@@ -28233,6 +28351,7 @@ late Pointer<NativeFunction<Void Function()>> _glIndexsv;
 /// ```c
 /// GLAPI void GLAPIENTRY glIndexsv( const GLshort *c )
 /// ```
+/// {@category opengl}
 void glIndexsv(Pointer<Int16> c) {
   final glIndexsvAsFunction = _glIndexsv
       .cast<NativeFunction<Void Function(Pointer<Int16> c)>>()
@@ -28246,6 +28365,7 @@ late Pointer<NativeFunction<Void Function()>> _glIndexubv;
 /// ```c
 /// GLAPI void GLAPIENTRY glIndexubv( const GLubyte *c )
 /// ```
+/// {@category opengl}
 void glIndexubv(Pointer<Uint8> c) {
   final glIndexubvAsFunction = _glIndexubv
       .cast<NativeFunction<Void Function(Pointer<Uint8> c)>>()
@@ -28259,6 +28379,7 @@ late Pointer<NativeFunction<Void Function()>> _glColor3b;
 /// ```c
 /// GLAPI void GLAPIENTRY glColor3b( GLbyte red, GLbyte green, GLbyte blue )
 /// ```
+/// {@category opengl}
 void glColor3b(int red, int green, int blue) {
   final glColor3bAsFunction = _glColor3b
       .cast<NativeFunction<Void Function(Int8 red, Int8 green, Int8 blue)>>()
@@ -28272,6 +28393,7 @@ late Pointer<NativeFunction<Void Function()>> _glColor3d;
 /// ```c
 /// GLAPI void GLAPIENTRY glColor3d( GLdouble red, GLdouble green, GLdouble blue )
 /// ```
+/// {@category opengl}
 void glColor3d(double red, double green, double blue) {
   final glColor3dAsFunction = _glColor3d
       .cast<
@@ -28287,6 +28409,7 @@ late Pointer<NativeFunction<Void Function()>> _glColor3f;
 /// ```c
 /// GLAPI void GLAPIENTRY glColor3f( GLfloat red, GLfloat green, GLfloat blue )
 /// ```
+/// {@category opengl}
 void glColor3f(double red, double green, double blue) {
   final glColor3fAsFunction = _glColor3f
       .cast<NativeFunction<Void Function(Float red, Float green, Float blue)>>()
@@ -28300,6 +28423,7 @@ late Pointer<NativeFunction<Void Function()>> _glColor3i;
 /// ```c
 /// GLAPI void GLAPIENTRY glColor3i( GLint red, GLint green, GLint blue )
 /// ```
+/// {@category opengl}
 void glColor3i(int red, int green, int blue) {
   final glColor3iAsFunction = _glColor3i
       .cast<NativeFunction<Void Function(Int32 red, Int32 green, Int32 blue)>>()
@@ -28313,6 +28437,7 @@ late Pointer<NativeFunction<Void Function()>> _glColor3s;
 /// ```c
 /// GLAPI void GLAPIENTRY glColor3s( GLshort red, GLshort green, GLshort blue )
 /// ```
+/// {@category opengl}
 void glColor3s(int red, int green, int blue) {
   final glColor3sAsFunction = _glColor3s
       .cast<NativeFunction<Void Function(Int16 red, Int16 green, Int16 blue)>>()
@@ -28326,6 +28451,7 @@ late Pointer<NativeFunction<Void Function()>> _glColor3ub;
 /// ```c
 /// GLAPI void GLAPIENTRY glColor3ub( GLubyte red, GLubyte green, GLubyte blue )
 /// ```
+/// {@category opengl}
 void glColor3ub(int red, int green, int blue) {
   final glColor3ubAsFunction = _glColor3ub
       .cast<NativeFunction<Void Function(Uint8 red, Uint8 green, Uint8 blue)>>()
@@ -28339,6 +28465,7 @@ late Pointer<NativeFunction<Void Function()>> _glColor3ui;
 /// ```c
 /// GLAPI void GLAPIENTRY glColor3ui( GLuint red, GLuint green, GLuint blue )
 /// ```
+/// {@category opengl}
 void glColor3ui(int red, int green, int blue) {
   final glColor3uiAsFunction = _glColor3ui
       .cast<
@@ -28354,6 +28481,7 @@ late Pointer<NativeFunction<Void Function()>> _glColor3us;
 /// ```c
 /// GLAPI void GLAPIENTRY glColor3us( GLushort red, GLushort green, GLushort blue )
 /// ```
+/// {@category opengl}
 void glColor3us(int red, int green, int blue) {
   final glColor3usAsFunction = _glColor3us
       .cast<
@@ -28369,6 +28497,7 @@ late Pointer<NativeFunction<Void Function()>> _glColor4b;
 /// ```c
 /// GLAPI void GLAPIENTRY glColor4b( GLbyte red, GLbyte green, GLbyte blue, GLbyte alpha )
 /// ```
+/// {@category opengl}
 void glColor4b(int red, int green, int blue, int alpha) {
   final glColor4bAsFunction = _glColor4b
       .cast<
@@ -28386,6 +28515,7 @@ late Pointer<NativeFunction<Void Function()>> _glColor4d;
 /// ```c
 /// GLAPI void GLAPIENTRY glColor4d( GLdouble red, GLdouble green, GLdouble blue, GLdouble alpha )
 /// ```
+/// {@category opengl}
 void glColor4d(double red, double green, double blue, double alpha) {
   final glColor4dAsFunction = _glColor4d
       .cast<
@@ -28405,6 +28535,7 @@ late Pointer<NativeFunction<Void Function()>> _glColor4f;
 /// ```c
 /// GLAPI void GLAPIENTRY glColor4f( GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha )
 /// ```
+/// {@category opengl}
 void glColor4f(double red, double green, double blue, double alpha) {
   final glColor4fAsFunction = _glColor4f
       .cast<
@@ -28424,6 +28555,7 @@ late Pointer<NativeFunction<Void Function()>> _glColor4i;
 /// ```c
 /// GLAPI void GLAPIENTRY glColor4i( GLint red, GLint green, GLint blue, GLint alpha )
 /// ```
+/// {@category opengl}
 void glColor4i(int red, int green, int blue, int alpha) {
   final glColor4iAsFunction = _glColor4i
       .cast<
@@ -28441,6 +28573,7 @@ late Pointer<NativeFunction<Void Function()>> _glColor4s;
 /// ```c
 /// GLAPI void GLAPIENTRY glColor4s( GLshort red, GLshort green, GLshort blue, GLshort alpha )
 /// ```
+/// {@category opengl}
 void glColor4s(int red, int green, int blue, int alpha) {
   final glColor4sAsFunction = _glColor4s
       .cast<
@@ -28458,6 +28591,7 @@ late Pointer<NativeFunction<Void Function()>> _glColor4ub;
 /// ```c
 /// GLAPI void GLAPIENTRY glColor4ub( GLubyte red, GLubyte green, GLubyte blue, GLubyte alpha )
 /// ```
+/// {@category opengl}
 void glColor4ub(int red, int green, int blue, int alpha) {
   final glColor4ubAsFunction = _glColor4ub
       .cast<
@@ -28475,6 +28609,7 @@ late Pointer<NativeFunction<Void Function()>> _glColor4ui;
 /// ```c
 /// GLAPI void GLAPIENTRY glColor4ui( GLuint red, GLuint green, GLuint blue, GLuint alpha )
 /// ```
+/// {@category opengl}
 void glColor4ui(int red, int green, int blue, int alpha) {
   final glColor4uiAsFunction = _glColor4ui
       .cast<
@@ -28492,6 +28627,7 @@ late Pointer<NativeFunction<Void Function()>> _glColor4us;
 /// ```c
 /// GLAPI void GLAPIENTRY glColor4us( GLushort red, GLushort green, GLushort blue, GLushort alpha )
 /// ```
+/// {@category opengl}
 void glColor4us(int red, int green, int blue, int alpha) {
   final glColor4usAsFunction = _glColor4us
       .cast<
@@ -28509,6 +28645,7 @@ late Pointer<NativeFunction<Void Function()>> _glColor3bv;
 /// ```c
 /// GLAPI void GLAPIENTRY glColor3bv( const GLbyte *v )
 /// ```
+/// {@category opengl}
 void glColor3bv(String v) {
   final glColor3bvAsFunction = _glColor3bv
       .cast<NativeFunction<Void Function(Pointer<Utf8> v)>>()
@@ -28525,6 +28662,7 @@ late Pointer<NativeFunction<Void Function()>> _glColor3dv;
 /// ```c
 /// GLAPI void GLAPIENTRY glColor3dv( const GLdouble *v )
 /// ```
+/// {@category opengl}
 void glColor3dv(Pointer<Double> v) {
   final glColor3dvAsFunction = _glColor3dv
       .cast<NativeFunction<Void Function(Pointer<Double> v)>>()
@@ -28538,6 +28676,7 @@ late Pointer<NativeFunction<Void Function()>> _glColor3fv;
 /// ```c
 /// GLAPI void GLAPIENTRY glColor3fv( const GLfloat *v )
 /// ```
+/// {@category opengl}
 void glColor3fv(Pointer<Float> v) {
   final glColor3fvAsFunction = _glColor3fv
       .cast<NativeFunction<Void Function(Pointer<Float> v)>>()
@@ -28551,6 +28690,7 @@ late Pointer<NativeFunction<Void Function()>> _glColor3iv;
 /// ```c
 /// GLAPI void GLAPIENTRY glColor3iv( const GLint *v )
 /// ```
+/// {@category opengl}
 void glColor3iv(Pointer<Int32> v) {
   final glColor3ivAsFunction = _glColor3iv
       .cast<NativeFunction<Void Function(Pointer<Int32> v)>>()
@@ -28564,6 +28704,7 @@ late Pointer<NativeFunction<Void Function()>> _glColor3sv;
 /// ```c
 /// GLAPI void GLAPIENTRY glColor3sv( const GLshort *v )
 /// ```
+/// {@category opengl}
 void glColor3sv(Pointer<Int16> v) {
   final glColor3svAsFunction = _glColor3sv
       .cast<NativeFunction<Void Function(Pointer<Int16> v)>>()
@@ -28577,6 +28718,7 @@ late Pointer<NativeFunction<Void Function()>> _glColor3ubv;
 /// ```c
 /// GLAPI void GLAPIENTRY glColor3ubv( const GLubyte *v )
 /// ```
+/// {@category opengl}
 void glColor3ubv(Pointer<Uint8> v) {
   final glColor3ubvAsFunction = _glColor3ubv
       .cast<NativeFunction<Void Function(Pointer<Uint8> v)>>()
@@ -28590,6 +28732,7 @@ late Pointer<NativeFunction<Void Function()>> _glColor3uiv;
 /// ```c
 /// GLAPI void GLAPIENTRY glColor3uiv( const GLuint *v )
 /// ```
+/// {@category opengl}
 void glColor3uiv(Pointer<Uint32> v) {
   final glColor3uivAsFunction = _glColor3uiv
       .cast<NativeFunction<Void Function(Pointer<Uint32> v)>>()
@@ -28603,6 +28746,7 @@ late Pointer<NativeFunction<Void Function()>> _glColor3usv;
 /// ```c
 /// GLAPI void GLAPIENTRY glColor3usv( const GLushort *v )
 /// ```
+/// {@category opengl}
 void glColor3usv(Pointer<Uint16> v) {
   final glColor3usvAsFunction = _glColor3usv
       .cast<NativeFunction<Void Function(Pointer<Uint16> v)>>()
@@ -28616,6 +28760,7 @@ late Pointer<NativeFunction<Void Function()>> _glColor4bv;
 /// ```c
 /// GLAPI void GLAPIENTRY glColor4bv( const GLbyte *v )
 /// ```
+/// {@category opengl}
 void glColor4bv(String v) {
   final glColor4bvAsFunction = _glColor4bv
       .cast<NativeFunction<Void Function(Pointer<Utf8> v)>>()
@@ -28632,6 +28777,7 @@ late Pointer<NativeFunction<Void Function()>> _glColor4dv;
 /// ```c
 /// GLAPI void GLAPIENTRY glColor4dv( const GLdouble *v )
 /// ```
+/// {@category opengl}
 void glColor4dv(Pointer<Double> v) {
   final glColor4dvAsFunction = _glColor4dv
       .cast<NativeFunction<Void Function(Pointer<Double> v)>>()
@@ -28645,6 +28791,7 @@ late Pointer<NativeFunction<Void Function()>> _glColor4fv;
 /// ```c
 /// GLAPI void GLAPIENTRY glColor4fv( const GLfloat *v )
 /// ```
+/// {@category opengl}
 void glColor4fv(Pointer<Float> v) {
   final glColor4fvAsFunction = _glColor4fv
       .cast<NativeFunction<Void Function(Pointer<Float> v)>>()
@@ -28658,6 +28805,7 @@ late Pointer<NativeFunction<Void Function()>> _glColor4iv;
 /// ```c
 /// GLAPI void GLAPIENTRY glColor4iv( const GLint *v )
 /// ```
+/// {@category opengl}
 void glColor4iv(Pointer<Int32> v) {
   final glColor4ivAsFunction = _glColor4iv
       .cast<NativeFunction<Void Function(Pointer<Int32> v)>>()
@@ -28671,6 +28819,7 @@ late Pointer<NativeFunction<Void Function()>> _glColor4sv;
 /// ```c
 /// GLAPI void GLAPIENTRY glColor4sv( const GLshort *v )
 /// ```
+/// {@category opengl}
 void glColor4sv(Pointer<Int16> v) {
   final glColor4svAsFunction = _glColor4sv
       .cast<NativeFunction<Void Function(Pointer<Int16> v)>>()
@@ -28684,6 +28833,7 @@ late Pointer<NativeFunction<Void Function()>> _glColor4ubv;
 /// ```c
 /// GLAPI void GLAPIENTRY glColor4ubv( const GLubyte *v )
 /// ```
+/// {@category opengl}
 void glColor4ubv(Pointer<Uint8> v) {
   final glColor4ubvAsFunction = _glColor4ubv
       .cast<NativeFunction<Void Function(Pointer<Uint8> v)>>()
@@ -28697,6 +28847,7 @@ late Pointer<NativeFunction<Void Function()>> _glColor4uiv;
 /// ```c
 /// GLAPI void GLAPIENTRY glColor4uiv( const GLuint *v )
 /// ```
+/// {@category opengl}
 void glColor4uiv(Pointer<Uint32> v) {
   final glColor4uivAsFunction = _glColor4uiv
       .cast<NativeFunction<Void Function(Pointer<Uint32> v)>>()
@@ -28710,6 +28861,7 @@ late Pointer<NativeFunction<Void Function()>> _glColor4usv;
 /// ```c
 /// GLAPI void GLAPIENTRY glColor4usv( const GLushort *v )
 /// ```
+/// {@category opengl}
 void glColor4usv(Pointer<Uint16> v) {
   final glColor4usvAsFunction = _glColor4usv
       .cast<NativeFunction<Void Function(Pointer<Uint16> v)>>()
@@ -28723,6 +28875,7 @@ late Pointer<NativeFunction<Void Function()>> _glTexCoord1d;
 /// ```c
 /// GLAPI void GLAPIENTRY glTexCoord1d( GLdouble s )
 /// ```
+/// {@category opengl}
 void glTexCoord1d(double s) {
   final glTexCoord1dAsFunction = _glTexCoord1d
       .cast<NativeFunction<Void Function(Double s)>>()
@@ -28736,6 +28889,7 @@ late Pointer<NativeFunction<Void Function()>> _glTexCoord1f;
 /// ```c
 /// GLAPI void GLAPIENTRY glTexCoord1f( GLfloat s )
 /// ```
+/// {@category opengl}
 void glTexCoord1f(double s) {
   final glTexCoord1fAsFunction = _glTexCoord1f
       .cast<NativeFunction<Void Function(Float s)>>()
@@ -28749,6 +28903,7 @@ late Pointer<NativeFunction<Void Function()>> _glTexCoord1i;
 /// ```c
 /// GLAPI void GLAPIENTRY glTexCoord1i( GLint s )
 /// ```
+/// {@category opengl}
 void glTexCoord1i(int s) {
   final glTexCoord1iAsFunction = _glTexCoord1i
       .cast<NativeFunction<Void Function(Int32 s)>>()
@@ -28762,6 +28917,7 @@ late Pointer<NativeFunction<Void Function()>> _glTexCoord1s;
 /// ```c
 /// GLAPI void GLAPIENTRY glTexCoord1s( GLshort s )
 /// ```
+/// {@category opengl}
 void glTexCoord1s(int s) {
   final glTexCoord1sAsFunction = _glTexCoord1s
       .cast<NativeFunction<Void Function(Int16 s)>>()
@@ -28775,6 +28931,7 @@ late Pointer<NativeFunction<Void Function()>> _glTexCoord2d;
 /// ```c
 /// GLAPI void GLAPIENTRY glTexCoord2d( GLdouble s, GLdouble t )
 /// ```
+/// {@category opengl}
 void glTexCoord2d(double s, double t) {
   final glTexCoord2dAsFunction = _glTexCoord2d
       .cast<NativeFunction<Void Function(Double s, Double t)>>()
@@ -28788,6 +28945,7 @@ late Pointer<NativeFunction<Void Function()>> _glTexCoord2f;
 /// ```c
 /// GLAPI void GLAPIENTRY glTexCoord2f( GLfloat s, GLfloat t )
 /// ```
+/// {@category opengl}
 void glTexCoord2f(double s, double t) {
   final glTexCoord2fAsFunction = _glTexCoord2f
       .cast<NativeFunction<Void Function(Float s, Float t)>>()
@@ -28801,6 +28959,7 @@ late Pointer<NativeFunction<Void Function()>> _glTexCoord2i;
 /// ```c
 /// GLAPI void GLAPIENTRY glTexCoord2i( GLint s, GLint t )
 /// ```
+/// {@category opengl}
 void glTexCoord2i(int s, int t) {
   final glTexCoord2iAsFunction = _glTexCoord2i
       .cast<NativeFunction<Void Function(Int32 s, Int32 t)>>()
@@ -28814,6 +28973,7 @@ late Pointer<NativeFunction<Void Function()>> _glTexCoord2s;
 /// ```c
 /// GLAPI void GLAPIENTRY glTexCoord2s( GLshort s, GLshort t )
 /// ```
+/// {@category opengl}
 void glTexCoord2s(int s, int t) {
   final glTexCoord2sAsFunction = _glTexCoord2s
       .cast<NativeFunction<Void Function(Int16 s, Int16 t)>>()
@@ -28827,6 +28987,7 @@ late Pointer<NativeFunction<Void Function()>> _glTexCoord3d;
 /// ```c
 /// GLAPI void GLAPIENTRY glTexCoord3d( GLdouble s, GLdouble t, GLdouble r )
 /// ```
+/// {@category opengl}
 void glTexCoord3d(double s, double t, double r) {
   final glTexCoord3dAsFunction = _glTexCoord3d
       .cast<NativeFunction<Void Function(Double s, Double t, Double r)>>()
@@ -28840,6 +29001,7 @@ late Pointer<NativeFunction<Void Function()>> _glTexCoord3f;
 /// ```c
 /// GLAPI void GLAPIENTRY glTexCoord3f( GLfloat s, GLfloat t, GLfloat r )
 /// ```
+/// {@category opengl}
 void glTexCoord3f(double s, double t, double r) {
   final glTexCoord3fAsFunction = _glTexCoord3f
       .cast<NativeFunction<Void Function(Float s, Float t, Float r)>>()
@@ -28853,6 +29015,7 @@ late Pointer<NativeFunction<Void Function()>> _glTexCoord3i;
 /// ```c
 /// GLAPI void GLAPIENTRY glTexCoord3i( GLint s, GLint t, GLint r )
 /// ```
+/// {@category opengl}
 void glTexCoord3i(int s, int t, int r) {
   final glTexCoord3iAsFunction = _glTexCoord3i
       .cast<NativeFunction<Void Function(Int32 s, Int32 t, Int32 r)>>()
@@ -28866,6 +29029,7 @@ late Pointer<NativeFunction<Void Function()>> _glTexCoord3s;
 /// ```c
 /// GLAPI void GLAPIENTRY glTexCoord3s( GLshort s, GLshort t, GLshort r )
 /// ```
+/// {@category opengl}
 void glTexCoord3s(int s, int t, int r) {
   final glTexCoord3sAsFunction = _glTexCoord3s
       .cast<NativeFunction<Void Function(Int16 s, Int16 t, Int16 r)>>()
@@ -28879,6 +29043,7 @@ late Pointer<NativeFunction<Void Function()>> _glTexCoord4d;
 /// ```c
 /// GLAPI void GLAPIENTRY glTexCoord4d( GLdouble s, GLdouble t, GLdouble r, GLdouble q )
 /// ```
+/// {@category opengl}
 void glTexCoord4d(double s, double t, double r, double q) {
   final glTexCoord4dAsFunction = _glTexCoord4d
       .cast<
@@ -28894,6 +29059,7 @@ late Pointer<NativeFunction<Void Function()>> _glTexCoord4f;
 /// ```c
 /// GLAPI void GLAPIENTRY glTexCoord4f( GLfloat s, GLfloat t, GLfloat r, GLfloat q )
 /// ```
+/// {@category opengl}
 void glTexCoord4f(double s, double t, double r, double q) {
   final glTexCoord4fAsFunction = _glTexCoord4f
       .cast<NativeFunction<Void Function(Float s, Float t, Float r, Float q)>>()
@@ -28907,6 +29073,7 @@ late Pointer<NativeFunction<Void Function()>> _glTexCoord4i;
 /// ```c
 /// GLAPI void GLAPIENTRY glTexCoord4i( GLint s, GLint t, GLint r, GLint q )
 /// ```
+/// {@category opengl}
 void glTexCoord4i(int s, int t, int r, int q) {
   final glTexCoord4iAsFunction = _glTexCoord4i
       .cast<NativeFunction<Void Function(Int32 s, Int32 t, Int32 r, Int32 q)>>()
@@ -28920,6 +29087,7 @@ late Pointer<NativeFunction<Void Function()>> _glTexCoord4s;
 /// ```c
 /// GLAPI void GLAPIENTRY glTexCoord4s( GLshort s, GLshort t, GLshort r, GLshort q )
 /// ```
+/// {@category opengl}
 void glTexCoord4s(int s, int t, int r, int q) {
   final glTexCoord4sAsFunction = _glTexCoord4s
       .cast<NativeFunction<Void Function(Int16 s, Int16 t, Int16 r, Int16 q)>>()
@@ -28933,6 +29101,7 @@ late Pointer<NativeFunction<Void Function()>> _glTexCoord1dv;
 /// ```c
 /// GLAPI void GLAPIENTRY glTexCoord1dv( const GLdouble *v )
 /// ```
+/// {@category opengl}
 void glTexCoord1dv(Pointer<Double> v) {
   final glTexCoord1dvAsFunction = _glTexCoord1dv
       .cast<NativeFunction<Void Function(Pointer<Double> v)>>()
@@ -28946,6 +29115,7 @@ late Pointer<NativeFunction<Void Function()>> _glTexCoord1fv;
 /// ```c
 /// GLAPI void GLAPIENTRY glTexCoord1fv( const GLfloat *v )
 /// ```
+/// {@category opengl}
 void glTexCoord1fv(Pointer<Float> v) {
   final glTexCoord1fvAsFunction = _glTexCoord1fv
       .cast<NativeFunction<Void Function(Pointer<Float> v)>>()
@@ -28959,6 +29129,7 @@ late Pointer<NativeFunction<Void Function()>> _glTexCoord1iv;
 /// ```c
 /// GLAPI void GLAPIENTRY glTexCoord1iv( const GLint *v )
 /// ```
+/// {@category opengl}
 void glTexCoord1iv(Pointer<Int32> v) {
   final glTexCoord1ivAsFunction = _glTexCoord1iv
       .cast<NativeFunction<Void Function(Pointer<Int32> v)>>()
@@ -28972,6 +29143,7 @@ late Pointer<NativeFunction<Void Function()>> _glTexCoord1sv;
 /// ```c
 /// GLAPI void GLAPIENTRY glTexCoord1sv( const GLshort *v )
 /// ```
+/// {@category opengl}
 void glTexCoord1sv(Pointer<Int16> v) {
   final glTexCoord1svAsFunction = _glTexCoord1sv
       .cast<NativeFunction<Void Function(Pointer<Int16> v)>>()
@@ -28985,6 +29157,7 @@ late Pointer<NativeFunction<Void Function()>> _glTexCoord2dv;
 /// ```c
 /// GLAPI void GLAPIENTRY glTexCoord2dv( const GLdouble *v )
 /// ```
+/// {@category opengl}
 void glTexCoord2dv(Pointer<Double> v) {
   final glTexCoord2dvAsFunction = _glTexCoord2dv
       .cast<NativeFunction<Void Function(Pointer<Double> v)>>()
@@ -28998,6 +29171,7 @@ late Pointer<NativeFunction<Void Function()>> _glTexCoord2fv;
 /// ```c
 /// GLAPI void GLAPIENTRY glTexCoord2fv( const GLfloat *v )
 /// ```
+/// {@category opengl}
 void glTexCoord2fv(Pointer<Float> v) {
   final glTexCoord2fvAsFunction = _glTexCoord2fv
       .cast<NativeFunction<Void Function(Pointer<Float> v)>>()
@@ -29011,6 +29185,7 @@ late Pointer<NativeFunction<Void Function()>> _glTexCoord2iv;
 /// ```c
 /// GLAPI void GLAPIENTRY glTexCoord2iv( const GLint *v )
 /// ```
+/// {@category opengl}
 void glTexCoord2iv(Pointer<Int32> v) {
   final glTexCoord2ivAsFunction = _glTexCoord2iv
       .cast<NativeFunction<Void Function(Pointer<Int32> v)>>()
@@ -29024,6 +29199,7 @@ late Pointer<NativeFunction<Void Function()>> _glTexCoord2sv;
 /// ```c
 /// GLAPI void GLAPIENTRY glTexCoord2sv( const GLshort *v )
 /// ```
+/// {@category opengl}
 void glTexCoord2sv(Pointer<Int16> v) {
   final glTexCoord2svAsFunction = _glTexCoord2sv
       .cast<NativeFunction<Void Function(Pointer<Int16> v)>>()
@@ -29037,6 +29213,7 @@ late Pointer<NativeFunction<Void Function()>> _glTexCoord3dv;
 /// ```c
 /// GLAPI void GLAPIENTRY glTexCoord3dv( const GLdouble *v )
 /// ```
+/// {@category opengl}
 void glTexCoord3dv(Pointer<Double> v) {
   final glTexCoord3dvAsFunction = _glTexCoord3dv
       .cast<NativeFunction<Void Function(Pointer<Double> v)>>()
@@ -29050,6 +29227,7 @@ late Pointer<NativeFunction<Void Function()>> _glTexCoord3fv;
 /// ```c
 /// GLAPI void GLAPIENTRY glTexCoord3fv( const GLfloat *v )
 /// ```
+/// {@category opengl}
 void glTexCoord3fv(Pointer<Float> v) {
   final glTexCoord3fvAsFunction = _glTexCoord3fv
       .cast<NativeFunction<Void Function(Pointer<Float> v)>>()
@@ -29063,6 +29241,7 @@ late Pointer<NativeFunction<Void Function()>> _glTexCoord3iv;
 /// ```c
 /// GLAPI void GLAPIENTRY glTexCoord3iv( const GLint *v )
 /// ```
+/// {@category opengl}
 void glTexCoord3iv(Pointer<Int32> v) {
   final glTexCoord3ivAsFunction = _glTexCoord3iv
       .cast<NativeFunction<Void Function(Pointer<Int32> v)>>()
@@ -29076,6 +29255,7 @@ late Pointer<NativeFunction<Void Function()>> _glTexCoord3sv;
 /// ```c
 /// GLAPI void GLAPIENTRY glTexCoord3sv( const GLshort *v )
 /// ```
+/// {@category opengl}
 void glTexCoord3sv(Pointer<Int16> v) {
   final glTexCoord3svAsFunction = _glTexCoord3sv
       .cast<NativeFunction<Void Function(Pointer<Int16> v)>>()
@@ -29089,6 +29269,7 @@ late Pointer<NativeFunction<Void Function()>> _glTexCoord4dv;
 /// ```c
 /// GLAPI void GLAPIENTRY glTexCoord4dv( const GLdouble *v )
 /// ```
+/// {@category opengl}
 void glTexCoord4dv(Pointer<Double> v) {
   final glTexCoord4dvAsFunction = _glTexCoord4dv
       .cast<NativeFunction<Void Function(Pointer<Double> v)>>()
@@ -29102,6 +29283,7 @@ late Pointer<NativeFunction<Void Function()>> _glTexCoord4fv;
 /// ```c
 /// GLAPI void GLAPIENTRY glTexCoord4fv( const GLfloat *v )
 /// ```
+/// {@category opengl}
 void glTexCoord4fv(Pointer<Float> v) {
   final glTexCoord4fvAsFunction = _glTexCoord4fv
       .cast<NativeFunction<Void Function(Pointer<Float> v)>>()
@@ -29115,6 +29297,7 @@ late Pointer<NativeFunction<Void Function()>> _glTexCoord4iv;
 /// ```c
 /// GLAPI void GLAPIENTRY glTexCoord4iv( const GLint *v )
 /// ```
+/// {@category opengl}
 void glTexCoord4iv(Pointer<Int32> v) {
   final glTexCoord4ivAsFunction = _glTexCoord4iv
       .cast<NativeFunction<Void Function(Pointer<Int32> v)>>()
@@ -29128,6 +29311,7 @@ late Pointer<NativeFunction<Void Function()>> _glTexCoord4sv;
 /// ```c
 /// GLAPI void GLAPIENTRY glTexCoord4sv( const GLshort *v )
 /// ```
+/// {@category opengl}
 void glTexCoord4sv(Pointer<Int16> v) {
   final glTexCoord4svAsFunction = _glTexCoord4sv
       .cast<NativeFunction<Void Function(Pointer<Int16> v)>>()
@@ -29141,6 +29325,7 @@ late Pointer<NativeFunction<Void Function()>> _glRasterPos2d;
 /// ```c
 /// GLAPI void GLAPIENTRY glRasterPos2d( GLdouble x, GLdouble y )
 /// ```
+/// {@category opengl}
 void glRasterPos2d(double x, double y) {
   final glRasterPos2dAsFunction = _glRasterPos2d
       .cast<NativeFunction<Void Function(Double x, Double y)>>()
@@ -29154,6 +29339,7 @@ late Pointer<NativeFunction<Void Function()>> _glRasterPos2f;
 /// ```c
 /// GLAPI void GLAPIENTRY glRasterPos2f( GLfloat x, GLfloat y )
 /// ```
+/// {@category opengl}
 void glRasterPos2f(double x, double y) {
   final glRasterPos2fAsFunction = _glRasterPos2f
       .cast<NativeFunction<Void Function(Float x, Float y)>>()
@@ -29167,6 +29353,7 @@ late Pointer<NativeFunction<Void Function()>> _glRasterPos2i;
 /// ```c
 /// GLAPI void GLAPIENTRY glRasterPos2i( GLint x, GLint y )
 /// ```
+/// {@category opengl}
 void glRasterPos2i(int x, int y) {
   final glRasterPos2iAsFunction = _glRasterPos2i
       .cast<NativeFunction<Void Function(Int32 x, Int32 y)>>()
@@ -29180,6 +29367,7 @@ late Pointer<NativeFunction<Void Function()>> _glRasterPos2s;
 /// ```c
 /// GLAPI void GLAPIENTRY glRasterPos2s( GLshort x, GLshort y )
 /// ```
+/// {@category opengl}
 void glRasterPos2s(int x, int y) {
   final glRasterPos2sAsFunction = _glRasterPos2s
       .cast<NativeFunction<Void Function(Int16 x, Int16 y)>>()
@@ -29193,6 +29381,7 @@ late Pointer<NativeFunction<Void Function()>> _glRasterPos3d;
 /// ```c
 /// GLAPI void GLAPIENTRY glRasterPos3d( GLdouble x, GLdouble y, GLdouble z )
 /// ```
+/// {@category opengl}
 void glRasterPos3d(double x, double y, double z) {
   final glRasterPos3dAsFunction = _glRasterPos3d
       .cast<NativeFunction<Void Function(Double x, Double y, Double z)>>()
@@ -29206,6 +29395,7 @@ late Pointer<NativeFunction<Void Function()>> _glRasterPos3f;
 /// ```c
 /// GLAPI void GLAPIENTRY glRasterPos3f( GLfloat x, GLfloat y, GLfloat z )
 /// ```
+/// {@category opengl}
 void glRasterPos3f(double x, double y, double z) {
   final glRasterPos3fAsFunction = _glRasterPos3f
       .cast<NativeFunction<Void Function(Float x, Float y, Float z)>>()
@@ -29219,6 +29409,7 @@ late Pointer<NativeFunction<Void Function()>> _glRasterPos3i;
 /// ```c
 /// GLAPI void GLAPIENTRY glRasterPos3i( GLint x, GLint y, GLint z )
 /// ```
+/// {@category opengl}
 void glRasterPos3i(int x, int y, int z) {
   final glRasterPos3iAsFunction = _glRasterPos3i
       .cast<NativeFunction<Void Function(Int32 x, Int32 y, Int32 z)>>()
@@ -29232,6 +29423,7 @@ late Pointer<NativeFunction<Void Function()>> _glRasterPos3s;
 /// ```c
 /// GLAPI void GLAPIENTRY glRasterPos3s( GLshort x, GLshort y, GLshort z )
 /// ```
+/// {@category opengl}
 void glRasterPos3s(int x, int y, int z) {
   final glRasterPos3sAsFunction = _glRasterPos3s
       .cast<NativeFunction<Void Function(Int16 x, Int16 y, Int16 z)>>()
@@ -29245,6 +29437,7 @@ late Pointer<NativeFunction<Void Function()>> _glRasterPos4d;
 /// ```c
 /// GLAPI void GLAPIENTRY glRasterPos4d( GLdouble x, GLdouble y, GLdouble z, GLdouble w )
 /// ```
+/// {@category opengl}
 void glRasterPos4d(double x, double y, double z, double w) {
   final glRasterPos4dAsFunction = _glRasterPos4d
       .cast<
@@ -29260,6 +29453,7 @@ late Pointer<NativeFunction<Void Function()>> _glRasterPos4f;
 /// ```c
 /// GLAPI void GLAPIENTRY glRasterPos4f( GLfloat x, GLfloat y, GLfloat z, GLfloat w )
 /// ```
+/// {@category opengl}
 void glRasterPos4f(double x, double y, double z, double w) {
   final glRasterPos4fAsFunction = _glRasterPos4f
       .cast<NativeFunction<Void Function(Float x, Float y, Float z, Float w)>>()
@@ -29273,6 +29467,7 @@ late Pointer<NativeFunction<Void Function()>> _glRasterPos4i;
 /// ```c
 /// GLAPI void GLAPIENTRY glRasterPos4i( GLint x, GLint y, GLint z, GLint w )
 /// ```
+/// {@category opengl}
 void glRasterPos4i(int x, int y, int z, int w) {
   final glRasterPos4iAsFunction = _glRasterPos4i
       .cast<NativeFunction<Void Function(Int32 x, Int32 y, Int32 z, Int32 w)>>()
@@ -29286,6 +29481,7 @@ late Pointer<NativeFunction<Void Function()>> _glRasterPos4s;
 /// ```c
 /// GLAPI void GLAPIENTRY glRasterPos4s( GLshort x, GLshort y, GLshort z, GLshort w )
 /// ```
+/// {@category opengl}
 void glRasterPos4s(int x, int y, int z, int w) {
   final glRasterPos4sAsFunction = _glRasterPos4s
       .cast<NativeFunction<Void Function(Int16 x, Int16 y, Int16 z, Int16 w)>>()
@@ -29299,6 +29495,7 @@ late Pointer<NativeFunction<Void Function()>> _glRasterPos2dv;
 /// ```c
 /// GLAPI void GLAPIENTRY glRasterPos2dv( const GLdouble *v )
 /// ```
+/// {@category opengl}
 void glRasterPos2dv(Pointer<Double> v) {
   final glRasterPos2dvAsFunction = _glRasterPos2dv
       .cast<NativeFunction<Void Function(Pointer<Double> v)>>()
@@ -29312,6 +29509,7 @@ late Pointer<NativeFunction<Void Function()>> _glRasterPos2fv;
 /// ```c
 /// GLAPI void GLAPIENTRY glRasterPos2fv( const GLfloat *v )
 /// ```
+/// {@category opengl}
 void glRasterPos2fv(Pointer<Float> v) {
   final glRasterPos2fvAsFunction = _glRasterPos2fv
       .cast<NativeFunction<Void Function(Pointer<Float> v)>>()
@@ -29325,6 +29523,7 @@ late Pointer<NativeFunction<Void Function()>> _glRasterPos2iv;
 /// ```c
 /// GLAPI void GLAPIENTRY glRasterPos2iv( const GLint *v )
 /// ```
+/// {@category opengl}
 void glRasterPos2iv(Pointer<Int32> v) {
   final glRasterPos2ivAsFunction = _glRasterPos2iv
       .cast<NativeFunction<Void Function(Pointer<Int32> v)>>()
@@ -29338,6 +29537,7 @@ late Pointer<NativeFunction<Void Function()>> _glRasterPos2sv;
 /// ```c
 /// GLAPI void GLAPIENTRY glRasterPos2sv( const GLshort *v )
 /// ```
+/// {@category opengl}
 void glRasterPos2sv(Pointer<Int16> v) {
   final glRasterPos2svAsFunction = _glRasterPos2sv
       .cast<NativeFunction<Void Function(Pointer<Int16> v)>>()
@@ -29351,6 +29551,7 @@ late Pointer<NativeFunction<Void Function()>> _glRasterPos3dv;
 /// ```c
 /// GLAPI void GLAPIENTRY glRasterPos3dv( const GLdouble *v )
 /// ```
+/// {@category opengl}
 void glRasterPos3dv(Pointer<Double> v) {
   final glRasterPos3dvAsFunction = _glRasterPos3dv
       .cast<NativeFunction<Void Function(Pointer<Double> v)>>()
@@ -29364,6 +29565,7 @@ late Pointer<NativeFunction<Void Function()>> _glRasterPos3fv;
 /// ```c
 /// GLAPI void GLAPIENTRY glRasterPos3fv( const GLfloat *v )
 /// ```
+/// {@category opengl}
 void glRasterPos3fv(Pointer<Float> v) {
   final glRasterPos3fvAsFunction = _glRasterPos3fv
       .cast<NativeFunction<Void Function(Pointer<Float> v)>>()
@@ -29377,6 +29579,7 @@ late Pointer<NativeFunction<Void Function()>> _glRasterPos3iv;
 /// ```c
 /// GLAPI void GLAPIENTRY glRasterPos3iv( const GLint *v )
 /// ```
+/// {@category opengl}
 void glRasterPos3iv(Pointer<Int32> v) {
   final glRasterPos3ivAsFunction = _glRasterPos3iv
       .cast<NativeFunction<Void Function(Pointer<Int32> v)>>()
@@ -29390,6 +29593,7 @@ late Pointer<NativeFunction<Void Function()>> _glRasterPos3sv;
 /// ```c
 /// GLAPI void GLAPIENTRY glRasterPos3sv( const GLshort *v )
 /// ```
+/// {@category opengl}
 void glRasterPos3sv(Pointer<Int16> v) {
   final glRasterPos3svAsFunction = _glRasterPos3sv
       .cast<NativeFunction<Void Function(Pointer<Int16> v)>>()
@@ -29403,6 +29607,7 @@ late Pointer<NativeFunction<Void Function()>> _glRasterPos4dv;
 /// ```c
 /// GLAPI void GLAPIENTRY glRasterPos4dv( const GLdouble *v )
 /// ```
+/// {@category opengl}
 void glRasterPos4dv(Pointer<Double> v) {
   final glRasterPos4dvAsFunction = _glRasterPos4dv
       .cast<NativeFunction<Void Function(Pointer<Double> v)>>()
@@ -29416,6 +29621,7 @@ late Pointer<NativeFunction<Void Function()>> _glRasterPos4fv;
 /// ```c
 /// GLAPI void GLAPIENTRY glRasterPos4fv( const GLfloat *v )
 /// ```
+/// {@category opengl}
 void glRasterPos4fv(Pointer<Float> v) {
   final glRasterPos4fvAsFunction = _glRasterPos4fv
       .cast<NativeFunction<Void Function(Pointer<Float> v)>>()
@@ -29429,6 +29635,7 @@ late Pointer<NativeFunction<Void Function()>> _glRasterPos4iv;
 /// ```c
 /// GLAPI void GLAPIENTRY glRasterPos4iv( const GLint *v )
 /// ```
+/// {@category opengl}
 void glRasterPos4iv(Pointer<Int32> v) {
   final glRasterPos4ivAsFunction = _glRasterPos4iv
       .cast<NativeFunction<Void Function(Pointer<Int32> v)>>()
@@ -29442,6 +29649,7 @@ late Pointer<NativeFunction<Void Function()>> _glRasterPos4sv;
 /// ```c
 /// GLAPI void GLAPIENTRY glRasterPos4sv( const GLshort *v )
 /// ```
+/// {@category opengl}
 void glRasterPos4sv(Pointer<Int16> v) {
   final glRasterPos4svAsFunction = _glRasterPos4sv
       .cast<NativeFunction<Void Function(Pointer<Int16> v)>>()
@@ -29455,6 +29663,7 @@ late Pointer<NativeFunction<Void Function()>> _glRectd;
 /// ```c
 /// GLAPI void GLAPIENTRY glRectd( GLdouble x1, GLdouble y1, GLdouble x2, GLdouble y2 )
 /// ```
+/// {@category opengl}
 void glRectd(double x1, double y1, double x2, double y2) {
   final glRectdAsFunction = _glRectd
       .cast<
@@ -29472,6 +29681,7 @@ late Pointer<NativeFunction<Void Function()>> _glRectf;
 /// ```c
 /// GLAPI void GLAPIENTRY glRectf( GLfloat x1, GLfloat y1, GLfloat x2, GLfloat y2 )
 /// ```
+/// {@category opengl}
 void glRectf(double x1, double y1, double x2, double y2) {
   final glRectfAsFunction = _glRectf
       .cast<
@@ -29487,6 +29697,7 @@ late Pointer<NativeFunction<Void Function()>> _glRecti;
 /// ```c
 /// GLAPI void GLAPIENTRY glRecti( GLint x1, GLint y1, GLint x2, GLint y2 )
 /// ```
+/// {@category opengl}
 void glRecti(int x1, int y1, int x2, int y2) {
   final glRectiAsFunction = _glRecti
       .cast<
@@ -29502,6 +29713,7 @@ late Pointer<NativeFunction<Void Function()>> _glRects;
 /// ```c
 /// GLAPI void GLAPIENTRY glRects( GLshort x1, GLshort y1, GLshort x2, GLshort y2 )
 /// ```
+/// {@category opengl}
 void glRects(int x1, int y1, int x2, int y2) {
   final glRectsAsFunction = _glRects
       .cast<
@@ -29517,6 +29729,7 @@ late Pointer<NativeFunction<Void Function()>> _glRectdv;
 /// ```c
 /// GLAPI void GLAPIENTRY glRectdv( const GLdouble *v1, const GLdouble *v2 )
 /// ```
+/// {@category opengl}
 void glRectdv(Pointer<Double> v1, Pointer<Double> v2) {
   final glRectdvAsFunction = _glRectdv
       .cast<
@@ -29532,6 +29745,7 @@ late Pointer<NativeFunction<Void Function()>> _glRectfv;
 /// ```c
 /// GLAPI void GLAPIENTRY glRectfv( const GLfloat *v1, const GLfloat *v2 )
 /// ```
+/// {@category opengl}
 void glRectfv(Pointer<Float> v1, Pointer<Float> v2) {
   final glRectfvAsFunction = _glRectfv
       .cast<
@@ -29547,6 +29761,7 @@ late Pointer<NativeFunction<Void Function()>> _glRectiv;
 /// ```c
 /// GLAPI void GLAPIENTRY glRectiv( const GLint *v1, const GLint *v2 )
 /// ```
+/// {@category opengl}
 void glRectiv(Pointer<Int32> v1, Pointer<Int32> v2) {
   final glRectivAsFunction = _glRectiv
       .cast<
@@ -29562,6 +29777,7 @@ late Pointer<NativeFunction<Void Function()>> _glRectsv;
 /// ```c
 /// GLAPI void GLAPIENTRY glRectsv( const GLshort *v1, const GLshort *v2 )
 /// ```
+/// {@category opengl}
 void glRectsv(Pointer<Int16> v1, Pointer<Int16> v2) {
   final glRectsvAsFunction = _glRectsv
       .cast<
@@ -29577,6 +29793,7 @@ late Pointer<NativeFunction<Void Function()>> _glVertexPointer;
 /// ```c
 /// GLAPI void GLAPIENTRY glVertexPointer( GLint size, GLenum type, GLsizei stride, const GLvoid *ptr )
 /// ```
+/// {@category opengl}
 void glVertexPointer(int size, int type, int stride, Pointer<NativeType> ptr) {
   final glVertexPointerAsFunction = _glVertexPointer
       .cast<
@@ -29601,6 +29818,7 @@ late Pointer<NativeFunction<Void Function()>> _glNormalPointer;
 /// ```c
 /// GLAPI void GLAPIENTRY glNormalPointer( GLenum type, GLsizei stride, const GLvoid *ptr )
 /// ```
+/// {@category opengl}
 void glNormalPointer(int type, int stride, Pointer<NativeType> ptr) {
   final glNormalPointerAsFunction = _glNormalPointer
       .cast<
@@ -29620,6 +29838,7 @@ late Pointer<NativeFunction<Void Function()>> _glColorPointer;
 /// ```c
 /// GLAPI void GLAPIENTRY glColorPointer( GLint size, GLenum type, GLsizei stride, const GLvoid *ptr )
 /// ```
+/// {@category opengl}
 void glColorPointer(int size, int type, int stride, Pointer<NativeType> ptr) {
   final glColorPointerAsFunction = _glColorPointer
       .cast<
@@ -29644,6 +29863,7 @@ late Pointer<NativeFunction<Void Function()>> _glIndexPointer;
 /// ```c
 /// GLAPI void GLAPIENTRY glIndexPointer( GLenum type, GLsizei stride, const GLvoid *ptr )
 /// ```
+/// {@category opengl}
 void glIndexPointer(int type, int stride, Pointer<NativeType> ptr) {
   final glIndexPointerAsFunction = _glIndexPointer
       .cast<
@@ -29663,6 +29883,7 @@ late Pointer<NativeFunction<Void Function()>> _glTexCoordPointer;
 /// ```c
 /// GLAPI void GLAPIENTRY glTexCoordPointer( GLint size, GLenum type, GLsizei stride, const GLvoid *ptr )
 /// ```
+/// {@category opengl}
 void glTexCoordPointer(
   int size,
   int type,
@@ -29692,6 +29913,7 @@ late Pointer<NativeFunction<Void Function()>> _glEdgeFlagPointer;
 /// ```c
 /// GLAPI void GLAPIENTRY glEdgeFlagPointer( GLsizei stride, const GLvoid *ptr )
 /// ```
+/// {@category opengl}
 void glEdgeFlagPointer(int stride, Pointer<NativeType> ptr) {
   final glEdgeFlagPointerAsFunction = _glEdgeFlagPointer
       .cast<
@@ -29707,6 +29929,7 @@ late Pointer<NativeFunction<Void Function()>> _glGetPointerv;
 /// ```c
 /// GLAPI void GLAPIENTRY glGetPointerv( GLenum pname, GLvoid **params )
 /// ```
+/// {@category opengl}
 void glGetPointerv(int pname, Pointer<Pointer<NativeType>> params) {
   final glGetPointervAsFunction = _glGetPointerv
       .cast<
@@ -29726,6 +29949,7 @@ late Pointer<NativeFunction<Void Function()>> _glArrayElement;
 /// ```c
 /// GLAPI void GLAPIENTRY glArrayElement( GLint i )
 /// ```
+/// {@category opengl}
 void glArrayElement(int i) {
   final glArrayElementAsFunction = _glArrayElement
       .cast<NativeFunction<Void Function(Int32 i)>>()
@@ -29739,6 +29963,7 @@ late Pointer<NativeFunction<Void Function()>> _glDrawArrays;
 /// ```c
 /// GLAPI void GLAPIENTRY glDrawArrays( GLenum mode, GLint first, GLsizei count )
 /// ```
+/// {@category opengl}
 void glDrawArrays(int mode, int first, int count) {
   final glDrawArraysAsFunction = _glDrawArrays
       .cast<
@@ -29754,6 +29979,7 @@ late Pointer<NativeFunction<Void Function()>> _glDrawElements;
 /// ```c
 /// GLAPI void GLAPIENTRY glDrawElements( GLenum mode, GLsizei count, GLenum type, const GLvoid *indices )
 /// ```
+/// {@category opengl}
 void glDrawElements(
   int mode,
   int count,
@@ -29788,6 +30014,7 @@ late Pointer<NativeFunction<Void Function()>> _glInterleavedArrays;
 /// ```c
 /// GLAPI void GLAPIENTRY glInterleavedArrays( GLenum format, GLsizei stride, const GLvoid *pointer )
 /// ```
+/// {@category opengl}
 void glInterleavedArrays(int format, int stride, Pointer<NativeType> pointer) {
   final glInterleavedArraysAsFunction = _glInterleavedArrays
       .cast<
@@ -29811,6 +30038,7 @@ late Pointer<NativeFunction<Void Function()>> _glShadeModel;
 /// ```c
 /// GLAPI void GLAPIENTRY glShadeModel( GLenum mode )
 /// ```
+/// {@category opengl}
 void glShadeModel(int mode) {
   final glShadeModelAsFunction = _glShadeModel
       .cast<NativeFunction<Void Function(Uint32 mode)>>()
@@ -29824,6 +30052,7 @@ late Pointer<NativeFunction<Void Function()>> _glLightf;
 /// ```c
 /// GLAPI void GLAPIENTRY glLightf( GLenum light, GLenum pname, GLfloat param )
 /// ```
+/// {@category opengl}
 void glLightf(int light, int pname, double param) {
   final glLightfAsFunction = _glLightf
       .cast<
@@ -29839,6 +30068,7 @@ late Pointer<NativeFunction<Void Function()>> _glLighti;
 /// ```c
 /// GLAPI void GLAPIENTRY glLighti( GLenum light, GLenum pname, GLint param )
 /// ```
+/// {@category opengl}
 void glLighti(int light, int pname, int param) {
   final glLightiAsFunction = _glLighti
       .cast<
@@ -29854,6 +30084,7 @@ late Pointer<NativeFunction<Void Function()>> _glLightfv;
 /// ```c
 /// GLAPI void GLAPIENTRY glLightfv( GLenum light, GLenum pname, const GLfloat *params )
 /// ```
+/// {@category opengl}
 void glLightfv(int light, int pname, Pointer<Float> params) {
   final glLightfvAsFunction = _glLightfv
       .cast<
@@ -29871,6 +30102,7 @@ late Pointer<NativeFunction<Void Function()>> _glLightiv;
 /// ```c
 /// GLAPI void GLAPIENTRY glLightiv( GLenum light, GLenum pname, const GLint *params )
 /// ```
+/// {@category opengl}
 void glLightiv(int light, int pname, Pointer<Int32> params) {
   final glLightivAsFunction = _glLightiv
       .cast<
@@ -29888,6 +30120,7 @@ late Pointer<NativeFunction<Void Function()>> _glGetLightfv;
 /// ```c
 /// GLAPI void GLAPIENTRY glGetLightfv( GLenum light, GLenum pname, GLfloat *params )
 /// ```
+/// {@category opengl}
 void glGetLightfv(int light, int pname, Pointer<Float> params) {
   final glGetLightfvAsFunction = _glGetLightfv
       .cast<
@@ -29905,6 +30138,7 @@ late Pointer<NativeFunction<Void Function()>> _glGetLightiv;
 /// ```c
 /// GLAPI void GLAPIENTRY glGetLightiv( GLenum light, GLenum pname, GLint *params )
 /// ```
+/// {@category opengl}
 void glGetLightiv(int light, int pname, Pointer<Int32> params) {
   final glGetLightivAsFunction = _glGetLightiv
       .cast<
@@ -29922,6 +30156,7 @@ late Pointer<NativeFunction<Void Function()>> _glLightModelf;
 /// ```c
 /// GLAPI void GLAPIENTRY glLightModelf( GLenum pname, GLfloat param )
 /// ```
+/// {@category opengl}
 void glLightModelf(int pname, double param) {
   final glLightModelfAsFunction = _glLightModelf
       .cast<NativeFunction<Void Function(Uint32 pname, Float param)>>()
@@ -29935,6 +30170,7 @@ late Pointer<NativeFunction<Void Function()>> _glLightModeli;
 /// ```c
 /// GLAPI void GLAPIENTRY glLightModeli( GLenum pname, GLint param )
 /// ```
+/// {@category opengl}
 void glLightModeli(int pname, int param) {
   final glLightModeliAsFunction = _glLightModeli
       .cast<NativeFunction<Void Function(Uint32 pname, Int32 param)>>()
@@ -29948,6 +30184,7 @@ late Pointer<NativeFunction<Void Function()>> _glLightModelfv;
 /// ```c
 /// GLAPI void GLAPIENTRY glLightModelfv( GLenum pname, const GLfloat *params )
 /// ```
+/// {@category opengl}
 void glLightModelfv(int pname, Pointer<Float> params) {
   final glLightModelfvAsFunction = _glLightModelfv
       .cast<
@@ -29963,6 +30200,7 @@ late Pointer<NativeFunction<Void Function()>> _glLightModeliv;
 /// ```c
 /// GLAPI void GLAPIENTRY glLightModeliv( GLenum pname, const GLint *params )
 /// ```
+/// {@category opengl}
 void glLightModeliv(int pname, Pointer<Int32> params) {
   final glLightModelivAsFunction = _glLightModeliv
       .cast<
@@ -29978,6 +30216,7 @@ late Pointer<NativeFunction<Void Function()>> _glMaterialf;
 /// ```c
 /// GLAPI void GLAPIENTRY glMaterialf( GLenum face, GLenum pname, GLfloat param )
 /// ```
+/// {@category opengl}
 void glMaterialf(int face, int pname, double param) {
   final glMaterialfAsFunction = _glMaterialf
       .cast<
@@ -29993,6 +30232,7 @@ late Pointer<NativeFunction<Void Function()>> _glMateriali;
 /// ```c
 /// GLAPI void GLAPIENTRY glMateriali( GLenum face, GLenum pname, GLint param )
 /// ```
+/// {@category opengl}
 void glMateriali(int face, int pname, int param) {
   final glMaterialiAsFunction = _glMateriali
       .cast<
@@ -30008,6 +30248,7 @@ late Pointer<NativeFunction<Void Function()>> _glMaterialfv;
 /// ```c
 /// GLAPI void GLAPIENTRY glMaterialfv( GLenum face, GLenum pname, const GLfloat *params )
 /// ```
+/// {@category opengl}
 void glMaterialfv(int face, int pname, Pointer<Float> params) {
   final glMaterialfvAsFunction = _glMaterialfv
       .cast<
@@ -30025,6 +30266,7 @@ late Pointer<NativeFunction<Void Function()>> _glMaterialiv;
 /// ```c
 /// GLAPI void GLAPIENTRY glMaterialiv( GLenum face, GLenum pname, const GLint *params )
 /// ```
+/// {@category opengl}
 void glMaterialiv(int face, int pname, Pointer<Int32> params) {
   final glMaterialivAsFunction = _glMaterialiv
       .cast<
@@ -30042,6 +30284,7 @@ late Pointer<NativeFunction<Void Function()>> _glGetMaterialfv;
 /// ```c
 /// GLAPI void GLAPIENTRY glGetMaterialfv( GLenum face, GLenum pname, GLfloat *params )
 /// ```
+/// {@category opengl}
 void glGetMaterialfv(int face, int pname, Pointer<Float> params) {
   final glGetMaterialfvAsFunction = _glGetMaterialfv
       .cast<
@@ -30059,6 +30302,7 @@ late Pointer<NativeFunction<Void Function()>> _glGetMaterialiv;
 /// ```c
 /// GLAPI void GLAPIENTRY glGetMaterialiv( GLenum face, GLenum pname, GLint *params )
 /// ```
+/// {@category opengl}
 void glGetMaterialiv(int face, int pname, Pointer<Int32> params) {
   final glGetMaterialivAsFunction = _glGetMaterialiv
       .cast<
@@ -30076,6 +30320,7 @@ late Pointer<NativeFunction<Void Function()>> _glColorMaterial;
 /// ```c
 /// GLAPI void GLAPIENTRY glColorMaterial( GLenum face, GLenum mode )
 /// ```
+/// {@category opengl}
 void glColorMaterial(int face, int mode) {
   final glColorMaterialAsFunction = _glColorMaterial
       .cast<NativeFunction<Void Function(Uint32 face, Uint32 mode)>>()
@@ -30089,6 +30334,7 @@ late Pointer<NativeFunction<Void Function()>> _glPixelZoom;
 /// ```c
 /// GLAPI void GLAPIENTRY glPixelZoom( GLfloat xfactor, GLfloat yfactor )
 /// ```
+/// {@category opengl}
 void glPixelZoom(double xfactor, double yfactor) {
   final glPixelZoomAsFunction = _glPixelZoom
       .cast<NativeFunction<Void Function(Float xfactor, Float yfactor)>>()
@@ -30102,6 +30348,7 @@ late Pointer<NativeFunction<Void Function()>> _glPixelStoref;
 /// ```c
 /// GLAPI void GLAPIENTRY glPixelStoref( GLenum pname, GLfloat param )
 /// ```
+/// {@category opengl}
 void glPixelStoref(int pname, double param) {
   final glPixelStorefAsFunction = _glPixelStoref
       .cast<NativeFunction<Void Function(Uint32 pname, Float param)>>()
@@ -30115,6 +30362,7 @@ late Pointer<NativeFunction<Void Function()>> _glPixelStorei;
 /// ```c
 /// GLAPI void GLAPIENTRY glPixelStorei( GLenum pname, GLint param )
 /// ```
+/// {@category opengl}
 void glPixelStorei(int pname, int param) {
   final glPixelStoreiAsFunction = _glPixelStorei
       .cast<NativeFunction<Void Function(Uint32 pname, Int32 param)>>()
@@ -30128,6 +30376,7 @@ late Pointer<NativeFunction<Void Function()>> _glPixelTransferf;
 /// ```c
 /// GLAPI void GLAPIENTRY glPixelTransferf( GLenum pname, GLfloat param )
 /// ```
+/// {@category opengl}
 void glPixelTransferf(int pname, double param) {
   final glPixelTransferfAsFunction = _glPixelTransferf
       .cast<NativeFunction<Void Function(Uint32 pname, Float param)>>()
@@ -30141,6 +30390,7 @@ late Pointer<NativeFunction<Void Function()>> _glPixelTransferi;
 /// ```c
 /// GLAPI void GLAPIENTRY glPixelTransferi( GLenum pname, GLint param )
 /// ```
+/// {@category opengl}
 void glPixelTransferi(int pname, int param) {
   final glPixelTransferiAsFunction = _glPixelTransferi
       .cast<NativeFunction<Void Function(Uint32 pname, Int32 param)>>()
@@ -30154,6 +30404,7 @@ late Pointer<NativeFunction<Void Function()>> _glPixelMapfv;
 /// ```c
 /// GLAPI void GLAPIENTRY glPixelMapfv( GLenum map, GLsizei mapsize, const GLfloat *values )
 /// ```
+/// {@category opengl}
 void glPixelMapfv(int map, int mapsize, Pointer<Float> values) {
   final glPixelMapfvAsFunction = _glPixelMapfv
       .cast<
@@ -30171,6 +30422,7 @@ late Pointer<NativeFunction<Void Function()>> _glPixelMapuiv;
 /// ```c
 /// GLAPI void GLAPIENTRY glPixelMapuiv( GLenum map, GLsizei mapsize, const GLuint *values )
 /// ```
+/// {@category opengl}
 void glPixelMapuiv(int map, int mapsize, Pointer<Uint32> values) {
   final glPixelMapuivAsFunction = _glPixelMapuiv
       .cast<
@@ -30190,6 +30442,7 @@ late Pointer<NativeFunction<Void Function()>> _glPixelMapusv;
 /// ```c
 /// GLAPI void GLAPIENTRY glPixelMapusv( GLenum map, GLsizei mapsize, const GLushort *values )
 /// ```
+/// {@category opengl}
 void glPixelMapusv(int map, int mapsize, Pointer<Uint16> values) {
   final glPixelMapusvAsFunction = _glPixelMapusv
       .cast<
@@ -30209,6 +30462,7 @@ late Pointer<NativeFunction<Void Function()>> _glGetPixelMapfv;
 /// ```c
 /// GLAPI void GLAPIENTRY glGetPixelMapfv( GLenum map, GLfloat *values )
 /// ```
+/// {@category opengl}
 void glGetPixelMapfv(int map, Pointer<Float> values) {
   final glGetPixelMapfvAsFunction = _glGetPixelMapfv
       .cast<NativeFunction<Void Function(Uint32 map, Pointer<Float> values)>>()
@@ -30222,6 +30476,7 @@ late Pointer<NativeFunction<Void Function()>> _glGetPixelMapuiv;
 /// ```c
 /// GLAPI void GLAPIENTRY glGetPixelMapuiv( GLenum map, GLuint *values )
 /// ```
+/// {@category opengl}
 void glGetPixelMapuiv(int map, Pointer<Uint32> values) {
   final glGetPixelMapuivAsFunction = _glGetPixelMapuiv
       .cast<NativeFunction<Void Function(Uint32 map, Pointer<Uint32> values)>>()
@@ -30235,6 +30490,7 @@ late Pointer<NativeFunction<Void Function()>> _glGetPixelMapusv;
 /// ```c
 /// GLAPI void GLAPIENTRY glGetPixelMapusv( GLenum map, GLushort *values )
 /// ```
+/// {@category opengl}
 void glGetPixelMapusv(int map, Pointer<Uint16> values) {
   final glGetPixelMapusvAsFunction = _glGetPixelMapusv
       .cast<NativeFunction<Void Function(Uint32 map, Pointer<Uint16> values)>>()
@@ -30248,6 +30504,7 @@ late Pointer<NativeFunction<Void Function()>> _glBitmap;
 /// ```c
 /// GLAPI void GLAPIENTRY glBitmap( GLsizei width, GLsizei height, GLfloat xorig, GLfloat yorig, GLfloat xmove, GLfloat ymove, const GLubyte *bitmap )
 /// ```
+/// {@category opengl}
 void glBitmap(
   int width,
   int height,
@@ -30291,6 +30548,7 @@ late Pointer<NativeFunction<Void Function()>> _glReadPixels;
 /// ```c
 /// GLAPI void GLAPIENTRY glReadPixels( GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type, GLvoid *pixels )
 /// ```
+/// {@category opengl}
 void glReadPixels(
   int x,
   int y,
@@ -30334,6 +30592,7 @@ late Pointer<NativeFunction<Void Function()>> _glDrawPixels;
 /// ```c
 /// GLAPI void GLAPIENTRY glDrawPixels( GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid *pixels )
 /// ```
+/// {@category opengl}
 void glDrawPixels(
   int width,
   int height,
@@ -30371,6 +30630,7 @@ late Pointer<NativeFunction<Void Function()>> _glCopyPixels;
 /// ```c
 /// GLAPI void GLAPIENTRY glCopyPixels( GLint x, GLint y, GLsizei width, GLsizei height, GLenum type )
 /// ```
+/// {@category opengl}
 void glCopyPixels(int x, int y, int width, int height, int type) {
   final glCopyPixelsAsFunction = _glCopyPixels
       .cast<
@@ -30396,6 +30656,7 @@ late Pointer<NativeFunction<Void Function()>> _glStencilFunc;
 /// ```c
 /// GLAPI void GLAPIENTRY glStencilFunc( GLenum func, GLint ref, GLuint mask )
 /// ```
+/// {@category opengl}
 void glStencilFunc(int func, int ref, int mask) {
   final glStencilFuncAsFunction = _glStencilFunc
       .cast<
@@ -30411,6 +30672,7 @@ late Pointer<NativeFunction<Void Function()>> _glStencilMask;
 /// ```c
 /// GLAPI void GLAPIENTRY glStencilMask( GLuint mask )
 /// ```
+/// {@category opengl}
 void glStencilMask(int mask) {
   final glStencilMaskAsFunction = _glStencilMask
       .cast<NativeFunction<Void Function(Uint32 mask)>>()
@@ -30424,6 +30686,7 @@ late Pointer<NativeFunction<Void Function()>> _glStencilOp;
 /// ```c
 /// GLAPI void GLAPIENTRY glStencilOp( GLenum fail, GLenum zfail, GLenum zpass )
 /// ```
+/// {@category opengl}
 void glStencilOp(int fail, int zfail, int zpass) {
   final glStencilOpAsFunction = _glStencilOp
       .cast<
@@ -30439,6 +30702,7 @@ late Pointer<NativeFunction<Void Function()>> _glClearStencil;
 /// ```c
 /// GLAPI void GLAPIENTRY glClearStencil( GLint s )
 /// ```
+/// {@category opengl}
 void glClearStencil(int s) {
   final glClearStencilAsFunction = _glClearStencil
       .cast<NativeFunction<Void Function(Int32 s)>>()
@@ -30452,6 +30716,7 @@ late Pointer<NativeFunction<Void Function()>> _glTexGend;
 /// ```c
 /// GLAPI void GLAPIENTRY glTexGend( GLenum coord, GLenum pname, GLdouble param )
 /// ```
+/// {@category opengl}
 void glTexGend(int coord, int pname, double param) {
   final glTexGendAsFunction = _glTexGend
       .cast<
@@ -30467,6 +30732,7 @@ late Pointer<NativeFunction<Void Function()>> _glTexGenf;
 /// ```c
 /// GLAPI void GLAPIENTRY glTexGenf( GLenum coord, GLenum pname, GLfloat param )
 /// ```
+/// {@category opengl}
 void glTexGenf(int coord, int pname, double param) {
   final glTexGenfAsFunction = _glTexGenf
       .cast<
@@ -30482,6 +30748,7 @@ late Pointer<NativeFunction<Void Function()>> _glTexGeni;
 /// ```c
 /// GLAPI void GLAPIENTRY glTexGeni( GLenum coord, GLenum pname, GLint param )
 /// ```
+/// {@category opengl}
 void glTexGeni(int coord, int pname, int param) {
   final glTexGeniAsFunction = _glTexGeni
       .cast<
@@ -30497,6 +30764,7 @@ late Pointer<NativeFunction<Void Function()>> _glTexGendv;
 /// ```c
 /// GLAPI void GLAPIENTRY glTexGendv( GLenum coord, GLenum pname, const GLdouble *params )
 /// ```
+/// {@category opengl}
 void glTexGendv(int coord, int pname, Pointer<Double> params) {
   final glTexGendvAsFunction = _glTexGendv
       .cast<
@@ -30516,6 +30784,7 @@ late Pointer<NativeFunction<Void Function()>> _glTexGenfv;
 /// ```c
 /// GLAPI void GLAPIENTRY glTexGenfv( GLenum coord, GLenum pname, const GLfloat *params )
 /// ```
+/// {@category opengl}
 void glTexGenfv(int coord, int pname, Pointer<Float> params) {
   final glTexGenfvAsFunction = _glTexGenfv
       .cast<
@@ -30533,6 +30802,7 @@ late Pointer<NativeFunction<Void Function()>> _glTexGeniv;
 /// ```c
 /// GLAPI void GLAPIENTRY glTexGeniv( GLenum coord, GLenum pname, const GLint *params )
 /// ```
+/// {@category opengl}
 void glTexGeniv(int coord, int pname, Pointer<Int32> params) {
   final glTexGenivAsFunction = _glTexGeniv
       .cast<
@@ -30550,6 +30820,7 @@ late Pointer<NativeFunction<Void Function()>> _glGetTexGendv;
 /// ```c
 /// GLAPI void GLAPIENTRY glGetTexGendv( GLenum coord, GLenum pname, GLdouble *params )
 /// ```
+/// {@category opengl}
 void glGetTexGendv(int coord, int pname, Pointer<Double> params) {
   final glGetTexGendvAsFunction = _glGetTexGendv
       .cast<
@@ -30569,6 +30840,7 @@ late Pointer<NativeFunction<Void Function()>> _glGetTexGenfv;
 /// ```c
 /// GLAPI void GLAPIENTRY glGetTexGenfv( GLenum coord, GLenum pname, GLfloat *params )
 /// ```
+/// {@category opengl}
 void glGetTexGenfv(int coord, int pname, Pointer<Float> params) {
   final glGetTexGenfvAsFunction = _glGetTexGenfv
       .cast<
@@ -30586,6 +30858,7 @@ late Pointer<NativeFunction<Void Function()>> _glGetTexGeniv;
 /// ```c
 /// GLAPI void GLAPIENTRY glGetTexGeniv( GLenum coord, GLenum pname, GLint *params )
 /// ```
+/// {@category opengl}
 void glGetTexGeniv(int coord, int pname, Pointer<Int32> params) {
   final glGetTexGenivAsFunction = _glGetTexGeniv
       .cast<
@@ -30603,6 +30876,7 @@ late Pointer<NativeFunction<Void Function()>> _glTexEnvf;
 /// ```c
 /// GLAPI void GLAPIENTRY glTexEnvf( GLenum target, GLenum pname, GLfloat param )
 /// ```
+/// {@category opengl}
 void glTexEnvf(int target, int pname, double param) {
   final glTexEnvfAsFunction = _glTexEnvf
       .cast<
@@ -30618,6 +30892,7 @@ late Pointer<NativeFunction<Void Function()>> _glTexEnvi;
 /// ```c
 /// GLAPI void GLAPIENTRY glTexEnvi( GLenum target, GLenum pname, GLint param )
 /// ```
+/// {@category opengl}
 void glTexEnvi(int target, int pname, int param) {
   final glTexEnviAsFunction = _glTexEnvi
       .cast<
@@ -30633,6 +30908,7 @@ late Pointer<NativeFunction<Void Function()>> _glTexEnvfv;
 /// ```c
 /// GLAPI void GLAPIENTRY glTexEnvfv( GLenum target, GLenum pname, const GLfloat *params )
 /// ```
+/// {@category opengl}
 void glTexEnvfv(int target, int pname, Pointer<Float> params) {
   final glTexEnvfvAsFunction = _glTexEnvfv
       .cast<
@@ -30652,6 +30928,7 @@ late Pointer<NativeFunction<Void Function()>> _glTexEnviv;
 /// ```c
 /// GLAPI void GLAPIENTRY glTexEnviv( GLenum target, GLenum pname, const GLint *params )
 /// ```
+/// {@category opengl}
 void glTexEnviv(int target, int pname, Pointer<Int32> params) {
   final glTexEnvivAsFunction = _glTexEnviv
       .cast<
@@ -30671,6 +30948,7 @@ late Pointer<NativeFunction<Void Function()>> _glGetTexEnvfv;
 /// ```c
 /// GLAPI void GLAPIENTRY glGetTexEnvfv( GLenum target, GLenum pname, GLfloat *params )
 /// ```
+/// {@category opengl}
 void glGetTexEnvfv(int target, int pname, Pointer<Float> params) {
   final glGetTexEnvfvAsFunction = _glGetTexEnvfv
       .cast<
@@ -30690,6 +30968,7 @@ late Pointer<NativeFunction<Void Function()>> _glGetTexEnviv;
 /// ```c
 /// GLAPI void GLAPIENTRY glGetTexEnviv( GLenum target, GLenum pname, GLint *params )
 /// ```
+/// {@category opengl}
 void glGetTexEnviv(int target, int pname, Pointer<Int32> params) {
   final glGetTexEnvivAsFunction = _glGetTexEnviv
       .cast<
@@ -30709,6 +30988,7 @@ late Pointer<NativeFunction<Void Function()>> _glTexParameterf;
 /// ```c
 /// GLAPI void GLAPIENTRY glTexParameterf( GLenum target, GLenum pname, GLfloat param )
 /// ```
+/// {@category opengl}
 void glTexParameterf(int target, int pname, double param) {
   final glTexParameterfAsFunction = _glTexParameterf
       .cast<
@@ -30724,6 +31004,7 @@ late Pointer<NativeFunction<Void Function()>> _glTexParameteri;
 /// ```c
 /// GLAPI void GLAPIENTRY glTexParameteri( GLenum target, GLenum pname, GLint param )
 /// ```
+/// {@category opengl}
 void glTexParameteri(int target, int pname, int param) {
   final glTexParameteriAsFunction = _glTexParameteri
       .cast<
@@ -30739,6 +31020,7 @@ late Pointer<NativeFunction<Void Function()>> _glTexParameterfv;
 /// ```c
 /// GLAPI void GLAPIENTRY glTexParameterfv( GLenum target, GLenum pname, const GLfloat *params )
 /// ```
+/// {@category opengl}
 void glTexParameterfv(int target, int pname, Pointer<Float> params) {
   final glTexParameterfvAsFunction = _glTexParameterfv
       .cast<
@@ -30758,6 +31040,7 @@ late Pointer<NativeFunction<Void Function()>> _glTexParameteriv;
 /// ```c
 /// GLAPI void GLAPIENTRY glTexParameteriv( GLenum target, GLenum pname, const GLint *params )
 /// ```
+/// {@category opengl}
 void glTexParameteriv(int target, int pname, Pointer<Int32> params) {
   final glTexParameterivAsFunction = _glTexParameteriv
       .cast<
@@ -30777,6 +31060,7 @@ late Pointer<NativeFunction<Void Function()>> _glGetTexParameterfv;
 /// ```c
 /// GLAPI void GLAPIENTRY glGetTexParameterfv( GLenum target, GLenum pname, GLfloat *params)
 /// ```
+/// {@category opengl}
 void glGetTexParameterfv(int target, int pname, Pointer<Float> params) {
   final glGetTexParameterfvAsFunction = _glGetTexParameterfv
       .cast<
@@ -30796,6 +31080,7 @@ late Pointer<NativeFunction<Void Function()>> _glGetTexParameteriv;
 /// ```c
 /// GLAPI void GLAPIENTRY glGetTexParameteriv( GLenum target, GLenum pname, GLint *params )
 /// ```
+/// {@category opengl}
 void glGetTexParameteriv(int target, int pname, Pointer<Int32> params) {
   final glGetTexParameterivAsFunction = _glGetTexParameteriv
       .cast<
@@ -30815,6 +31100,7 @@ late Pointer<NativeFunction<Void Function()>> _glGetTexLevelParameterfv;
 /// ```c
 /// GLAPI void GLAPIENTRY glGetTexLevelParameterfv( GLenum target, GLint level, GLenum pname, GLfloat *params )
 /// ```
+/// {@category opengl}
 void glGetTexLevelParameterfv(
   int target,
   int level,
@@ -30844,6 +31130,7 @@ late Pointer<NativeFunction<Void Function()>> _glGetTexLevelParameteriv;
 /// ```c
 /// GLAPI void GLAPIENTRY glGetTexLevelParameteriv( GLenum target, GLint level, GLenum pname, GLint *params )
 /// ```
+/// {@category opengl}
 void glGetTexLevelParameteriv(
   int target,
   int level,
@@ -30873,6 +31160,7 @@ late Pointer<NativeFunction<Void Function()>> _glTexImage1D;
 /// ```c
 /// GLAPI void GLAPIENTRY glTexImage1D( GLenum target, GLint level, GLint internalFormat, GLsizei width, GLint border, GLenum format, GLenum type, const GLvoid *pixels )
 /// ```
+/// {@category opengl}
 void glTexImage1D(
   int target,
   int level,
@@ -30928,6 +31216,7 @@ late Pointer<NativeFunction<Void Function()>> _glTexImage2D;
 /// ```c
 /// GLAPI void GLAPIENTRY glTexImage2D( GLenum target, GLint level, GLint internalFormat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const GLvoid *pixels )
 /// ```
+/// {@category opengl}
 void glTexImage2D(
   int target,
   int level,
@@ -30987,6 +31276,7 @@ late Pointer<NativeFunction<Void Function()>> _glGetTexImage;
 /// ```c
 /// GLAPI void GLAPIENTRY glGetTexImage( GLenum target, GLint level, GLenum format, GLenum type, GLvoid *pixels )
 /// ```
+/// {@category opengl}
 void glGetTexImage(
   int target,
   int level,
@@ -31024,6 +31314,7 @@ late Pointer<NativeFunction<Void Function()>> _glGenTextures;
 /// ```c
 /// GLAPI void GLAPIENTRY glGenTextures( GLsizei n, GLuint *textures )
 /// ```
+/// {@category opengl}
 void glGenTextures(int n, Pointer<Uint32> textures) {
   final glGenTexturesAsFunction = _glGenTextures
       .cast<NativeFunction<Void Function(Uint32 n, Pointer<Uint32> textures)>>()
@@ -31037,6 +31328,7 @@ late Pointer<NativeFunction<Void Function()>> _glDeleteTextures;
 /// ```c
 /// GLAPI void GLAPIENTRY glDeleteTextures( GLsizei n, const GLuint *textures)
 /// ```
+/// {@category opengl}
 void glDeleteTextures(int n, Pointer<Uint32> textures) {
   final glDeleteTexturesAsFunction = _glDeleteTextures
       .cast<NativeFunction<Void Function(Uint32 n, Pointer<Uint32> textures)>>()
@@ -31050,6 +31342,7 @@ late Pointer<NativeFunction<Void Function()>> _glBindTexture;
 /// ```c
 /// GLAPI void GLAPIENTRY glBindTexture( GLenum target, GLuint texture )
 /// ```
+/// {@category opengl}
 void glBindTexture(int target, int texture) {
   final glBindTextureAsFunction = _glBindTexture
       .cast<NativeFunction<Void Function(Uint32 target, Uint32 texture)>>()
@@ -31063,6 +31356,7 @@ late Pointer<NativeFunction<Void Function()>> _glPrioritizeTextures;
 /// ```c
 /// GLAPI void GLAPIENTRY glPrioritizeTextures( GLsizei n, const GLuint *textures, const GLclampf *priorities )
 /// ```
+/// {@category opengl}
 void glPrioritizeTextures(
   int n,
   Pointer<Uint32> textures,
@@ -31094,6 +31388,7 @@ late Pointer<NativeFunction<Void Function()>> _glAreTexturesResident;
 /// ```c
 /// GLAPI GLboolean GLAPIENTRY glAreTexturesResident( GLsizei n, const GLuint *textures, GLboolean *residences )
 /// ```
+/// {@category opengl}
 int glAreTexturesResident(
   int n,
   Pointer<Uint32> textures,
@@ -31121,6 +31416,7 @@ late Pointer<NativeFunction<Void Function()>> _glIsTexture;
 /// ```c
 /// GLAPI GLboolean GLAPIENTRY glIsTexture( GLuint texture )
 /// ```
+/// {@category opengl}
 int glIsTexture(int texture) {
   final glIsTextureAsFunction = _glIsTexture
       .cast<NativeFunction<Int32 Function(Uint32 texture)>>()
@@ -31134,6 +31430,7 @@ late Pointer<NativeFunction<Void Function()>> _glTexSubImage1D;
 /// ```c
 /// GLAPI void GLAPIENTRY glTexSubImage1D( GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLenum type, const GLvoid *pixels )
 /// ```
+/// {@category opengl}
 void glTexSubImage1D(
   int target,
   int level,
@@ -31185,6 +31482,7 @@ late Pointer<NativeFunction<Void Function()>> _glTexSubImage2D;
 /// ```c
 /// GLAPI void GLAPIENTRY glTexSubImage2D( GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid *pixels )
 /// ```
+/// {@category opengl}
 void glTexSubImage2D(
   int target,
   int level,
@@ -31244,6 +31542,7 @@ late Pointer<NativeFunction<Void Function()>> _glCopyTexImage1D;
 /// ```c
 /// GLAPI void GLAPIENTRY glCopyTexImage1D( GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLint border )
 /// ```
+/// {@category opengl}
 void glCopyTexImage1D(
   int target,
   int level,
@@ -31295,6 +31594,7 @@ late Pointer<NativeFunction<Void Function()>> _glCopyTexImage2D;
 /// ```c
 /// GLAPI void GLAPIENTRY glCopyTexImage2D( GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLsizei height, GLint border )
 /// ```
+/// {@category opengl}
 void glCopyTexImage2D(
   int target,
   int level,
@@ -31350,6 +31650,7 @@ late Pointer<NativeFunction<Void Function()>> _glCopyTexSubImage1D;
 /// ```c
 /// GLAPI void GLAPIENTRY glCopyTexSubImage1D( GLenum target, GLint level, GLint xoffset, GLint x, GLint y, GLsizei width )
 /// ```
+/// {@category opengl}
 void glCopyTexSubImage1D(
   int target,
   int level,
@@ -31390,6 +31691,7 @@ late Pointer<NativeFunction<Void Function()>> _glCopyTexSubImage2D;
 /// ```c
 /// GLAPI void GLAPIENTRY glCopyTexSubImage2D( GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint x, GLint y, GLsizei width, GLsizei height )
 /// ```
+/// {@category opengl}
 void glCopyTexSubImage2D(
   int target,
   int level,
@@ -31445,6 +31747,7 @@ late Pointer<NativeFunction<Void Function()>> _glMap1d;
 /// ```c
 /// GLAPI void GLAPIENTRY glMap1d( GLenum target, GLdouble u1, GLdouble u2, GLint stride, GLint order, const GLdouble *points )
 /// ```
+/// {@category opengl}
 void glMap1d(
   int target,
   double u1,
@@ -31485,6 +31788,7 @@ late Pointer<NativeFunction<Void Function()>> _glMap1f;
 /// ```c
 /// GLAPI void GLAPIENTRY glMap1f( GLenum target, GLfloat u1, GLfloat u2, GLint stride, GLint order, const GLfloat *points )
 /// ```
+/// {@category opengl}
 void glMap1f(
   int target,
   double u1,
@@ -31525,6 +31829,7 @@ late Pointer<NativeFunction<Void Function()>> _glMap2d;
 /// ```c
 /// GLAPI void GLAPIENTRY glMap2d( GLenum target, GLdouble u1, GLdouble u2, GLint ustride, GLint uorder, GLdouble v1, GLdouble v2, GLint vstride, GLint vorder, const GLdouble *points )
 /// ```
+/// {@category opengl}
 void glMap2d(
   int target,
   double u1,
@@ -31588,6 +31893,7 @@ late Pointer<NativeFunction<Void Function()>> _glMap2f;
 /// ```c
 /// GLAPI void GLAPIENTRY glMap2f( GLenum target, GLfloat u1, GLfloat u2, GLint ustride, GLint uorder, GLfloat v1, GLfloat v2, GLint vstride, GLint vorder, const GLfloat *points )
 /// ```
+/// {@category opengl}
 void glMap2f(
   int target,
   double u1,
@@ -31651,6 +31957,7 @@ late Pointer<NativeFunction<Void Function()>> _glGetMapdv;
 /// ```c
 /// GLAPI void GLAPIENTRY glGetMapdv( GLenum target, GLenum query, GLdouble *v )
 /// ```
+/// {@category opengl}
 void glGetMapdv(int target, int query, Pointer<Double> v) {
   final glGetMapdvAsFunction = _glGetMapdv
       .cast<
@@ -31668,6 +31975,7 @@ late Pointer<NativeFunction<Void Function()>> _glGetMapfv;
 /// ```c
 /// GLAPI void GLAPIENTRY glGetMapfv( GLenum target, GLenum query, GLfloat *v )
 /// ```
+/// {@category opengl}
 void glGetMapfv(int target, int query, Pointer<Float> v) {
   final glGetMapfvAsFunction = _glGetMapfv
       .cast<
@@ -31685,6 +31993,7 @@ late Pointer<NativeFunction<Void Function()>> _glGetMapiv;
 /// ```c
 /// GLAPI void GLAPIENTRY glGetMapiv( GLenum target, GLenum query, GLint *v )
 /// ```
+/// {@category opengl}
 void glGetMapiv(int target, int query, Pointer<Int32> v) {
   final glGetMapivAsFunction = _glGetMapiv
       .cast<
@@ -31702,6 +32011,7 @@ late Pointer<NativeFunction<Void Function()>> _glEvalCoord1d;
 /// ```c
 /// GLAPI void GLAPIENTRY glEvalCoord1d( GLdouble u )
 /// ```
+/// {@category opengl}
 void glEvalCoord1d(double u) {
   final glEvalCoord1dAsFunction = _glEvalCoord1d
       .cast<NativeFunction<Void Function(Double u)>>()
@@ -31715,6 +32025,7 @@ late Pointer<NativeFunction<Void Function()>> _glEvalCoord1f;
 /// ```c
 /// GLAPI void GLAPIENTRY glEvalCoord1f( GLfloat u )
 /// ```
+/// {@category opengl}
 void glEvalCoord1f(double u) {
   final glEvalCoord1fAsFunction = _glEvalCoord1f
       .cast<NativeFunction<Void Function(Float u)>>()
@@ -31728,6 +32039,7 @@ late Pointer<NativeFunction<Void Function()>> _glEvalCoord1dv;
 /// ```c
 /// GLAPI void GLAPIENTRY glEvalCoord1dv( const GLdouble *u )
 /// ```
+/// {@category opengl}
 void glEvalCoord1dv(Pointer<Double> u) {
   final glEvalCoord1dvAsFunction = _glEvalCoord1dv
       .cast<NativeFunction<Void Function(Pointer<Double> u)>>()
@@ -31741,6 +32053,7 @@ late Pointer<NativeFunction<Void Function()>> _glEvalCoord1fv;
 /// ```c
 /// GLAPI void GLAPIENTRY glEvalCoord1fv( const GLfloat *u )
 /// ```
+/// {@category opengl}
 void glEvalCoord1fv(Pointer<Float> u) {
   final glEvalCoord1fvAsFunction = _glEvalCoord1fv
       .cast<NativeFunction<Void Function(Pointer<Float> u)>>()
@@ -31754,6 +32067,7 @@ late Pointer<NativeFunction<Void Function()>> _glEvalCoord2d;
 /// ```c
 /// GLAPI void GLAPIENTRY glEvalCoord2d( GLdouble u, GLdouble v )
 /// ```
+/// {@category opengl}
 void glEvalCoord2d(double u, double v) {
   final glEvalCoord2dAsFunction = _glEvalCoord2d
       .cast<NativeFunction<Void Function(Double u, Double v)>>()
@@ -31767,6 +32081,7 @@ late Pointer<NativeFunction<Void Function()>> _glEvalCoord2f;
 /// ```c
 /// GLAPI void GLAPIENTRY glEvalCoord2f( GLfloat u, GLfloat v )
 /// ```
+/// {@category opengl}
 void glEvalCoord2f(double u, double v) {
   final glEvalCoord2fAsFunction = _glEvalCoord2f
       .cast<NativeFunction<Void Function(Float u, Float v)>>()
@@ -31780,6 +32095,7 @@ late Pointer<NativeFunction<Void Function()>> _glEvalCoord2dv;
 /// ```c
 /// GLAPI void GLAPIENTRY glEvalCoord2dv( const GLdouble *u )
 /// ```
+/// {@category opengl}
 void glEvalCoord2dv(Pointer<Double> u) {
   final glEvalCoord2dvAsFunction = _glEvalCoord2dv
       .cast<NativeFunction<Void Function(Pointer<Double> u)>>()
@@ -31793,6 +32109,7 @@ late Pointer<NativeFunction<Void Function()>> _glEvalCoord2fv;
 /// ```c
 /// GLAPI void GLAPIENTRY glEvalCoord2fv( const GLfloat *u )
 /// ```
+/// {@category opengl}
 void glEvalCoord2fv(Pointer<Float> u) {
   final glEvalCoord2fvAsFunction = _glEvalCoord2fv
       .cast<NativeFunction<Void Function(Pointer<Float> u)>>()
@@ -31806,6 +32123,7 @@ late Pointer<NativeFunction<Void Function()>> _glMapGrid1d;
 /// ```c
 /// GLAPI void GLAPIENTRY glMapGrid1d( GLint un, GLdouble u1, GLdouble u2 )
 /// ```
+/// {@category opengl}
 void glMapGrid1d(int un, double u1, double u2) {
   final glMapGrid1dAsFunction = _glMapGrid1d
       .cast<NativeFunction<Void Function(Int32 un, Double u1, Double u2)>>()
@@ -31819,6 +32137,7 @@ late Pointer<NativeFunction<Void Function()>> _glMapGrid1f;
 /// ```c
 /// GLAPI void GLAPIENTRY glMapGrid1f( GLint un, GLfloat u1, GLfloat u2 )
 /// ```
+/// {@category opengl}
 void glMapGrid1f(int un, double u1, double u2) {
   final glMapGrid1fAsFunction = _glMapGrid1f
       .cast<NativeFunction<Void Function(Int32 un, Float u1, Float u2)>>()
@@ -31832,6 +32151,7 @@ late Pointer<NativeFunction<Void Function()>> _glMapGrid2d;
 /// ```c
 /// GLAPI void GLAPIENTRY glMapGrid2d( GLint un, GLdouble u1, GLdouble u2, GLint vn, GLdouble v1, GLdouble v2 )
 /// ```
+/// {@category opengl}
 void glMapGrid2d(int un, double u1, double u2, int vn, double v1, double v2) {
   final glMapGrid2dAsFunction = _glMapGrid2d
       .cast<
@@ -31865,6 +32185,7 @@ late Pointer<NativeFunction<Void Function()>> _glMapGrid2f;
 /// ```c
 /// GLAPI void GLAPIENTRY glMapGrid2f( GLint un, GLfloat u1, GLfloat u2, GLint vn, GLfloat v1, GLfloat v2 )
 /// ```
+/// {@category opengl}
 void glMapGrid2f(int un, double u1, double u2, int vn, double v1, double v2) {
   final glMapGrid2fAsFunction = _glMapGrid2f
       .cast<
@@ -31898,6 +32219,7 @@ late Pointer<NativeFunction<Void Function()>> _glEvalPoint1;
 /// ```c
 /// GLAPI void GLAPIENTRY glEvalPoint1( GLint i )
 /// ```
+/// {@category opengl}
 void glEvalPoint1(int i) {
   final glEvalPoint1AsFunction = _glEvalPoint1
       .cast<NativeFunction<Void Function(Int32 i)>>()
@@ -31911,6 +32233,7 @@ late Pointer<NativeFunction<Void Function()>> _glEvalPoint2;
 /// ```c
 /// GLAPI void GLAPIENTRY glEvalPoint2( GLint i, GLint j )
 /// ```
+/// {@category opengl}
 void glEvalPoint2(int i, int j) {
   final glEvalPoint2AsFunction = _glEvalPoint2
       .cast<NativeFunction<Void Function(Int32 i, Int32 j)>>()
@@ -31924,6 +32247,7 @@ late Pointer<NativeFunction<Void Function()>> _glEvalMesh1;
 /// ```c
 /// GLAPI void GLAPIENTRY glEvalMesh1( GLenum mode, GLint i1, GLint i2 )
 /// ```
+/// {@category opengl}
 void glEvalMesh1(int mode, int i1, int i2) {
   final glEvalMesh1AsFunction = _glEvalMesh1
       .cast<NativeFunction<Void Function(Uint32 mode, Int32 i1, Int32 i2)>>()
@@ -31937,6 +32261,7 @@ late Pointer<NativeFunction<Void Function()>> _glEvalMesh2;
 /// ```c
 /// GLAPI void GLAPIENTRY glEvalMesh2( GLenum mode, GLint i1, GLint i2, GLint j1, GLint j2 )
 /// ```
+/// {@category opengl}
 void glEvalMesh2(int mode, int i1, int i2, int j1, int j2) {
   final glEvalMesh2AsFunction = _glEvalMesh2
       .cast<
@@ -31954,6 +32279,7 @@ late Pointer<NativeFunction<Void Function()>> _glFogf;
 /// ```c
 /// GLAPI void GLAPIENTRY glFogf( GLenum pname, GLfloat param )
 /// ```
+/// {@category opengl}
 void glFogf(int pname, double param) {
   final glFogfAsFunction = _glFogf
       .cast<NativeFunction<Void Function(Uint32 pname, Float param)>>()
@@ -31967,6 +32293,7 @@ late Pointer<NativeFunction<Void Function()>> _glFogi;
 /// ```c
 /// GLAPI void GLAPIENTRY glFogi( GLenum pname, GLint param )
 /// ```
+/// {@category opengl}
 void glFogi(int pname, int param) {
   final glFogiAsFunction = _glFogi
       .cast<NativeFunction<Void Function(Uint32 pname, Int32 param)>>()
@@ -31980,6 +32307,7 @@ late Pointer<NativeFunction<Void Function()>> _glFogfv;
 /// ```c
 /// GLAPI void GLAPIENTRY glFogfv( GLenum pname, const GLfloat *params )
 /// ```
+/// {@category opengl}
 void glFogfv(int pname, Pointer<Float> params) {
   final glFogfvAsFunction = _glFogfv
       .cast<
@@ -31995,6 +32323,7 @@ late Pointer<NativeFunction<Void Function()>> _glFogiv;
 /// ```c
 /// GLAPI void GLAPIENTRY glFogiv( GLenum pname, const GLint *params )
 /// ```
+/// {@category opengl}
 void glFogiv(int pname, Pointer<Int32> params) {
   final glFogivAsFunction = _glFogiv
       .cast<
@@ -32010,6 +32339,7 @@ late Pointer<NativeFunction<Void Function()>> _glFeedbackBuffer;
 /// ```c
 /// GLAPI void GLAPIENTRY glFeedbackBuffer( GLsizei size, GLenum type, GLfloat *buffer )
 /// ```
+/// {@category opengl}
 void glFeedbackBuffer(int size, int type, Pointer<Float> buffer) {
   final glFeedbackBufferAsFunction = _glFeedbackBuffer
       .cast<
@@ -32027,6 +32357,7 @@ late Pointer<NativeFunction<Void Function()>> _glPassThrough;
 /// ```c
 /// GLAPI void GLAPIENTRY glPassThrough( GLfloat token )
 /// ```
+/// {@category opengl}
 void glPassThrough(double token) {
   final glPassThroughAsFunction = _glPassThrough
       .cast<NativeFunction<Void Function(Float token)>>()
@@ -32040,6 +32371,7 @@ late Pointer<NativeFunction<Void Function()>> _glSelectBuffer;
 /// ```c
 /// GLAPI void GLAPIENTRY glSelectBuffer( GLsizei size, GLuint *buffer )
 /// ```
+/// {@category opengl}
 void glSelectBuffer(int size, Pointer<Uint32> buffer) {
   final glSelectBufferAsFunction = _glSelectBuffer
       .cast<
@@ -32055,6 +32387,7 @@ late Pointer<NativeFunction<Void Function()>> _glInitNames;
 /// ```c
 /// GLAPI void GLAPIENTRY glInitNames( void )
 /// ```
+/// {@category opengl}
 void glInitNames() {
   final glInitNamesAsFunction = _glInitNames
       .cast<NativeFunction<Void Function()>>()
@@ -32068,6 +32401,7 @@ late Pointer<NativeFunction<Void Function()>> _glLoadName;
 /// ```c
 /// GLAPI void GLAPIENTRY glLoadName( GLuint name )
 /// ```
+/// {@category opengl}
 void glLoadName(int name) {
   final glLoadNameAsFunction = _glLoadName
       .cast<NativeFunction<Void Function(Uint32 name)>>()
@@ -32081,6 +32415,7 @@ late Pointer<NativeFunction<Void Function()>> _glPushName;
 /// ```c
 /// GLAPI void GLAPIENTRY glPushName( GLuint name )
 /// ```
+/// {@category opengl}
 void glPushName(int name) {
   final glPushNameAsFunction = _glPushName
       .cast<NativeFunction<Void Function(Uint32 name)>>()
@@ -32094,6 +32429,7 @@ late Pointer<NativeFunction<Void Function()>> _glPopName;
 /// ```c
 /// GLAPI void GLAPIENTRY glPopName( void )
 /// ```
+/// {@category opengl}
 void glPopName() {
   final glPopNameAsFunction = _glPopName
       .cast<NativeFunction<Void Function()>>()
@@ -32107,6 +32443,7 @@ late Pointer<NativeFunction<Void Function()>> _glDrawRangeElements;
 /// ```c
 /// GLAPI void GLAPIENTRY glDrawRangeElements( GLenum mode, GLuint start, GLuint end, GLsizei count, GLenum type, const GLvoid *indices )
 /// ```
+/// {@category opengl}
 void glDrawRangeElements(
   int mode,
   int start,
@@ -32147,6 +32484,7 @@ late Pointer<NativeFunction<Void Function()>> _glTexImage3D;
 /// ```c
 /// GLAPI void GLAPIENTRY glTexImage3D( GLenum target, GLint level, GLint internalFormat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLenum format, GLenum type, const GLvoid *pixels )
 /// ```
+/// {@category opengl}
 void glTexImage3D(
   int target,
   int level,
@@ -32210,6 +32548,7 @@ late Pointer<NativeFunction<Void Function()>> _glTexSubImage3D;
 /// ```c
 /// GLAPI void GLAPIENTRY glTexSubImage3D( GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const GLvoid *pixels)
 /// ```
+/// {@category opengl}
 void glTexSubImage3D(
   int target,
   int level,
@@ -32277,6 +32616,7 @@ late Pointer<NativeFunction<Void Function()>> _glCopyTexSubImage3D;
 /// ```c
 /// GLAPI void GLAPIENTRY glCopyTexSubImage3D( GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLint x, GLint y, GLsizei width, GLsizei height )
 /// ```
+/// {@category opengl}
 void glCopyTexSubImage3D(
   int target,
   int level,
@@ -32336,6 +32676,7 @@ late Pointer<NativeFunction<Void Function()>> _glColorTable;
 /// ```c
 /// GLAPI void GLAPIENTRY glColorTable( GLenum target, GLenum internalformat, GLsizei width, GLenum format, GLenum type, const GLvoid *table )
 /// ```
+/// {@category opengl}
 void glColorTable(
   int target,
   int internalformat,
@@ -32383,6 +32724,7 @@ late Pointer<NativeFunction<Void Function()>> _glColorSubTable;
 /// ```c
 /// GLAPI void GLAPIENTRY glColorSubTable( GLenum target, GLsizei start, GLsizei count, GLenum format, GLenum type, const GLvoid *data )
 /// ```
+/// {@category opengl}
 void glColorSubTable(
   int target,
   int start,
@@ -32423,6 +32765,7 @@ late Pointer<NativeFunction<Void Function()>> _glColorTableParameteriv;
 /// ```c
 /// GLAPI void GLAPIENTRY glColorTableParameteriv(GLenum target, GLenum pname, const GLint *params)
 /// ```
+/// {@category opengl}
 void glColorTableParameteriv(int target, int pname, Pointer<Int32> params) {
   final glColorTableParameterivAsFunction = _glColorTableParameteriv
       .cast<
@@ -32442,6 +32785,7 @@ late Pointer<NativeFunction<Void Function()>> _glColorTableParameterfv;
 /// ```c
 /// GLAPI void GLAPIENTRY glColorTableParameterfv(GLenum target, GLenum pname, const GLfloat *params)
 /// ```
+/// {@category opengl}
 void glColorTableParameterfv(int target, int pname, Pointer<Float> params) {
   final glColorTableParameterfvAsFunction = _glColorTableParameterfv
       .cast<
@@ -32461,6 +32805,7 @@ late Pointer<NativeFunction<Void Function()>> _glCopyColorSubTable;
 /// ```c
 /// GLAPI void GLAPIENTRY glCopyColorSubTable( GLenum target, GLsizei start, GLint x, GLint y, GLsizei width )
 /// ```
+/// {@category opengl}
 void glCopyColorSubTable(int target, int start, int x, int y, int width) {
   final glCopyColorSubTableAsFunction = _glCopyColorSubTable
       .cast<
@@ -32486,6 +32831,7 @@ late Pointer<NativeFunction<Void Function()>> _glCopyColorTable;
 /// ```c
 /// GLAPI void GLAPIENTRY glCopyColorTable( GLenum target, GLenum internalformat, GLint x, GLint y, GLsizei width )
 /// ```
+/// {@category opengl}
 void glCopyColorTable(int target, int internalformat, int x, int y, int width) {
   final glCopyColorTableAsFunction = _glCopyColorTable
       .cast<
@@ -32511,6 +32857,7 @@ late Pointer<NativeFunction<Void Function()>> _glGetColorTable;
 /// ```c
 /// GLAPI void GLAPIENTRY glGetColorTable( GLenum target, GLenum format, GLenum type, GLvoid *table )
 /// ```
+/// {@category opengl}
 void glGetColorTable(
   int target,
   int format,
@@ -32545,6 +32892,7 @@ late Pointer<NativeFunction<Void Function()>> _glGetColorTableParameterfv;
 /// ```c
 /// GLAPI void GLAPIENTRY glGetColorTableParameterfv( GLenum target, GLenum pname, GLfloat *params )
 /// ```
+/// {@category opengl}
 void glGetColorTableParameterfv(int target, int pname, Pointer<Float> params) {
   final glGetColorTableParameterfvAsFunction = _glGetColorTableParameterfv
       .cast<
@@ -32564,6 +32912,7 @@ late Pointer<NativeFunction<Void Function()>> _glGetColorTableParameteriv;
 /// ```c
 /// GLAPI void GLAPIENTRY glGetColorTableParameteriv( GLenum target, GLenum pname, GLint *params )
 /// ```
+/// {@category opengl}
 void glGetColorTableParameteriv(int target, int pname, Pointer<Int32> params) {
   final glGetColorTableParameterivAsFunction = _glGetColorTableParameteriv
       .cast<
@@ -32583,6 +32932,7 @@ late Pointer<NativeFunction<Void Function()>> _glBlendEquation;
 /// ```c
 /// GLAPI void GLAPIENTRY glBlendEquation( GLenum mode )
 /// ```
+/// {@category opengl}
 void glBlendEquation(int mode) {
   final glBlendEquationAsFunction = _glBlendEquation
       .cast<NativeFunction<Void Function(Uint32 mode)>>()
@@ -32596,6 +32946,7 @@ late Pointer<NativeFunction<Void Function()>> _glBlendColor;
 /// ```c
 /// GLAPI void GLAPIENTRY glBlendColor( GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha )
 /// ```
+/// {@category opengl}
 void glBlendColor(double red, double green, double blue, double alpha) {
   final glBlendColorAsFunction = _glBlendColor
       .cast<
@@ -32615,6 +32966,7 @@ late Pointer<NativeFunction<Void Function()>> _glHistogram;
 /// ```c
 /// GLAPI void GLAPIENTRY glHistogram( GLenum target, GLsizei width, GLenum internalformat, GLboolean sink )
 /// ```
+/// {@category opengl}
 void glHistogram(int target, int width, int internalformat, int sink) {
   final glHistogramAsFunction = _glHistogram
       .cast<
@@ -32639,6 +32991,7 @@ late Pointer<NativeFunction<Void Function()>> _glResetHistogram;
 /// ```c
 /// GLAPI void GLAPIENTRY glResetHistogram( GLenum target )
 /// ```
+/// {@category opengl}
 void glResetHistogram(int target) {
   final glResetHistogramAsFunction = _glResetHistogram
       .cast<NativeFunction<Void Function(Uint32 target)>>()
@@ -32652,6 +33005,7 @@ late Pointer<NativeFunction<Void Function()>> _glGetHistogram;
 /// ```c
 /// GLAPI void GLAPIENTRY glGetHistogram( GLenum target, GLboolean reset, GLenum format, GLenum type, GLvoid *values )
 /// ```
+/// {@category opengl}
 void glGetHistogram(
   int target,
   int reset,
@@ -32689,6 +33043,7 @@ late Pointer<NativeFunction<Void Function()>> _glGetHistogramParameterfv;
 /// ```c
 /// GLAPI void GLAPIENTRY glGetHistogramParameterfv( GLenum target, GLenum pname, GLfloat *params )
 /// ```
+/// {@category opengl}
 void glGetHistogramParameterfv(int target, int pname, Pointer<Float> params) {
   final glGetHistogramParameterfvAsFunction = _glGetHistogramParameterfv
       .cast<
@@ -32708,6 +33063,7 @@ late Pointer<NativeFunction<Void Function()>> _glGetHistogramParameteriv;
 /// ```c
 /// GLAPI void GLAPIENTRY glGetHistogramParameteriv( GLenum target, GLenum pname, GLint *params )
 /// ```
+/// {@category opengl}
 void glGetHistogramParameteriv(int target, int pname, Pointer<Int32> params) {
   final glGetHistogramParameterivAsFunction = _glGetHistogramParameteriv
       .cast<
@@ -32727,6 +33083,7 @@ late Pointer<NativeFunction<Void Function()>> _glMinmax;
 /// ```c
 /// GLAPI void GLAPIENTRY glMinmax( GLenum target, GLenum internalformat, GLboolean sink )
 /// ```
+/// {@category opengl}
 void glMinmax(int target, int internalformat, int sink) {
   final glMinmaxAsFunction = _glMinmax
       .cast<
@@ -32744,6 +33101,7 @@ late Pointer<NativeFunction<Void Function()>> _glResetMinmax;
 /// ```c
 /// GLAPI void GLAPIENTRY glResetMinmax( GLenum target )
 /// ```
+/// {@category opengl}
 void glResetMinmax(int target) {
   final glResetMinmaxAsFunction = _glResetMinmax
       .cast<NativeFunction<Void Function(Uint32 target)>>()
@@ -32757,6 +33115,7 @@ late Pointer<NativeFunction<Void Function()>> _glGetMinmax;
 /// ```c
 /// GLAPI void GLAPIENTRY glGetMinmax( GLenum target, GLboolean reset, GLenum format, GLenum types, GLvoid *values )
 /// ```
+/// {@category opengl}
 void glGetMinmax(
   int target,
   int reset,
@@ -32794,6 +33153,7 @@ late Pointer<NativeFunction<Void Function()>> _glGetMinmaxParameterfv;
 /// ```c
 /// GLAPI void GLAPIENTRY glGetMinmaxParameterfv( GLenum target, GLenum pname, GLfloat *params )
 /// ```
+/// {@category opengl}
 void glGetMinmaxParameterfv(int target, int pname, Pointer<Float> params) {
   final glGetMinmaxParameterfvAsFunction = _glGetMinmaxParameterfv
       .cast<
@@ -32813,6 +33173,7 @@ late Pointer<NativeFunction<Void Function()>> _glGetMinmaxParameteriv;
 /// ```c
 /// GLAPI void GLAPIENTRY glGetMinmaxParameteriv( GLenum target, GLenum pname, GLint *params )
 /// ```
+/// {@category opengl}
 void glGetMinmaxParameteriv(int target, int pname, Pointer<Int32> params) {
   final glGetMinmaxParameterivAsFunction = _glGetMinmaxParameteriv
       .cast<
@@ -32832,6 +33193,7 @@ late Pointer<NativeFunction<Void Function()>> _glConvolutionFilter1D;
 /// ```c
 /// GLAPI void GLAPIENTRY glConvolutionFilter1D( GLenum target, GLenum internalformat, GLsizei width, GLenum format, GLenum type, const GLvoid *image )
 /// ```
+/// {@category opengl}
 void glConvolutionFilter1D(
   int target,
   int internalformat,
@@ -32879,6 +33241,7 @@ late Pointer<NativeFunction<Void Function()>> _glConvolutionFilter2D;
 /// ```c
 /// GLAPI void GLAPIENTRY glConvolutionFilter2D( GLenum target, GLenum internalformat, GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid *image )
 /// ```
+/// {@category opengl}
 void glConvolutionFilter2D(
   int target,
   int internalformat,
@@ -32930,6 +33293,7 @@ late Pointer<NativeFunction<Void Function()>> _glConvolutionParameterf;
 /// ```c
 /// GLAPI void GLAPIENTRY glConvolutionParameterf( GLenum target, GLenum pname, GLfloat params )
 /// ```
+/// {@category opengl}
 void glConvolutionParameterf(int target, int pname, double params) {
   final glConvolutionParameterfAsFunction = _glConvolutionParameterf
       .cast<
@@ -32945,6 +33309,7 @@ late Pointer<NativeFunction<Void Function()>> _glConvolutionParameterfv;
 /// ```c
 /// GLAPI void GLAPIENTRY glConvolutionParameterfv( GLenum target, GLenum pname, const GLfloat *params )
 /// ```
+/// {@category opengl}
 void glConvolutionParameterfv(int target, int pname, Pointer<Float> params) {
   final glConvolutionParameterfvAsFunction = _glConvolutionParameterfv
       .cast<
@@ -32964,6 +33329,7 @@ late Pointer<NativeFunction<Void Function()>> _glConvolutionParameteri;
 /// ```c
 /// GLAPI void GLAPIENTRY glConvolutionParameteri( GLenum target, GLenum pname, GLint params )
 /// ```
+/// {@category opengl}
 void glConvolutionParameteri(int target, int pname, int params) {
   final glConvolutionParameteriAsFunction = _glConvolutionParameteri
       .cast<
@@ -32979,6 +33345,7 @@ late Pointer<NativeFunction<Void Function()>> _glConvolutionParameteriv;
 /// ```c
 /// GLAPI void GLAPIENTRY glConvolutionParameteriv( GLenum target, GLenum pname, const GLint *params )
 /// ```
+/// {@category opengl}
 void glConvolutionParameteriv(int target, int pname, Pointer<Int32> params) {
   final glConvolutionParameterivAsFunction = _glConvolutionParameteriv
       .cast<
@@ -32998,6 +33365,7 @@ late Pointer<NativeFunction<Void Function()>> _glCopyConvolutionFilter1D;
 /// ```c
 /// GLAPI void GLAPIENTRY glCopyConvolutionFilter1D( GLenum target, GLenum internalformat, GLint x, GLint y, GLsizei width )
 /// ```
+/// {@category opengl}
 void glCopyConvolutionFilter1D(
   int target,
   int internalformat,
@@ -33035,6 +33403,7 @@ late Pointer<NativeFunction<Void Function()>> _glCopyConvolutionFilter2D;
 /// ```c
 /// GLAPI void GLAPIENTRY glCopyConvolutionFilter2D( GLenum target, GLenum internalformat, GLint x, GLint y, GLsizei width, GLsizei height)
 /// ```
+/// {@category opengl}
 void glCopyConvolutionFilter2D(
   int target,
   int internalformat,
@@ -33082,6 +33451,7 @@ late Pointer<NativeFunction<Void Function()>> _glGetConvolutionFilter;
 /// ```c
 /// GLAPI void GLAPIENTRY glGetConvolutionFilter( GLenum target, GLenum format, GLenum type, GLvoid *image )
 /// ```
+/// {@category opengl}
 void glGetConvolutionFilter(
   int target,
   int format,
@@ -33116,6 +33486,7 @@ late Pointer<NativeFunction<Void Function()>> _glGetConvolutionParameterfv;
 /// ```c
 /// GLAPI void GLAPIENTRY glGetConvolutionParameterfv( GLenum target, GLenum pname, GLfloat *params )
 /// ```
+/// {@category opengl}
 void glGetConvolutionParameterfv(int target, int pname, Pointer<Float> params) {
   final glGetConvolutionParameterfvAsFunction = _glGetConvolutionParameterfv
       .cast<
@@ -33135,6 +33506,7 @@ late Pointer<NativeFunction<Void Function()>> _glGetConvolutionParameteriv;
 /// ```c
 /// GLAPI void GLAPIENTRY glGetConvolutionParameteriv( GLenum target, GLenum pname, GLint *params )
 /// ```
+/// {@category opengl}
 void glGetConvolutionParameteriv(int target, int pname, Pointer<Int32> params) {
   final glGetConvolutionParameterivAsFunction = _glGetConvolutionParameteriv
       .cast<
@@ -33154,6 +33526,7 @@ late Pointer<NativeFunction<Void Function()>> _glSeparableFilter2D;
 /// ```c
 /// GLAPI void GLAPIENTRY glSeparableFilter2D( GLenum target, GLenum internalformat, GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid *row, const GLvoid *column )
 /// ```
+/// {@category opengl}
 void glSeparableFilter2D(
   int target,
   int internalformat,
@@ -33209,6 +33582,7 @@ late Pointer<NativeFunction<Void Function()>> _glGetSeparableFilter;
 /// ```c
 /// GLAPI void GLAPIENTRY glGetSeparableFilter( GLenum target, GLenum format, GLenum type, GLvoid *row, GLvoid *column, GLvoid *span )
 /// ```
+/// {@category opengl}
 void glGetSeparableFilter(
   int target,
   int format,
@@ -33256,6 +33630,7 @@ late Pointer<NativeFunction<Void Function()>> _glActiveTexture;
 /// ```c
 /// GLAPI void GLAPIENTRY glActiveTexture( GLenum texture )
 /// ```
+/// {@category opengl}
 void glActiveTexture(int texture) {
   final glActiveTextureAsFunction = _glActiveTexture
       .cast<NativeFunction<Void Function(Uint32 texture)>>()
@@ -33269,6 +33644,7 @@ late Pointer<NativeFunction<Void Function()>> _glClientActiveTexture;
 /// ```c
 /// GLAPI void GLAPIENTRY glClientActiveTexture( GLenum texture )
 /// ```
+/// {@category opengl}
 void glClientActiveTexture(int texture) {
   final glClientActiveTextureAsFunction = _glClientActiveTexture
       .cast<NativeFunction<Void Function(Uint32 texture)>>()
@@ -33282,6 +33658,7 @@ late Pointer<NativeFunction<Void Function()>> _glCompressedTexImage1D;
 /// ```c
 /// GLAPI void GLAPIENTRY glCompressedTexImage1D( GLenum target, GLint level, GLenum internalformat, GLsizei width, GLint border, GLsizei imageSize, const GLvoid *data )
 /// ```
+/// {@category opengl}
 void glCompressedTexImage1D(
   int target,
   int level,
@@ -33333,6 +33710,7 @@ late Pointer<NativeFunction<Void Function()>> _glCompressedTexImage2D;
 /// ```c
 /// GLAPI void GLAPIENTRY glCompressedTexImage2D( GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLint border, GLsizei imageSize, const GLvoid *data )
 /// ```
+/// {@category opengl}
 void glCompressedTexImage2D(
   int target,
   int level,
@@ -33388,6 +33766,7 @@ late Pointer<NativeFunction<Void Function()>> _glCompressedTexImage3D;
 /// ```c
 /// GLAPI void GLAPIENTRY glCompressedTexImage3D( GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLsizei imageSize, const GLvoid *data )
 /// ```
+/// {@category opengl}
 void glCompressedTexImage3D(
   int target,
   int level,
@@ -33447,6 +33826,7 @@ late Pointer<NativeFunction<Void Function()>> _glCompressedTexSubImage1D;
 /// ```c
 /// GLAPI void GLAPIENTRY glCompressedTexSubImage1D( GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLsizei imageSize, const GLvoid *data )
 /// ```
+/// {@category opengl}
 void glCompressedTexSubImage1D(
   int target,
   int level,
@@ -33498,6 +33878,7 @@ late Pointer<NativeFunction<Void Function()>> _glCompressedTexSubImage2D;
 /// ```c
 /// GLAPI void GLAPIENTRY glCompressedTexSubImage2D( GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLsizei imageSize, const GLvoid *data )
 /// ```
+/// {@category opengl}
 void glCompressedTexSubImage2D(
   int target,
   int level,
@@ -33557,6 +33938,7 @@ late Pointer<NativeFunction<Void Function()>> _glCompressedTexSubImage3D;
 /// ```c
 /// GLAPI void GLAPIENTRY glCompressedTexSubImage3D( GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLsizei imageSize, const GLvoid *data )
 /// ```
+/// {@category opengl}
 void glCompressedTexSubImage3D(
   int target,
   int level,
@@ -33624,6 +34006,7 @@ late Pointer<NativeFunction<Void Function()>> _glGetCompressedTexImage;
 /// ```c
 /// GLAPI void GLAPIENTRY glGetCompressedTexImage( GLenum target, GLint lod, GLvoid *img )
 /// ```
+/// {@category opengl}
 void glGetCompressedTexImage(int target, int lod, Pointer<NativeType> img) {
   final glGetCompressedTexImageAsFunction = _glGetCompressedTexImage
       .cast<
@@ -33643,6 +34026,7 @@ late Pointer<NativeFunction<Void Function()>> _glMultiTexCoord1d;
 /// ```c
 /// GLAPI void GLAPIENTRY glMultiTexCoord1d( GLenum target, GLdouble s )
 /// ```
+/// {@category opengl}
 void glMultiTexCoord1d(int target, double s) {
   final glMultiTexCoord1dAsFunction = _glMultiTexCoord1d
       .cast<NativeFunction<Void Function(Uint32 target, Double s)>>()
@@ -33656,6 +34040,7 @@ late Pointer<NativeFunction<Void Function()>> _glMultiTexCoord1dv;
 /// ```c
 /// GLAPI void GLAPIENTRY glMultiTexCoord1dv( GLenum target, const GLdouble *v )
 /// ```
+/// {@category opengl}
 void glMultiTexCoord1dv(int target, Pointer<Double> v) {
   final glMultiTexCoord1dvAsFunction = _glMultiTexCoord1dv
       .cast<NativeFunction<Void Function(Uint32 target, Pointer<Double> v)>>()
@@ -33669,6 +34054,7 @@ late Pointer<NativeFunction<Void Function()>> _glMultiTexCoord1f;
 /// ```c
 /// GLAPI void GLAPIENTRY glMultiTexCoord1f( GLenum target, GLfloat s )
 /// ```
+/// {@category opengl}
 void glMultiTexCoord1f(int target, double s) {
   final glMultiTexCoord1fAsFunction = _glMultiTexCoord1f
       .cast<NativeFunction<Void Function(Uint32 target, Float s)>>()
@@ -33682,6 +34068,7 @@ late Pointer<NativeFunction<Void Function()>> _glMultiTexCoord1fv;
 /// ```c
 /// GLAPI void GLAPIENTRY glMultiTexCoord1fv( GLenum target, const GLfloat *v )
 /// ```
+/// {@category opengl}
 void glMultiTexCoord1fv(int target, Pointer<Float> v) {
   final glMultiTexCoord1fvAsFunction = _glMultiTexCoord1fv
       .cast<NativeFunction<Void Function(Uint32 target, Pointer<Float> v)>>()
@@ -33695,6 +34082,7 @@ late Pointer<NativeFunction<Void Function()>> _glMultiTexCoord1i;
 /// ```c
 /// GLAPI void GLAPIENTRY glMultiTexCoord1i( GLenum target, GLint s )
 /// ```
+/// {@category opengl}
 void glMultiTexCoord1i(int target, int s) {
   final glMultiTexCoord1iAsFunction = _glMultiTexCoord1i
       .cast<NativeFunction<Void Function(Uint32 target, Int32 s)>>()
@@ -33708,6 +34096,7 @@ late Pointer<NativeFunction<Void Function()>> _glMultiTexCoord1iv;
 /// ```c
 /// GLAPI void GLAPIENTRY glMultiTexCoord1iv( GLenum target, const GLint *v )
 /// ```
+/// {@category opengl}
 void glMultiTexCoord1iv(int target, Pointer<Int32> v) {
   final glMultiTexCoord1ivAsFunction = _glMultiTexCoord1iv
       .cast<NativeFunction<Void Function(Uint32 target, Pointer<Int32> v)>>()
@@ -33721,6 +34110,7 @@ late Pointer<NativeFunction<Void Function()>> _glMultiTexCoord1s;
 /// ```c
 /// GLAPI void GLAPIENTRY glMultiTexCoord1s( GLenum target, GLshort s )
 /// ```
+/// {@category opengl}
 void glMultiTexCoord1s(int target, int s) {
   final glMultiTexCoord1sAsFunction = _glMultiTexCoord1s
       .cast<NativeFunction<Void Function(Uint32 target, Int16 s)>>()
@@ -33734,6 +34124,7 @@ late Pointer<NativeFunction<Void Function()>> _glMultiTexCoord1sv;
 /// ```c
 /// GLAPI void GLAPIENTRY glMultiTexCoord1sv( GLenum target, const GLshort *v )
 /// ```
+/// {@category opengl}
 void glMultiTexCoord1sv(int target, Pointer<Int16> v) {
   final glMultiTexCoord1svAsFunction = _glMultiTexCoord1sv
       .cast<NativeFunction<Void Function(Uint32 target, Pointer<Int16> v)>>()
@@ -33747,6 +34138,7 @@ late Pointer<NativeFunction<Void Function()>> _glMultiTexCoord2d;
 /// ```c
 /// GLAPI void GLAPIENTRY glMultiTexCoord2d( GLenum target, GLdouble s, GLdouble t )
 /// ```
+/// {@category opengl}
 void glMultiTexCoord2d(int target, double s, double t) {
   final glMultiTexCoord2dAsFunction = _glMultiTexCoord2d
       .cast<NativeFunction<Void Function(Uint32 target, Double s, Double t)>>()
@@ -33760,6 +34152,7 @@ late Pointer<NativeFunction<Void Function()>> _glMultiTexCoord2dv;
 /// ```c
 /// GLAPI void GLAPIENTRY glMultiTexCoord2dv( GLenum target, const GLdouble *v )
 /// ```
+/// {@category opengl}
 void glMultiTexCoord2dv(int target, Pointer<Double> v) {
   final glMultiTexCoord2dvAsFunction = _glMultiTexCoord2dv
       .cast<NativeFunction<Void Function(Uint32 target, Pointer<Double> v)>>()
@@ -33773,6 +34166,7 @@ late Pointer<NativeFunction<Void Function()>> _glMultiTexCoord2f;
 /// ```c
 /// GLAPI void GLAPIENTRY glMultiTexCoord2f( GLenum target, GLfloat s, GLfloat t )
 /// ```
+/// {@category opengl}
 void glMultiTexCoord2f(int target, double s, double t) {
   final glMultiTexCoord2fAsFunction = _glMultiTexCoord2f
       .cast<NativeFunction<Void Function(Uint32 target, Float s, Float t)>>()
@@ -33786,6 +34180,7 @@ late Pointer<NativeFunction<Void Function()>> _glMultiTexCoord2fv;
 /// ```c
 /// GLAPI void GLAPIENTRY glMultiTexCoord2fv( GLenum target, const GLfloat *v )
 /// ```
+/// {@category opengl}
 void glMultiTexCoord2fv(int target, Pointer<Float> v) {
   final glMultiTexCoord2fvAsFunction = _glMultiTexCoord2fv
       .cast<NativeFunction<Void Function(Uint32 target, Pointer<Float> v)>>()
@@ -33799,6 +34194,7 @@ late Pointer<NativeFunction<Void Function()>> _glMultiTexCoord2i;
 /// ```c
 /// GLAPI void GLAPIENTRY glMultiTexCoord2i( GLenum target, GLint s, GLint t )
 /// ```
+/// {@category opengl}
 void glMultiTexCoord2i(int target, int s, int t) {
   final glMultiTexCoord2iAsFunction = _glMultiTexCoord2i
       .cast<NativeFunction<Void Function(Uint32 target, Int32 s, Int32 t)>>()
@@ -33812,6 +34208,7 @@ late Pointer<NativeFunction<Void Function()>> _glMultiTexCoord2iv;
 /// ```c
 /// GLAPI void GLAPIENTRY glMultiTexCoord2iv( GLenum target, const GLint *v )
 /// ```
+/// {@category opengl}
 void glMultiTexCoord2iv(int target, Pointer<Int32> v) {
   final glMultiTexCoord2ivAsFunction = _glMultiTexCoord2iv
       .cast<NativeFunction<Void Function(Uint32 target, Pointer<Int32> v)>>()
@@ -33825,6 +34222,7 @@ late Pointer<NativeFunction<Void Function()>> _glMultiTexCoord2s;
 /// ```c
 /// GLAPI void GLAPIENTRY glMultiTexCoord2s( GLenum target, GLshort s, GLshort t )
 /// ```
+/// {@category opengl}
 void glMultiTexCoord2s(int target, int s, int t) {
   final glMultiTexCoord2sAsFunction = _glMultiTexCoord2s
       .cast<NativeFunction<Void Function(Uint32 target, Int16 s, Int16 t)>>()
@@ -33838,6 +34236,7 @@ late Pointer<NativeFunction<Void Function()>> _glMultiTexCoord2sv;
 /// ```c
 /// GLAPI void GLAPIENTRY glMultiTexCoord2sv( GLenum target, const GLshort *v )
 /// ```
+/// {@category opengl}
 void glMultiTexCoord2sv(int target, Pointer<Int16> v) {
   final glMultiTexCoord2svAsFunction = _glMultiTexCoord2sv
       .cast<NativeFunction<Void Function(Uint32 target, Pointer<Int16> v)>>()
@@ -33851,6 +34250,7 @@ late Pointer<NativeFunction<Void Function()>> _glMultiTexCoord3d;
 /// ```c
 /// GLAPI void GLAPIENTRY glMultiTexCoord3d( GLenum target, GLdouble s, GLdouble t, GLdouble r )
 /// ```
+/// {@category opengl}
 void glMultiTexCoord3d(int target, double s, double t, double r) {
   final glMultiTexCoord3dAsFunction = _glMultiTexCoord3d
       .cast<
@@ -33868,6 +34268,7 @@ late Pointer<NativeFunction<Void Function()>> _glMultiTexCoord3dv;
 /// ```c
 /// GLAPI void GLAPIENTRY glMultiTexCoord3dv( GLenum target, const GLdouble *v )
 /// ```
+/// {@category opengl}
 void glMultiTexCoord3dv(int target, Pointer<Double> v) {
   final glMultiTexCoord3dvAsFunction = _glMultiTexCoord3dv
       .cast<NativeFunction<Void Function(Uint32 target, Pointer<Double> v)>>()
@@ -33881,6 +34282,7 @@ late Pointer<NativeFunction<Void Function()>> _glMultiTexCoord3f;
 /// ```c
 /// GLAPI void GLAPIENTRY glMultiTexCoord3f( GLenum target, GLfloat s, GLfloat t, GLfloat r )
 /// ```
+/// {@category opengl}
 void glMultiTexCoord3f(int target, double s, double t, double r) {
   final glMultiTexCoord3fAsFunction = _glMultiTexCoord3f
       .cast<
@@ -33896,6 +34298,7 @@ late Pointer<NativeFunction<Void Function()>> _glMultiTexCoord3fv;
 /// ```c
 /// GLAPI void GLAPIENTRY glMultiTexCoord3fv( GLenum target, const GLfloat *v )
 /// ```
+/// {@category opengl}
 void glMultiTexCoord3fv(int target, Pointer<Float> v) {
   final glMultiTexCoord3fvAsFunction = _glMultiTexCoord3fv
       .cast<NativeFunction<Void Function(Uint32 target, Pointer<Float> v)>>()
@@ -33909,6 +34312,7 @@ late Pointer<NativeFunction<Void Function()>> _glMultiTexCoord3i;
 /// ```c
 /// GLAPI void GLAPIENTRY glMultiTexCoord3i( GLenum target, GLint s, GLint t, GLint r )
 /// ```
+/// {@category opengl}
 void glMultiTexCoord3i(int target, int s, int t, int r) {
   final glMultiTexCoord3iAsFunction = _glMultiTexCoord3i
       .cast<
@@ -33924,6 +34328,7 @@ late Pointer<NativeFunction<Void Function()>> _glMultiTexCoord3iv;
 /// ```c
 /// GLAPI void GLAPIENTRY glMultiTexCoord3iv( GLenum target, const GLint *v )
 /// ```
+/// {@category opengl}
 void glMultiTexCoord3iv(int target, Pointer<Int32> v) {
   final glMultiTexCoord3ivAsFunction = _glMultiTexCoord3iv
       .cast<NativeFunction<Void Function(Uint32 target, Pointer<Int32> v)>>()
@@ -33937,6 +34342,7 @@ late Pointer<NativeFunction<Void Function()>> _glMultiTexCoord3s;
 /// ```c
 /// GLAPI void GLAPIENTRY glMultiTexCoord3s( GLenum target, GLshort s, GLshort t, GLshort r )
 /// ```
+/// {@category opengl}
 void glMultiTexCoord3s(int target, int s, int t, int r) {
   final glMultiTexCoord3sAsFunction = _glMultiTexCoord3s
       .cast<
@@ -33952,6 +34358,7 @@ late Pointer<NativeFunction<Void Function()>> _glMultiTexCoord3sv;
 /// ```c
 /// GLAPI void GLAPIENTRY glMultiTexCoord3sv( GLenum target, const GLshort *v )
 /// ```
+/// {@category opengl}
 void glMultiTexCoord3sv(int target, Pointer<Int16> v) {
   final glMultiTexCoord3svAsFunction = _glMultiTexCoord3sv
       .cast<NativeFunction<Void Function(Uint32 target, Pointer<Int16> v)>>()
@@ -33965,6 +34372,7 @@ late Pointer<NativeFunction<Void Function()>> _glMultiTexCoord4d;
 /// ```c
 /// GLAPI void GLAPIENTRY glMultiTexCoord4d( GLenum target, GLdouble s, GLdouble t, GLdouble r, GLdouble q )
 /// ```
+/// {@category opengl}
 void glMultiTexCoord4d(int target, double s, double t, double r, double q) {
   final glMultiTexCoord4dAsFunction = _glMultiTexCoord4d
       .cast<
@@ -33984,6 +34392,7 @@ late Pointer<NativeFunction<Void Function()>> _glMultiTexCoord4dv;
 /// ```c
 /// GLAPI void GLAPIENTRY glMultiTexCoord4dv( GLenum target, const GLdouble *v )
 /// ```
+/// {@category opengl}
 void glMultiTexCoord4dv(int target, Pointer<Double> v) {
   final glMultiTexCoord4dvAsFunction = _glMultiTexCoord4dv
       .cast<NativeFunction<Void Function(Uint32 target, Pointer<Double> v)>>()
@@ -33997,6 +34406,7 @@ late Pointer<NativeFunction<Void Function()>> _glMultiTexCoord4f;
 /// ```c
 /// GLAPI void GLAPIENTRY glMultiTexCoord4f( GLenum target, GLfloat s, GLfloat t, GLfloat r, GLfloat q )
 /// ```
+/// {@category opengl}
 void glMultiTexCoord4f(int target, double s, double t, double r, double q) {
   final glMultiTexCoord4fAsFunction = _glMultiTexCoord4f
       .cast<
@@ -34016,6 +34426,7 @@ late Pointer<NativeFunction<Void Function()>> _glMultiTexCoord4fv;
 /// ```c
 /// GLAPI void GLAPIENTRY glMultiTexCoord4fv( GLenum target, const GLfloat *v )
 /// ```
+/// {@category opengl}
 void glMultiTexCoord4fv(int target, Pointer<Float> v) {
   final glMultiTexCoord4fvAsFunction = _glMultiTexCoord4fv
       .cast<NativeFunction<Void Function(Uint32 target, Pointer<Float> v)>>()
@@ -34029,6 +34440,7 @@ late Pointer<NativeFunction<Void Function()>> _glMultiTexCoord4i;
 /// ```c
 /// GLAPI void GLAPIENTRY glMultiTexCoord4i( GLenum target, GLint s, GLint t, GLint r, GLint q )
 /// ```
+/// {@category opengl}
 void glMultiTexCoord4i(int target, int s, int t, int r, int q) {
   final glMultiTexCoord4iAsFunction = _glMultiTexCoord4i
       .cast<
@@ -34046,6 +34458,7 @@ late Pointer<NativeFunction<Void Function()>> _glMultiTexCoord4iv;
 /// ```c
 /// GLAPI void GLAPIENTRY glMultiTexCoord4iv( GLenum target, const GLint *v )
 /// ```
+/// {@category opengl}
 void glMultiTexCoord4iv(int target, Pointer<Int32> v) {
   final glMultiTexCoord4ivAsFunction = _glMultiTexCoord4iv
       .cast<NativeFunction<Void Function(Uint32 target, Pointer<Int32> v)>>()
@@ -34059,6 +34472,7 @@ late Pointer<NativeFunction<Void Function()>> _glMultiTexCoord4s;
 /// ```c
 /// GLAPI void GLAPIENTRY glMultiTexCoord4s( GLenum target, GLshort s, GLshort t, GLshort r, GLshort q )
 /// ```
+/// {@category opengl}
 void glMultiTexCoord4s(int target, int s, int t, int r, int q) {
   final glMultiTexCoord4sAsFunction = _glMultiTexCoord4s
       .cast<
@@ -34076,6 +34490,7 @@ late Pointer<NativeFunction<Void Function()>> _glMultiTexCoord4sv;
 /// ```c
 /// GLAPI void GLAPIENTRY glMultiTexCoord4sv( GLenum target, const GLshort *v )
 /// ```
+/// {@category opengl}
 void glMultiTexCoord4sv(int target, Pointer<Int16> v) {
   final glMultiTexCoord4svAsFunction = _glMultiTexCoord4sv
       .cast<NativeFunction<Void Function(Uint32 target, Pointer<Int16> v)>>()
@@ -34089,6 +34504,7 @@ late Pointer<NativeFunction<Void Function()>> _glLoadTransposeMatrixd;
 /// ```c
 /// GLAPI void GLAPIENTRY glLoadTransposeMatrixd( const GLdouble m[16] )
 /// ```
+/// {@category opengl}
 void glLoadTransposeMatrixd(double m) {
   final glLoadTransposeMatrixdAsFunction = _glLoadTransposeMatrixd
       .cast<NativeFunction<Void Function(Double m)>>()
@@ -34102,6 +34518,7 @@ late Pointer<NativeFunction<Void Function()>> _glLoadTransposeMatrixf;
 /// ```c
 /// GLAPI void GLAPIENTRY glLoadTransposeMatrixf( const GLfloat m[16] )
 /// ```
+/// {@category opengl}
 void glLoadTransposeMatrixf(double m) {
   final glLoadTransposeMatrixfAsFunction = _glLoadTransposeMatrixf
       .cast<NativeFunction<Void Function(Float m)>>()
@@ -34115,6 +34532,7 @@ late Pointer<NativeFunction<Void Function()>> _glMultTransposeMatrixd;
 /// ```c
 /// GLAPI void GLAPIENTRY glMultTransposeMatrixd( const GLdouble m[16] )
 /// ```
+/// {@category opengl}
 void glMultTransposeMatrixd(double m) {
   final glMultTransposeMatrixdAsFunction = _glMultTransposeMatrixd
       .cast<NativeFunction<Void Function(Double m)>>()
@@ -34128,6 +34546,7 @@ late Pointer<NativeFunction<Void Function()>> _glMultTransposeMatrixf;
 /// ```c
 /// GLAPI void GLAPIENTRY glMultTransposeMatrixf( const GLfloat m[16] )
 /// ```
+/// {@category opengl}
 void glMultTransposeMatrixf(double m) {
   final glMultTransposeMatrixfAsFunction = _glMultTransposeMatrixf
       .cast<NativeFunction<Void Function(Float m)>>()
@@ -34141,6 +34560,7 @@ late Pointer<NativeFunction<Void Function()>> _glSampleCoverage;
 /// ```c
 /// GLAPI void GLAPIENTRY glSampleCoverage( GLclampf value, GLboolean invert )
 /// ```
+/// {@category opengl}
 void glSampleCoverage(double value, int invert) {
   final glSampleCoverageAsFunction = _glSampleCoverage
       .cast<NativeFunction<Void Function(Float value, Int32 invert)>>()
@@ -34154,6 +34574,7 @@ late Pointer<NativeFunction<Void Function()>> _glActiveTextureArb;
 /// ```c
 /// GLAPI void GLAPIENTRY glActiveTextureARB(GLenum texture)
 /// ```
+/// {@category opengl}
 void glActiveTextureArb(int texture) {
   final glActiveTextureArbAsFunction = _glActiveTextureArb
       .cast<NativeFunction<Void Function(Uint32 texture)>>()
@@ -34167,6 +34588,7 @@ late Pointer<NativeFunction<Void Function()>> _glClientActiveTextureArb;
 /// ```c
 /// GLAPI void GLAPIENTRY glClientActiveTextureARB(GLenum texture)
 /// ```
+/// {@category opengl}
 void glClientActiveTextureArb(int texture) {
   final glClientActiveTextureArbAsFunction = _glClientActiveTextureArb
       .cast<NativeFunction<Void Function(Uint32 texture)>>()
@@ -34180,6 +34602,7 @@ late Pointer<NativeFunction<Void Function()>> _glMultiTexCoord1dArb;
 /// ```c
 /// GLAPI void GLAPIENTRY glMultiTexCoord1dARB(GLenum target, GLdouble s)
 /// ```
+/// {@category opengl}
 void glMultiTexCoord1dArb(int target, double s) {
   final glMultiTexCoord1dArbAsFunction = _glMultiTexCoord1dArb
       .cast<NativeFunction<Void Function(Uint32 target, Double s)>>()
@@ -34193,6 +34616,7 @@ late Pointer<NativeFunction<Void Function()>> _glMultiTexCoord1dvArb;
 /// ```c
 /// GLAPI void GLAPIENTRY glMultiTexCoord1dvARB(GLenum target, const GLdouble *v)
 /// ```
+/// {@category opengl}
 void glMultiTexCoord1dvArb(int target, Pointer<Double> v) {
   final glMultiTexCoord1dvArbAsFunction = _glMultiTexCoord1dvArb
       .cast<NativeFunction<Void Function(Uint32 target, Pointer<Double> v)>>()
@@ -34206,6 +34630,7 @@ late Pointer<NativeFunction<Void Function()>> _glMultiTexCoord1fArb;
 /// ```c
 /// GLAPI void GLAPIENTRY glMultiTexCoord1fARB(GLenum target, GLfloat s)
 /// ```
+/// {@category opengl}
 void glMultiTexCoord1fArb(int target, double s) {
   final glMultiTexCoord1fArbAsFunction = _glMultiTexCoord1fArb
       .cast<NativeFunction<Void Function(Uint32 target, Float s)>>()
@@ -34219,6 +34644,7 @@ late Pointer<NativeFunction<Void Function()>> _glMultiTexCoord1fvArb;
 /// ```c
 /// GLAPI void GLAPIENTRY glMultiTexCoord1fvARB(GLenum target, const GLfloat *v)
 /// ```
+/// {@category opengl}
 void glMultiTexCoord1fvArb(int target, Pointer<Float> v) {
   final glMultiTexCoord1fvArbAsFunction = _glMultiTexCoord1fvArb
       .cast<NativeFunction<Void Function(Uint32 target, Pointer<Float> v)>>()
@@ -34232,6 +34658,7 @@ late Pointer<NativeFunction<Void Function()>> _glMultiTexCoord1iArb;
 /// ```c
 /// GLAPI void GLAPIENTRY glMultiTexCoord1iARB(GLenum target, GLint s)
 /// ```
+/// {@category opengl}
 void glMultiTexCoord1iArb(int target, int s) {
   final glMultiTexCoord1iArbAsFunction = _glMultiTexCoord1iArb
       .cast<NativeFunction<Void Function(Uint32 target, Int32 s)>>()
@@ -34245,6 +34672,7 @@ late Pointer<NativeFunction<Void Function()>> _glMultiTexCoord1ivArb;
 /// ```c
 /// GLAPI void GLAPIENTRY glMultiTexCoord1ivARB(GLenum target, const GLint *v)
 /// ```
+/// {@category opengl}
 void glMultiTexCoord1ivArb(int target, Pointer<Int32> v) {
   final glMultiTexCoord1ivArbAsFunction = _glMultiTexCoord1ivArb
       .cast<NativeFunction<Void Function(Uint32 target, Pointer<Int32> v)>>()
@@ -34258,6 +34686,7 @@ late Pointer<NativeFunction<Void Function()>> _glMultiTexCoord1sArb;
 /// ```c
 /// GLAPI void GLAPIENTRY glMultiTexCoord1sARB(GLenum target, GLshort s)
 /// ```
+/// {@category opengl}
 void glMultiTexCoord1sArb(int target, int s) {
   final glMultiTexCoord1sArbAsFunction = _glMultiTexCoord1sArb
       .cast<NativeFunction<Void Function(Uint32 target, Int16 s)>>()
@@ -34271,6 +34700,7 @@ late Pointer<NativeFunction<Void Function()>> _glMultiTexCoord1svArb;
 /// ```c
 /// GLAPI void GLAPIENTRY glMultiTexCoord1svARB(GLenum target, const GLshort *v)
 /// ```
+/// {@category opengl}
 void glMultiTexCoord1svArb(int target, Pointer<Int16> v) {
   final glMultiTexCoord1svArbAsFunction = _glMultiTexCoord1svArb
       .cast<NativeFunction<Void Function(Uint32 target, Pointer<Int16> v)>>()
@@ -34284,6 +34714,7 @@ late Pointer<NativeFunction<Void Function()>> _glMultiTexCoord2dArb;
 /// ```c
 /// GLAPI void GLAPIENTRY glMultiTexCoord2dARB(GLenum target, GLdouble s, GLdouble t)
 /// ```
+/// {@category opengl}
 void glMultiTexCoord2dArb(int target, double s, double t) {
   final glMultiTexCoord2dArbAsFunction = _glMultiTexCoord2dArb
       .cast<NativeFunction<Void Function(Uint32 target, Double s, Double t)>>()
@@ -34297,6 +34728,7 @@ late Pointer<NativeFunction<Void Function()>> _glMultiTexCoord2dvArb;
 /// ```c
 /// GLAPI void GLAPIENTRY glMultiTexCoord2dvARB(GLenum target, const GLdouble *v)
 /// ```
+/// {@category opengl}
 void glMultiTexCoord2dvArb(int target, Pointer<Double> v) {
   final glMultiTexCoord2dvArbAsFunction = _glMultiTexCoord2dvArb
       .cast<NativeFunction<Void Function(Uint32 target, Pointer<Double> v)>>()
@@ -34310,6 +34742,7 @@ late Pointer<NativeFunction<Void Function()>> _glMultiTexCoord2fArb;
 /// ```c
 /// GLAPI void GLAPIENTRY glMultiTexCoord2fARB(GLenum target, GLfloat s, GLfloat t)
 /// ```
+/// {@category opengl}
 void glMultiTexCoord2fArb(int target, double s, double t) {
   final glMultiTexCoord2fArbAsFunction = _glMultiTexCoord2fArb
       .cast<NativeFunction<Void Function(Uint32 target, Float s, Float t)>>()
@@ -34323,6 +34756,7 @@ late Pointer<NativeFunction<Void Function()>> _glMultiTexCoord2fvArb;
 /// ```c
 /// GLAPI void GLAPIENTRY glMultiTexCoord2fvARB(GLenum target, const GLfloat *v)
 /// ```
+/// {@category opengl}
 void glMultiTexCoord2fvArb(int target, Pointer<Float> v) {
   final glMultiTexCoord2fvArbAsFunction = _glMultiTexCoord2fvArb
       .cast<NativeFunction<Void Function(Uint32 target, Pointer<Float> v)>>()
@@ -34336,6 +34770,7 @@ late Pointer<NativeFunction<Void Function()>> _glMultiTexCoord2iArb;
 /// ```c
 /// GLAPI void GLAPIENTRY glMultiTexCoord2iARB(GLenum target, GLint s, GLint t)
 /// ```
+/// {@category opengl}
 void glMultiTexCoord2iArb(int target, int s, int t) {
   final glMultiTexCoord2iArbAsFunction = _glMultiTexCoord2iArb
       .cast<NativeFunction<Void Function(Uint32 target, Int32 s, Int32 t)>>()
@@ -34349,6 +34784,7 @@ late Pointer<NativeFunction<Void Function()>> _glMultiTexCoord2ivArb;
 /// ```c
 /// GLAPI void GLAPIENTRY glMultiTexCoord2ivARB(GLenum target, const GLint *v)
 /// ```
+/// {@category opengl}
 void glMultiTexCoord2ivArb(int target, Pointer<Int32> v) {
   final glMultiTexCoord2ivArbAsFunction = _glMultiTexCoord2ivArb
       .cast<NativeFunction<Void Function(Uint32 target, Pointer<Int32> v)>>()
@@ -34362,6 +34798,7 @@ late Pointer<NativeFunction<Void Function()>> _glMultiTexCoord2sArb;
 /// ```c
 /// GLAPI void GLAPIENTRY glMultiTexCoord2sARB(GLenum target, GLshort s, GLshort t)
 /// ```
+/// {@category opengl}
 void glMultiTexCoord2sArb(int target, int s, int t) {
   final glMultiTexCoord2sArbAsFunction = _glMultiTexCoord2sArb
       .cast<NativeFunction<Void Function(Uint32 target, Int16 s, Int16 t)>>()
@@ -34375,6 +34812,7 @@ late Pointer<NativeFunction<Void Function()>> _glMultiTexCoord2svArb;
 /// ```c
 /// GLAPI void GLAPIENTRY glMultiTexCoord2svARB(GLenum target, const GLshort *v)
 /// ```
+/// {@category opengl}
 void glMultiTexCoord2svArb(int target, Pointer<Int16> v) {
   final glMultiTexCoord2svArbAsFunction = _glMultiTexCoord2svArb
       .cast<NativeFunction<Void Function(Uint32 target, Pointer<Int16> v)>>()
@@ -34388,6 +34826,7 @@ late Pointer<NativeFunction<Void Function()>> _glMultiTexCoord3dArb;
 /// ```c
 /// GLAPI void GLAPIENTRY glMultiTexCoord3dARB(GLenum target, GLdouble s, GLdouble t, GLdouble r)
 /// ```
+/// {@category opengl}
 void glMultiTexCoord3dArb(int target, double s, double t, double r) {
   final glMultiTexCoord3dArbAsFunction = _glMultiTexCoord3dArb
       .cast<
@@ -34405,6 +34844,7 @@ late Pointer<NativeFunction<Void Function()>> _glMultiTexCoord3dvArb;
 /// ```c
 /// GLAPI void GLAPIENTRY glMultiTexCoord3dvARB(GLenum target, const GLdouble *v)
 /// ```
+/// {@category opengl}
 void glMultiTexCoord3dvArb(int target, Pointer<Double> v) {
   final glMultiTexCoord3dvArbAsFunction = _glMultiTexCoord3dvArb
       .cast<NativeFunction<Void Function(Uint32 target, Pointer<Double> v)>>()
@@ -34418,6 +34858,7 @@ late Pointer<NativeFunction<Void Function()>> _glMultiTexCoord3fArb;
 /// ```c
 /// GLAPI void GLAPIENTRY glMultiTexCoord3fARB(GLenum target, GLfloat s, GLfloat t, GLfloat r)
 /// ```
+/// {@category opengl}
 void glMultiTexCoord3fArb(int target, double s, double t, double r) {
   final glMultiTexCoord3fArbAsFunction = _glMultiTexCoord3fArb
       .cast<
@@ -34433,6 +34874,7 @@ late Pointer<NativeFunction<Void Function()>> _glMultiTexCoord3fvArb;
 /// ```c
 /// GLAPI void GLAPIENTRY glMultiTexCoord3fvARB(GLenum target, const GLfloat *v)
 /// ```
+/// {@category opengl}
 void glMultiTexCoord3fvArb(int target, Pointer<Float> v) {
   final glMultiTexCoord3fvArbAsFunction = _glMultiTexCoord3fvArb
       .cast<NativeFunction<Void Function(Uint32 target, Pointer<Float> v)>>()
@@ -34446,6 +34888,7 @@ late Pointer<NativeFunction<Void Function()>> _glMultiTexCoord3iArb;
 /// ```c
 /// GLAPI void GLAPIENTRY glMultiTexCoord3iARB(GLenum target, GLint s, GLint t, GLint r)
 /// ```
+/// {@category opengl}
 void glMultiTexCoord3iArb(int target, int s, int t, int r) {
   final glMultiTexCoord3iArbAsFunction = _glMultiTexCoord3iArb
       .cast<
@@ -34461,6 +34904,7 @@ late Pointer<NativeFunction<Void Function()>> _glMultiTexCoord3ivArb;
 /// ```c
 /// GLAPI void GLAPIENTRY glMultiTexCoord3ivARB(GLenum target, const GLint *v)
 /// ```
+/// {@category opengl}
 void glMultiTexCoord3ivArb(int target, Pointer<Int32> v) {
   final glMultiTexCoord3ivArbAsFunction = _glMultiTexCoord3ivArb
       .cast<NativeFunction<Void Function(Uint32 target, Pointer<Int32> v)>>()
@@ -34474,6 +34918,7 @@ late Pointer<NativeFunction<Void Function()>> _glMultiTexCoord3sArb;
 /// ```c
 /// GLAPI void GLAPIENTRY glMultiTexCoord3sARB(GLenum target, GLshort s, GLshort t, GLshort r)
 /// ```
+/// {@category opengl}
 void glMultiTexCoord3sArb(int target, int s, int t, int r) {
   final glMultiTexCoord3sArbAsFunction = _glMultiTexCoord3sArb
       .cast<
@@ -34489,6 +34934,7 @@ late Pointer<NativeFunction<Void Function()>> _glMultiTexCoord3svArb;
 /// ```c
 /// GLAPI void GLAPIENTRY glMultiTexCoord3svARB(GLenum target, const GLshort *v)
 /// ```
+/// {@category opengl}
 void glMultiTexCoord3svArb(int target, Pointer<Int16> v) {
   final glMultiTexCoord3svArbAsFunction = _glMultiTexCoord3svArb
       .cast<NativeFunction<Void Function(Uint32 target, Pointer<Int16> v)>>()
@@ -34502,6 +34948,7 @@ late Pointer<NativeFunction<Void Function()>> _glMultiTexCoord4dArb;
 /// ```c
 /// GLAPI void GLAPIENTRY glMultiTexCoord4dARB(GLenum target, GLdouble s, GLdouble t, GLdouble r, GLdouble q)
 /// ```
+/// {@category opengl}
 void glMultiTexCoord4dArb(int target, double s, double t, double r, double q) {
   final glMultiTexCoord4dArbAsFunction = _glMultiTexCoord4dArb
       .cast<
@@ -34521,6 +34968,7 @@ late Pointer<NativeFunction<Void Function()>> _glMultiTexCoord4dvArb;
 /// ```c
 /// GLAPI void GLAPIENTRY glMultiTexCoord4dvARB(GLenum target, const GLdouble *v)
 /// ```
+/// {@category opengl}
 void glMultiTexCoord4dvArb(int target, Pointer<Double> v) {
   final glMultiTexCoord4dvArbAsFunction = _glMultiTexCoord4dvArb
       .cast<NativeFunction<Void Function(Uint32 target, Pointer<Double> v)>>()
@@ -34534,6 +34982,7 @@ late Pointer<NativeFunction<Void Function()>> _glMultiTexCoord4fArb;
 /// ```c
 /// GLAPI void GLAPIENTRY glMultiTexCoord4fARB(GLenum target, GLfloat s, GLfloat t, GLfloat r, GLfloat q)
 /// ```
+/// {@category opengl}
 void glMultiTexCoord4fArb(int target, double s, double t, double r, double q) {
   final glMultiTexCoord4fArbAsFunction = _glMultiTexCoord4fArb
       .cast<
@@ -34553,6 +35002,7 @@ late Pointer<NativeFunction<Void Function()>> _glMultiTexCoord4fvArb;
 /// ```c
 /// GLAPI void GLAPIENTRY glMultiTexCoord4fvARB(GLenum target, const GLfloat *v)
 /// ```
+/// {@category opengl}
 void glMultiTexCoord4fvArb(int target, Pointer<Float> v) {
   final glMultiTexCoord4fvArbAsFunction = _glMultiTexCoord4fvArb
       .cast<NativeFunction<Void Function(Uint32 target, Pointer<Float> v)>>()
@@ -34566,6 +35016,7 @@ late Pointer<NativeFunction<Void Function()>> _glMultiTexCoord4iArb;
 /// ```c
 /// GLAPI void GLAPIENTRY glMultiTexCoord4iARB(GLenum target, GLint s, GLint t, GLint r, GLint q)
 /// ```
+/// {@category opengl}
 void glMultiTexCoord4iArb(int target, int s, int t, int r, int q) {
   final glMultiTexCoord4iArbAsFunction = _glMultiTexCoord4iArb
       .cast<
@@ -34583,6 +35034,7 @@ late Pointer<NativeFunction<Void Function()>> _glMultiTexCoord4ivArb;
 /// ```c
 /// GLAPI void GLAPIENTRY glMultiTexCoord4ivARB(GLenum target, const GLint *v)
 /// ```
+/// {@category opengl}
 void glMultiTexCoord4ivArb(int target, Pointer<Int32> v) {
   final glMultiTexCoord4ivArbAsFunction = _glMultiTexCoord4ivArb
       .cast<NativeFunction<Void Function(Uint32 target, Pointer<Int32> v)>>()
@@ -34596,6 +35048,7 @@ late Pointer<NativeFunction<Void Function()>> _glMultiTexCoord4sArb;
 /// ```c
 /// GLAPI void GLAPIENTRY glMultiTexCoord4sARB(GLenum target, GLshort s, GLshort t, GLshort r, GLshort q)
 /// ```
+/// {@category opengl}
 void glMultiTexCoord4sArb(int target, int s, int t, int r, int q) {
   final glMultiTexCoord4sArbAsFunction = _glMultiTexCoord4sArb
       .cast<
@@ -34613,6 +35066,7 @@ late Pointer<NativeFunction<Void Function()>> _glMultiTexCoord4svArb;
 /// ```c
 /// GLAPI void GLAPIENTRY glMultiTexCoord4svARB(GLenum target, const GLshort *v)
 /// ```
+/// {@category opengl}
 void glMultiTexCoord4svArb(int target, Pointer<Int16> v) {
   final glMultiTexCoord4svArbAsFunction = _glMultiTexCoord4svArb
       .cast<NativeFunction<Void Function(Uint32 target, Pointer<Int16> v)>>()

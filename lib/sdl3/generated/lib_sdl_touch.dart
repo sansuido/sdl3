@@ -19,6 +19,7 @@ part of '../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC SDL_TouchID * SDLCALL SDL_GetTouchDevices(int *count)
 /// ```
+/// {@category touch}
 Pointer<Uint64> sdlGetTouchDevices(Pointer<Int32> count) {
   final sdlGetTouchDevicesLookupFunction = _libSdl
       .lookupFunction<
@@ -40,6 +41,7 @@ Pointer<Uint64> sdlGetTouchDevices(Pointer<Int32> count) {
 /// ```c
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetTouchDeviceName(SDL_TouchID touchID)
 /// ```
+/// {@category touch}
 String? sdlGetTouchDeviceName(int touchId) {
   final sdlGetTouchDeviceNameLookupFunction = _libSdl
       .lookupFunction<
@@ -64,6 +66,7 @@ String? sdlGetTouchDeviceName(int touchId) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_TouchDeviceType SDLCALL SDL_GetTouchDeviceType(SDL_TouchID touchID)
 /// ```
+/// {@category touch}
 int sdlGetTouchDeviceType(int touchId) {
   final sdlGetTouchDeviceTypeLookupFunction = _libSdl
       .lookupFunction<
@@ -89,6 +92,7 @@ int sdlGetTouchDeviceType(int touchId) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Finger ** SDLCALL SDL_GetTouchFingers(SDL_TouchID touchID, int *count)
 /// ```
+/// {@category touch}
 Pointer<Pointer<SdlFinger>> sdlGetTouchFingers(
   int touchId,
   Pointer<Int32> count,

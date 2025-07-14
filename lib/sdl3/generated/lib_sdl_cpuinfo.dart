@@ -15,6 +15,7 @@ part of '../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_GetNumLogicalCPUCores(void)
 /// ```
+/// {@category cpuinfo}
 int sdlGetNumLogicalCpuCores() {
   final sdlGetNumLogicalCpuCoresLookupFunction = _libSdl
       .lookupFunction<Int32 Function(), int Function()>(
@@ -38,6 +39,7 @@ int sdlGetNumLogicalCpuCores() {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_GetCPUCacheLineSize(void)
 /// ```
+/// {@category cpuinfo}
 int sdlGetCpuCacheLineSize() {
   final sdlGetCpuCacheLineSizeLookupFunction = _libSdl
       .lookupFunction<Int32 Function(), int Function()>(
@@ -61,6 +63,7 @@ int sdlGetCpuCacheLineSize() {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_HasAltiVec(void)
 /// ```
+/// {@category cpuinfo}
 bool sdlHasAltiVec() {
   final sdlHasAltiVecLookupFunction = _libSdl
       .lookupFunction<Uint8 Function(), int Function()>('SDL_HasAltiVec');
@@ -81,6 +84,7 @@ bool sdlHasAltiVec() {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_HasMMX(void)
 /// ```
+/// {@category cpuinfo}
 bool sdlHasMmx() {
   final sdlHasMmxLookupFunction = _libSdl
       .lookupFunction<Uint8 Function(), int Function()>('SDL_HasMMX');
@@ -106,6 +110,7 @@ bool sdlHasMmx() {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_HasSSE(void)
 /// ```
+/// {@category cpuinfo}
 bool sdlHasSse() {
   final sdlHasSseLookupFunction = _libSdl
       .lookupFunction<Uint8 Function(), int Function()>('SDL_HasSSE');
@@ -131,6 +136,7 @@ bool sdlHasSse() {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_HasSSE2(void)
 /// ```
+/// {@category cpuinfo}
 bool sdlHasSse2() {
   final sdlHasSse2LookupFunction = _libSdl
       .lookupFunction<Uint8 Function(), int Function()>('SDL_HasSSE2');
@@ -156,6 +162,7 @@ bool sdlHasSse2() {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_HasSSE3(void)
 /// ```
+/// {@category cpuinfo}
 bool sdlHasSse3() {
   final sdlHasSse3LookupFunction = _libSdl
       .lookupFunction<Uint8 Function(), int Function()>('SDL_HasSSE3');
@@ -181,6 +188,7 @@ bool sdlHasSse3() {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_HasSSE41(void)
 /// ```
+/// {@category cpuinfo}
 bool sdlHasSse41() {
   final sdlHasSse41LookupFunction = _libSdl
       .lookupFunction<Uint8 Function(), int Function()>('SDL_HasSSE41');
@@ -206,6 +214,7 @@ bool sdlHasSse41() {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_HasSSE42(void)
 /// ```
+/// {@category cpuinfo}
 bool sdlHasSse42() {
   final sdlHasSse42LookupFunction = _libSdl
       .lookupFunction<Uint8 Function(), int Function()>('SDL_HasSSE42');
@@ -229,6 +238,7 @@ bool sdlHasSse42() {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_HasAVX(void)
 /// ```
+/// {@category cpuinfo}
 bool sdlHasAvx() {
   final sdlHasAvxLookupFunction = _libSdl
       .lookupFunction<Uint8 Function(), int Function()>('SDL_HasAVX');
@@ -252,6 +262,7 @@ bool sdlHasAvx() {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_HasAVX2(void)
 /// ```
+/// {@category cpuinfo}
 bool sdlHasAvx2() {
   final sdlHasAvx2LookupFunction = _libSdl
       .lookupFunction<Uint8 Function(), int Function()>('SDL_HasAVX2');
@@ -275,6 +286,7 @@ bool sdlHasAvx2() {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_HasAVX512F(void)
 /// ```
+/// {@category cpuinfo}
 bool sdlHasAvx512F() {
   final sdlHasAvx512FLookupFunction = _libSdl
       .lookupFunction<Uint8 Function(), int Function()>('SDL_HasAVX512F');
@@ -299,6 +311,7 @@ bool sdlHasAvx512F() {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_HasARMSIMD(void)
 /// ```
+/// {@category cpuinfo}
 bool sdlHasArmsimd() {
   final sdlHasArmsimdLookupFunction = _libSdl
       .lookupFunction<Uint8 Function(), int Function()>('SDL_HasARMSIMD');
@@ -319,6 +332,7 @@ bool sdlHasArmsimd() {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_HasNEON(void)
 /// ```
+/// {@category cpuinfo}
 bool sdlHasNeon() {
   final sdlHasNeonLookupFunction = _libSdl
       .lookupFunction<Uint8 Function(), int Function()>('SDL_HasNEON');
@@ -340,6 +354,7 @@ bool sdlHasNeon() {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_HasLSX(void)
 /// ```
+/// {@category cpuinfo}
 bool sdlHasLsx() {
   final sdlHasLsxLookupFunction = _libSdl
       .lookupFunction<Uint8 Function(), int Function()>('SDL_HasLSX');
@@ -361,6 +376,7 @@ bool sdlHasLsx() {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_HasLASX(void)
 /// ```
+/// {@category cpuinfo}
 bool sdlHasLasx() {
   final sdlHasLasxLookupFunction = _libSdl
       .lookupFunction<Uint8 Function(), int Function()>('SDL_HasLASX');
@@ -379,6 +395,7 @@ bool sdlHasLasx() {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_GetSystemRAM(void)
 /// ```
+/// {@category cpuinfo}
 int sdlGetSystemRam() {
   final sdlGetSystemRamLookupFunction = _libSdl
       .lookupFunction<Int32 Function(), int Function()>('SDL_GetSystemRAM');
@@ -410,6 +427,7 @@ int sdlGetSystemRam() {
 /// ```c
 /// extern SDL_DECLSPEC size_t SDLCALL SDL_GetSIMDAlignment(void)
 /// ```
+/// {@category cpuinfo}
 int sdlGetSimdAlignment() {
   final sdlGetSimdAlignmentLookupFunction = _libSdl
       .lookupFunction<Uint32 Function(), int Function()>(

@@ -18,6 +18,7 @@ part of '../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC Uint64 SDLCALL SDL_GetTicks(void)
 /// ```
+/// {@category timer}
 int sdlGetTicks() {
   final sdlGetTicksLookupFunction = _libSdl
       .lookupFunction<Uint64 Function(), int Function()>('SDL_GetTicks');
@@ -37,6 +38,7 @@ int sdlGetTicks() {
 /// ```c
 /// extern SDL_DECLSPEC Uint64 SDLCALL SDL_GetTicksNS(void)
 /// ```
+/// {@category timer}
 int sdlGetTicksNs() {
   final sdlGetTicksNsLookupFunction = _libSdl
       .lookupFunction<Uint64 Function(), int Function()>('SDL_GetTicksNS');
@@ -63,6 +65,7 @@ int sdlGetTicksNs() {
 /// ```c
 /// extern SDL_DECLSPEC Uint64 SDLCALL SDL_GetPerformanceCounter(void)
 /// ```
+/// {@category timer}
 int sdlGetPerformanceCounter() {
   final sdlGetPerformanceCounterLookupFunction = _libSdl
       .lookupFunction<Uint64 Function(), int Function()>(
@@ -85,6 +88,7 @@ int sdlGetPerformanceCounter() {
 /// ```c
 /// extern SDL_DECLSPEC Uint64 SDLCALL SDL_GetPerformanceFrequency(void)
 /// ```
+/// {@category timer}
 int sdlGetPerformanceFrequency() {
   final sdlGetPerformanceFrequencyLookupFunction = _libSdl
       .lookupFunction<Uint64 Function(), int Function()>(
@@ -112,6 +116,7 @@ int sdlGetPerformanceFrequency() {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_Delay(Uint32 ms)
 /// ```
+/// {@category timer}
 void sdlDelay(int ms) {
   final sdlDelayLookupFunction = _libSdl
       .lookupFunction<Void Function(Uint32 ms), void Function(int ms)>(
@@ -139,6 +144,7 @@ void sdlDelay(int ms) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_DelayNS(Uint64 ns)
 /// ```
+/// {@category timer}
 void sdlDelayNs(int ns) {
   final sdlDelayNsLookupFunction = _libSdl
       .lookupFunction<Void Function(Uint64 ns), void Function(int ns)>(
@@ -166,6 +172,7 @@ void sdlDelayNs(int ns) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_DelayPrecise(Uint64 ns)
 /// ```
+/// {@category timer}
 void sdlDelayPrecise(int ns) {
   final sdlDelayPreciseLookupFunction = _libSdl
       .lookupFunction<Void Function(Uint64 ns), void Function(int ns)>(
@@ -211,6 +218,7 @@ void sdlDelayPrecise(int ns) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_TimerID SDLCALL SDL_AddTimer(Uint32 interval, SDL_TimerCallback callback, void *userdata)
 /// ```
+/// {@category timer}
 int sdlAddTimer(
   int interval,
   Pointer<NativeFunction<SdlTimerCallback>> callback,
@@ -269,6 +277,7 @@ int sdlAddTimer(
 /// ```c
 /// extern SDL_DECLSPEC SDL_TimerID SDLCALL SDL_AddTimerNS(Uint64 interval, SDL_NSTimerCallback callback, void *userdata)
 /// ```
+/// {@category timer}
 int sdlAddTimerNs(
   int interval,
   Pointer<NativeFunction<SdlNsTimerCallback>> callback,
@@ -306,6 +315,7 @@ int sdlAddTimerNs(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_RemoveTimer(SDL_TimerID id)
 /// ```
+/// {@category timer}
 bool sdlRemoveTimer(int id) {
   final sdlRemoveTimerLookupFunction = _libSdl
       .lookupFunction<Uint8 Function(Uint32 id), int Function(int id)>(

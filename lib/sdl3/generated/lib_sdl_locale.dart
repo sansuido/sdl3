@@ -45,6 +45,7 @@ part of '../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC SDL_Locale ** SDLCALL SDL_GetPreferredLocales(int *count)
 /// ```
+/// {@category locale}
 Pointer<Pointer<SdlLocale>> sdlGetPreferredLocales(Pointer<Int32> count) {
   final sdlGetPreferredLocalesLookupFunction = _libSdl
       .lookupFunction<

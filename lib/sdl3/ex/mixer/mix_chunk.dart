@@ -46,6 +46,7 @@ extension MixChunkEx on MixChunk {
   /// ```c
   /// extern SDL_DECLSPEC Mix_Chunk * SDLCALL Mix_LoadWAV_IO(SDL_IOStream *src, bool closeio)
   /// ```
+  /// {@category mixer}
   static Pointer<MixChunk> loadWavIo(
     Pointer<SdlIoStream> src, {
     required bool closeio,
@@ -93,6 +94,7 @@ extension MixChunkEx on MixChunk {
   /// ```c
   /// extern SDL_DECLSPEC Mix_Chunk * SDLCALL Mix_LoadWAV(const char *file)
   /// ```
+  /// {@category mixer}
   static Pointer<MixChunk> loadWav(String? file) => mixLoadWav(file);
 
   ///
@@ -131,6 +133,7 @@ extension MixChunkEx on MixChunk {
   /// ```c
   /// extern SDL_DECLSPEC Mix_Chunk * SDLCALL Mix_QuickLoad_WAV(Uint8 *mem)
   /// ```
+  /// {@category mixer}
   static Pointer<MixChunk> quickLoadWav(Pointer<Uint8> mem) =>
       mixQuickLoadWav(mem);
 
@@ -155,6 +158,7 @@ extension MixChunkEx on MixChunk {
   /// ```c
   /// extern SDL_DECLSPEC Mix_Chunk * SDLCALL Mix_QuickLoad_RAW(Uint8 *mem, Uint32 len)
   /// ```
+  /// {@category mixer}
   static Pointer<MixChunk> quickLoadRaw(Pointer<Uint8> mem, int len) =>
       mixQuickLoadRaw(mem, len);
 
@@ -171,6 +175,7 @@ extension MixChunkEx on MixChunk {
   /// ```c
   /// extern SDL_DECLSPEC Mix_Chunk * SDLCALL Mix_GetChunk(int channel)
   /// ```
+  /// {@category mixer}
   static Pointer<MixChunk> get(int channel) => mixGetChunk(channel);
 }
 
@@ -199,6 +204,7 @@ extension MixChunkPointerEx on Pointer<MixChunk> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL Mix_FreeChunk(Mix_Chunk *chunk)
   /// ```
+  /// {@category mixer}
   void free() {
     mixFreeChunk(this);
   }
@@ -234,6 +240,7 @@ extension MixChunkPointerEx on Pointer<MixChunk> {
   /// ```c
   /// extern SDL_DECLSPEC int SDLCALL Mix_PlayChannel(int channel, Mix_Chunk *chunk, int loops)
   /// ```
+  /// {@category mixer}
   int playChannel(int channel, int loops) =>
       mixPlayChannel(channel, this, loops);
 
@@ -271,6 +278,7 @@ extension MixChunkPointerEx on Pointer<MixChunk> {
   /// ```c
   /// extern SDL_DECLSPEC int SDLCALL Mix_PlayChannelTimed(int channel, Mix_Chunk *chunk, int loops, int ticks)
   /// ```
+  /// {@category mixer}
   int playChannelTimed(int channel, int loops, int ticks) =>
       mixPlayChannelTimed(channel, this, loops, ticks);
 
@@ -315,6 +323,7 @@ extension MixChunkPointerEx on Pointer<MixChunk> {
   /// ```c
   /// extern SDL_DECLSPEC int SDLCALL Mix_FadeInChannel(int channel, Mix_Chunk *chunk, int loops, int ms)
   /// ```
+  /// {@category mixer}
   int fadeInChannel(int channel, int loops, int ms) =>
       mixFadeInChannel(channel, this, loops, ms);
 
@@ -363,6 +372,7 @@ extension MixChunkPointerEx on Pointer<MixChunk> {
   /// ```c
   /// extern SDL_DECLSPEC int SDLCALL Mix_FadeInChannelTimed(int channel, Mix_Chunk *chunk, int loops, int ms, int ticks)
   /// ```
+  /// {@category mixer}
   int fadeInChannelTimed(int channel, int loops, int ms, int ticks) =>
       mixFadeInChannelTimed(channel, this, loops, ms, ticks);
 
@@ -395,5 +405,6 @@ extension MixChunkPointerEx on Pointer<MixChunk> {
   /// ```c
   /// extern SDL_DECLSPEC int SDLCALL Mix_VolumeChunk(Mix_Chunk *chunk, int volume)
   /// ```
+  /// {@category mixer}
   int setVolume(int volume) => mixVolumeChunk(this, volume);
 }

@@ -26,6 +26,7 @@ part of '../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetHintWithPriority(const char *name, const char *value, SDL_HintPriority priority)
 /// ```
+/// {@category hints}
 bool sdlSetHintWithPriority(String? name, String? value, int priority) {
   final sdlSetHintWithPriorityLookupFunction = _libSdl
       .lookupFunction<
@@ -70,6 +71,7 @@ bool sdlSetHintWithPriority(String? name, String? value, int priority) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetHint(const char *name, const char *value)
 /// ```
+/// {@category hints}
 bool sdlSetHint(String? name, String? value) {
   final sdlSetHintLookupFunction = _libSdl
       .lookupFunction<
@@ -106,6 +108,7 @@ bool sdlSetHint(String? name, String? value) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_ResetHint(const char *name)
 /// ```
+/// {@category hints}
 bool sdlResetHint(String? name) {
   final sdlResetHintLookupFunction = _libSdl
       .lookupFunction<
@@ -134,6 +137,7 @@ bool sdlResetHint(String? name) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_ResetHints(void)
 /// ```
+/// {@category hints}
 void sdlResetHints() {
   final sdlResetHintsLookupFunction = _libSdl
       .lookupFunction<Void Function(), void Function()>('SDL_ResetHints');
@@ -161,6 +165,7 @@ void sdlResetHints() {
 /// ```c
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetHint(const char *name)
 /// ```
+/// {@category hints}
 String? sdlGetHint(String? name) {
   final sdlGetHintLookupFunction = _libSdl
       .lookupFunction<
@@ -194,6 +199,7 @@ String? sdlGetHint(String? name) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetHintBoolean(const char *name, bool default_value)
 /// ```
+/// {@category hints}
 bool sdlGetHintBoolean(String? name, bool defaultValue) {
   final sdlGetHintBooleanLookupFunction = _libSdl
       .lookupFunction<
@@ -229,6 +235,7 @@ bool sdlGetHintBoolean(String? name, bool defaultValue) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_AddHintCallback(const char *name, SDL_HintCallback callback, void *userdata)
 /// ```
+/// {@category hints}
 bool sdlAddHintCallback(
   String? name,
   Pointer<NativeFunction<SdlHintCallback>> callback,
@@ -271,6 +278,7 @@ bool sdlAddHintCallback(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_RemoveHintCallback(const char *name, SDL_HintCallback callback, void *userdata)
 /// ```
+/// {@category hints}
 void sdlRemoveHintCallback(
   String? name,
   Pointer<NativeFunction<SdlHintCallback>> callback,

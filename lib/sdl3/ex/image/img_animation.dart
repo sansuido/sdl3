@@ -19,6 +19,7 @@ extension ImgAnimationPointerEx on Pointer<ImgAnimation> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL IMG_FreeAnimation(IMG_Animation *anim)
   /// ```
+  /// {@category image}
   void free() {
     imgFreeAnimation(this);
   }

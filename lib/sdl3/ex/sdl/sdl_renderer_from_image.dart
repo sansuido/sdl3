@@ -41,6 +41,7 @@ extension SdlRendererFromImagePointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Texture * SDLCALL IMG_LoadTexture(SDL_Renderer *renderer, const char *file)
   /// ```
+  /// {@category image}
   Pointer<SdlTexture> loadTexture(String file) => imgLoadTexture(this, file);
 
   ///
@@ -91,6 +92,7 @@ extension SdlRendererFromImagePointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Texture * SDLCALL IMG_LoadTexture_IO(SDL_Renderer *renderer, SDL_IOStream *src, bool closeio)
   /// ```
+  /// {@category image}
   Pointer<SdlTexture> loadTextureIo(Pointer<SdlIoStream> src, bool freesrc) =>
       imgLoadTextureIo(this, src, freesrc);
 
@@ -150,6 +152,7 @@ extension SdlRendererFromImagePointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Texture * SDLCALL IMG_LoadTextureTyped_IO(SDL_Renderer *renderer, SDL_IOStream *src, bool closeio, const char *type)
   /// ```
+  /// {@category image}
   Pointer<SdlTexture> loadTextureTypedIo(
     Pointer<SdlIoStream> src,
     bool freesrc,

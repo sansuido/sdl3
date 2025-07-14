@@ -42,6 +42,7 @@ part of '../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC SDL_AsyncIO * SDLCALL SDL_AsyncIOFromFile(const char *file, const char *mode)
 /// ```
+/// {@category asyncio}
 Pointer<SdlAsyncIo> sdlAsyncIoFromFile(String? file, String? mode) {
   final sdlAsyncIoFromFileLookupFunction = _libSdl
       .lookupFunction<
@@ -75,6 +76,7 @@ Pointer<SdlAsyncIo> sdlAsyncIoFromFile(String? file, String? mode) {
 /// ```c
 /// extern SDL_DECLSPEC Sint64 SDLCALL SDL_GetAsyncIOSize(SDL_AsyncIO *asyncio)
 /// ```
+/// {@category asyncio}
 int sdlGetAsyncIoSize(Pointer<SdlAsyncIo> asyncio) {
   final sdlGetAsyncIoSizeLookupFunction = _libSdl
       .lookupFunction<
@@ -123,6 +125,7 @@ int sdlGetAsyncIoSize(Pointer<SdlAsyncIo> asyncio) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_ReadAsyncIO(SDL_AsyncIO *asyncio, void *ptr, Uint64 offset, Uint64 size, SDL_AsyncIOQueue *queue, void *userdata)
 /// ```
+/// {@category asyncio}
 bool sdlReadAsyncIo(
   Pointer<SdlAsyncIo> asyncio,
   Pointer<NativeType> ptr,
@@ -199,6 +202,7 @@ bool sdlReadAsyncIo(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_WriteAsyncIO(SDL_AsyncIO *asyncio, void *ptr, Uint64 offset, Uint64 size, SDL_AsyncIOQueue *queue, void *userdata)
 /// ```
+/// {@category asyncio}
 bool sdlWriteAsyncIo(
   Pointer<SdlAsyncIo> asyncio,
   Pointer<NativeType> ptr,
@@ -287,6 +291,7 @@ bool sdlWriteAsyncIo(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_CloseAsyncIO(SDL_AsyncIO *asyncio, bool flush, SDL_AsyncIOQueue *queue, void *userdata)
 /// ```
+/// {@category asyncio}
 bool sdlCloseAsyncIo(
   Pointer<SdlAsyncIo> asyncio,
   bool flush,
@@ -337,6 +342,7 @@ bool sdlCloseAsyncIo(
 /// ```c
 /// extern SDL_DECLSPEC SDL_AsyncIOQueue * SDLCALL SDL_CreateAsyncIOQueue(void)
 /// ```
+/// {@category asyncio}
 Pointer<SdlAsyncIoQueue> sdlCreateAsyncIoQueue() {
   final sdlCreateAsyncIoQueueLookupFunction = _libSdl
       .lookupFunction<
@@ -377,6 +383,7 @@ Pointer<SdlAsyncIoQueue> sdlCreateAsyncIoQueue() {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_DestroyAsyncIOQueue(SDL_AsyncIOQueue *queue)
 /// ```
+/// {@category asyncio}
 void sdlDestroyAsyncIoQueue(Pointer<SdlAsyncIoQueue> queue) {
   final sdlDestroyAsyncIoQueueLookupFunction = _libSdl
       .lookupFunction<
@@ -413,6 +420,7 @@ void sdlDestroyAsyncIoQueue(Pointer<SdlAsyncIoQueue> queue) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetAsyncIOResult(SDL_AsyncIOQueue *queue, SDL_AsyncIOOutcome *outcome)
 /// ```
+/// {@category asyncio}
 bool sdlGetAsyncIoResult(
   Pointer<SdlAsyncIoQueue> queue,
   Pointer<SdlAsyncIoOutcome> outcome,
@@ -476,6 +484,7 @@ bool sdlGetAsyncIoResult(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_WaitAsyncIOResult(SDL_AsyncIOQueue *queue, SDL_AsyncIOOutcome *outcome, Sint32 timeoutMS)
 /// ```
+/// {@category asyncio}
 bool sdlWaitAsyncIoResult(
   Pointer<SdlAsyncIoQueue> queue,
   Pointer<SdlAsyncIoOutcome> outcome,
@@ -522,6 +531,7 @@ bool sdlWaitAsyncIoResult(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_SignalAsyncIOQueue(SDL_AsyncIOQueue *queue)
 /// ```
+/// {@category asyncio}
 void sdlSignalAsyncIoQueue(Pointer<SdlAsyncIoQueue> queue) {
   final sdlSignalAsyncIoQueueLookupFunction = _libSdl
       .lookupFunction<
@@ -564,6 +574,7 @@ void sdlSignalAsyncIoQueue(Pointer<SdlAsyncIoQueue> queue) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_LoadFileAsync(const char *file, SDL_AsyncIOQueue *queue, void *userdata)
 /// ```
+/// {@category asyncio}
 bool sdlLoadFileAsync(
   String? file,
   Pointer<SdlAsyncIoQueue> queue,

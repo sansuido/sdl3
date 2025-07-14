@@ -21,6 +21,7 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetTextureSize(SDL_Texture *texture, float *w, float *h)
   /// ```
+  /// {@category render}
   math.Point<double>? getSize() {
     math.Point<double>? result;
     final wPointer = calloc<Float>();
@@ -64,6 +65,7 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetTextureColorMod(SDL_Texture *texture, Uint8 r, Uint8 g, Uint8 b)
   /// ```
+  /// {@category render}
   bool setColorMod(int r, int g, int b) => sdlSetTextureColorMod(this, r, g, b);
 
   ///
@@ -87,6 +89,7 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetTextureColorMod(SDL_Texture *texture, Uint8 *r, Uint8 *g, Uint8 *b)
   /// ```
+  /// {@category render}
   int? getColorMod() {
     int? result;
     final rPointer = calloc<Uint8>();
@@ -132,6 +135,7 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetTextureAlphaMod(SDL_Texture *texture, Uint8 alpha)
   /// ```
+  /// {@category render}
   bool setAlphaMod(int alpha) => sdlSetTextureAlphaMod(this, alpha);
 
   ///
@@ -153,6 +157,7 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetTextureAlphaMod(SDL_Texture *texture, Uint8 *alpha)
   /// ```
+  /// {@category render}
   int? getAlphaMod() {
     int? result;
     final alphaPointer = calloc<Uint8>();
@@ -183,6 +188,7 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetTextureBlendMode(SDL_Texture *texture, SDL_BlendMode blendMode)
   /// ```
+  /// {@category render}
   bool setBlendMode(int blendMode) => sdlSetTextureBlendMode(this, blendMode);
 
   ///
@@ -202,6 +208,7 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetTextureBlendMode(SDL_Texture *texture, SDL_BlendMode *blendMode)
   /// ```
+  /// {@category render}
   int? getBlendMode() {
     int? result;
     final blendModePointer = calloc<Uint32>();
@@ -233,6 +240,7 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetTextureScaleMode(SDL_Texture *texture, SDL_ScaleMode scaleMode)
   /// ```
+  /// {@category render}
   bool setScaleMode(int scaleMode) => sdlSetTextureScaleMode(this, scaleMode);
 
   ///
@@ -252,6 +260,7 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetTextureScaleMode(SDL_Texture *texture, SDL_ScaleMode *scaleMode)
   /// ```
+  /// {@category render}
   int? getScaleMode() {
     int? result;
     final scaleModePointer = calloc<Int32>();
@@ -297,6 +306,7 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_UpdateTexture(SDL_Texture *texture, const SDL_Rect *rect, const void *pixels, int pitch)
   /// ```
+  /// {@category render}
   bool update(Pointer<SdlRect> rect, Pointer<NativeType> pixels, int pitch) =>
       sdlUpdateTexture(this, rect, pixels, pitch);
 
@@ -333,6 +343,7 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_UpdateYUVTexture(SDL_Texture *texture, const SDL_Rect *rect, const Uint8 *Yplane, int Ypitch, const Uint8 *Uplane, int Upitch, const Uint8 *Vplane, int Vpitch)
   /// ```
+  /// {@category render}
   bool updateYuv(
     Pointer<SdlRect> rect,
     Pointer<Uint8> yplane,
@@ -381,6 +392,7 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_UpdateNVTexture(SDL_Texture *texture, const SDL_Rect *rect, const Uint8 *Yplane, int Ypitch, const Uint8 *UVplane, int UVpitch)
   /// ```
+  /// {@category render}
   bool updateNv(
     Pointer<SdlRect> rect,
     Pointer<Uint8> yplane,
@@ -422,6 +434,7 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_LockTexture(SDL_Texture *texture, const SDL_Rect *rect, void **pixels, int *pitch)
   /// ```
+  /// {@category render}
   bool lock(
     Pointer<SdlRect> rect,
     Pointer<Pointer<NativeType>> pixels,
@@ -465,6 +478,7 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_LockTextureToSurface(SDL_Texture *texture, const SDL_Rect *rect, SDL_Surface **surface)
   /// ```
+  /// {@category render}
   bool lockToSurface(
     Pointer<SdlRect> rect,
     Pointer<Pointer<SdlSurface>> surface,
@@ -492,6 +506,7 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_UnlockTexture(SDL_Texture *texture)
   /// ```
+  /// {@category render}
   void unlock() {
     sdlUnlockTexture(this);
   }
@@ -514,6 +529,7 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_DestroyTexture(SDL_Texture *texture)
   /// ```
+  /// {@category render}
   bool destroy() {
     if (this != nullptr) {
       sdlDestroyTexture(this);

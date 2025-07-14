@@ -23,6 +23,7 @@ extension SdlSurfaceEx on SdlSurface {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Surface * SDLCALL SDL_LoadBMP(const char *file)
   /// ```
+  /// {@category surface}
   static Pointer<SdlSurface> loadBmp(String file) => sdlLoadBmp(file);
 }
 
@@ -62,6 +63,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Cursor * SDLCALL SDL_CreateColorCursor(SDL_Surface *surface, int hot_x, int hot_y)
   /// ```
+  /// {@category mouse}
   Pointer<SdlCursor> createColorCursor(int hotX, int hotY) =>
       sdlCreateColorCursor(this, hotX, hotY);
 
@@ -89,6 +91,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_DestroySurface(SDL_Surface *surface)
   /// ```
+  /// {@category surface}
   bool destroy() {
     if (this != nullptr) {
       sdlDestroySurface(this);
@@ -117,6 +120,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetSurfacePalette(SDL_Surface *surface, SDL_Palette *palette)
   /// ```
+  /// {@category surface}
   bool setPalette(Pointer<SdlPalette> palette) =>
       sdlSetSurfacePalette(this, palette);
 
@@ -148,6 +152,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_LockSurface(SDL_Surface *surface)
   /// ```
+  /// {@category surface}
   bool lock() => sdlLockSurface(this);
 
   ///
@@ -166,6 +171,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_UnlockSurface(SDL_Surface *surface)
   /// ```
+  /// {@category surface}
   void unlock() {
     sdlUnlockSurface(this);
   }
@@ -193,6 +199,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Surface * SDLCALL SDL_LoadBMP_IO(SDL_IOStream *src, bool closeio)
   /// ```
+  /// {@category surface}
   Pointer<SdlSurface> loadBmpIo(Pointer<SdlIoStream> src, bool freesrc) =>
       sdlLoadBmpIo(src, freesrc);
 
@@ -222,6 +229,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SaveBMP_IO(SDL_Surface *surface, SDL_IOStream *dst, bool closeio)
   /// ```
+  /// {@category surface}
   bool saveBmpIo(Pointer<SdlIoStream> dst, bool freedst) =>
       sdlSaveBmpIo(this, dst, freedst);
 
@@ -247,6 +255,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetSurfaceRLE(SDL_Surface *surface, bool enabled)
   /// ```
+  /// {@category surface}
   bool setRre(bool enabled) => sdlSetSurfaceRle(this, enabled);
 
   ///
@@ -266,6 +275,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SurfaceHasRLE(SDL_Surface *surface)
   /// ```
+  /// {@category surface}
   bool hasRre() => sdlSurfaceHasRle(this);
 
   ///
@@ -295,6 +305,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetSurfaceColorKey(SDL_Surface *surface, bool enabled, Uint32 key)
   /// ```
+  /// {@category surface}
   bool setColorKey(bool enabled, int key) =>
       sdlSetSurfaceColorKey(this, enabled, key);
 
@@ -316,6 +327,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SurfaceHasColorKey(SDL_Surface *surface)
   /// ```
+  /// {@category surface}
   bool hadColorKey() => sdlSurfaceHasColorKey(this);
 
   ///
@@ -341,6 +353,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetSurfaceColorKey(SDL_Surface *surface, Uint32 *key)
   /// ```
+  /// {@category surface}
   int? getColorKey() {
     int? result;
     final keyPointer = calloc<Uint32>();
@@ -377,6 +390,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetSurfaceColorMod(SDL_Surface *surface, Uint8 r, Uint8 g, Uint8 b)
   /// ```
+  /// {@category surface}
   bool setColorMod(int r, int g, int b) => sdlSetSurfaceColorMod(this, r, g, b);
 
   ///
@@ -399,6 +413,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetSurfaceColorMod(SDL_Surface *surface, Uint8 *r, Uint8 *g, Uint8 *b)
   /// ```
+  /// {@category surface}
   int? getColorMod() {
     int? result;
     final rPointer = calloc<Uint8>();
@@ -440,6 +455,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetSurfaceAlphaMod(SDL_Surface *surface, Uint8 alpha)
   /// ```
+  /// {@category surface}
   bool setAlphaMod(int alpha) => sdlSetSurfaceAlphaMod(this, alpha);
 
   ///
@@ -460,6 +476,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetSurfaceAlphaMod(SDL_Surface *surface, Uint8 *alpha)
   /// ```
+  /// {@category surface}
   int? getAlphaMod() {
     int? result;
     final alphaPointer = calloc<Uint8>();
@@ -491,6 +508,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetSurfaceBlendMode(SDL_Surface *surface, SDL_BlendMode blendMode)
   /// ```
+  /// {@category surface}
   bool setBlendMode(int blendMode) => sdlSetSurfaceBlendMode(this, blendMode);
 
   ///
@@ -510,6 +528,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetSurfaceBlendMode(SDL_Surface *surface, SDL_BlendMode *blendMode)
   /// ```
+  /// {@category surface}
   int? getBlendMode() {
     int? result;
     final blendModePointer = calloc<Uint32>();
@@ -544,6 +563,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetSurfaceClipRect(SDL_Surface *surface, const SDL_Rect *rect)
   /// ```
+  /// {@category surface}
   bool setClipRect([math.Rectangle<double>? rect]) {
     Pointer<SdlRect> rectPointer = nullptr;
     if (rect != null) {
@@ -576,6 +596,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetSurfaceClipRect(SDL_Surface *surface, SDL_Rect *rect)
   /// ```
+  /// {@category surface}
   math.Rectangle<double> getClipRect() {
     final rectPointer = calloc<SdlRect>();
     sdlGetSurfaceClipRect(this, rectPointer);
@@ -605,6 +626,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Surface * SDLCALL SDL_DuplicateSurface(SDL_Surface *surface)
   /// ```
+  /// {@category surface}
   Pointer<SdlSurface> duplicate() => sdlDuplicateSurface(this);
 
   // sdlConvertPixels
@@ -638,6 +660,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_FillSurfaceRect(SDL_Surface *dst, const SDL_Rect *rect, Uint32 color)
   /// ```
+  /// {@category surface}
   bool fillRect(math.Rectangle<double>? rect, int color) {
     Pointer<SdlRect> rectPointer = nullptr;
     if (rect != null) {
@@ -676,6 +699,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_FillSurfaceRects(SDL_Surface *dst, const SDL_Rect *rects, int count, Uint32 color)
   /// ```
+  /// {@category surface}
   bool fillRects(List<math.Rectangle<double>> rects, int color) {
     final rectsPointer = rects.callocInt();
     final result = sdlFillSurfaceRects(this, rectsPointer, rects.length, color);
@@ -757,6 +781,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_BlitSurface(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, const SDL_Rect *dstrect)
   /// ```
+  /// {@category surface}
   bool upperBlit(
     Pointer<SdlSurface> dst, {
     math.Rectangle<double>? srcrect,
@@ -802,6 +827,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_BlitSurfaceUnchecked(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, const SDL_Rect *dstrect)
   /// ```
+  /// {@category surface}
   bool lowerBlit(
     Pointer<SdlSurface> dst, {
     math.Rectangle<double>? srcrect,
@@ -852,6 +878,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_BlitSurfaceScaled(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, const SDL_Rect *dstrect, SDL_ScaleMode scaleMode)
   /// ```
+  /// {@category surface}
   bool upperBlitScaled(
     Pointer<SdlSurface> dst, {
     math.Rectangle<double>? srcrect,
@@ -905,6 +932,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_BlitSurfaceUncheckedScaled(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, const SDL_Rect *dstrect, SDL_ScaleMode scaleMode)
   /// ```
+  /// {@category surface}
   bool lowerBlitScaled(
     Pointer<SdlSurface> dst, {
     math.Rectangle<double>? srcrect,
@@ -965,6 +993,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SaveBMP(SDL_Surface *surface, const char *file)
   /// ```
+  /// {@category surface}
   bool saveBmp(String file) => sdlSaveBmp(this, file);
 
   bool blit(

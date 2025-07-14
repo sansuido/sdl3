@@ -27,6 +27,7 @@ part of '../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC SDL_Tray * SDLCALL SDL_CreateTray(SDL_Surface *icon, const char *tooltip)
 /// ```
+/// {@category tray}
 Pointer<SdlTray> sdlCreateTray(Pointer<SdlSurface> icon, String? tooltip) {
   final sdlCreateTrayLookupFunction = _libSdl
       .lookupFunction<
@@ -61,6 +62,7 @@ Pointer<SdlTray> sdlCreateTray(Pointer<SdlSurface> icon, String? tooltip) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_SetTrayIcon(SDL_Tray *tray, SDL_Surface *icon)
 /// ```
+/// {@category tray}
 void sdlSetTrayIcon(Pointer<SdlTray> tray, Pointer<SdlSurface> icon) {
   final sdlSetTrayIconLookupFunction = _libSdl
       .lookupFunction<
@@ -86,6 +88,7 @@ void sdlSetTrayIcon(Pointer<SdlTray> tray, Pointer<SdlSurface> icon) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_SetTrayTooltip(SDL_Tray *tray, const char *tooltip)
 /// ```
+/// {@category tray}
 void sdlSetTrayTooltip(Pointer<SdlTray> tray, String? tooltip) {
   final sdlSetTrayTooltipLookupFunction = _libSdl
       .lookupFunction<
@@ -123,6 +126,7 @@ void sdlSetTrayTooltip(Pointer<SdlTray> tray, String? tooltip) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_TrayMenu * SDLCALL SDL_CreateTrayMenu(SDL_Tray *tray)
 /// ```
+/// {@category tray}
 Pointer<SdlTrayMenu> sdlCreateTrayMenu(Pointer<SdlTray> tray) {
   final sdlCreateTrayMenuLookupFunction = _libSdl
       .lookupFunction<
@@ -157,6 +161,7 @@ Pointer<SdlTrayMenu> sdlCreateTrayMenu(Pointer<SdlTray> tray) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_TrayMenu * SDLCALL SDL_CreateTraySubmenu(SDL_TrayEntry *entry)
 /// ```
+/// {@category tray}
 Pointer<SdlTrayMenu> sdlCreateTraySubmenu(Pointer<SdlTrayEntry> entry) {
   final sdlCreateTraySubmenuLookupFunction = _libSdl
       .lookupFunction<
@@ -191,6 +196,7 @@ Pointer<SdlTrayMenu> sdlCreateTraySubmenu(Pointer<SdlTrayEntry> entry) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_TrayMenu * SDLCALL SDL_GetTrayMenu(SDL_Tray *tray)
 /// ```
+/// {@category tray}
 Pointer<SdlTrayMenu> sdlGetTrayMenu(Pointer<SdlTray> tray) {
   final sdlGetTrayMenuLookupFunction = _libSdl
       .lookupFunction<
@@ -225,6 +231,7 @@ Pointer<SdlTrayMenu> sdlGetTrayMenu(Pointer<SdlTray> tray) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_TrayMenu * SDLCALL SDL_GetTraySubmenu(SDL_TrayEntry *entry)
 /// ```
+/// {@category tray}
 Pointer<SdlTrayMenu> sdlGetTraySubmenu(Pointer<SdlTrayEntry> entry) {
   final sdlGetTraySubmenuLookupFunction = _libSdl
       .lookupFunction<
@@ -255,6 +262,7 @@ Pointer<SdlTrayMenu> sdlGetTraySubmenu(Pointer<SdlTrayEntry> entry) {
 /// ```c
 /// extern SDL_DECLSPEC const SDL_TrayEntry ** SDLCALL SDL_GetTrayEntries(SDL_TrayMenu *menu, int *count)
 /// ```
+/// {@category tray}
 Pointer<Pointer<SdlTrayEntry>> sdlGetTrayEntries(
   Pointer<SdlTrayMenu> menu,
   Pointer<Int32> count,
@@ -289,6 +297,7 @@ Pointer<Pointer<SdlTrayEntry>> sdlGetTrayEntries(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_RemoveTrayEntry(SDL_TrayEntry *entry)
 /// ```
+/// {@category tray}
 void sdlRemoveTrayEntry(Pointer<SdlTrayEntry> entry) {
   final sdlRemoveTrayEntryLookupFunction = _libSdl
       .lookupFunction<
@@ -327,6 +336,7 @@ void sdlRemoveTrayEntry(Pointer<SdlTrayEntry> entry) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_TrayEntry * SDLCALL SDL_InsertTrayEntryAt(SDL_TrayMenu *menu, int pos, const char *label, SDL_TrayEntryFlags flags)
 /// ```
+/// {@category tray}
 Pointer<SdlTrayEntry> sdlInsertTrayEntryAt(
   Pointer<SdlTrayMenu> menu,
   int pos,
@@ -382,6 +392,7 @@ Pointer<SdlTrayEntry> sdlInsertTrayEntryAt(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_SetTrayEntryLabel(SDL_TrayEntry *entry, const char *label)
 /// ```
+/// {@category tray}
 void sdlSetTrayEntryLabel(Pointer<SdlTrayEntry> entry, String? label) {
   final sdlSetTrayEntryLabelLookupFunction = _libSdl
       .lookupFunction<
@@ -414,6 +425,7 @@ void sdlSetTrayEntryLabel(Pointer<SdlTrayEntry> entry, String? label) {
 /// ```c
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetTrayEntryLabel(SDL_TrayEntry *entry)
 /// ```
+/// {@category tray}
 String? sdlGetTrayEntryLabel(Pointer<SdlTrayEntry> entry) {
   final sdlGetTrayEntryLabelLookupFunction = _libSdl
       .lookupFunction<
@@ -447,6 +459,7 @@ String? sdlGetTrayEntryLabel(Pointer<SdlTrayEntry> entry) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_SetTrayEntryChecked(SDL_TrayEntry *entry, bool checked)
 /// ```
+/// {@category tray}
 void sdlSetTrayEntryChecked(Pointer<SdlTrayEntry> entry, bool checked) {
   final sdlSetTrayEntryCheckedLookupFunction = _libSdl
       .lookupFunction<
@@ -476,6 +489,7 @@ void sdlSetTrayEntryChecked(Pointer<SdlTrayEntry> entry, bool checked) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetTrayEntryChecked(SDL_TrayEntry *entry)
 /// ```
+/// {@category tray}
 bool sdlGetTrayEntryChecked(Pointer<SdlTrayEntry> entry) {
   final sdlGetTrayEntryCheckedLookupFunction = _libSdl
       .lookupFunction<
@@ -503,6 +517,7 @@ bool sdlGetTrayEntryChecked(Pointer<SdlTrayEntry> entry) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_SetTrayEntryEnabled(SDL_TrayEntry *entry, bool enabled)
 /// ```
+/// {@category tray}
 void sdlSetTrayEntryEnabled(Pointer<SdlTrayEntry> entry, bool enabled) {
   final sdlSetTrayEntryEnabledLookupFunction = _libSdl
       .lookupFunction<
@@ -530,6 +545,7 @@ void sdlSetTrayEntryEnabled(Pointer<SdlTrayEntry> entry, bool enabled) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetTrayEntryEnabled(SDL_TrayEntry *entry)
 /// ```
+/// {@category tray}
 bool sdlGetTrayEntryEnabled(Pointer<SdlTrayEntry> entry) {
   final sdlGetTrayEntryEnabledLookupFunction = _libSdl
       .lookupFunction<
@@ -558,6 +574,7 @@ bool sdlGetTrayEntryEnabled(Pointer<SdlTrayEntry> entry) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_SetTrayEntryCallback(SDL_TrayEntry *entry, SDL_TrayCallback callback, void *userdata)
 /// ```
+/// {@category tray}
 void sdlSetTrayEntryCallback(
   Pointer<SdlTrayEntry> entry,
   Pointer<NativeFunction<SdlTrayCallback>> callback,
@@ -592,6 +609,7 @@ void sdlSetTrayEntryCallback(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_ClickTrayEntry(SDL_TrayEntry *entry)
 /// ```
+/// {@category tray}
 void sdlClickTrayEntry(Pointer<SdlTrayEntry> entry) {
   final sdlClickTrayEntryLookupFunction = _libSdl
       .lookupFunction<
@@ -618,6 +636,7 @@ void sdlClickTrayEntry(Pointer<SdlTrayEntry> entry) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_DestroyTray(SDL_Tray *tray)
 /// ```
+/// {@category tray}
 void sdlDestroyTray(Pointer<SdlTray> tray) {
   final sdlDestroyTrayLookupFunction = _libSdl
       .lookupFunction<
@@ -643,6 +662,7 @@ void sdlDestroyTray(Pointer<SdlTray> tray) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_TrayMenu * SDLCALL SDL_GetTrayEntryParent(SDL_TrayEntry *entry)
 /// ```
+/// {@category tray}
 Pointer<SdlTrayMenu> sdlGetTrayEntryParent(Pointer<SdlTrayEntry> entry) {
   final sdlGetTrayEntryParentLookupFunction = _libSdl
       .lookupFunction<
@@ -673,6 +693,7 @@ Pointer<SdlTrayMenu> sdlGetTrayEntryParent(Pointer<SdlTrayEntry> entry) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_TrayEntry * SDLCALL SDL_GetTrayMenuParentEntry(SDL_TrayMenu *menu)
 /// ```
+/// {@category tray}
 Pointer<SdlTrayEntry> sdlGetTrayMenuParentEntry(Pointer<SdlTrayMenu> menu) {
   final sdlGetTrayMenuParentEntryLookupFunction = _libSdl
       .lookupFunction<
@@ -703,6 +724,7 @@ Pointer<SdlTrayEntry> sdlGetTrayMenuParentEntry(Pointer<SdlTrayMenu> menu) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Tray * SDLCALL SDL_GetTrayMenuParentTray(SDL_TrayMenu *menu)
 /// ```
+/// {@category tray}
 Pointer<SdlTray> sdlGetTrayMenuParentTray(Pointer<SdlTrayMenu> menu) {
   final sdlGetTrayMenuParentTrayLookupFunction = _libSdl
       .lookupFunction<
@@ -725,6 +747,7 @@ Pointer<SdlTray> sdlGetTrayMenuParentTray(Pointer<SdlTrayMenu> menu) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_UpdateTrays(void)
 /// ```
+/// {@category tray}
 void sdlUpdateTrays() {
   final sdlUpdateTraysLookupFunction = _libSdl
       .lookupFunction<Void Function(), void Function()>('SDL_UpdateTrays');

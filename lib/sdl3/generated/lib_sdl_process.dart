@@ -45,6 +45,7 @@ part of '../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC SDL_Process * SDLCALL SDL_CreateProcess(const char * const *args, bool pipe_stdio)
 /// ```
+/// {@category process}
 Pointer<SdlProcess> sdlCreateProcess(
   Pointer<Pointer<Int8>> args,
   bool pipeStdio,
@@ -132,6 +133,7 @@ Pointer<SdlProcess> sdlCreateProcess(
 /// ```c
 /// extern SDL_DECLSPEC SDL_Process * SDLCALL SDL_CreateProcessWithProperties(SDL_PropertiesID props)
 /// ```
+/// {@category process}
 Pointer<SdlProcess> sdlCreateProcessWithProperties(int props) {
   final sdlCreateProcessWithPropertiesLookupFunction = _libSdl
       .lookupFunction<
@@ -173,6 +175,7 @@ Pointer<SdlProcess> sdlCreateProcessWithProperties(int props) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_PropertiesID SDLCALL SDL_GetProcessProperties(SDL_Process *process)
 /// ```
+/// {@category process}
 int sdlGetProcessProperties(Pointer<SdlProcess> process) {
   final sdlGetProcessPropertiesLookupFunction = _libSdl
       .lookupFunction<
@@ -214,6 +217,7 @@ int sdlGetProcessProperties(Pointer<SdlProcess> process) {
 /// ```c
 /// extern SDL_DECLSPEC void * SDLCALL SDL_ReadProcess(SDL_Process *process, size_t *datasize, int *exitcode)
 /// ```
+/// {@category process}
 Pointer<NativeType> sdlReadProcess(
   Pointer<SdlProcess> process,
   Pointer<Uint32> datasize,
@@ -262,6 +266,7 @@ Pointer<NativeType> sdlReadProcess(
 /// ```c
 /// extern SDL_DECLSPEC SDL_IOStream * SDLCALL SDL_GetProcessInput(SDL_Process *process)
 /// ```
+/// {@category process}
 Pointer<SdlIoStream> sdlGetProcessInput(Pointer<SdlProcess> process) {
   final sdlGetProcessInputLookupFunction = _libSdl
       .lookupFunction<
@@ -296,6 +301,7 @@ Pointer<SdlIoStream> sdlGetProcessInput(Pointer<SdlProcess> process) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_IOStream * SDLCALL SDL_GetProcessOutput(SDL_Process *process)
 /// ```
+/// {@category process}
 Pointer<SdlIoStream> sdlGetProcessOutput(Pointer<SdlProcess> process) {
   final sdlGetProcessOutputLookupFunction = _libSdl
       .lookupFunction<
@@ -329,6 +335,7 @@ Pointer<SdlIoStream> sdlGetProcessOutput(Pointer<SdlProcess> process) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_KillProcess(SDL_Process *process, bool force)
 /// ```
+/// {@category process}
 bool sdlKillProcess(Pointer<SdlProcess> process, bool force) {
   final sdlKillProcessLookupFunction = _libSdl
       .lookupFunction<
@@ -372,6 +379,7 @@ bool sdlKillProcess(Pointer<SdlProcess> process, bool force) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_WaitProcess(SDL_Process *process, bool block, int *exitcode)
 /// ```
+/// {@category process}
 bool sdlWaitProcess(
   Pointer<SdlProcess> process,
   bool block,
@@ -413,6 +421,7 @@ bool sdlWaitProcess(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_DestroyProcess(SDL_Process *process)
 /// ```
+/// {@category process}
 void sdlDestroyProcess(Pointer<SdlProcess> process) {
   final sdlDestroyProcessLookupFunction = _libSdl
       .lookupFunction<

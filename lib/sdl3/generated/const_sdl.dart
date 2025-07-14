@@ -1999,7 +1999,7 @@ const SDL_RENDERER_VSYNC_ADAPTIVE = -1;
 const SDL_DEBUG_TEXT_FONT_CHARACTER_SIZE = 8;
 //const SDL_revision_h_ = ;
 const SDL_REVISION =
-    'SDL3-3.3.0-release-3.2.6-728-g343ad3edd (" SDL_VENDOR_INFO ")';
+    'SDL3-3.3.0-release-3.2.6-753-g0f061ff15 (" SDL_VENDOR_INFO ")';
 //const SDL_scancode_h_ = ;
 const SDL_SCANCODE_UNKNOWN = 0;
 const SDL_SCANCODE_A = 4;
@@ -2686,6 +2686,7 @@ const SDL_HITTEST_RESIZE_LEFT = 9;
 //const NO_SDL_VULKAN_TYPEDEFS = ;
 //const VK_DEFINE_HANDLE = (object) typedef struct object##_T* object;;
 //const VK_DEFINE_NON_DISPATCHABLE_HANDLE = (object) typedef struct object##_T *object;;
+/// {@category assert}
 class SdlkAssertion {
   static const retry = SDL_ASSERTION_RETRY;
   static const onBreak = SDL_ASSERTION_BREAK;
@@ -2694,6 +2695,7 @@ class SdlkAssertion {
   static const alwaysIgnore = SDL_ASSERTION_ALWAYS_IGNORE;
 }
 
+/// {@category asyncio}
 class SdlkAsyncio {
   static const taskRead = SDL_ASYNCIO_TASK_READ;
   static const taskWrite = SDL_ASYNCIO_TASK_WRITE;
@@ -2703,6 +2705,7 @@ class SdlkAsyncio {
   static const canceled = SDL_ASYNCIO_CANCELED;
 }
 
+/// {@category audio}
 class SdlkAudio {
   static const unknown = SDL_AUDIO_UNKNOWN;
   static const u8 = SDL_AUDIO_U8;
@@ -2715,6 +2718,7 @@ class SdlkAudio {
   static const f32Be = SDL_AUDIO_F32BE;
 }
 
+/// {@category blendmode}
 class SdlkBlendmode {
   static const none = SDL_BLENDMODE_NONE;
   static const blend = SDL_BLENDMODE_BLEND;
@@ -2726,6 +2730,7 @@ class SdlkBlendmode {
   static const invalid = SDL_BLENDMODE_INVALID;
 }
 
+/// {@category blendmode}
 class SdlkBlendoperation {
   static const add = SDL_BLENDOPERATION_ADD;
   static const subtract = SDL_BLENDOPERATION_SUBTRACT;
@@ -2734,6 +2739,7 @@ class SdlkBlendoperation {
   static const maximum = SDL_BLENDOPERATION_MAXIMUM;
 }
 
+/// {@category blendmode}
 class SdlkBlendfactor {
   static const zero = SDL_BLENDFACTOR_ZERO;
   static const one = SDL_BLENDFACTOR_ONE;
@@ -2747,18 +2753,21 @@ class SdlkBlendfactor {
   static const oneMinusDstAlpha = SDL_BLENDFACTOR_ONE_MINUS_DST_ALPHA;
 }
 
+/// {@category camera}
 class SdlkCameraPosition {
   static const unknown = SDL_CAMERA_POSITION_UNKNOWN;
   static const frontFacing = SDL_CAMERA_POSITION_FRONT_FACING;
   static const backFacing = SDL_CAMERA_POSITION_BACK_FACING;
 }
 
+/// {@category dialog}
 class SdlkFiledialog {
   static const openfile = SDL_FILEDIALOG_OPENFILE;
   static const savefile = SDL_FILEDIALOG_SAVEFILE;
   static const openfolder = SDL_FILEDIALOG_OPENFOLDER;
 }
 
+/// {@category dialog}
 class SdlkPropFileDialog {
   static const filtersPointer = SDL_PROP_FILE_DIALOG_FILTERS_POINTER;
   static const nfiltersNumber = SDL_PROP_FILE_DIALOG_NFILTERS_NUMBER;
@@ -2770,6 +2779,7 @@ class SdlkPropFileDialog {
   static const cancelString = SDL_PROP_FILE_DIALOG_CANCEL_STRING;
 }
 
+/// {@category events}
 class SdlkEvent {
   static const first = SDL_EVENT_FIRST;
   static const quit = SDL_EVENT_QUIT;
@@ -2896,6 +2906,7 @@ class SdlkEvent {
   static const enumPadding = SDL_EVENT_ENUM_PADDING;
 }
 
+/// {@category filesystem}
 class SdlkFolder {
   static const home = SDL_FOLDER_HOME;
   static const desktop = SDL_FOLDER_DESKTOP;
@@ -2911,6 +2922,7 @@ class SdlkFolder {
   static const count = SDL_FOLDER_COUNT;
 }
 
+/// {@category filesystem}
 class SdlkPathtype {
   static const none = SDL_PATHTYPE_NONE;
   static const file = SDL_PATHTYPE_FILE;
@@ -2918,12 +2930,14 @@ class SdlkPathtype {
   static const other = SDL_PATHTYPE_OTHER;
 }
 
+/// {@category filesystem}
 class SdlkEnum {
   static const onContinue = SDL_ENUM_CONTINUE;
   static const success = SDL_ENUM_SUCCESS;
   static const failure = SDL_ENUM_FAILURE;
 }
 
+/// {@category gamepad}
 class SdlkGamepadType {
   static const unknown = SDL_GAMEPAD_TYPE_UNKNOWN;
   static const standard = SDL_GAMEPAD_TYPE_STANDARD;
@@ -2943,6 +2957,7 @@ class SdlkGamepadType {
   static const count = SDL_GAMEPAD_TYPE_COUNT;
 }
 
+/// {@category gamepad}
 class SdlkGamepadButton {
   static const invalid = SDL_GAMEPAD_BUTTON_INVALID;
   static const south = SDL_GAMEPAD_BUTTON_SOUTH;
@@ -2974,6 +2989,7 @@ class SdlkGamepadButton {
   static const count = SDL_GAMEPAD_BUTTON_COUNT;
 }
 
+/// {@category gamepad}
 class SdlkGamepadButtonLabel {
   static const unknown = SDL_GAMEPAD_BUTTON_LABEL_UNKNOWN;
   static const a = SDL_GAMEPAD_BUTTON_LABEL_A;
@@ -2986,6 +3002,7 @@ class SdlkGamepadButtonLabel {
   static const triangle = SDL_GAMEPAD_BUTTON_LABEL_TRIANGLE;
 }
 
+/// {@category gamepad}
 class SdlkGamepadAxis {
   static const invalid = SDL_GAMEPAD_AXIS_INVALID;
   static const leftx = SDL_GAMEPAD_AXIS_LEFTX;
@@ -2997,6 +3014,7 @@ class SdlkGamepadAxis {
   static const count = SDL_GAMEPAD_AXIS_COUNT;
 }
 
+/// {@category gamepad}
 class SdlkGamepadBindtype {
   static const none = SDL_GAMEPAD_BINDTYPE_NONE;
   static const button = SDL_GAMEPAD_BINDTYPE_BUTTON;
@@ -3004,6 +3022,7 @@ class SdlkGamepadBindtype {
   static const hat = SDL_GAMEPAD_BINDTYPE_HAT;
 }
 
+/// {@category gpu}
 class SdlkGpuPrimitivetype {
   static const trianglelist = SDL_GPU_PRIMITIVETYPE_TRIANGLELIST;
   static const trianglestrip = SDL_GPU_PRIMITIVETYPE_TRIANGLESTRIP;
@@ -3012,12 +3031,14 @@ class SdlkGpuPrimitivetype {
   static const pointlist = SDL_GPU_PRIMITIVETYPE_POINTLIST;
 }
 
+/// {@category gpu}
 class SdlkGpuLoadop {
   static const load = SDL_GPU_LOADOP_LOAD;
   static const clear = SDL_GPU_LOADOP_CLEAR;
   static const dontCare = SDL_GPU_LOADOP_DONT_CARE;
 }
 
+/// {@category gpu}
 class SdlkGpuStoreop {
   static const store = SDL_GPU_STOREOP_STORE;
   static const dontCare = SDL_GPU_STOREOP_DONT_CARE;
@@ -3025,11 +3046,13 @@ class SdlkGpuStoreop {
   static const resolveAndStore = SDL_GPU_STOREOP_RESOLVE_AND_STORE;
 }
 
+/// {@category gpu}
 class SdlkGpuIndexelementsize {
   static const on16Bit = SDL_GPU_INDEXELEMENTSIZE_16BIT;
   static const on32Bit = SDL_GPU_INDEXELEMENTSIZE_32BIT;
 }
 
+/// {@category gpu}
 class SdlkGpuTextureformat {
   static const invalid = SDL_GPU_TEXTUREFORMAT_INVALID;
   static const a8Unorm = SDL_GPU_TEXTUREFORMAT_A8_UNORM;
@@ -3138,6 +3161,7 @@ class SdlkGpuTextureformat {
   static const astc12x12Float = SDL_GPU_TEXTUREFORMAT_ASTC_12x12_FLOAT;
 }
 
+/// {@category gpu}
 class SdlkGpuTextureusage {
   static const sampler = SDL_GPU_TEXTUREUSAGE_SAMPLER;
   static const colorTarget = SDL_GPU_TEXTUREUSAGE_COLOR_TARGET;
@@ -3149,6 +3173,7 @@ class SdlkGpuTextureusage {
       SDL_GPU_TEXTUREUSAGE_COMPUTE_STORAGE_SIMULTANEOUS_READ_WRITE;
 }
 
+/// {@category gpu}
 class SdlkGpuTexturetype {
   static const on2D = SDL_GPU_TEXTURETYPE_2D;
   static const on2DArray = SDL_GPU_TEXTURETYPE_2D_ARRAY;
@@ -3157,6 +3182,7 @@ class SdlkGpuTexturetype {
   static const cubeArray = SDL_GPU_TEXTURETYPE_CUBE_ARRAY;
 }
 
+/// {@category gpu}
 class SdlkGpuSamplecount {
   static const on1 = SDL_GPU_SAMPLECOUNT_1;
   static const on2 = SDL_GPU_SAMPLECOUNT_2;
@@ -3164,6 +3190,7 @@ class SdlkGpuSamplecount {
   static const on8 = SDL_GPU_SAMPLECOUNT_8;
 }
 
+/// {@category gpu}
 class SdlkGpuCubemapface {
   static const positivex = SDL_GPU_CUBEMAPFACE_POSITIVEX;
   static const negativex = SDL_GPU_CUBEMAPFACE_NEGATIVEX;
@@ -3173,6 +3200,7 @@ class SdlkGpuCubemapface {
   static const negativez = SDL_GPU_CUBEMAPFACE_NEGATIVEZ;
 }
 
+/// {@category gpu}
 class SdlkGpuBufferusage {
   static const vertex = SDL_GPU_BUFFERUSAGE_VERTEX;
   static const index = SDL_GPU_BUFFERUSAGE_INDEX;
@@ -3182,16 +3210,19 @@ class SdlkGpuBufferusage {
   static const computeStorageWrite = SDL_GPU_BUFFERUSAGE_COMPUTE_STORAGE_WRITE;
 }
 
+/// {@category gpu}
 class SdlkGpuTransferbufferusage {
   static const upload = SDL_GPU_TRANSFERBUFFERUSAGE_UPLOAD;
   static const download = SDL_GPU_TRANSFERBUFFERUSAGE_DOWNLOAD;
 }
 
+/// {@category gpu}
 class SdlkGpuShaderstage {
   static const vertex = SDL_GPU_SHADERSTAGE_VERTEX;
   static const fragment = SDL_GPU_SHADERSTAGE_FRAGMENT;
 }
 
+/// {@category gpu}
 class SdlkGpuShaderformat {
   static const invalid = SDL_GPU_SHADERFORMAT_INVALID;
   static const private = SDL_GPU_SHADERFORMAT_PRIVATE;
@@ -3202,6 +3233,7 @@ class SdlkGpuShaderformat {
   static const metallib = SDL_GPU_SHADERFORMAT_METALLIB;
 }
 
+/// {@category gpu}
 class SdlkGpuVertexelementformat {
   static const invalid = SDL_GPU_VERTEXELEMENTFORMAT_INVALID;
   static const int = SDL_GPU_VERTEXELEMENTFORMAT_INT;
@@ -3236,27 +3268,32 @@ class SdlkGpuVertexelementformat {
   static const half4 = SDL_GPU_VERTEXELEMENTFORMAT_HALF4;
 }
 
+/// {@category gpu}
 class SdlkGpuVertexinputrate {
   static const vertex = SDL_GPU_VERTEXINPUTRATE_VERTEX;
   static const instance = SDL_GPU_VERTEXINPUTRATE_INSTANCE;
 }
 
+/// {@category gpu}
 class SdlkGpuFillmode {
   static const fill = SDL_GPU_FILLMODE_FILL;
   static const line = SDL_GPU_FILLMODE_LINE;
 }
 
+/// {@category gpu}
 class SdlkGpuCullmode {
   static const none = SDL_GPU_CULLMODE_NONE;
   static const front = SDL_GPU_CULLMODE_FRONT;
   static const back = SDL_GPU_CULLMODE_BACK;
 }
 
+/// {@category gpu}
 class SdlkGpuFrontface {
   static const counterClockwise = SDL_GPU_FRONTFACE_COUNTER_CLOCKWISE;
   static const clockwise = SDL_GPU_FRONTFACE_CLOCKWISE;
 }
 
+/// {@category gpu}
 class SdlkGpuCompareop {
   static const invalid = SDL_GPU_COMPAREOP_INVALID;
   static const never = SDL_GPU_COMPAREOP_NEVER;
@@ -3269,6 +3306,7 @@ class SdlkGpuCompareop {
   static const always = SDL_GPU_COMPAREOP_ALWAYS;
 }
 
+/// {@category gpu}
 class SdlkGpuStencilop {
   static const invalid = SDL_GPU_STENCILOP_INVALID;
   static const keep = SDL_GPU_STENCILOP_KEEP;
@@ -3281,6 +3319,7 @@ class SdlkGpuStencilop {
   static const decrementAndWrap = SDL_GPU_STENCILOP_DECREMENT_AND_WRAP;
 }
 
+/// {@category gpu}
 class SdlkGpuBlendop {
   static const invalid = SDL_GPU_BLENDOP_INVALID;
   static const add = SDL_GPU_BLENDOP_ADD;
@@ -3290,6 +3329,7 @@ class SdlkGpuBlendop {
   static const max = SDL_GPU_BLENDOP_MAX;
 }
 
+/// {@category gpu}
 class SdlkGpuBlendfactor {
   static const invalid = SDL_GPU_BLENDFACTOR_INVALID;
   static const zero = SDL_GPU_BLENDFACTOR_ZERO;
@@ -3308,6 +3348,7 @@ class SdlkGpuBlendfactor {
   static const srcAlphaSaturate = SDL_GPU_BLENDFACTOR_SRC_ALPHA_SATURATE;
 }
 
+/// {@category gpu}
 class SdlkGpuColorcomponent {
   static const r = SDL_GPU_COLORCOMPONENT_R;
   static const g = SDL_GPU_COLORCOMPONENT_G;
@@ -3315,28 +3356,33 @@ class SdlkGpuColorcomponent {
   static const a = SDL_GPU_COLORCOMPONENT_A;
 }
 
+/// {@category gpu}
 class SdlkGpuFilter {
   static const nearest = SDL_GPU_FILTER_NEAREST;
   static const linear = SDL_GPU_FILTER_LINEAR;
 }
 
+/// {@category gpu}
 class SdlkGpuSamplermipmapmode {
   static const nearest = SDL_GPU_SAMPLERMIPMAPMODE_NEAREST;
   static const linear = SDL_GPU_SAMPLERMIPMAPMODE_LINEAR;
 }
 
+/// {@category gpu}
 class SdlkGpuSampleraddressmode {
   static const repeat = SDL_GPU_SAMPLERADDRESSMODE_REPEAT;
   static const mirroredRepeat = SDL_GPU_SAMPLERADDRESSMODE_MIRRORED_REPEAT;
   static const clampToEdge = SDL_GPU_SAMPLERADDRESSMODE_CLAMP_TO_EDGE;
 }
 
+/// {@category gpu}
 class SdlkGpuPresentmode {
   static const vsync = SDL_GPU_PRESENTMODE_VSYNC;
   static const immediate = SDL_GPU_PRESENTMODE_IMMEDIATE;
   static const mailbox = SDL_GPU_PRESENTMODE_MAILBOX;
 }
 
+/// {@category gpu}
 class SdlkGpuSwapchaincomposition {
   static const sdr = SDL_GPU_SWAPCHAINCOMPOSITION_SDR;
   static const sdrLinear = SDL_GPU_SWAPCHAINCOMPOSITION_SDR_LINEAR;
@@ -3345,6 +3391,7 @@ class SdlkGpuSwapchaincomposition {
   static const hdr10St2084 = SDL_GPU_SWAPCHAINCOMPOSITION_HDR10_ST2084;
 }
 
+/// {@category gpu}
 class SdlkPropGpu {
   static const deviceCreateDebugmodeBoolean =
       SDL_PROP_GPU_DEVICE_CREATE_DEBUGMODE_BOOLEAN;
@@ -3406,6 +3453,7 @@ class SdlkPropGpu {
       SDL_PROP_GPU_TRANSFERBUFFER_CREATE_NAME_STRING;
 }
 
+/// {@category haptic}
 class SdlkHaptic {
   static const infinity = SDL_HAPTIC_INFINITY;
   static const constant = SDL_HAPTIC_CONSTANT;
@@ -3434,6 +3482,7 @@ class SdlkHaptic {
   static const steeringAxis = SDL_HAPTIC_STEERING_AXIS;
 }
 
+/// {@category hidapi}
 class SdlkHidApiBus {
   static const unknown = SDL_HID_API_BUS_UNKNOWN;
   static const usb = SDL_HID_API_BUS_USB;
@@ -3442,6 +3491,7 @@ class SdlkHidApiBus {
   static const spi = SDL_HID_API_BUS_SPI;
 }
 
+/// {@category hints}
 class SdlkHint {
   static const allowAltTabWhileGrabbed = SDL_HINT_ALLOW_ALT_TAB_WHILE_GRABBED;
   static const androidAllowRecreateActivity =
@@ -3750,6 +3800,7 @@ class SdlkHint {
   static const override = SDL_HINT_OVERRIDE;
 }
 
+/// {@category init}
 class SdlkInit {
   static const audio = SDL_INIT_AUDIO;
   static const video = SDL_INIT_VIDEO;
@@ -3761,12 +3812,14 @@ class SdlkInit {
   static const camera = SDL_INIT_CAMERA;
 }
 
+/// {@category init}
 class SdlkApp {
   static const onContinue = SDL_APP_CONTINUE;
   static const success = SDL_APP_SUCCESS;
   static const failure = SDL_APP_FAILURE;
 }
 
+/// {@category init}
 class SdlkPropAppMetadata {
   static const nameString = SDL_PROP_APP_METADATA_NAME_STRING;
   static const versionString = SDL_PROP_APP_METADATA_VERSION_STRING;
@@ -3777,6 +3830,7 @@ class SdlkPropAppMetadata {
   static const typeString = SDL_PROP_APP_METADATA_TYPE_STRING;
 }
 
+/// {@category iostream}
 class SdlkIoStatus {
   static const ready = SDL_IO_STATUS_READY;
   static const error = SDL_IO_STATUS_ERROR;
@@ -3786,12 +3840,14 @@ class SdlkIoStatus {
   static const writeonly = SDL_IO_STATUS_WRITEONLY;
 }
 
+/// {@category iostream}
 class SdlkIoSeek {
   static const set = SDL_IO_SEEK_SET;
   static const cur = SDL_IO_SEEK_CUR;
   static const end = SDL_IO_SEEK_END;
 }
 
+/// {@category iostream}
 class SdlkPropIostream {
   static const windowsHandlePointer = SDL_PROP_IOSTREAM_WINDOWS_HANDLE_POINTER;
   static const stdioFilePointer = SDL_PROP_IOSTREAM_STDIO_FILE_POINTER;
@@ -3804,6 +3860,7 @@ class SdlkPropIostream {
       SDL_PROP_IOSTREAM_DYNAMIC_CHUNKSIZE_NUMBER;
 }
 
+/// {@category joystick}
 class SdlkJoystickType {
   static const unknown = SDL_JOYSTICK_TYPE_UNKNOWN;
   static const gamepad = SDL_JOYSTICK_TYPE_GAMEPAD;
@@ -3818,6 +3875,7 @@ class SdlkJoystickType {
   static const count = SDL_JOYSTICK_TYPE_COUNT;
 }
 
+/// {@category joystick}
 class SdlkJoystickConnection {
   static const invalid = SDL_JOYSTICK_CONNECTION_INVALID;
   static const unknown = SDL_JOYSTICK_CONNECTION_UNKNOWN;
@@ -3825,11 +3883,13 @@ class SdlkJoystickConnection {
   static const wireless = SDL_JOYSTICK_CONNECTION_WIRELESS;
 }
 
+/// {@category joystick}
 class SdlkJoystickAxis {
   static const max = SDL_JOYSTICK_AXIS_MAX;
   static const min = SDL_JOYSTICK_AXIS_MIN;
 }
 
+/// {@category joystick}
 class SdlkPropJoystickCap {
   static const monoLedBoolean = SDL_PROP_JOYSTICK_CAP_MONO_LED_BOOLEAN;
   static const rgbLedBoolean = SDL_PROP_JOYSTICK_CAP_RGB_LED_BOOLEAN;
@@ -3839,6 +3899,7 @@ class SdlkPropJoystickCap {
       SDL_PROP_JOYSTICK_CAP_TRIGGER_RUMBLE_BOOLEAN;
 }
 
+/// {@category joystick}
 class SdlkHat {
   static const centered = SDL_HAT_CENTERED;
   static const up = SDL_HAT_UP;
@@ -3851,6 +3912,7 @@ class SdlkHat {
   static const leftdown = SDL_HAT_LEFTDOWN;
 }
 
+/// {@category keyboard}
 class SdlkTextinputType {
   static const text = SDL_TEXTINPUT_TYPE_TEXT;
   static const textName = SDL_TEXTINPUT_TYPE_TEXT_NAME;
@@ -3864,6 +3926,7 @@ class SdlkTextinputType {
       SDL_TEXTINPUT_TYPE_NUMBER_PASSWORD_VISIBLE;
 }
 
+/// {@category keyboard}
 class SdlkCapitalize {
   static const none = SDL_CAPITALIZE_NONE;
   static const sentences = SDL_CAPITALIZE_SENTENCES;
@@ -3871,6 +3934,7 @@ class SdlkCapitalize {
   static const letters = SDL_CAPITALIZE_LETTERS;
 }
 
+/// {@category keyboard}
 class SdlkPropTextinput {
   static const typeNumber = SDL_PROP_TEXTINPUT_TYPE_NUMBER;
   static const capitalizationNumber = SDL_PROP_TEXTINPUT_CAPITALIZATION_NUMBER;
@@ -3880,6 +3944,7 @@ class SdlkPropTextinput {
       SDL_PROP_TEXTINPUT_ANDROID_INPUTTYPE_NUMBER;
 }
 
+/// {@category keycode}
 class Sdlk {
   static const extendedMask = SDLK_EXTENDED_MASK;
   static const unknown = SDLK_UNKNOWN;
@@ -4140,6 +4205,7 @@ class Sdlk {
   static const rhyper = SDLK_RHYPER;
 }
 
+/// {@category keycode}
 class SdlkKmod {
   static const none = SDL_KMOD_NONE;
   static const lshift = SDL_KMOD_LSHIFT;
@@ -4161,6 +4227,7 @@ class SdlkKmod {
   static const gui = SDL_KMOD_GUI;
 }
 
+/// {@category log}
 class SdlkLogCategory {
   static const application = SDL_LOG_CATEGORY_APPLICATION;
   static const error = SDL_LOG_CATEGORY_ERROR;
@@ -4184,6 +4251,7 @@ class SdlkLogCategory {
   static const custom = SDL_LOG_CATEGORY_CUSTOM;
 }
 
+/// {@category log}
 class SdlkLogPriority {
   static const invalid = SDL_LOG_PRIORITY_INVALID;
   static const trace = SDL_LOG_PRIORITY_TRACE;
@@ -4196,6 +4264,7 @@ class SdlkLogPriority {
   static const count = SDL_LOG_PRIORITY_COUNT;
 }
 
+/// {@category messagebox}
 class SdlkMessagebox {
   static const error = SDL_MESSAGEBOX_ERROR;
   static const warning = SDL_MESSAGEBOX_WARNING;
@@ -4204,11 +4273,13 @@ class SdlkMessagebox {
   static const buttonsRightToLeft = SDL_MESSAGEBOX_BUTTONS_RIGHT_TO_LEFT;
 }
 
+/// {@category messagebox}
 class SdlkMessageboxButton {
   static const returnkeyDefault = SDL_MESSAGEBOX_BUTTON_RETURNKEY_DEFAULT;
   static const escapekeyDefault = SDL_MESSAGEBOX_BUTTON_ESCAPEKEY_DEFAULT;
 }
 
+/// {@category messagebox}
 class SdlkMessageboxColor {
   static const background = SDL_MESSAGEBOX_COLOR_BACKGROUND;
   static const text = SDL_MESSAGEBOX_COLOR_TEXT;
@@ -4218,6 +4289,7 @@ class SdlkMessageboxColor {
   static const count = SDL_MESSAGEBOX_COLOR_COUNT;
 }
 
+/// {@category mouse}
 class SdlkSystemCursor {
   static const onDefault = SDL_SYSTEM_CURSOR_DEFAULT;
   static const text = SDL_SYSTEM_CURSOR_TEXT;
@@ -4242,11 +4314,13 @@ class SdlkSystemCursor {
   static const count = SDL_SYSTEM_CURSOR_COUNT;
 }
 
+/// {@category mouse}
 class SdlkMousewheel {
   static const normal = SDL_MOUSEWHEEL_NORMAL;
   static const flipped = SDL_MOUSEWHEEL_FLIPPED;
 }
 
+/// {@category mouse}
 class SdlkButton {
   static const left = SDL_BUTTON_LEFT;
   static const middle = SDL_BUTTON_MIDDLE;
@@ -4255,6 +4329,7 @@ class SdlkButton {
   static const x2 = SDL_BUTTON_X2;
 }
 
+/// {@category mutex}
 class SdlkInitStatus {
   static const uninitialized = SDL_INIT_STATUS_UNINITIALIZED;
   static const initializing = SDL_INIT_STATUS_INITIALIZING;
@@ -4262,6 +4337,7 @@ class SdlkInitStatus {
   static const uninitializing = SDL_INIT_STATUS_UNINITIALIZING;
 }
 
+/// {@category pen}
 class SdlkPenInput {
   static const down = SDL_PEN_INPUT_DOWN;
   static const button1 = SDL_PEN_INPUT_BUTTON_1;
@@ -4272,6 +4348,7 @@ class SdlkPenInput {
   static const eraserTip = SDL_PEN_INPUT_ERASER_TIP;
 }
 
+/// {@category pen}
 class SdlkPenAxis {
   static const pressure = SDL_PEN_AXIS_PRESSURE;
   static const xtilt = SDL_PEN_AXIS_XTILT;
@@ -4283,6 +4360,7 @@ class SdlkPenAxis {
   static const count = SDL_PEN_AXIS_COUNT;
 }
 
+/// {@category pixels}
 class SdlkAlpha {
   static const opaque = SDL_ALPHA_OPAQUE;
   static const opaqueFloat = SDL_ALPHA_OPAQUE_FLOAT;
@@ -4290,6 +4368,7 @@ class SdlkAlpha {
   static const transparentFloat = SDL_ALPHA_TRANSPARENT_FLOAT;
 }
 
+/// {@category pixels}
 class SdlkPixeltype {
   static const unknown = SDL_PIXELTYPE_UNKNOWN;
   static const index1 = SDL_PIXELTYPE_INDEX1;
@@ -4306,12 +4385,14 @@ class SdlkPixeltype {
   static const index2 = SDL_PIXELTYPE_INDEX2;
 }
 
+/// {@category pixels}
 class SdlkBitmaporder {
   static const none = SDL_BITMAPORDER_NONE;
   static const on4321 = SDL_BITMAPORDER_4321;
   static const on1234 = SDL_BITMAPORDER_1234;
 }
 
+/// {@category pixels}
 class SdlkPackedorder {
   static const none = SDL_PACKEDORDER_NONE;
   static const xrgb = SDL_PACKEDORDER_XRGB;
@@ -4324,6 +4405,7 @@ class SdlkPackedorder {
   static const bgra = SDL_PACKEDORDER_BGRA;
 }
 
+/// {@category pixels}
 class SdlkArrayorder {
   static const none = SDL_ARRAYORDER_NONE;
   static const rgb = SDL_ARRAYORDER_RGB;
@@ -4334,6 +4416,7 @@ class SdlkArrayorder {
   static const abgr = SDL_ARRAYORDER_ABGR;
 }
 
+/// {@category pixels}
 class SdlkPackedlayout {
   static const none = SDL_PACKEDLAYOUT_NONE;
   static const on332 = SDL_PACKEDLAYOUT_332;
@@ -4346,6 +4429,7 @@ class SdlkPackedlayout {
   static const on1010102 = SDL_PACKEDLAYOUT_1010102;
 }
 
+/// {@category pixels}
 class SdlkPixelformat {
   static const unknown = SDL_PIXELFORMAT_UNKNOWN;
   static const index1Lsb = SDL_PIXELFORMAT_INDEX1LSB;
@@ -4414,18 +4498,21 @@ class SdlkPixelformat {
   static const mjpg = SDL_PIXELFORMAT_MJPG;
 }
 
+/// {@category pixels}
 class SdlkColorType {
   static const unknown = SDL_COLOR_TYPE_UNKNOWN;
   static const rgb = SDL_COLOR_TYPE_RGB;
   static const ycbcr = SDL_COLOR_TYPE_YCBCR;
 }
 
+/// {@category pixels}
 class SdlkColorRange {
   static const unknown = SDL_COLOR_RANGE_UNKNOWN;
   static const limited = SDL_COLOR_RANGE_LIMITED;
   static const full = SDL_COLOR_RANGE_FULL;
 }
 
+/// {@category pixels}
 class SdlkColorPrimaries {
   static const unknown = SDL_COLOR_PRIMARIES_UNKNOWN;
   static const bt709 = SDL_COLOR_PRIMARIES_BT709;
@@ -4443,6 +4530,7 @@ class SdlkColorPrimaries {
   static const custom = SDL_COLOR_PRIMARIES_CUSTOM;
 }
 
+/// {@category pixels}
 class SdlkTransferCharacteristics {
   static const unknown = SDL_TRANSFER_CHARACTERISTICS_UNKNOWN;
   static const bt709 = SDL_TRANSFER_CHARACTERISTICS_BT709;
@@ -4465,6 +4553,7 @@ class SdlkTransferCharacteristics {
   static const custom = SDL_TRANSFER_CHARACTERISTICS_CUSTOM;
 }
 
+/// {@category pixels}
 class SdlkMatrixCoefficients {
   static const identity = SDL_MATRIX_COEFFICIENTS_IDENTITY;
   static const bt709 = SDL_MATRIX_COEFFICIENTS_BT709;
@@ -4483,6 +4572,7 @@ class SdlkMatrixCoefficients {
   static const custom = SDL_MATRIX_COEFFICIENTS_CUSTOM;
 }
 
+/// {@category pixels}
 class SdlkChromaLocation {
   static const none = SDL_CHROMA_LOCATION_NONE;
   static const left = SDL_CHROMA_LOCATION_LEFT;
@@ -4490,6 +4580,7 @@ class SdlkChromaLocation {
   static const topleft = SDL_CHROMA_LOCATION_TOPLEFT;
 }
 
+/// {@category pixels}
 class SdlkColorspace {
   static const unknown = SDL_COLORSPACE_UNKNOWN;
   static const srgb = SDL_COLORSPACE_SRGB;
@@ -4506,6 +4597,7 @@ class SdlkColorspace {
   static const yuvDefault = SDL_COLORSPACE_YUV_DEFAULT;
 }
 
+/// {@category power}
 class SdlkPowerstate {
   static const error = SDL_POWERSTATE_ERROR;
   static const unknown = SDL_POWERSTATE_UNKNOWN;
@@ -4515,6 +4607,7 @@ class SdlkPowerstate {
   static const charged = SDL_POWERSTATE_CHARGED;
 }
 
+/// {@category process}
 class SdlkProcessStdio {
   static const inherited = SDL_PROCESS_STDIO_INHERITED;
   static const onNull = SDL_PROCESS_STDIO_NULL;
@@ -4522,6 +4615,7 @@ class SdlkProcessStdio {
   static const redirect = SDL_PROCESS_STDIO_REDIRECT;
 }
 
+/// {@category process}
 class SdlkPropProcess {
   static const createArgsPointer = SDL_PROP_PROCESS_CREATE_ARGS_POINTER;
   static const createEnvironmentPointer =
@@ -4546,6 +4640,7 @@ class SdlkPropProcess {
   static const backgroundBoolean = SDL_PROP_PROCESS_BACKGROUND_BOOLEAN;
 }
 
+/// {@category properties}
 class SdlkPropertyType {
   static const invalid = SDL_PROPERTY_TYPE_INVALID;
   static const pointer = SDL_PROPERTY_TYPE_POINTER;
@@ -4555,12 +4650,14 @@ class SdlkPropertyType {
   static const boolean = SDL_PROPERTY_TYPE_BOOLEAN;
 }
 
+/// {@category render}
 class SdlkTextureaccess {
   static const static = SDL_TEXTUREACCESS_STATIC;
   static const streaming = SDL_TEXTUREACCESS_STREAMING;
   static const target = SDL_TEXTUREACCESS_TARGET;
 }
 
+/// {@category render}
 class SdlkTextureAddress {
   static const invalid = SDL_TEXTURE_ADDRESS_INVALID;
   static const auto = SDL_TEXTURE_ADDRESS_AUTO;
@@ -4568,6 +4665,7 @@ class SdlkTextureAddress {
   static const wrap = SDL_TEXTURE_ADDRESS_WRAP;
 }
 
+/// {@category render}
 class SdlkLogicalPresentation {
   static const disabled = SDL_LOGICAL_PRESENTATION_DISABLED;
   static const stretch = SDL_LOGICAL_PRESENTATION_STRETCH;
@@ -4576,6 +4674,7 @@ class SdlkLogicalPresentation {
   static const integerScale = SDL_LOGICAL_PRESENTATION_INTEGER_SCALE;
 }
 
+/// {@category render}
 class SdlkPropRenderer {
   static const createNameString = SDL_PROP_RENDERER_CREATE_NAME_STRING;
   static const createWindowPointer = SDL_PROP_RENDERER_CREATE_WINDOW_POINTER;
@@ -4638,6 +4737,7 @@ class SdlkPropRenderer {
   static const gpuDevicePointer = SDL_PROP_RENDERER_GPU_DEVICE_POINTER;
 }
 
+/// {@category render}
 class SdlkPropTexture {
   static const createColorspaceNumber =
       SDL_PROP_TEXTURE_CREATE_COLORSPACE_NUMBER;
@@ -4716,11 +4816,13 @@ class SdlkPropTexture {
   static const vulkanTextureNumber = SDL_PROP_TEXTURE_VULKAN_TEXTURE_NUMBER;
 }
 
+/// {@category render}
 class SdlkRendererVsync {
   static const disabled = SDL_RENDERER_VSYNC_DISABLED;
   static const adaptive = SDL_RENDERER_VSYNC_ADAPTIVE;
 }
 
+/// {@category scancode}
 class SdlkScancode {
   static const unknown = SDL_SCANCODE_UNKNOWN;
   static const a = SDL_SCANCODE_A;
@@ -4973,6 +5075,7 @@ class SdlkScancode {
   static const count = SDL_SCANCODE_COUNT;
 }
 
+/// {@category sensor}
 class SdlkSensor {
   static const invalid = SDL_SENSOR_INVALID;
   static const unknown = SDL_SENSOR_UNKNOWN;
@@ -4984,6 +5087,7 @@ class SdlkSensor {
   static const gyroR = SDL_SENSOR_GYRO_R;
 }
 
+/// {@category surface}
 class SdlkSurface {
   static const preallocated = SDL_SURFACE_PREALLOCATED;
   static const lockNeeded = SDL_SURFACE_LOCK_NEEDED;
@@ -4991,6 +5095,7 @@ class SdlkSurface {
   static const simdAligned = SDL_SURFACE_SIMD_ALIGNED;
 }
 
+/// {@category surface}
 class SdlkScalemode {
   static const invalid = SDL_SCALEMODE_INVALID;
   static const nearest = SDL_SCALEMODE_NEAREST;
@@ -4998,12 +5103,14 @@ class SdlkScalemode {
   static const pixelart = SDL_SCALEMODE_PIXELART;
 }
 
+/// {@category surface}
 class SdlkFlip {
   static const none = SDL_FLIP_NONE;
   static const horizontal = SDL_FLIP_HORIZONTAL;
   static const vertical = SDL_FLIP_VERTICAL;
 }
 
+/// {@category surface}
 class SdlkPropSurface {
   static const sdrWhitePointFloat = SDL_PROP_SURFACE_SDR_WHITE_POINT_FLOAT;
   static const hdrHeadroomFloat = SDL_PROP_SURFACE_HDR_HEADROOM_FLOAT;
@@ -5012,11 +5119,13 @@ class SdlkPropSurface {
   static const hotspotYNumber = SDL_PROP_SURFACE_HOTSPOT_Y_NUMBER;
 }
 
+/// {@category system}
 class SdlkAndroidExternalStorage {
   static const read = SDL_ANDROID_EXTERNAL_STORAGE_READ;
   static const write = SDL_ANDROID_EXTERNAL_STORAGE_WRITE;
 }
 
+/// {@category system}
 class SdlkSandbox {
   static const none = SDL_SANDBOX_NONE;
   static const unknownContainer = SDL_SANDBOX_UNKNOWN_CONTAINER;
@@ -5025,6 +5134,7 @@ class SdlkSandbox {
   static const macos = SDL_SANDBOX_MACOS;
 }
 
+/// {@category thread}
 class SdlkThreadPriority {
   static const low = SDL_THREAD_PRIORITY_LOW;
   static const normal = SDL_THREAD_PRIORITY_NORMAL;
@@ -5032,6 +5142,7 @@ class SdlkThreadPriority {
   static const timeCritical = SDL_THREAD_PRIORITY_TIME_CRITICAL;
 }
 
+/// {@category thread}
 class SdlkThread {
   static const priorityLow = SDL_THREAD_PRIORITY_LOW;
   static const priorityNormal = SDL_THREAD_PRIORITY_NORMAL;
@@ -5043,6 +5154,7 @@ class SdlkThread {
   static const complete = SDL_THREAD_COMPLETE;
 }
 
+/// {@category thread}
 class SdlkPropThread {
   static const createEntryFunctionPointer =
       SDL_PROP_THREAD_CREATE_ENTRY_FUNCTION_POINTER;
@@ -5051,17 +5163,20 @@ class SdlkPropThread {
   static const createStacksizeNumber = SDL_PROP_THREAD_CREATE_STACKSIZE_NUMBER;
 }
 
+/// {@category time}
 class SdlkDateFormat {
   static const yyyymmdd = SDL_DATE_FORMAT_YYYYMMDD;
   static const ddmmyyyy = SDL_DATE_FORMAT_DDMMYYYY;
   static const mmddyyyy = SDL_DATE_FORMAT_MMDDYYYY;
 }
 
+/// {@category time}
 class SdlkTimeFormat {
   static const on24Hr = SDL_TIME_FORMAT_24HR;
   static const on12Hr = SDL_TIME_FORMAT_12HR;
 }
 
+/// {@category touch}
 class SdlkTouchDevice {
   static const invalid = SDL_TOUCH_DEVICE_INVALID;
   static const direct = SDL_TOUCH_DEVICE_DIRECT;
@@ -5069,6 +5184,7 @@ class SdlkTouchDevice {
   static const indirectRelative = SDL_TOUCH_DEVICE_INDIRECT_RELATIVE;
 }
 
+/// {@category tray}
 class SdlkTrayentry {
   static const button = SDL_TRAYENTRY_BUTTON;
   static const checkbox = SDL_TRAYENTRY_CHECKBOX;
@@ -5077,12 +5193,14 @@ class SdlkTrayentry {
   static const checked = SDL_TRAYENTRY_CHECKED;
 }
 
+/// {@category video}
 class SdlkSystemTheme {
   static const unknown = SDL_SYSTEM_THEME_UNKNOWN;
   static const light = SDL_SYSTEM_THEME_LIGHT;
   static const dark = SDL_SYSTEM_THEME_DARK;
 }
 
+/// {@category video}
 class SdlkOrientation {
   static const unknown = SDL_ORIENTATION_UNKNOWN;
   static const landscape = SDL_ORIENTATION_LANDSCAPE;
@@ -5091,6 +5209,7 @@ class SdlkOrientation {
   static const portraitFlipped = SDL_ORIENTATION_PORTRAIT_FLIPPED;
 }
 
+/// {@category video}
 class SdlkWindow {
   static const fullscreen = SDL_WINDOW_FULLSCREEN;
   static const opengl = SDL_WINDOW_OPENGL;
@@ -5121,12 +5240,14 @@ class SdlkWindow {
   static const surfaceVsyncAdaptive = SDL_WINDOW_SURFACE_VSYNC_ADAPTIVE;
 }
 
+/// {@category video}
 class SdlkFlash {
   static const cancel = SDL_FLASH_CANCEL;
   static const briefly = SDL_FLASH_BRIEFLY;
   static const untilFocused = SDL_FLASH_UNTIL_FOCUSED;
 }
 
+/// {@category video}
 class SdlkProgressState {
   static const invalid = SDL_PROGRESS_STATE_INVALID;
   static const none = SDL_PROGRESS_STATE_NONE;
@@ -5136,6 +5257,7 @@ class SdlkProgressState {
   static const error = SDL_PROGRESS_STATE_ERROR;
 }
 
+/// {@category video}
 class SdlkGl {
   static const redSize = SDL_GL_RED_SIZE;
   static const greenSize = SDL_GL_GREEN_SIZE;
@@ -5183,6 +5305,7 @@ class SdlkGl {
   static const contextResetLoseContext = SDL_GL_CONTEXT_RESET_LOSE_CONTEXT;
 }
 
+/// {@category video}
 class SdlkPropDisplay {
   static const hdrEnabledBoolean = SDL_PROP_DISPLAY_HDR_ENABLED_BOOLEAN;
   static const kmsdrmPanelOrientationNumber =
@@ -5191,6 +5314,7 @@ class SdlkPropDisplay {
       SDL_PROP_DISPLAY_WAYLAND_WL_OUTPUT_POINTER;
 }
 
+/// {@category video}
 class SdlkPropWindow {
   static const createAlwaysOnTopBoolean =
       SDL_PROP_WINDOW_CREATE_ALWAYS_ON_TOP_BOOLEAN;
@@ -5305,11 +5429,13 @@ class SdlkPropWindow {
       SDL_PROP_WINDOW_EMSCRIPTEN_KEYBOARD_ELEMENT_STRING;
 }
 
+/// {@category video}
 class SdlkWindowSurfaceVsync {
   static const disabled = SDL_WINDOW_SURFACE_VSYNC_DISABLED;
   static const adaptive = SDL_WINDOW_SURFACE_VSYNC_ADAPTIVE;
 }
 
+/// {@category video}
 class SdlkHittest {
   static const normal = SDL_HITTEST_NORMAL;
   static const draggable = SDL_HITTEST_DRAGGABLE;

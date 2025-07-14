@@ -25,6 +25,7 @@ part of '../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_PumpEvents(void)
 /// ```
+/// {@category events}
 void sdlPumpEvents() {
   final sdlPumpEventsLookupFunction = _libSdl
       .lookupFunction<Void Function(), void Function()>('SDL_PumpEvents');
@@ -76,6 +77,7 @@ void sdlPumpEvents() {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_PeepEvents(SDL_Event *events, int numevents, SDL_EventAction action, Uint32 minType, Uint32 maxType)
 /// ```
+/// {@category events}
 int sdlPeepEvents(
   Pointer<SdlEvent> events,
   int numevents,
@@ -128,6 +130,7 @@ int sdlPeepEvents(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_HasEvent(Uint32 type)
 /// ```
+/// {@category events}
 bool sdlHasEvent(int type) {
   final sdlHasEventLookupFunction = _libSdl
       .lookupFunction<Uint8 Function(Uint32 type), int Function(int type)>(
@@ -157,6 +160,7 @@ bool sdlHasEvent(int type) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_HasEvents(Uint32 minType, Uint32 maxType)
 /// ```
+/// {@category events}
 bool sdlHasEvents(int minType, int maxType) {
   final sdlHasEventsLookupFunction = _libSdl
       .lookupFunction<
@@ -195,6 +199,7 @@ bool sdlHasEvents(int minType, int maxType) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_FlushEvent(Uint32 type)
 /// ```
+/// {@category events}
 void sdlFlushEvent(int type) {
   final sdlFlushEventLookupFunction = _libSdl
       .lookupFunction<Void Function(Uint32 type), void Function(int type)>(
@@ -231,6 +236,7 @@ void sdlFlushEvent(int type) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_FlushEvents(Uint32 minType, Uint32 maxType)
 /// ```
+/// {@category events}
 void sdlFlushEvents(int minType, int maxType) {
   final sdlFlushEventsLookupFunction = _libSdl
       .lookupFunction<
@@ -287,6 +293,7 @@ void sdlFlushEvents(int minType, int maxType) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_PollEvent(SDL_Event *event)
 /// ```
+/// {@category events}
 bool sdlPollEvent(Pointer<SdlEvent> event) {
   final sdlPollEventLookupFunction = _libSdl
       .lookupFunction<
@@ -321,6 +328,7 @@ bool sdlPollEvent(Pointer<SdlEvent> event) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_WaitEvent(SDL_Event *event)
 /// ```
+/// {@category events}
 bool sdlWaitEvent(Pointer<SdlEvent> event) {
   final sdlWaitEventLookupFunction = _libSdl
       .lookupFunction<
@@ -361,6 +369,7 @@ bool sdlWaitEvent(Pointer<SdlEvent> event) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_WaitEventTimeout(SDL_Event *event, Sint32 timeoutMS)
 /// ```
+/// {@category events}
 bool sdlWaitEventTimeout(Pointer<SdlEvent> event, int timeoutMs) {
   final sdlWaitEventTimeoutLookupFunction = _libSdl
       .lookupFunction<
@@ -405,6 +414,7 @@ bool sdlWaitEventTimeout(Pointer<SdlEvent> event, int timeoutMs) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_PushEvent(SDL_Event *event)
 /// ```
+/// {@category events}
 bool sdlPushEvent(Pointer<SdlEvent> event) {
   final sdlPushEventLookupFunction = _libSdl
       .lookupFunction<
@@ -456,6 +466,7 @@ bool sdlPushEvent(Pointer<SdlEvent> event) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_SetEventFilter(SDL_EventFilter filter, void *userdata)
 /// ```
+/// {@category events}
 void sdlSetEventFilter(
   Pointer<NativeFunction<SdlEventFilter>> filter,
   Pointer<NativeType> userdata,
@@ -494,6 +505,7 @@ void sdlSetEventFilter(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetEventFilter(SDL_EventFilter *filter, void **userdata)
 /// ```
+/// {@category events}
 bool sdlGetEventFilter(
   Pointer<Pointer<NativeFunction<SdlEventFilter>>> filter,
   Pointer<Pointer<NativeType>> userdata,
@@ -545,6 +557,7 @@ bool sdlGetEventFilter(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_AddEventWatch(SDL_EventFilter filter, void *userdata)
 /// ```
+/// {@category events}
 bool sdlAddEventWatch(
   Pointer<NativeFunction<SdlEventFilter>> filter,
   Pointer<NativeType> userdata,
@@ -581,6 +594,7 @@ bool sdlAddEventWatch(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_RemoveEventWatch(SDL_EventFilter filter, void *userdata)
 /// ```
+/// {@category events}
 void sdlRemoveEventWatch(
   Pointer<NativeFunction<SdlEventFilter>> filter,
   Pointer<NativeType> userdata,
@@ -620,6 +634,7 @@ void sdlRemoveEventWatch(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_FilterEvents(SDL_EventFilter filter, void *userdata)
 /// ```
+/// {@category events}
 void sdlFilterEvents(
   Pointer<NativeFunction<SdlEventFilter>> filter,
   Pointer<NativeType> userdata,
@@ -653,6 +668,7 @@ void sdlFilterEvents(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_SetEventEnabled(Uint32 type, bool enabled)
 /// ```
+/// {@category events}
 void sdlSetEventEnabled(int type, bool enabled) {
   final sdlSetEventEnabledLookupFunction = _libSdl
       .lookupFunction<
@@ -677,6 +693,7 @@ void sdlSetEventEnabled(int type, bool enabled) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_EventEnabled(Uint32 type)
 /// ```
+/// {@category events}
 bool sdlEventEnabled(int type) {
   final sdlEventEnabledLookupFunction = _libSdl
       .lookupFunction<Uint8 Function(Uint32 type), int Function(int type)>(
@@ -702,6 +719,7 @@ bool sdlEventEnabled(int type) {
 /// ```c
 /// extern SDL_DECLSPEC Uint32 SDLCALL SDL_RegisterEvents(int numevents)
 /// ```
+/// {@category events}
 int sdlRegisterEvents(int numevents) {
   final sdlRegisterEventsLookupFunction = _libSdl
       .lookupFunction<
@@ -728,6 +746,7 @@ int sdlRegisterEvents(int numevents) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Window * SDLCALL SDL_GetWindowFromEvent(const SDL_Event *event)
 /// ```
+/// {@category events}
 Pointer<SdlWindow> sdlGetWindowFromEvent(Pointer<SdlEvent> event) {
   final sdlGetWindowFromEventLookupFunction = _libSdl
       .lookupFunction<
@@ -770,6 +789,7 @@ Pointer<SdlWindow> sdlGetWindowFromEvent(Pointer<SdlEvent> event) {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_GetEventDescription(const SDL_Event *event, char *buf, int buflen)
 /// ```
+/// {@category events}
 int sdlGetEventDescription(
   Pointer<SdlEvent> event,
   Pointer<Int8> buf,

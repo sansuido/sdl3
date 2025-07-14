@@ -23,6 +23,7 @@ part of '../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC SDL_Storage * SDLCALL SDL_OpenTitleStorage(const char *override, SDL_PropertiesID props)
 /// ```
+/// {@category storage}
 Pointer<SdlStorage> sdlOpenTitleStorage(String? override, int props) {
   final sdlOpenTitleStorageLookupFunction = _libSdl
       .lookupFunction<
@@ -62,6 +63,7 @@ Pointer<SdlStorage> sdlOpenTitleStorage(String? override, int props) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Storage * SDLCALL SDL_OpenUserStorage(const char *org, const char *app, SDL_PropertiesID props)
 /// ```
+/// {@category storage}
 Pointer<SdlStorage> sdlOpenUserStorage(String? org, String? app, int props) {
   final sdlOpenUserStorageLookupFunction = _libSdl
       .lookupFunction<
@@ -114,6 +116,7 @@ Pointer<SdlStorage> sdlOpenUserStorage(String? org, String? app, int props) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Storage * SDLCALL SDL_OpenFileStorage(const char *path)
 /// ```
+/// {@category storage}
 Pointer<SdlStorage> sdlOpenFileStorage(String? path) {
   final sdlOpenFileStorageLookupFunction = _libSdl
       .lookupFunction<
@@ -156,6 +159,7 @@ Pointer<SdlStorage> sdlOpenFileStorage(String? path) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Storage * SDLCALL SDL_OpenStorage(const SDL_StorageInterface *iface, void *userdata)
 /// ```
+/// {@category storage}
 Pointer<SdlStorage> sdlOpenStorage(
   Pointer<SdlStorageInterface> iface,
   Pointer<NativeType> userdata,
@@ -193,6 +197,7 @@ Pointer<SdlStorage> sdlOpenStorage(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_CloseStorage(SDL_Storage *storage)
 /// ```
+/// {@category storage}
 bool sdlCloseStorage(Pointer<SdlStorage> storage) {
   final sdlCloseStorageLookupFunction = _libSdl
       .lookupFunction<
@@ -218,6 +223,7 @@ bool sdlCloseStorage(Pointer<SdlStorage> storage) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_StorageReady(SDL_Storage *storage)
 /// ```
+/// {@category storage}
 bool sdlStorageReady(Pointer<SdlStorage> storage) {
   final sdlStorageReadyLookupFunction = _libSdl
       .lookupFunction<
@@ -244,6 +250,7 @@ bool sdlStorageReady(Pointer<SdlStorage> storage) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetStorageFileSize(SDL_Storage *storage, const char *path, Uint64 *length)
 /// ```
+/// {@category storage}
 bool sdlGetStorageFileSize(
   Pointer<SdlStorage> storage,
   String? path,
@@ -293,6 +300,7 @@ bool sdlGetStorageFileSize(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_ReadStorageFile(SDL_Storage *storage, const char *path, void *destination, Uint64 length)
 /// ```
+/// {@category storage}
 bool sdlReadStorageFile(
   Pointer<SdlStorage> storage,
   String? path,
@@ -346,6 +354,7 @@ bool sdlReadStorageFile(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_WriteStorageFile(SDL_Storage *storage, const char *path, const void *source, Uint64 length)
 /// ```
+/// {@category storage}
 bool sdlWriteStorageFile(
   Pointer<SdlStorage> storage,
   String? path,
@@ -390,6 +399,7 @@ bool sdlWriteStorageFile(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_CreateStorageDirectory(SDL_Storage *storage, const char *path)
 /// ```
+/// {@category storage}
 bool sdlCreateStorageDirectory(Pointer<SdlStorage> storage, String? path) {
   final sdlCreateStorageDirectoryLookupFunction = _libSdl
       .lookupFunction<
@@ -433,6 +443,7 @@ bool sdlCreateStorageDirectory(Pointer<SdlStorage> storage, String? path) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_EnumerateStorageDirectory(SDL_Storage *storage, const char *path, SDL_EnumerateDirectoryCallback callback, void *userdata)
 /// ```
+/// {@category storage}
 bool sdlEnumerateStorageDirectory(
   Pointer<SdlStorage> storage,
   String? path,
@@ -482,6 +493,7 @@ bool sdlEnumerateStorageDirectory(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_RemoveStoragePath(SDL_Storage *storage, const char *path)
 /// ```
+/// {@category storage}
 bool sdlRemoveStoragePath(Pointer<SdlStorage> storage, String? path) {
   final sdlRemoveStoragePathLookupFunction = _libSdl
       .lookupFunction<
@@ -510,6 +522,7 @@ bool sdlRemoveStoragePath(Pointer<SdlStorage> storage, String? path) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_RenameStoragePath(SDL_Storage *storage, const char *oldpath, const char *newpath)
 /// ```
+/// {@category storage}
 bool sdlRenameStoragePath(
   Pointer<SdlStorage> storage,
   String? oldpath,
@@ -559,6 +572,7 @@ bool sdlRenameStoragePath(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_CopyStorageFile(SDL_Storage *storage, const char *oldpath, const char *newpath)
 /// ```
+/// {@category storage}
 bool sdlCopyStorageFile(
   Pointer<SdlStorage> storage,
   String? oldpath,
@@ -609,6 +623,7 @@ bool sdlCopyStorageFile(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetStoragePathInfo(SDL_Storage *storage, const char *path, SDL_PathInfo *info)
 /// ```
+/// {@category storage}
 bool sdlGetStoragePathInfo(
   Pointer<SdlStorage> storage,
   String? path,
@@ -648,6 +663,7 @@ bool sdlGetStoragePathInfo(
 /// ```c
 /// extern SDL_DECLSPEC Uint64 SDLCALL SDL_GetStorageSpaceRemaining(SDL_Storage *storage)
 /// ```
+/// {@category storage}
 int sdlGetStorageSpaceRemaining(Pointer<SdlStorage> storage) {
   final sdlGetStorageSpaceRemainingLookupFunction = _libSdl
       .lookupFunction<
@@ -698,6 +714,7 @@ int sdlGetStorageSpaceRemaining(Pointer<SdlStorage> storage) {
 /// ```c
 /// extern SDL_DECLSPEC char ** SDLCALL SDL_GlobStorageDirectory(SDL_Storage *storage, const char *path, const char *pattern, SDL_GlobFlags flags, int *count)
 /// ```
+/// {@category storage}
 Pointer<Pointer<Int8>> sdlGlobStorageDirectory(
   Pointer<SdlStorage> storage,
   String? path,

@@ -20,6 +20,7 @@ part of '../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetPlatform(void)
 /// ```
+/// {@category platform}
 String? sdlGetPlatform() {
   final sdlGetPlatformLookupFunction = _libSdl
       .lookupFunction<Pointer<Utf8> Function(), Pointer<Utf8> Function()>(
