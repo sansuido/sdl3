@@ -1,3 +1,7 @@
+## 2.2.1
+- SDL3-2025-07-20
+- [add] Added example (example/dxlib/no029.dart Action sample program).
+
 ## 2.2.0
 - SDL3-2025-07-13
 - [update] Added a category to doc.

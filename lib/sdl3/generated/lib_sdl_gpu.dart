@@ -679,7 +679,8 @@ Pointer<SdlGpuShader> sdlCreateGpuShader(
 /// Creates a texture object to be used in graphics or compute workflows.
 ///
 /// The contents of this texture are undefined until data is written to the
-/// texture.
+/// texture, either via SDL_UploadToGPUTexture or by performing a render or
+/// compute pass with this texture as a target.
 ///
 /// Note that certain combinations of usage flags are invalid. For example, a
 /// texture cannot have both the SAMPLER and GRAPHICS_STORAGE_READ flags.
@@ -721,6 +722,8 @@ Pointer<SdlGpuShader> sdlCreateGpuShader(
 ///
 /// \sa SDL_UploadToGPUTexture
 /// \sa SDL_DownloadFromGPUTexture
+/// \sa SDL_BeginGPURenderPass
+/// \sa SDL_BeginGPUComputePass
 /// \sa SDL_BindGPUVertexSamplers
 /// \sa SDL_BindGPUVertexStorageTextures
 /// \sa SDL_BindGPUFragmentSamplers
@@ -1491,6 +1494,14 @@ void sdlPushGpuComputeUniformData(
 /// pass. A default viewport and scissor state are automatically set when this
 /// is called. You cannot begin another render pass, or begin a compute pass or
 /// copy pass until you have ended the render pass.
+///
+/// Using SDL_GPU_LOADOP_LOAD before any contents have been written to the
+/// texture subresource will result in undefined behavior. SDL_GPU_LOADOP_CLEAR
+/// will set the contents of the texture subresource to a single value before
+/// any rendering is performed. It's fine to do an empty render pass using
+/// SDL_GPU_STOREOP_STORE to clear a texture, but in general it's better to
+/// think of clearing not as an independent operation but as something that's
+/// done as the beginning of a render pass.
 ///
 /// \param command_buffer a command buffer.
 /// \param color_target_infos an array of texture subresources with

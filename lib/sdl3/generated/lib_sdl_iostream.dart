@@ -111,8 +111,7 @@ Pointer<SdlIoStream> sdlIoFromFile(String? file, String? mode) {
 /// certain size, for both read and write access.
 ///
 /// This memory buffer is not copied by the SDL_IOStream; the pointer you
-/// provide must remain valid until you close the stream. Closing the stream
-/// will not free the original buffer.
+/// provide must remain valid until you close the stream.
 ///
 /// If you need to make sure the SDL_IOStream never writes to the memory
 /// buffer, you should use SDL_IOFromConstMem() with a read-only buffer of
@@ -124,6 +123,13 @@ Pointer<SdlIoStream> sdlIoFromFile(String? file, String? mode) {
 /// was passed to this function.
 /// - `SDL_PROP_IOSTREAM_MEMORY_SIZE_NUMBER`: this will be the `size` parameter
 /// that was passed to this function.
+///
+/// Additionally, the following properties are recognized:
+///
+/// - `SDL_PROP_IOSTREAM_MEMORY_FREE_FUNC`: if this property is set to a
+/// non-NULL value it will be interpreted as a function of SDL_free_func type
+/// and called with the passed `mem` pointer when closing the stream. By
+/// default it is unset, i.e., the memory will not be freed.
 ///
 /// \param mem a pointer to a buffer to feed an SDL_IOStream stream.
 /// \param size the buffer size, in bytes.
@@ -166,8 +172,7 @@ Pointer<SdlIoStream> sdlIoFromMem(Pointer<NativeType> mem, int size) {
 /// without writing to the memory buffer.
 ///
 /// This memory buffer is not copied by the SDL_IOStream; the pointer you
-/// provide must remain valid until you close the stream. Closing the stream
-/// will not free the original buffer.
+/// provide must remain valid until you close the stream.
 ///
 /// If you need to write to a memory buffer, you should use SDL_IOFromMem()
 /// with a writable buffer of memory instead.
@@ -178,6 +183,13 @@ Pointer<SdlIoStream> sdlIoFromMem(Pointer<NativeType> mem, int size) {
 /// was passed to this function.
 /// - `SDL_PROP_IOSTREAM_MEMORY_SIZE_NUMBER`: this will be the `size` parameter
 /// that was passed to this function.
+///
+/// Additionally, the following properties are recognized:
+///
+/// - `SDL_PROP_IOSTREAM_MEMORY_FREE_FUNC`: if this property is set to a
+/// non-NULL value it will be interpreted as a function of SDL_free_func type
+/// and called with the passed `mem` pointer when closing the stream. By
+/// default it is unset, i.e., the memory will not be freed.
 ///
 /// \param mem a pointer to a read-only buffer to feed an SDL_IOStream stream.
 /// \param size the buffer size, in bytes.
