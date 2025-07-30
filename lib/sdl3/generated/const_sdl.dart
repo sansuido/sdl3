@@ -1013,7 +1013,7 @@ const SDL_HINT_XINPUT_ENABLED = 'SDL_XINPUT_ENABLED';
 const SDL_HINT_ASSERT = 'SDL_ASSERT';
 const SDL_HINT_PEN_MOUSE_EVENTS = 'SDL_PEN_MOUSE_EVENTS';
 const SDL_HINT_PEN_TOUCH_EVENTS = 'SDL_PEN_TOUCH_EVENTS';
-const SDL_HINT_LOG_BACKENDS = 'SDL_LOG_BACKENDS';
+const SDL_HINT_DEBUG_LOGGING = 'SDL_DEBUG_LOGGING';
 const SDL_HINT_DEFAULT = 0;
 const SDL_HINT_NORMAL = 1;
 const SDL_HINT_OVERRIDE = 2;
@@ -1073,7 +1073,7 @@ const SDL_PROP_IOSTREAM_FILE_DESCRIPTOR_NUMBER = 'SDL.iostream.file_descriptor';
 const SDL_PROP_IOSTREAM_ANDROID_AASSET_POINTER = 'SDL.iostream.android.aasset';
 const SDL_PROP_IOSTREAM_MEMORY_POINTER = 'SDL.iostream.memory.base';
 const SDL_PROP_IOSTREAM_MEMORY_SIZE_NUMBER = 'SDL.iostream.memory.size';
-const SDL_PROP_IOSTREAM_MEMORY_FREE_FUNC = 'SDL.iostream.memory.free';
+const SDL_PROP_IOSTREAM_MEMORY_FREE_FUNC_POINTER = 'SDL.iostream.memory.free';
 const SDL_PROP_IOSTREAM_DYNAMIC_MEMORY_POINTER = 'SDL.iostream.dynamic.memory';
 const SDL_PROP_IOSTREAM_DYNAMIC_CHUNKSIZE_NUMBER =
     'SDL.iostream.dynamic.chunksize';
@@ -2002,7 +2002,7 @@ const SDL_RENDERER_VSYNC_ADAPTIVE = -1;
 const SDL_DEBUG_TEXT_FONT_CHARACTER_SIZE = 8;
 //const SDL_revision_h_ = ;
 const SDL_REVISION =
-    'SDL3-3.3.0-release-3.2.6-793-g735f0cc30 (" SDL_VENDOR_INFO ")';
+    'SDL3-3.3.0-release-3.2.6-829-g2ed1c35ca (" SDL_VENDOR_INFO ")';
 //const SDL_scancode_h_ = ;
 const SDL_SCANCODE_UNKNOWN = 0;
 const SDL_SCANCODE_A = 4;
@@ -3799,7 +3799,7 @@ class SdlkHint {
   static const onAssert = SDL_HINT_ASSERT;
   static const penMouseEvents = SDL_HINT_PEN_MOUSE_EVENTS;
   static const penTouchEvents = SDL_HINT_PEN_TOUCH_EVENTS;
-  static const logBackends = SDL_HINT_LOG_BACKENDS;
+  static const debugLogging = SDL_HINT_DEBUG_LOGGING;
   static const onDefault = SDL_HINT_DEFAULT;
   static const normal = SDL_HINT_NORMAL;
   static const override = SDL_HINT_OVERRIDE;
@@ -3860,7 +3860,8 @@ class SdlkPropIostream {
   static const androidAassetPointer = SDL_PROP_IOSTREAM_ANDROID_AASSET_POINTER;
   static const memoryPointer = SDL_PROP_IOSTREAM_MEMORY_POINTER;
   static const memorySizeNumber = SDL_PROP_IOSTREAM_MEMORY_SIZE_NUMBER;
-  static const memoryFreeFunc = SDL_PROP_IOSTREAM_MEMORY_FREE_FUNC;
+  static const memoryFreeFuncPointer =
+      SDL_PROP_IOSTREAM_MEMORY_FREE_FUNC_POINTER;
   static const dynamicMemoryPointer = SDL_PROP_IOSTREAM_DYNAMIC_MEMORY_POINTER;
   static const dynamicChunksizeNumber =
       SDL_PROP_IOSTREAM_DYNAMIC_CHUNKSIZE_NUMBER;

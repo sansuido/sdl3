@@ -1,3 +1,7 @@
+## 2.3.0
+- SDL3-2025-07-27
+- [changed] Critical changes have been made to mixer functions and structures.
+
 ## 2.2.1
 - SDL3-2025-07-20
 - [add] Added example (example/dxlib/no029.dart Action sample program).

@@ -2,3581 +2,3709 @@
 // ignore_for_file: avoid_positional_boolean_parameters
 part of '../sdl_mixer.dart';
 
-// typedef void (SDLCALL *Mix_MixCallback)(void *udata, Uint8 *stream, int len)
-typedef MixMixCallbackDart =
-    void Function(Pointer<NativeType> udata, Pointer<Uint8> stream, int len);
-typedef MixMixCallback =
-    Void Function(Pointer<NativeType> udata, Pointer<Uint8> stream, Int32 len);
+// typedef void (SDLCALL *MIX_TrackStoppedCallback)(void *userdata, MIX_Track *track)
+typedef MixTrackStoppedCallbackDart =
+    void Function(Pointer<NativeType> userdata, Pointer<MixTrack> track);
+typedef MixTrackStoppedCallback =
+    Void Function(Pointer<NativeType> userdata, Pointer<MixTrack> track);
 
-// typedef void (SDLCALL *Mix_MusicFinishedCallback)(void)
-typedef MixMusicFinishedCallbackDart = void Function();
-typedef MixMusicFinishedCallback = Void Function();
-
-// typedef void (SDLCALL *Mix_ChannelFinishedCallback)(int channel)
-typedef MixChannelFinishedCallbackDart = void Function(int channel);
-typedef MixChannelFinishedCallback = Void Function(Int32 channel);
-
-// typedef void (SDLCALL *Mix_EffectFunc_t)(int chan, void *stream, int len, void *udata)
-typedef MixEffectFuncTDart =
+// typedef void (SDLCALL *MIX_TrackMixCallback)(void *userdata, MIX_Track *track, const SDL_AudioSpec *spec, float *pcm, int samples)
+typedef MixTrackMixCallbackDart =
     void Function(
-      int chan,
-      Pointer<NativeType> stream,
-      int len,
-      Pointer<NativeType> udata,
+      Pointer<NativeType> userdata,
+      Pointer<MixTrack> track,
+      Pointer<SdlAudioSpec> spec,
+      Pointer<Float> pcm,
+      int samples,
     );
-typedef MixEffectFuncT =
+typedef MixTrackMixCallback =
     Void Function(
-      Int32 chan,
-      Pointer<NativeType> stream,
-      Int32 len,
-      Pointer<NativeType> udata,
+      Pointer<NativeType> userdata,
+      Pointer<MixTrack> track,
+      Pointer<SdlAudioSpec> spec,
+      Pointer<Float> pcm,
+      Int32 samples,
     );
 
-// typedef void (SDLCALL *Mix_EffectDone_t)(int chan, void *udata)
-typedef MixEffectDoneTDart = void Function(int chan, Pointer<NativeType> udata);
-typedef MixEffectDoneT = Void Function(Int32 chan, Pointer<NativeType> udata);
+// typedef void (SDLCALL *MIX_GroupMixCallback)(void *userdata, MIX_Group *group, const SDL_AudioSpec *spec, float *pcm, int samples)
+typedef MixGroupMixCallbackDart =
+    void Function(
+      Pointer<NativeType> userdata,
+      Pointer<MixGroup> group,
+      Pointer<SdlAudioSpec> spec,
+      Pointer<Float> pcm,
+      int samples,
+    );
+typedef MixGroupMixCallback =
+    Void Function(
+      Pointer<NativeType> userdata,
+      Pointer<MixGroup> group,
+      Pointer<SdlAudioSpec> spec,
+      Pointer<Float> pcm,
+      Int32 samples,
+    );
 
-// typedef bool (SDLCALL *Mix_EachSoundFontCallback)(const char*, void*)
-typedef MixEachSoundFontCallbackDart =
-    int Function(Pointer<Utf8> arg0, Pointer<NativeType> arg1);
-typedef MixEachSoundFontCallback =
-    Uint8 Function(Pointer<Utf8> arg0, Pointer<NativeType> arg1);
+// typedef void (SDLCALL *MIX_PostMixCallback)(void *userdata, MIX_Mixer *mixer, const SDL_AudioSpec *spec, float *pcm, int samples)
+typedef MixPostMixCallbackDart =
+    void Function(
+      Pointer<NativeType> userdata,
+      Pointer<MixMixer> mixer,
+      Pointer<SdlAudioSpec> spec,
+      Pointer<Float> pcm,
+      int samples,
+    );
+typedef MixPostMixCallback =
+    Void Function(
+      Pointer<NativeType> userdata,
+      Pointer<MixMixer> mixer,
+      Pointer<SdlAudioSpec> spec,
+      Pointer<Float> pcm,
+      Int32 samples,
+    );
 
 ///
-/// This function gets the version of the dynamically linked SDL_mixer library.
+/// Get the version of SDL_mixer that is linked against your program.
 ///
-/// \returns SDL_mixer version.
+/// If you are linking to SDL_mixer dynamically, then it is possible that the
+/// current version will be different than the version you compiled against.
+/// This function returns the current version, while SDL_MIXER_VERSION is the
+/// version you compiled with.
+///
+/// This function may be called safely at any time, even before MIX_Init().
+///
+/// \returns the version of the linked library.
 ///
 /// \since This function is available since SDL_mixer 3.0.0.
 ///
+/// \sa SDL_MIXER_VERSION
+///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL Mix_Version(void)
+/// extern SDL_DECLSPEC int SDLCALL MIX_Version(void)
 /// ```
 /// {@category mixer}
 int mixVersion() {
   final mixVersionLookupFunction = _libMixer
-      .lookupFunction<Int32 Function(), int Function()>('Mix_Version');
+      .lookupFunction<Int32 Function(), int Function()>('MIX_Version');
   return mixVersionLookupFunction();
 }
 
 ///
-/// Initialize SDL_mixer.
+/// Initialize the SDL_mixer library.
 ///
-/// This function loads dynamic libraries that SDL_mixer needs, and prepares
-/// them for use.
+/// This must be successfully called once before (almost) any other SDL_mixer
+/// function can be used.
 ///
-/// Note that, unlike other SDL libraries, this call is optional! If you load a
-/// music file, SDL_mixer will handle initialization on the fly. This function
-/// will let you know, up front, whether a specific format will be available
-/// for use.
+/// It is safe to call this multiple times; the library will only initialize
+/// once, and won't deinitialize until MIX_Quit() has been called a matching
+/// number of times. Extra attempts to init report success.
 ///
-/// Flags should be one or more flags from MIX_InitFlags OR'd together. It
-/// returns the flags successfully initialized, or 0 on failure.
+/// \returns true on success, false on error; call SDL_GetError() for details.
 ///
-/// Currently, these flags are:
-///
-/// - `MIX_INIT_FLAC`
-/// - `MIX_INIT_MOD`
-/// - `MIX_INIT_MP3`
-/// - `MIX_INIT_OGG`
-/// - `MIX_INIT_MID`
-/// - `MIX_INIT_OPUS`
-/// - `MIX_INIT_WAVPACK`
-///
-/// More flags may be added in a future SDL_mixer release.
-///
-/// This function may need to load external shared libraries to support various
-/// codecs, which means this function can fail to initialize that support on an
-/// otherwise-reasonable system if the library isn't available; this is not
-/// just a question of exceptional circumstances like running out of memory at
-/// startup!
-///
-/// Note that you may call this function more than once to initialize with
-/// additional flags. The return value will reflect both new flags that
-/// successfully initialized, and also include flags that had previously been
-/// initialized as well.
-///
-/// As this will return previously-initialized flags, it's legal to call this
-/// with zero (no flags set). This is a safe no-op that can be used to query
-/// the current initialization state without changing it at all.
-///
-/// Since this returns previously-initialized flags as well as new ones, and
-/// you can call this with zero, you should not check for a zero return value
-/// to determine an error condition. Instead, you should check to make sure all
-/// the flags you require are set in the return value. If you have a game with
-/// data in a specific format, this might be a fatal error. If you're a generic
-/// media player, perhaps you are fine with only having WAV and MP3 support and
-/// can live without Opus playback, even if you request support for everything.
-///
-/// Unlike other SDL satellite libraries, calls to Mix_Init do not stack; a
-/// single call to Mix_Quit() will deinitialize everything and does not have to
-/// be paired with a matching Mix_Init call. For that reason, it's considered
-/// best practices to have a single Mix_Init and Mix_Quit call in your program.
-/// While this isn't required, be aware of the risks of deviating from that
-/// behavior.
-///
-/// After initializing SDL_mixer, the next step is to open an audio device to
-/// prepare to play sound (with Mix_OpenAudio()), and load audio data to play
-/// with that device.
-///
-/// \param flags initialization flags, OR'd together.
-/// \returns all currently initialized flags.
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL_mixer 3.0.0.
 ///
-/// \sa Mix_Quit
+/// \sa MIX_Quit
 ///
 /// ```c
-/// extern SDL_DECLSPEC MIX_InitFlags SDLCALL Mix_Init(MIX_InitFlags flags)
+/// extern SDL_DECLSPEC bool SDLCALL MIX_Init(void)
 /// ```
 /// {@category mixer}
-int mixInit(int flags) {
+bool mixInit() {
   final mixInitLookupFunction = _libMixer
-      .lookupFunction<Uint32 Function(Uint32 flags), int Function(int flags)>(
-        'Mix_Init',
-      );
-  return mixInitLookupFunction(flags);
+      .lookupFunction<Uint8 Function(), int Function()>('MIX_Init');
+  return mixInitLookupFunction() == 1;
 }
 
 ///
-/// Deinitialize SDL_mixer.
+/// Deinitialize the SDL_mixer library.
 ///
-/// This should be the last function you call in SDL_mixer, after freeing all
-/// other resources and closing all audio devices. This will unload any shared
-/// libraries it is using for various codecs.
+/// This must be called when done with the library, probably at the end of your
+/// program.
 ///
-/// After this call, a call to Mix_Init(0) will return 0 (no codecs loaded).
+/// It is safe to call this multiple times; the library will only deinitialize
+/// once, when this function is called the same number of times as MIX_Init was
+/// successfully called.
 ///
-/// You can safely call Mix_Init() to reload various codec support after this
-/// call.
+/// Once you have successfully deinitialized the library, it is safe to call
+/// MIX_Init to reinitialize it for further use.
 ///
-/// Unlike other SDL satellite libraries, calls to Mix_Init do not stack; a
-/// single call to Mix_Quit() will deinitialize everything and does not have to
-/// be paired with a matching Mix_Init call. For that reason, it's considered
-/// best practices to have a single Mix_Init and Mix_Quit call in your program.
-/// While this isn't required, be aware of the risks of deviating from that
-/// behavior.
+/// On successful deinitialization, SDL_mixer will destroy almost all created
+/// objects, including objects of type:
+///
+/// - MIX_Mixer
+/// - MIX_Track
+/// - MIX_Audio
+/// - MIX_Group
+/// - MIX_AudioDecoder
+///
+/// ...which is to say: it's possible a single call to this function will clean
+/// up anything it allocated, stop all audio output, close audio devices, etc.
+/// Don't attempt to destroy objects after this call. The app is still
+/// encouraged to manage their resources carefully and clean up first, treating
+/// this function as a safety net against memory leaks.
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL_mixer 3.0.0.
 ///
-/// \sa Mix_Init
+/// \sa MIX_Init
 ///
 /// ```c
-/// extern SDL_DECLSPEC void SDLCALL Mix_Quit(void)
+/// extern SDL_DECLSPEC void SDLCALL MIX_Quit(void)
 /// ```
 /// {@category mixer}
 void mixQuit() {
   final mixQuitLookupFunction = _libMixer
-      .lookupFunction<Void Function(), void Function()>('Mix_Quit');
+      .lookupFunction<Void Function(), void Function()>('MIX_Quit');
   return mixQuitLookupFunction();
 }
 
 ///
-/// Open an audio device for playback.
+/// Report the number of audio decoders available for use.
 ///
-/// An audio device is what generates sound, so the app must open one to make
-/// noise.
+/// An audio decoder is what turns specific audio file formats into usable PCM
+/// data. For example, there might be an MP3 decoder, or a WAV decoder, etc.
+/// SDL_mixer probably has several decoders built in.
 ///
-/// This function will check if SDL's audio system is initialized, and if not,
-/// it will initialize it by calling `SDL_Init(SDL_INIT_AUDIO)` on your behalf.
-/// You are free to (and encouraged to!) initialize it yourself before calling
-/// this function, as this gives your program more control over the process.
+/// The return value can be used to call MIX_GetAudioDecoder() in a loop.
 ///
-/// If you aren't particularly concerned with the specifics of the audio
-/// device, and your data isn't in a specific format, you can pass a NULL for
-/// the `spec` parameter and SDL_mixer will choose a reasonable default.
-/// SDL_mixer will convert audio data you feed it to the hardware's format
-/// behind the scenes.
+/// The number of decoders available is decided during MIX_Init() and does not
+/// change until the library is deinitialized.
 ///
-/// That being said, if you have control of your audio data and you know its
-/// format ahead of time, you may save CPU time by opening the audio device in
-/// that exact format so SDL_mixer does not have to spend time converting
-/// anything behind the scenes, and can just pass the data straight through to
-/// the hardware.
+/// \returns the number of decoders available.
 ///
-/// The other reason to care about specific formats: if you plan to touch the
-/// mix buffer directly (with Mix_SetPostMix, a registered effect, or
-/// Mix_HookMusic), you might have code that expects it to be in a specific
-/// format, and you should specify that here.
+/// \threadsafety It is safe to call this function from any thread.
 ///
-/// This function allows you to select specific audio hardware on the system
-/// with the `devid` parameter. If you specify 0, SDL_mixer will choose the
-/// best default it can on your behalf (which, in many cases, is exactly what
-/// you want anyhow). This is equivalent to specifying
-/// `SDL_AUDIO_DEVICE_DEFAULT_PLAYBACK`, but is less wordy. SDL_mixer does not
-/// offer a mechanism to determine device IDs to open, but you can use
-/// SDL_GetAudioOutputDevices() to get a list of available devices. If you do
-/// this, be sure to call `SDL_Init(SDL_INIT_AUDIO)` first to initialize SDL's
-/// audio system!
+/// \since This function is available since SDL_mixer 3.0.0.
 ///
-/// If this function reports success, you are ready to start making noise! Load
-/// some audio data and start playing!
+/// \sa MIX_GetAudioDecoder
 ///
-/// When done with an audio device, probably at the end of the program, the app
-/// should close the audio with Mix_CloseAudio().
+/// ```c
+/// extern SDL_DECLSPEC int SDLCALL MIX_GetNumAudioDecoders(void)
+/// ```
+/// {@category mixer}
+int mixGetNumAudioDecoders() {
+  final mixGetNumAudioDecodersLookupFunction = _libMixer
+      .lookupFunction<Int32 Function(), int Function()>(
+        'MIX_GetNumAudioDecoders',
+      );
+  return mixGetNumAudioDecodersLookupFunction();
+}
+
 ///
-/// \param devid the device name to open, or 0 for a reasonable default.
-/// \param spec the audio format you'd like SDL_mixer to work in.
+/// Report the name of a specific audio decoders.
+///
+/// An audio decoder is what turns specific audio file formats into usable PCM
+/// data. For example, there might be an MP3 decoder, or a WAV decoder, etc.
+/// SDL_mixer probably has several decoders built in.
+///
+/// The names are capital English letters and numbers, low-ASCII. They don't
+/// necessarily map to a specific file format; Some decoders, like "XMP"
+/// operate on multiple file types, and more than one decoder might handle the
+/// same file type, like "DRMP3" vs "MPG123". Note that in that last example,
+/// neither decoder is called "MP3".
+///
+/// The index of a specific decoder is decided during MIX_Init() and does not
+/// change until the library is deinitialized. Valid indices are between zero
+/// and the return value of MIX_GetNumAudioDecoders().
+///
+/// The returned pointer is const memory owned by SDL_mixer; do not free it.
+///
+/// \param index the index of the decoder to query.
+/// \returns a UTF-8 (really, ASCII) string of the decoder's name, or NULL if
+/// `index` is invalid.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL_mixer 3.0.0.
+///
+/// \sa MIX_GetNumAudioDecoders
+///
+/// ```c
+/// extern SDL_DECLSPEC const char * SDLCALL MIX_GetAudioDecoder(int index)
+/// ```
+/// {@category mixer}
+String? mixGetAudioDecoder(int index) {
+  final mixGetAudioDecoderLookupFunction = _libMixer
+      .lookupFunction<
+        Pointer<Utf8> Function(Int32 index),
+        Pointer<Utf8> Function(int index)
+      >('MIX_GetAudioDecoder');
+  final result = mixGetAudioDecoderLookupFunction(index);
+  if (result == nullptr) {
+    return null;
+  }
+  return result.toDartString();
+}
+
+///
+/// Create a mixer that plays sound directly to an audio device.
+///
+/// This is usually the function you want, vs MIX_CreateMixer().
+///
+/// You can choose a specific device ID to open, following SDL's usual rules,
+/// but often the correct choice is to specify
+/// SDL_AUDIO_DEVICE_DEFAULT_PLAYBACK and let SDL figure out what device to use
+/// (and seamlessly transition you to new hardware if the default changes).
+///
+/// Only playback devices make sense here. Attempting to open a recording
+/// device will fail.
+///
+/// This will call SDL_Init(SDL_INIT_AUDIO) internally; it's safe to call
+/// SDL_Init() before this call, too, if you intend to enumerate audio devices
+/// to choose one to open here.
+///
+/// An audio format can be requested, and the system will try to set the
+/// hardware to those specifications, or as close as possible, but this is just
+/// a hint. SDL_mixer will handle all data conversion behind the scenes in any
+/// case, and specifying a NULL spec is a reasonable choice. The best reason to
+/// specify a format is because you know all your data is in that format and it
+/// might save some unnecessary CPU time on conversion.
+///
+/// The actual device format chosen is available through MIX_GetMixerFormat().
+///
+/// Once a mixer is created, next steps are usually to load audio (through
+/// MIX_LoadAudio() and friends), create a track (MIX_CreateTrack()), and play
+/// that audio through that track.
+///
+/// When done with the mixer, it can be destroyed with MIX_DestroyMixer().
+///
+/// \param devid the device to open for playback, or
+/// SDL_AUDIO_DEVICE_DEFAULT_PLAYBACK for the default.
+/// \param spec the audio format request from the device. May be NULL.
+/// \returns a mixer that can be used to play audio, or NULL on failure; call
+/// SDL_GetError() for more information.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL_mixer 3.0.0.
+///
+/// \sa MIX_CreateMixer
+/// \sa MIX_DestroyMixer
+///
+/// ```c
+/// extern SDL_DECLSPEC MIX_Mixer * SDLCALL MIX_CreateMixerDevice(SDL_AudioDeviceID devid, const SDL_AudioSpec *spec)
+/// ```
+/// {@category mixer}
+Pointer<MixMixer> mixCreateMixerDevice(int devid, Pointer<SdlAudioSpec> spec) {
+  final mixCreateMixerDeviceLookupFunction = _libMixer
+      .lookupFunction<
+        Pointer<MixMixer> Function(Uint32 devid, Pointer<SdlAudioSpec> spec),
+        Pointer<MixMixer> Function(int devid, Pointer<SdlAudioSpec> spec)
+      >('MIX_CreateMixerDevice');
+  return mixCreateMixerDeviceLookupFunction(devid, spec);
+}
+
+///
+/// Create a mixer that generates audio to a memory buffer.
+///
+/// Usually you want MIX_CreateMixerDevice() instead of this function. The
+/// mixer created here can be used with MIX_Generate() to produce more data on
+/// demand, as fast as desired.
+///
+/// An audio format must be specified. This is the format it will output in.
+/// This cannot be NULL.
+///
+/// Once a mixer is created, next steps are usually to load audio (through
+/// MIX_LoadAudio() and friends), create a track (MIX_CreateTrack()), and play
+/// that audio through that track.
+///
+/// When done with the mixer, it can be destroyed with MIX_DestroyMixer().
+///
+/// \param spec the audio format that mixer will generate.
+/// \returns a mixer that can be used to generate audio, or NULL on failure;
+/// call SDL_GetError() for more information.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL_mixer 3.0.0.
+///
+/// \sa MIX_CreateMixerDevice
+/// \sa MIX_DestroyMixer
+///
+/// ```c
+/// extern SDL_DECLSPEC MIX_Mixer * SDLCALL MIX_CreateMixer(const SDL_AudioSpec *spec)
+/// ```
+/// {@category mixer}
+Pointer<MixMixer> mixCreateMixer(Pointer<SdlAudioSpec> spec) {
+  final mixCreateMixerLookupFunction = _libMixer
+      .lookupFunction<
+        Pointer<MixMixer> Function(Pointer<SdlAudioSpec> spec),
+        Pointer<MixMixer> Function(Pointer<SdlAudioSpec> spec)
+      >('MIX_CreateMixer');
+  return mixCreateMixerLookupFunction(spec);
+}
+
+///
+/// Free a mixer.
+///
+/// If this mixer was created with MIX_CreateMixerDevice(), this function will
+/// also close the audio device and call SDL_QuitSubSystem(SDL_INIT_AUDIO).
+///
+/// Any MIX_Group or MIX_Track created for this mixer will also be destroyed.
+/// Do not access them again or attempt to destroy them after the device is
+/// destroyed. MIX_Audio objects will not be destroyed, since they can be
+/// shared between mixers (but those will all be destroyed during MIX_Quit()).
+///
+/// \param mixer the mixer to destroy.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL_mixer 3.0.0.
+///
+/// \sa MIX_CreateMixerDevice
+/// \sa MIX_CreateMixer
+///
+/// ```c
+/// extern SDL_DECLSPEC void SDLCALL MIX_DestroyMixer(MIX_Mixer *mixer)
+/// ```
+/// {@category mixer}
+void mixDestroyMixer(Pointer<MixMixer> mixer) {
+  final mixDestroyMixerLookupFunction = _libMixer
+      .lookupFunction<
+        Void Function(Pointer<MixMixer> mixer),
+        void Function(Pointer<MixMixer> mixer)
+      >('MIX_DestroyMixer');
+  return mixDestroyMixerLookupFunction(mixer);
+}
+
+///
+/// Get the properties associated with a mixer.
+///
+/// Currently SDL_mixer assigns no properties of its own to a mixer, but this
+/// can be a convenient place to store app-specific data.
+///
+/// A SDL_PropertiesID is created the first time this function is called for a
+/// given mixer.
+///
+/// \param mixer the mixer to query.
+/// \returns a valid property ID on success or 0 on failure; call
+/// SDL_GetError() for more information.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL_mixer 3.0.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC SDL_PropertiesID SDLCALL MIX_GetMixerProperties(MIX_Mixer *mixer)
+/// ```
+/// {@category mixer}
+int mixGetMixerProperties(Pointer<MixMixer> mixer) {
+  final mixGetMixerPropertiesLookupFunction = _libMixer
+      .lookupFunction<
+        Uint32 Function(Pointer<MixMixer> mixer),
+        int Function(Pointer<MixMixer> mixer)
+      >('MIX_GetMixerProperties');
+  return mixGetMixerPropertiesLookupFunction(mixer);
+}
+
+///
+/// Get the audio format a mixer is generating.
+///
+/// Generally you don't need this information, as SDL_mixer will convert data
+/// as necessary between inputs you provide and its output format, but it might
+/// be useful if trying to match your inputs to reduce conversion and
+/// resampling costs.
+///
+/// For mixers created with MIX_CreateMixerDevice(), this is the format of the
+/// audio device (and may change later if the device itself changes; SDL_mixer
+/// will seamlessly handle this change internally, though).
+///
+/// For mixers created with MIX_CreateMixer(), this is the format that
+/// MIX_Generate() will produce, as requested at create time, and does not
+/// change.
+///
+/// Note that internally, SDL_mixer will work in SDL_AUDIO_F32 format before
+/// outputting the format specified here, so it would be more efficient to
+/// match input data to that, not the final output format.
+///
+/// \param mixer the mixer to query.
+/// \param spec where to store the mixer audio format.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// \sa Mix_CloseAudio
-/// \sa Mix_QuerySpec
-///
-/// ```c
-/// extern SDL_DECLSPEC bool SDLCALL Mix_OpenAudio(SDL_AudioDeviceID devid, const SDL_AudioSpec *spec)
-/// ```
-/// {@category mixer}
-bool mixOpenAudio(int devid, Pointer<SdlAudioSpec> spec) {
-  final mixOpenAudioLookupFunction = _libMixer
-      .lookupFunction<
-        Uint8 Function(Uint32 devid, Pointer<SdlAudioSpec> spec),
-        int Function(int devid, Pointer<SdlAudioSpec> spec)
-      >('Mix_OpenAudio');
-  return mixOpenAudioLookupFunction(devid, spec) == 1;
-}
-
-///
-/// Suspend or resume the whole audio output.
-///
-/// \param pause_on 1 to pause audio output, or 0 to resume.
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL_mixer 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC void SDLCALL Mix_PauseAudio(int pause_on)
+/// extern SDL_DECLSPEC bool SDLCALL MIX_GetMixerFormat(MIX_Mixer *mixer, SDL_AudioSpec *spec)
 /// ```
 /// {@category mixer}
-void mixPauseAudio(int pauseOn) {
-  final mixPauseAudioLookupFunction = _libMixer
-      .lookupFunction<Void Function(Int32 pauseOn), void Function(int pauseOn)>(
-        'Mix_PauseAudio',
-      );
-  return mixPauseAudioLookupFunction(pauseOn);
+bool mixGetMixerFormat(Pointer<MixMixer> mixer, Pointer<SdlAudioSpec> spec) {
+  final mixGetMixerFormatLookupFunction = _libMixer
+      .lookupFunction<
+        Uint8 Function(Pointer<MixMixer> mixer, Pointer<SdlAudioSpec> spec),
+        int Function(Pointer<MixMixer> mixer, Pointer<SdlAudioSpec> spec)
+      >('MIX_GetMixerFormat');
+  return mixGetMixerFormatLookupFunction(mixer, spec) == 1;
 }
 
 ///
-/// Find out what the actual audio device parameters are.
+/// Load audio for playback from an SDL_IOStream.
 ///
-/// Note this is only important if the app intends to touch the audio buffers
-/// being sent to the hardware directly. If an app just wants to play audio
-/// files and let SDL_mixer handle the low-level details, this function can
-/// probably be ignored.
+/// In normal usage, apps should load audio once, maybe at startup, then play
+/// it multiple times.
 ///
-/// If the audio device is not opened, this function will return 0.
+/// When loading audio, it will be cached fully in RAM in its original data
+/// format. Each time it plays, the data will be decoded. For example, an MP3
+/// will be stored in memory in MP3 format and be decompressed on the fly
+/// during playback. This is a tradeoff between i/o overhead and memory usage.
 ///
-/// \param frequency On return, will be filled with the audio device's
-/// frequency in Hz.
-/// \param format On return, will be filled with the audio device's format.
-/// \param channels On return, will be filled with the audio device's channel
-/// count.
-/// \returns true if the audio device has been opened, false otherwise.
+/// If `predecode` is true, the data will be decompressed during load and
+/// stored as raw PCM data. This might dramatically increase loading time and
+/// memory usage, but there will be no need to decompress data during playback.
+///
+/// (One could also use MIX_SetTrackIOStream() to bypass loading the data into
+/// RAM upfront at all, but this offers still different tradeoffs. The correct
+/// approach depends on the app's needs and employing different approaches in
+/// different situations can make sense.)
+///
+/// MIX_Audio objects can be shared between mixers. This function takes a
+/// MIX_Mixer, to imply this is the most likely place it will be used and
+/// loading should try to match its audio format, but the resulting audio can
+/// be used elsewhere. If `mixer` is NULL, SDL_mixer will set reasonable
+/// defaults.
+///
+/// Once a MIX_Audio is created, it can be assigned to a MIX_Track with
+/// MIX_SetTrackAudio(), or played without any management with MIX_PlayAudio().
+///
+/// When done with a MIX_Audio, it can be freed with MIX_DestroyAudio().
+///
+/// This function loads data from an SDL_IOStream. There is also a version that
+/// loads from a path on the filesystem (MIX_LoadAudio()), and one that accepts
+/// properties for ultimate control (MIX_LoadAudioWithProperties()).
+///
+/// The SDL_IOStream provided must be able to seek, or loading will fail. If
+/// the stream can't seek (data is coming from an HTTP connection, etc),
+/// consider caching the data to memory or disk first and creating a new stream
+/// to read from there.
+///
+/// \param mixer a mixer this audio is intended to be used with. May be NULL.
+/// \param io the SDL_IOStream to load data from.
+/// \param predecode if true, data will be fully uncompressed before returning.
+/// \param closeio true if SDL_mixer should close `io` before returning
+/// (success or failure).
+/// \returns an audio object that can be used to make sound on a mixer, or NULL
+/// on failure; call SDL_GetError() for more information.
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL_mixer 3.0.0.
 ///
-/// \sa Mix_OpenAudio
+/// \sa MIX_DestroyAudio
+/// \sa MIX_SetTrackAudio
+/// \sa MIX_LoadAudio_IO
+/// \sa MIX_LoadAudioWithProperties
 ///
 /// ```c
-/// extern SDL_DECLSPEC bool SDLCALL Mix_QuerySpec(int *frequency, SDL_AudioFormat *format, int *channels)
+/// extern SDL_DECLSPEC MIX_Audio * SDLCALL MIX_LoadAudio_IO(MIX_Mixer *mixer, SDL_IOStream *io, bool predecode, bool closeio)
 /// ```
 /// {@category mixer}
-bool mixQuerySpec(
-  Pointer<Int32> frequency,
-  Pointer<Int32> format,
-  Pointer<Int32> channels,
-) {
-  final mixQuerySpecLookupFunction = _libMixer
-      .lookupFunction<
-        Uint8 Function(
-          Pointer<Int32> frequency,
-          Pointer<Int32> format,
-          Pointer<Int32> channels,
-        ),
-        int Function(
-          Pointer<Int32> frequency,
-          Pointer<Int32> format,
-          Pointer<Int32> channels,
-        )
-      >('Mix_QuerySpec');
-  return mixQuerySpecLookupFunction(frequency, format, channels) == 1;
-}
-
-///
-/// Dynamically change the number of channels managed by the mixer.
-///
-/// SDL_mixer deals with "channels," which is not the same thing as the
-/// mono/stereo channels; they might be better described as "tracks," as each
-/// one corresponds to a separate source of audio data. Three different WAV
-/// files playing at the same time would be three separate SDL_mixer channels,
-/// for example.
-///
-/// An app needs as many channels as it has audio data it wants to play
-/// simultaneously, mixing them into a single stream to send to the audio
-/// device.
-///
-/// SDL_mixer allocates `MIX_CHANNELS` (currently 8) channels when you open an
-/// audio device, which may be more than an app needs, but if the app needs
-/// more or wants less, this function can change it.
-///
-/// If decreasing the number of channels, any upper channels currently playing
-/// are stopped. This will deregister all effects on those channels and call
-/// any callback specified by Mix_ChannelFinished() for each removed channel.
-///
-/// If `numchans` is less than zero, this will return the current number of
-/// channels without changing anything.
-///
-/// \param numchans the new number of channels, or < 0 to query current channel
-/// count.
-/// \returns the new number of allocated channels.
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// ```c
-/// extern SDL_DECLSPEC int SDLCALL Mix_AllocateChannels(int numchans)
-/// ```
-/// {@category mixer}
-int mixAllocateChannels(int numchans) {
-  final mixAllocateChannelsLookupFunction = _libMixer
-      .lookupFunction<
-        Int32 Function(Int32 numchans),
-        int Function(int numchans)
-      >('Mix_AllocateChannels');
-  return mixAllocateChannelsLookupFunction(numchans);
-}
-
-///
-/// Load a supported audio format into a chunk.
-///
-/// SDL_mixer has two separate data structures for audio data. One it calls a
-/// "chunk," which is meant to be a file completely decoded into memory up
-/// front, and the other it calls "music" which is a file intended to be
-/// decoded on demand. Originally, simple formats like uncompressed WAV files
-/// were meant to be chunks and compressed things, like MP3s, were meant to be
-/// music, and you would stream one thing for a game's music and make repeating
-/// sound effects with the chunks.
-///
-/// In modern times, this isn't split by format anymore, and most are
-/// interchangeable, so the question is what the app thinks is worth
-/// predecoding or not. Chunks might take more memory, but once they are loaded
-/// won't need to decode again, whereas music always needs to be decoded on the
-/// fly. Also, crucially, there are as many channels for chunks as the app can
-/// allocate, but SDL_mixer only offers a single "music" channel.
-///
-/// If `closeio` is true, the IOStream will be closed before returning, whether
-/// this function succeeds or not. SDL_mixer reads everything it needs from the
-/// IOStream during this call in any case.
-///
-/// There is a separate function (a macro, before SDL_mixer 3.0.0) to read
-/// files from disk without having to deal with SDL_IOStream:
-/// `Mix_LoadWAV("filename.wav")` will call this function and manage those
-/// details for you.
-///
-/// When done with a chunk, the app should dispose of it with a call to
-/// Mix_FreeChunk().
-///
-/// \param src an SDL_IOStream that data will be read from.
-/// \param closeio true to close the SDL_IOStream before returning, false to
-/// leave it open.
-/// \returns a new chunk, or NULL on error.
-///
-/// \since This function is available since SDL_mixer 3.0.0
-///
-/// \sa Mix_LoadWAV
-/// \sa Mix_FreeChunk
-///
-/// ```c
-/// extern SDL_DECLSPEC Mix_Chunk * SDLCALL Mix_LoadWAV_IO(SDL_IOStream *src, bool closeio)
-/// ```
-/// {@category mixer}
-Pointer<MixChunk> mixLoadWavIo(Pointer<SdlIoStream> src, bool closeio) {
-  final mixLoadWavIoLookupFunction = _libMixer
-      .lookupFunction<
-        Pointer<MixChunk> Function(Pointer<SdlIoStream> src, Uint8 closeio),
-        Pointer<MixChunk> Function(Pointer<SdlIoStream> src, int closeio)
-      >('Mix_LoadWAV_IO');
-  return mixLoadWavIoLookupFunction(src, closeio ? 1 : 0);
-}
-
-///
-/// Load a supported audio format into a chunk.
-///
-/// SDL_mixer has two separate data structures for audio data. One it calls a
-/// "chunk," which is meant to be a file completely decoded into memory up
-/// front, and the other it calls "music" which is a file intended to be
-/// decoded on demand. Originally, simple formats like uncompressed WAV files
-/// were meant to be chunks and compressed things, like MP3s, were meant to be
-/// music, and you would stream one thing for a game's music and make repeating
-/// sound effects with the chunks.
-///
-/// In modern times, this isn't split by format anymore, and most are
-/// interchangeable, so the question is what the app thinks is worth
-/// predecoding or not. Chunks might take more memory, but once they are loaded
-/// won't need to decode again, whereas music always needs to be decoded on the
-/// fly. Also, crucially, there are as many channels for chunks as the app can
-/// allocate, but SDL_mixer only offers a single "music" channel.
-///
-/// If you would rather use the abstract SDL_IOStream interface to load data
-/// from somewhere other than the filesystem, you can use Mix_LoadWAV_IO()
-/// instead.
-///
-/// When done with a chunk, the app should dispose of it with a call to
-/// Mix_FreeChunk().
-///
-/// Note that before SDL_mixer 3.0.0, this function was a macro that called
-/// Mix_LoadWAV_IO(), creating a IOStream and setting `closeio` to true. This
-/// macro has since been promoted to a proper API function. Older binaries
-/// linked against a newer SDL_mixer will still call Mix_LoadWAV_IO directly,
-/// as they are using the macro, which was available since the dawn of time.
-///
-/// \param file the filesystem path to load data from.
-/// \returns a new chunk, or NULL on error.
-///
-/// \since This function is available since SDL_mixer 3.0.0
-///
-/// \sa Mix_LoadWAV_IO
-/// \sa Mix_FreeChunk
-///
-/// ```c
-/// extern SDL_DECLSPEC Mix_Chunk * SDLCALL Mix_LoadWAV(const char *file)
-/// ```
-/// {@category mixer}
-Pointer<MixChunk> mixLoadWav(String? file) {
-  final mixLoadWavLookupFunction = _libMixer
-      .lookupFunction<
-        Pointer<MixChunk> Function(Pointer<Utf8> file),
-        Pointer<MixChunk> Function(Pointer<Utf8> file)
-      >('Mix_LoadWAV');
-  final filePointer = file != null ? file.toNativeUtf8() : nullptr;
-  final result = mixLoadWavLookupFunction(filePointer);
-  calloc.free(filePointer);
-  return result;
-}
-
-///
-/// Load a supported audio format into a music object.
-///
-/// SDL_mixer has two separate data structures for audio data. One it calls a
-/// "chunk," which is meant to be a file completely decoded into memory up
-/// front, and the other it calls "music" which is a file intended to be
-/// decoded on demand. Originally, simple formats like uncompressed WAV files
-/// were meant to be chunks and compressed things, like MP3s, were meant to be
-/// music, and you would stream one thing for a game's music and make repeating
-/// sound effects with the chunks.
-///
-/// In modern times, this isn't split by format anymore, and most are
-/// interchangeable, so the question is what the app thinks is worth
-/// predecoding or not. Chunks might take more memory, but once they are loaded
-/// won't need to decode again, whereas music always needs to be decoded on the
-/// fly. Also, crucially, there are as many channels for chunks as the app can
-/// allocate, but SDL_mixer only offers a single "music" channel.
-///
-/// When done with this music, the app should dispose of it with a call to
-/// Mix_FreeMusic().
-///
-/// \param file a file path from where to load music data.
-/// \returns a new music object, or NULL on error.
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// \sa Mix_FreeMusic
-///
-/// ```c
-/// extern SDL_DECLSPEC Mix_Music * SDLCALL Mix_LoadMUS(const char *file)
-/// ```
-/// {@category mixer}
-Pointer<MixMusic> mixLoadMus(String? file) {
-  final mixLoadMusLookupFunction = _libMixer
-      .lookupFunction<
-        Pointer<MixMusic> Function(Pointer<Utf8> file),
-        Pointer<MixMusic> Function(Pointer<Utf8> file)
-      >('Mix_LoadMUS');
-  final filePointer = file != null ? file.toNativeUtf8() : nullptr;
-  final result = mixLoadMusLookupFunction(filePointer);
-  calloc.free(filePointer);
-  return result;
-}
-
-///
-/// Load a supported audio format into a music object.
-///
-/// SDL_mixer has two separate data structures for audio data. One it calls a
-/// "chunk," which is meant to be a file completely decoded into memory up
-/// front, and the other it calls "music" which is a file intended to be
-/// decoded on demand. Originally, simple formats like uncompressed WAV files
-/// were meant to be chunks and compressed things, like MP3s, were meant to be
-/// music, and you would stream one thing for a game's music and make repeating
-/// sound effects with the chunks.
-///
-/// In modern times, this isn't split by format anymore, and most are
-/// interchangeable, so the question is what the app thinks is worth
-/// predecoding or not. Chunks might take more memory, but once they are loaded
-/// won't need to decode again, whereas music always needs to be decoded on the
-/// fly. Also, crucially, there are as many channels for chunks as the app can
-/// allocate, but SDL_mixer only offers a single "music" channel.
-///
-/// If `closeio` is true, the IOStream will be closed before returning, whether
-/// this function succeeds or not. SDL_mixer reads everything it needs from the
-/// IOStream during this call in any case.
-///
-/// As a convenience, there is a function to read files from disk without
-/// having to deal with SDL_IOStream: `Mix_LoadMUS("filename.mp3")` will manage
-/// those details for you.
-///
-/// This function attempts to guess the file format from incoming data. If the
-/// caller knows the format, or wants to force it, it should use
-/// Mix_LoadMUSType_IO() instead.
-///
-/// When done with this music, the app should dispose of it with a call to
-/// Mix_FreeMusic().
-///
-/// \param src an SDL_IOStream that data will be read from.
-/// \param closeio true to close the SDL_IOStream before returning, false to
-/// leave it open.
-/// \returns a new music object, or NULL on error.
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// \sa Mix_FreeMusic
-///
-/// ```c
-/// extern SDL_DECLSPEC Mix_Music * SDLCALL Mix_LoadMUS_IO(SDL_IOStream *src, bool closeio)
-/// ```
-/// {@category mixer}
-Pointer<MixMusic> mixLoadMusIo(Pointer<SdlIoStream> src, bool closeio) {
-  final mixLoadMusIoLookupFunction = _libMixer
-      .lookupFunction<
-        Pointer<MixMusic> Function(Pointer<SdlIoStream> src, Uint8 closeio),
-        Pointer<MixMusic> Function(Pointer<SdlIoStream> src, int closeio)
-      >('Mix_LoadMUS_IO');
-  return mixLoadMusIoLookupFunction(src, closeio ? 1 : 0);
-}
-
-///
-/// Load an audio format into a music object, assuming a specific format.
-///
-/// SDL_mixer has two separate data structures for audio data. One it calls a
-/// "chunk," which is meant to be a file completely decoded into memory up
-/// front, and the other it calls "music" which is a file intended to be
-/// decoded on demand. Originally, simple formats like uncompressed WAV files
-/// were meant to be chunks and compressed things, like MP3s, were meant to be
-/// music, and you would stream one thing for a game's music and make repeating
-/// sound effects with the chunks.
-///
-/// In modern times, this isn't split by format anymore, and most are
-/// interchangeable, so the question is what the app thinks is worth
-/// predecoding or not. Chunks might take more memory, but once they are loaded
-/// won't need to decode again, whereas music always needs to be decoded on the
-/// fly. Also, crucially, there are as many channels for chunks as the app can
-/// allocate, but SDL_mixer only offers a single "music" channel.
-///
-/// This function loads music data, and lets the application specify the type
-/// of music being loaded, which might be useful if SDL_mixer cannot figure it
-/// out from the data stream itself.
-///
-/// Currently, the following types are supported:
-///
-/// - `MUS_NONE` (SDL_mixer should guess, based on the data)
-/// - `MUS_WAV` (Microsoft WAV files)
-/// - `MUS_MOD` (Various tracker formats)
-/// - `MUS_MID` (MIDI files)
-/// - `MUS_OGG` (Ogg Vorbis files)
-/// - `MUS_MP3` (MP3 files)
-/// - `MUS_FLAC` (FLAC files)
-/// - `MUS_OPUS` (Opus files)
-/// - `MUS_WAVPACK` (WavPack files)
-///
-/// If `closeio` is true, the IOStream will be closed before returning, whether
-/// this function succeeds or not. SDL_mixer reads everything it needs from the
-/// IOStream during this call in any case.
-///
-/// As a convenience, there is a function to read files from disk without
-/// having to deal with SDL_IOStream: `Mix_LoadMUS("filename.mp3")` will manage
-/// those details for you (but not let you specify the music type explicitly)..
-///
-/// When done with this music, the app should dispose of it with a call to
-/// Mix_FreeMusic().
-///
-/// \param src an SDL_IOStream that data will be read from.
-/// \param type the type of audio data provided by `src`.
-/// \param closeio true to close the SDL_IOStream before returning, false to
-/// leave it open.
-/// \returns a new music object, or NULL on error.
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// \sa Mix_FreeMusic
-///
-/// ```c
-/// extern SDL_DECLSPEC Mix_Music * SDLCALL Mix_LoadMUSType_IO(SDL_IOStream *src, Mix_MusicType type, bool closeio)
-/// ```
-/// {@category mixer}
-Pointer<MixMusic> mixLoadMusTypeIo(
-  Pointer<SdlIoStream> src,
-  int type,
+Pointer<MixAudio> mixLoadAudioIo(
+  Pointer<MixMixer> mixer,
+  Pointer<SdlIoStream> io,
+  bool predecode,
   bool closeio,
 ) {
-  final mixLoadMusTypeIoLookupFunction = _libMixer
+  final mixLoadAudioIoLookupFunction = _libMixer
       .lookupFunction<
-        Pointer<MixMusic> Function(
-          Pointer<SdlIoStream> src,
-          Int32 type,
+        Pointer<MixAudio> Function(
+          Pointer<MixMixer> mixer,
+          Pointer<SdlIoStream> io,
+          Uint8 predecode,
           Uint8 closeio,
         ),
-        Pointer<MixMusic> Function(
-          Pointer<SdlIoStream> src,
-          int type,
+        Pointer<MixAudio> Function(
+          Pointer<MixMixer> mixer,
+          Pointer<SdlIoStream> io,
+          int predecode,
           int closeio,
         )
-      >('Mix_LoadMUSType_IO');
-  return mixLoadMusTypeIoLookupFunction(src, type, closeio ? 1 : 0);
+      >('MIX_LoadAudio_IO');
+  return mixLoadAudioIoLookupFunction(
+    mixer,
+    io,
+    predecode ? 1 : 0,
+    closeio ? 1 : 0,
+  );
 }
 
 ///
-/// Load a WAV file from memory as quickly as possible.
+/// Load audio for playback from a file.
 ///
-/// Unlike Mix_LoadWAV_IO, this function has several requirements, and unless
-/// you control all your audio data and know what you're doing, you should
-/// consider this function unsafe and not use it.
+/// This is equivalent to calling:
 ///
-/// - The provided audio data MUST be in Microsoft WAV format.
-/// - The provided audio data shouldn't use any strange WAV extensions.
-/// - The audio data MUST be in the exact same format as the audio device. This
-/// function will not attempt to convert it, or even verify it's in the right
-/// format.
-/// - The audio data must be valid; this function does not know the size of the
-/// memory buffer, so if the WAV data is corrupted, it can read past the end
-/// of the buffer, causing a crash.
-/// - The audio data must live at least as long as the returned Mix_Chunk,
-/// because SDL_mixer will use that data directly and not make a copy of it.
+/// ```c
+/// SDL_LoadAudio_IO(mixer, SDL_IOFromFile(path, "rb"), predecode, true);
+/// ```
 ///
-/// This function will do NO error checking! Be extremely careful here!
+/// This function loads data from a path on the filesystem. There is also a
+/// version that loads from an SDL_IOStream (MIX_LoadAudio_IO()), and one that
+/// accepts properties for ultimate control (MIX_LoadAudioWithProperties()).
 ///
-/// (Seriously, use Mix_LoadWAV_IO instead.)
+/// \param mixer a mixer this audio is intended to be used with. May be NULL.
+/// \param path the path on the filesystem to load data from.
+/// \param predecode if true, data will be fully uncompressed before returning.
+/// \returns an audio object that can be used to make sound on a mixer, or NULL
+/// on failure; call SDL_GetError() for more information.
 ///
-/// If this function is successful, the provided memory buffer must remain
-/// available until Mix_FreeChunk() is called on the returned chunk.
-///
-/// \param mem memory buffer containing of a WAV file.
-/// \returns a new chunk, or NULL on error.
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL_mixer 3.0.0.
 ///
-/// \sa Mix_LoadWAV_IO
-/// \sa Mix_FreeChunk
+/// \sa MIX_DestroyAudio
+/// \sa MIX_SetTrackAudio
+/// \sa MIX_LoadAudio_IO
+/// \sa MIX_LoadAudioWithProperties
 ///
 /// ```c
-/// extern SDL_DECLSPEC Mix_Chunk * SDLCALL Mix_QuickLoad_WAV(Uint8 *mem)
+/// extern SDL_DECLSPEC MIX_Audio * SDLCALL MIX_LoadAudio(MIX_Mixer *mixer, const char *path, bool predecode)
 /// ```
 /// {@category mixer}
-Pointer<MixChunk> mixQuickLoadWav(Pointer<Uint8> mem) {
-  final mixQuickLoadWavLookupFunction = _libMixer
-      .lookupFunction<
-        Pointer<MixChunk> Function(Pointer<Uint8> mem),
-        Pointer<MixChunk> Function(Pointer<Uint8> mem)
-      >('Mix_QuickLoad_WAV');
-  return mixQuickLoadWavLookupFunction(mem);
-}
-
-///
-/// Load a raw audio data from memory as quickly as possible.
-///
-/// The audio data MUST be in the exact same format as the audio device. This
-/// function will not attempt to convert it, or even verify it's in the right
-/// format.
-///
-/// If this function is successful, the provided memory buffer must remain
-/// available until Mix_FreeChunk() is called on the returned chunk.
-///
-/// \param mem memory buffer containing raw PCM data.
-/// \param len length of buffer pointed to by `mem`, in bytes.
-/// \returns a new chunk, or NULL on error.
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// \sa Mix_FreeChunk
-///
-/// ```c
-/// extern SDL_DECLSPEC Mix_Chunk * SDLCALL Mix_QuickLoad_RAW(Uint8 *mem, Uint32 len)
-/// ```
-/// {@category mixer}
-Pointer<MixChunk> mixQuickLoadRaw(Pointer<Uint8> mem, int len) {
-  final mixQuickLoadRawLookupFunction = _libMixer
-      .lookupFunction<
-        Pointer<MixChunk> Function(Pointer<Uint8> mem, Uint32 len),
-        Pointer<MixChunk> Function(Pointer<Uint8> mem, int len)
-      >('Mix_QuickLoad_RAW');
-  return mixQuickLoadRawLookupFunction(mem, len);
-}
-
-///
-/// Free an audio chunk.
-///
-/// An app should call this function when it is done with a Mix_Chunk and wants
-/// to dispose of its resources.
-///
-/// SDL_mixer will stop any channels this chunk is currently playing on. This
-/// will deregister all effects on those channels and call any callback
-/// specified by Mix_ChannelFinished() for each removed channel.
-///
-/// \param chunk the chunk to free.
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// \sa Mix_LoadWAV
-/// \sa Mix_LoadWAV_IO
-/// \sa Mix_QuickLoad_WAV
-/// \sa Mix_QuickLoad_RAW
-///
-/// ```c
-/// extern SDL_DECLSPEC void SDLCALL Mix_FreeChunk(Mix_Chunk *chunk)
-/// ```
-/// {@category mixer}
-void mixFreeChunk(Pointer<MixChunk> chunk) {
-  final mixFreeChunkLookupFunction = _libMixer
-      .lookupFunction<
-        Void Function(Pointer<MixChunk> chunk),
-        void Function(Pointer<MixChunk> chunk)
-      >('Mix_FreeChunk');
-  return mixFreeChunkLookupFunction(chunk);
-}
-
-///
-/// Free a music object.
-///
-/// If this music is currently playing, it will be stopped.
-///
-/// If this music is in the process of fading out (via Mix_FadeOutMusic()),
-/// this function will *block* until the fade completes. If you need to avoid
-/// this, be sure to call Mix_HaltMusic() before freeing the music.
-///
-/// \param music the music object to free.
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// \sa Mix_LoadMUS
-/// \sa Mix_LoadMUS_IO
-/// \sa Mix_LoadMUSType_IO
-///
-/// ```c
-/// extern SDL_DECLSPEC void SDLCALL Mix_FreeMusic(Mix_Music *music)
-/// ```
-/// {@category mixer}
-void mixFreeMusic(Pointer<MixMusic> music) {
-  final mixFreeMusicLookupFunction = _libMixer
-      .lookupFunction<
-        Void Function(Pointer<MixMusic> music),
-        void Function(Pointer<MixMusic> music)
-      >('Mix_FreeMusic');
-  return mixFreeMusicLookupFunction(music);
-}
-
-///
-/// Get a list of chunk decoders that this build of SDL_mixer provides.
-///
-/// This list can change between builds AND runs of the program, if external
-/// libraries that add functionality become available. You must successfully
-/// call Mix_OpenAudio() before calling this function, as decoders are
-/// activated at device open time.
-///
-/// Appearing in this list doesn't promise your specific audio file will
-/// decode...but it's handy to know if you have, say, a functioning Ogg Vorbis
-/// install.
-///
-/// These return values are static, read-only data; do not modify or free it.
-/// The pointers remain valid until you call Mix_CloseAudio().
-///
-/// \returns number of chunk decoders available.
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// \sa Mix_GetChunkDecoder
-/// \sa Mix_HasChunkDecoder
-///
-/// ```c
-/// extern SDL_DECLSPEC int SDLCALL Mix_GetNumChunkDecoders(void)
-/// ```
-/// {@category mixer}
-int mixGetNumChunkDecoders() {
-  final mixGetNumChunkDecodersLookupFunction = _libMixer
-      .lookupFunction<Int32 Function(), int Function()>(
-        'Mix_GetNumChunkDecoders',
-      );
-  return mixGetNumChunkDecodersLookupFunction();
-}
-
-///
-/// Get a chunk decoder's name.
-///
-/// The requested decoder's index must be between zero and
-/// Mix_GetNumChunkDecoders()-1. It's safe to call this with an invalid index;
-/// this function will return NULL in that case.
-///
-/// This list can change between builds AND runs of the program, if external
-/// libraries that add functionality become available. You must successfully
-/// call Mix_OpenAudio() before calling this function, as decoders are
-/// activated at device open time.
-///
-/// \param index index of the chunk decoder.
-/// \returns the chunk decoder's name.
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// \sa Mix_GetNumChunkDecoders
-///
-/// ```c
-/// extern SDL_DECLSPEC const char * SDLCALL Mix_GetChunkDecoder(int index)
-/// ```
-/// {@category mixer}
-String? mixGetChunkDecoder(int index) {
-  final mixGetChunkDecoderLookupFunction = _libMixer
-      .lookupFunction<
-        Pointer<Utf8> Function(Int32 index),
-        Pointer<Utf8> Function(int index)
-      >('Mix_GetChunkDecoder');
-  final result = mixGetChunkDecoderLookupFunction(index);
-  if (result == nullptr) {
-    return null;
-  }
-  return result.toDartString();
-}
-
-///
-/// Check if a chunk decoder is available by name.
-///
-/// This result can change between builds AND runs of the program, if external
-/// libraries that add functionality become available. You must successfully
-/// call Mix_OpenAudio() before calling this function, as decoders are
-/// activated at device open time.
-///
-/// Decoder names are arbitrary but also obvious, so you have to know what
-/// you're looking for ahead of time, but usually it's the file extension in
-/// capital letters (some example names are "AIFF", "VOC", "WAV").
-///
-/// \param name the decoder name to query.
-/// \returns true if a decoder by that name is available, false otherwise.
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// \sa Mix_GetNumChunkDecoders
-/// \sa Mix_GetChunkDecoder
-///
-/// ```c
-/// extern SDL_DECLSPEC bool SDLCALL Mix_HasChunkDecoder(const char *name)
-/// ```
-/// {@category mixer}
-bool mixHasChunkDecoder(String? name) {
-  final mixHasChunkDecoderLookupFunction = _libMixer
-      .lookupFunction<
-        Uint8 Function(Pointer<Utf8> name),
-        int Function(Pointer<Utf8> name)
-      >('Mix_HasChunkDecoder');
-  final namePointer = name != null ? name.toNativeUtf8() : nullptr;
-  final result = mixHasChunkDecoderLookupFunction(namePointer) == 1;
-  calloc.free(namePointer);
-  return result;
-}
-
-///
-/// Get a list of music decoders that this build of SDL_mixer provides.
-///
-/// This list can change between builds AND runs of the program, if external
-/// libraries that add functionality become available. You must successfully
-/// call Mix_OpenAudio() before calling this function, as decoders are
-/// activated at device open time.
-///
-/// Appearing in this list doesn't promise your specific audio file will
-/// decode...but it's handy to know if you have, say, a functioning Ogg Vorbis
-/// install.
-///
-/// These return values are static, read-only data; do not modify or free it.
-/// The pointers remain valid until you call Mix_CloseAudio().
-///
-/// \returns number of music decoders available.
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// \sa Mix_GetMusicDecoder
-/// \sa Mix_HasMusicDecoder
-///
-/// ```c
-/// extern SDL_DECLSPEC int SDLCALL Mix_GetNumMusicDecoders(void)
-/// ```
-/// {@category mixer}
-int mixGetNumMusicDecoders() {
-  final mixGetNumMusicDecodersLookupFunction = _libMixer
-      .lookupFunction<Int32 Function(), int Function()>(
-        'Mix_GetNumMusicDecoders',
-      );
-  return mixGetNumMusicDecodersLookupFunction();
-}
-
-///
-/// Get a music decoder's name.
-///
-/// The requested decoder's index must be between zero and
-/// Mix_GetNumMusicDecoders()-1. It's safe to call this with an invalid index;
-/// this function will return NULL in that case.
-///
-/// This list can change between builds AND runs of the program, if external
-/// libraries that add functionality become available. You must successfully
-/// call Mix_OpenAudio() before calling this function, as decoders are
-/// activated at device open time.
-///
-/// \param index index of the music decoder.
-/// \returns the music decoder's name.
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// \sa Mix_GetNumMusicDecoders
-///
-/// ```c
-/// extern SDL_DECLSPEC const char * SDLCALL Mix_GetMusicDecoder(int index)
-/// ```
-/// {@category mixer}
-String? mixGetMusicDecoder(int index) {
-  final mixGetMusicDecoderLookupFunction = _libMixer
-      .lookupFunction<
-        Pointer<Utf8> Function(Int32 index),
-        Pointer<Utf8> Function(int index)
-      >('Mix_GetMusicDecoder');
-  final result = mixGetMusicDecoderLookupFunction(index);
-  if (result == nullptr) {
-    return null;
-  }
-  return result.toDartString();
-}
-
-///
-/// Check if a music decoder is available by name.
-///
-/// This result can change between builds AND runs of the program, if external
-/// libraries that add functionality become available. You must successfully
-/// call Mix_OpenAudio() before calling this function, as decoders are
-/// activated at device open time.
-///
-/// Decoder names are arbitrary but also obvious, so you have to know what
-/// you're looking for ahead of time, but usually it's the file extension in
-/// capital letters (some example names are "MOD", "MP3", "FLAC").
-///
-/// \param name the decoder name to query.
-/// \returns true if a decoder by that name is available, false otherwise.
-///
-/// \since This function is available since SDL_mixer 3.0.0
-///
-/// \sa Mix_GetNumMusicDecoders
-/// \sa Mix_GetMusicDecoder
-///
-/// ```c
-/// extern SDL_DECLSPEC bool SDLCALL Mix_HasMusicDecoder(const char *name)
-/// ```
-/// {@category mixer}
-bool mixHasMusicDecoder(String? name) {
-  final mixHasMusicDecoderLookupFunction = _libMixer
-      .lookupFunction<
-        Uint8 Function(Pointer<Utf8> name),
-        int Function(Pointer<Utf8> name)
-      >('Mix_HasMusicDecoder');
-  final namePointer = name != null ? name.toNativeUtf8() : nullptr;
-  final result = mixHasMusicDecoderLookupFunction(namePointer) == 1;
-  calloc.free(namePointer);
-  return result;
-}
-
-///
-/// Find out the format of a mixer music.
-///
-/// If `music` is NULL, this will query the currently playing music (and return
-/// MUS_NONE if nothing is currently playing).
-///
-/// \param music the music object to query, or NULL for the currently-playing
-/// music.
-/// \returns the Mix_MusicType for the music object.
-///
-/// \since This function is available since SDL_mixer 3.0.0
-///
-/// ```c
-/// extern SDL_DECLSPEC Mix_MusicType SDLCALL Mix_GetMusicType(const Mix_Music *music)
-/// ```
-/// {@category mixer}
-int mixGetMusicType(Pointer<MixMusic> music) {
-  final mixGetMusicTypeLookupFunction = _libMixer
-      .lookupFunction<
-        Int32 Function(Pointer<MixMusic> music),
-        int Function(Pointer<MixMusic> music)
-      >('Mix_GetMusicType');
-  return mixGetMusicTypeLookupFunction(music);
-}
-
-///
-/// Get the title for a music object, or its filename.
-///
-/// This returns format-specific metadata. Not all file formats supply this!
-///
-/// If `music` is NULL, this will query the currently-playing music.
-///
-/// If music's title tag is missing or empty, the filename will be returned. If
-/// you'd rather have the actual metadata or nothing, use
-/// Mix_GetMusicTitleTag() instead.
-///
-/// Please note that if the music was loaded from an SDL_IOStream instead of a
-/// filename, the filename returned will be an empty string ("").
-///
-/// This function never returns NULL! If no data is available, it will return
-/// an empty string ("").
-///
-/// \param music the music object to query, or NULL for the currently-playing
-/// music.
-/// \returns the music's title if available, or the filename if not, or "".
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// \sa Mix_GetMusicTitleTag
-/// \sa Mix_GetMusicArtistTag
-/// \sa Mix_GetMusicAlbumTag
-/// \sa Mix_GetMusicCopyrightTag
-///
-/// ```c
-/// extern SDL_DECLSPEC const char *SDLCALL Mix_GetMusicTitle(const Mix_Music *music)
-/// ```
-/// {@category mixer}
-String? mixGetMusicTitle(Pointer<MixMusic> music) {
-  final mixGetMusicTitleLookupFunction = _libMixer
-      .lookupFunction<
-        Pointer<Utf8> Function(Pointer<MixMusic> music),
-        Pointer<Utf8> Function(Pointer<MixMusic> music)
-      >('Mix_GetMusicTitle');
-  final result = mixGetMusicTitleLookupFunction(music);
-  if (result == nullptr) {
-    return null;
-  }
-  return result.toDartString();
-}
-
-///
-/// Get the title for a music object.
-///
-/// This returns format-specific metadata. Not all file formats supply this!
-///
-/// If `music` is NULL, this will query the currently-playing music.
-///
-/// Unlike this function, Mix_GetMusicTitle() produce a string with the music's
-/// filename if a title isn't available, which might be preferable for some
-/// applications.
-///
-/// This function never returns NULL! If no data is available, it will return
-/// an empty string ("").
-///
-/// \param music the music object to query, or NULL for the currently-playing
-/// music.
-/// \returns the music's title if available, or "".
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// \sa Mix_GetMusicTitle
-/// \sa Mix_GetMusicArtistTag
-/// \sa Mix_GetMusicAlbumTag
-/// \sa Mix_GetMusicCopyrightTag
-///
-/// ```c
-/// extern SDL_DECLSPEC const char *SDLCALL Mix_GetMusicTitleTag(const Mix_Music *music)
-/// ```
-/// {@category mixer}
-String? mixGetMusicTitleTag(Pointer<MixMusic> music) {
-  final mixGetMusicTitleTagLookupFunction = _libMixer
-      .lookupFunction<
-        Pointer<Utf8> Function(Pointer<MixMusic> music),
-        Pointer<Utf8> Function(Pointer<MixMusic> music)
-      >('Mix_GetMusicTitleTag');
-  final result = mixGetMusicTitleTagLookupFunction(music);
-  if (result == nullptr) {
-    return null;
-  }
-  return result.toDartString();
-}
-
-///
-/// Get the artist name for a music object.
-///
-/// This returns format-specific metadata. Not all file formats supply this!
-///
-/// If `music` is NULL, this will query the currently-playing music.
-///
-/// This function never returns NULL! If no data is available, it will return
-/// an empty string ("").
-///
-/// \param music the music object to query, or NULL for the currently-playing
-/// music.
-/// \returns the music's artist name if available, or "".
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// \sa Mix_GetMusicTitleTag
-/// \sa Mix_GetMusicAlbumTag
-/// \sa Mix_GetMusicCopyrightTag
-///
-/// ```c
-/// extern SDL_DECLSPEC const char *SDLCALL Mix_GetMusicArtistTag(const Mix_Music *music)
-/// ```
-/// {@category mixer}
-String? mixGetMusicArtistTag(Pointer<MixMusic> music) {
-  final mixGetMusicArtistTagLookupFunction = _libMixer
-      .lookupFunction<
-        Pointer<Utf8> Function(Pointer<MixMusic> music),
-        Pointer<Utf8> Function(Pointer<MixMusic> music)
-      >('Mix_GetMusicArtistTag');
-  final result = mixGetMusicArtistTagLookupFunction(music);
-  if (result == nullptr) {
-    return null;
-  }
-  return result.toDartString();
-}
-
-///
-/// Get the album name for a music object.
-///
-/// This returns format-specific metadata. Not all file formats supply this!
-///
-/// If `music` is NULL, this will query the currently-playing music.
-///
-/// This function never returns NULL! If no data is available, it will return
-/// an empty string ("").
-///
-/// \param music the music object to query, or NULL for the currently-playing
-/// music.
-/// \returns the music's album name if available, or "".
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// \sa Mix_GetMusicTitleTag
-/// \sa Mix_GetMusicArtistTag
-/// \sa Mix_GetMusicCopyrightTag
-///
-/// ```c
-/// extern SDL_DECLSPEC const char *SDLCALL Mix_GetMusicAlbumTag(const Mix_Music *music)
-/// ```
-/// {@category mixer}
-String? mixGetMusicAlbumTag(Pointer<MixMusic> music) {
-  final mixGetMusicAlbumTagLookupFunction = _libMixer
-      .lookupFunction<
-        Pointer<Utf8> Function(Pointer<MixMusic> music),
-        Pointer<Utf8> Function(Pointer<MixMusic> music)
-      >('Mix_GetMusicAlbumTag');
-  final result = mixGetMusicAlbumTagLookupFunction(music);
-  if (result == nullptr) {
-    return null;
-  }
-  return result.toDartString();
-}
-
-///
-/// Get the copyright text for a music object.
-///
-/// This returns format-specific metadata. Not all file formats supply this!
-///
-/// If `music` is NULL, this will query the currently-playing music.
-///
-/// This function never returns NULL! If no data is available, it will return
-/// an empty string ("").
-///
-/// \param music the music object to query, or NULL for the currently-playing
-/// music.
-/// \returns the music's copyright text if available, or "".
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// \sa Mix_GetMusicTitleTag
-/// \sa Mix_GetMusicArtistTag
-/// \sa Mix_GetMusicAlbumTag
-///
-/// ```c
-/// extern SDL_DECLSPEC const char *SDLCALL Mix_GetMusicCopyrightTag(const Mix_Music *music)
-/// ```
-/// {@category mixer}
-String? mixGetMusicCopyrightTag(Pointer<MixMusic> music) {
-  final mixGetMusicCopyrightTagLookupFunction = _libMixer
-      .lookupFunction<
-        Pointer<Utf8> Function(Pointer<MixMusic> music),
-        Pointer<Utf8> Function(Pointer<MixMusic> music)
-      >('Mix_GetMusicCopyrightTag');
-  final result = mixGetMusicCopyrightTagLookupFunction(music);
-  if (result == nullptr) {
-    return null;
-  }
-  return result.toDartString();
-}
-
-///
-/// Set a function that is called after all mixing is performed.
-///
-/// This can be used to provide real-time visual display of the audio stream or
-/// add a custom mixer filter for the stream data.
-///
-/// The callback will fire every time SDL_mixer is ready to supply more data to
-/// the audio device, after it has finished all its mixing work. This runs
-/// inside an SDL audio callback, so it's important that the callback return
-/// quickly, or there could be problems in the audio playback.
-///
-/// The data provided to the callback is in the format that the audio device
-/// was opened in, and it represents the exact waveform SDL_mixer has mixed
-/// from all playing chunks and music for playback. You are allowed to modify
-/// the data, but it cannot be resized (so you can't add a reverb effect that
-/// goes past the end of the buffer without saving some state between runs to
-/// add it into the next callback, or resample the buffer to a smaller size to
-/// speed it up, etc).
-///
-/// The `arg` pointer supplied here is passed to the callback as-is, for
-/// whatever the callback might want to do with it (keep track of some ongoing
-/// state, settings, etc).
-///
-/// Passing a NULL callback disables the post-mix callback until such a time as
-/// a new one callback is set.
-///
-/// There is only one callback available. If you need to mix multiple inputs,
-/// be prepared to handle them from a single function.
-///
-/// \param mix_func the callback function to become the new post-mix callback.
-/// \param arg a pointer that is passed, untouched, to the callback.
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// \sa Mix_HookMusic
-///
-/// ```c
-/// extern SDL_DECLSPEC void SDLCALL Mix_SetPostMix(Mix_MixCallback mix_func, void *arg)
-/// ```
-/// {@category mixer}
-void mixSetPostMix(
-  Pointer<NativeFunction<MixMixCallback>> mixFunc,
-  Pointer<NativeType> arg,
+Pointer<MixAudio> mixLoadAudio(
+  Pointer<MixMixer> mixer,
+  String? path,
+  bool predecode,
 ) {
-  final mixSetPostMixLookupFunction = _libMixer
+  final mixLoadAudioLookupFunction = _libMixer
       .lookupFunction<
-        Void Function(
-          Pointer<NativeFunction<MixMixCallback>> mixFunc,
-          Pointer<NativeType> arg,
+        Pointer<MixAudio> Function(
+          Pointer<MixMixer> mixer,
+          Pointer<Utf8> path,
+          Uint8 predecode,
         ),
-        void Function(
-          Pointer<NativeFunction<MixMixCallback>> mixFunc,
-          Pointer<NativeType> arg,
+        Pointer<MixAudio> Function(
+          Pointer<MixMixer> mixer,
+          Pointer<Utf8> path,
+          int predecode,
         )
-      >('Mix_SetPostMix');
-  return mixSetPostMixLookupFunction(mixFunc, arg);
-}
-
-///
-/// Add your own music player or additional mixer function.
-///
-/// This works something like Mix_SetPostMix(), but it has some crucial
-/// differences. Note that an app can use this _and_ Mix_SetPostMix() at the
-/// same time. This allows an app to replace the built-in music playback,
-/// either with it's own music decoder or with some sort of
-/// procedurally-generated audio output.
-///
-/// The supplied callback will fire every time SDL_mixer is preparing to supply
-/// more data to the audio device. This runs inside an SDL audio callback, so
-/// it's important that the callback return quickly, or there could be problems
-/// in the audio playback.
-///
-/// Running this callback is the first thing SDL_mixer will do when starting to
-/// mix more audio. The buffer will contain silence upon entry, so the callback
-/// does not need to mix into existing data or initialize the buffer.
-///
-/// Note that while a callback is set through this function, SDL_mixer will not
-/// mix any playing music; this callback is used instead. To disable this
-/// callback (and thus reenable built-in music playback) call this function
-/// with a NULL callback.
-///
-/// The data written to by the callback is in the format that the audio device
-/// was opened in, and upon return from the callback, SDL_mixer will mix any
-/// playing chunks (but not music!) into the buffer. The callback cannot resize
-/// the buffer (so you must be prepared to provide exactly the amount of data
-/// demanded or leave it as silence).
-///
-/// The `arg` pointer supplied here is passed to the callback as-is, for
-/// whatever the callback might want to do with it (keep track of some ongoing
-/// state, settings, etc).
-///
-/// As there is only one music "channel" mixed, there is only one callback
-/// available. If you need to mix multiple inputs, be prepared to handle them
-/// from a single function.
-///
-/// \param mix_func the callback function to become the new post-mix callback.
-/// \param arg a pointer that is passed, untouched, to the callback.
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// \sa Mix_SetPostMix
-///
-/// ```c
-/// extern SDL_DECLSPEC void SDLCALL Mix_HookMusic(Mix_MixCallback mix_func, void *arg)
-/// ```
-/// {@category mixer}
-void mixHookMusic(
-  Pointer<NativeFunction<MixMixCallback>> mixFunc,
-  Pointer<NativeType> arg,
-) {
-  final mixHookMusicLookupFunction = _libMixer
-      .lookupFunction<
-        Void Function(
-          Pointer<NativeFunction<MixMixCallback>> mixFunc,
-          Pointer<NativeType> arg,
-        ),
-        void Function(
-          Pointer<NativeFunction<MixMixCallback>> mixFunc,
-          Pointer<NativeType> arg,
-        )
-      >('Mix_HookMusic');
-  return mixHookMusicLookupFunction(mixFunc, arg);
-}
-
-///
-/// Set a callback that runs when a music object has stopped playing.
-///
-/// This callback will fire when the currently-playing music has completed, or
-/// when it has been explicitly stopped from a call to Mix_HaltMusic. As such,
-/// this callback might fire from an arbitrary background thread at almost any
-/// time; try to limit what you do here.
-///
-/// It is legal to start a new music object playing in this callback (or
-/// restart the one that just stopped). If the music finished normally, this
-/// can be used to loop the music without a gap in the audio playback.
-///
-/// A NULL pointer will disable the callback.
-///
-/// \param music_finished the callback function to become the new notification
-/// mechanism.
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// ```c
-/// extern SDL_DECLSPEC void SDLCALL Mix_HookMusicFinished(Mix_MusicFinishedCallback music_finished)
-/// ```
-/// {@category mixer}
-void mixHookMusicFinished(
-  Pointer<NativeFunction<MixMusicFinishedCallback>> musicFinished,
-) {
-  final mixHookMusicFinishedLookupFunction = _libMixer
-      .lookupFunction<
-        Void Function(
-          Pointer<NativeFunction<MixMusicFinishedCallback>> musicFinished,
-        ),
-        void Function(
-          Pointer<NativeFunction<MixMusicFinishedCallback>> musicFinished,
-        )
-      >('Mix_HookMusicFinished');
-  return mixHookMusicFinishedLookupFunction(musicFinished);
-}
-
-///
-/// Get a pointer to the user data for the current music hook.
-///
-/// This returns the `arg` pointer last passed to Mix_HookMusic(), or NULL if
-/// that function has never been called.
-///
-/// \returns pointer to the user data previously passed to Mix_HookMusic.
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// ```c
-/// extern SDL_DECLSPEC void * SDLCALL Mix_GetMusicHookData(void)
-/// ```
-/// {@category mixer}
-Pointer<NativeType> mixGetMusicHookData() {
-  final mixGetMusicHookDataLookupFunction = _libMixer
-      .lookupFunction<
-        Pointer<NativeType> Function(),
-        Pointer<NativeType> Function()
-      >('Mix_GetMusicHookData');
-  return mixGetMusicHookDataLookupFunction();
-}
-
-///
-/// Set a callback that runs when a channel has finished playing.
-///
-/// The callback may be called from the mixer's audio callback or it could be
-/// called as a result of Mix_HaltChannel(), etc.
-///
-/// The callback has a single parameter, `channel`, which says what mixer
-/// channel has just stopped.
-///
-/// A NULL pointer will disable the callback.
-///
-/// \param channel_finished the callback function to become the new
-/// notification mechanism.
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// ```c
-/// extern SDL_DECLSPEC void SDLCALL Mix_ChannelFinished(Mix_ChannelFinishedCallback channel_finished)
-/// ```
-/// {@category mixer}
-void mixChannelFinished(
-  Pointer<NativeFunction<MixChannelFinishedCallback>> channelFinished,
-) {
-  final mixChannelFinishedLookupFunction = _libMixer
-      .lookupFunction<
-        Void Function(
-          Pointer<NativeFunction<MixChannelFinishedCallback>> channelFinished,
-        ),
-        void Function(
-          Pointer<NativeFunction<MixChannelFinishedCallback>> channelFinished,
-        )
-      >('Mix_ChannelFinished');
-  return mixChannelFinishedLookupFunction(channelFinished);
-}
-
-///
-/// Register a special effect function.
-///
-/// At mixing time, the channel data is copied into a buffer and passed through
-/// each registered effect function. After it passes through all the functions,
-/// it is mixed into the final output stream. The copy to buffer is performed
-/// once, then each effect function performs on the output of the previous
-/// effect. Understand that this extra copy to a buffer is not performed if
-/// there are no effects registered for a given chunk, which saves CPU cycles,
-/// and any given effect will be extra cycles, too, so it is crucial that your
-/// code run fast. Also note that the data that your function is given is in
-/// the format of the sound device, and not the format you gave to
-/// Mix_OpenAudio(), although they may in reality be the same. This is an
-/// unfortunate but necessary speed concern. Use Mix_QuerySpec() to determine
-/// if you can handle the data before you register your effect, and take
-/// appropriate actions.
-///
-/// You may also specify a callback (Mix_EffectDone_t) that is called when the
-/// channel finishes playing. This gives you a more fine-grained control than
-/// Mix_ChannelFinished(), in case you need to free effect-specific resources,
-/// etc. If you don't need this, you can specify NULL.
-///
-/// You may set the callbacks before or after calling Mix_PlayChannel().
-///
-/// Things like Mix_SetPanning() are just internal special effect functions, so
-/// if you are using that, you've already incurred the overhead of a copy to a
-/// separate buffer, and that these effects will be in the queue with any
-/// functions you've registered. The list of registered effects for a channel
-/// is reset when a chunk finishes playing, so you need to explicitly set them
-/// with each call to Mix_PlayChannel*().
-///
-/// You may also register a special effect function that is to be run after
-/// final mixing occurs. The rules for these callbacks are identical to those
-/// in Mix_RegisterEffect, but they are run after all the channels and the
-/// music have been mixed into a single stream, whereas channel-specific
-/// effects run on a given channel before any other mixing occurs. These global
-/// effect callbacks are call "posteffects". Posteffects only have their
-/// Mix_EffectDone_t function called when they are unregistered (since the main
-/// output stream is never "done" in the same sense as a channel). You must
-/// unregister them manually when you've had enough. Your callback will be told
-/// that the channel being mixed is `MIX_CHANNEL_POST` if the processing is
-/// considered a posteffect.
-///
-/// After all these effects have finished processing, the callback registered
-/// through Mix_SetPostMix() runs, and then the stream goes to the audio
-/// device.
-///
-/// \param chan the channel to register an effect to, or MIX_CHANNEL_POST.
-/// \param f effect the callback to run when more of this channel is to be
-/// mixed.
-/// \param d effect done callback.
-/// \param arg argument.
-/// \returns true on success or false on failure; call SDL_GetError() for more
-/// information.
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// ```c
-/// extern SDL_DECLSPEC bool SDLCALL Mix_RegisterEffect(int chan, Mix_EffectFunc_t f, Mix_EffectDone_t d, void *arg)
-/// ```
-/// {@category mixer}
-bool mixRegisterEffect(
-  int chan,
-  Pointer<NativeFunction<MixEffectFuncT>> f,
-  Pointer<NativeFunction<MixEffectDoneT>> d,
-  Pointer<NativeType> arg,
-) {
-  final mixRegisterEffectLookupFunction = _libMixer
-      .lookupFunction<
-        Uint8 Function(
-          Int32 chan,
-          Pointer<NativeFunction<MixEffectFuncT>> f,
-          Pointer<NativeFunction<MixEffectDoneT>> d,
-          Pointer<NativeType> arg,
-        ),
-        int Function(
-          int chan,
-          Pointer<NativeFunction<MixEffectFuncT>> f,
-          Pointer<NativeFunction<MixEffectDoneT>> d,
-          Pointer<NativeType> arg,
-        )
-      >('Mix_RegisterEffect');
-  return mixRegisterEffectLookupFunction(chan, f, d, arg) == 1;
-}
-
-///
-/// Explicitly unregister a special effect function.
-///
-/// You may not need to call this at all, unless you need to stop an effect
-/// from processing in the middle of a chunk's playback.
-///
-/// Posteffects are never implicitly unregistered as they are for channels (as
-/// the output stream does not have an end), but they may be explicitly
-/// unregistered through this function by specifying MIX_CHANNEL_POST for a
-/// channel.
-///
-/// \param channel the channel to unregister an effect on, or MIX_CHANNEL_POST.
-/// \param f effect the callback stop calling in future mixing iterations.
-/// \returns true on success or false on failure; call SDL_GetError() for more
-/// information.
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// ```c
-/// extern SDL_DECLSPEC bool SDLCALL Mix_UnregisterEffect(int channel, Mix_EffectFunc_t f)
-/// ```
-/// {@category mixer}
-bool mixUnregisterEffect(
-  int channel,
-  Pointer<NativeFunction<MixEffectFuncT>> f,
-) {
-  final mixUnregisterEffectLookupFunction = _libMixer
-      .lookupFunction<
-        Uint8 Function(
-          Int32 channel,
-          Pointer<NativeFunction<MixEffectFuncT>> f,
-        ),
-        int Function(int channel, Pointer<NativeFunction<MixEffectFuncT>> f)
-      >('Mix_UnregisterEffect');
-  return mixUnregisterEffectLookupFunction(channel, f) == 1;
-}
-
-///
-/// Explicitly unregister all special effect functions.
-///
-/// You may not need to call this at all, unless you need to stop all effects
-/// from processing in the middle of a chunk's playback.
-///
-/// Note that this will also shut off some internal effect processing, since
-/// Mix_SetPanning() and others may use this API under the hood. This is called
-/// internally when a channel completes playback. Posteffects are never
-/// implicitly unregistered as they are for channels, but they may be
-/// explicitly unregistered through this function by specifying
-/// MIX_CHANNEL_POST for a channel.
-///
-/// \param channel the channel to unregister all effects on, or
-/// MIX_CHANNEL_POST.
-/// \returns true on success or false on failure; call SDL_GetError() for more
-/// information.
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// ```c
-/// extern SDL_DECLSPEC bool SDLCALL Mix_UnregisterAllEffects(int channel)
-/// ```
-/// {@category mixer}
-bool mixUnregisterAllEffects(int channel) {
-  final mixUnregisterAllEffectsLookupFunction = _libMixer
-      .lookupFunction<Uint8 Function(Int32 channel), int Function(int channel)>(
-        'Mix_UnregisterAllEffects',
-      );
-  return mixUnregisterAllEffectsLookupFunction(channel) == 1;
-}
-
-///
-/// Set the panning of a channel.
-///
-/// The left and right channels are specified as integers between 0 and 255,
-/// quietest to loudest, respectively.
-///
-/// Technically, this is just individual volume control for a sample with two
-/// (stereo) channels, so it can be used for more than just panning. If you
-/// want real panning, call it like this:
-///
-/// ```c
-/// Mix_SetPanning(channel, left, 255 - left);
-/// ```
-///
-/// Setting `channel` to MIX_CHANNEL_POST registers this as a posteffect, and
-/// the panning will be done to the final mixed stream before passing it on to
-/// the audio device.
-///
-/// This uses the Mix_RegisterEffect() API internally, and returns without
-/// registering the effect function if the audio device is not configured for
-/// stereo output. Setting both `left` and `right` to 255 causes this effect to
-/// be unregistered, since that is the data's normal state.
-///
-/// Note that an audio device in mono mode is a no-op, but this call will
-/// return successful in that case. Error messages can be retrieved from
-/// Mix_GetError().
-///
-/// \param channel The mixer channel to pan or MIX_CHANNEL_POST.
-/// \param left Volume of stereo left channel, 0 is silence, 255 is full
-/// volume.
-/// \param right Volume of stereo right channel, 0 is silence, 255 is full
-/// volume.
-/// \returns true on success or false on failure; call SDL_GetError() for more
-/// information.
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// \sa Mix_SetPosition
-/// \sa Mix_SetDistance
-///
-/// ```c
-/// extern SDL_DECLSPEC bool SDLCALL Mix_SetPanning(int channel, Uint8 left, Uint8 right)
-/// ```
-/// {@category mixer}
-bool mixSetPanning(int channel, int left, int right) {
-  final mixSetPanningLookupFunction = _libMixer
-      .lookupFunction<
-        Uint8 Function(Int32 channel, Uint8 left, Uint8 right),
-        int Function(int channel, int left, int right)
-      >('Mix_SetPanning');
-  return mixSetPanningLookupFunction(channel, left, right) == 1;
-}
-
-///
-/// Set the position of a channel.
-///
-/// `angle` is an integer from 0 to 360, that specifies the location of the
-/// sound in relation to the listener. `angle` will be reduced as necessary
-/// (540 becomes 180 degrees, -100 becomes 260). Angle 0 is due north, and
-/// rotates clockwise as the value increases. For efficiency, the precision of
-/// this effect may be limited (angles 1 through 7 might all produce the same
-/// effect, 8 through 15 are equal, etc). `distance` is an integer between 0
-/// and 255 that specifies the space between the sound and the listener. The
-/// larger the number, the further away the sound is. Using 255 does not
-/// guarantee that the channel will be removed from the mixing process or be
-/// completely silent. For efficiency, the precision of this effect may be
-/// limited (distance 0 through 5 might all produce the same effect, 6 through
-/// 10 are equal, etc). Setting `angle` and `distance` to 0 unregisters this
-/// effect, since the data would be unchanged.
-///
-/// If you need more precise positional audio, consider using OpenAL for
-/// spatialized effects instead of SDL_mixer. This is only meant to be a basic
-/// effect for simple "3D" games.
-///
-/// If the audio device is configured for mono output, then you won't get any
-/// effectiveness from the angle; however, distance attenuation on the channel
-/// will still occur. While this effect will function with stereo voices, it
-/// makes more sense to use voices with only one channel of sound, so when they
-/// are mixed through this effect, the positioning will sound correct. You can
-/// convert them to mono through SDL before giving them to the mixer in the
-/// first place if you like.
-///
-/// Setting the channel to MIX_CHANNEL_POST registers this as a posteffect, and
-/// the positioning will be done to the final mixed stream before passing it on
-/// to the audio device.
-///
-/// This is a convenience wrapper over Mix_SetDistance() and Mix_SetPanning().
-///
-/// \param channel The mixer channel to position, or MIX_CHANNEL_POST.
-/// \param angle angle, in degrees. North is 0, and goes clockwise.
-/// \param distance distance; 0 is the listener, 255 is maxiumum distance away.
-/// \returns true on success or false on failure; call SDL_GetError() for more
-/// information.
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// ```c
-/// extern SDL_DECLSPEC bool SDLCALL Mix_SetPosition(int channel, Sint16 angle, Uint8 distance)
-/// ```
-/// {@category mixer}
-bool mixSetPosition(int channel, int angle, int distance) {
-  final mixSetPositionLookupFunction = _libMixer
-      .lookupFunction<
-        Uint8 Function(Int32 channel, Int16 angle, Uint8 distance),
-        int Function(int channel, int angle, int distance)
-      >('Mix_SetPosition');
-  return mixSetPositionLookupFunction(channel, angle, distance) == 1;
-}
-
-///
-/// Set the "distance" of a channel.
-///
-/// `distance` is an integer from 0 to 255 that specifies the location of the
-/// sound in relation to the listener. Distance 0 is overlapping the listener,
-/// and 255 is as far away as possible. A distance of 255 does not guarantee
-/// silence; in such a case, you might want to try changing the chunk's volume,
-/// or just cull the sample from the mixing process with Mix_HaltChannel(). For
-/// efficiency, the precision of this effect may be limited (distances 1
-/// through 7 might all produce the same effect, 8 through 15 are equal, etc).
-/// (distance) is an integer between 0 and 255 that specifies the space between
-/// the sound and the listener. The larger the number, the further away the
-/// sound is. Setting the distance to 0 unregisters this effect, since the data
-/// would be unchanged. If you need more precise positional audio, consider
-/// using OpenAL for spatialized effects instead of SDL_mixer. This is only
-/// meant to be a basic effect for simple "3D" games.
-///
-/// Setting the channel to MIX_CHANNEL_POST registers this as a posteffect, and
-/// the distance attenuation will be done to the final mixed stream before
-/// passing it on to the audio device.
-///
-/// This uses the Mix_RegisterEffect() API internally.
-///
-/// \param channel The mixer channel to attenuate, or MIX_CHANNEL_POST.
-/// \param distance distance; 0 is the listener, 255 is maxiumum distance away.
-/// \returns true on success or false on failure; call SDL_GetError() for more
-/// information.
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// ```c
-/// extern SDL_DECLSPEC bool SDLCALL Mix_SetDistance(int channel, Uint8 distance)
-/// ```
-/// {@category mixer}
-bool mixSetDistance(int channel, int distance) {
-  final mixSetDistanceLookupFunction = _libMixer
-      .lookupFunction<
-        Uint8 Function(Int32 channel, Uint8 distance),
-        int Function(int channel, int distance)
-      >('Mix_SetDistance');
-  return mixSetDistanceLookupFunction(channel, distance) == 1;
-}
-
-///
-/// Cause a channel to reverse its stereo.
-///
-/// This is handy if the user has his speakers hooked up backwards, or you
-/// would like to have a trippy sound effect.
-///
-/// Calling this function with `flip` set to non-zero reverses the chunks's
-/// usual channels. If `flip` is zero, the effect is unregistered.
-///
-/// This uses the Mix_RegisterEffect() API internally, and thus is probably
-/// more CPU intensive than having the user just plug in his speakers
-/// correctly. Mix_SetReverseStereo() returns without registering the effect
-/// function if the audio device is not configured for stereo output.
-///
-/// If you specify MIX_CHANNEL_POST for `channel`, then this effect is used on
-/// the final mixed stream before sending it on to the audio device (a
-/// posteffect).
-///
-/// \param channel The mixer channel to reverse, or MIX_CHANNEL_POST.
-/// \param flip non-zero to reverse stereo, zero to disable this effect.
-/// \returns true on success or false on failure; call SDL_GetError() for more
-/// information. Note that an audio device in mono mode is a no-op,
-/// but this call will return successful in that case.
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// ```c
-/// extern SDL_DECLSPEC bool SDLCALL Mix_SetReverseStereo(int channel, int flip)
-/// ```
-/// {@category mixer}
-bool mixSetReverseStereo(int channel, int flip) {
-  final mixSetReverseStereoLookupFunction = _libMixer
-      .lookupFunction<
-        Uint8 Function(Int32 channel, Int32 flip),
-        int Function(int channel, int flip)
-      >('Mix_SetReverseStereo');
-  return mixSetReverseStereoLookupFunction(channel, flip) == 1;
-}
-
-///
-/// Reserve the first channels for the application.
-///
-/// While SDL_mixer will use up to the number of channels allocated by
-/// Mix_AllocateChannels(), this sets channels aside that will not be available
-/// when calling Mix_PlayChannel with a channel of -1 (play on the first unused
-/// channel). In this case, SDL_mixer will treat reserved channels as "used"
-/// whether anything is playing on them at the moment or not.
-///
-/// This is useful if you've budgeted some channels for dedicated audio and the
-/// rest are just used as they are available.
-///
-/// Calling this function will set channels 0 to `n - 1` to be reserved. This
-/// will not change channel allocations. The number of reserved channels will
-/// be clamped to the current number allocated.
-///
-/// By default, no channels are reserved.
-///
-/// \param num number of channels to reserve, starting at index zero.
-/// \returns the number of reserved channels.
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// ```c
-/// extern SDL_DECLSPEC int SDLCALL Mix_ReserveChannels(int num)
-/// ```
-/// {@category mixer}
-int mixReserveChannels(int num) {
-  final mixReserveChannelsLookupFunction = _libMixer
-      .lookupFunction<Int32 Function(Int32 num), int Function(int num)>(
-        'Mix_ReserveChannels',
-      );
-  return mixReserveChannelsLookupFunction(num);
-}
-
-///
-/// Assign a tag to a channel.
-///
-/// A tag is an arbitrary number that can be assigned to several mixer
-/// channels, to form groups of channels.
-///
-/// If 'tag' is -1, the tag is removed (actually -1 is the tag used to
-/// represent the group of all the channels).
-///
-/// This function replaces the requested channel's current tag; you may only
-/// have one tag per channel.
-///
-/// You may not specify MAX_CHANNEL_POST for a channel.
-///
-/// \param which the channel to set the tag on.
-/// \param tag an arbitrary value to assign a channel.
-/// \returns true on success or false on failure; call SDL_GetError() for more
-/// information.
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// ```c
-/// extern SDL_DECLSPEC bool SDLCALL Mix_GroupChannel(int which, int tag)
-/// ```
-/// {@category mixer}
-bool mixGroupChannel(int which, int tag) {
-  final mixGroupChannelLookupFunction = _libMixer
-      .lookupFunction<
-        Uint8 Function(Int32 which, Int32 tag),
-        int Function(int which, int tag)
-      >('Mix_GroupChannel');
-  return mixGroupChannelLookupFunction(which, tag) == 1;
-}
-
-///
-/// Assign several consecutive channels to the same tag.
-///
-/// A tag is an arbitrary number that can be assigned to several mixer
-/// channels, to form groups of channels.
-///
-/// If 'tag' is -1, the tag is removed (actually -1 is the tag used to
-/// represent the group of all the channels).
-///
-/// This function replaces the requested channels' current tags; you may only
-/// have one tag per channel.
-///
-/// You may not specify MAX_CHANNEL_POST for a channel.
-///
-/// Note that this returns success and failure in the _opposite_ way from
-/// Mix_GroupChannel(). We regret the API design mistake.
-///
-/// \param from the first channel to set the tag on.
-/// \param to the last channel to set the tag on, inclusive.
-/// \param tag an arbitrary value to assign a channel.
-/// \returns true on success or false on failure; call SDL_GetError() for more
-/// information.
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// ```c
-/// extern SDL_DECLSPEC bool SDLCALL Mix_GroupChannels(int from, int to, int tag)
-/// ```
-/// {@category mixer}
-bool mixGroupChannels(int from, int to, int tag) {
-  final mixGroupChannelsLookupFunction = _libMixer
-      .lookupFunction<
-        Uint8 Function(Int32 from, Int32 to, Int32 tag),
-        int Function(int from, int to, int tag)
-      >('Mix_GroupChannels');
-  return mixGroupChannelsLookupFunction(from, to, tag) == 1;
-}
-
-///
-/// Finds the first available channel in a group of channels.
-///
-/// A tag is an arbitrary number that can be assigned to several mixer
-/// channels, to form groups of channels.
-///
-/// This function searches all channels with a specified tag, and returns the
-/// channel number of the first one it finds that is currently unused.
-///
-/// If no channels with the specified tag are unused, this function returns -1.
-///
-/// \param tag an arbitrary value, assigned to channels, to search for.
-/// \returns first available channel, or -1 if none are available.
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// ```c
-/// extern SDL_DECLSPEC int SDLCALL Mix_GroupAvailable(int tag)
-/// ```
-/// {@category mixer}
-int mixGroupAvailable(int tag) {
-  final mixGroupAvailableLookupFunction = _libMixer
-      .lookupFunction<Int32 Function(Int32 tag), int Function(int tag)>(
-        'Mix_GroupAvailable',
-      );
-  return mixGroupAvailableLookupFunction(tag);
-}
-
-///
-/// Returns the number of channels in a group.
-///
-/// If tag is -1, this will return the total number of channels allocated,
-/// regardless of what their tag might be.
-///
-/// \param tag an arbitrary value, assigned to channels, to search for.
-/// \returns the number of channels assigned the specified tag.
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// ```c
-/// extern SDL_DECLSPEC int SDLCALL Mix_GroupCount(int tag)
-/// ```
-/// {@category mixer}
-int mixGroupCount(int tag) {
-  final mixGroupCountLookupFunction = _libMixer
-      .lookupFunction<Int32 Function(Int32 tag), int Function(int tag)>(
-        'Mix_GroupCount',
-      );
-  return mixGroupCountLookupFunction(tag);
-}
-
-///
-/// Find the "oldest" sample playing in a group of channels.
-///
-/// Specifically, this function returns the channel number that is assigned the
-/// specified tag, is currently playing, and has the lowest start time, based
-/// on the value of SDL_GetTicks() when the channel started playing.
-///
-/// If no channel with this tag is currently playing, this function returns -1.
-///
-/// \param tag an arbitrary value, assigned to channels, to search through.
-/// \returns the "oldest" sample playing in a group of channels.
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// \sa Mix_GroupNewer
-///
-/// ```c
-/// extern SDL_DECLSPEC int SDLCALL Mix_GroupOldest(int tag)
-/// ```
-/// {@category mixer}
-int mixGroupOldest(int tag) {
-  final mixGroupOldestLookupFunction = _libMixer
-      .lookupFunction<Int32 Function(Int32 tag), int Function(int tag)>(
-        'Mix_GroupOldest',
-      );
-  return mixGroupOldestLookupFunction(tag);
-}
-
-///
-/// Find the "most recent" sample playing in a group of channels.
-///
-/// Specifically, this function returns the channel number that is assigned the
-/// specified tag, is currently playing, and has the highest start time, based
-/// on the value of SDL_GetTicks() when the channel started playing.
-///
-/// If no channel with this tag is currently playing, this function returns -1.
-///
-/// \param tag an arbitrary value, assigned to channels, to search through.
-/// \returns the "most recent" sample playing in a group of channels.
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// \sa Mix_GroupOldest
-///
-/// ```c
-/// extern SDL_DECLSPEC int SDLCALL Mix_GroupNewer(int tag)
-/// ```
-/// {@category mixer}
-int mixGroupNewer(int tag) {
-  final mixGroupNewerLookupFunction = _libMixer
-      .lookupFunction<Int32 Function(Int32 tag), int Function(int tag)>(
-        'Mix_GroupNewer',
-      );
-  return mixGroupNewerLookupFunction(tag);
-}
-
-///
-/// Play an audio chunk on a specific channel.
-///
-/// If the specified channel is -1, play on the first free channel (and return
-/// -1 without playing anything new if no free channel was available).
-///
-/// If a specific channel was requested, and there is a chunk already playing
-/// there, that chunk will be halted and the new chunk will take its place.
-///
-/// If `loops` is greater than zero, loop the sound that many times. If `loops`
-/// is -1, loop "infinitely" (~65000 times).
-///
-/// Note that before SDL_mixer 3.0.0, this function was a macro that called
-/// Mix_PlayChannelTimed() with a fourth parameter ("ticks") of -1. This
-/// function still does the same thing, but promotes it to a proper API
-/// function. Older binaries linked against a newer SDL_mixer will still call
-/// Mix_PlayChannelTimed directly, as they are using the macro, which was
-/// available since the dawn of time.
-///
-/// \param channel the channel on which to play the new chunk.
-/// \param chunk the new chunk to play.
-/// \param loops the number of times the chunk should loop, -1 to loop (not
-/// actually) infinitely.
-/// \returns which channel was used to play the sound, or -1 if sound could not
-/// be played.
-///
-/// \since This function is available since SDL_mixer 3.0.0
-///
-/// ```c
-/// extern SDL_DECLSPEC int SDLCALL Mix_PlayChannel(int channel, Mix_Chunk *chunk, int loops)
-/// ```
-/// {@category mixer}
-int mixPlayChannel(int channel, Pointer<MixChunk> chunk, int loops) {
-  final mixPlayChannelLookupFunction = _libMixer
-      .lookupFunction<
-        Int32 Function(Int32 channel, Pointer<MixChunk> chunk, Int32 loops),
-        int Function(int channel, Pointer<MixChunk> chunk, int loops)
-      >('Mix_PlayChannel');
-  return mixPlayChannelLookupFunction(channel, chunk, loops);
-}
-
-///
-/// Play an audio chunk on a specific channel for a maximum time.
-///
-/// If the specified channel is -1, play on the first free channel (and return
-/// -1 without playing anything new if no free channel was available).
-///
-/// If a specific channel was requested, and there is a chunk already playing
-/// there, that chunk will be halted and the new chunk will take its place.
-///
-/// If `loops` is greater than zero, loop the sound that many times. If `loops`
-/// is -1, loop "infinitely" (~65000 times).
-///
-/// `ticks` specifies the maximum number of milliseconds to play this chunk
-/// before halting it. If you want the chunk to play until all data has been
-/// mixed, specify -1.
-///
-/// Note that this function does not block for the number of ticks requested;
-/// it just schedules the chunk to play and notes the maximum for the mixer to
-/// manage later, and returns immediately.
-///
-/// \param channel the channel on which to play the new chunk.
-/// \param chunk the new chunk to play.
-/// \param loops the number of times the chunk should loop, -1 to loop (not
-/// actually) infinitely.
-/// \param ticks the maximum number of milliseconds of this chunk to mix for
-/// playback.
-/// \returns which channel was used to play the sound, or -1 if sound could not
-/// be played.
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// ```c
-/// extern SDL_DECLSPEC int SDLCALL Mix_PlayChannelTimed(int channel, Mix_Chunk *chunk, int loops, int ticks)
-/// ```
-/// {@category mixer}
-int mixPlayChannelTimed(
-  int channel,
-  Pointer<MixChunk> chunk,
-  int loops,
-  int ticks,
-) {
-  final mixPlayChannelTimedLookupFunction = _libMixer
-      .lookupFunction<
-        Int32 Function(
-          Int32 channel,
-          Pointer<MixChunk> chunk,
-          Int32 loops,
-          Int32 ticks,
-        ),
-        int Function(int channel, Pointer<MixChunk> chunk, int loops, int ticks)
-      >('Mix_PlayChannelTimed');
-  return mixPlayChannelTimedLookupFunction(channel, chunk, loops, ticks);
-}
-
-///
-/// Play a new music object.
-///
-/// This will schedule the music object to begin mixing for playback.
-///
-/// There is only ever one music object playing at a time; if this is called
-/// when another music object is playing, the currently-playing music is halted
-/// and the new music will replace it.
-///
-/// Please note that if the currently-playing music is in the process of fading
-/// out (via Mix_FadeOutMusic()), this function will *block* until the fade
-/// completes. If you need to avoid this, be sure to call Mix_HaltMusic()
-/// before starting new music.
-///
-/// \param music the new music object to schedule for mixing.
-/// \param loops the number of loops to play the music for (0 means "play once
-/// and stop").
-/// \returns true on success or false on failure; call SDL_GetError() for more
-/// information.
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// ```c
-/// extern SDL_DECLSPEC bool SDLCALL Mix_PlayMusic(Mix_Music *music, int loops)
-/// ```
-/// {@category mixer}
-bool mixPlayMusic(Pointer<MixMusic> music, int loops) {
-  final mixPlayMusicLookupFunction = _libMixer
-      .lookupFunction<
-        Uint8 Function(Pointer<MixMusic> music, Int32 loops),
-        int Function(Pointer<MixMusic> music, int loops)
-      >('Mix_PlayMusic');
-  return mixPlayMusicLookupFunction(music, loops) == 1;
-}
-
-///
-/// Play a new music object, fading in the audio.
-///
-/// This will start the new music playing, much like Mix_PlayMusic() will, but
-/// will start the music playing at silence and fade in to its normal volume
-/// over the specified number of milliseconds.
-///
-/// If there is already music playing, that music will be halted and the new
-/// music object will take its place.
-///
-/// If `loops` is greater than zero, loop the music that many times. If `loops`
-/// is -1, loop "infinitely" (~65000 times).
-///
-/// Fading music will change it's volume progressively, as if Mix_VolumeMusic()
-/// was called on it (which is to say: you probably shouldn't call
-/// Mix_VolumeMusic() on fading music).
-///
-/// \param music the new music object to play.
-/// \param loops the number of times the chunk should loop, -1 to loop (not
-/// actually) infinitely.
-/// \param ms the number of milliseconds to spend fading in.
-/// \returns true on success or false on failure; call SDL_GetError() for more
-/// information.
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// ```c
-/// extern SDL_DECLSPEC bool SDLCALL Mix_FadeInMusic(Mix_Music *music, int loops, int ms)
-/// ```
-/// {@category mixer}
-bool mixFadeInMusic(Pointer<MixMusic> music, int loops, int ms) {
-  final mixFadeInMusicLookupFunction = _libMixer
-      .lookupFunction<
-        Uint8 Function(Pointer<MixMusic> music, Int32 loops, Int32 ms),
-        int Function(Pointer<MixMusic> music, int loops, int ms)
-      >('Mix_FadeInMusic');
-  return mixFadeInMusicLookupFunction(music, loops, ms) == 1;
-}
-
-///
-/// Play a new music object, fading in the audio, from a starting position.
-///
-/// This will start the new music playing, much like Mix_PlayMusic() will, but
-/// will start the music playing at silence and fade in to its normal volume
-/// over the specified number of milliseconds.
-///
-/// If there is already music playing, that music will be halted and the new
-/// music object will take its place.
-///
-/// If `loops` is greater than zero, loop the music that many times. If `loops`
-/// is -1, loop "infinitely" (~65000 times).
-///
-/// Fading music will change it's volume progressively, as if Mix_VolumeMusic()
-/// was called on it (which is to say: you probably shouldn't call
-/// Mix_VolumeMusic() on fading music).
-///
-/// This function allows the caller to start the music playback past the
-/// beginning of its audio data. You may specify a start position, in seconds,
-/// and the playback and fade-in will start there instead of with the first
-/// samples of the music.
-///
-/// An app can specify a `position` of 0.0 to start at the beginning of the
-/// music (or just call Mix_FadeInMusic() instead).
-///
-/// To convert from milliseconds, divide by 1000.0.
-///
-/// \param music the new music object to play.
-/// \param loops the number of times the chunk should loop, -1 to loop (not
-/// actually) infinitely.
-/// \param ms the number of milliseconds to spend fading in.
-/// \param position the start position within the music, in seconds, where
-/// playback should start.
-/// \returns true on success or false on failure; call SDL_GetError() for more
-/// information.
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// ```c
-/// extern SDL_DECLSPEC bool SDLCALL Mix_FadeInMusicPos(Mix_Music *music, int loops, int ms, double position)
-/// ```
-/// {@category mixer}
-bool mixFadeInMusicPos(
-  Pointer<MixMusic> music,
-  int loops,
-  int ms,
-  double position,
-) {
-  final mixFadeInMusicPosLookupFunction = _libMixer
-      .lookupFunction<
-        Uint8 Function(
-          Pointer<MixMusic> music,
-          Int32 loops,
-          Int32 ms,
-          Double position,
-        ),
-        int Function(
-          Pointer<MixMusic> music,
-          int loops,
-          int ms,
-          double position,
-        )
-      >('Mix_FadeInMusicPos');
-  return mixFadeInMusicPosLookupFunction(music, loops, ms, position) == 1;
-}
-
-///
-/// Play an audio chunk on a specific channel, fading in the audio.
-///
-/// This will start the new sound playing, much like Mix_PlayChannel() will,
-/// but will start the sound playing at silence and fade in to its normal
-/// volume over the specified number of milliseconds.
-///
-/// If the specified channel is -1, play on the first free channel (and return
-/// -1 without playing anything new if no free channel was available).
-///
-/// If a specific channel was requested, and there is a chunk already playing
-/// there, that chunk will be halted and the new chunk will take its place.
-///
-/// If `loops` is greater than zero, loop the sound that many times. If `loops`
-/// is -1, loop "infinitely" (~65000 times).
-///
-/// A fading channel will change it's volume progressively, as if Mix_Volume()
-/// was called on it (which is to say: you probably shouldn't call Mix_Volume()
-/// on a fading channel).
-///
-/// Note that before SDL_mixer 3.0.0, this function was a macro that called
-/// Mix_FadeInChannelTimed() with a fourth parameter ("ticks") of -1. This
-/// function still does the same thing, but promotes it to a proper API
-/// function. Older binaries linked against a newer SDL_mixer will still call
-/// Mix_FadeInChannelTimed directly, as they are using the macro, which was
-/// available since the dawn of time.
-///
-/// \param channel the channel on which to play the new chunk, or -1 to find
-/// any available.
-/// \param chunk the new chunk to play.
-/// \param loops the number of times the chunk should loop, -1 to loop (not
-/// actually) infinitely.
-/// \param ms the number of milliseconds to spend fading in.
-/// \returns which channel was used to play the sound, or -1 if sound could not
-/// be played.
-///
-/// \since This function is available since SDL_mixer 3.0.0
-///
-/// ```c
-/// extern SDL_DECLSPEC int SDLCALL Mix_FadeInChannel(int channel, Mix_Chunk *chunk, int loops, int ms)
-/// ```
-/// {@category mixer}
-int mixFadeInChannel(int channel, Pointer<MixChunk> chunk, int loops, int ms) {
-  final mixFadeInChannelLookupFunction = _libMixer
-      .lookupFunction<
-        Int32 Function(
-          Int32 channel,
-          Pointer<MixChunk> chunk,
-          Int32 loops,
-          Int32 ms,
-        ),
-        int Function(int channel, Pointer<MixChunk> chunk, int loops, int ms)
-      >('Mix_FadeInChannel');
-  return mixFadeInChannelLookupFunction(channel, chunk, loops, ms);
-}
-
-///
-/// Play an audio chunk on a specific channel, fading in the audio, for a
-/// maximum time.
-///
-/// This will start the new sound playing, much like Mix_PlayChannel() will,
-/// but will start the sound playing at silence and fade in to its normal
-/// volume over the specified number of milliseconds.
-///
-/// If the specified channel is -1, play on the first free channel (and return
-/// -1 without playing anything new if no free channel was available).
-///
-/// If a specific channel was requested, and there is a chunk already playing
-/// there, that chunk will be halted and the new chunk will take its place.
-///
-/// If `loops` is greater than zero, loop the sound that many times. If `loops`
-/// is -1, loop "infinitely" (~65000 times).
-///
-/// `ticks` specifies the maximum number of milliseconds to play this chunk
-/// before halting it. If you want the chunk to play until all data has been
-/// mixed, specify -1.
-///
-/// Note that this function does not block for the number of ticks requested;
-/// it just schedules the chunk to play and notes the maximum for the mixer to
-/// manage later, and returns immediately.
-///
-/// A fading channel will change it's volume progressively, as if Mix_Volume()
-/// was called on it (which is to say: you probably shouldn't call Mix_Volume()
-/// on a fading channel).
-///
-/// \param channel the channel on which to play the new chunk, or -1 to find
-/// any available.
-/// \param chunk the new chunk to play.
-/// \param loops the number of times the chunk should loop, -1 to loop (not
-/// actually) infinitely.
-/// \param ms the number of milliseconds to spend fading in.
-/// \param ticks the maximum number of milliseconds of this chunk to mix for
-/// playback.
-/// \returns which channel was used to play the sound, or -1 if sound could not
-/// be played.
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// ```c
-/// extern SDL_DECLSPEC int SDLCALL Mix_FadeInChannelTimed(int channel, Mix_Chunk *chunk, int loops, int ms, int ticks)
-/// ```
-/// {@category mixer}
-int mixFadeInChannelTimed(
-  int channel,
-  Pointer<MixChunk> chunk,
-  int loops,
-  int ms,
-  int ticks,
-) {
-  final mixFadeInChannelTimedLookupFunction = _libMixer
-      .lookupFunction<
-        Int32 Function(
-          Int32 channel,
-          Pointer<MixChunk> chunk,
-          Int32 loops,
-          Int32 ms,
-          Int32 ticks,
-        ),
-        int Function(
-          int channel,
-          Pointer<MixChunk> chunk,
-          int loops,
-          int ms,
-          int ticks,
-        )
-      >('Mix_FadeInChannelTimed');
-  return mixFadeInChannelTimedLookupFunction(channel, chunk, loops, ms, ticks);
-}
-
-///
-/// Set the volume for a specific channel.
-///
-/// The volume must be between 0 (silence) and MIX_MAX_VOLUME (full volume).
-/// Note that MIX_MAX_VOLUME is 128. Values greater than MIX_MAX_VOLUME are
-/// clamped to MIX_MAX_VOLUME.
-///
-/// Specifying a negative volume will not change the current volume; as such,
-/// this can be used to query the current volume without making changes, as
-/// this function returns the previous (in this case, still-current) value.
-///
-/// If the specified channel is -1, this function sets the volume for all
-/// channels, and returns _the average_ of all channels' volumes prior to this
-/// call.
-///
-/// The default volume for a channel is MIX_MAX_VOLUME (no attenuation).
-///
-/// \param channel the channel on set/query the volume on, or -1 for all
-/// channels.
-/// \param volume the new volume, between 0 and MIX_MAX_VOLUME, or -1 to query.
-/// \returns the previous volume. If the specified volume is -1, this returns
-/// the current volume. If `channel` is -1, this returns the average
-/// of all channels.
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// ```c
-/// extern SDL_DECLSPEC int SDLCALL Mix_Volume(int channel, int volume)
-/// ```
-/// {@category mixer}
-int mixVolume(int channel, int volume) {
-  final mixVolumeLookupFunction = _libMixer
-      .lookupFunction<
-        Int32 Function(Int32 channel, Int32 volume),
-        int Function(int channel, int volume)
-      >('Mix_Volume');
-  return mixVolumeLookupFunction(channel, volume);
-}
-
-///
-/// Set the volume for a specific chunk.
-///
-/// In addition to channels having a volume setting, individual chunks also
-/// maintain a separate volume. Both values are considered when mixing, so both
-/// affect the final attenuation of the sound. This lets an app adjust the
-/// volume for all instances of a sound in addition to specific instances of
-/// that sound.
-///
-/// The volume must be between 0 (silence) and MIX_MAX_VOLUME (full volume).
-/// Note that MIX_MAX_VOLUME is 128. Values greater than MIX_MAX_VOLUME are
-/// clamped to MIX_MAX_VOLUME.
-///
-/// Specifying a negative volume will not change the current volume; as such,
-/// this can be used to query the current volume without making changes, as
-/// this function returns the previous (in this case, still-current) value.
-///
-/// The default volume for a chunk is MIX_MAX_VOLUME (no attenuation).
-///
-/// \param chunk the chunk whose volume to adjust.
-/// \param volume the new volume, between 0 and MIX_MAX_VOLUME, or -1 to query.
-/// \returns the previous volume. If the specified volume is -1, this returns
-/// the current volume. If `chunk` is NULL, this returns -1.
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// ```c
-/// extern SDL_DECLSPEC int SDLCALL Mix_VolumeChunk(Mix_Chunk *chunk, int volume)
-/// ```
-/// {@category mixer}
-int mixVolumeChunk(Pointer<MixChunk> chunk, int volume) {
-  final mixVolumeChunkLookupFunction = _libMixer
-      .lookupFunction<
-        Int32 Function(Pointer<MixChunk> chunk, Int32 volume),
-        int Function(Pointer<MixChunk> chunk, int volume)
-      >('Mix_VolumeChunk');
-  return mixVolumeChunkLookupFunction(chunk, volume);
-}
-
-///
-/// Set the volume for the music channel.
-///
-/// The volume must be between 0 (silence) and MIX_MAX_VOLUME (full volume).
-/// Note that MIX_MAX_VOLUME is 128. Values greater than MIX_MAX_VOLUME are
-/// clamped to MIX_MAX_VOLUME.
-///
-/// Specifying a negative volume will not change the current volume; as such,
-/// this can be used to query the current volume without making changes, as
-/// this function returns the previous (in this case, still-current) value.
-///
-/// The default volume for music is MIX_MAX_VOLUME (no attenuation).
-///
-/// \param volume the new volume, between 0 and MIX_MAX_VOLUME, or -1 to query.
-/// \returns the previous volume. If the specified volume is -1, this returns
-/// the current volume.
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// ```c
-/// extern SDL_DECLSPEC int SDLCALL Mix_VolumeMusic(int volume)
-/// ```
-/// {@category mixer}
-int mixVolumeMusic(int volume) {
-  final mixVolumeMusicLookupFunction = _libMixer
-      .lookupFunction<Int32 Function(Int32 volume), int Function(int volume)>(
-        'Mix_VolumeMusic',
-      );
-  return mixVolumeMusicLookupFunction(volume);
-}
-
-///
-/// Query the current volume value for a music object.
-///
-/// \param music the music object to query.
-/// \returns the music's current volume, between 0 and MIX_MAX_VOLUME (128).
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// ```c
-/// extern SDL_DECLSPEC int SDLCALL Mix_GetMusicVolume(Mix_Music *music)
-/// ```
-/// {@category mixer}
-int mixGetMusicVolume(Pointer<MixMusic> music) {
-  final mixGetMusicVolumeLookupFunction = _libMixer
-      .lookupFunction<
-        Int32 Function(Pointer<MixMusic> music),
-        int Function(Pointer<MixMusic> music)
-      >('Mix_GetMusicVolume');
-  return mixGetMusicVolumeLookupFunction(music);
-}
-
-///
-/// Set the master volume for all channels.
-///
-/// SDL_mixer keeps a per-channel volume, a per-chunk volume, and a master
-/// volume, and considers all three when mixing audio. This function sets the
-/// master volume, which is applied to all playing channels when mixing.
-///
-/// The volume must be between 0 (silence) and MIX_MAX_VOLUME (full volume).
-/// Note that MIX_MAX_VOLUME is 128. Values greater than MIX_MAX_VOLUME are
-/// clamped to MIX_MAX_VOLUME.
-///
-/// Specifying a negative volume will not change the current volume; as such,
-/// this can be used to query the current volume without making changes, as
-/// this function returns the previous (in this case, still-current) value.
-///
-/// Note that the master volume does not affect any playing music; it is only
-/// applied when mixing chunks. Use Mix_VolumeMusic() for that.
-///
-/// \param volume the new volume, between 0 and MIX_MAX_VOLUME, or -1 to query.
-/// \returns the previous volume. If the specified volume is -1, this returns
-/// the current volume.
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// ```c
-/// extern SDL_DECLSPEC int SDLCALL Mix_MasterVolume(int volume)
-/// ```
-/// {@category mixer}
-int mixMasterVolume(int volume) {
-  final mixMasterVolumeLookupFunction = _libMixer
-      .lookupFunction<Int32 Function(Int32 volume), int Function(int volume)>(
-        'Mix_MasterVolume',
-      );
-  return mixMasterVolumeLookupFunction(volume);
-}
-
-///
-/// Halt playing of a particular channel.
-///
-/// This will stop further playback on that channel until a new chunk is
-/// started there.
-///
-/// Specifying a channel of -1 will halt _all_ channels, except for any playing
-/// music.
-///
-/// Any halted channels will have any currently-registered effects
-/// deregistered, and will call any callback specified by Mix_ChannelFinished()
-/// before this function returns.
-///
-/// You may not specify MAX_CHANNEL_POST for a channel.
-///
-/// \param channel channel to halt, or -1 to halt all channels.
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// ```c
-/// extern SDL_DECLSPEC void SDLCALL Mix_HaltChannel(int channel)
-/// ```
-/// {@category mixer}
-void mixHaltChannel(int channel) {
-  final mixHaltChannelLookupFunction = _libMixer
-      .lookupFunction<Void Function(Int32 channel), void Function(int channel)>(
-        'Mix_HaltChannel',
-      );
-  return mixHaltChannelLookupFunction(channel);
-}
-
-///
-/// Halt playing of a group of channels by arbitrary tag.
-///
-/// This will stop further playback on all channels with a specific tag, until
-/// a new chunk is started there.
-///
-/// A tag is an arbitrary number that can be assigned to several mixer
-/// channels, to form groups of channels.
-///
-/// The default tag for a channel is -1.
-///
-/// Any halted channels will have any currently-registered effects
-/// deregistered, and will call any callback specified by Mix_ChannelFinished()
-/// before this function returns.
-///
-/// \param tag an arbitrary value, assigned to channels, to search for.
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// ```c
-/// extern SDL_DECLSPEC void SDLCALL Mix_HaltGroup(int tag)
-/// ```
-/// {@category mixer}
-void mixHaltGroup(int tag) {
-  final mixHaltGroupLookupFunction = _libMixer
-      .lookupFunction<Void Function(Int32 tag), void Function(int tag)>(
-        'Mix_HaltGroup',
-      );
-  return mixHaltGroupLookupFunction(tag);
-}
-
-///
-/// Halt playing of the music stream.
-///
-/// This will stop further playback of music until a new music object is
-/// started there.
-///
-/// Any halted music will call any callback specified by
-/// Mix_HookMusicFinished() before this function returns.
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// ```c
-/// extern SDL_DECLSPEC void SDLCALL Mix_HaltMusic(void)
-/// ```
-/// {@category mixer}
-void mixHaltMusic() {
-  final mixHaltMusicLookupFunction = _libMixer
-      .lookupFunction<Void Function(), void Function()>('Mix_HaltMusic');
-  return mixHaltMusicLookupFunction();
-}
-
-///
-/// Change the expiration delay for a particular channel.
-///
-/// The channel will halt after the 'ticks' milliseconds have elapsed, or
-/// remove the expiration if 'ticks' is -1.
-///
-/// This overrides the value passed to the fourth parameter of
-/// Mix_PlayChannelTimed().
-///
-/// Specifying a channel of -1 will set an expiration for _all_ channels.
-///
-/// Any halted channels will have any currently-registered effects
-/// deregistered, and will call any callback specified by Mix_ChannelFinished()
-/// once the halt occurs.
-///
-/// Note that this function does not block for the number of ticks requested;
-/// it just schedules the chunk to expire and notes the time for the mixer to
-/// manage later, and returns immediately.
-///
-/// \param channel the channel to change the expiration time on.
-/// \param ticks number of milliseconds from now to let channel play before
-/// halting, -1 to not halt.
-/// \returns the number of channels that changed expirations.
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// ```c
-/// extern SDL_DECLSPEC int SDLCALL Mix_ExpireChannel(int channel, int ticks)
-/// ```
-/// {@category mixer}
-int mixExpireChannel(int channel, int ticks) {
-  final mixExpireChannelLookupFunction = _libMixer
-      .lookupFunction<
-        Int32 Function(Int32 channel, Int32 ticks),
-        int Function(int channel, int ticks)
-      >('Mix_ExpireChannel');
-  return mixExpireChannelLookupFunction(channel, ticks);
-}
-
-///
-/// Halt a channel after fading it out for a specified time.
-///
-/// This will begin a channel fading from its current volume to silence over
-/// `ms` milliseconds. After that time, the channel is halted.
-///
-/// Any halted channels will have any currently-registered effects
-/// deregistered, and will call any callback specified by Mix_ChannelFinished()
-/// once the halt occurs.
-///
-/// A fading channel will change it's volume progressively, as if Mix_Volume()
-/// was called on it (which is to say: you probably shouldn't call Mix_Volume()
-/// on a fading channel).
-///
-/// Note that this function does not block for the number of milliseconds
-/// requested; it just schedules the chunk to fade and notes the time for the
-/// mixer to manage later, and returns immediately.
-///
-/// \param which the channel to fade out.
-/// \param ms number of milliseconds to fade before halting the channel.
-/// \returns the number of channels scheduled to fade.
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// ```c
-/// extern SDL_DECLSPEC int SDLCALL Mix_FadeOutChannel(int which, int ms)
-/// ```
-/// {@category mixer}
-int mixFadeOutChannel(int which, int ms) {
-  final mixFadeOutChannelLookupFunction = _libMixer
-      .lookupFunction<
-        Int32 Function(Int32 which, Int32 ms),
-        int Function(int which, int ms)
-      >('Mix_FadeOutChannel');
-  return mixFadeOutChannelLookupFunction(which, ms);
-}
-
-///
-/// Halt a playing group of channels by arbitrary tag, after fading them out
-/// for a specified time.
-///
-/// This will begin fading a group of channels with a specific tag from their
-/// current volumes to silence over `ms` milliseconds. After that time, those
-/// channels are halted.
-///
-/// A tag is an arbitrary number that can be assigned to several mixer
-/// channels, to form groups of channels.
-///
-/// The default tag for a channel is -1.
-///
-/// Any halted channels will have any currently-registered effects
-/// deregistered, and will call any callback specified by Mix_ChannelFinished()
-/// once the halt occurs.
-///
-/// A fading channel will change it's volume progressively, as if Mix_Volume()
-/// was called on it (which is to say: you probably shouldn't call Mix_Volume()
-/// on a fading channel).
-///
-/// Note that this function does not block for the number of milliseconds
-/// requested; it just schedules the group to fade and notes the time for the
-/// mixer to manage later, and returns immediately.
-///
-/// \param tag an arbitrary value, assigned to channels, to search for.
-/// \param ms number of milliseconds to fade before halting the group.
-/// \returns the number of channels that were scheduled for fading.
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// ```c
-/// extern SDL_DECLSPEC int SDLCALL Mix_FadeOutGroup(int tag, int ms)
-/// ```
-/// {@category mixer}
-int mixFadeOutGroup(int tag, int ms) {
-  final mixFadeOutGroupLookupFunction = _libMixer
-      .lookupFunction<
-        Int32 Function(Int32 tag, Int32 ms),
-        int Function(int tag, int ms)
-      >('Mix_FadeOutGroup');
-  return mixFadeOutGroupLookupFunction(tag, ms);
-}
-
-///
-/// Halt the music stream after fading it out for a specified time.
-///
-/// This will begin the music fading from its current volume to silence over
-/// `ms` milliseconds. After that time, the music is halted.
-///
-/// Any halted music will call any callback specified by
-/// Mix_HookMusicFinished() once the halt occurs.
-///
-/// Fading music will change it's volume progressively, as if Mix_VolumeMusic()
-/// was called on it (which is to say: you probably shouldn't call
-/// Mix_VolumeMusic() on a fading channel).
-///
-/// Note that this function does not block for the number of milliseconds
-/// requested; it just schedules the music to fade and notes the time for the
-/// mixer to manage later, and returns immediately.
-///
-/// \param ms number of milliseconds to fade before halting the channel.
-/// \returns true if music was scheduled to fade, false otherwise. If no music
-/// is currently playing, this returns false.
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// ```c
-/// extern SDL_DECLSPEC bool SDLCALL Mix_FadeOutMusic(int ms)
-/// ```
-/// {@category mixer}
-bool mixFadeOutMusic(int ms) {
-  final mixFadeOutMusicLookupFunction = _libMixer
-      .lookupFunction<Uint8 Function(Int32 ms), int Function(int ms)>(
-        'Mix_FadeOutMusic',
-      );
-  return mixFadeOutMusicLookupFunction(ms) == 1;
-}
-
-///
-/// Query the fading status of the music stream.
-///
-/// This reports one of three values:
-///
-/// - `MIX_NO_FADING`
-/// - `MIX_FADING_OUT`
-/// - `MIX_FADING_IN`
-///
-/// If music is not currently playing, this returns `MIX_NO_FADING`.
-///
-/// \returns the current fading status of the music stream.
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// ```c
-/// extern SDL_DECLSPEC Mix_Fading SDLCALL Mix_FadingMusic(void)
-/// ```
-/// {@category mixer}
-int mixFadingMusic() {
-  final mixFadingMusicLookupFunction = _libMixer
-      .lookupFunction<Int32 Function(), int Function()>('Mix_FadingMusic');
-  return mixFadingMusicLookupFunction();
-}
-
-///
-/// Query the fading status of a channel.
-///
-/// This reports one of three values:
-///
-/// - `MIX_NO_FADING`
-/// - `MIX_FADING_OUT`
-/// - `MIX_FADING_IN`
-///
-/// If nothing is currently playing on the channel, or an invalid channel is
-/// specified, this returns `MIX_NO_FADING`.
-///
-/// You may not specify MAX_CHANNEL_POST for a channel.
-///
-/// You may not specify -1 for all channels; only individual channels may be
-/// queried.
-///
-/// \param which the channel to query.
-/// \returns the current fading status of the channel.
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// ```c
-/// extern SDL_DECLSPEC Mix_Fading SDLCALL Mix_FadingChannel(int which)
-/// ```
-/// {@category mixer}
-int mixFadingChannel(int which) {
-  final mixFadingChannelLookupFunction = _libMixer
-      .lookupFunction<Int32 Function(Int32 which), int Function(int which)>(
-        'Mix_FadingChannel',
-      );
-  return mixFadingChannelLookupFunction(which);
-}
-
-///
-/// Pause a particular channel.
-///
-/// Pausing a channel will prevent further playback of the assigned chunk but
-/// will maintain the chunk's current mixing position. When resumed, this
-/// channel will continue to mix the chunk where it left off.
-///
-/// A paused channel can be resumed by calling Mix_Resume().
-///
-/// A paused channel with an expiration will not expire while paused (the
-/// expiration countdown will be adjusted once resumed).
-///
-/// It is legal to halt a paused channel. Playing a new chunk on a paused
-/// channel will replace the current chunk and unpause the channel.
-///
-/// Specifying a channel of -1 will pause _all_ channels. Any music is
-/// unaffected.
-///
-/// You may not specify MAX_CHANNEL_POST for a channel.
-///
-/// \param channel the channel to pause, or -1 to pause all channels.
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// ```c
-/// extern SDL_DECLSPEC void SDLCALL Mix_Pause(int channel)
-/// ```
-/// {@category mixer}
-void mixPause(int channel) {
-  final mixPauseLookupFunction = _libMixer
-      .lookupFunction<Void Function(Int32 channel), void Function(int channel)>(
-        'Mix_Pause',
-      );
-  return mixPauseLookupFunction(channel);
-}
-
-///
-/// Pause playing of a group of channels by arbitrary tag.
-///
-/// Pausing a channel will prevent further playback of the assigned chunk but
-/// will maintain the chunk's current mixing position. When resumed, this
-/// channel will continue to mix the chunk where it left off.
-///
-/// A paused channel can be resumed by calling Mix_Resume() or
-/// Mix_ResumeGroup().
-///
-/// A paused channel with an expiration will not expire while paused (the
-/// expiration countdown will be adjusted once resumed).
-///
-/// A tag is an arbitrary number that can be assigned to several mixer
-/// channels, to form groups of channels.
-///
-/// The default tag for a channel is -1.
-///
-/// \param tag an arbitrary value, assigned to channels, to search for.
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// ```c
-/// extern SDL_DECLSPEC void SDLCALL Mix_PauseGroup(int tag)
-/// ```
-/// {@category mixer}
-void mixPauseGroup(int tag) {
-  final mixPauseGroupLookupFunction = _libMixer
-      .lookupFunction<Void Function(Int32 tag), void Function(int tag)>(
-        'Mix_PauseGroup',
-      );
-  return mixPauseGroupLookupFunction(tag);
-}
-
-///
-/// Resume a particular channel.
-///
-/// It is legal to resume an unpaused or invalid channel; it causes no effect
-/// and reports no error.
-///
-/// If the paused channel has an expiration, its expiration countdown resumes
-/// now, as well.
-///
-/// Specifying a channel of -1 will resume _all_ paused channels. Any music is
-/// unaffected.
-///
-/// \param channel the channel to resume, or -1 to resume all paused channels.
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// ```c
-/// extern SDL_DECLSPEC void SDLCALL Mix_Resume(int channel)
-/// ```
-/// {@category mixer}
-void mixResume(int channel) {
-  final mixResumeLookupFunction = _libMixer
-      .lookupFunction<Void Function(Int32 channel), void Function(int channel)>(
-        'Mix_Resume',
-      );
-  return mixResumeLookupFunction(channel);
-}
-
-///
-/// Resume playing of a group of channels by arbitrary tag.
-///
-/// It is legal to resume an unpaused or invalid channel; it causes no effect
-/// and reports no error.
-///
-/// If the paused channel has an expiration, its expiration countdown resumes
-/// now, as well.
-///
-/// A tag is an arbitrary number that can be assigned to several mixer
-/// channels, to form groups of channels.
-///
-/// The default tag for a channel is -1.
-///
-/// \param tag an arbitrary value, assigned to channels, to search for.
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// ```c
-/// extern SDL_DECLSPEC void SDLCALL Mix_ResumeGroup(int tag)
-/// ```
-/// {@category mixer}
-void mixResumeGroup(int tag) {
-  final mixResumeGroupLookupFunction = _libMixer
-      .lookupFunction<Void Function(Int32 tag), void Function(int tag)>(
-        'Mix_ResumeGroup',
-      );
-  return mixResumeGroupLookupFunction(tag);
-}
-
-///
-/// Query whether a particular channel is paused.
-///
-/// If an invalid channel is specified, this function returns zero.
-///
-/// \param channel the channel to query, or -1 to query all channels.
-/// \return 1 if channel paused, 0 otherwise. If `channel` is -1, returns the
-/// number of paused channels.
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// ```c
-/// extern SDL_DECLSPEC int SDLCALL Mix_Paused(int channel)
-/// ```
-/// {@category mixer}
-int mixPaused(int channel) {
-  final mixPausedLookupFunction = _libMixer
-      .lookupFunction<Int32 Function(Int32 channel), int Function(int channel)>(
-        'Mix_Paused',
-      );
-  return mixPausedLookupFunction(channel);
-}
-
-///
-/// Pause the music stream.
-///
-/// Pausing the music stream will prevent further playback of the assigned
-/// music object, but will maintain the object's current mixing position. When
-/// resumed, this channel will continue to mix the music where it left off.
-///
-/// Paused music can be resumed by calling Mix_ResumeMusic().
-///
-/// It is legal to halt paused music. Playing a new music object when music is
-/// paused will replace the current music and unpause the music stream.
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// ```c
-/// extern SDL_DECLSPEC void SDLCALL Mix_PauseMusic(void)
-/// ```
-/// {@category mixer}
-void mixPauseMusic() {
-  final mixPauseMusicLookupFunction = _libMixer
-      .lookupFunction<Void Function(), void Function()>('Mix_PauseMusic');
-  return mixPauseMusicLookupFunction();
-}
-
-///
-/// Resume the music stream.
-///
-/// It is legal to resume an unpaused music stream; it causes no effect and
-/// reports no error.
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// ```c
-/// extern SDL_DECLSPEC void SDLCALL Mix_ResumeMusic(void)
-/// ```
-/// {@category mixer}
-void mixResumeMusic() {
-  final mixResumeMusicLookupFunction = _libMixer
-      .lookupFunction<Void Function(), void Function()>('Mix_ResumeMusic');
-  return mixResumeMusicLookupFunction();
-}
-
-///
-/// Rewind the music stream.
-///
-/// This causes the currently-playing music to start mixing from the beginning
-/// of the music, as if it were just started.
-///
-/// It's a legal no-op to rewind the music stream when not playing.
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// ```c
-/// extern SDL_DECLSPEC void SDLCALL Mix_RewindMusic(void)
-/// ```
-/// {@category mixer}
-void mixRewindMusic() {
-  final mixRewindMusicLookupFunction = _libMixer
-      .lookupFunction<Void Function(), void Function()>('Mix_RewindMusic');
-  return mixRewindMusicLookupFunction();
-}
-
-///
-/// Query whether the music stream is paused.
-///
-/// \return true if music is paused, false otherwise.
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// \sa Mix_PauseMusic
-/// \sa Mix_ResumeMusic
-///
-/// ```c
-/// extern SDL_DECLSPEC bool SDLCALL Mix_PausedMusic(void)
-/// ```
-/// {@category mixer}
-bool mixPausedMusic() {
-  final mixPausedMusicLookupFunction = _libMixer
-      .lookupFunction<Uint8 Function(), int Function()>('Mix_PausedMusic');
-  return mixPausedMusicLookupFunction() == 1;
-}
-
-///
-/// Jump to a given order in mod music.
-///
-/// This only applies to MOD music formats.
-///
-/// \param order order.
-/// \returns true on success or false on failure; call SDL_GetError() for more
-/// information.
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// ```c
-/// extern SDL_DECLSPEC bool SDLCALL Mix_ModMusicJumpToOrder(int order)
-/// ```
-/// {@category mixer}
-bool mixModMusicJumpToOrder(int order) {
-  final mixModMusicJumpToOrderLookupFunction = _libMixer
-      .lookupFunction<Uint8 Function(Int32 order), int Function(int order)>(
-        'Mix_ModMusicJumpToOrder',
-      );
-  return mixModMusicJumpToOrderLookupFunction(order) == 1;
-}
-
-///
-/// Start a track in music object.
-///
-/// This only applies to GME music formats.
-///
-/// \param music the music object.
-/// \param track the track number to play. 0 is the first track.
-/// \returns true on success or false on failure; call SDL_GetError() for more
-/// information.
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// ```c
-/// extern SDL_DECLSPEC bool SDLCALL Mix_StartTrack(Mix_Music *music, int track)
-/// ```
-/// {@category mixer}
-bool mixStartTrack(Pointer<MixMusic> music, int track) {
-  final mixStartTrackLookupFunction = _libMixer
-      .lookupFunction<
-        Uint8 Function(Pointer<MixMusic> music, Int32 track),
-        int Function(Pointer<MixMusic> music, int track)
-      >('Mix_StartTrack');
-  return mixStartTrackLookupFunction(music, track) == 1;
-}
-
-///
-/// Get number of tracks in music object.
-///
-/// This only applies to GME music formats.
-///
-/// \param music the music object.
-/// \returns number of tracks if successful, or -1 if failed or isn't
-/// implemented.
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// ```c
-/// extern SDL_DECLSPEC int SDLCALL Mix_GetNumTracks(Mix_Music *music)
-/// ```
-/// {@category mixer}
-int mixGetNumTracks(Pointer<MixMusic> music) {
-  final mixGetNumTracksLookupFunction = _libMixer
-      .lookupFunction<
-        Int32 Function(Pointer<MixMusic> music),
-        int Function(Pointer<MixMusic> music)
-      >('Mix_GetNumTracks');
-  return mixGetNumTracksLookupFunction(music);
-}
-
-///
-/// Set the current position in the music stream, in seconds.
-///
-/// To convert from milliseconds, divide by 1000.0.
-///
-/// This function is only implemented for MOD music formats (set pattern order
-/// number) and for WAV, OGG, FLAC, MP3, and MOD music at the moment.
-///
-/// \param position the new position, in seconds (as a double).
-/// \returns true on success or false on failure; call SDL_GetError() for more
-/// information.
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// ```c
-/// extern SDL_DECLSPEC bool SDLCALL Mix_SetMusicPosition(double position)
-/// ```
-/// {@category mixer}
-bool mixSetMusicPosition(double position) {
-  final mixSetMusicPositionLookupFunction = _libMixer
-      .lookupFunction<
-        Uint8 Function(Double position),
-        int Function(double position)
-      >('Mix_SetMusicPosition');
-  return mixSetMusicPositionLookupFunction(position) == 1;
-}
-
-///
-/// Get the time current position of music stream, in seconds.
-///
-/// To convert to milliseconds, multiply by 1000.0.
-///
-/// \param music the music object to query.
-/// \returns -1.0 if this feature is not supported for some codec.
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// ```c
-/// extern SDL_DECLSPEC double SDLCALL Mix_GetMusicPosition(Mix_Music *music)
-/// ```
-/// {@category mixer}
-double mixGetMusicPosition(Pointer<MixMusic> music) {
-  final mixGetMusicPositionLookupFunction = _libMixer
-      .lookupFunction<
-        Double Function(Pointer<MixMusic> music),
-        double Function(Pointer<MixMusic> music)
-      >('Mix_GetMusicPosition');
-  return mixGetMusicPositionLookupFunction(music);
-}
-
-///
-/// Get a music object's duration, in seconds.
-///
-/// To convert to milliseconds, multiply by 1000.0.
-///
-/// If NULL is passed, returns duration of current playing music.
-///
-/// \param music the music object to query.
-/// \returns music duration in seconds, or -1.0 on error.
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// ```c
-/// extern SDL_DECLSPEC double SDLCALL Mix_MusicDuration(Mix_Music *music)
-/// ```
-/// {@category mixer}
-double mixMusicDuration(Pointer<MixMusic> music) {
-  final mixMusicDurationLookupFunction = _libMixer
-      .lookupFunction<
-        Double Function(Pointer<MixMusic> music),
-        double Function(Pointer<MixMusic> music)
-      >('Mix_MusicDuration');
-  return mixMusicDurationLookupFunction(music);
-}
-
-///
-/// Get the loop start time position of music stream, in seconds.
-///
-/// To convert to milliseconds, multiply by 1000.0.
-///
-/// If NULL is passed, returns duration of current playing music.
-///
-/// \param music the music object to query.
-/// \returns -1.0 if this feature is not used for this music or not supported
-/// for some codec.
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// ```c
-/// extern SDL_DECLSPEC double SDLCALL Mix_GetMusicLoopStartTime(Mix_Music *music)
-/// ```
-/// {@category mixer}
-double mixGetMusicLoopStartTime(Pointer<MixMusic> music) {
-  final mixGetMusicLoopStartTimeLookupFunction = _libMixer
-      .lookupFunction<
-        Double Function(Pointer<MixMusic> music),
-        double Function(Pointer<MixMusic> music)
-      >('Mix_GetMusicLoopStartTime');
-  return mixGetMusicLoopStartTimeLookupFunction(music);
-}
-
-///
-/// Get the loop end time position of music stream, in seconds.
-///
-/// To convert to milliseconds, multiply by 1000.0.
-///
-/// If NULL is passed, returns duration of current playing music.
-///
-/// \param music the music object to query.
-/// \returns -1.0 if this feature is not used for this music or not supported
-/// for some codec.
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// ```c
-/// extern SDL_DECLSPEC double SDLCALL Mix_GetMusicLoopEndTime(Mix_Music *music)
-/// ```
-/// {@category mixer}
-double mixGetMusicLoopEndTime(Pointer<MixMusic> music) {
-  final mixGetMusicLoopEndTimeLookupFunction = _libMixer
-      .lookupFunction<
-        Double Function(Pointer<MixMusic> music),
-        double Function(Pointer<MixMusic> music)
-      >('Mix_GetMusicLoopEndTime');
-  return mixGetMusicLoopEndTimeLookupFunction(music);
-}
-
-///
-/// Get the loop time length of music stream, in seconds.
-///
-/// To convert to milliseconds, multiply by 1000.0.
-///
-/// If NULL is passed, returns duration of current playing music.
-///
-/// \param music the music object to query.
-/// \returns -1.0 if this feature is not used for this music or not supported
-/// for some codec.
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// ```c
-/// extern SDL_DECLSPEC double SDLCALL Mix_GetMusicLoopLengthTime(Mix_Music *music)
-/// ```
-/// {@category mixer}
-double mixGetMusicLoopLengthTime(Pointer<MixMusic> music) {
-  final mixGetMusicLoopLengthTimeLookupFunction = _libMixer
-      .lookupFunction<
-        Double Function(Pointer<MixMusic> music),
-        double Function(Pointer<MixMusic> music)
-      >('Mix_GetMusicLoopLengthTime');
-  return mixGetMusicLoopLengthTimeLookupFunction(music);
-}
-
-///
-/// Check the playing status of a specific channel.
-///
-/// If the channel is currently playing, this function returns 1. Otherwise it
-/// returns 0.
-///
-/// If the specified channel is -1, all channels are checked, and this function
-/// returns the number of channels currently playing.
-///
-/// You may not specify MAX_CHANNEL_POST for a channel.
-///
-/// Paused channels are treated as playing, even though they are not currently
-/// making forward progress in mixing.
-///
-/// \param channel channel.
-/// \returns non-zero if channel is playing, zero otherwise. If `channel` is
-/// -1, return the total number of channel playings.
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// ```c
-/// extern SDL_DECLSPEC int SDLCALL Mix_Playing(int channel)
-/// ```
-/// {@category mixer}
-int mixPlaying(int channel) {
-  final mixPlayingLookupFunction = _libMixer
-      .lookupFunction<Int32 Function(Int32 channel), int Function(int channel)>(
-        'Mix_Playing',
-      );
-  return mixPlayingLookupFunction(channel);
-}
-
-///
-/// Check the playing status of the music stream.
-///
-/// If music is currently playing, this function returns 1. Otherwise it
-/// returns 0.
-///
-/// Paused music is treated as playing, even though it is not currently making
-/// forward progress in mixing.
-///
-/// \returns true if music is playing, false otherwise.
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// ```c
-/// extern SDL_DECLSPEC bool SDLCALL Mix_PlayingMusic(void)
-/// ```
-/// {@category mixer}
-bool mixPlayingMusic() {
-  final mixPlayingMusicLookupFunction = _libMixer
-      .lookupFunction<Uint8 Function(), int Function()>('Mix_PlayingMusic');
-  return mixPlayingMusicLookupFunction() == 1;
-}
-
-///
-/// Set SoundFonts paths to use by supported MIDI backends.
-///
-/// You may specify multiple paths in a single string by separating them with
-/// semicolons; they will be searched in the order listed.
-///
-/// This function replaces any previously-specified paths.
-///
-/// Passing a NULL path will remove any previously-specified paths.
-///
-/// \param paths Paths on the filesystem where SoundFonts are available,
-/// separated by semicolons.
-/// \returns true on success or false on failure; call SDL_GetError() for more
-/// information.
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// ```c
-/// extern SDL_DECLSPEC bool SDLCALL Mix_SetSoundFonts(const char *paths)
-/// ```
-/// {@category mixer}
-bool mixSetSoundFonts(String? paths) {
-  final mixSetSoundFontsLookupFunction = _libMixer
-      .lookupFunction<
-        Uint8 Function(Pointer<Utf8> paths),
-        int Function(Pointer<Utf8> paths)
-      >('Mix_SetSoundFonts');
-  final pathsPointer = paths != null ? paths.toNativeUtf8() : nullptr;
-  final result = mixSetSoundFontsLookupFunction(pathsPointer) == 1;
-  calloc.free(pathsPointer);
-  return result;
-}
-
-///
-/// Get SoundFonts paths to use by supported MIDI backends.
-///
-/// There are several factors that determine what will be reported by this
-/// function:
-///
-/// - If the boolean _SDL hint_ `"SDL_FORCE_SOUNDFONTS"` is set, AND the
-/// `"SDL_SOUNDFONTS"` _environment variable_ is also set, this function will
-/// return that environment variable regardless of whether
-/// Mix_SetSoundFonts() was ever called.
-/// - Otherwise, if Mix_SetSoundFonts() was successfully called with a non-NULL
-/// path, this function will return the string passed to that function.
-/// - Otherwise, if the `"SDL_SOUNDFONTS"` variable is set, this function will
-/// return that environment variable.
-/// - Otherwise, this function will search some common locations on the
-/// filesystem, and if it finds a SoundFont there, it will return that.
-/// - Failing everything else, this function returns NULL.
-///
-/// This returns a pointer to internal (possibly read-only) memory, and it
-/// should not be modified or free'd by the caller.
-///
-/// \returns semicolon-separated list of sound font paths.
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// ```c
-/// extern SDL_DECLSPEC const char* SDLCALL Mix_GetSoundFonts(void)
-/// ```
-/// {@category mixer}
-String? mixGetSoundFonts() {
-  final mixGetSoundFontsLookupFunction = _libMixer
-      .lookupFunction<Pointer<Utf8> Function(), Pointer<Utf8> Function()>(
-        'Mix_GetSoundFonts',
-      );
-  final result = mixGetSoundFontsLookupFunction();
-  if (result == nullptr) {
-    return null;
-  }
-  return result.toDartString();
-}
-
-///
-/// Iterate SoundFonts paths to use by supported MIDI backends.
-///
-/// This function will take the string reported by Mix_GetSoundFonts(), split
-/// it up into separate paths, as delimited by semicolons in the string, and
-/// call a callback function for each separate path.
-///
-/// If there are no paths available, this returns 0 without calling the
-/// callback at all.
-///
-/// If the callback returns non-zero, this function stops iterating and returns
-/// non-zero. If the callback returns 0, this function will continue iterating,
-/// calling the callback again for further paths. If the callback never returns
-/// 1, this function returns 0, so this can be used to decide if an available
-/// soundfont is acceptable for use.
-///
-/// \param function the callback function to call once per path.
-/// \param data a pointer to pass to the callback for its own personal use.
-/// \returns true if callback ever returned true, false on error or if the
-/// callback never returned true.
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// \sa Mix_GetSoundFonts
-///
-/// ```c
-/// extern SDL_DECLSPEC bool SDLCALL Mix_EachSoundFont(Mix_EachSoundFontCallback function, void *data)
-/// ```
-/// {@category mixer}
-bool mixEachSoundFont(
-  Pointer<NativeFunction<MixEachSoundFontCallback>> function,
-  Pointer<NativeType> data,
-) {
-  final mixEachSoundFontLookupFunction = _libMixer
-      .lookupFunction<
-        Uint8 Function(
-          Pointer<NativeFunction<MixEachSoundFontCallback>> function,
-          Pointer<NativeType> data,
-        ),
-        int Function(
-          Pointer<NativeFunction<MixEachSoundFontCallback>> function,
-          Pointer<NativeType> data,
-        )
-      >('Mix_EachSoundFont');
-  return mixEachSoundFontLookupFunction(function, data) == 1;
-}
-
-///
-/// Set full path of the Timidity config file.
-///
-/// For example, "/etc/timidity.cfg"
-///
-/// This is obviously only useful if SDL_mixer is using Timidity internally to
-/// play MIDI files.
-///
-/// \param path path to a Timidity config file.
-/// \returns true on success or false on failure; call SDL_GetError() for more
-/// information.
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// ```c
-/// extern SDL_DECLSPEC bool SDLCALL Mix_SetTimidityCfg(const char *path)
-/// ```
-/// {@category mixer}
-bool mixSetTimidityCfg(String? path) {
-  final mixSetTimidityCfgLookupFunction = _libMixer
-      .lookupFunction<
-        Uint8 Function(Pointer<Utf8> path),
-        int Function(Pointer<Utf8> path)
-      >('Mix_SetTimidityCfg');
+      >('MIX_LoadAudio');
   final pathPointer = path != null ? path.toNativeUtf8() : nullptr;
-  final result = mixSetTimidityCfgLookupFunction(pathPointer) == 1;
+  final result = mixLoadAudioLookupFunction(
+    mixer,
+    pathPointer,
+    predecode ? 1 : 0,
+  );
   calloc.free(pathPointer);
   return result;
 }
 
 ///
-/// Get full path of a previously-specified Timidity config file.
+/// Load audio for playback through a collection of properties.
 ///
-/// For example, "/etc/timidity.cfg"
+/// Please see SDL_LoadAudio_IO() for a description of what the various
+/// LoadAudio functions do. This function uses properties to dictate how it
+/// operates, and exposes functionality the other functions don't provide.
 ///
-/// If a path has never been specified, this returns NULL.
+/// These are the supported properties:
 ///
-/// This returns a pointer to internal memory, and it should not be modified or
-/// free'd by the caller.
+/// - `MIX_PROP_AUDIO_LOAD_IOSTREAM_POINTER`: a pointer to an SDL_IOStream to
+/// be used to load audio data. Required. This stream must be able to seek!
+/// - `MIX_PROP_AUDIO_LOAD_CLOSEIO_BOOLEAN`: true if SDL_mixer should close the
+/// SDL_IOStream before returning (success or failure).
+/// - `MIX_PROP_AUDIO_LOAD_PREDECODE_BOOLEAN`: true if SDL_mixer should fully
+/// decode and decompress the data before returning. Otherwise it will be
+/// stored in its original state and decompressed on demand.
+/// - `MIX_PROP_AUDIO_LOAD_PREFERRED_MIXER_POINTER`: a pointer to a MIX_Mixer,
+/// in case steps can be made to match its format when decoding. Optional.
+/// - `MIX_PROP_AUDIO_LOAD_SKIP_METADATA_TAGS_BOOLEAN`: true to skip parsing
+/// metadata tags, like ID3 and APE tags. This can be used to speed up
+/// loading _if the data definitely doesn't have these tags_. Some decoders
+/// will fail if these tags are present when this property is true.
+/// - `MIX_PROP_AUDIO_DECODER_STRING`: the name of the decoder to use for this
+/// data. Optional. If not specified, SDL_mixer will examine the data and
+/// choose the best decoder. These names are the same returned from
+/// MIX_GetAudioDecoder().
 ///
-/// \returns the previously-specified path, or NULL if not set.
+/// Specific decoders might accept additional custom properties, such as where
+/// to find soundfonts for MIDI playback, etc.
 ///
-/// \since This function is available since SDL_mixer 3.0.0.
+/// \param props a set of properties on how to load audio.
+/// \returns an audio object that can be used to make sound on a mixer, or NULL
+/// on failure; call SDL_GetError() for more information.
 ///
-/// \sa Mix_SetTimidityCfg
-///
-/// ```c
-/// extern SDL_DECLSPEC const char* SDLCALL Mix_GetTimidityCfg(void)
-/// ```
-/// {@category mixer}
-String? mixGetTimidityCfg() {
-  final mixGetTimidityCfgLookupFunction = _libMixer
-      .lookupFunction<Pointer<Utf8> Function(), Pointer<Utf8> Function()>(
-        'Mix_GetTimidityCfg',
-      );
-  final result = mixGetTimidityCfgLookupFunction();
-  if (result == nullptr) {
-    return null;
-  }
-  return result.toDartString();
-}
-
-///
-/// Get the Mix_Chunk currently associated with a mixer channel.
-///
-/// You may not specify MAX_CHANNEL_POST or -1 for a channel.
-///
-/// \param channel the channel to query.
-/// \returns the associated chunk, if any, or NULL if it's an invalid channel.
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL_mixer 3.0.0.
 ///
+/// \sa MIX_DestroyAudio
+/// \sa MIX_SetTrackAudio
+/// \sa MIX_LoadAudio
+/// \sa MIX_LoadAudio_IO
+///
 /// ```c
-/// extern SDL_DECLSPEC Mix_Chunk * SDLCALL Mix_GetChunk(int channel)
+/// extern SDL_DECLSPEC MIX_Audio * SDLCALL MIX_LoadAudioWithProperties(SDL_PropertiesID props)
 /// ```
 /// {@category mixer}
-Pointer<MixChunk> mixGetChunk(int channel) {
-  final mixGetChunkLookupFunction = _libMixer
+Pointer<MixAudio> mixLoadAudioWithProperties(int props) {
+  final mixLoadAudioWithPropertiesLookupFunction = _libMixer
       .lookupFunction<
-        Pointer<MixChunk> Function(Int32 channel),
-        Pointer<MixChunk> Function(int channel)
-      >('Mix_GetChunk');
-  return mixGetChunkLookupFunction(channel);
+        Pointer<MixAudio> Function(Uint32 props),
+        Pointer<MixAudio> Function(int props)
+      >('MIX_LoadAudioWithProperties');
+  return mixLoadAudioWithPropertiesLookupFunction(props);
 }
 
 ///
-/// Close the mixer, halting all playing audio.
+/// Load raw PCM data from an SDL_IOStream.
 ///
-/// Any halted channels will have any currently-registered effects
-/// deregistered, and will call any callback specified by Mix_ChannelFinished()
-/// before this function returns.
+/// There are other options for _streaming_ raw PCM: an SDL_AudioStream can be
+/// connected to a track, as can an SDL_IOStream, and will read from those
+/// sources on-demand when it is time to mix the audio. This function is useful
+/// for loading static audio data that is meant to be played multiple times.
 ///
-/// Any halted music will call any callback specified by
-/// Mix_HookMusicFinished() before this function returns.
+/// This function will load the raw data in its entirety and cache it in RAM.
 ///
-/// Do not start any new audio playing during callbacks in this function.
+/// MIX_Audio objects can be shared between multiple mixers. The `mixer`
+/// parameter just suggests the most likely mixer to use this audio, in case
+/// some optimization might be applied, but this is not required, and a NULL
+/// mixer may be specified.
 ///
-/// This will close the audio device. Attempting to play new audio after this
-/// function returns will fail, until another successful call to
-/// Mix_OpenAudio().
+/// \param mixer a mixer this audio is intended to be used with. May be NULL.
+/// \param io the SDL_IOStream to load data from.
+/// \param spec what format the raw data is in.
+/// \param closeio true if SDL_mixer should close `io` before returning
+/// (success or failure).
+/// \returns an audio object that can be used to make sound on a mixer, or NULL
+/// on failure; call SDL_GetError() for more information.
 ///
-/// Note that (unlike Mix_OpenAudio optionally calling SDL_Init(SDL_INIT_AUDIO)
-/// on the app's behalf), this will _not_ deinitialize the SDL audio subsystem
-/// in any case. At some point after calling this function and Mix_Quit(), some
-/// part of the application should be responsible for calling SDL_Quit() to
-/// deinitialize all of SDL, including its audio subsystem.
-///
-/// This function should be the last thing you call in SDL_mixer before
-/// Mix_Quit(). However, the following notes apply if you don't follow this
-/// advice:
-///
-/// Note that this will not free any loaded chunks or music; you should dispose
-/// of those resources separately. It is probably poor form to dispose of them
-/// _after_ this function, but it is safe to call Mix_FreeChunk() and
-/// Mix_FreeMusic() after closing the device.
-///
-/// Note that any chunks or music you don't free may or may not work if you
-/// call Mix_OpenAudio again, as the audio device may be in a new format and
-/// the existing chunks will not be converted to match.
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL_mixer 3.0.0.
 ///
-/// \sa Mix_Quit
+/// \sa MIX_DestroyAudio
+/// \sa MIX_SetTrackAudio
+/// \sa MIX_LoadRawAudio
+/// \sa MIX_LoadRawAudioNoCopy
+/// \sa MIX_LoadAudio_IO
 ///
 /// ```c
-/// extern SDL_DECLSPEC void SDLCALL Mix_CloseAudio(void)
+/// extern SDL_DECLSPEC MIX_Audio * SDLCALL MIX_LoadRawAudio_IO(MIX_Mixer *mixer, SDL_IOStream *io, const SDL_AudioSpec *spec, bool closeio)
 /// ```
 /// {@category mixer}
-void mixCloseAudio() {
-  final mixCloseAudioLookupFunction = _libMixer
-      .lookupFunction<Void Function(), void Function()>('Mix_CloseAudio');
-  return mixCloseAudioLookupFunction();
+Pointer<MixAudio> mixLoadRawAudioIo(
+  Pointer<MixMixer> mixer,
+  Pointer<SdlIoStream> io,
+  Pointer<SdlAudioSpec> spec,
+  bool closeio,
+) {
+  final mixLoadRawAudioIoLookupFunction = _libMixer
+      .lookupFunction<
+        Pointer<MixAudio> Function(
+          Pointer<MixMixer> mixer,
+          Pointer<SdlIoStream> io,
+          Pointer<SdlAudioSpec> spec,
+          Uint8 closeio,
+        ),
+        Pointer<MixAudio> Function(
+          Pointer<MixMixer> mixer,
+          Pointer<SdlIoStream> io,
+          Pointer<SdlAudioSpec> spec,
+          int closeio,
+        )
+      >('MIX_LoadRawAudio_IO');
+  return mixLoadRawAudioIoLookupFunction(mixer, io, spec, closeio ? 1 : 0);
+}
+
+///
+/// Load raw PCM data from a memory buffer.
+///
+/// There are other options for _streaming_ raw PCM: an SDL_AudioStream can be
+/// connected to a track, as can an SDL_IOStream, and will read from those
+/// sources on-demand when it is time to mix the audio. This function is useful
+/// for loading static audio data that is meant to be played multiple times.
+///
+/// This function will load the raw data in its entirety and cache it in RAM,
+/// allocating a copy. If the original data will outlive the created MIX_Audio,
+/// you can use MIX_LoadRawAudioNoCopy() to avoid extra allocations and copies.
+///
+/// MIX_Audio objects can be shared between multiple mixers. The `mixer`
+/// parameter just suggests the most likely mixer to use this audio, in case
+/// some optimization might be applied, but this is not required, and a NULL
+/// mixer may be specified.
+///
+/// \param mixer a mixer this audio is intended to be used with. May be NULL.
+/// \param data the raw PCM data to load.
+/// \param datalen the size, in bytes, of the raw PCM data.
+/// \param spec what format the raw data is in.
+/// \returns an audio object that can be used to make sound on a mixer, or NULL
+/// on failure; call SDL_GetError() for more information.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL_mixer 3.0.0.
+///
+/// \sa MIX_DestroyAudio
+/// \sa MIX_SetTrackAudio
+/// \sa MIX_LoadRawAudio_IO
+/// \sa MIX_LoadRawAudioNoCopy
+/// \sa MIX_LoadAudio_IO
+///
+/// ```c
+/// extern SDL_DECLSPEC MIX_Audio * SDLCALL MIX_LoadRawAudio(MIX_Mixer *mixer, const void *data, size_t datalen, const SDL_AudioSpec *spec)
+/// ```
+/// {@category mixer}
+Pointer<MixAudio> mixLoadRawAudio(
+  Pointer<MixMixer> mixer,
+  Pointer<NativeType> data,
+  int datalen,
+  Pointer<SdlAudioSpec> spec,
+) {
+  final mixLoadRawAudioLookupFunction = _libMixer
+      .lookupFunction<
+        Pointer<MixAudio> Function(
+          Pointer<MixMixer> mixer,
+          Pointer<NativeType> data,
+          Uint32 datalen,
+          Pointer<SdlAudioSpec> spec,
+        ),
+        Pointer<MixAudio> Function(
+          Pointer<MixMixer> mixer,
+          Pointer<NativeType> data,
+          int datalen,
+          Pointer<SdlAudioSpec> spec,
+        )
+      >('MIX_LoadRawAudio');
+  return mixLoadRawAudioLookupFunction(mixer, data, datalen, spec);
+}
+
+///
+/// Load raw PCM data from a memory buffer without making a copy.
+///
+/// This buffer must live for the entire time the returned MIX_Audio lives, as
+/// it will access it whenever it needs to mix more data.
+///
+/// This function is meant to maximize efficiency: if the data is already in
+/// memory and can remain there, don't copy it. But it can also lead to some
+/// interesting tricks, like changing the buffer's contents to alter multiple
+/// playing tracks at once. (But, of course, be careful when being too clever.)
+///
+/// MIX_Audio objects can be shared between multiple mixers. The `mixer`
+/// parameter just suggests the most likely mixer to use this audio, in case
+/// some optimization might be applied, but this is not required, and a NULL
+/// mixer may be specified.
+///
+/// If `free_when_done` is true, SDL_mixer will call `SDL_free(data)` when the
+/// returned MIX_Audio is eventually destroyed. This can be useful when the
+/// data is not static, but rather composed dynamically for this specific
+/// MIX_Audio and simply wants to avoid the extra copy.
+///
+/// \param mixer a mixer this audio is intended to be used with. May be NULL.
+/// \param data the buffer where the raw PCM data lives.
+/// \param datalen the size, in bytes, of the buffer.
+/// \param spec what format the raw data is in.
+/// \param free_when_done if true, `data` will be given to SDL_free() when the
+/// MIX_Audio is destroyed.
+/// \returns an audio object that can be used to make sound on a mixer, or NULL
+/// on failure; call SDL_GetError() for more information.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL_mixer 3.0.0.
+///
+/// \sa MIX_DestroyAudio
+/// \sa MIX_SetTrackAudio
+/// \sa MIX_LoadRawAudio
+/// \sa MIX_LoadRawAudio_IO
+/// \sa MIX_LoadAudio_IO
+///
+/// ```c
+/// extern SDL_DECLSPEC MIX_Audio * SDLCALL MIX_LoadRawAudioNoCopy(MIX_Mixer *mixer, const void *data, size_t datalen, const SDL_AudioSpec *spec, bool free_when_done)
+/// ```
+/// {@category mixer}
+Pointer<MixAudio> mixLoadRawAudioNoCopy(
+  Pointer<MixMixer> mixer,
+  Pointer<NativeType> data,
+  int datalen,
+  Pointer<SdlAudioSpec> spec,
+  bool freeWhenDone,
+) {
+  final mixLoadRawAudioNoCopyLookupFunction = _libMixer
+      .lookupFunction<
+        Pointer<MixAudio> Function(
+          Pointer<MixMixer> mixer,
+          Pointer<NativeType> data,
+          Uint32 datalen,
+          Pointer<SdlAudioSpec> spec,
+          Uint8 freeWhenDone,
+        ),
+        Pointer<MixAudio> Function(
+          Pointer<MixMixer> mixer,
+          Pointer<NativeType> data,
+          int datalen,
+          Pointer<SdlAudioSpec> spec,
+          int freeWhenDone,
+        )
+      >('MIX_LoadRawAudioNoCopy');
+  return mixLoadRawAudioNoCopyLookupFunction(
+    mixer,
+    data,
+    datalen,
+    spec,
+    freeWhenDone ? 1 : 0,
+  );
+}
+
+///
+/// Create a MIX_Audio that generates a sinewave.
+///
+/// This is useful just to have _something_ to play, perhaps for testing or
+/// debugging purposes.
+///
+/// The resulting MIX_Audio will generate infinite audio when assigned to a
+/// track.
+///
+/// You specify its frequency in Hz (determines the pitch of the sinewave's
+/// audio) and amplitude (determines the volume of the sinewave: 1.0f is very
+/// loud, 0.0f is silent).
+///
+/// MIX_Audio objects can be shared between multiple mixers. The `mixer`
+/// parameter just suggests the most likely mixer to use this audio, in case
+/// some optimization might be applied, but this is not required, and a NULL
+/// mixer may be specified.
+///
+/// \param mixer a mixer this audio is intended to be used with. May be NULL.
+/// \param hz the sinewave's frequency in Hz.
+/// \param amplitude the sinewave's amplitude from 0.0f to 1.0f.
+/// \returns an audio object that can be used to make sound on a mixer, or NULL
+/// on failure; call SDL_GetError() for more information.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL_mixer 3.0.0.
+///
+/// \sa MIX_DestroyAudio
+/// \sa MIX_SetTrackAudio
+/// \sa MIX_LoadAudio_IO
+///
+/// ```c
+/// extern SDL_DECLSPEC MIX_Audio * SDLCALL MIX_CreateSineWaveAudio(MIX_Mixer *mixer, int hz, float amplitude)
+/// ```
+/// {@category mixer}
+Pointer<MixAudio> mixCreateSineWaveAudio(
+  Pointer<MixMixer> mixer,
+  int hz,
+  double amplitude,
+) {
+  final mixCreateSineWaveAudioLookupFunction = _libMixer
+      .lookupFunction<
+        Pointer<MixAudio> Function(
+          Pointer<MixMixer> mixer,
+          Int32 hz,
+          Float amplitude,
+        ),
+        Pointer<MixAudio> Function(
+          Pointer<MixMixer> mixer,
+          int hz,
+          double amplitude,
+        )
+      >('MIX_CreateSineWaveAudio');
+  return mixCreateSineWaveAudioLookupFunction(mixer, hz, amplitude);
+}
+
+///
+/// Get the properties associated with a MIX_Audio.
+///
+/// SDL_mixer offers some properties of its own, but this can also be a
+/// convenient place to store app-specific data.
+///
+/// A SDL_PropertiesID is created the first time this function is called for a
+/// given MIX_Audio, if necessary.
+///
+/// The following read-only properties are provided by SDL_mixer:
+///
+/// - `MIX_PROP_METADATA_TITLE_STRING`: the audio's title ("Smells Like Teen
+/// Spirit").
+/// - `MIX_PROP_METADATA_ARTIST_STRING`: the audio's artist name ("Nirvana").
+/// - `MIX_PROP_METADATA_ALBUM_STRING`: the audio's album name ("Nevermind").
+/// - `MIX_PROP_METADATA_COPYRIGHT_STRING`: the audio's copyright info
+/// ("Copyright (c) 1991")
+/// - `MIX_PROP_METADATA_TRACK_NUMBER`: the audio's track number on the album
+/// (1)
+/// - `MIX_PROP_METADATA_TOTAL_TRACKS_NUMBER`: the total tracks on the album
+/// (13)
+/// - `MIX_PROP_METADATA_YEAR_NUMBER`: the year the audio was released (1991)
+/// - `MIX_PROP_METADATA_DURATION_FRAMES_NUMBER`: The sample frames worth of
+/// PCM data that comprise this audio. It might be off by a little if the
+/// decoder only knows the duration as a unit of time.
+/// - `MIX_PROP_METADATA_DURATION_INFINITE_BOOLEAN`: if true, audio never runs
+/// out of sound to generate. This isn't necessarily always known to
+/// SDL_mixer, though.
+///
+/// Other properties, documented with MIX_LoadAudioWithProperties(), may also
+/// be present.
+///
+/// Note that the metadata properties are whatever SDL_mixer finds in things
+/// like ID3 tags, and they often have very little standardized formatting, may
+/// be missing, and can be completely wrong if the original data is
+/// untrustworthy (like an MP3 from a P2P file sharing service).
+///
+/// \param audio the audio to query.
+/// \returns a valid property ID on success or 0 on failure; call
+/// SDL_GetError() for more information.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL_mixer 3.0.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC SDL_PropertiesID SDLCALL MIX_GetAudioProperties(MIX_Audio *audio)
+/// ```
+/// {@category mixer}
+int mixGetAudioProperties(Pointer<MixAudio> audio) {
+  final mixGetAudioPropertiesLookupFunction = _libMixer
+      .lookupFunction<
+        Uint32 Function(Pointer<MixAudio> audio),
+        int Function(Pointer<MixAudio> audio)
+      >('MIX_GetAudioProperties');
+  return mixGetAudioPropertiesLookupFunction(audio);
+}
+
+///
+/// Get the length of a MIX_Audio's playback in sample frames.
+///
+/// This information is also available via the
+/// MIX_PROP_METADATA_DURATION_FRAMES_NUMBER property, but it's common enough
+/// to provide a simple accessor function.
+///
+/// This reports the length of the data in _sample frames_, so sample-perfect
+/// mixing can be possible. Sample frames are only meaningful as a measure of
+/// time if the sample rate (frequency) is also known. To convert from sample
+/// frames to milliseconds, use MIX_AudioFramesToMS().
+///
+/// Not all audio file formats can report the complete length of the data they
+/// will produce through decoding: some can't calculate it, some might produce
+/// infinite audio.
+///
+/// Also, some file formats can only report duration as a unit of time, which
+/// means SDL_mixer might have to estimate sample frames from that information.
+/// With less precision, the reported duration might be off by a few sample
+/// frames in either direction.
+///
+/// This will return a value >= 0 if a duration is known. It might also return
+/// MIX_DURATION_UNKNOWN or MIX_DURATION_INFINITE.
+///
+/// \param audio the audio to query.
+/// \returns the length of the audio in sample frames, or MIX_DURATION_UNKNOWN
+/// or MIX_DURATION_INFINITE.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL_mixer 3.0.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC Sint64 SDLCALL MIX_GetAudioDuration(MIX_Audio *audio)
+/// ```
+/// {@category mixer}
+int mixGetAudioDuration(Pointer<MixAudio> audio) {
+  final mixGetAudioDurationLookupFunction = _libMixer
+      .lookupFunction<
+        Int64 Function(Pointer<MixAudio> audio),
+        int Function(Pointer<MixAudio> audio)
+      >('MIX_GetAudioDuration');
+  return mixGetAudioDurationLookupFunction(audio);
+}
+
+///
+/// Query the initial audio format of a MIX_Audio.
+///
+/// Note that some audio files can change format in the middle; some explicitly
+/// support this, but a more common example is two MP3 files concatenated
+/// together. In many cases, SDL_mixer will correctly handle these sort of
+/// files, but this function will only report the initial format a file uses.
+///
+/// \param audio the audio to query.
+/// \param spec on success, audio format details will be stored here.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL_mixer 3.0.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL MIX_GetAudioFormat(MIX_Audio *audio, SDL_AudioSpec *spec)
+/// ```
+/// {@category mixer}
+bool mixGetAudioFormat(Pointer<MixAudio> audio, Pointer<SdlAudioSpec> spec) {
+  final mixGetAudioFormatLookupFunction = _libMixer
+      .lookupFunction<
+        Uint8 Function(Pointer<MixAudio> audio, Pointer<SdlAudioSpec> spec),
+        int Function(Pointer<MixAudio> audio, Pointer<SdlAudioSpec> spec)
+      >('MIX_GetAudioFormat');
+  return mixGetAudioFormatLookupFunction(audio, spec) == 1;
+}
+
+///
+/// Destroy the specified audio.
+///
+/// MIX_Audio is reference-counted internally, so this function only unrefs it.
+/// If doing so causes the reference count to drop to zero, the MIX_Audio will
+/// be deallocated. This allows the system to safely operate if the audio is
+/// still assigned to a MIX_Track at the time of destruction. The actual
+/// destroying will happen when the track stops using it.
+///
+/// But from the caller's perspective, once this function is called, it should
+/// assume the `audio` pointer has become invalid.
+///
+/// Destroying a NULL MIX_Audio is a legal no-op.
+///
+/// \param audio the audio to destroy.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL_mixer 3.0.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC void SDLCALL MIX_DestroyAudio(MIX_Audio *audio)
+/// ```
+/// {@category mixer}
+void mixDestroyAudio(Pointer<MixAudio> audio) {
+  final mixDestroyAudioLookupFunction = _libMixer
+      .lookupFunction<
+        Void Function(Pointer<MixAudio> audio),
+        void Function(Pointer<MixAudio> audio)
+      >('MIX_DestroyAudio');
+  return mixDestroyAudioLookupFunction(audio);
+}
+
+///
+/// Create a new track on a mixer.
+///
+/// A track provides a single source of audio. All currently-playing tracks
+/// will be processed and mixed together to form the final output from the
+/// mixer.
+///
+/// There are no limits to the number of tracks on may create, beyond running
+/// out of memory, but in normal practice there are a small number of tracks
+/// that are reused between all loaded audio as appropriate.
+///
+/// Tracks are unique to a specific MIX_Mixer and can't be transferred between
+/// them.
+///
+/// \param mixer the mixer on which to create this track.
+/// \returns a new MIX_Track on success, NULL on error; call SDL_GetError() for
+/// more informations.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL_mixer 3.0.0.
+///
+/// \sa MIX_DestroyTrack
+///
+/// ```c
+/// extern SDL_DECLSPEC MIX_Track * SDLCALL MIX_CreateTrack(MIX_Mixer *mixer)
+/// ```
+/// {@category mixer}
+Pointer<MixTrack> mixCreateTrack(Pointer<MixMixer> mixer) {
+  final mixCreateTrackLookupFunction = _libMixer
+      .lookupFunction<
+        Pointer<MixTrack> Function(Pointer<MixMixer> mixer),
+        Pointer<MixTrack> Function(Pointer<MixMixer> mixer)
+      >('MIX_CreateTrack');
+  return mixCreateTrackLookupFunction(mixer);
+}
+
+///
+/// Destroy the specified track.
+///
+/// If the track is currently playing, it will be stopped immediately, without
+/// any fadeout. If there is a callback set through
+/// MIX_SetTrackStoppedCallback(), it will _not_ be called.
+///
+/// If the mixer is currently mixing in another thread, this will block until
+/// it finishes.
+///
+/// Destroying a NULL MIX_Track is a legal no-op.
+///
+/// \param track the track to destroy.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL_mixer 3.0.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC void SDLCALL MIX_DestroyTrack(MIX_Track *track)
+/// ```
+/// {@category mixer}
+void mixDestroyTrack(Pointer<MixTrack> track) {
+  final mixDestroyTrackLookupFunction = _libMixer
+      .lookupFunction<
+        Void Function(Pointer<MixTrack> track),
+        void Function(Pointer<MixTrack> track)
+      >('MIX_DestroyTrack');
+  return mixDestroyTrackLookupFunction(track);
+}
+
+///
+/// Get the properties associated with a track.
+///
+/// Currently SDL_mixer assigns no properties of its own to a track, but this
+/// can be a convenient place to store app-specific data.
+///
+/// A SDL_PropertiesID is created the first time this function is called for a
+/// given track.
+///
+/// \param track the track to query.
+/// \returns a valid property ID on success or 0 on failure; call
+/// SDL_GetError() for more information.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL_mixer 3.0.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC SDL_PropertiesID SDLCALL MIX_GetTrackProperties(MIX_Track *track)
+/// ```
+/// {@category mixer}
+int mixGetTrackProperties(Pointer<MixTrack> track) {
+  final mixGetTrackPropertiesLookupFunction = _libMixer
+      .lookupFunction<
+        Uint32 Function(Pointer<MixTrack> track),
+        int Function(Pointer<MixTrack> track)
+      >('MIX_GetTrackProperties');
+  return mixGetTrackPropertiesLookupFunction(track);
+}
+
+///
+/// Get the MIX_Mixer that owns a MIX_Track.
+///
+/// This is the mixer pointer that was passed to MIX_CreateTrack().
+///
+/// \param track the track to query.
+/// \returns the mixer associated with the track, or NULL on error; call
+/// SDL_GetError() for more information.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL_mixer 3.0.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC MIX_Mixer * SDLCALL MIX_GetTrackMixer(MIX_Track *track)
+/// ```
+/// {@category mixer}
+Pointer<MixMixer> mixGetTrackMixer(Pointer<MixTrack> track) {
+  final mixGetTrackMixerLookupFunction = _libMixer
+      .lookupFunction<
+        Pointer<MixMixer> Function(Pointer<MixTrack> track),
+        Pointer<MixMixer> Function(Pointer<MixTrack> track)
+      >('MIX_GetTrackMixer');
+  return mixGetTrackMixerLookupFunction(track);
+}
+
+///
+/// Set a MIX_Track's input to a MIX_Audio.
+///
+/// A MIX_Audio is audio data stored in RAM (possibly still in a compressed
+/// form). One MIX_Audio can be assigned to multiple tracks at once.
+///
+/// Once a track has a valid input, it can start mixing sound by calling
+/// MIX_PlayTrack(), or possibly MIX_PlayTag().
+///
+/// Calling this function with a NULL audio input is legal, and removes any
+/// input from the track. If the track was currently playing, the next time the
+/// mixer runs, it'll notice this and mark the track as stopped, calling any
+/// assigned MIX_TrackStoppedCallback.
+///
+/// It is legal to change the input of a track while it's playing, however some
+/// states, like loop points, may cease to make sense with the new audio. In
+/// such a case, one can call MIX_PlayTrack again to adjust parameters.
+///
+/// The track will hold a reference to the provided MIX_Audio, so it is safe to
+/// call MIX_DestroyAudio() on it while the track is still using it. The track
+/// will drop its reference (and possibly free the resources) once it is no
+/// longer using the MIX_Audio.
+///
+/// \param track the track on which to set a new audio input.
+/// \param audio the new audio input to set. May be NULL.
+/// \returns true on success, false on error; call SDL_GetError() for details.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL_mixer 3.0.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL MIX_SetTrackAudio(MIX_Track *track, MIX_Audio *audio)
+/// ```
+/// {@category mixer}
+bool mixSetTrackAudio(Pointer<MixTrack> track, Pointer<MixAudio> audio) {
+  final mixSetTrackAudioLookupFunction = _libMixer
+      .lookupFunction<
+        Uint8 Function(Pointer<MixTrack> track, Pointer<MixAudio> audio),
+        int Function(Pointer<MixTrack> track, Pointer<MixAudio> audio)
+      >('MIX_SetTrackAudio');
+  return mixSetTrackAudioLookupFunction(track, audio) == 1;
+}
+
+///
+/// Set a MIX_Track's input to an SDL_AudioStream.
+///
+/// Using an audio stream allows the application to generate any type of audio,
+/// in any format, possibly procedurally or on-demand, and mix in with all
+/// other tracks.
+///
+/// When a track uses an audio stream, it will call SDL_GetAudioStreamData as
+/// it needs more audio to mix. The app can either buffer data to the stream
+/// ahead of time, or set a callback on the stream to provide data as needed.
+/// Please refer to SDL's documentation for details.
+///
+/// A given audio stream may only be assigned to a single track at a time;
+/// duplicate assignments won't return an error, but assigning a stream to
+/// multiple tracks will cause each track to read from the stream arbitarily,
+/// causing confusion and incorrect mixing.
+///
+/// Once a track has a valid input, it can start mixing sound by calling
+/// MIX_PlayTrack(), or possibly MIX_PlayTag().
+///
+/// Calling this function with a NULL audio stream is legal, and removes any
+/// input from the track. If the track was currently playing, the next time the
+/// mixer runs, it'll notice this and mark the track as stopped, calling any
+/// assigned MIX_TrackStoppedCallback.
+///
+/// It is legal to change the input of a track while it's playing, however some
+/// states, like loop points, may cease to make sense with the new audio. In
+/// such a case, one can call MIX_PlayTrack again to adjust parameters.
+///
+/// The provided audio stream must remain valid until the track no longer needs
+/// it (either by changing the track's input or destroying the track).
+///
+/// \param track the track on which to set a new audio input.
+/// \param stream the audio stream to use as the track's input.
+/// \returns true on success, false on error; call SDL_GetError() for details.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL_mixer 3.0.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL MIX_SetTrackAudioStream(MIX_Track *track, SDL_AudioStream *stream)
+/// ```
+/// {@category mixer}
+bool mixSetTrackAudioStream(
+  Pointer<MixTrack> track,
+  Pointer<SdlAudioStream> stream,
+) {
+  final mixSetTrackAudioStreamLookupFunction = _libMixer
+      .lookupFunction<
+        Uint8 Function(Pointer<MixTrack> track, Pointer<SdlAudioStream> stream),
+        int Function(Pointer<MixTrack> track, Pointer<SdlAudioStream> stream)
+      >('MIX_SetTrackAudioStream');
+  return mixSetTrackAudioStreamLookupFunction(track, stream) == 1;
+}
+
+///
+/// Set a MIX_Track's input to an SDL_IOStream.
+///
+/// This is not the recommended way to set a track's input, but this can be
+/// useful for a very specific scenario: a large file, to be played once, that
+/// must be read from disk in small chunks as needed. In most cases, however,
+/// it is preferable to create a MIX_Audio ahead of time and use
+/// MIX_SetTrackAudio() instead.
+///
+/// The stream supplied here should provide an audio file in a supported
+/// format. SDL_mixer will parse it during this call to make sure it's valid,
+/// and then will read file data from the stream as it needs to decode more
+/// during mixing.
+///
+/// The stream must be able to seek through the complete set of data, or this
+/// function will fail.
+///
+/// A given IOStream may only be assigned to a single track at a time;
+/// duplicate assignments won't return an error, but assigning a stream to
+/// multiple tracks will cause each track to read from the stream arbitarily,
+/// causing confusion, incorrect mixing, or failure to decode.
+///
+/// Once a track has a valid input, it can start mixing sound by calling
+/// MIX_PlayTrack(), or possibly MIX_PlayTag().
+///
+/// Calling this function with a NULL stream is legal, and removes any input
+/// from the track. If the track was currently playing, the next time the mixer
+/// runs, it'll notice this and mark the track as stopped, calling any assigned
+/// MIX_TrackStoppedCallback.
+///
+/// It is legal to change the input of a track while it's playing, however some
+/// states, like loop points, may cease to make sense with the new audio. In
+/// such a case, one can call MIX_PlayTrack again to adjust parameters.
+///
+/// The provided stream must remain valid until the track no longer needs it
+/// (either by changing the track's input or destroying the track).
+///
+/// \param track the track on which to set a new audio input.
+/// \param io the new i/o stream to use as the track's input.
+/// \param closeio if true, close the stream when done with it.
+/// \returns true on success, false on error; call SDL_GetError() for details.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL_mixer 3.0.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL MIX_SetTrackIOStream(MIX_Track *track, SDL_IOStream *io, bool closeio)
+/// ```
+/// {@category mixer}
+bool mixSetTrackIoStream(
+  Pointer<MixTrack> track,
+  Pointer<SdlIoStream> io,
+  bool closeio,
+) {
+  final mixSetTrackIoStreamLookupFunction = _libMixer
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<MixTrack> track,
+          Pointer<SdlIoStream> io,
+          Uint8 closeio,
+        ),
+        int Function(
+          Pointer<MixTrack> track,
+          Pointer<SdlIoStream> io,
+          int closeio,
+        )
+      >('MIX_SetTrackIOStream');
+  return mixSetTrackIoStreamLookupFunction(track, io, closeio ? 1 : 0) == 1;
+}
+
+///
+/// Assign an arbitrary tag to a track.
+///
+/// A tag can be any valid C string in UTF-8 encoding. It can be useful to
+/// group tracks in various ways. For example, everything in-game might be
+/// marked as "game", so when the user brings up the settings menu, the app can
+/// pause all tracks involved in gameplay at once, but keep background music
+/// and menu sound effects running.
+///
+/// A track can have as many tags as desired, until the machine runs out of
+/// memory.
+///
+/// It's legal to add the same tag to a track more than once; the extra
+/// attempts will report success but not change anything.
+///
+/// Tags can later be removed with MIX_UntagTrack().
+///
+/// \param track the track to add a tag to.
+/// \param tag the tag to add.
+/// \returns true on success, false on error; call SDL_GetError() for details.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL_mixer 3.0.0.
+///
+/// \sa MIX_UntagTrack
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL MIX_TagTrack(MIX_Track *track, const char *tag)
+/// ```
+/// {@category mixer}
+bool mixTagTrack(Pointer<MixTrack> track, String? tag) {
+  final mixTagTrackLookupFunction = _libMixer
+      .lookupFunction<
+        Uint8 Function(Pointer<MixTrack> track, Pointer<Utf8> tag),
+        int Function(Pointer<MixTrack> track, Pointer<Utf8> tag)
+      >('MIX_TagTrack');
+  final tagPointer = tag != null ? tag.toNativeUtf8() : nullptr;
+  final result = mixTagTrackLookupFunction(track, tagPointer) == 1;
+  calloc.free(tagPointer);
+  return result;
+}
+
+///
+/// Remove an arbitrary tag from a track.
+///
+/// A tag can be any valid C string in UTF-8 encoding. It can be useful to
+/// group tracks in various ways. For example, everything in-game might be
+/// marked as "game", so when the user brings up the settings menu, the app can
+/// pause all tracks involved in gameplay at once, but keep background music
+/// and menu sound effects running.
+///
+/// It's legal to remove a tag that the track doesn't have; this function
+/// doesn't report errors, so this simply does nothing.
+///
+/// \param track the track from which to remove a tag.
+/// \param tag the tag to remove.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL_mixer 3.0.0.
+///
+/// \sa MIX_TagTrack
+///
+/// ```c
+/// extern SDL_DECLSPEC void SDLCALL MIX_UntagTrack(MIX_Track *track, const char *tag)
+/// ```
+/// {@category mixer}
+void mixUntagTrack(Pointer<MixTrack> track, String? tag) {
+  final mixUntagTrackLookupFunction = _libMixer
+      .lookupFunction<
+        Void Function(Pointer<MixTrack> track, Pointer<Utf8> tag),
+        void Function(Pointer<MixTrack> track, Pointer<Utf8> tag)
+      >('MIX_UntagTrack');
+  final tagPointer = tag != null ? tag.toNativeUtf8() : nullptr;
+  final result = mixUntagTrackLookupFunction(track, tagPointer);
+  calloc.free(tagPointer);
+  return result;
+}
+
+///
+/// Seek a playing track to a new position in its input.
+///
+/// (Not to be confused with MIX_SetTrack3DPosition(), which is positioning of
+/// the track in 3D space, not the playback position of its audio data.)
+///
+/// On a playing track, the next time the mixer runs, it will start mixing from
+/// the new position.
+///
+/// Position is defined in _sample frames_ of decoded audio, not units of time,
+/// so that sample-perfect mixing can be achieved. To instead operate in units
+/// of time, use MIX_TrackMSToFrames() to get the approximate sample frames for
+/// a given tick.
+///
+/// This function requires an input that can seek (so it can not be used if the
+/// input was set with MIX_SetTrackAudioStream()), and a audio file format that
+/// allows seeking. SDL_mixer's decoders for some file formats do not offer
+/// seeking, or can only seek to times, not exact sample frames, in which case
+/// the final position may be off by some amount of sample frames. Please check
+/// your audio data and file bug reports if appropriate.
+///
+/// It's legal to call this function on a track that is stopped, but a future
+/// call to MIX_PlayTrack() will reset the start position anyhow. Paused tracks
+/// will resume at the new input position.
+///
+/// \param track the track to change.
+/// \param frames the sample frame position to seek to.
+/// \returns true on success, false on error; call SDL_GetError() for details.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL_mixer 3.0.0.
+///
+/// \sa MIX_GetTrackPlaybackPosition
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL MIX_SetTrackPlaybackPosition(MIX_Track *track, Uint64 frames)
+/// ```
+/// {@category mixer}
+bool mixSetTrackPlaybackPosition(Pointer<MixTrack> track, int frames) {
+  final mixSetTrackPlaybackPositionLookupFunction = _libMixer
+      .lookupFunction<
+        Uint8 Function(Pointer<MixTrack> track, Uint64 frames),
+        int Function(Pointer<MixTrack> track, int frames)
+      >('MIX_SetTrackPlaybackPosition');
+  return mixSetTrackPlaybackPositionLookupFunction(track, frames) == 1;
+}
+
+///
+/// Get the current input position of a playing track.
+///
+/// (Not to be confused with MIX_GetTrack3DPosition(), which is positioning of
+/// the track in 3D space, not the playback position of its audio data.)
+///
+/// Position is defined in _sample frames_ of decoded audio, not units of time,
+/// so that sample-perfect mixing can be achieved. To instead operate in units
+/// of time, use MIX_TrackFramesToMS() to convert the return value to
+/// milliseconds.
+///
+/// Stopped and paused tracks will report the position when they halted.
+/// Playing tracks will report the current position, which will change over
+/// time.
+///
+/// \param track the track to change.
+/// \returns the track's current sample frame position, or -1 on error; call
+/// SDL_GetError() for details.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL_mixer 3.0.0.
+///
+/// \sa MIX_SetTrackPlaybackPosition
+///
+/// ```c
+/// extern SDL_DECLSPEC Sint64 SDLCALL MIX_GetTrackPlaybackPosition(MIX_Track *track)
+/// ```
+/// {@category mixer}
+int mixGetTrackPlaybackPosition(Pointer<MixTrack> track) {
+  final mixGetTrackPlaybackPositionLookupFunction = _libMixer
+      .lookupFunction<
+        Int64 Function(Pointer<MixTrack> track),
+        int Function(Pointer<MixTrack> track)
+      >('MIX_GetTrackPlaybackPosition');
+  return mixGetTrackPlaybackPositionLookupFunction(track);
+}
+
+///
+/// Query whether a given track is looping.
+///
+/// This specifically checks if the track is _not stopped_ (paused or playing),
+/// and there is at least one loop remaining. If a track _was_ looping but is
+/// on its final iteration of the loop, this will return false.
+///
+/// On various errors (MIX_Init() was not called, the track is NULL), this
+/// returns false, but there is no mechanism to distinguish errors from
+/// non-looping tracks.
+///
+/// \param track the track to query.
+/// \returns true if looping, false otherwise.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL_mixer 3.0.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL MIX_TrackLooping(MIX_Track *track)
+/// ```
+/// {@category mixer}
+bool mixTrackLooping(Pointer<MixTrack> track) {
+  final mixTrackLoopingLookupFunction = _libMixer
+      .lookupFunction<
+        Uint8 Function(Pointer<MixTrack> track),
+        int Function(Pointer<MixTrack> track)
+      >('MIX_TrackLooping');
+  return mixTrackLoopingLookupFunction(track) == 1;
+}
+
+///
+/// Query the MIX_Audio assigned to a track.
+///
+/// This returns the MIX_Audio object currently assigned to `track` through a
+/// call to MIX_SetTrackAudio(). If there is none assigned, or the track has an
+/// input that isn't a MIX_Audio (such as an SDL_AudioStream or SDL_IOStream),
+/// this will return NULL.
+///
+/// On various errors (MIX_Init() was not called, the track is NULL), this
+/// returns NULL, but there is no mechanism to distinguish errors from tracks
+/// without a valid input.
+///
+/// \param track the track to query.
+/// \returns a MIX_Audio if available, NULL if not.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL_mixer 3.0.0.
+///
+/// \sa MIX_GetTrackAudioStream
+///
+/// ```c
+/// extern SDL_DECLSPEC MIX_Audio * SDLCALL MIX_GetTrackAudio(MIX_Track *track)
+/// ```
+/// {@category mixer}
+Pointer<MixAudio> mixGetTrackAudio(Pointer<MixTrack> track) {
+  final mixGetTrackAudioLookupFunction = _libMixer
+      .lookupFunction<
+        Pointer<MixAudio> Function(Pointer<MixTrack> track),
+        Pointer<MixAudio> Function(Pointer<MixTrack> track)
+      >('MIX_GetTrackAudio');
+  return mixGetTrackAudioLookupFunction(track);
+}
+
+///
+/// Query the SDL_AudioStream assigned to a track.
+///
+/// This returns the SDL_AudioStream object currently assigned to `track`
+/// through a call to MIX_SetTrackAudioStream(). If there is none assigned, or
+/// the track has an input that isn't an SDL_AudioStream (such as a MIX_Audio
+/// or SDL_IOStream), this will return NULL.
+///
+/// On various errors (MIX_Init() was not called, the track is NULL), this
+/// returns NULL, but there is no mechanism to distinguish errors from tracks
+/// without a valid input.
+///
+/// \param track the track to query.
+/// \returns an SDL_AudioStream if available, NULL if not.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL_mixer 3.0.0.
+///
+/// \sa MIX_GetTrackAudio
+///
+/// ```c
+/// extern SDL_DECLSPEC SDL_AudioStream * SDLCALL MIX_GetTrackAudioStream(MIX_Track *track)
+/// ```
+/// {@category mixer}
+Pointer<SdlAudioStream> mixGetTrackAudioStream(Pointer<MixTrack> track) {
+  final mixGetTrackAudioStreamLookupFunction = _libMixer
+      .lookupFunction<
+        Pointer<SdlAudioStream> Function(Pointer<MixTrack> track),
+        Pointer<SdlAudioStream> Function(Pointer<MixTrack> track)
+      >('MIX_GetTrackAudioStream');
+  return mixGetTrackAudioStreamLookupFunction(track);
+}
+
+///
+/// Return the number of sample frames remaining to be mixed in a track.
+///
+/// If the track is playing or paused, and its total duration is known, this
+/// will report how much audio is left to mix. If the track is playing, future
+/// calls to this function will report different values.
+///
+/// Remaining audio is defined in _sample frames_ of decoded audio, not units
+/// of time, so that sample-perfect mixing can be achieved. To instead operate
+/// in units of time, use MIX_TrackFramesToMS() to convert the return value to
+/// milliseconds.
+///
+/// This function does not take into account fade-outs or looping, just the
+/// current mixing position vs the duration of the track.
+///
+/// If the duration of the track isn't known, or `track` is NULL, this function
+/// returns -1. A stopped track reports 0.
+///
+/// \param track the track to query.
+/// \returns the total sample frames still to be mixed, or -1 if unknown.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL_mixer 3.0.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC Sint64 SDLCALL MIX_GetTrackRemaining(MIX_Track *track)
+/// ```
+/// {@category mixer}
+int mixGetTrackRemaining(Pointer<MixTrack> track) {
+  final mixGetTrackRemainingLookupFunction = _libMixer
+      .lookupFunction<
+        Int64 Function(Pointer<MixTrack> track),
+        int Function(Pointer<MixTrack> track)
+      >('MIX_GetTrackRemaining');
+  return mixGetTrackRemainingLookupFunction(track);
+}
+
+///
+/// Convert milliseconds to sample frames for a track's current format.
+///
+/// This calculates time based on the track's current input format, which can
+/// change when its input does, and also if that input changes formats
+/// mid-stream (for example, if decoding a file that is two MP3s concatenated
+/// together).
+///
+/// If the track has no input, this returns 0.
+///
+/// On various errors (MIX_Init() was not called, the track is NULL), this
+/// returns 0, but there is no mechanism to distinguish errors from tracks
+/// without a valid input.
+///
+/// \param track the track to query.
+/// \param ms the milliseconds to convert to track-specific sample frames.
+/// \returns Converted number of sample frames, or zero for errors/no input.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL_mixer 3.0.0.
+///
+/// \sa MIX_TrackFramesToMS
+///
+/// ```c
+/// extern SDL_DECLSPEC Uint64 SDLCALL MIX_TrackMSToFrames(MIX_Track *track, Uint64 ms)
+/// ```
+/// {@category mixer}
+int mixTrackMsToFrames(Pointer<MixTrack> track, int ms) {
+  final mixTrackMsToFramesLookupFunction = _libMixer
+      .lookupFunction<
+        Uint64 Function(Pointer<MixTrack> track, Uint64 ms),
+        int Function(Pointer<MixTrack> track, int ms)
+      >('MIX_TrackMSToFrames');
+  return mixTrackMsToFramesLookupFunction(track, ms);
+}
+
+///
+/// Convert sample frames for a track's current format to milliseconds.
+///
+/// This calculates time based on the track's current input format, which can
+/// change when its input does, and also if that input changes formats
+/// mid-stream (for example, if decoding a file that is two MP3s concatenated
+/// together).
+///
+/// Sample frames are more precise than milliseconds, so out of necessity, this
+/// function will approximate by rounding down to the closest full millisecond.
+///
+/// If the track has no input, this returns 0.
+///
+/// On various errors (MIX_Init() was not called, the track is NULL), this
+/// returns 0, but there is no mechanism to distinguish errors from tracks
+/// without a valid input.
+///
+/// \param track the track to query.
+/// \param frames the track-specific sample frames to convert to milliseconds.
+/// \returns Converted number of milliseconds, or zero for errors/no input.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL_mixer 3.0.0.
+///
+/// \sa MIX_TrackMSToFrames
+///
+/// ```c
+/// extern SDL_DECLSPEC Uint64 SDLCALL MIX_TrackFramesToMS(MIX_Track *track, Uint64 frames)
+/// ```
+/// {@category mixer}
+int mixTrackFramesToMs(Pointer<MixTrack> track, int frames) {
+  final mixTrackFramesToMsLookupFunction = _libMixer
+      .lookupFunction<
+        Uint64 Function(Pointer<MixTrack> track, Uint64 frames),
+        int Function(Pointer<MixTrack> track, int frames)
+      >('MIX_TrackFramesToMS');
+  return mixTrackFramesToMsLookupFunction(track, frames);
+}
+
+///
+/// Convert milliseconds to sample frames for a MIX_Audio's format.
+///
+/// This calculates time based on the audio's initial format, even if the
+/// format would change mid-stream.
+///
+/// \param audio the audio to query.
+/// \param ms the milliseconds to convert to audio-specific sample frames.
+/// \returns Converted number of sample frames, or zero for errors/no input.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL_mixer 3.0.0.
+///
+/// \sa MIX_AudioFramesToMS
+///
+/// ```c
+/// extern SDL_DECLSPEC Uint64 SDLCALL MIX_AudioMSToFrames(MIX_Audio *audio, Uint64 ms)
+/// ```
+/// {@category mixer}
+int mixAudioMsToFrames(Pointer<MixAudio> audio, int ms) {
+  final mixAudioMsToFramesLookupFunction = _libMixer
+      .lookupFunction<
+        Uint64 Function(Pointer<MixAudio> audio, Uint64 ms),
+        int Function(Pointer<MixAudio> audio, int ms)
+      >('MIX_AudioMSToFrames');
+  return mixAudioMsToFramesLookupFunction(audio, ms);
+}
+
+///
+/// Convert sample frames for a MIX_Audio's format to milliseconds.
+///
+/// This calculates time based on the audio's initial format, even if the
+/// format would change mid-stream.
+///
+/// Sample frames are more precise than milliseconds, so out of necessity, this
+/// function will approximate by rounding down to the closest full millisecond.
+///
+/// \param audio the audio to query.
+/// \param frames the audio-specific sample frames to convert to milliseconds.
+/// \returns Converted number of milliseconds, or zero for errors/no input.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL_mixer 3.0.0.
+///
+/// \sa MIX_AudioMSToFrames
+///
+/// ```c
+/// extern SDL_DECLSPEC Uint64 SDLCALL MIX_AudioFramesToMS(MIX_Audio *audio, Uint64 frames)
+/// ```
+/// {@category mixer}
+int mixAudioFramesToMs(Pointer<MixAudio> audio, int frames) {
+  final mixAudioFramesToMsLookupFunction = _libMixer
+      .lookupFunction<
+        Uint64 Function(Pointer<MixAudio> audio, Uint64 frames),
+        int Function(Pointer<MixAudio> audio, int frames)
+      >('MIX_AudioFramesToMS');
+  return mixAudioFramesToMsLookupFunction(audio, frames);
+}
+
+///
+/// Convert milliseconds to sample frames at a specific sample rate.
+///
+/// If `sample_rate` is <= 0, this returns 0. No error is set.
+///
+/// \param sample_rate the sample rate to use for conversion.
+/// \param ms the milliseconds to convert to rate-specific sample frames.
+/// \returns Converted number of sample frames, or zero for errors.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL_mixer 3.0.0.
+///
+/// \sa MIX_FramesToMS
+///
+/// ```c
+/// extern SDL_DECLSPEC Uint64 SDLCALL MIX_MSToFrames(int sample_rate, Uint64 ms)
+/// ```
+/// {@category mixer}
+int mixMsToFrames(int sampleRate, int ms) {
+  final mixMsToFramesLookupFunction = _libMixer
+      .lookupFunction<
+        Uint64 Function(Int32 sampleRate, Uint64 ms),
+        int Function(int sampleRate, int ms)
+      >('MIX_MSToFrames');
+  return mixMsToFramesLookupFunction(sampleRate, ms);
+}
+
+///
+/// Convert sample frames, at a specific sample rate, to milliseconds.
+///
+/// If `sample_rate` is <= 0, this returns 0. No error is set.
+///
+/// Sample frames are more precise than milliseconds, so out of necessity, this
+/// function will approximate by rounding down to the closest full millisecond.
+///
+/// \param sample_rate the sample rate to use for conversion.
+/// \param frames the rate-specific sample frames to convert to milliseconds.
+/// \returns Converted number of milliseconds, or zero for errors.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL_mixer 3.0.0.
+///
+/// \sa MIX_MSToFrames
+///
+/// ```c
+/// extern SDL_DECLSPEC Uint64 SDLCALL MIX_FramesToMS(int sample_rate, Uint64 frames)
+/// ```
+/// {@category mixer}
+int mixFramesToMs(int sampleRate, int frames) {
+  final mixFramesToMsLookupFunction = _libMixer
+      .lookupFunction<
+        Uint64 Function(Int32 sampleRate, Uint64 frames),
+        int Function(int sampleRate, int frames)
+      >('MIX_FramesToMS');
+  return mixFramesToMsLookupFunction(sampleRate, frames);
+}
+
+///
+/// Start (or restart) mixing a track for playback.
+///
+/// The track will use whatever input was last assigned to it when playing; an
+/// input must be assigned to this track or this function will fail. Inputs are
+/// assigned with calls to MIX_SetTrackAudio(), MIX_SetTrackAudioStream(), or
+/// MIX_SetTrackIOStream().
+///
+/// If the track is already playing, or paused, this will restart the track
+/// with the newly-specified parameters.
+///
+/// As there are several parameters, and more may be added in the future, they
+/// are specified with an SDL_PropertiesID. The parameters have reasonable
+/// defaults, and specifying a 0 for `options` will choose defaults for
+/// everything.
+///
+/// These are the supported properties:
+///
+/// - `MIX_PROP_PLAY_LOOPS_NUMBER`: The number of times to loop the track when
+/// it reaches the end. A value of 1 will loop to the start one time. Zero
+/// will not loop at all. A value of -1 requests infinite loops. If the input
+/// is not seekable and this value isn't zero, this function will report
+/// success but the track will stop at the point it should loop. Default 0.
+/// - `MIX_PROP_PLAY_MAX_FRAME_NUMBER`: Mix at most to this sample frame
+/// position in the track. This will be treated as if the input reach EOF at
+/// this point in the audio file. If -1, mix all available audio without a
+/// limit. Default -1.
+/// - `MIX_PROP_PLAY_MAX_MILLISECONDS_NUMBER`: The same as using the
+/// MIX_PROP_PLAY_MAX_FRAME_NUMBER property, but the value is specified in
+/// milliseconds instead of sample frames. If both properties are specified,
+/// the sample frames value is favored. Default -1.
+/// - `MIX_PROP_PLAY_START_FRAME_NUMBER`: Start mixing from this sample frame
+/// position in the track's input. A value <= 0 will begin from the start of
+/// the track's input. If the input is not seekable and this value is > 0,
+/// this function will report failure. Default 0.
+/// - `MIX_PROP_PLAY_START_MILLISECOND_NUMBER`: The same as using the
+/// MIX_PROP_PLAY_START_FRAME_NUMBER property, but the value is specified in
+/// milliseconds instead of sample frames. If both properties are specified,
+/// the sample frames value is favored. Default 0.
+/// - `MIX_PROP_PLAY_LOOP_START_FRAME_NUMBER`: If the track is looping, this is
+/// the sample frame position that the track will loop back to; this lets one
+/// play an intro at the start of a track on the first iteration, but have a
+/// loop point somewhere in the middle thereafter. A value <= 0 will begin
+/// the loop from the start of the track's input. Default 0.
+/// - `MIX_PROP_PLAY_LOOP_START_MILLISECOND_NUMBER`: The same as using the
+/// MIX_PROP_PLAY_LOOP_START_FRAME_NUMBER property, but the value is
+/// specified in milliseconds instead of sample frames. If both properties
+/// are specified, the sample frames value is favored. Default 0.
+/// - `MIX_PROP_PLAY_FADE_IN_FRAMES_NUMBER`: The number of sample frames over
+/// which to fade in the newly-started track. The track will begin mixing
+/// silence and reach full volume smoothly over this many sample frames. If
+/// the track loops before the fade-in is complete, it will continue to fade
+/// correctly from the loop point. A value <= 0 will disable fade-in, so the
+/// track starts mixing at full volume. Default 0.
+/// - `MIX_PROP_PLAY_FADE_IN_MILLISECONDS_NUMBER`: The same as using the
+/// MIX_PROP_PLAY_FADE_IN_FRAMES_NUMBER property, but the value is specified
+/// in milliseconds instead of sample frames. If both properties are
+/// specified, the sample frames value is favored. Default 0.
+/// - `MIX_PROP_PLAY_APPEND_SILENCE_FRAMES_NUMBER`: At the end of mixing this
+/// track, after all loops are complete, append this many sample frames of
+/// silence as if it were part of the audio file. This allows for apps to
+/// implement effects in callbacks, like reverb, that need to generate
+/// samples past the end of the stream's audio, or perhaps introduce a delay
+/// before starting a new sound on the track without having to manage it
+/// directly. A value <= 0 generates no silence before stopping the track.
+/// Default 0.
+/// - `MIX_PROP_PLAY_APPEND_SILENCE_MILLISECONDS_NUMBER`: The same as using the
+/// MIX_PROP_PLAY_APPEND_SILENCE_FRAMES_NUMBER property, but the value is
+/// specified in milliseconds instead of sample frames. If both properties
+/// are specified, the sample frames value is favored. Default 0.
+///
+/// If this function fails, mixing of this track will not start (or restart, if
+/// it was already started).
+///
+/// \param track the track to start (or restart) mixing.
+/// \param options a set of properties that control playback. May be zero.
+/// \returns true on success, false on error; call SDL_GetError() for details.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL_mixer 3.0.0.
+///
+/// \sa MIX_PlayTag
+/// \sa MIX_PlayAudio
+/// \sa MIX_StopTrack
+/// \sa MIX_PauseTrack
+/// \sa MIX_TrackPlaying
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL MIX_PlayTrack(MIX_Track *track, SDL_PropertiesID options)
+/// ```
+/// {@category mixer}
+bool mixPlayTrack(Pointer<MixTrack> track, int options) {
+  final mixPlayTrackLookupFunction = _libMixer
+      .lookupFunction<
+        Uint8 Function(Pointer<MixTrack> track, Uint32 options),
+        int Function(Pointer<MixTrack> track, int options)
+      >('MIX_PlayTrack');
+  return mixPlayTrackLookupFunction(track, options) == 1;
+}
+
+///
+/// Start (or restart) mixing all tracks with a specific tag for playback.
+///
+/// This function follows all the same rules as MIX_PlayTrack(); please refer
+/// to its documentation for the details. Unlike that function, MIX_PlayTag()
+/// operates on multiple tracks at once that have the specified tag applied,
+/// via MIX_TagTrack().
+///
+/// If all of your tagged tracks have different sample rates, it would make
+/// sense to use the `*_MILLISECONDS_NUMBER` properties in your `options`,
+/// instead of `*_FRAMES_NUMBER`, and let SDL_mixer figure out how to apply it
+/// to each track.
+///
+/// This function returns true if all tagged tracks are started (or restarted).
+/// If any track fails, this function returns false, but all tracks that could
+/// start will still be started even when this function reports failure.
+///
+/// From the point of view of the mixing process, all tracks that successfully
+/// (re)start will do so at the exact same moment.
+///
+/// \param mixer the mixer on which to look for tagged tracks.
+/// \param tag the tag to use when searching for tracks.
+/// \param options the set of options that will be applied to each track.
+/// \returns true on success, false on error; call SDL_GetError() for details.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL_mixer 3.0.0.
+///
+/// \sa MIX_PlayTrack
+/// \sa MIX_TagTrack
+/// \sa MIX_StopTrack
+/// \sa MIX_PauseTrack
+/// \sa MIX_TrackPlaying
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL MIX_PlayTag(MIX_Mixer *mixer, const char *tag, SDL_PropertiesID options)
+/// ```
+/// {@category mixer}
+bool mixPlayTag(Pointer<MixMixer> mixer, String? tag, int options) {
+  final mixPlayTagLookupFunction = _libMixer
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<MixMixer> mixer,
+          Pointer<Utf8> tag,
+          Uint32 options,
+        ),
+        int Function(Pointer<MixMixer> mixer, Pointer<Utf8> tag, int options)
+      >('MIX_PlayTag');
+  final tagPointer = tag != null ? tag.toNativeUtf8() : nullptr;
+  final result = mixPlayTagLookupFunction(mixer, tagPointer, options) == 1;
+  calloc.free(tagPointer);
+  return result;
+}
+
+///
+/// Play a MIX_Audio from start to finish without any management.
+///
+/// This is what we term a "fire-and-forget" sound. Internally, SDL_mixer will
+/// manage a temporary track to mix the specified MIX_Audio, cleaning it up
+/// when complete. No options can be provided for how to do the mixing, like
+/// MIX_PlayTrack() offers, and since the track is not available to the caller,
+/// no adjustments can be made to mixing over time.
+///
+/// This is not the function to build an entire game of any complexity around,
+/// but it can be convenient to play simple, one-off sounds that can't be
+/// stopped early. An example would be a voice saying "GAME OVER" during an
+/// unpausable endgame sequence.
+///
+/// There are no limits to the number of fire-and-forget sounds that can mix at
+/// once (short of running out of memory), and SDL_mixer keeps an internal pool
+/// of temporary tracks it creates as needed and reuses when available.
+///
+/// \param mixer the mixer on which to play this audio.
+/// \param audio the audio input to play.
+/// \returns true if the track has begun mixing, false on error; call
+/// SDL_GetError() for details.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL_mixer 3.0.0.
+///
+/// \sa MIX_PlayTrack
+/// \sa MIX_LoadAudio
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL MIX_PlayAudio(MIX_Mixer *mixer, MIX_Audio *audio)
+/// ```
+/// {@category mixer}
+bool mixPlayAudio(Pointer<MixMixer> mixer, Pointer<MixAudio> audio) {
+  final mixPlayAudioLookupFunction = _libMixer
+      .lookupFunction<
+        Uint8 Function(Pointer<MixMixer> mixer, Pointer<MixAudio> audio),
+        int Function(Pointer<MixMixer> mixer, Pointer<MixAudio> audio)
+      >('MIX_PlayAudio');
+  return mixPlayAudioLookupFunction(mixer, audio) == 1;
+}
+
+///
+/// Halt a currently-playing track, possibly fading out over time.
+///
+/// If `fade_out_frames` is > 0, the track does not stop mixing immediately,
+/// but rather fades to silence over that many sample frames before stopping.
+/// Sample frames are specific to the input assigned to the track, to allow for
+/// sample-perfect mixing. MIX_TrackMSToFrames() can be used to convert
+/// milliseconds to an appropriate value here.
+///
+/// If the track ends normally while the fade-out is still in progress, the
+/// audio stops there; the fade is not adjusted to be shorter if it will last
+/// longer than the audio remaining.
+///
+/// Once a track has completed any fadeout and come to a stop, it will call its
+/// MIX_TrackStoppedCallback, if any. It is legal to assign the track a new
+/// input and/or restart it during this callback.
+///
+/// It is legal to halt a track that's already stopped. It does nothing, and
+/// returns true.
+///
+/// \param track the track to halt.
+/// \param fade_out_frames the number of sample frames to spend fading out to
+/// silence before halting. 0 to stop immediately.
+/// \returns true if the track has stopped, false on error; call SDL_GetError()
+/// for details.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL_mixer 3.0.0.
+///
+/// \sa MIX_PlayTrack
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL MIX_StopTrack(MIX_Track *track, Sint64 fade_out_frames)
+/// ```
+/// {@category mixer}
+bool mixStopTrack(Pointer<MixTrack> track, int fadeOutFrames) {
+  final mixStopTrackLookupFunction = _libMixer
+      .lookupFunction<
+        Uint8 Function(Pointer<MixTrack> track, Int64 fadeOutFrames),
+        int Function(Pointer<MixTrack> track, int fadeOutFrames)
+      >('MIX_StopTrack');
+  return mixStopTrackLookupFunction(track, fadeOutFrames) == 1;
+}
+
+///
+/// Halt all currently-playing tracks, possibly fading out over time.
+///
+/// If `fade_out_ms` is > 0, the tracks do not stop mixing immediately, but
+/// rather fades to silence over that many milliseconds before stopping. Note
+/// that this is different than MIX_StopTrack(), which wants sample frames;
+/// this function takes milliseconds because different tracks might have
+/// different sample rates.
+///
+/// If a track ends normally while the fade-out is still in progress, the audio
+/// stops there; the fade is not adjusted to be shorter if it will last longer
+/// than the audio remaining.
+///
+/// Once a track has completed any fadeout and come to a stop, it will call its
+/// MIX_TrackStoppedCallback, if any. It is legal to assign the track a new
+/// input and/or restart it during this callback. This function does not
+/// prevent new play requests from being made.
+///
+/// \param mixer the mixer on which to stop all tracks.
+/// \param fade_out_ms the number of milliseconds to spend fading out to
+/// silence before halting. 0 to stop immediately.
+/// \returns true on success, false on error; call SDL_GetError() for details.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL_mixer 3.0.0.
+///
+/// \sa MIX_StopTrack
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL MIX_StopAllTracks(MIX_Mixer *mixer, Sint64 fade_out_ms)
+/// ```
+/// {@category mixer}
+bool mixStopAllTracks(Pointer<MixMixer> mixer, int fadeOutMs) {
+  final mixStopAllTracksLookupFunction = _libMixer
+      .lookupFunction<
+        Uint8 Function(Pointer<MixMixer> mixer, Int64 fadeOutMs),
+        int Function(Pointer<MixMixer> mixer, int fadeOutMs)
+      >('MIX_StopAllTracks');
+  return mixStopAllTracksLookupFunction(mixer, fadeOutMs) == 1;
+}
+
+///
+/// Halt all tracks with a specific tag, possibly fading out over time.
+///
+/// If `fade_out_ms` is > 0, the tracks do not stop mixing immediately, but
+/// rather fades to silence over that many milliseconds before stopping. Note
+/// that this is different than MIX_StopTrack(), which wants sample frames;
+/// this function takes milliseconds because different tracks might have
+/// different sample rates.
+///
+/// If a track ends normally while the fade-out is still in progress, the audio
+/// stops there; the fade is not adjusted to be shorter if it will last longer
+/// than the audio remaining.
+///
+/// Once a track has completed any fadeout and come to a stop, it will call its
+/// MIX_TrackStoppedCallback, if any. It is legal to assign the track a new
+/// input and/or restart it during this callback. This function does not
+/// prevent new play requests from being made.
+///
+/// \param mixer the mixer on which to stop tracks.
+/// \param tag the tag to use when searching for tracks.
+/// \param fade_out_ms the number of milliseconds to spend fading out to
+/// silence before halting. 0 to stop immediately.
+/// \returns true on success, false on error; call SDL_GetError() for details.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL_mixer 3.0.0.
+///
+/// \sa MIX_StopTrack
+/// \sa MIX_TagTrack
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL MIX_StopTag(MIX_Mixer *mixer, const char *tag, Sint64 fade_out_ms)
+/// ```
+/// {@category mixer}
+bool mixStopTag(Pointer<MixMixer> mixer, String? tag, int fadeOutMs) {
+  final mixStopTagLookupFunction = _libMixer
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<MixMixer> mixer,
+          Pointer<Utf8> tag,
+          Int64 fadeOutMs,
+        ),
+        int Function(Pointer<MixMixer> mixer, Pointer<Utf8> tag, int fadeOutMs)
+      >('MIX_StopTag');
+  final tagPointer = tag != null ? tag.toNativeUtf8() : nullptr;
+  final result = mixStopTagLookupFunction(mixer, tagPointer, fadeOutMs) == 1;
+  calloc.free(tagPointer);
+  return result;
+}
+
+///
+/// Pause a currently-playing track.
+///
+/// A paused track is not considered "stopped," so its MIX_TrackStoppedCallback
+/// will not fire if paused, but it won't change state by default, generate
+/// audio, or generally make progress, until it is resumed.
+///
+/// It is legal to pause a track that's in any state (playing, already paused,
+/// or stopped). Unless the track is currently playing, pausing does nothing,
+/// and returns true. A false return is only used to signal errors here (such
+/// as MIX_Init not being called or `track` being NULL).
+///
+/// \param track the track to pause.
+/// \returns true if the track has paused, false on error; call SDL_GetError()
+/// for details.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL_mixer 3.0.0.
+///
+/// \sa MIX_ResumeTrack
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL MIX_PauseTrack(MIX_Track *track)
+/// ```
+/// {@category mixer}
+bool mixPauseTrack(Pointer<MixTrack> track) {
+  final mixPauseTrackLookupFunction = _libMixer
+      .lookupFunction<
+        Uint8 Function(Pointer<MixTrack> track),
+        int Function(Pointer<MixTrack> track)
+      >('MIX_PauseTrack');
+  return mixPauseTrackLookupFunction(track) == 1;
+}
+
+///
+/// Pause all currently-playing tracks.
+///
+/// A paused track is not considered "stopped," so its MIX_TrackStoppedCallback
+/// will not fire if paused, but it won't change state by default, generate
+/// audio, or generally make progress, until it is resumed.
+///
+/// This function makes all tracks on the specified mixer that are currently
+/// playing move to a paused state. They can later be resumed.
+///
+/// \param mixer the mixer on which to pause all tracks.
+/// \returns true on success, false on error; call SDL_GetError() for details.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL_mixer 3.0.0.
+///
+/// \sa MIX_ResumeTrack
+/// \sa MIX_ResumeAllTracks
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL MIX_PauseAllTracks(MIX_Mixer *mixer)
+/// ```
+/// {@category mixer}
+bool mixPauseAllTracks(Pointer<MixMixer> mixer) {
+  final mixPauseAllTracksLookupFunction = _libMixer
+      .lookupFunction<
+        Uint8 Function(Pointer<MixMixer> mixer),
+        int Function(Pointer<MixMixer> mixer)
+      >('MIX_PauseAllTracks');
+  return mixPauseAllTracksLookupFunction(mixer) == 1;
+}
+
+///
+/// Pause all tracks with a specific tag.
+///
+/// A paused track is not considered "stopped," so its MIX_TrackStoppedCallback
+/// will not fire if paused, but it won't change state by default, generate
+/// audio, or generally make progress, until it is resumed.
+///
+/// This function makes all currently-playing tracks on the specified mixer,
+/// with a specific tag, move to a paused state. They can later be resumed.
+///
+/// Tracks that match the specified tag that aren't currently playing are
+/// ignored.
+///
+/// \param mixer the mixer on which to pause tracks.
+/// \param tag the tag to use when searching for tracks.
+/// \returns true on success, false on error; call SDL_GetError() for details.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL_mixer 3.0.0.
+///
+/// \sa MIX_PauseTrack
+/// \sa MIX_ResumeTrack
+/// \sa MIX_ResumeTag
+/// \sa MIX_TagTrack
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL MIX_PauseTag(MIX_Mixer *mixer, const char *tag)
+/// ```
+/// {@category mixer}
+bool mixPauseTag(Pointer<MixMixer> mixer, String? tag) {
+  final mixPauseTagLookupFunction = _libMixer
+      .lookupFunction<
+        Uint8 Function(Pointer<MixMixer> mixer, Pointer<Utf8> tag),
+        int Function(Pointer<MixMixer> mixer, Pointer<Utf8> tag)
+      >('MIX_PauseTag');
+  final tagPointer = tag != null ? tag.toNativeUtf8() : nullptr;
+  final result = mixPauseTagLookupFunction(mixer, tagPointer) == 1;
+  calloc.free(tagPointer);
+  return result;
+}
+
+///
+/// Resume a currently-paused track.
+///
+/// A paused track is not considered "stopped," so its MIX_TrackStoppedCallback
+/// will not fire if paused, but it won't change state by default, generate
+/// audio, or generally make progress, until it is resumed.
+///
+/// It is legal to resume a track that's in any state (playing, paused, or
+/// stopped). Unless the track is currently paused, resuming does nothing, and
+/// returns true. A false return is only used to signal errors here (such as
+/// MIX_Init not being called or `track` being NULL).
+///
+/// \param track the track to resume.
+/// \returns true if the track has resumed, false on error; call SDL_GetError()
+/// for details.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL_mixer 3.0.0.
+///
+/// \sa MIX_PauseTrack
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL MIX_ResumeTrack(MIX_Track *track)
+/// ```
+/// {@category mixer}
+bool mixResumeTrack(Pointer<MixTrack> track) {
+  final mixResumeTrackLookupFunction = _libMixer
+      .lookupFunction<
+        Uint8 Function(Pointer<MixTrack> track),
+        int Function(Pointer<MixTrack> track)
+      >('MIX_ResumeTrack');
+  return mixResumeTrackLookupFunction(track) == 1;
+}
+
+///
+/// Resume all currently-paused tracks.
+///
+/// A paused track is not considered "stopped," so its MIX_TrackStoppedCallback
+/// will not fire if paused, but it won't change state by default, generate
+/// audio, or generally make progress, until it is resumed.
+///
+/// This function makes all tracks on the specified mixer that are currently
+/// paused move to a playing state.
+///
+/// \param mixer the mixer on which to resume all tracks.
+/// \returns true on success, false on error; call SDL_GetError() for details.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL_mixer 3.0.0.
+///
+/// \sa MIX_PauseTrack
+/// \sa MIX_PauseAllTracks
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL MIX_ResumeAllTracks(MIX_Mixer *mixer)
+/// ```
+/// {@category mixer}
+bool mixResumeAllTracks(Pointer<MixMixer> mixer) {
+  final mixResumeAllTracksLookupFunction = _libMixer
+      .lookupFunction<
+        Uint8 Function(Pointer<MixMixer> mixer),
+        int Function(Pointer<MixMixer> mixer)
+      >('MIX_ResumeAllTracks');
+  return mixResumeAllTracksLookupFunction(mixer) == 1;
+}
+
+///
+/// Resume all tracks with a specific tag.
+///
+/// A paused track is not considered "stopped," so its MIX_TrackStoppedCallback
+/// will not fire if paused, but it won't change state by default, generate
+/// audio, or generally make progress, until it is resumed.
+///
+/// This function makes all currently-paused tracks on the specified mixer,
+/// with a specific tag, move to a playing state.
+///
+/// Tracks that match the specified tag that aren't currently paused are
+/// ignored.
+///
+/// \param mixer the mixer on which to resume tracks.
+/// \param tag the tag to use when searching for tracks.
+/// \returns true on success, false on error; call SDL_GetError() for details.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL_mixer 3.0.0.
+///
+/// \sa MIX_ResumeTrack
+/// \sa MIX_PauseTrack
+/// \sa MIX_PauseTag
+/// \sa MIX_TagTrack
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL MIX_ResumeTag(MIX_Mixer *mixer, const char *tag)
+/// ```
+/// {@category mixer}
+bool mixResumeTag(Pointer<MixMixer> mixer, String? tag) {
+  final mixResumeTagLookupFunction = _libMixer
+      .lookupFunction<
+        Uint8 Function(Pointer<MixMixer> mixer, Pointer<Utf8> tag),
+        int Function(Pointer<MixMixer> mixer, Pointer<Utf8> tag)
+      >('MIX_ResumeTag');
+  final tagPointer = tag != null ? tag.toNativeUtf8() : nullptr;
+  final result = mixResumeTagLookupFunction(mixer, tagPointer) == 1;
+  calloc.free(tagPointer);
+  return result;
+}
+
+///
+/// Query if a track is currently playing.
+///
+/// If this returns true, the track is currently contributing to the mixer's
+/// output (it's "playing"). It is not stopped nor paused.
+///
+/// On various errors (MIX_Init() was not called, the track is NULL), this
+/// returns false, but there is no mechanism to distinguish errors from
+/// non-playing tracks.
+///
+/// \param track the track to query.
+/// \returns true if playing, false otherwise.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL_mixer 3.0.0.
+///
+/// \sa MIX_PlayTrack
+/// \sa MIX_PauseTrack
+/// \sa MIX_ResumeTrack
+/// \sa MIX_StopTrack
+/// \sa MIX_TrackPaused
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL MIX_TrackPlaying(MIX_Track *track)
+/// ```
+/// {@category mixer}
+bool mixTrackPlaying(Pointer<MixTrack> track) {
+  final mixTrackPlayingLookupFunction = _libMixer
+      .lookupFunction<
+        Uint8 Function(Pointer<MixTrack> track),
+        int Function(Pointer<MixTrack> track)
+      >('MIX_TrackPlaying');
+  return mixTrackPlayingLookupFunction(track) == 1;
+}
+
+///
+/// Query if a track is currently paused.
+///
+/// If this returns true, the track is not currently contributing to the
+/// mixer's output but will when resumed (it's "paused"). It is not playing nor
+/// stopped.
+///
+/// On various errors (MIX_Init() was not called, the track is NULL), this
+/// returns false, but there is no mechanism to distinguish errors from
+/// non-playing tracks.
+///
+/// \param track the track to query.
+/// \returns true if paused, false otherwise.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL_mixer 3.0.0.
+///
+/// \sa MIX_PlayTrack
+/// \sa MIX_PauseTrack
+/// \sa MIX_ResumeTrack
+/// \sa MIX_StopTrack
+/// \sa MIX_TrackPlaying
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL MIX_TrackPaused(MIX_Track *track)
+/// ```
+/// {@category mixer}
+bool mixTrackPaused(Pointer<MixTrack> track) {
+  final mixTrackPausedLookupFunction = _libMixer
+      .lookupFunction<
+        Uint8 Function(Pointer<MixTrack> track),
+        int Function(Pointer<MixTrack> track)
+      >('MIX_TrackPaused');
+  return mixTrackPausedLookupFunction(track) == 1;
+}
+
+///
+/// Set a mixer's master gain control.
+///
+/// Each mixer has a master gain, to adjust the volume of the entire mix. Each
+/// sample passing through the pipeline is modulated by this gain value. A gain
+/// of zero will generate silence, 1.0f will not change the mixed volume, and
+/// larger than 1.0f will increase the volume. Negative values are illegal.
+/// There is no maximum gain specified, but this can quickly get extremely
+/// loud, so please be careful with this setting.
+///
+/// A mixer's master gain defaults to 1.0f.
+///
+/// This value can be changed at any time to adjust the future mix.
+///
+/// \param mixer the mixer to adjust.
+/// \param gain the new gain value.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL_mixer 3.0.0.
+///
+/// \sa MIX_GetMasterGain
+/// \sa MIX_SetTrackGain
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL MIX_SetMasterGain(MIX_Mixer *mixer, float gain)
+/// ```
+/// {@category mixer}
+bool mixSetMasterGain(Pointer<MixMixer> mixer, double gain) {
+  final mixSetMasterGainLookupFunction = _libMixer
+      .lookupFunction<
+        Uint8 Function(Pointer<MixMixer> mixer, Float gain),
+        int Function(Pointer<MixMixer> mixer, double gain)
+      >('MIX_SetMasterGain');
+  return mixSetMasterGainLookupFunction(mixer, gain) == 1;
+}
+
+///
+/// Get a mixer's master gain control.
+///
+/// This returns the last value set through MIX_SetMasterGain(), or 1.0f if no
+/// value has ever been explicitly set.
+///
+/// \param mixer the mixer to query.
+/// \returns the mixer's current master gain.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL_mixer 3.0.0.
+///
+/// \sa MIX_SetMasterGain
+/// \sa MIX_GetTrackGain
+///
+/// ```c
+/// extern SDL_DECLSPEC float SDLCALL MIX_GetMasterGain(MIX_Mixer *mixer)
+/// ```
+/// {@category mixer}
+double mixGetMasterGain(Pointer<MixMixer> mixer) {
+  final mixGetMasterGainLookupFunction = _libMixer
+      .lookupFunction<
+        Float Function(Pointer<MixMixer> mixer),
+        double Function(Pointer<MixMixer> mixer)
+      >('MIX_GetMasterGain');
+  return mixGetMasterGainLookupFunction(mixer);
+}
+
+///
+/// Set a track's gain control.
+///
+/// Each track has its own gain, to adjust its overall volume. Each sample from
+/// this track is modulated by this gain value. A gain of zero will generate
+/// silence, 1.0f will not change the mixed volume, and larger than 1.0f will
+/// increase the volume. Negative values are illegal. There is no maximum gain
+/// specified, but this can quickly get extremely loud, so please be careful
+/// with this setting.
+///
+/// A track's gain defaults to 1.0f.
+///
+/// This value can be changed at any time to adjust the future mix.
+///
+/// \param track the track to adjust.
+/// \param gain the new gain value.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL_mixer 3.0.0.
+///
+/// \sa MIX_GetTrackGain
+/// \sa MIX_SetMasterGain
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL MIX_SetTrackGain(MIX_Track *track, float gain)
+/// ```
+/// {@category mixer}
+bool mixSetTrackGain(Pointer<MixTrack> track, double gain) {
+  final mixSetTrackGainLookupFunction = _libMixer
+      .lookupFunction<
+        Uint8 Function(Pointer<MixTrack> track, Float gain),
+        int Function(Pointer<MixTrack> track, double gain)
+      >('MIX_SetTrackGain');
+  return mixSetTrackGainLookupFunction(track, gain) == 1;
+}
+
+///
+/// Get a track's gain control.
+///
+/// This returns the last value set through MIX_SetTrackGain(), or 1.0f if no
+/// value has ever been explicitly set.
+///
+/// \param track the track to query.
+/// \returns the track's current gain.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL_mixer 3.0.0.
+///
+/// \sa MIX_SetTrackGain
+/// \sa MIX_GetMasterGain
+///
+/// ```c
+/// extern SDL_DECLSPEC float SDLCALL MIX_GetTrackGain(MIX_Track *track)
+/// ```
+/// {@category mixer}
+double mixGetTrackGain(Pointer<MixTrack> track) {
+  final mixGetTrackGainLookupFunction = _libMixer
+      .lookupFunction<
+        Float Function(Pointer<MixTrack> track),
+        double Function(Pointer<MixTrack> track)
+      >('MIX_GetTrackGain');
+  return mixGetTrackGainLookupFunction(track);
+}
+
+///
+/// Set the gain control of all tracks with a specific tag.
+///
+/// Each track has its own gain, to adjust its overall volume. Each sample from
+/// this track is modulated by this gain value. A gain of zero will generate
+/// silence, 1.0f will not change the mixed volume, and larger than 1.0f will
+/// increase the volume. Negative values are illegal. There is no maximum gain
+/// specified, but this can quickly get extremely loud, so please be careful
+/// with this setting.
+///
+/// A track's gain defaults to 1.0f.
+///
+/// This will change the gain control on tracks on the specified mixer that
+/// have the specified tag.
+///
+/// From the point of view of the mixing process, all tracks that successfully
+/// change gain values will do so at the exact same moment.
+///
+/// This value can be changed at any time to adjust the future mix.
+///
+/// \param mixer the mixer on which to look for tagged tracks.
+/// \param tag the tag to use when searching for tracks.
+/// \param gain the new gain value.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL_mixer 3.0.0.
+///
+/// \sa MIX_GetTrackGain
+/// \sa MIX_SetTrackGain
+/// \sa MIX_SetMasterGain
+/// \sa MIX_TagTrack
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL MIX_SetTagGain(MIX_Mixer *mixer, const char *tag, float gain)
+/// ```
+/// {@category mixer}
+bool mixSetTagGain(Pointer<MixMixer> mixer, String? tag, double gain) {
+  final mixSetTagGainLookupFunction = _libMixer
+      .lookupFunction<
+        Uint8 Function(Pointer<MixMixer> mixer, Pointer<Utf8> tag, Float gain),
+        int Function(Pointer<MixMixer> mixer, Pointer<Utf8> tag, double gain)
+      >('MIX_SetTagGain');
+  final tagPointer = tag != null ? tag.toNativeUtf8() : nullptr;
+  final result = mixSetTagGainLookupFunction(mixer, tagPointer, gain) == 1;
+  calloc.free(tagPointer);
+  return result;
+}
+
+///
+/// Change the frequency ratio of a track.
+///
+/// The frequency ratio is used to adjust the rate at which audio data is
+/// consumed. Changing this effectively modifies the speed and pitch of the
+/// track's audio. A value greater than 1.0f will play the audio faster, and at
+/// a higher pitch. A value less than 1.0f will play the audio slower, and at a
+/// lower pitch. 1.0f is normal speed.
+///
+/// The default value is 1.0f.
+///
+/// This value can be changed at any time to adjust the future mix.
+///
+/// \param track the track on which to change the frequency ratio.
+/// \param ratio the frequency ratio. Must be between 0.01f and 100.0f.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL_mixer 3.0.0.
+///
+/// \sa MIX_GetTrackFrequencyRatio
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL MIX_SetTrackFrequencyRatio(MIX_Track *track, float ratio)
+/// ```
+/// {@category mixer}
+bool mixSetTrackFrequencyRatio(Pointer<MixTrack> track, double ratio) {
+  final mixSetTrackFrequencyRatioLookupFunction = _libMixer
+      .lookupFunction<
+        Uint8 Function(Pointer<MixTrack> track, Float ratio),
+        int Function(Pointer<MixTrack> track, double ratio)
+      >('MIX_SetTrackFrequencyRatio');
+  return mixSetTrackFrequencyRatioLookupFunction(track, ratio) == 1;
+}
+
+///
+/// Query the frequency ratio of a track.
+///
+/// The frequency ratio is used to adjust the rate at which audio data is
+/// consumed. Changing this effectively modifies the speed and pitch of the
+/// track's audio. A value greater than 1.0f will play the audio faster, and at
+/// a higher pitch. A value less than 1.0f will play the audio slower, and at a
+/// lower pitch. 1.0f is normal speed.
+///
+/// The default value is 1.0f.
+///
+/// On various errors (MIX_Init() was not called, the track is NULL), this
+/// returns 0.0f. Since this is not a valid value to set, this can be seen as
+/// an error state.
+///
+/// \param track the track on which to query the frequency ratio.
+/// \returns the current frequency ratio, or 0.0f on failure; call
+/// SDL_GetError() for more information.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL_mixer 3.0.0.
+///
+/// \sa MIX_GetTrackFrequencyRatio
+///
+/// ```c
+/// extern SDL_DECLSPEC float SDLCALL MIX_GetTrackFrequencyRatio(MIX_Track *track)
+/// ```
+/// {@category mixer}
+double mixGetTrackFrequencyRatio(Pointer<MixTrack> track) {
+  final mixGetTrackFrequencyRatioLookupFunction = _libMixer
+      .lookupFunction<
+        Float Function(Pointer<MixTrack> track),
+        double Function(Pointer<MixTrack> track)
+      >('MIX_GetTrackFrequencyRatio');
+  return mixGetTrackFrequencyRatioLookupFunction(track);
+}
+
+///
+/// Set the current output channel map of a track.
+///
+/// Channel maps are optional; most things do not need them, instead passing
+/// data in the order that SDL expects.
+///
+/// The output channel map reorders track data after transformations and before
+/// it is mixed into a mixer group. This can be useful for reversing stereo
+/// channels, for example.
+///
+/// Each item in the array represents an input channel, and its value is the
+/// channel that it should be remapped to. To reverse a stereo signal's left
+/// and right values, you'd have an array of `{ 1, 0 }`. It is legal to remap
+/// multiple channels to the same thing, so `{ 1, 1 }` would duplicate the
+/// right channel to both channels of a stereo signal. An element in the
+/// channel map set to -1 instead of a valid channel will mute that channel,
+/// setting it to a silence value.
+///
+/// You cannot change the number of channels through a channel map, just
+/// reorder/mute them.
+///
+/// Tracks default to no remapping applied. Passing a NULL channel map is
+/// legal, and turns off remapping.
+///
+/// SDL_mixer will copy the channel map; the caller does not have to save this
+/// array after this call.
+///
+/// \param track the track to change.
+/// \param chmap the new channel map, NULL to reset to default.
+/// \param count The number of channels in the map.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL_mixer 3.0.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL MIX_SetTrackOutputChannelMap(MIX_Track *track, const int *chmap, int count)
+/// ```
+/// {@category mixer}
+bool mixSetTrackOutputChannelMap(
+  Pointer<MixTrack> track,
+  Pointer<Int32> chmap,
+  int count,
+) {
+  final mixSetTrackOutputChannelMapLookupFunction = _libMixer
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<MixTrack> track,
+          Pointer<Int32> chmap,
+          Int32 count,
+        ),
+        int Function(Pointer<MixTrack> track, Pointer<Int32> chmap, int count)
+      >('MIX_SetTrackOutputChannelMap');
+  return mixSetTrackOutputChannelMapLookupFunction(track, chmap, count) == 1;
+}
+
+///
+/// Force a track to stereo output, with optionally left/right panning.
+///
+/// This will cause the output of the track to convert to stereo, and then mix
+/// it only onto the Front Left and Front Right speakers, regardless of the
+/// speaker configuration. The left and right channels are modulated by
+/// `gains`, which can be used to produce panning effects. This function may be
+/// called to adjust the gains at any time.
+///
+/// If `gains` is not NULL, this track will be switched into forced-stereo
+/// mode. If `gains` is NULL, this will disable spatialization (both the
+/// forced-stereo mode of this function and full 3D spatialization of
+/// MIX_SetTrack3DPosition()).
+///
+/// Negative gains are clamped to zero; there is no clamp for maximum, so one
+/// could set the value > 1.0f to make a channel louder.
+///
+/// The track's 3D position, reported by MIX_GetTrack3DPosition(), will be
+/// reset to (0, 0, 0).
+///
+/// \param track the track to adjust.
+/// \param gains the per-channel gains, or NULL to disable spatialization.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL_mixer 3.0.0.
+///
+/// \sa MIX_SetTrack3DPosition
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL MIX_SetTrackStereo(MIX_Track *track, const MIX_StereoGains *gains)
+/// ```
+/// {@category mixer}
+bool mixSetTrackStereo(Pointer<MixTrack> track, Pointer<MixStereoGains> gains) {
+  final mixSetTrackStereoLookupFunction = _libMixer
+      .lookupFunction<
+        Uint8 Function(Pointer<MixTrack> track, Pointer<MixStereoGains> gains),
+        int Function(Pointer<MixTrack> track, Pointer<MixStereoGains> gains)
+      >('MIX_SetTrackStereo');
+  return mixSetTrackStereoLookupFunction(track, gains) == 1;
+}
+
+///
+/// Set a track's position in 3D space.
+///
+/// (Please note that SDL_mixer is not intended to be a extremely powerful 3D
+/// API. It lacks 3D features that other APIs like OpenAL offer: there's no
+/// doppler effect, distance models, rolloff, etc. This is meant to be Good
+/// Enough for games that can use some positional sounds and can even take
+/// advantage of surround-sound configurations.)
+///
+/// If `position` is not NULL, this track will be switched into 3D positional
+/// mode. If `position` is NULL, this will disable positional mixing (both the
+/// full 3D spatialization of this function and forced-stereo mode of
+/// MIX_SetTrackStereo()).
+///
+/// In 3D positional mode, SDL_mixer will mix this track as if it were
+/// positioned in 3D space, including distance attenuation (quieter as it gets
+/// further from the listener) and spatialization (positioned on the correct
+/// speakers to suggest direction, either with stereo outputs or full surround
+/// sound).
+///
+/// For a mono speaker output, spatialization is effectively disabled but
+/// distance attenuation will still work, which is all you can really do with a
+/// single speaker.
+///
+/// The coordinate system operates like OpenGL or OpenAL: a "right-handed"
+/// coordinate system. See MIX_Point3D for the details.
+///
+/// The listener is always at coordinate (0,0,0) and can't be changed.
+///
+/// The track's input will be converted to mono (1 channel) so it can be
+/// rendered across the correct speakers.
+///
+/// \param track the track for which to set 3D position.
+/// \param position the new 3D position for the track. May be NULL.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL_mixer 3.0.0.
+///
+/// \sa MIX_GetTrack3DPosition
+/// \sa MIX_SetTrackStereo
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL MIX_SetTrack3DPosition(MIX_Track *track, const MIX_Point3D *position)
+/// ```
+/// {@category mixer}
+bool mixSetTrack3DPosition(
+  Pointer<MixTrack> track,
+  Pointer<MixPoint3D> position,
+) {
+  final mixSetTrack3DPositionLookupFunction = _libMixer
+      .lookupFunction<
+        Uint8 Function(Pointer<MixTrack> track, Pointer<MixPoint3D> position),
+        int Function(Pointer<MixTrack> track, Pointer<MixPoint3D> position)
+      >('MIX_SetTrack3DPosition');
+  return mixSetTrack3DPositionLookupFunction(track, position) == 1;
+}
+
+///
+/// Get a track's current position in 3D space.
+///
+/// If 3D positioning isn't enabled for this track, through a call to
+/// MIX_SetTrack3DPosition(), this will return (0,0,0).
+///
+/// \param track the track to query.
+/// \param position on successful return, will contain the track's position.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL_mixer 3.0.0.
+///
+/// \sa MIX_SetTrack3DPosition
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL MIX_GetTrack3DPosition(MIX_Track *track, MIX_Point3D *position)
+/// ```
+/// {@category mixer}
+bool mixGetTrack3DPosition(
+  Pointer<MixTrack> track,
+  Pointer<MixPoint3D> position,
+) {
+  final mixGetTrack3DPositionLookupFunction = _libMixer
+      .lookupFunction<
+        Uint8 Function(Pointer<MixTrack> track, Pointer<MixPoint3D> position),
+        int Function(Pointer<MixTrack> track, Pointer<MixPoint3D> position)
+      >('MIX_GetTrack3DPosition');
+  return mixGetTrack3DPositionLookupFunction(track, position) == 1;
+}
+
+///
+/// Create a mixing group.
+///
+/// Tracks are assigned to a mixing group (or if unassigned, they live in a
+/// mixer's internal default group). All tracks in a group are mixed together
+/// and the app can access this mixed data before it is mixed with all other
+/// groups to produce the final output.
+///
+/// This can be a useful feature, but is completely optional; apps can ignore
+/// mixing groups entirely and still have a full experience with SDL_mixer.
+///
+/// After creating a group, assign tracks to it with MIX_SetTrackGroup(). Use
+/// MIX_SetGroupPostMixCallback() to access the group's mixed data.
+///
+/// A mixing group can be destroyed with MIX_DestroyGroup() when no longer
+/// needed. Destroying the mixer will also destroy all its still-existing
+/// mixing groups.
+///
+/// \param mixer the mixer on which to create a mixing group.
+/// \returns a newly-created mixing group, or NULL on error; call
+/// SDL_GetError() for more information.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL_mixer 3.0.0.
+///
+/// \sa MIX_DestroyGroup
+/// \sa MIX_SetTrackGroup
+/// \sa MIX_SetGroupPostMixCallback
+///
+/// ```c
+/// extern SDL_DECLSPEC MIX_Group * SDLCALL MIX_CreateGroup(MIX_Mixer *mixer)
+/// ```
+/// {@category mixer}
+Pointer<MixGroup> mixCreateGroup(Pointer<MixMixer> mixer) {
+  final mixCreateGroupLookupFunction = _libMixer
+      .lookupFunction<
+        Pointer<MixGroup> Function(Pointer<MixMixer> mixer),
+        Pointer<MixGroup> Function(Pointer<MixMixer> mixer)
+      >('MIX_CreateGroup');
+  return mixCreateGroupLookupFunction(mixer);
+}
+
+///
+/// Destroy a mixing group.
+///
+/// Any tracks currently assigned to this group will be reassigned to the
+/// mixer's internal default group.
+///
+/// \param group the mixing group to destroy.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL_mixer 3.0.0.
+///
+/// \sa MIX_CreateGroup
+///
+/// ```c
+/// extern SDL_DECLSPEC void SDLCALL MIX_DestroyGroup(MIX_Group *group)
+/// ```
+/// {@category mixer}
+void mixDestroyGroup(Pointer<MixGroup> group) {
+  final mixDestroyGroupLookupFunction = _libMixer
+      .lookupFunction<
+        Void Function(Pointer<MixGroup> group),
+        void Function(Pointer<MixGroup> group)
+      >('MIX_DestroyGroup');
+  return mixDestroyGroupLookupFunction(group);
+}
+
+///
+/// Get the properties associated with a group.
+///
+/// Currently SDL_mixer assigns no properties of its own to a group, but this
+/// can be a convenient place to store app-specific data.
+///
+/// A SDL_PropertiesID is created the first time this function is called for a
+/// given group.
+///
+/// \param group the group to query.
+/// \returns a valid property ID on success or 0 on failure; call
+/// SDL_GetError() for more information.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL_mixer 3.0.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC SDL_PropertiesID SDLCALL MIX_GetGroupProperties(MIX_Group *group)
+/// ```
+/// {@category mixer}
+int mixGetGroupProperties(Pointer<MixGroup> group) {
+  final mixGetGroupPropertiesLookupFunction = _libMixer
+      .lookupFunction<
+        Uint32 Function(Pointer<MixGroup> group),
+        int Function(Pointer<MixGroup> group)
+      >('MIX_GetGroupProperties');
+  return mixGetGroupPropertiesLookupFunction(group);
+}
+
+///
+/// Get the MIX_Mixer that owns a MIX_Group.
+///
+/// This is the mixer pointer that was passed to MIX_CreateGroup().
+///
+/// \param group the group to query.
+/// \returns the mixer associated with the group, or NULL on error; call
+/// SDL_GetError() for more information.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL_mixer 3.0.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC MIX_Mixer * SDLCALL MIX_GetGroupMixer(MIX_Group *group)
+/// ```
+/// {@category mixer}
+Pointer<MixMixer> mixGetGroupMixer(Pointer<MixGroup> group) {
+  final mixGetGroupMixerLookupFunction = _libMixer
+      .lookupFunction<
+        Pointer<MixMixer> Function(Pointer<MixGroup> group),
+        Pointer<MixMixer> Function(Pointer<MixGroup> group)
+      >('MIX_GetGroupMixer');
+  return mixGetGroupMixerLookupFunction(group);
+}
+
+///
+/// Assign a track to a mixing group.
+///
+/// All tracks in a group are mixed together, and that output is made available
+/// to the app before it is mixed into the final output.
+///
+/// Tracks can only be in one group at a time, and the track and group must
+/// have been created on the same MIX_Mixer.
+///
+/// Setting a track to a NULL group will remove it from any app-created groups,
+/// and reassign it to the mixer's internal default group.
+///
+/// \param track the track to set mixing group assignment.
+/// \param group the new mixing group to assign to. May be NULL.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL_mixer 3.0.0.
+///
+/// \sa MIX_CreateGroup
+/// \sa MIX_SetGroupPostMixCallback
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL MIX_SetTrackGroup(MIX_Track *track, MIX_Group *group)
+/// ```
+/// {@category mixer}
+bool mixSetTrackGroup(Pointer<MixTrack> track, Pointer<MixGroup> group) {
+  final mixSetTrackGroupLookupFunction = _libMixer
+      .lookupFunction<
+        Uint8 Function(Pointer<MixTrack> track, Pointer<MixGroup> group),
+        int Function(Pointer<MixTrack> track, Pointer<MixGroup> group)
+      >('MIX_SetTrackGroup');
+  return mixSetTrackGroupLookupFunction(track, group) == 1;
+}
+
+///
+/// Set a callback that fires when a MIX_Track is stopped.
+///
+/// When a track completes playback, either because it ran out of data to mix
+/// (and all loops were completed as well), or it was explicitly stopped by the
+/// app, it will fire the callback specified here.
+///
+/// Each track has its own unique callback.
+///
+/// Passing a NULL callback here is legal; it disables this track's callback.
+///
+/// Pausing a track will not fire the callback, nor will the callback fire on a
+/// playing track that is being destroyed.
+///
+/// It is legal to adjust the track, including changing its input and
+/// restarting it. If this is done because it ran out of data in the middle of
+/// mixing, the mixer will start mixing the new track state in its current run
+/// without any gap in the audio.
+///
+/// \param track the track to assign this callback to.
+/// \param cb the function to call when the track stops. May be NULL.
+/// \param userdata an opaque pointer provided to the callback for its own
+/// personal use.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \since This function is available since SDL_mixer 3.0.0.
+///
+/// \sa MIX_TrackStoppedCallback
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL MIX_SetTrackStoppedCallback(MIX_Track *track, MIX_TrackStoppedCallback cb, void *userdata)
+/// ```
+/// {@category mixer}
+bool mixSetTrackStoppedCallback(
+  Pointer<MixTrack> track,
+  Pointer<NativeFunction<MixTrackStoppedCallback>> cb,
+  Pointer<NativeType> userdata,
+) {
+  final mixSetTrackStoppedCallbackLookupFunction = _libMixer
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<MixTrack> track,
+          Pointer<NativeFunction<MixTrackStoppedCallback>> cb,
+          Pointer<NativeType> userdata,
+        ),
+        int Function(
+          Pointer<MixTrack> track,
+          Pointer<NativeFunction<MixTrackStoppedCallback>> cb,
+          Pointer<NativeType> userdata,
+        )
+      >('MIX_SetTrackStoppedCallback');
+  return mixSetTrackStoppedCallbackLookupFunction(track, cb, userdata) == 1;
+}
+
+///
+/// Set a callback that fires when a MIX_Track has initial decoded audio.
+///
+/// As a track needs to mix more data, it pulls from its input (a MIX_Audio, an
+/// SDL_AudioStream, etc). This input might be a compressed file format, like
+/// MP3, so a little more data is uncompressed from it.
+///
+/// Once the track has PCM data to start operating on, it can fire a callback
+/// before _any_ changes to the raw PCM input have happened. This lets an app
+/// view the data before it has gone through transformations such as gain, 3D
+/// positioning, fading, etc. It can also change the data in any way it pleases
+/// during this callback, and the mixer will continue as if this data came
+/// directly from the input.
+///
+/// Each track has its own unique raw callback.
+///
+/// Passing a NULL callback here is legal; it disables this track's callback.
+///
+/// \param track the track to assign this callback to.
+/// \param cb the function to call when the track mixes. May be NULL.
+/// \param userdata an opaque pointer provided to the callback for its own
+/// personal use.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \since This function is available since SDL_mixer 3.0.0.
+///
+/// \sa MIX_TrackMixCallback
+/// \sa MIX_SetTrackCookedCallback
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL MIX_SetTrackRawCallback(MIX_Track *track, MIX_TrackMixCallback cb, void *userdata)
+/// ```
+/// {@category mixer}
+bool mixSetTrackRawCallback(
+  Pointer<MixTrack> track,
+  Pointer<NativeFunction<MixTrackMixCallback>> cb,
+  Pointer<NativeType> userdata,
+) {
+  final mixSetTrackRawCallbackLookupFunction = _libMixer
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<MixTrack> track,
+          Pointer<NativeFunction<MixTrackMixCallback>> cb,
+          Pointer<NativeType> userdata,
+        ),
+        int Function(
+          Pointer<MixTrack> track,
+          Pointer<NativeFunction<MixTrackMixCallback>> cb,
+          Pointer<NativeType> userdata,
+        )
+      >('MIX_SetTrackRawCallback');
+  return mixSetTrackRawCallbackLookupFunction(track, cb, userdata) == 1;
+}
+
+///
+/// Set a callback that fires when the mixer has transformed a track's audio.
+///
+/// As a track needs to mix more data, it pulls from its input (a MIX_Audio, an
+/// SDL_AudioStream, etc). This input might be a compressed file format, like
+/// MP3, so a little more data is uncompressed from it.
+///
+/// Once the track has PCM data to start operating on, and its raw callback has
+/// completed, it will begin to transform the audio: gain, fading, frequency
+/// ratio, 3D positioning, etc.
+///
+/// A callback can be fired after all these transformations, but before the
+/// transformed data is mixed into other tracks. This lets an app view the data
+/// at the last moment that it is still a part of this track. It can also
+/// change the data in any way it pleases during this callback, and the mixer
+/// will continue as if this data came directly from the input.
+///
+/// Each track has its own unique cooked callback.
+///
+/// Passing a NULL callback here is legal; it disables this track's callback.
+///
+/// \param track the track to assign this callback to.
+/// \param cb the function to call when the track mixes. May be NULL.
+/// \param userdata an opaque pointer provided to the callback for its own
+/// personal use.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \since This function is available since SDL_mixer 3.0.0.
+///
+/// \sa MIX_TrackMixCallback
+/// \sa MIX_SetTrackRawCallback
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL MIX_SetTrackCookedCallback(MIX_Track *track, MIX_TrackMixCallback cb, void *userdata)
+/// ```
+/// {@category mixer}
+bool mixSetTrackCookedCallback(
+  Pointer<MixTrack> track,
+  Pointer<NativeFunction<MixTrackMixCallback>> cb,
+  Pointer<NativeType> userdata,
+) {
+  final mixSetTrackCookedCallbackLookupFunction = _libMixer
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<MixTrack> track,
+          Pointer<NativeFunction<MixTrackMixCallback>> cb,
+          Pointer<NativeType> userdata,
+        ),
+        int Function(
+          Pointer<MixTrack> track,
+          Pointer<NativeFunction<MixTrackMixCallback>> cb,
+          Pointer<NativeType> userdata,
+        )
+      >('MIX_SetTrackCookedCallback');
+  return mixSetTrackCookedCallbackLookupFunction(track, cb, userdata) == 1;
+}
+
+///
+/// Set a callback that fires when a mixer group has completed mixing.
+///
+/// After all playing tracks in a mixer group have pulled in more data from
+/// their inputs, transformed it, and mixed together into a single buffer, a
+/// callback can be fired. This lets an app view the data at the last moment
+/// that it is still a part of this group. It can also change the data in any
+/// way it pleases during this callback, and the mixer will continue as if this
+/// data came directly from the group's mix buffer.
+///
+/// Each group has its own unique callback. Tracks that aren't in an explicit
+/// MIX_Group are mixed in an internal grouping that is not available to the
+/// app.
+///
+/// Passing a NULL callback here is legal; it disables this group's callback.
+///
+/// \param group the mixing group to assign this callback to.
+/// \param cb the function to call when the group mixes. May be NULL.
+/// \param userdata an opaque pointer provided to the callback for its own
+/// personal use.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \since This function is available since SDL_mixer 3.0.0.
+///
+/// \sa MIX_GroupMixCallback
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL MIX_SetGroupPostMixCallback(MIX_Group *group, MIX_GroupMixCallback cb, void *userdata)
+/// ```
+/// {@category mixer}
+bool mixSetGroupPostMixCallback(
+  Pointer<MixGroup> group,
+  Pointer<NativeFunction<MixGroupMixCallback>> cb,
+  Pointer<NativeType> userdata,
+) {
+  final mixSetGroupPostMixCallbackLookupFunction = _libMixer
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<MixGroup> group,
+          Pointer<NativeFunction<MixGroupMixCallback>> cb,
+          Pointer<NativeType> userdata,
+        ),
+        int Function(
+          Pointer<MixGroup> group,
+          Pointer<NativeFunction<MixGroupMixCallback>> cb,
+          Pointer<NativeType> userdata,
+        )
+      >('MIX_SetGroupPostMixCallback');
+  return mixSetGroupPostMixCallbackLookupFunction(group, cb, userdata) == 1;
+}
+
+///
+/// Set a callback that fires when all mixing has completed.
+///
+/// After all mixer groups have processed, their buffers are mixed together
+/// into a single buffer for the final output, at which point a callback can be
+/// fired. This lets an app view the data at the last moment before mixing
+/// completes. It can also change the data in any way it pleases during this
+/// callback, and the mixer will continue as if this data is the final output.
+///
+/// Each mixer has its own unique callback.
+///
+/// Passing a NULL callback here is legal; it disables this mixer's callback.
+///
+/// \param mixer the mixer to assign this callback to.
+/// \param cb the function to call when the mixer mixes. May be NULL.
+/// \param userdata an opaque pointer provided to the callback for its own
+/// personal use.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \since This function is available since SDL_mixer 3.0.0.
+///
+/// \sa MIX_PostMixCallback
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL MIX_SetPostMixCallback(MIX_Mixer *mixer, MIX_PostMixCallback cb, void *userdata)
+/// ```
+/// {@category mixer}
+bool mixSetPostMixCallback(
+  Pointer<MixMixer> mixer,
+  Pointer<NativeFunction<MixPostMixCallback>> cb,
+  Pointer<NativeType> userdata,
+) {
+  final mixSetPostMixCallbackLookupFunction = _libMixer
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<MixMixer> mixer,
+          Pointer<NativeFunction<MixPostMixCallback>> cb,
+          Pointer<NativeType> userdata,
+        ),
+        int Function(
+          Pointer<MixMixer> mixer,
+          Pointer<NativeFunction<MixPostMixCallback>> cb,
+          Pointer<NativeType> userdata,
+        )
+      >('MIX_SetPostMixCallback');
+  return mixSetPostMixCallbackLookupFunction(mixer, cb, userdata) == 1;
+}
+
+///
+/// Generate mixer output when not driving an audio device.
+///
+/// SDL_mixer allows the creation of MIX_Mixer objects that are not connected
+/// to an audio device, by calling MIX_CreateMixer() instead of
+/// MIX_CreateMixerDevice(). Such mixers will not generate output until
+/// explicitly requested through this function.
+///
+/// The caller may request as much audio as desired, so long as `buflen` is a
+/// multiple of the sample frame size specified when creating the mixer (for
+/// example, if requesting stereo Sint16 audio, buflen must be a multiple of 4:
+/// 2 bytes-per-channel times 2 channels).
+///
+/// The mixer will mix as quickly as possible; since it works in sample frames
+/// instead of time, it can potentially generate enormous amounts of audio in a
+/// small amount of time.
+///
+/// On success, this always fills `buffer` with `buflen` bytes of audio; if all
+/// playing tracks finish mixing, it will fill the remaining buffer with
+/// silence.
+///
+/// Each call to this function will pick up where it left off, playing tracks
+/// will continue to mix from the point the previous call completed, etc. The
+/// mixer state can be changed between each call in any way desired: tracks can
+/// be added, played, stopped, changed, removed, etc. Effectively this function
+/// does the same thing SDL_mixer does internally when the audio device needs
+/// more audio to play.
+///
+/// This function can not be used with mixers from MIX_CreateMixerDevice();
+/// those generate audio as needed internally.
+///
+/// \param mixer the mixer for which to generate more audio.
+/// \param buffer a pointer to a buffer to store audio in.
+/// \param buflen the number of bytes to store in buffer.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL_mixer 3.0.0.
+///
+/// \sa MIX_CreateMixer
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL MIX_Generate(MIX_Mixer *mixer, void *buffer, int buflen)
+/// ```
+/// {@category mixer}
+bool mixGenerate(
+  Pointer<MixMixer> mixer,
+  Pointer<NativeType> buffer,
+  int buflen,
+) {
+  final mixGenerateLookupFunction = _libMixer
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<MixMixer> mixer,
+          Pointer<NativeType> buffer,
+          Int32 buflen,
+        ),
+        int Function(
+          Pointer<MixMixer> mixer,
+          Pointer<NativeType> buffer,
+          int buflen,
+        )
+      >('MIX_Generate');
+  return mixGenerateLookupFunction(mixer, buffer, buflen) == 1;
+}
+
+///
+/// Create a MIX_AudioDecoder from a path on the filesystem.
+///
+/// Most apps won't need this, as SDL_mixer's usual interfaces will decode
+/// audio as needed. However, if one wants to decode an audio file into a
+/// memory buffer without playing it, this interface offers that.
+///
+/// This function allows properties to be specified. This is intended to supply
+/// file-specific settings, such as where to find SoundFonts for a MIDI file,
+/// etc. In most cases, the caller should pass a zero to specify no extra
+/// properties.
+///
+/// When done with the audio decoder, it can be destroyed with
+/// MIX_DestroyAudioDecoder().
+///
+/// This function requires SDL_mixer to have been initialized with a successful
+/// call to MIX_Init(), but does not need an actual MIX_Mixer to have been
+/// created.
+///
+/// \param path the path on the filesystem from which to load data.
+/// \param props decoder-specific properties. May be zero.
+/// \returns an audio decoder, ready to decode.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL_mixer 3.0.0.
+///
+/// \sa MIX_CreateAudioDecoder_IO
+/// \sa MIX_DecodeAudio
+/// \sa MIX_DestroyAudioDecoder
+///
+/// ```c
+/// extern SDL_DECLSPEC MIX_AudioDecoder * SDLCALL MIX_CreateAudioDecoder(const char *path, SDL_PropertiesID props)
+/// ```
+/// {@category mixer}
+Pointer<MixAudioDecoder> mixCreateAudioDecoder(String? path, int props) {
+  final mixCreateAudioDecoderLookupFunction = _libMixer
+      .lookupFunction<
+        Pointer<MixAudioDecoder> Function(Pointer<Utf8> path, Uint32 props),
+        Pointer<MixAudioDecoder> Function(Pointer<Utf8> path, int props)
+      >('MIX_CreateAudioDecoder');
+  final pathPointer = path != null ? path.toNativeUtf8() : nullptr;
+  final result = mixCreateAudioDecoderLookupFunction(pathPointer, props);
+  calloc.free(pathPointer);
+  return result;
+}
+
+///
+/// Create a MIX_AudioDecoder from an SDL_IOStream.
+///
+/// Most apps won't need this, as SDL_mixer's usual interfaces will decode
+/// audio as needed. However, if one wants to decode an audio file into a
+/// memory buffer without playing it, this interface offers that.
+///
+/// This function allows properties to be specified. This is intended to supply
+/// file-specific settings, such as where to find SoundFonts for a MIDI file,
+/// etc. In most cases, the caller should pass a zero to specify no extra
+/// properties.
+///
+/// If `closeio` is true, then `io` will be closed when this decoder is done
+/// with it. If this function fails and `closeio` is true, then `io` will be
+/// closed before this function returns.
+///
+/// When done with the audio decoder, it can be destroyed with
+/// MIX_DestroyAudioDecoder().
+///
+/// This function requires SDL_mixer to have been initialized with a successful
+/// call to MIX_Init(), but does not need an actual MIX_Mixer to have been
+/// created.
+///
+/// \param io the i/o stream from which to load data.
+/// \param closeio if true, close the i/o stream when done with it.
+/// \param props decoder-specific properties. May be zero.
+/// \returns an audio decoder, ready to decode.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL_mixer 3.0.0.
+///
+/// \sa MIX_CreateAudioDecoder_IO
+/// \sa MIX_DecodeAudio
+/// \sa MIX_DestroyAudioDecoder
+///
+/// ```c
+/// extern SDL_DECLSPEC MIX_AudioDecoder * SDLCALL MIX_CreateAudioDecoder_IO(SDL_IOStream *io, bool closeio, SDL_PropertiesID props)
+/// ```
+/// {@category mixer}
+Pointer<MixAudioDecoder> mixCreateAudioDecoderIo(
+  Pointer<SdlIoStream> io,
+  bool closeio,
+  int props,
+) {
+  final mixCreateAudioDecoderIoLookupFunction = _libMixer
+      .lookupFunction<
+        Pointer<MixAudioDecoder> Function(
+          Pointer<SdlIoStream> io,
+          Uint8 closeio,
+          Uint32 props,
+        ),
+        Pointer<MixAudioDecoder> Function(
+          Pointer<SdlIoStream> io,
+          int closeio,
+          int props,
+        )
+      >('MIX_CreateAudioDecoder_IO');
+  return mixCreateAudioDecoderIoLookupFunction(io, closeio ? 1 : 0, props);
+}
+
+///
+/// Destroy the specified audio decoder.
+///
+/// Destroying a NULL MIX_AudioDecoder is a legal no-op.
+///
+/// \param audiodecoder the audio to destroy.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL_mixer 3.0.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC void SDLCALL MIX_DestroyAudioDecoder(MIX_AudioDecoder *audiodecoder)
+/// ```
+/// {@category mixer}
+void mixDestroyAudioDecoder(Pointer<MixAudioDecoder> audiodecoder) {
+  final mixDestroyAudioDecoderLookupFunction = _libMixer
+      .lookupFunction<
+        Void Function(Pointer<MixAudioDecoder> audiodecoder),
+        void Function(Pointer<MixAudioDecoder> audiodecoder)
+      >('MIX_DestroyAudioDecoder');
+  return mixDestroyAudioDecoderLookupFunction(audiodecoder);
+}
+
+///
+/// Get the properties associated with a MIX_AudioDecoder.
+///
+/// SDL_mixer offers some properties of its own, but this can also be a
+/// convenient place to store app-specific data.
+///
+/// A SDL_PropertiesID is created the first time this function is called for a
+/// given MIX_AudioDecoder, if necessary.
+///
+/// The file-specific metadata exposed through this function is identical to
+/// those available through MIX_GetAudioProperties(). Please refer to that
+/// function's documentation for details.
+///
+/// \param audiodecoder the audio decoder to query.
+/// \returns a valid property ID on success or 0 on failure; call
+/// SDL_GetError() for more information.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL_mixer 3.0.0.
+///
+/// \sa MIX_GetAudioProperties
+///
+/// ```c
+/// extern SDL_DECLSPEC SDL_PropertiesID SDLCALL MIX_GetAudioDecoderProperties(MIX_AudioDecoder *audiodecoder)
+/// ```
+/// {@category mixer}
+int mixGetAudioDecoderProperties(Pointer<MixAudioDecoder> audiodecoder) {
+  final mixGetAudioDecoderPropertiesLookupFunction = _libMixer
+      .lookupFunction<
+        Uint32 Function(Pointer<MixAudioDecoder> audiodecoder),
+        int Function(Pointer<MixAudioDecoder> audiodecoder)
+      >('MIX_GetAudioDecoderProperties');
+  return mixGetAudioDecoderPropertiesLookupFunction(audiodecoder);
+}
+
+///
+/// Query the initial audio format of a MIX_AudioDecoder.
+///
+/// Note that some audio files can change format in the middle; some explicitly
+/// support this, but a more common example is two MP3 files concatenated
+/// together. In many cases, SDL_mixer will correctly handle these sort of
+/// files, but this function will only report the initial format a file uses.
+///
+/// \param audiodecoder the audio decoder to query.
+/// \param spec on success, audio format details will be stored here.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL_mixer 3.0.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL MIX_GetAudioDecoderFormat(MIX_AudioDecoder *audiodecoder, SDL_AudioSpec *spec)
+/// ```
+/// {@category mixer}
+bool mixGetAudioDecoderFormat(
+  Pointer<MixAudioDecoder> audiodecoder,
+  Pointer<SdlAudioSpec> spec,
+) {
+  final mixGetAudioDecoderFormatLookupFunction = _libMixer
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<MixAudioDecoder> audiodecoder,
+          Pointer<SdlAudioSpec> spec,
+        ),
+        int Function(
+          Pointer<MixAudioDecoder> audiodecoder,
+          Pointer<SdlAudioSpec> spec,
+        )
+      >('MIX_GetAudioDecoderFormat');
+  return mixGetAudioDecoderFormatLookupFunction(audiodecoder, spec) == 1;
+}
+
+///
+/// Decode more audio from a MIX_AudioDecoder.
+///
+/// Data is decoded on demand in whatever format is requested. The format is
+/// permitted to change between calls.
+///
+/// This function will return the number of bytes decoded, which may be less
+/// than requested if there was an error or end-of-file. A return value of zero
+/// means the entire file was decoded, -1 means an unrecoverable error
+/// happened.
+///
+/// \param audiodecoder the decoder from which to retrieve more data.
+/// \param buffer the memory buffer to store decoded audio.
+/// \param buflen the maximum number of bytes to store to `buffer`.
+/// \param spec the format that audio data will be stored to `buffer`.
+/// \returns number of bytes decoded, or -1 on error; call SDL_GetError() for
+/// more information.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL_mixer 3.0.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC int SDLCALL MIX_DecodeAudio(MIX_AudioDecoder *audiodecoder, void *buffer, int buflen, const SDL_AudioSpec *spec)
+/// ```
+/// {@category mixer}
+int mixDecodeAudio(
+  Pointer<MixAudioDecoder> audiodecoder,
+  Pointer<NativeType> buffer,
+  int buflen,
+  Pointer<SdlAudioSpec> spec,
+) {
+  final mixDecodeAudioLookupFunction = _libMixer
+      .lookupFunction<
+        Int32 Function(
+          Pointer<MixAudioDecoder> audiodecoder,
+          Pointer<NativeType> buffer,
+          Int32 buflen,
+          Pointer<SdlAudioSpec> spec,
+        ),
+        int Function(
+          Pointer<MixAudioDecoder> audiodecoder,
+          Pointer<NativeType> buffer,
+          int buflen,
+          Pointer<SdlAudioSpec> spec,
+        )
+      >('MIX_DecodeAudio');
+  return mixDecodeAudioLookupFunction(audiodecoder, buffer, buflen, spec);
 }

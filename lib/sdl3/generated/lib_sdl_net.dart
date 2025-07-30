@@ -9,13 +9,13 @@ part of '../sdl_net.dart';
 /// \since This function is available since SDL_net 3.0.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL NET_GetVersion(void)
+/// extern SDL_DECLSPEC int SDLCALL NET_Version(void)
 /// ```
 /// {@category net}
-int netGetVersion() {
-  final netGetVersionLookupFunction = _libNet
-      .lookupFunction<Int32 Function(), int Function()>('NET_GetVersion');
-  return netGetVersionLookupFunction();
+int netVersion() {
+  final netVersionLookupFunction = _libNet
+      .lookupFunction<Int32 Function(), int Function()>('NET_Version');
+  return netVersionLookupFunction();
 }
 
 ///

@@ -4,59 +4,44 @@ part of '../sdl_mixer.dart';
 
 //const SDL_MIXER_H_ = ;
 const SDL_MIXER_MAJOR_VERSION = 3;
-const SDL_MIXER_MINOR_VERSION = 0;
+const SDL_MIXER_MINOR_VERSION = 1;
 const SDL_MIXER_MICRO_VERSION = 0;
 //const SDL_MIXER_VERSION = SDL_VERSIONNUM(SDL_MIXER_MAJOR_VERSION, SDL_MIXER_MINOR_VERSION, SDL_MIXER_MICRO_VERSION);
 //const SDL_MIXER_VERSION_ATLEAST = (X, Y, Z) ((SDL_MIXER_MAJOR_VERSION >= X) && (SDL_MIXER_MAJOR_VERSION > X || SDL_MIXER_MINOR_VERSION >= Y) && (SDL_MIXER_MAJOR_VERSION > X || SDL_MIXER_MINOR_VERSION > Y || SDL_MIXER_MICRO_VERSION >= Z));
-const MIX_INIT_FLAC = 0x00000001;
-const MIX_INIT_MOD = 0x00000002;
-const MIX_INIT_MP3 = 0x00000008;
-const MIX_INIT_OGG = 0x00000010;
-const MIX_INIT_MID = 0x00000020;
-const MIX_INIT_OPUS = 0x00000040;
-const MIX_INIT_WAVPACK = 0x00000080;
-const MIX_CHANNELS = 8;
-const MIX_DEFAULT_FREQUENCY = 44100;
-//const MIX_DEFAULT_FORMAT = SDL_AUDIO_S16;
-const MIX_DEFAULT_CHANNELS = 2;
-const MIX_MAX_VOLUME = 128;
-const MIX_NO_FADING = 0;
-const MIX_FADING_OUT = 1;
-const MIX_FADING_IN = 2;
-const MUS_NONE = 0;
-const MUS_WAV = 1;
-const MUS_MOD = 2;
-const MUS_MID = 3;
-const MUS_OGG = 4;
-const MUS_MP3 = 5;
-const MUS_FLAC = 6;
-const MUS_OPUS = 7;
-const MUS_WAVPACK = 8;
-const MUS_GME = 9;
-const MIX_CHANNEL_POST = -2;
-const MIX_EFFECTSMAXSPEED = 'MIX_EFFECTSMAXSPEED';
-
-/// {@category mixer}
-class MixkInit {
-  static const flac = MIX_INIT_FLAC;
-  static const mod = MIX_INIT_MOD;
-  static const mp3 = MIX_INIT_MP3;
-  static const ogg = MIX_INIT_OGG;
-  static const mid = MIX_INIT_MID;
-  static const opus = MIX_INIT_OPUS;
-  static const wavpack = MIX_INIT_WAVPACK;
-}
-
-/// {@category mixer}
-class Mus {
-  static const none = MUS_NONE;
-  static const wav = MUS_WAV;
-  static const mod = MUS_MOD;
-  static const mid = MUS_MID;
-  static const ogg = MUS_OGG;
-  static const mp3 = MUS_MP3;
-  static const flac = MUS_FLAC;
-  static const opus = MUS_OPUS;
-  static const wavpack = MUS_WAVPACK;
-  static const gme = MUS_GME;
-}
+const MIX_PROP_AUDIO_LOAD_IOSTREAM_POINTER = 'SDL_mixer.audio.load.iostream';
+const MIX_PROP_AUDIO_LOAD_CLOSEIO_BOOLEAN = 'SDL_mixer.audio.load.closeio';
+const MIX_PROP_AUDIO_LOAD_PREDECODE_BOOLEAN = 'SDL_mixer.audio.load.predecode';
+const MIX_PROP_AUDIO_LOAD_PREFERRED_MIXER_POINTER =
+    'SDL_mixer.audio.load.preferred_mixer';
+const MIX_PROP_AUDIO_LOAD_SKIP_METADATA_TAGS_BOOLEAN =
+    'SDL_mixer.audio.load.skip_metadata_tags';
+const MIX_PROP_AUDIO_DECODER_STRING = 'SDL_mixer.audio.decoder';
+const MIX_PROP_METADATA_TITLE_STRING = 'SDL_mixer.metadata.title';
+const MIX_PROP_METADATA_ARTIST_STRING = 'SDL_mixer.metadata.artist';
+const MIX_PROP_METADATA_ALBUM_STRING = 'SDL_mixer.metadata.album';
+const MIX_PROP_METADATA_COPYRIGHT_STRING = 'SDL_mixer.metadata.copyright';
+const MIX_PROP_METADATA_TRACK_NUMBER = 'SDL_mixer.metadata.track';
+const MIX_PROP_METADATA_TOTAL_TRACKS_NUMBER = 'SDL_mixer.metadata.total_tracks';
+const MIX_PROP_METADATA_YEAR_NUMBER = 'SDL_mixer.metadata.year';
+const MIX_PROP_METADATA_DURATION_FRAMES_NUMBER =
+    'SDL_mixer.metadata.duration_frames';
+const MIX_PROP_METADATA_DURATION_INFINITE_BOOLEAN =
+    'SDL_mixer.metadata.duration_infinite';
+const MIX_DURATION_UNKNOWN = -1;
+const MIX_DURATION_INFINITE = -2;
+const MIX_PROP_PLAY_LOOPS_NUMBER = 'SDL_mixer.play.loops';
+const MIX_PROP_PLAY_MAX_FRAME_NUMBER = 'SDL_mixer.play.max_frame';
+const MIX_PROP_PLAY_MAX_MILLISECONDS_NUMBER = 'SDL_mixer.play.max_milliseconds';
+const MIX_PROP_PLAY_START_FRAME_NUMBER = 'SDL_mixer.play.start_frame';
+const MIX_PROP_PLAY_START_MILLISECOND_NUMBER =
+    'SDL_mixer.play.start_millisecond';
+const MIX_PROP_PLAY_LOOP_START_FRAME_NUMBER = 'SDL_mixer.play.loop_start_frame';
+const MIX_PROP_PLAY_LOOP_START_MILLISECOND_NUMBER =
+    'SDL_mixer.play.loop_start_millisecond';
+const MIX_PROP_PLAY_FADE_IN_FRAMES_NUMBER = 'SDL_mixer.play.fade_in_frames';
+const MIX_PROP_PLAY_FADE_IN_MILLISECONDS_NUMBER =
+    'SDL_mixer.play.fade_in_milliseconds';
+const MIX_PROP_PLAY_APPEND_SILENCE_FRAMES_NUMBER =
+    'SDL_mixer.play.append_silence_frames';
+const MIX_PROP_PLAY_APPEND_SILENCE_MILLISECONDS_NUMBER =
+    'SDL_mixer.play.append_silence_milliseconds';
