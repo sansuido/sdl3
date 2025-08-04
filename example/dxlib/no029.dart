@@ -162,8 +162,8 @@ class Map {
   double cellSize;
   List<List<int>> _cellData = [];
 
-  int get cellWidth => _cellData[0].length;
-  int get cellHeight => _cellData.length;
+  int get cellDataWidth => _cellData[0].length;
+  int get cellDataHeight => _cellData.length;
 
   void loadCellData(List<List<int>> cellData) {
     _cellData = [];
@@ -173,8 +173,8 @@ class Map {
   }
 
   void debugDraw(Pointer<SdlRenderer> renderer) {
-    for (var cy = 0; cy < cellHeight; cy++) {
-      for (var cx = 0; cx < cellWidth; cx++) {
+    for (var cy = 0; cy < cellDataHeight; cy++) {
+      for (var cx = 0; cx < cellDataWidth; cx++) {
         final cellId = getCellId(cx, cy);
         final rect = getRectFromCellCootinates(cellId, cx, cy);
         if (rect != null) {
@@ -267,10 +267,10 @@ class Map {
   }
 
   int getCellId(int cx, int cy) {
-    if (cx >= cellWidth || cx < 0) {
+    if (cx >= cellDataWidth || cx < 0) {
       return 0;
     }
-    if (cy >= cellHeight || cy < 0) {
+    if (cy >= cellDataHeight || cy < 0) {
       return 0;
     }
     return _cellData[cy][cx];

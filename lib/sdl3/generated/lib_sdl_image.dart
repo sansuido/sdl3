@@ -2639,6 +2639,157 @@ bool imgSaveJpgIo(
 }
 
 ///
+/// Save an SDL_Surface into WEBP image data, via an SDL_IOStream.
+///
+/// If you just want to save to a filename, you can use IMG_SaveWEBP() instead.
+///
+/// If `closeio` is true, `dst` will be closed before returning, whether this
+/// function succeeds or not.
+///
+/// \param surface the SDL surface to save.
+/// \param dst the SDL_IOStream to save the image data to.
+/// \param closeio true to close/free the SDL_IOStream before returning, false
+/// to leave it open.
+/// \param quality between 0 and 100. For lossy, 0 gives the smallest size and
+/// 100 the largest. For lossless, this parameter is the amount
+/// of effort put into the compression: 0 is the fastest but
+/// gives larger files compared to the slowest, but best, 100.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \since This function is available since SDL_image 3.2.18.
+///
+/// \sa IMG_SaveWEBP
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL IMG_SaveWEBP_IO(SDL_Surface *surface, SDL_IOStream *dst, bool closeio, float quality)
+/// ```
+/// {@category image}
+bool imgSaveWebpIo(
+  Pointer<SdlSurface> surface,
+  Pointer<SdlIoStream> dst,
+  bool closeio,
+  double quality,
+) {
+  final imgSaveWebpIoLookupFunction = _libImage
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<SdlSurface> surface,
+          Pointer<SdlIoStream> dst,
+          Uint8 closeio,
+          Float quality,
+        ),
+        int Function(
+          Pointer<SdlSurface> surface,
+          Pointer<SdlIoStream> dst,
+          int closeio,
+          double quality,
+        )
+      >('IMG_SaveWEBP_IO');
+  return imgSaveWebpIoLookupFunction(surface, dst, closeio ? 1 : 0, quality) ==
+      1;
+}
+
+///
+/// Save an SDL_Surface into a WEBP image file.
+///
+/// If the file already exists, it will be overwritten.
+///
+/// \param surface the SDL surface to save.
+/// \param file path on the filesystem to write the new file to.
+/// \param quality between 0 and 100. For lossy, 0 gives the smallest size and
+/// 100 the largest. For lossless, this parameter is the amount
+/// of effort put into the compression: 0 is the fastest but
+/// gives larger files compared to the slowest, but best, 100.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \since This function is available since SDL_image 3.2.18.
+///
+/// \sa IMG_SaveWEBP_IO
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL IMG_SaveWEBP(SDL_Surface *surface, const char *file, float quality)
+/// ```
+/// {@category image}
+bool imgSaveWebp(Pointer<SdlSurface> surface, String? file, double quality) {
+  final imgSaveWebpLookupFunction = _libImage
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<SdlSurface> surface,
+          Pointer<Utf8> file,
+          Float quality,
+        ),
+        int Function(
+          Pointer<SdlSurface> surface,
+          Pointer<Utf8> file,
+          double quality,
+        )
+      >('IMG_SaveWEBP');
+  final filePointer = file != null ? file.toNativeUtf8() : nullptr;
+  final result = imgSaveWebpLookupFunction(surface, filePointer, quality) == 1;
+  calloc.free(filePointer);
+  return result;
+}
+
+///
+/// Save an SDL_Surface into TGA image data, via an SDL_IOStream.
+///
+/// If you just want to save to a filename, you can use IMG_SaveTGA() instead.
+///
+/// \param surface the SDL surface to save.
+/// \param dst the SDL_IOStream to save the image data to.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \since This function is available since SDL_image 3.2.18.
+///
+/// \sa IMG_SaveTGA
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL IMG_SaveTGA_IO(SDL_Surface *surface, SDL_IOStream *dst)
+/// ```
+/// {@category image}
+bool imgSaveTgaIo(Pointer<SdlSurface> surface, Pointer<SdlIoStream> dst) {
+  final imgSaveTgaIoLookupFunction = _libImage
+      .lookupFunction<
+        Uint8 Function(Pointer<SdlSurface> surface, Pointer<SdlIoStream> dst),
+        int Function(Pointer<SdlSurface> surface, Pointer<SdlIoStream> dst)
+      >('IMG_SaveTGA_IO');
+  return imgSaveTgaIoLookupFunction(surface, dst) == 1;
+}
+
+///
+/// Save an SDL_Surface into a TGA image file.
+///
+/// If the file already exists, it will be overwritten.
+///
+/// \param surface the SDL surface to save.
+/// \param file path on the filesystem to write new file to.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \since This function is available since SDL_image 3.2.18.
+///
+/// \sa IMG_SaveTGA_IO
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL IMG_SaveTGA(SDL_Surface *surface, const char *file)
+/// ```
+/// {@category image}
+bool imgSaveTga(Pointer<SdlSurface> surface, String? file) {
+  final imgSaveTgaLookupFunction = _libImage
+      .lookupFunction<
+        Uint8 Function(Pointer<SdlSurface> surface, Pointer<Utf8> file),
+        int Function(Pointer<SdlSurface> surface, Pointer<Utf8> file)
+      >('IMG_SaveTGA');
+  final filePointer = file != null ? file.toNativeUtf8() : nullptr;
+  final result = imgSaveTgaLookupFunction(surface, filePointer) == 1;
+  calloc.free(filePointer);
+  return result;
+}
+
+///
 /// Load an animation from a file.
 ///
 /// When done with the returned animation, the app should dispose of it with a
@@ -2848,4 +2999,215 @@ Pointer<ImgAnimation> imgLoadWebpAnimationIo(Pointer<SdlIoStream> src) {
         Pointer<ImgAnimation> Function(Pointer<SdlIoStream> src)
       >('IMG_LoadWEBPAnimation_IO');
   return imgLoadWebpAnimationIoLookupFunction(src);
+}
+
+///
+/// Create an animation stream and save it to a file.
+///
+/// The file type is determined from the file extension, e.g. "file.webp" will
+/// be encoded using WEBP.
+///
+/// \param file the file where the animation will be saved.
+/// \returns a new IMG_AnimationStream, or NULL on failure; call SDL_GetError()
+/// for more information.
+///
+/// \since This function is available since SDL_image 3.4.0.
+///
+/// \sa IMG_CreateAnimationStream_IO
+/// \sa IMG_CreateAnimationStreamWithProperties
+/// \sa IMG_AddAnimationFrame
+/// \sa IMG_CloseAnimationStream
+///
+/// ```c
+/// extern SDL_DECLSPEC IMG_AnimationStream * SDLCALL IMG_CreateAnimationStream(const char *file)
+/// ```
+/// {@category image}
+Pointer<ImgAnimationStream> imgCreateAnimationStream(String? file) {
+  final imgCreateAnimationStreamLookupFunction = _libImage
+      .lookupFunction<
+        Pointer<ImgAnimationStream> Function(Pointer<Utf8> file),
+        Pointer<ImgAnimationStream> Function(Pointer<Utf8> file)
+      >('IMG_CreateAnimationStream');
+  final filePointer = file != null ? file.toNativeUtf8() : nullptr;
+  final result = imgCreateAnimationStreamLookupFunction(filePointer);
+  calloc.free(filePointer);
+  return result;
+}
+
+///
+/// Create an animation stream and save it to an IOStream.
+///
+/// If `closeio` is true, `dst` will be closed before returning if this
+/// function fails, or when the animation stream is closed if this function
+/// succeeds.
+///
+/// \param dst an SDL_IOStream that will be used to save the stream.
+/// \param closeio true to close the SDL_IOStream when done, false to leave it
+/// open.
+/// \param type a filename extension that represent this data ("WEBP", etc).
+/// \returns a new IMG_AnimationStream, or NULL on failure; call SDL_GetError()
+/// for more information.
+///
+/// \since This function is available since SDL_image 3.4.0.
+///
+/// \sa IMG_CreateAnimationStream
+/// \sa IMG_CreateAnimationStreamWithProperties
+/// \sa IMG_AddAnimationFrame
+/// \sa IMG_CloseAnimationStream
+///
+/// ```c
+/// extern SDL_DECLSPEC IMG_AnimationStream * SDLCALL IMG_CreateAnimationStream_IO(SDL_IOStream *dst, bool closeio, const char *type)
+/// ```
+/// {@category image}
+Pointer<ImgAnimationStream> imgCreateAnimationStreamIo(
+  Pointer<SdlIoStream> dst,
+  bool closeio,
+  String? type,
+) {
+  final imgCreateAnimationStreamIoLookupFunction = _libImage
+      .lookupFunction<
+        Pointer<ImgAnimationStream> Function(
+          Pointer<SdlIoStream> dst,
+          Uint8 closeio,
+          Pointer<Utf8> type,
+        ),
+        Pointer<ImgAnimationStream> Function(
+          Pointer<SdlIoStream> dst,
+          int closeio,
+          Pointer<Utf8> type,
+        )
+      >('IMG_CreateAnimationStream_IO');
+  final typePointer = type != null ? type.toNativeUtf8() : nullptr;
+  final result = imgCreateAnimationStreamIoLookupFunction(
+    dst,
+    closeio ? 1 : 0,
+    typePointer,
+  );
+  calloc.free(typePointer);
+  return result;
+}
+
+///
+/// Create an animation stream with the specified properties.
+///
+/// These are the supported properties:
+///
+/// - `IMG_PROP_ANIMATION_STREAM_CREATE_FILENAME_STRING`: the file to save, if
+/// an SDL_IOStream isn't being used. This is required if
+/// `IMG_PROP_ANIMATION_STREAM_CREATE_IOSTREAM_POINTER` isn't set.
+/// - `IMG_PROP_ANIMATION_STREAM_CREATE_IOSTREAM_POINTER`: an SDL_IOStream that
+/// will be used to save the stream. This should not be closed until the
+/// animation stream is closed. This is required if
+/// `IMG_PROP_ANIMATION_STREAM_CREATE_FILENAME_STRING` isn't set.
+/// - `IMG_PROP_ANIMATION_STREAM_CREATE_IOSTREAM_AUTOCLOSE_BOOLEAN`: true if
+/// closing the animation stream should also close the associated
+/// SDL_IOStream.
+/// - `IMG_PROP_ANIMATION_STREAM_CREATE_TYPE_STRING`: the output file type,
+/// e.g. "webp", defaults to the file extension if
+/// `IMG_PROP_ANIMATION_STREAM_CREATE_FILENAME_STRING` is set.
+/// - `IMG_PROP_ANIMATION_STREAM_CREATE_QUALITY_NUMBER`: the compression
+/// quality, in the range of 0 to 100. The higher the number, the higher the
+/// quality and file size. This defaults to a balanced value for compression
+/// and quality.
+/// - `IMG_PROP_ANIMATION_STREAM_CREATE_TIMEBASE_NUMERATOR_NUMBER`: the
+/// numerator of the fraction used to multiply the pts to convert it to
+/// seconds. This defaults to 1.
+/// - `IMG_PROP_ANIMATION_STREAM_CREATE_TIMEBASE_DENOMINATOR_NUMBER`: the
+/// denominator of the fraction used to multiply the pts to convert it to
+/// seconds. This defaults to 1000.
+///
+/// \param props the properties of the animation stream.
+/// \returns a new IMG_AnimationStream, or NULL on failure; call SDL_GetError()
+/// for more information.
+///
+/// \since This function is available since SDL_image 3.4.0.
+///
+/// \sa IMG_CreateAnimationStream
+/// \sa IMG_CreateAnimationStream_IO
+/// \sa IMG_AddAnimationFrame
+/// \sa IMG_CloseAnimationStream
+///
+/// ```c
+/// extern SDL_DECLSPEC IMG_AnimationStream * SDLCALL IMG_CreateAnimationStreamWithProperties(SDL_PropertiesID props)
+/// ```
+/// {@category image}
+Pointer<ImgAnimationStream> imgCreateAnimationStreamWithProperties(int props) {
+  final imgCreateAnimationStreamWithPropertiesLookupFunction = _libImage
+      .lookupFunction<
+        Pointer<ImgAnimationStream> Function(Uint32 props),
+        Pointer<ImgAnimationStream> Function(int props)
+      >('IMG_CreateAnimationStreamWithProperties');
+  return imgCreateAnimationStreamWithPropertiesLookupFunction(props);
+}
+
+///
+/// Add a frame to a stream of images being saved.
+///
+/// \param stream the stream receiving images.
+/// \param surface the surface to add as the next frame in the animation.
+/// \param pts the presentation timestamp of the frame, usually in milliseconds
+/// but can be other units if the
+/// `IMG_PROP_ANIMATION_STREAM_CREATE_TIMEBASE_DENOMINATOR_NUMBER`
+/// property is set when creating the stream.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \since This function is available since SDL_image 3.4.0.
+///
+/// \sa IMG_CreateAnimationStream
+/// \sa IMG_CreateAnimationStream_IO
+/// \sa IMG_CreateAnimationStreamWithProperties
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL IMG_AddAnimationFrame(IMG_AnimationStream *stream, SDL_Surface *surface, Uint64 pts)
+/// ```
+/// {@category image}
+bool imgAddAnimationFrame(
+  Pointer<ImgAnimationStream> stream,
+  Pointer<SdlSurface> surface,
+  int pts,
+) {
+  final imgAddAnimationFrameLookupFunction = _libImage
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<ImgAnimationStream> stream,
+          Pointer<SdlSurface> surface,
+          Uint64 pts,
+        ),
+        int Function(
+          Pointer<ImgAnimationStream> stream,
+          Pointer<SdlSurface> surface,
+          int pts,
+        )
+      >('IMG_AddAnimationFrame');
+  return imgAddAnimationFrameLookupFunction(stream, surface, pts) == 1;
+}
+
+///
+/// Close an animation stream, finishing any encoding.
+///
+/// Calling this function frees the animation stream, and returns the final
+/// status of the encoding process.
+///
+/// \param stream the stream to close.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \since This function is available since SDL_image 3.4.0.
+///
+/// \sa IMG_CreateAnimationStream
+/// \sa IMG_CreateAnimationStream_IO
+/// \sa IMG_CreateAnimationStreamWithProperties
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL IMG_CloseAnimationStream(IMG_AnimationStream *stream)
+/// ```
+/// {@category image}
+bool imgCloseAnimationStream(Pointer<ImgAnimationStream> stream) {
+  final imgCloseAnimationStreamLookupFunction = _libImage
+      .lookupFunction<
+        Uint8 Function(Pointer<ImgAnimationStream> stream),
+        int Function(Pointer<ImgAnimationStream> stream)
+      >('IMG_CloseAnimationStream');
+  return imgCloseAnimationStreamLookupFunction(stream) == 1;
 }

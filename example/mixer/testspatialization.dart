@@ -37,7 +37,6 @@ bool appInit() {
     'org.libsdl.testmixerspatialization',
   );
   if (!sdlInit(SdlkInit.video)) {
-    sdlSetHint(SDL_HINT_RENDER_VSYNC, '1');
     print("Couldn't initialize SDL: ${sdlGetError()}");
     return false;
   }

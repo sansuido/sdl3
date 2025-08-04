@@ -537,7 +537,7 @@ Pointer<MixAudio> mixLoadAudioIo(
 /// This is equivalent to calling:
 ///
 /// ```c
-/// SDL_LoadAudio_IO(mixer, SDL_IOFromFile(path, "rb"), predecode, true);
+/// MIX_LoadAudio_IO(mixer, SDL_IOFromFile(path, "rb"), predecode, true);
 /// ```
 ///
 /// This function loads data from a path on the filesystem. There is also a
@@ -594,7 +594,7 @@ Pointer<MixAudio> mixLoadAudio(
 ///
 /// Load audio for playback through a collection of properties.
 ///
-/// Please see SDL_LoadAudio_IO() for a description of what the various
+/// Please see MIX_LoadAudio_IO() for a description of what the various
 /// LoadAudio functions do. This function uses properties to dictate how it
 /// operates, and exposes functionality the other functions don't provide.
 ///
@@ -1481,13 +1481,13 @@ void mixUntagTrack(Pointer<MixTrack> track, String? tag) {
 /// \sa MIX_GetTrackPlaybackPosition
 ///
 /// ```c
-/// extern SDL_DECLSPEC bool SDLCALL MIX_SetTrackPlaybackPosition(MIX_Track *track, Uint64 frames)
+/// extern SDL_DECLSPEC bool SDLCALL MIX_SetTrackPlaybackPosition(MIX_Track *track, Sint64 frames)
 /// ```
 /// {@category mixer}
 bool mixSetTrackPlaybackPosition(Pointer<MixTrack> track, int frames) {
   final mixSetTrackPlaybackPositionLookupFunction = _libMixer
       .lookupFunction<
-        Uint8 Function(Pointer<MixTrack> track, Uint64 frames),
+        Uint8 Function(Pointer<MixTrack> track, Int64 frames),
         int Function(Pointer<MixTrack> track, int frames)
       >('MIX_SetTrackPlaybackPosition');
   return mixSetTrackPlaybackPositionLookupFunction(track, frames) == 1;
@@ -1676,15 +1676,14 @@ int mixGetTrackRemaining(Pointer<MixTrack> track) {
 /// mid-stream (for example, if decoding a file that is two MP3s concatenated
 /// together).
 ///
-/// If the track has no input, this returns 0.
-///
 /// On various errors (MIX_Init() was not called, the track is NULL), this
-/// returns 0, but there is no mechanism to distinguish errors from tracks
-/// without a valid input.
+/// returns -1. If the track has no input, this returns -1. If `ms` is < 0,
+/// this returns -1.
 ///
 /// \param track the track to query.
 /// \param ms the milliseconds to convert to track-specific sample frames.
-/// \returns Converted number of sample frames, or zero for errors/no input.
+/// \returns Converted number of sample frames, or -1 for errors/no input; call
+/// SDL_GetError() for details.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -1693,13 +1692,13 @@ int mixGetTrackRemaining(Pointer<MixTrack> track) {
 /// \sa MIX_TrackFramesToMS
 ///
 /// ```c
-/// extern SDL_DECLSPEC Uint64 SDLCALL MIX_TrackMSToFrames(MIX_Track *track, Uint64 ms)
+/// extern SDL_DECLSPEC Sint64 SDLCALL MIX_TrackMSToFrames(MIX_Track *track, Sint64 ms)
 /// ```
 /// {@category mixer}
 int mixTrackMsToFrames(Pointer<MixTrack> track, int ms) {
   final mixTrackMsToFramesLookupFunction = _libMixer
       .lookupFunction<
-        Uint64 Function(Pointer<MixTrack> track, Uint64 ms),
+        Int64 Function(Pointer<MixTrack> track, Int64 ms),
         int Function(Pointer<MixTrack> track, int ms)
       >('MIX_TrackMSToFrames');
   return mixTrackMsToFramesLookupFunction(track, ms);
@@ -1716,15 +1715,14 @@ int mixTrackMsToFrames(Pointer<MixTrack> track, int ms) {
 /// Sample frames are more precise than milliseconds, so out of necessity, this
 /// function will approximate by rounding down to the closest full millisecond.
 ///
-/// If the track has no input, this returns 0.
-///
 /// On various errors (MIX_Init() was not called, the track is NULL), this
-/// returns 0, but there is no mechanism to distinguish errors from tracks
-/// without a valid input.
+/// returns -1. If the track has no input, this returns -1. If `frames` is < 0,
+/// this returns -1.
 ///
 /// \param track the track to query.
 /// \param frames the track-specific sample frames to convert to milliseconds.
-/// \returns Converted number of milliseconds, or zero for errors/no input.
+/// \returns Converted number of milliseconds, or -1 for errors/no input; call
+/// SDL_GetError() for details.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -1733,13 +1731,13 @@ int mixTrackMsToFrames(Pointer<MixTrack> track, int ms) {
 /// \sa MIX_TrackMSToFrames
 ///
 /// ```c
-/// extern SDL_DECLSPEC Uint64 SDLCALL MIX_TrackFramesToMS(MIX_Track *track, Uint64 frames)
+/// extern SDL_DECLSPEC Sint64 SDLCALL MIX_TrackFramesToMS(MIX_Track *track, Sint64 frames)
 /// ```
 /// {@category mixer}
 int mixTrackFramesToMs(Pointer<MixTrack> track, int frames) {
   final mixTrackFramesToMsLookupFunction = _libMixer
       .lookupFunction<
-        Uint64 Function(Pointer<MixTrack> track, Uint64 frames),
+        Int64 Function(Pointer<MixTrack> track, Int64 frames),
         int Function(Pointer<MixTrack> track, int frames)
       >('MIX_TrackFramesToMS');
   return mixTrackFramesToMsLookupFunction(track, frames);
@@ -1751,9 +1749,12 @@ int mixTrackFramesToMs(Pointer<MixTrack> track, int frames) {
 /// This calculates time based on the audio's initial format, even if the
 /// format would change mid-stream.
 ///
+/// If `ms` is < 0, this returns -1.
+///
 /// \param audio the audio to query.
 /// \param ms the milliseconds to convert to audio-specific sample frames.
-/// \returns Converted number of sample frames, or zero for errors/no input.
+/// \returns Converted number of sample frames, or -1 for errors/no input; call
+/// SDL_GetError() for details.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -1762,13 +1763,13 @@ int mixTrackFramesToMs(Pointer<MixTrack> track, int frames) {
 /// \sa MIX_AudioFramesToMS
 ///
 /// ```c
-/// extern SDL_DECLSPEC Uint64 SDLCALL MIX_AudioMSToFrames(MIX_Audio *audio, Uint64 ms)
+/// extern SDL_DECLSPEC Sint64 SDLCALL MIX_AudioMSToFrames(MIX_Audio *audio, Sint64 ms)
 /// ```
 /// {@category mixer}
 int mixAudioMsToFrames(Pointer<MixAudio> audio, int ms) {
   final mixAudioMsToFramesLookupFunction = _libMixer
       .lookupFunction<
-        Uint64 Function(Pointer<MixAudio> audio, Uint64 ms),
+        Int64 Function(Pointer<MixAudio> audio, Int64 ms),
         int Function(Pointer<MixAudio> audio, int ms)
       >('MIX_AudioMSToFrames');
   return mixAudioMsToFramesLookupFunction(audio, ms);
@@ -1783,9 +1784,12 @@ int mixAudioMsToFrames(Pointer<MixAudio> audio, int ms) {
 /// Sample frames are more precise than milliseconds, so out of necessity, this
 /// function will approximate by rounding down to the closest full millisecond.
 ///
+/// If `frames` is < 0, this returns -1.
+///
 /// \param audio the audio to query.
 /// \param frames the audio-specific sample frames to convert to milliseconds.
-/// \returns Converted number of milliseconds, or zero for errors/no input.
+/// \returns Converted number of milliseconds, or -1 for errors/no input; call
+/// SDL_GetError() for details.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -1794,13 +1798,13 @@ int mixAudioMsToFrames(Pointer<MixAudio> audio, int ms) {
 /// \sa MIX_AudioMSToFrames
 ///
 /// ```c
-/// extern SDL_DECLSPEC Uint64 SDLCALL MIX_AudioFramesToMS(MIX_Audio *audio, Uint64 frames)
+/// extern SDL_DECLSPEC Sint64 SDLCALL MIX_AudioFramesToMS(MIX_Audio *audio, Sint64 frames)
 /// ```
 /// {@category mixer}
 int mixAudioFramesToMs(Pointer<MixAudio> audio, int frames) {
   final mixAudioFramesToMsLookupFunction = _libMixer
       .lookupFunction<
-        Uint64 Function(Pointer<MixAudio> audio, Uint64 frames),
+        Int64 Function(Pointer<MixAudio> audio, Int64 frames),
         int Function(Pointer<MixAudio> audio, int frames)
       >('MIX_AudioFramesToMS');
   return mixAudioFramesToMsLookupFunction(audio, frames);
@@ -1809,11 +1813,12 @@ int mixAudioFramesToMs(Pointer<MixAudio> audio, int frames) {
 ///
 /// Convert milliseconds to sample frames at a specific sample rate.
 ///
-/// If `sample_rate` is <= 0, this returns 0. No error is set.
+/// If `sample_rate` is <= 0, this returns -1. If `ms` is < 0, this returns -1.
 ///
 /// \param sample_rate the sample rate to use for conversion.
 /// \param ms the milliseconds to convert to rate-specific sample frames.
-/// \returns Converted number of sample frames, or zero for errors.
+/// \returns Converted number of sample frames, or -1 for errors; call
+/// SDL_GetError() for details.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -1822,13 +1827,13 @@ int mixAudioFramesToMs(Pointer<MixAudio> audio, int frames) {
 /// \sa MIX_FramesToMS
 ///
 /// ```c
-/// extern SDL_DECLSPEC Uint64 SDLCALL MIX_MSToFrames(int sample_rate, Uint64 ms)
+/// extern SDL_DECLSPEC Sint64 SDLCALL MIX_MSToFrames(int sample_rate, Sint64 ms)
 /// ```
 /// {@category mixer}
 int mixMsToFrames(int sampleRate, int ms) {
   final mixMsToFramesLookupFunction = _libMixer
       .lookupFunction<
-        Uint64 Function(Int32 sampleRate, Uint64 ms),
+        Int64 Function(Int32 sampleRate, Int64 ms),
         int Function(int sampleRate, int ms)
       >('MIX_MSToFrames');
   return mixMsToFramesLookupFunction(sampleRate, ms);
@@ -1837,14 +1842,16 @@ int mixMsToFrames(int sampleRate, int ms) {
 ///
 /// Convert sample frames, at a specific sample rate, to milliseconds.
 ///
-/// If `sample_rate` is <= 0, this returns 0. No error is set.
-///
 /// Sample frames are more precise than milliseconds, so out of necessity, this
 /// function will approximate by rounding down to the closest full millisecond.
 ///
+/// If `sample_rate` is <= 0, this returns -1. If `frames` is < 0, this returns
+/// -1.
+///
 /// \param sample_rate the sample rate to use for conversion.
 /// \param frames the rate-specific sample frames to convert to milliseconds.
-/// \returns Converted number of milliseconds, or zero for errors.
+/// \returns Converted number of milliseconds, or -1 for errors; call
+/// SDL_GetError() for details.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -1853,13 +1860,13 @@ int mixMsToFrames(int sampleRate, int ms) {
 /// \sa MIX_MSToFrames
 ///
 /// ```c
-/// extern SDL_DECLSPEC Uint64 SDLCALL MIX_FramesToMS(int sample_rate, Uint64 frames)
+/// extern SDL_DECLSPEC Sint64 SDLCALL MIX_FramesToMS(int sample_rate, Sint64 frames)
 /// ```
 /// {@category mixer}
 int mixFramesToMs(int sampleRate, int frames) {
   final mixFramesToMsLookupFunction = _libMixer
       .lookupFunction<
-        Uint64 Function(Int32 sampleRate, Uint64 frames),
+        Int64 Function(Int32 sampleRate, Int64 frames),
         int Function(int sampleRate, int frames)
       >('MIX_FramesToMS');
   return mixFramesToMsLookupFunction(sampleRate, frames);

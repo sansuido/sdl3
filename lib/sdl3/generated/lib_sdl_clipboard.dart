@@ -34,7 +34,7 @@ bool sdlSetClipboardText(String? text) {
 ///
 /// Get UTF-8 text from the clipboard.
 ///
-/// This functions returns an empty string if there was not enough memory left
+/// This function returns an empty string if there is not enough memory left
 /// for a copy of the clipboard's content.
 ///
 /// \returns the clipboard text on success or an empty string on failure; call
@@ -115,7 +115,7 @@ bool sdlSetPrimarySelectionText(String? text) {
 ///
 /// Get UTF-8 text from the primary selection.
 ///
-/// This functions returns an empty string if there was not enough memory left
+/// This function returns an empty string if there is not enough memory left
 /// for a copy of the primary selection's content.
 ///
 /// \returns the primary selection text on success or an empty string on
@@ -175,7 +175,7 @@ bool sdlHasPrimarySelectionText() {
 /// respond with the data for the requested mime-type.
 ///
 /// The size of text data does not include any terminator, and the text does
-/// not need to be null terminated (e.g. you can directly copy a portion of a
+/// not need to be null-terminated (e.g., you can directly copy a portion of a
 /// document).
 ///
 /// \param callback a function pointer to the function that provides the
@@ -183,7 +183,8 @@ bool sdlHasPrimarySelectionText() {
 /// \param cleanup a function pointer to the function that cleans up the
 /// clipboard data.
 /// \param userdata an opaque pointer that will be forwarded to the callbacks.
-/// \param mime_types a list of mime-types that are being offered.
+/// \param mime_types a list of mime-types that are being offered. SDL copies
+/// the given list.
 /// \param num_mime_types the number of mime-types in the mime_types list.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
@@ -259,10 +260,10 @@ bool sdlClearClipboardData() {
 }
 
 ///
-/// Get the data from clipboard for a given mime type.
+/// Get the data from the clipboard for a given mime type.
 ///
 /// The size of text data does not include the terminator, but the text is
-/// guaranteed to be null terminated.
+/// guaranteed to be null-terminated.
 ///
 /// \param mime_type the mime type to read from the clipboard.
 /// \param size a pointer filled in with the length of the returned data.
@@ -305,8 +306,8 @@ Pointer<NativeType> sdlGetClipboardData(
 ///
 /// Query whether there is data in the clipboard for the provided mime type.
 ///
-/// \param mime_type the mime type to check for data for.
-/// \returns true if there exists data in clipboard for the provided mime type,
+/// \param mime_type the mime type to check for data.
+/// \returns true if data exists in the clipboard for the provided mime type,
 /// false if it does not.
 ///
 /// \threadsafety This function should only be called on the main thread.
@@ -337,7 +338,7 @@ bool sdlHasClipboardData(String? mimeType) {
 ///
 /// \param num_mime_types a pointer filled with the number of mime types, may
 /// be NULL.
-/// \returns a null terminated array of strings with mime types, or NULL on
+/// \returns a null-terminated array of strings with mime types, or NULL on
 /// failure; call SDL_GetError() for more information. This should be
 /// freed with SDL_free() when it is no longer needed.
 ///

@@ -250,7 +250,7 @@ extension MixMixerPointerEx on Pointer<MixMixer> {
   /// This is equivalent to calling:
   ///
   /// ```c
-  /// SDL_LoadAudio_IO(mixer, SDL_IOFromFile(path, "rb"), predecode, true);
+  /// MIX_LoadAudio_IO(mixer, SDL_IOFromFile(path, "rb"), predecode, true);
   /// ```
   ///
   /// This function loads data from a path on the filesystem. There is also a

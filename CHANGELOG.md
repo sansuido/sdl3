@@ -1,3 +1,8 @@
+## 2.3.1
+- SDL3-2025-08-03
+- [add] Added webp and ImgAnimationStream functions.
+- [add] Added polygon2d_test.dart example.
+
 ## 2.3.0
 - SDL3-2025-07-27
 - [changed] Critical changes have been made to mixer functions and structures.

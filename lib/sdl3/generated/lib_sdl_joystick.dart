@@ -392,6 +392,18 @@ Pointer<SdlJoystick> sdlGetJoystickFromPlayerIndex(int playerIndex) {
 ///
 /// Attach a new virtual joystick.
 ///
+/// Apps can create virtual joysticks, that exist without hardware directly
+/// backing them, and have program-supplied inputs. Once attached, a virtual
+/// joystick looks like any other joystick that SDL can access. These can be
+/// used to make other things look like joysticks, or provide pre-recorded
+/// input, etc.
+///
+/// Once attached, the app can send joystick inputs to the new virtual joystick
+/// using SDL_SetJoystickVirtualAxis(), etc.
+///
+/// When no longer needed, the virtual joystick can be removed by calling
+/// SDL_DetachVirtualJoystick().
+///
 /// \param desc joystick description, initialized using SDL_INIT_INTERFACE().
 /// \returns the joystick instance ID, or 0 on failure; call SDL_GetError() for
 /// more information.
@@ -399,6 +411,12 @@ Pointer<SdlJoystick> sdlGetJoystickFromPlayerIndex(int playerIndex) {
 /// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_DetachVirtualJoystick
+/// \sa SDL_SetJoystickVirtualAxis
+/// \sa SDL_SetJoystickVirtualButton
+/// \sa SDL_SetJoystickVirtualBall
+/// \sa SDL_SetJoystickVirtualHat
+/// \sa SDL_SetJoystickVirtualTouchpad
+/// \sa SDL_SetJoystickVirtualSensorData
 ///
 /// ```c
 /// extern SDL_DECLSPEC SDL_JoystickID SDLCALL SDL_AttachVirtualJoystick(const SDL_VirtualJoystickDesc *desc)
@@ -480,6 +498,12 @@ bool sdlIsJoystickVirtual(int instanceId) {
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
+/// \sa SDL_SetJoystickVirtualButton
+/// \sa SDL_SetJoystickVirtualBall
+/// \sa SDL_SetJoystickVirtualHat
+/// \sa SDL_SetJoystickVirtualTouchpad
+/// \sa SDL_SetJoystickVirtualSensorData
+///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetJoystickVirtualAxis(SDL_Joystick *joystick, int axis, Sint16 value)
 /// ```
@@ -514,6 +538,12 @@ bool sdlSetJoystickVirtualAxis(
 /// information.
 ///
 /// \since This function is available since SDL 3.2.0.
+///
+/// \sa SDL_SetJoystickVirtualAxis
+/// \sa SDL_SetJoystickVirtualButton
+/// \sa SDL_SetJoystickVirtualHat
+/// \sa SDL_SetJoystickVirtualTouchpad
+/// \sa SDL_SetJoystickVirtualSensorData
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetJoystickVirtualBall(SDL_Joystick *joystick, int ball, Sint16 xrel, Sint16 yrel)
@@ -561,6 +591,12 @@ bool sdlSetJoystickVirtualBall(
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
+/// \sa SDL_SetJoystickVirtualAxis
+/// \sa SDL_SetJoystickVirtualBall
+/// \sa SDL_SetJoystickVirtualHat
+/// \sa SDL_SetJoystickVirtualTouchpad
+/// \sa SDL_SetJoystickVirtualSensorData
+///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetJoystickVirtualButton(SDL_Joystick *joystick, int button, bool down)
 /// ```
@@ -599,6 +635,12 @@ bool sdlSetJoystickVirtualButton(
 /// information.
 ///
 /// \since This function is available since SDL 3.2.0.
+///
+/// \sa SDL_SetJoystickVirtualAxis
+/// \sa SDL_SetJoystickVirtualButton
+/// \sa SDL_SetJoystickVirtualBall
+/// \sa SDL_SetJoystickVirtualTouchpad
+/// \sa SDL_SetJoystickVirtualSensorData
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetJoystickVirtualHat(SDL_Joystick *joystick, int hat, Uint8 value)
@@ -640,6 +682,12 @@ bool sdlSetJoystickVirtualHat(
 /// information.
 ///
 /// \since This function is available since SDL 3.2.0.
+///
+/// \sa SDL_SetJoystickVirtualAxis
+/// \sa SDL_SetJoystickVirtualButton
+/// \sa SDL_SetJoystickVirtualBall
+/// \sa SDL_SetJoystickVirtualHat
+/// \sa SDL_SetJoystickVirtualSensorData
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetJoystickVirtualTouchpad(SDL_Joystick *joystick, int touchpad, int finger, bool down, float x, float y, float pressure)
@@ -706,6 +754,12 @@ bool sdlSetJoystickVirtualTouchpad(
 /// information.
 ///
 /// \since This function is available since SDL 3.2.0.
+///
+/// \sa SDL_SetJoystickVirtualAxis
+/// \sa SDL_SetJoystickVirtualButton
+/// \sa SDL_SetJoystickVirtualBall
+/// \sa SDL_SetJoystickVirtualHat
+/// \sa SDL_SetJoystickVirtualTouchpad
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SendJoystickVirtualSensorData(SDL_Joystick *joystick, SDL_SensorType type, Uint64 sensor_timestamp, const float *data, int num_values)

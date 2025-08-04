@@ -302,7 +302,7 @@ extension MixTrackPointerEx on Pointer<MixTrack> {
   /// \sa MIX_GetTrackPlaybackPosition
   ///
   /// ```c
-  /// extern SDL_DECLSPEC bool SDLCALL MIX_SetTrackPlaybackPosition(MIX_Track *track, Uint64 frames)
+  /// extern SDL_DECLSPEC bool SDLCALL MIX_SetTrackPlaybackPosition(MIX_Track *track, Sint64 frames)
   /// ```
   /// {@category mixer}
   bool setPlaybackPosition(int frames) =>
@@ -456,15 +456,14 @@ extension MixTrackPointerEx on Pointer<MixTrack> {
   /// mid-stream (for example, if decoding a file that is two MP3s concatenated
   /// together).
   ///
-  /// If the track has no input, this returns 0.
-  ///
   /// On various errors (MIX_Init() was not called, the track is NULL), this
-  /// returns 0, but there is no mechanism to distinguish errors from tracks
-  /// without a valid input.
+  /// returns -1. If the track has no input, this returns -1. If `ms` is < 0,
+  /// this returns -1.
   ///
   /// \param track the track to query.
   /// \param ms the milliseconds to convert to track-specific sample frames.
-  /// \returns Converted number of sample frames, or zero for errors/no input.
+  /// \returns Converted number of sample frames, or -1 for errors/no input; call
+  /// SDL_GetError() for details.
   ///
   /// \threadsafety It is safe to call this function from any thread.
   ///
@@ -473,7 +472,7 @@ extension MixTrackPointerEx on Pointer<MixTrack> {
   /// \sa MIX_TrackFramesToMS
   ///
   /// ```c
-  /// extern SDL_DECLSPEC Uint64 SDLCALL MIX_TrackMSToFrames(MIX_Track *track, Uint64 ms)
+  /// extern SDL_DECLSPEC Sint64 SDLCALL MIX_TrackMSToFrames(MIX_Track *track, Sint64 ms)
   /// ```
   /// {@category mixer}
   int msToFrames(int ms) => mixTrackMsToFrames(this, ms);
@@ -489,15 +488,14 @@ extension MixTrackPointerEx on Pointer<MixTrack> {
   /// Sample frames are more precise than milliseconds, so out of necessity, this
   /// function will approximate by rounding down to the closest full millisecond.
   ///
-  /// If the track has no input, this returns 0.
-  ///
   /// On various errors (MIX_Init() was not called, the track is NULL), this
-  /// returns 0, but there is no mechanism to distinguish errors from tracks
-  /// without a valid input.
+  /// returns -1. If the track has no input, this returns -1. If `frames` is < 0,
+  /// this returns -1.
   ///
   /// \param track the track to query.
   /// \param frames the track-specific sample frames to convert to milliseconds.
-  /// \returns Converted number of milliseconds, or zero for errors/no input.
+  /// \returns Converted number of milliseconds, or -1 for errors/no input; call
+  /// SDL_GetError() for details.
   ///
   /// \threadsafety It is safe to call this function from any thread.
   ///
@@ -506,7 +504,7 @@ extension MixTrackPointerEx on Pointer<MixTrack> {
   /// \sa MIX_TrackMSToFrames
   ///
   /// ```c
-  /// extern SDL_DECLSPEC Uint64 SDLCALL MIX_TrackFramesToMS(MIX_Track *track, Uint64 frames)
+  /// extern SDL_DECLSPEC Sint64 SDLCALL MIX_TrackFramesToMS(MIX_Track *track, Sint64 frames)
   /// ```
   /// {@category mixer}
   int framesToMs(int frames) => mixTrackFramesToMs(this, frames);

@@ -145,9 +145,12 @@ extension MixAudioPointerEx on Pointer<MixAudio> {
   /// This calculates time based on the audio's initial format, even if the
   /// format would change mid-stream.
   ///
+  /// If `ms` is < 0, this returns -1.
+  ///
   /// \param audio the audio to query.
   /// \param ms the milliseconds to convert to audio-specific sample frames.
-  /// \returns Converted number of sample frames, or zero for errors/no input.
+  /// \returns Converted number of sample frames, or -1 for errors/no input; call
+  /// SDL_GetError() for details.
   ///
   /// \threadsafety It is safe to call this function from any thread.
   ///
@@ -156,7 +159,7 @@ extension MixAudioPointerEx on Pointer<MixAudio> {
   /// \sa MIX_AudioFramesToMS
   ///
   /// ```c
-  /// extern SDL_DECLSPEC Uint64 SDLCALL MIX_AudioMSToFrames(MIX_Audio *audio, Uint64 ms)
+  /// extern SDL_DECLSPEC Sint64 SDLCALL MIX_AudioMSToFrames(MIX_Audio *audio, Sint64 ms)
   /// ```
   /// {@category mixer}
   int msToFrames(int ms) => mixAudioMsToFrames(this, ms);
@@ -170,9 +173,12 @@ extension MixAudioPointerEx on Pointer<MixAudio> {
   /// Sample frames are more precise than milliseconds, so out of necessity, this
   /// function will approximate by rounding down to the closest full millisecond.
   ///
+  /// If `frames` is < 0, this returns -1.
+  ///
   /// \param audio the audio to query.
   /// \param frames the audio-specific sample frames to convert to milliseconds.
-  /// \returns Converted number of milliseconds, or zero for errors/no input.
+  /// \returns Converted number of milliseconds, or -1 for errors/no input; call
+  /// SDL_GetError() for details.
   ///
   /// \threadsafety It is safe to call this function from any thread.
   ///
@@ -181,7 +187,7 @@ extension MixAudioPointerEx on Pointer<MixAudio> {
   /// \sa MIX_AudioMSToFrames
   ///
   /// ```c
-  /// extern SDL_DECLSPEC Uint64 SDLCALL MIX_AudioFramesToMS(MIX_Audio *audio, Uint64 frames)
+  /// extern SDL_DECLSPEC Sint64 SDLCALL MIX_AudioFramesToMS(MIX_Audio *audio, Sint64 frames)
   /// ```
   /// {@category mixer}
   int framesToMs(int frames) => mixAudioFramesToMs(this, frames);

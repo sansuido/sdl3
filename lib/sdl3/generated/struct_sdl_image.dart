@@ -21,3 +21,7 @@ final class ImgAnimation extends Struct {
   // [24]+(8)
   external Pointer<Int32> delays;
 }
+
+// IMG_AnimationStream
+/// {@category image}
+final class ImgAnimationStream extends Opaque {}
