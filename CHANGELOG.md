@@ -1,3 +1,6 @@
+## 2.3.2
+- SDL3-2025-08-10
+
 ## 2.3.1
 - SDL3-2025-08-03
 - [add] Added webp and ImgAnimationStream functions.

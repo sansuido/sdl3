@@ -2385,6 +2385,113 @@ Pointer<SdlSurface> imgReadXpmFromArrayToRgb888(Pointer<Pointer<Int8>> xpm) {
 }
 
 ///
+/// Save an SDL_Surface into an image file.
+///
+/// If the file already exists, it will be overwritten.
+///
+/// For formats that accept a quality, a default quality of 90 will be used.
+///
+/// \param surface the SDL surface to save.
+/// \param file path on the filesystem to write new file to.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \since This function is available since SDL_image 3.4.0.
+///
+/// \sa IMG_SaveTyped_IO
+/// \sa IMG_SaveAVIF
+/// \sa IMG_SaveBMP
+/// \sa IMG_SaveGIF
+/// \sa IMG_SaveJPG
+/// \sa IMG_SavePNG
+/// \sa IMG_SaveTGA
+/// \sa IMG_SaveWEBP
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL IMG_Save(SDL_Surface *surface, const char *file)
+/// ```
+/// {@category image}
+bool imgSave(Pointer<SdlSurface> surface, String? file) {
+  final imgSaveLookupFunction = _libImage
+      .lookupFunction<
+        Uint8 Function(Pointer<SdlSurface> surface, Pointer<Utf8> file),
+        int Function(Pointer<SdlSurface> surface, Pointer<Utf8> file)
+      >('IMG_Save');
+  final filePointer = file != null ? file.toNativeUtf8() : nullptr;
+  final result = imgSaveLookupFunction(surface, filePointer) == 1;
+  calloc.free(filePointer);
+  return result;
+}
+
+///
+/// Save an SDL_Surface into formatted image data, via an SDL_IOStream.
+///
+/// If you just want to save to a filename, you can use IMG_Save() instead.
+///
+/// If `closeio` is true, `dst` will be closed before returning, whether this
+/// function succeeds or not.
+///
+/// For formats that accept a quality, a default quality of 90 will be used.
+///
+/// \param surface the SDL surface to save.
+/// \param dst the SDL_IOStream to save the image data to.
+/// \param closeio true to close/free the SDL_IOStream before returning, false
+/// to leave it open.
+/// \param type a filename extension that represent this data ("BMP", "GIF",
+/// "PNG", etc).
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \since This function is available since SDL_image 3.4.0.
+///
+/// \sa IMG_Save
+/// \sa IMG_SaveAVIF_IO
+/// \sa IMG_SaveBMP_IO
+/// \sa IMG_SaveGIF_IO
+/// \sa IMG_SaveJPG_IO
+/// \sa IMG_SavePNG_IO
+/// \sa IMG_SaveTGA_IO
+/// \sa IMG_SaveWEBP_IO
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL IMG_SaveTyped_IO(SDL_Surface *surface, SDL_IOStream *dst, bool closeio, const char *type)
+/// ```
+/// {@category image}
+bool imgSaveTypedIo(
+  Pointer<SdlSurface> surface,
+  Pointer<SdlIoStream> dst,
+  bool closeio,
+  String? type,
+) {
+  final imgSaveTypedIoLookupFunction = _libImage
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<SdlSurface> surface,
+          Pointer<SdlIoStream> dst,
+          Uint8 closeio,
+          Pointer<Utf8> type,
+        ),
+        int Function(
+          Pointer<SdlSurface> surface,
+          Pointer<SdlIoStream> dst,
+          int closeio,
+          Pointer<Utf8> type,
+        )
+      >('IMG_SaveTyped_IO');
+  final typePointer = type != null ? type.toNativeUtf8() : nullptr;
+  final result =
+      imgSaveTypedIoLookupFunction(
+        surface,
+        dst,
+        closeio ? 1 : 0,
+        typePointer,
+      ) ==
+      1;
+  calloc.free(typePointer);
+  return result;
+}
+
+///
 /// Save an SDL_Surface into a AVIF image file.
 ///
 /// If the file already exists, it will be overwritten.
@@ -2475,7 +2582,7 @@ bool imgSaveAvifIo(
 }
 
 ///
-/// Save an SDL_Surface into a PNG image file.
+/// Save an SDL_Surface into a BMP image file.
 ///
 /// If the file already exists, it will be overwritten.
 ///
@@ -2484,30 +2591,36 @@ bool imgSaveAvifIo(
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
-/// \since This function is available since SDL_image 3.0.0.
+/// \since This function is available since SDL_image 3.4.0.
 ///
-/// \sa IMG_SavePNG_IO
+/// \sa IMG_SaveBMP_IO
+/// \sa IMG_SaveAVIF
+/// \sa IMG_SaveGIF
+/// \sa IMG_SaveJPG
+/// \sa IMG_SavePNG
+/// \sa IMG_SaveTGA
+/// \sa IMG_SaveWEBP
 ///
 /// ```c
-/// extern SDL_DECLSPEC bool SDLCALL IMG_SavePNG(SDL_Surface *surface, const char *file)
+/// extern SDL_DECLSPEC bool SDLCALL IMG_SaveBMP(SDL_Surface *surface, const char *file)
 /// ```
 /// {@category image}
-bool imgSavePng(Pointer<SdlSurface> surface, String? file) {
-  final imgSavePngLookupFunction = _libImage
+bool imgSaveBmp(Pointer<SdlSurface> surface, String? file) {
+  final imgSaveBmpLookupFunction = _libImage
       .lookupFunction<
         Uint8 Function(Pointer<SdlSurface> surface, Pointer<Utf8> file),
         int Function(Pointer<SdlSurface> surface, Pointer<Utf8> file)
-      >('IMG_SavePNG');
+      >('IMG_SaveBMP');
   final filePointer = file != null ? file.toNativeUtf8() : nullptr;
-  final result = imgSavePngLookupFunction(surface, filePointer) == 1;
+  final result = imgSaveBmpLookupFunction(surface, filePointer) == 1;
   calloc.free(filePointer);
   return result;
 }
 
 ///
-/// Save an SDL_Surface into PNG image data, via an SDL_IOStream.
+/// Save an SDL_Surface into BMP image data, via an SDL_IOStream.
 ///
-/// If you just want to save to a filename, you can use IMG_SavePNG() instead.
+/// If you just want to save to a filename, you can use IMG_SaveBMP() instead.
 ///
 /// If `closeio` is true, `dst` will be closed before returning, whether this
 /// function succeeds or not.
@@ -2519,20 +2632,26 @@ bool imgSavePng(Pointer<SdlSurface> surface, String? file) {
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
-/// \since This function is available since SDL_image 3.0.0.
+/// \since This function is available since SDL_image 3.4.0.
 ///
-/// \sa IMG_SavePNG
+/// \sa IMG_SaveBMP
+/// \sa IMG_SaveAVIF_IO
+/// \sa IMG_SaveGIF_IO
+/// \sa IMG_SaveJPG_IO
+/// \sa IMG_SavePNG_IO
+/// \sa IMG_SaveTGA_IO
+/// \sa IMG_SaveWEBP_IO
 ///
 /// ```c
-/// extern SDL_DECLSPEC bool SDLCALL IMG_SavePNG_IO(SDL_Surface *surface, SDL_IOStream *dst, bool closeio)
+/// extern SDL_DECLSPEC bool SDLCALL IMG_SaveBMP_IO(SDL_Surface *surface, SDL_IOStream *dst, bool closeio)
 /// ```
 /// {@category image}
-bool imgSavePngIo(
+bool imgSaveBmpIo(
   Pointer<SdlSurface> surface,
   Pointer<SdlIoStream> dst,
   bool closeio,
 ) {
-  final imgSavePngIoLookupFunction = _libImage
+  final imgSaveBmpIoLookupFunction = _libImage
       .lookupFunction<
         Uint8 Function(
           Pointer<SdlSurface> surface,
@@ -2544,8 +2663,82 @@ bool imgSavePngIo(
           Pointer<SdlIoStream> dst,
           int closeio,
         )
-      >('IMG_SavePNG_IO');
-  return imgSavePngIoLookupFunction(surface, dst, closeio ? 1 : 0) == 1;
+      >('IMG_SaveBMP_IO');
+  return imgSaveBmpIoLookupFunction(surface, dst, closeio ? 1 : 0) == 1;
+}
+
+///
+/// Save an SDL_Surface into a GIF image file.
+///
+/// If the file already exists, it will be overwritten.
+///
+/// \param surface the SDL surface to save.
+/// \param file path on the filesystem to write new file to.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \since This function is available since SDL_image 3.4.0.
+///
+/// \sa IMG_SaveGIF_IO
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL IMG_SaveGIF(SDL_Surface *surface, const char *file)
+/// ```
+/// {@category image}
+bool imgSaveGif(Pointer<SdlSurface> surface, String? file) {
+  final imgSaveGifLookupFunction = _libImage
+      .lookupFunction<
+        Uint8 Function(Pointer<SdlSurface> surface, Pointer<Utf8> file),
+        int Function(Pointer<SdlSurface> surface, Pointer<Utf8> file)
+      >('IMG_SaveGIF');
+  final filePointer = file != null ? file.toNativeUtf8() : nullptr;
+  final result = imgSaveGifLookupFunction(surface, filePointer) == 1;
+  calloc.free(filePointer);
+  return result;
+}
+
+///
+/// Save an SDL_Surface into GIF image data, via an SDL_IOStream.
+///
+/// If you just want to save to a filename, you can use IMG_SaveGIF() instead.
+///
+/// If `closeio` is true, `dst` will be closed before returning, whether this
+/// function succeeds or not.
+///
+/// \param surface the SDL surface to save.
+/// \param dst the SDL_IOStream to save the image data to.
+/// \param closeio true to close/free the SDL_IOStream before returning, false
+/// to leave it open.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \since This function is available since SDL_image 3.4.0.
+///
+/// \sa IMG_SaveGIF
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL IMG_SaveGIF_IO(SDL_Surface *surface, SDL_IOStream *dst, bool closeio)
+/// ```
+/// {@category image}
+bool imgSaveGifIo(
+  Pointer<SdlSurface> surface,
+  Pointer<SdlIoStream> dst,
+  bool closeio,
+) {
+  final imgSaveGifIoLookupFunction = _libImage
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<SdlSurface> surface,
+          Pointer<SdlIoStream> dst,
+          Uint8 closeio,
+        ),
+        int Function(
+          Pointer<SdlSurface> surface,
+          Pointer<SdlIoStream> dst,
+          int closeio,
+        )
+      >('IMG_SaveGIF_IO');
+  return imgSaveGifIoLookupFunction(surface, dst, closeio ? 1 : 0) == 1;
 }
 
 ///
@@ -2639,6 +2832,196 @@ bool imgSaveJpgIo(
 }
 
 ///
+/// Save an SDL_Surface into a PNG image file.
+///
+/// If the file already exists, it will be overwritten.
+///
+/// \param surface the SDL surface to save.
+/// \param file path on the filesystem to write new file to.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \since This function is available since SDL_image 3.0.0.
+///
+/// \sa IMG_SavePNG_IO
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL IMG_SavePNG(SDL_Surface *surface, const char *file)
+/// ```
+/// {@category image}
+bool imgSavePng(Pointer<SdlSurface> surface, String? file) {
+  final imgSavePngLookupFunction = _libImage
+      .lookupFunction<
+        Uint8 Function(Pointer<SdlSurface> surface, Pointer<Utf8> file),
+        int Function(Pointer<SdlSurface> surface, Pointer<Utf8> file)
+      >('IMG_SavePNG');
+  final filePointer = file != null ? file.toNativeUtf8() : nullptr;
+  final result = imgSavePngLookupFunction(surface, filePointer) == 1;
+  calloc.free(filePointer);
+  return result;
+}
+
+///
+/// Save an SDL_Surface into PNG image data, via an SDL_IOStream.
+///
+/// If you just want to save to a filename, you can use IMG_SavePNG() instead.
+///
+/// If `closeio` is true, `dst` will be closed before returning, whether this
+/// function succeeds or not.
+///
+/// \param surface the SDL surface to save.
+/// \param dst the SDL_IOStream to save the image data to.
+/// \param closeio true to close/free the SDL_IOStream before returning, false
+/// to leave it open.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \since This function is available since SDL_image 3.0.0.
+///
+/// \sa IMG_SavePNG
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL IMG_SavePNG_IO(SDL_Surface *surface, SDL_IOStream *dst, bool closeio)
+/// ```
+/// {@category image}
+bool imgSavePngIo(
+  Pointer<SdlSurface> surface,
+  Pointer<SdlIoStream> dst,
+  bool closeio,
+) {
+  final imgSavePngIoLookupFunction = _libImage
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<SdlSurface> surface,
+          Pointer<SdlIoStream> dst,
+          Uint8 closeio,
+        ),
+        int Function(
+          Pointer<SdlSurface> surface,
+          Pointer<SdlIoStream> dst,
+          int closeio,
+        )
+      >('IMG_SavePNG_IO');
+  return imgSavePngIoLookupFunction(surface, dst, closeio ? 1 : 0) == 1;
+}
+
+///
+/// Save an SDL_Surface into a TGA image file.
+///
+/// If the file already exists, it will be overwritten.
+///
+/// \param surface the SDL surface to save.
+/// \param file path on the filesystem to write new file to.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \since This function is available since SDL_image 3.4.0.
+///
+/// \sa IMG_SaveTGA_IO
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL IMG_SaveTGA(SDL_Surface *surface, const char *file)
+/// ```
+/// {@category image}
+bool imgSaveTga(Pointer<SdlSurface> surface, String? file) {
+  final imgSaveTgaLookupFunction = _libImage
+      .lookupFunction<
+        Uint8 Function(Pointer<SdlSurface> surface, Pointer<Utf8> file),
+        int Function(Pointer<SdlSurface> surface, Pointer<Utf8> file)
+      >('IMG_SaveTGA');
+  final filePointer = file != null ? file.toNativeUtf8() : nullptr;
+  final result = imgSaveTgaLookupFunction(surface, filePointer) == 1;
+  calloc.free(filePointer);
+  return result;
+}
+
+///
+/// Save an SDL_Surface into TGA image data, via an SDL_IOStream.
+///
+/// If you just want to save to a filename, you can use IMG_SaveTGA() instead.
+///
+/// If `closeio` is true, `dst` will be closed before returning, whether this
+/// function succeeds or not.
+///
+/// \param surface the SDL surface to save.
+/// \param dst the SDL_IOStream to save the image data to.
+/// \param closeio true to close/free the SDL_IOStream before returning, false
+/// to leave it open.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \since This function is available since SDL_image 3.4.0.
+///
+/// \sa IMG_SaveTGA
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL IMG_SaveTGA_IO(SDL_Surface *surface, SDL_IOStream *dst, bool closeio)
+/// ```
+/// {@category image}
+bool imgSaveTgaIo(
+  Pointer<SdlSurface> surface,
+  Pointer<SdlIoStream> dst,
+  bool closeio,
+) {
+  final imgSaveTgaIoLookupFunction = _libImage
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<SdlSurface> surface,
+          Pointer<SdlIoStream> dst,
+          Uint8 closeio,
+        ),
+        int Function(
+          Pointer<SdlSurface> surface,
+          Pointer<SdlIoStream> dst,
+          int closeio,
+        )
+      >('IMG_SaveTGA_IO');
+  return imgSaveTgaIoLookupFunction(surface, dst, closeio ? 1 : 0) == 1;
+}
+
+///
+/// Save an SDL_Surface into a WEBP image file.
+///
+/// If the file already exists, it will be overwritten.
+///
+/// \param surface the SDL surface to save.
+/// \param file path on the filesystem to write the new file to.
+/// \param quality between 0 and 100. For lossy, 0 gives the smallest size and
+/// 100 the largest. For lossless, this parameter is the amount
+/// of effort put into the compression: 0 is the fastest but
+/// gives larger files compared to the slowest, but best, 100.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \since This function is available since SDL_image 3.4.0.
+///
+/// \sa IMG_SaveWEBP_IO
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL IMG_SaveWEBP(SDL_Surface *surface, const char *file, float quality)
+/// ```
+/// {@category image}
+bool imgSaveWebp(Pointer<SdlSurface> surface, String? file, double quality) {
+  final imgSaveWebpLookupFunction = _libImage
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<SdlSurface> surface,
+          Pointer<Utf8> file,
+          Float quality,
+        ),
+        int Function(
+          Pointer<SdlSurface> surface,
+          Pointer<Utf8> file,
+          double quality,
+        )
+      >('IMG_SaveWEBP');
+  final filePointer = file != null ? file.toNativeUtf8() : nullptr;
+  final result = imgSaveWebpLookupFunction(surface, filePointer, quality) == 1;
+  calloc.free(filePointer);
+  return result;
+}
+
+///
 /// Save an SDL_Surface into WEBP image data, via an SDL_IOStream.
 ///
 /// If you just want to save to a filename, you can use IMG_SaveWEBP() instead.
@@ -2657,7 +3040,7 @@ bool imgSaveJpgIo(
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
-/// \since This function is available since SDL_image 3.2.18.
+/// \since This function is available since SDL_image 3.4.0.
 ///
 /// \sa IMG_SaveWEBP
 ///
@@ -2691,105 +3074,6 @@ bool imgSaveWebpIo(
 }
 
 ///
-/// Save an SDL_Surface into a WEBP image file.
-///
-/// If the file already exists, it will be overwritten.
-///
-/// \param surface the SDL surface to save.
-/// \param file path on the filesystem to write the new file to.
-/// \param quality between 0 and 100. For lossy, 0 gives the smallest size and
-/// 100 the largest. For lossless, this parameter is the amount
-/// of effort put into the compression: 0 is the fastest but
-/// gives larger files compared to the slowest, but best, 100.
-/// \returns true on success or false on failure; call SDL_GetError() for more
-/// information.
-///
-/// \since This function is available since SDL_image 3.2.18.
-///
-/// \sa IMG_SaveWEBP_IO
-///
-/// ```c
-/// extern SDL_DECLSPEC bool SDLCALL IMG_SaveWEBP(SDL_Surface *surface, const char *file, float quality)
-/// ```
-/// {@category image}
-bool imgSaveWebp(Pointer<SdlSurface> surface, String? file, double quality) {
-  final imgSaveWebpLookupFunction = _libImage
-      .lookupFunction<
-        Uint8 Function(
-          Pointer<SdlSurface> surface,
-          Pointer<Utf8> file,
-          Float quality,
-        ),
-        int Function(
-          Pointer<SdlSurface> surface,
-          Pointer<Utf8> file,
-          double quality,
-        )
-      >('IMG_SaveWEBP');
-  final filePointer = file != null ? file.toNativeUtf8() : nullptr;
-  final result = imgSaveWebpLookupFunction(surface, filePointer, quality) == 1;
-  calloc.free(filePointer);
-  return result;
-}
-
-///
-/// Save an SDL_Surface into TGA image data, via an SDL_IOStream.
-///
-/// If you just want to save to a filename, you can use IMG_SaveTGA() instead.
-///
-/// \param surface the SDL surface to save.
-/// \param dst the SDL_IOStream to save the image data to.
-/// \returns true on success or false on failure; call SDL_GetError() for more
-/// information.
-///
-/// \since This function is available since SDL_image 3.2.18.
-///
-/// \sa IMG_SaveTGA
-///
-/// ```c
-/// extern SDL_DECLSPEC bool SDLCALL IMG_SaveTGA_IO(SDL_Surface *surface, SDL_IOStream *dst)
-/// ```
-/// {@category image}
-bool imgSaveTgaIo(Pointer<SdlSurface> surface, Pointer<SdlIoStream> dst) {
-  final imgSaveTgaIoLookupFunction = _libImage
-      .lookupFunction<
-        Uint8 Function(Pointer<SdlSurface> surface, Pointer<SdlIoStream> dst),
-        int Function(Pointer<SdlSurface> surface, Pointer<SdlIoStream> dst)
-      >('IMG_SaveTGA_IO');
-  return imgSaveTgaIoLookupFunction(surface, dst) == 1;
-}
-
-///
-/// Save an SDL_Surface into a TGA image file.
-///
-/// If the file already exists, it will be overwritten.
-///
-/// \param surface the SDL surface to save.
-/// \param file path on the filesystem to write new file to.
-/// \returns true on success or false on failure; call SDL_GetError() for more
-/// information.
-///
-/// \since This function is available since SDL_image 3.2.18.
-///
-/// \sa IMG_SaveTGA_IO
-///
-/// ```c
-/// extern SDL_DECLSPEC bool SDLCALL IMG_SaveTGA(SDL_Surface *surface, const char *file)
-/// ```
-/// {@category image}
-bool imgSaveTga(Pointer<SdlSurface> surface, String? file) {
-  final imgSaveTgaLookupFunction = _libImage
-      .lookupFunction<
-        Uint8 Function(Pointer<SdlSurface> surface, Pointer<Utf8> file),
-        int Function(Pointer<SdlSurface> surface, Pointer<Utf8> file)
-      >('IMG_SaveTGA');
-  final filePointer = file != null ? file.toNativeUtf8() : nullptr;
-  final result = imgSaveTgaLookupFunction(surface, filePointer) == 1;
-  calloc.free(filePointer);
-  return result;
-}
-
-///
 /// Load an animation from a file.
 ///
 /// When done with the returned animation, the app should dispose of it with a
@@ -2800,6 +3084,12 @@ bool imgSaveTga(Pointer<SdlSurface> surface, String? file) {
 ///
 /// \since This function is available since SDL_image 3.0.0.
 ///
+/// \sa IMG_LoadAnimation_IO
+/// \sa IMG_LoadAnimationTyped_IO
+/// \sa IMG_LoadAPNGAnimation_IO
+/// \sa IMG_LoadAVIFAnimation_IO
+/// \sa IMG_LoadGIFAnimation_IO
+/// \sa IMG_LoadWEBPAnimation_IO
 /// \sa IMG_FreeAnimation
 ///
 /// ```c
@@ -2835,6 +3125,12 @@ Pointer<ImgAnimation> imgLoadAnimation(String? file) {
 ///
 /// \since This function is available since SDL_image 3.0.0.
 ///
+/// \sa IMG_LoadAnimation
+/// \sa IMG_LoadAnimationTyped_IO
+/// \sa IMG_LoadAPNGAnimation_IO
+/// \sa IMG_LoadAVIFAnimation_IO
+/// \sa IMG_LoadGIFAnimation_IO
+/// \sa IMG_LoadWEBPAnimation_IO
 /// \sa IMG_FreeAnimation
 ///
 /// ```c
@@ -2879,6 +3175,10 @@ Pointer<ImgAnimation> imgLoadAnimationIo(
 ///
 /// \sa IMG_LoadAnimation
 /// \sa IMG_LoadAnimation_IO
+/// \sa IMG_LoadAPNGAnimation_IO
+/// \sa IMG_LoadAVIFAnimation_IO
+/// \sa IMG_LoadGIFAnimation_IO
+/// \sa IMG_LoadWEBPAnimation_IO
 /// \sa IMG_FreeAnimation
 ///
 /// ```c
@@ -2925,6 +3225,10 @@ Pointer<ImgAnimation> imgLoadAnimationTypedIo(
 /// \sa IMG_LoadAnimation
 /// \sa IMG_LoadAnimation_IO
 /// \sa IMG_LoadAnimationTyped_IO
+/// \sa IMG_LoadAPNGAnimation_IO
+/// \sa IMG_LoadAVIFAnimation_IO
+/// \sa IMG_LoadGIFAnimation_IO
+/// \sa IMG_LoadWEBPAnimation_IO
 ///
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL IMG_FreeAnimation(IMG_Animation *anim)
@@ -2937,6 +3241,80 @@ void imgFreeAnimation(Pointer<ImgAnimation> anim) {
         void Function(Pointer<ImgAnimation> anim)
       >('IMG_FreeAnimation');
   return imgFreeAnimationLookupFunction(anim);
+}
+
+///
+/// Load an APNG animation directly from an SDL_IOStream.
+///
+/// If you know you definitely have an APNG image, you can call this function,
+/// which will skip SDL_image's file format detection routines. Generally, it's
+/// better to use the abstract interfaces; also, there is only an SDL_IOStream
+/// interface available here.
+///
+/// When done with the returned animation, the app should dispose of it with a
+/// call to IMG_FreeAnimation().
+///
+/// \param src an SDL_IOStream from which data will be read.
+/// \returns a new IMG_Animation, or NULL on error.
+///
+/// \since This function is available since SDL_image 3.4.0.
+///
+/// \sa IMG_LoadAnimation
+/// \sa IMG_LoadAnimation_IO
+/// \sa IMG_LoadAnimationTyped_IO
+/// \sa IMG_LoadAVIFAnimation_IO
+/// \sa IMG_LoadGIFAnimation_IO
+/// \sa IMG_LoadWEBPAnimation_IO
+/// \sa IMG_FreeAnimation
+///
+/// ```c
+/// extern SDL_DECLSPEC IMG_Animation *SDLCALL IMG_LoadAPNGAnimation_IO(SDL_IOStream *src)
+/// ```
+/// {@category image}
+Pointer<ImgAnimation> imgLoadApngAnimationIo(Pointer<SdlIoStream> src) {
+  final imgLoadApngAnimationIoLookupFunction = _libImage
+      .lookupFunction<
+        Pointer<ImgAnimation> Function(Pointer<SdlIoStream> src),
+        Pointer<ImgAnimation> Function(Pointer<SdlIoStream> src)
+      >('IMG_LoadAPNGAnimation_IO');
+  return imgLoadApngAnimationIoLookupFunction(src);
+}
+
+///
+/// Load an AVIF animation directly from an SDL_IOStream.
+///
+/// If you know you definitely have an AVIF animation, you can call this
+/// function, which will skip SDL_image's file format detection routines.
+/// Generally it's better to use the abstract interfaces; also, there is only
+/// an SDL_IOStream interface available here.
+///
+/// When done with the returned animation, the app should dispose of it with a
+/// call to IMG_FreeAnimation().
+///
+/// \param src an SDL_IOStream that data will be read from.
+/// \returns a new IMG_Animation, or NULL on error.
+///
+/// \since This function is available since SDL_image 3.4.0.
+///
+/// \sa IMG_LoadAnimation
+/// \sa IMG_LoadAnimation_IO
+/// \sa IMG_LoadAnimationTyped_IO
+/// \sa IMG_LoadAPNGAnimation_IO
+/// \sa IMG_LoadGIFAnimation_IO
+/// \sa IMG_LoadWEBPAnimation_IO
+/// \sa IMG_FreeAnimation
+///
+/// ```c
+/// extern SDL_DECLSPEC IMG_Animation *SDLCALL IMG_LoadAVIFAnimation_IO(SDL_IOStream *src)
+/// ```
+/// {@category image}
+Pointer<ImgAnimation> imgLoadAvifAnimationIo(Pointer<SdlIoStream> src) {
+  final imgLoadAvifAnimationIoLookupFunction = _libImage
+      .lookupFunction<
+        Pointer<ImgAnimation> Function(Pointer<SdlIoStream> src),
+        Pointer<ImgAnimation> Function(Pointer<SdlIoStream> src)
+      >('IMG_LoadAVIFAnimation_IO');
+  return imgLoadAvifAnimationIoLookupFunction(src);
 }
 
 ///
@@ -2955,6 +3333,9 @@ void imgFreeAnimation(Pointer<ImgAnimation> anim) {
 /// \sa IMG_LoadAnimation
 /// \sa IMG_LoadAnimation_IO
 /// \sa IMG_LoadAnimationTyped_IO
+/// \sa IMG_LoadAPNGAnimation_IO
+/// \sa IMG_LoadAVIFAnimation_IO
+/// \sa IMG_LoadWEBPAnimation_IO
 /// \sa IMG_FreeAnimation
 ///
 /// ```c
@@ -2986,6 +3367,9 @@ Pointer<ImgAnimation> imgLoadGifAnimationIo(Pointer<SdlIoStream> src) {
 /// \sa IMG_LoadAnimation
 /// \sa IMG_LoadAnimation_IO
 /// \sa IMG_LoadAnimationTyped_IO
+/// \sa IMG_LoadAPNGAnimation_IO
+/// \sa IMG_LoadAVIFAnimation_IO
+/// \sa IMG_LoadGIFAnimation_IO
 /// \sa IMG_FreeAnimation
 ///
 /// ```c
@@ -3157,6 +3541,7 @@ Pointer<ImgAnimationStream> imgCreateAnimationStreamWithProperties(int props) {
 /// \sa IMG_CreateAnimationStream
 /// \sa IMG_CreateAnimationStream_IO
 /// \sa IMG_CreateAnimationStreamWithProperties
+/// \sa IMG_CloseAnimationStream
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL IMG_AddAnimationFrame(IMG_AnimationStream *stream, SDL_Surface *surface, Uint64 pts)

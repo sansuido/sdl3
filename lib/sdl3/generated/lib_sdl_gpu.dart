@@ -1004,7 +1004,7 @@ void sdlInsertGpuDebugLabel(
 }
 
 ///
-/// Begins a debug group with an arbitary name.
+/// Begins a debug group with an arbitrary name.
 ///
 /// Used for denoting groups of calls when viewing the command buffer
 /// callstream in a graphics debugging tool.

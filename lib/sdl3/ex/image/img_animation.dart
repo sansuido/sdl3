@@ -15,6 +15,10 @@ extension ImgAnimationPointerEx on Pointer<ImgAnimation> {
   /// \sa IMG_LoadAnimation
   /// \sa IMG_LoadAnimation_IO
   /// \sa IMG_LoadAnimationTyped_IO
+  /// \sa IMG_LoadAPNGAnimation_IO
+  /// \sa IMG_LoadAVIFAnimation_IO
+  /// \sa IMG_LoadGIFAnimation_IO
+  /// \sa IMG_LoadWEBPAnimation_IO
   ///
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL IMG_FreeAnimation(IMG_Animation *anim)

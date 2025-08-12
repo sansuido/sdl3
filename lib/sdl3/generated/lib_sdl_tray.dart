@@ -3,33 +3,6 @@
 part of '../sdl.dart';
 
 ///
-/// Check whether or not tray icons can be created.
-///
-/// Note that this function does not guarantee that SDL_CreateTray() will or
-/// will not work; you should still check SDL_CreateTray() for errors.
-///
-/// Using tray icons require the video subsystem.
-///
-/// \returns true if trays are available, false otherwise.
-///
-/// \threadsafety This function should only be called on the main thread. It
-/// will return false if not called on the main thread.
-///
-/// \since This function is available since SDL 3.4.0.
-///
-/// \sa SDL_CreateTray
-///
-/// ```c
-/// extern SDL_DECLSPEC bool SDLCALL SDL_IsTraySupported(void)
-/// ```
-/// {@category tray}
-bool sdlIsTraySupported() {
-  final sdlIsTraySupportedLookupFunction = _libSdl
-      .lookupFunction<Uint8 Function(), int Function()>('SDL_IsTraySupported');
-  return sdlIsTraySupportedLookupFunction() == 1;
-}
-
-///
 /// Create an icon to be placed in the operating system's tray, or equivalent.
 ///
 /// Many platforms advise not using a system tray unless persistence is a

@@ -6,6 +6,8 @@ part of '../sdl_net.dart';
 ///
 /// \returns SDL_net version.
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL_net 3.0.0.
 ///
 /// ```c
@@ -157,9 +159,10 @@ Pointer<NetAddress> netResolveHostname(String? host) {
 /// \param address The NET_Address object to wait on.
 /// \param timeout Number of milliseconds to wait for resolution to complete.
 /// -1 to wait indefinitely, 0 to check once without waiting.
-/// \returns 1 if successfully resolved, -1 if resolution failed, 0 if still
-/// resolving (this function timed out without resolution); if -1,
-/// call SDL_GetError() for details.
+/// \returns NET_SUCCESS if successfully resolved, NET_FAILURE if resolution
+/// failed, NET_WAITING if still resolving (this function timed out
+/// without resolution); if NET_FAILURE, call SDL_GetError() for
+/// details.
 ///
 /// \threadsafety It is safe to call this function from any thread, and several
 /// threads can block on the same address simultaneously.
@@ -169,7 +172,7 @@ Pointer<NetAddress> netResolveHostname(String? host) {
 /// \sa NET_GetAddressStatus
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL NET_WaitUntilResolved(NET_Address *address, Sint32 timeout)
+/// extern SDL_DECLSPEC NET_Status SDLCALL NET_WaitUntilResolved(NET_Address *address, Sint32 timeout)
 /// ```
 /// {@category net}
 int netWaitUntilResolved(Pointer<NetAddress> address, int timeout) {
@@ -199,8 +202,10 @@ int netWaitUntilResolved(Pointer<NetAddress> address, int timeout) {
 /// host represented by the address.
 ///
 /// \param address The NET_Address to query.
-/// \returns 1 if successfully resolved, -1 if resolution failed, 0 if still
-/// resolving; if -1, call SDL_GetError() for details.
+/// \returns NET_SUCCESS if successfully resolved, NET_FAILURE if resolution
+/// failed, NET_WAITING if still resolving (this function timed out
+/// without resolution); if NET_FAILURE, call SDL_GetError() for
+/// details.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -209,7 +214,7 @@ int netWaitUntilResolved(Pointer<NetAddress> address, int timeout) {
 /// \sa NET_WaitUntilResolved
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL NET_GetAddressStatus(NET_Address *address)
+/// extern SDL_DECLSPEC NET_Status SDLCALL NET_GetAddressStatus(NET_Address *address)
 /// ```
 /// {@category net}
 int netGetAddressStatus(Pointer<NetAddress> address) {
@@ -400,7 +405,8 @@ void netSimulateAddressResolutionLoss(int percentLoss) {
 ///
 /// \param a first address to compare.
 /// \param b second address to compare.
-/// \returns -1 if `a` is "less than" `b`, 1 if "greater than", 0 if equal.
+/// \returns a value less than zero if `a` is "less than" `b`, a value greater
+/// than zero if "greater than", zero if equal.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -595,9 +601,10 @@ Pointer<NetStreamSocket> netCreateClient(
 /// \param sock The NET_StreamSocket object to wait on.
 /// \param timeout Number of milliseconds to wait for resolution to complete.
 /// -1 to wait indefinitely, 0 to check once without waiting.
-/// \returns 1 if successfully connected, -1 if connection failed, 0 if still
-/// connecting (this function timed out without resolution); if -1,
-/// call SDL_GetError() for details.
+/// \returns NET_SUCCESS if successfully connected, NET_FAILURE if connection
+/// failed, NET_WAITING if still connecting (this function timed out
+/// without resolution); if NET_FAILURE, call SDL_GetError() for
+/// details.
 ///
 /// \threadsafety You should not operate on the same socket from multiple
 /// threads at the same time without supplying a serialization
@@ -609,7 +616,7 @@ Pointer<NetStreamSocket> netCreateClient(
 /// \sa NET_GetConnectionStatus
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL NET_WaitUntilConnected(NET_StreamSocket *sock, Sint32 timeout)
+/// extern SDL_DECLSPEC NET_Status SDLCALL NET_WaitUntilConnected(NET_StreamSocket *sock, Sint32 timeout)
 /// ```
 /// {@category net}
 int netWaitUntilConnected(Pointer<NetStreamSocket> sock, int timeout) {
@@ -828,8 +835,9 @@ Pointer<NetAddress> netGetStreamSocketAddress(Pointer<NetStreamSocket> sock) {
 /// connection dropped later when your reads and writes report failures.
 ///
 /// \param sock the stream socket to query.
-/// \returns 1 if successfully connected, -1 if connection failed, 0 if still
-/// connecting; if -1, call SDL_GetError() for details.
+/// \returns NET_SUCCESS if successfully connected, NET_FAILURE if connection
+/// failed, NET_WAITING if still connecting; if NET_FAILURE, call
+/// SDL_GetError() for details.
 ///
 /// \threadsafety You should not operate on the same socket from multiple
 /// threads at the same time without supplying a serialization
@@ -841,7 +849,7 @@ Pointer<NetAddress> netGetStreamSocketAddress(Pointer<NetStreamSocket> sock) {
 /// \sa NET_WaitUntilConnected
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL NET_GetConnectionStatus(NET_StreamSocket *sock)
+/// extern SDL_DECLSPEC NET_Status SDLCALL NET_GetConnectionStatus(NET_StreamSocket *sock)
 /// ```
 /// {@category net}
 int netGetConnectionStatus(Pointer<NetStreamSocket> sock) {
@@ -1546,7 +1554,8 @@ void netDestroyDatagramSocket(Pointer<NetDatagramSocket> sock) {
 /// - NET_Server (reports new input when a connection is ready to be accepted
 /// with NET_AcceptClient())
 /// - NET_StreamSocket (reports new input when the remote end has sent more
-/// bytes of data to be read with NET_ReadFromStreamSocket).
+/// bytes of data to be read with NET_ReadFromStreamSocket, or if the socket
+/// finished making its initial connection).
 /// - NET_DatagramSocket (reports new input when a new packet arrives that can
 /// be read with NET_ReceiveDatagram).
 ///
