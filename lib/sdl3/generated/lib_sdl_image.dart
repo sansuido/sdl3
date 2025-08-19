@@ -3386,83 +3386,83 @@ Pointer<ImgAnimation> imgLoadWebpAnimationIo(Pointer<SdlIoStream> src) {
 }
 
 ///
-/// Create an animation stream and save it to a file.
+/// Create an encoder to save a series of images to a file.
 ///
 /// The file type is determined from the file extension, e.g. "file.webp" will
 /// be encoded using WEBP.
 ///
 /// \param file the file where the animation will be saved.
-/// \returns a new IMG_AnimationStream, or NULL on failure; call SDL_GetError()
-/// for more information.
+/// \returns a new IMG_AnimationEncoder, or NULL on failure; call
+/// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL_image 3.4.0.
 ///
-/// \sa IMG_CreateAnimationStream_IO
-/// \sa IMG_CreateAnimationStreamWithProperties
-/// \sa IMG_AddAnimationFrame
-/// \sa IMG_CloseAnimationStream
+/// \sa IMG_CreateAnimationEncoder_IO
+/// \sa IMG_CreateAnimationEncoderWithProperties
+/// \sa IMG_AddAnimationEncoderFrame
+/// \sa IMG_CloseAnimationEncoder
 ///
 /// ```c
-/// extern SDL_DECLSPEC IMG_AnimationStream * SDLCALL IMG_CreateAnimationStream(const char *file)
+/// extern SDL_DECLSPEC IMG_AnimationEncoder * SDLCALL IMG_CreateAnimationEncoder(const char *file)
 /// ```
 /// {@category image}
-Pointer<ImgAnimationStream> imgCreateAnimationStream(String? file) {
-  final imgCreateAnimationStreamLookupFunction = _libImage
+Pointer<ImgAnimationEncoder> imgCreateAnimationEncoder(String? file) {
+  final imgCreateAnimationEncoderLookupFunction = _libImage
       .lookupFunction<
-        Pointer<ImgAnimationStream> Function(Pointer<Utf8> file),
-        Pointer<ImgAnimationStream> Function(Pointer<Utf8> file)
-      >('IMG_CreateAnimationStream');
+        Pointer<ImgAnimationEncoder> Function(Pointer<Utf8> file),
+        Pointer<ImgAnimationEncoder> Function(Pointer<Utf8> file)
+      >('IMG_CreateAnimationEncoder');
   final filePointer = file != null ? file.toNativeUtf8() : nullptr;
-  final result = imgCreateAnimationStreamLookupFunction(filePointer);
+  final result = imgCreateAnimationEncoderLookupFunction(filePointer);
   calloc.free(filePointer);
   return result;
 }
 
 ///
-/// Create an animation stream and save it to an IOStream.
+/// Create an encoder to save a series of images to an IOStream.
 ///
 /// If `closeio` is true, `dst` will be closed before returning if this
-/// function fails, or when the animation stream is closed if this function
+/// function fails, or when the animation encoder is closed if this function
 /// succeeds.
 ///
 /// \param dst an SDL_IOStream that will be used to save the stream.
 /// \param closeio true to close the SDL_IOStream when done, false to leave it
 /// open.
 /// \param type a filename extension that represent this data ("WEBP", etc).
-/// \returns a new IMG_AnimationStream, or NULL on failure; call SDL_GetError()
-/// for more information.
+/// \returns a new IMG_AnimationEncoder, or NULL on failure; call
+/// SDL_GetError() for more information.
 ///
 /// \since This function is available since SDL_image 3.4.0.
 ///
-/// \sa IMG_CreateAnimationStream
-/// \sa IMG_CreateAnimationStreamWithProperties
-/// \sa IMG_AddAnimationFrame
-/// \sa IMG_CloseAnimationStream
+/// \sa IMG_CreateAnimationEncoder
+/// \sa IMG_CreateAnimationEncoderWithProperties
+/// \sa IMG_AddAnimationEncoderFrame
+/// \sa IMG_CloseAnimationEncoder
 ///
 /// ```c
-/// extern SDL_DECLSPEC IMG_AnimationStream * SDLCALL IMG_CreateAnimationStream_IO(SDL_IOStream *dst, bool closeio, const char *type)
+/// extern SDL_DECLSPEC IMG_AnimationEncoder * SDLCALL IMG_CreateAnimationEncoder_IO(SDL_IOStream *dst, bool closeio, const char *type)
 /// ```
 /// {@category image}
-Pointer<ImgAnimationStream> imgCreateAnimationStreamIo(
+Pointer<ImgAnimationEncoder> imgCreateAnimationEncoderIo(
   Pointer<SdlIoStream> dst,
   bool closeio,
   String? type,
 ) {
-  final imgCreateAnimationStreamIoLookupFunction = _libImage
+  final imgCreateAnimationEncoderIoLookupFunction = _libImage
       .lookupFunction<
-        Pointer<ImgAnimationStream> Function(
+        Pointer<ImgAnimationEncoder> Function(
           Pointer<SdlIoStream> dst,
           Uint8 closeio,
           Pointer<Utf8> type,
         ),
-        Pointer<ImgAnimationStream> Function(
+        Pointer<ImgAnimationEncoder> Function(
           Pointer<SdlIoStream> dst,
           int closeio,
           Pointer<Utf8> type,
         )
-      >('IMG_CreateAnimationStream_IO');
+      >('IMG_CreateAnimationEncoder_IO');
   final typePointer = type != null ? type.toNativeUtf8() : nullptr;
-  final result = imgCreateAnimationStreamIoLookupFunction(
+  final result = imgCreateAnimationEncoderIoLookupFunction(
     dst,
     closeio ? 1 : 0,
     typePointer,
@@ -3472,127 +3472,442 @@ Pointer<ImgAnimationStream> imgCreateAnimationStreamIo(
 }
 
 ///
-/// Create an animation stream with the specified properties.
+/// Create an animation encoder with the specified properties.
 ///
 /// These are the supported properties:
 ///
-/// - `IMG_PROP_ANIMATION_STREAM_CREATE_FILENAME_STRING`: the file to save, if
+/// - `IMG_PROP_ANIMATION_ENCODER_CREATE_FILENAME_STRING`: the file to save, if
 /// an SDL_IOStream isn't being used. This is required if
-/// `IMG_PROP_ANIMATION_STREAM_CREATE_IOSTREAM_POINTER` isn't set.
-/// - `IMG_PROP_ANIMATION_STREAM_CREATE_IOSTREAM_POINTER`: an SDL_IOStream that
-/// will be used to save the stream. This should not be closed until the
-/// animation stream is closed. This is required if
-/// `IMG_PROP_ANIMATION_STREAM_CREATE_FILENAME_STRING` isn't set.
-/// - `IMG_PROP_ANIMATION_STREAM_CREATE_IOSTREAM_AUTOCLOSE_BOOLEAN`: true if
-/// closing the animation stream should also close the associated
+/// `IMG_PROP_ANIMATION_ENCODER_CREATE_IOSTREAM_POINTER` isn't set.
+/// - `IMG_PROP_ANIMATION_ENCODER_CREATE_IOSTREAM_POINTER`: an SDL_IOStream
+/// that will be used to save the stream. This should not be closed until the
+/// animation encoder is closed. This is required if
+/// `IMG_PROP_ANIMATION_ENCODER_CREATE_FILENAME_STRING` isn't set.
+/// - `IMG_PROP_ANIMATION_ENCODER_CREATE_IOSTREAM_AUTOCLOSE_BOOLEAN`: true if
+/// closing the animation encoder should also close the associated
 /// SDL_IOStream.
-/// - `IMG_PROP_ANIMATION_STREAM_CREATE_TYPE_STRING`: the output file type,
+/// - `IMG_PROP_ANIMATION_ENCODER_CREATE_TYPE_STRING`: the output file type,
 /// e.g. "webp", defaults to the file extension if
-/// `IMG_PROP_ANIMATION_STREAM_CREATE_FILENAME_STRING` is set.
-/// - `IMG_PROP_ANIMATION_STREAM_CREATE_QUALITY_NUMBER`: the compression
+/// `IMG_PROP_ANIMATION_ENCODER_CREATE_FILENAME_STRING` is set.
+/// - `IMG_PROP_ANIMATION_ENCODER_CREATE_QUALITY_NUMBER`: the compression
 /// quality, in the range of 0 to 100. The higher the number, the higher the
 /// quality and file size. This defaults to a balanced value for compression
 /// and quality.
-/// - `IMG_PROP_ANIMATION_STREAM_CREATE_TIMEBASE_NUMERATOR_NUMBER`: the
+/// - `IMG_PROP_ANIMATION_ENCODER_CREATE_TIMEBASE_NUMERATOR_NUMBER`: the
 /// numerator of the fraction used to multiply the pts to convert it to
 /// seconds. This defaults to 1.
-/// - `IMG_PROP_ANIMATION_STREAM_CREATE_TIMEBASE_DENOMINATOR_NUMBER`: the
+/// - `IMG_PROP_ANIMATION_ENCODER_CREATE_TIMEBASE_DENOMINATOR_NUMBER`: the
 /// denominator of the fraction used to multiply the pts to convert it to
 /// seconds. This defaults to 1000.
 ///
-/// \param props the properties of the animation stream.
-/// \returns a new IMG_AnimationStream, or NULL on failure; call SDL_GetError()
+/// \param props the properties of the animation encoder.
+/// \returns a new IMG_AnimationEncoder, or NULL on failure; call
+/// SDL_GetError() for more information.
+///
+/// \since This function is available since SDL_image 3.4.0.
+///
+/// \sa IMG_CreateAnimationEncoder
+/// \sa IMG_CreateAnimationEncoder_IO
+/// \sa IMG_AddAnimationEncoderFrame
+/// \sa IMG_CloseAnimationEncoder
+///
+/// ```c
+/// extern SDL_DECLSPEC IMG_AnimationEncoder * SDLCALL IMG_CreateAnimationEncoderWithProperties(SDL_PropertiesID props)
+/// ```
+/// {@category image}
+Pointer<ImgAnimationEncoder> imgCreateAnimationEncoderWithProperties(
+  int props,
+) {
+  final imgCreateAnimationEncoderWithPropertiesLookupFunction = _libImage
+      .lookupFunction<
+        Pointer<ImgAnimationEncoder> Function(Uint32 props),
+        Pointer<ImgAnimationEncoder> Function(int props)
+      >('IMG_CreateAnimationEncoderWithProperties');
+  return imgCreateAnimationEncoderWithPropertiesLookupFunction(props);
+}
+
+///
+/// Add a frame to an animation encoder.
+///
+/// \param encoder the receiving images.
+/// \param surface the surface to add as the next frame in the animation.
+/// \param duration the duration of the frame, usually in milliseconds but can
+/// be other units if the
+/// `IMG_PROP_ANIMATION_ENCODER_CREATE_TIMEBASE_DENOMINATOR_NUMBER`
+/// property is set when creating the encoder.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \since This function is available since SDL_image 3.4.0.
+///
+/// \sa IMG_CreateAnimationEncoder
+/// \sa IMG_CreateAnimationEncoder_IO
+/// \sa IMG_CreateAnimationEncoderWithProperties
+/// \sa IMG_CloseAnimationEncoder
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL IMG_AddAnimationEncoderFrame(IMG_AnimationEncoder *encoder, SDL_Surface *surface, Uint64 duration)
+/// ```
+/// {@category image}
+bool imgAddAnimationEncoderFrame(
+  Pointer<ImgAnimationEncoder> encoder,
+  Pointer<SdlSurface> surface,
+  int duration,
+) {
+  final imgAddAnimationEncoderFrameLookupFunction = _libImage
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<ImgAnimationEncoder> encoder,
+          Pointer<SdlSurface> surface,
+          Uint64 duration,
+        ),
+        int Function(
+          Pointer<ImgAnimationEncoder> encoder,
+          Pointer<SdlSurface> surface,
+          int duration,
+        )
+      >('IMG_AddAnimationEncoderFrame');
+  return imgAddAnimationEncoderFrameLookupFunction(
+        encoder,
+        surface,
+        duration,
+      ) ==
+      1;
+}
+
+///
+/// Close an animation encoder, finishing any encoding.
+///
+/// Calling this function frees the animation encoder, and returns the final
+/// status of the encoding process.
+///
+/// \param encoder the encoder to close.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \since This function is available since SDL_image 3.4.0.
+///
+/// \sa IMG_CreateAnimationEncoder
+/// \sa IMG_CreateAnimationEncoder_IO
+/// \sa IMG_CreateAnimationEncoderWithProperties
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL IMG_CloseAnimationEncoder(IMG_AnimationEncoder *encoder)
+/// ```
+/// {@category image}
+bool imgCloseAnimationEncoder(Pointer<ImgAnimationEncoder> encoder) {
+  final imgCloseAnimationEncoderLookupFunction = _libImage
+      .lookupFunction<
+        Uint8 Function(Pointer<ImgAnimationEncoder> encoder),
+        int Function(Pointer<ImgAnimationEncoder> encoder)
+      >('IMG_CloseAnimationEncoder');
+  return imgCloseAnimationEncoderLookupFunction(encoder) == 1;
+}
+
+///
+/// Create a decoder to read a series of images from a file.
+///
+/// The file type is determined from the file extension, e.g. "file.webp" will
+/// be decoded using WEBP.
+///
+/// \param file the file containing a series of images.
+/// \returns a new IMG_AnimationDecoder, or NULL on failure; call
+/// SDL_GetError() for more information.
+///
+/// \since This function is available since SDL_image 3.4.0.
+///
+/// \sa IMG_CreateAnimationDecoder_IO
+/// \sa IMG_CreateAnimationDecoderWithProperties
+/// \sa IMG_GetAnimationDecoderFrame
+/// \sa IMG_ResetAnimationDecoder
+/// \sa IMG_CloseAnimationDecoder
+///
+/// ```c
+/// extern SDL_DECLSPEC IMG_AnimationDecoder * SDLCALL IMG_CreateAnimationDecoder(const char *file)
+/// ```
+/// {@category image}
+Pointer<ImgAnimationDecoder> imgCreateAnimationDecoder(String? file) {
+  final imgCreateAnimationDecoderLookupFunction = _libImage
+      .lookupFunction<
+        Pointer<ImgAnimationDecoder> Function(Pointer<Utf8> file),
+        Pointer<ImgAnimationDecoder> Function(Pointer<Utf8> file)
+      >('IMG_CreateAnimationDecoder');
+  final filePointer = file != null ? file.toNativeUtf8() : nullptr;
+  final result = imgCreateAnimationDecoderLookupFunction(filePointer);
+  calloc.free(filePointer);
+  return result;
+}
+
+///
+/// Create a decoder to read a series of images from an IOStream.
+///
+/// If `closeio` is true, `src` will be closed before returning if this
+/// function fails, or when the animation decoder is closed if this function
+/// succeeds.
+///
+/// \param src an SDL_IOStream containing a series of images.
+/// \param closeio true to close the SDL_IOStream when done, false to leave it
+/// open.
+/// \param type a filename extension that represent this data ("WEBP", etc).
+/// \returns a new IMG_AnimationDecoder, or NULL on failure; call
+/// SDL_GetError() for more information.
+///
+/// \since This function is available since SDL_image 3.4.0.
+///
+/// \sa IMG_CreateAnimationDecoder
+/// \sa IMG_CreateAnimationDecoderWithProperties
+/// \sa IMG_GetAnimationDecoderFrame
+/// \sa IMG_ResetAnimationDecoder
+/// \sa IMG_CloseAnimationDecoder
+///
+/// ```c
+/// extern SDL_DECLSPEC IMG_AnimationDecoder * SDLCALL IMG_CreateAnimationDecoder_IO(SDL_IOStream *src, bool closeio, const char *type)
+/// ```
+/// {@category image}
+Pointer<ImgAnimationDecoder> imgCreateAnimationDecoderIo(
+  Pointer<SdlIoStream> src,
+  bool closeio,
+  String? type,
+) {
+  final imgCreateAnimationDecoderIoLookupFunction = _libImage
+      .lookupFunction<
+        Pointer<ImgAnimationDecoder> Function(
+          Pointer<SdlIoStream> src,
+          Uint8 closeio,
+          Pointer<Utf8> type,
+        ),
+        Pointer<ImgAnimationDecoder> Function(
+          Pointer<SdlIoStream> src,
+          int closeio,
+          Pointer<Utf8> type,
+        )
+      >('IMG_CreateAnimationDecoder_IO');
+  final typePointer = type != null ? type.toNativeUtf8() : nullptr;
+  final result = imgCreateAnimationDecoderIoLookupFunction(
+    src,
+    closeio ? 1 : 0,
+    typePointer,
+  );
+  calloc.free(typePointer);
+  return result;
+}
+
+///
+/// Create an animation decoder with the specified properties.
+///
+/// These are the supported properties:
+///
+/// - `IMG_PROP_ANIMATION_DECODER_CREATE_FILENAME_STRING`: the file to load, if
+/// an SDL_IOStream isn't being used. This is required if
+/// `IMG_PROP_ANIMATION_DECODER_CREATE_IOSTREAM_POINTER` isn't set.
+/// - `IMG_PROP_ANIMATION_DECODER_CREATE_IOSTREAM_POINTER`: an SDL_IOStream
+/// containing a series of images. This should not be closed until the
+/// animation decoder is closed. This is required if
+/// `IMG_PROP_ANIMATION_DECODER_CREATE_FILENAME_STRING` isn't set.
+/// - `IMG_PROP_ANIMATION_DECODER_CREATE_IOSTREAM_AUTOCLOSE_BOOLEAN`: true if
+/// closing the animation decoder should also close the associated
+/// SDL_IOStream.
+/// - `IMG_PROP_ANIMATION_DECODER_CREATE_TYPE_STRING`: the input file type,
+/// e.g. "webp", defaults to the file extension if
+/// `IMG_PROP_ANIMATION_DECODER_CREATE_FILENAME_STRING` is set.
+///
+/// \param props the properties of the animation decoder.
+/// \returns a new IMG_AnimationDecoder, or NULL on failure; call
+/// SDL_GetError() for more information.
+///
+/// \since This function is available since SDL_image 3.4.0.
+///
+/// \sa IMG_CreateAnimationDecoder
+/// \sa IMG_CreateAnimationDecoder_IO
+/// \sa IMG_GetAnimationDecoderFrame
+/// \sa IMG_ResetAnimationDecoder
+/// \sa IMG_CloseAnimationDecoder
+///
+/// ```c
+/// extern SDL_DECLSPEC IMG_AnimationDecoder * SDLCALL IMG_CreateAnimationDecoderWithProperties(SDL_PropertiesID props)
+/// ```
+/// {@category image}
+Pointer<ImgAnimationDecoder> imgCreateAnimationDecoderWithProperties(
+  int props,
+) {
+  final imgCreateAnimationDecoderWithPropertiesLookupFunction = _libImage
+      .lookupFunction<
+        Pointer<ImgAnimationDecoder> Function(Uint32 props),
+        Pointer<ImgAnimationDecoder> Function(int props)
+      >('IMG_CreateAnimationDecoderWithProperties');
+  return imgCreateAnimationDecoderWithPropertiesLookupFunction(props);
+}
+
+///
+/// Get the properties of an animation decoder.
+///
+/// This function returns the properties of the animation decoder, which holds
+/// information about the underlying image such as description, copyright text
+/// and loop count.
+///
+/// \param decoder the animation decoder.
+/// \returns the properties ID of the animation decoder, or 0 if there are no
+/// properties; call SDL_GetError() for more information.
+///
+/// \since This function is available since SDL_image 3.4.0.
+///
+/// \sa IMG_CreateAnimationDecoder
+/// \sa IMG_CreateAnimationDecoder_IO
+/// \sa IMG_CreateAnimationDecoderWithProperties
+///
+/// ```c
+/// extern SDL_DECLSPEC SDL_PropertiesID SDLCALL IMG_GetAnimationDecoderProperties(IMG_AnimationDecoder* decoder)
+/// ```
+/// {@category image}
+int imgGetAnimationDecoderProperties(Pointer<ImgAnimationDecoder> decoder) {
+  final imgGetAnimationDecoderPropertiesLookupFunction = _libImage
+      .lookupFunction<
+        Uint32 Function(Pointer<ImgAnimationDecoder> decoder),
+        int Function(Pointer<ImgAnimationDecoder> decoder)
+      >('IMG_GetAnimationDecoderProperties');
+  return imgGetAnimationDecoderPropertiesLookupFunction(decoder);
+}
+
+///
+/// Get the next frame in an animation decoder.
+///
+/// This function decodes the next frame in the animation decoder, returning it
+/// as an SDL_Surface. The returned surface should be freed with
+/// SDL_FreeSurface() when no longer needed.
+///
+/// If the animation decoder has no more frames or an error occurred while
+/// decoding the frame, this function returns false. In that case, please call
+/// SDL_GetError() for more information. If SDL_GetError() returns an empty
+/// string, that means there are no more available frames. If SDL_GetError()
+/// returns a valid string, that means the decoding failed.
+///
+/// \param decoder the animation decoder.
+/// \param frame a pointer filled in with the SDL_Surface for the next frame in
+/// the animation.
+/// \param duration the duration of the frame, usually in milliseconds but can
+/// be other units if the
+/// `IMG_PROP_ANIMATION_DECODER_CREATE_TIMEBASE_DENOMINATOR_NUMBER`
+/// property is set when creating the decoder.
+/// \returns true on success or false on failure and when no more frames are
+/// available; call IMG_GetAnimationDecoderStatus() or SDL_GetError()
 /// for more information.
 ///
 /// \since This function is available since SDL_image 3.4.0.
 ///
-/// \sa IMG_CreateAnimationStream
-/// \sa IMG_CreateAnimationStream_IO
-/// \sa IMG_AddAnimationFrame
-/// \sa IMG_CloseAnimationStream
+/// \sa IMG_CreateAnimationDecoder
+/// \sa IMG_CreateAnimationDecoder_IO
+/// \sa IMG_CreateAnimationDecoderWithProperties
+/// \sa IMG_GetAnimationDecoderStatus
+/// \sa IMG_ResetAnimationDecoder
+/// \sa IMG_CloseAnimationDecoder
 ///
 /// ```c
-/// extern SDL_DECLSPEC IMG_AnimationStream * SDLCALL IMG_CreateAnimationStreamWithProperties(SDL_PropertiesID props)
+/// extern SDL_DECLSPEC bool SDLCALL IMG_GetAnimationDecoderFrame(IMG_AnimationDecoder *decoder, SDL_Surface **frame, Uint64 *duration)
 /// ```
 /// {@category image}
-Pointer<ImgAnimationStream> imgCreateAnimationStreamWithProperties(int props) {
-  final imgCreateAnimationStreamWithPropertiesLookupFunction = _libImage
-      .lookupFunction<
-        Pointer<ImgAnimationStream> Function(Uint32 props),
-        Pointer<ImgAnimationStream> Function(int props)
-      >('IMG_CreateAnimationStreamWithProperties');
-  return imgCreateAnimationStreamWithPropertiesLookupFunction(props);
-}
-
-///
-/// Add a frame to a stream of images being saved.
-///
-/// \param stream the stream receiving images.
-/// \param surface the surface to add as the next frame in the animation.
-/// \param pts the presentation timestamp of the frame, usually in milliseconds
-/// but can be other units if the
-/// `IMG_PROP_ANIMATION_STREAM_CREATE_TIMEBASE_DENOMINATOR_NUMBER`
-/// property is set when creating the stream.
-/// \returns true on success or false on failure; call SDL_GetError() for more
-/// information.
-///
-/// \since This function is available since SDL_image 3.4.0.
-///
-/// \sa IMG_CreateAnimationStream
-/// \sa IMG_CreateAnimationStream_IO
-/// \sa IMG_CreateAnimationStreamWithProperties
-/// \sa IMG_CloseAnimationStream
-///
-/// ```c
-/// extern SDL_DECLSPEC bool SDLCALL IMG_AddAnimationFrame(IMG_AnimationStream *stream, SDL_Surface *surface, Uint64 pts)
-/// ```
-/// {@category image}
-bool imgAddAnimationFrame(
-  Pointer<ImgAnimationStream> stream,
-  Pointer<SdlSurface> surface,
-  int pts,
+bool imgGetAnimationDecoderFrame(
+  Pointer<ImgAnimationDecoder> decoder,
+  Pointer<Pointer<SdlSurface>> frame,
+  Pointer<Uint64> duration,
 ) {
-  final imgAddAnimationFrameLookupFunction = _libImage
+  final imgGetAnimationDecoderFrameLookupFunction = _libImage
       .lookupFunction<
         Uint8 Function(
-          Pointer<ImgAnimationStream> stream,
-          Pointer<SdlSurface> surface,
-          Uint64 pts,
+          Pointer<ImgAnimationDecoder> decoder,
+          Pointer<Pointer<SdlSurface>> frame,
+          Pointer<Uint64> duration,
         ),
         int Function(
-          Pointer<ImgAnimationStream> stream,
-          Pointer<SdlSurface> surface,
-          int pts,
+          Pointer<ImgAnimationDecoder> decoder,
+          Pointer<Pointer<SdlSurface>> frame,
+          Pointer<Uint64> duration,
         )
-      >('IMG_AddAnimationFrame');
-  return imgAddAnimationFrameLookupFunction(stream, surface, pts) == 1;
+      >('IMG_GetAnimationDecoderFrame');
+  return imgGetAnimationDecoderFrameLookupFunction(decoder, frame, duration) ==
+      1;
 }
 
 ///
-/// Close an animation stream, finishing any encoding.
+/// Get the decoder status indicating the current state of the decoder.
 ///
-/// Calling this function frees the animation stream, and returns the final
-/// status of the encoding process.
+/// \param decoder the decoder to get the status of.
+/// \returns the status of the underlying decoder, or
+/// IMG_DECODER_STATUS_INVALID if the given decoder is invalid.
 ///
-/// \param stream the stream to close.
+/// \since This function is available since SDL_image 3.4.0.
+///
+/// \sa IMG_GetAnimationDecoderFrame
+///
+/// ```c
+/// extern SDL_DECLSPEC IMG_AnimationDecoderStatus SDLCALL IMG_GetAnimationDecoderStatus(IMG_AnimationDecoder *decoder)
+/// ```
+/// {@category image}
+int imgGetAnimationDecoderStatus(Pointer<ImgAnimationDecoder> decoder) {
+  final imgGetAnimationDecoderStatusLookupFunction = _libImage
+      .lookupFunction<
+        Int32 Function(Pointer<ImgAnimationDecoder> decoder),
+        int Function(Pointer<ImgAnimationDecoder> decoder)
+      >('IMG_GetAnimationDecoderStatus');
+  return imgGetAnimationDecoderStatusLookupFunction(decoder);
+}
+
+///
+/// Reset an animation decoder.
+///
+/// Calling this function resets the animation decoder, allowing it to start
+/// from the beginning again. This is useful if you want to decode the frame
+/// sequence again without creating a new decoder.
+///
+/// \param decoder the decoder to reset.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
 /// \since This function is available since SDL_image 3.4.0.
 ///
-/// \sa IMG_CreateAnimationStream
-/// \sa IMG_CreateAnimationStream_IO
-/// \sa IMG_CreateAnimationStreamWithProperties
+/// \sa IMG_CreateAnimationDecoder
+/// \sa IMG_CreateAnimationDecoder_IO
+/// \sa IMG_CreateAnimationDecoderWithProperties
+/// \sa IMG_GetAnimationDecoderFrame
+/// \sa IMG_CloseAnimationDecoder
 ///
 /// ```c
-/// extern SDL_DECLSPEC bool SDLCALL IMG_CloseAnimationStream(IMG_AnimationStream *stream)
+/// extern SDL_DECLSPEC bool SDLCALL IMG_ResetAnimationDecoder(IMG_AnimationDecoder *decoder)
 /// ```
 /// {@category image}
-bool imgCloseAnimationStream(Pointer<ImgAnimationStream> stream) {
-  final imgCloseAnimationStreamLookupFunction = _libImage
+bool imgResetAnimationDecoder(Pointer<ImgAnimationDecoder> decoder) {
+  final imgResetAnimationDecoderLookupFunction = _libImage
       .lookupFunction<
-        Uint8 Function(Pointer<ImgAnimationStream> stream),
-        int Function(Pointer<ImgAnimationStream> stream)
-      >('IMG_CloseAnimationStream');
-  return imgCloseAnimationStreamLookupFunction(stream) == 1;
+        Uint8 Function(Pointer<ImgAnimationDecoder> decoder),
+        int Function(Pointer<ImgAnimationDecoder> decoder)
+      >('IMG_ResetAnimationDecoder');
+  return imgResetAnimationDecoderLookupFunction(decoder) == 1;
+}
+
+///
+/// Close an animation decoder, finishing any decoding.
+///
+/// Calling this function frees the animation decoder, and returns the final
+/// status of the decoding process.
+///
+/// \param decoder the decoder to close.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \since This function is available since SDL_image 3.4.0.
+///
+/// \sa IMG_CreateAnimationDecoder
+/// \sa IMG_CreateAnimationDecoder_IO
+/// \sa IMG_CreateAnimationDecoderWithProperties
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL IMG_CloseAnimationDecoder(IMG_AnimationDecoder *decoder)
+/// ```
+/// {@category image}
+bool imgCloseAnimationDecoder(Pointer<ImgAnimationDecoder> decoder) {
+  final imgCloseAnimationDecoderLookupFunction = _libImage
+      .lookupFunction<
+        Uint8 Function(Pointer<ImgAnimationDecoder> decoder),
+        int Function(Pointer<ImgAnimationDecoder> decoder)
+      >('IMG_CloseAnimationDecoder');
+  return imgCloseAnimationDecoderLookupFunction(decoder) == 1;
 }

@@ -36,6 +36,8 @@ part of '../sdl.dart';
 /// doesn't implement this functionality, call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_GetPrefPath
@@ -111,6 +113,8 @@ String? sdlGetBasePath() {
 /// etc.). This should be freed with SDL_free() when it is no longer
 /// needed.
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_GetBasePath
@@ -155,6 +159,8 @@ Pointer<Int8> sdlGetPrefPath(String? org, String? app) {
 /// \returns either a null-terminated C string containing the full path to the
 /// folder, or NULL if an error happened.
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
@@ -185,6 +191,8 @@ String? sdlGetUserFolder(int folder) {
 /// \param path the path of the directory to create.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
@@ -222,6 +230,8 @@ bool sdlCreateDirectory(String? path) {
 /// \param userdata a pointer that is passed to `callback`.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
@@ -264,6 +274,8 @@ bool sdlEnumerateDirectory(
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
@@ -300,6 +312,8 @@ bool sdlRemovePath(String? path) {
 /// \param newpath the new path.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
@@ -359,6 +373,10 @@ bool sdlRenamePath(String? oldpath, String? newpath) {
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety It is safe to call this function from any thread, but this
+/// operation is not atomic, so the app might need to protect
+/// access to specific paths from other threads if appropriate.
+///
 /// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
@@ -388,6 +406,8 @@ bool sdlCopyFile(String? oldpath, String? newpath) {
 /// check for the existence of a file.
 /// \returns true on success or false if the file doesn't exist, or another
 /// failure; call SDL_GetError() for more information.
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
@@ -493,6 +513,8 @@ Pointer<Pointer<Int8>> sdlGlobDirectory(
 /// \returns a UTF-8 string of the current working directory in
 /// platform-dependent notation. NULL if there's a problem. This
 /// should be freed with SDL_free() when it is no longer needed.
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///

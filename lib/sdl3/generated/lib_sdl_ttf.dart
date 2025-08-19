@@ -1328,6 +1328,67 @@ int ttfGetFontDirection(Pointer<TtfFont> font) {
 }
 
 ///
+/// Set additional space in pixels to be applied between any two rendered
+/// characters.
+///
+/// The spacing value is applied uniformly after each character, in addition to
+/// the normal glyph's advance.
+///
+/// Spacing may be a negative value, in which case it will reduce the distance
+/// instead.
+///
+/// This updates any TTF_Text objects using this font.
+///
+/// \param font the font to specify a direction for.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety This function should be called on the thread that created the
+/// font.
+///
+/// \since This function is available since SDL_ttf 3.4.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL TTF_SetFontCharSpacing(TTF_Font *font, int spacing)
+/// ```
+/// {@category ttf}
+bool ttfSetFontCharSpacing(Pointer<TtfFont> font, int spacing) {
+  final ttfSetFontCharSpacingLookupFunction = _libTtf
+      .lookupFunction<
+        Uint8 Function(Pointer<TtfFont> font, Int32 spacing),
+        int Function(Pointer<TtfFont> font, int spacing)
+      >('TTF_SetFontCharSpacing');
+  return ttfSetFontCharSpacingLookupFunction(font, spacing) == 1;
+}
+
+///
+/// Get the additional character spacing in pixels to be applied between any
+/// two rendered characters.
+///
+/// This defaults to 0 if it hasn't been set.
+///
+/// \param font the font to query.
+/// \returns the character spacing in pixels.
+///
+/// \threadsafety This function should be called on the thread that created the
+/// font.
+///
+/// \since This function is available since SDL_ttf 3.4.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC int SDLCALL TTF_GetFontCharSpacing(TTF_Font *font)
+/// ```
+/// {@category ttf}
+int ttfGetFontCharSpacing(Pointer<TtfFont> font) {
+  final ttfGetFontCharSpacingLookupFunction = _libTtf
+      .lookupFunction<
+        Int32 Function(Pointer<TtfFont> font),
+        int Function(Pointer<TtfFont> font)
+      >('TTF_GetFontCharSpacing');
+  return ttfGetFontCharSpacingLookupFunction(font);
+}
+
+///
 /// Convert from a 4 character string to a 32-bit tag.
 ///
 /// \param string the 4 character string to convert.

@@ -1,3 +1,8 @@
+## 2.3.3
+- SDL3-2025-08-17
+- [add] Added ImgAnimationEncoder and ImgAnimationDecoder functions (removed ImgAnimationStream).
+- [add] Added ttfSet(or Get)FontCharSpacing.
+
 ## 2.3.2
 - SDL3-2025-08-10
 
