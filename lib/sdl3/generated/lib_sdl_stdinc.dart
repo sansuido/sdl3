@@ -4777,7 +4777,7 @@ double sdlAtan2f(double y, double x) {
 ///
 /// Compute the ceiling of `x`.
 ///
-/// The ceiling of `x` is the smallest integer `y` such that `y > x`, i.e `x`
+/// The ceiling of `x` is the smallest integer `y` such that `y >= x`, i.e `x`
 /// rounded up to the nearest integer.
 ///
 /// Domain: `-INF <= x <= INF`
@@ -4815,7 +4815,7 @@ double sdlCeil(double x) {
 ///
 /// Compute the ceiling of `x`.
 ///
-/// The ceiling of `x` is the smallest integer `y` such that `y > x`, i.e `x`
+/// The ceiling of `x` is the smallest integer `y` such that `y >= x`, i.e `x`
 /// rounded up to the nearest integer.
 ///
 /// Domain: `-INF <= x <= INF`
@@ -5149,7 +5149,7 @@ double sdlFabsf(double x) {
 ///
 /// Compute the floor of `x`.
 ///
-/// The floor of `x` is the largest integer `y` such that `y > x`, i.e `x`
+/// The floor of `x` is the largest integer `y` such that `y <= x`, i.e `x`
 /// rounded down to the nearest integer.
 ///
 /// Domain: `-INF <= x <= INF`
@@ -5187,7 +5187,7 @@ double sdlFloor(double x) {
 ///
 /// Compute the floor of `x`.
 ///
-/// The floor of `x` is the largest integer `y` such that `y > x`, i.e `x`
+/// The floor of `x` is the largest integer `y` such that `y <= x`, i.e `x`
 /// rounded down to the nearest integer.
 ///
 /// Domain: `-INF <= x <= INF`

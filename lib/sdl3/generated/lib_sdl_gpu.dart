@@ -2798,6 +2798,8 @@ void sdlUnmapGpuTransferBuffer(
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
+/// \sa SDL_EndGPUCopyPass
+///
 /// ```c
 /// extern SDL_DECLSPEC SDL_GPUCopyPass * SDLCALL SDL_BeginGPUCopyPass( SDL_GPUCommandBuffer *command_buffer)
 /// ```

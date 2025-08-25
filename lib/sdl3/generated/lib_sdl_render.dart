@@ -216,7 +216,7 @@ Pointer<SdlRenderer> sdlCreateRenderer(
 /// present synchronized with the refresh rate. This property can take any
 /// value that is supported by SDL_SetRenderVSync() for the renderer.
 ///
-/// With the SDL GPU renderer:
+/// With the SDL GPU renderer (since SDL 3.4.0):
 ///
 /// - `SDL_PROP_RENDERER_CREATE_GPU_SHADERS_SPIRV_BOOLEAN`: the app is able to
 /// provide SPIR-V shaders to SDL_GPURenderState, optional.

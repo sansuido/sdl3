@@ -1,3 +1,6 @@
+## 2.3.4
+- SDL3-2025-08-24
+
 ## 2.3.3
 - SDL3-2025-08-17
 - [add] Added ImgAnimationEncoder and ImgAnimationDecoder functions (removed ImgAnimationStream).
