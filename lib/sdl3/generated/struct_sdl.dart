@@ -3449,41 +3449,41 @@ final class SdlTexture extends Struct {
   external int refcount;
 }
 
-// SDL_GPURenderStateDesc
+// SDL_GPURenderStateCreateInfo
 /// {@category render}
-final class SdlGpuRenderStateDesc extends Struct {
-  // [0]+(4)
-  @Uint32()
-  external int version;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
-  // [8]+(8)
+final class SdlGpuRenderStateCreateInfo extends Struct {
+  // [0]+(8)
   external Pointer<SdlGpuShader> fragmentShader;
-  // [16]+(4)
+  // [8]+(4)
   @Int32()
   external int numSamplerBindings;
   // [] +(4)
   @Uint32()
-  external int blank_2;
-  // [24]+(8)
+  external int blank_1;
+  // [16]+(8)
   external Pointer<SdlGpuTextureSamplerBinding> samplerBindings;
-  // [32]+(4)
+  // [24]+(4)
   @Int32()
   external int numStorageTextures;
   // [] +(4)
   @Uint32()
-  external int blank_3;
-  // [40]+(8)
+  external int blank_2;
+  // [32]+(8)
   external Pointer<Pointer<SdlGpuTexture>> storageTextures;
-  // [48]+(4)
+  // [40]+(4)
   @Int32()
   external int numStorageBuffers;
   // [] +(4)
   @Uint32()
-  external int blank_4;
-  // [56]+(8)
+  external int blank_3;
+  // [48]+(8)
   external Pointer<Pointer<SdlGpuBuffer>> storageBuffers;
+  // [56]+(4)
+  @Uint32()
+  external int props;
+  // [] +(4)
+  @Uint32()
+  external int blank_4;
 }
 
 // SDL_GPURenderState

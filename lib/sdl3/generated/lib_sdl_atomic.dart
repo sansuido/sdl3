@@ -369,6 +369,35 @@ int sdlGetAtomicU32(Pointer<SdlAtomicU32> a) {
 }
 
 ///
+/// Add to an atomic variable.
+///
+/// This function also acts as a full memory barrier.
+///
+/// ***Note: If you don't know what this function is for, you shouldn't use
+/// it!***
+///
+/// \param a a pointer to an SDL_AtomicU32 variable to be modified.
+/// \param v the desired value to add or subtract.
+/// \returns the previous value of the atomic variable.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.4.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC Uint32 SDLCALL SDL_AddAtomicU32(SDL_AtomicU32 *a, int v)
+/// ```
+/// {@category atomic}
+int sdlAddAtomicU32(Pointer<SdlAtomicU32> a, int v) {
+  final sdlAddAtomicU32LookupFunction = _libSdl
+      .lookupFunction<
+        Uint32 Function(Pointer<SdlAtomicU32> a, Int32 v),
+        int Function(Pointer<SdlAtomicU32> a, int v)
+      >('SDL_AddAtomicU32');
+  return sdlAddAtomicU32LookupFunction(a, v);
+}
+
+///
 /// Set a pointer to a new value if it is currently an old value.
 ///
 /// ***Note: If you don't know what this function is for, you shouldn't use

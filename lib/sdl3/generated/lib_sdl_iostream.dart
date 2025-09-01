@@ -73,7 +73,7 @@ part of '../sdl.dart';
 /// \returns a pointer to the SDL_IOStream structure that is created or NULL on
 /// failure; call SDL_GetError() for more information.
 ///
-/// \threadsafety This function is not thread safe.
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
@@ -333,7 +333,7 @@ Pointer<SdlIoStream> sdlOpenIo(
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
-/// \threadsafety This function is not thread safe.
+/// \threadsafety Do not use the same SDL_IOStream from two threads at once.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
@@ -359,7 +359,7 @@ bool sdlCloseIo(Pointer<SdlIoStream> context) {
 /// \returns a valid property ID on success or 0 on failure; call
 /// SDL_GetError() for more information.
 ///
-/// \threadsafety This function is not thread safe.
+/// \threadsafety Do not use the same SDL_IOStream from two threads at once.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
@@ -390,7 +390,7 @@ int sdlGetIoProperties(Pointer<SdlIoStream> context) {
 /// \param context the SDL_IOStream to query.
 /// \returns an SDL_IOStatus enum with the current state.
 ///
-/// \threadsafety This function is not thread safe.
+/// \threadsafety Do not use the same SDL_IOStream from two threads at once.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
@@ -415,7 +415,7 @@ int sdlGetIoStatus(Pointer<SdlIoStream> context) {
 /// negative error code on failure; call SDL_GetError() for more
 /// information.
 ///
-/// \threadsafety This function is not thread safe.
+/// \threadsafety Do not use the same SDL_IOStream from two threads at once.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
@@ -453,7 +453,7 @@ int sdlGetIoSize(Pointer<SdlIoStream> context) {
 /// \returns the final offset in the data stream after the seek or -1 on
 /// failure; call SDL_GetError() for more information.
 ///
-/// \threadsafety This function is not thread safe.
+/// \threadsafety Do not use the same SDL_IOStream from two threads at once.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
@@ -488,7 +488,7 @@ int sdlSeekIo(Pointer<SdlIoStream> context, int offset, int whence) {
 /// \returns the current offset in the stream, or -1 if the information can not
 /// be determined.
 ///
-/// \threadsafety This function is not thread safe.
+/// \threadsafety Do not use the same SDL_IOStream from two threads at once.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
@@ -524,7 +524,7 @@ int sdlTellIo(Pointer<SdlIoStream> context) {
 /// \returns the number of bytes read, or 0 on end of file or other failure;
 /// call SDL_GetError() for more information.
 ///
-/// \threadsafety This function is not thread safe.
+/// \threadsafety Do not use the same SDL_IOStream from two threads at once.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
@@ -572,7 +572,7 @@ int sdlReadIo(Pointer<SdlIoStream> context, Pointer<NativeType> ptr, int size) {
 /// \returns the number of bytes written, which will be less than `size` on
 /// failure; call SDL_GetError() for more information.
 ///
-/// \threadsafety This function is not thread safe.
+/// \threadsafety Do not use the same SDL_IOStream from two threads at once.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
@@ -619,7 +619,7 @@ int sdlWriteIo(
 /// \returns the number of bytes written or 0 on failure; call SDL_GetError()
 /// for more information.
 ///
-/// \threadsafety This function is not thread safe.
+/// \threadsafety Do not use the same SDL_IOStream from two threads at once.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
@@ -653,7 +653,7 @@ int sdlIOprintf(Pointer<SdlIoStream> context, String? fmt) {
 /// \returns the number of bytes written or 0 on failure; call SDL_GetError()
 /// for more information.
 ///
-/// \threadsafety This function is not thread safe.
+/// \threadsafety Do not use the same SDL_IOStream from two threads at once.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
@@ -687,7 +687,7 @@ int sdlIOvprintf(Pointer<SdlIoStream> context, String? fmt) {
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
-/// \threadsafety This function is not thread safe.
+/// \threadsafety Do not use the same SDL_IOStream from two threads at once.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
@@ -724,7 +724,7 @@ bool sdlFlushIo(Pointer<SdlIoStream> context) {
 /// \returns the data or NULL on failure; call SDL_GetError() for more
 /// information.
 ///
-/// \threadsafety This function is not thread safe.
+/// \threadsafety Do not use the same SDL_IOStream from two threads at once.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
@@ -770,7 +770,7 @@ Pointer<NativeType> sdlLoadFileIo(
 /// \returns the data or NULL on failure; call SDL_GetError() for more
 /// information.
 ///
-/// \threadsafety This function is not thread safe.
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
@@ -811,7 +811,7 @@ Pointer<NativeType> sdlLoadFile(String? file, Pointer<Uint32> datasize) {
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
-/// \threadsafety This function is not thread safe.
+/// \threadsafety Do not use the same SDL_IOStream from two threads at once.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
@@ -856,7 +856,7 @@ bool sdlSaveFileIo(
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
-/// \threadsafety This function is not thread safe.
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
@@ -896,7 +896,7 @@ bool sdlSaveFile(String? file, Pointer<NativeType> data, int datasize) {
 /// \returns true on success or false on failure or EOF; call SDL_GetError()
 /// for more information.
 ///
-/// \threadsafety This function is not thread safe.
+/// \threadsafety Do not use the same SDL_IOStream from two threads at once.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
@@ -926,7 +926,7 @@ bool sdlReadU8(Pointer<SdlIoStream> src, Pointer<Uint8> value) {
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
-/// \threadsafety This function is not thread safe.
+/// \threadsafety Do not use the same SDL_IOStream from two threads at once.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
@@ -960,7 +960,7 @@ bool sdlReadS8(Pointer<SdlIoStream> src, Pointer<Int8> value) {
 /// \returns true on successful read or false on failure; call SDL_GetError()
 /// for more information.
 ///
-/// \threadsafety This function is not thread safe.
+/// \threadsafety Do not use the same SDL_IOStream from two threads at once.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
@@ -994,7 +994,7 @@ bool sdlReadU16Le(Pointer<SdlIoStream> src, Pointer<Uint16> value) {
 /// \returns true on successful read or false on failure; call SDL_GetError()
 /// for more information.
 ///
-/// \threadsafety This function is not thread safe.
+/// \threadsafety Do not use the same SDL_IOStream from two threads at once.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
@@ -1028,7 +1028,7 @@ bool sdlReadS16Le(Pointer<SdlIoStream> src, Pointer<Int16> value) {
 /// \returns true on successful read or false on failure; call SDL_GetError()
 /// for more information.
 ///
-/// \threadsafety This function is not thread safe.
+/// \threadsafety Do not use the same SDL_IOStream from two threads at once.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
@@ -1062,7 +1062,7 @@ bool sdlReadU16Be(Pointer<SdlIoStream> src, Pointer<Uint16> value) {
 /// \returns true on successful read or false on failure; call SDL_GetError()
 /// for more information.
 ///
-/// \threadsafety This function is not thread safe.
+/// \threadsafety Do not use the same SDL_IOStream from two threads at once.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
@@ -1096,7 +1096,7 @@ bool sdlReadS16Be(Pointer<SdlIoStream> src, Pointer<Int16> value) {
 /// \returns true on successful read or false on failure; call SDL_GetError()
 /// for more information.
 ///
-/// \threadsafety This function is not thread safe.
+/// \threadsafety Do not use the same SDL_IOStream from two threads at once.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
@@ -1130,7 +1130,7 @@ bool sdlReadU32Le(Pointer<SdlIoStream> src, Pointer<Uint32> value) {
 /// \returns true on successful read or false on failure; call SDL_GetError()
 /// for more information.
 ///
-/// \threadsafety This function is not thread safe.
+/// \threadsafety Do not use the same SDL_IOStream from two threads at once.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
@@ -1164,7 +1164,7 @@ bool sdlReadS32Le(Pointer<SdlIoStream> src, Pointer<Int32> value) {
 /// \returns true on successful read or false on failure; call SDL_GetError()
 /// for more information.
 ///
-/// \threadsafety This function is not thread safe.
+/// \threadsafety Do not use the same SDL_IOStream from two threads at once.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
@@ -1198,7 +1198,7 @@ bool sdlReadU32Be(Pointer<SdlIoStream> src, Pointer<Uint32> value) {
 /// \returns true on successful read or false on failure; call SDL_GetError()
 /// for more information.
 ///
-/// \threadsafety This function is not thread safe.
+/// \threadsafety Do not use the same SDL_IOStream from two threads at once.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
@@ -1232,7 +1232,7 @@ bool sdlReadS32Be(Pointer<SdlIoStream> src, Pointer<Int32> value) {
 /// \returns true on successful read or false on failure; call SDL_GetError()
 /// for more information.
 ///
-/// \threadsafety This function is not thread safe.
+/// \threadsafety Do not use the same SDL_IOStream from two threads at once.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
@@ -1266,7 +1266,7 @@ bool sdlReadU64Le(Pointer<SdlIoStream> src, Pointer<Uint64> value) {
 /// \returns true on successful read or false on failure; call SDL_GetError()
 /// for more information.
 ///
-/// \threadsafety This function is not thread safe.
+/// \threadsafety Do not use the same SDL_IOStream from two threads at once.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
@@ -1300,7 +1300,7 @@ bool sdlReadS64Le(Pointer<SdlIoStream> src, Pointer<Int64> value) {
 /// \returns true on successful read or false on failure; call SDL_GetError()
 /// for more information.
 ///
-/// \threadsafety This function is not thread safe.
+/// \threadsafety Do not use the same SDL_IOStream from two threads at once.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
@@ -1334,7 +1334,7 @@ bool sdlReadU64Be(Pointer<SdlIoStream> src, Pointer<Uint64> value) {
 /// \returns true on successful read or false on failure; call SDL_GetError()
 /// for more information.
 ///
-/// \threadsafety This function is not thread safe.
+/// \threadsafety Do not use the same SDL_IOStream from two threads at once.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
@@ -1359,7 +1359,7 @@ bool sdlReadS64Be(Pointer<SdlIoStream> src, Pointer<Int64> value) {
 /// \returns true on successful write or false on failure; call SDL_GetError()
 /// for more information.
 ///
-/// \threadsafety This function is not thread safe.
+/// \threadsafety Do not use the same SDL_IOStream from two threads at once.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
@@ -1384,7 +1384,7 @@ bool sdlWriteU8(Pointer<SdlIoStream> dst, int value) {
 /// \returns true on successful write or false on failure; call SDL_GetError()
 /// for more information.
 ///
-/// \threadsafety This function is not thread safe.
+/// \threadsafety Do not use the same SDL_IOStream from two threads at once.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
@@ -1414,7 +1414,7 @@ bool sdlWriteS8(Pointer<SdlIoStream> dst, int value) {
 /// \returns true on successful write or false on failure; call SDL_GetError()
 /// for more information.
 ///
-/// \threadsafety This function is not thread safe.
+/// \threadsafety Do not use the same SDL_IOStream from two threads at once.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
@@ -1444,7 +1444,7 @@ bool sdlWriteU16Le(Pointer<SdlIoStream> dst, int value) {
 /// \returns true on successful write or false on failure; call SDL_GetError()
 /// for more information.
 ///
-/// \threadsafety This function is not thread safe.
+/// \threadsafety Do not use the same SDL_IOStream from two threads at once.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
@@ -1473,7 +1473,7 @@ bool sdlWriteS16Le(Pointer<SdlIoStream> dst, int value) {
 /// \returns true on successful write or false on failure; call SDL_GetError()
 /// for more information.
 ///
-/// \threadsafety This function is not thread safe.
+/// \threadsafety Do not use the same SDL_IOStream from two threads at once.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
@@ -1502,7 +1502,7 @@ bool sdlWriteU16Be(Pointer<SdlIoStream> dst, int value) {
 /// \returns true on successful write or false on failure; call SDL_GetError()
 /// for more information.
 ///
-/// \threadsafety This function is not thread safe.
+/// \threadsafety Do not use the same SDL_IOStream from two threads at once.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
@@ -1532,7 +1532,7 @@ bool sdlWriteS16Be(Pointer<SdlIoStream> dst, int value) {
 /// \returns true on successful write or false on failure; call SDL_GetError()
 /// for more information.
 ///
-/// \threadsafety This function is not thread safe.
+/// \threadsafety Do not use the same SDL_IOStream from two threads at once.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
@@ -1562,7 +1562,7 @@ bool sdlWriteU32Le(Pointer<SdlIoStream> dst, int value) {
 /// \returns true on successful write or false on failure; call SDL_GetError()
 /// for more information.
 ///
-/// \threadsafety This function is not thread safe.
+/// \threadsafety Do not use the same SDL_IOStream from two threads at once.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
@@ -1591,7 +1591,7 @@ bool sdlWriteS32Le(Pointer<SdlIoStream> dst, int value) {
 /// \returns true on successful write or false on failure; call SDL_GetError()
 /// for more information.
 ///
-/// \threadsafety This function is not thread safe.
+/// \threadsafety Do not use the same SDL_IOStream from two threads at once.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
@@ -1620,7 +1620,7 @@ bool sdlWriteU32Be(Pointer<SdlIoStream> dst, int value) {
 /// \returns true on successful write or false on failure; call SDL_GetError()
 /// for more information.
 ///
-/// \threadsafety This function is not thread safe.
+/// \threadsafety Do not use the same SDL_IOStream from two threads at once.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
@@ -1650,7 +1650,7 @@ bool sdlWriteS32Be(Pointer<SdlIoStream> dst, int value) {
 /// \returns true on successful write or false on failure; call SDL_GetError()
 /// for more information.
 ///
-/// \threadsafety This function is not thread safe.
+/// \threadsafety Do not use the same SDL_IOStream from two threads at once.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
@@ -1680,7 +1680,7 @@ bool sdlWriteU64Le(Pointer<SdlIoStream> dst, int value) {
 /// \returns true on successful write or false on failure; call SDL_GetError()
 /// for more information.
 ///
-/// \threadsafety This function is not thread safe.
+/// \threadsafety Do not use the same SDL_IOStream from two threads at once.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
@@ -1709,7 +1709,7 @@ bool sdlWriteS64Le(Pointer<SdlIoStream> dst, int value) {
 /// \returns true on successful write or false on failure; call SDL_GetError()
 /// for more information.
 ///
-/// \threadsafety This function is not thread safe.
+/// \threadsafety Do not use the same SDL_IOStream from two threads at once.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
@@ -1738,7 +1738,7 @@ bool sdlWriteU64Be(Pointer<SdlIoStream> dst, int value) {
 /// \returns true on successful write or false on failure; call SDL_GetError()
 /// for more information.
 ///
-/// \threadsafety This function is not thread safe.
+/// \threadsafety Do not use the same SDL_IOStream from two threads at once.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///

@@ -114,6 +114,9 @@ const SDL_BLENDFACTOR_ONE_MINUS_DST_ALPHA = 0xA;
 const SDL_CAMERA_POSITION_UNKNOWN = 0;
 const SDL_CAMERA_POSITION_FRONT_FACING = 1;
 const SDL_CAMERA_POSITION_BACK_FACING = 2;
+const SDL_CAMERA_PERMISSION_STATE_DENIED = -1;
+const SDL_CAMERA_PERMISSION_STATE_PENDING = -1 + 1;
+const SDL_CAMERA_PERMISSION_STATE_APPROVED = -1 + 2;
 //const SDL_clipboard_h_ = ;
 //const SDL_cpuinfo_h_ = ;
 const SDL_CACHELINE_SIZE = 128;
@@ -708,6 +711,8 @@ const SDL_HID_API_BUS_USB = 0x01;
 const SDL_HID_API_BUS_BLUETOOTH = 0x02;
 const SDL_HID_API_BUS_I2C = 0x03;
 const SDL_HID_API_BUS_SPI = 0x04;
+const SDL_PROP_HIDAPI_LIBUSB_DEVICE_HANDLE_POINTER =
+    'SDL.hidapi.libusb.device.handle';
 //const SDL_hints_h_ = ;
 const SDL_HINT_ALLOW_ALT_TAB_WHILE_GRABBED = 'SDL_ALLOW_ALT_TAB_WHILE_GRABBED';
 const SDL_HINT_ANDROID_ALLOW_RECREATE_ACTIVITY =
@@ -835,6 +840,7 @@ const SDL_HINT_JOYSTICK_HIDAPI_SWITCH_HOME_LED =
     'SDL_JOYSTICK_HIDAPI_SWITCH_HOME_LED';
 const SDL_HINT_JOYSTICK_HIDAPI_SWITCH_PLAYER_LED =
     'SDL_JOYSTICK_HIDAPI_SWITCH_PLAYER_LED';
+const SDL_HINT_JOYSTICK_HIDAPI_SWITCH2 = 'SDL_JOYSTICK_HIDAPI_SWITCH2';
 const SDL_HINT_JOYSTICK_HIDAPI_VERTICAL_JOY_CONS =
     'SDL_JOYSTICK_HIDAPI_VERTICAL_JOY_CONS';
 const SDL_HINT_JOYSTICK_HIDAPI_WII = 'SDL_JOYSTICK_HIDAPI_WII';
@@ -2003,7 +2009,7 @@ const SDL_RENDERER_VSYNC_ADAPTIVE = -1;
 const SDL_DEBUG_TEXT_FONT_CHARACTER_SIZE = 8;
 //const SDL_revision_h_ = ;
 const SDL_REVISION =
-    'SDL3-3.3.0-release-3.2.6-962-g0fcaf4765 (" SDL_VENDOR_INFO ")';
+    'SDL3-3.3.0-release-3.2.6-1034-g875653658 (" SDL_VENDOR_INFO ")';
 //const SDL_scancode_h_ = ;
 const SDL_SCANCODE_UNKNOWN = 0;
 const SDL_SCANCODE_A = 4;
@@ -2264,6 +2270,7 @@ const SDL_SENSOR_ACCEL_L = -1 + 4;
 const SDL_SENSOR_GYRO_L = -1 + 5;
 const SDL_SENSOR_ACCEL_R = -1 + 6;
 const SDL_SENSOR_GYRO_R = -1 + 7;
+const SDL_SENSOR_COUNT = -1 + 8;
 //const SDL_stdinc_h_ = ;
 //const SDL_INCLUDE_STDBOOL_H = ;
 //const bool = unsigned char;
@@ -2399,6 +2406,8 @@ const SDL_SCALEMODE_PIXELART = -1 + 3;
 const SDL_FLIP_NONE = 0;
 const SDL_FLIP_HORIZONTAL = 1;
 const SDL_FLIP_VERTICAL = 2;
+const SDL_FLIP_HORIZONTAL_AND_VERTICAL =
+    SDL_FLIP_HORIZONTAL | SDL_FLIP_VERTICAL;
 const SDL_PROP_SURFACE_SDR_WHITE_POINT_FLOAT = 'SDL.surface.SDR_white_point';
 const SDL_PROP_SURFACE_HDR_HEADROOM_FLOAT = 'SDL.surface.HDR_headroom';
 const SDL_PROP_SURFACE_TONEMAP_OPERATOR_STRING = 'SDL.surface.tonemap';
@@ -2762,6 +2771,13 @@ class SdlkCameraPosition {
   static const unknown = SDL_CAMERA_POSITION_UNKNOWN;
   static const frontFacing = SDL_CAMERA_POSITION_FRONT_FACING;
   static const backFacing = SDL_CAMERA_POSITION_BACK_FACING;
+}
+
+/// {@category camera}
+class SdlkCameraPermission {
+  static const stateDenied = SDL_CAMERA_PERMISSION_STATE_DENIED;
+  static const statePending = SDL_CAMERA_PERMISSION_STATE_PENDING;
+  static const stateApproved = SDL_CAMERA_PERMISSION_STATE_APPROVED;
 }
 
 /// {@category dialog}
@@ -3623,6 +3639,7 @@ class SdlkHint {
       SDL_HINT_JOYSTICK_HIDAPI_SWITCH_HOME_LED;
   static const joystickHidapiSwitchPlayerLed =
       SDL_HINT_JOYSTICK_HIDAPI_SWITCH_PLAYER_LED;
+  static const joystickHidapiSwitch2 = SDL_HINT_JOYSTICK_HIDAPI_SWITCH2;
   static const joystickHidapiVerticalJoyCons =
       SDL_HINT_JOYSTICK_HIDAPI_VERTICAL_JOY_CONS;
   static const joystickHidapiWii = SDL_HINT_JOYSTICK_HIDAPI_WII;
@@ -5093,6 +5110,7 @@ class SdlkSensor {
   static const gyroL = SDL_SENSOR_GYRO_L;
   static const accelR = SDL_SENSOR_ACCEL_R;
   static const gyroR = SDL_SENSOR_GYRO_R;
+  static const count = SDL_SENSOR_COUNT;
 }
 
 /// {@category surface}
@@ -5116,6 +5134,7 @@ class SdlkFlip {
   static const none = SDL_FLIP_NONE;
   static const horizontal = SDL_FLIP_HORIZONTAL;
   static const vertical = SDL_FLIP_VERTICAL;
+  static const horizontalAndVertical = SDL_FLIP_HORIZONTAL_AND_VERTICAL;
 }
 
 /// {@category surface}

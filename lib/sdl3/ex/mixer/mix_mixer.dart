@@ -231,7 +231,7 @@ extension MixMixerPointerEx on Pointer<MixMixer> {
   ///
   /// \sa MIX_DestroyAudio
   /// \sa MIX_SetTrackAudio
-  /// \sa MIX_LoadAudio_IO
+  /// \sa MIX_LoadAudio
   /// \sa MIX_LoadAudioWithProperties
   ///
   /// ```c

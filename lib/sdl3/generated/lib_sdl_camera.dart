@@ -343,7 +343,7 @@ Pointer<SdlCamera> sdlOpenCamera(int instanceId, Pointer<SdlCameraSpec> spec) {
 /// \sa SDL_CloseCamera
 ///
 /// ```c
-/// extern SDL_DECLSPEC int SDLCALL SDL_GetCameraPermissionState(SDL_Camera *camera)
+/// extern SDL_DECLSPEC SDL_CameraPermissionState SDLCALL SDL_GetCameraPermissionState(SDL_Camera *camera)
 /// ```
 /// {@category camera}
 int sdlGetCameraPermissionState(Pointer<SdlCamera> camera) {

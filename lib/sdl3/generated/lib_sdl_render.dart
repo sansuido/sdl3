@@ -4306,7 +4306,8 @@ bool sdlGetRenderVSync(Pointer<SdlRenderer> renderer, Pointer<Int32> vsync) {
 /// break. If the text goes out of the window, it's gone.
 ///
 /// For serious text rendering, there are several good options, such as
-/// SDL_ttf, stb_truetype, or other external libraries.
+/// [SDL_ttf](https://wiki.libsdl.org/SDL3_ttf/FrontPage)
+/// , stb_truetype, or other external libraries.
 ///
 /// On first use, this will create an internal texture for rendering glyphs.
 /// This texture will live until the renderer is destroyed.
@@ -4485,8 +4486,7 @@ bool sdlGetDefaultTextureScaleMode(
 /// Create custom GPU render state.
 ///
 /// \param renderer the renderer to use.
-/// \param desc GPU render state description, initialized using
-/// SDL_INIT_INTERFACE().
+/// \param createinfo a struct describing the GPU render state to create.
 /// \returns a custom GPU render state or NULL on failure; call SDL_GetError()
 /// for more information.
 ///
@@ -4500,25 +4500,25 @@ bool sdlGetDefaultTextureScaleMode(
 /// \sa SDL_DestroyGPURenderState
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_GPURenderState * SDLCALL SDL_CreateGPURenderState(SDL_Renderer *renderer, SDL_GPURenderStateDesc *desc)
+/// extern SDL_DECLSPEC SDL_GPURenderState * SDLCALL SDL_CreateGPURenderState(SDL_Renderer *renderer, SDL_GPURenderStateCreateInfo *createinfo)
 /// ```
 /// {@category render}
 Pointer<SdlGpuRenderState> sdlCreateGpuRenderState(
   Pointer<SdlRenderer> renderer,
-  Pointer<SdlGpuRenderStateDesc> desc,
+  Pointer<SdlGpuRenderStateCreateInfo> createinfo,
 ) {
   final sdlCreateGpuRenderStateLookupFunction = _libSdl
       .lookupFunction<
         Pointer<SdlGpuRenderState> Function(
           Pointer<SdlRenderer> renderer,
-          Pointer<SdlGpuRenderStateDesc> desc,
+          Pointer<SdlGpuRenderStateCreateInfo> createinfo,
         ),
         Pointer<SdlGpuRenderState> Function(
           Pointer<SdlRenderer> renderer,
-          Pointer<SdlGpuRenderStateDesc> desc,
+          Pointer<SdlGpuRenderStateCreateInfo> createinfo,
         )
       >('SDL_CreateGPURenderState');
-  return sdlCreateGpuRenderStateLookupFunction(renderer, desc);
+  return sdlCreateGpuRenderStateLookupFunction(renderer, createinfo);
 }
 
 ///
