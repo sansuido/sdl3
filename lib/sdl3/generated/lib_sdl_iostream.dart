@@ -518,6 +518,10 @@ int sdlTellIo(Pointer<SdlIoStream> context) {
 /// the stream is not at EOF, SDL_GetIOStatus() will return a different error
 /// value and SDL_GetError() will offer a human-readable message.
 ///
+/// A request for zero bytes on a valid stream will return zero immediately
+/// without accessing the stream, so the stream status (EOF, err, etc) will not
+/// change.
+///
 /// \param context a pointer to an SDL_IOStream structure.
 /// \param ptr a pointer to a buffer to read data into.
 /// \param size the number of bytes to read from the data source.
@@ -565,6 +569,10 @@ int sdlReadIo(Pointer<SdlIoStream> context, Pointer<NativeType> ptr, int size) {
 /// The caller can use SDL_GetIOStatus() to determine if the problem is
 /// recoverable, such as a non-blocking write that can simply be retried later,
 /// or a fatal error.
+///
+/// A request for zero bytes on a valid stream will return zero immediately
+/// without accessing the stream, so the stream status (EOF, err, etc) will not
+/// change.
 ///
 /// \param context a pointer to an SDL_IOStream structure.
 /// \param ptr a pointer to a buffer containing data to write.

@@ -1,3 +1,6 @@
+## 2.3.6
+- SDL3-2025-09-07
+
 ## 2.3.5
 - SDL3-2025-08-31
 - [changed] The name has changed from SdlGpuRenderStateDesc to SdlGpuRenderStateCreateInfo.
