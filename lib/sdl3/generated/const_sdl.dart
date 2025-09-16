@@ -641,6 +641,8 @@ const SDL_PROP_GPU_DEVICE_CREATE_SHADERS_MSL_BOOLEAN =
     'SDL.gpu.device.create.shaders.msl';
 const SDL_PROP_GPU_DEVICE_CREATE_SHADERS_METALLIB_BOOLEAN =
     'SDL.gpu.device.create.shaders.metallib';
+const SDL_PROP_GPU_DEVICE_CREATE_D3D12_ALLOW_FEWER_RESOURCE_SLOTS_BOOLEAN =
+    'SDL.gpu.device.create.d3d12.allowtier1resourcebinding';
 const SDL_PROP_GPU_DEVICE_CREATE_D3D12_SEMANTIC_NAME_STRING =
     'SDL.gpu.device.create.d3d12.semantic';
 const SDL_PROP_GPU_DEVICE_CREATE_VULKAN_SHADERCLIPDISTANCE_BOOLEAN =
@@ -918,6 +920,7 @@ const SDL_HINT_PREFERRED_LOCALES = 'SDL_PREFERRED_LOCALES';
 const SDL_HINT_QUIT_ON_LAST_WINDOW_CLOSE = 'SDL_QUIT_ON_LAST_WINDOW_CLOSE';
 const SDL_HINT_RENDER_DIRECT3D_THREADSAFE = 'SDL_RENDER_DIRECT3D_THREADSAFE';
 const SDL_HINT_RENDER_DIRECT3D11_DEBUG = 'SDL_RENDER_DIRECT3D11_DEBUG';
+const SDL_HINT_RENDER_DIRECT3D11_WARP = 'SDL_RENDER_DIRECT3D11_WARP';
 const SDL_HINT_RENDER_VULKAN_DEBUG = 'SDL_RENDER_VULKAN_DEBUG';
 const SDL_HINT_RENDER_GPU_DEBUG = 'SDL_RENDER_GPU_DEBUG';
 const SDL_HINT_RENDER_GPU_LOW_POWER = 'SDL_RENDER_GPU_LOW_POWER';
@@ -2004,12 +2007,13 @@ const SDL_PROP_TEXTURE_OPENGLES2_TEXTURE_V_NUMBER =
 const SDL_PROP_TEXTURE_OPENGLES2_TEXTURE_TARGET_NUMBER =
     'SDL.texture.opengles2.target';
 const SDL_PROP_TEXTURE_VULKAN_TEXTURE_NUMBER = 'SDL.texture.vulkan.texture';
+const SDL_PROP_TEXTURE_GPU_TEXTURE_POINTER = 'SDL.texture.gpu.texture';
 const SDL_RENDERER_VSYNC_DISABLED = 0;
 const SDL_RENDERER_VSYNC_ADAPTIVE = -1;
 const SDL_DEBUG_TEXT_FONT_CHARACTER_SIZE = 8;
 //const SDL_revision_h_ = ;
 const SDL_REVISION =
-    'SDL3-3.3.0-release-3.2.6-1098-g25d9096d4 (" SDL_VENDOR_INFO ")';
+    'SDL3-3.3.0-release-3.2.6-1171-g4561be89a (" SDL_VENDOR_INFO ")';
 //const SDL_scancode_h_ = ;
 const SDL_SCANCODE_UNKNOWN = 0;
 const SDL_SCANCODE_A = 4;
@@ -3432,6 +3436,8 @@ class SdlkPropGpu {
       SDL_PROP_GPU_DEVICE_CREATE_SHADERS_MSL_BOOLEAN;
   static const deviceCreateShadersMetallibBoolean =
       SDL_PROP_GPU_DEVICE_CREATE_SHADERS_METALLIB_BOOLEAN;
+  static const deviceCreateD3D12AllowFewerResourceSlotsBoolean =
+      SDL_PROP_GPU_DEVICE_CREATE_D3D12_ALLOW_FEWER_RESOURCE_SLOTS_BOOLEAN;
   static const deviceCreateD3D12SemanticNameString =
       SDL_PROP_GPU_DEVICE_CREATE_D3D12_SEMANTIC_NAME_STRING;
   static const deviceCreateVulkanShaderclipdistanceBoolean =
@@ -3717,6 +3723,7 @@ class SdlkHint {
   static const quitOnLastWindowClose = SDL_HINT_QUIT_ON_LAST_WINDOW_CLOSE;
   static const renderDirect3DThreadsafe = SDL_HINT_RENDER_DIRECT3D_THREADSAFE;
   static const renderDirect3D11Debug = SDL_HINT_RENDER_DIRECT3D11_DEBUG;
+  static const renderDirect3D11Warp = SDL_HINT_RENDER_DIRECT3D11_WARP;
   static const renderVulkanDebug = SDL_HINT_RENDER_VULKAN_DEBUG;
   static const renderGpuDebug = SDL_HINT_RENDER_GPU_DEBUG;
   static const renderGpuLowPower = SDL_HINT_RENDER_GPU_LOW_POWER;
@@ -4839,6 +4846,7 @@ class SdlkPropTexture {
   static const opengles2TextureTargetNumber =
       SDL_PROP_TEXTURE_OPENGLES2_TEXTURE_TARGET_NUMBER;
   static const vulkanTextureNumber = SDL_PROP_TEXTURE_VULKAN_TEXTURE_NUMBER;
+  static const gpuTexturePointer = SDL_PROP_TEXTURE_GPU_TEXTURE_POINTER;
 }
 
 /// {@category render}

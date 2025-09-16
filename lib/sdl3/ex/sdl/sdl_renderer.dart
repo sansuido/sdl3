@@ -448,14 +448,6 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// specific dimensions but to make fonts look sharp, the app turns off logical
   /// presentation while drawing text, for example.
   ///
-  /// For the renderer's window, letterboxing is drawn into the framebuffer if
-  /// logical presentation is enabled during SDL_RenderPresent; be sure to
-  /// reenable it before presenting if you were toggling it, otherwise the
-  /// letterbox areas might have artifacts from previous frames (or artifacts
-  /// from external overlays, etc). Letterboxing is never drawn into texture
-  /// render targets; be sure to call SDL_RenderClear() before drawing into the
-  /// texture so the letterboxing areas are cleared, if appropriate.
-  ///
   /// You can convert coordinates in an event into rendering coordinates using
   /// SDL_ConvertEventToRenderCoordinates().
   ///
@@ -2195,8 +2187,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// break. If the text goes out of the window, it's gone.
   ///
   /// For serious text rendering, there are several good options, such as
-  /// [SDL_ttf](https://wiki.libsdl.org/SDL3_ttf/FrontPage)
-  /// , stb_truetype, or other external libraries.
+  /// SDL_ttf, stb_truetype, or other external libraries.
   ///
   /// On first use, this will create an internal texture for rendering glyphs.
   /// This texture will live until the renderer is destroyed.

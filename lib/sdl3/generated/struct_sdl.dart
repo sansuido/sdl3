@@ -2330,10 +2330,10 @@ final class SdlGpuDepthStencilTargetInfo extends Struct {
   external int clearStencil;
   // [30]+(1)
   @Uint8()
-  external int padding1;
+  external int mipLevel;
   // [31]+(1)
   @Uint8()
-  external int padding2;
+  external int layer;
 }
 
 // SDL_GPUBlitInfo

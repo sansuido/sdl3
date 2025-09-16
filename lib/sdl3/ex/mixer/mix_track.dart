@@ -199,6 +199,8 @@ extension MixTrackPointerEx on Pointer<MixTrack> {
   ///
   /// \since This function is available since SDL_mixer 3.0.0.
   ///
+  /// \sa MIX_SetTrackRawIOStream
+  ///
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL MIX_SetTrackIOStream(MIX_Track *track, SDL_IOStream *io, bool closeio)
   /// ```

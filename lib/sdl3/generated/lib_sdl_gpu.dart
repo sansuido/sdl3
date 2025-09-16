@@ -146,6 +146,14 @@ Pointer<SdlGpuDevice> sdlCreateGpuDevice(
 ///
 /// - `SDL_PROP_GPU_DEVICE_CREATE_D3D12_SEMANTIC_NAME_STRING`: the prefix to
 /// use for all vertex semantics, default is "TEXCOORD".
+/// - `SDL_PROP_GPU_DEVICE_CREATE_D3D12_ALLOW_FEWER_RESOURCE_SLOTS_BOOLEAN`: By
+/// default, Resourcing Binding Tier 2 is required for D3D12 support.
+/// However, an application can set this property to true to enable Tier 1
+/// support, if (and only if) the application uses 8 or fewer storage
+/// resources across all shader stages. As of writing, this property is
+/// useful for targeting Intel Haswell and Broadwell GPUs; other hardware
+/// either supports Tier 2 Resource Binding or does not support D3D12 in any
+/// capacity. Defaults to false.
 ///
 /// With the Vulkan renderer:
 ///
@@ -4062,6 +4070,49 @@ int sdlCalculateGpuTextureFormatSize(
     height,
     depthOrLayerCount,
   );
+}
+
+///
+/// Get the SDL pixel format corresponding to a GPU texture format.
+///
+/// \param format a texture format.
+/// \returns the corresponding pixel format, or SDL_PIXELFORMAT_UNKNOWN if
+/// there is no corresponding pixel format.
+///
+/// \since This function is available since SDL 3.4.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC SDL_PixelFormat SDLCALL SDL_GetPixelFormatFromGPUTextureFormat(SDL_GPUTextureFormat format)
+/// ```
+/// {@category gpu}
+int sdlGetPixelFormatFromGpuTextureFormat(int format) {
+  final sdlGetPixelFormatFromGpuTextureFormatLookupFunction = _libSdl
+      .lookupFunction<Int32 Function(Int32 format), int Function(int format)>(
+        'SDL_GetPixelFormatFromGPUTextureFormat',
+      );
+  return sdlGetPixelFormatFromGpuTextureFormatLookupFunction(format);
+}
+
+///
+/// Get the GPU texture format corresponding to an SDL pixel format.
+///
+/// \param format a pixel format.
+/// \returns the corresponding GPU texture format, or
+/// SDL_GPU_TEXTUREFORMAT_INVALID if there is no corresponding GPU
+/// texture format.
+///
+/// \since This function is available since SDL 3.4.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC SDL_GPUTextureFormat SDLCALL SDL_GetGPUTextureFormatFromPixelFormat(SDL_PixelFormat format)
+/// ```
+/// {@category gpu}
+int sdlGetGpuTextureFormatFromPixelFormat(int format) {
+  final sdlGetGpuTextureFormatFromPixelFormatLookupFunction = _libSdl
+      .lookupFunction<Int32 Function(Int32 format), int Function(int format)>(
+        'SDL_GetGPUTextureFormatFromPixelFormat',
+      );
+  return sdlGetGpuTextureFormatFromPixelFormatLookupFunction(format);
 }
 
 ///
