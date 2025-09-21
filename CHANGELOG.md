@@ -1,3 +1,6 @@
+## 2.3.8
+- SDL3-2025-09-21
+
 ## 2.3.7
 - SDL3-2025-09-14
 - [add] Added mixSetTrackRawIoStream.

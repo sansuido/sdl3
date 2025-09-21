@@ -87,7 +87,6 @@ extension SdlRendererFromImagePointerEx on Pointer<SdlRenderer> {
   ///
   /// \sa IMG_LoadTexture
   /// \sa IMG_LoadTextureTyped_IO
-  /// \sa SDL_DestroyTexture
   ///
   /// ```c
   /// extern SDL_DECLSPEC SDL_Texture * SDLCALL IMG_LoadTexture_IO(SDL_Renderer *renderer, SDL_IOStream *src, bool closeio)
@@ -147,7 +146,6 @@ extension SdlRendererFromImagePointerEx on Pointer<SdlRenderer> {
   ///
   /// \sa IMG_LoadTexture
   /// \sa IMG_LoadTexture_IO
-  /// \sa SDL_DestroyTexture
   ///
   /// ```c
   /// extern SDL_DECLSPEC SDL_Texture * SDLCALL IMG_LoadTextureTyped_IO(SDL_Renderer *renderer, SDL_IOStream *src, bool closeio, const char *type)

@@ -77,7 +77,6 @@ int imgVersion() {
 ///
 /// \sa IMG_Load
 /// \sa IMG_Load_IO
-/// \sa SDL_DestroySurface
 ///
 /// ```c
 /// extern SDL_DECLSPEC SDL_Surface * SDLCALL IMG_LoadTyped_IO(SDL_IOStream *src, bool closeio, const char *type)
@@ -152,7 +151,6 @@ Pointer<SdlSurface> imgLoadTypedIo(
 ///
 /// \sa IMG_LoadTyped_IO
 /// \sa IMG_Load_IO
-/// \sa SDL_DestroySurface
 ///
 /// ```c
 /// extern SDL_DECLSPEC SDL_Surface * SDLCALL IMG_Load(const char *file)
@@ -220,7 +218,6 @@ Pointer<SdlSurface> imgLoad(String? file) {
 ///
 /// \sa IMG_Load
 /// \sa IMG_LoadTyped_IO
-/// \sa SDL_DestroySurface
 ///
 /// ```c
 /// extern SDL_DECLSPEC SDL_Surface * SDLCALL IMG_Load_IO(SDL_IOStream *src, bool closeio)
@@ -336,7 +333,6 @@ Pointer<SdlTexture> imgLoadTexture(
 ///
 /// \sa IMG_LoadTexture
 /// \sa IMG_LoadTextureTyped_IO
-/// \sa SDL_DestroyTexture
 ///
 /// ```c
 /// extern SDL_DECLSPEC SDL_Texture * SDLCALL IMG_LoadTexture_IO(SDL_Renderer *renderer, SDL_IOStream *src, bool closeio)
@@ -414,7 +410,6 @@ Pointer<SdlTexture> imgLoadTextureIo(
 ///
 /// \sa IMG_LoadTexture
 /// \sa IMG_LoadTexture_IO
-/// \sa SDL_DestroyTexture
 ///
 /// ```c
 /// extern SDL_DECLSPEC SDL_Texture * SDLCALL IMG_LoadTextureTyped_IO(SDL_Renderer *renderer, SDL_IOStream *src, bool closeio, const char *type)

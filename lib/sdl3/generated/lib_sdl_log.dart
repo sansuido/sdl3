@@ -198,7 +198,6 @@ void sdlLog(String? fmt) {
 /// \sa SDL_LogInfo
 /// \sa SDL_LogMessage
 /// \sa SDL_LogMessageV
-/// \sa SDL_LogTrace
 /// \sa SDL_LogVerbose
 /// \sa SDL_LogWarn
 ///
