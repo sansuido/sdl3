@@ -64,8 +64,8 @@ int main() {
     final clip = Rectangle<double>(
       marge.toDouble(),
       marge.toDouble(),
-      window.getSize().x - marge * 2,
-      window.getSize().y - marge * 2,
+      window.getSize()!.x - marge * 2,
+      window.getSize()!.y - marge * 2,
     );
     renderer
       ..setDrawColor(0, 0, 0, 0)

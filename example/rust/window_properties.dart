@@ -42,8 +42,8 @@ int main() {
           break;
       }
     }
-    final position = window.getPosition();
-    final size = window.getSize();
+    final position = window.getPosition()!;
+    final size = window.getSize()!;
     window.setTitle(
       'Window - pos(${position.x}x${position.y}), size(${size.x}x${size.y}): $tick',
     );

@@ -300,11 +300,13 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowPosition(SDL_Window *window, int *x, int *y)
   /// ```
   /// {@category video}
-  math.Point<double> getPosition() {
+  math.Point<double>? getPosition() {
+    math.Point<double>? result;
     final x = calloc<Int32>();
     final y = calloc<Int32>();
-    sdlGetWindowPosition(this, x, y);
-    final result = math.Point<double>(x.value.toDouble(), y.value.toDouble());
+    if (sdlGetWindowPosition(this, x, y)) {
+      result = math.Point<double>(x.value.toDouble(), y.value.toDouble());
+    }
     calloc
       ..free(x)
       ..free(y);
@@ -377,11 +379,13 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowSize(SDL_Window *window, int *w, int *h)
   /// ```
   /// {@category video}
-  math.Point<double> getSize() {
+  math.Point<double>? getSize() {
+    math.Point<double>? result;
     final w = calloc<Int32>();
     final h = calloc<Int32>();
-    sdlGetWindowSize(this, w, h);
-    final result = math.Point<double>(w.value.toDouble(), h.value.toDouble());
+    if (sdlGetWindowSize(this, w, h)) {
+      result = math.Point<double>(w.value.toDouble(), h.value.toDouble());
+    }
     calloc
       ..free(w)
       ..free(h);
@@ -427,18 +431,20 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowBordersSize(SDL_Window *window, int *top, int *left, int *bottom, int *right)
   /// ```
   /// {@category video}
-  math.Rectangle<double> getBordersSize() {
+  math.Rectangle<double>? getBordersSize() {
+    math.Rectangle<double>? result;
     final top = calloc<Int32>();
     final left = calloc<Int32>();
     final bottom = calloc<Int32>();
     final right = calloc<Int32>();
-    sdlGetWindowBordersSize(this, top, left, bottom, right);
-    final result = math.Rectangle<double>(
-      top.value.toDouble(),
-      left.value.toDouble(),
-      bottom.value.toDouble(),
-      right.value.toDouble(),
-    );
+    if (sdlGetWindowBordersSize(this, top, left, bottom, right)) {
+      result = math.Rectangle<double>(
+        top.value.toDouble(),
+        left.value.toDouble(),
+        bottom.value.toDouble(),
+        right.value.toDouble(),
+      );
+    }
     calloc
       ..free(top)
       ..free(left)
@@ -469,11 +475,13 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowSizeInPixels(SDL_Window *window, int *w, int *h)
   /// ```
   /// {@category video}
-  math.Point<double> getSizeInPixels() {
+  math.Point<double>? getSizeInPixels() {
+    math.Point<double>? result;
     final w = calloc<Int32>();
     final h = calloc<Int32>();
-    sdlGetWindowSizeInPixels(this, w, h);
-    final result = math.Point<double>(w.value.toDouble(), h.value.toDouble());
+    if (sdlGetWindowSizeInPixels(this, w, h)) {
+      result = math.Point<double>(w.value.toDouble(), h.value.toDouble());
+    }
     calloc
       ..free(w)
       ..free(h);
@@ -524,11 +532,13 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowMinimumSize(SDL_Window *window, int *w, int *h)
   /// ```
   /// {@category video}
-  math.Point<double> getMinimumSize() {
+  math.Point<double>? getMinimumSize() {
+    math.Point<double>? result;
     final w = calloc<Int32>();
     final h = calloc<Int32>();
-    sdlGetWindowMinimumSize(this, w, h);
-    final result = math.Point<double>(w.value.toDouble(), h.value.toDouble());
+    if (sdlGetWindowMinimumSize(this, w, h)) {
+      result = math.Point<double>(w.value.toDouble(), h.value.toDouble());
+    }
     calloc
       ..free(w)
       ..free(h);
@@ -579,11 +589,13 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowMaximumSize(SDL_Window *window, int *w, int *h)
   /// ```
   /// {@category video}
-  math.Point<double> getMaximumSize() {
+  math.Point<double>? getMaximumSize() {
+    math.Point<double>? result;
     final w = calloc<Int32>();
     final h = calloc<Int32>();
-    sdlGetWindowMaximumSize(this, w, h);
-    final result = math.Point<double>(w.value.toDouble(), h.value.toDouble());
+    if (sdlGetWindowMaximumSize(this, w, h)) {
+      result = math.Point<double>(w.value.toDouble(), h.value.toDouble());
+    }
     calloc
       ..free(w)
       ..free(h);
@@ -1140,7 +1152,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// extern SDL_DECLSPEC float SDLCALL SDL_GetWindowOpacity(SDL_Window *window)
   /// ```
   /// {@category video}
-  double? getOpacity() => sdlGetWindowOpacity(this);
+  double getOpacity() => sdlGetWindowOpacity(this);
 
   ///
   /// Set the window as a child of a parent window.
@@ -1178,8 +1190,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowParent(SDL_Window *window, SDL_Window *parent)
   /// ```
   /// {@category video}
-  bool setWindowParent(Pointer<SdlWindow> parent) =>
-      sdlSetWindowParent(this, parent);
+  bool setParent(Pointer<SdlWindow> parent) => sdlSetWindowParent(this, parent);
 
   ///
   /// Toggle the state of the window as modal.
@@ -1203,7 +1214,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowModal(SDL_Window *window, bool modal)
   /// ```
   /// {@category video}
-  bool setWindowModal(bool modal) => sdlSetWindowModal(this, modal);
+  bool setModal(bool modal) => sdlSetWindowModal(this, modal);
 
   ///
   /// Set whether the window may have input focus.
@@ -1221,8 +1232,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowFocusable(SDL_Window *window, bool focusable)
   /// ```
   /// {@category video}
-  bool setWindowFocasable(bool focusable) =>
-      sdlSetWindowFocusable(this, focusable);
+  bool setFocasable(bool focusable) => sdlSetWindowFocusable(this, focusable);
 
   ///
   /// Display the system-level window menu.
@@ -1251,8 +1261,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// extern SDL_DECLSPEC bool SDLCALL SDL_ShowWindowSystemMenu(SDL_Window *window, int x, int y)
   /// ```
   /// {@category video}
-  bool showWindowSystemMenu(int x, int y) =>
-      sdlShowWindowSystemMenu(this, x, y);
+  bool showSystemMenu(int x, int y) => sdlShowWindowSystemMenu(this, x, y);
 
   // sdlSetWindowGammaRamp
   // sdlGetWindowGammaRamp

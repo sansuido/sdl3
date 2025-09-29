@@ -158,7 +158,7 @@ void sdlResetHints() {
 /// \sa SDL_SetHintWithPriority
 ///
 /// ```c
-/// extern SDL_DECLSPEC const char * SDLCALL SDL_GetHint(const char *name)
+/// extern SDL_DECLSPEC const char *SDLCALL SDL_GetHint(const char *name)
 /// ```
 /// {@category hints}
 String? sdlGetHint(String? name) {

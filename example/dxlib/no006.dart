@@ -171,7 +171,7 @@ class Game {
             final size = texture!.getSize()!;
             if (chara != '。' &&
                 chara != '、' &&
-                (drawX + size.x) > window.getSize().x) {
+                (drawX + size.x) > window.getSize()!.x) {
               drawX = 0;
               drawY += height;
               height = 0;

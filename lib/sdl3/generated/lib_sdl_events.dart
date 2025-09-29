@@ -453,7 +453,7 @@ bool sdlPushEvent(Pointer<SdlEvent> event) {
 /// the event filter, but events pushed onto the queue with SDL_PeepEvents() do
 /// not.
 ///
-/// \param filter an SDL_EventFilter function to call when an event happens.
+/// \param filter a function to call when an event happens.
 /// \param userdata a pointer that is passed to `filter`.
 ///
 /// \threadsafety It is safe to call this function from any thread.
