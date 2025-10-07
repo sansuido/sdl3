@@ -218,6 +218,8 @@ Pointer<SdlRenderer> sdlCreateRenderer(
 ///
 /// With the SDL GPU renderer (since SDL 3.4.0):
 ///
+/// - `SDL_PROP_RENDERER_CREATE_GPU_DEVICE_POINTER`: the device to use with the
+/// renderer, optional.
 /// - `SDL_PROP_RENDERER_CREATE_GPU_SHADERS_SPIRV_BOOLEAN`: the app is able to
 /// provide SPIR-V shaders to SDL_GPURenderState, optional.
 /// - `SDL_PROP_RENDERER_CREATE_GPU_SHADERS_DXIL_BOOLEAN`: the app is able to
@@ -268,57 +270,81 @@ Pointer<SdlRenderer> sdlCreateRendererWithProperties(int props) {
 }
 
 ///
-/// Create a 2D GPU rendering context for a window, with support for the
-/// specified shader format.
+/// Create a 2D GPU rendering context.
 ///
-/// This is a convenience function to create a SDL GPU backed renderer,
-/// intended to be used with SDL_GPURenderState. The resulting renderer will
-/// support shaders in one of the specified shader formats.
+/// The GPU device to use is passed in as a parameter. If this is NULL, then a
+/// device will be created normally and can be retrieved using
+/// SDL_GetGPURendererDevice().
 ///
-/// If no available GPU driver supports any of the specified shader formats,
-/// this function will fail.
+/// The window to use is passed in as a parameter. If this is NULL, then this
+/// will become an offscreen renderer. In that case, you should call
+/// SDL_SetRenderTarget() to setup rendering to a texture, and then call
+/// SDL_RenderPresent() normally to complete drawing a frame.
 ///
-/// \param window the window where rendering is displayed.
-/// \param format_flags a bitflag indicating which shader formats the app is
-/// able to provide.
-/// \param device a pointer filled with the associated GPU device, or NULL on
-/// error.
+/// \param device the GPU device to use with the renderer, or NULL to create a
+/// device.
+/// \param window the window where rendering is displayed, or NULL to create an
+/// offscreen renderer.
 /// \returns a valid rendering context or NULL if there was an error; call
 /// SDL_GetError() for more information.
 ///
-/// \threadsafety This function should only be called on the main thread.
+/// \threadsafety If this function is called with a valid GPU device, it should
+/// be called on the thread that created the device. If this
+/// function is called with a valid window, it should be called
+/// on the thread that created the window.
 ///
 /// \since This function is available since SDL 3.4.0.
 ///
 /// \sa SDL_CreateRendererWithProperties
-/// \sa SDL_GetGPUShaderFormats
+/// \sa SDL_GetGPURendererDevice
 /// \sa SDL_CreateGPUShader
 /// \sa SDL_CreateGPURenderState
-/// \sa SDL_SetRenderGPUState
+/// \sa SDL_SetGPURenderState
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_Renderer * SDLCALL SDL_CreateGPURenderer(SDL_Window *window, SDL_GPUShaderFormat format_flags, SDL_GPUDevice **device)
+/// extern SDL_DECLSPEC SDL_Renderer * SDLCALL SDL_CreateGPURenderer(SDL_GPUDevice *device, SDL_Window *window)
 /// ```
 /// {@category render}
 Pointer<SdlRenderer> sdlCreateGpuRenderer(
+  Pointer<SdlGpuDevice> device,
   Pointer<SdlWindow> window,
-  int formatFlags,
-  Pointer<Pointer<SdlGpuDevice>> device,
 ) {
   final sdlCreateGpuRendererLookupFunction = _libSdl
       .lookupFunction<
         Pointer<SdlRenderer> Function(
+          Pointer<SdlGpuDevice> device,
           Pointer<SdlWindow> window,
-          Uint32 formatFlags,
-          Pointer<Pointer<SdlGpuDevice>> device,
         ),
         Pointer<SdlRenderer> Function(
+          Pointer<SdlGpuDevice> device,
           Pointer<SdlWindow> window,
-          int formatFlags,
-          Pointer<Pointer<SdlGpuDevice>> device,
         )
       >('SDL_CreateGPURenderer');
-  return sdlCreateGpuRendererLookupFunction(window, formatFlags, device);
+  return sdlCreateGpuRendererLookupFunction(device, window);
+}
+
+///
+/// Return the GPU device used by a renderer.
+///
+/// \param renderer the rendering context.
+/// \returns the GPU device used by the renderer, or NULL if the renderer is
+/// not a GPU renderer; call SDL_GetError() for more information.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.4.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC SDL_GPUDevice * SDLCALL SDL_GetGPURendererDevice(SDL_Renderer *renderer)
+/// ```
+/// {@category render}
+Pointer<SdlGpuDevice> sdlGetGpuRendererDevice(Pointer<SdlRenderer> renderer) {
+  final sdlGetGpuRendererDeviceLookupFunction = _libSdl
+      .lookupFunction<
+        Pointer<SdlGpuDevice> Function(Pointer<SdlRenderer> renderer),
+        Pointer<SdlGpuDevice> Function(Pointer<SdlRenderer> renderer)
+      >('SDL_GetGPURendererDevice');
+  return sdlGetGpuRendererDeviceLookupFunction(renderer);
 }
 
 ///
@@ -334,7 +360,7 @@ Pointer<SdlRenderer> sdlCreateGpuRenderer(
 /// \returns a valid rendering context or NULL if there was an error; call
 /// SDL_GetError() for more information.
 ///
-/// \threadsafety This function should only be called on the main thread.
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
@@ -741,6 +767,9 @@ Pointer<SdlTexture> sdlCreateTextureFromSurface(
 /// pixels, required
 /// - `SDL_PROP_TEXTURE_CREATE_HEIGHT_NUMBER`: the height of the texture in
 /// pixels, required
+/// - `SDL_PROP_TEXTURE_CREATE_PALETTE_POINTER`: an SDL_Palette to use with
+/// palettized texture formats. This can be set later with
+/// SDL_SetTexturePalette()
 /// - `SDL_PROP_TEXTURE_CREATE_SDR_WHITE_POINT_FLOAT`: for HDR10 and floating
 /// point textures, this defines the value of 100% diffuse white, with higher
 /// values being displayed in the High Dynamic Range headroom. This defaults
@@ -934,6 +963,12 @@ Pointer<SdlTexture> sdlCreateTextureWithProperties(
 ///
 /// - `SDL_PROP_TEXTURE_GPU_TEXTURE_POINTER`: the SDL_GPUTexture associated
 /// with the texture
+/// - `SDL_PROP_TEXTURE_GPU_TEXTURE_UV_POINTER`: the SDL_GPUTexture associated
+/// with the UV plane of an NV12 texture
+/// - `SDL_PROP_TEXTURE_GPU_TEXTURE_U_POINTER`: the SDL_GPUTexture associated
+/// with the U plane of a YUV texture
+/// - `SDL_PROP_TEXTURE_GPU_TEXTURE_V_POINTER`: the SDL_GPUTexture associated
+/// with the V plane of a YUV texture
 ///
 /// \param texture the texture to query.
 /// \returns a valid property ID on success or 0 on failure; call
@@ -1018,6 +1053,71 @@ bool sdlGetTextureSize(
         )
       >('SDL_GetTextureSize');
   return sdlGetTextureSizeLookupFunction(texture, w, h) == 1;
+}
+
+///
+/// Set the palette used by a texture.
+///
+/// Setting the palette keeps an internal reference to the palette, which can
+/// be safely destroyed afterwards.
+///
+/// A single palette can be shared with many textures.
+///
+/// \param texture the texture to update.
+/// \param palette the SDL_Palette structure to use.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety This function should only be called on the main thread.
+///
+/// \since This function is available since SDL 3.4.0.
+///
+/// \sa SDL_CreatePalette
+/// \sa SDL_GetTexturePalette
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetTexturePalette(SDL_Texture *texture, SDL_Palette *palette)
+/// ```
+/// {@category render}
+bool sdlSetTexturePalette(
+  Pointer<SdlTexture> texture,
+  Pointer<SdlPalette> palette,
+) {
+  final sdlSetTexturePaletteLookupFunction = _libSdl
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<SdlTexture> texture,
+          Pointer<SdlPalette> palette,
+        ),
+        int Function(Pointer<SdlTexture> texture, Pointer<SdlPalette> palette)
+      >('SDL_SetTexturePalette');
+  return sdlSetTexturePaletteLookupFunction(texture, palette) == 1;
+}
+
+///
+/// Get the palette used by a texture.
+///
+/// \param texture the texture to query.
+/// \returns a pointer to the palette used by the texture, or NULL if there is
+/// no palette used.
+///
+/// \threadsafety This function should only be called on the main thread.
+///
+/// \since This function is available since SDL 3.4.0.
+///
+/// \sa SDL_SetTexturePalette
+///
+/// ```c
+/// extern SDL_DECLSPEC SDL_Palette * SDLCALL SDL_GetTexturePalette(SDL_Texture *texture)
+/// ```
+/// {@category render}
+Pointer<SdlPalette> sdlGetTexturePalette(Pointer<SdlTexture> texture) {
+  final sdlGetTexturePaletteLookupFunction = _libSdl
+      .lookupFunction<
+        Pointer<SdlPalette> Function(Pointer<SdlTexture> texture),
+        Pointer<SdlPalette> Function(Pointer<SdlTexture> texture)
+      >('SDL_GetTexturePalette');
+  return sdlGetTexturePaletteLookupFunction(texture);
 }
 
 ///
@@ -4296,8 +4396,8 @@ bool sdlGetRenderVSync(Pointer<SdlRenderer> renderer, Pointer<Int32> vsync) {
 /// Among these limitations:
 ///
 /// - It accepts UTF-8 strings, but will only renders ASCII characters.
-/// - It has a single, tiny size (8x8 pixels). One can use logical presentation
-/// or scaling to adjust it, but it will be blurry.
+/// - It has a single, tiny size (8x8 pixels). You can use logical presentation
+/// or SDL_SetRenderScale() to adjust it.
 /// - It uses a simple, hardcoded bitmap font. It does not allow different font
 /// selections and it does not support truetype, for proper scaling.
 /// - It does no word-wrapping and does not treat newline characters as a line
@@ -4493,7 +4593,7 @@ bool sdlGetDefaultTextureScaleMode(
 /// \since This function is available since SDL 3.4.0.
 ///
 /// \sa SDL_SetGPURenderStateFragmentUniforms
-/// \sa SDL_SetRenderGPUState
+/// \sa SDL_SetGPURenderState
 /// \sa SDL_DestroyGPURenderState
 ///
 /// ```c
@@ -4587,14 +4687,14 @@ bool sdlSetGpuRenderStateFragmentUniforms(
 /// \since This function is available since SDL 3.4.0.
 ///
 /// ```c
-/// extern SDL_DECLSPEC bool SDLCALL SDL_SetRenderGPUState(SDL_Renderer *renderer, SDL_GPURenderState *state)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetGPURenderState(SDL_Renderer *renderer, SDL_GPURenderState *state)
 /// ```
 /// {@category render}
-bool sdlSetRenderGpuState(
+bool sdlSetGpuRenderState(
   Pointer<SdlRenderer> renderer,
   Pointer<SdlGpuRenderState> state,
 ) {
-  final sdlSetRenderGpuStateLookupFunction = _libSdl
+  final sdlSetGpuRenderStateLookupFunction = _libSdl
       .lookupFunction<
         Uint8 Function(
           Pointer<SdlRenderer> renderer,
@@ -4604,8 +4704,8 @@ bool sdlSetRenderGpuState(
           Pointer<SdlRenderer> renderer,
           Pointer<SdlGpuRenderState> state,
         )
-      >('SDL_SetRenderGPUState');
-  return sdlSetRenderGpuStateLookupFunction(renderer, state) == 1;
+      >('SDL_SetGPURenderState');
+  return sdlSetGpuRenderStateLookupFunction(renderer, state) == 1;
 }
 
 ///

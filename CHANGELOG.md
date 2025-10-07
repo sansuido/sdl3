@@ -1,3 +1,6 @@
+## 2.3.10
+- SDL3-2025-10-05
+
 ## 2.3.9
 - SDL3-2025-09-28
 - [fixed] Fixed inconsistencies in the notation of some functions in SdlWindowPointerEx.

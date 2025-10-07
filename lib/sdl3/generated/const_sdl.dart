@@ -629,6 +629,14 @@ const SDL_PROP_GPU_DEVICE_CREATE_PREFERLOWPOWER_BOOLEAN =
 const SDL_PROP_GPU_DEVICE_CREATE_VERBOSE_BOOLEAN =
     'SDL.gpu.device.create.verbose';
 const SDL_PROP_GPU_DEVICE_CREATE_NAME_STRING = 'SDL.gpu.device.create.name';
+const SDL_PROP_GPU_DEVICE_CREATE_FEATURE_CLIP_DISTANCE_BOOLEAN =
+    'SDL.gpu.device.create.feature.clip_distance';
+const SDL_PROP_GPU_DEVICE_CREATE_FEATURE_DEPTH_CLAMPING_BOOLEAN =
+    'SDL.gpu.device.create.feature.depth_clamping';
+const SDL_PROP_GPU_DEVICE_CREATE_FEATURE_INDIRECT_DRAW_FIRST_INSTANCE_BOOLEAN =
+    'SDL.gpu.device.create.feature.indirect_draw_first_instance';
+const SDL_PROP_GPU_DEVICE_CREATE_FEATURE_ANISOTROPY_BOOLEAN =
+    'SDL.gpu.device.create.feature.anisotropy';
 const SDL_PROP_GPU_DEVICE_CREATE_SHADERS_PRIVATE_BOOLEAN =
     'SDL.gpu.device.create.shaders.private';
 const SDL_PROP_GPU_DEVICE_CREATE_SHADERS_SPIRV_BOOLEAN =
@@ -645,14 +653,6 @@ const SDL_PROP_GPU_DEVICE_CREATE_D3D12_ALLOW_FEWER_RESOURCE_SLOTS_BOOLEAN =
     'SDL.gpu.device.create.d3d12.allowtier1resourcebinding';
 const SDL_PROP_GPU_DEVICE_CREATE_D3D12_SEMANTIC_NAME_STRING =
     'SDL.gpu.device.create.d3d12.semantic';
-const SDL_PROP_GPU_DEVICE_CREATE_VULKAN_SHADERCLIPDISTANCE_BOOLEAN =
-    'SDL.gpu.device.create.vulkan.shaderclipdistance';
-const SDL_PROP_GPU_DEVICE_CREATE_VULKAN_DEPTHCLAMP_BOOLEAN =
-    'SDL.gpu.device.create.vulkan.depthclamp';
-const SDL_PROP_GPU_DEVICE_CREATE_VULKAN_DRAWINDIRECTFIRST_BOOLEAN =
-    'SDL.gpu.device.create.vulkan.drawindirectfirstinstance';
-const SDL_PROP_GPU_DEVICE_CREATE_VULKAN_SAMPLERANISOTROPY_BOOLEAN =
-    'SDL.gpu.device.create.vulkan.sampleranisotropy';
 const SDL_PROP_GPU_DEVICE_NAME_STRING = 'SDL.gpu.device.name';
 const SDL_PROP_GPU_DEVICE_DRIVER_NAME_STRING = 'SDL.gpu.device.driver_name';
 const SDL_PROP_GPU_DEVICE_DRIVER_VERSION_STRING =
@@ -759,6 +759,7 @@ const SDL_HINT_INVALID_PARAM_CHECKS = 'SDL_INVALID_PARAM_CHECKS';
 const SDL_HINT_EMSCRIPTEN_ASYNCIFY = 'SDL_EMSCRIPTEN_ASYNCIFY';
 const SDL_HINT_EMSCRIPTEN_CANVAS_SELECTOR = 'SDL_EMSCRIPTEN_CANVAS_SELECTOR';
 const SDL_HINT_EMSCRIPTEN_KEYBOARD_ELEMENT = 'SDL_EMSCRIPTEN_KEYBOARD_ELEMENT';
+const SDL_HINT_EMSCRIPTEN_FILL_DOCUMENT = 'SDL_EMSCRIPTEN_FILL_DOCUMENT';
 const SDL_HINT_ENABLE_SCREEN_KEYBOARD = 'SDL_ENABLE_SCREEN_KEYBOARD';
 const SDL_HINT_EVDEV_DEVICES = 'SDL_EVDEV_DEVICES';
 const SDL_HINT_EVENT_LOGGING = 'SDL_EVENT_LOGGING';
@@ -1866,6 +1867,7 @@ const SDL_PROPERTY_TYPE_BOOLEAN = 5;
 //const SDL_rect_h_ = ;
 //const SDL_render_h_ = ;
 const SDL_SOFTWARE_RENDERER = 'software';
+const SDL_GPU_RENDERER = 'gpu';
 const SDL_TEXTUREACCESS_STATIC = 0;
 const SDL_TEXTUREACCESS_STREAMING = 1;
 const SDL_TEXTUREACCESS_TARGET = 2;
@@ -1885,6 +1887,8 @@ const SDL_PROP_RENDERER_CREATE_OUTPUT_COLORSPACE_NUMBER =
     'SDL.renderer.create.output_colorspace';
 const SDL_PROP_RENDERER_CREATE_PRESENT_VSYNC_NUMBER =
     'SDL.renderer.create.present_vsync';
+const SDL_PROP_RENDERER_CREATE_GPU_DEVICE_POINTER =
+    'SDL.renderer.create.gpu.device';
 const SDL_PROP_RENDERER_CREATE_GPU_SHADERS_SPIRV_BOOLEAN =
     'SDL.renderer.create.gpu.shaders_spirv';
 const SDL_PROP_RENDERER_CREATE_GPU_SHADERS_DXIL_BOOLEAN =
@@ -1944,6 +1948,7 @@ const SDL_PROP_TEXTURE_CREATE_FORMAT_NUMBER = 'SDL.texture.create.format';
 const SDL_PROP_TEXTURE_CREATE_ACCESS_NUMBER = 'SDL.texture.create.access';
 const SDL_PROP_TEXTURE_CREATE_WIDTH_NUMBER = 'SDL.texture.create.width';
 const SDL_PROP_TEXTURE_CREATE_HEIGHT_NUMBER = 'SDL.texture.create.height';
+const SDL_PROP_TEXTURE_CREATE_PALETTE_POINTER = 'SDL.texture.create.palette';
 const SDL_PROP_TEXTURE_CREATE_SDR_WHITE_POINT_FLOAT =
     'SDL.texture.create.SDR_white_point';
 const SDL_PROP_TEXTURE_CREATE_HDR_HEADROOM_FLOAT =
@@ -2014,12 +2019,15 @@ const SDL_PROP_TEXTURE_OPENGLES2_TEXTURE_TARGET_NUMBER =
     'SDL.texture.opengles2.target';
 const SDL_PROP_TEXTURE_VULKAN_TEXTURE_NUMBER = 'SDL.texture.vulkan.texture';
 const SDL_PROP_TEXTURE_GPU_TEXTURE_POINTER = 'SDL.texture.gpu.texture';
+const SDL_PROP_TEXTURE_GPU_TEXTURE_UV_POINTER = 'SDL.texture.gpu.texture_uv';
+const SDL_PROP_TEXTURE_GPU_TEXTURE_U_POINTER = 'SDL.texture.gpu.texture_u';
+const SDL_PROP_TEXTURE_GPU_TEXTURE_V_POINTER = 'SDL.texture.gpu.texture_v';
 const SDL_RENDERER_VSYNC_DISABLED = 0;
 const SDL_RENDERER_VSYNC_ADAPTIVE = -1;
 const SDL_DEBUG_TEXT_FONT_CHARACTER_SIZE = 8;
 //const SDL_revision_h_ = ;
 const SDL_REVISION =
-    'SDL3-3.3.0-release-3.2.6-1315-ga1672f2d2 (" SDL_VENDOR_INFO ")';
+    'SDL-3.3.0-release-3.2.6-1403-g87f9a0e10 (" SDL_VENDOR_INFO ")';
 //const SDL_scancode_h_ = ;
 const SDL_SCANCODE_UNKNOWN = 0;
 const SDL_SCANCODE_A = 4;
@@ -2639,6 +2647,8 @@ const SDL_PROP_WINDOW_CREATE_WIN32_PIXEL_FORMAT_HWND_POINTER =
 const SDL_PROP_WINDOW_CREATE_X11_WINDOW_NUMBER = 'SDL.window.create.x11.window';
 const SDL_PROP_WINDOW_CREATE_EMSCRIPTEN_CANVAS_ID_STRING =
     'SDL.window.create.emscripten.canvas_id';
+const SDL_PROP_WINDOW_CREATE_EMSCRIPTEN_FILL_DOCUMENT_BOOLEAN =
+    'SDL.window.create.emscripten.fill_document';
 const SDL_PROP_WINDOW_CREATE_EMSCRIPTEN_KEYBOARD_ELEMENT_STRING =
     'SDL.window.create.emscripten.keyboard_element';
 const SDL_PROP_WINDOW_SHAPE_POINTER = 'SDL.window.shape';
@@ -2690,6 +2700,8 @@ const SDL_PROP_WINDOW_X11_SCREEN_NUMBER = 'SDL.window.x11.screen';
 const SDL_PROP_WINDOW_X11_WINDOW_NUMBER = 'SDL.window.x11.window';
 const SDL_PROP_WINDOW_EMSCRIPTEN_CANVAS_ID_STRING =
     'SDL.window.emscripten.canvas_id';
+const SDL_PROP_WINDOW_EMSCRIPTEN_FILL_DOCUMENT_BOOLEAN =
+    'SDL.window.emscripten.fill_document';
 const SDL_PROP_WINDOW_EMSCRIPTEN_KEYBOARD_ELEMENT_STRING =
     'SDL.window.emscripten.keyboard_element';
 const SDL_WINDOW_SURFACE_VSYNC_DISABLED = 0;
@@ -3430,6 +3442,14 @@ class SdlkPropGpu {
   static const deviceCreateVerboseBoolean =
       SDL_PROP_GPU_DEVICE_CREATE_VERBOSE_BOOLEAN;
   static const deviceCreateNameString = SDL_PROP_GPU_DEVICE_CREATE_NAME_STRING;
+  static const deviceCreateFeatureClipDistanceBoolean =
+      SDL_PROP_GPU_DEVICE_CREATE_FEATURE_CLIP_DISTANCE_BOOLEAN;
+  static const deviceCreateFeatureDepthClampingBoolean =
+      SDL_PROP_GPU_DEVICE_CREATE_FEATURE_DEPTH_CLAMPING_BOOLEAN;
+  static const deviceCreateFeatureIndirectDrawFirstInstanceBoolean =
+      SDL_PROP_GPU_DEVICE_CREATE_FEATURE_INDIRECT_DRAW_FIRST_INSTANCE_BOOLEAN;
+  static const deviceCreateFeatureAnisotropyBoolean =
+      SDL_PROP_GPU_DEVICE_CREATE_FEATURE_ANISOTROPY_BOOLEAN;
   static const deviceCreateShadersPrivateBoolean =
       SDL_PROP_GPU_DEVICE_CREATE_SHADERS_PRIVATE_BOOLEAN;
   static const deviceCreateShadersSpirvBoolean =
@@ -3446,14 +3466,6 @@ class SdlkPropGpu {
       SDL_PROP_GPU_DEVICE_CREATE_D3D12_ALLOW_FEWER_RESOURCE_SLOTS_BOOLEAN;
   static const deviceCreateD3D12SemanticNameString =
       SDL_PROP_GPU_DEVICE_CREATE_D3D12_SEMANTIC_NAME_STRING;
-  static const deviceCreateVulkanShaderclipdistanceBoolean =
-      SDL_PROP_GPU_DEVICE_CREATE_VULKAN_SHADERCLIPDISTANCE_BOOLEAN;
-  static const deviceCreateVulkanDepthclampBoolean =
-      SDL_PROP_GPU_DEVICE_CREATE_VULKAN_DEPTHCLAMP_BOOLEAN;
-  static const deviceCreateVulkanDrawindirectfirstBoolean =
-      SDL_PROP_GPU_DEVICE_CREATE_VULKAN_DRAWINDIRECTFIRST_BOOLEAN;
-  static const deviceCreateVulkanSampleranisotropyBoolean =
-      SDL_PROP_GPU_DEVICE_CREATE_VULKAN_SAMPLERANISOTROPY_BOOLEAN;
   static const deviceNameString = SDL_PROP_GPU_DEVICE_NAME_STRING;
   static const deviceDriverNameString = SDL_PROP_GPU_DEVICE_DRIVER_NAME_STRING;
   static const deviceDriverVersionString =
@@ -3568,6 +3580,7 @@ class SdlkHint {
   static const emscriptenAsyncify = SDL_HINT_EMSCRIPTEN_ASYNCIFY;
   static const emscriptenCanvasSelector = SDL_HINT_EMSCRIPTEN_CANVAS_SELECTOR;
   static const emscriptenKeyboardElement = SDL_HINT_EMSCRIPTEN_KEYBOARD_ELEMENT;
+  static const emscriptenFillDocument = SDL_HINT_EMSCRIPTEN_FILL_DOCUMENT;
   static const enableScreenKeyboard = SDL_HINT_ENABLE_SCREEN_KEYBOARD;
   static const evdevDevices = SDL_HINT_EVDEV_DEVICES;
   static const eventLogging = SDL_HINT_EVENT_LOGGING;
@@ -4727,6 +4740,8 @@ class SdlkPropRenderer {
       SDL_PROP_RENDERER_CREATE_OUTPUT_COLORSPACE_NUMBER;
   static const createPresentVsyncNumber =
       SDL_PROP_RENDERER_CREATE_PRESENT_VSYNC_NUMBER;
+  static const createGpuDevicePointer =
+      SDL_PROP_RENDERER_CREATE_GPU_DEVICE_POINTER;
   static const createGpuShadersSpirvBoolean =
       SDL_PROP_RENDERER_CREATE_GPU_SHADERS_SPIRV_BOOLEAN;
   static const createGpuShadersDxilBoolean =
@@ -4789,6 +4804,7 @@ class SdlkPropTexture {
   static const createAccessNumber = SDL_PROP_TEXTURE_CREATE_ACCESS_NUMBER;
   static const createWidthNumber = SDL_PROP_TEXTURE_CREATE_WIDTH_NUMBER;
   static const createHeightNumber = SDL_PROP_TEXTURE_CREATE_HEIGHT_NUMBER;
+  static const createPalettePointer = SDL_PROP_TEXTURE_CREATE_PALETTE_POINTER;
   static const createSdrWhitePointFloat =
       SDL_PROP_TEXTURE_CREATE_SDR_WHITE_POINT_FLOAT;
   static const createHdrHeadroomFloat =
@@ -4859,6 +4875,9 @@ class SdlkPropTexture {
       SDL_PROP_TEXTURE_OPENGLES2_TEXTURE_TARGET_NUMBER;
   static const vulkanTextureNumber = SDL_PROP_TEXTURE_VULKAN_TEXTURE_NUMBER;
   static const gpuTexturePointer = SDL_PROP_TEXTURE_GPU_TEXTURE_POINTER;
+  static const gpuTextureUvPointer = SDL_PROP_TEXTURE_GPU_TEXTURE_UV_POINTER;
+  static const gpuTextureUPointer = SDL_PROP_TEXTURE_GPU_TEXTURE_U_POINTER;
+  static const gpuTextureVPointer = SDL_PROP_TEXTURE_GPU_TEXTURE_V_POINTER;
 }
 
 /// {@category render}
@@ -5419,6 +5438,8 @@ class SdlkPropWindow {
   static const createX11WindowNumber = SDL_PROP_WINDOW_CREATE_X11_WINDOW_NUMBER;
   static const createEmscriptenCanvasIdString =
       SDL_PROP_WINDOW_CREATE_EMSCRIPTEN_CANVAS_ID_STRING;
+  static const createEmscriptenFillDocumentBoolean =
+      SDL_PROP_WINDOW_CREATE_EMSCRIPTEN_FILL_DOCUMENT_BOOLEAN;
   static const createEmscriptenKeyboardElementString =
       SDL_PROP_WINDOW_CREATE_EMSCRIPTEN_KEYBOARD_ELEMENT_STRING;
   static const shapePointer = SDL_PROP_WINDOW_SHAPE_POINTER;
@@ -5472,6 +5493,8 @@ class SdlkPropWindow {
   static const x11WindowNumber = SDL_PROP_WINDOW_X11_WINDOW_NUMBER;
   static const emscriptenCanvasIdString =
       SDL_PROP_WINDOW_EMSCRIPTEN_CANVAS_ID_STRING;
+  static const emscriptenFillDocumentBoolean =
+      SDL_PROP_WINDOW_EMSCRIPTEN_FILL_DOCUMENT_BOOLEAN;
   static const emscriptenKeyboardElementString =
       SDL_PROP_WINDOW_EMSCRIPTEN_KEYBOARD_ELEMENT_STRING;
 }

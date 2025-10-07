@@ -269,6 +269,9 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// pixels, required
   /// - `SDL_PROP_TEXTURE_CREATE_HEIGHT_NUMBER`: the height of the texture in
   /// pixels, required
+  /// - `SDL_PROP_TEXTURE_CREATE_PALETTE_POINTER`: an SDL_Palette to use with
+  /// palettized texture formats. This can be set later with
+  /// SDL_SetTexturePalette()
   /// - `SDL_PROP_TEXTURE_CREATE_SDR_WHITE_POINT_FLOAT`: for HDR10 and floating
   /// point textures, this defines the value of 100% diffuse white, with higher
   /// values being displayed in the High Dynamic Range headroom. This defaults
@@ -2179,8 +2182,8 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// Among these limitations:
   ///
   /// - It accepts UTF-8 strings, but will only renders ASCII characters.
-  /// - It has a single, tiny size (8x8 pixels). One can use logical presentation
-  /// or scaling to adjust it, but it will be blurry.
+  /// - It has a single, tiny size (8x8 pixels). You can use logical presentation
+  /// or SDL_SetRenderScale() to adjust it.
   /// - It uses a simple, hardcoded bitmap font. It does not allow different font
   /// selections and it does not support truetype, for proper scaling.
   /// - It does no word-wrapping and does not treat newline characters as a line
