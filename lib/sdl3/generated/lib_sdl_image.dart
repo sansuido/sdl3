@@ -448,6 +448,29 @@ Pointer<SdlTexture> imgLoadTextureTypedIo(
 }
 
 ///
+/// Get the image currently in the clipboard.
+///
+/// When done with the returned surface, the app should dispose of it with a
+/// call to SDL_DestroySurface().
+///
+/// \returns a new SDL surface, or NULL if no supported image is available.
+///
+/// \since This function is available since SDL_image 3.4.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC SDL_Surface * SDLCALL IMG_GetClipboardImage(void)
+/// ```
+/// {@category image}
+Pointer<SdlSurface> imgGetClipboardImage() {
+  final imgGetClipboardImageLookupFunction = _libImage
+      .lookupFunction<
+        Pointer<SdlSurface> Function(),
+        Pointer<SdlSurface> Function()
+      >('IMG_GetClipboardImage');
+  return imgGetClipboardImageLookupFunction();
+}
+
+///
 /// Detect AVIF image data on a readable/seekable SDL_IOStream.
 ///
 /// This function attempts to determine if a file is a given filetype, reading

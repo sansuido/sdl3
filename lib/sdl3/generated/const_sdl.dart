@@ -174,8 +174,9 @@ const SDL_EVENT_DISPLAY_MOVED = 0x151 + 3;
 const SDL_EVENT_DISPLAY_DESKTOP_MODE_CHANGED = 0x151 + 4;
 const SDL_EVENT_DISPLAY_CURRENT_MODE_CHANGED = 0x151 + 5;
 const SDL_EVENT_DISPLAY_CONTENT_SCALE_CHANGED = 0x151 + 6;
+const SDL_EVENT_DISPLAY_USABLE_BOUNDS_CHANGED = 0x151 + 7;
 const SDL_EVENT_DISPLAY_FIRST = SDL_EVENT_DISPLAY_ORIENTATION;
-const SDL_EVENT_DISPLAY_LAST = SDL_EVENT_DISPLAY_CONTENT_SCALE_CHANGED;
+const SDL_EVENT_DISPLAY_LAST = SDL_EVENT_DISPLAY_USABLE_BOUNDS_CHANGED;
 const SDL_EVENT_WINDOW_SHOWN = 0x202;
 const SDL_EVENT_WINDOW_HIDDEN = 0x202 + 1;
 const SDL_EVENT_WINDOW_EXPOSED = 0x202 + 2;
@@ -211,6 +212,8 @@ const SDL_EVENT_KEYMAP_CHANGED = 0x300 + 4;
 const SDL_EVENT_KEYBOARD_ADDED = 0x300 + 5;
 const SDL_EVENT_KEYBOARD_REMOVED = 0x300 + 6;
 const SDL_EVENT_TEXT_EDITING_CANDIDATES = 0x300 + 7;
+const SDL_EVENT_SCREEN_KEYBOARD_SHOWN = 0x300 + 8;
+const SDL_EVENT_SCREEN_KEYBOARD_HIDDEN = 0x300 + 9;
 const SDL_EVENT_MOUSE_MOTION = 0x400;
 const SDL_EVENT_MOUSE_BUTTON_DOWN = 0x400 + 1;
 const SDL_EVENT_MOUSE_BUTTON_UP = 0x400 + 2;
@@ -963,6 +966,8 @@ const SDL_HINT_VIDEO_FORCE_EGL = 'SDL_VIDEO_FORCE_EGL';
 const SDL_HINT_VIDEO_MAC_FULLSCREEN_SPACES = 'SDL_VIDEO_MAC_FULLSCREEN_SPACES';
 const SDL_HINT_VIDEO_MAC_FULLSCREEN_MENU_VISIBILITY =
     'SDL_VIDEO_MAC_FULLSCREEN_MENU_VISIBILITY';
+const SDL_HINT_VIDEO_METAL_AUTO_RESIZE_DRAWABLE =
+    'SDL_VIDEO_METAL_AUTO_RESIZE_DRAWABLE';
 const SDL_HINT_VIDEO_MATCH_EXCLUSIVE_MODE_ON_MOVE =
     'SDL_VIDEO_MATCH_EXCLUSIVE_MODE_ON_MOVE';
 const SDL_HINT_VIDEO_MINIMIZE_ON_FOCUS_LOSS =
@@ -1029,7 +1034,6 @@ const SDL_HINT_XINPUT_ENABLED = 'SDL_XINPUT_ENABLED';
 const SDL_HINT_ASSERT = 'SDL_ASSERT';
 const SDL_HINT_PEN_MOUSE_EVENTS = 'SDL_PEN_MOUSE_EVENTS';
 const SDL_HINT_PEN_TOUCH_EVENTS = 'SDL_PEN_TOUCH_EVENTS';
-const SDL_HINT_DEBUG_LOGGING = 'SDL_DEBUG_LOGGING';
 const SDL_HINT_DEFAULT = 0;
 const SDL_HINT_NORMAL = 1;
 const SDL_HINT_OVERRIDE = 2;
@@ -1864,6 +1868,7 @@ const SDL_PROPERTY_TYPE_STRING = 2;
 const SDL_PROPERTY_TYPE_NUMBER = 3;
 const SDL_PROPERTY_TYPE_FLOAT = 4;
 const SDL_PROPERTY_TYPE_BOOLEAN = 5;
+const SDL_PROP_NAME_STRING = 'SDL.name';
 //const SDL_rect_h_ = ;
 //const SDL_render_h_ = ;
 const SDL_SOFTWARE_RENDERER = 'software';
@@ -1985,6 +1990,14 @@ const SDL_PROP_TEXTURE_CREATE_OPENGLES2_TEXTURE_V_NUMBER =
     'SDL.texture.create.opengles2.texture_v';
 const SDL_PROP_TEXTURE_CREATE_VULKAN_TEXTURE_NUMBER =
     'SDL.texture.create.vulkan.texture';
+const SDL_PROP_TEXTURE_CREATE_GPU_TEXTURE_POINTER =
+    'SDL.texture.create.gpu.texture';
+const SDL_PROP_TEXTURE_CREATE_GPU_TEXTURE_UV_POINTER =
+    'SDL.texture.create.gpu.texture_uv';
+const SDL_PROP_TEXTURE_CREATE_GPU_TEXTURE_U_POINTER =
+    'SDL.texture.create.gpu.texture_u';
+const SDL_PROP_TEXTURE_CREATE_GPU_TEXTURE_V_POINTER =
+    'SDL.texture.create.gpu.texture_v';
 const SDL_PROP_TEXTURE_COLORSPACE_NUMBER = 'SDL.texture.colorspace';
 const SDL_PROP_TEXTURE_FORMAT_NUMBER = 'SDL.texture.format';
 const SDL_PROP_TEXTURE_ACCESS_NUMBER = 'SDL.texture.access';
@@ -2027,7 +2040,7 @@ const SDL_RENDERER_VSYNC_ADAPTIVE = -1;
 const SDL_DEBUG_TEXT_FONT_CHARACTER_SIZE = 8;
 //const SDL_revision_h_ = ;
 const SDL_REVISION =
-    'SDL-3.3.0-release-3.2.6-1403-g87f9a0e10 (" SDL_VENDOR_INFO ")';
+    'SDL-3.3.0-release-3.2.6-1512-gc89fed4ea (" SDL_VENDOR_INFO ")';
 //const SDL_scancode_h_ = ;
 const SDL_SCANCODE_UNKNOWN = 0;
 const SDL_SCANCODE_A = 4;
@@ -2843,6 +2856,8 @@ class SdlkEvent {
       SDL_EVENT_DISPLAY_CURRENT_MODE_CHANGED;
   static const displayContentScaleChanged =
       SDL_EVENT_DISPLAY_CONTENT_SCALE_CHANGED;
+  static const displayUsableBoundsChanged =
+      SDL_EVENT_DISPLAY_USABLE_BOUNDS_CHANGED;
   static const displayFirst = SDL_EVENT_DISPLAY_FIRST;
   static const displayLast = SDL_EVENT_DISPLAY_LAST;
   static const windowShown = SDL_EVENT_WINDOW_SHOWN;
@@ -2881,6 +2896,8 @@ class SdlkEvent {
   static const keyboardAdded = SDL_EVENT_KEYBOARD_ADDED;
   static const keyboardRemoved = SDL_EVENT_KEYBOARD_REMOVED;
   static const textEditingCandidates = SDL_EVENT_TEXT_EDITING_CANDIDATES;
+  static const screenKeyboardShown = SDL_EVENT_SCREEN_KEYBOARD_SHOWN;
+  static const screenKeyboardHidden = SDL_EVENT_SCREEN_KEYBOARD_HIDDEN;
   static const mouseMotion = SDL_EVENT_MOUSE_MOTION;
   static const mouseButtonDown = SDL_EVENT_MOUSE_BUTTON_DOWN;
   static const mouseButtonUp = SDL_EVENT_MOUSE_BUTTON_UP;
@@ -3784,6 +3801,8 @@ class SdlkHint {
   static const videoMacFullscreenSpaces = SDL_HINT_VIDEO_MAC_FULLSCREEN_SPACES;
   static const videoMacFullscreenMenuVisibility =
       SDL_HINT_VIDEO_MAC_FULLSCREEN_MENU_VISIBILITY;
+  static const videoMetalAutoResizeDrawable =
+      SDL_HINT_VIDEO_METAL_AUTO_RESIZE_DRAWABLE;
   static const videoMatchExclusiveModeOnMove =
       SDL_HINT_VIDEO_MATCH_EXCLUSIVE_MODE_ON_MOVE;
   static const videoMinimizeOnFocusLoss = SDL_HINT_VIDEO_MINIMIZE_ON_FOCUS_LOSS;
@@ -3849,7 +3868,6 @@ class SdlkHint {
   static const onAssert = SDL_HINT_ASSERT;
   static const penMouseEvents = SDL_HINT_PEN_MOUSE_EVENTS;
   static const penTouchEvents = SDL_HINT_PEN_TOUCH_EVENTS;
-  static const debugLogging = SDL_HINT_DEBUG_LOGGING;
   static const onDefault = SDL_HINT_DEFAULT;
   static const normal = SDL_HINT_NORMAL;
   static const override = SDL_HINT_OVERRIDE;
@@ -4841,6 +4859,14 @@ class SdlkPropTexture {
       SDL_PROP_TEXTURE_CREATE_OPENGLES2_TEXTURE_V_NUMBER;
   static const createVulkanTextureNumber =
       SDL_PROP_TEXTURE_CREATE_VULKAN_TEXTURE_NUMBER;
+  static const createGpuTexturePointer =
+      SDL_PROP_TEXTURE_CREATE_GPU_TEXTURE_POINTER;
+  static const createGpuTextureUvPointer =
+      SDL_PROP_TEXTURE_CREATE_GPU_TEXTURE_UV_POINTER;
+  static const createGpuTextureUPointer =
+      SDL_PROP_TEXTURE_CREATE_GPU_TEXTURE_U_POINTER;
+  static const createGpuTextureVPointer =
+      SDL_PROP_TEXTURE_CREATE_GPU_TEXTURE_V_POINTER;
   static const colorspaceNumber = SDL_PROP_TEXTURE_COLORSPACE_NUMBER;
   static const formatNumber = SDL_PROP_TEXTURE_FORMAT_NUMBER;
   static const accessNumber = SDL_PROP_TEXTURE_ACCESS_NUMBER;

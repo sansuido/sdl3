@@ -278,6 +278,13 @@ void sdlFlushEvents(int minType, int maxType) {
 /// }
 /// ```
 ///
+/// Note that Windows (and possibly other platforms) has a quirk about how it
+/// handles events while dragging/resizing a window, which can cause this
+/// function to block for significant amounts of time. Technical explanations
+/// and solutions are discussed on the wiki:
+///
+/// https://wiki.libsdl.org/SDL3/AppFreezeDuringDrag
+///
 /// \param event the SDL_Event structure to be filled with the next event from
 /// the queue, or NULL.
 /// \returns true if this got an event or false if there are none available.

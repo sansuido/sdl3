@@ -1,3 +1,9 @@
+## 2.4.0
+- SDL3-2025-10-12
+- [changed] Changed the license to MIT.
+- [add] Added imgGetClipboardImage function.
+- [add] Added PNG support functions to surface.
+
 ## 2.3.10
 - SDL3-2025-10-05
 

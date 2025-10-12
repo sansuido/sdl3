@@ -661,7 +661,7 @@ bool sdlSaveBmpIo(
 }
 
 ///
-/// Save a surface to a file.
+/// Save a surface to a file in BMP format.
 ///
 /// Surfaces with a 24-bit, 32-bit and paletted 8-bit format get saved in the
 /// BMP directly. Other RGB formats with 8-bit or higher get converted to a
@@ -693,6 +693,146 @@ bool sdlSaveBmp(Pointer<SdlSurface> surface, String? file) {
       >('SDL_SaveBMP');
   final filePointer = file != null ? file.toNativeUtf8() : nullptr;
   final result = sdlSaveBmpLookupFunction(surface, filePointer) == 1;
+  calloc.free(filePointer);
+  return result;
+}
+
+///
+/// Load a PNG image from a seekable SDL data stream.
+///
+/// The new surface should be freed with SDL_DestroySurface(). Not doing so
+/// will result in a memory leak.
+///
+/// \param src the data stream for the surface.
+/// \param closeio if true, calls SDL_CloseIO() on `src` before returning, even
+/// in the case of an error.
+/// \returns a pointer to a new SDL_Surface structure or NULL on failure; call
+/// SDL_GetError() for more information.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.4.0.
+///
+/// \sa SDL_DestroySurface
+/// \sa SDL_LoadPNG
+/// \sa SDL_SavePNG_IO
+///
+/// ```c
+/// extern SDL_DECLSPEC SDL_Surface * SDLCALL SDL_LoadPNG_IO(SDL_IOStream *src, bool closeio)
+/// ```
+/// {@category surface}
+Pointer<SdlSurface> sdlLoadPngIo(Pointer<SdlIoStream> src, bool closeio) {
+  final sdlLoadPngIoLookupFunction = _libSdl
+      .lookupFunction<
+        Pointer<SdlSurface> Function(Pointer<SdlIoStream> src, Uint8 closeio),
+        Pointer<SdlSurface> Function(Pointer<SdlIoStream> src, int closeio)
+      >('SDL_LoadPNG_IO');
+  return sdlLoadPngIoLookupFunction(src, closeio ? 1 : 0);
+}
+
+///
+/// Load a PNG image from a file.
+///
+/// The new surface should be freed with SDL_DestroySurface(). Not doing so
+/// will result in a memory leak.
+///
+/// \param file the PNG file to load.
+/// \returns a pointer to a new SDL_Surface structure or NULL on failure; call
+/// SDL_GetError() for more information.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.4.0.
+///
+/// \sa SDL_DestroySurface
+/// \sa SDL_LoadPNG_IO
+/// \sa SDL_SavePNG
+///
+/// ```c
+/// extern SDL_DECLSPEC SDL_Surface * SDLCALL SDL_LoadPNG(const char *file)
+/// ```
+/// {@category surface}
+Pointer<SdlSurface> sdlLoadPng(String? file) {
+  final sdlLoadPngLookupFunction = _libSdl
+      .lookupFunction<
+        Pointer<SdlSurface> Function(Pointer<Utf8> file),
+        Pointer<SdlSurface> Function(Pointer<Utf8> file)
+      >('SDL_LoadPNG');
+  final filePointer = file != null ? file.toNativeUtf8() : nullptr;
+  final result = sdlLoadPngLookupFunction(filePointer);
+  calloc.free(filePointer);
+  return result;
+}
+
+///
+/// Save a surface to a seekable SDL data stream in PNG format.
+///
+/// \param surface the SDL_Surface structure containing the image to be saved.
+/// \param dst a data stream to save to.
+/// \param closeio if true, calls SDL_CloseIO() on `dst` before returning, even
+/// in the case of an error.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety This function is not thread safe.
+///
+/// \since This function is available since SDL 3.4.0.
+///
+/// \sa SDL_LoadPNG_IO
+/// \sa SDL_SavePNG
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SavePNG_IO(SDL_Surface *surface, SDL_IOStream *dst, bool closeio)
+/// ```
+/// {@category surface}
+bool sdlSavePngIo(
+  Pointer<SdlSurface> surface,
+  Pointer<SdlIoStream> dst,
+  bool closeio,
+) {
+  final sdlSavePngIoLookupFunction = _libSdl
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<SdlSurface> surface,
+          Pointer<SdlIoStream> dst,
+          Uint8 closeio,
+        ),
+        int Function(
+          Pointer<SdlSurface> surface,
+          Pointer<SdlIoStream> dst,
+          int closeio,
+        )
+      >('SDL_SavePNG_IO');
+  return sdlSavePngIoLookupFunction(surface, dst, closeio ? 1 : 0) == 1;
+}
+
+///
+/// Save a surface to a file in PNG format.
+///
+/// \param surface the SDL_Surface structure containing the image to be saved.
+/// \param file a file to save to.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety This function is not thread safe.
+///
+/// \since This function is available since SDL 3.4.0.
+///
+/// \sa SDL_LoadPNG
+/// \sa SDL_SavePNG_IO
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SavePNG(SDL_Surface *surface, const char *file)
+/// ```
+/// {@category surface}
+bool sdlSavePng(Pointer<SdlSurface> surface, String? file) {
+  final sdlSavePngLookupFunction = _libSdl
+      .lookupFunction<
+        Uint8 Function(Pointer<SdlSurface> surface, Pointer<Utf8> file),
+        int Function(Pointer<SdlSurface> surface, Pointer<Utf8> file)
+      >('SDL_SavePNG');
+  final filePointer = file != null ? file.toNativeUtf8() : nullptr;
+  final result = sdlSavePngLookupFunction(surface, filePointer) == 1;
   calloc.free(filePointer);
   return result;
 }

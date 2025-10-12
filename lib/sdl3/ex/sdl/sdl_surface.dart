@@ -973,7 +973,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   //}
 
   ///
-  /// Save a surface to a file.
+  /// Save a surface to a file in BMP format.
   ///
   /// Surfaces with a 24-bit, 32-bit and paletted 8-bit format get saved in the
   /// BMP directly. Other RGB formats with 8-bit or higher get converted to a

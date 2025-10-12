@@ -846,6 +846,20 @@ Pointer<SdlTexture> sdlCreateTextureFromSurface(
 /// VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL associated with the texture, if
 /// you want to wrap an existing texture.
 ///
+/// With the GPU renderer:
+///
+/// - `SDL_PROP_TEXTURE_CREATE_GPU_TEXTURE_POINTER`: the SDL_GPUTexture
+/// associated with the texture, if you want to wrap an existing texture.
+/// - `SDL_PROP_TEXTURE_CREATE_GPU_TEXTURE_UV_NUMBER`: the SDL_GPUTexture
+/// associated with the UV plane of an NV12 texture, if you want to wrap an
+/// existing texture.
+/// - `SDL_PROP_TEXTURE_CREATE_GPU_TEXTURE_U_NUMBER`: the SDL_GPUTexture
+/// associated with the U plane of a YUV texture, if you want to wrap an
+/// existing texture.
+/// - `SDL_PROP_TEXTURE_CREATE_GPU_TEXTURE_V_NUMBER`: the SDL_GPUTexture
+/// associated with the V plane of a YUV texture, if you want to wrap an
+/// existing texture.
+///
 /// \param renderer the rendering context.
 /// \param props the properties to use.
 /// \returns the created texture or NULL on failure; call SDL_GetError() for
