@@ -474,6 +474,8 @@ String? sdlGetRendererName(Pointer<SdlRenderer> renderer) {
 /// - `SDL_PROP_RENDERER_TEXTURE_FORMATS_POINTER`: a (const SDL_PixelFormat *)
 /// array of pixel formats, terminated with SDL_PIXELFORMAT_UNKNOWN,
 /// representing the available texture formats for this renderer.
+/// - `SDL_PROP_RENDERER_TEXTURE_WRAPPING_BOOLEAN`: true if the renderer
+/// supports SDL_TEXTURE_ADDRESS_WRAP on non-power-of-two textures.
 /// - `SDL_PROP_RENDERER_OUTPUT_COLORSPACE_NUMBER`: an SDL_Colorspace value
 /// describing the colorspace for output to the display, defaults to
 /// SDL_COLORSPACE_SRGB.

@@ -139,6 +139,37 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   bool setAlphaMod(int alpha) => sdlSetTextureAlphaMod(this, alpha);
 
   ///
+  /// Set an additional alpha value multiplied into render copy operations.
+  ///
+  /// When this texture is rendered, during the copy operation the source alpha
+  /// value is modulated by this alpha value according to the following formula:
+  ///
+  /// `srcA = srcA * (alpha / 255)`
+  ///
+  /// Alpha modulation is not always supported by the renderer; it will return
+  /// false if alpha modulation is not supported.
+  ///
+  /// \param texture the texture to update.
+  /// \param alpha the source alpha value multiplied into copy operations.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
+  ///
+  /// \threadsafety This function should only be called on the main thread.
+  ///
+  /// \since This function is available since SDL 3.2.0.
+  ///
+  /// \sa SDL_GetTextureAlphaMod
+  /// \sa SDL_SetTextureAlphaModFloat
+  /// \sa SDL_SetTextureColorMod
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_SetTextureAlphaMod(SDL_Texture *texture, Uint8 alpha)
+  /// ```
+  /// {@category render}
+  bool setAlphaModFloat(double alpha) =>
+      sdlSetTextureAlphaModFloat(this, alpha);
+
+  ///
   /// Get the additional alpha value multiplied into render copy operations.
   ///
   /// \param texture the texture to query.
@@ -162,6 +193,36 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
     int? result;
     final alphaPointer = calloc<Uint8>();
     if (sdlGetTextureAlphaMod(this, alphaPointer)) {
+      result = alphaPointer.value;
+    }
+    calloc.free(alphaPointer);
+    return result;
+  }
+
+  ///
+  /// Get the additional alpha value multiplied into render copy operations.
+  ///
+  /// \param texture the texture to query.
+  /// \param alpha a pointer filled in with the current alpha value.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
+  ///
+  /// \threadsafety This function should only be called on the main thread.
+  ///
+  /// \since This function is available since SDL 3.2.0.
+  ///
+  /// \sa SDL_GetTextureAlphaMod
+  /// \sa SDL_GetTextureColorModFloat
+  /// \sa SDL_SetTextureAlphaModFloat
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_GetTextureAlphaModFloat(SDL_Texture *texture, float *alpha)
+  /// ```
+  /// {@category render}
+  double? getAlphaModFloat() {
+    double? result;
+    final alphaPointer = calloc<Float>();
+    if (sdlGetTextureAlphaModFloat(this, alphaPointer)) {
       result = alphaPointer.value;
     }
     calloc.free(alphaPointer);

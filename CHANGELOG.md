@@ -1,3 +1,10 @@
+## 2.4.1
+- SDL3-2025-10-19
+- [fixed] Changed the license to MIT.
+- [add] Added sdlCreateAnimatedCursor function.
+- [add] Added sdlGetPenDeviceType function.
+- [add] Added PinchFingerEvent(SDL_EVENT_PINCH_BEGIN, SDL_EVENT_PINCH_UPDATE, SDL_EVENT_PINCH_END).
+
 ## 2.4.0
 - SDL3-2025-10-12
 - [changed] Changed the license to MIT.

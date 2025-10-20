@@ -73,7 +73,7 @@ int main() {
     {
       renderer
         ..setTarget(lightsLayer)
-        ..setDrawColorFloat(0, 0, 0, 0)
+        ..setDrawColorFloat(0, 0, 0, 1)
         ..clear();
       const size = math.Point<double>(200, 200);
       final position = PointEx.getMousePosition();

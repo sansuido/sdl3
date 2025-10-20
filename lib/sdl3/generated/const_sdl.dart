@@ -245,6 +245,9 @@ const SDL_EVENT_FINGER_DOWN = 0x700;
 const SDL_EVENT_FINGER_UP = 0x700 + 1;
 const SDL_EVENT_FINGER_MOTION = 0x700 + 2;
 const SDL_EVENT_FINGER_CANCELED = 0x700 + 3;
+const SDL_EVENT_PINCH_BEGIN = 0x710;
+const SDL_EVENT_PINCH_UPDATE = 0x710 + 1;
+const SDL_EVENT_PINCH_END = 0x710 + 2;
 const SDL_EVENT_CLIPBOARD_UPDATE = 0x900;
 const SDL_EVENT_DROP_FILE = 0x1000;
 const SDL_EVENT_DROP_TEXT = 0x1000 + 1;
@@ -742,6 +745,7 @@ const SDL_HINT_AUDIO_DEVICE_APP_ICON_NAME = 'SDL_AUDIO_DEVICE_APP_ICON_NAME';
 const SDL_HINT_AUDIO_DEVICE_SAMPLE_FRAMES = 'SDL_AUDIO_DEVICE_SAMPLE_FRAMES';
 const SDL_HINT_AUDIO_DEVICE_STREAM_NAME = 'SDL_AUDIO_DEVICE_STREAM_NAME';
 const SDL_HINT_AUDIO_DEVICE_STREAM_ROLE = 'SDL_AUDIO_DEVICE_STREAM_ROLE';
+const SDL_HINT_AUDIO_DEVICE_RAW_STREAM = 'SDL_AUDIO_DEVICE_RAW_STREAM';
 const SDL_HINT_AUDIO_DISK_INPUT_FILE = 'SDL_AUDIO_DISK_INPUT_FILE';
 const SDL_HINT_AUDIO_DISK_OUTPUT_FILE = 'SDL_AUDIO_DISK_OUTPUT_FILE';
 const SDL_HINT_AUDIO_DISK_TIMESCALE = 'SDL_AUDIO_DISK_TIMESCALE';
@@ -1568,6 +1572,10 @@ const SDL_PEN_AXIS_ROTATION = 4;
 const SDL_PEN_AXIS_SLIDER = 5;
 const SDL_PEN_AXIS_TANGENTIAL_PRESSURE = 6;
 const SDL_PEN_AXIS_COUNT = 7;
+const SDL_PEN_DEVICE_TYPE_INVALID = -1;
+const SDL_PEN_DEVICE_TYPE_UNKNOWN = -1 + 1;
+const SDL_PEN_DEVICE_TYPE_DIRECT = -1 + 2;
+const SDL_PEN_DEVICE_TYPE_INDIRECT = -1 + 3;
 //const SDL_pixels_h_ = ;
 const SDL_ALPHA_OPAQUE = 255;
 const SDL_ALPHA_OPAQUE_FLOAT = 1.0;
@@ -1920,6 +1928,8 @@ const SDL_PROP_RENDERER_MAX_TEXTURE_SIZE_NUMBER =
     'SDL.renderer.max_texture_size';
 const SDL_PROP_RENDERER_TEXTURE_FORMATS_POINTER =
     'SDL.renderer.texture_formats';
+const SDL_PROP_RENDERER_TEXTURE_WRAPPING_BOOLEAN =
+    'SDL.renderer.texture_wrapping';
 const SDL_PROP_RENDERER_OUTPUT_COLORSPACE_NUMBER =
     'SDL.renderer.output_colorspace';
 const SDL_PROP_RENDERER_HDR_ENABLED_BOOLEAN = 'SDL.renderer.HDR_enabled';
@@ -2040,7 +2050,7 @@ const SDL_RENDERER_VSYNC_ADAPTIVE = -1;
 const SDL_DEBUG_TEXT_FONT_CHARACTER_SIZE = 8;
 //const SDL_revision_h_ = ;
 const SDL_REVISION =
-    'SDL-3.3.0-release-3.2.6-1512-gc89fed4ea (" SDL_VENDOR_INFO ")';
+    'SDL-3.3.0-release-3.2.6-1582-gcbcb145eb (" SDL_VENDOR_INFO ")';
 //const SDL_scancode_h_ = ;
 const SDL_SCANCODE_UNKNOWN = 0;
 const SDL_SCANCODE_A = 4;
@@ -2930,6 +2940,9 @@ class SdlkEvent {
   static const fingerUp = SDL_EVENT_FINGER_UP;
   static const fingerMotion = SDL_EVENT_FINGER_MOTION;
   static const fingerCanceled = SDL_EVENT_FINGER_CANCELED;
+  static const pinchBegin = SDL_EVENT_PINCH_BEGIN;
+  static const pinchUpdate = SDL_EVENT_PINCH_UPDATE;
+  static const pinchEnd = SDL_EVENT_PINCH_END;
   static const clipboardUpdate = SDL_EVENT_CLIPBOARD_UPDATE;
   static const dropFile = SDL_EVENT_DROP_FILE;
   static const dropText = SDL_EVENT_DROP_TEXT;
@@ -3577,6 +3590,7 @@ class SdlkHint {
   static const audioDeviceSampleFrames = SDL_HINT_AUDIO_DEVICE_SAMPLE_FRAMES;
   static const audioDeviceStreamName = SDL_HINT_AUDIO_DEVICE_STREAM_NAME;
   static const audioDeviceStreamRole = SDL_HINT_AUDIO_DEVICE_STREAM_ROLE;
+  static const audioDeviceRawStream = SDL_HINT_AUDIO_DEVICE_RAW_STREAM;
   static const audioDiskInputFile = SDL_HINT_AUDIO_DISK_INPUT_FILE;
   static const audioDiskOutputFile = SDL_HINT_AUDIO_DISK_OUTPUT_FILE;
   static const audioDiskTimescale = SDL_HINT_AUDIO_DISK_TIMESCALE;
@@ -4435,6 +4449,14 @@ class SdlkPenAxis {
   static const count = SDL_PEN_AXIS_COUNT;
 }
 
+/// {@category pen}
+class SdlkPenDeviceType {
+  static const invalid = SDL_PEN_DEVICE_TYPE_INVALID;
+  static const unknown = SDL_PEN_DEVICE_TYPE_UNKNOWN;
+  static const direct = SDL_PEN_DEVICE_TYPE_DIRECT;
+  static const indirect = SDL_PEN_DEVICE_TYPE_INDIRECT;
+}
+
 /// {@category pixels}
 class SdlkAlpha {
   static const opaque = SDL_ALPHA_OPAQUE;
@@ -4785,6 +4807,8 @@ class SdlkPropRenderer {
   static const maxTextureSizeNumber = SDL_PROP_RENDERER_MAX_TEXTURE_SIZE_NUMBER;
   static const textureFormatsPointer =
       SDL_PROP_RENDERER_TEXTURE_FORMATS_POINTER;
+  static const textureWrappingBoolean =
+      SDL_PROP_RENDERER_TEXTURE_WRAPPING_BOOLEAN;
   static const outputColorspaceNumber =
       SDL_PROP_RENDERER_OUTPUT_COLORSPACE_NUMBER;
   static const hdrEnabledBoolean = SDL_PROP_RENDERER_HDR_ENABLED_BOOLEAN;

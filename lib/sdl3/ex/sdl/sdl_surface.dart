@@ -55,6 +55,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_AddSurfaceAlternateImage
+  /// \sa SDL_CreateAnimatedCursor
   /// \sa SDL_CreateCursor
   /// \sa SDL_CreateSystemCursor
   /// \sa SDL_DestroyCursor

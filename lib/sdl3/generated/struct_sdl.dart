@@ -946,6 +946,26 @@ final class SdlTouchFingerEvent extends Struct {
   external int windowId;
 }
 
+// SDL_PinchFingerEvent
+/// {@category events}
+final class SdlPinchFingerEvent extends Struct {
+  // [0]+(4)
+  @Int32()
+  external int type;
+  // [4]+(4)
+  @Uint32()
+  external int reserved;
+  // [8]+(8)
+  @Uint64()
+  external int timestamp;
+  // [16]+(4)
+  @Float()
+  external double scale;
+  // [20]+(4)
+  @Uint32()
+  external int windowId;
+}
+
 // SDL_PenProximityEvent
 /// {@category events}
 final class SdlPenProximityEvent extends Struct {
@@ -1340,6 +1360,8 @@ extension SdlEventExtension on Pointer<SdlEvent> {
   Pointer<SdlUserEvent> get user => (cast<Uint8>() + 0).cast<SdlUserEvent>();
   Pointer<SdlTouchFingerEvent> get tfinger =>
       (cast<Uint8>() + 0).cast<SdlTouchFingerEvent>();
+  Pointer<SdlPinchFingerEvent> get pinch =>
+      (cast<Uint8>() + 0).cast<SdlPinchFingerEvent>();
   Pointer<SdlPenProximityEvent> get pproximity =>
       (cast<Uint8>() + 0).cast<SdlPenProximityEvent>();
   Pointer<SdlPenTouchEvent> get ptouch =>
@@ -3199,6 +3221,19 @@ final class SdlMessageBoxData extends Struct {
 // SDL_Cursor
 /// {@category mouse}
 final class SdlCursor extends Opaque {}
+
+// SDL_CursorFrameInfo
+/// {@category mouse}
+final class SdlCursorFrameInfo extends Struct {
+  // [0]+(8)
+  external Pointer<SdlSurface> surface;
+  // [8]+(4)
+  @Uint32()
+  external int duration;
+  // [] +(4)
+  @Uint32()
+  external int blank_1;
+}
 
 // SDL_Mutex
 /// {@category mutex}

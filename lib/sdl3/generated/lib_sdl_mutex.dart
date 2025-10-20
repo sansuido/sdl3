@@ -90,7 +90,7 @@ void sdlLockMutex(Pointer<NativeType> arg0) {
 /// \sa SDL_UnlockMutex
 ///
 /// ```c
-/// extern SDL_DECLSPEC bool SDLCALL SDL_TryLockMutex(SDL_Mutex *mutex) SDL_TRY_ACQUIRE(0, mutex)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_TryLockMutex(SDL_Mutex *mutex) SDL_TRY_ACQUIRE(true, mutex)
 /// ```
 /// {@category mutex}
 bool sdlTryLockMutex(Pointer<NativeType> arg0, Pointer<NativeType> arg1) {
@@ -327,7 +327,7 @@ void sdlLockRwLockForWriting(Pointer<NativeType> arg0) {
 /// \sa SDL_UnlockRWLock
 ///
 /// ```c
-/// extern SDL_DECLSPEC bool SDLCALL SDL_TryLockRWLockForReading(SDL_RWLock *rwlock) SDL_TRY_ACQUIRE_SHARED(0, rwlock)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_TryLockRWLockForReading(SDL_RWLock *rwlock) SDL_TRY_ACQUIRE_SHARED(true, rwlock)
 /// ```
 /// {@category mutex}
 bool sdlTryLockRwLockForReading(
@@ -371,7 +371,7 @@ bool sdlTryLockRwLockForReading(
 /// \sa SDL_UnlockRWLock
 ///
 /// ```c
-/// extern SDL_DECLSPEC bool SDLCALL SDL_TryLockRWLockForWriting(SDL_RWLock *rwlock) SDL_TRY_ACQUIRE(0, rwlock)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_TryLockRWLockForWriting(SDL_RWLock *rwlock) SDL_TRY_ACQUIRE(true, rwlock)
 /// ```
 /// {@category mutex}
 bool sdlTryLockRwLockForWriting(

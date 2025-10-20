@@ -1370,6 +1370,12 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   ///
   /// Create an OpenGL context for an OpenGL window, and make it current.
   ///
+  /// The OpenGL context will be created with the current states set through
+  /// SDL_GL_SetAttribute().
+  ///
+  /// The SDL_Window specified must have been created with the SDL_WINDOW_OPENGL
+  /// flag, or context creation will fail.
+  ///
   /// Windows users new to OpenGL should note that, for historical reasons, GL
   /// functions added after OpenGL version 1.1 are not available by default.
   /// Those functions must be loaded at run-time, either with an OpenGL

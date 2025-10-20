@@ -42,6 +42,7 @@ extension SdlCursorEx on SdlCursor {
   ///
   /// \since This function is available since SDL 3.2.0.
   ///
+  /// \sa SDL_CreateAnimatedCursor
   /// \sa SDL_CreateColorCursor
   /// \sa SDL_CreateSystemCursor
   /// \sa SDL_DestroyCursor
@@ -85,6 +86,7 @@ extension SdlCursorEx on SdlCursor {
   /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_AddSurfaceAlternateImage
+  /// \sa SDL_CreateAnimatedCursor
   /// \sa SDL_CreateCursor
   /// \sa SDL_CreateSystemCursor
   /// \sa SDL_DestroyCursor
@@ -236,6 +238,7 @@ extension SdlCursorPointerEx on Pointer<SdlCursor> {
   ///
   /// \since This function is available since SDL 3.2.0.
   ///
+  /// \sa SDL_CreateAnimatedCursor
   /// \sa SDL_CreateColorCursor
   /// \sa SDL_CreateCursor
   /// \sa SDL_CreateSystemCursor
