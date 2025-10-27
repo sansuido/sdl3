@@ -767,7 +767,7 @@ Pointer<SdlWindow> sdlGetWindowFromEvent(Pointer<SdlEvent> event) {
 }
 
 ///
-/// Generate a human-readable description of an event.
+/// Generate an English description of an event.
 ///
 /// This will fill `buf` with a null-terminated string that might look
 /// something like this:

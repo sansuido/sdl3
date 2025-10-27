@@ -114,7 +114,8 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \threadsafety This function is not thread safe.
+  /// \threadsafety This function can be called on different threads with
+  /// different surfaces.
   ///
   /// \since This function is available since SDL 3.2.0.
   ///
@@ -144,9 +145,10 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \threadsafety This function is not thread safe. The locking referred to by
-  /// this function is making the pixels available for direct
-  /// access, not thread-safe locking.
+  /// \threadsafety This function can be called on different threads with
+  /// different surfaces. The locking referred to by this function
+  /// is making the pixels available for direct access, not
+  /// thread-safe locking.
   ///
   /// \since This function is available since SDL 3.2.0.
   ///
@@ -223,7 +225,8 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \threadsafety This function is not thread safe.
+  /// \threadsafety This function can be called on different threads with
+  /// different surfaces.
   ///
   /// \since This function is available since SDL 3.2.0.
   ///
@@ -248,7 +251,8 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \threadsafety This function is not thread safe.
+  /// \threadsafety This function can be called on different threads with
+  /// different surfaces.
   ///
   /// \since This function is available since SDL 3.2.0.
   ///
@@ -298,7 +302,8 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \threadsafety This function is not thread safe.
+  /// \threadsafety This function can be called on different threads with
+  /// different surfaces.
   ///
   /// \since This function is available since SDL 3.2.0.
   ///
@@ -384,7 +389,8 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \threadsafety This function is not thread safe.
+  /// \threadsafety This function can be called on different threads with
+  /// different surfaces.
   ///
   /// \since This function is available since SDL 3.2.0.
   ///
@@ -407,7 +413,8 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \threadsafety This function is not thread safe.
+  /// \threadsafety This function can be called on different threads with
+  /// different surfaces.
   ///
   /// \since This function is available since SDL 3.2.0.
   ///
@@ -449,7 +456,8 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \threadsafety This function is not thread safe.
+  /// \threadsafety This function can be called on different threads with
+  /// different surfaces.
   ///
   /// \since This function is available since SDL 3.2.0.
   ///
@@ -503,7 +511,8 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \threadsafety This function is not thread safe.
+  /// \threadsafety This function can be called on different threads with
+  /// different surfaces.
   ///
   /// \since This function is available since SDL 3.2.0.
   ///
@@ -558,7 +567,8 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// \returns true if the rectangle intersects the surface, otherwise false and
   /// blits will be completely clipped.
   ///
-  /// \threadsafety This function is not thread safe.
+  /// \threadsafety This function can be called on different threads with
+  /// different surfaces.
   ///
   /// \since This function is available since SDL 3.2.0.
   ///
@@ -591,7 +601,8 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \threadsafety This function is not thread safe.
+  /// \threadsafety This function can be called on different threads with
+  /// different surfaces.
   ///
   /// \since This function is available since SDL 3.2.0.
   ///
@@ -621,7 +632,8 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// \returns a copy of the surface or NULL on failure; call SDL_GetError() for
   /// more information.
   ///
-  /// \threadsafety This function is not thread safe.
+  /// \threadsafety This function can be called on different threads with
+  /// different surfaces.
   ///
   /// \since This function is available since SDL 3.2.0.
   ///
@@ -655,7 +667,8 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \threadsafety This function is not thread safe.
+  /// \threadsafety This function can be called on different threads with
+  /// different surfaces.
   ///
   /// \since This function is available since SDL 3.2.0.
   ///
@@ -694,7 +707,8 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \threadsafety This function is not thread safe.
+  /// \threadsafety This function can be called on different threads with
+  /// different surfaces.
   ///
   /// \since This function is available since SDL 3.2.0.
   ///
@@ -987,7 +1001,8 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
-  /// \threadsafety This function is not thread safe.
+  /// \threadsafety This function can be called on different threads with
+  /// different surfaces.
   ///
   /// \since This function is available since SDL 3.2.0.
   ///

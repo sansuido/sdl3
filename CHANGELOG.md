@@ -1,3 +1,7 @@
+## 2.4.2
+- SDL3-2025-10-26
+- [add] Add image functions(imgSaveCurIo, imgSaveAnimation and more).
+
 ## 2.4.1
 - SDL3-2025-10-19
 - [fixed] Changed the license to MIT.

@@ -20,97 +20,6 @@ int imgVersion() {
 }
 
 ///
-/// Load an image from an SDL data source into a software surface.
-///
-/// An SDL_Surface is a buffer of pixels in memory accessible by the CPU. Use
-/// this if you plan to hand the data to something else or manipulate it
-/// further in code.
-///
-/// There are no guarantees about what format the new SDL_Surface data will be;
-/// in many cases, SDL_image will attempt to supply a surface that exactly
-/// matches the provided image, but in others it might have to convert (either
-/// because the image is in a format that SDL doesn't directly support or
-/// because it's compressed data that could reasonably uncompress to various
-/// formats and SDL_image had to pick one). You can inspect an SDL_Surface for
-/// its specifics, and use SDL_ConvertSurface to then migrate to any supported
-/// format.
-///
-/// If the image format supports a transparent pixel, SDL will set the colorkey
-/// for the surface. You can enable RLE acceleration on the surface afterwards
-/// by calling: SDL_SetSurfaceColorKey(image, SDL_RLEACCEL,
-/// image->format->colorkey);
-///
-/// If `closeio` is true, `src` will be closed before returning, whether this
-/// function succeeds or not. SDL_image reads everything it needs from `src`
-/// during this call in any case.
-///
-/// Even though this function accepts a file type, SDL_image may still try
-/// other decoders that are capable of detecting file type from the contents of
-/// the image data, but may rely on the caller-provided type string for formats
-/// that it cannot autodetect. If `type` is NULL, SDL_image will rely solely on
-/// its ability to guess the format.
-///
-/// There is a separate function to read files from disk without having to deal
-/// with SDL_IOStream: `IMG_Load("filename.jpg")` will call this function and
-/// manage those details for you, determining the file type from the filename's
-/// extension.
-///
-/// There is also IMG_Load_IO(), which is equivalent to this function except
-/// that it will rely on SDL_image to determine what type of data it is
-/// loading, much like passing a NULL for type.
-///
-/// If you are using SDL's 2D rendering API, there is an equivalent call to
-/// load images directly into an SDL_Texture for use by the GPU without using a
-/// software surface: call IMG_LoadTextureTyped_IO() instead.
-///
-/// When done with the returned surface, the app should dispose of it with a
-/// call to SDL_DestroySurface().
-///
-/// \param src an SDL_IOStream that data will be read from.
-/// \param closeio true to close/free the SDL_IOStream before returning, false
-/// to leave it open.
-/// \param type a filename extension that represent this data ("BMP", "GIF",
-/// "PNG", etc).
-/// \returns a new SDL surface, or NULL on error.
-///
-/// \since This function is available since SDL_image 3.0.0.
-///
-/// \sa IMG_Load
-/// \sa IMG_Load_IO
-///
-/// ```c
-/// extern SDL_DECLSPEC SDL_Surface * SDLCALL IMG_LoadTyped_IO(SDL_IOStream *src, bool closeio, const char *type)
-/// ```
-/// {@category image}
-Pointer<SdlSurface> imgLoadTypedIo(
-  Pointer<SdlIoStream> src,
-  bool closeio,
-  String? type,
-) {
-  final imgLoadTypedIoLookupFunction = _libImage
-      .lookupFunction<
-        Pointer<SdlSurface> Function(
-          Pointer<SdlIoStream> src,
-          Uint8 closeio,
-          Pointer<Utf8> type,
-        ),
-        Pointer<SdlSurface> Function(
-          Pointer<SdlIoStream> src,
-          int closeio,
-          Pointer<Utf8> type,
-        )
-      >('IMG_LoadTyped_IO');
-  final typePointer = type != null ? type.toNativeUtf8() : nullptr;
-  final result = imgLoadTypedIoLookupFunction(
-    src,
-    closeio ? 1 : 0,
-    typePointer,
-  );
-  calloc.free(typePointer);
-  return result;
-}
-
-///
 /// Load an image from a filesystem path into a software surface.
 ///
 /// An SDL_Surface is a buffer of pixels in memory accessible by the CPU. Use
@@ -230,6 +139,97 @@ Pointer<SdlSurface> imgLoadIo(Pointer<SdlIoStream> src, bool closeio) {
         Pointer<SdlSurface> Function(Pointer<SdlIoStream> src, int closeio)
       >('IMG_Load_IO');
   return imgLoadIoLookupFunction(src, closeio ? 1 : 0);
+}
+
+///
+/// Load an image from an SDL data source into a software surface.
+///
+/// An SDL_Surface is a buffer of pixels in memory accessible by the CPU. Use
+/// this if you plan to hand the data to something else or manipulate it
+/// further in code.
+///
+/// There are no guarantees about what format the new SDL_Surface data will be;
+/// in many cases, SDL_image will attempt to supply a surface that exactly
+/// matches the provided image, but in others it might have to convert (either
+/// because the image is in a format that SDL doesn't directly support or
+/// because it's compressed data that could reasonably uncompress to various
+/// formats and SDL_image had to pick one). You can inspect an SDL_Surface for
+/// its specifics, and use SDL_ConvertSurface to then migrate to any supported
+/// format.
+///
+/// If the image format supports a transparent pixel, SDL will set the colorkey
+/// for the surface. You can enable RLE acceleration on the surface afterwards
+/// by calling: SDL_SetSurfaceColorKey(image, SDL_RLEACCEL,
+/// image->format->colorkey);
+///
+/// If `closeio` is true, `src` will be closed before returning, whether this
+/// function succeeds or not. SDL_image reads everything it needs from `src`
+/// during this call in any case.
+///
+/// Even though this function accepts a file type, SDL_image may still try
+/// other decoders that are capable of detecting file type from the contents of
+/// the image data, but may rely on the caller-provided type string for formats
+/// that it cannot autodetect. If `type` is NULL, SDL_image will rely solely on
+/// its ability to guess the format.
+///
+/// There is a separate function to read files from disk without having to deal
+/// with SDL_IOStream: `IMG_Load("filename.jpg")` will call this function and
+/// manage those details for you, determining the file type from the filename's
+/// extension.
+///
+/// There is also IMG_Load_IO(), which is equivalent to this function except
+/// that it will rely on SDL_image to determine what type of data it is
+/// loading, much like passing a NULL for type.
+///
+/// If you are using SDL's 2D rendering API, there is an equivalent call to
+/// load images directly into an SDL_Texture for use by the GPU without using a
+/// software surface: call IMG_LoadTextureTyped_IO() instead.
+///
+/// When done with the returned surface, the app should dispose of it with a
+/// call to SDL_DestroySurface().
+///
+/// \param src an SDL_IOStream that data will be read from.
+/// \param closeio true to close/free the SDL_IOStream before returning, false
+/// to leave it open.
+/// \param type a filename extension that represent this data ("BMP", "GIF",
+/// "PNG", etc).
+/// \returns a new SDL surface, or NULL on error.
+///
+/// \since This function is available since SDL_image 3.0.0.
+///
+/// \sa IMG_Load
+/// \sa IMG_Load_IO
+///
+/// ```c
+/// extern SDL_DECLSPEC SDL_Surface * SDLCALL IMG_LoadTyped_IO(SDL_IOStream *src, bool closeio, const char *type)
+/// ```
+/// {@category image}
+Pointer<SdlSurface> imgLoadTypedIo(
+  Pointer<SdlIoStream> src,
+  bool closeio,
+  String? type,
+) {
+  final imgLoadTypedIoLookupFunction = _libImage
+      .lookupFunction<
+        Pointer<SdlSurface> Function(
+          Pointer<SdlIoStream> src,
+          Uint8 closeio,
+          Pointer<Utf8> type,
+        ),
+        Pointer<SdlSurface> Function(
+          Pointer<SdlIoStream> src,
+          int closeio,
+          Pointer<Utf8> type,
+        )
+      >('IMG_LoadTyped_IO');
+  final typePointer = type != null ? type.toNativeUtf8() : nullptr;
+  final result = imgLoadTypedIoLookupFunction(
+    src,
+    closeio ? 1 : 0,
+    typePointer,
+  );
+  calloc.free(typePointer);
+  return result;
 }
 
 ///
@@ -471,6 +471,61 @@ Pointer<SdlSurface> imgGetClipboardImage() {
 }
 
 ///
+/// Detect ANI animated cursor data on a readable/seekable SDL_IOStream.
+///
+/// This function attempts to determine if a file is a given filetype, reading
+/// the least amount possible from the SDL_IOStream (usually a few bytes).
+///
+/// There is no distinction made between "not the filetype in question" and
+/// basic i/o errors.
+///
+/// This function will always attempt to seek `src` back to where it started
+/// when this function was called, but it will not report any errors in doing
+/// so, but assuming seeking works, this means you can immediately use this
+/// with a different IMG_isTYPE function, or load the image without further
+/// seeking.
+///
+/// You do not need to call this function to load data; SDL_image can work to
+/// determine file type in many cases in its standard load functions.
+///
+/// \param src a seekable/readable SDL_IOStream to provide image data.
+/// \returns true if this is ANI animated cursor data, false otherwise.
+///
+/// \since This function is available since SDL_image 3.0.0.
+///
+/// \sa IMG_isAVIF
+/// \sa IMG_isBMP
+/// \sa IMG_isCUR
+/// \sa IMG_isGIF
+/// \sa IMG_isICO
+/// \sa IMG_isJPG
+/// \sa IMG_isJXL
+/// \sa IMG_isLBM
+/// \sa IMG_isPCX
+/// \sa IMG_isPNG
+/// \sa IMG_isPNM
+/// \sa IMG_isQOI
+/// \sa IMG_isSVG
+/// \sa IMG_isTIF
+/// \sa IMG_isWEBP
+/// \sa IMG_isXCF
+/// \sa IMG_isXPM
+/// \sa IMG_isXV
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL IMG_isANI(SDL_IOStream *src)
+/// ```
+/// {@category image}
+bool imgIsAni(Pointer<SdlIoStream> src) {
+  final imgIsAniLookupFunction = _libImage
+      .lookupFunction<
+        Uint8 Function(Pointer<SdlIoStream> src),
+        int Function(Pointer<SdlIoStream> src)
+      >('IMG_isANI');
+  return imgIsAniLookupFunction(src) == 1;
+}
+
+///
 /// Detect AVIF image data on a readable/seekable SDL_IOStream.
 ///
 /// This function attempts to determine if a file is a given filetype, reading
@@ -489,28 +544,28 @@ Pointer<SdlSurface> imgGetClipboardImage() {
 /// determine file type in many cases in its standard load functions.
 ///
 /// \param src a seekable/readable SDL_IOStream to provide image data.
-/// \returns non-zero if this is AVIF data, zero otherwise.
+/// \returns true if this is AVIF data, false otherwise.
 ///
 /// \since This function is available since SDL_image 3.0.0.
 ///
-/// \sa IMG_isAVIF
-/// \sa IMG_isICO
-/// \sa IMG_isCUR
+/// \sa IMG_isANI
 /// \sa IMG_isBMP
+/// \sa IMG_isCUR
 /// \sa IMG_isGIF
+/// \sa IMG_isICO
 /// \sa IMG_isJPG
 /// \sa IMG_isJXL
 /// \sa IMG_isLBM
 /// \sa IMG_isPCX
 /// \sa IMG_isPNG
 /// \sa IMG_isPNM
-/// \sa IMG_isSVG
 /// \sa IMG_isQOI
+/// \sa IMG_isSVG
 /// \sa IMG_isTIF
+/// \sa IMG_isWEBP
 /// \sa IMG_isXCF
 /// \sa IMG_isXPM
 /// \sa IMG_isXV
-/// \sa IMG_isWEBP
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL IMG_isAVIF(SDL_IOStream *src)
@@ -523,60 +578,6 @@ bool imgIsAvif(Pointer<SdlIoStream> src) {
         int Function(Pointer<SdlIoStream> src)
       >('IMG_isAVIF');
   return imgIsAvifLookupFunction(src) == 1;
-}
-
-///
-/// Detect ICO image data on a readable/seekable SDL_IOStream.
-///
-/// This function attempts to determine if a file is a given filetype, reading
-/// the least amount possible from the SDL_IOStream (usually a few bytes).
-///
-/// There is no distinction made between "not the filetype in question" and
-/// basic i/o errors.
-///
-/// This function will always attempt to seek `src` back to where it started
-/// when this function was called, but it will not report any errors in doing
-/// so, but assuming seeking works, this means you can immediately use this
-/// with a different IMG_isTYPE function, or load the image without further
-/// seeking.
-///
-/// You do not need to call this function to load data; SDL_image can work to
-/// determine file type in many cases in its standard load functions.
-///
-/// \param src a seekable/readable SDL_IOStream to provide image data.
-/// \returns non-zero if this is ICO data, zero otherwise.
-///
-/// \since This function is available since SDL_image 3.0.0.
-///
-/// \sa IMG_isAVIF
-/// \sa IMG_isCUR
-/// \sa IMG_isBMP
-/// \sa IMG_isGIF
-/// \sa IMG_isJPG
-/// \sa IMG_isJXL
-/// \sa IMG_isLBM
-/// \sa IMG_isPCX
-/// \sa IMG_isPNG
-/// \sa IMG_isPNM
-/// \sa IMG_isSVG
-/// \sa IMG_isQOI
-/// \sa IMG_isTIF
-/// \sa IMG_isXCF
-/// \sa IMG_isXPM
-/// \sa IMG_isXV
-/// \sa IMG_isWEBP
-///
-/// ```c
-/// extern SDL_DECLSPEC bool SDLCALL IMG_isICO(SDL_IOStream *src)
-/// ```
-/// {@category image}
-bool imgIsIco(Pointer<SdlIoStream> src) {
-  final imgIsIcoLookupFunction = _libImage
-      .lookupFunction<
-        Uint8 Function(Pointer<SdlIoStream> src),
-        int Function(Pointer<SdlIoStream> src)
-      >('IMG_isICO');
-  return imgIsIcoLookupFunction(src) == 1;
 }
 
 ///
@@ -598,27 +599,28 @@ bool imgIsIco(Pointer<SdlIoStream> src) {
 /// determine file type in many cases in its standard load functions.
 ///
 /// \param src a seekable/readable SDL_IOStream to provide image data.
-/// \returns non-zero if this is CUR data, zero otherwise.
+/// \returns true if this is CUR data, false otherwise.
 ///
 /// \since This function is available since SDL_image 3.0.0.
 ///
+/// \sa IMG_isANI
 /// \sa IMG_isAVIF
-/// \sa IMG_isICO
 /// \sa IMG_isBMP
 /// \sa IMG_isGIF
+/// \sa IMG_isICO
 /// \sa IMG_isJPG
 /// \sa IMG_isJXL
 /// \sa IMG_isLBM
 /// \sa IMG_isPCX
 /// \sa IMG_isPNG
 /// \sa IMG_isPNM
-/// \sa IMG_isSVG
 /// \sa IMG_isQOI
+/// \sa IMG_isSVG
 /// \sa IMG_isTIF
+/// \sa IMG_isWEBP
 /// \sa IMG_isXCF
 /// \sa IMG_isXPM
 /// \sa IMG_isXV
-/// \sa IMG_isWEBP
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL IMG_isCUR(SDL_IOStream *src)
@@ -652,27 +654,28 @@ bool imgIsCur(Pointer<SdlIoStream> src) {
 /// determine file type in many cases in its standard load functions.
 ///
 /// \param src a seekable/readable SDL_IOStream to provide image data.
-/// \returns non-zero if this is BMP data, zero otherwise.
+/// \returns true if this is BMP data, false otherwise.
 ///
 /// \since This function is available since SDL_image 3.0.0.
 ///
+/// \sa IMG_isANI
 /// \sa IMG_isAVIF
-/// \sa IMG_isICO
 /// \sa IMG_isCUR
 /// \sa IMG_isGIF
+/// \sa IMG_isICO
 /// \sa IMG_isJPG
 /// \sa IMG_isJXL
 /// \sa IMG_isLBM
 /// \sa IMG_isPCX
 /// \sa IMG_isPNG
 /// \sa IMG_isPNM
-/// \sa IMG_isSVG
 /// \sa IMG_isQOI
+/// \sa IMG_isSVG
 /// \sa IMG_isTIF
+/// \sa IMG_isWEBP
 /// \sa IMG_isXCF
 /// \sa IMG_isXPM
 /// \sa IMG_isXV
-/// \sa IMG_isWEBP
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL IMG_isBMP(SDL_IOStream *src)
@@ -706,27 +709,28 @@ bool imgIsBmp(Pointer<SdlIoStream> src) {
 /// determine file type in many cases in its standard load functions.
 ///
 /// \param src a seekable/readable SDL_IOStream to provide image data.
-/// \returns non-zero if this is GIF data, zero otherwise.
+/// \returns true if this is GIF data, false otherwise.
 ///
 /// \since This function is available since SDL_image 3.0.0.
 ///
+/// \sa IMG_isANI
 /// \sa IMG_isAVIF
-/// \sa IMG_isICO
-/// \sa IMG_isCUR
 /// \sa IMG_isBMP
+/// \sa IMG_isCUR
+/// \sa IMG_isICO
 /// \sa IMG_isJPG
 /// \sa IMG_isJXL
 /// \sa IMG_isLBM
 /// \sa IMG_isPCX
 /// \sa IMG_isPNG
 /// \sa IMG_isPNM
-/// \sa IMG_isSVG
 /// \sa IMG_isQOI
+/// \sa IMG_isSVG
 /// \sa IMG_isTIF
+/// \sa IMG_isWEBP
 /// \sa IMG_isXCF
 /// \sa IMG_isXPM
 /// \sa IMG_isXV
-/// \sa IMG_isWEBP
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL IMG_isGIF(SDL_IOStream *src)
@@ -739,6 +743,61 @@ bool imgIsGif(Pointer<SdlIoStream> src) {
         int Function(Pointer<SdlIoStream> src)
       >('IMG_isGIF');
   return imgIsGifLookupFunction(src) == 1;
+}
+
+///
+/// Detect ICO image data on a readable/seekable SDL_IOStream.
+///
+/// This function attempts to determine if a file is a given filetype, reading
+/// the least amount possible from the SDL_IOStream (usually a few bytes).
+///
+/// There is no distinction made between "not the filetype in question" and
+/// basic i/o errors.
+///
+/// This function will always attempt to seek `src` back to where it started
+/// when this function was called, but it will not report any errors in doing
+/// so, but assuming seeking works, this means you can immediately use this
+/// with a different IMG_isTYPE function, or load the image without further
+/// seeking.
+///
+/// You do not need to call this function to load data; SDL_image can work to
+/// determine file type in many cases in its standard load functions.
+///
+/// \param src a seekable/readable SDL_IOStream to provide image data.
+/// \returns true if this is ICO data, false otherwise.
+///
+/// \since This function is available since SDL_image 3.0.0.
+///
+/// \sa IMG_isANI
+/// \sa IMG_isAVIF
+/// \sa IMG_isBMP
+/// \sa IMG_isCUR
+/// \sa IMG_isGIF
+/// \sa IMG_isJPG
+/// \sa IMG_isJXL
+/// \sa IMG_isLBM
+/// \sa IMG_isPCX
+/// \sa IMG_isPNG
+/// \sa IMG_isPNM
+/// \sa IMG_isQOI
+/// \sa IMG_isSVG
+/// \sa IMG_isTIF
+/// \sa IMG_isWEBP
+/// \sa IMG_isXCF
+/// \sa IMG_isXPM
+/// \sa IMG_isXV
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL IMG_isICO(SDL_IOStream *src)
+/// ```
+/// {@category image}
+bool imgIsIco(Pointer<SdlIoStream> src) {
+  final imgIsIcoLookupFunction = _libImage
+      .lookupFunction<
+        Uint8 Function(Pointer<SdlIoStream> src),
+        int Function(Pointer<SdlIoStream> src)
+      >('IMG_isICO');
+  return imgIsIcoLookupFunction(src) == 1;
 }
 
 ///
@@ -760,27 +819,28 @@ bool imgIsGif(Pointer<SdlIoStream> src) {
 /// determine file type in many cases in its standard load functions.
 ///
 /// \param src a seekable/readable SDL_IOStream to provide image data.
-/// \returns non-zero if this is JPG data, zero otherwise.
+/// \returns true if this is JPG data, false otherwise.
 ///
 /// \since This function is available since SDL_image 3.0.0.
 ///
+/// \sa IMG_isANI
 /// \sa IMG_isAVIF
-/// \sa IMG_isICO
-/// \sa IMG_isCUR
 /// \sa IMG_isBMP
+/// \sa IMG_isCUR
 /// \sa IMG_isGIF
+/// \sa IMG_isICO
 /// \sa IMG_isJXL
 /// \sa IMG_isLBM
 /// \sa IMG_isPCX
 /// \sa IMG_isPNG
 /// \sa IMG_isPNM
-/// \sa IMG_isSVG
 /// \sa IMG_isQOI
+/// \sa IMG_isSVG
 /// \sa IMG_isTIF
+/// \sa IMG_isWEBP
 /// \sa IMG_isXCF
 /// \sa IMG_isXPM
 /// \sa IMG_isXV
-/// \sa IMG_isWEBP
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL IMG_isJPG(SDL_IOStream *src)
@@ -814,27 +874,28 @@ bool imgIsJpg(Pointer<SdlIoStream> src) {
 /// determine file type in many cases in its standard load functions.
 ///
 /// \param src a seekable/readable SDL_IOStream to provide image data.
-/// \returns non-zero if this is JXL data, zero otherwise.
+/// \returns true if this is JXL data, false otherwise.
 ///
 /// \since This function is available since SDL_image 3.0.0.
 ///
+/// \sa IMG_isANI
 /// \sa IMG_isAVIF
-/// \sa IMG_isICO
-/// \sa IMG_isCUR
 /// \sa IMG_isBMP
+/// \sa IMG_isCUR
 /// \sa IMG_isGIF
+/// \sa IMG_isICO
 /// \sa IMG_isJPG
 /// \sa IMG_isLBM
 /// \sa IMG_isPCX
 /// \sa IMG_isPNG
 /// \sa IMG_isPNM
-/// \sa IMG_isSVG
 /// \sa IMG_isQOI
+/// \sa IMG_isSVG
 /// \sa IMG_isTIF
+/// \sa IMG_isWEBP
 /// \sa IMG_isXCF
 /// \sa IMG_isXPM
 /// \sa IMG_isXV
-/// \sa IMG_isWEBP
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL IMG_isJXL(SDL_IOStream *src)
@@ -868,27 +929,28 @@ bool imgIsJxl(Pointer<SdlIoStream> src) {
 /// determine file type in many cases in its standard load functions.
 ///
 /// \param src a seekable/readable SDL_IOStream to provide image data.
-/// \returns non-zero if this is LBM data, zero otherwise.
+/// \returns true if this is LBM data, false otherwise.
 ///
 /// \since This function is available since SDL_image 3.0.0.
 ///
+/// \sa IMG_isANI
 /// \sa IMG_isAVIF
-/// \sa IMG_isICO
-/// \sa IMG_isCUR
 /// \sa IMG_isBMP
+/// \sa IMG_isCUR
 /// \sa IMG_isGIF
+/// \sa IMG_isICO
 /// \sa IMG_isJPG
 /// \sa IMG_isJXL
 /// \sa IMG_isPCX
 /// \sa IMG_isPNG
 /// \sa IMG_isPNM
-/// \sa IMG_isSVG
 /// \sa IMG_isQOI
+/// \sa IMG_isSVG
 /// \sa IMG_isTIF
+/// \sa IMG_isWEBP
 /// \sa IMG_isXCF
 /// \sa IMG_isXPM
 /// \sa IMG_isXV
-/// \sa IMG_isWEBP
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL IMG_isLBM(SDL_IOStream *src)
@@ -922,27 +984,28 @@ bool imgIsLbm(Pointer<SdlIoStream> src) {
 /// determine file type in many cases in its standard load functions.
 ///
 /// \param src a seekable/readable SDL_IOStream to provide image data.
-/// \returns non-zero if this is PCX data, zero otherwise.
+/// \returns true if this is PCX data, false otherwise.
 ///
 /// \since This function is available since SDL_image 3.0.0.
 ///
+/// \sa IMG_isANI
 /// \sa IMG_isAVIF
-/// \sa IMG_isICO
-/// \sa IMG_isCUR
 /// \sa IMG_isBMP
+/// \sa IMG_isCUR
 /// \sa IMG_isGIF
+/// \sa IMG_isICO
 /// \sa IMG_isJPG
 /// \sa IMG_isJXL
 /// \sa IMG_isLBM
 /// \sa IMG_isPNG
 /// \sa IMG_isPNM
-/// \sa IMG_isSVG
 /// \sa IMG_isQOI
+/// \sa IMG_isSVG
 /// \sa IMG_isTIF
+/// \sa IMG_isWEBP
 /// \sa IMG_isXCF
 /// \sa IMG_isXPM
 /// \sa IMG_isXV
-/// \sa IMG_isWEBP
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL IMG_isPCX(SDL_IOStream *src)
@@ -976,27 +1039,28 @@ bool imgIsPcx(Pointer<SdlIoStream> src) {
 /// determine file type in many cases in its standard load functions.
 ///
 /// \param src a seekable/readable SDL_IOStream to provide image data.
-/// \returns non-zero if this is PNG data, zero otherwise.
+/// \returns true if this is PNG data, false otherwise.
 ///
 /// \since This function is available since SDL_image 3.0.0.
 ///
+/// \sa IMG_isANI
 /// \sa IMG_isAVIF
-/// \sa IMG_isICO
-/// \sa IMG_isCUR
 /// \sa IMG_isBMP
+/// \sa IMG_isCUR
 /// \sa IMG_isGIF
+/// \sa IMG_isICO
 /// \sa IMG_isJPG
 /// \sa IMG_isJXL
 /// \sa IMG_isLBM
 /// \sa IMG_isPCX
 /// \sa IMG_isPNM
-/// \sa IMG_isSVG
 /// \sa IMG_isQOI
+/// \sa IMG_isSVG
 /// \sa IMG_isTIF
+/// \sa IMG_isWEBP
 /// \sa IMG_isXCF
 /// \sa IMG_isXPM
 /// \sa IMG_isXV
-/// \sa IMG_isWEBP
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL IMG_isPNG(SDL_IOStream *src)
@@ -1030,27 +1094,28 @@ bool imgIsPng(Pointer<SdlIoStream> src) {
 /// determine file type in many cases in its standard load functions.
 ///
 /// \param src a seekable/readable SDL_IOStream to provide image data.
-/// \returns non-zero if this is PNM data, zero otherwise.
+/// \returns true if this is PNM data, false otherwise.
 ///
 /// \since This function is available since SDL_image 3.0.0.
 ///
+/// \sa IMG_isANI
 /// \sa IMG_isAVIF
-/// \sa IMG_isICO
-/// \sa IMG_isCUR
 /// \sa IMG_isBMP
+/// \sa IMG_isCUR
 /// \sa IMG_isGIF
+/// \sa IMG_isICO
 /// \sa IMG_isJPG
 /// \sa IMG_isJXL
 /// \sa IMG_isLBM
 /// \sa IMG_isPCX
 /// \sa IMG_isPNG
-/// \sa IMG_isSVG
 /// \sa IMG_isQOI
+/// \sa IMG_isSVG
 /// \sa IMG_isTIF
+/// \sa IMG_isWEBP
 /// \sa IMG_isXCF
 /// \sa IMG_isXPM
 /// \sa IMG_isXV
-/// \sa IMG_isWEBP
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL IMG_isPNM(SDL_IOStream *src)
@@ -1063,60 +1128,6 @@ bool imgIsPnm(Pointer<SdlIoStream> src) {
         int Function(Pointer<SdlIoStream> src)
       >('IMG_isPNM');
   return imgIsPnmLookupFunction(src) == 1;
-}
-
-///
-/// Detect SVG image data on a readable/seekable SDL_IOStream.
-///
-/// This function attempts to determine if a file is a given filetype, reading
-/// the least amount possible from the SDL_IOStream (usually a few bytes).
-///
-/// There is no distinction made between "not the filetype in question" and
-/// basic i/o errors.
-///
-/// This function will always attempt to seek `src` back to where it started
-/// when this function was called, but it will not report any errors in doing
-/// so, but assuming seeking works, this means you can immediately use this
-/// with a different IMG_isTYPE function, or load the image without further
-/// seeking.
-///
-/// You do not need to call this function to load data; SDL_image can work to
-/// determine file type in many cases in its standard load functions.
-///
-/// \param src a seekable/readable SDL_IOStream to provide image data.
-/// \returns non-zero if this is SVG data, zero otherwise.
-///
-/// \since This function is available since SDL_image 3.0.0.
-///
-/// \sa IMG_isAVIF
-/// \sa IMG_isICO
-/// \sa IMG_isCUR
-/// \sa IMG_isBMP
-/// \sa IMG_isGIF
-/// \sa IMG_isJPG
-/// \sa IMG_isJXL
-/// \sa IMG_isLBM
-/// \sa IMG_isPCX
-/// \sa IMG_isPNG
-/// \sa IMG_isPNM
-/// \sa IMG_isQOI
-/// \sa IMG_isTIF
-/// \sa IMG_isXCF
-/// \sa IMG_isXPM
-/// \sa IMG_isXV
-/// \sa IMG_isWEBP
-///
-/// ```c
-/// extern SDL_DECLSPEC bool SDLCALL IMG_isSVG(SDL_IOStream *src)
-/// ```
-/// {@category image}
-bool imgIsSvg(Pointer<SdlIoStream> src) {
-  final imgIsSvgLookupFunction = _libImage
-      .lookupFunction<
-        Uint8 Function(Pointer<SdlIoStream> src),
-        int Function(Pointer<SdlIoStream> src)
-      >('IMG_isSVG');
-  return imgIsSvgLookupFunction(src) == 1;
 }
 
 ///
@@ -1138,15 +1149,16 @@ bool imgIsSvg(Pointer<SdlIoStream> src) {
 /// determine file type in many cases in its standard load functions.
 ///
 /// \param src a seekable/readable SDL_IOStream to provide image data.
-/// \returns non-zero if this is QOI data, zero otherwise.
+/// \returns true if this is QOI data, false otherwise.
 ///
 /// \since This function is available since SDL_image 3.0.0.
 ///
+/// \sa IMG_isANI
 /// \sa IMG_isAVIF
-/// \sa IMG_isICO
-/// \sa IMG_isCUR
 /// \sa IMG_isBMP
+/// \sa IMG_isCUR
 /// \sa IMG_isGIF
+/// \sa IMG_isICO
 /// \sa IMG_isJPG
 /// \sa IMG_isJXL
 /// \sa IMG_isLBM
@@ -1155,10 +1167,10 @@ bool imgIsSvg(Pointer<SdlIoStream> src) {
 /// \sa IMG_isPNM
 /// \sa IMG_isSVG
 /// \sa IMG_isTIF
+/// \sa IMG_isWEBP
 /// \sa IMG_isXCF
 /// \sa IMG_isXPM
 /// \sa IMG_isXV
-/// \sa IMG_isWEBP
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL IMG_isQOI(SDL_IOStream *src)
@@ -1171,6 +1183,61 @@ bool imgIsQoi(Pointer<SdlIoStream> src) {
         int Function(Pointer<SdlIoStream> src)
       >('IMG_isQOI');
   return imgIsQoiLookupFunction(src) == 1;
+}
+
+///
+/// Detect SVG image data on a readable/seekable SDL_IOStream.
+///
+/// This function attempts to determine if a file is a given filetype, reading
+/// the least amount possible from the SDL_IOStream (usually a few bytes).
+///
+/// There is no distinction made between "not the filetype in question" and
+/// basic i/o errors.
+///
+/// This function will always attempt to seek `src` back to where it started
+/// when this function was called, but it will not report any errors in doing
+/// so, but assuming seeking works, this means you can immediately use this
+/// with a different IMG_isTYPE function, or load the image without further
+/// seeking.
+///
+/// You do not need to call this function to load data; SDL_image can work to
+/// determine file type in many cases in its standard load functions.
+///
+/// \param src a seekable/readable SDL_IOStream to provide image data.
+/// \returns true if this is SVG data, false otherwise.
+///
+/// \since This function is available since SDL_image 3.0.0.
+///
+/// \sa IMG_isANI
+/// \sa IMG_isAVIF
+/// \sa IMG_isBMP
+/// \sa IMG_isCUR
+/// \sa IMG_isGIF
+/// \sa IMG_isICO
+/// \sa IMG_isJPG
+/// \sa IMG_isJXL
+/// \sa IMG_isLBM
+/// \sa IMG_isPCX
+/// \sa IMG_isPNG
+/// \sa IMG_isPNM
+/// \sa IMG_isQOI
+/// \sa IMG_isTIF
+/// \sa IMG_isWEBP
+/// \sa IMG_isXCF
+/// \sa IMG_isXPM
+/// \sa IMG_isXV
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL IMG_isSVG(SDL_IOStream *src)
+/// ```
+/// {@category image}
+bool imgIsSvg(Pointer<SdlIoStream> src) {
+  final imgIsSvgLookupFunction = _libImage
+      .lookupFunction<
+        Uint8 Function(Pointer<SdlIoStream> src),
+        int Function(Pointer<SdlIoStream> src)
+      >('IMG_isSVG');
+  return imgIsSvgLookupFunction(src) == 1;
 }
 
 ///
@@ -1192,27 +1259,28 @@ bool imgIsQoi(Pointer<SdlIoStream> src) {
 /// determine file type in many cases in its standard load functions.
 ///
 /// \param src a seekable/readable SDL_IOStream to provide image data.
-/// \returns non-zero if this is TIFF data, zero otherwise.
+/// \returns true if this is TIFF data, false otherwise.
 ///
 /// \since This function is available since SDL_image 3.0.0.
 ///
+/// \sa IMG_isANI
 /// \sa IMG_isAVIF
-/// \sa IMG_isICO
-/// \sa IMG_isCUR
 /// \sa IMG_isBMP
+/// \sa IMG_isCUR
 /// \sa IMG_isGIF
+/// \sa IMG_isICO
 /// \sa IMG_isJPG
 /// \sa IMG_isJXL
 /// \sa IMG_isLBM
 /// \sa IMG_isPCX
 /// \sa IMG_isPNG
 /// \sa IMG_isPNM
-/// \sa IMG_isSVG
 /// \sa IMG_isQOI
+/// \sa IMG_isSVG
+/// \sa IMG_isWEBP
 /// \sa IMG_isXCF
 /// \sa IMG_isXPM
 /// \sa IMG_isXV
-/// \sa IMG_isWEBP
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL IMG_isTIF(SDL_IOStream *src)
@@ -1225,6 +1293,61 @@ bool imgIsTif(Pointer<SdlIoStream> src) {
         int Function(Pointer<SdlIoStream> src)
       >('IMG_isTIF');
   return imgIsTifLookupFunction(src) == 1;
+}
+
+///
+/// Detect WEBP image data on a readable/seekable SDL_IOStream.
+///
+/// This function attempts to determine if a file is a given filetype, reading
+/// the least amount possible from the SDL_IOStream (usually a few bytes).
+///
+/// There is no distinction made between "not the filetype in question" and
+/// basic i/o errors.
+///
+/// This function will always attempt to seek `src` back to where it started
+/// when this function was called, but it will not report any errors in doing
+/// so, but assuming seeking works, this means you can immediately use this
+/// with a different IMG_isTYPE function, or load the image without further
+/// seeking.
+///
+/// You do not need to call this function to load data; SDL_image can work to
+/// determine file type in many cases in its standard load functions.
+///
+/// \param src a seekable/readable SDL_IOStream to provide image data.
+/// \returns true if this is WEBP data, false otherwise.
+///
+/// \since This function is available since SDL_image 3.0.0.
+///
+/// \sa IMG_isANI
+/// \sa IMG_isAVIF
+/// \sa IMG_isBMP
+/// \sa IMG_isCUR
+/// \sa IMG_isGIF
+/// \sa IMG_isICO
+/// \sa IMG_isJPG
+/// \sa IMG_isJXL
+/// \sa IMG_isLBM
+/// \sa IMG_isPCX
+/// \sa IMG_isPNG
+/// \sa IMG_isPNM
+/// \sa IMG_isQOI
+/// \sa IMG_isSVG
+/// \sa IMG_isTIF
+/// \sa IMG_isXCF
+/// \sa IMG_isXPM
+/// \sa IMG_isXV
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL IMG_isWEBP(SDL_IOStream *src)
+/// ```
+/// {@category image}
+bool imgIsWebp(Pointer<SdlIoStream> src) {
+  final imgIsWebpLookupFunction = _libImage
+      .lookupFunction<
+        Uint8 Function(Pointer<SdlIoStream> src),
+        int Function(Pointer<SdlIoStream> src)
+      >('IMG_isWEBP');
+  return imgIsWebpLookupFunction(src) == 1;
 }
 
 ///
@@ -1246,27 +1369,28 @@ bool imgIsTif(Pointer<SdlIoStream> src) {
 /// determine file type in many cases in its standard load functions.
 ///
 /// \param src a seekable/readable SDL_IOStream to provide image data.
-/// \returns non-zero if this is XCF data, zero otherwise.
+/// \returns true if this is XCF data, false otherwise.
 ///
 /// \since This function is available since SDL_image 3.0.0.
 ///
+/// \sa IMG_isANI
 /// \sa IMG_isAVIF
-/// \sa IMG_isICO
-/// \sa IMG_isCUR
 /// \sa IMG_isBMP
+/// \sa IMG_isCUR
 /// \sa IMG_isGIF
+/// \sa IMG_isICO
 /// \sa IMG_isJPG
 /// \sa IMG_isJXL
 /// \sa IMG_isLBM
 /// \sa IMG_isPCX
 /// \sa IMG_isPNG
 /// \sa IMG_isPNM
-/// \sa IMG_isSVG
 /// \sa IMG_isQOI
+/// \sa IMG_isSVG
 /// \sa IMG_isTIF
+/// \sa IMG_isWEBP
 /// \sa IMG_isXPM
 /// \sa IMG_isXV
-/// \sa IMG_isWEBP
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL IMG_isXCF(SDL_IOStream *src)
@@ -1300,27 +1424,28 @@ bool imgIsXcf(Pointer<SdlIoStream> src) {
 /// determine file type in many cases in its standard load functions.
 ///
 /// \param src a seekable/readable SDL_IOStream to provide image data.
-/// \returns non-zero if this is XPM data, zero otherwise.
+/// \returns true if this is XPM data, false otherwise.
 ///
 /// \since This function is available since SDL_image 3.0.0.
 ///
+/// \sa IMG_isANI
 /// \sa IMG_isAVIF
-/// \sa IMG_isICO
-/// \sa IMG_isCUR
 /// \sa IMG_isBMP
+/// \sa IMG_isCUR
 /// \sa IMG_isGIF
+/// \sa IMG_isICO
 /// \sa IMG_isJPG
 /// \sa IMG_isJXL
 /// \sa IMG_isLBM
 /// \sa IMG_isPCX
 /// \sa IMG_isPNG
 /// \sa IMG_isPNM
-/// \sa IMG_isSVG
 /// \sa IMG_isQOI
+/// \sa IMG_isSVG
 /// \sa IMG_isTIF
+/// \sa IMG_isWEBP
 /// \sa IMG_isXCF
 /// \sa IMG_isXV
-/// \sa IMG_isWEBP
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL IMG_isXPM(SDL_IOStream *src)
@@ -1354,27 +1479,28 @@ bool imgIsXpm(Pointer<SdlIoStream> src) {
 /// determine file type in many cases in its standard load functions.
 ///
 /// \param src a seekable/readable SDL_IOStream to provide image data.
-/// \returns non-zero if this is XV data, zero otherwise.
+/// \returns true if this is XV data, false otherwise.
 ///
 /// \since This function is available since SDL_image 3.0.0.
 ///
+/// \sa IMG_isANI
 /// \sa IMG_isAVIF
-/// \sa IMG_isICO
-/// \sa IMG_isCUR
 /// \sa IMG_isBMP
+/// \sa IMG_isCUR
 /// \sa IMG_isGIF
+/// \sa IMG_isICO
 /// \sa IMG_isJPG
 /// \sa IMG_isJXL
 /// \sa IMG_isLBM
 /// \sa IMG_isPCX
 /// \sa IMG_isPNG
 /// \sa IMG_isPNM
-/// \sa IMG_isSVG
 /// \sa IMG_isQOI
+/// \sa IMG_isSVG
 /// \sa IMG_isTIF
+/// \sa IMG_isWEBP
 /// \sa IMG_isXCF
 /// \sa IMG_isXPM
-/// \sa IMG_isWEBP
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL IMG_isXV(SDL_IOStream *src)
@@ -1390,60 +1516,6 @@ bool imgIsXv(Pointer<SdlIoStream> src) {
 }
 
 ///
-/// Detect WEBP image data on a readable/seekable SDL_IOStream.
-///
-/// This function attempts to determine if a file is a given filetype, reading
-/// the least amount possible from the SDL_IOStream (usually a few bytes).
-///
-/// There is no distinction made between "not the filetype in question" and
-/// basic i/o errors.
-///
-/// This function will always attempt to seek `src` back to where it started
-/// when this function was called, but it will not report any errors in doing
-/// so, but assuming seeking works, this means you can immediately use this
-/// with a different IMG_isTYPE function, or load the image without further
-/// seeking.
-///
-/// You do not need to call this function to load data; SDL_image can work to
-/// determine file type in many cases in its standard load functions.
-///
-/// \param src a seekable/readable SDL_IOStream to provide image data.
-/// \returns non-zero if this is WEBP data, zero otherwise.
-///
-/// \since This function is available since SDL_image 3.0.0.
-///
-/// \sa IMG_isAVIF
-/// \sa IMG_isICO
-/// \sa IMG_isCUR
-/// \sa IMG_isBMP
-/// \sa IMG_isGIF
-/// \sa IMG_isJPG
-/// \sa IMG_isJXL
-/// \sa IMG_isLBM
-/// \sa IMG_isPCX
-/// \sa IMG_isPNG
-/// \sa IMG_isPNM
-/// \sa IMG_isSVG
-/// \sa IMG_isQOI
-/// \sa IMG_isTIF
-/// \sa IMG_isXCF
-/// \sa IMG_isXPM
-/// \sa IMG_isXV
-///
-/// ```c
-/// extern SDL_DECLSPEC bool SDLCALL IMG_isWEBP(SDL_IOStream *src)
-/// ```
-/// {@category image}
-bool imgIsWebp(Pointer<SdlIoStream> src) {
-  final imgIsWebpLookupFunction = _libImage
-      .lookupFunction<
-        Uint8 Function(Pointer<SdlIoStream> src),
-        int Function(Pointer<SdlIoStream> src)
-      >('IMG_isWEBP');
-  return imgIsWebpLookupFunction(src) == 1;
-}
-
-///
 /// Load a AVIF image directly.
 ///
 /// If you know you definitely have a AVIF image, you can call this function,
@@ -1456,24 +1528,24 @@ bool imgIsWebp(Pointer<SdlIoStream> src) {
 ///
 /// \since This function is available since SDL_image 3.0.0.
 ///
-/// \sa IMG_LoadICO_IO
-/// \sa IMG_LoadCUR_IO
 /// \sa IMG_LoadBMP_IO
+/// \sa IMG_LoadCUR_IO
 /// \sa IMG_LoadGIF_IO
+/// \sa IMG_LoadICO_IO
 /// \sa IMG_LoadJPG_IO
 /// \sa IMG_LoadJXL_IO
 /// \sa IMG_LoadLBM_IO
 /// \sa IMG_LoadPCX_IO
 /// \sa IMG_LoadPNG_IO
 /// \sa IMG_LoadPNM_IO
-/// \sa IMG_LoadSVG_IO
 /// \sa IMG_LoadQOI_IO
+/// \sa IMG_LoadSVG_IO
 /// \sa IMG_LoadTGA_IO
 /// \sa IMG_LoadTIF_IO
+/// \sa IMG_LoadWEBP_IO
 /// \sa IMG_LoadXCF_IO
 /// \sa IMG_LoadXPM_IO
 /// \sa IMG_LoadXV_IO
-/// \sa IMG_LoadWEBP_IO
 ///
 /// ```c
 /// extern SDL_DECLSPEC SDL_Surface * SDLCALL IMG_LoadAVIF_IO(SDL_IOStream *src)
@@ -1486,96 +1558,6 @@ Pointer<SdlSurface> imgLoadAvifIo(Pointer<SdlIoStream> src) {
         Pointer<SdlSurface> Function(Pointer<SdlIoStream> src)
       >('IMG_LoadAVIF_IO');
   return imgLoadAvifIoLookupFunction(src);
-}
-
-///
-/// Load a ICO image directly.
-///
-/// If you know you definitely have a ICO image, you can call this function,
-/// which will skip SDL_image's file format detection routines. Generally it's
-/// better to use the abstract interfaces; also, there is only an SDL_IOStream
-/// interface available here.
-///
-/// \param src an SDL_IOStream to load image data from.
-/// \returns SDL surface, or NULL on error.
-///
-/// \since This function is available since SDL_image 3.0.0.
-///
-/// \sa IMG_LoadAVIF_IO
-/// \sa IMG_LoadCUR_IO
-/// \sa IMG_LoadBMP_IO
-/// \sa IMG_LoadGIF_IO
-/// \sa IMG_LoadJPG_IO
-/// \sa IMG_LoadJXL_IO
-/// \sa IMG_LoadLBM_IO
-/// \sa IMG_LoadPCX_IO
-/// \sa IMG_LoadPNG_IO
-/// \sa IMG_LoadPNM_IO
-/// \sa IMG_LoadSVG_IO
-/// \sa IMG_LoadQOI_IO
-/// \sa IMG_LoadTGA_IO
-/// \sa IMG_LoadTIF_IO
-/// \sa IMG_LoadXCF_IO
-/// \sa IMG_LoadXPM_IO
-/// \sa IMG_LoadXV_IO
-/// \sa IMG_LoadWEBP_IO
-///
-/// ```c
-/// extern SDL_DECLSPEC SDL_Surface * SDLCALL IMG_LoadICO_IO(SDL_IOStream *src)
-/// ```
-/// {@category image}
-Pointer<SdlSurface> imgLoadIcoIo(Pointer<SdlIoStream> src) {
-  final imgLoadIcoIoLookupFunction = _libImage
-      .lookupFunction<
-        Pointer<SdlSurface> Function(Pointer<SdlIoStream> src),
-        Pointer<SdlSurface> Function(Pointer<SdlIoStream> src)
-      >('IMG_LoadICO_IO');
-  return imgLoadIcoIoLookupFunction(src);
-}
-
-///
-/// Load a CUR image directly.
-///
-/// If you know you definitely have a CUR image, you can call this function,
-/// which will skip SDL_image's file format detection routines. Generally it's
-/// better to use the abstract interfaces; also, there is only an SDL_IOStream
-/// interface available here.
-///
-/// \param src an SDL_IOStream to load image data from.
-/// \returns SDL surface, or NULL on error.
-///
-/// \since This function is available since SDL_image 3.0.0.
-///
-/// \sa IMG_LoadAVIF_IO
-/// \sa IMG_LoadICO_IO
-/// \sa IMG_LoadBMP_IO
-/// \sa IMG_LoadGIF_IO
-/// \sa IMG_LoadJPG_IO
-/// \sa IMG_LoadJXL_IO
-/// \sa IMG_LoadLBM_IO
-/// \sa IMG_LoadPCX_IO
-/// \sa IMG_LoadPNG_IO
-/// \sa IMG_LoadPNM_IO
-/// \sa IMG_LoadSVG_IO
-/// \sa IMG_LoadQOI_IO
-/// \sa IMG_LoadTGA_IO
-/// \sa IMG_LoadTIF_IO
-/// \sa IMG_LoadXCF_IO
-/// \sa IMG_LoadXPM_IO
-/// \sa IMG_LoadXV_IO
-/// \sa IMG_LoadWEBP_IO
-///
-/// ```c
-/// extern SDL_DECLSPEC SDL_Surface * SDLCALL IMG_LoadCUR_IO(SDL_IOStream *src)
-/// ```
-/// {@category image}
-Pointer<SdlSurface> imgLoadCurIo(Pointer<SdlIoStream> src) {
-  final imgLoadCurIoLookupFunction = _libImage
-      .lookupFunction<
-        Pointer<SdlSurface> Function(Pointer<SdlIoStream> src),
-        Pointer<SdlSurface> Function(Pointer<SdlIoStream> src)
-      >('IMG_LoadCUR_IO');
-  return imgLoadCurIoLookupFunction(src);
 }
 
 ///
@@ -1592,23 +1574,23 @@ Pointer<SdlSurface> imgLoadCurIo(Pointer<SdlIoStream> src) {
 /// \since This function is available since SDL_image 3.0.0.
 ///
 /// \sa IMG_LoadAVIF_IO
-/// \sa IMG_LoadICO_IO
 /// \sa IMG_LoadCUR_IO
 /// \sa IMG_LoadGIF_IO
+/// \sa IMG_LoadICO_IO
 /// \sa IMG_LoadJPG_IO
 /// \sa IMG_LoadJXL_IO
 /// \sa IMG_LoadLBM_IO
 /// \sa IMG_LoadPCX_IO
 /// \sa IMG_LoadPNG_IO
 /// \sa IMG_LoadPNM_IO
-/// \sa IMG_LoadSVG_IO
 /// \sa IMG_LoadQOI_IO
+/// \sa IMG_LoadSVG_IO
 /// \sa IMG_LoadTGA_IO
 /// \sa IMG_LoadTIF_IO
+/// \sa IMG_LoadWEBP_IO
 /// \sa IMG_LoadXCF_IO
 /// \sa IMG_LoadXPM_IO
 /// \sa IMG_LoadXV_IO
-/// \sa IMG_LoadWEBP_IO
 ///
 /// ```c
 /// extern SDL_DECLSPEC SDL_Surface * SDLCALL IMG_LoadBMP_IO(SDL_IOStream *src)
@@ -1621,6 +1603,51 @@ Pointer<SdlSurface> imgLoadBmpIo(Pointer<SdlIoStream> src) {
         Pointer<SdlSurface> Function(Pointer<SdlIoStream> src)
       >('IMG_LoadBMP_IO');
   return imgLoadBmpIoLookupFunction(src);
+}
+
+///
+/// Load a CUR image directly.
+///
+/// If you know you definitely have a CUR image, you can call this function,
+/// which will skip SDL_image's file format detection routines. Generally it's
+/// better to use the abstract interfaces; also, there is only an SDL_IOStream
+/// interface available here.
+///
+/// \param src an SDL_IOStream to load image data from.
+/// \returns SDL surface, or NULL on error.
+///
+/// \since This function is available since SDL_image 3.0.0.
+///
+/// \sa IMG_LoadAVIF_IO
+/// \sa IMG_LoadBMP_IO
+/// \sa IMG_LoadGIF_IO
+/// \sa IMG_LoadICO_IO
+/// \sa IMG_LoadJPG_IO
+/// \sa IMG_LoadJXL_IO
+/// \sa IMG_LoadLBM_IO
+/// \sa IMG_LoadPCX_IO
+/// \sa IMG_LoadPNG_IO
+/// \sa IMG_LoadPNM_IO
+/// \sa IMG_LoadQOI_IO
+/// \sa IMG_LoadSVG_IO
+/// \sa IMG_LoadTGA_IO
+/// \sa IMG_LoadTIF_IO
+/// \sa IMG_LoadWEBP_IO
+/// \sa IMG_LoadXCF_IO
+/// \sa IMG_LoadXPM_IO
+/// \sa IMG_LoadXV_IO
+///
+/// ```c
+/// extern SDL_DECLSPEC SDL_Surface * SDLCALL IMG_LoadCUR_IO(SDL_IOStream *src)
+/// ```
+/// {@category image}
+Pointer<SdlSurface> imgLoadCurIo(Pointer<SdlIoStream> src) {
+  final imgLoadCurIoLookupFunction = _libImage
+      .lookupFunction<
+        Pointer<SdlSurface> Function(Pointer<SdlIoStream> src),
+        Pointer<SdlSurface> Function(Pointer<SdlIoStream> src)
+      >('IMG_LoadCUR_IO');
+  return imgLoadCurIoLookupFunction(src);
 }
 
 ///
@@ -1637,23 +1664,23 @@ Pointer<SdlSurface> imgLoadBmpIo(Pointer<SdlIoStream> src) {
 /// \since This function is available since SDL_image 3.0.0.
 ///
 /// \sa IMG_LoadAVIF_IO
-/// \sa IMG_LoadICO_IO
-/// \sa IMG_LoadCUR_IO
 /// \sa IMG_LoadBMP_IO
+/// \sa IMG_LoadCUR_IO
+/// \sa IMG_LoadICO_IO
 /// \sa IMG_LoadJPG_IO
 /// \sa IMG_LoadJXL_IO
 /// \sa IMG_LoadLBM_IO
 /// \sa IMG_LoadPCX_IO
 /// \sa IMG_LoadPNG_IO
 /// \sa IMG_LoadPNM_IO
-/// \sa IMG_LoadSVG_IO
 /// \sa IMG_LoadQOI_IO
+/// \sa IMG_LoadSVG_IO
 /// \sa IMG_LoadTGA_IO
 /// \sa IMG_LoadTIF_IO
+/// \sa IMG_LoadWEBP_IO
 /// \sa IMG_LoadXCF_IO
 /// \sa IMG_LoadXPM_IO
 /// \sa IMG_LoadXV_IO
-/// \sa IMG_LoadWEBP_IO
 ///
 /// ```c
 /// extern SDL_DECLSPEC SDL_Surface * SDLCALL IMG_LoadGIF_IO(SDL_IOStream *src)
@@ -1666,6 +1693,51 @@ Pointer<SdlSurface> imgLoadGifIo(Pointer<SdlIoStream> src) {
         Pointer<SdlSurface> Function(Pointer<SdlIoStream> src)
       >('IMG_LoadGIF_IO');
   return imgLoadGifIoLookupFunction(src);
+}
+
+///
+/// Load a ICO image directly.
+///
+/// If you know you definitely have a ICO image, you can call this function,
+/// which will skip SDL_image's file format detection routines. Generally it's
+/// better to use the abstract interfaces; also, there is only an SDL_IOStream
+/// interface available here.
+///
+/// \param src an SDL_IOStream to load image data from.
+/// \returns SDL surface, or NULL on error.
+///
+/// \since This function is available since SDL_image 3.0.0.
+///
+/// \sa IMG_LoadAVIF_IO
+/// \sa IMG_LoadBMP_IO
+/// \sa IMG_LoadCUR_IO
+/// \sa IMG_LoadGIF_IO
+/// \sa IMG_LoadJPG_IO
+/// \sa IMG_LoadJXL_IO
+/// \sa IMG_LoadLBM_IO
+/// \sa IMG_LoadPCX_IO
+/// \sa IMG_LoadPNG_IO
+/// \sa IMG_LoadPNM_IO
+/// \sa IMG_LoadQOI_IO
+/// \sa IMG_LoadSVG_IO
+/// \sa IMG_LoadTGA_IO
+/// \sa IMG_LoadTIF_IO
+/// \sa IMG_LoadWEBP_IO
+/// \sa IMG_LoadXCF_IO
+/// \sa IMG_LoadXPM_IO
+/// \sa IMG_LoadXV_IO
+///
+/// ```c
+/// extern SDL_DECLSPEC SDL_Surface * SDLCALL IMG_LoadICO_IO(SDL_IOStream *src)
+/// ```
+/// {@category image}
+Pointer<SdlSurface> imgLoadIcoIo(Pointer<SdlIoStream> src) {
+  final imgLoadIcoIoLookupFunction = _libImage
+      .lookupFunction<
+        Pointer<SdlSurface> Function(Pointer<SdlIoStream> src),
+        Pointer<SdlSurface> Function(Pointer<SdlIoStream> src)
+      >('IMG_LoadICO_IO');
+  return imgLoadIcoIoLookupFunction(src);
 }
 
 ///
@@ -1682,23 +1754,23 @@ Pointer<SdlSurface> imgLoadGifIo(Pointer<SdlIoStream> src) {
 /// \since This function is available since SDL_image 3.0.0.
 ///
 /// \sa IMG_LoadAVIF_IO
-/// \sa IMG_LoadICO_IO
-/// \sa IMG_LoadCUR_IO
 /// \sa IMG_LoadBMP_IO
+/// \sa IMG_LoadCUR_IO
 /// \sa IMG_LoadGIF_IO
+/// \sa IMG_LoadICO_IO
 /// \sa IMG_LoadJXL_IO
 /// \sa IMG_LoadLBM_IO
 /// \sa IMG_LoadPCX_IO
 /// \sa IMG_LoadPNG_IO
 /// \sa IMG_LoadPNM_IO
-/// \sa IMG_LoadSVG_IO
 /// \sa IMG_LoadQOI_IO
+/// \sa IMG_LoadSVG_IO
 /// \sa IMG_LoadTGA_IO
 /// \sa IMG_LoadTIF_IO
+/// \sa IMG_LoadWEBP_IO
 /// \sa IMG_LoadXCF_IO
 /// \sa IMG_LoadXPM_IO
 /// \sa IMG_LoadXV_IO
-/// \sa IMG_LoadWEBP_IO
 ///
 /// ```c
 /// extern SDL_DECLSPEC SDL_Surface * SDLCALL IMG_LoadJPG_IO(SDL_IOStream *src)
@@ -1727,23 +1799,23 @@ Pointer<SdlSurface> imgLoadJpgIo(Pointer<SdlIoStream> src) {
 /// \since This function is available since SDL_image 3.0.0.
 ///
 /// \sa IMG_LoadAVIF_IO
-/// \sa IMG_LoadICO_IO
-/// \sa IMG_LoadCUR_IO
 /// \sa IMG_LoadBMP_IO
+/// \sa IMG_LoadCUR_IO
 /// \sa IMG_LoadGIF_IO
+/// \sa IMG_LoadICO_IO
 /// \sa IMG_LoadJPG_IO
 /// \sa IMG_LoadLBM_IO
 /// \sa IMG_LoadPCX_IO
 /// \sa IMG_LoadPNG_IO
 /// \sa IMG_LoadPNM_IO
-/// \sa IMG_LoadSVG_IO
 /// \sa IMG_LoadQOI_IO
+/// \sa IMG_LoadSVG_IO
 /// \sa IMG_LoadTGA_IO
 /// \sa IMG_LoadTIF_IO
+/// \sa IMG_LoadWEBP_IO
 /// \sa IMG_LoadXCF_IO
 /// \sa IMG_LoadXPM_IO
 /// \sa IMG_LoadXV_IO
-/// \sa IMG_LoadWEBP_IO
 ///
 /// ```c
 /// extern SDL_DECLSPEC SDL_Surface * SDLCALL IMG_LoadJXL_IO(SDL_IOStream *src)
@@ -1772,23 +1844,23 @@ Pointer<SdlSurface> imgLoadJxlIo(Pointer<SdlIoStream> src) {
 /// \since This function is available since SDL_image 3.0.0.
 ///
 /// \sa IMG_LoadAVIF_IO
-/// \sa IMG_LoadICO_IO
-/// \sa IMG_LoadCUR_IO
 /// \sa IMG_LoadBMP_IO
+/// \sa IMG_LoadCUR_IO
 /// \sa IMG_LoadGIF_IO
+/// \sa IMG_LoadICO_IO
 /// \sa IMG_LoadJPG_IO
 /// \sa IMG_LoadJXL_IO
 /// \sa IMG_LoadPCX_IO
 /// \sa IMG_LoadPNG_IO
 /// \sa IMG_LoadPNM_IO
-/// \sa IMG_LoadSVG_IO
 /// \sa IMG_LoadQOI_IO
+/// \sa IMG_LoadSVG_IO
 /// \sa IMG_LoadTGA_IO
 /// \sa IMG_LoadTIF_IO
+/// \sa IMG_LoadWEBP_IO
 /// \sa IMG_LoadXCF_IO
 /// \sa IMG_LoadXPM_IO
 /// \sa IMG_LoadXV_IO
-/// \sa IMG_LoadWEBP_IO
 ///
 /// ```c
 /// extern SDL_DECLSPEC SDL_Surface * SDLCALL IMG_LoadLBM_IO(SDL_IOStream *src)
@@ -1817,23 +1889,23 @@ Pointer<SdlSurface> imgLoadLbmIo(Pointer<SdlIoStream> src) {
 /// \since This function is available since SDL_image 3.0.0.
 ///
 /// \sa IMG_LoadAVIF_IO
-/// \sa IMG_LoadICO_IO
-/// \sa IMG_LoadCUR_IO
 /// \sa IMG_LoadBMP_IO
+/// \sa IMG_LoadCUR_IO
 /// \sa IMG_LoadGIF_IO
+/// \sa IMG_LoadICO_IO
 /// \sa IMG_LoadJPG_IO
 /// \sa IMG_LoadJXL_IO
 /// \sa IMG_LoadLBM_IO
 /// \sa IMG_LoadPNG_IO
 /// \sa IMG_LoadPNM_IO
-/// \sa IMG_LoadSVG_IO
 /// \sa IMG_LoadQOI_IO
+/// \sa IMG_LoadSVG_IO
 /// \sa IMG_LoadTGA_IO
 /// \sa IMG_LoadTIF_IO
+/// \sa IMG_LoadWEBP_IO
 /// \sa IMG_LoadXCF_IO
 /// \sa IMG_LoadXPM_IO
 /// \sa IMG_LoadXV_IO
-/// \sa IMG_LoadWEBP_IO
 ///
 /// ```c
 /// extern SDL_DECLSPEC SDL_Surface * SDLCALL IMG_LoadPCX_IO(SDL_IOStream *src)
@@ -1862,23 +1934,23 @@ Pointer<SdlSurface> imgLoadPcxIo(Pointer<SdlIoStream> src) {
 /// \since This function is available since SDL_image 3.0.0.
 ///
 /// \sa IMG_LoadAVIF_IO
-/// \sa IMG_LoadICO_IO
-/// \sa IMG_LoadCUR_IO
 /// \sa IMG_LoadBMP_IO
+/// \sa IMG_LoadCUR_IO
 /// \sa IMG_LoadGIF_IO
+/// \sa IMG_LoadICO_IO
 /// \sa IMG_LoadJPG_IO
 /// \sa IMG_LoadJXL_IO
 /// \sa IMG_LoadLBM_IO
 /// \sa IMG_LoadPCX_IO
 /// \sa IMG_LoadPNM_IO
-/// \sa IMG_LoadSVG_IO
 /// \sa IMG_LoadQOI_IO
+/// \sa IMG_LoadSVG_IO
 /// \sa IMG_LoadTGA_IO
 /// \sa IMG_LoadTIF_IO
+/// \sa IMG_LoadWEBP_IO
 /// \sa IMG_LoadXCF_IO
 /// \sa IMG_LoadXPM_IO
 /// \sa IMG_LoadXV_IO
-/// \sa IMG_LoadWEBP_IO
 ///
 /// ```c
 /// extern SDL_DECLSPEC SDL_Surface * SDLCALL IMG_LoadPNG_IO(SDL_IOStream *src)
@@ -1907,23 +1979,23 @@ Pointer<SdlSurface> imgLoadPngIo(Pointer<SdlIoStream> src) {
 /// \since This function is available since SDL_image 3.0.0.
 ///
 /// \sa IMG_LoadAVIF_IO
-/// \sa IMG_LoadICO_IO
-/// \sa IMG_LoadCUR_IO
 /// \sa IMG_LoadBMP_IO
+/// \sa IMG_LoadCUR_IO
 /// \sa IMG_LoadGIF_IO
+/// \sa IMG_LoadICO_IO
 /// \sa IMG_LoadJPG_IO
 /// \sa IMG_LoadJXL_IO
 /// \sa IMG_LoadLBM_IO
 /// \sa IMG_LoadPCX_IO
 /// \sa IMG_LoadPNG_IO
-/// \sa IMG_LoadSVG_IO
 /// \sa IMG_LoadQOI_IO
+/// \sa IMG_LoadSVG_IO
 /// \sa IMG_LoadTGA_IO
 /// \sa IMG_LoadTIF_IO
+/// \sa IMG_LoadWEBP_IO
 /// \sa IMG_LoadXCF_IO
 /// \sa IMG_LoadXPM_IO
 /// \sa IMG_LoadXV_IO
-/// \sa IMG_LoadWEBP_IO
 ///
 /// ```c
 /// extern SDL_DECLSPEC SDL_Surface * SDLCALL IMG_LoadPNM_IO(SDL_IOStream *src)
@@ -1952,10 +2024,10 @@ Pointer<SdlSurface> imgLoadPnmIo(Pointer<SdlIoStream> src) {
 /// \since This function is available since SDL_image 3.0.0.
 ///
 /// \sa IMG_LoadAVIF_IO
-/// \sa IMG_LoadICO_IO
-/// \sa IMG_LoadCUR_IO
 /// \sa IMG_LoadBMP_IO
+/// \sa IMG_LoadCUR_IO
 /// \sa IMG_LoadGIF_IO
+/// \sa IMG_LoadICO_IO
 /// \sa IMG_LoadJPG_IO
 /// \sa IMG_LoadJXL_IO
 /// \sa IMG_LoadLBM_IO
@@ -1963,12 +2035,13 @@ Pointer<SdlSurface> imgLoadPnmIo(Pointer<SdlIoStream> src) {
 /// \sa IMG_LoadPNG_IO
 /// \sa IMG_LoadPNM_IO
 /// \sa IMG_LoadQOI_IO
+/// \sa IMG_LoadSizedSVG_IO
 /// \sa IMG_LoadTGA_IO
 /// \sa IMG_LoadTIF_IO
+/// \sa IMG_LoadWEBP_IO
 /// \sa IMG_LoadXCF_IO
 /// \sa IMG_LoadXPM_IO
 /// \sa IMG_LoadXV_IO
-/// \sa IMG_LoadWEBP_IO
 ///
 /// ```c
 /// extern SDL_DECLSPEC SDL_Surface * SDLCALL IMG_LoadSVG_IO(SDL_IOStream *src)
@@ -1981,6 +2054,52 @@ Pointer<SdlSurface> imgLoadSvgIo(Pointer<SdlIoStream> src) {
         Pointer<SdlSurface> Function(Pointer<SdlIoStream> src)
       >('IMG_LoadSVG_IO');
   return imgLoadSvgIoLookupFunction(src);
+}
+
+///
+/// Load an SVG image, scaled to a specific size.
+///
+/// Since SVG files are resolution-independent, you specify the size you would
+/// like the output image to be and it will be generated at those dimensions.
+///
+/// Either width or height may be 0 and the image will be auto-sized to
+/// preserve aspect ratio.
+///
+/// When done with the returned surface, the app should dispose of it with a
+/// call to SDL_DestroySurface().
+///
+/// \param src an SDL_IOStream to load SVG data from.
+/// \param width desired width of the generated surface, in pixels.
+/// \param height desired height of the generated surface, in pixels.
+/// \returns a new SDL surface, or NULL on error.
+///
+/// \since This function is available since SDL_image 3.0.0.
+///
+/// \sa IMG_LoadSVG_IO
+///
+/// ```c
+/// extern SDL_DECLSPEC SDL_Surface * SDLCALL IMG_LoadSizedSVG_IO(SDL_IOStream *src, int width, int height)
+/// ```
+/// {@category image}
+Pointer<SdlSurface> imgLoadSizedSvgIo(
+  Pointer<SdlIoStream> src,
+  int width,
+  int height,
+) {
+  final imgLoadSizedSvgIoLookupFunction = _libImage
+      .lookupFunction<
+        Pointer<SdlSurface> Function(
+          Pointer<SdlIoStream> src,
+          Int32 width,
+          Int32 height,
+        ),
+        Pointer<SdlSurface> Function(
+          Pointer<SdlIoStream> src,
+          int width,
+          int height,
+        )
+      >('IMG_LoadSizedSVG_IO');
+  return imgLoadSizedSvgIoLookupFunction(src, width, height);
 }
 
 ///
@@ -1997,10 +2116,10 @@ Pointer<SdlSurface> imgLoadSvgIo(Pointer<SdlIoStream> src) {
 /// \since This function is available since SDL_image 3.0.0.
 ///
 /// \sa IMG_LoadAVIF_IO
-/// \sa IMG_LoadICO_IO
-/// \sa IMG_LoadCUR_IO
 /// \sa IMG_LoadBMP_IO
+/// \sa IMG_LoadCUR_IO
 /// \sa IMG_LoadGIF_IO
+/// \sa IMG_LoadICO_IO
 /// \sa IMG_LoadJPG_IO
 /// \sa IMG_LoadJXL_IO
 /// \sa IMG_LoadLBM_IO
@@ -2010,10 +2129,10 @@ Pointer<SdlSurface> imgLoadSvgIo(Pointer<SdlIoStream> src) {
 /// \sa IMG_LoadSVG_IO
 /// \sa IMG_LoadTGA_IO
 /// \sa IMG_LoadTIF_IO
+/// \sa IMG_LoadWEBP_IO
 /// \sa IMG_LoadXCF_IO
 /// \sa IMG_LoadXPM_IO
 /// \sa IMG_LoadXV_IO
-/// \sa IMG_LoadWEBP_IO
 ///
 /// ```c
 /// extern SDL_DECLSPEC SDL_Surface * SDLCALL IMG_LoadQOI_IO(SDL_IOStream *src)
@@ -2042,23 +2161,23 @@ Pointer<SdlSurface> imgLoadQoiIo(Pointer<SdlIoStream> src) {
 /// \since This function is available since SDL_image 3.0.0.
 ///
 /// \sa IMG_LoadAVIF_IO
-/// \sa IMG_LoadICO_IO
-/// \sa IMG_LoadCUR_IO
 /// \sa IMG_LoadBMP_IO
+/// \sa IMG_LoadCUR_IO
 /// \sa IMG_LoadGIF_IO
+/// \sa IMG_LoadICO_IO
 /// \sa IMG_LoadJPG_IO
 /// \sa IMG_LoadJXL_IO
 /// \sa IMG_LoadLBM_IO
 /// \sa IMG_LoadPCX_IO
 /// \sa IMG_LoadPNG_IO
 /// \sa IMG_LoadPNM_IO
-/// \sa IMG_LoadSVG_IO
 /// \sa IMG_LoadQOI_IO
+/// \sa IMG_LoadSVG_IO
 /// \sa IMG_LoadTIF_IO
+/// \sa IMG_LoadWEBP_IO
 /// \sa IMG_LoadXCF_IO
 /// \sa IMG_LoadXPM_IO
 /// \sa IMG_LoadXV_IO
-/// \sa IMG_LoadWEBP_IO
 ///
 /// ```c
 /// extern SDL_DECLSPEC SDL_Surface * SDLCALL IMG_LoadTGA_IO(SDL_IOStream *src)
@@ -2087,23 +2206,23 @@ Pointer<SdlSurface> imgLoadTgaIo(Pointer<SdlIoStream> src) {
 /// \since This function is available since SDL_image 3.0.0.
 ///
 /// \sa IMG_LoadAVIF_IO
-/// \sa IMG_LoadICO_IO
-/// \sa IMG_LoadCUR_IO
 /// \sa IMG_LoadBMP_IO
+/// \sa IMG_LoadCUR_IO
 /// \sa IMG_LoadGIF_IO
+/// \sa IMG_LoadICO_IO
 /// \sa IMG_LoadJPG_IO
 /// \sa IMG_LoadJXL_IO
 /// \sa IMG_LoadLBM_IO
 /// \sa IMG_LoadPCX_IO
 /// \sa IMG_LoadPNG_IO
 /// \sa IMG_LoadPNM_IO
-/// \sa IMG_LoadSVG_IO
 /// \sa IMG_LoadQOI_IO
+/// \sa IMG_LoadSVG_IO
 /// \sa IMG_LoadTGA_IO
+/// \sa IMG_LoadWEBP_IO
 /// \sa IMG_LoadXCF_IO
 /// \sa IMG_LoadXPM_IO
 /// \sa IMG_LoadXV_IO
-/// \sa IMG_LoadWEBP_IO
 ///
 /// ```c
 /// extern SDL_DECLSPEC SDL_Surface * SDLCALL IMG_LoadTIF_IO(SDL_IOStream *src)
@@ -2116,6 +2235,51 @@ Pointer<SdlSurface> imgLoadTifIo(Pointer<SdlIoStream> src) {
         Pointer<SdlSurface> Function(Pointer<SdlIoStream> src)
       >('IMG_LoadTIF_IO');
   return imgLoadTifIoLookupFunction(src);
+}
+
+///
+/// Load a WEBP image directly.
+///
+/// If you know you definitely have a WEBP image, you can call this function,
+/// which will skip SDL_image's file format detection routines. Generally it's
+/// better to use the abstract interfaces; also, there is only an SDL_IOStream
+/// interface available here.
+///
+/// \param src an SDL_IOStream to load image data from.
+/// \returns SDL surface, or NULL on error.
+///
+/// \since This function is available since SDL_image 3.0.0.
+///
+/// \sa IMG_LoadAVIF_IO
+/// \sa IMG_LoadBMP_IO
+/// \sa IMG_LoadCUR_IO
+/// \sa IMG_LoadGIF_IO
+/// \sa IMG_LoadICO_IO
+/// \sa IMG_LoadJPG_IO
+/// \sa IMG_LoadJXL_IO
+/// \sa IMG_LoadLBM_IO
+/// \sa IMG_LoadPCX_IO
+/// \sa IMG_LoadPNG_IO
+/// \sa IMG_LoadPNM_IO
+/// \sa IMG_LoadQOI_IO
+/// \sa IMG_LoadSVG_IO
+/// \sa IMG_LoadTGA_IO
+/// \sa IMG_LoadTIF_IO
+/// \sa IMG_LoadXCF_IO
+/// \sa IMG_LoadXPM_IO
+/// \sa IMG_LoadXV_IO
+///
+/// ```c
+/// extern SDL_DECLSPEC SDL_Surface * SDLCALL IMG_LoadWEBP_IO(SDL_IOStream *src)
+/// ```
+/// {@category image}
+Pointer<SdlSurface> imgLoadWebpIo(Pointer<SdlIoStream> src) {
+  final imgLoadWebpIoLookupFunction = _libImage
+      .lookupFunction<
+        Pointer<SdlSurface> Function(Pointer<SdlIoStream> src),
+        Pointer<SdlSurface> Function(Pointer<SdlIoStream> src)
+      >('IMG_LoadWEBP_IO');
+  return imgLoadWebpIoLookupFunction(src);
 }
 
 ///
@@ -2132,23 +2296,23 @@ Pointer<SdlSurface> imgLoadTifIo(Pointer<SdlIoStream> src) {
 /// \since This function is available since SDL_image 3.0.0.
 ///
 /// \sa IMG_LoadAVIF_IO
-/// \sa IMG_LoadICO_IO
-/// \sa IMG_LoadCUR_IO
 /// \sa IMG_LoadBMP_IO
+/// \sa IMG_LoadCUR_IO
 /// \sa IMG_LoadGIF_IO
+/// \sa IMG_LoadICO_IO
 /// \sa IMG_LoadJPG_IO
 /// \sa IMG_LoadJXL_IO
 /// \sa IMG_LoadLBM_IO
 /// \sa IMG_LoadPCX_IO
 /// \sa IMG_LoadPNG_IO
 /// \sa IMG_LoadPNM_IO
-/// \sa IMG_LoadSVG_IO
 /// \sa IMG_LoadQOI_IO
+/// \sa IMG_LoadSVG_IO
 /// \sa IMG_LoadTGA_IO
 /// \sa IMG_LoadTIF_IO
+/// \sa IMG_LoadWEBP_IO
 /// \sa IMG_LoadXPM_IO
 /// \sa IMG_LoadXV_IO
-/// \sa IMG_LoadWEBP_IO
 ///
 /// ```c
 /// extern SDL_DECLSPEC SDL_Surface * SDLCALL IMG_LoadXCF_IO(SDL_IOStream *src)
@@ -2177,23 +2341,23 @@ Pointer<SdlSurface> imgLoadXcfIo(Pointer<SdlIoStream> src) {
 /// \since This function is available since SDL_image 3.0.0.
 ///
 /// \sa IMG_LoadAVIF_IO
-/// \sa IMG_LoadICO_IO
-/// \sa IMG_LoadCUR_IO
 /// \sa IMG_LoadBMP_IO
+/// \sa IMG_LoadCUR_IO
 /// \sa IMG_LoadGIF_IO
+/// \sa IMG_LoadICO_IO
 /// \sa IMG_LoadJPG_IO
 /// \sa IMG_LoadJXL_IO
 /// \sa IMG_LoadLBM_IO
 /// \sa IMG_LoadPCX_IO
 /// \sa IMG_LoadPNG_IO
 /// \sa IMG_LoadPNM_IO
-/// \sa IMG_LoadSVG_IO
 /// \sa IMG_LoadQOI_IO
+/// \sa IMG_LoadSVG_IO
 /// \sa IMG_LoadTGA_IO
 /// \sa IMG_LoadTIF_IO
+/// \sa IMG_LoadWEBP_IO
 /// \sa IMG_LoadXCF_IO
 /// \sa IMG_LoadXV_IO
-/// \sa IMG_LoadWEBP_IO
 ///
 /// ```c
 /// extern SDL_DECLSPEC SDL_Surface * SDLCALL IMG_LoadXPM_IO(SDL_IOStream *src)
@@ -2222,23 +2386,23 @@ Pointer<SdlSurface> imgLoadXpmIo(Pointer<SdlIoStream> src) {
 /// \since This function is available since SDL_image 3.0.0.
 ///
 /// \sa IMG_LoadAVIF_IO
-/// \sa IMG_LoadICO_IO
-/// \sa IMG_LoadCUR_IO
 /// \sa IMG_LoadBMP_IO
+/// \sa IMG_LoadCUR_IO
 /// \sa IMG_LoadGIF_IO
+/// \sa IMG_LoadICO_IO
 /// \sa IMG_LoadJPG_IO
 /// \sa IMG_LoadJXL_IO
 /// \sa IMG_LoadLBM_IO
 /// \sa IMG_LoadPCX_IO
 /// \sa IMG_LoadPNG_IO
 /// \sa IMG_LoadPNM_IO
-/// \sa IMG_LoadSVG_IO
 /// \sa IMG_LoadQOI_IO
+/// \sa IMG_LoadSVG_IO
 /// \sa IMG_LoadTGA_IO
 /// \sa IMG_LoadTIF_IO
+/// \sa IMG_LoadWEBP_IO
 /// \sa IMG_LoadXCF_IO
 /// \sa IMG_LoadXPM_IO
-/// \sa IMG_LoadWEBP_IO
 ///
 /// ```c
 /// extern SDL_DECLSPEC SDL_Surface * SDLCALL IMG_LoadXV_IO(SDL_IOStream *src)
@@ -2251,95 +2415,6 @@ Pointer<SdlSurface> imgLoadXvIo(Pointer<SdlIoStream> src) {
         Pointer<SdlSurface> Function(Pointer<SdlIoStream> src)
       >('IMG_LoadXV_IO');
   return imgLoadXvIoLookupFunction(src);
-}
-
-///
-/// Load a WEBP image directly.
-///
-/// If you know you definitely have a WEBP image, you can call this function,
-/// which will skip SDL_image's file format detection routines. Generally it's
-/// better to use the abstract interfaces; also, there is only an SDL_IOStream
-/// interface available here.
-///
-/// \param src an SDL_IOStream to load image data from.
-/// \returns SDL surface, or NULL on error.
-///
-/// \since This function is available since SDL_image 3.0.0.
-///
-/// \sa IMG_LoadAVIF_IO
-/// \sa IMG_LoadICO_IO
-/// \sa IMG_LoadCUR_IO
-/// \sa IMG_LoadBMP_IO
-/// \sa IMG_LoadGIF_IO
-/// \sa IMG_LoadJPG_IO
-/// \sa IMG_LoadJXL_IO
-/// \sa IMG_LoadLBM_IO
-/// \sa IMG_LoadPCX_IO
-/// \sa IMG_LoadPNG_IO
-/// \sa IMG_LoadPNM_IO
-/// \sa IMG_LoadSVG_IO
-/// \sa IMG_LoadQOI_IO
-/// \sa IMG_LoadTGA_IO
-/// \sa IMG_LoadTIF_IO
-/// \sa IMG_LoadXCF_IO
-/// \sa IMG_LoadXPM_IO
-/// \sa IMG_LoadXV_IO
-///
-/// ```c
-/// extern SDL_DECLSPEC SDL_Surface * SDLCALL IMG_LoadWEBP_IO(SDL_IOStream *src)
-/// ```
-/// {@category image}
-Pointer<SdlSurface> imgLoadWebpIo(Pointer<SdlIoStream> src) {
-  final imgLoadWebpIoLookupFunction = _libImage
-      .lookupFunction<
-        Pointer<SdlSurface> Function(Pointer<SdlIoStream> src),
-        Pointer<SdlSurface> Function(Pointer<SdlIoStream> src)
-      >('IMG_LoadWEBP_IO');
-  return imgLoadWebpIoLookupFunction(src);
-}
-
-///
-/// Load an SVG image, scaled to a specific size.
-///
-/// Since SVG files are resolution-independent, you specify the size you would
-/// like the output image to be and it will be generated at those dimensions.
-///
-/// Either width or height may be 0 and the image will be auto-sized to
-/// preserve aspect ratio.
-///
-/// When done with the returned surface, the app should dispose of it with a
-/// call to SDL_DestroySurface().
-///
-/// \param src an SDL_IOStream to load SVG data from.
-/// \param width desired width of the generated surface, in pixels.
-/// \param height desired height of the generated surface, in pixels.
-/// \returns a new SDL surface, or NULL on error.
-///
-/// \since This function is available since SDL_image 3.0.0.
-///
-/// ```c
-/// extern SDL_DECLSPEC SDL_Surface * SDLCALL IMG_LoadSizedSVG_IO(SDL_IOStream *src, int width, int height)
-/// ```
-/// {@category image}
-Pointer<SdlSurface> imgLoadSizedSvgIo(
-  Pointer<SdlIoStream> src,
-  int width,
-  int height,
-) {
-  final imgLoadSizedSvgIoLookupFunction = _libImage
-      .lookupFunction<
-        Pointer<SdlSurface> Function(
-          Pointer<SdlIoStream> src,
-          Int32 width,
-          Int32 height,
-        ),
-        Pointer<SdlSurface> Function(
-          Pointer<SdlIoStream> src,
-          int width,
-          int height,
-        )
-      >('IMG_LoadSizedSVG_IO');
-  return imgLoadSizedSvgIoLookupFunction(src, width, height);
 }
 
 ///
@@ -2419,7 +2494,9 @@ Pointer<SdlSurface> imgReadXpmFromArrayToRgb888(Pointer<Pointer<Int8>> xpm) {
 /// \sa IMG_SaveTyped_IO
 /// \sa IMG_SaveAVIF
 /// \sa IMG_SaveBMP
+/// \sa IMG_SaveCUR
 /// \sa IMG_SaveGIF
+/// \sa IMG_SaveICO
 /// \sa IMG_SaveJPG
 /// \sa IMG_SavePNG
 /// \sa IMG_SaveTGA
@@ -2465,7 +2542,9 @@ bool imgSave(Pointer<SdlSurface> surface, String? file) {
 /// \sa IMG_Save
 /// \sa IMG_SaveAVIF_IO
 /// \sa IMG_SaveBMP_IO
+/// \sa IMG_SaveCUR_IO
 /// \sa IMG_SaveGIF_IO
+/// \sa IMG_SaveICO_IO
 /// \sa IMG_SaveJPG_IO
 /// \sa IMG_SavePNG_IO
 /// \sa IMG_SaveTGA_IO
@@ -2612,12 +2691,6 @@ bool imgSaveAvifIo(
 /// \since This function is available since SDL_image 3.4.0.
 ///
 /// \sa IMG_SaveBMP_IO
-/// \sa IMG_SaveAVIF
-/// \sa IMG_SaveGIF
-/// \sa IMG_SaveJPG
-/// \sa IMG_SavePNG
-/// \sa IMG_SaveTGA
-/// \sa IMG_SaveWEBP
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL IMG_SaveBMP(SDL_Surface *surface, const char *file)
@@ -2653,12 +2726,6 @@ bool imgSaveBmp(Pointer<SdlSurface> surface, String? file) {
 /// \since This function is available since SDL_image 3.4.0.
 ///
 /// \sa IMG_SaveBMP
-/// \sa IMG_SaveAVIF_IO
-/// \sa IMG_SaveGIF_IO
-/// \sa IMG_SaveJPG_IO
-/// \sa IMG_SavePNG_IO
-/// \sa IMG_SaveTGA_IO
-/// \sa IMG_SaveWEBP_IO
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL IMG_SaveBMP_IO(SDL_Surface *surface, SDL_IOStream *dst, bool closeio)
@@ -2683,6 +2750,80 @@ bool imgSaveBmpIo(
         )
       >('IMG_SaveBMP_IO');
   return imgSaveBmpIoLookupFunction(surface, dst, closeio ? 1 : 0) == 1;
+}
+
+///
+/// Save an SDL_Surface into a CUR image file.
+///
+/// If the file already exists, it will be overwritten.
+///
+/// \param surface the SDL surface to save.
+/// \param file path on the filesystem to write new file to.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \since This function is available since SDL_image 3.4.0.
+///
+/// \sa IMG_SaveCUR_IO
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL IMG_SaveCUR(SDL_Surface *surface, const char *file)
+/// ```
+/// {@category image}
+bool imgSaveCur(Pointer<SdlSurface> surface, String? file) {
+  final imgSaveCurLookupFunction = _libImage
+      .lookupFunction<
+        Uint8 Function(Pointer<SdlSurface> surface, Pointer<Utf8> file),
+        int Function(Pointer<SdlSurface> surface, Pointer<Utf8> file)
+      >('IMG_SaveCUR');
+  final filePointer = file != null ? file.toNativeUtf8() : nullptr;
+  final result = imgSaveCurLookupFunction(surface, filePointer) == 1;
+  calloc.free(filePointer);
+  return result;
+}
+
+///
+/// Save an SDL_Surface into CUR image data, via an SDL_IOStream.
+///
+/// If you just want to save to a filename, you can use IMG_SaveCUR() instead.
+///
+/// If `closeio` is true, `dst` will be closed before returning, whether this
+/// function succeeds or not.
+///
+/// \param surface the SDL surface to save.
+/// \param dst the SDL_IOStream to save the image data to.
+/// \param closeio true to close/free the SDL_IOStream before returning, false
+/// to leave it open.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \since This function is available since SDL_image 3.4.0.
+///
+/// \sa IMG_SaveCUR
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL IMG_SaveCUR_IO(SDL_Surface *surface, SDL_IOStream *dst, bool closeio)
+/// ```
+/// {@category image}
+bool imgSaveCurIo(
+  Pointer<SdlSurface> surface,
+  Pointer<SdlIoStream> dst,
+  bool closeio,
+) {
+  final imgSaveCurIoLookupFunction = _libImage
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<SdlSurface> surface,
+          Pointer<SdlIoStream> dst,
+          Uint8 closeio,
+        ),
+        int Function(
+          Pointer<SdlSurface> surface,
+          Pointer<SdlIoStream> dst,
+          int closeio,
+        )
+      >('IMG_SaveCUR_IO');
+  return imgSaveCurIoLookupFunction(surface, dst, closeio ? 1 : 0) == 1;
 }
 
 ///
@@ -2757,6 +2898,80 @@ bool imgSaveGifIo(
         )
       >('IMG_SaveGIF_IO');
   return imgSaveGifIoLookupFunction(surface, dst, closeio ? 1 : 0) == 1;
+}
+
+///
+/// Save an SDL_Surface into a ICO image file.
+///
+/// If the file already exists, it will be overwritten.
+///
+/// \param surface the SDL surface to save.
+/// \param file path on the filesystem to write new file to.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \since This function is available since SDL_image 3.4.0.
+///
+/// \sa IMG_SaveICO_IO
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL IMG_SaveICO(SDL_Surface *surface, const char *file)
+/// ```
+/// {@category image}
+bool imgSaveIco(Pointer<SdlSurface> surface, String? file) {
+  final imgSaveIcoLookupFunction = _libImage
+      .lookupFunction<
+        Uint8 Function(Pointer<SdlSurface> surface, Pointer<Utf8> file),
+        int Function(Pointer<SdlSurface> surface, Pointer<Utf8> file)
+      >('IMG_SaveICO');
+  final filePointer = file != null ? file.toNativeUtf8() : nullptr;
+  final result = imgSaveIcoLookupFunction(surface, filePointer) == 1;
+  calloc.free(filePointer);
+  return result;
+}
+
+///
+/// Save an SDL_Surface into ICO image data, via an SDL_IOStream.
+///
+/// If you just want to save to a filename, you can use IMG_SaveICO() instead.
+///
+/// If `closeio` is true, `dst` will be closed before returning, whether this
+/// function succeeds or not.
+///
+/// \param surface the SDL surface to save.
+/// \param dst the SDL_IOStream to save the image data to.
+/// \param closeio true to close/free the SDL_IOStream before returning, false
+/// to leave it open.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \since This function is available since SDL_image 3.4.0.
+///
+/// \sa IMG_SaveICO
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL IMG_SaveICO_IO(SDL_Surface *surface, SDL_IOStream *dst, bool closeio)
+/// ```
+/// {@category image}
+bool imgSaveIcoIo(
+  Pointer<SdlSurface> surface,
+  Pointer<SdlIoStream> dst,
+  bool closeio,
+) {
+  final imgSaveIcoIoLookupFunction = _libImage
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<SdlSurface> surface,
+          Pointer<SdlIoStream> dst,
+          Uint8 closeio,
+        ),
+        int Function(
+          Pointer<SdlSurface> surface,
+          Pointer<SdlIoStream> dst,
+          int closeio,
+        )
+      >('IMG_SaveICO_IO');
+  return imgSaveIcoIoLookupFunction(surface, dst, closeio ? 1 : 0) == 1;
 }
 
 ///
@@ -3102,8 +3317,10 @@ bool imgSaveWebpIo(
 ///
 /// \since This function is available since SDL_image 3.0.0.
 ///
+/// \sa IMG_CreateAnimatedCursor
 /// \sa IMG_LoadAnimation_IO
 /// \sa IMG_LoadAnimationTyped_IO
+/// \sa IMG_LoadANIAnimation_IO
 /// \sa IMG_LoadAPNGAnimation_IO
 /// \sa IMG_LoadAVIFAnimation_IO
 /// \sa IMG_LoadGIFAnimation_IO
@@ -3143,8 +3360,10 @@ Pointer<ImgAnimation> imgLoadAnimation(String? file) {
 ///
 /// \since This function is available since SDL_image 3.0.0.
 ///
+/// \sa IMG_CreateAnimatedCursor
 /// \sa IMG_LoadAnimation
 /// \sa IMG_LoadAnimationTyped_IO
+/// \sa IMG_LoadANIAnimation_IO
 /// \sa IMG_LoadAPNGAnimation_IO
 /// \sa IMG_LoadAVIFAnimation_IO
 /// \sa IMG_LoadGIFAnimation_IO
@@ -3168,7 +3387,7 @@ Pointer<ImgAnimation> imgLoadAnimationIo(
 }
 
 ///
-/// Load an animation from an SDL datasource
+/// Load an animation from an SDL_IOStream.
 ///
 /// Even though this function accepts a file type, SDL_image may still try
 /// other decoders that are capable of detecting file type from the contents of
@@ -3191,8 +3410,10 @@ Pointer<ImgAnimation> imgLoadAnimationIo(
 ///
 /// \since This function is available since SDL_image 3.0.0.
 ///
+/// \sa IMG_CreateAnimatedCursor
 /// \sa IMG_LoadAnimation
 /// \sa IMG_LoadAnimation_IO
+/// \sa IMG_LoadANIAnimation_IO
 /// \sa IMG_LoadAPNGAnimation_IO
 /// \sa IMG_LoadAVIFAnimation_IO
 /// \sa IMG_LoadGIFAnimation_IO
@@ -3232,14 +3453,22 @@ Pointer<ImgAnimation> imgLoadAnimationTypedIo(
 }
 
 ///
-/// Dispose of an IMG_Animation and free its resources.
+/// Load an ANI animation directly from an SDL_IOStream.
 ///
-/// The provided `anim` pointer is not valid once this call returns.
+/// If you know you definitely have an ANI image, you can call this function,
+/// which will skip SDL_image's file format detection routines. Generally, it's
+/// better to use the abstract interfaces; also, there is only an SDL_IOStream
+/// interface available here.
 ///
-/// \param anim IMG_Animation to dispose of.
+/// When done with the returned animation, the app should dispose of it with a
+/// call to IMG_FreeAnimation().
 ///
-/// \since This function is available since SDL_image 3.0.0.
+/// \param src an SDL_IOStream from which data will be read.
+/// \returns a new IMG_Animation, or NULL on error.
 ///
+/// \since This function is available since SDL_image 3.4.0.
+///
+/// \sa IMG_isANI
 /// \sa IMG_LoadAnimation
 /// \sa IMG_LoadAnimation_IO
 /// \sa IMG_LoadAnimationTyped_IO
@@ -3247,18 +3476,19 @@ Pointer<ImgAnimation> imgLoadAnimationTypedIo(
 /// \sa IMG_LoadAVIFAnimation_IO
 /// \sa IMG_LoadGIFAnimation_IO
 /// \sa IMG_LoadWEBPAnimation_IO
+/// \sa IMG_FreeAnimation
 ///
 /// ```c
-/// extern SDL_DECLSPEC void SDLCALL IMG_FreeAnimation(IMG_Animation *anim)
+/// extern SDL_DECLSPEC IMG_Animation *SDLCALL IMG_LoadANIAnimation_IO(SDL_IOStream *src)
 /// ```
 /// {@category image}
-void imgFreeAnimation(Pointer<ImgAnimation> anim) {
-  final imgFreeAnimationLookupFunction = _libImage
+Pointer<ImgAnimation> imgLoadAniAnimationIo(Pointer<SdlIoStream> src) {
+  final imgLoadAniAnimationIoLookupFunction = _libImage
       .lookupFunction<
-        Void Function(Pointer<ImgAnimation> anim),
-        void Function(Pointer<ImgAnimation> anim)
-      >('IMG_FreeAnimation');
-  return imgFreeAnimationLookupFunction(anim);
+        Pointer<ImgAnimation> Function(Pointer<SdlIoStream> src),
+        Pointer<ImgAnimation> Function(Pointer<SdlIoStream> src)
+      >('IMG_LoadANIAnimation_IO');
+  return imgLoadAniAnimationIoLookupFunction(src);
 }
 
 ///
@@ -3277,9 +3507,11 @@ void imgFreeAnimation(Pointer<ImgAnimation> anim) {
 ///
 /// \since This function is available since SDL_image 3.4.0.
 ///
+/// \sa IMG_isPNG
 /// \sa IMG_LoadAnimation
 /// \sa IMG_LoadAnimation_IO
 /// \sa IMG_LoadAnimationTyped_IO
+/// \sa IMG_LoadANIAnimation_IO
 /// \sa IMG_LoadAVIFAnimation_IO
 /// \sa IMG_LoadGIFAnimation_IO
 /// \sa IMG_LoadWEBPAnimation_IO
@@ -3314,9 +3546,11 @@ Pointer<ImgAnimation> imgLoadApngAnimationIo(Pointer<SdlIoStream> src) {
 ///
 /// \since This function is available since SDL_image 3.4.0.
 ///
+/// \sa IMG_isAVIF
 /// \sa IMG_LoadAnimation
 /// \sa IMG_LoadAnimation_IO
 /// \sa IMG_LoadAnimationTyped_IO
+/// \sa IMG_LoadANIAnimation_IO
 /// \sa IMG_LoadAPNGAnimation_IO
 /// \sa IMG_LoadGIFAnimation_IO
 /// \sa IMG_LoadWEBPAnimation_IO
@@ -3348,9 +3582,11 @@ Pointer<ImgAnimation> imgLoadAvifAnimationIo(Pointer<SdlIoStream> src) {
 ///
 /// \since This function is available since SDL_image 3.0.0.
 ///
+/// \sa IMG_isGIF
 /// \sa IMG_LoadAnimation
 /// \sa IMG_LoadAnimation_IO
 /// \sa IMG_LoadAnimationTyped_IO
+/// \sa IMG_LoadANIAnimation_IO
 /// \sa IMG_LoadAPNGAnimation_IO
 /// \sa IMG_LoadAVIFAnimation_IO
 /// \sa IMG_LoadWEBPAnimation_IO
@@ -3382,9 +3618,11 @@ Pointer<ImgAnimation> imgLoadGifAnimationIo(Pointer<SdlIoStream> src) {
 ///
 /// \since This function is available since SDL_image 3.0.0.
 ///
+/// \sa IMG_isWEBP
 /// \sa IMG_LoadAnimation
 /// \sa IMG_LoadAnimation_IO
 /// \sa IMG_LoadAnimationTyped_IO
+/// \sa IMG_LoadANIAnimation_IO
 /// \sa IMG_LoadAPNGAnimation_IO
 /// \sa IMG_LoadAVIFAnimation_IO
 /// \sa IMG_LoadGIFAnimation_IO
@@ -3404,7 +3642,446 @@ Pointer<ImgAnimation> imgLoadWebpAnimationIo(Pointer<SdlIoStream> src) {
 }
 
 ///
+/// Save an animation to a file.
+///
+/// For formats that accept a quality, a default quality of 90 will be used.
+///
+/// \param anim the animation to save.
+/// \param file path on the filesystem containing an animated image.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \since This function is available since SDL_image 3.4.0.
+///
+/// \sa IMG_SaveAnimationTyped_IO
+/// \sa IMG_SaveANIAnimation_IO
+/// \sa IMG_SaveAPNGAnimation_IO
+/// \sa IMG_SaveAVIFAnimation_IO
+/// \sa IMG_SaveGIFAnimation_IO
+/// \sa IMG_SaveWEBPAnimation_IO
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL IMG_SaveAnimation(IMG_Animation *anim, const char *file)
+/// ```
+/// {@category image}
+bool imgSaveAnimation(Pointer<ImgAnimation> anim, String? file) {
+  final imgSaveAnimationLookupFunction = _libImage
+      .lookupFunction<
+        Uint8 Function(Pointer<ImgAnimation> anim, Pointer<Utf8> file),
+        int Function(Pointer<ImgAnimation> anim, Pointer<Utf8> file)
+      >('IMG_SaveAnimation');
+  final filePointer = file != null ? file.toNativeUtf8() : nullptr;
+  final result = imgSaveAnimationLookupFunction(anim, filePointer) == 1;
+  calloc.free(filePointer);
+  return result;
+}
+
+///
+/// Save an animation to an SDL_IOStream.
+///
+/// If you just want to save to a filename, you can use IMG_SaveAnimation()
+/// instead.
+///
+/// If `closeio` is true, `dst` will be closed before returning, whether this
+/// function succeeds or not.
+///
+/// For formats that accept a quality, a default quality of 90 will be used.
+///
+/// \param anim the animation to save.
+/// \param dst an SDL_IOStream that data will be written to.
+/// \param closeio true to close/free the SDL_IOStream before returning, false
+/// to leave it open.
+/// \param type a filename extension that represent this data ("GIF", etc).
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \since This function is available since SDL_image 3.4.0.
+///
+/// \sa IMG_SaveAnimation
+/// \sa IMG_SaveANIAnimation_IO
+/// \sa IMG_SaveAPNGAnimation_IO
+/// \sa IMG_SaveAVIFAnimation_IO
+/// \sa IMG_SaveGIFAnimation_IO
+/// \sa IMG_SaveWEBPAnimation_IO
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL IMG_SaveAnimationTyped_IO(IMG_Animation *anim, SDL_IOStream *dst, bool closeio, const char *type)
+/// ```
+/// {@category image}
+bool imgSaveAnimationTypedIo(
+  Pointer<ImgAnimation> anim,
+  Pointer<SdlIoStream> dst,
+  bool closeio,
+  String? type,
+) {
+  final imgSaveAnimationTypedIoLookupFunction = _libImage
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<ImgAnimation> anim,
+          Pointer<SdlIoStream> dst,
+          Uint8 closeio,
+          Pointer<Utf8> type,
+        ),
+        int Function(
+          Pointer<ImgAnimation> anim,
+          Pointer<SdlIoStream> dst,
+          int closeio,
+          Pointer<Utf8> type,
+        )
+      >('IMG_SaveAnimationTyped_IO');
+  final typePointer = type != null ? type.toNativeUtf8() : nullptr;
+  final result =
+      imgSaveAnimationTypedIoLookupFunction(
+        anim,
+        dst,
+        closeio ? 1 : 0,
+        typePointer,
+      ) ==
+      1;
+  calloc.free(typePointer);
+  return result;
+}
+
+///
+/// Save an animation in ANI format to an SDL_IOStream.
+///
+/// If `closeio` is true, `dst` will be closed before returning, whether this
+/// function succeeds or not.
+///
+/// \param anim the animation to save.
+/// \param dst an SDL_IOStream from which data will be written to.
+/// \param closeio true to close/free the SDL_IOStream before returning, false
+/// to leave it open.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \since This function is available since SDL_image 3.4.0.
+///
+/// \sa IMG_SaveAnimation
+/// \sa IMG_SaveAnimationTyped_IO
+/// \sa IMG_SaveAPNGAnimation_IO
+/// \sa IMG_SaveAVIFAnimation_IO
+/// \sa IMG_SaveGIFAnimation_IO
+/// \sa IMG_SaveWEBPAnimation_IO
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL IMG_SaveANIAnimation_IO(IMG_Animation *anim, SDL_IOStream *dst, bool closeio)
+/// ```
+/// {@category image}
+bool imgSaveAniAnimationIo(
+  Pointer<ImgAnimation> anim,
+  Pointer<SdlIoStream> dst,
+  bool closeio,
+) {
+  final imgSaveAniAnimationIoLookupFunction = _libImage
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<ImgAnimation> anim,
+          Pointer<SdlIoStream> dst,
+          Uint8 closeio,
+        ),
+        int Function(
+          Pointer<ImgAnimation> anim,
+          Pointer<SdlIoStream> dst,
+          int closeio,
+        )
+      >('IMG_SaveANIAnimation_IO');
+  return imgSaveAniAnimationIoLookupFunction(anim, dst, closeio ? 1 : 0) == 1;
+}
+
+///
+/// Save an animation in APNG format to an SDL_IOStream.
+///
+/// If `closeio` is true, `dst` will be closed before returning, whether this
+/// function succeeds or not.
+///
+/// \param anim the animation to save.
+/// \param dst an SDL_IOStream from which data will be written to.
+/// \param closeio true to close/free the SDL_IOStream before returning, false
+/// to leave it open.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \since This function is available since SDL_image 3.4.0.
+///
+/// \sa IMG_SaveAnimation
+/// \sa IMG_SaveAnimationTyped_IO
+/// \sa IMG_SaveANIAnimation_IO
+/// \sa IMG_SaveAVIFAnimation_IO
+/// \sa IMG_SaveGIFAnimation_IO
+/// \sa IMG_SaveWEBPAnimation_IO
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL IMG_SaveAPNGAnimation_IO(IMG_Animation *anim, SDL_IOStream *dst, bool closeio)
+/// ```
+/// {@category image}
+bool imgSaveApngAnimationIo(
+  Pointer<ImgAnimation> anim,
+  Pointer<SdlIoStream> dst,
+  bool closeio,
+) {
+  final imgSaveApngAnimationIoLookupFunction = _libImage
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<ImgAnimation> anim,
+          Pointer<SdlIoStream> dst,
+          Uint8 closeio,
+        ),
+        int Function(
+          Pointer<ImgAnimation> anim,
+          Pointer<SdlIoStream> dst,
+          int closeio,
+        )
+      >('IMG_SaveAPNGAnimation_IO');
+  return imgSaveApngAnimationIoLookupFunction(anim, dst, closeio ? 1 : 0) == 1;
+}
+
+///
+/// Save an animation in AVIF format to an SDL_IOStream.
+///
+/// If `closeio` is true, `dst` will be closed before returning, whether this
+/// function succeeds or not.
+///
+/// \param anim the animation to save.
+/// \param dst an SDL_IOStream from which data will be written to.
+/// \param closeio true to close/free the SDL_IOStream before returning, false
+/// to leave it open.
+/// \param quality the desired quality, ranging between 0 (lowest) and 100
+/// (highest).
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \since This function is available since SDL_image 3.4.0.
+///
+/// \sa IMG_SaveAnimation
+/// \sa IMG_SaveAnimationTyped_IO
+/// \sa IMG_SaveANIAnimation_IO
+/// \sa IMG_SaveAPNGAnimation_IO
+/// \sa IMG_SaveGIFAnimation_IO
+/// \sa IMG_SaveWEBPAnimation_IO
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL IMG_SaveAVIFAnimation_IO(IMG_Animation *anim, SDL_IOStream *dst, bool closeio, int quality)
+/// ```
+/// {@category image}
+bool imgSaveAvifAnimationIo(
+  Pointer<ImgAnimation> anim,
+  Pointer<SdlIoStream> dst,
+  bool closeio,
+  int quality,
+) {
+  final imgSaveAvifAnimationIoLookupFunction = _libImage
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<ImgAnimation> anim,
+          Pointer<SdlIoStream> dst,
+          Uint8 closeio,
+          Int32 quality,
+        ),
+        int Function(
+          Pointer<ImgAnimation> anim,
+          Pointer<SdlIoStream> dst,
+          int closeio,
+          int quality,
+        )
+      >('IMG_SaveAVIFAnimation_IO');
+  return imgSaveAvifAnimationIoLookupFunction(
+        anim,
+        dst,
+        closeio ? 1 : 0,
+        quality,
+      ) ==
+      1;
+}
+
+///
+/// Save an animation in GIF format to an SDL_IOStream.
+///
+/// If `closeio` is true, `dst` will be closed before returning, whether this
+/// function succeeds or not.
+///
+/// \param anim the animation to save.
+/// \param dst an SDL_IOStream from which data will be written to.
+/// \param closeio true to close/free the SDL_IOStream before returning, false
+/// to leave it open.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \since This function is available since SDL_image 3.4.0.
+///
+/// \sa IMG_SaveAnimation
+/// \sa IMG_SaveAnimationTyped_IO
+/// \sa IMG_SaveANIAnimation_IO
+/// \sa IMG_SaveAPNGAnimation_IO
+/// \sa IMG_SaveAVIFAnimation_IO
+/// \sa IMG_SaveWEBPAnimation_IO
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL IMG_SaveGIFAnimation_IO(IMG_Animation *anim, SDL_IOStream *dst, bool closeio)
+/// ```
+/// {@category image}
+bool imgSaveGifAnimationIo(
+  Pointer<ImgAnimation> anim,
+  Pointer<SdlIoStream> dst,
+  bool closeio,
+) {
+  final imgSaveGifAnimationIoLookupFunction = _libImage
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<ImgAnimation> anim,
+          Pointer<SdlIoStream> dst,
+          Uint8 closeio,
+        ),
+        int Function(
+          Pointer<ImgAnimation> anim,
+          Pointer<SdlIoStream> dst,
+          int closeio,
+        )
+      >('IMG_SaveGIFAnimation_IO');
+  return imgSaveGifAnimationIoLookupFunction(anim, dst, closeio ? 1 : 0) == 1;
+}
+
+///
+/// Save an animation in WEBP format to an SDL_IOStream.
+///
+/// If `closeio` is true, `dst` will be closed before returning, whether this
+/// function succeeds or not.
+///
+/// \param anim the animation to save.
+/// \param dst an SDL_IOStream from which data will be written to.
+/// \param closeio true to close/free the SDL_IOStream before returning, false
+/// to leave it open.
+/// \param quality between 0 and 100. For lossy, 0 gives the smallest size and
+/// 100 the largest. For lossless, this parameter is the amount
+/// of effort put into the compression: 0 is the fastest but
+/// gives larger files compared to the slowest, but best, 100.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \since This function is available since SDL_image 3.4.0.
+///
+/// \sa IMG_SaveAnimation
+/// \sa IMG_SaveAnimationTyped_IO
+/// \sa IMG_SaveANIAnimation_IO
+/// \sa IMG_SaveAPNGAnimation_IO
+/// \sa IMG_SaveAVIFAnimation_IO
+/// \sa IMG_SaveGIFAnimation_IO
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL IMG_SaveWEBPAnimation_IO(IMG_Animation *anim, SDL_IOStream *dst, bool closeio, int quality)
+/// ```
+/// {@category image}
+bool imgSaveWebpAnimationIo(
+  Pointer<ImgAnimation> anim,
+  Pointer<SdlIoStream> dst,
+  bool closeio,
+  int quality,
+) {
+  final imgSaveWebpAnimationIoLookupFunction = _libImage
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<ImgAnimation> anim,
+          Pointer<SdlIoStream> dst,
+          Uint8 closeio,
+          Int32 quality,
+        ),
+        int Function(
+          Pointer<ImgAnimation> anim,
+          Pointer<SdlIoStream> dst,
+          int closeio,
+          int quality,
+        )
+      >('IMG_SaveWEBPAnimation_IO');
+  return imgSaveWebpAnimationIoLookupFunction(
+        anim,
+        dst,
+        closeio ? 1 : 0,
+        quality,
+      ) ==
+      1;
+}
+
+///
+/// Create an animated cursor from an animation.
+///
+/// \param anim an animation to use to create an animated cursor.
+/// \param hot_x the x position of the cursor hot spot.
+/// \param hot_y the y position of the cursor hot spot.
+/// \returns the new cursor on success or NULL on failure; call SDL_GetError()
+/// for more information.
+///
+/// \since This function is available since SDL_image 3.4.0.
+///
+/// \sa IMG_LoadAnimation
+/// \sa IMG_LoadAnimation_IO
+/// \sa IMG_LoadAnimationTyped_IO
+///
+/// ```c
+/// extern SDL_DECLSPEC SDL_Cursor * SDLCALL IMG_CreateAnimatedCursor(IMG_Animation *anim, int hot_x, int hot_y)
+/// ```
+/// {@category image}
+Pointer<SdlCursor> imgCreateAnimatedCursor(
+  Pointer<ImgAnimation> anim,
+  int hotX,
+  int hotY,
+) {
+  final imgCreateAnimatedCursorLookupFunction = _libImage
+      .lookupFunction<
+        Pointer<SdlCursor> Function(
+          Pointer<ImgAnimation> anim,
+          Int32 hotX,
+          Int32 hotY,
+        ),
+        Pointer<SdlCursor> Function(
+          Pointer<ImgAnimation> anim,
+          int hotX,
+          int hotY,
+        )
+      >('IMG_CreateAnimatedCursor');
+  return imgCreateAnimatedCursorLookupFunction(anim, hotX, hotY);
+}
+
+///
+/// Dispose of an IMG_Animation and free its resources.
+///
+/// The provided `anim` pointer is not valid once this call returns.
+///
+/// \param anim IMG_Animation to dispose of.
+///
+/// \since This function is available since SDL_image 3.0.0.
+///
+/// \sa IMG_LoadAnimation
+/// \sa IMG_LoadAnimation_IO
+/// \sa IMG_LoadAnimationTyped_IO
+/// \sa IMG_LoadANIAnimation_IO
+/// \sa IMG_LoadAPNGAnimation_IO
+/// \sa IMG_LoadAVIFAnimation_IO
+/// \sa IMG_LoadGIFAnimation_IO
+/// \sa IMG_LoadWEBPAnimation_IO
+///
+/// ```c
+/// extern SDL_DECLSPEC void SDLCALL IMG_FreeAnimation(IMG_Animation *anim)
+/// ```
+/// {@category image}
+void imgFreeAnimation(Pointer<ImgAnimation> anim) {
+  final imgFreeAnimationLookupFunction = _libImage
+      .lookupFunction<
+        Void Function(Pointer<ImgAnimation> anim),
+        void Function(Pointer<ImgAnimation> anim)
+      >('IMG_FreeAnimation');
+  return imgFreeAnimationLookupFunction(anim);
+}
+
+///
 /// Create an encoder to save a series of images to a file.
+///
+/// These animation types are currently supported:
+///
+/// - ANI
+/// - APNG
+/// - AVIFS
+/// - GIF
+/// - WEBP
 ///
 /// The file type is determined from the file extension, e.g. "file.webp" will
 /// be encoded using WEBP.
@@ -3438,6 +4115,14 @@ Pointer<ImgAnimationEncoder> imgCreateAnimationEncoder(String? file) {
 
 ///
 /// Create an encoder to save a series of images to an IOStream.
+///
+/// These animation types are currently supported:
+///
+/// - ANI
+/// - APNG
+/// - AVIFS
+/// - GIF
+/// - WEBP
 ///
 /// If `closeio` is true, `dst` will be closed before returning if this
 /// function fails, or when the animation encoder is closed if this function
@@ -3491,6 +4176,14 @@ Pointer<ImgAnimationEncoder> imgCreateAnimationEncoderIo(
 
 ///
 /// Create an animation encoder with the specified properties.
+///
+/// These animation types are currently supported:
+///
+/// - ANI
+/// - APNG
+/// - AVIFS
+/// - GIF
+/// - WEBP
 ///
 /// These are the supported properties:
 ///
@@ -3625,6 +4318,14 @@ bool imgCloseAnimationEncoder(Pointer<ImgAnimationEncoder> encoder) {
 ///
 /// Create a decoder to read a series of images from a file.
 ///
+/// These animation types are currently supported:
+///
+/// - ANI
+/// - APNG
+/// - AVIFS
+/// - GIF
+/// - WEBP
+///
 /// The file type is determined from the file extension, e.g. "file.webp" will
 /// be decoded using WEBP.
 ///
@@ -3658,6 +4359,14 @@ Pointer<ImgAnimationDecoder> imgCreateAnimationDecoder(String? file) {
 
 ///
 /// Create a decoder to read a series of images from an IOStream.
+///
+/// These animation types are currently supported:
+///
+/// - ANI
+/// - APNG
+/// - AVIFS
+/// - GIF
+/// - WEBP
 ///
 /// If `closeio` is true, `src` will be closed before returning if this
 /// function fails, or when the animation decoder is closed if this function
@@ -3712,6 +4421,14 @@ Pointer<ImgAnimationDecoder> imgCreateAnimationDecoderIo(
 
 ///
 /// Create an animation decoder with the specified properties.
+///
+/// These animation types are currently supported:
+///
+/// - ANI
+/// - APNG
+/// - AVIFS
+/// - GIF
+/// - WEBP
 ///
 /// These are the supported properties:
 ///
