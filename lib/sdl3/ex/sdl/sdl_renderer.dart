@@ -719,8 +719,8 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   ///
   /// \param renderer the rendering context.
   /// \param event the event to modify.
-  /// \returns true on success or false on failure; call SDL_GetError() for more
-  /// information.
+  /// \returns true if the event is converted or doesn't need conversion, or
+  /// false on failure; call SDL_GetError() for more information.
   ///
   /// \threadsafety This function should only be called on the main thread.
   ///

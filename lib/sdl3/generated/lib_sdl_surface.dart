@@ -710,6 +710,10 @@ bool sdlSaveBmp(Pointer<SdlSurface> surface, String? file) {
 ///
 /// Load a PNG image from a seekable SDL data stream.
 ///
+/// This is intended as a convenience function for loading images from trusted
+/// sources. If you want to load arbitrary images you should use libpng or
+/// another image loading library designed with security in mind.
+///
 /// The new surface should be freed with SDL_DestroySurface(). Not doing so
 /// will result in a memory leak.
 ///
@@ -742,6 +746,10 @@ Pointer<SdlSurface> sdlLoadPngIo(Pointer<SdlIoStream> src, bool closeio) {
 
 ///
 /// Load a PNG image from a file.
+///
+/// This is intended as a convenience function for loading images from trusted
+/// sources. If you want to load arbitrary images you should use libpng or
+/// another image loading library designed with security in mind.
 ///
 /// The new surface should be freed with SDL_DestroySurface(). Not doing so
 /// will result in a memory leak.

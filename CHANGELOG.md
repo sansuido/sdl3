@@ -1,3 +1,6 @@
+## 2.4.3
+- SDL3-2025-11-02
+
 ## 2.4.2
 - SDL3-2025-10-26
 - [add] Add image functions(imgSaveCurIo, imgSaveAnimation and more).
