@@ -1815,8 +1815,8 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```
   /// {@category render}
   bool geometry(
-    Pointer<SdlVertex> vertices,
     Pointer<SdlTexture> texture,
+    Pointer<SdlVertex> vertices,
     int numVertices,
     Pointer<Int32> indices,
     int numIndices,
