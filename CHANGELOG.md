@@ -1,3 +1,8 @@
+## 2.4.5
+- SDL3-2025-11-16
+- [add] Added sdlLoadSurfaceIo and SdlGpuVulkanOptions.
+- [update] Dart 3.10.0
+
 ## 2.4.4
 - SDL3-2025-11-10
 - [add] Added example (example/geometry_triangle.dart)

@@ -2488,6 +2488,37 @@ final class SdlGpuStorageTextureReadWriteBinding extends Struct {
   external int blank_1;
 }
 
+// SDL_GPUVulkanOptions
+/// {@category gpu}
+final class SdlGpuVulkanOptions extends Struct {
+  // [0]+(4)
+  @Uint32()
+  external int vulkanApiVersion;
+  // [] +(4)
+  @Uint32()
+  external int blank_1;
+  // [8]+(8)
+  external Pointer<NativeType> featureList;
+  // [16]+(8)
+  external Pointer<NativeType> vulkan10PhysicalDeviceFeatures;
+  // [24]+(4)
+  @Uint32()
+  external int deviceExtensionCount;
+  // [] +(4)
+  @Uint32()
+  external int blank_2;
+  // [32]+(8)
+  external Pointer<Pointer<Int8>> deviceExtensionNames;
+  // [40]+(4)
+  @Uint32()
+  external int instanceExtensionCount;
+  // [] +(4)
+  @Uint32()
+  external int blank_3;
+  // [48]+(8)
+  external Pointer<Pointer<Int8>> instanceExtensionNames;
+}
+
 // SDL_GUID
 /// {@category guid}
 final class SdlGuid extends Struct {

@@ -660,6 +660,10 @@ const SDL_PROP_GPU_DEVICE_CREATE_D3D12_ALLOW_FEWER_RESOURCE_SLOTS_BOOLEAN =
     'SDL.gpu.device.create.d3d12.allowtier1resourcebinding';
 const SDL_PROP_GPU_DEVICE_CREATE_D3D12_SEMANTIC_NAME_STRING =
     'SDL.gpu.device.create.d3d12.semantic';
+const SDL_PROP_GPU_DEVICE_CREATE_VULKAN_REQUIRE_HARDWARE_ACCELERATION_BOOLEAN =
+    'SDL.gpu.device.create.vulkan.requirehardwareacceleration';
+const SDL_PROP_GPU_DEVICE_CREATE_VULKAN_OPTIONS_POINTER =
+    'SDL.gpu.device.create.vulkan.options';
 const SDL_PROP_GPU_DEVICE_NAME_STRING = 'SDL.gpu.device.name';
 const SDL_PROP_GPU_DEVICE_DRIVER_NAME_STRING = 'SDL.gpu.device.driver_name';
 const SDL_PROP_GPU_DEVICE_DRIVER_VERSION_STRING =
@@ -2054,7 +2058,7 @@ const SDL_RENDERER_VSYNC_ADAPTIVE = -1;
 const SDL_DEBUG_TEXT_FONT_CHARACTER_SIZE = 8;
 //const SDL_revision_h_ = ;
 const SDL_REVISION =
-    'SDL-3.3.3-preview-3.3.2-148-gf3d39815e (" SDL_VENDOR_INFO ")';
+    'SDL-3.3.3-preview-3.3.2-229-g770b38b4f (" SDL_VENDOR_INFO ")';
 //const SDL_scancode_h_ = ;
 const SDL_SCANCODE_UNKNOWN = 0;
 const SDL_SCANCODE_A = 4;
@@ -3500,6 +3504,10 @@ class SdlkPropGpu {
       SDL_PROP_GPU_DEVICE_CREATE_D3D12_ALLOW_FEWER_RESOURCE_SLOTS_BOOLEAN;
   static const deviceCreateD3D12SemanticNameString =
       SDL_PROP_GPU_DEVICE_CREATE_D3D12_SEMANTIC_NAME_STRING;
+  static const deviceCreateVulkanRequireHardwareAccelerationBoolean =
+      SDL_PROP_GPU_DEVICE_CREATE_VULKAN_REQUIRE_HARDWARE_ACCELERATION_BOOLEAN;
+  static const deviceCreateVulkanOptionsPointer =
+      SDL_PROP_GPU_DEVICE_CREATE_VULKAN_OPTIONS_POINTER;
   static const deviceNameString = SDL_PROP_GPU_DEVICE_NAME_STRING;
   static const deviceDriverNameString = SDL_PROP_GPU_DEVICE_DRIVER_NAME_STRING;
   static const deviceDriverVersionString =

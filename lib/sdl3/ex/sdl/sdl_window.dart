@@ -374,6 +374,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// \sa SDL_GetRenderOutputSize
   /// \sa SDL_GetWindowSizeInPixels
   /// \sa SDL_SetWindowSize
+  /// \sa SDL_EVENT_WINDOW_RESIZED
   ///
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowSize(SDL_Window *window, int *w, int *h)
