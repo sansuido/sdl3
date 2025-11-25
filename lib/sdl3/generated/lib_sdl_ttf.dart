@@ -1340,6 +1340,7 @@ int ttfGetFontDirection(Pointer<TtfFont> font) {
 /// This updates any TTF_Text objects using this font.
 ///
 /// \param font the font to specify a direction for.
+/// \param spacing the new additional glyph spacing for the font.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
@@ -3761,6 +3762,8 @@ bool ttfGetTextColorFloat(
 /// \param text the TTF_Text to modify.
 /// \param x the x offset of the upper left corner of this text in pixels.
 /// \param y the y offset of the upper left corner of this text in pixels.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \threadsafety This function should be called on the thread that created the
 /// text.
@@ -3790,6 +3793,8 @@ bool ttfSetTextPosition(Pointer<TtfText> text, int x, int y) {
 /// this text in pixels, may be NULL.
 /// \param y a pointer filled in with the y offset of the upper left corner of
 /// this text in pixels, may be NULL.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
 ///
 /// \threadsafety This function should be called on the thread that created the
 /// text.

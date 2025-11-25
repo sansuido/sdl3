@@ -1,3 +1,6 @@
+## 2.4.6
+- SDL3-2025-11-23
+
 ## 2.4.5
 - SDL3-2025-11-16
 - [add] Added sdlLoadSurfaceIo and SdlGpuVulkanOptions.

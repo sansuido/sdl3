@@ -187,6 +187,11 @@ int sdlGetPrimaryDisplay() {
 /// - `SDL_PROP_DISPLAY_WAYLAND_WL_OUTPUT_POINTER`: the wl_output associated
 /// with the display
 ///
+/// On Windows:
+///
+/// - `SDL_PROP_DISPLAY_WINDOWS_HMONITOR_POINTER`: the monitor handle
+/// (HMONITOR) associated with the display
+///
 /// \param displayID the instance ID of the display to query.
 /// \returns a valid property ID on success or 0 on failure; call
 /// SDL_GetError() for more information.

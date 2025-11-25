@@ -1572,6 +1572,7 @@ const SDL_PEN_INPUT_BUTTON_3 = 1 << 3;
 const SDL_PEN_INPUT_BUTTON_4 = 1 << 4;
 const SDL_PEN_INPUT_BUTTON_5 = 1 << 5;
 const SDL_PEN_INPUT_ERASER_TIP = 1 << 30;
+const SDL_PEN_INPUT_IN_PROXIMITY = 1 << 31;
 const SDL_PEN_AXIS_PRESSURE = 0;
 const SDL_PEN_AXIS_XTILT = 1;
 const SDL_PEN_AXIS_YTILT = 2;
@@ -2058,7 +2059,7 @@ const SDL_RENDERER_VSYNC_ADAPTIVE = -1;
 const SDL_DEBUG_TEXT_FONT_CHARACTER_SIZE = 8;
 //const SDL_revision_h_ = ;
 const SDL_REVISION =
-    'SDL-3.3.3-preview-3.3.2-229-g770b38b4f (" SDL_VENDOR_INFO ")';
+    'SDL-3.3.3-preview-3.3.2-281-g6a1218c1c (" SDL_VENDOR_INFO ")';
 //const SDL_scancode_h_ = ;
 const SDL_SCANCODE_UNKNOWN = 0;
 const SDL_SCANCODE_A = 4;
@@ -2626,6 +2627,8 @@ const SDL_PROP_DISPLAY_KMSDRM_PANEL_ORIENTATION_NUMBER =
     'SDL.display.KMSDRM.panel_orientation';
 const SDL_PROP_DISPLAY_WAYLAND_WL_OUTPUT_POINTER =
     'SDL.display.wayland.wl_output';
+const SDL_PROP_DISPLAY_WINDOWS_HMONITOR_POINTER =
+    'SDL.display.windows.hmonitor';
 const SDL_PROP_WINDOW_CREATE_ALWAYS_ON_TOP_BOOLEAN =
     'SDL.window.create.always_on_top';
 const SDL_PROP_WINDOW_CREATE_BORDERLESS_BOOLEAN =
@@ -4450,6 +4453,7 @@ class SdlkPenInput {
   static const button4 = SDL_PEN_INPUT_BUTTON_4;
   static const button5 = SDL_PEN_INPUT_BUTTON_5;
   static const eraserTip = SDL_PEN_INPUT_ERASER_TIP;
+  static const inProximity = SDL_PEN_INPUT_IN_PROXIMITY;
 }
 
 /// {@category pen}
@@ -5443,6 +5447,8 @@ class SdlkPropDisplay {
       SDL_PROP_DISPLAY_KMSDRM_PANEL_ORIENTATION_NUMBER;
   static const waylandWlOutputPointer =
       SDL_PROP_DISPLAY_WAYLAND_WL_OUTPUT_POINTER;
+  static const windowsHmonitorPointer =
+      SDL_PROP_DISPLAY_WINDOWS_HMONITOR_POINTER;
 }
 
 /// {@category video}
