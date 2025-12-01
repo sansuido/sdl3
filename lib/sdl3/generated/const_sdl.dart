@@ -2059,7 +2059,7 @@ const SDL_RENDERER_VSYNC_ADAPTIVE = -1;
 const SDL_DEBUG_TEXT_FONT_CHARACTER_SIZE = 8;
 //const SDL_revision_h_ = ;
 const SDL_REVISION =
-    'SDL-3.3.3-preview-3.3.2-281-g6a1218c1c (" SDL_VENDOR_INFO ")';
+    'SDL-3.3.3-preview-3.3.2-318-gdefd7895d (" SDL_VENDOR_INFO ")';
 //const SDL_scancode_h_ = ;
 const SDL_SCANCODE_UNKNOWN = 0;
 const SDL_SCANCODE_A = 4;
@@ -2668,6 +2668,8 @@ const SDL_PROP_WINDOW_CREATE_COCOA_WINDOW_POINTER =
     'SDL.window.create.cocoa.window';
 const SDL_PROP_WINDOW_CREATE_COCOA_VIEW_POINTER =
     'SDL.window.create.cocoa.view';
+const SDL_PROP_WINDOW_CREATE_WINDOWSCENE_POINTER =
+    'SDL.window.create.uikit.windowscene';
 const SDL_PROP_WINDOW_CREATE_WAYLAND_SURFACE_ROLE_CUSTOM_BOOLEAN =
     'SDL.window.create.wayland.surface_role_custom';
 const SDL_PROP_WINDOW_CREATE_WAYLAND_CREATE_EGL_WINDOW_BOOLEAN =
@@ -5496,6 +5498,8 @@ class SdlkPropWindow {
       SDL_PROP_WINDOW_CREATE_COCOA_WINDOW_POINTER;
   static const createCocoaViewPointer =
       SDL_PROP_WINDOW_CREATE_COCOA_VIEW_POINTER;
+  static const createWindowscenePointer =
+      SDL_PROP_WINDOW_CREATE_WINDOWSCENE_POINTER;
   static const createWaylandSurfaceRoleCustomBoolean =
       SDL_PROP_WINDOW_CREATE_WAYLAND_SURFACE_ROLE_CUSTOM_BOOLEAN;
   static const createWaylandCreateEglWindowBoolean =

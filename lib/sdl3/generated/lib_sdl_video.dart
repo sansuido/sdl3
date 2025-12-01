@@ -1196,6 +1196,12 @@ Pointer<SdlWindow> sdlCreatePopupWindow(
 /// - `SDL_PROP_WINDOW_CREATE_COCOA_VIEW_POINTER`: the `(__unsafe_unretained)`
 /// NSView associated with the window, defaults to `[window contentView]`
 ///
+/// These are additional supported properties on iOS, tvOS, and visionOS:
+///
+/// - `SDL_PROP_WINDOW_CREATE_WINDOWSCENE_POINTER`: the `(__unsafe_unretained)`
+/// UIWindowScene associated with the window, defaults to the active window
+/// scene.
+///
 /// These are additional supported properties on Wayland:
 ///
 /// - `SDL_PROP_WINDOW_CREATE_WAYLAND_SURFACE_ROLE_CUSTOM_BOOLEAN` - true if
