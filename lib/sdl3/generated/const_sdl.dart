@@ -908,6 +908,7 @@ const SDL_HINT_MAC_CTRL_CLICK_EMULATE_RIGHT_CLICK =
 const SDL_HINT_MAC_OPENGL_ASYNC_DISPATCH = 'SDL_MAC_OPENGL_ASYNC_DISPATCH';
 const SDL_HINT_MAC_OPTION_AS_ALT = 'SDL_MAC_OPTION_AS_ALT';
 const SDL_HINT_MAC_SCROLL_MOMENTUM = 'SDL_MAC_SCROLL_MOMENTUM';
+const SDL_HINT_MAC_PRESS_AND_HOLD = 'SDL_MAC_PRESS_AND_HOLD';
 const SDL_HINT_MAIN_CALLBACK_RATE = 'SDL_MAIN_CALLBACK_RATE';
 const SDL_HINT_MOUSE_AUTO_CAPTURE = 'SDL_MOUSE_AUTO_CAPTURE';
 const SDL_HINT_MOUSE_DOUBLE_CLICK_RADIUS = 'SDL_MOUSE_DOUBLE_CLICK_RADIUS';
@@ -2058,8 +2059,7 @@ const SDL_RENDERER_VSYNC_DISABLED = 0;
 const SDL_RENDERER_VSYNC_ADAPTIVE = -1;
 const SDL_DEBUG_TEXT_FONT_CHARACTER_SIZE = 8;
 //const SDL_revision_h_ = ;
-const SDL_REVISION =
-    'SDL-3.3.3-preview-3.3.2-318-gdefd7895d (" SDL_VENDOR_INFO ")';
+const SDL_REVISION = 'SDL-3.3.4-prerelease-3.3.4 (" SDL_VENDOR_INFO ")';
 //const SDL_scancode_h_ = ;
 const SDL_SCANCODE_UNKNOWN = 0;
 const SDL_SCANCODE_A = 4;
@@ -2463,6 +2463,7 @@ const SDL_PROP_SURFACE_HDR_HEADROOM_FLOAT = 'SDL.surface.HDR_headroom';
 const SDL_PROP_SURFACE_TONEMAP_OPERATOR_STRING = 'SDL.surface.tonemap';
 const SDL_PROP_SURFACE_HOTSPOT_X_NUMBER = 'SDL.surface.hotspot.x';
 const SDL_PROP_SURFACE_HOTSPOT_Y_NUMBER = 'SDL.surface.hotspot.y';
+const SDL_PROP_SURFACE_ROTATION_NUMBER = 'SDL.surface.rotation';
 //const SDL_system_h_ = ;
 const SDL_ANDROID_EXTERNAL_STORAGE_READ = 0x01;
 const SDL_ANDROID_EXTERNAL_STORAGE_WRITE = 0x02;
@@ -2523,7 +2524,7 @@ const SDL_TRAYENTRY_CHECKED = 0x40000000;
 //const SDL_version_h_ = ;
 const SDL_MAJOR_VERSION = 3;
 const SDL_MINOR_VERSION = 3;
-const SDL_MICRO_VERSION = 3;
+const SDL_MICRO_VERSION = 4;
 //const SDL_VERSIONNUM = (major, minor, patch) ((major) * 1000000 + (minor) * 1000 + (patch));
 //const SDL_VERSIONNUM_MAJOR = (version) ((version) / 1000000);
 //const SDL_VERSIONNUM_MINOR = (version) (((version) / 1000) % 1000);
@@ -3765,6 +3766,7 @@ class SdlkHint {
   static const macOpenglAsyncDispatch = SDL_HINT_MAC_OPENGL_ASYNC_DISPATCH;
   static const macOptionAsAlt = SDL_HINT_MAC_OPTION_AS_ALT;
   static const macScrollMomentum = SDL_HINT_MAC_SCROLL_MOMENTUM;
+  static const macPressAndHold = SDL_HINT_MAC_PRESS_AND_HOLD;
   static const mainCallbackRate = SDL_HINT_MAIN_CALLBACK_RATE;
   static const mouseAutoCapture = SDL_HINT_MOUSE_AUTO_CAPTURE;
   static const mouseDoubleClickRadius = SDL_HINT_MOUSE_DOUBLE_CLICK_RADIUS;
@@ -5254,6 +5256,7 @@ class SdlkPropSurface {
   static const tonemapOperatorString = SDL_PROP_SURFACE_TONEMAP_OPERATOR_STRING;
   static const hotspotXNumber = SDL_PROP_SURFACE_HOTSPOT_X_NUMBER;
   static const hotspotYNumber = SDL_PROP_SURFACE_HOTSPOT_Y_NUMBER;
+  static const rotationNumber = SDL_PROP_SURFACE_ROTATION_NUMBER;
 }
 
 /// {@category system}
