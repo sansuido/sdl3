@@ -1,3 +1,8 @@
+## 2.4.9
+- SDL3-2025-12-14
+- [add] Added sdlSetWindowFillDocument.
+- [update] Dart 3.10.4
+
 ## 2.4.8
 - SDL3-2025-12-07
 - [update] Dart 3.10.2

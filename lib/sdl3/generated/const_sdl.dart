@@ -771,7 +771,6 @@ const SDL_HINT_INVALID_PARAM_CHECKS = 'SDL_INVALID_PARAM_CHECKS';
 const SDL_HINT_EMSCRIPTEN_ASYNCIFY = 'SDL_EMSCRIPTEN_ASYNCIFY';
 const SDL_HINT_EMSCRIPTEN_CANVAS_SELECTOR = 'SDL_EMSCRIPTEN_CANVAS_SELECTOR';
 const SDL_HINT_EMSCRIPTEN_KEYBOARD_ELEMENT = 'SDL_EMSCRIPTEN_KEYBOARD_ELEMENT';
-const SDL_HINT_EMSCRIPTEN_FILL_DOCUMENT = 'SDL_EMSCRIPTEN_FILL_DOCUMENT';
 const SDL_HINT_ENABLE_SCREEN_KEYBOARD = 'SDL_ENABLE_SCREEN_KEYBOARD';
 const SDL_HINT_EVDEV_DEVICES = 'SDL_EVDEV_DEVICES';
 const SDL_HINT_EVENT_LOGGING = 'SDL_EVENT_LOGGING';
@@ -914,6 +913,7 @@ const SDL_HINT_MOUSE_AUTO_CAPTURE = 'SDL_MOUSE_AUTO_CAPTURE';
 const SDL_HINT_MOUSE_DOUBLE_CLICK_RADIUS = 'SDL_MOUSE_DOUBLE_CLICK_RADIUS';
 const SDL_HINT_MOUSE_DOUBLE_CLICK_TIME = 'SDL_MOUSE_DOUBLE_CLICK_TIME';
 const SDL_HINT_MOUSE_DEFAULT_SYSTEM_CURSOR = 'SDL_MOUSE_DEFAULT_SYSTEM_CURSOR';
+const SDL_HINT_MOUSE_DPI_SCALE_CURSORS = 'SDL_MOUSE_DPI_SCALE_CURSORS';
 const SDL_HINT_MOUSE_EMULATE_WARP_WITH_RELATIVE =
     'SDL_MOUSE_EMULATE_WARP_WITH_RELATIVE';
 const SDL_HINT_MOUSE_FOCUS_CLICKTHROUGH = 'SDL_MOUSE_FOCUS_CLICKTHROUGH';
@@ -2059,7 +2059,8 @@ const SDL_RENDERER_VSYNC_DISABLED = 0;
 const SDL_RENDERER_VSYNC_ADAPTIVE = -1;
 const SDL_DEBUG_TEXT_FONT_CHARACTER_SIZE = 8;
 //const SDL_revision_h_ = ;
-const SDL_REVISION = 'SDL-3.3.4-prerelease-3.3.4 (" SDL_VENDOR_INFO ")';
+const SDL_REVISION =
+    'SDL-3.3.5-prerelease-3.3.4-40-g5fe69e73b (" SDL_VENDOR_INFO ")';
 //const SDL_scancode_h_ = ;
 const SDL_SCANCODE_UNKNOWN = 0;
 const SDL_SCANCODE_A = 4;
@@ -2463,7 +2464,7 @@ const SDL_PROP_SURFACE_HDR_HEADROOM_FLOAT = 'SDL.surface.HDR_headroom';
 const SDL_PROP_SURFACE_TONEMAP_OPERATOR_STRING = 'SDL.surface.tonemap';
 const SDL_PROP_SURFACE_HOTSPOT_X_NUMBER = 'SDL.surface.hotspot.x';
 const SDL_PROP_SURFACE_HOTSPOT_Y_NUMBER = 'SDL.surface.hotspot.y';
-const SDL_PROP_SURFACE_ROTATION_NUMBER = 'SDL.surface.rotation';
+const SDL_PROP_SURFACE_ROTATION_FLOAT = 'SDL.surface.rotation';
 //const SDL_system_h_ = ;
 const SDL_ANDROID_EXTERNAL_STORAGE_READ = 0x01;
 const SDL_ANDROID_EXTERNAL_STORAGE_WRITE = 0x02;
@@ -2524,7 +2525,7 @@ const SDL_TRAYENTRY_CHECKED = 0x40000000;
 //const SDL_version_h_ = ;
 const SDL_MAJOR_VERSION = 3;
 const SDL_MINOR_VERSION = 3;
-const SDL_MICRO_VERSION = 4;
+const SDL_MICRO_VERSION = 5;
 //const SDL_VERSIONNUM = (major, minor, patch) ((major) * 1000000 + (minor) * 1000 + (patch));
 //const SDL_VERSIONNUM_MAJOR = (version) ((version) / 1000000);
 //const SDL_VERSIONNUM_MINOR = (version) (((version) / 1000) % 1000);
@@ -2563,6 +2564,7 @@ const SDL_WINDOW_UTILITY = 0x0000000000020000;
 const SDL_WINDOW_TOOLTIP = 0x0000000000040000;
 const SDL_WINDOW_POPUP_MENU = 0x0000000000080000;
 const SDL_WINDOW_KEYBOARD_GRABBED = 0x0000000000100000;
+const SDL_WINDOW_FILL_DOCUMENT = 0x0000000000200000;
 const SDL_WINDOW_VULKAN = 0x0000000010000000;
 const SDL_WINDOW_METAL = 0x0000000020000000;
 const SDL_WINDOW_TRANSPARENT = 0x0000000040000000;
@@ -2684,8 +2686,6 @@ const SDL_PROP_WINDOW_CREATE_WIN32_PIXEL_FORMAT_HWND_POINTER =
 const SDL_PROP_WINDOW_CREATE_X11_WINDOW_NUMBER = 'SDL.window.create.x11.window';
 const SDL_PROP_WINDOW_CREATE_EMSCRIPTEN_CANVAS_ID_STRING =
     'SDL.window.create.emscripten.canvas_id';
-const SDL_PROP_WINDOW_CREATE_EMSCRIPTEN_FILL_DOCUMENT_BOOLEAN =
-    'SDL.window.create.emscripten.fill_document';
 const SDL_PROP_WINDOW_CREATE_EMSCRIPTEN_KEYBOARD_ELEMENT_STRING =
     'SDL.window.create.emscripten.keyboard_element';
 const SDL_PROP_WINDOW_SHAPE_POINTER = 'SDL.window.shape';
@@ -2737,8 +2737,6 @@ const SDL_PROP_WINDOW_X11_SCREEN_NUMBER = 'SDL.window.x11.screen';
 const SDL_PROP_WINDOW_X11_WINDOW_NUMBER = 'SDL.window.x11.window';
 const SDL_PROP_WINDOW_EMSCRIPTEN_CANVAS_ID_STRING =
     'SDL.window.emscripten.canvas_id';
-const SDL_PROP_WINDOW_EMSCRIPTEN_FILL_DOCUMENT_BOOLEAN =
-    'SDL.window.emscripten.fill_document';
 const SDL_PROP_WINDOW_EMSCRIPTEN_KEYBOARD_ELEMENT_STRING =
     'SDL.window.emscripten.keyboard_element';
 const SDL_WINDOW_SURFACE_VSYNC_DISABLED = 0;
@@ -3629,7 +3627,6 @@ class SdlkHint {
   static const emscriptenAsyncify = SDL_HINT_EMSCRIPTEN_ASYNCIFY;
   static const emscriptenCanvasSelector = SDL_HINT_EMSCRIPTEN_CANVAS_SELECTOR;
   static const emscriptenKeyboardElement = SDL_HINT_EMSCRIPTEN_KEYBOARD_ELEMENT;
-  static const emscriptenFillDocument = SDL_HINT_EMSCRIPTEN_FILL_DOCUMENT;
   static const enableScreenKeyboard = SDL_HINT_ENABLE_SCREEN_KEYBOARD;
   static const evdevDevices = SDL_HINT_EVDEV_DEVICES;
   static const eventLogging = SDL_HINT_EVENT_LOGGING;
@@ -3772,6 +3769,7 @@ class SdlkHint {
   static const mouseDoubleClickRadius = SDL_HINT_MOUSE_DOUBLE_CLICK_RADIUS;
   static const mouseDoubleClickTime = SDL_HINT_MOUSE_DOUBLE_CLICK_TIME;
   static const mouseDefaultSystemCursor = SDL_HINT_MOUSE_DEFAULT_SYSTEM_CURSOR;
+  static const mouseDpiScaleCursors = SDL_HINT_MOUSE_DPI_SCALE_CURSORS;
   static const mouseEmulateWarpWithRelative =
       SDL_HINT_MOUSE_EMULATE_WARP_WITH_RELATIVE;
   static const mouseFocusClickthrough = SDL_HINT_MOUSE_FOCUS_CLICKTHROUGH;
@@ -5256,7 +5254,7 @@ class SdlkPropSurface {
   static const tonemapOperatorString = SDL_PROP_SURFACE_TONEMAP_OPERATOR_STRING;
   static const hotspotXNumber = SDL_PROP_SURFACE_HOTSPOT_X_NUMBER;
   static const hotspotYNumber = SDL_PROP_SURFACE_HOTSPOT_Y_NUMBER;
-  static const rotationNumber = SDL_PROP_SURFACE_ROTATION_NUMBER;
+  static const rotationFloat = SDL_PROP_SURFACE_ROTATION_FLOAT;
 }
 
 /// {@category system}
@@ -5372,6 +5370,7 @@ class SdlkWindow {
   static const tooltip = SDL_WINDOW_TOOLTIP;
   static const popupMenu = SDL_WINDOW_POPUP_MENU;
   static const keyboardGrabbed = SDL_WINDOW_KEYBOARD_GRABBED;
+  static const fillDocument = SDL_WINDOW_FILL_DOCUMENT;
   static const vulkan = SDL_WINDOW_VULKAN;
   static const metal = SDL_WINDOW_METAL;
   static const transparent = SDL_WINDOW_TRANSPARENT;
@@ -5516,8 +5515,6 @@ class SdlkPropWindow {
   static const createX11WindowNumber = SDL_PROP_WINDOW_CREATE_X11_WINDOW_NUMBER;
   static const createEmscriptenCanvasIdString =
       SDL_PROP_WINDOW_CREATE_EMSCRIPTEN_CANVAS_ID_STRING;
-  static const createEmscriptenFillDocumentBoolean =
-      SDL_PROP_WINDOW_CREATE_EMSCRIPTEN_FILL_DOCUMENT_BOOLEAN;
   static const createEmscriptenKeyboardElementString =
       SDL_PROP_WINDOW_CREATE_EMSCRIPTEN_KEYBOARD_ELEMENT_STRING;
   static const shapePointer = SDL_PROP_WINDOW_SHAPE_POINTER;
@@ -5571,8 +5568,6 @@ class SdlkPropWindow {
   static const x11WindowNumber = SDL_PROP_WINDOW_X11_WINDOW_NUMBER;
   static const emscriptenCanvasIdString =
       SDL_PROP_WINDOW_EMSCRIPTEN_CANVAS_ID_STRING;
-  static const emscriptenFillDocumentBoolean =
-      SDL_PROP_WINDOW_EMSCRIPTEN_FILL_DOCUMENT_BOOLEAN;
   static const emscriptenKeyboardElementString =
       SDL_PROP_WINDOW_EMSCRIPTEN_KEYBOARD_ELEMENT_STRING;
 }

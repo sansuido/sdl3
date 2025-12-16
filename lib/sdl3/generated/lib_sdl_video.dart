@@ -1235,15 +1235,6 @@ Pointer<SdlWindow> sdlCreatePopupWindow(
 ///
 /// - `SDL_PROP_WINDOW_CREATE_EMSCRIPTEN_CANVAS_ID_STRING`: the id given to the
 /// canvas element. This should start with a '#' sign
-/// - `SDL_PROP_WINDOW_CREATE_EMSCRIPTEN_FILL_DOCUMENT_BOOLEAN`: true to make
-/// the canvas element fill the entire document. Resize events will be
-/// generated as the browser window is resized, as that will adjust the
-/// canvas size as well. The canvas will cover anything else on the page,
-/// including any controls provided by Emscripten in its generated HTML file.
-/// Often times this is desirable for a browser-based game, but it means
-/// several things that we expect of an SDL window on other platforms might
-/// not work as expected, such as minimum window sizes and aspect ratios.
-/// Default false.
 /// - `SDL_PROP_WINDOW_CREATE_EMSCRIPTEN_KEYBOARD_ELEMENT_STRING`: override the
 /// binding element for keyboard inputs for this canvas. The variable can be
 /// one of:
@@ -1492,9 +1483,6 @@ Pointer<SdlWindow> sdlGetWindowParent(Pointer<SdlWindow> window) {
 ///
 /// - `SDL_PROP_WINDOW_EMSCRIPTEN_CANVAS_ID_STRING`: the id the canvas element
 /// will have
-/// - `SDL_PROP_WINDOW_EMSCRIPTEN_FILL_DOCUMENT_BOOLEAN`: true if the canvas is
-/// set to consume the entire browser window, bypassing some SDL window
-/// functionality.
 /// - `SDL_PROP_WINDOW_EMSCRIPTEN_KEYBOARD_ELEMENT_STRING`: the keyboard
 /// element that associates keyboard events to this window
 ///
@@ -1535,6 +1523,7 @@ int sdlGetWindowProperties(Pointer<SdlWindow> window) {
 /// \sa SDL_MinimizeWindow
 /// \sa SDL_SetWindowFullscreen
 /// \sa SDL_SetWindowMouseGrab
+/// \sa SDL_SetWindowFillDocument
 /// \sa SDL_ShowWindow
 ///
 /// ```c
@@ -2340,6 +2329,48 @@ bool sdlSetWindowAlwaysOnTop(Pointer<SdlWindow> window, bool onTop) {
         int Function(Pointer<SdlWindow> window, int onTop)
       >('SDL_SetWindowAlwaysOnTop');
   return sdlSetWindowAlwaysOnTopLookupFunction(window, onTop ? 1 : 0) == 1;
+}
+
+///
+/// Set the window to fill the current document space (Emscripten only).
+///
+/// This will add or remove the window's `SDL_WINDOW_FILL_DOCUMENT` flag.
+///
+/// Currently this flag only applies to the Emscripten target.
+///
+/// When enabled, the canvas element fills the entire document. Resize events
+/// will be generated as the browser window is resized, as that will adjust the
+/// canvas size as well. The canvas will cover anything else on the page,
+/// including any controls provided by Emscripten in its generated HTML file
+/// (in fact, any elements on the page that aren't the canvas will be moved
+/// into a hidden `div` element).
+///
+/// Often times this is desirable for a browser-based game, but it means
+/// several things that we expect of an SDL window on other platforms might not
+/// work as expected, such as minimum window sizes and aspect ratios.
+///
+/// \param window the window of which to change the fill-document state.
+/// \param fill true to set the window to fill the document, false to disable.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety This function should only be called on the main thread.
+///
+/// \since This function is available since SDL 3.4.0.
+///
+/// \sa SDL_GetWindowFlags
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowFillDocument(SDL_Window *window, bool fill)
+/// ```
+/// {@category video}
+bool sdlSetWindowFillDocument(Pointer<SdlWindow> window, bool fill) {
+  final sdlSetWindowFillDocumentLookupFunction = _libSdl
+      .lookupFunction<
+        Uint8 Function(Pointer<SdlWindow> window, Uint8 fill),
+        int Function(Pointer<SdlWindow> window, int fill)
+      >('SDL_SetWindowFillDocument');
+  return sdlSetWindowFillDocumentLookupFunction(window, fill ? 1 : 0) == 1;
 }
 
 ///

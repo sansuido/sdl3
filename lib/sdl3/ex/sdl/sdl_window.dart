@@ -148,6 +148,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// \sa SDL_MinimizeWindow
   /// \sa SDL_SetWindowFullscreen
   /// \sa SDL_SetWindowMouseGrab
+  /// \sa SDL_SetWindowFillDocument
   /// \sa SDL_ShowWindow
   ///
   /// ```c
