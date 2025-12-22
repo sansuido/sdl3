@@ -1,3 +1,7 @@
+## 2.4.10
+- SDL3-2025-12-21
+- [add] Added mixSetTrackLoops.
+
 ## 2.4.9
 - SDL3-2025-12-14
 - [add] Added sdlSetWindowFillDocument.

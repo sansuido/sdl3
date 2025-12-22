@@ -372,11 +372,11 @@ void mixDestroyMixer(Pointer<MixMixer> mixer) {
 ///
 /// Get the properties associated with a mixer.
 ///
-/// Currently SDL_mixer assigns no properties of its own to a mixer, but this
-/// can be a convenient place to store app-specific data.
+/// The following read-only properties are provided by SDL_mixer:
 ///
-/// A SDL_PropertiesID is created the first time this function is called for a
-/// given mixer.
+/// - `MIX_PROP_MIXER_DEVICE_NUMBER`: the SDL_AudioDeviceID that this mixer has
+/// opened for playback. This will be zero (no device) if the mixer was
+/// created with Mix_CreateMixer() instead of Mix_CreateMixerDevice().
 ///
 /// \param mixer the mixer to query.
 /// \returns a valid property ID on success or 0 on failure; call
@@ -1644,6 +1644,47 @@ bool mixTrackLooping(Pointer<MixTrack> track) {
         int Function(Pointer<MixTrack> track)
       >('MIX_TrackLooping');
   return mixTrackLoopingLookupFunction(track) == 1;
+}
+
+///
+/// Change the number of times a currently-playing track will loop.
+///
+/// This replaces any previously-set remaining loops. A value of 1 will loop to
+/// the start of playback one time. Zero will not loop at all. A value of -1
+/// requests infinite loops. If the input is not seekable and `num_loops` isn't
+/// zero, this function will report success but the track will stop at the
+/// point it should loop.
+///
+/// The new loop count replaces any previous state, even if the track has
+/// already looped.
+///
+/// This has no effect on a track that is fading out or stopped, and will
+/// return false. Stopped tracks can specify a loop count while starting via
+/// MIX_PROP_PLAY_LOOPS_NUMBER. This function alters that count in the middle
+/// of playback.
+///
+/// \param track the track to configure.
+/// \param num_loops new number of times to loop. Zero to disable looping, -1
+/// to loop infinitely.
+/// \returns true on success, false on error; call SDL_GetError() for details.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL_mixer 3.0.0.
+///
+/// \sa MIX_TrackLooping
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL MIX_SetTrackLoops(MIX_Track *track, int num_loops)
+/// ```
+/// {@category mixer}
+bool mixSetTrackLoops(Pointer<MixTrack> track, int numLoops) {
+  final mixSetTrackLoopsLookupFunction = _libMixer
+      .lookupFunction<
+        Uint8 Function(Pointer<MixTrack> track, Int32 numLoops),
+        int Function(Pointer<MixTrack> track, int numLoops)
+      >('MIX_SetTrackLoops');
+  return mixSetTrackLoopsLookupFunction(track, numLoops) == 1;
 }
 
 ///

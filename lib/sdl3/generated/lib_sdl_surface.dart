@@ -1898,7 +1898,7 @@ bool sdlPremultiplySurfaceAlpha(Pointer<SdlSurface> surface, bool linear) {
 /// This function handles all surface formats, and ignores any clip rectangle.
 ///
 /// If the surface is YUV, the color is assumed to be in the sRGB colorspace,
-/// otherwise the color is assumed to be in the colorspace of the suface.
+/// otherwise the color is assumed to be in the colorspace of the surface.
 ///
 /// \param surface the SDL_Surface to clear.
 /// \param r the red component of the pixel, normally in the range 0-1.

@@ -2060,7 +2060,7 @@ const SDL_RENDERER_VSYNC_ADAPTIVE = -1;
 const SDL_DEBUG_TEXT_FONT_CHARACTER_SIZE = 8;
 //const SDL_revision_h_ = ;
 const SDL_REVISION =
-    'SDL-3.3.5-prerelease-3.3.4-40-g5fe69e73b (" SDL_VENDOR_INFO ")';
+    'SDL-3.3.7-prerelease-3.3.6-11-g0d705ca27 (" SDL_VENDOR_INFO ")';
 //const SDL_scancode_h_ = ;
 const SDL_SCANCODE_UNKNOWN = 0;
 const SDL_SCANCODE_A = 4;
@@ -2525,7 +2525,7 @@ const SDL_TRAYENTRY_CHECKED = 0x40000000;
 //const SDL_version_h_ = ;
 const SDL_MAJOR_VERSION = 3;
 const SDL_MINOR_VERSION = 3;
-const SDL_MICRO_VERSION = 5;
+const SDL_MICRO_VERSION = 7;
 //const SDL_VERSIONNUM = (major, minor, patch) ((major) * 1000000 + (minor) * 1000 + (patch));
 //const SDL_VERSIONNUM_MAJOR = (version) ((version) / 1000000);
 //const SDL_VERSIONNUM_MINOR = (version) (((version) / 1000) % 1000);

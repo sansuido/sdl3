@@ -779,7 +779,7 @@ Pointer<SdlCursor> sdlGetCursor() {
 /// You do not have to call SDL_DestroyCursor() on the return value, but it is
 /// safe to do so.
 ///
-/// \returns the default cursor on success or NULL on failuree; call
+/// \returns the default cursor on success or NULL on failure; call
 /// SDL_GetError() for more information.
 ///
 /// \threadsafety This function should only be called on the main thread.

@@ -122,11 +122,11 @@ extension MixMixerPointerEx on Pointer<MixMixer> {
   ///
   /// Get the properties associated with a mixer.
   ///
-  /// Currently SDL_mixer assigns no properties of its own to a mixer, but this
-  /// can be a convenient place to store app-specific data.
+  /// The following read-only properties are provided by SDL_mixer:
   ///
-  /// A SDL_PropertiesID is created the first time this function is called for a
-  /// given mixer.
+  /// - `MIX_PROP_MIXER_DEVICE_NUMBER`: the SDL_AudioDeviceID that this mixer has
+  /// opened for playback. This will be zero (no device) if the mixer was
+  /// created with Mix_CreateMixer() instead of Mix_CreateMixerDevice().
   ///
   /// \param mixer the mixer to query.
   /// \returns a valid property ID on success or 0 on failure; call

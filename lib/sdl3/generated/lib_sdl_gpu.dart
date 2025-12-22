@@ -2481,7 +2481,7 @@ void sdlBindGpuComputePipeline(
 /// The textures must have been created with SDL_GPU_TEXTUREUSAGE_SAMPLER.
 ///
 /// Be sure your shader is set up according to the requirements documented in
-/// SDL_CreateGPUShader().
+/// SDL_CreateGPUComputePipeline().
 ///
 /// \param compute_pass a compute pass handle.
 /// \param first_slot the compute sampler slot to begin binding from.
@@ -2492,7 +2492,7 @@ void sdlBindGpuComputePipeline(
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
-/// \sa SDL_CreateGPUShader
+/// \sa SDL_CreateGPUComputePipeline
 ///
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_BindGPUComputeSamplers( SDL_GPUComputePass *compute_pass, Uint32 first_slot, const SDL_GPUTextureSamplerBinding *texture_sampler_bindings, Uint32 num_bindings)
@@ -2534,7 +2534,7 @@ void sdlBindGpuComputeSamplers(
 /// SDL_GPU_TEXTUREUSAGE_COMPUTE_STORAGE_READ.
 ///
 /// Be sure your shader is set up according to the requirements documented in
-/// SDL_CreateGPUShader().
+/// SDL_CreateGPUComputePipeline().
 ///
 /// \param compute_pass a compute pass handle.
 /// \param first_slot the compute storage texture slot to begin binding from.
@@ -2543,7 +2543,7 @@ void sdlBindGpuComputeSamplers(
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
-/// \sa SDL_CreateGPUShader
+/// \sa SDL_CreateGPUComputePipeline
 ///
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_BindGPUComputeStorageTextures( SDL_GPUComputePass *compute_pass, Uint32 first_slot, SDL_GPUTexture *const *storage_textures, Uint32 num_bindings)
@@ -2585,7 +2585,7 @@ void sdlBindGpuComputeStorageTextures(
 /// SDL_GPU_BUFFERUSAGE_COMPUTE_STORAGE_READ.
 ///
 /// Be sure your shader is set up according to the requirements documented in
-/// SDL_CreateGPUShader().
+/// SDL_CreateGPUComputePipeline().
 ///
 /// \param compute_pass a compute pass handle.
 /// \param first_slot the compute storage buffer slot to begin binding from.
@@ -2594,7 +2594,7 @@ void sdlBindGpuComputeStorageTextures(
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
-/// \sa SDL_CreateGPUShader
+/// \sa SDL_CreateGPUComputePipeline
 ///
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_BindGPUComputeStorageBuffers( SDL_GPUComputePass *compute_pass, Uint32 first_slot, SDL_GPUBuffer *const *storage_buffers, Uint32 num_bindings)

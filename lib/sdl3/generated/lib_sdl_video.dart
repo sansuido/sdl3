@@ -1842,7 +1842,7 @@ bool sdlGetWindowSize(
 /// notches, TV overscan, etc. This function provides the area of the window
 /// which is safe to have interactable content. You should continue rendering
 /// into the rest of the window, but it should not contain visually important
-/// or interactible content.
+/// or interactable content.
 ///
 /// \param window the window to query.
 /// \param rect a pointer filled in with the client area that is safe for
