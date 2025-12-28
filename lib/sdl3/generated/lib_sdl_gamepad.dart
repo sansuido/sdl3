@@ -1594,7 +1594,7 @@ int sdlGetGamepadAxis(Pointer<SdlGamepad> gamepad, int axis) {
 /// You do not normally need to call this function unless you are parsing
 /// SDL_Gamepad mappings in your own code.
 ///
-/// \param str string representing a SDL_Gamepad axis.
+/// \param str string representing a SDL_Gamepad button.
 /// \returns the SDL_GamepadButton enum corresponding to the input string, or
 /// `SDL_GAMEPAD_BUTTON_INVALID` if no match was found.
 ///

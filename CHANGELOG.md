@@ -1,3 +1,7 @@
+## 2.4.11
+- SDL3-2025-12-28
+- [update] Dart 3.10.6
+
 ## 2.4.10
 - SDL3-2025-12-21
 - [add] Added mixSetTrackLoops.

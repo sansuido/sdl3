@@ -2010,6 +2010,8 @@ const SDL_PROP_TEXTURE_CREATE_OPENGLES2_TEXTURE_V_NUMBER =
     'SDL.texture.create.opengles2.texture_v';
 const SDL_PROP_TEXTURE_CREATE_VULKAN_TEXTURE_NUMBER =
     'SDL.texture.create.vulkan.texture';
+const SDL_PROP_TEXTURE_CREATE_VULKAN_LAYOUT_NUMBER =
+    'SDL.texture.create.vulkan.layout';
 const SDL_PROP_TEXTURE_CREATE_GPU_TEXTURE_POINTER =
     'SDL.texture.create.gpu.texture';
 const SDL_PROP_TEXTURE_CREATE_GPU_TEXTURE_UV_POINTER =
@@ -2060,7 +2062,7 @@ const SDL_RENDERER_VSYNC_ADAPTIVE = -1;
 const SDL_DEBUG_TEXT_FONT_CHARACTER_SIZE = 8;
 //const SDL_revision_h_ = ;
 const SDL_REVISION =
-    'SDL-3.3.7-prerelease-3.3.6-11-g0d705ca27 (" SDL_VENDOR_INFO ")';
+    'SDL-3.3.7-prerelease-3.3.6-39-g9fe5c1512 (" SDL_VENDOR_INFO ")';
 //const SDL_scancode_h_ = ;
 const SDL_SCANCODE_UNKNOWN = 0;
 const SDL_SCANCODE_A = 4;
@@ -4904,6 +4906,8 @@ class SdlkPropTexture {
       SDL_PROP_TEXTURE_CREATE_OPENGLES2_TEXTURE_V_NUMBER;
   static const createVulkanTextureNumber =
       SDL_PROP_TEXTURE_CREATE_VULKAN_TEXTURE_NUMBER;
+  static const createVulkanLayoutNumber =
+      SDL_PROP_TEXTURE_CREATE_VULKAN_LAYOUT_NUMBER;
   static const createGpuTexturePointer =
       SDL_PROP_TEXTURE_CREATE_GPU_TEXTURE_POINTER;
   static const createGpuTextureUvPointer =

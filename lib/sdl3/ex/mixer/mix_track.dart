@@ -527,6 +527,10 @@ extension MixTrackPointerEx on Pointer<MixTrack> {
   /// defaults, and specifying a 0 for `options` will choose defaults for
   /// everything.
   ///
+  /// SDL_PropertiesID are discussed in
+  /// [SDL's documentation](https://wiki.libsdl.org/SDL3/CategoryProperties)
+  /// .
+  ///
   /// These are the supported properties:
   ///
   /// - `MIX_PROP_PLAY_LOOPS_NUMBER`: The number of times to loop the track when

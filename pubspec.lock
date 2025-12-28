@@ -34,4 +34,4 @@ packages:
     source: hosted
     version: "1.17.0"
 sdks:
-  dart: ">=3.10.4 <4.0.0"
+  dart: ">=3.10.6 <4.0.0"
