@@ -1,3 +1,9 @@
+## 2.5.0
+- SDL3-2026-01-04
+- [add] Added mixGetTrackTags and mixGetTaggedTracks.
+- [add] Added enum image classes. (ImgkPropAnimationEncoderCreate, ImgkDecoderStatus and more)
+- [add] Added enum mixer classes. (MixkPropAudioLoad, MixkPropMetadata and more)
+
 ## 2.4.11
 - SDL3-2025-12-28
 - [update] Dart 3.10.6

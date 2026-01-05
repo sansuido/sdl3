@@ -1508,8 +1508,10 @@ bool mixTagTrack(Pointer<MixTrack> track, String? tag) {
 /// It's legal to remove a tag that the track doesn't have; this function
 /// doesn't report errors, so this simply does nothing.
 ///
+/// Specifying a NULL tag will remove all tags on a track.
+///
 /// \param track the track from which to remove a tag.
-/// \param tag the tag to remove.
+/// \param tag the tag to remove, or NULL to remove all current tags.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -1529,6 +1531,89 @@ void mixUntagTrack(Pointer<MixTrack> track, String? tag) {
       >('MIX_UntagTrack');
   final tagPointer = tag != null ? tag.toNativeUtf8() : nullptr;
   final result = mixUntagTrackLookupFunction(track, tagPointer);
+  calloc.free(tagPointer);
+  return result;
+}
+
+///
+/// Get the tags currently associated with a track.
+///
+/// Tags are not provided in any guaranteed order.
+///
+/// \param track the track to query.
+/// \param count a pointer filled in with the number of tags returned, can be
+/// NULL.
+/// \returns an array of the tags, NULL-terminated, or NULL on failure; call
+/// SDL_GetError() for more information. This is a single allocation
+/// that should be freed with SDL_free() when it is no longer needed.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL_mixer 3.0.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC char ** SDLCALL MIX_GetTrackTags(MIX_Track *track, int *count)
+/// ```
+/// {@category mixer}
+Pointer<Pointer<Int8>> mixGetTrackTags(
+  Pointer<MixTrack> track,
+  Pointer<Int32> count,
+) {
+  final mixGetTrackTagsLookupFunction = _libMixer
+      .lookupFunction<
+        Pointer<Pointer<Int8>> Function(
+          Pointer<MixTrack> track,
+          Pointer<Int32> count,
+        ),
+        Pointer<Pointer<Int8>> Function(
+          Pointer<MixTrack> track,
+          Pointer<Int32> count,
+        )
+      >('MIX_GetTrackTags');
+  return mixGetTrackTagsLookupFunction(track, count);
+}
+
+///
+/// Get all tracks with a specific tag.
+///
+/// Tracks are not provided in any guaranteed order.
+///
+/// \param mixer the mixer to query.
+/// \param tag the tag to search.
+/// \param count a pointer filled in with the number of tracks returned, can be
+/// NULL.
+/// \returns an array of the tracks, NULL-terminated, or NULL on failure; call
+/// SDL_GetError() for more information. The returned pointer hould be
+/// freed with SDL_free() when it is no longer needed.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL_mixer 3.0.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC MIX_Track ** SDLCALL MIX_GetTaggedTracks(MIX_Mixer *mixer, const char *tag, int *count)
+/// ```
+/// {@category mixer}
+Pointer<Pointer<MixTrack>> mixGetTaggedTracks(
+  Pointer<MixMixer> mixer,
+  String? tag,
+  Pointer<Int32> count,
+) {
+  final mixGetTaggedTracksLookupFunction = _libMixer
+      .lookupFunction<
+        Pointer<Pointer<MixTrack>> Function(
+          Pointer<MixMixer> mixer,
+          Pointer<Utf8> tag,
+          Pointer<Int32> count,
+        ),
+        Pointer<Pointer<MixTrack>> Function(
+          Pointer<MixMixer> mixer,
+          Pointer<Utf8> tag,
+          Pointer<Int32> count,
+        )
+      >('MIX_GetTaggedTracks');
+  final tagPointer = tag != null ? tag.toNativeUtf8() : nullptr;
+  final result = mixGetTaggedTracksLookupFunction(mixer, tagPointer, count);
   calloc.free(tagPointer);
   return result;
 }

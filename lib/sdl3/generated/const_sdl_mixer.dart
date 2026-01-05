@@ -46,3 +46,53 @@ const MIX_PROP_PLAY_APPEND_SILENCE_FRAMES_NUMBER =
     'SDL_mixer.play.append_silence_frames';
 const MIX_PROP_PLAY_APPEND_SILENCE_MILLISECONDS_NUMBER =
     'SDL_mixer.play.append_silence_milliseconds';
+
+/// {@category mixer}
+class MixkPropAudioLoad {
+  static const iostreamPointer = MIX_PROP_AUDIO_LOAD_IOSTREAM_POINTER;
+  static const closeioBoolean = MIX_PROP_AUDIO_LOAD_CLOSEIO_BOOLEAN;
+  static const predecodeBoolean = MIX_PROP_AUDIO_LOAD_PREDECODE_BOOLEAN;
+  static const preferredMixerPointer =
+      MIX_PROP_AUDIO_LOAD_PREFERRED_MIXER_POINTER;
+  static const skipMetadataTagsBoolean =
+      MIX_PROP_AUDIO_LOAD_SKIP_METADATA_TAGS_BOOLEAN;
+}
+
+/// {@category mixer}
+class MixkPropMetadata {
+  static const titleString = MIX_PROP_METADATA_TITLE_STRING;
+  static const artistString = MIX_PROP_METADATA_ARTIST_STRING;
+  static const albumString = MIX_PROP_METADATA_ALBUM_STRING;
+  static const copyrightString = MIX_PROP_METADATA_COPYRIGHT_STRING;
+  static const trackNumber = MIX_PROP_METADATA_TRACK_NUMBER;
+  static const totalTracksNumber = MIX_PROP_METADATA_TOTAL_TRACKS_NUMBER;
+  static const yearNumber = MIX_PROP_METADATA_YEAR_NUMBER;
+  static const durationFramesNumber = MIX_PROP_METADATA_DURATION_FRAMES_NUMBER;
+  static const durationInfiniteBoolean =
+      MIX_PROP_METADATA_DURATION_INFINITE_BOOLEAN;
+}
+
+/// {@category mixer}
+class MixkDuration {
+  static const unknown = MIX_DURATION_UNKNOWN;
+  static const infinite = MIX_DURATION_INFINITE;
+}
+
+/// {@category mixer}
+class MixkPropPlay {
+  static const loopsNumber = MIX_PROP_PLAY_LOOPS_NUMBER;
+  static const maxFrameNumber = MIX_PROP_PLAY_MAX_FRAME_NUMBER;
+  static const maxMillisecondsNumber = MIX_PROP_PLAY_MAX_MILLISECONDS_NUMBER;
+  static const startFrameNumber = MIX_PROP_PLAY_START_FRAME_NUMBER;
+  static const startMillisecondNumber = MIX_PROP_PLAY_START_MILLISECOND_NUMBER;
+  static const loopStartFrameNumber = MIX_PROP_PLAY_LOOP_START_FRAME_NUMBER;
+  static const loopStartMillisecondNumber =
+      MIX_PROP_PLAY_LOOP_START_MILLISECOND_NUMBER;
+  static const fadeInFramesNumber = MIX_PROP_PLAY_FADE_IN_FRAMES_NUMBER;
+  static const fadeInMillisecondsNumber =
+      MIX_PROP_PLAY_FADE_IN_MILLISECONDS_NUMBER;
+  static const appendSilenceFramesNumber =
+      MIX_PROP_PLAY_APPEND_SILENCE_FRAMES_NUMBER;
+  static const appendSilenceMillisecondsNumber =
+      MIX_PROP_PLAY_APPEND_SILENCE_MILLISECONDS_NUMBER;
+}
