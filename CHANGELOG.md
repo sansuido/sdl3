@@ -1,3 +1,8 @@
+## 2.5.1
+- SDL3-2026-01-11
+- [update] Dart 3.10.7
+- [update] ffi ^2.1.5.
+
 ## 2.5.0
 - SDL3-2026-01-04
 - [add] Added mixGetTrackTags and mixGetTaggedTracks.

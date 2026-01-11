@@ -13,10 +13,10 @@ packages:
     dependency: "direct main"
     description:
       name: ffi
-      sha256: "289279317b4b16eb2bb7e271abccd4bf84ec9bdcbe999e278a94b804f5630418"
+      sha256: d07d37192dbf97461359c1518788f203b0c9102cfd2c35a716b823741219542c
       url: "https://pub.dev"
     source: hosted
-    version: "2.1.4"
+    version: "2.1.5"
   halildurmus_lints:
     dependency: "direct dev"
     description:
@@ -34,4 +34,4 @@ packages:
     source: hosted
     version: "1.17.0"
 sdks:
-  dart: ">=3.10.6 <4.0.0"
+  dart: ">=3.10.7 <4.0.0"
