@@ -1,3 +1,9 @@
+## 2.5.2
+- SDL3-2026-01-18
+- [changed] Changed mixTrackLooping to mixGetTrackLoops.
+- [add] Added mixSetMixerFrequencyRatio and mixGetMixerFrequencyRatio.
+- [add] Added imgLoadGpuTexture, imgLoadGpuTextureIo and imgLoadGpuTextureTypedIo.
+
 ## 2.5.1
 - SDL3-2026-01-11
 - [update] Dart 3.10.7

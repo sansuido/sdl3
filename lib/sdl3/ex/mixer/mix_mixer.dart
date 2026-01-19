@@ -37,7 +37,7 @@ extension MixMixerEx on MixMixer {
   ///
   /// \param devid the device to open for playback, or
   /// SDL_AUDIO_DEVICE_DEFAULT_PLAYBACK for the default.
-  /// \param spec the audio format request from the device. May be NULL.
+  /// \param spec the audio format to request from the device. May be NULL.
   /// \returns a mixer that can be used to play audio, or NULL on failure; call
   /// SDL_GetError() for more information.
   ///
@@ -426,12 +426,13 @@ extension MixMixerPointerEx on Pointer<MixMixer> {
   /// This is useful just to have _something_ to play, perhaps for testing or
   /// debugging purposes.
   ///
-  /// The resulting MIX_Audio will generate infinite audio when assigned to a
-  /// track.
-  ///
   /// You specify its frequency in Hz (determines the pitch of the sinewave's
   /// audio) and amplitude (determines the volume of the sinewave: 1.0f is very
   /// loud, 0.0f is silent).
+  ///
+  /// A number of milliseconds of audio to generate can be specified. Specifying
+  /// a value less than zero will generate infinite audio (when assigned to a
+  /// MIX_Track, the sinewave will play forever).
   ///
   /// MIX_Audio objects can be shared between multiple mixers. The `mixer`
   /// parameter just suggests the most likely mixer to use this audio, in case
@@ -441,6 +442,8 @@ extension MixMixerPointerEx on Pointer<MixMixer> {
   /// \param mixer a mixer this audio is intended to be used with. May be NULL.
   /// \param hz the sinewave's frequency in Hz.
   /// \param amplitude the sinewave's amplitude from 0.0f to 1.0f.
+  /// \param ms the maximum number of milliseconds of audio to generate, or less
+  /// than zero to generate infinite audio.
   /// \returns an audio object that can be used to make sound on a mixer, or NULL
   /// on failure; call SDL_GetError() for more information.
   ///
@@ -453,11 +456,11 @@ extension MixMixerPointerEx on Pointer<MixMixer> {
   /// \sa MIX_LoadAudio_IO
   ///
   /// ```c
-  /// extern SDL_DECLSPEC MIX_Audio * SDLCALL MIX_CreateSineWaveAudio(MIX_Mixer *mixer, int hz, float amplitude)
+  /// extern SDL_DECLSPEC MIX_Audio * SDLCALL MIX_CreateSineWaveAudio(MIX_Mixer *mixer, int hz, float amplitude, Sint64 ms)
   /// ```
   /// {@category mixer}
-  Pointer<MixAudio> createSineWaveAudio(int hz, double amplitude) =>
-      mixCreateSineWaveAudio(this, hz, amplitude);
+  Pointer<MixAudio> createSineWaveAudio(int hz, double amplitude, int ms) =>
+      mixCreateSineWaveAudio(this, hz, amplitude, ms);
 
   ///
   /// Create a new track on a mixer.
@@ -777,19 +780,19 @@ extension MixMixerPointerEx on Pointer<MixMixer> {
   ///
   /// \since This function is available since SDL_mixer 3.0.0.
   ///
-  /// \sa MIX_GetMasterGain
+  /// \sa MIX_GetMixerGain
   /// \sa MIX_SetTrackGain
   ///
   /// ```c
-  /// extern SDL_DECLSPEC bool SDLCALL MIX_SetMasterGain(MIX_Mixer *mixer, float gain)
+  /// extern SDL_DECLSPEC bool SDLCALL MIX_SetMixerGain(MIX_Mixer *mixer, float gain)
   /// ```
   /// {@category mixer}
-  bool setMasterGain(double gain) => mixSetMasterGain(this, gain);
+  bool setGain(double gain) => mixSetMixerGain(this, gain);
 
   ///
   /// Get a mixer's master gain control.
   ///
-  /// This returns the last value set through MIX_SetMasterGain(), or 1.0f if no
+  /// This returns the last value set through MIX_SetMixerGain(), or 1.0f if no
   /// value has ever been explicitly set.
   ///
   /// \param mixer the mixer to query.
@@ -799,14 +802,14 @@ extension MixMixerPointerEx on Pointer<MixMixer> {
   ///
   /// \since This function is available since SDL_mixer 3.0.0.
   ///
-  /// \sa MIX_SetMasterGain
+  /// \sa MIX_SetMixerGain
   /// \sa MIX_GetTrackGain
   ///
   /// ```c
-  /// extern SDL_DECLSPEC float SDLCALL MIX_GetMasterGain(MIX_Mixer *mixer)
+  /// extern SDL_DECLSPEC float SDLCALL MIX_GetMixerGain(MIX_Mixer *mixer)
   /// ```
   /// {@category mixer}
-  double getMasterGain() => mixGetMasterGain(this);
+  double getGain() => mixGetMixerGain(this);
 
   ///
   /// Set the gain control of all tracks with a specific tag.
@@ -840,7 +843,7 @@ extension MixMixerPointerEx on Pointer<MixMixer> {
   ///
   /// \sa MIX_GetTrackGain
   /// \sa MIX_SetTrackGain
-  /// \sa MIX_SetMasterGain
+  /// \sa MIX_SetMixerGain
   /// \sa MIX_TagTrack
   ///
   /// ```c
@@ -884,6 +887,64 @@ extension MixMixerPointerEx on Pointer<MixMixer> {
   /// ```
   /// {@category mixer}
   Pointer<MixGroup> createGroup() => mixCreateGroup(this);
+
+  ///
+  /// Set a mixer's master frequency ratio.
+  ///
+  /// Each mixer has a master frequency ratio, that affects the entire mix. This
+  /// can cause the final output to change speed and pitch. A value greater than
+  /// 1.0f will play the audio faster, and at a higher pitch. A value less than
+  /// 1.0f will play the audio slower, and at a lower pitch. 1.0f is normal
+  /// speed.
+  ///
+  /// Each track _also_ has a frequency ratio; it will be applied when mixing
+  /// that track's audio regardless of the master setting. The master setting
+  /// affects the final output after all mixing has been completed.
+  ///
+  /// A mixer's master frequency ratio defaults to 1.0f.
+  ///
+  /// This value can be changed at any time to adjust the future mix.
+  ///
+  /// \param mixer the mixer to adjust.
+  /// \param ratio the frequency ratio. Must be between 0.01f and 100.0f.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
+  ///
+  /// \threadsafety It is safe to call this function from any thread.
+  ///
+  /// \since This function is available since SDL_mixer 3.0.0.
+  ///
+  /// \sa MIX_GetMixerFrequencyRatio
+  /// \sa MIX_SetTrackFrequencyRatio
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC bool SDLCALL MIX_SetMixerFrequencyRatio(MIX_Mixer *mixer, float ratio)
+  /// ```
+  /// {@category mixer}
+  bool setFrequencyRatio(double ratio) =>
+      mixSetMixerFrequencyRatio(this, ratio);
+
+  ///
+  /// Get a mixer's master frequency ratio.
+  ///
+  /// This returns the last value set through MIX_SetMixerFrequencyRatio(), or
+  /// 1.0f if no value has ever been explicitly set.
+  ///
+  /// \param mixer the mixer to query.
+  /// \returns the mixer's current master frequency ratio.
+  ///
+  /// \threadsafety It is safe to call this function from any thread.
+  ///
+  /// \since This function is available since SDL_mixer 3.0.0.
+  ///
+  /// \sa MIX_SetMixerFrequencyRatio
+  /// \sa MIX_GetTrackFrequencyRatio
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC float SDLCALL MIX_GetMixerFrequencyRatio(MIX_Mixer *mixer)
+  /// ```
+  /// {@category mixer}
+  double getFrequencyRatio() => mixGetMixerFrequencyRatio(this);
 
   ///
   /// Set a callback that fires when all mixing has completed.

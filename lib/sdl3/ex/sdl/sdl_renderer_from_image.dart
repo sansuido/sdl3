@@ -6,7 +6,7 @@ extension SdlRendererFromImagePointerEx on Pointer<SdlRenderer> {
   // lib_sdl_image.dart
 
   ///
-  /// Load an image from a filesystem path into a GPU texture.
+  /// Load an image from a filesystem path into a texture.
   ///
   /// An SDL_Texture represents an image in GPU memory, usable by SDL's 2D Render
   /// API. This can be significantly more efficient than using a CPU-bound
@@ -29,7 +29,7 @@ extension SdlRendererFromImagePointerEx on Pointer<SdlRenderer> {
   /// When done with the returned texture, the app should dispose of it with a
   /// call to SDL_DestroyTexture().
   ///
-  /// \param renderer the SDL_Renderer to use to create the GPU texture.
+  /// \param renderer the SDL_Renderer to use to create the texture.
   /// \param file a path on the filesystem to load an image from.
   /// \returns a new texture, or NULL on error.
   ///
@@ -45,7 +45,7 @@ extension SdlRendererFromImagePointerEx on Pointer<SdlRenderer> {
   Pointer<SdlTexture> loadTexture(String file) => imgLoadTexture(this, file);
 
   ///
-  /// Load an image from an SDL data source into a GPU texture.
+  /// Load an image from an SDL data source into a texture.
   ///
   /// An SDL_Texture represents an image in GPU memory, usable by SDL's 2D Render
   /// API. This can be significantly more efficient than using a CPU-bound
@@ -77,7 +77,7 @@ extension SdlRendererFromImagePointerEx on Pointer<SdlRenderer> {
   /// When done with the returned texture, the app should dispose of it with a
   /// call to SDL_DestroyTexture().
   ///
-  /// \param renderer the SDL_Renderer to use to create the GPU texture.
+  /// \param renderer the SDL_Renderer to use to create the texture.
   /// \param src an SDL_IOStream that data will be read from.
   /// \param closeio true to close/free the SDL_IOStream before returning, false
   /// to leave it open.
@@ -96,7 +96,7 @@ extension SdlRendererFromImagePointerEx on Pointer<SdlRenderer> {
       imgLoadTextureIo(this, src, freesrc);
 
   ///
-  /// Load an image from an SDL data source into a GPU texture.
+  /// Load an image from an SDL data source into a texture.
   ///
   /// An SDL_Texture represents an image in GPU memory, usable by SDL's 2D Render
   /// API. This can be significantly more efficient than using a CPU-bound
@@ -134,7 +134,7 @@ extension SdlRendererFromImagePointerEx on Pointer<SdlRenderer> {
   /// When done with the returned texture, the app should dispose of it with a
   /// call to SDL_DestroyTexture().
   ///
-  /// \param renderer the SDL_Renderer to use to create the GPU texture.
+  /// \param renderer the SDL_Renderer to use to create the texture.
   /// \param src an SDL_IOStream that data will be read from.
   /// \param closeio true to close/free the SDL_IOStream before returning, false
   /// to leave it open.
