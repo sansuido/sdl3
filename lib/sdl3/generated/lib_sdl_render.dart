@@ -4616,7 +4616,7 @@ bool sdlGetDefaultTextureScaleMode(
 /// \sa SDL_DestroyGPURenderState
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_GPURenderState * SDLCALL SDL_CreateGPURenderState(SDL_Renderer *renderer, SDL_GPURenderStateCreateInfo *createinfo)
+/// extern SDL_DECLSPEC SDL_GPURenderState * SDLCALL SDL_CreateGPURenderState(SDL_Renderer *renderer, const SDL_GPURenderStateCreateInfo *createinfo)
 /// ```
 /// {@category render}
 Pointer<SdlGpuRenderState> sdlCreateGpuRenderState(

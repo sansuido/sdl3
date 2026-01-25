@@ -5,7 +5,7 @@ part of '../sdl_mixer.dart';
 //const SDL_MIXER_H_ = ;
 const SDL_MIXER_MAJOR_VERSION = 3;
 const SDL_MIXER_MINOR_VERSION = 1;
-const SDL_MIXER_MICRO_VERSION = 0;
+const SDL_MIXER_MICRO_VERSION = 3;
 //const SDL_MIXER_VERSION = SDL_VERSIONNUM(SDL_MIXER_MAJOR_VERSION, SDL_MIXER_MINOR_VERSION, SDL_MIXER_MICRO_VERSION);
 //const SDL_MIXER_VERSION_ATLEAST = (X, Y, Z) ((SDL_MIXER_MAJOR_VERSION >= X) && (SDL_MIXER_MAJOR_VERSION > X || SDL_MIXER_MINOR_VERSION >= Y) && (SDL_MIXER_MAJOR_VERSION > X || SDL_MIXER_MINOR_VERSION > Y || SDL_MIXER_MICRO_VERSION >= Z));
 const MIX_PROP_MIXER_DEVICE_NUMBER = 'SDL_mixer.mixer.device';
@@ -42,6 +42,8 @@ const MIX_PROP_PLAY_LOOP_START_MILLISECOND_NUMBER =
 const MIX_PROP_PLAY_FADE_IN_FRAMES_NUMBER = 'SDL_mixer.play.fade_in_frames';
 const MIX_PROP_PLAY_FADE_IN_MILLISECONDS_NUMBER =
     'SDL_mixer.play.fade_in_milliseconds';
+const MIX_PROP_PLAY_FADE_IN_START_GAIN_FLOAT =
+    'SDL_mixer.play.fade_in_start_gain';
 const MIX_PROP_PLAY_APPEND_SILENCE_FRAMES_NUMBER =
     'SDL_mixer.play.append_silence_frames';
 const MIX_PROP_PLAY_APPEND_SILENCE_MILLISECONDS_NUMBER =
@@ -91,6 +93,7 @@ class MixkPropPlay {
   static const fadeInFramesNumber = MIX_PROP_PLAY_FADE_IN_FRAMES_NUMBER;
   static const fadeInMillisecondsNumber =
       MIX_PROP_PLAY_FADE_IN_MILLISECONDS_NUMBER;
+  static const fadeInStartGainFloat = MIX_PROP_PLAY_FADE_IN_START_GAIN_FLOAT;
   static const appendSilenceFramesNumber =
       MIX_PROP_PLAY_APPEND_SILENCE_FRAMES_NUMBER;
   static const appendSilenceMillisecondsNumber =

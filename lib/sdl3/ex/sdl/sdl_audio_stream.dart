@@ -501,7 +501,7 @@ extension SdlAudioStreamPointerEx on Pointer<SdlAudioStream> {
   ///
   /// \since This function is available since SDL 3.2.0.
   ///
-  /// \sa SDL_SetAudioStreamInputChannelMap
+  /// \sa SDL_SetAudioStreamOutputChannelMap
   ///
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetAudioStreamInputChannelMap(SDL_AudioStream *stream, const int *chmap, int count)

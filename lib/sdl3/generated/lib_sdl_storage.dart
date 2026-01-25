@@ -482,7 +482,7 @@ bool sdlEnumerateStorageDirectory(
 /// Remove a file or an empty directory in a writable storage container.
 ///
 /// \param storage a storage container.
-/// \param path the path of the directory to enumerate.
+/// \param path the path to remove from the filesystem.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
