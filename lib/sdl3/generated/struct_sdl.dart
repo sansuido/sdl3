@@ -3300,6 +3300,32 @@ extension SdlInitStateExtension on Pointer<SdlInitState> {
   Pointer<SdlAtomicInt> get status => (cast<Uint8>() + 0).cast<SdlAtomicInt>();
 }
 
+// XrSessionCreateInfo
+/// {@category openxr}
+final class XrSessionCreateInfo extends Struct {
+  // [0]+(4)
+  @Int32()
+  external int type;
+  // [] +(4)
+  @Uint32()
+  external int blank_1;
+  // [8]+(8)
+  external Pointer<NativeType> next;
+}
+
+// XrSwapchainCreateInfo
+/// {@category openxr}
+final class XrSwapchainCreateInfo extends Struct {
+  // [0]+(4)
+  @Int32()
+  external int type;
+  // [] +(4)
+  @Uint32()
+  external int blank_1;
+  // [8]+(8)
+  external Pointer<NativeType> next;
+}
+
 // SDL_Color
 /// {@category pixels}
 final class SdlColor extends Struct {

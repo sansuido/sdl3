@@ -664,6 +664,34 @@ const SDL_PROP_GPU_DEVICE_CREATE_VULKAN_REQUIRE_HARDWARE_ACCELERATION_BOOLEAN =
     'SDL.gpu.device.create.vulkan.requirehardwareacceleration';
 const SDL_PROP_GPU_DEVICE_CREATE_VULKAN_OPTIONS_POINTER =
     'SDL.gpu.device.create.vulkan.options';
+const SDL_PROP_GPU_DEVICE_CREATE_METAL_ALLOW_MACFAMILY1_BOOLEAN =
+    'SDL.gpu.device.create.metal.allowmacfamily1';
+const SDL_PROP_GPU_DEVICE_CREATE_XR_ENABLE_BOOLEAN =
+    'SDL.gpu.device.create.xr.enable';
+const SDL_PROP_GPU_DEVICE_CREATE_XR_INSTANCE_POINTER =
+    'SDL.gpu.device.create.xr.instance_out';
+const SDL_PROP_GPU_DEVICE_CREATE_XR_SYSTEM_ID_POINTER =
+    'SDL.gpu.device.create.xr.system_id_out';
+const SDL_PROP_GPU_DEVICE_CREATE_XR_VERSION_NUMBER =
+    'SDL.gpu.device.create.xr.version';
+const SDL_PROP_GPU_DEVICE_CREATE_XR_FORM_FACTOR_NUMBER =
+    'SDL.gpu.device.create.xr.form_factor';
+const SDL_PROP_GPU_DEVICE_CREATE_XR_EXTENSION_COUNT_NUMBER =
+    'SDL.gpu.device.create.xr.extensions.count';
+const SDL_PROP_GPU_DEVICE_CREATE_XR_EXTENSION_NAMES_POINTER =
+    'SDL.gpu.device.create.xr.extensions.names';
+const SDL_PROP_GPU_DEVICE_CREATE_XR_LAYER_COUNT_NUMBER =
+    'SDL.gpu.device.create.xr.layers.count';
+const SDL_PROP_GPU_DEVICE_CREATE_XR_LAYER_NAMES_POINTER =
+    'SDL.gpu.device.create.xr.layers.names';
+const SDL_PROP_GPU_DEVICE_CREATE_XR_APPLICATION_NAME_STRING =
+    'SDL.gpu.device.create.xr.application.name';
+const SDL_PROP_GPU_DEVICE_CREATE_XR_APPLICATION_VERSION_NUMBER =
+    'SDL.gpu.device.create.xr.application.version';
+const SDL_PROP_GPU_DEVICE_CREATE_XR_ENGINE_NAME_STRING =
+    'SDL.gpu.device.create.xr.engine.name';
+const SDL_PROP_GPU_DEVICE_CREATE_XR_ENGINE_VERSION_NUMBER =
+    'SDL.gpu.device.create.xr.engine.version';
 const SDL_PROP_GPU_DEVICE_NAME_STRING = 'SDL.gpu.device.name';
 const SDL_PROP_GPU_DEVICE_DRIVER_NAME_STRING = 'SDL.gpu.device.driver_name';
 const SDL_PROP_GPU_DEVICE_DRIVER_VERSION_STRING =
@@ -795,6 +823,7 @@ const SDL_HINT_HIDAPI_LIBUSB_GAMECUBE = 'SDL_HIDAPI_LIBUSB_GAMECUBE';
 const SDL_HINT_HIDAPI_LIBUSB_WHITELIST = 'SDL_HIDAPI_LIBUSB_WHITELIST';
 const SDL_HINT_HIDAPI_UDEV = 'SDL_HIDAPI_UDEV';
 const SDL_HINT_GPU_DRIVER = 'SDL_GPU_DRIVER';
+const SDL_HINT_OPENXR_LIBRARY = 'SDL_OPENXR_LIBRARY';
 const SDL_HINT_HIDAPI_ENUMERATE_ONLY_CONTROLLERS =
     'SDL_HIDAPI_ENUMERATE_ONLY_CONTROLLERS';
 const SDL_HINT_HIDAPI_IGNORE_DEVICES = 'SDL_HIDAPI_IGNORE_DEVICES';
@@ -1564,6 +1593,15 @@ const SDL_INIT_STATUS_UNINITIALIZED = 0;
 const SDL_INIT_STATUS_INITIALIZING = 1;
 const SDL_INIT_STATUS_INITIALIZED = 2;
 const SDL_INIT_STATUS_UNINITIALIZING = 3;
+//const SDL_openxr_h_ = ;
+const NO_SDL_OPENXR_TYPEDEFS = 1;
+const XR_NULL_HANDLE = 0;
+//const XR_DEFINE_HANDLE = (object) typedef Uint64 object;;
+const XR_TYPE_SESSION_CREATE_INFO = 8;
+const XR_TYPE_SWAPCHAIN_CREATE_INFO = 9;
+const XR_ERROR_FUNCTION_UNSUPPORTED = -7;
+const XR_ERROR_HANDLE_INVALID = -12;
+//const PFN_xrGetInstanceProcAddr = SDL_FunctionPointer;
 //const SDL_pen_h_ = ;
 //const SDL_PEN_MOUSEID = ((SDL_MouseID)-2);
 //const SDL_PEN_TOUCHID = ((SDL_TouchID)-2);
@@ -2063,7 +2101,7 @@ const SDL_RENDERER_VSYNC_ADAPTIVE = -1;
 const SDL_DEBUG_TEXT_FONT_CHARACTER_SIZE = 8;
 //const SDL_revision_h_ = ;
 const SDL_REVISION =
-    'SDL-3.5.0-release-3.4.0-111-g6fc31b7f0 (" SDL_VENDOR_INFO ")';
+    'SDL-3.5.0-release-3.4.0-153-g4743f97c3 (" SDL_VENDOR_INFO ")';
 //const SDL_scancode_h_ = ;
 const SDL_SCANCODE_UNKNOWN = 0;
 const SDL_SCANCODE_A = 4;
@@ -2714,6 +2752,8 @@ const SDL_PROP_WINDOW_COCOA_WINDOW_POINTER = 'SDL.window.cocoa.window';
 const SDL_PROP_WINDOW_COCOA_METAL_VIEW_TAG_NUMBER =
     'SDL.window.cocoa.metal_view_tag';
 const SDL_PROP_WINDOW_OPENVR_OVERLAY_ID_NUMBER = 'SDL.window.openvr.overlay_id';
+const SDL_PROP_WINDOW_QNX_WINDOW_POINTER = 'SDL.window.qnx.window';
+const SDL_PROP_WINDOW_QNX_SURFACE_POINTER = 'SDL.window.qnx.surface';
 const SDL_PROP_WINDOW_VIVANTE_DISPLAY_POINTER = 'SDL.window.vivante.display';
 const SDL_PROP_WINDOW_VIVANTE_WINDOW_POINTER = 'SDL.window.vivante.window';
 const SDL_PROP_WINDOW_VIVANTE_SURFACE_POINTER = 'SDL.window.vivante.surface';
@@ -3515,6 +3555,34 @@ class SdlkPropGpu {
       SDL_PROP_GPU_DEVICE_CREATE_VULKAN_REQUIRE_HARDWARE_ACCELERATION_BOOLEAN;
   static const deviceCreateVulkanOptionsPointer =
       SDL_PROP_GPU_DEVICE_CREATE_VULKAN_OPTIONS_POINTER;
+  static const deviceCreateMetalAllowMacfamily1Boolean =
+      SDL_PROP_GPU_DEVICE_CREATE_METAL_ALLOW_MACFAMILY1_BOOLEAN;
+  static const deviceCreateXrEnableBoolean =
+      SDL_PROP_GPU_DEVICE_CREATE_XR_ENABLE_BOOLEAN;
+  static const deviceCreateXrInstancePointer =
+      SDL_PROP_GPU_DEVICE_CREATE_XR_INSTANCE_POINTER;
+  static const deviceCreateXrSystemIdPointer =
+      SDL_PROP_GPU_DEVICE_CREATE_XR_SYSTEM_ID_POINTER;
+  static const deviceCreateXrVersionNumber =
+      SDL_PROP_GPU_DEVICE_CREATE_XR_VERSION_NUMBER;
+  static const deviceCreateXrFormFactorNumber =
+      SDL_PROP_GPU_DEVICE_CREATE_XR_FORM_FACTOR_NUMBER;
+  static const deviceCreateXrExtensionCountNumber =
+      SDL_PROP_GPU_DEVICE_CREATE_XR_EXTENSION_COUNT_NUMBER;
+  static const deviceCreateXrExtensionNamesPointer =
+      SDL_PROP_GPU_DEVICE_CREATE_XR_EXTENSION_NAMES_POINTER;
+  static const deviceCreateXrLayerCountNumber =
+      SDL_PROP_GPU_DEVICE_CREATE_XR_LAYER_COUNT_NUMBER;
+  static const deviceCreateXrLayerNamesPointer =
+      SDL_PROP_GPU_DEVICE_CREATE_XR_LAYER_NAMES_POINTER;
+  static const deviceCreateXrApplicationNameString =
+      SDL_PROP_GPU_DEVICE_CREATE_XR_APPLICATION_NAME_STRING;
+  static const deviceCreateXrApplicationVersionNumber =
+      SDL_PROP_GPU_DEVICE_CREATE_XR_APPLICATION_VERSION_NUMBER;
+  static const deviceCreateXrEngineNameString =
+      SDL_PROP_GPU_DEVICE_CREATE_XR_ENGINE_NAME_STRING;
+  static const deviceCreateXrEngineVersionNumber =
+      SDL_PROP_GPU_DEVICE_CREATE_XR_ENGINE_VERSION_NUMBER;
   static const deviceNameString = SDL_PROP_GPU_DEVICE_NAME_STRING;
   static const deviceDriverNameString = SDL_PROP_GPU_DEVICE_DRIVER_NAME_STRING;
   static const deviceDriverVersionString =
@@ -3654,6 +3722,7 @@ class SdlkHint {
   static const hidapiLibusbWhitelist = SDL_HINT_HIDAPI_LIBUSB_WHITELIST;
   static const hidapiUdev = SDL_HINT_HIDAPI_UDEV;
   static const gpuDriver = SDL_HINT_GPU_DRIVER;
+  static const openxrLibrary = SDL_HINT_OPENXR_LIBRARY;
   static const hidapiEnumerateOnlyControllers =
       SDL_HINT_HIDAPI_ENUMERATE_ONLY_CONTROLLERS;
   static const hidapiIgnoreDevices = SDL_HINT_HIDAPI_IGNORE_DEVICES;
@@ -5547,6 +5616,8 @@ class SdlkPropWindow {
   static const cocoaMetalViewTagNumber =
       SDL_PROP_WINDOW_COCOA_METAL_VIEW_TAG_NUMBER;
   static const openvrOverlayIdNumber = SDL_PROP_WINDOW_OPENVR_OVERLAY_ID_NUMBER;
+  static const qnxWindowPointer = SDL_PROP_WINDOW_QNX_WINDOW_POINTER;
+  static const qnxSurfacePointer = SDL_PROP_WINDOW_QNX_SURFACE_POINTER;
   static const vivanteDisplayPointer = SDL_PROP_WINDOW_VIVANTE_DISPLAY_POINTER;
   static const vivanteWindowPointer = SDL_PROP_WINDOW_VIVANTE_WINDOW_POINTER;
   static const vivanteSurfacePointer = SDL_PROP_WINDOW_VIVANTE_SURFACE_POINTER;

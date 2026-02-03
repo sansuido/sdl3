@@ -83,6 +83,8 @@ dartdoc:
       markdown: doc/opengl.md
     'opengl_glext':
       markdown: doc/opengl_glext.md
+    'openxr':
+      markdown: doc/openxr.md
     'pen':
       markdown: doc/pen.md
     'pixels':
@@ -175,6 +177,7 @@ dartdoc:
     'pen',
     'opengl',
     'opengl_glext',
+    'openxr',
     'pixels',
     'platform',
     'power',

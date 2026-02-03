@@ -17,13 +17,33 @@ part of '../sdl.dart';
 /// extern SDL_DECLSPEC void SDLCALL SDL_LockJoysticks(void) SDL_ACQUIRE(SDL_joystick_lock)
 /// ```
 /// {@category joystick}
-void sdlLockJoysticks(Pointer<NativeType> arg0) {
+void sdlLockJoysticks() {
   final sdlLockJoysticksLookupFunction = _libSdl
-      .lookupFunction<
-        Void Function(Pointer<NativeType> arg0),
-        void Function(Pointer<NativeType> arg0)
-      >('SDL_LockJoysticks');
-  return sdlLockJoysticksLookupFunction(arg0);
+      .lookupFunction<Void Function(), void Function()>('SDL_LockJoysticks');
+  return sdlLockJoysticksLookupFunction();
+}
+
+///
+/// Locking for atomic access to the joystick API.
+///
+/// The SDL joystick functions are thread-safe, however you can lock the
+/// joysticks while processing to guarantee that the joystick list won't change
+/// and joystick and gamepad events will not be delivered.
+///
+/// \returns true if the joysticks were successfully locked, false otherwise.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.6.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL SDL_TryLockJoysticks(void) SDL_ACQUIRE(SDL_joystick_lock)
+/// ```
+/// {@category joystick}
+bool sdlTryLockJoysticks() {
+  final sdlTryLockJoysticksLookupFunction = _libSdl
+      .lookupFunction<Uint8 Function(), int Function()>('SDL_TryLockJoysticks');
+  return sdlTryLockJoysticksLookupFunction() == 1;
 }
 
 ///
@@ -38,13 +58,10 @@ void sdlLockJoysticks(Pointer<NativeType> arg0) {
 /// extern SDL_DECLSPEC void SDLCALL SDL_UnlockJoysticks(void) SDL_RELEASE(SDL_joystick_lock)
 /// ```
 /// {@category joystick}
-void sdlUnlockJoysticks(Pointer<NativeType> arg0) {
+void sdlUnlockJoysticks() {
   final sdlUnlockJoysticksLookupFunction = _libSdl
-      .lookupFunction<
-        Void Function(Pointer<NativeType> arg0),
-        void Function(Pointer<NativeType> arg0)
-      >('SDL_UnlockJoysticks');
-  return sdlUnlockJoysticksLookupFunction(arg0);
+      .lookupFunction<Void Function(), void Function()>('SDL_UnlockJoysticks');
+  return sdlUnlockJoysticksLookupFunction();
 }
 
 ///

@@ -61,13 +61,13 @@ Pointer<SdlMutex> sdlCreateMutex() {
 /// extern SDL_DECLSPEC void SDLCALL SDL_LockMutex(SDL_Mutex *mutex) SDL_ACQUIRE(mutex)
 /// ```
 /// {@category mutex}
-void sdlLockMutex(Pointer<NativeType> arg0) {
+void sdlLockMutex(Pointer<SdlMutex> mutex) {
   final sdlLockMutexLookupFunction = _libSdl
       .lookupFunction<
-        Void Function(Pointer<NativeType> arg0),
-        void Function(Pointer<NativeType> arg0)
+        Void Function(Pointer<SdlMutex> mutex),
+        void Function(Pointer<SdlMutex> mutex)
       >('SDL_LockMutex');
-  return sdlLockMutexLookupFunction(arg0);
+  return sdlLockMutexLookupFunction(mutex);
 }
 
 ///
@@ -93,13 +93,13 @@ void sdlLockMutex(Pointer<NativeType> arg0) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_TryLockMutex(SDL_Mutex *mutex) SDL_TRY_ACQUIRE(true, mutex)
 /// ```
 /// {@category mutex}
-bool sdlTryLockMutex(Pointer<NativeType> arg0, Pointer<NativeType> arg1) {
+bool sdlTryLockMutex(Pointer<SdlMutex> mutex) {
   final sdlTryLockMutexLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(Pointer<NativeType> arg0, Pointer<NativeType> arg1),
-        int Function(Pointer<NativeType> arg0, Pointer<NativeType> arg1)
+        Uint8 Function(Pointer<SdlMutex> mutex),
+        int Function(Pointer<SdlMutex> mutex)
       >('SDL_TryLockMutex');
-  return sdlTryLockMutexLookupFunction(arg0, arg1) == 1;
+  return sdlTryLockMutexLookupFunction(mutex) == 1;
 }
 
 ///
@@ -123,13 +123,13 @@ bool sdlTryLockMutex(Pointer<NativeType> arg0, Pointer<NativeType> arg1) {
 /// extern SDL_DECLSPEC void SDLCALL SDL_UnlockMutex(SDL_Mutex *mutex) SDL_RELEASE(mutex)
 /// ```
 /// {@category mutex}
-void sdlUnlockMutex(Pointer<NativeType> arg0) {
+void sdlUnlockMutex(Pointer<SdlMutex> mutex) {
   final sdlUnlockMutexLookupFunction = _libSdl
       .lookupFunction<
-        Void Function(Pointer<NativeType> arg0),
-        void Function(Pointer<NativeType> arg0)
+        Void Function(Pointer<SdlMutex> mutex),
+        void Function(Pointer<SdlMutex> mutex)
       >('SDL_UnlockMutex');
-  return sdlUnlockMutexLookupFunction(arg0);
+  return sdlUnlockMutexLookupFunction(mutex);
 }
 
 ///
@@ -252,13 +252,13 @@ Pointer<SdlRwLock> sdlCreateRwLock() {
 /// extern SDL_DECLSPEC void SDLCALL SDL_LockRWLockForReading(SDL_RWLock *rwlock) SDL_ACQUIRE_SHARED(rwlock)
 /// ```
 /// {@category mutex}
-void sdlLockRwLockForReading(Pointer<NativeType> arg0) {
+void sdlLockRwLockForReading(Pointer<SdlRwLock> rwlock) {
   final sdlLockRwLockForReadingLookupFunction = _libSdl
       .lookupFunction<
-        Void Function(Pointer<NativeType> arg0),
-        void Function(Pointer<NativeType> arg0)
+        Void Function(Pointer<SdlRwLock> rwlock),
+        void Function(Pointer<SdlRwLock> rwlock)
       >('SDL_LockRWLockForReading');
-  return sdlLockRwLockForReadingLookupFunction(arg0);
+  return sdlLockRwLockForReadingLookupFunction(rwlock);
 }
 
 ///
@@ -294,13 +294,13 @@ void sdlLockRwLockForReading(Pointer<NativeType> arg0) {
 /// extern SDL_DECLSPEC void SDLCALL SDL_LockRWLockForWriting(SDL_RWLock *rwlock) SDL_ACQUIRE(rwlock)
 /// ```
 /// {@category mutex}
-void sdlLockRwLockForWriting(Pointer<NativeType> arg0) {
+void sdlLockRwLockForWriting(Pointer<SdlRwLock> rwlock) {
   final sdlLockRwLockForWritingLookupFunction = _libSdl
       .lookupFunction<
-        Void Function(Pointer<NativeType> arg0),
-        void Function(Pointer<NativeType> arg0)
+        Void Function(Pointer<SdlRwLock> rwlock),
+        void Function(Pointer<SdlRwLock> rwlock)
       >('SDL_LockRWLockForWriting');
-  return sdlLockRwLockForWritingLookupFunction(arg0);
+  return sdlLockRwLockForWritingLookupFunction(rwlock);
 }
 
 ///
@@ -330,16 +330,13 @@ void sdlLockRwLockForWriting(Pointer<NativeType> arg0) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_TryLockRWLockForReading(SDL_RWLock *rwlock) SDL_TRY_ACQUIRE_SHARED(true, rwlock)
 /// ```
 /// {@category mutex}
-bool sdlTryLockRwLockForReading(
-  Pointer<NativeType> arg0,
-  Pointer<NativeType> arg1,
-) {
+bool sdlTryLockRwLockForReading(Pointer<SdlRwLock> rwlock) {
   final sdlTryLockRwLockForReadingLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(Pointer<NativeType> arg0, Pointer<NativeType> arg1),
-        int Function(Pointer<NativeType> arg0, Pointer<NativeType> arg1)
+        Uint8 Function(Pointer<SdlRwLock> rwlock),
+        int Function(Pointer<SdlRwLock> rwlock)
       >('SDL_TryLockRWLockForReading');
-  return sdlTryLockRwLockForReadingLookupFunction(arg0, arg1) == 1;
+  return sdlTryLockRwLockForReadingLookupFunction(rwlock) == 1;
 }
 
 ///
@@ -374,16 +371,13 @@ bool sdlTryLockRwLockForReading(
 /// extern SDL_DECLSPEC bool SDLCALL SDL_TryLockRWLockForWriting(SDL_RWLock *rwlock) SDL_TRY_ACQUIRE(true, rwlock)
 /// ```
 /// {@category mutex}
-bool sdlTryLockRwLockForWriting(
-  Pointer<NativeType> arg0,
-  Pointer<NativeType> arg1,
-) {
+bool sdlTryLockRwLockForWriting(Pointer<SdlRwLock> rwlock) {
   final sdlTryLockRwLockForWritingLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(Pointer<NativeType> arg0, Pointer<NativeType> arg1),
-        int Function(Pointer<NativeType> arg0, Pointer<NativeType> arg1)
+        Uint8 Function(Pointer<SdlRwLock> rwlock),
+        int Function(Pointer<SdlRwLock> rwlock)
       >('SDL_TryLockRWLockForWriting');
-  return sdlTryLockRwLockForWritingLookupFunction(arg0, arg1) == 1;
+  return sdlTryLockRwLockForWritingLookupFunction(rwlock) == 1;
 }
 
 ///
@@ -413,13 +407,13 @@ bool sdlTryLockRwLockForWriting(
 /// extern SDL_DECLSPEC void SDLCALL SDL_UnlockRWLock(SDL_RWLock *rwlock) SDL_RELEASE_GENERIC(rwlock)
 /// ```
 /// {@category mutex}
-void sdlUnlockRwLock(Pointer<NativeType> arg0) {
+void sdlUnlockRwLock(Pointer<SdlRwLock> rwlock) {
   final sdlUnlockRwLockLookupFunction = _libSdl
       .lookupFunction<
-        Void Function(Pointer<NativeType> arg0),
-        void Function(Pointer<NativeType> arg0)
+        Void Function(Pointer<SdlRwLock> rwlock),
+        void Function(Pointer<SdlRwLock> rwlock)
       >('SDL_UnlockRWLock');
-  return sdlUnlockRwLockLookupFunction(arg0);
+  return sdlUnlockRwLockLookupFunction(rwlock);
 }
 
 ///

@@ -1589,8 +1589,8 @@ Pointer<Pointer<Int8>> mixGetTrackTags(
 /// \param count a pointer filled in with the number of tracks returned, can be
 /// NULL.
 /// \returns an array of the tracks, NULL-terminated, or NULL on failure; call
-/// SDL_GetError() for more information. The returned pointer hould be
-/// freed with SDL_free() when it is no longer needed.
+/// SDL_GetError() for more information. The returned pointer should
+/// be freed with SDL_free() when it is no longer needed.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///

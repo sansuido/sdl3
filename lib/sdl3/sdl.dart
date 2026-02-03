@@ -53,6 +53,7 @@ part 'generated/lib_sdl_metal.dart';
 part 'generated/lib_sdl_misc.dart';
 part 'generated/lib_sdl_mouse.dart';
 part 'generated/lib_sdl_mutex.dart';
+part 'generated/lib_sdl_openxr.dart';
 part 'generated/lib_sdl_pen.dart';
 part 'generated/lib_sdl_pixels.dart';
 part 'generated/lib_sdl_platform.dart';

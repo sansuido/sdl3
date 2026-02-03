@@ -1,3 +1,10 @@
+## 2.5.4
+- SDL3-2026-02-01
+- [update] Dart 3.10.8
+- [add] Added OpenXR functions and structs.
+- [add] Added sdlTryLockJoysticks.
+- [fixed] Fixed an incorrect functions argument(sdlLockJoysticks, sdlLockMutex and more).
+
 ## 2.5.3
 - SDL3-2026-01-25
 

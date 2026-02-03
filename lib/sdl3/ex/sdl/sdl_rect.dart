@@ -15,7 +15,7 @@ extension SdlFRectPointerEx on Pointer<SdlFRect> {
   ///
   /// \since This function is available since SDL 3.2.0.
   ///
-  /// \sa SDL_GetRectIntersection
+  /// \sa SDL_GetRectIntersectionFloat
   ///
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_HasRectIntersectionFloat(const SDL_FRect *A, const SDL_FRect *B)
