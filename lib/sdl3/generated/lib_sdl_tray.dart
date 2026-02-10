@@ -20,6 +20,7 @@ part of '../sdl.dart';
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
+/// \sa SDL_CreateTrayWithProperties
 /// \sa SDL_CreateTrayMenu
 /// \sa SDL_GetTrayMenu
 /// \sa SDL_DestroyTray
@@ -44,6 +45,61 @@ Pointer<SdlTray> sdlCreateTray(Pointer<SdlSurface> icon, String? tooltip) {
   final result = sdlCreateTrayLookupFunction(icon, tooltipPointer);
   calloc.free(tooltipPointer);
   return result;
+}
+
+///
+/// Create an icon to be placed in the operating system's tray, or equivalent.
+///
+/// Many platforms advise not using a system tray unless persistence is a
+/// necessary feature. Avoid needlessly creating a tray icon, as the user may
+/// feel like it clutters their interface.
+///
+/// Using tray icons require the video subsystem.
+///
+/// These are the supported properties:
+///
+/// - `SDL_PROP_TRAY_CREATE_ICON_POINTER`: an SDL_Surface to be used as the
+/// tray icon. May be NULL.
+/// - `SDL_PROP_TRAY_CREATE_TOOLTIP_STRING`: a tooltip to be displayed when the
+/// mouse hovers the icon in UTF-8 encoding. Not supported on all platforms.
+/// May be NULL.
+/// - `SDL_PROP_TRAY_CREATE_USERDATA_POINTER`: an optional pointer to associate
+/// with the tray, which will be passed to click callbacks. May be NULL.
+/// - `SDL_PROP_TRAY_CREATE_LEFTCLICK_CALLBACK_POINTER`: an
+/// SDL_TrayClickCallback to be invoked when the tray icon is left-clicked.
+/// Not supported on all platforms. The callback should return true to show
+/// the default menu, or false to skip showing it. May be NULL.
+/// - `SDL_PROP_TRAY_CREATE_RIGHTCLICK_CALLBACK_POINTER`: an
+/// SDL_TrayClickCallback to be invoked when the tray icon is right-clicked.
+/// Not supported on all platforms. The callback should return true to show
+/// the default menu, or false to skip showing it. May be NULL.
+/// - `SDL_PROP_TRAY_CREATE_MIDDLECLICK_CALLBACK_POINTER`: an
+/// SDL_TrayClickCallback to be invoked when the tray icon is middle-clicked.
+/// Not supported on all platforms. May be NULL.
+///
+/// \param props the properties to use.
+/// \returns The newly created system tray icon.
+///
+/// \threadsafety This function should only be called on the main thread.
+///
+/// \since This function is available since SDL 3.6.0.
+///
+/// \sa SDL_CreateTray
+/// \sa SDL_CreateTrayMenu
+/// \sa SDL_GetTrayMenu
+/// \sa SDL_DestroyTray
+///
+/// ```c
+/// extern SDL_DECLSPEC SDL_Tray * SDLCALL SDL_CreateTrayWithProperties(SDL_PropertiesID props)
+/// ```
+/// {@category tray}
+Pointer<SdlTray> sdlCreateTrayWithProperties(int props) {
+  final sdlCreateTrayWithPropertiesLookupFunction = _libSdl
+      .lookupFunction<
+        Pointer<SdlTray> Function(Uint32 props),
+        Pointer<SdlTray> Function(int props)
+      >('SDL_CreateTrayWithProperties');
+  return sdlCreateTrayWithPropertiesLookupFunction(props);
 }
 
 ///

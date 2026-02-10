@@ -1,3 +1,9 @@
+## 2.5.5
+- SDL3-2026-02-08
+- [update] Dart 3.10.9
+- [update] halildurmus_lints: ^1.1.0
+- [add] Added sdlCreateTrayWithProperties.
+
 ## 2.5.4
 - SDL3-2026-02-01
 - [update] Dart 3.10.8

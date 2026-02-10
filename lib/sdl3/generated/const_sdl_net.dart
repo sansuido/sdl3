@@ -1,5 +1,5 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-// ignore_for_file: constant_identifier_names, specify_nonobvious_property_types
+// ignore_for_file: constant_identifier_names
 part of '../sdl_net.dart';
 
 //const SDL_NET_H_ = ;

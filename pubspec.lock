@@ -21,17 +21,17 @@ packages:
     dependency: "direct dev"
     description:
       name: halildurmus_lints
-      sha256: e53fb1a654c2ed5a4e04b024c0b129fa6c86cadfa6d6218ed66fa35c74587af7
+      sha256: df5126c4db3fbb2b851c7436d5c305c3351559e9792baaab107d24df971dca96
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.1"
+    version: "1.1.0"
   meta:
     dependency: transitive
     description:
       name: meta
-      sha256: "23f08335362185a5ea2ad3a4e597f1375e78bce8a040df5c600c8d3552ef2394"
+      sha256: "9f29b9bcc8ee287b1a31e0d01be0eae99a930dbffdaecf04b3f3d82a969f296f"
       url: "https://pub.dev"
     source: hosted
-    version: "1.17.0"
+    version: "1.18.1"
 sdks:
-  dart: ">=3.10.8 <4.0.0"
+  dart: ">=3.10.9 <4.0.0"

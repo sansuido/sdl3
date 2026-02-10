@@ -1,4 +1,4 @@
-// ignore_for_file: constant_identifier_names, non_constant_identifier_names
+// ignore_for_file: non_constant_identifier_names
 part of '../sdl_net.dart';
 
 final int SDL_NET_COMPILEDVERSION = sdlVersionnum(

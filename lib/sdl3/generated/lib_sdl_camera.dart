@@ -513,7 +513,7 @@ Pointer<SdlSurface> sdlAcquireCameraFrame(
 ///
 /// Release a frame of video acquired from a camera.
 ///
-/// Let the back-end re-use the internal buffer for camera.
+/// Let the back-end reuse the internal buffer for camera.
 ///
 /// This function _must_ be called only on surface objects returned by
 /// SDL_AcquireCameraFrame(). This function should be called as quickly as

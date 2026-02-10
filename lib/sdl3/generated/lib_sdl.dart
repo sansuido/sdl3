@@ -324,6 +324,12 @@ typedef SdlTrayCallbackDart =
 typedef SdlTrayCallback =
     Void Function(Pointer<NativeType> userdata, Pointer<SdlTrayEntry> entry);
 
+// typedef bool (SDLCALL *SDL_TrayClickCallback)(void *userdata, SDL_Tray *tray)
+typedef SdlTrayClickCallbackDart =
+    int Function(Pointer<NativeType> userdata, Pointer<SdlTray> tray);
+typedef SdlTrayClickCallback =
+    Uint8 Function(Pointer<NativeType> userdata, Pointer<SdlTray> tray);
+
 // typedef SDL_EGLAttrib *(SDLCALL *SDL_EGLAttribArrayCallback)(void *userdata)
 typedef SdlEglAttribArrayCallbackDart =
     Pointer<Uint64> Function(Pointer<NativeType> userdata);

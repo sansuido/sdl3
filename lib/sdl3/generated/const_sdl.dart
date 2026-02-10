@@ -660,6 +660,10 @@ const SDL_PROP_GPU_DEVICE_CREATE_D3D12_ALLOW_FEWER_RESOURCE_SLOTS_BOOLEAN =
     'SDL.gpu.device.create.d3d12.allowtier1resourcebinding';
 const SDL_PROP_GPU_DEVICE_CREATE_D3D12_SEMANTIC_NAME_STRING =
     'SDL.gpu.device.create.d3d12.semantic';
+const SDL_PROP_GPU_DEVICE_CREATE_D3D12_AGILITY_SDK_VERSION_NUMBER =
+    'SDL.gpu.device.create.d3d12.agility_sdk_version';
+const SDL_PROP_GPU_DEVICE_CREATE_D3D12_AGILITY_SDK_PATH_STRING =
+    'SDL.gpu.device.create.d3d12.agility_sdk_path';
 const SDL_PROP_GPU_DEVICE_CREATE_VULKAN_REQUIRE_HARDWARE_ACCELERATION_BOOLEAN =
     'SDL.gpu.device.create.vulkan.requirehardwareacceleration';
 const SDL_PROP_GPU_DEVICE_CREATE_VULKAN_OPTIONS_POINTER =
@@ -881,6 +885,7 @@ const SDL_HINT_JOYSTICK_HIDAPI_8BITDO = 'SDL_JOYSTICK_HIDAPI_8BITDO';
 const SDL_HINT_JOYSTICK_HIDAPI_SINPUT = 'SDL_JOYSTICK_HIDAPI_SINPUT';
 const SDL_HINT_JOYSTICK_HIDAPI_ZUIKI = 'SDL_JOYSTICK_HIDAPI_ZUIKI';
 const SDL_HINT_JOYSTICK_HIDAPI_FLYDIGI = 'SDL_JOYSTICK_HIDAPI_FLYDIGI';
+const SDL_HINT_JOYSTICK_HIDAPI_GAMESIR = 'SDL_JOYSTICK_HIDAPI_GAMESIR';
 const SDL_HINT_JOYSTICK_HIDAPI_SWITCH = 'SDL_JOYSTICK_HIDAPI_SWITCH';
 const SDL_HINT_JOYSTICK_HIDAPI_SWITCH_HOME_LED =
     'SDL_JOYSTICK_HIDAPI_SWITCH_HOME_LED';
@@ -960,6 +965,7 @@ const SDL_HINT_NO_SIGNAL_HANDLERS = 'SDL_NO_SIGNAL_HANDLERS';
 const SDL_HINT_OPENGL_LIBRARY = 'SDL_OPENGL_LIBRARY';
 const SDL_HINT_EGL_LIBRARY = 'SDL_EGL_LIBRARY';
 const SDL_HINT_OPENGL_ES_DRIVER = 'SDL_OPENGL_ES_DRIVER';
+const SDL_HINT_OPENGL_FORCE_SRGB_CAPABLE = 'SDL_OPENGL_FORCE_SRGB_CAPABLE';
 const SDL_HINT_OPENVR_LIBRARY = 'SDL_OPENVR_LIBRARY';
 const SDL_HINT_ORIENTATIONS = 'SDL_ORIENTATIONS';
 const SDL_HINT_POLL_SENTINEL = 'SDL_POLL_SENTINEL';
@@ -2101,7 +2107,7 @@ const SDL_RENDERER_VSYNC_ADAPTIVE = -1;
 const SDL_DEBUG_TEXT_FONT_CHARACTER_SIZE = 8;
 //const SDL_revision_h_ = ;
 const SDL_REVISION =
-    'SDL-3.5.0-release-3.4.0-153-g4743f97c3 (" SDL_VENDOR_INFO ")';
+    'SDL-3.5.0-release-3.4.0-250-gc15ca2774 (" SDL_VENDOR_INFO ")';
 //const SDL_scancode_h_ = ;
 const SDL_SCANCODE_UNKNOWN = 0;
 const SDL_SCANCODE_A = 4;
@@ -2563,6 +2569,15 @@ const SDL_TRAYENTRY_CHECKBOX = 0x00000002;
 const SDL_TRAYENTRY_SUBMENU = 0x00000004;
 const SDL_TRAYENTRY_DISABLED = 0x80000000;
 const SDL_TRAYENTRY_CHECKED = 0x40000000;
+const SDL_PROP_TRAY_CREATE_ICON_POINTER = 'SDL.tray.create.icon';
+const SDL_PROP_TRAY_CREATE_TOOLTIP_STRING = 'SDL.tray.create.tooltip';
+const SDL_PROP_TRAY_CREATE_USERDATA_POINTER = 'SDL.tray.create.userdata';
+const SDL_PROP_TRAY_CREATE_LEFTCLICK_CALLBACK_POINTER =
+    'SDL.tray.create.leftclick_callback';
+const SDL_PROP_TRAY_CREATE_RIGHTCLICK_CALLBACK_POINTER =
+    'SDL.tray.create.rightclick_callback';
+const SDL_PROP_TRAY_CREATE_MIDDLECLICK_CALLBACK_POINTER =
+    'SDL.tray.create.middleclick_callback';
 //const SDL_version_h_ = ;
 const SDL_MAJOR_VERSION = 3;
 const SDL_MINOR_VERSION = 5;
@@ -3551,6 +3566,10 @@ class SdlkPropGpu {
       SDL_PROP_GPU_DEVICE_CREATE_D3D12_ALLOW_FEWER_RESOURCE_SLOTS_BOOLEAN;
   static const deviceCreateD3D12SemanticNameString =
       SDL_PROP_GPU_DEVICE_CREATE_D3D12_SEMANTIC_NAME_STRING;
+  static const deviceCreateD3D12AgilitySdkVersionNumber =
+      SDL_PROP_GPU_DEVICE_CREATE_D3D12_AGILITY_SDK_VERSION_NUMBER;
+  static const deviceCreateD3D12AgilitySdkPathString =
+      SDL_PROP_GPU_DEVICE_CREATE_D3D12_AGILITY_SDK_PATH_STRING;
   static const deviceCreateVulkanRequireHardwareAccelerationBoolean =
       SDL_PROP_GPU_DEVICE_CREATE_VULKAN_REQUIRE_HARDWARE_ACCELERATION_BOOLEAN;
   static const deviceCreateVulkanOptionsPointer =
@@ -3780,6 +3799,7 @@ class SdlkHint {
   static const joystickHidapiSinput = SDL_HINT_JOYSTICK_HIDAPI_SINPUT;
   static const joystickHidapiZuiki = SDL_HINT_JOYSTICK_HIDAPI_ZUIKI;
   static const joystickHidapiFlydigi = SDL_HINT_JOYSTICK_HIDAPI_FLYDIGI;
+  static const joystickHidapiGamesir = SDL_HINT_JOYSTICK_HIDAPI_GAMESIR;
   static const joystickHidapiSwitch = SDL_HINT_JOYSTICK_HIDAPI_SWITCH;
   static const joystickHidapiSwitchHomeLed =
       SDL_HINT_JOYSTICK_HIDAPI_SWITCH_HOME_LED;
@@ -3859,6 +3879,7 @@ class SdlkHint {
   static const openglLibrary = SDL_HINT_OPENGL_LIBRARY;
   static const eglLibrary = SDL_HINT_EGL_LIBRARY;
   static const openglEsDriver = SDL_HINT_OPENGL_ES_DRIVER;
+  static const openglForceSrgbCapable = SDL_HINT_OPENGL_FORCE_SRGB_CAPABLE;
   static const openvrLibrary = SDL_HINT_OPENVR_LIBRARY;
   static const orientations = SDL_HINT_ORIENTATIONS;
   static const pollSentinel = SDL_HINT_POLL_SENTINEL;
