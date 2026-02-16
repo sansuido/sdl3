@@ -752,7 +752,7 @@ bool sdlResumeHaptic(Pointer<SdlHaptic> haptic) {
 /// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_RunHapticEffect
-/// \sa SDL_StopHapticEffects
+/// \sa SDL_StopHapticEffect
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_StopHapticEffects(SDL_Haptic *haptic)

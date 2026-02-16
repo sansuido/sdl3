@@ -524,7 +524,8 @@ void sdlLogMessageV(int category, int priority, String? fmt) {
 ///
 /// Get the default log output function.
 ///
-/// \returns the default log output callback.
+/// \returns the default log output callback. It should be called with NULL for
+/// the userdata argument.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///

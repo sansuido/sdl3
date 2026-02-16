@@ -3,7 +3,7 @@ SDL3 for Dart
 
 # Requirement
 
-* ffi ^2.1.5
+* ffi ^2.2.0
 
 This library is limited to 64bit.  
 Since ffi is used, a dynamic library suitable for various environments is required.  

@@ -1,3 +1,9 @@
+## 2.5.6
+- SDL3-2026-02-15
+- [update] Dart 3.11.0
+- [update] ffi ^2.2.0
+- [update] halildurmus_lints: ^2.0.0
+
 ## 2.5.5
 - SDL3-2026-02-08
 - [update] Dart 3.10.9
