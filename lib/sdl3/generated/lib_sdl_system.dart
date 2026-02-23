@@ -11,6 +11,8 @@ part of '../sdl.dart';
 /// \param callback the SDL_WindowsMessageHook function to call.
 /// \param userdata a pointer to pass to every iteration of `callback`.
 ///
+/// \threadsafety This function should only be called on the main thread.
+///
 /// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_WindowsMessageHook
@@ -117,6 +119,8 @@ bool sdlGetDxgiOutputInfo(
 /// \param callback the SDL_X11EventHook function to call.
 /// \param userdata a pointer to pass to every iteration of `callback`.
 ///
+/// \threadsafety This function should only be called on the main thread.
+///
 /// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
@@ -151,6 +155,8 @@ void sdlSetX11EventHook(
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
@@ -177,6 +183,8 @@ bool sdlSetLinuxThreadPriority(int threadId, int priority) {
 /// SCHED_OTHER, etc...).
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
@@ -235,6 +243,8 @@ bool sdlSetLinuxThreadPriorityAndPolicy(
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety This function should only be called on the main thread.
+///
 /// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_SetiOSEventPump
@@ -279,6 +289,8 @@ bool sdlSetiOsAnimationCallback(
 /// This function is only available on Apple iOS.
 ///
 /// \param enabled true to enable the event pump, false to disable it.
+///
+/// \threadsafety This function should only be called on the main thread.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
@@ -397,6 +409,8 @@ Pointer<NativeType> sdlGetAndroidActivity() {
 ///
 /// \returns the Android API level.
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
@@ -416,6 +430,8 @@ int sdlGetAndroidSdkVersion() {
 ///
 /// \returns true if this is a Chromebook, false otherwise.
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
@@ -432,6 +448,8 @@ bool sdlIsChromebook() {
 /// Query if the application is running on a Samsung DeX docking station.
 ///
 /// \returns true if this is a DeX docking station, false otherwise.
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
@@ -774,6 +792,8 @@ bool sdlSendAndroidMessage(int command, int param) {
 ///
 /// \returns true if the device is a tablet, false otherwise.
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
@@ -792,6 +812,8 @@ bool sdlIsTablet() {
 /// If SDL can't determine this, it will return false.
 ///
 /// \returns true if the device is a TV, false otherwise.
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///

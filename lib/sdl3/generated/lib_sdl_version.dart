@@ -13,6 +13,8 @@ part of '../sdl.dart';
 ///
 /// \returns the version of the linked library.
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_GetRevision
@@ -47,6 +49,8 @@ int sdlGetVersion() {
 ///
 /// \returns an arbitrary string, uniquely identifying the exact revision of
 /// the SDL library in use.
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///

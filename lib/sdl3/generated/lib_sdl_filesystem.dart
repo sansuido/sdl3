@@ -404,6 +404,10 @@ bool sdlCopyFile(String? oldpath, String? newpath) {
 ///
 /// Get information about a filesystem path.
 ///
+/// Symlinks, on filesystems that support them, are always followed, so you
+/// will always get information on what the symlink eventually points to, and
+/// not the symlink itself.
+///
 /// \param path the path to query.
 /// \param info a pointer filled in with information about the path, or NULL to
 /// check for the existence of a file.

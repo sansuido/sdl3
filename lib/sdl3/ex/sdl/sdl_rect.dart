@@ -13,6 +13,8 @@ extension SdlFRectPointerEx on Pointer<SdlFRect> {
   /// \param B an SDL_FRect structure representing the second rectangle.
   /// \returns true if there is an intersection, false otherwise.
   ///
+  /// \threadsafety It is safe to call this function from any thread.
+  ///
   /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_GetRectIntersectionFloat
@@ -35,6 +37,8 @@ extension SdlFRectPointerEx on Pointer<SdlFRect> {
   /// rectangles `A` and `B`.
   /// \returns true if there is an intersection, false otherwise.
   ///
+  /// \threadsafety It is safe to call this function from any thread.
+  ///
   /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_HasRectIntersectionFloat
@@ -55,6 +59,8 @@ extension SdlFRectPointerEx on Pointer<SdlFRect> {
   /// `A` and `B`.
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
+  ///
+  /// \threadsafety It is safe to call this function from any thread.
   ///
   /// \since This function is available since SDL 3.2.0.
   ///
@@ -81,6 +87,8 @@ extension SdlFRectPointerEx on Pointer<SdlFRect> {
   /// \param X2 a pointer to the ending X-coordinate of the line.
   /// \param Y2 a pointer to the ending Y-coordinate of the line.
   /// \returns true if there is an intersection, false otherwise.
+  ///
+  /// \threadsafety It is safe to call this function from any thread.
   ///
   /// \since This function is available since SDL 3.2.0.
   ///
@@ -136,6 +144,8 @@ extension SdlRectPointerEx on Pointer<SdlRect> {
   /// rectangles `A` and `B`.
   /// \returns true if there is an intersection, false otherwise.
   ///
+  /// \threadsafety It is safe to call this function from any thread.
+  ///
   /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_HasRectIntersection
@@ -156,6 +166,8 @@ extension SdlRectPointerEx on Pointer<SdlRect> {
   /// `A` and `B`.
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
+  ///
+  /// \threadsafety It is safe to call this function from any thread.
   ///
   /// \since This function is available since SDL 3.2.0.
   ///
@@ -181,6 +193,8 @@ extension SdlRectPointerEx on Pointer<SdlRect> {
   /// \param X2 a pointer to the ending X-coordinate of the line.
   /// \param Y2 a pointer to the ending Y-coordinate of the line.
   /// \returns true if there is an intersection, false otherwise.
+  ///
+  /// \threadsafety It is safe to call this function from any thread.
   ///
   /// \since This function is available since SDL 3.2.0.
   ///

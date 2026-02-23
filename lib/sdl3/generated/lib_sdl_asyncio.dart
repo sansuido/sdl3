@@ -33,6 +33,8 @@ part of '../sdl.dart';
 /// \returns a pointer to the SDL_AsyncIO structure that is created or NULL on
 /// failure; call SDL_GetError() for more information.
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_CloseAsyncIO
@@ -566,6 +568,8 @@ void sdlSignalAsyncIoQueue(Pointer<SdlAsyncIoQueue> queue) {
 /// results.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///

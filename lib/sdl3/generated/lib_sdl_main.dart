@@ -10,6 +10,8 @@ part of '../sdl.dart';
 /// will not be changed it is necessary to define SDL_MAIN_HANDLED before
 /// including SDL.h.
 ///
+/// \threadsafety This function is not thread safe.
+///
 /// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_Init
@@ -172,6 +174,8 @@ int sdlEnterAppMainCallbacks(
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety This function is not thread safe.
+///
 /// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
@@ -207,6 +211,8 @@ bool sdlRegisterApp(String? name, int style, Pointer<NativeType> hInst) {
 /// deregistered when the registration counter in SDL_RegisterApp decrements to
 /// zero through calls to this function.
 ///
+/// \threadsafety This function is not thread safe.
+///
 /// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
@@ -224,6 +230,8 @@ void sdlUnregisterApp() {
 ///
 /// This function is only needed for Xbox GDK support; all other platforms will
 /// do nothing and set an "unsupported" error message.
+///
+/// \threadsafety This function is not thread safe.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///

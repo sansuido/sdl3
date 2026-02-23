@@ -40,6 +40,8 @@ part of '../sdl.dart';
 /// allocation that should be freed with SDL_free() when it is no
 /// longer needed.
 ///
+/// \threadsafety This function is not thread safe.
+///
 /// \since This function is available since SDL 3.2.0.
 ///
 /// ```c

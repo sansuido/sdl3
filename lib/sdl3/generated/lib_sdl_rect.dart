@@ -40,6 +40,8 @@ bool sdlHasRectIntersection(Pointer<SdlRect> a, Pointer<SdlRect> b) {
 /// rectangles `A` and `B`.
 /// \returns true if there is an intersection, false otherwise.
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_HasRectIntersection
@@ -78,6 +80,8 @@ bool sdlGetRectIntersection(
 /// `A` and `B`.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
@@ -120,6 +124,8 @@ bool sdlGetRectUnion(
 /// rectangle.
 /// \returns true if any points were enclosed or false if all the points were
 /// outside of the clipping rectangle.
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
@@ -168,6 +174,8 @@ bool sdlGetRectEnclosingPoints(
 /// \param Y2 a pointer to the ending Y-coordinate of the line.
 /// \returns true if there is an intersection, false otherwise.
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
@@ -210,6 +218,8 @@ bool sdlGetRectAndLineIntersection(
 /// \param B an SDL_FRect structure representing the second rectangle.
 /// \returns true if there is an intersection, false otherwise.
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_GetRectIntersectionFloat
@@ -237,6 +247,8 @@ bool sdlHasRectIntersectionFloat(Pointer<SdlFRect> a, Pointer<SdlFRect> b) {
 /// \param result an SDL_FRect structure filled in with the intersection of
 /// rectangles `A` and `B`.
 /// \returns true if there is an intersection, false otherwise.
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
@@ -276,6 +288,8 @@ bool sdlGetRectIntersectionFloat(
 /// `A` and `B`.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
@@ -319,6 +333,8 @@ bool sdlGetRectUnionFloat(
 /// rectangle.
 /// \returns true if any points were enclosed or false if all the points were
 /// outside of the clipping rectangle.
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
@@ -372,6 +388,8 @@ bool sdlGetRectEnclosingPointsFloat(
 /// \param X2 a pointer to the ending X-coordinate of the line.
 /// \param Y2 a pointer to the ending Y-coordinate of the line.
 /// \returns true if there is an intersection, false otherwise.
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///

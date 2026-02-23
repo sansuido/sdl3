@@ -17,6 +17,8 @@ part of '../sdl.dart';
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety This function is not thread safe.
+///
 /// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
@@ -47,6 +49,8 @@ bool sdlGetDateTimeLocalePreferences(
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
@@ -74,6 +78,8 @@ bool sdlGetCurrentTime(Pointer<Int64> ticks) {
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
@@ -99,6 +105,8 @@ bool sdlTimeToDateTime(int ticks, Pointer<SdlDateTime> dt, bool localTime) {
 /// \param ticks the resulting SDL_Time.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
@@ -126,6 +134,8 @@ bool sdlDateTimeToTime(Pointer<SdlDateTime> dt, Pointer<Int64> ticks) {
 /// Windows FILETIME value.
 /// \param dwHighDateTime a pointer filled in with the high portion of the
 /// Windows FILETIME value.
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
@@ -165,6 +175,8 @@ void sdlTimeToWindows(
 /// \param dwHighDateTime the high portion of the Windows FILETIME value.
 /// \returns the converted SDL time.
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
@@ -187,6 +199,8 @@ int sdlTimeFromWindows(int dwLowDateTime, int dwHighDateTime) {
 /// \param month the month [1-12].
 /// \returns the number of days in the requested month or -1 on failure; call
 /// SDL_GetError() for more information.
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
@@ -212,6 +226,8 @@ int sdlGetDaysInMonth(int year, int month) {
 /// \returns the day of year [0-365] if the date is valid or -1 on failure;
 /// call SDL_GetError() for more information.
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
@@ -235,6 +251,8 @@ int sdlGetDayOfYear(int year, int month, int day) {
 /// \param day the day component of the date.
 /// \returns a value between 0 and 6 (0 being Sunday) if the date is valid or
 /// -1 on failure; call SDL_GetError() for more information.
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///

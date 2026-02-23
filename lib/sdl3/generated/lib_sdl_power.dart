@@ -31,6 +31,8 @@ part of '../sdl.dart';
 /// \returns the current battery state or `SDL_POWERSTATE_ERROR` on failure;
 /// call SDL_GetError() for more information.
 ///
+/// \threadsafety This function is not thread safe.
+///
 /// \since This function is available since SDL 3.2.0.
 ///
 /// ```c

@@ -581,6 +581,8 @@ void sdlDestroyEnvironment(Pointer<SdlEnvironment> env) {
 ///
 /// Get the value of a variable in the environment.
 ///
+/// The name of the variable is case sensitive on all platforms.
+///
 /// This function uses SDL's cached copy of the environment and is thread-safe.
 ///
 /// \param name the name of the variable to get.
@@ -615,6 +617,11 @@ String? sdlGetenv(String? name) {
 ///
 /// This function bypasses SDL's cached copy of the environment and is not
 /// thread-safe.
+///
+/// On some platforms, this may make case-insensitive matches, while other
+/// platforms are case-sensitive. It is best to be precise with strings used
+/// for queries through this interface. SDL_getenv is always case-sensitive,
+/// however.
 ///
 /// \param name the name of the variable to get.
 /// \returns a pointer to the value of the variable or NULL if it can't be
@@ -6210,6 +6217,8 @@ double sdlTanf(double x) {
 /// \returns a handle that must be freed with SDL_iconv_close, or
 /// SDL_ICONV_ERROR on failure.
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_iconv
@@ -6246,6 +6255,8 @@ Pointer<SdlIconvT> sdlIconvOpen(String? tocode, String? fromcode) {
 ///
 /// \param cd The character set conversion handle.
 /// \returns 0 on success, or -1 on failure.
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
@@ -6295,6 +6306,8 @@ int sdlIconvClose(Pointer<SdlIconvT> cd) {
 /// \param outbuf Address of variable that points to the output buffer.
 /// \param outbytesleft The number of bytes in the output buffer.
 /// \returns the number of conversions on success, or a negative error code.
+///
+/// \threadsafety Do not use the same SDL_iconv_t from two threads at once.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
@@ -6351,6 +6364,8 @@ int sdlIconv(
 /// \param inbuf the string to convert to a different encoding.
 /// \param inbytesleft the size of the input string _in bytes_.
 /// \returns a new string, converted to the new encoding, or NULL on error.
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///

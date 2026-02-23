@@ -15,6 +15,8 @@ part of '../sdl.dart';
 /// \returns the initialized and unlocked mutex or NULL on failure; call
 /// SDL_GetError() for more information.
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_DestroyMutex
@@ -52,6 +54,8 @@ Pointer<SdlMutex> sdlCreateMutex() {
 ///
 /// \param mutex the mutex to lock.
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_TryLockMutex
@@ -84,6 +88,8 @@ void sdlLockMutex(Pointer<SdlMutex> mutex) {
 /// \param mutex the mutex to try to lock.
 /// \returns true on success, false if the mutex would block.
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_LockMutex
@@ -114,6 +120,9 @@ bool sdlTryLockMutex(Pointer<SdlMutex> mutex) {
 ///
 /// \param mutex the mutex to unlock.
 ///
+/// \threadsafety This call must be paired with a previous locking call on the
+/// same thread.
+///
 /// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_LockMutex
@@ -142,6 +151,8 @@ void sdlUnlockMutex(Pointer<SdlMutex> mutex) {
 /// on the platform.
 ///
 /// \param mutex the mutex to destroy.
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
@@ -190,6 +201,8 @@ void sdlDestroyMutex(Pointer<SdlMutex> mutex) {
 ///
 /// \returns the initialized and unlocked read/write lock or NULL on failure;
 /// call SDL_GetError() for more information.
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
@@ -242,6 +255,8 @@ Pointer<SdlRwLock> sdlCreateRwLock() {
 ///
 /// \param rwlock the read/write lock to lock.
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_LockRWLockForWriting
@@ -284,6 +299,8 @@ void sdlLockRwLockForReading(Pointer<SdlRwLock> rwlock) {
 ///
 /// \param rwlock the read/write lock to lock.
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_LockRWLockForReading
@@ -319,6 +336,8 @@ void sdlLockRwLockForWriting(Pointer<SdlRwLock> rwlock) {
 ///
 /// \param rwlock the rwlock to try to lock.
 /// \returns true on success, false if the lock would block.
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
@@ -361,6 +380,8 @@ bool sdlTryLockRwLockForReading(Pointer<SdlRwLock> rwlock) {
 /// \param rwlock the rwlock to try to lock.
 /// \returns true on success, false if the lock would block.
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_LockRWLockForWriting
@@ -396,6 +417,9 @@ bool sdlTryLockRwLockForWriting(Pointer<SdlRwLock> rwlock) {
 ///
 /// \param rwlock the rwlock to unlock.
 ///
+/// \threadsafety This call must be paired with a previous locking call on the
+/// same thread.
+///
 /// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_LockRWLockForReading
@@ -427,6 +451,8 @@ void sdlUnlockRwLock(Pointer<SdlRwLock> rwlock) {
 ///
 /// \param rwlock the rwlock to destroy.
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_CreateRWLock
@@ -456,6 +482,8 @@ void sdlDestroyRwLock(Pointer<SdlRwLock> rwlock) {
 /// \param initial_value the starting value of the semaphore.
 /// \returns a new semaphore or NULL on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
@@ -487,6 +515,8 @@ Pointer<SdlSemaphore> sdlCreateSemaphore(int initialValue) {
 ///
 /// \param sem the semaphore to destroy.
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_CreateSemaphore
@@ -515,6 +545,8 @@ void sdlDestroySemaphore(Pointer<SdlSemaphore> sem) {
 /// a time length of -1.
 ///
 /// \param sem the semaphore wait on.
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
@@ -545,6 +577,8 @@ void sdlWaitSemaphore(Pointer<SdlSemaphore> sem) {
 ///
 /// \param sem the semaphore to wait on.
 /// \returns true if the wait succeeds, false if the wait would block.
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
@@ -577,6 +611,8 @@ bool sdlTryWaitSemaphore(Pointer<SdlSemaphore> sem) {
 /// indefinitely.
 /// \returns true if the wait succeeds or false if the wait times out.
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_SignalSemaphore
@@ -600,6 +636,8 @@ bool sdlWaitSemaphoreTimeout(Pointer<SdlSemaphore> sem, int timeoutMs) {
 /// Atomically increment a semaphore's value and wake waiting threads.
 ///
 /// \param sem the semaphore to increment.
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
@@ -626,6 +664,8 @@ void sdlSignalSemaphore(Pointer<SdlSemaphore> sem) {
 /// \param sem the semaphore to query.
 /// \returns the current value of the semaphore.
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.2.0.
 ///
 /// ```c
@@ -646,6 +686,8 @@ int sdlGetSemaphoreValue(Pointer<SdlSemaphore> sem) {
 ///
 /// \returns a new condition variable or NULL on failure; call SDL_GetError()
 /// for more information.
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
@@ -672,6 +714,8 @@ Pointer<SdlCondition> sdlCreateCondition() {
 /// Destroy a condition variable.
 ///
 /// \param cond the condition variable to destroy.
+///
+/// \threadsafety It is safe to call this function from any thread.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///

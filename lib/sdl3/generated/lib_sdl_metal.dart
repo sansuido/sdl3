@@ -14,6 +14,8 @@ part of '../sdl.dart';
 /// \param window the window.
 /// \returns handle NSView or UIView.
 ///
+/// \threadsafety This function should only be called on the main thread.
+///
 /// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_Metal_DestroyView
@@ -40,6 +42,8 @@ void sdlMetalCreateView(Pointer<SdlWindow> window) {
 ///
 /// \param view the SDL_MetalView object.
 ///
+/// \threadsafety This function should only be called on the main thread.
+///
 /// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_Metal_CreateView
@@ -61,6 +65,8 @@ void sdlMetalDestroyView() {
 ///
 /// \param view the SDL_MetalView object.
 /// \returns a pointer.
+///
+/// \threadsafety This function should only be called on the main thread.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///

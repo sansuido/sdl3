@@ -8,6 +8,8 @@ part of '../sdl.dart';
 /// \returns a valid property ID on success or 0 on failure; call
 /// SDL_GetError() for more information.
 ///
+/// \threadsafety It is safe to call this function from any thread.
+///
 /// \since This function is available since SDL 3.2.0.
 ///
 /// ```c

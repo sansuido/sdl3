@@ -215,6 +215,8 @@ extension PointsEx on List<math.Point<double>> {
   /// \returns true if any points were enclosed or false if all the points were
   /// outside of the clipping rectangle.
   ///
+  /// \threadsafety It is safe to call this function from any thread.
+  ///
   /// \since This function is available since SDL 3.2.0.
   ///
   /// ```c

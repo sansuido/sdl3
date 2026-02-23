@@ -31,6 +31,8 @@ part of '../sdl.dart';
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
 ///
+/// \threadsafety This function should only be called on the main thread.
+///
 /// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_ShowSimpleMessageBox
@@ -92,6 +94,8 @@ bool sdlShowMessageBox(
 /// \param window the parent window, or NULL for no parent.
 /// \returns true on success or false on failure; call SDL_GetError() for more
 /// information.
+///
+/// \threadsafety This function should only be called on the main thread.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
