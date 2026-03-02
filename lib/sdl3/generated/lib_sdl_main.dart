@@ -228,12 +228,26 @@ void sdlUnregisterApp() {
 ///
 /// Callback from the application to let the suspend continue.
 ///
+/// This should be called from an event watch in response to an
+/// `SDL_EVENT_DID_ENTER_BACKGROUND` event.
+///
+/// When using SDL_Render, your event watch should be added _after_ creating
+/// the `SDL_Renderer`; this allows the timing of the D3D12 command queue
+/// suspension to execute in the correct order.
+///
+/// When using SDL_GPU, this should be called after calling SDL_GDKSuspendGPU.
+///
+/// If you're writing your own D3D12 renderer, this should be called after
+/// calling `ID3D12CommandQueue::SuspendX`.
+///
 /// This function is only needed for Xbox GDK support; all other platforms will
 /// do nothing and set an "unsupported" error message.
 ///
 /// \threadsafety This function is not thread safe.
 ///
 /// \since This function is available since SDL 3.2.0.
+///
+/// \sa SDL_AddEventWatch
 ///
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_GDKSuspendComplete(void)

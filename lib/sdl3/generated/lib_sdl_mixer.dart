@@ -1087,7 +1087,7 @@ void mixDestroyAudio(Pointer<MixAudio> audio) {
 /// will be processed and mixed together to form the final output from the
 /// mixer.
 ///
-/// There are no limits to the number of tracks on may create, beyond running
+/// There are no limits to the number of tracks one may create, beyond running
 /// out of memory, but in normal practice there are a small number of tracks
 /// that are reused between all loaded audio as appropriate.
 ///
@@ -3765,10 +3765,20 @@ bool mixSetPostMixCallback(
 /// This function can not be used with mixers from MIX_CreateMixerDevice();
 /// those generate audio as needed internally.
 ///
+/// This function returns the number of _bytes_ of real audio mixed, which
+/// might be less than `buflen`. While all `buflen` bytes of `buffer` will be
+/// initialized, if available tracks to mix run out, the end of the buffer will
+/// be initialized with silence; this silence will not be counted in the return
+/// value, so the caller has the option to identify how much of the buffer has
+/// legimitate contents vs appended silence. As such, any value >= 0 signifies
+/// success. A return value of -1 means failure (out of memory, invalid
+/// parameters, etc).
+///
 /// \param mixer the mixer for which to generate more audio.
 /// \param buffer a pointer to a buffer to store audio in.
 /// \param buflen the number of bytes to store in buffer.
-/// \returns true on success or false on failure; call SDL_GetError() for more
+/// \returns The number of bytes of mixed audio, discounting appended silence,
+/// on success, or -1 on failure; call SDL_GetError() for more
 /// information.
 ///
 /// \threadsafety It is safe to call this function from any thread.
@@ -3778,17 +3788,17 @@ bool mixSetPostMixCallback(
 /// \sa MIX_CreateMixer
 ///
 /// ```c
-/// extern SDL_DECLSPEC bool SDLCALL MIX_Generate(MIX_Mixer *mixer, void *buffer, int buflen)
+/// extern SDL_DECLSPEC int SDLCALL MIX_Generate(MIX_Mixer *mixer, void *buffer, int buflen)
 /// ```
 /// {@category mixer}
-bool mixGenerate(
+int mixGenerate(
   Pointer<MixMixer> mixer,
   Pointer<NativeType> buffer,
   int buflen,
 ) {
   final mixGenerateLookupFunction = _libMixer
       .lookupFunction<
-        Uint8 Function(
+        Int32 Function(
           Pointer<MixMixer> mixer,
           Pointer<NativeType> buffer,
           Int32 buflen,
@@ -3799,7 +3809,7 @@ bool mixGenerate(
           int buflen,
         )
       >('MIX_Generate');
-  return mixGenerateLookupFunction(mixer, buffer, buflen) == 1;
+  return mixGenerateLookupFunction(mixer, buffer, buflen);
 }
 
 ///

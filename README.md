@@ -12,7 +12,7 @@ Since sdl3gfx is included in the source, a dynamic library is not required.
 For OpenGL, call require separately.  
 
 ```dart
-import 'package:sdl3/sdl3.dart'; // SDL3, SDL3_image, SDL3_mixer, SDL3_net, SDL3_ttf
+import 'package:sdl3/sdl3.dart'; // SDL3, SDL3_image, SDL3_mixer, SDL3_net, SDL3_ttf, SDL3_shadercross
 import 'package:sdl3/sdl3gfx.dart'; // SDL3_gfx
 import 'package:sdl3/sdl3opengl.dart'; // OpenGL
 ```
@@ -24,6 +24,7 @@ SDL3_image.dll
 SDL3_mixer.dll  
 SDL3_net.dll  
 SDL3_ttf.dll  
+SDL3_shadercross.dll  
 
 ## Linux (or Android, Fuchsia) requires so files.
 
@@ -32,6 +33,7 @@ libSDL3_image.so
 libSDL3_mixer.so  
 libSDL3_net.so  
 libSDL3_ttf.so  
+libSDL3_shadercross.so
 
 ## MacOS (or iOS) requires dylib files.
 
@@ -40,6 +42,7 @@ libSDL3_image.dylib
 libSDL3_mixer.dylib  
 libSDL3_net.dylib  
 libSDL3_ttf.dylib  
+libSDL3_shadercross.dylib  
 
 ## And more.
 
@@ -51,6 +54,7 @@ SdlDynamicLibraryService().set('image', 'YOUR_SDL3_image_ENVIONMENT.dylib');
 SdlDynamicLibraryService().set('mixer', 'YOUR_SDL3_mixer_ENVIONMENT.dylib');
 SdlDynamicLibraryService().set('net', 'YOUR_SDL3_net_ENVIONMENT.dylib');
 SdlDynamicLibraryService().set('ttf', 'YOUR_SDL3_ttf_ENVIONMENT.dylib');
+SdlDynamicLibraryService().set('shadercross', 'YOUR_SDL3_shadercross_ENVIONMENT.dylib');
 if (sdlInit(SDL_INIT_VIDEO)) {
   // success
 }

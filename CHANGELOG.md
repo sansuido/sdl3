@@ -1,3 +1,10 @@
+## 2.6.0
+- SDL3-2026-03-01
+- [added] Added shadercross library.
+- [added] Added example/test_shadercross.dart.
+- [changed] The return value of mixGenerate has been changed to int.
+- [update] Dart 3.11.1
+
 ## 2.5.7
 - SDL3-2026-02-22
 

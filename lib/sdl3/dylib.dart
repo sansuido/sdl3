@@ -25,29 +25,13 @@ class SdlDynamicLibraryService {
       return header + key + extension;
     }
 
-    //    String getDefaultOpenglFilename() {
-    //      var filename = '';
-    //      switch (Platform.operatingSystem) {
-    //        case 'android':
-    //        case 'linux':
-    //        case 'fuchsia':
-    //          filename = 'libGL.so';
-    //        case 'ios':
-    //        case 'macos':
-    //          filename = 'libGL.dylib';
-    //        case 'windows':
-    //          filename = 'opengl32.dll';
-    //      }
-    //      return filename;
-    //    }
-
     entries = {};
     entries['sdl'] = getDefaultSdlFilename('SDL3');
     entries['image'] = getDefaultSdlFilename('SDL3_image');
     entries['mixer'] = getDefaultSdlFilename('SDL3_mixer');
     entries['net'] = getDefaultSdlFilename('SDL3_net');
     entries['ttf'] = getDefaultSdlFilename('SDL3_ttf');
-    //    entries['opengl'] = getDefaultOpenglFilename();
+    entries['shadercross'] = getDefaultSdlFilename('SDL3_shadercross');
   }
   late Map<String, String> entries;
 

@@ -105,6 +105,8 @@ dartdoc:
       markdown: doc/scancode.md
     'sensor':
       markdown: doc/sensor.md
+    'shadercross':
+      markdown: doc/shadercross.md
     'stdinc':
       markdown: doc/stdinc.md
     'storage':
@@ -187,6 +189,7 @@ dartdoc:
     'render',
     'scancode',
     'sensor',
+    'shadercross',
     'stdinc',
     'storage',
     'surface',
