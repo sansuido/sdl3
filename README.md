@@ -66,7 +66,7 @@ A Dart library for accessing SDL 3 APIs using, FFI.
 
 https://www.libsdl.org/
 
-Windows 64bit & Linux (Tested under Windows 10 WSL2 environment)
+Windows 64bit & Linux (Tested under Windows 11 WSL2 environment)
 
 Currently, we are providing it on an experimental basis using the dll compiled below.
 

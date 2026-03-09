@@ -4295,7 +4295,7 @@ double sdlRandf() {
 ///
 /// Generate 32 pseudo-random bits.
 ///
-/// You likely want to use SDL_rand() to get a psuedo-random number instead.
+/// You likely want to use SDL_rand() to get a pseudo-random number instead.
 ///
 /// There are no guarantees as to the quality of the random sequence produced,
 /// and this should not be used for security (cryptography, passwords) or where
@@ -4410,7 +4410,7 @@ double sdlRandfR(Pointer<Uint64> state) {
 ///
 /// Generate 32 pseudo-random bits.
 ///
-/// You likely want to use SDL_rand_r() to get a psuedo-random number instead.
+/// You likely want to use SDL_rand_r() to get a pseudo-random number instead.
 ///
 /// There are no guarantees as to the quality of the random sequence produced,
 /// and this should not be used for security (cryptography, passwords) or where
@@ -4696,7 +4696,7 @@ double sdlAtanf(double x) {
 ///
 /// Domain: `-INF <= x <= INF`, `-INF <= y <= INF`
 ///
-/// Range: `-Pi <= y <= Pi`
+/// Range: `-Pi <= z <= Pi`
 ///
 /// This function operates on double-precision floating point values, use
 /// SDL_atan2f for single-precision floats.
@@ -4710,8 +4710,8 @@ double sdlAtanf(double x) {
 ///
 /// \param y floating point value of the numerator (y coordinate).
 /// \param x floating point value of the denominator (x coordinate).
-/// \returns arc tangent of of `y / x` in radians, or, if `x = 0`, either
-/// `-Pi/2`, `0`, or `Pi/2`, depending on the value of `y`.
+/// \returns arc tangent of `y / x` in radians, or, if `x = 0`, either `-Pi/2`,
+/// `0`, or `Pi/2`, depending on the value of `y`.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///

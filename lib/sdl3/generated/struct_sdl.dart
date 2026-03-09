@@ -71,9 +71,6 @@ final class SdlAtomicInt extends Struct {
   // [0]+(4)
   @Int32()
   external int value;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
 }
 
 // SDL_AtomicU32
@@ -82,9 +79,6 @@ final class SdlAtomicU32 extends Struct {
   // [0]+(4)
   @Uint32()
   external int value;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
 }
 
 // SDL_AudioSpec
@@ -99,9 +93,6 @@ final class SdlAudioSpec extends Struct {
   // [8]+(4)
   @Int32()
   external int freq;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
 }
 
 // SDL_AudioStream
@@ -1675,9 +1666,6 @@ final class SdlGpuIndexedIndirectDrawCommand extends Struct {
   // [16]+(4)
   @Uint32()
   external int firstInstance;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
 }
 
 // SDL_GPUIndirectDispatchCommand
@@ -1692,9 +1680,6 @@ final class SdlGpuIndirectDispatchCommand extends Struct {
   // [8]+(4)
   @Uint32()
   external int groupcountZ;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
 }
 
 // SDL_GPUSamplerCreateInfo
@@ -1748,9 +1733,6 @@ final class SdlGpuSamplerCreateInfo extends Struct {
   // [48]+(4)
   @Uint32()
   external int props;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
 }
 
 // SDL_GPUVertexBufferDescription
@@ -1937,9 +1919,6 @@ final class SdlGpuTextureCreateInfo extends Struct {
   // [32]+(4)
   @Uint32()
   external int props;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
 }
 
 // SDL_GPUBufferCreateInfo
@@ -1954,9 +1933,6 @@ final class SdlGpuBufferCreateInfo extends Struct {
   // [8]+(4)
   @Uint32()
   external int props;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
 }
 
 // SDL_GPUTransferBufferCreateInfo
@@ -1971,9 +1947,6 @@ final class SdlGpuTransferBufferCreateInfo extends Struct {
   // [8]+(4)
   @Uint32()
   external int props;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
 }
 
 // SDL_GPURasterizerState
@@ -2009,9 +1982,6 @@ final class SdlGpuRasterizerState extends Struct {
   // [27]+(1)
   @Uint8()
   external int padding2;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
 }
 
 // SDL_GPUMultisampleState
@@ -2035,9 +2005,6 @@ final class SdlGpuMultisampleState extends Struct {
   // [11]+(1)
   @Uint8()
   external int padding3;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
 }
 
 // SDL_GPUDepthStencilState
@@ -2080,9 +2047,6 @@ final class SdlGpuDepthStencilState extends Struct {
   // [43]+(1)
   @Uint8()
   external int padding3;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
 }
 
 /// {@category gpu}
@@ -2108,9 +2072,6 @@ final class SdlGpuColorTargetDescription extends Struct {
   external int blendState_3;
   @Uint64()
   external int blendState_4;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
 }
 
 /// {@category gpu}
@@ -2167,21 +2128,21 @@ final class SdlGpuGraphicsPipelineCreateInfo extends Struct {
   // [48]+(4)
   @Int32()
   external int primitiveType;
-  // [52]+(32)
+  // [52]+(28)
   @Uint64()
   external int rasterizerState_1;
   @Uint64()
   external int rasterizerState_2;
   @Uint64()
   external int rasterizerState_3;
-  @Uint64()
+  @Uint32()
   external int rasterizerState_4;
-  // [84]+(16)
+  // [80]+(12)
   @Uint64()
   external int multisampleState_1;
-  @Uint64()
+  @Uint32()
   external int multisampleState_2;
-  // [100]+(48)
+  // [92]+(44)
   @Uint64()
   external int depthStencilState_1;
   @Uint64()
@@ -2192,18 +2153,21 @@ final class SdlGpuGraphicsPipelineCreateInfo extends Struct {
   external int depthStencilState_4;
   @Uint64()
   external int depthStencilState_5;
-  @Uint64()
+  @Uint32()
   external int depthStencilState_6;
-  // [148]+(24)
+  // [136]+(24)
   @Uint64()
   external int targetInfo_1;
   @Uint64()
   external int targetInfo_2;
   @Uint64()
   external int targetInfo_3;
-  // [172]+(4)
+  // [160]+(4)
   @Uint32()
   external int props;
+  // [] +(4)
+  @Uint32()
+  external int blank_1;
 }
 
 /// {@category gpu}
@@ -2214,11 +2178,11 @@ extension SdlGpuGraphicsPipelineCreateInfoExtension
   Pointer<SdlGpuRasterizerState> get rasterizerState =>
       (cast<Uint8>() + 52).cast<SdlGpuRasterizerState>();
   Pointer<SdlGpuMultisampleState> get multisampleState =>
-      (cast<Uint8>() + 84).cast<SdlGpuMultisampleState>();
+      (cast<Uint8>() + 80).cast<SdlGpuMultisampleState>();
   Pointer<SdlGpuDepthStencilState> get depthStencilState =>
-      (cast<Uint8>() + 100).cast<SdlGpuDepthStencilState>();
+      (cast<Uint8>() + 92).cast<SdlGpuDepthStencilState>();
   Pointer<SdlGpuGraphicsPipelineTargetInfo> get targetInfo =>
-      (cast<Uint8>() + 148).cast<SdlGpuGraphicsPipelineTargetInfo>();
+      (cast<Uint8>() + 136).cast<SdlGpuGraphicsPipelineTargetInfo>();
 }
 
 // SDL_GPUComputePipelineCreateInfo
@@ -2587,14 +2551,14 @@ final class SdlHapticConstant extends Struct {
   // [0]+(2)
   @Uint16()
   external int type;
-  // [2]+(16)
+  // [] +(2)
+  @Uint16()
+  external int blank_1;
+  // [4]+(16)
   @Uint64()
   external int direction_1;
   @Uint64()
   external int direction_2;
-  // [] +(2)
-  @Uint16()
-  external int blank_1;
   // [20]+(4)
   @Uint32()
   external int length;
@@ -2627,7 +2591,7 @@ final class SdlHapticConstant extends Struct {
 /// {@category haptic}
 extension SdlHapticConstantExtension on Pointer<SdlHapticConstant> {
   Pointer<SdlHapticDirection> get direction =>
-      (cast<Uint8>() + 2).cast<SdlHapticDirection>();
+      (cast<Uint8>() + 4).cast<SdlHapticDirection>();
 }
 
 // SDL_HapticPeriodic
@@ -2636,14 +2600,14 @@ final class SdlHapticPeriodic extends Struct {
   // [0]+(2)
   @Uint16()
   external int type;
-  // [2]+(16)
+  // [] +(2)
+  @Uint16()
+  external int blank_1;
+  // [4]+(16)
   @Uint64()
   external int direction_1;
   @Uint64()
   external int direction_2;
-  // [] +(2)
-  @Uint16()
-  external int blank_1;
   // [20]+(4)
   @Uint32()
   external int length;
@@ -2688,7 +2652,7 @@ final class SdlHapticPeriodic extends Struct {
 /// {@category haptic}
 extension SdlHapticPeriodicExtension on Pointer<SdlHapticPeriodic> {
   Pointer<SdlHapticDirection> get direction =>
-      (cast<Uint8>() + 2).cast<SdlHapticDirection>();
+      (cast<Uint8>() + 4).cast<SdlHapticDirection>();
 }
 
 // SDL_HapticCondition
@@ -2697,14 +2661,14 @@ final class SdlHapticCondition extends Struct {
   // [0]+(2)
   @Uint16()
   external int type;
-  // [2]+(16)
+  // [] +(2)
+  @Uint16()
+  external int blank_1;
+  // [4]+(16)
   @Uint64()
   external int direction_1;
   @Uint64()
   external int direction_2;
-  // [] +(2)
-  @Uint16()
-  external int blank_1;
   // [20]+(4)
   @Uint32()
   external int length;
@@ -2759,17 +2723,15 @@ final class SdlHapticCondition extends Struct {
   external int center_2;
   @Int16()
   external int center_3;
-  // [] +(6)
-  @Uint32()
-  external int blank_2;
+  // [] +(2)
   @Uint16()
-  external int blank_3;
+  external int blank_2;
 }
 
 /// {@category haptic}
 extension SdlHapticConditionExtension on Pointer<SdlHapticCondition> {
   Pointer<SdlHapticDirection> get direction =>
-      (cast<Uint8>() + 2).cast<SdlHapticDirection>();
+      (cast<Uint8>() + 4).cast<SdlHapticDirection>();
 }
 
 // SDL_HapticRamp
@@ -2778,14 +2740,14 @@ final class SdlHapticRamp extends Struct {
   // [0]+(2)
   @Uint16()
   external int type;
-  // [2]+(16)
+  // [] +(2)
+  @Uint16()
+  external int blank_1;
+  // [4]+(16)
   @Uint64()
   external int direction_1;
   @Uint64()
   external int direction_2;
-  // [] +(2)
-  @Uint16()
-  external int blank_1;
   // [20]+(4)
   @Uint32()
   external int length;
@@ -2816,17 +2778,15 @@ final class SdlHapticRamp extends Struct {
   // [40]+(2)
   @Uint16()
   external int fadeLevel;
-  // [] +(6)
-  @Uint32()
-  external int blank_2;
+  // [] +(2)
   @Uint16()
-  external int blank_3;
+  external int blank_2;
 }
 
 /// {@category haptic}
 extension SdlHapticRampExtension on Pointer<SdlHapticRamp> {
   Pointer<SdlHapticDirection> get direction =>
-      (cast<Uint8>() + 2).cast<SdlHapticDirection>();
+      (cast<Uint8>() + 4).cast<SdlHapticDirection>();
 }
 
 // SDL_HapticLeftRight
@@ -2847,9 +2807,6 @@ final class SdlHapticLeftRight extends Struct {
   // [10]+(2)
   @Uint16()
   external int smallMagnitude;
-  // [] +(4)
-  @Uint32()
-  external int blank_2;
 }
 
 // SDL_HapticCustom
@@ -2858,14 +2815,14 @@ final class SdlHapticCustom extends Struct {
   // [0]+(2)
   @Uint16()
   external int type;
-  // [2]+(16)
+  // [] +(2)
+  @Uint16()
+  external int blank_1;
+  // [4]+(16)
   @Uint64()
   external int direction_1;
   @Uint64()
   external int direction_2;
-  // [] +(2)
-  @Uint16()
-  external int blank_1;
   // [20]+(4)
   @Uint32()
   external int length;
@@ -2912,13 +2869,13 @@ final class SdlHapticCustom extends Struct {
 /// {@category haptic}
 extension SdlHapticCustomExtension on Pointer<SdlHapticCustom> {
   Pointer<SdlHapticDirection> get direction =>
-      (cast<Uint8>() + 2).cast<SdlHapticDirection>();
+      (cast<Uint8>() + 4).cast<SdlHapticDirection>();
 }
 
 // SDL_HapticEffect
 /// {@category haptic}
 final class SdlHapticEffect extends Struct {
-  // [0]+(72)
+  // [0]+(68)
   @Uint64()
   external int union_1;
   @Uint64()
@@ -2935,7 +2892,7 @@ final class SdlHapticEffect extends Struct {
   external int union_7;
   @Uint64()
   external int union_8;
-  @Uint64()
+  @Uint32()
   external int union_9;
 }
 
@@ -3187,27 +3144,20 @@ final class SdlMessageBoxColor extends Struct {
   // [2]+(1)
   @Uint8()
   external int b;
-  // [] +(5)
-  @Uint32()
-  external int blank_1;
-  @Uint8()
-  external int blank_2;
 }
 
 // SDL_MessageBoxColorScheme
 /// {@category messagebox}
 final class SdlMessageBoxColorScheme extends Struct {
-  // [0]+(8*5)
+  // [0]+(3*5)
   @Uint64()
   external int colors_1;
-  @Uint64()
+  @Uint32()
   external int colors_2;
-  @Uint64()
+  @Uint16()
   external int colors_3;
-  @Uint64()
+  @Uint8()
   external int colors_4;
-  @Uint64()
-  external int colors_5;
 }
 
 /// {@category messagebox}
@@ -3216,7 +3166,7 @@ extension SdlMessageBoxColorSchemeExtension
   List<SdlMessageBoxColor> get colors {
     final list = <SdlMessageBoxColor>[];
     for (var i = 0; i < 5; i++) {
-      list.add((cast<Uint8>() + 0 + i * 8).cast<SdlMessageBoxColor>().ref);
+      list.add((cast<Uint8>() + 0 + i * 3).cast<SdlMessageBoxColor>().ref);
     }
     return list;
   }
@@ -3285,9 +3235,12 @@ final class SdlCondition extends Opaque {}
 // SDL_InitState
 /// {@category mutex}
 final class SdlInitState extends Struct {
-  // [0]+(8)
-  @Uint64()
+  // [0]+(4)
+  @Uint32()
   external int status_1;
+  // [] +(4)
+  @Uint32()
+  external int blank_1;
   // [8]+(8)
   @Uint64()
   external int thread;
@@ -3341,9 +3294,6 @@ final class SdlColor extends Struct {
   // [3]+(1)
   @Uint8()
   external int a;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
 }
 
 // SDL_FColor
@@ -3731,9 +3681,6 @@ final class SdlDateTime extends Struct {
   // [32]+(4)
   @Int32()
   external int utcOffset;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
 }
 
 // SDL_Finger

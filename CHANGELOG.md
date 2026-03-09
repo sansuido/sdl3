@@ -1,3 +1,9 @@
+## 2.6.1
+- SDL3-2026-03-08
+- [fixed] Fixed some incorrect calculation of byte size of structure(SdlGpuGraphicsPipelineCreateInfo and more).
+- [added] Added mixer functions(mixLockMixer, mixUnlockMixer and mixLoadAudioNoCopy).
+- [added] Added GPU functions(sdlSetGpuRenderStateSamplerBindings, sdlSetGpuRenderStateStorageTextures, sdlSetGpuRenderStateStorageBuffers, sdlGdkSuspendRenderer and sdlGdkResumeRenderer).
+
 ## 2.6.0
 - SDL3-2026-03-01
 - [added] Added shadercross library.

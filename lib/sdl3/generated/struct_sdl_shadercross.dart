@@ -100,9 +100,6 @@ final class SdlShaderCrossComputePipelineMetadata extends Struct {
   // [32]+(4)
   @Uint32()
   external int threadcountZ;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
 }
 
 // SDL_ShaderCross_SPIRV_Info

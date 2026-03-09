@@ -41,7 +41,7 @@ extension MixMixerEx on MixMixer {
   /// \returns a mixer that can be used to play audio, or NULL on failure; call
   /// SDL_GetError() for more information.
   ///
-  /// \threadsafety It is safe to call this function from any thread.
+  /// \threadsafety This function should only be called on the main thread.
   ///
   /// \since This function is available since SDL_mixer 3.0.0.
   ///
@@ -106,7 +106,10 @@ extension MixMixerPointerEx on Pointer<MixMixer> {
   ///
   /// \param mixer the mixer to destroy.
   ///
-  /// \threadsafety It is safe to call this function from any thread.
+  /// \threadsafety If this is used with a MIX_Mixer from MIX_CreateMixerDevice,
+  /// then this function should only be called on the main thread.
+  /// If this is used with a MIX_Mixer from MIX_CreateMixer, then
+  /// it is safe to call this function from any thread.
   ///
   /// \since This function is available since SDL_mixer 3.0.0.
   ///
@@ -373,7 +376,7 @@ extension MixMixerPointerEx on Pointer<MixMixer> {
   /// Load raw PCM data from a memory buffer without making a copy.
   ///
   /// This buffer must live for the entire time the returned MIX_Audio lives, as
-  /// it will access it whenever it needs to mix more data.
+  /// the mixer will access the buffer whenever it needs to mix more data.
   ///
   /// This function is meant to maximize efficiency: if the data is already in
   /// memory and can remain there, don't copy it. But it can also lead to some

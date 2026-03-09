@@ -1788,8 +1788,10 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
 
   ///
   /// Render a list of triangles, optionally using a texture and indices into the
-  /// vertex array Color and alpha modulation is done per vertex
-  /// (SDL_SetTextureColorMod and SDL_SetTextureAlphaMod are ignored).
+  /// vertex array.
+  ///
+  /// Color and alpha modulation is done per vertex (SDL_SetTextureColorMod and
+  /// SDL_SetTextureAlphaMod are ignored).
   ///
   /// \param renderer the rendering context.
   /// \param texture (optional) The SDL texture to use.
@@ -1830,8 +1832,10 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
 
   ///
   /// Render a list of triangles, optionally using a texture and indices into the
-  /// vertex arrays Color and alpha modulation is done per vertex
-  /// (SDL_SetTextureColorMod and SDL_SetTextureAlphaMod are ignored).
+  /// vertex arrays.
+  ///
+  /// Color and alpha modulation is done per vertex (SDL_SetTextureColorMod and
+  /// SDL_SetTextureAlphaMod are ignored).
   ///
   /// \param renderer the rendering context.
   /// \param texture (optional) The SDL texture to use.

@@ -3771,8 +3771,10 @@ bool sdlRenderTexture9GridTiled(
 
 ///
 /// Render a list of triangles, optionally using a texture and indices into the
-/// vertex array Color and alpha modulation is done per vertex
-/// (SDL_SetTextureColorMod and SDL_SetTextureAlphaMod are ignored).
+/// vertex array.
+///
+/// Color and alpha modulation is done per vertex (SDL_SetTextureColorMod and
+/// SDL_SetTextureAlphaMod are ignored).
 ///
 /// \param renderer the rendering context.
 /// \param texture (optional) The SDL texture to use.
@@ -3836,8 +3838,10 @@ bool sdlRenderGeometry(
 
 ///
 /// Render a list of triangles, optionally using a texture and indices into the
-/// vertex arrays Color and alpha modulation is done per vertex
-/// (SDL_SetTextureColorMod and SDL_SetTextureAlphaMod are ignored).
+/// vertex arrays.
+///
+/// Color and alpha modulation is done per vertex (SDL_SetTextureColorMod and
+/// SDL_SetTextureAlphaMod are ignored).
 ///
 /// \param renderer the rendering context.
 /// \param texture (optional) The SDL texture to use.
@@ -4640,6 +4644,148 @@ Pointer<SdlGpuRenderState> sdlCreateGpuRenderState(
 }
 
 ///
+/// Set sampler bindings variables in a custom GPU render state.
+///
+/// The data is copied and will be binded using SDL_BindGPUFragmentSamplers()
+/// during draw call execution.
+///
+/// \param state the state to modify.
+/// \param num_sampler_bindings The number of additional fragment samplers to
+/// bind.
+/// \param sampler_bindings Additional fragment samplers to bind.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety This function should be called on the thread that created the
+/// renderer.
+///
+/// \since This function is available since SDL 3.6.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetGPURenderStateSamplerBindings(SDL_GPURenderState *state, int num_sampler_bindings, const SDL_GPUTextureSamplerBinding *sampler_bindings)
+/// ```
+/// {@category render}
+bool sdlSetGpuRenderStateSamplerBindings(
+  Pointer<SdlGpuRenderState> state,
+  int numSamplerBindings,
+  Pointer<SdlGpuTextureSamplerBinding> samplerBindings,
+) {
+  final sdlSetGpuRenderStateSamplerBindingsLookupFunction = _libSdl
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<SdlGpuRenderState> state,
+          Int32 numSamplerBindings,
+          Pointer<SdlGpuTextureSamplerBinding> samplerBindings,
+        ),
+        int Function(
+          Pointer<SdlGpuRenderState> state,
+          int numSamplerBindings,
+          Pointer<SdlGpuTextureSamplerBinding> samplerBindings,
+        )
+      >('SDL_SetGPURenderStateSamplerBindings');
+  return sdlSetGpuRenderStateSamplerBindingsLookupFunction(
+        state,
+        numSamplerBindings,
+        samplerBindings,
+      ) ==
+      1;
+}
+
+///
+/// Set storage textures variables in a custom GPU render state.
+///
+/// The data is copied and will be binded using
+/// SDL_BindGPUFragmentStorageTextures() during draw call execution.
+///
+/// \param state the state to modify.
+/// \param num_storage_textures The number of storage textures to bind.
+/// \param storage_textures Storage textures to bind.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety This function should be called on the thread that created the
+/// renderer.
+///
+/// \since This function is available since SDL 3.6.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetGPURenderStateStorageTextures(SDL_GPURenderState *state, int num_storage_textures, SDL_GPUTexture *const *storage_textures)
+/// ```
+/// {@category render}
+bool sdlSetGpuRenderStateStorageTextures(
+  Pointer<SdlGpuRenderState> state,
+  int numStorageTextures,
+  Pointer<Pointer<SdlGpuTexture>> storageTextures,
+) {
+  final sdlSetGpuRenderStateStorageTexturesLookupFunction = _libSdl
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<SdlGpuRenderState> state,
+          Int32 numStorageTextures,
+          Pointer<Pointer<SdlGpuTexture>> storageTextures,
+        ),
+        int Function(
+          Pointer<SdlGpuRenderState> state,
+          int numStorageTextures,
+          Pointer<Pointer<SdlGpuTexture>> storageTextures,
+        )
+      >('SDL_SetGPURenderStateStorageTextures');
+  return sdlSetGpuRenderStateStorageTexturesLookupFunction(
+        state,
+        numStorageTextures,
+        storageTextures,
+      ) ==
+      1;
+}
+
+///
+/// Set storage buffers variables in a custom GPU render state.
+///
+/// The data is copied and will be binded using
+/// SDL_BindGPUFragmentStorageBuffers() during draw call execution.
+///
+/// \param state the state to modify.
+/// \param num_storage_buffers The number of storage buffers to bind.
+/// \param storage_buffers Storage buffers to bind.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety This function should be called on the thread that created the
+/// renderer.
+///
+/// \since This function is available since SDL 3.6.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetGPURenderStateStorageBuffers(SDL_GPURenderState *state, int num_storage_buffers, SDL_GPUBuffer *const *storage_buffers)
+/// ```
+/// {@category render}
+bool sdlSetGpuRenderStateStorageBuffers(
+  Pointer<SdlGpuRenderState> state,
+  int numStorageBuffers,
+  Pointer<Pointer<SdlGpuBuffer>> storageBuffers,
+) {
+  final sdlSetGpuRenderStateStorageBuffersLookupFunction = _libSdl
+      .lookupFunction<
+        Uint8 Function(
+          Pointer<SdlGpuRenderState> state,
+          Int32 numStorageBuffers,
+          Pointer<Pointer<SdlGpuBuffer>> storageBuffers,
+        ),
+        int Function(
+          Pointer<SdlGpuRenderState> state,
+          int numStorageBuffers,
+          Pointer<Pointer<SdlGpuBuffer>> storageBuffers,
+        )
+      >('SDL_SetGPURenderStateStorageBuffers');
+  return sdlSetGpuRenderStateStorageBuffersLookupFunction(
+        state,
+        numStorageBuffers,
+        storageBuffers,
+      ) ==
+      1;
+}
+
+///
 /// Set fragment shader uniform variables in a custom GPU render state.
 ///
 /// The data is copied and will be pushed using
@@ -4752,4 +4898,60 @@ void sdlDestroyGpuRenderState(Pointer<SdlGpuRenderState> state) {
         void Function(Pointer<SdlGpuRenderState> state)
       >('SDL_DestroyGPURenderState');
   return sdlDestroyGpuRenderStateLookupFunction(state);
+}
+
+///
+/// Call this to suspend Render operations on Xbox after receiving the
+/// SDL_EVENT_DID_ENTER_BACKGROUND event.
+///
+/// Do NOT call any SDL_Render functions after calling this function! This must
+/// also be called before calling SDL_GDKSuspendComplete.
+///
+/// This function MUST be called on the application's render thread.
+///
+/// \param renderer the renderer which should suspend operation.
+///
+/// \since This function is available since SDL 3.6.0.
+///
+/// \sa SDL_AddEventWatch
+///
+/// ```c
+/// extern SDL_DECLSPEC void SDLCALL SDL_GDKSuspendRenderer(SDL_Renderer *renderer)
+/// ```
+/// {@category render}
+void sdlGdkSuspendRenderer(Pointer<SdlRenderer> renderer) {
+  final sdlGdkSuspendRendererLookupFunction = _libSdl
+      .lookupFunction<
+        Void Function(Pointer<SdlRenderer> renderer),
+        void Function(Pointer<SdlRenderer> renderer)
+      >('SDL_GDKSuspendRenderer');
+  return sdlGdkSuspendRendererLookupFunction(renderer);
+}
+
+///
+/// Call this to resume Render operations on Xbox after receiving the
+/// SDL_EVENT_WILL_ENTER_FOREGROUND event.
+///
+/// When resuming, this function MUST be called before calling any other
+/// SDL_Render functions.
+///
+/// This function MUST be called on the application's render thread.
+///
+/// \param renderer the renderer which should resume operation.
+///
+/// \since This function is available since SDL 3.6.0.
+///
+/// \sa SDL_AddEventWatch
+///
+/// ```c
+/// extern SDL_DECLSPEC void SDLCALL SDL_GDKResumeRenderer(SDL_Renderer *renderer)
+/// ```
+/// {@category render}
+void sdlGdkResumeRenderer(Pointer<SdlRenderer> renderer) {
+  final sdlGdkResumeRendererLookupFunction = _libSdl
+      .lookupFunction<
+        Void Function(Pointer<SdlRenderer> renderer),
+        void Function(Pointer<SdlRenderer> renderer)
+      >('SDL_GDKResumeRenderer');
+  return sdlGdkResumeRendererLookupFunction(renderer);
 }

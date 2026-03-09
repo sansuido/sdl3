@@ -40,9 +40,6 @@ final class MixPoint3D extends Struct {
   // [8]+(4)
   @Float()
   external double z;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
 }
 
 // MIX_AudioDecoder

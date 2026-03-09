@@ -48,6 +48,8 @@ const MIX_PROP_PLAY_APPEND_SILENCE_FRAMES_NUMBER =
     'SDL_mixer.play.append_silence_frames';
 const MIX_PROP_PLAY_APPEND_SILENCE_MILLISECONDS_NUMBER =
     'SDL_mixer.play.append_silence_milliseconds';
+const MIX_PROP_PLAY_HALT_WHEN_EXHAUSTED_BOOLEAN =
+    'SDL_mixer.play.halt_when_exhausted';
 
 /// {@category mixer}
 class MixkPropAudioLoad {
@@ -98,4 +100,6 @@ class MixkPropPlay {
       MIX_PROP_PLAY_APPEND_SILENCE_FRAMES_NUMBER;
   static const appendSilenceMillisecondsNumber =
       MIX_PROP_PLAY_APPEND_SILENCE_MILLISECONDS_NUMBER;
+  static const haltWhenExhaustedBoolean =
+      MIX_PROP_PLAY_HALT_WHEN_EXHAUSTED_BOOLEAN;
 }

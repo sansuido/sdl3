@@ -78,9 +78,6 @@ final class TtfSubString extends Struct {
   external int rect_1;
   @Uint64()
   external int rect_2;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
 }
 
 /// {@category ttf}
