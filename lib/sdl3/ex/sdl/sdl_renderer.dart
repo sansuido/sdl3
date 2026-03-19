@@ -1,5 +1,44 @@
 part of '../../sdl.dart';
 
+///
+/// Set sampler bindings variables in a custom GPU render state.
+///
+/// The data is copied and will be binded using SDL_BindGPUFragmentSamplers()
+/// during draw call execution.
+///
+/// \param state the state to modify.
+/// \param num_sampler_bindings The number of additional fragment samplers to
+/// bind.
+/// \param sampler_bindings Additional fragment samplers to bind.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety This function should be called on the thread that created the
+/// renderer.
+///
+/// \since This function is available since SDL 3.6.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetGPURenderStateSamplerBindings(SDL_GPURenderState *state, int num_sampler_bindings, const SDL_GPUTextureSamplerBinding *sampler_bindings)
+/// ```
+/// {@category render}
+bool sdlxSetGpuRenderStateSamplerBindings(
+  Pointer<SdlGpuRenderState> state, {
+  required List<SdlxGpuTextureSamplerBinding> bindings,
+}) {
+  var result = false;
+  if (bindings.isNotEmpty) {
+    final bindingsPointer = bindings.calloc();
+    result = sdlSetGpuRenderStateSamplerBindings(
+      state,
+      bindings.length,
+      bindingsPointer,
+    );
+    bindingsPointer.callocFree();
+  }
+  return result;
+}
+
 extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   // lib_sdl_renderer.dart
 

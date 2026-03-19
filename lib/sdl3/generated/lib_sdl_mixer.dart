@@ -475,7 +475,7 @@ bool mixGetMixerFormat(Pointer<MixMixer> mixer, Pointer<SdlAudioSpec> spec) {
 /// locked until the final matching unlock call.
 ///
 /// Do not lock the mixer for significant amounts of time, or it can cause
-/// audio dropouts. Just do simply things quickly and unlock again.
+/// audio dropouts. Just do simple things quickly and unlock again.
 ///
 /// Locking a NULL mixer is a safe no-op.
 ///
@@ -2416,6 +2416,14 @@ int mixFramesToMs(int sampleRate, int frames) {
 /// possible. Note that a track is not consider exhausted until all its loops
 /// and appended silence have been mixed (and also, that loops don't mean
 /// anything when the input is an AudioStream). Default true.
+/// - `MIX_PROP_PLAY_START_ORDER_NUMBER`: This is a special-case property that
+/// most apps can ignore. For mod file formats, start mixing from a specific
+/// "order" index instead of the start of the file. A value < 0 will cause
+/// this property to be ignored. If the decoder doesn't support this
+/// property, it will also be ignored. If this property is _not_ ignored, the
+/// MIX_PROP_PLAY_START_FRAME_NUMBER and
+/// MIX_PROP_PLAY_START_MILLISECOND_NUMBER properties will be ignored
+/// instead. Default -1. Since SDL_mixer 3.2.2.
 ///
 /// If this function fails, mixing of this track will not start (or restart, if
 /// it was already started).
@@ -2605,8 +2613,12 @@ bool mixStopTrack(Pointer<MixTrack> track, int fadeOutFrames) {
 ///
 /// Once a track has completed any fadeout and come to a stop, it will call its
 /// MIX_TrackStoppedCallback, if any. It is legal to assign the track a new
-/// input and/or restart it during this callback. This function does not
-/// prevent new play requests from being made.
+/// input and/or restart it during this callback.
+///
+/// This function does not prevent new play requests from being made; itâs
+/// legal to use this function to begin fading all playing tracks but then
+/// start other tracks playing normally while those fade-outs are still in
+/// progress.
 ///
 /// \param mixer the mixer on which to stop all tracks.
 /// \param fade_out_ms the number of milliseconds to spend fading out to

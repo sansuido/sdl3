@@ -4,8 +4,8 @@ part of '../sdl_mixer.dart';
 
 //const SDL_MIXER_H_ = ;
 const SDL_MIXER_MAJOR_VERSION = 3;
-const SDL_MIXER_MINOR_VERSION = 1;
-const SDL_MIXER_MICRO_VERSION = 3;
+const SDL_MIXER_MINOR_VERSION = 3;
+const SDL_MIXER_MICRO_VERSION = 0;
 //const SDL_MIXER_VERSION = SDL_VERSIONNUM(SDL_MIXER_MAJOR_VERSION, SDL_MIXER_MINOR_VERSION, SDL_MIXER_MICRO_VERSION);
 //const SDL_MIXER_VERSION_ATLEAST = (X, Y, Z) ((SDL_MIXER_MAJOR_VERSION >= X) && (SDL_MIXER_MAJOR_VERSION > X || SDL_MIXER_MINOR_VERSION >= Y) && (SDL_MIXER_MAJOR_VERSION > X || SDL_MIXER_MINOR_VERSION > Y || SDL_MIXER_MICRO_VERSION >= Z));
 const MIX_PROP_MIXER_DEVICE_NUMBER = 'SDL_mixer.mixer.device';
@@ -36,6 +36,7 @@ const MIX_PROP_PLAY_MAX_MILLISECONDS_NUMBER = 'SDL_mixer.play.max_milliseconds';
 const MIX_PROP_PLAY_START_FRAME_NUMBER = 'SDL_mixer.play.start_frame';
 const MIX_PROP_PLAY_START_MILLISECOND_NUMBER =
     'SDL_mixer.play.start_millisecond';
+const MIX_PROP_PLAY_START_ORDER_NUMBER = 'SDL_mixer.play.start_order';
 const MIX_PROP_PLAY_LOOP_START_FRAME_NUMBER = 'SDL_mixer.play.loop_start_frame';
 const MIX_PROP_PLAY_LOOP_START_MILLISECOND_NUMBER =
     'SDL_mixer.play.loop_start_millisecond';
@@ -89,6 +90,7 @@ class MixkPropPlay {
   static const maxMillisecondsNumber = MIX_PROP_PLAY_MAX_MILLISECONDS_NUMBER;
   static const startFrameNumber = MIX_PROP_PLAY_START_FRAME_NUMBER;
   static const startMillisecondNumber = MIX_PROP_PLAY_START_MILLISECOND_NUMBER;
+  static const startOrderNumber = MIX_PROP_PLAY_START_ORDER_NUMBER;
   static const loopStartFrameNumber = MIX_PROP_PLAY_LOOP_START_FRAME_NUMBER;
   static const loopStartMillisecondNumber =
       MIX_PROP_PLAY_LOOP_START_MILLISECOND_NUMBER;

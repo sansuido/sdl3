@@ -1,3 +1,8 @@
+## 2.6.2
+- SDL3-2026-03-15
+- [added] Added functions and wrapper classes for the GPU (first implementation).
+- [update] Dart 3.11.2
+
 ## 2.6.1
 - SDL3-2026-03-08
 - [fixed] Fixed some incorrect calculation of byte size of structure(SdlGpuGraphicsPipelineCreateInfo and more).
