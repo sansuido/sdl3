@@ -6,7 +6,6 @@ class SdlxGpuTransferBufferCreateInfo {
     this.size = 0,
     this.props = 0,
   });
-
   int usage;
   int size;
   int props;

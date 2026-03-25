@@ -15,6 +15,7 @@ class SdlxGpuViewport {
   double h;
   double minDepth;
   double maxDepth;
+
   Pointer<SdlGpuViewport> calloc() {
     final pointer = ffi.calloc<SdlGpuViewport>();
     pointer.ref.x = x;

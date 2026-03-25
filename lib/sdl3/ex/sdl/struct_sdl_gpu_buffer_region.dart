@@ -21,17 +21,3 @@ class SdlxGpuBufferRegion {
     return pointer;
   }
 }
-
-//// SDL_GPUBufferRegion
-///// {@category gpu}
-//final class SdlGpuBufferRegion extends Struct {
-//  // [0]+(8)
-//  external Pointer<SdlGpuBuffer> buffer;
-//  // [8]+(4)
-//  @Uint32()
-//  external int offset;
-//  // [12]+(4)
-//  @Uint32()
-//  external int size;
-//}
-//

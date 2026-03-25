@@ -1,3 +1,10 @@
+## 2.7.0
+- SDL3-2026-03-22
+- [fixed] Fixed an issue with memory allocation on the Dart side for some structs.
+- [added] Added functions and wrapper classes for the GPU.
+- [added] Added the URL for sdl3_gpu_examples to the readme file.
+- [update] Dart 3.11.3
+
 ## 2.6.2
 - SDL3-2026-03-15
 - [added] Added functions and wrapper classes for the GPU (first implementation).

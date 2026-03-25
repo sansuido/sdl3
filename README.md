@@ -72,9 +72,13 @@ Currently, we are providing it on an experimental basis using the dll compiled b
 
 https://github.com/sansuido/build-sdl3
 
-# Example
+# Examples
 
+## learnopengl.com for Dart
 https://github.com/sansuido/sdl3_learnopengl/
+
+## SDL_gpu_examples for Dart
+https://github.com/sansuido/sdl3_gpu_examples/
 
 # Author
 

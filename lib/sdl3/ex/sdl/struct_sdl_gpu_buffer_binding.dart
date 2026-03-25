@@ -6,6 +6,7 @@ class SdlxGpuBufferBinding {
   }
   late Pointer<SdlGpuBuffer> buffer;
   int offset;
+
   Pointer<SdlGpuBufferBinding> calloc() {
     final pointer = ffi.calloc<SdlGpuBufferBinding>();
     pointer.ref.buffer = buffer;

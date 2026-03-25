@@ -41,38 +41,3 @@ class SdlxGpuDepthStencilTargetInfo {
     return pointer;
   }
 }
-
-//// SDL_GPUDepthStencilTargetInfo
-///// {@category gpu}
-//final class SdlGpuDepthStencilTargetInfo extends Struct {
-//  // [0]+(8)
-//  external Pointer<SdlGpuTexture> texture;
-//  // [8]+(4)
-//  @Float()
-//  external double clearDepth;
-//  // [12]+(4)
-//  @Int32()
-//  external int loadOp;
-//  // [16]+(4)
-//  @Int32()
-//  external int storeOp;
-//  // [20]+(4)
-//  @Int32()
-//  external int stencilLoadOp;
-//  // [24]+(4)
-//  @Int32()
-//  external int stencilStoreOp;
-//  // [28]+(1)
-//  @Uint8()
-//  external int cycle;
-//  // [29]+(1)
-//  @Uint8()
-//  external int clearStencil;
-//  // [30]+(1)
-//  @Uint8()
-//  external int mipLevel;
-//  // [31]+(1)
-//  @Uint8()
-//  external int layer;
-//}
-//

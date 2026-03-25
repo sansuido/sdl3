@@ -10,6 +10,7 @@ class SdlxGpuTextureSamplerBinding {
   }
   late Pointer<SdlGpuTexture> texture;
   late Pointer<SdlGpuSampler> sampler;
+
   Pointer<SdlGpuTextureSamplerBinding> calloc() {
     final pointer = ffi.calloc<SdlGpuTextureSamplerBinding>();
     pointer.ref.texture = texture;

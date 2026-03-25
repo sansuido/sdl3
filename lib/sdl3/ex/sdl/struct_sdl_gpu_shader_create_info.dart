@@ -26,6 +26,7 @@ class SdlxGpuShaderCreateInfo {
   int numStorageBuffers;
   int numUniformBuffers;
   int props;
+
   Pointer<SdlGpuShaderCreateInfo> calloc() {
     final pointer = ffi.calloc<SdlGpuShaderCreateInfo>();
     pointer.ref.codeSize = codeSize;
@@ -50,5 +51,6 @@ extension SdlGpuShaderCreateInfoCallocAllFreeExtension
     if (ref.entrypoint != nullptr) {
       ref.entrypoint.callocFree();
     }
+    callocFree();
   }
 }

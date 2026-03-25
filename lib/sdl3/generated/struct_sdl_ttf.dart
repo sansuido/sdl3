@@ -74,10 +74,14 @@ final class TtfSubString extends Struct {
   @Int32()
   external int clusterIndex;
   // [20]+(16)
-  @Uint64()
+  @Uint32()
   external int rect_1;
-  @Uint64()
+  @Uint32()
   external int rect_2;
+  @Uint32()
+  external int rect_3;
+  @Uint32()
+  external int rect_4;
 }
 
 /// {@category ttf}

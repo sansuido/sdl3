@@ -6,6 +6,7 @@ class SdlxRect {
   int y;
   int w;
   int h;
+
   Pointer<SdlRect> calloc() {
     final pointer = ffi.calloc<SdlRect>();
     pointer.ref.x = x;

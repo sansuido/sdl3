@@ -9,6 +9,7 @@ class SdlxGpuStorageBufferReadWriteBinding {
   }
   late Pointer<SdlGpuBuffer> buffer;
   int cycle;
+
   Pointer<SdlGpuStorageBufferReadWriteBinding> calloc() {
     final pointer = ffi.calloc<SdlGpuStorageBufferReadWriteBinding>();
     pointer.ref.buffer = buffer;

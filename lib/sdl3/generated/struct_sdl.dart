@@ -2014,15 +2014,23 @@ final class SdlGpuDepthStencilState extends Struct {
   @Int32()
   external int compareOp;
   // [4]+(16)
-  @Uint64()
+  @Uint32()
   external int backStencilState_1;
-  @Uint64()
+  @Uint32()
   external int backStencilState_2;
+  @Uint32()
+  external int backStencilState_3;
+  @Uint32()
+  external int backStencilState_4;
   // [20]+(16)
-  @Uint64()
+  @Uint32()
   external int frontStencilState_1;
-  @Uint64()
+  @Uint32()
   external int frontStencilState_2;
+  @Uint32()
+  external int frontStencilState_3;
+  @Uint32()
+  external int frontStencilState_4;
   // [36]+(1)
   @Uint8()
   external int compareMask;
@@ -2064,14 +2072,22 @@ final class SdlGpuColorTargetDescription extends Struct {
   @Int32()
   external int format;
   // [4]+(32)
-  @Uint64()
+  @Uint32()
   external int blendState_1;
-  @Uint64()
+  @Uint32()
   external int blendState_2;
-  @Uint64()
+  @Uint32()
   external int blendState_3;
-  @Uint64()
+  @Uint32()
   external int blendState_4;
+  @Uint32()
+  external int blendState_5;
+  @Uint32()
+  external int blendState_6;
+  @Uint32()
+  external int blendState_7;
+  @Uint32()
+  external int blendState_8;
 }
 
 /// {@category gpu}
@@ -2555,10 +2571,14 @@ final class SdlHapticConstant extends Struct {
   @Uint16()
   external int blank_1;
   // [4]+(16)
-  @Uint64()
+  @Uint32()
   external int direction_1;
-  @Uint64()
+  @Uint32()
   external int direction_2;
+  @Uint32()
+  external int direction_3;
+  @Uint32()
+  external int direction_4;
   // [20]+(4)
   @Uint32()
   external int length;
@@ -2604,10 +2624,14 @@ final class SdlHapticPeriodic extends Struct {
   @Uint16()
   external int blank_1;
   // [4]+(16)
-  @Uint64()
+  @Uint32()
   external int direction_1;
-  @Uint64()
+  @Uint32()
   external int direction_2;
+  @Uint32()
+  external int direction_3;
+  @Uint32()
+  external int direction_4;
   // [20]+(4)
   @Uint32()
   external int length;
@@ -2665,10 +2689,14 @@ final class SdlHapticCondition extends Struct {
   @Uint16()
   external int blank_1;
   // [4]+(16)
-  @Uint64()
+  @Uint32()
   external int direction_1;
-  @Uint64()
+  @Uint32()
   external int direction_2;
+  @Uint32()
+  external int direction_3;
+  @Uint32()
+  external int direction_4;
   // [20]+(4)
   @Uint32()
   external int length;
@@ -2744,10 +2772,14 @@ final class SdlHapticRamp extends Struct {
   @Uint16()
   external int blank_1;
   // [4]+(16)
-  @Uint64()
+  @Uint32()
   external int direction_1;
-  @Uint64()
+  @Uint32()
   external int direction_2;
+  @Uint32()
+  external int direction_3;
+  @Uint32()
+  external int direction_4;
   // [20]+(4)
   @Uint32()
   external int length;
@@ -3150,14 +3182,36 @@ final class SdlMessageBoxColor extends Struct {
 /// {@category messagebox}
 final class SdlMessageBoxColorScheme extends Struct {
   // [0]+(3*5)
-  @Uint64()
+  @Uint8()
   external int colors_1;
-  @Uint32()
+  @Uint8()
   external int colors_2;
-  @Uint16()
+  @Uint8()
   external int colors_3;
   @Uint8()
   external int colors_4;
+  @Uint8()
+  external int colors_5;
+  @Uint8()
+  external int colors_6;
+  @Uint8()
+  external int colors_7;
+  @Uint8()
+  external int colors_8;
+  @Uint8()
+  external int colors_9;
+  @Uint8()
+  external int colors_10;
+  @Uint8()
+  external int colors_11;
+  @Uint8()
+  external int colors_12;
+  @Uint8()
+  external int colors_13;
+  @Uint8()
+  external int colors_14;
+  @Uint8()
+  external int colors_15;
 }
 
 /// {@category messagebox}
@@ -3451,16 +3505,24 @@ final class SdlFRect extends Struct {
 /// {@category render}
 final class SdlVertex extends Struct {
   // [0]+(8)
-  @Uint64()
+  @Uint32()
   external int position_1;
+  @Uint32()
+  external int position_2;
   // [8]+(16)
-  @Uint64()
+  @Uint32()
   external int color_1;
-  @Uint64()
+  @Uint32()
   external int color_2;
+  @Uint32()
+  external int color_3;
+  @Uint32()
+  external int color_4;
   // [24]+(8)
-  @Uint64()
+  @Uint32()
   external int texCoord_1;
+  @Uint32()
+  external int texCoord_2;
 }
 
 /// {@category render}
