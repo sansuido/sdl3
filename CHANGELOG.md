@@ -1,3 +1,7 @@
+## 2.7.1
+- SDL3-2026-03-29
+- [update] Dart 3.11.4
+
 ## 2.7.0
 - SDL3-2026-03-22
 - [fixed] Fixed an issue with memory allocation on the Dart side for some structs.

@@ -786,6 +786,27 @@ bool sdlSendAndroidMessage(int command, int param) {
 }
 
 ///
+/// Query if the current device is a phone.
+///
+/// If SDL can't determine this, it will return false.
+///
+/// \returns true if the device is a phone, false otherwise.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.6.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL SDL_IsPhone(void)
+/// ```
+/// {@category system}
+bool sdlIsPhone() {
+  final sdlIsPhoneLookupFunction = _libSdl
+      .lookupFunction<Uint8 Function(), int Function()>('SDL_IsPhone');
+  return sdlIsPhoneLookupFunction() == 1;
+}
+
+///
 /// Query if the current device is a tablet.
 ///
 /// If SDL can't determine this, it will return false.
