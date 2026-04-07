@@ -1,3 +1,8 @@
+## 2.7.2
+- SDL3-2026-04-05
+- [added] Added functions and wrapper classes for the dialog.
+- [added] Added examples/dialog_demo.dart.
+
 ## 2.7.1
 - SDL3-2026-03-29
 - [update] Dart 3.11.4
