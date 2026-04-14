@@ -1203,6 +1203,10 @@ const SDL_PROP_TEXTINPUT_TYPE_NUMBER = 'SDL.textinput.type';
 const SDL_PROP_TEXTINPUT_CAPITALIZATION_NUMBER = 'SDL.textinput.capitalization';
 const SDL_PROP_TEXTINPUT_AUTOCORRECT_BOOLEAN = 'SDL.textinput.autocorrect';
 const SDL_PROP_TEXTINPUT_MULTILINE_BOOLEAN = 'SDL.textinput.multiline';
+const SDL_PROP_TEXTINPUT_TITLE_STRING = 'SDL.textinput.title';
+const SDL_PROP_TEXTINPUT_PLACEHOLDER_STRING = 'SDL.textinput.placeholder';
+const SDL_PROP_TEXTINPUT_DEFAULT_TEXT_STRING = 'SDL.textinput.default_text';
+const SDL_PROP_TEXTINPUT_MAX_LENGTH_NUMBER = 'SDL.textinput.max_length';
 const SDL_PROP_TEXTINPUT_ANDROID_INPUTTYPE_NUMBER =
     'SDL.textinput.android.inputtype';
 //const SDL_keycode_h_ = ;
@@ -2113,7 +2117,7 @@ const SDL_RENDERER_VSYNC_ADAPTIVE = -1;
 const SDL_DEBUG_TEXT_FONT_CHARACTER_SIZE = 8;
 //const SDL_revision_h_ = ;
 const SDL_REVISION =
-    'SDL-3.5.0-release-3.4.0-512-g19f70284a (" SDL_VENDOR_INFO ")';
+    'SDL-3.5.0-release-3.4.0-545-g7f12b975b (" SDL_VENDOR_INFO ")';
 //const SDL_scancode_h_ = ;
 const SDL_SCANCODE_UNKNOWN = 0;
 const SDL_SCANCODE_A = 4;
@@ -4155,6 +4159,10 @@ class SdlkPropTextinput {
   static const capitalizationNumber = SDL_PROP_TEXTINPUT_CAPITALIZATION_NUMBER;
   static const autocorrectBoolean = SDL_PROP_TEXTINPUT_AUTOCORRECT_BOOLEAN;
   static const multilineBoolean = SDL_PROP_TEXTINPUT_MULTILINE_BOOLEAN;
+  static const titleString = SDL_PROP_TEXTINPUT_TITLE_STRING;
+  static const placeholderString = SDL_PROP_TEXTINPUT_PLACEHOLDER_STRING;
+  static const defaultTextString = SDL_PROP_TEXTINPUT_DEFAULT_TEXT_STRING;
+  static const maxLengthNumber = SDL_PROP_TEXTINPUT_MAX_LENGTH_NUMBER;
   static const androidInputtypeNumber =
       SDL_PROP_TEXTINPUT_ANDROID_INPUTTYPE_NUMBER;
 }

@@ -31,6 +31,8 @@ const SDL_SHADERCROSS_PROP_SPIRV_PSSL_COMPATIBILITY_BOOLEAN =
     'SDL_shadercross.spirv.pssl.compatibility';
 const SDL_SHADERCROSS_PROP_SPIRV_MSL_VERSION_STRING =
     'SDL_shadercross.spirv.msl.version';
+const SDL_SHADERCROSS_PROP_HLSL_SKIP_SPIRV_ROUNDTRIP_BOOLEAN =
+    'SDL_shadercross.hlsl.skip_spirv_roundtrip';
 
 /// {@category shadercross}
 class SdlkShadercrossIovarType {
@@ -67,4 +69,6 @@ class SdlkShadercrossProp {
       SDL_SHADERCROSS_PROP_SPIRV_PSSL_COMPATIBILITY_BOOLEAN;
   static const spirvMslVersionString =
       SDL_SHADERCROSS_PROP_SPIRV_MSL_VERSION_STRING;
+  static const hlslSkipSpirvRoundtripBoolean =
+      SDL_SHADERCROSS_PROP_HLSL_SKIP_SPIRV_ROUNDTRIP_BOOLEAN;
 }

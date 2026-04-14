@@ -1,3 +1,6 @@
+## 2.7.3
+- SDL3-2026-04-12
+
 ## 2.7.2
 - SDL3-2026-04-05
 - [added] Added functions and wrapper classes for the dialog.

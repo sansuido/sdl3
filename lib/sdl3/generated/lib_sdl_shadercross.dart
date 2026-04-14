@@ -361,8 +361,9 @@ int sdlShaderCrossGetHlslShaderFormats() {
 /// These are the optional properties that can be used:
 ///
 /// - `SDL_SHADERCROSS_PROP_SHADER_DEBUG_ENABLE_BOOLEAN`: allows debug info to be emitted when relevant. Should only be used with debugging tools like Renderdoc.
-/// - `SDL_SHADERCROSS_PROP_SHADER_DEBUG_ENABLE_BOOLEAN`: a UTF-8 name to be used with the shader. Relevant for use with debugging tools like Renderdoc.
-/// - `SDL_SHADERCROSS_PROP_SHADER_CULL_UNUSED_BINDINGS_BOOLEAN`: When true, indicates that the compiler should not cull unused shader resources. This behavior is disabled by default.
+/// - `SDL_SHADERCROSS_PROP_SHADER_DEBUG_NAME_STRING`: a UTF-8 name to be used with the shader. Relevant for use with debugging tools like Renderdoc.
+/// - `SDL_SHADERCROSS_PROP_SHADER_CULL_UNUSED_BINDINGS_BOOLEAN`: When true, indicates that the compiler should cull unused shader resources. This behavior is disabled by default.
+/// - `SDL_SHADERCROSS_PROP_HLSL_SKIP_SPIRV_ROUNDTRIP_BOOLEAN`: When true, the SPIRV roundtrip is skipped. This behavior is disabled by default. Do not use this property if your shader uses Structured Buffers.
 ///
 /// \param info a struct describing the shader to transpile.
 /// \param size filled in with the bytecode buffer size.
@@ -401,7 +402,8 @@ Pointer<NativeType> sdlShaderCrossCompileDxbcFromHlsl(
 ///
 /// - `SDL_SHADERCROSS_PROP_SHADER_DEBUG_ENABLE_BOOLEAN`: allows debug info to be emitted when relevant. Should only be used with debugging tools like Renderdoc.
 /// - `SDL_SHADERCROSS_PROP_SHADER_DEBUG_NAME_STRING`: a UTF-8 name to be used with the shader. Relevant for use with debugging tools like Renderdoc.
-/// - `SDL_SHADERCROSS_PROP_SHADER_CULL_UNUSED_BINDINGS_BOOLEAN`: when true, indicates that the compiler should not cull unused shader resources. This behavior is disabled by default.
+/// - `SDL_SHADERCROSS_PROP_SHADER_CULL_UNUSED_BINDINGS_BOOLEAN`: when true, indicates that the compiler should cull unused shader resources. This behavior is disabled by default.
+/// - `SDL_SHADERCROSS_PROP_HLSL_SKIP_SPIRV_ROUNDTRIP_BOOLEAN`: when true, the SPIRV roundtrip is skipped. This behavior is disabled by default. Do not use this property if your shader uses Structured Buffers.
 ///
 /// \param info a struct describing the shader to transpile.
 /// \param size filled in with the bytecode buffer size.
@@ -440,7 +442,7 @@ Pointer<NativeType> sdlShaderCrossCompileDxilFromHlsl(
 ///
 /// - `SDL_SHADERCROSS_PROP_SHADER_DEBUG_ENABLE_BOOLEAN`: allows debug info to be emitted when relevant. Should only be used with debugging tools like Renderdoc.
 /// - `SDL_SHADERCROSS_PROP_SHADER_DEBUG_NAME_STRING`: a UTF-8 name to be used with the shader. Relevant for use with debugging tools like Renderdoc.
-/// - `SDL_SHADERCROSS_PROP_SHADER_CULL_UNUSED_BINDINGS_BOOLEAN`: when true, indicates that the compiler should not cull unused shader resources. This behavior is disabled by default.
+/// - `SDL_SHADERCROSS_PROP_SHADER_CULL_UNUSED_BINDINGS_BOOLEAN`: when true, indicates that the compiler should cull unused shader resources. This behavior is disabled by default.
 ///
 /// \param info a struct describing the shader to transpile.
 /// \param size filled in with the bytecode buffer size.
