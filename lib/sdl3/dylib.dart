@@ -10,10 +10,12 @@ class SdlDynamicLibraryService {
       var extension = '';
       switch (Platform.operatingSystem) {
         case 'android':
-        case 'linux':
         case 'fuchsia':
           header = 'lib';
           extension = '.so';
+        case 'linux':
+          header = 'lib';
+          extension = '.so.0';
         case 'ios':
         case 'macos':
           header = 'lib';

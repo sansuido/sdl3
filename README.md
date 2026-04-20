@@ -26,7 +26,16 @@ SDL3_net.dll
 SDL3_ttf.dll  
 SDL3_shadercross.dll  
 
-## Linux (or Android, Fuchsia) requires so files.
+## Linux requires so files.
+
+libSDL3.so.0  
+libSDL3_image.so.0  
+libSDL3_mixer.so.0  
+libSDL3_net.so.0  
+libSDL3_ttf.so.0  
+libSDL3_shadercross.so.0
+
+## Android, Fuchsia requires so files.
 
 libSDL3.so  
 libSDL3_image.so  

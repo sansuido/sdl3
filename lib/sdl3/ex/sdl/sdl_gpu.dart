@@ -1191,7 +1191,6 @@ void sdlxDownloadToGpuTexture(
   Pointer<SdlGpuCopyPass> copyPass,
   SdlxGpuTextureRegion source,
   SdlxGpuTextureTransferInfo destination,
-  bool cycle,
 ) {
   final sourcePointer = source.calloc();
   final destinationPointer = destination.calloc();

@@ -1,3 +1,9 @@
+## 2.7.4
+- SDL3-2026-04-19
+- [fixed] Fixed dynamic library loading on Linux by using `.so.0` extension to ensure compatibility with installed SDL3 system libraries.
+- Separated Linux and Fuchsia platform handling to use correct library extensions for each.
+- [added] Added examples/hit_test.dart.
+
 ## 2.7.3
 - SDL3-2026-04-12
 
