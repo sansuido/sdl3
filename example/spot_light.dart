@@ -1,6 +1,5 @@
 // https://discourse.libsdl.org/t/is-possible-to-create-ambient-light-in-sdl2/28381
 import 'dart:ffi';
-import 'dart:math' as math;
 
 import 'package:ffi/ffi.dart';
 import 'package:sdl3/sdl3.dart';
@@ -73,13 +72,14 @@ int main() {
     {
       renderer
         ..setTarget(lightsLayer)
-        ..setDrawColorFloat(0, 0, 0, 1)
+        ..setDrawColorFloat(SdlxFColor(0, 0, 0))
         ..clear();
-      const size = math.Point<double>(200, 200);
-      final position = PointEx.getMousePosition();
+      final size = SdlxFPoint(200, 200);
+      final position = SdlxFPoint(0, 0);
+      sdlxGetMouseState(position);
       renderer.textureRotated(
         lightTexture,
-        dstrect: RectangleEx.fromCenter(position, size),
+        dstrect: SdlxFRect.fromCenter(position, size),
         angle: angle,
       );
       angle += 0.1;
@@ -90,7 +90,7 @@ int main() {
       renderer
         ..setTarget(shadowLayer)
         // put your desired tint , (the alpha value has no effect here)
-        ..setDrawColorFloat(tint, tint, tint, 1);
+        ..setDrawColorFloat(SdlxFColor(tint, tint, tint));
       if (calc != 0) {
         tint += calc;
         if (tint <= tintMin) {
@@ -103,7 +103,7 @@ int main() {
       }
       // draw the color to the entire shadow
       renderer
-        ..fillRect()
+        ..fillRect(null)
         // your spotlights
         ..texture(lightsLayer)
         ..setTarget(nullptr);
@@ -111,7 +111,7 @@ int main() {
     // render everythings
     {
       renderer
-        ..setDrawColorFloat(0, 0, 0, 0)
+        ..setDrawColorFloat(SdlxFColor(0, 0, 0))
         ..clear()
         ..texture(bgTexture)
         ..texture(shadowLayer)

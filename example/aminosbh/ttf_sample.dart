@@ -29,7 +29,6 @@
  *
  */
 import 'dart:ffi';
-import 'dart:math';
 import 'package:ffi/ffi.dart';
 import 'package:sdl3/sdl3.dart';
 
@@ -75,11 +74,11 @@ int main() {
       // Declare rect of square
       // Square dimensions: Half of the min(gScreenWidth, gScreenHeight)
       // Square position: In the middle of the screen
-      const squareRect = Rectangle<double>(
-        gScreenWidth / 2 - gScreenHeight / 2 / 2,
-        gScreenHeight / 2 - gScreenHeight / 2 / 2,
-        gScreenHeight / 2,
-        gScreenHeight / 2,
+      final squareRect = SdlxFRect(
+        x: gScreenWidth / 2 - gScreenHeight / 2 / 2,
+        y: gScreenHeight / 2 - gScreenHeight / 2 / 2,
+        w: gScreenHeight / 2,
+        h: gScreenHeight / 2,
       );
       Pointer<TtfFont> font = nullptr;
       font = TtfFontEx.open(gFontPath, 40);
@@ -91,18 +90,15 @@ int main() {
         );
         return 0;
       }
-      final textColor = calloc<SdlColor>()..setRgba(0, 0, 0, SDL_ALPHA_OPAQUE);
-      final backgroundColor = calloc<SdlColor>()
-        ..setRgba(255, 255, 255, SDL_ALPHA_OPAQUE);
+      final textColor = SdlxColor(0, 0, 0);
+      final backgroundColor = SdlxColor(255, 255, 255);
       Pointer<SdlTexture> text = nullptr;
-      late Rectangle<double> textRect;
+      late SdlxFRect textRect;
       final textSurface = font.renderTextShaded(
         '赤い四角/Red square',
-        textColor.ref,
-        backgroundColor.ref,
+        textColor,
+        backgroundColor,
       );
-      textColor.callocFree();
-      backgroundColor.callocFree();
       font.close();
       if (textSurface == nullptr) {
         print(
@@ -120,11 +116,11 @@ int main() {
           return 0;
         }
         // Get text dimensions
-        textRect = Rectangle<double>(
-          (gScreenWidth - textSurface.ref.w) / 2,
-          squareRect.top - textSurface.ref.h - 10,
-          textSurface.ref.w.toDouble(),
-          textSurface.ref.h.toDouble(),
+        textRect = SdlxFRect(
+          x: (gScreenWidth - textSurface.ref.w) / 2,
+          y: squareRect.y - textSurface.ref.h - 10,
+          w: textSurface.ref.w.toDouble(),
+          h: textSurface.ref.h.toDouble(),
         );
         textSurface.destroy();
       }
@@ -141,11 +137,11 @@ int main() {
         }
         // Initialize renderer color white for the background
         renderer
-          ..setDrawColor(0xff, 0xff, 0xff, SDL_ALPHA_OPAQUE)
+          ..setDrawColor(SdlxColor(0xff, 0xff, 0xff))
           // Clear screen
           ..clear()
           // Set renderer color red to draw the square
-          ..setDrawColor(0xff, 0x00, 0x00, SDL_ALPHA_OPAQUE)
+          ..setDrawColor(SdlxColor(0xff, 0, 0))
           // Draw filled square
           ..fillRect(squareRect)
           // Draw text

@@ -1041,15 +1041,11 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// extern SDL_DECLSPEC SDL_Surface * SDLCALL TTF_RenderText_Shaded(TTF_Font *font, const char *text, size_t length, SDL_Color fg, SDL_Color bg)
   /// ```
   /// {@category ttf}
-  Pointer<SdlSurface> renderTextShaded(String? text, SdlColor fg, SdlColor bg) {
-    var length = 0;
-    if (text != null) {
-      final pointer = text.toNativeUtf8();
-      length = pointer.length;
-      calloc.free(pointer);
-    }
-    return ttfRenderTextShaded(this, text, length, fg, bg);
-  }
+  Pointer<SdlSurface> renderTextShaded(
+    String? text,
+    SdlxColor fg,
+    SdlxColor bg,
+  ) => ttfxRenderTextShaded(this, text, fg, bg);
 
   ///
   /// Render UTF-8 text at high quality to a new 8-bit surface.
@@ -1093,18 +1089,10 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// {@category ttf}
   Pointer<SdlSurface> renderTextShadedWrapped(
     String? text,
-    SdlColor fg,
-    SdlColor bg,
+    SdlxColor fg,
+    SdlxColor bg,
     int wrapLength,
-  ) {
-    var length = 0;
-    if (text != null) {
-      final pointer = text.toNativeUtf8();
-      length = pointer.length;
-      calloc.free(pointer);
-    }
-    return ttfRenderTextShadedWrapped(this, text, length, fg, bg, wrapLength);
-  }
+  ) => ttfxRenderTextShadedWrapped(this, text, fg, bg, wrapLength);
 
   ///
   /// Render a single UNICODE codepoint at high quality to a new 8-bit surface.
@@ -1139,8 +1127,8 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// extern SDL_DECLSPEC SDL_Surface * SDLCALL TTF_RenderGlyph_Shaded(TTF_Font *font, Uint32 ch, SDL_Color fg, SDL_Color bg)
   /// ```
   /// {@category ttf}
-  Pointer<SdlSurface> renderGlyphShaded(int ch, SdlColor fg, SdlColor bg) =>
-      ttfRenderGlyphShaded(this, ch, fg, bg);
+  Pointer<SdlSurface> renderGlyphShaded(int ch, SdlxColor fg, SdlxColor bg) =>
+      ttfxRenderGlyphShaded(this, ch, fg, bg);
 
   ///
   /// Render UTF-8 text at high quality to a new ARGB surface.
@@ -1180,15 +1168,8 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// extern SDL_DECLSPEC SDL_Surface * SDLCALL TTF_RenderText_Blended(TTF_Font *font, const char *text, size_t length, SDL_Color fg)
   /// ```
   /// {@category ttf}
-  Pointer<SdlSurface> renderTextBlended(String? text, SdlColor fg) {
-    var length = 0;
-    if (text != null) {
-      final pointer = text.toNativeUtf8();
-      length = pointer.length;
-      calloc.free(pointer);
-    }
-    return ttfRenderTextBlended(this, text, length, fg);
-  }
+  Pointer<SdlSurface> renderTextBlended(String? text, SdlxColor fg) =>
+      ttfxRenderTextBlended(this, text, fg);
 
   ///
   /// Render word-wrapped UTF-8 text at high quality to a new ARGB surface.
@@ -1230,17 +1211,9 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// {@category ttf}
   Pointer<SdlSurface> renderTextBlendedWrapped(
     String? text,
-    SdlColor fg,
+    SdlxColor fg,
     int wrapLength,
-  ) {
-    var length = 0;
-    if (text != null) {
-      final pointer = text.toNativeUtf8();
-      length = pointer.length;
-      calloc.free(pointer);
-    }
-    return ttfRenderTextBlendedWrapped(this, text, length, fg, wrapLength);
-  }
+  ) => ttfxRenderTextBlendedWrapped(this, text, fg, wrapLength);
 
   ///
   /// Render a single UNICODE codepoint at high quality to a new ARGB surface.
@@ -1273,8 +1246,8 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// extern SDL_DECLSPEC SDL_Surface * SDLCALL TTF_RenderGlyph_Blended(TTF_Font *font, Uint32 ch, SDL_Color fg)
   /// ```
   /// {@category ttf}
-  Pointer<SdlSurface> renderGlyphBlended(int ch, SdlColor fg) =>
-      ttfRenderGlyphBlended(this, ch, fg);
+  Pointer<SdlSurface> renderGlyphBlended(int ch, SdlxColor fg) =>
+      ttfxRenderGlyphBlended(this, ch, fg);
 
   ///
   /// Render UTF-8 text at LCD subpixel quality to a new ARGB surface.
@@ -1318,17 +1291,9 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   Pointer<SdlSurface> renderTextLcd(
     String? text,
     int length,
-    SdlColor fg,
-    SdlColor bg,
-  ) {
-    var length = 0;
-    if (text != null) {
-      final pointer = text.toNativeUtf8();
-      length = pointer.length;
-      calloc.free(pointer);
-    }
-    return ttfRenderTextLcd(this, text, length, fg, bg);
-  }
+    SdlxColor fg,
+    SdlxColor bg,
+  ) => ttfxRenderTextLcd(this, text, fg, bg);
 
   ///
   /// Render word-wrapped UTF-8 text at LCD subpixel quality to a new ARGB
@@ -1373,18 +1338,10 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   Pointer<SdlSurface> renderTextLcdWrapped(
     String? text,
     int length,
-    SdlColor fg,
-    SdlColor bg,
+    SdlxColor fg,
+    SdlxColor bg,
     int wrapLength,
-  ) {
-    var length = 0;
-    if (text != null) {
-      final pointer = text.toNativeUtf8();
-      length = pointer.length;
-      calloc.free(pointer);
-    }
-    return ttfRenderTextLcdWrapped(this, text, length, fg, bg, wrapLength);
-  }
+  ) => ttfxRenderTextLcdWrapped(this, text, fg, bg, wrapLength);
 
   ///
   /// Render a single UNICODE codepoint at LCD subpixel quality to a new ARGB
@@ -1419,8 +1376,8 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// extern SDL_DECLSPEC SDL_Surface * SDLCALL TTF_RenderGlyph_LCD(TTF_Font *font, Uint32 ch, SDL_Color fg, SDL_Color bg)
   /// ```
   /// {@category ttf}
-  Pointer<SdlSurface> renderGlyphLcd(int ch, SdlColor fg, SdlColor bg) =>
-      ttfRenderGlyphLcd(this, ch, fg, bg);
+  Pointer<SdlSurface> renderGlyphLcd(int ch, SdlxColor fg, SdlxColor bg) =>
+      ttfxRenderGlyphLcd(this, ch, fg, bg);
 
   ///
   /// Dispose of a previously-created font.

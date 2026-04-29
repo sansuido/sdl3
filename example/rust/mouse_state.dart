@@ -1,6 +1,5 @@
 // https://github.com/Rust-SDL2/rust-sdl2/blob/master/examples/mouse-state.rs
 import 'dart:ffi';
-import 'dart:math';
 import 'package:ffi/ffi.dart';
 import 'package:sdl3/sdl3.dart';
 
@@ -17,7 +16,7 @@ int main() {
   }
   final event = calloc<SdlEvent>();
   var running = true;
-  var oldPoint = const Point<double>(0, 0);
+  var oldPoint = SdlxFPoint(0, 0);
   var oldButton = 0;
   while (running) {
     while (event.poll()) {
@@ -32,8 +31,8 @@ int main() {
           break;
       }
     }
-    final newPoint = PointEx.getMousePosition();
-    final newButton = sdlGetMouseState(nullptr, nullptr);
+    final newPoint = SdlxFPoint(0, 0);
+    final newButton = sdlxGetMouseState(newPoint);
     if (oldPoint != newPoint || oldButton != newButton) {
       print('X = ${newPoint.x} Y = ${newPoint.y} : $oldButton => $newButton');
       oldPoint = newPoint;

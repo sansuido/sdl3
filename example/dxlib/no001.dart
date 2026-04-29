@@ -2,7 +2,6 @@
 // 1.キー入力の基本
 // 1.Keystroke basics
 import 'dart:ffi';
-import 'dart:math';
 import 'package:ffi/ffi.dart';
 import 'package:sdl3/sdl3.dart';
 
@@ -78,15 +77,15 @@ int main() {
       }
       // draw
       gRenderer
-        ..setDrawColor(0x00, 0x00, 0x00, SDL_ALPHA_OPAQUE)
+        ..setDrawColor(SdlxColor(0, 0, 0))
         ..clear()
-        ..setDrawColor(0x00, 0xff, 0x00, SDL_ALPHA_OPAQUE)
+        ..setDrawColor(SdlxColor(0, 255, 0))
         ..fillRect(
-          Rectangle(
-            gPlayerX,
-            gPlayerY,
-            gPlayerWidth.toDouble(),
-            gPlayerHeight.toDouble(),
+          SdlxFRect(
+            x: gPlayerX,
+            y: gPlayerY,
+            w: gPlayerWidth.toDouble(),
+            h: gPlayerHeight.toDouble(),
           ),
         )
         ..present();

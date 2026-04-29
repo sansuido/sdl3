@@ -1,8 +1,10 @@
 import 'dart:ffi';
 import 'package:ffi/ffi.dart';
+import 'package:ffi/ffi.dart' as ffi;
 import 'dylib.dart' as dylib;
 import 'sdl.dart';
 
+part 'ex/ttf/lib_sdl_ttf.dart';
 part 'ex/ttf/ttf_font.dart';
 part 'generated/const_sdl_ttf.dart';
 part 'generated/lib_sdl_ttf.dart';

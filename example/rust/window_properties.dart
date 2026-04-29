@@ -42,14 +42,16 @@ int main() {
           break;
       }
     }
-    final position = window.getPosition()!;
-    final size = window.getSize()!;
-    window.setTitle(
-      'Window - pos(${position.x}x${position.y}), size(${size.x}x${size.y}): $tick',
-    );
+    final position = SdlxPoint(0, 0);
+    final size = SdlxPoint(0, 0);
+    if (window.getPosition(position) && window.getSize(size)) {
+      window.setTitle(
+        'Window - pos(${position.x}x${position.y}), size(${size.x}x${size.y}): $tick',
+      );
+    }
     tick++;
     renderer
-      ..setDrawColor(0, 0, 0, SDL_ALPHA_OPAQUE)
+      ..setDrawColor(SdlxColor(0, 0, 0))
       ..clear()
       ..present();
   }

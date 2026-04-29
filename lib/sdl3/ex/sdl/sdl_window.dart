@@ -301,18 +301,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowPosition(SDL_Window *window, int *x, int *y)
   /// ```
   /// {@category video}
-  math.Point<double>? getPosition() {
-    math.Point<double>? result;
-    final x = calloc<Int32>();
-    final y = calloc<Int32>();
-    if (sdlGetWindowPosition(this, x, y)) {
-      result = math.Point<double>(x.value.toDouble(), y.value.toDouble());
-    }
-    calloc
-      ..free(x)
-      ..free(y);
-    return result;
-  }
+  bool getPosition(SdlxPoint position) => sdlxGetWindowPosition(this, position);
 
   ///
   /// Request that the size of a window's client area be set.
@@ -381,18 +370,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowSize(SDL_Window *window, int *w, int *h)
   /// ```
   /// {@category video}
-  math.Point<double>? getSize() {
-    math.Point<double>? result;
-    final w = calloc<Int32>();
-    final h = calloc<Int32>();
-    if (sdlGetWindowSize(this, w, h)) {
-      result = math.Point<double>(w.value.toDouble(), h.value.toDouble());
-    }
-    calloc
-      ..free(w)
-      ..free(h);
-    return result;
-  }
+  bool getSize(SdlxPoint size) => sdlxGetWindowSize(this, size);
 
   ///
   /// Get the size of a window's borders (decorations) around the client area.
@@ -433,27 +411,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowBordersSize(SDL_Window *window, int *top, int *left, int *bottom, int *right)
   /// ```
   /// {@category video}
-  math.Rectangle<double>? getBordersSize() {
-    math.Rectangle<double>? result;
-    final top = calloc<Int32>();
-    final left = calloc<Int32>();
-    final bottom = calloc<Int32>();
-    final right = calloc<Int32>();
-    if (sdlGetWindowBordersSize(this, top, left, bottom, right)) {
-      result = math.Rectangle<double>(
-        top.value.toDouble(),
-        left.value.toDouble(),
-        bottom.value.toDouble(),
-        right.value.toDouble(),
-      );
-    }
-    calloc
-      ..free(top)
-      ..free(left)
-      ..free(bottom)
-      ..free(right);
-    return result;
-  }
+  bool getBordersSize(SdlxRect rect) => sdlxGetWindowBordersSize(this, rect);
 
   ///
   /// Get the size of a window's client area, in pixels.
@@ -477,18 +435,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowSizeInPixels(SDL_Window *window, int *w, int *h)
   /// ```
   /// {@category video}
-  math.Point<double>? getSizeInPixels() {
-    math.Point<double>? result;
-    final w = calloc<Int32>();
-    final h = calloc<Int32>();
-    if (sdlGetWindowSizeInPixels(this, w, h)) {
-      result = math.Point<double>(w.value.toDouble(), h.value.toDouble());
-    }
-    calloc
-      ..free(w)
-      ..free(h);
-    return result;
-  }
+  bool getSizeInPixels(SdlxPoint size) => sdlxGetWindowSizeInPixels(this, size);
 
   ///
   /// Set the minimum size of a window's client area.
@@ -534,18 +481,8 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowMinimumSize(SDL_Window *window, int *w, int *h)
   /// ```
   /// {@category video}
-  math.Point<double>? getMinimumSize() {
-    math.Point<double>? result;
-    final w = calloc<Int32>();
-    final h = calloc<Int32>();
-    if (sdlGetWindowMinimumSize(this, w, h)) {
-      result = math.Point<double>(w.value.toDouble(), h.value.toDouble());
-    }
-    calloc
-      ..free(w)
-      ..free(h);
-    return result;
-  }
+  bool getMinimumSize(SdlxPoint minSize) =>
+      sdlxGetWindowMinimumSize(this, minSize);
 
   ///
   /// Set the maximum size of a window's client area.
@@ -591,18 +528,8 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowMaximumSize(SDL_Window *window, int *w, int *h)
   /// ```
   /// {@category video}
-  math.Point<double>? getMaximumSize() {
-    math.Point<double>? result;
-    final w = calloc<Int32>();
-    final h = calloc<Int32>();
-    if (sdlGetWindowMaximumSize(this, w, h)) {
-      result = math.Point<double>(w.value.toDouble(), h.value.toDouble());
-    }
-    calloc
-      ..free(w)
-      ..free(h);
-    return result;
-  }
+  bool getMaximumSize(SdlxPoint maxSize) =>
+      sdlxGetWindowMaximumSize(this, maxSize);
 
   ///
   /// Set the border state of a window.
@@ -937,16 +864,8 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// extern SDL_DECLSPEC bool SDLCALL SDL_UpdateWindowSurfaceRects(SDL_Window *window, const SDL_Rect *rects, int numrects)
   /// ```
   /// {@category video}
-  bool updateSurfaceRects(List<math.Rectangle<double>> rects) {
-    final rectsPointer = rects.callocInt();
-    final result = sdlUpdateWindowSurfaceRects(
-      this,
-      rectsPointer,
-      rects.length,
-    );
-    calloc.free(rectsPointer);
-    return result;
-  }
+  bool updateSurfaceRects(List<SdlxRect> rects) =>
+      sdlxUpdateWindowSurfaceRects(this, rects);
 
   ///
   /// Set a window's keyboard grab mode.
@@ -1074,12 +993,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowMouseRect(SDL_Window *window, const SDL_Rect *rect)
   /// ```
   /// {@category video}
-  bool setMouseRect(math.Rectangle<double> rect) {
-    final rectPointer = rect.callocInt();
-    final result = sdlSetWindowMouseRect(this, rectPointer);
-    calloc.free(rectPointer);
-    return result;
-  }
+  bool setMouseRect(SdlxRect rect) => sdlxSetWindowMouseRect(this, rect);
 
   ///
   /// Get the mouse confinement rectangle of a window.
@@ -1100,14 +1014,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// extern SDL_DECLSPEC const SDL_Rect * SDLCALL SDL_GetWindowMouseRect(SDL_Window *window)
   /// ```
   /// {@category video}
-  math.Rectangle<double>? getMouseRect() {
-    math.Rectangle<double>? result;
-    final rectPointer = sdlGetWindowMouseRect(this);
-    if (rectPointer != nullptr) {
-      result = rectPointer.create();
-    }
-    return result;
-  }
+  SdlxRect? getMouseRect() => sdlxGetWindowMouseRect(this);
 
   ///
   /// Set the opacity for a window.

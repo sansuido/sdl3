@@ -4,13 +4,13 @@ extension SdlRendererFromGfxPointerEx on Pointer<SdlRenderer> {
   // lib_sdl_gfx.dart
 
   bool pixelColor(
-    math.Point<double> p,
-    int color, {
+    SdlxFPoint p,
+    SdlxColor color, {
     int blendMode = SDL_BLENDMODE_BLEND,
   }) => gfx.pixelColor(this, p.x, p.y, color, blendMode: blendMode);
 
   bool pixelRgba(
-    math.Point<double> p,
+    SdlxFPoint p,
     int r,
     int g,
     int b,
@@ -22,7 +22,7 @@ extension SdlRendererFromGfxPointerEx on Pointer<SdlRenderer> {
     double x1,
     double x2,
     double y,
-    int color, {
+    SdlxColor color, {
     int blendMode = SDL_BLENDMODE_BLEND,
   }) => gfx.hlineColor(this, x1, x2, y, color, blendMode: blendMode);
 
@@ -41,7 +41,7 @@ extension SdlRendererFromGfxPointerEx on Pointer<SdlRenderer> {
     double x,
     double y1,
     double y2,
-    int color, {
+    SdlxColor color, {
     int blendMode = SDL_BLENDMODE_BLEND,
   }) => gfx.vlineColor(this, x, y1, y2, color, blendMode: blendMode);
 
@@ -57,21 +57,21 @@ extension SdlRendererFromGfxPointerEx on Pointer<SdlRenderer> {
   }) => gfx.vlineRgba(this, x, y1, y2, r, g, b, a, blendMode: blendMode);
 
   bool rectangleColor(
-    math.Rectangle<double> rect,
-    int color, {
+    SdlxFRect rect,
+    SdlxColor color, {
     int blendMode = SDL_BLENDMODE_BLEND,
   }) => gfx.rectangleColor(
     this,
-    rect.left,
-    rect.top,
-    rect.right,
-    rect.bottom,
+    rect.x,
+    rect.y,
+    rect.x + rect.w,
+    rect.y + rect.h,
     color,
     blendMode: blendMode,
   );
 
   bool rectangleRgba(
-    math.Rectangle<double> rect,
+    SdlxFRect rect,
     int r,
     int g,
     int b,
@@ -79,10 +79,10 @@ extension SdlRendererFromGfxPointerEx on Pointer<SdlRenderer> {
     int blendMode = SDL_BLENDMODE_BLEND,
   }) => gfx.rectangleRgba(
     this,
-    rect.left,
-    rect.top,
-    rect.right,
-    rect.bottom,
+    rect.x,
+    rect.y,
+    rect.x + rect.w,
+    rect.y + rect.h,
     r,
     g,
     b,
@@ -91,23 +91,23 @@ extension SdlRendererFromGfxPointerEx on Pointer<SdlRenderer> {
   );
 
   bool roundedRectangleColor(
-    math.Rectangle<double> rect,
+    SdlxFRect rect,
     double rad,
-    int color, {
+    SdlxColor color, {
     int blendMode = SDL_BLENDMODE_BLEND,
   }) => gfx.roundedRectangleColor(
     this,
-    rect.left,
-    rect.top,
-    rect.right,
-    rect.bottom,
+    rect.x,
+    rect.y,
+    rect.x + rect.w,
+    rect.y + rect.h,
     rad,
     color,
     blendMode: blendMode,
   );
 
   bool roundedRectangleRgba(
-    math.Rectangle<double> rect,
+    SdlxFRect rect,
     double rad,
     int r,
     int g,
@@ -116,10 +116,10 @@ extension SdlRendererFromGfxPointerEx on Pointer<SdlRenderer> {
     int blendMode = SDL_BLENDMODE_BLEND,
   }) => gfx.roundedRectangleRgba(
     this,
-    rect.left,
-    rect.top,
-    rect.right,
-    rect.bottom,
+    rect.x,
+    rect.y,
+    rect.x + rect.w,
+    rect.y + rect.h,
     rad,
     r,
     g,
@@ -129,35 +129,35 @@ extension SdlRendererFromGfxPointerEx on Pointer<SdlRenderer> {
   );
 
   bool boxColor(
-    math.Rectangle<double> rect,
-    int color, {
+    SdlxFRect rect,
+    SdlxColor color, {
     int blendMode = SDL_BLENDMODE_BLEND,
   }) => gfx.boxColor(
     this,
-    rect.left,
-    rect.top,
-    rect.right,
-    rect.bottom,
+    rect.x,
+    rect.y,
+    rect.x + rect.w,
+    rect.y + rect.h,
     color,
     blendMode: blendMode,
   );
 
   bool boxInColor(
-    math.Rectangle<double> rect,
-    int color, {
+    SdlxFRect rect,
+    SdlxColor color, {
     int blendMode = SDL_BLENDMODE_BLEND,
   }) => gfx.boxColor(
     this,
-    rect.left,
-    rect.top,
-    rect.right - 1,
-    rect.bottom - 1,
+    rect.x,
+    rect.y,
+    rect.x + rect.w - 1,
+    rect.y + rect.h - 1,
     color,
     blendMode: blendMode,
   );
 
   bool boxRgba(
-    math.Rectangle<double> rect,
+    SdlxFRect rect,
     int r,
     int g,
     int b,
@@ -165,10 +165,10 @@ extension SdlRendererFromGfxPointerEx on Pointer<SdlRenderer> {
     int blendMode = SDL_BLENDMODE_BLEND,
   }) => gfx.boxRgba(
     this,
-    rect.left,
-    rect.top,
-    rect.right,
-    rect.bottom,
+    rect.x,
+    rect.y,
+    rect.x + rect.w,
+    rect.y + rect.h,
     r,
     g,
     b,
@@ -177,7 +177,7 @@ extension SdlRendererFromGfxPointerEx on Pointer<SdlRenderer> {
   );
 
   bool boxInRgba(
-    math.Rectangle<double> rect,
+    SdlxFRect rect,
     int r,
     int g,
     int b,
@@ -185,10 +185,10 @@ extension SdlRendererFromGfxPointerEx on Pointer<SdlRenderer> {
     int blendMode = SDL_BLENDMODE_BLEND,
   }) => gfx.boxRgba(
     this,
-    rect.left,
-    rect.top,
-    rect.right - 1,
-    rect.bottom - 1,
+    rect.x,
+    rect.y,
+    rect.x + rect.w - 1,
+    rect.y + rect.h - 1,
     r,
     g,
     b,
@@ -197,39 +197,39 @@ extension SdlRendererFromGfxPointerEx on Pointer<SdlRenderer> {
   );
 
   bool roundedBoxColor(
-    math.Rectangle<double> rect,
+    SdlxFRect rect,
     double rad,
-    int color, {
+    SdlxColor color, {
     int blendMode = SDL_BLENDMODE_BLEND,
   }) => gfx.roundedBoxColor(
     this,
-    rect.left,
-    rect.top,
-    rect.right,
-    rect.bottom,
+    rect.x,
+    rect.y,
+    rect.x + rect.w,
+    rect.y + rect.h,
     rad,
     color,
     blendMode: blendMode,
   );
 
   bool roundedBoxInColor(
-    math.Rectangle<double> rect,
+    SdlxFRect rect,
     double rad,
-    int color, {
+    SdlxColor color, {
     int blendMode = SDL_BLENDMODE_BLEND,
   }) => gfx.roundedBoxColor(
     this,
-    rect.left,
-    rect.top,
-    rect.right - 1,
-    rect.bottom - 1,
+    rect.x,
+    rect.y,
+    rect.x + rect.w - 1,
+    rect.y + rect.h - 1,
     rad,
     color,
     blendMode: blendMode,
   );
 
   bool roundedBoxRgba(
-    math.Rectangle<double> rect,
+    SdlxFRect rect,
     double rad,
     int r,
     int g,
@@ -238,10 +238,10 @@ extension SdlRendererFromGfxPointerEx on Pointer<SdlRenderer> {
     int blendMode = SDL_BLENDMODE_BLEND,
   }) => gfx.roundedBoxRgba(
     this,
-    rect.left,
-    rect.top,
-    rect.right,
-    rect.bottom,
+    rect.x,
+    rect.y,
+    rect.x + rect.w,
+    rect.y + rect.h,
     rad,
     r,
     g,
@@ -251,7 +251,7 @@ extension SdlRendererFromGfxPointerEx on Pointer<SdlRenderer> {
   );
 
   bool roundedBoxInRgba(
-    math.Rectangle<double> rect,
+    SdlxFRect rect,
     double rad,
     int r,
     int g,
@@ -260,10 +260,10 @@ extension SdlRendererFromGfxPointerEx on Pointer<SdlRenderer> {
     int blendMode = SDL_BLENDMODE_BLEND,
   }) => gfx.roundedBoxRgba(
     this,
-    rect.left,
-    rect.top,
-    rect.right - 1,
-    rect.bottom - 1,
+    rect.x,
+    rect.y,
+    rect.x + rect.w - 1,
+    rect.y + rect.h - 1,
     rad,
     r,
     g,
@@ -273,16 +273,16 @@ extension SdlRendererFromGfxPointerEx on Pointer<SdlRenderer> {
   );
 
   bool lineColor(
-    math.Point<double> p1,
-    math.Point<double> p2,
-    int color, {
+    SdlxFPoint p1,
+    SdlxFPoint p2,
+    SdlxColor color, {
     int blendMode = SDL_BLENDMODE_BLEND,
   }) =>
       gfx.lineColor(this, p1.x, p1.y, p2.x, p2.y, color, blendMode: blendMode);
 
   bool lineRgba(
-    math.Point<double> p1,
-    math.Point<double> p2,
+    SdlxFPoint p1,
+    SdlxFPoint p2,
     int r,
     int g,
     int b,
@@ -302,9 +302,9 @@ extension SdlRendererFromGfxPointerEx on Pointer<SdlRenderer> {
   );
 
   bool aaLineColor(
-    math.Point<double> p1,
-    math.Point<double> p2,
-    int color, {
+    SdlxFPoint p1,
+    SdlxFPoint p2,
+    SdlxColor color, {
     int blendMode = SDL_BLENDMODE_BLEND,
   }) => gfx.aalineColor(
     this,
@@ -317,8 +317,8 @@ extension SdlRendererFromGfxPointerEx on Pointer<SdlRenderer> {
   );
 
   bool aaLineRgba(
-    math.Point<double> p1,
-    math.Point<double> p2,
+    SdlxFPoint p1,
+    SdlxFPoint p2,
     int r,
     int g,
     int b,
@@ -338,10 +338,10 @@ extension SdlRendererFromGfxPointerEx on Pointer<SdlRenderer> {
   );
 
   bool thickLineColor(
-    math.Point<double> p1,
-    math.Point<double> p2,
+    SdlxFPoint p1,
+    SdlxFPoint p2,
     double width,
-    int color, {
+    SdlxColor color, {
     int blendMode = SDL_BLENDMODE_BLEND,
   }) => gfx.thickLineColor(
     this,
@@ -355,8 +355,8 @@ extension SdlRendererFromGfxPointerEx on Pointer<SdlRenderer> {
   );
 
   bool thickLineRgba(
-    math.Point<double> p1,
-    math.Point<double> p2,
+    SdlxFPoint p1,
+    SdlxFPoint p2,
     double width,
     int r,
     int g,
@@ -378,14 +378,14 @@ extension SdlRendererFromGfxPointerEx on Pointer<SdlRenderer> {
   );
 
   bool circleColor(
-    math.Point<double> p,
+    SdlxFPoint p,
     double rad,
-    int color, {
+    SdlxColor color, {
     int blendMode = SDL_BLENDMODE_BLEND,
   }) => gfx.circleColor(this, p.x, p.y, rad, color, blendMode: blendMode);
 
   bool circleRgba(
-    math.Point<double> p,
+    SdlxFPoint p,
     double rad,
     int r,
     int g,
@@ -395,11 +395,11 @@ extension SdlRendererFromGfxPointerEx on Pointer<SdlRenderer> {
   }) => gfx.circleRgba(this, p.x, p.y, rad, r, g, b, a, blendMode: blendMode);
 
   bool arcColor(
-    math.Point<double> p,
+    SdlxFPoint p,
     double rad,
     double start,
     double end,
-    int color, {
+    SdlxColor color, {
     int blendMode = SDL_BLENDMODE_BLEND,
   }) => gfx.arcColor(
     this,
@@ -413,7 +413,7 @@ extension SdlRendererFromGfxPointerEx on Pointer<SdlRenderer> {
   );
 
   bool arcRgba(
-    math.Point<double> p,
+    SdlxFPoint p,
     double rad,
     double start,
     double end,
@@ -437,14 +437,14 @@ extension SdlRendererFromGfxPointerEx on Pointer<SdlRenderer> {
   );
 
   bool aaCircleColor(
-    math.Point<double> p,
+    SdlxFPoint p,
     double rad,
-    int color, {
+    SdlxColor color, {
     int blendMode = SDL_BLENDMODE_BLEND,
   }) => gfx.aacircleColor(this, p.x, p.y, rad, color, blendMode: blendMode);
 
   bool aaCircleRgba(
-    math.Point<double> p,
+    SdlxFPoint p,
     double rad,
     int r,
     int g,
@@ -454,14 +454,14 @@ extension SdlRendererFromGfxPointerEx on Pointer<SdlRenderer> {
   }) => gfx.aacircleRgba(this, p.x, p.y, rad, r, g, b, a, blendMode: blendMode);
 
   bool filledCircleColor(
-    math.Point<double> p,
+    SdlxFPoint p,
     double rad,
-    int color, {
+    SdlxColor color, {
     int blendMode = SDL_BLENDMODE_BLEND,
   }) => gfx.filledCircleColor(this, p.x, p.y, rad, color, blendMode: blendMode);
 
   bool filledCircleRgba(
-    math.Point<double> p,
+    SdlxFPoint p,
     double rad,
     int r,
     int g,
@@ -481,9 +481,9 @@ extension SdlRendererFromGfxPointerEx on Pointer<SdlRenderer> {
   );
 
   bool ellipseColor(
-    math.Point<double> p,
-    math.Point<double> rad,
-    int color, {
+    SdlxFPoint p,
+    SdlxFPoint rad,
+    SdlxColor color, {
     int blendMode = SDL_BLENDMODE_BLEND,
   }) => gfx.ellipseColor(
     this,
@@ -496,8 +496,8 @@ extension SdlRendererFromGfxPointerEx on Pointer<SdlRenderer> {
   );
 
   bool ellipseRgba(
-    math.Point<double> p,
-    math.Point<double> rad,
+    SdlxFPoint p,
+    SdlxFPoint rad,
     int r,
     int g,
     int b,
@@ -517,9 +517,9 @@ extension SdlRendererFromGfxPointerEx on Pointer<SdlRenderer> {
   );
 
   bool aaEllipseColor(
-    math.Point<double> p,
-    math.Point<double> rad,
-    int color, {
+    SdlxFPoint p,
+    SdlxFPoint rad,
+    SdlxColor color, {
     int blendMode = SDL_BLENDMODE_BLEND,
   }) => gfx.aaellipseColor(
     this,
@@ -532,8 +532,8 @@ extension SdlRendererFromGfxPointerEx on Pointer<SdlRenderer> {
   );
 
   bool aaEllipseRgba(
-    math.Point<double> p,
-    math.Point<double> rad,
+    SdlxFPoint p,
+    SdlxFPoint rad,
     int r,
     int g,
     int b,
@@ -553,9 +553,9 @@ extension SdlRendererFromGfxPointerEx on Pointer<SdlRenderer> {
   );
 
   bool filledEllipseColor(
-    math.Point<double> p,
-    math.Point<double> rad,
-    int color, {
+    SdlxFPoint p,
+    SdlxFPoint rad,
+    SdlxColor color, {
     int blendMode = SDL_BLENDMODE_BLEND,
   }) => gfx.filledEllipseColor(
     this,
@@ -568,8 +568,8 @@ extension SdlRendererFromGfxPointerEx on Pointer<SdlRenderer> {
   );
 
   bool filledEllipseRgba(
-    math.Point<double> p,
-    math.Point<double> rad,
+    SdlxFPoint p,
+    SdlxFPoint rad,
     int r,
     int g,
     int b,
@@ -589,11 +589,11 @@ extension SdlRendererFromGfxPointerEx on Pointer<SdlRenderer> {
   );
 
   bool pieColor(
-    math.Point<double> p,
+    SdlxFPoint p,
     double rad,
     double start,
     double end,
-    int color, {
+    SdlxColor color, {
     int blendMode = SDL_BLENDMODE_BLEND,
   }) => gfx.pieColor(
     this,
@@ -607,7 +607,7 @@ extension SdlRendererFromGfxPointerEx on Pointer<SdlRenderer> {
   );
 
   bool pieRgba(
-    math.Point<double> p,
+    SdlxFPoint p,
     double rad,
     double start,
     double end,
@@ -631,11 +631,11 @@ extension SdlRendererFromGfxPointerEx on Pointer<SdlRenderer> {
   );
 
   bool filledPieColor(
-    math.Point<double> p,
+    SdlxFPoint p,
     double rad,
     double start,
     double end,
-    int color, {
+    SdlxColor color, {
     int blendMode = SDL_BLENDMODE_BLEND,
   }) => gfx.filledPieColor(
     this,
@@ -649,7 +649,7 @@ extension SdlRendererFromGfxPointerEx on Pointer<SdlRenderer> {
   );
 
   bool filledPieRgba(
-    math.Point<double> p,
+    SdlxFPoint p,
     double rad,
     double start,
     double end,
@@ -673,10 +673,10 @@ extension SdlRendererFromGfxPointerEx on Pointer<SdlRenderer> {
   );
 
   bool trigonColor(
-    math.Point<double> p1,
-    math.Point<double> p2,
-    math.Point<double> p3,
-    int color, {
+    SdlxFPoint p1,
+    SdlxFPoint p2,
+    SdlxFPoint p3,
+    SdlxColor color, {
     int blendMode = SDL_BLENDMODE_BLEND,
   }) => gfx.trigonColor(
     this,
@@ -691,9 +691,9 @@ extension SdlRendererFromGfxPointerEx on Pointer<SdlRenderer> {
   );
 
   bool trigonRgba(
-    math.Point<double> p1,
-    math.Point<double> p2,
-    math.Point<double> p3,
+    SdlxFPoint p1,
+    SdlxFPoint p2,
+    SdlxFPoint p3,
     int r,
     int g,
     int b,
@@ -715,10 +715,10 @@ extension SdlRendererFromGfxPointerEx on Pointer<SdlRenderer> {
   );
 
   bool aaTrigonColor(
-    math.Point<double> p1,
-    math.Point<double> p2,
-    math.Point<double> p3,
-    int color, {
+    SdlxFPoint p1,
+    SdlxFPoint p2,
+    SdlxFPoint p3,
+    SdlxColor color, {
     int blendMode = SDL_BLENDMODE_BLEND,
   }) => gfx.aatrigonColor(
     this,
@@ -733,9 +733,9 @@ extension SdlRendererFromGfxPointerEx on Pointer<SdlRenderer> {
   );
 
   bool aaTrigonRgba(
-    math.Point<double> p1,
-    math.Point<double> p2,
-    math.Point<double> p3,
+    SdlxFPoint p1,
+    SdlxFPoint p2,
+    SdlxFPoint p3,
     int r,
     int g,
     int b,
@@ -757,10 +757,10 @@ extension SdlRendererFromGfxPointerEx on Pointer<SdlRenderer> {
   );
 
   bool filledTrigonColor(
-    math.Point<double> p1,
-    math.Point<double> p2,
-    math.Point<double> p3,
-    int color, {
+    SdlxFPoint p1,
+    SdlxFPoint p2,
+    SdlxFPoint p3,
+    SdlxColor color, {
     int blendMode = SDL_BLENDMODE_BLEND,
   }) => gfx.filledTrigonColor(
     this,
@@ -775,9 +775,9 @@ extension SdlRendererFromGfxPointerEx on Pointer<SdlRenderer> {
   );
 
   bool filledTrigonRgba(
-    math.Point<double> p1,
-    math.Point<double> p2,
-    math.Point<double> p3,
+    SdlxFPoint p1,
+    SdlxFPoint p2,
+    SdlxFPoint p3,
     int r,
     int g,
     int b,
@@ -799,196 +799,135 @@ extension SdlRendererFromGfxPointerEx on Pointer<SdlRenderer> {
   );
 
   bool polygonColor(
-    List<math.Point<double>> ps,
-    int color, {
+    List<SdlxFPoint> points,
+    SdlxColor color, {
     int blendMode = SDL_BLENDMODE_BLEND,
   }) {
-    final xsPointer = ps.callocInt16X();
-    final ysPointer = ps.callocInt16Y();
-    final result = gfx.polygonColor(
-      this,
-      xsPointer,
-      ysPointer,
-      ps.length,
-      color,
-      blendMode: blendMode,
-    );
-    calloc
-      ..free(xsPointer)
-      ..free(ysPointer);
+    final result = gfx.polygonColor(this, points, color, blendMode: blendMode);
     return result;
   }
 
   bool polygonRgba(
-    List<math.Point<double>> ps,
+    List<SdlxFPoint> points,
     int r,
     int g,
     int b,
     int a, {
     int blendMode = SDL_BLENDMODE_BLEND,
   }) {
-    final xsPointer = ps.callocInt16X();
-    final ysPointer = ps.callocInt16Y();
     final result = gfx.polygonRgba(
       this,
-      xsPointer,
-      ysPointer,
-      ps.length,
+      points,
       r,
       g,
       b,
       a,
       blendMode: blendMode,
     );
-    calloc
-      ..free(xsPointer)
-      ..free(ysPointer);
     return result;
   }
 
   bool aaPolygonColor(
-    List<math.Point<double>> ps,
-    int color, {
+    List<SdlxFPoint> points,
+    SdlxColor color, {
     int blendMode = SDL_BLENDMODE_BLEND,
   }) {
-    final xsPointer = ps.callocInt16X();
-    final ysPointer = ps.callocInt16Y();
     final result = gfx.aapolygonColor(
       this,
-      xsPointer,
-      ysPointer,
-      ps.length,
+      points,
       color,
       blendMode: blendMode,
     );
-    calloc
-      ..free(xsPointer)
-      ..free(ysPointer);
     return result;
   }
 
   bool aaPolygonRgba(
-    List<math.Point<double>> ps,
+    List<SdlxFPoint> points,
     int r,
     int g,
     int b,
     int a, {
     int blendMode = SDL_BLENDMODE_BLEND,
   }) {
-    final xsPointer = ps.callocInt16X();
-    final ysPointer = ps.callocInt16Y();
     final result = gfx.aapolygonRgba(
       this,
-      xsPointer,
-      ysPointer,
-      ps.length,
+      points,
       r,
       g,
       b,
       a,
       blendMode: blendMode,
     );
-    calloc
-      ..free(xsPointer)
-      ..free(ysPointer);
     return result;
   }
 
   bool filledPolygonColor(
-    List<math.Point<double>> ps,
-    int color, {
+    List<SdlxFPoint> points,
+    SdlxColor color, {
     int blendMode = SDL_BLENDMODE_BLEND,
   }) {
-    final xsPointer = ps.callocInt16X();
-    final ysPointer = ps.callocInt16Y();
     final result = gfx.filledPolygonColor(
       this,
-      xsPointer,
-      ysPointer,
-      ps.length,
+      points,
       color,
       blendMode: blendMode,
     );
-    calloc
-      ..free(xsPointer)
-      ..free(ysPointer);
     return result;
   }
 
   bool filledPolygonRgba(
-    List<math.Point<double>> ps,
+    List<SdlxFPoint> points,
     int r,
     int g,
     int b,
     int a, {
     int blendMode = SDL_BLENDMODE_BLEND,
   }) {
-    final xsPointer = ps.callocInt16X();
-    final ysPointer = ps.callocInt16Y();
     final result = gfx.filledPolygonRgba(
       this,
-      xsPointer,
-      ysPointer,
-      ps.length,
+      points,
       r,
       g,
       b,
       a,
       blendMode: blendMode,
     );
-    calloc
-      ..free(xsPointer)
-      ..free(ysPointer);
     return result;
   }
 
   bool texturedPolygon(
-    List<math.Point<double>> ps,
+    List<SdlxFPoint> points,
     Pointer<SdlSurface> texture,
-    math.Point<double> texturePos,
+    SdlxFPoint texturePos,
   ) {
-    final xsPointer = ps.callocInt16X();
-    final ysPointer = ps.callocInt16Y();
     final result = gfx.texturedPolygon(
       this,
-      xsPointer,
-      ysPointer,
-      ps.length,
+      points,
       texture,
       texturePos.x.toInt(),
       texturePos.y.toInt(),
     );
-    calloc
-      ..free(xsPointer)
-      ..free(ysPointer);
     return result;
   }
 
   bool bezierColor(
-    List<math.Point<double>> ps,
+    List<SdlxFPoint> points,
     int s,
-    int color, {
+    SdlxColor color, {
     int blendMode = SDL_BLENDMODE_BLEND,
   }) {
-    final xsPointer = ps.callocInt16X();
-    final ysPointer = ps.callocInt16Y();
     final result = gfx.bezierColor(
       this,
-      xsPointer,
-      ysPointer,
-      ps.length,
+      points,
       s,
       color,
       blendMode: blendMode,
     );
-    calloc
-      ..free(xsPointer)
-      ..free(ysPointer);
     return result;
   }
 
   bool bezierRgba(
-    List<math.Point<double>> ps,
+    List<SdlxFPoint> points,
     int s,
     int r,
     int g,
@@ -996,13 +935,9 @@ extension SdlRendererFromGfxPointerEx on Pointer<SdlRenderer> {
     int a, {
     int blendMode = SDL_BLENDMODE_BLEND,
   }) {
-    final xsPointer = ps.callocInt16X();
-    final ysPointer = ps.callocInt16Y();
     final result = gfx.bezierRgba(
       this,
-      xsPointer,
-      ysPointer,
-      ps.length,
+      points,
       s,
       r,
       g,
@@ -1010,28 +945,42 @@ extension SdlRendererFromGfxPointerEx on Pointer<SdlRenderer> {
       a,
       blendMode: blendMode,
     );
-    calloc
-      ..free(xsPointer)
-      ..free(ysPointer);
     return result;
   }
 
-  bool characterColor(math.Point<double> p, int c, int color) =>
+  bool characterColor(SdlxFPoint p, int c, SdlxColor color) =>
       gfx.characterColor(this, p.x, p.y, c, color);
 
-  bool characterRgba(math.Point<double> p, int c, int r, int g, int b, int a) =>
+  bool characterRgba(SdlxFPoint p, int c, int r, int g, int b, int a) =>
       gfx.characterRgba(this, p.x, p.y, c, r, g, b, a);
 
-  bool stringColor(math.Point<double> p, String s, int color) =>
+  bool stringColor(SdlxFPoint p, String s, SdlxColor color) =>
       gfx.stringColor(this, p.x, p.y, s, color);
 
-  bool stringRgba(math.Point<double> p, String s, int r, int g, int b, int a) =>
+  bool stringRgba(SdlxFPoint p, String s, int r, int g, int b, int a) =>
       gfx.stringRgba(this, p.x, p.y, s, r, g, b, a);
 
-  bool stringAnchorRgba(
-    math.Point<double> p,
+  bool stringAnchorColor(
+    SdlxFPoint p,
     String s,
-    math.Point<double> anchorPoint,
+    SdlxFPoint anchorPoint,
+    SdlxColor color, {
+    int? charRotation,
+  }) => stringAnchorRgba(
+    p,
+    s,
+    anchorPoint,
+    color.r,
+    color.g,
+    color.b,
+    color.a,
+    charRotation: charRotation,
+  );
+
+  bool stringAnchorRgba(
+    SdlxFPoint p,
+    String s,
+    SdlxFPoint anchorPoint,
     int r,
     int g,
     int b,

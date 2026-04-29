@@ -22,18 +22,7 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetTextureSize(SDL_Texture *texture, float *w, float *h)
   /// ```
   /// {@category render}
-  math.Point<double>? getSize() {
-    math.Point<double>? result;
-    final wPointer = calloc<Float>();
-    final hPointer = calloc<Float>();
-    if (sdlGetTextureSize(this, wPointer, hPointer)) {
-      result = math.Point(wPointer.value, hPointer.value);
-    }
-    calloc
-      ..free(wPointer)
-      ..free(hPointer);
-    return result;
-  }
+  bool getSize(SdlxFPoint size) => sdlxGetTextureSize(this, size);
 
   ///
   /// Set an additional color value multiplied into render copy operations.
@@ -66,47 +55,7 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetTextureColorMod(SDL_Texture *texture, Uint8 r, Uint8 g, Uint8 b)
   /// ```
   /// {@category render}
-  bool setColorMod(int r, int g, int b) => sdlSetTextureColorMod(this, r, g, b);
-
-  ///
-  /// Get the additional color value multiplied into render copy operations.
-  ///
-  /// \param texture the texture to query.
-  /// \param r a pointer filled in with the current red color value.
-  /// \param g a pointer filled in with the current green color value.
-  /// \param b a pointer filled in with the current blue color value.
-  /// \returns true on success or false on failure; call SDL_GetError() for more
-  /// information.
-  ///
-  /// \threadsafety This function should only be called on the main thread.
-  ///
-  /// \since This function is available since SDL 3.2.0.
-  ///
-  /// \sa SDL_GetTextureAlphaMod
-  /// \sa SDL_GetTextureColorModFloat
-  /// \sa SDL_SetTextureColorMod
-  ///
-  /// ```c
-  /// extern SDL_DECLSPEC bool SDLCALL SDL_GetTextureColorMod(SDL_Texture *texture, Uint8 *r, Uint8 *g, Uint8 *b)
-  /// ```
-  /// {@category render}
-  int? getColorMod() {
-    int? result;
-    final rPointer = calloc<Uint8>();
-    final gPointer = calloc<Uint8>();
-    final bPointer = calloc<Uint8>();
-    if (sdlGetTextureColorMod(this, rPointer, gPointer, bPointer)) {
-      result = 0;
-      result += rPointer.value << 16;
-      result += gPointer.value << 8;
-      result += bPointer.value << 0;
-    }
-    calloc
-      ..free(rPointer)
-      ..free(gPointer)
-      ..free(bPointer);
-    return result;
-  }
+  bool setColorMod(SdlxColor color) => sdlxSetTextureColorMod(this, color);
 
   ///
   /// Set an additional alpha value multiplied into render copy operations.
@@ -139,18 +88,12 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   bool setAlphaMod(int alpha) => sdlSetTextureAlphaMod(this, alpha);
 
   ///
-  /// Set an additional alpha value multiplied into render copy operations.
+  /// Get the additional color value multiplied into render copy operations.
   ///
-  /// When this texture is rendered, during the copy operation the source alpha
-  /// value is modulated by this alpha value according to the following formula:
-  ///
-  /// `srcA = srcA * (alpha / 255)`
-  ///
-  /// Alpha modulation is not always supported by the renderer; it will return
-  /// false if alpha modulation is not supported.
-  ///
-  /// \param texture the texture to update.
-  /// \param alpha the source alpha value multiplied into copy operations.
+  /// \param texture the texture to query.
+  /// \param r a pointer filled in with the current red color value.
+  /// \param g a pointer filled in with the current green color value.
+  /// \param b a pointer filled in with the current blue color value.
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
@@ -159,15 +102,14 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_GetTextureAlphaMod
-  /// \sa SDL_SetTextureAlphaModFloat
+  /// \sa SDL_GetTextureColorModFloat
   /// \sa SDL_SetTextureColorMod
   ///
   /// ```c
-  /// extern SDL_DECLSPEC bool SDLCALL SDL_SetTextureAlphaMod(SDL_Texture *texture, Uint8 alpha)
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_GetTextureColorMod(SDL_Texture *texture, Uint8 *r, Uint8 *g, Uint8 *b)
   /// ```
   /// {@category render}
-  bool setAlphaModFloat(double alpha) =>
-      sdlSetTextureAlphaModFloat(this, alpha);
+  bool getColorMod(SdlxColor color) => sdlxGetTextureColorMod(this, color);
 
   ///
   /// Get the additional alpha value multiplied into render copy operations.
@@ -189,15 +131,97 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetTextureAlphaMod(SDL_Texture *texture, Uint8 *alpha)
   /// ```
   /// {@category render}
-  int? getAlphaMod() {
-    int? result;
-    final alphaPointer = calloc<Uint8>();
-    if (sdlGetTextureAlphaMod(this, alphaPointer)) {
-      result = alphaPointer.value;
-    }
-    calloc.free(alphaPointer);
-    return result;
-  }
+  int? getAlphaMod() => sdlxGetTextureAlphaMod(this);
+
+  ///
+  /// Set an additional color value multiplied into render copy operations.
+  ///
+  /// When this texture is rendered, during the copy operation each source color
+  /// channel is modulated by the appropriate color value according to the
+  /// following formula:
+  ///
+  /// `srcC = srcC * color`
+  ///
+  /// Color modulation is not always supported by the renderer; it will return
+  /// false if color modulation is not supported.
+  ///
+  /// \param texture the texture to update.
+  /// \param r the red color value multiplied into copy operations.
+  /// \param g the green color value multiplied into copy operations.
+  /// \param b the blue color value multiplied into copy operations.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
+  ///
+  /// \threadsafety This function should only be called on the main thread.
+  ///
+  /// \since This function is available since SDL 3.2.0.
+  ///
+  /// \sa SDL_GetTextureColorModFloat
+  /// \sa SDL_SetTextureAlphaModFloat
+  /// \sa SDL_SetTextureColorMod
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_SetTextureColorModFloat(SDL_Texture *texture, float r, float g, float b)
+  /// ```
+  /// {@category render}
+  bool setColorModFloat(SdlxFColor color) =>
+      sdlxSetTextureColorModFloat(this, color);
+
+  ///
+  /// Set an additional alpha value multiplied into render copy operations.
+  ///
+  /// When this texture is rendered, during the copy operation the source alpha
+  /// value is modulated by this alpha value according to the following formula:
+  ///
+  /// `srcA = srcA * alpha`
+  ///
+  /// Alpha modulation is not always supported by the renderer; it will return
+  /// false if alpha modulation is not supported.
+  ///
+  /// \param texture the texture to update.
+  /// \param alpha the source alpha value multiplied into copy operations.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
+  ///
+  /// \threadsafety This function should only be called on the main thread.
+  ///
+  /// \since This function is available since SDL 3.2.0.
+  ///
+  /// \sa SDL_GetTextureAlphaModFloat
+  /// \sa SDL_SetTextureAlphaMod
+  /// \sa SDL_SetTextureColorModFloat
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_SetTextureAlphaModFloat(SDL_Texture *texture, float alpha)
+  /// ```
+  /// {@category render}
+  bool setAlphaModFloat(double alpha) =>
+      sdlSetTextureAlphaModFloat(this, alpha);
+
+  ///
+  /// Get the additional color value multiplied into render copy operations.
+  ///
+  /// \param texture the texture to query.
+  /// \param r a pointer filled in with the current red color value.
+  /// \param g a pointer filled in with the current green color value.
+  /// \param b a pointer filled in with the current blue color value.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
+  ///
+  /// \threadsafety This function should only be called on the main thread.
+  ///
+  /// \since This function is available since SDL 3.2.0.
+  ///
+  /// \sa SDL_GetTextureAlphaModFloat
+  /// \sa SDL_GetTextureColorMod
+  /// \sa SDL_SetTextureColorModFloat
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_GetTextureColorModFloat(SDL_Texture *texture, float *r, float *g, float *b)
+  /// ```
+  /// {@category render}
+  bool getColorModFloat(SdlxFColor color) =>
+      sdlxGetTextureColorModFloat(this, color);
 
   ///
   /// Get the additional alpha value multiplied into render copy operations.
@@ -219,15 +243,7 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetTextureAlphaModFloat(SDL_Texture *texture, float *alpha)
   /// ```
   /// {@category render}
-  double? getAlphaModFloat() {
-    double? result;
-    final alphaPointer = calloc<Float>();
-    if (sdlGetTextureAlphaModFloat(this, alphaPointer)) {
-      result = alphaPointer.value;
-    }
-    calloc.free(alphaPointer);
-    return result;
-  }
+  double? getAlphaModFloat() => sdlxGetTextureAlphaModFloat(this);
 
   ///
   /// Set the blend mode for a texture, used by SDL_RenderTexture().
@@ -270,15 +286,7 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetTextureBlendMode(SDL_Texture *texture, SDL_BlendMode *blendMode)
   /// ```
   /// {@category render}
-  int? getBlendMode() {
-    int? result;
-    final blendModePointer = calloc<Uint32>();
-    if (sdlGetTextureBlendMode(this, blendModePointer)) {
-      result = blendModePointer.value;
-    }
-    calloc.free(blendModePointer);
-    return result;
-  }
+  int? getBlendMode() => sdlxGetTextureBlendMode(this);
 
   ///
   /// Set the scale mode used for texture scale operations.
@@ -322,15 +330,7 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetTextureScaleMode(SDL_Texture *texture, SDL_ScaleMode *scaleMode)
   /// ```
   /// {@category render}
-  int? getScaleMode() {
-    int? result;
-    final scaleModePointer = calloc<Int32>();
-    if (sdlGetTextureScaleMode(this, scaleModePointer)) {
-      result = scaleModePointer.value;
-    }
-    calloc.free(scaleModePointer);
-    return result;
-  }
+  int? getScaleMode() => sdlxGetTextureScaleMode(this);
 
   ///
   /// Update the given texture rectangle with new pixel data.
@@ -368,8 +368,8 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// extern SDL_DECLSPEC bool SDLCALL SDL_UpdateTexture(SDL_Texture *texture, const SDL_Rect *rect, const void *pixels, int pitch)
   /// ```
   /// {@category render}
-  bool update(Pointer<SdlRect> rect, Pointer<NativeType> pixels, int pitch) =>
-      sdlUpdateTexture(this, rect, pixels, pitch);
+  bool update(Pointer<NativeType> pixels, int pitch, {SdlxRect? rect}) =>
+      sdlxUpdateTexture(this, pixels, pitch, rect: rect);
 
   ///
   /// Update a rectangle within a planar YV12 or IYUV texture with new pixel
@@ -405,23 +405,17 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// extern SDL_DECLSPEC bool SDLCALL SDL_UpdateYUVTexture(SDL_Texture *texture, const SDL_Rect *rect, const Uint8 *Yplane, int Ypitch, const Uint8 *Uplane, int Upitch, const Uint8 *Vplane, int Vpitch)
   /// ```
   /// {@category render}
-  bool updateYuv(
-    Pointer<SdlRect> rect,
-    Pointer<Uint8> yplane,
-    int ypitch,
-    Pointer<Uint8> uplane,
-    int upitch,
-    Pointer<Uint8> vplane,
-    int vpitch,
-  ) => sdlUpdateYuvTexture(
+  bool updateYuv({
+    SdlxRect? rect,
+    List<int>? yplane,
+    List<int>? uplane,
+    List<int>? vplane,
+  }) => sdlxUpdateYuvTexture(
     this,
-    rect,
-    yplane,
-    ypitch,
-    uplane,
-    upitch,
-    vplane,
-    vpitch,
+    rect: rect,
+    yplane: yplane,
+    uplane: uplane,
+    vplane: vplane,
   );
 
   ///
@@ -454,13 +448,8 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// extern SDL_DECLSPEC bool SDLCALL SDL_UpdateNVTexture(SDL_Texture *texture, const SDL_Rect *rect, const Uint8 *Yplane, int Ypitch, const Uint8 *UVplane, int UVpitch)
   /// ```
   /// {@category render}
-  bool updateNv(
-    Pointer<SdlRect> rect,
-    Pointer<Uint8> yplane,
-    int ypitch,
-    Pointer<Uint8> uVplane,
-    int uVpitch,
-  ) => sdlUpdateNvTexture(this, rect, yplane, ypitch, uVplane, uVpitch);
+  bool updateNv({SdlxRect? rect, List<int>? yplane, List<int>? uVplane}) =>
+      sdlxUpdateNvTexture(this, rect: rect, yplane: yplane, uVplane: uVplane);
 
   ///
   /// Lock a portion of the texture for **write-only** pixel access.

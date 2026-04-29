@@ -2,7 +2,6 @@
 // 4.マップスクロール基本
 // 4.Map scroll basics
 import 'dart:ffi';
-import 'dart:math';
 import 'package:ffi/ffi.dart';
 import 'package:sdl3/sdl3.dart';
 
@@ -141,10 +140,10 @@ void render() {
   final mapDrawPointY = gPlayerY - drawMapChipNumY ~/ 2;
   // init
   gRenderer
-    ..setDrawColor(0x00, 0x00, 0x00, SDL_ALPHA_OPAQUE)
+    ..setDrawColor(SdlxColor(0, 0, 0))
     ..clear()
     // map
-    ..setDrawColor(0xff, 0x00, 0x00, SDL_ALPHA_OPAQUE);
+    ..setDrawColor(SdlxColor(0xff, 0, 0));
   for (var y = 0; y < gMapData.length; y++) {
     final drawY = y + mapDrawPointY;
     if (drawY < 0 || drawY >= gMapData.length) {
@@ -157,11 +156,11 @@ void render() {
       }
       if (gMapData[drawY][drawX] == 0) {
         gRenderer.fillRect(
-          Rectangle<double>(
-            x * gMapSize + gScrollX,
-            y * gMapSize + gScrollY,
-            gMapSize.toDouble(),
-            gMapSize.toDouble(),
+          SdlxFRect(
+            x: x * gMapSize + gScrollX,
+            y: y * gMapSize + gScrollY,
+            w: gMapSize.toDouble(),
+            h: gMapSize.toDouble(),
           ),
         );
       }
@@ -169,13 +168,13 @@ void render() {
   }
   // player
   gRenderer
-    ..setDrawColor(0xff, 0xff, 0xff, 0xff)
+    ..setDrawColor(SdlxColor(0xff, 0xff, 0xff))
     ..fillRect(
-      Rectangle<double>(
-        (gPlayerX - mapDrawPointX) * gMapSize.toDouble(),
-        (gPlayerY - mapDrawPointY) * gMapSize.toDouble(),
-        gMapSize.toDouble(),
-        gMapSize.toDouble(),
+      SdlxFRect(
+        x: (gPlayerX - mapDrawPointX) * gMapSize.toDouble(),
+        y: (gPlayerY - mapDrawPointY) * gMapSize.toDouble(),
+        w: gMapSize.toDouble(),
+        h: gMapSize.toDouble(),
       ),
     )
     // term

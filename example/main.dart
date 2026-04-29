@@ -1,5 +1,4 @@
 import 'dart:ffi';
-import 'dart:math';
 import 'package:ffi/ffi.dart';
 import 'package:sdl3/sdl3.dart';
 
@@ -22,11 +21,11 @@ int main() {
     sdlQuit();
     return -1;
   }
-  final lines = <Point<double>>[
-    const Point(320, 200),
-    const Point(300, 240),
-    const Point(340, 240),
-    const Point(320, 200),
+  final lines = <SdlxFPoint>[
+    SdlxFPoint(320, 200),
+    SdlxFPoint(300, 240),
+    SdlxFPoint(340, 240),
+    SdlxFPoint(320, 200),
   ];
   final event = calloc<SdlEvent>();
   var running = true;
@@ -40,9 +39,9 @@ int main() {
       }
     }
     renderer
-      ..setDrawColor(0, 0, 0, SDL_ALPHA_OPAQUE)
+      ..setDrawColor(SdlxColor(0, 0, 0))
       ..clear()
-      ..setDrawColor(255, 255, 255, SDL_ALPHA_OPAQUE)
+      ..setDrawColor(SdlxColor(255, 255, 255))
       ..lines(lines)
       ..present();
   }

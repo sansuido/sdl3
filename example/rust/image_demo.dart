@@ -50,8 +50,8 @@ int main() {
               texture = nullptr;
             }
             texture = loadTexture;
-            final size = loadTexture.getSize();
-            if (size != null) {
+            final size = SdlxFPoint(0, 0);
+            if (loadTexture.getSize(size)) {
               print('X=${size.x} Y=${size.y}');
             }
           } else {
@@ -62,7 +62,7 @@ int main() {
       }
     }
     renderer
-      ..setDrawColor(255, 255, 255, SDL_ALPHA_OPAQUE)
+      ..setDrawColor(SdlxColor(0xff, 0xff, 0xff))
       ..clear();
     if (texture != nullptr) {
       renderer.texture(texture);

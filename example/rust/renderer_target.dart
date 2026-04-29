@@ -1,6 +1,5 @@
 // https://github.com/Rust-SDL2/rust-sdl2/blob/master/examples/renderer-target.rs
 import 'dart:ffi';
-import 'dart:math';
 import 'package:ffi/ffi.dart';
 import 'package:sdl3/sdl3.dart';
 
@@ -50,20 +49,20 @@ int main() {
       }
     }
     angle += 0.5;
-    const dstrect = Rectangle<double>(0, 0, 400, 300);
+    final dstrect = SdlxFRect(w: 400, h: 300);
     renderer
       ..setTarget(texture)
       ..clear()
-      ..setDrawColor(255, 0, 0, SDL_ALPHA_OPAQUE)
+      ..setDrawColor(SdlxColor(0xff, 0, 0))
       ..fillRect(dstrect)
       ..setTarget(nullptr)
-      ..setDrawColor(0, 0, 0, SDL_ALPHA_OPAQUE)
+      ..setDrawColor(SdlxColor(0, 0, 0))
       ..clear()
       ..textureRotated(
         texture,
         dstrect: dstrect,
         angle: angle,
-        center: const Point(400, 300),
+        center: SdlxFPoint(400, 300),
       )
       ..present();
   }

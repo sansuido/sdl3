@@ -36,9 +36,10 @@ int main() {
   }
 
   renderer.setLogicalPresentation(
-    gWinWidth,
-    gWinHeight,
-    SDL_LOGICAL_PRESENTATION_STRETCH,
+    SdlxRenderLogicalPresentationInfo()
+      ..w = gWinWidth
+      ..h = gWinHeight
+      ..mode = SDL_LOGICAL_PRESENTATION_STRETCH,
   );
   // create texture
   final texture = renderer.createTexture(

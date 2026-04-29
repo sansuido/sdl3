@@ -30,7 +30,7 @@ class SdlxGpuBlitInfo {
   }) {
     source = SdlxGpuBlitRegion();
     destination = SdlxGpuBlitRegion();
-    clearColor = SdlxFColor();
+    clearColor = SdlxFColor(0, 0, 0);
   }
 
   late SdlxGpuBlitRegion source;

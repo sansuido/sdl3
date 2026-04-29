@@ -15,7 +15,7 @@ class SdlxGpuColorTargetInfo {
     this.cycleResolveTexture = 0,
   }) {
     this.texture = texture ?? nullptr;
-    this.clearColor = clearColor ?? SdlxFColor();
+    this.clearColor = clearColor ?? SdlxFColor(0, 0, 0);
     this.resolveTexture = resolveTexture ?? nullptr;
   }
   late Pointer<SdlGpuTexture> texture;

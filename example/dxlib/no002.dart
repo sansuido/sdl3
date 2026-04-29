@@ -2,7 +2,6 @@
 // 2.ジャンプ処理
 // 2.Jump processing
 import 'dart:ffi';
-import 'dart:math';
 import 'package:ffi/ffi.dart';
 import 'package:sdl3/sdl3.dart';
 
@@ -92,16 +91,16 @@ bool handleEvents() {
 void render() {
   // init
   gRenderer
-    ..setDrawColor(0x00, 0x00, 0x00, SDL_ALPHA_OPAQUE)
+    ..setDrawColor(SdlxColor(0, 0, 0))
     ..clear()
     // player
-    ..setDrawColor(0x00, 0xff, 0x00, SDL_ALPHA_OPAQUE)
+    ..setDrawColor(SdlxColor(0, 255, 0))
     ..fillRect(
-      Rectangle(
-        gPlayerX,
-        gPlayerY,
-        gPlayerWidth.toDouble(),
-        gPlayerHeight.toDouble(),
+      SdlxFRect(
+        x: gPlayerX,
+        y: gPlayerY,
+        w: gPlayerWidth.toDouble(),
+        h: gPlayerHeight.toDouble(),
       ),
     )
     // term

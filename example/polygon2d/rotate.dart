@@ -1,5 +1,4 @@
 import 'dart:ffi';
-import 'dart:math' as math;
 
 import 'package:ffi/ffi.dart';
 import 'package:sdl3/sdl3.dart';
@@ -26,23 +25,19 @@ bool appInit() {
   gPolygons = [];
   gPolygons
     ..add(
-      Polygon.fromLTWH(
-        const math.Point<double>(0, 0),
-        const math.Point<double>(32, 64),
-      )..shift(const math.Point<double>(320 - 64, 240 - 64)),
+      Polygon.fromLTWH(SdlxFPoint(0, 0), SdlxFPoint(32, 64))
+        ..shift(SdlxFPoint(320 - 64, 240 - 64)),
     )
     ..add(
       Polygon([
-        const math.Point<double>(64 + 18, 0 + 18),
-        const math.Point<double>(64 + 18, 64 + 18),
-        const math.Point<double>(0 + 18, 64 + 18),
-      ])..shift(const math.Point<double>(320 - 64, 240 - 64)),
+        SdlxFPoint(64 + 18, 0 + 18),
+        SdlxFPoint(64 + 18, 64 + 18),
+        SdlxFPoint(0 + 18, 64 + 18),
+      ])..shift(SdlxFPoint(320 - 64, 240 - 64)),
     )
     ..add(
-      Polygon.fromLTWH(
-        const math.Point<double>(0, 0),
-        const math.Point<double>(64, 64),
-      )..shift(const math.Point<double>(320 + 16, 240 + 16)),
+      Polygon.fromLTWH(SdlxFPoint(0, 0), SdlxFPoint(64, 64))
+        ..shift(SdlxFPoint(320 + 16, 240 + 16)),
     );
   return true;
 }
@@ -60,8 +55,8 @@ bool appEvent(Pointer<SdlEvent> event) {
     case SdlkEvent.mouseButtonDown:
       if (event.button.ref.button == SdlkButton.left) {
         final mouse = Polygon.fromCenter(
-          math.Point<double>(event.button.ref.x, event.button.ref.y),
-          const math.Point<double>(1, 1),
+          SdlxFPoint(event.button.ref.x, event.button.ref.y),
+          SdlxFPoint(1, 1),
         );
         for (var i = gPolygons.length - 1; i >= 0; i--) {
           final polygon = gPolygons[i];
@@ -78,7 +73,7 @@ bool appEvent(Pointer<SdlEvent> event) {
     case SdlkEvent.mouseMotion:
       if (gHoldPolygon != null) {
         gHoldPolygon!.shift(
-          math.Point<double>(event.motion.ref.xrel, event.motion.ref.yrel),
+          SdlxFPoint(event.motion.ref.xrel, event.motion.ref.yrel),
         );
       }
   }
@@ -94,10 +89,10 @@ bool appIterate() {
       }
     }
   }
-  const i1 = math.Point<double>(0, 480 / 4);
-  const i2 = math.Point<double>(640, 480 / 4 * 3);
+  final i1 = SdlxFPoint(0, 480 / 4);
+  final i2 = SdlxFPoint(640, 480 / 4 * 3);
   gRenderer
-    ..setDrawColor(0, 0, 0, 255)
+    ..setDrawColor(SdlxColor(0, 0, 0))
     ..clear();
   for (final polygon in gPolygons) {
     if (polygon == gHoldPolygon) {

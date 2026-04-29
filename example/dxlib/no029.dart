@@ -39,7 +39,7 @@ class Player {
   static var speed = 3.0;
   static var maxSpeed = 5.0;
   static double decline = speed / 5;
-  math.Point<double> size;
+  SdlxFPoint size;
   var _x = 0.0;
   var _y = 0.0;
   var downSpeed = 0.0;
@@ -52,8 +52,7 @@ class Player {
     _y = y;
   }
 
-  math.Rectangle<double> getRect() =>
-      RectangleEx.fromCenter(math.Point<double>(_x, _y), size);
+  SdlxFRect getRect() => SdlxFRect.fromCenter(SdlxFPoint(_x, _y), size);
 
   void update(Map map) {
     final wall = <int>[1];
@@ -79,7 +78,7 @@ class Player {
       if (keys[SdlkScancode.down] != 0) {
         if (map.intersection(
               getRect(),
-              move: const math.Point<double>(0, 0.1),
+              move: SdlxFPoint(0, 0.1),
               mask: floors,
             ) !=
             null) {
@@ -105,13 +104,13 @@ class Player {
     if (moveY != 0) {
       final interRect = map.intersection(
         getRect(),
-        move: math.Point<double>(0, moveY),
+        move: SdlxFPoint(0, moveY),
         mask: mask,
       );
       final originY = _y;
       _y += moveY;
       if (interRect != null) {
-        _y -= interRect.height * moveY.sign;
+        _y -= interRect.h * moveY.sign;
         if (moveY < 0) {
           downSpeed *= -1;
         } else {
@@ -125,24 +124,20 @@ class Player {
     if (moveX != 0) {
       final interRect = map.intersection(
         getRect(),
-        move: math.Point<double>(moveX, 0),
+        move: SdlxFPoint(moveX, 0),
         mask: mask,
       );
       final originX = _x;
       _x += moveX;
       if (interRect != null) {
-        _x -= interRect.width * moveX.sign;
+        _x -= interRect.w * moveX.sign;
         velocityX = 0;
       }
       if (map.intersection(getRect(), mask: mask) != null) {
         _x = originX;
       }
     }
-    if (map.intersection(
-          getRect(),
-          move: const math.Point<double>(0, 0.1),
-          mask: mask,
-        ) ==
+    if (map.intersection(getRect(), move: SdlxFPoint(0, 0.1), mask: mask) ==
         null) {
       jumpFlag = true;
     } else {
@@ -197,55 +192,50 @@ class Map {
     }
   }
 
-  math.Rectangle<double>? intersection(
-    math.Rectangle<double> originRect, {
-    math.Point<double> move = const math.Point<double>(0, 0),
+  SdlxFRect? intersection(
+    SdlxFRect originRect, {
+    SdlxFPoint? move,
     List<int>? mask,
   }) {
-    late math.Rectangle<double> afterRect;
-    afterRect = originRect.shift(move);
+    final move0 = move ?? SdlxFPoint(0, 0);
+    final afterRect = SdlxFRect.fromRect(originRect)
+      ..x += move0.x
+      ..y += move0.y;
     final cellRects = getRectsFromArea(afterRect, mask: mask);
     for (final cellRect in cellRects) {
       final interRect = afterRect.intersection(cellRect);
-      if (interRect != null && interRect.width != 0 && interRect.height != 0) {
+      if (interRect != null && interRect.w != 0 && interRect.h != 0) {
         return interRect;
       }
     }
     return null;
   }
 
-  math.Rectangle<double>? getRectFromCellCootinates(
-    int cellId,
-    int cx,
-    int cy,
-  ) {
+  SdlxFRect? getRectFromCellCootinates(int cellId, int cx, int cy) {
     switch (cellId) {
       case 1:
-        return RectangleEx.fromLTWH(
-          math.Point<double>(cx * cellSize, cy * cellSize),
-          math.Point<double>(cellSize, cellSize),
+        return SdlxFRect.fromPosition(
+          SdlxFPoint(cx * cellSize, cy * cellSize),
+          SdlxFPoint(cellSize, cellSize),
         );
       case 2:
-        return RectangleEx.fromLTWH(
-          math.Point<double>(cx * cellSize, cy * cellSize),
-          math.Point<double>(cellSize, cellSize * 0.5),
+        return SdlxFRect.fromPosition(
+          SdlxFPoint(cx * cellSize, cy * cellSize),
+          SdlxFPoint(cellSize, cellSize * 0.5),
         );
       case 3:
-        return RectangleEx.fromLTWH(
-          math.Point<double>(cx * cellSize, cy * cellSize + cellSize * 0.5),
-          math.Point<double>(cellSize, cellSize * 0.5),
+        return SdlxFRect.fromPosition(
+          SdlxFPoint(cx * cellSize, cy * cellSize + cellSize * 0.5),
+          SdlxFPoint(cellSize, cellSize * 0.5),
         );
     }
     return null;
   }
 
-  List<math.Rectangle<double>> getRectsFromArea(
-    math.Rectangle<double> area, {
-    List<int>? mask,
-  }) {
-    final result = <math.Rectangle<double>>[];
-    final tl = getCellCoodinates(area.topLeft.x, area.topLeft.y);
-    final br = getCellCoodinates(area.bottomRight.x, area.bottomRight.y);
+  List<SdlxFRect> getRectsFromArea(SdlxFRect area, {List<int>? mask}) {
+    final result = <SdlxFRect>[];
+    final tl = getCellCoodinates(area.x, area.y);
+    final br = getCellCoodinates(area.x + area.w, area.y + area.h);
     for (var cy = tl.y; cy <= br.y; cy++) {
       for (var cx = tl.x; cx <= br.x; cx++) {
         final cellId = getCellId(cx, cy);
@@ -260,10 +250,10 @@ class Map {
     return result;
   }
 
-  math.Point<int> getCellCoodinates(double x, double y) {
+  SdlxPoint getCellCoodinates(double x, double y) {
     final cx = x ~/ cellSize;
     final cy = y ~/ cellSize;
-    return math.Point<int>(cx, cy);
+    return SdlxPoint(cx, cy);
   }
 
   int getCellId(int cx, int cy) {
@@ -283,7 +273,7 @@ void update(Map map, Player player) {
 
 void draw(Pointer<SdlRenderer> renderer, Map map, Player player) {
   renderer
-    ..setDrawColor(0, 0, 0, 255)
+    ..setDrawColor(SdlxColor(0, 0, 0))
     ..clear();
   map.debugDraw(renderer);
   player.debugDraw(renderer);
@@ -292,7 +282,7 @@ void draw(Pointer<SdlRenderer> renderer, Map map, Player player) {
 
 void actMain(Pointer<SdlRenderer> renderer) {
   final map = Map(gCellSize)..loadCellData(gMapData);
-  final player = Player(const math.Point<double>(gCellSize - 2, gCellSize - 2))
+  final player = Player(SdlxFPoint(gCellSize - 2, gCellSize - 2))
     ..setPosition(320, 240);
   var running = true;
   final event = calloc<SdlEvent>();

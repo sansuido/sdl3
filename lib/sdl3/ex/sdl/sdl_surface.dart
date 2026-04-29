@@ -579,15 +579,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetSurfaceClipRect(SDL_Surface *surface, const SDL_Rect *rect)
   /// ```
   /// {@category surface}
-  bool setClipRect([math.Rectangle<double>? rect]) {
-    Pointer<SdlRect> rectPointer = nullptr;
-    if (rect != null) {
-      rectPointer = rect.callocInt();
-    }
-    final result = sdlSetSurfaceClipRect(this, rectPointer);
-    calloc.free(rectPointer);
-    return result;
-  }
+  bool setClipRect([SdlxRect? rect]) => sdlxSetSurfaceClipRect(this, rect);
 
   ///
   /// Get the clipping rectangle for a surface.
@@ -613,13 +605,7 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetSurfaceClipRect(SDL_Surface *surface, SDL_Rect *rect)
   /// ```
   /// {@category surface}
-  math.Rectangle<double> getClipRect() {
-    final rectPointer = calloc<SdlRect>();
-    sdlGetSurfaceClipRect(this, rectPointer);
-    final result = rectPointer.create();
-    calloc.free(rectPointer);
-    return result;
-  }
+  bool getClipRect(SdlxRect rect) => sdlxGetSurfaceClipRect(this, rect);
 
   ///
   /// Creates a new surface identical to the existing surface.
@@ -679,15 +665,8 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// extern SDL_DECLSPEC bool SDLCALL SDL_FillSurfaceRect(SDL_Surface *dst, const SDL_Rect *rect, Uint32 color)
   /// ```
   /// {@category surface}
-  bool fillRect(math.Rectangle<double>? rect, int color) {
-    Pointer<SdlRect> rectPointer = nullptr;
-    if (rect != null) {
-      rectPointer = rect.callocInt();
-    }
-    final result = sdlFillSurfaceRect(this, rectPointer, color);
-    calloc.free(rectPointer);
-    return result;
-  }
+  bool fillRect(SdlxRect? rect, int color) =>
+      sdlxFillSurfaceRect(this, rect, color);
 
   ///
   /// Perform a fast fill of a set of rectangles with a specific color.
@@ -719,12 +698,8 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// extern SDL_DECLSPEC bool SDLCALL SDL_FillSurfaceRects(SDL_Surface *dst, const SDL_Rect *rects, int count, Uint32 color)
   /// ```
   /// {@category surface}
-  bool fillRects(List<math.Rectangle<double>> rects, int color) {
-    final rectsPointer = rects.callocInt();
-    final result = sdlFillSurfaceRects(this, rectsPointer, rects.length, color);
-    calloc.free(rectsPointer);
-    return result;
-  }
+  bool fillRects(List<SdlxRect> rects, int color) =>
+      sdlxFillSurfaceRects(this, rects, color);
 
   ///
   /// Performs a fast blit from the source surface to the destination surface
@@ -801,25 +776,8 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// extern SDL_DECLSPEC bool SDLCALL SDL_BlitSurface(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, const SDL_Rect *dstrect)
   /// ```
   /// {@category surface}
-  bool upperBlit(
-    Pointer<SdlSurface> dst, {
-    math.Rectangle<double>? srcrect,
-    math.Rectangle<double>? dstrect,
-  }) {
-    Pointer<SdlRect> srcrectPointer = nullptr;
-    Pointer<SdlRect> dstrectPointer = nullptr;
-    if (srcrect != null) {
-      srcrectPointer = srcrect.callocInt();
-    }
-    if (dstrect != null) {
-      dstrectPointer = dstrect.callocInt();
-    }
-    final result = sdlBlitSurface(this, srcrectPointer, dst, dstrectPointer);
-    calloc
-      ..free(srcrectPointer)
-      ..free(dstrectPointer);
-    return result;
-  }
+  bool blit(SdlxRect? srcrect, Pointer<SdlSurface> dst, SdlxRect? dstrect) =>
+      sdlxBlitSurface(this, srcrect, dst, dstrect);
 
   ///
   /// Perform low-level surface blitting only.
@@ -847,30 +805,11 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// extern SDL_DECLSPEC bool SDLCALL SDL_BlitSurfaceUnchecked(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, const SDL_Rect *dstrect)
   /// ```
   /// {@category surface}
-  bool lowerBlit(
-    Pointer<SdlSurface> dst, {
-    math.Rectangle<double>? srcrect,
-    math.Rectangle<double>? dstrect,
-  }) {
-    Pointer<SdlRect> srcrectPointer = nullptr;
-    Pointer<SdlRect> dstrectPointer = nullptr;
-    if (srcrect != null) {
-      srcrectPointer = srcrect.callocInt();
-    }
-    if (dstrect != null) {
-      dstrectPointer = dstrect.callocInt();
-    }
-    final result = sdlBlitSurfaceUnchecked(
-      this,
-      srcrectPointer,
-      dst,
-      dstrectPointer,
-    );
-    calloc
-      ..free(srcrectPointer)
-      ..free(dstrectPointer);
-    return result;
-  }
+  bool blitUnchecked(
+    SdlxRect srcrect,
+    Pointer<SdlSurface> dst,
+    SdlxRect dstrect,
+  ) => sdlxBlitSurfaceUnchecked(this, srcrect, dst, dstrect);
 
   ///
   /// Perform a scaled blit to a destination surface, which may be of a different
@@ -899,31 +838,12 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// ```
   /// {@category surface}
   bool upperBlitScaled(
-    Pointer<SdlSurface> dst, {
-    math.Rectangle<double>? srcrect,
-    math.Rectangle<double>? dstrect,
-    int scaleMode = 0,
-  }) {
-    Pointer<SdlRect> srcrectPointer = nullptr;
-    Pointer<SdlRect> dstrectPointer = nullptr;
-    if (srcrect != null) {
-      srcrectPointer = srcrect.callocInt();
-    }
-    if (dstrect != null) {
-      dstrectPointer = dstrect.callocInt();
-    }
-    final result = sdlBlitSurfaceScaled(
-      this,
-      srcrectPointer,
-      dst,
-      dstrectPointer,
-      scaleMode,
-    );
-    calloc
-      ..free(srcrectPointer)
-      ..free(dstrectPointer);
-    return result;
-  }
+    SdlxRect? srcrect,
+    Pointer<SdlSurface> dst,
+    SdlxRect? dstrect, {
+    int scaleMode = SdlkScalemode.invalid,
+  }) =>
+      sdlxBlitSurfaceScaled(this, srcrect, dst, dstrect, scaleMode: scaleMode);
 
   ///
   /// Perform low-level surface scaled blitting only.
@@ -952,32 +872,18 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// extern SDL_DECLSPEC bool SDLCALL SDL_BlitSurfaceUncheckedScaled(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, const SDL_Rect *dstrect, SDL_ScaleMode scaleMode)
   /// ```
   /// {@category surface}
-  bool lowerBlitScaled(
-    Pointer<SdlSurface> dst, {
-    math.Rectangle<double>? srcrect,
-    math.Rectangle<double>? dstrect,
-    int scaleMode = 0,
-  }) {
-    Pointer<SdlRect> srcrectPointer = nullptr;
-    Pointer<SdlRect> dstrectPointer = nullptr;
-    if (srcrect != null) {
-      srcrectPointer = srcrect.callocInt();
-    }
-    if (dstrect != null) {
-      dstrectPointer = dstrect.callocInt();
-    }
-    final result = sdlBlitSurfaceUncheckedScaled(
-      this,
-      srcrectPointer,
-      dst,
-      dstrectPointer,
-      scaleMode,
-    );
-    calloc
-      ..free(srcrectPointer)
-      ..free(dstrectPointer);
-    return result;
-  }
+  bool blitUncheckedScaled(
+    SdlxRect srcrect,
+    Pointer<SdlSurface> dst,
+    SdlxRect dstrect, {
+    int scaleMode = SdlkScalemode.invalid,
+  }) => sdlxBlitSurfaceUncheckedScaled(
+    this,
+    srcrect,
+    dst,
+    dstrect,
+    scaleMode: scaleMode,
+  );
 
   // sdlSetYuvConversionMode
   // sdlGetYuvConversionMode
@@ -1015,16 +921,4 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// ```
   /// {@category surface}
   bool saveBmp(String file) => sdlSaveBmp(this, file);
-
-  bool blit(
-    Pointer<SdlSurface> dst, {
-    math.Rectangle<double>? srcrect,
-    math.Rectangle<double>? dstrect,
-  }) => upperBlit(dst, srcrect: srcrect, dstrect: dstrect);
-
-  bool blitScaled(
-    Pointer<SdlSurface> dst, {
-    math.Rectangle<double>? srcrect,
-    math.Rectangle<double>? dstrect,
-  }) => upperBlitScaled(dst, srcrect: srcrect, dstrect: dstrect);
 }

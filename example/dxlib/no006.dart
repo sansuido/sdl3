@@ -2,7 +2,6 @@
 // 5.サウンドのベル基本
 // 5.Sound novel basics
 import 'dart:ffi';
-import 'dart:math';
 import 'package:ffi/ffi.dart';
 import 'package:sdl3/sdl3.dart';
 
@@ -68,14 +67,13 @@ class Game {
     for (var n = 0; n < gString.length; n++) {
       final chara = gString[n];
       if (!charaTextures.containsKey(chara)) {
-        final textColor = calloc<SdlColor>()..setRgba(0, 0, 0, 255);
-        final surface = font.renderTextBlended(chara, textColor.ref);
+        final textColor = SdlxColor(0, 0, 0);
+        final surface = font.renderTextBlended(chara, textColor);
         if (surface != nullptr) {
           final texture = renderer.createTextureFromSurface(surface);
           charaTextures[chara] = texture;
           surface.destroy();
         }
-        textColor.callocFree();
       }
     }
     font.close();
@@ -87,21 +85,19 @@ class Game {
     if (font == nullptr) {
       return false;
     }
-    final textColor = calloc<SdlColor>()..setRgba(0, 0, 0, 255);
-    final alertColor = calloc<SdlColor>()..setRgba(255, 0, 0, 255);
+    final textColor = SdlxColor(0, 0, 0);
+    final alertColor = SdlxColor(255, 0, 0);
 
     final surface = font.renderTextShaded(
       '[PRESS ANY KEY]',
-      textColor.ref,
-      alertColor.ref,
+      textColor,
+      alertColor,
     );
     if (surface != nullptr) {
       pressAnyKeyTexture = renderer.createTextureFromSurface(surface);
       surface.destroy();
     }
     font.close();
-    textColor.callocFree();
-    alertColor.callocFree();
     return true;
   }
 
@@ -150,7 +146,7 @@ class Game {
 
   void render() {
     renderer
-      ..setDrawColor(255, 255, 255, 255)
+      ..setDrawColor(SdlxColor(0xff, 0xff, 0xff))
       ..clear();
     var drawX = 0;
     var drawY = 0;
@@ -168,41 +164,48 @@ class Game {
         default:
           final texture = charaTextures[chara];
           if (texture != nullptr) {
-            final size = texture!.getSize()!;
-            if (chara != '。' &&
-                chara != '、' &&
-                (drawX + size.x) > window.getSize()!.x) {
-              drawX = 0;
-              drawY += height;
-              height = 0;
+            final size = SdlxFPoint(0, 0);
+            if (texture!.getSize(size)) {
+              final windowSize = SdlxPoint(0, 0);
+              final getResult = window.getSize(windowSize);
+              if (getResult &&
+                  chara != '。' &&
+                  chara != '、' &&
+                  (drawX + size.x) > windowSize.x) {
+                drawX = 0;
+                drawY += height;
+                height = 0;
+              }
+              renderer.texture(
+                texture,
+                dstrect: SdlxFRect(
+                  x: drawX.toDouble(),
+                  y: drawY.toDouble(),
+                  w: size.x,
+                  h: size.y,
+                ),
+              );
+              drawX += size.x.toInt();
+              height = size.y.toInt() > height ? size.y.toInt() : height;
             }
-            renderer.texture(
-              texture,
-              dstrect: Rectangle<double>(
-                drawX.toDouble(),
-                drawY.toDouble(),
-                size.x,
-                size.y,
-              ),
-            );
-            drawX += size.x.toInt();
-            height = size.y.toInt() > height ? size.y.toInt() : height;
           }
       }
     }
     if (buttonWait) {
-      final size = pressAnyKeyTexture.getSize()!;
-      drawX = 0;
-      drawY += height;
-      renderer.texture(
-        pressAnyKeyTexture,
-        dstrect: Rectangle<double>(
-          drawX.toDouble(),
-          drawY.toDouble(),
-          size.x,
-          size.y,
-        ),
-      );
+      final size = SdlxFPoint(0, 0);
+      if (pressAnyKeyTexture.getSize(size)) {
+        drawX = 0;
+        drawY += height;
+        renderer.texture(
+          pressAnyKeyTexture,
+          dstrect: SdlxFRect(
+            x: drawX.toDouble(),
+            y: drawY.toDouble(),
+            w: size.x,
+            h: size.y,
+          ),
+        );
+      }
     }
     renderer.present();
   }

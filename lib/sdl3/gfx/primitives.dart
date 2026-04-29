@@ -69,21 +69,18 @@ bool pixelColor(
   Pointer<SdlRenderer> renderer,
   double x,
   double y,
-  int color, {
+  SdlxColor color, {
   int blendMode = SDL_BLENDMODE_BLEND,
-}) {
-  final co = Uint32List.fromList([color]).buffer.asUint8List();
-  return pixelRgba(
-    renderer,
-    x,
-    y,
-    co[0],
-    co[1],
-    co[2],
-    co[3],
-    blendMode: blendMode,
-  );
-}
+}) => pixelRgba(
+  renderer,
+  x,
+  y,
+  color.r,
+  color.g,
+  color.b,
+  color.a,
+  blendMode: blendMode,
+);
 
 /*!
 \brief Draw pixel with blending enabled if a<255.
@@ -191,22 +188,19 @@ bool hlineColor(
   double x1,
   double x2,
   double y,
-  int color, {
+  SdlxColor color, {
   int blendMode = SDL_BLENDMODE_BLEND,
-}) {
-  final co = Uint32List.fromList([color]).buffer.asUint8List();
-  return hlineRgba(
-    renderer,
-    x1,
-    x2,
-    y,
-    co[0],
-    co[1],
-    co[2],
-    co[3],
-    blendMode: blendMode,
-  );
-}
+}) => hlineRgba(
+  renderer,
+  x1,
+  x2,
+  y,
+  color.r,
+  color.g,
+  color.b,
+  color.a,
+  blendMode: blendMode,
+);
 
 /*!
 \brief Draw horizontal line with blending.
@@ -277,22 +271,19 @@ bool vlineColor(
   double x,
   double y1,
   double y2,
-  int color, {
+  SdlxColor color, {
   int blendMode = SDL_BLENDMODE_BLEND,
-}) {
-  final co = Uint32List.fromList([color]).buffer.asUint8List();
-  return vlineRgba(
-    renderer,
-    x,
-    y1,
-    y2,
-    co[0],
-    co[1],
-    co[2],
-    co[3],
-    blendMode: blendMode,
-  );
-}
+}) => vlineRgba(
+  renderer,
+  x,
+  y1,
+  y2,
+  color.r,
+  color.g,
+  color.b,
+  color.a,
+  blendMode: blendMode,
+);
 
 /*!
 \brief Draw vertical line with blending.
@@ -352,23 +343,20 @@ bool rectangleColor(
   double y1,
   double x2,
   double y2,
-  int color, {
+  SdlxColor color, {
   int blendMode = SDL_BLENDMODE_BLEND,
-}) {
-  final co = Uint32List.fromList([color]).buffer.asUint8List();
-  return rectangleRgba(
-    renderer,
-    x1,
-    y1,
-    x2,
-    y2,
-    co[0],
-    co[1],
-    co[2],
-    co[3],
-    blendMode: blendMode,
-  );
-}
+}) => rectangleRgba(
+  renderer,
+  x1,
+  y1,
+  x2,
+  y2,
+  color.r,
+  color.g,
+  color.b,
+  color.a,
+  blendMode: blendMode,
+);
 
 /*!
 \brief Draw rectangle with blending.
@@ -505,24 +493,21 @@ bool roundedRectangleColor(
   double x2,
   double y2,
   double rad,
-  int color, {
+  SdlxColor color, {
   int blendMode = SDL_BLENDMODE_BLEND,
-}) {
-  final co = Uint32List.fromList([color]).buffer.asUint8List();
-  return roundedRectangleRgba(
-    renderer,
-    x1,
-    y1,
-    x2,
-    y2,
-    rad,
-    co[0],
-    co[1],
-    co[2],
-    co[3],
-    blendMode: blendMode,
-  );
-}
+}) => roundedRectangleRgba(
+  renderer,
+  x1,
+  y1,
+  x2,
+  y2,
+  rad,
+  color.r,
+  color.g,
+  color.b,
+  color.a,
+  blendMode: blendMode,
+);
 
 /*!
 \brief Draw rounded-corner rectangle with blending.
@@ -820,24 +805,21 @@ bool roundedBoxColor(
   double x2,
   double y2,
   double rad,
-  int color, {
+  SdlxColor color, {
   int blendMode = SDL_BLENDMODE_BLEND,
-}) {
-  final co = Uint32List.fromList([color]).buffer.asUint8List();
-  return roundedBoxRgba(
-    renderer,
-    x1,
-    y1,
-    x2,
-    y2,
-    rad,
-    co[0],
-    co[1],
-    co[2],
-    co[3],
-    blendMode: blendMode,
-  );
-}
+}) => roundedBoxRgba(
+  renderer,
+  x1,
+  y1,
+  x2,
+  y2,
+  rad,
+  color.r,
+  color.g,
+  color.b,
+  color.a,
+  blendMode: blendMode,
+);
 
 /*!
 \brief Draw rounded-corner box (filled rectangle) with blending.
@@ -1119,23 +1101,20 @@ bool boxColor(
   double y1,
   double x2,
   double y2,
-  int color, {
+  SdlxColor color, {
   int blendMode = SDL_BLENDMODE_BLEND,
-}) {
-  final co = Uint32List.fromList([color]).buffer.asUint8List();
-  return boxRgba(
-    renderer,
-    x1,
-    y1,
-    x2,
-    y2,
-    co[0],
-    co[1],
-    co[2],
-    co[3],
-    blendMode: blendMode,
-  );
-}
+}) => boxRgba(
+  renderer,
+  x1,
+  y1,
+  x2,
+  y2,
+  color.r,
+  color.g,
+  color.b,
+  color.a,
+  blendMode: blendMode,
+);
 
 /*!
 \brief Draw box (filled rectangle) with blending.
@@ -1289,23 +1268,20 @@ bool lineColor(
   double y1,
   double x2,
   double y2,
-  int color, {
+  SdlxColor color, {
   int blendMode = SDL_BLENDMODE_BLEND,
-}) {
-  final co = Uint32List.fromList([color]).buffer.asUint8List();
-  return lineRgba(
-    renderer,
-    x1,
-    y1,
-    x2,
-    y2,
-    co[0],
-    co[1],
-    co[2],
-    co[3],
-    blendMode: blendMode,
-  );
-}
+}) => lineRgba(
+  renderer,
+  x1,
+  y1,
+  x2,
+  y2,
+  color.r,
+  color.g,
+  color.b,
+  color.a,
+  blendMode: blendMode,
+);
 
 /*!
 \brief Draw line with alpha blending.
@@ -1680,24 +1656,21 @@ bool aalineColor(
   double y1,
   double x2,
   double y2,
-  int color, {
+  SdlxColor color, {
   int blendMode = SDL_BLENDMODE_BLEND,
-}) {
-  final co = Uint32List.fromList([color]).buffer.asUint8List();
-  return _aalineRgba(
-    renderer,
-    x1,
-    y1,
-    x2,
-    y2,
-    co[0],
-    co[1],
-    co[2],
-    co[3],
-    1,
-    blendMode: blendMode,
-  );
-}
+}) => _aalineRgba(
+  renderer,
+  x1,
+  y1,
+  x2,
+  y2,
+  color.r,
+  color.g,
+  color.b,
+  color.a,
+  1,
+  blendMode: blendMode,
+);
 
 /*!
 \brief Draw anti-aliased line with alpha blending.
@@ -1746,23 +1719,20 @@ bool circleColor(
   double x,
   double y,
   double rad,
-  int color, {
+  SdlxColor color, {
   int blendMode = SDL_BLENDMODE_BLEND,
-}) {
-  final co = Uint32List.fromList([color]).buffer.asUint8List();
-  return ellipseRgba(
-    renderer,
-    x,
-    y,
-    rad,
-    rad,
-    co[0],
-    co[1],
-    co[2],
-    co[3],
-    blendMode: blendMode,
-  );
-}
+}) => ellipseRgba(
+  renderer,
+  x,
+  y,
+  rad,
+  rad,
+  color.r,
+  color.g,
+  color.b,
+  color.a,
+  blendMode: blendMode,
+);
 
 /*!
 \brief Draw circle with blending.
@@ -1812,24 +1782,21 @@ bool arcColor(
   double rad,
   double start,
   double end,
-  int color, {
+  SdlxColor color, {
   int blendMode = SDL_BLENDMODE_BLEND,
-}) {
-  final co = Uint32List.fromList([color]).buffer.asUint8List();
-  return arcRgba(
-    renderer,
-    x,
-    y,
-    rad,
-    start,
-    end,
-    co[0],
-    co[1],
-    co[2],
-    co[3],
-    blendMode: blendMode,
-  );
-}
+}) => arcRgba(
+  renderer,
+  x,
+  y,
+  rad,
+  start,
+  end,
+  color.r,
+  color.g,
+  color.b,
+  color.a,
+  blendMode: blendMode,
+);
 
 /*!
 \brief Arc with blending.
@@ -2171,23 +2138,20 @@ bool aacircleColor(
   double x,
   double y,
   double rad,
-  int color, {
+  SdlxColor color, {
   int blendMode = SDL_BLENDMODE_BLEND,
-}) {
-  final co = Uint32List.fromList([color]).buffer.asUint8List();
-  return aaellipseRgba(
-    renderer,
-    x,
-    y,
-    rad,
-    rad,
-    co[0],
-    co[1],
-    co[2],
-    co[3],
-    blendMode: blendMode,
-  );
-}
+}) => aaellipseRgba(
+  renderer,
+  x,
+  y,
+  rad,
+  rad,
+  color.r,
+  color.g,
+  color.b,
+  color.a,
+  blendMode: blendMode,
+);
 
 /*!
 \brief Draw anti-aliased circle with blending.
@@ -2525,24 +2489,21 @@ bool ellipseColor(
   double y,
   double rx,
   double ry,
-  int color, {
+  SdlxColor color, {
   int blendMode = SDL_BLENDMODE_BLEND,
-}) {
-  final co = Uint32List.fromList([color]).buffer.asUint8List();
-  return _ellipseRgba(
-    renderer,
-    x,
-    y,
-    rx,
-    ry,
-    co[0],
-    co[1],
-    co[2],
-    co[3],
-    0,
-    blendMode: blendMode,
-  );
-}
+}) => _ellipseRgba(
+  renderer,
+  x,
+  y,
+  rx,
+  ry,
+  color.r,
+  color.g,
+  color.b,
+  color.a,
+  0,
+  blendMode: blendMode,
+);
 
 /*!
 \brief Draw ellipse with blending.
@@ -2590,23 +2551,20 @@ bool filledCircleColor(
   double x,
   double y,
   double rad,
-  int color, {
+  SdlxColor color, {
   int blendMode = SDL_BLENDMODE_BLEND,
-}) {
-  final co = Uint32List.fromList([color]).buffer.asUint8List();
-  return filledEllipseRgba(
-    renderer,
-    x,
-    y,
-    rad,
-    rad,
-    co[0],
-    co[1],
-    co[2],
-    co[3],
-    blendMode: blendMode,
-  );
-}
+}) => filledEllipseRgba(
+  renderer,
+  x,
+  y,
+  rad,
+  rad,
+  color.r,
+  color.g,
+  color.b,
+  color.a,
+  blendMode: blendMode,
+);
 
 /*!
 \brief Draw filled circle with blending.
@@ -2653,23 +2611,20 @@ bool aaellipseColor(
   double y,
   double rx,
   double ry,
-  int color, {
+  SdlxColor color, {
   int blendMode = SDL_BLENDMODE_BLEND,
-}) {
-  final co = Uint32List.fromList([color]).buffer.asUint8List();
-  return aaellipseRgba(
-    renderer,
-    x,
-    y,
-    rx,
-    ry,
-    co[0],
-    co[1],
-    co[2],
-    co[3],
-    blendMode: blendMode,
-  );
-}
+}) => aaellipseRgba(
+  renderer,
+  x,
+  y,
+  rx,
+  ry,
+  color.r,
+  color.g,
+  color.b,
+  color.a,
+  blendMode: blendMode,
+);
 
 /*!
 \brief Draw anti-aliased ellipse with blending.
@@ -3161,24 +3116,21 @@ bool filledEllipseColor(
   double y,
   double rx,
   double ry,
-  int color, {
+  SdlxColor color, {
   int blendMode = SDL_BLENDMODE_BLEND,
-}) {
-  final co = Uint32List.fromList([color]).buffer.asUint8List();
-  return _ellipseRgba(
-    renderer,
-    x,
-    y,
-    rx,
-    ry,
-    co[0],
-    co[1],
-    co[2],
-    co[3],
-    1,
-    blendMode: blendMode,
-  );
-}
+}) => _ellipseRgba(
+  renderer,
+  x,
+  y,
+  rx,
+  ry,
+  color.r,
+  color.g,
+  color.b,
+  color.a,
+  1,
+  blendMode: blendMode,
+);
 
 /*!
 \brief Draw filled ellipse with blending.
@@ -3296,27 +3248,29 @@ bool _pieRgba(
   }
 
   /* Allocate combined vertex array */
-  final vx = calloc<Int16>(numpoints);
-  final vy = calloc<Int16>(numpoints);
+  final points = List<SdlxFPoint>.generate(
+    numpoints,
+    (index) => SdlxFPoint(0, 0),
+  );
 
   /* Update point to start of vy */
 
   /* Center */
-  vx[0] = x.toInt();
-  vy[0] = y.toInt();
+  points[0].x = x;
+  points[1].y = y;
 
   /* First vertex */
   angle = startAngle;
-  vx[1] = (x + dr * math.cos(angle)).toInt();
-  vy[1] = (y + dr * math.sin(angle)).toInt();
+  points[1].x = x + dr * math.cos(angle);
+  points[1].y = y + dr * math.sin(angle);
 
   if (numpoints < 3) {
     result = lineRgba(
       renderer,
-      vx[0].toDouble(),
-      vy[0].toDouble(),
-      vx[1].toDouble(),
-      vy[1].toDouble(),
+      points[0].x,
+      points[0].y,
+      points[1].x,
+      points[1].y,
       r,
       g,
       b,
@@ -3332,8 +3286,8 @@ bool _pieRgba(
       if (angle > endAngle) {
         angle = endAngle;
       }
-      vx[i] = (x + dr * math.cos(angle)).toInt();
-      vy[i] = (y + dr * math.sin(angle)).toInt();
+      points[i].x = x + dr * math.cos(angle);
+      points[i].y = y + dr * math.sin(angle);
       i++;
     }
 
@@ -3341,9 +3295,7 @@ bool _pieRgba(
     if (filled != 0) {
       result = filledPolygonRgba(
         renderer,
-        vx,
-        vy,
-        numpoints,
+        points,
         r,
         g,
         b,
@@ -3351,25 +3303,9 @@ bool _pieRgba(
         blendMode: blendMode,
       );
     } else {
-      result = polygonRgba(
-        renderer,
-        vx,
-        vy,
-        numpoints,
-        r,
-        g,
-        b,
-        a,
-        blendMode: blendMode,
-      );
+      result = polygonRgba(renderer, points, r, g, b, a, blendMode: blendMode);
     }
   }
-
-  /* Free combined vertex array */
-  //free(vx);
-  calloc
-    ..free(vx)
-    ..free(vy);
 
   return result;
 }
@@ -3394,25 +3330,22 @@ bool pieColor(
   double rad,
   double start,
   double end,
-  int color, {
+  SdlxColor color, {
   int blendMode = SDL_BLENDMODE_BLEND,
-}) {
-  final co = Uint32List.fromList([color]).buffer.asUint8List();
-  return _pieRgba(
-    renderer,
-    x,
-    y,
-    rad,
-    start,
-    end,
-    co[0],
-    co[1],
-    co[2],
-    co[3],
-    0,
-    blendMode: blendMode,
-  );
-}
+}) => _pieRgba(
+  renderer,
+  x,
+  y,
+  rad,
+  start,
+  end,
+  color.r,
+  color.g,
+  color.b,
+  color.a,
+  0,
+  blendMode: blendMode,
+);
 
 /*!
 \brief Draw pie (outline) with alpha blending.
@@ -3477,25 +3410,22 @@ bool filledPieColor(
   double rad,
   double start,
   double end,
-  int color, {
+  SdlxColor color, {
   int blendMode = SDL_BLENDMODE_BLEND,
-}) {
-  final co = Uint32List.fromList([color]).buffer.asUint8List();
-  return _pieRgba(
-    renderer,
-    x,
-    y,
-    rad,
-    start,
-    end,
-    co[0],
-    co[1],
-    co[2],
-    co[3],
-    1,
-    blendMode: blendMode,
-  );
-}
+}) => _pieRgba(
+  renderer,
+  x,
+  y,
+  rad,
+  start,
+  end,
+  color.r,
+  color.g,
+  color.b,
+  color.a,
+  1,
+  blendMode: blendMode,
+);
 
 /*!
 \brief Draw filled pie with alpha blending.
@@ -3566,24 +3496,18 @@ bool trigonColor(
   double y2,
   double x3,
   double y3,
-  int color, {
+  SdlxColor color, {
   int blendMode = SDL_BLENDMODE_BLEND,
 }) {
-  final vx = calloc<Int16>(3);
-  final vy = calloc<Int16>(3);
+  final points = List<SdlxFPoint>.generate(3, (index) => SdlxFPoint(0, 0));
 
-  vx[0] = x1.toInt();
-  vx[1] = x2.toInt();
-  vx[2] = x3.toInt();
-  vy[0] = y1.toInt();
-  vy[1] = y2.toInt();
-  vy[2] = y3.toInt();
-
-  final result = polygonColor(renderer, vx, vy, 3, color, blendMode: blendMode);
-  calloc
-    ..free(vx)
-    ..free(vy);
-
+  points[0].x = x1;
+  points[1].x = x2;
+  points[2].x = x3;
+  points[0].y = y1;
+  points[1].y = y2;
+  points[2].y = y3;
+  final result = polygonColor(renderer, points, color, blendMode: blendMode);
   return result;
 }
 
@@ -3618,31 +3542,24 @@ bool trigonRgba(
   int a, {
   int blendMode = SDL_BLENDMODE_BLEND,
 }) {
-  final vx = calloc<Int16>(3);
-  final vy = calloc<Int16>(3);
+  final points = List<SdlxFPoint>.generate(3, (index) => SdlxFPoint(0, 0));
 
-  vx[0] = x1.toInt();
-  vx[1] = x2.toInt();
-  vx[2] = x3.toInt();
-  vy[0] = y1.toInt();
-  vy[1] = y2.toInt();
-  vy[2] = y3.toInt();
+  points[0].x = x1;
+  points[1].x = x2;
+  points[2].x = x3;
+  points[0].y = y1;
+  points[1].y = y2;
+  points[2].y = y3;
 
   final result = polygonRgba(
     renderer,
-    vx,
-    vy,
-    3,
+    points,
     r,
     g,
     b,
     a,
     blendMode: blendMode,
   );
-  calloc
-    ..free(vx)
-    ..free(vy);
-
   return result;
 }
 
@@ -3672,31 +3589,19 @@ bool aatrigonColor(
   double y2,
   double x3,
   double y3,
-  int color, {
+  SdlxColor color, {
   int blendMode = SDL_BLENDMODE_BLEND,
 }) {
-  final vx = calloc<Int16>(3);
-  final vy = calloc<Int16>(3);
+  final points = List<SdlxFPoint>.generate(3, (index) => SdlxFPoint(0, 0));
 
-  vx[0] = x1.toInt();
-  vx[1] = x2.toInt();
-  vx[2] = x3.toInt();
-  vy[0] = y1.toInt();
-  vy[1] = y2.toInt();
-  vy[2] = y3.toInt();
+  points[0].x = x1;
+  points[1].x = x2;
+  points[2].x = x3;
+  points[0].y = y1;
+  points[1].y = y2;
+  points[2].y = y3;
 
-  final result = aapolygonColor(
-    renderer,
-    vx,
-    vy,
-    3,
-    color,
-    blendMode: blendMode,
-  );
-  calloc
-    ..free(vx)
-    ..free(vy);
-
+  final result = aapolygonColor(renderer, points, color, blendMode: blendMode);
   return result;
 }
 
@@ -3731,31 +3636,24 @@ bool aatrigonRgba(
   int a, {
   int blendMode = SDL_BLENDMODE_BLEND,
 }) {
-  final vx = calloc<Int16>(3);
-  final vy = calloc<Int16>(3);
+  final points = List<SdlxFPoint>.generate(3, (index) => SdlxFPoint(0, 0));
 
-  vx[0] = x1.toInt();
-  vx[1] = x2.toInt();
-  vx[2] = x3.toInt();
-  vy[0] = y1.toInt();
-  vy[1] = y2.toInt();
-  vy[2] = y3.toInt();
+  points[0].x = x1;
+  points[1].x = x2;
+  points[2].x = x3;
+  points[0].y = y1;
+  points[1].y = y2;
+  points[2].y = y3;
 
   final result = aapolygonRgba(
     renderer,
-    vx,
-    vy,
-    3,
+    points,
     r,
     g,
     b,
     a,
     blendMode: blendMode,
   );
-  calloc
-    ..free(vx)
-    ..free(vy);
-
   return result;
 }
 
@@ -3785,31 +3683,24 @@ bool filledTrigonColor(
   double y2,
   double x3,
   double y3,
-  int color, {
+  SdlxColor color, {
   int blendMode = SDL_BLENDMODE_BLEND,
 }) {
-  final vx = calloc<Int16>(3);
-  final vy = calloc<Int16>(3);
+  final points = List<SdlxFPoint>.generate(3, (index) => SdlxFPoint(0, 0));
 
-  vx[0] = x1.toInt();
-  vx[1] = x2.toInt();
-  vx[2] = x3.toInt();
-  vy[0] = y1.toInt();
-  vy[1] = y2.toInt();
-  vy[2] = y3.toInt();
+  points[0].x = x1;
+  points[1].x = x2;
+  points[2].x = x3;
+  points[0].y = y1;
+  points[1].y = y2;
+  points[2].y = y3;
 
   final result = filledPolygonColor(
     renderer,
-    vx,
-    vy,
-    3,
+    points,
     color,
     blendMode: blendMode,
   );
-  calloc
-    ..free(vx)
-    ..free(vy);
-
   return result;
 }
 
@@ -3846,31 +3737,24 @@ bool filledTrigonRgba(
   int a, {
   int blendMode = SDL_BLENDMODE_BLEND,
 }) {
-  final vx = calloc<Int16>(3);
-  final vy = calloc<Int16>(3);
+  final points = List<SdlxFPoint>.generate(3, (index) => SdlxFPoint(0, 0));
 
-  vx[0] = x1.toInt();
-  vx[1] = x2.toInt();
-  vx[2] = x3.toInt();
-  vy[0] = y1.toInt();
-  vy[1] = y2.toInt();
-  vy[2] = y3.toInt();
+  points[0].x = x1;
+  points[1].x = x2;
+  points[2].x = x3;
+  points[0].y = y1;
+  points[1].y = y2;
+  points[2].y = y3;
 
   final result = filledPolygonRgba(
     renderer,
-    vx,
-    vy,
-    3,
+    points,
     r,
     g,
     b,
     a,
     blendMode: blendMode,
   );
-  calloc
-    ..free(vx)
-    ..free(vy);
-
   return result;
 }
 
@@ -3889,25 +3773,18 @@ bool filledTrigonRgba(
 */
 bool polygonColor(
   Pointer<SdlRenderer> renderer,
-  Pointer<Int16> vx,
-  Pointer<Int16> vy,
-  int n,
-  int color, {
+  List<SdlxFPoint> points,
+  SdlxColor color, {
   int blendMode = SDL_BLENDMODE_BLEND,
-}) {
-  final co = Uint32List.fromList([color]).buffer.asUint8List();
-  return polygonRgba(
-    renderer,
-    vx,
-    vy,
-    n,
-    co[0],
-    co[1],
-    co[2],
-    co[3],
-    blendMode: blendMode,
-  );
-}
+}) => polygonRgba(
+  renderer,
+  points,
+  color.r,
+  color.g,
+  color.b,
+  color.a,
+  blendMode: blendMode,
+);
 
 /*!
 \brief Draw polygon with the currently set color and blend mode.
@@ -3919,60 +3796,33 @@ bool polygonColor(
 
 \returns Returns 0 on success, -1 on failure.
 */
-bool polygon(
-  Pointer<SdlRenderer> renderer,
-  Pointer<Int16> vx,
-  Pointer<Int16> vy,
-  int n,
-) {
+bool polygon(Pointer<SdlRenderer> renderer, List<SdlxFPoint> points) {
   /*
 	* Draw 
 	*/
   var result = true;
-  int i;
-  int nn;
-
-  /*
-	* Vertex array NULL check 
-	*/
-  if (vx == nullptr) {
-    return false;
-  }
-  if (vy == nullptr) {
-    return false;
-  }
 
   /*
 	* Sanity check 
 	*/
-  if (n < 3) {
+  if (points.length < 3) {
     return false;
   }
 
   /*
 	* Create array of points
 	*/
-  nn = n + 1;
-  final points = calloc<SdlFPoint>(nn);
-  //	points = (SDL_Point*)malloc(sizeof(SDL_Point) * nn);
-  if (points == nullptr) {
-    return false;
+  final renderPoints = <SdlxFPoint>[];
+  for (final point in points) {
+    renderPoints.add(point);
   }
-  for (i = 0; i < n; i++) {
-    points[i].x = vx[i].toDouble();
-    points[i].y = vy[i].toDouble();
-  }
-  points[n].x = vx[0].toDouble();
-  points[n].y = vy[0].toDouble();
-
+  renderPoints.add(points[0]);
   /*
 	* Draw 
 	*/
   if (result) {
-    result = sdlRenderLines(renderer, points, nn);
+    result = sdlxRenderLines(renderer, renderPoints);
   }
-  calloc.free(points);
-
   return result;
 }
 
@@ -3992,9 +3842,7 @@ bool polygon(
 */
 bool polygonRgba(
   Pointer<SdlRenderer> renderer,
-  Pointer<Int16> vx,
-  Pointer<Int16> vy,
-  int n,
+  List<SdlxFPoint> points,
   int r,
   int g,
   int b,
@@ -4007,19 +3855,9 @@ bool polygonRgba(
   var result = true;
 
   /*
-	* Vertex array NULL check 
-	*/
-  if (vx == nullptr) {
-    return false;
-  }
-  if (vy == nullptr) {
-    return false;
-  }
-
-  /*
 	* Sanity check 
 	*/
-  if (n < 3) {
+  if (points.length < 3) {
     return false;
   }
 
@@ -4042,7 +3880,7 @@ bool polygonRgba(
 	* Draw 
 	*/
   if (result) {
-    result = polygon(renderer, vx, vy, n);
+    result = polygon(renderer, points);
   }
 
   return result;
@@ -4063,25 +3901,18 @@ bool polygonRgba(
 */
 bool aapolygonColor(
   Pointer<SdlRenderer> renderer,
-  Pointer<Int16> vx,
-  Pointer<Int16> vy,
-  int n,
-  int color, {
+  List<SdlxFPoint> points,
+  SdlxColor color, {
   int blendMode = SDL_BLENDMODE_BLEND,
-}) {
-  final co = Uint32List.fromList([color]).buffer.asUint8List();
-  return aapolygonRgba(
-    renderer,
-    vx,
-    vy,
-    n,
-    co[0],
-    co[1],
-    co[2],
-    co[3],
-    blendMode: blendMode,
-  );
-}
+}) => aapolygonRgba(
+  renderer,
+  points,
+  color.r,
+  color.g,
+  color.b,
+  color.a,
+  blendMode: blendMode,
+);
 
 /*!
 \brief Draw anti-aliased polygon with alpha blending.
@@ -4099,9 +3930,7 @@ bool aapolygonColor(
 */
 bool aapolygonRgba(
   Pointer<SdlRenderer> renderer,
-  Pointer<Int16> vx,
-  Pointer<Int16> vy,
-  int n,
+  List<SdlxFPoint> points,
   int r,
   int g,
   int b,
@@ -4109,22 +3938,11 @@ bool aapolygonRgba(
   int blendMode = SDL_BLENDMODE_BLEND,
 }) {
   var result = true;
-  int i;
-
-  /*
-	* Vertex array NULL check 
-	*/
-  if (vx == nullptr) {
-    return false;
-  }
-  if (vy == nullptr) {
-    return false;
-  }
 
   /*
 	* Sanity check 
 	*/
-  if (n < 3) {
+  if (points.length < 3) {
     return false;
   }
 
@@ -4136,14 +3954,14 @@ bool aapolygonRgba(
 	* Draw 
 	*/
   result = true;
-  for (i = 1; i < n; i++) {
+  for (var i = 1; i < points.length; i++) {
     if (result) {
       result = _aalineRgba(
         renderer,
-        vx[i - 1].toDouble(),
-        vy[i - 1].toDouble(),
-        vx[i].toDouble(),
-        vy[i].toDouble(),
+        points[i - 1].x,
+        points[i - 1].y,
+        points[i].x,
+        points[i].y,
         r,
         g,
         b,
@@ -4156,10 +3974,10 @@ bool aapolygonRgba(
   if (result) {
     result = _aalineRgba(
       renderer,
-      vx[n - 1].toDouble(),
-      vy[n - 1].toDouble(),
-      vx[0].toDouble(),
-      vy[0].toDouble(),
+      points[points.length - 1].x,
+      points[points.length - 1].y,
+      points[0].x,
+      points[0].y,
       r,
       g,
       b,
@@ -4168,7 +3986,6 @@ bool aapolygonRgba(
       blendMode: blendMode,
     );
   }
-
   return result;
 }
 
@@ -4192,9 +4009,7 @@ Note: The last two parameters are optional; but are required for multithreaded o
 */
 bool filledPolygonRgbaMt(
   Pointer<SdlRenderer> renderer,
-  Pointer<Int16> vx,
-  Pointer<Int16> vy,
-  int n,
+  List<SdlxFPoint> points,
   int r,
   int g,
   int b,
@@ -4203,43 +4018,33 @@ bool filledPolygonRgbaMt(
 }) {
   var result = true;
   int i;
-  int y;
+  double y;
   int xa;
   int xb;
-  int miny;
-  int maxy;
-  int x1;
-  int y1;
-  int x2;
-  int y2;
+  double miny;
+  double maxy;
+  double x1;
+  double y1;
+  double x2;
+  double y2;
   int ind1;
   int ind2;
   final gfxPrimitivesPolyInts = <int>[];
 
   /*
-	* Vertex array NULL check 
-	*/
-  if (vx == nullptr) {
-    return false;
-  }
-  if (vy == nullptr) {
-    return false;
-  }
-
-  /*
 	* Sanity check number of edges
 	*/
-  if (n < 3) {
+  if (points.length < 3) {
     return false;
   }
 
-  miny = vy[0];
-  maxy = vy[0];
-  for (i = 1; (i < n); i++) {
-    if (vy[i] < miny) {
-      miny = vy[i];
-    } else if (vy[i] > maxy) {
-      maxy = vy[i];
+  miny = points[0].y;
+  maxy = points[0].y;
+  for (var i = 1; i < points.length; i++) {
+    if (points[i].y < miny) {
+      miny = points[i].y;
+    } else if (points[i].y > maxy) {
+      maxy = points[i].y;
     }
   }
 
@@ -4249,30 +4054,31 @@ bool filledPolygonRgbaMt(
   result = true;
   for (y = miny; (y <= maxy); y++) {
     gfxPrimitivesPolyInts.clear();
-    for (i = 0; (i < n); i++) {
+    for (i = 0; (i < points.length); i++) {
       if (i == 0) {
-        ind1 = n - 1;
+        ind1 = points.length - 1;
         ind2 = 0;
       } else {
         ind1 = i - 1;
         ind2 = i;
       }
-      y1 = vy[ind1];
-      y2 = vy[ind2];
+      y1 = points[ind1].y;
+      y2 = points[ind2].y;
       if (y1 < y2) {
-        x1 = vx[ind1];
-        x2 = vx[ind2];
+        x1 = points[ind1].x;
+        x2 = points[ind2].x;
       } else if (y1 > y2) {
-        y2 = vy[ind1];
-        y1 = vy[ind2];
-        x2 = vx[ind1];
-        x1 = vx[ind2];
+        y2 = points[ind1].y;
+        y1 = points[ind2].y;
+        x2 = points[ind1].x;
+        x1 = points[ind2].x;
       } else {
         continue;
       }
       if (((y >= y1) && (y < y2)) || ((y == maxy) && (y > y1) && (y <= y2))) {
         gfxPrimitivesPolyInts.add(
-          ((65536 * (y - y1)) ~/ (y2 - y1)) * (x2 - x1) + (65536 * x1),
+          ((65536 * (y - y1)) ~/ (y2 - y1)) * (x2.toInt() - x1.toInt()) +
+              (65536 * x1.toInt()),
         );
       }
     }
@@ -4293,7 +4099,7 @@ bool filledPolygonRgbaMt(
       xb = gfxPrimitivesPolyInts[i + 1] - 1;
       xb = (xb >> 16) + ((xb & 32768) >> 15);
       if (result) {
-        result = hline(renderer, xa.toDouble(), xb.toDouble(), y.toDouble());
+        result = hline(renderer, xa.toDouble(), xb.toDouble(), y);
       }
     }
   }
@@ -4313,25 +4119,18 @@ bool filledPolygonRgbaMt(
 */
 bool filledPolygonColor(
   Pointer<SdlRenderer> renderer,
-  Pointer<Int16> vx,
-  Pointer<Int16> vy,
-  int n,
-  int color, {
+  List<SdlxFPoint> points,
+  SdlxColor color, {
   int blendMode = SDL_BLENDMODE_BLEND,
-}) {
-  final co = Uint32List.fromList([color]).buffer.asUint8List();
-  return filledPolygonRgbaMt(
-    renderer,
-    vx,
-    vy,
-    n,
-    co[0],
-    co[1],
-    co[2],
-    co[3],
-    blendMode: blendMode,
-  );
-}
+}) => filledPolygonRgbaMt(
+  renderer,
+  points,
+  color.r,
+  color.g,
+  color.b,
+  color.a,
+  blendMode: blendMode,
+);
 
 /*!
 \brief Draw filled polygon with alpha blending.
@@ -4349,16 +4148,13 @@ bool filledPolygonColor(
 */
 bool filledPolygonRgba(
   Pointer<SdlRenderer> renderer,
-  Pointer<Int16> vx,
-  Pointer<Int16> vy,
-  int n,
+  List<SdlxFPoint> points,
   int r,
   int g,
   int b,
   int a, {
   int blendMode = SDL_BLENDMODE_BLEND,
-}) =>
-    filledPolygonRgbaMt(renderer, vx, vy, n, r, g, b, a, blendMode: blendMode);
+}) => filledPolygonRgbaMt(renderer, points, r, g, b, a, blendMode: blendMode);
 
 /* ---- Textured Polygon */
 
@@ -4497,26 +4293,24 @@ to the left and want the texture to apear the same you need to increase the text
 */
 bool texturedPolygonMt(
   Pointer<SdlRenderer> renderer,
-  Pointer<Int16> vx,
-  Pointer<Int16> vy,
-  int n,
+  List<SdlxFPoint> points,
   Pointer<SdlSurface> texture,
   int textureDx,
   int textureDy,
 ) {
   var result = true;
   int i;
-  int y;
+  double y;
   int xa;
   int xb;
-  int minx;
-  int maxx;
-  int miny;
-  int maxy;
-  int x1;
-  int y1;
-  int x2;
-  int y2;
+  double minx;
+  double maxx;
+  double miny;
+  double maxy;
+  double x1;
+  double y1;
+  double x2;
+  double y2;
   int ind1;
   int ind2;
   final gfxPrimitivesPolyInts = <int>[];
@@ -4525,47 +4319,27 @@ bool texturedPolygonMt(
   /*
 	* Sanity check number of edges
 	*/
-  if (n < 3) {
+  if (points.length < 3) {
     return false;
   }
 
   /*
-	* Map polygon cache  
-	*/
-
-  /*
-	* Allocate temp array, only grow array 
-	*/
-
-  /*
-	* Check temp array
-	*/
-
-  /*
-	* Update cache variables
-	*/
-
-  /*
-	* Check temp array again
-	*/
-
-  /*
 	* Determine X,Y minima,maxima 
 	*/
-  miny = vy[0];
-  maxy = vy[0];
-  minx = vx[0];
-  maxx = vx[0];
-  for (i = 1; (i < n); i++) {
-    if (vy[i] < miny) {
-      miny = vy[i];
-    } else if (vy[i] > maxy) {
-      maxy = vy[i];
+  miny = points[0].y;
+  maxy = points[0].y;
+  minx = points[0].x;
+  maxx = points[0].x;
+  for (i = 1; (i < points.length); i++) {
+    if (points[i].y < miny) {
+      miny = points[i].y;
+    } else if (points[i].y > maxy) {
+      maxy = points[i].y;
     }
-    if (vx[i] < minx) {
-      minx = vx[i];
-    } else if (vx[i] > maxx) {
-      maxx = vx[i];
+    if (points[i].x < minx) {
+      minx = points[i].x;
+    } else if (points[i].x > maxx) {
+      maxx = points[i].x;
     }
   }
 
@@ -4582,30 +4356,31 @@ bool texturedPolygonMt(
   result = true;
   for (y = miny; (y <= maxy); y++) {
     gfxPrimitivesPolyInts.clear();
-    for (i = 0; (i < n); i++) {
+    for (i = 0; (i < points.length); i++) {
       if (i == 0) {
-        ind1 = n - 1;
+        ind1 = points.length - 1;
         ind2 = 0;
       } else {
         ind1 = i - 1;
         ind2 = i;
       }
-      y1 = vy[ind1];
-      y2 = vy[ind2];
+      y1 = points[ind1].y;
+      y2 = points[ind2].y;
       if (y1 < y2) {
-        x1 = vx[ind1];
-        x2 = vx[ind2];
+        x1 = points[ind1].x;
+        x2 = points[ind2].x;
       } else if (y1 > y2) {
-        y2 = vy[ind1];
-        y1 = vy[ind2];
-        x2 = vx[ind1];
-        x1 = vx[ind2];
+        y2 = points[ind1].y;
+        y1 = points[ind2].y;
+        x2 = points[ind1].x;
+        x1 = points[ind2].x;
       } else {
         continue;
       }
       if (((y >= y1) && (y < y2)) || ((y == maxy) && (y > y1) && (y <= y2))) {
         gfxPrimitivesPolyInts.add(
-          ((65536 * (y - y1)) ~/ (y2 - y1)) * (x2 - x1) + (65536 * x1),
+          ((65536 * (y - y1)) ~/ (y2 - y1)) * (x2.toInt() - x1.toInt()) +
+              (65536 * x1.toInt()),
         );
       }
     }
@@ -4621,7 +4396,7 @@ bool texturedPolygonMt(
           renderer,
           xa.toDouble(),
           xb.toDouble(),
-          y.toDouble(),
+          y,
           textureAsTexture,
           texture.ref.w,
           texture.ref.h,
@@ -4656,13 +4431,11 @@ to the left and want the texture to apear the same you need to increase the text
 */
 bool texturedPolygon(
   Pointer<SdlRenderer> renderer,
-  Pointer<Int16> vx,
-  Pointer<Int16> vy,
-  int n,
+  List<SdlxFPoint> points,
   Pointer<SdlSurface> texture,
   int textureDx,
   int textureDy,
-) => texturedPolygonMt(renderer, vx, vy, n, texture, textureDx, textureDy);
+) => texturedPolygonMt(renderer, points, texture, textureDx, textureDy);
 
 /*!
 \brief Sets or resets the current global font data.
@@ -4931,11 +4704,8 @@ bool characterColor(
   double x,
   double y,
   int c,
-  int color,
-) {
-  final co = Uint32List.fromList([color]).buffer.asUint8List();
-  return characterRgba(renderer, x, y, c, co[0], co[1], co[2], co[3]);
-}
+  SdlxColor color,
+) => characterRgba(renderer, x, y, c, color.r, color.g, color.b, color.a);
 
 /*!
 \brief Draw a string in the currently set font.
@@ -4956,11 +4726,8 @@ bool stringColor(
   double x,
   double y,
   String s,
-  int color,
-) {
-  final co = Uint32List.fromList([color]).buffer.asUint8List();
-  return stringRgba(renderer, x, y, s, co[0], co[1], co[2], co[3]);
-}
+  SdlxColor color,
+) => stringRgba(renderer, x, y, s, color.r, color.g, color.b, color.a);
 
 /*!
 \brief Draw a string in the currently set font.
@@ -5095,27 +4862,20 @@ double _evaluateBezier(List<double> data, int ndata, double t) {
 */
 bool bezierColor(
   Pointer<SdlRenderer> renderer,
-  Pointer<Int16> vx,
-  Pointer<Int16> vy,
-  int n,
+  List<SdlxFPoint> points,
   int s,
-  int color, {
+  SdlxColor color, {
   int blendMode = SDL_BLENDMODE_BLEND,
-}) {
-  final co = Uint32List.fromList([color]).buffer.asUint8List();
-  return bezierRgba(
-    renderer,
-    vx,
-    vy,
-    n,
-    s,
-    co[0],
-    co[1],
-    co[2],
-    co[3],
-    blendMode: blendMode,
-  );
-}
+}) => bezierRgba(
+  renderer,
+  points,
+  s,
+  color.r,
+  color.g,
+  color.b,
+  color.a,
+  blendMode: blendMode,
+);
 
 /*!
 \brief Draw a bezier curve with alpha blending.
@@ -5134,9 +4894,7 @@ bool bezierColor(
 */
 bool bezierRgba(
   Pointer<SdlRenderer> renderer,
-  Pointer<Int16> vx,
-  Pointer<Int16> vy,
-  int n,
+  List<SdlxFPoint> points,
   int s,
   int r,
   int g,
@@ -5158,7 +4916,7 @@ bool bezierRgba(
   /*
 	* Sanity check 
 	*/
-  if (n < 3) {
+  if (points.length < 3) {
     return false;
   }
   if (s < 2) {
@@ -5171,12 +4929,12 @@ bool bezierRgba(
   stepsize = 1.0 / s;
 
   /* Transfer vertices into float arrays */
-  for (i = 0; i < n; i++) {
-    x.add(vx[i].toDouble());
-    y.add(vy[i].toDouble());
+  for (i = 0; i < points.length; i++) {
+    x.add(points[i].x);
+    y.add(points[i].y);
   }
-  x.add(vx[0].toDouble());
-  y.add(vy[0].toDouble());
+  x.add(points[0].x);
+  y.add(points[0].y);
 
   /*
 	* Set color 
@@ -5193,12 +4951,12 @@ bool bezierRgba(
 	* Draw 
 	*/
   t = 0.0;
-  x1 = _evaluateBezier(x, n + 1, t).toInt();
-  y1 = _evaluateBezier(y, n + 1, t).toInt();
-  for (i = 0; i <= (n * s); i++) {
+  x1 = _evaluateBezier(x, points.length + 1, t).toInt();
+  y1 = _evaluateBezier(y, points.length + 1, t).toInt();
+  for (i = 0; i <= (points.length * s); i++) {
     t += stepsize;
-    x2 = _evaluateBezier(x, n, t).toInt();
-    y2 = _evaluateBezier(y, n, t).toInt();
+    x2 = _evaluateBezier(x, points.length, t).toInt();
+    y2 = _evaluateBezier(y, points.length, t).toInt();
     if (result) {
       result = line(
         renderer,
@@ -5211,10 +4969,6 @@ bool bezierRgba(
     x1 = x2;
     y1 = y2;
   }
-
-  /* Clean up temporary array */
-  //free(x);
-  //free(y);
 
   return result;
 }
@@ -5239,24 +4993,21 @@ bool thickLineColor(
   double x2,
   double y2,
   double width,
-  int color, {
+  SdlxColor color, {
   int blendMode = SDL_BLENDMODE_BLEND,
-}) {
-  final co = Uint32List.fromList([color]).buffer.asUint8List();
-  return thickLineRgba(
-    renderer,
-    x1,
-    y1,
-    x2,
-    y2,
-    width,
-    co[0],
-    co[1],
-    co[2],
-    co[3],
-    blendMode: blendMode,
-  );
-}
+}) => thickLineRgba(
+  renderer,
+  x1,
+  y1,
+  x2,
+  y2,
+  width,
+  color.r,
+  color.g,
+  color.b,
+  color.a,
+  blendMode: blendMode,
+);
 
 /*!
 \brief Draw a thick line with alpha blending.
@@ -5300,8 +5051,7 @@ bool thickLineRgba(
   double ny;
   double ang;
   double adj;
-  final px = calloc<Int16>(4);
-  final py = calloc<Int16>(4);
+  final points = List<SdlxFPoint>.generate(4, (index) => SdlxFPoint(0, 0));
 
   if (renderer == nullptr) {
     return false;
@@ -5347,31 +5097,25 @@ bool thickLineRgba(
   dy1 = y1;
   dx2 = x2;
   dy2 = y2;
-  px[0] = (dx1 + ny).toInt();
-  px[1] = (dx1 - ny).toInt();
-  px[2] = (dx2 - ny).toInt();
-  px[3] = (dx2 + ny).toInt();
-  py[0] = (dy1 - nx).toInt();
-  py[1] = (dy1 + nx).toInt();
-  py[2] = (dy2 + nx).toInt();
-  py[3] = (dy2 - nx).toInt();
+  points[0].x = dx1 + ny;
+  points[1].x = dx1 - ny;
+  points[2].x = dx2 - ny;
+  points[3].x = dx2 + ny;
+  points[0].y = dy1 - nx;
+  points[1].y = dy1 + nx;
+  points[2].y = dy2 + nx;
+  points[3].y = dy2 - nx;
 
   /* Draw polygon */
   final result = filledPolygonRgba(
     renderer,
-    px,
-    py,
-    4,
+    points,
     r,
     g,
     b,
     a,
     blendMode: blendMode,
   );
-  calloc
-    ..free(px)
-    ..free(py);
-
   return result;
 }
 

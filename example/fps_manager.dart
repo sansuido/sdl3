@@ -1,5 +1,4 @@
 import 'dart:ffi';
-import 'dart:math';
 import 'package:ffi/ffi.dart';
 import 'package:sdl3/sdl3.dart';
 import 'package:sdl3/sdl3gfx.dart' as gfx;
@@ -71,13 +70,9 @@ int main() {
       frameCount++;
     }
     renderer
-      ..setDrawColor(0, 0, 0, 0)
+      ..setDrawColor(SdlxColor(0, 0, 0))
       ..clear()
-      ..stringColor(
-        const Point(15, 15),
-        'FPS:$frameRate',
-        SdlColorEx.rgbaToU32(0, 255, 0, 255),
-      )
+      ..stringColor(SdlxFPoint(15, 15), 'FPS:$frameRate', SdlxColor(0, 255, 0))
       ..present();
   }
   gfx.gfxFree();

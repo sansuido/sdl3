@@ -198,7 +198,7 @@ bool sdlHasPrimarySelectionText() {
 /// \sa SDL_HasClipboardData
 ///
 /// ```c
-/// extern SDL_DECLSPEC bool SDLCALL SDL_SetClipboardData(SDL_ClipboardDataCallback callback, SDL_ClipboardCleanupCallback cleanup, void *userdata, const char **mime_types, size_t num_mime_types)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetClipboardData(SDL_ClipboardDataCallback callback, SDL_ClipboardCleanupCallback cleanup, void *userdata, const char *const *mime_types, size_t num_mime_types)
 /// ```
 /// {@category clipboard}
 bool sdlSetClipboardData(

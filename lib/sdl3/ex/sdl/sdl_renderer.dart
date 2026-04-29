@@ -1,44 +1,5 @@
 part of '../../sdl.dart';
 
-///
-/// Set sampler bindings variables in a custom GPU render state.
-///
-/// The data is copied and will be binded using SDL_BindGPUFragmentSamplers()
-/// during draw call execution.
-///
-/// \param state the state to modify.
-/// \param num_sampler_bindings The number of additional fragment samplers to
-/// bind.
-/// \param sampler_bindings Additional fragment samplers to bind.
-/// \returns true on success or false on failure; call SDL_GetError() for more
-/// information.
-///
-/// \threadsafety This function should be called on the thread that created the
-/// renderer.
-///
-/// \since This function is available since SDL 3.6.0.
-///
-/// ```c
-/// extern SDL_DECLSPEC bool SDLCALL SDL_SetGPURenderStateSamplerBindings(SDL_GPURenderState *state, int num_sampler_bindings, const SDL_GPUTextureSamplerBinding *sampler_bindings)
-/// ```
-/// {@category render}
-bool sdlxSetGpuRenderStateSamplerBindings(
-  Pointer<SdlGpuRenderState> state, {
-  required List<SdlxGpuTextureSamplerBinding> bindings,
-}) {
-  var result = false;
-  if (bindings.isNotEmpty) {
-    final bindingsPointer = bindings.calloc();
-    result = sdlSetGpuRenderStateSamplerBindings(
-      state,
-      bindings.length,
-      bindingsPointer,
-    );
-    bindingsPointer.callocFree();
-  }
-  return result;
-}
-
 extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   // lib_sdl_renderer.dart
 
@@ -176,19 +137,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderOutputSize(SDL_Renderer *renderer, int *w, int *h)
   /// ```
   /// {@category render}
-  math.Point<double> getOutputSize() {
-    final wPointer = calloc<Int32>();
-    final hPointer = calloc<Int32>();
-    sdlGetRenderOutputSize(this, wPointer, hPointer);
-    final result = math.Point<double>(
-      wPointer.value.toDouble(),
-      hPointer.value.toDouble(),
-    );
-    calloc
-      ..free(wPointer)
-      ..free(hPointer);
-    return result;
-  }
+  bool getOutputSize(SdlxPoint size) => sdlxGetRenderOutputSize(this, size);
 
   ///
   /// Get the current output size in pixels of a rendering context.
@@ -215,19 +164,8 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetCurrentRenderOutputSize(SDL_Renderer *renderer, int *w, int *h)
   /// ```
   /// {@category render}
-  math.Point<double> getCurrentOutputSize() {
-    final wPointer = calloc<Int32>();
-    final hPointer = calloc<Int32>();
-    sdlGetCurrentRenderOutputSize(this, wPointer, hPointer);
-    final result = math.Point<double>(
-      wPointer.value.toDouble(),
-      hPointer.value.toDouble(),
-    );
-    calloc
-      ..free(wPointer)
-      ..free(hPointer);
-    return result;
-  }
+  bool getCurrentOutputSize(SdlxPoint size) =>
+      sdlxGetCurrentRenderOutputSize(this, size);
 
   ///
   /// Create a texture for a rendering context.
@@ -527,8 +465,8 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetRenderLogicalPresentation(SDL_Renderer *renderer, int w, int h, SDL_RendererLogicalPresentation mode)
   /// ```
   /// {@category render}
-  bool setLogicalPresentation(int w, int h, int mode) =>
-      sdlSetRenderLogicalPresentation(this, w, h, mode);
+  bool setLogicalPresentation(SdlxRenderLogicalPresentationInfo info) =>
+      sdlxSetRenderLogicalPresentation(this, info);
 
   ///
   /// Get device independent resolution and presentation mode for rendering.
@@ -557,94 +495,8 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderLogicalPresentation(SDL_Renderer *renderer, int *w, int *h, SDL_RendererLogicalPresentation *mode)
   /// ```
   /// {@category render}
-  bool getLogicalPresentation(
-    Pointer<Int32> w,
-    Pointer<Int32> h,
-    Pointer<Int32> mode,
-  ) => sdlGetRenderLogicalPresentation(this, w, h, mode);
-
-  ///
-  /// Get device independent resolution and presentation mode for rendering.
-  ///
-  /// This function gets the width and height of the logical rendering output, or
-  /// 0 if a logical resolution is not enabled.
-  ///
-  /// Each render target has its own logical presentation state. This function
-  /// gets the state for the current render target.
-  ///
-  /// \param renderer the rendering context.
-  /// \param w an int filled with the logical presentation width.
-  /// \param h an int filled with the logical presentation height.
-  /// \param mode a variable filled with the logical presentation mode being
-  /// used.
-  /// \returns true on success or false on failure; call SDL_GetError() for more
-  /// information.
-  ///
-  /// \threadsafety This function should only be called on the main thread.
-  ///
-  /// \since This function is available since SDL 3.2.0.
-  ///
-  /// \sa SDL_SetRenderLogicalPresentation
-  ///
-  /// ```c
-  /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderLogicalPresentation(SDL_Renderer *renderer, int *w, int *h, SDL_RendererLogicalPresentation *mode)
-  /// ```
-  /// {@category render}
-  math.Point<double> getLogicalSize() {
-    final wPointer = calloc<Int32>();
-    final hPointer = calloc<Int32>();
-    final modePointer = calloc<Int32>();
-    sdlGetRenderLogicalPresentation(this, wPointer, hPointer, modePointer);
-    final result = math.Point<double>(
-      wPointer.value.toDouble(),
-      hPointer.value.toDouble(),
-    );
-    calloc
-      ..free(wPointer)
-      ..free(hPointer)
-      ..free(modePointer);
-    return result;
-  }
-
-  ///
-  /// Get device independent resolution and presentation mode for rendering.
-  ///
-  /// This function gets the width and height of the logical rendering output, or
-  /// 0 if a logical resolution is not enabled.
-  ///
-  /// Each render target has its own logical presentation state. This function
-  /// gets the state for the current render target.
-  ///
-  /// \param renderer the rendering context.
-  /// \param w an int filled with the logical presentation width.
-  /// \param h an int filled with the logical presentation height.
-  /// \param mode a variable filled with the logical presentation mode being
-  /// used.
-  /// \returns true on success or false on failure; call SDL_GetError() for more
-  /// information.
-  ///
-  /// \threadsafety This function should only be called on the main thread.
-  ///
-  /// \since This function is available since SDL 3.2.0.
-  ///
-  /// \sa SDL_SetRenderLogicalPresentation
-  ///
-  /// ```c
-  /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderLogicalPresentation(SDL_Renderer *renderer, int *w, int *h, SDL_RendererLogicalPresentation *mode)
-  /// ```
-  /// {@category render}
-  int getLogicalMode() {
-    final wPointer = calloc<Int32>();
-    final hPointer = calloc<Int32>();
-    final modePointer = calloc<Int32>();
-    sdlGetRenderLogicalPresentation(this, wPointer, hPointer, modePointer);
-    final result = modePointer.value;
-    calloc
-      ..free(wPointer)
-      ..free(hPointer)
-      ..free(modePointer);
-    return result;
-  }
+  bool getLogicalPresentation(SdlxRenderLogicalPresentationInfo info) =>
+      sdlxGetRenderLogicalPresentation(this, info);
 
   ///
   /// Get a point in render coordinates when given a point in window coordinates.
@@ -675,16 +527,14 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderCoordinatesFromWindow(SDL_Renderer *renderer, float window_x, float window_y, float *x, float *y)
   /// ```
   /// {@category render}
-  math.Point<double> coordinatesFromWindow(double windowX, double windowY) {
-    final xPointer = calloc<Float>();
-    final yPointer = calloc<Float>();
-    sdlRenderCoordinatesFromWindow(this, windowX, windowY, xPointer, yPointer);
-    final result = math.Point<double>(xPointer.value, yPointer.value);
-    calloc
-      ..free(xPointer)
-      ..free(yPointer);
-    return result;
-  }
+  bool coordinatesFromWindow({
+    required SdlxFPoint windowPosition,
+    required SdlxFPoint renderPosition,
+  }) => sdlxRenderCoordinatesFromWindow(
+    this,
+    windowPosition: windowPosition,
+    renderPosition: renderPosition,
+  );
 
   ///
   /// Get a point in window coordinates when given a point in render coordinates.
@@ -718,19 +568,14 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderCoordinatesToWindow(SDL_Renderer *renderer, float x, float y, float *window_x, float *window_y)
   /// ```
   /// {@category render}
-  math.Point<double> coordinatesToWindow(double x, double y) {
-    final windowXPointer = calloc<Float>();
-    final windowYPointer = calloc<Float>();
-    sdlRenderCoordinatesToWindow(this, x, y, windowXPointer, windowYPointer);
-    final result = math.Point<double>(
-      windowXPointer.value,
-      windowYPointer.value,
-    );
-    calloc
-      ..free(windowXPointer)
-      ..free(windowYPointer);
-    return result;
-  }
+  bool coordinatesToWindow({
+    required SdlxFPoint renderPosition,
+    required SdlxFPoint windowPosition,
+  }) => sdlxRenderCoordinatesToWindow(
+    this,
+    renderPosition: renderPosition,
+    windowPosition: windowPosition,
+  );
 
   ///
   /// Convert the coordinates in an event to render coordinates.
@@ -802,15 +647,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetRenderViewport(SDL_Renderer *renderer, const SDL_Rect *rect)
   /// ```
   /// {@category render}
-  bool setViewport([math.Rectangle<double>? rect]) {
-    Pointer<SdlRect> rectPointer = nullptr;
-    if (rect != null) {
-      rectPointer = rect.callocInt();
-    }
-    final result = sdlSetRenderViewport(this, rectPointer);
-    calloc.free(rectPointer);
-    return result;
-  }
+  bool setVierport(SdlxRect? rect) => sdlxSetRenderViewport(this, rect);
 
   ///
   /// Get the drawing area for the current target.
@@ -834,13 +671,33 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderViewport(SDL_Renderer *renderer, SDL_Rect *rect)
   /// ```
   /// {@category render}
-  math.Rectangle<double> getViewport() {
-    final rectPointer = calloc<SdlRect>();
-    sdlGetRenderViewport(this, rectPointer);
-    final result = rectPointer.create();
-    calloc.free(rectPointer);
-    return result;
-  }
+  bool getViewport(SdlxRect rect) => sdlxGetRenderViewport(this, rect);
+
+  ///
+  /// Get the safe area for rendering within the current viewport.
+  ///
+  /// Some devices have portions of the screen which are partially obscured or
+  /// not interactive, possibly due to on-screen controls, curved edges, camera
+  /// notches, TV overscan, etc. This function provides the area of the current
+  /// viewport which is safe to have interactible content. You should continue
+  /// rendering into the rest of the render target, but it should not contain
+  /// visually important or interactible content.
+  ///
+  /// \param renderer the rendering context.
+  /// \param rect a pointer filled in with the area that is safe for interactive
+  /// content.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
+  ///
+  /// \threadsafety This function should only be called on the main thread.
+  ///
+  /// \since This function is available since SDL 3.2.0.
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderSafeArea(SDL_Renderer *renderer, SDL_Rect *rect)
+  /// ```
+  /// {@category render}
+  bool getSafeArea(SdlxRect rect) => sdlxGetRenderSafeArea(this, rect);
 
   ///
   /// Set the clip rectangle for rendering on the specified target.
@@ -865,15 +722,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetRenderClipRect(SDL_Renderer *renderer, const SDL_Rect *rect)
   /// ```
   /// {@category render}
-  bool setClipRect([math.Rectangle<double>? rect]) {
-    Pointer<SdlRect> rectPointer = nullptr;
-    if (rect != null) {
-      rectPointer = rect.callocInt();
-    }
-    final result = sdlSetRenderClipRect(this, rectPointer);
-    calloc.free(rectPointer);
-    return result;
-  }
+  bool setClipRect(SdlxRect? rect) => sdlxSetRenderClipRect(this, rect);
 
   ///
   /// Get the clip rectangle for the current target.
@@ -898,13 +747,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderClipRect(SDL_Renderer *renderer, SDL_Rect *rect)
   /// ```
   /// {@category render}
-  math.Rectangle<double> getClipRect() {
-    final rectPointer = calloc<SdlRect>();
-    sdlGetRenderClipRect(this, rectPointer);
-    final result = rectPointer.create();
-    calloc.free(rectPointer);
-    return result;
-  }
+  bool getClipRect(SdlxRect rect) => sdlxGetRenderClipRect(this, rect);
 
   ///
   /// Get whether clipping is enabled on the given render target.
@@ -959,8 +802,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetRenderScale(SDL_Renderer *renderer, float scaleX, float scaleY)
   /// ```
   /// {@category render}
-  bool setScale(double scaleX, double scaleY) =>
-      sdlSetRenderScale(this, scaleX, scaleY);
+  bool setScale(SdlxFPoint scale) => sdlxSetRenderScale(this, scale);
 
   ///
   /// Get the drawing scale for the current target.
@@ -984,16 +826,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderScale(SDL_Renderer *renderer, float *scaleX, float *scaleY)
   /// ```
   /// {@category render}
-  math.Point<double> getScale() {
-    final scaleXPointer = calloc<Float>();
-    final scaleYPointer = calloc<Float>();
-    sdlGetRenderScale(this, scaleXPointer, scaleYPointer);
-    final result = math.Point<double>(scaleXPointer.value, scaleYPointer.value);
-    calloc
-      ..free(scaleXPointer)
-      ..free(scaleYPointer);
-    return result;
-  }
+  bool getScale(SdlxFPoint scale) => sdlxGetRenderScale(this, scale);
 
   ///
   /// Set the color used for drawing operations.
@@ -1022,8 +855,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetRenderDrawColor(SDL_Renderer *renderer, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
   /// ```
   /// {@category render}
-  bool setDrawColor(int r, int g, int b, int a) =>
-      sdlSetRenderDrawColor(this, r, g, b, a);
+  bool setDrawColor(SdlxColor color) => sdlxSetRenderDrawColor(this, color);
 
   ///
   /// Set the color used for drawing operations (Rect, Line and Clear).
@@ -1052,8 +884,8 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetRenderDrawColorFloat(SDL_Renderer *renderer, float r, float g, float b, float a)
   /// ```
   /// {@category render}
-  bool setDrawColorFloat(double r, double g, double b, double a) =>
-      sdlSetRenderDrawColorFloat(this, r, g, b, a);
+  bool setDrawColorFloat(SdlxFColor color) =>
+      sdlxSetRenderDrawColorFloat(this, color);
 
   ///
   /// Get the color used for drawing operations (Rect, Line and Clear).
@@ -1081,29 +913,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderDrawColor(SDL_Renderer *renderer, Uint8 *r, Uint8 *g, Uint8 *b, Uint8 *a)
   /// ```
   /// {@category render}
-  bool getDrawColor(Pointer<SdlColor> color) {
-    final rPointer = calloc<Uint8>();
-    final gPointer = calloc<Uint8>();
-    final bPointer = calloc<Uint8>();
-    final aPointer = calloc<Uint8>();
-    final result = sdlGetRenderDrawColor(
-      this,
-      rPointer,
-      gPointer,
-      bPointer,
-      aPointer,
-    );
-    color.ref.r = rPointer.value;
-    color.ref.g = gPointer.value;
-    color.ref.b = bPointer.value;
-    color.ref.a = aPointer.value;
-    calloc
-      ..free(rPointer)
-      ..free(gPointer)
-      ..free(bPointer)
-      ..free(aPointer);
-    return result;
-  }
+  bool getDrawColor(SdlxColor color) => sdlxGetRenderDrawColor(this, color);
 
   ///
   /// Get the color used for drawing operations (Rect, Line and Clear).
@@ -1131,29 +941,8 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderDrawColorFloat(SDL_Renderer *renderer, float *r, float *g, float *b, float *a)
   /// ```
   /// {@category render}
-  bool getDrawColorFloat(Pointer<SdlFColor> color) {
-    final rPointer = calloc<Float>();
-    final gPointer = calloc<Float>();
-    final bPointer = calloc<Float>();
-    final aPointer = calloc<Float>();
-    final result = sdlGetRenderDrawColorFloat(
-      this,
-      rPointer,
-      gPointer,
-      bPointer,
-      aPointer,
-    );
-    color.ref.r = rPointer.value;
-    color.ref.g = gPointer.value;
-    color.ref.b = bPointer.value;
-    color.ref.a = aPointer.value;
-    calloc
-      ..free(rPointer)
-      ..free(gPointer)
-      ..free(bPointer)
-      ..free(aPointer);
-    return result;
-  }
+  bool getDrawColorFloat(SdlxFColor color) =>
+      sdlxGetRenderDrawColorFloat(this, color);
 
   ///
   /// Set the color scale used for render operations.
@@ -1201,13 +990,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderColorScale(SDL_Renderer *renderer, float *scale)
   /// ```
   /// {@category render}
-  double getColorScale() {
-    final scalePointer = calloc<Float>();
-    sdlGetRenderColorScale(this, scalePointer);
-    final result = scalePointer.value;
-    calloc.free(scalePointer);
-    return result;
-  }
+  double? getColorScale() => sdlxGetRenderColorScale(this);
 
   ///
   /// Set the blend mode used for drawing operations (Fill and Line).
@@ -1250,13 +1033,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderDrawBlendMode(SDL_Renderer *renderer, SDL_BlendMode *blendMode)
   /// ```
   /// {@category render}
-  int getDrawBlendMode() {
-    final blendModePointer = calloc<Uint32>();
-    sdlGetRenderDrawBlendMode(this, blendModePointer);
-    final result = blendModePointer.value;
-    calloc.free(blendModePointer);
-    return result;
-  }
+  int? getDrawBlendMode() => sdlxGetRenderDrawBlendMode(this);
 
   ///
   /// Clear the current rendering target with the drawing color.
@@ -1301,8 +1078,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderPoint(SDL_Renderer *renderer, float x, float y)
   /// ```
   /// {@category render}
-  bool point(math.Point<double> point) =>
-      sdlRenderPoint(this, point.x, point.y);
+  bool point(SdlxFPoint point) => sdlxRenderPoint(this, point);
 
   ///
   /// Draw multiple points on the current rendering target at subpixel precision.
@@ -1323,12 +1099,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderPoints(SDL_Renderer *renderer, const SDL_FPoint *points, int count)
   /// ```
   /// {@category render}
-  bool points(List<math.Point<double>> points) {
-    final pointsPointer = points.calloc();
-    final result = sdlRenderPoints(this, pointsPointer, points.length);
-    calloc.free(pointsPointer);
-    return result;
-  }
+  bool points(List<SdlxFPoint> points) => sdlxRenderPoints(this, points);
 
   ///
   /// Draw a line on the current rendering target at subpixel precision.
@@ -1351,8 +1122,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderLine(SDL_Renderer *renderer, float x1, float y1, float x2, float y2)
   /// ```
   /// {@category render}
-  bool line(math.Point<double> p1, math.Point<double> p2) =>
-      sdlRenderLine(this, p1.x, p1.y, p2.x, p2.y);
+  bool line(SdlxFPoint p1, SdlxFPoint p2) => sdlxRenderLine(this, p1, p2);
 
   ///
   /// Draw a series of connected lines on the current rendering target at
@@ -1374,12 +1144,8 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderLines(SDL_Renderer *renderer, const SDL_FPoint *points, int count)
   /// ```
   /// {@category render}
-  bool lines(List<math.Point<double>> points) {
-    final pointsPointer = points.calloc();
-    final result = sdlRenderLines(this, pointsPointer, points.length);
-    calloc.free(pointsPointer);
-    return result;
-  }
+
+  bool lines(List<SdlxFPoint> points) => sdlxRenderLines(this, points);
 
   ///
   /// Draw a rectangle on the current rendering target at subpixel precision.
@@ -1400,15 +1166,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderRect(SDL_Renderer *renderer, const SDL_FRect *rect)
   /// ```
   /// {@category render}
-  bool rect(math.Rectangle<double>? rect) {
-    Pointer<SdlFRect> rectPointer = nullptr;
-    if (rect != null) {
-      rectPointer = rect.calloc();
-    }
-    final result = sdlRenderRect(this, rectPointer);
-    calloc.free(rectPointer);
-    return result;
-  }
+  bool rect(SdlxFRect? rect) => sdlxRenderRect(this, rect);
 
   ///
   /// Draw some number of rectangles on the current rendering target at subpixel
@@ -1430,12 +1188,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderRects(SDL_Renderer *renderer, const SDL_FRect *rects, int count)
   /// ```
   /// {@category render}
-  bool rects(List<math.Rectangle<double>> rects) {
-    final rectsPointer = rects.calloc();
-    final result = sdlRenderRects(this, rectsPointer, rects.length);
-    calloc.free(rectsPointer);
-    return result;
-  }
+  bool rects(List<SdlxFRect> rects) => sdlxRenderRects(this, rects);
 
   ///
   /// Fill a rectangle on the current rendering target with the drawing color at
@@ -1457,15 +1210,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderFillRect(SDL_Renderer *renderer, const SDL_FRect *rect)
   /// ```
   /// {@category render}
-  bool fillRect([math.Rectangle<double>? rect]) {
-    Pointer<SdlFRect> rectPointer = nullptr;
-    if (rect != null) {
-      rectPointer = rect.calloc();
-    }
-    final result = sdlRenderFillRect(this, rectPointer);
-    calloc.free(rectPointer);
-    return result;
-  }
+  bool fillRect(SdlxFRect? rect) => sdlxRenderFillRect(this, rect);
 
   ///
   /// Fill some number of rectangles on the current rendering target with the
@@ -1487,12 +1232,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderFillRects(SDL_Renderer *renderer, const SDL_FRect *rects, int count)
   /// ```
   /// {@category render}
-  bool fillRects(List<math.Rectangle<double>> rects) {
-    final rectsPointer = rects.calloc();
-    final result = sdlRenderFillRects(this, rectsPointer, rects.length);
-    calloc.free(rectsPointer);
-    return result;
-  }
+  bool fillRects(List<SdlxFRect> rects) => sdlxRenderFillRects(this, rects);
 
   ///
   /// Copy a portion of the texture to the current rendering target at subpixel
@@ -1520,28 +1260,9 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// {@category render}
   bool texture(
     Pointer<SdlTexture> texture, {
-    math.Rectangle<double>? srcrect,
-    math.Rectangle<double>? dstrect,
-  }) {
-    Pointer<SdlFRect> srcrectPointer = nullptr;
-    Pointer<SdlFRect> dstrectPointer = nullptr;
-    if (srcrect != null) {
-      srcrectPointer = srcrect.calloc();
-    }
-    if (dstrect != null) {
-      dstrectPointer = dstrect.calloc();
-    }
-    final result = sdlRenderTexture(
-      this,
-      texture,
-      srcrectPointer,
-      dstrectPointer,
-    );
-    calloc
-      ..free(srcrectPointer)
-      ..free(dstrectPointer);
-    return result;
-  }
+    SdlxFRect? srcrect,
+    SdlxFRect? dstrect,
+  }) => sdlxRenderTexture(this, texture, srcrect: srcrect, dstrect: dstrect);
 
   ///
   /// Copy a portion of the source texture to the current rendering target, with
@@ -1575,39 +1296,20 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// {@category render}
   bool textureRotated(
     Pointer<SdlTexture> texture, {
-    math.Rectangle<double>? srcrect,
-    math.Rectangle<double>? dstrect,
+    SdlxFRect? srcrect,
+    SdlxFRect? dstrect,
     double angle = 0,
-    math.Point<double>? center,
-    int flip = SDL_FLIP_NONE,
-  }) {
-    Pointer<SdlFRect> srcrectPointer = nullptr;
-    Pointer<SdlFRect> dstrectPointer = nullptr;
-    Pointer<SdlFPoint> centerPointer = nullptr;
-    if (srcrect != null) {
-      srcrectPointer = srcrect.calloc();
-    }
-    if (dstrect != null) {
-      dstrectPointer = dstrect.calloc();
-    }
-    if (center != null) {
-      centerPointer = center.calloc();
-    }
-    final result = sdlRenderTextureRotated(
-      this,
-      texture,
-      srcrectPointer,
-      dstrectPointer,
-      angle,
-      centerPointer,
-      flip,
-    );
-    calloc
-      ..free(srcrectPointer)
-      ..free(dstrectPointer)
-      ..free(centerPointer);
-    return result;
-  }
+    SdlxFPoint? center,
+    int flip = SdlkFlip.none,
+  }) => sdlxRenderTextureRotated(
+    this,
+    texture,
+    srcrect: srcrect,
+    dstrect: dstrect,
+    angle: angle,
+    center: center,
+    flip: flip,
+  );
 
   ///
   /// Copy a portion of the source texture to the current rendering target, with
@@ -1641,42 +1343,18 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// {@category render}
   bool textureAffine(
     Pointer<SdlTexture> texture, {
-    math.Rectangle<double>? srcrect,
-    math.Point<double>? origin,
-    math.Point<double>? right,
-    math.Point<double>? down,
-  }) {
-    Pointer<SdlFRect> srcrectPointer = nullptr;
-    Pointer<SdlFPoint> originPointer = nullptr;
-    Pointer<SdlFPoint> rightPointer = nullptr;
-    Pointer<SdlFPoint> downPointer = nullptr;
-    if (srcrect != null) {
-      srcrectPointer = srcrect.calloc();
-    }
-    if (origin != null) {
-      originPointer = origin.calloc();
-    }
-    if (right != null) {
-      rightPointer = right.calloc();
-    }
-    if (down != null) {
-      downPointer = down.calloc();
-    }
-    final result = sdlRenderTextureAffine(
-      this,
-      texture,
-      srcrectPointer,
-      originPointer,
-      rightPointer,
-      downPointer,
-    );
-    calloc
-      ..free(srcrectPointer)
-      ..free(originPointer)
-      ..free(rightPointer)
-      ..free(downPointer);
-    return result;
-  }
+    SdlxFRect? srcrect,
+    SdlxFPoint? origin,
+    SdlxFPoint? right,
+    SdlxFPoint? down,
+  }) => sdlxRenderTextureAffine(
+    this,
+    texture,
+    srcrect: srcrect,
+    origin: origin,
+    right: right,
+    down: down,
+  );
 
   ///
   /// Tile a portion of the texture to the current rendering target at subpixel
@@ -1709,30 +1387,16 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// {@category render}
   bool textureTiled(
     Pointer<SdlTexture> texture, {
-    math.Rectangle<double>? srcrect,
-    double scale = 1.0,
-    math.Rectangle<double>? dstrect,
-  }) {
-    Pointer<SdlFRect> srcrectPointer = nullptr;
-    Pointer<SdlFRect> dstrectPointer = nullptr;
-    if (srcrect != null) {
-      srcrectPointer = srcrect.calloc();
-    }
-    if (dstrect != null) {
-      dstrectPointer = dstrect.calloc();
-    }
-    final result = sdlRenderTextureTiled(
-      this,
-      texture,
-      srcrectPointer,
-      scale,
-      dstrectPointer,
-    );
-    calloc
-      ..free(srcrectPointer)
-      ..free(dstrectPointer);
-    return result;
-  }
+    SdlxFRect? srcrect,
+    double scale = 1,
+    SdlxFRect? dstrect,
+  }) => sdlxRenderTextureTiled(
+    this,
+    texture,
+    srcrect: srcrect,
+    scale: scale,
+    dstrect: dstrect,
+  );
 
   ///
   /// Perform a scaled copy using the 9-grid algorithm to the current rendering
@@ -1774,56 +1438,24 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   bool texture9Grid(
     Pointer<SdlRenderer> renderer,
     Pointer<SdlTexture> texture, {
-    math.Rectangle<double>? srcrect,
-    double? width,
-    double? leftWidth,
-    double? rightWidth,
-    double? height,
-    double? topHeight,
-    double? bottomHeight,
-    double scale = 1.0,
-    math.Rectangle<double>? dstrect,
-  }) {
-    Pointer<SdlFRect> srcrectPointer = nullptr;
-    Pointer<SdlFRect> dstrectPointer = nullptr;
-    var rw = rightWidth;
-    var lw = leftWidth;
-    var th = topHeight;
-    var bh = bottomHeight;
-    if (srcrect != null) {
-      srcrectPointer = srcrect.calloc();
-    }
-    if (dstrect != null) {
-      dstrectPointer = dstrect.calloc();
-    }
-    if (width != null) {
-      lw ??= width;
-      rw ??= width;
-    }
-    if (height != null) {
-      th ??= height;
-      bh ??= height;
-    }
-    lw ??= 0.0;
-    rw ??= 0.0;
-    th ??= 0.0;
-    bh ??= 0.0;
-    final result = sdlRenderTexture9Grid(
-      this,
-      texture,
-      srcrectPointer,
-      lw,
-      rw,
-      th,
-      bh,
-      scale,
-      dstrectPointer,
-    );
-    calloc
-      ..free(srcrectPointer)
-      ..free(dstrectPointer);
-    return result;
-  }
+    required double leftWidth,
+    required double rightWidth,
+    required double topHeight,
+    required double bottomHeight,
+    SdlxFRect? srcrect,
+    double scale = 1,
+    SdlxFRect? dstrect,
+  }) => sdlxRenderTexture9Grid(
+    this,
+    texture,
+    leftWidth: leftWidth,
+    rightWidth: rightWidth,
+    topHeight: topHeight,
+    bottomHeight: bottomHeight,
+    srcrect: srcrect,
+    scale: scale,
+    dstrect: dstrect,
+  );
 
   ///
   /// Render a list of triangles, optionally using a texture and indices into the
@@ -1855,19 +1487,10 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```
   /// {@category render}
   bool geometry(
-    Pointer<SdlTexture> texture,
-    Pointer<SdlVertex> vertices,
-    int numVertices,
-    Pointer<Int32> indices,
-    int numIndices,
-  ) => sdlRenderGeometry(
-    this,
-    texture,
-    vertices,
-    numVertices,
-    indices,
-    numIndices,
-  );
+    Pointer<SdlTexture> texture, {
+    List<SdlxVertex>? vertices,
+    List<int>? indices,
+  }) => sdlxRenderGeometry(this, texture, vertices: vertices, indices: indices);
 
   ///
   /// Render a list of triangles, optionally using a texture and indices into the
@@ -1959,12 +1582,8 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// extern SDL_DECLSPEC SDL_Surface * SDLCALL SDL_RenderReadPixels(SDL_Renderer *renderer, const SDL_Rect *rect)
   /// ```
   /// {@category render}
-  Pointer<SdlSurface> readPixels(math.Rectangle<double> rect) {
-    final rectPointer = rect.callocInt();
-    final result = sdlRenderReadPixels(this, rectPointer);
-    calloc.free(rectPointer);
-    return result;
-  }
+  Pointer<SdlSurface> readPixels(SdlxRect? rect) =>
+      sdlxRenderReadPixels(this, rect);
 
   ///
   /// Update the screen with any rendering performed since the previous call.

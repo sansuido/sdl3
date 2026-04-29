@@ -2,7 +2,6 @@
 // 5.シューティング基本
 // 5.Shooting basics
 import 'dart:ffi';
-import 'dart:math';
 import 'package:ffi/ffi.dart';
 import 'package:sdl3/sdl3.dart';
 
@@ -96,15 +95,15 @@ bool handleEvents() {
 void renderer() {
   // init
   gRenderer
-    ..setDrawColor(0x00, 0x00, 0x00, SDL_ALPHA_OPAQUE)
+    ..setDrawColor(SdlxColor(0, 0, 0))
     ..clear()
     // draw player
-    ..setDrawColor(0xff, 0x00, 0x00, SDL_ALPHA_OPAQUE)
-    ..fillRect(Rectangle(gPlayer.x - 24, gPlayer.y - 24, 48, 48))
+    ..setDrawColor(SdlxColor(0xff, 0, 0))
+    ..fillRect(SdlxFRect(x: gPlayer.x - 24, y: gPlayer.y - 24, w: 48, h: 48))
     // shot
-    ..setDrawColor(0xff, 0xff, 0xff, SDL_ALPHA_OPAQUE);
+    ..setDrawColor(SdlxColor(0xff, 0xff, 0xff));
   for (final shot in gShotList) {
-    gRenderer.fillRect(Rectangle(shot.x - 8, shot.y - 8, 16, 16));
+    gRenderer.fillRect(SdlxFRect(x: shot.x - 8, y: shot.y - 8, w: 16, h: 16));
   }
   // term
   gRenderer.present();

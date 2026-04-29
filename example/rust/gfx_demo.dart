@@ -1,6 +1,5 @@
 // https://github.com/Rust-SDL2/rust-sdl2/blob/master/examples/gfx-demo.rs
 import 'dart:ffi';
-import 'dart:math';
 import 'package:ffi/ffi.dart';
 import 'package:sdl3/sdl3.dart';
 import 'package:sdl3/sdl3gfx.dart' as gfx;
@@ -34,7 +33,7 @@ int main() {
   }
   final fpsManager = gfx.FpsManager();
   final event = calloc<SdlEvent>();
-  final clickPoints = <Point<double>>[];
+  final clickPoints = <SdlxFPoint>[];
   var running = true;
   while (running) {
     while (event.poll()) {
@@ -49,7 +48,9 @@ int main() {
         case SDL_EVENT_MOUSE_BUTTON_DOWN:
           switch (event.button.ref.button) {
             case SDL_BUTTON_LEFT:
-              clickPoints.add(PointEx.getMousePosition());
+              final position = SdlxFPoint(0, 0);
+              sdlxGetMouseState(position);
+              clickPoints.add(position);
             case SDL_BUTTON_RIGHT:
               if (clickPoints.isNotEmpty) {
                 clickPoints.removeLast();
@@ -62,16 +63,16 @@ int main() {
       }
     }
     renderer
-      ..setDrawColor(0, 0, 0, 0)
+      ..setDrawColor(SdlxColor(0, 0, 0))
       ..clear()
-      ..filledPolygonColor(clickPoints, SdlColorEx.rgbaToU32(255, 255, 255, 64))
-      ..polygonColor(clickPoints, SdlColorEx.rgbaToU32(255, 255, 255, 255))
-      ..bezierColor(clickPoints, 10, SdlColorEx.rgbaToU32(255, 0, 0, 255));
+      ..filledPolygonColor(clickPoints, SdlxColor(255, 255, 255, 64))
+      ..polygonColor(clickPoints, SdlxColor(255, 255, 255))
+      ..bezierColor(clickPoints, 10, SdlxColor(255, 0, 0));
     for (var n = 0; n < clickPoints.length; n++) {
       renderer.stringColor(
         clickPoints[n],
         (n + 1).toString(),
-        SdlColorEx.rgbaToU32(0, 255, 0, 255),
+        SdlxColor(0, 255, 0),
       );
     }
     renderer.present();

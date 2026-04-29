@@ -35,7 +35,7 @@ int main() {
   const double baseX = 100;
   const double baseY = 240;
   final event = calloc<SdlEvent>();
-  final points = <Point<double>>[];
+  final points = <SdlxFPoint>[];
   const dx = 3.0;
   var zY = 1 / 10.0;
   var coY = 30;
@@ -43,7 +43,7 @@ int main() {
   var t = 0.0;
   var fun = 5;
   for (var i = 0; i < gMaxN; i++) {
-    points.add(const Point(0, 0));
+    points.add(SdlxFPoint(0, 0));
   }
   var running = true;
   while (running) {
@@ -76,45 +76,35 @@ int main() {
       }
     }
     for (var i = 0; i < gMaxN; i++) {
-      points[i] = Point(points[i].x + dx, points[i].y);
+      points[i] = SdlxFPoint(points[i].x + dx, points[i].y);
     }
     for (var i = gMaxN - 1; i > 0; i--) {
-      points[i] = Point(points[i - 1].x, points[i - 1].y);
+      points[i] = SdlxFPoint(points[i - 1].x, points[i - 1].y);
     }
     t += zY;
-    points[0] = Point(baseX, baseY + coY * cos(t));
+    points[0] = SdlxFPoint(baseX, baseY + coY * cos(t));
     tot++;
     if (tot > gMaxN) {
       tot--;
     }
     renderer
-      ..setDrawColor(0, 0, 0, 0)
+      ..setDrawColor(SdlxColor(0, 0, 0))
       ..clear()
-      ..hlineColor(
-        0,
-        gWidth - 1,
-        baseY,
-        SdlColorEx.rgbaToU32(0xff, 0xff, 0xff, 0xff),
-      )
-      ..vlineColor(
-        baseX,
-        0,
-        gHeight - 1,
-        SdlColorEx.rgbaToU32(0xff, 0xff, 0xff, 0xff),
-      );
+      ..hlineColor(0, gWidth - 1, baseY, SdlxColor(0xff, 0xff, 0xff))
+      ..vlineColor(baseX, 0, gHeight - 1, SdlxColor(0xff, 0xff, 0xff));
     for (var i = 0; (i + fun) < tot; i++) {
       renderer.thickLineColor(
         points[i],
         points[i + fun],
         1,
-        SdlColorEx.rgbaToU32(0x00, 0xff, 0x00, 0xff),
+        SdlxColor(0, 255, 0),
       );
     }
     renderer
       ..stringColor(
-        const Point(10, 10),
+        SdlxFPoint(10, 10),
         'coY:$coY zY:$zY fun:$fun',
-        SdlColorEx.rgbaToU32(0x00, 0xff, 0x00, 0xff),
+        SdlxColor(0, 255, 0),
       )
       ..present();
   }

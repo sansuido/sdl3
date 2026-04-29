@@ -23,12 +23,13 @@ int main() {
   sdlSetHint(SDL_HINT_RENDER_VSYNC, '1');
   texture = renderer.loadTexture('assets/jap/gate.png');
   if (texture != nullptr) {
-    final size = texture.getSize();
-    if (size != null) {
+    final size = SdlxFPoint(0, 0);
+    if (texture.getSize(size)) {
       renderer.setLogicalPresentation(
-        size.x.toInt(),
-        size.y.toInt(),
-        SDL_LOGICAL_PRESENTATION_LETTERBOX,
+        SdlxRenderLogicalPresentationInfo()
+          ..w = size.x.toInt()
+          ..h = size.y.toInt()
+          ..mode = SdlkLogicalPresentation.letterbox,
       );
     }
   }

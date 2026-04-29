@@ -1,9 +1,16 @@
 part of '../../sdl.dart';
 
 class SdlxPoint {
-  SdlxPoint({this.x = 0, this.y = 0});
+  SdlxPoint(this.x, this.y);
   int x;
   int y;
+
+  SdlxFPoint toFloat() => SdlxFPoint(x.toDouble(), y.toDouble());
+
+  void loadFromPointer(Pointer<SdlPoint> pointer) {
+    x = pointer.ref.x;
+    y = pointer.ref.y;
+  }
 
   Pointer<SdlPoint> calloc() {
     final pointer = ffi.calloc<SdlPoint>();

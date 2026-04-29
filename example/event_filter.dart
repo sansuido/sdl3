@@ -64,7 +64,7 @@ int main() {
           break;
       }
       renderer
-        ..setDrawColor(0, 0, blue.value, SDL_ALPHA_OPAQUE)
+        ..setDrawColor(SdlxColor(0, 0, blue.value))
         ..clear()
         ..present();
     }

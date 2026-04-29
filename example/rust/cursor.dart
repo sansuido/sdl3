@@ -57,7 +57,7 @@ int main() {
       }
     }
     renderer
-      ..setDrawColor(255, 255, 255, SDL_ALPHA_OPAQUE)
+      ..setDrawColor(SdlxColor(0xff, 0xff, 0xff))
       ..clear()
       ..present();
   }

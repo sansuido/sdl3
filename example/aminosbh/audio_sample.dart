@@ -140,19 +140,19 @@ int main() {
   } else {
     wav.resume();
     final bar = math.min(gScreenWidth, gScreenHeight) / 2;
-    final squareRect = math.Rectangle<double>(
-      gScreenWidth / 2 - bar / 2,
-      gScreenHeight / 2 - bar / 2,
-      bar,
-      bar,
+    final squareRect = SdlxFRect(
+      x: gScreenWidth / 2 - bar / 2,
+      y: gScreenHeight / 2 - bar / 2,
+      w: bar,
+      h: bar,
     );
-    final pauseRect1 = math.Rectangle<double>(
-      squareRect.left + (squareRect.width - 40 * 3) / 2,
-      squareRect.top + squareRect.height / 4,
-      40,
-      squareRect.height / 2,
+    final pauseRect1 = SdlxFRect(
+      x: squareRect.x + (squareRect.w - 40 * 3) / 2,
+      y: squareRect.y + squareRect.h / 4,
+      w: 40,
+      h: squareRect.h / 2,
     );
-    final pauseRect2 = pauseRect1.shift(const math.Point(40 * 2, 0));
+    final pauseRect2 = SdlxFRect.fromRect(pauseRect1)..x += 40 * 2;
     final event = calloc<SdlEvent>();
     var running = true;
     while (running) {
@@ -175,13 +175,13 @@ int main() {
         }
       }
       renderer
-        ..setDrawColor(0xff, 0xff, 0xff, SDL_ALPHA_OPAQUE)
+        ..setDrawColor(SdlxColor(0xff, 0xff, 0xff))
         ..clear()
-        ..setDrawColor(0x19, 0x71, 0xa9, SDL_ALPHA_OPAQUE)
+        ..setDrawColor(SdlxColor(0x19, 0x71, 0xa9))
         ..fillRect(squareRect);
       if (wav.paused()) {
         renderer
-          ..setDrawColor(0xff, 0xff, 0xff, SDL_ALPHA_OPAQUE)
+          ..setDrawColor(SdlxColor(0xff, 0xff, 0xff))
           ..fillRect(pauseRect1)
           ..fillRect(pauseRect2);
       }

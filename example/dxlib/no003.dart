@@ -2,7 +2,6 @@
 // 3.マップ表示基本
 // 3.Map display basics
 import 'dart:ffi';
-import 'dart:math';
 import 'package:ffi/ffi.dart';
 import 'package:sdl3/sdl3.dart';
 
@@ -70,15 +69,15 @@ bool handleEvents() {
 void render() {
   // init
   gRenderer
-    ..setDrawColor(0xff, 0xff, 0xff, SDL_ALPHA_OPAQUE)
+    ..setDrawColor(SdlxColor(0xff, 0xff, 0xff))
     ..clear()
     // map
-    ..setDrawColor(0xff, 0x00, 0x00, SDL_ALPHA_OPAQUE);
-  final rects = <Rectangle<double>>[];
+    ..setDrawColor(SdlxColor(0xff, 0, 0));
+  final rects = <SdlxFRect>[];
   for (var y = 0; y < gMapData.length; y++) {
     for (var x = 0; x < gMapData[y].length; x++) {
       if (gMapData[y][x] != 0) {
-        rects.add(Rectangle(x * 64, y * 64, 64, 64));
+        rects.add(SdlxFRect(x: x * 64, y: y * 64, w: 64, h: 64));
       }
     }
   }

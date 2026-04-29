@@ -1,6 +1,5 @@
 // https://github.com/Rust-SDL2/rust-sdl2/blob/master/examples/animation.rs
 import 'dart:ffi';
-import 'dart:math';
 import 'package:ffi/ffi.dart';
 import 'package:sdl3/sdl3.dart';
 
@@ -11,8 +10,8 @@ class Chara {
     this.angle = 0,
     this.flip = SDL_FLIP_NONE,
   });
-  late Rectangle<double> srcrect;
-  late Rectangle<double> dstrect;
+  late SdlxFRect srcrect;
+  late SdlxFRect dstrect;
   late double angle;
   late int flip;
 }
@@ -45,20 +44,17 @@ int main() {
   // King - walk animation
   // Soldier - walk animation
   final charas = <Chara>[
-    Chara(const Rectangle(0, 0, 32, 32), const Rectangle(0, 0, 32 * 4, 32 * 4)),
+    Chara(SdlxFRect(w: 32, h: 32), SdlxFRect(w: 32 * 4, h: 32 * 4)),
     Chara(
-      const Rectangle(0, 32, 32, 32),
-      const Rectangle(0, 0, 32 * 4, 32 * 4),
+      SdlxFRect(y: 32, w: 32, h: 32),
+      SdlxFRect(w: 32 * 4, h: 32 * 4),
       flip: SDL_FLIP_HORIZONTAL,
     ),
-    Chara(
-      const Rectangle(0, 64, 32, 32),
-      const Rectangle(0, 0, 32 * 4, 32 * 4),
-    ),
+    Chara(SdlxFRect(y: 64, w: 32, h: 32), SdlxFRect(w: 32 * 4, h: 32 * 4)),
   ];
-  charas[0].dstrect = charas[0].dstrect.centerOn(const Point(-64, 120));
-  charas[1].dstrect = charas[1].dstrect.centerOn(const Point(0, 240));
-  charas[2].dstrect = charas[2].dstrect.centerOn(const Point(440, 360));
+  charas[0].dstrect.center = SdlxFPoint(-64, 120);
+  charas[1].dstrect.center = SdlxFPoint(0, 240);
+  charas[2].dstrect.center = SdlxFPoint(440, 360);
   while (running) {
     while (event.poll()) {
       switch (event.type) {
@@ -73,26 +69,14 @@ int main() {
       }
     }
     final ticks = sdlGetTicks();
-    charas[0].srcrect = charas[0].srcrect.setX(
-      32 * ((ticks / 100) % 4).floor().toDouble(),
-    );
-    charas[0].dstrect = charas[0].dstrect.setX(
-      1 * ((ticks / 14) % 768).floor() - 128,
-    );
-    charas[1].srcrect = charas[1].srcrect.setX(
-      32 * ((ticks / 100) % 4).floor().toDouble(),
-    );
-    charas[1].dstrect = charas[1].dstrect.setX(
-      (1 * ((ticks / 12) % 768).floor() - 672) * -1,
-    );
-    charas[2].srcrect = charas[2].srcrect.setX(
-      32 * ((ticks / 100) % 4).floor().toDouble(),
-    );
-    charas[2].dstrect = charas[2].dstrect.setX(
-      1 * ((ticks / 10) % 768).floor() - 128,
-    );
+    charas[0].srcrect.x = 32 * ((ticks / 100) % 4).floor().toDouble();
+    charas[0].dstrect.x = 1 * ((ticks / 14) % 768).floor() - 128;
+    charas[1].srcrect.x = 32 * ((ticks / 100) % 4).floor().toDouble();
+    charas[1].dstrect.x = (1 * ((ticks / 12) % 768).floor() - 672) * -1;
+    charas[2].srcrect.x = 32 * ((ticks / 100) % 4).floor().toDouble();
+    charas[2].dstrect.x = 1 * ((ticks / 10) % 768).floor() - 128;
     renderer
-      ..setDrawColor(0, 0, 0, SDL_ALPHA_OPAQUE)
+      ..setDrawColor(SdlxColor(0, 0, 0))
       ..clear();
     // copy the frame to the canvas
     for (final chara in charas) {

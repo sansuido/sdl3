@@ -1826,7 +1826,6 @@ bool ttfGetGlyphKerning(
 bool ttfGetStringSize(
   Pointer<TtfFont> font,
   String? text,
-  int length,
   Pointer<Int32> w,
   Pointer<Int32> h,
 ) {
@@ -1848,6 +1847,7 @@ bool ttfGetStringSize(
         )
       >('TTF_GetStringSize');
   final textPointer = text != null ? text.toNativeUtf8() : nullptr;
+  final length = textPointer.length;
   final result =
       ttfGetStringSizeLookupFunction(font, textPointer, length, w, h) == 1;
   calloc.free(textPointer);
@@ -1887,7 +1887,6 @@ bool ttfGetStringSize(
 bool ttfGetStringSizeWrapped(
   Pointer<TtfFont> font,
   String? text,
-  int length,
   int wrapWidth,
   Pointer<Int32> w,
   Pointer<Int32> h,
@@ -1912,6 +1911,7 @@ bool ttfGetStringSizeWrapped(
         )
       >('TTF_GetStringSizeWrapped');
   final textPointer = text != null ? text.toNativeUtf8() : nullptr;
+  final length = textPointer.length;
   final result =
       ttfGetStringSizeWrappedLookupFunction(
         font,
@@ -1959,7 +1959,6 @@ bool ttfGetStringSizeWrapped(
 bool ttfMeasureString(
   Pointer<TtfFont> font,
   String? text,
-  int length,
   int maxWidth,
   Pointer<Int32> measuredWidth,
   Pointer<Uint32> measuredLength,
@@ -1984,6 +1983,7 @@ bool ttfMeasureString(
         )
       >('TTF_MeasureString');
   final textPointer = text != null ? text.toNativeUtf8() : nullptr;
+  final length = textPointer.length;
   final result =
       ttfMeasureStringLookupFunction(
         font,
@@ -2040,7 +2040,6 @@ bool ttfMeasureString(
 Pointer<SdlSurface> ttfRenderTextSolid(
   Pointer<TtfFont> font,
   String? text,
-  int length,
   SdlColor fg,
 ) {
   final ttfRenderTextSolidLookupFunction = _libTtf
@@ -2059,6 +2058,7 @@ Pointer<SdlSurface> ttfRenderTextSolid(
         )
       >('TTF_RenderText_Solid');
   final textPointer = text != null ? text.toNativeUtf8() : nullptr;
+  final length = textPointer.length;
   final result = ttfRenderTextSolidLookupFunction(
     font,
     textPointer,
@@ -2110,7 +2110,6 @@ Pointer<SdlSurface> ttfRenderTextSolid(
 Pointer<SdlSurface> ttfRenderTextSolidWrapped(
   Pointer<TtfFont> font,
   String? text,
-  int length,
   SdlColor fg,
   int wrapLength,
 ) {
@@ -2132,6 +2131,7 @@ Pointer<SdlSurface> ttfRenderTextSolidWrapped(
         )
       >('TTF_RenderText_Solid_Wrapped');
   final textPointer = text != null ? text.toNativeUtf8() : nullptr;
+  final length = textPointer.length;
   final result = ttfRenderTextSolidWrappedLookupFunction(
     font,
     textPointer,
@@ -2234,7 +2234,6 @@ Pointer<SdlSurface> ttfRenderGlyphSolid(
 Pointer<SdlSurface> ttfRenderTextShaded(
   Pointer<TtfFont> font,
   String? text,
-  int length,
   SdlColor fg,
   SdlColor bg,
 ) {
@@ -2256,6 +2255,7 @@ Pointer<SdlSurface> ttfRenderTextShaded(
         )
       >('TTF_RenderText_Shaded');
   final textPointer = text != null ? text.toNativeUtf8() : nullptr;
+  final length = textPointer.length;
   final result = ttfRenderTextShadedLookupFunction(
     font,
     textPointer,
@@ -2310,7 +2310,6 @@ Pointer<SdlSurface> ttfRenderTextShaded(
 Pointer<SdlSurface> ttfRenderTextShadedWrapped(
   Pointer<TtfFont> font,
   String? text,
-  int length,
   SdlColor fg,
   SdlColor bg,
   int wrapWidth,
@@ -2335,6 +2334,7 @@ Pointer<SdlSurface> ttfRenderTextShadedWrapped(
         )
       >('TTF_RenderText_Shaded_Wrapped');
   final textPointer = text != null ? text.toNativeUtf8() : nullptr;
+  final length = textPointer.length;
   final result = ttfRenderTextShadedWrappedLookupFunction(
     font,
     textPointer,
@@ -2445,7 +2445,6 @@ Pointer<SdlSurface> ttfRenderGlyphShaded(
 Pointer<SdlSurface> ttfRenderTextBlended(
   Pointer<TtfFont> font,
   String? text,
-  int length,
   SdlColor fg,
 ) {
   final ttfRenderTextBlendedLookupFunction = _libTtf
@@ -2464,6 +2463,7 @@ Pointer<SdlSurface> ttfRenderTextBlended(
         )
       >('TTF_RenderText_Blended');
   final textPointer = text != null ? text.toNativeUtf8() : nullptr;
+  final length = textPointer.length;
   final result = ttfRenderTextBlendedLookupFunction(
     font,
     textPointer,
@@ -2515,7 +2515,6 @@ Pointer<SdlSurface> ttfRenderTextBlended(
 Pointer<SdlSurface> ttfRenderTextBlendedWrapped(
   Pointer<TtfFont> font,
   String? text,
-  int length,
   SdlColor fg,
   int wrapWidth,
 ) {
@@ -2537,6 +2536,7 @@ Pointer<SdlSurface> ttfRenderTextBlendedWrapped(
         )
       >('TTF_RenderText_Blended_Wrapped');
   final textPointer = text != null ? text.toNativeUtf8() : nullptr;
+  final length = textPointer.length;
   final result = ttfRenderTextBlendedWrappedLookupFunction(
     font,
     textPointer,
@@ -2638,7 +2638,6 @@ Pointer<SdlSurface> ttfRenderGlyphBlended(
 Pointer<SdlSurface> ttfRenderTextLcd(
   Pointer<TtfFont> font,
   String? text,
-  int length,
   SdlColor fg,
   SdlColor bg,
 ) {
@@ -2660,6 +2659,7 @@ Pointer<SdlSurface> ttfRenderTextLcd(
         )
       >('TTF_RenderText_LCD');
   final textPointer = text != null ? text.toNativeUtf8() : nullptr;
+  final length = textPointer.length;
   final result = ttfRenderTextLcdLookupFunction(
     font,
     textPointer,
@@ -2714,7 +2714,6 @@ Pointer<SdlSurface> ttfRenderTextLcd(
 Pointer<SdlSurface> ttfRenderTextLcdWrapped(
   Pointer<TtfFont> font,
   String? text,
-  int length,
   SdlColor fg,
   SdlColor bg,
   int wrapWidth,
@@ -2739,6 +2738,7 @@ Pointer<SdlSurface> ttfRenderTextLcdWrapped(
         )
       >('TTF_RenderText_LCD_Wrapped');
   final textPointer = text != null ? text.toNativeUtf8() : nullptr;
+  final length = textPointer.length;
   final result = ttfRenderTextLcdWrappedLookupFunction(
     font,
     textPointer,
@@ -3267,7 +3267,6 @@ Pointer<TtfText> ttfCreateText(
   Pointer<TtfTextEngine> engine,
   Pointer<TtfFont> font,
   String? text,
-  int length,
 ) {
   final ttfCreateTextLookupFunction = _libTtf
       .lookupFunction<
@@ -3285,6 +3284,7 @@ Pointer<TtfText> ttfCreateText(
         )
       >('TTF_CreateText');
   final textPointer = text != null ? text.toNativeUtf8() : nullptr;
+  final length = textPointer.length;
   final result = ttfCreateTextLookupFunction(engine, font, textPointer, length);
   calloc.free(textPointer);
   return result;
@@ -3973,7 +3973,7 @@ bool ttfTextWrapWhitespaceVisible(Pointer<TtfText> text) {
 /// extern SDL_DECLSPEC bool SDLCALL TTF_SetTextString(TTF_Text *text, const char *string, size_t length)
 /// ```
 /// {@category ttf}
-bool ttfSetTextString(Pointer<TtfText> text, String? string, int length) {
+bool ttfSetTextString(Pointer<TtfText> text, String? string) {
   final ttfSetTextStringLookupFunction = _libTtf
       .lookupFunction<
         Uint8 Function(
@@ -3984,6 +3984,7 @@ bool ttfSetTextString(Pointer<TtfText> text, String? string, int length) {
         int Function(Pointer<TtfText> text, Pointer<Utf8> string, int length)
       >('TTF_SetTextString');
   final stringPointer = string != null ? string.toNativeUtf8() : nullptr;
+  final length = stringPointer.length;
   final result =
       ttfSetTextStringLookupFunction(text, stringPointer, length) == 1;
   calloc.free(stringPointer);
@@ -4019,12 +4020,7 @@ bool ttfSetTextString(Pointer<TtfText> text, String? string, int length) {
 /// extern SDL_DECLSPEC bool SDLCALL TTF_InsertTextString(TTF_Text *text, int offset, const char *string, size_t length)
 /// ```
 /// {@category ttf}
-bool ttfInsertTextString(
-  Pointer<TtfText> text,
-  int offset,
-  String? string,
-  int length,
-) {
+bool ttfInsertTextString(Pointer<TtfText> text, int offset, String? string) {
   final ttfInsertTextStringLookupFunction = _libTtf
       .lookupFunction<
         Uint8 Function(
@@ -4041,6 +4037,7 @@ bool ttfInsertTextString(
         )
       >('TTF_InsertTextString');
   final stringPointer = string != null ? string.toNativeUtf8() : nullptr;
+  final length = stringPointer.length;
   final result =
       ttfInsertTextStringLookupFunction(text, offset, stringPointer, length) ==
       1;
@@ -4073,7 +4070,7 @@ bool ttfInsertTextString(
 /// extern SDL_DECLSPEC bool SDLCALL TTF_AppendTextString(TTF_Text *text, const char *string, size_t length)
 /// ```
 /// {@category ttf}
-bool ttfAppendTextString(Pointer<TtfText> text, String? string, int length) {
+bool ttfAppendTextString(Pointer<TtfText> text, String? string) {
   final ttfAppendTextStringLookupFunction = _libTtf
       .lookupFunction<
         Uint8 Function(
@@ -4084,6 +4081,7 @@ bool ttfAppendTextString(Pointer<TtfText> text, String? string, int length) {
         int Function(Pointer<TtfText> text, Pointer<Utf8> string, int length)
       >('TTF_AppendTextString');
   final stringPointer = string != null ? string.toNativeUtf8() : nullptr;
+  final length = stringPointer.length;
   final result =
       ttfAppendTextStringLookupFunction(text, stringPointer, length) == 1;
   calloc.free(stringPointer);

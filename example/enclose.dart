@@ -1,5 +1,4 @@
 import 'dart:ffi';
-import 'dart:math';
 import 'package:ffi/ffi.dart';
 import 'package:sdl3/sdl3.dart';
 import 'package:sdl3/sdl3gfx.dart' as gfx;
@@ -33,7 +32,7 @@ int main() {
   }
   final fpsManager = gfx.FpsManager();
   final event = calloc<SdlEvent>();
-  final clickPoints = <Point<double>>[];
+  final clickPoints = <SdlxFPoint>[];
   var running = true;
   while (running) {
     while (event.poll()) {
@@ -48,7 +47,10 @@ int main() {
         case SDL_EVENT_MOUSE_BUTTON_DOWN:
           switch (event.button.ref.button) {
             case SDL_BUTTON_LEFT:
-              clickPoints.add(PointEx.getMousePosition());
+              final position = SdlxFPoint(0, 0);
+              sdlxGetMouseState(position);
+              clickPoints.add(position);
+            //clickPoints.add(PointEx.getMousePosition());
             case SDL_BUTTON_RIGHT:
               if (clickPoints.isNotEmpty) {
                 clickPoints.removeLast();
@@ -61,25 +63,31 @@ int main() {
       }
     }
     const marge = 64;
-    final clip = Rectangle<double>(
-      marge.toDouble(),
-      marge.toDouble(),
-      window.getSize()!.x - marge * 2,
-      window.getSize()!.y - marge * 2,
+    final windowPosition = SdlxPoint(0, 0);
+    window.getSize(windowPosition);
+    final clip = SdlxFRect(
+      x: marge.toDouble(),
+      y: marge.toDouble(),
+      w: windowPosition.x - marge * 2,
+      h: windowPosition.y - marge * 2,
     );
     renderer
-      ..setDrawColor(0, 0, 0, 0)
+      ..setDrawColor(SdlxColor(0, 0, 0))
       ..clear()
-      ..boxColor(clip, SdlColorEx.rgbaToU32(0, 0, 255, 64));
-    final rect = clickPoints.getEncloseRect(clip: clip);
-    if (rect != null) {
-      renderer.rectangleColor(rect, SdlColorEx.rgbaToU32(255, 255, 255, 255));
+      ..boxColor(clip, SdlxColor(0, 0, 255, 64));
+    final resultRect = SdlxRect();
+    if (sdlxGetRectEnclosingPoints(
+      clickPoints.toInt(),
+      clip.toInt(),
+      resultRect,
+    )) {
+      renderer.rectangleColor(resultRect.toFloat(), SdlxColor(255, 255, 255));
     }
     for (var n = 0; n < clickPoints.length; n++) {
       renderer.stringColor(
         clickPoints[n],
         (n + 1).toString(),
-        SdlColorEx.rgbaToU32(0, 255, 0, 255),
+        SdlxColor(0, 255, 0),
       );
     }
     renderer.present();

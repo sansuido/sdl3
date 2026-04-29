@@ -21,30 +21,18 @@ int main() {
     sdlQuit();
     return -1;
   }
-  final verts = calloc<SdlVertex>(3);
-  final vert0 = verts + 0;
-  vert0.position.ref.x = 400;
-  vert0.position.ref.y = 150;
-  vert0.color.ref.r = 1.0;
-  vert0.color.ref.g = 0.0;
-  vert0.color.ref.b = 0.0;
-  vert0.color.ref.a = 1.0;
-  //// left
-  final vert1 = verts + 1;
-  vert1.position.ref.x = 200;
-  vert1.position.ref.y = 450;
-  vert1.color.ref.r = 0.0;
-  vert1.color.ref.g = 0.0;
-  vert1.color.ref.b = 1.0;
-  vert1.color.ref.a = 1.0;
-  //// right
-  final vert2 = verts + 2;
-  vert2.position.ref.x = 600;
-  vert2.position.ref.y = 450;
-  vert2.color.ref.r = 0.0;
-  vert2.color.ref.g = 1.0;
-  vert2.color.ref.b = 0.0;
-  vert2.color.ref.a = 1.0;
+  final vertices = <SdlxVertex>[
+    SdlxVertex()
+      ..position = SdlxFPoint(400, 150)
+      ..color = SdlxFColor(1, 0, 0),
+    SdlxVertex()
+      ..position = SdlxFPoint(200, 450)
+      ..color = SdlxFColor(0, 0, 1),
+    SdlxVertex()
+      ..position = SdlxFPoint(600, 450)
+      ..color = SdlxFColor(0, 1, 0),
+  ];
+
   final event = calloc<SdlEvent>();
   var running = true;
   while (running) {
@@ -57,13 +45,12 @@ int main() {
       }
     }
     renderer
-      ..setDrawColor(0, 0, 0, SDL_ALPHA_OPAQUE)
+      ..setDrawColor(SdlxColor(0, 0, 0))
       ..clear()
-      ..geometry(nullptr, verts, 3, nullptr, 0)
+      ..geometry(nullptr, vertices: vertices)
       ..present();
   }
   event.callocFree();
-  verts.callocFree();
   renderer.destroy();
   window.destroy();
   sdlQuit();

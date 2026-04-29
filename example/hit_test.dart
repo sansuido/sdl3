@@ -7,18 +7,19 @@ int hitTest(
   Pointer<SdlPoint> area,
   Pointer<NativeType> data,
 ) {
-  final wPointer = calloc<Int32>();
-  final hPointer = calloc<Int32>();
   final flags = sdlGetWindowFlags(window);
   final isFullscreen = (flags & SdlkWindow.fullscreen) != 0;
   if (isFullscreen) {
+    print('fullscreen');
     return SdlkHittest.normal;
   }
-  sdlGetWindowSize(window, wPointer, hPointer);
-  final w = wPointer.value;
-  final h = hPointer.value;
-  wPointer.callocFree();
-  hPointer.callocFree();
+  final size = SdlxPoint(0, 0);
+  if (!sdlxGetWindowSize(window, size)) {
+    print('Failed to get window size');
+    return SdlkHittest.normal;
+  }
+  final w = size.x;
+  final h = size.y;
   final x = area.ref.x;
   final y = area.ref.y;
   const b = 8;

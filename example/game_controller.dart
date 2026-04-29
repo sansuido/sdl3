@@ -1,5 +1,4 @@
 import 'dart:ffi';
-import 'dart:math';
 import 'package:ffi/ffi.dart';
 import 'package:sdl3/sdl3.dart';
 
@@ -86,19 +85,19 @@ int main() {
           break;
       }
       renderer
-        ..setDrawColor(255, 255, 255, SDL_ALPHA_OPAQUE)
+        ..setDrawColor(SdlxColor(0xff, 0xff, 0xff))
         ..clear();
       for (var n = 0; n < buttonEnables.length; n++) {
-        var color = SdlColorEx.rgbaToU32(255, 0, 0, SDL_ALPHA_OPAQUE);
+        var color = SdlxColor(255, 0, 0);
         if (buttonEnables[n]) {
-          color = SdlColorEx.rgbaToU32(0, 255, 0, SDL_ALPHA_OPAQUE);
+          color = SdlxColor(0, 255, 0);
         }
         renderer
-          ..filledCircleColor(Point(20, (n + 1) * 20), 10, color)
+          ..filledCircleColor(SdlxFPoint(20, (n + 1) * 20), 10, color)
           ..stringColor(
-            Point(20 + 20, (n + 1) * 20),
+            SdlxFPoint(20 + 20, (n + 1) * 20),
             buttonNames[n],
-            SdlColorEx.rgbaToU32(0, 0, 0, SDL_ALPHA_OPAQUE),
+            SdlxColor(0, 0, 0),
           );
       }
       renderer.present();

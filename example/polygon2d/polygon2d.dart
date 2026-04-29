@@ -1,41 +1,36 @@
 import 'dart:math' as math;
+import 'package:sdl3/sdl3.dart';
 
 class Polygon {
   Polygon(this.points);
 
-  List<math.Point<double>> points = [];
+  List<SdlxFPoint> points = [];
 
-  void shift(math.Point<double> shift) {
+  void shift(SdlxFPoint shift) {
     for (var i = 0; i < points.length; i++) {
       points[i] = points[i] + shift;
     }
   }
 
-  static Polygon fromCenter(
-    math.Point<double> center,
-    math.Point<double> size,
-  ) => Polygon([
-    center + math.Point<double>(-size.x * 0.5, -size.y * 0.5),
-    center + math.Point<double>(size.x * 0.5, -size.y * 0.5),
-    center + math.Point<double>(size.x * 0.5, size.y * 0.5),
-    center + math.Point<double>(-size.x * 0.5, size.y * 0.5),
+  static Polygon fromCenter(SdlxFPoint center, SdlxFPoint size) => Polygon([
+    center + SdlxFPoint(-size.x * 0.5, -size.y * 0.5),
+    center + SdlxFPoint(size.x * 0.5, -size.y * 0.5),
+    center + SdlxFPoint(size.x * 0.5, size.y * 0.5),
+    center + SdlxFPoint(-size.x * 0.5, size.y * 0.5),
   ]);
 
-  static Polygon fromLTWH(
-    math.Point<double> topLeft,
-    math.Point<double> size,
-  ) => Polygon([
+  static Polygon fromLTWH(SdlxFPoint topLeft, SdlxFPoint size) => Polygon([
     topLeft,
-    topLeft + math.Point<double>(size.x, 0),
+    topLeft + SdlxFPoint(size.x, 0),
     topLeft + size,
-    topLeft + math.Point<double>(0, size.y),
+    topLeft + SdlxFPoint(0, size.y),
   ]);
 
-  math.Point<double>? calculateCentroid() {
+  SdlxFPoint? calculateCentroid() {
     if (points.length < 3) {
       switch (points.length) {
         case 2:
-          return math.Point<double>(
+          return SdlxFPoint(
             (points[0].x + points[1].x) / 2,
             (points[0].y + points[1].y) / 2,
           );
@@ -60,13 +55,13 @@ class Polygon {
     if (area.abs() < 1e-9) {
       return null;
     }
-    return math.Point<double>(sumCx / (6.0 * area), sumCy / (6.0 * area));
+    return SdlxFPoint(sumCx / (6.0 * area), sumCy / (6.0 * area));
   }
 
-  void rotateAroundCenter(math.Point<double> center, double angleRadians) {
-    math.Point<double> rotatePointAroundCenter(
-      math.Point<double> point,
-      math.Point<double> center,
+  void rotateAroundCenter(SdlxFPoint center, double angleRadians) {
+    SdlxFPoint rotatePointAroundCenter(
+      SdlxFPoint point,
+      SdlxFPoint center,
       double angleRadians,
     ) {
       final translatedX = point.x - center.x;
@@ -77,7 +72,7 @@ class Polygon {
       final rotatedY =
           translatedX * math.sin(angleRadians) +
           translatedY * math.cos(angleRadians);
-      return math.Point<double>(rotatedX + center.x, rotatedY + center.y);
+      return SdlxFPoint(rotatedX + center.x, rotatedY + center.y);
     }
 
     for (var i = 0; i < points.length; i++) {
@@ -85,24 +80,20 @@ class Polygon {
     }
   }
 
-  List<math.Point<double>>? intersectLine(
-    math.Point<double> a,
-    math.Point<double> b,
-  ) {
-    double cross(math.Point<double> a, math.Point<double> b) =>
-        a.x * b.y - a.y * b.x;
+  List<SdlxFPoint>? intersectLine(SdlxFPoint a, SdlxFPoint b) {
+    double cross(SdlxFPoint a, SdlxFPoint b) => a.x * b.y - a.y * b.x;
 
-    double calculateDistance(math.Point<double> p1, math.Point<double> p2) {
+    double calculateDistance(SdlxFPoint p1, SdlxFPoint p2) {
       final dx = p1.x - p2.x;
       final dy = p1.y - p2.y;
       return math.sqrt(dx * dx + dy * dy);
     }
 
-    math.Point<double>? intersection(
-      math.Point<double> a,
-      math.Point<double> b,
-      math.Point<double> c,
-      math.Point<double> d,
+    SdlxFPoint? intersection(
+      SdlxFPoint a,
+      SdlxFPoint b,
+      SdlxFPoint c,
+      SdlxFPoint d,
     ) {
       final deno = cross(b - a, d - c);
       if (deno == 0.0) {
@@ -113,10 +104,10 @@ class Polygon {
       if (s < 0.0 || 1.0 < s || t < 0.0 || 1.0 < t) {
         return null;
       }
-      return math.Point<double>(a.x + s * (b - a).x, a.y + s * (b - a).y);
+      return SdlxFPoint(a.x + s * (b - a).x, a.y + s * (b - a).y);
     }
 
-    List<math.Point<double>>? result;
+    List<SdlxFPoint>? result;
     double? resultDistance;
     for (var i = 0; i < points.length; i++) {
       final p1 = points[i];
@@ -134,15 +125,13 @@ class Polygon {
   }
 
   bool isCollide(Polygon other) {
-    math.Point<double> edgeVector(math.Point<double> a, math.Point<double> b) =>
-        math.Point<double>(b.x - a.x, b.y - a.y);
+    SdlxFPoint edgeVector(SdlxFPoint a, SdlxFPoint b) =>
+        SdlxFPoint(b.x - a.x, b.y - a.y);
 
-    math.Point<double> normalVector(math.Point<double> edge) =>
-        math.Point<double>(-edge.y, edge.x);
+    SdlxFPoint normalVector(SdlxFPoint edge) => SdlxFPoint(-edge.y, edge.x);
 
-    bool isSeparated(Polygon other, math.Point<double> axis) {
-      double dot(math.Point<double> a, math.Point<double> b) =>
-          a.x * b.x + a.y * b.y;
+    bool isSeparated(Polygon other, SdlxFPoint axis) {
+      double dot(SdlxFPoint a, SdlxFPoint b) => a.x * b.x + a.y * b.y;
       var min1 = double.infinity;
       var max1 = -min1;
       var min2 = min1;
