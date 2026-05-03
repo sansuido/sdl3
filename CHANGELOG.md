@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.8.1] - 2026-05-04
+- SDL3-2026-05-03
+### Added
+- Added functions and wrapper classes for the messagebox.
+- Added `examples/show_message_box.dart`.
+- Added `examples/rust/animation_desktop_companion.dart`.
+
+
 ## [2.8.0] - 2026-04-29
 - SDL3-2026-04-26
 ### Changed

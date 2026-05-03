@@ -9,6 +9,7 @@ import 'sdl_image.dart';
 
 part 'ex/sdl/lib_sdl_dialog.dart';
 part 'ex/sdl/lib_sdl_gpu.dart';
+part 'ex/sdl/lib_sdl_messagebox.dart';
 part 'ex/sdl/lib_sdl_mouse.dart';
 part 'ex/sdl/lib_sdl_rect.dart';
 part 'ex/sdl/lib_sdl_render.dart';
@@ -54,6 +55,7 @@ part 'ex/sdl/struct_sdl_gpu_texture_sampler_binding.dart';
 part 'ex/sdl/struct_sdl_gpu_texture_transfer_info.dart';
 part 'ex/sdl/struct_sdl_gpu_transfer_buffer_create_info.dart';
 part 'ex/sdl/struct_sdl_gpu_viewport.dart';
+part 'ex/sdl/struct_sdl_message_box_data.dart';
 part 'ex/sdl/struct_sdl_palette.dart';
 part 'ex/sdl/struct_sdl_point.dart';
 part 'ex/sdl/struct_sdl_rect.dart';

@@ -7,6 +7,19 @@ class SdlxFPoint {
 
   SdlxPoint toInt() => SdlxPoint(x.toInt(), y.toInt());
 
+  SdlxFPoint lerpTo(SdlxFPoint other, double t) =>
+      SdlxFPoint(x + (other.x - x) * t, y + (other.y - y) * t);
+
+  double distanceTo(SdlxFPoint other) => math.sqrt(distanceToSq(other));
+
+  double distanceToSq(SdlxFPoint other) {
+    final dx = x - other.x;
+    final dy = y - other.y;
+    return dx * dx + dy * dy;
+  }
+
+  double angleTo(SdlxFPoint other) => math.atan2(other.y - y, other.x - x);
+
   SdlxFPoint operator +(SdlxFPoint other) =>
       SdlxFPoint(x + other.x, y + other.y);
   SdlxFPoint operator -(SdlxFPoint other) =>

@@ -4732,6 +4732,9 @@ Pointer<ImgAnimationDecoder> imgCreateAnimationDecoderWithProperties(
 /// information about the underlying image such as description, copyright text
 /// and loop count.
 ///
+/// `IMG_PROP_METADATA_LOOP_COUNT_NUMBER`, if present, specifies the number of
+/// times to play the animation, with 0 meaning loop continuously.
+///
 /// \param decoder the animation decoder.
 /// \returns the properties ID of the animation decoder, or 0 if there are no
 /// properties; call SDL_GetError() for more information.
@@ -4743,7 +4746,7 @@ Pointer<ImgAnimationDecoder> imgCreateAnimationDecoderWithProperties(
 /// \sa IMG_CreateAnimationDecoderWithProperties
 ///
 /// ```c
-/// extern SDL_DECLSPEC SDL_PropertiesID SDLCALL IMG_GetAnimationDecoderProperties(IMG_AnimationDecoder* decoder)
+/// extern SDL_DECLSPEC SDL_PropertiesID SDLCALL IMG_GetAnimationDecoderProperties(IMG_AnimationDecoder *decoder)
 /// ```
 /// {@category image}
 int imgGetAnimationDecoderProperties(Pointer<ImgAnimationDecoder> decoder) {
