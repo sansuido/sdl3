@@ -1,5 +1,5 @@
 import 'dart:ffi';
-import 'package:ffi/ffi.dart';
+//import 'package:ffi/ffi.dart';
 import 'package:sdl3/sdl3.dart';
 
 int main() {
@@ -23,26 +23,26 @@ int main() {
   }
   sdlSetHint(SDL_HINT_RENDER_VSYNC, '1');
   texture = renderer.loadTexture('assets/jap/gate.png');
-  var done = true;
-  final event = calloc<SdlEvent>();
-  while (done) {
-    while (sdlPollEvent(event)) {
-      switch (event.type) {
-        case SDL_EVENT_QUIT:
-          done = false;
-        case SDL_EVENT_KEY_DOWN:
-          switch (event.key.ref.key) {
-            case SDLK_LEFT:
-              width += 1;
-            case SDLK_RIGHT:
-              width -= 1;
-            case SDLK_UP:
-              height += 1;
-            case SDLK_DOWN:
-              height -= 1;
-          }
-        default:
-          break;
+  var running = true;
+  while (running) {
+    SdlxEvent? event;
+    while ((event = sdlxPollEvent()) != null) {
+      if (event is SdlxQuitEvent) {
+        running = false;
+      }
+      if (event is SdlxKeyboardEvent && event.type == SdlkEvent.keyDown) {
+        switch (event.scancode) {
+          case SdlkScancode.escape:
+            running = false;
+          case SdlkScancode.left:
+            width += 1;
+          case SdlkScancode.right:
+            width -= 1;
+          case SdlkScancode.up:
+            height += 1;
+          case SdlkScancode.down:
+            height -= 1;
+        }
       }
     }
     sdlRenderClear(renderer);
@@ -73,7 +73,6 @@ int main() {
     sdlRenderDebugText(renderer, 5, 45, 'width: $width height: $height');
     sdlRenderPresent(renderer);
   }
-  calloc.free(event);
   sdlDestroyRenderer(renderer);
   sdlDestroyWindow(window);
   sdlQuit();

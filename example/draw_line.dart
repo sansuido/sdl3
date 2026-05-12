@@ -16,9 +16,19 @@ int main() {
       window,
       renderer,
     )) {
-      var done = true;
-      while (done) {
-        final event = calloc<SdlEvent>();
+      var running = true;
+      while (running) {
+        SdlxEvent? event;
+        while ((event = sdlxPollEvent()) != null) {
+          if (event is SdlxQuitEvent) {
+            running = false;
+          }
+          if (event is SdlxKeyboardEvent && event.type == SdlkEvent.keyDown) {
+            if (event.scancode == SdlkScancode.escape) {
+              running = false;
+            }
+          }
+        }
         sdlSetRenderDrawColor(renderer.value, 0, 0, 0, SDL_ALPHA_OPAQUE);
         sdlRenderClear(renderer.value);
         sdlSetRenderDrawColor(renderer.value, 255, 255, 255, SDL_ALPHA_OPAQUE);
@@ -26,12 +36,6 @@ int main() {
         sdlRenderLine(renderer.value, 300, 240, 340, 240);
         sdlRenderLine(renderer.value, 340, 240, 320, 200);
         sdlRenderPresent(renderer.value);
-        while (sdlPollEvent(event)) {
-          if (event.type == SDL_EVENT_QUIT) {
-            done = false;
-          }
-        }
-        calloc.free(event);
       }
       sdlDestroyRenderer(renderer.value);
       sdlDestroyWindow(window.value);

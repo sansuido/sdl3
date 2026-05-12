@@ -1,5 +1,4 @@
 import 'dart:ffi';
-import 'package:ffi/ffi.dart';
 import 'package:sdl3/sdl3.dart';
 
 int main() {
@@ -26,41 +25,41 @@ int main() {
     final size = SdlxFPoint(0, 0);
     if (texture.getSize(size)) {
       renderer.setLogicalPresentation(
-        SdlxRenderLogicalPresentationInfo()
+        SdlxRenderLogicalPresentation()
           ..w = size.x.toInt()
           ..h = size.y.toInt()
           ..mode = SdlkLogicalPresentation.letterbox,
       );
     }
   }
-  var done = true;
-  final event = calloc<SdlEvent>();
-  while (done) {
-    while (sdlPollEvent(event)) {
-      switch (event.type) {
-        case SDL_EVENT_QUIT:
-          done = false;
-        case SDL_EVENT_WINDOW_RESIZED:
-          //resizeCount = 2;
-          break;
-        default:
-          break;
+  var running = true;
+  while (running) {
+    SdlxEvent? event;
+    while ((event = sdlxPollEvent()) != null) {
+      if (event is SdlxQuitEvent) {
+        running = false;
+      }
+      if (event is SdlxKeyboardEvent && event.type == SdlkEvent.keyDown) {
+        if (event.scancode == SdlkScancode.escape) {
+          running = false;
+        }
+      }
+      if (event is SdlxWindowEvent && event.type == SdlkEvent.windowResized) {
+        resizeCount += 1;
+        if (resizeCount > 0) {
+          sdlShowSimpleMessageBox(
+            SDL_MESSAGEBOX_INFORMATION,
+            'resize',
+            'count=$resizeCount',
+            window,
+          );
+        }
       }
     }
     sdlRenderClear(renderer);
     sdlRenderTexture(renderer, texture, nullptr, nullptr);
     sdlRenderPresent(renderer);
-    if (resizeCount > 0) {
-      sdlShowSimpleMessageBox(
-        SDL_MESSAGEBOX_INFORMATION,
-        'resize',
-        'count=$resizeCount',
-        window,
-      );
-      resizeCount -= 1;
-    }
   }
-  calloc.free(event);
   sdlDestroyRenderer(renderer);
   sdlDestroyWindow(window);
   sdlQuit();

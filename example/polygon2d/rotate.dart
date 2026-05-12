@@ -1,8 +1,5 @@
 import 'dart:ffi';
-
-import 'package:ffi/ffi.dart';
 import 'package:sdl3/sdl3.dart';
-
 import 'polygon2d.dart';
 
 Pointer<SdlWindow> gWindow = nullptr;
@@ -48,36 +45,45 @@ void appQuit() {
   sdlQuit();
 }
 
-bool appEvent(Pointer<SdlEvent> event) {
-  switch (event.type) {
-    case SdlkEvent.quit:
-      return true;
-    case SdlkEvent.mouseButtonDown:
-      if (event.button.ref.button == SdlkButton.left) {
-        final mouse = Polygon.fromCenter(
-          SdlxFPoint(event.button.ref.x, event.button.ref.y),
-          SdlxFPoint(1, 1),
-        );
-        for (var i = gPolygons.length - 1; i >= 0; i--) {
-          final polygon = gPolygons[i];
-          if (mouse.isCollide(polygon)) {
-            gHoldPolygon = polygon;
-            break;
-          }
+bool appEvent() {
+  var running = true;
+  SdlxEvent? event;
+  while ((event = sdlxPollEvent()) != null) {
+    if (event is SdlxQuitEvent) {
+      running = false;
+    }
+    if (event is SdlxKeyboardEvent && event.type == SdlkEvent.keyDown) {
+      if (event.scancode == SdlkScancode.escape) {
+        running = false;
+      }
+    }
+    if (event is SdlxMouseButtonEvent) {
+      if (event.button == SdlkButton.left) {
+        switch (event.type) {
+          case SdlkEvent.mouseButtonDown:
+            final mouse = Polygon.fromCenter(
+              SdlxFPoint(event.x, event.y),
+              SdlxFPoint(1, 1),
+            );
+            for (var i = gPolygons.length - 1; i >= 0; i--) {
+              final polygon = gPolygons[i];
+              if (mouse.isCollide(polygon)) {
+                gHoldPolygon = polygon;
+                break;
+              }
+            }
+          case SdlkEvent.mouseButtonUp:
+            gHoldPolygon = null;
         }
       }
-    case SdlkEvent.mouseButtonUp:
-      if (event.button.ref.button == SdlkButton.left) {
-        gHoldPolygon = null;
-      }
-    case SdlkEvent.mouseMotion:
+    }
+    if (event is SdlxMouseMotionEvent) {
       if (gHoldPolygon != null) {
-        gHoldPolygon!.shift(
-          SdlxFPoint(event.motion.ref.xrel, event.motion.ref.yrel),
-        );
+        gHoldPolygon!.shift(SdlxFPoint(event.xrel, event.yrel));
       }
+    }
   }
-  return false;
+  return running;
 }
 
 bool appIterate() {
@@ -125,26 +131,22 @@ bool appIterate() {
   gRenderer
     ..lineRgba(i1, i2, 255, 255, 0, 255)
     ..present();
-  return false;
+  return true;
 }
 
 void main() async {
   if (appInit()) {
-    var quit = false;
-    final event = calloc<SdlEvent>();
-    while (!quit) {
-      while (event.poll()) {
-        quit = appEvent(event);
-        if (quit) {
-          break;
-        }
+    var running = true;
+    while (running) {
+      running = appEvent();
+      if (!running) {
+        break;
       }
-      if (!quit) {
-        quit = appIterate();
+      if (running) {
+        running = appIterate();
       }
       await Future.delayed(const Duration(milliseconds: 16));
     }
-    event.callocFree();
   }
   appQuit();
 }

@@ -2,7 +2,6 @@
 // 2.ジャンプ処理
 // 2.Jump processing
 import 'dart:ffi';
-import 'package:ffi/ffi.dart';
 import 'package:sdl3/sdl3.dart';
 
 const gTitle = 'DXLIB Tutorial 02';
@@ -47,20 +46,20 @@ void close() {
 }
 
 void update() {
-  final keys = sdlGetKeyboardState(nullptr);
-  if (keys[SDL_SCANCODE_UP] != 0) {
+  final keys = sdlxGetKeyboardState();
+  if (keys[SDL_SCANCODE_UP]) {
     gPlayerY -= gPlayerHeight ~/ 4;
   }
-  if (keys[SDL_SCANCODE_DOWN] != 0) {
+  if (keys[SDL_SCANCODE_DOWN]) {
     gPlayerY += gPlayerHeight ~/ 4;
   }
-  if (keys[SDL_SCANCODE_LEFT] != 0) {
+  if (keys[SDL_SCANCODE_LEFT]) {
     gPlayerX -= gPlayerWidth ~/ 4;
   }
-  if (keys[SDL_SCANCODE_RIGHT] != 0) {
+  if (keys[SDL_SCANCODE_RIGHT]) {
     gPlayerX += gPlayerWidth ~/ 4;
   }
-  if (keys[SDL_SCANCODE_SPACE] != 0) {
+  if (keys[SDL_SCANCODE_SPACE]) {
     if (gPlayerY == 300) {
       gJumpPower = 20;
     }
@@ -74,18 +73,20 @@ void update() {
 }
 
 bool handleEvents() {
-  var quit = false;
-  final event = calloc<SdlEvent>();
-  while (event.poll()) {
-    switch (event.type) {
-      case SDL_EVENT_QUIT:
-        quit = true;
-      default:
-        break;
+  var running = true;
+  SdlxEvent? event;
+  while ((event = sdlxPollEvent()) != null) {
+    if (event is SdlxQuitEvent) {
+      running = false;
+    }
+    if (event is SdlxKeyboardEvent && event.type == SdlkEvent.keyDown) {
+      switch (event.scancode) {
+        case SdlkScancode.escape:
+          running = false;
+      }
     }
   }
-  event.callocFree();
-  return quit;
+  return running;
 }
 
 void render() {
@@ -110,12 +111,12 @@ void render() {
 int main() {
   // initialize
   if (init()) {
-    var quit = false;
-    while (!quit) {
+    var running = true;
+    while (running) {
+      // handleEvents
+      running = handleEvents();
       // update
       update();
-      // handleEvents
-      quit = handleEvents();
       // render
       render();
     }

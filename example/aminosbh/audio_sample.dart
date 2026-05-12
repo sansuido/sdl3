@@ -153,25 +153,24 @@ int main() {
       h: squareRect.h / 2,
     );
     final pauseRect2 = SdlxFRect.fromRect(pauseRect1)..x += 40 * 2;
-    final event = calloc<SdlEvent>();
     var running = true;
     while (running) {
-      while (event.poll()) {
-        switch (event.type) {
-          case SDL_EVENT_QUIT:
-            running = false;
-          case SDL_EVENT_KEY_DOWN:
-            if (event.key.ref.key == SDLK_ESCAPE) {
+      SdlxEvent? event;
+      while ((event = sdlxPollEvent()) != null) {
+        if (event is SdlxQuitEvent) {
+          running = false;
+        }
+        if (event is SdlxKeyboardEvent && event.type == SdlkEvent.keyDown) {
+          switch (event.scancode) {
+            case SdlkScancode.escape:
               running = false;
-            } else if (event.key.ref.key == SDLK_SPACE) {
+            case SdlkScancode.space:
               if (wav.paused()) {
                 wav.resume();
               } else {
                 wav.pause();
               }
-            }
-          default:
-            break;
+          }
         }
       }
       renderer
@@ -187,7 +186,6 @@ int main() {
       }
       renderer.present();
     }
-    event.callocFree();
     wav.destroy();
   }
   // Destroy renderer

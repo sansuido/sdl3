@@ -4,7 +4,6 @@
 
 import 'dart:ffi';
 import 'dart:math' as math;
-import 'package:ffi/ffi.dart';
 import 'package:sdl3/sdl3.dart';
 
 const gTitle = 'DXLIB Tutorial 29';
@@ -58,7 +57,7 @@ class Player {
     final wall = <int>[1];
     final floors = <int>[2, 3];
     List<int>? mask;
-    final keys = sdlGetKeyboardState(nullptr);
+    final keys = sdlxGetKeyboardState();
     double moveX = 0;
     double moveY = 0;
     if (map.intersection(getRect(), mask: floors) != null) {
@@ -66,16 +65,16 @@ class Player {
     } else if (downSpeed < 0) {
       mask = wall;
     }
-    if (keys[SdlkScancode.left] != 0) {
+    if (keys[SdlkScancode.left]) {
       velocityX -= speed;
       velocityX = math.max(velocityX, -(maxSpeed + decline));
     }
-    if (keys[SdlkScancode.right] != 0) {
+    if (keys[SdlkScancode.right]) {
       velocityX += speed;
       velocityX = math.min(velocityX, maxSpeed + decline);
     }
-    if (keys[SdlkScancode.z] != 0) {
-      if (keys[SdlkScancode.down] != 0) {
+    if (keys[SdlkScancode.z]) {
+      if (keys[SdlkScancode.down]) {
         if (map.intersection(
               getRect(),
               move: SdlxFPoint(0, 0.1),
@@ -285,18 +284,21 @@ void actMain(Pointer<SdlRenderer> renderer) {
   final player = Player(SdlxFPoint(gCellSize - 2, gCellSize - 2))
     ..setPosition(320, 240);
   var running = true;
-  final event = calloc<SdlEvent>();
   while (running) {
-    while (event.poll()) {
-      switch (event.type) {
-        case SdlkEvent.quit:
+    SdlxEvent? event;
+    while ((event = sdlxPollEvent()) != null) {
+      if (event is SdlxQuitEvent) {
+        running = false;
+      }
+      if (event is SdlxKeyboardEvent && event.type == SdlkEvent.keyDown) {
+        if (event.scancode == SdlkScancode.escape) {
           running = false;
+        }
       }
     }
     update(map, player);
     draw(renderer, map, player);
   }
-  event.callocFree();
 }
 
 int main() {

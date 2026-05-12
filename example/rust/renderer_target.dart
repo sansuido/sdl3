@@ -1,6 +1,5 @@
 // https://github.com/Rust-SDL2/rust-sdl2/blob/master/examples/renderer-target.rs
 import 'dart:ffi';
-import 'package:ffi/ffi.dart';
 import 'package:sdl3/sdl3.dart';
 
 int main() {
@@ -32,20 +31,18 @@ int main() {
     400,
     300,
   );
-  final event = calloc<SdlEvent>();
   var running = true;
   var angle = 0.0;
   while (running) {
-    while (event.poll()) {
-      switch (event.type) {
-        case SDL_EVENT_QUIT:
+    SdlxEvent? event;
+    while ((event = sdlxPollEvent()) != null) {
+      if (event is SdlxQuitEvent) {
+        running = false;
+      }
+      if (event is SdlxKeyboardEvent && event.type == SdlkEvent.keyDown) {
+        if (event.scancode == SdlkScancode.escape) {
           running = false;
-        case SDL_EVENT_KEY_DOWN:
-          if (event.key.ref.key == SDLK_ESCAPE) {
-            running = false;
-          }
-        default:
-          break;
+        }
       }
     }
     angle += 0.5;
@@ -67,7 +64,6 @@ int main() {
       ..present();
   }
   texture.destroy();
-  event.callocFree();
   renderer.destroy();
   window.destroy();
   sdlQuit();

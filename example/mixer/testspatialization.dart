@@ -94,34 +94,42 @@ void appQuit() {
   sdlQuit();
 }
 
-bool appEvent(Pointer<SdlEvent> event) {
-  switch (event.type) {
-    case SdlkEvent.quit:
-      return true;
-    case SdlkEvent.keyDown:
-      switch (event.key.ref.key) {
-        case Sdlk.escape:
-          return true;
-        case Sdlk.a:
+bool appEvent() {
+  var running = true;
+  SdlxEvent? event;
+  while ((event = sdlxPollEvent()) != null) {
+    if (event is SdlxQuitEvent) {
+      running = false;
+    }
+    if (event is SdlxKeyboardEvent && event.type == SdlkEvent.keyDown) {
+      switch (event.scancode) {
+        case SdlkScancode.escape:
+          running = false;
+        case SdlkScancode.a:
           gAutopilot = true;
       }
-    case SdlkEvent.mouseButtonDown:
-      if (event.button.ref.button == 1) {
-        gMouseDown = true;
+    }
+    if (event is SdlxMouseButtonEvent) {
+      if (event.type == SdlkEvent.mouseButtonDown) {
+        if (event.button == 1) {
+          gMouseDown = true;
+        }
+      } else if (event.type == SdlkEvent.mouseButtonUp) {
+        if (event.button == 1) {
+          gAutopilot = false;
+          gMouseDown = false;
+        }
       }
-    case SdlkEvent.mouseButtonUp:
-      if (event.button.ref.button == 1) {
-        gAutopilot = false;
-        gMouseDown = false;
-      }
-    case SdlkEvent.mouseMotion:
+    }
+    if (event is SdlxMouseMotionEvent) {
       if (gMouseDown) {
         gAutopilot = false;
-        gMouseX = event.motion.ref.x;
-        gMouseY = event.motion.ref.y;
+        gMouseX = event.x;
+        gMouseY = event.y;
       }
+    }
   }
-  return false;
+  return running;
 }
 
 bool appIterate() {
@@ -133,25 +141,27 @@ bool appIterate() {
       moment *
       2.0 *
       SDL_PI_F; // angle on the circle for this moment, in radians.
-  final center = calloc<SdlFPoint>()
-    ..ref.x = 640.0 / 2.0
-    ..ref.y = 480.0 / 2.0;
+  final center = SdlxFPoint(0, 0)
+    ..x = 640.0 / 2.0
+    ..y = 480.0 / 2.0;
   const radius = 200.0; // size of half the circle (radius, not diameter).
   const boxsize = 30.0;
-  final sourcept = calloc<SdlFPoint>();
+  final sourcept = SdlxFPoint(0, 0);
   final position = calloc<MixPoint3D>();
   position.ref.y = 0; // always horizontal.
   // run in a horizontal circle around the listener (circling on X and Z coordinates).
   if (gAutopilot) {
     position.ref.x = sdlCosf(angle);
     position.ref.z = sdlSinf(angle);
-    sourcept.ref.x = center.ref.x + (position.ref.x * radius);
-    sourcept.ref.y = center.ref.y + (position.ref.z * radius);
+    sourcept
+      ..x = center.x + (position.ref.x * radius)
+      ..y = center.y + (position.ref.z * radius);
   } else {
     position.ref.x = ((gMouseX / 640.0) * 2.0) - 1.0; // scale to -1.0f to 1.0f
     position.ref.z = ((gMouseY / 480.0) * 2.0) - 1.0;
-    sourcept.ref.x = gMouseX;
-    sourcept.ref.y = gMouseY;
+    sourcept
+      ..x = gMouseX
+      ..y = gMouseY;
   }
   const scale = 3.0;
   position.ref.x *= scale; // make distance attenuation noticable.
@@ -175,64 +185,56 @@ bool appIterate() {
     sdlRenderLine(gRenderer, 0, 240, 640, 240);
   }
   {
-    final sourceRect = calloc<SdlFRect>()
-      ..ref.x = sourcept.ref.x - boxsize / 2
-      ..ref.y = sourcept.ref.y - boxsize / 2
-      ..ref.w = boxsize
-      ..ref.h = boxsize;
+    final sourceRect = SdlxFRect()
+      ..x = sourcept.x - boxsize / 2
+      ..y = sourcept.y - boxsize / 2
+      ..w = boxsize
+      ..h = boxsize;
     sdlSetRenderDrawColor(gRenderer, 0, 0, 255, 255);
-    sdlRenderFillRect(gRenderer, sourceRect);
+    sdlxRenderFillRect(gRenderer, sourceRect);
     sdlSetRenderDrawColor(gRenderer, 255, 255, 255, 255);
     sdlRenderDebugText(
       gRenderer,
-      sourceRect.ref.x + ((boxsize - 48.0) / 2.0),
-      sourceRect.ref.y + boxsize,
+      sourceRect.x + ((boxsize - 48.0) / 2.0),
+      sourceRect.y + boxsize,
       'SOURCE',
     );
-    sourceRect.callocFree();
   }
   {
-    final listenerRect = calloc<SdlFRect>()
-      ..ref.x = center.ref.x - boxsize / 2
-      ..ref.y = center.ref.y - boxsize / 2
-      ..ref.w = boxsize
-      ..ref.h = boxsize;
+    final listenerRect = SdlxFRect()
+      ..x = center.x - boxsize / 2
+      ..y = center.y - boxsize / 2
+      ..w = boxsize
+      ..h = boxsize;
     sdlSetRenderDrawColor(gRenderer, 0, 255, 0, 255);
-    sdlRenderFillRect(gRenderer, listenerRect);
+    sdlxRenderFillRect(gRenderer, listenerRect);
     sdlSetRenderDrawColor(gRenderer, 255, 255, 255, 255);
     sdlRenderDebugText(
       gRenderer,
-      listenerRect.ref.x + ((boxsize - 64.0) / 2.0),
-      listenerRect.ref.y + boxsize,
+      listenerRect.x + ((boxsize - 64.0) / 2.0),
+      listenerRect.y + boxsize,
       'LISTENER',
     );
-    listenerRect.callocFree();
   }
   sdlRenderPresent(gRenderer);
-  center.callocFree();
-  sourcept.callocFree();
   position.callocFree();
-  return false;
+  return true;
 }
 
 void main() async {
   if (appInit()) {
-    var quit = false;
-    final event = calloc<SdlEvent>();
-    while (!quit) {
-      while (event.poll()) {
-        quit = appEvent(event);
-        if (quit) {
-          break;
-        }
+    var running = true;
+    while (running) {
+      running = appEvent();
+      if (!running) {
+        break;
       }
-      if (!quit) {
-        quit = appIterate();
+      if (running) {
+        running = appIterate();
       }
       // Note that when using sdlDelay, you cannot delegate processing to a callback.
       await Future.delayed(const Duration(milliseconds: 16));
     }
-    event.callocFree();
   }
   appQuit();
 }

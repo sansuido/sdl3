@@ -1,6 +1,5 @@
 // https://github.com/Rust-SDL2/rust-sdl2/blob/master/examples/gfx-demo.rs
 import 'dart:ffi';
-import 'package:ffi/ffi.dart';
 import 'package:sdl3/sdl3.dart';
 import 'package:sdl3/sdl3gfx.dart' as gfx;
 
@@ -32,34 +31,31 @@ int main() {
     return -1;
   }
   final fpsManager = gfx.FpsManager();
-  final event = calloc<SdlEvent>();
   final clickPoints = <SdlxFPoint>[];
   var running = true;
   while (running) {
-    while (event.poll()) {
-      switch (event.type) {
-        case SDL_EVENT_QUIT:
+    SdlxEvent? event;
+    while ((event = sdlxPollEvent()) != null) {
+      if (event is SdlxQuitEvent) {
+        running = false;
+      }
+      if (event is SdlxKeyboardEvent && event.type == SdlkEvent.keyDown) {
+        if (event.scancode == SdlkScancode.escape) {
           running = false;
-        case SDL_EVENT_KEY_DOWN:
-          switch (event.key.ref.key) {
-            case SDLK_ESCAPE:
-              running = false;
-          }
-        case SDL_EVENT_MOUSE_BUTTON_DOWN:
-          switch (event.button.ref.button) {
-            case SDL_BUTTON_LEFT:
-              final position = SdlxFPoint(0, 0);
-              sdlxGetMouseState(position);
-              clickPoints.add(position);
-            case SDL_BUTTON_RIGHT:
-              if (clickPoints.isNotEmpty) {
-                clickPoints.removeLast();
-              }
-            default:
-              break;
-          }
-        default:
-          break;
+        }
+      }
+      if (event is SdlxMouseButtonEvent &&
+          event.type == SdlkEvent.mouseButtonDown) {
+        switch (event.button) {
+          case SdlkButton.left:
+            final position = SdlxFPoint(0, 0);
+            sdlxGetMouseState(position);
+            clickPoints.add(position);
+          case SdlkButton.right:
+            if (clickPoints.isNotEmpty) {
+              clickPoints.removeLast();
+            }
+        }
       }
     }
     renderer
@@ -76,10 +72,9 @@ int main() {
       );
     }
     renderer.present();
-    fpsManager.delay();
+    fpsManager.delaySync();
   }
   gfx.gfxFree();
-  event.callocFree();
   renderer.destroy();
   window.destroy();
   sdlQuit();

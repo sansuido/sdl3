@@ -2,7 +2,6 @@
 // 5.サウンドのベル基本
 // 5.Sound novel basics
 import 'dart:ffi';
-import 'package:ffi/ffi.dart';
 import 'package:sdl3/sdl3.dart';
 
 const gTitle = 'DXLIB Tutorial 06';
@@ -102,20 +101,22 @@ class Game {
   }
 
   void handleEvents() {
-    final event = calloc<SdlEvent>();
-    while (event.poll()) {
-      switch (event.type) {
-        case SDL_EVENT_QUIT:
-          running = false;
-        case SDL_EVENT_KEY_DOWN:
-          if (buttonWait) {
-            buttonWait = false;
-          }
-        default:
-          break;
+    SdlxEvent? event;
+    while ((event = sdlxPollEvent()) != null) {
+      if (event is SdlxQuitEvent) {
+        running = false;
+      }
+      if (event is SdlxKeyboardEvent && event.type == SdlkEvent.keyDown) {
+        switch (event.scancode) {
+          case SdlkScancode.escape:
+            running = false;
+          default:
+            if (buttonWait) {
+              buttonWait = false;
+            }
+        }
       }
     }
-    event.callocFree();
   }
 
   void update() {

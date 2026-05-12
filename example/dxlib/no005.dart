@@ -2,7 +2,6 @@
 // 5.シューティング基本
 // 5.Shooting basics
 import 'dart:ffi';
-import 'package:ffi/ffi.dart';
 import 'package:sdl3/sdl3.dart';
 
 const gTitle = 'DXLIB Tutorial 05';
@@ -52,11 +51,11 @@ void close() {
 }
 
 void update() {
-  final keys = sdlGetKeyboardState(nullptr);
-  if (keys[SDL_SCANCODE_LEFT] != 0) {
+  final keys = sdlxGetKeyboardState();
+  if (keys[SDL_SCANCODE_LEFT]) {
     gPlayer.x -= 3;
   }
-  if (keys[SDL_SCANCODE_RIGHT] != 0) {
+  if (keys[SDL_SCANCODE_RIGHT]) {
     gPlayer.x += 3;
   }
   var index = 0;
@@ -68,7 +67,7 @@ void update() {
       index++;
     }
   }
-  if (keys[SDL_SCANCODE_Z] != 0 && gShotList.length < gMaxShot) {
+  if (keys[SDL_SCANCODE_Z] && gShotList.length < gMaxShot) {
     gShotList.add(
       Position()
         ..x = gPlayer.x
@@ -78,18 +77,20 @@ void update() {
 }
 
 bool handleEvents() {
-  var quit = false;
-  final event = calloc<SdlEvent>();
-  while (event.poll()) {
-    switch (event.type) {
-      case SDL_EVENT_QUIT:
-        quit = true;
-      default:
-        break;
+  var running = true;
+  SdlxEvent? event;
+  while ((event = sdlxPollEvent()) != null) {
+    if (event is SdlxQuitEvent) {
+      running = false;
+    }
+    if (event is SdlxKeyboardEvent && event.type == SdlkEvent.keyDown) {
+      switch (event.scancode) {
+        case SdlkScancode.escape:
+          running = false;
+      }
     }
   }
-  event.callocFree();
-  return quit;
+  return running;
 }
 
 void renderer() {
@@ -111,12 +112,12 @@ void renderer() {
 
 int main() {
   if (init()) {
-    var quit = false;
-    while (!quit) {
+    var running = true;
+    while (running) {
+      // handleEvents
+      running = handleEvents();
       // update
       update();
-      // handleEvents
-      quit = handleEvents();
       // renderer
       renderer();
     }

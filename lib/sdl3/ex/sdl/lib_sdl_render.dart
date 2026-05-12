@@ -744,8 +744,13 @@ bool sdlxUpdateNvTexture(
 /// {@category render}
 bool sdlxSetRenderLogicalPresentation(
   Pointer<SdlRenderer> renderer,
-  SdlxRenderLogicalPresentationInfo info,
-) => sdlSetRenderLogicalPresentation(renderer, info.w, info.h, info.mode);
+  SdlxRenderLogicalPresentation presentation,
+) => sdlSetRenderLogicalPresentation(
+  renderer,
+  presentation.w,
+  presentation.h,
+  presentation.mode,
+);
 
 ///
 /// Get device independent resolution and presentation mode for rendering.
@@ -776,7 +781,7 @@ bool sdlxSetRenderLogicalPresentation(
 /// {@category render}
 bool sdlxGetRenderLogicalPresentation(
   Pointer<SdlRenderer> renderer,
-  SdlxRenderLogicalPresentationInfo info,
+  SdlxRenderLogicalPresentation presentation,
 ) {
   final wPointer = calloc<Int32>();
   final hPointer = calloc<Int32>();
@@ -789,13 +794,13 @@ bool sdlxGetRenderLogicalPresentation(
     modePointer,
   );
   if (result) {
-    info
+    presentation
       ..w = wPointer.value
       ..h = hPointer.value
       ..mode = modePointer.value;
     result = sdlGetRenderLogicalPresentationRect(renderer, rectPointer);
     if (result) {
-      info.rect.loadFromPointer(rectPointer);
+      presentation.rect.loadFromPointer(rectPointer);
     }
   }
   wPointer.callocFree();

@@ -1,6 +1,5 @@
 // https://github.com/Rust-SDL2/rust-sdl2/blob/master/examples/animation.rs
 import 'dart:ffi';
-import 'package:ffi/ffi.dart';
 import 'package:sdl3/sdl3.dart';
 
 class Chara {
@@ -38,7 +37,6 @@ int main() {
   // animation sheet and extras are available from
   // https://opengameart.org/content/a-platformer-in-the-forest
   final texture = renderer.loadTexture('assets/rust/characters.bmp');
-  final event = calloc<SdlEvent>();
   var running = true;
   // Baby - walk animation
   // King - walk animation
@@ -56,16 +54,15 @@ int main() {
   charas[1].dstrect.center = SdlxFPoint(0, 240);
   charas[2].dstrect.center = SdlxFPoint(440, 360);
   while (running) {
-    while (event.poll()) {
-      switch (event.type) {
-        case SDL_EVENT_QUIT:
+    SdlxEvent? event;
+    while ((event = sdlxPollEvent()) != null) {
+      if (event is SdlxQuitEvent) {
+        running = false;
+      }
+      if (event is SdlxKeyboardEvent && event.type == SdlkEvent.keyDown) {
+        if (event.scancode == SdlkScancode.escape) {
           running = false;
-        case SDL_EVENT_KEY_DOWN:
-          if (event.key.ref.key == SDLK_ESCAPE) {
-            running = false;
-          }
-        default:
-          break;
+        }
       }
     }
     final ticks = sdlGetTicks();
@@ -90,7 +87,6 @@ int main() {
     }
     renderer.present();
   }
-  event.callocFree();
   texture.destroy();
   window.destroy();
   renderer.destroy();

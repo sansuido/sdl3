@@ -53,24 +53,20 @@ int main() {
   }
   final blue = calloc<Uint8>();
   sdlSetEventFilter(Pointer.fromFunction(myEventFilter, 0), blue);
-  final event = calloc<SdlEvent>();
-  var quit = false;
-  while (!quit) {
-    while (event.poll()) {
-      switch (event.type) {
-        case SDL_EVENT_QUIT:
-          quit = true;
-        default:
-          break;
+  var running = true;
+  while (running) {
+    SdlxEvent? event;
+    while ((event = sdlxPollEvent()) != null) {
+      if (event is SdlxQuitEvent) {
+        running = false;
       }
-      renderer
-        ..setDrawColor(SdlxColor(0, 0, blue.value))
-        ..clear()
-        ..present();
     }
+    renderer
+      ..setDrawColor(SdlxColor(0, 0, blue.value))
+      ..clear()
+      ..present();
   }
   blue.callocFree();
-  event.callocFree();
   renderer.destroy();
   window.destroy();
   sdlQuit();

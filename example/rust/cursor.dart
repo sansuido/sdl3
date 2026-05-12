@@ -1,6 +1,5 @@
 // https://github.com/Rust-SDL2/rust-sdl2/blob/master/examples/cursor.rs
 import 'dart:ffi';
-import 'package:ffi/ffi.dart';
 import 'package:sdl3/sdl3.dart';
 
 int main() {
@@ -32,28 +31,30 @@ int main() {
     cursor = surface.createColorCursor(0, 0)..set();
     surface.destroy();
   }
-  final event = calloc<SdlEvent>();
   var running = true;
   while (running) {
-    while (event.poll()) {
-      switch (event.type) {
-        case SDL_EVENT_QUIT:
+    SdlxEvent? event;
+    while ((event = sdlxPollEvent()) != null) {
+      if (event is SdlxQuitEvent) {
+        running = false;
+      }
+      if (event is SdlxKeyboardEvent && event.type == SdlkEvent.keyDown) {
+        if (event.scancode == SdlkScancode.escape) {
           running = false;
-        case SDL_EVENT_DROP_FILE:
-          final data = event.drop.ref.data.cast<Utf8>().toDartString();
-          final surface = imgLoad(data);
-          if (surface != nullptr) {
-            if (cursor != nullptr) {
-              cursor.destroy();
-              cursor = nullptr;
-            }
-            cursor = surface.createColorCursor(0, 0)..set();
-            surface.destroy();
-          } else {
-            sdlShowSimpleMessageBox(0, 'imgGetError', imgGetError(), window);
+        }
+      }
+      if (event is SdlxDropEvent && event.type == SdlkEvent.dropFile) {
+        final surface = imgLoad(event.data);
+        if (surface != nullptr) {
+          if (cursor != nullptr) {
+            cursor.destroy();
+            cursor = nullptr;
           }
-        default:
-          break;
+          cursor = surface.createColorCursor(0, 0)..set();
+          surface.destroy();
+        } else {
+          sdlShowSimpleMessageBox(0, 'imgGetError', imgGetError(), window);
+        }
       }
     }
     renderer
@@ -61,7 +62,6 @@ int main() {
       ..clear()
       ..present();
   }
-  event.callocFree();
   cursor.destroy();
   renderer.destroy();
   window.destroy();

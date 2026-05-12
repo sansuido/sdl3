@@ -2,7 +2,6 @@
 // 3.マップ表示基本
 // 3.Map display basics
 import 'dart:ffi';
-import 'package:ffi/ffi.dart';
 import 'package:sdl3/sdl3.dart';
 
 const gTitle = 'DXLIB Tutorial 03';
@@ -52,18 +51,14 @@ void close() {
 }
 
 bool handleEvents() {
-  var quit = false;
-  final event = calloc<SdlEvent>();
-  while (event.poll()) {
-    switch (event.type) {
-      case SDL_EVENT_QUIT:
-        quit = true;
-      default:
-        break;
+  var running = true;
+  SdlxEvent? event;
+  while ((event = sdlxPollEvent()) != null) {
+    if (event is SdlxQuitEvent) {
+      running = false;
     }
   }
-  event.callocFree();
-  return quit;
+  return running;
 }
 
 void render() {
@@ -89,11 +84,10 @@ void render() {
 
 int main() {
   if (init()) {
-    var quit = false;
-    while (!quit) {
-      // update
+    var running = true;
+    while (running) {
       // handleEvents
-      quit = handleEvents();
+      running = handleEvents();
       // render
       render();
     }

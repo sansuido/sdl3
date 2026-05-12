@@ -1,5 +1,4 @@
 import 'dart:ffi';
-import 'package:ffi/ffi.dart';
 import 'package:sdl3/sdl3.dart';
 import 'package:sdl3/sdl3gfx.dart' as gfx;
 
@@ -15,7 +14,6 @@ int main() {
     print(sdlGetError());
     return -1;
   }
-  sdlSetHint(SDL_HINT_RENDER_VSYNC, '1');
   final window = SdlWindowEx.create(
     title: '',
     w: gWindowWidth,
@@ -36,32 +34,30 @@ int main() {
   }
   final fpsManager = gfx.FpsManager();
   setTitle(window, fpsManager);
-  final event = calloc<SdlEvent>();
   var time = sdlGetTicks();
   var frameRate = 0;
   var frameCount = 0;
   var running = true;
   while (running) {
-    while (event.poll()) {
-      switch (event.type) {
-        case SDL_EVENT_QUIT:
-          running = false;
-        case SDL_EVENT_KEY_DOWN:
-          switch (event.key.ref.key) {
-            case SDLK_UP:
-              fpsManager.setFramerate(fpsManager.getFramerate() + 1);
-              setTitle(window, fpsManager);
-            case SDLK_DOWN:
-              fpsManager.setFramerate(fpsManager.getFramerate() - 1);
-              setTitle(window, fpsManager);
-            default:
-              break;
-          }
-        default:
-          break;
+    SdlxEvent? event;
+    while ((event = sdlxPollEvent()) != null) {
+      if (event is SdlxQuitEvent) {
+        running = false;
+      }
+      if (event is SdlxKeyboardEvent && event.type == SdlkEvent.keyDown) {
+        switch (event.scancode) {
+          case SdlkScancode.up:
+            fpsManager.setFramerate(fpsManager.getFramerate() + 1);
+            setTitle(window, fpsManager);
+          case SdlkScancode.down:
+            fpsManager.setFramerate(fpsManager.getFramerate() - 1);
+            setTitle(window, fpsManager);
+          case SdlkScancode.escape:
+            running = false;
+        }
       }
     }
-    fpsManager.delay();
+    fpsManager.delaySync();
     if ((sdlGetTicks() - time) > 1000) {
       frameRate = frameCount;
       frameCount = 0;
@@ -76,7 +72,6 @@ int main() {
       ..present();
   }
   gfx.gfxFree();
-  event.callocFree();
   renderer.destroy();
   window.destroy();
   sdlQuit();

@@ -36,7 +36,7 @@ int main() {
   }
 
   renderer.setLogicalPresentation(
-    SdlxRenderLogicalPresentationInfo()
+    SdlxRenderLogicalPresentation()
       ..w = gWinWidth
       ..h = gWinHeight
       ..mode = SDL_LOGICAL_PRESENTATION_STRETCH,
@@ -69,24 +69,25 @@ int main() {
   ).getUint32(0);
   texture.unlock();
   // main loop
-  final event = calloc<SdlEvent>();
   var running = true;
   while (running) {
-    while (event.poll()) {
-      switch (event.type) {
-        case SDL_EVENT_QUIT:
-          running = false;
-        default:
-          break;
+    SdlxEvent? event;
+    while ((event = sdlxPollEvent()) != null) {
+      if (event is SdlxQuitEvent) {
+        running = false;
       }
-      // render on screen
-      renderer
-        ..clear()
-        ..texture(texture)
-        ..present();
+      if (event is SdlxKeyboardEvent && event.type == SdlkEvent.keyDown) {
+        if (event.scancode == SdlkScancode.escape) {
+          running = false;
+        }
+      }
     }
+    // render on screen
+    renderer
+      ..clear()
+      ..texture(texture)
+      ..present();
   }
-  event.callocFree();
   texture.destroy();
   renderer.destroy();
   window.destroy();

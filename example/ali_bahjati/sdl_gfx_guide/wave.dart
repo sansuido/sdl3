@@ -1,8 +1,8 @@
 // https://github.com/ali-bahjati/sdl_gfx_guide/blob/master/wave.c
 import 'dart:ffi';
 import 'dart:math';
-import 'package:ffi/ffi.dart';
 import 'package:sdl3/sdl3.dart';
+import 'package:sdl3/sdl3gfx.dart' as gfx;
 
 const gWidth = 1000;
 const gHeight = 400;
@@ -34,7 +34,6 @@ int main() {
   }
   const double baseX = 100;
   const double baseY = 240;
-  final event = calloc<SdlEvent>();
   final points = <SdlxFPoint>[];
   const dx = 3.0;
   var zY = 1 / 10.0;
@@ -47,32 +46,31 @@ int main() {
   }
   var running = true;
   while (running) {
-    while (event.poll()) {
-      switch (event.type) {
-        case SDL_EVENT_QUIT:
-          running = false;
-        case SDL_EVENT_KEY_DOWN:
-          switch (event.key.ref.key) {
-            case SDLK_UP:
-              coY++;
-            case SDLK_DOWN:
-              coY--;
-            case SDLK_LEFT:
-              zY -= 0.01;
-            case SDLK_RIGHT:
-              zY += 0.01;
-            case SDLK_Z:
-              fun++;
-            case SDLK_X:
-              fun--;
-              if (fun == 0) {
-                fun = 1;
-              }
-            default:
-              break;
-          }
-        default:
-          break;
+    SdlxEvent? event;
+    while ((event = sdlxPollEvent()) != null) {
+      if (event is SdlxQuitEvent) {
+        running = false;
+      }
+      if (event is SdlxKeyboardEvent && event.type == SdlkEvent.keyDown) {
+        switch (event.scancode) {
+          case SdlkScancode.escape:
+            running = false;
+          case SdlkScancode.up:
+            coY++;
+          case SdlkScancode.down:
+            coY--;
+          case SdlkScancode.left:
+            zY -= 0.01;
+          case SdlkScancode.right:
+            zY += 0.01;
+          case SdlkScancode.z:
+            fun++;
+          case SdlkScancode.x:
+            fun--;
+            if (fun == 0) {
+              fun = 1;
+            }
+        }
       }
     }
     for (var i = 0; i < gMaxN; i++) {
@@ -108,7 +106,7 @@ int main() {
       )
       ..present();
   }
-  event.callocFree();
+  gfx.gfxFree();
   renderer.destroy();
   window.destroy();
   sdlQuit();

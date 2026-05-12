@@ -13,9 +13,6 @@ final class ImgAnimation extends Struct {
   // [8]+(4)
   @Int32()
   external int count;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
   // [16]+(8)
   external Pointer<Pointer<SdlSurface>> frames;
   // [24]+(8)

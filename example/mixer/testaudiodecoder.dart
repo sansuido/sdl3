@@ -81,33 +81,35 @@ void appQuit() {
   sdlQuit();
 }
 
-bool appEvent(Pointer<SdlEvent> event) {
-  if (event.type == SdlkEvent.quit) {
-    return true;
+bool appEvent() {
+  var running = true;
+  SdlxEvent? event;
+  while ((event = sdlxPollEvent()) != null) {
+    if (event is SdlxQuitEvent) {
+      running = false;
+    }
+    if (event is SdlxKeyboardEvent && event.type == SdlkEvent.keyDown) {
+      if (event.scancode == SdlkScancode.escape) {
+        running = false;
+      }
+    }
   }
-  return false;
+  return running;
 }
 
 bool appIterate() => gDone;
 
 void main() async {
   if (appInit()) {
-    var quit = false;
-    final event = calloc<SdlEvent>();
-    while (!quit) {
-      while (event.poll()) {
-        quit = appEvent(event);
-        if (quit) {
-          break;
-        }
-      }
-      if (!quit) {
-        quit = appIterate();
+    var running = false;
+    while (running) {
+      running = appEvent();
+      if (running) {
+        running = appIterate();
       }
       // Note that when using sdlDelay, you cannot delegate processing to a callback.
       await Future.delayed(const Duration(milliseconds: 16));
     }
-    event.callocFree();
   }
   appQuit();
 }

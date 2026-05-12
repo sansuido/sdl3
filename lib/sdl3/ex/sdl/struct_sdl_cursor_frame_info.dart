@@ -1,20 +1,5 @@
 part of '../../sdl.dart';
 
-/*
-// SDL_CursorFrameInfo
-/// {@category mouse}
-final class SdlCursorFrameInfo extends Struct {
-  // [0]+(8)
-  external Pointer<SdlSurface> surface;
-  // [8]+(4)
-  @Uint32()
-  external int duration;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
-}
-*/
-
 class SdlxCursorFrameInfo {
   SdlxCursorFrameInfo({Pointer<SdlSurface>? surface, this.duration = 0}) {
     this.surface = surface ?? nullptr;

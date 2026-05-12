@@ -2,7 +2,6 @@
 // 1.キー入力の基本
 // 1.Keystroke basics
 import 'dart:ffi';
-import 'package:ffi/ffi.dart';
 import 'package:sdl3/sdl3.dart';
 
 const gTitle = 'DXLIB Tutorial 01';
@@ -50,30 +49,31 @@ void close() {
 int main() {
   // initialize
   if (init()) {
-    var quit = false;
-    final event = calloc<SdlEvent>();
-    while (!quit) {
-      while (event.poll()) {
-        switch (event.type) {
-          case SDL_EVENT_QUIT:
-            quit = true;
-          case SDL_EVENT_KEY_DOWN:
-            final keys = sdlGetKeyboardState(nullptr);
-            if (keys[SDL_SCANCODE_UP] != 0) {
-              gPlayerY -= gPlayerHeight ~/ 2;
-            }
-            if (keys[SDL_SCANCODE_DOWN] != 0) {
-              gPlayerY += gPlayerHeight ~/ 2;
-            }
-            if (keys[SDL_SCANCODE_LEFT] != 0) {
-              gPlayerX -= gPlayerWidth ~/ 2;
-            }
-            if (keys[SDL_SCANCODE_RIGHT] != 0) {
-              gPlayerX += gPlayerWidth ~/ 2;
-            }
-          default:
-            break;
+    var running = true;
+    while (running) {
+      SdlxEvent? event;
+      while ((event = sdlxPollEvent()) != null) {
+        if (event is SdlxQuitEvent) {
+          running = false;
         }
+        if (event is SdlxKeyboardEvent && event.type == SdlkEvent.keyDown) {
+          if (event.scancode == SdlkScancode.escape) {
+            running = false;
+          }
+        }
+      }
+      final keys = sdlxGetKeyboardState();
+      if (keys[SdlkScancode.up]) {
+        gPlayerY -= gPlayerHeight ~/ 2;
+      }
+      if (keys[SdlkScancode.down]) {
+        gPlayerY += gPlayerHeight ~/ 2;
+      }
+      if (keys[SdlkScancode.left]) {
+        gPlayerX -= gPlayerWidth ~/ 2;
+      }
+      if (keys[SdlkScancode.right]) {
+        gPlayerX += gPlayerWidth ~/ 2;
       }
       // draw
       gRenderer
@@ -90,7 +90,6 @@ int main() {
         )
         ..present();
     }
-    event.callocFree();
   }
   // close
   close();

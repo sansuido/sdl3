@@ -2,7 +2,6 @@
 // 4.マップスクロール基本
 // 4.Map scroll basics
 import 'dart:ffi';
-import 'package:ffi/ffi.dart';
 import 'package:sdl3/sdl3.dart';
 
 const gTitle = 'DXLIB Tutorial 04';
@@ -71,23 +70,23 @@ void close() {
 
 void update() {
   if (gMove == 0) {
-    final keys = sdlGetKeyboardState(nullptr);
-    if (keys[SDL_SCANCODE_UP] != 0) {
+    final keys = sdlxGetKeyboardState();
+    if (keys[SDL_SCANCODE_UP]) {
       gMove = 1;
       gMoveX = 0;
       gMoveY = -1;
     }
-    if (keys[SDL_SCANCODE_DOWN] != 0) {
+    if (keys[SDL_SCANCODE_DOWN]) {
       gMove = 1;
       gMoveX = 0;
       gMoveY = 1;
     }
-    if (keys[SDL_SCANCODE_LEFT] != 0) {
+    if (keys[SDL_SCANCODE_LEFT]) {
       gMove = 1;
       gMoveX = -1;
       gMoveY = 0;
     }
-    if (keys[SDL_SCANCODE_RIGHT] != 0) {
+    if (keys[SDL_SCANCODE_RIGHT]) {
       gMove = 1;
       gMoveX = 1;
       gMoveY = 0;
@@ -118,18 +117,20 @@ void update() {
 }
 
 bool handleEvents() {
-  var quit = false;
-  final event = calloc<SdlEvent>();
-  while (event.poll()) {
-    switch (event.type) {
-      case SDL_EVENT_QUIT:
-        quit = true;
-      default:
-        break;
+  var running = true;
+  SdlxEvent? event;
+  while ((event = sdlxPollEvent()) != null) {
+    if (event is SdlxQuitEvent) {
+      running = false;
+    }
+    if (event is SdlxKeyboardEvent && event.type == SdlkEvent.keyDown) {
+      switch (event.scancode) {
+        case SdlkScancode.escape:
+          running = false;
+      }
     }
   }
-  event.callocFree();
-  return quit;
+  return running;
 }
 
 void render() {
@@ -183,12 +184,12 @@ void render() {
 
 int main() {
   if (init()) {
-    var quit = false;
-    while (!quit) {
+    var running = true;
+    while (running) {
+      // handleEvents
+      running = handleEvents();
       // update
       update();
-      // handleEvents
-      quit = handleEvents();
       // render
       render();
     }

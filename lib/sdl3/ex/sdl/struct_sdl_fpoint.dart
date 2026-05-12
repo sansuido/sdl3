@@ -20,6 +20,14 @@ class SdlxFPoint {
 
   double angleTo(SdlxFPoint other) => math.atan2(other.y - y, other.x - x);
 
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is SdlxFPoint && x == other.x && y == other.y;
+
+  @override
+  int get hashCode => x.hashCode ^ y.hashCode;
+
   SdlxFPoint operator +(SdlxFPoint other) =>
       SdlxFPoint(x + other.x, y + other.y);
   SdlxFPoint operator -(SdlxFPoint other) =>

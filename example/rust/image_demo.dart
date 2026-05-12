@@ -1,6 +1,5 @@
 // https://github.com/Rust-SDL2/rust-sdl2/blob/master/examples/image-demo.rs
 import 'dart:ffi';
-import 'package:ffi/ffi.dart';
 import 'package:sdl3/sdl3.dart';
 
 int main() {
@@ -28,37 +27,35 @@ int main() {
     sdlQuit();
     return -1;
   }
-  final event = calloc<SdlEvent>();
   Pointer<SdlTexture> texture = nullptr;
   var running = true;
   while (running) {
-    while (event.poll()) {
-      switch (event.type) {
-        case SDL_EVENT_QUIT:
+    SdlxEvent? event;
+    while ((event = sdlxPollEvent()) != null) {
+      if (event is SdlxQuitEvent) {
+        running = false;
+      }
+      if (event is SdlxKeyboardEvent && event.type == SdlkEvent.keyDown) {
+        if (event.scancode == SdlkScancode.escape) {
           running = false;
-        case SDL_EVENT_KEY_DOWN:
-          if (event.key.ref.key == SDLK_ESCAPE) {
-            running = false;
+        }
+      }
+      if (event is SdlxDropEvent && event.type == SdlkEvent.dropFile) {
+        print(event.data);
+        final loadTexture = renderer.loadTexture(event.data);
+        if (loadTexture != nullptr) {
+          if (texture != nullptr) {
+            texture.destroy();
+            texture = nullptr;
           }
-        case SDL_EVENT_DROP_FILE:
-          final data = event.drop.ref.data.cast<Utf8>().toDartString();
-          print(data);
-          final loadTexture = renderer.loadTexture(data);
-          if (loadTexture != nullptr) {
-            if (texture != nullptr) {
-              texture.destroy();
-              texture = nullptr;
-            }
-            texture = loadTexture;
-            final size = SdlxFPoint(0, 0);
-            if (loadTexture.getSize(size)) {
-              print('X=${size.x} Y=${size.y}');
-            }
-          } else {
-            sdlShowSimpleMessageBox(0, 'imgGetError', imgGetError(), window);
+          texture = loadTexture;
+          final size = SdlxFPoint(0, 0);
+          if (loadTexture.getSize(size)) {
+            print('X=${size.x} Y=${size.y}');
           }
-        default:
-          break;
+        } else {
+          sdlShowSimpleMessageBox(0, 'imgGetError', imgGetError(), window);
+        }
       }
     }
     renderer
@@ -69,7 +66,6 @@ int main() {
     }
     renderer.present();
   }
-  event.callocFree();
   texture.destroy();
   renderer.destroy();
   window.destroy();

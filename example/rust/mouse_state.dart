@@ -1,6 +1,5 @@
 // https://github.com/Rust-SDL2/rust-sdl2/blob/master/examples/mouse-state.rs
 import 'dart:ffi';
-import 'package:ffi/ffi.dart';
 import 'package:sdl3/sdl3.dart';
 
 int main() {
@@ -14,21 +13,19 @@ int main() {
     sdlQuit();
     return -1;
   }
-  final event = calloc<SdlEvent>();
   var running = true;
   var oldPoint = SdlxFPoint(0, 0);
   var oldButton = 0;
   while (running) {
-    while (event.poll()) {
-      switch (event.type) {
-        case SDL_EVENT_QUIT:
+    SdlxEvent? event;
+    while ((event = sdlxPollEvent()) != null) {
+      if (event is SdlxQuitEvent) {
+        running = false;
+      }
+      if (event is SdlxKeyboardEvent && event.type == SdlkEvent.keyDown) {
+        if (event.scancode == SdlkScancode.escape) {
           running = false;
-        case SDL_EVENT_KEY_DOWN:
-          if (event.key.ref.key == SDLK_ESCAPE) {
-            running = false;
-          }
-        default:
-          break;
+        }
       }
     }
     final newPoint = SdlxFPoint(0, 0);
@@ -39,7 +36,6 @@ int main() {
       oldButton = newButton;
     }
   }
-  event.callocFree();
   window.destroy();
   sdlQuit();
   return 0;

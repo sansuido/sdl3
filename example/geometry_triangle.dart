@@ -1,5 +1,4 @@
 import 'dart:ffi';
-import 'package:ffi/ffi.dart';
 import 'package:sdl3/sdl3.dart';
 
 int main() {
@@ -33,15 +32,17 @@ int main() {
       ..color = SdlxFColor(0, 1, 0),
   ];
 
-  final event = calloc<SdlEvent>();
   var running = true;
   while (running) {
-    while (event.poll()) {
-      switch (event.type) {
-        case SDL_EVENT_QUIT:
+    SdlxEvent? event;
+    while ((event = sdlxPollEvent()) != null) {
+      if (event is SdlxQuitEvent) {
+        running = false;
+      }
+      if (event is SdlxKeyboardEvent && event.type == SdlkEvent.keyDown) {
+        if (event.scancode == SdlkScancode.escape) {
           running = false;
-        default:
-          break;
+        }
       }
     }
     renderer
@@ -50,7 +51,6 @@ int main() {
       ..geometry(nullptr, vertices: vertices)
       ..present();
   }
-  event.callocFree();
   renderer.destroy();
   window.destroy();
   sdlQuit();

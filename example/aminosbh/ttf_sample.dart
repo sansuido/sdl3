@@ -29,7 +29,6 @@
  *
  */
 import 'dart:ffi';
-import 'package:ffi/ffi.dart';
 import 'package:sdl3/sdl3.dart';
 
 // Define screen dimensions
@@ -125,15 +124,19 @@ int main() {
         textSurface.destroy();
       }
       // Event loop exit flag
-      var quit = false;
+      var running = true;
       // Event loop
-      while (!quit) {
-        final event = calloc<SdlEvent>()
-          // Wait indefinitely for the next available event
-          ..wait();
-        // User requests quit
-        if (event.type == SDL_EVENT_QUIT) {
-          quit = true;
+      while (running) {
+        SdlxEvent? event;
+        if ((event = sdlxWaitEvent()) != null) {
+          if (event is SdlxQuitEvent) {
+            running = false;
+          }
+          if (event is SdlxKeyboardEvent && event.type == SdlkEvent.keyDown) {
+            if (event.scancode == SdlkScancode.escape) {
+              running = false;
+            }
+          }
         }
         // Initialize renderer color white for the background
         renderer
@@ -148,7 +151,6 @@ int main() {
           ..texture(text, dstrect: textRect)
           // Update screen
           ..present();
-        event.callocFree();
       }
       // Destroy renderer
       renderer.destroy();

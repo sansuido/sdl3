@@ -7,11 +7,6 @@ final class SdlAssertData extends Struct {
   // [0]+(1)
   @Uint8()
   external int alwaysIgnore;
-  // [] +(3)
-  @Uint16()
-  external int blank_1;
-  @Uint8()
-  external int blank_2;
   // [4]+(4)
   @Uint32()
   external int triggerCount;
@@ -22,9 +17,6 @@ final class SdlAssertData extends Struct {
   // [24]+(4)
   @Int32()
   external int linenum;
-  // [] +(4)
-  @Uint32()
-  external int blank_3;
   // [32]+(8)
   external Pointer<Utf8> function;
   // [40]+(8)
@@ -170,9 +162,6 @@ final class SdlDisplayEvent extends Struct {
   // [24]+(4)
   @Int32()
   external int data2;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
 }
 
 // SDL_WindowEvent
@@ -196,9 +185,6 @@ final class SdlWindowEvent extends Struct {
   // [24]+(4)
   @Int32()
   external int data2;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
 }
 
 // SDL_KeyboardDeviceEvent
@@ -216,9 +202,6 @@ final class SdlKeyboardDeviceEvent extends Struct {
   // [16]+(4)
   @Uint32()
   external int which;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
 }
 
 // SDL_KeyboardEvent
@@ -257,9 +240,6 @@ final class SdlKeyboardEvent extends Struct {
   // [37]+(1)
   @Uint8()
   external int repeat;
-  // [] +(2)
-  @Uint16()
-  external int blank_1;
 }
 
 // SDL_TextEditingEvent
@@ -277,9 +257,6 @@ final class SdlTextEditingEvent extends Struct {
   // [16]+(4)
   @Uint32()
   external int windowId;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
   // [24]+(8)
   external Pointer<Utf8> text;
   // [32]+(4)
@@ -305,9 +282,6 @@ final class SdlTextEditingCandidatesEvent extends Struct {
   // [16]+(4)
   @Uint32()
   external int windowId;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
   // [24]+(8)
   external Pointer<Pointer<Int8>> candidates;
   // [32]+(4)
@@ -328,9 +302,6 @@ final class SdlTextEditingCandidatesEvent extends Struct {
   // [43]+(1)
   @Uint8()
   external int padding3;
-  // [] +(4)
-  @Uint32()
-  external int blank_2;
 }
 
 // SDL_TextInputEvent
@@ -348,9 +319,6 @@ final class SdlTextInputEvent extends Struct {
   // [16]+(4)
   @Uint32()
   external int windowId;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
   // [24]+(8)
   external Pointer<Utf8> text;
 }
@@ -370,9 +338,6 @@ final class SdlMouseDeviceEvent extends Struct {
   // [16]+(4)
   @Uint32()
   external int which;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
 }
 
 // SDL_MouseMotionEvent
@@ -408,9 +373,6 @@ final class SdlMouseMotionEvent extends Struct {
   // [40]+(4)
   @Float()
   external double yrel;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
 }
 
 // SDL_MouseButtonEvent
@@ -449,9 +411,6 @@ final class SdlMouseButtonEvent extends Struct {
   // [32]+(4)
   @Float()
   external double y;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
 }
 
 // SDL_MouseWheelEvent
@@ -493,9 +452,6 @@ final class SdlMouseWheelEvent extends Struct {
   // [48]+(4)
   @Int32()
   external int integerY;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
 }
 
 // SDL_JoyAxisEvent
@@ -531,9 +487,6 @@ final class SdlJoyAxisEvent extends Struct {
   // [26]+(2)
   @Uint16()
   external int padding4;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
 }
 
 // SDL_JoyBallEvent
@@ -569,9 +522,6 @@ final class SdlJoyBallEvent extends Struct {
   // [26]+(2)
   @Int16()
   external int yrel;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
 }
 
 // SDL_JoyHatEvent
@@ -647,9 +597,6 @@ final class SdlJoyDeviceEvent extends Struct {
   // [16]+(4)
   @Uint32()
   external int which;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
 }
 
 // SDL_JoyBatteryEvent
@@ -673,9 +620,6 @@ final class SdlJoyBatteryEvent extends Struct {
   // [24]+(4)
   @Int32()
   external int percent;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
 }
 
 // SDL_GamepadAxisEvent
@@ -711,9 +655,6 @@ final class SdlGamepadAxisEvent extends Struct {
   // [26]+(2)
   @Uint16()
   external int padding4;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
 }
 
 // SDL_GamepadButtonEvent
@@ -760,9 +701,6 @@ final class SdlGamepadDeviceEvent extends Struct {
   // [16]+(4)
   @Uint32()
   external int which;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
 }
 
 // SDL_GamepadTouchpadEvent
@@ -822,9 +760,6 @@ final class SdlGamepadSensorEvent extends Struct {
   external double data_2;
   @Float()
   external double data_3;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
   // [40]+(8)
   @Uint64()
   external int sensorTimestamp;
@@ -874,9 +809,6 @@ final class SdlCameraDeviceEvent extends Struct {
   // [16]+(4)
   @Uint32()
   external int which;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
 }
 
 // SDL_RenderEvent
@@ -894,9 +826,6 @@ final class SdlRenderEvent extends Struct {
   // [16]+(4)
   @Uint32()
   external int windowId;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
 }
 
 // SDL_TouchFingerEvent
@@ -1004,9 +933,6 @@ final class SdlPenMotionEvent extends Struct {
   // [32]+(4)
   @Float()
   external double y;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
 }
 
 // SDL_PenTouchEvent
@@ -1042,9 +968,6 @@ final class SdlPenTouchEvent extends Struct {
   // [37]+(1)
   @Uint8()
   external int down;
-  // [] +(2)
-  @Uint16()
-  external int blank_1;
 }
 
 // SDL_PenButtonEvent
@@ -1080,9 +1003,6 @@ final class SdlPenButtonEvent extends Struct {
   // [37]+(1)
   @Uint8()
   external int down;
-  // [] +(2)
-  @Uint16()
-  external int blank_1;
 }
 
 // SDL_PenAxisEvent
@@ -1118,9 +1038,6 @@ final class SdlPenAxisEvent extends Struct {
   // [40]+(4)
   @Float()
   external double value;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
 }
 
 // SDL_DropEvent
@@ -1144,9 +1061,6 @@ final class SdlDropEvent extends Struct {
   // [24]+(4)
   @Float()
   external double y;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
   // [32]+(8)
   external Pointer<Utf8> source;
   // [40]+(8)
@@ -1168,11 +1082,6 @@ final class SdlClipboardEvent extends Struct {
   // [16]+(1)
   @Uint8()
   external int owner;
-  // [] +(3)
-  @Uint16()
-  external int blank_1;
-  @Uint8()
-  external int blank_2;
   // [20]+(4)
   @Int32()
   external int numMimeTypes;
@@ -1208,9 +1117,6 @@ final class SdlSensorEvent extends Struct {
   external double data_5;
   @Float()
   external double data_6;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
   // [48]+(8)
   @Uint64()
   external int sensorTimestamp;
@@ -1377,9 +1283,6 @@ final class SdlPathInfo extends Struct {
   // [0]+(4)
   @Int32()
   external int type;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
   // [8]+(8)
   @Uint64()
   external int size;
@@ -1410,9 +1313,6 @@ final class SdlGamepadBinding extends Struct {
   // [8]+(4)
   @Int32()
   external int axisMax;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
   // [16]+(8)
   external Pointer<NativeType> output;
 }
@@ -1506,9 +1406,6 @@ final class SdlGpuTextureTransferInfo extends Struct {
   // [16]+(4)
   @Uint32()
   external int rowsPerLayer;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
 }
 
 // SDL_GPUTransferBufferLocation
@@ -1519,9 +1416,6 @@ final class SdlGpuTransferBufferLocation extends Struct {
   // [8]+(4)
   @Uint32()
   external int offset;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
 }
 
 // SDL_GPUTextureLocation
@@ -1544,9 +1438,6 @@ final class SdlGpuTextureLocation extends Struct {
   // [24]+(4)
   @Uint32()
   external int z;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
 }
 
 // SDL_GPUTextureRegion
@@ -1613,9 +1504,6 @@ final class SdlGpuBufferLocation extends Struct {
   // [8]+(4)
   @Uint32()
   external int offset;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
 }
 
 // SDL_GPUBufferRegion
@@ -1777,17 +1665,11 @@ final class SdlGpuVertexInputState extends Struct {
   // [8]+(4)
   @Uint32()
   external int numVertexBuffers;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
   // [16]+(8)
   external Pointer<SdlGpuVertexAttribute> vertexAttributes;
   // [24]+(4)
   @Uint32()
   external int numVertexAttributes;
-  // [] +(4)
-  @Uint32()
-  external int blank_2;
 }
 
 // SDL_GPUStencilOpState
@@ -1843,11 +1725,6 @@ final class SdlGpuColorTargetBlendState extends Struct {
   // [28]+(1)
   @Uint8()
   external int padding2;
-  // [] +(3)
-  @Uint16()
-  external int blank_1;
-  @Uint8()
-  external int blank_2;
 }
 
 // SDL_GPUShaderCreateInfo
@@ -1856,9 +1733,6 @@ final class SdlGpuShaderCreateInfo extends Struct {
   // [0]+(4)
   @Uint32()
   external int codeSize;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
   // [8]+(8)
   external Pointer<Uint8> code;
   // [16]+(8)
@@ -1884,9 +1758,6 @@ final class SdlGpuShaderCreateInfo extends Struct {
   // [48]+(4)
   @Uint32()
   external int props;
-  // [] +(4)
-  @Uint32()
-  external int blank_2;
 }
 
 // SDL_GPUTextureCreateInfo
@@ -2120,9 +1991,6 @@ final class SdlGpuGraphicsPipelineTargetInfo extends Struct {
   // [19]+(1)
   @Uint8()
   external int padding3;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
 }
 
 // SDL_GPUGraphicsPipelineCreateInfo
@@ -2145,32 +2013,50 @@ final class SdlGpuGraphicsPipelineCreateInfo extends Struct {
   @Int32()
   external int primitiveType;
   // [52]+(28)
-  @Uint64()
+  @Uint8()
   external int rasterizerState_1;
-  @Uint64()
+  @Uint8()
   external int rasterizerState_2;
-  @Uint64()
+  @Uint8()
   external int rasterizerState_3;
-  @Uint32()
+  @Uint8()
   external int rasterizerState_4;
+  @Uint64()
+  external int rasterizerState_5;
+  @Uint64()
+  external int rasterizerState_6;
+  @Uint64()
+  external int rasterizerState_7;
   // [80]+(12)
-  @Uint64()
+  @Uint8()
   external int multisampleState_1;
-  @Uint32()
+  @Uint8()
   external int multisampleState_2;
+  @Uint8()
+  external int multisampleState_3;
+  @Uint8()
+  external int multisampleState_4;
+  @Uint64()
+  external int multisampleState_5;
   // [92]+(44)
-  @Uint64()
+  @Uint8()
   external int depthStencilState_1;
-  @Uint64()
+  @Uint8()
   external int depthStencilState_2;
-  @Uint64()
+  @Uint8()
   external int depthStencilState_3;
-  @Uint64()
+  @Uint8()
   external int depthStencilState_4;
   @Uint64()
   external int depthStencilState_5;
-  @Uint32()
+  @Uint64()
   external int depthStencilState_6;
+  @Uint64()
+  external int depthStencilState_7;
+  @Uint64()
+  external int depthStencilState_8;
+  @Uint64()
+  external int depthStencilState_9;
   // [136]+(24)
   @Uint64()
   external int targetInfo_1;
@@ -2181,9 +2067,6 @@ final class SdlGpuGraphicsPipelineCreateInfo extends Struct {
   // [160]+(4)
   @Uint32()
   external int props;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
 }
 
 /// {@category gpu}
@@ -2207,9 +2090,6 @@ final class SdlGpuComputePipelineCreateInfo extends Struct {
   // [0]+(4)
   @Uint32()
   external int codeSize;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
   // [8]+(8)
   external Pointer<Uint8> code;
   // [16]+(8)
@@ -2247,9 +2127,6 @@ final class SdlGpuComputePipelineCreateInfo extends Struct {
   // [64]+(4)
   @Uint32()
   external int props;
-  // [] +(4)
-  @Uint32()
-  external int blank_2;
 }
 
 // SDL_GPUColorTargetInfo
@@ -2294,9 +2171,6 @@ final class SdlGpuColorTargetInfo extends Struct {
   // [59]+(1)
   @Uint8()
   external int padding2;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
 }
 
 /// {@category gpu}
@@ -2404,9 +2278,6 @@ final class SdlGpuBufferBinding extends Struct {
   // [8]+(4)
   @Uint32()
   external int offset;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
 }
 
 // SDL_GPUTextureSamplerBinding
@@ -2435,9 +2306,6 @@ final class SdlGpuStorageBufferReadWriteBinding extends Struct {
   // [11]+(1)
   @Uint8()
   external int padding3;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
 }
 
 // SDL_GPUStorageTextureReadWriteBinding
@@ -2463,9 +2331,6 @@ final class SdlGpuStorageTextureReadWriteBinding extends Struct {
   // [19]+(1)
   @Uint8()
   external int padding3;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
 }
 
 // SDL_GPUVulkanOptions
@@ -2474,9 +2339,6 @@ final class SdlGpuVulkanOptions extends Struct {
   // [0]+(4)
   @Uint32()
   external int vulkanApiVersion;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
   // [8]+(8)
   external Pointer<NativeType> featureList;
   // [16]+(8)
@@ -2484,17 +2346,11 @@ final class SdlGpuVulkanOptions extends Struct {
   // [24]+(4)
   @Uint32()
   external int deviceExtensionCount;
-  // [] +(4)
-  @Uint32()
-  external int blank_2;
   // [32]+(8)
   external Pointer<Pointer<Int8>> deviceExtensionNames;
   // [40]+(4)
   @Uint32()
   external int instanceExtensionCount;
-  // [] +(4)
-  @Uint32()
-  external int blank_3;
   // [48]+(8)
   external Pointer<Pointer<Int8>> instanceExtensionNames;
 }
@@ -2547,11 +2403,6 @@ final class SdlHapticDirection extends Struct {
   // [0]+(1)
   @Uint8()
   external int type;
-  // [] +(3)
-  @Uint16()
-  external int blank_1;
-  @Uint8()
-  external int blank_2;
   // [4]+(4*3)
   @Int32()
   external int dir_1;
@@ -2567,9 +2418,6 @@ final class SdlHapticConstant extends Struct {
   // [0]+(2)
   @Uint16()
   external int type;
-  // [] +(2)
-  @Uint16()
-  external int blank_1;
   // [4]+(16)
   @Uint32()
   external int direction_1;
@@ -2620,9 +2468,6 @@ final class SdlHapticPeriodic extends Struct {
   // [0]+(2)
   @Uint16()
   external int type;
-  // [] +(2)
-  @Uint16()
-  external int blank_1;
   // [4]+(16)
   @Uint32()
   external int direction_1;
@@ -2668,9 +2513,6 @@ final class SdlHapticPeriodic extends Struct {
   // [44]+(2)
   @Uint16()
   external int fadeLevel;
-  // [] +(2)
-  @Uint16()
-  external int blank_2;
 }
 
 /// {@category haptic}
@@ -2685,9 +2527,6 @@ final class SdlHapticCondition extends Struct {
   // [0]+(2)
   @Uint16()
   external int type;
-  // [] +(2)
-  @Uint16()
-  external int blank_1;
   // [4]+(16)
   @Uint32()
   external int direction_1;
@@ -2751,9 +2590,6 @@ final class SdlHapticCondition extends Struct {
   external int center_2;
   @Int16()
   external int center_3;
-  // [] +(2)
-  @Uint16()
-  external int blank_2;
 }
 
 /// {@category haptic}
@@ -2768,9 +2604,6 @@ final class SdlHapticRamp extends Struct {
   // [0]+(2)
   @Uint16()
   external int type;
-  // [] +(2)
-  @Uint16()
-  external int blank_1;
   // [4]+(16)
   @Uint32()
   external int direction_1;
@@ -2810,9 +2643,6 @@ final class SdlHapticRamp extends Struct {
   // [40]+(2)
   @Uint16()
   external int fadeLevel;
-  // [] +(2)
-  @Uint16()
-  external int blank_2;
 }
 
 /// {@category haptic}
@@ -2827,9 +2657,6 @@ final class SdlHapticLeftRight extends Struct {
   // [0]+(2)
   @Uint16()
   external int type;
-  // [] +(2)
-  @Uint16()
-  external int blank_1;
   // [4]+(4)
   @Uint32()
   external int length;
@@ -2847,9 +2674,6 @@ final class SdlHapticCustom extends Struct {
   // [0]+(2)
   @Uint16()
   external int type;
-  // [] +(2)
-  @Uint16()
-  external int blank_1;
   // [4]+(16)
   @Uint64()
   external int direction_1;
@@ -2870,18 +2694,12 @@ final class SdlHapticCustom extends Struct {
   // [30]+(1)
   @Uint8()
   external int channels;
-  // [] +(1)
-  @Uint8()
-  external int blank_2;
   // [32]+(2)
   @Uint16()
   external int period;
   // [34]+(2)
   @Uint16()
   external int samples;
-  // [] +(4)
-  @Uint32()
-  external int blank_3;
   // [40]+(8)
   external Pointer<Uint16> data;
   // [48]+(2)
@@ -2959,19 +2777,11 @@ final class SdlHidDeviceInfo extends Struct {
   // [10]+(2)
   @Uint16()
   external int productId;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
   // [16]+(8)
   external Pointer<Int16> serialNumber;
   // [24]+(2)
   @Uint16()
   external int releaseNumber;
-  // [] +(6)
-  @Uint32()
-  external int blank_2;
-  @Uint16()
-  external int blank_3;
   // [32]+(8)
   external Pointer<Int16> manufacturerString;
   // [40]+(8)
@@ -3007,9 +2817,6 @@ final class SdlIoStreamInterface extends Struct {
   // [0]+(4)
   @Uint32()
   external int version;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
   // [8]+(8)
   external Pointer<NativeType> size;
   // [16]+(8)
@@ -3105,9 +2912,6 @@ final class SdlVirtualJoystickDesc extends Struct {
   // [32]+(4)
   @Uint32()
   external int axisMask;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
   // [40]+(8)
   external Pointer<Utf8> name;
   // [48]+(8)
@@ -3232,9 +3036,6 @@ final class SdlMessageBoxData extends Struct {
   // [0]+(4)
   @Uint32()
   external int flags;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
   // [8]+(8)
   external Pointer<SdlWindow> window;
   // [16]+(8)
@@ -3244,9 +3045,6 @@ final class SdlMessageBoxData extends Struct {
   // [32]+(4)
   @Int32()
   external int numbuttons;
-  // [] +(4)
-  @Uint32()
-  external int blank_2;
   // [40]+(8)
   external Pointer<SdlMessageBoxButtonData> buttons;
   // [48]+(8)
@@ -3265,9 +3063,6 @@ final class SdlCursorFrameInfo extends Struct {
   // [8]+(4)
   @Uint32()
   external int duration;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
 }
 
 // SDL_Mutex
@@ -3290,11 +3085,14 @@ final class SdlCondition extends Opaque {}
 /// {@category mutex}
 final class SdlInitState extends Struct {
   // [0]+(4)
-  @Uint32()
+  @Uint8()
   external int status_1;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
+  @Uint8()
+  external int status_2;
+  @Uint8()
+  external int status_3;
+  @Uint8()
+  external int status_4;
   // [8]+(8)
   @Uint64()
   external int thread;
@@ -3313,9 +3111,6 @@ final class XrSessionCreateInfo extends Struct {
   // [0]+(4)
   @Int32()
   external int type;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
   // [8]+(8)
   external Pointer<NativeType> next;
 }
@@ -3326,9 +3121,6 @@ final class XrSwapchainCreateInfo extends Struct {
   // [0]+(4)
   @Int32()
   external int type;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
   // [8]+(8)
   external Pointer<NativeType> next;
 }
@@ -3373,9 +3165,6 @@ final class SdlPalette extends Struct {
   // [0]+(4)
   @Int32()
   external int ncolors;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
   // [8]+(8)
   external Pointer<SdlColor> colors;
   // [16]+(4)
@@ -3561,33 +3350,21 @@ final class SdlGpuRenderStateCreateInfo extends Struct {
   // [8]+(4)
   @Int32()
   external int numSamplerBindings;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
   // [16]+(8)
   external Pointer<SdlGpuTextureSamplerBinding> samplerBindings;
   // [24]+(4)
   @Int32()
   external int numStorageTextures;
-  // [] +(4)
-  @Uint32()
-  external int blank_2;
   // [32]+(8)
   external Pointer<Pointer<SdlGpuTexture>> storageTextures;
   // [40]+(4)
   @Int32()
   external int numStorageBuffers;
-  // [] +(4)
-  @Uint32()
-  external int blank_3;
   // [48]+(8)
   external Pointer<Pointer<SdlGpuBuffer>> storageBuffers;
   // [56]+(4)
   @Uint32()
   external int props;
-  // [] +(4)
-  @Uint32()
-  external int blank_4;
 }
 
 // SDL_GPURenderState
@@ -3604,13 +3381,6 @@ final class SdlAlignmentTest extends Struct {
   // [0]+(1)
   @Uint8()
   external int a;
-  // [] +(7)
-  @Uint32()
-  external int blank_1;
-  @Uint16()
-  external int blank_2;
-  @Uint8()
-  external int blank_3;
   // [8]+(8)
   external Pointer<NativeType> b;
 }
@@ -3629,9 +3399,6 @@ final class SdlStorageInterface extends Struct {
   // [0]+(4)
   @Uint32()
   external int version;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
   // [8]+(8)
   external Pointer<NativeType> close;
   // [16]+(8)
@@ -3678,17 +3445,11 @@ final class SdlSurface extends Struct {
   // [16]+(4)
   @Int32()
   external int pitch;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
   // [24]+(8)
   external Pointer<NativeType> pixels;
   // [32]+(4)
   @Int32()
   external int refcount;
-  // [] +(4)
-  @Uint32()
-  external int blank_2;
   // [40]+(8)
   external Pointer<NativeType> reserved;
 }
@@ -3760,9 +3521,6 @@ final class SdlFinger extends Struct {
   // [16]+(4)
   @Float()
   external double pressure;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
 }
 
 // SDL_Tray

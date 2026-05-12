@@ -1,5 +1,18 @@
 # Changelog
 
+## [2.8.2] - 2026-05-12
+- SDL3-2026-05-10
+### Added
+- Added functions and wrapper classes for the events.
+- Added functions and wrapper classes for the keyboard.
+- Added operator == for the SdlxFPoint.
+### Changed
+- **Updated Examples**: All sample code has been migrated to use the new events.
+### Fixed
+- Removed the padding that was previously handled knowledge-wise within the structure.
+- Improved the `gfx/primitives_stack.dart`.
+- Renamed the class of SdlxRenderLogicalPresentation (remove "Info" from the end).
+
 ## [2.8.1] - 2026-05-04
 - SDL3-2026-05-03
 ### Added

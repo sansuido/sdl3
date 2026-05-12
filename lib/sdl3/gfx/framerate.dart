@@ -81,7 +81,7 @@ class FpsManager {
 
   int getFramecount() => _framecount;
 
-  int delay() {
+  int delaySync() {
     double currentTicks;
     double targetTicks;
     double theDelay;
@@ -112,7 +112,7 @@ class FpsManager {
     return timePassed.toInt();
   }
 
-  Future<int> delayNative() async {
+  Future<int> delay() async {
     double currentTicks;
     double targetTicks;
     double theDelay;

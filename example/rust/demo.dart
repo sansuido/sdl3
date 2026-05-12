@@ -1,6 +1,5 @@
 // https://github.com/Rust-SDL2/rust-sdl2/blob/master/examples/demo.rs
 import 'dart:ffi';
-import 'package:ffi/ffi.dart';
 import 'package:sdl3/sdl3.dart';
 
 int main() {
@@ -26,22 +25,23 @@ int main() {
     sdlQuit();
     return -1;
   }
-  final event = calloc<SdlEvent>();
   var running = true;
   while (running) {
-    while (event.poll()) {
-      switch (event.type) {
-        case SDL_EVENT_QUIT:
+    SdlxEvent? event;
+    while ((event = sdlxPollEvent()) != null) {
+      if (event is SdlxQuitEvent) {
+        running = false;
+      }
+      if (event is SdlxKeyboardEvent && event.type == SdlkEvent.keyDown) {
+        if (event.scancode == SdlkScancode.escape) {
           running = false;
-        default:
-          break;
+        }
       }
     }
     renderer
       ..setDrawColor(SdlxColor(0xff, 0xff, 0xff))
       ..present();
   }
-  event.callocFree();
   renderer.destroy();
   window.destroy();
   sdlQuit();

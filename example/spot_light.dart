@@ -1,7 +1,6 @@
 // https://discourse.libsdl.org/t/is-possible-to-create-ambient-light-in-sdl2/28381
 import 'dart:ffi';
 
-import 'package:ffi/ffi.dart';
 import 'package:sdl3/sdl3.dart';
 
 int main() {
@@ -50,22 +49,25 @@ int main() {
   double angle = 0;
   var tint = tintMin;
   double calc = 0;
-  final event = calloc<SdlEvent>();
   var running = true;
   while (running) {
-    while (event.poll()) {
-      switch (event.type) {
-        case SdlkEvent.quit:
+    SdlxEvent? event;
+    while ((event = sdlxPollEvent()) != null) {
+      if (event is SdlxQuitEvent) {
+        running = false;
+      }
+      if (event is SdlxKeyboardEvent && event.type == SdlkEvent.keyDown) {
+        if (event.scancode == SdlkScancode.escape) {
           running = false;
-        case SdlkEvent.mouseButtonDown:
-          // left click event
-          if (event.button.ref.button == SdlkButton.left) {
-            if (tint <= tintMin) {
-              calc = calcValue;
-            } else if (tint >= tintMax) {
-              calc = -calcValue;
-            }
-          }
+        }
+      }
+      // left click event
+      if (event is SdlxMouseButtonEvent && event.button == SdlkButton.left) {
+        if (tint <= tintMin) {
+          calc = calcValue;
+        } else if (tint >= tintMax) {
+          calc = -calcValue;
+        }
       }
     }
     // draw light points
@@ -118,7 +120,6 @@ int main() {
         ..present();
     }
   }
-  event.callocFree();
   bgTexture.destroy();
   lightTexture.destroy();
   lightsLayer.destroy();

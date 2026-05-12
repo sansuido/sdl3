@@ -465,8 +465,8 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetRenderLogicalPresentation(SDL_Renderer *renderer, int w, int h, SDL_RendererLogicalPresentation mode)
   /// ```
   /// {@category render}
-  bool setLogicalPresentation(SdlxRenderLogicalPresentationInfo info) =>
-      sdlxSetRenderLogicalPresentation(this, info);
+  bool setLogicalPresentation(SdlxRenderLogicalPresentation presentation) =>
+      sdlxSetRenderLogicalPresentation(this, presentation);
 
   ///
   /// Get device independent resolution and presentation mode for rendering.
@@ -495,8 +495,8 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderLogicalPresentation(SDL_Renderer *renderer, int *w, int *h, SDL_RendererLogicalPresentation *mode)
   /// ```
   /// {@category render}
-  bool getLogicalPresentation(SdlxRenderLogicalPresentationInfo info) =>
-      sdlxGetRenderLogicalPresentation(this, info);
+  bool getLogicalPresentation(SdlxRenderLogicalPresentation presentation) =>
+      sdlxGetRenderLogicalPresentation(this, presentation);
 
   ///
   /// Get a point in render coordinates when given a point in window coordinates.

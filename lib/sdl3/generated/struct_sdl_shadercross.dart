@@ -15,9 +15,6 @@ final class SdlShaderCrossIoVarMetadata extends Struct {
   // [16]+(4)
   @Uint32()
   external int vectorSize;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
 }
 
 // SDL_ShaderCross_GraphicsShaderResourceInfo
@@ -48,17 +45,11 @@ final class SdlShaderCrossGraphicsShaderMetadata extends Struct {
   // [16]+(4)
   @Uint32()
   external int numInputs;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
   // [24]+(8)
   external Pointer<SdlShaderCrossIoVarMetadata> inputs;
   // [32]+(4)
   @Uint32()
   external int numOutputs;
-  // [] +(4)
-  @Uint32()
-  external int blank_2;
   // [40]+(8)
   external Pointer<SdlShaderCrossIoVarMetadata> outputs;
 }
@@ -110,9 +101,6 @@ final class SdlShaderCrossSpirvInfo extends Struct {
   // [8]+(4)
   @Uint32()
   external int bytecodeSize;
-  // [] +(4)
-  @Uint32()
-  external int blank_1;
   // [16]+(8)
   external Pointer<Utf8> entrypoint;
   // [24]+(4)

@@ -1,5 +1,4 @@
 import 'dart:ffi';
-import 'package:ffi/ffi.dart';
 import 'package:sdl3/sdl3.dart';
 
 const gHlslSource = '''
@@ -35,22 +34,19 @@ choke
 enum CompileMode { dxbc, dxil, spirv }
 
 void testCompile(CompileMode mode, String source, {bool debug = false}) {
-  final hlslInfo = calloc<SdlShaderCrossHlslInfo>();
-  final size = calloc<Uint32>();
-  final sourceUtf8 = source.toNativeUtf8();
-  final entrypointUtf8 = 'main'.toNativeUtf8();
-  hlslInfo.ref.source = sourceUtf8;
-  hlslInfo.ref.shaderStage = SdlkShadercrossShaderstage.vertex;
-  hlslInfo.ref.entrypoint = entrypointUtf8;
+  final hlslInfo = SdlxShaderCrossHlslInfo()
+    ..source = source
+    ..shaderStage = SdlkShadercrossShaderstage.vertex
+    ..entrypoint = 'main';
   if (debug) {
-    hlslInfo.ref.props = sdlCreateProperties();
+    hlslInfo.props = sdlCreateProperties();
     sdlSetBooleanProperty(
-      hlslInfo.ref.props,
+      hlslInfo.props,
       SDL_SHADERCROSS_PROP_SHADER_DEBUG_ENABLE_BOOLEAN,
       true,
     );
     sdlSetStringProperty(
-      hlslInfo.ref.props,
+      hlslInfo.props,
       SDL_SHADERCROSS_PROP_SHADER_DEBUG_NAME_STRING,
       'Simple shader',
     );
@@ -58,14 +54,14 @@ void testCompile(CompileMode mode, String source, {bool debug = false}) {
   late Pointer<NativeType> shader;
   switch (mode) {
     case CompileMode.dxbc:
-      shader = sdlShaderCrossCompileDxbcFromHlsl(hlslInfo, size);
-      print('dxbc: size: ${size.value}');
+      shader = sdlxShaderCrossCompileDxbcFromHlsl(hlslInfo);
+      print('dxbc: size: ${hlslInfo.size}');
     case CompileMode.dxil:
-      shader = sdlShaderCrossCompileDxilFromHlsl(hlslInfo, size);
-      print('dxil: size: ${size.value}');
+      shader = sdlxShaderCrossCompileDxilFromHlsl(hlslInfo);
+      print('dxil: size: ${hlslInfo.size}');
     case CompileMode.spirv:
-      shader = sdlShaderCrossCompileSpirvFromHlsl(hlslInfo, size);
-      print('spirv: size: ${size.value}');
+      shader = sdlxShaderCrossCompileSpirvFromHlsl(hlslInfo);
+      print('spirv: size: ${hlslInfo.size}');
   }
   if (shader == nullptr) {
     print('Failed to compile shader: ${sdlGetError()}');
@@ -73,12 +69,8 @@ void testCompile(CompileMode mode, String source, {bool debug = false}) {
     sdlFree(shader);
   }
   if (debug) {
-    sdlDestroyProperties(hlslInfo.ref.props);
+    sdlDestroyProperties(hlslInfo.props);
   }
-  sourceUtf8.callocFree();
-  entrypointUtf8.callocFree();
-  hlslInfo.callocFree();
-  size.callocFree();
 }
 
 void main() {

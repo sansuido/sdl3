@@ -1,5 +1,4 @@
 import 'dart:ffi';
-import 'package:ffi/ffi.dart';
 import 'package:sdl3/sdl3.dart';
 
 const gScreenWidth = 800;
@@ -65,45 +64,45 @@ int main() {
   for (var n = 0; n < SDL_GAMEPAD_BUTTON_COUNT; n++) {
     buttonEnables.add(false);
   }
-  final event = calloc<SdlEvent>();
   var running = true;
   while (running) {
-    while (event.poll()) {
-      switch (event.type) {
-        case SDL_EVENT_QUIT:
-          running = false;
-        case SDL_EVENT_KEY_DOWN:
-          if (event.key.ref.key == SDLK_ESCAPE) {
+    SdlxEvent? event;
+    while ((event = sdlxPollEvent()) != null) {
+      if (event is SdlxQuitEvent) {
+        running = false;
+      }
+      if (event is SdlxKeyboardEvent && event.type == SdlkEvent.keyDown) {
+        switch (event.scancode) {
+          case SdlkScancode.escape:
             running = false;
-            break;
-          }
-        case SDL_EVENT_GAMEPAD_BUTTON_DOWN:
-          buttonEnables[event.gbutton.ref.button] = true;
-        case SDL_EVENT_GAMEPAD_BUTTON_UP:
-          buttonEnables[event.gbutton.ref.button] = false;
-        default:
-          break;
+        }
+      }
+      if (event is SdlxGamepadButtonEvent) {
+        if (event.type == SdlkEvent.gamepadButtonDown) {
+          buttonEnables[event.button] = true;
+        } else {
+          buttonEnables[event.button] = false;
+        }
+      }
+    }
+    renderer
+      ..setDrawColor(SdlxColor(0xff, 0xff, 0xff))
+      ..clear();
+    for (var n = 0; n < buttonEnables.length; n++) {
+      var color = SdlxColor(255, 0, 0);
+      if (buttonEnables[n]) {
+        color = SdlxColor(0, 255, 0);
       }
       renderer
-        ..setDrawColor(SdlxColor(0xff, 0xff, 0xff))
-        ..clear();
-      for (var n = 0; n < buttonEnables.length; n++) {
-        var color = SdlxColor(255, 0, 0);
-        if (buttonEnables[n]) {
-          color = SdlxColor(0, 255, 0);
-        }
-        renderer
-          ..filledCircleColor(SdlxFPoint(20, (n + 1) * 20), 10, color)
-          ..stringColor(
-            SdlxFPoint(20 + 20, (n + 1) * 20),
-            buttonNames[n],
-            SdlxColor(0, 0, 0),
-          );
-      }
-      renderer.present();
+        ..filledCircleColor(SdlxFPoint(20, (n + 1) * 20), 10, color)
+        ..stringColor(
+          SdlxFPoint(20 + 20, (n + 1) * 20),
+          buttonNames[n],
+          SdlxColor(0, 0, 0),
+        );
     }
+    renderer.present();
   }
-  event.callocFree();
   gameController.close();
   renderer.destroy();
   window.destroy();

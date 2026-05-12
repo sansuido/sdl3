@@ -25,17 +25,9 @@ final class NetDatagram extends Struct {
   // [8]+(2)
   @Uint16()
   external int port;
-  // [] +(6)
-  @Uint32()
-  external int blank_1;
-  @Uint16()
-  external int blank_2;
   // [16]+(8)
   external Pointer<Uint8> buf;
   // [24]+(4)
   @Int32()
   external int buflen;
-  // [] +(4)
-  @Uint32()
-  external int blank_3;
 }
