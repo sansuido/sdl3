@@ -54,8 +54,9 @@ extension MixAudioDecoderEx on MixAudioDecoder {
   ///
   /// This function allows properties to be specified. This is intended to supply
   /// file-specific settings, such as where to find SoundFonts for a MIDI file,
-  /// etc. In most cases, the caller should pass a zero to specify no extra
-  /// properties.
+  /// etc. Most of the properties available to MIX_LoadAudioWithProperties()
+  /// apply here, too. In most cases, the caller should pass a zero to specify no
+  /// extra properties.
   ///
   /// If `closeio` is true, then `io` will be closed when this decoder is done
   /// with it. If this function fails and `closeio` is true, then `io` will be

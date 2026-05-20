@@ -5,6 +5,8 @@ class SdlxFPoint {
   double x;
   double y;
 
+  static SdlxFPoint get zero => SdlxFPoint(0, 0);
+
   SdlxPoint toInt() => SdlxPoint(x.toInt(), y.toInt());
 
   SdlxFPoint lerpTo(SdlxFPoint other, double t) =>

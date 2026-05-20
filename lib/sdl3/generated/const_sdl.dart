@@ -204,8 +204,9 @@ const SDL_EVENT_WINDOW_ENTER_FULLSCREEN = 0x202 + 21;
 const SDL_EVENT_WINDOW_LEAVE_FULLSCREEN = 0x202 + 22;
 const SDL_EVENT_WINDOW_DESTROYED = 0x202 + 23;
 const SDL_EVENT_WINDOW_HDR_STATE_CHANGED = 0x202 + 24;
+const SDL_EVENT_WINDOW_CURVATURE_CHANGED = 0x202 + 25;
 const SDL_EVENT_WINDOW_FIRST = SDL_EVENT_WINDOW_SHOWN;
-const SDL_EVENT_WINDOW_LAST = SDL_EVENT_WINDOW_HDR_STATE_CHANGED;
+const SDL_EVENT_WINDOW_LAST = SDL_EVENT_WINDOW_CURVATURE_CHANGED;
 const SDL_EVENT_KEY_DOWN = 0x300;
 const SDL_EVENT_KEY_UP = 0x300 + 1;
 const SDL_EVENT_TEXT_EDITING = 0x300 + 2;
@@ -766,6 +767,8 @@ const SDL_HINT_ANDROID_ALLOW_RECREATE_ACTIVITY =
 const SDL_HINT_ANDROID_BLOCK_ON_PAUSE = 'SDL_ANDROID_BLOCK_ON_PAUSE';
 const SDL_HINT_ANDROID_LOW_LATENCY_AUDIO = 'SDL_ANDROID_LOW_LATENCY_AUDIO';
 const SDL_HINT_ANDROID_TRAP_BACK_BUTTON = 'SDL_ANDROID_TRAP_BACK_BUTTON';
+const SDL_HINT_ANDROID_ALLOW_PERSISTENT_FOLDER_ACCESS =
+    'SDL_ANDROID_ALLOW_PERSISTENT_FOLDER_ACCESS';
 const SDL_HINT_APP_ID = 'SDL_APP_ID';
 const SDL_HINT_APP_NAME = 'SDL_APP_NAME';
 const SDL_HINT_APPLE_TV_CONTROLLER_UI_EVENTS =
@@ -1119,6 +1122,7 @@ const SDL_PROP_APP_METADATA_TYPE_STRING = 'SDL.app.metadata.type';
 const SDL_LSX_INTRINSICS = 1;
 const SDL_LASX_INTRINSICS = 1;
 const SDL_NEON_INTRINSICS = 1;
+const SDL_SVE2_INTRINSICS = 1;
 const SDL_ALTIVEC_INTRINSICS = 1;
 const SDL_MMX_INTRINSICS = 1;
 const SDL_SSE_INTRINSICS = 1;
@@ -1131,6 +1135,7 @@ const SDL_AVX2_INTRINSICS = 1;
 const SDL_AVX512F_INTRINSICS = 1;
 //const __ARM_NEON = 1;
 //const __ARM_ARCH = 8;
+//const __ARM_FEATURE_SVE2 = 1;
 //const SDL_HAS_TARGET_ATTRIBS = ;
 //const SDL_TARGETING = (x) __attribute__((target(x)));
 //const SDL_DISABLE_AVX = /* see https:;
@@ -1573,7 +1578,21 @@ const SDL_SYSTEM_CURSOR_SE_RESIZE = 16;
 const SDL_SYSTEM_CURSOR_S_RESIZE = 17;
 const SDL_SYSTEM_CURSOR_SW_RESIZE = 18;
 const SDL_SYSTEM_CURSOR_W_RESIZE = 19;
-const SDL_SYSTEM_CURSOR_COUNT = 20;
+const SDL_SYSTEM_CURSOR_CONTEXT_MENU = 20;
+const SDL_SYSTEM_CURSOR_HELP = 21;
+const SDL_SYSTEM_CURSOR_CELL = 22;
+const SDL_SYSTEM_CURSOR_VERTICAL_TEXT = 23;
+const SDL_SYSTEM_CURSOR_ALIAS = 24;
+const SDL_SYSTEM_CURSOR_COPY = 25;
+const SDL_SYSTEM_CURSOR_NO_DROP = 26;
+const SDL_SYSTEM_CURSOR_GRAB = 27;
+const SDL_SYSTEM_CURSOR_GRABBING = 28;
+const SDL_SYSTEM_CURSOR_COL_RESIZE = 29;
+const SDL_SYSTEM_CURSOR_ROW_RESIZE = 30;
+const SDL_SYSTEM_CURSOR_ALL_SCROLL = 31;
+const SDL_SYSTEM_CURSOR_ZOOM_IN = 32;
+const SDL_SYSTEM_CURSOR_ZOOM_OUT = 33;
+const SDL_SYSTEM_CURSOR_COUNT = 34;
 const SDL_MOUSEWHEEL_NORMAL = 0;
 const SDL_MOUSEWHEEL_FLIPPED = 1;
 const SDL_BUTTON_LEFT = 1;
@@ -2122,7 +2141,7 @@ const SDL_RENDERER_VSYNC_ADAPTIVE = -1;
 const SDL_DEBUG_TEXT_FONT_CHARACTER_SIZE = 8;
 //const SDL_revision_h_ = ;
 const SDL_REVISION =
-    'SDL-3.5.0-release-3.4.0-686-ge497077cb (" SDL_VENDOR_INFO ")';
+    'SDL-3.5.0-release-3.4.0-770-g71979477c (" SDL_VENDOR_INFO ")';
 //const SDL_scancode_h_ = ;
 const SDL_SCANCODE_UNKNOWN = 0;
 const SDL_SCANCODE_A = 4;
@@ -2759,6 +2778,7 @@ const SDL_PROP_WINDOW_CREATE_EMSCRIPTEN_CANVAS_ID_STRING =
     'SDL.window.create.emscripten.canvas_id';
 const SDL_PROP_WINDOW_CREATE_EMSCRIPTEN_KEYBOARD_ELEMENT_STRING =
     'SDL.window.create.emscripten.keyboard_element';
+const SDL_PROP_WINDOW_CREATE_CURVATURE_FLOAT = 'SDL.window.create.curvature';
 const SDL_PROP_WINDOW_SHAPE_POINTER = 'SDL.window.shape';
 const SDL_PROP_WINDOW_HDR_ENABLED_BOOLEAN = 'SDL.window.HDR_enabled';
 const SDL_PROP_WINDOW_SDR_WHITE_LEVEL_FLOAT = 'SDL.window.SDR_white_level';
@@ -2812,6 +2832,7 @@ const SDL_PROP_WINDOW_EMSCRIPTEN_CANVAS_ID_STRING =
     'SDL.window.emscripten.canvas_id';
 const SDL_PROP_WINDOW_EMSCRIPTEN_KEYBOARD_ELEMENT_STRING =
     'SDL.window.emscripten.keyboard_element';
+const SDL_PROP_WINDOW_CURVATURE_FLOAT = 'SDL.window.curvature';
 const SDL_WINDOW_SURFACE_VSYNC_DISABLED = 0;
 const SDL_WINDOW_SURFACE_VSYNC_ADAPTIVE = -1;
 const SDL_HITTEST_NORMAL = 0;
@@ -2981,6 +3002,7 @@ class SdlkEvent {
   static const windowLeaveFullscreen = SDL_EVENT_WINDOW_LEAVE_FULLSCREEN;
   static const windowDestroyed = SDL_EVENT_WINDOW_DESTROYED;
   static const windowHdrStateChanged = SDL_EVENT_WINDOW_HDR_STATE_CHANGED;
+  static const windowCurvatureChanged = SDL_EVENT_WINDOW_CURVATURE_CHANGED;
   static const windowFirst = SDL_EVENT_WINDOW_FIRST;
   static const windowLast = SDL_EVENT_WINDOW_LAST;
   static const keyDown = SDL_EVENT_KEY_DOWN;
@@ -3694,6 +3716,8 @@ class SdlkHint {
   static const androidBlockOnPause = SDL_HINT_ANDROID_BLOCK_ON_PAUSE;
   static const androidLowLatencyAudio = SDL_HINT_ANDROID_LOW_LATENCY_AUDIO;
   static const androidTrapBackButton = SDL_HINT_ANDROID_TRAP_BACK_BUTTON;
+  static const androidAllowPersistentFolderAccess =
+      SDL_HINT_ANDROID_ALLOW_PERSISTENT_FOLDER_ACCESS;
   static const appId = SDL_HINT_APP_ID;
   static const appName = SDL_HINT_APP_NAME;
   static const appleTvControllerUiEvents =
@@ -4542,6 +4566,20 @@ class SdlkSystemCursor {
   static const sResize = SDL_SYSTEM_CURSOR_S_RESIZE;
   static const swResize = SDL_SYSTEM_CURSOR_SW_RESIZE;
   static const wResize = SDL_SYSTEM_CURSOR_W_RESIZE;
+  static const contextMenu = SDL_SYSTEM_CURSOR_CONTEXT_MENU;
+  static const help = SDL_SYSTEM_CURSOR_HELP;
+  static const cell = SDL_SYSTEM_CURSOR_CELL;
+  static const verticalText = SDL_SYSTEM_CURSOR_VERTICAL_TEXT;
+  static const alias = SDL_SYSTEM_CURSOR_ALIAS;
+  static const copy = SDL_SYSTEM_CURSOR_COPY;
+  static const noDrop = SDL_SYSTEM_CURSOR_NO_DROP;
+  static const grab = SDL_SYSTEM_CURSOR_GRAB;
+  static const grabbing = SDL_SYSTEM_CURSOR_GRABBING;
+  static const colResize = SDL_SYSTEM_CURSOR_COL_RESIZE;
+  static const rowResize = SDL_SYSTEM_CURSOR_ROW_RESIZE;
+  static const allScroll = SDL_SYSTEM_CURSOR_ALL_SCROLL;
+  static const zoomIn = SDL_SYSTEM_CURSOR_ZOOM_IN;
+  static const zoomOut = SDL_SYSTEM_CURSOR_ZOOM_OUT;
   static const count = SDL_SYSTEM_CURSOR_COUNT;
 }
 
@@ -5641,6 +5679,7 @@ class SdlkPropWindow {
       SDL_PROP_WINDOW_CREATE_EMSCRIPTEN_CANVAS_ID_STRING;
   static const createEmscriptenKeyboardElementString =
       SDL_PROP_WINDOW_CREATE_EMSCRIPTEN_KEYBOARD_ELEMENT_STRING;
+  static const createCurvatureFloat = SDL_PROP_WINDOW_CREATE_CURVATURE_FLOAT;
   static const shapePointer = SDL_PROP_WINDOW_SHAPE_POINTER;
   static const hdrEnabledBoolean = SDL_PROP_WINDOW_HDR_ENABLED_BOOLEAN;
   static const sdrWhiteLevelFloat = SDL_PROP_WINDOW_SDR_WHITE_LEVEL_FLOAT;
@@ -5696,6 +5735,7 @@ class SdlkPropWindow {
       SDL_PROP_WINDOW_EMSCRIPTEN_CANVAS_ID_STRING;
   static const emscriptenKeyboardElementString =
       SDL_PROP_WINDOW_EMSCRIPTEN_KEYBOARD_ELEMENT_STRING;
+  static const curvatureFloat = SDL_PROP_WINDOW_CURVATURE_FLOAT;
 }
 
 /// {@category video}

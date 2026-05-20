@@ -16,6 +16,8 @@ const MIX_PROP_AUDIO_LOAD_PREFERRED_MIXER_POINTER =
     'SDL_mixer.audio.load.preferred_mixer';
 const MIX_PROP_AUDIO_LOAD_SKIP_METADATA_TAGS_BOOLEAN =
     'SDL_mixer.audio.load.skip_metadata_tags';
+const MIX_PROP_AUDIO_LOAD_IGNORE_LOOPS_BOOLEAN =
+    'SDL_mixer.audio.load.ignore_loops';
 const MIX_PROP_AUDIO_DECODER_STRING = 'SDL_mixer.audio.decoder';
 const MIX_PROP_METADATA_TITLE_STRING = 'SDL_mixer.metadata.title';
 const MIX_PROP_METADATA_ARTIST_STRING = 'SDL_mixer.metadata.artist';
@@ -61,6 +63,7 @@ class MixkPropAudioLoad {
       MIX_PROP_AUDIO_LOAD_PREFERRED_MIXER_POINTER;
   static const skipMetadataTagsBoolean =
       MIX_PROP_AUDIO_LOAD_SKIP_METADATA_TAGS_BOOLEAN;
+  static const ignoreLoopsBoolean = MIX_PROP_AUDIO_LOAD_IGNORE_LOOPS_BOOLEAN;
 }
 
 /// {@category mixer}

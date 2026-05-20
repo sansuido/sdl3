@@ -1,13 +1,5 @@
 part of '../../sdl.dart';
 
-/*
-const SDL_MESSAGEBOX_COLOR_BACKGROUND = 0;
-const SDL_MESSAGEBOX_COLOR_TEXT = 1;
-const SDL_MESSAGEBOX_COLOR_BUTTON_BORDER = 2;
-const SDL_MESSAGEBOX_COLOR_BUTTON_BACKGROUND = 3;
-const SDL_MESSAGEBOX_COLOR_BUTTON_SELECTED = 4;
-*/
-
 class SdlxMessageBoxColorScheme {
   SdlxMessageBoxColorScheme({
     required this.background,
@@ -41,7 +33,6 @@ class SdlxMessageBoxColorScheme {
     pointer.colors[SdlkMessageboxColor.buttonSelected].g = buttonSelected.g;
     pointer.colors[SdlkMessageboxColor.buttonSelected].b = buttonSelected.b;
     return pointer;
-    //pointer.ref.background = background.calloc();
   }
 }
 

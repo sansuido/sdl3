@@ -3,6 +3,7 @@
 part of '../sdl_opengl.dart';
 
 //const SDL_opengl_h_ = ;
+const USE_OPENGL32 = 1;
 //const __gl_h_ = ;
 //const GLAPI = __declspec(dllexport);
 //const GLAPIENTRY = ;

@@ -539,8 +539,13 @@ void netFreeLocalAddresses(Pointer<Pointer<NetAddress>> addresses) {
 /// you do not have to byteswap it into "network order," as the library will
 /// handle that for you.
 ///
+/// There are currently no extra properties for creating a client, so `props`
+/// should be zero. A future revision of SDL_net may add additional (optional)
+/// properties.
+///
 /// \param address the address of the remote server to connect to.
 /// \param port the port on the remote server to connect to.
+/// \param props properties of the new client. Specify zero for defaults.
 /// \returns a new NET_StreamSocket, pending connection, or NULL on error; call
 /// SDL_GetError() for details.
 ///
@@ -553,22 +558,28 @@ void netFreeLocalAddresses(Pointer<Pointer<NetAddress>> addresses) {
 /// \sa NET_DestroyStreamSocket
 ///
 /// ```c
-/// extern SDL_DECLSPEC NET_StreamSocket * SDLCALL NET_CreateClient(NET_Address *address, Uint16 port)
+/// extern SDL_DECLSPEC NET_StreamSocket * SDLCALL NET_CreateClient(NET_Address *address, Uint16 port, SDL_PropertiesID props)
 /// ```
 /// {@category net}
 Pointer<NetStreamSocket> netCreateClient(
   Pointer<NetAddress> address,
   int port,
+  int props,
 ) {
   final netCreateClientLookupFunction = _libNet
       .lookupFunction<
         Pointer<NetStreamSocket> Function(
           Pointer<NetAddress> address,
           Uint16 port,
+          Uint32 props,
         ),
-        Pointer<NetStreamSocket> Function(Pointer<NetAddress> address, int port)
+        Pointer<NetStreamSocket> Function(
+          Pointer<NetAddress> address,
+          int port,
+          int props,
+        )
       >('NET_CreateClient');
-  return netCreateClientLookupFunction(address, port);
+  return netCreateClientLookupFunction(address, port, props);
 }
 
 ///
@@ -661,8 +672,24 @@ int netWaitUntilConnected(Pointer<NetStreamSocket> sock, int timeout) {
 /// you do not have to byteswap it into "network order," as the library will
 /// handle that for you.
 ///
+/// The caller may supply properties to customize behavior. This is optional,
+/// and a value of zero for `props` will request defaults for all properties.
+///
+/// These are the supported properties:
+///
+/// - `NET_PROP_SERVER_REUSEADDR_BOOLEAN`: true if the server should be created
+/// even if a previous server has recently used this address. For various
+/// reasons, networks prefer that there be some delay between apps reusing
+/// the same address, but this can be problematic when iterating quickly, for
+/// software development purposes or just restarting a crashed service. This
+/// property defaults to true (although it should be noted that, at the
+/// operating system level, this defaults to false!). If this property is
+/// false and the OS feels that not enough time has elapsed, server creation
+/// will fail and this function will report an error.
+///
 /// \param addr the _local_ address to listen for connections on, or NULL.
 /// \param port the port on the local address to listen for connections on.
+/// \param props properties of the new server. Specify zero for defaults.
 /// \returns a new NET_Server, or NULL on error; call SDL_GetError() for
 /// details.
 ///
@@ -675,16 +702,28 @@ int netWaitUntilConnected(Pointer<NetStreamSocket> sock, int timeout) {
 /// \sa NET_DestroyServer
 ///
 /// ```c
-/// extern SDL_DECLSPEC NET_Server * SDLCALL NET_CreateServer(NET_Address *addr, Uint16 port)
+/// extern SDL_DECLSPEC NET_Server * SDLCALL NET_CreateServer(NET_Address *addr, Uint16 port, SDL_PropertiesID props)
 /// ```
 /// {@category net}
-Pointer<NetServer> netCreateServer(Pointer<NetAddress> addr, int port) {
+Pointer<NetServer> netCreateServer(
+  Pointer<NetAddress> addr,
+  int port,
+  int props,
+) {
   final netCreateServerLookupFunction = _libNet
       .lookupFunction<
-        Pointer<NetServer> Function(Pointer<NetAddress> addr, Uint16 port),
-        Pointer<NetServer> Function(Pointer<NetAddress> addr, int port)
+        Pointer<NetServer> Function(
+          Pointer<NetAddress> addr,
+          Uint16 port,
+          Uint32 props,
+        ),
+        Pointer<NetServer> Function(
+          Pointer<NetAddress> addr,
+          int port,
+          int props,
+        )
       >('NET_CreateServer');
-  return netCreateServerLookupFunction(addr, port);
+  return netCreateServerLookupFunction(addr, port, props);
 }
 
 ///
@@ -1239,10 +1278,37 @@ void netDestroyStreamSocket(Pointer<NetStreamSocket> sock) {
 /// you do not have to byteswap it into "network order," as the library will
 /// handle that for you.
 ///
+/// The caller may supply properties to customize behavior. This is optional,
+/// and a value of zero for `props` will request defaults for all properties.
+///
+/// These are the supported properties:
+///
+/// - `NET_PROP_DATAGRAM_SOCKET_REUSEADDR_BOOLEAN`: true if the socket should
+/// be created even if a previous socket has recently used this address. For
+/// various reasons, networks prefer that there be some delay between apps
+/// reusing the same address, but this can be problematic when iterating
+/// quickly, for software development purposes or just restarting a crashed
+/// service. This property defaults to true (although it should be noted
+/// that, at the operating system level, this defaults to false!). If this
+/// property is false and the OS feels that not enough time has elapsed,
+/// socket creation will fail and this function will report an error.
+/// - `NET_PROP_DATAGRAM_SOCKET_ALLOW_BROADCAST_BOOLEAN`: true if the socket
+/// should allow broadcasting. At the lower level, this will set
+/// `SO_BROADCAST` for IPv4 sockets, to allow sending to the subnet's
+/// broadcast address at the OS level. For IPv6, it'll join the all-nodes
+/// link-local multicast group, ff02::1, allowing sending and receiving
+/// there, more or less simulating the usual IPv4 broadcast semantics. Other
+/// protocols take similar approaches. If you do not intend to send or
+/// receive broadcast packets on this socket, set this property to false, or
+/// omit it, as it defaults to false. Note: IPv4 will still be able to
+/// receive broadcast packets without this option, but IPv6 will not. Also
+/// see notes about sending to a broadcast address in NET_SendDatagram().
+///
 /// \param addr the local address to listen for connections on, or NULL to
 /// listen on all available local addresses.
 /// \param port the port on the local address to listen for connections on, or
 /// zero for the system to decide.
+/// \param props properties of the new socket. Specify zero for defaults.
 /// \returns a new NET_DatagramSocket, or NULL on error; call SDL_GetError()
 /// for details.
 ///
@@ -1254,22 +1320,28 @@ void netDestroyStreamSocket(Pointer<NetStreamSocket> sock) {
 /// \sa NET_DestroyDatagramSocket
 ///
 /// ```c
-/// extern SDL_DECLSPEC NET_DatagramSocket * SDLCALL NET_CreateDatagramSocket(NET_Address *addr, Uint16 port)
+/// extern SDL_DECLSPEC NET_DatagramSocket * SDLCALL NET_CreateDatagramSocket(NET_Address *addr, Uint16 port, SDL_PropertiesID props)
 /// ```
 /// {@category net}
 Pointer<NetDatagramSocket> netCreateDatagramSocket(
   Pointer<NetAddress> addr,
   int port,
+  int props,
 ) {
   final netCreateDatagramSocketLookupFunction = _libNet
       .lookupFunction<
         Pointer<NetDatagramSocket> Function(
           Pointer<NetAddress> addr,
           Uint16 port,
+          Uint32 props,
         ),
-        Pointer<NetDatagramSocket> Function(Pointer<NetAddress> addr, int port)
+        Pointer<NetDatagramSocket> Function(
+          Pointer<NetAddress> addr,
+          int port,
+          int props,
+        )
       >('NET_CreateDatagramSocket');
-  return netCreateDatagramSocketLookupFunction(addr, port);
+  return netCreateDatagramSocketLookupFunction(addr, port, props);
 }
 
 ///
@@ -1282,7 +1354,9 @@ Pointer<NetDatagramSocket> netCreateDatagramSocket(
 ///
 /// Datagram packets might arrive in a different order than you sent them, or
 /// they may just be lost while travelling across the network. You have to plan
-/// for this.
+/// for this. As an added confusion, since SDL_net might send the same packet
+/// on multiple interfaces, you might get duplicate packets, possibly from
+/// different network addresses. You have to plan for this, too.
 ///
 /// You can send to any address and port on the network, but there has to be a
 /// datagram socket waiting for the data on the other side for the packet not
@@ -1305,8 +1379,37 @@ Pointer<NetDatagramSocket> netCreateDatagramSocket(
 /// should assume it is no longer usable and should destroy it with
 /// SDL_DestroyDatagramSocket().
 ///
+/// Sending to a NULL address is treated as a request to broadcast a packet.
+/// Note that this will report failure immediately if the socket was not
+/// created with broadcast permission. Broadcast packets are (more or less)
+/// sent to every machine on the LAN, unconditionally.
+///
+/// **WARNING**: It is possible to build a game where everyone is playing on
+/// the same LAN, and every player is simply broadcasting packets. This is
+/// absolutely the wrong thing to do, however. Broadcast packets go to every
+/// device on the LAN, whether they want them or not. The game DOOM, in its
+/// heyday, was capable of
+/// [bringing entire networks to their knees](https://doomwiki.org/wiki/Doom_in_workplaces)
+/// , as many players on the same network would all be broadcasting
+/// relentlessly.
+///
+/// In practice, broadcasting sparingly can be useful for certain
+/// functionality: a LAN-only client broadcasting a few packets to ask for
+/// available servers, and running servers replying directly to that client
+/// without broadcasting at all, is reasonable and safe. Once clients and
+/// servers have found each other, they can communicate directly without any
+/// broadcasting at all. For peer-to-peer games, once connection is
+/// established, it's better to either send unique packets to each known
+/// player, or use a multicasting (which works like broadcast, but only routes
+/// packets to devices that are explicitly listening for it).
+///
+/// With IPv6, which doesn't support broadcasts, broadcasting is faked with
+/// multicast to the all-nodes link-local multicast group, ff02::1, either on a
+/// specific interface or letting the OS choose the default. Other protocols
+/// might fake broadcast operations in similar ways in the future.
+///
 /// \param sock the datagram socket to send data through.
-/// \param address the NET_Address object address.
+/// \param address the NET_Address object address. May be NULL to broadcast.
 /// \param port the address port.
 /// \param buf a pointer to the data to send as a single packet.
 /// \param buflen the size of the data to send, in bytes.
@@ -1359,7 +1462,7 @@ bool netSendDatagram(
 /// Datagram sockets send packets of data. They either arrive as complete
 /// packets or they don't arrive at all, so you'll never receive half a packet.
 ///
-/// This call never blocks; if no new data isn't available at the time of the
+/// This call never blocks; if no new data is available at the time of the
 /// call, it returns true immediately. The caller can try again later.
 ///
 /// On a successful call to this function, it returns true, even if no new

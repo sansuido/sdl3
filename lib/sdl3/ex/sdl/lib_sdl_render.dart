@@ -109,64 +109,6 @@ bool sdlxGetTextureSize(Pointer<SdlTexture> texture, SdlxFPoint size) {
 }
 
 ///
-/// Set the palette used by a texture.
-///
-/// Setting the palette keeps an internal reference to the palette, which can
-/// be safely destroyed afterwards.
-///
-/// A single palette can be shared with many textures.
-///
-/// \param texture the texture to update.
-/// \param palette the SDL_Palette structure to use.
-/// \returns true on success or false on failure; call SDL_GetError() for more
-/// information.
-///
-/// \threadsafety This function should only be called on the main thread.
-///
-/// \since This function is available since SDL 3.4.0.
-///
-/// \sa SDL_CreatePalette
-/// \sa SDL_GetTexturePalette
-///
-/// ```c
-/// extern SDL_DECLSPEC bool SDLCALL SDL_SetTexturePalette(SDL_Texture *texture, SDL_Palette *palette)
-/// ```
-/// {@category render}
-bool sdlxSetTexturePalette(Pointer<SdlTexture> texture, SdlxPalette palette) {
-  final palettePointer = palette.calloc();
-  final result = sdlSetTexturePalette(texture, palettePointer);
-  palettePointer.callocAllFree();
-  return result;
-}
-
-///
-/// Get the palette used by a texture.
-///
-/// \param texture the texture to query.
-/// \returns a pointer to the palette used by the texture, or NULL if there is
-/// no palette used.
-///
-/// \threadsafety This function should only be called on the main thread.
-///
-/// \since This function is available since SDL 3.4.0.
-///
-/// \sa SDL_SetTexturePalette
-///
-/// ```c
-/// extern SDL_DECLSPEC SDL_Palette * SDLCALL SDL_GetTexturePalette(SDL_Texture *texture)
-/// ```
-/// {@category render}
-SdlxPalette? sdlxGetTexturePalette(Pointer<SdlTexture> texture) {
-  SdlxPalette? result;
-  final palettePointer = sdlGetTexturePalette(texture);
-  if (palettePointer != nullptr) {
-    result = SdlxPalette()..loadFromPointer(palettePointer);
-    sdlDestroyPalette(palettePointer);
-  }
-  return result;
-}
-
-///
 /// Set an additional color value multiplied into render copy operations.
 ///
 /// When this texture is rendered, during the copy operation each source color

@@ -1,65 +1,6 @@
 part of '../../sdl.dart';
 
 ///
-/// Set the palette used by a surface.
-///
-/// Setting the palette keeps an internal reference to the palette, which can
-/// be safely destroyed afterwards.
-///
-/// A single palette can be shared with many surfaces.
-///
-/// \param surface the SDL_Surface structure to update.
-/// \param palette the SDL_Palette structure to use.
-/// \returns true on success or false on failure; call SDL_GetError() for more
-/// information.
-///
-/// \threadsafety This function can be called on different threads with
-/// different surfaces.
-///
-/// \since This function is available since SDL 3.2.0.
-///
-/// \sa SDL_CreatePalette
-/// \sa SDL_GetSurfacePalette
-///
-/// ```c
-/// extern SDL_DECLSPEC bool SDLCALL SDL_SetSurfacePalette(SDL_Surface *surface, SDL_Palette *palette)
-/// ```
-/// {@category surface}
-bool sdlxSetSurfacePalette(Pointer<SdlSurface> surface, SdlxPalette palette) {
-  final palettePointer = palette.calloc();
-  final result = sdlSetSurfacePalette(surface, palettePointer);
-  palettePointer.callocFree();
-  return result;
-}
-
-///
-/// Get the palette used by a surface.
-///
-/// \param surface the SDL_Surface structure to query.
-/// \returns a pointer to the palette used by the surface, or NULL if there is
-/// no palette used.
-///
-/// \threadsafety It is safe to call this function from any thread.
-///
-/// \since This function is available since SDL 3.2.0.
-///
-/// \sa SDL_SetSurfacePalette
-///
-/// ```c
-/// extern SDL_DECLSPEC SDL_Palette * SDLCALL SDL_GetSurfacePalette(SDL_Surface *surface)
-/// ```
-/// {@category surface}
-SdlxPalette? sdlxGetSurfacePalette(Pointer<SdlSurface> surface) {
-  SdlxPalette? result;
-  final palettePointer = sdlGetSurfacePalette(surface);
-  if (palettePointer != nullptr) {
-    result = SdlxPalette()..loadFromPointer(palettePointer);
-    sdlDestroyPalette(palettePointer);
-  }
-  return result;
-}
-
-///
 /// Get an array including all versions of a surface.
 ///
 /// This returns all versions of a surface, with the surface being queried as
@@ -316,61 +257,6 @@ bool sdlxGetSurfaceClipRect(Pointer<SdlSurface> surface, SdlxRect rect) {
     rect.loadFromPointer(rectPointer);
   }
   rectPointer.callocFree();
-  return result;
-}
-
-///
-/// Copy an existing surface to a new surface of the specified format and
-/// colorspace.
-///
-/// This function converts an existing surface to a new format and colorspace
-/// and returns the new surface. This will perform any pixel format and
-/// colorspace conversion needed.
-///
-/// If the original surface has alternate images, the new surface will have a
-/// reference to them as well.
-///
-/// \param surface the existing SDL_Surface structure to convert.
-/// \param format the new pixel format.
-/// \param palette an optional palette to use for indexed formats, may be NULL.
-/// \param colorspace the new colorspace.
-/// \param props an SDL_PropertiesID with additional color properties, or 0.
-/// \returns the new SDL_Surface structure that is created or NULL on failure;
-/// call SDL_GetError() for more information.
-///
-/// \threadsafety This function can be called on different threads with
-/// different surfaces.
-///
-/// \since This function is available since SDL 3.2.0.
-///
-/// \sa SDL_ConvertSurface
-/// \sa SDL_DestroySurface
-///
-/// ```c
-/// extern SDL_DECLSPEC SDL_Surface * SDLCALL SDL_ConvertSurfaceAndColorspace(SDL_Surface *surface, SDL_PixelFormat format, SDL_Palette *palette, SDL_Colorspace colorspace, SDL_PropertiesID props)
-/// ```
-/// {@category surface}
-Pointer<SdlSurface> sdlxConvertSurfaceAndColorspace(
-  Pointer<SdlSurface> surface,
-  int format,
-  int colorspace, {
-  SdlxPalette? palette,
-  int props = 0,
-}) {
-  Pointer<SdlPalette> palettePointer = nullptr;
-  if (palette != null) {
-    palettePointer = palette.calloc();
-  }
-  final result = sdlConvertSurfaceAndColorspace(
-    surface,
-    format,
-    palettePointer,
-    colorspace,
-    props,
-  );
-  if (palettePointer != nullptr) {
-    palettePointer.callocFree();
-  }
   return result;
 }
 

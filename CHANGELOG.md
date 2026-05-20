@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.8.3] - 2026-05-20
+- SDL3-2026-05-17
+### Added
+- Added functions and wrapper classes for the pixels.
+### Fixed
+- Removed SdlxPalette.
+### Updated
+- Dart 3.12.0
+
 ## [2.8.2] - 2026-05-12
 - SDL3-2026-05-10
 ### Added

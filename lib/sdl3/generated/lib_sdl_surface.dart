@@ -560,7 +560,7 @@ void sdlUnlockSurface(Pointer<SdlSurface> surface) {
 }
 
 ///
-/// Load a BMP or PNG image from a seekable SDL data stream.
+/// Load a BMP, PNG or JPEG image from a seekable SDL data stream.
 ///
 /// The new surface should be freed with SDL_DestroySurface(). Not doing so
 /// will result in a memory leak.
@@ -592,7 +592,7 @@ Pointer<SdlSurface> sdlLoadSurfaceIo(Pointer<SdlIoStream> src, bool closeio) {
 }
 
 ///
-/// Load a BMP or PNG image from a file.
+/// Load a BMP, PNG or JPEG image from a file.
 ///
 /// The new surface should be freed with SDL_DestroySurface(). Not doing so
 /// will result in a memory leak.
@@ -924,6 +924,79 @@ bool sdlSavePng(Pointer<SdlSurface> surface, String? file) {
       >('SDL_SavePNG');
   final filePointer = file != null ? file.toNativeUtf8() : nullptr;
   final result = sdlSavePngLookupFunction(surface, filePointer) == 1;
+  calloc.free(filePointer);
+  return result;
+}
+
+///
+/// Load a JPEG image from a seekable SDL data stream.
+///
+/// This is intended as a convenience function for loading images from trusted
+/// sources. If you want to load arbitrary images you should use libjpeg or
+/// another image loading library designed with security in mind.
+///
+/// The new surface should be freed with SDL_DestroySurface(). Not doing so
+/// will result in a memory leak.
+///
+/// \param src the data stream for the surface.
+/// \param closeio if true, calls SDL_CloseIO() on `src` before returning, even
+/// in the case of an error.
+/// \returns a pointer to a new SDL_Surface structure or NULL on failure; call
+/// SDL_GetError() for more information.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.6.0.
+///
+/// \sa SDL_DestroySurface
+/// \sa SDL_LoadJPG
+///
+/// ```c
+/// extern SDL_DECLSPEC SDL_Surface * SDLCALL SDL_LoadJPG_IO(SDL_IOStream *src, bool closeio)
+/// ```
+/// {@category surface}
+Pointer<SdlSurface> sdlLoadJpgIo(Pointer<SdlIoStream> src, bool closeio) {
+  final sdlLoadJpgIoLookupFunction = _libSdl
+      .lookupFunction<
+        Pointer<SdlSurface> Function(Pointer<SdlIoStream> src, Uint8 closeio),
+        Pointer<SdlSurface> Function(Pointer<SdlIoStream> src, int closeio)
+      >('SDL_LoadJPG_IO');
+  return sdlLoadJpgIoLookupFunction(src, closeio ? 1 : 0);
+}
+
+///
+/// Load a JPEG image from a file.
+///
+/// This is intended as a convenience function for loading images from trusted
+/// sources. If you want to load arbitrary images you should use libjpeg or
+/// another image loading library designed with security in mind.
+///
+/// The new surface should be freed with SDL_DestroySurface(). Not doing so
+/// will result in a memory leak.
+///
+/// \param file the JPG file to load.
+/// \returns a pointer to a new SDL_Surface structure or NULL on failure; call
+/// SDL_GetError() for more information.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.6.0.
+///
+/// \sa SDL_DestroySurface
+/// \sa SDL_LoadJPG_IO
+///
+/// ```c
+/// extern SDL_DECLSPEC SDL_Surface * SDLCALL SDL_LoadJPG(const char *file)
+/// ```
+/// {@category surface}
+Pointer<SdlSurface> sdlLoadJpg(String? file) {
+  final sdlLoadJpgLookupFunction = _libSdl
+      .lookupFunction<
+        Pointer<SdlSurface> Function(Pointer<Utf8> file),
+        Pointer<SdlSurface> Function(Pointer<Utf8> file)
+      >('SDL_LoadJPG');
+  final filePointer = file != null ? file.toNativeUtf8() : nullptr;
+  final result = sdlLoadJpgLookupFunction(filePointer);
   calloc.free(filePointer);
   return result;
 }
