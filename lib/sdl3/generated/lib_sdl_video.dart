@@ -1250,11 +1250,7 @@ Pointer<SdlWindow> sdlCreatePopupWindow(
 ///
 /// These are additional supported properties with visionOS:
 ///
-/// - `SDL_PROP_WINDOW_CREATE_CURVATURE_FLOAT`: the curvature of the window on
-/// visionOS. Curved windows have square corners and additional controls for
-/// more immersive gaming. This can be -1 (disabled), which is the default, 0
-/// (no curve), or set to a specific curvature radius in millimeters. A
-/// common value for a gaming monitor is 1000.
+/// - `SDL_PROP_WINDOW_CREATE_VISIONOS_SETTINGS_STRING`: the settings of the window in JSON format. If this isn't set, the window will have standard UIKit behavior. If this is set to "" or a valid setting string then the window is created with enhanced features allowing curved display. The curvature in the settings is defined as a radius in millimeters. A common value for a gaming monitor is 1000 and a setting string for that would be "{\"curvatureRadius\":1000}".
 ///
 /// If this window is being created to be used with an SDL_Renderer, you should
 /// not add a graphics API specific property
@@ -1503,10 +1499,7 @@ Pointer<SdlWindow> sdlGetWindowParent(Pointer<SdlWindow> window) {
 ///
 /// On visionOS:
 ///
-/// - `SDL_PROP_WINDOW_CURVATURE_FLOAT`: the curvature of the window in curved
-/// mode on visionOS. This value is updated dynamically when changed via the
-/// screen ornaments. This can be 0 (no curve), or a specific curvature
-/// radius in millimeters. A common value for a gaming monitor is 1000.
+/// - `SDL_PROP_WINDOW_VISIONOS_SETTINGS_STRING`: the current settings of the window in JSON format, or NULL if the window has standard UIKit behavior. SDL_EVENT_WINDOW_SETTINGS_CHANGED is sent when this value changes.
 ///
 /// \param window the window to query.
 /// \returns a valid property ID on success or 0 on failure; call

@@ -42,7 +42,7 @@ extension MixAudioDecoderEx on MixAudioDecoder {
   /// extern SDL_DECLSPEC MIX_AudioDecoder * SDLCALL MIX_CreateAudioDecoder(const char *path, SDL_PropertiesID props)
   /// ```
   /// {@category mixer}
-  static Pointer<MixAudioDecoder> create(String? path, int props) =>
+  static Pointer<MixAudioDecoder> create(String path, int props) =>
       mixCreateAudioDecoder(path, props);
 
   ///
@@ -161,8 +161,7 @@ extension MixAudioDecoderPointerEx on Pointer<MixAudioDecoder> {
   /// extern SDL_DECLSPEC bool SDLCALL MIX_GetAudioDecoderFormat(MIX_AudioDecoder *audiodecoder, SDL_AudioSpec *spec)
   /// ```
   /// {@category mixer}
-  bool getFormat(Pointer<SdlAudioSpec> spec) =>
-      mixGetAudioDecoderFormat(this, spec);
+  bool getFormat(SdlxAudioSpec spec) => mixxGetAudioDecoderFormat(this, spec);
 
   ///
   /// Decode more audio from a MIX_AudioDecoder.
@@ -190,9 +189,6 @@ extension MixAudioDecoderPointerEx on Pointer<MixAudioDecoder> {
   /// extern SDL_DECLSPEC int SDLCALL MIX_DecodeAudio(MIX_AudioDecoder *audiodecoder, void *buffer, int buflen, const SDL_AudioSpec *spec)
   /// ```
   /// {@category mixer}
-  int decodeAudio(
-    Pointer<NativeType> buffer,
-    int buflen,
-    Pointer<SdlAudioSpec> spec,
-  ) => mixDecodeAudio(this, buffer, buflen, spec);
+  int decodeAudio(Uint8List buffer, SdlxAudioSpec spec) =>
+      mixxDecodeAudio(this, buffer, spec);
 }

@@ -72,6 +72,9 @@ class SdlxEvent {
           return SdlxGamepadTouchpadEvent.fromPointer(pointer);
         case SDL_EVENT_GAMEPAD_SENSOR_UPDATE:
           return SdlxGamepadSensorEvent.fromPointer(pointer);
+        case SDL_EVENT_GAMEPAD_CAPSENSE_TOUCH:
+        case SDL_EVENT_GAMEPAD_CAPSENSE_RELEASE:
+          return SdlxGamepadCapSenseEvent.fromPointer(pointer);
         case SDL_EVENT_AUDIO_DEVICE_ADDED:
         case SDL_EVENT_AUDIO_DEVICE_REMOVED:
         case SDL_EVENT_AUDIO_DEVICE_FORMAT_CHANGED:
@@ -789,6 +792,33 @@ class SdlxGamepadSensorEvent extends SdlxEvent {
 
   static SdlxGamepadSensorEvent fromPointer(Pointer<SdlEvent> pointer) =>
       SdlxGamepadSensorEvent()..loadFromPointer(pointer);
+}
+
+class SdlxGamepadCapSenseEvent extends SdlxEvent {
+  SdlxGamepadCapSenseEvent({
+    super.type = 0,
+    super.reserved = 0,
+    super.timestamp = 0,
+    this.which = 0,
+    this.capsense = 0,
+    this.down = 0,
+  });
+
+  int which;
+  int capsense;
+  int down;
+
+  void loadFromPointer(Pointer<SdlEvent> pointer) {
+    type = pointer.gcapsense.ref.type;
+    reserved = pointer.gcapsense.ref.reserved;
+    timestamp = pointer.gcapsense.ref.timestamp;
+    which = pointer.gcapsense.ref.which;
+    capsense = pointer.gcapsense.ref.capsense;
+    down = pointer.gcapsense.ref.down;
+  }
+
+  static SdlxGamepadCapSenseEvent fromPointer(Pointer<SdlEvent> pointer) =>
+      SdlxGamepadCapSenseEvent()..loadFromPointer(pointer);
 }
 
 class SdlxAudioDeviceEvent extends SdlxEvent {

@@ -10,7 +10,7 @@ Pointer<MixAudioDecoder> gAudioDecoder = nullptr;
 Pointer<SdlAudioStream> gAudioStream = nullptr;
 Pointer<SdlAudioSpec> gAudioSpec = nullptr;
 NativeCallable<SdlAudioStreamCallback>? gAudioStreamCall;
-var gDone = false;
+var gDone = true;
 
 void audioStreamCallback(
   Pointer<NativeType> userdata,
@@ -28,7 +28,7 @@ void audioStreamCallback(
     final needed = math.min(additionalAmount0, 1024);
     final br = mixDecodeAudio(audioDecoder, buffer, needed, gAudioSpec);
     if (br <= 0) {
-      gDone = true;
+      gDone = false;
       break;
     }
     sdlPutAudioStreamData(stream, buffer, br);
@@ -101,7 +101,7 @@ bool appIterate() => gDone;
 
 void main() async {
   if (appInit()) {
-    var running = false;
+    var running = true;
     while (running) {
       running = appEvent();
       if (running) {

@@ -111,7 +111,7 @@ extension MixAudioPointerEx on Pointer<MixAudio> {
   /// extern SDL_DECLSPEC bool SDLCALL MIX_GetAudioFormat(MIX_Audio *audio, SDL_AudioSpec *spec)
   /// ```
   /// {@category mixer}
-  bool getFormat(Pointer<SdlAudioSpec> spec) => mixGetAudioFormat(this, spec);
+  bool getFormat(SdlxAudioSpec spec) => mixxGetAudioFormat(this, spec);
 
   ///
   /// Destroy the specified audio.

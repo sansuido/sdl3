@@ -40,6 +40,7 @@ class FpsManager {
   double _measticks = 0;
   var _measrate = 0;
   var _meascount = 0;
+  double _deltaTime = 0;
 
   double _getTicks() {
     final ticks = sdlGetTicks().toDouble();
@@ -79,6 +80,8 @@ class FpsManager {
 
   int getMeasFramerate() => _measrate;
 
+  double getDeltaTime() => _deltaTime;
+
   int getFramecount() => _framecount;
 
   int delaySync() {
@@ -97,6 +100,7 @@ class FpsManager {
     targetTicks = _baseticks + _framecount.toDouble() * _rateticks;
     if (currentTicks <= targetTicks) {
       theDelay = targetTicks - currentTicks;
+      _deltaTime = theDelay / 1000;
       sdlDelay(theDelay.toInt());
     } else {
       _framecount = 0;
@@ -128,6 +132,7 @@ class FpsManager {
     targetTicks = _baseticks + _framecount.toDouble() * _rateticks;
     if (currentTicks <= targetTicks) {
       theDelay = targetTicks - currentTicks;
+      _deltaTime = theDelay / 1000;
       await Future.delayed(Duration(milliseconds: theDelay.toInt()));
     } else {
       _framecount = 0;

@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.8.4] - 2026-05-25
+- SDL3-2026-05-24
+### Added
+- Added functions and wrapper classes for the audio and mixer.
+- Added `SdlxGamepadCapSenseEvent` (`SDL_EVENT_GAMEPAD_CAPSENSE_TOUCH`, `SDL_EVENT_GAMEPAD_CAPSENSE_RELEASE`).
+- Added `examples/dxlib/no029_steep_slope1.dart` and `no029_steep_slope2.dart`.
+- Added `FpsManager.getDeltaTime()`.
+- Added a link to the SDL_projects for Dart in README.md.
+
+### Changed
+- **Updated Examples**: All sample code has been migrated to use the new native audio and mixer structs.
+
 ## [2.8.3] - 2026-05-20
 - SDL3-2026-05-17
 ### Added

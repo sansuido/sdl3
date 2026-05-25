@@ -52,10 +52,8 @@ extension MixMixerEx on MixMixer {
   /// extern SDL_DECLSPEC MIX_Mixer * SDLCALL MIX_CreateMixerDevice(SDL_AudioDeviceID devid, const SDL_AudioSpec *spec)
   /// ```
   /// {@category mixer}
-  static Pointer<MixMixer> createDevice(
-    int devid,
-    Pointer<SdlAudioSpec> spec,
-  ) => mixCreateMixerDevice(devid, spec);
+  static Pointer<MixMixer> createDevice(int devid, SdlxAudioSpec? spec) =>
+      mixxCreateMixerDevice(devid, spec);
 
   ///
   /// Create a mixer that generates audio to a memory buffer.
@@ -178,7 +176,7 @@ extension MixMixerPointerEx on Pointer<MixMixer> {
   /// extern SDL_DECLSPEC bool SDLCALL MIX_GetMixerFormat(MIX_Mixer *mixer, SDL_AudioSpec *spec)
   /// ```
   /// {@category mixer}
-  bool getFormat(Pointer<SdlAudioSpec> spec) => mixGetMixerFormat(this, spec);
+  bool getFormat(SdlxAudioSpec spec) => mixxGetMixerFormat(this, spec);
 
   ///
   /// Load audio for playback from an SDL_IOStream.
@@ -324,9 +322,9 @@ extension MixMixerPointerEx on Pointer<MixMixer> {
   /// {@category mixer}
   Pointer<MixAudio> loadRawAudioIo(
     Pointer<SdlIoStream> io,
-    Pointer<SdlAudioSpec> spec,
-    bool closeio,
-  ) => mixLoadRawAudioIo(this, io, spec, closeio);
+    SdlxAudioSpec spec, {
+    bool closeio = false,
+  }) => mixxLoadRawAudioIo(this, io, spec, closeio: closeio);
 
   ///
   /// Load raw PCM data from a memory buffer.
@@ -369,8 +367,8 @@ extension MixMixerPointerEx on Pointer<MixMixer> {
   Pointer<MixAudio> loadRawAudio(
     Pointer<NativeType> data,
     int datalen,
-    Pointer<SdlAudioSpec> spec,
-  ) => mixLoadRawAudio(this, data, datalen, spec);
+    SdlxAudioSpec spec,
+  ) => mixxLoadRawAudio(this, data, datalen, spec);
 
   ///
   /// Load raw PCM data from a memory buffer without making a copy.
@@ -417,11 +415,11 @@ extension MixMixerPointerEx on Pointer<MixMixer> {
   /// ```
   /// {@category mixer}
   Pointer<MixAudio> loadRawAudioNoCopy(
-    Pointer<NativeType> data,
+    Uint8List data,
     int datalen,
-    Pointer<SdlAudioSpec> spec,
+    SdlxAudioSpec spec,
     bool freeWhenDone,
-  ) => mixLoadRawAudioNoCopy(this, data, datalen, spec, freeWhenDone);
+  ) => mixxLoadRawAudioNoCopy(this, data, spec);
 
   ///
   /// Create a MIX_Audio that generates a sinewave.
@@ -534,7 +532,7 @@ extension MixMixerPointerEx on Pointer<MixMixer> {
   /// extern SDL_DECLSPEC bool SDLCALL MIX_PlayTag(MIX_Mixer *mixer, const char *tag, SDL_PropertiesID options)
   /// ```
   /// {@category mixer}
-  bool playTag(String? tag, int options) => mixPlayTag(this, tag, options);
+  bool playTag(String tag, int options) => mixPlayTag(this, tag, options);
 
   ///
   /// Play a MIX_Audio from start to finish without any management.
@@ -646,7 +644,7 @@ extension MixMixerPointerEx on Pointer<MixMixer> {
   /// extern SDL_DECLSPEC bool SDLCALL MIX_StopTag(MIX_Mixer *mixer, const char *tag, Sint64 fade_out_ms)
   /// ```
   /// {@category mixer}
-  bool stopTag(String? tag, int fadeOutMs) => mixStopTag(this, tag, fadeOutMs);
+  bool stopTag(String tag, int fadeOutMs) => mixStopTag(this, tag, fadeOutMs);
 
   ///
   /// Pause all currently-playing tracks.
@@ -704,7 +702,7 @@ extension MixMixerPointerEx on Pointer<MixMixer> {
   /// extern SDL_DECLSPEC bool SDLCALL MIX_PauseTag(MIX_Mixer *mixer, const char *tag)
   /// ```
   /// {@category mixer}
-  bool pauseTag(String? tag) => mixPauseTag(this, tag);
+  bool pauseTag(String tag) => mixPauseTag(this, tag);
 
   ///
   /// Resume all currently-paused tracks.
@@ -762,7 +760,7 @@ extension MixMixerPointerEx on Pointer<MixMixer> {
   /// extern SDL_DECLSPEC bool SDLCALL MIX_ResumeTag(MIX_Mixer *mixer, const char *tag)
   /// ```
   /// {@category mixer}
-  bool resumeTag(String? tag) => mixResumeTag(this, tag);
+  bool resumeTag(String tag) => mixResumeTag(this, tag);
 
   ///
   /// Set a mixer's master gain control.
@@ -857,7 +855,7 @@ extension MixMixerPointerEx on Pointer<MixMixer> {
   /// extern SDL_DECLSPEC bool SDLCALL MIX_SetTagGain(MIX_Mixer *mixer, const char *tag, float gain)
   /// ```
   /// {@category mixer}
-  bool setTagGain(String? tag, double gain) => mixSetTagGain(this, tag, gain);
+  bool setTagGain(String tag, double gain) => mixSetTagGain(this, tag, gain);
 
   ///
   /// Create a mixing group.
@@ -1043,6 +1041,5 @@ extension MixMixerPointerEx on Pointer<MixMixer> {
   /// extern SDL_DECLSPEC int SDLCALL MIX_Generate(MIX_Mixer *mixer, void *buffer, int buflen)
   /// ```
   /// {@category mixer}
-  int generate(Pointer<NativeType> buffer, int buflen) =>
-      mixGenerate(this, buffer, buflen);
+  int generate(TypedData buffer) => mixxGenerate(this, buffer);
 }

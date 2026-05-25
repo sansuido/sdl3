@@ -1,6 +1,5 @@
 // https://github.com/libsdl-org/SDL_mixer/blob/main/test/testspatialization.c
 import 'dart:ffi';
-import 'package:ffi/ffi.dart';
 import 'package:sdl3/sdl3.dart';
 
 const gSound = 'assets/waves-at-baltic-sea-shore/waves-at-baltic-sea-shore.wav';
@@ -147,26 +146,31 @@ bool appIterate() {
   const radius = 200.0; // size of half the circle (radius, not diameter).
   const boxsize = 30.0;
   final sourcept = SdlxFPoint(0, 0);
-  final position = calloc<MixPoint3D>();
-  position.ref.y = 0; // always horizontal.
+  final position = MixxPoint3D()..y = 0; // always horizontal.
   // run in a horizontal circle around the listener (circling on X and Z coordinates).
   if (gAutopilot) {
-    position.ref.x = sdlCosf(angle);
-    position.ref.z = sdlSinf(angle);
+    position
+      ..x = sdlCosf(angle)
+      ..z = sdlSinf(angle);
     sourcept
-      ..x = center.x + (position.ref.x * radius)
-      ..y = center.y + (position.ref.z * radius);
+      ..x = center.x + (position.x * radius)
+      ..y = center.y + (position.z * radius);
   } else {
-    position.ref.x = ((gMouseX / 640.0) * 2.0) - 1.0; // scale to -1.0f to 1.0f
-    position.ref.z = ((gMouseY / 480.0) * 2.0) - 1.0;
+    position
+      ..x =
+          ((gMouseX / 640.0) * 2.0) -
+          1.0 // scale to -1.0f to 1.0f
+      ..z = ((gMouseY / 480.0) * 2.0) - 1.0;
     sourcept
       ..x = gMouseX
       ..y = gMouseY;
   }
   const scale = 3.0;
-  position.ref.x *= scale; // make distance attenuation noticable.
-  position.ref.z *= scale;
-  mixSetTrack3DPosition(gTrack, position);
+  position
+    ..x *=
+        scale // make distance attenuation noticable.
+    ..z *= scale;
+  mixxSetTrack3DPosition(gTrack, position);
   sdlSetRenderDrawColor(gRenderer, 0, 0, 0, 255);
   sdlRenderClear(gRenderer);
   if (gTrack.playing() && gPcms.isNotEmpty) {
@@ -217,7 +221,6 @@ bool appIterate() {
     );
   }
   sdlRenderPresent(gRenderer);
-  position.callocFree();
   return true;
 }
 

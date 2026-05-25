@@ -26178,7 +26178,7 @@ void glDebugMessageCallbackAmd(
 late Pointer<NativeFunction<Void Function()>> _glGetDebugMessageLogAmd;
 
 /// ```c
-/// GLAPI GLuint APIENTRY glGetDebugMessageLogAMD (GLuint count, GLsizei bufSize, GLenum *categories, GLuint *severities, GLuint *ids, GLsizei *lengths, GLchar *message)
+/// GLAPI GLuint APIENTRY glGetDebugMessageLogAMD (GLuint count, GLsizei bufSize, GLenum *categories, GLenum *severities, GLuint *ids, GLsizei *lengths, GLchar *message)
 /// ```
 /// {@category opengl_glext}
 int glGetDebugMessageLogAmd(
@@ -41911,6 +41911,128 @@ void glFogCoordPointerExt(int type, int stride, Pointer<NativeType> pointer) {
 }
 
 /// @nodoc
+late Pointer<NativeFunction<Void Function()>> _glGetFragmentShadingRatesExt;
+
+/// ```c
+/// GLAPI void APIENTRY glGetFragmentShadingRatesEXT (GLsizei samples, GLsizei maxCount, GLsizei *count, GLenum *shadingRates)
+/// ```
+/// {@category opengl_glext}
+void glGetFragmentShadingRatesExt(
+  int samples,
+  int maxCount,
+  Pointer<Uint32> count,
+  Pointer<Uint32> shadingRates,
+) {
+  final glGetFragmentShadingRatesExtAsFunction = _glGetFragmentShadingRatesExt
+      .cast<
+        NativeFunction<
+          Void Function(
+            Uint32 samples,
+            Uint32 maxCount,
+            Pointer<Uint32> count,
+            Pointer<Uint32> shadingRates,
+          )
+        >
+      >()
+      .asFunction<
+        void Function(
+          int samples,
+          int maxCount,
+          Pointer<Uint32> count,
+          Pointer<Uint32> shadingRates,
+        )
+      >();
+  return glGetFragmentShadingRatesExtAsFunction(
+    samples,
+    maxCount,
+    count,
+    shadingRates,
+  );
+}
+
+/// @nodoc
+late Pointer<NativeFunction<Void Function()>> _glShadingRateExt;
+
+/// ```c
+/// GLAPI void APIENTRY glShadingRateEXT (GLenum rate)
+/// ```
+/// {@category opengl_glext}
+void glShadingRateExt(int rate) {
+  final glShadingRateExtAsFunction = _glShadingRateExt
+      .cast<NativeFunction<Void Function(Uint32 rate)>>()
+      .asFunction<void Function(int rate)>();
+  return glShadingRateExtAsFunction(rate);
+}
+
+/// @nodoc
+late Pointer<NativeFunction<Void Function()>> _glShadingRateCombinerOpsExt;
+
+/// ```c
+/// GLAPI void APIENTRY glShadingRateCombinerOpsEXT (GLenum combinerOp0, GLenum combinerOp1)
+/// ```
+/// {@category opengl_glext}
+void glShadingRateCombinerOpsExt(int combinerOp0, int combinerOp1) {
+  final glShadingRateCombinerOpsExtAsFunction = _glShadingRateCombinerOpsExt
+      .cast<
+        NativeFunction<Void Function(Uint32 combinerOp0, Uint32 combinerOp1)>
+      >()
+      .asFunction<void Function(int combinerOp0, int combinerOp1)>();
+  return glShadingRateCombinerOpsExtAsFunction(combinerOp0, combinerOp1);
+}
+
+/// @nodoc
+late Pointer<NativeFunction<Void Function()>> _glFramebufferShadingRateExt;
+
+/// ```c
+/// GLAPI void APIENTRY glFramebufferShadingRateEXT (GLenum target, GLenum attachment, GLuint texture, GLint baseLayer, GLsizei numLayers, GLsizei texelWidth, GLsizei texelHeight)
+/// ```
+/// {@category opengl_glext}
+void glFramebufferShadingRateExt(
+  int target,
+  int attachment,
+  int texture,
+  int baseLayer,
+  int numLayers,
+  int texelWidth,
+  int texelHeight,
+) {
+  final glFramebufferShadingRateExtAsFunction = _glFramebufferShadingRateExt
+      .cast<
+        NativeFunction<
+          Void Function(
+            Uint32 target,
+            Uint32 attachment,
+            Uint32 texture,
+            Int32 baseLayer,
+            Uint32 numLayers,
+            Uint32 texelWidth,
+            Uint32 texelHeight,
+          )
+        >
+      >()
+      .asFunction<
+        void Function(
+          int target,
+          int attachment,
+          int texture,
+          int baseLayer,
+          int numLayers,
+          int texelWidth,
+          int texelHeight,
+        )
+      >();
+  return glFramebufferShadingRateExtAsFunction(
+    target,
+    attachment,
+    texture,
+    baseLayer,
+    numLayers,
+    texelWidth,
+    texelHeight,
+  );
+}
+
+/// @nodoc
 late Pointer<NativeFunction<Void Function()>> _glBlitFramebufferExt;
 
 /// ```c
@@ -41969,6 +42091,142 @@ void glBlitFramebufferExt(
     dstY0,
     dstX1,
     dstY1,
+    mask,
+    filter,
+  );
+}
+
+/// @nodoc
+late Pointer<NativeFunction<Void Function()>> _glBlitFramebufferLayersExt;
+
+/// ```c
+/// GLAPI void APIENTRY glBlitFramebufferLayersEXT (GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter)
+/// ```
+/// {@category opengl_glext}
+void glBlitFramebufferLayersExt(
+  int srcX0,
+  int srcY0,
+  int srcX1,
+  int srcY1,
+  int dstX0,
+  int dstY0,
+  int dstX1,
+  int dstY1,
+  int mask,
+  int filter,
+) {
+  final glBlitFramebufferLayersExtAsFunction = _glBlitFramebufferLayersExt
+      .cast<
+        NativeFunction<
+          Void Function(
+            Int32 srcX0,
+            Int32 srcY0,
+            Int32 srcX1,
+            Int32 srcY1,
+            Int32 dstX0,
+            Int32 dstY0,
+            Int32 dstX1,
+            Int32 dstY1,
+            Uint32 mask,
+            Uint32 filter,
+          )
+        >
+      >()
+      .asFunction<
+        void Function(
+          int srcX0,
+          int srcY0,
+          int srcX1,
+          int srcY1,
+          int dstX0,
+          int dstY0,
+          int dstX1,
+          int dstY1,
+          int mask,
+          int filter,
+        )
+      >();
+  return glBlitFramebufferLayersExtAsFunction(
+    srcX0,
+    srcY0,
+    srcX1,
+    srcY1,
+    dstX0,
+    dstY0,
+    dstX1,
+    dstY1,
+    mask,
+    filter,
+  );
+}
+
+/// @nodoc
+late Pointer<NativeFunction<Void Function()>> _glBlitFramebufferLayerExt;
+
+/// ```c
+/// GLAPI void APIENTRY glBlitFramebufferLayerEXT (GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint srcLayer, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLint dstLayer, GLbitfield mask, GLenum filter)
+/// ```
+/// {@category opengl_glext}
+void glBlitFramebufferLayerExt(
+  int srcX0,
+  int srcY0,
+  int srcX1,
+  int srcY1,
+  int srcLayer,
+  int dstX0,
+  int dstY0,
+  int dstX1,
+  int dstY1,
+  int dstLayer,
+  int mask,
+  int filter,
+) {
+  final glBlitFramebufferLayerExtAsFunction = _glBlitFramebufferLayerExt
+      .cast<
+        NativeFunction<
+          Void Function(
+            Int32 srcX0,
+            Int32 srcY0,
+            Int32 srcX1,
+            Int32 srcY1,
+            Int32 srcLayer,
+            Int32 dstX0,
+            Int32 dstY0,
+            Int32 dstX1,
+            Int32 dstY1,
+            Int32 dstLayer,
+            Uint32 mask,
+            Uint32 filter,
+          )
+        >
+      >()
+      .asFunction<
+        void Function(
+          int srcX0,
+          int srcY0,
+          int srcX1,
+          int srcY1,
+          int srcLayer,
+          int dstX0,
+          int dstY0,
+          int dstX1,
+          int dstY1,
+          int dstLayer,
+          int mask,
+          int filter,
+        )
+      >();
+  return glBlitFramebufferLayerExtAsFunction(
+    srcX0,
+    srcY0,
+    srcX1,
+    srcY1,
+    srcLayer,
+    dstX0,
+    dstY0,
+    dstX1,
+    dstY1,
+    dstLayer,
     mask,
     filter,
   );
@@ -44268,6 +44526,115 @@ void glImportMemoryWin32NameExt(
         )
       >();
   return glImportMemoryWin32NameExtAsFunction(memory, size, handleType, name);
+}
+
+/// @nodoc
+late Pointer<NativeFunction<Void Function()>> _glDrawMeshTasksExt;
+
+/// ```c
+/// GLAPI void APIENTRY glDrawMeshTasksEXT (GLuint num_groups_x, GLuint num_groups_y, GLuint num_groups_z)
+/// ```
+/// {@category opengl_glext}
+void glDrawMeshTasksExt(int numGroupsX, int numGroupsY, int numGroupsZ) {
+  final glDrawMeshTasksExtAsFunction = _glDrawMeshTasksExt
+      .cast<
+        NativeFunction<
+          Void Function(Uint32 numGroupsX, Uint32 numGroupsY, Uint32 numGroupsZ)
+        >
+      >()
+      .asFunction<
+        void Function(int numGroupsX, int numGroupsY, int numGroupsZ)
+      >();
+  return glDrawMeshTasksExtAsFunction(numGroupsX, numGroupsY, numGroupsZ);
+}
+
+/// @nodoc
+late Pointer<NativeFunction<Void Function()>> _glDrawMeshTasksIndirectExt;
+
+/// ```c
+/// GLAPI void APIENTRY glDrawMeshTasksIndirectEXT (GLintptr indirect)
+/// ```
+/// {@category opengl_glext}
+void glDrawMeshTasksIndirectExt(Pointer<NativeType> indirect) {
+  final glDrawMeshTasksIndirectExtAsFunction = _glDrawMeshTasksIndirectExt
+      .cast<NativeFunction<Void Function(Pointer<NativeType> indirect)>>()
+      .asFunction<void Function(Pointer<NativeType> indirect)>();
+  return glDrawMeshTasksIndirectExtAsFunction(indirect);
+}
+
+/// @nodoc
+late Pointer<NativeFunction<Void Function()>> _glMultiDrawMeshTasksIndirectExt;
+
+/// ```c
+/// GLAPI void APIENTRY glMultiDrawMeshTasksIndirectEXT (GLintptr indirect, GLsizei drawcount, GLsizei stride)
+/// ```
+/// {@category opengl_glext}
+void glMultiDrawMeshTasksIndirectExt(
+  Pointer<NativeType> indirect,
+  int drawcount,
+  int stride,
+) {
+  final glMultiDrawMeshTasksIndirectExtAsFunction =
+      _glMultiDrawMeshTasksIndirectExt
+          .cast<
+            NativeFunction<
+              Void Function(
+                Pointer<NativeType> indirect,
+                Uint32 drawcount,
+                Uint32 stride,
+              )
+            >
+          >()
+          .asFunction<
+            void Function(
+              Pointer<NativeType> indirect,
+              int drawcount,
+              int stride,
+            )
+          >();
+  return glMultiDrawMeshTasksIndirectExtAsFunction(indirect, drawcount, stride);
+}
+
+/// @nodoc
+late Pointer<NativeFunction<Void Function()>>
+_glMultiDrawMeshTasksIndirectCountExt;
+
+/// ```c
+/// GLAPI void APIENTRY glMultiDrawMeshTasksIndirectCountEXT (GLintptr indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride)
+/// ```
+/// {@category opengl_glext}
+void glMultiDrawMeshTasksIndirectCountExt(
+  Pointer<NativeType> indirect,
+  Pointer<NativeType> drawcount,
+  int maxdrawcount,
+  int stride,
+) {
+  final glMultiDrawMeshTasksIndirectCountExtAsFunction =
+      _glMultiDrawMeshTasksIndirectCountExt
+          .cast<
+            NativeFunction<
+              Void Function(
+                Pointer<NativeType> indirect,
+                Pointer<NativeType> drawcount,
+                Uint32 maxdrawcount,
+                Uint32 stride,
+              )
+            >
+          >()
+          .asFunction<
+            void Function(
+              Pointer<NativeType> indirect,
+              Pointer<NativeType> drawcount,
+              int maxdrawcount,
+              int stride,
+            )
+          >();
+  return glMultiDrawMeshTasksIndirectCountExtAsFunction(
+    indirect,
+    drawcount,
+    maxdrawcount,
+    stride,
+  );
 }
 
 /// @nodoc
@@ -48790,6 +49157,52 @@ void glGetFramebufferParameterivMesa(
 }
 
 /// @nodoc
+late Pointer<NativeFunction<Void Function()>> _glAddClientPointerRangeMesa;
+
+/// ```c
+/// GLAPI void APIENTRY glAddClientPointerRangeMESA (GLvoid *addr, GLsizeiptr size)
+/// ```
+/// {@category opengl_glext}
+void glAddClientPointerRangeMesa(
+  Pointer<NativeType> addr,
+  Pointer<Uint32> size,
+) {
+  final glAddClientPointerRangeMesaAsFunction = _glAddClientPointerRangeMesa
+      .cast<
+        NativeFunction<
+          Void Function(Pointer<NativeType> addr, Pointer<Uint32> size)
+        >
+      >()
+      .asFunction<
+        void Function(Pointer<NativeType> addr, Pointer<Uint32> size)
+      >();
+  return glAddClientPointerRangeMesaAsFunction(addr, size);
+}
+
+/// @nodoc
+late Pointer<NativeFunction<Void Function()>> _glReleaseClientPointerRangeMesa;
+
+/// ```c
+/// GLAPI void* APIENTRY glReleaseClientPointerRangeMESA (GLsizeiptr *size)
+/// ```
+/// {@category opengl_glext}
+Pointer<NativeType> glReleaseClientPointerRangeMesa(
+  Pointer<Pointer<Uint32>> size,
+) {
+  final glReleaseClientPointerRangeMesaAsFunction =
+      _glReleaseClientPointerRangeMesa
+          .cast<
+            NativeFunction<
+              Pointer<NativeType> Function(Pointer<Pointer<Uint32>> size)
+            >
+          >()
+          .asFunction<
+            Pointer<NativeType> Function(Pointer<Pointer<Uint32>> size)
+          >();
+  return glReleaseClientPointerRangeMesaAsFunction(size);
+}
+
+/// @nodoc
 late Pointer<NativeFunction<Void Function()>> _glResizeBuffersMesa;
 
 /// ```c
@@ -49173,7 +49586,7 @@ void glEndConditionalRenderNvx() {
 late Pointer<NativeFunction<Void Function()>> _glUploadGpuMaskNvx;
 
 /// ```c
-/// GLAPI void APIENTRY glUploadGPUMaskNVX (GLbitfield mask)
+/// GLAPI void APIENTRY glUploadGpuMaskNVX (GLbitfield mask)
 /// ```
 /// {@category opengl_glext}
 void glUploadGpuMaskNvx(int mask) {
@@ -49284,7 +49697,7 @@ void glMulticastScissorArrayvNvx(
 late Pointer<NativeFunction<Void Function()>> _glAsyncCopyBufferSubDataNvx;
 
 /// ```c
-/// GLAPI GLuint APIENTRY glAsyncCopyBufferSubDataNVX (GLsizei waitSemaphoreCount, const GLuint *waitSemaphoreArray, const GLuint64 *fenceValueArray, GLuint readGPU, GLbitfield writeGPUMask, GLuint readBuffer, GLuint writeBuffer, GLintptr readOffset, GLintptr writeOffset, GLsizeiptr size, GLsizei signalSemaphoreCount, const GLuint *signalSemaphoreArray, const GLuint64 *signalValueArray)
+/// GLAPI GLuint APIENTRY glAsyncCopyBufferSubDataNVX (GLsizei waitSemaphoreCount, const GLuint *waitSemaphoreArray, const GLuint64 *fenceValueArray, GLuint readGpu, GLbitfield writeGpuMask, GLuint readBuffer, GLuint writeBuffer, GLintptr readOffset, GLintptr writeOffset, GLsizeiptr size, GLsizei signalSemaphoreCount, const GLuint *signalSemaphoreArray, const GLuint64 *signalValueArray)
 /// ```
 /// {@category opengl_glext}
 int glAsyncCopyBufferSubDataNvx(
@@ -49360,7 +49773,7 @@ int glAsyncCopyBufferSubDataNvx(
 late Pointer<NativeFunction<Void Function()>> _glAsyncCopyImageSubDataNvx;
 
 /// ```c
-/// GLAPI GLuint APIENTRY glAsyncCopyImageSubDataNVX (GLsizei waitSemaphoreCount, const GLuint *waitSemaphoreArray, const GLuint64 *waitValueArray, GLuint srcGPU, GLbitfield dstGPUMask, GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srcY, GLint srcZ, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei srcWidth, GLsizei srcHeight, GLsizei srcDepth, GLsizei signalSemaphoreCount, const GLuint *signalSemaphoreArray, const GLuint64 *signalValueArray)
+/// GLAPI GLuint APIENTRY glAsyncCopyImageSubDataNVX (GLsizei waitSemaphoreCount, const GLuint *waitSemaphoreArray, const GLuint64 *waitValueArray, GLuint srcGpu, GLbitfield dstGpuMask, GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srcY, GLint srcZ, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei srcWidth, GLsizei srcHeight, GLsizei srcDepth, GLsizei signalSemaphoreCount, const GLuint *signalSemaphoreArray, const GLuint64 *signalValueArray)
 /// ```
 /// {@category opengl_glext}
 int glAsyncCopyImageSubDataNvx(
@@ -49520,7 +49933,7 @@ void glLgpuNamedBufferSubDataNvx(
 late Pointer<NativeFunction<Void Function()>> _glLgpuCopyImageSubDataNvx;
 
 /// ```c
-/// GLAPI void APIENTRY glLGPUCopyImageSubDataNVX (GLuint sourceGPU, GLbitfield destinationGPUMask, GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srxY, GLint srcZ, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei width, GLsizei height, GLsizei depth)
+/// GLAPI void APIENTRY glLGPUCopyImageSubDataNVX (GLuint sourceGpu, GLbitfield destinationGpuMask, GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srxY, GLint srcZ, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei width, GLsizei height, GLsizei depth)
 /// ```
 /// {@category opengl_glext}
 void glLgpuCopyImageSubDataNvx(
@@ -49640,7 +50053,7 @@ int glCreateProgressFenceNvx() {
 late Pointer<NativeFunction<Void Function()>> _glSignalSemaphoreui64Nvx;
 
 /// ```c
-/// GLAPI void APIENTRY glSignalSemaphoreui64NVX (GLuint signalGPU, GLsizei fenceObjectCount, const GLuint *semaphoreArray, const GLuint64 *fenceValueArray)
+/// GLAPI void APIENTRY glSignalSemaphoreui64NVX (GLuint signalGpu, GLsizei fenceObjectCount, const GLuint *semaphoreArray, const GLuint64 *fenceValueArray)
 /// ```
 /// {@category opengl_glext}
 void glSignalSemaphoreui64Nvx(
@@ -49680,7 +50093,7 @@ void glSignalSemaphoreui64Nvx(
 late Pointer<NativeFunction<Void Function()>> _glWaitSemaphoreui64Nvx;
 
 /// ```c
-/// GLAPI void APIENTRY glWaitSemaphoreui64NVX (GLuint waitGPU, GLsizei fenceObjectCount, const GLuint *semaphoreArray, const GLuint64 *fenceValueArray)
+/// GLAPI void APIENTRY glWaitSemaphoreui64NVX (GLuint waitGpu, GLsizei fenceObjectCount, const GLuint *semaphoreArray, const GLuint64 *fenceValueArray)
 /// ```
 /// {@category opengl_glext}
 void glWaitSemaphoreui64Nvx(
@@ -51880,7 +52293,7 @@ void glFramebufferTextureFaceExt(
 late Pointer<NativeFunction<Void Function()>> _glRenderGpuMaskNv;
 
 /// ```c
-/// GLAPI void APIENTRY glRenderGPUMaskNV (GLbitfield mask)
+/// GLAPI void APIENTRY glRenderGpuMaskNV (GLbitfield mask)
 /// ```
 /// {@category opengl_glext}
 void glRenderGpuMaskNv(int mask) {
@@ -51938,7 +52351,7 @@ void glMulticastBufferSubDataNv(
 late Pointer<NativeFunction<Void Function()>> _glMulticastCopyBufferSubDataNv;
 
 /// ```c
-/// GLAPI void APIENTRY glMulticastCopyBufferSubDataNV (GLuint readGPU, GLbitfield writeGPUMask, GLuint readBuffer, GLuint writeBuffer, GLintptr readOffset, GLintptr writeOffset, GLsizeiptr size)
+/// GLAPI void APIENTRY glMulticastCopyBufferSubDataNV (GLuint readGpu, GLbitfield writeGpuMask, GLuint readBuffer, GLuint writeBuffer, GLintptr readOffset, GLintptr writeOffset, GLsizeiptr size)
 /// ```
 /// {@category opengl_glext}
 void glMulticastCopyBufferSubDataNv(
@@ -51991,7 +52404,7 @@ void glMulticastCopyBufferSubDataNv(
 late Pointer<NativeFunction<Void Function()>> _glMulticastCopyImageSubDataNv;
 
 /// ```c
-/// GLAPI void APIENTRY glMulticastCopyImageSubDataNV (GLuint srcGPU, GLbitfield dstGPUMask, GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srcY, GLint srcZ, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei srcWidth, GLsizei srcHeight, GLsizei srcDepth)
+/// GLAPI void APIENTRY glMulticastCopyImageSubDataNV (GLuint srcGpu, GLbitfield dstGpuMask, GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srcY, GLint srcZ, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei srcWidth, GLsizei srcHeight, GLsizei srcDepth)
 /// ```
 /// {@category opengl_glext}
 void glMulticastCopyImageSubDataNv(
@@ -52083,7 +52496,7 @@ void glMulticastCopyImageSubDataNv(
 late Pointer<NativeFunction<Void Function()>> _glMulticastBlitFramebufferNv;
 
 /// ```c
-/// GLAPI void APIENTRY glMulticastBlitFramebufferNV (GLuint srcGPU, GLuint dstGPU, GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter)
+/// GLAPI void APIENTRY glMulticastBlitFramebufferNV (GLuint srcGpu, GLuint dstGpu, GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter)
 /// ```
 /// {@category opengl_glext}
 void glMulticastBlitFramebufferNv(
@@ -52215,7 +52628,7 @@ void glMulticastBarrierNv() {
 late Pointer<NativeFunction<Void Function()>> _glMulticastWaitSyncNv;
 
 /// ```c
-/// GLAPI void APIENTRY glMulticastWaitSyncNV (GLuint signalGPU, GLbitfield waitGPUMask)
+/// GLAPI void APIENTRY glMulticastWaitSyncNV (GLuint signalGpu, GLbitfield waitGpuMask)
 /// ```
 /// {@category opengl_glext}
 void glMulticastWaitSyncNv(int signalGpu, int waitGpuMask) {
@@ -53278,92 +53691,6 @@ void glMultiTexCoord4hvNv(int target, Pointer<Uint16> v) {
 }
 
 /// @nodoc
-late Pointer<NativeFunction<Void Function()>> _glFogCoordhNv;
-
-/// ```c
-/// GLAPI void APIENTRY glFogCoordhNV (GLhalfNV fog)
-/// ```
-/// {@category opengl_glext}
-void glFogCoordhNv(int fog) {
-  final glFogCoordhNvAsFunction = _glFogCoordhNv
-      .cast<NativeFunction<Void Function(Uint16 fog)>>()
-      .asFunction<void Function(int fog)>();
-  return glFogCoordhNvAsFunction(fog);
-}
-
-/// @nodoc
-late Pointer<NativeFunction<Void Function()>> _glFogCoordhvNv;
-
-/// ```c
-/// GLAPI void APIENTRY glFogCoordhvNV (const GLhalfNV *fog)
-/// ```
-/// {@category opengl_glext}
-void glFogCoordhvNv(Pointer<Uint16> fog) {
-  final glFogCoordhvNvAsFunction = _glFogCoordhvNv
-      .cast<NativeFunction<Void Function(Pointer<Uint16> fog)>>()
-      .asFunction<void Function(Pointer<Uint16> fog)>();
-  return glFogCoordhvNvAsFunction(fog);
-}
-
-/// @nodoc
-late Pointer<NativeFunction<Void Function()>> _glSecondaryColor3hNv;
-
-/// ```c
-/// GLAPI void APIENTRY glSecondaryColor3hNV (GLhalfNV red, GLhalfNV green, GLhalfNV blue)
-/// ```
-/// {@category opengl_glext}
-void glSecondaryColor3hNv(int red, int green, int blue) {
-  final glSecondaryColor3hNvAsFunction = _glSecondaryColor3hNv
-      .cast<
-        NativeFunction<Void Function(Uint16 red, Uint16 green, Uint16 blue)>
-      >()
-      .asFunction<void Function(int red, int green, int blue)>();
-  return glSecondaryColor3hNvAsFunction(red, green, blue);
-}
-
-/// @nodoc
-late Pointer<NativeFunction<Void Function()>> _glSecondaryColor3hvNv;
-
-/// ```c
-/// GLAPI void APIENTRY glSecondaryColor3hvNV (const GLhalfNV *v)
-/// ```
-/// {@category opengl_glext}
-void glSecondaryColor3hvNv(Pointer<Uint16> v) {
-  final glSecondaryColor3hvNvAsFunction = _glSecondaryColor3hvNv
-      .cast<NativeFunction<Void Function(Pointer<Uint16> v)>>()
-      .asFunction<void Function(Pointer<Uint16> v)>();
-  return glSecondaryColor3hvNvAsFunction(v);
-}
-
-/// @nodoc
-late Pointer<NativeFunction<Void Function()>> _glVertexWeighthNv;
-
-/// ```c
-/// GLAPI void APIENTRY glVertexWeighthNV (GLhalfNV weight)
-/// ```
-/// {@category opengl_glext}
-void glVertexWeighthNv(int weight) {
-  final glVertexWeighthNvAsFunction = _glVertexWeighthNv
-      .cast<NativeFunction<Void Function(Uint16 weight)>>()
-      .asFunction<void Function(int weight)>();
-  return glVertexWeighthNvAsFunction(weight);
-}
-
-/// @nodoc
-late Pointer<NativeFunction<Void Function()>> _glVertexWeighthvNv;
-
-/// ```c
-/// GLAPI void APIENTRY glVertexWeighthvNV (const GLhalfNV *weight)
-/// ```
-/// {@category opengl_glext}
-void glVertexWeighthvNv(Pointer<Uint16> weight) {
-  final glVertexWeighthvNvAsFunction = _glVertexWeighthvNv
-      .cast<NativeFunction<Void Function(Pointer<Uint16> weight)>>()
-      .asFunction<void Function(Pointer<Uint16> weight)>();
-  return glVertexWeighthvNvAsFunction(weight);
-}
-
-/// @nodoc
 late Pointer<NativeFunction<Void Function()>> _glVertexAttrib1hNv;
 
 /// ```c
@@ -53545,6 +53872,92 @@ void glVertexAttribs4hvNv(int index, int n, Pointer<Uint16> v) {
       >()
       .asFunction<void Function(int index, int n, Pointer<Uint16> v)>();
   return glVertexAttribs4hvNvAsFunction(index, n, v);
+}
+
+/// @nodoc
+late Pointer<NativeFunction<Void Function()>> _glFogCoordhNv;
+
+/// ```c
+/// GLAPI void APIENTRY glFogCoordhNV (GLhalfNV fog)
+/// ```
+/// {@category opengl_glext}
+void glFogCoordhNv(int fog) {
+  final glFogCoordhNvAsFunction = _glFogCoordhNv
+      .cast<NativeFunction<Void Function(Uint16 fog)>>()
+      .asFunction<void Function(int fog)>();
+  return glFogCoordhNvAsFunction(fog);
+}
+
+/// @nodoc
+late Pointer<NativeFunction<Void Function()>> _glFogCoordhvNv;
+
+/// ```c
+/// GLAPI void APIENTRY glFogCoordhvNV (const GLhalfNV *fog)
+/// ```
+/// {@category opengl_glext}
+void glFogCoordhvNv(Pointer<Uint16> fog) {
+  final glFogCoordhvNvAsFunction = _glFogCoordhvNv
+      .cast<NativeFunction<Void Function(Pointer<Uint16> fog)>>()
+      .asFunction<void Function(Pointer<Uint16> fog)>();
+  return glFogCoordhvNvAsFunction(fog);
+}
+
+/// @nodoc
+late Pointer<NativeFunction<Void Function()>> _glSecondaryColor3hNv;
+
+/// ```c
+/// GLAPI void APIENTRY glSecondaryColor3hNV (GLhalfNV red, GLhalfNV green, GLhalfNV blue)
+/// ```
+/// {@category opengl_glext}
+void glSecondaryColor3hNv(int red, int green, int blue) {
+  final glSecondaryColor3hNvAsFunction = _glSecondaryColor3hNv
+      .cast<
+        NativeFunction<Void Function(Uint16 red, Uint16 green, Uint16 blue)>
+      >()
+      .asFunction<void Function(int red, int green, int blue)>();
+  return glSecondaryColor3hNvAsFunction(red, green, blue);
+}
+
+/// @nodoc
+late Pointer<NativeFunction<Void Function()>> _glSecondaryColor3hvNv;
+
+/// ```c
+/// GLAPI void APIENTRY glSecondaryColor3hvNV (const GLhalfNV *v)
+/// ```
+/// {@category opengl_glext}
+void glSecondaryColor3hvNv(Pointer<Uint16> v) {
+  final glSecondaryColor3hvNvAsFunction = _glSecondaryColor3hvNv
+      .cast<NativeFunction<Void Function(Pointer<Uint16> v)>>()
+      .asFunction<void Function(Pointer<Uint16> v)>();
+  return glSecondaryColor3hvNvAsFunction(v);
+}
+
+/// @nodoc
+late Pointer<NativeFunction<Void Function()>> _glVertexWeighthNv;
+
+/// ```c
+/// GLAPI void APIENTRY glVertexWeighthNV (GLhalfNV weight)
+/// ```
+/// {@category opengl_glext}
+void glVertexWeighthNv(int weight) {
+  final glVertexWeighthNvAsFunction = _glVertexWeighthNv
+      .cast<NativeFunction<Void Function(Uint16 weight)>>()
+      .asFunction<void Function(int weight)>();
+  return glVertexWeighthNvAsFunction(weight);
+}
+
+/// @nodoc
+late Pointer<NativeFunction<Void Function()>> _glVertexWeighthvNv;
+
+/// ```c
+/// GLAPI void APIENTRY glVertexWeighthvNV (const GLhalfNV *weight)
+/// ```
+/// {@category opengl_glext}
+void glVertexWeighthvNv(Pointer<Uint16> weight) {
+  final glVertexWeighthvNvAsFunction = _glVertexWeighthvNv
+      .cast<NativeFunction<Void Function(Pointer<Uint16> weight)>>()
+      .asFunction<void Function(Pointer<Uint16> weight)>();
+  return glVertexWeighthvNvAsFunction(weight);
 }
 
 /// @nodoc
@@ -61149,6 +61562,56 @@ void glFramebufferTextureMultiviewOvr(
 }
 
 /// @nodoc
+late Pointer<NativeFunction<Void Function()>>
+_glNamedFramebufferTextureMultiviewOvr;
+
+/// ```c
+/// GLAPI void APIENTRY glNamedFramebufferTextureMultiviewOVR (GLuint framebuffer, GLenum attachment, GLuint texture, GLint level, GLint baseViewIndex, GLsizei numViews)
+/// ```
+/// {@category opengl_glext}
+void glNamedFramebufferTextureMultiviewOvr(
+  int framebuffer,
+  int attachment,
+  int texture,
+  int level,
+  int baseViewIndex,
+  int numViews,
+) {
+  final glNamedFramebufferTextureMultiviewOvrAsFunction =
+      _glNamedFramebufferTextureMultiviewOvr
+          .cast<
+            NativeFunction<
+              Void Function(
+                Uint32 framebuffer,
+                Uint32 attachment,
+                Uint32 texture,
+                Int32 level,
+                Int32 baseViewIndex,
+                Uint32 numViews,
+              )
+            >
+          >()
+          .asFunction<
+            void Function(
+              int framebuffer,
+              int attachment,
+              int texture,
+              int level,
+              int baseViewIndex,
+              int numViews,
+            )
+          >();
+  return glNamedFramebufferTextureMultiviewOvrAsFunction(
+    framebuffer,
+    attachment,
+    texture,
+    level,
+    baseViewIndex,
+    numViews,
+  );
+}
+
+/// @nodoc
 late Pointer<NativeFunction<Void Function()>> _glHintPgi;
 
 /// ```c
@@ -66897,7 +67360,23 @@ void _sdlOpenglGlextLoader() {
   _glFogCoorddExt = sdlGlGetProcAddressEx('glFogCoorddExt');
   _glFogCoorddvExt = sdlGlGetProcAddressEx('glFogCoorddvExt');
   _glFogCoordPointerExt = sdlGlGetProcAddressEx('glFogCoordPointerExt');
+  _glGetFragmentShadingRatesExt = sdlGlGetProcAddressEx(
+    'glGetFragmentShadingRatesExt',
+  );
+  _glShadingRateExt = sdlGlGetProcAddressEx('glShadingRateExt');
+  _glShadingRateCombinerOpsExt = sdlGlGetProcAddressEx(
+    'glShadingRateCombinerOpsExt',
+  );
+  _glFramebufferShadingRateExt = sdlGlGetProcAddressEx(
+    'glFramebufferShadingRateExt',
+  );
   _glBlitFramebufferExt = sdlGlGetProcAddressEx('glBlitFramebufferExt');
+  _glBlitFramebufferLayersExt = sdlGlGetProcAddressEx(
+    'glBlitFramebufferLayersExt',
+  );
+  _glBlitFramebufferLayerExt = sdlGlGetProcAddressEx(
+    'glBlitFramebufferLayerExt',
+  );
   _glRenderbufferStorageMultisampleExt = sdlGlGetProcAddressEx(
     'glRenderbufferStorageMultisampleExt',
   );
@@ -67039,6 +67518,16 @@ void _sdlOpenglGlextLoader() {
   );
   _glImportMemoryWin32NameExt = sdlGlGetProcAddressEx(
     'glImportMemoryWin32NameExt',
+  );
+  _glDrawMeshTasksExt = sdlGlGetProcAddressEx('glDrawMeshTasksExt');
+  _glDrawMeshTasksIndirectExt = sdlGlGetProcAddressEx(
+    'glDrawMeshTasksIndirectExt',
+  );
+  _glMultiDrawMeshTasksIndirectExt = sdlGlGetProcAddressEx(
+    'glMultiDrawMeshTasksIndirectExt',
+  );
+  _glMultiDrawMeshTasksIndirectCountExt = sdlGlGetProcAddressEx(
+    'glMultiDrawMeshTasksIndirectCountExt',
   );
   _glMultiDrawArraysExt = sdlGlGetProcAddressEx('glMultiDrawArraysExt');
   _glMultiDrawElementsExt = sdlGlGetProcAddressEx('glMultiDrawElementsExt');
@@ -67325,6 +67814,12 @@ void _sdlOpenglGlextLoader() {
   );
   _glGetFramebufferParameterivMesa = sdlGlGetProcAddressEx(
     'glGetFramebufferParameterivMesa',
+  );
+  _glAddClientPointerRangeMesa = sdlGlGetProcAddressEx(
+    'glAddClientPointerRangeMesa',
+  );
+  _glReleaseClientPointerRangeMesa = sdlGlGetProcAddressEx(
+    'glReleaseClientPointerRangeMesa',
   );
   _glResizeBuffersMesa = sdlGlGetProcAddressEx('glResizeBuffersMesa');
   _glWindowPos2dMesa = sdlGlGetProcAddressEx('glWindowPos2dMesa');
@@ -67652,12 +68147,6 @@ void _sdlOpenglGlextLoader() {
   _glMultiTexCoord3hvNv = sdlGlGetProcAddressEx('glMultiTexCoord3hvNv');
   _glMultiTexCoord4hNv = sdlGlGetProcAddressEx('glMultiTexCoord4hNv');
   _glMultiTexCoord4hvNv = sdlGlGetProcAddressEx('glMultiTexCoord4hvNv');
-  _glFogCoordhNv = sdlGlGetProcAddressEx('glFogCoordhNv');
-  _glFogCoordhvNv = sdlGlGetProcAddressEx('glFogCoordhvNv');
-  _glSecondaryColor3hNv = sdlGlGetProcAddressEx('glSecondaryColor3hNv');
-  _glSecondaryColor3hvNv = sdlGlGetProcAddressEx('glSecondaryColor3hvNv');
-  _glVertexWeighthNv = sdlGlGetProcAddressEx('glVertexWeighthNv');
-  _glVertexWeighthvNv = sdlGlGetProcAddressEx('glVertexWeighthvNv');
   _glVertexAttrib1hNv = sdlGlGetProcAddressEx('glVertexAttrib1hNv');
   _glVertexAttrib1hvNv = sdlGlGetProcAddressEx('glVertexAttrib1hvNv');
   _glVertexAttrib2hNv = sdlGlGetProcAddressEx('glVertexAttrib2hNv');
@@ -67670,6 +68159,12 @@ void _sdlOpenglGlextLoader() {
   _glVertexAttribs2hvNv = sdlGlGetProcAddressEx('glVertexAttribs2hvNv');
   _glVertexAttribs3hvNv = sdlGlGetProcAddressEx('glVertexAttribs3hvNv');
   _glVertexAttribs4hvNv = sdlGlGetProcAddressEx('glVertexAttribs4hvNv');
+  _glFogCoordhNv = sdlGlGetProcAddressEx('glFogCoordhNv');
+  _glFogCoordhvNv = sdlGlGetProcAddressEx('glFogCoordhvNv');
+  _glSecondaryColor3hNv = sdlGlGetProcAddressEx('glSecondaryColor3hNv');
+  _glSecondaryColor3hvNv = sdlGlGetProcAddressEx('glSecondaryColor3hvNv');
+  _glVertexWeighthNv = sdlGlGetProcAddressEx('glVertexWeighthNv');
+  _glVertexWeighthvNv = sdlGlGetProcAddressEx('glVertexWeighthvNv');
   _glGetInternalformatSampleivNv = sdlGlGetProcAddressEx(
     'glGetInternalformatSampleivNv',
   );
@@ -68143,6 +68638,9 @@ void _sdlOpenglGlextLoader() {
   _glViewportSwizzleNv = sdlGlGetProcAddressEx('glViewportSwizzleNv');
   _glFramebufferTextureMultiviewOvr = sdlGlGetProcAddressEx(
     'glFramebufferTextureMultiviewOvr',
+  );
+  _glNamedFramebufferTextureMultiviewOvr = sdlGlGetProcAddressEx(
+    'glNamedFramebufferTextureMultiviewOvr',
   );
   _glHintPgi = sdlGlGetProcAddressEx('glHintPgi');
   _glDetailTexFuncSgis = sdlGlGetProcAddressEx('glDetailTexFuncSgis');

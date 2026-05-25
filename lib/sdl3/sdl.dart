@@ -1,5 +1,6 @@
 import 'dart:ffi';
 import 'dart:math' as math;
+import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 import 'package:ffi/ffi.dart' as ffi;
 import 'dylib.dart' as dylib;
@@ -7,6 +8,7 @@ import 'sdl_dart.dart';
 import 'sdl_gfx.dart' as gfx;
 import 'sdl_image.dart';
 
+part 'ex/sdl/lib_sdl_audio.dart';
 part 'ex/sdl/lib_sdl_dialog.dart';
 part 'ex/sdl/lib_sdl_events.dart';
 part 'ex/sdl/lib_sdl_gpu.dart';
@@ -29,6 +31,7 @@ part 'ex/sdl/sdl_renderer_from_image.dart';
 part 'ex/sdl/sdl_surface.dart';
 part 'ex/sdl/sdl_texture.dart';
 part 'ex/sdl/sdl_window.dart';
+part 'ex/sdl/struct_sdl_audio_spec.dart';
 part 'ex/sdl/struct_sdl_color.dart';
 part 'ex/sdl/struct_sdl_cursor_frame_info.dart';
 part 'ex/sdl/struct_sdl_dialog_file_filter.dart';

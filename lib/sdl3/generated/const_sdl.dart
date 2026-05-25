@@ -204,9 +204,9 @@ const SDL_EVENT_WINDOW_ENTER_FULLSCREEN = 0x202 + 21;
 const SDL_EVENT_WINDOW_LEAVE_FULLSCREEN = 0x202 + 22;
 const SDL_EVENT_WINDOW_DESTROYED = 0x202 + 23;
 const SDL_EVENT_WINDOW_HDR_STATE_CHANGED = 0x202 + 24;
-const SDL_EVENT_WINDOW_CURVATURE_CHANGED = 0x202 + 25;
+const SDL_EVENT_WINDOW_SETTINGS_CHANGED = 0x202 + 25;
 const SDL_EVENT_WINDOW_FIRST = SDL_EVENT_WINDOW_SHOWN;
-const SDL_EVENT_WINDOW_LAST = SDL_EVENT_WINDOW_CURVATURE_CHANGED;
+const SDL_EVENT_WINDOW_LAST = SDL_EVENT_WINDOW_SETTINGS_CHANGED;
 const SDL_EVENT_KEY_DOWN = 0x300;
 const SDL_EVENT_KEY_UP = 0x300 + 1;
 const SDL_EVENT_TEXT_EDITING = 0x300 + 2;
@@ -244,6 +244,8 @@ const SDL_EVENT_GAMEPAD_TOUCHPAD_UP = 0x650 + 8;
 const SDL_EVENT_GAMEPAD_SENSOR_UPDATE = 0x650 + 9;
 const SDL_EVENT_GAMEPAD_UPDATE_COMPLETE = 0x650 + 10;
 const SDL_EVENT_GAMEPAD_STEAM_HANDLE_UPDATED = 0x650 + 11;
+const SDL_EVENT_GAMEPAD_CAPSENSE_TOUCH = 0x650 + 12;
+const SDL_EVENT_GAMEPAD_CAPSENSE_RELEASE = 0x650 + 13;
 const SDL_EVENT_FINGER_DOWN = 0x700;
 const SDL_EVENT_FINGER_UP = 0x700 + 1;
 const SDL_EVENT_FINGER_MOTION = 0x700 + 2;
@@ -321,7 +323,8 @@ const SDL_GAMEPAD_TYPE_NINTENDO_SWITCH_JOYCON_LEFT = 0 + 8;
 const SDL_GAMEPAD_TYPE_NINTENDO_SWITCH_JOYCON_RIGHT = 0 + 9;
 const SDL_GAMEPAD_TYPE_NINTENDO_SWITCH_JOYCON_PAIR = 0 + 10;
 const SDL_GAMEPAD_TYPE_GAMECUBE = 0 + 11;
-const SDL_GAMEPAD_TYPE_COUNT = 0 + 12;
+const SDL_GAMEPAD_TYPE_STEAM = 0 + 12;
+const SDL_GAMEPAD_TYPE_COUNT = 0 + 13;
 const SDL_GAMEPAD_BUTTON_INVALID = -1;
 const SDL_GAMEPAD_BUTTON_SOUTH = -1 + 1;
 const SDL_GAMEPAD_BUTTON_EAST = -1 + 2;
@@ -367,6 +370,12 @@ const SDL_GAMEPAD_AXIS_RIGHTY = -1 + 4;
 const SDL_GAMEPAD_AXIS_LEFT_TRIGGER = -1 + 5;
 const SDL_GAMEPAD_AXIS_RIGHT_TRIGGER = -1 + 6;
 const SDL_GAMEPAD_AXIS_COUNT = -1 + 7;
+const SDL_GAMEPAD_CAPSENSE_INVALID = -1;
+const SDL_GAMEPAD_CAPSENSE_LEFT_STICK = -1 + 1;
+const SDL_GAMEPAD_CAPSENSE_RIGHT_STICK = -1 + 2;
+const SDL_GAMEPAD_CAPSENSE_LEFT_GRIP = -1 + 3;
+const SDL_GAMEPAD_CAPSENSE_RIGHT_GRIP = -1 + 4;
+const SDL_GAMEPAD_CAPSENSE_COUNT = -1 + 5;
 const SDL_GAMEPAD_BINDTYPE_NONE = 0;
 const SDL_GAMEPAD_BINDTYPE_BUTTON = 0 + 1;
 const SDL_GAMEPAD_BINDTYPE_AXIS = 0 + 2;
@@ -791,6 +800,7 @@ const SDL_HINT_AUDIO_DISK_INPUT_FILE = 'SDL_AUDIO_DISK_INPUT_FILE';
 const SDL_HINT_AUDIO_DISK_OUTPUT_FILE = 'SDL_AUDIO_DISK_OUTPUT_FILE';
 const SDL_HINT_AUDIO_DISK_TIMESCALE = 'SDL_AUDIO_DISK_TIMESCALE';
 const SDL_HINT_AUDIO_DRIVER = 'SDL_AUDIO_DRIVER';
+const SDL_HINT_AUDIO_DUCK_OTHERS = 'SDL_AUDIO_DUCK_OTHERS';
 const SDL_HINT_AUDIO_DUMMY_TIMESCALE = 'SDL_AUDIO_DUMMY_TIMESCALE';
 const SDL_HINT_AUDIO_FORMAT = 'SDL_AUDIO_FORMAT';
 const SDL_HINT_AUDIO_FREQUENCY = 'SDL_AUDIO_FREQUENCY';
@@ -2141,7 +2151,7 @@ const SDL_RENDERER_VSYNC_ADAPTIVE = -1;
 const SDL_DEBUG_TEXT_FONT_CHARACTER_SIZE = 8;
 //const SDL_revision_h_ = ;
 const SDL_REVISION =
-    'SDL-3.5.0-release-3.4.0-770-g71979477c (" SDL_VENDOR_INFO ")';
+    'SDL-3.5.0-release-3.4.0-849-g6c55fad41 (" SDL_VENDOR_INFO ")';
 //const SDL_scancode_h_ = ;
 const SDL_SCANCODE_UNKNOWN = 0;
 const SDL_SCANCODE_A = 4;
@@ -2778,7 +2788,8 @@ const SDL_PROP_WINDOW_CREATE_EMSCRIPTEN_CANVAS_ID_STRING =
     'SDL.window.create.emscripten.canvas_id';
 const SDL_PROP_WINDOW_CREATE_EMSCRIPTEN_KEYBOARD_ELEMENT_STRING =
     'SDL.window.create.emscripten.keyboard_element';
-const SDL_PROP_WINDOW_CREATE_CURVATURE_FLOAT = 'SDL.window.create.curvature';
+const SDL_PROP_WINDOW_CREATE_VISIONOS_SETTINGS_STRING =
+    'SDL.window.create.visionos.settings';
 const SDL_PROP_WINDOW_SHAPE_POINTER = 'SDL.window.shape';
 const SDL_PROP_WINDOW_HDR_ENABLED_BOOLEAN = 'SDL.window.HDR_enabled';
 const SDL_PROP_WINDOW_SDR_WHITE_LEVEL_FLOAT = 'SDL.window.SDR_white_level';
@@ -2832,7 +2843,7 @@ const SDL_PROP_WINDOW_EMSCRIPTEN_CANVAS_ID_STRING =
     'SDL.window.emscripten.canvas_id';
 const SDL_PROP_WINDOW_EMSCRIPTEN_KEYBOARD_ELEMENT_STRING =
     'SDL.window.emscripten.keyboard_element';
-const SDL_PROP_WINDOW_CURVATURE_FLOAT = 'SDL.window.curvature';
+const SDL_PROP_WINDOW_VISIONOS_SETTINGS_STRING = 'SDL.window.visionos.settings';
 const SDL_WINDOW_SURFACE_VSYNC_DISABLED = 0;
 const SDL_WINDOW_SURFACE_VSYNC_ADAPTIVE = -1;
 const SDL_HITTEST_NORMAL = 0;
@@ -3002,7 +3013,7 @@ class SdlkEvent {
   static const windowLeaveFullscreen = SDL_EVENT_WINDOW_LEAVE_FULLSCREEN;
   static const windowDestroyed = SDL_EVENT_WINDOW_DESTROYED;
   static const windowHdrStateChanged = SDL_EVENT_WINDOW_HDR_STATE_CHANGED;
-  static const windowCurvatureChanged = SDL_EVENT_WINDOW_CURVATURE_CHANGED;
+  static const windowSettingsChanged = SDL_EVENT_WINDOW_SETTINGS_CHANGED;
   static const windowFirst = SDL_EVENT_WINDOW_FIRST;
   static const windowLast = SDL_EVENT_WINDOW_LAST;
   static const keyDown = SDL_EVENT_KEY_DOWN;
@@ -3043,6 +3054,8 @@ class SdlkEvent {
   static const gamepadUpdateComplete = SDL_EVENT_GAMEPAD_UPDATE_COMPLETE;
   static const gamepadSteamHandleUpdated =
       SDL_EVENT_GAMEPAD_STEAM_HANDLE_UPDATED;
+  static const gamepadCapsenseTouch = SDL_EVENT_GAMEPAD_CAPSENSE_TOUCH;
+  static const gamepadCapsenseRelease = SDL_EVENT_GAMEPAD_CAPSENSE_RELEASE;
   static const fingerDown = SDL_EVENT_FINGER_DOWN;
   static const fingerUp = SDL_EVENT_FINGER_UP;
   static const fingerMotion = SDL_EVENT_FINGER_MOTION;
@@ -3133,6 +3146,7 @@ class SdlkGamepadType {
   static const nintendoSwitchJoyconPair =
       SDL_GAMEPAD_TYPE_NINTENDO_SWITCH_JOYCON_PAIR;
   static const gamecube = SDL_GAMEPAD_TYPE_GAMECUBE;
+  static const steam = SDL_GAMEPAD_TYPE_STEAM;
   static const count = SDL_GAMEPAD_TYPE_COUNT;
 }
 
@@ -3740,6 +3754,7 @@ class SdlkHint {
   static const audioDiskOutputFile = SDL_HINT_AUDIO_DISK_OUTPUT_FILE;
   static const audioDiskTimescale = SDL_HINT_AUDIO_DISK_TIMESCALE;
   static const audioDriver = SDL_HINT_AUDIO_DRIVER;
+  static const audioDuckOthers = SDL_HINT_AUDIO_DUCK_OTHERS;
   static const audioDummyTimescale = SDL_HINT_AUDIO_DUMMY_TIMESCALE;
   static const audioFormat = SDL_HINT_AUDIO_FORMAT;
   static const audioFrequency = SDL_HINT_AUDIO_FREQUENCY;
@@ -5679,7 +5694,8 @@ class SdlkPropWindow {
       SDL_PROP_WINDOW_CREATE_EMSCRIPTEN_CANVAS_ID_STRING;
   static const createEmscriptenKeyboardElementString =
       SDL_PROP_WINDOW_CREATE_EMSCRIPTEN_KEYBOARD_ELEMENT_STRING;
-  static const createCurvatureFloat = SDL_PROP_WINDOW_CREATE_CURVATURE_FLOAT;
+  static const createVisionosSettingsString =
+      SDL_PROP_WINDOW_CREATE_VISIONOS_SETTINGS_STRING;
   static const shapePointer = SDL_PROP_WINDOW_SHAPE_POINTER;
   static const hdrEnabledBoolean = SDL_PROP_WINDOW_HDR_ENABLED_BOOLEAN;
   static const sdrWhiteLevelFloat = SDL_PROP_WINDOW_SDR_WHITE_LEVEL_FLOAT;
@@ -5735,7 +5751,8 @@ class SdlkPropWindow {
       SDL_PROP_WINDOW_EMSCRIPTEN_CANVAS_ID_STRING;
   static const emscriptenKeyboardElementString =
       SDL_PROP_WINDOW_EMSCRIPTEN_KEYBOARD_ELEMENT_STRING;
-  static const curvatureFloat = SDL_PROP_WINDOW_CURVATURE_FLOAT;
+  static const visionosSettingsString =
+      SDL_PROP_WINDOW_VISIONOS_SETTINGS_STRING;
 }
 
 /// {@category video}

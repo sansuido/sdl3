@@ -765,6 +765,35 @@ final class SdlGamepadSensorEvent extends Struct {
   external int sensorTimestamp;
 }
 
+// SDL_GamepadCapSenseEvent
+/// {@category events}
+final class SdlGamepadCapSenseEvent extends Struct {
+  // [0]+(4)
+  @Int32()
+  external int type;
+  // [4]+(4)
+  @Uint32()
+  external int reserved;
+  // [8]+(8)
+  @Uint64()
+  external int timestamp;
+  // [16]+(4)
+  @Uint32()
+  external int which;
+  // [20]+(1)
+  @Uint8()
+  external int capsense;
+  // [21]+(1)
+  @Uint8()
+  external int down;
+  // [22]+(1)
+  @Uint8()
+  external int padding1;
+  // [23]+(1)
+  @Uint8()
+  external int padding2;
+}
+
 // SDL_AudioDeviceEvent
 /// {@category events}
 final class SdlAudioDeviceEvent extends Struct {
@@ -1247,6 +1276,8 @@ extension SdlEventExtension on Pointer<SdlEvent> {
       (cast<Uint8>() + 0).cast<SdlGamepadTouchpadEvent>();
   Pointer<SdlGamepadSensorEvent> get gsensor =>
       (cast<Uint8>() + 0).cast<SdlGamepadSensorEvent>();
+  Pointer<SdlGamepadCapSenseEvent> get gcapsense =>
+      (cast<Uint8>() + 0).cast<SdlGamepadCapSenseEvent>();
   Pointer<SdlAudioDeviceEvent> get adevice =>
       (cast<Uint8>() + 0).cast<SdlAudioDeviceEvent>();
   Pointer<SdlCameraDeviceEvent> get cdevice =>

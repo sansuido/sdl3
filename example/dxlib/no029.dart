@@ -305,7 +305,6 @@ int main() {
   if (!sdlInit(SdlkInit.video)) {
     return -1;
   }
-  sdlSetHint(SDL_HINT_RENDER_VSYNC, '1');
   final window = SdlWindowEx.create(
     title: gTitle,
     w: gScreenWidth,
@@ -321,6 +320,7 @@ int main() {
     sdlQuit();
     return -1;
   }
+  renderer.setVSync(1);
   actMain(renderer);
   renderer.destroy();
   window.destroy();

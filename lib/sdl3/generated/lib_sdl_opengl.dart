@@ -12498,7 +12498,7 @@ typedef PFNGLDEBUGMESSAGECALLBACKAMDPROC =
       Pointer<NativeType> userParam,
     );
 
-// typedef GLuint (APIENTRYP PFNGLGETDEBUGMESSAGELOGAMDPROC) (GLuint count, GLsizei bufSize, GLenum *categories, GLuint *severities, GLuint *ids, GLsizei *lengths, GLchar *message)
+// typedef GLuint (APIENTRYP PFNGLGETDEBUGMESSAGELOGAMDPROC) (GLuint count, GLsizei bufSize, GLenum *categories, GLenum *severities, GLuint *ids, GLsizei *lengths, GLchar *message)
 typedef PFNGLGETDEBUGMESSAGELOGAMDPROCDart =
     int Function(
       int count,
@@ -18370,6 +18370,54 @@ typedef PFNGLFOGCOORDPOINTEREXTPROCDart =
 typedef PFNGLFOGCOORDPOINTEREXTPROC =
     Void Function(Uint32 type, Uint32 stride, Pointer<NativeType> pointer);
 
+// typedef void (APIENTRYP PFNGLGETFRAGMENTSHADINGRATESEXTPROC) (GLsizei samples, GLsizei maxCount, GLsizei *count, GLenum *shadingRates)
+typedef PFNGLGETFRAGMENTSHADINGRATESEXTPROCDart =
+    void Function(
+      int samples,
+      int maxCount,
+      Pointer<Uint32> count,
+      Pointer<Uint32> shadingRates,
+    );
+typedef PFNGLGETFRAGMENTSHADINGRATESEXTPROC =
+    Void Function(
+      Uint32 samples,
+      Uint32 maxCount,
+      Pointer<Uint32> count,
+      Pointer<Uint32> shadingRates,
+    );
+
+// typedef void (APIENTRYP PFNGLSHADINGRATEEXTPROC) (GLenum rate)
+typedef PFNGLSHADINGRATEEXTPROCDart = void Function(int rate);
+typedef PFNGLSHADINGRATEEXTPROC = Void Function(Uint32 rate);
+
+// typedef void (APIENTRYP PFNGLSHADINGRATECOMBINEROPSEXTPROC) (GLenum combinerOp0, GLenum combinerOp1)
+typedef PFNGLSHADINGRATECOMBINEROPSEXTPROCDart =
+    void Function(int combinerOp0, int combinerOp1);
+typedef PFNGLSHADINGRATECOMBINEROPSEXTPROC =
+    Void Function(Uint32 combinerOp0, Uint32 combinerOp1);
+
+// typedef void (APIENTRYP PFNGLFRAMEBUFFERSHADINGRATEEXTPROC) (GLenum target, GLenum attachment, GLuint texture, GLint baseLayer, GLsizei numLayers, GLsizei texelWidth, GLsizei texelHeight)
+typedef PFNGLFRAMEBUFFERSHADINGRATEEXTPROCDart =
+    void Function(
+      int target,
+      int attachment,
+      int texture,
+      int baseLayer,
+      int numLayers,
+      int texelWidth,
+      int texelHeight,
+    );
+typedef PFNGLFRAMEBUFFERSHADINGRATEEXTPROC =
+    Void Function(
+      Uint32 target,
+      Uint32 attachment,
+      Uint32 texture,
+      Int32 baseLayer,
+      Uint32 numLayers,
+      Uint32 texelWidth,
+      Uint32 texelHeight,
+    );
+
 // typedef void (APIENTRYP PFNGLBLITFRAMEBUFFEREXTPROC) (GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter)
 typedef PFNGLBLITFRAMEBUFFEREXTPROCDart =
     void Function(
@@ -18394,6 +18442,66 @@ typedef PFNGLBLITFRAMEBUFFEREXTPROC =
       Int32 dstY0,
       Int32 dstX1,
       Int32 dstY1,
+      Uint32 mask,
+      Uint32 filter,
+    );
+
+// typedef void (APIENTRYP PFNGLBLITFRAMEBUFFERLAYERSEXTPROC) (GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter)
+typedef PFNGLBLITFRAMEBUFFERLAYERSEXTPROCDart =
+    void Function(
+      int srcX0,
+      int srcY0,
+      int srcX1,
+      int srcY1,
+      int dstX0,
+      int dstY0,
+      int dstX1,
+      int dstY1,
+      int mask,
+      int filter,
+    );
+typedef PFNGLBLITFRAMEBUFFERLAYERSEXTPROC =
+    Void Function(
+      Int32 srcX0,
+      Int32 srcY0,
+      Int32 srcX1,
+      Int32 srcY1,
+      Int32 dstX0,
+      Int32 dstY0,
+      Int32 dstX1,
+      Int32 dstY1,
+      Uint32 mask,
+      Uint32 filter,
+    );
+
+// typedef void (APIENTRYP PFNGLBLITFRAMEBUFFERLAYEREXTPROC) (GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint srcLayer, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLint dstLayer, GLbitfield mask, GLenum filter)
+typedef PFNGLBLITFRAMEBUFFERLAYEREXTPROCDart =
+    void Function(
+      int srcX0,
+      int srcY0,
+      int srcX1,
+      int srcY1,
+      int srcLayer,
+      int dstX0,
+      int dstY0,
+      int dstX1,
+      int dstY1,
+      int dstLayer,
+      int mask,
+      int filter,
+    );
+typedef PFNGLBLITFRAMEBUFFERLAYEREXTPROC =
+    Void Function(
+      Int32 srcX0,
+      Int32 srcY0,
+      Int32 srcX1,
+      Int32 srcY1,
+      Int32 srcLayer,
+      Int32 dstX0,
+      Int32 dstY0,
+      Int32 dstX1,
+      Int32 dstY1,
+      Int32 dstLayer,
       Uint32 mask,
       Uint32 filter,
     );
@@ -19241,6 +19349,44 @@ typedef PFNGLIMPORTMEMORYWIN32NAMEEXTPROC =
       Uint64 size,
       Uint32 handleType,
       Pointer<NativeType> name,
+    );
+
+// typedef void (APIENTRYP PFNGLDRAWMESHTASKSEXTPROC) (GLuint num_groups_x, GLuint num_groups_y, GLuint num_groups_z)
+typedef PFNGLDRAWMESHTASKSEXTPROCDart =
+    void Function(int numGroupsX, int numGroupsY, int numGroupsZ);
+typedef PFNGLDRAWMESHTASKSEXTPROC =
+    Void Function(Uint32 numGroupsX, Uint32 numGroupsY, Uint32 numGroupsZ);
+
+// typedef void (APIENTRYP PFNGLDRAWMESHTASKSINDIRECTEXTPROC) (GLintptr indirect)
+typedef PFNGLDRAWMESHTASKSINDIRECTEXTPROCDart =
+    void Function(Pointer<NativeType> indirect);
+typedef PFNGLDRAWMESHTASKSINDIRECTEXTPROC =
+    Void Function(Pointer<NativeType> indirect);
+
+// typedef void (APIENTRYP PFNGLMULTIDRAWMESHTASKSINDIRECTEXTPROC) (GLintptr indirect, GLsizei drawcount, GLsizei stride)
+typedef PFNGLMULTIDRAWMESHTASKSINDIRECTEXTPROCDart =
+    void Function(Pointer<NativeType> indirect, int drawcount, int stride);
+typedef PFNGLMULTIDRAWMESHTASKSINDIRECTEXTPROC =
+    Void Function(
+      Pointer<NativeType> indirect,
+      Uint32 drawcount,
+      Uint32 stride,
+    );
+
+// typedef void (APIENTRYP PFNGLMULTIDRAWMESHTASKSINDIRECTCOUNTEXTPROC) (GLintptr indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride)
+typedef PFNGLMULTIDRAWMESHTASKSINDIRECTCOUNTEXTPROCDart =
+    void Function(
+      Pointer<NativeType> indirect,
+      Pointer<NativeType> drawcount,
+      int maxdrawcount,
+      int stride,
+    );
+typedef PFNGLMULTIDRAWMESHTASKSINDIRECTCOUNTEXTPROC =
+    Void Function(
+      Pointer<NativeType> indirect,
+      Pointer<NativeType> drawcount,
+      Uint32 maxdrawcount,
+      Uint32 stride,
     );
 
 // typedef void (APIENTRYP PFNGLMULTIDRAWARRAYSEXTPROC) (GLenum mode, const GLint *first, const GLsizei *count, GLsizei primcount)
@@ -20876,6 +21022,18 @@ typedef PFNGLGETFRAMEBUFFERPARAMETERIVMESAPROCDart =
 typedef PFNGLGETFRAMEBUFFERPARAMETERIVMESAPROC =
     Void Function(Uint32 target, Uint32 pname, Pointer<Int32> params);
 
+// typedef void (APIENTRYP PFNGLADDCLIENTPOINTERRANGEMESAPROC) (GLvoid *addr, GLsizeiptr size)
+typedef PFNGLADDCLIENTPOINTERRANGEMESAPROCDart =
+    void Function(Pointer<NativeType> addr, Pointer<Uint32> size);
+typedef PFNGLADDCLIENTPOINTERRANGEMESAPROC =
+    Void Function(Pointer<NativeType> addr, Pointer<Uint32> size);
+
+// typedef void* (APIENTRYP PFNGLRELEASECLIENTPOINTERRANGEMESAPROC) (GLsizeiptr *size)
+typedef PFNGLRELEASECLIENTPOINTERRANGEMESAPROCDart =
+    Pointer<NativeType> Function(Pointer<Pointer<Uint32>> size);
+typedef PFNGLRELEASECLIENTPOINTERRANGEMESAPROC =
+    Pointer<NativeType> Function(Pointer<Pointer<Uint32>> size);
+
 // typedef void (APIENTRYP PFNGLRESIZEBUFFERSMESAPROC) (void)
 typedef PFNGLRESIZEBUFFERSMESAPROCDart = void Function();
 typedef PFNGLRESIZEBUFFERSMESAPROC = Void Function();
@@ -21016,7 +21174,7 @@ typedef PFNGLMULTICASTSCISSORARRAYVNVXPROCDart =
 typedef PFNGLMULTICASTSCISSORARRAYVNVXPROC =
     Void Function(Uint32 gpu, Uint32 first, Uint32 count, Pointer<Int32> v);
 
-// typedef GLuint (APIENTRYP PFNGLASYNCCOPYBUFFERSUBDATANVXPROC) (GLsizei waitSemaphoreCount, const GLuint *waitSemaphoreArray, const GLuint64 *fenceValueArray, GLuint readGPU, GLbitfield writeGPUMask, GLuint readBuffer, GLuint writeBuffer, GLintptr readOffset, GLintptr writeOffset, GLsizeiptr size, GLsizei signalSemaphoreCount, const GLuint *signalSemaphoreArray, const GLuint64 *signalValueArray)
+// typedef GLuint (APIENTRYP PFNGLASYNCCOPYBUFFERSUBDATANVXPROC) (GLsizei waitSemaphoreCount, const GLuint *waitSemaphoreArray, const GLuint64 *fenceValueArray, GLuint readGpu, GLbitfield writeGpuMask, GLuint readBuffer, GLuint writeBuffer, GLintptr readOffset, GLintptr writeOffset, GLsizeiptr size, GLsizei signalSemaphoreCount, const GLuint *signalSemaphoreArray, const GLuint64 *signalValueArray)
 typedef PFNGLASYNCCOPYBUFFERSUBDATANVXPROCDart =
     int Function(
       int waitSemaphoreCount,
@@ -21050,7 +21208,7 @@ typedef PFNGLASYNCCOPYBUFFERSUBDATANVXPROC =
       Pointer<Uint64> signalValueArray,
     );
 
-// typedef GLuint (APIENTRYP PFNGLASYNCCOPYIMAGESUBDATANVXPROC) (GLsizei waitSemaphoreCount, const GLuint *waitSemaphoreArray, const GLuint64 *waitValueArray, GLuint srcGPU, GLbitfield dstGPUMask, GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srcY, GLint srcZ, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei srcWidth, GLsizei srcHeight, GLsizei srcDepth, GLsizei signalSemaphoreCount, const GLuint *signalSemaphoreArray, const GLuint64 *signalValueArray)
+// typedef GLuint (APIENTRYP PFNGLASYNCCOPYIMAGESUBDATANVXPROC) (GLsizei waitSemaphoreCount, const GLuint *waitSemaphoreArray, const GLuint64 *waitValueArray, GLuint srcGpu, GLbitfield dstGpuMask, GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srcY, GLint srcZ, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei srcWidth, GLsizei srcHeight, GLsizei srcDepth, GLsizei signalSemaphoreCount, const GLuint *signalSemaphoreArray, const GLuint64 *signalValueArray)
 typedef PFNGLASYNCCOPYIMAGESUBDATANVXPROCDart =
     int Function(
       int waitSemaphoreCount,
@@ -21122,7 +21280,7 @@ typedef PFNGLLGPUNAMEDBUFFERSUBDATANVXPROC =
       Pointer<NativeType> data,
     );
 
-// typedef void (APIENTRYP PFNGLLGPUCOPYIMAGESUBDATANVXPROC) (GLuint sourceGPU, GLbitfield destinationGPUMask, GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srxY, GLint srcZ, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei width, GLsizei height, GLsizei depth)
+// typedef void (APIENTRYP PFNGLLGPUCOPYIMAGESUBDATANVXPROC) (GLuint sourceGpu, GLbitfield destinationGpuMask, GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srxY, GLint srcZ, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei width, GLsizei height, GLsizei depth)
 typedef PFNGLLGPUCOPYIMAGESUBDATANVXPROCDart =
     void Function(
       int sourceGpu,
@@ -21172,7 +21330,7 @@ typedef PFNGLLGPUINTERLOCKNVXPROC = Void Function();
 typedef PFNGLCREATEPROGRESSFENCENVXPROCDart = int Function();
 typedef PFNGLCREATEPROGRESSFENCENVXPROC = Uint32 Function();
 
-// typedef void (APIENTRYP PFNGLSIGNALSEMAPHOREUI64NVXPROC) (GLuint signalGPU, GLsizei fenceObjectCount, const GLuint *semaphoreArray, const GLuint64 *fenceValueArray)
+// typedef void (APIENTRYP PFNGLSIGNALSEMAPHOREUI64NVXPROC) (GLuint signalGpu, GLsizei fenceObjectCount, const GLuint *semaphoreArray, const GLuint64 *fenceValueArray)
 typedef PFNGLSIGNALSEMAPHOREUI64NVXPROCDart =
     void Function(
       int signalGpu,
@@ -21188,7 +21346,7 @@ typedef PFNGLSIGNALSEMAPHOREUI64NVXPROC =
       Pointer<Uint64> fenceValueArray,
     );
 
-// typedef void (APIENTRYP PFNGLWAITSEMAPHOREUI64NVXPROC) (GLuint waitGPU, GLsizei fenceObjectCount, const GLuint *semaphoreArray, const GLuint64 *fenceValueArray)
+// typedef void (APIENTRYP PFNGLWAITSEMAPHOREUI64NVXPROC) (GLuint waitGpu, GLsizei fenceObjectCount, const GLuint *semaphoreArray, const GLuint64 *fenceValueArray)
 typedef PFNGLWAITSEMAPHOREUI64NVXPROCDart =
     void Function(
       int waitGpu,
@@ -22025,7 +22183,7 @@ typedef PFNGLMULTICASTBUFFERSUBDATANVPROC =
       Pointer<NativeType> data,
     );
 
-// typedef void (APIENTRYP PFNGLMULTICASTCOPYBUFFERSUBDATANVPROC) (GLuint readGPU, GLbitfield writeGPUMask, GLuint readBuffer, GLuint writeBuffer, GLintptr readOffset, GLintptr writeOffset, GLsizeiptr size)
+// typedef void (APIENTRYP PFNGLMULTICASTCOPYBUFFERSUBDATANVPROC) (GLuint readGpu, GLbitfield writeGpuMask, GLuint readBuffer, GLuint writeBuffer, GLintptr readOffset, GLintptr writeOffset, GLsizeiptr size)
 typedef PFNGLMULTICASTCOPYBUFFERSUBDATANVPROCDart =
     void Function(
       int readGpu,
@@ -22047,7 +22205,7 @@ typedef PFNGLMULTICASTCOPYBUFFERSUBDATANVPROC =
       Pointer<Uint32> size,
     );
 
-// typedef void (APIENTRYP PFNGLMULTICASTCOPYIMAGESUBDATANVPROC) (GLuint srcGPU, GLbitfield dstGPUMask, GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srcY, GLint srcZ, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei srcWidth, GLsizei srcHeight, GLsizei srcDepth)
+// typedef void (APIENTRYP PFNGLMULTICASTCOPYIMAGESUBDATANVPROC) (GLuint srcGpu, GLbitfield dstGpuMask, GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srcY, GLint srcZ, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei srcWidth, GLsizei srcHeight, GLsizei srcDepth)
 typedef PFNGLMULTICASTCOPYIMAGESUBDATANVPROCDart =
     void Function(
       int srcGpu,
@@ -22089,7 +22247,7 @@ typedef PFNGLMULTICASTCOPYIMAGESUBDATANVPROC =
       Uint32 srcDepth,
     );
 
-// typedef void (APIENTRYP PFNGLMULTICASTBLITFRAMEBUFFERNVPROC) (GLuint srcGPU, GLuint dstGPU, GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter)
+// typedef void (APIENTRYP PFNGLMULTICASTBLITFRAMEBUFFERNVPROC) (GLuint srcGpu, GLuint dstGpu, GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter)
 typedef PFNGLMULTICASTBLITFRAMEBUFFERNVPROCDart =
     void Function(
       int srcGpu,
@@ -22143,7 +22301,7 @@ typedef PFNGLMULTICASTFRAMEBUFFERSAMPLELOCATIONSFVNVPROC =
 typedef PFNGLMULTICASTBARRIERNVPROCDart = void Function();
 typedef PFNGLMULTICASTBARRIERNVPROC = Void Function();
 
-// typedef void (APIENTRYP PFNGLMULTICASTWAITSYNCNVPROC) (GLuint signalGPU, GLbitfield waitGPUMask)
+// typedef void (APIENTRYP PFNGLMULTICASTWAITSYNCNVPROC) (GLuint signalGpu, GLbitfield waitGpuMask)
 typedef PFNGLMULTICASTWAITSYNCNVPROCDart =
     void Function(int signalGpu, int waitGpuMask);
 typedef PFNGLMULTICASTWAITSYNCNVPROC =
@@ -22460,32 +22618,6 @@ typedef PFNGLMULTITEXCOORD4HVNVPROCDart =
 typedef PFNGLMULTITEXCOORD4HVNVPROC =
     Void Function(Uint32 target, Pointer<Uint16> v);
 
-// typedef void (APIENTRYP PFNGLFOGCOORDHNVPROC) (GLhalfNV fog)
-typedef PFNGLFOGCOORDHNVPROCDart = void Function(int fog);
-typedef PFNGLFOGCOORDHNVPROC = Void Function(Uint16 fog);
-
-// typedef void (APIENTRYP PFNGLFOGCOORDHVNVPROC) (const GLhalfNV *fog)
-typedef PFNGLFOGCOORDHVNVPROCDart = void Function(Pointer<Uint16> fog);
-typedef PFNGLFOGCOORDHVNVPROC = Void Function(Pointer<Uint16> fog);
-
-// typedef void (APIENTRYP PFNGLSECONDARYCOLOR3HNVPROC) (GLhalfNV red, GLhalfNV green, GLhalfNV blue)
-typedef PFNGLSECONDARYCOLOR3HNVPROCDart =
-    void Function(int red, int green, int blue);
-typedef PFNGLSECONDARYCOLOR3HNVPROC =
-    Void Function(Uint16 red, Uint16 green, Uint16 blue);
-
-// typedef void (APIENTRYP PFNGLSECONDARYCOLOR3HVNVPROC) (const GLhalfNV *v)
-typedef PFNGLSECONDARYCOLOR3HVNVPROCDart = void Function(Pointer<Uint16> v);
-typedef PFNGLSECONDARYCOLOR3HVNVPROC = Void Function(Pointer<Uint16> v);
-
-// typedef void (APIENTRYP PFNGLVERTEXWEIGHTHNVPROC) (GLhalfNV weight)
-typedef PFNGLVERTEXWEIGHTHNVPROCDart = void Function(int weight);
-typedef PFNGLVERTEXWEIGHTHNVPROC = Void Function(Uint16 weight);
-
-// typedef void (APIENTRYP PFNGLVERTEXWEIGHTHVNVPROC) (const GLhalfNV *weight)
-typedef PFNGLVERTEXWEIGHTHVNVPROCDart = void Function(Pointer<Uint16> weight);
-typedef PFNGLVERTEXWEIGHTHVNVPROC = Void Function(Pointer<Uint16> weight);
-
 // typedef void (APIENTRYP PFNGLVERTEXATTRIB1HNVPROC) (GLuint index, GLhalfNV x)
 typedef PFNGLVERTEXATTRIB1HNVPROCDart = void Function(int index, int x);
 typedef PFNGLVERTEXATTRIB1HNVPROC = Void Function(Uint32 index, Uint16 x);
@@ -22554,6 +22686,32 @@ typedef PFNGLVERTEXATTRIBS4HVNVPROCDart =
     void Function(int index, int n, Pointer<Uint16> v);
 typedef PFNGLVERTEXATTRIBS4HVNVPROC =
     Void Function(Uint32 index, Uint32 n, Pointer<Uint16> v);
+
+// typedef void (APIENTRYP PFNGLFOGCOORDHNVPROC) (GLhalfNV fog)
+typedef PFNGLFOGCOORDHNVPROCDart = void Function(int fog);
+typedef PFNGLFOGCOORDHNVPROC = Void Function(Uint16 fog);
+
+// typedef void (APIENTRYP PFNGLFOGCOORDHVNVPROC) (const GLhalfNV *fog)
+typedef PFNGLFOGCOORDHVNVPROCDart = void Function(Pointer<Uint16> fog);
+typedef PFNGLFOGCOORDHVNVPROC = Void Function(Pointer<Uint16> fog);
+
+// typedef void (APIENTRYP PFNGLSECONDARYCOLOR3HNVPROC) (GLhalfNV red, GLhalfNV green, GLhalfNV blue)
+typedef PFNGLSECONDARYCOLOR3HNVPROCDart =
+    void Function(int red, int green, int blue);
+typedef PFNGLSECONDARYCOLOR3HNVPROC =
+    Void Function(Uint16 red, Uint16 green, Uint16 blue);
+
+// typedef void (APIENTRYP PFNGLSECONDARYCOLOR3HVNVPROC) (const GLhalfNV *v)
+typedef PFNGLSECONDARYCOLOR3HVNVPROCDart = void Function(Pointer<Uint16> v);
+typedef PFNGLSECONDARYCOLOR3HVNVPROC = Void Function(Pointer<Uint16> v);
+
+// typedef void (APIENTRYP PFNGLVERTEXWEIGHTHNVPROC) (GLhalfNV weight)
+typedef PFNGLVERTEXWEIGHTHNVPROCDart = void Function(int weight);
+typedef PFNGLVERTEXWEIGHTHNVPROC = Void Function(Uint16 weight);
+
+// typedef void (APIENTRYP PFNGLVERTEXWEIGHTHVNVPROC) (const GLhalfNV *weight)
+typedef PFNGLVERTEXWEIGHTHVNVPROCDart = void Function(Pointer<Uint16> weight);
+typedef PFNGLVERTEXWEIGHTHVNVPROC = Void Function(Pointer<Uint16> weight);
 
 // typedef void (APIENTRYP PFNGLGETINTERNALFORMATSAMPLEIVNVPROC) (GLenum target, GLenum internalformat, GLsizei samples, GLenum pname, GLsizei count, GLint *params)
 typedef PFNGLGETINTERNALFORMATSAMPLEIVNVPROCDart =
@@ -25351,6 +25509,26 @@ typedef PFNGLFRAMEBUFFERTEXTUREMULTIVIEWOVRPROCDart =
 typedef PFNGLFRAMEBUFFERTEXTUREMULTIVIEWOVRPROC =
     Void Function(
       Uint32 target,
+      Uint32 attachment,
+      Uint32 texture,
+      Int32 level,
+      Int32 baseViewIndex,
+      Uint32 numViews,
+    );
+
+// typedef void (APIENTRYP PFNGLNAMEDFRAMEBUFFERTEXTUREMULTIVIEWOVRPROC) (GLuint framebuffer, GLenum attachment, GLuint texture, GLint level, GLint baseViewIndex, GLsizei numViews)
+typedef PFNGLNAMEDFRAMEBUFFERTEXTUREMULTIVIEWOVRPROCDart =
+    void Function(
+      int framebuffer,
+      int attachment,
+      int texture,
+      int level,
+      int baseViewIndex,
+      int numViews,
+    );
+typedef PFNGLNAMEDFRAMEBUFFERTEXTUREMULTIVIEWOVRPROC =
+    Void Function(
+      Uint32 framebuffer,
       Uint32 attachment,
       Uint32 texture,
       Int32 level,

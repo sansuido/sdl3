@@ -30,7 +30,6 @@
  */
 import 'dart:ffi';
 import 'dart:math' as math;
-import 'package:ffi/ffi.dart';
 import 'package:sdl3/sdl3.dart';
 
 const gScreenWidth = 800;
@@ -44,38 +43,24 @@ class WavExample {
   int get device => sdlGetAudioStreamDevice(stream);
 
   bool load(String filename) {
-    var stat = true;
+    var result = false;
     final rwops = sdlIoFromFile(filename, 'rb');
+    final spec = SdlxAudioSpec();
     if (rwops != nullptr) {
-      final wavSpec = calloc<SdlAudioSpec>();
-      final wavLength = calloc<Uint32>();
-      final wavBuffer = calloc<Pointer<Uint8>>();
-      stat = sdlLoadWavIo(rwops, true, wavSpec, wavBuffer, wavLength);
-      if (stat) {
-        stream = sdlOpenAudioDeviceStream(
+      final buffer = sdlxLoadWavIo(rwops, spec, closeio: true);
+      if (buffer != null) {
+        stream = sdlxOpenAudioDeviceStream(
           SDL_AUDIO_DEVICE_DEFAULT_OUTPUT,
-          wavSpec,
+          spec,
           nullptr,
           nullptr,
         );
         if (stream != nullptr) {
-          stat = sdlPutAudioStreamData(
-            stream,
-            wavBuffer.value,
-            wavLength.value,
-          );
-        } else {
-          stat = false;
+          result = sdlxPutAudioStreamData(stream, buffer);
         }
-        sdlFree(wavBuffer.value);
       }
-      wavBuffer.callocFree();
-      wavLength.callocFree();
-      wavSpec.callocFree();
-    } else {
-      stat = false;
     }
-    return stat;
+    return result;
   }
 
   bool paused() => sdlAudioDevicePaused(device);

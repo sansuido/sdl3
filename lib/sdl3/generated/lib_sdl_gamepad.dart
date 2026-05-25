@@ -2048,6 +2048,58 @@ bool sdlGetGamepadSensorData(
 }
 
 ///
+/// Return whether a gamepad has a particular capsense.
+///
+/// \param gamepad the gamepad to query.
+/// \param type the type of capsense to query.
+/// \returns true if the capsense exists, false otherwise.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.6.0.
+///
+/// \sa SDL_GetGamepadCapSense
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GamepadHasCapSense(SDL_Gamepad *gamepad, SDL_GamepadCapSenseType type)
+/// ```
+/// {@category gamepad}
+bool sdlGamepadHasCapSense(Pointer<SdlGamepad> gamepad, int type) {
+  final sdlGamepadHasCapSenseLookupFunction = _libSdl
+      .lookupFunction<
+        Uint8 Function(Pointer<SdlGamepad> gamepad, Int32 type),
+        int Function(Pointer<SdlGamepad> gamepad, int type)
+      >('SDL_GamepadHasCapSense');
+  return sdlGamepadHasCapSenseLookupFunction(gamepad, type) == 1;
+}
+
+///
+/// Get the current state of a capsense on a gamepad.
+///
+/// \param gamepad a gamepad.
+/// \param type the type of capsense to query.
+/// \returns true if the capsense is touched, false otherwise.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.6.0.
+///
+/// \sa SDL_GamepadHasCapSense
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GetGamepadCapSense(SDL_Gamepad *gamepad, SDL_GamepadCapSenseType type)
+/// ```
+/// {@category gamepad}
+bool sdlGetGamepadCapSense(Pointer<SdlGamepad> gamepad, int type) {
+  final sdlGetGamepadCapSenseLookupFunction = _libSdl
+      .lookupFunction<
+        Uint8 Function(Pointer<SdlGamepad> gamepad, Int32 type),
+        int Function(Pointer<SdlGamepad> gamepad, int type)
+      >('SDL_GetGamepadCapSense');
+  return sdlGetGamepadCapSenseLookupFunction(gamepad, type) == 1;
+}
+
+///
 /// Start a rumble effect on a gamepad.
 ///
 /// Each call to this function cancels any previous rumble effect, and calling

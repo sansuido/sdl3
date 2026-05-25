@@ -242,7 +242,7 @@ extension MixTrackPointerEx on Pointer<MixTrack> {
   /// extern SDL_DECLSPEC bool SDLCALL MIX_TagTrack(MIX_Track *track, const char *tag)
   /// ```
   /// {@category mixer}
-  bool tag(String? tag) => mixTagTrack(this, tag);
+  bool tag(String tag) => mixTagTrack(this, tag);
 
   ///
   /// Remove an arbitrary tag from a track.
@@ -271,7 +271,7 @@ extension MixTrackPointerEx on Pointer<MixTrack> {
   /// extern SDL_DECLSPEC void SDLCALL MIX_UntagTrack(MIX_Track *track, const char *tag)
   /// ```
   /// {@category mixer}
-  void untag(String? tag) => mixUntagTrack(this, tag);
+  void untag(String tag) => mixUntagTrack(this, tag);
 
   ///
   /// Seek a playing track to a new position in its input.
@@ -962,8 +962,8 @@ extension MixTrackPointerEx on Pointer<MixTrack> {
   /// extern SDL_DECLSPEC bool SDLCALL MIX_SetTrackOutputChannelMap(MIX_Track *track, const int *chmap, int count)
   /// ```
   /// {@category mixer}
-  bool setOutputChannelMap(Pointer<Int32> chmap, int count) =>
-      mixSetTrackOutputChannelMap(this, chmap, count);
+  bool setOutputChannelMap(List<int>? chmap) =>
+      mixxSetTrackOutputChannelMap(this, chmap);
 
   ///
   /// Force a track to stereo output, with optionally left/right panning.
@@ -1000,8 +1000,7 @@ extension MixTrackPointerEx on Pointer<MixTrack> {
   /// extern SDL_DECLSPEC bool SDLCALL MIX_SetTrackStereo(MIX_Track *track, const MIX_StereoGains *gains)
   /// ```
   /// {@category mixer}
-  bool setStereo(Pointer<MixStereoGains> gains) =>
-      mixSetTrackStereo(this, gains);
+  bool setStereo(MixxStereoGains? gains) => mixxSetTrackStereo(this, gains);
 
   ///
   /// Set a track's position in 3D space.
@@ -1051,8 +1050,8 @@ extension MixTrackPointerEx on Pointer<MixTrack> {
   /// extern SDL_DECLSPEC bool SDLCALL MIX_SetTrack3DPosition(MIX_Track *track, const MIX_Point3D *position)
   /// ```
   /// {@category mixer}
-  bool set3DPosition(Pointer<MixPoint3D> position) =>
-      mixSetTrack3DPosition(this, position);
+  bool set3DPosition(MixxPoint3D? position) =>
+      mixxSetTrack3DPosition(this, position);
 
   ///
   /// Get a track's current position in 3D space.
@@ -1075,8 +1074,8 @@ extension MixTrackPointerEx on Pointer<MixTrack> {
   /// extern SDL_DECLSPEC bool SDLCALL MIX_GetTrack3DPosition(MIX_Track *track, MIX_Point3D *position)
   /// ```
   /// {@category mixer}
-  bool get3DPosition(Pointer<MixPoint3D> position) =>
-      mixGetTrack3DPosition(this, position);
+  bool get3DPosition(MixxPoint3D position) =>
+      mixxGetTrack3DPosition(this, position);
 
   ///
   /// Assign a track to a mixing group.
