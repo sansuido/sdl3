@@ -361,8 +361,15 @@ void sdlxUnbindAudioStreams(List<Pointer<SdlAudioStream>> streams) {
 ///
 /// Create a new audio stream.
 ///
-/// \param src_spec the format details of the input audio.
-/// \param dst_spec the format details of the output audio.
+/// Note that `src_spec` or `dst_spec` may be NULL, but any attempts to put or
+/// get data from an audio stream will fail until it has valid specs assigned
+/// to both ends of the stream. Specs can be assigned later through
+/// SDL_SetAudioStreamFormat(), or binding the stream to an audio device (which
+/// will set the format of only the input or output, depending on what kind of
+/// device the stream was bound to).
+///
+/// \param src_spec the format details of the input audio. May be NULL.
+/// \param dst_spec the format details of the output audio. May be NULL.
 /// \returns a new audio stream on success or NULL on failure; call
 /// SDL_GetError() for more information.
 ///

@@ -1,11 +1,20 @@
 # Changelog
 
+## [2.8.5] - 2026-06-03
+- SDL3-2026-05-31
+### Added
+- Added functions and wrapper classes for the asyncio.
+- Added functions for the clipboard.
+- Added functions and wrapper classes for the image.
+- Added Task List (for 2.9.0) in README.md.
+- Added `example/asyncio_demo.dart`.
+
 ## [2.8.4] - 2026-05-25
 - SDL3-2026-05-24
 ### Added
 - Added functions and wrapper classes for the audio and mixer.
 - Added `SdlxGamepadCapSenseEvent` (`SDL_EVENT_GAMEPAD_CAPSENSE_TOUCH`, `SDL_EVENT_GAMEPAD_CAPSENSE_RELEASE`).
-- Added `examples/dxlib/no029_steep_slope1.dart` and `no029_steep_slope2.dart`.
+- Added `example/dxlib/no029_steep_slope1.dart` and `no029_steep_slope2.dart`.
 - Added `FpsManager.getDeltaTime()`.
 - Added a link to the SDL_projects for Dart in README.md.
 
@@ -38,8 +47,8 @@
 - SDL3-2026-05-03
 ### Added
 - Added functions and wrapper classes for the messagebox.
-- Added `examples/show_message_box.dart`.
-- Added `examples/rust/animation_desktop_companion.dart`.
+- Added `example/show_message_box.dart`.
+- Added `example/rust/animation_desktop_companion.dart`.
 
 
 ## [2.8.0] - 2026-04-29
@@ -62,7 +71,7 @@
 - Fixed dynamic library loading on Linux by using `.so.0` extension to ensure compatibility with installed SDL3 system libraries.
 - Separated Linux and Fuchsia platform handling to use correct library extensions for each.
 ### Added
-- Added `examples/hit_test.dart`.
+- Added `example/hit_test.dart`.
 
 ## [2.7.3] - 2026-04-12
 - SDL3-2026-04-12
@@ -71,7 +80,7 @@
 - SDL3-2026-04-05
 ### Added
 - Added functions and wrapper classes for the dialog.
-- Added `examples/dialog_demo.dart`.
+- Added `example/dialog_demo.dart`.
 
 ## [2.7.1] - 2026-03-29
 - SDL3-2026-03-29

@@ -6,8 +6,15 @@ extension SdlAudioStreamEx on SdlAudioStream {
   ///
   /// Create a new audio stream.
   ///
-  /// \param src_spec the format details of the input audio.
-  /// \param dst_spec the format details of the output audio.
+  /// Note that `src_spec` or `dst_spec` may be NULL, but any attempts to put or
+  /// get data from an audio stream will fail until it has valid specs assigned
+  /// to both ends of the stream. Specs can be assigned later through
+  /// SDL_SetAudioStreamFormat(), or binding the stream to an audio device (which
+  /// will set the format of only the input or output, depending on what kind of
+  /// device the stream was bound to).
+  ///
+  /// \param src_spec the format details of the input audio. May be NULL.
+  /// \param dst_spec the format details of the output audio. May be NULL.
   /// \returns a new audio stream on success or NULL on failure; call
   /// SDL_GetError() for more information.
   ///
@@ -283,6 +290,9 @@ extension SdlAudioStreamPointerEx on Pointer<SdlAudioStream> {
   /// dst_spec for playback devices). Attempts to make a change to this side will
   /// be ignored, but this will not report an error. The other side's format can
   /// be changed.
+  ///
+  /// `src_spec` and `dst_spec` may each be NULL; a NULL spec signals not to
+  /// change the current format for that side of the stream.
   ///
   /// \param stream the stream the format is being changed.
   /// \param src_spec the new format of the audio input; if NULL, it is not

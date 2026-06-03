@@ -3554,10 +3554,13 @@ int sdlGetGpuSwapchainTextureFormat(
 /// submitted. The swapchain texture should only be referenced by the command
 /// buffer used to acquire it.
 ///
-/// This function will fill the swapchain texture handle with NULL if too many
-/// frames are in flight. This is not an error. This NULL pointer should not be
-/// passed back into SDL. Instead, it should be considered as an indication to
-/// wait until the swapchain is available.
+/// If too many frames are in flight, this function will fill the swapchain
+/// texture handle with NULL and return true. This is not an error. This NULL
+/// pointer should not be passed back into SDL. Instead, it should be
+/// considered as an indication to wait.
+///
+/// In VSYNC present mode (which is the default) this function may block on
+/// vblank.
 ///
 /// If you use this function, it is possible to create a situation where many
 /// command buffers are allocated while the rendering context waits for the GPU
@@ -3633,7 +3636,8 @@ bool sdlAcquireGpuSwapchainTexture(
 }
 
 ///
-/// Blocks the thread until a swapchain texture is available to be acquired.
+/// Blocks the thread until all presenting command buffers are finished
+/// executing.
 ///
 /// \param device a GPU context.
 /// \param window a window that has been claimed.
