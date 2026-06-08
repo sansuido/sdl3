@@ -76,10 +76,10 @@ int sdlCreateProperties() {
 bool sdlCopyProperties(int src, int dst) {
   final sdlCopyPropertiesLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(Uint32 src, Uint32 dst),
-        int Function(int src, int dst)
+        Bool Function(Uint32 src, Uint32 dst),
+        bool Function(int src, int dst)
       >('SDL_CopyProperties');
-  return sdlCopyPropertiesLookupFunction(src, dst) == 1;
+  return sdlCopyPropertiesLookupFunction(src, dst);
 }
 
 ///
@@ -110,10 +110,10 @@ bool sdlCopyProperties(int src, int dst) {
 /// {@category properties}
 bool sdlLockProperties(int props) {
   final sdlLockPropertiesLookupFunction = _libSdl
-      .lookupFunction<Uint8 Function(Uint32 props), int Function(int props)>(
+      .lookupFunction<Bool Function(Uint32 props), bool Function(int props)>(
         'SDL_LockProperties',
       );
-  return sdlLockPropertiesLookupFunction(props) == 1;
+  return sdlLockPropertiesLookupFunction(props);
 }
 
 ///
@@ -175,37 +175,35 @@ void sdlUnlockProperties(int props) {
 bool sdlSetPointerPropertyWithCleanup(
   int props,
   String? name,
-  Pointer<NativeType> value,
+  Pointer<Void> value,
   Pointer<NativeFunction<SdlCleanupPropertyCallback>> cleanup,
-  Pointer<NativeType> userdata,
+  Pointer<Void> userdata,
 ) {
   final sdlSetPointerPropertyWithCleanupLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(
+        Bool Function(
           Uint32 props,
           Pointer<Utf8> name,
-          Pointer<NativeType> value,
+          Pointer<Void> value,
           Pointer<NativeFunction<SdlCleanupPropertyCallback>> cleanup,
-          Pointer<NativeType> userdata,
+          Pointer<Void> userdata,
         ),
-        int Function(
+        bool Function(
           int props,
           Pointer<Utf8> name,
-          Pointer<NativeType> value,
+          Pointer<Void> value,
           Pointer<NativeFunction<SdlCleanupPropertyCallback>> cleanup,
-          Pointer<NativeType> userdata,
+          Pointer<Void> userdata,
         )
       >('SDL_SetPointerPropertyWithCleanup');
   final namePointer = name != null ? name.toNativeUtf8() : nullptr;
-  final result =
-      sdlSetPointerPropertyWithCleanupLookupFunction(
-        props,
-        namePointer,
-        value,
-        cleanup,
-        userdata,
-      ) ==
-      1;
+  final result = sdlSetPointerPropertyWithCleanupLookupFunction(
+    props,
+    namePointer,
+    value,
+    cleanup,
+    userdata,
+  );
   calloc.free(namePointer);
   return result;
 }
@@ -235,19 +233,14 @@ bool sdlSetPointerPropertyWithCleanup(
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetPointerProperty(SDL_PropertiesID props, const char *name, void *value)
 /// ```
 /// {@category properties}
-bool sdlSetPointerProperty(int props, String? name, Pointer<NativeType> value) {
+bool sdlSetPointerProperty(int props, String? name, Pointer<Void> value) {
   final sdlSetPointerPropertyLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(
-          Uint32 props,
-          Pointer<Utf8> name,
-          Pointer<NativeType> value,
-        ),
-        int Function(int props, Pointer<Utf8> name, Pointer<NativeType> value)
+        Bool Function(Uint32 props, Pointer<Utf8> name, Pointer<Void> value),
+        bool Function(int props, Pointer<Utf8> name, Pointer<Void> value)
       >('SDL_SetPointerProperty');
   final namePointer = name != null ? name.toNativeUtf8() : nullptr;
-  final result =
-      sdlSetPointerPropertyLookupFunction(props, namePointer, value) == 1;
+  final result = sdlSetPointerPropertyLookupFunction(props, namePointer, value);
   calloc.free(namePointer);
   return result;
 }
@@ -277,13 +270,16 @@ bool sdlSetPointerProperty(int props, String? name, Pointer<NativeType> value) {
 bool sdlSetStringProperty(int props, String? name, String? value) {
   final sdlSetStringPropertyLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(Uint32 props, Pointer<Utf8> name, Pointer<Utf8> value),
-        int Function(int props, Pointer<Utf8> name, Pointer<Utf8> value)
+        Bool Function(Uint32 props, Pointer<Utf8> name, Pointer<Utf8> value),
+        bool Function(int props, Pointer<Utf8> name, Pointer<Utf8> value)
       >('SDL_SetStringProperty');
   final namePointer = name != null ? name.toNativeUtf8() : nullptr;
   final valuePointer = value != null ? value.toNativeUtf8() : nullptr;
-  final result =
-      sdlSetStringPropertyLookupFunction(props, namePointer, valuePointer) == 1;
+  final result = sdlSetStringPropertyLookupFunction(
+    props,
+    namePointer,
+    valuePointer,
+  );
   calloc
     ..free(namePointer)
     ..free(valuePointer);
@@ -312,12 +308,11 @@ bool sdlSetStringProperty(int props, String? name, String? value) {
 bool sdlSetNumberProperty(int props, String? name, int value) {
   final sdlSetNumberPropertyLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(Uint32 props, Pointer<Utf8> name, Int64 value),
-        int Function(int props, Pointer<Utf8> name, int value)
+        Bool Function(Uint32 props, Pointer<Utf8> name, Int64 value),
+        bool Function(int props, Pointer<Utf8> name, int value)
       >('SDL_SetNumberProperty');
   final namePointer = name != null ? name.toNativeUtf8() : nullptr;
-  final result =
-      sdlSetNumberPropertyLookupFunction(props, namePointer, value) == 1;
+  final result = sdlSetNumberPropertyLookupFunction(props, namePointer, value);
   calloc.free(namePointer);
   return result;
 }
@@ -344,12 +339,11 @@ bool sdlSetNumberProperty(int props, String? name, int value) {
 bool sdlSetFloatProperty(int props, String? name, double value) {
   final sdlSetFloatPropertyLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(Uint32 props, Pointer<Utf8> name, Float value),
-        int Function(int props, Pointer<Utf8> name, double value)
+        Bool Function(Uint32 props, Pointer<Utf8> name, Float value),
+        bool Function(int props, Pointer<Utf8> name, double value)
       >('SDL_SetFloatProperty');
   final namePointer = name != null ? name.toNativeUtf8() : nullptr;
-  final result =
-      sdlSetFloatPropertyLookupFunction(props, namePointer, value) == 1;
+  final result = sdlSetFloatPropertyLookupFunction(props, namePointer, value);
   calloc.free(namePointer);
   return result;
 }
@@ -376,13 +370,11 @@ bool sdlSetFloatProperty(int props, String? name, double value) {
 bool sdlSetBooleanProperty(int props, String? name, bool value) {
   final sdlSetBooleanPropertyLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(Uint32 props, Pointer<Utf8> name, Uint8 value),
-        int Function(int props, Pointer<Utf8> name, int value)
+        Bool Function(Uint32 props, Pointer<Utf8> name, Bool value),
+        bool Function(int props, Pointer<Utf8> name, bool value)
       >('SDL_SetBooleanProperty');
   final namePointer = name != null ? name.toNativeUtf8() : nullptr;
-  final result =
-      sdlSetBooleanPropertyLookupFunction(props, namePointer, value ? 1 : 0) ==
-      1;
+  final result = sdlSetBooleanPropertyLookupFunction(props, namePointer, value);
   calloc.free(namePointer);
   return result;
 }
@@ -407,11 +399,11 @@ bool sdlSetBooleanProperty(int props, String? name, bool value) {
 bool sdlHasProperty(int props, String? name) {
   final sdlHasPropertyLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(Uint32 props, Pointer<Utf8> name),
-        int Function(int props, Pointer<Utf8> name)
+        Bool Function(Uint32 props, Pointer<Utf8> name),
+        bool Function(int props, Pointer<Utf8> name)
       >('SDL_HasProperty');
   final namePointer = name != null ? name.toNativeUtf8() : nullptr;
-  final result = sdlHasPropertyLookupFunction(props, namePointer) == 1;
+  final result = sdlHasPropertyLookupFunction(props, namePointer);
   calloc.free(namePointer);
   return result;
 }
@@ -481,22 +473,22 @@ int sdlGetPropertyType(int props, String? name) {
 /// extern SDL_DECLSPEC void * SDLCALL SDL_GetPointerProperty(SDL_PropertiesID props, const char *name, void *default_value)
 /// ```
 /// {@category properties}
-Pointer<NativeType> sdlGetPointerProperty(
+Pointer<Void> sdlGetPointerProperty(
   int props,
   String? name,
-  Pointer<NativeType> defaultValue,
+  Pointer<Void> defaultValue,
 ) {
   final sdlGetPointerPropertyLookupFunction = _libSdl
       .lookupFunction<
-        Pointer<NativeType> Function(
+        Pointer<Void> Function(
           Uint32 props,
           Pointer<Utf8> name,
-          Pointer<NativeType> defaultValue,
+          Pointer<Void> defaultValue,
         ),
-        Pointer<NativeType> Function(
+        Pointer<Void> Function(
           int props,
           Pointer<Utf8> name,
-          Pointer<NativeType> defaultValue,
+          Pointer<Void> defaultValue,
         )
       >('SDL_GetPointerProperty');
   final namePointer = name != null ? name.toNativeUtf8() : nullptr;
@@ -674,17 +666,15 @@ double sdlGetFloatProperty(int props, String? name, double defaultValue) {
 bool sdlGetBooleanProperty(int props, String? name, bool defaultValue) {
   final sdlGetBooleanPropertyLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(Uint32 props, Pointer<Utf8> name, Uint8 defaultValue),
-        int Function(int props, Pointer<Utf8> name, int defaultValue)
+        Bool Function(Uint32 props, Pointer<Utf8> name, Bool defaultValue),
+        bool Function(int props, Pointer<Utf8> name, bool defaultValue)
       >('SDL_GetBooleanProperty');
   final namePointer = name != null ? name.toNativeUtf8() : nullptr;
-  final result =
-      sdlGetBooleanPropertyLookupFunction(
-        props,
-        namePointer,
-        defaultValue ? 1 : 0,
-      ) ==
-      1;
+  final result = sdlGetBooleanPropertyLookupFunction(
+    props,
+    namePointer,
+    defaultValue,
+  );
   calloc.free(namePointer);
   return result;
 }
@@ -708,11 +698,11 @@ bool sdlGetBooleanProperty(int props, String? name, bool defaultValue) {
 bool sdlClearProperty(int props, String? name) {
   final sdlClearPropertyLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(Uint32 props, Pointer<Utf8> name),
-        int Function(int props, Pointer<Utf8> name)
+        Bool Function(Uint32 props, Pointer<Utf8> name),
+        bool Function(int props, Pointer<Utf8> name)
       >('SDL_ClearProperty');
   final namePointer = name != null ? name.toNativeUtf8() : nullptr;
-  final result = sdlClearPropertyLookupFunction(props, namePointer) == 1;
+  final result = sdlClearPropertyLookupFunction(props, namePointer);
   calloc.free(namePointer);
   return result;
 }
@@ -740,22 +730,22 @@ bool sdlClearProperty(int props, String? name) {
 bool sdlEnumerateProperties(
   int props,
   Pointer<NativeFunction<SdlEnumeratePropertiesCallback>> callback,
-  Pointer<NativeType> userdata,
+  Pointer<Void> userdata,
 ) {
   final sdlEnumeratePropertiesLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(
+        Bool Function(
           Uint32 props,
           Pointer<NativeFunction<SdlEnumeratePropertiesCallback>> callback,
-          Pointer<NativeType> userdata,
+          Pointer<Void> userdata,
         ),
-        int Function(
+        bool Function(
           int props,
           Pointer<NativeFunction<SdlEnumeratePropertiesCallback>> callback,
-          Pointer<NativeType> userdata,
+          Pointer<Void> userdata,
         )
       >('SDL_EnumerateProperties');
-  return sdlEnumeratePropertiesLookupFunction(props, callback, userdata) == 1;
+  return sdlEnumeratePropertiesLookupFunction(props, callback, userdata);
 }
 
 ///

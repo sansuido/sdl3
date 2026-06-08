@@ -65,10 +65,10 @@ part of '../sdl.dart';
 /// {@category init}
 bool sdlInit(int flags) {
   final sdlInitLookupFunction = _libSdl
-      .lookupFunction<Uint8 Function(Uint32 flags), int Function(int flags)>(
+      .lookupFunction<Bool Function(Uint32 flags), bool Function(int flags)>(
         'SDL_Init',
       );
-  return sdlInitLookupFunction(flags) == 1;
+  return sdlInitLookupFunction(flags);
 }
 
 ///
@@ -94,10 +94,10 @@ bool sdlInit(int flags) {
 /// {@category init}
 bool sdlInitSubSystem(int flags) {
   final sdlInitSubSystemLookupFunction = _libSdl
-      .lookupFunction<Uint8 Function(Uint32 flags), int Function(int flags)>(
+      .lookupFunction<Bool Function(Uint32 flags), bool Function(int flags)>(
         'SDL_InitSubSystem',
       );
-  return sdlInitSubSystemLookupFunction(flags) == 1;
+  return sdlInitSubSystemLookupFunction(flags);
 }
 
 ///
@@ -205,8 +205,8 @@ void sdlQuit() {
 /// {@category init}
 bool sdlIsMainThread() {
   final sdlIsMainThreadLookupFunction = _libSdl
-      .lookupFunction<Uint8 Function(), int Function()>('SDL_IsMainThread');
-  return sdlIsMainThreadLookupFunction() == 1;
+      .lookupFunction<Bool Function(), bool Function()>('SDL_IsMainThread');
+  return sdlIsMainThreadLookupFunction();
 }
 
 ///
@@ -239,28 +239,23 @@ bool sdlIsMainThread() {
 /// {@category init}
 bool sdlRunOnMainThread(
   Pointer<NativeFunction<SdlMainThreadCallback>> callback,
-  Pointer<NativeType> userdata,
+  Pointer<Void> userdata,
   bool waitComplete,
 ) {
   final sdlRunOnMainThreadLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(
+        Bool Function(
           Pointer<NativeFunction<SdlMainThreadCallback>> callback,
-          Pointer<NativeType> userdata,
-          Uint8 waitComplete,
+          Pointer<Void> userdata,
+          Bool waitComplete,
         ),
-        int Function(
+        bool Function(
           Pointer<NativeFunction<SdlMainThreadCallback>> callback,
-          Pointer<NativeType> userdata,
-          int waitComplete,
+          Pointer<Void> userdata,
+          bool waitComplete,
         )
       >('SDL_RunOnMainThread');
-  return sdlRunOnMainThreadLookupFunction(
-        callback,
-        userdata,
-        waitComplete ? 1 : 0,
-      ) ==
-      1;
+  return sdlRunOnMainThreadLookupFunction(callback, userdata, waitComplete);
 }
 
 ///
@@ -310,12 +305,12 @@ bool sdlSetAppMetadata(
 ) {
   final sdlSetAppMetadataLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(
+        Bool Function(
           Pointer<Utf8> appname,
           Pointer<Utf8> appversion,
           Pointer<Utf8> appidentifier,
         ),
-        int Function(
+        bool Function(
           Pointer<Utf8> appname,
           Pointer<Utf8> appversion,
           Pointer<Utf8> appidentifier,
@@ -328,13 +323,11 @@ bool sdlSetAppMetadata(
   final appidentifierPointer = appidentifier != null
       ? appidentifier.toNativeUtf8()
       : nullptr;
-  final result =
-      sdlSetAppMetadataLookupFunction(
-        appnamePointer,
-        appversionPointer,
-        appidentifierPointer,
-      ) ==
-      1;
+  final result = sdlSetAppMetadataLookupFunction(
+    appnamePointer,
+    appversionPointer,
+    appidentifierPointer,
+  );
   calloc
     ..free(appnamePointer)
     ..free(appversionPointer)
@@ -410,13 +403,15 @@ bool sdlSetAppMetadata(
 bool sdlSetAppMetadataProperty(String? name, String? value) {
   final sdlSetAppMetadataPropertyLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(Pointer<Utf8> name, Pointer<Utf8> value),
-        int Function(Pointer<Utf8> name, Pointer<Utf8> value)
+        Bool Function(Pointer<Utf8> name, Pointer<Utf8> value),
+        bool Function(Pointer<Utf8> name, Pointer<Utf8> value)
       >('SDL_SetAppMetadataProperty');
   final namePointer = name != null ? name.toNativeUtf8() : nullptr;
   final valuePointer = value != null ? value.toNativeUtf8() : nullptr;
-  final result =
-      sdlSetAppMetadataPropertyLookupFunction(namePointer, valuePointer) == 1;
+  final result = sdlSetAppMetadataPropertyLookupFunction(
+    namePointer,
+    valuePointer,
+  );
   calloc
     ..free(namePointer)
     ..free(valuePointer);

@@ -65,7 +65,7 @@ int sdlRunApp(
   int argc,
   Pointer<Pointer<Int8>> argv,
   Pointer<NativeFunction<SdlMainFunc>> mainFunction,
-  Pointer<NativeType> reserved,
+  Pointer<Void> reserved,
 ) {
   final sdlRunAppLookupFunction = _libSdl
       .lookupFunction<
@@ -73,13 +73,13 @@ int sdlRunApp(
           Int32 argc,
           Pointer<Pointer<Int8>> argv,
           Pointer<NativeFunction<SdlMainFunc>> mainFunction,
-          Pointer<NativeType> reserved,
+          Pointer<Void> reserved,
         ),
         int Function(
           int argc,
           Pointer<Pointer<Int8>> argv,
           Pointer<NativeFunction<SdlMainFunc>> mainFunction,
-          Pointer<NativeType> reserved,
+          Pointer<Void> reserved,
         )
       >('SDL_RunApp');
   return sdlRunAppLookupFunction(argc, argv, mainFunction, reserved);
@@ -182,18 +182,14 @@ int sdlEnterAppMainCallbacks(
 /// extern SDL_DECLSPEC bool SDLCALL SDL_RegisterApp(const char *name, Uint32 style, void *hInst)
 /// ```
 /// {@category main}
-bool sdlRegisterApp(String? name, int style, Pointer<NativeType> hInst) {
+bool sdlRegisterApp(String? name, int style, Pointer<Void> hInst) {
   final sdlRegisterAppLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(
-          Pointer<Utf8> name,
-          Uint32 style,
-          Pointer<NativeType> hInst,
-        ),
-        int Function(Pointer<Utf8> name, int style, Pointer<NativeType> hInst)
+        Bool Function(Pointer<Utf8> name, Uint32 style, Pointer<Void> hInst),
+        bool Function(Pointer<Utf8> name, int style, Pointer<Void> hInst)
       >('SDL_RegisterApp');
   final namePointer = name != null ? name.toNativeUtf8() : nullptr;
-  final result = sdlRegisterAppLookupFunction(namePointer, style, hInst) == 1;
+  final result = sdlRegisterAppLookupFunction(namePointer, style, hInst);
   calloc.free(namePointer);
   return result;
 }

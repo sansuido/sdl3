@@ -204,6 +204,6 @@ extension SdlAsyncIoQueuePointerEx on Pointer<SdlAsyncIoQueue> {
   /// extern SDL_DECLSPEC bool SDLCALL SDL_LoadFileAsync(const char *file, SDL_AsyncIOQueue *queue, void *userdata)
   /// ```
   /// {@category asyncio}
-  bool loadFile(String file, Pointer<NativeType> userdata) =>
+  bool loadFile(String file, Pointer<Void> userdata) =>
       sdlLoadFileAsync(file, this, userdata);
 }

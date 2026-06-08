@@ -281,18 +281,18 @@ bool sdlGetSensorData(
 ) {
   final sdlGetSensorDataLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(
+        Bool Function(
           Pointer<SdlSensor> sensor,
           Pointer<Float> data,
           Int32 numValues,
         ),
-        int Function(
+        bool Function(
           Pointer<SdlSensor> sensor,
           Pointer<Float> data,
           int numValues,
         )
       >('SDL_GetSensorData');
-  return sdlGetSensorDataLookupFunction(sensor, data, numValues) == 1;
+  return sdlGetSensorDataLookupFunction(sensor, data, numValues);
 }
 
 ///

@@ -16,11 +16,11 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'package:sdl3/sdl3.dart';
 
-int myEventFilter(Pointer<NativeType> bluePrev, Pointer<SdlEvent> event) {
+bool myEventFilter(Pointer<Void> bluePrev, Pointer<SdlEvent> event) {
   final blue = bluePrev.cast<Uint8>();
-  switch (event.type) {
+  switch (event.ref.type) {
     case SDL_EVENT_KEY_DOWN:
-      switch (event.key.ref.key) {
+      switch (event.ref.key.key) {
         case SDLK_SPACE:
           if (blue.value == 0) {
             blue.value = 255;
@@ -29,7 +29,7 @@ int myEventFilter(Pointer<NativeType> bluePrev, Pointer<SdlEvent> event) {
           }
       }
   }
-  return 1;
+  return true;
 }
 
 int main() {
@@ -52,7 +52,10 @@ int main() {
     return -1;
   }
   final blue = calloc<Uint8>();
-  sdlSetEventFilter(Pointer.fromFunction(myEventFilter, 0), blue);
+  sdlSetEventFilter(
+    Pointer.fromFunction(myEventFilter, false),
+    blue.cast<Void>(),
+  );
   var running = true;
   while (running) {
     SdlxEvent? event;

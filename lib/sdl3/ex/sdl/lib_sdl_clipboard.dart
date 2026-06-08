@@ -27,7 +27,7 @@ String? sdlxGetClipboardText() {
     return null;
   }
   final text = result.cast<Utf8>().toDartString();
-  sdlFree(result);
+  sdlFree(result.cast<Void>());
   return text;
 }
 
@@ -58,7 +58,7 @@ String? sdlxGetPrimarySelectionText() {
     return null;
   }
   final text = result.cast<Utf8>().toDartString();
-  sdlFree(result);
+  sdlFree(result.cast<Void>());
   return text;
 }
 
@@ -87,11 +87,11 @@ String? sdlxGetPrimarySelectionText() {
 /// {@category clipboard}
 String? sdlxGetClipboardData(String mimeType) {
   String? result;
-  final sizePointer = ffi.calloc<Uint32>();
+  final sizePointer = ffi.calloc<Size>();
   final data = sdlGetClipboardData(mimeType, sizePointer).cast<Utf8>();
   if (data != nullptr) {
     result = data.toDartString(length: sizePointer.value);
-    sdlFree(data);
+    sdlFree(data.cast<Void>());
   }
   sizePointer.callocFree();
   return result;
@@ -118,7 +118,7 @@ String? sdlxGetClipboardData(String mimeType) {
 /// {@category clipboard}
 List<String> sdlxGetClipboardMimeTypes() {
   final result = <String>[];
-  final numMimeTypesPointer = ffi.calloc<Uint32>();
+  final numMimeTypesPointer = ffi.calloc<Size>();
   final mimeTypesPointer = sdlGetClipboardMimeTypes(numMimeTypesPointer);
   if (mimeTypesPointer != nullptr) {
     for (var i = 0; i < numMimeTypesPointer.value; i++) {
@@ -127,7 +127,7 @@ List<String> sdlxGetClipboardMimeTypes() {
         result.add(mimeTypePointer.cast<Utf8>().toDartString());
       }
     }
-    sdlFree(mimeTypesPointer);
+    sdlFree(mimeTypesPointer.cast<Void>());
   }
   numMimeTypesPointer.callocFree();
   return result;

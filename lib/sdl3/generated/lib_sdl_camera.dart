@@ -441,10 +441,10 @@ bool sdlGetCameraFormat(
 ) {
   final sdlGetCameraFormatLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(Pointer<SdlCamera> camera, Pointer<SdlCameraSpec> spec),
-        int Function(Pointer<SdlCamera> camera, Pointer<SdlCameraSpec> spec)
+        Bool Function(Pointer<SdlCamera> camera, Pointer<SdlCameraSpec> spec),
+        bool Function(Pointer<SdlCamera> camera, Pointer<SdlCameraSpec> spec)
       >('SDL_GetCameraFormat');
-  return sdlGetCameraFormatLookupFunction(camera, spec) == 1;
+  return sdlGetCameraFormatLookupFunction(camera, spec);
 }
 
 ///

@@ -111,11 +111,11 @@ extension SdlAsyncIoPointerEx on Pointer<SdlAsyncIo> {
   /// ```
   /// {@category asyncio}
   bool read(
-    Pointer<NativeType> ptr,
+    Pointer<Void> ptr,
     int offset,
     int size,
     Pointer<SdlAsyncIoQueue> queue,
-    Pointer<NativeType> userdata,
+    Pointer<Void> userdata,
   ) => sdlReadAsyncIo(this, ptr, offset, size, queue, userdata);
 
   ///
@@ -158,11 +158,11 @@ extension SdlAsyncIoPointerEx on Pointer<SdlAsyncIo> {
   /// ```
   /// {@category asyncio}
   bool write(
-    Pointer<NativeType> ptr,
+    Pointer<Void> ptr,
     int offset,
     int size,
     Pointer<SdlAsyncIoQueue> queue,
-    Pointer<NativeType> userdata,
+    Pointer<Void> userdata,
   ) => sdlWriteAsyncIo(this, ptr, offset, size, queue, userdata);
 
   ///
@@ -218,7 +218,7 @@ extension SdlAsyncIoPointerEx on Pointer<SdlAsyncIo> {
   /// {@category asyncio}
   bool close(
     Pointer<SdlAsyncIoQueue> queue,
-    Pointer<NativeType> userdata, {
+    Pointer<Void> userdata, {
     bool flush = false,
   }) => sdlCloseAsyncIo(this, flush, queue, userdata);
 }

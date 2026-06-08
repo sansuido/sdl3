@@ -4,14 +4,14 @@ part of '../sdl_mixer.dart';
 
 // typedef void (SDLCALL *MIX_TrackStoppedCallback)(void *userdata, MIX_Track *track)
 typedef MixTrackStoppedCallbackDart =
-    void Function(Pointer<NativeType> userdata, Pointer<MixTrack> track);
+    void Function(Pointer<Void> userdata, Pointer<MixTrack> track);
 typedef MixTrackStoppedCallback =
-    Void Function(Pointer<NativeType> userdata, Pointer<MixTrack> track);
+    Void Function(Pointer<Void> userdata, Pointer<MixTrack> track);
 
 // typedef void (SDLCALL *MIX_TrackMixCallback)(void *userdata, MIX_Track *track, const SDL_AudioSpec *spec, float *pcm, int samples)
 typedef MixTrackMixCallbackDart =
     void Function(
-      Pointer<NativeType> userdata,
+      Pointer<Void> userdata,
       Pointer<MixTrack> track,
       Pointer<SdlAudioSpec> spec,
       Pointer<Float> pcm,
@@ -19,7 +19,7 @@ typedef MixTrackMixCallbackDart =
     );
 typedef MixTrackMixCallback =
     Void Function(
-      Pointer<NativeType> userdata,
+      Pointer<Void> userdata,
       Pointer<MixTrack> track,
       Pointer<SdlAudioSpec> spec,
       Pointer<Float> pcm,
@@ -29,7 +29,7 @@ typedef MixTrackMixCallback =
 // typedef void (SDLCALL *MIX_GroupMixCallback)(void *userdata, MIX_Group *group, const SDL_AudioSpec *spec, float *pcm, int samples)
 typedef MixGroupMixCallbackDart =
     void Function(
-      Pointer<NativeType> userdata,
+      Pointer<Void> userdata,
       Pointer<MixGroup> group,
       Pointer<SdlAudioSpec> spec,
       Pointer<Float> pcm,
@@ -37,7 +37,7 @@ typedef MixGroupMixCallbackDart =
     );
 typedef MixGroupMixCallback =
     Void Function(
-      Pointer<NativeType> userdata,
+      Pointer<Void> userdata,
       Pointer<MixGroup> group,
       Pointer<SdlAudioSpec> spec,
       Pointer<Float> pcm,
@@ -47,7 +47,7 @@ typedef MixGroupMixCallback =
 // typedef void (SDLCALL *MIX_PostMixCallback)(void *userdata, MIX_Mixer *mixer, const SDL_AudioSpec *spec, float *pcm, int samples)
 typedef MixPostMixCallbackDart =
     void Function(
-      Pointer<NativeType> userdata,
+      Pointer<Void> userdata,
       Pointer<MixMixer> mixer,
       Pointer<SdlAudioSpec> spec,
       Pointer<Float> pcm,
@@ -55,7 +55,7 @@ typedef MixPostMixCallbackDart =
     );
 typedef MixPostMixCallback =
     Void Function(
-      Pointer<NativeType> userdata,
+      Pointer<Void> userdata,
       Pointer<MixMixer> mixer,
       Pointer<SdlAudioSpec> spec,
       Pointer<Float> pcm,
@@ -112,8 +112,8 @@ int mixVersion() {
 /// {@category mixer}
 bool mixInit() {
   final mixInitLookupFunction = _libMixer
-      .lookupFunction<Uint8 Function(), int Function()>('MIX_Init');
-  return mixInitLookupFunction() == 1;
+      .lookupFunction<Bool Function(), bool Function()>('MIX_Init');
+  return mixInitLookupFunction();
 }
 
 ///
@@ -438,10 +438,10 @@ int mixGetMixerProperties(Pointer<MixMixer> mixer) {
 bool mixGetMixerFormat(Pointer<MixMixer> mixer, Pointer<SdlAudioSpec> spec) {
   final mixGetMixerFormatLookupFunction = _libMixer
       .lookupFunction<
-        Uint8 Function(Pointer<MixMixer> mixer, Pointer<SdlAudioSpec> spec),
-        int Function(Pointer<MixMixer> mixer, Pointer<SdlAudioSpec> spec)
+        Bool Function(Pointer<MixMixer> mixer, Pointer<SdlAudioSpec> spec),
+        bool Function(Pointer<MixMixer> mixer, Pointer<SdlAudioSpec> spec)
       >('MIX_GetMixerFormat');
-  return mixGetMixerFormatLookupFunction(mixer, spec) == 1;
+  return mixGetMixerFormatLookupFunction(mixer, spec);
 }
 
 ///
@@ -607,22 +607,17 @@ Pointer<MixAudio> mixLoadAudioIo(
         Pointer<MixAudio> Function(
           Pointer<MixMixer> mixer,
           Pointer<SdlIoStream> io,
-          Uint8 predecode,
-          Uint8 closeio,
+          Bool predecode,
+          Bool closeio,
         ),
         Pointer<MixAudio> Function(
           Pointer<MixMixer> mixer,
           Pointer<SdlIoStream> io,
-          int predecode,
-          int closeio,
+          bool predecode,
+          bool closeio,
         )
       >('MIX_LoadAudio_IO');
-  return mixLoadAudioIoLookupFunction(
-    mixer,
-    io,
-    predecode ? 1 : 0,
-    closeio ? 1 : 0,
-  );
+  return mixLoadAudioIoLookupFunction(mixer, io, predecode, closeio);
 }
 
 ///
@@ -667,20 +662,16 @@ Pointer<MixAudio> mixLoadAudio(
         Pointer<MixAudio> Function(
           Pointer<MixMixer> mixer,
           Pointer<Utf8> path,
-          Uint8 predecode,
+          Bool predecode,
         ),
         Pointer<MixAudio> Function(
           Pointer<MixMixer> mixer,
           Pointer<Utf8> path,
-          int predecode,
+          bool predecode,
         )
       >('MIX_LoadAudio');
   final pathPointer = path != null ? path.toNativeUtf8() : nullptr;
-  final result = mixLoadAudioLookupFunction(
-    mixer,
-    pathPointer,
-    predecode ? 1 : 0,
-  );
+  final result = mixLoadAudioLookupFunction(mixer, pathPointer, predecode);
   calloc.free(pathPointer);
   return result;
 }
@@ -748,7 +739,7 @@ Pointer<MixAudio> mixLoadAudio(
 /// {@category mixer}
 Pointer<MixAudio> mixLoadAudioNoCopy(
   Pointer<MixMixer> mixer,
-  Pointer<NativeType> data,
+  Pointer<Void> data,
   int datalen,
   bool freeWhenDone,
 ) {
@@ -756,23 +747,18 @@ Pointer<MixAudio> mixLoadAudioNoCopy(
       .lookupFunction<
         Pointer<MixAudio> Function(
           Pointer<MixMixer> mixer,
-          Pointer<NativeType> data,
-          Uint32 datalen,
-          Uint8 freeWhenDone,
+          Pointer<Void> data,
+          Size datalen,
+          Bool freeWhenDone,
         ),
         Pointer<MixAudio> Function(
           Pointer<MixMixer> mixer,
-          Pointer<NativeType> data,
+          Pointer<Void> data,
           int datalen,
-          int freeWhenDone,
+          bool freeWhenDone,
         )
       >('MIX_LoadAudioNoCopy');
-  return mixLoadAudioNoCopyLookupFunction(
-    mixer,
-    data,
-    datalen,
-    freeWhenDone ? 1 : 0,
-  );
+  return mixLoadAudioNoCopyLookupFunction(mixer, data, datalen, freeWhenDone);
 }
 
 ///
@@ -887,16 +873,16 @@ Pointer<MixAudio> mixLoadRawAudioIo(
           Pointer<MixMixer> mixer,
           Pointer<SdlIoStream> io,
           Pointer<SdlAudioSpec> spec,
-          Uint8 closeio,
+          Bool closeio,
         ),
         Pointer<MixAudio> Function(
           Pointer<MixMixer> mixer,
           Pointer<SdlIoStream> io,
           Pointer<SdlAudioSpec> spec,
-          int closeio,
+          bool closeio,
         )
       >('MIX_LoadRawAudio_IO');
-  return mixLoadRawAudioIoLookupFunction(mixer, io, spec, closeio ? 1 : 0);
+  return mixLoadRawAudioIoLookupFunction(mixer, io, spec, closeio);
 }
 
 ///
@@ -939,7 +925,7 @@ Pointer<MixAudio> mixLoadRawAudioIo(
 /// {@category mixer}
 Pointer<MixAudio> mixLoadRawAudio(
   Pointer<MixMixer> mixer,
-  Pointer<NativeType> data,
+  Pointer<Void> data,
   int datalen,
   Pointer<SdlAudioSpec> spec,
 ) {
@@ -947,13 +933,13 @@ Pointer<MixAudio> mixLoadRawAudio(
       .lookupFunction<
         Pointer<MixAudio> Function(
           Pointer<MixMixer> mixer,
-          Pointer<NativeType> data,
-          Uint32 datalen,
+          Pointer<Void> data,
+          Size datalen,
           Pointer<SdlAudioSpec> spec,
         ),
         Pointer<MixAudio> Function(
           Pointer<MixMixer> mixer,
-          Pointer<NativeType> data,
+          Pointer<Void> data,
           int datalen,
           Pointer<SdlAudioSpec> spec,
         )
@@ -1007,7 +993,7 @@ Pointer<MixAudio> mixLoadRawAudio(
 /// {@category mixer}
 Pointer<MixAudio> mixLoadRawAudioNoCopy(
   Pointer<MixMixer> mixer,
-  Pointer<NativeType> data,
+  Pointer<Void> data,
   int datalen,
   Pointer<SdlAudioSpec> spec,
   bool freeWhenDone,
@@ -1016,17 +1002,17 @@ Pointer<MixAudio> mixLoadRawAudioNoCopy(
       .lookupFunction<
         Pointer<MixAudio> Function(
           Pointer<MixMixer> mixer,
-          Pointer<NativeType> data,
-          Uint32 datalen,
+          Pointer<Void> data,
+          Size datalen,
           Pointer<SdlAudioSpec> spec,
-          Uint8 freeWhenDone,
+          Bool freeWhenDone,
         ),
         Pointer<MixAudio> Function(
           Pointer<MixMixer> mixer,
-          Pointer<NativeType> data,
+          Pointer<Void> data,
           int datalen,
           Pointer<SdlAudioSpec> spec,
-          int freeWhenDone,
+          bool freeWhenDone,
         )
       >('MIX_LoadRawAudioNoCopy');
   return mixLoadRawAudioNoCopyLookupFunction(
@@ -1034,7 +1020,7 @@ Pointer<MixAudio> mixLoadRawAudioNoCopy(
     data,
     datalen,
     spec,
-    freeWhenDone ? 1 : 0,
+    freeWhenDone,
   );
 }
 
@@ -1228,10 +1214,10 @@ int mixGetAudioDuration(Pointer<MixAudio> audio) {
 bool mixGetAudioFormat(Pointer<MixAudio> audio, Pointer<SdlAudioSpec> spec) {
   final mixGetAudioFormatLookupFunction = _libMixer
       .lookupFunction<
-        Uint8 Function(Pointer<MixAudio> audio, Pointer<SdlAudioSpec> spec),
-        int Function(Pointer<MixAudio> audio, Pointer<SdlAudioSpec> spec)
+        Bool Function(Pointer<MixAudio> audio, Pointer<SdlAudioSpec> spec),
+        bool Function(Pointer<MixAudio> audio, Pointer<SdlAudioSpec> spec)
       >('MIX_GetAudioFormat');
-  return mixGetAudioFormatLookupFunction(audio, spec) == 1;
+  return mixGetAudioFormatLookupFunction(audio, spec);
 }
 
 ///
@@ -1432,10 +1418,10 @@ Pointer<MixMixer> mixGetTrackMixer(Pointer<MixTrack> track) {
 bool mixSetTrackAudio(Pointer<MixTrack> track, Pointer<MixAudio> audio) {
   final mixSetTrackAudioLookupFunction = _libMixer
       .lookupFunction<
-        Uint8 Function(Pointer<MixTrack> track, Pointer<MixAudio> audio),
-        int Function(Pointer<MixTrack> track, Pointer<MixAudio> audio)
+        Bool Function(Pointer<MixTrack> track, Pointer<MixAudio> audio),
+        bool Function(Pointer<MixTrack> track, Pointer<MixAudio> audio)
       >('MIX_SetTrackAudio');
-  return mixSetTrackAudioLookupFunction(track, audio) == 1;
+  return mixSetTrackAudioLookupFunction(track, audio);
 }
 
 ///
@@ -1488,10 +1474,10 @@ bool mixSetTrackAudioStream(
 ) {
   final mixSetTrackAudioStreamLookupFunction = _libMixer
       .lookupFunction<
-        Uint8 Function(Pointer<MixTrack> track, Pointer<SdlAudioStream> stream),
-        int Function(Pointer<MixTrack> track, Pointer<SdlAudioStream> stream)
+        Bool Function(Pointer<MixTrack> track, Pointer<SdlAudioStream> stream),
+        bool Function(Pointer<MixTrack> track, Pointer<SdlAudioStream> stream)
       >('MIX_SetTrackAudioStream');
-  return mixSetTrackAudioStreamLookupFunction(track, stream) == 1;
+  return mixSetTrackAudioStreamLookupFunction(track, stream);
 }
 
 ///
@@ -1553,18 +1539,18 @@ bool mixSetTrackIoStream(
 ) {
   final mixSetTrackIoStreamLookupFunction = _libMixer
       .lookupFunction<
-        Uint8 Function(
+        Bool Function(
           Pointer<MixTrack> track,
           Pointer<SdlIoStream> io,
-          Uint8 closeio,
+          Bool closeio,
         ),
-        int Function(
+        bool Function(
           Pointer<MixTrack> track,
           Pointer<SdlIoStream> io,
-          int closeio,
+          bool closeio,
         )
       >('MIX_SetTrackIOStream');
-  return mixSetTrackIoStreamLookupFunction(track, io, closeio ? 1 : 0) == 1;
+  return mixSetTrackIoStreamLookupFunction(track, io, closeio);
 }
 
 ///
@@ -1627,26 +1613,20 @@ bool mixSetTrackRawIoStream(
 ) {
   final mixSetTrackRawIoStreamLookupFunction = _libMixer
       .lookupFunction<
-        Uint8 Function(
+        Bool Function(
           Pointer<MixTrack> track,
           Pointer<SdlIoStream> io,
           Pointer<SdlAudioSpec> spec,
-          Uint8 closeio,
+          Bool closeio,
         ),
-        int Function(
+        bool Function(
           Pointer<MixTrack> track,
           Pointer<SdlIoStream> io,
           Pointer<SdlAudioSpec> spec,
-          int closeio,
+          bool closeio,
         )
       >('MIX_SetTrackRawIOStream');
-  return mixSetTrackRawIoStreamLookupFunction(
-        track,
-        io,
-        spec,
-        closeio ? 1 : 0,
-      ) ==
-      1;
+  return mixSetTrackRawIoStreamLookupFunction(track, io, spec, closeio);
 }
 
 ///
@@ -1683,11 +1663,11 @@ bool mixSetTrackRawIoStream(
 bool mixTagTrack(Pointer<MixTrack> track, String? tag) {
   final mixTagTrackLookupFunction = _libMixer
       .lookupFunction<
-        Uint8 Function(Pointer<MixTrack> track, Pointer<Utf8> tag),
-        int Function(Pointer<MixTrack> track, Pointer<Utf8> tag)
+        Bool Function(Pointer<MixTrack> track, Pointer<Utf8> tag),
+        bool Function(Pointer<MixTrack> track, Pointer<Utf8> tag)
       >('MIX_TagTrack');
   final tagPointer = tag != null ? tag.toNativeUtf8() : nullptr;
-  final result = mixTagTrackLookupFunction(track, tagPointer) == 1;
+  final result = mixTagTrackLookupFunction(track, tagPointer);
   calloc.free(tagPointer);
   return result;
 }
@@ -1856,10 +1836,10 @@ Pointer<Pointer<MixTrack>> mixGetTaggedTracks(
 bool mixSetTrackPlaybackPosition(Pointer<MixTrack> track, int frames) {
   final mixSetTrackPlaybackPositionLookupFunction = _libMixer
       .lookupFunction<
-        Uint8 Function(Pointer<MixTrack> track, Int64 frames),
-        int Function(Pointer<MixTrack> track, int frames)
+        Bool Function(Pointer<MixTrack> track, Int64 frames),
+        bool Function(Pointer<MixTrack> track, int frames)
       >('MIX_SetTrackPlaybackPosition');
-  return mixSetTrackPlaybackPositionLookupFunction(track, frames) == 1;
+  return mixSetTrackPlaybackPositionLookupFunction(track, frames);
 }
 
 ///
@@ -2010,10 +1990,10 @@ int mixGetTrackLoops(Pointer<MixTrack> track) {
 bool mixSetTrackLoops(Pointer<MixTrack> track, int numLoops) {
   final mixSetTrackLoopsLookupFunction = _libMixer
       .lookupFunction<
-        Uint8 Function(Pointer<MixTrack> track, Int32 numLoops),
-        int Function(Pointer<MixTrack> track, int numLoops)
+        Bool Function(Pointer<MixTrack> track, Int32 numLoops),
+        bool Function(Pointer<MixTrack> track, int numLoops)
       >('MIX_SetTrackLoops');
-  return mixSetTrackLoopsLookupFunction(track, numLoops) == 1;
+  return mixSetTrackLoopsLookupFunction(track, numLoops);
 }
 
 ///
@@ -2455,10 +2435,10 @@ int mixFramesToMs(int sampleRate, int frames) {
 bool mixPlayTrack(Pointer<MixTrack> track, int options) {
   final mixPlayTrackLookupFunction = _libMixer
       .lookupFunction<
-        Uint8 Function(Pointer<MixTrack> track, Uint32 options),
-        int Function(Pointer<MixTrack> track, int options)
+        Bool Function(Pointer<MixTrack> track, Uint32 options),
+        bool Function(Pointer<MixTrack> track, int options)
       >('MIX_PlayTrack');
-  return mixPlayTrackLookupFunction(track, options) == 1;
+  return mixPlayTrackLookupFunction(track, options);
 }
 
 ///
@@ -2503,15 +2483,15 @@ bool mixPlayTrack(Pointer<MixTrack> track, int options) {
 bool mixPlayTag(Pointer<MixMixer> mixer, String? tag, int options) {
   final mixPlayTagLookupFunction = _libMixer
       .lookupFunction<
-        Uint8 Function(
+        Bool Function(
           Pointer<MixMixer> mixer,
           Pointer<Utf8> tag,
           Uint32 options,
         ),
-        int Function(Pointer<MixMixer> mixer, Pointer<Utf8> tag, int options)
+        bool Function(Pointer<MixMixer> mixer, Pointer<Utf8> tag, int options)
       >('MIX_PlayTag');
   final tagPointer = tag != null ? tag.toNativeUtf8() : nullptr;
-  final result = mixPlayTagLookupFunction(mixer, tagPointer, options) == 1;
+  final result = mixPlayTagLookupFunction(mixer, tagPointer, options);
   calloc.free(tagPointer);
   return result;
 }
@@ -2553,10 +2533,10 @@ bool mixPlayTag(Pointer<MixMixer> mixer, String? tag, int options) {
 bool mixPlayAudio(Pointer<MixMixer> mixer, Pointer<MixAudio> audio) {
   final mixPlayAudioLookupFunction = _libMixer
       .lookupFunction<
-        Uint8 Function(Pointer<MixMixer> mixer, Pointer<MixAudio> audio),
-        int Function(Pointer<MixMixer> mixer, Pointer<MixAudio> audio)
+        Bool Function(Pointer<MixMixer> mixer, Pointer<MixAudio> audio),
+        bool Function(Pointer<MixMixer> mixer, Pointer<MixAudio> audio)
       >('MIX_PlayAudio');
-  return mixPlayAudioLookupFunction(mixer, audio) == 1;
+  return mixPlayAudioLookupFunction(mixer, audio);
 }
 
 ///
@@ -2598,10 +2578,10 @@ bool mixPlayAudio(Pointer<MixMixer> mixer, Pointer<MixAudio> audio) {
 bool mixStopTrack(Pointer<MixTrack> track, int fadeOutFrames) {
   final mixStopTrackLookupFunction = _libMixer
       .lookupFunction<
-        Uint8 Function(Pointer<MixTrack> track, Int64 fadeOutFrames),
-        int Function(Pointer<MixTrack> track, int fadeOutFrames)
+        Bool Function(Pointer<MixTrack> track, Int64 fadeOutFrames),
+        bool Function(Pointer<MixTrack> track, int fadeOutFrames)
       >('MIX_StopTrack');
-  return mixStopTrackLookupFunction(track, fadeOutFrames) == 1;
+  return mixStopTrackLookupFunction(track, fadeOutFrames);
 }
 
 ///
@@ -2644,10 +2624,10 @@ bool mixStopTrack(Pointer<MixTrack> track, int fadeOutFrames) {
 bool mixStopAllTracks(Pointer<MixMixer> mixer, int fadeOutMs) {
   final mixStopAllTracksLookupFunction = _libMixer
       .lookupFunction<
-        Uint8 Function(Pointer<MixMixer> mixer, Int64 fadeOutMs),
-        int Function(Pointer<MixMixer> mixer, int fadeOutMs)
+        Bool Function(Pointer<MixMixer> mixer, Int64 fadeOutMs),
+        bool Function(Pointer<MixMixer> mixer, int fadeOutMs)
       >('MIX_StopAllTracks');
-  return mixStopAllTracksLookupFunction(mixer, fadeOutMs) == 1;
+  return mixStopAllTracksLookupFunction(mixer, fadeOutMs);
 }
 
 ///
@@ -2688,15 +2668,15 @@ bool mixStopAllTracks(Pointer<MixMixer> mixer, int fadeOutMs) {
 bool mixStopTag(Pointer<MixMixer> mixer, String? tag, int fadeOutMs) {
   final mixStopTagLookupFunction = _libMixer
       .lookupFunction<
-        Uint8 Function(
+        Bool Function(
           Pointer<MixMixer> mixer,
           Pointer<Utf8> tag,
           Int64 fadeOutMs,
         ),
-        int Function(Pointer<MixMixer> mixer, Pointer<Utf8> tag, int fadeOutMs)
+        bool Function(Pointer<MixMixer> mixer, Pointer<Utf8> tag, int fadeOutMs)
       >('MIX_StopTag');
   final tagPointer = tag != null ? tag.toNativeUtf8() : nullptr;
-  final result = mixStopTagLookupFunction(mixer, tagPointer, fadeOutMs) == 1;
+  final result = mixStopTagLookupFunction(mixer, tagPointer, fadeOutMs);
   calloc.free(tagPointer);
   return result;
 }
@@ -2730,10 +2710,10 @@ bool mixStopTag(Pointer<MixMixer> mixer, String? tag, int fadeOutMs) {
 bool mixPauseTrack(Pointer<MixTrack> track) {
   final mixPauseTrackLookupFunction = _libMixer
       .lookupFunction<
-        Uint8 Function(Pointer<MixTrack> track),
-        int Function(Pointer<MixTrack> track)
+        Bool Function(Pointer<MixTrack> track),
+        bool Function(Pointer<MixTrack> track)
       >('MIX_PauseTrack');
-  return mixPauseTrackLookupFunction(track) == 1;
+  return mixPauseTrackLookupFunction(track);
 }
 
 ///
@@ -2763,10 +2743,10 @@ bool mixPauseTrack(Pointer<MixTrack> track) {
 bool mixPauseAllTracks(Pointer<MixMixer> mixer) {
   final mixPauseAllTracksLookupFunction = _libMixer
       .lookupFunction<
-        Uint8 Function(Pointer<MixMixer> mixer),
-        int Function(Pointer<MixMixer> mixer)
+        Bool Function(Pointer<MixMixer> mixer),
+        bool Function(Pointer<MixMixer> mixer)
       >('MIX_PauseAllTracks');
-  return mixPauseAllTracksLookupFunction(mixer) == 1;
+  return mixPauseAllTracksLookupFunction(mixer);
 }
 
 ///
@@ -2802,11 +2782,11 @@ bool mixPauseAllTracks(Pointer<MixMixer> mixer) {
 bool mixPauseTag(Pointer<MixMixer> mixer, String? tag) {
   final mixPauseTagLookupFunction = _libMixer
       .lookupFunction<
-        Uint8 Function(Pointer<MixMixer> mixer, Pointer<Utf8> tag),
-        int Function(Pointer<MixMixer> mixer, Pointer<Utf8> tag)
+        Bool Function(Pointer<MixMixer> mixer, Pointer<Utf8> tag),
+        bool Function(Pointer<MixMixer> mixer, Pointer<Utf8> tag)
       >('MIX_PauseTag');
   final tagPointer = tag != null ? tag.toNativeUtf8() : nullptr;
-  final result = mixPauseTagLookupFunction(mixer, tagPointer) == 1;
+  final result = mixPauseTagLookupFunction(mixer, tagPointer);
   calloc.free(tagPointer);
   return result;
 }
@@ -2840,10 +2820,10 @@ bool mixPauseTag(Pointer<MixMixer> mixer, String? tag) {
 bool mixResumeTrack(Pointer<MixTrack> track) {
   final mixResumeTrackLookupFunction = _libMixer
       .lookupFunction<
-        Uint8 Function(Pointer<MixTrack> track),
-        int Function(Pointer<MixTrack> track)
+        Bool Function(Pointer<MixTrack> track),
+        bool Function(Pointer<MixTrack> track)
       >('MIX_ResumeTrack');
-  return mixResumeTrackLookupFunction(track) == 1;
+  return mixResumeTrackLookupFunction(track);
 }
 
 ///
@@ -2873,10 +2853,10 @@ bool mixResumeTrack(Pointer<MixTrack> track) {
 bool mixResumeAllTracks(Pointer<MixMixer> mixer) {
   final mixResumeAllTracksLookupFunction = _libMixer
       .lookupFunction<
-        Uint8 Function(Pointer<MixMixer> mixer),
-        int Function(Pointer<MixMixer> mixer)
+        Bool Function(Pointer<MixMixer> mixer),
+        bool Function(Pointer<MixMixer> mixer)
       >('MIX_ResumeAllTracks');
-  return mixResumeAllTracksLookupFunction(mixer) == 1;
+  return mixResumeAllTracksLookupFunction(mixer);
 }
 
 ///
@@ -2912,11 +2892,11 @@ bool mixResumeAllTracks(Pointer<MixMixer> mixer) {
 bool mixResumeTag(Pointer<MixMixer> mixer, String? tag) {
   final mixResumeTagLookupFunction = _libMixer
       .lookupFunction<
-        Uint8 Function(Pointer<MixMixer> mixer, Pointer<Utf8> tag),
-        int Function(Pointer<MixMixer> mixer, Pointer<Utf8> tag)
+        Bool Function(Pointer<MixMixer> mixer, Pointer<Utf8> tag),
+        bool Function(Pointer<MixMixer> mixer, Pointer<Utf8> tag)
       >('MIX_ResumeTag');
   final tagPointer = tag != null ? tag.toNativeUtf8() : nullptr;
-  final result = mixResumeTagLookupFunction(mixer, tagPointer) == 1;
+  final result = mixResumeTagLookupFunction(mixer, tagPointer);
   calloc.free(tagPointer);
   return result;
 }
@@ -2951,10 +2931,10 @@ bool mixResumeTag(Pointer<MixMixer> mixer, String? tag) {
 bool mixTrackPlaying(Pointer<MixTrack> track) {
   final mixTrackPlayingLookupFunction = _libMixer
       .lookupFunction<
-        Uint8 Function(Pointer<MixTrack> track),
-        int Function(Pointer<MixTrack> track)
+        Bool Function(Pointer<MixTrack> track),
+        bool Function(Pointer<MixTrack> track)
       >('MIX_TrackPlaying');
-  return mixTrackPlayingLookupFunction(track) == 1;
+  return mixTrackPlayingLookupFunction(track);
 }
 
 ///
@@ -2988,10 +2968,10 @@ bool mixTrackPlaying(Pointer<MixTrack> track) {
 bool mixTrackPaused(Pointer<MixTrack> track) {
   final mixTrackPausedLookupFunction = _libMixer
       .lookupFunction<
-        Uint8 Function(Pointer<MixTrack> track),
-        int Function(Pointer<MixTrack> track)
+        Bool Function(Pointer<MixTrack> track),
+        bool Function(Pointer<MixTrack> track)
       >('MIX_TrackPaused');
-  return mixTrackPausedLookupFunction(track) == 1;
+  return mixTrackPausedLookupFunction(track);
 }
 
 ///
@@ -3027,10 +3007,10 @@ bool mixTrackPaused(Pointer<MixTrack> track) {
 bool mixSetMixerGain(Pointer<MixMixer> mixer, double gain) {
   final mixSetMixerGainLookupFunction = _libMixer
       .lookupFunction<
-        Uint8 Function(Pointer<MixMixer> mixer, Float gain),
-        int Function(Pointer<MixMixer> mixer, double gain)
+        Bool Function(Pointer<MixMixer> mixer, Float gain),
+        bool Function(Pointer<MixMixer> mixer, double gain)
       >('MIX_SetMixerGain');
-  return mixSetMixerGainLookupFunction(mixer, gain) == 1;
+  return mixSetMixerGainLookupFunction(mixer, gain);
 }
 
 ///
@@ -3095,10 +3075,10 @@ double mixGetMixerGain(Pointer<MixMixer> mixer) {
 bool mixSetTrackGain(Pointer<MixTrack> track, double gain) {
   final mixSetTrackGainLookupFunction = _libMixer
       .lookupFunction<
-        Uint8 Function(Pointer<MixTrack> track, Float gain),
-        int Function(Pointer<MixTrack> track, double gain)
+        Bool Function(Pointer<MixTrack> track, Float gain),
+        bool Function(Pointer<MixTrack> track, double gain)
       >('MIX_SetTrackGain');
-  return mixSetTrackGainLookupFunction(track, gain) == 1;
+  return mixSetTrackGainLookupFunction(track, gain);
 }
 
 ///
@@ -3172,11 +3152,11 @@ double mixGetTrackGain(Pointer<MixTrack> track) {
 bool mixSetTagGain(Pointer<MixMixer> mixer, String? tag, double gain) {
   final mixSetTagGainLookupFunction = _libMixer
       .lookupFunction<
-        Uint8 Function(Pointer<MixMixer> mixer, Pointer<Utf8> tag, Float gain),
-        int Function(Pointer<MixMixer> mixer, Pointer<Utf8> tag, double gain)
+        Bool Function(Pointer<MixMixer> mixer, Pointer<Utf8> tag, Float gain),
+        bool Function(Pointer<MixMixer> mixer, Pointer<Utf8> tag, double gain)
       >('MIX_SetTagGain');
   final tagPointer = tag != null ? tag.toNativeUtf8() : nullptr;
-  final result = mixSetTagGainLookupFunction(mixer, tagPointer, gain) == 1;
+  final result = mixSetTagGainLookupFunction(mixer, tagPointer, gain);
   calloc.free(tagPointer);
   return result;
 }
@@ -3217,10 +3197,10 @@ bool mixSetTagGain(Pointer<MixMixer> mixer, String? tag, double gain) {
 bool mixSetMixerFrequencyRatio(Pointer<MixMixer> mixer, double ratio) {
   final mixSetMixerFrequencyRatioLookupFunction = _libMixer
       .lookupFunction<
-        Uint8 Function(Pointer<MixMixer> mixer, Float ratio),
-        int Function(Pointer<MixMixer> mixer, double ratio)
+        Bool Function(Pointer<MixMixer> mixer, Float ratio),
+        bool Function(Pointer<MixMixer> mixer, double ratio)
       >('MIX_SetMixerFrequencyRatio');
-  return mixSetMixerFrequencyRatioLookupFunction(mixer, ratio) == 1;
+  return mixSetMixerFrequencyRatioLookupFunction(mixer, ratio);
 }
 
 ///
@@ -3283,10 +3263,10 @@ double mixGetMixerFrequencyRatio(Pointer<MixMixer> mixer) {
 bool mixSetTrackFrequencyRatio(Pointer<MixTrack> track, double ratio) {
   final mixSetTrackFrequencyRatioLookupFunction = _libMixer
       .lookupFunction<
-        Uint8 Function(Pointer<MixTrack> track, Float ratio),
-        int Function(Pointer<MixTrack> track, double ratio)
+        Bool Function(Pointer<MixTrack> track, Float ratio),
+        bool Function(Pointer<MixTrack> track, double ratio)
       >('MIX_SetTrackFrequencyRatio');
-  return mixSetTrackFrequencyRatioLookupFunction(track, ratio) == 1;
+  return mixSetTrackFrequencyRatioLookupFunction(track, ratio);
 }
 
 ///
@@ -3375,14 +3355,14 @@ bool mixSetTrackOutputChannelMap(
 ) {
   final mixSetTrackOutputChannelMapLookupFunction = _libMixer
       .lookupFunction<
-        Uint8 Function(
+        Bool Function(
           Pointer<MixTrack> track,
           Pointer<Int32> chmap,
           Int32 count,
         ),
-        int Function(Pointer<MixTrack> track, Pointer<Int32> chmap, int count)
+        bool Function(Pointer<MixTrack> track, Pointer<Int32> chmap, int count)
       >('MIX_SetTrackOutputChannelMap');
-  return mixSetTrackOutputChannelMapLookupFunction(track, chmap, count) == 1;
+  return mixSetTrackOutputChannelMapLookupFunction(track, chmap, count);
 }
 
 ///
@@ -3423,10 +3403,10 @@ bool mixSetTrackOutputChannelMap(
 bool mixSetTrackStereo(Pointer<MixTrack> track, Pointer<MixStereoGains> gains) {
   final mixSetTrackStereoLookupFunction = _libMixer
       .lookupFunction<
-        Uint8 Function(Pointer<MixTrack> track, Pointer<MixStereoGains> gains),
-        int Function(Pointer<MixTrack> track, Pointer<MixStereoGains> gains)
+        Bool Function(Pointer<MixTrack> track, Pointer<MixStereoGains> gains),
+        bool Function(Pointer<MixTrack> track, Pointer<MixStereoGains> gains)
       >('MIX_SetTrackStereo');
-  return mixSetTrackStereoLookupFunction(track, gains) == 1;
+  return mixSetTrackStereoLookupFunction(track, gains);
 }
 
 ///
@@ -3483,10 +3463,10 @@ bool mixSetTrack3DPosition(
 ) {
   final mixSetTrack3DPositionLookupFunction = _libMixer
       .lookupFunction<
-        Uint8 Function(Pointer<MixTrack> track, Pointer<MixPoint3D> position),
-        int Function(Pointer<MixTrack> track, Pointer<MixPoint3D> position)
+        Bool Function(Pointer<MixTrack> track, Pointer<MixPoint3D> position),
+        bool Function(Pointer<MixTrack> track, Pointer<MixPoint3D> position)
       >('MIX_SetTrack3DPosition');
-  return mixSetTrack3DPositionLookupFunction(track, position) == 1;
+  return mixSetTrack3DPositionLookupFunction(track, position);
 }
 
 ///
@@ -3516,10 +3496,10 @@ bool mixGetTrack3DPosition(
 ) {
   final mixGetTrack3DPositionLookupFunction = _libMixer
       .lookupFunction<
-        Uint8 Function(Pointer<MixTrack> track, Pointer<MixPoint3D> position),
-        int Function(Pointer<MixTrack> track, Pointer<MixPoint3D> position)
+        Bool Function(Pointer<MixTrack> track, Pointer<MixPoint3D> position),
+        bool Function(Pointer<MixTrack> track, Pointer<MixPoint3D> position)
       >('MIX_GetTrack3DPosition');
-  return mixGetTrack3DPositionLookupFunction(track, position) == 1;
+  return mixGetTrack3DPositionLookupFunction(track, position);
 }
 
 ///
@@ -3679,10 +3659,10 @@ Pointer<MixMixer> mixGetGroupMixer(Pointer<MixGroup> group) {
 bool mixSetTrackGroup(Pointer<MixTrack> track, Pointer<MixGroup> group) {
   final mixSetTrackGroupLookupFunction = _libMixer
       .lookupFunction<
-        Uint8 Function(Pointer<MixTrack> track, Pointer<MixGroup> group),
-        int Function(Pointer<MixTrack> track, Pointer<MixGroup> group)
+        Bool Function(Pointer<MixTrack> track, Pointer<MixGroup> group),
+        bool Function(Pointer<MixTrack> track, Pointer<MixGroup> group)
       >('MIX_SetTrackGroup');
-  return mixSetTrackGroupLookupFunction(track, group) == 1;
+  return mixSetTrackGroupLookupFunction(track, group);
 }
 
 ///
@@ -3722,22 +3702,22 @@ bool mixSetTrackGroup(Pointer<MixTrack> track, Pointer<MixGroup> group) {
 bool mixSetTrackStoppedCallback(
   Pointer<MixTrack> track,
   Pointer<NativeFunction<MixTrackStoppedCallback>> cb,
-  Pointer<NativeType> userdata,
+  Pointer<Void> userdata,
 ) {
   final mixSetTrackStoppedCallbackLookupFunction = _libMixer
       .lookupFunction<
-        Uint8 Function(
+        Bool Function(
           Pointer<MixTrack> track,
           Pointer<NativeFunction<MixTrackStoppedCallback>> cb,
-          Pointer<NativeType> userdata,
+          Pointer<Void> userdata,
         ),
-        int Function(
+        bool Function(
           Pointer<MixTrack> track,
           Pointer<NativeFunction<MixTrackStoppedCallback>> cb,
-          Pointer<NativeType> userdata,
+          Pointer<Void> userdata,
         )
       >('MIX_SetTrackStoppedCallback');
-  return mixSetTrackStoppedCallbackLookupFunction(track, cb, userdata) == 1;
+  return mixSetTrackStoppedCallbackLookupFunction(track, cb, userdata);
 }
 
 ///
@@ -3777,22 +3757,22 @@ bool mixSetTrackStoppedCallback(
 bool mixSetTrackRawCallback(
   Pointer<MixTrack> track,
   Pointer<NativeFunction<MixTrackMixCallback>> cb,
-  Pointer<NativeType> userdata,
+  Pointer<Void> userdata,
 ) {
   final mixSetTrackRawCallbackLookupFunction = _libMixer
       .lookupFunction<
-        Uint8 Function(
+        Bool Function(
           Pointer<MixTrack> track,
           Pointer<NativeFunction<MixTrackMixCallback>> cb,
-          Pointer<NativeType> userdata,
+          Pointer<Void> userdata,
         ),
-        int Function(
+        bool Function(
           Pointer<MixTrack> track,
           Pointer<NativeFunction<MixTrackMixCallback>> cb,
-          Pointer<NativeType> userdata,
+          Pointer<Void> userdata,
         )
       >('MIX_SetTrackRawCallback');
-  return mixSetTrackRawCallbackLookupFunction(track, cb, userdata) == 1;
+  return mixSetTrackRawCallbackLookupFunction(track, cb, userdata);
 }
 
 ///
@@ -3835,22 +3815,22 @@ bool mixSetTrackRawCallback(
 bool mixSetTrackCookedCallback(
   Pointer<MixTrack> track,
   Pointer<NativeFunction<MixTrackMixCallback>> cb,
-  Pointer<NativeType> userdata,
+  Pointer<Void> userdata,
 ) {
   final mixSetTrackCookedCallbackLookupFunction = _libMixer
       .lookupFunction<
-        Uint8 Function(
+        Bool Function(
           Pointer<MixTrack> track,
           Pointer<NativeFunction<MixTrackMixCallback>> cb,
-          Pointer<NativeType> userdata,
+          Pointer<Void> userdata,
         ),
-        int Function(
+        bool Function(
           Pointer<MixTrack> track,
           Pointer<NativeFunction<MixTrackMixCallback>> cb,
-          Pointer<NativeType> userdata,
+          Pointer<Void> userdata,
         )
       >('MIX_SetTrackCookedCallback');
-  return mixSetTrackCookedCallbackLookupFunction(track, cb, userdata) == 1;
+  return mixSetTrackCookedCallbackLookupFunction(track, cb, userdata);
 }
 
 ///
@@ -3887,22 +3867,22 @@ bool mixSetTrackCookedCallback(
 bool mixSetGroupPostMixCallback(
   Pointer<MixGroup> group,
   Pointer<NativeFunction<MixGroupMixCallback>> cb,
-  Pointer<NativeType> userdata,
+  Pointer<Void> userdata,
 ) {
   final mixSetGroupPostMixCallbackLookupFunction = _libMixer
       .lookupFunction<
-        Uint8 Function(
+        Bool Function(
           Pointer<MixGroup> group,
           Pointer<NativeFunction<MixGroupMixCallback>> cb,
-          Pointer<NativeType> userdata,
+          Pointer<Void> userdata,
         ),
-        int Function(
+        bool Function(
           Pointer<MixGroup> group,
           Pointer<NativeFunction<MixGroupMixCallback>> cb,
-          Pointer<NativeType> userdata,
+          Pointer<Void> userdata,
         )
       >('MIX_SetGroupPostMixCallback');
-  return mixSetGroupPostMixCallbackLookupFunction(group, cb, userdata) == 1;
+  return mixSetGroupPostMixCallbackLookupFunction(group, cb, userdata);
 }
 
 ///
@@ -3936,22 +3916,22 @@ bool mixSetGroupPostMixCallback(
 bool mixSetPostMixCallback(
   Pointer<MixMixer> mixer,
   Pointer<NativeFunction<MixPostMixCallback>> cb,
-  Pointer<NativeType> userdata,
+  Pointer<Void> userdata,
 ) {
   final mixSetPostMixCallbackLookupFunction = _libMixer
       .lookupFunction<
-        Uint8 Function(
+        Bool Function(
           Pointer<MixMixer> mixer,
           Pointer<NativeFunction<MixPostMixCallback>> cb,
-          Pointer<NativeType> userdata,
+          Pointer<Void> userdata,
         ),
-        int Function(
+        bool Function(
           Pointer<MixMixer> mixer,
           Pointer<NativeFunction<MixPostMixCallback>> cb,
-          Pointer<NativeType> userdata,
+          Pointer<Void> userdata,
         )
       >('MIX_SetPostMixCallback');
-  return mixSetPostMixCallbackLookupFunction(mixer, cb, userdata) == 1;
+  return mixSetPostMixCallbackLookupFunction(mixer, cb, userdata);
 }
 
 ///
@@ -4011,23 +3991,15 @@ bool mixSetPostMixCallback(
 /// extern SDL_DECLSPEC int SDLCALL MIX_Generate(MIX_Mixer *mixer, void *buffer, int buflen)
 /// ```
 /// {@category mixer}
-int mixGenerate(
-  Pointer<MixMixer> mixer,
-  Pointer<NativeType> buffer,
-  int buflen,
-) {
+int mixGenerate(Pointer<MixMixer> mixer, Pointer<Void> buffer, int buflen) {
   final mixGenerateLookupFunction = _libMixer
       .lookupFunction<
         Int32 Function(
           Pointer<MixMixer> mixer,
-          Pointer<NativeType> buffer,
+          Pointer<Void> buffer,
           Int32 buflen,
         ),
-        int Function(
-          Pointer<MixMixer> mixer,
-          Pointer<NativeType> buffer,
-          int buflen,
-        )
+        int Function(Pointer<MixMixer> mixer, Pointer<Void> buffer, int buflen)
       >('MIX_Generate');
   return mixGenerateLookupFunction(mixer, buffer, buflen);
 }
@@ -4133,16 +4105,16 @@ Pointer<MixAudioDecoder> mixCreateAudioDecoderIo(
       .lookupFunction<
         Pointer<MixAudioDecoder> Function(
           Pointer<SdlIoStream> io,
-          Uint8 closeio,
+          Bool closeio,
           Uint32 props,
         ),
         Pointer<MixAudioDecoder> Function(
           Pointer<SdlIoStream> io,
-          int closeio,
+          bool closeio,
           int props,
         )
       >('MIX_CreateAudioDecoder_IO');
-  return mixCreateAudioDecoderIoLookupFunction(io, closeio ? 1 : 0, props);
+  return mixCreateAudioDecoderIoLookupFunction(io, closeio, props);
 }
 
 ///
@@ -4232,16 +4204,16 @@ bool mixGetAudioDecoderFormat(
 ) {
   final mixGetAudioDecoderFormatLookupFunction = _libMixer
       .lookupFunction<
-        Uint8 Function(
+        Bool Function(
           Pointer<MixAudioDecoder> audiodecoder,
           Pointer<SdlAudioSpec> spec,
         ),
-        int Function(
+        bool Function(
           Pointer<MixAudioDecoder> audiodecoder,
           Pointer<SdlAudioSpec> spec,
         )
       >('MIX_GetAudioDecoderFormat');
-  return mixGetAudioDecoderFormatLookupFunction(audiodecoder, spec) == 1;
+  return mixGetAudioDecoderFormatLookupFunction(audiodecoder, spec);
 }
 
 ///
@@ -4272,7 +4244,7 @@ bool mixGetAudioDecoderFormat(
 /// {@category mixer}
 int mixDecodeAudio(
   Pointer<MixAudioDecoder> audiodecoder,
-  Pointer<NativeType> buffer,
+  Pointer<Void> buffer,
   int buflen,
   Pointer<SdlAudioSpec> spec,
 ) {
@@ -4280,13 +4252,13 @@ int mixDecodeAudio(
       .lookupFunction<
         Int32 Function(
           Pointer<MixAudioDecoder> audiodecoder,
-          Pointer<NativeType> buffer,
+          Pointer<Void> buffer,
           Int32 buflen,
           Pointer<SdlAudioSpec> spec,
         ),
         int Function(
           Pointer<MixAudioDecoder> audiodecoder,
-          Pointer<NativeType> buffer,
+          Pointer<Void> buffer,
           int buflen,
           Pointer<SdlAudioSpec> spec,
         )

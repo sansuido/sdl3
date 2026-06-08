@@ -31,14 +31,10 @@ bool sdlGetDateTimeLocalePreferences(
 ) {
   final sdlGetDateTimeLocalePreferencesLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(Pointer<Int32> dateFormat, Pointer<Int32> timeFormat),
-        int Function(Pointer<Int32> dateFormat, Pointer<Int32> timeFormat)
+        Bool Function(Pointer<Int32> dateFormat, Pointer<Int32> timeFormat),
+        bool Function(Pointer<Int32> dateFormat, Pointer<Int32> timeFormat)
       >('SDL_GetDateTimeLocalePreferences');
-  return sdlGetDateTimeLocalePreferencesLookupFunction(
-        dateFormat,
-        timeFormat,
-      ) ==
-      1;
+  return sdlGetDateTimeLocalePreferencesLookupFunction(dateFormat, timeFormat);
 }
 
 ///
@@ -60,10 +56,10 @@ bool sdlGetDateTimeLocalePreferences(
 bool sdlGetCurrentTime(Pointer<Int64> ticks) {
   final sdlGetCurrentTimeLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(Pointer<Int64> ticks),
-        int Function(Pointer<Int64> ticks)
+        Bool Function(Pointer<Int64> ticks),
+        bool Function(Pointer<Int64> ticks)
       >('SDL_GetCurrentTime');
-  return sdlGetCurrentTimeLookupFunction(ticks) == 1;
+  return sdlGetCurrentTimeLookupFunction(ticks);
 }
 
 ///
@@ -89,10 +85,10 @@ bool sdlGetCurrentTime(Pointer<Int64> ticks) {
 bool sdlTimeToDateTime(int ticks, Pointer<SdlDateTime> dt, bool localTime) {
   final sdlTimeToDateTimeLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(Int64 ticks, Pointer<SdlDateTime> dt, Uint8 localTime),
-        int Function(int ticks, Pointer<SdlDateTime> dt, int localTime)
+        Bool Function(Int64 ticks, Pointer<SdlDateTime> dt, Bool localTime),
+        bool Function(int ticks, Pointer<SdlDateTime> dt, bool localTime)
       >('SDL_TimeToDateTime');
-  return sdlTimeToDateTimeLookupFunction(ticks, dt, localTime ? 1 : 0) == 1;
+  return sdlTimeToDateTimeLookupFunction(ticks, dt, localTime);
 }
 
 ///
@@ -117,10 +113,10 @@ bool sdlTimeToDateTime(int ticks, Pointer<SdlDateTime> dt, bool localTime) {
 bool sdlDateTimeToTime(Pointer<SdlDateTime> dt, Pointer<Int64> ticks) {
   final sdlDateTimeToTimeLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(Pointer<SdlDateTime> dt, Pointer<Int64> ticks),
-        int Function(Pointer<SdlDateTime> dt, Pointer<Int64> ticks)
+        Bool Function(Pointer<SdlDateTime> dt, Pointer<Int64> ticks),
+        bool Function(Pointer<SdlDateTime> dt, Pointer<Int64> ticks)
       >('SDL_DateTimeToTime');
-  return sdlDateTimeToTimeLookupFunction(dt, ticks) == 1;
+  return sdlDateTimeToTimeLookupFunction(dt, ticks);
 }
 
 ///

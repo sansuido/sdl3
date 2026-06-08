@@ -1535,7 +1535,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
     Pointer<Float> uv,
     int uvStride,
     int numVertices,
-    Pointer<NativeType> indices,
+    Pointer<Void> indices,
     int numIndices,
     int sizeIndices,
   ) => sdlRenderGeometryRaw(
@@ -1721,7 +1721,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// extern SDL_DECLSPEC void * SDLCALL SDL_GetRenderMetalLayer(SDL_Renderer *renderer)
   /// ```
   /// {@category render}
-  Pointer<NativeType> getMetalLayer() => sdlGetRenderMetalLayer(this);
+  Pointer<Void> getMetalLayer() => sdlGetRenderMetalLayer(this);
 
   ///
   /// Get the Metal command encoder for the current frame.
@@ -1748,7 +1748,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// extern SDL_DECLSPEC void * SDLCALL SDL_GetRenderMetalCommandEncoder(SDL_Renderer *renderer)
   /// ```
   /// {@category render}
-  Pointer<NativeType> getMetalCommandEncoder() =>
+  Pointer<Void> getMetalCommandEncoder() =>
       sdlGetRenderMetalCommandEncoder(this);
 
   ///

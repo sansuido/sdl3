@@ -96,6 +96,6 @@ extension MixGroupPointerEx on Pointer<MixGroup> {
   /// {@category mixer}
   bool setPostMixCallback(
     Pointer<NativeFunction<MixGroupMixCallback>> cb,
-    Pointer<NativeType> userdata,
+    Pointer<Void> userdata,
   ) => mixSetGroupPostMixCallback(this, cb, userdata);
 }

@@ -104,7 +104,7 @@ bool sdlCreateWindowAndRenderer(
 ) {
   final sdlCreateWindowAndRendererLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(
+        Bool Function(
           Pointer<Utf8> title,
           Int32 width,
           Int32 height,
@@ -112,7 +112,7 @@ bool sdlCreateWindowAndRenderer(
           Pointer<Pointer<SdlWindow>> window,
           Pointer<Pointer<SdlRenderer>> renderer,
         ),
-        int Function(
+        bool Function(
           Pointer<Utf8> title,
           int width,
           int height,
@@ -122,16 +122,14 @@ bool sdlCreateWindowAndRenderer(
         )
       >('SDL_CreateWindowAndRenderer');
   final titlePointer = title != null ? title.toNativeUtf8() : nullptr;
-  final result =
-      sdlCreateWindowAndRendererLookupFunction(
-        titlePointer,
-        width,
-        height,
-        windowFlags,
-        window,
-        renderer,
-      ) ==
-      1;
+  final result = sdlCreateWindowAndRendererLookupFunction(
+    titlePointer,
+    width,
+    height,
+    windowFlags,
+    window,
+    renderer,
+  );
   calloc.free(titlePointer);
   return result;
 }
@@ -589,18 +587,18 @@ bool sdlGetRenderOutputSize(
 ) {
   final sdlGetRenderOutputSizeLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(
+        Bool Function(
           Pointer<SdlRenderer> renderer,
           Pointer<Int32> w,
           Pointer<Int32> h,
         ),
-        int Function(
+        bool Function(
           Pointer<SdlRenderer> renderer,
           Pointer<Int32> w,
           Pointer<Int32> h,
         )
       >('SDL_GetRenderOutputSize');
-  return sdlGetRenderOutputSizeLookupFunction(renderer, w, h) == 1;
+  return sdlGetRenderOutputSizeLookupFunction(renderer, w, h);
 }
 
 ///
@@ -635,18 +633,18 @@ bool sdlGetCurrentRenderOutputSize(
 ) {
   final sdlGetCurrentRenderOutputSizeLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(
+        Bool Function(
           Pointer<SdlRenderer> renderer,
           Pointer<Int32> w,
           Pointer<Int32> h,
         ),
-        int Function(
+        bool Function(
           Pointer<SdlRenderer> renderer,
           Pointer<Int32> w,
           Pointer<Int32> h,
         )
       >('SDL_GetCurrentRenderOutputSize');
-  return sdlGetCurrentRenderOutputSizeLookupFunction(renderer, w, h) == 1;
+  return sdlGetCurrentRenderOutputSizeLookupFunction(renderer, w, h);
 }
 
 ///
@@ -1056,18 +1054,18 @@ bool sdlGetTextureSize(
 ) {
   final sdlGetTextureSizeLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(
+        Bool Function(
           Pointer<SdlTexture> texture,
           Pointer<Float> w,
           Pointer<Float> h,
         ),
-        int Function(
+        bool Function(
           Pointer<SdlTexture> texture,
           Pointer<Float> w,
           Pointer<Float> h,
         )
       >('SDL_GetTextureSize');
-  return sdlGetTextureSizeLookupFunction(texture, w, h) == 1;
+  return sdlGetTextureSizeLookupFunction(texture, w, h);
 }
 
 ///
@@ -1100,13 +1098,10 @@ bool sdlSetTexturePalette(
 ) {
   final sdlSetTexturePaletteLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(
-          Pointer<SdlTexture> texture,
-          Pointer<SdlPalette> palette,
-        ),
-        int Function(Pointer<SdlTexture> texture, Pointer<SdlPalette> palette)
+        Bool Function(Pointer<SdlTexture> texture, Pointer<SdlPalette> palette),
+        bool Function(Pointer<SdlTexture> texture, Pointer<SdlPalette> palette)
       >('SDL_SetTexturePalette');
-  return sdlSetTexturePaletteLookupFunction(texture, palette) == 1;
+  return sdlSetTexturePaletteLookupFunction(texture, palette);
 }
 
 ///
@@ -1169,10 +1164,10 @@ Pointer<SdlPalette> sdlGetTexturePalette(Pointer<SdlTexture> texture) {
 bool sdlSetTextureColorMod(Pointer<SdlTexture> texture, int r, int g, int b) {
   final sdlSetTextureColorModLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(Pointer<SdlTexture> texture, Uint8 r, Uint8 g, Uint8 b),
-        int Function(Pointer<SdlTexture> texture, int r, int g, int b)
+        Bool Function(Pointer<SdlTexture> texture, Uint8 r, Uint8 g, Uint8 b),
+        bool Function(Pointer<SdlTexture> texture, int r, int g, int b)
       >('SDL_SetTextureColorMod');
-  return sdlSetTextureColorModLookupFunction(texture, r, g, b) == 1;
+  return sdlSetTextureColorModLookupFunction(texture, r, g, b);
 }
 
 ///
@@ -1214,10 +1209,10 @@ bool sdlSetTextureColorModFloat(
 ) {
   final sdlSetTextureColorModFloatLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(Pointer<SdlTexture> texture, Float r, Float g, Float b),
-        int Function(Pointer<SdlTexture> texture, double r, double g, double b)
+        Bool Function(Pointer<SdlTexture> texture, Float r, Float g, Float b),
+        bool Function(Pointer<SdlTexture> texture, double r, double g, double b)
       >('SDL_SetTextureColorModFloat');
-  return sdlSetTextureColorModFloatLookupFunction(texture, r, g, b) == 1;
+  return sdlSetTextureColorModFloatLookupFunction(texture, r, g, b);
 }
 
 ///
@@ -1250,20 +1245,20 @@ bool sdlGetTextureColorMod(
 ) {
   final sdlGetTextureColorModLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(
+        Bool Function(
           Pointer<SdlTexture> texture,
           Pointer<Uint8> r,
           Pointer<Uint8> g,
           Pointer<Uint8> b,
         ),
-        int Function(
+        bool Function(
           Pointer<SdlTexture> texture,
           Pointer<Uint8> r,
           Pointer<Uint8> g,
           Pointer<Uint8> b,
         )
       >('SDL_GetTextureColorMod');
-  return sdlGetTextureColorModLookupFunction(texture, r, g, b) == 1;
+  return sdlGetTextureColorModLookupFunction(texture, r, g, b);
 }
 
 ///
@@ -1296,20 +1291,20 @@ bool sdlGetTextureColorModFloat(
 ) {
   final sdlGetTextureColorModFloatLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(
+        Bool Function(
           Pointer<SdlTexture> texture,
           Pointer<Float> r,
           Pointer<Float> g,
           Pointer<Float> b,
         ),
-        int Function(
+        bool Function(
           Pointer<SdlTexture> texture,
           Pointer<Float> r,
           Pointer<Float> g,
           Pointer<Float> b,
         )
       >('SDL_GetTextureColorModFloat');
-  return sdlGetTextureColorModFloatLookupFunction(texture, r, g, b) == 1;
+  return sdlGetTextureColorModFloatLookupFunction(texture, r, g, b);
 }
 
 ///
@@ -1343,10 +1338,10 @@ bool sdlGetTextureColorModFloat(
 bool sdlSetTextureAlphaMod(Pointer<SdlTexture> texture, int alpha) {
   final sdlSetTextureAlphaModLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(Pointer<SdlTexture> texture, Uint8 alpha),
-        int Function(Pointer<SdlTexture> texture, int alpha)
+        Bool Function(Pointer<SdlTexture> texture, Uint8 alpha),
+        bool Function(Pointer<SdlTexture> texture, int alpha)
       >('SDL_SetTextureAlphaMod');
-  return sdlSetTextureAlphaModLookupFunction(texture, alpha) == 1;
+  return sdlSetTextureAlphaModLookupFunction(texture, alpha);
 }
 
 ///
@@ -1380,10 +1375,10 @@ bool sdlSetTextureAlphaMod(Pointer<SdlTexture> texture, int alpha) {
 bool sdlSetTextureAlphaModFloat(Pointer<SdlTexture> texture, double alpha) {
   final sdlSetTextureAlphaModFloatLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(Pointer<SdlTexture> texture, Float alpha),
-        int Function(Pointer<SdlTexture> texture, double alpha)
+        Bool Function(Pointer<SdlTexture> texture, Float alpha),
+        bool Function(Pointer<SdlTexture> texture, double alpha)
       >('SDL_SetTextureAlphaModFloat');
-  return sdlSetTextureAlphaModFloatLookupFunction(texture, alpha) == 1;
+  return sdlSetTextureAlphaModFloatLookupFunction(texture, alpha);
 }
 
 ///
@@ -1409,10 +1404,10 @@ bool sdlSetTextureAlphaModFloat(Pointer<SdlTexture> texture, double alpha) {
 bool sdlGetTextureAlphaMod(Pointer<SdlTexture> texture, Pointer<Uint8> alpha) {
   final sdlGetTextureAlphaModLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(Pointer<SdlTexture> texture, Pointer<Uint8> alpha),
-        int Function(Pointer<SdlTexture> texture, Pointer<Uint8> alpha)
+        Bool Function(Pointer<SdlTexture> texture, Pointer<Uint8> alpha),
+        bool Function(Pointer<SdlTexture> texture, Pointer<Uint8> alpha)
       >('SDL_GetTextureAlphaMod');
-  return sdlGetTextureAlphaModLookupFunction(texture, alpha) == 1;
+  return sdlGetTextureAlphaModLookupFunction(texture, alpha);
 }
 
 ///
@@ -1441,10 +1436,10 @@ bool sdlGetTextureAlphaModFloat(
 ) {
   final sdlGetTextureAlphaModFloatLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(Pointer<SdlTexture> texture, Pointer<Float> alpha),
-        int Function(Pointer<SdlTexture> texture, Pointer<Float> alpha)
+        Bool Function(Pointer<SdlTexture> texture, Pointer<Float> alpha),
+        bool Function(Pointer<SdlTexture> texture, Pointer<Float> alpha)
       >('SDL_GetTextureAlphaModFloat');
-  return sdlGetTextureAlphaModFloatLookupFunction(texture, alpha) == 1;
+  return sdlGetTextureAlphaModFloatLookupFunction(texture, alpha);
 }
 
 ///
@@ -1471,10 +1466,10 @@ bool sdlGetTextureAlphaModFloat(
 bool sdlSetTextureBlendMode(Pointer<SdlTexture> texture, int blendMode) {
   final sdlSetTextureBlendModeLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(Pointer<SdlTexture> texture, Uint32 blendMode),
-        int Function(Pointer<SdlTexture> texture, int blendMode)
+        Bool Function(Pointer<SdlTexture> texture, Uint32 blendMode),
+        bool Function(Pointer<SdlTexture> texture, int blendMode)
       >('SDL_SetTextureBlendMode');
-  return sdlSetTextureBlendModeLookupFunction(texture, blendMode) == 1;
+  return sdlSetTextureBlendModeLookupFunction(texture, blendMode);
 }
 
 ///
@@ -1501,10 +1496,10 @@ bool sdlGetTextureBlendMode(
 ) {
   final sdlGetTextureBlendModeLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(Pointer<SdlTexture> texture, Pointer<Uint32> blendMode),
-        int Function(Pointer<SdlTexture> texture, Pointer<Uint32> blendMode)
+        Bool Function(Pointer<SdlTexture> texture, Pointer<Uint32> blendMode),
+        bool Function(Pointer<SdlTexture> texture, Pointer<Uint32> blendMode)
       >('SDL_GetTextureBlendMode');
-  return sdlGetTextureBlendModeLookupFunction(texture, blendMode) == 1;
+  return sdlGetTextureBlendModeLookupFunction(texture, blendMode);
 }
 
 ///
@@ -1532,10 +1527,10 @@ bool sdlGetTextureBlendMode(
 bool sdlSetTextureScaleMode(Pointer<SdlTexture> texture, int scaleMode) {
   final sdlSetTextureScaleModeLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(Pointer<SdlTexture> texture, Int32 scaleMode),
-        int Function(Pointer<SdlTexture> texture, int scaleMode)
+        Bool Function(Pointer<SdlTexture> texture, Int32 scaleMode),
+        bool Function(Pointer<SdlTexture> texture, int scaleMode)
       >('SDL_SetTextureScaleMode');
-  return sdlSetTextureScaleModeLookupFunction(texture, scaleMode) == 1;
+  return sdlSetTextureScaleModeLookupFunction(texture, scaleMode);
 }
 
 ///
@@ -1562,10 +1557,10 @@ bool sdlGetTextureScaleMode(
 ) {
   final sdlGetTextureScaleModeLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(Pointer<SdlTexture> texture, Pointer<Int32> scaleMode),
-        int Function(Pointer<SdlTexture> texture, Pointer<Int32> scaleMode)
+        Bool Function(Pointer<SdlTexture> texture, Pointer<Int32> scaleMode),
+        bool Function(Pointer<SdlTexture> texture, Pointer<Int32> scaleMode)
       >('SDL_GetTextureScaleMode');
-  return sdlGetTextureScaleModeLookupFunction(texture, scaleMode) == 1;
+  return sdlGetTextureScaleModeLookupFunction(texture, scaleMode);
 }
 
 ///
@@ -1607,25 +1602,25 @@ bool sdlGetTextureScaleMode(
 bool sdlUpdateTexture(
   Pointer<SdlTexture> texture,
   Pointer<SdlRect> rect,
-  Pointer<NativeType> pixels,
+  Pointer<Void> pixels,
   int pitch,
 ) {
   final sdlUpdateTextureLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(
+        Bool Function(
           Pointer<SdlTexture> texture,
           Pointer<SdlRect> rect,
-          Pointer<NativeType> pixels,
+          Pointer<Void> pixels,
           Int32 pitch,
         ),
-        int Function(
+        bool Function(
           Pointer<SdlTexture> texture,
           Pointer<SdlRect> rect,
-          Pointer<NativeType> pixels,
+          Pointer<Void> pixels,
           int pitch,
         )
       >('SDL_UpdateTexture');
-  return sdlUpdateTextureLookupFunction(texture, rect, pixels, pitch) == 1;
+  return sdlUpdateTextureLookupFunction(texture, rect, pixels, pitch);
 }
 
 ///
@@ -1674,7 +1669,7 @@ bool sdlUpdateYuvTexture(
 ) {
   final sdlUpdateYuvTextureLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(
+        Bool Function(
           Pointer<SdlTexture> texture,
           Pointer<SdlRect> rect,
           Pointer<Uint8> yplane,
@@ -1684,7 +1679,7 @@ bool sdlUpdateYuvTexture(
           Pointer<Uint8> vplane,
           Int32 vpitch,
         ),
-        int Function(
+        bool Function(
           Pointer<SdlTexture> texture,
           Pointer<SdlRect> rect,
           Pointer<Uint8> yplane,
@@ -1696,16 +1691,15 @@ bool sdlUpdateYuvTexture(
         )
       >('SDL_UpdateYUVTexture');
   return sdlUpdateYuvTextureLookupFunction(
-        texture,
-        rect,
-        yplane,
-        ypitch,
-        uplane,
-        upitch,
-        vplane,
-        vpitch,
-      ) ==
-      1;
+    texture,
+    rect,
+    yplane,
+    ypitch,
+    uplane,
+    upitch,
+    vplane,
+    vpitch,
+  );
 }
 
 ///
@@ -1748,7 +1742,7 @@ bool sdlUpdateNvTexture(
 ) {
   final sdlUpdateNvTextureLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(
+        Bool Function(
           Pointer<SdlTexture> texture,
           Pointer<SdlRect> rect,
           Pointer<Uint8> yplane,
@@ -1756,7 +1750,7 @@ bool sdlUpdateNvTexture(
           Pointer<Uint8> uVplane,
           Int32 uVpitch,
         ),
-        int Function(
+        bool Function(
           Pointer<SdlTexture> texture,
           Pointer<SdlRect> rect,
           Pointer<Uint8> yplane,
@@ -1766,14 +1760,13 @@ bool sdlUpdateNvTexture(
         )
       >('SDL_UpdateNVTexture');
   return sdlUpdateNvTextureLookupFunction(
-        texture,
-        rect,
-        yplane,
-        ypitch,
-        uVplane,
-        uVpitch,
-      ) ==
-      1;
+    texture,
+    rect,
+    yplane,
+    ypitch,
+    uVplane,
+    uVpitch,
+  );
 }
 
 ///
@@ -1813,25 +1806,25 @@ bool sdlUpdateNvTexture(
 bool sdlLockTexture(
   Pointer<SdlTexture> texture,
   Pointer<SdlRect> rect,
-  Pointer<Pointer<NativeType>> pixels,
+  Pointer<Pointer<Void>> pixels,
   Pointer<Int32> pitch,
 ) {
   final sdlLockTextureLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(
+        Bool Function(
           Pointer<SdlTexture> texture,
           Pointer<SdlRect> rect,
-          Pointer<Pointer<NativeType>> pixels,
+          Pointer<Pointer<Void>> pixels,
           Pointer<Int32> pitch,
         ),
-        int Function(
+        bool Function(
           Pointer<SdlTexture> texture,
           Pointer<SdlRect> rect,
-          Pointer<Pointer<NativeType>> pixels,
+          Pointer<Pointer<Void>> pixels,
           Pointer<Int32> pitch,
         )
       >('SDL_LockTexture');
-  return sdlLockTextureLookupFunction(texture, rect, pixels, pitch) == 1;
+  return sdlLockTextureLookupFunction(texture, rect, pixels, pitch);
 }
 
 ///
@@ -1879,18 +1872,18 @@ bool sdlLockTextureToSurface(
 ) {
   final sdlLockTextureToSurfaceLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(
+        Bool Function(
           Pointer<SdlTexture> texture,
           Pointer<SdlRect> rect,
           Pointer<Pointer<SdlSurface>> surface,
         ),
-        int Function(
+        bool Function(
           Pointer<SdlTexture> texture,
           Pointer<SdlRect> rect,
           Pointer<Pointer<SdlSurface>> surface,
         )
       >('SDL_LockTextureToSurface');
-  return sdlLockTextureToSurfaceLookupFunction(texture, rect, surface) == 1;
+  return sdlLockTextureToSurfaceLookupFunction(texture, rect, surface);
 }
 
 ///
@@ -1960,13 +1953,16 @@ bool sdlSetRenderTarget(
 ) {
   final sdlSetRenderTargetLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(
+        Bool Function(
           Pointer<SdlRenderer> renderer,
           Pointer<SdlTexture> texture,
         ),
-        int Function(Pointer<SdlRenderer> renderer, Pointer<SdlTexture> texture)
+        bool Function(
+          Pointer<SdlRenderer> renderer,
+          Pointer<SdlTexture> texture,
+        )
       >('SDL_SetRenderTarget');
-  return sdlSetRenderTargetLookupFunction(renderer, texture) == 1;
+  return sdlSetRenderTargetLookupFunction(renderer, texture);
 }
 
 ///
@@ -2054,16 +2050,15 @@ bool sdlSetRenderLogicalPresentation(
 ) {
   final sdlSetRenderLogicalPresentationLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(
+        Bool Function(
           Pointer<SdlRenderer> renderer,
           Int32 w,
           Int32 h,
           Int32 mode,
         ),
-        int Function(Pointer<SdlRenderer> renderer, int w, int h, int mode)
+        bool Function(Pointer<SdlRenderer> renderer, int w, int h, int mode)
       >('SDL_SetRenderLogicalPresentation');
-  return sdlSetRenderLogicalPresentationLookupFunction(renderer, w, h, mode) ==
-      1;
+  return sdlSetRenderLogicalPresentationLookupFunction(renderer, w, h, mode);
 }
 
 ///
@@ -2101,21 +2096,20 @@ bool sdlGetRenderLogicalPresentation(
 ) {
   final sdlGetRenderLogicalPresentationLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(
+        Bool Function(
           Pointer<SdlRenderer> renderer,
           Pointer<Int32> w,
           Pointer<Int32> h,
           Pointer<Int32> mode,
         ),
-        int Function(
+        bool Function(
           Pointer<SdlRenderer> renderer,
           Pointer<Int32> w,
           Pointer<Int32> h,
           Pointer<Int32> mode,
         )
       >('SDL_GetRenderLogicalPresentation');
-  return sdlGetRenderLogicalPresentationLookupFunction(renderer, w, h, mode) ==
-      1;
+  return sdlGetRenderLogicalPresentationLookupFunction(renderer, w, h, mode);
 }
 
 ///
@@ -2151,10 +2145,10 @@ bool sdlGetRenderLogicalPresentationRect(
 ) {
   final sdlGetRenderLogicalPresentationRectLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(Pointer<SdlRenderer> renderer, Pointer<SdlFRect> rect),
-        int Function(Pointer<SdlRenderer> renderer, Pointer<SdlFRect> rect)
+        Bool Function(Pointer<SdlRenderer> renderer, Pointer<SdlFRect> rect),
+        bool Function(Pointer<SdlRenderer> renderer, Pointer<SdlFRect> rect)
       >('SDL_GetRenderLogicalPresentationRect');
-  return sdlGetRenderLogicalPresentationRectLookupFunction(renderer, rect) == 1;
+  return sdlGetRenderLogicalPresentationRectLookupFunction(renderer, rect);
 }
 
 ///
@@ -2195,14 +2189,14 @@ bool sdlRenderCoordinatesFromWindow(
 ) {
   final sdlRenderCoordinatesFromWindowLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(
+        Bool Function(
           Pointer<SdlRenderer> renderer,
           Float windowX,
           Float windowY,
           Pointer<Float> x,
           Pointer<Float> y,
         ),
-        int Function(
+        bool Function(
           Pointer<SdlRenderer> renderer,
           double windowX,
           double windowY,
@@ -2211,13 +2205,12 @@ bool sdlRenderCoordinatesFromWindow(
         )
       >('SDL_RenderCoordinatesFromWindow');
   return sdlRenderCoordinatesFromWindowLookupFunction(
-        renderer,
-        windowX,
-        windowY,
-        x,
-        y,
-      ) ==
-      1;
+    renderer,
+    windowX,
+    windowY,
+    x,
+    y,
+  );
 }
 
 ///
@@ -2261,14 +2254,14 @@ bool sdlRenderCoordinatesToWindow(
 ) {
   final sdlRenderCoordinatesToWindowLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(
+        Bool Function(
           Pointer<SdlRenderer> renderer,
           Float x,
           Float y,
           Pointer<Float> windowX,
           Pointer<Float> windowY,
         ),
-        int Function(
+        bool Function(
           Pointer<SdlRenderer> renderer,
           double x,
           double y,
@@ -2277,13 +2270,12 @@ bool sdlRenderCoordinatesToWindow(
         )
       >('SDL_RenderCoordinatesToWindow');
   return sdlRenderCoordinatesToWindowLookupFunction(
-        renderer,
-        x,
-        y,
-        windowX,
-        windowY,
-      ) ==
-      1;
+    renderer,
+    x,
+    y,
+    windowX,
+    windowY,
+  );
 }
 
 ///
@@ -2330,10 +2322,10 @@ bool sdlConvertEventToRenderCoordinates(
 ) {
   final sdlConvertEventToRenderCoordinatesLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(Pointer<SdlRenderer> renderer, Pointer<SdlEvent> event),
-        int Function(Pointer<SdlRenderer> renderer, Pointer<SdlEvent> event)
+        Bool Function(Pointer<SdlRenderer> renderer, Pointer<SdlEvent> event),
+        bool Function(Pointer<SdlRenderer> renderer, Pointer<SdlEvent> event)
       >('SDL_ConvertEventToRenderCoordinates');
-  return sdlConvertEventToRenderCoordinatesLookupFunction(renderer, event) == 1;
+  return sdlConvertEventToRenderCoordinatesLookupFunction(renderer, event);
 }
 
 ///
@@ -2371,10 +2363,10 @@ bool sdlSetRenderViewport(
 ) {
   final sdlSetRenderViewportLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(Pointer<SdlRenderer> renderer, Pointer<SdlRect> rect),
-        int Function(Pointer<SdlRenderer> renderer, Pointer<SdlRect> rect)
+        Bool Function(Pointer<SdlRenderer> renderer, Pointer<SdlRect> rect),
+        bool Function(Pointer<SdlRenderer> renderer, Pointer<SdlRect> rect)
       >('SDL_SetRenderViewport');
-  return sdlSetRenderViewportLookupFunction(renderer, rect) == 1;
+  return sdlSetRenderViewportLookupFunction(renderer, rect);
 }
 
 ///
@@ -2405,10 +2397,10 @@ bool sdlGetRenderViewport(
 ) {
   final sdlGetRenderViewportLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(Pointer<SdlRenderer> renderer, Pointer<SdlRect> rect),
-        int Function(Pointer<SdlRenderer> renderer, Pointer<SdlRect> rect)
+        Bool Function(Pointer<SdlRenderer> renderer, Pointer<SdlRect> rect),
+        bool Function(Pointer<SdlRenderer> renderer, Pointer<SdlRect> rect)
       >('SDL_GetRenderViewport');
-  return sdlGetRenderViewportLookupFunction(renderer, rect) == 1;
+  return sdlGetRenderViewportLookupFunction(renderer, rect);
 }
 
 ///
@@ -2438,10 +2430,10 @@ bool sdlGetRenderViewport(
 bool sdlRenderViewportSet(Pointer<SdlRenderer> renderer) {
   final sdlRenderViewportSetLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(Pointer<SdlRenderer> renderer),
-        int Function(Pointer<SdlRenderer> renderer)
+        Bool Function(Pointer<SdlRenderer> renderer),
+        bool Function(Pointer<SdlRenderer> renderer)
       >('SDL_RenderViewportSet');
-  return sdlRenderViewportSetLookupFunction(renderer) == 1;
+  return sdlRenderViewportSetLookupFunction(renderer);
 }
 
 ///
@@ -2474,10 +2466,10 @@ bool sdlGetRenderSafeArea(
 ) {
   final sdlGetRenderSafeAreaLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(Pointer<SdlRenderer> renderer, Pointer<SdlRect> rect),
-        int Function(Pointer<SdlRenderer> renderer, Pointer<SdlRect> rect)
+        Bool Function(Pointer<SdlRenderer> renderer, Pointer<SdlRect> rect),
+        bool Function(Pointer<SdlRenderer> renderer, Pointer<SdlRect> rect)
       >('SDL_GetRenderSafeArea');
-  return sdlGetRenderSafeAreaLookupFunction(renderer, rect) == 1;
+  return sdlGetRenderSafeAreaLookupFunction(renderer, rect);
 }
 
 ///
@@ -2509,10 +2501,10 @@ bool sdlSetRenderClipRect(
 ) {
   final sdlSetRenderClipRectLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(Pointer<SdlRenderer> renderer, Pointer<SdlRect> rect),
-        int Function(Pointer<SdlRenderer> renderer, Pointer<SdlRect> rect)
+        Bool Function(Pointer<SdlRenderer> renderer, Pointer<SdlRect> rect),
+        bool Function(Pointer<SdlRenderer> renderer, Pointer<SdlRect> rect)
       >('SDL_SetRenderClipRect');
-  return sdlSetRenderClipRectLookupFunction(renderer, rect) == 1;
+  return sdlSetRenderClipRectLookupFunction(renderer, rect);
 }
 
 ///
@@ -2544,10 +2536,10 @@ bool sdlGetRenderClipRect(
 ) {
   final sdlGetRenderClipRectLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(Pointer<SdlRenderer> renderer, Pointer<SdlRect> rect),
-        int Function(Pointer<SdlRenderer> renderer, Pointer<SdlRect> rect)
+        Bool Function(Pointer<SdlRenderer> renderer, Pointer<SdlRect> rect),
+        bool Function(Pointer<SdlRenderer> renderer, Pointer<SdlRect> rect)
       >('SDL_GetRenderClipRect');
-  return sdlGetRenderClipRectLookupFunction(renderer, rect) == 1;
+  return sdlGetRenderClipRectLookupFunction(renderer, rect);
 }
 
 ///
@@ -2574,10 +2566,10 @@ bool sdlGetRenderClipRect(
 bool sdlRenderClipEnabled(Pointer<SdlRenderer> renderer) {
   final sdlRenderClipEnabledLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(Pointer<SdlRenderer> renderer),
-        int Function(Pointer<SdlRenderer> renderer)
+        Bool Function(Pointer<SdlRenderer> renderer),
+        bool Function(Pointer<SdlRenderer> renderer)
       >('SDL_RenderClipEnabled');
-  return sdlRenderClipEnabledLookupFunction(renderer) == 1;
+  return sdlRenderClipEnabledLookupFunction(renderer);
 }
 
 ///
@@ -2617,18 +2609,18 @@ bool sdlSetRenderScale(
 ) {
   final sdlSetRenderScaleLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(
+        Bool Function(
           Pointer<SdlRenderer> renderer,
           Float scaleX,
           Float scaleY,
         ),
-        int Function(
+        bool Function(
           Pointer<SdlRenderer> renderer,
           double scaleX,
           double scaleY,
         )
       >('SDL_SetRenderScale');
-  return sdlSetRenderScaleLookupFunction(renderer, scaleX, scaleY) == 1;
+  return sdlSetRenderScaleLookupFunction(renderer, scaleX, scaleY);
 }
 
 ///
@@ -2660,18 +2652,18 @@ bool sdlGetRenderScale(
 ) {
   final sdlGetRenderScaleLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(
+        Bool Function(
           Pointer<SdlRenderer> renderer,
           Pointer<Float> scaleX,
           Pointer<Float> scaleY,
         ),
-        int Function(
+        bool Function(
           Pointer<SdlRenderer> renderer,
           Pointer<Float> scaleX,
           Pointer<Float> scaleY,
         )
       >('SDL_GetRenderScale');
-  return sdlGetRenderScaleLookupFunction(renderer, scaleX, scaleY) == 1;
+  return sdlGetRenderScaleLookupFunction(renderer, scaleX, scaleY);
 }
 
 ///
@@ -2710,16 +2702,16 @@ bool sdlSetRenderDrawColor(
 ) {
   final sdlSetRenderDrawColorLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(
+        Bool Function(
           Pointer<SdlRenderer> renderer,
           Uint8 r,
           Uint8 g,
           Uint8 b,
           Uint8 a,
         ),
-        int Function(Pointer<SdlRenderer> renderer, int r, int g, int b, int a)
+        bool Function(Pointer<SdlRenderer> renderer, int r, int g, int b, int a)
       >('SDL_SetRenderDrawColor');
-  return sdlSetRenderDrawColorLookupFunction(renderer, r, g, b, a) == 1;
+  return sdlSetRenderDrawColorLookupFunction(renderer, r, g, b, a);
 }
 
 ///
@@ -2758,14 +2750,14 @@ bool sdlSetRenderDrawColorFloat(
 ) {
   final sdlSetRenderDrawColorFloatLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(
+        Bool Function(
           Pointer<SdlRenderer> renderer,
           Float r,
           Float g,
           Float b,
           Float a,
         ),
-        int Function(
+        bool Function(
           Pointer<SdlRenderer> renderer,
           double r,
           double g,
@@ -2773,7 +2765,7 @@ bool sdlSetRenderDrawColorFloat(
           double a,
         )
       >('SDL_SetRenderDrawColorFloat');
-  return sdlSetRenderDrawColorFloatLookupFunction(renderer, r, g, b, a) == 1;
+  return sdlSetRenderDrawColorFloatLookupFunction(renderer, r, g, b, a);
 }
 
 ///
@@ -2811,14 +2803,14 @@ bool sdlGetRenderDrawColor(
 ) {
   final sdlGetRenderDrawColorLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(
+        Bool Function(
           Pointer<SdlRenderer> renderer,
           Pointer<Uint8> r,
           Pointer<Uint8> g,
           Pointer<Uint8> b,
           Pointer<Uint8> a,
         ),
-        int Function(
+        bool Function(
           Pointer<SdlRenderer> renderer,
           Pointer<Uint8> r,
           Pointer<Uint8> g,
@@ -2826,7 +2818,7 @@ bool sdlGetRenderDrawColor(
           Pointer<Uint8> a,
         )
       >('SDL_GetRenderDrawColor');
-  return sdlGetRenderDrawColorLookupFunction(renderer, r, g, b, a) == 1;
+  return sdlGetRenderDrawColorLookupFunction(renderer, r, g, b, a);
 }
 
 ///
@@ -2864,14 +2856,14 @@ bool sdlGetRenderDrawColorFloat(
 ) {
   final sdlGetRenderDrawColorFloatLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(
+        Bool Function(
           Pointer<SdlRenderer> renderer,
           Pointer<Float> r,
           Pointer<Float> g,
           Pointer<Float> b,
           Pointer<Float> a,
         ),
-        int Function(
+        bool Function(
           Pointer<SdlRenderer> renderer,
           Pointer<Float> r,
           Pointer<Float> g,
@@ -2879,7 +2871,7 @@ bool sdlGetRenderDrawColorFloat(
           Pointer<Float> a,
         )
       >('SDL_GetRenderDrawColorFloat');
-  return sdlGetRenderDrawColorFloatLookupFunction(renderer, r, g, b, a) == 1;
+  return sdlGetRenderDrawColorFloatLookupFunction(renderer, r, g, b, a);
 }
 
 ///
@@ -2911,10 +2903,10 @@ bool sdlGetRenderDrawColorFloat(
 bool sdlSetRenderColorScale(Pointer<SdlRenderer> renderer, double scale) {
   final sdlSetRenderColorScaleLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(Pointer<SdlRenderer> renderer, Float scale),
-        int Function(Pointer<SdlRenderer> renderer, double scale)
+        Bool Function(Pointer<SdlRenderer> renderer, Float scale),
+        bool Function(Pointer<SdlRenderer> renderer, double scale)
       >('SDL_SetRenderColorScale');
-  return sdlSetRenderColorScaleLookupFunction(renderer, scale) == 1;
+  return sdlSetRenderColorScaleLookupFunction(renderer, scale);
 }
 
 ///
@@ -2941,10 +2933,10 @@ bool sdlGetRenderColorScale(
 ) {
   final sdlGetRenderColorScaleLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(Pointer<SdlRenderer> renderer, Pointer<Float> scale),
-        int Function(Pointer<SdlRenderer> renderer, Pointer<Float> scale)
+        Bool Function(Pointer<SdlRenderer> renderer, Pointer<Float> scale),
+        bool Function(Pointer<SdlRenderer> renderer, Pointer<Float> scale)
       >('SDL_GetRenderColorScale');
-  return sdlGetRenderColorScaleLookupFunction(renderer, scale) == 1;
+  return sdlGetRenderColorScaleLookupFunction(renderer, scale);
 }
 
 ///
@@ -2970,10 +2962,10 @@ bool sdlGetRenderColorScale(
 bool sdlSetRenderDrawBlendMode(Pointer<SdlRenderer> renderer, int blendMode) {
   final sdlSetRenderDrawBlendModeLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(Pointer<SdlRenderer> renderer, Uint32 blendMode),
-        int Function(Pointer<SdlRenderer> renderer, int blendMode)
+        Bool Function(Pointer<SdlRenderer> renderer, Uint32 blendMode),
+        bool Function(Pointer<SdlRenderer> renderer, int blendMode)
       >('SDL_SetRenderDrawBlendMode');
-  return sdlSetRenderDrawBlendModeLookupFunction(renderer, blendMode) == 1;
+  return sdlSetRenderDrawBlendModeLookupFunction(renderer, blendMode);
 }
 
 ///
@@ -3000,13 +2992,10 @@ bool sdlGetRenderDrawBlendMode(
 ) {
   final sdlGetRenderDrawBlendModeLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(
-          Pointer<SdlRenderer> renderer,
-          Pointer<Uint32> blendMode,
-        ),
-        int Function(Pointer<SdlRenderer> renderer, Pointer<Uint32> blendMode)
+        Bool Function(Pointer<SdlRenderer> renderer, Pointer<Uint32> blendMode),
+        bool Function(Pointer<SdlRenderer> renderer, Pointer<Uint32> blendMode)
       >('SDL_GetRenderDrawBlendMode');
-  return sdlGetRenderDrawBlendModeLookupFunction(renderer, blendMode) == 1;
+  return sdlGetRenderDrawBlendModeLookupFunction(renderer, blendMode);
 }
 
 ///
@@ -3034,10 +3023,10 @@ bool sdlGetRenderDrawBlendMode(
 bool sdlRenderClear(Pointer<SdlRenderer> renderer) {
   final sdlRenderClearLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(Pointer<SdlRenderer> renderer),
-        int Function(Pointer<SdlRenderer> renderer)
+        Bool Function(Pointer<SdlRenderer> renderer),
+        bool Function(Pointer<SdlRenderer> renderer)
       >('SDL_RenderClear');
-  return sdlRenderClearLookupFunction(renderer) == 1;
+  return sdlRenderClearLookupFunction(renderer);
 }
 
 ///
@@ -3062,10 +3051,10 @@ bool sdlRenderClear(Pointer<SdlRenderer> renderer) {
 bool sdlRenderPoint(Pointer<SdlRenderer> renderer, double x, double y) {
   final sdlRenderPointLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(Pointer<SdlRenderer> renderer, Float x, Float y),
-        int Function(Pointer<SdlRenderer> renderer, double x, double y)
+        Bool Function(Pointer<SdlRenderer> renderer, Float x, Float y),
+        bool Function(Pointer<SdlRenderer> renderer, double x, double y)
       >('SDL_RenderPoint');
-  return sdlRenderPointLookupFunction(renderer, x, y) == 1;
+  return sdlRenderPointLookupFunction(renderer, x, y);
 }
 
 ///
@@ -3094,18 +3083,18 @@ bool sdlRenderPoints(
 ) {
   final sdlRenderPointsLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(
+        Bool Function(
           Pointer<SdlRenderer> renderer,
           Pointer<SdlFPoint> points,
           Int32 count,
         ),
-        int Function(
+        bool Function(
           Pointer<SdlRenderer> renderer,
           Pointer<SdlFPoint> points,
           int count,
         )
       >('SDL_RenderPoints');
-  return sdlRenderPointsLookupFunction(renderer, points, count) == 1;
+  return sdlRenderPointsLookupFunction(renderer, points, count);
 }
 
 ///
@@ -3138,14 +3127,14 @@ bool sdlRenderLine(
 ) {
   final sdlRenderLineLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(
+        Bool Function(
           Pointer<SdlRenderer> renderer,
           Float x1,
           Float y1,
           Float x2,
           Float y2,
         ),
-        int Function(
+        bool Function(
           Pointer<SdlRenderer> renderer,
           double x1,
           double y1,
@@ -3153,7 +3142,7 @@ bool sdlRenderLine(
           double y2,
         )
       >('SDL_RenderLine');
-  return sdlRenderLineLookupFunction(renderer, x1, y1, x2, y2) == 1;
+  return sdlRenderLineLookupFunction(renderer, x1, y1, x2, y2);
 }
 
 ///
@@ -3183,18 +3172,18 @@ bool sdlRenderLines(
 ) {
   final sdlRenderLinesLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(
+        Bool Function(
           Pointer<SdlRenderer> renderer,
           Pointer<SdlFPoint> points,
           Int32 count,
         ),
-        int Function(
+        bool Function(
           Pointer<SdlRenderer> renderer,
           Pointer<SdlFPoint> points,
           int count,
         )
       >('SDL_RenderLines');
-  return sdlRenderLinesLookupFunction(renderer, points, count) == 1;
+  return sdlRenderLinesLookupFunction(renderer, points, count);
 }
 
 ///
@@ -3219,10 +3208,10 @@ bool sdlRenderLines(
 bool sdlRenderRect(Pointer<SdlRenderer> renderer, Pointer<SdlFRect> rect) {
   final sdlRenderRectLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(Pointer<SdlRenderer> renderer, Pointer<SdlFRect> rect),
-        int Function(Pointer<SdlRenderer> renderer, Pointer<SdlFRect> rect)
+        Bool Function(Pointer<SdlRenderer> renderer, Pointer<SdlFRect> rect),
+        bool Function(Pointer<SdlRenderer> renderer, Pointer<SdlFRect> rect)
       >('SDL_RenderRect');
-  return sdlRenderRectLookupFunction(renderer, rect) == 1;
+  return sdlRenderRectLookupFunction(renderer, rect);
 }
 
 ///
@@ -3252,18 +3241,18 @@ bool sdlRenderRects(
 ) {
   final sdlRenderRectsLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(
+        Bool Function(
           Pointer<SdlRenderer> renderer,
           Pointer<SdlFRect> rects,
           Int32 count,
         ),
-        int Function(
+        bool Function(
           Pointer<SdlRenderer> renderer,
           Pointer<SdlFRect> rects,
           int count,
         )
       >('SDL_RenderRects');
-  return sdlRenderRectsLookupFunction(renderer, rects, count) == 1;
+  return sdlRenderRectsLookupFunction(renderer, rects, count);
 }
 
 ///
@@ -3289,10 +3278,10 @@ bool sdlRenderRects(
 bool sdlRenderFillRect(Pointer<SdlRenderer> renderer, Pointer<SdlFRect> rect) {
   final sdlRenderFillRectLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(Pointer<SdlRenderer> renderer, Pointer<SdlFRect> rect),
-        int Function(Pointer<SdlRenderer> renderer, Pointer<SdlFRect> rect)
+        Bool Function(Pointer<SdlRenderer> renderer, Pointer<SdlFRect> rect),
+        bool Function(Pointer<SdlRenderer> renderer, Pointer<SdlFRect> rect)
       >('SDL_RenderFillRect');
-  return sdlRenderFillRectLookupFunction(renderer, rect) == 1;
+  return sdlRenderFillRectLookupFunction(renderer, rect);
 }
 
 ///
@@ -3322,18 +3311,18 @@ bool sdlRenderFillRects(
 ) {
   final sdlRenderFillRectsLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(
+        Bool Function(
           Pointer<SdlRenderer> renderer,
           Pointer<SdlFRect> rects,
           Int32 count,
         ),
-        int Function(
+        bool Function(
           Pointer<SdlRenderer> renderer,
           Pointer<SdlFRect> rects,
           int count,
         )
       >('SDL_RenderFillRects');
-  return sdlRenderFillRectsLookupFunction(renderer, rects, count) == 1;
+  return sdlRenderFillRectsLookupFunction(renderer, rects, count);
 }
 
 ///
@@ -3368,21 +3357,20 @@ bool sdlRenderTexture(
 ) {
   final sdlRenderTextureLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(
+        Bool Function(
           Pointer<SdlRenderer> renderer,
           Pointer<SdlTexture> texture,
           Pointer<SdlFRect> srcrect,
           Pointer<SdlFRect> dstrect,
         ),
-        int Function(
+        bool Function(
           Pointer<SdlRenderer> renderer,
           Pointer<SdlTexture> texture,
           Pointer<SdlFRect> srcrect,
           Pointer<SdlFRect> dstrect,
         )
       >('SDL_RenderTexture');
-  return sdlRenderTextureLookupFunction(renderer, texture, srcrect, dstrect) ==
-      1;
+  return sdlRenderTextureLookupFunction(renderer, texture, srcrect, dstrect);
 }
 
 ///
@@ -3426,7 +3414,7 @@ bool sdlRenderTextureRotated(
 ) {
   final sdlRenderTextureRotatedLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(
+        Bool Function(
           Pointer<SdlRenderer> renderer,
           Pointer<SdlTexture> texture,
           Pointer<SdlFRect> srcrect,
@@ -3435,7 +3423,7 @@ bool sdlRenderTextureRotated(
           Pointer<SdlFPoint> center,
           Int32 flip,
         ),
-        int Function(
+        bool Function(
           Pointer<SdlRenderer> renderer,
           Pointer<SdlTexture> texture,
           Pointer<SdlFRect> srcrect,
@@ -3446,15 +3434,14 @@ bool sdlRenderTextureRotated(
         )
       >('SDL_RenderTextureRotated');
   return sdlRenderTextureRotatedLookupFunction(
-        renderer,
-        texture,
-        srcrect,
-        dstrect,
-        angle,
-        center,
-        flip,
-      ) ==
-      1;
+    renderer,
+    texture,
+    srcrect,
+    dstrect,
+    angle,
+    center,
+    flip,
+  );
 }
 
 ///
@@ -3497,7 +3484,7 @@ bool sdlRenderTextureAffine(
 ) {
   final sdlRenderTextureAffineLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(
+        Bool Function(
           Pointer<SdlRenderer> renderer,
           Pointer<SdlTexture> texture,
           Pointer<SdlFRect> srcrect,
@@ -3505,7 +3492,7 @@ bool sdlRenderTextureAffine(
           Pointer<SdlFPoint> right,
           Pointer<SdlFPoint> down,
         ),
-        int Function(
+        bool Function(
           Pointer<SdlRenderer> renderer,
           Pointer<SdlTexture> texture,
           Pointer<SdlFRect> srcrect,
@@ -3515,14 +3502,13 @@ bool sdlRenderTextureAffine(
         )
       >('SDL_RenderTextureAffine');
   return sdlRenderTextureAffineLookupFunction(
-        renderer,
-        texture,
-        srcrect,
-        origin,
-        right,
-        down,
-      ) ==
-      1;
+    renderer,
+    texture,
+    srcrect,
+    origin,
+    right,
+    down,
+  );
 }
 
 ///
@@ -3563,14 +3549,14 @@ bool sdlRenderTextureTiled(
 ) {
   final sdlRenderTextureTiledLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(
+        Bool Function(
           Pointer<SdlRenderer> renderer,
           Pointer<SdlTexture> texture,
           Pointer<SdlFRect> srcrect,
           Float scale,
           Pointer<SdlFRect> dstrect,
         ),
-        int Function(
+        bool Function(
           Pointer<SdlRenderer> renderer,
           Pointer<SdlTexture> texture,
           Pointer<SdlFRect> srcrect,
@@ -3579,13 +3565,12 @@ bool sdlRenderTextureTiled(
         )
       >('SDL_RenderTextureTiled');
   return sdlRenderTextureTiledLookupFunction(
-        renderer,
-        texture,
-        srcrect,
-        scale,
-        dstrect,
-      ) ==
-      1;
+    renderer,
+    texture,
+    srcrect,
+    scale,
+    dstrect,
+  );
 }
 
 ///
@@ -3638,7 +3623,7 @@ bool sdlRenderTexture9Grid(
 ) {
   final sdlRenderTexture9GridLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(
+        Bool Function(
           Pointer<SdlRenderer> renderer,
           Pointer<SdlTexture> texture,
           Pointer<SdlFRect> srcrect,
@@ -3649,7 +3634,7 @@ bool sdlRenderTexture9Grid(
           Float scale,
           Pointer<SdlFRect> dstrect,
         ),
-        int Function(
+        bool Function(
           Pointer<SdlRenderer> renderer,
           Pointer<SdlTexture> texture,
           Pointer<SdlFRect> srcrect,
@@ -3662,17 +3647,16 @@ bool sdlRenderTexture9Grid(
         )
       >('SDL_RenderTexture9Grid');
   return sdlRenderTexture9GridLookupFunction(
-        renderer,
-        texture,
-        srcrect,
-        leftWidth,
-        rightWidth,
-        topHeight,
-        bottomHeight,
-        scale,
-        dstrect,
-      ) ==
-      1;
+    renderer,
+    texture,
+    srcrect,
+    leftWidth,
+    rightWidth,
+    topHeight,
+    bottomHeight,
+    scale,
+    dstrect,
+  );
 }
 
 ///
@@ -3729,7 +3713,7 @@ bool sdlRenderTexture9GridTiled(
 ) {
   final sdlRenderTexture9GridTiledLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(
+        Bool Function(
           Pointer<SdlRenderer> renderer,
           Pointer<SdlTexture> texture,
           Pointer<SdlFRect> srcrect,
@@ -3741,7 +3725,7 @@ bool sdlRenderTexture9GridTiled(
           Pointer<SdlFRect> dstrect,
           Float tileScale,
         ),
-        int Function(
+        bool Function(
           Pointer<SdlRenderer> renderer,
           Pointer<SdlTexture> texture,
           Pointer<SdlFRect> srcrect,
@@ -3755,18 +3739,17 @@ bool sdlRenderTexture9GridTiled(
         )
       >('SDL_RenderTexture9GridTiled');
   return sdlRenderTexture9GridTiledLookupFunction(
-        renderer,
-        texture,
-        srcrect,
-        leftWidth,
-        rightWidth,
-        topHeight,
-        bottomHeight,
-        scale,
-        dstrect,
-        tileScale,
-      ) ==
-      1;
+    renderer,
+    texture,
+    srcrect,
+    leftWidth,
+    rightWidth,
+    topHeight,
+    bottomHeight,
+    scale,
+    dstrect,
+    tileScale,
+  );
 }
 
 ///
@@ -3808,7 +3791,7 @@ bool sdlRenderGeometry(
 ) {
   final sdlRenderGeometryLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(
+        Bool Function(
           Pointer<SdlRenderer> renderer,
           Pointer<SdlTexture> texture,
           Pointer<SdlVertex> vertices,
@@ -3816,7 +3799,7 @@ bool sdlRenderGeometry(
           Pointer<Int32> indices,
           Int32 numIndices,
         ),
-        int Function(
+        bool Function(
           Pointer<SdlRenderer> renderer,
           Pointer<SdlTexture> texture,
           Pointer<SdlVertex> vertices,
@@ -3826,14 +3809,13 @@ bool sdlRenderGeometry(
         )
       >('SDL_RenderGeometry');
   return sdlRenderGeometryLookupFunction(
-        renderer,
-        texture,
-        vertices,
-        numVertices,
-        indices,
-        numIndices,
-      ) ==
-      1;
+    renderer,
+    texture,
+    vertices,
+    numVertices,
+    indices,
+    numIndices,
+  );
 }
 
 ///
@@ -3880,13 +3862,13 @@ bool sdlRenderGeometryRaw(
   Pointer<Float> uv,
   int uvStride,
   int numVertices,
-  Pointer<NativeType> indices,
+  Pointer<Void> indices,
   int numIndices,
   int sizeIndices,
 ) {
   final sdlRenderGeometryRawLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(
+        Bool Function(
           Pointer<SdlRenderer> renderer,
           Pointer<SdlTexture> texture,
           Pointer<Float> xy,
@@ -3896,11 +3878,11 @@ bool sdlRenderGeometryRaw(
           Pointer<Float> uv,
           Int32 uvStride,
           Int32 numVertices,
-          Pointer<NativeType> indices,
+          Pointer<Void> indices,
           Int32 numIndices,
           Int32 sizeIndices,
         ),
-        int Function(
+        bool Function(
           Pointer<SdlRenderer> renderer,
           Pointer<SdlTexture> texture,
           Pointer<Float> xy,
@@ -3910,26 +3892,25 @@ bool sdlRenderGeometryRaw(
           Pointer<Float> uv,
           int uvStride,
           int numVertices,
-          Pointer<NativeType> indices,
+          Pointer<Void> indices,
           int numIndices,
           int sizeIndices,
         )
       >('SDL_RenderGeometryRaw');
   return sdlRenderGeometryRawLookupFunction(
-        renderer,
-        texture,
-        xy,
-        xyStride,
-        color,
-        colorStride,
-        uv,
-        uvStride,
-        numVertices,
-        indices,
-        numIndices,
-        sizeIndices,
-      ) ==
-      1;
+    renderer,
+    texture,
+    xy,
+    xyStride,
+    color,
+    colorStride,
+    uv,
+    uvStride,
+    numVertices,
+    indices,
+    numIndices,
+    sizeIndices,
+  );
 }
 
 ///
@@ -3962,11 +3943,10 @@ bool sdlSetRenderTextureAddressMode(
 ) {
   final sdlSetRenderTextureAddressModeLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(Pointer<SdlRenderer> renderer, Int32 uMode, Int32 vMode),
-        int Function(Pointer<SdlRenderer> renderer, int uMode, int vMode)
+        Bool Function(Pointer<SdlRenderer> renderer, Int32 uMode, Int32 vMode),
+        bool Function(Pointer<SdlRenderer> renderer, int uMode, int vMode)
       >('SDL_SetRenderTextureAddressMode');
-  return sdlSetRenderTextureAddressModeLookupFunction(renderer, uMode, vMode) ==
-      1;
+  return sdlSetRenderTextureAddressModeLookupFunction(renderer, uMode, vMode);
 }
 
 ///
@@ -3999,19 +3979,18 @@ bool sdlGetRenderTextureAddressMode(
 ) {
   final sdlGetRenderTextureAddressModeLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(
+        Bool Function(
           Pointer<SdlRenderer> renderer,
           Pointer<Int32> uMode,
           Pointer<Int32> vMode,
         ),
-        int Function(
+        bool Function(
           Pointer<SdlRenderer> renderer,
           Pointer<Int32> uMode,
           Pointer<Int32> vMode,
         )
       >('SDL_GetRenderTextureAddressMode');
-  return sdlGetRenderTextureAddressModeLookupFunction(renderer, uMode, vMode) ==
-      1;
+  return sdlGetRenderTextureAddressModeLookupFunction(renderer, uMode, vMode);
 }
 
 ///
@@ -4115,10 +4094,10 @@ Pointer<SdlSurface> sdlRenderReadPixels(
 bool sdlRenderPresent(Pointer<SdlRenderer> renderer) {
   final sdlRenderPresentLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(Pointer<SdlRenderer> renderer),
-        int Function(Pointer<SdlRenderer> renderer)
+        Bool Function(Pointer<SdlRenderer> renderer),
+        bool Function(Pointer<SdlRenderer> renderer)
       >('SDL_RenderPresent');
-  return sdlRenderPresentLookupFunction(renderer) == 1;
+  return sdlRenderPresentLookupFunction(renderer);
 }
 
 ///
@@ -4214,10 +4193,10 @@ void sdlDestroyRenderer(Pointer<SdlRenderer> renderer) {
 bool sdlFlushRenderer(Pointer<SdlRenderer> renderer) {
   final sdlFlushRendererLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(Pointer<SdlRenderer> renderer),
-        int Function(Pointer<SdlRenderer> renderer)
+        Bool Function(Pointer<SdlRenderer> renderer),
+        bool Function(Pointer<SdlRenderer> renderer)
       >('SDL_FlushRenderer');
-  return sdlFlushRendererLookupFunction(renderer) == 1;
+  return sdlFlushRendererLookupFunction(renderer);
 }
 
 ///
@@ -4240,11 +4219,11 @@ bool sdlFlushRenderer(Pointer<SdlRenderer> renderer) {
 /// extern SDL_DECLSPEC void * SDLCALL SDL_GetRenderMetalLayer(SDL_Renderer *renderer)
 /// ```
 /// {@category render}
-Pointer<NativeType> sdlGetRenderMetalLayer(Pointer<SdlRenderer> renderer) {
+Pointer<Void> sdlGetRenderMetalLayer(Pointer<SdlRenderer> renderer) {
   final sdlGetRenderMetalLayerLookupFunction = _libSdl
       .lookupFunction<
-        Pointer<NativeType> Function(Pointer<SdlRenderer> renderer),
-        Pointer<NativeType> Function(Pointer<SdlRenderer> renderer)
+        Pointer<Void> Function(Pointer<SdlRenderer> renderer),
+        Pointer<Void> Function(Pointer<SdlRenderer> renderer)
       >('SDL_GetRenderMetalLayer');
   return sdlGetRenderMetalLayerLookupFunction(renderer);
 }
@@ -4274,13 +4253,11 @@ Pointer<NativeType> sdlGetRenderMetalLayer(Pointer<SdlRenderer> renderer) {
 /// extern SDL_DECLSPEC void * SDLCALL SDL_GetRenderMetalCommandEncoder(SDL_Renderer *renderer)
 /// ```
 /// {@category render}
-Pointer<NativeType> sdlGetRenderMetalCommandEncoder(
-  Pointer<SdlRenderer> renderer,
-) {
+Pointer<Void> sdlGetRenderMetalCommandEncoder(Pointer<SdlRenderer> renderer) {
   final sdlGetRenderMetalCommandEncoderLookupFunction = _libSdl
       .lookupFunction<
-        Pointer<NativeType> Function(Pointer<SdlRenderer> renderer),
-        Pointer<NativeType> Function(Pointer<SdlRenderer> renderer)
+        Pointer<Void> Function(Pointer<SdlRenderer> renderer),
+        Pointer<Void> Function(Pointer<SdlRenderer> renderer)
       >('SDL_GetRenderMetalCommandEncoder');
   return sdlGetRenderMetalCommandEncoderLookupFunction(renderer);
 }
@@ -4325,13 +4302,13 @@ bool sdlAddVulkanRenderSemaphores(
 ) {
   final sdlAddVulkanRenderSemaphoresLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(
+        Bool Function(
           Pointer<SdlRenderer> renderer,
           Uint32 waitStageMask,
           Int64 waitSemaphore,
           Int64 signalSemaphore,
         ),
-        int Function(
+        bool Function(
           Pointer<SdlRenderer> renderer,
           int waitStageMask,
           int waitSemaphore,
@@ -4339,12 +4316,11 @@ bool sdlAddVulkanRenderSemaphores(
         )
       >('SDL_AddVulkanRenderSemaphores');
   return sdlAddVulkanRenderSemaphoresLookupFunction(
-        renderer,
-        waitStageMask,
-        waitSemaphore,
-        signalSemaphore,
-      ) ==
-      1;
+    renderer,
+    waitStageMask,
+    waitSemaphore,
+    signalSemaphore,
+  );
 }
 
 ///
@@ -4377,10 +4353,10 @@ bool sdlAddVulkanRenderSemaphores(
 bool sdlSetRenderVSync(Pointer<SdlRenderer> renderer, int vsync) {
   final sdlSetRenderVSyncLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(Pointer<SdlRenderer> renderer, Int32 vsync),
-        int Function(Pointer<SdlRenderer> renderer, int vsync)
+        Bool Function(Pointer<SdlRenderer> renderer, Int32 vsync),
+        bool Function(Pointer<SdlRenderer> renderer, int vsync)
       >('SDL_SetRenderVSync');
-  return sdlSetRenderVSyncLookupFunction(renderer, vsync) == 1;
+  return sdlSetRenderVSyncLookupFunction(renderer, vsync);
 }
 
 ///
@@ -4405,10 +4381,10 @@ bool sdlSetRenderVSync(Pointer<SdlRenderer> renderer, int vsync) {
 bool sdlGetRenderVSync(Pointer<SdlRenderer> renderer, Pointer<Int32> vsync) {
   final sdlGetRenderVSyncLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(Pointer<SdlRenderer> renderer, Pointer<Int32> vsync),
-        int Function(Pointer<SdlRenderer> renderer, Pointer<Int32> vsync)
+        Bool Function(Pointer<SdlRenderer> renderer, Pointer<Int32> vsync),
+        bool Function(Pointer<SdlRenderer> renderer, Pointer<Int32> vsync)
       >('SDL_GetRenderVSync');
-  return sdlGetRenderVSyncLookupFunction(renderer, vsync) == 1;
+  return sdlGetRenderVSyncLookupFunction(renderer, vsync);
 }
 
 ///
@@ -4462,13 +4438,13 @@ bool sdlRenderDebugText(
 ) {
   final sdlRenderDebugTextLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(
+        Bool Function(
           Pointer<SdlRenderer> renderer,
           Float x,
           Float y,
           Pointer<Utf8> str,
         ),
-        int Function(
+        bool Function(
           Pointer<SdlRenderer> renderer,
           double x,
           double y,
@@ -4476,8 +4452,7 @@ bool sdlRenderDebugText(
         )
       >('SDL_RenderDebugText');
   final strPointer = str != null ? str.toNativeUtf8() : nullptr;
-  final result =
-      sdlRenderDebugTextLookupFunction(renderer, x, y, strPointer) == 1;
+  final result = sdlRenderDebugTextLookupFunction(renderer, x, y, strPointer);
   calloc.free(strPointer);
   return result;
 }
@@ -4520,13 +4495,13 @@ bool sdlRenderDebugTextFormat(
 ) {
   final sdlRenderDebugTextFormatLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(
+        Bool Function(
           Pointer<SdlRenderer> renderer,
           Float x,
           Float y,
           Pointer<Utf8> fmt,
         ),
-        int Function(
+        bool Function(
           Pointer<SdlRenderer> renderer,
           double x,
           double y,
@@ -4534,8 +4509,12 @@ bool sdlRenderDebugTextFormat(
         )
       >('SDL_RenderDebugTextFormat');
   final fmtPointer = fmt != null ? fmt.toNativeUtf8() : nullptr;
-  final result =
-      sdlRenderDebugTextFormatLookupFunction(renderer, x, y, fmtPointer) == 1;
+  final result = sdlRenderDebugTextFormatLookupFunction(
+    renderer,
+    x,
+    y,
+    fmtPointer,
+  );
   calloc.free(fmtPointer);
   return result;
 }
@@ -4566,10 +4545,10 @@ bool sdlSetDefaultTextureScaleMode(
 ) {
   final sdlSetDefaultTextureScaleModeLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(Pointer<SdlRenderer> renderer, Int32 scaleMode),
-        int Function(Pointer<SdlRenderer> renderer, int scaleMode)
+        Bool Function(Pointer<SdlRenderer> renderer, Int32 scaleMode),
+        bool Function(Pointer<SdlRenderer> renderer, int scaleMode)
       >('SDL_SetDefaultTextureScaleMode');
-  return sdlSetDefaultTextureScaleModeLookupFunction(renderer, scaleMode) == 1;
+  return sdlSetDefaultTextureScaleModeLookupFunction(renderer, scaleMode);
 }
 
 ///
@@ -4598,10 +4577,10 @@ bool sdlGetDefaultTextureScaleMode(
 ) {
   final sdlGetDefaultTextureScaleModeLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(Pointer<SdlRenderer> renderer, Pointer<Int32> scaleMode),
-        int Function(Pointer<SdlRenderer> renderer, Pointer<Int32> scaleMode)
+        Bool Function(Pointer<SdlRenderer> renderer, Pointer<Int32> scaleMode),
+        bool Function(Pointer<SdlRenderer> renderer, Pointer<Int32> scaleMode)
       >('SDL_GetDefaultTextureScaleMode');
-  return sdlGetDefaultTextureScaleModeLookupFunction(renderer, scaleMode) == 1;
+  return sdlGetDefaultTextureScaleModeLookupFunction(renderer, scaleMode);
 }
 
 ///
@@ -4672,23 +4651,22 @@ bool sdlSetGpuRenderStateSamplerBindings(
 ) {
   final sdlSetGpuRenderStateSamplerBindingsLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(
+        Bool Function(
           Pointer<SdlGpuRenderState> state,
           Int32 numSamplerBindings,
           Pointer<SdlGpuTextureSamplerBinding> samplerBindings,
         ),
-        int Function(
+        bool Function(
           Pointer<SdlGpuRenderState> state,
           int numSamplerBindings,
           Pointer<SdlGpuTextureSamplerBinding> samplerBindings,
         )
       >('SDL_SetGPURenderStateSamplerBindings');
   return sdlSetGpuRenderStateSamplerBindingsLookupFunction(
-        state,
-        numSamplerBindings,
-        samplerBindings,
-      ) ==
-      1;
+    state,
+    numSamplerBindings,
+    samplerBindings,
+  );
 }
 
 ///
@@ -4719,23 +4697,22 @@ bool sdlSetGpuRenderStateStorageTextures(
 ) {
   final sdlSetGpuRenderStateStorageTexturesLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(
+        Bool Function(
           Pointer<SdlGpuRenderState> state,
           Int32 numStorageTextures,
           Pointer<Pointer<SdlGpuTexture>> storageTextures,
         ),
-        int Function(
+        bool Function(
           Pointer<SdlGpuRenderState> state,
           int numStorageTextures,
           Pointer<Pointer<SdlGpuTexture>> storageTextures,
         )
       >('SDL_SetGPURenderStateStorageTextures');
   return sdlSetGpuRenderStateStorageTexturesLookupFunction(
-        state,
-        numStorageTextures,
-        storageTextures,
-      ) ==
-      1;
+    state,
+    numStorageTextures,
+    storageTextures,
+  );
 }
 
 ///
@@ -4766,23 +4743,22 @@ bool sdlSetGpuRenderStateStorageBuffers(
 ) {
   final sdlSetGpuRenderStateStorageBuffersLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(
+        Bool Function(
           Pointer<SdlGpuRenderState> state,
           Int32 numStorageBuffers,
           Pointer<Pointer<SdlGpuBuffer>> storageBuffers,
         ),
-        int Function(
+        bool Function(
           Pointer<SdlGpuRenderState> state,
           int numStorageBuffers,
           Pointer<Pointer<SdlGpuBuffer>> storageBuffers,
         )
       >('SDL_SetGPURenderStateStorageBuffers');
   return sdlSetGpuRenderStateStorageBuffersLookupFunction(
-        state,
-        numStorageBuffers,
-        storageBuffers,
-      ) ==
-      1;
+    state,
+    numStorageBuffers,
+    storageBuffers,
+  );
 }
 
 ///
@@ -4810,31 +4786,30 @@ bool sdlSetGpuRenderStateStorageBuffers(
 bool sdlSetGpuRenderStateFragmentUniforms(
   Pointer<SdlGpuRenderState> state,
   int slotIndex,
-  Pointer<NativeType> data,
+  Pointer<Void> data,
   int length,
 ) {
   final sdlSetGpuRenderStateFragmentUniformsLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(
+        Bool Function(
           Pointer<SdlGpuRenderState> state,
           Uint32 slotIndex,
-          Pointer<NativeType> data,
+          Pointer<Void> data,
           Uint32 length,
         ),
-        int Function(
+        bool Function(
           Pointer<SdlGpuRenderState> state,
           int slotIndex,
-          Pointer<NativeType> data,
+          Pointer<Void> data,
           int length,
         )
       >('SDL_SetGPURenderStateFragmentUniforms');
   return sdlSetGpuRenderStateFragmentUniformsLookupFunction(
-        state,
-        slotIndex,
-        data,
-        length,
-      ) ==
-      1;
+    state,
+    slotIndex,
+    data,
+    length,
+  );
 }
 
 ///
@@ -4863,16 +4838,16 @@ bool sdlSetGpuRenderState(
 ) {
   final sdlSetGpuRenderStateLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(
+        Bool Function(
           Pointer<SdlRenderer> renderer,
           Pointer<SdlGpuRenderState> state,
         ),
-        int Function(
+        bool Function(
           Pointer<SdlRenderer> renderer,
           Pointer<SdlGpuRenderState> state,
         )
       >('SDL_SetGPURenderState');
-  return sdlSetGpuRenderStateLookupFunction(renderer, state) == 1;
+  return sdlSetGpuRenderStateLookupFunction(renderer, state);
 }
 
 ///

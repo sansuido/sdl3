@@ -30,17 +30,17 @@ part of '../sdl.dart';
 /// {@category assert}
 void sdlSetAssertionHandler(
   Pointer<NativeFunction<SdlAssertionHandler>> handler,
-  Pointer<NativeType> userdata,
+  Pointer<Void> userdata,
 ) {
   final sdlSetAssertionHandlerLookupFunction = _libSdl
       .lookupFunction<
         Void Function(
           Pointer<NativeFunction<SdlAssertionHandler>> handler,
-          Pointer<NativeType> userdata,
+          Pointer<Void> userdata,
         ),
         void Function(
           Pointer<NativeFunction<SdlAssertionHandler>> handler,
-          Pointer<NativeType> userdata,
+          Pointer<Void> userdata,
         )
       >('SDL_SetAssertionHandler');
   return sdlSetAssertionHandlerLookupFunction(handler, userdata);
@@ -104,15 +104,15 @@ Pointer<NativeFunction<SdlAssertionHandler>> sdlGetDefaultAssertionHandler() {
 /// ```
 /// {@category assert}
 Pointer<NativeFunction<SdlAssertionHandler>> sdlGetAssertionHandler(
-  Pointer<Pointer<NativeType>> puserdata,
+  Pointer<Pointer<Void>> puserdata,
 ) {
   final sdlGetAssertionHandlerLookupFunction = _libSdl
       .lookupFunction<
         Pointer<NativeFunction<SdlAssertionHandler>> Function(
-          Pointer<Pointer<NativeType>> puserdata,
+          Pointer<Pointer<Void>> puserdata,
         ),
         Pointer<NativeFunction<SdlAssertionHandler>> Function(
-          Pointer<Pointer<NativeType>> puserdata,
+          Pointer<Pointer<Void>> puserdata,
         )
       >('SDL_GetAssertionHandler');
   return sdlGetAssertionHandlerLookupFunction(puserdata);

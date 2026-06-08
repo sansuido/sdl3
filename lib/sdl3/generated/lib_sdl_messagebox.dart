@@ -47,16 +47,16 @@ bool sdlShowMessageBox(
 ) {
   final sdlShowMessageBoxLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(
+        Bool Function(
           Pointer<SdlMessageBoxData> messageboxdata,
           Pointer<Int32> buttonid,
         ),
-        int Function(
+        bool Function(
           Pointer<SdlMessageBoxData> messageboxdata,
           Pointer<Int32> buttonid,
         )
       >('SDL_ShowMessageBox');
-  return sdlShowMessageBoxLookupFunction(messageboxdata, buttonid) == 1;
+  return sdlShowMessageBoxLookupFunction(messageboxdata, buttonid);
 }
 
 ///
@@ -113,13 +113,13 @@ bool sdlShowSimpleMessageBox(
 ) {
   final sdlShowSimpleMessageBoxLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(
+        Bool Function(
           Uint32 flags,
           Pointer<Utf8> title,
           Pointer<Utf8> message,
           Pointer<SdlWindow> window,
         ),
-        int Function(
+        bool Function(
           int flags,
           Pointer<Utf8> title,
           Pointer<Utf8> message,
@@ -128,14 +128,12 @@ bool sdlShowSimpleMessageBox(
       >('SDL_ShowSimpleMessageBox');
   final titlePointer = title != null ? title.toNativeUtf8() : nullptr;
   final messagePointer = message != null ? message.toNativeUtf8() : nullptr;
-  final result =
-      sdlShowSimpleMessageBoxLookupFunction(
-        flags,
-        titlePointer,
-        messagePointer,
-        window,
-      ) ==
-      1;
+  final result = sdlShowSimpleMessageBoxLookupFunction(
+    flags,
+    titlePointer,
+    messagePointer,
+    window,
+  );
   calloc
     ..free(titlePointer)
     ..free(messagePointer);

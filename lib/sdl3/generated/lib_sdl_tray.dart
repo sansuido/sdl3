@@ -519,10 +519,10 @@ String? sdlGetTrayEntryLabel(Pointer<SdlTrayEntry> entry) {
 void sdlSetTrayEntryChecked(Pointer<SdlTrayEntry> entry, bool checked) {
   final sdlSetTrayEntryCheckedLookupFunction = _libSdl
       .lookupFunction<
-        Void Function(Pointer<SdlTrayEntry> entry, Uint8 checked),
-        void Function(Pointer<SdlTrayEntry> entry, int checked)
+        Void Function(Pointer<SdlTrayEntry> entry, Bool checked),
+        void Function(Pointer<SdlTrayEntry> entry, bool checked)
       >('SDL_SetTrayEntryChecked');
-  return sdlSetTrayEntryCheckedLookupFunction(entry, checked ? 1 : 0);
+  return sdlSetTrayEntryCheckedLookupFunction(entry, checked);
 }
 
 ///
@@ -549,10 +549,10 @@ void sdlSetTrayEntryChecked(Pointer<SdlTrayEntry> entry, bool checked) {
 bool sdlGetTrayEntryChecked(Pointer<SdlTrayEntry> entry) {
   final sdlGetTrayEntryCheckedLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(Pointer<SdlTrayEntry> entry),
-        int Function(Pointer<SdlTrayEntry> entry)
+        Bool Function(Pointer<SdlTrayEntry> entry),
+        bool Function(Pointer<SdlTrayEntry> entry)
       >('SDL_GetTrayEntryChecked');
-  return sdlGetTrayEntryCheckedLookupFunction(entry) == 1;
+  return sdlGetTrayEntryCheckedLookupFunction(entry);
 }
 
 ///
@@ -577,10 +577,10 @@ bool sdlGetTrayEntryChecked(Pointer<SdlTrayEntry> entry) {
 void sdlSetTrayEntryEnabled(Pointer<SdlTrayEntry> entry, bool enabled) {
   final sdlSetTrayEntryEnabledLookupFunction = _libSdl
       .lookupFunction<
-        Void Function(Pointer<SdlTrayEntry> entry, Uint8 enabled),
-        void Function(Pointer<SdlTrayEntry> entry, int enabled)
+        Void Function(Pointer<SdlTrayEntry> entry, Bool enabled),
+        void Function(Pointer<SdlTrayEntry> entry, bool enabled)
       >('SDL_SetTrayEntryEnabled');
-  return sdlSetTrayEntryEnabledLookupFunction(entry, enabled ? 1 : 0);
+  return sdlSetTrayEntryEnabledLookupFunction(entry, enabled);
 }
 
 ///
@@ -605,10 +605,10 @@ void sdlSetTrayEntryEnabled(Pointer<SdlTrayEntry> entry, bool enabled) {
 bool sdlGetTrayEntryEnabled(Pointer<SdlTrayEntry> entry) {
   final sdlGetTrayEntryEnabledLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(Pointer<SdlTrayEntry> entry),
-        int Function(Pointer<SdlTrayEntry> entry)
+        Bool Function(Pointer<SdlTrayEntry> entry),
+        bool Function(Pointer<SdlTrayEntry> entry)
       >('SDL_GetTrayEntryEnabled');
-  return sdlGetTrayEntryEnabledLookupFunction(entry) == 1;
+  return sdlGetTrayEntryEnabledLookupFunction(entry);
 }
 
 ///
@@ -634,19 +634,19 @@ bool sdlGetTrayEntryEnabled(Pointer<SdlTrayEntry> entry) {
 void sdlSetTrayEntryCallback(
   Pointer<SdlTrayEntry> entry,
   Pointer<NativeFunction<SdlTrayCallback>> callback,
-  Pointer<NativeType> userdata,
+  Pointer<Void> userdata,
 ) {
   final sdlSetTrayEntryCallbackLookupFunction = _libSdl
       .lookupFunction<
         Void Function(
           Pointer<SdlTrayEntry> entry,
           Pointer<NativeFunction<SdlTrayCallback>> callback,
-          Pointer<NativeType> userdata,
+          Pointer<Void> userdata,
         ),
         void Function(
           Pointer<SdlTrayEntry> entry,
           Pointer<NativeFunction<SdlTrayCallback>> callback,
-          Pointer<NativeType> userdata,
+          Pointer<Void> userdata,
         )
       >('SDL_SetTrayEntryCallback');
   return sdlSetTrayEntryCallbackLookupFunction(entry, callback, userdata);

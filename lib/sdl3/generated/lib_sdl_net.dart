@@ -44,8 +44,8 @@ int netVersion() {
 /// {@category net}
 bool netInit() {
   final netInitLookupFunction = _libNet
-      .lookupFunction<Uint8 Function(), int Function()>('NET_Init');
-  return netInitLookupFunction() == 1;
+      .lookupFunction<Bool Function(), bool Function()>('NET_Init');
+  return netInitLookupFunction();
 }
 
 ///
@@ -316,17 +316,17 @@ String? netGetAddressString(Pointer<NetAddress> address) {
 /// extern SDL_DECLSPEC const void * SDLCALL NET_GetAddressBytes(NET_Address *address, int *num_bytes)
 /// ```
 /// {@category net}
-Pointer<NativeType> netGetAddressBytes(
+Pointer<Void> netGetAddressBytes(
   Pointer<NetAddress> address,
   Pointer<Int32> numBytes,
 ) {
   final netGetAddressBytesLookupFunction = _libNet
       .lookupFunction<
-        Pointer<NativeType> Function(
+        Pointer<Void> Function(
           Pointer<NetAddress> address,
           Pointer<Int32> numBytes,
         ),
-        Pointer<NativeType> Function(
+        Pointer<Void> Function(
           Pointer<NetAddress> address,
           Pointer<Int32> numBytes,
         )
@@ -840,16 +840,16 @@ bool netAcceptClient(
 ) {
   final netAcceptClientLookupFunction = _libNet
       .lookupFunction<
-        Uint8 Function(
+        Bool Function(
           Pointer<NetServer> server,
           Pointer<Pointer<NetStreamSocket>> clientStream,
         ),
-        int Function(
+        bool Function(
           Pointer<NetServer> server,
           Pointer<Pointer<NetStreamSocket>> clientStream,
         )
       >('NET_AcceptClient');
-  return netAcceptClientLookupFunction(server, clientStream) == 1;
+  return netAcceptClientLookupFunction(server, clientStream);
 }
 
 ///
@@ -1015,23 +1015,23 @@ int netGetConnectionStatus(Pointer<NetStreamSocket> sock) {
 /// {@category net}
 bool netWriteToStreamSocket(
   Pointer<NetStreamSocket> sock,
-  Pointer<NativeType> buf,
+  Pointer<Void> buf,
   int buflen,
 ) {
   final netWriteToStreamSocketLookupFunction = _libNet
       .lookupFunction<
-        Uint8 Function(
+        Bool Function(
           Pointer<NetStreamSocket> sock,
-          Pointer<NativeType> buf,
+          Pointer<Void> buf,
           Int32 buflen,
         ),
-        int Function(
+        bool Function(
           Pointer<NetStreamSocket> sock,
-          Pointer<NativeType> buf,
+          Pointer<Void> buf,
           int buflen,
         )
       >('NET_WriteToStreamSocket');
-  return netWriteToStreamSocketLookupFunction(sock, buf, buflen) == 1;
+  return netWriteToStreamSocketLookupFunction(sock, buf, buflen);
 }
 
 ///
@@ -1186,19 +1186,19 @@ int netWaitUntilStreamSocketDrained(
 /// {@category net}
 int netReadFromStreamSocket(
   Pointer<NetStreamSocket> sock,
-  Pointer<NativeType> buf,
+  Pointer<Void> buf,
   int buflen,
 ) {
   final netReadFromStreamSocketLookupFunction = _libNet
       .lookupFunction<
         Int32 Function(
           Pointer<NetStreamSocket> sock,
-          Pointer<NativeType> buf,
+          Pointer<Void> buf,
           Int32 buflen,
         ),
         int Function(
           Pointer<NetStreamSocket> sock,
-          Pointer<NativeType> buf,
+          Pointer<Void> buf,
           int buflen,
         )
       >('NET_ReadFromStreamSocket');
@@ -1497,27 +1497,27 @@ bool netSendDatagram(
   Pointer<NetDatagramSocket> sock,
   Pointer<NetAddress> address,
   int port,
-  Pointer<NativeType> buf,
+  Pointer<Void> buf,
   int buflen,
 ) {
   final netSendDatagramLookupFunction = _libNet
       .lookupFunction<
-        Uint8 Function(
+        Bool Function(
           Pointer<NetDatagramSocket> sock,
           Pointer<NetAddress> address,
           Uint16 port,
-          Pointer<NativeType> buf,
+          Pointer<Void> buf,
           Int32 buflen,
         ),
-        int Function(
+        bool Function(
           Pointer<NetDatagramSocket> sock,
           Pointer<NetAddress> address,
           int port,
-          Pointer<NativeType> buf,
+          Pointer<Void> buf,
           int buflen,
         )
       >('NET_SendDatagram');
-  return netSendDatagramLookupFunction(sock, address, port, buf, buflen) == 1;
+  return netSendDatagramLookupFunction(sock, address, port, buf, buflen);
 }
 
 ///
@@ -1576,16 +1576,16 @@ bool netReceiveDatagram(
 ) {
   final netReceiveDatagramLookupFunction = _libNet
       .lookupFunction<
-        Uint8 Function(
+        Bool Function(
           Pointer<NetDatagramSocket> sock,
           Pointer<Pointer<NetDatagram>> dgram,
         ),
-        int Function(
+        bool Function(
           Pointer<NetDatagramSocket> sock,
           Pointer<Pointer<NetDatagram>> dgram,
         )
       >('NET_ReceiveDatagram');
-  return netReceiveDatagramLookupFunction(sock, dgram) == 1;
+  return netReceiveDatagramLookupFunction(sock, dgram);
 }
 
 ///
@@ -1760,19 +1760,19 @@ void netDestroyDatagramSocket(Pointer<NetDatagramSocket> sock) {
 /// ```
 /// {@category net}
 int netWaitUntilInputAvailable(
-  Pointer<Pointer<NativeType>> vsockets,
+  Pointer<Pointer<Void>> vsockets,
   int numsockets,
   int timeout,
 ) {
   final netWaitUntilInputAvailableLookupFunction = _libNet
       .lookupFunction<
         Int32 Function(
-          Pointer<Pointer<NativeType>> vsockets,
+          Pointer<Pointer<Void>> vsockets,
           Int32 numsockets,
           Int32 timeout,
         ),
         int Function(
-          Pointer<Pointer<NativeType>> vsockets,
+          Pointer<Pointer<Void>> vsockets,
           int numsockets,
           int timeout,
         )

@@ -7,17 +7,17 @@ class SdlxEvent {
   int timestamp;
 
   static SdlxEvent fromPointer(Pointer<SdlEvent> pointer) {
-    if (pointer.type >= SDL_EVENT_DISPLAY_FIRST &&
-        pointer.type <= SDL_EVENT_DISPLAY_LAST) {
+    if (pointer.ref.type >= SDL_EVENT_DISPLAY_FIRST &&
+        pointer.ref.type <= SDL_EVENT_DISPLAY_LAST) {
       return SdlxDisplayEvent.fromPointer(pointer);
-    } else if (pointer.type >= SDL_EVENT_WINDOW_FIRST &&
-        pointer.type <= SDL_EVENT_WINDOW_LAST) {
+    } else if (pointer.ref.type >= SDL_EVENT_WINDOW_FIRST &&
+        pointer.ref.type <= SDL_EVENT_WINDOW_LAST) {
       return SdlxWindowEvent.fromPointer(pointer);
-    } else if (pointer.type >= SDL_EVENT_USER &&
-        pointer.type <= SDL_EVENT_LAST) {
+    } else if (pointer.ref.type >= SDL_EVENT_USER &&
+        pointer.ref.type <= SDL_EVENT_LAST) {
       return SdlxUserEvent.fromPointer(pointer);
     } else {
-      switch (pointer.type) {
+      switch (pointer.ref.type) {
         case SDL_EVENT_KEYBOARD_ADDED:
         case SDL_EVENT_KEYBOARD_REMOVED:
           return SdlxKeyboardDeviceEvent.fromPointer(pointer);
@@ -133,9 +133,9 @@ class SdlxCommonEvent extends SdlxEvent {
   SdlxCommonEvent({super.type = 0, super.reserved = 0, super.timestamp = 0});
 
   void loadFromPointer(Pointer<SdlEvent> pointer) {
-    type = pointer.common.ref.type;
-    reserved = pointer.common.ref.reserved;
-    timestamp = pointer.common.ref.timestamp;
+    type = pointer.ref.common.type;
+    reserved = pointer.ref.common.reserved;
+    timestamp = pointer.ref.common.timestamp;
   }
 
   static SdlxCommonEvent fromPointer(Pointer<SdlEvent> pointer) =>
@@ -157,12 +157,12 @@ class SdlxDisplayEvent extends SdlxEvent {
   int data2;
 
   void loadFromPointer(Pointer<SdlEvent> pointer) {
-    type = pointer.display.ref.type;
-    reserved = pointer.display.ref.reserved;
-    timestamp = pointer.display.ref.timestamp;
-    displayId = pointer.display.ref.displayId;
-    data1 = pointer.display.ref.data1;
-    data2 = pointer.display.ref.data2;
+    type = pointer.ref.display.type;
+    reserved = pointer.ref.display.reserved;
+    timestamp = pointer.ref.display.timestamp;
+    displayId = pointer.ref.display.displayId;
+    data1 = pointer.ref.display.data1;
+    data2 = pointer.ref.display.data2;
   }
 
   static SdlxDisplayEvent fromPointer(Pointer<SdlEvent> pointer) =>
@@ -184,12 +184,12 @@ class SdlxWindowEvent extends SdlxEvent {
   int data2;
 
   void loadFromPointer(Pointer<SdlEvent> pointer) {
-    type = pointer.window.ref.type;
-    reserved = pointer.window.ref.reserved;
-    timestamp = pointer.window.ref.timestamp;
-    windowId = pointer.window.ref.windowId;
-    data1 = pointer.window.ref.data1;
-    data2 = pointer.window.ref.data2;
+    type = pointer.ref.window.type;
+    reserved = pointer.ref.window.reserved;
+    timestamp = pointer.ref.window.timestamp;
+    windowId = pointer.ref.window.windowId;
+    data1 = pointer.ref.window.data1;
+    data2 = pointer.ref.window.data2;
   }
 
   static SdlxWindowEvent fromPointer(Pointer<SdlEvent> pointer) =>
@@ -206,10 +206,10 @@ class SdlxKeyboardDeviceEvent extends SdlxEvent {
 
   int which;
   void loadFromPointer(Pointer<SdlEvent> pointer) {
-    type = pointer.kdevice.ref.type;
-    reserved = pointer.kdevice.ref.reserved;
-    timestamp = pointer.kdevice.ref.timestamp;
-    which = pointer.kdevice.ref.which;
+    type = pointer.ref.kdevice.type;
+    reserved = pointer.ref.kdevice.reserved;
+    timestamp = pointer.ref.kdevice.timestamp;
+    which = pointer.ref.kdevice.which;
   }
 
   static SdlxKeyboardDeviceEvent fromPointer(Pointer<SdlEvent> pointer) =>
@@ -227,8 +227,8 @@ class SdlxKeyboardEvent extends SdlxEvent {
     this.key = 0,
     this.mod = 0,
     this.raw = 0,
-    this.down = 0,
-    this.repeat = 0,
+    this.down = false,
+    this.repeat = false,
   });
 
   int windowId;
@@ -237,21 +237,21 @@ class SdlxKeyboardEvent extends SdlxEvent {
   int key;
   int mod;
   int raw;
-  int down;
-  int repeat;
+  bool down;
+  bool repeat;
 
   void loadFromPointer(Pointer<SdlEvent> pointer) {
-    type = pointer.key.ref.type;
-    reserved = pointer.key.ref.reserved;
-    timestamp = pointer.key.ref.timestamp;
-    windowId = pointer.key.ref.windowId;
-    which = pointer.key.ref.which;
-    scancode = pointer.key.ref.scancode;
-    key = pointer.key.ref.key;
-    mod = pointer.key.ref.mod;
-    raw = pointer.key.ref.raw;
-    down = pointer.key.ref.down;
-    repeat = pointer.key.ref.repeat;
+    type = pointer.ref.key.type;
+    reserved = pointer.ref.key.reserved;
+    timestamp = pointer.ref.key.timestamp;
+    windowId = pointer.ref.key.windowId;
+    which = pointer.ref.key.which;
+    scancode = pointer.ref.key.scancode;
+    key = pointer.ref.key.key;
+    mod = pointer.ref.key.mod;
+    raw = pointer.ref.key.raw;
+    down = pointer.ref.key.down;
+    repeat = pointer.ref.key.repeat;
   }
 
   static SdlxKeyboardEvent fromPointer(Pointer<SdlEvent> pointer) =>
@@ -274,15 +274,15 @@ class SdlxTextEditingEvent extends SdlxEvent {
   int start;
   int length;
   void loadFromPointer(Pointer<SdlEvent> pointer) {
-    type = pointer.edit.ref.type;
-    reserved = pointer.edit.ref.reserved;
-    timestamp = pointer.edit.ref.timestamp;
-    windowId = pointer.edit.ref.windowId;
-    if (pointer.edit.ref.text != nullptr) {
-      text = pointer.edit.ref.text.toDartString();
+    type = pointer.ref.edit.type;
+    reserved = pointer.ref.edit.reserved;
+    timestamp = pointer.ref.edit.timestamp;
+    windowId = pointer.ref.edit.windowId;
+    if (pointer.ref.edit.text != nullptr) {
+      text = pointer.ref.edit.text.toDartString();
     }
-    start = pointer.edit.ref.start;
-    length = pointer.edit.ref.length;
+    start = pointer.ref.edit.start;
+    length = pointer.ref.edit.length;
   }
 
   static SdlxTextEditingEvent fromPointer(Pointer<SdlEvent> pointer) =>
@@ -297,29 +297,29 @@ class SdlxTextEditingCandidatesEvent extends SdlxEvent {
     this.windowId = 0,
     List<String>? candidates,
     this.selectedCandidate = 0,
-    this.horizontal = 0,
+    this.horizontal = false,
   }) {
     this.candidates = candidates ?? [];
   }
   int windowId;
   late List<String> candidates;
   int selectedCandidate;
-  int horizontal;
+  bool horizontal;
 
   void loadFromPointer(Pointer<SdlEvent> pointer) {
-    type = pointer.editCandidates.ref.type;
-    reserved = pointer.editCandidates.ref.reserved;
-    timestamp = pointer.editCandidates.ref.timestamp;
-    for (var i = 0; i < pointer.editCandidates.ref.numCandidates; i++) {
-      if (pointer.editCandidates.ref.candidates[i] != nullptr) {
+    type = pointer.ref.editCandidates.type;
+    reserved = pointer.ref.editCandidates.reserved;
+    timestamp = pointer.ref.editCandidates.timestamp;
+    for (var i = 0; i < pointer.ref.editCandidates.numCandidates; i++) {
+      if (pointer.ref.editCandidates.candidates[i] != nullptr) {
         candidates.add(
-          pointer.editCandidates.ref.candidates[i].cast<Utf8>().toDartString(),
+          pointer.ref.editCandidates.candidates[i].cast<Utf8>().toDartString(),
         );
       }
     }
-    windowId = pointer.editCandidates.ref.windowId;
-    selectedCandidate = pointer.editCandidates.ref.selectedCandidate;
-    horizontal = pointer.editCandidates.ref.horizontal;
+    windowId = pointer.ref.editCandidates.windowId;
+    selectedCandidate = pointer.ref.editCandidates.selectedCandidate;
+    horizontal = pointer.ref.editCandidates.horizontal;
   }
 
   static SdlxTextEditingCandidatesEvent fromPointer(
@@ -340,12 +340,12 @@ class SdlxTextInputEvent extends SdlxEvent {
   String text;
 
   void loadFromPointer(Pointer<SdlEvent> pointer) {
-    type = pointer.text.ref.type;
-    reserved = pointer.text.ref.reserved;
-    timestamp = pointer.text.ref.timestamp;
-    windowId = pointer.text.ref.windowId;
-    if (pointer.text.ref.text != nullptr) {
-      text = pointer.text.ref.text.toDartString();
+    type = pointer.ref.text.type;
+    reserved = pointer.ref.text.reserved;
+    timestamp = pointer.ref.text.timestamp;
+    windowId = pointer.ref.text.windowId;
+    if (pointer.ref.text.text != nullptr) {
+      text = pointer.ref.text.text.toDartString();
     }
   }
 
@@ -364,10 +364,10 @@ class SdlxMouseDeviceEvent extends SdlxEvent {
   int which;
 
   void loadFromPointer(Pointer<SdlEvent> pointer) {
-    type = pointer.mdevice.ref.type;
-    reserved = pointer.mdevice.ref.reserved;
-    timestamp = pointer.mdevice.ref.timestamp;
-    which = pointer.mdevice.ref.which;
+    type = pointer.ref.mdevice.type;
+    reserved = pointer.ref.mdevice.reserved;
+    timestamp = pointer.ref.mdevice.timestamp;
+    which = pointer.ref.mdevice.which;
   }
 
   static SdlxMouseDeviceEvent fromPointer(Pointer<SdlEvent> pointer) =>
@@ -397,16 +397,16 @@ class SdlxMouseMotionEvent extends SdlxEvent {
   double yrel;
 
   void loadFromPointer(Pointer<SdlEvent> pointer) {
-    type = pointer.motion.ref.type;
-    reserved = pointer.motion.ref.reserved;
-    timestamp = pointer.motion.ref.timestamp;
-    windowId = pointer.motion.ref.windowId;
-    which = pointer.motion.ref.which;
-    state = pointer.motion.ref.state;
-    x = pointer.motion.ref.x;
-    y = pointer.motion.ref.y;
-    xrel = pointer.motion.ref.xrel;
-    yrel = pointer.motion.ref.yrel;
+    type = pointer.ref.motion.type;
+    reserved = pointer.ref.motion.reserved;
+    timestamp = pointer.ref.motion.timestamp;
+    windowId = pointer.ref.motion.windowId;
+    which = pointer.ref.motion.which;
+    state = pointer.ref.motion.state;
+    x = pointer.ref.motion.x;
+    y = pointer.ref.motion.y;
+    xrel = pointer.ref.motion.xrel;
+    yrel = pointer.ref.motion.yrel;
   }
 
   static SdlxMouseMotionEvent fromPointer(Pointer<SdlEvent> pointer) =>
@@ -421,7 +421,7 @@ class SdlxMouseButtonEvent extends SdlxEvent {
     this.windowId = 0,
     this.which = 0,
     this.button = 0,
-    this.down = 0,
+    this.down = false,
     this.clicks = 0,
     this.x = 0,
     this.y = 0,
@@ -430,22 +430,22 @@ class SdlxMouseButtonEvent extends SdlxEvent {
   int windowId;
   int which;
   int button;
-  int down;
+  bool down;
   int clicks;
   double x;
   double y;
 
   void loadFromPointer(Pointer<SdlEvent> pointer) {
-    type = pointer.button.ref.type;
-    reserved = pointer.button.ref.reserved;
-    timestamp = pointer.button.ref.timestamp;
-    windowId = pointer.button.ref.windowId;
-    which = pointer.button.ref.which;
-    button = pointer.button.ref.button;
-    down = pointer.button.ref.down;
-    clicks = pointer.button.ref.clicks;
-    x = pointer.button.ref.x;
-    y = pointer.button.ref.y;
+    type = pointer.ref.button.type;
+    reserved = pointer.ref.button.reserved;
+    timestamp = pointer.ref.button.timestamp;
+    windowId = pointer.ref.button.windowId;
+    which = pointer.ref.button.which;
+    button = pointer.ref.button.button;
+    down = pointer.ref.button.down;
+    clicks = pointer.ref.button.clicks;
+    x = pointer.ref.button.x;
+    y = pointer.ref.button.y;
   }
 
   static SdlxMouseButtonEvent fromPointer(Pointer<SdlEvent> pointer) =>
@@ -479,18 +479,18 @@ class SdlxMouseWheelEvent extends SdlxEvent {
   int integerY;
 
   void loadFromPointer(Pointer<SdlEvent> pointer) {
-    type = pointer.wheel.ref.type;
-    reserved = pointer.wheel.ref.reserved;
-    timestamp = pointer.wheel.ref.timestamp;
-    windowId = pointer.wheel.ref.windowId;
-    which = pointer.wheel.ref.which;
-    x = pointer.wheel.ref.x;
-    y = pointer.wheel.ref.y;
-    direction = pointer.wheel.ref.direction;
-    mouseX = pointer.wheel.ref.mouseX;
-    mouseY = pointer.wheel.ref.mouseY;
-    integerX = pointer.wheel.ref.integerX;
-    integerY = pointer.wheel.ref.integerY;
+    type = pointer.ref.wheel.type;
+    reserved = pointer.ref.wheel.reserved;
+    timestamp = pointer.ref.wheel.timestamp;
+    windowId = pointer.ref.wheel.windowId;
+    which = pointer.ref.wheel.which;
+    x = pointer.ref.wheel.x;
+    y = pointer.ref.wheel.y;
+    direction = pointer.ref.wheel.direction;
+    mouseX = pointer.ref.wheel.mouseX;
+    mouseY = pointer.ref.wheel.mouseY;
+    integerX = pointer.ref.wheel.integerX;
+    integerY = pointer.ref.wheel.integerY;
   }
 
   static SdlxMouseWheelEvent fromPointer(Pointer<SdlEvent> pointer) =>
@@ -512,12 +512,12 @@ class SdlxJoyAxisEvent extends SdlxEvent {
   int value;
 
   void loadFromPointer(Pointer<SdlEvent> pointer) {
-    type = pointer.jaxis.ref.type;
-    reserved = pointer.jaxis.ref.reserved;
-    timestamp = pointer.jaxis.ref.timestamp;
-    which = pointer.jaxis.ref.which;
-    axis = pointer.jaxis.ref.axis;
-    value = pointer.jaxis.ref.value;
+    type = pointer.ref.jaxis.type;
+    reserved = pointer.ref.jaxis.reserved;
+    timestamp = pointer.ref.jaxis.timestamp;
+    which = pointer.ref.jaxis.which;
+    axis = pointer.ref.jaxis.axis;
+    value = pointer.ref.jaxis.value;
   }
 
   static SdlxJoyAxisEvent fromPointer(Pointer<SdlEvent> pointer) =>
@@ -540,13 +540,13 @@ class SdlxJoyBallEvent extends SdlxEvent {
   int xrel;
   int yrel;
   void loadFromPointer(Pointer<SdlEvent> pointer) {
-    type = pointer.jball.ref.type;
-    reserved = pointer.jball.ref.reserved;
-    timestamp = pointer.jball.ref.timestamp;
-    which = pointer.jball.ref.which;
-    ball = pointer.jball.ref.ball;
-    xrel = pointer.jball.ref.xrel;
-    yrel = pointer.jball.ref.yrel;
+    type = pointer.ref.jball.type;
+    reserved = pointer.ref.jball.reserved;
+    timestamp = pointer.ref.jball.timestamp;
+    which = pointer.ref.jball.which;
+    ball = pointer.ref.jball.ball;
+    xrel = pointer.ref.jball.xrel;
+    yrel = pointer.ref.jball.yrel;
   }
 
   static SdlxJoyBallEvent fromPointer(Pointer<SdlEvent> pointer) =>
@@ -568,12 +568,12 @@ class SdlxJoyHatEvent extends SdlxEvent {
   int value;
 
   void loadFromPointer(Pointer<SdlEvent> pointer) {
-    type = pointer.jhat.ref.type;
-    reserved = pointer.jhat.ref.reserved;
-    timestamp = pointer.jhat.ref.timestamp;
-    which = pointer.jhat.ref.which;
-    hat = pointer.jhat.ref.hat;
-    value = pointer.jhat.ref.value;
+    type = pointer.ref.jhat.type;
+    reserved = pointer.ref.jhat.reserved;
+    timestamp = pointer.ref.jhat.timestamp;
+    which = pointer.ref.jhat.which;
+    hat = pointer.ref.jhat.hat;
+    value = pointer.ref.jhat.value;
   }
 
   static SdlxJoyHatEvent fromPointer(Pointer<SdlEvent> pointer) =>
@@ -587,20 +587,20 @@ class SdlxJoyButtonEvent extends SdlxEvent {
     super.timestamp = 0,
     this.which = 0,
     this.button = 0,
-    this.down = 0,
+    this.down = false,
   });
 
   int which;
   int button;
-  int down;
+  bool down;
 
   void loadFromPointer(Pointer<SdlEvent> pointer) {
-    type = pointer.jbutton.ref.type;
-    reserved = pointer.jbutton.ref.reserved;
-    timestamp = pointer.jbutton.ref.timestamp;
-    which = pointer.jbutton.ref.which;
-    button = pointer.jbutton.ref.button;
-    down = pointer.jbutton.ref.down;
+    type = pointer.ref.jbutton.type;
+    reserved = pointer.ref.jbutton.reserved;
+    timestamp = pointer.ref.jbutton.timestamp;
+    which = pointer.ref.jbutton.which;
+    button = pointer.ref.jbutton.button;
+    down = pointer.ref.jbutton.down;
   }
 
   static SdlxJoyButtonEvent fromPointer(Pointer<SdlEvent> pointer) =>
@@ -617,10 +617,10 @@ class SdlxJoyDeviceEvent extends SdlxEvent {
   int which;
 
   void loadFromPointer(Pointer<SdlEvent> pointer) {
-    type = pointer.jdevice.ref.type;
-    reserved = pointer.jdevice.ref.reserved;
-    timestamp = pointer.jdevice.ref.timestamp;
-    which = pointer.jdevice.ref.which;
+    type = pointer.ref.jdevice.type;
+    reserved = pointer.ref.jdevice.reserved;
+    timestamp = pointer.ref.jdevice.timestamp;
+    which = pointer.ref.jdevice.which;
   }
 
   static SdlxJoyDeviceEvent fromPointer(Pointer<SdlEvent> pointer) =>
@@ -641,12 +641,12 @@ class SdlxJoyBatteryEvent extends SdlxEvent {
   int state;
   int percent;
   void loadFromPointer(Pointer<SdlEvent> pointer) {
-    type = pointer.jbattery.ref.type;
-    reserved = pointer.jbattery.ref.reserved;
-    timestamp = pointer.jbattery.ref.timestamp;
-    which = pointer.jbattery.ref.which;
-    state = pointer.jbattery.ref.state;
-    percent = pointer.jbattery.ref.percent;
+    type = pointer.ref.jbattery.type;
+    reserved = pointer.ref.jbattery.reserved;
+    timestamp = pointer.ref.jbattery.timestamp;
+    which = pointer.ref.jbattery.which;
+    state = pointer.ref.jbattery.state;
+    percent = pointer.ref.jbattery.percent;
   }
 
   static SdlxJoyBatteryEvent fromPointer(Pointer<SdlEvent> pointer) =>
@@ -668,12 +668,12 @@ class SdlxGamepadAxisEvent extends SdlxEvent {
   int value;
 
   void loadFromPointer(Pointer<SdlEvent> pointer) {
-    type = pointer.gaxis.ref.type;
-    reserved = pointer.gaxis.ref.reserved;
-    timestamp = pointer.gaxis.ref.timestamp;
-    which = pointer.gaxis.ref.which;
-    axis = pointer.gaxis.ref.axis;
-    value = pointer.gaxis.ref.value;
+    type = pointer.ref.gaxis.type;
+    reserved = pointer.ref.gaxis.reserved;
+    timestamp = pointer.ref.gaxis.timestamp;
+    which = pointer.ref.gaxis.which;
+    axis = pointer.ref.gaxis.axis;
+    value = pointer.ref.gaxis.value;
   }
 
   static SdlxGamepadAxisEvent fromPointer(Pointer<SdlEvent> pointer) =>
@@ -687,20 +687,20 @@ class SdlxGamepadButtonEvent extends SdlxEvent {
     super.timestamp = 0,
     this.which = 0,
     this.button = 0,
-    this.down = 0,
+    this.down = false,
   });
 
   int which;
   int button;
-  int down;
+  bool down;
 
   void loadFromPointer(Pointer<SdlEvent> pointer) {
-    type = pointer.gbutton.ref.type;
-    reserved = pointer.gbutton.ref.reserved;
-    timestamp = pointer.gbutton.ref.timestamp;
-    which = pointer.gbutton.ref.which;
-    button = pointer.gbutton.ref.button;
-    down = pointer.gbutton.ref.down;
+    type = pointer.ref.gbutton.type;
+    reserved = pointer.ref.gbutton.reserved;
+    timestamp = pointer.ref.gbutton.timestamp;
+    which = pointer.ref.gbutton.which;
+    button = pointer.ref.gbutton.button;
+    down = pointer.ref.gbutton.down;
   }
 
   static SdlxGamepadButtonEvent fromPointer(Pointer<SdlEvent> pointer) =>
@@ -718,10 +718,10 @@ class SdlxGamepadDeviceEvent extends SdlxEvent {
   int which;
 
   void loadFromPointer(Pointer<SdlEvent> pointer) {
-    type = pointer.gdevice.ref.type;
-    reserved = pointer.gdevice.ref.reserved;
-    timestamp = pointer.gdevice.ref.timestamp;
-    which = pointer.gdevice.ref.which;
+    type = pointer.ref.gdevice.type;
+    reserved = pointer.ref.gdevice.reserved;
+    timestamp = pointer.ref.gdevice.timestamp;
+    which = pointer.ref.gdevice.which;
   }
 
   static SdlxGamepadDeviceEvent fromPointer(Pointer<SdlEvent> pointer) =>
@@ -748,15 +748,15 @@ class SdlxGamepadTouchpadEvent extends SdlxEvent {
   double pressure;
 
   void loadFromPointer(Pointer<SdlEvent> pointer) {
-    type = pointer.gtouchpad.ref.type;
-    reserved = pointer.gtouchpad.ref.reserved;
-    timestamp = pointer.gtouchpad.ref.timestamp;
-    which = pointer.gtouchpad.ref.which;
-    touchpad = pointer.gtouchpad.ref.touchpad;
-    finger = pointer.gtouchpad.ref.finger;
-    x = pointer.gtouchpad.ref.x;
-    y = pointer.gtouchpad.ref.y;
-    pressure = pointer.gtouchpad.ref.pressure;
+    type = pointer.ref.gtouchpad.type;
+    reserved = pointer.ref.gtouchpad.reserved;
+    timestamp = pointer.ref.gtouchpad.timestamp;
+    which = pointer.ref.gtouchpad.which;
+    touchpad = pointer.ref.gtouchpad.touchpad;
+    finger = pointer.ref.gtouchpad.finger;
+    x = pointer.ref.gtouchpad.x;
+    y = pointer.ref.gtouchpad.y;
+    pressure = pointer.ref.gtouchpad.pressure;
   }
 
   static SdlxGamepadTouchpadEvent fromPointer(Pointer<SdlEvent> pointer) =>
@@ -779,15 +779,15 @@ class SdlxGamepadSensorEvent extends SdlxEvent {
   late List<double> datas;
   int sensor;
   void loadFromPointer(Pointer<SdlEvent> pointer) {
-    type = pointer.gsensor.ref.type;
-    reserved = pointer.gsensor.ref.reserved;
-    timestamp = pointer.gsensor.ref.timestamp;
-    which = pointer.gsensor.ref.which;
+    type = pointer.ref.gsensor.type;
+    reserved = pointer.ref.gsensor.reserved;
+    timestamp = pointer.ref.gsensor.timestamp;
+    which = pointer.ref.gsensor.which;
     datas
-      ..add(pointer.gsensor.ref.data_1)
-      ..add(pointer.gsensor.ref.data_2)
-      ..add(pointer.gsensor.ref.data_3);
-    sensor = pointer.gsensor.ref.sensor;
+      ..add(pointer.ref.gsensor.data[0])
+      ..add(pointer.ref.gsensor.data[1])
+      ..add(pointer.ref.gsensor.data[2]);
+    sensor = pointer.ref.gsensor.sensor;
   }
 
   static SdlxGamepadSensorEvent fromPointer(Pointer<SdlEvent> pointer) =>
@@ -801,20 +801,20 @@ class SdlxGamepadCapSenseEvent extends SdlxEvent {
     super.timestamp = 0,
     this.which = 0,
     this.capsense = 0,
-    this.down = 0,
+    this.down = false,
   });
 
   int which;
   int capsense;
-  int down;
+  bool down;
 
   void loadFromPointer(Pointer<SdlEvent> pointer) {
-    type = pointer.gcapsense.ref.type;
-    reserved = pointer.gcapsense.ref.reserved;
-    timestamp = pointer.gcapsense.ref.timestamp;
-    which = pointer.gcapsense.ref.which;
-    capsense = pointer.gcapsense.ref.capsense;
-    down = pointer.gcapsense.ref.down;
+    type = pointer.ref.gcapsense.type;
+    reserved = pointer.ref.gcapsense.reserved;
+    timestamp = pointer.ref.gcapsense.timestamp;
+    which = pointer.ref.gcapsense.which;
+    capsense = pointer.ref.gcapsense.capsense;
+    down = pointer.ref.gcapsense.down;
   }
 
   static SdlxGamepadCapSenseEvent fromPointer(Pointer<SdlEvent> pointer) =>
@@ -827,18 +827,18 @@ class SdlxAudioDeviceEvent extends SdlxEvent {
     super.reserved = 0,
     super.timestamp = 0,
     this.which = 0,
-    this.recording = 0,
+    this.recording = false,
   });
 
   int which;
-  int recording;
+  bool recording;
 
   void loadFromPointer(Pointer<SdlEvent> pointer) {
-    type = pointer.adevice.ref.type;
-    reserved = pointer.adevice.ref.reserved;
-    timestamp = pointer.adevice.ref.timestamp;
-    which = pointer.adevice.ref.which;
-    recording = pointer.adevice.ref.recording;
+    type = pointer.ref.adevice.type;
+    reserved = pointer.ref.adevice.reserved;
+    timestamp = pointer.ref.adevice.timestamp;
+    which = pointer.ref.adevice.which;
+    recording = pointer.ref.adevice.recording;
   }
 
   static SdlxAudioDeviceEvent fromPointer(Pointer<SdlEvent> pointer) =>
@@ -855,10 +855,10 @@ class SdlxCameraDeviceEvent extends SdlxEvent {
 
   int which;
   void loadFromPointer(Pointer<SdlEvent> pointer) {
-    type = pointer.cdevice.ref.type;
-    reserved = pointer.cdevice.ref.reserved;
-    timestamp = pointer.cdevice.ref.timestamp;
-    which = pointer.cdevice.ref.which;
+    type = pointer.ref.cdevice.type;
+    reserved = pointer.ref.cdevice.reserved;
+    timestamp = pointer.ref.cdevice.timestamp;
+    which = pointer.ref.cdevice.which;
   }
 
   static SdlxCameraDeviceEvent fromPointer(Pointer<SdlEvent> pointer) =>
@@ -875,10 +875,10 @@ class SdlxRenderEvent extends SdlxEvent {
 
   int windowId;
   void loadFromPointer(Pointer<SdlEvent> pointer) {
-    type = pointer.render.ref.type;
-    reserved = pointer.render.ref.reserved;
-    timestamp = pointer.render.ref.timestamp;
-    windowId = pointer.render.ref.windowId;
+    type = pointer.ref.render.type;
+    reserved = pointer.ref.render.reserved;
+    timestamp = pointer.ref.render.timestamp;
+    windowId = pointer.ref.render.windowId;
   }
 
   static SdlxRenderEvent fromPointer(Pointer<SdlEvent> pointer) =>
@@ -909,17 +909,17 @@ class SdlxTouchFingerEvent extends SdlxEvent {
   int windowId;
 
   void loadFromPointer(Pointer<SdlEvent> pointer) {
-    type = pointer.tfinger.ref.type;
-    reserved = pointer.tfinger.ref.reserved;
-    timestamp = pointer.tfinger.ref.timestamp;
-    touchId = pointer.tfinger.ref.touchId;
-    fingerId = pointer.tfinger.ref.fingerId;
-    x = pointer.tfinger.ref.x;
-    y = pointer.tfinger.ref.y;
-    dx = pointer.tfinger.ref.dx;
-    dy = pointer.tfinger.ref.dy;
-    pressure = pointer.tfinger.ref.pressure;
-    windowId = pointer.tfinger.ref.windowId;
+    type = pointer.ref.tfinger.type;
+    reserved = pointer.ref.tfinger.reserved;
+    timestamp = pointer.ref.tfinger.timestamp;
+    touchId = pointer.ref.tfinger.touchId;
+    fingerId = pointer.ref.tfinger.fingerId;
+    x = pointer.ref.tfinger.x;
+    y = pointer.ref.tfinger.y;
+    dx = pointer.ref.tfinger.dx;
+    dy = pointer.ref.tfinger.dy;
+    pressure = pointer.ref.tfinger.pressure;
+    windowId = pointer.ref.tfinger.windowId;
   }
 
   static SdlxTouchFingerEvent fromPointer(Pointer<SdlEvent> pointer) =>
@@ -938,11 +938,11 @@ class SdlxPinchFingerEvent extends SdlxEvent {
   int windowId;
 
   void loadFromPointer(Pointer<SdlEvent> pointer) {
-    type = pointer.pinch.ref.type;
-    reserved = pointer.pinch.ref.reserved;
-    timestamp = pointer.pinch.ref.timestamp;
-    scale = pointer.pinch.ref.scale;
-    windowId = pointer.pinch.ref.windowId;
+    type = pointer.ref.pinch.type;
+    reserved = pointer.ref.pinch.reserved;
+    timestamp = pointer.ref.pinch.timestamp;
+    scale = pointer.ref.pinch.scale;
+    windowId = pointer.ref.pinch.windowId;
   }
 
   static SdlxPinchFingerEvent fromPointer(Pointer<SdlEvent> pointer) =>
@@ -962,11 +962,11 @@ class SdlxPenProximityEvent extends SdlxEvent {
   int which;
 
   void loadFromPointer(Pointer<SdlEvent> pointer) {
-    type = pointer.pproximity.ref.type;
-    reserved = pointer.pproximity.ref.reserved;
-    timestamp = pointer.pproximity.ref.timestamp;
-    windowId = pointer.pproximity.ref.windowId;
-    which = pointer.pproximity.ref.which;
+    type = pointer.ref.pproximity.type;
+    reserved = pointer.ref.pproximity.reserved;
+    timestamp = pointer.ref.pproximity.timestamp;
+    windowId = pointer.ref.pproximity.windowId;
+    which = pointer.ref.pproximity.which;
   }
 
   static SdlxPenProximityEvent fromPointer(Pointer<SdlEvent> pointer) =>
@@ -991,14 +991,14 @@ class SdlxPenMotionEvent extends SdlxEvent {
   double y;
 
   void loadFromPointer(Pointer<SdlEvent> pointer) {
-    type = pointer.pmotion.ref.type;
-    reserved = pointer.pmotion.ref.reserved;
-    timestamp = pointer.pmotion.ref.timestamp;
-    windowId = pointer.pmotion.ref.windowId;
-    which = pointer.pmotion.ref.which;
-    penState = pointer.pmotion.ref.penState;
-    x = pointer.pmotion.ref.x;
-    y = pointer.pmotion.ref.y;
+    type = pointer.ref.pmotion.type;
+    reserved = pointer.ref.pmotion.reserved;
+    timestamp = pointer.ref.pmotion.timestamp;
+    windowId = pointer.ref.pmotion.windowId;
+    which = pointer.ref.pmotion.which;
+    penState = pointer.ref.pmotion.penState;
+    x = pointer.ref.pmotion.x;
+    y = pointer.ref.pmotion.y;
   }
 
   static SdlxPenMotionEvent fromPointer(Pointer<SdlEvent> pointer) =>
@@ -1015,28 +1015,28 @@ class SdlxPenTouchEvent extends SdlxEvent {
     this.penState = 0,
     this.x = 0,
     this.y = 0,
-    this.eraser = 0,
-    this.down = 0,
+    this.eraser = false,
+    this.down = false,
   });
   int windowId;
   int which;
   int penState;
   double x;
   double y;
-  int eraser;
-  int down;
+  bool eraser;
+  bool down;
 
   void loadFromPointer(Pointer<SdlEvent> pointer) {
-    type = pointer.ptouch.ref.type;
-    reserved = pointer.ptouch.ref.reserved;
-    timestamp = pointer.ptouch.ref.timestamp;
-    windowId = pointer.ptouch.ref.windowId;
-    which = pointer.ptouch.ref.which;
-    penState = pointer.ptouch.ref.penState;
-    x = pointer.ptouch.ref.x;
-    y = pointer.ptouch.ref.y;
-    eraser = pointer.ptouch.ref.eraser;
-    down = pointer.ptouch.ref.down;
+    type = pointer.ref.ptouch.type;
+    reserved = pointer.ref.ptouch.reserved;
+    timestamp = pointer.ref.ptouch.timestamp;
+    windowId = pointer.ref.ptouch.windowId;
+    which = pointer.ref.ptouch.which;
+    penState = pointer.ref.ptouch.penState;
+    x = pointer.ref.ptouch.x;
+    y = pointer.ref.ptouch.y;
+    eraser = pointer.ref.ptouch.eraser;
+    down = pointer.ref.ptouch.down;
   }
 
   static SdlxPenTouchEvent fromPointer(Pointer<SdlEvent> pointer) =>
@@ -1054,7 +1054,7 @@ class SdlxPenButtonEvent extends SdlxEvent {
     this.x = 0,
     this.y = 0,
     this.button = 0,
-    this.down = 0,
+    this.down = false,
   });
   int windowId;
   int which;
@@ -1062,19 +1062,19 @@ class SdlxPenButtonEvent extends SdlxEvent {
   double x;
   double y;
   int button;
-  int down;
+  bool down;
 
   void loadFromPointer(Pointer<SdlEvent> pointer) {
-    type = pointer.pbutton.ref.type;
-    reserved = pointer.pbutton.ref.reserved;
-    timestamp = pointer.pbutton.ref.timestamp;
-    windowId = pointer.pbutton.ref.windowId;
-    which = pointer.pbutton.ref.which;
-    penState = pointer.pbutton.ref.penState;
-    x = pointer.pbutton.ref.x;
-    y = pointer.pbutton.ref.y;
-    button = pointer.pbutton.ref.button;
-    down = pointer.pbutton.ref.down;
+    type = pointer.ref.pbutton.type;
+    reserved = pointer.ref.pbutton.reserved;
+    timestamp = pointer.ref.pbutton.timestamp;
+    windowId = pointer.ref.pbutton.windowId;
+    which = pointer.ref.pbutton.which;
+    penState = pointer.ref.pbutton.penState;
+    x = pointer.ref.pbutton.x;
+    y = pointer.ref.pbutton.y;
+    button = pointer.ref.pbutton.button;
+    down = pointer.ref.pbutton.down;
   }
 
   static SdlxPenButtonEvent fromPointer(Pointer<SdlEvent> pointer) =>
@@ -1103,16 +1103,16 @@ class SdlxPenAxisEvent extends SdlxEvent {
   double value;
 
   void loadFromPointer(Pointer<SdlEvent> pointer) {
-    type = pointer.paxis.ref.type;
-    reserved = pointer.paxis.ref.reserved;
-    timestamp = pointer.paxis.ref.timestamp;
-    windowId = pointer.paxis.ref.windowId;
-    which = pointer.paxis.ref.which;
-    penState = pointer.paxis.ref.penState;
-    x = pointer.paxis.ref.x;
-    y = pointer.paxis.ref.y;
-    axis = pointer.paxis.ref.axis;
-    value = pointer.paxis.ref.value;
+    type = pointer.ref.paxis.type;
+    reserved = pointer.ref.paxis.reserved;
+    timestamp = pointer.ref.paxis.timestamp;
+    windowId = pointer.ref.paxis.windowId;
+    which = pointer.ref.paxis.which;
+    penState = pointer.ref.paxis.penState;
+    x = pointer.ref.paxis.x;
+    y = pointer.ref.paxis.y;
+    axis = pointer.ref.paxis.axis;
+    value = pointer.ref.paxis.value;
   }
 
   static SdlxPenAxisEvent fromPointer(Pointer<SdlEvent> pointer) =>
@@ -1138,17 +1138,17 @@ class SdlxDropEvent extends SdlxEvent {
   String data;
 
   void loadFromPointer(Pointer<SdlEvent> pointer) {
-    type = pointer.drop.ref.type;
-    reserved = pointer.drop.ref.reserved;
-    timestamp = pointer.drop.ref.timestamp;
-    windowId = pointer.drop.ref.windowId;
-    x = pointer.drop.ref.x;
-    y = pointer.drop.ref.y;
-    if (pointer.drop.ref.source != nullptr) {
-      source = pointer.drop.ref.source.toDartString();
+    type = pointer.ref.drop.type;
+    reserved = pointer.ref.drop.reserved;
+    timestamp = pointer.ref.drop.timestamp;
+    windowId = pointer.ref.drop.windowId;
+    x = pointer.ref.drop.x;
+    y = pointer.ref.drop.y;
+    if (pointer.ref.drop.source != nullptr) {
+      source = pointer.ref.drop.source.toDartString();
     }
-    if (pointer.drop.ref.data != nullptr) {
-      data = pointer.drop.ref.data.toDartString();
+    if (pointer.ref.drop.data != nullptr) {
+      data = pointer.ref.drop.data.toDartString();
     }
   }
 
@@ -1161,23 +1161,23 @@ class SdlxClipboardEvent extends SdlxEvent {
     super.type = 0,
     super.reserved = 0,
     super.timestamp = 0,
-    this.owner = 0,
+    this.owner = false,
     List<String>? mimeTypes,
   }) {
     this.mimeTypes = mimeTypes ?? [];
   }
-  int owner;
+  bool owner;
   late List<String> mimeTypes;
 
   void loadFromPointer(Pointer<SdlEvent> pointer) {
-    type = pointer.clipboard.ref.type;
-    reserved = pointer.clipboard.ref.reserved;
-    timestamp = pointer.clipboard.ref.timestamp;
-    owner = pointer.clipboard.ref.owner;
-    for (var i = 0; i < pointer.clipboard.ref.numMimeTypes; i++) {
-      if (pointer.clipboard.ref.mimeTypes[i] != nullptr) {
+    type = pointer.ref.clipboard.type;
+    reserved = pointer.ref.clipboard.reserved;
+    timestamp = pointer.ref.clipboard.timestamp;
+    owner = pointer.ref.clipboard.owner;
+    for (var i = 0; i < pointer.ref.clipboard.numMimeTypes; i++) {
+      if (pointer.ref.clipboard.mimeTypes[i] != nullptr) {
         mimeTypes.add(
-          pointer.clipboard.ref.mimeTypes[i].cast<Utf8>().toDartString(),
+          pointer.ref.clipboard.mimeTypes[i].cast<Utf8>().toDartString(),
         );
       }
     }
@@ -1204,18 +1204,18 @@ class SdlxSensorEvent extends SdlxEvent {
   int sensorTimestamp;
 
   void loadFromPointer(Pointer<SdlEvent> pointer) {
-    type = pointer.sensor.ref.type;
-    reserved = pointer.sensor.ref.reserved;
-    timestamp = pointer.sensor.ref.timestamp;
-    which = pointer.sensor.ref.which;
+    type = pointer.ref.sensor.type;
+    reserved = pointer.ref.sensor.reserved;
+    timestamp = pointer.ref.sensor.timestamp;
+    which = pointer.ref.sensor.which;
     datas
-      ..add(pointer.sensor.ref.data_1)
-      ..add(pointer.sensor.ref.data_2)
-      ..add(pointer.sensor.ref.data_3)
-      ..add(pointer.sensor.ref.data_4)
-      ..add(pointer.sensor.ref.data_5)
-      ..add(pointer.sensor.ref.data_6);
-    sensorTimestamp = pointer.sensor.ref.sensorTimestamp;
+      ..add(pointer.ref.sensor.data[0])
+      ..add(pointer.ref.sensor.data[1])
+      ..add(pointer.ref.sensor.data[2])
+      ..add(pointer.ref.sensor.data[3])
+      ..add(pointer.ref.sensor.data[4])
+      ..add(pointer.ref.sensor.data[5]);
+    sensorTimestamp = pointer.ref.sensor.sensorTimestamp;
   }
 
   static SdlxSensorEvent fromPointer(Pointer<SdlEvent> pointer) =>
@@ -1226,9 +1226,9 @@ class SdlxQuitEvent extends SdlxEvent {
   SdlxQuitEvent({super.type = 0, super.reserved = 0, super.timestamp = 0});
 
   void loadFromPointer(Pointer<SdlEvent> pointer) {
-    type = pointer.quit.ref.type;
-    reserved = pointer.quit.ref.reserved;
-    timestamp = pointer.quit.ref.timestamp;
+    type = pointer.ref.quit.type;
+    reserved = pointer.ref.quit.reserved;
+    timestamp = pointer.ref.quit.timestamp;
   }
 
   static SdlxQuitEvent fromPointer(Pointer<SdlEvent> pointer) =>
@@ -1242,8 +1242,8 @@ class SdlxUserEvent extends SdlxEvent {
     super.timestamp = 0,
     this.windowId = 0,
     this.code = 0,
-    Pointer<NativeType>? data1,
-    Pointer<NativeType>? data2,
+    Pointer<Void>? data1,
+    Pointer<Void>? data2,
   }) {
     this.data1 = data1 ?? nullptr;
     this.data2 = data2 ?? nullptr;
@@ -1251,17 +1251,17 @@ class SdlxUserEvent extends SdlxEvent {
 
   int windowId;
   int code;
-  late Pointer<NativeType> data1;
-  late Pointer<NativeType> data2;
+  late Pointer<Void> data1;
+  late Pointer<Void> data2;
 
   void loadFromPointer(Pointer<SdlEvent> pointer) {
-    type = pointer.user.ref.type;
-    reserved = pointer.user.ref.reserved;
-    timestamp = pointer.user.ref.timestamp;
-    windowId = pointer.user.ref.windowId;
-    code = pointer.user.ref.code;
-    data1 = pointer.user.ref.data1;
-    data2 = pointer.user.ref.data2;
+    type = pointer.ref.user.type;
+    reserved = pointer.ref.user.reserved;
+    timestamp = pointer.ref.user.timestamp;
+    windowId = pointer.ref.user.windowId;
+    code = pointer.ref.user.code;
+    data1 = pointer.ref.user.data1;
+    data2 = pointer.ref.user.data2;
   }
 
   static SdlxUserEvent fromPointer(Pointer<SdlEvent> pointer) =>

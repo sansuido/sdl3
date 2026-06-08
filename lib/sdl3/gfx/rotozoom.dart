@@ -129,7 +129,11 @@ Pointer<SdlSurface> rotateSurface90Degrees(
           dstBuf.value = dst.ref.pixels.cast<Uint8>();
           bpr = src.ref.w * bpp;
           for (row = 0; row < src.ref.h; row++) {
-            sdlMemcpy(dstBuf.value, srcBuf.value, bpr);
+            sdlMemcpy(
+              dstBuf.value.cast<Void>(),
+              srcBuf.value.cast<Void>(),
+              bpr,
+            );
             srcBuf.value = srcBuf.value + src.ref.pitch;
             dstBuf.value = dstBuf.value + dst.ref.pitch;
           }
@@ -147,7 +151,11 @@ Pointer<SdlSurface> rotateSurface90Degrees(
             ..value = dst.ref.pixels.cast<Uint8>()
             ..value = dstBuf.value + (dst.ref.w - row - 1) * bpp;
           for (col = 0; col < src.ref.w; ++col) {
-            sdlMemcpy(dstBuf.value, srcBuf.value, bpp);
+            sdlMemcpy(
+              dstBuf.value.cast<Void>(),
+              srcBuf.value.cast<Void>(),
+              bpp,
+            );
             srcBuf.value = srcBuf.value + bpp;
             dstBuf.value = dstBuf.value + dst.ref.pitch;
           }
@@ -167,7 +175,11 @@ Pointer<SdlSurface> rotateSurface90Degrees(
                 (dst.ref.h - row - 1) * dst.ref.pitch +
                 (dst.ref.w - 1) * bpp;
           for (col = 0; col < src.ref.w; ++col) {
-            sdlMemcpy(dstBuf.value, srcBuf.value, bpp);
+            sdlMemcpy(
+              dstBuf.value.cast<Void>(),
+              srcBuf.value.cast<Void>(),
+              bpp,
+            );
             srcBuf.value = srcBuf.value + bpp;
             dstBuf.value = dstBuf.value - bpp;
           }
@@ -185,7 +197,11 @@ Pointer<SdlSurface> rotateSurface90Degrees(
             ..value =
                 dstBuf.value + (row * bpp) + ((dst.ref.h - 1) * dst.ref.pitch);
           for (col = 0; col < src.ref.w; ++col) {
-            sdlMemcpy(dstBuf.value, srcBuf.value, bpp);
+            sdlMemcpy(
+              dstBuf.value.cast<Void>(),
+              srcBuf.value.cast<Void>(),
+              bpp,
+            );
             srcBuf.value = srcBuf.value + bpp;
             dstBuf.value = dstBuf.value - dst.ref.pitch;
           }

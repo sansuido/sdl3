@@ -13,8 +13,8 @@ class SdlxGpuSamplerCreateInfo {
     this.compareOp = 0,
     this.minLod = 0,
     this.maxLod = 0,
-    this.enableAnisotropy = 0,
-    this.enableCompare = 0,
+    this.enableAnisotropy = false,
+    this.enableCompare = false,
     this.padding1 = 0,
     this.padding2 = 0,
     this.props = 0,
@@ -30,8 +30,8 @@ class SdlxGpuSamplerCreateInfo {
   int compareOp;
   double minLod;
   double maxLod;
-  int enableAnisotropy;
-  int enableCompare;
+  bool enableAnisotropy;
+  bool enableCompare;
   int padding1;
   int padding2;
   int props;

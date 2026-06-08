@@ -41,19 +41,19 @@ part of '../sdl.dart';
 Pointer<SdlThread> sdlCreateThread(
   Pointer<NativeFunction<SdlThreadFunction>> fn,
   String? name,
-  Pointer<NativeType> data,
+  Pointer<Void> data,
 ) {
   final sdlCreateThreadLookupFunction = _libSdl
       .lookupFunction<
         Pointer<SdlThread> Function(
           Pointer<NativeFunction<SdlThreadFunction>> fn,
           Pointer<Utf8> name,
-          Pointer<NativeType> data,
+          Pointer<Void> data,
         ),
         Pointer<SdlThread> Function(
           Pointer<NativeFunction<SdlThreadFunction>> fn,
           Pointer<Utf8> name,
-          Pointer<NativeType> data,
+          Pointer<Void> data,
         )
       >('SDL_CreateThread');
   final namePointer = name != null ? name.toNativeUtf8() : nullptr;
@@ -164,25 +164,25 @@ Pointer<SdlThread> sdlCreateThreadWithProperties(int props) {
 Pointer<SdlThread> sdlCreateThreadRuntime(
   Pointer<NativeFunction<SdlThreadFunction>> fn,
   String? name,
-  Pointer<NativeType> data,
-  Pointer<NativeType> pfnBeginThread,
-  Pointer<NativeType> pfnEndThread,
+  Pointer<Void> data,
+  Pointer<NativeFunction<SdlFunctionPointer>> pfnBeginThread,
+  Pointer<NativeFunction<SdlFunctionPointer>> pfnEndThread,
 ) {
   final sdlCreateThreadRuntimeLookupFunction = _libSdl
       .lookupFunction<
         Pointer<SdlThread> Function(
           Pointer<NativeFunction<SdlThreadFunction>> fn,
           Pointer<Utf8> name,
-          Pointer<NativeType> data,
-          Pointer<NativeType> pfnBeginThread,
-          Pointer<NativeType> pfnEndThread,
+          Pointer<Void> data,
+          Pointer<NativeFunction<SdlFunctionPointer>> pfnBeginThread,
+          Pointer<NativeFunction<SdlFunctionPointer>> pfnEndThread,
         ),
         Pointer<SdlThread> Function(
           Pointer<NativeFunction<SdlThreadFunction>> fn,
           Pointer<Utf8> name,
-          Pointer<NativeType> data,
-          Pointer<NativeType> pfnBeginThread,
-          Pointer<NativeType> pfnEndThread,
+          Pointer<Void> data,
+          Pointer<NativeFunction<SdlFunctionPointer>> pfnBeginThread,
+          Pointer<NativeFunction<SdlFunctionPointer>> pfnEndThread,
         )
       >('SDL_CreateThreadRuntime');
   final namePointer = name != null ? name.toNativeUtf8() : nullptr;
@@ -217,20 +217,20 @@ Pointer<SdlThread> sdlCreateThreadRuntime(
 /// {@category thread}
 Pointer<SdlThread> sdlCreateThreadWithPropertiesRuntime(
   int props,
-  Pointer<NativeType> pfnBeginThread,
-  Pointer<NativeType> pfnEndThread,
+  Pointer<NativeFunction<SdlFunctionPointer>> pfnBeginThread,
+  Pointer<NativeFunction<SdlFunctionPointer>> pfnEndThread,
 ) {
   final sdlCreateThreadWithPropertiesRuntimeLookupFunction = _libSdl
       .lookupFunction<
         Pointer<SdlThread> Function(
           Uint32 props,
-          Pointer<NativeType> pfnBeginThread,
-          Pointer<NativeType> pfnEndThread,
+          Pointer<NativeFunction<SdlFunctionPointer>> pfnBeginThread,
+          Pointer<NativeFunction<SdlFunctionPointer>> pfnEndThread,
         ),
         Pointer<SdlThread> Function(
           int props,
-          Pointer<NativeType> pfnBeginThread,
-          Pointer<NativeType> pfnEndThread,
+          Pointer<NativeFunction<SdlFunctionPointer>> pfnBeginThread,
+          Pointer<NativeFunction<SdlFunctionPointer>> pfnEndThread,
         )
       >('SDL_CreateThreadWithPropertiesRuntime');
   return sdlCreateThreadWithPropertiesRuntimeLookupFunction(
@@ -350,10 +350,10 @@ int sdlGetThreadId(Pointer<SdlThread> thread) {
 bool sdlSetCurrentThreadPriority(int priority) {
   final sdlSetCurrentThreadPriorityLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(Int32 priority),
-        int Function(int priority)
+        Bool Function(Int32 priority),
+        bool Function(int priority)
       >('SDL_SetCurrentThreadPriority');
-  return sdlSetCurrentThreadPriorityLookupFunction(priority) == 1;
+  return sdlSetCurrentThreadPriorityLookupFunction(priority);
 }
 
 ///
@@ -497,11 +497,11 @@ void sdlDetachThread(Pointer<SdlThread> thread) {
 /// extern SDL_DECLSPEC void * SDLCALL SDL_GetTLS(SDL_TLSID *id)
 /// ```
 /// {@category thread}
-Pointer<NativeType> sdlGetTls(Pointer<SdlAtomicInt> id) {
+Pointer<Void> sdlGetTls(Pointer<SdlAtomicInt> id) {
   final sdlGetTlsLookupFunction = _libSdl
       .lookupFunction<
-        Pointer<NativeType> Function(Pointer<SdlAtomicInt> id),
-        Pointer<NativeType> Function(Pointer<SdlAtomicInt> id)
+        Pointer<Void> Function(Pointer<SdlAtomicInt> id),
+        Pointer<Void> Function(Pointer<SdlAtomicInt> id)
       >('SDL_GetTLS');
   return sdlGetTlsLookupFunction(id);
 }
@@ -538,23 +538,23 @@ Pointer<NativeType> sdlGetTls(Pointer<SdlAtomicInt> id) {
 /// {@category thread}
 bool sdlSetTls(
   Pointer<SdlAtomicInt> id,
-  Pointer<NativeType> value,
-  Pointer<NativeType> deor,
+  Pointer<Void> value,
+  SdlTlsDeorCallback deor,
 ) {
   final sdlSetTlsLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(
+        Bool Function(
           Pointer<SdlAtomicInt> id,
-          Pointer<NativeType> value,
-          Pointer<NativeType> deor,
+          Pointer<Void> value,
+          SdlTlsDeorCallback deor,
         ),
-        int Function(
+        bool Function(
           Pointer<SdlAtomicInt> id,
-          Pointer<NativeType> value,
-          Pointer<NativeType> deor,
+          Pointer<Void> value,
+          SdlTlsDeorCallback deor,
         )
       >('SDL_SetTLS');
-  return sdlSetTlsLookupFunction(id, value, deor) == 1;
+  return sdlSetTlsLookupFunction(id, value, deor);
 }
 
 ///

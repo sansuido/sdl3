@@ -27,7 +27,7 @@ Pointer<Uint8> sdlxShaderCrossCompileDxbcFromHlsl(
 ) {
   Pointer<Uint8> result = nullptr;
   final infoPointer = info.calloc();
-  final sizePointer = calloc<Uint32>();
+  final sizePointer = calloc<Size>();
   result = sdlShaderCrossCompileDxbcFromHlsl(
     infoPointer,
     sizePointer,
@@ -65,7 +65,7 @@ Pointer<Uint8> sdlxShaderCrossCompileDxilFromHlsl(
 ) {
   Pointer<Uint8> result = nullptr;
   final infoPointer = info.calloc();
-  final sizePointer = calloc<Uint32>();
+  final sizePointer = calloc<Size>();
   result = sdlShaderCrossCompileDxilFromHlsl(
     infoPointer,
     sizePointer,
@@ -102,7 +102,7 @@ Pointer<Uint8> sdlxShaderCrossCompileSpirvFromHlsl(
 ) {
   Pointer<Uint8> result = nullptr;
   final infoPointer = info.calloc();
-  final sizePointer = calloc<Uint32>();
+  final sizePointer = calloc<Size>();
   result = sdlShaderCrossCompileSpirvFromHlsl(
     infoPointer,
     sizePointer,

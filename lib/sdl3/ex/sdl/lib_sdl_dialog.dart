@@ -56,7 +56,7 @@ part of '../../sdl.dart';
 void sdlxShowOpenFileDialog({
   required Pointer<NativeFunction<SdlDialogFileCallback>>? callback,
   Pointer<SdlWindow>? window,
-  Pointer<NativeType>? userdata,
+  Pointer<Void>? userdata,
   List<SdlxDialogFileFilter>? filters,
   String? defaultLocation,
   bool allowMany = false,
@@ -133,7 +133,7 @@ void sdlxShowOpenFileDialog({
 void sdlxShowSaveFileDialog({
   required Pointer<NativeFunction<SdlDialogFileCallback>>? callback,
   Pointer<SdlWindow>? window,
-  Pointer<NativeType>? userdata,
+  Pointer<Void>? userdata,
   List<SdlxDialogFileFilter>? filters,
   String? defaultLocation,
 }) {
@@ -204,7 +204,7 @@ void sdlxShowSaveFileDialog({
 void sdlxShowOpenFolderDialog({
   required Pointer<NativeFunction<SdlDialogFileCallback>>? callback,
   Pointer<SdlWindow>? window,
-  Pointer<NativeType>? userdata,
+  Pointer<Void>? userdata,
   String? defaultLocation,
   bool allowMany = false,
 }) {
@@ -271,7 +271,7 @@ void sdlxShowOpenFolderDialog({
 void sdlxShowFileDialogWithProperties({
   required int type,
   required Pointer<NativeFunction<SdlDialogFileCallback>>? callback,
-  Pointer<NativeType>? userdata,
+  Pointer<Void>? userdata,
   int prop = 0,
 }) {
   sdlShowFileDialogWithProperties(

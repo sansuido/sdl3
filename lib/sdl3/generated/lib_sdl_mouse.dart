@@ -19,8 +19,8 @@ part of '../sdl.dart';
 /// {@category mouse}
 bool sdlHasMouse() {
   final sdlHasMouseLookupFunction = _libSdl
-      .lookupFunction<Uint8 Function(), int Function()>('SDL_HasMouse');
-  return sdlHasMouseLookupFunction() == 1;
+      .lookupFunction<Bool Function(), bool Function()>('SDL_HasMouse');
+  return sdlHasMouseLookupFunction();
 }
 
 ///
@@ -312,10 +312,10 @@ void sdlWarpMouseInWindow(Pointer<SdlWindow> window, double x, double y) {
 bool sdlWarpMouseGlobal(double x, double y) {
   final sdlWarpMouseGlobalLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(Float x, Float y),
-        int Function(double x, double y)
+        Bool Function(Float x, Float y),
+        bool Function(double x, double y)
       >('SDL_WarpMouseGlobal');
-  return sdlWarpMouseGlobalLookupFunction(x, y) == 1;
+  return sdlWarpMouseGlobalLookupFunction(x, y);
 }
 
 ///
@@ -340,20 +340,20 @@ bool sdlWarpMouseGlobal(double x, double y) {
 /// {@category mouse}
 bool sdlSetRelativeMouseTransform(
   Pointer<NativeFunction<SdlMouseMotionTransformCallback>> callback,
-  Pointer<NativeType> userdata,
+  Pointer<Void> userdata,
 ) {
   final sdlSetRelativeMouseTransformLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(
+        Bool Function(
           Pointer<NativeFunction<SdlMouseMotionTransformCallback>> callback,
-          Pointer<NativeType> userdata,
+          Pointer<Void> userdata,
         ),
-        int Function(
+        bool Function(
           Pointer<NativeFunction<SdlMouseMotionTransformCallback>> callback,
-          Pointer<NativeType> userdata,
+          Pointer<Void> userdata,
         )
       >('SDL_SetRelativeMouseTransform');
-  return sdlSetRelativeMouseTransformLookupFunction(callback, userdata) == 1;
+  return sdlSetRelativeMouseTransformLookupFunction(callback, userdata);
 }
 
 ///
@@ -389,11 +389,10 @@ bool sdlSetRelativeMouseTransform(
 bool sdlSetWindowRelativeMouseMode(Pointer<SdlWindow> window, bool enabled) {
   final sdlSetWindowRelativeMouseModeLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(Pointer<SdlWindow> window, Uint8 enabled),
-        int Function(Pointer<SdlWindow> window, int enabled)
+        Bool Function(Pointer<SdlWindow> window, Bool enabled),
+        bool Function(Pointer<SdlWindow> window, bool enabled)
       >('SDL_SetWindowRelativeMouseMode');
-  return sdlSetWindowRelativeMouseModeLookupFunction(window, enabled ? 1 : 0) ==
-      1;
+  return sdlSetWindowRelativeMouseModeLookupFunction(window, enabled);
 }
 
 ///
@@ -415,10 +414,10 @@ bool sdlSetWindowRelativeMouseMode(Pointer<SdlWindow> window, bool enabled) {
 bool sdlGetWindowRelativeMouseMode(Pointer<SdlWindow> window) {
   final sdlGetWindowRelativeMouseModeLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(Pointer<SdlWindow> window),
-        int Function(Pointer<SdlWindow> window)
+        Bool Function(Pointer<SdlWindow> window),
+        bool Function(Pointer<SdlWindow> window)
       >('SDL_GetWindowRelativeMouseMode');
-  return sdlGetWindowRelativeMouseModeLookupFunction(window) == 1;
+  return sdlGetWindowRelativeMouseModeLookupFunction(window);
 }
 
 ///
@@ -473,10 +472,10 @@ bool sdlGetWindowRelativeMouseMode(Pointer<SdlWindow> window) {
 /// {@category mouse}
 bool sdlCaptureMouse(bool enabled) {
   final sdlCaptureMouseLookupFunction = _libSdl
-      .lookupFunction<Uint8 Function(Uint8 enabled), int Function(int enabled)>(
+      .lookupFunction<Bool Function(Bool enabled), bool Function(bool enabled)>(
         'SDL_CaptureMouse',
       );
-  return sdlCaptureMouseLookupFunction(enabled ? 1 : 0) == 1;
+  return sdlCaptureMouseLookupFunction(enabled);
 }
 
 ///
@@ -740,10 +739,10 @@ Pointer<SdlCursor> sdlCreateSystemCursor(int id) {
 bool sdlSetCursor(Pointer<SdlCursor> cursor) {
   final sdlSetCursorLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(Pointer<SdlCursor> cursor),
-        int Function(Pointer<SdlCursor> cursor)
+        Bool Function(Pointer<SdlCursor> cursor),
+        bool Function(Pointer<SdlCursor> cursor)
       >('SDL_SetCursor');
-  return sdlSetCursorLookupFunction(cursor) == 1;
+  return sdlSetCursorLookupFunction(cursor);
 }
 
 ///
@@ -848,8 +847,8 @@ void sdlDestroyCursor(Pointer<SdlCursor> cursor) {
 /// {@category mouse}
 bool sdlShowCursor() {
   final sdlShowCursorLookupFunction = _libSdl
-      .lookupFunction<Uint8 Function(), int Function()>('SDL_ShowCursor');
-  return sdlShowCursorLookupFunction() == 1;
+      .lookupFunction<Bool Function(), bool Function()>('SDL_ShowCursor');
+  return sdlShowCursorLookupFunction();
 }
 
 ///
@@ -871,8 +870,8 @@ bool sdlShowCursor() {
 /// {@category mouse}
 bool sdlHideCursor() {
   final sdlHideCursorLookupFunction = _libSdl
-      .lookupFunction<Uint8 Function(), int Function()>('SDL_HideCursor');
-  return sdlHideCursorLookupFunction() == 1;
+      .lookupFunction<Bool Function(), bool Function()>('SDL_HideCursor');
+  return sdlHideCursorLookupFunction();
 }
 
 ///
@@ -894,6 +893,6 @@ bool sdlHideCursor() {
 /// {@category mouse}
 bool sdlCursorVisible() {
   final sdlCursorVisibleLookupFunction = _libSdl
-      .lookupFunction<Uint8 Function(), int Function()>('SDL_CursorVisible');
-  return sdlCursorVisibleLookupFunction() == 1;
+      .lookupFunction<Bool Function(), bool Function()>('SDL_CursorVisible');
+  return sdlCursorVisibleLookupFunction();
 }

@@ -17,21 +17,22 @@ class SdlxMessageBoxColorScheme {
 
   Pointer<SdlMessageBoxColorScheme> calloc() {
     final pointer = ffi.calloc<SdlMessageBoxColorScheme>();
-    pointer.colors[SdlkMessageboxColor.background].r = background.r;
-    pointer.colors[SdlkMessageboxColor.background].g = background.g;
-    pointer.colors[SdlkMessageboxColor.background].b = background.b;
-    pointer.colors[SdlkMessageboxColor.text].r = text.r;
-    pointer.colors[SdlkMessageboxColor.text].g = text.g;
-    pointer.colors[SdlkMessageboxColor.text].b = text.b;
-    pointer.colors[SdlkMessageboxColor.buttonBorder].r = buttonBorder.r;
-    pointer.colors[SdlkMessageboxColor.buttonBorder].g = buttonBorder.g;
-    pointer.colors[SdlkMessageboxColor.buttonBorder].b = buttonBorder.b;
-    pointer.colors[SdlkMessageboxColor.buttonBackground].r = buttonBackground.r;
-    pointer.colors[SdlkMessageboxColor.buttonBackground].g = buttonBackground.g;
-    pointer.colors[SdlkMessageboxColor.buttonBackground].b = buttonBackground.b;
-    pointer.colors[SdlkMessageboxColor.buttonSelected].r = buttonSelected.r;
-    pointer.colors[SdlkMessageboxColor.buttonSelected].g = buttonSelected.g;
-    pointer.colors[SdlkMessageboxColor.buttonSelected].b = buttonSelected.b;
+    final colorsPointer = pointer.cast<SdlMessageBoxColor>();
+    colorsPointer[SdlkMessageboxColor.background].r = background.r;
+    colorsPointer[SdlkMessageboxColor.background].g = background.g;
+    colorsPointer[SdlkMessageboxColor.background].b = background.b;
+    colorsPointer[SdlkMessageboxColor.text].r = text.r;
+    colorsPointer[SdlkMessageboxColor.text].g = text.g;
+    colorsPointer[SdlkMessageboxColor.text].b = text.b;
+    colorsPointer[SdlkMessageboxColor.buttonBorder].r = buttonBorder.r;
+    colorsPointer[SdlkMessageboxColor.buttonBorder].g = buttonBorder.g;
+    colorsPointer[SdlkMessageboxColor.buttonBorder].b = buttonBorder.b;
+    colorsPointer[SdlkMessageboxColor.buttonBackground].r = buttonBackground.r;
+    colorsPointer[SdlkMessageboxColor.buttonBackground].g = buttonBackground.g;
+    colorsPointer[SdlkMessageboxColor.buttonBackground].b = buttonBackground.b;
+    colorsPointer[SdlkMessageboxColor.buttonSelected].r = buttonSelected.r;
+    colorsPointer[SdlkMessageboxColor.buttonSelected].g = buttonSelected.g;
+    colorsPointer[SdlkMessageboxColor.buttonSelected].b = buttonSelected.b;
     return pointer;
   }
 }

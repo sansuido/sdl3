@@ -61,7 +61,7 @@ bool sdlGetMasksForPixelFormat(
 ) {
   final sdlGetMasksForPixelFormatLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(
+        Bool Function(
           Int32 format,
           Pointer<Int32> bpp,
           Pointer<Uint32> rmask,
@@ -69,7 +69,7 @@ bool sdlGetMasksForPixelFormat(
           Pointer<Uint32> bmask,
           Pointer<Uint32> amask,
         ),
-        int Function(
+        bool Function(
           int format,
           Pointer<Int32> bpp,
           Pointer<Uint32> rmask,
@@ -79,14 +79,13 @@ bool sdlGetMasksForPixelFormat(
         )
       >('SDL_GetMasksForPixelFormat');
   return sdlGetMasksForPixelFormatLookupFunction(
-        format,
-        bpp,
-        rmask,
-        gmask,
-        bmask,
-        amask,
-      ) ==
-      1;
+    format,
+    bpp,
+    rmask,
+    gmask,
+    bmask,
+    amask,
+  );
 }
 
 ///
@@ -226,13 +225,13 @@ bool sdlSetPaletteColors(
 ) {
   final sdlSetPaletteColorsLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(
+        Bool Function(
           Pointer<SdlPalette> palette,
           Pointer<SdlColor> colors,
           Int32 firstcolor,
           Int32 ncolors,
         ),
-        int Function(
+        bool Function(
           Pointer<SdlPalette> palette,
           Pointer<SdlColor> colors,
           int firstcolor,
@@ -240,12 +239,11 @@ bool sdlSetPaletteColors(
         )
       >('SDL_SetPaletteColors');
   return sdlSetPaletteColorsLookupFunction(
-        palette,
-        colors,
-        firstcolor,
-        ncolors,
-      ) ==
-      1;
+    palette,
+    colors,
+    firstcolor,
+    ncolors,
+  );
 }
 
 ///

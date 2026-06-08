@@ -229,10 +229,10 @@ int sdlDestroyGpuxrSwapchain(
 /// {@category openxr}
 bool sdlOpenXrLoadLibrary() {
   final sdlOpenXrLoadLibraryLookupFunction = _libSdl
-      .lookupFunction<Uint8 Function(), int Function()>(
+      .lookupFunction<Bool Function(), bool Function()>(
         'SDL_OpenXR_LoadLibrary',
       );
-  return sdlOpenXrLoadLibraryLookupFunction() == 1;
+  return sdlOpenXrLoadLibraryLookupFunction();
 }
 
 ///
@@ -278,11 +278,11 @@ void sdlOpenXrUnloadLibrary() {
 /// extern SDL_DECLSPEC PFN_xrGetInstanceProcAddr SDLCALL SDL_OpenXR_GetXrGetInstanceProcAddr(void)
 /// ```
 /// {@category openxr}
-Pointer<NativeType> sdlOpenXrGetXrGetInstanceProcAddr() {
+PfnXrGetInstanceProcAddr sdlOpenXrGetXrGetInstanceProcAddr() {
   final sdlOpenXrGetXrGetInstanceProcAddrLookupFunction = _libSdl
       .lookupFunction<
-        Pointer<NativeType> Function(),
-        Pointer<NativeType> Function()
+        PfnXrGetInstanceProcAddr Function(),
+        PfnXrGetInstanceProcAddr Function()
       >('SDL_OpenXR_GetXrGetInstanceProcAddr');
   return sdlOpenXrGetXrGetInstanceProcAddrLookupFunction();
 }

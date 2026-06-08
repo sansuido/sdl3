@@ -51,7 +51,7 @@ void testCompile(CompileMode mode, String source, {bool debug = false}) {
       'Simple shader',
     );
   }
-  late Pointer<NativeType> shader;
+  late Pointer<Uint8> shader;
   switch (mode) {
     case CompileMode.dxbc:
       shader = sdlxShaderCrossCompileDxbcFromHlsl(hlslInfo);
@@ -66,7 +66,7 @@ void testCompile(CompileMode mode, String source, {bool debug = false}) {
   if (shader == nullptr) {
     print('Failed to compile shader: ${sdlGetError()}');
   } else {
-    sdlFree(shader);
+    sdlFree(shader.cast<Void>());
   }
   if (debug) {
     sdlDestroyProperties(hlslInfo.props);

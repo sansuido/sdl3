@@ -39,7 +39,7 @@ List<int> sdlxGetAudioPlaybackDevices() {
     for (var i = 0; i < countPointer.value; i++) {
       result.add(devicesPointer[i]);
     }
-    sdlFree(devicesPointer);
+    sdlFree(devicesPointer.cast<Void>());
   }
   countPointer.callocFree();
   return result;
@@ -84,7 +84,7 @@ List<int> sdlxGetAudioRecordingDevices() {
     for (var i = 0; i < countPointer.value; i++) {
       result.add(devicesPointer[i]);
     }
-    sdlFree(devicesPointer);
+    sdlFree(devicesPointer.cast<Void>());
   }
   countPointer.callocFree();
   return result;
@@ -178,7 +178,7 @@ List<int> sdlxGetAudioDeviceChannelMap(int devid) {
     for (var i = 0; i < countPointer.value; i++) {
       result.add(channelMapsPointer[i]);
     }
-    sdlFree(channelMapsPointer);
+    sdlFree(channelMapsPointer.cast<Void>());
   }
   countPointer.callocFree();
   return result;
@@ -525,7 +525,7 @@ List<int> sdlxGetAudioStreamInputChannelMap(Pointer<SdlAudioStream> stream) {
     for (var i = 0; i < countPointer.value; i++) {
       result.add(inputChannelMapsPointer[i]);
     }
-    sdlFree(inputChannelMapsPointer);
+    sdlFree(inputChannelMapsPointer.cast<Void>());
   }
   countPointer.callocFree();
   return result;
@@ -568,7 +568,7 @@ List<int> sdlxGetAudioStreamOutputChannelMap(Pointer<SdlAudioStream> stream) {
     for (var i = 0; i < countPointer.value; i++) {
       result.add(inputChannelMapsPointer[i]);
     }
-    sdlFree(inputChannelMapsPointer);
+    sdlFree(inputChannelMapsPointer.cast<Void>());
   }
   countPointer.callocFree();
   return result;
@@ -771,7 +771,7 @@ bool sdlxPutAudioStreamData(Pointer<SdlAudioStream> stream, TypedData buf) {
   }
   bufPointer.asTypedList(totalBytes).setAll(0, byteView);
   final result = sdlPutAudioStreamData(stream, bufPointer.cast(), totalBytes);
-  sdlFree(bufPointer);
+  sdlFree(bufPointer.cast<Void>());
   return result;
 }
 
@@ -828,7 +828,7 @@ bool sdlxPutAudioStreamDataNoCopy(
   Pointer<SdlAudioStream> stream,
   Uint8List buf,
   Pointer<NativeFunction<SdlAudioStreamDataCompleteCallback>> callback,
-  Pointer<NativeType> userdata,
+  Pointer<Void> userdata,
 ) {
   final byteView = buf.buffer.asUint8List(buf.offsetInBytes, buf.lengthInBytes);
   final totalBytes = byteView.length;
@@ -839,12 +839,12 @@ bool sdlxPutAudioStreamDataNoCopy(
   bufPointer.asTypedList(totalBytes).setAll(0, byteView);
   final result = sdlPutAudioStreamDataNoCopy(
     stream,
-    bufPointer,
+    bufPointer.cast<Void>(),
     buf.length,
     callback,
     userdata,
   );
-  sdlFree(bufPointer);
+  sdlFree(bufPointer.cast<Void>());
   return result;
 }
 
@@ -900,7 +900,7 @@ TypedData? sdlxGetAudioStreamData(
     maxLenInBytes,
   );
   if (bytesRead <= 0) {
-    sdlFree(bufPointer);
+    sdlFree(bufPointer.cast<Void>());
     return null;
   }
   TypedData? result;
@@ -920,7 +920,7 @@ TypedData? sdlxGetAudioStreamData(
     case SDL_AUDIO_F32BE:
       result = Float32List.fromList(byteBuffer.asFloat32List());
   }
-  sdlFree(bufPointer);
+  sdlFree(bufPointer.cast<Void>());
   return result;
 }
 
@@ -992,7 +992,7 @@ Pointer<SdlAudioStream> sdlxOpenAudioDeviceStream(
   int devid,
   SdlxAudioSpec? spec,
   Pointer<NativeFunction<SdlAudioStreamCallback>> callback,
-  Pointer<NativeType> userdata,
+  Pointer<Void> userdata,
 ) {
   Pointer<SdlAudioSpec> specPointer = nullptr;
   if (spec != null) {
@@ -1113,7 +1113,7 @@ Uint8List? sdlxLoadWavIo(
     result = Uint8List.fromList(
       audioBufPointer.value.asTypedList(audioLenPointer.value),
     );
-    sdlFree(audioBufPointer.value);
+    sdlFree(audioBufPointer.value.cast<Void>());
   }
   specPointer.callocFree();
   audioBufPointer.callocFree();
@@ -1170,7 +1170,7 @@ Uint8List? sdlxLoadWav(String path, SdlxAudioSpec spec) {
     result = Uint8List.fromList(
       audioBufPointer.value.asTypedList(audioLenPointer.value),
     );
-    sdlFree(audioBufPointer.value);
+    sdlFree(audioBufPointer.value.cast<Void>());
   }
   specPointer.callocFree();
   audioBufPointer.callocFree();

@@ -143,80 +143,6 @@ bool mixxGetMixerFormat(Pointer<MixMixer> mixer, SdlxAudioSpec spec) {
 }
 
 ///
-/// Load audio for playback from a memory buffer without making a copy.
-///
-/// When loading audio through most other LoadAudio functions, the data will be
-/// cached fully in RAM in its original data format, for decoding on-demand.
-/// This function does most of the same work as those functions, but instead
-/// uses a buffer of memory provided by the app that it does not make a copy
-/// of.
-///
-/// This buffer must live for the entire time the returned MIX_Audio lives, as
-/// the mixer will access the buffer whenever it needs to mix more data.
-///
-/// This function is meant to maximize efficiency: if the data is already in
-/// memory and can remain there, don't copy it. This data can be in any
-/// supported audio file format (WAV, MP3, etc); it will be decoded on the fly
-/// while mixing. Unlike MIX_LoadAudio(), there is no `predecode` option
-/// offered here, as this is meant to optimize for data that's already in
-/// memory and intends to exist there for significant time; since predecoding
-/// would only need the file format data once, upfront, one could simply wrap
-/// it in SDL_CreateIOFromConstMem() and pass that to MIX_LoadAudio_IO().
-///
-/// MIX_Audio objects can be shared between multiple mixers. The `mixer`
-/// parameter just suggests the most likely mixer to use this audio, in case
-/// some optimization might be applied, but this is not required, and a NULL
-/// mixer may be specified.
-///
-/// If `free_when_done` is true, SDL_mixer will call `SDL_free(data)` when the
-/// returned MIX_Audio is eventually destroyed. This can be useful when the
-/// data is not static, but rather loaded elsewhere for this specific MIX_Audio
-/// and simply wants to avoid the extra copy.
-///
-/// As audio format information is obtained from the file format metadata, this
-/// isn't useful for raw PCM data; in that case, use MIX_LoadRawAudioNoCopy()
-/// instead, which offers an SDL_AudioSpec.
-///
-/// Once a MIX_Audio is created, it can be assigned to a MIX_Track with
-/// MIX_SetTrackAudio(), or played without any management with MIX_PlayAudio().
-///
-/// When done with a MIX_Audio, it can be freed with MIX_DestroyAudio().
-///
-/// \param mixer a mixer this audio is intended to be used with. May be NULL.
-/// \param data the buffer where the audio data lives.
-/// \param datalen the size, in bytes, of the buffer.
-/// \param free_when_done if true, `data` will be given to SDL_free() when the
-/// MIX_Audio is destroyed.
-/// \returns an audio object that can be used to make sound on a mixer, or NULL
-/// on failure; call SDL_GetError() for more information.
-///
-/// \threadsafety It is safe to call this function from any thread.
-///
-/// \since This function is available since SDL_mixer 3.0.0.
-///
-/// \sa MIX_DestroyAudio
-/// \sa MIX_SetTrackAudio
-/// \sa MIX_LoadRawAudioNoCopy
-/// \sa MIX_LoadAudio_IO
-///
-/// ```c
-/// extern SDL_DECLSPEC MIX_Audio * SDLCALL MIX_LoadAudioNoCopy(MIX_Mixer *mixer, const void *data, size_t datalen, bool free_when_done)
-/// ```
-/// {@category mixer}
-Pointer<MixAudio> mixxLoadAudioNoCopy(Pointer<MixMixer> mixer, Uint8List data) {
-  final dataPointer = sdlMalloc(data.length).cast<Uint8>();
-  if (dataPointer == nullptr) {
-    return nullptr;
-  }
-  dataPointer.asTypedList(data.length).setAll(0, data);
-  final result = mixLoadAudioNoCopy(mixer, dataPointer, data.length, true);
-  if (result == nullptr) {
-    sdlFree(dataPointer);
-  }
-  return result;
-}
-
-///
 /// Load raw PCM data from an SDL_IOStream.
 ///
 /// There are other options for _streaming_ raw PCM: an SDL_AudioStream can be
@@ -305,12 +231,17 @@ Pointer<MixAudio> mixxLoadRawAudioIo(
 /// {@category mixer}
 Pointer<MixAudio> mixxLoadRawAudio(
   Pointer<MixMixer> mixer,
-  Pointer<NativeType> data,
+  Pointer<Void> data,
   int datalen,
   SdlxAudioSpec spec,
 ) {
   final specPointer = spec.calloc();
-  final result = mixLoadRawAudio(mixer, data, datalen, specPointer);
+  final result = mixLoadRawAudio(
+    mixer,
+    data.cast<Void>(),
+    datalen,
+    specPointer,
+  );
   specPointer.callocFree();
   return result;
 }
@@ -361,26 +292,20 @@ Pointer<MixAudio> mixxLoadRawAudio(
 /// {@category mixer}
 Pointer<MixAudio> mixxLoadRawAudioNoCopy(
   Pointer<MixMixer> mixer,
-  Uint8List data,
-  SdlxAudioSpec spec,
-) {
-  final dataPointer = sdlMalloc(data.length).cast<Uint8>();
-  if (dataPointer == nullptr) {
-    return nullptr;
-  }
+  Pointer<Void> data,
+  int datalen,
+  SdlxAudioSpec spec, {
+  bool freeWhenDone = false,
+}) {
   final specPointer = spec.calloc();
-  dataPointer.asTypedList(data.length).setAll(0, data);
   final result = mixLoadRawAudioNoCopy(
     mixer,
-    dataPointer,
-    data.length,
+    data,
+    datalen,
     specPointer,
-    true,
+    freeWhenDone,
   );
   specPointer.callocFree();
-  if (result == nullptr) {
-    sdlFree(dataPointer);
-  }
   return result;
 }
 
@@ -507,7 +432,7 @@ List<String> mixxGetTrackTags(Pointer<MixTrack> track) {
     for (var i = 0; i < countPointer.value; i++) {
       result.add(tagsPointer[i].cast<Utf8>().toDartString());
     }
-    sdlFree(tagsPointer);
+    sdlFree(tagsPointer.cast<Void>());
   }
   countPointer.callocFree();
   return result;
@@ -545,7 +470,7 @@ List<Pointer<MixTrack>> mixxGetTaggedTracks(
     for (var i = 0; i < countPointer.value; i++) {
       result.add(tracksPointer[i]);
     }
-    sdlFree(tracksPointer);
+    sdlFree(tracksPointer.cast<Void>());
   }
   countPointer.callocFree();
   return result;
@@ -816,7 +741,7 @@ int mixxGenerate(Pointer<MixMixer> mixer, TypedData buffer) {
   if (bytesWritten > 0) {
     byteView.setAll(0, bufferPointer.asTypedList(bytesWritten));
   }
-  sdlFree(bufferPointer);
+  sdlFree(bufferPointer.cast<Void>());
   return bytesWritten;
 }
 
@@ -905,7 +830,7 @@ int mixxDecodeAudio(
   if (bytesWritten > 0) {
     byteView.setAll(0, bufferPointer.asTypedList(bytesWritten));
   }
-  sdlFree(bufferPointer);
+  sdlFree(bufferPointer.cast<Void>());
   specPointer.callocFree();
   return bytesWritten;
 }

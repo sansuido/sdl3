@@ -33,7 +33,7 @@ List<int> sdlxGetKeyboards() {
     for (var i = 0; i < countPointer.value; i++) {
       result.add(resultPointer[i]);
     }
-    sdlFree(resultPointer);
+    sdlFree(resultPointer.cast<Void>());
   }
   countPointer.callocFree();
   return result;
@@ -80,7 +80,7 @@ List<bool> sdlxGetKeyboardState() {
   final resultPointer = sdlGetKeyboardState(numkeysPointer);
   if (resultPointer != nullptr) {
     for (var i = 0; i < numkeysPointer.value; i++) {
-      result.add(resultPointer[i] != 0);
+      result.add(resultPointer[i]);
     }
   }
   numkeysPointer.callocFree();

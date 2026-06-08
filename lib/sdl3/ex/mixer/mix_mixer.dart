@@ -365,7 +365,7 @@ extension MixMixerPointerEx on Pointer<MixMixer> {
   /// ```
   /// {@category mixer}
   Pointer<MixAudio> loadRawAudio(
-    Pointer<NativeType> data,
+    Pointer<Void> data,
     int datalen,
     SdlxAudioSpec spec,
   ) => mixxLoadRawAudio(this, data, datalen, spec);
@@ -415,11 +415,17 @@ extension MixMixerPointerEx on Pointer<MixMixer> {
   /// ```
   /// {@category mixer}
   Pointer<MixAudio> loadRawAudioNoCopy(
-    Uint8List data,
+    Pointer<Void> data,
     int datalen,
-    SdlxAudioSpec spec,
-    bool freeWhenDone,
-  ) => mixxLoadRawAudioNoCopy(this, data, spec);
+    SdlxAudioSpec spec, {
+    bool freeWhenDone = false,
+  }) => mixxLoadRawAudioNoCopy(
+    this,
+    data,
+    datalen,
+    spec,
+    freeWhenDone: freeWhenDone,
+  );
 
   ///
   /// Create a MIX_Audio that generates a sinewave.
@@ -981,7 +987,7 @@ extension MixMixerPointerEx on Pointer<MixMixer> {
   /// {@category mixer}
   bool setPostMixCallback(
     Pointer<NativeFunction<MixPostMixCallback>> cb,
-    Pointer<NativeType> userdata,
+    Pointer<Void> userdata,
   ) => mixSetPostMixCallback(this, cb, userdata);
 
   ///

@@ -55,18 +55,21 @@ int main() {
     sdlQuit();
   }
   // array of pixels
-  final texturePixels = calloc<Pointer<Uint32>>();
+  final texturePixels = calloc<Pointer<Void>>();
   final texturePitch = calloc<Int32>();
   texture.lock(nullptr, texturePixels, texturePitch);
   // update texture with new data
-  texturePixels.value.value = ByteData.view(
+  texturePixels.value.cast<Uint32>().value = ByteData.view(
     Uint8List.fromList([255, 0, 0, 255]).buffer,
   ).getUint32(0);
-  (texturePixels.value + gWinWidth * gWinHeight ~/ 2 + gWinWidth ~/ 2).value =
-      ByteData.view(Uint8List.fromList([0, 255, 0, 255]).buffer).getUint32(0);
-  (texturePixels.value + gWinWidth * gWinHeight - 1).value = ByteData.view(
-    Uint8List.fromList([0, 0, 255, 255]).buffer,
+  (texturePixels.value.cast<Uint32>() +
+          gWinWidth * gWinHeight ~/ 2 +
+          gWinWidth ~/ 2)
+      .value = ByteData.view(
+    Uint8List.fromList([0, 255, 0, 255]).buffer,
   ).getUint32(0);
+  (texturePixels.value.cast<Uint32>() + gWinWidth * gWinHeight - 1).value =
+      ByteData.view(Uint8List.fromList([0, 0, 255, 255]).buffer).getUint32(0);
   texture.unlock();
   // main loop
   var running = true;

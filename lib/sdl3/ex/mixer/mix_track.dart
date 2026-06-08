@@ -1143,7 +1143,7 @@ extension MixTrackPointerEx on Pointer<MixTrack> {
   /// {@category mixer}
   bool setStoppedCallback(
     Pointer<NativeFunction<MixTrackStoppedCallback>> cb,
-    Pointer<NativeType> userdata,
+    Pointer<Void> userdata,
   ) => mixSetTrackStoppedCallback(this, cb, userdata);
 
   ///
@@ -1182,7 +1182,7 @@ extension MixTrackPointerEx on Pointer<MixTrack> {
   /// {@category mixer}
   bool setRawCallback(
     Pointer<NativeFunction<MixTrackMixCallback>> cb,
-    Pointer<NativeType> userdata,
+    Pointer<Void> userdata,
   ) => mixSetTrackRawCallback(this, cb, userdata);
 
   ///
@@ -1224,6 +1224,6 @@ extension MixTrackPointerEx on Pointer<MixTrack> {
   /// {@category mixer}
   bool setCookedCallback(
     Pointer<NativeFunction<MixTrackMixCallback>> cb,
-    Pointer<NativeType> userdata,
+    Pointer<Void> userdata,
   ) => mixSetTrackCookedCallback(this, cb, userdata);
 }

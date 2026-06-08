@@ -22,11 +22,11 @@ part of '../sdl.dart';
 bool sdlSetClipboardText(String? text) {
   final sdlSetClipboardTextLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(Pointer<Utf8> text),
-        int Function(Pointer<Utf8> text)
+        Bool Function(Pointer<Utf8> text),
+        bool Function(Pointer<Utf8> text)
       >('SDL_SetClipboardText');
   final textPointer = text != null ? text.toNativeUtf8() : nullptr;
-  final result = sdlSetClipboardTextLookupFunction(textPointer) == 1;
+  final result = sdlSetClipboardTextLookupFunction(textPointer);
   calloc.free(textPointer);
   return result;
 }
@@ -78,8 +78,8 @@ Pointer<Int8> sdlGetClipboardText() {
 /// {@category clipboard}
 bool sdlHasClipboardText() {
   final sdlHasClipboardTextLookupFunction = _libSdl
-      .lookupFunction<Uint8 Function(), int Function()>('SDL_HasClipboardText');
-  return sdlHasClipboardTextLookupFunction() == 1;
+      .lookupFunction<Bool Function(), bool Function()>('SDL_HasClipboardText');
+  return sdlHasClipboardTextLookupFunction();
 }
 
 ///
@@ -103,11 +103,11 @@ bool sdlHasClipboardText() {
 bool sdlSetPrimarySelectionText(String? text) {
   final sdlSetPrimarySelectionTextLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(Pointer<Utf8> text),
-        int Function(Pointer<Utf8> text)
+        Bool Function(Pointer<Utf8> text),
+        bool Function(Pointer<Utf8> text)
       >('SDL_SetPrimarySelectionText');
   final textPointer = text != null ? text.toNativeUtf8() : nullptr;
-  final result = sdlSetPrimarySelectionTextLookupFunction(textPointer) == 1;
+  final result = sdlSetPrimarySelectionTextLookupFunction(textPointer);
   calloc.free(textPointer);
   return result;
 }
@@ -160,10 +160,10 @@ Pointer<Int8> sdlGetPrimarySelectionText() {
 /// {@category clipboard}
 bool sdlHasPrimarySelectionText() {
   final sdlHasPrimarySelectionTextLookupFunction = _libSdl
-      .lookupFunction<Uint8 Function(), int Function()>(
+      .lookupFunction<Bool Function(), bool Function()>(
         'SDL_HasPrimarySelectionText',
       );
-  return sdlHasPrimarySelectionTextLookupFunction() == 1;
+  return sdlHasPrimarySelectionTextLookupFunction();
 }
 
 ///
@@ -204,35 +204,34 @@ bool sdlHasPrimarySelectionText() {
 bool sdlSetClipboardData(
   Pointer<NativeFunction<SdlClipboardDataCallback>> callback,
   Pointer<NativeFunction<SdlClipboardCleanupCallback>> cleanup,
-  Pointer<NativeType> userdata,
+  Pointer<Void> userdata,
   Pointer<Pointer<Int8>> mimeTypes,
   int numMimeTypes,
 ) {
   final sdlSetClipboardDataLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(
+        Bool Function(
           Pointer<NativeFunction<SdlClipboardDataCallback>> callback,
           Pointer<NativeFunction<SdlClipboardCleanupCallback>> cleanup,
-          Pointer<NativeType> userdata,
+          Pointer<Void> userdata,
           Pointer<Pointer<Int8>> mimeTypes,
-          Uint32 numMimeTypes,
+          Size numMimeTypes,
         ),
-        int Function(
+        bool Function(
           Pointer<NativeFunction<SdlClipboardDataCallback>> callback,
           Pointer<NativeFunction<SdlClipboardCleanupCallback>> cleanup,
-          Pointer<NativeType> userdata,
+          Pointer<Void> userdata,
           Pointer<Pointer<Int8>> mimeTypes,
           int numMimeTypes,
         )
       >('SDL_SetClipboardData');
   return sdlSetClipboardDataLookupFunction(
-        callback,
-        cleanup,
-        userdata,
-        mimeTypes,
-        numMimeTypes,
-      ) ==
-      1;
+    callback,
+    cleanup,
+    userdata,
+    mimeTypes,
+    numMimeTypes,
+  );
 }
 
 ///
@@ -253,10 +252,10 @@ bool sdlSetClipboardData(
 /// {@category clipboard}
 bool sdlClearClipboardData() {
   final sdlClearClipboardDataLookupFunction = _libSdl
-      .lookupFunction<Uint8 Function(), int Function()>(
+      .lookupFunction<Bool Function(), bool Function()>(
         'SDL_ClearClipboardData',
       );
-  return sdlClearClipboardDataLookupFunction() == 1;
+  return sdlClearClipboardDataLookupFunction();
 }
 
 ///
@@ -282,20 +281,11 @@ bool sdlClearClipboardData() {
 /// extern SDL_DECLSPEC void * SDLCALL SDL_GetClipboardData(const char *mime_type, size_t *size)
 /// ```
 /// {@category clipboard}
-Pointer<NativeType> sdlGetClipboardData(
-  String? mimeType,
-  Pointer<Uint32> size,
-) {
+Pointer<Void> sdlGetClipboardData(String? mimeType, Pointer<Size> size) {
   final sdlGetClipboardDataLookupFunction = _libSdl
       .lookupFunction<
-        Pointer<NativeType> Function(
-          Pointer<Utf8> mimeType,
-          Pointer<Uint32> size,
-        ),
-        Pointer<NativeType> Function(
-          Pointer<Utf8> mimeType,
-          Pointer<Uint32> size,
-        )
+        Pointer<Void> Function(Pointer<Utf8> mimeType, Pointer<Size> size),
+        Pointer<Void> Function(Pointer<Utf8> mimeType, Pointer<Size> size)
       >('SDL_GetClipboardData');
   final mimeTypePointer = mimeType != null ? mimeType.toNativeUtf8() : nullptr;
   final result = sdlGetClipboardDataLookupFunction(mimeTypePointer, size);
@@ -324,11 +314,11 @@ Pointer<NativeType> sdlGetClipboardData(
 bool sdlHasClipboardData(String? mimeType) {
   final sdlHasClipboardDataLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(Pointer<Utf8> mimeType),
-        int Function(Pointer<Utf8> mimeType)
+        Bool Function(Pointer<Utf8> mimeType),
+        bool Function(Pointer<Utf8> mimeType)
       >('SDL_HasClipboardData');
   final mimeTypePointer = mimeType != null ? mimeType.toNativeUtf8() : nullptr;
-  final result = sdlHasClipboardDataLookupFunction(mimeTypePointer) == 1;
+  final result = sdlHasClipboardDataLookupFunction(mimeTypePointer);
   calloc.free(mimeTypePointer);
   return result;
 }
@@ -352,11 +342,11 @@ bool sdlHasClipboardData(String? mimeType) {
 /// extern SDL_DECLSPEC char ** SDLCALL SDL_GetClipboardMimeTypes(size_t *num_mime_types)
 /// ```
 /// {@category clipboard}
-Pointer<Pointer<Int8>> sdlGetClipboardMimeTypes(Pointer<Uint32> numMimeTypes) {
+Pointer<Pointer<Int8>> sdlGetClipboardMimeTypes(Pointer<Size> numMimeTypes) {
   final sdlGetClipboardMimeTypesLookupFunction = _libSdl
       .lookupFunction<
-        Pointer<Pointer<Int8>> Function(Pointer<Uint32> numMimeTypes),
-        Pointer<Pointer<Int8>> Function(Pointer<Uint32> numMimeTypes)
+        Pointer<Pointer<Int8>> Function(Pointer<Size> numMimeTypes),
+        Pointer<Pointer<Int8>> Function(Pointer<Size> numMimeTypes)
       >('SDL_GetClipboardMimeTypes');
   return sdlGetClipboardMimeTypesLookupFunction(numMimeTypes);
 }

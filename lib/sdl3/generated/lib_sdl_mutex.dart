@@ -102,10 +102,10 @@ void sdlLockMutex(Pointer<SdlMutex> mutex) {
 bool sdlTryLockMutex(Pointer<SdlMutex> mutex) {
   final sdlTryLockMutexLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(Pointer<SdlMutex> mutex),
-        int Function(Pointer<SdlMutex> mutex)
+        Bool Function(Pointer<SdlMutex> mutex),
+        bool Function(Pointer<SdlMutex> mutex)
       >('SDL_TryLockMutex');
-  return sdlTryLockMutexLookupFunction(mutex) == 1;
+  return sdlTryLockMutexLookupFunction(mutex);
 }
 
 ///
@@ -352,10 +352,10 @@ void sdlLockRwLockForWriting(Pointer<SdlRwLock> rwlock) {
 bool sdlTryLockRwLockForReading(Pointer<SdlRwLock> rwlock) {
   final sdlTryLockRwLockForReadingLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(Pointer<SdlRwLock> rwlock),
-        int Function(Pointer<SdlRwLock> rwlock)
+        Bool Function(Pointer<SdlRwLock> rwlock),
+        bool Function(Pointer<SdlRwLock> rwlock)
       >('SDL_TryLockRWLockForReading');
-  return sdlTryLockRwLockForReadingLookupFunction(rwlock) == 1;
+  return sdlTryLockRwLockForReadingLookupFunction(rwlock);
 }
 
 ///
@@ -395,10 +395,10 @@ bool sdlTryLockRwLockForReading(Pointer<SdlRwLock> rwlock) {
 bool sdlTryLockRwLockForWriting(Pointer<SdlRwLock> rwlock) {
   final sdlTryLockRwLockForWritingLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(Pointer<SdlRwLock> rwlock),
-        int Function(Pointer<SdlRwLock> rwlock)
+        Bool Function(Pointer<SdlRwLock> rwlock),
+        bool Function(Pointer<SdlRwLock> rwlock)
       >('SDL_TryLockRWLockForWriting');
-  return sdlTryLockRwLockForWritingLookupFunction(rwlock) == 1;
+  return sdlTryLockRwLockForWritingLookupFunction(rwlock);
 }
 
 ///
@@ -593,10 +593,10 @@ void sdlWaitSemaphore(Pointer<SdlSemaphore> sem) {
 bool sdlTryWaitSemaphore(Pointer<SdlSemaphore> sem) {
   final sdlTryWaitSemaphoreLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(Pointer<SdlSemaphore> sem),
-        int Function(Pointer<SdlSemaphore> sem)
+        Bool Function(Pointer<SdlSemaphore> sem),
+        bool Function(Pointer<SdlSemaphore> sem)
       >('SDL_TryWaitSemaphore');
-  return sdlTryWaitSemaphoreLookupFunction(sem) == 1;
+  return sdlTryWaitSemaphoreLookupFunction(sem);
 }
 
 ///
@@ -626,10 +626,10 @@ bool sdlTryWaitSemaphore(Pointer<SdlSemaphore> sem) {
 bool sdlWaitSemaphoreTimeout(Pointer<SdlSemaphore> sem, int timeoutMs) {
   final sdlWaitSemaphoreTimeoutLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(Pointer<SdlSemaphore> sem, Int32 timeoutMs),
-        int Function(Pointer<SdlSemaphore> sem, int timeoutMs)
+        Bool Function(Pointer<SdlSemaphore> sem, Int32 timeoutMs),
+        bool Function(Pointer<SdlSemaphore> sem, int timeoutMs)
       >('SDL_WaitSemaphoreTimeout');
-  return sdlWaitSemaphoreTimeoutLookupFunction(sem, timeoutMs) == 1;
+  return sdlWaitSemaphoreTimeoutLookupFunction(sem, timeoutMs);
 }
 
 ///
@@ -864,18 +864,18 @@ bool sdlWaitConditionTimeout(
 ) {
   final sdlWaitConditionTimeoutLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(
+        Bool Function(
           Pointer<SdlCondition> cond,
           Pointer<SdlMutex> mutex,
           Int32 timeoutMs,
         ),
-        int Function(
+        bool Function(
           Pointer<SdlCondition> cond,
           Pointer<SdlMutex> mutex,
           int timeoutMs,
         )
       >('SDL_WaitConditionTimeout');
-  return sdlWaitConditionTimeoutLookupFunction(cond, mutex, timeoutMs) == 1;
+  return sdlWaitConditionTimeoutLookupFunction(cond, mutex, timeoutMs);
 }
 
 ///
@@ -906,10 +906,10 @@ bool sdlWaitConditionTimeout(
 bool sdlShouldInit(Pointer<SdlInitState> state) {
   final sdlShouldInitLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(Pointer<SdlInitState> state),
-        int Function(Pointer<SdlInitState> state)
+        Bool Function(Pointer<SdlInitState> state),
+        bool Function(Pointer<SdlInitState> state)
       >('SDL_ShouldInit');
-  return sdlShouldInitLookupFunction(state) == 1;
+  return sdlShouldInitLookupFunction(state);
 }
 
 ///
@@ -938,10 +938,10 @@ bool sdlShouldInit(Pointer<SdlInitState> state) {
 bool sdlShouldQuit(Pointer<SdlInitState> state) {
   final sdlShouldQuitLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(Pointer<SdlInitState> state),
-        int Function(Pointer<SdlInitState> state)
+        Bool Function(Pointer<SdlInitState> state),
+        bool Function(Pointer<SdlInitState> state)
       >('SDL_ShouldQuit');
-  return sdlShouldQuitLookupFunction(state) == 1;
+  return sdlShouldQuitLookupFunction(state);
 }
 
 ///
@@ -968,8 +968,8 @@ bool sdlShouldQuit(Pointer<SdlInitState> state) {
 void sdlSetInitialized(Pointer<SdlInitState> state, bool initialized) {
   final sdlSetInitializedLookupFunction = _libSdl
       .lookupFunction<
-        Void Function(Pointer<SdlInitState> state, Uint8 initialized),
-        void Function(Pointer<SdlInitState> state, int initialized)
+        Void Function(Pointer<SdlInitState> state, Bool initialized),
+        void Function(Pointer<SdlInitState> state, bool initialized)
       >('SDL_SetInitialized');
-  return sdlSetInitializedLookupFunction(state, initialized ? 1 : 0);
+  return sdlSetInitializedLookupFunction(state, initialized);
 }

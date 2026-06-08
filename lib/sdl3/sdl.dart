@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:ffi';
 import 'dart:math' as math;
 import 'dart:typed_data';
@@ -14,14 +15,18 @@ part 'ex/sdl/lib_sdl_clipboard.dart';
 part 'ex/sdl/lib_sdl_dialog.dart';
 part 'ex/sdl/lib_sdl_events.dart';
 part 'ex/sdl/lib_sdl_gpu.dart';
+part 'ex/sdl/lib_sdl_iostream.dart';
 part 'ex/sdl/lib_sdl_keyboard.dart';
+part 'ex/sdl/lib_sdl_locale.dart';
 part 'ex/sdl/lib_sdl_messagebox.dart';
 part 'ex/sdl/lib_sdl_mouse.dart';
 part 'ex/sdl/lib_sdl_pixels.dart';
+part 'ex/sdl/lib_sdl_process.dart';
 part 'ex/sdl/lib_sdl_rect.dart';
 part 'ex/sdl/lib_sdl_render.dart';
 part 'ex/sdl/lib_sdl_surface.dart';
 part 'ex/sdl/lib_sdl_video.dart';
+part 'ex/sdl/lib_sdl_vulkan.dart';
 part 'ex/sdl/sdl_async_io.dart';
 part 'ex/sdl/sdl_async_io_queue.dart';
 part 'ex/sdl/sdl_audio_stream.dart';
@@ -29,7 +34,9 @@ part 'ex/sdl/sdl_color.dart';
 part 'ex/sdl/sdl_cursor.dart';
 part 'ex/sdl/sdl_event.dart';
 part 'ex/sdl/sdl_gamepad.dart';
+part 'ex/sdl/sdl_iostream.dart';
 part 'ex/sdl/sdl_renderer.dart';
+part 'ex/sdl/sdl_process.dart';
 part 'ex/sdl/sdl_renderer_from_gfx.dart';
 part 'ex/sdl/sdl_renderer_from_image.dart';
 part 'ex/sdl/sdl_surface.dart';
@@ -39,6 +46,7 @@ part 'ex/sdl/struct_sdl_async_io_outcome.dart';
 part 'ex/sdl/struct_sdl_audio_spec.dart';
 part 'ex/sdl/struct_sdl_color.dart';
 part 'ex/sdl/struct_sdl_cursor_frame_info.dart';
+part 'ex/sdl/struct_sdl_data_result.dart';
 part 'ex/sdl/struct_sdl_dialog_file_filter.dart';
 part 'ex/sdl/struct_sdl_display_mode.dart';
 part 'ex/sdl/struct_sdl_event.dart';
@@ -67,6 +75,7 @@ part 'ex/sdl/struct_sdl_gpu_texture_sampler_binding.dart';
 part 'ex/sdl/struct_sdl_gpu_texture_transfer_info.dart';
 part 'ex/sdl/struct_sdl_gpu_transfer_buffer_create_info.dart';
 part 'ex/sdl/struct_sdl_gpu_viewport.dart';
+part 'ex/sdl/struct_sdl_locale.dart';
 part 'ex/sdl/struct_sdl_masks.dart';
 part 'ex/sdl/struct_sdl_message_box_data.dart';
 part 'ex/sdl/struct_sdl_point.dart';
@@ -134,3 +143,33 @@ part 'ex/lib_sdl_ex.dart';
 part 'ex/lib_sdl_video_ex.dart';
 
 final DynamicLibrary _libSdl = dylib.SdlDynamicLibraryService().open('sdl');
+
+// lib_sdl_opengl.dart
+final class ClContext extends Opaque {}
+
+final class ClEvent extends Opaque {}
+
+// lib_sdl_metal.dart
+typedef SdlMetalView = Pointer<Void>;
+
+// lib_sdl_openxr.dart
+typedef PfnXrGetInstanceProcAddr = Pointer<NativeFunction<SdlFunctionPointer>>;
+
+// lib_sdl_thread.dart
+typedef SdlTlsDeorCallback = Pointer<NativeFunction<SdlFunctionPointer>>;
+
+// lib_sdl_video.dart
+typedef SdlEglSurface = Pointer<Void>;
+
+// lib_sdl_vulkan.dart
+final class VkInstanceT extends Opaque {}
+
+final class VkPhysicalDeviceT extends Opaque {}
+
+final class VkSurfaceKHRT extends Opaque {}
+
+final class VkAllocationCallbacks extends Opaque {}
+
+typedef VkInstance = Pointer<VkInstanceT>;
+typedef VkSurfaceKHR = Pointer<VkSurfaceKHRT>;
+typedef VkPhysicalDevice = Pointer<VkPhysicalDeviceT>;

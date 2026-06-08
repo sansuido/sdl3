@@ -8,7 +8,7 @@ class SdlxGpuDepthStencilTargetInfo {
     this.storeOp = 0,
     this.stencilLoadOp = 0,
     this.stencilStoreOp = 0,
-    this.cycle = 0,
+    this.cycle = false,
     this.clearStencil = 0,
     this.mipLevel = 0,
     this.layer = 0,
@@ -21,7 +21,7 @@ class SdlxGpuDepthStencilTargetInfo {
   int storeOp;
   int stencilLoadOp;
   int stencilStoreOp;
-  int cycle;
+  bool cycle;
   int clearStencil;
   int mipLevel;
   int layer;

@@ -107,7 +107,7 @@ extension SdlAudioStreamEx on SdlAudioStream {
     int devid,
     Pointer<SdlAudioSpec> spec,
     Pointer<NativeFunction<SdlAudioStreamCallback>> callback,
-    Pointer<NativeType> userdata,
+    Pointer<Void> userdata,
   ) => sdlOpenAudioDeviceStream(devid, spec, callback, userdata);
 }
 
@@ -615,7 +615,7 @@ extension SdlAudioStreamPointerEx on Pointer<SdlAudioStream> {
   /// extern SDL_DECLSPEC bool SDLCALL SDL_PutAudioStreamData(SDL_AudioStream *stream, const void *buf, int len)
   /// ```
   /// {@category audio}
-  bool putData(Pointer<NativeType> buf, int len) =>
+  bool putData(Pointer<Void> buf, int len) =>
       sdlPutAudioStreamData(this, buf, len);
 
   ///
@@ -650,7 +650,7 @@ extension SdlAudioStreamPointerEx on Pointer<SdlAudioStream> {
   /// extern SDL_DECLSPEC int SDLCALL SDL_GetAudioStreamData(SDL_AudioStream *stream, void *buf, int len)
   /// ```
   /// {@category audio}
-  int getData(Pointer<NativeType> buf, int len) =>
+  int getData(Pointer<Void> buf, int len) =>
       sdlGetAudioStreamData(this, buf, len);
 
   ///
@@ -933,7 +933,7 @@ extension SdlAudioStreamPointerEx on Pointer<SdlAudioStream> {
   /// {@category audio}
   bool setGetCallback(
     Pointer<NativeFunction<SdlAudioStreamCallback>> callback,
-    Pointer<NativeType> userdata,
+    Pointer<Void> userdata,
   ) => sdlSetAudioStreamGetCallback(this, callback, userdata);
 
   ///
@@ -989,7 +989,7 @@ extension SdlAudioStreamPointerEx on Pointer<SdlAudioStream> {
   /// {@category audio}
   bool setPutCallback(
     Pointer<NativeFunction<SdlAudioStreamCallback>> callback,
-    Pointer<NativeType> userdata,
+    Pointer<Void> userdata,
   ) => sdlSetAudioStreamPutCallback(this, callback, userdata);
 
   ///

@@ -97,7 +97,7 @@ https://github.com/sansuido/sdl3_projects/
 
 yamahara
 
-# Task List (for 2.9.0)
+# Task List (for 3.0.0)
 - [x] ~~lib_sdl.dart~~
 - [x] ~~lib_sdl_assert.dart~~
 - [x] [lib_sdl_asyncio.dart](./lib/sdl3/ex/sdl/lib_sdl_asyncio.dart)
@@ -116,18 +116,18 @@ yamahara
 - [ ] lib_sdl_guid.dart
 - [ ] lib_sdl_haptic.dart
 - [ ] lib_sdl_hidapi.dart
-- [ ] ~~lib_sdl_hints.dart~~
+- [x] ~~lib_sdl_hints.dart~~
 - [x] [lib_sdl_image.dart](./lib/sdl3/ex/image/lib_sdl_image.dart)
-- [ ] ~~lib_sdl_init.dart~~
-- [ ] lib_sdl_iostream.dart
+- [x] ~~lib_sdl_init.dart~~
+- [x] [lib_sdl_iostream.dart](./lib/sdl3/ex/sdl/lib_sdl_iostream.dart)
 - [ ] lib_sdl_joystick.dart
 - [x] [lib_sdl_keyboard.dart](./lib/sdl3/ex/sdl/lib_sdl_keyboard.dart)
 - [ ] lib_sdl_loadso.dart
-- [ ] lib_sdl_locale.dart
-- [ ] ~~lib_sdl_log.dart~~
+- [x] [lib_sdl_locale.dart](./lib/sdl3/ex/sdl/lib_sdl_locale.dart)
+- [x] ~~lib_sdl_log.dart~~
 - [ ] lib_sdl_main.dart
 - [x] [lib_sdl_messagebox.dart](./lib/sdl3/ex/sdl/lib_sdl_messagebox.dart)
-- [ ] ~~lib_sdl_metal.dart~~
+- [x] ~~lib_sdl_metal.dart~~
 - [x] ~~lib_sdl_misc.dart~~
 - [x] [lib_sdl_mixer.dart](./lib/sdl3/ex/mixer/lib_sdl_mixer.dart)
 - [x] [lib_sdl_mouse.dart](./lib/sdl3/ex/sdl/lib_sdl_mouse.dart)
@@ -140,7 +140,7 @@ yamahara
 - [x] [lib_sdl_pixels.dart](./lib/sdl3/ex/sdl/lib_sdl_pixels.dart)
 - [x] ~~lib_sdl_platform.dart~~
 - [ ] lib_sdl_power.dart
-- [ ] lib_sdl_process.dart
+- [x] [lib_sdl_process.dart](./lib/sdl3/ex/sdl/lib_sdl_process.dart)
 - [ ] lib_sdl_properties.dart
 - [x] [lib_sdl_rect.dart](./lib/sdl3/ex/sdl/lib_sdl_rect.dart)
 - [x] [lib_sdl_render.dart](./lib/sdl3/ex/sdl/lib_sdl_render.dart)
@@ -158,4 +158,4 @@ yamahara
 - [x] [lib_sdl_ttf.dart](./lib/sdl3/ex/ttf/lib_sdl_ttf.dart)
 - [x] ~~lib_sdl_version.dart~~
 - [x] [lib_sdl_video.dart](./lib/sdl3/ex/sdl/lib_sdl_video.dart)
-- [ ] lib_sdl_vulkan.dart
+- [x] [lib_sdl_vulkan.dart](./lib/sdl3/ex/sdl/lib_sdl_vulkan.dart)

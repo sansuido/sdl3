@@ -5,14 +5,14 @@ class SdlxGpuStorageTextureReadWriteBinding {
     Pointer<SdlGpuTexture>? texture,
     this.mipLevel = 0,
     this.layer = 0,
-    this.cycle = 0,
+    this.cycle = false,
   }) {
     this.texture = texture ?? nullptr;
   }
   late Pointer<SdlGpuTexture> texture;
   int mipLevel;
   int layer;
-  int cycle;
+  bool cycle;
 
   Pointer<SdlGpuStorageTextureReadWriteBinding> calloc() {
     final pointer = ffi.calloc<SdlGpuStorageTextureReadWriteBinding>();

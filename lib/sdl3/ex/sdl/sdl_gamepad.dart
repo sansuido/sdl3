@@ -1380,7 +1380,7 @@ extension SdlGamepadPointerEx on Pointer<SdlGamepad> {
   bool getTouchpadFinger(
     int touchpad,
     int finger,
-    Pointer<Uint8> down,
+    Pointer<Bool> down,
     Pointer<Float> x,
     Pointer<Float> y,
     Pointer<Float> pressure,
@@ -1607,7 +1607,7 @@ extension SdlGamepadPointerEx on Pointer<SdlGamepad> {
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SendGamepadEffect(SDL_Gamepad *gamepad, const void *data, int size)
   /// ```
   /// {@category gamepad}
-  bool sendEffect(Pointer<NativeType> data, int size) =>
+  bool sendEffect(Pointer<Void> data, int size) =>
       sdlSendGamepadEffect(this, data, size);
 
   ///

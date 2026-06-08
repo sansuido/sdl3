@@ -31,7 +31,13 @@ Future<int> main() async {
     final bytesToRead = (offset + gChunkSize <= totalSize)
         ? gChunkSize
         : (totalSize - offset);
-    if (io.read(buffer + offset, offset, bytesToRead, queue, nullptr)) {
+    if (io.read(
+      (buffer + offset).cast<Void>(),
+      offset,
+      bytesToRead,
+      queue,
+      nullptr,
+    )) {
       totalRequests++;
     }
     offset += bytesToRead;

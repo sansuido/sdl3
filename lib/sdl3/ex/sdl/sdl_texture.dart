@@ -368,7 +368,7 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// extern SDL_DECLSPEC bool SDLCALL SDL_UpdateTexture(SDL_Texture *texture, const SDL_Rect *rect, const void *pixels, int pitch)
   /// ```
   /// {@category render}
-  bool update(Pointer<NativeType> pixels, int pitch, {SdlxRect? rect}) =>
+  bool update(Pointer<Void> pixels, int pitch, {SdlxRect? rect}) =>
       sdlxUpdateTexture(this, pixels, pitch, rect: rect);
 
   ///
@@ -487,7 +487,7 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// {@category render}
   bool lock(
     Pointer<SdlRect> rect,
-    Pointer<Pointer<NativeType>> pixels,
+    Pointer<Pointer<Void>> pixels,
     Pointer<Int32> pitch,
   ) => sdlLockTexture(this, rect, pixels, pitch);
 

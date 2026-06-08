@@ -49,8 +49,8 @@ class SdlxGpuRasterizerState {
     this.depthBiasAntFactor = 0,
     this.depthBiasClamp = 0,
     this.depthBiasSlopeFactor = 0,
-    this.enableDepthBias = 0,
-    this.enableDepthClip = 0,
+    this.enableDepthBias = false,
+    this.enableDepthClip = false,
   });
 
   int fillMode;
@@ -59,21 +59,21 @@ class SdlxGpuRasterizerState {
   double depthBiasAntFactor;
   double depthBiasClamp;
   double depthBiasSlopeFactor;
-  int enableDepthBias;
-  int enableDepthClip;
+  bool enableDepthBias;
+  bool enableDepthClip;
 }
 
 class SdlxGpuMultisampleState {
   SdlxGpuMultisampleState({
     this.sampleCount = 0,
     this.sampleMask = 0,
-    this.enableMask = 0,
-    this.enableAlphaToCoverage = 0,
+    this.enableMask = false,
+    this.enableAlphaToCoverage = false,
   });
   int sampleCount;
   int sampleMask;
-  int enableMask;
-  int enableAlphaToCoverage;
+  bool enableMask;
+  bool enableAlphaToCoverage;
 }
 
 class SdlxGpuStencilOpState {
@@ -94,9 +94,9 @@ class SdlxGpuDepthStencilState {
     this.compareOp = 0,
     this.compareMask = 0,
     this.writeMask = 0,
-    this.enableDepthTest = 0,
-    this.enableDepthWrite = 0,
-    this.enableStencilTest = 0,
+    this.enableDepthTest = false,
+    this.enableDepthWrite = false,
+    this.enableStencilTest = false,
   }) {
     backStencilState = SdlxGpuStencilOpState();
     frontStencilState = SdlxGpuStencilOpState();
@@ -106,9 +106,9 @@ class SdlxGpuDepthStencilState {
   late SdlxGpuStencilOpState frontStencilState;
   int compareMask;
   int writeMask;
-  int enableDepthTest;
-  int enableDepthWrite;
-  int enableStencilTest;
+  bool enableDepthTest;
+  bool enableDepthWrite;
+  bool enableStencilTest;
 }
 
 class SdlxGpuColorTargetBlendState {
@@ -120,8 +120,8 @@ class SdlxGpuColorTargetBlendState {
     this.dstAlphaBlendfactor = 0,
     this.alphaBlendOp = 0,
     this.colorWriteMask = 0,
-    this.enableBlend = 0,
-    this.enableColorWriteMask = 0,
+    this.enableBlend = false,
+    this.enableColorWriteMask = false,
   });
   int srcColorBlendfactor;
   int dstColorBlendfactor;
@@ -130,8 +130,8 @@ class SdlxGpuColorTargetBlendState {
   int dstAlphaBlendfactor;
   int alphaBlendOp;
   int colorWriteMask;
-  int enableBlend;
-  int enableColorWriteMask;
+  bool enableBlend;
+  bool enableColorWriteMask;
 }
 
 class SdlxGpuColorTargetDescription {
@@ -146,14 +146,14 @@ class SdlxGpuGraphicsPipelineTargetInfo {
   SdlxGpuGraphicsPipelineTargetInfo({
     List<SdlxGpuColorTargetDescription>? colorTargetDescriptions,
     this.depthStencilFormat = 0,
-    this.hasDepthStencilTarget = 0,
+    this.hasDepthStencilTarget = false,
   }) {
     this.colorTargetDescriptions = colorTargetDescriptions ?? [];
   }
   late List<SdlxGpuColorTargetDescription> colorTargetDescriptions;
   //int numColorTargets;
   int depthStencilFormat;
-  int hasDepthStencilTarget;
+  bool hasDepthStencilTarget;
 }
 
 class SdlxGpuGraphicsPipelineCreateInfo {
@@ -209,9 +209,9 @@ class SdlxGpuGraphicsPipelineCreateInfo {
           vertexBufferDescriptions[i].instanceStepRate =
               vertexInputState.vertexBufferDescriptions[i].instanceStepRate;
         }
-        pointer.vertexInputState.ref.numVertexBuffers =
+        pointer.ref.vertexInputState.numVertexBuffers =
             vertexInputState.vertexBufferDescriptions.length;
-        pointer.vertexInputState.ref.vertexBufferDescriptions =
+        pointer.ref.vertexInputState.vertexBufferDescriptions =
             vertexBufferDescriptions;
       }
       if (vertexInputState.vertexAttributes.isNotEmpty) {
@@ -228,63 +228,63 @@ class SdlxGpuGraphicsPipelineCreateInfo {
           vertexAttributes[i].offset =
               vertexInputState.vertexAttributes[i].offset;
         }
-        pointer.vertexInputState.ref.numVertexAttributes =
+        pointer.ref.vertexInputState.numVertexAttributes =
             vertexInputState.vertexAttributes.length;
-        pointer.vertexInputState.ref.vertexAttributes = vertexAttributes;
+        pointer.ref.vertexInputState.vertexAttributes = vertexAttributes;
       }
     }
     // rasterizerState
     {
-      pointer.rasterizerState.ref.fillMode = rasterizerState.fillMode;
-      pointer.rasterizerState.ref.cullMode = rasterizerState.cullMode;
-      pointer.rasterizerState.ref.frontFace = rasterizerState.frontFace;
-      pointer.rasterizerState.ref.depthBiasAntFactor =
+      pointer.ref.rasterizerState.fillMode = rasterizerState.fillMode;
+      pointer.ref.rasterizerState.cullMode = rasterizerState.cullMode;
+      pointer.ref.rasterizerState.frontFace = rasterizerState.frontFace;
+      pointer.ref.rasterizerState.depthBiasAntFactor =
           rasterizerState.depthBiasAntFactor;
-      pointer.rasterizerState.ref.depthBiasClamp =
+      pointer.ref.rasterizerState.depthBiasClamp =
           rasterizerState.depthBiasClamp;
-      pointer.rasterizerState.ref.depthBiasSlopeFactor =
+      pointer.ref.rasterizerState.depthBiasSlopeFactor =
           rasterizerState.depthBiasSlopeFactor;
-      pointer.rasterizerState.ref.enableDepthBias =
+      pointer.ref.rasterizerState.enableDepthBias =
           rasterizerState.enableDepthBias;
-      pointer.rasterizerState.ref.enableDepthClip =
+      pointer.ref.rasterizerState.enableDepthClip =
           rasterizerState.enableDepthClip;
     }
     // multisampleState
     {
-      pointer.multisampleState.ref.sampleCount = multisampleState.sampleCount;
-      pointer.multisampleState.ref.sampleMask = multisampleState.sampleMask;
-      pointer.multisampleState.ref.enableMask = multisampleState.enableMask;
-      pointer.multisampleState.ref.enableAlphaToCoverage =
+      pointer.ref.multisampleState.sampleCount = multisampleState.sampleCount;
+      pointer.ref.multisampleState.sampleMask = multisampleState.sampleMask;
+      pointer.ref.multisampleState.enableMask = multisampleState.enableMask;
+      pointer.ref.multisampleState.enableAlphaToCoverage =
           multisampleState.enableAlphaToCoverage;
     }
     // depthStencilState
     {
-      pointer.depthStencilState.ref.compareOp = depthStencilState.compareOp;
+      pointer.ref.depthStencilState.compareOp = depthStencilState.compareOp;
       // backStencilState
-      pointer.depthStencilState.backStencilState.ref.failOp =
+      pointer.ref.depthStencilState.backStencilState.failOp =
           depthStencilState.backStencilState.failOp;
-      pointer.depthStencilState.backStencilState.ref.passOp =
+      pointer.ref.depthStencilState.backStencilState.passOp =
           depthStencilState.backStencilState.passOp;
-      pointer.depthStencilState.backStencilState.ref.depthFailOp =
+      pointer.ref.depthStencilState.backStencilState.depthFailOp =
           depthStencilState.backStencilState.depthFailOp;
-      pointer.depthStencilState.backStencilState.ref.compareOp =
+      pointer.ref.depthStencilState.backStencilState.compareOp =
           depthStencilState.backStencilState.compareOp;
       // frontStencilState
-      pointer.depthStencilState.frontStencilState.ref.failOp =
+      pointer.ref.depthStencilState.frontStencilState.failOp =
           depthStencilState.frontStencilState.failOp;
-      pointer.depthStencilState.frontStencilState.ref.passOp =
+      pointer.ref.depthStencilState.frontStencilState.passOp =
           depthStencilState.frontStencilState.passOp;
-      pointer.depthStencilState.frontStencilState.ref.depthFailOp =
+      pointer.ref.depthStencilState.frontStencilState.depthFailOp =
           depthStencilState.frontStencilState.depthFailOp;
-      pointer.depthStencilState.frontStencilState.ref.compareOp =
+      pointer.ref.depthStencilState.frontStencilState.compareOp =
           depthStencilState.frontStencilState.compareOp;
-      pointer.depthStencilState.ref.compareMask = depthStencilState.compareMask;
-      pointer.depthStencilState.ref.writeMask = depthStencilState.writeMask;
-      pointer.depthStencilState.ref.enableDepthTest =
+      pointer.ref.depthStencilState.compareMask = depthStencilState.compareMask;
+      pointer.ref.depthStencilState.writeMask = depthStencilState.writeMask;
+      pointer.ref.depthStencilState.enableDepthTest =
           depthStencilState.enableDepthTest;
-      pointer.depthStencilState.ref.enableDepthWrite =
+      pointer.ref.depthStencilState.enableDepthWrite =
           depthStencilState.enableDepthWrite;
-      pointer.depthStencilState.ref.enableStencilTest =
+      pointer.ref.depthStencilState.enableStencilTest =
           depthStencilState.enableStencilTest;
     }
     // targetInfo
@@ -299,43 +299,43 @@ class SdlxGpuGraphicsPipelineCreateInfo {
           final colorTargetDescription = colorTargetDescriptions + i;
           colorTargetDescriptions[i].format =
               targetInfo.colorTargetDescriptions[i].format;
-          colorTargetDescription.blendState.ref.srcColorBlendfactor = targetInfo
+          colorTargetDescription.ref.blendState.srcColorBlendfactor = targetInfo
               .colorTargetDescriptions[i]
               .blendState
               .srcColorBlendfactor;
-          colorTargetDescription.blendState.ref.dstColorBlendfactor = targetInfo
+          colorTargetDescription.ref.blendState.dstColorBlendfactor = targetInfo
               .colorTargetDescriptions[i]
               .blendState
               .dstColorBlendfactor;
-          colorTargetDescription.blendState.ref.colorBlendOp =
+          colorTargetDescription.ref.blendState.colorBlendOp =
               targetInfo.colorTargetDescriptions[i].blendState.colorBlendOp;
-          colorTargetDescription.blendState.ref.srcAlphaBlendfactor = targetInfo
+          colorTargetDescription.ref.blendState.srcAlphaBlendfactor = targetInfo
               .colorTargetDescriptions[i]
               .blendState
               .srcAlphaBlendfactor;
-          colorTargetDescription.blendState.ref.dstAlphaBlendfactor = targetInfo
+          colorTargetDescription.ref.blendState.dstAlphaBlendfactor = targetInfo
               .colorTargetDescriptions[i]
               .blendState
               .dstAlphaBlendfactor;
-          colorTargetDescription.blendState.ref.alphaBlendOp =
+          colorTargetDescription.ref.blendState.alphaBlendOp =
               targetInfo.colorTargetDescriptions[i].blendState.alphaBlendOp;
-          colorTargetDescription.blendState.ref.colorWriteMask =
+          colorTargetDescription.ref.blendState.colorWriteMask =
               targetInfo.colorTargetDescriptions[i].blendState.colorWriteMask;
-          colorTargetDescription.blendState.ref.enableBlend =
+          colorTargetDescription.ref.blendState.enableBlend =
               targetInfo.colorTargetDescriptions[i].blendState.enableBlend;
-          colorTargetDescription.blendState.ref.enableColorWriteMask =
+          colorTargetDescription.ref.blendState.enableColorWriteMask =
               targetInfo
                   .colorTargetDescriptions[i]
                   .blendState
                   .enableColorWriteMask;
         }
-        pointer.targetInfo.ref.numColorTargets =
+        pointer.ref.targetInfo.numColorTargets =
             targetInfo.colorTargetDescriptions.length;
-        pointer.targetInfo.ref.colorTargetDescriptions =
+        pointer.ref.targetInfo.colorTargetDescriptions =
             colorTargetDescriptions;
       }
-      pointer.targetInfo.ref.depthStencilFormat = targetInfo.depthStencilFormat;
-      pointer.targetInfo.ref.hasDepthStencilTarget =
+      pointer.ref.targetInfo.depthStencilFormat = targetInfo.depthStencilFormat;
+      pointer.ref.targetInfo.hasDepthStencilTarget =
           targetInfo.hasDepthStencilTarget;
     }
     return pointer;
@@ -345,17 +345,17 @@ class SdlxGpuGraphicsPipelineCreateInfo {
 extension SdlGpuGraphicsPipelineCreateInfoCallocAllFreeExtension
     on Pointer<SdlGpuGraphicsPipelineCreateInfo> {
   void callocAllFree() {
-    if (vertexInputState.ref.numVertexBuffers > 0) {
-      vertexInputState.ref.vertexBufferDescriptions.callocFree();
-      vertexInputState.ref.vertexBufferDescriptions = nullptr;
+    if (ref.vertexInputState.numVertexBuffers > 0) {
+      ref.vertexInputState.vertexBufferDescriptions.callocFree();
+      ref.vertexInputState.vertexBufferDescriptions = nullptr;
     }
-    if (vertexInputState.ref.numVertexAttributes > 0) {
-      vertexInputState.ref.vertexAttributes.callocFree();
-      vertexInputState.ref.vertexAttributes = nullptr;
+    if (ref.vertexInputState.numVertexAttributes > 0) {
+      ref.vertexInputState.vertexAttributes.callocFree();
+      ref.vertexInputState.vertexAttributes = nullptr;
     }
-    if (targetInfo.ref.numColorTargets > 0) {
-      targetInfo.ref.colorTargetDescriptions.callocFree();
-      targetInfo.ref.colorTargetDescriptions = nullptr;
+    if (ref.targetInfo.numColorTargets > 0) {
+      ref.targetInfo.colorTargetDescriptions.callocFree();
+      ref.targetInfo.colorTargetDescriptions = nullptr;
     }
     callocFree();
   }

@@ -5,11 +5,11 @@ class SdlxAsyncIoOutcome {
     Pointer<SdlAsyncIo>? asyncio,
     this.type = 0,
     this.result = 0,
-    Pointer<NativeType>? buffer,
+    Pointer<Void>? buffer,
     this.offset = 0,
     this.bytesRequested = 0,
     this.bytesTransferred = 0,
-    Pointer<NativeType>? userdata,
+    Pointer<Void>? userdata,
   }) {
     this.asyncio = asyncio ?? nullptr;
     this.buffer = buffer ?? nullptr;
@@ -18,11 +18,11 @@ class SdlxAsyncIoOutcome {
   late Pointer<SdlAsyncIo> asyncio;
   int type;
   int result;
-  late Pointer<NativeType> buffer;
+  late Pointer<Void> buffer;
   int offset;
   int bytesRequested;
   int bytesTransferred;
-  late Pointer<NativeType> userdata;
+  late Pointer<Void> userdata;
 
   void loadFromPointer(Pointer<SdlAsyncIoOutcome> pointer) {
     asyncio = pointer.ref.asyncio;

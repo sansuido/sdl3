@@ -13,8 +13,8 @@ part of '../sdl_shadercross.dart';
 /// {@category shadercross}
 bool sdlShaderCrossInit() {
   final sdlShaderCrossInitLookupFunction = _libShadercross
-      .lookupFunction<Uint8 Function(), int Function()>('SDL_ShaderCross_Init');
-  return sdlShaderCrossInitLookupFunction() == 1;
+      .lookupFunction<Bool Function(), bool Function()>('SDL_ShaderCross_Init');
+  return sdlShaderCrossInitLookupFunction();
 }
 
 ///
@@ -66,13 +66,13 @@ int sdlShaderCrossGetSpirvShaderFormats() {
 /// extern SDL_DECLSPEC void * SDLCALL SDL_ShaderCross_TranspileMSLFromSPIRV( const SDL_ShaderCross_SPIRV_Info *info)
 /// ```
 /// {@category shadercross}
-Pointer<NativeType> sdlShaderCrossTranspileMslFromSpirv(
+Pointer<Void> sdlShaderCrossTranspileMslFromSpirv(
   Pointer<SdlShaderCrossSpirvInfo> info,
 ) {
   final sdlShaderCrossTranspileMslFromSpirvLookupFunction = _libShadercross
       .lookupFunction<
-        Pointer<NativeType> Function(Pointer<SdlShaderCrossSpirvInfo> info),
-        Pointer<NativeType> Function(Pointer<SdlShaderCrossSpirvInfo> info)
+        Pointer<Void> Function(Pointer<SdlShaderCrossSpirvInfo> info),
+        Pointer<Void> Function(Pointer<SdlShaderCrossSpirvInfo> info)
       >('SDL_ShaderCross_TranspileMSLFromSPIRV');
   return sdlShaderCrossTranspileMslFromSpirvLookupFunction(info);
 }
@@ -93,13 +93,13 @@ Pointer<NativeType> sdlShaderCrossTranspileMslFromSpirv(
 /// extern SDL_DECLSPEC void * SDLCALL SDL_ShaderCross_TranspileHLSLFromSPIRV( const SDL_ShaderCross_SPIRV_Info *info)
 /// ```
 /// {@category shadercross}
-Pointer<NativeType> sdlShaderCrossTranspileHlslFromSpirv(
+Pointer<Void> sdlShaderCrossTranspileHlslFromSpirv(
   Pointer<SdlShaderCrossSpirvInfo> info,
 ) {
   final sdlShaderCrossTranspileHlslFromSpirvLookupFunction = _libShadercross
       .lookupFunction<
-        Pointer<NativeType> Function(Pointer<SdlShaderCrossSpirvInfo> info),
-        Pointer<NativeType> Function(Pointer<SdlShaderCrossSpirvInfo> info)
+        Pointer<Void> Function(Pointer<SdlShaderCrossSpirvInfo> info),
+        Pointer<Void> Function(Pointer<SdlShaderCrossSpirvInfo> info)
       >('SDL_ShaderCross_TranspileHLSLFromSPIRV');
   return sdlShaderCrossTranspileHlslFromSpirvLookupFunction(info);
 }
@@ -117,19 +117,19 @@ Pointer<NativeType> sdlShaderCrossTranspileHlslFromSpirv(
 /// extern SDL_DECLSPEC void * SDLCALL SDL_ShaderCross_CompileDXBCFromSPIRV( const SDL_ShaderCross_SPIRV_Info *info, size_t *size)
 /// ```
 /// {@category shadercross}
-Pointer<NativeType> sdlShaderCrossCompileDxbcFromSpirv(
+Pointer<Void> sdlShaderCrossCompileDxbcFromSpirv(
   Pointer<SdlShaderCrossSpirvInfo> info,
-  Pointer<Uint32> size,
+  Pointer<Size> size,
 ) {
   final sdlShaderCrossCompileDxbcFromSpirvLookupFunction = _libShadercross
       .lookupFunction<
-        Pointer<NativeType> Function(
+        Pointer<Void> Function(
           Pointer<SdlShaderCrossSpirvInfo> info,
-          Pointer<Uint32> size,
+          Pointer<Size> size,
         ),
-        Pointer<NativeType> Function(
+        Pointer<Void> Function(
           Pointer<SdlShaderCrossSpirvInfo> info,
-          Pointer<Uint32> size,
+          Pointer<Size> size,
         )
       >('SDL_ShaderCross_CompileDXBCFromSPIRV');
   return sdlShaderCrossCompileDxbcFromSpirvLookupFunction(info, size);
@@ -148,19 +148,19 @@ Pointer<NativeType> sdlShaderCrossCompileDxbcFromSpirv(
 /// extern SDL_DECLSPEC void * SDLCALL SDL_ShaderCross_CompileDXILFromSPIRV( const SDL_ShaderCross_SPIRV_Info *info, size_t *size)
 /// ```
 /// {@category shadercross}
-Pointer<NativeType> sdlShaderCrossCompileDxilFromSpirv(
+Pointer<Void> sdlShaderCrossCompileDxilFromSpirv(
   Pointer<SdlShaderCrossSpirvInfo> info,
-  Pointer<Uint32> size,
+  Pointer<Size> size,
 ) {
   final sdlShaderCrossCompileDxilFromSpirvLookupFunction = _libShadercross
       .lookupFunction<
-        Pointer<NativeType> Function(
+        Pointer<Void> Function(
           Pointer<SdlShaderCrossSpirvInfo> info,
-          Pointer<Uint32> size,
+          Pointer<Size> size,
         ),
-        Pointer<NativeType> Function(
+        Pointer<Void> Function(
           Pointer<SdlShaderCrossSpirvInfo> info,
-          Pointer<Uint32> size,
+          Pointer<Size> size,
         )
       >('SDL_ShaderCross_CompileDXILFromSPIRV');
   return sdlShaderCrossCompileDxilFromSpirvLookupFunction(info, size);
@@ -278,7 +278,7 @@ sdlShaderCrossReflectGraphicsSpirv(
       .lookupFunction<
         Pointer<SdlShaderCrossGraphicsShaderMetadata> Function(
           Pointer<Uint8> bytecode,
-          Uint32 bytecodeSize,
+          Size bytecodeSize,
           Uint32 props,
         ),
         Pointer<SdlShaderCrossGraphicsShaderMetadata> Function(
@@ -318,7 +318,7 @@ sdlShaderCrossReflectComputeSpirv(
       .lookupFunction<
         Pointer<SdlShaderCrossComputePipelineMetadata> Function(
           Pointer<Uint8> bytecode,
-          Uint32 bytecodeSize,
+          Size bytecodeSize,
           Uint32 props,
         ),
         Pointer<SdlShaderCrossComputePipelineMetadata> Function(
@@ -375,19 +375,19 @@ int sdlShaderCrossGetHlslShaderFormats() {
 /// extern SDL_DECLSPEC void * SDLCALL SDL_ShaderCross_CompileDXBCFromHLSL( const SDL_ShaderCross_HLSL_Info *info, size_t *size)
 /// ```
 /// {@category shadercross}
-Pointer<NativeType> sdlShaderCrossCompileDxbcFromHlsl(
+Pointer<Void> sdlShaderCrossCompileDxbcFromHlsl(
   Pointer<SdlShaderCrossHlslInfo> info,
-  Pointer<Uint32> size,
+  Pointer<Size> size,
 ) {
   final sdlShaderCrossCompileDxbcFromHlslLookupFunction = _libShadercross
       .lookupFunction<
-        Pointer<NativeType> Function(
+        Pointer<Void> Function(
           Pointer<SdlShaderCrossHlslInfo> info,
-          Pointer<Uint32> size,
+          Pointer<Size> size,
         ),
-        Pointer<NativeType> Function(
+        Pointer<Void> Function(
           Pointer<SdlShaderCrossHlslInfo> info,
-          Pointer<Uint32> size,
+          Pointer<Size> size,
         )
       >('SDL_ShaderCross_CompileDXBCFromHLSL');
   return sdlShaderCrossCompileDxbcFromHlslLookupFunction(info, size);
@@ -415,19 +415,19 @@ Pointer<NativeType> sdlShaderCrossCompileDxbcFromHlsl(
 /// extern SDL_DECLSPEC void * SDLCALL SDL_ShaderCross_CompileDXILFromHLSL( const SDL_ShaderCross_HLSL_Info *info, size_t *size)
 /// ```
 /// {@category shadercross}
-Pointer<NativeType> sdlShaderCrossCompileDxilFromHlsl(
+Pointer<Void> sdlShaderCrossCompileDxilFromHlsl(
   Pointer<SdlShaderCrossHlslInfo> info,
-  Pointer<Uint32> size,
+  Pointer<Size> size,
 ) {
   final sdlShaderCrossCompileDxilFromHlslLookupFunction = _libShadercross
       .lookupFunction<
-        Pointer<NativeType> Function(
+        Pointer<Void> Function(
           Pointer<SdlShaderCrossHlslInfo> info,
-          Pointer<Uint32> size,
+          Pointer<Size> size,
         ),
-        Pointer<NativeType> Function(
+        Pointer<Void> Function(
           Pointer<SdlShaderCrossHlslInfo> info,
-          Pointer<Uint32> size,
+          Pointer<Size> size,
         )
       >('SDL_ShaderCross_CompileDXILFromHLSL');
   return sdlShaderCrossCompileDxilFromHlslLookupFunction(info, size);
@@ -454,19 +454,19 @@ Pointer<NativeType> sdlShaderCrossCompileDxilFromHlsl(
 /// extern SDL_DECLSPEC void * SDLCALL SDL_ShaderCross_CompileSPIRVFromHLSL( const SDL_ShaderCross_HLSL_Info *info, size_t *size)
 /// ```
 /// {@category shadercross}
-Pointer<NativeType> sdlShaderCrossCompileSpirvFromHlsl(
+Pointer<Void> sdlShaderCrossCompileSpirvFromHlsl(
   Pointer<SdlShaderCrossHlslInfo> info,
-  Pointer<Uint32> size,
+  Pointer<Size> size,
 ) {
   final sdlShaderCrossCompileSpirvFromHlslLookupFunction = _libShadercross
       .lookupFunction<
-        Pointer<NativeType> Function(
+        Pointer<Void> Function(
           Pointer<SdlShaderCrossHlslInfo> info,
-          Pointer<Uint32> size,
+          Pointer<Size> size,
         ),
-        Pointer<NativeType> Function(
+        Pointer<Void> Function(
           Pointer<SdlShaderCrossHlslInfo> info,
-          Pointer<Uint32> size,
+          Pointer<Size> size,
         )
       >('SDL_ShaderCross_CompileSPIRVFromHLSL');
   return sdlShaderCrossCompileSpirvFromHlslLookupFunction(info, size);

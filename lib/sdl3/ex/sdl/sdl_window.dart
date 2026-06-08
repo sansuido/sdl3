@@ -1223,7 +1223,7 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// {@category video}
   bool setHitTest(
     Pointer<NativeFunction<SdlHitTest>> callback,
-    Pointer<NativeType> callbackData,
+    Pointer<Void> callbackData,
   ) => sdlSetWindowHitTest(this, callback, callbackData);
 
   ///

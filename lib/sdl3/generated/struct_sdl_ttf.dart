@@ -71,17 +71,5 @@ final class TtfSubString extends Struct {
   @Int32()
   external int clusterIndex;
   // [20]+(16)
-  @Uint32()
-  external int rect_1;
-  @Uint32()
-  external int rect_2;
-  @Uint32()
-  external int rect_3;
-  @Uint32()
-  external int rect_4;
-}
-
-/// {@category ttf}
-extension TtfSubStringExtension on Pointer<TtfSubString> {
-  Pointer<SdlRect> get rect => (cast<Uint8>() + 20).cast<SdlRect>();
+  external SdlRect rect;
 }

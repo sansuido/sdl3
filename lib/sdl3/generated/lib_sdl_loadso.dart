@@ -61,17 +61,17 @@ Pointer<SdlSharedObject> sdlLoadObject(String? sofile) {
 /// extern SDL_DECLSPEC SDL_FunctionPointer SDLCALL SDL_LoadFunction(SDL_SharedObject *handle, const char *name)
 /// ```
 /// {@category loadso}
-Pointer<NativeType> sdlLoadFunction(
+Pointer<NativeFunction<SdlFunctionPointer>> sdlLoadFunction(
   Pointer<SdlSharedObject> handle,
   String? name,
 ) {
   final sdlLoadFunctionLookupFunction = _libSdl
       .lookupFunction<
-        Pointer<NativeType> Function(
+        Pointer<NativeFunction<SdlFunctionPointer>> Function(
           Pointer<SdlSharedObject> handle,
           Pointer<Utf8> name,
         ),
-        Pointer<NativeType> Function(
+        Pointer<NativeFunction<SdlFunctionPointer>> Function(
           Pointer<SdlSharedObject> handle,
           Pointer<Utf8> name,
         )

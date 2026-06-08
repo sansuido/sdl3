@@ -13,7 +13,7 @@ NativeCallable<SdlAudioStreamCallback>? gAudioStreamCall;
 var gDone = true;
 
 void audioStreamCallback(
-  Pointer<NativeType> userdata,
+  Pointer<Void> userdata,
   Pointer<SdlAudioStream> stream,
   int additionalAmount,
   int totalAmount,
@@ -26,12 +26,17 @@ void audioStreamCallback(
   final buffer = calloc<Uint8>(1024);
   while (additionalAmount0 > 0) {
     final needed = math.min(additionalAmount0, 1024);
-    final br = mixDecodeAudio(audioDecoder, buffer, needed, gAudioSpec);
+    final br = mixDecodeAudio(
+      audioDecoder,
+      buffer.cast<Void>(),
+      needed,
+      gAudioSpec,
+    );
     if (br <= 0) {
       gDone = false;
       break;
     }
-    sdlPutAudioStreamData(stream, buffer, br);
+    sdlPutAudioStreamData(stream, buffer.cast<Void>(), br);
     additionalAmount0 -= br;
   }
   buffer.callocFree();
@@ -58,7 +63,7 @@ bool appInit() {
     SDL_AUDIO_DEVICE_DEFAULT_PLAYBACK,
     nullptr,
     gAudioStreamCall!.nativeFunction,
-    gAudioDecoder,
+    gAudioDecoder.cast<Void>(),
   );
   if (gAudioStream == nullptr) {
     print('Failed to open audio device: ${sdlGetError()}');

@@ -132,12 +132,11 @@ void sdlResetLogPriorities() {
 bool sdlSetLogPriorityPrefix(int priority, String? prefix) {
   final sdlSetLogPriorityPrefixLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(Int32 priority, Pointer<Utf8> prefix),
-        int Function(int priority, Pointer<Utf8> prefix)
+        Bool Function(Int32 priority, Pointer<Utf8> prefix),
+        bool Function(int priority, Pointer<Utf8> prefix)
       >('SDL_SetLogPriorityPrefix');
   final prefixPointer = prefix != null ? prefix.toNativeUtf8() : nullptr;
-  final result =
-      sdlSetLogPriorityPrefixLookupFunction(priority, prefixPointer) == 1;
+  final result = sdlSetLogPriorityPrefixLookupFunction(priority, prefixPointer);
   calloc.free(prefixPointer);
   return result;
 }
@@ -568,17 +567,17 @@ Pointer<NativeFunction<SdlLogOutputFunction>> sdlGetDefaultLogOutputFunction() {
 /// {@category log}
 void sdlGetLogOutputFunction(
   Pointer<Pointer<NativeFunction<SdlLogOutputFunction>>> callback,
-  Pointer<Pointer<NativeType>> userdata,
+  Pointer<Pointer<Void>> userdata,
 ) {
   final sdlGetLogOutputFunctionLookupFunction = _libSdl
       .lookupFunction<
         Void Function(
           Pointer<Pointer<NativeFunction<SdlLogOutputFunction>>> callback,
-          Pointer<Pointer<NativeType>> userdata,
+          Pointer<Pointer<Void>> userdata,
         ),
         void Function(
           Pointer<Pointer<NativeFunction<SdlLogOutputFunction>>> callback,
-          Pointer<Pointer<NativeType>> userdata,
+          Pointer<Pointer<Void>> userdata,
         )
       >('SDL_GetLogOutputFunction');
   return sdlGetLogOutputFunctionLookupFunction(callback, userdata);
@@ -603,17 +602,17 @@ void sdlGetLogOutputFunction(
 /// {@category log}
 void sdlSetLogOutputFunction(
   Pointer<NativeFunction<SdlLogOutputFunction>> callback,
-  Pointer<NativeType> userdata,
+  Pointer<Void> userdata,
 ) {
   final sdlSetLogOutputFunctionLookupFunction = _libSdl
       .lookupFunction<
         Void Function(
           Pointer<NativeFunction<SdlLogOutputFunction>> callback,
-          Pointer<NativeType> userdata,
+          Pointer<Void> userdata,
         ),
         void Function(
           Pointer<NativeFunction<SdlLogOutputFunction>> callback,
-          Pointer<NativeType> userdata,
+          Pointer<Void> userdata,
         )
       >('SDL_SetLogOutputFunction');
   return sdlSetLogOutputFunctionLookupFunction(callback, userdata);

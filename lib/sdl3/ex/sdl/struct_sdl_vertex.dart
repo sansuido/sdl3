@@ -13,14 +13,14 @@ class SdlxVertex {
 
   Pointer<SdlVertex> calloc() {
     final pointer = ffi.calloc<SdlVertex>();
-    pointer.position.ref.x = position.x;
-    pointer.position.ref.y = position.y;
-    pointer.color.ref.r = color.r;
-    pointer.color.ref.g = color.g;
-    pointer.color.ref.b = color.b;
-    pointer.color.ref.a = color.a;
-    pointer.texCoord.ref.x = texCoord.x;
-    pointer.texCoord.ref.y = texCoord.y;
+    pointer.ref.position.x = position.x;
+    pointer.ref.position.y = position.y;
+    pointer.ref.color.r = color.r;
+    pointer.ref.color.g = color.g;
+    pointer.ref.color.b = color.b;
+    pointer.ref.color.a = color.a;
+    pointer.ref.texCoord.x = texCoord.x;
+    pointer.ref.texCoord.y = texCoord.y;
     return pointer;
   }
 }
@@ -30,14 +30,14 @@ extension SdlxVertexListExtension on List<SdlxVertex> {
     final buffersPointer = ffi.calloc<SdlVertex>(length);
     for (var n = 0; n < length; n++) {
       final bufferPointer = buffersPointer + n;
-      bufferPointer.position.ref.x = this[n].position.x;
-      bufferPointer.position.ref.y = this[n].position.y;
-      bufferPointer.color.ref.r = this[n].color.r;
-      bufferPointer.color.ref.g = this[n].color.g;
-      bufferPointer.color.ref.b = this[n].color.b;
-      bufferPointer.color.ref.a = this[n].color.a;
-      bufferPointer.texCoord.ref.x = this[n].texCoord.x;
-      bufferPointer.texCoord.ref.y = this[n].texCoord.y;
+      bufferPointer.ref.position.x = this[n].position.x;
+      bufferPointer.ref.position.y = this[n].position.y;
+      bufferPointer.ref.color.r = this[n].color.r;
+      bufferPointer.ref.color.g = this[n].color.g;
+      bufferPointer.ref.color.b = this[n].color.b;
+      bufferPointer.ref.color.a = this[n].color.a;
+      bufferPointer.ref.texCoord.x = this[n].texCoord.x;
+      bufferPointer.ref.texCoord.y = this[n].texCoord.y;
     }
     return buffersPointer;
   }

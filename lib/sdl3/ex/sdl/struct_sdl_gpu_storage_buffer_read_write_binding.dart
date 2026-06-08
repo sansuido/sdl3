@@ -3,12 +3,12 @@ part of '../../sdl.dart';
 class SdlxGpuStorageBufferReadWriteBinding {
   SdlxGpuStorageBufferReadWriteBinding({
     Pointer<SdlGpuBuffer>? buffer,
-    this.cycle = 0,
+    this.cycle = false,
   }) {
     this.buffer = buffer ?? nullptr;
   }
   late Pointer<SdlGpuBuffer> buffer;
-  int cycle;
+  bool cycle;
 
   Pointer<SdlGpuStorageBufferReadWriteBinding> calloc() {
     final pointer = ffi.calloc<SdlGpuStorageBufferReadWriteBinding>();

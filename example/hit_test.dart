@@ -4,7 +4,7 @@ import 'package:sdl3/sdl3.dart';
 int hitTest(
   Pointer<SdlWindow> window,
   Pointer<SdlPoint> area,
-  Pointer<NativeType> data,
+  Pointer<Void> data,
 ) {
   final flags = sdlGetWindowFlags(window);
   final isFullscreen = (flags & SdlkWindow.fullscreen) != 0;

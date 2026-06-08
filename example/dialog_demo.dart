@@ -3,7 +3,7 @@ import 'package:ffi/ffi.dart' as ffi;
 import 'package:sdl3/sdl3.dart';
 
 void dialogFileCallback(
-  Pointer<NativeType> userdata,
+  Pointer<Void> userdata,
   Pointer<Pointer<Int8>> filelist,
   int filter,
 ) {

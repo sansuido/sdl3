@@ -35,11 +35,11 @@ part of '../sdl.dart';
 bool sdlSetError(String? fmt) {
   final sdlSetErrorLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(Pointer<Utf8> fmt),
-        int Function(Pointer<Utf8> fmt)
+        Bool Function(Pointer<Utf8> fmt),
+        bool Function(Pointer<Utf8> fmt)
       >('SDL_SetError');
   final fmtPointer = fmt != null ? fmt.toNativeUtf8() : nullptr;
-  final result = sdlSetErrorLookupFunction(fmtPointer) == 1;
+  final result = sdlSetErrorLookupFunction(fmtPointer);
   calloc.free(fmtPointer);
   return result;
 }
@@ -68,11 +68,11 @@ bool sdlSetError(String? fmt) {
 bool sdlSetErrorV(String? fmt) {
   final sdlSetErrorVLookupFunction = _libSdl
       .lookupFunction<
-        Uint8 Function(Pointer<Utf8> fmt),
-        int Function(Pointer<Utf8> fmt)
+        Bool Function(Pointer<Utf8> fmt),
+        bool Function(Pointer<Utf8> fmt)
       >('SDL_SetErrorV');
   final fmtPointer = fmt != null ? fmt.toNativeUtf8() : nullptr;
-  final result = sdlSetErrorVLookupFunction(fmtPointer) == 1;
+  final result = sdlSetErrorVLookupFunction(fmtPointer);
   calloc.free(fmtPointer);
   return result;
 }
@@ -94,8 +94,8 @@ bool sdlSetErrorV(String? fmt) {
 /// {@category error}
 bool sdlOutOfMemory() {
   final sdlOutOfMemoryLookupFunction = _libSdl
-      .lookupFunction<Uint8 Function(), int Function()>('SDL_OutOfMemory');
-  return sdlOutOfMemoryLookupFunction() == 1;
+      .lookupFunction<Bool Function(), bool Function()>('SDL_OutOfMemory');
+  return sdlOutOfMemoryLookupFunction();
 }
 
 ///
@@ -167,6 +167,6 @@ String? sdlGetError() {
 /// {@category error}
 bool sdlClearError() {
   final sdlClearErrorLookupFunction = _libSdl
-      .lookupFunction<Uint8 Function(), int Function()>('SDL_ClearError');
-  return sdlClearErrorLookupFunction() == 1;
+      .lookupFunction<Bool Function(), bool Function()>('SDL_ClearError');
+  return sdlClearErrorLookupFunction();
 }

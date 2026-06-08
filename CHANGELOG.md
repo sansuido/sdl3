@@ -1,5 +1,21 @@
 # Changelog
 
+## [2.9.0] - 2026-06-09
+- SDL3-2026-06-07
+### Changed
+- **Major overhaul of FFI type definitions**: Refactored bindings to use proper `Short`, `UnsignedLong`, and `Bool` types for robust multi-platform compatibility (Windows & Steam Deck).
+- **Fixed `SDL_Event` layout**: Successfully migrated to a full `Union` structure with correct 128-byte alignment, removing manual pointer casting hacks.
+- Simplified boolean returns by removing manual `== 1` checks.
+### Added
+- Added functions and wrapper classes for the iostream.
+- Added functions and wrapper classes for the locale.
+- Added functions and wrapper classes for the process.
+- Added functions for the vulkan.
+- Added `example/hidapi_demo.dart`.
+- Added `example/locale_demo.dart`.
+- Added `example/process_iostream_demo.dart`.
+- Added `example/process_read_demo.dart`.
+
 ## [2.8.5] - 2026-06-03
 - SDL3-2026-05-31
 ### Added

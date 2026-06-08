@@ -11,8 +11,8 @@ class SdlxGpuColorTargetInfo {
     Pointer<SdlGpuTexture>? resolveTexture,
     this.resolveMipLevel = 0,
     this.resolveLayer = 0,
-    this.cycle = 0,
-    this.cycleResolveTexture = 0,
+    this.cycle = false,
+    this.cycleResolveTexture = false,
   }) {
     this.texture = texture ?? nullptr;
     this.clearColor = clearColor ?? SdlxFColor(0, 0, 0);
@@ -27,18 +27,18 @@ class SdlxGpuColorTargetInfo {
   late Pointer<SdlGpuTexture> resolveTexture;
   int resolveMipLevel;
   int resolveLayer;
-  int cycle;
-  int cycleResolveTexture;
+  bool cycle;
+  bool cycleResolveTexture;
 
   Pointer<SdlGpuColorTargetInfo> calloc() {
     final pointer = ffi.calloc<SdlGpuColorTargetInfo>();
     pointer.ref.texture = texture;
     pointer.ref.mipLevel = mipLevel;
     pointer.ref.layerOrDepthPlane = layerOrDepthPlane;
-    pointer.clearColor.ref.r = clearColor.r;
-    pointer.clearColor.ref.g = clearColor.g;
-    pointer.clearColor.ref.b = clearColor.b;
-    pointer.clearColor.ref.a = clearColor.a;
+    pointer.ref.clearColor.r = clearColor.r;
+    pointer.ref.clearColor.g = clearColor.g;
+    pointer.ref.clearColor.b = clearColor.b;
+    pointer.ref.clearColor.a = clearColor.a;
     pointer.ref.loadOp = loadOp;
     pointer.ref.storeOp = storeOp;
     pointer.ref.resolveTexture = resolveTexture;
@@ -58,10 +58,10 @@ extension SdlxGpuColorTargetInfoListExtension on List<SdlxGpuColorTargetInfo> {
       bufferPointer.ref.texture = this[n].texture;
       bufferPointer.ref.mipLevel = this[n].mipLevel;
       bufferPointer.ref.layerOrDepthPlane = this[n].layerOrDepthPlane;
-      bufferPointer.clearColor.ref.r = this[n].clearColor.r;
-      bufferPointer.clearColor.ref.g = this[n].clearColor.g;
-      bufferPointer.clearColor.ref.b = this[n].clearColor.b;
-      bufferPointer.clearColor.ref.a = this[n].clearColor.a;
+      bufferPointer.ref.clearColor.r = this[n].clearColor.r;
+      bufferPointer.ref.clearColor.g = this[n].clearColor.g;
+      bufferPointer.ref.clearColor.b = this[n].clearColor.b;
+      bufferPointer.ref.clearColor.a = this[n].clearColor.a;
       bufferPointer.ref.loadOp = this[n].loadOp;
       bufferPointer.ref.storeOp = this[n].storeOp;
       bufferPointer.ref.resolveTexture = this[n].resolveTexture;

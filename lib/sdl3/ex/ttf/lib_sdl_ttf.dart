@@ -130,7 +130,7 @@ bool ttfxMeasureString(
   SdlxPoint measured,
 ) {
   final measuredWidthPointer = ffi.calloc<Int32>();
-  final measuredLengthPointer = ffi.calloc<Uint32>();
+  final measuredLengthPointer = ffi.calloc<Size>();
   final result = ttfMeasureString(
     font,
     text,

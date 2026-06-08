@@ -38,10 +38,7 @@ final class SdlShaderCrossGraphicsShaderResourceInfo extends Struct {
 /// {@category shadercross}
 final class SdlShaderCrossGraphicsShaderMetadata extends Struct {
   // [0]+(16)
-  @Uint64()
-  external int resourceInfo_1;
-  @Uint64()
-  external int resourceInfo_2;
+  external SdlShaderCrossGraphicsShaderResourceInfo resourceInfo;
   // [16]+(4)
   @Uint32()
   external int numInputs;
@@ -52,13 +49,6 @@ final class SdlShaderCrossGraphicsShaderMetadata extends Struct {
   external int numOutputs;
   // [40]+(8)
   external Pointer<SdlShaderCrossIoVarMetadata> outputs;
-}
-
-/// {@category shadercross}
-extension SdlShaderCrossGraphicsShaderMetadataExtension
-    on Pointer<SdlShaderCrossGraphicsShaderMetadata> {
-  Pointer<SdlShaderCrossGraphicsShaderResourceInfo> get resourceInfo =>
-      (cast<Uint8>() + 0).cast<SdlShaderCrossGraphicsShaderResourceInfo>();
 }
 
 // SDL_ShaderCross_ComputePipelineMetadata
@@ -98,8 +88,8 @@ final class SdlShaderCrossComputePipelineMetadata extends Struct {
 final class SdlShaderCrossSpirvInfo extends Struct {
   // [0]+(8)
   external Pointer<Uint8> bytecode;
-  // [8]+(4)
-  @Uint32()
+  // [8]+(8)
+  @Size()
   external int bytecodeSize;
   // [16]+(8)
   external Pointer<Utf8> entrypoint;

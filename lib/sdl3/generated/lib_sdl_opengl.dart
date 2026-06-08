@@ -23,7 +23,7 @@ typedef PFNGLINDEXMASKPROC = Void Function(Uint32 mask);
 typedef PFNGLCOLORMASKPROCDart =
     void Function(int red, int green, int blue, int alpha);
 typedef PFNGLCOLORMASKPROC =
-    Void Function(Int32 red, Int32 green, Int32 blue, Int32 alpha);
+    Void Function(Uint8 red, Uint8 green, Uint8 blue, Uint8 alpha);
 
 // typedef void (APIENTRYP PFNGLALPHAFUNCPROC) ( GLenum func, GLclampf ref )
 typedef PFNGLALPHAFUNCPROCDart = void Function(int func, double ref);
@@ -75,17 +75,17 @@ typedef PFNGLGETPOLYGONSTIPPLEPROC = Void Function(Pointer<Uint8> mask);
 
 // typedef void (APIENTRYP PFNGLEDGEFLAGPROC) ( GLboolean flag )
 typedef PFNGLEDGEFLAGPROCDart = void Function(int flag);
-typedef PFNGLEDGEFLAGPROC = Void Function(Int32 flag);
+typedef PFNGLEDGEFLAGPROC = Void Function(Uint8 flag);
 
 // typedef void (APIENTRYP PFNGLEDGEFLAGVPROC) ( const GLboolean *flag )
-typedef PFNGLEDGEFLAGVPROCDart = void Function(Pointer<Int32> flag);
-typedef PFNGLEDGEFLAGVPROC = Void Function(Pointer<Int32> flag);
+typedef PFNGLEDGEFLAGVPROCDart = void Function(Pointer<Uint8> flag);
+typedef PFNGLEDGEFLAGVPROC = Void Function(Pointer<Uint8> flag);
 
 // typedef void (APIENTRYP PFNGLSCISSORPROC) ( GLint x, GLint y, GLsizei width, GLsizei height)
 typedef PFNGLSCISSORPROCDart =
     void Function(int x, int y, int width, int height);
 typedef PFNGLSCISSORPROC =
-    Void Function(Int32 x, Int32 y, Uint32 width, Uint32 height);
+    Void Function(Int32 x, Int32 y, Int32 width, Int32 height);
 
 // typedef void (APIENTRYP PFNGLCLIPPLANEPROC) ( GLenum plane, const GLdouble *equation )
 typedef PFNGLCLIPPLANEPROCDart =
@@ -117,7 +117,7 @@ typedef PFNGLDISABLEPROC = Void Function(Uint32 cap);
 
 // typedef GLboolean (APIENTRYP PFNGLISENABLEDPROC) ( GLenum cap )
 typedef PFNGLISENABLEDPROCDart = int Function(int cap);
-typedef PFNGLISENABLEDPROC = Int32 Function(Uint32 cap);
+typedef PFNGLISENABLEDPROC = Uint8 Function(Uint32 cap);
 
 // typedef void (APIENTRYP PFNGLENABLECLIENTSTATEPROC) ( GLenum cap )
 typedef PFNGLENABLECLIENTSTATEPROCDart = void Function(int cap);
@@ -129,9 +129,9 @@ typedef PFNGLDISABLECLIENTSTATEPROC = Void Function(Uint32 cap);
 
 // typedef void (APIENTRYP PFNGLGETBOOLEANVPROC) ( GLenum pname, GLboolean *params )
 typedef PFNGLGETBOOLEANVPROCDart =
-    void Function(int pname, Pointer<Int32> params);
+    void Function(int pname, Pointer<Uint8> params);
 typedef PFNGLGETBOOLEANVPROC =
-    Void Function(Uint32 pname, Pointer<Int32> params);
+    Void Function(Uint32 pname, Pointer<Uint8> params);
 
 // typedef void (APIENTRYP PFNGLGETDOUBLEVPROC) ( GLenum pname, GLdouble *params )
 typedef PFNGLGETDOUBLEVPROCDart =
@@ -200,7 +200,7 @@ typedef PFNGLDEPTHFUNCPROC = Void Function(Uint32 func);
 
 // typedef void (APIENTRYP PFNGLDEPTHMASKPROC) ( GLboolean flag )
 typedef PFNGLDEPTHMASKPROCDart = void Function(int flag);
-typedef PFNGLDEPTHMASKPROC = Void Function(Int32 flag);
+typedef PFNGLDEPTHMASKPROC = Void Function(Uint8 flag);
 
 // typedef void (APIENTRYP PFNGLDEPTHRANGEPROC) ( GLclampd near_val, GLclampd far_val )
 typedef PFNGLDEPTHRANGEPROCDart = void Function(double nearVal, double farVal);
@@ -264,7 +264,7 @@ typedef PFNGLFRUSTUMPROC =
 typedef PFNGLVIEWPORTPROCDart =
     void Function(int x, int y, int width, int height);
 typedef PFNGLVIEWPORTPROC =
-    Void Function(Int32 x, Int32 y, Uint32 width, Uint32 height);
+    Void Function(Int32 x, Int32 y, Int32 width, Int32 height);
 
 // typedef void (APIENTRYP PFNGLPUSHMATRIXPROC) ( void )
 typedef PFNGLPUSHMATRIXPROCDart = void Function();
@@ -324,15 +324,15 @@ typedef PFNGLTRANSLATEFPROC = Void Function(Float x, Float y, Float z);
 
 // typedef GLboolean (APIENTRYP PFNGLISLISTPROC) ( GLuint list )
 typedef PFNGLISLISTPROCDart = int Function(int list);
-typedef PFNGLISLISTPROC = Int32 Function(Uint32 list);
+typedef PFNGLISLISTPROC = Uint8 Function(Uint32 list);
 
 // typedef void (APIENTRYP PFNGLDELETELISTSPROC) ( GLuint list, GLsizei range )
 typedef PFNGLDELETELISTSPROCDart = void Function(int list, int range);
-typedef PFNGLDELETELISTSPROC = Void Function(Uint32 list, Uint32 range);
+typedef PFNGLDELETELISTSPROC = Void Function(Uint32 list, Int32 range);
 
 // typedef GLuint (APIENTRYP PFNGLGENLISTSPROC) ( GLsizei range )
 typedef PFNGLGENLISTSPROCDart = int Function(int range);
-typedef PFNGLGENLISTSPROC = Uint32 Function(Uint32 range);
+typedef PFNGLGENLISTSPROC = Uint32 Function(Int32 range);
 
 // typedef void (APIENTRYP PFNGLNEWLISTPROC) ( GLuint list, GLenum mode )
 typedef PFNGLNEWLISTPROCDart = void Function(int list, int mode);
@@ -348,9 +348,9 @@ typedef PFNGLCALLLISTPROC = Void Function(Uint32 list);
 
 // typedef void (APIENTRYP PFNGLCALLLISTSPROC) ( GLsizei n, GLenum type, const GLvoid *lists )
 typedef PFNGLCALLLISTSPROCDart =
-    void Function(int n, int type, Pointer<NativeType> lists);
+    void Function(int n, int type, Pointer<Void> lists);
 typedef PFNGLCALLLISTSPROC =
-    Void Function(Uint32 n, Uint32 type, Pointer<NativeType> lists);
+    Void Function(Int32 n, Uint32 type, Pointer<Void> lists);
 
 // typedef void (APIENTRYP PFNGLLISTBASEPROC) ( GLuint base )
 typedef PFNGLLISTBASEPROCDart = void Function(int base);
@@ -965,60 +965,45 @@ typedef PFNGLRECTSVPROC = Void Function(Pointer<Int16> v1, Pointer<Int16> v2);
 
 // typedef void (APIENTRYP PFNGLVERTEXPOINTERPROC) ( GLint size, GLenum type, GLsizei stride, const GLvoid *ptr )
 typedef PFNGLVERTEXPOINTERPROCDart =
-    void Function(int size, int type, int stride, Pointer<NativeType> ptr);
+    void Function(int size, int type, int stride, Pointer<Void> ptr);
 typedef PFNGLVERTEXPOINTERPROC =
-    Void Function(
-      Int32 size,
-      Uint32 type,
-      Uint32 stride,
-      Pointer<NativeType> ptr,
-    );
+    Void Function(Int32 size, Uint32 type, Int32 stride, Pointer<Void> ptr);
 
 // typedef void (APIENTRYP PFNGLNORMALPOINTERPROC) ( GLenum type, GLsizei stride, const GLvoid *ptr )
 typedef PFNGLNORMALPOINTERPROCDart =
-    void Function(int type, int stride, Pointer<NativeType> ptr);
+    void Function(int type, int stride, Pointer<Void> ptr);
 typedef PFNGLNORMALPOINTERPROC =
-    Void Function(Uint32 type, Uint32 stride, Pointer<NativeType> ptr);
+    Void Function(Uint32 type, Int32 stride, Pointer<Void> ptr);
 
 // typedef void (APIENTRYP PFNGLCOLORPOINTERPROC) ( GLint size, GLenum type, GLsizei stride, const GLvoid *ptr )
 typedef PFNGLCOLORPOINTERPROCDart =
-    void Function(int size, int type, int stride, Pointer<NativeType> ptr);
+    void Function(int size, int type, int stride, Pointer<Void> ptr);
 typedef PFNGLCOLORPOINTERPROC =
-    Void Function(
-      Int32 size,
-      Uint32 type,
-      Uint32 stride,
-      Pointer<NativeType> ptr,
-    );
+    Void Function(Int32 size, Uint32 type, Int32 stride, Pointer<Void> ptr);
 
 // typedef void (APIENTRYP PFNGLINDEXPOINTERPROC) ( GLenum type, GLsizei stride, const GLvoid *ptr )
 typedef PFNGLINDEXPOINTERPROCDart =
-    void Function(int type, int stride, Pointer<NativeType> ptr);
+    void Function(int type, int stride, Pointer<Void> ptr);
 typedef PFNGLINDEXPOINTERPROC =
-    Void Function(Uint32 type, Uint32 stride, Pointer<NativeType> ptr);
+    Void Function(Uint32 type, Int32 stride, Pointer<Void> ptr);
 
 // typedef void (APIENTRYP PFNGLTEXCOORDPOINTERPROC) ( GLint size, GLenum type, GLsizei stride, const GLvoid *ptr )
 typedef PFNGLTEXCOORDPOINTERPROCDart =
-    void Function(int size, int type, int stride, Pointer<NativeType> ptr);
+    void Function(int size, int type, int stride, Pointer<Void> ptr);
 typedef PFNGLTEXCOORDPOINTERPROC =
-    Void Function(
-      Int32 size,
-      Uint32 type,
-      Uint32 stride,
-      Pointer<NativeType> ptr,
-    );
+    Void Function(Int32 size, Uint32 type, Int32 stride, Pointer<Void> ptr);
 
 // typedef void (APIENTRYP PFNGLEDGEFLAGPOINTERPROC) ( GLsizei stride, const GLvoid *ptr )
 typedef PFNGLEDGEFLAGPOINTERPROCDart =
-    void Function(int stride, Pointer<NativeType> ptr);
+    void Function(int stride, Pointer<Void> ptr);
 typedef PFNGLEDGEFLAGPOINTERPROC =
-    Void Function(Uint32 stride, Pointer<NativeType> ptr);
+    Void Function(Int32 stride, Pointer<Void> ptr);
 
 // typedef void (APIENTRYP PFNGLGETPOINTERVPROC) ( GLenum pname, GLvoid **params )
 typedef PFNGLGETPOINTERVPROCDart =
-    void Function(int pname, Pointer<Pointer<NativeType>> params);
+    void Function(int pname, Pointer<Pointer<Void>> params);
 typedef PFNGLGETPOINTERVPROC =
-    Void Function(Uint32 pname, Pointer<Pointer<NativeType>> params);
+    Void Function(Uint32 pname, Pointer<Pointer<Void>> params);
 
 // typedef void (APIENTRYP PFNGLARRAYELEMENTPROC) ( GLint i )
 typedef PFNGLARRAYELEMENTPROCDart = void Function(int i);
@@ -1027,24 +1012,19 @@ typedef PFNGLARRAYELEMENTPROC = Void Function(Int32 i);
 // typedef void (APIENTRYP PFNGLDRAWARRAYSPROC) ( GLenum mode, GLint first, GLsizei count )
 typedef PFNGLDRAWARRAYSPROCDart = void Function(int mode, int first, int count);
 typedef PFNGLDRAWARRAYSPROC =
-    Void Function(Uint32 mode, Int32 first, Uint32 count);
+    Void Function(Uint32 mode, Int32 first, Int32 count);
 
 // typedef void (APIENTRYP PFNGLDRAWELEMENTSPROC) ( GLenum mode, GLsizei count, GLenum type, const GLvoid *indices )
 typedef PFNGLDRAWELEMENTSPROCDart =
-    void Function(int mode, int count, int type, Pointer<NativeType> indices);
+    void Function(int mode, int count, int type, Pointer<Void> indices);
 typedef PFNGLDRAWELEMENTSPROC =
-    Void Function(
-      Uint32 mode,
-      Uint32 count,
-      Uint32 type,
-      Pointer<NativeType> indices,
-    );
+    Void Function(Uint32 mode, Int32 count, Uint32 type, Pointer<Void> indices);
 
 // typedef void (APIENTRYP PFNGLINTERLEAVEDARRAYSPROC) ( GLenum format, GLsizei stride, const GLvoid *pointer )
 typedef PFNGLINTERLEAVEDARRAYSPROCDart =
-    void Function(int format, int stride, Pointer<NativeType> pointer);
+    void Function(int format, int stride, Pointer<Void> pointer);
 typedef PFNGLINTERLEAVEDARRAYSPROC =
-    Void Function(Uint32 format, Uint32 stride, Pointer<NativeType> pointer);
+    Void Function(Uint32 format, Int32 stride, Pointer<Void> pointer);
 
 // typedef void (APIENTRYP PFNGLSHADEMODELPROC) ( GLenum mode )
 typedef PFNGLSHADEMODELPROCDart = void Function(int mode);
@@ -1167,19 +1147,19 @@ typedef PFNGLPIXELTRANSFERIPROC = Void Function(Uint32 pname, Int32 param);
 typedef PFNGLPIXELMAPFVPROCDart =
     void Function(int map, int mapsize, Pointer<Float> values);
 typedef PFNGLPIXELMAPFVPROC =
-    Void Function(Uint32 map, Uint32 mapsize, Pointer<Float> values);
+    Void Function(Uint32 map, Int32 mapsize, Pointer<Float> values);
 
 // typedef void (APIENTRYP PFNGLPIXELMAPUIVPROC) ( GLenum map, GLsizei mapsize, const GLuint *values )
 typedef PFNGLPIXELMAPUIVPROCDart =
     void Function(int map, int mapsize, Pointer<Uint32> values);
 typedef PFNGLPIXELMAPUIVPROC =
-    Void Function(Uint32 map, Uint32 mapsize, Pointer<Uint32> values);
+    Void Function(Uint32 map, Int32 mapsize, Pointer<Uint32> values);
 
 // typedef void (APIENTRYP PFNGLPIXELMAPUSVPROC) ( GLenum map, GLsizei mapsize, const GLushort *values )
 typedef PFNGLPIXELMAPUSVPROCDart =
     void Function(int map, int mapsize, Pointer<Uint16> values);
 typedef PFNGLPIXELMAPUSVPROC =
-    Void Function(Uint32 map, Uint32 mapsize, Pointer<Uint16> values);
+    Void Function(Uint32 map, Int32 mapsize, Pointer<Uint16> values);
 
 // typedef void (APIENTRYP PFNGLGETPIXELMAPFVPROC) ( GLenum map, GLfloat *values )
 typedef PFNGLGETPIXELMAPFVPROCDart =
@@ -1212,8 +1192,8 @@ typedef PFNGLBITMAPPROCDart =
     );
 typedef PFNGLBITMAPPROC =
     Void Function(
-      Uint32 width,
-      Uint32 height,
+      Int32 width,
+      Int32 height,
       Float xorig,
       Float yorig,
       Float xmove,
@@ -1230,17 +1210,17 @@ typedef PFNGLREADPIXELSPROCDart =
       int height,
       int format,
       int type,
-      Pointer<NativeType> pixels,
+      Pointer<Void> pixels,
     );
 typedef PFNGLREADPIXELSPROC =
     Void Function(
       Int32 x,
       Int32 y,
-      Uint32 width,
-      Uint32 height,
+      Int32 width,
+      Int32 height,
       Uint32 format,
       Uint32 type,
-      Pointer<NativeType> pixels,
+      Pointer<Void> pixels,
     );
 
 // typedef void (APIENTRYP PFNGLDRAWPIXELSPROC) ( GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid *pixels )
@@ -1250,22 +1230,22 @@ typedef PFNGLDRAWPIXELSPROCDart =
       int height,
       int format,
       int type,
-      Pointer<NativeType> pixels,
+      Pointer<Void> pixels,
     );
 typedef PFNGLDRAWPIXELSPROC =
     Void Function(
-      Uint32 width,
-      Uint32 height,
+      Int32 width,
+      Int32 height,
       Uint32 format,
       Uint32 type,
-      Pointer<NativeType> pixels,
+      Pointer<Void> pixels,
     );
 
 // typedef void (APIENTRYP PFNGLCOPYPIXELSPROC) ( GLint x, GLint y, GLsizei width, GLsizei height, GLenum type )
 typedef PFNGLCOPYPIXELSPROCDart =
     void Function(int x, int y, int width, int height, int type);
 typedef PFNGLCOPYPIXELSPROC =
-    Void Function(Int32 x, Int32 y, Uint32 width, Uint32 height, Uint32 type);
+    Void Function(Int32 x, Int32 y, Int32 width, Int32 height, Uint32 type);
 
 // typedef void (APIENTRYP PFNGLSTENCILFUNCPROC) ( GLenum func, GLint ref, GLuint mask )
 typedef PFNGLSTENCILFUNCPROCDart = void Function(int func, int ref, int mask);
@@ -1441,18 +1421,18 @@ typedef PFNGLTEXIMAGE1DPROCDart =
       int border,
       int format,
       int type,
-      Pointer<NativeType> pixels,
+      Pointer<Void> pixels,
     );
 typedef PFNGLTEXIMAGE1DPROC =
     Void Function(
       Uint32 target,
       Int32 level,
       Int32 internalFormat,
-      Uint32 width,
+      Int32 width,
       Int32 border,
       Uint32 format,
       Uint32 type,
-      Pointer<NativeType> pixels,
+      Pointer<Void> pixels,
     );
 
 // typedef void (APIENTRYP PFNGLTEXIMAGE2DPROC) ( GLenum target, GLint level, GLint internalFormat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const GLvoid *pixels )
@@ -1466,19 +1446,19 @@ typedef PFNGLTEXIMAGE2DPROCDart =
       int border,
       int format,
       int type,
-      Pointer<NativeType> pixels,
+      Pointer<Void> pixels,
     );
 typedef PFNGLTEXIMAGE2DPROC =
     Void Function(
       Uint32 target,
       Int32 level,
       Int32 internalFormat,
-      Uint32 width,
-      Uint32 height,
+      Int32 width,
+      Int32 height,
       Int32 border,
       Uint32 format,
       Uint32 type,
-      Pointer<NativeType> pixels,
+      Pointer<Void> pixels,
     );
 
 // typedef void (APIENTRYP PFNGLGETTEXIMAGEPROC) ( GLenum target, GLint level, GLenum format, GLenum type, GLvoid *pixels )
@@ -1488,7 +1468,7 @@ typedef PFNGLGETTEXIMAGEPROCDart =
       int level,
       int format,
       int type,
-      Pointer<NativeType> pixels,
+      Pointer<Void> pixels,
     );
 typedef PFNGLGETTEXIMAGEPROC =
     Void Function(
@@ -1496,20 +1476,19 @@ typedef PFNGLGETTEXIMAGEPROC =
       Int32 level,
       Uint32 format,
       Uint32 type,
-      Pointer<NativeType> pixels,
+      Pointer<Void> pixels,
     );
 
 // typedef void (APIENTRYP PFNGLGENTEXTURESPROC) ( GLsizei n, GLuint *textures )
 typedef PFNGLGENTEXTURESPROCDart =
     void Function(int n, Pointer<Uint32> textures);
-typedef PFNGLGENTEXTURESPROC =
-    Void Function(Uint32 n, Pointer<Uint32> textures);
+typedef PFNGLGENTEXTURESPROC = Void Function(Int32 n, Pointer<Uint32> textures);
 
 // typedef void (APIENTRYP PFNGLDELETETEXTURESPROC) ( GLsizei n, const GLuint *textures)
 typedef PFNGLDELETETEXTURESPROCDart =
     void Function(int n, Pointer<Uint32> textures);
 typedef PFNGLDELETETEXTURESPROC =
-    Void Function(Uint32 n, Pointer<Uint32> textures);
+    Void Function(Int32 n, Pointer<Uint32> textures);
 
 // typedef void (APIENTRYP PFNGLBINDTEXTUREPROC) ( GLenum target, GLuint texture )
 typedef PFNGLBINDTEXTUREPROCDart = void Function(int target, int texture);
@@ -1519,25 +1498,21 @@ typedef PFNGLBINDTEXTUREPROC = Void Function(Uint32 target, Uint32 texture);
 typedef PFNGLPRIORITIZETEXTURESPROCDart =
     void Function(int n, Pointer<Uint32> textures, Pointer<Float> priorities);
 typedef PFNGLPRIORITIZETEXTURESPROC =
-    Void Function(
-      Uint32 n,
-      Pointer<Uint32> textures,
-      Pointer<Float> priorities,
-    );
+    Void Function(Int32 n, Pointer<Uint32> textures, Pointer<Float> priorities);
 
 // typedef GLboolean (APIENTRYP PFNGLARETEXTURESRESIDENTPROC) ( GLsizei n, const GLuint *textures, GLboolean *residences )
 typedef PFNGLARETEXTURESRESIDENTPROCDart =
-    int Function(int n, Pointer<Uint32> textures, Pointer<Int32> residences);
+    int Function(int n, Pointer<Uint32> textures, Pointer<Uint8> residences);
 typedef PFNGLARETEXTURESRESIDENTPROC =
-    Int32 Function(
-      Uint32 n,
+    Uint8 Function(
+      Int32 n,
       Pointer<Uint32> textures,
-      Pointer<Int32> residences,
+      Pointer<Uint8> residences,
     );
 
 // typedef GLboolean (APIENTRYP PFNGLISTEXTUREPROC) ( GLuint texture )
 typedef PFNGLISTEXTUREPROCDart = int Function(int texture);
-typedef PFNGLISTEXTUREPROC = Int32 Function(Uint32 texture);
+typedef PFNGLISTEXTUREPROC = Uint8 Function(Uint32 texture);
 
 // typedef void (APIENTRYP PFNGLTEXSUBIMAGE1DPROC) ( GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLenum type, const GLvoid *pixels )
 typedef PFNGLTEXSUBIMAGE1DPROCDart =
@@ -1548,17 +1523,17 @@ typedef PFNGLTEXSUBIMAGE1DPROCDart =
       int width,
       int format,
       int type,
-      Pointer<NativeType> pixels,
+      Pointer<Void> pixels,
     );
 typedef PFNGLTEXSUBIMAGE1DPROC =
     Void Function(
       Uint32 target,
       Int32 level,
       Int32 xoffset,
-      Uint32 width,
+      Int32 width,
       Uint32 format,
       Uint32 type,
-      Pointer<NativeType> pixels,
+      Pointer<Void> pixels,
     );
 
 // typedef void (APIENTRYP PFNGLTEXSUBIMAGE2DPROC) ( GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid *pixels )
@@ -1572,7 +1547,7 @@ typedef PFNGLTEXSUBIMAGE2DPROCDart =
       int height,
       int format,
       int type,
-      Pointer<NativeType> pixels,
+      Pointer<Void> pixels,
     );
 typedef PFNGLTEXSUBIMAGE2DPROC =
     Void Function(
@@ -1580,11 +1555,11 @@ typedef PFNGLTEXSUBIMAGE2DPROC =
       Int32 level,
       Int32 xoffset,
       Int32 yoffset,
-      Uint32 width,
-      Uint32 height,
+      Int32 width,
+      Int32 height,
       Uint32 format,
       Uint32 type,
-      Pointer<NativeType> pixels,
+      Pointer<Void> pixels,
     );
 
 // typedef void (APIENTRYP PFNGLCOPYTEXIMAGE1DPROC) ( GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLint border )
@@ -1605,7 +1580,7 @@ typedef PFNGLCOPYTEXIMAGE1DPROC =
       Uint32 internalformat,
       Int32 x,
       Int32 y,
-      Uint32 width,
+      Int32 width,
       Int32 border,
     );
 
@@ -1628,8 +1603,8 @@ typedef PFNGLCOPYTEXIMAGE2DPROC =
       Uint32 internalformat,
       Int32 x,
       Int32 y,
-      Uint32 width,
-      Uint32 height,
+      Int32 width,
+      Int32 height,
       Int32 border,
     );
 
@@ -1643,7 +1618,7 @@ typedef PFNGLCOPYTEXSUBIMAGE1DPROC =
       Int32 xoffset,
       Int32 x,
       Int32 y,
-      Uint32 width,
+      Int32 width,
     );
 
 // typedef void (APIENTRYP PFNGLCOPYTEXSUBIMAGE2DPROC) ( GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint x, GLint y, GLsizei width, GLsizei height )
@@ -1666,8 +1641,8 @@ typedef PFNGLCOPYTEXSUBIMAGE2DPROC =
       Int32 yoffset,
       Int32 x,
       Int32 y,
-      Uint32 width,
-      Uint32 height,
+      Int32 width,
+      Int32 height,
     );
 
 // typedef void (APIENTRYP PFNGLMAP1DPROC) ( GLenum target, GLdouble u1, GLdouble u2, GLint stride, GLint order, const GLdouble *points )
@@ -1881,7 +1856,7 @@ typedef PFNGLFOGIVPROC = Void Function(Uint32 pname, Pointer<Int32> params);
 typedef PFNGLFEEDBACKBUFFERPROCDart =
     void Function(int size, int type, Pointer<Float> buffer);
 typedef PFNGLFEEDBACKBUFFERPROC =
-    Void Function(Uint32 size, Uint32 type, Pointer<Float> buffer);
+    Void Function(Int32 size, Uint32 type, Pointer<Float> buffer);
 
 // typedef void (APIENTRYP PFNGLPASSTHROUGHPROC) ( GLfloat token )
 typedef PFNGLPASSTHROUGHPROCDart = void Function(double token);
@@ -1891,7 +1866,7 @@ typedef PFNGLPASSTHROUGHPROC = Void Function(Float token);
 typedef PFNGLSELECTBUFFERPROCDart =
     void Function(int size, Pointer<Uint32> buffer);
 typedef PFNGLSELECTBUFFERPROC =
-    Void Function(Uint32 size, Pointer<Uint32> buffer);
+    Void Function(Int32 size, Pointer<Uint32> buffer);
 
 // typedef void (APIENTRYP PFNGLINITNAMESPROC) ( void )
 typedef PFNGLINITNAMESPROCDart = void Function();
@@ -1917,16 +1892,16 @@ typedef PFNGLDRAWRANGEELEMENTSPROCDart =
       int end,
       int count,
       int type,
-      Pointer<NativeType> indices,
+      Pointer<Void> indices,
     );
 typedef PFNGLDRAWRANGEELEMENTSPROC =
     Void Function(
       Uint32 mode,
       Uint32 start,
       Uint32 end,
-      Uint32 count,
+      Int32 count,
       Uint32 type,
-      Pointer<NativeType> indices,
+      Pointer<Void> indices,
     );
 
 // typedef void (APIENTRYP PFNGLTEXIMAGE3DPROC) ( GLenum target, GLint level, GLint internalFormat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLenum format, GLenum type, const GLvoid *pixels )
@@ -1941,20 +1916,20 @@ typedef PFNGLTEXIMAGE3DPROCDart =
       int border,
       int format,
       int type,
-      Pointer<NativeType> pixels,
+      Pointer<Void> pixels,
     );
 typedef PFNGLTEXIMAGE3DPROC =
     Void Function(
       Uint32 target,
       Int32 level,
       Int32 internalFormat,
-      Uint32 width,
-      Uint32 height,
-      Uint32 depth,
+      Int32 width,
+      Int32 height,
+      Int32 depth,
       Int32 border,
       Uint32 format,
       Uint32 type,
-      Pointer<NativeType> pixels,
+      Pointer<Void> pixels,
     );
 
 // typedef void (APIENTRYP PFNGLTEXSUBIMAGE3DPROC) ( GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const GLvoid *pixels)
@@ -1970,7 +1945,7 @@ typedef PFNGLTEXSUBIMAGE3DPROCDart =
       int depth,
       int format,
       int type,
-      Pointer<NativeType> pixels,
+      Pointer<Void> pixels,
     );
 typedef PFNGLTEXSUBIMAGE3DPROC =
     Void Function(
@@ -1979,12 +1954,12 @@ typedef PFNGLTEXSUBIMAGE3DPROC =
       Int32 xoffset,
       Int32 yoffset,
       Int32 zoffset,
-      Uint32 width,
-      Uint32 height,
-      Uint32 depth,
+      Int32 width,
+      Int32 height,
+      Int32 depth,
       Uint32 format,
       Uint32 type,
-      Pointer<NativeType> pixels,
+      Pointer<Void> pixels,
     );
 
 // typedef void (APIENTRYP PFNGLCOPYTEXSUBIMAGE3DPROC) ( GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLint x, GLint y, GLsizei width, GLsizei height )
@@ -2009,8 +1984,8 @@ typedef PFNGLCOPYTEXSUBIMAGE3DPROC =
       Int32 zoffset,
       Int32 x,
       Int32 y,
-      Uint32 width,
-      Uint32 height,
+      Int32 width,
+      Int32 height,
     );
 
 // typedef void (APIENTRYP PFNGLCOLORTABLEPROC) ( GLenum target, GLenum internalformat, GLsizei width, GLenum format, GLenum type, const GLvoid *table )
@@ -2021,16 +1996,16 @@ typedef PFNGLCOLORTABLEPROCDart =
       int width,
       int format,
       int type,
-      Pointer<NativeType> table,
+      Pointer<Void> table,
     );
 typedef PFNGLCOLORTABLEPROC =
     Void Function(
       Uint32 target,
       Uint32 internalformat,
-      Uint32 width,
+      Int32 width,
       Uint32 format,
       Uint32 type,
-      Pointer<NativeType> table,
+      Pointer<Void> table,
     );
 
 // typedef void (APIENTRYP PFNGLCOLORSUBTABLEPROC) ( GLenum target, GLsizei start, GLsizei count, GLenum format, GLenum type, const GLvoid *data )
@@ -2041,16 +2016,16 @@ typedef PFNGLCOLORSUBTABLEPROCDart =
       int count,
       int format,
       int type,
-      Pointer<NativeType> data,
+      Pointer<Void> data,
     );
 typedef PFNGLCOLORSUBTABLEPROC =
     Void Function(
       Uint32 target,
-      Uint32 start,
-      Uint32 count,
+      Int32 start,
+      Int32 count,
       Uint32 format,
       Uint32 type,
-      Pointer<NativeType> data,
+      Pointer<Void> data,
     );
 
 // typedef void (APIENTRYP PFNGLCOLORTABLEPARAMETERIVPROC) (GLenum target, GLenum pname, const GLint *params)
@@ -2069,7 +2044,7 @@ typedef PFNGLCOLORTABLEPARAMETERFVPROC =
 typedef PFNGLCOPYCOLORSUBTABLEPROCDart =
     void Function(int target, int start, int x, int y, int width);
 typedef PFNGLCOPYCOLORSUBTABLEPROC =
-    Void Function(Uint32 target, Uint32 start, Int32 x, Int32 y, Uint32 width);
+    Void Function(Uint32 target, Int32 start, Int32 x, Int32 y, Int32 width);
 
 // typedef void (APIENTRYP PFNGLCOPYCOLORTABLEPROC) ( GLenum target, GLenum internalformat, GLint x, GLint y, GLsizei width )
 typedef PFNGLCOPYCOLORTABLEPROCDart =
@@ -2080,18 +2055,18 @@ typedef PFNGLCOPYCOLORTABLEPROC =
       Uint32 internalformat,
       Int32 x,
       Int32 y,
-      Uint32 width,
+      Int32 width,
     );
 
 // typedef void (APIENTRYP PFNGLGETCOLORTABLEPROC) ( GLenum target, GLenum format, GLenum type, GLvoid *table )
 typedef PFNGLGETCOLORTABLEPROCDart =
-    void Function(int target, int format, int type, Pointer<NativeType> table);
+    void Function(int target, int format, int type, Pointer<Void> table);
 typedef PFNGLGETCOLORTABLEPROC =
     Void Function(
       Uint32 target,
       Uint32 format,
       Uint32 type,
-      Pointer<NativeType> table,
+      Pointer<Void> table,
     );
 
 // typedef void (APIENTRYP PFNGLGETCOLORTABLEPARAMETERFVPROC) ( GLenum target, GLenum pname, GLfloat *params )
@@ -2122,9 +2097,9 @@ typedef PFNGLHISTOGRAMPROCDart =
 typedef PFNGLHISTOGRAMPROC =
     Void Function(
       Uint32 target,
-      Uint32 width,
+      Int32 width,
       Uint32 internalformat,
-      Int32 sink,
+      Uint8 sink,
     );
 
 // typedef void (APIENTRYP PFNGLRESETHISTOGRAMPROC) ( GLenum target )
@@ -2138,15 +2113,15 @@ typedef PFNGLGETHISTOGRAMPROCDart =
       int reset,
       int format,
       int type,
-      Pointer<NativeType> values,
+      Pointer<Void> values,
     );
 typedef PFNGLGETHISTOGRAMPROC =
     Void Function(
       Uint32 target,
-      Int32 reset,
+      Uint8 reset,
       Uint32 format,
       Uint32 type,
-      Pointer<NativeType> values,
+      Pointer<Void> values,
     );
 
 // typedef void (APIENTRYP PFNGLGETHISTOGRAMPARAMETERFVPROC) ( GLenum target, GLenum pname, GLfloat *params )
@@ -2165,7 +2140,7 @@ typedef PFNGLGETHISTOGRAMPARAMETERIVPROC =
 typedef PFNGLMINMAXPROCDart =
     void Function(int target, int internalformat, int sink);
 typedef PFNGLMINMAXPROC =
-    Void Function(Uint32 target, Uint32 internalformat, Int32 sink);
+    Void Function(Uint32 target, Uint32 internalformat, Uint8 sink);
 
 // typedef void (APIENTRYP PFNGLRESETMINMAXPROC) ( GLenum target )
 typedef PFNGLRESETMINMAXPROCDart = void Function(int target);
@@ -2178,15 +2153,15 @@ typedef PFNGLGETMINMAXPROCDart =
       int reset,
       int format,
       int types,
-      Pointer<NativeType> values,
+      Pointer<Void> values,
     );
 typedef PFNGLGETMINMAXPROC =
     Void Function(
       Uint32 target,
-      Int32 reset,
+      Uint8 reset,
       Uint32 format,
       Uint32 types,
-      Pointer<NativeType> values,
+      Pointer<Void> values,
     );
 
 // typedef void (APIENTRYP PFNGLGETMINMAXPARAMETERFVPROC) ( GLenum target, GLenum pname, GLfloat *params )
@@ -2209,16 +2184,16 @@ typedef PFNGLCONVOLUTIONFILTER1DPROCDart =
       int width,
       int format,
       int type,
-      Pointer<NativeType> image,
+      Pointer<Void> image,
     );
 typedef PFNGLCONVOLUTIONFILTER1DPROC =
     Void Function(
       Uint32 target,
       Uint32 internalformat,
-      Uint32 width,
+      Int32 width,
       Uint32 format,
       Uint32 type,
-      Pointer<NativeType> image,
+      Pointer<Void> image,
     );
 
 // typedef void (APIENTRYP PFNGLCONVOLUTIONFILTER2DPROC) ( GLenum target, GLenum internalformat, GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid *image )
@@ -2230,17 +2205,17 @@ typedef PFNGLCONVOLUTIONFILTER2DPROCDart =
       int height,
       int format,
       int type,
-      Pointer<NativeType> image,
+      Pointer<Void> image,
     );
 typedef PFNGLCONVOLUTIONFILTER2DPROC =
     Void Function(
       Uint32 target,
       Uint32 internalformat,
-      Uint32 width,
-      Uint32 height,
+      Int32 width,
+      Int32 height,
       Uint32 format,
       Uint32 type,
-      Pointer<NativeType> image,
+      Pointer<Void> image,
     );
 
 // typedef void (APIENTRYP PFNGLCONVOLUTIONPARAMETERFPROC) ( GLenum target, GLenum pname, GLfloat params )
@@ -2276,7 +2251,7 @@ typedef PFNGLCOPYCONVOLUTIONFILTER1DPROC =
       Uint32 internalformat,
       Int32 x,
       Int32 y,
-      Uint32 width,
+      Int32 width,
     );
 
 // typedef void (APIENTRYP PFNGLCOPYCONVOLUTIONFILTER2DPROC) ( GLenum target, GLenum internalformat, GLint x, GLint y, GLsizei width, GLsizei height)
@@ -2295,19 +2270,19 @@ typedef PFNGLCOPYCONVOLUTIONFILTER2DPROC =
       Uint32 internalformat,
       Int32 x,
       Int32 y,
-      Uint32 width,
-      Uint32 height,
+      Int32 width,
+      Int32 height,
     );
 
 // typedef void (APIENTRYP PFNGLGETCONVOLUTIONFILTERPROC) ( GLenum target, GLenum format, GLenum type, GLvoid *image )
 typedef PFNGLGETCONVOLUTIONFILTERPROCDart =
-    void Function(int target, int format, int type, Pointer<NativeType> image);
+    void Function(int target, int format, int type, Pointer<Void> image);
 typedef PFNGLGETCONVOLUTIONFILTERPROC =
     Void Function(
       Uint32 target,
       Uint32 format,
       Uint32 type,
-      Pointer<NativeType> image,
+      Pointer<Void> image,
     );
 
 // typedef void (APIENTRYP PFNGLGETCONVOLUTIONPARAMETERFVPROC) ( GLenum target, GLenum pname, GLfloat *params )
@@ -2331,19 +2306,19 @@ typedef PFNGLSEPARABLEFILTER2DPROCDart =
       int height,
       int format,
       int type,
-      Pointer<NativeType> row,
-      Pointer<NativeType> column,
+      Pointer<Void> row,
+      Pointer<Void> column,
     );
 typedef PFNGLSEPARABLEFILTER2DPROC =
     Void Function(
       Uint32 target,
       Uint32 internalformat,
-      Uint32 width,
-      Uint32 height,
+      Int32 width,
+      Int32 height,
       Uint32 format,
       Uint32 type,
-      Pointer<NativeType> row,
-      Pointer<NativeType> column,
+      Pointer<Void> row,
+      Pointer<Void> column,
     );
 
 // typedef void (APIENTRYP PFNGLGETSEPARABLEFILTERPROC) ( GLenum target, GLenum format, GLenum type, GLvoid *row, GLvoid *column, GLvoid *span )
@@ -2352,18 +2327,18 @@ typedef PFNGLGETSEPARABLEFILTERPROCDart =
       int target,
       int format,
       int type,
-      Pointer<NativeType> row,
-      Pointer<NativeType> column,
-      Pointer<NativeType> span,
+      Pointer<Void> row,
+      Pointer<Void> column,
+      Pointer<Void> span,
     );
 typedef PFNGLGETSEPARABLEFILTERPROC =
     Void Function(
       Uint32 target,
       Uint32 format,
       Uint32 type,
-      Pointer<NativeType> row,
-      Pointer<NativeType> column,
-      Pointer<NativeType> span,
+      Pointer<Void> row,
+      Pointer<Void> column,
+      Pointer<Void> span,
     );
 
 // typedef void (APIENTRYP PFNGLACTIVETEXTUREPROC) ( GLenum texture )
@@ -2383,17 +2358,17 @@ typedef PFNGLCOMPRESSEDTEXIMAGE1DPROCDart =
       int width,
       int border,
       int imageSize,
-      Pointer<NativeType> data,
+      Pointer<Void> data,
     );
 typedef PFNGLCOMPRESSEDTEXIMAGE1DPROC =
     Void Function(
       Uint32 target,
       Int32 level,
       Uint32 internalformat,
-      Uint32 width,
+      Int32 width,
       Int32 border,
-      Uint32 imageSize,
-      Pointer<NativeType> data,
+      Int32 imageSize,
+      Pointer<Void> data,
     );
 
 // typedef void (APIENTRYP PFNGLCOMPRESSEDTEXIMAGE2DPROC) ( GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLint border, GLsizei imageSize, const GLvoid *data )
@@ -2406,18 +2381,18 @@ typedef PFNGLCOMPRESSEDTEXIMAGE2DPROCDart =
       int height,
       int border,
       int imageSize,
-      Pointer<NativeType> data,
+      Pointer<Void> data,
     );
 typedef PFNGLCOMPRESSEDTEXIMAGE2DPROC =
     Void Function(
       Uint32 target,
       Int32 level,
       Uint32 internalformat,
-      Uint32 width,
-      Uint32 height,
+      Int32 width,
+      Int32 height,
       Int32 border,
-      Uint32 imageSize,
-      Pointer<NativeType> data,
+      Int32 imageSize,
+      Pointer<Void> data,
     );
 
 // typedef void (APIENTRYP PFNGLCOMPRESSEDTEXIMAGE3DPROC) ( GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLsizei imageSize, const GLvoid *data )
@@ -2431,19 +2406,19 @@ typedef PFNGLCOMPRESSEDTEXIMAGE3DPROCDart =
       int depth,
       int border,
       int imageSize,
-      Pointer<NativeType> data,
+      Pointer<Void> data,
     );
 typedef PFNGLCOMPRESSEDTEXIMAGE3DPROC =
     Void Function(
       Uint32 target,
       Int32 level,
       Uint32 internalformat,
-      Uint32 width,
-      Uint32 height,
-      Uint32 depth,
+      Int32 width,
+      Int32 height,
+      Int32 depth,
       Int32 border,
-      Uint32 imageSize,
-      Pointer<NativeType> data,
+      Int32 imageSize,
+      Pointer<Void> data,
     );
 
 // typedef void (APIENTRYP PFNGLCOMPRESSEDTEXSUBIMAGE1DPROC) ( GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLsizei imageSize, const GLvoid *data )
@@ -2455,17 +2430,17 @@ typedef PFNGLCOMPRESSEDTEXSUBIMAGE1DPROCDart =
       int width,
       int format,
       int imageSize,
-      Pointer<NativeType> data,
+      Pointer<Void> data,
     );
 typedef PFNGLCOMPRESSEDTEXSUBIMAGE1DPROC =
     Void Function(
       Uint32 target,
       Int32 level,
       Int32 xoffset,
-      Uint32 width,
+      Int32 width,
       Uint32 format,
-      Uint32 imageSize,
-      Pointer<NativeType> data,
+      Int32 imageSize,
+      Pointer<Void> data,
     );
 
 // typedef void (APIENTRYP PFNGLCOMPRESSEDTEXSUBIMAGE2DPROC) ( GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLsizei imageSize, const GLvoid *data )
@@ -2479,7 +2454,7 @@ typedef PFNGLCOMPRESSEDTEXSUBIMAGE2DPROCDart =
       int height,
       int format,
       int imageSize,
-      Pointer<NativeType> data,
+      Pointer<Void> data,
     );
 typedef PFNGLCOMPRESSEDTEXSUBIMAGE2DPROC =
     Void Function(
@@ -2487,11 +2462,11 @@ typedef PFNGLCOMPRESSEDTEXSUBIMAGE2DPROC =
       Int32 level,
       Int32 xoffset,
       Int32 yoffset,
-      Uint32 width,
-      Uint32 height,
+      Int32 width,
+      Int32 height,
       Uint32 format,
-      Uint32 imageSize,
-      Pointer<NativeType> data,
+      Int32 imageSize,
+      Pointer<Void> data,
     );
 
 // typedef void (APIENTRYP PFNGLCOMPRESSEDTEXSUBIMAGE3DPROC) ( GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLsizei imageSize, const GLvoid *data )
@@ -2507,7 +2482,7 @@ typedef PFNGLCOMPRESSEDTEXSUBIMAGE3DPROCDart =
       int depth,
       int format,
       int imageSize,
-      Pointer<NativeType> data,
+      Pointer<Void> data,
     );
 typedef PFNGLCOMPRESSEDTEXSUBIMAGE3DPROC =
     Void Function(
@@ -2516,19 +2491,19 @@ typedef PFNGLCOMPRESSEDTEXSUBIMAGE3DPROC =
       Int32 xoffset,
       Int32 yoffset,
       Int32 zoffset,
-      Uint32 width,
-      Uint32 height,
-      Uint32 depth,
+      Int32 width,
+      Int32 height,
+      Int32 depth,
       Uint32 format,
-      Uint32 imageSize,
-      Pointer<NativeType> data,
+      Int32 imageSize,
+      Pointer<Void> data,
     );
 
 // typedef void (APIENTRYP PFNGLGETCOMPRESSEDTEXIMAGEPROC) ( GLenum target, GLint lod, GLvoid *img )
 typedef PFNGLGETCOMPRESSEDTEXIMAGEPROCDart =
-    void Function(int target, int lod, Pointer<NativeType> img);
+    void Function(int target, int lod, Pointer<Void> img);
 typedef PFNGLGETCOMPRESSEDTEXIMAGEPROC =
-    Void Function(Uint32 target, Int32 lod, Pointer<NativeType> img);
+    Void Function(Uint32 target, Int32 lod, Pointer<Void> img);
 
 // typedef void (APIENTRYP PFNGLMULTITEXCOORD1DPROC) ( GLenum target, GLdouble s )
 typedef PFNGLMULTITEXCOORD1DPROCDart = void Function(int target, double s);
@@ -2730,7 +2705,7 @@ typedef PFNGLMULTTRANSPOSEMATRIXFPROC = Void Function(Float m);
 
 // typedef void (APIENTRYP PFNGLSAMPLECOVERAGEPROC) ( GLclampf value, GLboolean invert )
 typedef PFNGLSAMPLECOVERAGEPROCDart = void Function(double value, int invert);
-typedef PFNGLSAMPLECOVERAGEPROC = Void Function(Float value, Int32 invert);
+typedef PFNGLSAMPLECOVERAGEPROC = Void Function(Float value, Uint8 invert);
 
 // typedef void (APIENTRYP PFNGLACTIVETEXTUREARBPROC) (GLenum texture)
 typedef PFNGLACTIVETEXTUREARBPROCDart = void Function(int texture);
@@ -2945,33 +2920,33 @@ typedef PFNGLMULTIDRAWARRAYSPROCDart =
     void Function(
       int mode,
       Pointer<Int32> first,
-      Pointer<Uint32> count,
+      Pointer<Int32> count,
       int drawcount,
     );
 typedef PFNGLMULTIDRAWARRAYSPROC =
     Void Function(
       Uint32 mode,
       Pointer<Int32> first,
-      Pointer<Uint32> count,
-      Uint32 drawcount,
+      Pointer<Int32> count,
+      Int32 drawcount,
     );
 
 // typedef void (APIENTRYP PFNGLMULTIDRAWELEMENTSPROC) (GLenum mode, const GLsizei *count, GLenum type, const void *const*indices, GLsizei drawcount)
 typedef PFNGLMULTIDRAWELEMENTSPROCDart =
     void Function(
       int mode,
-      Pointer<Uint32> count,
+      Pointer<Int32> count,
       int type,
-      Pointer<Pointer<NativeType>> indices,
+      Pointer<Pointer<Void>> indices,
       int drawcount,
     );
 typedef PFNGLMULTIDRAWELEMENTSPROC =
     Void Function(
       Uint32 mode,
-      Pointer<Uint32> count,
+      Pointer<Int32> count,
       Uint32 type,
-      Pointer<Pointer<NativeType>> indices,
-      Uint32 drawcount,
+      Pointer<Pointer<Void>> indices,
+      Int32 drawcount,
     );
 
 // typedef void (APIENTRYP PFNGLPOINTPARAMETERFPROC) (GLenum pname, GLfloat param)
@@ -3012,9 +2987,9 @@ typedef PFNGLFOGCOORDDVPROC = Void Function(Pointer<Double> coord);
 
 // typedef void (APIENTRYP PFNGLFOGCOORDPOINTERPROC) (GLenum type, GLsizei stride, const void *pointer)
 typedef PFNGLFOGCOORDPOINTERPROCDart =
-    void Function(int type, int stride, Pointer<NativeType> pointer);
+    void Function(int type, int stride, Pointer<Void> pointer);
 typedef PFNGLFOGCOORDPOINTERPROC =
-    Void Function(Uint32 type, Uint32 stride, Pointer<NativeType> pointer);
+    Void Function(Uint32 type, Int32 stride, Pointer<Void> pointer);
 
 // typedef void (APIENTRYP PFNGLSECONDARYCOLOR3BPROC) (GLbyte red, GLbyte green, GLbyte blue)
 typedef PFNGLSECONDARYCOLOR3BPROCDart =
@@ -3098,14 +3073,9 @@ typedef PFNGLSECONDARYCOLOR3USVPROC = Void Function(Pointer<Uint16> v);
 
 // typedef void (APIENTRYP PFNGLSECONDARYCOLORPOINTERPROC) (GLint size, GLenum type, GLsizei stride, const void *pointer)
 typedef PFNGLSECONDARYCOLORPOINTERPROCDart =
-    void Function(int size, int type, int stride, Pointer<NativeType> pointer);
+    void Function(int size, int type, int stride, Pointer<Void> pointer);
 typedef PFNGLSECONDARYCOLORPOINTERPROC =
-    Void Function(
-      Int32 size,
-      Uint32 type,
-      Uint32 stride,
-      Pointer<NativeType> pointer,
-    );
+    Void Function(Int32 size, Uint32 type, Int32 stride, Pointer<Void> pointer);
 
 // typedef void (APIENTRYP PFNGLWINDOWPOS2DPROC) (GLdouble x, GLdouble y)
 typedef PFNGLWINDOWPOS2DPROCDart = void Function(double x, double y);
@@ -3173,15 +3143,15 @@ typedef PFNGLWINDOWPOS3SVPROC = Void Function(Pointer<Int16> v);
 
 // typedef void (APIENTRYP PFNGLGENQUERIESPROC) (GLsizei n, GLuint *ids)
 typedef PFNGLGENQUERIESPROCDart = void Function(int n, Pointer<Uint32> ids);
-typedef PFNGLGENQUERIESPROC = Void Function(Uint32 n, Pointer<Uint32> ids);
+typedef PFNGLGENQUERIESPROC = Void Function(Int32 n, Pointer<Uint32> ids);
 
 // typedef void (APIENTRYP PFNGLDELETEQUERIESPROC) (GLsizei n, const GLuint *ids)
 typedef PFNGLDELETEQUERIESPROCDart = void Function(int n, Pointer<Uint32> ids);
-typedef PFNGLDELETEQUERIESPROC = Void Function(Uint32 n, Pointer<Uint32> ids);
+typedef PFNGLDELETEQUERIESPROC = Void Function(Int32 n, Pointer<Uint32> ids);
 
 // typedef GLboolean (APIENTRYP PFNGLISQUERYPROC) (GLuint id)
 typedef PFNGLISQUERYPROCDart = int Function(int id);
-typedef PFNGLISQUERYPROC = Int32 Function(Uint32 id);
+typedef PFNGLISQUERYPROC = Uint8 Function(Uint32 id);
 
 // typedef void (APIENTRYP PFNGLBEGINQUERYPROC) (GLenum target, GLuint id)
 typedef PFNGLBEGINQUERYPROCDart = void Function(int target, int id);
@@ -3217,73 +3187,52 @@ typedef PFNGLBINDBUFFERPROC = Void Function(Uint32 target, Uint32 buffer);
 typedef PFNGLDELETEBUFFERSPROCDart =
     void Function(int n, Pointer<Uint32> buffers);
 typedef PFNGLDELETEBUFFERSPROC =
-    Void Function(Uint32 n, Pointer<Uint32> buffers);
+    Void Function(Int32 n, Pointer<Uint32> buffers);
 
 // typedef void (APIENTRYP PFNGLGENBUFFERSPROC) (GLsizei n, GLuint *buffers)
 typedef PFNGLGENBUFFERSPROCDart = void Function(int n, Pointer<Uint32> buffers);
-typedef PFNGLGENBUFFERSPROC = Void Function(Uint32 n, Pointer<Uint32> buffers);
+typedef PFNGLGENBUFFERSPROC = Void Function(Int32 n, Pointer<Uint32> buffers);
 
 // typedef GLboolean (APIENTRYP PFNGLISBUFFERPROC) (GLuint buffer)
 typedef PFNGLISBUFFERPROCDart = int Function(int buffer);
-typedef PFNGLISBUFFERPROC = Int32 Function(Uint32 buffer);
+typedef PFNGLISBUFFERPROC = Uint8 Function(Uint32 buffer);
 
 // typedef void (APIENTRYP PFNGLBUFFERDATAPROC) (GLenum target, GLsizeiptr size, const void *data, GLenum usage)
 typedef PFNGLBUFFERDATAPROCDart =
-    void Function(
-      int target,
-      Pointer<Uint32> size,
-      Pointer<NativeType> data,
-      int usage,
-    );
+    void Function(int target, int size, Pointer<Void> data, int usage);
 typedef PFNGLBUFFERDATAPROC =
-    Void Function(
-      Uint32 target,
-      Pointer<Uint32> size,
-      Pointer<NativeType> data,
-      Uint32 usage,
-    );
+    Void Function(Uint32 target, IntPtr size, Pointer<Void> data, Uint32 usage);
 
 // typedef void (APIENTRYP PFNGLBUFFERSUBDATAPROC) (GLenum target, GLintptr offset, GLsizeiptr size, const void *data)
 typedef PFNGLBUFFERSUBDATAPROCDart =
-    void Function(
-      int target,
-      Pointer<NativeType> offset,
-      Pointer<Uint32> size,
-      Pointer<NativeType> data,
-    );
+    void Function(int target, int offset, int size, Pointer<Void> data);
 typedef PFNGLBUFFERSUBDATAPROC =
     Void Function(
       Uint32 target,
-      Pointer<NativeType> offset,
-      Pointer<Uint32> size,
-      Pointer<NativeType> data,
+      IntPtr offset,
+      IntPtr size,
+      Pointer<Void> data,
     );
 
 // typedef void (APIENTRYP PFNGLGETBUFFERSUBDATAPROC) (GLenum target, GLintptr offset, GLsizeiptr size, void *data)
 typedef PFNGLGETBUFFERSUBDATAPROCDart =
-    void Function(
-      int target,
-      Pointer<NativeType> offset,
-      Pointer<Uint32> size,
-      Pointer<NativeType> data,
-    );
+    void Function(int target, int offset, int size, Pointer<Void> data);
 typedef PFNGLGETBUFFERSUBDATAPROC =
     Void Function(
       Uint32 target,
-      Pointer<NativeType> offset,
-      Pointer<Uint32> size,
-      Pointer<NativeType> data,
+      IntPtr offset,
+      IntPtr size,
+      Pointer<Void> data,
     );
 
 // typedef void *(APIENTRYP PFNGLMAPBUFFERPROC) (GLenum target, GLenum access)
-typedef PFNGLMAPBUFFERPROCDart =
-    Pointer<NativeType> Function(int target, int access);
+typedef PFNGLMAPBUFFERPROCDart = Pointer<Void> Function(int target, int access);
 typedef PFNGLMAPBUFFERPROC =
-    Pointer<NativeType> Function(Uint32 target, Uint32 access);
+    Pointer<Void> Function(Uint32 target, Uint32 access);
 
 // typedef GLboolean (APIENTRYP PFNGLUNMAPBUFFERPROC) (GLenum target)
 typedef PFNGLUNMAPBUFFERPROCDart = int Function(int target);
-typedef PFNGLUNMAPBUFFERPROC = Int32 Function(Uint32 target);
+typedef PFNGLUNMAPBUFFERPROC = Uint8 Function(Uint32 target);
 
 // typedef void (APIENTRYP PFNGLGETBUFFERPARAMETERIVPROC) (GLenum target, GLenum pname, GLint *params)
 typedef PFNGLGETBUFFERPARAMETERIVPROCDart =
@@ -3293,13 +3242,9 @@ typedef PFNGLGETBUFFERPARAMETERIVPROC =
 
 // typedef void (APIENTRYP PFNGLGETBUFFERPOINTERVPROC) (GLenum target, GLenum pname, void **params)
 typedef PFNGLGETBUFFERPOINTERVPROCDart =
-    void Function(int target, int pname, Pointer<Pointer<NativeType>> params);
+    void Function(int target, int pname, Pointer<Pointer<Void>> params);
 typedef PFNGLGETBUFFERPOINTERVPROC =
-    Void Function(
-      Uint32 target,
-      Uint32 pname,
-      Pointer<Pointer<NativeType>> params,
-    );
+    Void Function(Uint32 target, Uint32 pname, Pointer<Pointer<Void>> params);
 
 // typedef void (APIENTRYP PFNGLBLENDEQUATIONSEPARATEPROC) (GLenum modeRGB, GLenum modeAlpha)
 typedef PFNGLBLENDEQUATIONSEPARATEPROCDart =
@@ -3309,7 +3254,7 @@ typedef PFNGLBLENDEQUATIONSEPARATEPROC =
 
 // typedef void (APIENTRYP PFNGLDRAWBUFFERSPROC) (GLsizei n, const GLenum *bufs)
 typedef PFNGLDRAWBUFFERSPROCDart = void Function(int n, Pointer<Uint32> bufs);
-typedef PFNGLDRAWBUFFERSPROC = Void Function(Uint32 n, Pointer<Uint32> bufs);
+typedef PFNGLDRAWBUFFERSPROC = Void Function(Int32 n, Pointer<Uint32> bufs);
 
 // typedef void (APIENTRYP PFNGLSTENCILOPSEPARATEPROC) (GLenum face, GLenum sfail, GLenum dpfail, GLenum dppass)
 typedef PFNGLSTENCILOPSEPARATEPROCDart =
@@ -3375,7 +3320,7 @@ typedef PFNGLGETACTIVEATTRIBPROCDart =
       int program,
       int index,
       int bufSize,
-      Pointer<Uint32> length,
+      Pointer<Int32> length,
       Pointer<Int32> size,
       Pointer<Uint32> type,
       Pointer<Int8> name,
@@ -3384,8 +3329,8 @@ typedef PFNGLGETACTIVEATTRIBPROC =
     Void Function(
       Uint32 program,
       Uint32 index,
-      Uint32 bufSize,
-      Pointer<Uint32> length,
+      Int32 bufSize,
+      Pointer<Int32> length,
       Pointer<Int32> size,
       Pointer<Uint32> type,
       Pointer<Int8> name,
@@ -3397,7 +3342,7 @@ typedef PFNGLGETACTIVEUNIFORMPROCDart =
       int program,
       int index,
       int bufSize,
-      Pointer<Uint32> length,
+      Pointer<Int32> length,
       Pointer<Int32> size,
       Pointer<Uint32> type,
       Pointer<Int8> name,
@@ -3406,8 +3351,8 @@ typedef PFNGLGETACTIVEUNIFORMPROC =
     Void Function(
       Uint32 program,
       Uint32 index,
-      Uint32 bufSize,
-      Pointer<Uint32> length,
+      Int32 bufSize,
+      Pointer<Int32> length,
       Pointer<Int32> size,
       Pointer<Uint32> type,
       Pointer<Int8> name,
@@ -3418,14 +3363,14 @@ typedef PFNGLGETATTACHEDSHADERSPROCDart =
     void Function(
       int program,
       int maxCount,
-      Pointer<Uint32> count,
+      Pointer<Int32> count,
       Pointer<Uint32> shaders,
     );
 typedef PFNGLGETATTACHEDSHADERSPROC =
     Void Function(
       Uint32 program,
-      Uint32 maxCount,
-      Pointer<Uint32> count,
+      Int32 maxCount,
+      Pointer<Int32> count,
       Pointer<Uint32> shaders,
     );
 
@@ -3446,14 +3391,14 @@ typedef PFNGLGETPROGRAMINFOLOGPROCDart =
     void Function(
       int program,
       int bufSize,
-      Pointer<Uint32> length,
+      Pointer<Int32> length,
       Pointer<Int8> infoLog,
     );
 typedef PFNGLGETPROGRAMINFOLOGPROC =
     Void Function(
       Uint32 program,
-      Uint32 bufSize,
-      Pointer<Uint32> length,
+      Int32 bufSize,
+      Pointer<Int32> length,
       Pointer<Int8> infoLog,
     );
 
@@ -3468,14 +3413,14 @@ typedef PFNGLGETSHADERINFOLOGPROCDart =
     void Function(
       int shader,
       int bufSize,
-      Pointer<Uint32> length,
+      Pointer<Int32> length,
       Pointer<Int8> infoLog,
     );
 typedef PFNGLGETSHADERINFOLOGPROC =
     Void Function(
       Uint32 shader,
-      Uint32 bufSize,
-      Pointer<Uint32> length,
+      Int32 bufSize,
+      Pointer<Int32> length,
       Pointer<Int8> infoLog,
     );
 
@@ -3484,14 +3429,14 @@ typedef PFNGLGETSHADERSOURCEPROCDart =
     void Function(
       int shader,
       int bufSize,
-      Pointer<Uint32> length,
+      Pointer<Int32> length,
       Pointer<Int8> source,
     );
 typedef PFNGLGETSHADERSOURCEPROC =
     Void Function(
       Uint32 shader,
-      Uint32 bufSize,
-      Pointer<Uint32> length,
+      Int32 bufSize,
+      Pointer<Int32> length,
       Pointer<Int8> source,
     );
 
@@ -3533,21 +3478,17 @@ typedef PFNGLGETVERTEXATTRIBIVPROC =
 
 // typedef void (APIENTRYP PFNGLGETVERTEXATTRIBPOINTERVPROC) (GLuint index, GLenum pname, void **pointer)
 typedef PFNGLGETVERTEXATTRIBPOINTERVPROCDart =
-    void Function(int index, int pname, Pointer<Pointer<NativeType>> pointer);
+    void Function(int index, int pname, Pointer<Pointer<Void>> pointer);
 typedef PFNGLGETVERTEXATTRIBPOINTERVPROC =
-    Void Function(
-      Uint32 index,
-      Uint32 pname,
-      Pointer<Pointer<NativeType>> pointer,
-    );
+    Void Function(Uint32 index, Uint32 pname, Pointer<Pointer<Void>> pointer);
 
 // typedef GLboolean (APIENTRYP PFNGLISPROGRAMPROC) (GLuint program)
 typedef PFNGLISPROGRAMPROCDart = int Function(int program);
-typedef PFNGLISPROGRAMPROC = Int32 Function(Uint32 program);
+typedef PFNGLISPROGRAMPROC = Uint8 Function(Uint32 program);
 
 // typedef GLboolean (APIENTRYP PFNGLISSHADERPROC) (GLuint shader)
 typedef PFNGLISSHADERPROCDart = int Function(int shader);
-typedef PFNGLISSHADERPROC = Int32 Function(Uint32 shader);
+typedef PFNGLISSHADERPROC = Uint8 Function(Uint32 shader);
 
 // typedef void (APIENTRYP PFNGLLINKPROGRAMPROC) (GLuint program)
 typedef PFNGLLINKPROGRAMPROCDart = void Function(int program);
@@ -3564,7 +3505,7 @@ typedef PFNGLSHADERSOURCEPROCDart =
 typedef PFNGLSHADERSOURCEPROC =
     Void Function(
       Uint32 shader,
-      Uint32 count,
+      Int32 count,
       Pointer<Pointer<Int8>> string,
       Pointer<Int32> length,
     );
@@ -3618,49 +3559,49 @@ typedef PFNGLUNIFORM4IPROC =
 typedef PFNGLUNIFORM1FVPROCDart =
     void Function(int location, int count, Pointer<Float> value);
 typedef PFNGLUNIFORM1FVPROC =
-    Void Function(Int32 location, Uint32 count, Pointer<Float> value);
+    Void Function(Int32 location, Int32 count, Pointer<Float> value);
 
 // typedef void (APIENTRYP PFNGLUNIFORM2FVPROC) (GLint location, GLsizei count, const GLfloat *value)
 typedef PFNGLUNIFORM2FVPROCDart =
     void Function(int location, int count, Pointer<Float> value);
 typedef PFNGLUNIFORM2FVPROC =
-    Void Function(Int32 location, Uint32 count, Pointer<Float> value);
+    Void Function(Int32 location, Int32 count, Pointer<Float> value);
 
 // typedef void (APIENTRYP PFNGLUNIFORM3FVPROC) (GLint location, GLsizei count, const GLfloat *value)
 typedef PFNGLUNIFORM3FVPROCDart =
     void Function(int location, int count, Pointer<Float> value);
 typedef PFNGLUNIFORM3FVPROC =
-    Void Function(Int32 location, Uint32 count, Pointer<Float> value);
+    Void Function(Int32 location, Int32 count, Pointer<Float> value);
 
 // typedef void (APIENTRYP PFNGLUNIFORM4FVPROC) (GLint location, GLsizei count, const GLfloat *value)
 typedef PFNGLUNIFORM4FVPROCDart =
     void Function(int location, int count, Pointer<Float> value);
 typedef PFNGLUNIFORM4FVPROC =
-    Void Function(Int32 location, Uint32 count, Pointer<Float> value);
+    Void Function(Int32 location, Int32 count, Pointer<Float> value);
 
 // typedef void (APIENTRYP PFNGLUNIFORM1IVPROC) (GLint location, GLsizei count, const GLint *value)
 typedef PFNGLUNIFORM1IVPROCDart =
     void Function(int location, int count, Pointer<Int32> value);
 typedef PFNGLUNIFORM1IVPROC =
-    Void Function(Int32 location, Uint32 count, Pointer<Int32> value);
+    Void Function(Int32 location, Int32 count, Pointer<Int32> value);
 
 // typedef void (APIENTRYP PFNGLUNIFORM2IVPROC) (GLint location, GLsizei count, const GLint *value)
 typedef PFNGLUNIFORM2IVPROCDart =
     void Function(int location, int count, Pointer<Int32> value);
 typedef PFNGLUNIFORM2IVPROC =
-    Void Function(Int32 location, Uint32 count, Pointer<Int32> value);
+    Void Function(Int32 location, Int32 count, Pointer<Int32> value);
 
 // typedef void (APIENTRYP PFNGLUNIFORM3IVPROC) (GLint location, GLsizei count, const GLint *value)
 typedef PFNGLUNIFORM3IVPROCDart =
     void Function(int location, int count, Pointer<Int32> value);
 typedef PFNGLUNIFORM3IVPROC =
-    Void Function(Int32 location, Uint32 count, Pointer<Int32> value);
+    Void Function(Int32 location, Int32 count, Pointer<Int32> value);
 
 // typedef void (APIENTRYP PFNGLUNIFORM4IVPROC) (GLint location, GLsizei count, const GLint *value)
 typedef PFNGLUNIFORM4IVPROCDart =
     void Function(int location, int count, Pointer<Int32> value);
 typedef PFNGLUNIFORM4IVPROC =
-    Void Function(Int32 location, Uint32 count, Pointer<Int32> value);
+    Void Function(Int32 location, Int32 count, Pointer<Int32> value);
 
 // typedef void (APIENTRYP PFNGLUNIFORMMATRIX2FVPROC) (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
 typedef PFNGLUNIFORMMATRIX2FVPROCDart =
@@ -3668,8 +3609,8 @@ typedef PFNGLUNIFORMMATRIX2FVPROCDart =
 typedef PFNGLUNIFORMMATRIX2FVPROC =
     Void Function(
       Int32 location,
-      Uint32 count,
-      Int32 transpose,
+      Int32 count,
+      Uint8 transpose,
       Pointer<Float> value,
     );
 
@@ -3679,8 +3620,8 @@ typedef PFNGLUNIFORMMATRIX3FVPROCDart =
 typedef PFNGLUNIFORMMATRIX3FVPROC =
     Void Function(
       Int32 location,
-      Uint32 count,
-      Int32 transpose,
+      Int32 count,
+      Uint8 transpose,
       Pointer<Float> value,
     );
 
@@ -3690,8 +3631,8 @@ typedef PFNGLUNIFORMMATRIX4FVPROCDart =
 typedef PFNGLUNIFORMMATRIX4FVPROC =
     Void Function(
       Int32 location,
-      Uint32 count,
-      Int32 transpose,
+      Int32 count,
+      Uint8 transpose,
       Pointer<Float> value,
     );
 
@@ -3913,16 +3854,16 @@ typedef PFNGLVERTEXATTRIBPOINTERPROCDart =
       int type,
       int normalized,
       int stride,
-      Pointer<NativeType> pointer,
+      Pointer<Void> pointer,
     );
 typedef PFNGLVERTEXATTRIBPOINTERPROC =
     Void Function(
       Uint32 index,
       Int32 size,
       Uint32 type,
-      Int32 normalized,
-      Uint32 stride,
-      Pointer<NativeType> pointer,
+      Uint8 normalized,
+      Int32 stride,
+      Pointer<Void> pointer,
     );
 
 // typedef void (APIENTRYP PFNGLUNIFORMMATRIX2X3FVPROC) (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
@@ -3931,8 +3872,8 @@ typedef PFNGLUNIFORMMATRIX2X3FVPROCDart =
 typedef PFNGLUNIFORMMATRIX2X3FVPROC =
     Void Function(
       Int32 location,
-      Uint32 count,
-      Int32 transpose,
+      Int32 count,
+      Uint8 transpose,
       Pointer<Float> value,
     );
 
@@ -3942,8 +3883,8 @@ typedef PFNGLUNIFORMMATRIX3X2FVPROCDart =
 typedef PFNGLUNIFORMMATRIX3X2FVPROC =
     Void Function(
       Int32 location,
-      Uint32 count,
-      Int32 transpose,
+      Int32 count,
+      Uint8 transpose,
       Pointer<Float> value,
     );
 
@@ -3953,8 +3894,8 @@ typedef PFNGLUNIFORMMATRIX2X4FVPROCDart =
 typedef PFNGLUNIFORMMATRIX2X4FVPROC =
     Void Function(
       Int32 location,
-      Uint32 count,
-      Int32 transpose,
+      Int32 count,
+      Uint8 transpose,
       Pointer<Float> value,
     );
 
@@ -3964,8 +3905,8 @@ typedef PFNGLUNIFORMMATRIX4X2FVPROCDart =
 typedef PFNGLUNIFORMMATRIX4X2FVPROC =
     Void Function(
       Int32 location,
-      Uint32 count,
-      Int32 transpose,
+      Int32 count,
+      Uint8 transpose,
       Pointer<Float> value,
     );
 
@@ -3975,8 +3916,8 @@ typedef PFNGLUNIFORMMATRIX3X4FVPROCDart =
 typedef PFNGLUNIFORMMATRIX3X4FVPROC =
     Void Function(
       Int32 location,
-      Uint32 count,
-      Int32 transpose,
+      Int32 count,
+      Uint8 transpose,
       Pointer<Float> value,
     );
 
@@ -3986,8 +3927,8 @@ typedef PFNGLUNIFORMMATRIX4X3FVPROCDart =
 typedef PFNGLUNIFORMMATRIX4X3FVPROC =
     Void Function(
       Int32 location,
-      Uint32 count,
-      Int32 transpose,
+      Int32 count,
+      Uint8 transpose,
       Pointer<Float> value,
     );
 
@@ -3995,13 +3936,13 @@ typedef PFNGLUNIFORMMATRIX4X3FVPROC =
 typedef PFNGLCOLORMASKIPROCDart =
     void Function(int index, int r, int g, int b, int a);
 typedef PFNGLCOLORMASKIPROC =
-    Void Function(Uint32 index, Int32 r, Int32 g, Int32 b, Int32 a);
+    Void Function(Uint32 index, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
 
 // typedef void (APIENTRYP PFNGLGETBOOLEANI_VPROC) (GLenum target, GLuint index, GLboolean *data)
 typedef PfnglgetbooleaniVprocDart =
-    void Function(int target, int index, Pointer<Int32> data);
+    void Function(int target, int index, Pointer<Uint8> data);
 typedef PfnglgetbooleaniVproc =
-    Void Function(Uint32 target, Uint32 index, Pointer<Int32> data);
+    Void Function(Uint32 target, Uint32 index, Pointer<Uint8> data);
 
 // typedef void (APIENTRYP PFNGLGETINTEGERI_VPROC) (GLenum target, GLuint index, GLint *data)
 typedef PfnglgetintegeriVprocDart =
@@ -4019,7 +3960,7 @@ typedef PFNGLDISABLEIPROC = Void Function(Uint32 target, Uint32 index);
 
 // typedef GLboolean (APIENTRYP PFNGLISENABLEDIPROC) (GLenum target, GLuint index)
 typedef PFNGLISENABLEDIPROCDart = int Function(int target, int index);
-typedef PFNGLISENABLEDIPROC = Int32 Function(Uint32 target, Uint32 index);
+typedef PFNGLISENABLEDIPROC = Uint8 Function(Uint32 target, Uint32 index);
 
 // typedef void (APIENTRYP PFNGLBEGINTRANSFORMFEEDBACKPROC) (GLenum primitiveMode)
 typedef PFNGLBEGINTRANSFORMFEEDBACKPROCDart = void Function(int primitiveMode);
@@ -4031,20 +3972,14 @@ typedef PFNGLENDTRANSFORMFEEDBACKPROC = Void Function();
 
 // typedef void (APIENTRYP PFNGLBINDBUFFERRANGEPROC) (GLenum target, GLuint index, GLuint buffer, GLintptr offset, GLsizeiptr size)
 typedef PFNGLBINDBUFFERRANGEPROCDart =
-    void Function(
-      int target,
-      int index,
-      int buffer,
-      Pointer<NativeType> offset,
-      Pointer<Uint32> size,
-    );
+    void Function(int target, int index, int buffer, int offset, int size);
 typedef PFNGLBINDBUFFERRANGEPROC =
     Void Function(
       Uint32 target,
       Uint32 index,
       Uint32 buffer,
-      Pointer<NativeType> offset,
-      Pointer<Uint32> size,
+      IntPtr offset,
+      IntPtr size,
     );
 
 // typedef void (APIENTRYP PFNGLBINDBUFFERBASEPROC) (GLenum target, GLuint index, GLuint buffer)
@@ -4064,7 +3999,7 @@ typedef PFNGLTRANSFORMFEEDBACKVARYINGSPROCDart =
 typedef PFNGLTRANSFORMFEEDBACKVARYINGSPROC =
     Void Function(
       Uint32 program,
-      Uint32 count,
+      Int32 count,
       Pointer<Pointer<Int8>> varyings,
       Uint32 bufferMode,
     );
@@ -4075,8 +4010,8 @@ typedef PFNGLGETTRANSFORMFEEDBACKVARYINGPROCDart =
       int program,
       int index,
       int bufSize,
-      Pointer<Uint32> length,
-      Pointer<Uint32> size,
+      Pointer<Int32> length,
+      Pointer<Int32> size,
       Pointer<Uint32> type,
       Pointer<Int8> name,
     );
@@ -4084,9 +4019,9 @@ typedef PFNGLGETTRANSFORMFEEDBACKVARYINGPROC =
     Void Function(
       Uint32 program,
       Uint32 index,
-      Uint32 bufSize,
-      Pointer<Uint32> length,
-      Pointer<Uint32> size,
+      Int32 bufSize,
+      Pointer<Int32> length,
+      Pointer<Int32> size,
       Pointer<Uint32> type,
       Pointer<Int8> name,
     );
@@ -4110,15 +4045,15 @@ typedef PFNGLVERTEXATTRIBIPOINTERPROCDart =
       int size,
       int type,
       int stride,
-      Pointer<NativeType> pointer,
+      Pointer<Void> pointer,
     );
 typedef PFNGLVERTEXATTRIBIPOINTERPROC =
     Void Function(
       Uint32 index,
       Int32 size,
       Uint32 type,
-      Uint32 stride,
-      Pointer<NativeType> pointer,
+      Int32 stride,
+      Pointer<Void> pointer,
     );
 
 // typedef void (APIENTRYP PFNGLGETVERTEXATTRIBIIVPROC) (GLuint index, GLenum pname, GLint *params)
@@ -4290,25 +4225,25 @@ typedef PFNGLUNIFORM4UIPROC =
 typedef PFNGLUNIFORM1UIVPROCDart =
     void Function(int location, int count, Pointer<Uint32> value);
 typedef PFNGLUNIFORM1UIVPROC =
-    Void Function(Int32 location, Uint32 count, Pointer<Uint32> value);
+    Void Function(Int32 location, Int32 count, Pointer<Uint32> value);
 
 // typedef void (APIENTRYP PFNGLUNIFORM2UIVPROC) (GLint location, GLsizei count, const GLuint *value)
 typedef PFNGLUNIFORM2UIVPROCDart =
     void Function(int location, int count, Pointer<Uint32> value);
 typedef PFNGLUNIFORM2UIVPROC =
-    Void Function(Int32 location, Uint32 count, Pointer<Uint32> value);
+    Void Function(Int32 location, Int32 count, Pointer<Uint32> value);
 
 // typedef void (APIENTRYP PFNGLUNIFORM3UIVPROC) (GLint location, GLsizei count, const GLuint *value)
 typedef PFNGLUNIFORM3UIVPROCDart =
     void Function(int location, int count, Pointer<Uint32> value);
 typedef PFNGLUNIFORM3UIVPROC =
-    Void Function(Int32 location, Uint32 count, Pointer<Uint32> value);
+    Void Function(Int32 location, Int32 count, Pointer<Uint32> value);
 
 // typedef void (APIENTRYP PFNGLUNIFORM4UIVPROC) (GLint location, GLsizei count, const GLuint *value)
 typedef PFNGLUNIFORM4UIVPROCDart =
     void Function(int location, int count, Pointer<Uint32> value);
 typedef PFNGLUNIFORM4UIVPROC =
-    Void Function(Int32 location, Uint32 count, Pointer<Uint32> value);
+    Void Function(Int32 location, Int32 count, Pointer<Uint32> value);
 
 // typedef void (APIENTRYP PFNGLTEXPARAMETERIIVPROC) (GLenum target, GLenum pname, const GLint *params)
 typedef PFNGLTEXPARAMETERIIVPROCDart =
@@ -4365,7 +4300,7 @@ typedef PFNGLGETSTRINGIPROC =
 
 // typedef GLboolean (APIENTRYP PFNGLISRENDERBUFFERPROC) (GLuint renderbuffer)
 typedef PFNGLISRENDERBUFFERPROCDart = int Function(int renderbuffer);
-typedef PFNGLISRENDERBUFFERPROC = Int32 Function(Uint32 renderbuffer);
+typedef PFNGLISRENDERBUFFERPROC = Uint8 Function(Uint32 renderbuffer);
 
 // typedef void (APIENTRYP PFNGLBINDRENDERBUFFERPROC) (GLenum target, GLuint renderbuffer)
 typedef PFNGLBINDRENDERBUFFERPROCDart =
@@ -4377,13 +4312,13 @@ typedef PFNGLBINDRENDERBUFFERPROC =
 typedef PFNGLDELETERENDERBUFFERSPROCDart =
     void Function(int n, Pointer<Uint32> renderbuffers);
 typedef PFNGLDELETERENDERBUFFERSPROC =
-    Void Function(Uint32 n, Pointer<Uint32> renderbuffers);
+    Void Function(Int32 n, Pointer<Uint32> renderbuffers);
 
 // typedef void (APIENTRYP PFNGLGENRENDERBUFFERSPROC) (GLsizei n, GLuint *renderbuffers)
 typedef PFNGLGENRENDERBUFFERSPROCDart =
     void Function(int n, Pointer<Uint32> renderbuffers);
 typedef PFNGLGENRENDERBUFFERSPROC =
-    Void Function(Uint32 n, Pointer<Uint32> renderbuffers);
+    Void Function(Int32 n, Pointer<Uint32> renderbuffers);
 
 // typedef void (APIENTRYP PFNGLRENDERBUFFERSTORAGEPROC) (GLenum target, GLenum internalformat, GLsizei width, GLsizei height)
 typedef PFNGLRENDERBUFFERSTORAGEPROCDart =
@@ -4392,8 +4327,8 @@ typedef PFNGLRENDERBUFFERSTORAGEPROC =
     Void Function(
       Uint32 target,
       Uint32 internalformat,
-      Uint32 width,
-      Uint32 height,
+      Int32 width,
+      Int32 height,
     );
 
 // typedef void (APIENTRYP PFNGLGETRENDERBUFFERPARAMETERIVPROC) (GLenum target, GLenum pname, GLint *params)
@@ -4404,7 +4339,7 @@ typedef PFNGLGETRENDERBUFFERPARAMETERIVPROC =
 
 // typedef GLboolean (APIENTRYP PFNGLISFRAMEBUFFERPROC) (GLuint framebuffer)
 typedef PFNGLISFRAMEBUFFERPROCDart = int Function(int framebuffer);
-typedef PFNGLISFRAMEBUFFERPROC = Int32 Function(Uint32 framebuffer);
+typedef PFNGLISFRAMEBUFFERPROC = Uint8 Function(Uint32 framebuffer);
 
 // typedef void (APIENTRYP PFNGLBINDFRAMEBUFFERPROC) (GLenum target, GLuint framebuffer)
 typedef PFNGLBINDFRAMEBUFFERPROCDart =
@@ -4416,13 +4351,13 @@ typedef PFNGLBINDFRAMEBUFFERPROC =
 typedef PFNGLDELETEFRAMEBUFFERSPROCDart =
     void Function(int n, Pointer<Uint32> framebuffers);
 typedef PFNGLDELETEFRAMEBUFFERSPROC =
-    Void Function(Uint32 n, Pointer<Uint32> framebuffers);
+    Void Function(Int32 n, Pointer<Uint32> framebuffers);
 
 // typedef void (APIENTRYP PFNGLGENFRAMEBUFFERSPROC) (GLsizei n, GLuint *framebuffers)
 typedef PFNGLGENFRAMEBUFFERSPROCDart =
     void Function(int n, Pointer<Uint32> framebuffers);
 typedef PFNGLGENFRAMEBUFFERSPROC =
-    Void Function(Uint32 n, Pointer<Uint32> framebuffers);
+    Void Function(Int32 n, Pointer<Uint32> framebuffers);
 
 // typedef GLenum (APIENTRYP PFNGLCHECKFRAMEBUFFERSTATUSPROC) (GLenum target)
 typedef PFNGLCHECKFRAMEBUFFERSTATUSPROCDart = int Function(int target);
@@ -4555,10 +4490,10 @@ typedef PFNGLRENDERBUFFERSTORAGEMULTISAMPLEPROCDart =
 typedef PFNGLRENDERBUFFERSTORAGEMULTISAMPLEPROC =
     Void Function(
       Uint32 target,
-      Uint32 samples,
+      Int32 samples,
       Uint32 internalformat,
-      Uint32 width,
-      Uint32 height,
+      Int32 width,
+      Int32 height,
     );
 
 // typedef void (APIENTRYP PFNGLFRAMEBUFFERTEXTURELAYERPROC) (GLenum target, GLenum attachment, GLuint texture, GLint level, GLint layer)
@@ -4581,33 +4516,20 @@ typedef PFNGLFRAMEBUFFERTEXTURELAYERPROC =
 
 // typedef void *(APIENTRYP PFNGLMAPBUFFERRANGEPROC) (GLenum target, GLintptr offset, GLsizeiptr length, GLbitfield access)
 typedef PFNGLMAPBUFFERRANGEPROCDart =
-    Pointer<NativeType> Function(
-      int target,
-      Pointer<NativeType> offset,
-      Pointer<Uint32> length,
-      int access,
-    );
+    Pointer<Void> Function(int target, int offset, int length, int access);
 typedef PFNGLMAPBUFFERRANGEPROC =
-    Pointer<NativeType> Function(
+    Pointer<Void> Function(
       Uint32 target,
-      Pointer<NativeType> offset,
-      Pointer<Uint32> length,
+      IntPtr offset,
+      IntPtr length,
       Uint32 access,
     );
 
 // typedef void (APIENTRYP PFNGLFLUSHMAPPEDBUFFERRANGEPROC) (GLenum target, GLintptr offset, GLsizeiptr length)
 typedef PFNGLFLUSHMAPPEDBUFFERRANGEPROCDart =
-    void Function(
-      int target,
-      Pointer<NativeType> offset,
-      Pointer<Uint32> length,
-    );
+    void Function(int target, int offset, int length);
 typedef PFNGLFLUSHMAPPEDBUFFERRANGEPROC =
-    Void Function(
-      Uint32 target,
-      Pointer<NativeType> offset,
-      Pointer<Uint32> length,
-    );
+    Void Function(Uint32 target, IntPtr offset, IntPtr length);
 
 // typedef void (APIENTRYP PFNGLBINDVERTEXARRAYPROC) (GLuint array)
 typedef PFNGLBINDVERTEXARRAYPROCDart = void Function(int array);
@@ -4617,23 +4539,23 @@ typedef PFNGLBINDVERTEXARRAYPROC = Void Function(Uint32 array);
 typedef PFNGLDELETEVERTEXARRAYSPROCDart =
     void Function(int n, Pointer<Uint32> arrays);
 typedef PFNGLDELETEVERTEXARRAYSPROC =
-    Void Function(Uint32 n, Pointer<Uint32> arrays);
+    Void Function(Int32 n, Pointer<Uint32> arrays);
 
 // typedef void (APIENTRYP PFNGLGENVERTEXARRAYSPROC) (GLsizei n, GLuint *arrays)
 typedef PFNGLGENVERTEXARRAYSPROCDart =
     void Function(int n, Pointer<Uint32> arrays);
 typedef PFNGLGENVERTEXARRAYSPROC =
-    Void Function(Uint32 n, Pointer<Uint32> arrays);
+    Void Function(Int32 n, Pointer<Uint32> arrays);
 
 // typedef GLboolean (APIENTRYP PFNGLISVERTEXARRAYPROC) (GLuint array)
 typedef PFNGLISVERTEXARRAYPROCDart = int Function(int array);
-typedef PFNGLISVERTEXARRAYPROC = Int32 Function(Uint32 array);
+typedef PFNGLISVERTEXARRAYPROC = Uint8 Function(Uint32 array);
 
 // typedef void (APIENTRYP PFNGLDRAWARRAYSINSTANCEDPROC) (GLenum mode, GLint first, GLsizei count, GLsizei instancecount)
 typedef PFNGLDRAWARRAYSINSTANCEDPROCDart =
     void Function(int mode, int first, int count, int instancecount);
 typedef PFNGLDRAWARRAYSINSTANCEDPROC =
-    Void Function(Uint32 mode, Int32 first, Uint32 count, Uint32 instancecount);
+    Void Function(Uint32 mode, Int32 first, Int32 count, Int32 instancecount);
 
 // typedef void (APIENTRYP PFNGLDRAWELEMENTSINSTANCEDPROC) (GLenum mode, GLsizei count, GLenum type, const void *indices, GLsizei instancecount)
 typedef PFNGLDRAWELEMENTSINSTANCEDPROCDart =
@@ -4641,16 +4563,16 @@ typedef PFNGLDRAWELEMENTSINSTANCEDPROCDart =
       int mode,
       int count,
       int type,
-      Pointer<NativeType> indices,
+      Pointer<Void> indices,
       int instancecount,
     );
 typedef PFNGLDRAWELEMENTSINSTANCEDPROC =
     Void Function(
       Uint32 mode,
-      Uint32 count,
+      Int32 count,
       Uint32 type,
-      Pointer<NativeType> indices,
-      Uint32 instancecount,
+      Pointer<Void> indices,
+      Int32 instancecount,
     );
 
 // typedef void (APIENTRYP PFNGLTEXBUFFERPROC) (GLenum target, GLenum internalformat, GLuint buffer)
@@ -4668,17 +4590,17 @@ typedef PFNGLCOPYBUFFERSUBDATAPROCDart =
     void Function(
       int readTarget,
       int writeTarget,
-      Pointer<NativeType> readOffset,
-      Pointer<NativeType> writeOffset,
-      Pointer<Uint32> size,
+      int readOffset,
+      int writeOffset,
+      int size,
     );
 typedef PFNGLCOPYBUFFERSUBDATAPROC =
     Void Function(
       Uint32 readTarget,
       Uint32 writeTarget,
-      Pointer<NativeType> readOffset,
-      Pointer<NativeType> writeOffset,
-      Pointer<Uint32> size,
+      IntPtr readOffset,
+      IntPtr writeOffset,
+      IntPtr size,
     );
 
 // typedef void (APIENTRYP PFNGLGETUNIFORMINDICESPROC) (GLuint program, GLsizei uniformCount, const GLchar *const*uniformNames, GLuint *uniformIndices)
@@ -4692,7 +4614,7 @@ typedef PFNGLGETUNIFORMINDICESPROCDart =
 typedef PFNGLGETUNIFORMINDICESPROC =
     Void Function(
       Uint32 program,
-      Uint32 uniformCount,
+      Int32 uniformCount,
       Pointer<Pointer<Int8>> uniformNames,
       Pointer<Uint32> uniformIndices,
     );
@@ -4709,7 +4631,7 @@ typedef PFNGLGETACTIVEUNIFORMSIVPROCDart =
 typedef PFNGLGETACTIVEUNIFORMSIVPROC =
     Void Function(
       Uint32 program,
-      Uint32 uniformCount,
+      Int32 uniformCount,
       Pointer<Uint32> uniformIndices,
       Uint32 pname,
       Pointer<Int32> params,
@@ -4721,15 +4643,15 @@ typedef PFNGLGETACTIVEUNIFORMNAMEPROCDart =
       int program,
       int uniformIndex,
       int bufSize,
-      Pointer<Uint32> length,
+      Pointer<Int32> length,
       Pointer<Int8> uniformName,
     );
 typedef PFNGLGETACTIVEUNIFORMNAMEPROC =
     Void Function(
       Uint32 program,
       Uint32 uniformIndex,
-      Uint32 bufSize,
-      Pointer<Uint32> length,
+      Int32 bufSize,
+      Pointer<Int32> length,
       Pointer<Int8> uniformName,
     );
 
@@ -4761,15 +4683,15 @@ typedef PFNGLGETACTIVEUNIFORMBLOCKNAMEPROCDart =
       int program,
       int uniformBlockIndex,
       int bufSize,
-      Pointer<Uint32> length,
+      Pointer<Int32> length,
       Pointer<Int8> uniformBlockName,
     );
 typedef PFNGLGETACTIVEUNIFORMBLOCKNAMEPROC =
     Void Function(
       Uint32 program,
       Uint32 uniformBlockIndex,
-      Uint32 bufSize,
-      Pointer<Uint32> length,
+      Int32 bufSize,
+      Pointer<Int32> length,
       Pointer<Int8> uniformBlockName,
     );
 
@@ -4789,15 +4711,15 @@ typedef PFNGLDRAWELEMENTSBASEVERTEXPROCDart =
       int mode,
       int count,
       int type,
-      Pointer<NativeType> indices,
+      Pointer<Void> indices,
       int basevertex,
     );
 typedef PFNGLDRAWELEMENTSBASEVERTEXPROC =
     Void Function(
       Uint32 mode,
-      Uint32 count,
+      Int32 count,
       Uint32 type,
-      Pointer<NativeType> indices,
+      Pointer<Void> indices,
       Int32 basevertex,
     );
 
@@ -4809,7 +4731,7 @@ typedef PFNGLDRAWRANGEELEMENTSBASEVERTEXPROCDart =
       int end,
       int count,
       int type,
-      Pointer<NativeType> indices,
+      Pointer<Void> indices,
       int basevertex,
     );
 typedef PFNGLDRAWRANGEELEMENTSBASEVERTEXPROC =
@@ -4817,9 +4739,9 @@ typedef PFNGLDRAWRANGEELEMENTSBASEVERTEXPROC =
       Uint32 mode,
       Uint32 start,
       Uint32 end,
-      Uint32 count,
+      Int32 count,
       Uint32 type,
-      Pointer<NativeType> indices,
+      Pointer<Void> indices,
       Int32 basevertex,
     );
 
@@ -4829,17 +4751,17 @@ typedef PFNGLDRAWELEMENTSINSTANCEDBASEVERTEXPROCDart =
       int mode,
       int count,
       int type,
-      Pointer<NativeType> indices,
+      Pointer<Void> indices,
       int instancecount,
       int basevertex,
     );
 typedef PFNGLDRAWELEMENTSINSTANCEDBASEVERTEXPROC =
     Void Function(
       Uint32 mode,
-      Uint32 count,
+      Int32 count,
       Uint32 type,
-      Pointer<NativeType> indices,
-      Uint32 instancecount,
+      Pointer<Void> indices,
+      Int32 instancecount,
       Int32 basevertex,
     );
 
@@ -4847,19 +4769,19 @@ typedef PFNGLDRAWELEMENTSINSTANCEDBASEVERTEXPROC =
 typedef PFNGLMULTIDRAWELEMENTSBASEVERTEXPROCDart =
     void Function(
       int mode,
-      Pointer<Uint32> count,
+      Pointer<Int32> count,
       int type,
-      Pointer<Pointer<NativeType>> indices,
+      Pointer<Pointer<Void>> indices,
       int drawcount,
       Pointer<Int32> basevertex,
     );
 typedef PFNGLMULTIDRAWELEMENTSBASEVERTEXPROC =
     Void Function(
       Uint32 mode,
-      Pointer<Uint32> count,
+      Pointer<Int32> count,
       Uint32 type,
-      Pointer<Pointer<NativeType>> indices,
-      Uint32 drawcount,
+      Pointer<Pointer<Void>> indices,
+      Int32 drawcount,
       Pointer<Int32> basevertex,
     );
 
@@ -4869,29 +4791,29 @@ typedef PFNGLPROVOKINGVERTEXPROC = Void Function(Uint32 mode);
 
 // typedef GLsync (APIENTRYP PFNGLFENCESYNCPROC) (GLenum condition, GLbitfield flags)
 typedef PFNGLFENCESYNCPROCDart =
-    Pointer<NativeType> Function(int condition, int flags);
+    Pointer<Void> Function(int condition, int flags);
 typedef PFNGLFENCESYNCPROC =
-    Pointer<NativeType> Function(Uint32 condition, Uint32 flags);
+    Pointer<Void> Function(Uint32 condition, Uint32 flags);
 
 // typedef GLboolean (APIENTRYP PFNGLISSYNCPROC) (GLsync sync)
-typedef PFNGLISSYNCPROCDart = int Function(Pointer<NativeType> sync);
-typedef PFNGLISSYNCPROC = Int32 Function(Pointer<NativeType> sync);
+typedef PFNGLISSYNCPROCDart = int Function(Pointer<Void> sync);
+typedef PFNGLISSYNCPROC = Uint8 Function(Pointer<Void> sync);
 
 // typedef void (APIENTRYP PFNGLDELETESYNCPROC) (GLsync sync)
-typedef PFNGLDELETESYNCPROCDart = void Function(Pointer<NativeType> sync);
-typedef PFNGLDELETESYNCPROC = Void Function(Pointer<NativeType> sync);
+typedef PFNGLDELETESYNCPROCDart = void Function(Pointer<Void> sync);
+typedef PFNGLDELETESYNCPROC = Void Function(Pointer<Void> sync);
 
 // typedef GLenum (APIENTRYP PFNGLCLIENTWAITSYNCPROC) (GLsync sync, GLbitfield flags, GLuint64 timeout)
 typedef PFNGLCLIENTWAITSYNCPROCDart =
-    int Function(Pointer<NativeType> sync, int flags, int timeout);
+    int Function(Pointer<Void> sync, int flags, int timeout);
 typedef PFNGLCLIENTWAITSYNCPROC =
-    Uint32 Function(Pointer<NativeType> sync, Uint32 flags, Uint64 timeout);
+    Uint32 Function(Pointer<Void> sync, Uint32 flags, Uint64 timeout);
 
 // typedef void (APIENTRYP PFNGLWAITSYNCPROC) (GLsync sync, GLbitfield flags, GLuint64 timeout)
 typedef PFNGLWAITSYNCPROCDart =
-    void Function(Pointer<NativeType> sync, int flags, int timeout);
+    void Function(Pointer<Void> sync, int flags, int timeout);
 typedef PFNGLWAITSYNCPROC =
-    Void Function(Pointer<NativeType> sync, Uint32 flags, Uint64 timeout);
+    Void Function(Pointer<Void> sync, Uint32 flags, Uint64 timeout);
 
 // typedef void (APIENTRYP PFNGLGETINTEGER64VPROC) (GLenum pname, GLint64 *data)
 typedef PFNGLGETINTEGER64VPROCDart =
@@ -4902,18 +4824,18 @@ typedef PFNGLGETINTEGER64VPROC =
 // typedef void (APIENTRYP PFNGLGETSYNCIVPROC) (GLsync sync, GLenum pname, GLsizei count, GLsizei *length, GLint *values)
 typedef PFNGLGETSYNCIVPROCDart =
     void Function(
-      Pointer<NativeType> sync,
+      Pointer<Void> sync,
       int pname,
       int count,
-      Pointer<Uint32> length,
+      Pointer<Int32> length,
       Pointer<Int32> values,
     );
 typedef PFNGLGETSYNCIVPROC =
     Void Function(
-      Pointer<NativeType> sync,
+      Pointer<Void> sync,
       Uint32 pname,
-      Uint32 count,
-      Pointer<Uint32> length,
+      Int32 count,
+      Pointer<Int32> length,
       Pointer<Int32> values,
     );
 
@@ -4953,11 +4875,11 @@ typedef PFNGLTEXIMAGE2DMULTISAMPLEPROCDart =
 typedef PFNGLTEXIMAGE2DMULTISAMPLEPROC =
     Void Function(
       Uint32 target,
-      Uint32 samples,
+      Int32 samples,
       Uint32 internalformat,
-      Uint32 width,
-      Uint32 height,
-      Int32 fixedsamplelocations,
+      Int32 width,
+      Int32 height,
+      Uint8 fixedsamplelocations,
     );
 
 // typedef void (APIENTRYP PFNGLTEXIMAGE3DMULTISAMPLEPROC) (GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedsamplelocations)
@@ -4974,12 +4896,12 @@ typedef PFNGLTEXIMAGE3DMULTISAMPLEPROCDart =
 typedef PFNGLTEXIMAGE3DMULTISAMPLEPROC =
     Void Function(
       Uint32 target,
-      Uint32 samples,
+      Int32 samples,
       Uint32 internalformat,
-      Uint32 width,
-      Uint32 height,
-      Uint32 depth,
-      Int32 fixedsamplelocations,
+      Int32 width,
+      Int32 height,
+      Int32 depth,
+      Uint8 fixedsamplelocations,
     );
 
 // typedef void (APIENTRYP PFNGLGETMULTISAMPLEFVPROC) (GLenum pname, GLuint index, GLfloat *val)
@@ -5013,17 +4935,17 @@ typedef PFNGLGETFRAGDATAINDEXPROC =
 typedef PFNGLGENSAMPLERSPROCDart =
     void Function(int count, Pointer<Uint32> samplers);
 typedef PFNGLGENSAMPLERSPROC =
-    Void Function(Uint32 count, Pointer<Uint32> samplers);
+    Void Function(Int32 count, Pointer<Uint32> samplers);
 
 // typedef void (APIENTRYP PFNGLDELETESAMPLERSPROC) (GLsizei count, const GLuint *samplers)
 typedef PFNGLDELETESAMPLERSPROCDart =
     void Function(int count, Pointer<Uint32> samplers);
 typedef PFNGLDELETESAMPLERSPROC =
-    Void Function(Uint32 count, Pointer<Uint32> samplers);
+    Void Function(Int32 count, Pointer<Uint32> samplers);
 
 // typedef GLboolean (APIENTRYP PFNGLISSAMPLERPROC) (GLuint sampler)
 typedef PFNGLISSAMPLERPROCDart = int Function(int sampler);
-typedef PFNGLISSAMPLERPROC = Int32 Function(Uint32 sampler);
+typedef PFNGLISSAMPLERPROC = Uint8 Function(Uint32 sampler);
 
 // typedef void (APIENTRYP PFNGLBINDSAMPLERPROC) (GLuint unit, GLuint sampler)
 typedef PFNGLBINDSAMPLERPROCDart = void Function(int unit, int sampler);
@@ -5115,7 +5037,7 @@ typedef PFNGLVERTEXATTRIBDIVISORPROC =
 typedef PFNGLVERTEXATTRIBP1UIPROCDart =
     void Function(int index, int type, int normalized, int value);
 typedef PFNGLVERTEXATTRIBP1UIPROC =
-    Void Function(Uint32 index, Uint32 type, Int32 normalized, Uint32 value);
+    Void Function(Uint32 index, Uint32 type, Uint8 normalized, Uint32 value);
 
 // typedef void (APIENTRYP PFNGLVERTEXATTRIBP1UIVPROC) (GLuint index, GLenum type, GLboolean normalized, const GLuint *value)
 typedef PFNGLVERTEXATTRIBP1UIVPROCDart =
@@ -5124,7 +5046,7 @@ typedef PFNGLVERTEXATTRIBP1UIVPROC =
     Void Function(
       Uint32 index,
       Uint32 type,
-      Int32 normalized,
+      Uint8 normalized,
       Pointer<Uint32> value,
     );
 
@@ -5132,7 +5054,7 @@ typedef PFNGLVERTEXATTRIBP1UIVPROC =
 typedef PFNGLVERTEXATTRIBP2UIPROCDart =
     void Function(int index, int type, int normalized, int value);
 typedef PFNGLVERTEXATTRIBP2UIPROC =
-    Void Function(Uint32 index, Uint32 type, Int32 normalized, Uint32 value);
+    Void Function(Uint32 index, Uint32 type, Uint8 normalized, Uint32 value);
 
 // typedef void (APIENTRYP PFNGLVERTEXATTRIBP2UIVPROC) (GLuint index, GLenum type, GLboolean normalized, const GLuint *value)
 typedef PFNGLVERTEXATTRIBP2UIVPROCDart =
@@ -5141,7 +5063,7 @@ typedef PFNGLVERTEXATTRIBP2UIVPROC =
     Void Function(
       Uint32 index,
       Uint32 type,
-      Int32 normalized,
+      Uint8 normalized,
       Pointer<Uint32> value,
     );
 
@@ -5149,7 +5071,7 @@ typedef PFNGLVERTEXATTRIBP2UIVPROC =
 typedef PFNGLVERTEXATTRIBP3UIPROCDart =
     void Function(int index, int type, int normalized, int value);
 typedef PFNGLVERTEXATTRIBP3UIPROC =
-    Void Function(Uint32 index, Uint32 type, Int32 normalized, Uint32 value);
+    Void Function(Uint32 index, Uint32 type, Uint8 normalized, Uint32 value);
 
 // typedef void (APIENTRYP PFNGLVERTEXATTRIBP3UIVPROC) (GLuint index, GLenum type, GLboolean normalized, const GLuint *value)
 typedef PFNGLVERTEXATTRIBP3UIVPROCDart =
@@ -5158,7 +5080,7 @@ typedef PFNGLVERTEXATTRIBP3UIVPROC =
     Void Function(
       Uint32 index,
       Uint32 type,
-      Int32 normalized,
+      Uint8 normalized,
       Pointer<Uint32> value,
     );
 
@@ -5166,7 +5088,7 @@ typedef PFNGLVERTEXATTRIBP3UIVPROC =
 typedef PFNGLVERTEXATTRIBP4UIPROCDart =
     void Function(int index, int type, int normalized, int value);
 typedef PFNGLVERTEXATTRIBP4UIPROC =
-    Void Function(Uint32 index, Uint32 type, Int32 normalized, Uint32 value);
+    Void Function(Uint32 index, Uint32 type, Uint8 normalized, Uint32 value);
 
 // typedef void (APIENTRYP PFNGLVERTEXATTRIBP4UIVPROC) (GLuint index, GLenum type, GLboolean normalized, const GLuint *value)
 typedef PFNGLVERTEXATTRIBP4UIVPROCDart =
@@ -5175,7 +5097,7 @@ typedef PFNGLVERTEXATTRIBP4UIVPROC =
     Void Function(
       Uint32 index,
       Uint32 type,
-      Int32 normalized,
+      Uint8 normalized,
       Pointer<Uint32> value,
     );
 
@@ -5367,15 +5289,15 @@ typedef PFNGLBLENDFUNCSEPARATEIPROC =
 
 // typedef void (APIENTRYP PFNGLDRAWARRAYSINDIRECTPROC) (GLenum mode, const void *indirect)
 typedef PFNGLDRAWARRAYSINDIRECTPROCDart =
-    void Function(int mode, Pointer<NativeType> indirect);
+    void Function(int mode, Pointer<Void> indirect);
 typedef PFNGLDRAWARRAYSINDIRECTPROC =
-    Void Function(Uint32 mode, Pointer<NativeType> indirect);
+    Void Function(Uint32 mode, Pointer<Void> indirect);
 
 // typedef void (APIENTRYP PFNGLDRAWELEMENTSINDIRECTPROC) (GLenum mode, GLenum type, const void *indirect)
 typedef PFNGLDRAWELEMENTSINDIRECTPROCDart =
-    void Function(int mode, int type, Pointer<NativeType> indirect);
+    void Function(int mode, int type, Pointer<Void> indirect);
 typedef PFNGLDRAWELEMENTSINDIRECTPROC =
-    Void Function(Uint32 mode, Uint32 type, Pointer<NativeType> indirect);
+    Void Function(Uint32 mode, Uint32 type, Pointer<Void> indirect);
 
 // typedef void (APIENTRYP PFNGLUNIFORM1DPROC) (GLint location, GLdouble x)
 typedef PFNGLUNIFORM1DPROCDart = void Function(int location, double x);
@@ -5402,25 +5324,25 @@ typedef PFNGLUNIFORM4DPROC =
 typedef PFNGLUNIFORM1DVPROCDart =
     void Function(int location, int count, Pointer<Double> value);
 typedef PFNGLUNIFORM1DVPROC =
-    Void Function(Int32 location, Uint32 count, Pointer<Double> value);
+    Void Function(Int32 location, Int32 count, Pointer<Double> value);
 
 // typedef void (APIENTRYP PFNGLUNIFORM2DVPROC) (GLint location, GLsizei count, const GLdouble *value)
 typedef PFNGLUNIFORM2DVPROCDart =
     void Function(int location, int count, Pointer<Double> value);
 typedef PFNGLUNIFORM2DVPROC =
-    Void Function(Int32 location, Uint32 count, Pointer<Double> value);
+    Void Function(Int32 location, Int32 count, Pointer<Double> value);
 
 // typedef void (APIENTRYP PFNGLUNIFORM3DVPROC) (GLint location, GLsizei count, const GLdouble *value)
 typedef PFNGLUNIFORM3DVPROCDart =
     void Function(int location, int count, Pointer<Double> value);
 typedef PFNGLUNIFORM3DVPROC =
-    Void Function(Int32 location, Uint32 count, Pointer<Double> value);
+    Void Function(Int32 location, Int32 count, Pointer<Double> value);
 
 // typedef void (APIENTRYP PFNGLUNIFORM4DVPROC) (GLint location, GLsizei count, const GLdouble *value)
 typedef PFNGLUNIFORM4DVPROCDart =
     void Function(int location, int count, Pointer<Double> value);
 typedef PFNGLUNIFORM4DVPROC =
-    Void Function(Int32 location, Uint32 count, Pointer<Double> value);
+    Void Function(Int32 location, Int32 count, Pointer<Double> value);
 
 // typedef void (APIENTRYP PFNGLUNIFORMMATRIX2DVPROC) (GLint location, GLsizei count, GLboolean transpose, const GLdouble *value)
 typedef PFNGLUNIFORMMATRIX2DVPROCDart =
@@ -5433,8 +5355,8 @@ typedef PFNGLUNIFORMMATRIX2DVPROCDart =
 typedef PFNGLUNIFORMMATRIX2DVPROC =
     Void Function(
       Int32 location,
-      Uint32 count,
-      Int32 transpose,
+      Int32 count,
+      Uint8 transpose,
       Pointer<Double> value,
     );
 
@@ -5449,8 +5371,8 @@ typedef PFNGLUNIFORMMATRIX3DVPROCDart =
 typedef PFNGLUNIFORMMATRIX3DVPROC =
     Void Function(
       Int32 location,
-      Uint32 count,
-      Int32 transpose,
+      Int32 count,
+      Uint8 transpose,
       Pointer<Double> value,
     );
 
@@ -5465,8 +5387,8 @@ typedef PFNGLUNIFORMMATRIX4DVPROCDart =
 typedef PFNGLUNIFORMMATRIX4DVPROC =
     Void Function(
       Int32 location,
-      Uint32 count,
-      Int32 transpose,
+      Int32 count,
+      Uint8 transpose,
       Pointer<Double> value,
     );
 
@@ -5481,8 +5403,8 @@ typedef PFNGLUNIFORMMATRIX2X3DVPROCDart =
 typedef PFNGLUNIFORMMATRIX2X3DVPROC =
     Void Function(
       Int32 location,
-      Uint32 count,
-      Int32 transpose,
+      Int32 count,
+      Uint8 transpose,
       Pointer<Double> value,
     );
 
@@ -5497,8 +5419,8 @@ typedef PFNGLUNIFORMMATRIX2X4DVPROCDart =
 typedef PFNGLUNIFORMMATRIX2X4DVPROC =
     Void Function(
       Int32 location,
-      Uint32 count,
-      Int32 transpose,
+      Int32 count,
+      Uint8 transpose,
       Pointer<Double> value,
     );
 
@@ -5513,8 +5435,8 @@ typedef PFNGLUNIFORMMATRIX3X2DVPROCDart =
 typedef PFNGLUNIFORMMATRIX3X2DVPROC =
     Void Function(
       Int32 location,
-      Uint32 count,
-      Int32 transpose,
+      Int32 count,
+      Uint8 transpose,
       Pointer<Double> value,
     );
 
@@ -5529,8 +5451,8 @@ typedef PFNGLUNIFORMMATRIX3X4DVPROCDart =
 typedef PFNGLUNIFORMMATRIX3X4DVPROC =
     Void Function(
       Int32 location,
-      Uint32 count,
-      Int32 transpose,
+      Int32 count,
+      Uint8 transpose,
       Pointer<Double> value,
     );
 
@@ -5545,8 +5467,8 @@ typedef PFNGLUNIFORMMATRIX4X2DVPROCDart =
 typedef PFNGLUNIFORMMATRIX4X2DVPROC =
     Void Function(
       Int32 location,
-      Uint32 count,
-      Int32 transpose,
+      Int32 count,
+      Uint8 transpose,
       Pointer<Double> value,
     );
 
@@ -5561,8 +5483,8 @@ typedef PFNGLUNIFORMMATRIX4X3DVPROCDart =
 typedef PFNGLUNIFORMMATRIX4X3DVPROC =
     Void Function(
       Int32 location,
-      Uint32 count,
-      Int32 transpose,
+      Int32 count,
+      Uint8 transpose,
       Pointer<Double> value,
     );
 
@@ -5609,7 +5531,7 @@ typedef PFNGLGETACTIVESUBROUTINEUNIFORMNAMEPROCDart =
       int shadertype,
       int index,
       int bufSize,
-      Pointer<Uint32> length,
+      Pointer<Int32> length,
       Pointer<Int8> name,
     );
 typedef PFNGLGETACTIVESUBROUTINEUNIFORMNAMEPROC =
@@ -5617,8 +5539,8 @@ typedef PFNGLGETACTIVESUBROUTINEUNIFORMNAMEPROC =
       Uint32 program,
       Uint32 shadertype,
       Uint32 index,
-      Uint32 bufSize,
-      Pointer<Uint32> length,
+      Int32 bufSize,
+      Pointer<Int32> length,
       Pointer<Int8> name,
     );
 
@@ -5629,7 +5551,7 @@ typedef PFNGLGETACTIVESUBROUTINENAMEPROCDart =
       int shadertype,
       int index,
       int bufSize,
-      Pointer<Uint32> length,
+      Pointer<Int32> length,
       Pointer<Int8> name,
     );
 typedef PFNGLGETACTIVESUBROUTINENAMEPROC =
@@ -5637,8 +5559,8 @@ typedef PFNGLGETACTIVESUBROUTINENAMEPROC =
       Uint32 program,
       Uint32 shadertype,
       Uint32 index,
-      Uint32 bufSize,
-      Pointer<Uint32> length,
+      Int32 bufSize,
+      Pointer<Int32> length,
       Pointer<Int8> name,
     );
 
@@ -5646,7 +5568,7 @@ typedef PFNGLGETACTIVESUBROUTINENAMEPROC =
 typedef PFNGLUNIFORMSUBROUTINESUIVPROCDart =
     void Function(int shadertype, int count, Pointer<Uint32> indices);
 typedef PFNGLUNIFORMSUBROUTINESUIVPROC =
-    Void Function(Uint32 shadertype, Uint32 count, Pointer<Uint32> indices);
+    Void Function(Uint32 shadertype, Int32 count, Pointer<Uint32> indices);
 
 // typedef void (APIENTRYP PFNGLGETUNIFORMSUBROUTINEUIVPROC) (GLenum shadertype, GLint location, GLuint *params)
 typedef PFNGLGETUNIFORMSUBROUTINEUIVPROCDart =
@@ -5689,17 +5611,17 @@ typedef PFNGLBINDTRANSFORMFEEDBACKPROC =
 typedef PFNGLDELETETRANSFORMFEEDBACKSPROCDart =
     void Function(int n, Pointer<Uint32> ids);
 typedef PFNGLDELETETRANSFORMFEEDBACKSPROC =
-    Void Function(Uint32 n, Pointer<Uint32> ids);
+    Void Function(Int32 n, Pointer<Uint32> ids);
 
 // typedef void (APIENTRYP PFNGLGENTRANSFORMFEEDBACKSPROC) (GLsizei n, GLuint *ids)
 typedef PFNGLGENTRANSFORMFEEDBACKSPROCDart =
     void Function(int n, Pointer<Uint32> ids);
 typedef PFNGLGENTRANSFORMFEEDBACKSPROC =
-    Void Function(Uint32 n, Pointer<Uint32> ids);
+    Void Function(Int32 n, Pointer<Uint32> ids);
 
 // typedef GLboolean (APIENTRYP PFNGLISTRANSFORMFEEDBACKPROC) (GLuint id)
 typedef PFNGLISTRANSFORMFEEDBACKPROCDart = int Function(int id);
-typedef PFNGLISTRANSFORMFEEDBACKPROC = Int32 Function(Uint32 id);
+typedef PFNGLISTRANSFORMFEEDBACKPROC = Uint8 Function(Uint32 id);
 
 // typedef void (APIENTRYP PFNGLPAUSETRANSFORMFEEDBACKPROC) (void)
 typedef PFNGLPAUSETRANSFORMFEEDBACKPROCDart = void Function();
@@ -5750,16 +5672,16 @@ typedef PFNGLSHADERBINARYPROCDart =
       int count,
       Pointer<Uint32> shaders,
       int binaryFormat,
-      Pointer<NativeType> binary,
+      Pointer<Void> binary,
       int length,
     );
 typedef PFNGLSHADERBINARYPROC =
     Void Function(
-      Uint32 count,
+      Int32 count,
       Pointer<Uint32> shaders,
       Uint32 binaryFormat,
-      Pointer<NativeType> binary,
-      Uint32 length,
+      Pointer<Void> binary,
+      Int32 length,
     );
 
 // typedef void (APIENTRYP PFNGLGETSHADERPRECISIONFORMATPROC) (GLenum shadertype, GLenum precisiontype, GLint *range, GLint *precision)
@@ -5791,17 +5713,17 @@ typedef PFNGLGETPROGRAMBINARYPROCDart =
     void Function(
       int program,
       int bufSize,
-      Pointer<Uint32> length,
+      Pointer<Int32> length,
       Pointer<Uint32> binaryFormat,
-      Pointer<NativeType> binary,
+      Pointer<Void> binary,
     );
 typedef PFNGLGETPROGRAMBINARYPROC =
     Void Function(
       Uint32 program,
-      Uint32 bufSize,
-      Pointer<Uint32> length,
+      Int32 bufSize,
+      Pointer<Int32> length,
       Pointer<Uint32> binaryFormat,
-      Pointer<NativeType> binary,
+      Pointer<Void> binary,
     );
 
 // typedef void (APIENTRYP PFNGLPROGRAMBINARYPROC) (GLuint program, GLenum binaryFormat, const void *binary, GLsizei length)
@@ -5809,15 +5731,15 @@ typedef PFNGLPROGRAMBINARYPROCDart =
     void Function(
       int program,
       int binaryFormat,
-      Pointer<NativeType> binary,
+      Pointer<Void> binary,
       int length,
     );
 typedef PFNGLPROGRAMBINARYPROC =
     Void Function(
       Uint32 program,
       Uint32 binaryFormat,
-      Pointer<NativeType> binary,
-      Uint32 length,
+      Pointer<Void> binary,
+      Int32 length,
     );
 
 // typedef void (APIENTRYP PFNGLPROGRAMPARAMETERIPROC) (GLuint program, GLenum pname, GLint value)
@@ -5842,7 +5764,7 @@ typedef PFNGLACTIVESHADERPROGRAMPROC =
 typedef PFNGLCREATESHADERPROGRAMVPROCDart =
     int Function(int type, int count, Pointer<Pointer<Int8>> strings);
 typedef PFNGLCREATESHADERPROGRAMVPROC =
-    Uint32 Function(Uint32 type, Uint32 count, Pointer<Pointer<Int8>> strings);
+    Uint32 Function(Uint32 type, Int32 count, Pointer<Pointer<Int8>> strings);
 
 // typedef void (APIENTRYP PFNGLBINDPROGRAMPIPELINEPROC) (GLuint pipeline)
 typedef PFNGLBINDPROGRAMPIPELINEPROCDart = void Function(int pipeline);
@@ -5852,17 +5774,17 @@ typedef PFNGLBINDPROGRAMPIPELINEPROC = Void Function(Uint32 pipeline);
 typedef PFNGLDELETEPROGRAMPIPELINESPROCDart =
     void Function(int n, Pointer<Uint32> pipelines);
 typedef PFNGLDELETEPROGRAMPIPELINESPROC =
-    Void Function(Uint32 n, Pointer<Uint32> pipelines);
+    Void Function(Int32 n, Pointer<Uint32> pipelines);
 
 // typedef void (APIENTRYP PFNGLGENPROGRAMPIPELINESPROC) (GLsizei n, GLuint *pipelines)
 typedef PFNGLGENPROGRAMPIPELINESPROCDart =
     void Function(int n, Pointer<Uint32> pipelines);
 typedef PFNGLGENPROGRAMPIPELINESPROC =
-    Void Function(Uint32 n, Pointer<Uint32> pipelines);
+    Void Function(Int32 n, Pointer<Uint32> pipelines);
 
 // typedef GLboolean (APIENTRYP PFNGLISPROGRAMPIPELINEPROC) (GLuint pipeline)
 typedef PFNGLISPROGRAMPIPELINEPROCDart = int Function(int pipeline);
-typedef PFNGLISPROGRAMPIPELINEPROC = Int32 Function(Uint32 pipeline);
+typedef PFNGLISPROGRAMPIPELINEPROC = Uint8 Function(Uint32 pipeline);
 
 // typedef void (APIENTRYP PFNGLGETPROGRAMPIPELINEIVPROC) (GLuint pipeline, GLenum pname, GLint *params)
 typedef PFNGLGETPROGRAMPIPELINEIVPROCDart =
@@ -5883,7 +5805,7 @@ typedef PFNGLPROGRAMUNIFORM1IVPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
+      Int32 count,
       Pointer<Int32> value,
     );
 
@@ -5900,7 +5822,7 @@ typedef PFNGLPROGRAMUNIFORM1FVPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
+      Int32 count,
       Pointer<Float> value,
     );
 
@@ -5917,7 +5839,7 @@ typedef PFNGLPROGRAMUNIFORM1DVPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
+      Int32 count,
       Pointer<Double> value,
     );
 
@@ -5934,7 +5856,7 @@ typedef PFNGLPROGRAMUNIFORM1UIVPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
+      Int32 count,
       Pointer<Uint32> value,
     );
 
@@ -5951,7 +5873,7 @@ typedef PFNGLPROGRAMUNIFORM2IVPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
+      Int32 count,
       Pointer<Int32> value,
     );
 
@@ -5968,7 +5890,7 @@ typedef PFNGLPROGRAMUNIFORM2FVPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
+      Int32 count,
       Pointer<Float> value,
     );
 
@@ -5985,7 +5907,7 @@ typedef PFNGLPROGRAMUNIFORM2DVPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
+      Int32 count,
       Pointer<Double> value,
     );
 
@@ -6002,7 +5924,7 @@ typedef PFNGLPROGRAMUNIFORM2UIVPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
+      Int32 count,
       Pointer<Uint32> value,
     );
 
@@ -6019,7 +5941,7 @@ typedef PFNGLPROGRAMUNIFORM3IVPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
+      Int32 count,
       Pointer<Int32> value,
     );
 
@@ -6036,7 +5958,7 @@ typedef PFNGLPROGRAMUNIFORM3FVPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
+      Int32 count,
       Pointer<Float> value,
     );
 
@@ -6059,7 +5981,7 @@ typedef PFNGLPROGRAMUNIFORM3DVPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
+      Int32 count,
       Pointer<Double> value,
     );
 
@@ -6082,7 +6004,7 @@ typedef PFNGLPROGRAMUNIFORM3UIVPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
+      Int32 count,
       Pointer<Uint32> value,
     );
 
@@ -6106,7 +6028,7 @@ typedef PFNGLPROGRAMUNIFORM4IVPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
+      Int32 count,
       Pointer<Int32> value,
     );
 
@@ -6137,7 +6059,7 @@ typedef PFNGLPROGRAMUNIFORM4FVPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
+      Int32 count,
       Pointer<Float> value,
     );
 
@@ -6168,7 +6090,7 @@ typedef PFNGLPROGRAMUNIFORM4DVPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
+      Int32 count,
       Pointer<Double> value,
     );
 
@@ -6192,7 +6114,7 @@ typedef PFNGLPROGRAMUNIFORM4UIVPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
+      Int32 count,
       Pointer<Uint32> value,
     );
 
@@ -6209,8 +6131,8 @@ typedef PFNGLPROGRAMUNIFORMMATRIX2FVPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
-      Int32 transpose,
+      Int32 count,
+      Uint8 transpose,
       Pointer<Float> value,
     );
 
@@ -6227,8 +6149,8 @@ typedef PFNGLPROGRAMUNIFORMMATRIX3FVPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
-      Int32 transpose,
+      Int32 count,
+      Uint8 transpose,
       Pointer<Float> value,
     );
 
@@ -6245,8 +6167,8 @@ typedef PFNGLPROGRAMUNIFORMMATRIX4FVPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
-      Int32 transpose,
+      Int32 count,
+      Uint8 transpose,
       Pointer<Float> value,
     );
 
@@ -6263,8 +6185,8 @@ typedef PFNGLPROGRAMUNIFORMMATRIX2DVPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
-      Int32 transpose,
+      Int32 count,
+      Uint8 transpose,
       Pointer<Double> value,
     );
 
@@ -6281,8 +6203,8 @@ typedef PFNGLPROGRAMUNIFORMMATRIX3DVPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
-      Int32 transpose,
+      Int32 count,
+      Uint8 transpose,
       Pointer<Double> value,
     );
 
@@ -6299,8 +6221,8 @@ typedef PFNGLPROGRAMUNIFORMMATRIX4DVPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
-      Int32 transpose,
+      Int32 count,
+      Uint8 transpose,
       Pointer<Double> value,
     );
 
@@ -6317,8 +6239,8 @@ typedef PFNGLPROGRAMUNIFORMMATRIX2X3FVPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
-      Int32 transpose,
+      Int32 count,
+      Uint8 transpose,
       Pointer<Float> value,
     );
 
@@ -6335,8 +6257,8 @@ typedef PFNGLPROGRAMUNIFORMMATRIX3X2FVPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
-      Int32 transpose,
+      Int32 count,
+      Uint8 transpose,
       Pointer<Float> value,
     );
 
@@ -6353,8 +6275,8 @@ typedef PFNGLPROGRAMUNIFORMMATRIX2X4FVPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
-      Int32 transpose,
+      Int32 count,
+      Uint8 transpose,
       Pointer<Float> value,
     );
 
@@ -6371,8 +6293,8 @@ typedef PFNGLPROGRAMUNIFORMMATRIX4X2FVPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
-      Int32 transpose,
+      Int32 count,
+      Uint8 transpose,
       Pointer<Float> value,
     );
 
@@ -6389,8 +6311,8 @@ typedef PFNGLPROGRAMUNIFORMMATRIX3X4FVPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
-      Int32 transpose,
+      Int32 count,
+      Uint8 transpose,
       Pointer<Float> value,
     );
 
@@ -6407,8 +6329,8 @@ typedef PFNGLPROGRAMUNIFORMMATRIX4X3FVPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
-      Int32 transpose,
+      Int32 count,
+      Uint8 transpose,
       Pointer<Float> value,
     );
 
@@ -6425,8 +6347,8 @@ typedef PFNGLPROGRAMUNIFORMMATRIX2X3DVPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
-      Int32 transpose,
+      Int32 count,
+      Uint8 transpose,
       Pointer<Double> value,
     );
 
@@ -6443,8 +6365,8 @@ typedef PFNGLPROGRAMUNIFORMMATRIX3X2DVPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
-      Int32 transpose,
+      Int32 count,
+      Uint8 transpose,
       Pointer<Double> value,
     );
 
@@ -6461,8 +6383,8 @@ typedef PFNGLPROGRAMUNIFORMMATRIX2X4DVPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
-      Int32 transpose,
+      Int32 count,
+      Uint8 transpose,
       Pointer<Double> value,
     );
 
@@ -6479,8 +6401,8 @@ typedef PFNGLPROGRAMUNIFORMMATRIX4X2DVPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
-      Int32 transpose,
+      Int32 count,
+      Uint8 transpose,
       Pointer<Double> value,
     );
 
@@ -6497,8 +6419,8 @@ typedef PFNGLPROGRAMUNIFORMMATRIX3X4DVPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
-      Int32 transpose,
+      Int32 count,
+      Uint8 transpose,
       Pointer<Double> value,
     );
 
@@ -6515,8 +6437,8 @@ typedef PFNGLPROGRAMUNIFORMMATRIX4X3DVPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
-      Int32 transpose,
+      Int32 count,
+      Uint8 transpose,
       Pointer<Double> value,
     );
 
@@ -6529,14 +6451,14 @@ typedef PFNGLGETPROGRAMPIPELINEINFOLOGPROCDart =
     void Function(
       int pipeline,
       int bufSize,
-      Pointer<Uint32> length,
+      Pointer<Int32> length,
       Pointer<Int8> infoLog,
     );
 typedef PFNGLGETPROGRAMPIPELINEINFOLOGPROC =
     Void Function(
       Uint32 pipeline,
-      Uint32 bufSize,
-      Pointer<Uint32> length,
+      Int32 bufSize,
+      Pointer<Int32> length,
       Pointer<Int8> infoLog,
     );
 
@@ -6593,15 +6515,15 @@ typedef PFNGLVERTEXATTRIBLPOINTERPROCDart =
       int size,
       int type,
       int stride,
-      Pointer<NativeType> pointer,
+      Pointer<Void> pointer,
     );
 typedef PFNGLVERTEXATTRIBLPOINTERPROC =
     Void Function(
       Uint32 index,
       Int32 size,
       Uint32 type,
-      Uint32 stride,
-      Pointer<NativeType> pointer,
+      Int32 stride,
+      Pointer<Void> pointer,
     );
 
 // typedef void (APIENTRYP PFNGLGETVERTEXATTRIBLDVPROC) (GLuint index, GLenum pname, GLdouble *params)
@@ -6614,7 +6536,7 @@ typedef PFNGLGETVERTEXATTRIBLDVPROC =
 typedef PFNGLVIEWPORTARRAYVPROCDart =
     void Function(int first, int count, Pointer<Float> v);
 typedef PFNGLVIEWPORTARRAYVPROC =
-    Void Function(Uint32 first, Uint32 count, Pointer<Float> v);
+    Void Function(Uint32 first, Int32 count, Pointer<Float> v);
 
 // typedef void (APIENTRYP PFNGLVIEWPORTINDEXEDFPROC) (GLuint index, GLfloat x, GLfloat y, GLfloat w, GLfloat h)
 typedef PFNGLVIEWPORTINDEXEDFPROCDart =
@@ -6632,7 +6554,7 @@ typedef PFNGLVIEWPORTINDEXEDFVPROC =
 typedef PFNGLSCISSORARRAYVPROCDart =
     void Function(int first, int count, Pointer<Int32> v);
 typedef PFNGLSCISSORARRAYVPROC =
-    Void Function(Uint32 first, Uint32 count, Pointer<Int32> v);
+    Void Function(Uint32 first, Int32 count, Pointer<Int32> v);
 
 // typedef void (APIENTRYP PFNGLSCISSORINDEXEDPROC) (GLuint index, GLint left, GLint bottom, GLsizei width, GLsizei height)
 typedef PFNGLSCISSORINDEXEDPROCDart =
@@ -6642,8 +6564,8 @@ typedef PFNGLSCISSORINDEXEDPROC =
       Uint32 index,
       Int32 left,
       Int32 bottom,
-      Uint32 width,
-      Uint32 height,
+      Int32 width,
+      Int32 height,
     );
 
 // typedef void (APIENTRYP PFNGLSCISSORINDEXEDVPROC) (GLuint index, const GLint *v)
@@ -6656,7 +6578,7 @@ typedef PFNGLSCISSORINDEXEDVPROC =
 typedef PFNGLDEPTHRANGEARRAYVPROCDart =
     void Function(int first, int count, Pointer<Double> v);
 typedef PFNGLDEPTHRANGEARRAYVPROC =
-    Void Function(Uint32 first, Uint32 count, Pointer<Double> v);
+    Void Function(Uint32 first, Int32 count, Pointer<Double> v);
 
 // typedef void (APIENTRYP PFNGLDEPTHRANGEINDEXEDPROC) (GLuint index, GLdouble n, GLdouble f)
 typedef PFNGLDEPTHRANGEINDEXEDPROCDart =
@@ -6689,8 +6611,8 @@ typedef PFNGLDRAWARRAYSINSTANCEDBASEINSTANCEPROC =
     Void Function(
       Uint32 mode,
       Int32 first,
-      Uint32 count,
-      Uint32 instancecount,
+      Int32 count,
+      Int32 instancecount,
       Uint32 baseinstance,
     );
 
@@ -6700,17 +6622,17 @@ typedef PFNGLDRAWELEMENTSINSTANCEDBASEINSTANCEPROCDart =
       int mode,
       int count,
       int type,
-      Pointer<NativeType> indices,
+      Pointer<Void> indices,
       int instancecount,
       int baseinstance,
     );
 typedef PFNGLDRAWELEMENTSINSTANCEDBASEINSTANCEPROC =
     Void Function(
       Uint32 mode,
-      Uint32 count,
+      Int32 count,
       Uint32 type,
-      Pointer<NativeType> indices,
-      Uint32 instancecount,
+      Pointer<Void> indices,
+      Int32 instancecount,
       Uint32 baseinstance,
     );
 
@@ -6720,7 +6642,7 @@ typedef PFNGLDRAWELEMENTSINSTANCEDBASEVERTEXBASEINSTANCEPROCDart =
       int mode,
       int count,
       int type,
-      Pointer<NativeType> indices,
+      Pointer<Void> indices,
       int instancecount,
       int basevertex,
       int baseinstance,
@@ -6728,10 +6650,10 @@ typedef PFNGLDRAWELEMENTSINSTANCEDBASEVERTEXBASEINSTANCEPROCDart =
 typedef PFNGLDRAWELEMENTSINSTANCEDBASEVERTEXBASEINSTANCEPROC =
     Void Function(
       Uint32 mode,
-      Uint32 count,
+      Int32 count,
       Uint32 type,
-      Pointer<NativeType> indices,
-      Uint32 instancecount,
+      Pointer<Void> indices,
+      Int32 instancecount,
       Int32 basevertex,
       Uint32 baseinstance,
     );
@@ -6750,7 +6672,7 @@ typedef PFNGLGETINTERNALFORMATIVPROC =
       Uint32 target,
       Uint32 internalformat,
       Uint32 pname,
-      Uint32 count,
+      Int32 count,
       Pointer<Int32> params,
     );
 
@@ -6786,7 +6708,7 @@ typedef PFNGLBINDIMAGETEXTUREPROC =
       Uint32 unit,
       Uint32 texture,
       Int32 level,
-      Int32 layered,
+      Uint8 layered,
       Int32 layer,
       Uint32 access,
       Uint32 format,
@@ -6802,9 +6724,9 @@ typedef PFNGLTEXSTORAGE1DPROCDart =
 typedef PFNGLTEXSTORAGE1DPROC =
     Void Function(
       Uint32 target,
-      Uint32 levels,
+      Int32 levels,
       Uint32 internalformat,
-      Uint32 width,
+      Int32 width,
     );
 
 // typedef void (APIENTRYP PFNGLTEXSTORAGE2DPROC) (GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height)
@@ -6819,10 +6741,10 @@ typedef PFNGLTEXSTORAGE2DPROCDart =
 typedef PFNGLTEXSTORAGE2DPROC =
     Void Function(
       Uint32 target,
-      Uint32 levels,
+      Int32 levels,
       Uint32 internalformat,
-      Uint32 width,
-      Uint32 height,
+      Int32 width,
+      Int32 height,
     );
 
 // typedef void (APIENTRYP PFNGLTEXSTORAGE3DPROC) (GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth)
@@ -6838,24 +6760,24 @@ typedef PFNGLTEXSTORAGE3DPROCDart =
 typedef PFNGLTEXSTORAGE3DPROC =
     Void Function(
       Uint32 target,
-      Uint32 levels,
+      Int32 levels,
       Uint32 internalformat,
-      Uint32 width,
-      Uint32 height,
-      Uint32 depth,
+      Int32 width,
+      Int32 height,
+      Int32 depth,
     );
 
 // typedef void (APIENTRYP PFNGLDRAWTRANSFORMFEEDBACKINSTANCEDPROC) (GLenum mode, GLuint id, GLsizei instancecount)
 typedef PFNGLDRAWTRANSFORMFEEDBACKINSTANCEDPROCDart =
     void Function(int mode, int id, int instancecount);
 typedef PFNGLDRAWTRANSFORMFEEDBACKINSTANCEDPROC =
-    Void Function(Uint32 mode, Uint32 id, Uint32 instancecount);
+    Void Function(Uint32 mode, Uint32 id, Int32 instancecount);
 
 // typedef void (APIENTRYP PFNGLDRAWTRANSFORMFEEDBACKSTREAMINSTANCEDPROC) (GLenum mode, GLuint id, GLuint stream, GLsizei instancecount)
 typedef PFNGLDRAWTRANSFORMFEEDBACKSTREAMINSTANCEDPROCDart =
     void Function(int mode, int id, int stream, int instancecount);
 typedef PFNGLDRAWTRANSFORMFEEDBACKSTREAMINSTANCEDPROC =
-    Void Function(Uint32 mode, Uint32 id, Uint32 stream, Uint32 instancecount);
+    Void Function(Uint32 mode, Uint32 id, Uint32 stream, Int32 instancecount);
 
 // typedef void (APIENTRY *GLDEBUGPROC)(GLenum source,GLenum type,GLuint id,GLenum severity,GLsizei length,const GLchar *message,const void *userParam)
 typedef GLDEBUGPROCDart =
@@ -6866,7 +6788,7 @@ typedef GLDEBUGPROCDart =
       int severity,
       int length,
       Pointer<Utf8> message,
-      Pointer<NativeType> userParam,
+      Pointer<Void> userParam,
     );
 typedef GLDEBUGPROC =
     Void Function(
@@ -6874,9 +6796,9 @@ typedef GLDEBUGPROC =
       Uint32 type,
       Uint32 id,
       Uint32 severity,
-      Uint32 length,
+      Int32 length,
       Pointer<Utf8> message,
-      Pointer<NativeType> userParam,
+      Pointer<Void> userParam,
     );
 
 // typedef void (APIENTRYP PFNGLCLEARBUFFERDATAPROC) (GLenum target, GLenum internalformat, GLenum format, GLenum type, const void *data)
@@ -6886,7 +6808,7 @@ typedef PFNGLCLEARBUFFERDATAPROCDart =
       int internalformat,
       int format,
       int type,
-      Pointer<NativeType> data,
+      Pointer<Void> data,
     );
 typedef PFNGLCLEARBUFFERDATAPROC =
     Void Function(
@@ -6894,7 +6816,7 @@ typedef PFNGLCLEARBUFFERDATAPROC =
       Uint32 internalformat,
       Uint32 format,
       Uint32 type,
-      Pointer<NativeType> data,
+      Pointer<Void> data,
     );
 
 // typedef void (APIENTRYP PFNGLCLEARBUFFERSUBDATAPROC) (GLenum target, GLenum internalformat, GLintptr offset, GLsizeiptr size, GLenum format, GLenum type, const void *data)
@@ -6902,21 +6824,21 @@ typedef PFNGLCLEARBUFFERSUBDATAPROCDart =
     void Function(
       int target,
       int internalformat,
-      Pointer<NativeType> offset,
-      Pointer<Uint32> size,
+      int offset,
+      int size,
       int format,
       int type,
-      Pointer<NativeType> data,
+      Pointer<Void> data,
     );
 typedef PFNGLCLEARBUFFERSUBDATAPROC =
     Void Function(
       Uint32 target,
       Uint32 internalformat,
-      Pointer<NativeType> offset,
-      Pointer<Uint32> size,
+      IntPtr offset,
+      IntPtr size,
       Uint32 format,
       Uint32 type,
-      Pointer<NativeType> data,
+      Pointer<Void> data,
     );
 
 // typedef void (APIENTRYP PFNGLDISPATCHCOMPUTEPROC) (GLuint num_groups_x, GLuint num_groups_y, GLuint num_groups_z)
@@ -6926,10 +6848,8 @@ typedef PFNGLDISPATCHCOMPUTEPROC =
     Void Function(Uint32 numGroupsX, Uint32 numGroupsY, Uint32 numGroupsZ);
 
 // typedef void (APIENTRYP PFNGLDISPATCHCOMPUTEINDIRECTPROC) (GLintptr indirect)
-typedef PFNGLDISPATCHCOMPUTEINDIRECTPROCDart =
-    void Function(Pointer<NativeType> indirect);
-typedef PFNGLDISPATCHCOMPUTEINDIRECTPROC =
-    Void Function(Pointer<NativeType> indirect);
+typedef PFNGLDISPATCHCOMPUTEINDIRECTPROCDart = void Function(int indirect);
+typedef PFNGLDISPATCHCOMPUTEINDIRECTPROC = Void Function(IntPtr indirect);
 
 // typedef void (APIENTRYP PFNGLCOPYIMAGESUBDATAPROC) (GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srcY, GLint srcZ, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei srcWidth, GLsizei srcHeight, GLsizei srcDepth)
 typedef PFNGLCOPYIMAGESUBDATAPROCDart =
@@ -6964,9 +6884,9 @@ typedef PFNGLCOPYIMAGESUBDATAPROC =
       Int32 dstX,
       Int32 dstY,
       Int32 dstZ,
-      Uint32 srcWidth,
-      Uint32 srcHeight,
-      Uint32 srcDepth,
+      Int32 srcWidth,
+      Int32 srcHeight,
+      Int32 srcDepth,
     );
 
 // typedef void (APIENTRYP PFNGLFRAMEBUFFERPARAMETERIPROC) (GLenum target, GLenum pname, GLint param)
@@ -6995,7 +6915,7 @@ typedef PFNGLGETINTERNALFORMATI64VPROC =
       Uint32 target,
       Uint32 internalformat,
       Uint32 pname,
-      Uint32 count,
+      Int32 count,
       Pointer<Int64> params,
     );
 
@@ -7018,9 +6938,9 @@ typedef PFNGLINVALIDATETEXSUBIMAGEPROC =
       Int32 xoffset,
       Int32 yoffset,
       Int32 zoffset,
-      Uint32 width,
-      Uint32 height,
-      Uint32 depth,
+      Int32 width,
+      Int32 height,
+      Int32 depth,
     );
 
 // typedef void (APIENTRYP PFNGLINVALIDATETEXIMAGEPROC) (GLuint texture, GLint level)
@@ -7030,17 +6950,9 @@ typedef PFNGLINVALIDATETEXIMAGEPROC =
 
 // typedef void (APIENTRYP PFNGLINVALIDATEBUFFERSUBDATAPROC) (GLuint buffer, GLintptr offset, GLsizeiptr length)
 typedef PFNGLINVALIDATEBUFFERSUBDATAPROCDart =
-    void Function(
-      int buffer,
-      Pointer<NativeType> offset,
-      Pointer<Uint32> length,
-    );
+    void Function(int buffer, int offset, int length);
 typedef PFNGLINVALIDATEBUFFERSUBDATAPROC =
-    Void Function(
-      Uint32 buffer,
-      Pointer<NativeType> offset,
-      Pointer<Uint32> length,
-    );
+    Void Function(Uint32 buffer, IntPtr offset, IntPtr length);
 
 // typedef void (APIENTRYP PFNGLINVALIDATEBUFFERDATAPROC) (GLuint buffer)
 typedef PFNGLINVALIDATEBUFFERDATAPROCDart = void Function(int buffer);
@@ -7052,7 +6964,7 @@ typedef PFNGLINVALIDATEFRAMEBUFFERPROCDart =
 typedef PFNGLINVALIDATEFRAMEBUFFERPROC =
     Void Function(
       Uint32 target,
-      Uint32 numAttachments,
+      Int32 numAttachments,
       Pointer<Uint32> attachments,
     );
 
@@ -7070,28 +6982,23 @@ typedef PFNGLINVALIDATESUBFRAMEBUFFERPROCDart =
 typedef PFNGLINVALIDATESUBFRAMEBUFFERPROC =
     Void Function(
       Uint32 target,
-      Uint32 numAttachments,
+      Int32 numAttachments,
       Pointer<Uint32> attachments,
       Int32 x,
       Int32 y,
-      Uint32 width,
-      Uint32 height,
+      Int32 width,
+      Int32 height,
     );
 
 // typedef void (APIENTRYP PFNGLMULTIDRAWARRAYSINDIRECTPROC) (GLenum mode, const void *indirect, GLsizei drawcount, GLsizei stride)
 typedef PFNGLMULTIDRAWARRAYSINDIRECTPROCDart =
-    void Function(
-      int mode,
-      Pointer<NativeType> indirect,
-      int drawcount,
-      int stride,
-    );
+    void Function(int mode, Pointer<Void> indirect, int drawcount, int stride);
 typedef PFNGLMULTIDRAWARRAYSINDIRECTPROC =
     Void Function(
       Uint32 mode,
-      Pointer<NativeType> indirect,
-      Uint32 drawcount,
-      Uint32 stride,
+      Pointer<Void> indirect,
+      Int32 drawcount,
+      Int32 stride,
     );
 
 // typedef void (APIENTRYP PFNGLMULTIDRAWELEMENTSINDIRECTPROC) (GLenum mode, GLenum type, const void *indirect, GLsizei drawcount, GLsizei stride)
@@ -7099,7 +7006,7 @@ typedef PFNGLMULTIDRAWELEMENTSINDIRECTPROCDart =
     void Function(
       int mode,
       int type,
-      Pointer<NativeType> indirect,
+      Pointer<Void> indirect,
       int drawcount,
       int stride,
     );
@@ -7107,9 +7014,9 @@ typedef PFNGLMULTIDRAWELEMENTSINDIRECTPROC =
     Void Function(
       Uint32 mode,
       Uint32 type,
-      Pointer<NativeType> indirect,
-      Uint32 drawcount,
-      Uint32 stride,
+      Pointer<Void> indirect,
+      Int32 drawcount,
+      Int32 stride,
     );
 
 // typedef void (APIENTRYP PFNGLGETPROGRAMINTERFACEIVPROC) (GLuint program, GLenum programInterface, GLenum pname, GLint *params)
@@ -7145,7 +7052,7 @@ typedef PFNGLGETPROGRAMRESOURCENAMEPROCDart =
       int programInterface,
       int index,
       int bufSize,
-      Pointer<Uint32> length,
+      Pointer<Int32> length,
       Pointer<Int8> name,
     );
 typedef PFNGLGETPROGRAMRESOURCENAMEPROC =
@@ -7153,8 +7060,8 @@ typedef PFNGLGETPROGRAMRESOURCENAMEPROC =
       Uint32 program,
       Uint32 programInterface,
       Uint32 index,
-      Uint32 bufSize,
-      Pointer<Uint32> length,
+      Int32 bufSize,
+      Pointer<Int32> length,
       Pointer<Int8> name,
     );
 
@@ -7167,7 +7074,7 @@ typedef PFNGLGETPROGRAMRESOURCEIVPROCDart =
       int propCount,
       Pointer<Uint32> props,
       int count,
-      Pointer<Uint32> length,
+      Pointer<Int32> length,
       Pointer<Int32> params,
     );
 typedef PFNGLGETPROGRAMRESOURCEIVPROC =
@@ -7175,10 +7082,10 @@ typedef PFNGLGETPROGRAMRESOURCEIVPROC =
       Uint32 program,
       Uint32 programInterface,
       Uint32 index,
-      Uint32 propCount,
+      Int32 propCount,
       Pointer<Uint32> props,
-      Uint32 count,
-      Pointer<Uint32> length,
+      Int32 count,
+      Pointer<Int32> length,
       Pointer<Int32> params,
     );
 
@@ -7210,16 +7117,16 @@ typedef PFNGLTEXBUFFERRANGEPROCDart =
       int target,
       int internalformat,
       int buffer,
-      Pointer<NativeType> offset,
-      Pointer<Uint32> size,
+      int offset,
+      int size,
     );
 typedef PFNGLTEXBUFFERRANGEPROC =
     Void Function(
       Uint32 target,
       Uint32 internalformat,
       Uint32 buffer,
-      Pointer<NativeType> offset,
-      Pointer<Uint32> size,
+      IntPtr offset,
+      IntPtr size,
     );
 
 // typedef void (APIENTRYP PFNGLTEXSTORAGE2DMULTISAMPLEPROC) (GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLboolean fixedsamplelocations)
@@ -7235,11 +7142,11 @@ typedef PFNGLTEXSTORAGE2DMULTISAMPLEPROCDart =
 typedef PFNGLTEXSTORAGE2DMULTISAMPLEPROC =
     Void Function(
       Uint32 target,
-      Uint32 samples,
+      Int32 samples,
       Uint32 internalformat,
-      Uint32 width,
-      Uint32 height,
-      Int32 fixedsamplelocations,
+      Int32 width,
+      Int32 height,
+      Uint8 fixedsamplelocations,
     );
 
 // typedef void (APIENTRYP PFNGLTEXSTORAGE3DMULTISAMPLEPROC) (GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedsamplelocations)
@@ -7256,12 +7163,12 @@ typedef PFNGLTEXSTORAGE3DMULTISAMPLEPROCDart =
 typedef PFNGLTEXSTORAGE3DMULTISAMPLEPROC =
     Void Function(
       Uint32 target,
-      Uint32 samples,
+      Int32 samples,
       Uint32 internalformat,
-      Uint32 width,
-      Uint32 height,
-      Uint32 depth,
-      Int32 fixedsamplelocations,
+      Int32 width,
+      Int32 height,
+      Int32 depth,
+      Uint8 fixedsamplelocations,
     );
 
 // typedef void (APIENTRYP PFNGLTEXTUREVIEWPROC) (GLuint texture, GLenum target, GLuint origtexture, GLenum internalformat, GLuint minlevel, GLuint numlevels, GLuint minlayer, GLuint numlayers)
@@ -7290,18 +7197,13 @@ typedef PFNGLTEXTUREVIEWPROC =
 
 // typedef void (APIENTRYP PFNGLBINDVERTEXBUFFERPROC) (GLuint bindingindex, GLuint buffer, GLintptr offset, GLsizei stride)
 typedef PFNGLBINDVERTEXBUFFERPROCDart =
-    void Function(
-      int bindingindex,
-      int buffer,
-      Pointer<NativeType> offset,
-      int stride,
-    );
+    void Function(int bindingindex, int buffer, int offset, int stride);
 typedef PFNGLBINDVERTEXBUFFERPROC =
     Void Function(
       Uint32 bindingindex,
       Uint32 buffer,
-      Pointer<NativeType> offset,
-      Uint32 stride,
+      IntPtr offset,
+      Int32 stride,
     );
 
 // typedef void (APIENTRYP PFNGLVERTEXATTRIBFORMATPROC) (GLuint attribindex, GLint size, GLenum type, GLboolean normalized, GLuint relativeoffset)
@@ -7318,7 +7220,7 @@ typedef PFNGLVERTEXATTRIBFORMATPROC =
       Uint32 attribindex,
       Int32 size,
       Uint32 type,
-      Int32 normalized,
+      Uint8 normalized,
       Uint32 relativeoffset,
     );
 
@@ -7371,9 +7273,9 @@ typedef PFNGLDEBUGMESSAGECONTROLPROC =
       Uint32 source,
       Uint32 type,
       Uint32 severity,
-      Uint32 count,
+      Int32 count,
       Pointer<Uint32> ids,
-      Int32 enabled,
+      Uint8 enabled,
     );
 
 // typedef void (APIENTRYP PFNGLDEBUGMESSAGEINSERTPROC) (GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar *buf)
@@ -7392,7 +7294,7 @@ typedef PFNGLDEBUGMESSAGEINSERTPROC =
       Uint32 type,
       Uint32 id,
       Uint32 severity,
-      Uint32 length,
+      Int32 length,
       Pointer<Utf8> buf,
     );
 
@@ -7400,12 +7302,12 @@ typedef PFNGLDEBUGMESSAGEINSERTPROC =
 typedef PFNGLDEBUGMESSAGECALLBACKPROCDart =
     void Function(
       Pointer<NativeFunction<GLDEBUGPROC>> callback,
-      Pointer<NativeType> userParam,
+      Pointer<Void> userParam,
     );
 typedef PFNGLDEBUGMESSAGECALLBACKPROC =
     Void Function(
       Pointer<NativeFunction<GLDEBUGPROC>> callback,
-      Pointer<NativeType> userParam,
+      Pointer<Void> userParam,
     );
 
 // typedef GLuint (APIENTRYP PFNGLGETDEBUGMESSAGELOGPROC) (GLuint count, GLsizei bufSize, GLenum *sources, GLenum *types, GLuint *ids, GLenum *severities, GLsizei *lengths, GLchar *messageLog)
@@ -7417,18 +7319,18 @@ typedef PFNGLGETDEBUGMESSAGELOGPROCDart =
       Pointer<Uint32> types,
       Pointer<Uint32> ids,
       Pointer<Uint32> severities,
-      Pointer<Uint32> lengths,
+      Pointer<Int32> lengths,
       Pointer<Int8> messageLog,
     );
 typedef PFNGLGETDEBUGMESSAGELOGPROC =
     Uint32 Function(
       Uint32 count,
-      Uint32 bufSize,
+      Int32 bufSize,
       Pointer<Uint32> sources,
       Pointer<Uint32> types,
       Pointer<Uint32> ids,
       Pointer<Uint32> severities,
-      Pointer<Uint32> lengths,
+      Pointer<Int32> lengths,
       Pointer<Int8> messageLog,
     );
 
@@ -7439,7 +7341,7 @@ typedef PFNGLPUSHDEBUGGROUPPROC =
     Void Function(
       Uint32 source,
       Uint32 id,
-      Uint32 length,
+      Int32 length,
       Pointer<Utf8> message,
     );
 
@@ -7454,7 +7356,7 @@ typedef PFNGLOBJECTLABELPROC =
     Void Function(
       Uint32 identifier,
       Uint32 name,
-      Uint32 length,
+      Int32 length,
       Pointer<Utf8> label,
     );
 
@@ -7464,55 +7366,45 @@ typedef PFNGLGETOBJECTLABELPROCDart =
       int identifier,
       int name,
       int bufSize,
-      Pointer<Uint32> length,
+      Pointer<Int32> length,
       Pointer<Int8> label,
     );
 typedef PFNGLGETOBJECTLABELPROC =
     Void Function(
       Uint32 identifier,
       Uint32 name,
-      Uint32 bufSize,
-      Pointer<Uint32> length,
+      Int32 bufSize,
+      Pointer<Int32> length,
       Pointer<Int8> label,
     );
 
 // typedef void (APIENTRYP PFNGLOBJECTPTRLABELPROC) (const void *ptr, GLsizei length, const GLchar *label)
 typedef PFNGLOBJECTPTRLABELPROCDart =
-    void Function(Pointer<NativeType> ptr, int length, Pointer<Utf8> label);
+    void Function(Pointer<Void> ptr, int length, Pointer<Utf8> label);
 typedef PFNGLOBJECTPTRLABELPROC =
-    Void Function(Pointer<NativeType> ptr, Uint32 length, Pointer<Utf8> label);
+    Void Function(Pointer<Void> ptr, Int32 length, Pointer<Utf8> label);
 
 // typedef void (APIENTRYP PFNGLGETOBJECTPTRLABELPROC) (const void *ptr, GLsizei bufSize, GLsizei *length, GLchar *label)
 typedef PFNGLGETOBJECTPTRLABELPROCDart =
     void Function(
-      Pointer<NativeType> ptr,
+      Pointer<Void> ptr,
       int bufSize,
-      Pointer<Uint32> length,
+      Pointer<Int32> length,
       Pointer<Int8> label,
     );
 typedef PFNGLGETOBJECTPTRLABELPROC =
     Void Function(
-      Pointer<NativeType> ptr,
-      Uint32 bufSize,
-      Pointer<Uint32> length,
+      Pointer<Void> ptr,
+      Int32 bufSize,
+      Pointer<Int32> length,
       Pointer<Int8> label,
     );
 
 // typedef void (APIENTRYP PFNGLBUFFERSTORAGEPROC) (GLenum target, GLsizeiptr size, const void *data, GLbitfield flags)
 typedef PFNGLBUFFERSTORAGEPROCDart =
-    void Function(
-      int target,
-      Pointer<Uint32> size,
-      Pointer<NativeType> data,
-      int flags,
-    );
+    void Function(int target, int size, Pointer<Void> data, int flags);
 typedef PFNGLBUFFERSTORAGEPROC =
-    Void Function(
-      Uint32 target,
-      Pointer<Uint32> size,
-      Pointer<NativeType> data,
-      Uint32 flags,
-    );
+    Void Function(Uint32 target, IntPtr size, Pointer<Void> data, Uint32 flags);
 
 // typedef void (APIENTRYP PFNGLCLEARTEXIMAGEPROC) (GLuint texture, GLint level, GLenum format, GLenum type, const void *data)
 typedef PFNGLCLEARTEXIMAGEPROCDart =
@@ -7521,7 +7413,7 @@ typedef PFNGLCLEARTEXIMAGEPROCDart =
       int level,
       int format,
       int type,
-      Pointer<NativeType> data,
+      Pointer<Void> data,
     );
 typedef PFNGLCLEARTEXIMAGEPROC =
     Void Function(
@@ -7529,7 +7421,7 @@ typedef PFNGLCLEARTEXIMAGEPROC =
       Int32 level,
       Uint32 format,
       Uint32 type,
-      Pointer<NativeType> data,
+      Pointer<Void> data,
     );
 
 // typedef void (APIENTRYP PFNGLCLEARTEXSUBIMAGEPROC) (GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const void *data)
@@ -7545,7 +7437,7 @@ typedef PFNGLCLEARTEXSUBIMAGEPROCDart =
       int depth,
       int format,
       int type,
-      Pointer<NativeType> data,
+      Pointer<Void> data,
     );
 typedef PFNGLCLEARTEXSUBIMAGEPROC =
     Void Function(
@@ -7554,12 +7446,12 @@ typedef PFNGLCLEARTEXSUBIMAGEPROC =
       Int32 xoffset,
       Int32 yoffset,
       Int32 zoffset,
-      Uint32 width,
-      Uint32 height,
-      Uint32 depth,
+      Int32 width,
+      Int32 height,
+      Int32 depth,
       Uint32 format,
       Uint32 type,
-      Pointer<NativeType> data,
+      Pointer<Void> data,
     );
 
 // typedef void (APIENTRYP PFNGLBINDBUFFERSBASEPROC) (GLenum target, GLuint first, GLsizei count, const GLuint *buffers)
@@ -7569,7 +7461,7 @@ typedef PFNGLBINDBUFFERSBASEPROC =
     Void Function(
       Uint32 target,
       Uint32 first,
-      Uint32 count,
+      Int32 count,
       Pointer<Uint32> buffers,
     );
 
@@ -7580,36 +7472,36 @@ typedef PFNGLBINDBUFFERSRANGEPROCDart =
       int first,
       int count,
       Pointer<Uint32> buffers,
-      Pointer<Pointer<NativeType>> offsets,
-      Pointer<Pointer<Uint32>> sizes,
+      Pointer<IntPtr> offsets,
+      Pointer<IntPtr> sizes,
     );
 typedef PFNGLBINDBUFFERSRANGEPROC =
     Void Function(
       Uint32 target,
       Uint32 first,
-      Uint32 count,
+      Int32 count,
       Pointer<Uint32> buffers,
-      Pointer<Pointer<NativeType>> offsets,
-      Pointer<Pointer<Uint32>> sizes,
+      Pointer<IntPtr> offsets,
+      Pointer<IntPtr> sizes,
     );
 
 // typedef void (APIENTRYP PFNGLBINDTEXTURESPROC) (GLuint first, GLsizei count, const GLuint *textures)
 typedef PFNGLBINDTEXTURESPROCDart =
     void Function(int first, int count, Pointer<Uint32> textures);
 typedef PFNGLBINDTEXTURESPROC =
-    Void Function(Uint32 first, Uint32 count, Pointer<Uint32> textures);
+    Void Function(Uint32 first, Int32 count, Pointer<Uint32> textures);
 
 // typedef void (APIENTRYP PFNGLBINDSAMPLERSPROC) (GLuint first, GLsizei count, const GLuint *samplers)
 typedef PFNGLBINDSAMPLERSPROCDart =
     void Function(int first, int count, Pointer<Uint32> samplers);
 typedef PFNGLBINDSAMPLERSPROC =
-    Void Function(Uint32 first, Uint32 count, Pointer<Uint32> samplers);
+    Void Function(Uint32 first, Int32 count, Pointer<Uint32> samplers);
 
 // typedef void (APIENTRYP PFNGLBINDIMAGETEXTURESPROC) (GLuint first, GLsizei count, const GLuint *textures)
 typedef PFNGLBINDIMAGETEXTURESPROCDart =
     void Function(int first, int count, Pointer<Uint32> textures);
 typedef PFNGLBINDIMAGETEXTURESPROC =
-    Void Function(Uint32 first, Uint32 count, Pointer<Uint32> textures);
+    Void Function(Uint32 first, Int32 count, Pointer<Uint32> textures);
 
 // typedef void (APIENTRYP PFNGLBINDVERTEXBUFFERSPROC) (GLuint first, GLsizei count, const GLuint *buffers, const GLintptr *offsets, const GLsizei *strides)
 typedef PFNGLBINDVERTEXBUFFERSPROCDart =
@@ -7617,16 +7509,16 @@ typedef PFNGLBINDVERTEXBUFFERSPROCDart =
       int first,
       int count,
       Pointer<Uint32> buffers,
-      Pointer<Pointer<NativeType>> offsets,
-      Pointer<Uint32> strides,
+      Pointer<IntPtr> offsets,
+      Pointer<Int32> strides,
     );
 typedef PFNGLBINDVERTEXBUFFERSPROC =
     Void Function(
       Uint32 first,
-      Uint32 count,
+      Int32 count,
       Pointer<Uint32> buffers,
-      Pointer<Pointer<NativeType>> offsets,
-      Pointer<Uint32> strides,
+      Pointer<IntPtr> offsets,
+      Pointer<Int32> strides,
     );
 
 // typedef void (APIENTRYP PFNGLCLIPCONTROLPROC) (GLenum origin, GLenum depth)
@@ -7637,7 +7529,7 @@ typedef PFNGLCLIPCONTROLPROC = Void Function(Uint32 origin, Uint32 depth);
 typedef PFNGLCREATETRANSFORMFEEDBACKSPROCDart =
     void Function(int n, Pointer<Uint32> ids);
 typedef PFNGLCREATETRANSFORMFEEDBACKSPROC =
-    Void Function(Uint32 n, Pointer<Uint32> ids);
+    Void Function(Int32 n, Pointer<Uint32> ids);
 
 // typedef void (APIENTRYP PFNGLTRANSFORMFEEDBACKBUFFERBASEPROC) (GLuint xfb, GLuint index, GLuint buffer)
 typedef PFNGLTRANSFORMFEEDBACKBUFFERBASEPROCDart =
@@ -7647,20 +7539,14 @@ typedef PFNGLTRANSFORMFEEDBACKBUFFERBASEPROC =
 
 // typedef void (APIENTRYP PFNGLTRANSFORMFEEDBACKBUFFERRANGEPROC) (GLuint xfb, GLuint index, GLuint buffer, GLintptr offset, GLsizeiptr size)
 typedef PFNGLTRANSFORMFEEDBACKBUFFERRANGEPROCDart =
-    void Function(
-      int xfb,
-      int index,
-      int buffer,
-      Pointer<NativeType> offset,
-      Pointer<Uint32> size,
-    );
+    void Function(int xfb, int index, int buffer, int offset, int size);
 typedef PFNGLTRANSFORMFEEDBACKBUFFERRANGEPROC =
     Void Function(
       Uint32 xfb,
       Uint32 index,
       Uint32 buffer,
-      Pointer<NativeType> offset,
-      Pointer<Uint32> size,
+      IntPtr offset,
+      IntPtr size,
     );
 
 // typedef void (APIENTRYP PFNGLGETTRANSFORMFEEDBACKIVPROC) (GLuint xfb, GLenum pname, GLint *param)
@@ -7685,54 +7571,29 @@ typedef Pfnglgettransformfeedbacki64Vproc =
 typedef PFNGLCREATEBUFFERSPROCDart =
     void Function(int n, Pointer<Uint32> buffers);
 typedef PFNGLCREATEBUFFERSPROC =
-    Void Function(Uint32 n, Pointer<Uint32> buffers);
+    Void Function(Int32 n, Pointer<Uint32> buffers);
 
 // typedef void (APIENTRYP PFNGLNAMEDBUFFERSTORAGEPROC) (GLuint buffer, GLsizeiptr size, const void *data, GLbitfield flags)
 typedef PFNGLNAMEDBUFFERSTORAGEPROCDart =
-    void Function(
-      int buffer,
-      Pointer<Uint32> size,
-      Pointer<NativeType> data,
-      int flags,
-    );
+    void Function(int buffer, int size, Pointer<Void> data, int flags);
 typedef PFNGLNAMEDBUFFERSTORAGEPROC =
-    Void Function(
-      Uint32 buffer,
-      Pointer<Uint32> size,
-      Pointer<NativeType> data,
-      Uint32 flags,
-    );
+    Void Function(Uint32 buffer, IntPtr size, Pointer<Void> data, Uint32 flags);
 
 // typedef void (APIENTRYP PFNGLNAMEDBUFFERDATAPROC) (GLuint buffer, GLsizeiptr size, const void *data, GLenum usage)
 typedef PFNGLNAMEDBUFFERDATAPROCDart =
-    void Function(
-      int buffer,
-      Pointer<Uint32> size,
-      Pointer<NativeType> data,
-      int usage,
-    );
+    void Function(int buffer, int size, Pointer<Void> data, int usage);
 typedef PFNGLNAMEDBUFFERDATAPROC =
-    Void Function(
-      Uint32 buffer,
-      Pointer<Uint32> size,
-      Pointer<NativeType> data,
-      Uint32 usage,
-    );
+    Void Function(Uint32 buffer, IntPtr size, Pointer<Void> data, Uint32 usage);
 
 // typedef void (APIENTRYP PFNGLNAMEDBUFFERSUBDATAPROC) (GLuint buffer, GLintptr offset, GLsizeiptr size, const void *data)
 typedef PFNGLNAMEDBUFFERSUBDATAPROCDart =
-    void Function(
-      int buffer,
-      Pointer<NativeType> offset,
-      Pointer<Uint32> size,
-      Pointer<NativeType> data,
-    );
+    void Function(int buffer, int offset, int size, Pointer<Void> data);
 typedef PFNGLNAMEDBUFFERSUBDATAPROC =
     Void Function(
       Uint32 buffer,
-      Pointer<NativeType> offset,
-      Pointer<Uint32> size,
-      Pointer<NativeType> data,
+      IntPtr offset,
+      IntPtr size,
+      Pointer<Void> data,
     );
 
 // typedef void (APIENTRYP PFNGLCOPYNAMEDBUFFERSUBDATAPROC) (GLuint readBuffer, GLuint writeBuffer, GLintptr readOffset, GLintptr writeOffset, GLsizeiptr size)
@@ -7740,17 +7601,17 @@ typedef PFNGLCOPYNAMEDBUFFERSUBDATAPROCDart =
     void Function(
       int readBuffer,
       int writeBuffer,
-      Pointer<NativeType> readOffset,
-      Pointer<NativeType> writeOffset,
-      Pointer<Uint32> size,
+      int readOffset,
+      int writeOffset,
+      int size,
     );
 typedef PFNGLCOPYNAMEDBUFFERSUBDATAPROC =
     Void Function(
       Uint32 readBuffer,
       Uint32 writeBuffer,
-      Pointer<NativeType> readOffset,
-      Pointer<NativeType> writeOffset,
-      Pointer<Uint32> size,
+      IntPtr readOffset,
+      IntPtr writeOffset,
+      IntPtr size,
     );
 
 // typedef void (APIENTRYP PFNGLCLEARNAMEDBUFFERDATAPROC) (GLuint buffer, GLenum internalformat, GLenum format, GLenum type, const void *data)
@@ -7760,7 +7621,7 @@ typedef PFNGLCLEARNAMEDBUFFERDATAPROCDart =
       int internalformat,
       int format,
       int type,
-      Pointer<NativeType> data,
+      Pointer<Void> data,
     );
 typedef PFNGLCLEARNAMEDBUFFERDATAPROC =
     Void Function(
@@ -7768,7 +7629,7 @@ typedef PFNGLCLEARNAMEDBUFFERDATAPROC =
       Uint32 internalformat,
       Uint32 format,
       Uint32 type,
-      Pointer<NativeType> data,
+      Pointer<Void> data,
     );
 
 // typedef void (APIENTRYP PFNGLCLEARNAMEDBUFFERSUBDATAPROC) (GLuint buffer, GLenum internalformat, GLintptr offset, GLsizeiptr size, GLenum format, GLenum type, const void *data)
@@ -7776,62 +7637,49 @@ typedef PFNGLCLEARNAMEDBUFFERSUBDATAPROCDart =
     void Function(
       int buffer,
       int internalformat,
-      Pointer<NativeType> offset,
-      Pointer<Uint32> size,
+      int offset,
+      int size,
       int format,
       int type,
-      Pointer<NativeType> data,
+      Pointer<Void> data,
     );
 typedef PFNGLCLEARNAMEDBUFFERSUBDATAPROC =
     Void Function(
       Uint32 buffer,
       Uint32 internalformat,
-      Pointer<NativeType> offset,
-      Pointer<Uint32> size,
+      IntPtr offset,
+      IntPtr size,
       Uint32 format,
       Uint32 type,
-      Pointer<NativeType> data,
+      Pointer<Void> data,
     );
 
 // typedef void *(APIENTRYP PFNGLMAPNAMEDBUFFERPROC) (GLuint buffer, GLenum access)
 typedef PFNGLMAPNAMEDBUFFERPROCDart =
-    Pointer<NativeType> Function(int buffer, int access);
+    Pointer<Void> Function(int buffer, int access);
 typedef PFNGLMAPNAMEDBUFFERPROC =
-    Pointer<NativeType> Function(Uint32 buffer, Uint32 access);
+    Pointer<Void> Function(Uint32 buffer, Uint32 access);
 
 // typedef void *(APIENTRYP PFNGLMAPNAMEDBUFFERRANGEPROC) (GLuint buffer, GLintptr offset, GLsizeiptr length, GLbitfield access)
 typedef PFNGLMAPNAMEDBUFFERRANGEPROCDart =
-    Pointer<NativeType> Function(
-      int buffer,
-      Pointer<NativeType> offset,
-      Pointer<Uint32> length,
-      int access,
-    );
+    Pointer<Void> Function(int buffer, int offset, int length, int access);
 typedef PFNGLMAPNAMEDBUFFERRANGEPROC =
-    Pointer<NativeType> Function(
+    Pointer<Void> Function(
       Uint32 buffer,
-      Pointer<NativeType> offset,
-      Pointer<Uint32> length,
+      IntPtr offset,
+      IntPtr length,
       Uint32 access,
     );
 
 // typedef GLboolean (APIENTRYP PFNGLUNMAPNAMEDBUFFERPROC) (GLuint buffer)
 typedef PFNGLUNMAPNAMEDBUFFERPROCDart = int Function(int buffer);
-typedef PFNGLUNMAPNAMEDBUFFERPROC = Int32 Function(Uint32 buffer);
+typedef PFNGLUNMAPNAMEDBUFFERPROC = Uint8 Function(Uint32 buffer);
 
 // typedef void (APIENTRYP PFNGLFLUSHMAPPEDNAMEDBUFFERRANGEPROC) (GLuint buffer, GLintptr offset, GLsizeiptr length)
 typedef PFNGLFLUSHMAPPEDNAMEDBUFFERRANGEPROCDart =
-    void Function(
-      int buffer,
-      Pointer<NativeType> offset,
-      Pointer<Uint32> length,
-    );
+    void Function(int buffer, int offset, int length);
 typedef PFNGLFLUSHMAPPEDNAMEDBUFFERRANGEPROC =
-    Void Function(
-      Uint32 buffer,
-      Pointer<NativeType> offset,
-      Pointer<Uint32> length,
-    );
+    Void Function(Uint32 buffer, IntPtr offset, IntPtr length);
 
 // typedef void (APIENTRYP PFNGLGETNAMEDBUFFERPARAMETERIVPROC) (GLuint buffer, GLenum pname, GLint *params)
 typedef PFNGLGETNAMEDBUFFERPARAMETERIVPROCDart =
@@ -7847,35 +7695,26 @@ typedef PFNGLGETNAMEDBUFFERPARAMETERI64VPROC =
 
 // typedef void (APIENTRYP PFNGLGETNAMEDBUFFERPOINTERVPROC) (GLuint buffer, GLenum pname, void **params)
 typedef PFNGLGETNAMEDBUFFERPOINTERVPROCDart =
-    void Function(int buffer, int pname, Pointer<Pointer<NativeType>> params);
+    void Function(int buffer, int pname, Pointer<Pointer<Void>> params);
 typedef PFNGLGETNAMEDBUFFERPOINTERVPROC =
-    Void Function(
-      Uint32 buffer,
-      Uint32 pname,
-      Pointer<Pointer<NativeType>> params,
-    );
+    Void Function(Uint32 buffer, Uint32 pname, Pointer<Pointer<Void>> params);
 
 // typedef void (APIENTRYP PFNGLGETNAMEDBUFFERSUBDATAPROC) (GLuint buffer, GLintptr offset, GLsizeiptr size, void *data)
 typedef PFNGLGETNAMEDBUFFERSUBDATAPROCDart =
-    void Function(
-      int buffer,
-      Pointer<NativeType> offset,
-      Pointer<Uint32> size,
-      Pointer<NativeType> data,
-    );
+    void Function(int buffer, int offset, int size, Pointer<Void> data);
 typedef PFNGLGETNAMEDBUFFERSUBDATAPROC =
     Void Function(
       Uint32 buffer,
-      Pointer<NativeType> offset,
-      Pointer<Uint32> size,
-      Pointer<NativeType> data,
+      IntPtr offset,
+      IntPtr size,
+      Pointer<Void> data,
     );
 
 // typedef void (APIENTRYP PFNGLCREATEFRAMEBUFFERSPROC) (GLsizei n, GLuint *framebuffers)
 typedef PFNGLCREATEFRAMEBUFFERSPROCDart =
     void Function(int n, Pointer<Uint32> framebuffers);
 typedef PFNGLCREATEFRAMEBUFFERSPROC =
-    Void Function(Uint32 n, Pointer<Uint32> framebuffers);
+    Void Function(Int32 n, Pointer<Uint32> framebuffers);
 
 // typedef void (APIENTRYP PFNGLNAMEDFRAMEBUFFERRENDERBUFFERPROC) (GLuint framebuffer, GLenum attachment, GLenum renderbuffertarget, GLuint renderbuffer)
 typedef PFNGLNAMEDFRAMEBUFFERRENDERBUFFERPROCDart =
@@ -7938,7 +7777,7 @@ typedef PFNGLNAMEDFRAMEBUFFERDRAWBUFFERPROC =
 typedef PFNGLNAMEDFRAMEBUFFERDRAWBUFFERSPROCDart =
     void Function(int framebuffer, int n, Pointer<Uint32> bufs);
 typedef PFNGLNAMEDFRAMEBUFFERDRAWBUFFERSPROC =
-    Void Function(Uint32 framebuffer, Uint32 n, Pointer<Uint32> bufs);
+    Void Function(Uint32 framebuffer, Int32 n, Pointer<Uint32> bufs);
 
 // typedef void (APIENTRYP PFNGLNAMEDFRAMEBUFFERREADBUFFERPROC) (GLuint framebuffer, GLenum src)
 typedef PFNGLNAMEDFRAMEBUFFERREADBUFFERPROCDart =
@@ -7956,7 +7795,7 @@ typedef PFNGLINVALIDATENAMEDFRAMEBUFFERDATAPROCDart =
 typedef PFNGLINVALIDATENAMEDFRAMEBUFFERDATAPROC =
     Void Function(
       Uint32 framebuffer,
-      Uint32 numAttachments,
+      Int32 numAttachments,
       Pointer<Uint32> attachments,
     );
 
@@ -7974,12 +7813,12 @@ typedef PFNGLINVALIDATENAMEDFRAMEBUFFERSUBDATAPROCDart =
 typedef PFNGLINVALIDATENAMEDFRAMEBUFFERSUBDATAPROC =
     Void Function(
       Uint32 framebuffer,
-      Uint32 numAttachments,
+      Int32 numAttachments,
       Pointer<Uint32> attachments,
       Int32 x,
       Int32 y,
-      Uint32 width,
-      Uint32 height,
+      Int32 width,
+      Int32 height,
     );
 
 // typedef void (APIENTRYP PFNGLCLEARNAMEDFRAMEBUFFERIVPROC) (GLuint framebuffer, GLenum buffer, GLint drawbuffer, const GLint *value)
@@ -8112,7 +7951,7 @@ typedef PFNGLGETNAMEDFRAMEBUFFERATTACHMENTPARAMETERIVPROC =
 typedef PFNGLCREATERENDERBUFFERSPROCDart =
     void Function(int n, Pointer<Uint32> renderbuffers);
 typedef PFNGLCREATERENDERBUFFERSPROC =
-    Void Function(Uint32 n, Pointer<Uint32> renderbuffers);
+    Void Function(Int32 n, Pointer<Uint32> renderbuffers);
 
 // typedef void (APIENTRYP PFNGLNAMEDRENDERBUFFERSTORAGEPROC) (GLuint renderbuffer, GLenum internalformat, GLsizei width, GLsizei height)
 typedef PFNGLNAMEDRENDERBUFFERSTORAGEPROCDart =
@@ -8121,8 +7960,8 @@ typedef PFNGLNAMEDRENDERBUFFERSTORAGEPROC =
     Void Function(
       Uint32 renderbuffer,
       Uint32 internalformat,
-      Uint32 width,
-      Uint32 height,
+      Int32 width,
+      Int32 height,
     );
 
 // typedef void (APIENTRYP PFNGLNAMEDRENDERBUFFERSTORAGEMULTISAMPLEPROC) (GLuint renderbuffer, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height)
@@ -8137,10 +7976,10 @@ typedef PFNGLNAMEDRENDERBUFFERSTORAGEMULTISAMPLEPROCDart =
 typedef PFNGLNAMEDRENDERBUFFERSTORAGEMULTISAMPLEPROC =
     Void Function(
       Uint32 renderbuffer,
-      Uint32 samples,
+      Int32 samples,
       Uint32 internalformat,
-      Uint32 width,
-      Uint32 height,
+      Int32 width,
+      Int32 height,
     );
 
 // typedef void (APIENTRYP PFNGLGETNAMEDRENDERBUFFERPARAMETERIVPROC) (GLuint renderbuffer, GLenum pname, GLint *params)
@@ -8153,7 +7992,7 @@ typedef PFNGLGETNAMEDRENDERBUFFERPARAMETERIVPROC =
 typedef PFNGLCREATETEXTURESPROCDart =
     void Function(int target, int n, Pointer<Uint32> textures);
 typedef PFNGLCREATETEXTURESPROC =
-    Void Function(Uint32 target, Uint32 n, Pointer<Uint32> textures);
+    Void Function(Uint32 target, Int32 n, Pointer<Uint32> textures);
 
 // typedef void (APIENTRYP PFNGLTEXTUREBUFFERPROC) (GLuint texture, GLenum internalformat, GLuint buffer)
 typedef PFNGLTEXTUREBUFFERPROCDart =
@@ -8167,16 +8006,16 @@ typedef PFNGLTEXTUREBUFFERRANGEPROCDart =
       int texture,
       int internalformat,
       int buffer,
-      Pointer<NativeType> offset,
-      Pointer<Uint32> size,
+      int offset,
+      int size,
     );
 typedef PFNGLTEXTUREBUFFERRANGEPROC =
     Void Function(
       Uint32 texture,
       Uint32 internalformat,
       Uint32 buffer,
-      Pointer<NativeType> offset,
-      Pointer<Uint32> size,
+      IntPtr offset,
+      IntPtr size,
     );
 
 // typedef void (APIENTRYP PFNGLTEXTURESTORAGE1DPROC) (GLuint texture, GLsizei levels, GLenum internalformat, GLsizei width)
@@ -8185,9 +8024,9 @@ typedef PFNGLTEXTURESTORAGE1DPROCDart =
 typedef PFNGLTEXTURESTORAGE1DPROC =
     Void Function(
       Uint32 texture,
-      Uint32 levels,
+      Int32 levels,
       Uint32 internalformat,
-      Uint32 width,
+      Int32 width,
     );
 
 // typedef void (APIENTRYP PFNGLTEXTURESTORAGE2DPROC) (GLuint texture, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height)
@@ -8202,10 +8041,10 @@ typedef PFNGLTEXTURESTORAGE2DPROCDart =
 typedef PFNGLTEXTURESTORAGE2DPROC =
     Void Function(
       Uint32 texture,
-      Uint32 levels,
+      Int32 levels,
       Uint32 internalformat,
-      Uint32 width,
-      Uint32 height,
+      Int32 width,
+      Int32 height,
     );
 
 // typedef void (APIENTRYP PFNGLTEXTURESTORAGE3DPROC) (GLuint texture, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth)
@@ -8221,11 +8060,11 @@ typedef PFNGLTEXTURESTORAGE3DPROCDart =
 typedef PFNGLTEXTURESTORAGE3DPROC =
     Void Function(
       Uint32 texture,
-      Uint32 levels,
+      Int32 levels,
       Uint32 internalformat,
-      Uint32 width,
-      Uint32 height,
-      Uint32 depth,
+      Int32 width,
+      Int32 height,
+      Int32 depth,
     );
 
 // typedef void (APIENTRYP PFNGLTEXTURESTORAGE2DMULTISAMPLEPROC) (GLuint texture, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLboolean fixedsamplelocations)
@@ -8241,11 +8080,11 @@ typedef PFNGLTEXTURESTORAGE2DMULTISAMPLEPROCDart =
 typedef PFNGLTEXTURESTORAGE2DMULTISAMPLEPROC =
     Void Function(
       Uint32 texture,
-      Uint32 samples,
+      Int32 samples,
       Uint32 internalformat,
-      Uint32 width,
-      Uint32 height,
-      Int32 fixedsamplelocations,
+      Int32 width,
+      Int32 height,
+      Uint8 fixedsamplelocations,
     );
 
 // typedef void (APIENTRYP PFNGLTEXTURESTORAGE3DMULTISAMPLEPROC) (GLuint texture, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedsamplelocations)
@@ -8262,12 +8101,12 @@ typedef PFNGLTEXTURESTORAGE3DMULTISAMPLEPROCDart =
 typedef PFNGLTEXTURESTORAGE3DMULTISAMPLEPROC =
     Void Function(
       Uint32 texture,
-      Uint32 samples,
+      Int32 samples,
       Uint32 internalformat,
-      Uint32 width,
-      Uint32 height,
-      Uint32 depth,
-      Int32 fixedsamplelocations,
+      Int32 width,
+      Int32 height,
+      Int32 depth,
+      Uint8 fixedsamplelocations,
     );
 
 // typedef void (APIENTRYP PFNGLTEXTURESUBIMAGE1DPROC) (GLuint texture, GLint level, GLint xoffset, GLsizei width, GLenum format, GLenum type, const void *pixels)
@@ -8279,17 +8118,17 @@ typedef PFNGLTEXTURESUBIMAGE1DPROCDart =
       int width,
       int format,
       int type,
-      Pointer<NativeType> pixels,
+      Pointer<Void> pixels,
     );
 typedef PFNGLTEXTURESUBIMAGE1DPROC =
     Void Function(
       Uint32 texture,
       Int32 level,
       Int32 xoffset,
-      Uint32 width,
+      Int32 width,
       Uint32 format,
       Uint32 type,
-      Pointer<NativeType> pixels,
+      Pointer<Void> pixels,
     );
 
 // typedef void (APIENTRYP PFNGLTEXTURESUBIMAGE2DPROC) (GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const void *pixels)
@@ -8303,7 +8142,7 @@ typedef PFNGLTEXTURESUBIMAGE2DPROCDart =
       int height,
       int format,
       int type,
-      Pointer<NativeType> pixels,
+      Pointer<Void> pixels,
     );
 typedef PFNGLTEXTURESUBIMAGE2DPROC =
     Void Function(
@@ -8311,11 +8150,11 @@ typedef PFNGLTEXTURESUBIMAGE2DPROC =
       Int32 level,
       Int32 xoffset,
       Int32 yoffset,
-      Uint32 width,
-      Uint32 height,
+      Int32 width,
+      Int32 height,
       Uint32 format,
       Uint32 type,
-      Pointer<NativeType> pixels,
+      Pointer<Void> pixels,
     );
 
 // typedef void (APIENTRYP PFNGLTEXTURESUBIMAGE3DPROC) (GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const void *pixels)
@@ -8331,7 +8170,7 @@ typedef PFNGLTEXTURESUBIMAGE3DPROCDart =
       int depth,
       int format,
       int type,
-      Pointer<NativeType> pixels,
+      Pointer<Void> pixels,
     );
 typedef PFNGLTEXTURESUBIMAGE3DPROC =
     Void Function(
@@ -8340,12 +8179,12 @@ typedef PFNGLTEXTURESUBIMAGE3DPROC =
       Int32 xoffset,
       Int32 yoffset,
       Int32 zoffset,
-      Uint32 width,
-      Uint32 height,
-      Uint32 depth,
+      Int32 width,
+      Int32 height,
+      Int32 depth,
       Uint32 format,
       Uint32 type,
-      Pointer<NativeType> pixels,
+      Pointer<Void> pixels,
     );
 
 // typedef void (APIENTRYP PFNGLCOMPRESSEDTEXTURESUBIMAGE1DPROC) (GLuint texture, GLint level, GLint xoffset, GLsizei width, GLenum format, GLsizei imageSize, const void *data)
@@ -8357,17 +8196,17 @@ typedef PFNGLCOMPRESSEDTEXTURESUBIMAGE1DPROCDart =
       int width,
       int format,
       int imageSize,
-      Pointer<NativeType> data,
+      Pointer<Void> data,
     );
 typedef PFNGLCOMPRESSEDTEXTURESUBIMAGE1DPROC =
     Void Function(
       Uint32 texture,
       Int32 level,
       Int32 xoffset,
-      Uint32 width,
+      Int32 width,
       Uint32 format,
-      Uint32 imageSize,
-      Pointer<NativeType> data,
+      Int32 imageSize,
+      Pointer<Void> data,
     );
 
 // typedef void (APIENTRYP PFNGLCOMPRESSEDTEXTURESUBIMAGE2DPROC) (GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLsizei imageSize, const void *data)
@@ -8381,7 +8220,7 @@ typedef PFNGLCOMPRESSEDTEXTURESUBIMAGE2DPROCDart =
       int height,
       int format,
       int imageSize,
-      Pointer<NativeType> data,
+      Pointer<Void> data,
     );
 typedef PFNGLCOMPRESSEDTEXTURESUBIMAGE2DPROC =
     Void Function(
@@ -8389,11 +8228,11 @@ typedef PFNGLCOMPRESSEDTEXTURESUBIMAGE2DPROC =
       Int32 level,
       Int32 xoffset,
       Int32 yoffset,
-      Uint32 width,
-      Uint32 height,
+      Int32 width,
+      Int32 height,
       Uint32 format,
-      Uint32 imageSize,
-      Pointer<NativeType> data,
+      Int32 imageSize,
+      Pointer<Void> data,
     );
 
 // typedef void (APIENTRYP PFNGLCOMPRESSEDTEXTURESUBIMAGE3DPROC) (GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLsizei imageSize, const void *data)
@@ -8409,7 +8248,7 @@ typedef PFNGLCOMPRESSEDTEXTURESUBIMAGE3DPROCDart =
       int depth,
       int format,
       int imageSize,
-      Pointer<NativeType> data,
+      Pointer<Void> data,
     );
 typedef PFNGLCOMPRESSEDTEXTURESUBIMAGE3DPROC =
     Void Function(
@@ -8418,12 +8257,12 @@ typedef PFNGLCOMPRESSEDTEXTURESUBIMAGE3DPROC =
       Int32 xoffset,
       Int32 yoffset,
       Int32 zoffset,
-      Uint32 width,
-      Uint32 height,
-      Uint32 depth,
+      Int32 width,
+      Int32 height,
+      Int32 depth,
       Uint32 format,
-      Uint32 imageSize,
-      Pointer<NativeType> data,
+      Int32 imageSize,
+      Pointer<Void> data,
     );
 
 // typedef void (APIENTRYP PFNGLCOPYTEXTURESUBIMAGE1DPROC) (GLuint texture, GLint level, GLint xoffset, GLint x, GLint y, GLsizei width)
@@ -8436,7 +8275,7 @@ typedef PFNGLCOPYTEXTURESUBIMAGE1DPROC =
       Int32 xoffset,
       Int32 x,
       Int32 y,
-      Uint32 width,
+      Int32 width,
     );
 
 // typedef void (APIENTRYP PFNGLCOPYTEXTURESUBIMAGE2DPROC) (GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint x, GLint y, GLsizei width, GLsizei height)
@@ -8459,8 +8298,8 @@ typedef PFNGLCOPYTEXTURESUBIMAGE2DPROC =
       Int32 yoffset,
       Int32 x,
       Int32 y,
-      Uint32 width,
-      Uint32 height,
+      Int32 width,
+      Int32 height,
     );
 
 // typedef void (APIENTRYP PFNGLCOPYTEXTURESUBIMAGE3DPROC) (GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLint x, GLint y, GLsizei width, GLsizei height)
@@ -8485,8 +8324,8 @@ typedef PFNGLCOPYTEXTURESUBIMAGE3DPROC =
       Int32 zoffset,
       Int32 x,
       Int32 y,
-      Uint32 width,
-      Uint32 height,
+      Int32 width,
+      Int32 height,
     );
 
 // typedef void (APIENTRYP PFNGLTEXTUREPARAMETERFPROC) (GLuint texture, GLenum pname, GLfloat param)
@@ -8541,7 +8380,7 @@ typedef PFNGLGETTEXTUREIMAGEPROCDart =
       int format,
       int type,
       int bufSize,
-      Pointer<NativeType> pixels,
+      Pointer<Void> pixels,
     );
 typedef PFNGLGETTEXTUREIMAGEPROC =
     Void Function(
@@ -8549,24 +8388,19 @@ typedef PFNGLGETTEXTUREIMAGEPROC =
       Int32 level,
       Uint32 format,
       Uint32 type,
-      Uint32 bufSize,
-      Pointer<NativeType> pixels,
+      Int32 bufSize,
+      Pointer<Void> pixels,
     );
 
 // typedef void (APIENTRYP PFNGLGETCOMPRESSEDTEXTUREIMAGEPROC) (GLuint texture, GLint level, GLsizei bufSize, void *pixels)
 typedef PFNGLGETCOMPRESSEDTEXTUREIMAGEPROCDart =
-    void Function(
-      int texture,
-      int level,
-      int bufSize,
-      Pointer<NativeType> pixels,
-    );
+    void Function(int texture, int level, int bufSize, Pointer<Void> pixels);
 typedef PFNGLGETCOMPRESSEDTEXTUREIMAGEPROC =
     Void Function(
       Uint32 texture,
       Int32 level,
-      Uint32 bufSize,
-      Pointer<NativeType> pixels,
+      Int32 bufSize,
+      Pointer<Void> pixels,
     );
 
 // typedef void (APIENTRYP PFNGLGETTEXTURELEVELPARAMETERFVPROC) (GLuint texture, GLint level, GLenum pname, GLfloat *params)
@@ -8619,7 +8453,7 @@ typedef PFNGLGETTEXTUREPARAMETERIVPROC =
 typedef PFNGLCREATEVERTEXARRAYSPROCDart =
     void Function(int n, Pointer<Uint32> arrays);
 typedef PFNGLCREATEVERTEXARRAYSPROC =
-    Void Function(Uint32 n, Pointer<Uint32> arrays);
+    Void Function(Int32 n, Pointer<Uint32> arrays);
 
 // typedef void (APIENTRYP PFNGLDISABLEVERTEXARRAYATTRIBPROC) (GLuint vaobj, GLuint index)
 typedef PFNGLDISABLEVERTEXARRAYATTRIBPROCDart =
@@ -8645,7 +8479,7 @@ typedef PFNGLVERTEXARRAYVERTEXBUFFERPROCDart =
       int vaobj,
       int bindingindex,
       int buffer,
-      Pointer<NativeType> offset,
+      int offset,
       int stride,
     );
 typedef PFNGLVERTEXARRAYVERTEXBUFFERPROC =
@@ -8653,8 +8487,8 @@ typedef PFNGLVERTEXARRAYVERTEXBUFFERPROC =
       Uint32 vaobj,
       Uint32 bindingindex,
       Uint32 buffer,
-      Pointer<NativeType> offset,
-      Uint32 stride,
+      IntPtr offset,
+      Int32 stride,
     );
 
 // typedef void (APIENTRYP PFNGLVERTEXARRAYVERTEXBUFFERSPROC) (GLuint vaobj, GLuint first, GLsizei count, const GLuint *buffers, const GLintptr *offsets, const GLsizei *strides)
@@ -8664,17 +8498,17 @@ typedef PFNGLVERTEXARRAYVERTEXBUFFERSPROCDart =
       int first,
       int count,
       Pointer<Uint32> buffers,
-      Pointer<Pointer<NativeType>> offsets,
-      Pointer<Uint32> strides,
+      Pointer<IntPtr> offsets,
+      Pointer<Int32> strides,
     );
 typedef PFNGLVERTEXARRAYVERTEXBUFFERSPROC =
     Void Function(
       Uint32 vaobj,
       Uint32 first,
-      Uint32 count,
+      Int32 count,
       Pointer<Uint32> buffers,
-      Pointer<Pointer<NativeType>> offsets,
-      Pointer<Uint32> strides,
+      Pointer<IntPtr> offsets,
+      Pointer<Int32> strides,
     );
 
 // typedef void (APIENTRYP PFNGLVERTEXARRAYATTRIBBINDINGPROC) (GLuint vaobj, GLuint attribindex, GLuint bindingindex)
@@ -8699,7 +8533,7 @@ typedef PFNGLVERTEXARRAYATTRIBFORMATPROC =
       Uint32 attribindex,
       Int32 size,
       Uint32 type,
-      Int32 normalized,
+      Uint8 normalized,
       Uint32 relativeoffset,
     );
 
@@ -8777,63 +8611,43 @@ typedef PFNGLGETVERTEXARRAYINDEXED64IVPROC =
 typedef PFNGLCREATESAMPLERSPROCDart =
     void Function(int n, Pointer<Uint32> samplers);
 typedef PFNGLCREATESAMPLERSPROC =
-    Void Function(Uint32 n, Pointer<Uint32> samplers);
+    Void Function(Int32 n, Pointer<Uint32> samplers);
 
 // typedef void (APIENTRYP PFNGLCREATEPROGRAMPIPELINESPROC) (GLsizei n, GLuint *pipelines)
 typedef PFNGLCREATEPROGRAMPIPELINESPROCDart =
     void Function(int n, Pointer<Uint32> pipelines);
 typedef PFNGLCREATEPROGRAMPIPELINESPROC =
-    Void Function(Uint32 n, Pointer<Uint32> pipelines);
+    Void Function(Int32 n, Pointer<Uint32> pipelines);
 
 // typedef void (APIENTRYP PFNGLCREATEQUERIESPROC) (GLenum target, GLsizei n, GLuint *ids)
 typedef PFNGLCREATEQUERIESPROCDart =
     void Function(int target, int n, Pointer<Uint32> ids);
 typedef PFNGLCREATEQUERIESPROC =
-    Void Function(Uint32 target, Uint32 n, Pointer<Uint32> ids);
+    Void Function(Uint32 target, Int32 n, Pointer<Uint32> ids);
 
 // typedef void (APIENTRYP PFNGLGETQUERYBUFFEROBJECTI64VPROC) (GLuint id, GLuint buffer, GLenum pname, GLintptr offset)
 typedef PFNGLGETQUERYBUFFEROBJECTI64VPROCDart =
-    void Function(int id, int buffer, int pname, Pointer<NativeType> offset);
+    void Function(int id, int buffer, int pname, int offset);
 typedef PFNGLGETQUERYBUFFEROBJECTI64VPROC =
-    Void Function(
-      Uint32 id,
-      Uint32 buffer,
-      Uint32 pname,
-      Pointer<NativeType> offset,
-    );
+    Void Function(Uint32 id, Uint32 buffer, Uint32 pname, IntPtr offset);
 
 // typedef void (APIENTRYP PFNGLGETQUERYBUFFEROBJECTIVPROC) (GLuint id, GLuint buffer, GLenum pname, GLintptr offset)
 typedef PFNGLGETQUERYBUFFEROBJECTIVPROCDart =
-    void Function(int id, int buffer, int pname, Pointer<NativeType> offset);
+    void Function(int id, int buffer, int pname, int offset);
 typedef PFNGLGETQUERYBUFFEROBJECTIVPROC =
-    Void Function(
-      Uint32 id,
-      Uint32 buffer,
-      Uint32 pname,
-      Pointer<NativeType> offset,
-    );
+    Void Function(Uint32 id, Uint32 buffer, Uint32 pname, IntPtr offset);
 
 // typedef void (APIENTRYP PFNGLGETQUERYBUFFEROBJECTUI64VPROC) (GLuint id, GLuint buffer, GLenum pname, GLintptr offset)
 typedef PFNGLGETQUERYBUFFEROBJECTUI64VPROCDart =
-    void Function(int id, int buffer, int pname, Pointer<NativeType> offset);
+    void Function(int id, int buffer, int pname, int offset);
 typedef PFNGLGETQUERYBUFFEROBJECTUI64VPROC =
-    Void Function(
-      Uint32 id,
-      Uint32 buffer,
-      Uint32 pname,
-      Pointer<NativeType> offset,
-    );
+    Void Function(Uint32 id, Uint32 buffer, Uint32 pname, IntPtr offset);
 
 // typedef void (APIENTRYP PFNGLGETQUERYBUFFEROBJECTUIVPROC) (GLuint id, GLuint buffer, GLenum pname, GLintptr offset)
 typedef PFNGLGETQUERYBUFFEROBJECTUIVPROCDart =
-    void Function(int id, int buffer, int pname, Pointer<NativeType> offset);
+    void Function(int id, int buffer, int pname, int offset);
 typedef PFNGLGETQUERYBUFFEROBJECTUIVPROC =
-    Void Function(
-      Uint32 id,
-      Uint32 buffer,
-      Uint32 pname,
-      Pointer<NativeType> offset,
-    );
+    Void Function(Uint32 id, Uint32 buffer, Uint32 pname, IntPtr offset);
 
 // typedef void (APIENTRYP PFNGLMEMORYBARRIERBYREGIONPROC) (GLbitfield barriers)
 typedef PFNGLMEMORYBARRIERBYREGIONPROCDart = void Function(int barriers);
@@ -8853,7 +8667,7 @@ typedef PFNGLGETTEXTURESUBIMAGEPROCDart =
       int format,
       int type,
       int bufSize,
-      Pointer<NativeType> pixels,
+      Pointer<Void> pixels,
     );
 typedef PFNGLGETTEXTURESUBIMAGEPROC =
     Void Function(
@@ -8862,13 +8676,13 @@ typedef PFNGLGETTEXTURESUBIMAGEPROC =
       Int32 xoffset,
       Int32 yoffset,
       Int32 zoffset,
-      Uint32 width,
-      Uint32 height,
-      Uint32 depth,
+      Int32 width,
+      Int32 height,
+      Int32 depth,
       Uint32 format,
       Uint32 type,
-      Uint32 bufSize,
-      Pointer<NativeType> pixels,
+      Int32 bufSize,
+      Pointer<Void> pixels,
     );
 
 // typedef void (APIENTRYP PFNGLGETCOMPRESSEDTEXTURESUBIMAGEPROC) (GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLsizei bufSize, void *pixels)
@@ -8883,7 +8697,7 @@ typedef PFNGLGETCOMPRESSEDTEXTURESUBIMAGEPROCDart =
       int height,
       int depth,
       int bufSize,
-      Pointer<NativeType> pixels,
+      Pointer<Void> pixels,
     );
 typedef PFNGLGETCOMPRESSEDTEXTURESUBIMAGEPROC =
     Void Function(
@@ -8892,11 +8706,11 @@ typedef PFNGLGETCOMPRESSEDTEXTURESUBIMAGEPROC =
       Int32 xoffset,
       Int32 yoffset,
       Int32 zoffset,
-      Uint32 width,
-      Uint32 height,
-      Uint32 depth,
-      Uint32 bufSize,
-      Pointer<NativeType> pixels,
+      Int32 width,
+      Int32 height,
+      Int32 depth,
+      Int32 bufSize,
+      Pointer<Void> pixels,
     );
 
 // typedef GLenum (APIENTRYP PFNGLGETGRAPHICSRESETSTATUSPROC) (void)
@@ -8905,13 +8719,13 @@ typedef PFNGLGETGRAPHICSRESETSTATUSPROC = Uint32 Function();
 
 // typedef void (APIENTRYP PFNGLGETNCOMPRESSEDTEXIMAGEPROC) (GLenum target, GLint lod, GLsizei bufSize, void *pixels)
 typedef PFNGLGETNCOMPRESSEDTEXIMAGEPROCDart =
-    void Function(int target, int lod, int bufSize, Pointer<NativeType> pixels);
+    void Function(int target, int lod, int bufSize, Pointer<Void> pixels);
 typedef PFNGLGETNCOMPRESSEDTEXIMAGEPROC =
     Void Function(
       Uint32 target,
       Int32 lod,
-      Uint32 bufSize,
-      Pointer<NativeType> pixels,
+      Int32 bufSize,
+      Pointer<Void> pixels,
     );
 
 // typedef void (APIENTRYP PFNGLGETNTEXIMAGEPROC) (GLenum target, GLint level, GLenum format, GLenum type, GLsizei bufSize, void *pixels)
@@ -8922,7 +8736,7 @@ typedef PFNGLGETNTEXIMAGEPROCDart =
       int format,
       int type,
       int bufSize,
-      Pointer<NativeType> pixels,
+      Pointer<Void> pixels,
     );
 typedef PFNGLGETNTEXIMAGEPROC =
     Void Function(
@@ -8930,8 +8744,8 @@ typedef PFNGLGETNTEXIMAGEPROC =
       Int32 level,
       Uint32 format,
       Uint32 type,
-      Uint32 bufSize,
-      Pointer<NativeType> pixels,
+      Int32 bufSize,
+      Pointer<Void> pixels,
     );
 
 // typedef void (APIENTRYP PFNGLGETNUNIFORMDVPROC) (GLuint program, GLint location, GLsizei bufSize, GLdouble *params)
@@ -8946,7 +8760,7 @@ typedef PFNGLGETNUNIFORMDVPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 bufSize,
+      Int32 bufSize,
       Pointer<Double> params,
     );
 
@@ -8962,7 +8776,7 @@ typedef PFNGLGETNUNIFORMFVPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 bufSize,
+      Int32 bufSize,
       Pointer<Float> params,
     );
 
@@ -8978,7 +8792,7 @@ typedef PFNGLGETNUNIFORMIVPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 bufSize,
+      Int32 bufSize,
       Pointer<Int32> params,
     );
 
@@ -8994,7 +8808,7 @@ typedef PFNGLGETNUNIFORMUIVPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 bufSize,
+      Int32 bufSize,
       Pointer<Uint32> params,
     );
 
@@ -9008,18 +8822,18 @@ typedef PFNGLREADNPIXELSPROCDart =
       int format,
       int type,
       int bufSize,
-      Pointer<NativeType> data,
+      Pointer<Void> data,
     );
 typedef PFNGLREADNPIXELSPROC =
     Void Function(
       Int32 x,
       Int32 y,
-      Uint32 width,
-      Uint32 height,
+      Int32 width,
+      Int32 height,
       Uint32 format,
       Uint32 type,
-      Uint32 bufSize,
-      Pointer<NativeType> data,
+      Int32 bufSize,
+      Pointer<Void> data,
     );
 
 // typedef void (APIENTRYP PFNGLGETNMAPDVPROC) (GLenum target, GLenum query, GLsizei bufSize, GLdouble *v)
@@ -9029,7 +8843,7 @@ typedef PFNGLGETNMAPDVPROC =
     Void Function(
       Uint32 target,
       Uint32 query,
-      Uint32 bufSize,
+      Int32 bufSize,
       Pointer<Double> v,
     );
 
@@ -9037,47 +8851,37 @@ typedef PFNGLGETNMAPDVPROC =
 typedef PFNGLGETNMAPFVPROCDart =
     void Function(int target, int query, int bufSize, Pointer<Float> v);
 typedef PFNGLGETNMAPFVPROC =
-    Void Function(
-      Uint32 target,
-      Uint32 query,
-      Uint32 bufSize,
-      Pointer<Float> v,
-    );
+    Void Function(Uint32 target, Uint32 query, Int32 bufSize, Pointer<Float> v);
 
 // typedef void (APIENTRYP PFNGLGETNMAPIVPROC) (GLenum target, GLenum query, GLsizei bufSize, GLint *v)
 typedef PFNGLGETNMAPIVPROCDart =
     void Function(int target, int query, int bufSize, Pointer<Int32> v);
 typedef PFNGLGETNMAPIVPROC =
-    Void Function(
-      Uint32 target,
-      Uint32 query,
-      Uint32 bufSize,
-      Pointer<Int32> v,
-    );
+    Void Function(Uint32 target, Uint32 query, Int32 bufSize, Pointer<Int32> v);
 
 // typedef void (APIENTRYP PFNGLGETNPIXELMAPFVPROC) (GLenum map, GLsizei bufSize, GLfloat *values)
 typedef PFNGLGETNPIXELMAPFVPROCDart =
     void Function(int map, int bufSize, Pointer<Float> values);
 typedef PFNGLGETNPIXELMAPFVPROC =
-    Void Function(Uint32 map, Uint32 bufSize, Pointer<Float> values);
+    Void Function(Uint32 map, Int32 bufSize, Pointer<Float> values);
 
 // typedef void (APIENTRYP PFNGLGETNPIXELMAPUIVPROC) (GLenum map, GLsizei bufSize, GLuint *values)
 typedef PFNGLGETNPIXELMAPUIVPROCDart =
     void Function(int map, int bufSize, Pointer<Uint32> values);
 typedef PFNGLGETNPIXELMAPUIVPROC =
-    Void Function(Uint32 map, Uint32 bufSize, Pointer<Uint32> values);
+    Void Function(Uint32 map, Int32 bufSize, Pointer<Uint32> values);
 
 // typedef void (APIENTRYP PFNGLGETNPIXELMAPUSVPROC) (GLenum map, GLsizei bufSize, GLushort *values)
 typedef PFNGLGETNPIXELMAPUSVPROCDart =
     void Function(int map, int bufSize, Pointer<Uint16> values);
 typedef PFNGLGETNPIXELMAPUSVPROC =
-    Void Function(Uint32 map, Uint32 bufSize, Pointer<Uint16> values);
+    Void Function(Uint32 map, Int32 bufSize, Pointer<Uint16> values);
 
 // typedef void (APIENTRYP PFNGLGETNPOLYGONSTIPPLEPROC) (GLsizei bufSize, GLubyte *pattern)
 typedef PFNGLGETNPOLYGONSTIPPLEPROCDart =
     void Function(int bufSize, Pointer<Uint8> pattern);
 typedef PFNGLGETNPOLYGONSTIPPLEPROC =
-    Void Function(Uint32 bufSize, Pointer<Uint8> pattern);
+    Void Function(Int32 bufSize, Pointer<Uint8> pattern);
 
 // typedef void (APIENTRYP PFNGLGETNCOLORTABLEPROC) (GLenum target, GLenum format, GLenum type, GLsizei bufSize, void *table)
 typedef PFNGLGETNCOLORTABLEPROCDart =
@@ -9086,15 +8890,15 @@ typedef PFNGLGETNCOLORTABLEPROCDart =
       int format,
       int type,
       int bufSize,
-      Pointer<NativeType> table,
+      Pointer<Void> table,
     );
 typedef PFNGLGETNCOLORTABLEPROC =
     Void Function(
       Uint32 target,
       Uint32 format,
       Uint32 type,
-      Uint32 bufSize,
-      Pointer<NativeType> table,
+      Int32 bufSize,
+      Pointer<Void> table,
     );
 
 // typedef void (APIENTRYP PFNGLGETNCONVOLUTIONFILTERPROC) (GLenum target, GLenum format, GLenum type, GLsizei bufSize, void *image)
@@ -9104,15 +8908,15 @@ typedef PFNGLGETNCONVOLUTIONFILTERPROCDart =
       int format,
       int type,
       int bufSize,
-      Pointer<NativeType> image,
+      Pointer<Void> image,
     );
 typedef PFNGLGETNCONVOLUTIONFILTERPROC =
     Void Function(
       Uint32 target,
       Uint32 format,
       Uint32 type,
-      Uint32 bufSize,
-      Pointer<NativeType> image,
+      Int32 bufSize,
+      Pointer<Void> image,
     );
 
 // typedef void (APIENTRYP PFNGLGETNSEPARABLEFILTERPROC) (GLenum target, GLenum format, GLenum type, GLsizei rowBufSize, void *row, GLsizei columnBufSize, void *column, void *span)
@@ -9122,21 +8926,21 @@ typedef PFNGLGETNSEPARABLEFILTERPROCDart =
       int format,
       int type,
       int rowBufSize,
-      Pointer<NativeType> row,
+      Pointer<Void> row,
       int columnBufSize,
-      Pointer<NativeType> column,
-      Pointer<NativeType> span,
+      Pointer<Void> column,
+      Pointer<Void> span,
     );
 typedef PFNGLGETNSEPARABLEFILTERPROC =
     Void Function(
       Uint32 target,
       Uint32 format,
       Uint32 type,
-      Uint32 rowBufSize,
-      Pointer<NativeType> row,
-      Uint32 columnBufSize,
-      Pointer<NativeType> column,
-      Pointer<NativeType> span,
+      Int32 rowBufSize,
+      Pointer<Void> row,
+      Int32 columnBufSize,
+      Pointer<Void> column,
+      Pointer<Void> span,
     );
 
 // typedef void (APIENTRYP PFNGLGETNHISTOGRAMPROC) (GLenum target, GLboolean reset, GLenum format, GLenum type, GLsizei bufSize, void *values)
@@ -9147,16 +8951,16 @@ typedef PFNGLGETNHISTOGRAMPROCDart =
       int format,
       int type,
       int bufSize,
-      Pointer<NativeType> values,
+      Pointer<Void> values,
     );
 typedef PFNGLGETNHISTOGRAMPROC =
     Void Function(
       Uint32 target,
-      Int32 reset,
+      Uint8 reset,
       Uint32 format,
       Uint32 type,
-      Uint32 bufSize,
-      Pointer<NativeType> values,
+      Int32 bufSize,
+      Pointer<Void> values,
     );
 
 // typedef void (APIENTRYP PFNGLGETNMINMAXPROC) (GLenum target, GLboolean reset, GLenum format, GLenum type, GLsizei bufSize, void *values)
@@ -9167,16 +8971,16 @@ typedef PFNGLGETNMINMAXPROCDart =
       int format,
       int type,
       int bufSize,
-      Pointer<NativeType> values,
+      Pointer<Void> values,
     );
 typedef PFNGLGETNMINMAXPROC =
     Void Function(
       Uint32 target,
-      Int32 reset,
+      Uint8 reset,
       Uint32 format,
       Uint32 type,
-      Uint32 bufSize,
-      Pointer<NativeType> values,
+      Int32 bufSize,
+      Pointer<Void> values,
     );
 
 // typedef void (APIENTRYP PFNGLTEXTUREBARRIERPROC) (void)
@@ -9205,18 +9009,18 @@ typedef PFNGLSPECIALIZESHADERPROC =
 typedef PFNGLMULTIDRAWARRAYSINDIRECTCOUNTPROCDart =
     void Function(
       int mode,
-      Pointer<NativeType> indirect,
-      Pointer<NativeType> drawcount,
+      Pointer<Void> indirect,
+      int drawcount,
       int maxdrawcount,
       int stride,
     );
 typedef PFNGLMULTIDRAWARRAYSINDIRECTCOUNTPROC =
     Void Function(
       Uint32 mode,
-      Pointer<NativeType> indirect,
-      Pointer<NativeType> drawcount,
-      Uint32 maxdrawcount,
-      Uint32 stride,
+      Pointer<Void> indirect,
+      IntPtr drawcount,
+      Int32 maxdrawcount,
+      Int32 stride,
     );
 
 // typedef void (APIENTRYP PFNGLMULTIDRAWELEMENTSINDIRECTCOUNTPROC) (GLenum mode, GLenum type, const void *indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride)
@@ -9224,8 +9028,8 @@ typedef PFNGLMULTIDRAWELEMENTSINDIRECTCOUNTPROCDart =
     void Function(
       int mode,
       int type,
-      Pointer<NativeType> indirect,
-      Pointer<NativeType> drawcount,
+      Pointer<Void> indirect,
+      int drawcount,
       int maxdrawcount,
       int stride,
     );
@@ -9233,10 +9037,10 @@ typedef PFNGLMULTIDRAWELEMENTSINDIRECTCOUNTPROC =
     Void Function(
       Uint32 mode,
       Uint32 type,
-      Pointer<NativeType> indirect,
-      Pointer<NativeType> drawcount,
-      Uint32 maxdrawcount,
-      Uint32 stride,
+      Pointer<Void> indirect,
+      IntPtr drawcount,
+      Int32 maxdrawcount,
+      Int32 stride,
     );
 
 // typedef void (APIENTRYP PFNGLPOLYGONOFFSETCLAMPPROC) (GLfloat factor, GLfloat units, GLfloat clamp)
@@ -9295,7 +9099,7 @@ typedef PFNGLGETIMAGEHANDLEARBPROC =
     Uint64 Function(
       Uint32 texture,
       Int32 level,
-      Int32 layered,
+      Uint8 layered,
       Int32 layer,
       Uint32 format,
     );
@@ -9320,7 +9124,7 @@ typedef PFNGLUNIFORMHANDLEUI64ARBPROC =
 typedef PFNGLUNIFORMHANDLEUI64VARBPROCDart =
     void Function(int location, int count, Pointer<Uint64> value);
 typedef PFNGLUNIFORMHANDLEUI64VARBPROC =
-    Void Function(Int32 location, Uint32 count, Pointer<Uint64> value);
+    Void Function(Int32 location, Int32 count, Pointer<Uint64> value);
 
 // typedef void (APIENTRYP PFNGLPROGRAMUNIFORMHANDLEUI64ARBPROC) (GLuint program, GLint location, GLuint64 value)
 typedef PFNGLPROGRAMUNIFORMHANDLEUI64ARBPROCDart =
@@ -9335,17 +9139,17 @@ typedef PFNGLPROGRAMUNIFORMHANDLEUI64VARBPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
+      Int32 count,
       Pointer<Uint64> values,
     );
 
 // typedef GLboolean (APIENTRYP PFNGLISTEXTUREHANDLERESIDENTARBPROC) (GLuint64 handle)
 typedef PFNGLISTEXTUREHANDLERESIDENTARBPROCDart = int Function(int handle);
-typedef PFNGLISTEXTUREHANDLERESIDENTARBPROC = Int32 Function(Uint64 handle);
+typedef PFNGLISTEXTUREHANDLERESIDENTARBPROC = Uint8 Function(Uint64 handle);
 
 // typedef GLboolean (APIENTRYP PFNGLISIMAGEHANDLERESIDENTARBPROC) (GLuint64 handle)
 typedef PFNGLISIMAGEHANDLERESIDENTARBPROCDart = int Function(int handle);
-typedef PFNGLISIMAGEHANDLERESIDENTARBPROC = Int32 Function(Uint64 handle);
+typedef PFNGLISIMAGEHANDLERESIDENTARBPROC = Uint8 Function(Uint64 handle);
 
 // typedef void (APIENTRYP PFNGLVERTEXATTRIBL1UI64ARBPROC) (GLuint index, GLuint64EXT x)
 typedef PFNGLVERTEXATTRIBL1UI64ARBPROCDart = void Function(int index, int x);
@@ -9365,15 +9169,15 @@ typedef PFNGLGETVERTEXATTRIBLUI64VARBPROC =
 
 // typedef GLsync (APIENTRYP PFNGLCREATESYNCFROMCLEVENTARBPROC) (struct _cl_context *context, struct _cl_event *event, GLbitfield flags)
 typedef PFNGLCREATESYNCFROMCLEVENTARBPROCDart =
-    Pointer<NativeType> Function(
-      Pointer<Pointer<NativeType>> context,
-      Pointer<Pointer<NativeType>> event,
+    Pointer<Void> Function(
+      Pointer<ClContext> context,
+      Pointer<ClEvent> event,
       int flags,
     );
 typedef PFNGLCREATESYNCFROMCLEVENTARBPROC =
-    Pointer<NativeType> Function(
-      Pointer<Pointer<NativeType>> context,
-      Pointer<Pointer<NativeType>> event,
+    Pointer<Void> Function(
+      Pointer<ClContext> context,
+      Pointer<ClEvent> event,
       Uint32 flags,
     );
 
@@ -9410,7 +9214,7 @@ typedef GLDEBUGPROCARBDart =
       int severity,
       int length,
       Pointer<Utf8> message,
-      Pointer<NativeType> userParam,
+      Pointer<Void> userParam,
     );
 typedef GLDEBUGPROCARB =
     Void Function(
@@ -9418,9 +9222,9 @@ typedef GLDEBUGPROCARB =
       Uint32 type,
       Uint32 id,
       Uint32 severity,
-      Uint32 length,
+      Int32 length,
       Pointer<Utf8> message,
-      Pointer<NativeType> userParam,
+      Pointer<Void> userParam,
     );
 
 // typedef void (APIENTRYP PFNGLDEBUGMESSAGECONTROLARBPROC) (GLenum source, GLenum type, GLenum severity, GLsizei count, const GLuint *ids, GLboolean enabled)
@@ -9438,9 +9242,9 @@ typedef PFNGLDEBUGMESSAGECONTROLARBPROC =
       Uint32 source,
       Uint32 type,
       Uint32 severity,
-      Uint32 count,
+      Int32 count,
       Pointer<Uint32> ids,
-      Int32 enabled,
+      Uint8 enabled,
     );
 
 // typedef void (APIENTRYP PFNGLDEBUGMESSAGEINSERTARBPROC) (GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar *buf)
@@ -9459,7 +9263,7 @@ typedef PFNGLDEBUGMESSAGEINSERTARBPROC =
       Uint32 type,
       Uint32 id,
       Uint32 severity,
-      Uint32 length,
+      Int32 length,
       Pointer<Utf8> buf,
     );
 
@@ -9467,12 +9271,12 @@ typedef PFNGLDEBUGMESSAGEINSERTARBPROC =
 typedef PFNGLDEBUGMESSAGECALLBACKARBPROCDart =
     void Function(
       Pointer<NativeFunction<GLDEBUGPROCARB>> callback,
-      Pointer<NativeType> userParam,
+      Pointer<Void> userParam,
     );
 typedef PFNGLDEBUGMESSAGECALLBACKARBPROC =
     Void Function(
       Pointer<NativeFunction<GLDEBUGPROCARB>> callback,
-      Pointer<NativeType> userParam,
+      Pointer<Void> userParam,
     );
 
 // typedef GLuint (APIENTRYP PFNGLGETDEBUGMESSAGELOGARBPROC) (GLuint count, GLsizei bufSize, GLenum *sources, GLenum *types, GLuint *ids, GLenum *severities, GLsizei *lengths, GLchar *messageLog)
@@ -9484,25 +9288,25 @@ typedef PFNGLGETDEBUGMESSAGELOGARBPROCDart =
       Pointer<Uint32> types,
       Pointer<Uint32> ids,
       Pointer<Uint32> severities,
-      Pointer<Uint32> lengths,
+      Pointer<Int32> lengths,
       Pointer<Int8> messageLog,
     );
 typedef PFNGLGETDEBUGMESSAGELOGARBPROC =
     Uint32 Function(
       Uint32 count,
-      Uint32 bufSize,
+      Int32 bufSize,
       Pointer<Uint32> sources,
       Pointer<Uint32> types,
       Pointer<Uint32> ids,
       Pointer<Uint32> severities,
-      Pointer<Uint32> lengths,
+      Pointer<Int32> lengths,
       Pointer<Int8> messageLog,
     );
 
 // typedef void (APIENTRYP PFNGLDRAWBUFFERSARBPROC) (GLsizei n, const GLenum *bufs)
 typedef PFNGLDRAWBUFFERSARBPROCDart =
     void Function(int n, Pointer<Uint32> bufs);
-typedef PFNGLDRAWBUFFERSARBPROC = Void Function(Uint32 n, Pointer<Uint32> bufs);
+typedef PFNGLDRAWBUFFERSARBPROC = Void Function(Int32 n, Pointer<Uint32> bufs);
 
 // typedef void (APIENTRYP PFNGLBLENDEQUATIONIARBPROC) (GLuint buf, GLenum mode)
 typedef PFNGLBLENDEQUATIONIARBPROCDart = void Function(int buf, int mode);
@@ -9535,7 +9339,7 @@ typedef PFNGLBLENDFUNCSEPARATEIARBPROC =
 typedef PFNGLDRAWARRAYSINSTANCEDARBPROCDart =
     void Function(int mode, int first, int count, int primcount);
 typedef PFNGLDRAWARRAYSINSTANCEDARBPROC =
-    Void Function(Uint32 mode, Int32 first, Uint32 count, Uint32 primcount);
+    Void Function(Uint32 mode, Int32 first, Int32 count, Int32 primcount);
 
 // typedef void (APIENTRYP PFNGLDRAWELEMENTSINSTANCEDARBPROC) (GLenum mode, GLsizei count, GLenum type, const void *indices, GLsizei primcount)
 typedef PFNGLDRAWELEMENTSINSTANCEDARBPROCDart =
@@ -9543,27 +9347,27 @@ typedef PFNGLDRAWELEMENTSINSTANCEDARBPROCDart =
       int mode,
       int count,
       int type,
-      Pointer<NativeType> indices,
+      Pointer<Void> indices,
       int primcount,
     );
 typedef PFNGLDRAWELEMENTSINSTANCEDARBPROC =
     Void Function(
       Uint32 mode,
-      Uint32 count,
+      Int32 count,
       Uint32 type,
-      Pointer<NativeType> indices,
-      Uint32 primcount,
+      Pointer<Void> indices,
+      Int32 primcount,
     );
 
 // typedef void (APIENTRYP PFNGLPROGRAMSTRINGARBPROC) (GLenum target, GLenum format, GLsizei len, const void *string)
 typedef PFNGLPROGRAMSTRINGARBPROCDart =
-    void Function(int target, int format, int len, Pointer<NativeType> string);
+    void Function(int target, int format, int len, Pointer<Void> string);
 typedef PFNGLPROGRAMSTRINGARBPROC =
     Void Function(
       Uint32 target,
       Uint32 format,
-      Uint32 len,
-      Pointer<NativeType> string,
+      Int32 len,
+      Pointer<Void> string,
     );
 
 // typedef void (APIENTRYP PFNGLBINDPROGRAMARBPROC) (GLenum target, GLuint program)
@@ -9574,13 +9378,13 @@ typedef PFNGLBINDPROGRAMARBPROC = Void Function(Uint32 target, Uint32 program);
 typedef PFNGLDELETEPROGRAMSARBPROCDart =
     void Function(int n, Pointer<Uint32> programs);
 typedef PFNGLDELETEPROGRAMSARBPROC =
-    Void Function(Uint32 n, Pointer<Uint32> programs);
+    Void Function(Int32 n, Pointer<Uint32> programs);
 
 // typedef void (APIENTRYP PFNGLGENPROGRAMSARBPROC) (GLsizei n, GLuint *programs)
 typedef PFNGLGENPROGRAMSARBPROCDart =
     void Function(int n, Pointer<Uint32> programs);
 typedef PFNGLGENPROGRAMSARBPROC =
-    Void Function(Uint32 n, Pointer<Uint32> programs);
+    Void Function(Int32 n, Pointer<Uint32> programs);
 
 // typedef void (APIENTRYP PFNGLPROGRAMENVPARAMETER4DARBPROC) (GLenum target, GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w)
 typedef PFNGLPROGRAMENVPARAMETER4DARBPROCDart =
@@ -9718,13 +9522,13 @@ typedef PFNGLGETPROGRAMIVARBPROC =
 
 // typedef void (APIENTRYP PFNGLGETPROGRAMSTRINGARBPROC) (GLenum target, GLenum pname, void *string)
 typedef PFNGLGETPROGRAMSTRINGARBPROCDart =
-    void Function(int target, int pname, Pointer<NativeType> string);
+    void Function(int target, int pname, Pointer<Void> string);
 typedef PFNGLGETPROGRAMSTRINGARBPROC =
-    Void Function(Uint32 target, Uint32 pname, Pointer<NativeType> string);
+    Void Function(Uint32 target, Uint32 pname, Pointer<Void> string);
 
 // typedef GLboolean (APIENTRYP PFNGLISPROGRAMARBPROC) (GLuint program)
 typedef PFNGLISPROGRAMARBPROCDart = int Function(int program);
-typedef PFNGLISPROGRAMARBPROC = Int32 Function(Uint32 program);
+typedef PFNGLISPROGRAMARBPROC = Uint8 Function(Uint32 program);
 
 // typedef void (APIENTRYP PFNGLPROGRAMPARAMETERIARBPROC) (GLuint program, GLenum pname, GLint value)
 typedef PFNGLPROGRAMPARAMETERIARBPROCDart =
@@ -9816,25 +9620,25 @@ typedef PFNGLUNIFORM4I64ARBPROC =
 typedef PFNGLUNIFORM1I64VARBPROCDart =
     void Function(int location, int count, Pointer<Int64> value);
 typedef PFNGLUNIFORM1I64VARBPROC =
-    Void Function(Int32 location, Uint32 count, Pointer<Int64> value);
+    Void Function(Int32 location, Int32 count, Pointer<Int64> value);
 
 // typedef void (APIENTRYP PFNGLUNIFORM2I64VARBPROC) (GLint location, GLsizei count, const GLint64 *value)
 typedef PFNGLUNIFORM2I64VARBPROCDart =
     void Function(int location, int count, Pointer<Int64> value);
 typedef PFNGLUNIFORM2I64VARBPROC =
-    Void Function(Int32 location, Uint32 count, Pointer<Int64> value);
+    Void Function(Int32 location, Int32 count, Pointer<Int64> value);
 
 // typedef void (APIENTRYP PFNGLUNIFORM3I64VARBPROC) (GLint location, GLsizei count, const GLint64 *value)
 typedef PFNGLUNIFORM3I64VARBPROCDart =
     void Function(int location, int count, Pointer<Int64> value);
 typedef PFNGLUNIFORM3I64VARBPROC =
-    Void Function(Int32 location, Uint32 count, Pointer<Int64> value);
+    Void Function(Int32 location, Int32 count, Pointer<Int64> value);
 
 // typedef void (APIENTRYP PFNGLUNIFORM4I64VARBPROC) (GLint location, GLsizei count, const GLint64 *value)
 typedef PFNGLUNIFORM4I64VARBPROCDart =
     void Function(int location, int count, Pointer<Int64> value);
 typedef PFNGLUNIFORM4I64VARBPROC =
-    Void Function(Int32 location, Uint32 count, Pointer<Int64> value);
+    Void Function(Int32 location, Int32 count, Pointer<Int64> value);
 
 // typedef void (APIENTRYP PFNGLUNIFORM1UI64ARBPROC) (GLint location, GLuint64 x)
 typedef PFNGLUNIFORM1UI64ARBPROCDart = void Function(int location, int x);
@@ -9862,25 +9666,25 @@ typedef PFNGLUNIFORM4UI64ARBPROC =
 typedef PFNGLUNIFORM1UI64VARBPROCDart =
     void Function(int location, int count, Pointer<Uint64> value);
 typedef PFNGLUNIFORM1UI64VARBPROC =
-    Void Function(Int32 location, Uint32 count, Pointer<Uint64> value);
+    Void Function(Int32 location, Int32 count, Pointer<Uint64> value);
 
 // typedef void (APIENTRYP PFNGLUNIFORM2UI64VARBPROC) (GLint location, GLsizei count, const GLuint64 *value)
 typedef PFNGLUNIFORM2UI64VARBPROCDart =
     void Function(int location, int count, Pointer<Uint64> value);
 typedef PFNGLUNIFORM2UI64VARBPROC =
-    Void Function(Int32 location, Uint32 count, Pointer<Uint64> value);
+    Void Function(Int32 location, Int32 count, Pointer<Uint64> value);
 
 // typedef void (APIENTRYP PFNGLUNIFORM3UI64VARBPROC) (GLint location, GLsizei count, const GLuint64 *value)
 typedef PFNGLUNIFORM3UI64VARBPROCDart =
     void Function(int location, int count, Pointer<Uint64> value);
 typedef PFNGLUNIFORM3UI64VARBPROC =
-    Void Function(Int32 location, Uint32 count, Pointer<Uint64> value);
+    Void Function(Int32 location, Int32 count, Pointer<Uint64> value);
 
 // typedef void (APIENTRYP PFNGLUNIFORM4UI64VARBPROC) (GLint location, GLsizei count, const GLuint64 *value)
 typedef PFNGLUNIFORM4UI64VARBPROCDart =
     void Function(int location, int count, Pointer<Uint64> value);
 typedef PFNGLUNIFORM4UI64VARBPROC =
-    Void Function(Int32 location, Uint32 count, Pointer<Uint64> value);
+    Void Function(Int32 location, Int32 count, Pointer<Uint64> value);
 
 // typedef void (APIENTRYP PFNGLGETUNIFORMI64VARBPROC) (GLuint program, GLint location, GLint64 *params)
 typedef PFNGLGETUNIFORMI64VARBPROCDart =
@@ -9906,7 +9710,7 @@ typedef PFNGLGETNUNIFORMI64VARBPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 bufSize,
+      Int32 bufSize,
       Pointer<Int64> params,
     );
 
@@ -9922,7 +9726,7 @@ typedef PFNGLGETNUNIFORMUI64VARBPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 bufSize,
+      Int32 bufSize,
       Pointer<Uint64> params,
     );
 
@@ -9964,7 +9768,7 @@ typedef PFNGLPROGRAMUNIFORM1I64VARBPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
+      Int32 count,
       Pointer<Int64> value,
     );
 
@@ -9975,7 +9779,7 @@ typedef PFNGLPROGRAMUNIFORM2I64VARBPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
+      Int32 count,
       Pointer<Int64> value,
     );
 
@@ -9986,7 +9790,7 @@ typedef PFNGLPROGRAMUNIFORM3I64VARBPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
+      Int32 count,
       Pointer<Int64> value,
     );
 
@@ -9997,7 +9801,7 @@ typedef PFNGLPROGRAMUNIFORM4I64VARBPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
+      Int32 count,
       Pointer<Int64> value,
     );
 
@@ -10039,7 +9843,7 @@ typedef PFNGLPROGRAMUNIFORM1UI64VARBPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
+      Int32 count,
       Pointer<Uint64> value,
     );
 
@@ -10050,7 +9854,7 @@ typedef PFNGLPROGRAMUNIFORM2UI64VARBPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
+      Int32 count,
       Pointer<Uint64> value,
     );
 
@@ -10061,7 +9865,7 @@ typedef PFNGLPROGRAMUNIFORM3UI64VARBPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
+      Int32 count,
       Pointer<Uint64> value,
     );
 
@@ -10072,7 +9876,7 @@ typedef PFNGLPROGRAMUNIFORM4UI64VARBPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
+      Int32 count,
       Pointer<Uint64> value,
     );
 
@@ -10080,18 +9884,18 @@ typedef PFNGLPROGRAMUNIFORM4UI64VARBPROC =
 typedef PFNGLMULTIDRAWARRAYSINDIRECTCOUNTARBPROCDart =
     void Function(
       int mode,
-      Pointer<NativeType> indirect,
-      Pointer<NativeType> drawcount,
+      Pointer<Void> indirect,
+      int drawcount,
       int maxdrawcount,
       int stride,
     );
 typedef PFNGLMULTIDRAWARRAYSINDIRECTCOUNTARBPROC =
     Void Function(
       Uint32 mode,
-      Pointer<NativeType> indirect,
-      Pointer<NativeType> drawcount,
-      Uint32 maxdrawcount,
-      Uint32 stride,
+      Pointer<Void> indirect,
+      IntPtr drawcount,
+      Int32 maxdrawcount,
+      Int32 stride,
     );
 
 // typedef void (APIENTRYP PFNGLMULTIDRAWELEMENTSINDIRECTCOUNTARBPROC) (GLenum mode, GLenum type, const void *indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride)
@@ -10099,8 +9903,8 @@ typedef PFNGLMULTIDRAWELEMENTSINDIRECTCOUNTARBPROCDart =
     void Function(
       int mode,
       int type,
-      Pointer<NativeType> indirect,
-      Pointer<NativeType> drawcount,
+      Pointer<Void> indirect,
+      int drawcount,
       int maxdrawcount,
       int stride,
     );
@@ -10108,10 +9912,10 @@ typedef PFNGLMULTIDRAWELEMENTSINDIRECTCOUNTARBPROC =
     Void Function(
       Uint32 mode,
       Uint32 type,
-      Pointer<NativeType> indirect,
-      Pointer<NativeType> drawcount,
-      Uint32 maxdrawcount,
-      Uint32 stride,
+      Pointer<Void> indirect,
+      IntPtr drawcount,
+      Int32 maxdrawcount,
+      Int32 stride,
     );
 
 // typedef void (APIENTRYP PFNGLVERTEXATTRIBDIVISORARBPROC) (GLuint index, GLuint divisor)
@@ -10144,33 +9948,27 @@ typedef PFNGLMATRIXINDEXUIVARBPROC =
 
 // typedef void (APIENTRYP PFNGLMATRIXINDEXPOINTERARBPROC) (GLint size, GLenum type, GLsizei stride, const void *pointer)
 typedef PFNGLMATRIXINDEXPOINTERARBPROCDart =
-    void Function(int size, int type, int stride, Pointer<NativeType> pointer);
+    void Function(int size, int type, int stride, Pointer<Void> pointer);
 typedef PFNGLMATRIXINDEXPOINTERARBPROC =
-    Void Function(
-      Int32 size,
-      Uint32 type,
-      Uint32 stride,
-      Pointer<NativeType> pointer,
-    );
+    Void Function(Int32 size, Uint32 type, Int32 stride, Pointer<Void> pointer);
 
 // typedef void (APIENTRYP PFNGLSAMPLECOVERAGEARBPROC) (GLfloat value, GLboolean invert)
 typedef PFNGLSAMPLECOVERAGEARBPROCDart =
     void Function(double value, int invert);
-typedef PFNGLSAMPLECOVERAGEARBPROC = Void Function(Float value, Int32 invert);
+typedef PFNGLSAMPLECOVERAGEARBPROC = Void Function(Float value, Uint8 invert);
 
 // typedef void (APIENTRYP PFNGLGENQUERIESARBPROC) (GLsizei n, GLuint *ids)
 typedef PFNGLGENQUERIESARBPROCDart = void Function(int n, Pointer<Uint32> ids);
-typedef PFNGLGENQUERIESARBPROC = Void Function(Uint32 n, Pointer<Uint32> ids);
+typedef PFNGLGENQUERIESARBPROC = Void Function(Int32 n, Pointer<Uint32> ids);
 
 // typedef void (APIENTRYP PFNGLDELETEQUERIESARBPROC) (GLsizei n, const GLuint *ids)
 typedef PFNGLDELETEQUERIESARBPROCDart =
     void Function(int n, Pointer<Uint32> ids);
-typedef PFNGLDELETEQUERIESARBPROC =
-    Void Function(Uint32 n, Pointer<Uint32> ids);
+typedef PFNGLDELETEQUERIESARBPROC = Void Function(Int32 n, Pointer<Uint32> ids);
 
 // typedef GLboolean (APIENTRYP PFNGLISQUERYARBPROC) (GLuint id)
 typedef PFNGLISQUERYARBPROCDart = int Function(int id);
-typedef PFNGLISQUERYARBPROC = Int32 Function(Uint32 id);
+typedef PFNGLISQUERYARBPROC = Uint8 Function(Uint32 id);
 
 // typedef void (APIENTRYP PFNGLBEGINQUERYARBPROC) (GLenum target, GLuint id)
 typedef PFNGLBEGINQUERYARBPROCDart = void Function(int target, int id);
@@ -10225,7 +10023,7 @@ typedef PFNGLGETNTEXIMAGEARBPROCDart =
       int format,
       int type,
       int bufSize,
-      Pointer<NativeType> img,
+      Pointer<Void> img,
     );
 typedef PFNGLGETNTEXIMAGEARBPROC =
     Void Function(
@@ -10233,8 +10031,8 @@ typedef PFNGLGETNTEXIMAGEARBPROC =
       Int32 level,
       Uint32 format,
       Uint32 type,
-      Uint32 bufSize,
-      Pointer<NativeType> img,
+      Int32 bufSize,
+      Pointer<Void> img,
     );
 
 // typedef void (APIENTRYP PFNGLREADNPIXELSARBPROC) (GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type, GLsizei bufSize, void *data)
@@ -10247,30 +10045,25 @@ typedef PFNGLREADNPIXELSARBPROCDart =
       int format,
       int type,
       int bufSize,
-      Pointer<NativeType> data,
+      Pointer<Void> data,
     );
 typedef PFNGLREADNPIXELSARBPROC =
     Void Function(
       Int32 x,
       Int32 y,
-      Uint32 width,
-      Uint32 height,
+      Int32 width,
+      Int32 height,
       Uint32 format,
       Uint32 type,
-      Uint32 bufSize,
-      Pointer<NativeType> data,
+      Int32 bufSize,
+      Pointer<Void> data,
     );
 
 // typedef void (APIENTRYP PFNGLGETNCOMPRESSEDTEXIMAGEARBPROC) (GLenum target, GLint lod, GLsizei bufSize, void *img)
 typedef PFNGLGETNCOMPRESSEDTEXIMAGEARBPROCDart =
-    void Function(int target, int lod, int bufSize, Pointer<NativeType> img);
+    void Function(int target, int lod, int bufSize, Pointer<Void> img);
 typedef PFNGLGETNCOMPRESSEDTEXIMAGEARBPROC =
-    Void Function(
-      Uint32 target,
-      Int32 lod,
-      Uint32 bufSize,
-      Pointer<NativeType> img,
-    );
+    Void Function(Uint32 target, Int32 lod, Int32 bufSize, Pointer<Void> img);
 
 // typedef void (APIENTRYP PFNGLGETNUNIFORMFVARBPROC) (GLuint program, GLint location, GLsizei bufSize, GLfloat *params)
 typedef PFNGLGETNUNIFORMFVARBPROCDart =
@@ -10284,7 +10077,7 @@ typedef PFNGLGETNUNIFORMFVARBPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 bufSize,
+      Int32 bufSize,
       Pointer<Float> params,
     );
 
@@ -10300,7 +10093,7 @@ typedef PFNGLGETNUNIFORMIVARBPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 bufSize,
+      Int32 bufSize,
       Pointer<Int32> params,
     );
 
@@ -10316,7 +10109,7 @@ typedef PFNGLGETNUNIFORMUIVARBPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 bufSize,
+      Int32 bufSize,
       Pointer<Uint32> params,
     );
 
@@ -10332,7 +10125,7 @@ typedef PFNGLGETNUNIFORMDVARBPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 bufSize,
+      Int32 bufSize,
       Pointer<Double> params,
     );
 
@@ -10343,7 +10136,7 @@ typedef PFNGLGETNMAPDVARBPROC =
     Void Function(
       Uint32 target,
       Uint32 query,
-      Uint32 bufSize,
+      Int32 bufSize,
       Pointer<Double> v,
     );
 
@@ -10351,47 +10144,37 @@ typedef PFNGLGETNMAPDVARBPROC =
 typedef PFNGLGETNMAPFVARBPROCDart =
     void Function(int target, int query, int bufSize, Pointer<Float> v);
 typedef PFNGLGETNMAPFVARBPROC =
-    Void Function(
-      Uint32 target,
-      Uint32 query,
-      Uint32 bufSize,
-      Pointer<Float> v,
-    );
+    Void Function(Uint32 target, Uint32 query, Int32 bufSize, Pointer<Float> v);
 
 // typedef void (APIENTRYP PFNGLGETNMAPIVARBPROC) (GLenum target, GLenum query, GLsizei bufSize, GLint *v)
 typedef PFNGLGETNMAPIVARBPROCDart =
     void Function(int target, int query, int bufSize, Pointer<Int32> v);
 typedef PFNGLGETNMAPIVARBPROC =
-    Void Function(
-      Uint32 target,
-      Uint32 query,
-      Uint32 bufSize,
-      Pointer<Int32> v,
-    );
+    Void Function(Uint32 target, Uint32 query, Int32 bufSize, Pointer<Int32> v);
 
 // typedef void (APIENTRYP PFNGLGETNPIXELMAPFVARBPROC) (GLenum map, GLsizei bufSize, GLfloat *values)
 typedef PFNGLGETNPIXELMAPFVARBPROCDart =
     void Function(int map, int bufSize, Pointer<Float> values);
 typedef PFNGLGETNPIXELMAPFVARBPROC =
-    Void Function(Uint32 map, Uint32 bufSize, Pointer<Float> values);
+    Void Function(Uint32 map, Int32 bufSize, Pointer<Float> values);
 
 // typedef void (APIENTRYP PFNGLGETNPIXELMAPUIVARBPROC) (GLenum map, GLsizei bufSize, GLuint *values)
 typedef PFNGLGETNPIXELMAPUIVARBPROCDart =
     void Function(int map, int bufSize, Pointer<Uint32> values);
 typedef PFNGLGETNPIXELMAPUIVARBPROC =
-    Void Function(Uint32 map, Uint32 bufSize, Pointer<Uint32> values);
+    Void Function(Uint32 map, Int32 bufSize, Pointer<Uint32> values);
 
 // typedef void (APIENTRYP PFNGLGETNPIXELMAPUSVARBPROC) (GLenum map, GLsizei bufSize, GLushort *values)
 typedef PFNGLGETNPIXELMAPUSVARBPROCDart =
     void Function(int map, int bufSize, Pointer<Uint16> values);
 typedef PFNGLGETNPIXELMAPUSVARBPROC =
-    Void Function(Uint32 map, Uint32 bufSize, Pointer<Uint16> values);
+    Void Function(Uint32 map, Int32 bufSize, Pointer<Uint16> values);
 
 // typedef void (APIENTRYP PFNGLGETNPOLYGONSTIPPLEARBPROC) (GLsizei bufSize, GLubyte *pattern)
 typedef PFNGLGETNPOLYGONSTIPPLEARBPROCDart =
     void Function(int bufSize, Pointer<Uint8> pattern);
 typedef PFNGLGETNPOLYGONSTIPPLEARBPROC =
-    Void Function(Uint32 bufSize, Pointer<Uint8> pattern);
+    Void Function(Int32 bufSize, Pointer<Uint8> pattern);
 
 // typedef void (APIENTRYP PFNGLGETNCOLORTABLEARBPROC) (GLenum target, GLenum format, GLenum type, GLsizei bufSize, void *table)
 typedef PFNGLGETNCOLORTABLEARBPROCDart =
@@ -10400,15 +10183,15 @@ typedef PFNGLGETNCOLORTABLEARBPROCDart =
       int format,
       int type,
       int bufSize,
-      Pointer<NativeType> table,
+      Pointer<Void> table,
     );
 typedef PFNGLGETNCOLORTABLEARBPROC =
     Void Function(
       Uint32 target,
       Uint32 format,
       Uint32 type,
-      Uint32 bufSize,
-      Pointer<NativeType> table,
+      Int32 bufSize,
+      Pointer<Void> table,
     );
 
 // typedef void (APIENTRYP PFNGLGETNCONVOLUTIONFILTERARBPROC) (GLenum target, GLenum format, GLenum type, GLsizei bufSize, void *image)
@@ -10418,15 +10201,15 @@ typedef PFNGLGETNCONVOLUTIONFILTERARBPROCDart =
       int format,
       int type,
       int bufSize,
-      Pointer<NativeType> image,
+      Pointer<Void> image,
     );
 typedef PFNGLGETNCONVOLUTIONFILTERARBPROC =
     Void Function(
       Uint32 target,
       Uint32 format,
       Uint32 type,
-      Uint32 bufSize,
-      Pointer<NativeType> image,
+      Int32 bufSize,
+      Pointer<Void> image,
     );
 
 // typedef void (APIENTRYP PFNGLGETNSEPARABLEFILTERARBPROC) (GLenum target, GLenum format, GLenum type, GLsizei rowBufSize, void *row, GLsizei columnBufSize, void *column, void *span)
@@ -10436,21 +10219,21 @@ typedef PFNGLGETNSEPARABLEFILTERARBPROCDart =
       int format,
       int type,
       int rowBufSize,
-      Pointer<NativeType> row,
+      Pointer<Void> row,
       int columnBufSize,
-      Pointer<NativeType> column,
-      Pointer<NativeType> span,
+      Pointer<Void> column,
+      Pointer<Void> span,
     );
 typedef PFNGLGETNSEPARABLEFILTERARBPROC =
     Void Function(
       Uint32 target,
       Uint32 format,
       Uint32 type,
-      Uint32 rowBufSize,
-      Pointer<NativeType> row,
-      Uint32 columnBufSize,
-      Pointer<NativeType> column,
-      Pointer<NativeType> span,
+      Int32 rowBufSize,
+      Pointer<Void> row,
+      Int32 columnBufSize,
+      Pointer<Void> column,
+      Pointer<Void> span,
     );
 
 // typedef void (APIENTRYP PFNGLGETNHISTOGRAMARBPROC) (GLenum target, GLboolean reset, GLenum format, GLenum type, GLsizei bufSize, void *values)
@@ -10461,16 +10244,16 @@ typedef PFNGLGETNHISTOGRAMARBPROCDart =
       int format,
       int type,
       int bufSize,
-      Pointer<NativeType> values,
+      Pointer<Void> values,
     );
 typedef PFNGLGETNHISTOGRAMARBPROC =
     Void Function(
       Uint32 target,
-      Int32 reset,
+      Uint8 reset,
       Uint32 format,
       Uint32 type,
-      Uint32 bufSize,
-      Pointer<NativeType> values,
+      Int32 bufSize,
+      Pointer<Void> values,
     );
 
 // typedef void (APIENTRYP PFNGLGETNMINMAXARBPROC) (GLenum target, GLboolean reset, GLenum format, GLenum type, GLsizei bufSize, void *values)
@@ -10481,23 +10264,23 @@ typedef PFNGLGETNMINMAXARBPROCDart =
       int format,
       int type,
       int bufSize,
-      Pointer<NativeType> values,
+      Pointer<Void> values,
     );
 typedef PFNGLGETNMINMAXARBPROC =
     Void Function(
       Uint32 target,
-      Int32 reset,
+      Uint8 reset,
       Uint32 format,
       Uint32 type,
-      Uint32 bufSize,
-      Pointer<NativeType> values,
+      Int32 bufSize,
+      Pointer<Void> values,
     );
 
 // typedef void (APIENTRYP PFNGLFRAMEBUFFERSAMPLELOCATIONSFVARBPROC) (GLenum target, GLuint start, GLsizei count, const GLfloat *v)
 typedef PFNGLFRAMEBUFFERSAMPLELOCATIONSFVARBPROCDart =
     void Function(int target, int start, int count, Pointer<Float> v);
 typedef PFNGLFRAMEBUFFERSAMPLELOCATIONSFVARBPROC =
-    Void Function(Uint32 target, Uint32 start, Uint32 count, Pointer<Float> v);
+    Void Function(Uint32 target, Uint32 start, Int32 count, Pointer<Float> v);
 
 // typedef void (APIENTRYP PFNGLNAMEDFRAMEBUFFERSAMPLELOCATIONSFVARBPROC) (GLuint framebuffer, GLuint start, GLsizei count, const GLfloat *v)
 typedef PFNGLNAMEDFRAMEBUFFERSAMPLELOCATIONSFVARBPROCDart =
@@ -10506,7 +10289,7 @@ typedef PFNGLNAMEDFRAMEBUFFERSAMPLELOCATIONSFVARBPROC =
     Void Function(
       Uint32 framebuffer,
       Uint32 start,
-      Uint32 count,
+      Int32 count,
       Pointer<Float> v,
     );
 
@@ -10519,79 +10302,68 @@ typedef PFNGLMINSAMPLESHADINGARBPROCDart = void Function(double value);
 typedef PFNGLMINSAMPLESHADINGARBPROC = Void Function(Float value);
 
 // typedef void (APIENTRYP PFNGLDELETEOBJECTARBPROC) (GLhandleARB obj)
-typedef PFNGLDELETEOBJECTARBPROCDart = void Function(Pointer<NativeType> obj);
-typedef PFNGLDELETEOBJECTARBPROC = Void Function(Pointer<NativeType> obj);
+typedef PFNGLDELETEOBJECTARBPROCDart = void Function(Pointer<Void> obj);
+typedef PFNGLDELETEOBJECTARBPROC = Void Function(Pointer<Void> obj);
 
 // typedef GLhandleARB (APIENTRYP PFNGLGETHANDLEARBPROC) (GLenum pname)
-typedef PFNGLGETHANDLEARBPROCDart = Pointer<NativeType> Function(int pname);
-typedef PFNGLGETHANDLEARBPROC = Pointer<NativeType> Function(Uint32 pname);
+typedef PFNGLGETHANDLEARBPROCDart = Pointer<Void> Function(int pname);
+typedef PFNGLGETHANDLEARBPROC = Pointer<Void> Function(Uint32 pname);
 
 // typedef void (APIENTRYP PFNGLDETACHOBJECTARBPROC) (GLhandleARB containerObj, GLhandleARB attachedObj)
 typedef PFNGLDETACHOBJECTARBPROCDart =
-    void Function(
-      Pointer<NativeType> containerObj,
-      Pointer<NativeType> attachedObj,
-    );
+    void Function(Pointer<Void> containerObj, Pointer<Void> attachedObj);
 typedef PFNGLDETACHOBJECTARBPROC =
-    Void Function(
-      Pointer<NativeType> containerObj,
-      Pointer<NativeType> attachedObj,
-    );
+    Void Function(Pointer<Void> containerObj, Pointer<Void> attachedObj);
 
 // typedef GLhandleARB (APIENTRYP PFNGLCREATESHADEROBJECTARBPROC) (GLenum shaderType)
 typedef PFNGLCREATESHADEROBJECTARBPROCDart =
-    Pointer<NativeType> Function(int shaderType);
+    Pointer<Void> Function(int shaderType);
 typedef PFNGLCREATESHADEROBJECTARBPROC =
-    Pointer<NativeType> Function(Uint32 shaderType);
+    Pointer<Void> Function(Uint32 shaderType);
 
 // typedef void (APIENTRYP PFNGLSHADERSOURCEARBPROC) (GLhandleARB shaderObj, GLsizei count, const GLcharARB **string, const GLint *length)
 typedef PFNGLSHADERSOURCEARBPROCDart =
     void Function(
-      Pointer<NativeType> shaderObj,
+      Pointer<Void> shaderObj,
       int count,
       Pointer<Pointer<Int8>> string,
       Pointer<Int32> length,
     );
 typedef PFNGLSHADERSOURCEARBPROC =
     Void Function(
-      Pointer<NativeType> shaderObj,
-      Uint32 count,
+      Pointer<Void> shaderObj,
+      Int32 count,
       Pointer<Pointer<Int8>> string,
       Pointer<Int32> length,
     );
 
 // typedef void (APIENTRYP PFNGLCOMPILESHADERARBPROC) (GLhandleARB shaderObj)
-typedef PFNGLCOMPILESHADERARBPROCDart =
-    void Function(Pointer<NativeType> shaderObj);
-typedef PFNGLCOMPILESHADERARBPROC =
-    Void Function(Pointer<NativeType> shaderObj);
+typedef PFNGLCOMPILESHADERARBPROCDart = void Function(Pointer<Void> shaderObj);
+typedef PFNGLCOMPILESHADERARBPROC = Void Function(Pointer<Void> shaderObj);
 
 // typedef GLhandleARB (APIENTRYP PFNGLCREATEPROGRAMOBJECTARBPROC) (void)
-typedef PFNGLCREATEPROGRAMOBJECTARBPROCDart = Pointer<NativeType> Function();
-typedef PFNGLCREATEPROGRAMOBJECTARBPROC = Pointer<NativeType> Function();
+typedef PFNGLCREATEPROGRAMOBJECTARBPROCDart = Pointer<Void> Function();
+typedef PFNGLCREATEPROGRAMOBJECTARBPROC = Pointer<Void> Function();
 
 // typedef void (APIENTRYP PFNGLATTACHOBJECTARBPROC) (GLhandleARB containerObj, GLhandleARB obj)
 typedef PFNGLATTACHOBJECTARBPROCDart =
-    void Function(Pointer<NativeType> containerObj, Pointer<NativeType> obj);
+    void Function(Pointer<Void> containerObj, Pointer<Void> obj);
 typedef PFNGLATTACHOBJECTARBPROC =
-    Void Function(Pointer<NativeType> containerObj, Pointer<NativeType> obj);
+    Void Function(Pointer<Void> containerObj, Pointer<Void> obj);
 
 // typedef void (APIENTRYP PFNGLLINKPROGRAMARBPROC) (GLhandleARB programObj)
-typedef PFNGLLINKPROGRAMARBPROCDart =
-    void Function(Pointer<NativeType> programObj);
-typedef PFNGLLINKPROGRAMARBPROC = Void Function(Pointer<NativeType> programObj);
+typedef PFNGLLINKPROGRAMARBPROCDart = void Function(Pointer<Void> programObj);
+typedef PFNGLLINKPROGRAMARBPROC = Void Function(Pointer<Void> programObj);
 
 // typedef void (APIENTRYP PFNGLUSEPROGRAMOBJECTARBPROC) (GLhandleARB programObj)
 typedef PFNGLUSEPROGRAMOBJECTARBPROCDart =
-    void Function(Pointer<NativeType> programObj);
-typedef PFNGLUSEPROGRAMOBJECTARBPROC =
-    Void Function(Pointer<NativeType> programObj);
+    void Function(Pointer<Void> programObj);
+typedef PFNGLUSEPROGRAMOBJECTARBPROC = Void Function(Pointer<Void> programObj);
 
 // typedef void (APIENTRYP PFNGLVALIDATEPROGRAMARBPROC) (GLhandleARB programObj)
 typedef PFNGLVALIDATEPROGRAMARBPROCDart =
-    void Function(Pointer<NativeType> programObj);
-typedef PFNGLVALIDATEPROGRAMARBPROC =
-    Void Function(Pointer<NativeType> programObj);
+    void Function(Pointer<Void> programObj);
+typedef PFNGLVALIDATEPROGRAMARBPROC = Void Function(Pointer<Void> programObj);
 
 // typedef void (APIENTRYP PFNGLUNIFORM1FARBPROC) (GLint location, GLfloat v0)
 typedef PFNGLUNIFORM1FARBPROCDart = void Function(int location, double v0);
@@ -10640,49 +10412,49 @@ typedef PFNGLUNIFORM4IARBPROC =
 typedef PFNGLUNIFORM1FVARBPROCDart =
     void Function(int location, int count, Pointer<Float> value);
 typedef PFNGLUNIFORM1FVARBPROC =
-    Void Function(Int32 location, Uint32 count, Pointer<Float> value);
+    Void Function(Int32 location, Int32 count, Pointer<Float> value);
 
 // typedef void (APIENTRYP PFNGLUNIFORM2FVARBPROC) (GLint location, GLsizei count, const GLfloat *value)
 typedef PFNGLUNIFORM2FVARBPROCDart =
     void Function(int location, int count, Pointer<Float> value);
 typedef PFNGLUNIFORM2FVARBPROC =
-    Void Function(Int32 location, Uint32 count, Pointer<Float> value);
+    Void Function(Int32 location, Int32 count, Pointer<Float> value);
 
 // typedef void (APIENTRYP PFNGLUNIFORM3FVARBPROC) (GLint location, GLsizei count, const GLfloat *value)
 typedef PFNGLUNIFORM3FVARBPROCDart =
     void Function(int location, int count, Pointer<Float> value);
 typedef PFNGLUNIFORM3FVARBPROC =
-    Void Function(Int32 location, Uint32 count, Pointer<Float> value);
+    Void Function(Int32 location, Int32 count, Pointer<Float> value);
 
 // typedef void (APIENTRYP PFNGLUNIFORM4FVARBPROC) (GLint location, GLsizei count, const GLfloat *value)
 typedef PFNGLUNIFORM4FVARBPROCDart =
     void Function(int location, int count, Pointer<Float> value);
 typedef PFNGLUNIFORM4FVARBPROC =
-    Void Function(Int32 location, Uint32 count, Pointer<Float> value);
+    Void Function(Int32 location, Int32 count, Pointer<Float> value);
 
 // typedef void (APIENTRYP PFNGLUNIFORM1IVARBPROC) (GLint location, GLsizei count, const GLint *value)
 typedef PFNGLUNIFORM1IVARBPROCDart =
     void Function(int location, int count, Pointer<Int32> value);
 typedef PFNGLUNIFORM1IVARBPROC =
-    Void Function(Int32 location, Uint32 count, Pointer<Int32> value);
+    Void Function(Int32 location, Int32 count, Pointer<Int32> value);
 
 // typedef void (APIENTRYP PFNGLUNIFORM2IVARBPROC) (GLint location, GLsizei count, const GLint *value)
 typedef PFNGLUNIFORM2IVARBPROCDart =
     void Function(int location, int count, Pointer<Int32> value);
 typedef PFNGLUNIFORM2IVARBPROC =
-    Void Function(Int32 location, Uint32 count, Pointer<Int32> value);
+    Void Function(Int32 location, Int32 count, Pointer<Int32> value);
 
 // typedef void (APIENTRYP PFNGLUNIFORM3IVARBPROC) (GLint location, GLsizei count, const GLint *value)
 typedef PFNGLUNIFORM3IVARBPROCDart =
     void Function(int location, int count, Pointer<Int32> value);
 typedef PFNGLUNIFORM3IVARBPROC =
-    Void Function(Int32 location, Uint32 count, Pointer<Int32> value);
+    Void Function(Int32 location, Int32 count, Pointer<Int32> value);
 
 // typedef void (APIENTRYP PFNGLUNIFORM4IVARBPROC) (GLint location, GLsizei count, const GLint *value)
 typedef PFNGLUNIFORM4IVARBPROCDart =
     void Function(int location, int count, Pointer<Int32> value);
 typedef PFNGLUNIFORM4IVARBPROC =
-    Void Function(Int32 location, Uint32 count, Pointer<Int32> value);
+    Void Function(Int32 location, Int32 count, Pointer<Int32> value);
 
 // typedef void (APIENTRYP PFNGLUNIFORMMATRIX2FVARBPROC) (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
 typedef PFNGLUNIFORMMATRIX2FVARBPROCDart =
@@ -10690,8 +10462,8 @@ typedef PFNGLUNIFORMMATRIX2FVARBPROCDart =
 typedef PFNGLUNIFORMMATRIX2FVARBPROC =
     Void Function(
       Int32 location,
-      Uint32 count,
-      Int32 transpose,
+      Int32 count,
+      Uint8 transpose,
       Pointer<Float> value,
     );
 
@@ -10701,8 +10473,8 @@ typedef PFNGLUNIFORMMATRIX3FVARBPROCDart =
 typedef PFNGLUNIFORMMATRIX3FVARBPROC =
     Void Function(
       Int32 location,
-      Uint32 count,
-      Int32 transpose,
+      Int32 count,
+      Uint8 transpose,
       Pointer<Float> value,
     );
 
@@ -10712,78 +10484,78 @@ typedef PFNGLUNIFORMMATRIX4FVARBPROCDart =
 typedef PFNGLUNIFORMMATRIX4FVARBPROC =
     Void Function(
       Int32 location,
-      Uint32 count,
-      Int32 transpose,
+      Int32 count,
+      Uint8 transpose,
       Pointer<Float> value,
     );
 
 // typedef void (APIENTRYP PFNGLGETOBJECTPARAMETERFVARBPROC) (GLhandleARB obj, GLenum pname, GLfloat *params)
 typedef PFNGLGETOBJECTPARAMETERFVARBPROCDart =
-    void Function(Pointer<NativeType> obj, int pname, Pointer<Float> params);
+    void Function(Pointer<Void> obj, int pname, Pointer<Float> params);
 typedef PFNGLGETOBJECTPARAMETERFVARBPROC =
-    Void Function(Pointer<NativeType> obj, Uint32 pname, Pointer<Float> params);
+    Void Function(Pointer<Void> obj, Uint32 pname, Pointer<Float> params);
 
 // typedef void (APIENTRYP PFNGLGETOBJECTPARAMETERIVARBPROC) (GLhandleARB obj, GLenum pname, GLint *params)
 typedef PFNGLGETOBJECTPARAMETERIVARBPROCDart =
-    void Function(Pointer<NativeType> obj, int pname, Pointer<Int32> params);
+    void Function(Pointer<Void> obj, int pname, Pointer<Int32> params);
 typedef PFNGLGETOBJECTPARAMETERIVARBPROC =
-    Void Function(Pointer<NativeType> obj, Uint32 pname, Pointer<Int32> params);
+    Void Function(Pointer<Void> obj, Uint32 pname, Pointer<Int32> params);
 
 // typedef void (APIENTRYP PFNGLGETINFOLOGARBPROC) (GLhandleARB obj, GLsizei maxLength, GLsizei *length, GLcharARB *infoLog)
 typedef PFNGLGETINFOLOGARBPROCDart =
     void Function(
-      Pointer<NativeType> obj,
+      Pointer<Void> obj,
       int maxLength,
-      Pointer<Uint32> length,
+      Pointer<Int32> length,
       Pointer<Int8> infoLog,
     );
 typedef PFNGLGETINFOLOGARBPROC =
     Void Function(
-      Pointer<NativeType> obj,
-      Uint32 maxLength,
-      Pointer<Uint32> length,
+      Pointer<Void> obj,
+      Int32 maxLength,
+      Pointer<Int32> length,
       Pointer<Int8> infoLog,
     );
 
 // typedef void (APIENTRYP PFNGLGETATTACHEDOBJECTSARBPROC) (GLhandleARB containerObj, GLsizei maxCount, GLsizei *count, GLhandleARB *obj)
 typedef PFNGLGETATTACHEDOBJECTSARBPROCDart =
     void Function(
-      Pointer<NativeType> containerObj,
+      Pointer<Void> containerObj,
       int maxCount,
-      Pointer<Uint32> count,
-      Pointer<Pointer<NativeType>> obj,
+      Pointer<Int32> count,
+      Pointer<Pointer<Void>> obj,
     );
 typedef PFNGLGETATTACHEDOBJECTSARBPROC =
     Void Function(
-      Pointer<NativeType> containerObj,
-      Uint32 maxCount,
-      Pointer<Uint32> count,
-      Pointer<Pointer<NativeType>> obj,
+      Pointer<Void> containerObj,
+      Int32 maxCount,
+      Pointer<Int32> count,
+      Pointer<Pointer<Void>> obj,
     );
 
 // typedef GLint (APIENTRYP PFNGLGETUNIFORMLOCATIONARBPROC) (GLhandleARB programObj, const GLcharARB *name)
 typedef PFNGLGETUNIFORMLOCATIONARBPROCDart =
-    int Function(Pointer<NativeType> programObj, Pointer<Utf8> name);
+    int Function(Pointer<Void> programObj, Pointer<Utf8> name);
 typedef PFNGLGETUNIFORMLOCATIONARBPROC =
-    Int32 Function(Pointer<NativeType> programObj, Pointer<Utf8> name);
+    Int32 Function(Pointer<Void> programObj, Pointer<Utf8> name);
 
 // typedef void (APIENTRYP PFNGLGETACTIVEUNIFORMARBPROC) (GLhandleARB programObj, GLuint index, GLsizei maxLength, GLsizei *length, GLint *size, GLenum *type, GLcharARB *name)
 typedef PFNGLGETACTIVEUNIFORMARBPROCDart =
     void Function(
-      Pointer<NativeType> programObj,
+      Pointer<Void> programObj,
       int index,
       int maxLength,
-      Pointer<Uint32> length,
+      Pointer<Int32> length,
       Pointer<Int32> size,
       Pointer<Uint32> type,
       Pointer<Int8> name,
     );
 typedef PFNGLGETACTIVEUNIFORMARBPROC =
     Void Function(
-      Pointer<NativeType> programObj,
+      Pointer<Void> programObj,
       Uint32 index,
-      Uint32 maxLength,
-      Pointer<Uint32> length,
+      Int32 maxLength,
+      Pointer<Int32> length,
       Pointer<Int32> size,
       Pointer<Uint32> type,
       Pointer<Int8> name,
@@ -10792,13 +10564,13 @@ typedef PFNGLGETACTIVEUNIFORMARBPROC =
 // typedef void (APIENTRYP PFNGLGETUNIFORMFVARBPROC) (GLhandleARB programObj, GLint location, GLfloat *params)
 typedef PFNGLGETUNIFORMFVARBPROCDart =
     void Function(
-      Pointer<NativeType> programObj,
+      Pointer<Void> programObj,
       int location,
       Pointer<Float> params,
     );
 typedef PFNGLGETUNIFORMFVARBPROC =
     Void Function(
-      Pointer<NativeType> programObj,
+      Pointer<Void> programObj,
       Int32 location,
       Pointer<Float> params,
     );
@@ -10806,13 +10578,13 @@ typedef PFNGLGETUNIFORMFVARBPROC =
 // typedef void (APIENTRYP PFNGLGETUNIFORMIVARBPROC) (GLhandleARB programObj, GLint location, GLint *params)
 typedef PFNGLGETUNIFORMIVARBPROCDart =
     void Function(
-      Pointer<NativeType> programObj,
+      Pointer<Void> programObj,
       int location,
       Pointer<Int32> params,
     );
 typedef PFNGLGETUNIFORMIVARBPROC =
     Void Function(
-      Pointer<NativeType> programObj,
+      Pointer<Void> programObj,
       Int32 location,
       Pointer<Int32> params,
     );
@@ -10820,16 +10592,16 @@ typedef PFNGLGETUNIFORMIVARBPROC =
 // typedef void (APIENTRYP PFNGLGETSHADERSOURCEARBPROC) (GLhandleARB obj, GLsizei maxLength, GLsizei *length, GLcharARB *source)
 typedef PFNGLGETSHADERSOURCEARBPROCDart =
     void Function(
-      Pointer<NativeType> obj,
+      Pointer<Void> obj,
       int maxLength,
-      Pointer<Uint32> length,
+      Pointer<Int32> length,
       Pointer<Int8> source,
     );
 typedef PFNGLGETSHADERSOURCEARBPROC =
     Void Function(
-      Pointer<NativeType> obj,
-      Uint32 maxLength,
-      Pointer<Uint32> length,
+      Pointer<Void> obj,
+      Int32 maxLength,
+      Pointer<Int32> length,
       Pointer<Int8> source,
     );
 
@@ -10868,7 +10640,7 @@ typedef PFNGLCOMPILESHADERINCLUDEARBPROCDart =
 typedef PFNGLCOMPILESHADERINCLUDEARBPROC =
     Void Function(
       Uint32 shader,
-      Uint32 count,
+      Int32 count,
       Pointer<Pointer<Int8>> path,
       Pointer<Int32> length,
     );
@@ -10877,7 +10649,7 @@ typedef PFNGLCOMPILESHADERINCLUDEARBPROC =
 typedef PFNGLISNAMEDSTRINGARBPROCDart =
     int Function(int namelen, Pointer<Utf8> name);
 typedef PFNGLISNAMEDSTRINGARBPROC =
-    Int32 Function(Int32 namelen, Pointer<Utf8> name);
+    Uint8 Function(Int32 namelen, Pointer<Utf8> name);
 
 // typedef void (APIENTRYP PFNGLGETNAMEDSTRINGARBPROC) (GLint namelen, const GLchar *name, GLsizei bufSize, GLint *stringlen, GLchar *string)
 typedef PFNGLGETNAMEDSTRINGARBPROCDart =
@@ -10892,7 +10664,7 @@ typedef PFNGLGETNAMEDSTRINGARBPROC =
     Void Function(
       Int32 namelen,
       Pointer<Utf8> name,
-      Uint32 bufSize,
+      Int32 bufSize,
       Pointer<Int32> stringlen,
       Pointer<Int8> string,
     );
@@ -10915,51 +10687,21 @@ typedef PFNGLGETNAMEDSTRINGIVARBPROC =
 
 // typedef void (APIENTRYP PFNGLBUFFERPAGECOMMITMENTARBPROC) (GLenum target, GLintptr offset, GLsizeiptr size, GLboolean commit)
 typedef PFNGLBUFFERPAGECOMMITMENTARBPROCDart =
-    void Function(
-      int target,
-      Pointer<NativeType> offset,
-      Pointer<Uint32> size,
-      int commit,
-    );
+    void Function(int target, int offset, int size, int commit);
 typedef PFNGLBUFFERPAGECOMMITMENTARBPROC =
-    Void Function(
-      Uint32 target,
-      Pointer<NativeType> offset,
-      Pointer<Uint32> size,
-      Int32 commit,
-    );
+    Void Function(Uint32 target, IntPtr offset, IntPtr size, Uint8 commit);
 
 // typedef void (APIENTRYP PFNGLNAMEDBUFFERPAGECOMMITMENTEXTPROC) (GLuint buffer, GLintptr offset, GLsizeiptr size, GLboolean commit)
 typedef PFNGLNAMEDBUFFERPAGECOMMITMENTEXTPROCDart =
-    void Function(
-      int buffer,
-      Pointer<NativeType> offset,
-      Pointer<Uint32> size,
-      int commit,
-    );
+    void Function(int buffer, int offset, int size, int commit);
 typedef PFNGLNAMEDBUFFERPAGECOMMITMENTEXTPROC =
-    Void Function(
-      Uint32 buffer,
-      Pointer<NativeType> offset,
-      Pointer<Uint32> size,
-      Int32 commit,
-    );
+    Void Function(Uint32 buffer, IntPtr offset, IntPtr size, Uint8 commit);
 
 // typedef void (APIENTRYP PFNGLNAMEDBUFFERPAGECOMMITMENTARBPROC) (GLuint buffer, GLintptr offset, GLsizeiptr size, GLboolean commit)
 typedef PFNGLNAMEDBUFFERPAGECOMMITMENTARBPROCDart =
-    void Function(
-      int buffer,
-      Pointer<NativeType> offset,
-      Pointer<Uint32> size,
-      int commit,
-    );
+    void Function(int buffer, int offset, int size, int commit);
 typedef PFNGLNAMEDBUFFERPAGECOMMITMENTARBPROC =
-    Void Function(
-      Uint32 buffer,
-      Pointer<NativeType> offset,
-      Pointer<Uint32> size,
-      Int32 commit,
-    );
+    Void Function(Uint32 buffer, IntPtr offset, IntPtr size, Uint8 commit);
 
 // typedef void (APIENTRYP PFNGLTEXPAGECOMMITMENTARBPROC) (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLboolean commit)
 typedef PFNGLTEXPAGECOMMITMENTARBPROCDart =
@@ -10981,10 +10723,10 @@ typedef PFNGLTEXPAGECOMMITMENTARBPROC =
       Int32 xoffset,
       Int32 yoffset,
       Int32 zoffset,
-      Uint32 width,
-      Uint32 height,
-      Uint32 depth,
-      Int32 commit,
+      Int32 width,
+      Int32 height,
+      Int32 depth,
+      Uint8 commit,
     );
 
 // typedef void (APIENTRYP PFNGLTEXBUFFERARBPROC) (GLenum target, GLenum internalformat, GLuint buffer)
@@ -11004,19 +10746,19 @@ typedef PFNGLCOMPRESSEDTEXIMAGE3DARBPROCDart =
       int depth,
       int border,
       int imageSize,
-      Pointer<NativeType> data,
+      Pointer<Void> data,
     );
 typedef PFNGLCOMPRESSEDTEXIMAGE3DARBPROC =
     Void Function(
       Uint32 target,
       Int32 level,
       Uint32 internalformat,
-      Uint32 width,
-      Uint32 height,
-      Uint32 depth,
+      Int32 width,
+      Int32 height,
+      Int32 depth,
       Int32 border,
-      Uint32 imageSize,
-      Pointer<NativeType> data,
+      Int32 imageSize,
+      Pointer<Void> data,
     );
 
 // typedef void (APIENTRYP PFNGLCOMPRESSEDTEXIMAGE2DARBPROC) (GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLint border, GLsizei imageSize, const void *data)
@@ -11029,18 +10771,18 @@ typedef PFNGLCOMPRESSEDTEXIMAGE2DARBPROCDart =
       int height,
       int border,
       int imageSize,
-      Pointer<NativeType> data,
+      Pointer<Void> data,
     );
 typedef PFNGLCOMPRESSEDTEXIMAGE2DARBPROC =
     Void Function(
       Uint32 target,
       Int32 level,
       Uint32 internalformat,
-      Uint32 width,
-      Uint32 height,
+      Int32 width,
+      Int32 height,
       Int32 border,
-      Uint32 imageSize,
-      Pointer<NativeType> data,
+      Int32 imageSize,
+      Pointer<Void> data,
     );
 
 // typedef void (APIENTRYP PFNGLCOMPRESSEDTEXIMAGE1DARBPROC) (GLenum target, GLint level, GLenum internalformat, GLsizei width, GLint border, GLsizei imageSize, const void *data)
@@ -11052,17 +10794,17 @@ typedef PFNGLCOMPRESSEDTEXIMAGE1DARBPROCDart =
       int width,
       int border,
       int imageSize,
-      Pointer<NativeType> data,
+      Pointer<Void> data,
     );
 typedef PFNGLCOMPRESSEDTEXIMAGE1DARBPROC =
     Void Function(
       Uint32 target,
       Int32 level,
       Uint32 internalformat,
-      Uint32 width,
+      Int32 width,
       Int32 border,
-      Uint32 imageSize,
-      Pointer<NativeType> data,
+      Int32 imageSize,
+      Pointer<Void> data,
     );
 
 // typedef void (APIENTRYP PFNGLCOMPRESSEDTEXSUBIMAGE3DARBPROC) (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLsizei imageSize, const void *data)
@@ -11078,7 +10820,7 @@ typedef PFNGLCOMPRESSEDTEXSUBIMAGE3DARBPROCDart =
       int depth,
       int format,
       int imageSize,
-      Pointer<NativeType> data,
+      Pointer<Void> data,
     );
 typedef PFNGLCOMPRESSEDTEXSUBIMAGE3DARBPROC =
     Void Function(
@@ -11087,12 +10829,12 @@ typedef PFNGLCOMPRESSEDTEXSUBIMAGE3DARBPROC =
       Int32 xoffset,
       Int32 yoffset,
       Int32 zoffset,
-      Uint32 width,
-      Uint32 height,
-      Uint32 depth,
+      Int32 width,
+      Int32 height,
+      Int32 depth,
       Uint32 format,
-      Uint32 imageSize,
-      Pointer<NativeType> data,
+      Int32 imageSize,
+      Pointer<Void> data,
     );
 
 // typedef void (APIENTRYP PFNGLCOMPRESSEDTEXSUBIMAGE2DARBPROC) (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLsizei imageSize, const void *data)
@@ -11106,7 +10848,7 @@ typedef PFNGLCOMPRESSEDTEXSUBIMAGE2DARBPROCDart =
       int height,
       int format,
       int imageSize,
-      Pointer<NativeType> data,
+      Pointer<Void> data,
     );
 typedef PFNGLCOMPRESSEDTEXSUBIMAGE2DARBPROC =
     Void Function(
@@ -11114,11 +10856,11 @@ typedef PFNGLCOMPRESSEDTEXSUBIMAGE2DARBPROC =
       Int32 level,
       Int32 xoffset,
       Int32 yoffset,
-      Uint32 width,
-      Uint32 height,
+      Int32 width,
+      Int32 height,
       Uint32 format,
-      Uint32 imageSize,
-      Pointer<NativeType> data,
+      Int32 imageSize,
+      Pointer<Void> data,
     );
 
 // typedef void (APIENTRYP PFNGLCOMPRESSEDTEXSUBIMAGE1DARBPROC) (GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLsizei imageSize, const void *data)
@@ -11130,24 +10872,24 @@ typedef PFNGLCOMPRESSEDTEXSUBIMAGE1DARBPROCDart =
       int width,
       int format,
       int imageSize,
-      Pointer<NativeType> data,
+      Pointer<Void> data,
     );
 typedef PFNGLCOMPRESSEDTEXSUBIMAGE1DARBPROC =
     Void Function(
       Uint32 target,
       Int32 level,
       Int32 xoffset,
-      Uint32 width,
+      Int32 width,
       Uint32 format,
-      Uint32 imageSize,
-      Pointer<NativeType> data,
+      Int32 imageSize,
+      Pointer<Void> data,
     );
 
 // typedef void (APIENTRYP PFNGLGETCOMPRESSEDTEXIMAGEARBPROC) (GLenum target, GLint level, void *img)
 typedef PFNGLGETCOMPRESSEDTEXIMAGEARBPROCDart =
-    void Function(int target, int level, Pointer<NativeType> img);
+    void Function(int target, int level, Pointer<Void> img);
 typedef PFNGLGETCOMPRESSEDTEXIMAGEARBPROC =
-    Void Function(Uint32 target, Int32 level, Pointer<NativeType> img);
+    Void Function(Uint32 target, Int32 level, Pointer<Void> img);
 
 // typedef void (APIENTRYP PFNGLLOADTRANSPOSEMATRIXFARBPROC) (const GLfloat *m)
 typedef PFNGLLOADTRANSPOSEMATRIXFARBPROCDart = void Function(Pointer<Float> m);
@@ -11214,14 +10956,9 @@ typedef PFNGLWEIGHTUIVARBPROC =
 
 // typedef void (APIENTRYP PFNGLWEIGHTPOINTERARBPROC) (GLint size, GLenum type, GLsizei stride, const void *pointer)
 typedef PFNGLWEIGHTPOINTERARBPROCDart =
-    void Function(int size, int type, int stride, Pointer<NativeType> pointer);
+    void Function(int size, int type, int stride, Pointer<Void> pointer);
 typedef PFNGLWEIGHTPOINTERARBPROC =
-    Void Function(
-      Int32 size,
-      Uint32 type,
-      Uint32 stride,
-      Pointer<NativeType> pointer,
-    );
+    Void Function(Int32 size, Uint32 type, Int32 stride, Pointer<Void> pointer);
 
 // typedef void (APIENTRYP PFNGLVERTEXBLENDARBPROC) (GLint count)
 typedef PFNGLVERTEXBLENDARBPROCDart = void Function(int count);
@@ -11235,75 +10972,45 @@ typedef PFNGLBINDBUFFERARBPROC = Void Function(Uint32 target, Uint32 buffer);
 typedef PFNGLDELETEBUFFERSARBPROCDart =
     void Function(int n, Pointer<Uint32> buffers);
 typedef PFNGLDELETEBUFFERSARBPROC =
-    Void Function(Uint32 n, Pointer<Uint32> buffers);
+    Void Function(Int32 n, Pointer<Uint32> buffers);
 
 // typedef void (APIENTRYP PFNGLGENBUFFERSARBPROC) (GLsizei n, GLuint *buffers)
 typedef PFNGLGENBUFFERSARBPROCDart =
     void Function(int n, Pointer<Uint32> buffers);
 typedef PFNGLGENBUFFERSARBPROC =
-    Void Function(Uint32 n, Pointer<Uint32> buffers);
+    Void Function(Int32 n, Pointer<Uint32> buffers);
 
 // typedef GLboolean (APIENTRYP PFNGLISBUFFERARBPROC) (GLuint buffer)
 typedef PFNGLISBUFFERARBPROCDart = int Function(int buffer);
-typedef PFNGLISBUFFERARBPROC = Int32 Function(Uint32 buffer);
+typedef PFNGLISBUFFERARBPROC = Uint8 Function(Uint32 buffer);
 
 // typedef void (APIENTRYP PFNGLBUFFERDATAARBPROC) (GLenum target, GLsizeiptrARB size, const void *data, GLenum usage)
 typedef PFNGLBUFFERDATAARBPROCDart =
-    void Function(
-      int target,
-      Pointer<NativeType> size,
-      Pointer<NativeType> data,
-      int usage,
-    );
+    void Function(int target, int size, Pointer<Void> data, int usage);
 typedef PFNGLBUFFERDATAARBPROC =
-    Void Function(
-      Uint32 target,
-      Pointer<NativeType> size,
-      Pointer<NativeType> data,
-      Uint32 usage,
-    );
+    Void Function(Uint32 target, Int64 size, Pointer<Void> data, Uint32 usage);
 
 // typedef void (APIENTRYP PFNGLBUFFERSUBDATAARBPROC) (GLenum target, GLintptrARB offset, GLsizeiptrARB size, const void *data)
 typedef PFNGLBUFFERSUBDATAARBPROCDart =
-    void Function(
-      int target,
-      int offset,
-      Pointer<NativeType> size,
-      Pointer<NativeType> data,
-    );
+    void Function(int target, int offset, int size, Pointer<Void> data);
 typedef PFNGLBUFFERSUBDATAARBPROC =
-    Void Function(
-      Uint32 target,
-      Uint64 offset,
-      Pointer<NativeType> size,
-      Pointer<NativeType> data,
-    );
+    Void Function(Uint32 target, IntPtr offset, Int64 size, Pointer<Void> data);
 
 // typedef void (APIENTRYP PFNGLGETBUFFERSUBDATAARBPROC) (GLenum target, GLintptrARB offset, GLsizeiptrARB size, void *data)
 typedef PFNGLGETBUFFERSUBDATAARBPROCDart =
-    void Function(
-      int target,
-      int offset,
-      Pointer<NativeType> size,
-      Pointer<NativeType> data,
-    );
+    void Function(int target, int offset, int size, Pointer<Void> data);
 typedef PFNGLGETBUFFERSUBDATAARBPROC =
-    Void Function(
-      Uint32 target,
-      Uint64 offset,
-      Pointer<NativeType> size,
-      Pointer<NativeType> data,
-    );
+    Void Function(Uint32 target, IntPtr offset, Int64 size, Pointer<Void> data);
 
 // typedef void *(APIENTRYP PFNGLMAPBUFFERARBPROC) (GLenum target, GLenum access)
 typedef PFNGLMAPBUFFERARBPROCDart =
-    Pointer<NativeType> Function(int target, int access);
+    Pointer<Void> Function(int target, int access);
 typedef PFNGLMAPBUFFERARBPROC =
-    Pointer<NativeType> Function(Uint32 target, Uint32 access);
+    Pointer<Void> Function(Uint32 target, Uint32 access);
 
 // typedef GLboolean (APIENTRYP PFNGLUNMAPBUFFERARBPROC) (GLenum target)
 typedef PFNGLUNMAPBUFFERARBPROCDart = int Function(int target);
-typedef PFNGLUNMAPBUFFERARBPROC = Int32 Function(Uint32 target);
+typedef PFNGLUNMAPBUFFERARBPROC = Uint8 Function(Uint32 target);
 
 // typedef void (APIENTRYP PFNGLGETBUFFERPARAMETERIVARBPROC) (GLenum target, GLenum pname, GLint *params)
 typedef PFNGLGETBUFFERPARAMETERIVARBPROCDart =
@@ -11313,13 +11020,9 @@ typedef PFNGLGETBUFFERPARAMETERIVARBPROC =
 
 // typedef void (APIENTRYP PFNGLGETBUFFERPOINTERVARBPROC) (GLenum target, GLenum pname, void **params)
 typedef PFNGLGETBUFFERPOINTERVARBPROCDart =
-    void Function(int target, int pname, Pointer<Pointer<NativeType>> params);
+    void Function(int target, int pname, Pointer<Pointer<Void>> params);
 typedef PFNGLGETBUFFERPOINTERVARBPROC =
-    Void Function(
-      Uint32 target,
-      Uint32 pname,
-      Pointer<Pointer<NativeType>> params,
-    );
+    Void Function(Uint32 target, Uint32 pname, Pointer<Pointer<Void>> params);
 
 // typedef void (APIENTRYP PFNGLVERTEXATTRIB1DARBPROC) (GLuint index, GLdouble x)
 typedef PFNGLVERTEXATTRIB1DARBPROCDart = void Function(int index, double x);
@@ -11538,16 +11241,16 @@ typedef PFNGLVERTEXATTRIBPOINTERARBPROCDart =
       int type,
       int normalized,
       int stride,
-      Pointer<NativeType> pointer,
+      Pointer<Void> pointer,
     );
 typedef PFNGLVERTEXATTRIBPOINTERARBPROC =
     Void Function(
       Uint32 index,
       Int32 size,
       Uint32 type,
-      Int32 normalized,
-      Uint32 stride,
-      Pointer<NativeType> pointer,
+      Uint8 normalized,
+      Int32 stride,
+      Pointer<Void> pointer,
     );
 
 // typedef void (APIENTRYP PFNGLENABLEVERTEXATTRIBARRAYARBPROC) (GLuint index)
@@ -11578,45 +11281,33 @@ typedef PFNGLGETVERTEXATTRIBIVARBPROC =
 
 // typedef void (APIENTRYP PFNGLGETVERTEXATTRIBPOINTERVARBPROC) (GLuint index, GLenum pname, void **pointer)
 typedef PFNGLGETVERTEXATTRIBPOINTERVARBPROCDart =
-    void Function(int index, int pname, Pointer<Pointer<NativeType>> pointer);
+    void Function(int index, int pname, Pointer<Pointer<Void>> pointer);
 typedef PFNGLGETVERTEXATTRIBPOINTERVARBPROC =
-    Void Function(
-      Uint32 index,
-      Uint32 pname,
-      Pointer<Pointer<NativeType>> pointer,
-    );
+    Void Function(Uint32 index, Uint32 pname, Pointer<Pointer<Void>> pointer);
 
 // typedef void (APIENTRYP PFNGLBINDATTRIBLOCATIONARBPROC) (GLhandleARB programObj, GLuint index, const GLcharARB *name)
 typedef PFNGLBINDATTRIBLOCATIONARBPROCDart =
-    void Function(
-      Pointer<NativeType> programObj,
-      int index,
-      Pointer<Utf8> name,
-    );
+    void Function(Pointer<Void> programObj, int index, Pointer<Utf8> name);
 typedef PFNGLBINDATTRIBLOCATIONARBPROC =
-    Void Function(
-      Pointer<NativeType> programObj,
-      Uint32 index,
-      Pointer<Utf8> name,
-    );
+    Void Function(Pointer<Void> programObj, Uint32 index, Pointer<Utf8> name);
 
 // typedef void (APIENTRYP PFNGLGETACTIVEATTRIBARBPROC) (GLhandleARB programObj, GLuint index, GLsizei maxLength, GLsizei *length, GLint *size, GLenum *type, GLcharARB *name)
 typedef PFNGLGETACTIVEATTRIBARBPROCDart =
     void Function(
-      Pointer<NativeType> programObj,
+      Pointer<Void> programObj,
       int index,
       int maxLength,
-      Pointer<Uint32> length,
+      Pointer<Int32> length,
       Pointer<Int32> size,
       Pointer<Uint32> type,
       Pointer<Int8> name,
     );
 typedef PFNGLGETACTIVEATTRIBARBPROC =
     Void Function(
-      Pointer<NativeType> programObj,
+      Pointer<Void> programObj,
       Uint32 index,
-      Uint32 maxLength,
-      Pointer<Uint32> length,
+      Int32 maxLength,
+      Pointer<Int32> length,
       Pointer<Int32> size,
       Pointer<Uint32> type,
       Pointer<Int8> name,
@@ -11624,15 +11315,15 @@ typedef PFNGLGETACTIVEATTRIBARBPROC =
 
 // typedef GLint (APIENTRYP PFNGLGETATTRIBLOCATIONARBPROC) (GLhandleARB programObj, const GLcharARB *name)
 typedef PFNGLGETATTRIBLOCATIONARBPROCDart =
-    int Function(Pointer<NativeType> programObj, Pointer<Utf8> name);
+    int Function(Pointer<Void> programObj, Pointer<Utf8> name);
 typedef PFNGLGETATTRIBLOCATIONARBPROC =
-    Int32 Function(Pointer<NativeType> programObj, Pointer<Utf8> name);
+    Int32 Function(Pointer<Void> programObj, Pointer<Utf8> name);
 
 // typedef void (APIENTRYP PFNGLDEPTHRANGEARRAYDVNVPROC) (GLuint first, GLsizei count, const GLdouble *v)
 typedef PFNGLDEPTHRANGEARRAYDVNVPROCDart =
     void Function(int first, int count, Pointer<Double> v);
 typedef PFNGLDEPTHRANGEARRAYDVNVPROC =
-    Void Function(Uint32 first, Uint32 count, Pointer<Double> v);
+    Void Function(Uint32 first, Int32 count, Pointer<Double> v);
 
 // typedef void (APIENTRYP PFNGLDEPTHRANGEINDEXEDDNVPROC) (GLuint index, GLdouble n, GLdouble f)
 typedef PFNGLDEPTHRANGEINDEXEDDNVPROCDart =
@@ -12013,8 +11704,8 @@ typedef PFNGLBITMAPXOESPROCDart =
     );
 typedef PFNGLBITMAPXOESPROC =
     Void Function(
-      Uint32 width,
-      Uint32 height,
+      Int32 width,
+      Int32 height,
       Int32 xorig,
       Int32 yorig,
       Int32 xmove,
@@ -12078,7 +11769,7 @@ typedef PFNGLEVALCOORD2XVOESPROC = Void Function(Pointer<Int32> coords);
 typedef PFNGLFEEDBACKBUFFERXOESPROCDart =
     void Function(int n, int type, Pointer<Int32> buffer);
 typedef PFNGLFEEDBACKBUFFERXOESPROC =
-    Void Function(Uint32 n, Uint32 type, Pointer<Int32> buffer);
+    Void Function(Int32 n, Uint32 type, Pointer<Int32> buffer);
 
 // typedef void (APIENTRYP PFNGLGETCONVOLUTIONPARAMETERXVOESPROC) (GLenum target, GLenum pname, GLfixed *params)
 typedef PFNGLGETCONVOLUTIONPARAMETERXVOESPROCDart =
@@ -12277,11 +11968,7 @@ typedef PFNGLPIXELZOOMXOESPROC = Void Function(Int32 xfactor, Int32 yfactor);
 typedef PFNGLPRIORITIZETEXTURESXOESPROCDart =
     void Function(int n, Pointer<Uint32> textures, Pointer<Int32> priorities);
 typedef PFNGLPRIORITIZETEXTURESXOESPROC =
-    Void Function(
-      Uint32 n,
-      Pointer<Uint32> textures,
-      Pointer<Int32> priorities,
-    );
+    Void Function(Int32 n, Pointer<Uint32> textures, Pointer<Int32> priorities);
 
 // typedef void (APIENTRYP PFNGLRASTERPOS2XOESPROC) (GLfixed x, GLfixed y)
 typedef PFNGLRASTERPOS2XOESPROCDart = void Function(int x, int y);
@@ -12438,16 +12125,16 @@ typedef GLDEBUGPROCAMDDart =
       int severity,
       int length,
       Pointer<Utf8> message,
-      Pointer<NativeType> userParam,
+      Pointer<Void> userParam,
     );
 typedef GLDEBUGPROCAMD =
     Void Function(
       Uint32 id,
       Uint32 category,
       Uint32 severity,
-      Uint32 length,
+      Int32 length,
       Pointer<Utf8> message,
-      Pointer<NativeType> userParam,
+      Pointer<Void> userParam,
     );
 
 // typedef void (APIENTRYP PFNGLDEBUGMESSAGEENABLEAMDPROC) (GLenum category, GLenum severity, GLsizei count, const GLuint *ids, GLboolean enabled)
@@ -12463,9 +12150,9 @@ typedef PFNGLDEBUGMESSAGEENABLEAMDPROC =
     Void Function(
       Uint32 category,
       Uint32 severity,
-      Uint32 count,
+      Int32 count,
       Pointer<Uint32> ids,
-      Int32 enabled,
+      Uint8 enabled,
     );
 
 // typedef void (APIENTRYP PFNGLDEBUGMESSAGEINSERTAMDPROC) (GLenum category, GLenum severity, GLuint id, GLsizei length, const GLchar *buf)
@@ -12482,7 +12169,7 @@ typedef PFNGLDEBUGMESSAGEINSERTAMDPROC =
       Uint32 category,
       Uint32 severity,
       Uint32 id,
-      Uint32 length,
+      Int32 length,
       Pointer<Utf8> buf,
     );
 
@@ -12490,12 +12177,12 @@ typedef PFNGLDEBUGMESSAGEINSERTAMDPROC =
 typedef PFNGLDEBUGMESSAGECALLBACKAMDPROCDart =
     void Function(
       Pointer<NativeFunction<GLDEBUGPROCAMD>> callback,
-      Pointer<NativeType> userParam,
+      Pointer<Void> userParam,
     );
 typedef PFNGLDEBUGMESSAGECALLBACKAMDPROC =
     Void Function(
       Pointer<NativeFunction<GLDEBUGPROCAMD>> callback,
-      Pointer<NativeType> userParam,
+      Pointer<Void> userParam,
     );
 
 // typedef GLuint (APIENTRYP PFNGLGETDEBUGMESSAGELOGAMDPROC) (GLuint count, GLsizei bufSize, GLenum *categories, GLenum *severities, GLuint *ids, GLsizei *lengths, GLchar *message)
@@ -12506,17 +12193,17 @@ typedef PFNGLGETDEBUGMESSAGELOGAMDPROCDart =
       Pointer<Uint32> categories,
       Pointer<Uint32> severities,
       Pointer<Uint32> ids,
-      Pointer<Uint32> lengths,
+      Pointer<Int32> lengths,
       Pointer<Int8> message,
     );
 typedef PFNGLGETDEBUGMESSAGELOGAMDPROC =
     Uint32 Function(
       Uint32 count,
-      Uint32 bufSize,
+      Int32 bufSize,
       Pointer<Uint32> categories,
       Pointer<Uint32> severities,
       Pointer<Uint32> ids,
-      Pointer<Uint32> lengths,
+      Pointer<Int32> lengths,
       Pointer<Int8> message,
     );
 
@@ -12562,11 +12249,11 @@ typedef PFNGLRENDERBUFFERSTORAGEMULTISAMPLEADVANCEDAMDPROCDart =
 typedef PFNGLRENDERBUFFERSTORAGEMULTISAMPLEADVANCEDAMDPROC =
     Void Function(
       Uint32 target,
-      Uint32 samples,
-      Uint32 storageSamples,
+      Int32 samples,
+      Int32 storageSamples,
       Uint32 internalformat,
-      Uint32 width,
-      Uint32 height,
+      Int32 width,
+      Int32 height,
     );
 
 // typedef void (APIENTRYP PFNGLNAMEDRENDERBUFFERSTORAGEMULTISAMPLEADVANCEDAMDPROC) (GLuint renderbuffer, GLsizei samples, GLsizei storageSamples, GLenum internalformat, GLsizei width, GLsizei height)
@@ -12582,11 +12269,11 @@ typedef PFNGLNAMEDRENDERBUFFERSTORAGEMULTISAMPLEADVANCEDAMDPROCDart =
 typedef PFNGLNAMEDRENDERBUFFERSTORAGEMULTISAMPLEADVANCEDAMDPROC =
     Void Function(
       Uint32 renderbuffer,
-      Uint32 samples,
-      Uint32 storageSamples,
+      Int32 samples,
+      Int32 storageSamples,
       Uint32 internalformat,
-      Uint32 width,
-      Uint32 height,
+      Int32 width,
+      Int32 height,
     );
 
 // typedef void (APIENTRYP PFNGLFRAMEBUFFERSAMPLEPOSITIONSFVAMDPROC) (GLenum target, GLuint numsamples, GLuint pixelindex, const GLfloat *values)
@@ -12637,7 +12324,7 @@ typedef PFNGLGETFRAMEBUFFERPARAMETERFVAMDPROC =
       Uint32 pname,
       Uint32 numsamples,
       Uint32 pixelindex,
-      Uint32 size,
+      Int32 size,
       Pointer<Float> values,
     );
 
@@ -12657,7 +12344,7 @@ typedef PFNGLGETNAMEDFRAMEBUFFERPARAMETERFVAMDPROC =
       Uint32 pname,
       Uint32 numsamples,
       Uint32 pixelindex,
-      Uint32 size,
+      Int32 size,
       Pointer<Float> values,
     );
 
@@ -12686,25 +12373,25 @@ typedef PFNGLUNIFORM4I64NVPROC =
 typedef PFNGLUNIFORM1I64VNVPROCDart =
     void Function(int location, int count, Pointer<Int64> value);
 typedef PFNGLUNIFORM1I64VNVPROC =
-    Void Function(Int32 location, Uint32 count, Pointer<Int64> value);
+    Void Function(Int32 location, Int32 count, Pointer<Int64> value);
 
 // typedef void (APIENTRYP PFNGLUNIFORM2I64VNVPROC) (GLint location, GLsizei count, const GLint64EXT *value)
 typedef PFNGLUNIFORM2I64VNVPROCDart =
     void Function(int location, int count, Pointer<Int64> value);
 typedef PFNGLUNIFORM2I64VNVPROC =
-    Void Function(Int32 location, Uint32 count, Pointer<Int64> value);
+    Void Function(Int32 location, Int32 count, Pointer<Int64> value);
 
 // typedef void (APIENTRYP PFNGLUNIFORM3I64VNVPROC) (GLint location, GLsizei count, const GLint64EXT *value)
 typedef PFNGLUNIFORM3I64VNVPROCDart =
     void Function(int location, int count, Pointer<Int64> value);
 typedef PFNGLUNIFORM3I64VNVPROC =
-    Void Function(Int32 location, Uint32 count, Pointer<Int64> value);
+    Void Function(Int32 location, Int32 count, Pointer<Int64> value);
 
 // typedef void (APIENTRYP PFNGLUNIFORM4I64VNVPROC) (GLint location, GLsizei count, const GLint64EXT *value)
 typedef PFNGLUNIFORM4I64VNVPROCDart =
     void Function(int location, int count, Pointer<Int64> value);
 typedef PFNGLUNIFORM4I64VNVPROC =
-    Void Function(Int32 location, Uint32 count, Pointer<Int64> value);
+    Void Function(Int32 location, Int32 count, Pointer<Int64> value);
 
 // typedef void (APIENTRYP PFNGLUNIFORM1UI64NVPROC) (GLint location, GLuint64EXT x)
 typedef PFNGLUNIFORM1UI64NVPROCDart = void Function(int location, int x);
@@ -12731,25 +12418,25 @@ typedef PFNGLUNIFORM4UI64NVPROC =
 typedef PFNGLUNIFORM1UI64VNVPROCDart =
     void Function(int location, int count, Pointer<Uint64> value);
 typedef PFNGLUNIFORM1UI64VNVPROC =
-    Void Function(Int32 location, Uint32 count, Pointer<Uint64> value);
+    Void Function(Int32 location, Int32 count, Pointer<Uint64> value);
 
 // typedef void (APIENTRYP PFNGLUNIFORM2UI64VNVPROC) (GLint location, GLsizei count, const GLuint64EXT *value)
 typedef PFNGLUNIFORM2UI64VNVPROCDart =
     void Function(int location, int count, Pointer<Uint64> value);
 typedef PFNGLUNIFORM2UI64VNVPROC =
-    Void Function(Int32 location, Uint32 count, Pointer<Uint64> value);
+    Void Function(Int32 location, Int32 count, Pointer<Uint64> value);
 
 // typedef void (APIENTRYP PFNGLUNIFORM3UI64VNVPROC) (GLint location, GLsizei count, const GLuint64EXT *value)
 typedef PFNGLUNIFORM3UI64VNVPROCDart =
     void Function(int location, int count, Pointer<Uint64> value);
 typedef PFNGLUNIFORM3UI64VNVPROC =
-    Void Function(Int32 location, Uint32 count, Pointer<Uint64> value);
+    Void Function(Int32 location, Int32 count, Pointer<Uint64> value);
 
 // typedef void (APIENTRYP PFNGLUNIFORM4UI64VNVPROC) (GLint location, GLsizei count, const GLuint64EXT *value)
 typedef PFNGLUNIFORM4UI64VNVPROCDart =
     void Function(int location, int count, Pointer<Uint64> value);
 typedef PFNGLUNIFORM4UI64VNVPROC =
-    Void Function(Int32 location, Uint32 count, Pointer<Uint64> value);
+    Void Function(Int32 location, Int32 count, Pointer<Uint64> value);
 
 // typedef void (APIENTRYP PFNGLGETUNIFORMI64VNVPROC) (GLuint program, GLint location, GLint64EXT *params)
 typedef PFNGLGETUNIFORMI64VNVPROCDart =
@@ -12801,7 +12488,7 @@ typedef PFNGLPROGRAMUNIFORM1I64VNVPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
+      Int32 count,
       Pointer<Int64> value,
     );
 
@@ -12812,7 +12499,7 @@ typedef PFNGLPROGRAMUNIFORM2I64VNVPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
+      Int32 count,
       Pointer<Int64> value,
     );
 
@@ -12823,7 +12510,7 @@ typedef PFNGLPROGRAMUNIFORM3I64VNVPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
+      Int32 count,
       Pointer<Int64> value,
     );
 
@@ -12834,7 +12521,7 @@ typedef PFNGLPROGRAMUNIFORM4I64VNVPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
+      Int32 count,
       Pointer<Int64> value,
     );
 
@@ -12876,7 +12563,7 @@ typedef PFNGLPROGRAMUNIFORM1UI64VNVPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
+      Int32 count,
       Pointer<Uint64> value,
     );
 
@@ -12887,7 +12574,7 @@ typedef PFNGLPROGRAMUNIFORM2UI64VNVPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
+      Int32 count,
       Pointer<Uint64> value,
     );
 
@@ -12898,7 +12585,7 @@ typedef PFNGLPROGRAMUNIFORM3UI64VNVPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
+      Int32 count,
       Pointer<Uint64> value,
     );
 
@@ -12909,7 +12596,7 @@ typedef PFNGLPROGRAMUNIFORM4UI64VNVPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
+      Int32 count,
       Pointer<Uint64> value,
     );
 
@@ -12921,18 +12608,13 @@ typedef PFNGLVERTEXATTRIBPARAMETERIAMDPROC =
 
 // typedef void (APIENTRYP PFNGLMULTIDRAWARRAYSINDIRECTAMDPROC) (GLenum mode, const void *indirect, GLsizei primcount, GLsizei stride)
 typedef PFNGLMULTIDRAWARRAYSINDIRECTAMDPROCDart =
-    void Function(
-      int mode,
-      Pointer<NativeType> indirect,
-      int primcount,
-      int stride,
-    );
+    void Function(int mode, Pointer<Void> indirect, int primcount, int stride);
 typedef PFNGLMULTIDRAWARRAYSINDIRECTAMDPROC =
     Void Function(
       Uint32 mode,
-      Pointer<NativeType> indirect,
-      Uint32 primcount,
-      Uint32 stride,
+      Pointer<Void> indirect,
+      Int32 primcount,
+      Int32 stride,
     );
 
 // typedef void (APIENTRYP PFNGLMULTIDRAWELEMENTSINDIRECTAMDPROC) (GLenum mode, GLenum type, const void *indirect, GLsizei primcount, GLsizei stride)
@@ -12940,7 +12622,7 @@ typedef PFNGLMULTIDRAWELEMENTSINDIRECTAMDPROCDart =
     void Function(
       int mode,
       int type,
-      Pointer<NativeType> indirect,
+      Pointer<Void> indirect,
       int primcount,
       int stride,
     );
@@ -12948,9 +12630,9 @@ typedef PFNGLMULTIDRAWELEMENTSINDIRECTAMDPROC =
     Void Function(
       Uint32 mode,
       Uint32 type,
-      Pointer<NativeType> indirect,
-      Uint32 primcount,
-      Uint32 stride,
+      Pointer<Void> indirect,
+      Int32 primcount,
+      Int32 stride,
     );
 
 // typedef void (APIENTRYP PFNGLGENNAMESAMDPROC) (GLenum identifier, GLuint num, GLuint *names)
@@ -12967,7 +12649,7 @@ typedef PFNGLDELETENAMESAMDPROC =
 
 // typedef GLboolean (APIENTRYP PFNGLISNAMEAMDPROC) (GLenum identifier, GLuint name)
 typedef PFNGLISNAMEAMDPROCDart = int Function(int identifier, int name);
-typedef PFNGLISNAMEAMDPROC = Int32 Function(Uint32 identifier, Uint32 name);
+typedef PFNGLISNAMEAMDPROC = Uint8 Function(Uint32 identifier, Uint32 name);
 
 // typedef void (APIENTRYP PFNGLQUERYOBJECTPARAMETERUIAMDPROC) (GLenum target, GLuint id, GLenum pname, GLuint param)
 typedef PFNGLQUERYOBJECTPARAMETERUIAMDPROCDart =
@@ -12985,7 +12667,7 @@ typedef PFNGLGETPERFMONITORGROUPSAMDPROCDart =
 typedef PFNGLGETPERFMONITORGROUPSAMDPROC =
     Void Function(
       Pointer<Int32> numGroups,
-      Uint32 groupsSize,
+      Int32 groupsSize,
       Pointer<Uint32> groups,
     );
 
@@ -13003,7 +12685,7 @@ typedef PFNGLGETPERFMONITORCOUNTERSAMDPROC =
       Uint32 group,
       Pointer<Int32> numCounters,
       Pointer<Int32> maxActiveCounters,
-      Uint32 counterSize,
+      Int32 counterSize,
       Pointer<Uint32> counters,
     );
 
@@ -13012,14 +12694,14 @@ typedef PFNGLGETPERFMONITORGROUPSTRINGAMDPROCDart =
     void Function(
       int group,
       int bufSize,
-      Pointer<Uint32> length,
+      Pointer<Int32> length,
       Pointer<Int8> groupString,
     );
 typedef PFNGLGETPERFMONITORGROUPSTRINGAMDPROC =
     Void Function(
       Uint32 group,
-      Uint32 bufSize,
-      Pointer<Uint32> length,
+      Int32 bufSize,
+      Pointer<Int32> length,
       Pointer<Int8> groupString,
     );
 
@@ -13029,40 +12711,40 @@ typedef PFNGLGETPERFMONITORCOUNTERSTRINGAMDPROCDart =
       int group,
       int counter,
       int bufSize,
-      Pointer<Uint32> length,
+      Pointer<Int32> length,
       Pointer<Int8> counterString,
     );
 typedef PFNGLGETPERFMONITORCOUNTERSTRINGAMDPROC =
     Void Function(
       Uint32 group,
       Uint32 counter,
-      Uint32 bufSize,
-      Pointer<Uint32> length,
+      Int32 bufSize,
+      Pointer<Int32> length,
       Pointer<Int8> counterString,
     );
 
 // typedef void (APIENTRYP PFNGLGETPERFMONITORCOUNTERINFOAMDPROC) (GLuint group, GLuint counter, GLenum pname, void *data)
 typedef PFNGLGETPERFMONITORCOUNTERINFOAMDPROCDart =
-    void Function(int group, int counter, int pname, Pointer<NativeType> data);
+    void Function(int group, int counter, int pname, Pointer<Void> data);
 typedef PFNGLGETPERFMONITORCOUNTERINFOAMDPROC =
     Void Function(
       Uint32 group,
       Uint32 counter,
       Uint32 pname,
-      Pointer<NativeType> data,
+      Pointer<Void> data,
     );
 
 // typedef void (APIENTRYP PFNGLGENPERFMONITORSAMDPROC) (GLsizei n, GLuint *monitors)
 typedef PFNGLGENPERFMONITORSAMDPROCDart =
     void Function(int n, Pointer<Uint32> monitors);
 typedef PFNGLGENPERFMONITORSAMDPROC =
-    Void Function(Uint32 n, Pointer<Uint32> monitors);
+    Void Function(Int32 n, Pointer<Uint32> monitors);
 
 // typedef void (APIENTRYP PFNGLDELETEPERFMONITORSAMDPROC) (GLsizei n, GLuint *monitors)
 typedef PFNGLDELETEPERFMONITORSAMDPROCDart =
     void Function(int n, Pointer<Uint32> monitors);
 typedef PFNGLDELETEPERFMONITORSAMDPROC =
-    Void Function(Uint32 n, Pointer<Uint32> monitors);
+    Void Function(Int32 n, Pointer<Uint32> monitors);
 
 // typedef void (APIENTRYP PFNGLSELECTPERFMONITORCOUNTERSAMDPROC) (GLuint monitor, GLboolean enable, GLuint group, GLint numCounters, GLuint *counterList)
 typedef PFNGLSELECTPERFMONITORCOUNTERSAMDPROCDart =
@@ -13076,7 +12758,7 @@ typedef PFNGLSELECTPERFMONITORCOUNTERSAMDPROCDart =
 typedef PFNGLSELECTPERFMONITORCOUNTERSAMDPROC =
     Void Function(
       Uint32 monitor,
-      Int32 enable,
+      Uint8 enable,
       Uint32 group,
       Int32 numCounters,
       Pointer<Uint32> counterList,
@@ -13103,7 +12785,7 @@ typedef PFNGLGETPERFMONITORCOUNTERDATAAMDPROC =
     Void Function(
       Uint32 monitor,
       Uint32 pname,
-      Uint32 dataSize,
+      Int32 dataSize,
       Pointer<Uint32> data,
       Pointer<Int32> bytesWritten,
     );
@@ -13129,10 +12811,10 @@ typedef PFNGLTEXSTORAGESPARSEAMDPROC =
     Void Function(
       Uint32 target,
       Uint32 internalFormat,
-      Uint32 width,
-      Uint32 height,
-      Uint32 depth,
-      Uint32 layers,
+      Int32 width,
+      Int32 height,
+      Int32 depth,
+      Int32 layers,
       Uint32 flags,
     );
 
@@ -13153,10 +12835,10 @@ typedef PFNGLTEXTURESTORAGESPARSEAMDPROC =
       Uint32 texture,
       Uint32 target,
       Uint32 internalFormat,
-      Uint32 width,
-      Uint32 height,
-      Uint32 depth,
-      Uint32 layers,
+      Int32 width,
+      Int32 height,
+      Int32 depth,
+      Int32 layers,
       Uint32 flags,
     );
 
@@ -13174,15 +12856,15 @@ typedef PFNGLTESSELLATIONMODEAMDPROC = Void Function(Uint32 mode);
 
 // typedef void (APIENTRYP PFNGLELEMENTPOINTERAPPLEPROC) (GLenum type, const void *pointer)
 typedef PFNGLELEMENTPOINTERAPPLEPROCDart =
-    void Function(int type, Pointer<NativeType> pointer);
+    void Function(int type, Pointer<Void> pointer);
 typedef PFNGLELEMENTPOINTERAPPLEPROC =
-    Void Function(Uint32 type, Pointer<NativeType> pointer);
+    Void Function(Uint32 type, Pointer<Void> pointer);
 
 // typedef void (APIENTRYP PFNGLDRAWELEMENTARRAYAPPLEPROC) (GLenum mode, GLint first, GLsizei count)
 typedef PFNGLDRAWELEMENTARRAYAPPLEPROCDart =
     void Function(int mode, int first, int count);
 typedef PFNGLDRAWELEMENTARRAYAPPLEPROC =
-    Void Function(Uint32 mode, Int32 first, Uint32 count);
+    Void Function(Uint32 mode, Int32 first, Int32 count);
 
 // typedef void (APIENTRYP PFNGLDRAWRANGEELEMENTARRAYAPPLEPROC) (GLenum mode, GLuint start, GLuint end, GLint first, GLsizei count)
 typedef PFNGLDRAWRANGEELEMENTARRAYAPPLEPROCDart =
@@ -13193,7 +12875,7 @@ typedef PFNGLDRAWRANGEELEMENTARRAYAPPLEPROC =
       Uint32 start,
       Uint32 end,
       Int32 first,
-      Uint32 count,
+      Int32 count,
     );
 
 // typedef void (APIENTRYP PFNGLMULTIDRAWELEMENTARRAYAPPLEPROC) (GLenum mode, const GLint *first, const GLsizei *count, GLsizei primcount)
@@ -13201,15 +12883,15 @@ typedef PFNGLMULTIDRAWELEMENTARRAYAPPLEPROCDart =
     void Function(
       int mode,
       Pointer<Int32> first,
-      Pointer<Uint32> count,
+      Pointer<Int32> count,
       int primcount,
     );
 typedef PFNGLMULTIDRAWELEMENTARRAYAPPLEPROC =
     Void Function(
       Uint32 mode,
       Pointer<Int32> first,
-      Pointer<Uint32> count,
-      Uint32 primcount,
+      Pointer<Int32> count,
+      Int32 primcount,
     );
 
 // typedef void (APIENTRYP PFNGLMULTIDRAWRANGEELEMENTARRAYAPPLEPROC) (GLenum mode, GLuint start, GLuint end, const GLint *first, const GLsizei *count, GLsizei primcount)
@@ -13219,7 +12901,7 @@ typedef PFNGLMULTIDRAWRANGEELEMENTARRAYAPPLEPROCDart =
       int start,
       int end,
       Pointer<Int32> first,
-      Pointer<Uint32> count,
+      Pointer<Int32> count,
       int primcount,
     );
 typedef PFNGLMULTIDRAWRANGEELEMENTARRAYAPPLEPROC =
@@ -13228,21 +12910,21 @@ typedef PFNGLMULTIDRAWRANGEELEMENTARRAYAPPLEPROC =
       Uint32 start,
       Uint32 end,
       Pointer<Int32> first,
-      Pointer<Uint32> count,
-      Uint32 primcount,
+      Pointer<Int32> count,
+      Int32 primcount,
     );
 
 // typedef void (APIENTRYP PFNGLGENFENCESAPPLEPROC) (GLsizei n, GLuint *fences)
 typedef PFNGLGENFENCESAPPLEPROCDart =
     void Function(int n, Pointer<Uint32> fences);
 typedef PFNGLGENFENCESAPPLEPROC =
-    Void Function(Uint32 n, Pointer<Uint32> fences);
+    Void Function(Int32 n, Pointer<Uint32> fences);
 
 // typedef void (APIENTRYP PFNGLDELETEFENCESAPPLEPROC) (GLsizei n, const GLuint *fences)
 typedef PFNGLDELETEFENCESAPPLEPROCDart =
     void Function(int n, Pointer<Uint32> fences);
 typedef PFNGLDELETEFENCESAPPLEPROC =
-    Void Function(Uint32 n, Pointer<Uint32> fences);
+    Void Function(Int32 n, Pointer<Uint32> fences);
 
 // typedef void (APIENTRYP PFNGLSETFENCEAPPLEPROC) (GLuint fence)
 typedef PFNGLSETFENCEAPPLEPROCDart = void Function(int fence);
@@ -13250,11 +12932,11 @@ typedef PFNGLSETFENCEAPPLEPROC = Void Function(Uint32 fence);
 
 // typedef GLboolean (APIENTRYP PFNGLISFENCEAPPLEPROC) (GLuint fence)
 typedef PFNGLISFENCEAPPLEPROCDart = int Function(int fence);
-typedef PFNGLISFENCEAPPLEPROC = Int32 Function(Uint32 fence);
+typedef PFNGLISFENCEAPPLEPROC = Uint8 Function(Uint32 fence);
 
 // typedef GLboolean (APIENTRYP PFNGLTESTFENCEAPPLEPROC) (GLuint fence)
 typedef PFNGLTESTFENCEAPPLEPROCDart = int Function(int fence);
-typedef PFNGLTESTFENCEAPPLEPROC = Int32 Function(Uint32 fence);
+typedef PFNGLTESTFENCEAPPLEPROC = Uint8 Function(Uint32 fence);
 
 // typedef void (APIENTRYP PFNGLFINISHFENCEAPPLEPROC) (GLuint fence)
 typedef PFNGLFINISHFENCEAPPLEPROCDart = void Function(int fence);
@@ -13262,7 +12944,7 @@ typedef PFNGLFINISHFENCEAPPLEPROC = Void Function(Uint32 fence);
 
 // typedef GLboolean (APIENTRYP PFNGLTESTOBJECTAPPLEPROC) (GLenum object, GLuint name)
 typedef PFNGLTESTOBJECTAPPLEPROCDart = int Function(int object, int name);
-typedef PFNGLTESTOBJECTAPPLEPROC = Int32 Function(Uint32 object, Uint32 name);
+typedef PFNGLTESTOBJECTAPPLEPROC = Uint8 Function(Uint32 object, Uint32 name);
 
 // typedef void (APIENTRYP PFNGLFINISHOBJECTAPPLEPROC) (GLenum object, GLint name)
 typedef PFNGLFINISHOBJECTAPPLEPROCDart = void Function(int object, int name);
@@ -13276,13 +12958,9 @@ typedef PFNGLBUFFERPARAMETERIAPPLEPROC =
 
 // typedef void (APIENTRYP PFNGLFLUSHMAPPEDBUFFERRANGEAPPLEPROC) (GLenum target, GLintptr offset, GLsizeiptr size)
 typedef PFNGLFLUSHMAPPEDBUFFERRANGEAPPLEPROCDart =
-    void Function(int target, Pointer<NativeType> offset, Pointer<Uint32> size);
+    void Function(int target, int offset, int size);
 typedef PFNGLFLUSHMAPPEDBUFFERRANGEAPPLEPROC =
-    Void Function(
-      Uint32 target,
-      Pointer<NativeType> offset,
-      Pointer<Uint32> size,
-    );
+    Void Function(Uint32 target, IntPtr offset, IntPtr size);
 
 // typedef GLenum (APIENTRYP PFNGLOBJECTPURGEABLEAPPLEPROC) (GLenum objectType, GLuint name, GLenum option)
 typedef PFNGLOBJECTPURGEABLEAPPLEPROCDart =
@@ -13309,19 +12987,15 @@ typedef PFNGLGETOBJECTPARAMETERIVAPPLEPROC =
 
 // typedef void (APIENTRYP PFNGLTEXTURERANGEAPPLEPROC) (GLenum target, GLsizei length, const void *pointer)
 typedef PFNGLTEXTURERANGEAPPLEPROCDart =
-    void Function(int target, int length, Pointer<NativeType> pointer);
+    void Function(int target, int length, Pointer<Void> pointer);
 typedef PFNGLTEXTURERANGEAPPLEPROC =
-    Void Function(Uint32 target, Uint32 length, Pointer<NativeType> pointer);
+    Void Function(Uint32 target, Int32 length, Pointer<Void> pointer);
 
 // typedef void (APIENTRYP PFNGLGETTEXPARAMETERPOINTERVAPPLEPROC) (GLenum target, GLenum pname, void **params)
 typedef PFNGLGETTEXPARAMETERPOINTERVAPPLEPROCDart =
-    void Function(int target, int pname, Pointer<Pointer<NativeType>> params);
+    void Function(int target, int pname, Pointer<Pointer<Void>> params);
 typedef PFNGLGETTEXPARAMETERPOINTERVAPPLEPROC =
-    Void Function(
-      Uint32 target,
-      Uint32 pname,
-      Pointer<Pointer<NativeType>> params,
-    );
+    Void Function(Uint32 target, Uint32 pname, Pointer<Pointer<Void>> params);
 
 // typedef void (APIENTRYP PFNGLBINDVERTEXARRAYAPPLEPROC) (GLuint array)
 typedef PFNGLBINDVERTEXARRAYAPPLEPROCDart = void Function(int array);
@@ -13331,29 +13005,29 @@ typedef PFNGLBINDVERTEXARRAYAPPLEPROC = Void Function(Uint32 array);
 typedef PFNGLDELETEVERTEXARRAYSAPPLEPROCDart =
     void Function(int n, Pointer<Uint32> arrays);
 typedef PFNGLDELETEVERTEXARRAYSAPPLEPROC =
-    Void Function(Uint32 n, Pointer<Uint32> arrays);
+    Void Function(Int32 n, Pointer<Uint32> arrays);
 
 // typedef void (APIENTRYP PFNGLGENVERTEXARRAYSAPPLEPROC) (GLsizei n, GLuint *arrays)
 typedef PFNGLGENVERTEXARRAYSAPPLEPROCDart =
     void Function(int n, Pointer<Uint32> arrays);
 typedef PFNGLGENVERTEXARRAYSAPPLEPROC =
-    Void Function(Uint32 n, Pointer<Uint32> arrays);
+    Void Function(Int32 n, Pointer<Uint32> arrays);
 
 // typedef GLboolean (APIENTRYP PFNGLISVERTEXARRAYAPPLEPROC) (GLuint array)
 typedef PFNGLISVERTEXARRAYAPPLEPROCDart = int Function(int array);
-typedef PFNGLISVERTEXARRAYAPPLEPROC = Int32 Function(Uint32 array);
+typedef PFNGLISVERTEXARRAYAPPLEPROC = Uint8 Function(Uint32 array);
 
 // typedef void (APIENTRYP PFNGLVERTEXARRAYRANGEAPPLEPROC) (GLsizei length, void *pointer)
 typedef PFNGLVERTEXARRAYRANGEAPPLEPROCDart =
-    void Function(int length, Pointer<NativeType> pointer);
+    void Function(int length, Pointer<Void> pointer);
 typedef PFNGLVERTEXARRAYRANGEAPPLEPROC =
-    Void Function(Uint32 length, Pointer<NativeType> pointer);
+    Void Function(Int32 length, Pointer<Void> pointer);
 
 // typedef void (APIENTRYP PFNGLFLUSHVERTEXARRAYRANGEAPPLEPROC) (GLsizei length, void *pointer)
 typedef PFNGLFLUSHVERTEXARRAYRANGEAPPLEPROCDart =
-    void Function(int length, Pointer<NativeType> pointer);
+    void Function(int length, Pointer<Void> pointer);
 typedef PFNGLFLUSHVERTEXARRAYRANGEAPPLEPROC =
-    Void Function(Uint32 length, Pointer<NativeType> pointer);
+    Void Function(Int32 length, Pointer<Void> pointer);
 
 // typedef void (APIENTRYP PFNGLVERTEXARRAYPARAMETERIAPPLEPROC) (GLenum pname, GLint param)
 typedef PFNGLVERTEXARRAYPARAMETERIAPPLEPROCDart =
@@ -13377,7 +13051,7 @@ typedef PFNGLDISABLEVERTEXATTRIBAPPLEPROC =
 typedef PFNGLISVERTEXATTRIBENABLEDAPPLEPROCDart =
     int Function(int index, int pname);
 typedef PFNGLISVERTEXATTRIBENABLEDAPPLEPROC =
-    Int32 Function(Uint32 index, Uint32 pname);
+    Uint8 Function(Uint32 index, Uint32 pname);
 
 // typedef void (APIENTRYP PFNGLMAPVERTEXATTRIB1DAPPLEPROC) (GLuint index, GLuint size, GLdouble u1, GLdouble u2, GLint stride, GLint order, const GLdouble *points)
 typedef PFNGLMAPVERTEXATTRIB1DAPPLEPROCDart =
@@ -13486,23 +13160,23 @@ typedef PFNGLMAPVERTEXATTRIB2FAPPLEPROC =
 // typedef void (APIENTRYP PFNGLDRAWBUFFERSATIPROC) (GLsizei n, const GLenum *bufs)
 typedef PFNGLDRAWBUFFERSATIPROCDart =
     void Function(int n, Pointer<Uint32> bufs);
-typedef PFNGLDRAWBUFFERSATIPROC = Void Function(Uint32 n, Pointer<Uint32> bufs);
+typedef PFNGLDRAWBUFFERSATIPROC = Void Function(Int32 n, Pointer<Uint32> bufs);
 
 // typedef void (APIENTRYP PFNGLELEMENTPOINTERATIPROC) (GLenum type, const void *pointer)
 typedef PFNGLELEMENTPOINTERATIPROCDart =
-    void Function(int type, Pointer<NativeType> pointer);
+    void Function(int type, Pointer<Void> pointer);
 typedef PFNGLELEMENTPOINTERATIPROC =
-    Void Function(Uint32 type, Pointer<NativeType> pointer);
+    Void Function(Uint32 type, Pointer<Void> pointer);
 
 // typedef void (APIENTRYP PFNGLDRAWELEMENTARRAYATIPROC) (GLenum mode, GLsizei count)
 typedef PFNGLDRAWELEMENTARRAYATIPROCDart = void Function(int mode, int count);
-typedef PFNGLDRAWELEMENTARRAYATIPROC = Void Function(Uint32 mode, Uint32 count);
+typedef PFNGLDRAWELEMENTARRAYATIPROC = Void Function(Uint32 mode, Int32 count);
 
 // typedef void (APIENTRYP PFNGLDRAWRANGEELEMENTARRAYATIPROC) (GLenum mode, GLuint start, GLuint end, GLsizei count)
 typedef PFNGLDRAWRANGEELEMENTARRAYATIPROCDart =
     void Function(int mode, int start, int end, int count);
 typedef PFNGLDRAWRANGEELEMENTARRAYATIPROC =
-    Void Function(Uint32 mode, Uint32 start, Uint32 end, Uint32 count);
+    Void Function(Uint32 mode, Uint32 start, Uint32 end, Int32 count);
 
 // typedef void (APIENTRYP PFNGLTEXBUMPPARAMETERIVATIPROC) (GLenum pname, const GLint *param)
 typedef PFNGLTEXBUMPPARAMETERIVATIPROCDart =
@@ -13729,10 +13403,8 @@ typedef PFNGLSETFRAGMENTSHADERCONSTANTATIPROC =
     Void Function(Uint32 dst, Pointer<Float> value);
 
 // typedef void *(APIENTRYP PFNGLMAPOBJECTBUFFERATIPROC) (GLuint buffer)
-typedef PFNGLMAPOBJECTBUFFERATIPROCDart =
-    Pointer<NativeType> Function(int buffer);
-typedef PFNGLMAPOBJECTBUFFERATIPROC =
-    Pointer<NativeType> Function(Uint32 buffer);
+typedef PFNGLMAPOBJECTBUFFERATIPROCDart = Pointer<Void> Function(int buffer);
+typedef PFNGLMAPOBJECTBUFFERATIPROC = Pointer<Void> Function(Uint32 buffer);
 
 // typedef void (APIENTRYP PFNGLUNMAPOBJECTBUFFERATIPROC) (GLuint buffer)
 typedef PFNGLUNMAPOBJECTBUFFERATIPROCDart = void Function(int buffer);
@@ -13760,13 +13432,13 @@ typedef PFNGLSTENCILFUNCSEPARATEATIPROC =
 
 // typedef GLuint (APIENTRYP PFNGLNEWOBJECTBUFFERATIPROC) (GLsizei size, const void *pointer, GLenum usage)
 typedef PFNGLNEWOBJECTBUFFERATIPROCDart =
-    int Function(int size, Pointer<NativeType> pointer, int usage);
+    int Function(int size, Pointer<Void> pointer, int usage);
 typedef PFNGLNEWOBJECTBUFFERATIPROC =
-    Uint32 Function(Uint32 size, Pointer<NativeType> pointer, Uint32 usage);
+    Uint32 Function(Int32 size, Pointer<Void> pointer, Uint32 usage);
 
 // typedef GLboolean (APIENTRYP PFNGLISOBJECTBUFFERATIPROC) (GLuint buffer)
 typedef PFNGLISOBJECTBUFFERATIPROCDart = int Function(int buffer);
-typedef PFNGLISOBJECTBUFFERATIPROC = Int32 Function(Uint32 buffer);
+typedef PFNGLISOBJECTBUFFERATIPROC = Uint8 Function(Uint32 buffer);
 
 // typedef void (APIENTRYP PFNGLUPDATEOBJECTBUFFERATIPROC) (GLuint buffer, GLuint offset, GLsizei size, const void *pointer, GLenum preserve)
 typedef PFNGLUPDATEOBJECTBUFFERATIPROCDart =
@@ -13774,15 +13446,15 @@ typedef PFNGLUPDATEOBJECTBUFFERATIPROCDart =
       int buffer,
       int offset,
       int size,
-      Pointer<NativeType> pointer,
+      Pointer<Void> pointer,
       int preserve,
     );
 typedef PFNGLUPDATEOBJECTBUFFERATIPROC =
     Void Function(
       Uint32 buffer,
       Uint32 offset,
-      Uint32 size,
-      Pointer<NativeType> pointer,
+      Int32 size,
+      Pointer<Void> pointer,
       Uint32 preserve,
     );
 
@@ -13817,7 +13489,7 @@ typedef PFNGLARRAYOBJECTATIPROC =
       Uint32 array,
       Int32 size,
       Uint32 type,
-      Uint32 stride,
+      Int32 stride,
       Uint32 buffer,
       Uint32 offset,
     );
@@ -13841,7 +13513,7 @@ typedef PFNGLVARIANTARRAYOBJECTATIPROC =
     Void Function(
       Uint32 id,
       Uint32 type,
-      Uint32 stride,
+      Int32 stride,
       Uint32 buffer,
       Uint32 offset,
     );
@@ -13874,8 +13546,8 @@ typedef PFNGLVERTEXATTRIBARRAYOBJECTATIPROC =
       Uint32 index,
       Int32 size,
       Uint32 type,
-      Int32 normalized,
-      Uint32 stride,
+      Uint8 normalized,
+      Int32 stride,
       Uint32 buffer,
       Uint32 offset,
     );
@@ -14151,29 +13823,21 @@ typedef PFNGLVERTEXBLENDENVFATIPROC = Void Function(Uint32 pname, Float param);
 
 // typedef void (APIENTRYP PFNGLEGLIMAGETARGETTEXSTORAGEEXTPROC) (GLenum target, GLeglImageOES image, const GLint* attrib_list)
 typedef PFNGLEGLIMAGETARGETTEXSTORAGEEXTPROCDart =
-    void Function(
-      int target,
-      Pointer<NativeType> image,
-      Pointer<Int32> attribList,
-    );
+    void Function(int target, Pointer<Void> image, Pointer<Int32> attribList);
 typedef PFNGLEGLIMAGETARGETTEXSTORAGEEXTPROC =
     Void Function(
       Uint32 target,
-      Pointer<NativeType> image,
+      Pointer<Void> image,
       Pointer<Int32> attribList,
     );
 
 // typedef void (APIENTRYP PFNGLEGLIMAGETARGETTEXTURESTORAGEEXTPROC) (GLuint texture, GLeglImageOES image, const GLint* attrib_list)
 typedef PFNGLEGLIMAGETARGETTEXTURESTORAGEEXTPROCDart =
-    void Function(
-      int texture,
-      Pointer<NativeType> image,
-      Pointer<Int32> attribList,
-    );
+    void Function(int texture, Pointer<Void> image, Pointer<Int32> attribList);
 typedef PFNGLEGLIMAGETARGETTEXTURESTORAGEEXTPROC =
     Void Function(
       Uint32 texture,
-      Pointer<NativeType> image,
+      Pointer<Void> image,
       Pointer<Int32> attribList,
     );
 
@@ -14191,9 +13855,9 @@ typedef PFNGLGETUNIFORMBUFFERSIZEEXTPROC =
 
 // typedef GLintptr (APIENTRYP PFNGLGETUNIFORMOFFSETEXTPROC) (GLuint program, GLint location)
 typedef PFNGLGETUNIFORMOFFSETEXTPROCDart =
-    Pointer<NativeType> Function(int program, int location);
+    int Function(int program, int location);
 typedef PFNGLGETUNIFORMOFFSETEXTPROC =
-    Pointer<NativeType> Function(Uint32 program, Int32 location);
+    IntPtr Function(Uint32 program, Int32 location);
 
 // typedef void (APIENTRYP PFNGLBLENDCOLOREXTPROC) (GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha)
 typedef PFNGLBLENDCOLOREXTPROCDart =
@@ -14235,27 +13899,27 @@ typedef PFNGLCOLORSUBTABLEEXTPROCDart =
       int count,
       int format,
       int type,
-      Pointer<NativeType> data,
+      Pointer<Void> data,
     );
 typedef PFNGLCOLORSUBTABLEEXTPROC =
     Void Function(
       Uint32 target,
-      Uint32 start,
-      Uint32 count,
+      Int32 start,
+      Int32 count,
       Uint32 format,
       Uint32 type,
-      Pointer<NativeType> data,
+      Pointer<Void> data,
     );
 
 // typedef void (APIENTRYP PFNGLCOPYCOLORSUBTABLEEXTPROC) (GLenum target, GLsizei start, GLint x, GLint y, GLsizei width)
 typedef PFNGLCOPYCOLORSUBTABLEEXTPROCDart =
     void Function(int target, int start, int x, int y, int width);
 typedef PFNGLCOPYCOLORSUBTABLEEXTPROC =
-    Void Function(Uint32 target, Uint32 start, Int32 x, Int32 y, Uint32 width);
+    Void Function(Uint32 target, Int32 start, Int32 x, Int32 y, Int32 width);
 
 // typedef void (APIENTRYP PFNGLLOCKARRAYSEXTPROC) (GLint first, GLsizei count)
 typedef PFNGLLOCKARRAYSEXTPROCDart = void Function(int first, int count);
-typedef PFNGLLOCKARRAYSEXTPROC = Void Function(Int32 first, Uint32 count);
+typedef PFNGLLOCKARRAYSEXTPROC = Void Function(Int32 first, Int32 count);
 
 // typedef void (APIENTRYP PFNGLUNLOCKARRAYSEXTPROC) (void)
 typedef PFNGLUNLOCKARRAYSEXTPROCDart = void Function();
@@ -14269,16 +13933,16 @@ typedef PFNGLCONVOLUTIONFILTER1DEXTPROCDart =
       int width,
       int format,
       int type,
-      Pointer<NativeType> image,
+      Pointer<Void> image,
     );
 typedef PFNGLCONVOLUTIONFILTER1DEXTPROC =
     Void Function(
       Uint32 target,
       Uint32 internalformat,
-      Uint32 width,
+      Int32 width,
       Uint32 format,
       Uint32 type,
-      Pointer<NativeType> image,
+      Pointer<Void> image,
     );
 
 // typedef void (APIENTRYP PFNGLCONVOLUTIONFILTER2DEXTPROC) (GLenum target, GLenum internalformat, GLsizei width, GLsizei height, GLenum format, GLenum type, const void *image)
@@ -14290,17 +13954,17 @@ typedef PFNGLCONVOLUTIONFILTER2DEXTPROCDart =
       int height,
       int format,
       int type,
-      Pointer<NativeType> image,
+      Pointer<Void> image,
     );
 typedef PFNGLCONVOLUTIONFILTER2DEXTPROC =
     Void Function(
       Uint32 target,
       Uint32 internalformat,
-      Uint32 width,
-      Uint32 height,
+      Int32 width,
+      Int32 height,
       Uint32 format,
       Uint32 type,
-      Pointer<NativeType> image,
+      Pointer<Void> image,
     );
 
 // typedef void (APIENTRYP PFNGLCONVOLUTIONPARAMETERFEXTPROC) (GLenum target, GLenum pname, GLfloat params)
@@ -14336,7 +14000,7 @@ typedef PFNGLCOPYCONVOLUTIONFILTER1DEXTPROC =
       Uint32 internalformat,
       Int32 x,
       Int32 y,
-      Uint32 width,
+      Int32 width,
     );
 
 // typedef void (APIENTRYP PFNGLCOPYCONVOLUTIONFILTER2DEXTPROC) (GLenum target, GLenum internalformat, GLint x, GLint y, GLsizei width, GLsizei height)
@@ -14355,19 +14019,19 @@ typedef PFNGLCOPYCONVOLUTIONFILTER2DEXTPROC =
       Uint32 internalformat,
       Int32 x,
       Int32 y,
-      Uint32 width,
-      Uint32 height,
+      Int32 width,
+      Int32 height,
     );
 
 // typedef void (APIENTRYP PFNGLGETCONVOLUTIONFILTEREXTPROC) (GLenum target, GLenum format, GLenum type, void *image)
 typedef PFNGLGETCONVOLUTIONFILTEREXTPROCDart =
-    void Function(int target, int format, int type, Pointer<NativeType> image);
+    void Function(int target, int format, int type, Pointer<Void> image);
 typedef PFNGLGETCONVOLUTIONFILTEREXTPROC =
     Void Function(
       Uint32 target,
       Uint32 format,
       Uint32 type,
-      Pointer<NativeType> image,
+      Pointer<Void> image,
     );
 
 // typedef void (APIENTRYP PFNGLGETCONVOLUTIONPARAMETERFVEXTPROC) (GLenum target, GLenum pname, GLfloat *params)
@@ -14388,18 +14052,18 @@ typedef PFNGLGETSEPARABLEFILTEREXTPROCDart =
       int target,
       int format,
       int type,
-      Pointer<NativeType> row,
-      Pointer<NativeType> column,
-      Pointer<NativeType> span,
+      Pointer<Void> row,
+      Pointer<Void> column,
+      Pointer<Void> span,
     );
 typedef PFNGLGETSEPARABLEFILTEREXTPROC =
     Void Function(
       Uint32 target,
       Uint32 format,
       Uint32 type,
-      Pointer<NativeType> row,
-      Pointer<NativeType> column,
-      Pointer<NativeType> span,
+      Pointer<Void> row,
+      Pointer<Void> column,
+      Pointer<Void> span,
     );
 
 // typedef void (APIENTRYP PFNGLSEPARABLEFILTER2DEXTPROC) (GLenum target, GLenum internalformat, GLsizei width, GLsizei height, GLenum format, GLenum type, const void *row, const void *column)
@@ -14411,19 +14075,19 @@ typedef PFNGLSEPARABLEFILTER2DEXTPROCDart =
       int height,
       int format,
       int type,
-      Pointer<NativeType> row,
-      Pointer<NativeType> column,
+      Pointer<Void> row,
+      Pointer<Void> column,
     );
 typedef PFNGLSEPARABLEFILTER2DEXTPROC =
     Void Function(
       Uint32 target,
       Uint32 internalformat,
-      Uint32 width,
-      Uint32 height,
+      Int32 width,
+      Int32 height,
       Uint32 format,
       Uint32 type,
-      Pointer<NativeType> row,
-      Pointer<NativeType> column,
+      Pointer<Void> row,
+      Pointer<Void> column,
     );
 
 // typedef void (APIENTRYP PFNGLTANGENT3BEXTPROC) (GLbyte tx, GLbyte ty, GLbyte tz)
@@ -14512,15 +14176,15 @@ typedef PFNGLBINORMAL3SVEXTPROC = Void Function(Pointer<Int16> v);
 
 // typedef void (APIENTRYP PFNGLTANGENTPOINTEREXTPROC) (GLenum type, GLsizei stride, const void *pointer)
 typedef PFNGLTANGENTPOINTEREXTPROCDart =
-    void Function(int type, int stride, Pointer<NativeType> pointer);
+    void Function(int type, int stride, Pointer<Void> pointer);
 typedef PFNGLTANGENTPOINTEREXTPROC =
-    Void Function(Uint32 type, Uint32 stride, Pointer<NativeType> pointer);
+    Void Function(Uint32 type, Int32 stride, Pointer<Void> pointer);
 
 // typedef void (APIENTRYP PFNGLBINORMALPOINTEREXTPROC) (GLenum type, GLsizei stride, const void *pointer)
 typedef PFNGLBINORMALPOINTEREXTPROCDart =
-    void Function(int type, int stride, Pointer<NativeType> pointer);
+    void Function(int type, int stride, Pointer<Void> pointer);
 typedef PFNGLBINORMALPOINTEREXTPROC =
-    Void Function(Uint32 type, Uint32 stride, Pointer<NativeType> pointer);
+    Void Function(Uint32 type, Int32 stride, Pointer<Void> pointer);
 
 // typedef void (APIENTRYP PFNGLCOPYTEXIMAGE1DEXTPROC) (GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLint border)
 typedef PFNGLCOPYTEXIMAGE1DEXTPROCDart =
@@ -14540,7 +14204,7 @@ typedef PFNGLCOPYTEXIMAGE1DEXTPROC =
       Uint32 internalformat,
       Int32 x,
       Int32 y,
-      Uint32 width,
+      Int32 width,
       Int32 border,
     );
 
@@ -14563,8 +14227,8 @@ typedef PFNGLCOPYTEXIMAGE2DEXTPROC =
       Uint32 internalformat,
       Int32 x,
       Int32 y,
-      Uint32 width,
-      Uint32 height,
+      Int32 width,
+      Int32 height,
       Int32 border,
     );
 
@@ -14578,7 +14242,7 @@ typedef PFNGLCOPYTEXSUBIMAGE1DEXTPROC =
       Int32 xoffset,
       Int32 x,
       Int32 y,
-      Uint32 width,
+      Int32 width,
     );
 
 // typedef void (APIENTRYP PFNGLCOPYTEXSUBIMAGE2DEXTPROC) (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint x, GLint y, GLsizei width, GLsizei height)
@@ -14601,8 +14265,8 @@ typedef PFNGLCOPYTEXSUBIMAGE2DEXTPROC =
       Int32 yoffset,
       Int32 x,
       Int32 y,
-      Uint32 width,
-      Uint32 height,
+      Int32 width,
+      Int32 height,
     );
 
 // typedef void (APIENTRYP PFNGLCOPYTEXSUBIMAGE3DEXTPROC) (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLint x, GLint y, GLsizei width, GLsizei height)
@@ -14627,8 +14291,8 @@ typedef PFNGLCOPYTEXSUBIMAGE3DEXTPROC =
       Int32 zoffset,
       Int32 x,
       Int32 y,
-      Uint32 width,
-      Uint32 height,
+      Int32 width,
+      Int32 height,
     );
 
 // typedef void (APIENTRYP PFNGLCULLPARAMETERDVEXTPROC) (GLenum pname, GLdouble *params)
@@ -14650,7 +14314,7 @@ typedef PFNGLLABELOBJECTEXTPROC =
     Void Function(
       Uint32 type,
       Uint32 object,
-      Uint32 length,
+      Int32 length,
       Pointer<Utf8> label,
     );
 
@@ -14660,15 +14324,15 @@ typedef PFNGLGETOBJECTLABELEXTPROCDart =
       int type,
       int object,
       int bufSize,
-      Pointer<Uint32> length,
+      Pointer<Int32> length,
       Pointer<Int8> label,
     );
 typedef PFNGLGETOBJECTLABELEXTPROC =
     Void Function(
       Uint32 type,
       Uint32 object,
-      Uint32 bufSize,
-      Pointer<Uint32> length,
+      Int32 bufSize,
+      Pointer<Int32> length,
       Pointer<Int8> label,
     );
 
@@ -14676,13 +14340,13 @@ typedef PFNGLGETOBJECTLABELEXTPROC =
 typedef PFNGLINSERTEVENTMARKEREXTPROCDart =
     void Function(int length, Pointer<Utf8> marker);
 typedef PFNGLINSERTEVENTMARKEREXTPROC =
-    Void Function(Uint32 length, Pointer<Utf8> marker);
+    Void Function(Int32 length, Pointer<Utf8> marker);
 
 // typedef void (APIENTRYP PFNGLPUSHGROUPMARKEREXTPROC) (GLsizei length, const GLchar *marker)
 typedef PFNGLPUSHGROUPMARKEREXTPROCDart =
     void Function(int length, Pointer<Utf8> marker);
 typedef PFNGLPUSHGROUPMARKEREXTPROC =
-    Void Function(Uint32 length, Pointer<Utf8> marker);
+    Void Function(Int32 length, Pointer<Utf8> marker);
 
 // typedef void (APIENTRYP PFNGLPOPGROUPMARKEREXTPROC) (void)
 typedef PFNGLPOPGROUPMARKEREXTPROCDart = void Function();
@@ -14855,7 +14519,7 @@ typedef PFNGLTEXTUREIMAGE1DEXTPROCDart =
       int border,
       int format,
       int type,
-      Pointer<NativeType> pixels,
+      Pointer<Void> pixels,
     );
 typedef PFNGLTEXTUREIMAGE1DEXTPROC =
     Void Function(
@@ -14863,11 +14527,11 @@ typedef PFNGLTEXTUREIMAGE1DEXTPROC =
       Uint32 target,
       Int32 level,
       Int32 internalformat,
-      Uint32 width,
+      Int32 width,
       Int32 border,
       Uint32 format,
       Uint32 type,
-      Pointer<NativeType> pixels,
+      Pointer<Void> pixels,
     );
 
 // typedef void (APIENTRYP PFNGLTEXTUREIMAGE2DEXTPROC) (GLuint texture, GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const void *pixels)
@@ -14882,7 +14546,7 @@ typedef PFNGLTEXTUREIMAGE2DEXTPROCDart =
       int border,
       int format,
       int type,
-      Pointer<NativeType> pixels,
+      Pointer<Void> pixels,
     );
 typedef PFNGLTEXTUREIMAGE2DEXTPROC =
     Void Function(
@@ -14890,12 +14554,12 @@ typedef PFNGLTEXTUREIMAGE2DEXTPROC =
       Uint32 target,
       Int32 level,
       Int32 internalformat,
-      Uint32 width,
-      Uint32 height,
+      Int32 width,
+      Int32 height,
       Int32 border,
       Uint32 format,
       Uint32 type,
-      Pointer<NativeType> pixels,
+      Pointer<Void> pixels,
     );
 
 // typedef void (APIENTRYP PFNGLTEXTURESUBIMAGE1DEXTPROC) (GLuint texture, GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLenum type, const void *pixels)
@@ -14908,7 +14572,7 @@ typedef PFNGLTEXTURESUBIMAGE1DEXTPROCDart =
       int width,
       int format,
       int type,
-      Pointer<NativeType> pixels,
+      Pointer<Void> pixels,
     );
 typedef PFNGLTEXTURESUBIMAGE1DEXTPROC =
     Void Function(
@@ -14916,10 +14580,10 @@ typedef PFNGLTEXTURESUBIMAGE1DEXTPROC =
       Uint32 target,
       Int32 level,
       Int32 xoffset,
-      Uint32 width,
+      Int32 width,
       Uint32 format,
       Uint32 type,
-      Pointer<NativeType> pixels,
+      Pointer<Void> pixels,
     );
 
 // typedef void (APIENTRYP PFNGLTEXTURESUBIMAGE2DEXTPROC) (GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const void *pixels)
@@ -14934,7 +14598,7 @@ typedef PFNGLTEXTURESUBIMAGE2DEXTPROCDart =
       int height,
       int format,
       int type,
-      Pointer<NativeType> pixels,
+      Pointer<Void> pixels,
     );
 typedef PFNGLTEXTURESUBIMAGE2DEXTPROC =
     Void Function(
@@ -14943,11 +14607,11 @@ typedef PFNGLTEXTURESUBIMAGE2DEXTPROC =
       Int32 level,
       Int32 xoffset,
       Int32 yoffset,
-      Uint32 width,
-      Uint32 height,
+      Int32 width,
+      Int32 height,
       Uint32 format,
       Uint32 type,
-      Pointer<NativeType> pixels,
+      Pointer<Void> pixels,
     );
 
 // typedef void (APIENTRYP PFNGLCOPYTEXTUREIMAGE1DEXTPROC) (GLuint texture, GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLint border)
@@ -14970,7 +14634,7 @@ typedef PFNGLCOPYTEXTUREIMAGE1DEXTPROC =
       Uint32 internalformat,
       Int32 x,
       Int32 y,
-      Uint32 width,
+      Int32 width,
       Int32 border,
     );
 
@@ -14995,8 +14659,8 @@ typedef PFNGLCOPYTEXTUREIMAGE2DEXTPROC =
       Uint32 internalformat,
       Int32 x,
       Int32 y,
-      Uint32 width,
-      Uint32 height,
+      Int32 width,
+      Int32 height,
       Int32 border,
     );
 
@@ -15019,7 +14683,7 @@ typedef PFNGLCOPYTEXTURESUBIMAGE1DEXTPROC =
       Int32 xoffset,
       Int32 x,
       Int32 y,
-      Uint32 width,
+      Int32 width,
     );
 
 // typedef void (APIENTRYP PFNGLCOPYTEXTURESUBIMAGE2DEXTPROC) (GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint x, GLint y, GLsizei width, GLsizei height)
@@ -15044,8 +14708,8 @@ typedef PFNGLCOPYTEXTURESUBIMAGE2DEXTPROC =
       Int32 yoffset,
       Int32 x,
       Int32 y,
-      Uint32 width,
-      Uint32 height,
+      Int32 width,
+      Int32 height,
     );
 
 // typedef void (APIENTRYP PFNGLGETTEXTUREIMAGEEXTPROC) (GLuint texture, GLenum target, GLint level, GLenum format, GLenum type, void *pixels)
@@ -15056,7 +14720,7 @@ typedef PFNGLGETTEXTUREIMAGEEXTPROCDart =
       int level,
       int format,
       int type,
-      Pointer<NativeType> pixels,
+      Pointer<Void> pixels,
     );
 typedef PFNGLGETTEXTUREIMAGEEXTPROC =
     Void Function(
@@ -15065,7 +14729,7 @@ typedef PFNGLGETTEXTUREIMAGEEXTPROC =
       Int32 level,
       Uint32 format,
       Uint32 type,
-      Pointer<NativeType> pixels,
+      Pointer<Void> pixels,
     );
 
 // typedef void (APIENTRYP PFNGLGETTEXTUREPARAMETERFVEXTPROC) (GLuint texture, GLenum target, GLenum pname, GLfloat *params)
@@ -15139,7 +14803,7 @@ typedef PFNGLTEXTUREIMAGE3DEXTPROCDart =
       int border,
       int format,
       int type,
-      Pointer<NativeType> pixels,
+      Pointer<Void> pixels,
     );
 typedef PFNGLTEXTUREIMAGE3DEXTPROC =
     Void Function(
@@ -15147,13 +14811,13 @@ typedef PFNGLTEXTUREIMAGE3DEXTPROC =
       Uint32 target,
       Int32 level,
       Int32 internalformat,
-      Uint32 width,
-      Uint32 height,
-      Uint32 depth,
+      Int32 width,
+      Int32 height,
+      Int32 depth,
       Int32 border,
       Uint32 format,
       Uint32 type,
-      Pointer<NativeType> pixels,
+      Pointer<Void> pixels,
     );
 
 // typedef void (APIENTRYP PFNGLTEXTURESUBIMAGE3DEXTPROC) (GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const void *pixels)
@@ -15170,7 +14834,7 @@ typedef PFNGLTEXTURESUBIMAGE3DEXTPROCDart =
       int depth,
       int format,
       int type,
-      Pointer<NativeType> pixels,
+      Pointer<Void> pixels,
     );
 typedef PFNGLTEXTURESUBIMAGE3DEXTPROC =
     Void Function(
@@ -15180,12 +14844,12 @@ typedef PFNGLTEXTURESUBIMAGE3DEXTPROC =
       Int32 xoffset,
       Int32 yoffset,
       Int32 zoffset,
-      Uint32 width,
-      Uint32 height,
-      Uint32 depth,
+      Int32 width,
+      Int32 height,
+      Int32 depth,
       Uint32 format,
       Uint32 type,
-      Pointer<NativeType> pixels,
+      Pointer<Void> pixels,
     );
 
 // typedef void (APIENTRYP PFNGLCOPYTEXTURESUBIMAGE3DEXTPROC) (GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLint x, GLint y, GLsizei width, GLsizei height)
@@ -15212,8 +14876,8 @@ typedef PFNGLCOPYTEXTURESUBIMAGE3DEXTPROC =
       Int32 zoffset,
       Int32 x,
       Int32 y,
-      Uint32 width,
-      Uint32 height,
+      Int32 width,
+      Int32 height,
     );
 
 // typedef void (APIENTRYP PFNGLBINDMULTITEXTUREEXTPROC) (GLenum texunit, GLenum target, GLuint texture)
@@ -15229,15 +14893,15 @@ typedef PFNGLMULTITEXCOORDPOINTEREXTPROCDart =
       int size,
       int type,
       int stride,
-      Pointer<NativeType> pointer,
+      Pointer<Void> pointer,
     );
 typedef PFNGLMULTITEXCOORDPOINTEREXTPROC =
     Void Function(
       Uint32 texunit,
       Int32 size,
       Uint32 type,
-      Uint32 stride,
-      Pointer<NativeType> pointer,
+      Int32 stride,
+      Pointer<Void> pointer,
     );
 
 // typedef void (APIENTRYP PFNGLMULTITEXENVFEXTPROC) (GLenum texunit, GLenum target, GLenum pname, GLfloat param)
@@ -15425,7 +15089,7 @@ typedef PFNGLMULTITEXIMAGE1DEXTPROCDart =
       int border,
       int format,
       int type,
-      Pointer<NativeType> pixels,
+      Pointer<Void> pixels,
     );
 typedef PFNGLMULTITEXIMAGE1DEXTPROC =
     Void Function(
@@ -15433,11 +15097,11 @@ typedef PFNGLMULTITEXIMAGE1DEXTPROC =
       Uint32 target,
       Int32 level,
       Int32 internalformat,
-      Uint32 width,
+      Int32 width,
       Int32 border,
       Uint32 format,
       Uint32 type,
-      Pointer<NativeType> pixels,
+      Pointer<Void> pixels,
     );
 
 // typedef void (APIENTRYP PFNGLMULTITEXIMAGE2DEXTPROC) (GLenum texunit, GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const void *pixels)
@@ -15452,7 +15116,7 @@ typedef PFNGLMULTITEXIMAGE2DEXTPROCDart =
       int border,
       int format,
       int type,
-      Pointer<NativeType> pixels,
+      Pointer<Void> pixels,
     );
 typedef PFNGLMULTITEXIMAGE2DEXTPROC =
     Void Function(
@@ -15460,12 +15124,12 @@ typedef PFNGLMULTITEXIMAGE2DEXTPROC =
       Uint32 target,
       Int32 level,
       Int32 internalformat,
-      Uint32 width,
-      Uint32 height,
+      Int32 width,
+      Int32 height,
       Int32 border,
       Uint32 format,
       Uint32 type,
-      Pointer<NativeType> pixels,
+      Pointer<Void> pixels,
     );
 
 // typedef void (APIENTRYP PFNGLMULTITEXSUBIMAGE1DEXTPROC) (GLenum texunit, GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLenum type, const void *pixels)
@@ -15478,7 +15142,7 @@ typedef PFNGLMULTITEXSUBIMAGE1DEXTPROCDart =
       int width,
       int format,
       int type,
-      Pointer<NativeType> pixels,
+      Pointer<Void> pixels,
     );
 typedef PFNGLMULTITEXSUBIMAGE1DEXTPROC =
     Void Function(
@@ -15486,10 +15150,10 @@ typedef PFNGLMULTITEXSUBIMAGE1DEXTPROC =
       Uint32 target,
       Int32 level,
       Int32 xoffset,
-      Uint32 width,
+      Int32 width,
       Uint32 format,
       Uint32 type,
-      Pointer<NativeType> pixels,
+      Pointer<Void> pixels,
     );
 
 // typedef void (APIENTRYP PFNGLMULTITEXSUBIMAGE2DEXTPROC) (GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const void *pixels)
@@ -15504,7 +15168,7 @@ typedef PFNGLMULTITEXSUBIMAGE2DEXTPROCDart =
       int height,
       int format,
       int type,
-      Pointer<NativeType> pixels,
+      Pointer<Void> pixels,
     );
 typedef PFNGLMULTITEXSUBIMAGE2DEXTPROC =
     Void Function(
@@ -15513,11 +15177,11 @@ typedef PFNGLMULTITEXSUBIMAGE2DEXTPROC =
       Int32 level,
       Int32 xoffset,
       Int32 yoffset,
-      Uint32 width,
-      Uint32 height,
+      Int32 width,
+      Int32 height,
       Uint32 format,
       Uint32 type,
-      Pointer<NativeType> pixels,
+      Pointer<Void> pixels,
     );
 
 // typedef void (APIENTRYP PFNGLCOPYMULTITEXIMAGE1DEXTPROC) (GLenum texunit, GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLint border)
@@ -15540,7 +15204,7 @@ typedef PFNGLCOPYMULTITEXIMAGE1DEXTPROC =
       Uint32 internalformat,
       Int32 x,
       Int32 y,
-      Uint32 width,
+      Int32 width,
       Int32 border,
     );
 
@@ -15565,8 +15229,8 @@ typedef PFNGLCOPYMULTITEXIMAGE2DEXTPROC =
       Uint32 internalformat,
       Int32 x,
       Int32 y,
-      Uint32 width,
-      Uint32 height,
+      Int32 width,
+      Int32 height,
       Int32 border,
     );
 
@@ -15589,7 +15253,7 @@ typedef PFNGLCOPYMULTITEXSUBIMAGE1DEXTPROC =
       Int32 xoffset,
       Int32 x,
       Int32 y,
-      Uint32 width,
+      Int32 width,
     );
 
 // typedef void (APIENTRYP PFNGLCOPYMULTITEXSUBIMAGE2DEXTPROC) (GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint x, GLint y, GLsizei width, GLsizei height)
@@ -15614,8 +15278,8 @@ typedef PFNGLCOPYMULTITEXSUBIMAGE2DEXTPROC =
       Int32 yoffset,
       Int32 x,
       Int32 y,
-      Uint32 width,
-      Uint32 height,
+      Int32 width,
+      Int32 height,
     );
 
 // typedef void (APIENTRYP PFNGLGETMULTITEXIMAGEEXTPROC) (GLenum texunit, GLenum target, GLint level, GLenum format, GLenum type, void *pixels)
@@ -15626,7 +15290,7 @@ typedef PFNGLGETMULTITEXIMAGEEXTPROCDart =
       int level,
       int format,
       int type,
-      Pointer<NativeType> pixels,
+      Pointer<Void> pixels,
     );
 typedef PFNGLGETMULTITEXIMAGEEXTPROC =
     Void Function(
@@ -15635,7 +15299,7 @@ typedef PFNGLGETMULTITEXIMAGEEXTPROC =
       Int32 level,
       Uint32 format,
       Uint32 type,
-      Pointer<NativeType> pixels,
+      Pointer<Void> pixels,
     );
 
 // typedef void (APIENTRYP PFNGLGETMULTITEXPARAMETERFVEXTPROC) (GLenum texunit, GLenum target, GLenum pname, GLfloat *params)
@@ -15709,7 +15373,7 @@ typedef PFNGLMULTITEXIMAGE3DEXTPROCDart =
       int border,
       int format,
       int type,
-      Pointer<NativeType> pixels,
+      Pointer<Void> pixels,
     );
 typedef PFNGLMULTITEXIMAGE3DEXTPROC =
     Void Function(
@@ -15717,13 +15381,13 @@ typedef PFNGLMULTITEXIMAGE3DEXTPROC =
       Uint32 target,
       Int32 level,
       Int32 internalformat,
-      Uint32 width,
-      Uint32 height,
-      Uint32 depth,
+      Int32 width,
+      Int32 height,
+      Int32 depth,
       Int32 border,
       Uint32 format,
       Uint32 type,
-      Pointer<NativeType> pixels,
+      Pointer<Void> pixels,
     );
 
 // typedef void (APIENTRYP PFNGLMULTITEXSUBIMAGE3DEXTPROC) (GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const void *pixels)
@@ -15740,7 +15404,7 @@ typedef PFNGLMULTITEXSUBIMAGE3DEXTPROCDart =
       int depth,
       int format,
       int type,
-      Pointer<NativeType> pixels,
+      Pointer<Void> pixels,
     );
 typedef PFNGLMULTITEXSUBIMAGE3DEXTPROC =
     Void Function(
@@ -15750,12 +15414,12 @@ typedef PFNGLMULTITEXSUBIMAGE3DEXTPROC =
       Int32 xoffset,
       Int32 yoffset,
       Int32 zoffset,
-      Uint32 width,
-      Uint32 height,
-      Uint32 depth,
+      Int32 width,
+      Int32 height,
+      Int32 depth,
       Uint32 format,
       Uint32 type,
-      Pointer<NativeType> pixels,
+      Pointer<Void> pixels,
     );
 
 // typedef void (APIENTRYP PFNGLCOPYMULTITEXSUBIMAGE3DEXTPROC) (GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLint x, GLint y, GLsizei width, GLsizei height)
@@ -15782,8 +15446,8 @@ typedef PFNGLCOPYMULTITEXSUBIMAGE3DEXTPROC =
       Int32 zoffset,
       Int32 x,
       Int32 y,
-      Uint32 width,
-      Uint32 height,
+      Int32 width,
+      Int32 height,
     );
 
 // typedef void (APIENTRYP PFNGLENABLECLIENTSTATEINDEXEDEXTPROC) (GLenum array, GLuint index)
@@ -15812,13 +15476,9 @@ typedef PFNGLGETDOUBLEINDEXEDVEXTPROC =
 
 // typedef void (APIENTRYP PFNGLGETPOINTERINDEXEDVEXTPROC) (GLenum target, GLuint index, void **data)
 typedef PFNGLGETPOINTERINDEXEDVEXTPROCDart =
-    void Function(int target, int index, Pointer<Pointer<NativeType>> data);
+    void Function(int target, int index, Pointer<Pointer<Void>> data);
 typedef PFNGLGETPOINTERINDEXEDVEXTPROC =
-    Void Function(
-      Uint32 target,
-      Uint32 index,
-      Pointer<Pointer<NativeType>> data,
-    );
+    Void Function(Uint32 target, Uint32 index, Pointer<Pointer<Void>> data);
 
 // typedef void (APIENTRYP PFNGLENABLEINDEXEDEXTPROC) (GLenum target, GLuint index)
 typedef PFNGLENABLEINDEXEDEXTPROCDart = void Function(int target, int index);
@@ -15831,7 +15491,7 @@ typedef PFNGLDISABLEINDEXEDEXTPROC = Void Function(Uint32 target, Uint32 index);
 // typedef GLboolean (APIENTRYP PFNGLISENABLEDINDEXEDEXTPROC) (GLenum target, GLuint index)
 typedef PFNGLISENABLEDINDEXEDEXTPROCDart = int Function(int target, int index);
 typedef PFNGLISENABLEDINDEXEDEXTPROC =
-    Int32 Function(Uint32 target, Uint32 index);
+    Uint8 Function(Uint32 target, Uint32 index);
 
 // typedef void (APIENTRYP PFNGLGETINTEGERINDEXEDVEXTPROC) (GLenum target, GLuint index, GLint *data)
 typedef PFNGLGETINTEGERINDEXEDVEXTPROCDart =
@@ -15841,9 +15501,9 @@ typedef PFNGLGETINTEGERINDEXEDVEXTPROC =
 
 // typedef void (APIENTRYP PFNGLGETBOOLEANINDEXEDVEXTPROC) (GLenum target, GLuint index, GLboolean *data)
 typedef PFNGLGETBOOLEANINDEXEDVEXTPROCDart =
-    void Function(int target, int index, Pointer<Int32> data);
+    void Function(int target, int index, Pointer<Uint8> data);
 typedef PFNGLGETBOOLEANINDEXEDVEXTPROC =
-    Void Function(Uint32 target, Uint32 index, Pointer<Int32> data);
+    Void Function(Uint32 target, Uint32 index, Pointer<Uint8> data);
 
 // typedef void (APIENTRYP PFNGLCOMPRESSEDTEXTUREIMAGE3DEXTPROC) (GLuint texture, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLsizei imageSize, const void *bits)
 typedef PFNGLCOMPRESSEDTEXTUREIMAGE3DEXTPROCDart =
@@ -15857,7 +15517,7 @@ typedef PFNGLCOMPRESSEDTEXTUREIMAGE3DEXTPROCDart =
       int depth,
       int border,
       int imageSize,
-      Pointer<NativeType> bits,
+      Pointer<Void> bits,
     );
 typedef PFNGLCOMPRESSEDTEXTUREIMAGE3DEXTPROC =
     Void Function(
@@ -15865,12 +15525,12 @@ typedef PFNGLCOMPRESSEDTEXTUREIMAGE3DEXTPROC =
       Uint32 target,
       Int32 level,
       Uint32 internalformat,
-      Uint32 width,
-      Uint32 height,
-      Uint32 depth,
+      Int32 width,
+      Int32 height,
+      Int32 depth,
       Int32 border,
-      Uint32 imageSize,
-      Pointer<NativeType> bits,
+      Int32 imageSize,
+      Pointer<Void> bits,
     );
 
 // typedef void (APIENTRYP PFNGLCOMPRESSEDTEXTUREIMAGE2DEXTPROC) (GLuint texture, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLint border, GLsizei imageSize, const void *bits)
@@ -15884,7 +15544,7 @@ typedef PFNGLCOMPRESSEDTEXTUREIMAGE2DEXTPROCDart =
       int height,
       int border,
       int imageSize,
-      Pointer<NativeType> bits,
+      Pointer<Void> bits,
     );
 typedef PFNGLCOMPRESSEDTEXTUREIMAGE2DEXTPROC =
     Void Function(
@@ -15892,11 +15552,11 @@ typedef PFNGLCOMPRESSEDTEXTUREIMAGE2DEXTPROC =
       Uint32 target,
       Int32 level,
       Uint32 internalformat,
-      Uint32 width,
-      Uint32 height,
+      Int32 width,
+      Int32 height,
       Int32 border,
-      Uint32 imageSize,
-      Pointer<NativeType> bits,
+      Int32 imageSize,
+      Pointer<Void> bits,
     );
 
 // typedef void (APIENTRYP PFNGLCOMPRESSEDTEXTUREIMAGE1DEXTPROC) (GLuint texture, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLint border, GLsizei imageSize, const void *bits)
@@ -15909,7 +15569,7 @@ typedef PFNGLCOMPRESSEDTEXTUREIMAGE1DEXTPROCDart =
       int width,
       int border,
       int imageSize,
-      Pointer<NativeType> bits,
+      Pointer<Void> bits,
     );
 typedef PFNGLCOMPRESSEDTEXTUREIMAGE1DEXTPROC =
     Void Function(
@@ -15917,10 +15577,10 @@ typedef PFNGLCOMPRESSEDTEXTUREIMAGE1DEXTPROC =
       Uint32 target,
       Int32 level,
       Uint32 internalformat,
-      Uint32 width,
+      Int32 width,
       Int32 border,
-      Uint32 imageSize,
-      Pointer<NativeType> bits,
+      Int32 imageSize,
+      Pointer<Void> bits,
     );
 
 // typedef void (APIENTRYP PFNGLCOMPRESSEDTEXTURESUBIMAGE3DEXTPROC) (GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLsizei imageSize, const void *bits)
@@ -15937,7 +15597,7 @@ typedef PFNGLCOMPRESSEDTEXTURESUBIMAGE3DEXTPROCDart =
       int depth,
       int format,
       int imageSize,
-      Pointer<NativeType> bits,
+      Pointer<Void> bits,
     );
 typedef PFNGLCOMPRESSEDTEXTURESUBIMAGE3DEXTPROC =
     Void Function(
@@ -15947,12 +15607,12 @@ typedef PFNGLCOMPRESSEDTEXTURESUBIMAGE3DEXTPROC =
       Int32 xoffset,
       Int32 yoffset,
       Int32 zoffset,
-      Uint32 width,
-      Uint32 height,
-      Uint32 depth,
+      Int32 width,
+      Int32 height,
+      Int32 depth,
       Uint32 format,
-      Uint32 imageSize,
-      Pointer<NativeType> bits,
+      Int32 imageSize,
+      Pointer<Void> bits,
     );
 
 // typedef void (APIENTRYP PFNGLCOMPRESSEDTEXTURESUBIMAGE2DEXTPROC) (GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLsizei imageSize, const void *bits)
@@ -15967,7 +15627,7 @@ typedef PFNGLCOMPRESSEDTEXTURESUBIMAGE2DEXTPROCDart =
       int height,
       int format,
       int imageSize,
-      Pointer<NativeType> bits,
+      Pointer<Void> bits,
     );
 typedef PFNGLCOMPRESSEDTEXTURESUBIMAGE2DEXTPROC =
     Void Function(
@@ -15976,11 +15636,11 @@ typedef PFNGLCOMPRESSEDTEXTURESUBIMAGE2DEXTPROC =
       Int32 level,
       Int32 xoffset,
       Int32 yoffset,
-      Uint32 width,
-      Uint32 height,
+      Int32 width,
+      Int32 height,
       Uint32 format,
-      Uint32 imageSize,
-      Pointer<NativeType> bits,
+      Int32 imageSize,
+      Pointer<Void> bits,
     );
 
 // typedef void (APIENTRYP PFNGLCOMPRESSEDTEXTURESUBIMAGE1DEXTPROC) (GLuint texture, GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLsizei imageSize, const void *bits)
@@ -15993,7 +15653,7 @@ typedef PFNGLCOMPRESSEDTEXTURESUBIMAGE1DEXTPROCDart =
       int width,
       int format,
       int imageSize,
-      Pointer<NativeType> bits,
+      Pointer<Void> bits,
     );
 typedef PFNGLCOMPRESSEDTEXTURESUBIMAGE1DEXTPROC =
     Void Function(
@@ -16001,22 +15661,17 @@ typedef PFNGLCOMPRESSEDTEXTURESUBIMAGE1DEXTPROC =
       Uint32 target,
       Int32 level,
       Int32 xoffset,
-      Uint32 width,
+      Int32 width,
       Uint32 format,
-      Uint32 imageSize,
-      Pointer<NativeType> bits,
+      Int32 imageSize,
+      Pointer<Void> bits,
     );
 
 // typedef void (APIENTRYP PFNGLGETCOMPRESSEDTEXTUREIMAGEEXTPROC) (GLuint texture, GLenum target, GLint lod, void *img)
 typedef PFNGLGETCOMPRESSEDTEXTUREIMAGEEXTPROCDart =
-    void Function(int texture, int target, int lod, Pointer<NativeType> img);
+    void Function(int texture, int target, int lod, Pointer<Void> img);
 typedef PFNGLGETCOMPRESSEDTEXTUREIMAGEEXTPROC =
-    Void Function(
-      Uint32 texture,
-      Uint32 target,
-      Int32 lod,
-      Pointer<NativeType> img,
-    );
+    Void Function(Uint32 texture, Uint32 target, Int32 lod, Pointer<Void> img);
 
 // typedef void (APIENTRYP PFNGLCOMPRESSEDMULTITEXIMAGE3DEXTPROC) (GLenum texunit, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLsizei imageSize, const void *bits)
 typedef PFNGLCOMPRESSEDMULTITEXIMAGE3DEXTPROCDart =
@@ -16030,7 +15685,7 @@ typedef PFNGLCOMPRESSEDMULTITEXIMAGE3DEXTPROCDart =
       int depth,
       int border,
       int imageSize,
-      Pointer<NativeType> bits,
+      Pointer<Void> bits,
     );
 typedef PFNGLCOMPRESSEDMULTITEXIMAGE3DEXTPROC =
     Void Function(
@@ -16038,12 +15693,12 @@ typedef PFNGLCOMPRESSEDMULTITEXIMAGE3DEXTPROC =
       Uint32 target,
       Int32 level,
       Uint32 internalformat,
-      Uint32 width,
-      Uint32 height,
-      Uint32 depth,
+      Int32 width,
+      Int32 height,
+      Int32 depth,
       Int32 border,
-      Uint32 imageSize,
-      Pointer<NativeType> bits,
+      Int32 imageSize,
+      Pointer<Void> bits,
     );
 
 // typedef void (APIENTRYP PFNGLCOMPRESSEDMULTITEXIMAGE2DEXTPROC) (GLenum texunit, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLint border, GLsizei imageSize, const void *bits)
@@ -16057,7 +15712,7 @@ typedef PFNGLCOMPRESSEDMULTITEXIMAGE2DEXTPROCDart =
       int height,
       int border,
       int imageSize,
-      Pointer<NativeType> bits,
+      Pointer<Void> bits,
     );
 typedef PFNGLCOMPRESSEDMULTITEXIMAGE2DEXTPROC =
     Void Function(
@@ -16065,11 +15720,11 @@ typedef PFNGLCOMPRESSEDMULTITEXIMAGE2DEXTPROC =
       Uint32 target,
       Int32 level,
       Uint32 internalformat,
-      Uint32 width,
-      Uint32 height,
+      Int32 width,
+      Int32 height,
       Int32 border,
-      Uint32 imageSize,
-      Pointer<NativeType> bits,
+      Int32 imageSize,
+      Pointer<Void> bits,
     );
 
 // typedef void (APIENTRYP PFNGLCOMPRESSEDMULTITEXIMAGE1DEXTPROC) (GLenum texunit, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLint border, GLsizei imageSize, const void *bits)
@@ -16082,7 +15737,7 @@ typedef PFNGLCOMPRESSEDMULTITEXIMAGE1DEXTPROCDart =
       int width,
       int border,
       int imageSize,
-      Pointer<NativeType> bits,
+      Pointer<Void> bits,
     );
 typedef PFNGLCOMPRESSEDMULTITEXIMAGE1DEXTPROC =
     Void Function(
@@ -16090,10 +15745,10 @@ typedef PFNGLCOMPRESSEDMULTITEXIMAGE1DEXTPROC =
       Uint32 target,
       Int32 level,
       Uint32 internalformat,
-      Uint32 width,
+      Int32 width,
       Int32 border,
-      Uint32 imageSize,
-      Pointer<NativeType> bits,
+      Int32 imageSize,
+      Pointer<Void> bits,
     );
 
 // typedef void (APIENTRYP PFNGLCOMPRESSEDMULTITEXSUBIMAGE3DEXTPROC) (GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLsizei imageSize, const void *bits)
@@ -16110,7 +15765,7 @@ typedef PFNGLCOMPRESSEDMULTITEXSUBIMAGE3DEXTPROCDart =
       int depth,
       int format,
       int imageSize,
-      Pointer<NativeType> bits,
+      Pointer<Void> bits,
     );
 typedef PFNGLCOMPRESSEDMULTITEXSUBIMAGE3DEXTPROC =
     Void Function(
@@ -16120,12 +15775,12 @@ typedef PFNGLCOMPRESSEDMULTITEXSUBIMAGE3DEXTPROC =
       Int32 xoffset,
       Int32 yoffset,
       Int32 zoffset,
-      Uint32 width,
-      Uint32 height,
-      Uint32 depth,
+      Int32 width,
+      Int32 height,
+      Int32 depth,
       Uint32 format,
-      Uint32 imageSize,
-      Pointer<NativeType> bits,
+      Int32 imageSize,
+      Pointer<Void> bits,
     );
 
 // typedef void (APIENTRYP PFNGLCOMPRESSEDMULTITEXSUBIMAGE2DEXTPROC) (GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLsizei imageSize, const void *bits)
@@ -16140,7 +15795,7 @@ typedef PFNGLCOMPRESSEDMULTITEXSUBIMAGE2DEXTPROCDart =
       int height,
       int format,
       int imageSize,
-      Pointer<NativeType> bits,
+      Pointer<Void> bits,
     );
 typedef PFNGLCOMPRESSEDMULTITEXSUBIMAGE2DEXTPROC =
     Void Function(
@@ -16149,11 +15804,11 @@ typedef PFNGLCOMPRESSEDMULTITEXSUBIMAGE2DEXTPROC =
       Int32 level,
       Int32 xoffset,
       Int32 yoffset,
-      Uint32 width,
-      Uint32 height,
+      Int32 width,
+      Int32 height,
       Uint32 format,
-      Uint32 imageSize,
-      Pointer<NativeType> bits,
+      Int32 imageSize,
+      Pointer<Void> bits,
     );
 
 // typedef void (APIENTRYP PFNGLCOMPRESSEDMULTITEXSUBIMAGE1DEXTPROC) (GLenum texunit, GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLsizei imageSize, const void *bits)
@@ -16166,7 +15821,7 @@ typedef PFNGLCOMPRESSEDMULTITEXSUBIMAGE1DEXTPROCDart =
       int width,
       int format,
       int imageSize,
-      Pointer<NativeType> bits,
+      Pointer<Void> bits,
     );
 typedef PFNGLCOMPRESSEDMULTITEXSUBIMAGE1DEXTPROC =
     Void Function(
@@ -16174,22 +15829,17 @@ typedef PFNGLCOMPRESSEDMULTITEXSUBIMAGE1DEXTPROC =
       Uint32 target,
       Int32 level,
       Int32 xoffset,
-      Uint32 width,
+      Int32 width,
       Uint32 format,
-      Uint32 imageSize,
-      Pointer<NativeType> bits,
+      Int32 imageSize,
+      Pointer<Void> bits,
     );
 
 // typedef void (APIENTRYP PFNGLGETCOMPRESSEDMULTITEXIMAGEEXTPROC) (GLenum texunit, GLenum target, GLint lod, void *img)
 typedef PFNGLGETCOMPRESSEDMULTITEXIMAGEEXTPROCDart =
-    void Function(int texunit, int target, int lod, Pointer<NativeType> img);
+    void Function(int texunit, int target, int lod, Pointer<Void> img);
 typedef PFNGLGETCOMPRESSEDMULTITEXIMAGEEXTPROC =
-    Void Function(
-      Uint32 texunit,
-      Uint32 target,
-      Int32 lod,
-      Pointer<NativeType> img,
-    );
+    Void Function(Uint32 texunit, Uint32 target, Int32 lod, Pointer<Void> img);
 
 // typedef void (APIENTRYP PFNGLMATRIXLOADTRANSPOSEFEXTPROC) (GLenum mode, const GLfloat *m)
 typedef PFNGLMATRIXLOADTRANSPOSEFEXTPROCDart =
@@ -16217,45 +15867,30 @@ typedef PFNGLMATRIXMULTTRANSPOSEDEXTPROC =
 
 // typedef void (APIENTRYP PFNGLNAMEDBUFFERDATAEXTPROC) (GLuint buffer, GLsizeiptr size, const void *data, GLenum usage)
 typedef PFNGLNAMEDBUFFERDATAEXTPROCDart =
-    void Function(
-      int buffer,
-      Pointer<Uint32> size,
-      Pointer<NativeType> data,
-      int usage,
-    );
+    void Function(int buffer, int size, Pointer<Void> data, int usage);
 typedef PFNGLNAMEDBUFFERDATAEXTPROC =
-    Void Function(
-      Uint32 buffer,
-      Pointer<Uint32> size,
-      Pointer<NativeType> data,
-      Uint32 usage,
-    );
+    Void Function(Uint32 buffer, IntPtr size, Pointer<Void> data, Uint32 usage);
 
 // typedef void (APIENTRYP PFNGLNAMEDBUFFERSUBDATAEXTPROC) (GLuint buffer, GLintptr offset, GLsizeiptr size, const void *data)
 typedef PFNGLNAMEDBUFFERSUBDATAEXTPROCDart =
-    void Function(
-      int buffer,
-      Pointer<NativeType> offset,
-      Pointer<Uint32> size,
-      Pointer<NativeType> data,
-    );
+    void Function(int buffer, int offset, int size, Pointer<Void> data);
 typedef PFNGLNAMEDBUFFERSUBDATAEXTPROC =
     Void Function(
       Uint32 buffer,
-      Pointer<NativeType> offset,
-      Pointer<Uint32> size,
-      Pointer<NativeType> data,
+      IntPtr offset,
+      IntPtr size,
+      Pointer<Void> data,
     );
 
 // typedef void *(APIENTRYP PFNGLMAPNAMEDBUFFEREXTPROC) (GLuint buffer, GLenum access)
 typedef PFNGLMAPNAMEDBUFFEREXTPROCDart =
-    Pointer<NativeType> Function(int buffer, int access);
+    Pointer<Void> Function(int buffer, int access);
 typedef PFNGLMAPNAMEDBUFFEREXTPROC =
-    Pointer<NativeType> Function(Uint32 buffer, Uint32 access);
+    Pointer<Void> Function(Uint32 buffer, Uint32 access);
 
 // typedef GLboolean (APIENTRYP PFNGLUNMAPNAMEDBUFFEREXTPROC) (GLuint buffer)
 typedef PFNGLUNMAPNAMEDBUFFEREXTPROCDart = int Function(int buffer);
-typedef PFNGLUNMAPNAMEDBUFFEREXTPROC = Int32 Function(Uint32 buffer);
+typedef PFNGLUNMAPNAMEDBUFFEREXTPROC = Uint8 Function(Uint32 buffer);
 
 // typedef void (APIENTRYP PFNGLGETNAMEDBUFFERPARAMETERIVEXTPROC) (GLuint buffer, GLenum pname, GLint *params)
 typedef PFNGLGETNAMEDBUFFERPARAMETERIVEXTPROCDart =
@@ -16265,28 +15900,19 @@ typedef PFNGLGETNAMEDBUFFERPARAMETERIVEXTPROC =
 
 // typedef void (APIENTRYP PFNGLGETNAMEDBUFFERPOINTERVEXTPROC) (GLuint buffer, GLenum pname, void **params)
 typedef PFNGLGETNAMEDBUFFERPOINTERVEXTPROCDart =
-    void Function(int buffer, int pname, Pointer<Pointer<NativeType>> params);
+    void Function(int buffer, int pname, Pointer<Pointer<Void>> params);
 typedef PFNGLGETNAMEDBUFFERPOINTERVEXTPROC =
-    Void Function(
-      Uint32 buffer,
-      Uint32 pname,
-      Pointer<Pointer<NativeType>> params,
-    );
+    Void Function(Uint32 buffer, Uint32 pname, Pointer<Pointer<Void>> params);
 
 // typedef void (APIENTRYP PFNGLGETNAMEDBUFFERSUBDATAEXTPROC) (GLuint buffer, GLintptr offset, GLsizeiptr size, void *data)
 typedef PFNGLGETNAMEDBUFFERSUBDATAEXTPROCDart =
-    void Function(
-      int buffer,
-      Pointer<NativeType> offset,
-      Pointer<Uint32> size,
-      Pointer<NativeType> data,
-    );
+    void Function(int buffer, int offset, int size, Pointer<Void> data);
 typedef PFNGLGETNAMEDBUFFERSUBDATAEXTPROC =
     Void Function(
       Uint32 buffer,
-      Pointer<NativeType> offset,
-      Pointer<Uint32> size,
-      Pointer<NativeType> data,
+      IntPtr offset,
+      IntPtr size,
+      Pointer<Void> data,
     );
 
 // typedef void (APIENTRYP PFNGLPROGRAMUNIFORM1FEXTPROC) (GLuint program, GLint location, GLfloat v0)
@@ -16365,7 +15991,7 @@ typedef PFNGLPROGRAMUNIFORM1FVEXTPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
+      Int32 count,
       Pointer<Float> value,
     );
 
@@ -16376,7 +16002,7 @@ typedef PFNGLPROGRAMUNIFORM2FVEXTPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
+      Int32 count,
       Pointer<Float> value,
     );
 
@@ -16387,7 +16013,7 @@ typedef PFNGLPROGRAMUNIFORM3FVEXTPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
+      Int32 count,
       Pointer<Float> value,
     );
 
@@ -16398,7 +16024,7 @@ typedef PFNGLPROGRAMUNIFORM4FVEXTPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
+      Int32 count,
       Pointer<Float> value,
     );
 
@@ -16409,7 +16035,7 @@ typedef PFNGLPROGRAMUNIFORM1IVEXTPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
+      Int32 count,
       Pointer<Int32> value,
     );
 
@@ -16420,7 +16046,7 @@ typedef PFNGLPROGRAMUNIFORM2IVEXTPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
+      Int32 count,
       Pointer<Int32> value,
     );
 
@@ -16431,7 +16057,7 @@ typedef PFNGLPROGRAMUNIFORM3IVEXTPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
+      Int32 count,
       Pointer<Int32> value,
     );
 
@@ -16442,7 +16068,7 @@ typedef PFNGLPROGRAMUNIFORM4IVEXTPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
+      Int32 count,
       Pointer<Int32> value,
     );
 
@@ -16459,8 +16085,8 @@ typedef PFNGLPROGRAMUNIFORMMATRIX2FVEXTPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
-      Int32 transpose,
+      Int32 count,
+      Uint8 transpose,
       Pointer<Float> value,
     );
 
@@ -16477,8 +16103,8 @@ typedef PFNGLPROGRAMUNIFORMMATRIX3FVEXTPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
-      Int32 transpose,
+      Int32 count,
+      Uint8 transpose,
       Pointer<Float> value,
     );
 
@@ -16495,8 +16121,8 @@ typedef PFNGLPROGRAMUNIFORMMATRIX4FVEXTPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
-      Int32 transpose,
+      Int32 count,
+      Uint8 transpose,
       Pointer<Float> value,
     );
 
@@ -16513,8 +16139,8 @@ typedef PFNGLPROGRAMUNIFORMMATRIX2X3FVEXTPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
-      Int32 transpose,
+      Int32 count,
+      Uint8 transpose,
       Pointer<Float> value,
     );
 
@@ -16531,8 +16157,8 @@ typedef PFNGLPROGRAMUNIFORMMATRIX3X2FVEXTPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
-      Int32 transpose,
+      Int32 count,
+      Uint8 transpose,
       Pointer<Float> value,
     );
 
@@ -16549,8 +16175,8 @@ typedef PFNGLPROGRAMUNIFORMMATRIX2X4FVEXTPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
-      Int32 transpose,
+      Int32 count,
+      Uint8 transpose,
       Pointer<Float> value,
     );
 
@@ -16567,8 +16193,8 @@ typedef PFNGLPROGRAMUNIFORMMATRIX4X2FVEXTPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
-      Int32 transpose,
+      Int32 count,
+      Uint8 transpose,
       Pointer<Float> value,
     );
 
@@ -16585,8 +16211,8 @@ typedef PFNGLPROGRAMUNIFORMMATRIX3X4FVEXTPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
-      Int32 transpose,
+      Int32 count,
+      Uint8 transpose,
       Pointer<Float> value,
     );
 
@@ -16603,8 +16229,8 @@ typedef PFNGLPROGRAMUNIFORMMATRIX4X3FVEXTPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
-      Int32 transpose,
+      Int32 count,
+      Uint8 transpose,
       Pointer<Float> value,
     );
 
@@ -16762,7 +16388,7 @@ typedef PFNGLPROGRAMUNIFORM1UIVEXTPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
+      Int32 count,
       Pointer<Uint32> value,
     );
 
@@ -16773,7 +16399,7 @@ typedef PFNGLPROGRAMUNIFORM2UIVEXTPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
+      Int32 count,
       Pointer<Uint32> value,
     );
 
@@ -16784,7 +16410,7 @@ typedef PFNGLPROGRAMUNIFORM3UIVEXTPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
+      Int32 count,
       Pointer<Uint32> value,
     );
 
@@ -16795,7 +16421,7 @@ typedef PFNGLPROGRAMUNIFORM4UIVEXTPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
+      Int32 count,
       Pointer<Uint32> value,
     );
 
@@ -16813,7 +16439,7 @@ typedef PFNGLNAMEDPROGRAMLOCALPARAMETERS4FVEXTPROC =
       Uint32 program,
       Uint32 target,
       Uint32 index,
-      Uint32 count,
+      Int32 count,
       Pointer<Float> params,
     );
 
@@ -16864,7 +16490,7 @@ typedef PFNGLNAMEDPROGRAMLOCALPARAMETERSI4IVEXTPROC =
       Uint32 program,
       Uint32 target,
       Uint32 index,
-      Uint32 count,
+      Int32 count,
       Pointer<Int32> params,
     );
 
@@ -16915,7 +16541,7 @@ typedef PFNGLNAMEDPROGRAMLOCALPARAMETERSI4UIVEXTPROC =
       Uint32 program,
       Uint32 target,
       Uint32 index,
-      Uint32 count,
+      Int32 count,
       Pointer<Uint32> params,
     );
 
@@ -16967,13 +16593,9 @@ typedef PfnglgetdoubleiVextproc =
 
 // typedef void (APIENTRYP PFNGLGETPOINTERI_VEXTPROC) (GLenum pname, GLuint index, void **params)
 typedef PfnglgetpointeriVextprocDart =
-    void Function(int pname, int index, Pointer<Pointer<NativeType>> params);
+    void Function(int pname, int index, Pointer<Pointer<Void>> params);
 typedef PfnglgetpointeriVextproc =
-    Void Function(
-      Uint32 pname,
-      Uint32 index,
-      Pointer<Pointer<NativeType>> params,
-    );
+    Void Function(Uint32 pname, Uint32 index, Pointer<Pointer<Void>> params);
 
 // typedef void (APIENTRYP PFNGLNAMEDPROGRAMSTRINGEXTPROC) (GLuint program, GLenum target, GLenum format, GLsizei len, const void *string)
 typedef PFNGLNAMEDPROGRAMSTRINGEXTPROCDart =
@@ -16982,15 +16604,15 @@ typedef PFNGLNAMEDPROGRAMSTRINGEXTPROCDart =
       int target,
       int format,
       int len,
-      Pointer<NativeType> string,
+      Pointer<Void> string,
     );
 typedef PFNGLNAMEDPROGRAMSTRINGEXTPROC =
     Void Function(
       Uint32 program,
       Uint32 target,
       Uint32 format,
-      Uint32 len,
-      Pointer<NativeType> string,
+      Int32 len,
+      Pointer<Void> string,
     );
 
 // typedef void (APIENTRYP PFNGLNAMEDPROGRAMLOCALPARAMETER4DEXTPROC) (GLuint program, GLenum target, GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w)
@@ -17094,18 +16716,13 @@ typedef PFNGLGETNAMEDPROGRAMIVEXTPROC =
 
 // typedef void (APIENTRYP PFNGLGETNAMEDPROGRAMSTRINGEXTPROC) (GLuint program, GLenum target, GLenum pname, void *string)
 typedef PFNGLGETNAMEDPROGRAMSTRINGEXTPROCDart =
-    void Function(
-      int program,
-      int target,
-      int pname,
-      Pointer<NativeType> string,
-    );
+    void Function(int program, int target, int pname, Pointer<Void> string);
 typedef PFNGLGETNAMEDPROGRAMSTRINGEXTPROC =
     Void Function(
       Uint32 program,
       Uint32 target,
       Uint32 pname,
-      Pointer<NativeType> string,
+      Pointer<Void> string,
     );
 
 // typedef void (APIENTRYP PFNGLNAMEDRENDERBUFFERSTORAGEEXTPROC) (GLuint renderbuffer, GLenum internalformat, GLsizei width, GLsizei height)
@@ -17115,8 +16732,8 @@ typedef PFNGLNAMEDRENDERBUFFERSTORAGEEXTPROC =
     Void Function(
       Uint32 renderbuffer,
       Uint32 internalformat,
-      Uint32 width,
-      Uint32 height,
+      Int32 width,
+      Int32 height,
     );
 
 // typedef void (APIENTRYP PFNGLGETNAMEDRENDERBUFFERPARAMETERIVEXTPROC) (GLuint renderbuffer, GLenum pname, GLint *params)
@@ -17137,10 +16754,10 @@ typedef PFNGLNAMEDRENDERBUFFERSTORAGEMULTISAMPLEEXTPROCDart =
 typedef PFNGLNAMEDRENDERBUFFERSTORAGEMULTISAMPLEEXTPROC =
     Void Function(
       Uint32 renderbuffer,
-      Uint32 samples,
+      Int32 samples,
       Uint32 internalformat,
-      Uint32 width,
-      Uint32 height,
+      Int32 width,
+      Int32 height,
     );
 
 // typedef void (APIENTRYP PFNGLNAMEDRENDERBUFFERSTORAGEMULTISAMPLECOVERAGEEXTPROC) (GLuint renderbuffer, GLsizei coverageSamples, GLsizei colorSamples, GLenum internalformat, GLsizei width, GLsizei height)
@@ -17156,11 +16773,11 @@ typedef PFNGLNAMEDRENDERBUFFERSTORAGEMULTISAMPLECOVERAGEEXTPROCDart =
 typedef PFNGLNAMEDRENDERBUFFERSTORAGEMULTISAMPLECOVERAGEEXTPROC =
     Void Function(
       Uint32 renderbuffer,
-      Uint32 coverageSamples,
-      Uint32 colorSamples,
+      Int32 coverageSamples,
+      Int32 colorSamples,
       Uint32 internalformat,
-      Uint32 width,
-      Uint32 height,
+      Int32 width,
+      Int32 height,
     );
 
 // typedef GLenum (APIENTRYP PFNGLCHECKNAMEDFRAMEBUFFERSTATUSEXTPROC) (GLuint framebuffer, GLenum target)
@@ -17279,7 +16896,7 @@ typedef PFNGLFRAMEBUFFERDRAWBUFFEREXTPROC =
 typedef PFNGLFRAMEBUFFERDRAWBUFFERSEXTPROCDart =
     void Function(int framebuffer, int n, Pointer<Uint32> bufs);
 typedef PFNGLFRAMEBUFFERDRAWBUFFERSEXTPROC =
-    Void Function(Uint32 framebuffer, Uint32 n, Pointer<Uint32> bufs);
+    Void Function(Uint32 framebuffer, Int32 n, Pointer<Uint32> bufs);
 
 // typedef void (APIENTRYP PFNGLFRAMEBUFFERREADBUFFEREXTPROC) (GLuint framebuffer, GLenum mode)
 typedef PFNGLFRAMEBUFFERREADBUFFEREXTPROCDart =
@@ -17298,17 +16915,17 @@ typedef PFNGLNAMEDCOPYBUFFERSUBDATAEXTPROCDart =
     void Function(
       int readBuffer,
       int writeBuffer,
-      Pointer<NativeType> readOffset,
-      Pointer<NativeType> writeOffset,
-      Pointer<Uint32> size,
+      int readOffset,
+      int writeOffset,
+      int size,
     );
 typedef PFNGLNAMEDCOPYBUFFERSUBDATAEXTPROC =
     Void Function(
       Uint32 readBuffer,
       Uint32 writeBuffer,
-      Pointer<NativeType> readOffset,
-      Pointer<NativeType> writeOffset,
-      Pointer<Uint32> size,
+      IntPtr readOffset,
+      IntPtr writeOffset,
+      IntPtr size,
     );
 
 // typedef void (APIENTRYP PFNGLNAMEDFRAMEBUFFERTEXTUREEXTPROC) (GLuint framebuffer, GLenum attachment, GLuint texture, GLint level)
@@ -17378,7 +16995,7 @@ typedef PFNGLVERTEXARRAYVERTEXOFFSETEXTPROCDart =
       int size,
       int type,
       int stride,
-      Pointer<NativeType> offset,
+      int offset,
     );
 typedef PFNGLVERTEXARRAYVERTEXOFFSETEXTPROC =
     Void Function(
@@ -17386,8 +17003,8 @@ typedef PFNGLVERTEXARRAYVERTEXOFFSETEXTPROC =
       Uint32 buffer,
       Int32 size,
       Uint32 type,
-      Uint32 stride,
-      Pointer<NativeType> offset,
+      Int32 stride,
+      IntPtr offset,
     );
 
 // typedef void (APIENTRYP PFNGLVERTEXARRAYCOLOROFFSETEXTPROC) (GLuint vaobj, GLuint buffer, GLint size, GLenum type, GLsizei stride, GLintptr offset)
@@ -17398,7 +17015,7 @@ typedef PFNGLVERTEXARRAYCOLOROFFSETEXTPROCDart =
       int size,
       int type,
       int stride,
-      Pointer<NativeType> offset,
+      int offset,
     );
 typedef PFNGLVERTEXARRAYCOLOROFFSETEXTPROC =
     Void Function(
@@ -17406,60 +17023,38 @@ typedef PFNGLVERTEXARRAYCOLOROFFSETEXTPROC =
       Uint32 buffer,
       Int32 size,
       Uint32 type,
-      Uint32 stride,
-      Pointer<NativeType> offset,
+      Int32 stride,
+      IntPtr offset,
     );
 
 // typedef void (APIENTRYP PFNGLVERTEXARRAYEDGEFLAGOFFSETEXTPROC) (GLuint vaobj, GLuint buffer, GLsizei stride, GLintptr offset)
 typedef PFNGLVERTEXARRAYEDGEFLAGOFFSETEXTPROCDart =
-    void Function(
-      int vaobj,
-      int buffer,
-      int stride,
-      Pointer<NativeType> offset,
-    );
+    void Function(int vaobj, int buffer, int stride, int offset);
 typedef PFNGLVERTEXARRAYEDGEFLAGOFFSETEXTPROC =
-    Void Function(
-      Uint32 vaobj,
-      Uint32 buffer,
-      Uint32 stride,
-      Pointer<NativeType> offset,
-    );
+    Void Function(Uint32 vaobj, Uint32 buffer, Int32 stride, IntPtr offset);
 
 // typedef void (APIENTRYP PFNGLVERTEXARRAYINDEXOFFSETEXTPROC) (GLuint vaobj, GLuint buffer, GLenum type, GLsizei stride, GLintptr offset)
 typedef PFNGLVERTEXARRAYINDEXOFFSETEXTPROCDart =
-    void Function(
-      int vaobj,
-      int buffer,
-      int type,
-      int stride,
-      Pointer<NativeType> offset,
-    );
+    void Function(int vaobj, int buffer, int type, int stride, int offset);
 typedef PFNGLVERTEXARRAYINDEXOFFSETEXTPROC =
     Void Function(
       Uint32 vaobj,
       Uint32 buffer,
       Uint32 type,
-      Uint32 stride,
-      Pointer<NativeType> offset,
+      Int32 stride,
+      IntPtr offset,
     );
 
 // typedef void (APIENTRYP PFNGLVERTEXARRAYNORMALOFFSETEXTPROC) (GLuint vaobj, GLuint buffer, GLenum type, GLsizei stride, GLintptr offset)
 typedef PFNGLVERTEXARRAYNORMALOFFSETEXTPROCDart =
-    void Function(
-      int vaobj,
-      int buffer,
-      int type,
-      int stride,
-      Pointer<NativeType> offset,
-    );
+    void Function(int vaobj, int buffer, int type, int stride, int offset);
 typedef PFNGLVERTEXARRAYNORMALOFFSETEXTPROC =
     Void Function(
       Uint32 vaobj,
       Uint32 buffer,
       Uint32 type,
-      Uint32 stride,
-      Pointer<NativeType> offset,
+      Int32 stride,
+      IntPtr offset,
     );
 
 // typedef void (APIENTRYP PFNGLVERTEXARRAYTEXCOORDOFFSETEXTPROC) (GLuint vaobj, GLuint buffer, GLint size, GLenum type, GLsizei stride, GLintptr offset)
@@ -17470,7 +17065,7 @@ typedef PFNGLVERTEXARRAYTEXCOORDOFFSETEXTPROCDart =
       int size,
       int type,
       int stride,
-      Pointer<NativeType> offset,
+      int offset,
     );
 typedef PFNGLVERTEXARRAYTEXCOORDOFFSETEXTPROC =
     Void Function(
@@ -17478,8 +17073,8 @@ typedef PFNGLVERTEXARRAYTEXCOORDOFFSETEXTPROC =
       Uint32 buffer,
       Int32 size,
       Uint32 type,
-      Uint32 stride,
-      Pointer<NativeType> offset,
+      Int32 stride,
+      IntPtr offset,
     );
 
 // typedef void (APIENTRYP PFNGLVERTEXARRAYMULTITEXCOORDOFFSETEXTPROC) (GLuint vaobj, GLuint buffer, GLenum texunit, GLint size, GLenum type, GLsizei stride, GLintptr offset)
@@ -17491,7 +17086,7 @@ typedef PFNGLVERTEXARRAYMULTITEXCOORDOFFSETEXTPROCDart =
       int size,
       int type,
       int stride,
-      Pointer<NativeType> offset,
+      int offset,
     );
 typedef PFNGLVERTEXARRAYMULTITEXCOORDOFFSETEXTPROC =
     Void Function(
@@ -17500,26 +17095,20 @@ typedef PFNGLVERTEXARRAYMULTITEXCOORDOFFSETEXTPROC =
       Uint32 texunit,
       Int32 size,
       Uint32 type,
-      Uint32 stride,
-      Pointer<NativeType> offset,
+      Int32 stride,
+      IntPtr offset,
     );
 
 // typedef void (APIENTRYP PFNGLVERTEXARRAYFOGCOORDOFFSETEXTPROC) (GLuint vaobj, GLuint buffer, GLenum type, GLsizei stride, GLintptr offset)
 typedef PFNGLVERTEXARRAYFOGCOORDOFFSETEXTPROCDart =
-    void Function(
-      int vaobj,
-      int buffer,
-      int type,
-      int stride,
-      Pointer<NativeType> offset,
-    );
+    void Function(int vaobj, int buffer, int type, int stride, int offset);
 typedef PFNGLVERTEXARRAYFOGCOORDOFFSETEXTPROC =
     Void Function(
       Uint32 vaobj,
       Uint32 buffer,
       Uint32 type,
-      Uint32 stride,
-      Pointer<NativeType> offset,
+      Int32 stride,
+      IntPtr offset,
     );
 
 // typedef void (APIENTRYP PFNGLVERTEXARRAYSECONDARYCOLOROFFSETEXTPROC) (GLuint vaobj, GLuint buffer, GLint size, GLenum type, GLsizei stride, GLintptr offset)
@@ -17530,7 +17119,7 @@ typedef PFNGLVERTEXARRAYSECONDARYCOLOROFFSETEXTPROCDart =
       int size,
       int type,
       int stride,
-      Pointer<NativeType> offset,
+      int offset,
     );
 typedef PFNGLVERTEXARRAYSECONDARYCOLOROFFSETEXTPROC =
     Void Function(
@@ -17538,8 +17127,8 @@ typedef PFNGLVERTEXARRAYSECONDARYCOLOROFFSETEXTPROC =
       Uint32 buffer,
       Int32 size,
       Uint32 type,
-      Uint32 stride,
-      Pointer<NativeType> offset,
+      Int32 stride,
+      IntPtr offset,
     );
 
 // typedef void (APIENTRYP PFNGLVERTEXARRAYVERTEXATTRIBOFFSETEXTPROC) (GLuint vaobj, GLuint buffer, GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, GLintptr offset)
@@ -17552,7 +17141,7 @@ typedef PFNGLVERTEXARRAYVERTEXATTRIBOFFSETEXTPROCDart =
       int type,
       int normalized,
       int stride,
-      Pointer<NativeType> offset,
+      int offset,
     );
 typedef PFNGLVERTEXARRAYVERTEXATTRIBOFFSETEXTPROC =
     Void Function(
@@ -17561,9 +17150,9 @@ typedef PFNGLVERTEXARRAYVERTEXATTRIBOFFSETEXTPROC =
       Uint32 index,
       Int32 size,
       Uint32 type,
-      Int32 normalized,
-      Uint32 stride,
-      Pointer<NativeType> offset,
+      Uint8 normalized,
+      Int32 stride,
+      IntPtr offset,
     );
 
 // typedef void (APIENTRYP PFNGLVERTEXARRAYVERTEXATTRIBIOFFSETEXTPROC) (GLuint vaobj, GLuint buffer, GLuint index, GLint size, GLenum type, GLsizei stride, GLintptr offset)
@@ -17575,7 +17164,7 @@ typedef PFNGLVERTEXARRAYVERTEXATTRIBIOFFSETEXTPROCDart =
       int size,
       int type,
       int stride,
-      Pointer<NativeType> offset,
+      int offset,
     );
 typedef PFNGLVERTEXARRAYVERTEXATTRIBIOFFSETEXTPROC =
     Void Function(
@@ -17584,8 +17173,8 @@ typedef PFNGLVERTEXARRAYVERTEXATTRIBIOFFSETEXTPROC =
       Uint32 index,
       Int32 size,
       Uint32 type,
-      Uint32 stride,
-      Pointer<NativeType> offset,
+      Int32 stride,
+      IntPtr offset,
     );
 
 // typedef void (APIENTRYP PFNGLENABLEVERTEXARRAYEXTPROC) (GLuint vaobj, GLenum array)
@@ -17619,13 +17208,9 @@ typedef PFNGLGETVERTEXARRAYINTEGERVEXTPROC =
 
 // typedef void (APIENTRYP PFNGLGETVERTEXARRAYPOINTERVEXTPROC) (GLuint vaobj, GLenum pname, void **param)
 typedef PFNGLGETVERTEXARRAYPOINTERVEXTPROCDart =
-    void Function(int vaobj, int pname, Pointer<Pointer<NativeType>> param);
+    void Function(int vaobj, int pname, Pointer<Pointer<Void>> param);
 typedef PFNGLGETVERTEXARRAYPOINTERVEXTPROC =
-    Void Function(
-      Uint32 vaobj,
-      Uint32 pname,
-      Pointer<Pointer<NativeType>> param,
-    );
+    Void Function(Uint32 vaobj, Uint32 pname, Pointer<Pointer<Void>> param);
 
 // typedef void (APIENTRYP PFNGLGETVERTEXARRAYINTEGERI_VEXTPROC) (GLuint vaobj, GLuint index, GLenum pname, GLint *param)
 typedef PfnglgetvertexarrayintegeriVextprocDart =
@@ -17644,61 +17229,38 @@ typedef PfnglgetvertexarraypointeriVextprocDart =
       int vaobj,
       int index,
       int pname,
-      Pointer<Pointer<NativeType>> param,
+      Pointer<Pointer<Void>> param,
     );
 typedef PfnglgetvertexarraypointeriVextproc =
     Void Function(
       Uint32 vaobj,
       Uint32 index,
       Uint32 pname,
-      Pointer<Pointer<NativeType>> param,
+      Pointer<Pointer<Void>> param,
     );
 
 // typedef void *(APIENTRYP PFNGLMAPNAMEDBUFFERRANGEEXTPROC) (GLuint buffer, GLintptr offset, GLsizeiptr length, GLbitfield access)
 typedef PFNGLMAPNAMEDBUFFERRANGEEXTPROCDart =
-    Pointer<NativeType> Function(
-      int buffer,
-      Pointer<NativeType> offset,
-      Pointer<Uint32> length,
-      int access,
-    );
+    Pointer<Void> Function(int buffer, int offset, int length, int access);
 typedef PFNGLMAPNAMEDBUFFERRANGEEXTPROC =
-    Pointer<NativeType> Function(
+    Pointer<Void> Function(
       Uint32 buffer,
-      Pointer<NativeType> offset,
-      Pointer<Uint32> length,
+      IntPtr offset,
+      IntPtr length,
       Uint32 access,
     );
 
 // typedef void (APIENTRYP PFNGLFLUSHMAPPEDNAMEDBUFFERRANGEEXTPROC) (GLuint buffer, GLintptr offset, GLsizeiptr length)
 typedef PFNGLFLUSHMAPPEDNAMEDBUFFERRANGEEXTPROCDart =
-    void Function(
-      int buffer,
-      Pointer<NativeType> offset,
-      Pointer<Uint32> length,
-    );
+    void Function(int buffer, int offset, int length);
 typedef PFNGLFLUSHMAPPEDNAMEDBUFFERRANGEEXTPROC =
-    Void Function(
-      Uint32 buffer,
-      Pointer<NativeType> offset,
-      Pointer<Uint32> length,
-    );
+    Void Function(Uint32 buffer, IntPtr offset, IntPtr length);
 
 // typedef void (APIENTRYP PFNGLNAMEDBUFFERSTORAGEEXTPROC) (GLuint buffer, GLsizeiptr size, const void *data, GLbitfield flags)
 typedef PFNGLNAMEDBUFFERSTORAGEEXTPROCDart =
-    void Function(
-      int buffer,
-      Pointer<Uint32> size,
-      Pointer<NativeType> data,
-      int flags,
-    );
+    void Function(int buffer, int size, Pointer<Void> data, int flags);
 typedef PFNGLNAMEDBUFFERSTORAGEEXTPROC =
-    Void Function(
-      Uint32 buffer,
-      Pointer<Uint32> size,
-      Pointer<NativeType> data,
-      Uint32 flags,
-    );
+    Void Function(Uint32 buffer, IntPtr size, Pointer<Void> data, Uint32 flags);
 
 // typedef void (APIENTRYP PFNGLCLEARNAMEDBUFFERDATAEXTPROC) (GLuint buffer, GLenum internalformat, GLenum format, GLenum type, const void *data)
 typedef PFNGLCLEARNAMEDBUFFERDATAEXTPROCDart =
@@ -17707,7 +17269,7 @@ typedef PFNGLCLEARNAMEDBUFFERDATAEXTPROCDart =
       int internalformat,
       int format,
       int type,
-      Pointer<NativeType> data,
+      Pointer<Void> data,
     );
 typedef PFNGLCLEARNAMEDBUFFERDATAEXTPROC =
     Void Function(
@@ -17715,7 +17277,7 @@ typedef PFNGLCLEARNAMEDBUFFERDATAEXTPROC =
       Uint32 internalformat,
       Uint32 format,
       Uint32 type,
-      Pointer<NativeType> data,
+      Pointer<Void> data,
     );
 
 // typedef void (APIENTRYP PFNGLCLEARNAMEDBUFFERSUBDATAEXTPROC) (GLuint buffer, GLenum internalformat, GLsizeiptr offset, GLsizeiptr size, GLenum format, GLenum type, const void *data)
@@ -17723,21 +17285,21 @@ typedef PFNGLCLEARNAMEDBUFFERSUBDATAEXTPROCDart =
     void Function(
       int buffer,
       int internalformat,
-      Pointer<Uint32> offset,
-      Pointer<Uint32> size,
+      int offset,
+      int size,
       int format,
       int type,
-      Pointer<NativeType> data,
+      Pointer<Void> data,
     );
 typedef PFNGLCLEARNAMEDBUFFERSUBDATAEXTPROC =
     Void Function(
       Uint32 buffer,
       Uint32 internalformat,
-      Pointer<Uint32> offset,
-      Pointer<Uint32> size,
+      IntPtr offset,
+      IntPtr size,
       Uint32 format,
       Uint32 type,
-      Pointer<NativeType> data,
+      Pointer<Void> data,
     );
 
 // typedef void (APIENTRYP PFNGLNAMEDFRAMEBUFFERPARAMETERIEXTPROC) (GLuint framebuffer, GLenum pname, GLint param)
@@ -17797,7 +17359,7 @@ typedef PFNGLPROGRAMUNIFORM1DVEXTPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
+      Int32 count,
       Pointer<Double> value,
     );
 
@@ -17808,7 +17370,7 @@ typedef PFNGLPROGRAMUNIFORM2DVEXTPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
+      Int32 count,
       Pointer<Double> value,
     );
 
@@ -17819,7 +17381,7 @@ typedef PFNGLPROGRAMUNIFORM3DVEXTPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
+      Int32 count,
       Pointer<Double> value,
     );
 
@@ -17830,7 +17392,7 @@ typedef PFNGLPROGRAMUNIFORM4DVEXTPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
+      Int32 count,
       Pointer<Double> value,
     );
 
@@ -17847,8 +17409,8 @@ typedef PFNGLPROGRAMUNIFORMMATRIX2DVEXTPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
-      Int32 transpose,
+      Int32 count,
+      Uint8 transpose,
       Pointer<Double> value,
     );
 
@@ -17865,8 +17427,8 @@ typedef PFNGLPROGRAMUNIFORMMATRIX3DVEXTPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
-      Int32 transpose,
+      Int32 count,
+      Uint8 transpose,
       Pointer<Double> value,
     );
 
@@ -17883,8 +17445,8 @@ typedef PFNGLPROGRAMUNIFORMMATRIX4DVEXTPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
-      Int32 transpose,
+      Int32 count,
+      Uint8 transpose,
       Pointer<Double> value,
     );
 
@@ -17901,8 +17463,8 @@ typedef PFNGLPROGRAMUNIFORMMATRIX2X3DVEXTPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
-      Int32 transpose,
+      Int32 count,
+      Uint8 transpose,
       Pointer<Double> value,
     );
 
@@ -17919,8 +17481,8 @@ typedef PFNGLPROGRAMUNIFORMMATRIX2X4DVEXTPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
-      Int32 transpose,
+      Int32 count,
+      Uint8 transpose,
       Pointer<Double> value,
     );
 
@@ -17937,8 +17499,8 @@ typedef PFNGLPROGRAMUNIFORMMATRIX3X2DVEXTPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
-      Int32 transpose,
+      Int32 count,
+      Uint8 transpose,
       Pointer<Double> value,
     );
 
@@ -17955,8 +17517,8 @@ typedef PFNGLPROGRAMUNIFORMMATRIX3X4DVEXTPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
-      Int32 transpose,
+      Int32 count,
+      Uint8 transpose,
       Pointer<Double> value,
     );
 
@@ -17973,8 +17535,8 @@ typedef PFNGLPROGRAMUNIFORMMATRIX4X2DVEXTPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
-      Int32 transpose,
+      Int32 count,
+      Uint8 transpose,
       Pointer<Double> value,
     );
 
@@ -17991,8 +17553,8 @@ typedef PFNGLPROGRAMUNIFORMMATRIX4X3DVEXTPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
-      Int32 transpose,
+      Int32 count,
+      Uint8 transpose,
       Pointer<Double> value,
     );
 
@@ -18003,8 +17565,8 @@ typedef PFNGLTEXTUREBUFFERRANGEEXTPROCDart =
       int target,
       int internalformat,
       int buffer,
-      Pointer<NativeType> offset,
-      Pointer<Uint32> size,
+      int offset,
+      int size,
     );
 typedef PFNGLTEXTUREBUFFERRANGEEXTPROC =
     Void Function(
@@ -18012,8 +17574,8 @@ typedef PFNGLTEXTUREBUFFERRANGEEXTPROC =
       Uint32 target,
       Uint32 internalformat,
       Uint32 buffer,
-      Pointer<NativeType> offset,
-      Pointer<Uint32> size,
+      IntPtr offset,
+      IntPtr size,
     );
 
 // typedef void (APIENTRYP PFNGLTEXTURESTORAGE1DEXTPROC) (GLuint texture, GLenum target, GLsizei levels, GLenum internalformat, GLsizei width)
@@ -18029,9 +17591,9 @@ typedef PFNGLTEXTURESTORAGE1DEXTPROC =
     Void Function(
       Uint32 texture,
       Uint32 target,
-      Uint32 levels,
+      Int32 levels,
       Uint32 internalformat,
-      Uint32 width,
+      Int32 width,
     );
 
 // typedef void (APIENTRYP PFNGLTEXTURESTORAGE2DEXTPROC) (GLuint texture, GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height)
@@ -18048,10 +17610,10 @@ typedef PFNGLTEXTURESTORAGE2DEXTPROC =
     Void Function(
       Uint32 texture,
       Uint32 target,
-      Uint32 levels,
+      Int32 levels,
       Uint32 internalformat,
-      Uint32 width,
-      Uint32 height,
+      Int32 width,
+      Int32 height,
     );
 
 // typedef void (APIENTRYP PFNGLTEXTURESTORAGE3DEXTPROC) (GLuint texture, GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth)
@@ -18069,11 +17631,11 @@ typedef PFNGLTEXTURESTORAGE3DEXTPROC =
     Void Function(
       Uint32 texture,
       Uint32 target,
-      Uint32 levels,
+      Int32 levels,
       Uint32 internalformat,
-      Uint32 width,
-      Uint32 height,
-      Uint32 depth,
+      Int32 width,
+      Int32 height,
+      Int32 depth,
     );
 
 // typedef void (APIENTRYP PFNGLTEXTURESTORAGE2DMULTISAMPLEEXTPROC) (GLuint texture, GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLboolean fixedsamplelocations)
@@ -18091,11 +17653,11 @@ typedef PFNGLTEXTURESTORAGE2DMULTISAMPLEEXTPROC =
     Void Function(
       Uint32 texture,
       Uint32 target,
-      Uint32 samples,
+      Int32 samples,
       Uint32 internalformat,
-      Uint32 width,
-      Uint32 height,
-      Int32 fixedsamplelocations,
+      Int32 width,
+      Int32 height,
+      Uint8 fixedsamplelocations,
     );
 
 // typedef void (APIENTRYP PFNGLTEXTURESTORAGE3DMULTISAMPLEEXTPROC) (GLuint texture, GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedsamplelocations)
@@ -18114,12 +17676,12 @@ typedef PFNGLTEXTURESTORAGE3DMULTISAMPLEEXTPROC =
     Void Function(
       Uint32 texture,
       Uint32 target,
-      Uint32 samples,
+      Int32 samples,
       Uint32 internalformat,
-      Uint32 width,
-      Uint32 height,
-      Uint32 depth,
-      Int32 fixedsamplelocations,
+      Int32 width,
+      Int32 height,
+      Int32 depth,
+      Uint8 fixedsamplelocations,
     );
 
 // typedef void (APIENTRYP PFNGLVERTEXARRAYBINDVERTEXBUFFEREXTPROC) (GLuint vaobj, GLuint bindingindex, GLuint buffer, GLintptr offset, GLsizei stride)
@@ -18128,7 +17690,7 @@ typedef PFNGLVERTEXARRAYBINDVERTEXBUFFEREXTPROCDart =
       int vaobj,
       int bindingindex,
       int buffer,
-      Pointer<NativeType> offset,
+      int offset,
       int stride,
     );
 typedef PFNGLVERTEXARRAYBINDVERTEXBUFFEREXTPROC =
@@ -18136,8 +17698,8 @@ typedef PFNGLVERTEXARRAYBINDVERTEXBUFFEREXTPROC =
       Uint32 vaobj,
       Uint32 bindingindex,
       Uint32 buffer,
-      Pointer<NativeType> offset,
-      Uint32 stride,
+      IntPtr offset,
+      Int32 stride,
     );
 
 // typedef void (APIENTRYP PFNGLVERTEXARRAYVERTEXATTRIBFORMATEXTPROC) (GLuint vaobj, GLuint attribindex, GLint size, GLenum type, GLboolean normalized, GLuint relativeoffset)
@@ -18156,7 +17718,7 @@ typedef PFNGLVERTEXARRAYVERTEXATTRIBFORMATEXTPROC =
       Uint32 attribindex,
       Int32 size,
       Uint32 type,
-      Int32 normalized,
+      Uint8 normalized,
       Uint32 relativeoffset,
     );
 
@@ -18217,7 +17779,7 @@ typedef PFNGLVERTEXARRAYVERTEXATTRIBLOFFSETEXTPROCDart =
       int size,
       int type,
       int stride,
-      Pointer<NativeType> offset,
+      int offset,
     );
 typedef PFNGLVERTEXARRAYVERTEXATTRIBLOFFSETEXTPROC =
     Void Function(
@@ -18226,8 +17788,8 @@ typedef PFNGLVERTEXARRAYVERTEXATTRIBLOFFSETEXTPROC =
       Uint32 index,
       Int32 size,
       Uint32 type,
-      Uint32 stride,
-      Pointer<NativeType> offset,
+      Int32 stride,
+      IntPtr offset,
     );
 
 // typedef void (APIENTRYP PFNGLTEXTUREPAGECOMMITMENTEXTPROC) (GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLboolean commit)
@@ -18250,10 +17812,10 @@ typedef PFNGLTEXTUREPAGECOMMITMENTEXTPROC =
       Int32 xoffset,
       Int32 yoffset,
       Int32 zoffset,
-      Uint32 width,
-      Uint32 height,
-      Uint32 depth,
-      Int32 commit,
+      Int32 width,
+      Int32 height,
+      Int32 depth,
+      Uint8 commit,
     );
 
 // typedef void (APIENTRYP PFNGLVERTEXARRAYVERTEXATTRIBDIVISOREXTPROC) (GLuint vaobj, GLuint index, GLuint divisor)
@@ -18266,13 +17828,13 @@ typedef PFNGLVERTEXARRAYVERTEXATTRIBDIVISOREXTPROC =
 typedef PFNGLCOLORMASKINDEXEDEXTPROCDart =
     void Function(int index, int r, int g, int b, int a);
 typedef PFNGLCOLORMASKINDEXEDEXTPROC =
-    Void Function(Uint32 index, Int32 r, Int32 g, Int32 b, Int32 a);
+    Void Function(Uint32 index, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
 
 // typedef void (APIENTRYP PFNGLDRAWARRAYSINSTANCEDEXTPROC) (GLenum mode, GLint start, GLsizei count, GLsizei primcount)
 typedef PFNGLDRAWARRAYSINSTANCEDEXTPROCDart =
     void Function(int mode, int start, int count, int primcount);
 typedef PFNGLDRAWARRAYSINSTANCEDEXTPROC =
-    Void Function(Uint32 mode, Int32 start, Uint32 count, Uint32 primcount);
+    Void Function(Uint32 mode, Int32 start, Int32 count, Int32 primcount);
 
 // typedef void (APIENTRYP PFNGLDRAWELEMENTSINSTANCEDEXTPROC) (GLenum mode, GLsizei count, GLenum type, const void *indices, GLsizei primcount)
 typedef PFNGLDRAWELEMENTSINSTANCEDEXTPROCDart =
@@ -18280,16 +17842,16 @@ typedef PFNGLDRAWELEMENTSINSTANCEDEXTPROCDart =
       int mode,
       int count,
       int type,
-      Pointer<NativeType> indices,
+      Pointer<Void> indices,
       int primcount,
     );
 typedef PFNGLDRAWELEMENTSINSTANCEDEXTPROC =
     Void Function(
       Uint32 mode,
-      Uint32 count,
+      Int32 count,
       Uint32 type,
-      Pointer<NativeType> indices,
-      Uint32 primcount,
+      Pointer<Void> indices,
+      Int32 primcount,
     );
 
 // typedef void (APIENTRYP PFNGLDRAWRANGEELEMENTSEXTPROC) (GLenum mode, GLuint start, GLuint end, GLsizei count, GLenum type, const void *indices)
@@ -18300,33 +17862,33 @@ typedef PFNGLDRAWRANGEELEMENTSEXTPROCDart =
       int end,
       int count,
       int type,
-      Pointer<NativeType> indices,
+      Pointer<Void> indices,
     );
 typedef PFNGLDRAWRANGEELEMENTSEXTPROC =
     Void Function(
       Uint32 mode,
       Uint32 start,
       Uint32 end,
-      Uint32 count,
+      Int32 count,
       Uint32 type,
-      Pointer<NativeType> indices,
+      Pointer<Void> indices,
     );
 
 // typedef void (APIENTRYP PFNGLBUFFERSTORAGEEXTERNALEXTPROC) (GLenum target, GLintptr offset, GLsizeiptr size, GLeglClientBufferEXT clientBuffer, GLbitfield flags)
 typedef PFNGLBUFFERSTORAGEEXTERNALEXTPROCDart =
     void Function(
       int target,
-      Pointer<NativeType> offset,
-      Pointer<Uint32> size,
-      Pointer<NativeType> clientBuffer,
+      int offset,
+      int size,
+      Pointer<Void> clientBuffer,
       int flags,
     );
 typedef PFNGLBUFFERSTORAGEEXTERNALEXTPROC =
     Void Function(
       Uint32 target,
-      Pointer<NativeType> offset,
-      Pointer<Uint32> size,
-      Pointer<NativeType> clientBuffer,
+      IntPtr offset,
+      IntPtr size,
+      Pointer<Void> clientBuffer,
       Uint32 flags,
     );
 
@@ -18334,17 +17896,17 @@ typedef PFNGLBUFFERSTORAGEEXTERNALEXTPROC =
 typedef PFNGLNAMEDBUFFERSTORAGEEXTERNALEXTPROCDart =
     void Function(
       int buffer,
-      Pointer<NativeType> offset,
-      Pointer<Uint32> size,
-      Pointer<NativeType> clientBuffer,
+      int offset,
+      int size,
+      Pointer<Void> clientBuffer,
       int flags,
     );
 typedef PFNGLNAMEDBUFFERSTORAGEEXTERNALEXTPROC =
     Void Function(
       Uint32 buffer,
-      Pointer<NativeType> offset,
-      Pointer<Uint32> size,
-      Pointer<NativeType> clientBuffer,
+      IntPtr offset,
+      IntPtr size,
+      Pointer<Void> clientBuffer,
       Uint32 flags,
     );
 
@@ -18366,23 +17928,23 @@ typedef PFNGLFOGCOORDDVEXTPROC = Void Function(Pointer<Double> coord);
 
 // typedef void (APIENTRYP PFNGLFOGCOORDPOINTEREXTPROC) (GLenum type, GLsizei stride, const void *pointer)
 typedef PFNGLFOGCOORDPOINTEREXTPROCDart =
-    void Function(int type, int stride, Pointer<NativeType> pointer);
+    void Function(int type, int stride, Pointer<Void> pointer);
 typedef PFNGLFOGCOORDPOINTEREXTPROC =
-    Void Function(Uint32 type, Uint32 stride, Pointer<NativeType> pointer);
+    Void Function(Uint32 type, Int32 stride, Pointer<Void> pointer);
 
 // typedef void (APIENTRYP PFNGLGETFRAGMENTSHADINGRATESEXTPROC) (GLsizei samples, GLsizei maxCount, GLsizei *count, GLenum *shadingRates)
 typedef PFNGLGETFRAGMENTSHADINGRATESEXTPROCDart =
     void Function(
       int samples,
       int maxCount,
-      Pointer<Uint32> count,
+      Pointer<Int32> count,
       Pointer<Uint32> shadingRates,
     );
 typedef PFNGLGETFRAGMENTSHADINGRATESEXTPROC =
     Void Function(
-      Uint32 samples,
-      Uint32 maxCount,
-      Pointer<Uint32> count,
+      Int32 samples,
+      Int32 maxCount,
+      Pointer<Int32> count,
       Pointer<Uint32> shadingRates,
     );
 
@@ -18413,9 +17975,9 @@ typedef PFNGLFRAMEBUFFERSHADINGRATEEXTPROC =
       Uint32 attachment,
       Uint32 texture,
       Int32 baseLayer,
-      Uint32 numLayers,
-      Uint32 texelWidth,
-      Uint32 texelHeight,
+      Int32 numLayers,
+      Int32 texelWidth,
+      Int32 texelHeight,
     );
 
 // typedef void (APIENTRYP PFNGLBLITFRAMEBUFFEREXTPROC) (GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter)
@@ -18518,15 +18080,15 @@ typedef PFNGLRENDERBUFFERSTORAGEMULTISAMPLEEXTPROCDart =
 typedef PFNGLRENDERBUFFERSTORAGEMULTISAMPLEEXTPROC =
     Void Function(
       Uint32 target,
-      Uint32 samples,
+      Int32 samples,
       Uint32 internalformat,
-      Uint32 width,
-      Uint32 height,
+      Int32 width,
+      Int32 height,
     );
 
 // typedef GLboolean (APIENTRYP PFNGLISRENDERBUFFEREXTPROC) (GLuint renderbuffer)
 typedef PFNGLISRENDERBUFFEREXTPROCDart = int Function(int renderbuffer);
-typedef PFNGLISRENDERBUFFEREXTPROC = Int32 Function(Uint32 renderbuffer);
+typedef PFNGLISRENDERBUFFEREXTPROC = Uint8 Function(Uint32 renderbuffer);
 
 // typedef void (APIENTRYP PFNGLBINDRENDERBUFFEREXTPROC) (GLenum target, GLuint renderbuffer)
 typedef PFNGLBINDRENDERBUFFEREXTPROCDart =
@@ -18538,13 +18100,13 @@ typedef PFNGLBINDRENDERBUFFEREXTPROC =
 typedef PFNGLDELETERENDERBUFFERSEXTPROCDart =
     void Function(int n, Pointer<Uint32> renderbuffers);
 typedef PFNGLDELETERENDERBUFFERSEXTPROC =
-    Void Function(Uint32 n, Pointer<Uint32> renderbuffers);
+    Void Function(Int32 n, Pointer<Uint32> renderbuffers);
 
 // typedef void (APIENTRYP PFNGLGENRENDERBUFFERSEXTPROC) (GLsizei n, GLuint *renderbuffers)
 typedef PFNGLGENRENDERBUFFERSEXTPROCDart =
     void Function(int n, Pointer<Uint32> renderbuffers);
 typedef PFNGLGENRENDERBUFFERSEXTPROC =
-    Void Function(Uint32 n, Pointer<Uint32> renderbuffers);
+    Void Function(Int32 n, Pointer<Uint32> renderbuffers);
 
 // typedef void (APIENTRYP PFNGLRENDERBUFFERSTORAGEEXTPROC) (GLenum target, GLenum internalformat, GLsizei width, GLsizei height)
 typedef PFNGLRENDERBUFFERSTORAGEEXTPROCDart =
@@ -18553,8 +18115,8 @@ typedef PFNGLRENDERBUFFERSTORAGEEXTPROC =
     Void Function(
       Uint32 target,
       Uint32 internalformat,
-      Uint32 width,
-      Uint32 height,
+      Int32 width,
+      Int32 height,
     );
 
 // typedef void (APIENTRYP PFNGLGETRENDERBUFFERPARAMETERIVEXTPROC) (GLenum target, GLenum pname, GLint *params)
@@ -18565,7 +18127,7 @@ typedef PFNGLGETRENDERBUFFERPARAMETERIVEXTPROC =
 
 // typedef GLboolean (APIENTRYP PFNGLISFRAMEBUFFEREXTPROC) (GLuint framebuffer)
 typedef PFNGLISFRAMEBUFFEREXTPROCDart = int Function(int framebuffer);
-typedef PFNGLISFRAMEBUFFEREXTPROC = Int32 Function(Uint32 framebuffer);
+typedef PFNGLISFRAMEBUFFEREXTPROC = Uint8 Function(Uint32 framebuffer);
 
 // typedef void (APIENTRYP PFNGLBINDFRAMEBUFFEREXTPROC) (GLenum target, GLuint framebuffer)
 typedef PFNGLBINDFRAMEBUFFEREXTPROCDart =
@@ -18577,13 +18139,13 @@ typedef PFNGLBINDFRAMEBUFFEREXTPROC =
 typedef PFNGLDELETEFRAMEBUFFERSEXTPROCDart =
     void Function(int n, Pointer<Uint32> framebuffers);
 typedef PFNGLDELETEFRAMEBUFFERSEXTPROC =
-    Void Function(Uint32 n, Pointer<Uint32> framebuffers);
+    Void Function(Int32 n, Pointer<Uint32> framebuffers);
 
 // typedef void (APIENTRYP PFNGLGENFRAMEBUFFERSEXTPROC) (GLsizei n, GLuint *framebuffers)
 typedef PFNGLGENFRAMEBUFFERSEXTPROCDart =
     void Function(int n, Pointer<Uint32> framebuffers);
 typedef PFNGLGENFRAMEBUFFERSEXTPROC =
-    Void Function(Uint32 n, Pointer<Uint32> framebuffers);
+    Void Function(Int32 n, Pointer<Uint32> framebuffers);
 
 // typedef GLenum (APIENTRYP PFNGLCHECKFRAMEBUFFERSTATUSEXTPROC) (GLenum target)
 typedef PFNGLCHECKFRAMEBUFFERSTATUSEXTPROCDart = int Function(int target);
@@ -18689,7 +18251,7 @@ typedef PFNGLPROGRAMENVPARAMETERS4FVEXTPROC =
     Void Function(
       Uint32 target,
       Uint32 index,
-      Uint32 count,
+      Int32 count,
       Pointer<Float> params,
     );
 
@@ -18700,7 +18262,7 @@ typedef PFNGLPROGRAMLOCALPARAMETERS4FVEXTPROC =
     Void Function(
       Uint32 target,
       Uint32 index,
-      Uint32 count,
+      Int32 count,
       Pointer<Float> params,
     );
 
@@ -18748,25 +18310,25 @@ typedef PFNGLUNIFORM4UIEXTPROC =
 typedef PFNGLUNIFORM1UIVEXTPROCDart =
     void Function(int location, int count, Pointer<Uint32> value);
 typedef PFNGLUNIFORM1UIVEXTPROC =
-    Void Function(Int32 location, Uint32 count, Pointer<Uint32> value);
+    Void Function(Int32 location, Int32 count, Pointer<Uint32> value);
 
 // typedef void (APIENTRYP PFNGLUNIFORM2UIVEXTPROC) (GLint location, GLsizei count, const GLuint *value)
 typedef PFNGLUNIFORM2UIVEXTPROCDart =
     void Function(int location, int count, Pointer<Uint32> value);
 typedef PFNGLUNIFORM2UIVEXTPROC =
-    Void Function(Int32 location, Uint32 count, Pointer<Uint32> value);
+    Void Function(Int32 location, Int32 count, Pointer<Uint32> value);
 
 // typedef void (APIENTRYP PFNGLUNIFORM3UIVEXTPROC) (GLint location, GLsizei count, const GLuint *value)
 typedef PFNGLUNIFORM3UIVEXTPROCDart =
     void Function(int location, int count, Pointer<Uint32> value);
 typedef PFNGLUNIFORM3UIVEXTPROC =
-    Void Function(Int32 location, Uint32 count, Pointer<Uint32> value);
+    Void Function(Int32 location, Int32 count, Pointer<Uint32> value);
 
 // typedef void (APIENTRYP PFNGLUNIFORM4UIVEXTPROC) (GLint location, GLsizei count, const GLuint *value)
 typedef PFNGLUNIFORM4UIVEXTPROCDart =
     void Function(int location, int count, Pointer<Uint32> value);
 typedef PFNGLUNIFORM4UIVEXTPROC =
-    Void Function(Int32 location, Uint32 count, Pointer<Uint32> value);
+    Void Function(Int32 location, Int32 count, Pointer<Uint32> value);
 
 // typedef void (APIENTRYP PFNGLVERTEXATTRIBI1IEXTPROC) (GLuint index, GLint x)
 typedef PFNGLVERTEXATTRIBI1IEXTPROCDart = void Function(int index, int x);
@@ -18891,15 +18453,15 @@ typedef PFNGLVERTEXATTRIBIPOINTEREXTPROCDart =
       int size,
       int type,
       int stride,
-      Pointer<NativeType> pointer,
+      Pointer<Void> pointer,
     );
 typedef PFNGLVERTEXATTRIBIPOINTEREXTPROC =
     Void Function(
       Uint32 index,
       Int32 size,
       Uint32 type,
-      Uint32 stride,
-      Pointer<NativeType> pointer,
+      Int32 stride,
+      Pointer<Void> pointer,
     );
 
 // typedef void (APIENTRYP PFNGLGETVERTEXATTRIBIIVEXTPROC) (GLuint index, GLenum pname, GLint *params)
@@ -18921,15 +18483,15 @@ typedef PFNGLGETHISTOGRAMEXTPROCDart =
       int reset,
       int format,
       int type,
-      Pointer<NativeType> values,
+      Pointer<Void> values,
     );
 typedef PFNGLGETHISTOGRAMEXTPROC =
     Void Function(
       Uint32 target,
-      Int32 reset,
+      Uint8 reset,
       Uint32 format,
       Uint32 type,
-      Pointer<NativeType> values,
+      Pointer<Void> values,
     );
 
 // typedef void (APIENTRYP PFNGLGETHISTOGRAMPARAMETERFVEXTPROC) (GLenum target, GLenum pname, GLfloat *params)
@@ -18951,15 +18513,15 @@ typedef PFNGLGETMINMAXEXTPROCDart =
       int reset,
       int format,
       int type,
-      Pointer<NativeType> values,
+      Pointer<Void> values,
     );
 typedef PFNGLGETMINMAXEXTPROC =
     Void Function(
       Uint32 target,
-      Int32 reset,
+      Uint8 reset,
       Uint32 format,
       Uint32 type,
-      Pointer<NativeType> values,
+      Pointer<Void> values,
     );
 
 // typedef void (APIENTRYP PFNGLGETMINMAXPARAMETERFVEXTPROC) (GLenum target, GLenum pname, GLfloat *params)
@@ -18980,16 +18542,16 @@ typedef PFNGLHISTOGRAMEXTPROCDart =
 typedef PFNGLHISTOGRAMEXTPROC =
     Void Function(
       Uint32 target,
-      Uint32 width,
+      Int32 width,
       Uint32 internalformat,
-      Int32 sink,
+      Uint8 sink,
     );
 
 // typedef void (APIENTRYP PFNGLMINMAXEXTPROC) (GLenum target, GLenum internalformat, GLboolean sink)
 typedef PFNGLMINMAXEXTPROCDart =
     void Function(int target, int internalformat, int sink);
 typedef PFNGLMINMAXEXTPROC =
-    Void Function(Uint32 target, Uint32 internalformat, Int32 sink);
+    Void Function(Uint32 target, Uint32 internalformat, Uint8 sink);
 
 // typedef void (APIENTRYP PFNGLRESETHISTOGRAMEXTPROC) (GLenum target)
 typedef PFNGLRESETHISTOGRAMEXTPROCDart = void Function(int target);
@@ -19035,17 +18597,17 @@ typedef PfnglgetunsignedbyteiVextproc =
 typedef PFNGLDELETEMEMORYOBJECTSEXTPROCDart =
     void Function(int n, Pointer<Uint32> memoryObjects);
 typedef PFNGLDELETEMEMORYOBJECTSEXTPROC =
-    Void Function(Uint32 n, Pointer<Uint32> memoryObjects);
+    Void Function(Int32 n, Pointer<Uint32> memoryObjects);
 
 // typedef GLboolean (APIENTRYP PFNGLISMEMORYOBJECTEXTPROC) (GLuint memoryObject)
 typedef PFNGLISMEMORYOBJECTEXTPROCDart = int Function(int memoryObject);
-typedef PFNGLISMEMORYOBJECTEXTPROC = Int32 Function(Uint32 memoryObject);
+typedef PFNGLISMEMORYOBJECTEXTPROC = Uint8 Function(Uint32 memoryObject);
 
 // typedef void (APIENTRYP PFNGLCREATEMEMORYOBJECTSEXTPROC) (GLsizei n, GLuint *memoryObjects)
 typedef PFNGLCREATEMEMORYOBJECTSEXTPROCDart =
     void Function(int n, Pointer<Uint32> memoryObjects);
 typedef PFNGLCREATEMEMORYOBJECTSEXTPROC =
-    Void Function(Uint32 n, Pointer<Uint32> memoryObjects);
+    Void Function(Int32 n, Pointer<Uint32> memoryObjects);
 
 // typedef void (APIENTRYP PFNGLMEMORYOBJECTPARAMETERIVEXTPROC) (GLuint memoryObject, GLenum pname, const GLint *params)
 typedef PFNGLMEMORYOBJECTPARAMETERIVEXTPROCDart =
@@ -19073,10 +18635,10 @@ typedef PFNGLTEXSTORAGEMEM2DEXTPROCDart =
 typedef PFNGLTEXSTORAGEMEM2DEXTPROC =
     Void Function(
       Uint32 target,
-      Uint32 levels,
+      Int32 levels,
       Uint32 internalFormat,
-      Uint32 width,
-      Uint32 height,
+      Int32 width,
+      Int32 height,
       Uint32 memory,
       Uint64 offset,
     );
@@ -19096,11 +18658,11 @@ typedef PFNGLTEXSTORAGEMEM2DMULTISAMPLEEXTPROCDart =
 typedef PFNGLTEXSTORAGEMEM2DMULTISAMPLEEXTPROC =
     Void Function(
       Uint32 target,
-      Uint32 samples,
+      Int32 samples,
       Uint32 internalFormat,
-      Uint32 width,
-      Uint32 height,
-      Int32 fixedSampleLocations,
+      Int32 width,
+      Int32 height,
+      Uint8 fixedSampleLocations,
       Uint32 memory,
       Uint64 offset,
     );
@@ -19120,11 +18682,11 @@ typedef PFNGLTEXSTORAGEMEM3DEXTPROCDart =
 typedef PFNGLTEXSTORAGEMEM3DEXTPROC =
     Void Function(
       Uint32 target,
-      Uint32 levels,
+      Int32 levels,
       Uint32 internalFormat,
-      Uint32 width,
-      Uint32 height,
-      Uint32 depth,
+      Int32 width,
+      Int32 height,
+      Int32 depth,
       Uint32 memory,
       Uint64 offset,
     );
@@ -19145,26 +18707,21 @@ typedef PFNGLTEXSTORAGEMEM3DMULTISAMPLEEXTPROCDart =
 typedef PFNGLTEXSTORAGEMEM3DMULTISAMPLEEXTPROC =
     Void Function(
       Uint32 target,
-      Uint32 samples,
+      Int32 samples,
       Uint32 internalFormat,
-      Uint32 width,
-      Uint32 height,
-      Uint32 depth,
-      Int32 fixedSampleLocations,
+      Int32 width,
+      Int32 height,
+      Int32 depth,
+      Uint8 fixedSampleLocations,
       Uint32 memory,
       Uint64 offset,
     );
 
 // typedef void (APIENTRYP PFNGLBUFFERSTORAGEMEMEXTPROC) (GLenum target, GLsizeiptr size, GLuint memory, GLuint64 offset)
 typedef PFNGLBUFFERSTORAGEMEMEXTPROCDart =
-    void Function(int target, Pointer<Uint32> size, int memory, int offset);
+    void Function(int target, int size, int memory, int offset);
 typedef PFNGLBUFFERSTORAGEMEMEXTPROC =
-    Void Function(
-      Uint32 target,
-      Pointer<Uint32> size,
-      Uint32 memory,
-      Uint64 offset,
-    );
+    Void Function(Uint32 target, IntPtr size, Uint32 memory, Uint64 offset);
 
 // typedef void (APIENTRYP PFNGLTEXTURESTORAGEMEM2DEXTPROC) (GLuint texture, GLsizei levels, GLenum internalFormat, GLsizei width, GLsizei height, GLuint memory, GLuint64 offset)
 typedef PFNGLTEXTURESTORAGEMEM2DEXTPROCDart =
@@ -19180,10 +18737,10 @@ typedef PFNGLTEXTURESTORAGEMEM2DEXTPROCDart =
 typedef PFNGLTEXTURESTORAGEMEM2DEXTPROC =
     Void Function(
       Uint32 texture,
-      Uint32 levels,
+      Int32 levels,
       Uint32 internalFormat,
-      Uint32 width,
-      Uint32 height,
+      Int32 width,
+      Int32 height,
       Uint32 memory,
       Uint64 offset,
     );
@@ -19203,11 +18760,11 @@ typedef PFNGLTEXTURESTORAGEMEM2DMULTISAMPLEEXTPROCDart =
 typedef PFNGLTEXTURESTORAGEMEM2DMULTISAMPLEEXTPROC =
     Void Function(
       Uint32 texture,
-      Uint32 samples,
+      Int32 samples,
       Uint32 internalFormat,
-      Uint32 width,
-      Uint32 height,
-      Int32 fixedSampleLocations,
+      Int32 width,
+      Int32 height,
+      Uint8 fixedSampleLocations,
       Uint32 memory,
       Uint64 offset,
     );
@@ -19227,11 +18784,11 @@ typedef PFNGLTEXTURESTORAGEMEM3DEXTPROCDart =
 typedef PFNGLTEXTURESTORAGEMEM3DEXTPROC =
     Void Function(
       Uint32 texture,
-      Uint32 levels,
+      Int32 levels,
       Uint32 internalFormat,
-      Uint32 width,
-      Uint32 height,
-      Uint32 depth,
+      Int32 width,
+      Int32 height,
+      Int32 depth,
       Uint32 memory,
       Uint64 offset,
     );
@@ -19252,26 +18809,21 @@ typedef PFNGLTEXTURESTORAGEMEM3DMULTISAMPLEEXTPROCDart =
 typedef PFNGLTEXTURESTORAGEMEM3DMULTISAMPLEEXTPROC =
     Void Function(
       Uint32 texture,
-      Uint32 samples,
+      Int32 samples,
       Uint32 internalFormat,
-      Uint32 width,
-      Uint32 height,
-      Uint32 depth,
-      Int32 fixedSampleLocations,
+      Int32 width,
+      Int32 height,
+      Int32 depth,
+      Uint8 fixedSampleLocations,
       Uint32 memory,
       Uint64 offset,
     );
 
 // typedef void (APIENTRYP PFNGLNAMEDBUFFERSTORAGEMEMEXTPROC) (GLuint buffer, GLsizeiptr size, GLuint memory, GLuint64 offset)
 typedef PFNGLNAMEDBUFFERSTORAGEMEMEXTPROCDart =
-    void Function(int buffer, Pointer<Uint32> size, int memory, int offset);
+    void Function(int buffer, int size, int memory, int offset);
 typedef PFNGLNAMEDBUFFERSTORAGEMEMEXTPROC =
-    Void Function(
-      Uint32 buffer,
-      Pointer<Uint32> size,
-      Uint32 memory,
-      Uint64 offset,
-    );
+    Void Function(Uint32 buffer, IntPtr size, Uint32 memory, Uint64 offset);
 
 // typedef void (APIENTRYP PFNGLTEXSTORAGEMEM1DEXTPROC) (GLenum target, GLsizei levels, GLenum internalFormat, GLsizei width, GLuint memory, GLuint64 offset)
 typedef PFNGLTEXSTORAGEMEM1DEXTPROCDart =
@@ -19286,9 +18838,9 @@ typedef PFNGLTEXSTORAGEMEM1DEXTPROCDart =
 typedef PFNGLTEXSTORAGEMEM1DEXTPROC =
     Void Function(
       Uint32 target,
-      Uint32 levels,
+      Int32 levels,
       Uint32 internalFormat,
-      Uint32 width,
+      Int32 width,
       Uint32 memory,
       Uint64 offset,
     );
@@ -19306,9 +18858,9 @@ typedef PFNGLTEXTURESTORAGEMEM1DEXTPROCDart =
 typedef PFNGLTEXTURESTORAGEMEM1DEXTPROC =
     Void Function(
       Uint32 texture,
-      Uint32 levels,
+      Int32 levels,
       Uint32 internalFormat,
-      Uint32 width,
+      Int32 width,
       Uint32 memory,
       Uint64 offset,
     );
@@ -19321,34 +18873,24 @@ typedef PFNGLIMPORTMEMORYFDEXTPROC =
 
 // typedef void (APIENTRYP PFNGLIMPORTMEMORYWIN32HANDLEEXTPROC) (GLuint memory, GLuint64 size, GLenum handleType, void *handle)
 typedef PFNGLIMPORTMEMORYWIN32HANDLEEXTPROCDart =
-    void Function(
-      int memory,
-      int size,
-      int handleType,
-      Pointer<NativeType> handle,
-    );
+    void Function(int memory, int size, int handleType, Pointer<Void> handle);
 typedef PFNGLIMPORTMEMORYWIN32HANDLEEXTPROC =
     Void Function(
       Uint32 memory,
       Uint64 size,
       Uint32 handleType,
-      Pointer<NativeType> handle,
+      Pointer<Void> handle,
     );
 
 // typedef void (APIENTRYP PFNGLIMPORTMEMORYWIN32NAMEEXTPROC) (GLuint memory, GLuint64 size, GLenum handleType, const void *name)
 typedef PFNGLIMPORTMEMORYWIN32NAMEEXTPROCDart =
-    void Function(
-      int memory,
-      int size,
-      int handleType,
-      Pointer<NativeType> name,
-    );
+    void Function(int memory, int size, int handleType, Pointer<Void> name);
 typedef PFNGLIMPORTMEMORYWIN32NAMEEXTPROC =
     Void Function(
       Uint32 memory,
       Uint64 size,
       Uint32 handleType,
-      Pointer<NativeType> name,
+      Pointer<Void> name,
     );
 
 // typedef void (APIENTRYP PFNGLDRAWMESHTASKSEXTPROC) (GLuint num_groups_x, GLuint num_groups_y, GLuint num_groups_z)
@@ -19358,35 +18900,24 @@ typedef PFNGLDRAWMESHTASKSEXTPROC =
     Void Function(Uint32 numGroupsX, Uint32 numGroupsY, Uint32 numGroupsZ);
 
 // typedef void (APIENTRYP PFNGLDRAWMESHTASKSINDIRECTEXTPROC) (GLintptr indirect)
-typedef PFNGLDRAWMESHTASKSINDIRECTEXTPROCDart =
-    void Function(Pointer<NativeType> indirect);
-typedef PFNGLDRAWMESHTASKSINDIRECTEXTPROC =
-    Void Function(Pointer<NativeType> indirect);
+typedef PFNGLDRAWMESHTASKSINDIRECTEXTPROCDart = void Function(int indirect);
+typedef PFNGLDRAWMESHTASKSINDIRECTEXTPROC = Void Function(IntPtr indirect);
 
 // typedef void (APIENTRYP PFNGLMULTIDRAWMESHTASKSINDIRECTEXTPROC) (GLintptr indirect, GLsizei drawcount, GLsizei stride)
 typedef PFNGLMULTIDRAWMESHTASKSINDIRECTEXTPROCDart =
-    void Function(Pointer<NativeType> indirect, int drawcount, int stride);
+    void Function(int indirect, int drawcount, int stride);
 typedef PFNGLMULTIDRAWMESHTASKSINDIRECTEXTPROC =
-    Void Function(
-      Pointer<NativeType> indirect,
-      Uint32 drawcount,
-      Uint32 stride,
-    );
+    Void Function(IntPtr indirect, Int32 drawcount, Int32 stride);
 
 // typedef void (APIENTRYP PFNGLMULTIDRAWMESHTASKSINDIRECTCOUNTEXTPROC) (GLintptr indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride)
 typedef PFNGLMULTIDRAWMESHTASKSINDIRECTCOUNTEXTPROCDart =
-    void Function(
-      Pointer<NativeType> indirect,
-      Pointer<NativeType> drawcount,
-      int maxdrawcount,
-      int stride,
-    );
+    void Function(int indirect, int drawcount, int maxdrawcount, int stride);
 typedef PFNGLMULTIDRAWMESHTASKSINDIRECTCOUNTEXTPROC =
     Void Function(
-      Pointer<NativeType> indirect,
-      Pointer<NativeType> drawcount,
-      Uint32 maxdrawcount,
-      Uint32 stride,
+      IntPtr indirect,
+      IntPtr drawcount,
+      Int32 maxdrawcount,
+      Int32 stride,
     );
 
 // typedef void (APIENTRYP PFNGLMULTIDRAWARRAYSEXTPROC) (GLenum mode, const GLint *first, const GLsizei *count, GLsizei primcount)
@@ -19394,38 +18925,38 @@ typedef PFNGLMULTIDRAWARRAYSEXTPROCDart =
     void Function(
       int mode,
       Pointer<Int32> first,
-      Pointer<Uint32> count,
+      Pointer<Int32> count,
       int primcount,
     );
 typedef PFNGLMULTIDRAWARRAYSEXTPROC =
     Void Function(
       Uint32 mode,
       Pointer<Int32> first,
-      Pointer<Uint32> count,
-      Uint32 primcount,
+      Pointer<Int32> count,
+      Int32 primcount,
     );
 
 // typedef void (APIENTRYP PFNGLMULTIDRAWELEMENTSEXTPROC) (GLenum mode, const GLsizei *count, GLenum type, const void *const*indices, GLsizei primcount)
 typedef PFNGLMULTIDRAWELEMENTSEXTPROCDart =
     void Function(
       int mode,
-      Pointer<Uint32> count,
+      Pointer<Int32> count,
       int type,
-      Pointer<Pointer<NativeType>> indices,
+      Pointer<Pointer<Void>> indices,
       int primcount,
     );
 typedef PFNGLMULTIDRAWELEMENTSEXTPROC =
     Void Function(
       Uint32 mode,
-      Pointer<Uint32> count,
+      Pointer<Int32> count,
       Uint32 type,
-      Pointer<Pointer<NativeType>> indices,
-      Uint32 primcount,
+      Pointer<Pointer<Void>> indices,
+      Int32 primcount,
     );
 
 // typedef void (APIENTRYP PFNGLSAMPLEMASKEXTPROC) (GLclampf value, GLboolean invert)
 typedef PFNGLSAMPLEMASKEXTPROCDart = void Function(double value, int invert);
-typedef PFNGLSAMPLEMASKEXTPROC = Void Function(Float value, Int32 invert);
+typedef PFNGLSAMPLEMASKEXTPROC = Void Function(Float value, Uint8 invert);
 
 // typedef void (APIENTRYP PFNGLSAMPLEPATTERNEXTPROC) (GLenum pattern)
 typedef PFNGLSAMPLEPATTERNEXTPROCDart = void Function(int pattern);
@@ -19439,27 +18970,27 @@ typedef PFNGLCOLORTABLEEXTPROCDart =
       int width,
       int format,
       int type,
-      Pointer<NativeType> table,
+      Pointer<Void> table,
     );
 typedef PFNGLCOLORTABLEEXTPROC =
     Void Function(
       Uint32 target,
       Uint32 internalFormat,
-      Uint32 width,
+      Int32 width,
       Uint32 format,
       Uint32 type,
-      Pointer<NativeType> table,
+      Pointer<Void> table,
     );
 
 // typedef void (APIENTRYP PFNGLGETCOLORTABLEEXTPROC) (GLenum target, GLenum format, GLenum type, void *data)
 typedef PFNGLGETCOLORTABLEEXTPROCDart =
-    void Function(int target, int format, int type, Pointer<NativeType> data);
+    void Function(int target, int format, int type, Pointer<Void> data);
 typedef PFNGLGETCOLORTABLEEXTPROC =
     Void Function(
       Uint32 target,
       Uint32 format,
       Uint32 type,
-      Pointer<NativeType> data,
+      Pointer<Void> data,
     );
 
 // typedef void (APIENTRYP PFNGLGETCOLORTABLEPARAMETERIVEXTPROC) (GLenum target, GLenum pname, GLint *params)
@@ -19540,7 +19071,7 @@ typedef PFNGLPROVOKINGVERTEXEXTPROC = Void Function(Uint32 mode);
 typedef PFNGLRASTERSAMPLESEXTPROCDart =
     void Function(int samples, int fixedsamplelocations);
 typedef PFNGLRASTERSAMPLESEXTPROC =
-    Void Function(Uint32 samples, Int32 fixedsamplelocations);
+    Void Function(Uint32 samples, Uint8 fixedsamplelocations);
 
 // typedef void (APIENTRYP PFNGLSECONDARYCOLOR3BEXTPROC) (GLbyte red, GLbyte green, GLbyte blue)
 typedef PFNGLSECONDARYCOLOR3BEXTPROCDart =
@@ -19624,30 +19155,25 @@ typedef PFNGLSECONDARYCOLOR3USVEXTPROC = Void Function(Pointer<Uint16> v);
 
 // typedef void (APIENTRYP PFNGLSECONDARYCOLORPOINTEREXTPROC) (GLint size, GLenum type, GLsizei stride, const void *pointer)
 typedef PFNGLSECONDARYCOLORPOINTEREXTPROCDart =
-    void Function(int size, int type, int stride, Pointer<NativeType> pointer);
+    void Function(int size, int type, int stride, Pointer<Void> pointer);
 typedef PFNGLSECONDARYCOLORPOINTEREXTPROC =
-    Void Function(
-      Int32 size,
-      Uint32 type,
-      Uint32 stride,
-      Pointer<NativeType> pointer,
-    );
+    Void Function(Int32 size, Uint32 type, Int32 stride, Pointer<Void> pointer);
 
 // typedef void (APIENTRYP PFNGLGENSEMAPHORESEXTPROC) (GLsizei n, GLuint *semaphores)
 typedef PFNGLGENSEMAPHORESEXTPROCDart =
     void Function(int n, Pointer<Uint32> semaphores);
 typedef PFNGLGENSEMAPHORESEXTPROC =
-    Void Function(Uint32 n, Pointer<Uint32> semaphores);
+    Void Function(Int32 n, Pointer<Uint32> semaphores);
 
 // typedef void (APIENTRYP PFNGLDELETESEMAPHORESEXTPROC) (GLsizei n, const GLuint *semaphores)
 typedef PFNGLDELETESEMAPHORESEXTPROCDart =
     void Function(int n, Pointer<Uint32> semaphores);
 typedef PFNGLDELETESEMAPHORESEXTPROC =
-    Void Function(Uint32 n, Pointer<Uint32> semaphores);
+    Void Function(Int32 n, Pointer<Uint32> semaphores);
 
 // typedef GLboolean (APIENTRYP PFNGLISSEMAPHOREEXTPROC) (GLuint semaphore)
 typedef PFNGLISSEMAPHOREEXTPROCDart = int Function(int semaphore);
-typedef PFNGLISSEMAPHOREEXTPROC = Int32 Function(Uint32 semaphore);
+typedef PFNGLISSEMAPHOREEXTPROC = Uint8 Function(Uint32 semaphore);
 
 // typedef void (APIENTRYP PFNGLSEMAPHOREPARAMETERUI64VEXTPROC) (GLuint semaphore, GLenum pname, const GLuint64 *params)
 typedef PFNGLSEMAPHOREPARAMETERUI64VEXTPROCDart =
@@ -19709,23 +19235,15 @@ typedef PFNGLIMPORTSEMAPHOREFDEXTPROC =
 
 // typedef void (APIENTRYP PFNGLIMPORTSEMAPHOREWIN32HANDLEEXTPROC) (GLuint semaphore, GLenum handleType, void *handle)
 typedef PFNGLIMPORTSEMAPHOREWIN32HANDLEEXTPROCDart =
-    void Function(int semaphore, int handleType, Pointer<NativeType> handle);
+    void Function(int semaphore, int handleType, Pointer<Void> handle);
 typedef PFNGLIMPORTSEMAPHOREWIN32HANDLEEXTPROC =
-    Void Function(
-      Uint32 semaphore,
-      Uint32 handleType,
-      Pointer<NativeType> handle,
-    );
+    Void Function(Uint32 semaphore, Uint32 handleType, Pointer<Void> handle);
 
 // typedef void (APIENTRYP PFNGLIMPORTSEMAPHOREWIN32NAMEEXTPROC) (GLuint semaphore, GLenum handleType, const void *name)
 typedef PFNGLIMPORTSEMAPHOREWIN32NAMEEXTPROCDart =
-    void Function(int semaphore, int handleType, Pointer<NativeType> name);
+    void Function(int semaphore, int handleType, Pointer<Void> name);
 typedef PFNGLIMPORTSEMAPHOREWIN32NAMEEXTPROC =
-    Void Function(
-      Uint32 semaphore,
-      Uint32 handleType,
-      Pointer<NativeType> name,
-    );
+    Void Function(Uint32 semaphore, Uint32 handleType, Pointer<Void> name);
 
 // typedef void (APIENTRYP PFNGLUSESHADERPROGRAMEXTPROC) (GLenum type, GLuint program)
 typedef PFNGLUSESHADERPROGRAMEXTPROCDart = void Function(int type, int program);
@@ -19762,7 +19280,7 @@ typedef PFNGLBINDIMAGETEXTUREEXTPROC =
       Uint32 index,
       Uint32 texture,
       Int32 level,
-      Int32 layered,
+      Uint8 layered,
       Int32 layer,
       Uint32 access,
       Int32 format,
@@ -19776,7 +19294,7 @@ typedef PFNGLMEMORYBARRIEREXTPROC = Void Function(Uint32 barriers);
 typedef PFNGLSTENCILCLEARTAGEXTPROCDart =
     void Function(int stencilTagBits, int stencilClearTag);
 typedef PFNGLSTENCILCLEARTAGEXTPROC =
-    Void Function(Uint32 stencilTagBits, Uint32 stencilClearTag);
+    Void Function(Int32 stencilTagBits, Uint32 stencilClearTag);
 
 // typedef void (APIENTRYP PFNGLACTIVESTENCILFACEEXTPROC) (GLenum face)
 typedef PFNGLACTIVESTENCILFACEEXTPROCDart = void Function(int face);
@@ -19791,17 +19309,17 @@ typedef PFNGLTEXSUBIMAGE1DEXTPROCDart =
       int width,
       int format,
       int type,
-      Pointer<NativeType> pixels,
+      Pointer<Void> pixels,
     );
 typedef PFNGLTEXSUBIMAGE1DEXTPROC =
     Void Function(
       Uint32 target,
       Int32 level,
       Int32 xoffset,
-      Uint32 width,
+      Int32 width,
       Uint32 format,
       Uint32 type,
-      Pointer<NativeType> pixels,
+      Pointer<Void> pixels,
     );
 
 // typedef void (APIENTRYP PFNGLTEXSUBIMAGE2DEXTPROC) (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const void *pixels)
@@ -19815,7 +19333,7 @@ typedef PFNGLTEXSUBIMAGE2DEXTPROCDart =
       int height,
       int format,
       int type,
-      Pointer<NativeType> pixels,
+      Pointer<Void> pixels,
     );
 typedef PFNGLTEXSUBIMAGE2DEXTPROC =
     Void Function(
@@ -19823,11 +19341,11 @@ typedef PFNGLTEXSUBIMAGE2DEXTPROC =
       Int32 level,
       Int32 xoffset,
       Int32 yoffset,
-      Uint32 width,
-      Uint32 height,
+      Int32 width,
+      Int32 height,
       Uint32 format,
       Uint32 type,
-      Pointer<NativeType> pixels,
+      Pointer<Void> pixels,
     );
 
 // typedef void (APIENTRYP PFNGLTEXIMAGE3DEXTPROC) (GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLenum format, GLenum type, const void *pixels)
@@ -19842,20 +19360,20 @@ typedef PFNGLTEXIMAGE3DEXTPROCDart =
       int border,
       int format,
       int type,
-      Pointer<NativeType> pixels,
+      Pointer<Void> pixels,
     );
 typedef PFNGLTEXIMAGE3DEXTPROC =
     Void Function(
       Uint32 target,
       Int32 level,
       Uint32 internalformat,
-      Uint32 width,
-      Uint32 height,
-      Uint32 depth,
+      Int32 width,
+      Int32 height,
+      Int32 depth,
       Int32 border,
       Uint32 format,
       Uint32 type,
-      Pointer<NativeType> pixels,
+      Pointer<Void> pixels,
     );
 
 // typedef void (APIENTRYP PFNGLTEXSUBIMAGE3DEXTPROC) (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const void *pixels)
@@ -19871,7 +19389,7 @@ typedef PFNGLTEXSUBIMAGE3DEXTPROCDart =
       int depth,
       int format,
       int type,
-      Pointer<NativeType> pixels,
+      Pointer<Void> pixels,
     );
 typedef PFNGLTEXSUBIMAGE3DEXTPROC =
     Void Function(
@@ -19880,12 +19398,12 @@ typedef PFNGLTEXSUBIMAGE3DEXTPROC =
       Int32 xoffset,
       Int32 yoffset,
       Int32 zoffset,
-      Uint32 width,
-      Uint32 height,
-      Uint32 depth,
+      Int32 width,
+      Int32 height,
+      Int32 depth,
       Uint32 format,
       Uint32 type,
-      Pointer<NativeType> pixels,
+      Pointer<Void> pixels,
     );
 
 // typedef void (APIENTRYP PFNGLFRAMEBUFFERTEXTURELAYEREXTPROC) (GLenum target, GLenum attachment, GLuint texture, GLint level, GLint layer)
@@ -19950,12 +19468,12 @@ typedef PFNGLCLEARCOLORIUIEXTPROC =
 
 // typedef GLboolean (APIENTRYP PFNGLARETEXTURESRESIDENTEXTPROC) (GLsizei n, const GLuint *textures, GLboolean *residences)
 typedef PFNGLARETEXTURESRESIDENTEXTPROCDart =
-    int Function(int n, Pointer<Uint32> textures, Pointer<Int32> residences);
+    int Function(int n, Pointer<Uint32> textures, Pointer<Uint8> residences);
 typedef PFNGLARETEXTURESRESIDENTEXTPROC =
-    Int32 Function(
-      Uint32 n,
+    Uint8 Function(
+      Int32 n,
       Pointer<Uint32> textures,
-      Pointer<Int32> residences,
+      Pointer<Uint8> residences,
     );
 
 // typedef void (APIENTRYP PFNGLBINDTEXTUREEXTPROC) (GLenum target, GLuint texture)
@@ -19966,27 +19484,23 @@ typedef PFNGLBINDTEXTUREEXTPROC = Void Function(Uint32 target, Uint32 texture);
 typedef PFNGLDELETETEXTURESEXTPROCDart =
     void Function(int n, Pointer<Uint32> textures);
 typedef PFNGLDELETETEXTURESEXTPROC =
-    Void Function(Uint32 n, Pointer<Uint32> textures);
+    Void Function(Int32 n, Pointer<Uint32> textures);
 
 // typedef void (APIENTRYP PFNGLGENTEXTURESEXTPROC) (GLsizei n, GLuint *textures)
 typedef PFNGLGENTEXTURESEXTPROCDart =
     void Function(int n, Pointer<Uint32> textures);
 typedef PFNGLGENTEXTURESEXTPROC =
-    Void Function(Uint32 n, Pointer<Uint32> textures);
+    Void Function(Int32 n, Pointer<Uint32> textures);
 
 // typedef GLboolean (APIENTRYP PFNGLISTEXTUREEXTPROC) (GLuint texture)
 typedef PFNGLISTEXTUREEXTPROCDart = int Function(int texture);
-typedef PFNGLISTEXTUREEXTPROC = Int32 Function(Uint32 texture);
+typedef PFNGLISTEXTUREEXTPROC = Uint8 Function(Uint32 texture);
 
 // typedef void (APIENTRYP PFNGLPRIORITIZETEXTURESEXTPROC) (GLsizei n, const GLuint *textures, const GLclampf *priorities)
 typedef PFNGLPRIORITIZETEXTURESEXTPROCDart =
     void Function(int n, Pointer<Uint32> textures, Pointer<Float> priorities);
 typedef PFNGLPRIORITIZETEXTURESEXTPROC =
-    Void Function(
-      Uint32 n,
-      Pointer<Uint32> textures,
-      Pointer<Float> priorities,
-    );
+    Void Function(Int32 n, Pointer<Uint32> textures, Pointer<Float> priorities);
 
 // typedef void (APIENTRYP PFNGLTEXTURENORMALEXTPROC) (GLenum mode)
 typedef PFNGLTEXTURENORMALEXTPROCDart = void Function(int mode);
@@ -19998,9 +19512,9 @@ typedef PFNGLTEXSTORAGE1DEXTPROCDart =
 typedef PFNGLTEXSTORAGE1DEXTPROC =
     Void Function(
       Uint32 target,
-      Uint32 levels,
+      Int32 levels,
       Uint32 internalformat,
-      Uint32 width,
+      Int32 width,
     );
 
 // typedef void (APIENTRYP PFNGLTEXSTORAGE2DEXTPROC) (GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height)
@@ -20015,10 +19529,10 @@ typedef PFNGLTEXSTORAGE2DEXTPROCDart =
 typedef PFNGLTEXSTORAGE2DEXTPROC =
     Void Function(
       Uint32 target,
-      Uint32 levels,
+      Int32 levels,
       Uint32 internalformat,
-      Uint32 width,
-      Uint32 height,
+      Int32 width,
+      Int32 height,
     );
 
 // typedef void (APIENTRYP PFNGLTEXSTORAGE3DEXTPROC) (GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth)
@@ -20034,11 +19548,11 @@ typedef PFNGLTEXSTORAGE3DEXTPROCDart =
 typedef PFNGLTEXSTORAGE3DEXTPROC =
     Void Function(
       Uint32 target,
-      Uint32 levels,
+      Int32 levels,
       Uint32 internalformat,
-      Uint32 width,
-      Uint32 height,
-      Uint32 depth,
+      Int32 width,
+      Int32 height,
+      Int32 depth,
     );
 
 // typedef void (APIENTRYP PFNGLGETQUERYOBJECTI64VEXTPROC) (GLuint id, GLenum pname, GLint64 *params)
@@ -20065,37 +19579,21 @@ typedef PFNGLENDTRANSFORMFEEDBACKEXTPROC = Void Function();
 
 // typedef void (APIENTRYP PFNGLBINDBUFFERRANGEEXTPROC) (GLenum target, GLuint index, GLuint buffer, GLintptr offset, GLsizeiptr size)
 typedef PFNGLBINDBUFFERRANGEEXTPROCDart =
-    void Function(
-      int target,
-      int index,
-      int buffer,
-      Pointer<NativeType> offset,
-      Pointer<Uint32> size,
-    );
+    void Function(int target, int index, int buffer, int offset, int size);
 typedef PFNGLBINDBUFFERRANGEEXTPROC =
     Void Function(
       Uint32 target,
       Uint32 index,
       Uint32 buffer,
-      Pointer<NativeType> offset,
-      Pointer<Uint32> size,
+      IntPtr offset,
+      IntPtr size,
     );
 
 // typedef void (APIENTRYP PFNGLBINDBUFFEROFFSETEXTPROC) (GLenum target, GLuint index, GLuint buffer, GLintptr offset)
 typedef PFNGLBINDBUFFEROFFSETEXTPROCDart =
-    void Function(
-      int target,
-      int index,
-      int buffer,
-      Pointer<NativeType> offset,
-    );
+    void Function(int target, int index, int buffer, int offset);
 typedef PFNGLBINDBUFFEROFFSETEXTPROC =
-    Void Function(
-      Uint32 target,
-      Uint32 index,
-      Uint32 buffer,
-      Pointer<NativeType> offset,
-    );
+    Void Function(Uint32 target, Uint32 index, Uint32 buffer, IntPtr offset);
 
 // typedef void (APIENTRYP PFNGLBINDBUFFERBASEEXTPROC) (GLenum target, GLuint index, GLuint buffer)
 typedef PFNGLBINDBUFFERBASEEXTPROCDart =
@@ -20114,7 +19612,7 @@ typedef PFNGLTRANSFORMFEEDBACKVARYINGSEXTPROCDart =
 typedef PFNGLTRANSFORMFEEDBACKVARYINGSEXTPROC =
     Void Function(
       Uint32 program,
-      Uint32 count,
+      Int32 count,
       Pointer<Pointer<Int8>> varyings,
       Uint32 bufferMode,
     );
@@ -20125,8 +19623,8 @@ typedef PFNGLGETTRANSFORMFEEDBACKVARYINGEXTPROCDart =
       int program,
       int index,
       int bufSize,
-      Pointer<Uint32> length,
-      Pointer<Uint32> size,
+      Pointer<Int32> length,
+      Pointer<Int32> size,
       Pointer<Uint32> type,
       Pointer<Int8> name,
     );
@@ -20134,9 +19632,9 @@ typedef PFNGLGETTRANSFORMFEEDBACKVARYINGEXTPROC =
     Void Function(
       Uint32 program,
       Uint32 index,
-      Uint32 bufSize,
-      Pointer<Uint32> length,
-      Pointer<Uint32> size,
+      Int32 bufSize,
+      Pointer<Int32> length,
+      Pointer<Int32> size,
       Pointer<Uint32> type,
       Pointer<Int8> name,
     );
@@ -20152,55 +19650,55 @@ typedef PFNGLCOLORPOINTEREXTPROCDart =
       int type,
       int stride,
       int count,
-      Pointer<NativeType> pointer,
+      Pointer<Void> pointer,
     );
 typedef PFNGLCOLORPOINTEREXTPROC =
     Void Function(
       Int32 size,
       Uint32 type,
-      Uint32 stride,
-      Uint32 count,
-      Pointer<NativeType> pointer,
+      Int32 stride,
+      Int32 count,
+      Pointer<Void> pointer,
     );
 
 // typedef void (APIENTRYP PFNGLDRAWARRAYSEXTPROC) (GLenum mode, GLint first, GLsizei count)
 typedef PFNGLDRAWARRAYSEXTPROCDart =
     void Function(int mode, int first, int count);
 typedef PFNGLDRAWARRAYSEXTPROC =
-    Void Function(Uint32 mode, Int32 first, Uint32 count);
+    Void Function(Uint32 mode, Int32 first, Int32 count);
 
 // typedef void (APIENTRYP PFNGLEDGEFLAGPOINTEREXTPROC) (GLsizei stride, GLsizei count, const GLboolean *pointer)
 typedef PFNGLEDGEFLAGPOINTEREXTPROCDart =
-    void Function(int stride, int count, Pointer<Int32> pointer);
+    void Function(int stride, int count, Pointer<Uint8> pointer);
 typedef PFNGLEDGEFLAGPOINTEREXTPROC =
-    Void Function(Uint32 stride, Uint32 count, Pointer<Int32> pointer);
+    Void Function(Int32 stride, Int32 count, Pointer<Uint8> pointer);
 
 // typedef void (APIENTRYP PFNGLGETPOINTERVEXTPROC) (GLenum pname, void **params)
 typedef PFNGLGETPOINTERVEXTPROCDart =
-    void Function(int pname, Pointer<Pointer<NativeType>> params);
+    void Function(int pname, Pointer<Pointer<Void>> params);
 typedef PFNGLGETPOINTERVEXTPROC =
-    Void Function(Uint32 pname, Pointer<Pointer<NativeType>> params);
+    Void Function(Uint32 pname, Pointer<Pointer<Void>> params);
 
 // typedef void (APIENTRYP PFNGLINDEXPOINTEREXTPROC) (GLenum type, GLsizei stride, GLsizei count, const void *pointer)
 typedef PFNGLINDEXPOINTEREXTPROCDart =
-    void Function(int type, int stride, int count, Pointer<NativeType> pointer);
+    void Function(int type, int stride, int count, Pointer<Void> pointer);
 typedef PFNGLINDEXPOINTEREXTPROC =
     Void Function(
       Uint32 type,
-      Uint32 stride,
-      Uint32 count,
-      Pointer<NativeType> pointer,
+      Int32 stride,
+      Int32 count,
+      Pointer<Void> pointer,
     );
 
 // typedef void (APIENTRYP PFNGLNORMALPOINTEREXTPROC) (GLenum type, GLsizei stride, GLsizei count, const void *pointer)
 typedef PFNGLNORMALPOINTEREXTPROCDart =
-    void Function(int type, int stride, int count, Pointer<NativeType> pointer);
+    void Function(int type, int stride, int count, Pointer<Void> pointer);
 typedef PFNGLNORMALPOINTEREXTPROC =
     Void Function(
       Uint32 type,
-      Uint32 stride,
-      Uint32 count,
-      Pointer<NativeType> pointer,
+      Int32 stride,
+      Int32 count,
+      Pointer<Void> pointer,
     );
 
 // typedef void (APIENTRYP PFNGLTEXCOORDPOINTEREXTPROC) (GLint size, GLenum type, GLsizei stride, GLsizei count, const void *pointer)
@@ -20210,15 +19708,15 @@ typedef PFNGLTEXCOORDPOINTEREXTPROCDart =
       int type,
       int stride,
       int count,
-      Pointer<NativeType> pointer,
+      Pointer<Void> pointer,
     );
 typedef PFNGLTEXCOORDPOINTEREXTPROC =
     Void Function(
       Int32 size,
       Uint32 type,
-      Uint32 stride,
-      Uint32 count,
-      Pointer<NativeType> pointer,
+      Int32 stride,
+      Int32 count,
+      Pointer<Void> pointer,
     );
 
 // typedef void (APIENTRYP PFNGLVERTEXPOINTEREXTPROC) (GLint size, GLenum type, GLsizei stride, GLsizei count, const void *pointer)
@@ -20228,15 +19726,15 @@ typedef PFNGLVERTEXPOINTEREXTPROCDart =
       int type,
       int stride,
       int count,
-      Pointer<NativeType> pointer,
+      Pointer<Void> pointer,
     );
 typedef PFNGLVERTEXPOINTEREXTPROC =
     Void Function(
       Int32 size,
       Uint32 type,
-      Uint32 stride,
-      Uint32 count,
-      Pointer<NativeType> pointer,
+      Int32 stride,
+      Int32 count,
+      Pointer<Void> pointer,
     );
 
 // typedef void (APIENTRYP PFNGLVERTEXATTRIBL1DEXTPROC) (GLuint index, GLdouble x)
@@ -20292,15 +19790,15 @@ typedef PFNGLVERTEXATTRIBLPOINTEREXTPROCDart =
       int size,
       int type,
       int stride,
-      Pointer<NativeType> pointer,
+      Pointer<Void> pointer,
     );
 typedef PFNGLVERTEXATTRIBLPOINTEREXTPROC =
     Void Function(
       Uint32 index,
       Int32 size,
       Uint32 type,
-      Uint32 stride,
-      Pointer<NativeType> pointer,
+      Int32 stride,
+      Pointer<Void> pointer,
     );
 
 // typedef void (APIENTRYP PFNGLGETVERTEXATTRIBLDVEXTPROC) (GLuint index, GLenum pname, GLdouble *params)
@@ -20397,15 +19895,15 @@ typedef PFNGLGENSYMBOLSEXTPROC =
 
 // typedef void (APIENTRYP PFNGLSETINVARIANTEXTPROC) (GLuint id, GLenum type, const void *addr)
 typedef PFNGLSETINVARIANTEXTPROCDart =
-    void Function(int id, int type, Pointer<NativeType> addr);
+    void Function(int id, int type, Pointer<Void> addr);
 typedef PFNGLSETINVARIANTEXTPROC =
-    Void Function(Uint32 id, Uint32 type, Pointer<NativeType> addr);
+    Void Function(Uint32 id, Uint32 type, Pointer<Void> addr);
 
 // typedef void (APIENTRYP PFNGLSETLOCALCONSTANTEXTPROC) (GLuint id, GLenum type, const void *addr)
 typedef PFNGLSETLOCALCONSTANTEXTPROCDart =
-    void Function(int id, int type, Pointer<NativeType> addr);
+    void Function(int id, int type, Pointer<Void> addr);
 typedef PFNGLSETLOCALCONSTANTEXTPROC =
-    Void Function(Uint32 id, Uint32 type, Pointer<NativeType> addr);
+    Void Function(Uint32 id, Uint32 type, Pointer<Void> addr);
 
 // typedef void (APIENTRYP PFNGLVARIANTBVEXTPROC) (GLuint id, const GLbyte *addr)
 typedef PFNGLVARIANTBVEXTPROCDart = void Function(int id, Pointer<Utf8> addr);
@@ -20443,14 +19941,9 @@ typedef PFNGLVARIANTUIVEXTPROC = Void Function(Uint32 id, Pointer<Uint32> addr);
 
 // typedef void (APIENTRYP PFNGLVARIANTPOINTEREXTPROC) (GLuint id, GLenum type, GLuint stride, const void *addr)
 typedef PFNGLVARIANTPOINTEREXTPROCDart =
-    void Function(int id, int type, int stride, Pointer<NativeType> addr);
+    void Function(int id, int type, int stride, Pointer<Void> addr);
 typedef PFNGLVARIANTPOINTEREXTPROC =
-    Void Function(
-      Uint32 id,
-      Uint32 type,
-      Uint32 stride,
-      Pointer<NativeType> addr,
-    );
+    Void Function(Uint32 id, Uint32 type, Uint32 stride, Pointer<Void> addr);
 
 // typedef void (APIENTRYP PFNGLENABLEVARIANTCLIENTSTATEEXTPROC) (GLuint id)
 typedef PFNGLENABLEVARIANTCLIENTSTATEEXTPROCDart = void Function(int id);
@@ -20489,13 +19982,13 @@ typedef PFNGLBINDPARAMETEREXTPROC = Uint32 Function(Uint32 value);
 
 // typedef GLboolean (APIENTRYP PFNGLISVARIANTENABLEDEXTPROC) (GLuint id, GLenum cap)
 typedef PFNGLISVARIANTENABLEDEXTPROCDart = int Function(int id, int cap);
-typedef PFNGLISVARIANTENABLEDEXTPROC = Int32 Function(Uint32 id, Uint32 cap);
+typedef PFNGLISVARIANTENABLEDEXTPROC = Uint8 Function(Uint32 id, Uint32 cap);
 
 // typedef void (APIENTRYP PFNGLGETVARIANTBOOLEANVEXTPROC) (GLuint id, GLenum value, GLboolean *data)
 typedef PFNGLGETVARIANTBOOLEANVEXTPROCDart =
-    void Function(int id, int value, Pointer<Int32> data);
+    void Function(int id, int value, Pointer<Uint8> data);
 typedef PFNGLGETVARIANTBOOLEANVEXTPROC =
-    Void Function(Uint32 id, Uint32 value, Pointer<Int32> data);
+    Void Function(Uint32 id, Uint32 value, Pointer<Uint8> data);
 
 // typedef void (APIENTRYP PFNGLGETVARIANTINTEGERVEXTPROC) (GLuint id, GLenum value, GLint *data)
 typedef PFNGLGETVARIANTINTEGERVEXTPROCDart =
@@ -20511,15 +20004,15 @@ typedef PFNGLGETVARIANTFLOATVEXTPROC =
 
 // typedef void (APIENTRYP PFNGLGETVARIANTPOINTERVEXTPROC) (GLuint id, GLenum value, void **data)
 typedef PFNGLGETVARIANTPOINTERVEXTPROCDart =
-    void Function(int id, int value, Pointer<Pointer<NativeType>> data);
+    void Function(int id, int value, Pointer<Pointer<Void>> data);
 typedef PFNGLGETVARIANTPOINTERVEXTPROC =
-    Void Function(Uint32 id, Uint32 value, Pointer<Pointer<NativeType>> data);
+    Void Function(Uint32 id, Uint32 value, Pointer<Pointer<Void>> data);
 
 // typedef void (APIENTRYP PFNGLGETINVARIANTBOOLEANVEXTPROC) (GLuint id, GLenum value, GLboolean *data)
 typedef PFNGLGETINVARIANTBOOLEANVEXTPROCDart =
-    void Function(int id, int value, Pointer<Int32> data);
+    void Function(int id, int value, Pointer<Uint8> data);
 typedef PFNGLGETINVARIANTBOOLEANVEXTPROC =
-    Void Function(Uint32 id, Uint32 value, Pointer<Int32> data);
+    Void Function(Uint32 id, Uint32 value, Pointer<Uint8> data);
 
 // typedef void (APIENTRYP PFNGLGETINVARIANTINTEGERVEXTPROC) (GLuint id, GLenum value, GLint *data)
 typedef PFNGLGETINVARIANTINTEGERVEXTPROCDart =
@@ -20535,9 +20028,9 @@ typedef PFNGLGETINVARIANTFLOATVEXTPROC =
 
 // typedef void (APIENTRYP PFNGLGETLOCALCONSTANTBOOLEANVEXTPROC) (GLuint id, GLenum value, GLboolean *data)
 typedef PFNGLGETLOCALCONSTANTBOOLEANVEXTPROCDart =
-    void Function(int id, int value, Pointer<Int32> data);
+    void Function(int id, int value, Pointer<Uint8> data);
 typedef PFNGLGETLOCALCONSTANTBOOLEANVEXTPROC =
-    Void Function(Uint32 id, Uint32 value, Pointer<Int32> data);
+    Void Function(Uint32 id, Uint32 value, Pointer<Uint8> data);
 
 // typedef void (APIENTRYP PFNGLGETLOCALCONSTANTINTEGERVEXTPROC) (GLuint id, GLenum value, GLint *data)
 typedef PFNGLGETLOCALCONSTANTINTEGERVEXTPROCDart =
@@ -20561,44 +20054,35 @@ typedef PFNGLVERTEXWEIGHTFVEXTPROC = Void Function(Pointer<Float> weight);
 
 // typedef void (APIENTRYP PFNGLVERTEXWEIGHTPOINTEREXTPROC) (GLint size, GLenum type, GLsizei stride, const void *pointer)
 typedef PFNGLVERTEXWEIGHTPOINTEREXTPROCDart =
-    void Function(int size, int type, int stride, Pointer<NativeType> pointer);
+    void Function(int size, int type, int stride, Pointer<Void> pointer);
 typedef PFNGLVERTEXWEIGHTPOINTEREXTPROC =
-    Void Function(
-      Int32 size,
-      Uint32 type,
-      Uint32 stride,
-      Pointer<NativeType> pointer,
-    );
+    Void Function(Int32 size, Uint32 type, Int32 stride, Pointer<Void> pointer);
 
 // typedef GLboolean (APIENTRYP PFNGLACQUIREKEYEDMUTEXWIN32EXTPROC) (GLuint memory, GLuint64 key, GLuint timeout)
 typedef PFNGLACQUIREKEYEDMUTEXWIN32EXTPROCDart =
     int Function(int memory, int key, int timeout);
 typedef PFNGLACQUIREKEYEDMUTEXWIN32EXTPROC =
-    Int32 Function(Uint32 memory, Uint64 key, Uint32 timeout);
+    Uint8 Function(Uint32 memory, Uint64 key, Uint32 timeout);
 
 // typedef GLboolean (APIENTRYP PFNGLRELEASEKEYEDMUTEXWIN32EXTPROC) (GLuint memory, GLuint64 key)
 typedef PFNGLRELEASEKEYEDMUTEXWIN32EXTPROCDart =
     int Function(int memory, int key);
 typedef PFNGLRELEASEKEYEDMUTEXWIN32EXTPROC =
-    Int32 Function(Uint32 memory, Uint64 key);
+    Uint8 Function(Uint32 memory, Uint64 key);
 
 // typedef void (APIENTRYP PFNGLWINDOWRECTANGLESEXTPROC) (GLenum mode, GLsizei count, const GLint *box)
 typedef PFNGLWINDOWRECTANGLESEXTPROCDart =
     void Function(int mode, int count, Pointer<Int32> box);
 typedef PFNGLWINDOWRECTANGLESEXTPROC =
-    Void Function(Uint32 mode, Uint32 count, Pointer<Int32> box);
+    Void Function(Uint32 mode, Int32 count, Pointer<Int32> box);
 
 // typedef GLsync (APIENTRYP PFNGLIMPORTSYNCEXTPROC) (GLenum external_sync_type, GLintptr external_sync, GLbitfield flags)
 typedef PFNGLIMPORTSYNCEXTPROCDart =
-    Pointer<NativeType> Function(
-      int externalSyncType,
-      Pointer<NativeType> externalSync,
-      int flags,
-    );
+    Pointer<Void> Function(int externalSyncType, int externalSync, int flags);
 typedef PFNGLIMPORTSYNCEXTPROC =
-    Pointer<NativeType> Function(
+    Pointer<Void> Function(
       Uint32 externalSyncType,
-      Pointer<NativeType> externalSync,
+      IntPtr externalSync,
       Uint32 flags,
     );
 
@@ -20608,9 +20092,9 @@ typedef PFNGLFRAMETERMINATORGREMEDYPROC = Void Function();
 
 // typedef void (APIENTRYP PFNGLSTRINGMARKERGREMEDYPROC) (GLsizei len, const void *string)
 typedef PFNGLSTRINGMARKERGREMEDYPROCDart =
-    void Function(int len, Pointer<NativeType> string);
+    void Function(int len, Pointer<Void> string);
 typedef PFNGLSTRINGMARKERGREMEDYPROC =
-    Void Function(Uint32 len, Pointer<NativeType> string);
+    Void Function(Int32 len, Pointer<Void> string);
 
 // typedef void (APIENTRYP PFNGLIMAGETRANSFORMPARAMETERIHPPROC) (GLenum target, GLenum pname, GLint param)
 typedef PFNGLIMAGETRANSFORMPARAMETERIHPPROCDart =
@@ -20653,7 +20137,7 @@ typedef PFNGLMULTIMODEDRAWARRAYSIBMPROCDart =
     void Function(
       Pointer<Uint32> mode,
       Pointer<Int32> first,
-      Pointer<Uint32> count,
+      Pointer<Int32> count,
       int primcount,
       int modestride,
     );
@@ -20661,8 +20145,8 @@ typedef PFNGLMULTIMODEDRAWARRAYSIBMPROC =
     Void Function(
       Pointer<Uint32> mode,
       Pointer<Int32> first,
-      Pointer<Uint32> count,
-      Uint32 primcount,
+      Pointer<Int32> count,
+      Int32 primcount,
       Int32 modestride,
     );
 
@@ -20670,19 +20154,19 @@ typedef PFNGLMULTIMODEDRAWARRAYSIBMPROC =
 typedef PFNGLMULTIMODEDRAWELEMENTSIBMPROCDart =
     void Function(
       Pointer<Uint32> mode,
-      Pointer<Uint32> count,
+      Pointer<Int32> count,
       int type,
-      Pointer<Pointer<NativeType>> indices,
+      Pointer<Pointer<Void>> indices,
       int primcount,
       int modestride,
     );
 typedef PFNGLMULTIMODEDRAWELEMENTSIBMPROC =
     Void Function(
       Pointer<Uint32> mode,
-      Pointer<Uint32> count,
+      Pointer<Int32> count,
       Uint32 type,
-      Pointer<Pointer<NativeType>> indices,
-      Uint32 primcount,
+      Pointer<Pointer<Void>> indices,
+      Int32 primcount,
       Int32 modestride,
     );
 
@@ -20696,7 +20180,7 @@ typedef PFNGLCOLORPOINTERLISTIBMPROCDart =
       int size,
       int type,
       int stride,
-      Pointer<Pointer<NativeType>> pointer,
+      Pointer<Pointer<Void>> pointer,
       int ptrstride,
     );
 typedef PFNGLCOLORPOINTERLISTIBMPROC =
@@ -20704,7 +20188,7 @@ typedef PFNGLCOLORPOINTERLISTIBMPROC =
       Int32 size,
       Uint32 type,
       Int32 stride,
-      Pointer<Pointer<NativeType>> pointer,
+      Pointer<Pointer<Void>> pointer,
       Int32 ptrstride,
     );
 
@@ -20714,7 +20198,7 @@ typedef PFNGLSECONDARYCOLORPOINTERLISTIBMPROCDart =
       int size,
       int type,
       int stride,
-      Pointer<Pointer<NativeType>> pointer,
+      Pointer<Pointer<Void>> pointer,
       int ptrstride,
     );
 typedef PFNGLSECONDARYCOLORPOINTERLISTIBMPROC =
@@ -20722,17 +20206,17 @@ typedef PFNGLSECONDARYCOLORPOINTERLISTIBMPROC =
       Int32 size,
       Uint32 type,
       Int32 stride,
-      Pointer<Pointer<NativeType>> pointer,
+      Pointer<Pointer<Void>> pointer,
       Int32 ptrstride,
     );
 
 // typedef void (APIENTRYP PFNGLEDGEFLAGPOINTERLISTIBMPROC) (GLint stride, const GLboolean **pointer, GLint ptrstride)
 typedef PFNGLEDGEFLAGPOINTERLISTIBMPROCDart =
-    void Function(int stride, Pointer<Pointer<Int32>> pointer, int ptrstride);
+    void Function(int stride, Pointer<Pointer<Uint8>> pointer, int ptrstride);
 typedef PFNGLEDGEFLAGPOINTERLISTIBMPROC =
     Void Function(
       Int32 stride,
-      Pointer<Pointer<Int32>> pointer,
+      Pointer<Pointer<Uint8>> pointer,
       Int32 ptrstride,
     );
 
@@ -20741,14 +20225,14 @@ typedef PFNGLFOGCOORDPOINTERLISTIBMPROCDart =
     void Function(
       int type,
       int stride,
-      Pointer<Pointer<NativeType>> pointer,
+      Pointer<Pointer<Void>> pointer,
       int ptrstride,
     );
 typedef PFNGLFOGCOORDPOINTERLISTIBMPROC =
     Void Function(
       Uint32 type,
       Int32 stride,
-      Pointer<Pointer<NativeType>> pointer,
+      Pointer<Pointer<Void>> pointer,
       Int32 ptrstride,
     );
 
@@ -20757,14 +20241,14 @@ typedef PFNGLINDEXPOINTERLISTIBMPROCDart =
     void Function(
       int type,
       int stride,
-      Pointer<Pointer<NativeType>> pointer,
+      Pointer<Pointer<Void>> pointer,
       int ptrstride,
     );
 typedef PFNGLINDEXPOINTERLISTIBMPROC =
     Void Function(
       Uint32 type,
       Int32 stride,
-      Pointer<Pointer<NativeType>> pointer,
+      Pointer<Pointer<Void>> pointer,
       Int32 ptrstride,
     );
 
@@ -20773,14 +20257,14 @@ typedef PFNGLNORMALPOINTERLISTIBMPROCDart =
     void Function(
       int type,
       int stride,
-      Pointer<Pointer<NativeType>> pointer,
+      Pointer<Pointer<Void>> pointer,
       int ptrstride,
     );
 typedef PFNGLNORMALPOINTERLISTIBMPROC =
     Void Function(
       Uint32 type,
       Int32 stride,
-      Pointer<Pointer<NativeType>> pointer,
+      Pointer<Pointer<Void>> pointer,
       Int32 ptrstride,
     );
 
@@ -20790,7 +20274,7 @@ typedef PFNGLTEXCOORDPOINTERLISTIBMPROCDart =
       int size,
       int type,
       int stride,
-      Pointer<Pointer<NativeType>> pointer,
+      Pointer<Pointer<Void>> pointer,
       int ptrstride,
     );
 typedef PFNGLTEXCOORDPOINTERLISTIBMPROC =
@@ -20798,7 +20282,7 @@ typedef PFNGLTEXCOORDPOINTERLISTIBMPROC =
       Int32 size,
       Uint32 type,
       Int32 stride,
-      Pointer<Pointer<NativeType>> pointer,
+      Pointer<Pointer<Void>> pointer,
       Int32 ptrstride,
     );
 
@@ -20808,7 +20292,7 @@ typedef PFNGLVERTEXPOINTERLISTIBMPROCDart =
       int size,
       int type,
       int stride,
-      Pointer<Pointer<NativeType>> pointer,
+      Pointer<Pointer<Void>> pointer,
       int ptrstride,
     );
 typedef PFNGLVERTEXPOINTERLISTIBMPROC =
@@ -20816,7 +20300,7 @@ typedef PFNGLVERTEXPOINTERLISTIBMPROC =
       Int32 size,
       Uint32 type,
       Int32 stride,
-      Pointer<Pointer<NativeType>> pointer,
+      Pointer<Pointer<Void>> pointer,
       Int32 ptrstride,
     );
 
@@ -20852,7 +20336,7 @@ typedef PFNGLUNMAPTEXTURE2DINTELPROC =
 
 // typedef void *(APIENTRYP PFNGLMAPTEXTURE2DINTELPROC) (GLuint texture, GLint level, GLbitfield access, GLint *stride, GLenum *layout)
 typedef PFNGLMAPTEXTURE2DINTELPROCDart =
-    Pointer<NativeType> Function(
+    Pointer<Void> Function(
       int texture,
       int level,
       int access,
@@ -20860,7 +20344,7 @@ typedef PFNGLMAPTEXTURE2DINTELPROCDart =
       Pointer<Uint32> layout,
     );
 typedef PFNGLMAPTEXTURE2DINTELPROC =
-    Pointer<NativeType> Function(
+    Pointer<Void> Function(
       Uint32 texture,
       Int32 level,
       Uint32 access,
@@ -20870,39 +20354,27 @@ typedef PFNGLMAPTEXTURE2DINTELPROC =
 
 // typedef void (APIENTRYP PFNGLVERTEXPOINTERVINTELPROC) (GLint size, GLenum type, const void **pointer)
 typedef PFNGLVERTEXPOINTERVINTELPROCDart =
-    void Function(int size, int type, Pointer<Pointer<NativeType>> pointer);
+    void Function(int size, int type, Pointer<Pointer<Void>> pointer);
 typedef PFNGLVERTEXPOINTERVINTELPROC =
-    Void Function(
-      Int32 size,
-      Uint32 type,
-      Pointer<Pointer<NativeType>> pointer,
-    );
+    Void Function(Int32 size, Uint32 type, Pointer<Pointer<Void>> pointer);
 
 // typedef void (APIENTRYP PFNGLNORMALPOINTERVINTELPROC) (GLenum type, const void **pointer)
 typedef PFNGLNORMALPOINTERVINTELPROCDart =
-    void Function(int type, Pointer<Pointer<NativeType>> pointer);
+    void Function(int type, Pointer<Pointer<Void>> pointer);
 typedef PFNGLNORMALPOINTERVINTELPROC =
-    Void Function(Uint32 type, Pointer<Pointer<NativeType>> pointer);
+    Void Function(Uint32 type, Pointer<Pointer<Void>> pointer);
 
 // typedef void (APIENTRYP PFNGLCOLORPOINTERVINTELPROC) (GLint size, GLenum type, const void **pointer)
 typedef PFNGLCOLORPOINTERVINTELPROCDart =
-    void Function(int size, int type, Pointer<Pointer<NativeType>> pointer);
+    void Function(int size, int type, Pointer<Pointer<Void>> pointer);
 typedef PFNGLCOLORPOINTERVINTELPROC =
-    Void Function(
-      Int32 size,
-      Uint32 type,
-      Pointer<Pointer<NativeType>> pointer,
-    );
+    Void Function(Int32 size, Uint32 type, Pointer<Pointer<Void>> pointer);
 
 // typedef void (APIENTRYP PFNGLTEXCOORDPOINTERVINTELPROC) (GLint size, GLenum type, const void **pointer)
 typedef PFNGLTEXCOORDPOINTERVINTELPROCDart =
-    void Function(int size, int type, Pointer<Pointer<NativeType>> pointer);
+    void Function(int size, int type, Pointer<Pointer<Void>> pointer);
 typedef PFNGLTEXCOORDPOINTERVINTELPROC =
-    Void Function(
-      Int32 size,
-      Uint32 type,
-      Pointer<Pointer<NativeType>> pointer,
-    );
+    Void Function(Int32 size, Uint32 type, Pointer<Pointer<Void>> pointer);
 
 // typedef void (APIENTRYP PFNGLBEGINPERFQUERYINTELPROC) (GLuint queryHandle)
 typedef PFNGLBEGINPERFQUERYINTELPROCDart = void Function(int queryHandle);
@@ -20970,15 +20442,15 @@ typedef PFNGLGETPERFQUERYDATAINTELPROCDart =
       int queryHandle,
       int flags,
       int dataSize,
-      Pointer<NativeType> data,
+      Pointer<Void> data,
       Pointer<Uint32> bytesWritten,
     );
 typedef PFNGLGETPERFQUERYDATAINTELPROC =
     Void Function(
       Uint32 queryHandle,
       Uint32 flags,
-      Uint32 dataSize,
-      Pointer<NativeType> data,
+      Int32 dataSize,
+      Pointer<Void> data,
       Pointer<Uint32> bytesWritten,
     );
 
@@ -21024,15 +20496,15 @@ typedef PFNGLGETFRAMEBUFFERPARAMETERIVMESAPROC =
 
 // typedef void (APIENTRYP PFNGLADDCLIENTPOINTERRANGEMESAPROC) (GLvoid *addr, GLsizeiptr size)
 typedef PFNGLADDCLIENTPOINTERRANGEMESAPROCDart =
-    void Function(Pointer<NativeType> addr, Pointer<Uint32> size);
+    void Function(Pointer<Void> addr, int size);
 typedef PFNGLADDCLIENTPOINTERRANGEMESAPROC =
-    Void Function(Pointer<NativeType> addr, Pointer<Uint32> size);
+    Void Function(Pointer<Void> addr, IntPtr size);
 
 // typedef void* (APIENTRYP PFNGLRELEASECLIENTPOINTERRANGEMESAPROC) (GLsizeiptr *size)
 typedef PFNGLRELEASECLIENTPOINTERRANGEMESAPROCDart =
-    Pointer<NativeType> Function(Pointer<Pointer<Uint32>> size);
+    Pointer<Void> Function(Pointer<IntPtr> size);
 typedef PFNGLRELEASECLIENTPOINTERRANGEMESAPROC =
-    Pointer<NativeType> Function(Pointer<Pointer<Uint32>> size);
+    Pointer<Void> Function(Pointer<IntPtr> size);
 
 // typedef void (APIENTRYP PFNGLRESIZEBUFFERSMESAPROC) (void)
 typedef PFNGLRESIZEBUFFERSMESAPROCDart = void Function();
@@ -21160,7 +20632,7 @@ typedef PFNGLUPLOADGPUMASKNVXPROC = Void Function(Uint32 mask);
 typedef PFNGLMULTICASTVIEWPORTARRAYVNVXPROCDart =
     void Function(int gpu, int first, int count, Pointer<Float> v);
 typedef PFNGLMULTICASTVIEWPORTARRAYVNVXPROC =
-    Void Function(Uint32 gpu, Uint32 first, Uint32 count, Pointer<Float> v);
+    Void Function(Uint32 gpu, Uint32 first, Int32 count, Pointer<Float> v);
 
 // typedef void (APIENTRYP PFNGLMULTICASTVIEWPORTPOSITIONWSCALENVXPROC) (GLuint gpu, GLuint index, GLfloat xcoeff, GLfloat ycoeff)
 typedef PFNGLMULTICASTVIEWPORTPOSITIONWSCALENVXPROCDart =
@@ -21172,7 +20644,7 @@ typedef PFNGLMULTICASTVIEWPORTPOSITIONWSCALENVXPROC =
 typedef PFNGLMULTICASTSCISSORARRAYVNVXPROCDart =
     void Function(int gpu, int first, int count, Pointer<Int32> v);
 typedef PFNGLMULTICASTSCISSORARRAYVNVXPROC =
-    Void Function(Uint32 gpu, Uint32 first, Uint32 count, Pointer<Int32> v);
+    Void Function(Uint32 gpu, Uint32 first, Int32 count, Pointer<Int32> v);
 
 // typedef GLuint (APIENTRYP PFNGLASYNCCOPYBUFFERSUBDATANVXPROC) (GLsizei waitSemaphoreCount, const GLuint *waitSemaphoreArray, const GLuint64 *fenceValueArray, GLuint readGpu, GLbitfield writeGpuMask, GLuint readBuffer, GLuint writeBuffer, GLintptr readOffset, GLintptr writeOffset, GLsizeiptr size, GLsizei signalSemaphoreCount, const GLuint *signalSemaphoreArray, const GLuint64 *signalValueArray)
 typedef PFNGLASYNCCOPYBUFFERSUBDATANVXPROCDart =
@@ -21184,26 +20656,26 @@ typedef PFNGLASYNCCOPYBUFFERSUBDATANVXPROCDart =
       int writeGpuMask,
       int readBuffer,
       int writeBuffer,
-      Pointer<NativeType> readOffset,
-      Pointer<NativeType> writeOffset,
-      Pointer<Uint32> size,
+      int readOffset,
+      int writeOffset,
+      int size,
       int signalSemaphoreCount,
       Pointer<Uint32> signalSemaphoreArray,
       Pointer<Uint64> signalValueArray,
     );
 typedef PFNGLASYNCCOPYBUFFERSUBDATANVXPROC =
     Uint32 Function(
-      Uint32 waitSemaphoreCount,
+      Int32 waitSemaphoreCount,
       Pointer<Uint32> waitSemaphoreArray,
       Pointer<Uint64> fenceValueArray,
       Uint32 readGpu,
       Uint32 writeGpuMask,
       Uint32 readBuffer,
       Uint32 writeBuffer,
-      Pointer<NativeType> readOffset,
-      Pointer<NativeType> writeOffset,
-      Pointer<Uint32> size,
-      Uint32 signalSemaphoreCount,
+      IntPtr readOffset,
+      IntPtr writeOffset,
+      IntPtr size,
+      Int32 signalSemaphoreCount,
       Pointer<Uint32> signalSemaphoreArray,
       Pointer<Uint64> signalValueArray,
     );
@@ -21237,7 +20709,7 @@ typedef PFNGLASYNCCOPYIMAGESUBDATANVXPROCDart =
     );
 typedef PFNGLASYNCCOPYIMAGESUBDATANVXPROC =
     Uint32 Function(
-      Uint32 waitSemaphoreCount,
+      Int32 waitSemaphoreCount,
       Pointer<Uint32> waitSemaphoreArray,
       Pointer<Uint64> waitValueArray,
       Uint32 srcGpu,
@@ -21254,10 +20726,10 @@ typedef PFNGLASYNCCOPYIMAGESUBDATANVXPROC =
       Int32 dstX,
       Int32 dstY,
       Int32 dstZ,
-      Uint32 srcWidth,
-      Uint32 srcHeight,
-      Uint32 srcDepth,
-      Uint32 signalSemaphoreCount,
+      Int32 srcWidth,
+      Int32 srcHeight,
+      Int32 srcDepth,
+      Int32 signalSemaphoreCount,
       Pointer<Uint32> signalSemaphoreArray,
       Pointer<Uint64> signalValueArray,
     );
@@ -21267,17 +20739,17 @@ typedef PFNGLLGPUNAMEDBUFFERSUBDATANVXPROCDart =
     void Function(
       int gpuMask,
       int buffer,
-      Pointer<NativeType> offset,
-      Pointer<Uint32> size,
-      Pointer<NativeType> data,
+      int offset,
+      int size,
+      Pointer<Void> data,
     );
 typedef PFNGLLGPUNAMEDBUFFERSUBDATANVXPROC =
     Void Function(
       Uint32 gpuMask,
       Uint32 buffer,
-      Pointer<NativeType> offset,
-      Pointer<Uint32> size,
-      Pointer<NativeType> data,
+      IntPtr offset,
+      IntPtr size,
+      Pointer<Void> data,
     );
 
 // typedef void (APIENTRYP PFNGLLGPUCOPYIMAGESUBDATANVXPROC) (GLuint sourceGpu, GLbitfield destinationGpuMask, GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srxY, GLint srcZ, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei width, GLsizei height, GLsizei depth)
@@ -21317,9 +20789,9 @@ typedef PFNGLLGPUCOPYIMAGESUBDATANVXPROC =
       Int32 dstX,
       Int32 dstY,
       Int32 dstZ,
-      Uint32 width,
-      Uint32 height,
-      Uint32 depth,
+      Int32 width,
+      Int32 height,
+      Int32 depth,
     );
 
 // typedef void (APIENTRYP PFNGLLGPUINTERLOCKNVXPROC) (void)
@@ -21341,7 +20813,7 @@ typedef PFNGLSIGNALSEMAPHOREUI64NVXPROCDart =
 typedef PFNGLSIGNALSEMAPHOREUI64NVXPROC =
     Void Function(
       Uint32 signalGpu,
-      Uint32 fenceObjectCount,
+      Int32 fenceObjectCount,
       Pointer<Uint32> semaphoreArray,
       Pointer<Uint64> fenceValueArray,
     );
@@ -21357,7 +20829,7 @@ typedef PFNGLWAITSEMAPHOREUI64NVXPROCDart =
 typedef PFNGLWAITSEMAPHOREUI64NVXPROC =
     Void Function(
       Uint32 waitGpu,
-      Uint32 fenceObjectCount,
+      Int32 fenceObjectCount,
       Pointer<Uint32> semaphoreArray,
       Pointer<Uint64> fenceValueArray,
     );
@@ -21371,7 +20843,7 @@ typedef PFNGLCLIENTWAITSEMAPHOREUI64NVXPROCDart =
     );
 typedef PFNGLCLIENTWAITSEMAPHOREUI64NVXPROC =
     Void Function(
-      Uint32 fenceObjectCount,
+      Int32 fenceObjectCount,
       Pointer<Uint32> semaphoreArray,
       Pointer<Uint64> fenceValueArray,
     );
@@ -21384,7 +20856,7 @@ typedef PFNGLALPHATOCOVERAGEDITHERCONTROLNVPROC = Void Function(Uint32 mode);
 typedef PFNGLMULTIDRAWARRAYSINDIRECTBINDLESSNVPROCDart =
     void Function(
       int mode,
-      Pointer<NativeType> indirect,
+      Pointer<Void> indirect,
       int drawCount,
       int stride,
       int vertexBufferCount,
@@ -21392,9 +20864,9 @@ typedef PFNGLMULTIDRAWARRAYSINDIRECTBINDLESSNVPROCDart =
 typedef PFNGLMULTIDRAWARRAYSINDIRECTBINDLESSNVPROC =
     Void Function(
       Uint32 mode,
-      Pointer<NativeType> indirect,
-      Uint32 drawCount,
-      Uint32 stride,
+      Pointer<Void> indirect,
+      Int32 drawCount,
+      Int32 stride,
       Int32 vertexBufferCount,
     );
 
@@ -21403,7 +20875,7 @@ typedef PFNGLMULTIDRAWELEMENTSINDIRECTBINDLESSNVPROCDart =
     void Function(
       int mode,
       int type,
-      Pointer<NativeType> indirect,
+      Pointer<Void> indirect,
       int drawCount,
       int stride,
       int vertexBufferCount,
@@ -21412,9 +20884,9 @@ typedef PFNGLMULTIDRAWELEMENTSINDIRECTBINDLESSNVPROC =
     Void Function(
       Uint32 mode,
       Uint32 type,
-      Pointer<NativeType> indirect,
-      Uint32 drawCount,
-      Uint32 stride,
+      Pointer<Void> indirect,
+      Int32 drawCount,
+      Int32 stride,
       Int32 vertexBufferCount,
     );
 
@@ -21422,7 +20894,7 @@ typedef PFNGLMULTIDRAWELEMENTSINDIRECTBINDLESSNVPROC =
 typedef PFNGLMULTIDRAWARRAYSINDIRECTBINDLESSCOUNTNVPROCDart =
     void Function(
       int mode,
-      Pointer<NativeType> indirect,
+      Pointer<Void> indirect,
       int drawCount,
       int maxDrawCount,
       int stride,
@@ -21431,10 +20903,10 @@ typedef PFNGLMULTIDRAWARRAYSINDIRECTBINDLESSCOUNTNVPROCDart =
 typedef PFNGLMULTIDRAWARRAYSINDIRECTBINDLESSCOUNTNVPROC =
     Void Function(
       Uint32 mode,
-      Pointer<NativeType> indirect,
-      Uint32 drawCount,
-      Uint32 maxDrawCount,
-      Uint32 stride,
+      Pointer<Void> indirect,
+      Int32 drawCount,
+      Int32 maxDrawCount,
+      Int32 stride,
       Int32 vertexBufferCount,
     );
 
@@ -21443,7 +20915,7 @@ typedef PFNGLMULTIDRAWELEMENTSINDIRECTBINDLESSCOUNTNVPROCDart =
     void Function(
       int mode,
       int type,
-      Pointer<NativeType> indirect,
+      Pointer<Void> indirect,
       int drawCount,
       int maxDrawCount,
       int stride,
@@ -21453,10 +20925,10 @@ typedef PFNGLMULTIDRAWELEMENTSINDIRECTBINDLESSCOUNTNVPROC =
     Void Function(
       Uint32 mode,
       Uint32 type,
-      Pointer<NativeType> indirect,
-      Uint32 drawCount,
-      Uint32 maxDrawCount,
-      Uint32 stride,
+      Pointer<Void> indirect,
+      Int32 drawCount,
+      Int32 maxDrawCount,
+      Int32 stride,
       Int32 vertexBufferCount,
     );
 
@@ -21485,7 +20957,7 @@ typedef PFNGLGETIMAGEHANDLENVPROC =
     Uint64 Function(
       Uint32 texture,
       Int32 level,
-      Int32 layered,
+      Uint8 layered,
       Int32 layer,
       Uint32 format,
     );
@@ -21510,7 +20982,7 @@ typedef PFNGLUNIFORMHANDLEUI64NVPROC =
 typedef PFNGLUNIFORMHANDLEUI64VNVPROCDart =
     void Function(int location, int count, Pointer<Uint64> value);
 typedef PFNGLUNIFORMHANDLEUI64VNVPROC =
-    Void Function(Int32 location, Uint32 count, Pointer<Uint64> value);
+    Void Function(Int32 location, Int32 count, Pointer<Uint64> value);
 
 // typedef void (APIENTRYP PFNGLPROGRAMUNIFORMHANDLEUI64NVPROC) (GLuint program, GLint location, GLuint64 value)
 typedef PFNGLPROGRAMUNIFORMHANDLEUI64NVPROCDart =
@@ -21525,17 +20997,17 @@ typedef PFNGLPROGRAMUNIFORMHANDLEUI64VNVPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
+      Int32 count,
       Pointer<Uint64> values,
     );
 
 // typedef GLboolean (APIENTRYP PFNGLISTEXTUREHANDLERESIDENTNVPROC) (GLuint64 handle)
 typedef PFNGLISTEXTUREHANDLERESIDENTNVPROCDart = int Function(int handle);
-typedef PFNGLISTEXTUREHANDLERESIDENTNVPROC = Int32 Function(Uint64 handle);
+typedef PFNGLISTEXTUREHANDLERESIDENTNVPROC = Uint8 Function(Uint64 handle);
 
 // typedef GLboolean (APIENTRYP PFNGLISIMAGEHANDLERESIDENTNVPROC) (GLuint64 handle)
 typedef PFNGLISIMAGEHANDLERESIDENTNVPROCDart = int Function(int handle);
-typedef PFNGLISIMAGEHANDLERESIDENTNVPROC = Int32 Function(Uint64 handle);
+typedef PFNGLISIMAGEHANDLERESIDENTNVPROC = Uint8 Function(Uint64 handle);
 
 // typedef void (APIENTRYP PFNGLBLENDPARAMETERINVPROC) (GLenum pname, GLint value)
 typedef PFNGLBLENDPARAMETERINVPROCDart = void Function(int pname, int value);
@@ -21555,17 +21027,17 @@ typedef PFNGLVIEWPORTPOSITIONWSCALENVPROC =
 typedef PFNGLCREATESTATESNVPROCDart =
     void Function(int n, Pointer<Uint32> states);
 typedef PFNGLCREATESTATESNVPROC =
-    Void Function(Uint32 n, Pointer<Uint32> states);
+    Void Function(Int32 n, Pointer<Uint32> states);
 
 // typedef void (APIENTRYP PFNGLDELETESTATESNVPROC) (GLsizei n, const GLuint *states)
 typedef PFNGLDELETESTATESNVPROCDart =
     void Function(int n, Pointer<Uint32> states);
 typedef PFNGLDELETESTATESNVPROC =
-    Void Function(Uint32 n, Pointer<Uint32> states);
+    Void Function(Int32 n, Pointer<Uint32> states);
 
 // typedef GLboolean (APIENTRYP PFNGLISSTATENVPROC) (GLuint state)
 typedef PFNGLISSTATENVPROCDart = int Function(int state);
-typedef PFNGLISSTATENVPROC = Int32 Function(Uint32 state);
+typedef PFNGLISSTATENVPROC = Uint8 Function(Uint32 state);
 
 // typedef void (APIENTRYP PFNGLSTATECAPTURENVPROC) (GLuint state, GLenum mode)
 typedef PFNGLSTATECAPTURENVPROCDart = void Function(int state, int mode);
@@ -21585,16 +21057,16 @@ typedef PFNGLDRAWCOMMANDSNVPROCDart =
     void Function(
       int primitiveMode,
       int buffer,
-      Pointer<Pointer<NativeType>> indirects,
-      Pointer<Uint32> sizes,
+      Pointer<IntPtr> indirects,
+      Pointer<Int32> sizes,
       int count,
     );
 typedef PFNGLDRAWCOMMANDSNVPROC =
     Void Function(
       Uint32 primitiveMode,
       Uint32 buffer,
-      Pointer<Pointer<NativeType>> indirects,
-      Pointer<Uint32> sizes,
+      Pointer<IntPtr> indirects,
+      Pointer<Int32> sizes,
       Uint32 count,
     );
 
@@ -21603,14 +21075,14 @@ typedef PFNGLDRAWCOMMANDSADDRESSNVPROCDart =
     void Function(
       int primitiveMode,
       Pointer<Uint64> indirects,
-      Pointer<Uint32> sizes,
+      Pointer<Int32> sizes,
       int count,
     );
 typedef PFNGLDRAWCOMMANDSADDRESSNVPROC =
     Void Function(
       Uint32 primitiveMode,
       Pointer<Uint64> indirects,
-      Pointer<Uint32> sizes,
+      Pointer<Int32> sizes,
       Uint32 count,
     );
 
@@ -21618,8 +21090,8 @@ typedef PFNGLDRAWCOMMANDSADDRESSNVPROC =
 typedef PFNGLDRAWCOMMANDSSTATESNVPROCDart =
     void Function(
       int buffer,
-      Pointer<Pointer<NativeType>> indirects,
-      Pointer<Uint32> sizes,
+      Pointer<IntPtr> indirects,
+      Pointer<Int32> sizes,
       Pointer<Uint32> states,
       Pointer<Uint32> fbos,
       int count,
@@ -21627,8 +21099,8 @@ typedef PFNGLDRAWCOMMANDSSTATESNVPROCDart =
 typedef PFNGLDRAWCOMMANDSSTATESNVPROC =
     Void Function(
       Uint32 buffer,
-      Pointer<Pointer<NativeType>> indirects,
-      Pointer<Uint32> sizes,
+      Pointer<IntPtr> indirects,
+      Pointer<Int32> sizes,
       Pointer<Uint32> states,
       Pointer<Uint32> fbos,
       Uint32 count,
@@ -21638,7 +21110,7 @@ typedef PFNGLDRAWCOMMANDSSTATESNVPROC =
 typedef PFNGLDRAWCOMMANDSSTATESADDRESSNVPROCDart =
     void Function(
       Pointer<Uint64> indirects,
-      Pointer<Uint32> sizes,
+      Pointer<Int32> sizes,
       Pointer<Uint32> states,
       Pointer<Uint32> fbos,
       int count,
@@ -21646,7 +21118,7 @@ typedef PFNGLDRAWCOMMANDSSTATESADDRESSNVPROCDart =
 typedef PFNGLDRAWCOMMANDSSTATESADDRESSNVPROC =
     Void Function(
       Pointer<Uint64> indirects,
-      Pointer<Uint32> sizes,
+      Pointer<Int32> sizes,
       Pointer<Uint32> states,
       Pointer<Uint32> fbos,
       Uint32 count,
@@ -21656,25 +21128,25 @@ typedef PFNGLDRAWCOMMANDSSTATESADDRESSNVPROC =
 typedef PFNGLCREATECOMMANDLISTSNVPROCDart =
     void Function(int n, Pointer<Uint32> lists);
 typedef PFNGLCREATECOMMANDLISTSNVPROC =
-    Void Function(Uint32 n, Pointer<Uint32> lists);
+    Void Function(Int32 n, Pointer<Uint32> lists);
 
 // typedef void (APIENTRYP PFNGLDELETECOMMANDLISTSNVPROC) (GLsizei n, const GLuint *lists)
 typedef PFNGLDELETECOMMANDLISTSNVPROCDart =
     void Function(int n, Pointer<Uint32> lists);
 typedef PFNGLDELETECOMMANDLISTSNVPROC =
-    Void Function(Uint32 n, Pointer<Uint32> lists);
+    Void Function(Int32 n, Pointer<Uint32> lists);
 
 // typedef GLboolean (APIENTRYP PFNGLISCOMMANDLISTNVPROC) (GLuint list)
 typedef PFNGLISCOMMANDLISTNVPROCDart = int Function(int list);
-typedef PFNGLISCOMMANDLISTNVPROC = Int32 Function(Uint32 list);
+typedef PFNGLISCOMMANDLISTNVPROC = Uint8 Function(Uint32 list);
 
 // typedef void (APIENTRYP PFNGLLISTDRAWCOMMANDSSTATESCLIENTNVPROC) (GLuint list, GLuint segment, const void **indirects, const GLsizei *sizes, const GLuint *states, const GLuint *fbos, GLuint count)
 typedef PFNGLLISTDRAWCOMMANDSSTATESCLIENTNVPROCDart =
     void Function(
       int list,
       int segment,
-      Pointer<Pointer<NativeType>> indirects,
-      Pointer<Uint32> sizes,
+      Pointer<Pointer<Void>> indirects,
+      Pointer<Int32> sizes,
       Pointer<Uint32> states,
       Pointer<Uint32> fbos,
       int count,
@@ -21683,8 +21155,8 @@ typedef PFNGLLISTDRAWCOMMANDSSTATESCLIENTNVPROC =
     Void Function(
       Uint32 list,
       Uint32 segment,
-      Pointer<Pointer<NativeType>> indirects,
-      Pointer<Uint32> sizes,
+      Pointer<Pointer<Void>> indirects,
+      Pointer<Int32> sizes,
       Pointer<Uint32> states,
       Pointer<Uint32> fbos,
       Uint32 count,
@@ -21764,9 +21236,9 @@ typedef PFNGLCOPYIMAGESUBDATANVPROC =
       Int32 dstX,
       Int32 dstY,
       Int32 dstZ,
-      Uint32 width,
-      Uint32 height,
-      Uint32 depth,
+      Int32 width,
+      Int32 height,
+      Int32 depth,
     );
 
 // typedef void (APIENTRYP PFNGLDEPTHRANGEDNVPROC) (GLdouble zNear, GLdouble zFar)
@@ -21874,19 +21346,19 @@ typedef PFNGLMAPCONTROLPOINTSNVPROCDart =
       int uorder,
       int vorder,
       int packed,
-      Pointer<NativeType> points,
+      Pointer<Void> points,
     );
 typedef PFNGLMAPCONTROLPOINTSNVPROC =
     Void Function(
       Uint32 target,
       Uint32 index,
       Uint32 type,
-      Uint32 ustride,
-      Uint32 vstride,
+      Int32 ustride,
+      Int32 vstride,
       Int32 uorder,
       Int32 vorder,
-      Int32 packed,
-      Pointer<NativeType> points,
+      Uint8 packed,
+      Pointer<Void> points,
     );
 
 // typedef void (APIENTRYP PFNGLMAPPARAMETERIVNVPROC) (GLenum target, GLenum pname, const GLint *params)
@@ -21910,17 +21382,17 @@ typedef PFNGLGETMAPCONTROLPOINTSNVPROCDart =
       int ustride,
       int vstride,
       int packed,
-      Pointer<NativeType> points,
+      Pointer<Void> points,
     );
 typedef PFNGLGETMAPCONTROLPOINTSNVPROC =
     Void Function(
       Uint32 target,
       Uint32 index,
       Uint32 type,
-      Uint32 ustride,
-      Uint32 vstride,
-      Int32 packed,
-      Pointer<NativeType> points,
+      Int32 ustride,
+      Int32 vstride,
+      Uint8 packed,
+      Pointer<Void> points,
     );
 
 // typedef void (APIENTRYP PFNGLGETMAPPARAMETERIVNVPROC) (GLenum target, GLenum pname, GLint *params)
@@ -21981,19 +21453,19 @@ typedef PFNGLTEXRENDERBUFFERNVPROC =
 typedef PFNGLDELETEFENCESNVPROCDart =
     void Function(int n, Pointer<Uint32> fences);
 typedef PFNGLDELETEFENCESNVPROC =
-    Void Function(Uint32 n, Pointer<Uint32> fences);
+    Void Function(Int32 n, Pointer<Uint32> fences);
 
 // typedef void (APIENTRYP PFNGLGENFENCESNVPROC) (GLsizei n, GLuint *fences)
 typedef PFNGLGENFENCESNVPROCDart = void Function(int n, Pointer<Uint32> fences);
-typedef PFNGLGENFENCESNVPROC = Void Function(Uint32 n, Pointer<Uint32> fences);
+typedef PFNGLGENFENCESNVPROC = Void Function(Int32 n, Pointer<Uint32> fences);
 
 // typedef GLboolean (APIENTRYP PFNGLISFENCENVPROC) (GLuint fence)
 typedef PFNGLISFENCENVPROCDart = int Function(int fence);
-typedef PFNGLISFENCENVPROC = Int32 Function(Uint32 fence);
+typedef PFNGLISFENCENVPROC = Uint8 Function(Uint32 fence);
 
 // typedef GLboolean (APIENTRYP PFNGLTESTFENCENVPROC) (GLuint fence)
 typedef PFNGLTESTFENCENVPROCDart = int Function(int fence);
-typedef PFNGLTESTFENCENVPROC = Int32 Function(Uint32 fence);
+typedef PFNGLTESTFENCENVPROC = Uint8 Function(Uint32 fence);
 
 // typedef void (APIENTRYP PFNGLGETFENCEIVNVPROC) (GLuint fence, GLenum pname, GLint *params)
 typedef PFNGLGETFENCEIVNVPROCDart =
@@ -22027,7 +21499,7 @@ typedef PFNGLPROGRAMNAMEDPARAMETER4FNVPROCDart =
 typedef PFNGLPROGRAMNAMEDPARAMETER4FNVPROC =
     Void Function(
       Uint32 id,
-      Uint32 len,
+      Int32 len,
       Pointer<Uint8> name,
       Float x,
       Float y,
@@ -22039,7 +21511,7 @@ typedef PFNGLPROGRAMNAMEDPARAMETER4FNVPROC =
 typedef PFNGLPROGRAMNAMEDPARAMETER4FVNVPROCDart =
     void Function(int id, int len, Pointer<Uint8> name, Pointer<Float> v);
 typedef PFNGLPROGRAMNAMEDPARAMETER4FVNVPROC =
-    Void Function(Uint32 id, Uint32 len, Pointer<Uint8> name, Pointer<Float> v);
+    Void Function(Uint32 id, Int32 len, Pointer<Uint8> name, Pointer<Float> v);
 
 // typedef void (APIENTRYP PFNGLPROGRAMNAMEDPARAMETER4DNVPROC) (GLuint id, GLsizei len, const GLubyte *name, GLdouble x, GLdouble y, GLdouble z, GLdouble w)
 typedef PFNGLPROGRAMNAMEDPARAMETER4DNVPROCDart =
@@ -22055,7 +21527,7 @@ typedef PFNGLPROGRAMNAMEDPARAMETER4DNVPROCDart =
 typedef PFNGLPROGRAMNAMEDPARAMETER4DNVPROC =
     Void Function(
       Uint32 id,
-      Uint32 len,
+      Int32 len,
       Pointer<Uint8> name,
       Double x,
       Double y,
@@ -22067,12 +21539,7 @@ typedef PFNGLPROGRAMNAMEDPARAMETER4DNVPROC =
 typedef PFNGLPROGRAMNAMEDPARAMETER4DVNVPROCDart =
     void Function(int id, int len, Pointer<Uint8> name, Pointer<Double> v);
 typedef PFNGLPROGRAMNAMEDPARAMETER4DVNVPROC =
-    Void Function(
-      Uint32 id,
-      Uint32 len,
-      Pointer<Uint8> name,
-      Pointer<Double> v,
-    );
+    Void Function(Uint32 id, Int32 len, Pointer<Uint8> name, Pointer<Double> v);
 
 // typedef void (APIENTRYP PFNGLGETPROGRAMNAMEDPARAMETERFVNVPROC) (GLuint id, GLsizei len, const GLubyte *name, GLfloat *params)
 typedef PFNGLGETPROGRAMNAMEDPARAMETERFVNVPROCDart =
@@ -22080,7 +21547,7 @@ typedef PFNGLGETPROGRAMNAMEDPARAMETERFVNVPROCDart =
 typedef PFNGLGETPROGRAMNAMEDPARAMETERFVNVPROC =
     Void Function(
       Uint32 id,
-      Uint32 len,
+      Int32 len,
       Pointer<Uint8> name,
       Pointer<Float> params,
     );
@@ -22091,7 +21558,7 @@ typedef PFNGLGETPROGRAMNAMEDPARAMETERDVNVPROCDart =
 typedef PFNGLGETPROGRAMNAMEDPARAMETERDVNVPROC =
     Void Function(
       Uint32 id,
-      Uint32 len,
+      Int32 len,
       Pointer<Uint8> name,
       Pointer<Double> params,
     );
@@ -22100,13 +21567,13 @@ typedef PFNGLGETPROGRAMNAMEDPARAMETERDVNVPROC =
 typedef PFNGLCOVERAGEMODULATIONTABLENVPROCDart =
     void Function(int n, Pointer<Float> v);
 typedef PFNGLCOVERAGEMODULATIONTABLENVPROC =
-    Void Function(Uint32 n, Pointer<Float> v);
+    Void Function(Int32 n, Pointer<Float> v);
 
 // typedef void (APIENTRYP PFNGLGETCOVERAGEMODULATIONTABLENVPROC) (GLsizei bufSize, GLfloat *v)
 typedef PFNGLGETCOVERAGEMODULATIONTABLENVPROCDart =
     void Function(int bufSize, Pointer<Float> v);
 typedef PFNGLGETCOVERAGEMODULATIONTABLENVPROC =
-    Void Function(Uint32 bufSize, Pointer<Float> v);
+    Void Function(Int32 bufSize, Pointer<Float> v);
 
 // typedef void (APIENTRYP PFNGLCOVERAGEMODULATIONNVPROC) (GLenum components)
 typedef PFNGLCOVERAGEMODULATIONNVPROCDart = void Function(int components);
@@ -22125,11 +21592,11 @@ typedef PFNGLRENDERBUFFERSTORAGEMULTISAMPLECOVERAGENVPROCDart =
 typedef PFNGLRENDERBUFFERSTORAGEMULTISAMPLECOVERAGENVPROC =
     Void Function(
       Uint32 target,
-      Uint32 coverageSamples,
-      Uint32 colorSamples,
+      Int32 coverageSamples,
+      Int32 colorSamples,
       Uint32 internalformat,
-      Uint32 width,
-      Uint32 height,
+      Int32 width,
+      Int32 height,
     );
 
 // typedef void (APIENTRYP PFNGLPROGRAMVERTEXLIMITNVPROC) (GLenum target, GLint limit)
@@ -22170,17 +21637,17 @@ typedef PFNGLMULTICASTBUFFERSUBDATANVPROCDart =
     void Function(
       int gpuMask,
       int buffer,
-      Pointer<NativeType> offset,
-      Pointer<Uint32> size,
-      Pointer<NativeType> data,
+      int offset,
+      int size,
+      Pointer<Void> data,
     );
 typedef PFNGLMULTICASTBUFFERSUBDATANVPROC =
     Void Function(
       Uint32 gpuMask,
       Uint32 buffer,
-      Pointer<NativeType> offset,
-      Pointer<Uint32> size,
-      Pointer<NativeType> data,
+      IntPtr offset,
+      IntPtr size,
+      Pointer<Void> data,
     );
 
 // typedef void (APIENTRYP PFNGLMULTICASTCOPYBUFFERSUBDATANVPROC) (GLuint readGpu, GLbitfield writeGpuMask, GLuint readBuffer, GLuint writeBuffer, GLintptr readOffset, GLintptr writeOffset, GLsizeiptr size)
@@ -22190,9 +21657,9 @@ typedef PFNGLMULTICASTCOPYBUFFERSUBDATANVPROCDart =
       int writeGpuMask,
       int readBuffer,
       int writeBuffer,
-      Pointer<NativeType> readOffset,
-      Pointer<NativeType> writeOffset,
-      Pointer<Uint32> size,
+      int readOffset,
+      int writeOffset,
+      int size,
     );
 typedef PFNGLMULTICASTCOPYBUFFERSUBDATANVPROC =
     Void Function(
@@ -22200,9 +21667,9 @@ typedef PFNGLMULTICASTCOPYBUFFERSUBDATANVPROC =
       Uint32 writeGpuMask,
       Uint32 readBuffer,
       Uint32 writeBuffer,
-      Pointer<NativeType> readOffset,
-      Pointer<NativeType> writeOffset,
-      Pointer<Uint32> size,
+      IntPtr readOffset,
+      IntPtr writeOffset,
+      IntPtr size,
     );
 
 // typedef void (APIENTRYP PFNGLMULTICASTCOPYIMAGESUBDATANVPROC) (GLuint srcGpu, GLbitfield dstGpuMask, GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srcY, GLint srcZ, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei srcWidth, GLsizei srcHeight, GLsizei srcDepth)
@@ -22242,9 +21709,9 @@ typedef PFNGLMULTICASTCOPYIMAGESUBDATANVPROC =
       Int32 dstX,
       Int32 dstY,
       Int32 dstZ,
-      Uint32 srcWidth,
-      Uint32 srcHeight,
-      Uint32 srcDepth,
+      Int32 srcWidth,
+      Int32 srcHeight,
+      Int32 srcDepth,
     );
 
 // typedef void (APIENTRYP PFNGLMULTICASTBLITFRAMEBUFFERNVPROC) (GLuint srcGpu, GLuint dstGpu, GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter)
@@ -22293,7 +21760,7 @@ typedef PFNGLMULTICASTFRAMEBUFFERSAMPLELOCATIONSFVNVPROC =
       Uint32 gpu,
       Uint32 framebuffer,
       Uint32 start,
-      Uint32 count,
+      Int32 count,
       Pointer<Float> v,
     );
 
@@ -22357,7 +21824,7 @@ typedef PFNGLPROGRAMLOCALPARAMETERSI4IVNVPROC =
     Void Function(
       Uint32 target,
       Uint32 index,
-      Uint32 count,
+      Int32 count,
       Pointer<Int32> params,
     );
 
@@ -22387,7 +21854,7 @@ typedef PFNGLPROGRAMLOCALPARAMETERSI4UIVNVPROC =
     Void Function(
       Uint32 target,
       Uint32 index,
-      Uint32 count,
+      Int32 count,
       Pointer<Uint32> params,
     );
 
@@ -22417,7 +21884,7 @@ typedef PFNGLPROGRAMENVPARAMETERSI4IVNVPROC =
     Void Function(
       Uint32 target,
       Uint32 index,
-      Uint32 count,
+      Int32 count,
       Pointer<Int32> params,
     );
 
@@ -22447,7 +21914,7 @@ typedef PFNGLPROGRAMENVPARAMETERSI4UIVNVPROC =
     Void Function(
       Uint32 target,
       Uint32 index,
-      Uint32 count,
+      Int32 count,
       Pointer<Uint32> params,
     );
 
@@ -22479,7 +21946,7 @@ typedef PFNGLGETPROGRAMENVPARAMETERIUIVNVPROC =
 typedef PFNGLPROGRAMSUBROUTINEPARAMETERSUIVNVPROCDart =
     void Function(int target, int count, Pointer<Uint32> params);
 typedef PFNGLPROGRAMSUBROUTINEPARAMETERSUIVNVPROC =
-    Void Function(Uint32 target, Uint32 count, Pointer<Uint32> params);
+    Void Function(Uint32 target, Int32 count, Pointer<Uint32> params);
 
 // typedef void (APIENTRYP PFNGLGETPROGRAMSUBROUTINEPARAMETERUIVNVPROC) (GLenum target, GLuint index, GLuint *param)
 typedef PFNGLGETPROGRAMSUBROUTINEPARAMETERUIVNVPROCDart =
@@ -22489,229 +21956,274 @@ typedef PFNGLGETPROGRAMSUBROUTINEPARAMETERUIVNVPROC =
 
 // typedef void (APIENTRYP PFNGLVERTEX2HNVPROC) (GLhalfNV x, GLhalfNV y)
 typedef PFNGLVERTEX2HNVPROCDart = void Function(int x, int y);
-typedef PFNGLVERTEX2HNVPROC = Void Function(Uint16 x, Uint16 y);
+typedef PFNGLVERTEX2HNVPROC = Void Function(UnsignedShort x, UnsignedShort y);
 
 // typedef void (APIENTRYP PFNGLVERTEX2HVNVPROC) (const GLhalfNV *v)
-typedef PFNGLVERTEX2HVNVPROCDart = void Function(Pointer<Uint16> v);
-typedef PFNGLVERTEX2HVNVPROC = Void Function(Pointer<Uint16> v);
+typedef PFNGLVERTEX2HVNVPROCDart = void Function(Pointer<UnsignedShort> v);
+typedef PFNGLVERTEX2HVNVPROC = Void Function(Pointer<UnsignedShort> v);
 
 // typedef void (APIENTRYP PFNGLVERTEX3HNVPROC) (GLhalfNV x, GLhalfNV y, GLhalfNV z)
 typedef PFNGLVERTEX3HNVPROCDart = void Function(int x, int y, int z);
-typedef PFNGLVERTEX3HNVPROC = Void Function(Uint16 x, Uint16 y, Uint16 z);
+typedef PFNGLVERTEX3HNVPROC =
+    Void Function(UnsignedShort x, UnsignedShort y, UnsignedShort z);
 
 // typedef void (APIENTRYP PFNGLVERTEX3HVNVPROC) (const GLhalfNV *v)
-typedef PFNGLVERTEX3HVNVPROCDart = void Function(Pointer<Uint16> v);
-typedef PFNGLVERTEX3HVNVPROC = Void Function(Pointer<Uint16> v);
+typedef PFNGLVERTEX3HVNVPROCDart = void Function(Pointer<UnsignedShort> v);
+typedef PFNGLVERTEX3HVNVPROC = Void Function(Pointer<UnsignedShort> v);
 
 // typedef void (APIENTRYP PFNGLVERTEX4HNVPROC) (GLhalfNV x, GLhalfNV y, GLhalfNV z, GLhalfNV w)
 typedef PFNGLVERTEX4HNVPROCDart = void Function(int x, int y, int z, int w);
 typedef PFNGLVERTEX4HNVPROC =
-    Void Function(Uint16 x, Uint16 y, Uint16 z, Uint16 w);
+    Void Function(
+      UnsignedShort x,
+      UnsignedShort y,
+      UnsignedShort z,
+      UnsignedShort w,
+    );
 
 // typedef void (APIENTRYP PFNGLVERTEX4HVNVPROC) (const GLhalfNV *v)
-typedef PFNGLVERTEX4HVNVPROCDart = void Function(Pointer<Uint16> v);
-typedef PFNGLVERTEX4HVNVPROC = Void Function(Pointer<Uint16> v);
+typedef PFNGLVERTEX4HVNVPROCDart = void Function(Pointer<UnsignedShort> v);
+typedef PFNGLVERTEX4HVNVPROC = Void Function(Pointer<UnsignedShort> v);
 
 // typedef void (APIENTRYP PFNGLNORMAL3HNVPROC) (GLhalfNV nx, GLhalfNV ny, GLhalfNV nz)
 typedef PFNGLNORMAL3HNVPROCDart = void Function(int nx, int ny, int nz);
-typedef PFNGLNORMAL3HNVPROC = Void Function(Uint16 nx, Uint16 ny, Uint16 nz);
+typedef PFNGLNORMAL3HNVPROC =
+    Void Function(UnsignedShort nx, UnsignedShort ny, UnsignedShort nz);
 
 // typedef void (APIENTRYP PFNGLNORMAL3HVNVPROC) (const GLhalfNV *v)
-typedef PFNGLNORMAL3HVNVPROCDart = void Function(Pointer<Uint16> v);
-typedef PFNGLNORMAL3HVNVPROC = Void Function(Pointer<Uint16> v);
+typedef PFNGLNORMAL3HVNVPROCDart = void Function(Pointer<UnsignedShort> v);
+typedef PFNGLNORMAL3HVNVPROC = Void Function(Pointer<UnsignedShort> v);
 
 // typedef void (APIENTRYP PFNGLCOLOR3HNVPROC) (GLhalfNV red, GLhalfNV green, GLhalfNV blue)
 typedef PFNGLCOLOR3HNVPROCDart = void Function(int red, int green, int blue);
 typedef PFNGLCOLOR3HNVPROC =
-    Void Function(Uint16 red, Uint16 green, Uint16 blue);
+    Void Function(UnsignedShort red, UnsignedShort green, UnsignedShort blue);
 
 // typedef void (APIENTRYP PFNGLCOLOR3HVNVPROC) (const GLhalfNV *v)
-typedef PFNGLCOLOR3HVNVPROCDart = void Function(Pointer<Uint16> v);
-typedef PFNGLCOLOR3HVNVPROC = Void Function(Pointer<Uint16> v);
+typedef PFNGLCOLOR3HVNVPROCDart = void Function(Pointer<UnsignedShort> v);
+typedef PFNGLCOLOR3HVNVPROC = Void Function(Pointer<UnsignedShort> v);
 
 // typedef void (APIENTRYP PFNGLCOLOR4HNVPROC) (GLhalfNV red, GLhalfNV green, GLhalfNV blue, GLhalfNV alpha)
 typedef PFNGLCOLOR4HNVPROCDart =
     void Function(int red, int green, int blue, int alpha);
 typedef PFNGLCOLOR4HNVPROC =
-    Void Function(Uint16 red, Uint16 green, Uint16 blue, Uint16 alpha);
+    Void Function(
+      UnsignedShort red,
+      UnsignedShort green,
+      UnsignedShort blue,
+      UnsignedShort alpha,
+    );
 
 // typedef void (APIENTRYP PFNGLCOLOR4HVNVPROC) (const GLhalfNV *v)
-typedef PFNGLCOLOR4HVNVPROCDart = void Function(Pointer<Uint16> v);
-typedef PFNGLCOLOR4HVNVPROC = Void Function(Pointer<Uint16> v);
+typedef PFNGLCOLOR4HVNVPROCDart = void Function(Pointer<UnsignedShort> v);
+typedef PFNGLCOLOR4HVNVPROC = Void Function(Pointer<UnsignedShort> v);
 
 // typedef void (APIENTRYP PFNGLTEXCOORD1HNVPROC) (GLhalfNV s)
 typedef PFNGLTEXCOORD1HNVPROCDart = void Function(int s);
-typedef PFNGLTEXCOORD1HNVPROC = Void Function(Uint16 s);
+typedef PFNGLTEXCOORD1HNVPROC = Void Function(UnsignedShort s);
 
 // typedef void (APIENTRYP PFNGLTEXCOORD1HVNVPROC) (const GLhalfNV *v)
-typedef PFNGLTEXCOORD1HVNVPROCDart = void Function(Pointer<Uint16> v);
-typedef PFNGLTEXCOORD1HVNVPROC = Void Function(Pointer<Uint16> v);
+typedef PFNGLTEXCOORD1HVNVPROCDart = void Function(Pointer<UnsignedShort> v);
+typedef PFNGLTEXCOORD1HVNVPROC = Void Function(Pointer<UnsignedShort> v);
 
 // typedef void (APIENTRYP PFNGLTEXCOORD2HNVPROC) (GLhalfNV s, GLhalfNV t)
 typedef PFNGLTEXCOORD2HNVPROCDart = void Function(int s, int t);
-typedef PFNGLTEXCOORD2HNVPROC = Void Function(Uint16 s, Uint16 t);
+typedef PFNGLTEXCOORD2HNVPROC = Void Function(UnsignedShort s, UnsignedShort t);
 
 // typedef void (APIENTRYP PFNGLTEXCOORD2HVNVPROC) (const GLhalfNV *v)
-typedef PFNGLTEXCOORD2HVNVPROCDart = void Function(Pointer<Uint16> v);
-typedef PFNGLTEXCOORD2HVNVPROC = Void Function(Pointer<Uint16> v);
+typedef PFNGLTEXCOORD2HVNVPROCDart = void Function(Pointer<UnsignedShort> v);
+typedef PFNGLTEXCOORD2HVNVPROC = Void Function(Pointer<UnsignedShort> v);
 
 // typedef void (APIENTRYP PFNGLTEXCOORD3HNVPROC) (GLhalfNV s, GLhalfNV t, GLhalfNV r)
 typedef PFNGLTEXCOORD3HNVPROCDart = void Function(int s, int t, int r);
-typedef PFNGLTEXCOORD3HNVPROC = Void Function(Uint16 s, Uint16 t, Uint16 r);
+typedef PFNGLTEXCOORD3HNVPROC =
+    Void Function(UnsignedShort s, UnsignedShort t, UnsignedShort r);
 
 // typedef void (APIENTRYP PFNGLTEXCOORD3HVNVPROC) (const GLhalfNV *v)
-typedef PFNGLTEXCOORD3HVNVPROCDart = void Function(Pointer<Uint16> v);
-typedef PFNGLTEXCOORD3HVNVPROC = Void Function(Pointer<Uint16> v);
+typedef PFNGLTEXCOORD3HVNVPROCDart = void Function(Pointer<UnsignedShort> v);
+typedef PFNGLTEXCOORD3HVNVPROC = Void Function(Pointer<UnsignedShort> v);
 
 // typedef void (APIENTRYP PFNGLTEXCOORD4HNVPROC) (GLhalfNV s, GLhalfNV t, GLhalfNV r, GLhalfNV q)
 typedef PFNGLTEXCOORD4HNVPROCDart = void Function(int s, int t, int r, int q);
 typedef PFNGLTEXCOORD4HNVPROC =
-    Void Function(Uint16 s, Uint16 t, Uint16 r, Uint16 q);
+    Void Function(
+      UnsignedShort s,
+      UnsignedShort t,
+      UnsignedShort r,
+      UnsignedShort q,
+    );
 
 // typedef void (APIENTRYP PFNGLTEXCOORD4HVNVPROC) (const GLhalfNV *v)
-typedef PFNGLTEXCOORD4HVNVPROCDart = void Function(Pointer<Uint16> v);
-typedef PFNGLTEXCOORD4HVNVPROC = Void Function(Pointer<Uint16> v);
+typedef PFNGLTEXCOORD4HVNVPROCDart = void Function(Pointer<UnsignedShort> v);
+typedef PFNGLTEXCOORD4HVNVPROC = Void Function(Pointer<UnsignedShort> v);
 
 // typedef void (APIENTRYP PFNGLMULTITEXCOORD1HNVPROC) (GLenum target, GLhalfNV s)
 typedef PFNGLMULTITEXCOORD1HNVPROCDart = void Function(int target, int s);
-typedef PFNGLMULTITEXCOORD1HNVPROC = Void Function(Uint32 target, Uint16 s);
+typedef PFNGLMULTITEXCOORD1HNVPROC =
+    Void Function(Uint32 target, UnsignedShort s);
 
 // typedef void (APIENTRYP PFNGLMULTITEXCOORD1HVNVPROC) (GLenum target, const GLhalfNV *v)
 typedef PFNGLMULTITEXCOORD1HVNVPROCDart =
-    void Function(int target, Pointer<Uint16> v);
+    void Function(int target, Pointer<UnsignedShort> v);
 typedef PFNGLMULTITEXCOORD1HVNVPROC =
-    Void Function(Uint32 target, Pointer<Uint16> v);
+    Void Function(Uint32 target, Pointer<UnsignedShort> v);
 
 // typedef void (APIENTRYP PFNGLMULTITEXCOORD2HNVPROC) (GLenum target, GLhalfNV s, GLhalfNV t)
 typedef PFNGLMULTITEXCOORD2HNVPROCDart =
     void Function(int target, int s, int t);
 typedef PFNGLMULTITEXCOORD2HNVPROC =
-    Void Function(Uint32 target, Uint16 s, Uint16 t);
+    Void Function(Uint32 target, UnsignedShort s, UnsignedShort t);
 
 // typedef void (APIENTRYP PFNGLMULTITEXCOORD2HVNVPROC) (GLenum target, const GLhalfNV *v)
 typedef PFNGLMULTITEXCOORD2HVNVPROCDart =
-    void Function(int target, Pointer<Uint16> v);
+    void Function(int target, Pointer<UnsignedShort> v);
 typedef PFNGLMULTITEXCOORD2HVNVPROC =
-    Void Function(Uint32 target, Pointer<Uint16> v);
+    Void Function(Uint32 target, Pointer<UnsignedShort> v);
 
 // typedef void (APIENTRYP PFNGLMULTITEXCOORD3HNVPROC) (GLenum target, GLhalfNV s, GLhalfNV t, GLhalfNV r)
 typedef PFNGLMULTITEXCOORD3HNVPROCDart =
     void Function(int target, int s, int t, int r);
 typedef PFNGLMULTITEXCOORD3HNVPROC =
-    Void Function(Uint32 target, Uint16 s, Uint16 t, Uint16 r);
+    Void Function(
+      Uint32 target,
+      UnsignedShort s,
+      UnsignedShort t,
+      UnsignedShort r,
+    );
 
 // typedef void (APIENTRYP PFNGLMULTITEXCOORD3HVNVPROC) (GLenum target, const GLhalfNV *v)
 typedef PFNGLMULTITEXCOORD3HVNVPROCDart =
-    void Function(int target, Pointer<Uint16> v);
+    void Function(int target, Pointer<UnsignedShort> v);
 typedef PFNGLMULTITEXCOORD3HVNVPROC =
-    Void Function(Uint32 target, Pointer<Uint16> v);
+    Void Function(Uint32 target, Pointer<UnsignedShort> v);
 
 // typedef void (APIENTRYP PFNGLMULTITEXCOORD4HNVPROC) (GLenum target, GLhalfNV s, GLhalfNV t, GLhalfNV r, GLhalfNV q)
 typedef PFNGLMULTITEXCOORD4HNVPROCDart =
     void Function(int target, int s, int t, int r, int q);
 typedef PFNGLMULTITEXCOORD4HNVPROC =
-    Void Function(Uint32 target, Uint16 s, Uint16 t, Uint16 r, Uint16 q);
+    Void Function(
+      Uint32 target,
+      UnsignedShort s,
+      UnsignedShort t,
+      UnsignedShort r,
+      UnsignedShort q,
+    );
 
 // typedef void (APIENTRYP PFNGLMULTITEXCOORD4HVNVPROC) (GLenum target, const GLhalfNV *v)
 typedef PFNGLMULTITEXCOORD4HVNVPROCDart =
-    void Function(int target, Pointer<Uint16> v);
+    void Function(int target, Pointer<UnsignedShort> v);
 typedef PFNGLMULTITEXCOORD4HVNVPROC =
-    Void Function(Uint32 target, Pointer<Uint16> v);
+    Void Function(Uint32 target, Pointer<UnsignedShort> v);
 
 // typedef void (APIENTRYP PFNGLVERTEXATTRIB1HNVPROC) (GLuint index, GLhalfNV x)
 typedef PFNGLVERTEXATTRIB1HNVPROCDart = void Function(int index, int x);
-typedef PFNGLVERTEXATTRIB1HNVPROC = Void Function(Uint32 index, Uint16 x);
+typedef PFNGLVERTEXATTRIB1HNVPROC =
+    Void Function(Uint32 index, UnsignedShort x);
 
 // typedef void (APIENTRYP PFNGLVERTEXATTRIB1HVNVPROC) (GLuint index, const GLhalfNV *v)
 typedef PFNGLVERTEXATTRIB1HVNVPROCDart =
-    void Function(int index, Pointer<Uint16> v);
+    void Function(int index, Pointer<UnsignedShort> v);
 typedef PFNGLVERTEXATTRIB1HVNVPROC =
-    Void Function(Uint32 index, Pointer<Uint16> v);
+    Void Function(Uint32 index, Pointer<UnsignedShort> v);
 
 // typedef void (APIENTRYP PFNGLVERTEXATTRIB2HNVPROC) (GLuint index, GLhalfNV x, GLhalfNV y)
 typedef PFNGLVERTEXATTRIB2HNVPROCDart = void Function(int index, int x, int y);
 typedef PFNGLVERTEXATTRIB2HNVPROC =
-    Void Function(Uint32 index, Uint16 x, Uint16 y);
+    Void Function(Uint32 index, UnsignedShort x, UnsignedShort y);
 
 // typedef void (APIENTRYP PFNGLVERTEXATTRIB2HVNVPROC) (GLuint index, const GLhalfNV *v)
 typedef PFNGLVERTEXATTRIB2HVNVPROCDart =
-    void Function(int index, Pointer<Uint16> v);
+    void Function(int index, Pointer<UnsignedShort> v);
 typedef PFNGLVERTEXATTRIB2HVNVPROC =
-    Void Function(Uint32 index, Pointer<Uint16> v);
+    Void Function(Uint32 index, Pointer<UnsignedShort> v);
 
 // typedef void (APIENTRYP PFNGLVERTEXATTRIB3HNVPROC) (GLuint index, GLhalfNV x, GLhalfNV y, GLhalfNV z)
 typedef PFNGLVERTEXATTRIB3HNVPROCDart =
     void Function(int index, int x, int y, int z);
 typedef PFNGLVERTEXATTRIB3HNVPROC =
-    Void Function(Uint32 index, Uint16 x, Uint16 y, Uint16 z);
+    Void Function(
+      Uint32 index,
+      UnsignedShort x,
+      UnsignedShort y,
+      UnsignedShort z,
+    );
 
 // typedef void (APIENTRYP PFNGLVERTEXATTRIB3HVNVPROC) (GLuint index, const GLhalfNV *v)
 typedef PFNGLVERTEXATTRIB3HVNVPROCDart =
-    void Function(int index, Pointer<Uint16> v);
+    void Function(int index, Pointer<UnsignedShort> v);
 typedef PFNGLVERTEXATTRIB3HVNVPROC =
-    Void Function(Uint32 index, Pointer<Uint16> v);
+    Void Function(Uint32 index, Pointer<UnsignedShort> v);
 
 // typedef void (APIENTRYP PFNGLVERTEXATTRIB4HNVPROC) (GLuint index, GLhalfNV x, GLhalfNV y, GLhalfNV z, GLhalfNV w)
 typedef PFNGLVERTEXATTRIB4HNVPROCDart =
     void Function(int index, int x, int y, int z, int w);
 typedef PFNGLVERTEXATTRIB4HNVPROC =
-    Void Function(Uint32 index, Uint16 x, Uint16 y, Uint16 z, Uint16 w);
+    Void Function(
+      Uint32 index,
+      UnsignedShort x,
+      UnsignedShort y,
+      UnsignedShort z,
+      UnsignedShort w,
+    );
 
 // typedef void (APIENTRYP PFNGLVERTEXATTRIB4HVNVPROC) (GLuint index, const GLhalfNV *v)
 typedef PFNGLVERTEXATTRIB4HVNVPROCDart =
-    void Function(int index, Pointer<Uint16> v);
+    void Function(int index, Pointer<UnsignedShort> v);
 typedef PFNGLVERTEXATTRIB4HVNVPROC =
-    Void Function(Uint32 index, Pointer<Uint16> v);
+    Void Function(Uint32 index, Pointer<UnsignedShort> v);
 
 // typedef void (APIENTRYP PFNGLVERTEXATTRIBS1HVNVPROC) (GLuint index, GLsizei n, const GLhalfNV *v)
 typedef PFNGLVERTEXATTRIBS1HVNVPROCDart =
-    void Function(int index, int n, Pointer<Uint16> v);
+    void Function(int index, int n, Pointer<UnsignedShort> v);
 typedef PFNGLVERTEXATTRIBS1HVNVPROC =
-    Void Function(Uint32 index, Uint32 n, Pointer<Uint16> v);
+    Void Function(Uint32 index, Int32 n, Pointer<UnsignedShort> v);
 
 // typedef void (APIENTRYP PFNGLVERTEXATTRIBS2HVNVPROC) (GLuint index, GLsizei n, const GLhalfNV *v)
 typedef PFNGLVERTEXATTRIBS2HVNVPROCDart =
-    void Function(int index, int n, Pointer<Uint16> v);
+    void Function(int index, int n, Pointer<UnsignedShort> v);
 typedef PFNGLVERTEXATTRIBS2HVNVPROC =
-    Void Function(Uint32 index, Uint32 n, Pointer<Uint16> v);
+    Void Function(Uint32 index, Int32 n, Pointer<UnsignedShort> v);
 
 // typedef void (APIENTRYP PFNGLVERTEXATTRIBS3HVNVPROC) (GLuint index, GLsizei n, const GLhalfNV *v)
 typedef PFNGLVERTEXATTRIBS3HVNVPROCDart =
-    void Function(int index, int n, Pointer<Uint16> v);
+    void Function(int index, int n, Pointer<UnsignedShort> v);
 typedef PFNGLVERTEXATTRIBS3HVNVPROC =
-    Void Function(Uint32 index, Uint32 n, Pointer<Uint16> v);
+    Void Function(Uint32 index, Int32 n, Pointer<UnsignedShort> v);
 
 // typedef void (APIENTRYP PFNGLVERTEXATTRIBS4HVNVPROC) (GLuint index, GLsizei n, const GLhalfNV *v)
 typedef PFNGLVERTEXATTRIBS4HVNVPROCDart =
-    void Function(int index, int n, Pointer<Uint16> v);
+    void Function(int index, int n, Pointer<UnsignedShort> v);
 typedef PFNGLVERTEXATTRIBS4HVNVPROC =
-    Void Function(Uint32 index, Uint32 n, Pointer<Uint16> v);
+    Void Function(Uint32 index, Int32 n, Pointer<UnsignedShort> v);
 
 // typedef void (APIENTRYP PFNGLFOGCOORDHNVPROC) (GLhalfNV fog)
 typedef PFNGLFOGCOORDHNVPROCDart = void Function(int fog);
-typedef PFNGLFOGCOORDHNVPROC = Void Function(Uint16 fog);
+typedef PFNGLFOGCOORDHNVPROC = Void Function(UnsignedShort fog);
 
 // typedef void (APIENTRYP PFNGLFOGCOORDHVNVPROC) (const GLhalfNV *fog)
-typedef PFNGLFOGCOORDHVNVPROCDart = void Function(Pointer<Uint16> fog);
-typedef PFNGLFOGCOORDHVNVPROC = Void Function(Pointer<Uint16> fog);
+typedef PFNGLFOGCOORDHVNVPROCDart = void Function(Pointer<UnsignedShort> fog);
+typedef PFNGLFOGCOORDHVNVPROC = Void Function(Pointer<UnsignedShort> fog);
 
 // typedef void (APIENTRYP PFNGLSECONDARYCOLOR3HNVPROC) (GLhalfNV red, GLhalfNV green, GLhalfNV blue)
 typedef PFNGLSECONDARYCOLOR3HNVPROCDart =
     void Function(int red, int green, int blue);
 typedef PFNGLSECONDARYCOLOR3HNVPROC =
-    Void Function(Uint16 red, Uint16 green, Uint16 blue);
+    Void Function(UnsignedShort red, UnsignedShort green, UnsignedShort blue);
 
 // typedef void (APIENTRYP PFNGLSECONDARYCOLOR3HVNVPROC) (const GLhalfNV *v)
-typedef PFNGLSECONDARYCOLOR3HVNVPROCDart = void Function(Pointer<Uint16> v);
-typedef PFNGLSECONDARYCOLOR3HVNVPROC = Void Function(Pointer<Uint16> v);
+typedef PFNGLSECONDARYCOLOR3HVNVPROCDart =
+    void Function(Pointer<UnsignedShort> v);
+typedef PFNGLSECONDARYCOLOR3HVNVPROC = Void Function(Pointer<UnsignedShort> v);
 
 // typedef void (APIENTRYP PFNGLVERTEXWEIGHTHNVPROC) (GLhalfNV weight)
 typedef PFNGLVERTEXWEIGHTHNVPROCDart = void Function(int weight);
-typedef PFNGLVERTEXWEIGHTHNVPROC = Void Function(Uint16 weight);
+typedef PFNGLVERTEXWEIGHTHNVPROC = Void Function(UnsignedShort weight);
 
 // typedef void (APIENTRYP PFNGLVERTEXWEIGHTHVNVPROC) (const GLhalfNV *weight)
-typedef PFNGLVERTEXWEIGHTHVNVPROCDart = void Function(Pointer<Uint16> weight);
-typedef PFNGLVERTEXWEIGHTHVNVPROC = Void Function(Pointer<Uint16> weight);
+typedef PFNGLVERTEXWEIGHTHVNVPROCDart =
+    void Function(Pointer<UnsignedShort> weight);
+typedef PFNGLVERTEXWEIGHTHVNVPROC =
+    Void Function(Pointer<UnsignedShort> weight);
 
 // typedef void (APIENTRYP PFNGLGETINTERNALFORMATSAMPLEIVNVPROC) (GLenum target, GLenum internalformat, GLsizei samples, GLenum pname, GLsizei count, GLint *params)
 typedef PFNGLGETINTERNALFORMATSAMPLEIVNVPROCDart =
@@ -22727,9 +22239,9 @@ typedef PFNGLGETINTERNALFORMATSAMPLEIVNVPROC =
     Void Function(
       Uint32 target,
       Uint32 internalformat,
-      Uint32 samples,
+      Int32 samples,
       Uint32 pname,
-      Uint32 count,
+      Int32 count,
       Pointer<Int32> params,
     );
 
@@ -22747,7 +22259,7 @@ typedef PFNGLGETMEMORYOBJECTDETACHEDRESOURCESUIVNVPROC =
       Uint32 memory,
       Uint32 pname,
       Int32 first,
-      Uint32 count,
+      Int32 count,
       Pointer<Uint32> params,
     );
 
@@ -22785,8 +22297,8 @@ typedef PFNGLNAMEDBUFFERATTACHMEMORYNVPROC =
 typedef PFNGLBUFFERPAGECOMMITMENTMEMNVPROCDart =
     void Function(
       int target,
-      Pointer<NativeType> offset,
-      Pointer<Uint32> size,
+      int offset,
+      int size,
       int memory,
       int memOffset,
       int commit,
@@ -22794,11 +22306,11 @@ typedef PFNGLBUFFERPAGECOMMITMENTMEMNVPROCDart =
 typedef PFNGLBUFFERPAGECOMMITMENTMEMNVPROC =
     Void Function(
       Uint32 target,
-      Pointer<NativeType> offset,
-      Pointer<Uint32> size,
+      IntPtr offset,
+      IntPtr size,
       Uint32 memory,
       Uint64 memOffset,
-      Int32 commit,
+      Uint8 commit,
     );
 
 // typedef void (APIENTRYP PFNGLTEXPAGECOMMITMENTMEMNVPROC) (GLenum target, GLint layer, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLuint memory, GLuint64 offset, GLboolean commit)
@@ -22825,20 +22337,20 @@ typedef PFNGLTEXPAGECOMMITMENTMEMNVPROC =
       Int32 xoffset,
       Int32 yoffset,
       Int32 zoffset,
-      Uint32 width,
-      Uint32 height,
-      Uint32 depth,
+      Int32 width,
+      Int32 height,
+      Int32 depth,
       Uint32 memory,
       Uint64 offset,
-      Int32 commit,
+      Uint8 commit,
     );
 
 // typedef void (APIENTRYP PFNGLNAMEDBUFFERPAGECOMMITMENTMEMNVPROC) (GLuint buffer, GLintptr offset, GLsizeiptr size, GLuint memory, GLuint64 memOffset, GLboolean commit)
 typedef PFNGLNAMEDBUFFERPAGECOMMITMENTMEMNVPROCDart =
     void Function(
       int buffer,
-      Pointer<NativeType> offset,
-      Pointer<Uint32> size,
+      int offset,
+      int size,
       int memory,
       int memOffset,
       int commit,
@@ -22846,11 +22358,11 @@ typedef PFNGLNAMEDBUFFERPAGECOMMITMENTMEMNVPROCDart =
 typedef PFNGLNAMEDBUFFERPAGECOMMITMENTMEMNVPROC =
     Void Function(
       Uint32 buffer,
-      Pointer<NativeType> offset,
-      Pointer<Uint32> size,
+      IntPtr offset,
+      IntPtr size,
       Uint32 memory,
       Uint64 memOffset,
-      Int32 commit,
+      Uint8 commit,
     );
 
 // typedef void (APIENTRYP PFNGLTEXTUREPAGECOMMITMENTMEMNVPROC) (GLuint texture, GLint layer, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLuint memory, GLuint64 offset, GLboolean commit)
@@ -22877,12 +22389,12 @@ typedef PFNGLTEXTUREPAGECOMMITMENTMEMNVPROC =
       Int32 xoffset,
       Int32 yoffset,
       Int32 zoffset,
-      Uint32 width,
-      Uint32 height,
-      Uint32 depth,
+      Int32 width,
+      Int32 height,
+      Int32 depth,
       Uint32 memory,
       Uint64 offset,
-      Int32 commit,
+      Uint8 commit,
     );
 
 // typedef void (APIENTRYP PFNGLDRAWMESHTASKSNVPROC) (GLuint first, GLuint count)
@@ -22890,52 +22402,41 @@ typedef PFNGLDRAWMESHTASKSNVPROCDart = void Function(int first, int count);
 typedef PFNGLDRAWMESHTASKSNVPROC = Void Function(Uint32 first, Uint32 count);
 
 // typedef void (APIENTRYP PFNGLDRAWMESHTASKSINDIRECTNVPROC) (GLintptr indirect)
-typedef PFNGLDRAWMESHTASKSINDIRECTNVPROCDart =
-    void Function(Pointer<NativeType> indirect);
-typedef PFNGLDRAWMESHTASKSINDIRECTNVPROC =
-    Void Function(Pointer<NativeType> indirect);
+typedef PFNGLDRAWMESHTASKSINDIRECTNVPROCDart = void Function(int indirect);
+typedef PFNGLDRAWMESHTASKSINDIRECTNVPROC = Void Function(IntPtr indirect);
 
 // typedef void (APIENTRYP PFNGLMULTIDRAWMESHTASKSINDIRECTNVPROC) (GLintptr indirect, GLsizei drawcount, GLsizei stride)
 typedef PFNGLMULTIDRAWMESHTASKSINDIRECTNVPROCDart =
-    void Function(Pointer<NativeType> indirect, int drawcount, int stride);
+    void Function(int indirect, int drawcount, int stride);
 typedef PFNGLMULTIDRAWMESHTASKSINDIRECTNVPROC =
-    Void Function(
-      Pointer<NativeType> indirect,
-      Uint32 drawcount,
-      Uint32 stride,
-    );
+    Void Function(IntPtr indirect, Int32 drawcount, Int32 stride);
 
 // typedef void (APIENTRYP PFNGLMULTIDRAWMESHTASKSINDIRECTCOUNTNVPROC) (GLintptr indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride)
 typedef PFNGLMULTIDRAWMESHTASKSINDIRECTCOUNTNVPROCDart =
-    void Function(
-      Pointer<NativeType> indirect,
-      Pointer<NativeType> drawcount,
-      int maxdrawcount,
-      int stride,
-    );
+    void Function(int indirect, int drawcount, int maxdrawcount, int stride);
 typedef PFNGLMULTIDRAWMESHTASKSINDIRECTCOUNTNVPROC =
     Void Function(
-      Pointer<NativeType> indirect,
-      Pointer<NativeType> drawcount,
-      Uint32 maxdrawcount,
-      Uint32 stride,
+      IntPtr indirect,
+      IntPtr drawcount,
+      Int32 maxdrawcount,
+      Int32 stride,
     );
 
 // typedef void (APIENTRYP PFNGLGENOCCLUSIONQUERIESNVPROC) (GLsizei n, GLuint *ids)
 typedef PFNGLGENOCCLUSIONQUERIESNVPROCDart =
     void Function(int n, Pointer<Uint32> ids);
 typedef PFNGLGENOCCLUSIONQUERIESNVPROC =
-    Void Function(Uint32 n, Pointer<Uint32> ids);
+    Void Function(Int32 n, Pointer<Uint32> ids);
 
 // typedef void (APIENTRYP PFNGLDELETEOCCLUSIONQUERIESNVPROC) (GLsizei n, const GLuint *ids)
 typedef PFNGLDELETEOCCLUSIONQUERIESNVPROCDart =
     void Function(int n, Pointer<Uint32> ids);
 typedef PFNGLDELETEOCCLUSIONQUERIESNVPROC =
-    Void Function(Uint32 n, Pointer<Uint32> ids);
+    Void Function(Int32 n, Pointer<Uint32> ids);
 
 // typedef GLboolean (APIENTRYP PFNGLISOCCLUSIONQUERYNVPROC) (GLuint id)
 typedef PFNGLISOCCLUSIONQUERYNVPROCDart = int Function(int id);
-typedef PFNGLISOCCLUSIONQUERYNVPROC = Int32 Function(Uint32 id);
+typedef PFNGLISOCCLUSIONQUERYNVPROC = Uint8 Function(Uint32 id);
 
 // typedef void (APIENTRYP PFNGLBEGINOCCLUSIONQUERYNVPROC) (GLuint id)
 typedef PFNGLBEGINOCCLUSIONQUERYNVPROCDart = void Function(int id);
@@ -22971,7 +22472,7 @@ typedef PFNGLPROGRAMBUFFERPARAMETERSFVNVPROC =
       Uint32 target,
       Uint32 bindingIndex,
       Uint32 wordIndex,
-      Uint32 count,
+      Int32 count,
       Pointer<Float> params,
     );
 
@@ -22989,7 +22490,7 @@ typedef PFNGLPROGRAMBUFFERPARAMETERSIIVNVPROC =
       Uint32 target,
       Uint32 bindingIndex,
       Uint32 wordIndex,
-      Uint32 count,
+      Int32 count,
       Pointer<Int32> params,
     );
 
@@ -23007,21 +22508,21 @@ typedef PFNGLPROGRAMBUFFERPARAMETERSIUIVNVPROC =
       Uint32 target,
       Uint32 bindingIndex,
       Uint32 wordIndex,
-      Uint32 count,
+      Int32 count,
       Pointer<Uint32> params,
     );
 
 // typedef GLuint (APIENTRYP PFNGLGENPATHSNVPROC) (GLsizei range)
 typedef PFNGLGENPATHSNVPROCDart = int Function(int range);
-typedef PFNGLGENPATHSNVPROC = Uint32 Function(Uint32 range);
+typedef PFNGLGENPATHSNVPROC = Uint32 Function(Int32 range);
 
 // typedef void (APIENTRYP PFNGLDELETEPATHSNVPROC) (GLuint path, GLsizei range)
 typedef PFNGLDELETEPATHSNVPROCDart = void Function(int path, int range);
-typedef PFNGLDELETEPATHSNVPROC = Void Function(Uint32 path, Uint32 range);
+typedef PFNGLDELETEPATHSNVPROC = Void Function(Uint32 path, Int32 range);
 
 // typedef GLboolean (APIENTRYP PFNGLISPATHNVPROC) (GLuint path)
 typedef PFNGLISPATHNVPROCDart = int Function(int path);
-typedef PFNGLISPATHNVPROC = Int32 Function(Uint32 path);
+typedef PFNGLISPATHNVPROC = Uint8 Function(Uint32 path);
 
 // typedef void (APIENTRYP PFNGLPATHCOMMANDSNVPROC) (GLuint path, GLsizei numCommands, const GLubyte *commands, GLsizei numCoords, GLenum coordType, const void *coords)
 typedef PFNGLPATHCOMMANDSNVPROCDart =
@@ -23031,32 +22532,27 @@ typedef PFNGLPATHCOMMANDSNVPROCDart =
       Pointer<Uint8> commands,
       int numCoords,
       int coordType,
-      Pointer<NativeType> coords,
+      Pointer<Void> coords,
     );
 typedef PFNGLPATHCOMMANDSNVPROC =
     Void Function(
       Uint32 path,
-      Uint32 numCommands,
+      Int32 numCommands,
       Pointer<Uint8> commands,
-      Uint32 numCoords,
+      Int32 numCoords,
       Uint32 coordType,
-      Pointer<NativeType> coords,
+      Pointer<Void> coords,
     );
 
 // typedef void (APIENTRYP PFNGLPATHCOORDSNVPROC) (GLuint path, GLsizei numCoords, GLenum coordType, const void *coords)
 typedef PFNGLPATHCOORDSNVPROCDart =
-    void Function(
-      int path,
-      int numCoords,
-      int coordType,
-      Pointer<NativeType> coords,
-    );
+    void Function(int path, int numCoords, int coordType, Pointer<Void> coords);
 typedef PFNGLPATHCOORDSNVPROC =
     Void Function(
       Uint32 path,
-      Uint32 numCoords,
+      Int32 numCoords,
       Uint32 coordType,
-      Pointer<NativeType> coords,
+      Pointer<Void> coords,
     );
 
 // typedef void (APIENTRYP PFNGLPATHSUBCOMMANDSNVPROC) (GLuint path, GLsizei commandStart, GLsizei commandsToDelete, GLsizei numCommands, const GLubyte *commands, GLsizei numCoords, GLenum coordType, const void *coords)
@@ -23069,18 +22565,18 @@ typedef PFNGLPATHSUBCOMMANDSNVPROCDart =
       Pointer<Uint8> commands,
       int numCoords,
       int coordType,
-      Pointer<NativeType> coords,
+      Pointer<Void> coords,
     );
 typedef PFNGLPATHSUBCOMMANDSNVPROC =
     Void Function(
       Uint32 path,
-      Uint32 commandStart,
-      Uint32 commandsToDelete,
-      Uint32 numCommands,
+      Int32 commandStart,
+      Int32 commandsToDelete,
+      Int32 numCommands,
       Pointer<Uint8> commands,
-      Uint32 numCoords,
+      Int32 numCoords,
       Uint32 coordType,
-      Pointer<NativeType> coords,
+      Pointer<Void> coords,
     );
 
 // typedef void (APIENTRYP PFNGLPATHSUBCOORDSNVPROC) (GLuint path, GLsizei coordStart, GLsizei numCoords, GLenum coordType, const void *coords)
@@ -23090,31 +22586,26 @@ typedef PFNGLPATHSUBCOORDSNVPROCDart =
       int coordStart,
       int numCoords,
       int coordType,
-      Pointer<NativeType> coords,
+      Pointer<Void> coords,
     );
 typedef PFNGLPATHSUBCOORDSNVPROC =
     Void Function(
       Uint32 path,
-      Uint32 coordStart,
-      Uint32 numCoords,
+      Int32 coordStart,
+      Int32 numCoords,
       Uint32 coordType,
-      Pointer<NativeType> coords,
+      Pointer<Void> coords,
     );
 
 // typedef void (APIENTRYP PFNGLPATHSTRINGNVPROC) (GLuint path, GLenum format, GLsizei length, const void *pathString)
 typedef PFNGLPATHSTRINGNVPROCDart =
-    void Function(
-      int path,
-      int format,
-      int length,
-      Pointer<NativeType> pathString,
-    );
+    void Function(int path, int format, int length, Pointer<Void> pathString);
 typedef PFNGLPATHSTRINGNVPROC =
     Void Function(
       Uint32 path,
       Uint32 format,
-      Uint32 length,
-      Pointer<NativeType> pathString,
+      Int32 length,
+      Pointer<Void> pathString,
     );
 
 // typedef void (APIENTRYP PFNGLPATHGLYPHSNVPROC) (GLuint firstPathName, GLenum fontTarget, const void *fontName, GLbitfield fontStyle, GLsizei numGlyphs, GLenum type, const void *charcodes, GLenum handleMissingGlyphs, GLuint pathParameterTemplate, GLfloat emScale)
@@ -23122,11 +22613,11 @@ typedef PFNGLPATHGLYPHSNVPROCDart =
     void Function(
       int firstPathName,
       int fontTarget,
-      Pointer<NativeType> fontName,
+      Pointer<Void> fontName,
       int fontStyle,
       int numGlyphs,
       int type,
-      Pointer<NativeType> charcodes,
+      Pointer<Void> charcodes,
       int handleMissingGlyphs,
       int pathParameterTemplate,
       double emScale,
@@ -23135,11 +22626,11 @@ typedef PFNGLPATHGLYPHSNVPROC =
     Void Function(
       Uint32 firstPathName,
       Uint32 fontTarget,
-      Pointer<NativeType> fontName,
+      Pointer<Void> fontName,
       Uint32 fontStyle,
-      Uint32 numGlyphs,
+      Int32 numGlyphs,
       Uint32 type,
-      Pointer<NativeType> charcodes,
+      Pointer<Void> charcodes,
       Uint32 handleMissingGlyphs,
       Uint32 pathParameterTemplate,
       Float emScale,
@@ -23150,7 +22641,7 @@ typedef PFNGLPATHGLYPHRANGENVPROCDart =
     void Function(
       int firstPathName,
       int fontTarget,
-      Pointer<NativeType> fontName,
+      Pointer<Void> fontName,
       int fontStyle,
       int firstGlyph,
       int numGlyphs,
@@ -23162,10 +22653,10 @@ typedef PFNGLPATHGLYPHRANGENVPROC =
     Void Function(
       Uint32 firstPathName,
       Uint32 fontTarget,
-      Pointer<NativeType> fontName,
+      Pointer<Void> fontName,
       Uint32 fontStyle,
       Uint32 firstGlyph,
-      Uint32 numGlyphs,
+      Int32 numGlyphs,
       Uint32 handleMissingGlyphs,
       Uint32 pathParameterTemplate,
       Float emScale,
@@ -23182,7 +22673,7 @@ typedef PFNGLWEIGHTPATHSNVPROCDart =
 typedef PFNGLWEIGHTPATHSNVPROC =
     Void Function(
       Uint32 resultPath,
-      Uint32 numPaths,
+      Int32 numPaths,
       Pointer<Uint32> paths,
       Pointer<Float> weights,
     );
@@ -23241,7 +22732,7 @@ typedef PFNGLPATHPARAMETERFNVPROC =
 typedef PFNGLPATHDASHARRAYNVPROCDart =
     void Function(int path, int dashCount, Pointer<Float> dashArray);
 typedef PFNGLPATHDASHARRAYNVPROC =
-    Void Function(Uint32 path, Uint32 dashCount, Pointer<Float> dashArray);
+    Void Function(Uint32 path, Int32 dashCount, Pointer<Float> dashArray);
 
 // typedef void (APIENTRYP PFNGLPATHSTENCILFUNCNVPROC) (GLenum func, GLint ref, GLuint mask)
 typedef PFNGLPATHSTENCILFUNCNVPROCDart =
@@ -23272,7 +22763,7 @@ typedef PFNGLSTENCILFILLPATHINSTANCEDNVPROCDart =
     void Function(
       int numPaths,
       int pathNameType,
-      Pointer<NativeType> paths,
+      Pointer<Void> paths,
       int pathBase,
       int fillMode,
       int mask,
@@ -23281,9 +22772,9 @@ typedef PFNGLSTENCILFILLPATHINSTANCEDNVPROCDart =
     );
 typedef PFNGLSTENCILFILLPATHINSTANCEDNVPROC =
     Void Function(
-      Uint32 numPaths,
+      Int32 numPaths,
       Uint32 pathNameType,
-      Pointer<NativeType> paths,
+      Pointer<Void> paths,
       Uint32 pathBase,
       Uint32 fillMode,
       Uint32 mask,
@@ -23296,7 +22787,7 @@ typedef PFNGLSTENCILSTROKEPATHINSTANCEDNVPROCDart =
     void Function(
       int numPaths,
       int pathNameType,
-      Pointer<NativeType> paths,
+      Pointer<Void> paths,
       int pathBase,
       int reference,
       int mask,
@@ -23305,9 +22796,9 @@ typedef PFNGLSTENCILSTROKEPATHINSTANCEDNVPROCDart =
     );
 typedef PFNGLSTENCILSTROKEPATHINSTANCEDNVPROC =
     Void Function(
-      Uint32 numPaths,
+      Int32 numPaths,
       Uint32 pathNameType,
-      Pointer<NativeType> paths,
+      Pointer<Void> paths,
       Uint32 pathBase,
       Int32 reference,
       Uint32 mask,
@@ -23333,7 +22824,7 @@ typedef PFNGLCOVERFILLPATHINSTANCEDNVPROCDart =
     void Function(
       int numPaths,
       int pathNameType,
-      Pointer<NativeType> paths,
+      Pointer<Void> paths,
       int pathBase,
       int coverMode,
       int transformType,
@@ -23341,9 +22832,9 @@ typedef PFNGLCOVERFILLPATHINSTANCEDNVPROCDart =
     );
 typedef PFNGLCOVERFILLPATHINSTANCEDNVPROC =
     Void Function(
-      Uint32 numPaths,
+      Int32 numPaths,
       Uint32 pathNameType,
-      Pointer<NativeType> paths,
+      Pointer<Void> paths,
       Uint32 pathBase,
       Uint32 coverMode,
       Uint32 transformType,
@@ -23355,7 +22846,7 @@ typedef PFNGLCOVERSTROKEPATHINSTANCEDNVPROCDart =
     void Function(
       int numPaths,
       int pathNameType,
-      Pointer<NativeType> paths,
+      Pointer<Void> paths,
       int pathBase,
       int coverMode,
       int transformType,
@@ -23363,9 +22854,9 @@ typedef PFNGLCOVERSTROKEPATHINSTANCEDNVPROCDart =
     );
 typedef PFNGLCOVERSTROKEPATHINSTANCEDNVPROC =
     Void Function(
-      Uint32 numPaths,
+      Int32 numPaths,
       Uint32 pathNameType,
-      Pointer<NativeType> paths,
+      Pointer<Void> paths,
       Uint32 pathBase,
       Uint32 coverMode,
       Uint32 transformType,
@@ -23408,7 +22899,7 @@ typedef PFNGLGETPATHMETRICSNVPROCDart =
       int metricQueryMask,
       int numPaths,
       int pathNameType,
-      Pointer<NativeType> paths,
+      Pointer<Void> paths,
       int pathBase,
       int stride,
       Pointer<Float> metrics,
@@ -23416,11 +22907,11 @@ typedef PFNGLGETPATHMETRICSNVPROCDart =
 typedef PFNGLGETPATHMETRICSNVPROC =
     Void Function(
       Uint32 metricQueryMask,
-      Uint32 numPaths,
+      Int32 numPaths,
       Uint32 pathNameType,
-      Pointer<NativeType> paths,
+      Pointer<Void> paths,
       Uint32 pathBase,
-      Uint32 stride,
+      Int32 stride,
       Pointer<Float> metrics,
     );
 
@@ -23437,8 +22928,8 @@ typedef PFNGLGETPATHMETRICRANGENVPROC =
     Void Function(
       Uint32 metricQueryMask,
       Uint32 firstPathName,
-      Uint32 numPaths,
-      Uint32 stride,
+      Int32 numPaths,
+      Int32 stride,
       Pointer<Float> metrics,
     );
 
@@ -23448,7 +22939,7 @@ typedef PFNGLGETPATHSPACINGNVPROCDart =
       int pathListMode,
       int numPaths,
       int pathNameType,
-      Pointer<NativeType> paths,
+      Pointer<Void> paths,
       int pathBase,
       double advanceScale,
       double kerningScale,
@@ -23458,9 +22949,9 @@ typedef PFNGLGETPATHSPACINGNVPROCDart =
 typedef PFNGLGETPATHSPACINGNVPROC =
     Void Function(
       Uint32 pathListMode,
-      Uint32 numPaths,
+      Int32 numPaths,
       Uint32 pathNameType,
-      Pointer<NativeType> paths,
+      Pointer<Void> paths,
       Uint32 pathBase,
       Float advanceScale,
       Float kerningScale,
@@ -23472,19 +22963,19 @@ typedef PFNGLGETPATHSPACINGNVPROC =
 typedef PFNGLISPOINTINFILLPATHNVPROCDart =
     int Function(int path, int mask, double x, double y);
 typedef PFNGLISPOINTINFILLPATHNVPROC =
-    Int32 Function(Uint32 path, Uint32 mask, Float x, Float y);
+    Uint8 Function(Uint32 path, Uint32 mask, Float x, Float y);
 
 // typedef GLboolean (APIENTRYP PFNGLISPOINTINSTROKEPATHNVPROC) (GLuint path, GLfloat x, GLfloat y)
 typedef PFNGLISPOINTINSTROKEPATHNVPROCDart =
     int Function(int path, double x, double y);
 typedef PFNGLISPOINTINSTROKEPATHNVPROC =
-    Int32 Function(Uint32 path, Float x, Float y);
+    Uint8 Function(Uint32 path, Float x, Float y);
 
 // typedef GLfloat (APIENTRYP PFNGLGETPATHLENGTHNVPROC) (GLuint path, GLsizei startSegment, GLsizei numSegments)
 typedef PFNGLGETPATHLENGTHNVPROCDart =
     double Function(int path, int startSegment, int numSegments);
 typedef PFNGLGETPATHLENGTHNVPROC =
-    Float Function(Uint32 path, Uint32 startSegment, Uint32 numSegments);
+    Float Function(Uint32 path, Int32 startSegment, Int32 numSegments);
 
 // typedef GLboolean (APIENTRYP PFNGLPOINTALONGPATHNVPROC) (GLuint path, GLsizei startSegment, GLsizei numSegments, GLfloat distance, GLfloat *x, GLfloat *y, GLfloat *tangentX, GLfloat *tangentY)
 typedef PFNGLPOINTALONGPATHNVPROCDart =
@@ -23499,10 +22990,10 @@ typedef PFNGLPOINTALONGPATHNVPROCDart =
       Pointer<Float> tangentY,
     );
 typedef PFNGLPOINTALONGPATHNVPROC =
-    Int32 Function(
+    Uint8 Function(
       Uint32 path,
-      Uint32 startSegment,
-      Uint32 numSegments,
+      Int32 startSegment,
+      Int32 numSegments,
       Float distance,
       Pointer<Float> x,
       Pointer<Float> y,
@@ -23563,7 +23054,7 @@ typedef PFNGLSTENCILTHENCOVERFILLPATHINSTANCEDNVPROCDart =
     void Function(
       int numPaths,
       int pathNameType,
-      Pointer<NativeType> paths,
+      Pointer<Void> paths,
       int pathBase,
       int fillMode,
       int mask,
@@ -23573,9 +23064,9 @@ typedef PFNGLSTENCILTHENCOVERFILLPATHINSTANCEDNVPROCDart =
     );
 typedef PFNGLSTENCILTHENCOVERFILLPATHINSTANCEDNVPROC =
     Void Function(
-      Uint32 numPaths,
+      Int32 numPaths,
       Uint32 pathNameType,
-      Pointer<NativeType> paths,
+      Pointer<Void> paths,
       Uint32 pathBase,
       Uint32 fillMode,
       Uint32 mask,
@@ -23589,7 +23080,7 @@ typedef PFNGLSTENCILTHENCOVERSTROKEPATHINSTANCEDNVPROCDart =
     void Function(
       int numPaths,
       int pathNameType,
-      Pointer<NativeType> paths,
+      Pointer<Void> paths,
       int pathBase,
       int reference,
       int mask,
@@ -23599,9 +23090,9 @@ typedef PFNGLSTENCILTHENCOVERSTROKEPATHINSTANCEDNVPROCDart =
     );
 typedef PFNGLSTENCILTHENCOVERSTROKEPATHINSTANCEDNVPROC =
     Void Function(
-      Uint32 numPaths,
+      Int32 numPaths,
       Uint32 pathNameType,
-      Pointer<NativeType> paths,
+      Pointer<Void> paths,
       Uint32 pathBase,
       Int32 reference,
       Uint32 mask,
@@ -23614,7 +23105,7 @@ typedef PFNGLSTENCILTHENCOVERSTROKEPATHINSTANCEDNVPROC =
 typedef PFNGLPATHGLYPHINDEXRANGENVPROCDart =
     int Function(
       int fontTarget,
-      Pointer<NativeType> fontName,
+      Pointer<Void> fontName,
       int fontStyle,
       int pathParameterTemplate,
       double emScale,
@@ -23623,7 +23114,7 @@ typedef PFNGLPATHGLYPHINDEXRANGENVPROCDart =
 typedef PFNGLPATHGLYPHINDEXRANGENVPROC =
     Uint32 Function(
       Uint32 fontTarget,
-      Pointer<NativeType> fontName,
+      Pointer<Void> fontName,
       Uint32 fontStyle,
       Uint32 pathParameterTemplate,
       Float emScale,
@@ -23635,7 +23126,7 @@ typedef PFNGLPATHGLYPHINDEXARRAYNVPROCDart =
     int Function(
       int firstPathName,
       int fontTarget,
-      Pointer<NativeType> fontName,
+      Pointer<Void> fontName,
       int fontStyle,
       int firstGlyphIndex,
       int numGlyphs,
@@ -23646,10 +23137,10 @@ typedef PFNGLPATHGLYPHINDEXARRAYNVPROC =
     Uint32 Function(
       Uint32 firstPathName,
       Uint32 fontTarget,
-      Pointer<NativeType> fontName,
+      Pointer<Void> fontName,
       Uint32 fontStyle,
       Uint32 firstGlyphIndex,
-      Uint32 numGlyphs,
+      Int32 numGlyphs,
       Uint32 pathParameterTemplate,
       Float emScale,
     );
@@ -23659,8 +23150,8 @@ typedef PFNGLPATHMEMORYGLYPHINDEXARRAYNVPROCDart =
     int Function(
       int firstPathName,
       int fontTarget,
-      Pointer<Uint32> fontSize,
-      Pointer<NativeType> fontData,
+      int fontSize,
+      Pointer<Void> fontData,
       int faceIndex,
       int firstGlyphIndex,
       int numGlyphs,
@@ -23671,11 +23162,11 @@ typedef PFNGLPATHMEMORYGLYPHINDEXARRAYNVPROC =
     Uint32 Function(
       Uint32 firstPathName,
       Uint32 fontTarget,
-      Pointer<Uint32> fontSize,
-      Pointer<NativeType> fontData,
-      Uint32 faceIndex,
+      IntPtr fontSize,
+      Pointer<Void> fontData,
+      Int32 faceIndex,
       Uint32 firstGlyphIndex,
-      Uint32 numGlyphs,
+      Int32 numGlyphs,
       Uint32 pathParameterTemplate,
       Float emScale,
     );
@@ -23707,7 +23198,7 @@ typedef PFNGLGETPROGRAMRESOURCEFVNVPROCDart =
       int propCount,
       Pointer<Uint32> props,
       int count,
-      Pointer<Uint32> length,
+      Pointer<Int32> length,
       Pointer<Float> params,
     );
 typedef PFNGLGETPROGRAMRESOURCEFVNVPROC =
@@ -23715,10 +23206,10 @@ typedef PFNGLGETPROGRAMRESOURCEFVNVPROC =
       Uint32 program,
       Uint32 programInterface,
       Uint32 index,
-      Uint32 propCount,
+      Int32 propCount,
       Pointer<Uint32> props,
-      Uint32 count,
-      Pointer<Uint32> length,
+      Int32 count,
+      Pointer<Int32> length,
       Pointer<Float> params,
     );
 
@@ -23784,9 +23275,9 @@ typedef PFNGLGETPATHTEXGENFVNVPROC =
 
 // typedef void (APIENTRYP PFNGLPIXELDATARANGENVPROC) (GLenum target, GLsizei length, const void *pointer)
 typedef PFNGLPIXELDATARANGENVPROCDart =
-    void Function(int target, int length, Pointer<NativeType> pointer);
+    void Function(int target, int length, Pointer<Void> pointer);
 typedef PFNGLPIXELDATARANGENVPROC =
-    Void Function(Uint32 target, Uint32 length, Pointer<NativeType> pointer);
+    Void Function(Uint32 target, Int32 length, Pointer<Void> pointer);
 
 // typedef void (APIENTRYP PFNGLFLUSHPIXELDATARANGENVPROC) (GLenum target)
 typedef PFNGLFLUSHPIXELDATARANGENVPROCDart = void Function(int target);
@@ -23913,13 +23404,13 @@ typedef PFNGLQUERYRESOURCENVPROC =
 typedef PFNGLGENQUERYRESOURCETAGNVPROCDart =
     void Function(int n, Pointer<Int32> tagIds);
 typedef PFNGLGENQUERYRESOURCETAGNVPROC =
-    Void Function(Uint32 n, Pointer<Int32> tagIds);
+    Void Function(Int32 n, Pointer<Int32> tagIds);
 
 // typedef void (APIENTRYP PFNGLDELETEQUERYRESOURCETAGNVPROC) (GLsizei n, const GLint *tagIds)
 typedef PFNGLDELETEQUERYRESOURCETAGNVPROCDart =
     void Function(int n, Pointer<Int32> tagIds);
 typedef PFNGLDELETEQUERYRESOURCETAGNVPROC =
-    Void Function(Uint32 n, Pointer<Int32> tagIds);
+    Void Function(Int32 n, Pointer<Int32> tagIds);
 
 // typedef void (APIENTRYP PFNGLQUERYRESOURCETAGNVPROC) (GLint tagId, const GLchar *tagString)
 typedef PFNGLQUERYRESOURCETAGNVPROCDart =
@@ -23993,9 +23484,9 @@ typedef PFNGLCOMBINEROUTPUTNVPROC =
       Uint32 sumOutput,
       Uint32 scale,
       Uint32 bias,
-      Int32 abDotProduct,
-      Int32 cdDotProduct,
-      Int32 muxSum,
+      Uint8 abDotProduct,
+      Uint8 cdDotProduct,
+      Uint8 muxSum,
     );
 
 // typedef void (APIENTRYP PFNGLFINALCOMBINERINPUTNVPROC) (GLenum variable, GLenum input, GLenum mapping, GLenum componentUsage)
@@ -24095,7 +23586,7 @@ typedef PFNGLGETCOMBINERSTAGEPARAMETERFVNVPROC =
 typedef PFNGLFRAMEBUFFERSAMPLELOCATIONSFVNVPROCDart =
     void Function(int target, int start, int count, Pointer<Float> v);
 typedef PFNGLFRAMEBUFFERSAMPLELOCATIONSFVNVPROC =
-    Void Function(Uint32 target, Uint32 start, Uint32 count, Pointer<Float> v);
+    Void Function(Uint32 target, Uint32 start, Int32 count, Pointer<Float> v);
 
 // typedef void (APIENTRYP PFNGLNAMEDFRAMEBUFFERSAMPLELOCATIONSFVNVPROC) (GLuint framebuffer, GLuint start, GLsizei count, const GLfloat *v)
 typedef PFNGLNAMEDFRAMEBUFFERSAMPLELOCATIONSFVNVPROCDart =
@@ -24104,7 +23595,7 @@ typedef PFNGLNAMEDFRAMEBUFFERSAMPLELOCATIONSFVNVPROC =
     Void Function(
       Uint32 framebuffer,
       Uint32 start,
-      Uint32 count,
+      Int32 count,
       Pointer<Float> v,
     );
 
@@ -24116,13 +23607,13 @@ typedef PFNGLRESOLVEDEPTHVALUESNVPROC = Void Function();
 typedef PFNGLSCISSOREXCLUSIVENVPROCDart =
     void Function(int x, int y, int width, int height);
 typedef PFNGLSCISSOREXCLUSIVENVPROC =
-    Void Function(Int32 x, Int32 y, Uint32 width, Uint32 height);
+    Void Function(Int32 x, Int32 y, Int32 width, Int32 height);
 
 // typedef void (APIENTRYP PFNGLSCISSOREXCLUSIVEARRAYVNVPROC) (GLuint first, GLsizei count, const GLint *v)
 typedef PFNGLSCISSOREXCLUSIVEARRAYVNVPROCDart =
     void Function(int first, int count, Pointer<Int32> v);
 typedef PFNGLSCISSOREXCLUSIVEARRAYVNVPROC =
-    Void Function(Uint32 first, Uint32 count, Pointer<Int32> v);
+    Void Function(Uint32 first, Int32 count, Pointer<Int32> v);
 
 // typedef void (APIENTRYP PFNGLMAKEBUFFERRESIDENTNVPROC) (GLenum target, GLenum access)
 typedef PFNGLMAKEBUFFERRESIDENTNVPROCDart =
@@ -24136,7 +23627,7 @@ typedef PFNGLMAKEBUFFERNONRESIDENTNVPROC = Void Function(Uint32 target);
 
 // typedef GLboolean (APIENTRYP PFNGLISBUFFERRESIDENTNVPROC) (GLenum target)
 typedef PFNGLISBUFFERRESIDENTNVPROCDart = int Function(int target);
-typedef PFNGLISBUFFERRESIDENTNVPROC = Int32 Function(Uint32 target);
+typedef PFNGLISBUFFERRESIDENTNVPROC = Uint8 Function(Uint32 target);
 
 // typedef void (APIENTRYP PFNGLMAKENAMEDBUFFERRESIDENTNVPROC) (GLuint buffer, GLenum access)
 typedef PFNGLMAKENAMEDBUFFERRESIDENTNVPROCDart =
@@ -24150,7 +23641,7 @@ typedef PFNGLMAKENAMEDBUFFERNONRESIDENTNVPROC = Void Function(Uint32 buffer);
 
 // typedef GLboolean (APIENTRYP PFNGLISNAMEDBUFFERRESIDENTNVPROC) (GLuint buffer)
 typedef PFNGLISNAMEDBUFFERRESIDENTNVPROCDart = int Function(int buffer);
-typedef PFNGLISNAMEDBUFFERRESIDENTNVPROC = Int32 Function(Uint32 buffer);
+typedef PFNGLISNAMEDBUFFERRESIDENTNVPROC = Uint8 Function(Uint32 buffer);
 
 // typedef void (APIENTRYP PFNGLGETBUFFERPARAMETERUI64VNVPROC) (GLenum target, GLenum pname, GLuint64EXT *params)
 typedef PFNGLGETBUFFERPARAMETERUI64VNVPROCDart =
@@ -24178,7 +23669,7 @@ typedef PFNGLUNIFORMUI64NVPROC = Void Function(Int32 location, Uint64 value);
 typedef PFNGLUNIFORMUI64VNVPROCDart =
     void Function(int location, int count, Pointer<Uint64> value);
 typedef PFNGLUNIFORMUI64VNVPROC =
-    Void Function(Int32 location, Uint32 count, Pointer<Uint64> value);
+    Void Function(Int32 location, Int32 count, Pointer<Uint64> value);
 
 // typedef void (APIENTRYP PFNGLPROGRAMUNIFORMUI64NVPROC) (GLuint program, GLint location, GLuint64EXT value)
 typedef PFNGLPROGRAMUNIFORMUI64NVPROCDart =
@@ -24193,7 +23684,7 @@ typedef PFNGLPROGRAMUNIFORMUI64VNVPROC =
     Void Function(
       Uint32 program,
       Int32 location,
-      Uint32 count,
+      Int32 count,
       Pointer<Uint64> value,
     );
 
@@ -24220,7 +23711,7 @@ typedef PFNGLGETSHADINGRATESAMPLELOCATIONIVNVPROC =
 
 // typedef void (APIENTRYP PFNGLSHADINGRATEIMAGEBARRIERNVPROC) (GLboolean synchronize)
 typedef PFNGLSHADINGRATEIMAGEBARRIERNVPROCDart = void Function(int synchronize);
-typedef PFNGLSHADINGRATEIMAGEBARRIERNVPROC = Void Function(Int32 synchronize);
+typedef PFNGLSHADINGRATEIMAGEBARRIERNVPROC = Void Function(Uint8 synchronize);
 
 // typedef void (APIENTRYP PFNGLSHADINGRATEIMAGEPALETTENVPROC) (GLuint viewport, GLuint first, GLsizei count, const GLenum *rates)
 typedef PFNGLSHADINGRATEIMAGEPALETTENVPROCDart =
@@ -24229,7 +23720,7 @@ typedef PFNGLSHADINGRATEIMAGEPALETTENVPROC =
     Void Function(
       Uint32 viewport,
       Uint32 first,
-      Uint32 count,
+      Int32 count,
       Pointer<Uint32> rates,
     );
 
@@ -24261,12 +23752,12 @@ typedef PFNGLTEXIMAGE2DMULTISAMPLECOVERAGENVPROCDart =
 typedef PFNGLTEXIMAGE2DMULTISAMPLECOVERAGENVPROC =
     Void Function(
       Uint32 target,
-      Uint32 coverageSamples,
-      Uint32 colorSamples,
+      Int32 coverageSamples,
+      Int32 colorSamples,
       Int32 internalFormat,
-      Uint32 width,
-      Uint32 height,
-      Int32 fixedSampleLocations,
+      Int32 width,
+      Int32 height,
+      Uint8 fixedSampleLocations,
     );
 
 // typedef void (APIENTRYP PFNGLTEXIMAGE3DMULTISAMPLECOVERAGENVPROC) (GLenum target, GLsizei coverageSamples, GLsizei colorSamples, GLint internalFormat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedSampleLocations)
@@ -24284,13 +23775,13 @@ typedef PFNGLTEXIMAGE3DMULTISAMPLECOVERAGENVPROCDart =
 typedef PFNGLTEXIMAGE3DMULTISAMPLECOVERAGENVPROC =
     Void Function(
       Uint32 target,
-      Uint32 coverageSamples,
-      Uint32 colorSamples,
+      Int32 coverageSamples,
+      Int32 colorSamples,
       Int32 internalFormat,
-      Uint32 width,
-      Uint32 height,
-      Uint32 depth,
-      Int32 fixedSampleLocations,
+      Int32 width,
+      Int32 height,
+      Int32 depth,
+      Uint8 fixedSampleLocations,
     );
 
 // typedef void (APIENTRYP PFNGLTEXTUREIMAGE2DMULTISAMPLENVPROC) (GLuint texture, GLenum target, GLsizei samples, GLint internalFormat, GLsizei width, GLsizei height, GLboolean fixedSampleLocations)
@@ -24308,11 +23799,11 @@ typedef PFNGLTEXTUREIMAGE2DMULTISAMPLENVPROC =
     Void Function(
       Uint32 texture,
       Uint32 target,
-      Uint32 samples,
+      Int32 samples,
       Int32 internalFormat,
-      Uint32 width,
-      Uint32 height,
-      Int32 fixedSampleLocations,
+      Int32 width,
+      Int32 height,
+      Uint8 fixedSampleLocations,
     );
 
 // typedef void (APIENTRYP PFNGLTEXTUREIMAGE3DMULTISAMPLENVPROC) (GLuint texture, GLenum target, GLsizei samples, GLint internalFormat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedSampleLocations)
@@ -24331,12 +23822,12 @@ typedef PFNGLTEXTUREIMAGE3DMULTISAMPLENVPROC =
     Void Function(
       Uint32 texture,
       Uint32 target,
-      Uint32 samples,
+      Int32 samples,
       Int32 internalFormat,
-      Uint32 width,
-      Uint32 height,
-      Uint32 depth,
-      Int32 fixedSampleLocations,
+      Int32 width,
+      Int32 height,
+      Int32 depth,
+      Uint8 fixedSampleLocations,
     );
 
 // typedef void (APIENTRYP PFNGLTEXTUREIMAGE2DMULTISAMPLECOVERAGENVPROC) (GLuint texture, GLenum target, GLsizei coverageSamples, GLsizei colorSamples, GLint internalFormat, GLsizei width, GLsizei height, GLboolean fixedSampleLocations)
@@ -24355,12 +23846,12 @@ typedef PFNGLTEXTUREIMAGE2DMULTISAMPLECOVERAGENVPROC =
     Void Function(
       Uint32 texture,
       Uint32 target,
-      Uint32 coverageSamples,
-      Uint32 colorSamples,
+      Int32 coverageSamples,
+      Int32 colorSamples,
       Int32 internalFormat,
-      Uint32 width,
-      Uint32 height,
-      Int32 fixedSampleLocations,
+      Int32 width,
+      Int32 height,
+      Uint8 fixedSampleLocations,
     );
 
 // typedef void (APIENTRYP PFNGLTEXTUREIMAGE3DMULTISAMPLECOVERAGENVPROC) (GLuint texture, GLenum target, GLsizei coverageSamples, GLsizei colorSamples, GLint internalFormat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedSampleLocations)
@@ -24380,20 +23871,20 @@ typedef PFNGLTEXTUREIMAGE3DMULTISAMPLECOVERAGENVPROC =
     Void Function(
       Uint32 texture,
       Uint32 target,
-      Uint32 coverageSamples,
-      Uint32 colorSamples,
+      Int32 coverageSamples,
+      Int32 colorSamples,
       Int32 internalFormat,
-      Uint32 width,
-      Uint32 height,
-      Uint32 depth,
-      Int32 fixedSampleLocations,
+      Int32 width,
+      Int32 height,
+      Int32 depth,
+      Uint8 fixedSampleLocations,
     );
 
 // typedef void (APIENTRYP PFNGLCREATESEMAPHORESNVPROC) (GLsizei n, GLuint *semaphores)
 typedef PFNGLCREATESEMAPHORESNVPROCDart =
     void Function(int n, Pointer<Uint32> semaphores);
 typedef PFNGLCREATESEMAPHORESNVPROC =
-    Void Function(Uint32 n, Pointer<Uint32> semaphores);
+    Void Function(Int32 n, Pointer<Uint32> semaphores);
 
 // typedef void (APIENTRYP PFNGLSEMAPHOREPARAMETERIVNVPROC) (GLuint semaphore, GLenum pname, const GLint *params)
 typedef PFNGLSEMAPHOREPARAMETERIVNVPROCDart =
@@ -24420,41 +23911,25 @@ typedef PFNGLENDTRANSFORMFEEDBACKNVPROC = Void Function();
 typedef PFNGLTRANSFORMFEEDBACKATTRIBSNVPROCDart =
     void Function(int count, Pointer<Int32> attribs, int bufferMode);
 typedef PFNGLTRANSFORMFEEDBACKATTRIBSNVPROC =
-    Void Function(Uint32 count, Pointer<Int32> attribs, Uint32 bufferMode);
+    Void Function(Int32 count, Pointer<Int32> attribs, Uint32 bufferMode);
 
 // typedef void (APIENTRYP PFNGLBINDBUFFERRANGENVPROC) (GLenum target, GLuint index, GLuint buffer, GLintptr offset, GLsizeiptr size)
 typedef PFNGLBINDBUFFERRANGENVPROCDart =
-    void Function(
-      int target,
-      int index,
-      int buffer,
-      Pointer<NativeType> offset,
-      Pointer<Uint32> size,
-    );
+    void Function(int target, int index, int buffer, int offset, int size);
 typedef PFNGLBINDBUFFERRANGENVPROC =
     Void Function(
       Uint32 target,
       Uint32 index,
       Uint32 buffer,
-      Pointer<NativeType> offset,
-      Pointer<Uint32> size,
+      IntPtr offset,
+      IntPtr size,
     );
 
 // typedef void (APIENTRYP PFNGLBINDBUFFEROFFSETNVPROC) (GLenum target, GLuint index, GLuint buffer, GLintptr offset)
 typedef PFNGLBINDBUFFEROFFSETNVPROCDart =
-    void Function(
-      int target,
-      int index,
-      int buffer,
-      Pointer<NativeType> offset,
-    );
+    void Function(int target, int index, int buffer, int offset);
 typedef PFNGLBINDBUFFEROFFSETNVPROC =
-    Void Function(
-      Uint32 target,
-      Uint32 index,
-      Uint32 buffer,
-      Pointer<NativeType> offset,
-    );
+    Void Function(Uint32 target, Uint32 index, Uint32 buffer, IntPtr offset);
 
 // typedef void (APIENTRYP PFNGLBINDBUFFERBASENVPROC) (GLenum target, GLuint index, GLuint buffer)
 typedef PFNGLBINDBUFFERBASENVPROCDart =
@@ -24473,7 +23948,7 @@ typedef PFNGLTRANSFORMFEEDBACKVARYINGSNVPROCDart =
 typedef PFNGLTRANSFORMFEEDBACKVARYINGSNVPROC =
     Void Function(
       Uint32 program,
-      Uint32 count,
+      Int32 count,
       Pointer<Int32> locations,
       Uint32 bufferMode,
     );
@@ -24496,8 +23971,8 @@ typedef PFNGLGETACTIVEVARYINGNVPROCDart =
       int program,
       int index,
       int bufSize,
-      Pointer<Uint32> length,
-      Pointer<Uint32> size,
+      Pointer<Int32> length,
+      Pointer<Int32> size,
       Pointer<Uint32> type,
       Pointer<Int8> name,
     );
@@ -24505,9 +23980,9 @@ typedef PFNGLGETACTIVEVARYINGNVPROC =
     Void Function(
       Uint32 program,
       Uint32 index,
-      Uint32 bufSize,
-      Pointer<Uint32> length,
-      Pointer<Uint32> size,
+      Int32 bufSize,
+      Pointer<Int32> length,
+      Pointer<Int32> size,
       Pointer<Uint32> type,
       Pointer<Int8> name,
     );
@@ -24529,9 +24004,9 @@ typedef PFNGLTRANSFORMFEEDBACKSTREAMATTRIBSNVPROCDart =
     );
 typedef PFNGLTRANSFORMFEEDBACKSTREAMATTRIBSNVPROC =
     Void Function(
-      Uint32 count,
+      Int32 count,
       Pointer<Int32> attribs,
-      Uint32 nbuffers,
+      Int32 nbuffers,
       Pointer<Int32> bufstreams,
       Uint32 bufferMode,
     );
@@ -24546,17 +24021,17 @@ typedef PFNGLBINDTRANSFORMFEEDBACKNVPROC =
 typedef PFNGLDELETETRANSFORMFEEDBACKSNVPROCDart =
     void Function(int n, Pointer<Uint32> ids);
 typedef PFNGLDELETETRANSFORMFEEDBACKSNVPROC =
-    Void Function(Uint32 n, Pointer<Uint32> ids);
+    Void Function(Int32 n, Pointer<Uint32> ids);
 
 // typedef void (APIENTRYP PFNGLGENTRANSFORMFEEDBACKSNVPROC) (GLsizei n, GLuint *ids)
 typedef PFNGLGENTRANSFORMFEEDBACKSNVPROCDart =
     void Function(int n, Pointer<Uint32> ids);
 typedef PFNGLGENTRANSFORMFEEDBACKSNVPROC =
-    Void Function(Uint32 n, Pointer<Uint32> ids);
+    Void Function(Int32 n, Pointer<Uint32> ids);
 
 // typedef GLboolean (APIENTRYP PFNGLISTRANSFORMFEEDBACKNVPROC) (GLuint id)
 typedef PFNGLISTRANSFORMFEEDBACKNVPROCDart = int Function(int id);
-typedef PFNGLISTRANSFORMFEEDBACKNVPROC = Int32 Function(Uint32 id);
+typedef PFNGLISTRANSFORMFEEDBACKNVPROC = Uint8 Function(Uint32 id);
 
 // typedef void (APIENTRYP PFNGLPAUSETRANSFORMFEEDBACKNVPROC) (void)
 typedef PFNGLPAUSETRANSFORMFEEDBACKNVPROCDart = void Function();
@@ -24573,15 +24048,9 @@ typedef PFNGLDRAWTRANSFORMFEEDBACKNVPROC =
 
 // typedef void (APIENTRYP PFNGLVDPAUINITNVPROC) (const void *vdpDevice, const void *getProcAddress)
 typedef PFNGLVDPAUINITNVPROCDart =
-    void Function(
-      Pointer<NativeType> vdpDevice,
-      Pointer<NativeType> getProcAddress,
-    );
+    void Function(Pointer<Void> vdpDevice, Pointer<Void> getProcAddress);
 typedef PFNGLVDPAUINITNVPROC =
-    Void Function(
-      Pointer<NativeType> vdpDevice,
-      Pointer<NativeType> getProcAddress,
-    );
+    Void Function(Pointer<Void> vdpDevice, Pointer<Void> getProcAddress);
 
 // typedef void (APIENTRYP PFNGLVDPAUFININVPROC) (void)
 typedef PFNGLVDPAUFININVPROCDart = void Function();
@@ -24589,99 +24058,98 @@ typedef PFNGLVDPAUFININVPROC = Void Function();
 
 // typedef GLvdpauSurfaceNV (APIENTRYP PFNGLVDPAUREGISTERVIDEOSURFACENVPROC) (const void *vdpSurface, GLenum target, GLsizei numTextureNames, const GLuint *textureNames)
 typedef PFNGLVDPAUREGISTERVIDEOSURFACENVPROCDart =
-    Pointer<NativeType> Function(
-      Pointer<NativeType> vdpSurface,
+    Pointer<Void> Function(
+      Pointer<Void> vdpSurface,
       int target,
       int numTextureNames,
       Pointer<Uint32> textureNames,
     );
 typedef PFNGLVDPAUREGISTERVIDEOSURFACENVPROC =
-    Pointer<NativeType> Function(
-      Pointer<NativeType> vdpSurface,
+    Pointer<Void> Function(
+      Pointer<Void> vdpSurface,
       Uint32 target,
-      Uint32 numTextureNames,
+      Int32 numTextureNames,
       Pointer<Uint32> textureNames,
     );
 
 // typedef GLvdpauSurfaceNV (APIENTRYP PFNGLVDPAUREGISTEROUTPUTSURFACENVPROC) (const void *vdpSurface, GLenum target, GLsizei numTextureNames, const GLuint *textureNames)
 typedef PFNGLVDPAUREGISTEROUTPUTSURFACENVPROCDart =
-    Pointer<NativeType> Function(
-      Pointer<NativeType> vdpSurface,
+    Pointer<Void> Function(
+      Pointer<Void> vdpSurface,
       int target,
       int numTextureNames,
       Pointer<Uint32> textureNames,
     );
 typedef PFNGLVDPAUREGISTEROUTPUTSURFACENVPROC =
-    Pointer<NativeType> Function(
-      Pointer<NativeType> vdpSurface,
+    Pointer<Void> Function(
+      Pointer<Void> vdpSurface,
       Uint32 target,
-      Uint32 numTextureNames,
+      Int32 numTextureNames,
       Pointer<Uint32> textureNames,
     );
 
 // typedef GLboolean (APIENTRYP PFNGLVDPAUISSURFACENVPROC) (GLvdpauSurfaceNV surface)
-typedef PFNGLVDPAUISSURFACENVPROCDart =
-    int Function(Pointer<NativeType> surface);
-typedef PFNGLVDPAUISSURFACENVPROC = Int32 Function(Pointer<NativeType> surface);
+typedef PFNGLVDPAUISSURFACENVPROCDart = int Function(Pointer<Void> surface);
+typedef PFNGLVDPAUISSURFACENVPROC = Uint8 Function(Pointer<Void> surface);
 
 // typedef void (APIENTRYP PFNGLVDPAUUNREGISTERSURFACENVPROC) (GLvdpauSurfaceNV surface)
 typedef PFNGLVDPAUUNREGISTERSURFACENVPROCDart =
-    void Function(Pointer<NativeType> surface);
+    void Function(Pointer<Void> surface);
 typedef PFNGLVDPAUUNREGISTERSURFACENVPROC =
-    Void Function(Pointer<NativeType> surface);
+    Void Function(Pointer<Void> surface);
 
 // typedef void (APIENTRYP PFNGLVDPAUGETSURFACEIVNVPROC) (GLvdpauSurfaceNV surface, GLenum pname, GLsizei count, GLsizei *length, GLint *values)
 typedef PFNGLVDPAUGETSURFACEIVNVPROCDart =
     void Function(
-      Pointer<NativeType> surface,
+      Pointer<Void> surface,
       int pname,
       int count,
-      Pointer<Uint32> length,
+      Pointer<Int32> length,
       Pointer<Int32> values,
     );
 typedef PFNGLVDPAUGETSURFACEIVNVPROC =
     Void Function(
-      Pointer<NativeType> surface,
+      Pointer<Void> surface,
       Uint32 pname,
-      Uint32 count,
-      Pointer<Uint32> length,
+      Int32 count,
+      Pointer<Int32> length,
       Pointer<Int32> values,
     );
 
 // typedef void (APIENTRYP PFNGLVDPAUSURFACEACCESSNVPROC) (GLvdpauSurfaceNV surface, GLenum access)
 typedef PFNGLVDPAUSURFACEACCESSNVPROCDart =
-    void Function(Pointer<NativeType> surface, int access);
+    void Function(Pointer<Void> surface, int access);
 typedef PFNGLVDPAUSURFACEACCESSNVPROC =
-    Void Function(Pointer<NativeType> surface, Uint32 access);
+    Void Function(Pointer<Void> surface, Uint32 access);
 
 // typedef void (APIENTRYP PFNGLVDPAUMAPSURFACESNVPROC) (GLsizei numSurfaces, const GLvdpauSurfaceNV *surfaces)
 typedef PFNGLVDPAUMAPSURFACESNVPROCDart =
-    void Function(int numSurfaces, Pointer<Pointer<NativeType>> surfaces);
+    void Function(int numSurfaces, Pointer<Pointer<Void>> surfaces);
 typedef PFNGLVDPAUMAPSURFACESNVPROC =
-    Void Function(Uint32 numSurfaces, Pointer<Pointer<NativeType>> surfaces);
+    Void Function(Int32 numSurfaces, Pointer<Pointer<Void>> surfaces);
 
 // typedef void (APIENTRYP PFNGLVDPAUUNMAPSURFACESNVPROC) (GLsizei numSurface, const GLvdpauSurfaceNV *surfaces)
 typedef PFNGLVDPAUUNMAPSURFACESNVPROCDart =
-    void Function(int numSurface, Pointer<Pointer<NativeType>> surfaces);
+    void Function(int numSurface, Pointer<Pointer<Void>> surfaces);
 typedef PFNGLVDPAUUNMAPSURFACESNVPROC =
-    Void Function(Uint32 numSurface, Pointer<Pointer<NativeType>> surfaces);
+    Void Function(Int32 numSurface, Pointer<Pointer<Void>> surfaces);
 
 // typedef GLvdpauSurfaceNV (APIENTRYP PFNGLVDPAUREGISTERVIDEOSURFACEWITHPICTURESTRUCTURENVPROC) (const void *vdpSurface, GLenum target, GLsizei numTextureNames, const GLuint *textureNames, GLboolean isFrameStructure)
 typedef PFNGLVDPAUREGISTERVIDEOSURFACEWITHPICTURESTRUCTURENVPROCDart =
-    Pointer<NativeType> Function(
-      Pointer<NativeType> vdpSurface,
+    Pointer<Void> Function(
+      Pointer<Void> vdpSurface,
       int target,
       int numTextureNames,
       Pointer<Uint32> textureNames,
       int isFrameStructure,
     );
 typedef PFNGLVDPAUREGISTERVIDEOSURFACEWITHPICTURESTRUCTURENVPROC =
-    Pointer<NativeType> Function(
-      Pointer<NativeType> vdpSurface,
+    Pointer<Void> Function(
+      Pointer<Void> vdpSurface,
       Uint32 target,
-      Uint32 numTextureNames,
+      Int32 numTextureNames,
       Pointer<Uint32> textureNames,
-      Int32 isFrameStructure,
+      Uint8 isFrameStructure,
     );
 
 // typedef void (APIENTRYP PFNGLFLUSHVERTEXARRAYRANGENVPROC) (void)
@@ -24690,9 +24158,9 @@ typedef PFNGLFLUSHVERTEXARRAYRANGENVPROC = Void Function();
 
 // typedef void (APIENTRYP PFNGLVERTEXARRAYRANGENVPROC) (GLsizei length, const void *pointer)
 typedef PFNGLVERTEXARRAYRANGENVPROCDart =
-    void Function(int length, Pointer<NativeType> pointer);
+    void Function(int length, Pointer<Void> pointer);
 typedef PFNGLVERTEXARRAYRANGENVPROC =
-    Void Function(Uint32 length, Pointer<NativeType> pointer);
+    Void Function(Int32 length, Pointer<Void> pointer);
 
 // typedef void (APIENTRYP PFNGLVERTEXATTRIBL1I64NVPROC) (GLuint index, GLint64EXT x)
 typedef PFNGLVERTEXATTRIBL1I64NVPROCDart = void Function(int index, int x);
@@ -24802,58 +24270,53 @@ typedef PFNGLGETVERTEXATTRIBLUI64VNVPROC =
 typedef PFNGLVERTEXATTRIBLFORMATNVPROCDart =
     void Function(int index, int size, int type, int stride);
 typedef PFNGLVERTEXATTRIBLFORMATNVPROC =
-    Void Function(Uint32 index, Int32 size, Uint32 type, Uint32 stride);
+    Void Function(Uint32 index, Int32 size, Uint32 type, Int32 stride);
 
 // typedef void (APIENTRYP PFNGLBUFFERADDRESSRANGENVPROC) (GLenum pname, GLuint index, GLuint64EXT address, GLsizeiptr length)
 typedef PFNGLBUFFERADDRESSRANGENVPROCDart =
-    void Function(int pname, int index, int address, Pointer<Uint32> length);
+    void Function(int pname, int index, int address, int length);
 typedef PFNGLBUFFERADDRESSRANGENVPROC =
-    Void Function(
-      Uint32 pname,
-      Uint32 index,
-      Uint64 address,
-      Pointer<Uint32> length,
-    );
+    Void Function(Uint32 pname, Uint32 index, Uint64 address, IntPtr length);
 
 // typedef void (APIENTRYP PFNGLVERTEXFORMATNVPROC) (GLint size, GLenum type, GLsizei stride)
 typedef PFNGLVERTEXFORMATNVPROCDart =
     void Function(int size, int type, int stride);
 typedef PFNGLVERTEXFORMATNVPROC =
-    Void Function(Int32 size, Uint32 type, Uint32 stride);
+    Void Function(Int32 size, Uint32 type, Int32 stride);
 
 // typedef void (APIENTRYP PFNGLNORMALFORMATNVPROC) (GLenum type, GLsizei stride)
 typedef PFNGLNORMALFORMATNVPROCDart = void Function(int type, int stride);
-typedef PFNGLNORMALFORMATNVPROC = Void Function(Uint32 type, Uint32 stride);
+typedef PFNGLNORMALFORMATNVPROC = Void Function(Uint32 type, Int32 stride);
 
 // typedef void (APIENTRYP PFNGLCOLORFORMATNVPROC) (GLint size, GLenum type, GLsizei stride)
 typedef PFNGLCOLORFORMATNVPROCDart =
     void Function(int size, int type, int stride);
 typedef PFNGLCOLORFORMATNVPROC =
-    Void Function(Int32 size, Uint32 type, Uint32 stride);
+    Void Function(Int32 size, Uint32 type, Int32 stride);
 
 // typedef void (APIENTRYP PFNGLINDEXFORMATNVPROC) (GLenum type, GLsizei stride)
 typedef PFNGLINDEXFORMATNVPROCDart = void Function(int type, int stride);
-typedef PFNGLINDEXFORMATNVPROC = Void Function(Uint32 type, Uint32 stride);
+typedef PFNGLINDEXFORMATNVPROC = Void Function(Uint32 type, Int32 stride);
 
 // typedef void (APIENTRYP PFNGLTEXCOORDFORMATNVPROC) (GLint size, GLenum type, GLsizei stride)
 typedef PFNGLTEXCOORDFORMATNVPROCDart =
     void Function(int size, int type, int stride);
 typedef PFNGLTEXCOORDFORMATNVPROC =
-    Void Function(Int32 size, Uint32 type, Uint32 stride);
+    Void Function(Int32 size, Uint32 type, Int32 stride);
 
 // typedef void (APIENTRYP PFNGLEDGEFLAGFORMATNVPROC) (GLsizei stride)
 typedef PFNGLEDGEFLAGFORMATNVPROCDart = void Function(int stride);
-typedef PFNGLEDGEFLAGFORMATNVPROC = Void Function(Uint32 stride);
+typedef PFNGLEDGEFLAGFORMATNVPROC = Void Function(Int32 stride);
 
 // typedef void (APIENTRYP PFNGLSECONDARYCOLORFORMATNVPROC) (GLint size, GLenum type, GLsizei stride)
 typedef PFNGLSECONDARYCOLORFORMATNVPROCDart =
     void Function(int size, int type, int stride);
 typedef PFNGLSECONDARYCOLORFORMATNVPROC =
-    Void Function(Int32 size, Uint32 type, Uint32 stride);
+    Void Function(Int32 size, Uint32 type, Int32 stride);
 
 // typedef void (APIENTRYP PFNGLFOGCOORDFORMATNVPROC) (GLenum type, GLsizei stride)
 typedef PFNGLFOGCOORDFORMATNVPROCDart = void Function(int type, int stride);
-typedef PFNGLFOGCOORDFORMATNVPROC = Void Function(Uint32 type, Uint32 stride);
+typedef PFNGLFOGCOORDFORMATNVPROC = Void Function(Uint32 type, Int32 stride);
 
 // typedef void (APIENTRYP PFNGLVERTEXATTRIBFORMATNVPROC) (GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride)
 typedef PFNGLVERTEXATTRIBFORMATNVPROCDart =
@@ -24863,15 +24326,15 @@ typedef PFNGLVERTEXATTRIBFORMATNVPROC =
       Uint32 index,
       Int32 size,
       Uint32 type,
-      Int32 normalized,
-      Uint32 stride,
+      Uint8 normalized,
+      Int32 stride,
     );
 
 // typedef void (APIENTRYP PFNGLVERTEXATTRIBIFORMATNVPROC) (GLuint index, GLint size, GLenum type, GLsizei stride)
 typedef PFNGLVERTEXATTRIBIFORMATNVPROCDart =
     void Function(int index, int size, int type, int stride);
 typedef PFNGLVERTEXATTRIBIFORMATNVPROC =
-    Void Function(Uint32 index, Int32 size, Uint32 type, Uint32 stride);
+    Void Function(Uint32 index, Int32 size, Uint32 type, Int32 stride);
 
 // typedef void (APIENTRYP PFNGLGETINTEGERUI64I_VNVPROC) (GLenum value, GLuint index, GLuint64EXT *result)
 typedef Pfnglgetintegerui64IVnvprocDart =
@@ -24881,12 +24344,12 @@ typedef Pfnglgetintegerui64IVnvproc =
 
 // typedef GLboolean (APIENTRYP PFNGLAREPROGRAMSRESIDENTNVPROC) (GLsizei n, const GLuint *programs, GLboolean *residences)
 typedef PFNGLAREPROGRAMSRESIDENTNVPROCDart =
-    int Function(int n, Pointer<Uint32> programs, Pointer<Int32> residences);
+    int Function(int n, Pointer<Uint32> programs, Pointer<Uint8> residences);
 typedef PFNGLAREPROGRAMSRESIDENTNVPROC =
-    Int32 Function(
-      Uint32 n,
+    Uint8 Function(
+      Int32 n,
       Pointer<Uint32> programs,
-      Pointer<Int32> residences,
+      Pointer<Uint8> residences,
     );
 
 // typedef void (APIENTRYP PFNGLBINDPROGRAMNVPROC) (GLenum target, GLuint id)
@@ -24897,7 +24360,7 @@ typedef PFNGLBINDPROGRAMNVPROC = Void Function(Uint32 target, Uint32 id);
 typedef PFNGLDELETEPROGRAMSNVPROCDart =
     void Function(int n, Pointer<Uint32> programs);
 typedef PFNGLDELETEPROGRAMSNVPROC =
-    Void Function(Uint32 n, Pointer<Uint32> programs);
+    Void Function(Int32 n, Pointer<Uint32> programs);
 
 // typedef void (APIENTRYP PFNGLEXECUTEPROGRAMNVPROC) (GLenum target, GLuint id, const GLfloat *params)
 typedef PFNGLEXECUTEPROGRAMNVPROCDart =
@@ -24909,7 +24372,7 @@ typedef PFNGLEXECUTEPROGRAMNVPROC =
 typedef PFNGLGENPROGRAMSNVPROCDart =
     void Function(int n, Pointer<Uint32> programs);
 typedef PFNGLGENPROGRAMSNVPROC =
-    Void Function(Uint32 n, Pointer<Uint32> programs);
+    Void Function(Int32 n, Pointer<Uint32> programs);
 
 // typedef void (APIENTRYP PFNGLGETPROGRAMPARAMETERDVNVPROC) (GLenum target, GLuint index, GLenum pname, GLdouble *params)
 typedef PFNGLGETPROGRAMPARAMETERDVNVPROCDart =
@@ -24976,23 +24439,19 @@ typedef PFNGLGETVERTEXATTRIBIVNVPROC =
 
 // typedef void (APIENTRYP PFNGLGETVERTEXATTRIBPOINTERVNVPROC) (GLuint index, GLenum pname, void **pointer)
 typedef PFNGLGETVERTEXATTRIBPOINTERVNVPROCDart =
-    void Function(int index, int pname, Pointer<Pointer<NativeType>> pointer);
+    void Function(int index, int pname, Pointer<Pointer<Void>> pointer);
 typedef PFNGLGETVERTEXATTRIBPOINTERVNVPROC =
-    Void Function(
-      Uint32 index,
-      Uint32 pname,
-      Pointer<Pointer<NativeType>> pointer,
-    );
+    Void Function(Uint32 index, Uint32 pname, Pointer<Pointer<Void>> pointer);
 
 // typedef GLboolean (APIENTRYP PFNGLISPROGRAMNVPROC) (GLuint id)
 typedef PFNGLISPROGRAMNVPROCDart = int Function(int id);
-typedef PFNGLISPROGRAMNVPROC = Int32 Function(Uint32 id);
+typedef PFNGLISPROGRAMNVPROC = Uint8 Function(Uint32 id);
 
 // typedef void (APIENTRYP PFNGLLOADPROGRAMNVPROC) (GLenum target, GLuint id, GLsizei len, const GLubyte *program)
 typedef PFNGLLOADPROGRAMNVPROCDart =
     void Function(int target, int id, int len, Pointer<Uint8> program);
 typedef PFNGLLOADPROGRAMNVPROC =
-    Void Function(Uint32 target, Uint32 id, Uint32 len, Pointer<Uint8> program);
+    Void Function(Uint32 target, Uint32 id, Int32 len, Pointer<Uint8> program);
 
 // typedef void (APIENTRYP PFNGLPROGRAMPARAMETER4DNVPROC) (GLenum target, GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w)
 typedef PFNGLPROGRAMPARAMETER4DNVPROCDart =
@@ -25050,19 +24509,19 @@ typedef PFNGLPROGRAMPARAMETER4FVNVPROC =
 typedef PFNGLPROGRAMPARAMETERS4DVNVPROCDart =
     void Function(int target, int index, int count, Pointer<Double> v);
 typedef PFNGLPROGRAMPARAMETERS4DVNVPROC =
-    Void Function(Uint32 target, Uint32 index, Uint32 count, Pointer<Double> v);
+    Void Function(Uint32 target, Uint32 index, Int32 count, Pointer<Double> v);
 
 // typedef void (APIENTRYP PFNGLPROGRAMPARAMETERS4FVNVPROC) (GLenum target, GLuint index, GLsizei count, const GLfloat *v)
 typedef PFNGLPROGRAMPARAMETERS4FVNVPROCDart =
     void Function(int target, int index, int count, Pointer<Float> v);
 typedef PFNGLPROGRAMPARAMETERS4FVNVPROC =
-    Void Function(Uint32 target, Uint32 index, Uint32 count, Pointer<Float> v);
+    Void Function(Uint32 target, Uint32 index, Int32 count, Pointer<Float> v);
 
 // typedef void (APIENTRYP PFNGLREQUESTRESIDENTPROGRAMSNVPROC) (GLsizei n, const GLuint *programs)
 typedef PFNGLREQUESTRESIDENTPROGRAMSNVPROCDart =
     void Function(int n, Pointer<Uint32> programs);
 typedef PFNGLREQUESTRESIDENTPROGRAMSNVPROC =
-    Void Function(Uint32 n, Pointer<Uint32> programs);
+    Void Function(Int32 n, Pointer<Uint32> programs);
 
 // typedef void (APIENTRYP PFNGLTRACKMATRIXNVPROC) (GLenum target, GLuint address, GLenum matrix, GLenum transform)
 typedef PFNGLTRACKMATRIXNVPROCDart =
@@ -25082,15 +24541,15 @@ typedef PFNGLVERTEXATTRIBPOINTERNVPROCDart =
       int fsize,
       int type,
       int stride,
-      Pointer<NativeType> pointer,
+      Pointer<Void> pointer,
     );
 typedef PFNGLVERTEXATTRIBPOINTERNVPROC =
     Void Function(
       Uint32 index,
       Int32 fsize,
       Uint32 type,
-      Uint32 stride,
-      Pointer<NativeType> pointer,
+      Int32 stride,
+      Pointer<Void> pointer,
     );
 
 // typedef void (APIENTRYP PFNGLVERTEXATTRIB1DNVPROC) (GLuint index, GLdouble x)
@@ -25246,79 +24705,79 @@ typedef PFNGLVERTEXATTRIB4UBVNVPROC =
 typedef PFNGLVERTEXATTRIBS1DVNVPROCDart =
     void Function(int index, int count, Pointer<Double> v);
 typedef PFNGLVERTEXATTRIBS1DVNVPROC =
-    Void Function(Uint32 index, Uint32 count, Pointer<Double> v);
+    Void Function(Uint32 index, Int32 count, Pointer<Double> v);
 
 // typedef void (APIENTRYP PFNGLVERTEXATTRIBS1FVNVPROC) (GLuint index, GLsizei count, const GLfloat *v)
 typedef PFNGLVERTEXATTRIBS1FVNVPROCDart =
     void Function(int index, int count, Pointer<Float> v);
 typedef PFNGLVERTEXATTRIBS1FVNVPROC =
-    Void Function(Uint32 index, Uint32 count, Pointer<Float> v);
+    Void Function(Uint32 index, Int32 count, Pointer<Float> v);
 
 // typedef void (APIENTRYP PFNGLVERTEXATTRIBS1SVNVPROC) (GLuint index, GLsizei count, const GLshort *v)
 typedef PFNGLVERTEXATTRIBS1SVNVPROCDart =
     void Function(int index, int count, Pointer<Int16> v);
 typedef PFNGLVERTEXATTRIBS1SVNVPROC =
-    Void Function(Uint32 index, Uint32 count, Pointer<Int16> v);
+    Void Function(Uint32 index, Int32 count, Pointer<Int16> v);
 
 // typedef void (APIENTRYP PFNGLVERTEXATTRIBS2DVNVPROC) (GLuint index, GLsizei count, const GLdouble *v)
 typedef PFNGLVERTEXATTRIBS2DVNVPROCDart =
     void Function(int index, int count, Pointer<Double> v);
 typedef PFNGLVERTEXATTRIBS2DVNVPROC =
-    Void Function(Uint32 index, Uint32 count, Pointer<Double> v);
+    Void Function(Uint32 index, Int32 count, Pointer<Double> v);
 
 // typedef void (APIENTRYP PFNGLVERTEXATTRIBS2FVNVPROC) (GLuint index, GLsizei count, const GLfloat *v)
 typedef PFNGLVERTEXATTRIBS2FVNVPROCDart =
     void Function(int index, int count, Pointer<Float> v);
 typedef PFNGLVERTEXATTRIBS2FVNVPROC =
-    Void Function(Uint32 index, Uint32 count, Pointer<Float> v);
+    Void Function(Uint32 index, Int32 count, Pointer<Float> v);
 
 // typedef void (APIENTRYP PFNGLVERTEXATTRIBS2SVNVPROC) (GLuint index, GLsizei count, const GLshort *v)
 typedef PFNGLVERTEXATTRIBS2SVNVPROCDart =
     void Function(int index, int count, Pointer<Int16> v);
 typedef PFNGLVERTEXATTRIBS2SVNVPROC =
-    Void Function(Uint32 index, Uint32 count, Pointer<Int16> v);
+    Void Function(Uint32 index, Int32 count, Pointer<Int16> v);
 
 // typedef void (APIENTRYP PFNGLVERTEXATTRIBS3DVNVPROC) (GLuint index, GLsizei count, const GLdouble *v)
 typedef PFNGLVERTEXATTRIBS3DVNVPROCDart =
     void Function(int index, int count, Pointer<Double> v);
 typedef PFNGLVERTEXATTRIBS3DVNVPROC =
-    Void Function(Uint32 index, Uint32 count, Pointer<Double> v);
+    Void Function(Uint32 index, Int32 count, Pointer<Double> v);
 
 // typedef void (APIENTRYP PFNGLVERTEXATTRIBS3FVNVPROC) (GLuint index, GLsizei count, const GLfloat *v)
 typedef PFNGLVERTEXATTRIBS3FVNVPROCDart =
     void Function(int index, int count, Pointer<Float> v);
 typedef PFNGLVERTEXATTRIBS3FVNVPROC =
-    Void Function(Uint32 index, Uint32 count, Pointer<Float> v);
+    Void Function(Uint32 index, Int32 count, Pointer<Float> v);
 
 // typedef void (APIENTRYP PFNGLVERTEXATTRIBS3SVNVPROC) (GLuint index, GLsizei count, const GLshort *v)
 typedef PFNGLVERTEXATTRIBS3SVNVPROCDart =
     void Function(int index, int count, Pointer<Int16> v);
 typedef PFNGLVERTEXATTRIBS3SVNVPROC =
-    Void Function(Uint32 index, Uint32 count, Pointer<Int16> v);
+    Void Function(Uint32 index, Int32 count, Pointer<Int16> v);
 
 // typedef void (APIENTRYP PFNGLVERTEXATTRIBS4DVNVPROC) (GLuint index, GLsizei count, const GLdouble *v)
 typedef PFNGLVERTEXATTRIBS4DVNVPROCDart =
     void Function(int index, int count, Pointer<Double> v);
 typedef PFNGLVERTEXATTRIBS4DVNVPROC =
-    Void Function(Uint32 index, Uint32 count, Pointer<Double> v);
+    Void Function(Uint32 index, Int32 count, Pointer<Double> v);
 
 // typedef void (APIENTRYP PFNGLVERTEXATTRIBS4FVNVPROC) (GLuint index, GLsizei count, const GLfloat *v)
 typedef PFNGLVERTEXATTRIBS4FVNVPROCDart =
     void Function(int index, int count, Pointer<Float> v);
 typedef PFNGLVERTEXATTRIBS4FVNVPROC =
-    Void Function(Uint32 index, Uint32 count, Pointer<Float> v);
+    Void Function(Uint32 index, Int32 count, Pointer<Float> v);
 
 // typedef void (APIENTRYP PFNGLVERTEXATTRIBS4SVNVPROC) (GLuint index, GLsizei count, const GLshort *v)
 typedef PFNGLVERTEXATTRIBS4SVNVPROCDart =
     void Function(int index, int count, Pointer<Int16> v);
 typedef PFNGLVERTEXATTRIBS4SVNVPROC =
-    Void Function(Uint32 index, Uint32 count, Pointer<Int16> v);
+    Void Function(Uint32 index, Int32 count, Pointer<Int16> v);
 
 // typedef void (APIENTRYP PFNGLVERTEXATTRIBS4UBVNVPROC) (GLuint index, GLsizei count, const GLubyte *v)
 typedef PFNGLVERTEXATTRIBS4UBVNVPROCDart =
     void Function(int index, int count, Pointer<Uint8> v);
 typedef PFNGLVERTEXATTRIBS4UBVNVPROC =
-    Void Function(Uint32 index, Uint32 count, Pointer<Uint8> v);
+    Void Function(Uint32 index, Int32 count, Pointer<Uint8> v);
 
 // typedef void (APIENTRYP PFNGLBEGINVIDEOCAPTURENVPROC) (GLuint video_capture_slot)
 typedef PFNGLBEGINVIDEOCAPTURENVPROCDart = void Function(int videoCaptureSlot);
@@ -25337,7 +24796,7 @@ typedef PFNGLBINDVIDEOCAPTURESTREAMBUFFERNVPROC =
       Uint32 videoCaptureSlot,
       Uint32 stream,
       Uint32 frameRegion,
-      Uint64 offset,
+      IntPtr offset,
     );
 
 // typedef void (APIENTRYP PFNGLBINDVIDEOCAPTURESTREAMTEXTURENVPROC) (GLuint video_capture_slot, GLuint stream, GLenum frame_region, GLenum target, GLuint texture)
@@ -25513,7 +24972,7 @@ typedef PFNGLFRAMEBUFFERTEXTUREMULTIVIEWOVRPROC =
       Uint32 texture,
       Int32 level,
       Int32 baseViewIndex,
-      Uint32 numViews,
+      Int32 numViews,
     );
 
 // typedef void (APIENTRYP PFNGLNAMEDFRAMEBUFFERTEXTUREMULTIVIEWOVRPROC) (GLuint framebuffer, GLenum attachment, GLuint texture, GLint level, GLint baseViewIndex, GLsizei numViews)
@@ -25533,7 +24992,7 @@ typedef PFNGLNAMEDFRAMEBUFFERTEXTUREMULTIVIEWOVRPROC =
       Uint32 texture,
       Int32 level,
       Int32 baseViewIndex,
-      Uint32 numViews,
+      Int32 numViews,
     );
 
 // typedef void (APIENTRYP PFNGLHINTPGIPROC) (GLenum target, GLint mode)
@@ -25544,7 +25003,7 @@ typedef PFNGLHINTPGIPROC = Void Function(Uint32 target, Int32 mode);
 typedef PFNGLDETAILTEXFUNCSGISPROCDart =
     void Function(int target, int n, Pointer<Float> points);
 typedef PFNGLDETAILTEXFUNCSGISPROC =
-    Void Function(Uint32 target, Uint32 n, Pointer<Float> points);
+    Void Function(Uint32 target, Int32 n, Pointer<Float> points);
 
 // typedef void (APIENTRYP PFNGLGETDETAILTEXFUNCSGISPROC) (GLenum target, GLfloat *points)
 typedef PFNGLGETDETAILTEXFUNCSGISPROCDart =
@@ -25554,7 +25013,7 @@ typedef PFNGLGETDETAILTEXFUNCSGISPROC =
 
 // typedef void (APIENTRYP PFNGLFOGFUNCSGISPROC) (GLsizei n, const GLfloat *points)
 typedef PFNGLFOGFUNCSGISPROCDart = void Function(int n, Pointer<Float> points);
-typedef PFNGLFOGFUNCSGISPROC = Void Function(Uint32 n, Pointer<Float> points);
+typedef PFNGLFOGFUNCSGISPROC = Void Function(Int32 n, Pointer<Float> points);
 
 // typedef void (APIENTRYP PFNGLGETFOGFUNCSGISPROC) (GLfloat *points)
 typedef PFNGLGETFOGFUNCSGISPROCDart = void Function(Pointer<Float> points);
@@ -25562,7 +25021,7 @@ typedef PFNGLGETFOGFUNCSGISPROC = Void Function(Pointer<Float> points);
 
 // typedef void (APIENTRYP PFNGLSAMPLEMASKSGISPROC) (GLclampf value, GLboolean invert)
 typedef PFNGLSAMPLEMASKSGISPROCDart = void Function(double value, int invert);
-typedef PFNGLSAMPLEMASKSGISPROC = Void Function(Float value, Int32 invert);
+typedef PFNGLSAMPLEMASKSGISPROC = Void Function(Float value, Uint8 invert);
 
 // typedef void (APIENTRYP PFNGLSAMPLEPATTERNSGISPROC) (GLenum pattern)
 typedef PFNGLSAMPLEPATTERNSGISPROCDart = void Function(int pattern);
@@ -25619,7 +25078,7 @@ typedef PFNGLPOINTPARAMETERFVSGISPROC =
 typedef PFNGLSHARPENTEXFUNCSGISPROCDart =
     void Function(int target, int n, Pointer<Float> points);
 typedef PFNGLSHARPENTEXFUNCSGISPROC =
-    Void Function(Uint32 target, Uint32 n, Pointer<Float> points);
+    Void Function(Uint32 target, Int32 n, Pointer<Float> points);
 
 // typedef void (APIENTRYP PFNGLGETSHARPENTEXFUNCSGISPROC) (GLenum target, GLfloat *points)
 typedef PFNGLGETSHARPENTEXFUNCSGISPROCDart =
@@ -25640,21 +25099,21 @@ typedef PFNGLTEXIMAGE4DSGISPROCDart =
       int border,
       int format,
       int type,
-      Pointer<NativeType> pixels,
+      Pointer<Void> pixels,
     );
 typedef PFNGLTEXIMAGE4DSGISPROC =
     Void Function(
       Uint32 target,
       Int32 level,
       Uint32 internalformat,
-      Uint32 width,
-      Uint32 height,
-      Uint32 depth,
-      Uint32 size4d,
+      Int32 width,
+      Int32 height,
+      Int32 depth,
+      Int32 size4d,
       Int32 border,
       Uint32 format,
       Uint32 type,
-      Pointer<NativeType> pixels,
+      Pointer<Void> pixels,
     );
 
 // typedef void (APIENTRYP PFNGLTEXSUBIMAGE4DSGISPROC) (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLint woffset, GLsizei width, GLsizei height, GLsizei depth, GLsizei size4d, GLenum format, GLenum type, const void *pixels)
@@ -25672,7 +25131,7 @@ typedef PFNGLTEXSUBIMAGE4DSGISPROCDart =
       int size4d,
       int format,
       int type,
-      Pointer<NativeType> pixels,
+      Pointer<Void> pixels,
     );
 typedef PFNGLTEXSUBIMAGE4DSGISPROC =
     Void Function(
@@ -25682,20 +25141,20 @@ typedef PFNGLTEXSUBIMAGE4DSGISPROC =
       Int32 yoffset,
       Int32 zoffset,
       Int32 woffset,
-      Uint32 width,
-      Uint32 height,
-      Uint32 depth,
-      Uint32 size4d,
+      Int32 width,
+      Int32 height,
+      Int32 depth,
+      Int32 size4d,
       Uint32 format,
       Uint32 type,
-      Pointer<NativeType> pixels,
+      Pointer<Void> pixels,
     );
 
 // typedef void (APIENTRYP PFNGLTEXTURECOLORMASKSGISPROC) (GLboolean red, GLboolean green, GLboolean blue, GLboolean alpha)
 typedef PFNGLTEXTURECOLORMASKSGISPROCDart =
     void Function(int red, int green, int blue, int alpha);
 typedef PFNGLTEXTURECOLORMASKSGISPROC =
-    Void Function(Int32 red, Int32 green, Int32 blue, Int32 alpha);
+    Void Function(Uint8 red, Uint8 green, Uint8 blue, Uint8 alpha);
 
 // typedef void (APIENTRYP PFNGLGETTEXFILTERFUNCSGISPROC) (GLenum target, GLenum filter, GLfloat *weights)
 typedef PFNGLGETTEXFILTERFUNCSGISPROCDart =
@@ -25710,7 +25169,7 @@ typedef PFNGLTEXFILTERFUNCSGISPROC =
     Void Function(
       Uint32 target,
       Uint32 filter,
-      Uint32 n,
+      Int32 n,
       Pointer<Float> weights,
     );
 
@@ -25728,17 +25187,17 @@ typedef PFNGLPOLLASYNCSGIXPROC = Int32 Function(Pointer<Uint32> markerp);
 
 // typedef GLuint (APIENTRYP PFNGLGENASYNCMARKERSSGIXPROC) (GLsizei range)
 typedef PFNGLGENASYNCMARKERSSGIXPROCDart = int Function(int range);
-typedef PFNGLGENASYNCMARKERSSGIXPROC = Uint32 Function(Uint32 range);
+typedef PFNGLGENASYNCMARKERSSGIXPROC = Uint32 Function(Int32 range);
 
 // typedef void (APIENTRYP PFNGLDELETEASYNCMARKERSSGIXPROC) (GLuint marker, GLsizei range)
 typedef PFNGLDELETEASYNCMARKERSSGIXPROCDart =
     void Function(int marker, int range);
 typedef PFNGLDELETEASYNCMARKERSSGIXPROC =
-    Void Function(Uint32 marker, Uint32 range);
+    Void Function(Uint32 marker, Int32 range);
 
 // typedef GLboolean (APIENTRYP PFNGLISASYNCMARKERSGIXPROC) (GLuint marker)
 typedef PFNGLISASYNCMARKERSGIXPROCDart = int Function(int marker);
-typedef PFNGLISASYNCMARKERSGIXPROC = Int32 Function(Uint32 marker);
+typedef PFNGLISASYNCMARKERSGIXPROC = Uint8 Function(Uint32 marker);
 
 // typedef void (APIENTRYP PFNGLFLUSHRASTERSGIXPROC) (void)
 typedef PFNGLFLUSHRASTERSGIXPROCDart = void Function();
@@ -25856,9 +25315,9 @@ typedef PFNGLFRAMEZOOMSGIXPROC = Void Function(Int32 factor);
 
 // typedef void (APIENTRYP PFNGLIGLOOINTERFACESGIXPROC) (GLenum pname, const void *params)
 typedef PFNGLIGLOOINTERFACESGIXPROCDart =
-    void Function(int pname, Pointer<NativeType> params);
+    void Function(int pname, Pointer<Void> params);
 typedef PFNGLIGLOOINTERFACESGIXPROC =
-    Void Function(Uint32 pname, Pointer<NativeType> params);
+    Void Function(Uint32 pname, Pointer<Void> params);
 
 // typedef GLint (APIENTRYP PFNGLGETINSTRUMENTSSGIXPROC) (void)
 typedef PFNGLGETINSTRUMENTSSGIXPROCDart = int Function();
@@ -25868,7 +25327,7 @@ typedef PFNGLGETINSTRUMENTSSGIXPROC = Int32 Function();
 typedef PFNGLINSTRUMENTSBUFFERSGIXPROCDart =
     void Function(int size, Pointer<Int32> buffer);
 typedef PFNGLINSTRUMENTSBUFFERSGIXPROC =
-    Void Function(Uint32 size, Pointer<Int32> buffer);
+    Void Function(Int32 size, Pointer<Int32> buffer);
 
 // typedef GLint (APIENTRYP PFNGLPOLLINSTRUMENTSSGIXPROC) (GLint *marker_p)
 typedef PFNGLPOLLINSTRUMENTSSGIXPROCDart = int Function(Pointer<Int32> markerP);
@@ -26046,16 +25505,16 @@ typedef PFNGLCOLORTABLESGIPROCDart =
       int width,
       int format,
       int type,
-      Pointer<NativeType> table,
+      Pointer<Void> table,
     );
 typedef PFNGLCOLORTABLESGIPROC =
     Void Function(
       Uint32 target,
       Uint32 internalformat,
-      Uint32 width,
+      Int32 width,
       Uint32 format,
       Uint32 type,
-      Pointer<NativeType> table,
+      Pointer<Void> table,
     );
 
 // typedef void (APIENTRYP PFNGLCOLORTABLEPARAMETERFVSGIPROC) (GLenum target, GLenum pname, const GLfloat *params)
@@ -26079,18 +25538,18 @@ typedef PFNGLCOPYCOLORTABLESGIPROC =
       Uint32 internalformat,
       Int32 x,
       Int32 y,
-      Uint32 width,
+      Int32 width,
     );
 
 // typedef void (APIENTRYP PFNGLGETCOLORTABLESGIPROC) (GLenum target, GLenum format, GLenum type, void *table)
 typedef PFNGLGETCOLORTABLESGIPROCDart =
-    void Function(int target, int format, int type, Pointer<NativeType> table);
+    void Function(int target, int format, int type, Pointer<Void> table);
 typedef PFNGLGETCOLORTABLESGIPROC =
     Void Function(
       Uint32 target,
       Uint32 format,
       Uint32 type,
-      Pointer<NativeType> table,
+      Pointer<Void> table,
     );
 
 // typedef void (APIENTRYP PFNGLGETCOLORTABLEPARAMETERFVSGIPROC) (GLenum target, GLenum pname, GLfloat *params)
@@ -26145,7 +25604,7 @@ typedef PFNGLGLOBALALPHAFACTORUISUNPROC = Void Function(Uint32 factor);
 typedef PFNGLDRAWMESHARRAYSSUNPROCDart =
     void Function(int mode, int first, int count, int width);
 typedef PFNGLDRAWMESHARRAYSSUNPROC =
-    Void Function(Uint32 mode, Int32 first, Uint32 count, Uint32 width);
+    Void Function(Uint32 mode, Int32 first, Int32 count, Int32 width);
 
 // typedef void (APIENTRYP PFNGLREPLACEMENTCODEUISUNPROC) (GLuint code)
 typedef PFNGLREPLACEMENTCODEUISUNPROCDart = void Function(int code);
@@ -26175,13 +25634,9 @@ typedef PFNGLREPLACEMENTCODEUBVSUNPROC = Void Function(Pointer<Uint8> code);
 
 // typedef void (APIENTRYP PFNGLREPLACEMENTCODEPOINTERSUNPROC) (GLenum type, GLsizei stride, const void **pointer)
 typedef PFNGLREPLACEMENTCODEPOINTERSUNPROCDart =
-    void Function(int type, int stride, Pointer<Pointer<NativeType>> pointer);
+    void Function(int type, int stride, Pointer<Pointer<Void>> pointer);
 typedef PFNGLREPLACEMENTCODEPOINTERSUNPROC =
-    Void Function(
-      Uint32 type,
-      Uint32 stride,
-      Pointer<Pointer<NativeType>> pointer,
-    );
+    Void Function(Uint32 type, Int32 stride, Pointer<Pointer<Void>> pointer);
 
 // typedef void (APIENTRYP PFNGLCOLOR4UBVERTEX2FSUNPROC) (GLubyte r, GLubyte g, GLubyte b, GLubyte a, GLfloat x, GLfloat y)
 typedef PFNGLCOLOR4UBVERTEX2FSUNPROCDart =
@@ -26839,7 +26294,7 @@ void glColorMask(int red, int green, int blue, int alpha) {
   final glColorMaskAsFunction = _glColorMask
       .cast<
         NativeFunction<
-          Void Function(Int32 red, Int32 green, Int32 blue, Int32 alpha)
+          Void Function(Uint8 red, Uint8 green, Uint8 blue, Uint8 alpha)
         >
       >()
       .asFunction<void Function(int red, int green, int blue, int alpha)>();
@@ -27023,7 +26478,7 @@ late Pointer<NativeFunction<Void Function()>> _glEdgeFlag;
 /// {@category opengl}
 void glEdgeFlag(int flag) {
   final glEdgeFlagAsFunction = _glEdgeFlag
-      .cast<NativeFunction<Void Function(Int32 flag)>>()
+      .cast<NativeFunction<Void Function(Uint8 flag)>>()
       .asFunction<void Function(int flag)>();
   return glEdgeFlagAsFunction(flag);
 }
@@ -27035,10 +26490,10 @@ late Pointer<NativeFunction<Void Function()>> _glEdgeFlagv;
 /// GLAPI void GLAPIENTRY glEdgeFlagv( const GLboolean *flag )
 /// ```
 /// {@category opengl}
-void glEdgeFlagv(Pointer<Int32> flag) {
+void glEdgeFlagv(Pointer<Uint8> flag) {
   final glEdgeFlagvAsFunction = _glEdgeFlagv
-      .cast<NativeFunction<Void Function(Pointer<Int32> flag)>>()
-      .asFunction<void Function(Pointer<Int32> flag)>();
+      .cast<NativeFunction<Void Function(Pointer<Uint8> flag)>>()
+      .asFunction<void Function(Pointer<Uint8> flag)>();
   return glEdgeFlagvAsFunction(flag);
 }
 
@@ -27053,7 +26508,7 @@ void glScissor(int x, int y, int width, int height) {
   final glScissorAsFunction = _glScissor
       .cast<
         NativeFunction<
-          Void Function(Int32 x, Int32 y, Uint32 width, Uint32 height)
+          Void Function(Int32 x, Int32 y, Int32 width, Int32 height)
         >
       >()
       .asFunction<void Function(int x, int y, int width, int height)>();
@@ -27157,7 +26612,7 @@ late Pointer<NativeFunction<Void Function()>> _glIsEnabled;
 /// {@category opengl}
 int glIsEnabled(int cap) {
   final glIsEnabledAsFunction = _glIsEnabled
-      .cast<NativeFunction<Int32 Function(Uint32 cap)>>()
+      .cast<NativeFunction<Uint8 Function(Uint32 cap)>>()
       .asFunction<int Function(int cap)>();
   return glIsEnabledAsFunction(cap);
 }
@@ -27197,12 +26652,12 @@ late Pointer<NativeFunction<Void Function()>> _glGetBooleanv;
 /// GLAPI void GLAPIENTRY glGetBooleanv( GLenum pname, GLboolean *params )
 /// ```
 /// {@category opengl}
-void glGetBooleanv(int pname, Pointer<Int32> params) {
+void glGetBooleanv(int pname, Pointer<Uint8> params) {
   final glGetBooleanvAsFunction = _glGetBooleanv
       .cast<
-        NativeFunction<Void Function(Uint32 pname, Pointer<Int32> params)>
+        NativeFunction<Void Function(Uint32 pname, Pointer<Uint8> params)>
       >()
-      .asFunction<void Function(int pname, Pointer<Int32> params)>();
+      .asFunction<void Function(int pname, Pointer<Uint8> params)>();
   return glGetBooleanvAsFunction(pname, params);
 }
 
@@ -27431,7 +26886,7 @@ late Pointer<NativeFunction<Void Function()>> _glDepthMask;
 /// {@category opengl}
 void glDepthMask(int flag) {
   final glDepthMaskAsFunction = _glDepthMask
-      .cast<NativeFunction<Void Function(Int32 flag)>>()
+      .cast<NativeFunction<Void Function(Uint8 flag)>>()
       .asFunction<void Function(int flag)>();
   return glDepthMaskAsFunction(flag);
 }
@@ -27591,7 +27046,7 @@ void glViewport(int x, int y, int width, int height) {
   final glViewportAsFunction = _glViewport
       .cast<
         NativeFunction<
-          Void Function(Int32 x, Int32 y, Uint32 width, Uint32 height)
+          Void Function(Int32 x, Int32 y, Int32 width, Int32 height)
         >
       >()
       .asFunction<void Function(int x, int y, int width, int height)>();
@@ -27795,7 +27250,7 @@ late Pointer<NativeFunction<Void Function()>> _glIsList;
 /// {@category opengl}
 int glIsList(int list) {
   final glIsListAsFunction = _glIsList
-      .cast<NativeFunction<Int32 Function(Uint32 list)>>()
+      .cast<NativeFunction<Uint8 Function(Uint32 list)>>()
       .asFunction<int Function(int list)>();
   return glIsListAsFunction(list);
 }
@@ -27809,7 +27264,7 @@ late Pointer<NativeFunction<Void Function()>> _glDeleteLists;
 /// {@category opengl}
 void glDeleteLists(int list, int range) {
   final glDeleteListsAsFunction = _glDeleteLists
-      .cast<NativeFunction<Void Function(Uint32 list, Uint32 range)>>()
+      .cast<NativeFunction<Void Function(Uint32 list, Int32 range)>>()
       .asFunction<void Function(int list, int range)>();
   return glDeleteListsAsFunction(list, range);
 }
@@ -27823,7 +27278,7 @@ late Pointer<NativeFunction<Void Function()>> _glGenLists;
 /// {@category opengl}
 int glGenLists(int range) {
   final glGenListsAsFunction = _glGenLists
-      .cast<NativeFunction<Uint32 Function(Uint32 range)>>()
+      .cast<NativeFunction<Uint32 Function(Int32 range)>>()
       .asFunction<int Function(int range)>();
   return glGenListsAsFunction(range);
 }
@@ -27877,14 +27332,12 @@ late Pointer<NativeFunction<Void Function()>> _glCallLists;
 /// GLAPI void GLAPIENTRY glCallLists( GLsizei n, GLenum type, const GLvoid *lists )
 /// ```
 /// {@category opengl}
-void glCallLists(int n, int type, Pointer<NativeType> lists) {
+void glCallLists(int n, int type, Pointer<Void> lists) {
   final glCallListsAsFunction = _glCallLists
       .cast<
-        NativeFunction<
-          Void Function(Uint32 n, Uint32 type, Pointer<NativeType> lists)
-        >
+        NativeFunction<Void Function(Int32 n, Uint32 type, Pointer<Void> lists)>
       >()
-      .asFunction<void Function(int n, int type, Pointer<NativeType> lists)>();
+      .asFunction<void Function(int n, int type, Pointer<Void> lists)>();
   return glCallListsAsFunction(n, type, lists);
 }
 
@@ -29972,20 +29425,20 @@ late Pointer<NativeFunction<Void Function()>> _glVertexPointer;
 /// GLAPI void GLAPIENTRY glVertexPointer( GLint size, GLenum type, GLsizei stride, const GLvoid *ptr )
 /// ```
 /// {@category opengl}
-void glVertexPointer(int size, int type, int stride, Pointer<NativeType> ptr) {
+void glVertexPointer(int size, int type, int stride, Pointer<Void> ptr) {
   final glVertexPointerAsFunction = _glVertexPointer
       .cast<
         NativeFunction<
           Void Function(
             Int32 size,
             Uint32 type,
-            Uint32 stride,
-            Pointer<NativeType> ptr,
+            Int32 stride,
+            Pointer<Void> ptr,
           )
         >
       >()
       .asFunction<
-        void Function(int size, int type, int stride, Pointer<NativeType> ptr)
+        void Function(int size, int type, int stride, Pointer<Void> ptr)
       >();
   return glVertexPointerAsFunction(size, type, stride, ptr);
 }
@@ -29997,16 +29450,14 @@ late Pointer<NativeFunction<Void Function()>> _glNormalPointer;
 /// GLAPI void GLAPIENTRY glNormalPointer( GLenum type, GLsizei stride, const GLvoid *ptr )
 /// ```
 /// {@category opengl}
-void glNormalPointer(int type, int stride, Pointer<NativeType> ptr) {
+void glNormalPointer(int type, int stride, Pointer<Void> ptr) {
   final glNormalPointerAsFunction = _glNormalPointer
       .cast<
         NativeFunction<
-          Void Function(Uint32 type, Uint32 stride, Pointer<NativeType> ptr)
+          Void Function(Uint32 type, Int32 stride, Pointer<Void> ptr)
         >
       >()
-      .asFunction<
-        void Function(int type, int stride, Pointer<NativeType> ptr)
-      >();
+      .asFunction<void Function(int type, int stride, Pointer<Void> ptr)>();
   return glNormalPointerAsFunction(type, stride, ptr);
 }
 
@@ -30017,20 +29468,20 @@ late Pointer<NativeFunction<Void Function()>> _glColorPointer;
 /// GLAPI void GLAPIENTRY glColorPointer( GLint size, GLenum type, GLsizei stride, const GLvoid *ptr )
 /// ```
 /// {@category opengl}
-void glColorPointer(int size, int type, int stride, Pointer<NativeType> ptr) {
+void glColorPointer(int size, int type, int stride, Pointer<Void> ptr) {
   final glColorPointerAsFunction = _glColorPointer
       .cast<
         NativeFunction<
           Void Function(
             Int32 size,
             Uint32 type,
-            Uint32 stride,
-            Pointer<NativeType> ptr,
+            Int32 stride,
+            Pointer<Void> ptr,
           )
         >
       >()
       .asFunction<
-        void Function(int size, int type, int stride, Pointer<NativeType> ptr)
+        void Function(int size, int type, int stride, Pointer<Void> ptr)
       >();
   return glColorPointerAsFunction(size, type, stride, ptr);
 }
@@ -30042,16 +29493,14 @@ late Pointer<NativeFunction<Void Function()>> _glIndexPointer;
 /// GLAPI void GLAPIENTRY glIndexPointer( GLenum type, GLsizei stride, const GLvoid *ptr )
 /// ```
 /// {@category opengl}
-void glIndexPointer(int type, int stride, Pointer<NativeType> ptr) {
+void glIndexPointer(int type, int stride, Pointer<Void> ptr) {
   final glIndexPointerAsFunction = _glIndexPointer
       .cast<
         NativeFunction<
-          Void Function(Uint32 type, Uint32 stride, Pointer<NativeType> ptr)
+          Void Function(Uint32 type, Int32 stride, Pointer<Void> ptr)
         >
       >()
-      .asFunction<
-        void Function(int type, int stride, Pointer<NativeType> ptr)
-      >();
+      .asFunction<void Function(int type, int stride, Pointer<Void> ptr)>();
   return glIndexPointerAsFunction(type, stride, ptr);
 }
 
@@ -30062,25 +29511,20 @@ late Pointer<NativeFunction<Void Function()>> _glTexCoordPointer;
 /// GLAPI void GLAPIENTRY glTexCoordPointer( GLint size, GLenum type, GLsizei stride, const GLvoid *ptr )
 /// ```
 /// {@category opengl}
-void glTexCoordPointer(
-  int size,
-  int type,
-  int stride,
-  Pointer<NativeType> ptr,
-) {
+void glTexCoordPointer(int size, int type, int stride, Pointer<Void> ptr) {
   final glTexCoordPointerAsFunction = _glTexCoordPointer
       .cast<
         NativeFunction<
           Void Function(
             Int32 size,
             Uint32 type,
-            Uint32 stride,
-            Pointer<NativeType> ptr,
+            Int32 stride,
+            Pointer<Void> ptr,
           )
         >
       >()
       .asFunction<
-        void Function(int size, int type, int stride, Pointer<NativeType> ptr)
+        void Function(int size, int type, int stride, Pointer<Void> ptr)
       >();
   return glTexCoordPointerAsFunction(size, type, stride, ptr);
 }
@@ -30092,12 +29536,10 @@ late Pointer<NativeFunction<Void Function()>> _glEdgeFlagPointer;
 /// GLAPI void GLAPIENTRY glEdgeFlagPointer( GLsizei stride, const GLvoid *ptr )
 /// ```
 /// {@category opengl}
-void glEdgeFlagPointer(int stride, Pointer<NativeType> ptr) {
+void glEdgeFlagPointer(int stride, Pointer<Void> ptr) {
   final glEdgeFlagPointerAsFunction = _glEdgeFlagPointer
-      .cast<
-        NativeFunction<Void Function(Uint32 stride, Pointer<NativeType> ptr)>
-      >()
-      .asFunction<void Function(int stride, Pointer<NativeType> ptr)>();
+      .cast<NativeFunction<Void Function(Int32 stride, Pointer<Void> ptr)>>()
+      .asFunction<void Function(int stride, Pointer<Void> ptr)>();
   return glEdgeFlagPointerAsFunction(stride, ptr);
 }
 
@@ -30108,16 +29550,14 @@ late Pointer<NativeFunction<Void Function()>> _glGetPointerv;
 /// GLAPI void GLAPIENTRY glGetPointerv( GLenum pname, GLvoid **params )
 /// ```
 /// {@category opengl}
-void glGetPointerv(int pname, Pointer<Pointer<NativeType>> params) {
+void glGetPointerv(int pname, Pointer<Pointer<Void>> params) {
   final glGetPointervAsFunction = _glGetPointerv
       .cast<
         NativeFunction<
-          Void Function(Uint32 pname, Pointer<Pointer<NativeType>> params)
+          Void Function(Uint32 pname, Pointer<Pointer<Void>> params)
         >
       >()
-      .asFunction<
-        void Function(int pname, Pointer<Pointer<NativeType>> params)
-      >();
+      .asFunction<void Function(int pname, Pointer<Pointer<Void>> params)>();
   return glGetPointervAsFunction(pname, params);
 }
 
@@ -30145,7 +29585,7 @@ late Pointer<NativeFunction<Void Function()>> _glDrawArrays;
 void glDrawArrays(int mode, int first, int count) {
   final glDrawArraysAsFunction = _glDrawArrays
       .cast<
-        NativeFunction<Void Function(Uint32 mode, Int32 first, Uint32 count)>
+        NativeFunction<Void Function(Uint32 mode, Int32 first, Int32 count)>
       >()
       .asFunction<void Function(int mode, int first, int count)>();
   return glDrawArraysAsFunction(mode, first, count);
@@ -30158,30 +29598,20 @@ late Pointer<NativeFunction<Void Function()>> _glDrawElements;
 /// GLAPI void GLAPIENTRY glDrawElements( GLenum mode, GLsizei count, GLenum type, const GLvoid *indices )
 /// ```
 /// {@category opengl}
-void glDrawElements(
-  int mode,
-  int count,
-  int type,
-  Pointer<NativeType> indices,
-) {
+void glDrawElements(int mode, int count, int type, Pointer<Void> indices) {
   final glDrawElementsAsFunction = _glDrawElements
       .cast<
         NativeFunction<
           Void Function(
             Uint32 mode,
-            Uint32 count,
+            Int32 count,
             Uint32 type,
-            Pointer<NativeType> indices,
+            Pointer<Void> indices,
           )
         >
       >()
       .asFunction<
-        void Function(
-          int mode,
-          int count,
-          int type,
-          Pointer<NativeType> indices,
-        )
+        void Function(int mode, int count, int type, Pointer<Void> indices)
       >();
   return glDrawElementsAsFunction(mode, count, type, indices);
 }
@@ -30193,19 +29623,15 @@ late Pointer<NativeFunction<Void Function()>> _glInterleavedArrays;
 /// GLAPI void GLAPIENTRY glInterleavedArrays( GLenum format, GLsizei stride, const GLvoid *pointer )
 /// ```
 /// {@category opengl}
-void glInterleavedArrays(int format, int stride, Pointer<NativeType> pointer) {
+void glInterleavedArrays(int format, int stride, Pointer<Void> pointer) {
   final glInterleavedArraysAsFunction = _glInterleavedArrays
       .cast<
         NativeFunction<
-          Void Function(
-            Uint32 format,
-            Uint32 stride,
-            Pointer<NativeType> pointer,
-          )
+          Void Function(Uint32 format, Int32 stride, Pointer<Void> pointer)
         >
       >()
       .asFunction<
-        void Function(int format, int stride, Pointer<NativeType> pointer)
+        void Function(int format, int stride, Pointer<Void> pointer)
       >();
   return glInterleavedArraysAsFunction(format, stride, pointer);
 }
@@ -30587,7 +30013,7 @@ void glPixelMapfv(int map, int mapsize, Pointer<Float> values) {
   final glPixelMapfvAsFunction = _glPixelMapfv
       .cast<
         NativeFunction<
-          Void Function(Uint32 map, Uint32 mapsize, Pointer<Float> values)
+          Void Function(Uint32 map, Int32 mapsize, Pointer<Float> values)
         >
       >()
       .asFunction<void Function(int map, int mapsize, Pointer<Float> values)>();
@@ -30605,7 +30031,7 @@ void glPixelMapuiv(int map, int mapsize, Pointer<Uint32> values) {
   final glPixelMapuivAsFunction = _glPixelMapuiv
       .cast<
         NativeFunction<
-          Void Function(Uint32 map, Uint32 mapsize, Pointer<Uint32> values)
+          Void Function(Uint32 map, Int32 mapsize, Pointer<Uint32> values)
         >
       >()
       .asFunction<
@@ -30625,7 +30051,7 @@ void glPixelMapusv(int map, int mapsize, Pointer<Uint16> values) {
   final glPixelMapusvAsFunction = _glPixelMapusv
       .cast<
         NativeFunction<
-          Void Function(Uint32 map, Uint32 mapsize, Pointer<Uint16> values)
+          Void Function(Uint32 map, Int32 mapsize, Pointer<Uint16> values)
         >
       >()
       .asFunction<
@@ -30696,8 +30122,8 @@ void glBitmap(
       .cast<
         NativeFunction<
           Void Function(
-            Uint32 width,
-            Uint32 height,
+            Int32 width,
+            Int32 height,
             Float xorig,
             Float yorig,
             Float xmove,
@@ -30734,7 +30160,7 @@ void glReadPixels(
   int height,
   int format,
   int type,
-  Pointer<NativeType> pixels,
+  Pointer<Void> pixels,
 ) {
   final glReadPixelsAsFunction = _glReadPixels
       .cast<
@@ -30742,11 +30168,11 @@ void glReadPixels(
           Void Function(
             Int32 x,
             Int32 y,
-            Uint32 width,
-            Uint32 height,
+            Int32 width,
+            Int32 height,
             Uint32 format,
             Uint32 type,
-            Pointer<NativeType> pixels,
+            Pointer<Void> pixels,
           )
         >
       >()
@@ -30758,7 +30184,7 @@ void glReadPixels(
           int height,
           int format,
           int type,
-          Pointer<NativeType> pixels,
+          Pointer<Void> pixels,
         )
       >();
   return glReadPixelsAsFunction(x, y, width, height, format, type, pixels);
@@ -30776,17 +30202,17 @@ void glDrawPixels(
   int height,
   int format,
   int type,
-  Pointer<NativeType> pixels,
+  Pointer<Void> pixels,
 ) {
   final glDrawPixelsAsFunction = _glDrawPixels
       .cast<
         NativeFunction<
           Void Function(
-            Uint32 width,
-            Uint32 height,
+            Int32 width,
+            Int32 height,
             Uint32 format,
             Uint32 type,
-            Pointer<NativeType> pixels,
+            Pointer<Void> pixels,
           )
         >
       >()
@@ -30796,7 +30222,7 @@ void glDrawPixels(
           int height,
           int format,
           int type,
-          Pointer<NativeType> pixels,
+          Pointer<Void> pixels,
         )
       >();
   return glDrawPixelsAsFunction(width, height, format, type, pixels);
@@ -30816,8 +30242,8 @@ void glCopyPixels(int x, int y, int width, int height, int type) {
           Void Function(
             Int32 x,
             Int32 y,
-            Uint32 width,
-            Uint32 height,
+            Int32 width,
+            Int32 height,
             Uint32 type,
           )
         >
@@ -31347,7 +30773,7 @@ void glTexImage1D(
   int border,
   int format,
   int type,
-  Pointer<NativeType> pixels,
+  Pointer<Void> pixels,
 ) {
   final glTexImage1DAsFunction = _glTexImage1D
       .cast<
@@ -31356,11 +30782,11 @@ void glTexImage1D(
             Uint32 target,
             Int32 level,
             Int32 internalFormat,
-            Uint32 width,
+            Int32 width,
             Int32 border,
             Uint32 format,
             Uint32 type,
-            Pointer<NativeType> pixels,
+            Pointer<Void> pixels,
           )
         >
       >()
@@ -31373,7 +30799,7 @@ void glTexImage1D(
           int border,
           int format,
           int type,
-          Pointer<NativeType> pixels,
+          Pointer<Void> pixels,
         )
       >();
   return glTexImage1DAsFunction(
@@ -31404,7 +30830,7 @@ void glTexImage2D(
   int border,
   int format,
   int type,
-  Pointer<NativeType> pixels,
+  Pointer<Void> pixels,
 ) {
   final glTexImage2DAsFunction = _glTexImage2D
       .cast<
@@ -31413,12 +30839,12 @@ void glTexImage2D(
             Uint32 target,
             Int32 level,
             Int32 internalFormat,
-            Uint32 width,
-            Uint32 height,
+            Int32 width,
+            Int32 height,
             Int32 border,
             Uint32 format,
             Uint32 type,
-            Pointer<NativeType> pixels,
+            Pointer<Void> pixels,
           )
         >
       >()
@@ -31432,7 +30858,7 @@ void glTexImage2D(
           int border,
           int format,
           int type,
-          Pointer<NativeType> pixels,
+          Pointer<Void> pixels,
         )
       >();
   return glTexImage2DAsFunction(
@@ -31460,7 +30886,7 @@ void glGetTexImage(
   int level,
   int format,
   int type,
-  Pointer<NativeType> pixels,
+  Pointer<Void> pixels,
 ) {
   final glGetTexImageAsFunction = _glGetTexImage
       .cast<
@@ -31470,7 +30896,7 @@ void glGetTexImage(
             Int32 level,
             Uint32 format,
             Uint32 type,
-            Pointer<NativeType> pixels,
+            Pointer<Void> pixels,
           )
         >
       >()
@@ -31480,7 +30906,7 @@ void glGetTexImage(
           int level,
           int format,
           int type,
-          Pointer<NativeType> pixels,
+          Pointer<Void> pixels,
         )
       >();
   return glGetTexImageAsFunction(target, level, format, type, pixels);
@@ -31495,7 +30921,7 @@ late Pointer<NativeFunction<Void Function()>> _glGenTextures;
 /// {@category opengl}
 void glGenTextures(int n, Pointer<Uint32> textures) {
   final glGenTexturesAsFunction = _glGenTextures
-      .cast<NativeFunction<Void Function(Uint32 n, Pointer<Uint32> textures)>>()
+      .cast<NativeFunction<Void Function(Int32 n, Pointer<Uint32> textures)>>()
       .asFunction<void Function(int n, Pointer<Uint32> textures)>();
   return glGenTexturesAsFunction(n, textures);
 }
@@ -31509,7 +30935,7 @@ late Pointer<NativeFunction<Void Function()>> _glDeleteTextures;
 /// {@category opengl}
 void glDeleteTextures(int n, Pointer<Uint32> textures) {
   final glDeleteTexturesAsFunction = _glDeleteTextures
-      .cast<NativeFunction<Void Function(Uint32 n, Pointer<Uint32> textures)>>()
+      .cast<NativeFunction<Void Function(Int32 n, Pointer<Uint32> textures)>>()
       .asFunction<void Function(int n, Pointer<Uint32> textures)>();
   return glDeleteTexturesAsFunction(n, textures);
 }
@@ -31544,7 +30970,7 @@ void glPrioritizeTextures(
       .cast<
         NativeFunction<
           Void Function(
-            Uint32 n,
+            Int32 n,
             Pointer<Uint32> textures,
             Pointer<Float> priorities,
           )
@@ -31570,20 +30996,20 @@ late Pointer<NativeFunction<Void Function()>> _glAreTexturesResident;
 int glAreTexturesResident(
   int n,
   Pointer<Uint32> textures,
-  Pointer<Int32> residences,
+  Pointer<Uint8> residences,
 ) {
   final glAreTexturesResidentAsFunction = _glAreTexturesResident
       .cast<
         NativeFunction<
-          Int32 Function(
-            Uint32 n,
+          Uint8 Function(
+            Int32 n,
             Pointer<Uint32> textures,
-            Pointer<Int32> residences,
+            Pointer<Uint8> residences,
           )
         >
       >()
       .asFunction<
-        int Function(int n, Pointer<Uint32> textures, Pointer<Int32> residences)
+        int Function(int n, Pointer<Uint32> textures, Pointer<Uint8> residences)
       >();
   return glAreTexturesResidentAsFunction(n, textures, residences);
 }
@@ -31597,7 +31023,7 @@ late Pointer<NativeFunction<Void Function()>> _glIsTexture;
 /// {@category opengl}
 int glIsTexture(int texture) {
   final glIsTextureAsFunction = _glIsTexture
-      .cast<NativeFunction<Int32 Function(Uint32 texture)>>()
+      .cast<NativeFunction<Uint8 Function(Uint32 texture)>>()
       .asFunction<int Function(int texture)>();
   return glIsTextureAsFunction(texture);
 }
@@ -31616,7 +31042,7 @@ void glTexSubImage1D(
   int width,
   int format,
   int type,
-  Pointer<NativeType> pixels,
+  Pointer<Void> pixels,
 ) {
   final glTexSubImage1DAsFunction = _glTexSubImage1D
       .cast<
@@ -31625,10 +31051,10 @@ void glTexSubImage1D(
             Uint32 target,
             Int32 level,
             Int32 xoffset,
-            Uint32 width,
+            Int32 width,
             Uint32 format,
             Uint32 type,
-            Pointer<NativeType> pixels,
+            Pointer<Void> pixels,
           )
         >
       >()
@@ -31640,7 +31066,7 @@ void glTexSubImage1D(
           int width,
           int format,
           int type,
-          Pointer<NativeType> pixels,
+          Pointer<Void> pixels,
         )
       >();
   return glTexSubImage1DAsFunction(
@@ -31670,7 +31096,7 @@ void glTexSubImage2D(
   int height,
   int format,
   int type,
-  Pointer<NativeType> pixels,
+  Pointer<Void> pixels,
 ) {
   final glTexSubImage2DAsFunction = _glTexSubImage2D
       .cast<
@@ -31680,11 +31106,11 @@ void glTexSubImage2D(
             Int32 level,
             Int32 xoffset,
             Int32 yoffset,
-            Uint32 width,
-            Uint32 height,
+            Int32 width,
+            Int32 height,
             Uint32 format,
             Uint32 type,
-            Pointer<NativeType> pixels,
+            Pointer<Void> pixels,
           )
         >
       >()
@@ -31698,7 +31124,7 @@ void glTexSubImage2D(
           int height,
           int format,
           int type,
-          Pointer<NativeType> pixels,
+          Pointer<Void> pixels,
         )
       >();
   return glTexSubImage2DAsFunction(
@@ -31739,7 +31165,7 @@ void glCopyTexImage1D(
             Uint32 internalformat,
             Int32 x,
             Int32 y,
-            Uint32 width,
+            Int32 width,
             Int32 border,
           )
         >
@@ -31792,8 +31218,8 @@ void glCopyTexImage2D(
             Uint32 internalformat,
             Int32 x,
             Int32 y,
-            Uint32 width,
-            Uint32 height,
+            Int32 width,
+            Int32 height,
             Int32 border,
           )
         >
@@ -31846,7 +31272,7 @@ void glCopyTexSubImage1D(
             Int32 xoffset,
             Int32 x,
             Int32 y,
-            Uint32 width,
+            Int32 width,
           )
         >
       >()
@@ -31890,8 +31316,8 @@ void glCopyTexSubImage2D(
             Int32 yoffset,
             Int32 x,
             Int32 y,
-            Uint32 width,
-            Uint32 height,
+            Int32 width,
+            Int32 height,
           )
         >
       >()
@@ -32522,7 +31948,7 @@ void glFeedbackBuffer(int size, int type, Pointer<Float> buffer) {
   final glFeedbackBufferAsFunction = _glFeedbackBuffer
       .cast<
         NativeFunction<
-          Void Function(Uint32 size, Uint32 type, Pointer<Float> buffer)
+          Void Function(Int32 size, Uint32 type, Pointer<Float> buffer)
         >
       >()
       .asFunction<void Function(int size, int type, Pointer<Float> buffer)>();
@@ -32552,9 +31978,7 @@ late Pointer<NativeFunction<Void Function()>> _glSelectBuffer;
 /// {@category opengl}
 void glSelectBuffer(int size, Pointer<Uint32> buffer) {
   final glSelectBufferAsFunction = _glSelectBuffer
-      .cast<
-        NativeFunction<Void Function(Uint32 size, Pointer<Uint32> buffer)>
-      >()
+      .cast<NativeFunction<Void Function(Int32 size, Pointer<Uint32> buffer)>>()
       .asFunction<void Function(int size, Pointer<Uint32> buffer)>();
   return glSelectBufferAsFunction(size, buffer);
 }
@@ -32628,7 +32052,7 @@ void glDrawRangeElements(
   int end,
   int count,
   int type,
-  Pointer<NativeType> indices,
+  Pointer<Void> indices,
 ) {
   final glDrawRangeElementsAsFunction = _glDrawRangeElements
       .cast<
@@ -32637,9 +32061,9 @@ void glDrawRangeElements(
             Uint32 mode,
             Uint32 start,
             Uint32 end,
-            Uint32 count,
+            Int32 count,
             Uint32 type,
-            Pointer<NativeType> indices,
+            Pointer<Void> indices,
           )
         >
       >()
@@ -32650,7 +32074,7 @@ void glDrawRangeElements(
           int end,
           int count,
           int type,
-          Pointer<NativeType> indices,
+          Pointer<Void> indices,
         )
       >();
   return glDrawRangeElementsAsFunction(mode, start, end, count, type, indices);
@@ -32673,7 +32097,7 @@ void glTexImage3D(
   int border,
   int format,
   int type,
-  Pointer<NativeType> pixels,
+  Pointer<Void> pixels,
 ) {
   final glTexImage3DAsFunction = _glTexImage3D
       .cast<
@@ -32682,13 +32106,13 @@ void glTexImage3D(
             Uint32 target,
             Int32 level,
             Int32 internalFormat,
-            Uint32 width,
-            Uint32 height,
-            Uint32 depth,
+            Int32 width,
+            Int32 height,
+            Int32 depth,
             Int32 border,
             Uint32 format,
             Uint32 type,
-            Pointer<NativeType> pixels,
+            Pointer<Void> pixels,
           )
         >
       >()
@@ -32703,7 +32127,7 @@ void glTexImage3D(
           int border,
           int format,
           int type,
-          Pointer<NativeType> pixels,
+          Pointer<Void> pixels,
         )
       >();
   return glTexImage3DAsFunction(
@@ -32738,7 +32162,7 @@ void glTexSubImage3D(
   int depth,
   int format,
   int type,
-  Pointer<NativeType> pixels,
+  Pointer<Void> pixels,
 ) {
   final glTexSubImage3DAsFunction = _glTexSubImage3D
       .cast<
@@ -32749,12 +32173,12 @@ void glTexSubImage3D(
             Int32 xoffset,
             Int32 yoffset,
             Int32 zoffset,
-            Uint32 width,
-            Uint32 height,
-            Uint32 depth,
+            Int32 width,
+            Int32 height,
+            Int32 depth,
             Uint32 format,
             Uint32 type,
-            Pointer<NativeType> pixels,
+            Pointer<Void> pixels,
           )
         >
       >()
@@ -32770,7 +32194,7 @@ void glTexSubImage3D(
           int depth,
           int format,
           int type,
-          Pointer<NativeType> pixels,
+          Pointer<Void> pixels,
         )
       >();
   return glTexSubImage3DAsFunction(
@@ -32817,8 +32241,8 @@ void glCopyTexSubImage3D(
             Int32 zoffset,
             Int32 x,
             Int32 y,
-            Uint32 width,
-            Uint32 height,
+            Int32 width,
+            Int32 height,
           )
         >
       >()
@@ -32861,7 +32285,7 @@ void glColorTable(
   int width,
   int format,
   int type,
-  Pointer<NativeType> table,
+  Pointer<Void> table,
 ) {
   final glColorTableAsFunction = _glColorTable
       .cast<
@@ -32869,10 +32293,10 @@ void glColorTable(
           Void Function(
             Uint32 target,
             Uint32 internalformat,
-            Uint32 width,
+            Int32 width,
             Uint32 format,
             Uint32 type,
-            Pointer<NativeType> table,
+            Pointer<Void> table,
           )
         >
       >()
@@ -32883,7 +32307,7 @@ void glColorTable(
           int width,
           int format,
           int type,
-          Pointer<NativeType> table,
+          Pointer<Void> table,
         )
       >();
   return glColorTableAsFunction(
@@ -32909,18 +32333,18 @@ void glColorSubTable(
   int count,
   int format,
   int type,
-  Pointer<NativeType> data,
+  Pointer<Void> data,
 ) {
   final glColorSubTableAsFunction = _glColorSubTable
       .cast<
         NativeFunction<
           Void Function(
             Uint32 target,
-            Uint32 start,
-            Uint32 count,
+            Int32 start,
+            Int32 count,
             Uint32 format,
             Uint32 type,
-            Pointer<NativeType> data,
+            Pointer<Void> data,
           )
         >
       >()
@@ -32931,7 +32355,7 @@ void glColorSubTable(
           int count,
           int format,
           int type,
-          Pointer<NativeType> data,
+          Pointer<Void> data,
         )
       >();
   return glColorSubTableAsFunction(target, start, count, format, type, data);
@@ -32990,10 +32414,10 @@ void glCopyColorSubTable(int target, int start, int x, int y, int width) {
         NativeFunction<
           Void Function(
             Uint32 target,
-            Uint32 start,
+            Int32 start,
             Int32 x,
             Int32 y,
-            Uint32 width,
+            Int32 width,
           )
         >
       >()
@@ -33019,7 +32443,7 @@ void glCopyColorTable(int target, int internalformat, int x, int y, int width) {
             Uint32 internalformat,
             Int32 x,
             Int32 y,
-            Uint32 width,
+            Int32 width,
           )
         >
       >()
@@ -33036,12 +32460,7 @@ late Pointer<NativeFunction<Void Function()>> _glGetColorTable;
 /// GLAPI void GLAPIENTRY glGetColorTable( GLenum target, GLenum format, GLenum type, GLvoid *table )
 /// ```
 /// {@category opengl}
-void glGetColorTable(
-  int target,
-  int format,
-  int type,
-  Pointer<NativeType> table,
-) {
+void glGetColorTable(int target, int format, int type, Pointer<Void> table) {
   final glGetColorTableAsFunction = _glGetColorTable
       .cast<
         NativeFunction<
@@ -33049,17 +32468,12 @@ void glGetColorTable(
             Uint32 target,
             Uint32 format,
             Uint32 type,
-            Pointer<NativeType> table,
+            Pointer<Void> table,
           )
         >
       >()
       .asFunction<
-        void Function(
-          int target,
-          int format,
-          int type,
-          Pointer<NativeType> table,
-        )
+        void Function(int target, int format, int type, Pointer<Void> table)
       >();
   return glGetColorTableAsFunction(target, format, type, table);
 }
@@ -33151,9 +32565,9 @@ void glHistogram(int target, int width, int internalformat, int sink) {
         NativeFunction<
           Void Function(
             Uint32 target,
-            Uint32 width,
+            Int32 width,
             Uint32 internalformat,
-            Int32 sink,
+            Uint8 sink,
           )
         >
       >()
@@ -33189,17 +32603,17 @@ void glGetHistogram(
   int reset,
   int format,
   int type,
-  Pointer<NativeType> values,
+  Pointer<Void> values,
 ) {
   final glGetHistogramAsFunction = _glGetHistogram
       .cast<
         NativeFunction<
           Void Function(
             Uint32 target,
-            Int32 reset,
+            Uint8 reset,
             Uint32 format,
             Uint32 type,
-            Pointer<NativeType> values,
+            Pointer<Void> values,
           )
         >
       >()
@@ -33209,7 +32623,7 @@ void glGetHistogram(
           int reset,
           int format,
           int type,
-          Pointer<NativeType> values,
+          Pointer<Void> values,
         )
       >();
   return glGetHistogramAsFunction(target, reset, format, type, values);
@@ -33266,7 +32680,7 @@ void glMinmax(int target, int internalformat, int sink) {
   final glMinmaxAsFunction = _glMinmax
       .cast<
         NativeFunction<
-          Void Function(Uint32 target, Uint32 internalformat, Int32 sink)
+          Void Function(Uint32 target, Uint32 internalformat, Uint8 sink)
         >
       >()
       .asFunction<void Function(int target, int internalformat, int sink)>();
@@ -33299,17 +32713,17 @@ void glGetMinmax(
   int reset,
   int format,
   int types,
-  Pointer<NativeType> values,
+  Pointer<Void> values,
 ) {
   final glGetMinmaxAsFunction = _glGetMinmax
       .cast<
         NativeFunction<
           Void Function(
             Uint32 target,
-            Int32 reset,
+            Uint8 reset,
             Uint32 format,
             Uint32 types,
-            Pointer<NativeType> values,
+            Pointer<Void> values,
           )
         >
       >()
@@ -33319,7 +32733,7 @@ void glGetMinmax(
           int reset,
           int format,
           int types,
-          Pointer<NativeType> values,
+          Pointer<Void> values,
         )
       >();
   return glGetMinmaxAsFunction(target, reset, format, types, values);
@@ -33378,7 +32792,7 @@ void glConvolutionFilter1D(
   int width,
   int format,
   int type,
-  Pointer<NativeType> image,
+  Pointer<Void> image,
 ) {
   final glConvolutionFilter1DAsFunction = _glConvolutionFilter1D
       .cast<
@@ -33386,10 +32800,10 @@ void glConvolutionFilter1D(
           Void Function(
             Uint32 target,
             Uint32 internalformat,
-            Uint32 width,
+            Int32 width,
             Uint32 format,
             Uint32 type,
-            Pointer<NativeType> image,
+            Pointer<Void> image,
           )
         >
       >()
@@ -33400,7 +32814,7 @@ void glConvolutionFilter1D(
           int width,
           int format,
           int type,
-          Pointer<NativeType> image,
+          Pointer<Void> image,
         )
       >();
   return glConvolutionFilter1DAsFunction(
@@ -33427,7 +32841,7 @@ void glConvolutionFilter2D(
   int height,
   int format,
   int type,
-  Pointer<NativeType> image,
+  Pointer<Void> image,
 ) {
   final glConvolutionFilter2DAsFunction = _glConvolutionFilter2D
       .cast<
@@ -33435,11 +32849,11 @@ void glConvolutionFilter2D(
           Void Function(
             Uint32 target,
             Uint32 internalformat,
-            Uint32 width,
-            Uint32 height,
+            Int32 width,
+            Int32 height,
             Uint32 format,
             Uint32 type,
-            Pointer<NativeType> image,
+            Pointer<Void> image,
           )
         >
       >()
@@ -33451,7 +32865,7 @@ void glConvolutionFilter2D(
           int height,
           int format,
           int type,
-          Pointer<NativeType> image,
+          Pointer<Void> image,
         )
       >();
   return glConvolutionFilter2DAsFunction(
@@ -33559,7 +32973,7 @@ void glCopyConvolutionFilter1D(
             Uint32 internalformat,
             Int32 x,
             Int32 y,
-            Uint32 width,
+            Int32 width,
           )
         >
       >()
@@ -33598,8 +33012,8 @@ void glCopyConvolutionFilter2D(
             Uint32 internalformat,
             Int32 x,
             Int32 y,
-            Uint32 width,
-            Uint32 height,
+            Int32 width,
+            Int32 height,
           )
         >
       >()
@@ -33634,7 +33048,7 @@ void glGetConvolutionFilter(
   int target,
   int format,
   int type,
-  Pointer<NativeType> image,
+  Pointer<Void> image,
 ) {
   final glGetConvolutionFilterAsFunction = _glGetConvolutionFilter
       .cast<
@@ -33643,17 +33057,12 @@ void glGetConvolutionFilter(
             Uint32 target,
             Uint32 format,
             Uint32 type,
-            Pointer<NativeType> image,
+            Pointer<Void> image,
           )
         >
       >()
       .asFunction<
-        void Function(
-          int target,
-          int format,
-          int type,
-          Pointer<NativeType> image,
-        )
+        void Function(int target, int format, int type, Pointer<Void> image)
       >();
   return glGetConvolutionFilterAsFunction(target, format, type, image);
 }
@@ -33712,8 +33121,8 @@ void glSeparableFilter2D(
   int height,
   int format,
   int type,
-  Pointer<NativeType> row,
-  Pointer<NativeType> column,
+  Pointer<Void> row,
+  Pointer<Void> column,
 ) {
   final glSeparableFilter2DAsFunction = _glSeparableFilter2D
       .cast<
@@ -33721,12 +33130,12 @@ void glSeparableFilter2D(
           Void Function(
             Uint32 target,
             Uint32 internalformat,
-            Uint32 width,
-            Uint32 height,
+            Int32 width,
+            Int32 height,
             Uint32 format,
             Uint32 type,
-            Pointer<NativeType> row,
-            Pointer<NativeType> column,
+            Pointer<Void> row,
+            Pointer<Void> column,
           )
         >
       >()
@@ -33738,8 +33147,8 @@ void glSeparableFilter2D(
           int height,
           int format,
           int type,
-          Pointer<NativeType> row,
-          Pointer<NativeType> column,
+          Pointer<Void> row,
+          Pointer<Void> column,
         )
       >();
   return glSeparableFilter2DAsFunction(
@@ -33765,9 +33174,9 @@ void glGetSeparableFilter(
   int target,
   int format,
   int type,
-  Pointer<NativeType> row,
-  Pointer<NativeType> column,
-  Pointer<NativeType> span,
+  Pointer<Void> row,
+  Pointer<Void> column,
+  Pointer<Void> span,
 ) {
   final glGetSeparableFilterAsFunction = _glGetSeparableFilter
       .cast<
@@ -33776,9 +33185,9 @@ void glGetSeparableFilter(
             Uint32 target,
             Uint32 format,
             Uint32 type,
-            Pointer<NativeType> row,
-            Pointer<NativeType> column,
-            Pointer<NativeType> span,
+            Pointer<Void> row,
+            Pointer<Void> column,
+            Pointer<Void> span,
           )
         >
       >()
@@ -33787,9 +33196,9 @@ void glGetSeparableFilter(
           int target,
           int format,
           int type,
-          Pointer<NativeType> row,
-          Pointer<NativeType> column,
-          Pointer<NativeType> span,
+          Pointer<Void> row,
+          Pointer<Void> column,
+          Pointer<Void> span,
         )
       >();
   return glGetSeparableFilterAsFunction(
@@ -33844,7 +33253,7 @@ void glCompressedTexImage1D(
   int width,
   int border,
   int imageSize,
-  Pointer<NativeType> data,
+  Pointer<Void> data,
 ) {
   final glCompressedTexImage1DAsFunction = _glCompressedTexImage1D
       .cast<
@@ -33853,10 +33262,10 @@ void glCompressedTexImage1D(
             Uint32 target,
             Int32 level,
             Uint32 internalformat,
-            Uint32 width,
+            Int32 width,
             Int32 border,
-            Uint32 imageSize,
-            Pointer<NativeType> data,
+            Int32 imageSize,
+            Pointer<Void> data,
           )
         >
       >()
@@ -33868,7 +33277,7 @@ void glCompressedTexImage1D(
           int width,
           int border,
           int imageSize,
-          Pointer<NativeType> data,
+          Pointer<Void> data,
         )
       >();
   return glCompressedTexImage1DAsFunction(
@@ -33897,7 +33306,7 @@ void glCompressedTexImage2D(
   int height,
   int border,
   int imageSize,
-  Pointer<NativeType> data,
+  Pointer<Void> data,
 ) {
   final glCompressedTexImage2DAsFunction = _glCompressedTexImage2D
       .cast<
@@ -33906,11 +33315,11 @@ void glCompressedTexImage2D(
             Uint32 target,
             Int32 level,
             Uint32 internalformat,
-            Uint32 width,
-            Uint32 height,
+            Int32 width,
+            Int32 height,
             Int32 border,
-            Uint32 imageSize,
-            Pointer<NativeType> data,
+            Int32 imageSize,
+            Pointer<Void> data,
           )
         >
       >()
@@ -33923,7 +33332,7 @@ void glCompressedTexImage2D(
           int height,
           int border,
           int imageSize,
-          Pointer<NativeType> data,
+          Pointer<Void> data,
         )
       >();
   return glCompressedTexImage2DAsFunction(
@@ -33954,7 +33363,7 @@ void glCompressedTexImage3D(
   int depth,
   int border,
   int imageSize,
-  Pointer<NativeType> data,
+  Pointer<Void> data,
 ) {
   final glCompressedTexImage3DAsFunction = _glCompressedTexImage3D
       .cast<
@@ -33963,12 +33372,12 @@ void glCompressedTexImage3D(
             Uint32 target,
             Int32 level,
             Uint32 internalformat,
-            Uint32 width,
-            Uint32 height,
-            Uint32 depth,
+            Int32 width,
+            Int32 height,
+            Int32 depth,
             Int32 border,
-            Uint32 imageSize,
-            Pointer<NativeType> data,
+            Int32 imageSize,
+            Pointer<Void> data,
           )
         >
       >()
@@ -33982,7 +33391,7 @@ void glCompressedTexImage3D(
           int depth,
           int border,
           int imageSize,
-          Pointer<NativeType> data,
+          Pointer<Void> data,
         )
       >();
   return glCompressedTexImage3DAsFunction(
@@ -34012,7 +33421,7 @@ void glCompressedTexSubImage1D(
   int width,
   int format,
   int imageSize,
-  Pointer<NativeType> data,
+  Pointer<Void> data,
 ) {
   final glCompressedTexSubImage1DAsFunction = _glCompressedTexSubImage1D
       .cast<
@@ -34021,10 +33430,10 @@ void glCompressedTexSubImage1D(
             Uint32 target,
             Int32 level,
             Int32 xoffset,
-            Uint32 width,
+            Int32 width,
             Uint32 format,
-            Uint32 imageSize,
-            Pointer<NativeType> data,
+            Int32 imageSize,
+            Pointer<Void> data,
           )
         >
       >()
@@ -34036,7 +33445,7 @@ void glCompressedTexSubImage1D(
           int width,
           int format,
           int imageSize,
-          Pointer<NativeType> data,
+          Pointer<Void> data,
         )
       >();
   return glCompressedTexSubImage1DAsFunction(
@@ -34066,7 +33475,7 @@ void glCompressedTexSubImage2D(
   int height,
   int format,
   int imageSize,
-  Pointer<NativeType> data,
+  Pointer<Void> data,
 ) {
   final glCompressedTexSubImage2DAsFunction = _glCompressedTexSubImage2D
       .cast<
@@ -34076,11 +33485,11 @@ void glCompressedTexSubImage2D(
             Int32 level,
             Int32 xoffset,
             Int32 yoffset,
-            Uint32 width,
-            Uint32 height,
+            Int32 width,
+            Int32 height,
             Uint32 format,
-            Uint32 imageSize,
-            Pointer<NativeType> data,
+            Int32 imageSize,
+            Pointer<Void> data,
           )
         >
       >()
@@ -34094,7 +33503,7 @@ void glCompressedTexSubImage2D(
           int height,
           int format,
           int imageSize,
-          Pointer<NativeType> data,
+          Pointer<Void> data,
         )
       >();
   return glCompressedTexSubImage2DAsFunction(
@@ -34128,7 +33537,7 @@ void glCompressedTexSubImage3D(
   int depth,
   int format,
   int imageSize,
-  Pointer<NativeType> data,
+  Pointer<Void> data,
 ) {
   final glCompressedTexSubImage3DAsFunction = _glCompressedTexSubImage3D
       .cast<
@@ -34139,12 +33548,12 @@ void glCompressedTexSubImage3D(
             Int32 xoffset,
             Int32 yoffset,
             Int32 zoffset,
-            Uint32 width,
-            Uint32 height,
-            Uint32 depth,
+            Int32 width,
+            Int32 height,
+            Int32 depth,
             Uint32 format,
-            Uint32 imageSize,
-            Pointer<NativeType> data,
+            Int32 imageSize,
+            Pointer<Void> data,
           )
         >
       >()
@@ -34160,7 +33569,7 @@ void glCompressedTexSubImage3D(
           int depth,
           int format,
           int imageSize,
-          Pointer<NativeType> data,
+          Pointer<Void> data,
         )
       >();
   return glCompressedTexSubImage3DAsFunction(
@@ -34185,16 +33594,14 @@ late Pointer<NativeFunction<Void Function()>> _glGetCompressedTexImage;
 /// GLAPI void GLAPIENTRY glGetCompressedTexImage( GLenum target, GLint lod, GLvoid *img )
 /// ```
 /// {@category opengl}
-void glGetCompressedTexImage(int target, int lod, Pointer<NativeType> img) {
+void glGetCompressedTexImage(int target, int lod, Pointer<Void> img) {
   final glGetCompressedTexImageAsFunction = _glGetCompressedTexImage
       .cast<
         NativeFunction<
-          Void Function(Uint32 target, Int32 lod, Pointer<NativeType> img)
+          Void Function(Uint32 target, Int32 lod, Pointer<Void> img)
         >
       >()
-      .asFunction<
-        void Function(int target, int lod, Pointer<NativeType> img)
-      >();
+      .asFunction<void Function(int target, int lod, Pointer<Void> img)>();
   return glGetCompressedTexImageAsFunction(target, lod, img);
 }
 
@@ -34741,7 +34148,7 @@ late Pointer<NativeFunction<Void Function()>> _glSampleCoverage;
 /// {@category opengl}
 void glSampleCoverage(double value, int invert) {
   final glSampleCoverageAsFunction = _glSampleCoverage
-      .cast<NativeFunction<Void Function(Float value, Int32 invert)>>()
+      .cast<NativeFunction<Void Function(Float value, Uint8 invert)>>()
       .asFunction<void Function(double value, int invert)>();
   return glSampleCoverageAsFunction(value, invert);
 }

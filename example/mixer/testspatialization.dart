@@ -17,7 +17,7 @@ List<double> gPcms = [];
 NativeCallable<MixTrackMixCallback>? gRawCall;
 
 void rawCallback(
-  Pointer<NativeType> userdata,
+  Pointer<Void> userdata,
   Pointer<MixTrack> track,
   Pointer<SdlAudioSpec> spec,
   Pointer<Float> pcm,

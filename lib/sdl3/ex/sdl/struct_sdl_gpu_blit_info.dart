@@ -26,7 +26,7 @@ class SdlxGpuBlitInfo {
     this.loadOp = 0,
     this.flipMode = 0,
     this.filter = 0,
-    this.cycle = 0,
+    this.cycle = false,
   }) {
     source = SdlxGpuBlitRegion();
     destination = SdlxGpuBlitRegion();
@@ -39,29 +39,29 @@ class SdlxGpuBlitInfo {
   late SdlxFColor clearColor;
   int flipMode;
   int filter;
-  int cycle;
+  bool cycle;
 
   Pointer<SdlGpuBlitInfo> calloc() {
     final pointer = ffi.calloc<SdlGpuBlitInfo>();
-    pointer.source.ref.texture = source.texture;
-    pointer.source.ref.mipLevel = source.mipLevel;
-    pointer.source.ref.layerOrDepthPlane = source.layerOrDepthPlane;
-    pointer.source.ref.x = source.x;
-    pointer.source.ref.y = source.y;
-    pointer.source.ref.w = source.w;
-    pointer.source.ref.h = source.h;
-    pointer.destination.ref.texture = destination.texture;
-    pointer.destination.ref.mipLevel = destination.mipLevel;
-    pointer.destination.ref.layerOrDepthPlane = destination.layerOrDepthPlane;
-    pointer.destination.ref.x = destination.x;
-    pointer.destination.ref.y = destination.y;
-    pointer.destination.ref.w = destination.w;
-    pointer.destination.ref.h = destination.h;
+    pointer.ref.source.texture = source.texture;
+    pointer.ref.source.mipLevel = source.mipLevel;
+    pointer.ref.source.layerOrDepthPlane = source.layerOrDepthPlane;
+    pointer.ref.source.x = source.x;
+    pointer.ref.source.y = source.y;
+    pointer.ref.source.w = source.w;
+    pointer.ref.source.h = source.h;
+    pointer.ref.destination.texture = destination.texture;
+    pointer.ref.destination.mipLevel = destination.mipLevel;
+    pointer.ref.destination.layerOrDepthPlane = destination.layerOrDepthPlane;
+    pointer.ref.destination.x = destination.x;
+    pointer.ref.destination.y = destination.y;
+    pointer.ref.destination.w = destination.w;
+    pointer.ref.destination.h = destination.h;
     pointer.ref.loadOp = loadOp;
-    pointer.clearColor.ref.r = clearColor.r;
-    pointer.clearColor.ref.g = clearColor.g;
-    pointer.clearColor.ref.b = clearColor.b;
-    pointer.clearColor.ref.a = clearColor.a;
+    pointer.ref.clearColor.r = clearColor.r;
+    pointer.ref.clearColor.g = clearColor.g;
+    pointer.ref.clearColor.b = clearColor.b;
+    pointer.ref.clearColor.a = clearColor.a;
     pointer.ref.flipMode = flipMode;
     pointer.ref.filter = filter;
     pointer.ref.cycle = cycle;

@@ -51,7 +51,7 @@ late Pointer<NativeFunction<Void Function()>> _glMultiDrawArrays;
 void glMultiDrawArrays(
   int mode,
   Pointer<Int32> first,
-  Pointer<Uint32> count,
+  Pointer<Int32> count,
   int drawcount,
 ) {
   final glMultiDrawArraysAsFunction = _glMultiDrawArrays
@@ -60,8 +60,8 @@ void glMultiDrawArrays(
           Void Function(
             Uint32 mode,
             Pointer<Int32> first,
-            Pointer<Uint32> count,
-            Uint32 drawcount,
+            Pointer<Int32> count,
+            Int32 drawcount,
           )
         >
       >()
@@ -69,7 +69,7 @@ void glMultiDrawArrays(
         void Function(
           int mode,
           Pointer<Int32> first,
-          Pointer<Uint32> count,
+          Pointer<Int32> count,
           int drawcount,
         )
       >();
@@ -85,9 +85,9 @@ late Pointer<NativeFunction<Void Function()>> _glMultiDrawElements;
 /// {@category opengl_glext}
 void glMultiDrawElements(
   int mode,
-  Pointer<Uint32> count,
+  Pointer<Int32> count,
   int type,
-  Pointer<Pointer<NativeType>> indices,
+  Pointer<Pointer<Void>> indices,
   int drawcount,
 ) {
   final glMultiDrawElementsAsFunction = _glMultiDrawElements
@@ -95,19 +95,19 @@ void glMultiDrawElements(
         NativeFunction<
           Void Function(
             Uint32 mode,
-            Pointer<Uint32> count,
+            Pointer<Int32> count,
             Uint32 type,
-            Pointer<Pointer<NativeType>> indices,
-            Uint32 drawcount,
+            Pointer<Pointer<Void>> indices,
+            Int32 drawcount,
           )
         >
       >()
       .asFunction<
         void Function(
           int mode,
-          Pointer<Uint32> count,
+          Pointer<Int32> count,
           int type,
-          Pointer<Pointer<NativeType>> indices,
+          Pointer<Pointer<Void>> indices,
           int drawcount,
         )
       >();
@@ -237,16 +237,14 @@ late Pointer<NativeFunction<Void Function()>> _glFogCoordPointer;
 /// GLAPI void APIENTRY glFogCoordPointer (GLenum type, GLsizei stride, const void *pointer)
 /// ```
 /// {@category opengl_glext}
-void glFogCoordPointer(int type, int stride, Pointer<NativeType> pointer) {
+void glFogCoordPointer(int type, int stride, Pointer<Void> pointer) {
   final glFogCoordPointerAsFunction = _glFogCoordPointer
       .cast<
         NativeFunction<
-          Void Function(Uint32 type, Uint32 stride, Pointer<NativeType> pointer)
+          Void Function(Uint32 type, Int32 stride, Pointer<Void> pointer)
         >
       >()
-      .asFunction<
-        void Function(int type, int stride, Pointer<NativeType> pointer)
-      >();
+      .asFunction<void Function(int type, int stride, Pointer<Void> pointer)>();
   return glFogCoordPointerAsFunction(type, stride, pointer);
 }
 
@@ -494,7 +492,7 @@ void glSecondaryColorPointer(
   int size,
   int type,
   int stride,
-  Pointer<NativeType> pointer,
+  Pointer<Void> pointer,
 ) {
   final glSecondaryColorPointerAsFunction = _glSecondaryColorPointer
       .cast<
@@ -502,18 +500,13 @@ void glSecondaryColorPointer(
           Void Function(
             Int32 size,
             Uint32 type,
-            Uint32 stride,
-            Pointer<NativeType> pointer,
+            Int32 stride,
+            Pointer<Void> pointer,
           )
         >
       >()
       .asFunction<
-        void Function(
-          int size,
-          int type,
-          int stride,
-          Pointer<NativeType> pointer,
-        )
+        void Function(int size, int type, int stride, Pointer<Void> pointer)
       >();
   return glSecondaryColorPointerAsFunction(size, type, stride, pointer);
 }
@@ -751,7 +744,7 @@ late Pointer<NativeFunction<Void Function()>> _glGenQueries;
 /// {@category opengl_glext}
 void glGenQueries(int n, Pointer<Uint32> ids) {
   final glGenQueriesAsFunction = _glGenQueries
-      .cast<NativeFunction<Void Function(Uint32 n, Pointer<Uint32> ids)>>()
+      .cast<NativeFunction<Void Function(Int32 n, Pointer<Uint32> ids)>>()
       .asFunction<void Function(int n, Pointer<Uint32> ids)>();
   return glGenQueriesAsFunction(n, ids);
 }
@@ -765,7 +758,7 @@ late Pointer<NativeFunction<Void Function()>> _glDeleteQueries;
 /// {@category opengl_glext}
 void glDeleteQueries(int n, Pointer<Uint32> ids) {
   final glDeleteQueriesAsFunction = _glDeleteQueries
-      .cast<NativeFunction<Void Function(Uint32 n, Pointer<Uint32> ids)>>()
+      .cast<NativeFunction<Void Function(Int32 n, Pointer<Uint32> ids)>>()
       .asFunction<void Function(int n, Pointer<Uint32> ids)>();
   return glDeleteQueriesAsFunction(n, ids);
 }
@@ -779,7 +772,7 @@ late Pointer<NativeFunction<Void Function()>> _glIsQuery;
 /// {@category opengl_glext}
 int glIsQuery(int id) {
   final glIsQueryAsFunction = _glIsQuery
-      .cast<NativeFunction<Int32 Function(Uint32 id)>>()
+      .cast<NativeFunction<Uint8 Function(Uint32 id)>>()
       .asFunction<int Function(int id)>();
   return glIsQueryAsFunction(id);
 }
@@ -891,7 +884,7 @@ late Pointer<NativeFunction<Void Function()>> _glDeleteBuffers;
 /// {@category opengl_glext}
 void glDeleteBuffers(int n, Pointer<Uint32> buffers) {
   final glDeleteBuffersAsFunction = _glDeleteBuffers
-      .cast<NativeFunction<Void Function(Uint32 n, Pointer<Uint32> buffers)>>()
+      .cast<NativeFunction<Void Function(Int32 n, Pointer<Uint32> buffers)>>()
       .asFunction<void Function(int n, Pointer<Uint32> buffers)>();
   return glDeleteBuffersAsFunction(n, buffers);
 }
@@ -905,7 +898,7 @@ late Pointer<NativeFunction<Void Function()>> _glGenBuffers;
 /// {@category opengl_glext}
 void glGenBuffers(int n, Pointer<Uint32> buffers) {
   final glGenBuffersAsFunction = _glGenBuffers
-      .cast<NativeFunction<Void Function(Uint32 n, Pointer<Uint32> buffers)>>()
+      .cast<NativeFunction<Void Function(Int32 n, Pointer<Uint32> buffers)>>()
       .asFunction<void Function(int n, Pointer<Uint32> buffers)>();
   return glGenBuffersAsFunction(n, buffers);
 }
@@ -919,7 +912,7 @@ late Pointer<NativeFunction<Void Function()>> _glIsBuffer;
 /// {@category opengl_glext}
 int glIsBuffer(int buffer) {
   final glIsBufferAsFunction = _glIsBuffer
-      .cast<NativeFunction<Int32 Function(Uint32 buffer)>>()
+      .cast<NativeFunction<Uint8 Function(Uint32 buffer)>>()
       .asFunction<int Function(int buffer)>();
   return glIsBufferAsFunction(buffer);
 }
@@ -931,30 +924,20 @@ late Pointer<NativeFunction<Void Function()>> _glBufferData;
 /// GLAPI void APIENTRY glBufferData (GLenum target, GLsizeiptr size, const void *data, GLenum usage)
 /// ```
 /// {@category opengl_glext}
-void glBufferData(
-  int target,
-  Pointer<Uint32> size,
-  Pointer<NativeType> data,
-  int usage,
-) {
+void glBufferData(int target, int size, Pointer<Void> data, int usage) {
   final glBufferDataAsFunction = _glBufferData
       .cast<
         NativeFunction<
           Void Function(
             Uint32 target,
-            Pointer<Uint32> size,
-            Pointer<NativeType> data,
+            IntPtr size,
+            Pointer<Void> data,
             Uint32 usage,
           )
         >
       >()
       .asFunction<
-        void Function(
-          int target,
-          Pointer<Uint32> size,
-          Pointer<NativeType> data,
-          int usage,
-        )
+        void Function(int target, int size, Pointer<Void> data, int usage)
       >();
   return glBufferDataAsFunction(target, size, data, usage);
 }
@@ -966,30 +949,20 @@ late Pointer<NativeFunction<Void Function()>> _glBufferSubData;
 /// GLAPI void APIENTRY glBufferSubData (GLenum target, GLintptr offset, GLsizeiptr size, const void *data)
 /// ```
 /// {@category opengl_glext}
-void glBufferSubData(
-  int target,
-  Pointer<NativeType> offset,
-  Pointer<Uint32> size,
-  Pointer<NativeType> data,
-) {
+void glBufferSubData(int target, int offset, int size, Pointer<Void> data) {
   final glBufferSubDataAsFunction = _glBufferSubData
       .cast<
         NativeFunction<
           Void Function(
             Uint32 target,
-            Pointer<NativeType> offset,
-            Pointer<Uint32> size,
-            Pointer<NativeType> data,
+            IntPtr offset,
+            IntPtr size,
+            Pointer<Void> data,
           )
         >
       >()
       .asFunction<
-        void Function(
-          int target,
-          Pointer<NativeType> offset,
-          Pointer<Uint32> size,
-          Pointer<NativeType> data,
-        )
+        void Function(int target, int offset, int size, Pointer<Void> data)
       >();
   return glBufferSubDataAsFunction(target, offset, size, data);
 }
@@ -1001,30 +974,20 @@ late Pointer<NativeFunction<Void Function()>> _glGetBufferSubData;
 /// GLAPI void APIENTRY glGetBufferSubData (GLenum target, GLintptr offset, GLsizeiptr size, void *data)
 /// ```
 /// {@category opengl_glext}
-void glGetBufferSubData(
-  int target,
-  Pointer<NativeType> offset,
-  Pointer<Uint32> size,
-  Pointer<NativeType> data,
-) {
+void glGetBufferSubData(int target, int offset, int size, Pointer<Void> data) {
   final glGetBufferSubDataAsFunction = _glGetBufferSubData
       .cast<
         NativeFunction<
           Void Function(
             Uint32 target,
-            Pointer<NativeType> offset,
-            Pointer<Uint32> size,
-            Pointer<NativeType> data,
+            IntPtr offset,
+            IntPtr size,
+            Pointer<Void> data,
           )
         >
       >()
       .asFunction<
-        void Function(
-          int target,
-          Pointer<NativeType> offset,
-          Pointer<Uint32> size,
-          Pointer<NativeType> data,
-        )
+        void Function(int target, int offset, int size, Pointer<Void> data)
       >();
   return glGetBufferSubDataAsFunction(target, offset, size, data);
 }
@@ -1036,14 +999,12 @@ late Pointer<NativeFunction<Void Function()>> _glMapBuffer;
 /// GLAPI void *APIENTRY glMapBuffer (GLenum target, GLenum access)
 /// ```
 /// {@category opengl_glext}
-Pointer<NativeType> glMapBuffer(int target, int access) {
+Pointer<Void> glMapBuffer(int target, int access) {
   final glMapBufferAsFunction = _glMapBuffer
       .cast<
-        NativeFunction<
-          Pointer<NativeType> Function(Uint32 target, Uint32 access)
-        >
+        NativeFunction<Pointer<Void> Function(Uint32 target, Uint32 access)>
       >()
-      .asFunction<Pointer<NativeType> Function(int target, int access)>();
+      .asFunction<Pointer<Void> Function(int target, int access)>();
   return glMapBufferAsFunction(target, access);
 }
 
@@ -1056,7 +1017,7 @@ late Pointer<NativeFunction<Void Function()>> _glUnmapBuffer;
 /// {@category opengl_glext}
 int glUnmapBuffer(int target) {
   final glUnmapBufferAsFunction = _glUnmapBuffer
-      .cast<NativeFunction<Int32 Function(Uint32 target)>>()
+      .cast<NativeFunction<Uint8 Function(Uint32 target)>>()
       .asFunction<int Function(int target)>();
   return glUnmapBufferAsFunction(target);
 }
@@ -1088,27 +1049,19 @@ late Pointer<NativeFunction<Void Function()>> _glGetBufferPointerv;
 /// GLAPI void APIENTRY glGetBufferPointerv (GLenum target, GLenum pname, void **params)
 /// ```
 /// {@category opengl_glext}
-void glGetBufferPointerv(
-  int target,
-  int pname,
-  Pointer<Pointer<NativeType>> params,
-) {
+void glGetBufferPointerv(int target, int pname, Pointer<Pointer<Void>> params) {
   final glGetBufferPointervAsFunction = _glGetBufferPointerv
       .cast<
         NativeFunction<
           Void Function(
             Uint32 target,
             Uint32 pname,
-            Pointer<Pointer<NativeType>> params,
+            Pointer<Pointer<Void>> params,
           )
         >
       >()
       .asFunction<
-        void Function(
-          int target,
-          int pname,
-          Pointer<Pointer<NativeType>> params,
-        )
+        void Function(int target, int pname, Pointer<Pointer<Void>> params)
       >();
   return glGetBufferPointervAsFunction(target, pname, params);
 }
@@ -1136,7 +1089,7 @@ late Pointer<NativeFunction<Void Function()>> _glDrawBuffers;
 /// {@category opengl_glext}
 void glDrawBuffers(int n, Pointer<Uint32> bufs) {
   final glDrawBuffersAsFunction = _glDrawBuffers
-      .cast<NativeFunction<Void Function(Uint32 n, Pointer<Uint32> bufs)>>()
+      .cast<NativeFunction<Void Function(Int32 n, Pointer<Uint32> bufs)>>()
       .asFunction<void Function(int n, Pointer<Uint32> bufs)>();
   return glDrawBuffersAsFunction(n, bufs);
 }
@@ -1349,7 +1302,7 @@ void glGetActiveAttrib(
   int program,
   int index,
   int bufSize,
-  Pointer<Uint32> length,
+  Pointer<Int32> length,
   Pointer<Int32> size,
   Pointer<Uint32> type,
   Pointer<Int8> name,
@@ -1360,8 +1313,8 @@ void glGetActiveAttrib(
           Void Function(
             Uint32 program,
             Uint32 index,
-            Uint32 bufSize,
-            Pointer<Uint32> length,
+            Int32 bufSize,
+            Pointer<Int32> length,
             Pointer<Int32> size,
             Pointer<Uint32> type,
             Pointer<Int8> name,
@@ -1373,7 +1326,7 @@ void glGetActiveAttrib(
           int program,
           int index,
           int bufSize,
-          Pointer<Uint32> length,
+          Pointer<Int32> length,
           Pointer<Int32> size,
           Pointer<Uint32> type,
           Pointer<Int8> name,
@@ -1401,7 +1354,7 @@ void glGetActiveUniform(
   int program,
   int index,
   int bufSize,
-  Pointer<Uint32> length,
+  Pointer<Int32> length,
   Pointer<Int32> size,
   Pointer<Uint32> type,
   Pointer<Int8> name,
@@ -1412,8 +1365,8 @@ void glGetActiveUniform(
           Void Function(
             Uint32 program,
             Uint32 index,
-            Uint32 bufSize,
-            Pointer<Uint32> length,
+            Int32 bufSize,
+            Pointer<Int32> length,
             Pointer<Int32> size,
             Pointer<Uint32> type,
             Pointer<Int8> name,
@@ -1425,7 +1378,7 @@ void glGetActiveUniform(
           int program,
           int index,
           int bufSize,
-          Pointer<Uint32> length,
+          Pointer<Int32> length,
           Pointer<Int32> size,
           Pointer<Uint32> type,
           Pointer<Int8> name,
@@ -1452,7 +1405,7 @@ late Pointer<NativeFunction<Void Function()>> _glGetAttachedShaders;
 void glGetAttachedShaders(
   int program,
   int maxCount,
-  Pointer<Uint32> count,
+  Pointer<Int32> count,
   Pointer<Uint32> shaders,
 ) {
   final glGetAttachedShadersAsFunction = _glGetAttachedShaders
@@ -1460,8 +1413,8 @@ void glGetAttachedShaders(
         NativeFunction<
           Void Function(
             Uint32 program,
-            Uint32 maxCount,
-            Pointer<Uint32> count,
+            Int32 maxCount,
+            Pointer<Int32> count,
             Pointer<Uint32> shaders,
           )
         >
@@ -1470,7 +1423,7 @@ void glGetAttachedShaders(
         void Function(
           int program,
           int maxCount,
-          Pointer<Uint32> count,
+          Pointer<Int32> count,
           Pointer<Uint32> shaders,
         )
       >();
@@ -1526,7 +1479,7 @@ late Pointer<NativeFunction<Void Function()>> _glGetProgramInfoLog;
 void glGetProgramInfoLog(
   int program,
   int bufSize,
-  Pointer<Uint32> length,
+  Pointer<Int32> length,
   Pointer<Int8> infoLog,
 ) {
   final glGetProgramInfoLogAsFunction = _glGetProgramInfoLog
@@ -1534,8 +1487,8 @@ void glGetProgramInfoLog(
         NativeFunction<
           Void Function(
             Uint32 program,
-            Uint32 bufSize,
-            Pointer<Uint32> length,
+            Int32 bufSize,
+            Pointer<Int32> length,
             Pointer<Int8> infoLog,
           )
         >
@@ -1544,7 +1497,7 @@ void glGetProgramInfoLog(
         void Function(
           int program,
           int bufSize,
-          Pointer<Uint32> length,
+          Pointer<Int32> length,
           Pointer<Int8> infoLog,
         )
       >();
@@ -1581,7 +1534,7 @@ late Pointer<NativeFunction<Void Function()>> _glGetShaderInfoLog;
 void glGetShaderInfoLog(
   int shader,
   int bufSize,
-  Pointer<Uint32> length,
+  Pointer<Int32> length,
   Pointer<Int8> infoLog,
 ) {
   final glGetShaderInfoLogAsFunction = _glGetShaderInfoLog
@@ -1589,8 +1542,8 @@ void glGetShaderInfoLog(
         NativeFunction<
           Void Function(
             Uint32 shader,
-            Uint32 bufSize,
-            Pointer<Uint32> length,
+            Int32 bufSize,
+            Pointer<Int32> length,
             Pointer<Int8> infoLog,
           )
         >
@@ -1599,7 +1552,7 @@ void glGetShaderInfoLog(
         void Function(
           int shader,
           int bufSize,
-          Pointer<Uint32> length,
+          Pointer<Int32> length,
           Pointer<Int8> infoLog,
         )
       >();
@@ -1616,7 +1569,7 @@ late Pointer<NativeFunction<Void Function()>> _glGetShaderSource;
 void glGetShaderSource(
   int shader,
   int bufSize,
-  Pointer<Uint32> length,
+  Pointer<Int32> length,
   Pointer<Int8> source,
 ) {
   final glGetShaderSourceAsFunction = _glGetShaderSource
@@ -1624,8 +1577,8 @@ void glGetShaderSource(
         NativeFunction<
           Void Function(
             Uint32 shader,
-            Uint32 bufSize,
-            Pointer<Uint32> length,
+            Int32 bufSize,
+            Pointer<Int32> length,
             Pointer<Int8> source,
           )
         >
@@ -1634,7 +1587,7 @@ void glGetShaderSource(
         void Function(
           int shader,
           int bufSize,
-          Pointer<Uint32> length,
+          Pointer<Int32> length,
           Pointer<Int8> source,
         )
       >();
@@ -1766,7 +1719,7 @@ late Pointer<NativeFunction<Void Function()>> _glGetVertexAttribPointerv;
 void glGetVertexAttribPointerv(
   int index,
   int pname,
-  Pointer<Pointer<NativeType>> pointer,
+  Pointer<Pointer<Void>> pointer,
 ) {
   final glGetVertexAttribPointervAsFunction = _glGetVertexAttribPointerv
       .cast<
@@ -1774,16 +1727,12 @@ void glGetVertexAttribPointerv(
           Void Function(
             Uint32 index,
             Uint32 pname,
-            Pointer<Pointer<NativeType>> pointer,
+            Pointer<Pointer<Void>> pointer,
           )
         >
       >()
       .asFunction<
-        void Function(
-          int index,
-          int pname,
-          Pointer<Pointer<NativeType>> pointer,
-        )
+        void Function(int index, int pname, Pointer<Pointer<Void>> pointer)
       >();
   return glGetVertexAttribPointervAsFunction(index, pname, pointer);
 }
@@ -1797,7 +1746,7 @@ late Pointer<NativeFunction<Void Function()>> _glIsProgram;
 /// {@category opengl_glext}
 int glIsProgram(int program) {
   final glIsProgramAsFunction = _glIsProgram
-      .cast<NativeFunction<Int32 Function(Uint32 program)>>()
+      .cast<NativeFunction<Uint8 Function(Uint32 program)>>()
       .asFunction<int Function(int program)>();
   return glIsProgramAsFunction(program);
 }
@@ -1811,7 +1760,7 @@ late Pointer<NativeFunction<Void Function()>> _glIsShader;
 /// {@category opengl_glext}
 int glIsShader(int shader) {
   final glIsShaderAsFunction = _glIsShader
-      .cast<NativeFunction<Int32 Function(Uint32 shader)>>()
+      .cast<NativeFunction<Uint8 Function(Uint32 shader)>>()
       .asFunction<int Function(int shader)>();
   return glIsShaderAsFunction(shader);
 }
@@ -1848,7 +1797,7 @@ void glShaderSource(
         NativeFunction<
           Void Function(
             Uint32 shader,
-            Uint32 count,
+            Int32 count,
             Pointer<Pointer<Int8>> string,
             Pointer<Int32> length,
           )
@@ -2024,7 +1973,7 @@ void glUniform1fv(int location, int count, Pointer<Float> value) {
   final glUniform1fvAsFunction = _glUniform1fv
       .cast<
         NativeFunction<
-          Void Function(Int32 location, Uint32 count, Pointer<Float> value)
+          Void Function(Int32 location, Int32 count, Pointer<Float> value)
         >
       >()
       .asFunction<
@@ -2044,7 +1993,7 @@ void glUniform2fv(int location, int count, Pointer<Float> value) {
   final glUniform2fvAsFunction = _glUniform2fv
       .cast<
         NativeFunction<
-          Void Function(Int32 location, Uint32 count, Pointer<Float> value)
+          Void Function(Int32 location, Int32 count, Pointer<Float> value)
         >
       >()
       .asFunction<
@@ -2064,7 +2013,7 @@ void glUniform3fv(int location, int count, Pointer<Float> value) {
   final glUniform3fvAsFunction = _glUniform3fv
       .cast<
         NativeFunction<
-          Void Function(Int32 location, Uint32 count, Pointer<Float> value)
+          Void Function(Int32 location, Int32 count, Pointer<Float> value)
         >
       >()
       .asFunction<
@@ -2084,7 +2033,7 @@ void glUniform4fv(int location, int count, Pointer<Float> value) {
   final glUniform4fvAsFunction = _glUniform4fv
       .cast<
         NativeFunction<
-          Void Function(Int32 location, Uint32 count, Pointer<Float> value)
+          Void Function(Int32 location, Int32 count, Pointer<Float> value)
         >
       >()
       .asFunction<
@@ -2104,7 +2053,7 @@ void glUniform1iv(int location, int count, Pointer<Int32> value) {
   final glUniform1ivAsFunction = _glUniform1iv
       .cast<
         NativeFunction<
-          Void Function(Int32 location, Uint32 count, Pointer<Int32> value)
+          Void Function(Int32 location, Int32 count, Pointer<Int32> value)
         >
       >()
       .asFunction<
@@ -2124,7 +2073,7 @@ void glUniform2iv(int location, int count, Pointer<Int32> value) {
   final glUniform2ivAsFunction = _glUniform2iv
       .cast<
         NativeFunction<
-          Void Function(Int32 location, Uint32 count, Pointer<Int32> value)
+          Void Function(Int32 location, Int32 count, Pointer<Int32> value)
         >
       >()
       .asFunction<
@@ -2144,7 +2093,7 @@ void glUniform3iv(int location, int count, Pointer<Int32> value) {
   final glUniform3ivAsFunction = _glUniform3iv
       .cast<
         NativeFunction<
-          Void Function(Int32 location, Uint32 count, Pointer<Int32> value)
+          Void Function(Int32 location, Int32 count, Pointer<Int32> value)
         >
       >()
       .asFunction<
@@ -2164,7 +2113,7 @@ void glUniform4iv(int location, int count, Pointer<Int32> value) {
   final glUniform4ivAsFunction = _glUniform4iv
       .cast<
         NativeFunction<
-          Void Function(Int32 location, Uint32 count, Pointer<Int32> value)
+          Void Function(Int32 location, Int32 count, Pointer<Int32> value)
         >
       >()
       .asFunction<
@@ -2191,8 +2140,8 @@ void glUniformMatrix2fv(
         NativeFunction<
           Void Function(
             Int32 location,
-            Uint32 count,
-            Int32 transpose,
+            Int32 count,
+            Uint8 transpose,
             Pointer<Float> value,
           )
         >
@@ -2226,8 +2175,8 @@ void glUniformMatrix3fv(
         NativeFunction<
           Void Function(
             Int32 location,
-            Uint32 count,
-            Int32 transpose,
+            Int32 count,
+            Uint8 transpose,
             Pointer<Float> value,
           )
         >
@@ -2261,8 +2210,8 @@ void glUniformMatrix4fv(
         NativeFunction<
           Void Function(
             Int32 location,
-            Uint32 count,
-            Int32 transpose,
+            Int32 count,
+            Uint8 transpose,
             Pointer<Float> value,
           )
         >
@@ -2843,7 +2792,7 @@ void glVertexAttribPointer(
   int type,
   int normalized,
   int stride,
-  Pointer<NativeType> pointer,
+  Pointer<Void> pointer,
 ) {
   final glVertexAttribPointerAsFunction = _glVertexAttribPointer
       .cast<
@@ -2852,9 +2801,9 @@ void glVertexAttribPointer(
             Uint32 index,
             Int32 size,
             Uint32 type,
-            Int32 normalized,
-            Uint32 stride,
-            Pointer<NativeType> pointer,
+            Uint8 normalized,
+            Int32 stride,
+            Pointer<Void> pointer,
           )
         >
       >()
@@ -2865,7 +2814,7 @@ void glVertexAttribPointer(
           int type,
           int normalized,
           int stride,
-          Pointer<NativeType> pointer,
+          Pointer<Void> pointer,
         )
       >();
   return glVertexAttribPointerAsFunction(
@@ -2896,8 +2845,8 @@ void glUniformMatrix2x3fv(
         NativeFunction<
           Void Function(
             Int32 location,
-            Uint32 count,
-            Int32 transpose,
+            Int32 count,
+            Uint8 transpose,
             Pointer<Float> value,
           )
         >
@@ -2931,8 +2880,8 @@ void glUniformMatrix3x2fv(
         NativeFunction<
           Void Function(
             Int32 location,
-            Uint32 count,
-            Int32 transpose,
+            Int32 count,
+            Uint8 transpose,
             Pointer<Float> value,
           )
         >
@@ -2966,8 +2915,8 @@ void glUniformMatrix2x4fv(
         NativeFunction<
           Void Function(
             Int32 location,
-            Uint32 count,
-            Int32 transpose,
+            Int32 count,
+            Uint8 transpose,
             Pointer<Float> value,
           )
         >
@@ -3001,8 +2950,8 @@ void glUniformMatrix4x2fv(
         NativeFunction<
           Void Function(
             Int32 location,
-            Uint32 count,
-            Int32 transpose,
+            Int32 count,
+            Uint8 transpose,
             Pointer<Float> value,
           )
         >
@@ -3036,8 +2985,8 @@ void glUniformMatrix3x4fv(
         NativeFunction<
           Void Function(
             Int32 location,
-            Uint32 count,
-            Int32 transpose,
+            Int32 count,
+            Uint8 transpose,
             Pointer<Float> value,
           )
         >
@@ -3071,8 +3020,8 @@ void glUniformMatrix4x3fv(
         NativeFunction<
           Void Function(
             Int32 location,
-            Uint32 count,
-            Int32 transpose,
+            Int32 count,
+            Uint8 transpose,
             Pointer<Float> value,
           )
         >
@@ -3099,7 +3048,7 @@ void glColorMaski(int index, int r, int g, int b, int a) {
   final glColorMaskiAsFunction = _glColorMaski
       .cast<
         NativeFunction<
-          Void Function(Uint32 index, Int32 r, Int32 g, Int32 b, Int32 a)
+          Void Function(Uint32 index, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
         >
       >()
       .asFunction<void Function(int index, int r, int g, int b, int a)>();
@@ -3113,14 +3062,14 @@ late Pointer<NativeFunction<Void Function()>> _glGetBooleaniV;
 /// GLAPI void APIENTRY glGetBooleani_v (GLenum target, GLuint index, GLboolean *data)
 /// ```
 /// {@category opengl_glext}
-void glGetBooleaniV(int target, int index, Pointer<Int32> data) {
+void glGetBooleaniV(int target, int index, Pointer<Uint8> data) {
   final glGetBooleaniVAsFunction = _glGetBooleaniV
       .cast<
         NativeFunction<
-          Void Function(Uint32 target, Uint32 index, Pointer<Int32> data)
+          Void Function(Uint32 target, Uint32 index, Pointer<Uint8> data)
         >
       >()
-      .asFunction<void Function(int target, int index, Pointer<Int32> data)>();
+      .asFunction<void Function(int target, int index, Pointer<Uint8> data)>();
   return glGetBooleaniVAsFunction(target, index, data);
 }
 
@@ -3179,7 +3128,7 @@ late Pointer<NativeFunction<Void Function()>> _glIsEnabledi;
 /// {@category opengl_glext}
 int glIsEnabledi(int target, int index) {
   final glIsEnablediAsFunction = _glIsEnabledi
-      .cast<NativeFunction<Int32 Function(Uint32 target, Uint32 index)>>()
+      .cast<NativeFunction<Uint8 Function(Uint32 target, Uint32 index)>>()
       .asFunction<int Function(int target, int index)>();
   return glIsEnablediAsFunction(target, index);
 }
@@ -3223,8 +3172,8 @@ void glBindBufferRange(
   int target,
   int index,
   int buffer,
-  Pointer<NativeType> offset,
-  Pointer<Uint32> size,
+  int offset,
+  int size,
 ) {
   final glBindBufferRangeAsFunction = _glBindBufferRange
       .cast<
@@ -3233,19 +3182,13 @@ void glBindBufferRange(
             Uint32 target,
             Uint32 index,
             Uint32 buffer,
-            Pointer<NativeType> offset,
-            Pointer<Uint32> size,
+            IntPtr offset,
+            IntPtr size,
           )
         >
       >()
       .asFunction<
-        void Function(
-          int target,
-          int index,
-          int buffer,
-          Pointer<NativeType> offset,
-          Pointer<Uint32> size,
-        )
+        void Function(int target, int index, int buffer, int offset, int size)
       >();
   return glBindBufferRangeAsFunction(target, index, buffer, offset, size);
 }
@@ -3286,7 +3229,7 @@ void glTransformFeedbackVaryings(
         NativeFunction<
           Void Function(
             Uint32 program,
-            Uint32 count,
+            Int32 count,
             Pointer<Pointer<Int8>> varyings,
             Uint32 bufferMode,
           )
@@ -3319,8 +3262,8 @@ void glGetTransformFeedbackVarying(
   int program,
   int index,
   int bufSize,
-  Pointer<Uint32> length,
-  Pointer<Uint32> size,
+  Pointer<Int32> length,
+  Pointer<Int32> size,
   Pointer<Uint32> type,
   Pointer<Int8> name,
 ) {
@@ -3330,9 +3273,9 @@ void glGetTransformFeedbackVarying(
           Void Function(
             Uint32 program,
             Uint32 index,
-            Uint32 bufSize,
-            Pointer<Uint32> length,
-            Pointer<Uint32> size,
+            Int32 bufSize,
+            Pointer<Int32> length,
+            Pointer<Int32> size,
             Pointer<Uint32> type,
             Pointer<Int8> name,
           )
@@ -3343,8 +3286,8 @@ void glGetTransformFeedbackVarying(
           int program,
           int index,
           int bufSize,
-          Pointer<Uint32> length,
-          Pointer<Uint32> size,
+          Pointer<Int32> length,
+          Pointer<Int32> size,
           Pointer<Uint32> type,
           Pointer<Int8> name,
         )
@@ -3414,7 +3357,7 @@ void glVertexAttribIPointer(
   int size,
   int type,
   int stride,
-  Pointer<NativeType> pointer,
+  Pointer<Void> pointer,
 ) {
   final glVertexAttribIPointerAsFunction = _glVertexAttribIPointer
       .cast<
@@ -3423,8 +3366,8 @@ void glVertexAttribIPointer(
             Uint32 index,
             Int32 size,
             Uint32 type,
-            Uint32 stride,
-            Pointer<NativeType> pointer,
+            Int32 stride,
+            Pointer<Void> pointer,
           )
         >
       >()
@@ -3434,7 +3377,7 @@ void glVertexAttribIPointer(
           int size,
           int type,
           int stride,
-          Pointer<NativeType> pointer,
+          Pointer<Void> pointer,
         )
       >();
   return glVertexAttribIPointerAsFunction(index, size, type, stride, pointer);
@@ -3920,7 +3863,7 @@ void glUniform1uiv(int location, int count, Pointer<Uint32> value) {
   final glUniform1uivAsFunction = _glUniform1uiv
       .cast<
         NativeFunction<
-          Void Function(Int32 location, Uint32 count, Pointer<Uint32> value)
+          Void Function(Int32 location, Int32 count, Pointer<Uint32> value)
         >
       >()
       .asFunction<
@@ -3940,7 +3883,7 @@ void glUniform2uiv(int location, int count, Pointer<Uint32> value) {
   final glUniform2uivAsFunction = _glUniform2uiv
       .cast<
         NativeFunction<
-          Void Function(Int32 location, Uint32 count, Pointer<Uint32> value)
+          Void Function(Int32 location, Int32 count, Pointer<Uint32> value)
         >
       >()
       .asFunction<
@@ -3960,7 +3903,7 @@ void glUniform3uiv(int location, int count, Pointer<Uint32> value) {
   final glUniform3uivAsFunction = _glUniform3uiv
       .cast<
         NativeFunction<
-          Void Function(Int32 location, Uint32 count, Pointer<Uint32> value)
+          Void Function(Int32 location, Int32 count, Pointer<Uint32> value)
         >
       >()
       .asFunction<
@@ -3980,7 +3923,7 @@ void glUniform4uiv(int location, int count, Pointer<Uint32> value) {
   final glUniform4uivAsFunction = _glUniform4uiv
       .cast<
         NativeFunction<
-          Void Function(Int32 location, Uint32 count, Pointer<Uint32> value)
+          Void Function(Int32 location, Int32 count, Pointer<Uint32> value)
         >
       >()
       .asFunction<
@@ -4179,7 +4122,7 @@ late Pointer<NativeFunction<Void Function()>> _glIsRenderbuffer;
 /// {@category opengl_glext}
 int glIsRenderbuffer(int renderbuffer) {
   final glIsRenderbufferAsFunction = _glIsRenderbuffer
-      .cast<NativeFunction<Int32 Function(Uint32 renderbuffer)>>()
+      .cast<NativeFunction<Uint8 Function(Uint32 renderbuffer)>>()
       .asFunction<int Function(int renderbuffer)>();
   return glIsRenderbufferAsFunction(renderbuffer);
 }
@@ -4208,7 +4151,7 @@ late Pointer<NativeFunction<Void Function()>> _glDeleteRenderbuffers;
 void glDeleteRenderbuffers(int n, Pointer<Uint32> renderbuffers) {
   final glDeleteRenderbuffersAsFunction = _glDeleteRenderbuffers
       .cast<
-        NativeFunction<Void Function(Uint32 n, Pointer<Uint32> renderbuffers)>
+        NativeFunction<Void Function(Int32 n, Pointer<Uint32> renderbuffers)>
       >()
       .asFunction<void Function(int n, Pointer<Uint32> renderbuffers)>();
   return glDeleteRenderbuffersAsFunction(n, renderbuffers);
@@ -4224,7 +4167,7 @@ late Pointer<NativeFunction<Void Function()>> _glGenRenderbuffers;
 void glGenRenderbuffers(int n, Pointer<Uint32> renderbuffers) {
   final glGenRenderbuffersAsFunction = _glGenRenderbuffers
       .cast<
-        NativeFunction<Void Function(Uint32 n, Pointer<Uint32> renderbuffers)>
+        NativeFunction<Void Function(Int32 n, Pointer<Uint32> renderbuffers)>
       >()
       .asFunction<void Function(int n, Pointer<Uint32> renderbuffers)>();
   return glGenRenderbuffersAsFunction(n, renderbuffers);
@@ -4249,8 +4192,8 @@ void glRenderbufferStorage(
           Void Function(
             Uint32 target,
             Uint32 internalformat,
-            Uint32 width,
-            Uint32 height,
+            Int32 width,
+            Int32 height,
           )
         >
       >()
@@ -4293,7 +4236,7 @@ late Pointer<NativeFunction<Void Function()>> _glIsFramebuffer;
 /// {@category opengl_glext}
 int glIsFramebuffer(int framebuffer) {
   final glIsFramebufferAsFunction = _glIsFramebuffer
-      .cast<NativeFunction<Int32 Function(Uint32 framebuffer)>>()
+      .cast<NativeFunction<Uint8 Function(Uint32 framebuffer)>>()
       .asFunction<int Function(int framebuffer)>();
   return glIsFramebufferAsFunction(framebuffer);
 }
@@ -4322,7 +4265,7 @@ late Pointer<NativeFunction<Void Function()>> _glDeleteFramebuffers;
 void glDeleteFramebuffers(int n, Pointer<Uint32> framebuffers) {
   final glDeleteFramebuffersAsFunction = _glDeleteFramebuffers
       .cast<
-        NativeFunction<Void Function(Uint32 n, Pointer<Uint32> framebuffers)>
+        NativeFunction<Void Function(Int32 n, Pointer<Uint32> framebuffers)>
       >()
       .asFunction<void Function(int n, Pointer<Uint32> framebuffers)>();
   return glDeleteFramebuffersAsFunction(n, framebuffers);
@@ -4338,7 +4281,7 @@ late Pointer<NativeFunction<Void Function()>> _glGenFramebuffers;
 void glGenFramebuffers(int n, Pointer<Uint32> framebuffers) {
   final glGenFramebuffersAsFunction = _glGenFramebuffers
       .cast<
-        NativeFunction<Void Function(Uint32 n, Pointer<Uint32> framebuffers)>
+        NativeFunction<Void Function(Int32 n, Pointer<Uint32> framebuffers)>
       >()
       .asFunction<void Function(int n, Pointer<Uint32> framebuffers)>();
   return glGenFramebuffersAsFunction(n, framebuffers);
@@ -4674,10 +4617,10 @@ void glRenderbufferStorageMultisample(
             NativeFunction<
               Void Function(
                 Uint32 target,
-                Uint32 samples,
+                Int32 samples,
                 Uint32 internalformat,
-                Uint32 width,
-                Uint32 height,
+                Int32 width,
+                Int32 height,
               )
             >
           >()
@@ -4750,30 +4693,20 @@ late Pointer<NativeFunction<Void Function()>> _glMapBufferRange;
 /// GLAPI void *APIENTRY glMapBufferRange (GLenum target, GLintptr offset, GLsizeiptr length, GLbitfield access)
 /// ```
 /// {@category opengl_glext}
-Pointer<NativeType> glMapBufferRange(
-  int target,
-  Pointer<NativeType> offset,
-  Pointer<Uint32> length,
-  int access,
-) {
+Pointer<Void> glMapBufferRange(int target, int offset, int length, int access) {
   final glMapBufferRangeAsFunction = _glMapBufferRange
       .cast<
         NativeFunction<
-          Pointer<NativeType> Function(
+          Pointer<Void> Function(
             Uint32 target,
-            Pointer<NativeType> offset,
-            Pointer<Uint32> length,
+            IntPtr offset,
+            IntPtr length,
             Uint32 access,
           )
         >
       >()
       .asFunction<
-        Pointer<NativeType> Function(
-          int target,
-          Pointer<NativeType> offset,
-          Pointer<Uint32> length,
-          int access,
-        )
+        Pointer<Void> Function(int target, int offset, int length, int access)
       >();
   return glMapBufferRangeAsFunction(target, offset, length, access);
 }
@@ -4785,28 +4718,14 @@ late Pointer<NativeFunction<Void Function()>> _glFlushMappedBufferRange;
 /// GLAPI void APIENTRY glFlushMappedBufferRange (GLenum target, GLintptr offset, GLsizeiptr length)
 /// ```
 /// {@category opengl_glext}
-void glFlushMappedBufferRange(
-  int target,
-  Pointer<NativeType> offset,
-  Pointer<Uint32> length,
-) {
+void glFlushMappedBufferRange(int target, int offset, int length) {
   final glFlushMappedBufferRangeAsFunction = _glFlushMappedBufferRange
       .cast<
         NativeFunction<
-          Void Function(
-            Uint32 target,
-            Pointer<NativeType> offset,
-            Pointer<Uint32> length,
-          )
+          Void Function(Uint32 target, IntPtr offset, IntPtr length)
         >
       >()
-      .asFunction<
-        void Function(
-          int target,
-          Pointer<NativeType> offset,
-          Pointer<Uint32> length,
-        )
-      >();
+      .asFunction<void Function(int target, int offset, int length)>();
   return glFlushMappedBufferRangeAsFunction(target, offset, length);
 }
 
@@ -4833,7 +4752,7 @@ late Pointer<NativeFunction<Void Function()>> _glDeleteVertexArrays;
 /// {@category opengl_glext}
 void glDeleteVertexArrays(int n, Pointer<Uint32> arrays) {
   final glDeleteVertexArraysAsFunction = _glDeleteVertexArrays
-      .cast<NativeFunction<Void Function(Uint32 n, Pointer<Uint32> arrays)>>()
+      .cast<NativeFunction<Void Function(Int32 n, Pointer<Uint32> arrays)>>()
       .asFunction<void Function(int n, Pointer<Uint32> arrays)>();
   return glDeleteVertexArraysAsFunction(n, arrays);
 }
@@ -4847,7 +4766,7 @@ late Pointer<NativeFunction<Void Function()>> _glGenVertexArrays;
 /// {@category opengl_glext}
 void glGenVertexArrays(int n, Pointer<Uint32> arrays) {
   final glGenVertexArraysAsFunction = _glGenVertexArrays
-      .cast<NativeFunction<Void Function(Uint32 n, Pointer<Uint32> arrays)>>()
+      .cast<NativeFunction<Void Function(Int32 n, Pointer<Uint32> arrays)>>()
       .asFunction<void Function(int n, Pointer<Uint32> arrays)>();
   return glGenVertexArraysAsFunction(n, arrays);
 }
@@ -4861,7 +4780,7 @@ late Pointer<NativeFunction<Void Function()>> _glIsVertexArray;
 /// {@category opengl_glext}
 int glIsVertexArray(int array) {
   final glIsVertexArrayAsFunction = _glIsVertexArray
-      .cast<NativeFunction<Int32 Function(Uint32 array)>>()
+      .cast<NativeFunction<Uint8 Function(Uint32 array)>>()
       .asFunction<int Function(int array)>();
   return glIsVertexArrayAsFunction(array);
 }
@@ -4880,8 +4799,8 @@ void glDrawArraysInstanced(int mode, int first, int count, int instancecount) {
           Void Function(
             Uint32 mode,
             Int32 first,
-            Uint32 count,
-            Uint32 instancecount,
+            Int32 count,
+            Int32 instancecount,
           )
         >
       >()
@@ -4902,7 +4821,7 @@ void glDrawElementsInstanced(
   int mode,
   int count,
   int type,
-  Pointer<NativeType> indices,
+  Pointer<Void> indices,
   int instancecount,
 ) {
   final glDrawElementsInstancedAsFunction = _glDrawElementsInstanced
@@ -4910,10 +4829,10 @@ void glDrawElementsInstanced(
         NativeFunction<
           Void Function(
             Uint32 mode,
-            Uint32 count,
+            Int32 count,
             Uint32 type,
-            Pointer<NativeType> indices,
-            Uint32 instancecount,
+            Pointer<Void> indices,
+            Int32 instancecount,
           )
         >
       >()
@@ -4922,7 +4841,7 @@ void glDrawElementsInstanced(
           int mode,
           int count,
           int type,
-          Pointer<NativeType> indices,
+          Pointer<Void> indices,
           int instancecount,
         )
       >();
@@ -4977,9 +4896,9 @@ late Pointer<NativeFunction<Void Function()>> _glCopyBufferSubData;
 void glCopyBufferSubData(
   int readTarget,
   int writeTarget,
-  Pointer<NativeType> readOffset,
-  Pointer<NativeType> writeOffset,
-  Pointer<Uint32> size,
+  int readOffset,
+  int writeOffset,
+  int size,
 ) {
   final glCopyBufferSubDataAsFunction = _glCopyBufferSubData
       .cast<
@@ -4987,9 +4906,9 @@ void glCopyBufferSubData(
           Void Function(
             Uint32 readTarget,
             Uint32 writeTarget,
-            Pointer<NativeType> readOffset,
-            Pointer<NativeType> writeOffset,
-            Pointer<Uint32> size,
+            IntPtr readOffset,
+            IntPtr writeOffset,
+            IntPtr size,
           )
         >
       >()
@@ -4997,9 +4916,9 @@ void glCopyBufferSubData(
         void Function(
           int readTarget,
           int writeTarget,
-          Pointer<NativeType> readOffset,
-          Pointer<NativeType> writeOffset,
-          Pointer<Uint32> size,
+          int readOffset,
+          int writeOffset,
+          int size,
         )
       >();
   return glCopyBufferSubDataAsFunction(
@@ -5029,7 +4948,7 @@ void glGetUniformIndices(
         NativeFunction<
           Void Function(
             Uint32 program,
-            Uint32 uniformCount,
+            Int32 uniformCount,
             Pointer<Pointer<Int8>> uniformNames,
             Pointer<Uint32> uniformIndices,
           )
@@ -5070,7 +4989,7 @@ void glGetActiveUniformsiv(
         NativeFunction<
           Void Function(
             Uint32 program,
-            Uint32 uniformCount,
+            Int32 uniformCount,
             Pointer<Uint32> uniformIndices,
             Uint32 pname,
             Pointer<Int32> params,
@@ -5106,7 +5025,7 @@ void glGetActiveUniformName(
   int program,
   int uniformIndex,
   int bufSize,
-  Pointer<Uint32> length,
+  Pointer<Int32> length,
   Pointer<Int8> uniformName,
 ) {
   final glGetActiveUniformNameAsFunction = _glGetActiveUniformName
@@ -5115,8 +5034,8 @@ void glGetActiveUniformName(
           Void Function(
             Uint32 program,
             Uint32 uniformIndex,
-            Uint32 bufSize,
-            Pointer<Uint32> length,
+            Int32 bufSize,
+            Pointer<Int32> length,
             Pointer<Int8> uniformName,
           )
         >
@@ -5126,7 +5045,7 @@ void glGetActiveUniformName(
           int program,
           int uniformIndex,
           int bufSize,
-          Pointer<Uint32> length,
+          Pointer<Int32> length,
           Pointer<Int8> uniformName,
         )
       >();
@@ -5214,7 +5133,7 @@ void glGetActiveUniformBlockName(
   int program,
   int uniformBlockIndex,
   int bufSize,
-  Pointer<Uint32> length,
+  Pointer<Int32> length,
   Pointer<Int8> uniformBlockName,
 ) {
   final glGetActiveUniformBlockNameAsFunction = _glGetActiveUniformBlockName
@@ -5223,8 +5142,8 @@ void glGetActiveUniformBlockName(
           Void Function(
             Uint32 program,
             Uint32 uniformBlockIndex,
-            Uint32 bufSize,
-            Pointer<Uint32> length,
+            Int32 bufSize,
+            Pointer<Int32> length,
             Pointer<Int8> uniformBlockName,
           )
         >
@@ -5234,7 +5153,7 @@ void glGetActiveUniformBlockName(
           int program,
           int uniformBlockIndex,
           int bufSize,
-          Pointer<Uint32> length,
+          Pointer<Int32> length,
           Pointer<Int8> uniformBlockName,
         )
       >();
@@ -5294,7 +5213,7 @@ void glDrawElementsBaseVertex(
   int mode,
   int count,
   int type,
-  Pointer<NativeType> indices,
+  Pointer<Void> indices,
   int basevertex,
 ) {
   final glDrawElementsBaseVertexAsFunction = _glDrawElementsBaseVertex
@@ -5302,9 +5221,9 @@ void glDrawElementsBaseVertex(
         NativeFunction<
           Void Function(
             Uint32 mode,
-            Uint32 count,
+            Int32 count,
             Uint32 type,
-            Pointer<NativeType> indices,
+            Pointer<Void> indices,
             Int32 basevertex,
           )
         >
@@ -5314,7 +5233,7 @@ void glDrawElementsBaseVertex(
           int mode,
           int count,
           int type,
-          Pointer<NativeType> indices,
+          Pointer<Void> indices,
           int basevertex,
         )
       >();
@@ -5340,7 +5259,7 @@ void glDrawRangeElementsBaseVertex(
   int end,
   int count,
   int type,
-  Pointer<NativeType> indices,
+  Pointer<Void> indices,
   int basevertex,
 ) {
   final glDrawRangeElementsBaseVertexAsFunction = _glDrawRangeElementsBaseVertex
@@ -5350,9 +5269,9 @@ void glDrawRangeElementsBaseVertex(
             Uint32 mode,
             Uint32 start,
             Uint32 end,
-            Uint32 count,
+            Int32 count,
             Uint32 type,
-            Pointer<NativeType> indices,
+            Pointer<Void> indices,
             Int32 basevertex,
           )
         >
@@ -5364,7 +5283,7 @@ void glDrawRangeElementsBaseVertex(
           int end,
           int count,
           int type,
-          Pointer<NativeType> indices,
+          Pointer<Void> indices,
           int basevertex,
         )
       >();
@@ -5391,7 +5310,7 @@ void glDrawElementsInstancedBaseVertex(
   int mode,
   int count,
   int type,
-  Pointer<NativeType> indices,
+  Pointer<Void> indices,
   int instancecount,
   int basevertex,
 ) {
@@ -5401,10 +5320,10 @@ void glDrawElementsInstancedBaseVertex(
             NativeFunction<
               Void Function(
                 Uint32 mode,
-                Uint32 count,
+                Int32 count,
                 Uint32 type,
-                Pointer<NativeType> indices,
-                Uint32 instancecount,
+                Pointer<Void> indices,
+                Int32 instancecount,
                 Int32 basevertex,
               )
             >
@@ -5414,7 +5333,7 @@ void glDrawElementsInstancedBaseVertex(
               int mode,
               int count,
               int type,
-              Pointer<NativeType> indices,
+              Pointer<Void> indices,
               int instancecount,
               int basevertex,
             )
@@ -5438,9 +5357,9 @@ late Pointer<NativeFunction<Void Function()>> _glMultiDrawElementsBaseVertex;
 /// {@category opengl_glext}
 void glMultiDrawElementsBaseVertex(
   int mode,
-  Pointer<Uint32> count,
+  Pointer<Int32> count,
   int type,
-  Pointer<Pointer<NativeType>> indices,
+  Pointer<Pointer<Void>> indices,
   int drawcount,
   Pointer<Int32> basevertex,
 ) {
@@ -5449,10 +5368,10 @@ void glMultiDrawElementsBaseVertex(
         NativeFunction<
           Void Function(
             Uint32 mode,
-            Pointer<Uint32> count,
+            Pointer<Int32> count,
             Uint32 type,
-            Pointer<Pointer<NativeType>> indices,
-            Uint32 drawcount,
+            Pointer<Pointer<Void>> indices,
+            Int32 drawcount,
             Pointer<Int32> basevertex,
           )
         >
@@ -5460,9 +5379,9 @@ void glMultiDrawElementsBaseVertex(
       .asFunction<
         void Function(
           int mode,
-          Pointer<Uint32> count,
+          Pointer<Int32> count,
           int type,
-          Pointer<Pointer<NativeType>> indices,
+          Pointer<Pointer<Void>> indices,
           int drawcount,
           Pointer<Int32> basevertex,
         )
@@ -5498,14 +5417,12 @@ late Pointer<NativeFunction<Void Function()>> _glFenceSync;
 /// GLAPI GLsync APIENTRY glFenceSync (GLenum condition, GLbitfield flags)
 /// ```
 /// {@category opengl_glext}
-Pointer<NativeType> glFenceSync(int condition, int flags) {
+Pointer<Void> glFenceSync(int condition, int flags) {
   final glFenceSyncAsFunction = _glFenceSync
       .cast<
-        NativeFunction<
-          Pointer<NativeType> Function(Uint32 condition, Uint32 flags)
-        >
+        NativeFunction<Pointer<Void> Function(Uint32 condition, Uint32 flags)>
       >()
-      .asFunction<Pointer<NativeType> Function(int condition, int flags)>();
+      .asFunction<Pointer<Void> Function(int condition, int flags)>();
   return glFenceSyncAsFunction(condition, flags);
 }
 
@@ -5516,10 +5433,10 @@ late Pointer<NativeFunction<Void Function()>> _glIsSync;
 /// GLAPI GLboolean APIENTRY glIsSync (GLsync sync)
 /// ```
 /// {@category opengl_glext}
-int glIsSync(Pointer<NativeType> sync) {
+int glIsSync(Pointer<Void> sync) {
   final glIsSyncAsFunction = _glIsSync
-      .cast<NativeFunction<Int32 Function(Pointer<NativeType> sync)>>()
-      .asFunction<int Function(Pointer<NativeType> sync)>();
+      .cast<NativeFunction<Uint8 Function(Pointer<Void> sync)>>()
+      .asFunction<int Function(Pointer<Void> sync)>();
   return glIsSyncAsFunction(sync);
 }
 
@@ -5530,10 +5447,10 @@ late Pointer<NativeFunction<Void Function()>> _glDeleteSync;
 /// GLAPI void APIENTRY glDeleteSync (GLsync sync)
 /// ```
 /// {@category opengl_glext}
-void glDeleteSync(Pointer<NativeType> sync) {
+void glDeleteSync(Pointer<Void> sync) {
   final glDeleteSyncAsFunction = _glDeleteSync
-      .cast<NativeFunction<Void Function(Pointer<NativeType> sync)>>()
-      .asFunction<void Function(Pointer<NativeType> sync)>();
+      .cast<NativeFunction<Void Function(Pointer<Void> sync)>>()
+      .asFunction<void Function(Pointer<Void> sync)>();
   return glDeleteSyncAsFunction(sync);
 }
 
@@ -5544,20 +5461,14 @@ late Pointer<NativeFunction<Void Function()>> _glClientWaitSync;
 /// GLAPI GLenum APIENTRY glClientWaitSync (GLsync sync, GLbitfield flags, GLuint64 timeout)
 /// ```
 /// {@category opengl_glext}
-int glClientWaitSync(Pointer<NativeType> sync, int flags, int timeout) {
+int glClientWaitSync(Pointer<Void> sync, int flags, int timeout) {
   final glClientWaitSyncAsFunction = _glClientWaitSync
       .cast<
         NativeFunction<
-          Uint32 Function(
-            Pointer<NativeType> sync,
-            Uint32 flags,
-            Uint64 timeout,
-          )
+          Uint32 Function(Pointer<Void> sync, Uint32 flags, Uint64 timeout)
         >
       >()
-      .asFunction<
-        int Function(Pointer<NativeType> sync, int flags, int timeout)
-      >();
+      .asFunction<int Function(Pointer<Void> sync, int flags, int timeout)>();
   return glClientWaitSyncAsFunction(sync, flags, timeout);
 }
 
@@ -5568,16 +5479,14 @@ late Pointer<NativeFunction<Void Function()>> _glWaitSync;
 /// GLAPI void APIENTRY glWaitSync (GLsync sync, GLbitfield flags, GLuint64 timeout)
 /// ```
 /// {@category opengl_glext}
-void glWaitSync(Pointer<NativeType> sync, int flags, int timeout) {
+void glWaitSync(Pointer<Void> sync, int flags, int timeout) {
   final glWaitSyncAsFunction = _glWaitSync
       .cast<
         NativeFunction<
-          Void Function(Pointer<NativeType> sync, Uint32 flags, Uint64 timeout)
+          Void Function(Pointer<Void> sync, Uint32 flags, Uint64 timeout)
         >
       >()
-      .asFunction<
-        void Function(Pointer<NativeType> sync, int flags, int timeout)
-      >();
+      .asFunction<void Function(Pointer<Void> sync, int flags, int timeout)>();
   return glWaitSyncAsFunction(sync, flags, timeout);
 }
 
@@ -5603,30 +5512,30 @@ late Pointer<NativeFunction<Void Function()>> _glGetSynciv;
 /// ```
 /// {@category opengl_glext}
 void glGetSynciv(
-  Pointer<NativeType> sync,
+  Pointer<Void> sync,
   int pname,
   int count,
-  Pointer<Uint32> length,
+  Pointer<Int32> length,
   Pointer<Int32> values,
 ) {
   final glGetSyncivAsFunction = _glGetSynciv
       .cast<
         NativeFunction<
           Void Function(
-            Pointer<NativeType> sync,
+            Pointer<Void> sync,
             Uint32 pname,
-            Uint32 count,
-            Pointer<Uint32> length,
+            Int32 count,
+            Pointer<Int32> length,
             Pointer<Int32> values,
           )
         >
       >()
       .asFunction<
         void Function(
-          Pointer<NativeType> sync,
+          Pointer<Void> sync,
           int pname,
           int count,
-          Pointer<Uint32> length,
+          Pointer<Int32> length,
           Pointer<Int32> values,
         )
       >();
@@ -5716,11 +5625,11 @@ void glTexImage2DMultisample(
         NativeFunction<
           Void Function(
             Uint32 target,
-            Uint32 samples,
+            Int32 samples,
             Uint32 internalformat,
-            Uint32 width,
-            Uint32 height,
-            Int32 fixedsamplelocations,
+            Int32 width,
+            Int32 height,
+            Uint8 fixedsamplelocations,
           )
         >
       >()
@@ -5765,12 +5674,12 @@ void glTexImage3DMultisample(
         NativeFunction<
           Void Function(
             Uint32 target,
-            Uint32 samples,
+            Int32 samples,
             Uint32 internalformat,
-            Uint32 width,
-            Uint32 height,
-            Uint32 depth,
-            Int32 fixedsamplelocations,
+            Int32 width,
+            Int32 height,
+            Int32 depth,
+            Uint8 fixedsamplelocations,
           )
         >
       >()
@@ -5900,7 +5809,7 @@ late Pointer<NativeFunction<Void Function()>> _glGenSamplers;
 void glGenSamplers(int count, Pointer<Uint32> samplers) {
   final glGenSamplersAsFunction = _glGenSamplers
       .cast<
-        NativeFunction<Void Function(Uint32 count, Pointer<Uint32> samplers)>
+        NativeFunction<Void Function(Int32 count, Pointer<Uint32> samplers)>
       >()
       .asFunction<void Function(int count, Pointer<Uint32> samplers)>();
   return glGenSamplersAsFunction(count, samplers);
@@ -5916,7 +5825,7 @@ late Pointer<NativeFunction<Void Function()>> _glDeleteSamplers;
 void glDeleteSamplers(int count, Pointer<Uint32> samplers) {
   final glDeleteSamplersAsFunction = _glDeleteSamplers
       .cast<
-        NativeFunction<Void Function(Uint32 count, Pointer<Uint32> samplers)>
+        NativeFunction<Void Function(Int32 count, Pointer<Uint32> samplers)>
       >()
       .asFunction<void Function(int count, Pointer<Uint32> samplers)>();
   return glDeleteSamplersAsFunction(count, samplers);
@@ -5931,7 +5840,7 @@ late Pointer<NativeFunction<Void Function()>> _glIsSampler;
 /// {@category opengl_glext}
 int glIsSampler(int sampler) {
   final glIsSamplerAsFunction = _glIsSampler
-      .cast<NativeFunction<Int32 Function(Uint32 sampler)>>()
+      .cast<NativeFunction<Uint8 Function(Uint32 sampler)>>()
       .asFunction<int Function(int sampler)>();
   return glIsSamplerAsFunction(sampler);
 }
@@ -6220,7 +6129,7 @@ void glVertexAttribP1ui(int index, int type, int normalized, int value) {
           Void Function(
             Uint32 index,
             Uint32 type,
-            Int32 normalized,
+            Uint8 normalized,
             Uint32 value,
           )
         >
@@ -6250,7 +6159,7 @@ void glVertexAttribP1uiv(
           Void Function(
             Uint32 index,
             Uint32 type,
-            Int32 normalized,
+            Uint8 normalized,
             Pointer<Uint32> value,
           )
         >
@@ -6280,7 +6189,7 @@ void glVertexAttribP2ui(int index, int type, int normalized, int value) {
           Void Function(
             Uint32 index,
             Uint32 type,
-            Int32 normalized,
+            Uint8 normalized,
             Uint32 value,
           )
         >
@@ -6310,7 +6219,7 @@ void glVertexAttribP2uiv(
           Void Function(
             Uint32 index,
             Uint32 type,
-            Int32 normalized,
+            Uint8 normalized,
             Pointer<Uint32> value,
           )
         >
@@ -6340,7 +6249,7 @@ void glVertexAttribP3ui(int index, int type, int normalized, int value) {
           Void Function(
             Uint32 index,
             Uint32 type,
-            Int32 normalized,
+            Uint8 normalized,
             Uint32 value,
           )
         >
@@ -6370,7 +6279,7 @@ void glVertexAttribP3uiv(
           Void Function(
             Uint32 index,
             Uint32 type,
-            Int32 normalized,
+            Uint8 normalized,
             Pointer<Uint32> value,
           )
         >
@@ -6400,7 +6309,7 @@ void glVertexAttribP4ui(int index, int type, int normalized, int value) {
           Void Function(
             Uint32 index,
             Uint32 type,
-            Int32 normalized,
+            Uint8 normalized,
             Uint32 value,
           )
         >
@@ -6430,7 +6339,7 @@ void glVertexAttribP4uiv(
           Void Function(
             Uint32 index,
             Uint32 type,
-            Int32 normalized,
+            Uint8 normalized,
             Pointer<Uint32> value,
           )
         >
@@ -7027,12 +6936,12 @@ late Pointer<NativeFunction<Void Function()>> _glDrawArraysIndirect;
 /// GLAPI void APIENTRY glDrawArraysIndirect (GLenum mode, const void *indirect)
 /// ```
 /// {@category opengl_glext}
-void glDrawArraysIndirect(int mode, Pointer<NativeType> indirect) {
+void glDrawArraysIndirect(int mode, Pointer<Void> indirect) {
   final glDrawArraysIndirectAsFunction = _glDrawArraysIndirect
       .cast<
-        NativeFunction<Void Function(Uint32 mode, Pointer<NativeType> indirect)>
+        NativeFunction<Void Function(Uint32 mode, Pointer<Void> indirect)>
       >()
-      .asFunction<void Function(int mode, Pointer<NativeType> indirect)>();
+      .asFunction<void Function(int mode, Pointer<Void> indirect)>();
   return glDrawArraysIndirectAsFunction(mode, indirect);
 }
 
@@ -7043,16 +6952,14 @@ late Pointer<NativeFunction<Void Function()>> _glDrawElementsIndirect;
 /// GLAPI void APIENTRY glDrawElementsIndirect (GLenum mode, GLenum type, const void *indirect)
 /// ```
 /// {@category opengl_glext}
-void glDrawElementsIndirect(int mode, int type, Pointer<NativeType> indirect) {
+void glDrawElementsIndirect(int mode, int type, Pointer<Void> indirect) {
   final glDrawElementsIndirectAsFunction = _glDrawElementsIndirect
       .cast<
         NativeFunction<
-          Void Function(Uint32 mode, Uint32 type, Pointer<NativeType> indirect)
+          Void Function(Uint32 mode, Uint32 type, Pointer<Void> indirect)
         >
       >()
-      .asFunction<
-        void Function(int mode, int type, Pointer<NativeType> indirect)
-      >();
+      .asFunction<void Function(int mode, int type, Pointer<Void> indirect)>();
   return glDrawElementsIndirectAsFunction(mode, type, indirect);
 }
 
@@ -7133,7 +7040,7 @@ void glUniform1dv(int location, int count, Pointer<Double> value) {
   final glUniform1dvAsFunction = _glUniform1dv
       .cast<
         NativeFunction<
-          Void Function(Int32 location, Uint32 count, Pointer<Double> value)
+          Void Function(Int32 location, Int32 count, Pointer<Double> value)
         >
       >()
       .asFunction<
@@ -7153,7 +7060,7 @@ void glUniform2dv(int location, int count, Pointer<Double> value) {
   final glUniform2dvAsFunction = _glUniform2dv
       .cast<
         NativeFunction<
-          Void Function(Int32 location, Uint32 count, Pointer<Double> value)
+          Void Function(Int32 location, Int32 count, Pointer<Double> value)
         >
       >()
       .asFunction<
@@ -7173,7 +7080,7 @@ void glUniform3dv(int location, int count, Pointer<Double> value) {
   final glUniform3dvAsFunction = _glUniform3dv
       .cast<
         NativeFunction<
-          Void Function(Int32 location, Uint32 count, Pointer<Double> value)
+          Void Function(Int32 location, Int32 count, Pointer<Double> value)
         >
       >()
       .asFunction<
@@ -7193,7 +7100,7 @@ void glUniform4dv(int location, int count, Pointer<Double> value) {
   final glUniform4dvAsFunction = _glUniform4dv
       .cast<
         NativeFunction<
-          Void Function(Int32 location, Uint32 count, Pointer<Double> value)
+          Void Function(Int32 location, Int32 count, Pointer<Double> value)
         >
       >()
       .asFunction<
@@ -7220,8 +7127,8 @@ void glUniformMatrix2dv(
         NativeFunction<
           Void Function(
             Int32 location,
-            Uint32 count,
-            Int32 transpose,
+            Int32 count,
+            Uint8 transpose,
             Pointer<Double> value,
           )
         >
@@ -7255,8 +7162,8 @@ void glUniformMatrix3dv(
         NativeFunction<
           Void Function(
             Int32 location,
-            Uint32 count,
-            Int32 transpose,
+            Int32 count,
+            Uint8 transpose,
             Pointer<Double> value,
           )
         >
@@ -7290,8 +7197,8 @@ void glUniformMatrix4dv(
         NativeFunction<
           Void Function(
             Int32 location,
-            Uint32 count,
-            Int32 transpose,
+            Int32 count,
+            Uint8 transpose,
             Pointer<Double> value,
           )
         >
@@ -7325,8 +7232,8 @@ void glUniformMatrix2x3dv(
         NativeFunction<
           Void Function(
             Int32 location,
-            Uint32 count,
-            Int32 transpose,
+            Int32 count,
+            Uint8 transpose,
             Pointer<Double> value,
           )
         >
@@ -7360,8 +7267,8 @@ void glUniformMatrix2x4dv(
         NativeFunction<
           Void Function(
             Int32 location,
-            Uint32 count,
-            Int32 transpose,
+            Int32 count,
+            Uint8 transpose,
             Pointer<Double> value,
           )
         >
@@ -7395,8 +7302,8 @@ void glUniformMatrix3x2dv(
         NativeFunction<
           Void Function(
             Int32 location,
-            Uint32 count,
-            Int32 transpose,
+            Int32 count,
+            Uint8 transpose,
             Pointer<Double> value,
           )
         >
@@ -7430,8 +7337,8 @@ void glUniformMatrix3x4dv(
         NativeFunction<
           Void Function(
             Int32 location,
-            Uint32 count,
-            Int32 transpose,
+            Int32 count,
+            Uint8 transpose,
             Pointer<Double> value,
           )
         >
@@ -7465,8 +7372,8 @@ void glUniformMatrix4x2dv(
         NativeFunction<
           Void Function(
             Int32 location,
-            Uint32 count,
-            Int32 transpose,
+            Int32 count,
+            Uint8 transpose,
             Pointer<Double> value,
           )
         >
@@ -7500,8 +7407,8 @@ void glUniformMatrix4x3dv(
         NativeFunction<
           Void Function(
             Int32 location,
-            Uint32 count,
-            Int32 transpose,
+            Int32 count,
+            Uint8 transpose,
             Pointer<Double> value,
           )
         >
@@ -7653,7 +7560,7 @@ void glGetActiveSubroutineUniformName(
   int shadertype,
   int index,
   int bufSize,
-  Pointer<Uint32> length,
+  Pointer<Int32> length,
   Pointer<Int8> name,
 ) {
   final glGetActiveSubroutineUniformNameAsFunction =
@@ -7664,8 +7571,8 @@ void glGetActiveSubroutineUniformName(
                 Uint32 program,
                 Uint32 shadertype,
                 Uint32 index,
-                Uint32 bufSize,
-                Pointer<Uint32> length,
+                Int32 bufSize,
+                Pointer<Int32> length,
                 Pointer<Int8> name,
               )
             >
@@ -7676,7 +7583,7 @@ void glGetActiveSubroutineUniformName(
               int shadertype,
               int index,
               int bufSize,
-              Pointer<Uint32> length,
+              Pointer<Int32> length,
               Pointer<Int8> name,
             )
           >();
@@ -7702,7 +7609,7 @@ void glGetActiveSubroutineName(
   int shadertype,
   int index,
   int bufSize,
-  Pointer<Uint32> length,
+  Pointer<Int32> length,
   Pointer<Int8> name,
 ) {
   final glGetActiveSubroutineNameAsFunction = _glGetActiveSubroutineName
@@ -7712,8 +7619,8 @@ void glGetActiveSubroutineName(
             Uint32 program,
             Uint32 shadertype,
             Uint32 index,
-            Uint32 bufSize,
-            Pointer<Uint32> length,
+            Int32 bufSize,
+            Pointer<Int32> length,
             Pointer<Int8> name,
           )
         >
@@ -7724,7 +7631,7 @@ void glGetActiveSubroutineName(
           int shadertype,
           int index,
           int bufSize,
-          Pointer<Uint32> length,
+          Pointer<Int32> length,
           Pointer<Int8> name,
         )
       >();
@@ -7753,11 +7660,7 @@ void glUniformSubroutinesuiv(
   final glUniformSubroutinesuivAsFunction = _glUniformSubroutinesuiv
       .cast<
         NativeFunction<
-          Void Function(
-            Uint32 shadertype,
-            Uint32 count,
-            Pointer<Uint32> indices,
-          )
+          Void Function(Uint32 shadertype, Int32 count, Pointer<Uint32> indices)
         >
       >()
       .asFunction<
@@ -7882,7 +7785,7 @@ late Pointer<NativeFunction<Void Function()>> _glDeleteTransformFeedbacks;
 /// {@category opengl_glext}
 void glDeleteTransformFeedbacks(int n, Pointer<Uint32> ids) {
   final glDeleteTransformFeedbacksAsFunction = _glDeleteTransformFeedbacks
-      .cast<NativeFunction<Void Function(Uint32 n, Pointer<Uint32> ids)>>()
+      .cast<NativeFunction<Void Function(Int32 n, Pointer<Uint32> ids)>>()
       .asFunction<void Function(int n, Pointer<Uint32> ids)>();
   return glDeleteTransformFeedbacksAsFunction(n, ids);
 }
@@ -7896,7 +7799,7 @@ late Pointer<NativeFunction<Void Function()>> _glGenTransformFeedbacks;
 /// {@category opengl_glext}
 void glGenTransformFeedbacks(int n, Pointer<Uint32> ids) {
   final glGenTransformFeedbacksAsFunction = _glGenTransformFeedbacks
-      .cast<NativeFunction<Void Function(Uint32 n, Pointer<Uint32> ids)>>()
+      .cast<NativeFunction<Void Function(Int32 n, Pointer<Uint32> ids)>>()
       .asFunction<void Function(int n, Pointer<Uint32> ids)>();
   return glGenTransformFeedbacksAsFunction(n, ids);
 }
@@ -7910,7 +7813,7 @@ late Pointer<NativeFunction<Void Function()>> _glIsTransformFeedback;
 /// {@category opengl_glext}
 int glIsTransformFeedback(int id) {
   final glIsTransformFeedbackAsFunction = _glIsTransformFeedback
-      .cast<NativeFunction<Int32 Function(Uint32 id)>>()
+      .cast<NativeFunction<Uint8 Function(Uint32 id)>>()
       .asFunction<int Function(int id)>();
   return glIsTransformFeedbackAsFunction(id);
 }
@@ -8058,18 +7961,18 @@ void glShaderBinary(
   int count,
   Pointer<Uint32> shaders,
   int binaryFormat,
-  Pointer<NativeType> binary,
+  Pointer<Void> binary,
   int length,
 ) {
   final glShaderBinaryAsFunction = _glShaderBinary
       .cast<
         NativeFunction<
           Void Function(
-            Uint32 count,
+            Int32 count,
             Pointer<Uint32> shaders,
             Uint32 binaryFormat,
-            Pointer<NativeType> binary,
-            Uint32 length,
+            Pointer<Void> binary,
+            Int32 length,
           )
         >
       >()
@@ -8078,7 +7981,7 @@ void glShaderBinary(
           int count,
           Pointer<Uint32> shaders,
           int binaryFormat,
-          Pointer<NativeType> binary,
+          Pointer<Void> binary,
           int length,
         )
       >();
@@ -8163,19 +8066,19 @@ late Pointer<NativeFunction<Void Function()>> _glGetProgramBinary;
 void glGetProgramBinary(
   int program,
   int bufSize,
-  Pointer<Uint32> length,
+  Pointer<Int32> length,
   Pointer<Uint32> binaryFormat,
-  Pointer<NativeType> binary,
+  Pointer<Void> binary,
 ) {
   final glGetProgramBinaryAsFunction = _glGetProgramBinary
       .cast<
         NativeFunction<
           Void Function(
             Uint32 program,
-            Uint32 bufSize,
-            Pointer<Uint32> length,
+            Int32 bufSize,
+            Pointer<Int32> length,
             Pointer<Uint32> binaryFormat,
-            Pointer<NativeType> binary,
+            Pointer<Void> binary,
           )
         >
       >()
@@ -8183,9 +8086,9 @@ void glGetProgramBinary(
         void Function(
           int program,
           int bufSize,
-          Pointer<Uint32> length,
+          Pointer<Int32> length,
           Pointer<Uint32> binaryFormat,
-          Pointer<NativeType> binary,
+          Pointer<Void> binary,
         )
       >();
   return glGetProgramBinaryAsFunction(
@@ -8207,7 +8110,7 @@ late Pointer<NativeFunction<Void Function()>> _glProgramBinary;
 void glProgramBinary(
   int program,
   int binaryFormat,
-  Pointer<NativeType> binary,
+  Pointer<Void> binary,
   int length,
 ) {
   final glProgramBinaryAsFunction = _glProgramBinary
@@ -8216,8 +8119,8 @@ void glProgramBinary(
           Void Function(
             Uint32 program,
             Uint32 binaryFormat,
-            Pointer<NativeType> binary,
-            Uint32 length,
+            Pointer<Void> binary,
+            Int32 length,
           )
         >
       >()
@@ -8225,7 +8128,7 @@ void glProgramBinary(
         void Function(
           int program,
           int binaryFormat,
-          Pointer<NativeType> binary,
+          Pointer<Void> binary,
           int length,
         )
       >();
@@ -8297,7 +8200,7 @@ int glCreateShaderProgramv(
         NativeFunction<
           Uint32 Function(
             Uint32 type,
-            Uint32 count,
+            Int32 count,
             Pointer<Pointer<Int8>> strings,
           )
         >
@@ -8331,9 +8234,7 @@ late Pointer<NativeFunction<Void Function()>> _glDeleteProgramPipelines;
 /// {@category opengl_glext}
 void glDeleteProgramPipelines(int n, Pointer<Uint32> pipelines) {
   final glDeleteProgramPipelinesAsFunction = _glDeleteProgramPipelines
-      .cast<
-        NativeFunction<Void Function(Uint32 n, Pointer<Uint32> pipelines)>
-      >()
+      .cast<NativeFunction<Void Function(Int32 n, Pointer<Uint32> pipelines)>>()
       .asFunction<void Function(int n, Pointer<Uint32> pipelines)>();
   return glDeleteProgramPipelinesAsFunction(n, pipelines);
 }
@@ -8347,9 +8248,7 @@ late Pointer<NativeFunction<Void Function()>> _glGenProgramPipelines;
 /// {@category opengl_glext}
 void glGenProgramPipelines(int n, Pointer<Uint32> pipelines) {
   final glGenProgramPipelinesAsFunction = _glGenProgramPipelines
-      .cast<
-        NativeFunction<Void Function(Uint32 n, Pointer<Uint32> pipelines)>
-      >()
+      .cast<NativeFunction<Void Function(Int32 n, Pointer<Uint32> pipelines)>>()
       .asFunction<void Function(int n, Pointer<Uint32> pipelines)>();
   return glGenProgramPipelinesAsFunction(n, pipelines);
 }
@@ -8363,7 +8262,7 @@ late Pointer<NativeFunction<Void Function()>> _glIsProgramPipeline;
 /// {@category opengl_glext}
 int glIsProgramPipeline(int pipeline) {
   final glIsProgramPipelineAsFunction = _glIsProgramPipeline
-      .cast<NativeFunction<Int32 Function(Uint32 pipeline)>>()
+      .cast<NativeFunction<Uint8 Function(Uint32 pipeline)>>()
       .asFunction<int Function(int pipeline)>();
   return glIsProgramPipelineAsFunction(pipeline);
 }
@@ -8423,7 +8322,7 @@ void glProgramUniform1iv(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 count,
+            Int32 count,
             Pointer<Int32> value,
           )
         >
@@ -8474,7 +8373,7 @@ void glProgramUniform1fv(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 count,
+            Int32 count,
             Pointer<Float> value,
           )
         >
@@ -8525,7 +8424,7 @@ void glProgramUniform1dv(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 count,
+            Int32 count,
             Pointer<Double> value,
           )
         >
@@ -8576,7 +8475,7 @@ void glProgramUniform1uiv(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 count,
+            Int32 count,
             Pointer<Uint32> value,
           )
         >
@@ -8629,7 +8528,7 @@ void glProgramUniform2iv(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 count,
+            Int32 count,
             Pointer<Int32> value,
           )
         >
@@ -8684,7 +8583,7 @@ void glProgramUniform2fv(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 count,
+            Int32 count,
             Pointer<Float> value,
           )
         >
@@ -8739,7 +8638,7 @@ void glProgramUniform2dv(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 count,
+            Int32 count,
             Pointer<Double> value,
           )
         >
@@ -8792,7 +8691,7 @@ void glProgramUniform2uiv(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 count,
+            Int32 count,
             Pointer<Uint32> value,
           )
         >
@@ -8853,7 +8752,7 @@ void glProgramUniform3iv(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 count,
+            Int32 count,
             Pointer<Int32> value,
           )
         >
@@ -8926,7 +8825,7 @@ void glProgramUniform3fv(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 count,
+            Int32 count,
             Pointer<Float> value,
           )
         >
@@ -8999,7 +8898,7 @@ void glProgramUniform3dv(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 count,
+            Int32 count,
             Pointer<Double> value,
           )
         >
@@ -9060,7 +8959,7 @@ void glProgramUniform3uiv(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 count,
+            Int32 count,
             Pointer<Uint32> value,
           )
         >
@@ -9129,7 +9028,7 @@ void glProgramUniform4iv(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 count,
+            Int32 count,
             Pointer<Int32> value,
           )
         >
@@ -9205,7 +9104,7 @@ void glProgramUniform4fv(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 count,
+            Int32 count,
             Pointer<Float> value,
           )
         >
@@ -9281,7 +9180,7 @@ void glProgramUniform4dv(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 count,
+            Int32 count,
             Pointer<Double> value,
           )
         >
@@ -9350,7 +9249,7 @@ void glProgramUniform4uiv(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 count,
+            Int32 count,
             Pointer<Uint32> value,
           )
         >
@@ -9386,8 +9285,8 @@ void glProgramUniformMatrix2fv(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 count,
-            Int32 transpose,
+            Int32 count,
+            Uint8 transpose,
             Pointer<Float> value,
           )
         >
@@ -9430,8 +9329,8 @@ void glProgramUniformMatrix3fv(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 count,
-            Int32 transpose,
+            Int32 count,
+            Uint8 transpose,
             Pointer<Float> value,
           )
         >
@@ -9474,8 +9373,8 @@ void glProgramUniformMatrix4fv(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 count,
-            Int32 transpose,
+            Int32 count,
+            Uint8 transpose,
             Pointer<Float> value,
           )
         >
@@ -9518,8 +9417,8 @@ void glProgramUniformMatrix2dv(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 count,
-            Int32 transpose,
+            Int32 count,
+            Uint8 transpose,
             Pointer<Double> value,
           )
         >
@@ -9562,8 +9461,8 @@ void glProgramUniformMatrix3dv(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 count,
-            Int32 transpose,
+            Int32 count,
+            Uint8 transpose,
             Pointer<Double> value,
           )
         >
@@ -9606,8 +9505,8 @@ void glProgramUniformMatrix4dv(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 count,
-            Int32 transpose,
+            Int32 count,
+            Uint8 transpose,
             Pointer<Double> value,
           )
         >
@@ -9650,8 +9549,8 @@ void glProgramUniformMatrix2x3fv(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 count,
-            Int32 transpose,
+            Int32 count,
+            Uint8 transpose,
             Pointer<Float> value,
           )
         >
@@ -9694,8 +9593,8 @@ void glProgramUniformMatrix3x2fv(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 count,
-            Int32 transpose,
+            Int32 count,
+            Uint8 transpose,
             Pointer<Float> value,
           )
         >
@@ -9738,8 +9637,8 @@ void glProgramUniformMatrix2x4fv(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 count,
-            Int32 transpose,
+            Int32 count,
+            Uint8 transpose,
             Pointer<Float> value,
           )
         >
@@ -9782,8 +9681,8 @@ void glProgramUniformMatrix4x2fv(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 count,
-            Int32 transpose,
+            Int32 count,
+            Uint8 transpose,
             Pointer<Float> value,
           )
         >
@@ -9826,8 +9725,8 @@ void glProgramUniformMatrix3x4fv(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 count,
-            Int32 transpose,
+            Int32 count,
+            Uint8 transpose,
             Pointer<Float> value,
           )
         >
@@ -9870,8 +9769,8 @@ void glProgramUniformMatrix4x3fv(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 count,
-            Int32 transpose,
+            Int32 count,
+            Uint8 transpose,
             Pointer<Float> value,
           )
         >
@@ -9914,8 +9813,8 @@ void glProgramUniformMatrix2x3dv(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 count,
-            Int32 transpose,
+            Int32 count,
+            Uint8 transpose,
             Pointer<Double> value,
           )
         >
@@ -9958,8 +9857,8 @@ void glProgramUniformMatrix3x2dv(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 count,
-            Int32 transpose,
+            Int32 count,
+            Uint8 transpose,
             Pointer<Double> value,
           )
         >
@@ -10002,8 +9901,8 @@ void glProgramUniformMatrix2x4dv(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 count,
-            Int32 transpose,
+            Int32 count,
+            Uint8 transpose,
             Pointer<Double> value,
           )
         >
@@ -10046,8 +9945,8 @@ void glProgramUniformMatrix4x2dv(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 count,
-            Int32 transpose,
+            Int32 count,
+            Uint8 transpose,
             Pointer<Double> value,
           )
         >
@@ -10090,8 +9989,8 @@ void glProgramUniformMatrix3x4dv(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 count,
-            Int32 transpose,
+            Int32 count,
+            Uint8 transpose,
             Pointer<Double> value,
           )
         >
@@ -10134,8 +10033,8 @@ void glProgramUniformMatrix4x3dv(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 count,
-            Int32 transpose,
+            Int32 count,
+            Uint8 transpose,
             Pointer<Double> value,
           )
         >
@@ -10182,7 +10081,7 @@ late Pointer<NativeFunction<Void Function()>> _glGetProgramPipelineInfoLog;
 void glGetProgramPipelineInfoLog(
   int pipeline,
   int bufSize,
-  Pointer<Uint32> length,
+  Pointer<Int32> length,
   Pointer<Int8> infoLog,
 ) {
   final glGetProgramPipelineInfoLogAsFunction = _glGetProgramPipelineInfoLog
@@ -10190,8 +10089,8 @@ void glGetProgramPipelineInfoLog(
         NativeFunction<
           Void Function(
             Uint32 pipeline,
-            Uint32 bufSize,
-            Pointer<Uint32> length,
+            Int32 bufSize,
+            Pointer<Int32> length,
             Pointer<Int8> infoLog,
           )
         >
@@ -10200,7 +10099,7 @@ void glGetProgramPipelineInfoLog(
         void Function(
           int pipeline,
           int bufSize,
-          Pointer<Uint32> length,
+          Pointer<Int32> length,
           Pointer<Int8> infoLog,
         )
       >();
@@ -10346,7 +10245,7 @@ void glVertexAttribLPointer(
   int size,
   int type,
   int stride,
-  Pointer<NativeType> pointer,
+  Pointer<Void> pointer,
 ) {
   final glVertexAttribLPointerAsFunction = _glVertexAttribLPointer
       .cast<
@@ -10355,8 +10254,8 @@ void glVertexAttribLPointer(
             Uint32 index,
             Int32 size,
             Uint32 type,
-            Uint32 stride,
-            Pointer<NativeType> pointer,
+            Int32 stride,
+            Pointer<Void> pointer,
           )
         >
       >()
@@ -10366,7 +10265,7 @@ void glVertexAttribLPointer(
           int size,
           int type,
           int stride,
-          Pointer<NativeType> pointer,
+          Pointer<Void> pointer,
         )
       >();
   return glVertexAttribLPointerAsFunction(index, size, type, stride, pointer);
@@ -10403,7 +10302,7 @@ void glViewportArrayv(int first, int count, Pointer<Float> v) {
   final glViewportArrayvAsFunction = _glViewportArrayv
       .cast<
         NativeFunction<
-          Void Function(Uint32 first, Uint32 count, Pointer<Float> v)
+          Void Function(Uint32 first, Int32 count, Pointer<Float> v)
         >
       >()
       .asFunction<void Function(int first, int count, Pointer<Float> v)>();
@@ -10455,7 +10354,7 @@ void glScissorArrayv(int first, int count, Pointer<Int32> v) {
   final glScissorArrayvAsFunction = _glScissorArrayv
       .cast<
         NativeFunction<
-          Void Function(Uint32 first, Uint32 count, Pointer<Int32> v)
+          Void Function(Uint32 first, Int32 count, Pointer<Int32> v)
         >
       >()
       .asFunction<void Function(int first, int count, Pointer<Int32> v)>();
@@ -10477,8 +10376,8 @@ void glScissorIndexed(int index, int left, int bottom, int width, int height) {
             Uint32 index,
             Int32 left,
             Int32 bottom,
-            Uint32 width,
-            Uint32 height,
+            Int32 width,
+            Int32 height,
           )
         >
       >()
@@ -10513,7 +10412,7 @@ void glDepthRangeArrayv(int first, int count, Pointer<Double> v) {
   final glDepthRangeArrayvAsFunction = _glDepthRangeArrayv
       .cast<
         NativeFunction<
-          Void Function(Uint32 first, Uint32 count, Pointer<Double> v)
+          Void Function(Uint32 first, Int32 count, Pointer<Double> v)
         >
       >()
       .asFunction<void Function(int first, int count, Pointer<Double> v)>();
@@ -10592,8 +10491,8 @@ void glDrawArraysInstancedBaseInstance(
               Void Function(
                 Uint32 mode,
                 Int32 first,
-                Uint32 count,
-                Uint32 instancecount,
+                Int32 count,
+                Int32 instancecount,
                 Uint32 baseinstance,
               )
             >
@@ -10628,7 +10527,7 @@ void glDrawElementsInstancedBaseInstance(
   int mode,
   int count,
   int type,
-  Pointer<NativeType> indices,
+  Pointer<Void> indices,
   int instancecount,
   int baseinstance,
 ) {
@@ -10638,10 +10537,10 @@ void glDrawElementsInstancedBaseInstance(
             NativeFunction<
               Void Function(
                 Uint32 mode,
-                Uint32 count,
+                Int32 count,
                 Uint32 type,
-                Pointer<NativeType> indices,
-                Uint32 instancecount,
+                Pointer<Void> indices,
+                Int32 instancecount,
                 Uint32 baseinstance,
               )
             >
@@ -10651,7 +10550,7 @@ void glDrawElementsInstancedBaseInstance(
               int mode,
               int count,
               int type,
-              Pointer<NativeType> indices,
+              Pointer<Void> indices,
               int instancecount,
               int baseinstance,
             )
@@ -10678,7 +10577,7 @@ void glDrawElementsInstancedBaseVertexBaseInstance(
   int mode,
   int count,
   int type,
-  Pointer<NativeType> indices,
+  Pointer<Void> indices,
   int instancecount,
   int basevertex,
   int baseinstance,
@@ -10689,10 +10588,10 @@ void glDrawElementsInstancedBaseVertexBaseInstance(
             NativeFunction<
               Void Function(
                 Uint32 mode,
-                Uint32 count,
+                Int32 count,
                 Uint32 type,
-                Pointer<NativeType> indices,
-                Uint32 instancecount,
+                Pointer<Void> indices,
+                Int32 instancecount,
                 Int32 basevertex,
                 Uint32 baseinstance,
               )
@@ -10703,7 +10602,7 @@ void glDrawElementsInstancedBaseVertexBaseInstance(
               int mode,
               int count,
               int type,
-              Pointer<NativeType> indices,
+              Pointer<Void> indices,
               int instancecount,
               int basevertex,
               int baseinstance,
@@ -10741,7 +10640,7 @@ void glGetInternalformativ(
             Uint32 target,
             Uint32 internalformat,
             Uint32 pname,
-            Uint32 count,
+            Int32 count,
             Pointer<Int32> params,
           )
         >
@@ -10828,7 +10727,7 @@ void glBindImageTexture(
             Uint32 unit,
             Uint32 texture,
             Int32 level,
-            Int32 layered,
+            Uint8 layered,
             Int32 layer,
             Uint32 access,
             Uint32 format,
@@ -10884,9 +10783,9 @@ void glTexStorage1D(int target, int levels, int internalformat, int width) {
         NativeFunction<
           Void Function(
             Uint32 target,
-            Uint32 levels,
+            Int32 levels,
             Uint32 internalformat,
-            Uint32 width,
+            Int32 width,
           )
         >
       >()
@@ -10915,10 +10814,10 @@ void glTexStorage2D(
         NativeFunction<
           Void Function(
             Uint32 target,
-            Uint32 levels,
+            Int32 levels,
             Uint32 internalformat,
-            Uint32 width,
-            Uint32 height,
+            Int32 width,
+            Int32 height,
           )
         >
       >()
@@ -10960,11 +10859,11 @@ void glTexStorage3D(
         NativeFunction<
           Void Function(
             Uint32 target,
-            Uint32 levels,
+            Int32 levels,
             Uint32 internalformat,
-            Uint32 width,
-            Uint32 height,
-            Uint32 depth,
+            Int32 width,
+            Int32 height,
+            Int32 depth,
           )
         >
       >()
@@ -11000,7 +10899,7 @@ void glDrawTransformFeedbackInstanced(int mode, int id, int instancecount) {
       _glDrawTransformFeedbackInstanced
           .cast<
             NativeFunction<
-              Void Function(Uint32 mode, Uint32 id, Uint32 instancecount)
+              Void Function(Uint32 mode, Uint32 id, Int32 instancecount)
             >
           >()
           .asFunction<void Function(int mode, int id, int instancecount)>();
@@ -11029,7 +10928,7 @@ void glDrawTransformFeedbackStreamInstanced(
                 Uint32 mode,
                 Uint32 id,
                 Uint32 stream,
-                Uint32 instancecount,
+                Int32 instancecount,
               )
             >
           >()
@@ -11056,7 +10955,7 @@ void glClearBufferData(
   int internalformat,
   int format,
   int type,
-  Pointer<NativeType> data,
+  Pointer<Void> data,
 ) {
   final glClearBufferDataAsFunction = _glClearBufferData
       .cast<
@@ -11066,7 +10965,7 @@ void glClearBufferData(
             Uint32 internalformat,
             Uint32 format,
             Uint32 type,
-            Pointer<NativeType> data,
+            Pointer<Void> data,
           )
         >
       >()
@@ -11076,7 +10975,7 @@ void glClearBufferData(
           int internalformat,
           int format,
           int type,
-          Pointer<NativeType> data,
+          Pointer<Void> data,
         )
       >();
   return glClearBufferDataAsFunction(
@@ -11098,11 +10997,11 @@ late Pointer<NativeFunction<Void Function()>> _glClearBufferSubData;
 void glClearBufferSubData(
   int target,
   int internalformat,
-  Pointer<NativeType> offset,
-  Pointer<Uint32> size,
+  int offset,
+  int size,
   int format,
   int type,
-  Pointer<NativeType> data,
+  Pointer<Void> data,
 ) {
   final glClearBufferSubDataAsFunction = _glClearBufferSubData
       .cast<
@@ -11110,11 +11009,11 @@ void glClearBufferSubData(
           Void Function(
             Uint32 target,
             Uint32 internalformat,
-            Pointer<NativeType> offset,
-            Pointer<Uint32> size,
+            IntPtr offset,
+            IntPtr size,
             Uint32 format,
             Uint32 type,
-            Pointer<NativeType> data,
+            Pointer<Void> data,
           )
         >
       >()
@@ -11122,11 +11021,11 @@ void glClearBufferSubData(
         void Function(
           int target,
           int internalformat,
-          Pointer<NativeType> offset,
-          Pointer<Uint32> size,
+          int offset,
+          int size,
           int format,
           int type,
-          Pointer<NativeType> data,
+          Pointer<Void> data,
         )
       >();
   return glClearBufferSubDataAsFunction(
@@ -11167,10 +11066,10 @@ late Pointer<NativeFunction<Void Function()>> _glDispatchComputeIndirect;
 /// GLAPI void APIENTRY glDispatchComputeIndirect (GLintptr indirect)
 /// ```
 /// {@category opengl_glext}
-void glDispatchComputeIndirect(Pointer<NativeType> indirect) {
+void glDispatchComputeIndirect(int indirect) {
   final glDispatchComputeIndirectAsFunction = _glDispatchComputeIndirect
-      .cast<NativeFunction<Void Function(Pointer<NativeType> indirect)>>()
-      .asFunction<void Function(Pointer<NativeType> indirect)>();
+      .cast<NativeFunction<Void Function(IntPtr indirect)>>()
+      .asFunction<void Function(int indirect)>();
   return glDispatchComputeIndirectAsFunction(indirect);
 }
 
@@ -11214,9 +11113,9 @@ void glCopyImageSubData(
             Int32 dstX,
             Int32 dstY,
             Int32 dstZ,
-            Uint32 srcWidth,
-            Uint32 srcHeight,
-            Uint32 srcDepth,
+            Int32 srcWidth,
+            Int32 srcHeight,
+            Int32 srcDepth,
           )
         >
       >()
@@ -11315,7 +11214,7 @@ void glGetInternalformati64v(
             Uint32 target,
             Uint32 internalformat,
             Uint32 pname,
-            Uint32 count,
+            Int32 count,
             Pointer<Int64> params,
           )
         >
@@ -11364,9 +11263,9 @@ void glInvalidateTexSubImage(
             Int32 xoffset,
             Int32 yoffset,
             Int32 zoffset,
-            Uint32 width,
-            Uint32 height,
-            Uint32 depth,
+            Int32 width,
+            Int32 height,
+            Int32 depth,
           )
         >
       >()
@@ -11415,28 +11314,14 @@ late Pointer<NativeFunction<Void Function()>> _glInvalidateBufferSubData;
 /// GLAPI void APIENTRY glInvalidateBufferSubData (GLuint buffer, GLintptr offset, GLsizeiptr length)
 /// ```
 /// {@category opengl_glext}
-void glInvalidateBufferSubData(
-  int buffer,
-  Pointer<NativeType> offset,
-  Pointer<Uint32> length,
-) {
+void glInvalidateBufferSubData(int buffer, int offset, int length) {
   final glInvalidateBufferSubDataAsFunction = _glInvalidateBufferSubData
       .cast<
         NativeFunction<
-          Void Function(
-            Uint32 buffer,
-            Pointer<NativeType> offset,
-            Pointer<Uint32> length,
-          )
+          Void Function(Uint32 buffer, IntPtr offset, IntPtr length)
         >
       >()
-      .asFunction<
-        void Function(
-          int buffer,
-          Pointer<NativeType> offset,
-          Pointer<Uint32> length,
-        )
-      >();
+      .asFunction<void Function(int buffer, int offset, int length)>();
   return glInvalidateBufferSubDataAsFunction(buffer, offset, length);
 }
 
@@ -11471,7 +11356,7 @@ void glInvalidateFramebuffer(
         NativeFunction<
           Void Function(
             Uint32 target,
-            Uint32 numAttachments,
+            Int32 numAttachments,
             Pointer<Uint32> attachments,
           )
         >
@@ -11507,12 +11392,12 @@ void glInvalidateSubFramebuffer(
         NativeFunction<
           Void Function(
             Uint32 target,
-            Uint32 numAttachments,
+            Int32 numAttachments,
             Pointer<Uint32> attachments,
             Int32 x,
             Int32 y,
-            Uint32 width,
-            Uint32 height,
+            Int32 width,
+            Int32 height,
           )
         >
       >()
@@ -11547,7 +11432,7 @@ late Pointer<NativeFunction<Void Function()>> _glMultiDrawArraysIndirect;
 /// {@category opengl_glext}
 void glMultiDrawArraysIndirect(
   int mode,
-  Pointer<NativeType> indirect,
+  Pointer<Void> indirect,
   int drawcount,
   int stride,
 ) {
@@ -11556,16 +11441,16 @@ void glMultiDrawArraysIndirect(
         NativeFunction<
           Void Function(
             Uint32 mode,
-            Pointer<NativeType> indirect,
-            Uint32 drawcount,
-            Uint32 stride,
+            Pointer<Void> indirect,
+            Int32 drawcount,
+            Int32 stride,
           )
         >
       >()
       .asFunction<
         void Function(
           int mode,
-          Pointer<NativeType> indirect,
+          Pointer<Void> indirect,
           int drawcount,
           int stride,
         )
@@ -11583,7 +11468,7 @@ late Pointer<NativeFunction<Void Function()>> _glMultiDrawElementsIndirect;
 void glMultiDrawElementsIndirect(
   int mode,
   int type,
-  Pointer<NativeType> indirect,
+  Pointer<Void> indirect,
   int drawcount,
   int stride,
 ) {
@@ -11593,9 +11478,9 @@ void glMultiDrawElementsIndirect(
           Void Function(
             Uint32 mode,
             Uint32 type,
-            Pointer<NativeType> indirect,
-            Uint32 drawcount,
-            Uint32 stride,
+            Pointer<Void> indirect,
+            Int32 drawcount,
+            Int32 stride,
           )
         >
       >()
@@ -11603,7 +11488,7 @@ void glMultiDrawElementsIndirect(
         void Function(
           int mode,
           int type,
-          Pointer<NativeType> indirect,
+          Pointer<Void> indirect,
           int drawcount,
           int stride,
         )
@@ -11700,7 +11585,7 @@ void glGetProgramResourceName(
   int programInterface,
   int index,
   int bufSize,
-  Pointer<Uint32> length,
+  Pointer<Int32> length,
   Pointer<Int8> name,
 ) {
   final glGetProgramResourceNameAsFunction = _glGetProgramResourceName
@@ -11710,8 +11595,8 @@ void glGetProgramResourceName(
             Uint32 program,
             Uint32 programInterface,
             Uint32 index,
-            Uint32 bufSize,
-            Pointer<Uint32> length,
+            Int32 bufSize,
+            Pointer<Int32> length,
             Pointer<Int8> name,
           )
         >
@@ -11722,7 +11607,7 @@ void glGetProgramResourceName(
           int programInterface,
           int index,
           int bufSize,
-          Pointer<Uint32> length,
+          Pointer<Int32> length,
           Pointer<Int8> name,
         )
       >();
@@ -11750,7 +11635,7 @@ void glGetProgramResourceiv(
   int propCount,
   Pointer<Uint32> props,
   int count,
-  Pointer<Uint32> length,
+  Pointer<Int32> length,
   Pointer<Int32> params,
 ) {
   final glGetProgramResourceivAsFunction = _glGetProgramResourceiv
@@ -11760,10 +11645,10 @@ void glGetProgramResourceiv(
             Uint32 program,
             Uint32 programInterface,
             Uint32 index,
-            Uint32 propCount,
+            Int32 propCount,
             Pointer<Uint32> props,
-            Uint32 count,
-            Pointer<Uint32> length,
+            Int32 count,
+            Pointer<Int32> length,
             Pointer<Int32> params,
           )
         >
@@ -11776,7 +11661,7 @@ void glGetProgramResourceiv(
           int propCount,
           Pointer<Uint32> props,
           int count,
-          Pointer<Uint32> length,
+          Pointer<Int32> length,
           Pointer<Int32> params,
         )
       >();
@@ -11911,8 +11796,8 @@ void glTexBufferRange(
   int target,
   int internalformat,
   int buffer,
-  Pointer<NativeType> offset,
-  Pointer<Uint32> size,
+  int offset,
+  int size,
 ) {
   final glTexBufferRangeAsFunction = _glTexBufferRange
       .cast<
@@ -11921,8 +11806,8 @@ void glTexBufferRange(
             Uint32 target,
             Uint32 internalformat,
             Uint32 buffer,
-            Pointer<NativeType> offset,
-            Pointer<Uint32> size,
+            IntPtr offset,
+            IntPtr size,
           )
         >
       >()
@@ -11931,8 +11816,8 @@ void glTexBufferRange(
           int target,
           int internalformat,
           int buffer,
-          Pointer<NativeType> offset,
-          Pointer<Uint32> size,
+          int offset,
+          int size,
         )
       >();
   return glTexBufferRangeAsFunction(
@@ -11964,11 +11849,11 @@ void glTexStorage2DMultisample(
         NativeFunction<
           Void Function(
             Uint32 target,
-            Uint32 samples,
+            Int32 samples,
             Uint32 internalformat,
-            Uint32 width,
-            Uint32 height,
-            Int32 fixedsamplelocations,
+            Int32 width,
+            Int32 height,
+            Uint8 fixedsamplelocations,
           )
         >
       >()
@@ -12013,12 +11898,12 @@ void glTexStorage3DMultisample(
         NativeFunction<
           Void Function(
             Uint32 target,
-            Uint32 samples,
+            Int32 samples,
             Uint32 internalformat,
-            Uint32 width,
-            Uint32 height,
-            Uint32 depth,
-            Int32 fixedsamplelocations,
+            Int32 width,
+            Int32 height,
+            Int32 depth,
+            Uint8 fixedsamplelocations,
           )
         >
       >()
@@ -12107,30 +11992,20 @@ late Pointer<NativeFunction<Void Function()>> _glBindVertexBuffer;
 /// GLAPI void APIENTRY glBindVertexBuffer (GLuint bindingindex, GLuint buffer, GLintptr offset, GLsizei stride)
 /// ```
 /// {@category opengl_glext}
-void glBindVertexBuffer(
-  int bindingindex,
-  int buffer,
-  Pointer<NativeType> offset,
-  int stride,
-) {
+void glBindVertexBuffer(int bindingindex, int buffer, int offset, int stride) {
   final glBindVertexBufferAsFunction = _glBindVertexBuffer
       .cast<
         NativeFunction<
           Void Function(
             Uint32 bindingindex,
             Uint32 buffer,
-            Pointer<NativeType> offset,
-            Uint32 stride,
+            IntPtr offset,
+            Int32 stride,
           )
         >
       >()
       .asFunction<
-        void Function(
-          int bindingindex,
-          int buffer,
-          Pointer<NativeType> offset,
-          int stride,
-        )
+        void Function(int bindingindex, int buffer, int offset, int stride)
       >();
   return glBindVertexBufferAsFunction(bindingindex, buffer, offset, stride);
 }
@@ -12156,7 +12031,7 @@ void glVertexAttribFormat(
             Uint32 attribindex,
             Int32 size,
             Uint32 type,
-            Int32 normalized,
+            Uint8 normalized,
             Uint32 relativeoffset,
           )
         >
@@ -12303,9 +12178,9 @@ void glDebugMessageControl(
             Uint32 source,
             Uint32 type,
             Uint32 severity,
-            Uint32 count,
+            Int32 count,
             Pointer<Uint32> ids,
-            Int32 enabled,
+            Uint8 enabled,
           )
         >
       >()
@@ -12352,7 +12227,7 @@ void glDebugMessageInsert(
             Uint32 type,
             Uint32 id,
             Uint32 severity,
-            Uint32 length,
+            Int32 length,
             Pointer<Utf8> buf,
           )
         >
@@ -12389,21 +12264,21 @@ late Pointer<NativeFunction<Void Function()>> _glDebugMessageCallback;
 /// {@category opengl_glext}
 void glDebugMessageCallback(
   Pointer<NativeFunction<GLDEBUGPROC>> callback,
-  Pointer<NativeType> userParam,
+  Pointer<Void> userParam,
 ) {
   final glDebugMessageCallbackAsFunction = _glDebugMessageCallback
       .cast<
         NativeFunction<
           Void Function(
             Pointer<NativeFunction<GLDEBUGPROC>> callback,
-            Pointer<NativeType> userParam,
+            Pointer<Void> userParam,
           )
         >
       >()
       .asFunction<
         void Function(
           Pointer<NativeFunction<GLDEBUGPROC>> callback,
-          Pointer<NativeType> userParam,
+          Pointer<Void> userParam,
         )
       >();
   return glDebugMessageCallbackAsFunction(callback, userParam);
@@ -12423,7 +12298,7 @@ int glGetDebugMessageLog(
   Pointer<Uint32> types,
   Pointer<Uint32> ids,
   Pointer<Uint32> severities,
-  Pointer<Uint32> lengths,
+  Pointer<Int32> lengths,
   Pointer<Int8> messageLog,
 ) {
   final glGetDebugMessageLogAsFunction = _glGetDebugMessageLog
@@ -12431,12 +12306,12 @@ int glGetDebugMessageLog(
         NativeFunction<
           Uint32 Function(
             Uint32 count,
-            Uint32 bufSize,
+            Int32 bufSize,
             Pointer<Uint32> sources,
             Pointer<Uint32> types,
             Pointer<Uint32> ids,
             Pointer<Uint32> severities,
-            Pointer<Uint32> lengths,
+            Pointer<Int32> lengths,
             Pointer<Int8> messageLog,
           )
         >
@@ -12449,7 +12324,7 @@ int glGetDebugMessageLog(
           Pointer<Uint32> types,
           Pointer<Uint32> ids,
           Pointer<Uint32> severities,
-          Pointer<Uint32> lengths,
+          Pointer<Int32> lengths,
           Pointer<Int8> messageLog,
         )
       >();
@@ -12479,7 +12354,7 @@ void glPushDebugGroup(int source, int id, int length, String message) {
           Void Function(
             Uint32 source,
             Uint32 id,
-            Uint32 length,
+            Int32 length,
             Pointer<Utf8> message,
           )
         >
@@ -12521,7 +12396,7 @@ void glObjectLabel(int identifier, int name, int length, String label) {
           Void Function(
             Uint32 identifier,
             Uint32 name,
-            Uint32 length,
+            Int32 length,
             Pointer<Utf8> label,
           )
         >
@@ -12551,7 +12426,7 @@ void glGetObjectLabel(
   int identifier,
   int name,
   int bufSize,
-  Pointer<Uint32> length,
+  Pointer<Int32> length,
   Pointer<Int8> label,
 ) {
   final glGetObjectLabelAsFunction = _glGetObjectLabel
@@ -12560,8 +12435,8 @@ void glGetObjectLabel(
           Void Function(
             Uint32 identifier,
             Uint32 name,
-            Uint32 bufSize,
-            Pointer<Uint32> length,
+            Int32 bufSize,
+            Pointer<Int32> length,
             Pointer<Int8> label,
           )
         >
@@ -12571,7 +12446,7 @@ void glGetObjectLabel(
           int identifier,
           int name,
           int bufSize,
-          Pointer<Uint32> length,
+          Pointer<Int32> length,
           Pointer<Int8> label,
         )
       >();
@@ -12585,19 +12460,15 @@ late Pointer<NativeFunction<Void Function()>> _glObjectPtrLabel;
 /// GLAPI void APIENTRY glObjectPtrLabel (const void *ptr, GLsizei length, const GLchar *label)
 /// ```
 /// {@category opengl_glext}
-void glObjectPtrLabel(Pointer<NativeType> ptr, int length, String label) {
+void glObjectPtrLabel(Pointer<Void> ptr, int length, String label) {
   final glObjectPtrLabelAsFunction = _glObjectPtrLabel
       .cast<
         NativeFunction<
-          Void Function(
-            Pointer<NativeType> ptr,
-            Uint32 length,
-            Pointer<Utf8> label,
-          )
+          Void Function(Pointer<Void> ptr, Int32 length, Pointer<Utf8> label)
         >
       >()
       .asFunction<
-        void Function(Pointer<NativeType> ptr, int length, Pointer<Utf8> label)
+        void Function(Pointer<Void> ptr, int length, Pointer<Utf8> label)
       >();
   final labelPointer = label.toNativeUtf8();
   final result = glObjectPtrLabelAsFunction(ptr, length, labelPointer);
@@ -12613,27 +12484,27 @@ late Pointer<NativeFunction<Void Function()>> _glGetObjectPtrLabel;
 /// ```
 /// {@category opengl_glext}
 void glGetObjectPtrLabel(
-  Pointer<NativeType> ptr,
+  Pointer<Void> ptr,
   int bufSize,
-  Pointer<Uint32> length,
+  Pointer<Int32> length,
   Pointer<Int8> label,
 ) {
   final glGetObjectPtrLabelAsFunction = _glGetObjectPtrLabel
       .cast<
         NativeFunction<
           Void Function(
-            Pointer<NativeType> ptr,
-            Uint32 bufSize,
-            Pointer<Uint32> length,
+            Pointer<Void> ptr,
+            Int32 bufSize,
+            Pointer<Int32> length,
             Pointer<Int8> label,
           )
         >
       >()
       .asFunction<
         void Function(
-          Pointer<NativeType> ptr,
+          Pointer<Void> ptr,
           int bufSize,
-          Pointer<Uint32> length,
+          Pointer<Int32> length,
           Pointer<Int8> label,
         )
       >();
@@ -12647,30 +12518,20 @@ late Pointer<NativeFunction<Void Function()>> _glBufferStorage;
 /// GLAPI void APIENTRY glBufferStorage (GLenum target, GLsizeiptr size, const void *data, GLbitfield flags)
 /// ```
 /// {@category opengl_glext}
-void glBufferStorage(
-  int target,
-  Pointer<Uint32> size,
-  Pointer<NativeType> data,
-  int flags,
-) {
+void glBufferStorage(int target, int size, Pointer<Void> data, int flags) {
   final glBufferStorageAsFunction = _glBufferStorage
       .cast<
         NativeFunction<
           Void Function(
             Uint32 target,
-            Pointer<Uint32> size,
-            Pointer<NativeType> data,
+            IntPtr size,
+            Pointer<Void> data,
             Uint32 flags,
           )
         >
       >()
       .asFunction<
-        void Function(
-          int target,
-          Pointer<Uint32> size,
-          Pointer<NativeType> data,
-          int flags,
-        )
+        void Function(int target, int size, Pointer<Void> data, int flags)
       >();
   return glBufferStorageAsFunction(target, size, data, flags);
 }
@@ -12687,7 +12548,7 @@ void glClearTexImage(
   int level,
   int format,
   int type,
-  Pointer<NativeType> data,
+  Pointer<Void> data,
 ) {
   final glClearTexImageAsFunction = _glClearTexImage
       .cast<
@@ -12697,7 +12558,7 @@ void glClearTexImage(
             Int32 level,
             Uint32 format,
             Uint32 type,
-            Pointer<NativeType> data,
+            Pointer<Void> data,
           )
         >
       >()
@@ -12707,7 +12568,7 @@ void glClearTexImage(
           int level,
           int format,
           int type,
-          Pointer<NativeType> data,
+          Pointer<Void> data,
         )
       >();
   return glClearTexImageAsFunction(texture, level, format, type, data);
@@ -12731,7 +12592,7 @@ void glClearTexSubImage(
   int depth,
   int format,
   int type,
-  Pointer<NativeType> data,
+  Pointer<Void> data,
 ) {
   final glClearTexSubImageAsFunction = _glClearTexSubImage
       .cast<
@@ -12742,12 +12603,12 @@ void glClearTexSubImage(
             Int32 xoffset,
             Int32 yoffset,
             Int32 zoffset,
-            Uint32 width,
-            Uint32 height,
-            Uint32 depth,
+            Int32 width,
+            Int32 height,
+            Int32 depth,
             Uint32 format,
             Uint32 type,
-            Pointer<NativeType> data,
+            Pointer<Void> data,
           )
         >
       >()
@@ -12763,7 +12624,7 @@ void glClearTexSubImage(
           int depth,
           int format,
           int type,
-          Pointer<NativeType> data,
+          Pointer<Void> data,
         )
       >();
   return glClearTexSubImageAsFunction(
@@ -12800,7 +12661,7 @@ void glBindBuffersBase(
           Void Function(
             Uint32 target,
             Uint32 first,
-            Uint32 count,
+            Int32 count,
             Pointer<Uint32> buffers,
           )
         >
@@ -12823,8 +12684,8 @@ void glBindBuffersRange(
   int first,
   int count,
   Pointer<Uint32> buffers,
-  Pointer<Pointer<NativeType>> offsets,
-  Pointer<Pointer<Uint32>> sizes,
+  Pointer<IntPtr> offsets,
+  Pointer<IntPtr> sizes,
 ) {
   final glBindBuffersRangeAsFunction = _glBindBuffersRange
       .cast<
@@ -12832,10 +12693,10 @@ void glBindBuffersRange(
           Void Function(
             Uint32 target,
             Uint32 first,
-            Uint32 count,
+            Int32 count,
             Pointer<Uint32> buffers,
-            Pointer<Pointer<NativeType>> offsets,
-            Pointer<Pointer<Uint32>> sizes,
+            Pointer<IntPtr> offsets,
+            Pointer<IntPtr> sizes,
           )
         >
       >()
@@ -12845,8 +12706,8 @@ void glBindBuffersRange(
           int first,
           int count,
           Pointer<Uint32> buffers,
-          Pointer<Pointer<NativeType>> offsets,
-          Pointer<Pointer<Uint32>> sizes,
+          Pointer<IntPtr> offsets,
+          Pointer<IntPtr> sizes,
         )
       >();
   return glBindBuffersRangeAsFunction(
@@ -12870,7 +12731,7 @@ void glBindTextures(int first, int count, Pointer<Uint32> textures) {
   final glBindTexturesAsFunction = _glBindTextures
       .cast<
         NativeFunction<
-          Void Function(Uint32 first, Uint32 count, Pointer<Uint32> textures)
+          Void Function(Uint32 first, Int32 count, Pointer<Uint32> textures)
         >
       >()
       .asFunction<
@@ -12890,7 +12751,7 @@ void glBindSamplers(int first, int count, Pointer<Uint32> samplers) {
   final glBindSamplersAsFunction = _glBindSamplers
       .cast<
         NativeFunction<
-          Void Function(Uint32 first, Uint32 count, Pointer<Uint32> samplers)
+          Void Function(Uint32 first, Int32 count, Pointer<Uint32> samplers)
         >
       >()
       .asFunction<
@@ -12910,7 +12771,7 @@ void glBindImageTextures(int first, int count, Pointer<Uint32> textures) {
   final glBindImageTexturesAsFunction = _glBindImageTextures
       .cast<
         NativeFunction<
-          Void Function(Uint32 first, Uint32 count, Pointer<Uint32> textures)
+          Void Function(Uint32 first, Int32 count, Pointer<Uint32> textures)
         >
       >()
       .asFunction<
@@ -12930,18 +12791,18 @@ void glBindVertexBuffers(
   int first,
   int count,
   Pointer<Uint32> buffers,
-  Pointer<Pointer<NativeType>> offsets,
-  Pointer<Uint32> strides,
+  Pointer<IntPtr> offsets,
+  Pointer<Int32> strides,
 ) {
   final glBindVertexBuffersAsFunction = _glBindVertexBuffers
       .cast<
         NativeFunction<
           Void Function(
             Uint32 first,
-            Uint32 count,
+            Int32 count,
             Pointer<Uint32> buffers,
-            Pointer<Pointer<NativeType>> offsets,
-            Pointer<Uint32> strides,
+            Pointer<IntPtr> offsets,
+            Pointer<Int32> strides,
           )
         >
       >()
@@ -12950,8 +12811,8 @@ void glBindVertexBuffers(
           int first,
           int count,
           Pointer<Uint32> buffers,
-          Pointer<Pointer<NativeType>> offsets,
-          Pointer<Uint32> strides,
+          Pointer<IntPtr> offsets,
+          Pointer<Int32> strides,
         )
       >();
   return glBindVertexBuffersAsFunction(first, count, buffers, offsets, strides);
@@ -12980,7 +12841,7 @@ late Pointer<NativeFunction<Void Function()>> _glCreateTransformFeedbacks;
 /// {@category opengl_glext}
 void glCreateTransformFeedbacks(int n, Pointer<Uint32> ids) {
   final glCreateTransformFeedbacksAsFunction = _glCreateTransformFeedbacks
-      .cast<NativeFunction<Void Function(Uint32 n, Pointer<Uint32> ids)>>()
+      .cast<NativeFunction<Void Function(Int32 n, Pointer<Uint32> ids)>>()
       .asFunction<void Function(int n, Pointer<Uint32> ids)>();
   return glCreateTransformFeedbacksAsFunction(n, ids);
 }
@@ -13012,8 +12873,8 @@ void glTransformFeedbackBufferRange(
   int xfb,
   int index,
   int buffer,
-  Pointer<NativeType> offset,
-  Pointer<Uint32> size,
+  int offset,
+  int size,
 ) {
   final glTransformFeedbackBufferRangeAsFunction =
       _glTransformFeedbackBufferRange
@@ -13023,19 +12884,13 @@ void glTransformFeedbackBufferRange(
                 Uint32 xfb,
                 Uint32 index,
                 Uint32 buffer,
-                Pointer<NativeType> offset,
-                Pointer<Uint32> size,
+                IntPtr offset,
+                IntPtr size,
               )
             >
           >()
           .asFunction<
-            void Function(
-              int xfb,
-              int index,
-              int buffer,
-              Pointer<NativeType> offset,
-              Pointer<Uint32> size,
-            )
+            void Function(int xfb, int index, int buffer, int offset, int size)
           >();
   return glTransformFeedbackBufferRangeAsFunction(
     xfb,
@@ -13133,7 +12988,7 @@ late Pointer<NativeFunction<Void Function()>> _glCreateBuffers;
 /// {@category opengl_glext}
 void glCreateBuffers(int n, Pointer<Uint32> buffers) {
   final glCreateBuffersAsFunction = _glCreateBuffers
-      .cast<NativeFunction<Void Function(Uint32 n, Pointer<Uint32> buffers)>>()
+      .cast<NativeFunction<Void Function(Int32 n, Pointer<Uint32> buffers)>>()
       .asFunction<void Function(int n, Pointer<Uint32> buffers)>();
   return glCreateBuffersAsFunction(n, buffers);
 }
@@ -13145,30 +13000,20 @@ late Pointer<NativeFunction<Void Function()>> _glNamedBufferStorage;
 /// GLAPI void APIENTRY glNamedBufferStorage (GLuint buffer, GLsizeiptr size, const void *data, GLbitfield flags)
 /// ```
 /// {@category opengl_glext}
-void glNamedBufferStorage(
-  int buffer,
-  Pointer<Uint32> size,
-  Pointer<NativeType> data,
-  int flags,
-) {
+void glNamedBufferStorage(int buffer, int size, Pointer<Void> data, int flags) {
   final glNamedBufferStorageAsFunction = _glNamedBufferStorage
       .cast<
         NativeFunction<
           Void Function(
             Uint32 buffer,
-            Pointer<Uint32> size,
-            Pointer<NativeType> data,
+            IntPtr size,
+            Pointer<Void> data,
             Uint32 flags,
           )
         >
       >()
       .asFunction<
-        void Function(
-          int buffer,
-          Pointer<Uint32> size,
-          Pointer<NativeType> data,
-          int flags,
-        )
+        void Function(int buffer, int size, Pointer<Void> data, int flags)
       >();
   return glNamedBufferStorageAsFunction(buffer, size, data, flags);
 }
@@ -13180,30 +13025,20 @@ late Pointer<NativeFunction<Void Function()>> _glNamedBufferData;
 /// GLAPI void APIENTRY glNamedBufferData (GLuint buffer, GLsizeiptr size, const void *data, GLenum usage)
 /// ```
 /// {@category opengl_glext}
-void glNamedBufferData(
-  int buffer,
-  Pointer<Uint32> size,
-  Pointer<NativeType> data,
-  int usage,
-) {
+void glNamedBufferData(int buffer, int size, Pointer<Void> data, int usage) {
   final glNamedBufferDataAsFunction = _glNamedBufferData
       .cast<
         NativeFunction<
           Void Function(
             Uint32 buffer,
-            Pointer<Uint32> size,
-            Pointer<NativeType> data,
+            IntPtr size,
+            Pointer<Void> data,
             Uint32 usage,
           )
         >
       >()
       .asFunction<
-        void Function(
-          int buffer,
-          Pointer<Uint32> size,
-          Pointer<NativeType> data,
-          int usage,
-        )
+        void Function(int buffer, int size, Pointer<Void> data, int usage)
       >();
   return glNamedBufferDataAsFunction(buffer, size, data, usage);
 }
@@ -13217,28 +13052,23 @@ late Pointer<NativeFunction<Void Function()>> _glNamedBufferSubData;
 /// {@category opengl_glext}
 void glNamedBufferSubData(
   int buffer,
-  Pointer<NativeType> offset,
-  Pointer<Uint32> size,
-  Pointer<NativeType> data,
+  int offset,
+  int size,
+  Pointer<Void> data,
 ) {
   final glNamedBufferSubDataAsFunction = _glNamedBufferSubData
       .cast<
         NativeFunction<
           Void Function(
             Uint32 buffer,
-            Pointer<NativeType> offset,
-            Pointer<Uint32> size,
-            Pointer<NativeType> data,
+            IntPtr offset,
+            IntPtr size,
+            Pointer<Void> data,
           )
         >
       >()
       .asFunction<
-        void Function(
-          int buffer,
-          Pointer<NativeType> offset,
-          Pointer<Uint32> size,
-          Pointer<NativeType> data,
-        )
+        void Function(int buffer, int offset, int size, Pointer<Void> data)
       >();
   return glNamedBufferSubDataAsFunction(buffer, offset, size, data);
 }
@@ -13253,9 +13083,9 @@ late Pointer<NativeFunction<Void Function()>> _glCopyNamedBufferSubData;
 void glCopyNamedBufferSubData(
   int readBuffer,
   int writeBuffer,
-  Pointer<NativeType> readOffset,
-  Pointer<NativeType> writeOffset,
-  Pointer<Uint32> size,
+  int readOffset,
+  int writeOffset,
+  int size,
 ) {
   final glCopyNamedBufferSubDataAsFunction = _glCopyNamedBufferSubData
       .cast<
@@ -13263,9 +13093,9 @@ void glCopyNamedBufferSubData(
           Void Function(
             Uint32 readBuffer,
             Uint32 writeBuffer,
-            Pointer<NativeType> readOffset,
-            Pointer<NativeType> writeOffset,
-            Pointer<Uint32> size,
+            IntPtr readOffset,
+            IntPtr writeOffset,
+            IntPtr size,
           )
         >
       >()
@@ -13273,9 +13103,9 @@ void glCopyNamedBufferSubData(
         void Function(
           int readBuffer,
           int writeBuffer,
-          Pointer<NativeType> readOffset,
-          Pointer<NativeType> writeOffset,
-          Pointer<Uint32> size,
+          int readOffset,
+          int writeOffset,
+          int size,
         )
       >();
   return glCopyNamedBufferSubDataAsFunction(
@@ -13299,7 +13129,7 @@ void glClearNamedBufferData(
   int internalformat,
   int format,
   int type,
-  Pointer<NativeType> data,
+  Pointer<Void> data,
 ) {
   final glClearNamedBufferDataAsFunction = _glClearNamedBufferData
       .cast<
@@ -13309,7 +13139,7 @@ void glClearNamedBufferData(
             Uint32 internalformat,
             Uint32 format,
             Uint32 type,
-            Pointer<NativeType> data,
+            Pointer<Void> data,
           )
         >
       >()
@@ -13319,7 +13149,7 @@ void glClearNamedBufferData(
           int internalformat,
           int format,
           int type,
-          Pointer<NativeType> data,
+          Pointer<Void> data,
         )
       >();
   return glClearNamedBufferDataAsFunction(
@@ -13341,11 +13171,11 @@ late Pointer<NativeFunction<Void Function()>> _glClearNamedBufferSubData;
 void glClearNamedBufferSubData(
   int buffer,
   int internalformat,
-  Pointer<NativeType> offset,
-  Pointer<Uint32> size,
+  int offset,
+  int size,
   int format,
   int type,
-  Pointer<NativeType> data,
+  Pointer<Void> data,
 ) {
   final glClearNamedBufferSubDataAsFunction = _glClearNamedBufferSubData
       .cast<
@@ -13353,11 +13183,11 @@ void glClearNamedBufferSubData(
           Void Function(
             Uint32 buffer,
             Uint32 internalformat,
-            Pointer<NativeType> offset,
-            Pointer<Uint32> size,
+            IntPtr offset,
+            IntPtr size,
             Uint32 format,
             Uint32 type,
-            Pointer<NativeType> data,
+            Pointer<Void> data,
           )
         >
       >()
@@ -13365,11 +13195,11 @@ void glClearNamedBufferSubData(
         void Function(
           int buffer,
           int internalformat,
-          Pointer<NativeType> offset,
-          Pointer<Uint32> size,
+          int offset,
+          int size,
           int format,
           int type,
-          Pointer<NativeType> data,
+          Pointer<Void> data,
         )
       >();
   return glClearNamedBufferSubDataAsFunction(
@@ -13390,14 +13220,12 @@ late Pointer<NativeFunction<Void Function()>> _glMapNamedBuffer;
 /// GLAPI void *APIENTRY glMapNamedBuffer (GLuint buffer, GLenum access)
 /// ```
 /// {@category opengl_glext}
-Pointer<NativeType> glMapNamedBuffer(int buffer, int access) {
+Pointer<Void> glMapNamedBuffer(int buffer, int access) {
   final glMapNamedBufferAsFunction = _glMapNamedBuffer
       .cast<
-        NativeFunction<
-          Pointer<NativeType> Function(Uint32 buffer, Uint32 access)
-        >
+        NativeFunction<Pointer<Void> Function(Uint32 buffer, Uint32 access)>
       >()
-      .asFunction<Pointer<NativeType> Function(int buffer, int access)>();
+      .asFunction<Pointer<Void> Function(int buffer, int access)>();
   return glMapNamedBufferAsFunction(buffer, access);
 }
 
@@ -13408,30 +13236,25 @@ late Pointer<NativeFunction<Void Function()>> _glMapNamedBufferRange;
 /// GLAPI void *APIENTRY glMapNamedBufferRange (GLuint buffer, GLintptr offset, GLsizeiptr length, GLbitfield access)
 /// ```
 /// {@category opengl_glext}
-Pointer<NativeType> glMapNamedBufferRange(
+Pointer<Void> glMapNamedBufferRange(
   int buffer,
-  Pointer<NativeType> offset,
-  Pointer<Uint32> length,
+  int offset,
+  int length,
   int access,
 ) {
   final glMapNamedBufferRangeAsFunction = _glMapNamedBufferRange
       .cast<
         NativeFunction<
-          Pointer<NativeType> Function(
+          Pointer<Void> Function(
             Uint32 buffer,
-            Pointer<NativeType> offset,
-            Pointer<Uint32> length,
+            IntPtr offset,
+            IntPtr length,
             Uint32 access,
           )
         >
       >()
       .asFunction<
-        Pointer<NativeType> Function(
-          int buffer,
-          Pointer<NativeType> offset,
-          Pointer<Uint32> length,
-          int access,
-        )
+        Pointer<Void> Function(int buffer, int offset, int length, int access)
       >();
   return glMapNamedBufferRangeAsFunction(buffer, offset, length, access);
 }
@@ -13445,7 +13268,7 @@ late Pointer<NativeFunction<Void Function()>> _glUnmapNamedBuffer;
 /// {@category opengl_glext}
 int glUnmapNamedBuffer(int buffer) {
   final glUnmapNamedBufferAsFunction = _glUnmapNamedBuffer
-      .cast<NativeFunction<Int32 Function(Uint32 buffer)>>()
+      .cast<NativeFunction<Uint8 Function(Uint32 buffer)>>()
       .asFunction<int Function(int buffer)>();
   return glUnmapNamedBufferAsFunction(buffer);
 }
@@ -13457,28 +13280,14 @@ late Pointer<NativeFunction<Void Function()>> _glFlushMappedNamedBufferRange;
 /// GLAPI void APIENTRY glFlushMappedNamedBufferRange (GLuint buffer, GLintptr offset, GLsizeiptr length)
 /// ```
 /// {@category opengl_glext}
-void glFlushMappedNamedBufferRange(
-  int buffer,
-  Pointer<NativeType> offset,
-  Pointer<Uint32> length,
-) {
+void glFlushMappedNamedBufferRange(int buffer, int offset, int length) {
   final glFlushMappedNamedBufferRangeAsFunction = _glFlushMappedNamedBufferRange
       .cast<
         NativeFunction<
-          Void Function(
-            Uint32 buffer,
-            Pointer<NativeType> offset,
-            Pointer<Uint32> length,
-          )
+          Void Function(Uint32 buffer, IntPtr offset, IntPtr length)
         >
       >()
-      .asFunction<
-        void Function(
-          int buffer,
-          Pointer<NativeType> offset,
-          Pointer<Uint32> length,
-        )
-      >();
+      .asFunction<void Function(int buffer, int offset, int length)>();
   return glFlushMappedNamedBufferRangeAsFunction(buffer, offset, length);
 }
 
@@ -13536,7 +13345,7 @@ late Pointer<NativeFunction<Void Function()>> _glGetNamedBufferPointerv;
 void glGetNamedBufferPointerv(
   int buffer,
   int pname,
-  Pointer<Pointer<NativeType>> params,
+  Pointer<Pointer<Void>> params,
 ) {
   final glGetNamedBufferPointervAsFunction = _glGetNamedBufferPointerv
       .cast<
@@ -13544,16 +13353,12 @@ void glGetNamedBufferPointerv(
           Void Function(
             Uint32 buffer,
             Uint32 pname,
-            Pointer<Pointer<NativeType>> params,
+            Pointer<Pointer<Void>> params,
           )
         >
       >()
       .asFunction<
-        void Function(
-          int buffer,
-          int pname,
-          Pointer<Pointer<NativeType>> params,
-        )
+        void Function(int buffer, int pname, Pointer<Pointer<Void>> params)
       >();
   return glGetNamedBufferPointervAsFunction(buffer, pname, params);
 }
@@ -13567,28 +13372,23 @@ late Pointer<NativeFunction<Void Function()>> _glGetNamedBufferSubData;
 /// {@category opengl_glext}
 void glGetNamedBufferSubData(
   int buffer,
-  Pointer<NativeType> offset,
-  Pointer<Uint32> size,
-  Pointer<NativeType> data,
+  int offset,
+  int size,
+  Pointer<Void> data,
 ) {
   final glGetNamedBufferSubDataAsFunction = _glGetNamedBufferSubData
       .cast<
         NativeFunction<
           Void Function(
             Uint32 buffer,
-            Pointer<NativeType> offset,
-            Pointer<Uint32> size,
-            Pointer<NativeType> data,
+            IntPtr offset,
+            IntPtr size,
+            Pointer<Void> data,
           )
         >
       >()
       .asFunction<
-        void Function(
-          int buffer,
-          Pointer<NativeType> offset,
-          Pointer<Uint32> size,
-          Pointer<NativeType> data,
-        )
+        void Function(int buffer, int offset, int size, Pointer<Void> data)
       >();
   return glGetNamedBufferSubDataAsFunction(buffer, offset, size, data);
 }
@@ -13603,7 +13403,7 @@ late Pointer<NativeFunction<Void Function()>> _glCreateFramebuffers;
 void glCreateFramebuffers(int n, Pointer<Uint32> framebuffers) {
   final glCreateFramebuffersAsFunction = _glCreateFramebuffers
       .cast<
-        NativeFunction<Void Function(Uint32 n, Pointer<Uint32> framebuffers)>
+        NativeFunction<Void Function(Int32 n, Pointer<Uint32> framebuffers)>
       >()
       .asFunction<void Function(int n, Pointer<Uint32> framebuffers)>();
   return glCreateFramebuffersAsFunction(n, framebuffers);
@@ -13777,7 +13577,7 @@ void glNamedFramebufferDrawBuffers(
   final glNamedFramebufferDrawBuffersAsFunction = _glNamedFramebufferDrawBuffers
       .cast<
         NativeFunction<
-          Void Function(Uint32 framebuffer, Uint32 n, Pointer<Uint32> bufs)
+          Void Function(Uint32 framebuffer, Int32 n, Pointer<Uint32> bufs)
         >
       >()
       .asFunction<
@@ -13818,7 +13618,7 @@ void glInvalidateNamedFramebufferData(
             NativeFunction<
               Void Function(
                 Uint32 framebuffer,
-                Uint32 numAttachments,
+                Int32 numAttachments,
                 Pointer<Uint32> attachments,
               )
             >
@@ -13860,12 +13660,12 @@ void glInvalidateNamedFramebufferSubData(
             NativeFunction<
               Void Function(
                 Uint32 framebuffer,
-                Uint32 numAttachments,
+                Int32 numAttachments,
                 Pointer<Uint32> attachments,
                 Int32 x,
                 Int32 y,
-                Uint32 width,
-                Uint32 height,
+                Int32 width,
+                Int32 height,
               )
             >
           >()
@@ -14224,7 +14024,7 @@ late Pointer<NativeFunction<Void Function()>> _glCreateRenderbuffers;
 void glCreateRenderbuffers(int n, Pointer<Uint32> renderbuffers) {
   final glCreateRenderbuffersAsFunction = _glCreateRenderbuffers
       .cast<
-        NativeFunction<Void Function(Uint32 n, Pointer<Uint32> renderbuffers)>
+        NativeFunction<Void Function(Int32 n, Pointer<Uint32> renderbuffers)>
       >()
       .asFunction<void Function(int n, Pointer<Uint32> renderbuffers)>();
   return glCreateRenderbuffersAsFunction(n, renderbuffers);
@@ -14249,8 +14049,8 @@ void glNamedRenderbufferStorage(
           Void Function(
             Uint32 renderbuffer,
             Uint32 internalformat,
-            Uint32 width,
-            Uint32 height,
+            Int32 width,
+            Int32 height,
           )
         >
       >()
@@ -14291,10 +14091,10 @@ void glNamedRenderbufferStorageMultisample(
             NativeFunction<
               Void Function(
                 Uint32 renderbuffer,
-                Uint32 samples,
+                Int32 samples,
                 Uint32 internalformat,
-                Uint32 width,
-                Uint32 height,
+                Int32 width,
+                Int32 height,
               )
             >
           >()
@@ -14361,7 +14161,7 @@ void glCreateTextures(int target, int n, Pointer<Uint32> textures) {
   final glCreateTexturesAsFunction = _glCreateTextures
       .cast<
         NativeFunction<
-          Void Function(Uint32 target, Uint32 n, Pointer<Uint32> textures)
+          Void Function(Uint32 target, Int32 n, Pointer<Uint32> textures)
         >
       >()
       .asFunction<void Function(int target, int n, Pointer<Uint32> textures)>();
@@ -14397,8 +14197,8 @@ void glTextureBufferRange(
   int texture,
   int internalformat,
   int buffer,
-  Pointer<NativeType> offset,
-  Pointer<Uint32> size,
+  int offset,
+  int size,
 ) {
   final glTextureBufferRangeAsFunction = _glTextureBufferRange
       .cast<
@@ -14407,8 +14207,8 @@ void glTextureBufferRange(
             Uint32 texture,
             Uint32 internalformat,
             Uint32 buffer,
-            Pointer<NativeType> offset,
-            Pointer<Uint32> size,
+            IntPtr offset,
+            IntPtr size,
           )
         >
       >()
@@ -14417,8 +14217,8 @@ void glTextureBufferRange(
           int texture,
           int internalformat,
           int buffer,
-          Pointer<NativeType> offset,
-          Pointer<Uint32> size,
+          int offset,
+          int size,
         )
       >();
   return glTextureBufferRangeAsFunction(
@@ -14448,9 +14248,9 @@ void glTextureStorage1D(
         NativeFunction<
           Void Function(
             Uint32 texture,
-            Uint32 levels,
+            Int32 levels,
             Uint32 internalformat,
-            Uint32 width,
+            Int32 width,
           )
         >
       >()
@@ -14479,10 +14279,10 @@ void glTextureStorage2D(
         NativeFunction<
           Void Function(
             Uint32 texture,
-            Uint32 levels,
+            Int32 levels,
             Uint32 internalformat,
-            Uint32 width,
-            Uint32 height,
+            Int32 width,
+            Int32 height,
           )
         >
       >()
@@ -14524,11 +14324,11 @@ void glTextureStorage3D(
         NativeFunction<
           Void Function(
             Uint32 texture,
-            Uint32 levels,
+            Int32 levels,
             Uint32 internalformat,
-            Uint32 width,
-            Uint32 height,
-            Uint32 depth,
+            Int32 width,
+            Int32 height,
+            Int32 depth,
           )
         >
       >()
@@ -14572,11 +14372,11 @@ void glTextureStorage2DMultisample(
         NativeFunction<
           Void Function(
             Uint32 texture,
-            Uint32 samples,
+            Int32 samples,
             Uint32 internalformat,
-            Uint32 width,
-            Uint32 height,
-            Int32 fixedsamplelocations,
+            Int32 width,
+            Int32 height,
+            Uint8 fixedsamplelocations,
           )
         >
       >()
@@ -14621,12 +14421,12 @@ void glTextureStorage3DMultisample(
         NativeFunction<
           Void Function(
             Uint32 texture,
-            Uint32 samples,
+            Int32 samples,
             Uint32 internalformat,
-            Uint32 width,
-            Uint32 height,
-            Uint32 depth,
-            Int32 fixedsamplelocations,
+            Int32 width,
+            Int32 height,
+            Int32 depth,
+            Uint8 fixedsamplelocations,
           )
         >
       >()
@@ -14666,7 +14466,7 @@ void glTextureSubImage1D(
   int width,
   int format,
   int type,
-  Pointer<NativeType> pixels,
+  Pointer<Void> pixels,
 ) {
   final glTextureSubImage1DAsFunction = _glTextureSubImage1D
       .cast<
@@ -14675,10 +14475,10 @@ void glTextureSubImage1D(
             Uint32 texture,
             Int32 level,
             Int32 xoffset,
-            Uint32 width,
+            Int32 width,
             Uint32 format,
             Uint32 type,
-            Pointer<NativeType> pixels,
+            Pointer<Void> pixels,
           )
         >
       >()
@@ -14690,7 +14490,7 @@ void glTextureSubImage1D(
           int width,
           int format,
           int type,
-          Pointer<NativeType> pixels,
+          Pointer<Void> pixels,
         )
       >();
   return glTextureSubImage1DAsFunction(
@@ -14720,7 +14520,7 @@ void glTextureSubImage2D(
   int height,
   int format,
   int type,
-  Pointer<NativeType> pixels,
+  Pointer<Void> pixels,
 ) {
   final glTextureSubImage2DAsFunction = _glTextureSubImage2D
       .cast<
@@ -14730,11 +14530,11 @@ void glTextureSubImage2D(
             Int32 level,
             Int32 xoffset,
             Int32 yoffset,
-            Uint32 width,
-            Uint32 height,
+            Int32 width,
+            Int32 height,
             Uint32 format,
             Uint32 type,
-            Pointer<NativeType> pixels,
+            Pointer<Void> pixels,
           )
         >
       >()
@@ -14748,7 +14548,7 @@ void glTextureSubImage2D(
           int height,
           int format,
           int type,
-          Pointer<NativeType> pixels,
+          Pointer<Void> pixels,
         )
       >();
   return glTextureSubImage2DAsFunction(
@@ -14782,7 +14582,7 @@ void glTextureSubImage3D(
   int depth,
   int format,
   int type,
-  Pointer<NativeType> pixels,
+  Pointer<Void> pixels,
 ) {
   final glTextureSubImage3DAsFunction = _glTextureSubImage3D
       .cast<
@@ -14793,12 +14593,12 @@ void glTextureSubImage3D(
             Int32 xoffset,
             Int32 yoffset,
             Int32 zoffset,
-            Uint32 width,
-            Uint32 height,
-            Uint32 depth,
+            Int32 width,
+            Int32 height,
+            Int32 depth,
             Uint32 format,
             Uint32 type,
-            Pointer<NativeType> pixels,
+            Pointer<Void> pixels,
           )
         >
       >()
@@ -14814,7 +14614,7 @@ void glTextureSubImage3D(
           int depth,
           int format,
           int type,
-          Pointer<NativeType> pixels,
+          Pointer<Void> pixels,
         )
       >();
   return glTextureSubImage3DAsFunction(
@@ -14846,7 +14646,7 @@ void glCompressedTextureSubImage1D(
   int width,
   int format,
   int imageSize,
-  Pointer<NativeType> data,
+  Pointer<Void> data,
 ) {
   final glCompressedTextureSubImage1DAsFunction = _glCompressedTextureSubImage1D
       .cast<
@@ -14855,10 +14655,10 @@ void glCompressedTextureSubImage1D(
             Uint32 texture,
             Int32 level,
             Int32 xoffset,
-            Uint32 width,
+            Int32 width,
             Uint32 format,
-            Uint32 imageSize,
-            Pointer<NativeType> data,
+            Int32 imageSize,
+            Pointer<Void> data,
           )
         >
       >()
@@ -14870,7 +14670,7 @@ void glCompressedTextureSubImage1D(
           int width,
           int format,
           int imageSize,
-          Pointer<NativeType> data,
+          Pointer<Void> data,
         )
       >();
   return glCompressedTextureSubImage1DAsFunction(
@@ -14900,7 +14700,7 @@ void glCompressedTextureSubImage2D(
   int height,
   int format,
   int imageSize,
-  Pointer<NativeType> data,
+  Pointer<Void> data,
 ) {
   final glCompressedTextureSubImage2DAsFunction = _glCompressedTextureSubImage2D
       .cast<
@@ -14910,11 +14710,11 @@ void glCompressedTextureSubImage2D(
             Int32 level,
             Int32 xoffset,
             Int32 yoffset,
-            Uint32 width,
-            Uint32 height,
+            Int32 width,
+            Int32 height,
             Uint32 format,
-            Uint32 imageSize,
-            Pointer<NativeType> data,
+            Int32 imageSize,
+            Pointer<Void> data,
           )
         >
       >()
@@ -14928,7 +14728,7 @@ void glCompressedTextureSubImage2D(
           int height,
           int format,
           int imageSize,
-          Pointer<NativeType> data,
+          Pointer<Void> data,
         )
       >();
   return glCompressedTextureSubImage2DAsFunction(
@@ -14962,7 +14762,7 @@ void glCompressedTextureSubImage3D(
   int depth,
   int format,
   int imageSize,
-  Pointer<NativeType> data,
+  Pointer<Void> data,
 ) {
   final glCompressedTextureSubImage3DAsFunction = _glCompressedTextureSubImage3D
       .cast<
@@ -14973,12 +14773,12 @@ void glCompressedTextureSubImage3D(
             Int32 xoffset,
             Int32 yoffset,
             Int32 zoffset,
-            Uint32 width,
-            Uint32 height,
-            Uint32 depth,
+            Int32 width,
+            Int32 height,
+            Int32 depth,
             Uint32 format,
-            Uint32 imageSize,
-            Pointer<NativeType> data,
+            Int32 imageSize,
+            Pointer<Void> data,
           )
         >
       >()
@@ -14994,7 +14794,7 @@ void glCompressedTextureSubImage3D(
           int depth,
           int format,
           int imageSize,
-          Pointer<NativeType> data,
+          Pointer<Void> data,
         )
       >();
   return glCompressedTextureSubImage3DAsFunction(
@@ -15036,7 +14836,7 @@ void glCopyTextureSubImage1D(
             Int32 xoffset,
             Int32 x,
             Int32 y,
-            Uint32 width,
+            Int32 width,
           )
         >
       >()
@@ -15087,8 +14887,8 @@ void glCopyTextureSubImage2D(
             Int32 yoffset,
             Int32 x,
             Int32 y,
-            Uint32 width,
-            Uint32 height,
+            Int32 width,
+            Int32 height,
           )
         >
       >()
@@ -15145,8 +14945,8 @@ void glCopyTextureSubImage3D(
             Int32 zoffset,
             Int32 x,
             Int32 y,
-            Uint32 width,
-            Uint32 height,
+            Int32 width,
+            Int32 height,
           )
         >
       >()
@@ -15329,7 +15129,7 @@ void glGetTextureImage(
   int format,
   int type,
   int bufSize,
-  Pointer<NativeType> pixels,
+  Pointer<Void> pixels,
 ) {
   final glGetTextureImageAsFunction = _glGetTextureImage
       .cast<
@@ -15339,8 +15139,8 @@ void glGetTextureImage(
             Int32 level,
             Uint32 format,
             Uint32 type,
-            Uint32 bufSize,
-            Pointer<NativeType> pixels,
+            Int32 bufSize,
+            Pointer<Void> pixels,
           )
         >
       >()
@@ -15351,7 +15151,7 @@ void glGetTextureImage(
           int format,
           int type,
           int bufSize,
-          Pointer<NativeType> pixels,
+          Pointer<Void> pixels,
         )
       >();
   return glGetTextureImageAsFunction(
@@ -15375,7 +15175,7 @@ void glGetCompressedTextureImage(
   int texture,
   int level,
   int bufSize,
-  Pointer<NativeType> pixels,
+  Pointer<Void> pixels,
 ) {
   final glGetCompressedTextureImageAsFunction = _glGetCompressedTextureImage
       .cast<
@@ -15383,18 +15183,13 @@ void glGetCompressedTextureImage(
           Void Function(
             Uint32 texture,
             Int32 level,
-            Uint32 bufSize,
-            Pointer<NativeType> pixels,
+            Int32 bufSize,
+            Pointer<Void> pixels,
           )
         >
       >()
       .asFunction<
-        void Function(
-          int texture,
-          int level,
-          int bufSize,
-          Pointer<NativeType> pixels,
-        )
+        void Function(int texture, int level, int bufSize, Pointer<Void> pixels)
       >();
   return glGetCompressedTextureImageAsFunction(texture, level, bufSize, pixels);
 }
@@ -15548,7 +15343,7 @@ late Pointer<NativeFunction<Void Function()>> _glCreateVertexArrays;
 /// {@category opengl_glext}
 void glCreateVertexArrays(int n, Pointer<Uint32> arrays) {
   final glCreateVertexArraysAsFunction = _glCreateVertexArrays
-      .cast<NativeFunction<Void Function(Uint32 n, Pointer<Uint32> arrays)>>()
+      .cast<NativeFunction<Void Function(Int32 n, Pointer<Uint32> arrays)>>()
       .asFunction<void Function(int n, Pointer<Uint32> arrays)>();
   return glCreateVertexArraysAsFunction(n, arrays);
 }
@@ -15606,7 +15401,7 @@ void glVertexArrayVertexBuffer(
   int vaobj,
   int bindingindex,
   int buffer,
-  Pointer<NativeType> offset,
+  int offset,
   int stride,
 ) {
   final glVertexArrayVertexBufferAsFunction = _glVertexArrayVertexBuffer
@@ -15616,8 +15411,8 @@ void glVertexArrayVertexBuffer(
             Uint32 vaobj,
             Uint32 bindingindex,
             Uint32 buffer,
-            Pointer<NativeType> offset,
-            Uint32 stride,
+            IntPtr offset,
+            Int32 stride,
           )
         >
       >()
@@ -15626,7 +15421,7 @@ void glVertexArrayVertexBuffer(
           int vaobj,
           int bindingindex,
           int buffer,
-          Pointer<NativeType> offset,
+          int offset,
           int stride,
         )
       >();
@@ -15651,8 +15446,8 @@ void glVertexArrayVertexBuffers(
   int first,
   int count,
   Pointer<Uint32> buffers,
-  Pointer<Pointer<NativeType>> offsets,
-  Pointer<Uint32> strides,
+  Pointer<IntPtr> offsets,
+  Pointer<Int32> strides,
 ) {
   final glVertexArrayVertexBuffersAsFunction = _glVertexArrayVertexBuffers
       .cast<
@@ -15660,10 +15455,10 @@ void glVertexArrayVertexBuffers(
           Void Function(
             Uint32 vaobj,
             Uint32 first,
-            Uint32 count,
+            Int32 count,
             Pointer<Uint32> buffers,
-            Pointer<Pointer<NativeType>> offsets,
-            Pointer<Uint32> strides,
+            Pointer<IntPtr> offsets,
+            Pointer<Int32> strides,
           )
         >
       >()
@@ -15673,8 +15468,8 @@ void glVertexArrayVertexBuffers(
           int first,
           int count,
           Pointer<Uint32> buffers,
-          Pointer<Pointer<NativeType>> offsets,
-          Pointer<Uint32> strides,
+          Pointer<IntPtr> offsets,
+          Pointer<Int32> strides,
         )
       >();
   return glVertexArrayVertexBuffersAsFunction(
@@ -15730,7 +15525,7 @@ void glVertexArrayAttribFormat(
             Uint32 attribindex,
             Int32 size,
             Uint32 type,
-            Int32 normalized,
+            Uint8 normalized,
             Uint32 relativeoffset,
           )
         >
@@ -15948,7 +15743,7 @@ late Pointer<NativeFunction<Void Function()>> _glCreateSamplers;
 /// {@category opengl_glext}
 void glCreateSamplers(int n, Pointer<Uint32> samplers) {
   final glCreateSamplersAsFunction = _glCreateSamplers
-      .cast<NativeFunction<Void Function(Uint32 n, Pointer<Uint32> samplers)>>()
+      .cast<NativeFunction<Void Function(Int32 n, Pointer<Uint32> samplers)>>()
       .asFunction<void Function(int n, Pointer<Uint32> samplers)>();
   return glCreateSamplersAsFunction(n, samplers);
 }
@@ -15962,9 +15757,7 @@ late Pointer<NativeFunction<Void Function()>> _glCreateProgramPipelines;
 /// {@category opengl_glext}
 void glCreateProgramPipelines(int n, Pointer<Uint32> pipelines) {
   final glCreateProgramPipelinesAsFunction = _glCreateProgramPipelines
-      .cast<
-        NativeFunction<Void Function(Uint32 n, Pointer<Uint32> pipelines)>
-      >()
+      .cast<NativeFunction<Void Function(Int32 n, Pointer<Uint32> pipelines)>>()
       .asFunction<void Function(int n, Pointer<Uint32> pipelines)>();
   return glCreateProgramPipelinesAsFunction(n, pipelines);
 }
@@ -15980,7 +15773,7 @@ void glCreateQueries(int target, int n, Pointer<Uint32> ids) {
   final glCreateQueriesAsFunction = _glCreateQueries
       .cast<
         NativeFunction<
-          Void Function(Uint32 target, Uint32 n, Pointer<Uint32> ids)
+          Void Function(Uint32 target, Int32 n, Pointer<Uint32> ids)
         >
       >()
       .asFunction<void Function(int target, int n, Pointer<Uint32> ids)>();
@@ -15994,26 +15787,14 @@ late Pointer<NativeFunction<Void Function()>> _glGetQueryBufferObjecti64v;
 /// GLAPI void APIENTRY glGetQueryBufferObjecti64v (GLuint id, GLuint buffer, GLenum pname, GLintptr offset)
 /// ```
 /// {@category opengl_glext}
-void glGetQueryBufferObjecti64v(
-  int id,
-  int buffer,
-  int pname,
-  Pointer<NativeType> offset,
-) {
+void glGetQueryBufferObjecti64v(int id, int buffer, int pname, int offset) {
   final glGetQueryBufferObjecti64vAsFunction = _glGetQueryBufferObjecti64v
       .cast<
         NativeFunction<
-          Void Function(
-            Uint32 id,
-            Uint32 buffer,
-            Uint32 pname,
-            Pointer<NativeType> offset,
-          )
+          Void Function(Uint32 id, Uint32 buffer, Uint32 pname, IntPtr offset)
         >
       >()
-      .asFunction<
-        void Function(int id, int buffer, int pname, Pointer<NativeType> offset)
-      >();
+      .asFunction<void Function(int id, int buffer, int pname, int offset)>();
   return glGetQueryBufferObjecti64vAsFunction(id, buffer, pname, offset);
 }
 
@@ -16024,26 +15805,14 @@ late Pointer<NativeFunction<Void Function()>> _glGetQueryBufferObjectiv;
 /// GLAPI void APIENTRY glGetQueryBufferObjectiv (GLuint id, GLuint buffer, GLenum pname, GLintptr offset)
 /// ```
 /// {@category opengl_glext}
-void glGetQueryBufferObjectiv(
-  int id,
-  int buffer,
-  int pname,
-  Pointer<NativeType> offset,
-) {
+void glGetQueryBufferObjectiv(int id, int buffer, int pname, int offset) {
   final glGetQueryBufferObjectivAsFunction = _glGetQueryBufferObjectiv
       .cast<
         NativeFunction<
-          Void Function(
-            Uint32 id,
-            Uint32 buffer,
-            Uint32 pname,
-            Pointer<NativeType> offset,
-          )
+          Void Function(Uint32 id, Uint32 buffer, Uint32 pname, IntPtr offset)
         >
       >()
-      .asFunction<
-        void Function(int id, int buffer, int pname, Pointer<NativeType> offset)
-      >();
+      .asFunction<void Function(int id, int buffer, int pname, int offset)>();
   return glGetQueryBufferObjectivAsFunction(id, buffer, pname, offset);
 }
 
@@ -16054,26 +15823,14 @@ late Pointer<NativeFunction<Void Function()>> _glGetQueryBufferObjectui64v;
 /// GLAPI void APIENTRY glGetQueryBufferObjectui64v (GLuint id, GLuint buffer, GLenum pname, GLintptr offset)
 /// ```
 /// {@category opengl_glext}
-void glGetQueryBufferObjectui64v(
-  int id,
-  int buffer,
-  int pname,
-  Pointer<NativeType> offset,
-) {
+void glGetQueryBufferObjectui64v(int id, int buffer, int pname, int offset) {
   final glGetQueryBufferObjectui64vAsFunction = _glGetQueryBufferObjectui64v
       .cast<
         NativeFunction<
-          Void Function(
-            Uint32 id,
-            Uint32 buffer,
-            Uint32 pname,
-            Pointer<NativeType> offset,
-          )
+          Void Function(Uint32 id, Uint32 buffer, Uint32 pname, IntPtr offset)
         >
       >()
-      .asFunction<
-        void Function(int id, int buffer, int pname, Pointer<NativeType> offset)
-      >();
+      .asFunction<void Function(int id, int buffer, int pname, int offset)>();
   return glGetQueryBufferObjectui64vAsFunction(id, buffer, pname, offset);
 }
 
@@ -16084,26 +15841,14 @@ late Pointer<NativeFunction<Void Function()>> _glGetQueryBufferObjectuiv;
 /// GLAPI void APIENTRY glGetQueryBufferObjectuiv (GLuint id, GLuint buffer, GLenum pname, GLintptr offset)
 /// ```
 /// {@category opengl_glext}
-void glGetQueryBufferObjectuiv(
-  int id,
-  int buffer,
-  int pname,
-  Pointer<NativeType> offset,
-) {
+void glGetQueryBufferObjectuiv(int id, int buffer, int pname, int offset) {
   final glGetQueryBufferObjectuivAsFunction = _glGetQueryBufferObjectuiv
       .cast<
         NativeFunction<
-          Void Function(
-            Uint32 id,
-            Uint32 buffer,
-            Uint32 pname,
-            Pointer<NativeType> offset,
-          )
+          Void Function(Uint32 id, Uint32 buffer, Uint32 pname, IntPtr offset)
         >
       >()
-      .asFunction<
-        void Function(int id, int buffer, int pname, Pointer<NativeType> offset)
-      >();
+      .asFunction<void Function(int id, int buffer, int pname, int offset)>();
   return glGetQueryBufferObjectuivAsFunction(id, buffer, pname, offset);
 }
 
@@ -16140,7 +15885,7 @@ void glGetTextureSubImage(
   int format,
   int type,
   int bufSize,
-  Pointer<NativeType> pixels,
+  Pointer<Void> pixels,
 ) {
   final glGetTextureSubImageAsFunction = _glGetTextureSubImage
       .cast<
@@ -16151,13 +15896,13 @@ void glGetTextureSubImage(
             Int32 xoffset,
             Int32 yoffset,
             Int32 zoffset,
-            Uint32 width,
-            Uint32 height,
-            Uint32 depth,
+            Int32 width,
+            Int32 height,
+            Int32 depth,
             Uint32 format,
             Uint32 type,
-            Uint32 bufSize,
-            Pointer<NativeType> pixels,
+            Int32 bufSize,
+            Pointer<Void> pixels,
           )
         >
       >()
@@ -16174,7 +15919,7 @@ void glGetTextureSubImage(
           int format,
           int type,
           int bufSize,
-          Pointer<NativeType> pixels,
+          Pointer<Void> pixels,
         )
       >();
   return glGetTextureSubImageAsFunction(
@@ -16210,7 +15955,7 @@ void glGetCompressedTextureSubImage(
   int height,
   int depth,
   int bufSize,
-  Pointer<NativeType> pixels,
+  Pointer<Void> pixels,
 ) {
   final glGetCompressedTextureSubImageAsFunction =
       _glGetCompressedTextureSubImage
@@ -16222,11 +15967,11 @@ void glGetCompressedTextureSubImage(
                 Int32 xoffset,
                 Int32 yoffset,
                 Int32 zoffset,
-                Uint32 width,
-                Uint32 height,
-                Uint32 depth,
-                Uint32 bufSize,
-                Pointer<NativeType> pixels,
+                Int32 width,
+                Int32 height,
+                Int32 depth,
+                Int32 bufSize,
+                Pointer<Void> pixels,
               )
             >
           >()
@@ -16241,7 +15986,7 @@ void glGetCompressedTextureSubImage(
               int height,
               int depth,
               int bufSize,
-              Pointer<NativeType> pixels,
+              Pointer<Void> pixels,
             )
           >();
   return glGetCompressedTextureSubImageAsFunction(
@@ -16283,7 +16028,7 @@ void glGetnCompressedTexImage(
   int target,
   int lod,
   int bufSize,
-  Pointer<NativeType> pixels,
+  Pointer<Void> pixels,
 ) {
   final glGetnCompressedTexImageAsFunction = _glGetnCompressedTexImage
       .cast<
@@ -16291,18 +16036,13 @@ void glGetnCompressedTexImage(
           Void Function(
             Uint32 target,
             Int32 lod,
-            Uint32 bufSize,
-            Pointer<NativeType> pixels,
+            Int32 bufSize,
+            Pointer<Void> pixels,
           )
         >
       >()
       .asFunction<
-        void Function(
-          int target,
-          int lod,
-          int bufSize,
-          Pointer<NativeType> pixels,
-        )
+        void Function(int target, int lod, int bufSize, Pointer<Void> pixels)
       >();
   return glGetnCompressedTexImageAsFunction(target, lod, bufSize, pixels);
 }
@@ -16320,7 +16060,7 @@ void glGetnTexImage(
   int format,
   int type,
   int bufSize,
-  Pointer<NativeType> pixels,
+  Pointer<Void> pixels,
 ) {
   final glGetnTexImageAsFunction = _glGetnTexImage
       .cast<
@@ -16330,8 +16070,8 @@ void glGetnTexImage(
             Int32 level,
             Uint32 format,
             Uint32 type,
-            Uint32 bufSize,
-            Pointer<NativeType> pixels,
+            Int32 bufSize,
+            Pointer<Void> pixels,
           )
         >
       >()
@@ -16342,7 +16082,7 @@ void glGetnTexImage(
           int format,
           int type,
           int bufSize,
-          Pointer<NativeType> pixels,
+          Pointer<Void> pixels,
         )
       >();
   return glGetnTexImageAsFunction(target, level, format, type, bufSize, pixels);
@@ -16367,7 +16107,7 @@ void glGetnUniformdv(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 bufSize,
+            Int32 bufSize,
             Pointer<Double> params,
           )
         >
@@ -16402,7 +16142,7 @@ void glGetnUniformfv(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 bufSize,
+            Int32 bufSize,
             Pointer<Float> params,
           )
         >
@@ -16437,7 +16177,7 @@ void glGetnUniformiv(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 bufSize,
+            Int32 bufSize,
             Pointer<Int32> params,
           )
         >
@@ -16472,7 +16212,7 @@ void glGetnUniformuiv(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 bufSize,
+            Int32 bufSize,
             Pointer<Uint32> params,
           )
         >
@@ -16503,7 +16243,7 @@ void glReadnPixels(
   int format,
   int type,
   int bufSize,
-  Pointer<NativeType> data,
+  Pointer<Void> data,
 ) {
   final glReadnPixelsAsFunction = _glReadnPixels
       .cast<
@@ -16511,12 +16251,12 @@ void glReadnPixels(
           Void Function(
             Int32 x,
             Int32 y,
-            Uint32 width,
-            Uint32 height,
+            Int32 width,
+            Int32 height,
             Uint32 format,
             Uint32 type,
-            Uint32 bufSize,
-            Pointer<NativeType> data,
+            Int32 bufSize,
+            Pointer<Void> data,
           )
         >
       >()
@@ -16529,7 +16269,7 @@ void glReadnPixels(
           int format,
           int type,
           int bufSize,
-          Pointer<NativeType> data,
+          Pointer<Void> data,
         )
       >();
   return glReadnPixelsAsFunction(
@@ -16558,7 +16298,7 @@ void glGetnMapdv(int target, int query, int bufSize, Pointer<Double> v) {
           Void Function(
             Uint32 target,
             Uint32 query,
-            Uint32 bufSize,
+            Int32 bufSize,
             Pointer<Double> v,
           )
         >
@@ -16583,7 +16323,7 @@ void glGetnMapfv(int target, int query, int bufSize, Pointer<Float> v) {
           Void Function(
             Uint32 target,
             Uint32 query,
-            Uint32 bufSize,
+            Int32 bufSize,
             Pointer<Float> v,
           )
         >
@@ -16608,7 +16348,7 @@ void glGetnMapiv(int target, int query, int bufSize, Pointer<Int32> v) {
           Void Function(
             Uint32 target,
             Uint32 query,
-            Uint32 bufSize,
+            Int32 bufSize,
             Pointer<Int32> v,
           )
         >
@@ -16630,7 +16370,7 @@ void glGetnPixelMapfv(int map, int bufSize, Pointer<Float> values) {
   final glGetnPixelMapfvAsFunction = _glGetnPixelMapfv
       .cast<
         NativeFunction<
-          Void Function(Uint32 map, Uint32 bufSize, Pointer<Float> values)
+          Void Function(Uint32 map, Int32 bufSize, Pointer<Float> values)
         >
       >()
       .asFunction<void Function(int map, int bufSize, Pointer<Float> values)>();
@@ -16648,7 +16388,7 @@ void glGetnPixelMapuiv(int map, int bufSize, Pointer<Uint32> values) {
   final glGetnPixelMapuivAsFunction = _glGetnPixelMapuiv
       .cast<
         NativeFunction<
-          Void Function(Uint32 map, Uint32 bufSize, Pointer<Uint32> values)
+          Void Function(Uint32 map, Int32 bufSize, Pointer<Uint32> values)
         >
       >()
       .asFunction<
@@ -16668,7 +16408,7 @@ void glGetnPixelMapusv(int map, int bufSize, Pointer<Uint16> values) {
   final glGetnPixelMapusvAsFunction = _glGetnPixelMapusv
       .cast<
         NativeFunction<
-          Void Function(Uint32 map, Uint32 bufSize, Pointer<Uint16> values)
+          Void Function(Uint32 map, Int32 bufSize, Pointer<Uint16> values)
         >
       >()
       .asFunction<
@@ -16687,7 +16427,7 @@ late Pointer<NativeFunction<Void Function()>> _glGetnPolygonStipple;
 void glGetnPolygonStipple(int bufSize, Pointer<Uint8> pattern) {
   final glGetnPolygonStippleAsFunction = _glGetnPolygonStipple
       .cast<
-        NativeFunction<Void Function(Uint32 bufSize, Pointer<Uint8> pattern)>
+        NativeFunction<Void Function(Int32 bufSize, Pointer<Uint8> pattern)>
       >()
       .asFunction<void Function(int bufSize, Pointer<Uint8> pattern)>();
   return glGetnPolygonStippleAsFunction(bufSize, pattern);
@@ -16705,7 +16445,7 @@ void glGetnColorTable(
   int format,
   int type,
   int bufSize,
-  Pointer<NativeType> table,
+  Pointer<Void> table,
 ) {
   final glGetnColorTableAsFunction = _glGetnColorTable
       .cast<
@@ -16714,8 +16454,8 @@ void glGetnColorTable(
             Uint32 target,
             Uint32 format,
             Uint32 type,
-            Uint32 bufSize,
-            Pointer<NativeType> table,
+            Int32 bufSize,
+            Pointer<Void> table,
           )
         >
       >()
@@ -16725,7 +16465,7 @@ void glGetnColorTable(
           int format,
           int type,
           int bufSize,
-          Pointer<NativeType> table,
+          Pointer<Void> table,
         )
       >();
   return glGetnColorTableAsFunction(target, format, type, bufSize, table);
@@ -16743,7 +16483,7 @@ void glGetnConvolutionFilter(
   int format,
   int type,
   int bufSize,
-  Pointer<NativeType> image,
+  Pointer<Void> image,
 ) {
   final glGetnConvolutionFilterAsFunction = _glGetnConvolutionFilter
       .cast<
@@ -16752,8 +16492,8 @@ void glGetnConvolutionFilter(
             Uint32 target,
             Uint32 format,
             Uint32 type,
-            Uint32 bufSize,
-            Pointer<NativeType> image,
+            Int32 bufSize,
+            Pointer<Void> image,
           )
         >
       >()
@@ -16763,7 +16503,7 @@ void glGetnConvolutionFilter(
           int format,
           int type,
           int bufSize,
-          Pointer<NativeType> image,
+          Pointer<Void> image,
         )
       >();
   return glGetnConvolutionFilterAsFunction(
@@ -16787,10 +16527,10 @@ void glGetnSeparableFilter(
   int format,
   int type,
   int rowBufSize,
-  Pointer<NativeType> row,
+  Pointer<Void> row,
   int columnBufSize,
-  Pointer<NativeType> column,
-  Pointer<NativeType> span,
+  Pointer<Void> column,
+  Pointer<Void> span,
 ) {
   final glGetnSeparableFilterAsFunction = _glGetnSeparableFilter
       .cast<
@@ -16799,11 +16539,11 @@ void glGetnSeparableFilter(
             Uint32 target,
             Uint32 format,
             Uint32 type,
-            Uint32 rowBufSize,
-            Pointer<NativeType> row,
-            Uint32 columnBufSize,
-            Pointer<NativeType> column,
-            Pointer<NativeType> span,
+            Int32 rowBufSize,
+            Pointer<Void> row,
+            Int32 columnBufSize,
+            Pointer<Void> column,
+            Pointer<Void> span,
           )
         >
       >()
@@ -16813,10 +16553,10 @@ void glGetnSeparableFilter(
           int format,
           int type,
           int rowBufSize,
-          Pointer<NativeType> row,
+          Pointer<Void> row,
           int columnBufSize,
-          Pointer<NativeType> column,
-          Pointer<NativeType> span,
+          Pointer<Void> column,
+          Pointer<Void> span,
         )
       >();
   return glGetnSeparableFilterAsFunction(
@@ -16844,18 +16584,18 @@ void glGetnHistogram(
   int format,
   int type,
   int bufSize,
-  Pointer<NativeType> values,
+  Pointer<Void> values,
 ) {
   final glGetnHistogramAsFunction = _glGetnHistogram
       .cast<
         NativeFunction<
           Void Function(
             Uint32 target,
-            Int32 reset,
+            Uint8 reset,
             Uint32 format,
             Uint32 type,
-            Uint32 bufSize,
-            Pointer<NativeType> values,
+            Int32 bufSize,
+            Pointer<Void> values,
           )
         >
       >()
@@ -16866,7 +16606,7 @@ void glGetnHistogram(
           int format,
           int type,
           int bufSize,
-          Pointer<NativeType> values,
+          Pointer<Void> values,
         )
       >();
   return glGetnHistogramAsFunction(
@@ -16892,18 +16632,18 @@ void glGetnMinmax(
   int format,
   int type,
   int bufSize,
-  Pointer<NativeType> values,
+  Pointer<Void> values,
 ) {
   final glGetnMinmaxAsFunction = _glGetnMinmax
       .cast<
         NativeFunction<
           Void Function(
             Uint32 target,
-            Int32 reset,
+            Uint8 reset,
             Uint32 format,
             Uint32 type,
-            Uint32 bufSize,
-            Pointer<NativeType> values,
+            Int32 bufSize,
+            Pointer<Void> values,
           )
         >
       >()
@@ -16914,7 +16654,7 @@ void glGetnMinmax(
           int format,
           int type,
           int bufSize,
-          Pointer<NativeType> values,
+          Pointer<Void> values,
         )
       >();
   return glGetnMinmaxAsFunction(target, reset, format, type, bufSize, values);
@@ -16990,8 +16730,8 @@ late Pointer<NativeFunction<Void Function()>> _glMultiDrawArraysIndirectCount;
 /// {@category opengl_glext}
 void glMultiDrawArraysIndirectCount(
   int mode,
-  Pointer<NativeType> indirect,
-  Pointer<NativeType> drawcount,
+  Pointer<Void> indirect,
+  int drawcount,
   int maxdrawcount,
   int stride,
 ) {
@@ -17001,18 +16741,18 @@ void glMultiDrawArraysIndirectCount(
             NativeFunction<
               Void Function(
                 Uint32 mode,
-                Pointer<NativeType> indirect,
-                Pointer<NativeType> drawcount,
-                Uint32 maxdrawcount,
-                Uint32 stride,
+                Pointer<Void> indirect,
+                IntPtr drawcount,
+                Int32 maxdrawcount,
+                Int32 stride,
               )
             >
           >()
           .asFunction<
             void Function(
               int mode,
-              Pointer<NativeType> indirect,
-              Pointer<NativeType> drawcount,
+              Pointer<Void> indirect,
+              int drawcount,
               int maxdrawcount,
               int stride,
             )
@@ -17036,8 +16776,8 @@ late Pointer<NativeFunction<Void Function()>> _glMultiDrawElementsIndirectCount;
 void glMultiDrawElementsIndirectCount(
   int mode,
   int type,
-  Pointer<NativeType> indirect,
-  Pointer<NativeType> drawcount,
+  Pointer<Void> indirect,
+  int drawcount,
   int maxdrawcount,
   int stride,
 ) {
@@ -17048,10 +16788,10 @@ void glMultiDrawElementsIndirectCount(
               Void Function(
                 Uint32 mode,
                 Uint32 type,
-                Pointer<NativeType> indirect,
-                Pointer<NativeType> drawcount,
-                Uint32 maxdrawcount,
-                Uint32 stride,
+                Pointer<Void> indirect,
+                IntPtr drawcount,
+                Int32 maxdrawcount,
+                Int32 stride,
               )
             >
           >()
@@ -17059,8 +16799,8 @@ void glMultiDrawElementsIndirectCount(
             void Function(
               int mode,
               int type,
-              Pointer<NativeType> indirect,
-              Pointer<NativeType> drawcount,
+              Pointer<Void> indirect,
+              int drawcount,
               int maxdrawcount,
               int stride,
             )
@@ -17226,7 +16966,7 @@ int glGetImageHandleArb(
           Uint64 Function(
             Uint32 texture,
             Int32 level,
-            Int32 layered,
+            Uint8 layered,
             Int32 layer,
             Uint32 format,
           )
@@ -17292,7 +17032,7 @@ void glUniformHandleui64vArb(int location, int count, Pointer<Uint64> value) {
   final glUniformHandleui64vArbAsFunction = _glUniformHandleui64vArb
       .cast<
         NativeFunction<
-          Void Function(Int32 location, Uint32 count, Pointer<Uint64> value)
+          Void Function(Int32 location, Int32 count, Pointer<Uint64> value)
         >
       >()
       .asFunction<
@@ -17339,7 +17079,7 @@ void glProgramUniformHandleui64vArb(
               Void Function(
                 Uint32 program,
                 Int32 location,
-                Uint32 count,
+                Int32 count,
                 Pointer<Uint64> values,
               )
             >
@@ -17369,7 +17109,7 @@ late Pointer<NativeFunction<Void Function()>> _glIsTextureHandleResidentArb;
 /// {@category opengl_glext}
 int glIsTextureHandleResidentArb(int handle) {
   final glIsTextureHandleResidentArbAsFunction = _glIsTextureHandleResidentArb
-      .cast<NativeFunction<Int32 Function(Uint64 handle)>>()
+      .cast<NativeFunction<Uint8 Function(Uint64 handle)>>()
       .asFunction<int Function(int handle)>();
   return glIsTextureHandleResidentArbAsFunction(handle);
 }
@@ -17383,7 +17123,7 @@ late Pointer<NativeFunction<Void Function()>> _glIsImageHandleResidentArb;
 /// {@category opengl_glext}
 int glIsImageHandleResidentArb(int handle) {
   final glIsImageHandleResidentArbAsFunction = _glIsImageHandleResidentArb
-      .cast<NativeFunction<Int32 Function(Uint64 handle)>>()
+      .cast<NativeFunction<Uint8 Function(Uint64 handle)>>()
       .asFunction<int Function(int handle)>();
   return glIsImageHandleResidentArbAsFunction(handle);
 }
@@ -17443,25 +17183,25 @@ late Pointer<NativeFunction<Void Function()>> _glCreateSyncFromCLeventArb;
 /// GLAPI GLsync APIENTRY glCreateSyncFromCLeventARB (struct _cl_context *context, struct _cl_event *event, GLbitfield flags)
 /// ```
 /// {@category opengl_glext}
-Pointer<NativeType> glCreateSyncFromCLeventArb(
-  Pointer<Pointer<NativeType>> context,
-  Pointer<Pointer<NativeType>> event,
+Pointer<Void> glCreateSyncFromCLeventArb(
+  Pointer<ClContext> context,
+  Pointer<ClEvent> event,
   int flags,
 ) {
   final glCreateSyncFromCLeventArbAsFunction = _glCreateSyncFromCLeventArb
       .cast<
         NativeFunction<
-          Pointer<NativeType> Function(
-            Pointer<Pointer<NativeType>> context,
-            Pointer<Pointer<NativeType>> event,
+          Pointer<Void> Function(
+            Pointer<ClContext> context,
+            Pointer<ClEvent> event,
             Uint32 flags,
           )
         >
       >()
       .asFunction<
-        Pointer<NativeType> Function(
-          Pointer<Pointer<NativeType>> context,
-          Pointer<Pointer<NativeType>> event,
+        Pointer<Void> Function(
+          Pointer<ClContext> context,
+          Pointer<ClEvent> event,
           int flags,
         )
       >();
@@ -17552,9 +17292,9 @@ void glDebugMessageControlArb(
             Uint32 source,
             Uint32 type,
             Uint32 severity,
-            Uint32 count,
+            Int32 count,
             Pointer<Uint32> ids,
-            Int32 enabled,
+            Uint8 enabled,
           )
         >
       >()
@@ -17601,7 +17341,7 @@ void glDebugMessageInsertArb(
             Uint32 type,
             Uint32 id,
             Uint32 severity,
-            Uint32 length,
+            Int32 length,
             Pointer<Utf8> buf,
           )
         >
@@ -17638,21 +17378,21 @@ late Pointer<NativeFunction<Void Function()>> _glDebugMessageCallbackArb;
 /// {@category opengl_glext}
 void glDebugMessageCallbackArb(
   Pointer<NativeFunction<GLDEBUGPROCARB>> callback,
-  Pointer<NativeType> userParam,
+  Pointer<Void> userParam,
 ) {
   final glDebugMessageCallbackArbAsFunction = _glDebugMessageCallbackArb
       .cast<
         NativeFunction<
           Void Function(
             Pointer<NativeFunction<GLDEBUGPROCARB>> callback,
-            Pointer<NativeType> userParam,
+            Pointer<Void> userParam,
           )
         >
       >()
       .asFunction<
         void Function(
           Pointer<NativeFunction<GLDEBUGPROCARB>> callback,
-          Pointer<NativeType> userParam,
+          Pointer<Void> userParam,
         )
       >();
   return glDebugMessageCallbackArbAsFunction(callback, userParam);
@@ -17672,7 +17412,7 @@ int glGetDebugMessageLogArb(
   Pointer<Uint32> types,
   Pointer<Uint32> ids,
   Pointer<Uint32> severities,
-  Pointer<Uint32> lengths,
+  Pointer<Int32> lengths,
   Pointer<Int8> messageLog,
 ) {
   final glGetDebugMessageLogArbAsFunction = _glGetDebugMessageLogArb
@@ -17680,12 +17420,12 @@ int glGetDebugMessageLogArb(
         NativeFunction<
           Uint32 Function(
             Uint32 count,
-            Uint32 bufSize,
+            Int32 bufSize,
             Pointer<Uint32> sources,
             Pointer<Uint32> types,
             Pointer<Uint32> ids,
             Pointer<Uint32> severities,
-            Pointer<Uint32> lengths,
+            Pointer<Int32> lengths,
             Pointer<Int8> messageLog,
           )
         >
@@ -17698,7 +17438,7 @@ int glGetDebugMessageLogArb(
           Pointer<Uint32> types,
           Pointer<Uint32> ids,
           Pointer<Uint32> severities,
-          Pointer<Uint32> lengths,
+          Pointer<Int32> lengths,
           Pointer<Int8> messageLog,
         )
       >();
@@ -17723,7 +17463,7 @@ late Pointer<NativeFunction<Void Function()>> _glDrawBuffersArb;
 /// {@category opengl_glext}
 void glDrawBuffersArb(int n, Pointer<Uint32> bufs) {
   final glDrawBuffersArbAsFunction = _glDrawBuffersArb
-      .cast<NativeFunction<Void Function(Uint32 n, Pointer<Uint32> bufs)>>()
+      .cast<NativeFunction<Void Function(Int32 n, Pointer<Uint32> bufs)>>()
       .asFunction<void Function(int n, Pointer<Uint32> bufs)>();
   return glDrawBuffersArbAsFunction(n, bufs);
 }
@@ -17829,12 +17569,7 @@ void glDrawArraysInstancedArb(int mode, int first, int count, int primcount) {
   final glDrawArraysInstancedArbAsFunction = _glDrawArraysInstancedArb
       .cast<
         NativeFunction<
-          Void Function(
-            Uint32 mode,
-            Int32 first,
-            Uint32 count,
-            Uint32 primcount,
-          )
+          Void Function(Uint32 mode, Int32 first, Int32 count, Int32 primcount)
         >
       >()
       .asFunction<
@@ -17854,7 +17589,7 @@ void glDrawElementsInstancedArb(
   int mode,
   int count,
   int type,
-  Pointer<NativeType> indices,
+  Pointer<Void> indices,
   int primcount,
 ) {
   final glDrawElementsInstancedArbAsFunction = _glDrawElementsInstancedArb
@@ -17862,10 +17597,10 @@ void glDrawElementsInstancedArb(
         NativeFunction<
           Void Function(
             Uint32 mode,
-            Uint32 count,
+            Int32 count,
             Uint32 type,
-            Pointer<NativeType> indices,
-            Uint32 primcount,
+            Pointer<Void> indices,
+            Int32 primcount,
           )
         >
       >()
@@ -17874,7 +17609,7 @@ void glDrawElementsInstancedArb(
           int mode,
           int count,
           int type,
-          Pointer<NativeType> indices,
+          Pointer<Void> indices,
           int primcount,
         )
       >();
@@ -17894,30 +17629,20 @@ late Pointer<NativeFunction<Void Function()>> _glProgramStringArb;
 /// GLAPI void APIENTRY glProgramStringARB (GLenum target, GLenum format, GLsizei len, const void *string)
 /// ```
 /// {@category opengl_glext}
-void glProgramStringArb(
-  int target,
-  int format,
-  int len,
-  Pointer<NativeType> string,
-) {
+void glProgramStringArb(int target, int format, int len, Pointer<Void> string) {
   final glProgramStringArbAsFunction = _glProgramStringArb
       .cast<
         NativeFunction<
           Void Function(
             Uint32 target,
             Uint32 format,
-            Uint32 len,
-            Pointer<NativeType> string,
+            Int32 len,
+            Pointer<Void> string,
           )
         >
       >()
       .asFunction<
-        void Function(
-          int target,
-          int format,
-          int len,
-          Pointer<NativeType> string,
-        )
+        void Function(int target, int format, int len, Pointer<Void> string)
       >();
   return glProgramStringArbAsFunction(target, format, len, string);
 }
@@ -17945,7 +17670,7 @@ late Pointer<NativeFunction<Void Function()>> _glDeleteProgramsArb;
 /// {@category opengl_glext}
 void glDeleteProgramsArb(int n, Pointer<Uint32> programs) {
   final glDeleteProgramsArbAsFunction = _glDeleteProgramsArb
-      .cast<NativeFunction<Void Function(Uint32 n, Pointer<Uint32> programs)>>()
+      .cast<NativeFunction<Void Function(Int32 n, Pointer<Uint32> programs)>>()
       .asFunction<void Function(int n, Pointer<Uint32> programs)>();
   return glDeleteProgramsArbAsFunction(n, programs);
 }
@@ -17959,7 +17684,7 @@ late Pointer<NativeFunction<Void Function()>> _glGenProgramsArb;
 /// {@category opengl_glext}
 void glGenProgramsArb(int n, Pointer<Uint32> programs) {
   final glGenProgramsArbAsFunction = _glGenProgramsArb
-      .cast<NativeFunction<Void Function(Uint32 n, Pointer<Uint32> programs)>>()
+      .cast<NativeFunction<Void Function(Int32 n, Pointer<Uint32> programs)>>()
       .asFunction<void Function(int n, Pointer<Uint32> programs)>();
   return glGenProgramsArbAsFunction(n, programs);
 }
@@ -18345,16 +18070,14 @@ late Pointer<NativeFunction<Void Function()>> _glGetProgramStringArb;
 /// GLAPI void APIENTRY glGetProgramStringARB (GLenum target, GLenum pname, void *string)
 /// ```
 /// {@category opengl_glext}
-void glGetProgramStringArb(int target, int pname, Pointer<NativeType> string) {
+void glGetProgramStringArb(int target, int pname, Pointer<Void> string) {
   final glGetProgramStringArbAsFunction = _glGetProgramStringArb
       .cast<
         NativeFunction<
-          Void Function(Uint32 target, Uint32 pname, Pointer<NativeType> string)
+          Void Function(Uint32 target, Uint32 pname, Pointer<Void> string)
         >
       >()
-      .asFunction<
-        void Function(int target, int pname, Pointer<NativeType> string)
-      >();
+      .asFunction<void Function(int target, int pname, Pointer<Void> string)>();
   return glGetProgramStringArbAsFunction(target, pname, string);
 }
 
@@ -18367,7 +18090,7 @@ late Pointer<NativeFunction<Void Function()>> _glIsProgramArb;
 /// {@category opengl_glext}
 int glIsProgramArb(int program) {
   final glIsProgramArbAsFunction = _glIsProgramArb
-      .cast<NativeFunction<Int32 Function(Uint32 program)>>()
+      .cast<NativeFunction<Uint8 Function(Uint32 program)>>()
       .asFunction<int Function(int program)>();
   return glIsProgramArbAsFunction(program);
 }
@@ -18626,7 +18349,7 @@ void glUniform1i64vArb(int location, int count, Pointer<Int64> value) {
   final glUniform1i64vArbAsFunction = _glUniform1i64vArb
       .cast<
         NativeFunction<
-          Void Function(Int32 location, Uint32 count, Pointer<Int64> value)
+          Void Function(Int32 location, Int32 count, Pointer<Int64> value)
         >
       >()
       .asFunction<
@@ -18646,7 +18369,7 @@ void glUniform2i64vArb(int location, int count, Pointer<Int64> value) {
   final glUniform2i64vArbAsFunction = _glUniform2i64vArb
       .cast<
         NativeFunction<
-          Void Function(Int32 location, Uint32 count, Pointer<Int64> value)
+          Void Function(Int32 location, Int32 count, Pointer<Int64> value)
         >
       >()
       .asFunction<
@@ -18666,7 +18389,7 @@ void glUniform3i64vArb(int location, int count, Pointer<Int64> value) {
   final glUniform3i64vArbAsFunction = _glUniform3i64vArb
       .cast<
         NativeFunction<
-          Void Function(Int32 location, Uint32 count, Pointer<Int64> value)
+          Void Function(Int32 location, Int32 count, Pointer<Int64> value)
         >
       >()
       .asFunction<
@@ -18686,7 +18409,7 @@ void glUniform4i64vArb(int location, int count, Pointer<Int64> value) {
   final glUniform4i64vArbAsFunction = _glUniform4i64vArb
       .cast<
         NativeFunction<
-          Void Function(Int32 location, Uint32 count, Pointer<Int64> value)
+          Void Function(Int32 location, Int32 count, Pointer<Int64> value)
         >
       >()
       .asFunction<
@@ -18770,7 +18493,7 @@ void glUniform1ui64vArb(int location, int count, Pointer<Uint64> value) {
   final glUniform1ui64vArbAsFunction = _glUniform1ui64vArb
       .cast<
         NativeFunction<
-          Void Function(Int32 location, Uint32 count, Pointer<Uint64> value)
+          Void Function(Int32 location, Int32 count, Pointer<Uint64> value)
         >
       >()
       .asFunction<
@@ -18790,7 +18513,7 @@ void glUniform2ui64vArb(int location, int count, Pointer<Uint64> value) {
   final glUniform2ui64vArbAsFunction = _glUniform2ui64vArb
       .cast<
         NativeFunction<
-          Void Function(Int32 location, Uint32 count, Pointer<Uint64> value)
+          Void Function(Int32 location, Int32 count, Pointer<Uint64> value)
         >
       >()
       .asFunction<
@@ -18810,7 +18533,7 @@ void glUniform3ui64vArb(int location, int count, Pointer<Uint64> value) {
   final glUniform3ui64vArbAsFunction = _glUniform3ui64vArb
       .cast<
         NativeFunction<
-          Void Function(Int32 location, Uint32 count, Pointer<Uint64> value)
+          Void Function(Int32 location, Int32 count, Pointer<Uint64> value)
         >
       >()
       .asFunction<
@@ -18830,7 +18553,7 @@ void glUniform4ui64vArb(int location, int count, Pointer<Uint64> value) {
   final glUniform4ui64vArbAsFunction = _glUniform4ui64vArb
       .cast<
         NativeFunction<
-          Void Function(Int32 location, Uint32 count, Pointer<Uint64> value)
+          Void Function(Int32 location, Int32 count, Pointer<Uint64> value)
         >
       >()
       .asFunction<
@@ -18898,7 +18621,7 @@ void glGetnUniformi64vArb(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 bufSize,
+            Int32 bufSize,
             Pointer<Int64> params,
           )
         >
@@ -18933,7 +18656,7 @@ void glGetnUniformui64vArb(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 bufSize,
+            Int32 bufSize,
             Pointer<Uint64> params,
           )
         >
@@ -19062,7 +18785,7 @@ void glProgramUniform1i64vArb(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 count,
+            Int32 count,
             Pointer<Int64> value,
           )
         >
@@ -19097,7 +18820,7 @@ void glProgramUniform2i64vArb(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 count,
+            Int32 count,
             Pointer<Int64> value,
           )
         >
@@ -19132,7 +18855,7 @@ void glProgramUniform3i64vArb(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 count,
+            Int32 count,
             Pointer<Int64> value,
           )
         >
@@ -19167,7 +18890,7 @@ void glProgramUniform4i64vArb(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 count,
+            Int32 count,
             Pointer<Int64> value,
           )
         >
@@ -19296,7 +19019,7 @@ void glProgramUniform1ui64vArb(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 count,
+            Int32 count,
             Pointer<Uint64> value,
           )
         >
@@ -19331,7 +19054,7 @@ void glProgramUniform2ui64vArb(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 count,
+            Int32 count,
             Pointer<Uint64> value,
           )
         >
@@ -19366,7 +19089,7 @@ void glProgramUniform3ui64vArb(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 count,
+            Int32 count,
             Pointer<Uint64> value,
           )
         >
@@ -19401,7 +19124,7 @@ void glProgramUniform4ui64vArb(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 count,
+            Int32 count,
             Pointer<Uint64> value,
           )
         >
@@ -19427,8 +19150,8 @@ _glMultiDrawArraysIndirectCountArb;
 /// {@category opengl_glext}
 void glMultiDrawArraysIndirectCountArb(
   int mode,
-  Pointer<NativeType> indirect,
-  Pointer<NativeType> drawcount,
+  Pointer<Void> indirect,
+  int drawcount,
   int maxdrawcount,
   int stride,
 ) {
@@ -19438,18 +19161,18 @@ void glMultiDrawArraysIndirectCountArb(
             NativeFunction<
               Void Function(
                 Uint32 mode,
-                Pointer<NativeType> indirect,
-                Pointer<NativeType> drawcount,
-                Uint32 maxdrawcount,
-                Uint32 stride,
+                Pointer<Void> indirect,
+                IntPtr drawcount,
+                Int32 maxdrawcount,
+                Int32 stride,
               )
             >
           >()
           .asFunction<
             void Function(
               int mode,
-              Pointer<NativeType> indirect,
-              Pointer<NativeType> drawcount,
+              Pointer<Void> indirect,
+              int drawcount,
               int maxdrawcount,
               int stride,
             )
@@ -19474,8 +19197,8 @@ _glMultiDrawElementsIndirectCountArb;
 void glMultiDrawElementsIndirectCountArb(
   int mode,
   int type,
-  Pointer<NativeType> indirect,
-  Pointer<NativeType> drawcount,
+  Pointer<Void> indirect,
+  int drawcount,
   int maxdrawcount,
   int stride,
 ) {
@@ -19486,10 +19209,10 @@ void glMultiDrawElementsIndirectCountArb(
               Void Function(
                 Uint32 mode,
                 Uint32 type,
-                Pointer<NativeType> indirect,
-                Pointer<NativeType> drawcount,
-                Uint32 maxdrawcount,
-                Uint32 stride,
+                Pointer<Void> indirect,
+                IntPtr drawcount,
+                Int32 maxdrawcount,
+                Int32 stride,
               )
             >
           >()
@@ -19497,8 +19220,8 @@ void glMultiDrawElementsIndirectCountArb(
             void Function(
               int mode,
               int type,
-              Pointer<NativeType> indirect,
-              Pointer<NativeType> drawcount,
+              Pointer<Void> indirect,
+              int drawcount,
               int maxdrawcount,
               int stride,
             )
@@ -19598,7 +19321,7 @@ void glMatrixIndexPointerArb(
   int size,
   int type,
   int stride,
-  Pointer<NativeType> pointer,
+  Pointer<Void> pointer,
 ) {
   final glMatrixIndexPointerArbAsFunction = _glMatrixIndexPointerArb
       .cast<
@@ -19606,18 +19329,13 @@ void glMatrixIndexPointerArb(
           Void Function(
             Int32 size,
             Uint32 type,
-            Uint32 stride,
-            Pointer<NativeType> pointer,
+            Int32 stride,
+            Pointer<Void> pointer,
           )
         >
       >()
       .asFunction<
-        void Function(
-          int size,
-          int type,
-          int stride,
-          Pointer<NativeType> pointer,
-        )
+        void Function(int size, int type, int stride, Pointer<Void> pointer)
       >();
   return glMatrixIndexPointerArbAsFunction(size, type, stride, pointer);
 }
@@ -19631,7 +19349,7 @@ late Pointer<NativeFunction<Void Function()>> _glSampleCoverageArb;
 /// {@category opengl_glext}
 void glSampleCoverageArb(double value, int invert) {
   final glSampleCoverageArbAsFunction = _glSampleCoverageArb
-      .cast<NativeFunction<Void Function(Float value, Int32 invert)>>()
+      .cast<NativeFunction<Void Function(Float value, Uint8 invert)>>()
       .asFunction<void Function(double value, int invert)>();
   return glSampleCoverageArbAsFunction(value, invert);
 }
@@ -19645,7 +19363,7 @@ late Pointer<NativeFunction<Void Function()>> _glGenQueriesArb;
 /// {@category opengl_glext}
 void glGenQueriesArb(int n, Pointer<Uint32> ids) {
   final glGenQueriesArbAsFunction = _glGenQueriesArb
-      .cast<NativeFunction<Void Function(Uint32 n, Pointer<Uint32> ids)>>()
+      .cast<NativeFunction<Void Function(Int32 n, Pointer<Uint32> ids)>>()
       .asFunction<void Function(int n, Pointer<Uint32> ids)>();
   return glGenQueriesArbAsFunction(n, ids);
 }
@@ -19659,7 +19377,7 @@ late Pointer<NativeFunction<Void Function()>> _glDeleteQueriesArb;
 /// {@category opengl_glext}
 void glDeleteQueriesArb(int n, Pointer<Uint32> ids) {
   final glDeleteQueriesArbAsFunction = _glDeleteQueriesArb
-      .cast<NativeFunction<Void Function(Uint32 n, Pointer<Uint32> ids)>>()
+      .cast<NativeFunction<Void Function(Int32 n, Pointer<Uint32> ids)>>()
       .asFunction<void Function(int n, Pointer<Uint32> ids)>();
   return glDeleteQueriesArbAsFunction(n, ids);
 }
@@ -19673,7 +19391,7 @@ late Pointer<NativeFunction<Void Function()>> _glIsQueryArb;
 /// {@category opengl_glext}
 int glIsQueryArb(int id) {
   final glIsQueryArbAsFunction = _glIsQueryArb
-      .cast<NativeFunction<Int32 Function(Uint32 id)>>()
+      .cast<NativeFunction<Uint8 Function(Uint32 id)>>()
       .asFunction<int Function(int id)>();
   return glIsQueryArbAsFunction(id);
 }
@@ -19833,7 +19551,7 @@ void glGetnTexImageArb(
   int format,
   int type,
   int bufSize,
-  Pointer<NativeType> img,
+  Pointer<Void> img,
 ) {
   final glGetnTexImageArbAsFunction = _glGetnTexImageArb
       .cast<
@@ -19843,8 +19561,8 @@ void glGetnTexImageArb(
             Int32 level,
             Uint32 format,
             Uint32 type,
-            Uint32 bufSize,
-            Pointer<NativeType> img,
+            Int32 bufSize,
+            Pointer<Void> img,
           )
         >
       >()
@@ -19855,7 +19573,7 @@ void glGetnTexImageArb(
           int format,
           int type,
           int bufSize,
-          Pointer<NativeType> img,
+          Pointer<Void> img,
         )
       >();
   return glGetnTexImageArbAsFunction(target, level, format, type, bufSize, img);
@@ -19876,7 +19594,7 @@ void glReadnPixelsArb(
   int format,
   int type,
   int bufSize,
-  Pointer<NativeType> data,
+  Pointer<Void> data,
 ) {
   final glReadnPixelsArbAsFunction = _glReadnPixelsArb
       .cast<
@@ -19884,12 +19602,12 @@ void glReadnPixelsArb(
           Void Function(
             Int32 x,
             Int32 y,
-            Uint32 width,
-            Uint32 height,
+            Int32 width,
+            Int32 height,
             Uint32 format,
             Uint32 type,
-            Uint32 bufSize,
-            Pointer<NativeType> data,
+            Int32 bufSize,
+            Pointer<Void> data,
           )
         >
       >()
@@ -19902,7 +19620,7 @@ void glReadnPixelsArb(
           int format,
           int type,
           int bufSize,
-          Pointer<NativeType> data,
+          Pointer<Void> data,
         )
       >();
   return glReadnPixelsArbAsFunction(
@@ -19928,7 +19646,7 @@ void glGetnCompressedTexImageArb(
   int target,
   int lod,
   int bufSize,
-  Pointer<NativeType> img,
+  Pointer<Void> img,
 ) {
   final glGetnCompressedTexImageArbAsFunction = _glGetnCompressedTexImageArb
       .cast<
@@ -19936,13 +19654,13 @@ void glGetnCompressedTexImageArb(
           Void Function(
             Uint32 target,
             Int32 lod,
-            Uint32 bufSize,
-            Pointer<NativeType> img,
+            Int32 bufSize,
+            Pointer<Void> img,
           )
         >
       >()
       .asFunction<
-        void Function(int target, int lod, int bufSize, Pointer<NativeType> img)
+        void Function(int target, int lod, int bufSize, Pointer<Void> img)
       >();
   return glGetnCompressedTexImageArbAsFunction(target, lod, bufSize, img);
 }
@@ -19966,7 +19684,7 @@ void glGetnUniformfvArb(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 bufSize,
+            Int32 bufSize,
             Pointer<Float> params,
           )
         >
@@ -20001,7 +19719,7 @@ void glGetnUniformivArb(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 bufSize,
+            Int32 bufSize,
             Pointer<Int32> params,
           )
         >
@@ -20036,7 +19754,7 @@ void glGetnUniformuivArb(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 bufSize,
+            Int32 bufSize,
             Pointer<Uint32> params,
           )
         >
@@ -20071,7 +19789,7 @@ void glGetnUniformdvArb(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 bufSize,
+            Int32 bufSize,
             Pointer<Double> params,
           )
         >
@@ -20101,7 +19819,7 @@ void glGetnMapdvArb(int target, int query, int bufSize, Pointer<Double> v) {
           Void Function(
             Uint32 target,
             Uint32 query,
-            Uint32 bufSize,
+            Int32 bufSize,
             Pointer<Double> v,
           )
         >
@@ -20126,7 +19844,7 @@ void glGetnMapfvArb(int target, int query, int bufSize, Pointer<Float> v) {
           Void Function(
             Uint32 target,
             Uint32 query,
-            Uint32 bufSize,
+            Int32 bufSize,
             Pointer<Float> v,
           )
         >
@@ -20151,7 +19869,7 @@ void glGetnMapivArb(int target, int query, int bufSize, Pointer<Int32> v) {
           Void Function(
             Uint32 target,
             Uint32 query,
-            Uint32 bufSize,
+            Int32 bufSize,
             Pointer<Int32> v,
           )
         >
@@ -20173,7 +19891,7 @@ void glGetnPixelMapfvArb(int map, int bufSize, Pointer<Float> values) {
   final glGetnPixelMapfvArbAsFunction = _glGetnPixelMapfvArb
       .cast<
         NativeFunction<
-          Void Function(Uint32 map, Uint32 bufSize, Pointer<Float> values)
+          Void Function(Uint32 map, Int32 bufSize, Pointer<Float> values)
         >
       >()
       .asFunction<void Function(int map, int bufSize, Pointer<Float> values)>();
@@ -20191,7 +19909,7 @@ void glGetnPixelMapuivArb(int map, int bufSize, Pointer<Uint32> values) {
   final glGetnPixelMapuivArbAsFunction = _glGetnPixelMapuivArb
       .cast<
         NativeFunction<
-          Void Function(Uint32 map, Uint32 bufSize, Pointer<Uint32> values)
+          Void Function(Uint32 map, Int32 bufSize, Pointer<Uint32> values)
         >
       >()
       .asFunction<
@@ -20211,7 +19929,7 @@ void glGetnPixelMapusvArb(int map, int bufSize, Pointer<Uint16> values) {
   final glGetnPixelMapusvArbAsFunction = _glGetnPixelMapusvArb
       .cast<
         NativeFunction<
-          Void Function(Uint32 map, Uint32 bufSize, Pointer<Uint16> values)
+          Void Function(Uint32 map, Int32 bufSize, Pointer<Uint16> values)
         >
       >()
       .asFunction<
@@ -20230,7 +19948,7 @@ late Pointer<NativeFunction<Void Function()>> _glGetnPolygonStippleArb;
 void glGetnPolygonStippleArb(int bufSize, Pointer<Uint8> pattern) {
   final glGetnPolygonStippleArbAsFunction = _glGetnPolygonStippleArb
       .cast<
-        NativeFunction<Void Function(Uint32 bufSize, Pointer<Uint8> pattern)>
+        NativeFunction<Void Function(Int32 bufSize, Pointer<Uint8> pattern)>
       >()
       .asFunction<void Function(int bufSize, Pointer<Uint8> pattern)>();
   return glGetnPolygonStippleArbAsFunction(bufSize, pattern);
@@ -20248,7 +19966,7 @@ void glGetnColorTableArb(
   int format,
   int type,
   int bufSize,
-  Pointer<NativeType> table,
+  Pointer<Void> table,
 ) {
   final glGetnColorTableArbAsFunction = _glGetnColorTableArb
       .cast<
@@ -20257,8 +19975,8 @@ void glGetnColorTableArb(
             Uint32 target,
             Uint32 format,
             Uint32 type,
-            Uint32 bufSize,
-            Pointer<NativeType> table,
+            Int32 bufSize,
+            Pointer<Void> table,
           )
         >
       >()
@@ -20268,7 +19986,7 @@ void glGetnColorTableArb(
           int format,
           int type,
           int bufSize,
-          Pointer<NativeType> table,
+          Pointer<Void> table,
         )
       >();
   return glGetnColorTableArbAsFunction(target, format, type, bufSize, table);
@@ -20286,7 +20004,7 @@ void glGetnConvolutionFilterArb(
   int format,
   int type,
   int bufSize,
-  Pointer<NativeType> image,
+  Pointer<Void> image,
 ) {
   final glGetnConvolutionFilterArbAsFunction = _glGetnConvolutionFilterArb
       .cast<
@@ -20295,8 +20013,8 @@ void glGetnConvolutionFilterArb(
             Uint32 target,
             Uint32 format,
             Uint32 type,
-            Uint32 bufSize,
-            Pointer<NativeType> image,
+            Int32 bufSize,
+            Pointer<Void> image,
           )
         >
       >()
@@ -20306,7 +20024,7 @@ void glGetnConvolutionFilterArb(
           int format,
           int type,
           int bufSize,
-          Pointer<NativeType> image,
+          Pointer<Void> image,
         )
       >();
   return glGetnConvolutionFilterArbAsFunction(
@@ -20330,10 +20048,10 @@ void glGetnSeparableFilterArb(
   int format,
   int type,
   int rowBufSize,
-  Pointer<NativeType> row,
+  Pointer<Void> row,
   int columnBufSize,
-  Pointer<NativeType> column,
-  Pointer<NativeType> span,
+  Pointer<Void> column,
+  Pointer<Void> span,
 ) {
   final glGetnSeparableFilterArbAsFunction = _glGetnSeparableFilterArb
       .cast<
@@ -20342,11 +20060,11 @@ void glGetnSeparableFilterArb(
             Uint32 target,
             Uint32 format,
             Uint32 type,
-            Uint32 rowBufSize,
-            Pointer<NativeType> row,
-            Uint32 columnBufSize,
-            Pointer<NativeType> column,
-            Pointer<NativeType> span,
+            Int32 rowBufSize,
+            Pointer<Void> row,
+            Int32 columnBufSize,
+            Pointer<Void> column,
+            Pointer<Void> span,
           )
         >
       >()
@@ -20356,10 +20074,10 @@ void glGetnSeparableFilterArb(
           int format,
           int type,
           int rowBufSize,
-          Pointer<NativeType> row,
+          Pointer<Void> row,
           int columnBufSize,
-          Pointer<NativeType> column,
-          Pointer<NativeType> span,
+          Pointer<Void> column,
+          Pointer<Void> span,
         )
       >();
   return glGetnSeparableFilterArbAsFunction(
@@ -20387,18 +20105,18 @@ void glGetnHistogramArb(
   int format,
   int type,
   int bufSize,
-  Pointer<NativeType> values,
+  Pointer<Void> values,
 ) {
   final glGetnHistogramArbAsFunction = _glGetnHistogramArb
       .cast<
         NativeFunction<
           Void Function(
             Uint32 target,
-            Int32 reset,
+            Uint8 reset,
             Uint32 format,
             Uint32 type,
-            Uint32 bufSize,
-            Pointer<NativeType> values,
+            Int32 bufSize,
+            Pointer<Void> values,
           )
         >
       >()
@@ -20409,7 +20127,7 @@ void glGetnHistogramArb(
           int format,
           int type,
           int bufSize,
-          Pointer<NativeType> values,
+          Pointer<Void> values,
         )
       >();
   return glGetnHistogramArbAsFunction(
@@ -20435,18 +20153,18 @@ void glGetnMinmaxArb(
   int format,
   int type,
   int bufSize,
-  Pointer<NativeType> values,
+  Pointer<Void> values,
 ) {
   final glGetnMinmaxArbAsFunction = _glGetnMinmaxArb
       .cast<
         NativeFunction<
           Void Function(
             Uint32 target,
-            Int32 reset,
+            Uint8 reset,
             Uint32 format,
             Uint32 type,
-            Uint32 bufSize,
-            Pointer<NativeType> values,
+            Int32 bufSize,
+            Pointer<Void> values,
           )
         >
       >()
@@ -20457,7 +20175,7 @@ void glGetnMinmaxArb(
           int format,
           int type,
           int bufSize,
-          Pointer<NativeType> values,
+          Pointer<Void> values,
         )
       >();
   return glGetnMinmaxArbAsFunction(
@@ -20491,7 +20209,7 @@ void glFramebufferSampleLocationsfvArb(
               Void Function(
                 Uint32 target,
                 Uint32 start,
-                Uint32 count,
+                Int32 count,
                 Pointer<Float> v,
               )
             >
@@ -20523,7 +20241,7 @@ void glNamedFramebufferSampleLocationsfvArb(
               Void Function(
                 Uint32 framebuffer,
                 Uint32 start,
-                Uint32 count,
+                Int32 count,
                 Pointer<Float> v,
               )
             >
@@ -20579,10 +20297,10 @@ late Pointer<NativeFunction<Void Function()>> _glDeleteObjectArb;
 /// GLAPI void APIENTRY glDeleteObjectARB (GLhandleARB obj)
 /// ```
 /// {@category opengl_glext}
-void glDeleteObjectArb(Pointer<NativeType> obj) {
+void glDeleteObjectArb(Pointer<Void> obj) {
   final glDeleteObjectArbAsFunction = _glDeleteObjectArb
-      .cast<NativeFunction<Void Function(Pointer<NativeType> obj)>>()
-      .asFunction<void Function(Pointer<NativeType> obj)>();
+      .cast<NativeFunction<Void Function(Pointer<Void> obj)>>()
+      .asFunction<void Function(Pointer<Void> obj)>();
   return glDeleteObjectArbAsFunction(obj);
 }
 
@@ -20593,10 +20311,10 @@ late Pointer<NativeFunction<Void Function()>> _glGetHandleArb;
 /// GLAPI GLhandleARB APIENTRY glGetHandleARB (GLenum pname)
 /// ```
 /// {@category opengl_glext}
-Pointer<NativeType> glGetHandleArb(int pname) {
+Pointer<Void> glGetHandleArb(int pname) {
   final glGetHandleArbAsFunction = _glGetHandleArb
-      .cast<NativeFunction<Pointer<NativeType> Function(Uint32 pname)>>()
-      .asFunction<Pointer<NativeType> Function(int pname)>();
+      .cast<NativeFunction<Pointer<Void> Function(Uint32 pname)>>()
+      .asFunction<Pointer<Void> Function(int pname)>();
   return glGetHandleArbAsFunction(pname);
 }
 
@@ -20607,24 +20325,15 @@ late Pointer<NativeFunction<Void Function()>> _glDetachObjectArb;
 /// GLAPI void APIENTRY glDetachObjectARB (GLhandleARB containerObj, GLhandleARB attachedObj)
 /// ```
 /// {@category opengl_glext}
-void glDetachObjectArb(
-  Pointer<NativeType> containerObj,
-  Pointer<NativeType> attachedObj,
-) {
+void glDetachObjectArb(Pointer<Void> containerObj, Pointer<Void> attachedObj) {
   final glDetachObjectArbAsFunction = _glDetachObjectArb
       .cast<
         NativeFunction<
-          Void Function(
-            Pointer<NativeType> containerObj,
-            Pointer<NativeType> attachedObj,
-          )
+          Void Function(Pointer<Void> containerObj, Pointer<Void> attachedObj)
         >
       >()
       .asFunction<
-        void Function(
-          Pointer<NativeType> containerObj,
-          Pointer<NativeType> attachedObj,
-        )
+        void Function(Pointer<Void> containerObj, Pointer<Void> attachedObj)
       >();
   return glDetachObjectArbAsFunction(containerObj, attachedObj);
 }
@@ -20636,10 +20345,10 @@ late Pointer<NativeFunction<Void Function()>> _glCreateShaderObjectArb;
 /// GLAPI GLhandleARB APIENTRY glCreateShaderObjectARB (GLenum shaderType)
 /// ```
 /// {@category opengl_glext}
-Pointer<NativeType> glCreateShaderObjectArb(int shaderType) {
+Pointer<Void> glCreateShaderObjectArb(int shaderType) {
   final glCreateShaderObjectArbAsFunction = _glCreateShaderObjectArb
-      .cast<NativeFunction<Pointer<NativeType> Function(Uint32 shaderType)>>()
-      .asFunction<Pointer<NativeType> Function(int shaderType)>();
+      .cast<NativeFunction<Pointer<Void> Function(Uint32 shaderType)>>()
+      .asFunction<Pointer<Void> Function(int shaderType)>();
   return glCreateShaderObjectArbAsFunction(shaderType);
 }
 
@@ -20651,7 +20360,7 @@ late Pointer<NativeFunction<Void Function()>> _glShaderSourceArb;
 /// ```
 /// {@category opengl_glext}
 void glShaderSourceArb(
-  Pointer<NativeType> shaderObj,
+  Pointer<Void> shaderObj,
   int count,
   Pointer<Pointer<Int8>> string,
   Pointer<Int32> length,
@@ -20660,8 +20369,8 @@ void glShaderSourceArb(
       .cast<
         NativeFunction<
           Void Function(
-            Pointer<NativeType> shaderObj,
-            Uint32 count,
+            Pointer<Void> shaderObj,
+            Int32 count,
             Pointer<Pointer<Int8>> string,
             Pointer<Int32> length,
           )
@@ -20669,7 +20378,7 @@ void glShaderSourceArb(
       >()
       .asFunction<
         void Function(
-          Pointer<NativeType> shaderObj,
+          Pointer<Void> shaderObj,
           int count,
           Pointer<Pointer<Int8>> string,
           Pointer<Int32> length,
@@ -20685,10 +20394,10 @@ late Pointer<NativeFunction<Void Function()>> _glCompileShaderArb;
 /// GLAPI void APIENTRY glCompileShaderARB (GLhandleARB shaderObj)
 /// ```
 /// {@category opengl_glext}
-void glCompileShaderArb(Pointer<NativeType> shaderObj) {
+void glCompileShaderArb(Pointer<Void> shaderObj) {
   final glCompileShaderArbAsFunction = _glCompileShaderArb
-      .cast<NativeFunction<Void Function(Pointer<NativeType> shaderObj)>>()
-      .asFunction<void Function(Pointer<NativeType> shaderObj)>();
+      .cast<NativeFunction<Void Function(Pointer<Void> shaderObj)>>()
+      .asFunction<void Function(Pointer<Void> shaderObj)>();
   return glCompileShaderArbAsFunction(shaderObj);
 }
 
@@ -20699,10 +20408,10 @@ late Pointer<NativeFunction<Void Function()>> _glCreateProgramObjectArb;
 /// GLAPI GLhandleARB APIENTRY glCreateProgramObjectARB (void)
 /// ```
 /// {@category opengl_glext}
-Pointer<NativeType> glCreateProgramObjectArb() {
+Pointer<Void> glCreateProgramObjectArb() {
   final glCreateProgramObjectArbAsFunction = _glCreateProgramObjectArb
-      .cast<NativeFunction<Pointer<NativeType> Function()>>()
-      .asFunction<Pointer<NativeType> Function()>();
+      .cast<NativeFunction<Pointer<Void> Function()>>()
+      .asFunction<Pointer<Void> Function()>();
   return glCreateProgramObjectArbAsFunction();
 }
 
@@ -20713,21 +20422,15 @@ late Pointer<NativeFunction<Void Function()>> _glAttachObjectArb;
 /// GLAPI void APIENTRY glAttachObjectARB (GLhandleARB containerObj, GLhandleARB obj)
 /// ```
 /// {@category opengl_glext}
-void glAttachObjectArb(
-  Pointer<NativeType> containerObj,
-  Pointer<NativeType> obj,
-) {
+void glAttachObjectArb(Pointer<Void> containerObj, Pointer<Void> obj) {
   final glAttachObjectArbAsFunction = _glAttachObjectArb
       .cast<
         NativeFunction<
-          Void Function(
-            Pointer<NativeType> containerObj,
-            Pointer<NativeType> obj,
-          )
+          Void Function(Pointer<Void> containerObj, Pointer<Void> obj)
         >
       >()
       .asFunction<
-        void Function(Pointer<NativeType> containerObj, Pointer<NativeType> obj)
+        void Function(Pointer<Void> containerObj, Pointer<Void> obj)
       >();
   return glAttachObjectArbAsFunction(containerObj, obj);
 }
@@ -20739,10 +20442,10 @@ late Pointer<NativeFunction<Void Function()>> _glLinkProgramArb;
 /// GLAPI void APIENTRY glLinkProgramARB (GLhandleARB programObj)
 /// ```
 /// {@category opengl_glext}
-void glLinkProgramArb(Pointer<NativeType> programObj) {
+void glLinkProgramArb(Pointer<Void> programObj) {
   final glLinkProgramArbAsFunction = _glLinkProgramArb
-      .cast<NativeFunction<Void Function(Pointer<NativeType> programObj)>>()
-      .asFunction<void Function(Pointer<NativeType> programObj)>();
+      .cast<NativeFunction<Void Function(Pointer<Void> programObj)>>()
+      .asFunction<void Function(Pointer<Void> programObj)>();
   return glLinkProgramArbAsFunction(programObj);
 }
 
@@ -20753,10 +20456,10 @@ late Pointer<NativeFunction<Void Function()>> _glUseProgramObjectArb;
 /// GLAPI void APIENTRY glUseProgramObjectARB (GLhandleARB programObj)
 /// ```
 /// {@category opengl_glext}
-void glUseProgramObjectArb(Pointer<NativeType> programObj) {
+void glUseProgramObjectArb(Pointer<Void> programObj) {
   final glUseProgramObjectArbAsFunction = _glUseProgramObjectArb
-      .cast<NativeFunction<Void Function(Pointer<NativeType> programObj)>>()
-      .asFunction<void Function(Pointer<NativeType> programObj)>();
+      .cast<NativeFunction<Void Function(Pointer<Void> programObj)>>()
+      .asFunction<void Function(Pointer<Void> programObj)>();
   return glUseProgramObjectArbAsFunction(programObj);
 }
 
@@ -20767,10 +20470,10 @@ late Pointer<NativeFunction<Void Function()>> _glValidateProgramArb;
 /// GLAPI void APIENTRY glValidateProgramARB (GLhandleARB programObj)
 /// ```
 /// {@category opengl_glext}
-void glValidateProgramArb(Pointer<NativeType> programObj) {
+void glValidateProgramArb(Pointer<Void> programObj) {
   final glValidateProgramArbAsFunction = _glValidateProgramArb
-      .cast<NativeFunction<Void Function(Pointer<NativeType> programObj)>>()
-      .asFunction<void Function(Pointer<NativeType> programObj)>();
+      .cast<NativeFunction<Void Function(Pointer<Void> programObj)>>()
+      .asFunction<void Function(Pointer<Void> programObj)>();
   return glValidateProgramArbAsFunction(programObj);
 }
 
@@ -20919,7 +20622,7 @@ void glUniform1fvArb(int location, int count, Pointer<Float> value) {
   final glUniform1fvArbAsFunction = _glUniform1fvArb
       .cast<
         NativeFunction<
-          Void Function(Int32 location, Uint32 count, Pointer<Float> value)
+          Void Function(Int32 location, Int32 count, Pointer<Float> value)
         >
       >()
       .asFunction<
@@ -20939,7 +20642,7 @@ void glUniform2fvArb(int location, int count, Pointer<Float> value) {
   final glUniform2fvArbAsFunction = _glUniform2fvArb
       .cast<
         NativeFunction<
-          Void Function(Int32 location, Uint32 count, Pointer<Float> value)
+          Void Function(Int32 location, Int32 count, Pointer<Float> value)
         >
       >()
       .asFunction<
@@ -20959,7 +20662,7 @@ void glUniform3fvArb(int location, int count, Pointer<Float> value) {
   final glUniform3fvArbAsFunction = _glUniform3fvArb
       .cast<
         NativeFunction<
-          Void Function(Int32 location, Uint32 count, Pointer<Float> value)
+          Void Function(Int32 location, Int32 count, Pointer<Float> value)
         >
       >()
       .asFunction<
@@ -20979,7 +20682,7 @@ void glUniform4fvArb(int location, int count, Pointer<Float> value) {
   final glUniform4fvArbAsFunction = _glUniform4fvArb
       .cast<
         NativeFunction<
-          Void Function(Int32 location, Uint32 count, Pointer<Float> value)
+          Void Function(Int32 location, Int32 count, Pointer<Float> value)
         >
       >()
       .asFunction<
@@ -20999,7 +20702,7 @@ void glUniform1ivArb(int location, int count, Pointer<Int32> value) {
   final glUniform1ivArbAsFunction = _glUniform1ivArb
       .cast<
         NativeFunction<
-          Void Function(Int32 location, Uint32 count, Pointer<Int32> value)
+          Void Function(Int32 location, Int32 count, Pointer<Int32> value)
         >
       >()
       .asFunction<
@@ -21019,7 +20722,7 @@ void glUniform2ivArb(int location, int count, Pointer<Int32> value) {
   final glUniform2ivArbAsFunction = _glUniform2ivArb
       .cast<
         NativeFunction<
-          Void Function(Int32 location, Uint32 count, Pointer<Int32> value)
+          Void Function(Int32 location, Int32 count, Pointer<Int32> value)
         >
       >()
       .asFunction<
@@ -21039,7 +20742,7 @@ void glUniform3ivArb(int location, int count, Pointer<Int32> value) {
   final glUniform3ivArbAsFunction = _glUniform3ivArb
       .cast<
         NativeFunction<
-          Void Function(Int32 location, Uint32 count, Pointer<Int32> value)
+          Void Function(Int32 location, Int32 count, Pointer<Int32> value)
         >
       >()
       .asFunction<
@@ -21059,7 +20762,7 @@ void glUniform4ivArb(int location, int count, Pointer<Int32> value) {
   final glUniform4ivArbAsFunction = _glUniform4ivArb
       .cast<
         NativeFunction<
-          Void Function(Int32 location, Uint32 count, Pointer<Int32> value)
+          Void Function(Int32 location, Int32 count, Pointer<Int32> value)
         >
       >()
       .asFunction<
@@ -21086,8 +20789,8 @@ void glUniformMatrix2fvArb(
         NativeFunction<
           Void Function(
             Int32 location,
-            Uint32 count,
-            Int32 transpose,
+            Int32 count,
+            Uint8 transpose,
             Pointer<Float> value,
           )
         >
@@ -21121,8 +20824,8 @@ void glUniformMatrix3fvArb(
         NativeFunction<
           Void Function(
             Int32 location,
-            Uint32 count,
-            Int32 transpose,
+            Int32 count,
+            Uint8 transpose,
             Pointer<Float> value,
           )
         >
@@ -21156,8 +20859,8 @@ void glUniformMatrix4fvArb(
         NativeFunction<
           Void Function(
             Int32 location,
-            Uint32 count,
-            Int32 transpose,
+            Int32 count,
+            Uint8 transpose,
             Pointer<Float> value,
           )
         >
@@ -21181,22 +20884,18 @@ late Pointer<NativeFunction<Void Function()>> _glGetObjectParameterfvArb;
 /// ```
 /// {@category opengl_glext}
 void glGetObjectParameterfvArb(
-  Pointer<NativeType> obj,
+  Pointer<Void> obj,
   int pname,
   Pointer<Float> params,
 ) {
   final glGetObjectParameterfvArbAsFunction = _glGetObjectParameterfvArb
       .cast<
         NativeFunction<
-          Void Function(
-            Pointer<NativeType> obj,
-            Uint32 pname,
-            Pointer<Float> params,
-          )
+          Void Function(Pointer<Void> obj, Uint32 pname, Pointer<Float> params)
         >
       >()
       .asFunction<
-        void Function(Pointer<NativeType> obj, int pname, Pointer<Float> params)
+        void Function(Pointer<Void> obj, int pname, Pointer<Float> params)
       >();
   return glGetObjectParameterfvArbAsFunction(obj, pname, params);
 }
@@ -21209,22 +20908,18 @@ late Pointer<NativeFunction<Void Function()>> _glGetObjectParameterivArb;
 /// ```
 /// {@category opengl_glext}
 void glGetObjectParameterivArb(
-  Pointer<NativeType> obj,
+  Pointer<Void> obj,
   int pname,
   Pointer<Int32> params,
 ) {
   final glGetObjectParameterivArbAsFunction = _glGetObjectParameterivArb
       .cast<
         NativeFunction<
-          Void Function(
-            Pointer<NativeType> obj,
-            Uint32 pname,
-            Pointer<Int32> params,
-          )
+          Void Function(Pointer<Void> obj, Uint32 pname, Pointer<Int32> params)
         >
       >()
       .asFunction<
-        void Function(Pointer<NativeType> obj, int pname, Pointer<Int32> params)
+        void Function(Pointer<Void> obj, int pname, Pointer<Int32> params)
       >();
   return glGetObjectParameterivArbAsFunction(obj, pname, params);
 }
@@ -21237,27 +20932,27 @@ late Pointer<NativeFunction<Void Function()>> _glGetInfoLogArb;
 /// ```
 /// {@category opengl_glext}
 void glGetInfoLogArb(
-  Pointer<NativeType> obj,
+  Pointer<Void> obj,
   int maxLength,
-  Pointer<Uint32> length,
+  Pointer<Int32> length,
   Pointer<Int8> infoLog,
 ) {
   final glGetInfoLogArbAsFunction = _glGetInfoLogArb
       .cast<
         NativeFunction<
           Void Function(
-            Pointer<NativeType> obj,
-            Uint32 maxLength,
-            Pointer<Uint32> length,
+            Pointer<Void> obj,
+            Int32 maxLength,
+            Pointer<Int32> length,
             Pointer<Int8> infoLog,
           )
         >
       >()
       .asFunction<
         void Function(
-          Pointer<NativeType> obj,
+          Pointer<Void> obj,
           int maxLength,
-          Pointer<Uint32> length,
+          Pointer<Int32> length,
           Pointer<Int8> infoLog,
         )
       >();
@@ -21272,28 +20967,28 @@ late Pointer<NativeFunction<Void Function()>> _glGetAttachedObjectsArb;
 /// ```
 /// {@category opengl_glext}
 void glGetAttachedObjectsArb(
-  Pointer<NativeType> containerObj,
+  Pointer<Void> containerObj,
   int maxCount,
-  Pointer<Uint32> count,
-  Pointer<Pointer<NativeType>> obj,
+  Pointer<Int32> count,
+  Pointer<Pointer<Void>> obj,
 ) {
   final glGetAttachedObjectsArbAsFunction = _glGetAttachedObjectsArb
       .cast<
         NativeFunction<
           Void Function(
-            Pointer<NativeType> containerObj,
-            Uint32 maxCount,
-            Pointer<Uint32> count,
-            Pointer<Pointer<NativeType>> obj,
+            Pointer<Void> containerObj,
+            Int32 maxCount,
+            Pointer<Int32> count,
+            Pointer<Pointer<Void>> obj,
           )
         >
       >()
       .asFunction<
         void Function(
-          Pointer<NativeType> containerObj,
+          Pointer<Void> containerObj,
           int maxCount,
-          Pointer<Uint32> count,
-          Pointer<Pointer<NativeType>> obj,
+          Pointer<Int32> count,
+          Pointer<Pointer<Void>> obj,
         )
       >();
   return glGetAttachedObjectsArbAsFunction(containerObj, maxCount, count, obj);
@@ -21306,16 +21001,14 @@ late Pointer<NativeFunction<Void Function()>> _glGetUniformLocationArb;
 /// GLAPI GLint APIENTRY glGetUniformLocationARB (GLhandleARB programObj, const GLcharARB *name)
 /// ```
 /// {@category opengl_glext}
-int glGetUniformLocationArb(Pointer<NativeType> programObj, String name) {
+int glGetUniformLocationArb(Pointer<Void> programObj, String name) {
   final glGetUniformLocationArbAsFunction = _glGetUniformLocationArb
       .cast<
         NativeFunction<
-          Int32 Function(Pointer<NativeType> programObj, Pointer<Utf8> name)
+          Int32 Function(Pointer<Void> programObj, Pointer<Utf8> name)
         >
       >()
-      .asFunction<
-        int Function(Pointer<NativeType> programObj, Pointer<Utf8> name)
-      >();
+      .asFunction<int Function(Pointer<Void> programObj, Pointer<Utf8> name)>();
   final namePointer = name.toNativeUtf8();
   final result = glGetUniformLocationArbAsFunction(programObj, namePointer);
   calloc.free(namePointer);
@@ -21330,10 +21023,10 @@ late Pointer<NativeFunction<Void Function()>> _glGetActiveUniformArb;
 /// ```
 /// {@category opengl_glext}
 void glGetActiveUniformArb(
-  Pointer<NativeType> programObj,
+  Pointer<Void> programObj,
   int index,
   int maxLength,
-  Pointer<Uint32> length,
+  Pointer<Int32> length,
   Pointer<Int32> size,
   Pointer<Uint32> type,
   Pointer<Int8> name,
@@ -21342,10 +21035,10 @@ void glGetActiveUniformArb(
       .cast<
         NativeFunction<
           Void Function(
-            Pointer<NativeType> programObj,
+            Pointer<Void> programObj,
             Uint32 index,
-            Uint32 maxLength,
-            Pointer<Uint32> length,
+            Int32 maxLength,
+            Pointer<Int32> length,
             Pointer<Int32> size,
             Pointer<Uint32> type,
             Pointer<Int8> name,
@@ -21354,10 +21047,10 @@ void glGetActiveUniformArb(
       >()
       .asFunction<
         void Function(
-          Pointer<NativeType> programObj,
+          Pointer<Void> programObj,
           int index,
           int maxLength,
-          Pointer<Uint32> length,
+          Pointer<Int32> length,
           Pointer<Int32> size,
           Pointer<Uint32> type,
           Pointer<Int8> name,
@@ -21382,7 +21075,7 @@ late Pointer<NativeFunction<Void Function()>> _glGetUniformfvArb;
 /// ```
 /// {@category opengl_glext}
 void glGetUniformfvArb(
-  Pointer<NativeType> programObj,
+  Pointer<Void> programObj,
   int location,
   Pointer<Float> params,
 ) {
@@ -21390,7 +21083,7 @@ void glGetUniformfvArb(
       .cast<
         NativeFunction<
           Void Function(
-            Pointer<NativeType> programObj,
+            Pointer<Void> programObj,
             Int32 location,
             Pointer<Float> params,
           )
@@ -21398,7 +21091,7 @@ void glGetUniformfvArb(
       >()
       .asFunction<
         void Function(
-          Pointer<NativeType> programObj,
+          Pointer<Void> programObj,
           int location,
           Pointer<Float> params,
         )
@@ -21414,7 +21107,7 @@ late Pointer<NativeFunction<Void Function()>> _glGetUniformivArb;
 /// ```
 /// {@category opengl_glext}
 void glGetUniformivArb(
-  Pointer<NativeType> programObj,
+  Pointer<Void> programObj,
   int location,
   Pointer<Int32> params,
 ) {
@@ -21422,7 +21115,7 @@ void glGetUniformivArb(
       .cast<
         NativeFunction<
           Void Function(
-            Pointer<NativeType> programObj,
+            Pointer<Void> programObj,
             Int32 location,
             Pointer<Int32> params,
           )
@@ -21430,7 +21123,7 @@ void glGetUniformivArb(
       >()
       .asFunction<
         void Function(
-          Pointer<NativeType> programObj,
+          Pointer<Void> programObj,
           int location,
           Pointer<Int32> params,
         )
@@ -21446,27 +21139,27 @@ late Pointer<NativeFunction<Void Function()>> _glGetShaderSourceArb;
 /// ```
 /// {@category opengl_glext}
 void glGetShaderSourceArb(
-  Pointer<NativeType> obj,
+  Pointer<Void> obj,
   int maxLength,
-  Pointer<Uint32> length,
+  Pointer<Int32> length,
   Pointer<Int8> source,
 ) {
   final glGetShaderSourceArbAsFunction = _glGetShaderSourceArb
       .cast<
         NativeFunction<
           Void Function(
-            Pointer<NativeType> obj,
-            Uint32 maxLength,
-            Pointer<Uint32> length,
+            Pointer<Void> obj,
+            Int32 maxLength,
+            Pointer<Int32> length,
             Pointer<Int8> source,
           )
         >
       >()
       .asFunction<
         void Function(
-          Pointer<NativeType> obj,
+          Pointer<Void> obj,
           int maxLength,
-          Pointer<Uint32> length,
+          Pointer<Int32> length,
           Pointer<Int8> source,
         )
       >();
@@ -21558,7 +21251,7 @@ void glCompileShaderIncludeArb(
         NativeFunction<
           Void Function(
             Uint32 shader,
-            Uint32 count,
+            Int32 count,
             Pointer<Pointer<Int8>> path,
             Pointer<Int32> length,
           )
@@ -21584,7 +21277,7 @@ late Pointer<NativeFunction<Void Function()>> _glIsNamedStringArb;
 /// {@category opengl_glext}
 int glIsNamedStringArb(int namelen, String name) {
   final glIsNamedStringArbAsFunction = _glIsNamedStringArb
-      .cast<NativeFunction<Int32 Function(Int32 namelen, Pointer<Utf8> name)>>()
+      .cast<NativeFunction<Uint8 Function(Int32 namelen, Pointer<Utf8> name)>>()
       .asFunction<int Function(int namelen, Pointer<Utf8> name)>();
   final namePointer = name.toNativeUtf8();
   final result = glIsNamedStringArbAsFunction(namelen, namePointer);
@@ -21612,7 +21305,7 @@ void glGetNamedStringArb(
           Void Function(
             Int32 namelen,
             Pointer<Utf8> name,
-            Uint32 bufSize,
+            Int32 bufSize,
             Pointer<Int32> stringlen,
             Pointer<Int8> string,
           )
@@ -21689,30 +21382,15 @@ late Pointer<NativeFunction<Void Function()>> _glBufferPageCommitmentArb;
 /// GLAPI void APIENTRY glBufferPageCommitmentARB (GLenum target, GLintptr offset, GLsizeiptr size, GLboolean commit)
 /// ```
 /// {@category opengl_glext}
-void glBufferPageCommitmentArb(
-  int target,
-  Pointer<NativeType> offset,
-  Pointer<Uint32> size,
-  int commit,
-) {
+void glBufferPageCommitmentArb(int target, int offset, int size, int commit) {
   final glBufferPageCommitmentArbAsFunction = _glBufferPageCommitmentArb
       .cast<
         NativeFunction<
-          Void Function(
-            Uint32 target,
-            Pointer<NativeType> offset,
-            Pointer<Uint32> size,
-            Int32 commit,
-          )
+          Void Function(Uint32 target, IntPtr offset, IntPtr size, Uint8 commit)
         >
       >()
       .asFunction<
-        void Function(
-          int target,
-          Pointer<NativeType> offset,
-          Pointer<Uint32> size,
-          int commit,
-        )
+        void Function(int target, int offset, int size, int commit)
       >();
   return glBufferPageCommitmentArbAsFunction(target, offset, size, commit);
 }
@@ -21726,8 +21404,8 @@ late Pointer<NativeFunction<Void Function()>> _glNamedBufferPageCommitmentExt;
 /// {@category opengl_glext}
 void glNamedBufferPageCommitmentExt(
   int buffer,
-  Pointer<NativeType> offset,
-  Pointer<Uint32> size,
+  int offset,
+  int size,
   int commit,
 ) {
   final glNamedBufferPageCommitmentExtAsFunction =
@@ -21736,19 +21414,14 @@ void glNamedBufferPageCommitmentExt(
             NativeFunction<
               Void Function(
                 Uint32 buffer,
-                Pointer<NativeType> offset,
-                Pointer<Uint32> size,
-                Int32 commit,
+                IntPtr offset,
+                IntPtr size,
+                Uint8 commit,
               )
             >
           >()
           .asFunction<
-            void Function(
-              int buffer,
-              Pointer<NativeType> offset,
-              Pointer<Uint32> size,
-              int commit,
-            )
+            void Function(int buffer, int offset, int size, int commit)
           >();
   return glNamedBufferPageCommitmentExtAsFunction(buffer, offset, size, commit);
 }
@@ -21762,8 +21435,8 @@ late Pointer<NativeFunction<Void Function()>> _glNamedBufferPageCommitmentArb;
 /// {@category opengl_glext}
 void glNamedBufferPageCommitmentArb(
   int buffer,
-  Pointer<NativeType> offset,
-  Pointer<Uint32> size,
+  int offset,
+  int size,
   int commit,
 ) {
   final glNamedBufferPageCommitmentArbAsFunction =
@@ -21772,19 +21445,14 @@ void glNamedBufferPageCommitmentArb(
             NativeFunction<
               Void Function(
                 Uint32 buffer,
-                Pointer<NativeType> offset,
-                Pointer<Uint32> size,
-                Int32 commit,
+                IntPtr offset,
+                IntPtr size,
+                Uint8 commit,
               )
             >
           >()
           .asFunction<
-            void Function(
-              int buffer,
-              Pointer<NativeType> offset,
-              Pointer<Uint32> size,
-              int commit,
-            )
+            void Function(int buffer, int offset, int size, int commit)
           >();
   return glNamedBufferPageCommitmentArbAsFunction(buffer, offset, size, commit);
 }
@@ -21816,10 +21484,10 @@ void glTexPageCommitmentArb(
             Int32 xoffset,
             Int32 yoffset,
             Int32 zoffset,
-            Uint32 width,
-            Uint32 height,
-            Uint32 depth,
-            Int32 commit,
+            Int32 width,
+            Int32 height,
+            Int32 depth,
+            Uint8 commit,
           )
         >
       >()
@@ -21883,7 +21551,7 @@ void glCompressedTexImage3Darb(
   int depth,
   int border,
   int imageSize,
-  Pointer<NativeType> data,
+  Pointer<Void> data,
 ) {
   final glCompressedTexImage3DarbAsFunction = _glCompressedTexImage3Darb
       .cast<
@@ -21892,12 +21560,12 @@ void glCompressedTexImage3Darb(
             Uint32 target,
             Int32 level,
             Uint32 internalformat,
-            Uint32 width,
-            Uint32 height,
-            Uint32 depth,
+            Int32 width,
+            Int32 height,
+            Int32 depth,
             Int32 border,
-            Uint32 imageSize,
-            Pointer<NativeType> data,
+            Int32 imageSize,
+            Pointer<Void> data,
           )
         >
       >()
@@ -21911,7 +21579,7 @@ void glCompressedTexImage3Darb(
           int depth,
           int border,
           int imageSize,
-          Pointer<NativeType> data,
+          Pointer<Void> data,
         )
       >();
   return glCompressedTexImage3DarbAsFunction(
@@ -21942,7 +21610,7 @@ void glCompressedTexImage2Darb(
   int height,
   int border,
   int imageSize,
-  Pointer<NativeType> data,
+  Pointer<Void> data,
 ) {
   final glCompressedTexImage2DarbAsFunction = _glCompressedTexImage2Darb
       .cast<
@@ -21951,11 +21619,11 @@ void glCompressedTexImage2Darb(
             Uint32 target,
             Int32 level,
             Uint32 internalformat,
-            Uint32 width,
-            Uint32 height,
+            Int32 width,
+            Int32 height,
             Int32 border,
-            Uint32 imageSize,
-            Pointer<NativeType> data,
+            Int32 imageSize,
+            Pointer<Void> data,
           )
         >
       >()
@@ -21968,7 +21636,7 @@ void glCompressedTexImage2Darb(
           int height,
           int border,
           int imageSize,
-          Pointer<NativeType> data,
+          Pointer<Void> data,
         )
       >();
   return glCompressedTexImage2DarbAsFunction(
@@ -21997,7 +21665,7 @@ void glCompressedTexImage1Darb(
   int width,
   int border,
   int imageSize,
-  Pointer<NativeType> data,
+  Pointer<Void> data,
 ) {
   final glCompressedTexImage1DarbAsFunction = _glCompressedTexImage1Darb
       .cast<
@@ -22006,10 +21674,10 @@ void glCompressedTexImage1Darb(
             Uint32 target,
             Int32 level,
             Uint32 internalformat,
-            Uint32 width,
+            Int32 width,
             Int32 border,
-            Uint32 imageSize,
-            Pointer<NativeType> data,
+            Int32 imageSize,
+            Pointer<Void> data,
           )
         >
       >()
@@ -22021,7 +21689,7 @@ void glCompressedTexImage1Darb(
           int width,
           int border,
           int imageSize,
-          Pointer<NativeType> data,
+          Pointer<Void> data,
         )
       >();
   return glCompressedTexImage1DarbAsFunction(
@@ -22053,7 +21721,7 @@ void glCompressedTexSubImage3Darb(
   int depth,
   int format,
   int imageSize,
-  Pointer<NativeType> data,
+  Pointer<Void> data,
 ) {
   final glCompressedTexSubImage3DarbAsFunction = _glCompressedTexSubImage3Darb
       .cast<
@@ -22064,12 +21732,12 @@ void glCompressedTexSubImage3Darb(
             Int32 xoffset,
             Int32 yoffset,
             Int32 zoffset,
-            Uint32 width,
-            Uint32 height,
-            Uint32 depth,
+            Int32 width,
+            Int32 height,
+            Int32 depth,
             Uint32 format,
-            Uint32 imageSize,
-            Pointer<NativeType> data,
+            Int32 imageSize,
+            Pointer<Void> data,
           )
         >
       >()
@@ -22085,7 +21753,7 @@ void glCompressedTexSubImage3Darb(
           int depth,
           int format,
           int imageSize,
-          Pointer<NativeType> data,
+          Pointer<Void> data,
         )
       >();
   return glCompressedTexSubImage3DarbAsFunction(
@@ -22119,7 +21787,7 @@ void glCompressedTexSubImage2Darb(
   int height,
   int format,
   int imageSize,
-  Pointer<NativeType> data,
+  Pointer<Void> data,
 ) {
   final glCompressedTexSubImage2DarbAsFunction = _glCompressedTexSubImage2Darb
       .cast<
@@ -22129,11 +21797,11 @@ void glCompressedTexSubImage2Darb(
             Int32 level,
             Int32 xoffset,
             Int32 yoffset,
-            Uint32 width,
-            Uint32 height,
+            Int32 width,
+            Int32 height,
             Uint32 format,
-            Uint32 imageSize,
-            Pointer<NativeType> data,
+            Int32 imageSize,
+            Pointer<Void> data,
           )
         >
       >()
@@ -22147,7 +21815,7 @@ void glCompressedTexSubImage2Darb(
           int height,
           int format,
           int imageSize,
-          Pointer<NativeType> data,
+          Pointer<Void> data,
         )
       >();
   return glCompressedTexSubImage2DarbAsFunction(
@@ -22177,7 +21845,7 @@ void glCompressedTexSubImage1Darb(
   int width,
   int format,
   int imageSize,
-  Pointer<NativeType> data,
+  Pointer<Void> data,
 ) {
   final glCompressedTexSubImage1DarbAsFunction = _glCompressedTexSubImage1Darb
       .cast<
@@ -22186,10 +21854,10 @@ void glCompressedTexSubImage1Darb(
             Uint32 target,
             Int32 level,
             Int32 xoffset,
-            Uint32 width,
+            Int32 width,
             Uint32 format,
-            Uint32 imageSize,
-            Pointer<NativeType> data,
+            Int32 imageSize,
+            Pointer<Void> data,
           )
         >
       >()
@@ -22201,7 +21869,7 @@ void glCompressedTexSubImage1Darb(
           int width,
           int format,
           int imageSize,
-          Pointer<NativeType> data,
+          Pointer<Void> data,
         )
       >();
   return glCompressedTexSubImage1DarbAsFunction(
@@ -22222,20 +21890,14 @@ late Pointer<NativeFunction<Void Function()>> _glGetCompressedTexImageArb;
 /// GLAPI void APIENTRY glGetCompressedTexImageARB (GLenum target, GLint level, void *img)
 /// ```
 /// {@category opengl_glext}
-void glGetCompressedTexImageArb(
-  int target,
-  int level,
-  Pointer<NativeType> img,
-) {
+void glGetCompressedTexImageArb(int target, int level, Pointer<Void> img) {
   final glGetCompressedTexImageArbAsFunction = _glGetCompressedTexImageArb
       .cast<
         NativeFunction<
-          Void Function(Uint32 target, Int32 level, Pointer<NativeType> img)
+          Void Function(Uint32 target, Int32 level, Pointer<Void> img)
         >
       >()
-      .asFunction<
-        void Function(int target, int level, Pointer<NativeType> img)
-      >();
+      .asFunction<void Function(int target, int level, Pointer<Void> img)>();
   return glGetCompressedTexImageArbAsFunction(target, level, img);
 }
 
@@ -22423,30 +22085,20 @@ late Pointer<NativeFunction<Void Function()>> _glWeightPointerArb;
 /// GLAPI void APIENTRY glWeightPointerARB (GLint size, GLenum type, GLsizei stride, const void *pointer)
 /// ```
 /// {@category opengl_glext}
-void glWeightPointerArb(
-  int size,
-  int type,
-  int stride,
-  Pointer<NativeType> pointer,
-) {
+void glWeightPointerArb(int size, int type, int stride, Pointer<Void> pointer) {
   final glWeightPointerArbAsFunction = _glWeightPointerArb
       .cast<
         NativeFunction<
           Void Function(
             Int32 size,
             Uint32 type,
-            Uint32 stride,
-            Pointer<NativeType> pointer,
+            Int32 stride,
+            Pointer<Void> pointer,
           )
         >
       >()
       .asFunction<
-        void Function(
-          int size,
-          int type,
-          int stride,
-          Pointer<NativeType> pointer,
-        )
+        void Function(int size, int type, int stride, Pointer<Void> pointer)
       >();
   return glWeightPointerArbAsFunction(size, type, stride, pointer);
 }
@@ -22488,7 +22140,7 @@ late Pointer<NativeFunction<Void Function()>> _glDeleteBuffersArb;
 /// {@category opengl_glext}
 void glDeleteBuffersArb(int n, Pointer<Uint32> buffers) {
   final glDeleteBuffersArbAsFunction = _glDeleteBuffersArb
-      .cast<NativeFunction<Void Function(Uint32 n, Pointer<Uint32> buffers)>>()
+      .cast<NativeFunction<Void Function(Int32 n, Pointer<Uint32> buffers)>>()
       .asFunction<void Function(int n, Pointer<Uint32> buffers)>();
   return glDeleteBuffersArbAsFunction(n, buffers);
 }
@@ -22502,7 +22154,7 @@ late Pointer<NativeFunction<Void Function()>> _glGenBuffersArb;
 /// {@category opengl_glext}
 void glGenBuffersArb(int n, Pointer<Uint32> buffers) {
   final glGenBuffersArbAsFunction = _glGenBuffersArb
-      .cast<NativeFunction<Void Function(Uint32 n, Pointer<Uint32> buffers)>>()
+      .cast<NativeFunction<Void Function(Int32 n, Pointer<Uint32> buffers)>>()
       .asFunction<void Function(int n, Pointer<Uint32> buffers)>();
   return glGenBuffersArbAsFunction(n, buffers);
 }
@@ -22516,7 +22168,7 @@ late Pointer<NativeFunction<Void Function()>> _glIsBufferArb;
 /// {@category opengl_glext}
 int glIsBufferArb(int buffer) {
   final glIsBufferArbAsFunction = _glIsBufferArb
-      .cast<NativeFunction<Int32 Function(Uint32 buffer)>>()
+      .cast<NativeFunction<Uint8 Function(Uint32 buffer)>>()
       .asFunction<int Function(int buffer)>();
   return glIsBufferArbAsFunction(buffer);
 }
@@ -22528,30 +22180,20 @@ late Pointer<NativeFunction<Void Function()>> _glBufferDataArb;
 /// GLAPI void APIENTRY glBufferDataARB (GLenum target, GLsizeiptrARB size, const void *data, GLenum usage)
 /// ```
 /// {@category opengl_glext}
-void glBufferDataArb(
-  int target,
-  Pointer<NativeType> size,
-  Pointer<NativeType> data,
-  int usage,
-) {
+void glBufferDataArb(int target, int size, Pointer<Void> data, int usage) {
   final glBufferDataArbAsFunction = _glBufferDataArb
       .cast<
         NativeFunction<
           Void Function(
             Uint32 target,
-            Pointer<NativeType> size,
-            Pointer<NativeType> data,
+            Int64 size,
+            Pointer<Void> data,
             Uint32 usage,
           )
         >
       >()
       .asFunction<
-        void Function(
-          int target,
-          Pointer<NativeType> size,
-          Pointer<NativeType> data,
-          int usage,
-        )
+        void Function(int target, int size, Pointer<Void> data, int usage)
       >();
   return glBufferDataArbAsFunction(target, size, data, usage);
 }
@@ -22563,30 +22205,20 @@ late Pointer<NativeFunction<Void Function()>> _glBufferSubDataArb;
 /// GLAPI void APIENTRY glBufferSubDataARB (GLenum target, GLintptrARB offset, GLsizeiptrARB size, const void *data)
 /// ```
 /// {@category opengl_glext}
-void glBufferSubDataArb(
-  int target,
-  int offset,
-  Pointer<NativeType> size,
-  Pointer<NativeType> data,
-) {
+void glBufferSubDataArb(int target, int offset, int size, Pointer<Void> data) {
   final glBufferSubDataArbAsFunction = _glBufferSubDataArb
       .cast<
         NativeFunction<
           Void Function(
             Uint32 target,
-            Uint64 offset,
-            Pointer<NativeType> size,
-            Pointer<NativeType> data,
+            IntPtr offset,
+            Int64 size,
+            Pointer<Void> data,
           )
         >
       >()
       .asFunction<
-        void Function(
-          int target,
-          int offset,
-          Pointer<NativeType> size,
-          Pointer<NativeType> data,
-        )
+        void Function(int target, int offset, int size, Pointer<Void> data)
       >();
   return glBufferSubDataArbAsFunction(target, offset, size, data);
 }
@@ -22601,27 +22233,22 @@ late Pointer<NativeFunction<Void Function()>> _glGetBufferSubDataArb;
 void glGetBufferSubDataArb(
   int target,
   int offset,
-  Pointer<NativeType> size,
-  Pointer<NativeType> data,
+  int size,
+  Pointer<Void> data,
 ) {
   final glGetBufferSubDataArbAsFunction = _glGetBufferSubDataArb
       .cast<
         NativeFunction<
           Void Function(
             Uint32 target,
-            Uint64 offset,
-            Pointer<NativeType> size,
-            Pointer<NativeType> data,
+            IntPtr offset,
+            Int64 size,
+            Pointer<Void> data,
           )
         >
       >()
       .asFunction<
-        void Function(
-          int target,
-          int offset,
-          Pointer<NativeType> size,
-          Pointer<NativeType> data,
-        )
+        void Function(int target, int offset, int size, Pointer<Void> data)
       >();
   return glGetBufferSubDataArbAsFunction(target, offset, size, data);
 }
@@ -22633,14 +22260,12 @@ late Pointer<NativeFunction<Void Function()>> _glMapBufferArb;
 /// GLAPI void *APIENTRY glMapBufferARB (GLenum target, GLenum access)
 /// ```
 /// {@category opengl_glext}
-Pointer<NativeType> glMapBufferArb(int target, int access) {
+Pointer<Void> glMapBufferArb(int target, int access) {
   final glMapBufferArbAsFunction = _glMapBufferArb
       .cast<
-        NativeFunction<
-          Pointer<NativeType> Function(Uint32 target, Uint32 access)
-        >
+        NativeFunction<Pointer<Void> Function(Uint32 target, Uint32 access)>
       >()
-      .asFunction<Pointer<NativeType> Function(int target, int access)>();
+      .asFunction<Pointer<Void> Function(int target, int access)>();
   return glMapBufferArbAsFunction(target, access);
 }
 
@@ -22653,7 +22278,7 @@ late Pointer<NativeFunction<Void Function()>> _glUnmapBufferArb;
 /// {@category opengl_glext}
 int glUnmapBufferArb(int target) {
   final glUnmapBufferArbAsFunction = _glUnmapBufferArb
-      .cast<NativeFunction<Int32 Function(Uint32 target)>>()
+      .cast<NativeFunction<Uint8 Function(Uint32 target)>>()
       .asFunction<int Function(int target)>();
   return glUnmapBufferArbAsFunction(target);
 }
@@ -22688,7 +22313,7 @@ late Pointer<NativeFunction<Void Function()>> _glGetBufferPointervArb;
 void glGetBufferPointervArb(
   int target,
   int pname,
-  Pointer<Pointer<NativeType>> params,
+  Pointer<Pointer<Void>> params,
 ) {
   final glGetBufferPointervArbAsFunction = _glGetBufferPointervArb
       .cast<
@@ -22696,16 +22321,12 @@ void glGetBufferPointervArb(
           Void Function(
             Uint32 target,
             Uint32 pname,
-            Pointer<Pointer<NativeType>> params,
+            Pointer<Pointer<Void>> params,
           )
         >
       >()
       .asFunction<
-        void Function(
-          int target,
-          int pname,
-          Pointer<Pointer<NativeType>> params,
-        )
+        void Function(int target, int pname, Pointer<Pointer<Void>> params)
       >();
   return glGetBufferPointervArbAsFunction(target, pname, params);
 }
@@ -23261,7 +22882,7 @@ void glVertexAttribPointerArb(
   int type,
   int normalized,
   int stride,
-  Pointer<NativeType> pointer,
+  Pointer<Void> pointer,
 ) {
   final glVertexAttribPointerArbAsFunction = _glVertexAttribPointerArb
       .cast<
@@ -23270,9 +22891,9 @@ void glVertexAttribPointerArb(
             Uint32 index,
             Int32 size,
             Uint32 type,
-            Int32 normalized,
-            Uint32 stride,
-            Pointer<NativeType> pointer,
+            Uint8 normalized,
+            Int32 stride,
+            Pointer<Void> pointer,
           )
         >
       >()
@@ -23283,7 +22904,7 @@ void glVertexAttribPointerArb(
           int type,
           int normalized,
           int stride,
-          Pointer<NativeType> pointer,
+          Pointer<Void> pointer,
         )
       >();
   return glVertexAttribPointerArbAsFunction(
@@ -23390,7 +23011,7 @@ late Pointer<NativeFunction<Void Function()>> _glGetVertexAttribPointervArb;
 void glGetVertexAttribPointervArb(
   int index,
   int pname,
-  Pointer<Pointer<NativeType>> pointer,
+  Pointer<Pointer<Void>> pointer,
 ) {
   final glGetVertexAttribPointervArbAsFunction = _glGetVertexAttribPointervArb
       .cast<
@@ -23398,16 +23019,12 @@ void glGetVertexAttribPointervArb(
           Void Function(
             Uint32 index,
             Uint32 pname,
-            Pointer<Pointer<NativeType>> pointer,
+            Pointer<Pointer<Void>> pointer,
           )
         >
       >()
       .asFunction<
-        void Function(
-          int index,
-          int pname,
-          Pointer<Pointer<NativeType>> pointer,
-        )
+        void Function(int index, int pname, Pointer<Pointer<Void>> pointer)
       >();
   return glGetVertexAttribPointervArbAsFunction(index, pname, pointer);
 }
@@ -23419,27 +23036,19 @@ late Pointer<NativeFunction<Void Function()>> _glBindAttribLocationArb;
 /// GLAPI void APIENTRY glBindAttribLocationARB (GLhandleARB programObj, GLuint index, const GLcharARB *name)
 /// ```
 /// {@category opengl_glext}
-void glBindAttribLocationArb(
-  Pointer<NativeType> programObj,
-  int index,
-  String name,
-) {
+void glBindAttribLocationArb(Pointer<Void> programObj, int index, String name) {
   final glBindAttribLocationArbAsFunction = _glBindAttribLocationArb
       .cast<
         NativeFunction<
           Void Function(
-            Pointer<NativeType> programObj,
+            Pointer<Void> programObj,
             Uint32 index,
             Pointer<Utf8> name,
           )
         >
       >()
       .asFunction<
-        void Function(
-          Pointer<NativeType> programObj,
-          int index,
-          Pointer<Utf8> name,
-        )
+        void Function(Pointer<Void> programObj, int index, Pointer<Utf8> name)
       >();
   final namePointer = name.toNativeUtf8();
   final result = glBindAttribLocationArbAsFunction(
@@ -23459,10 +23068,10 @@ late Pointer<NativeFunction<Void Function()>> _glGetActiveAttribArb;
 /// ```
 /// {@category opengl_glext}
 void glGetActiveAttribArb(
-  Pointer<NativeType> programObj,
+  Pointer<Void> programObj,
   int index,
   int maxLength,
-  Pointer<Uint32> length,
+  Pointer<Int32> length,
   Pointer<Int32> size,
   Pointer<Uint32> type,
   Pointer<Int8> name,
@@ -23471,10 +23080,10 @@ void glGetActiveAttribArb(
       .cast<
         NativeFunction<
           Void Function(
-            Pointer<NativeType> programObj,
+            Pointer<Void> programObj,
             Uint32 index,
-            Uint32 maxLength,
-            Pointer<Uint32> length,
+            Int32 maxLength,
+            Pointer<Int32> length,
             Pointer<Int32> size,
             Pointer<Uint32> type,
             Pointer<Int8> name,
@@ -23483,10 +23092,10 @@ void glGetActiveAttribArb(
       >()
       .asFunction<
         void Function(
-          Pointer<NativeType> programObj,
+          Pointer<Void> programObj,
           int index,
           int maxLength,
-          Pointer<Uint32> length,
+          Pointer<Int32> length,
           Pointer<Int32> size,
           Pointer<Uint32> type,
           Pointer<Int8> name,
@@ -23510,16 +23119,14 @@ late Pointer<NativeFunction<Void Function()>> _glGetAttribLocationArb;
 /// GLAPI GLint APIENTRY glGetAttribLocationARB (GLhandleARB programObj, const GLcharARB *name)
 /// ```
 /// {@category opengl_glext}
-int glGetAttribLocationArb(Pointer<NativeType> programObj, String name) {
+int glGetAttribLocationArb(Pointer<Void> programObj, String name) {
   final glGetAttribLocationArbAsFunction = _glGetAttribLocationArb
       .cast<
         NativeFunction<
-          Int32 Function(Pointer<NativeType> programObj, Pointer<Utf8> name)
+          Int32 Function(Pointer<Void> programObj, Pointer<Utf8> name)
         >
       >()
-      .asFunction<
-        int Function(Pointer<NativeType> programObj, Pointer<Utf8> name)
-      >();
+      .asFunction<int Function(Pointer<Void> programObj, Pointer<Utf8> name)>();
   final namePointer = name.toNativeUtf8();
   final result = glGetAttribLocationArbAsFunction(programObj, namePointer);
   calloc.free(namePointer);
@@ -23537,7 +23144,7 @@ void glDepthRangeArraydvNv(int first, int count, Pointer<Double> v) {
   final glDepthRangeArraydvNvAsFunction = _glDepthRangeArraydvNv
       .cast<
         NativeFunction<
-          Void Function(Uint32 first, Uint32 count, Pointer<Double> v)
+          Void Function(Uint32 first, Int32 count, Pointer<Double> v)
         >
       >()
       .asFunction<void Function(int first, int count, Pointer<Double> v)>();
@@ -24759,8 +24366,8 @@ void glBitmapxOes(
       .cast<
         NativeFunction<
           Void Function(
-            Uint32 width,
-            Uint32 height,
+            Int32 width,
+            Int32 height,
             Int32 xorig,
             Int32 yorig,
             Int32 xmove,
@@ -24972,7 +24579,7 @@ void glFeedbackBufferxOes(int n, int type, Pointer<Int32> buffer) {
   final glFeedbackBufferxOesAsFunction = _glFeedbackBufferxOes
       .cast<
         NativeFunction<
-          Void Function(Uint32 n, Uint32 type, Pointer<Int32> buffer)
+          Void Function(Int32 n, Uint32 type, Pointer<Int32> buffer)
         >
       >()
       .asFunction<void Function(int n, int type, Pointer<Int32> buffer)>();
@@ -25544,7 +25151,7 @@ void glPrioritizeTexturesxOes(
       .cast<
         NativeFunction<
           Void Function(
-            Uint32 n,
+            Int32 n,
             Pointer<Uint32> textures,
             Pointer<Int32> priorities,
           )
@@ -26074,9 +25681,9 @@ void glDebugMessageEnableAmd(
           Void Function(
             Uint32 category,
             Uint32 severity,
-            Uint32 count,
+            Int32 count,
             Pointer<Uint32> ids,
-            Int32 enabled,
+            Uint8 enabled,
           )
         >
       >()
@@ -26119,7 +25726,7 @@ void glDebugMessageInsertAmd(
             Uint32 category,
             Uint32 severity,
             Uint32 id,
-            Uint32 length,
+            Int32 length,
             Pointer<Utf8> buf,
           )
         >
@@ -26154,21 +25761,21 @@ late Pointer<NativeFunction<Void Function()>> _glDebugMessageCallbackAmd;
 /// {@category opengl_glext}
 void glDebugMessageCallbackAmd(
   Pointer<NativeFunction<GLDEBUGPROCAMD>> callback,
-  Pointer<NativeType> userParam,
+  Pointer<Void> userParam,
 ) {
   final glDebugMessageCallbackAmdAsFunction = _glDebugMessageCallbackAmd
       .cast<
         NativeFunction<
           Void Function(
             Pointer<NativeFunction<GLDEBUGPROCAMD>> callback,
-            Pointer<NativeType> userParam,
+            Pointer<Void> userParam,
           )
         >
       >()
       .asFunction<
         void Function(
           Pointer<NativeFunction<GLDEBUGPROCAMD>> callback,
-          Pointer<NativeType> userParam,
+          Pointer<Void> userParam,
         )
       >();
   return glDebugMessageCallbackAmdAsFunction(callback, userParam);
@@ -26187,7 +25794,7 @@ int glGetDebugMessageLogAmd(
   Pointer<Uint32> categories,
   Pointer<Uint32> severities,
   Pointer<Uint32> ids,
-  Pointer<Uint32> lengths,
+  Pointer<Int32> lengths,
   Pointer<Int8> message,
 ) {
   final glGetDebugMessageLogAmdAsFunction = _glGetDebugMessageLogAmd
@@ -26195,11 +25802,11 @@ int glGetDebugMessageLogAmd(
         NativeFunction<
           Uint32 Function(
             Uint32 count,
-            Uint32 bufSize,
+            Int32 bufSize,
             Pointer<Uint32> categories,
             Pointer<Uint32> severities,
             Pointer<Uint32> ids,
-            Pointer<Uint32> lengths,
+            Pointer<Int32> lengths,
             Pointer<Int8> message,
           )
         >
@@ -26211,7 +25818,7 @@ int glGetDebugMessageLogAmd(
           Pointer<Uint32> categories,
           Pointer<Uint32> severities,
           Pointer<Uint32> ids,
-          Pointer<Uint32> lengths,
+          Pointer<Int32> lengths,
           Pointer<Int8> message,
         )
       >();
@@ -26340,11 +25947,11 @@ void glRenderbufferStorageMultisampleAdvancedAmd(
             NativeFunction<
               Void Function(
                 Uint32 target,
-                Uint32 samples,
-                Uint32 storageSamples,
+                Int32 samples,
+                Int32 storageSamples,
                 Uint32 internalformat,
-                Uint32 width,
-                Uint32 height,
+                Int32 width,
+                Int32 height,
               )
             >
           >()
@@ -26390,11 +25997,11 @@ void glNamedRenderbufferStorageMultisampleAdvancedAmd(
             NativeFunction<
               Void Function(
                 Uint32 renderbuffer,
-                Uint32 samples,
-                Uint32 storageSamples,
+                Int32 samples,
+                Int32 storageSamples,
                 Uint32 internalformat,
-                Uint32 width,
-                Uint32 height,
+                Int32 width,
+                Int32 height,
               )
             >
           >()
@@ -26526,7 +26133,7 @@ void glGetFramebufferParameterfvAmd(
                 Uint32 pname,
                 Uint32 numsamples,
                 Uint32 pixelindex,
-                Uint32 size,
+                Int32 size,
                 Pointer<Float> values,
               )
             >
@@ -26576,7 +26183,7 @@ void glGetNamedFramebufferParameterfvAmd(
                 Uint32 pname,
                 Uint32 numsamples,
                 Uint32 pixelindex,
-                Uint32 size,
+                Int32 size,
                 Pointer<Float> values,
               )
             >
@@ -26674,7 +26281,7 @@ void glUniform1i64vNv(int location, int count, Pointer<Int64> value) {
   final glUniform1i64vNvAsFunction = _glUniform1i64vNv
       .cast<
         NativeFunction<
-          Void Function(Int32 location, Uint32 count, Pointer<Int64> value)
+          Void Function(Int32 location, Int32 count, Pointer<Int64> value)
         >
       >()
       .asFunction<
@@ -26694,7 +26301,7 @@ void glUniform2i64vNv(int location, int count, Pointer<Int64> value) {
   final glUniform2i64vNvAsFunction = _glUniform2i64vNv
       .cast<
         NativeFunction<
-          Void Function(Int32 location, Uint32 count, Pointer<Int64> value)
+          Void Function(Int32 location, Int32 count, Pointer<Int64> value)
         >
       >()
       .asFunction<
@@ -26714,7 +26321,7 @@ void glUniform3i64vNv(int location, int count, Pointer<Int64> value) {
   final glUniform3i64vNvAsFunction = _glUniform3i64vNv
       .cast<
         NativeFunction<
-          Void Function(Int32 location, Uint32 count, Pointer<Int64> value)
+          Void Function(Int32 location, Int32 count, Pointer<Int64> value)
         >
       >()
       .asFunction<
@@ -26734,7 +26341,7 @@ void glUniform4i64vNv(int location, int count, Pointer<Int64> value) {
   final glUniform4i64vNvAsFunction = _glUniform4i64vNv
       .cast<
         NativeFunction<
-          Void Function(Int32 location, Uint32 count, Pointer<Int64> value)
+          Void Function(Int32 location, Int32 count, Pointer<Int64> value)
         >
       >()
       .asFunction<
@@ -26818,7 +26425,7 @@ void glUniform1ui64vNv(int location, int count, Pointer<Uint64> value) {
   final glUniform1ui64vNvAsFunction = _glUniform1ui64vNv
       .cast<
         NativeFunction<
-          Void Function(Int32 location, Uint32 count, Pointer<Uint64> value)
+          Void Function(Int32 location, Int32 count, Pointer<Uint64> value)
         >
       >()
       .asFunction<
@@ -26838,7 +26445,7 @@ void glUniform2ui64vNv(int location, int count, Pointer<Uint64> value) {
   final glUniform2ui64vNvAsFunction = _glUniform2ui64vNv
       .cast<
         NativeFunction<
-          Void Function(Int32 location, Uint32 count, Pointer<Uint64> value)
+          Void Function(Int32 location, Int32 count, Pointer<Uint64> value)
         >
       >()
       .asFunction<
@@ -26858,7 +26465,7 @@ void glUniform3ui64vNv(int location, int count, Pointer<Uint64> value) {
   final glUniform3ui64vNvAsFunction = _glUniform3ui64vNv
       .cast<
         NativeFunction<
-          Void Function(Int32 location, Uint32 count, Pointer<Uint64> value)
+          Void Function(Int32 location, Int32 count, Pointer<Uint64> value)
         >
       >()
       .asFunction<
@@ -26878,7 +26485,7 @@ void glUniform4ui64vNv(int location, int count, Pointer<Uint64> value) {
   final glUniform4ui64vNvAsFunction = _glUniform4ui64vNv
       .cast<
         NativeFunction<
-          Void Function(Int32 location, Uint32 count, Pointer<Uint64> value)
+          Void Function(Int32 location, Int32 count, Pointer<Uint64> value)
         >
       >()
       .asFunction<
@@ -27040,7 +26647,7 @@ void glProgramUniform1i64vNv(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 count,
+            Int32 count,
             Pointer<Int64> value,
           )
         >
@@ -27075,7 +26682,7 @@ void glProgramUniform2i64vNv(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 count,
+            Int32 count,
             Pointer<Int64> value,
           )
         >
@@ -27110,7 +26717,7 @@ void glProgramUniform3i64vNv(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 count,
+            Int32 count,
             Pointer<Int64> value,
           )
         >
@@ -27145,7 +26752,7 @@ void glProgramUniform4i64vNv(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 count,
+            Int32 count,
             Pointer<Int64> value,
           )
         >
@@ -27274,7 +26881,7 @@ void glProgramUniform1ui64vNv(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 count,
+            Int32 count,
             Pointer<Uint64> value,
           )
         >
@@ -27309,7 +26916,7 @@ void glProgramUniform2ui64vNv(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 count,
+            Int32 count,
             Pointer<Uint64> value,
           )
         >
@@ -27344,7 +26951,7 @@ void glProgramUniform3ui64vNv(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 count,
+            Int32 count,
             Pointer<Uint64> value,
           )
         >
@@ -27379,7 +26986,7 @@ void glProgramUniform4ui64vNv(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 count,
+            Int32 count,
             Pointer<Uint64> value,
           )
         >
@@ -27420,7 +27027,7 @@ late Pointer<NativeFunction<Void Function()>> _glMultiDrawArraysIndirectAmd;
 /// {@category opengl_glext}
 void glMultiDrawArraysIndirectAmd(
   int mode,
-  Pointer<NativeType> indirect,
+  Pointer<Void> indirect,
   int primcount,
   int stride,
 ) {
@@ -27429,16 +27036,16 @@ void glMultiDrawArraysIndirectAmd(
         NativeFunction<
           Void Function(
             Uint32 mode,
-            Pointer<NativeType> indirect,
-            Uint32 primcount,
-            Uint32 stride,
+            Pointer<Void> indirect,
+            Int32 primcount,
+            Int32 stride,
           )
         >
       >()
       .asFunction<
         void Function(
           int mode,
-          Pointer<NativeType> indirect,
+          Pointer<Void> indirect,
           int primcount,
           int stride,
         )
@@ -27461,7 +27068,7 @@ late Pointer<NativeFunction<Void Function()>> _glMultiDrawElementsIndirectAmd;
 void glMultiDrawElementsIndirectAmd(
   int mode,
   int type,
-  Pointer<NativeType> indirect,
+  Pointer<Void> indirect,
   int primcount,
   int stride,
 ) {
@@ -27472,9 +27079,9 @@ void glMultiDrawElementsIndirectAmd(
               Void Function(
                 Uint32 mode,
                 Uint32 type,
-                Pointer<NativeType> indirect,
-                Uint32 primcount,
-                Uint32 stride,
+                Pointer<Void> indirect,
+                Int32 primcount,
+                Int32 stride,
               )
             >
           >()
@@ -27482,7 +27089,7 @@ void glMultiDrawElementsIndirectAmd(
             void Function(
               int mode,
               int type,
-              Pointer<NativeType> indirect,
+              Pointer<Void> indirect,
               int primcount,
               int stride,
             )
@@ -27545,7 +27152,7 @@ late Pointer<NativeFunction<Void Function()>> _glIsNameAmd;
 /// {@category opengl_glext}
 int glIsNameAmd(int identifier, int name) {
   final glIsNameAmdAsFunction = _glIsNameAmd
-      .cast<NativeFunction<Int32 Function(Uint32 identifier, Uint32 name)>>()
+      .cast<NativeFunction<Uint8 Function(Uint32 identifier, Uint32 name)>>()
       .asFunction<int Function(int identifier, int name)>();
   return glIsNameAmdAsFunction(identifier, name);
 }
@@ -27585,7 +27192,7 @@ void glGetPerfMonitorGroupsAmd(
         NativeFunction<
           Void Function(
             Pointer<Int32> numGroups,
-            Uint32 groupsSize,
+            Int32 groupsSize,
             Pointer<Uint32> groups,
           )
         >
@@ -27621,7 +27228,7 @@ void glGetPerfMonitorCountersAmd(
             Uint32 group,
             Pointer<Int32> numCounters,
             Pointer<Int32> maxActiveCounters,
-            Uint32 counterSize,
+            Int32 counterSize,
             Pointer<Uint32> counters,
           )
         >
@@ -27654,7 +27261,7 @@ late Pointer<NativeFunction<Void Function()>> _glGetPerfMonitorGroupStringAmd;
 void glGetPerfMonitorGroupStringAmd(
   int group,
   int bufSize,
-  Pointer<Uint32> length,
+  Pointer<Int32> length,
   Pointer<Int8> groupString,
 ) {
   final glGetPerfMonitorGroupStringAmdAsFunction =
@@ -27663,8 +27270,8 @@ void glGetPerfMonitorGroupStringAmd(
             NativeFunction<
               Void Function(
                 Uint32 group,
-                Uint32 bufSize,
-                Pointer<Uint32> length,
+                Int32 bufSize,
+                Pointer<Int32> length,
                 Pointer<Int8> groupString,
               )
             >
@@ -27673,7 +27280,7 @@ void glGetPerfMonitorGroupStringAmd(
             void Function(
               int group,
               int bufSize,
-              Pointer<Uint32> length,
+              Pointer<Int32> length,
               Pointer<Int8> groupString,
             )
           >();
@@ -27696,7 +27303,7 @@ void glGetPerfMonitorCounterStringAmd(
   int group,
   int counter,
   int bufSize,
-  Pointer<Uint32> length,
+  Pointer<Int32> length,
   Pointer<Int8> counterString,
 ) {
   final glGetPerfMonitorCounterStringAmdAsFunction =
@@ -27706,8 +27313,8 @@ void glGetPerfMonitorCounterStringAmd(
               Void Function(
                 Uint32 group,
                 Uint32 counter,
-                Uint32 bufSize,
-                Pointer<Uint32> length,
+                Int32 bufSize,
+                Pointer<Int32> length,
                 Pointer<Int8> counterString,
               )
             >
@@ -27717,7 +27324,7 @@ void glGetPerfMonitorCounterStringAmd(
               int group,
               int counter,
               int bufSize,
-              Pointer<Uint32> length,
+              Pointer<Int32> length,
               Pointer<Int8> counterString,
             )
           >();
@@ -27741,7 +27348,7 @@ void glGetPerfMonitorCounterInfoAmd(
   int group,
   int counter,
   int pname,
-  Pointer<NativeType> data,
+  Pointer<Void> data,
 ) {
   final glGetPerfMonitorCounterInfoAmdAsFunction =
       _glGetPerfMonitorCounterInfoAmd
@@ -27751,17 +27358,12 @@ void glGetPerfMonitorCounterInfoAmd(
                 Uint32 group,
                 Uint32 counter,
                 Uint32 pname,
-                Pointer<NativeType> data,
+                Pointer<Void> data,
               )
             >
           >()
           .asFunction<
-            void Function(
-              int group,
-              int counter,
-              int pname,
-              Pointer<NativeType> data,
-            )
+            void Function(int group, int counter, int pname, Pointer<Void> data)
           >();
   return glGetPerfMonitorCounterInfoAmdAsFunction(group, counter, pname, data);
 }
@@ -27775,7 +27377,7 @@ late Pointer<NativeFunction<Void Function()>> _glGenPerfMonitorsAmd;
 /// {@category opengl_glext}
 void glGenPerfMonitorsAmd(int n, Pointer<Uint32> monitors) {
   final glGenPerfMonitorsAmdAsFunction = _glGenPerfMonitorsAmd
-      .cast<NativeFunction<Void Function(Uint32 n, Pointer<Uint32> monitors)>>()
+      .cast<NativeFunction<Void Function(Int32 n, Pointer<Uint32> monitors)>>()
       .asFunction<void Function(int n, Pointer<Uint32> monitors)>();
   return glGenPerfMonitorsAmdAsFunction(n, monitors);
 }
@@ -27789,7 +27391,7 @@ late Pointer<NativeFunction<Void Function()>> _glDeletePerfMonitorsAmd;
 /// {@category opengl_glext}
 void glDeletePerfMonitorsAmd(int n, Pointer<Uint32> monitors) {
   final glDeletePerfMonitorsAmdAsFunction = _glDeletePerfMonitorsAmd
-      .cast<NativeFunction<Void Function(Uint32 n, Pointer<Uint32> monitors)>>()
+      .cast<NativeFunction<Void Function(Int32 n, Pointer<Uint32> monitors)>>()
       .asFunction<void Function(int n, Pointer<Uint32> monitors)>();
   return glDeletePerfMonitorsAmdAsFunction(n, monitors);
 }
@@ -27814,7 +27416,7 @@ void glSelectPerfMonitorCountersAmd(
             NativeFunction<
               Void Function(
                 Uint32 monitor,
-                Int32 enable,
+                Uint8 enable,
                 Uint32 group,
                 Int32 numCounters,
                 Pointer<Uint32> counterList,
@@ -27888,7 +27490,7 @@ void glGetPerfMonitorCounterDataAmd(
               Void Function(
                 Uint32 monitor,
                 Uint32 pname,
-                Uint32 dataSize,
+                Int32 dataSize,
                 Pointer<Uint32> data,
                 Pointer<Int32> bytesWritten,
               )
@@ -27952,10 +27554,10 @@ void glTexStorageSparseAmd(
           Void Function(
             Uint32 target,
             Uint32 internalFormat,
-            Uint32 width,
-            Uint32 height,
-            Uint32 depth,
-            Uint32 layers,
+            Int32 width,
+            Int32 height,
+            Int32 depth,
+            Int32 layers,
             Uint32 flags,
           )
         >
@@ -28006,10 +27608,10 @@ void glTextureStorageSparseAmd(
             Uint32 texture,
             Uint32 target,
             Uint32 internalFormat,
-            Uint32 width,
-            Uint32 height,
-            Uint32 depth,
-            Uint32 layers,
+            Int32 width,
+            Int32 height,
+            Int32 depth,
+            Int32 layers,
             Uint32 flags,
           )
         >
@@ -28087,12 +27689,10 @@ late Pointer<NativeFunction<Void Function()>> _glElementPointerApple;
 /// GLAPI void APIENTRY glElementPointerAPPLE (GLenum type, const void *pointer)
 /// ```
 /// {@category opengl_glext}
-void glElementPointerApple(int type, Pointer<NativeType> pointer) {
+void glElementPointerApple(int type, Pointer<Void> pointer) {
   final glElementPointerAppleAsFunction = _glElementPointerApple
-      .cast<
-        NativeFunction<Void Function(Uint32 type, Pointer<NativeType> pointer)>
-      >()
-      .asFunction<void Function(int type, Pointer<NativeType> pointer)>();
+      .cast<NativeFunction<Void Function(Uint32 type, Pointer<Void> pointer)>>()
+      .asFunction<void Function(int type, Pointer<Void> pointer)>();
   return glElementPointerAppleAsFunction(type, pointer);
 }
 
@@ -28106,7 +27706,7 @@ late Pointer<NativeFunction<Void Function()>> _glDrawElementArrayApple;
 void glDrawElementArrayApple(int mode, int first, int count) {
   final glDrawElementArrayAppleAsFunction = _glDrawElementArrayApple
       .cast<
-        NativeFunction<Void Function(Uint32 mode, Int32 first, Uint32 count)>
+        NativeFunction<Void Function(Uint32 mode, Int32 first, Int32 count)>
       >()
       .asFunction<void Function(int mode, int first, int count)>();
   return glDrawElementArrayAppleAsFunction(mode, first, count);
@@ -28134,7 +27734,7 @@ void glDrawRangeElementArrayApple(
             Uint32 start,
             Uint32 end,
             Int32 first,
-            Uint32 count,
+            Int32 count,
           )
         >
       >()
@@ -28154,7 +27754,7 @@ late Pointer<NativeFunction<Void Function()>> _glMultiDrawElementArrayApple;
 void glMultiDrawElementArrayApple(
   int mode,
   Pointer<Int32> first,
-  Pointer<Uint32> count,
+  Pointer<Int32> count,
   int primcount,
 ) {
   final glMultiDrawElementArrayAppleAsFunction = _glMultiDrawElementArrayApple
@@ -28163,8 +27763,8 @@ void glMultiDrawElementArrayApple(
           Void Function(
             Uint32 mode,
             Pointer<Int32> first,
-            Pointer<Uint32> count,
-            Uint32 primcount,
+            Pointer<Int32> count,
+            Int32 primcount,
           )
         >
       >()
@@ -28172,7 +27772,7 @@ void glMultiDrawElementArrayApple(
         void Function(
           int mode,
           Pointer<Int32> first,
-          Pointer<Uint32> count,
+          Pointer<Int32> count,
           int primcount,
         )
       >();
@@ -28192,7 +27792,7 @@ void glMultiDrawRangeElementArrayApple(
   int start,
   int end,
   Pointer<Int32> first,
-  Pointer<Uint32> count,
+  Pointer<Int32> count,
   int primcount,
 ) {
   final glMultiDrawRangeElementArrayAppleAsFunction =
@@ -28204,8 +27804,8 @@ void glMultiDrawRangeElementArrayApple(
                 Uint32 start,
                 Uint32 end,
                 Pointer<Int32> first,
-                Pointer<Uint32> count,
-                Uint32 primcount,
+                Pointer<Int32> count,
+                Int32 primcount,
               )
             >
           >()
@@ -28215,7 +27815,7 @@ void glMultiDrawRangeElementArrayApple(
               int start,
               int end,
               Pointer<Int32> first,
-              Pointer<Uint32> count,
+              Pointer<Int32> count,
               int primcount,
             )
           >();
@@ -28238,7 +27838,7 @@ late Pointer<NativeFunction<Void Function()>> _glGenFencesApple;
 /// {@category opengl_glext}
 void glGenFencesApple(int n, Pointer<Uint32> fences) {
   final glGenFencesAppleAsFunction = _glGenFencesApple
-      .cast<NativeFunction<Void Function(Uint32 n, Pointer<Uint32> fences)>>()
+      .cast<NativeFunction<Void Function(Int32 n, Pointer<Uint32> fences)>>()
       .asFunction<void Function(int n, Pointer<Uint32> fences)>();
   return glGenFencesAppleAsFunction(n, fences);
 }
@@ -28252,7 +27852,7 @@ late Pointer<NativeFunction<Void Function()>> _glDeleteFencesApple;
 /// {@category opengl_glext}
 void glDeleteFencesApple(int n, Pointer<Uint32> fences) {
   final glDeleteFencesAppleAsFunction = _glDeleteFencesApple
-      .cast<NativeFunction<Void Function(Uint32 n, Pointer<Uint32> fences)>>()
+      .cast<NativeFunction<Void Function(Int32 n, Pointer<Uint32> fences)>>()
       .asFunction<void Function(int n, Pointer<Uint32> fences)>();
   return glDeleteFencesAppleAsFunction(n, fences);
 }
@@ -28280,7 +27880,7 @@ late Pointer<NativeFunction<Void Function()>> _glIsFenceApple;
 /// {@category opengl_glext}
 int glIsFenceApple(int fence) {
   final glIsFenceAppleAsFunction = _glIsFenceApple
-      .cast<NativeFunction<Int32 Function(Uint32 fence)>>()
+      .cast<NativeFunction<Uint8 Function(Uint32 fence)>>()
       .asFunction<int Function(int fence)>();
   return glIsFenceAppleAsFunction(fence);
 }
@@ -28294,7 +27894,7 @@ late Pointer<NativeFunction<Void Function()>> _glTestFenceApple;
 /// {@category opengl_glext}
 int glTestFenceApple(int fence) {
   final glTestFenceAppleAsFunction = _glTestFenceApple
-      .cast<NativeFunction<Int32 Function(Uint32 fence)>>()
+      .cast<NativeFunction<Uint8 Function(Uint32 fence)>>()
       .asFunction<int Function(int fence)>();
   return glTestFenceAppleAsFunction(fence);
 }
@@ -28322,7 +27922,7 @@ late Pointer<NativeFunction<Void Function()>> _glTestObjectApple;
 /// {@category opengl_glext}
 int glTestObjectApple(int object, int name) {
   final glTestObjectAppleAsFunction = _glTestObjectApple
-      .cast<NativeFunction<Int32 Function(Uint32 object, Uint32 name)>>()
+      .cast<NativeFunction<Uint8 Function(Uint32 object, Uint32 name)>>()
       .asFunction<int Function(int object, int name)>();
   return glTestObjectAppleAsFunction(object, name);
 }
@@ -28364,28 +27964,12 @@ late Pointer<NativeFunction<Void Function()>> _glFlushMappedBufferRangeApple;
 /// GLAPI void APIENTRY glFlushMappedBufferRangeAPPLE (GLenum target, GLintptr offset, GLsizeiptr size)
 /// ```
 /// {@category opengl_glext}
-void glFlushMappedBufferRangeApple(
-  int target,
-  Pointer<NativeType> offset,
-  Pointer<Uint32> size,
-) {
+void glFlushMappedBufferRangeApple(int target, int offset, int size) {
   final glFlushMappedBufferRangeAppleAsFunction = _glFlushMappedBufferRangeApple
       .cast<
-        NativeFunction<
-          Void Function(
-            Uint32 target,
-            Pointer<NativeType> offset,
-            Pointer<Uint32> size,
-          )
-        >
+        NativeFunction<Void Function(Uint32 target, IntPtr offset, IntPtr size)>
       >()
-      .asFunction<
-        void Function(
-          int target,
-          Pointer<NativeType> offset,
-          Pointer<Uint32> size,
-        )
-      >();
+      .asFunction<void Function(int target, int offset, int size)>();
   return glFlushMappedBufferRangeAppleAsFunction(target, offset, size);
 }
 
@@ -28467,19 +28051,15 @@ late Pointer<NativeFunction<Void Function()>> _glTextureRangeApple;
 /// GLAPI void APIENTRY glTextureRangeAPPLE (GLenum target, GLsizei length, const void *pointer)
 /// ```
 /// {@category opengl_glext}
-void glTextureRangeApple(int target, int length, Pointer<NativeType> pointer) {
+void glTextureRangeApple(int target, int length, Pointer<Void> pointer) {
   final glTextureRangeAppleAsFunction = _glTextureRangeApple
       .cast<
         NativeFunction<
-          Void Function(
-            Uint32 target,
-            Uint32 length,
-            Pointer<NativeType> pointer,
-          )
+          Void Function(Uint32 target, Int32 length, Pointer<Void> pointer)
         >
       >()
       .asFunction<
-        void Function(int target, int length, Pointer<NativeType> pointer)
+        void Function(int target, int length, Pointer<Void> pointer)
       >();
   return glTextureRangeAppleAsFunction(target, length, pointer);
 }
@@ -28494,7 +28074,7 @@ late Pointer<NativeFunction<Void Function()>> _glGetTexParameterPointervApple;
 void glGetTexParameterPointervApple(
   int target,
   int pname,
-  Pointer<Pointer<NativeType>> params,
+  Pointer<Pointer<Void>> params,
 ) {
   final glGetTexParameterPointervAppleAsFunction =
       _glGetTexParameterPointervApple
@@ -28503,16 +28083,12 @@ void glGetTexParameterPointervApple(
               Void Function(
                 Uint32 target,
                 Uint32 pname,
-                Pointer<Pointer<NativeType>> params,
+                Pointer<Pointer<Void>> params,
               )
             >
           >()
           .asFunction<
-            void Function(
-              int target,
-              int pname,
-              Pointer<Pointer<NativeType>> params,
-            )
+            void Function(int target, int pname, Pointer<Pointer<Void>> params)
           >();
   return glGetTexParameterPointervAppleAsFunction(target, pname, params);
 }
@@ -28540,7 +28116,7 @@ late Pointer<NativeFunction<Void Function()>> _glDeleteVertexArraysApple;
 /// {@category opengl_glext}
 void glDeleteVertexArraysApple(int n, Pointer<Uint32> arrays) {
   final glDeleteVertexArraysAppleAsFunction = _glDeleteVertexArraysApple
-      .cast<NativeFunction<Void Function(Uint32 n, Pointer<Uint32> arrays)>>()
+      .cast<NativeFunction<Void Function(Int32 n, Pointer<Uint32> arrays)>>()
       .asFunction<void Function(int n, Pointer<Uint32> arrays)>();
   return glDeleteVertexArraysAppleAsFunction(n, arrays);
 }
@@ -28554,7 +28130,7 @@ late Pointer<NativeFunction<Void Function()>> _glGenVertexArraysApple;
 /// {@category opengl_glext}
 void glGenVertexArraysApple(int n, Pointer<Uint32> arrays) {
   final glGenVertexArraysAppleAsFunction = _glGenVertexArraysApple
-      .cast<NativeFunction<Void Function(Uint32 n, Pointer<Uint32> arrays)>>()
+      .cast<NativeFunction<Void Function(Int32 n, Pointer<Uint32> arrays)>>()
       .asFunction<void Function(int n, Pointer<Uint32> arrays)>();
   return glGenVertexArraysAppleAsFunction(n, arrays);
 }
@@ -28568,7 +28144,7 @@ late Pointer<NativeFunction<Void Function()>> _glIsVertexArrayApple;
 /// {@category opengl_glext}
 int glIsVertexArrayApple(int array) {
   final glIsVertexArrayAppleAsFunction = _glIsVertexArrayApple
-      .cast<NativeFunction<Int32 Function(Uint32 array)>>()
+      .cast<NativeFunction<Uint8 Function(Uint32 array)>>()
       .asFunction<int Function(int array)>();
   return glIsVertexArrayAppleAsFunction(array);
 }
@@ -28580,14 +28156,12 @@ late Pointer<NativeFunction<Void Function()>> _glVertexArrayRangeApple;
 /// GLAPI void APIENTRY glVertexArrayRangeAPPLE (GLsizei length, void *pointer)
 /// ```
 /// {@category opengl_glext}
-void glVertexArrayRangeApple(int length, Pointer<NativeType> pointer) {
+void glVertexArrayRangeApple(int length, Pointer<Void> pointer) {
   final glVertexArrayRangeAppleAsFunction = _glVertexArrayRangeApple
       .cast<
-        NativeFunction<
-          Void Function(Uint32 length, Pointer<NativeType> pointer)
-        >
+        NativeFunction<Void Function(Int32 length, Pointer<Void> pointer)>
       >()
-      .asFunction<void Function(int length, Pointer<NativeType> pointer)>();
+      .asFunction<void Function(int length, Pointer<Void> pointer)>();
   return glVertexArrayRangeAppleAsFunction(length, pointer);
 }
 
@@ -28598,14 +28172,12 @@ late Pointer<NativeFunction<Void Function()>> _glFlushVertexArrayRangeApple;
 /// GLAPI void APIENTRY glFlushVertexArrayRangeAPPLE (GLsizei length, void *pointer)
 /// ```
 /// {@category opengl_glext}
-void glFlushVertexArrayRangeApple(int length, Pointer<NativeType> pointer) {
+void glFlushVertexArrayRangeApple(int length, Pointer<Void> pointer) {
   final glFlushVertexArrayRangeAppleAsFunction = _glFlushVertexArrayRangeApple
       .cast<
-        NativeFunction<
-          Void Function(Uint32 length, Pointer<NativeType> pointer)
-        >
+        NativeFunction<Void Function(Int32 length, Pointer<Void> pointer)>
       >()
-      .asFunction<void Function(int length, Pointer<NativeType> pointer)>();
+      .asFunction<void Function(int length, Pointer<Void> pointer)>();
   return glFlushVertexArrayRangeAppleAsFunction(length, pointer);
 }
 
@@ -28660,7 +28232,7 @@ late Pointer<NativeFunction<Void Function()>> _glIsVertexAttribEnabledApple;
 /// {@category opengl_glext}
 int glIsVertexAttribEnabledApple(int index, int pname) {
   final glIsVertexAttribEnabledAppleAsFunction = _glIsVertexAttribEnabledApple
-      .cast<NativeFunction<Int32 Function(Uint32 index, Uint32 pname)>>()
+      .cast<NativeFunction<Uint8 Function(Uint32 index, Uint32 pname)>>()
       .asFunction<int Function(int index, int pname)>();
   return glIsVertexAttribEnabledAppleAsFunction(index, pname);
 }
@@ -28914,7 +28486,7 @@ late Pointer<NativeFunction<Void Function()>> _glDrawBuffersAti;
 /// {@category opengl_glext}
 void glDrawBuffersAti(int n, Pointer<Uint32> bufs) {
   final glDrawBuffersAtiAsFunction = _glDrawBuffersAti
-      .cast<NativeFunction<Void Function(Uint32 n, Pointer<Uint32> bufs)>>()
+      .cast<NativeFunction<Void Function(Int32 n, Pointer<Uint32> bufs)>>()
       .asFunction<void Function(int n, Pointer<Uint32> bufs)>();
   return glDrawBuffersAtiAsFunction(n, bufs);
 }
@@ -28926,12 +28498,10 @@ late Pointer<NativeFunction<Void Function()>> _glElementPointerAti;
 /// GLAPI void APIENTRY glElementPointerATI (GLenum type, const void *pointer)
 /// ```
 /// {@category opengl_glext}
-void glElementPointerAti(int type, Pointer<NativeType> pointer) {
+void glElementPointerAti(int type, Pointer<Void> pointer) {
   final glElementPointerAtiAsFunction = _glElementPointerAti
-      .cast<
-        NativeFunction<Void Function(Uint32 type, Pointer<NativeType> pointer)>
-      >()
-      .asFunction<void Function(int type, Pointer<NativeType> pointer)>();
+      .cast<NativeFunction<Void Function(Uint32 type, Pointer<Void> pointer)>>()
+      .asFunction<void Function(int type, Pointer<Void> pointer)>();
   return glElementPointerAtiAsFunction(type, pointer);
 }
 
@@ -28944,7 +28514,7 @@ late Pointer<NativeFunction<Void Function()>> _glDrawElementArrayAti;
 /// {@category opengl_glext}
 void glDrawElementArrayAti(int mode, int count) {
   final glDrawElementArrayAtiAsFunction = _glDrawElementArrayAti
-      .cast<NativeFunction<Void Function(Uint32 mode, Uint32 count)>>()
+      .cast<NativeFunction<Void Function(Uint32 mode, Int32 count)>>()
       .asFunction<void Function(int mode, int count)>();
   return glDrawElementArrayAtiAsFunction(mode, count);
 }
@@ -28960,7 +28530,7 @@ void glDrawRangeElementArrayAti(int mode, int start, int end, int count) {
   final glDrawRangeElementArrayAtiAsFunction = _glDrawRangeElementArrayAti
       .cast<
         NativeFunction<
-          Void Function(Uint32 mode, Uint32 start, Uint32 end, Uint32 count)
+          Void Function(Uint32 mode, Uint32 start, Uint32 end, Int32 count)
         >
       >()
       .asFunction<void Function(int mode, int start, int end, int count)>();
@@ -29521,10 +29091,10 @@ late Pointer<NativeFunction<Void Function()>> _glMapObjectBufferAti;
 /// GLAPI void *APIENTRY glMapObjectBufferATI (GLuint buffer)
 /// ```
 /// {@category opengl_glext}
-Pointer<NativeType> glMapObjectBufferAti(int buffer) {
+Pointer<Void> glMapObjectBufferAti(int buffer) {
   final glMapObjectBufferAtiAsFunction = _glMapObjectBufferAti
-      .cast<NativeFunction<Pointer<NativeType> Function(Uint32 buffer)>>()
-      .asFunction<Pointer<NativeType> Function(int buffer)>();
+      .cast<NativeFunction<Pointer<Void> Function(Uint32 buffer)>>()
+      .asFunction<Pointer<Void> Function(int buffer)>();
   return glMapObjectBufferAtiAsFunction(buffer);
 }
 
@@ -29620,20 +29190,14 @@ late Pointer<NativeFunction<Void Function()>> _glNewObjectBufferAti;
 /// GLAPI GLuint APIENTRY glNewObjectBufferATI (GLsizei size, const void *pointer, GLenum usage)
 /// ```
 /// {@category opengl_glext}
-int glNewObjectBufferAti(int size, Pointer<NativeType> pointer, int usage) {
+int glNewObjectBufferAti(int size, Pointer<Void> pointer, int usage) {
   final glNewObjectBufferAtiAsFunction = _glNewObjectBufferAti
       .cast<
         NativeFunction<
-          Uint32 Function(
-            Uint32 size,
-            Pointer<NativeType> pointer,
-            Uint32 usage,
-          )
+          Uint32 Function(Int32 size, Pointer<Void> pointer, Uint32 usage)
         >
       >()
-      .asFunction<
-        int Function(int size, Pointer<NativeType> pointer, int usage)
-      >();
+      .asFunction<int Function(int size, Pointer<Void> pointer, int usage)>();
   return glNewObjectBufferAtiAsFunction(size, pointer, usage);
 }
 
@@ -29646,7 +29210,7 @@ late Pointer<NativeFunction<Void Function()>> _glIsObjectBufferAti;
 /// {@category opengl_glext}
 int glIsObjectBufferAti(int buffer) {
   final glIsObjectBufferAtiAsFunction = _glIsObjectBufferAti
-      .cast<NativeFunction<Int32 Function(Uint32 buffer)>>()
+      .cast<NativeFunction<Uint8 Function(Uint32 buffer)>>()
       .asFunction<int Function(int buffer)>();
   return glIsObjectBufferAtiAsFunction(buffer);
 }
@@ -29662,7 +29226,7 @@ void glUpdateObjectBufferAti(
   int buffer,
   int offset,
   int size,
-  Pointer<NativeType> pointer,
+  Pointer<Void> pointer,
   int preserve,
 ) {
   final glUpdateObjectBufferAtiAsFunction = _glUpdateObjectBufferAti
@@ -29671,8 +29235,8 @@ void glUpdateObjectBufferAti(
           Void Function(
             Uint32 buffer,
             Uint32 offset,
-            Uint32 size,
-            Pointer<NativeType> pointer,
+            Int32 size,
+            Pointer<Void> pointer,
             Uint32 preserve,
           )
         >
@@ -29682,7 +29246,7 @@ void glUpdateObjectBufferAti(
           int buffer,
           int offset,
           int size,
-          Pointer<NativeType> pointer,
+          Pointer<Void> pointer,
           int preserve,
         )
       >();
@@ -29771,7 +29335,7 @@ void glArrayObjectAti(
             Uint32 array,
             Int32 size,
             Uint32 type,
-            Uint32 stride,
+            Int32 stride,
             Uint32 buffer,
             Uint32 offset,
           )
@@ -29846,7 +29410,7 @@ void glVariantArrayObjectAti(
           Void Function(
             Uint32 id,
             Uint32 type,
-            Uint32 stride,
+            Int32 stride,
             Uint32 buffer,
             Uint32 offset,
           )
@@ -29917,8 +29481,8 @@ void glVertexAttribArrayObjectAti(
             Uint32 index,
             Int32 size,
             Uint32 type,
-            Int32 normalized,
-            Uint32 stride,
+            Uint8 normalized,
+            Int32 stride,
             Uint32 buffer,
             Uint32 offset,
           )
@@ -30730,7 +30294,7 @@ late Pointer<NativeFunction<Void Function()>> _glEglImageTargetTexStorageExt;
 /// {@category opengl_glext}
 void glEglImageTargetTexStorageExt(
   int target,
-  Pointer<NativeType> image,
+  Pointer<Void> image,
   Pointer<Int32> attribList,
 ) {
   final glEglImageTargetTexStorageExtAsFunction = _glEglImageTargetTexStorageExt
@@ -30738,7 +30302,7 @@ void glEglImageTargetTexStorageExt(
         NativeFunction<
           Void Function(
             Uint32 target,
-            Pointer<NativeType> image,
+            Pointer<Void> image,
             Pointer<Int32> attribList,
           )
         >
@@ -30746,7 +30310,7 @@ void glEglImageTargetTexStorageExt(
       .asFunction<
         void Function(
           int target,
-          Pointer<NativeType> image,
+          Pointer<Void> image,
           Pointer<Int32> attribList,
         )
       >();
@@ -30763,7 +30327,7 @@ _glEglImageTargetTextureStorageExt;
 /// {@category opengl_glext}
 void glEglImageTargetTextureStorageExt(
   int texture,
-  Pointer<NativeType> image,
+  Pointer<Void> image,
   Pointer<Int32> attribList,
 ) {
   final glEglImageTargetTextureStorageExtAsFunction =
@@ -30772,7 +30336,7 @@ void glEglImageTargetTextureStorageExt(
             NativeFunction<
               Void Function(
                 Uint32 texture,
-                Pointer<NativeType> image,
+                Pointer<Void> image,
                 Pointer<Int32> attribList,
               )
             >
@@ -30780,7 +30344,7 @@ void glEglImageTargetTextureStorageExt(
           .asFunction<
             void Function(
               int texture,
-              Pointer<NativeType> image,
+              Pointer<Void> image,
               Pointer<Int32> attribList,
             )
           >();
@@ -30830,14 +30394,10 @@ late Pointer<NativeFunction<Void Function()>> _glGetUniformOffsetExt;
 /// GLAPI GLintptr APIENTRY glGetUniformOffsetEXT (GLuint program, GLint location)
 /// ```
 /// {@category opengl_glext}
-Pointer<NativeType> glGetUniformOffsetExt(int program, int location) {
+int glGetUniformOffsetExt(int program, int location) {
   final glGetUniformOffsetExtAsFunction = _glGetUniformOffsetExt
-      .cast<
-        NativeFunction<
-          Pointer<NativeType> Function(Uint32 program, Int32 location)
-        >
-      >()
-      .asFunction<Pointer<NativeType> Function(int program, int location)>();
+      .cast<NativeFunction<IntPtr Function(Uint32 program, Int32 location)>>()
+      .asFunction<int Function(int program, int location)>();
   return glGetUniformOffsetExtAsFunction(program, location);
 }
 
@@ -30942,18 +30502,18 @@ void glColorSubTableExt(
   int count,
   int format,
   int type,
-  Pointer<NativeType> data,
+  Pointer<Void> data,
 ) {
   final glColorSubTableExtAsFunction = _glColorSubTableExt
       .cast<
         NativeFunction<
           Void Function(
             Uint32 target,
-            Uint32 start,
-            Uint32 count,
+            Int32 start,
+            Int32 count,
             Uint32 format,
             Uint32 type,
-            Pointer<NativeType> data,
+            Pointer<Void> data,
           )
         >
       >()
@@ -30964,7 +30524,7 @@ void glColorSubTableExt(
           int count,
           int format,
           int type,
-          Pointer<NativeType> data,
+          Pointer<Void> data,
         )
       >();
   return glColorSubTableExtAsFunction(target, start, count, format, type, data);
@@ -30983,10 +30543,10 @@ void glCopyColorSubTableExt(int target, int start, int x, int y, int width) {
         NativeFunction<
           Void Function(
             Uint32 target,
-            Uint32 start,
+            Int32 start,
             Int32 x,
             Int32 y,
-            Uint32 width,
+            Int32 width,
           )
         >
       >()
@@ -31005,7 +30565,7 @@ late Pointer<NativeFunction<Void Function()>> _glLockArraysExt;
 /// {@category opengl_glext}
 void glLockArraysExt(int first, int count) {
   final glLockArraysExtAsFunction = _glLockArraysExt
-      .cast<NativeFunction<Void Function(Int32 first, Uint32 count)>>()
+      .cast<NativeFunction<Void Function(Int32 first, Int32 count)>>()
       .asFunction<void Function(int first, int count)>();
   return glLockArraysExtAsFunction(first, count);
 }
@@ -31037,7 +30597,7 @@ void glConvolutionFilter1Dext(
   int width,
   int format,
   int type,
-  Pointer<NativeType> image,
+  Pointer<Void> image,
 ) {
   final glConvolutionFilter1DextAsFunction = _glConvolutionFilter1Dext
       .cast<
@@ -31045,10 +30605,10 @@ void glConvolutionFilter1Dext(
           Void Function(
             Uint32 target,
             Uint32 internalformat,
-            Uint32 width,
+            Int32 width,
             Uint32 format,
             Uint32 type,
-            Pointer<NativeType> image,
+            Pointer<Void> image,
           )
         >
       >()
@@ -31059,7 +30619,7 @@ void glConvolutionFilter1Dext(
           int width,
           int format,
           int type,
-          Pointer<NativeType> image,
+          Pointer<Void> image,
         )
       >();
   return glConvolutionFilter1DextAsFunction(
@@ -31086,7 +30646,7 @@ void glConvolutionFilter2Dext(
   int height,
   int format,
   int type,
-  Pointer<NativeType> image,
+  Pointer<Void> image,
 ) {
   final glConvolutionFilter2DextAsFunction = _glConvolutionFilter2Dext
       .cast<
@@ -31094,11 +30654,11 @@ void glConvolutionFilter2Dext(
           Void Function(
             Uint32 target,
             Uint32 internalformat,
-            Uint32 width,
-            Uint32 height,
+            Int32 width,
+            Int32 height,
             Uint32 format,
             Uint32 type,
-            Pointer<NativeType> image,
+            Pointer<Void> image,
           )
         >
       >()
@@ -31110,7 +30670,7 @@ void glConvolutionFilter2Dext(
           int height,
           int format,
           int type,
-          Pointer<NativeType> image,
+          Pointer<Void> image,
         )
       >();
   return glConvolutionFilter2DextAsFunction(
@@ -31218,7 +30778,7 @@ void glCopyConvolutionFilter1Dext(
             Uint32 internalformat,
             Int32 x,
             Int32 y,
-            Uint32 width,
+            Int32 width,
           )
         >
       >()
@@ -31257,8 +30817,8 @@ void glCopyConvolutionFilter2Dext(
             Uint32 internalformat,
             Int32 x,
             Int32 y,
-            Uint32 width,
-            Uint32 height,
+            Int32 width,
+            Int32 height,
           )
         >
       >()
@@ -31293,7 +30853,7 @@ void glGetConvolutionFilterExt(
   int target,
   int format,
   int type,
-  Pointer<NativeType> image,
+  Pointer<Void> image,
 ) {
   final glGetConvolutionFilterExtAsFunction = _glGetConvolutionFilterExt
       .cast<
@@ -31302,17 +30862,12 @@ void glGetConvolutionFilterExt(
             Uint32 target,
             Uint32 format,
             Uint32 type,
-            Pointer<NativeType> image,
+            Pointer<Void> image,
           )
         >
       >()
       .asFunction<
-        void Function(
-          int target,
-          int format,
-          int type,
-          Pointer<NativeType> image,
-        )
+        void Function(int target, int format, int type, Pointer<Void> image)
       >();
   return glGetConvolutionFilterExtAsFunction(target, format, type, image);
 }
@@ -31378,9 +30933,9 @@ void glGetSeparableFilterExt(
   int target,
   int format,
   int type,
-  Pointer<NativeType> row,
-  Pointer<NativeType> column,
-  Pointer<NativeType> span,
+  Pointer<Void> row,
+  Pointer<Void> column,
+  Pointer<Void> span,
 ) {
   final glGetSeparableFilterExtAsFunction = _glGetSeparableFilterExt
       .cast<
@@ -31389,9 +30944,9 @@ void glGetSeparableFilterExt(
             Uint32 target,
             Uint32 format,
             Uint32 type,
-            Pointer<NativeType> row,
-            Pointer<NativeType> column,
-            Pointer<NativeType> span,
+            Pointer<Void> row,
+            Pointer<Void> column,
+            Pointer<Void> span,
           )
         >
       >()
@@ -31400,9 +30955,9 @@ void glGetSeparableFilterExt(
           int target,
           int format,
           int type,
-          Pointer<NativeType> row,
-          Pointer<NativeType> column,
-          Pointer<NativeType> span,
+          Pointer<Void> row,
+          Pointer<Void> column,
+          Pointer<Void> span,
         )
       >();
   return glGetSeparableFilterExtAsFunction(
@@ -31429,8 +30984,8 @@ void glSeparableFilter2Dext(
   int height,
   int format,
   int type,
-  Pointer<NativeType> row,
-  Pointer<NativeType> column,
+  Pointer<Void> row,
+  Pointer<Void> column,
 ) {
   final glSeparableFilter2DextAsFunction = _glSeparableFilter2Dext
       .cast<
@@ -31438,12 +30993,12 @@ void glSeparableFilter2Dext(
           Void Function(
             Uint32 target,
             Uint32 internalformat,
-            Uint32 width,
-            Uint32 height,
+            Int32 width,
+            Int32 height,
             Uint32 format,
             Uint32 type,
-            Pointer<NativeType> row,
-            Pointer<NativeType> column,
+            Pointer<Void> row,
+            Pointer<Void> column,
           )
         >
       >()
@@ -31455,8 +31010,8 @@ void glSeparableFilter2Dext(
           int height,
           int format,
           int type,
-          Pointer<NativeType> row,
-          Pointer<NativeType> column,
+          Pointer<Void> row,
+          Pointer<Void> column,
         )
       >();
   return glSeparableFilter2DextAsFunction(
@@ -31764,16 +31319,14 @@ late Pointer<NativeFunction<Void Function()>> _glTangentPointerExt;
 /// GLAPI void APIENTRY glTangentPointerEXT (GLenum type, GLsizei stride, const void *pointer)
 /// ```
 /// {@category opengl_glext}
-void glTangentPointerExt(int type, int stride, Pointer<NativeType> pointer) {
+void glTangentPointerExt(int type, int stride, Pointer<Void> pointer) {
   final glTangentPointerExtAsFunction = _glTangentPointerExt
       .cast<
         NativeFunction<
-          Void Function(Uint32 type, Uint32 stride, Pointer<NativeType> pointer)
+          Void Function(Uint32 type, Int32 stride, Pointer<Void> pointer)
         >
       >()
-      .asFunction<
-        void Function(int type, int stride, Pointer<NativeType> pointer)
-      >();
+      .asFunction<void Function(int type, int stride, Pointer<Void> pointer)>();
   return glTangentPointerExtAsFunction(type, stride, pointer);
 }
 
@@ -31784,16 +31337,14 @@ late Pointer<NativeFunction<Void Function()>> _glBinormalPointerExt;
 /// GLAPI void APIENTRY glBinormalPointerEXT (GLenum type, GLsizei stride, const void *pointer)
 /// ```
 /// {@category opengl_glext}
-void glBinormalPointerExt(int type, int stride, Pointer<NativeType> pointer) {
+void glBinormalPointerExt(int type, int stride, Pointer<Void> pointer) {
   final glBinormalPointerExtAsFunction = _glBinormalPointerExt
       .cast<
         NativeFunction<
-          Void Function(Uint32 type, Uint32 stride, Pointer<NativeType> pointer)
+          Void Function(Uint32 type, Int32 stride, Pointer<Void> pointer)
         >
       >()
-      .asFunction<
-        void Function(int type, int stride, Pointer<NativeType> pointer)
-      >();
+      .asFunction<void Function(int type, int stride, Pointer<Void> pointer)>();
   return glBinormalPointerExtAsFunction(type, stride, pointer);
 }
 
@@ -31822,7 +31373,7 @@ void glCopyTexImage1Dext(
             Uint32 internalformat,
             Int32 x,
             Int32 y,
-            Uint32 width,
+            Int32 width,
             Int32 border,
           )
         >
@@ -31875,8 +31426,8 @@ void glCopyTexImage2Dext(
             Uint32 internalformat,
             Int32 x,
             Int32 y,
-            Uint32 width,
-            Uint32 height,
+            Int32 width,
+            Int32 height,
             Int32 border,
           )
         >
@@ -31929,7 +31480,7 @@ void glCopyTexSubImage1Dext(
             Int32 xoffset,
             Int32 x,
             Int32 y,
-            Uint32 width,
+            Int32 width,
           )
         >
       >()
@@ -31973,8 +31524,8 @@ void glCopyTexSubImage2Dext(
             Int32 yoffset,
             Int32 x,
             Int32 y,
-            Uint32 width,
-            Uint32 height,
+            Int32 width,
+            Int32 height,
           )
         >
       >()
@@ -32031,8 +31582,8 @@ void glCopyTexSubImage3Dext(
             Int32 zoffset,
             Int32 x,
             Int32 y,
-            Uint32 width,
-            Uint32 height,
+            Int32 width,
+            Int32 height,
           )
         >
       >()
@@ -32108,7 +31659,7 @@ void glLabelObjectExt(int type, int object, int length, String label) {
           Void Function(
             Uint32 type,
             Uint32 object,
-            Uint32 length,
+            Int32 length,
             Pointer<Utf8> label,
           )
         >
@@ -32133,7 +31684,7 @@ void glGetObjectLabelExt(
   int type,
   int object,
   int bufSize,
-  Pointer<Uint32> length,
+  Pointer<Int32> length,
   Pointer<Int8> label,
 ) {
   final glGetObjectLabelExtAsFunction = _glGetObjectLabelExt
@@ -32142,8 +31693,8 @@ void glGetObjectLabelExt(
           Void Function(
             Uint32 type,
             Uint32 object,
-            Uint32 bufSize,
-            Pointer<Uint32> length,
+            Int32 bufSize,
+            Pointer<Int32> length,
             Pointer<Int8> label,
           )
         >
@@ -32153,7 +31704,7 @@ void glGetObjectLabelExt(
           int type,
           int object,
           int bufSize,
-          Pointer<Uint32> length,
+          Pointer<Int32> length,
           Pointer<Int8> label,
         )
       >();
@@ -32169,9 +31720,7 @@ late Pointer<NativeFunction<Void Function()>> _glInsertEventMarkerExt;
 /// {@category opengl_glext}
 void glInsertEventMarkerExt(int length, String marker) {
   final glInsertEventMarkerExtAsFunction = _glInsertEventMarkerExt
-      .cast<
-        NativeFunction<Void Function(Uint32 length, Pointer<Utf8> marker)>
-      >()
+      .cast<NativeFunction<Void Function(Int32 length, Pointer<Utf8> marker)>>()
       .asFunction<void Function(int length, Pointer<Utf8> marker)>();
   final markerPointer = marker.toNativeUtf8();
   final result = glInsertEventMarkerExtAsFunction(length, markerPointer);
@@ -32188,9 +31737,7 @@ late Pointer<NativeFunction<Void Function()>> _glPushGroupMarkerExt;
 /// {@category opengl_glext}
 void glPushGroupMarkerExt(int length, String marker) {
   final glPushGroupMarkerExtAsFunction = _glPushGroupMarkerExt
-      .cast<
-        NativeFunction<Void Function(Uint32 length, Pointer<Utf8> marker)>
-      >()
+      .cast<NativeFunction<Void Function(Int32 length, Pointer<Utf8> marker)>>()
       .asFunction<void Function(int length, Pointer<Utf8> marker)>();
   final markerPointer = marker.toNativeUtf8();
   final result = glPushGroupMarkerExtAsFunction(length, markerPointer);
@@ -32686,7 +32233,7 @@ void glTextureImage1Dext(
   int border,
   int format,
   int type,
-  Pointer<NativeType> pixels,
+  Pointer<Void> pixels,
 ) {
   final glTextureImage1DextAsFunction = _glTextureImage1Dext
       .cast<
@@ -32696,11 +32243,11 @@ void glTextureImage1Dext(
             Uint32 target,
             Int32 level,
             Int32 internalformat,
-            Uint32 width,
+            Int32 width,
             Int32 border,
             Uint32 format,
             Uint32 type,
-            Pointer<NativeType> pixels,
+            Pointer<Void> pixels,
           )
         >
       >()
@@ -32714,7 +32261,7 @@ void glTextureImage1Dext(
           int border,
           int format,
           int type,
-          Pointer<NativeType> pixels,
+          Pointer<Void> pixels,
         )
       >();
   return glTextureImage1DextAsFunction(
@@ -32747,7 +32294,7 @@ void glTextureImage2Dext(
   int border,
   int format,
   int type,
-  Pointer<NativeType> pixels,
+  Pointer<Void> pixels,
 ) {
   final glTextureImage2DextAsFunction = _glTextureImage2Dext
       .cast<
@@ -32757,12 +32304,12 @@ void glTextureImage2Dext(
             Uint32 target,
             Int32 level,
             Int32 internalformat,
-            Uint32 width,
-            Uint32 height,
+            Int32 width,
+            Int32 height,
             Int32 border,
             Uint32 format,
             Uint32 type,
-            Pointer<NativeType> pixels,
+            Pointer<Void> pixels,
           )
         >
       >()
@@ -32777,7 +32324,7 @@ void glTextureImage2Dext(
           int border,
           int format,
           int type,
-          Pointer<NativeType> pixels,
+          Pointer<Void> pixels,
         )
       >();
   return glTextureImage2DextAsFunction(
@@ -32809,7 +32356,7 @@ void glTextureSubImage1Dext(
   int width,
   int format,
   int type,
-  Pointer<NativeType> pixels,
+  Pointer<Void> pixels,
 ) {
   final glTextureSubImage1DextAsFunction = _glTextureSubImage1Dext
       .cast<
@@ -32819,10 +32366,10 @@ void glTextureSubImage1Dext(
             Uint32 target,
             Int32 level,
             Int32 xoffset,
-            Uint32 width,
+            Int32 width,
             Uint32 format,
             Uint32 type,
-            Pointer<NativeType> pixels,
+            Pointer<Void> pixels,
           )
         >
       >()
@@ -32835,7 +32382,7 @@ void glTextureSubImage1Dext(
           int width,
           int format,
           int type,
-          Pointer<NativeType> pixels,
+          Pointer<Void> pixels,
         )
       >();
   return glTextureSubImage1DextAsFunction(
@@ -32867,7 +32414,7 @@ void glTextureSubImage2Dext(
   int height,
   int format,
   int type,
-  Pointer<NativeType> pixels,
+  Pointer<Void> pixels,
 ) {
   final glTextureSubImage2DextAsFunction = _glTextureSubImage2Dext
       .cast<
@@ -32878,11 +32425,11 @@ void glTextureSubImage2Dext(
             Int32 level,
             Int32 xoffset,
             Int32 yoffset,
-            Uint32 width,
-            Uint32 height,
+            Int32 width,
+            Int32 height,
             Uint32 format,
             Uint32 type,
-            Pointer<NativeType> pixels,
+            Pointer<Void> pixels,
           )
         >
       >()
@@ -32897,7 +32444,7 @@ void glTextureSubImage2Dext(
           int height,
           int format,
           int type,
-          Pointer<NativeType> pixels,
+          Pointer<Void> pixels,
         )
       >();
   return glTextureSubImage2DextAsFunction(
@@ -32941,7 +32488,7 @@ void glCopyTextureImage1Dext(
             Uint32 internalformat,
             Int32 x,
             Int32 y,
-            Uint32 width,
+            Int32 width,
             Int32 border,
           )
         >
@@ -32998,8 +32545,8 @@ void glCopyTextureImage2Dext(
             Uint32 internalformat,
             Int32 x,
             Int32 y,
-            Uint32 width,
-            Uint32 height,
+            Int32 width,
+            Int32 height,
             Int32 border,
           )
         >
@@ -33056,7 +32603,7 @@ void glCopyTextureSubImage1Dext(
             Int32 xoffset,
             Int32 x,
             Int32 y,
-            Uint32 width,
+            Int32 width,
           )
         >
       >()
@@ -33111,8 +32658,8 @@ void glCopyTextureSubImage2Dext(
             Int32 yoffset,
             Int32 x,
             Int32 y,
-            Uint32 width,
-            Uint32 height,
+            Int32 width,
+            Int32 height,
           )
         >
       >()
@@ -33155,7 +32702,7 @@ void glGetTextureImageExt(
   int level,
   int format,
   int type,
-  Pointer<NativeType> pixels,
+  Pointer<Void> pixels,
 ) {
   final glGetTextureImageExtAsFunction = _glGetTextureImageExt
       .cast<
@@ -33166,7 +32713,7 @@ void glGetTextureImageExt(
             Int32 level,
             Uint32 format,
             Uint32 type,
-            Pointer<NativeType> pixels,
+            Pointer<Void> pixels,
           )
         >
       >()
@@ -33177,7 +32724,7 @@ void glGetTextureImageExt(
           int level,
           int format,
           int type,
-          Pointer<NativeType> pixels,
+          Pointer<Void> pixels,
         )
       >();
   return glGetTextureImageExtAsFunction(
@@ -33358,7 +32905,7 @@ void glTextureImage3Dext(
   int border,
   int format,
   int type,
-  Pointer<NativeType> pixels,
+  Pointer<Void> pixels,
 ) {
   final glTextureImage3DextAsFunction = _glTextureImage3Dext
       .cast<
@@ -33368,13 +32915,13 @@ void glTextureImage3Dext(
             Uint32 target,
             Int32 level,
             Int32 internalformat,
-            Uint32 width,
-            Uint32 height,
-            Uint32 depth,
+            Int32 width,
+            Int32 height,
+            Int32 depth,
             Int32 border,
             Uint32 format,
             Uint32 type,
-            Pointer<NativeType> pixels,
+            Pointer<Void> pixels,
           )
         >
       >()
@@ -33390,7 +32937,7 @@ void glTextureImage3Dext(
           int border,
           int format,
           int type,
-          Pointer<NativeType> pixels,
+          Pointer<Void> pixels,
         )
       >();
   return glTextureImage3DextAsFunction(
@@ -33427,7 +32974,7 @@ void glTextureSubImage3Dext(
   int depth,
   int format,
   int type,
-  Pointer<NativeType> pixels,
+  Pointer<Void> pixels,
 ) {
   final glTextureSubImage3DextAsFunction = _glTextureSubImage3Dext
       .cast<
@@ -33439,12 +32986,12 @@ void glTextureSubImage3Dext(
             Int32 xoffset,
             Int32 yoffset,
             Int32 zoffset,
-            Uint32 width,
-            Uint32 height,
-            Uint32 depth,
+            Int32 width,
+            Int32 height,
+            Int32 depth,
             Uint32 format,
             Uint32 type,
-            Pointer<NativeType> pixels,
+            Pointer<Void> pixels,
           )
         >
       >()
@@ -33461,7 +33008,7 @@ void glTextureSubImage3Dext(
           int depth,
           int format,
           int type,
-          Pointer<NativeType> pixels,
+          Pointer<Void> pixels,
         )
       >();
   return glTextureSubImage3DextAsFunction(
@@ -33511,8 +33058,8 @@ void glCopyTextureSubImage3Dext(
             Int32 zoffset,
             Int32 x,
             Int32 y,
-            Uint32 width,
-            Uint32 height,
+            Int32 width,
+            Int32 height,
           )
         >
       >()
@@ -33574,7 +33121,7 @@ void glMultiTexCoordPointerExt(
   int size,
   int type,
   int stride,
-  Pointer<NativeType> pointer,
+  Pointer<Void> pointer,
 ) {
   final glMultiTexCoordPointerExtAsFunction = _glMultiTexCoordPointerExt
       .cast<
@@ -33583,8 +33130,8 @@ void glMultiTexCoordPointerExt(
             Uint32 texunit,
             Int32 size,
             Uint32 type,
-            Uint32 stride,
-            Pointer<NativeType> pointer,
+            Int32 stride,
+            Pointer<Void> pointer,
           )
         >
       >()
@@ -33594,7 +33141,7 @@ void glMultiTexCoordPointerExt(
           int size,
           int type,
           int stride,
-          Pointer<NativeType> pointer,
+          Pointer<Void> pointer,
         )
       >();
   return glMultiTexCoordPointerExtAsFunction(
@@ -34147,7 +33694,7 @@ void glMultiTexImage1Dext(
   int border,
   int format,
   int type,
-  Pointer<NativeType> pixels,
+  Pointer<Void> pixels,
 ) {
   final glMultiTexImage1DextAsFunction = _glMultiTexImage1Dext
       .cast<
@@ -34157,11 +33704,11 @@ void glMultiTexImage1Dext(
             Uint32 target,
             Int32 level,
             Int32 internalformat,
-            Uint32 width,
+            Int32 width,
             Int32 border,
             Uint32 format,
             Uint32 type,
-            Pointer<NativeType> pixels,
+            Pointer<Void> pixels,
           )
         >
       >()
@@ -34175,7 +33722,7 @@ void glMultiTexImage1Dext(
           int border,
           int format,
           int type,
-          Pointer<NativeType> pixels,
+          Pointer<Void> pixels,
         )
       >();
   return glMultiTexImage1DextAsFunction(
@@ -34208,7 +33755,7 @@ void glMultiTexImage2Dext(
   int border,
   int format,
   int type,
-  Pointer<NativeType> pixels,
+  Pointer<Void> pixels,
 ) {
   final glMultiTexImage2DextAsFunction = _glMultiTexImage2Dext
       .cast<
@@ -34218,12 +33765,12 @@ void glMultiTexImage2Dext(
             Uint32 target,
             Int32 level,
             Int32 internalformat,
-            Uint32 width,
-            Uint32 height,
+            Int32 width,
+            Int32 height,
             Int32 border,
             Uint32 format,
             Uint32 type,
-            Pointer<NativeType> pixels,
+            Pointer<Void> pixels,
           )
         >
       >()
@@ -34238,7 +33785,7 @@ void glMultiTexImage2Dext(
           int border,
           int format,
           int type,
-          Pointer<NativeType> pixels,
+          Pointer<Void> pixels,
         )
       >();
   return glMultiTexImage2DextAsFunction(
@@ -34270,7 +33817,7 @@ void glMultiTexSubImage1Dext(
   int width,
   int format,
   int type,
-  Pointer<NativeType> pixels,
+  Pointer<Void> pixels,
 ) {
   final glMultiTexSubImage1DextAsFunction = _glMultiTexSubImage1Dext
       .cast<
@@ -34280,10 +33827,10 @@ void glMultiTexSubImage1Dext(
             Uint32 target,
             Int32 level,
             Int32 xoffset,
-            Uint32 width,
+            Int32 width,
             Uint32 format,
             Uint32 type,
-            Pointer<NativeType> pixels,
+            Pointer<Void> pixels,
           )
         >
       >()
@@ -34296,7 +33843,7 @@ void glMultiTexSubImage1Dext(
           int width,
           int format,
           int type,
-          Pointer<NativeType> pixels,
+          Pointer<Void> pixels,
         )
       >();
   return glMultiTexSubImage1DextAsFunction(
@@ -34328,7 +33875,7 @@ void glMultiTexSubImage2Dext(
   int height,
   int format,
   int type,
-  Pointer<NativeType> pixels,
+  Pointer<Void> pixels,
 ) {
   final glMultiTexSubImage2DextAsFunction = _glMultiTexSubImage2Dext
       .cast<
@@ -34339,11 +33886,11 @@ void glMultiTexSubImage2Dext(
             Int32 level,
             Int32 xoffset,
             Int32 yoffset,
-            Uint32 width,
-            Uint32 height,
+            Int32 width,
+            Int32 height,
             Uint32 format,
             Uint32 type,
-            Pointer<NativeType> pixels,
+            Pointer<Void> pixels,
           )
         >
       >()
@@ -34358,7 +33905,7 @@ void glMultiTexSubImage2Dext(
           int height,
           int format,
           int type,
-          Pointer<NativeType> pixels,
+          Pointer<Void> pixels,
         )
       >();
   return glMultiTexSubImage2DextAsFunction(
@@ -34402,7 +33949,7 @@ void glCopyMultiTexImage1Dext(
             Uint32 internalformat,
             Int32 x,
             Int32 y,
-            Uint32 width,
+            Int32 width,
             Int32 border,
           )
         >
@@ -34459,8 +34006,8 @@ void glCopyMultiTexImage2Dext(
             Uint32 internalformat,
             Int32 x,
             Int32 y,
-            Uint32 width,
-            Uint32 height,
+            Int32 width,
+            Int32 height,
             Int32 border,
           )
         >
@@ -34517,7 +34064,7 @@ void glCopyMultiTexSubImage1Dext(
             Int32 xoffset,
             Int32 x,
             Int32 y,
-            Uint32 width,
+            Int32 width,
           )
         >
       >()
@@ -34572,8 +34119,8 @@ void glCopyMultiTexSubImage2Dext(
             Int32 yoffset,
             Int32 x,
             Int32 y,
-            Uint32 width,
-            Uint32 height,
+            Int32 width,
+            Int32 height,
           )
         >
       >()
@@ -34616,7 +34163,7 @@ void glGetMultiTexImageExt(
   int level,
   int format,
   int type,
-  Pointer<NativeType> pixels,
+  Pointer<Void> pixels,
 ) {
   final glGetMultiTexImageExtAsFunction = _glGetMultiTexImageExt
       .cast<
@@ -34627,7 +34174,7 @@ void glGetMultiTexImageExt(
             Int32 level,
             Uint32 format,
             Uint32 type,
-            Pointer<NativeType> pixels,
+            Pointer<Void> pixels,
           )
         >
       >()
@@ -34638,7 +34185,7 @@ void glGetMultiTexImageExt(
           int level,
           int format,
           int type,
-          Pointer<NativeType> pixels,
+          Pointer<Void> pixels,
         )
       >();
   return glGetMultiTexImageExtAsFunction(
@@ -34819,7 +34366,7 @@ void glMultiTexImage3Dext(
   int border,
   int format,
   int type,
-  Pointer<NativeType> pixels,
+  Pointer<Void> pixels,
 ) {
   final glMultiTexImage3DextAsFunction = _glMultiTexImage3Dext
       .cast<
@@ -34829,13 +34376,13 @@ void glMultiTexImage3Dext(
             Uint32 target,
             Int32 level,
             Int32 internalformat,
-            Uint32 width,
-            Uint32 height,
-            Uint32 depth,
+            Int32 width,
+            Int32 height,
+            Int32 depth,
             Int32 border,
             Uint32 format,
             Uint32 type,
-            Pointer<NativeType> pixels,
+            Pointer<Void> pixels,
           )
         >
       >()
@@ -34851,7 +34398,7 @@ void glMultiTexImage3Dext(
           int border,
           int format,
           int type,
-          Pointer<NativeType> pixels,
+          Pointer<Void> pixels,
         )
       >();
   return glMultiTexImage3DextAsFunction(
@@ -34888,7 +34435,7 @@ void glMultiTexSubImage3Dext(
   int depth,
   int format,
   int type,
-  Pointer<NativeType> pixels,
+  Pointer<Void> pixels,
 ) {
   final glMultiTexSubImage3DextAsFunction = _glMultiTexSubImage3Dext
       .cast<
@@ -34900,12 +34447,12 @@ void glMultiTexSubImage3Dext(
             Int32 xoffset,
             Int32 yoffset,
             Int32 zoffset,
-            Uint32 width,
-            Uint32 height,
-            Uint32 depth,
+            Int32 width,
+            Int32 height,
+            Int32 depth,
             Uint32 format,
             Uint32 type,
-            Pointer<NativeType> pixels,
+            Pointer<Void> pixels,
           )
         >
       >()
@@ -34922,7 +34469,7 @@ void glMultiTexSubImage3Dext(
           int depth,
           int format,
           int type,
-          Pointer<NativeType> pixels,
+          Pointer<Void> pixels,
         )
       >();
   return glMultiTexSubImage3DextAsFunction(
@@ -34972,8 +34519,8 @@ void glCopyMultiTexSubImage3Dext(
             Int32 zoffset,
             Int32 x,
             Int32 y,
-            Uint32 width,
-            Uint32 height,
+            Int32 width,
+            Int32 height,
           )
         >
       >()
@@ -35080,7 +34627,7 @@ late Pointer<NativeFunction<Void Function()>> _glGetPointerIndexedvExt;
 void glGetPointerIndexedvExt(
   int target,
   int index,
-  Pointer<Pointer<NativeType>> data,
+  Pointer<Pointer<Void>> data,
 ) {
   final glGetPointerIndexedvExtAsFunction = _glGetPointerIndexedvExt
       .cast<
@@ -35088,12 +34635,12 @@ void glGetPointerIndexedvExt(
           Void Function(
             Uint32 target,
             Uint32 index,
-            Pointer<Pointer<NativeType>> data,
+            Pointer<Pointer<Void>> data,
           )
         >
       >()
       .asFunction<
-        void Function(int target, int index, Pointer<Pointer<NativeType>> data)
+        void Function(int target, int index, Pointer<Pointer<Void>> data)
       >();
   return glGetPointerIndexedvExtAsFunction(target, index, data);
 }
@@ -35135,7 +34682,7 @@ late Pointer<NativeFunction<Void Function()>> _glIsEnabledIndexedExt;
 /// {@category opengl_glext}
 int glIsEnabledIndexedExt(int target, int index) {
   final glIsEnabledIndexedExtAsFunction = _glIsEnabledIndexedExt
-      .cast<NativeFunction<Int32 Function(Uint32 target, Uint32 index)>>()
+      .cast<NativeFunction<Uint8 Function(Uint32 target, Uint32 index)>>()
       .asFunction<int Function(int target, int index)>();
   return glIsEnabledIndexedExtAsFunction(target, index);
 }
@@ -35165,14 +34712,14 @@ late Pointer<NativeFunction<Void Function()>> _glGetBooleanIndexedvExt;
 /// GLAPI void APIENTRY glGetBooleanIndexedvEXT (GLenum target, GLuint index, GLboolean *data)
 /// ```
 /// {@category opengl_glext}
-void glGetBooleanIndexedvExt(int target, int index, Pointer<Int32> data) {
+void glGetBooleanIndexedvExt(int target, int index, Pointer<Uint8> data) {
   final glGetBooleanIndexedvExtAsFunction = _glGetBooleanIndexedvExt
       .cast<
         NativeFunction<
-          Void Function(Uint32 target, Uint32 index, Pointer<Int32> data)
+          Void Function(Uint32 target, Uint32 index, Pointer<Uint8> data)
         >
       >()
-      .asFunction<void Function(int target, int index, Pointer<Int32> data)>();
+      .asFunction<void Function(int target, int index, Pointer<Uint8> data)>();
   return glGetBooleanIndexedvExtAsFunction(target, index, data);
 }
 
@@ -35193,7 +34740,7 @@ void glCompressedTextureImage3Dext(
   int depth,
   int border,
   int imageSize,
-  Pointer<NativeType> bits,
+  Pointer<Void> bits,
 ) {
   final glCompressedTextureImage3DextAsFunction = _glCompressedTextureImage3Dext
       .cast<
@@ -35203,12 +34750,12 @@ void glCompressedTextureImage3Dext(
             Uint32 target,
             Int32 level,
             Uint32 internalformat,
-            Uint32 width,
-            Uint32 height,
-            Uint32 depth,
+            Int32 width,
+            Int32 height,
+            Int32 depth,
             Int32 border,
-            Uint32 imageSize,
-            Pointer<NativeType> bits,
+            Int32 imageSize,
+            Pointer<Void> bits,
           )
         >
       >()
@@ -35223,7 +34770,7 @@ void glCompressedTextureImage3Dext(
           int depth,
           int border,
           int imageSize,
-          Pointer<NativeType> bits,
+          Pointer<Void> bits,
         )
       >();
   return glCompressedTextureImage3DextAsFunction(
@@ -35256,7 +34803,7 @@ void glCompressedTextureImage2Dext(
   int height,
   int border,
   int imageSize,
-  Pointer<NativeType> bits,
+  Pointer<Void> bits,
 ) {
   final glCompressedTextureImage2DextAsFunction = _glCompressedTextureImage2Dext
       .cast<
@@ -35266,11 +34813,11 @@ void glCompressedTextureImage2Dext(
             Uint32 target,
             Int32 level,
             Uint32 internalformat,
-            Uint32 width,
-            Uint32 height,
+            Int32 width,
+            Int32 height,
             Int32 border,
-            Uint32 imageSize,
-            Pointer<NativeType> bits,
+            Int32 imageSize,
+            Pointer<Void> bits,
           )
         >
       >()
@@ -35284,7 +34831,7 @@ void glCompressedTextureImage2Dext(
           int height,
           int border,
           int imageSize,
-          Pointer<NativeType> bits,
+          Pointer<Void> bits,
         )
       >();
   return glCompressedTextureImage2DextAsFunction(
@@ -35315,7 +34862,7 @@ void glCompressedTextureImage1Dext(
   int width,
   int border,
   int imageSize,
-  Pointer<NativeType> bits,
+  Pointer<Void> bits,
 ) {
   final glCompressedTextureImage1DextAsFunction = _glCompressedTextureImage1Dext
       .cast<
@@ -35325,10 +34872,10 @@ void glCompressedTextureImage1Dext(
             Uint32 target,
             Int32 level,
             Uint32 internalformat,
-            Uint32 width,
+            Int32 width,
             Int32 border,
-            Uint32 imageSize,
-            Pointer<NativeType> bits,
+            Int32 imageSize,
+            Pointer<Void> bits,
           )
         >
       >()
@@ -35341,7 +34888,7 @@ void glCompressedTextureImage1Dext(
           int width,
           int border,
           int imageSize,
-          Pointer<NativeType> bits,
+          Pointer<Void> bits,
         )
       >();
   return glCompressedTextureImage1DextAsFunction(
@@ -35375,7 +34922,7 @@ void glCompressedTextureSubImage3Dext(
   int depth,
   int format,
   int imageSize,
-  Pointer<NativeType> bits,
+  Pointer<Void> bits,
 ) {
   final glCompressedTextureSubImage3DextAsFunction =
       _glCompressedTextureSubImage3Dext
@@ -35388,12 +34935,12 @@ void glCompressedTextureSubImage3Dext(
                 Int32 xoffset,
                 Int32 yoffset,
                 Int32 zoffset,
-                Uint32 width,
-                Uint32 height,
-                Uint32 depth,
+                Int32 width,
+                Int32 height,
+                Int32 depth,
                 Uint32 format,
-                Uint32 imageSize,
-                Pointer<NativeType> bits,
+                Int32 imageSize,
+                Pointer<Void> bits,
               )
             >
           >()
@@ -35410,7 +34957,7 @@ void glCompressedTextureSubImage3Dext(
               int depth,
               int format,
               int imageSize,
-              Pointer<NativeType> bits,
+              Pointer<Void> bits,
             )
           >();
   return glCompressedTextureSubImage3DextAsFunction(
@@ -35446,7 +34993,7 @@ void glCompressedTextureSubImage2Dext(
   int height,
   int format,
   int imageSize,
-  Pointer<NativeType> bits,
+  Pointer<Void> bits,
 ) {
   final glCompressedTextureSubImage2DextAsFunction =
       _glCompressedTextureSubImage2Dext
@@ -35458,11 +35005,11 @@ void glCompressedTextureSubImage2Dext(
                 Int32 level,
                 Int32 xoffset,
                 Int32 yoffset,
-                Uint32 width,
-                Uint32 height,
+                Int32 width,
+                Int32 height,
                 Uint32 format,
-                Uint32 imageSize,
-                Pointer<NativeType> bits,
+                Int32 imageSize,
+                Pointer<Void> bits,
               )
             >
           >()
@@ -35477,7 +35024,7 @@ void glCompressedTextureSubImage2Dext(
               int height,
               int format,
               int imageSize,
-              Pointer<NativeType> bits,
+              Pointer<Void> bits,
             )
           >();
   return glCompressedTextureSubImage2DextAsFunction(
@@ -35509,7 +35056,7 @@ void glCompressedTextureSubImage1Dext(
   int width,
   int format,
   int imageSize,
-  Pointer<NativeType> bits,
+  Pointer<Void> bits,
 ) {
   final glCompressedTextureSubImage1DextAsFunction =
       _glCompressedTextureSubImage1Dext
@@ -35520,10 +35067,10 @@ void glCompressedTextureSubImage1Dext(
                 Uint32 target,
                 Int32 level,
                 Int32 xoffset,
-                Uint32 width,
+                Int32 width,
                 Uint32 format,
-                Uint32 imageSize,
-                Pointer<NativeType> bits,
+                Int32 imageSize,
+                Pointer<Void> bits,
               )
             >
           >()
@@ -35536,7 +35083,7 @@ void glCompressedTextureSubImage1Dext(
               int width,
               int format,
               int imageSize,
-              Pointer<NativeType> bits,
+              Pointer<Void> bits,
             )
           >();
   return glCompressedTextureSubImage1DextAsFunction(
@@ -35562,7 +35109,7 @@ void glGetCompressedTextureImageExt(
   int texture,
   int target,
   int lod,
-  Pointer<NativeType> img,
+  Pointer<Void> img,
 ) {
   final glGetCompressedTextureImageExtAsFunction =
       _glGetCompressedTextureImageExt
@@ -35572,17 +35119,12 @@ void glGetCompressedTextureImageExt(
                 Uint32 texture,
                 Uint32 target,
                 Int32 lod,
-                Pointer<NativeType> img,
+                Pointer<Void> img,
               )
             >
           >()
           .asFunction<
-            void Function(
-              int texture,
-              int target,
-              int lod,
-              Pointer<NativeType> img,
-            )
+            void Function(int texture, int target, int lod, Pointer<Void> img)
           >();
   return glGetCompressedTextureImageExtAsFunction(texture, target, lod, img);
 }
@@ -35604,7 +35146,7 @@ void glCompressedMultiTexImage3Dext(
   int depth,
   int border,
   int imageSize,
-  Pointer<NativeType> bits,
+  Pointer<Void> bits,
 ) {
   final glCompressedMultiTexImage3DextAsFunction =
       _glCompressedMultiTexImage3Dext
@@ -35615,12 +35157,12 @@ void glCompressedMultiTexImage3Dext(
                 Uint32 target,
                 Int32 level,
                 Uint32 internalformat,
-                Uint32 width,
-                Uint32 height,
-                Uint32 depth,
+                Int32 width,
+                Int32 height,
+                Int32 depth,
                 Int32 border,
-                Uint32 imageSize,
-                Pointer<NativeType> bits,
+                Int32 imageSize,
+                Pointer<Void> bits,
               )
             >
           >()
@@ -35635,7 +35177,7 @@ void glCompressedMultiTexImage3Dext(
               int depth,
               int border,
               int imageSize,
-              Pointer<NativeType> bits,
+              Pointer<Void> bits,
             )
           >();
   return glCompressedMultiTexImage3DextAsFunction(
@@ -35668,7 +35210,7 @@ void glCompressedMultiTexImage2Dext(
   int height,
   int border,
   int imageSize,
-  Pointer<NativeType> bits,
+  Pointer<Void> bits,
 ) {
   final glCompressedMultiTexImage2DextAsFunction =
       _glCompressedMultiTexImage2Dext
@@ -35679,11 +35221,11 @@ void glCompressedMultiTexImage2Dext(
                 Uint32 target,
                 Int32 level,
                 Uint32 internalformat,
-                Uint32 width,
-                Uint32 height,
+                Int32 width,
+                Int32 height,
                 Int32 border,
-                Uint32 imageSize,
-                Pointer<NativeType> bits,
+                Int32 imageSize,
+                Pointer<Void> bits,
               )
             >
           >()
@@ -35697,7 +35239,7 @@ void glCompressedMultiTexImage2Dext(
               int height,
               int border,
               int imageSize,
-              Pointer<NativeType> bits,
+              Pointer<Void> bits,
             )
           >();
   return glCompressedMultiTexImage2DextAsFunction(
@@ -35728,7 +35270,7 @@ void glCompressedMultiTexImage1Dext(
   int width,
   int border,
   int imageSize,
-  Pointer<NativeType> bits,
+  Pointer<Void> bits,
 ) {
   final glCompressedMultiTexImage1DextAsFunction =
       _glCompressedMultiTexImage1Dext
@@ -35739,10 +35281,10 @@ void glCompressedMultiTexImage1Dext(
                 Uint32 target,
                 Int32 level,
                 Uint32 internalformat,
-                Uint32 width,
+                Int32 width,
                 Int32 border,
-                Uint32 imageSize,
-                Pointer<NativeType> bits,
+                Int32 imageSize,
+                Pointer<Void> bits,
               )
             >
           >()
@@ -35755,7 +35297,7 @@ void glCompressedMultiTexImage1Dext(
               int width,
               int border,
               int imageSize,
-              Pointer<NativeType> bits,
+              Pointer<Void> bits,
             )
           >();
   return glCompressedMultiTexImage1DextAsFunction(
@@ -35790,7 +35332,7 @@ void glCompressedMultiTexSubImage3Dext(
   int depth,
   int format,
   int imageSize,
-  Pointer<NativeType> bits,
+  Pointer<Void> bits,
 ) {
   final glCompressedMultiTexSubImage3DextAsFunction =
       _glCompressedMultiTexSubImage3Dext
@@ -35803,12 +35345,12 @@ void glCompressedMultiTexSubImage3Dext(
                 Int32 xoffset,
                 Int32 yoffset,
                 Int32 zoffset,
-                Uint32 width,
-                Uint32 height,
-                Uint32 depth,
+                Int32 width,
+                Int32 height,
+                Int32 depth,
                 Uint32 format,
-                Uint32 imageSize,
-                Pointer<NativeType> bits,
+                Int32 imageSize,
+                Pointer<Void> bits,
               )
             >
           >()
@@ -35825,7 +35367,7 @@ void glCompressedMultiTexSubImage3Dext(
               int depth,
               int format,
               int imageSize,
-              Pointer<NativeType> bits,
+              Pointer<Void> bits,
             )
           >();
   return glCompressedMultiTexSubImage3DextAsFunction(
@@ -35862,7 +35404,7 @@ void glCompressedMultiTexSubImage2Dext(
   int height,
   int format,
   int imageSize,
-  Pointer<NativeType> bits,
+  Pointer<Void> bits,
 ) {
   final glCompressedMultiTexSubImage2DextAsFunction =
       _glCompressedMultiTexSubImage2Dext
@@ -35874,11 +35416,11 @@ void glCompressedMultiTexSubImage2Dext(
                 Int32 level,
                 Int32 xoffset,
                 Int32 yoffset,
-                Uint32 width,
-                Uint32 height,
+                Int32 width,
+                Int32 height,
                 Uint32 format,
-                Uint32 imageSize,
-                Pointer<NativeType> bits,
+                Int32 imageSize,
+                Pointer<Void> bits,
               )
             >
           >()
@@ -35893,7 +35435,7 @@ void glCompressedMultiTexSubImage2Dext(
               int height,
               int format,
               int imageSize,
-              Pointer<NativeType> bits,
+              Pointer<Void> bits,
             )
           >();
   return glCompressedMultiTexSubImage2DextAsFunction(
@@ -35926,7 +35468,7 @@ void glCompressedMultiTexSubImage1Dext(
   int width,
   int format,
   int imageSize,
-  Pointer<NativeType> bits,
+  Pointer<Void> bits,
 ) {
   final glCompressedMultiTexSubImage1DextAsFunction =
       _glCompressedMultiTexSubImage1Dext
@@ -35937,10 +35479,10 @@ void glCompressedMultiTexSubImage1Dext(
                 Uint32 target,
                 Int32 level,
                 Int32 xoffset,
-                Uint32 width,
+                Int32 width,
                 Uint32 format,
-                Uint32 imageSize,
-                Pointer<NativeType> bits,
+                Int32 imageSize,
+                Pointer<Void> bits,
               )
             >
           >()
@@ -35953,7 +35495,7 @@ void glCompressedMultiTexSubImage1Dext(
               int width,
               int format,
               int imageSize,
-              Pointer<NativeType> bits,
+              Pointer<Void> bits,
             )
           >();
   return glCompressedMultiTexSubImage1DextAsFunction(
@@ -35979,7 +35521,7 @@ void glGetCompressedMultiTexImageExt(
   int texunit,
   int target,
   int lod,
-  Pointer<NativeType> img,
+  Pointer<Void> img,
 ) {
   final glGetCompressedMultiTexImageExtAsFunction =
       _glGetCompressedMultiTexImageExt
@@ -35989,17 +35531,12 @@ void glGetCompressedMultiTexImageExt(
                 Uint32 texunit,
                 Uint32 target,
                 Int32 lod,
-                Pointer<NativeType> img,
+                Pointer<Void> img,
               )
             >
           >()
           .asFunction<
-            void Function(
-              int texunit,
-              int target,
-              int lod,
-              Pointer<NativeType> img,
-            )
+            void Function(int texunit, int target, int lod, Pointer<Void> img)
           >();
   return glGetCompressedMultiTexImageExtAsFunction(texunit, target, lod, img);
 }
@@ -36067,30 +35604,20 @@ late Pointer<NativeFunction<Void Function()>> _glNamedBufferDataExt;
 /// GLAPI void APIENTRY glNamedBufferDataEXT (GLuint buffer, GLsizeiptr size, const void *data, GLenum usage)
 /// ```
 /// {@category opengl_glext}
-void glNamedBufferDataExt(
-  int buffer,
-  Pointer<Uint32> size,
-  Pointer<NativeType> data,
-  int usage,
-) {
+void glNamedBufferDataExt(int buffer, int size, Pointer<Void> data, int usage) {
   final glNamedBufferDataExtAsFunction = _glNamedBufferDataExt
       .cast<
         NativeFunction<
           Void Function(
             Uint32 buffer,
-            Pointer<Uint32> size,
-            Pointer<NativeType> data,
+            IntPtr size,
+            Pointer<Void> data,
             Uint32 usage,
           )
         >
       >()
       .asFunction<
-        void Function(
-          int buffer,
-          Pointer<Uint32> size,
-          Pointer<NativeType> data,
-          int usage,
-        )
+        void Function(int buffer, int size, Pointer<Void> data, int usage)
       >();
   return glNamedBufferDataExtAsFunction(buffer, size, data, usage);
 }
@@ -36104,28 +35631,23 @@ late Pointer<NativeFunction<Void Function()>> _glNamedBufferSubDataExt;
 /// {@category opengl_glext}
 void glNamedBufferSubDataExt(
   int buffer,
-  Pointer<NativeType> offset,
-  Pointer<Uint32> size,
-  Pointer<NativeType> data,
+  int offset,
+  int size,
+  Pointer<Void> data,
 ) {
   final glNamedBufferSubDataExtAsFunction = _glNamedBufferSubDataExt
       .cast<
         NativeFunction<
           Void Function(
             Uint32 buffer,
-            Pointer<NativeType> offset,
-            Pointer<Uint32> size,
-            Pointer<NativeType> data,
+            IntPtr offset,
+            IntPtr size,
+            Pointer<Void> data,
           )
         >
       >()
       .asFunction<
-        void Function(
-          int buffer,
-          Pointer<NativeType> offset,
-          Pointer<Uint32> size,
-          Pointer<NativeType> data,
-        )
+        void Function(int buffer, int offset, int size, Pointer<Void> data)
       >();
   return glNamedBufferSubDataExtAsFunction(buffer, offset, size, data);
 }
@@ -36137,14 +35659,12 @@ late Pointer<NativeFunction<Void Function()>> _glMapNamedBufferExt;
 /// GLAPI void *APIENTRY glMapNamedBufferEXT (GLuint buffer, GLenum access)
 /// ```
 /// {@category opengl_glext}
-Pointer<NativeType> glMapNamedBufferExt(int buffer, int access) {
+Pointer<Void> glMapNamedBufferExt(int buffer, int access) {
   final glMapNamedBufferExtAsFunction = _glMapNamedBufferExt
       .cast<
-        NativeFunction<
-          Pointer<NativeType> Function(Uint32 buffer, Uint32 access)
-        >
+        NativeFunction<Pointer<Void> Function(Uint32 buffer, Uint32 access)>
       >()
-      .asFunction<Pointer<NativeType> Function(int buffer, int access)>();
+      .asFunction<Pointer<Void> Function(int buffer, int access)>();
   return glMapNamedBufferExtAsFunction(buffer, access);
 }
 
@@ -36157,7 +35677,7 @@ late Pointer<NativeFunction<Void Function()>> _glUnmapNamedBufferExt;
 /// {@category opengl_glext}
 int glUnmapNamedBufferExt(int buffer) {
   final glUnmapNamedBufferExtAsFunction = _glUnmapNamedBufferExt
-      .cast<NativeFunction<Int32 Function(Uint32 buffer)>>()
+      .cast<NativeFunction<Uint8 Function(Uint32 buffer)>>()
       .asFunction<int Function(int buffer)>();
   return glUnmapNamedBufferExtAsFunction(buffer);
 }
@@ -36197,7 +35717,7 @@ late Pointer<NativeFunction<Void Function()>> _glGetNamedBufferPointervExt;
 void glGetNamedBufferPointervExt(
   int buffer,
   int pname,
-  Pointer<Pointer<NativeType>> params,
+  Pointer<Pointer<Void>> params,
 ) {
   final glGetNamedBufferPointervExtAsFunction = _glGetNamedBufferPointervExt
       .cast<
@@ -36205,16 +35725,12 @@ void glGetNamedBufferPointervExt(
           Void Function(
             Uint32 buffer,
             Uint32 pname,
-            Pointer<Pointer<NativeType>> params,
+            Pointer<Pointer<Void>> params,
           )
         >
       >()
       .asFunction<
-        void Function(
-          int buffer,
-          int pname,
-          Pointer<Pointer<NativeType>> params,
-        )
+        void Function(int buffer, int pname, Pointer<Pointer<Void>> params)
       >();
   return glGetNamedBufferPointervExtAsFunction(buffer, pname, params);
 }
@@ -36228,28 +35744,23 @@ late Pointer<NativeFunction<Void Function()>> _glGetNamedBufferSubDataExt;
 /// {@category opengl_glext}
 void glGetNamedBufferSubDataExt(
   int buffer,
-  Pointer<NativeType> offset,
-  Pointer<Uint32> size,
-  Pointer<NativeType> data,
+  int offset,
+  int size,
+  Pointer<Void> data,
 ) {
   final glGetNamedBufferSubDataExtAsFunction = _glGetNamedBufferSubDataExt
       .cast<
         NativeFunction<
           Void Function(
             Uint32 buffer,
-            Pointer<NativeType> offset,
-            Pointer<Uint32> size,
-            Pointer<NativeType> data,
+            IntPtr offset,
+            IntPtr size,
+            Pointer<Void> data,
           )
         >
       >()
       .asFunction<
-        void Function(
-          int buffer,
-          Pointer<NativeType> offset,
-          Pointer<Uint32> size,
-          Pointer<NativeType> data,
-        )
+        void Function(int buffer, int offset, int size, Pointer<Void> data)
       >();
   return glGetNamedBufferSubDataExtAsFunction(buffer, offset, size, data);
 }
@@ -36482,7 +35993,7 @@ void glProgramUniform1fvExt(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 count,
+            Int32 count,
             Pointer<Float> value,
           )
         >
@@ -36517,7 +36028,7 @@ void glProgramUniform2fvExt(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 count,
+            Int32 count,
             Pointer<Float> value,
           )
         >
@@ -36552,7 +36063,7 @@ void glProgramUniform3fvExt(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 count,
+            Int32 count,
             Pointer<Float> value,
           )
         >
@@ -36587,7 +36098,7 @@ void glProgramUniform4fvExt(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 count,
+            Int32 count,
             Pointer<Float> value,
           )
         >
@@ -36622,7 +36133,7 @@ void glProgramUniform1ivExt(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 count,
+            Int32 count,
             Pointer<Int32> value,
           )
         >
@@ -36657,7 +36168,7 @@ void glProgramUniform2ivExt(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 count,
+            Int32 count,
             Pointer<Int32> value,
           )
         >
@@ -36692,7 +36203,7 @@ void glProgramUniform3ivExt(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 count,
+            Int32 count,
             Pointer<Int32> value,
           )
         >
@@ -36727,7 +36238,7 @@ void glProgramUniform4ivExt(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 count,
+            Int32 count,
             Pointer<Int32> value,
           )
         >
@@ -36763,8 +36274,8 @@ void glProgramUniformMatrix2fvExt(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 count,
-            Int32 transpose,
+            Int32 count,
+            Uint8 transpose,
             Pointer<Float> value,
           )
         >
@@ -36807,8 +36318,8 @@ void glProgramUniformMatrix3fvExt(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 count,
-            Int32 transpose,
+            Int32 count,
+            Uint8 transpose,
             Pointer<Float> value,
           )
         >
@@ -36851,8 +36362,8 @@ void glProgramUniformMatrix4fvExt(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 count,
-            Int32 transpose,
+            Int32 count,
+            Uint8 transpose,
             Pointer<Float> value,
           )
         >
@@ -36896,8 +36407,8 @@ void glProgramUniformMatrix2x3fvExt(
               Void Function(
                 Uint32 program,
                 Int32 location,
-                Uint32 count,
-                Int32 transpose,
+                Int32 count,
+                Uint8 transpose,
                 Pointer<Float> value,
               )
             >
@@ -36941,8 +36452,8 @@ void glProgramUniformMatrix3x2fvExt(
               Void Function(
                 Uint32 program,
                 Int32 location,
-                Uint32 count,
-                Int32 transpose,
+                Int32 count,
+                Uint8 transpose,
                 Pointer<Float> value,
               )
             >
@@ -36986,8 +36497,8 @@ void glProgramUniformMatrix2x4fvExt(
               Void Function(
                 Uint32 program,
                 Int32 location,
-                Uint32 count,
-                Int32 transpose,
+                Int32 count,
+                Uint8 transpose,
                 Pointer<Float> value,
               )
             >
@@ -37031,8 +36542,8 @@ void glProgramUniformMatrix4x2fvExt(
               Void Function(
                 Uint32 program,
                 Int32 location,
-                Uint32 count,
-                Int32 transpose,
+                Int32 count,
+                Uint8 transpose,
                 Pointer<Float> value,
               )
             >
@@ -37076,8 +36587,8 @@ void glProgramUniformMatrix3x4fvExt(
               Void Function(
                 Uint32 program,
                 Int32 location,
-                Uint32 count,
-                Int32 transpose,
+                Int32 count,
+                Uint8 transpose,
                 Pointer<Float> value,
               )
             >
@@ -37121,8 +36632,8 @@ void glProgramUniformMatrix4x3fvExt(
               Void Function(
                 Uint32 program,
                 Int32 location,
-                Uint32 count,
-                Int32 transpose,
+                Int32 count,
+                Uint8 transpose,
                 Pointer<Float> value,
               )
             >
@@ -37583,7 +37094,7 @@ void glProgramUniform1uivExt(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 count,
+            Int32 count,
             Pointer<Uint32> value,
           )
         >
@@ -37618,7 +37129,7 @@ void glProgramUniform2uivExt(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 count,
+            Int32 count,
             Pointer<Uint32> value,
           )
         >
@@ -37653,7 +37164,7 @@ void glProgramUniform3uivExt(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 count,
+            Int32 count,
             Pointer<Uint32> value,
           )
         >
@@ -37688,7 +37199,7 @@ void glProgramUniform4uivExt(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 count,
+            Int32 count,
             Pointer<Uint32> value,
           )
         >
@@ -37727,7 +37238,7 @@ void glNamedProgramLocalParameters4fvExt(
                 Uint32 program,
                 Uint32 target,
                 Uint32 index,
-                Uint32 count,
+                Int32 count,
                 Pointer<Float> params,
               )
             >
@@ -37869,7 +37380,7 @@ void glNamedProgramLocalParametersI4ivExt(
                 Uint32 program,
                 Uint32 target,
                 Uint32 index,
-                Uint32 count,
+                Int32 count,
                 Pointer<Int32> params,
               )
             >
@@ -38011,7 +37522,7 @@ void glNamedProgramLocalParametersI4uivExt(
                 Uint32 program,
                 Uint32 target,
                 Uint32 index,
-                Uint32 count,
+                Int32 count,
                 Pointer<Uint32> params,
               )
             >
@@ -38191,23 +37702,19 @@ late Pointer<NativeFunction<Void Function()>> _glGetPointeriVExt;
 /// GLAPI void APIENTRY glGetPointeri_vEXT (GLenum pname, GLuint index, void **params)
 /// ```
 /// {@category opengl_glext}
-void glGetPointeriVExt(
-  int pname,
-  int index,
-  Pointer<Pointer<NativeType>> params,
-) {
+void glGetPointeriVExt(int pname, int index, Pointer<Pointer<Void>> params) {
   final glGetPointeriVExtAsFunction = _glGetPointeriVExt
       .cast<
         NativeFunction<
           Void Function(
             Uint32 pname,
             Uint32 index,
-            Pointer<Pointer<NativeType>> params,
+            Pointer<Pointer<Void>> params,
           )
         >
       >()
       .asFunction<
-        void Function(int pname, int index, Pointer<Pointer<NativeType>> params)
+        void Function(int pname, int index, Pointer<Pointer<Void>> params)
       >();
   return glGetPointeriVExtAsFunction(pname, index, params);
 }
@@ -38224,7 +37731,7 @@ void glNamedProgramStringExt(
   int target,
   int format,
   int len,
-  Pointer<NativeType> string,
+  Pointer<Void> string,
 ) {
   final glNamedProgramStringExtAsFunction = _glNamedProgramStringExt
       .cast<
@@ -38233,8 +37740,8 @@ void glNamedProgramStringExt(
             Uint32 program,
             Uint32 target,
             Uint32 format,
-            Uint32 len,
-            Pointer<NativeType> string,
+            Int32 len,
+            Pointer<Void> string,
           )
         >
       >()
@@ -38244,7 +37751,7 @@ void glNamedProgramStringExt(
           int target,
           int format,
           int len,
-          Pointer<NativeType> string,
+          Pointer<Void> string,
         )
       >();
   return glNamedProgramStringExtAsFunction(
@@ -38573,7 +38080,7 @@ void glGetNamedProgramStringExt(
   int program,
   int target,
   int pname,
-  Pointer<NativeType> string,
+  Pointer<Void> string,
 ) {
   final glGetNamedProgramStringExtAsFunction = _glGetNamedProgramStringExt
       .cast<
@@ -38582,17 +38089,12 @@ void glGetNamedProgramStringExt(
             Uint32 program,
             Uint32 target,
             Uint32 pname,
-            Pointer<NativeType> string,
+            Pointer<Void> string,
           )
         >
       >()
       .asFunction<
-        void Function(
-          int program,
-          int target,
-          int pname,
-          Pointer<NativeType> string,
-        )
+        void Function(int program, int target, int pname, Pointer<Void> string)
       >();
   return glGetNamedProgramStringExtAsFunction(program, target, pname, string);
 }
@@ -38616,8 +38118,8 @@ void glNamedRenderbufferStorageExt(
           Void Function(
             Uint32 renderbuffer,
             Uint32 internalformat,
-            Uint32 width,
-            Uint32 height,
+            Int32 width,
+            Int32 height,
           )
         >
       >()
@@ -38692,10 +38194,10 @@ void glNamedRenderbufferStorageMultisampleExt(
             NativeFunction<
               Void Function(
                 Uint32 renderbuffer,
-                Uint32 samples,
+                Int32 samples,
                 Uint32 internalformat,
-                Uint32 width,
-                Uint32 height,
+                Int32 width,
+                Int32 height,
               )
             >
           >()
@@ -38739,11 +38241,11 @@ void glNamedRenderbufferStorageMultisampleCoverageExt(
             NativeFunction<
               Void Function(
                 Uint32 renderbuffer,
-                Uint32 coverageSamples,
-                Uint32 colorSamples,
+                Int32 coverageSamples,
+                Int32 colorSamples,
                 Uint32 internalformat,
-                Uint32 width,
-                Uint32 height,
+                Int32 width,
+                Int32 height,
               )
             >
           >()
@@ -39060,7 +38562,7 @@ void glFramebufferDrawBuffersExt(int framebuffer, int n, Pointer<Uint32> bufs) {
   final glFramebufferDrawBuffersExtAsFunction = _glFramebufferDrawBuffersExt
       .cast<
         NativeFunction<
-          Void Function(Uint32 framebuffer, Uint32 n, Pointer<Uint32> bufs)
+          Void Function(Uint32 framebuffer, Int32 n, Pointer<Uint32> bufs)
         >
       >()
       .asFunction<
@@ -39122,9 +38624,9 @@ late Pointer<NativeFunction<Void Function()>> _glNamedCopyBufferSubDataExt;
 void glNamedCopyBufferSubDataExt(
   int readBuffer,
   int writeBuffer,
-  Pointer<NativeType> readOffset,
-  Pointer<NativeType> writeOffset,
-  Pointer<Uint32> size,
+  int readOffset,
+  int writeOffset,
+  int size,
 ) {
   final glNamedCopyBufferSubDataExtAsFunction = _glNamedCopyBufferSubDataExt
       .cast<
@@ -39132,9 +38634,9 @@ void glNamedCopyBufferSubDataExt(
           Void Function(
             Uint32 readBuffer,
             Uint32 writeBuffer,
-            Pointer<NativeType> readOffset,
-            Pointer<NativeType> writeOffset,
-            Pointer<Uint32> size,
+            IntPtr readOffset,
+            IntPtr writeOffset,
+            IntPtr size,
           )
         >
       >()
@@ -39142,9 +38644,9 @@ void glNamedCopyBufferSubDataExt(
         void Function(
           int readBuffer,
           int writeBuffer,
-          Pointer<NativeType> readOffset,
-          Pointer<NativeType> writeOffset,
-          Pointer<Uint32> size,
+          int readOffset,
+          int writeOffset,
+          int size,
         )
       >();
   return glNamedCopyBufferSubDataExtAsFunction(
@@ -39331,7 +38833,7 @@ void glVertexArrayVertexOffsetExt(
   int size,
   int type,
   int stride,
-  Pointer<NativeType> offset,
+  int offset,
 ) {
   final glVertexArrayVertexOffsetExtAsFunction = _glVertexArrayVertexOffsetExt
       .cast<
@@ -39341,8 +38843,8 @@ void glVertexArrayVertexOffsetExt(
             Uint32 buffer,
             Int32 size,
             Uint32 type,
-            Uint32 stride,
-            Pointer<NativeType> offset,
+            Int32 stride,
+            IntPtr offset,
           )
         >
       >()
@@ -39353,7 +38855,7 @@ void glVertexArrayVertexOffsetExt(
           int size,
           int type,
           int stride,
-          Pointer<NativeType> offset,
+          int offset,
         )
       >();
   return glVertexArrayVertexOffsetExtAsFunction(
@@ -39379,7 +38881,7 @@ void glVertexArrayColorOffsetExt(
   int size,
   int type,
   int stride,
-  Pointer<NativeType> offset,
+  int offset,
 ) {
   final glVertexArrayColorOffsetExtAsFunction = _glVertexArrayColorOffsetExt
       .cast<
@@ -39389,8 +38891,8 @@ void glVertexArrayColorOffsetExt(
             Uint32 buffer,
             Int32 size,
             Uint32 type,
-            Uint32 stride,
-            Pointer<NativeType> offset,
+            Int32 stride,
+            IntPtr offset,
           )
         >
       >()
@@ -39401,7 +38903,7 @@ void glVertexArrayColorOffsetExt(
           int size,
           int type,
           int stride,
-          Pointer<NativeType> offset,
+          int offset,
         )
       >();
   return glVertexArrayColorOffsetExtAsFunction(
@@ -39425,7 +38927,7 @@ void glVertexArrayEdgeFlagOffsetExt(
   int vaobj,
   int buffer,
   int stride,
-  Pointer<NativeType> offset,
+  int offset,
 ) {
   final glVertexArrayEdgeFlagOffsetExtAsFunction =
       _glVertexArrayEdgeFlagOffsetExt
@@ -39434,18 +38936,13 @@ void glVertexArrayEdgeFlagOffsetExt(
               Void Function(
                 Uint32 vaobj,
                 Uint32 buffer,
-                Uint32 stride,
-                Pointer<NativeType> offset,
+                Int32 stride,
+                IntPtr offset,
               )
             >
           >()
           .asFunction<
-            void Function(
-              int vaobj,
-              int buffer,
-              int stride,
-              Pointer<NativeType> offset,
-            )
+            void Function(int vaobj, int buffer, int stride, int offset)
           >();
   return glVertexArrayEdgeFlagOffsetExtAsFunction(
     vaobj,
@@ -39467,7 +38964,7 @@ void glVertexArrayIndexOffsetExt(
   int buffer,
   int type,
   int stride,
-  Pointer<NativeType> offset,
+  int offset,
 ) {
   final glVertexArrayIndexOffsetExtAsFunction = _glVertexArrayIndexOffsetExt
       .cast<
@@ -39476,19 +38973,13 @@ void glVertexArrayIndexOffsetExt(
             Uint32 vaobj,
             Uint32 buffer,
             Uint32 type,
-            Uint32 stride,
-            Pointer<NativeType> offset,
+            Int32 stride,
+            IntPtr offset,
           )
         >
       >()
       .asFunction<
-        void Function(
-          int vaobj,
-          int buffer,
-          int type,
-          int stride,
-          Pointer<NativeType> offset,
-        )
+        void Function(int vaobj, int buffer, int type, int stride, int offset)
       >();
   return glVertexArrayIndexOffsetExtAsFunction(
     vaobj,
@@ -39511,7 +39002,7 @@ void glVertexArrayNormalOffsetExt(
   int buffer,
   int type,
   int stride,
-  Pointer<NativeType> offset,
+  int offset,
 ) {
   final glVertexArrayNormalOffsetExtAsFunction = _glVertexArrayNormalOffsetExt
       .cast<
@@ -39520,19 +39011,13 @@ void glVertexArrayNormalOffsetExt(
             Uint32 vaobj,
             Uint32 buffer,
             Uint32 type,
-            Uint32 stride,
-            Pointer<NativeType> offset,
+            Int32 stride,
+            IntPtr offset,
           )
         >
       >()
       .asFunction<
-        void Function(
-          int vaobj,
-          int buffer,
-          int type,
-          int stride,
-          Pointer<NativeType> offset,
-        )
+        void Function(int vaobj, int buffer, int type, int stride, int offset)
       >();
   return glVertexArrayNormalOffsetExtAsFunction(
     vaobj,
@@ -39556,7 +39041,7 @@ void glVertexArrayTexCoordOffsetExt(
   int size,
   int type,
   int stride,
-  Pointer<NativeType> offset,
+  int offset,
 ) {
   final glVertexArrayTexCoordOffsetExtAsFunction =
       _glVertexArrayTexCoordOffsetExt
@@ -39567,8 +39052,8 @@ void glVertexArrayTexCoordOffsetExt(
                 Uint32 buffer,
                 Int32 size,
                 Uint32 type,
-                Uint32 stride,
-                Pointer<NativeType> offset,
+                Int32 stride,
+                IntPtr offset,
               )
             >
           >()
@@ -39579,7 +39064,7 @@ void glVertexArrayTexCoordOffsetExt(
               int size,
               int type,
               int stride,
-              Pointer<NativeType> offset,
+              int offset,
             )
           >();
   return glVertexArrayTexCoordOffsetExtAsFunction(
@@ -39607,7 +39092,7 @@ void glVertexArrayMultiTexCoordOffsetExt(
   int size,
   int type,
   int stride,
-  Pointer<NativeType> offset,
+  int offset,
 ) {
   final glVertexArrayMultiTexCoordOffsetExtAsFunction =
       _glVertexArrayMultiTexCoordOffsetExt
@@ -39619,8 +39104,8 @@ void glVertexArrayMultiTexCoordOffsetExt(
                 Uint32 texunit,
                 Int32 size,
                 Uint32 type,
-                Uint32 stride,
-                Pointer<NativeType> offset,
+                Int32 stride,
+                IntPtr offset,
               )
             >
           >()
@@ -39632,7 +39117,7 @@ void glVertexArrayMultiTexCoordOffsetExt(
               int size,
               int type,
               int stride,
-              Pointer<NativeType> offset,
+              int offset,
             )
           >();
   return glVertexArrayMultiTexCoordOffsetExtAsFunction(
@@ -39658,7 +39143,7 @@ void glVertexArrayFogCoordOffsetExt(
   int buffer,
   int type,
   int stride,
-  Pointer<NativeType> offset,
+  int offset,
 ) {
   final glVertexArrayFogCoordOffsetExtAsFunction =
       _glVertexArrayFogCoordOffsetExt
@@ -39668,8 +39153,8 @@ void glVertexArrayFogCoordOffsetExt(
                 Uint32 vaobj,
                 Uint32 buffer,
                 Uint32 type,
-                Uint32 stride,
-                Pointer<NativeType> offset,
+                Int32 stride,
+                IntPtr offset,
               )
             >
           >()
@@ -39679,7 +39164,7 @@ void glVertexArrayFogCoordOffsetExt(
               int buffer,
               int type,
               int stride,
-              Pointer<NativeType> offset,
+              int offset,
             )
           >();
   return glVertexArrayFogCoordOffsetExtAsFunction(
@@ -39705,7 +39190,7 @@ void glVertexArraySecondaryColorOffsetExt(
   int size,
   int type,
   int stride,
-  Pointer<NativeType> offset,
+  int offset,
 ) {
   final glVertexArraySecondaryColorOffsetExtAsFunction =
       _glVertexArraySecondaryColorOffsetExt
@@ -39716,8 +39201,8 @@ void glVertexArraySecondaryColorOffsetExt(
                 Uint32 buffer,
                 Int32 size,
                 Uint32 type,
-                Uint32 stride,
-                Pointer<NativeType> offset,
+                Int32 stride,
+                IntPtr offset,
               )
             >
           >()
@@ -39728,7 +39213,7 @@ void glVertexArraySecondaryColorOffsetExt(
               int size,
               int type,
               int stride,
-              Pointer<NativeType> offset,
+              int offset,
             )
           >();
   return glVertexArraySecondaryColorOffsetExtAsFunction(
@@ -39757,7 +39242,7 @@ void glVertexArrayVertexAttribOffsetExt(
   int type,
   int normalized,
   int stride,
-  Pointer<NativeType> offset,
+  int offset,
 ) {
   final glVertexArrayVertexAttribOffsetExtAsFunction =
       _glVertexArrayVertexAttribOffsetExt
@@ -39769,9 +39254,9 @@ void glVertexArrayVertexAttribOffsetExt(
                 Uint32 index,
                 Int32 size,
                 Uint32 type,
-                Int32 normalized,
-                Uint32 stride,
-                Pointer<NativeType> offset,
+                Uint8 normalized,
+                Int32 stride,
+                IntPtr offset,
               )
             >
           >()
@@ -39784,7 +39269,7 @@ void glVertexArrayVertexAttribOffsetExt(
               int type,
               int normalized,
               int stride,
-              Pointer<NativeType> offset,
+              int offset,
             )
           >();
   return glVertexArrayVertexAttribOffsetExtAsFunction(
@@ -39814,7 +39299,7 @@ void glVertexArrayVertexAttribIOffsetExt(
   int size,
   int type,
   int stride,
-  Pointer<NativeType> offset,
+  int offset,
 ) {
   final glVertexArrayVertexAttribIOffsetExtAsFunction =
       _glVertexArrayVertexAttribIOffsetExt
@@ -39826,8 +39311,8 @@ void glVertexArrayVertexAttribIOffsetExt(
                 Uint32 index,
                 Int32 size,
                 Uint32 type,
-                Uint32 stride,
-                Pointer<NativeType> offset,
+                Int32 stride,
+                IntPtr offset,
               )
             >
           >()
@@ -39839,7 +39324,7 @@ void glVertexArrayVertexAttribIOffsetExt(
               int size,
               int type,
               int stride,
-              Pointer<NativeType> offset,
+              int offset,
             )
           >();
   return glVertexArrayVertexAttribIOffsetExtAsFunction(
@@ -39937,7 +39422,7 @@ late Pointer<NativeFunction<Void Function()>> _glGetVertexArrayPointervExt;
 void glGetVertexArrayPointervExt(
   int vaobj,
   int pname,
-  Pointer<Pointer<NativeType>> param,
+  Pointer<Pointer<Void>> param,
 ) {
   final glGetVertexArrayPointervExtAsFunction = _glGetVertexArrayPointervExt
       .cast<
@@ -39945,12 +39430,12 @@ void glGetVertexArrayPointervExt(
           Void Function(
             Uint32 vaobj,
             Uint32 pname,
-            Pointer<Pointer<NativeType>> param,
+            Pointer<Pointer<Void>> param,
           )
         >
       >()
       .asFunction<
-        void Function(int vaobj, int pname, Pointer<Pointer<NativeType>> param)
+        void Function(int vaobj, int pname, Pointer<Pointer<Void>> param)
       >();
   return glGetVertexArrayPointervExtAsFunction(vaobj, pname, param);
 }
@@ -39996,7 +39481,7 @@ void glGetVertexArrayPointeriVExt(
   int vaobj,
   int index,
   int pname,
-  Pointer<Pointer<NativeType>> param,
+  Pointer<Pointer<Void>> param,
 ) {
   final glGetVertexArrayPointeriVExtAsFunction = _glGetVertexArrayPointeriVExt
       .cast<
@@ -40005,7 +39490,7 @@ void glGetVertexArrayPointeriVExt(
             Uint32 vaobj,
             Uint32 index,
             Uint32 pname,
-            Pointer<Pointer<NativeType>> param,
+            Pointer<Pointer<Void>> param,
           )
         >
       >()
@@ -40014,7 +39499,7 @@ void glGetVertexArrayPointeriVExt(
           int vaobj,
           int index,
           int pname,
-          Pointer<Pointer<NativeType>> param,
+          Pointer<Pointer<Void>> param,
         )
       >();
   return glGetVertexArrayPointeriVExtAsFunction(vaobj, index, pname, param);
@@ -40027,30 +39512,25 @@ late Pointer<NativeFunction<Void Function()>> _glMapNamedBufferRangeExt;
 /// GLAPI void *APIENTRY glMapNamedBufferRangeEXT (GLuint buffer, GLintptr offset, GLsizeiptr length, GLbitfield access)
 /// ```
 /// {@category opengl_glext}
-Pointer<NativeType> glMapNamedBufferRangeExt(
+Pointer<Void> glMapNamedBufferRangeExt(
   int buffer,
-  Pointer<NativeType> offset,
-  Pointer<Uint32> length,
+  int offset,
+  int length,
   int access,
 ) {
   final glMapNamedBufferRangeExtAsFunction = _glMapNamedBufferRangeExt
       .cast<
         NativeFunction<
-          Pointer<NativeType> Function(
+          Pointer<Void> Function(
             Uint32 buffer,
-            Pointer<NativeType> offset,
-            Pointer<Uint32> length,
+            IntPtr offset,
+            IntPtr length,
             Uint32 access,
           )
         >
       >()
       .asFunction<
-        Pointer<NativeType> Function(
-          int buffer,
-          Pointer<NativeType> offset,
-          Pointer<Uint32> length,
-          int access,
-        )
+        Pointer<Void> Function(int buffer, int offset, int length, int access)
       >();
   return glMapNamedBufferRangeExtAsFunction(buffer, offset, length, access);
 }
@@ -40062,29 +39542,15 @@ late Pointer<NativeFunction<Void Function()>> _glFlushMappedNamedBufferRangeExt;
 /// GLAPI void APIENTRY glFlushMappedNamedBufferRangeEXT (GLuint buffer, GLintptr offset, GLsizeiptr length)
 /// ```
 /// {@category opengl_glext}
-void glFlushMappedNamedBufferRangeExt(
-  int buffer,
-  Pointer<NativeType> offset,
-  Pointer<Uint32> length,
-) {
+void glFlushMappedNamedBufferRangeExt(int buffer, int offset, int length) {
   final glFlushMappedNamedBufferRangeExtAsFunction =
       _glFlushMappedNamedBufferRangeExt
           .cast<
             NativeFunction<
-              Void Function(
-                Uint32 buffer,
-                Pointer<NativeType> offset,
-                Pointer<Uint32> length,
-              )
+              Void Function(Uint32 buffer, IntPtr offset, IntPtr length)
             >
           >()
-          .asFunction<
-            void Function(
-              int buffer,
-              Pointer<NativeType> offset,
-              Pointer<Uint32> length,
-            )
-          >();
+          .asFunction<void Function(int buffer, int offset, int length)>();
   return glFlushMappedNamedBufferRangeExtAsFunction(buffer, offset, length);
 }
 
@@ -40097,8 +39563,8 @@ late Pointer<NativeFunction<Void Function()>> _glNamedBufferStorageExt;
 /// {@category opengl_glext}
 void glNamedBufferStorageExt(
   int buffer,
-  Pointer<Uint32> size,
-  Pointer<NativeType> data,
+  int size,
+  Pointer<Void> data,
   int flags,
 ) {
   final glNamedBufferStorageExtAsFunction = _glNamedBufferStorageExt
@@ -40106,19 +39572,14 @@ void glNamedBufferStorageExt(
         NativeFunction<
           Void Function(
             Uint32 buffer,
-            Pointer<Uint32> size,
-            Pointer<NativeType> data,
+            IntPtr size,
+            Pointer<Void> data,
             Uint32 flags,
           )
         >
       >()
       .asFunction<
-        void Function(
-          int buffer,
-          Pointer<Uint32> size,
-          Pointer<NativeType> data,
-          int flags,
-        )
+        void Function(int buffer, int size, Pointer<Void> data, int flags)
       >();
   return glNamedBufferStorageExtAsFunction(buffer, size, data, flags);
 }
@@ -40135,7 +39596,7 @@ void glClearNamedBufferDataExt(
   int internalformat,
   int format,
   int type,
-  Pointer<NativeType> data,
+  Pointer<Void> data,
 ) {
   final glClearNamedBufferDataExtAsFunction = _glClearNamedBufferDataExt
       .cast<
@@ -40145,7 +39606,7 @@ void glClearNamedBufferDataExt(
             Uint32 internalformat,
             Uint32 format,
             Uint32 type,
-            Pointer<NativeType> data,
+            Pointer<Void> data,
           )
         >
       >()
@@ -40155,7 +39616,7 @@ void glClearNamedBufferDataExt(
           int internalformat,
           int format,
           int type,
-          Pointer<NativeType> data,
+          Pointer<Void> data,
         )
       >();
   return glClearNamedBufferDataExtAsFunction(
@@ -40177,11 +39638,11 @@ late Pointer<NativeFunction<Void Function()>> _glClearNamedBufferSubDataExt;
 void glClearNamedBufferSubDataExt(
   int buffer,
   int internalformat,
-  Pointer<Uint32> offset,
-  Pointer<Uint32> size,
+  int offset,
+  int size,
   int format,
   int type,
-  Pointer<NativeType> data,
+  Pointer<Void> data,
 ) {
   final glClearNamedBufferSubDataExtAsFunction = _glClearNamedBufferSubDataExt
       .cast<
@@ -40189,11 +39650,11 @@ void glClearNamedBufferSubDataExt(
           Void Function(
             Uint32 buffer,
             Uint32 internalformat,
-            Pointer<Uint32> offset,
-            Pointer<Uint32> size,
+            IntPtr offset,
+            IntPtr size,
             Uint32 format,
             Uint32 type,
-            Pointer<NativeType> data,
+            Pointer<Void> data,
           )
         >
       >()
@@ -40201,11 +39662,11 @@ void glClearNamedBufferSubDataExt(
         void Function(
           int buffer,
           int internalformat,
-          Pointer<Uint32> offset,
-          Pointer<Uint32> size,
+          int offset,
+          int size,
           int format,
           int type,
-          Pointer<NativeType> data,
+          Pointer<Void> data,
         )
       >();
   return glClearNamedBufferSubDataExtAsFunction(
@@ -40400,7 +39861,7 @@ void glProgramUniform1dvExt(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 count,
+            Int32 count,
             Pointer<Double> value,
           )
         >
@@ -40435,7 +39896,7 @@ void glProgramUniform2dvExt(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 count,
+            Int32 count,
             Pointer<Double> value,
           )
         >
@@ -40470,7 +39931,7 @@ void glProgramUniform3dvExt(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 count,
+            Int32 count,
             Pointer<Double> value,
           )
         >
@@ -40505,7 +39966,7 @@ void glProgramUniform4dvExt(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 count,
+            Int32 count,
             Pointer<Double> value,
           )
         >
@@ -40541,8 +40002,8 @@ void glProgramUniformMatrix2dvExt(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 count,
-            Int32 transpose,
+            Int32 count,
+            Uint8 transpose,
             Pointer<Double> value,
           )
         >
@@ -40585,8 +40046,8 @@ void glProgramUniformMatrix3dvExt(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 count,
-            Int32 transpose,
+            Int32 count,
+            Uint8 transpose,
             Pointer<Double> value,
           )
         >
@@ -40629,8 +40090,8 @@ void glProgramUniformMatrix4dvExt(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 count,
-            Int32 transpose,
+            Int32 count,
+            Uint8 transpose,
             Pointer<Double> value,
           )
         >
@@ -40674,8 +40135,8 @@ void glProgramUniformMatrix2x3dvExt(
               Void Function(
                 Uint32 program,
                 Int32 location,
-                Uint32 count,
-                Int32 transpose,
+                Int32 count,
+                Uint8 transpose,
                 Pointer<Double> value,
               )
             >
@@ -40719,8 +40180,8 @@ void glProgramUniformMatrix2x4dvExt(
               Void Function(
                 Uint32 program,
                 Int32 location,
-                Uint32 count,
-                Int32 transpose,
+                Int32 count,
+                Uint8 transpose,
                 Pointer<Double> value,
               )
             >
@@ -40764,8 +40225,8 @@ void glProgramUniformMatrix3x2dvExt(
               Void Function(
                 Uint32 program,
                 Int32 location,
-                Uint32 count,
-                Int32 transpose,
+                Int32 count,
+                Uint8 transpose,
                 Pointer<Double> value,
               )
             >
@@ -40809,8 +40270,8 @@ void glProgramUniformMatrix3x4dvExt(
               Void Function(
                 Uint32 program,
                 Int32 location,
-                Uint32 count,
-                Int32 transpose,
+                Int32 count,
+                Uint8 transpose,
                 Pointer<Double> value,
               )
             >
@@ -40854,8 +40315,8 @@ void glProgramUniformMatrix4x2dvExt(
               Void Function(
                 Uint32 program,
                 Int32 location,
-                Uint32 count,
-                Int32 transpose,
+                Int32 count,
+                Uint8 transpose,
                 Pointer<Double> value,
               )
             >
@@ -40899,8 +40360,8 @@ void glProgramUniformMatrix4x3dvExt(
               Void Function(
                 Uint32 program,
                 Int32 location,
-                Uint32 count,
-                Int32 transpose,
+                Int32 count,
+                Uint8 transpose,
                 Pointer<Double> value,
               )
             >
@@ -40935,8 +40396,8 @@ void glTextureBufferRangeExt(
   int target,
   int internalformat,
   int buffer,
-  Pointer<NativeType> offset,
-  Pointer<Uint32> size,
+  int offset,
+  int size,
 ) {
   final glTextureBufferRangeExtAsFunction = _glTextureBufferRangeExt
       .cast<
@@ -40946,8 +40407,8 @@ void glTextureBufferRangeExt(
             Uint32 target,
             Uint32 internalformat,
             Uint32 buffer,
-            Pointer<NativeType> offset,
-            Pointer<Uint32> size,
+            IntPtr offset,
+            IntPtr size,
           )
         >
       >()
@@ -40957,8 +40418,8 @@ void glTextureBufferRangeExt(
           int target,
           int internalformat,
           int buffer,
-          Pointer<NativeType> offset,
-          Pointer<Uint32> size,
+          int offset,
+          int size,
         )
       >();
   return glTextureBufferRangeExtAsFunction(
@@ -40991,9 +40452,9 @@ void glTextureStorage1Dext(
           Void Function(
             Uint32 texture,
             Uint32 target,
-            Uint32 levels,
+            Int32 levels,
             Uint32 internalformat,
-            Uint32 width,
+            Int32 width,
           )
         >
       >()
@@ -41036,10 +40497,10 @@ void glTextureStorage2Dext(
           Void Function(
             Uint32 texture,
             Uint32 target,
-            Uint32 levels,
+            Int32 levels,
             Uint32 internalformat,
-            Uint32 width,
-            Uint32 height,
+            Int32 width,
+            Int32 height,
           )
         >
       >()
@@ -41085,11 +40546,11 @@ void glTextureStorage3Dext(
           Void Function(
             Uint32 texture,
             Uint32 target,
-            Uint32 levels,
+            Int32 levels,
             Uint32 internalformat,
-            Uint32 width,
-            Uint32 height,
-            Uint32 depth,
+            Int32 width,
+            Int32 height,
+            Int32 depth,
           )
         >
       >()
@@ -41138,11 +40599,11 @@ void glTextureStorage2DMultisampleExt(
               Void Function(
                 Uint32 texture,
                 Uint32 target,
-                Uint32 samples,
+                Int32 samples,
                 Uint32 internalformat,
-                Uint32 width,
-                Uint32 height,
-                Int32 fixedsamplelocations,
+                Int32 width,
+                Int32 height,
+                Uint8 fixedsamplelocations,
               )
             >
           >()
@@ -41192,12 +40653,12 @@ void glTextureStorage3DMultisampleExt(
               Void Function(
                 Uint32 texture,
                 Uint32 target,
-                Uint32 samples,
+                Int32 samples,
                 Uint32 internalformat,
-                Uint32 width,
-                Uint32 height,
-                Uint32 depth,
-                Int32 fixedsamplelocations,
+                Int32 width,
+                Int32 height,
+                Int32 depth,
+                Uint8 fixedsamplelocations,
               )
             >
           >()
@@ -41236,7 +40697,7 @@ void glVertexArrayBindVertexBufferExt(
   int vaobj,
   int bindingindex,
   int buffer,
-  Pointer<NativeType> offset,
+  int offset,
   int stride,
 ) {
   final glVertexArrayBindVertexBufferExtAsFunction =
@@ -41247,8 +40708,8 @@ void glVertexArrayBindVertexBufferExt(
                 Uint32 vaobj,
                 Uint32 bindingindex,
                 Uint32 buffer,
-                Pointer<NativeType> offset,
-                Uint32 stride,
+                IntPtr offset,
+                Int32 stride,
               )
             >
           >()
@@ -41257,7 +40718,7 @@ void glVertexArrayBindVertexBufferExt(
               int vaobj,
               int bindingindex,
               int buffer,
-              Pointer<NativeType> offset,
+              int offset,
               int stride,
             )
           >();
@@ -41295,7 +40756,7 @@ void glVertexArrayVertexAttribFormatExt(
                 Uint32 attribindex,
                 Int32 size,
                 Uint32 type,
-                Int32 normalized,
+                Uint8 normalized,
                 Uint32 relativeoffset,
               )
             >
@@ -41491,7 +40952,7 @@ void glVertexArrayVertexAttribLOffsetExt(
   int size,
   int type,
   int stride,
-  Pointer<NativeType> offset,
+  int offset,
 ) {
   final glVertexArrayVertexAttribLOffsetExtAsFunction =
       _glVertexArrayVertexAttribLOffsetExt
@@ -41503,8 +40964,8 @@ void glVertexArrayVertexAttribLOffsetExt(
                 Uint32 index,
                 Int32 size,
                 Uint32 type,
-                Uint32 stride,
-                Pointer<NativeType> offset,
+                Int32 stride,
+                IntPtr offset,
               )
             >
           >()
@@ -41516,7 +40977,7 @@ void glVertexArrayVertexAttribLOffsetExt(
               int size,
               int type,
               int stride,
-              Pointer<NativeType> offset,
+              int offset,
             )
           >();
   return glVertexArrayVertexAttribLOffsetExtAsFunction(
@@ -41557,10 +41018,10 @@ void glTexturePageCommitmentExt(
             Int32 xoffset,
             Int32 yoffset,
             Int32 zoffset,
-            Uint32 width,
-            Uint32 height,
-            Uint32 depth,
-            Int32 commit,
+            Int32 width,
+            Int32 height,
+            Int32 depth,
+            Uint8 commit,
           )
         >
       >()
@@ -41621,7 +41082,7 @@ void glColorMaskIndexedExt(int index, int r, int g, int b, int a) {
   final glColorMaskIndexedExtAsFunction = _glColorMaskIndexedExt
       .cast<
         NativeFunction<
-          Void Function(Uint32 index, Int32 r, Int32 g, Int32 b, Int32 a)
+          Void Function(Uint32 index, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
         >
       >()
       .asFunction<void Function(int index, int r, int g, int b, int a)>();
@@ -41639,12 +41100,7 @@ void glDrawArraysInstancedExt(int mode, int start, int count, int primcount) {
   final glDrawArraysInstancedExtAsFunction = _glDrawArraysInstancedExt
       .cast<
         NativeFunction<
-          Void Function(
-            Uint32 mode,
-            Int32 start,
-            Uint32 count,
-            Uint32 primcount,
-          )
+          Void Function(Uint32 mode, Int32 start, Int32 count, Int32 primcount)
         >
       >()
       .asFunction<
@@ -41664,7 +41120,7 @@ void glDrawElementsInstancedExt(
   int mode,
   int count,
   int type,
-  Pointer<NativeType> indices,
+  Pointer<Void> indices,
   int primcount,
 ) {
   final glDrawElementsInstancedExtAsFunction = _glDrawElementsInstancedExt
@@ -41672,10 +41128,10 @@ void glDrawElementsInstancedExt(
         NativeFunction<
           Void Function(
             Uint32 mode,
-            Uint32 count,
+            Int32 count,
             Uint32 type,
-            Pointer<NativeType> indices,
-            Uint32 primcount,
+            Pointer<Void> indices,
+            Int32 primcount,
           )
         >
       >()
@@ -41684,7 +41140,7 @@ void glDrawElementsInstancedExt(
           int mode,
           int count,
           int type,
-          Pointer<NativeType> indices,
+          Pointer<Void> indices,
           int primcount,
         )
       >();
@@ -41710,7 +41166,7 @@ void glDrawRangeElementsExt(
   int end,
   int count,
   int type,
-  Pointer<NativeType> indices,
+  Pointer<Void> indices,
 ) {
   final glDrawRangeElementsExtAsFunction = _glDrawRangeElementsExt
       .cast<
@@ -41719,9 +41175,9 @@ void glDrawRangeElementsExt(
             Uint32 mode,
             Uint32 start,
             Uint32 end,
-            Uint32 count,
+            Int32 count,
             Uint32 type,
-            Pointer<NativeType> indices,
+            Pointer<Void> indices,
           )
         >
       >()
@@ -41732,7 +41188,7 @@ void glDrawRangeElementsExt(
           int end,
           int count,
           int type,
-          Pointer<NativeType> indices,
+          Pointer<Void> indices,
         )
       >();
   return glDrawRangeElementsExtAsFunction(
@@ -41754,9 +41210,9 @@ late Pointer<NativeFunction<Void Function()>> _glBufferStorageExternalExt;
 /// {@category opengl_glext}
 void glBufferStorageExternalExt(
   int target,
-  Pointer<NativeType> offset,
-  Pointer<Uint32> size,
-  Pointer<NativeType> clientBuffer,
+  int offset,
+  int size,
+  Pointer<Void> clientBuffer,
   int flags,
 ) {
   final glBufferStorageExternalExtAsFunction = _glBufferStorageExternalExt
@@ -41764,9 +41220,9 @@ void glBufferStorageExternalExt(
         NativeFunction<
           Void Function(
             Uint32 target,
-            Pointer<NativeType> offset,
-            Pointer<Uint32> size,
-            Pointer<NativeType> clientBuffer,
+            IntPtr offset,
+            IntPtr size,
+            Pointer<Void> clientBuffer,
             Uint32 flags,
           )
         >
@@ -41774,9 +41230,9 @@ void glBufferStorageExternalExt(
       .asFunction<
         void Function(
           int target,
-          Pointer<NativeType> offset,
-          Pointer<Uint32> size,
-          Pointer<NativeType> clientBuffer,
+          int offset,
+          int size,
+          Pointer<Void> clientBuffer,
           int flags,
         )
       >();
@@ -41798,9 +41254,9 @@ late Pointer<NativeFunction<Void Function()>> _glNamedBufferStorageExternalExt;
 /// {@category opengl_glext}
 void glNamedBufferStorageExternalExt(
   int buffer,
-  Pointer<NativeType> offset,
-  Pointer<Uint32> size,
-  Pointer<NativeType> clientBuffer,
+  int offset,
+  int size,
+  Pointer<Void> clientBuffer,
   int flags,
 ) {
   final glNamedBufferStorageExternalExtAsFunction =
@@ -41809,9 +41265,9 @@ void glNamedBufferStorageExternalExt(
             NativeFunction<
               Void Function(
                 Uint32 buffer,
-                Pointer<NativeType> offset,
-                Pointer<Uint32> size,
-                Pointer<NativeType> clientBuffer,
+                IntPtr offset,
+                IntPtr size,
+                Pointer<Void> clientBuffer,
                 Uint32 flags,
               )
             >
@@ -41819,9 +41275,9 @@ void glNamedBufferStorageExternalExt(
           .asFunction<
             void Function(
               int buffer,
-              Pointer<NativeType> offset,
-              Pointer<Uint32> size,
-              Pointer<NativeType> clientBuffer,
+              int offset,
+              int size,
+              Pointer<Void> clientBuffer,
               int flags,
             )
           >();
@@ -41897,16 +41353,14 @@ late Pointer<NativeFunction<Void Function()>> _glFogCoordPointerExt;
 /// GLAPI void APIENTRY glFogCoordPointerEXT (GLenum type, GLsizei stride, const void *pointer)
 /// ```
 /// {@category opengl_glext}
-void glFogCoordPointerExt(int type, int stride, Pointer<NativeType> pointer) {
+void glFogCoordPointerExt(int type, int stride, Pointer<Void> pointer) {
   final glFogCoordPointerExtAsFunction = _glFogCoordPointerExt
       .cast<
         NativeFunction<
-          Void Function(Uint32 type, Uint32 stride, Pointer<NativeType> pointer)
+          Void Function(Uint32 type, Int32 stride, Pointer<Void> pointer)
         >
       >()
-      .asFunction<
-        void Function(int type, int stride, Pointer<NativeType> pointer)
-      >();
+      .asFunction<void Function(int type, int stride, Pointer<Void> pointer)>();
   return glFogCoordPointerExtAsFunction(type, stride, pointer);
 }
 
@@ -41920,16 +41374,16 @@ late Pointer<NativeFunction<Void Function()>> _glGetFragmentShadingRatesExt;
 void glGetFragmentShadingRatesExt(
   int samples,
   int maxCount,
-  Pointer<Uint32> count,
+  Pointer<Int32> count,
   Pointer<Uint32> shadingRates,
 ) {
   final glGetFragmentShadingRatesExtAsFunction = _glGetFragmentShadingRatesExt
       .cast<
         NativeFunction<
           Void Function(
-            Uint32 samples,
-            Uint32 maxCount,
-            Pointer<Uint32> count,
+            Int32 samples,
+            Int32 maxCount,
+            Pointer<Int32> count,
             Pointer<Uint32> shadingRates,
           )
         >
@@ -41938,7 +41392,7 @@ void glGetFragmentShadingRatesExt(
         void Function(
           int samples,
           int maxCount,
-          Pointer<Uint32> count,
+          Pointer<Int32> count,
           Pointer<Uint32> shadingRates,
         )
       >();
@@ -42004,9 +41458,9 @@ void glFramebufferShadingRateExt(
             Uint32 attachment,
             Uint32 texture,
             Int32 baseLayer,
-            Uint32 numLayers,
-            Uint32 texelWidth,
-            Uint32 texelHeight,
+            Int32 numLayers,
+            Int32 texelWidth,
+            Int32 texelHeight,
           )
         >
       >()
@@ -42253,10 +41707,10 @@ void glRenderbufferStorageMultisampleExt(
             NativeFunction<
               Void Function(
                 Uint32 target,
-                Uint32 samples,
+                Int32 samples,
                 Uint32 internalformat,
-                Uint32 width,
-                Uint32 height,
+                Int32 width,
+                Int32 height,
               )
             >
           >()
@@ -42287,7 +41741,7 @@ late Pointer<NativeFunction<Void Function()>> _glIsRenderbufferExt;
 /// {@category opengl_glext}
 int glIsRenderbufferExt(int renderbuffer) {
   final glIsRenderbufferExtAsFunction = _glIsRenderbufferExt
-      .cast<NativeFunction<Int32 Function(Uint32 renderbuffer)>>()
+      .cast<NativeFunction<Uint8 Function(Uint32 renderbuffer)>>()
       .asFunction<int Function(int renderbuffer)>();
   return glIsRenderbufferExtAsFunction(renderbuffer);
 }
@@ -42316,7 +41770,7 @@ late Pointer<NativeFunction<Void Function()>> _glDeleteRenderbuffersExt;
 void glDeleteRenderbuffersExt(int n, Pointer<Uint32> renderbuffers) {
   final glDeleteRenderbuffersExtAsFunction = _glDeleteRenderbuffersExt
       .cast<
-        NativeFunction<Void Function(Uint32 n, Pointer<Uint32> renderbuffers)>
+        NativeFunction<Void Function(Int32 n, Pointer<Uint32> renderbuffers)>
       >()
       .asFunction<void Function(int n, Pointer<Uint32> renderbuffers)>();
   return glDeleteRenderbuffersExtAsFunction(n, renderbuffers);
@@ -42332,7 +41786,7 @@ late Pointer<NativeFunction<Void Function()>> _glGenRenderbuffersExt;
 void glGenRenderbuffersExt(int n, Pointer<Uint32> renderbuffers) {
   final glGenRenderbuffersExtAsFunction = _glGenRenderbuffersExt
       .cast<
-        NativeFunction<Void Function(Uint32 n, Pointer<Uint32> renderbuffers)>
+        NativeFunction<Void Function(Int32 n, Pointer<Uint32> renderbuffers)>
       >()
       .asFunction<void Function(int n, Pointer<Uint32> renderbuffers)>();
   return glGenRenderbuffersExtAsFunction(n, renderbuffers);
@@ -42357,8 +41811,8 @@ void glRenderbufferStorageExt(
           Void Function(
             Uint32 target,
             Uint32 internalformat,
-            Uint32 width,
-            Uint32 height,
+            Int32 width,
+            Int32 height,
           )
         >
       >()
@@ -42407,7 +41861,7 @@ late Pointer<NativeFunction<Void Function()>> _glIsFramebufferExt;
 /// {@category opengl_glext}
 int glIsFramebufferExt(int framebuffer) {
   final glIsFramebufferExtAsFunction = _glIsFramebufferExt
-      .cast<NativeFunction<Int32 Function(Uint32 framebuffer)>>()
+      .cast<NativeFunction<Uint8 Function(Uint32 framebuffer)>>()
       .asFunction<int Function(int framebuffer)>();
   return glIsFramebufferExtAsFunction(framebuffer);
 }
@@ -42436,7 +41890,7 @@ late Pointer<NativeFunction<Void Function()>> _glDeleteFramebuffersExt;
 void glDeleteFramebuffersExt(int n, Pointer<Uint32> framebuffers) {
   final glDeleteFramebuffersExtAsFunction = _glDeleteFramebuffersExt
       .cast<
-        NativeFunction<Void Function(Uint32 n, Pointer<Uint32> framebuffers)>
+        NativeFunction<Void Function(Int32 n, Pointer<Uint32> framebuffers)>
       >()
       .asFunction<void Function(int n, Pointer<Uint32> framebuffers)>();
   return glDeleteFramebuffersExtAsFunction(n, framebuffers);
@@ -42452,7 +41906,7 @@ late Pointer<NativeFunction<Void Function()>> _glGenFramebuffersExt;
 void glGenFramebuffersExt(int n, Pointer<Uint32> framebuffers) {
   final glGenFramebuffersExtAsFunction = _glGenFramebuffersExt
       .cast<
-        NativeFunction<Void Function(Uint32 n, Pointer<Uint32> framebuffers)>
+        NativeFunction<Void Function(Int32 n, Pointer<Uint32> framebuffers)>
       >()
       .asFunction<void Function(int n, Pointer<Uint32> framebuffers)>();
   return glGenFramebuffersExtAsFunction(n, framebuffers);
@@ -42739,7 +42193,7 @@ void glProgramEnvParameters4fvExt(
           Void Function(
             Uint32 target,
             Uint32 index,
-            Uint32 count,
+            Int32 count,
             Pointer<Float> params,
           )
         >
@@ -42770,7 +42224,7 @@ void glProgramLocalParameters4fvExt(
               Void Function(
                 Uint32 target,
                 Uint32 index,
-                Uint32 count,
+                Int32 count,
                 Pointer<Float> params,
               )
             >
@@ -42935,7 +42389,7 @@ void glUniform1uivExt(int location, int count, Pointer<Uint32> value) {
   final glUniform1uivExtAsFunction = _glUniform1uivExt
       .cast<
         NativeFunction<
-          Void Function(Int32 location, Uint32 count, Pointer<Uint32> value)
+          Void Function(Int32 location, Int32 count, Pointer<Uint32> value)
         >
       >()
       .asFunction<
@@ -42955,7 +42409,7 @@ void glUniform2uivExt(int location, int count, Pointer<Uint32> value) {
   final glUniform2uivExtAsFunction = _glUniform2uivExt
       .cast<
         NativeFunction<
-          Void Function(Int32 location, Uint32 count, Pointer<Uint32> value)
+          Void Function(Int32 location, Int32 count, Pointer<Uint32> value)
         >
       >()
       .asFunction<
@@ -42975,7 +42429,7 @@ void glUniform3uivExt(int location, int count, Pointer<Uint32> value) {
   final glUniform3uivExtAsFunction = _glUniform3uivExt
       .cast<
         NativeFunction<
-          Void Function(Int32 location, Uint32 count, Pointer<Uint32> value)
+          Void Function(Int32 location, Int32 count, Pointer<Uint32> value)
         >
       >()
       .asFunction<
@@ -42995,7 +42449,7 @@ void glUniform4uivExt(int location, int count, Pointer<Uint32> value) {
   final glUniform4uivExtAsFunction = _glUniform4uivExt
       .cast<
         NativeFunction<
-          Void Function(Int32 location, Uint32 count, Pointer<Uint32> value)
+          Void Function(Int32 location, Int32 count, Pointer<Uint32> value)
         >
       >()
       .asFunction<
@@ -43313,7 +42767,7 @@ void glVertexAttribIPointerExt(
   int size,
   int type,
   int stride,
-  Pointer<NativeType> pointer,
+  Pointer<Void> pointer,
 ) {
   final glVertexAttribIPointerExtAsFunction = _glVertexAttribIPointerExt
       .cast<
@@ -43322,8 +42776,8 @@ void glVertexAttribIPointerExt(
             Uint32 index,
             Int32 size,
             Uint32 type,
-            Uint32 stride,
-            Pointer<NativeType> pointer,
+            Int32 stride,
+            Pointer<Void> pointer,
           )
         >
       >()
@@ -43333,7 +42787,7 @@ void glVertexAttribIPointerExt(
           int size,
           int type,
           int stride,
-          Pointer<NativeType> pointer,
+          Pointer<Void> pointer,
         )
       >();
   return glVertexAttribIPointerExtAsFunction(
@@ -43395,17 +42849,17 @@ void glGetHistogramExt(
   int reset,
   int format,
   int type,
-  Pointer<NativeType> values,
+  Pointer<Void> values,
 ) {
   final glGetHistogramExtAsFunction = _glGetHistogramExt
       .cast<
         NativeFunction<
           Void Function(
             Uint32 target,
-            Int32 reset,
+            Uint8 reset,
             Uint32 format,
             Uint32 type,
-            Pointer<NativeType> values,
+            Pointer<Void> values,
           )
         >
       >()
@@ -43415,7 +42869,7 @@ void glGetHistogramExt(
           int reset,
           int format,
           int type,
-          Pointer<NativeType> values,
+          Pointer<Void> values,
         )
       >();
   return glGetHistogramExtAsFunction(target, reset, format, type, values);
@@ -43481,17 +42935,17 @@ void glGetMinmaxExt(
   int reset,
   int format,
   int type,
-  Pointer<NativeType> values,
+  Pointer<Void> values,
 ) {
   final glGetMinmaxExtAsFunction = _glGetMinmaxExt
       .cast<
         NativeFunction<
           Void Function(
             Uint32 target,
-            Int32 reset,
+            Uint8 reset,
             Uint32 format,
             Uint32 type,
-            Pointer<NativeType> values,
+            Pointer<Void> values,
           )
         >
       >()
@@ -43501,7 +42955,7 @@ void glGetMinmaxExt(
           int reset,
           int format,
           int type,
-          Pointer<NativeType> values,
+          Pointer<Void> values,
         )
       >();
   return glGetMinmaxExtAsFunction(target, reset, format, type, values);
@@ -43560,9 +43014,9 @@ void glHistogramExt(int target, int width, int internalformat, int sink) {
         NativeFunction<
           Void Function(
             Uint32 target,
-            Uint32 width,
+            Int32 width,
             Uint32 internalformat,
-            Int32 sink,
+            Uint8 sink,
           )
         >
       >()
@@ -43583,7 +43037,7 @@ void glMinmaxExt(int target, int internalformat, int sink) {
   final glMinmaxExtAsFunction = _glMinmaxExt
       .cast<
         NativeFunction<
-          Void Function(Uint32 target, Uint32 internalformat, Int32 sink)
+          Void Function(Uint32 target, Uint32 internalformat, Uint8 sink)
         >
       >()
       .asFunction<void Function(int target, int internalformat, int sink)>();
@@ -43730,7 +43184,7 @@ late Pointer<NativeFunction<Void Function()>> _glDeleteMemoryObjectsExt;
 void glDeleteMemoryObjectsExt(int n, Pointer<Uint32> memoryObjects) {
   final glDeleteMemoryObjectsExtAsFunction = _glDeleteMemoryObjectsExt
       .cast<
-        NativeFunction<Void Function(Uint32 n, Pointer<Uint32> memoryObjects)>
+        NativeFunction<Void Function(Int32 n, Pointer<Uint32> memoryObjects)>
       >()
       .asFunction<void Function(int n, Pointer<Uint32> memoryObjects)>();
   return glDeleteMemoryObjectsExtAsFunction(n, memoryObjects);
@@ -43745,7 +43199,7 @@ late Pointer<NativeFunction<Void Function()>> _glIsMemoryObjectExt;
 /// {@category opengl_glext}
 int glIsMemoryObjectExt(int memoryObject) {
   final glIsMemoryObjectExtAsFunction = _glIsMemoryObjectExt
-      .cast<NativeFunction<Int32 Function(Uint32 memoryObject)>>()
+      .cast<NativeFunction<Uint8 Function(Uint32 memoryObject)>>()
       .asFunction<int Function(int memoryObject)>();
   return glIsMemoryObjectExtAsFunction(memoryObject);
 }
@@ -43760,7 +43214,7 @@ late Pointer<NativeFunction<Void Function()>> _glCreateMemoryObjectsExt;
 void glCreateMemoryObjectsExt(int n, Pointer<Uint32> memoryObjects) {
   final glCreateMemoryObjectsExtAsFunction = _glCreateMemoryObjectsExt
       .cast<
-        NativeFunction<Void Function(Uint32 n, Pointer<Uint32> memoryObjects)>
+        NativeFunction<Void Function(Int32 n, Pointer<Uint32> memoryObjects)>
       >()
       .asFunction<void Function(int n, Pointer<Uint32> memoryObjects)>();
   return glCreateMemoryObjectsExtAsFunction(n, memoryObjects);
@@ -43844,10 +43298,10 @@ void glTexStorageMem2Dext(
         NativeFunction<
           Void Function(
             Uint32 target,
-            Uint32 levels,
+            Int32 levels,
             Uint32 internalFormat,
-            Uint32 width,
-            Uint32 height,
+            Int32 width,
+            Int32 height,
             Uint32 memory,
             Uint64 offset,
           )
@@ -43898,11 +43352,11 @@ void glTexStorageMem2DMultisampleExt(
             NativeFunction<
               Void Function(
                 Uint32 target,
-                Uint32 samples,
+                Int32 samples,
                 Uint32 internalFormat,
-                Uint32 width,
-                Uint32 height,
-                Int32 fixedSampleLocations,
+                Int32 width,
+                Int32 height,
+                Uint8 fixedSampleLocations,
                 Uint32 memory,
                 Uint64 offset,
               )
@@ -43954,11 +43408,11 @@ void glTexStorageMem3Dext(
         NativeFunction<
           Void Function(
             Uint32 target,
-            Uint32 levels,
+            Int32 levels,
             Uint32 internalFormat,
-            Uint32 width,
-            Uint32 height,
-            Uint32 depth,
+            Int32 width,
+            Int32 height,
+            Int32 depth,
             Uint32 memory,
             Uint64 offset,
           )
@@ -44012,12 +43466,12 @@ void glTexStorageMem3DMultisampleExt(
             NativeFunction<
               Void Function(
                 Uint32 target,
-                Uint32 samples,
+                Int32 samples,
                 Uint32 internalFormat,
-                Uint32 width,
-                Uint32 height,
-                Uint32 depth,
-                Int32 fixedSampleLocations,
+                Int32 width,
+                Int32 height,
+                Int32 depth,
+                Uint8 fixedSampleLocations,
                 Uint32 memory,
                 Uint64 offset,
               )
@@ -44056,25 +43510,20 @@ late Pointer<NativeFunction<Void Function()>> _glBufferStorageMemExt;
 /// GLAPI void APIENTRY glBufferStorageMemEXT (GLenum target, GLsizeiptr size, GLuint memory, GLuint64 offset)
 /// ```
 /// {@category opengl_glext}
-void glBufferStorageMemExt(
-  int target,
-  Pointer<Uint32> size,
-  int memory,
-  int offset,
-) {
+void glBufferStorageMemExt(int target, int size, int memory, int offset) {
   final glBufferStorageMemExtAsFunction = _glBufferStorageMemExt
       .cast<
         NativeFunction<
           Void Function(
             Uint32 target,
-            Pointer<Uint32> size,
+            IntPtr size,
             Uint32 memory,
             Uint64 offset,
           )
         >
       >()
       .asFunction<
-        void Function(int target, Pointer<Uint32> size, int memory, int offset)
+        void Function(int target, int size, int memory, int offset)
       >();
   return glBufferStorageMemExtAsFunction(target, size, memory, offset);
 }
@@ -44100,10 +43549,10 @@ void glTextureStorageMem2Dext(
         NativeFunction<
           Void Function(
             Uint32 texture,
-            Uint32 levels,
+            Int32 levels,
             Uint32 internalFormat,
-            Uint32 width,
-            Uint32 height,
+            Int32 width,
+            Int32 height,
             Uint32 memory,
             Uint64 offset,
           )
@@ -44155,11 +43604,11 @@ void glTextureStorageMem2DMultisampleExt(
             NativeFunction<
               Void Function(
                 Uint32 texture,
-                Uint32 samples,
+                Int32 samples,
                 Uint32 internalFormat,
-                Uint32 width,
-                Uint32 height,
-                Int32 fixedSampleLocations,
+                Int32 width,
+                Int32 height,
+                Uint8 fixedSampleLocations,
                 Uint32 memory,
                 Uint64 offset,
               )
@@ -44211,11 +43660,11 @@ void glTextureStorageMem3Dext(
         NativeFunction<
           Void Function(
             Uint32 texture,
-            Uint32 levels,
+            Int32 levels,
             Uint32 internalFormat,
-            Uint32 width,
-            Uint32 height,
-            Uint32 depth,
+            Int32 width,
+            Int32 height,
+            Int32 depth,
             Uint32 memory,
             Uint64 offset,
           )
@@ -44270,12 +43719,12 @@ void glTextureStorageMem3DMultisampleExt(
             NativeFunction<
               Void Function(
                 Uint32 texture,
-                Uint32 samples,
+                Int32 samples,
                 Uint32 internalFormat,
-                Uint32 width,
-                Uint32 height,
-                Uint32 depth,
-                Int32 fixedSampleLocations,
+                Int32 width,
+                Int32 height,
+                Int32 depth,
+                Uint8 fixedSampleLocations,
                 Uint32 memory,
                 Uint64 offset,
               )
@@ -44314,25 +43763,20 @@ late Pointer<NativeFunction<Void Function()>> _glNamedBufferStorageMemExt;
 /// GLAPI void APIENTRY glNamedBufferStorageMemEXT (GLuint buffer, GLsizeiptr size, GLuint memory, GLuint64 offset)
 /// ```
 /// {@category opengl_glext}
-void glNamedBufferStorageMemExt(
-  int buffer,
-  Pointer<Uint32> size,
-  int memory,
-  int offset,
-) {
+void glNamedBufferStorageMemExt(int buffer, int size, int memory, int offset) {
   final glNamedBufferStorageMemExtAsFunction = _glNamedBufferStorageMemExt
       .cast<
         NativeFunction<
           Void Function(
             Uint32 buffer,
-            Pointer<Uint32> size,
+            IntPtr size,
             Uint32 memory,
             Uint64 offset,
           )
         >
       >()
       .asFunction<
-        void Function(int buffer, Pointer<Uint32> size, int memory, int offset)
+        void Function(int buffer, int size, int memory, int offset)
       >();
   return glNamedBufferStorageMemExtAsFunction(buffer, size, memory, offset);
 }
@@ -44357,9 +43801,9 @@ void glTexStorageMem1Dext(
         NativeFunction<
           Void Function(
             Uint32 target,
-            Uint32 levels,
+            Int32 levels,
             Uint32 internalFormat,
-            Uint32 width,
+            Int32 width,
             Uint32 memory,
             Uint64 offset,
           )
@@ -44405,9 +43849,9 @@ void glTextureStorageMem1Dext(
         NativeFunction<
           Void Function(
             Uint32 texture,
-            Uint32 levels,
+            Int32 levels,
             Uint32 internalFormat,
-            Uint32 width,
+            Int32 width,
             Uint32 memory,
             Uint64 offset,
           )
@@ -44464,7 +43908,7 @@ void glImportMemoryWin32HandleExt(
   int memory,
   int size,
   int handleType,
-  Pointer<NativeType> handle,
+  Pointer<Void> handle,
 ) {
   final glImportMemoryWin32HandleExtAsFunction = _glImportMemoryWin32HandleExt
       .cast<
@@ -44473,7 +43917,7 @@ void glImportMemoryWin32HandleExt(
             Uint32 memory,
             Uint64 size,
             Uint32 handleType,
-            Pointer<NativeType> handle,
+            Pointer<Void> handle,
           )
         >
       >()
@@ -44482,7 +43926,7 @@ void glImportMemoryWin32HandleExt(
           int memory,
           int size,
           int handleType,
-          Pointer<NativeType> handle,
+          Pointer<Void> handle,
         )
       >();
   return glImportMemoryWin32HandleExtAsFunction(
@@ -44504,7 +43948,7 @@ void glImportMemoryWin32NameExt(
   int memory,
   int size,
   int handleType,
-  Pointer<NativeType> name,
+  Pointer<Void> name,
 ) {
   final glImportMemoryWin32NameExtAsFunction = _glImportMemoryWin32NameExt
       .cast<
@@ -44513,17 +43957,12 @@ void glImportMemoryWin32NameExt(
             Uint32 memory,
             Uint64 size,
             Uint32 handleType,
-            Pointer<NativeType> name,
+            Pointer<Void> name,
           )
         >
       >()
       .asFunction<
-        void Function(
-          int memory,
-          int size,
-          int handleType,
-          Pointer<NativeType> name,
-        )
+        void Function(int memory, int size, int handleType, Pointer<Void> name)
       >();
   return glImportMemoryWin32NameExtAsFunction(memory, size, handleType, name);
 }
@@ -44555,10 +43994,10 @@ late Pointer<NativeFunction<Void Function()>> _glDrawMeshTasksIndirectExt;
 /// GLAPI void APIENTRY glDrawMeshTasksIndirectEXT (GLintptr indirect)
 /// ```
 /// {@category opengl_glext}
-void glDrawMeshTasksIndirectExt(Pointer<NativeType> indirect) {
+void glDrawMeshTasksIndirectExt(int indirect) {
   final glDrawMeshTasksIndirectExtAsFunction = _glDrawMeshTasksIndirectExt
-      .cast<NativeFunction<Void Function(Pointer<NativeType> indirect)>>()
-      .asFunction<void Function(Pointer<NativeType> indirect)>();
+      .cast<NativeFunction<Void Function(IntPtr indirect)>>()
+      .asFunction<void Function(int indirect)>();
   return glDrawMeshTasksIndirectExtAsFunction(indirect);
 }
 
@@ -44569,29 +44008,15 @@ late Pointer<NativeFunction<Void Function()>> _glMultiDrawMeshTasksIndirectExt;
 /// GLAPI void APIENTRY glMultiDrawMeshTasksIndirectEXT (GLintptr indirect, GLsizei drawcount, GLsizei stride)
 /// ```
 /// {@category opengl_glext}
-void glMultiDrawMeshTasksIndirectExt(
-  Pointer<NativeType> indirect,
-  int drawcount,
-  int stride,
-) {
+void glMultiDrawMeshTasksIndirectExt(int indirect, int drawcount, int stride) {
   final glMultiDrawMeshTasksIndirectExtAsFunction =
       _glMultiDrawMeshTasksIndirectExt
           .cast<
             NativeFunction<
-              Void Function(
-                Pointer<NativeType> indirect,
-                Uint32 drawcount,
-                Uint32 stride,
-              )
+              Void Function(IntPtr indirect, Int32 drawcount, Int32 stride)
             >
           >()
-          .asFunction<
-            void Function(
-              Pointer<NativeType> indirect,
-              int drawcount,
-              int stride,
-            )
-          >();
+          .asFunction<void Function(int indirect, int drawcount, int stride)>();
   return glMultiDrawMeshTasksIndirectExtAsFunction(indirect, drawcount, stride);
 }
 
@@ -44604,8 +44029,8 @@ _glMultiDrawMeshTasksIndirectCountExt;
 /// ```
 /// {@category opengl_glext}
 void glMultiDrawMeshTasksIndirectCountExt(
-  Pointer<NativeType> indirect,
-  Pointer<NativeType> drawcount,
+  int indirect,
+  int drawcount,
   int maxdrawcount,
   int stride,
 ) {
@@ -44614,17 +44039,17 @@ void glMultiDrawMeshTasksIndirectCountExt(
           .cast<
             NativeFunction<
               Void Function(
-                Pointer<NativeType> indirect,
-                Pointer<NativeType> drawcount,
-                Uint32 maxdrawcount,
-                Uint32 stride,
+                IntPtr indirect,
+                IntPtr drawcount,
+                Int32 maxdrawcount,
+                Int32 stride,
               )
             >
           >()
           .asFunction<
             void Function(
-              Pointer<NativeType> indirect,
-              Pointer<NativeType> drawcount,
+              int indirect,
+              int drawcount,
               int maxdrawcount,
               int stride,
             )
@@ -44647,7 +44072,7 @@ late Pointer<NativeFunction<Void Function()>> _glMultiDrawArraysExt;
 void glMultiDrawArraysExt(
   int mode,
   Pointer<Int32> first,
-  Pointer<Uint32> count,
+  Pointer<Int32> count,
   int primcount,
 ) {
   final glMultiDrawArraysExtAsFunction = _glMultiDrawArraysExt
@@ -44656,8 +44081,8 @@ void glMultiDrawArraysExt(
           Void Function(
             Uint32 mode,
             Pointer<Int32> first,
-            Pointer<Uint32> count,
-            Uint32 primcount,
+            Pointer<Int32> count,
+            Int32 primcount,
           )
         >
       >()
@@ -44665,7 +44090,7 @@ void glMultiDrawArraysExt(
         void Function(
           int mode,
           Pointer<Int32> first,
-          Pointer<Uint32> count,
+          Pointer<Int32> count,
           int primcount,
         )
       >();
@@ -44681,9 +44106,9 @@ late Pointer<NativeFunction<Void Function()>> _glMultiDrawElementsExt;
 /// {@category opengl_glext}
 void glMultiDrawElementsExt(
   int mode,
-  Pointer<Uint32> count,
+  Pointer<Int32> count,
   int type,
-  Pointer<Pointer<NativeType>> indices,
+  Pointer<Pointer<Void>> indices,
   int primcount,
 ) {
   final glMultiDrawElementsExtAsFunction = _glMultiDrawElementsExt
@@ -44691,19 +44116,19 @@ void glMultiDrawElementsExt(
         NativeFunction<
           Void Function(
             Uint32 mode,
-            Pointer<Uint32> count,
+            Pointer<Int32> count,
             Uint32 type,
-            Pointer<Pointer<NativeType>> indices,
-            Uint32 primcount,
+            Pointer<Pointer<Void>> indices,
+            Int32 primcount,
           )
         >
       >()
       .asFunction<
         void Function(
           int mode,
-          Pointer<Uint32> count,
+          Pointer<Int32> count,
           int type,
-          Pointer<Pointer<NativeType>> indices,
+          Pointer<Pointer<Void>> indices,
           int primcount,
         )
       >();
@@ -44725,7 +44150,7 @@ late Pointer<NativeFunction<Void Function()>> _glSampleMaskExt;
 /// {@category opengl_glext}
 void glSampleMaskExt(double value, int invert) {
   final glSampleMaskExtAsFunction = _glSampleMaskExt
-      .cast<NativeFunction<Void Function(Float value, Int32 invert)>>()
+      .cast<NativeFunction<Void Function(Float value, Uint8 invert)>>()
       .asFunction<void Function(double value, int invert)>();
   return glSampleMaskExtAsFunction(value, invert);
 }
@@ -44757,7 +44182,7 @@ void glColorTableExt(
   int width,
   int format,
   int type,
-  Pointer<NativeType> table,
+  Pointer<Void> table,
 ) {
   final glColorTableExtAsFunction = _glColorTableExt
       .cast<
@@ -44765,10 +44190,10 @@ void glColorTableExt(
           Void Function(
             Uint32 target,
             Uint32 internalFormat,
-            Uint32 width,
+            Int32 width,
             Uint32 format,
             Uint32 type,
-            Pointer<NativeType> table,
+            Pointer<Void> table,
           )
         >
       >()
@@ -44779,7 +44204,7 @@ void glColorTableExt(
           int width,
           int format,
           int type,
-          Pointer<NativeType> table,
+          Pointer<Void> table,
         )
       >();
   return glColorTableExtAsFunction(
@@ -44799,12 +44224,7 @@ late Pointer<NativeFunction<Void Function()>> _glGetColorTableExt;
 /// GLAPI void APIENTRY glGetColorTableEXT (GLenum target, GLenum format, GLenum type, void *data)
 /// ```
 /// {@category opengl_glext}
-void glGetColorTableExt(
-  int target,
-  int format,
-  int type,
-  Pointer<NativeType> data,
-) {
+void glGetColorTableExt(int target, int format, int type, Pointer<Void> data) {
   final glGetColorTableExtAsFunction = _glGetColorTableExt
       .cast<
         NativeFunction<
@@ -44812,17 +44232,12 @@ void glGetColorTableExt(
             Uint32 target,
             Uint32 format,
             Uint32 type,
-            Pointer<NativeType> data,
+            Pointer<Void> data,
           )
         >
       >()
       .asFunction<
-        void Function(
-          int target,
-          int format,
-          int type,
-          Pointer<NativeType> data,
-        )
+        void Function(int target, int format, int type, Pointer<Void> data)
       >();
   return glGetColorTableExtAsFunction(target, format, type, data);
 }
@@ -45094,7 +44509,7 @@ void glRasterSamplesExt(int samples, int fixedsamplelocations) {
   final glRasterSamplesExtAsFunction = _glRasterSamplesExt
       .cast<
         NativeFunction<
-          Void Function(Uint32 samples, Int32 fixedsamplelocations)
+          Void Function(Uint32 samples, Uint8 fixedsamplelocations)
         >
       >()
       .asFunction<void Function(int samples, int fixedsamplelocations)>();
@@ -45345,7 +44760,7 @@ void glSecondaryColorPointerExt(
   int size,
   int type,
   int stride,
-  Pointer<NativeType> pointer,
+  Pointer<Void> pointer,
 ) {
   final glSecondaryColorPointerExtAsFunction = _glSecondaryColorPointerExt
       .cast<
@@ -45353,18 +44768,13 @@ void glSecondaryColorPointerExt(
           Void Function(
             Int32 size,
             Uint32 type,
-            Uint32 stride,
-            Pointer<NativeType> pointer,
+            Int32 stride,
+            Pointer<Void> pointer,
           )
         >
       >()
       .asFunction<
-        void Function(
-          int size,
-          int type,
-          int stride,
-          Pointer<NativeType> pointer,
-        )
+        void Function(int size, int type, int stride, Pointer<Void> pointer)
       >();
   return glSecondaryColorPointerExtAsFunction(size, type, stride, pointer);
 }
@@ -45379,7 +44789,7 @@ late Pointer<NativeFunction<Void Function()>> _glGenSemaphoresExt;
 void glGenSemaphoresExt(int n, Pointer<Uint32> semaphores) {
   final glGenSemaphoresExtAsFunction = _glGenSemaphoresExt
       .cast<
-        NativeFunction<Void Function(Uint32 n, Pointer<Uint32> semaphores)>
+        NativeFunction<Void Function(Int32 n, Pointer<Uint32> semaphores)>
       >()
       .asFunction<void Function(int n, Pointer<Uint32> semaphores)>();
   return glGenSemaphoresExtAsFunction(n, semaphores);
@@ -45395,7 +44805,7 @@ late Pointer<NativeFunction<Void Function()>> _glDeleteSemaphoresExt;
 void glDeleteSemaphoresExt(int n, Pointer<Uint32> semaphores) {
   final glDeleteSemaphoresExtAsFunction = _glDeleteSemaphoresExt
       .cast<
-        NativeFunction<Void Function(Uint32 n, Pointer<Uint32> semaphores)>
+        NativeFunction<Void Function(Int32 n, Pointer<Uint32> semaphores)>
       >()
       .asFunction<void Function(int n, Pointer<Uint32> semaphores)>();
   return glDeleteSemaphoresExtAsFunction(n, semaphores);
@@ -45410,7 +44820,7 @@ late Pointer<NativeFunction<Void Function()>> _glIsSemaphoreExt;
 /// {@category opengl_glext}
 int glIsSemaphoreExt(int semaphore) {
   final glIsSemaphoreExtAsFunction = _glIsSemaphoreExt
-      .cast<NativeFunction<Int32 Function(Uint32 semaphore)>>()
+      .cast<NativeFunction<Uint8 Function(Uint32 semaphore)>>()
       .asFunction<int Function(int semaphore)>();
   return glIsSemaphoreExtAsFunction(semaphore);
 }
@@ -45592,7 +45002,7 @@ late Pointer<NativeFunction<Void Function()>> _glImportSemaphoreWin32HandleExt;
 void glImportSemaphoreWin32HandleExt(
   int semaphore,
   int handleType,
-  Pointer<NativeType> handle,
+  Pointer<Void> handle,
 ) {
   final glImportSemaphoreWin32HandleExtAsFunction =
       _glImportSemaphoreWin32HandleExt
@@ -45601,16 +45011,12 @@ void glImportSemaphoreWin32HandleExt(
               Void Function(
                 Uint32 semaphore,
                 Uint32 handleType,
-                Pointer<NativeType> handle,
+                Pointer<Void> handle,
               )
             >
           >()
           .asFunction<
-            void Function(
-              int semaphore,
-              int handleType,
-              Pointer<NativeType> handle,
-            )
+            void Function(int semaphore, int handleType, Pointer<Void> handle)
           >();
   return glImportSemaphoreWin32HandleExtAsFunction(
     semaphore,
@@ -45629,20 +45035,16 @@ late Pointer<NativeFunction<Void Function()>> _glImportSemaphoreWin32NameExt;
 void glImportSemaphoreWin32NameExt(
   int semaphore,
   int handleType,
-  Pointer<NativeType> name,
+  Pointer<Void> name,
 ) {
   final glImportSemaphoreWin32NameExtAsFunction = _glImportSemaphoreWin32NameExt
       .cast<
         NativeFunction<
-          Void Function(
-            Uint32 semaphore,
-            Uint32 handleType,
-            Pointer<NativeType> name,
-          )
+          Void Function(Uint32 semaphore, Uint32 handleType, Pointer<Void> name)
         >
       >()
       .asFunction<
-        void Function(int semaphore, int handleType, Pointer<NativeType> name)
+        void Function(int semaphore, int handleType, Pointer<Void> name)
       >();
   return glImportSemaphoreWin32NameExtAsFunction(semaphore, handleType, name);
 }
@@ -45731,7 +45133,7 @@ void glBindImageTextureExt(
             Uint32 index,
             Uint32 texture,
             Int32 level,
-            Int32 layered,
+            Uint8 layered,
             Int32 layer,
             Uint32 access,
             Int32 format,
@@ -45785,7 +45187,7 @@ void glStencilClearTagExt(int stencilTagBits, int stencilClearTag) {
   final glStencilClearTagExtAsFunction = _glStencilClearTagExt
       .cast<
         NativeFunction<
-          Void Function(Uint32 stencilTagBits, Uint32 stencilClearTag)
+          Void Function(Int32 stencilTagBits, Uint32 stencilClearTag)
         >
       >()
       .asFunction<void Function(int stencilTagBits, int stencilClearTag)>();
@@ -45820,7 +45222,7 @@ void glTexSubImage1Dext(
   int width,
   int format,
   int type,
-  Pointer<NativeType> pixels,
+  Pointer<Void> pixels,
 ) {
   final glTexSubImage1DextAsFunction = _glTexSubImage1Dext
       .cast<
@@ -45829,10 +45231,10 @@ void glTexSubImage1Dext(
             Uint32 target,
             Int32 level,
             Int32 xoffset,
-            Uint32 width,
+            Int32 width,
             Uint32 format,
             Uint32 type,
-            Pointer<NativeType> pixels,
+            Pointer<Void> pixels,
           )
         >
       >()
@@ -45844,7 +45246,7 @@ void glTexSubImage1Dext(
           int width,
           int format,
           int type,
-          Pointer<NativeType> pixels,
+          Pointer<Void> pixels,
         )
       >();
   return glTexSubImage1DextAsFunction(
@@ -45874,7 +45276,7 @@ void glTexSubImage2Dext(
   int height,
   int format,
   int type,
-  Pointer<NativeType> pixels,
+  Pointer<Void> pixels,
 ) {
   final glTexSubImage2DextAsFunction = _glTexSubImage2Dext
       .cast<
@@ -45884,11 +45286,11 @@ void glTexSubImage2Dext(
             Int32 level,
             Int32 xoffset,
             Int32 yoffset,
-            Uint32 width,
-            Uint32 height,
+            Int32 width,
+            Int32 height,
             Uint32 format,
             Uint32 type,
-            Pointer<NativeType> pixels,
+            Pointer<Void> pixels,
           )
         >
       >()
@@ -45902,7 +45304,7 @@ void glTexSubImage2Dext(
           int height,
           int format,
           int type,
-          Pointer<NativeType> pixels,
+          Pointer<Void> pixels,
         )
       >();
   return glTexSubImage2DextAsFunction(
@@ -45935,7 +45337,7 @@ void glTexImage3Dext(
   int border,
   int format,
   int type,
-  Pointer<NativeType> pixels,
+  Pointer<Void> pixels,
 ) {
   final glTexImage3DextAsFunction = _glTexImage3Dext
       .cast<
@@ -45944,13 +45346,13 @@ void glTexImage3Dext(
             Uint32 target,
             Int32 level,
             Uint32 internalformat,
-            Uint32 width,
-            Uint32 height,
-            Uint32 depth,
+            Int32 width,
+            Int32 height,
+            Int32 depth,
             Int32 border,
             Uint32 format,
             Uint32 type,
-            Pointer<NativeType> pixels,
+            Pointer<Void> pixels,
           )
         >
       >()
@@ -45965,7 +45367,7 @@ void glTexImage3Dext(
           int border,
           int format,
           int type,
-          Pointer<NativeType> pixels,
+          Pointer<Void> pixels,
         )
       >();
   return glTexImage3DextAsFunction(
@@ -46000,7 +45402,7 @@ void glTexSubImage3Dext(
   int depth,
   int format,
   int type,
-  Pointer<NativeType> pixels,
+  Pointer<Void> pixels,
 ) {
   final glTexSubImage3DextAsFunction = _glTexSubImage3Dext
       .cast<
@@ -46011,12 +45413,12 @@ void glTexSubImage3Dext(
             Int32 xoffset,
             Int32 yoffset,
             Int32 zoffset,
-            Uint32 width,
-            Uint32 height,
-            Uint32 depth,
+            Int32 width,
+            Int32 height,
+            Int32 depth,
             Uint32 format,
             Uint32 type,
-            Pointer<NativeType> pixels,
+            Pointer<Void> pixels,
           )
         >
       >()
@@ -46032,7 +45434,7 @@ void glTexSubImage3Dext(
           int depth,
           int format,
           int type,
-          Pointer<NativeType> pixels,
+          Pointer<Void> pixels,
         )
       >();
   return glTexSubImage3DextAsFunction(
@@ -46238,20 +45640,20 @@ late Pointer<NativeFunction<Void Function()>> _glAreTexturesResidentExt;
 int glAreTexturesResidentExt(
   int n,
   Pointer<Uint32> textures,
-  Pointer<Int32> residences,
+  Pointer<Uint8> residences,
 ) {
   final glAreTexturesResidentExtAsFunction = _glAreTexturesResidentExt
       .cast<
         NativeFunction<
-          Int32 Function(
-            Uint32 n,
+          Uint8 Function(
+            Int32 n,
             Pointer<Uint32> textures,
-            Pointer<Int32> residences,
+            Pointer<Uint8> residences,
           )
         >
       >()
       .asFunction<
-        int Function(int n, Pointer<Uint32> textures, Pointer<Int32> residences)
+        int Function(int n, Pointer<Uint32> textures, Pointer<Uint8> residences)
       >();
   return glAreTexturesResidentExtAsFunction(n, textures, residences);
 }
@@ -46279,7 +45681,7 @@ late Pointer<NativeFunction<Void Function()>> _glDeleteTexturesExt;
 /// {@category opengl_glext}
 void glDeleteTexturesExt(int n, Pointer<Uint32> textures) {
   final glDeleteTexturesExtAsFunction = _glDeleteTexturesExt
-      .cast<NativeFunction<Void Function(Uint32 n, Pointer<Uint32> textures)>>()
+      .cast<NativeFunction<Void Function(Int32 n, Pointer<Uint32> textures)>>()
       .asFunction<void Function(int n, Pointer<Uint32> textures)>();
   return glDeleteTexturesExtAsFunction(n, textures);
 }
@@ -46293,7 +45695,7 @@ late Pointer<NativeFunction<Void Function()>> _glGenTexturesExt;
 /// {@category opengl_glext}
 void glGenTexturesExt(int n, Pointer<Uint32> textures) {
   final glGenTexturesExtAsFunction = _glGenTexturesExt
-      .cast<NativeFunction<Void Function(Uint32 n, Pointer<Uint32> textures)>>()
+      .cast<NativeFunction<Void Function(Int32 n, Pointer<Uint32> textures)>>()
       .asFunction<void Function(int n, Pointer<Uint32> textures)>();
   return glGenTexturesExtAsFunction(n, textures);
 }
@@ -46307,7 +45709,7 @@ late Pointer<NativeFunction<Void Function()>> _glIsTextureExt;
 /// {@category opengl_glext}
 int glIsTextureExt(int texture) {
   final glIsTextureExtAsFunction = _glIsTextureExt
-      .cast<NativeFunction<Int32 Function(Uint32 texture)>>()
+      .cast<NativeFunction<Uint8 Function(Uint32 texture)>>()
       .asFunction<int Function(int texture)>();
   return glIsTextureExtAsFunction(texture);
 }
@@ -46328,7 +45730,7 @@ void glPrioritizeTexturesExt(
       .cast<
         NativeFunction<
           Void Function(
-            Uint32 n,
+            Int32 n,
             Pointer<Uint32> textures,
             Pointer<Float> priorities,
           )
@@ -46371,9 +45773,9 @@ void glTexStorage1Dext(int target, int levels, int internalformat, int width) {
         NativeFunction<
           Void Function(
             Uint32 target,
-            Uint32 levels,
+            Int32 levels,
             Uint32 internalformat,
-            Uint32 width,
+            Int32 width,
           )
         >
       >()
@@ -46402,10 +45804,10 @@ void glTexStorage2Dext(
         NativeFunction<
           Void Function(
             Uint32 target,
-            Uint32 levels,
+            Int32 levels,
             Uint32 internalformat,
-            Uint32 width,
-            Uint32 height,
+            Int32 width,
+            Int32 height,
           )
         >
       >()
@@ -46447,11 +45849,11 @@ void glTexStorage3Dext(
         NativeFunction<
           Void Function(
             Uint32 target,
-            Uint32 levels,
+            Int32 levels,
             Uint32 internalformat,
-            Uint32 width,
-            Uint32 height,
-            Uint32 depth,
+            Int32 width,
+            Int32 height,
+            Int32 depth,
           )
         >
       >()
@@ -46550,8 +45952,8 @@ void glBindBufferRangeExt(
   int target,
   int index,
   int buffer,
-  Pointer<NativeType> offset,
-  Pointer<Uint32> size,
+  int offset,
+  int size,
 ) {
   final glBindBufferRangeExtAsFunction = _glBindBufferRangeExt
       .cast<
@@ -46560,19 +45962,13 @@ void glBindBufferRangeExt(
             Uint32 target,
             Uint32 index,
             Uint32 buffer,
-            Pointer<NativeType> offset,
-            Pointer<Uint32> size,
+            IntPtr offset,
+            IntPtr size,
           )
         >
       >()
       .asFunction<
-        void Function(
-          int target,
-          int index,
-          int buffer,
-          Pointer<NativeType> offset,
-          Pointer<Uint32> size,
-        )
+        void Function(int target, int index, int buffer, int offset, int size)
       >();
   return glBindBufferRangeExtAsFunction(target, index, buffer, offset, size);
 }
@@ -46584,12 +45980,7 @@ late Pointer<NativeFunction<Void Function()>> _glBindBufferOffsetExt;
 /// GLAPI void APIENTRY glBindBufferOffsetEXT (GLenum target, GLuint index, GLuint buffer, GLintptr offset)
 /// ```
 /// {@category opengl_glext}
-void glBindBufferOffsetExt(
-  int target,
-  int index,
-  int buffer,
-  Pointer<NativeType> offset,
-) {
+void glBindBufferOffsetExt(int target, int index, int buffer, int offset) {
   final glBindBufferOffsetExtAsFunction = _glBindBufferOffsetExt
       .cast<
         NativeFunction<
@@ -46597,17 +45988,12 @@ void glBindBufferOffsetExt(
             Uint32 target,
             Uint32 index,
             Uint32 buffer,
-            Pointer<NativeType> offset,
+            IntPtr offset,
           )
         >
       >()
       .asFunction<
-        void Function(
-          int target,
-          int index,
-          int buffer,
-          Pointer<NativeType> offset,
-        )
+        void Function(int target, int index, int buffer, int offset)
       >();
   return glBindBufferOffsetExtAsFunction(target, index, buffer, offset);
 }
@@ -46649,7 +46035,7 @@ void glTransformFeedbackVaryingsExt(
             NativeFunction<
               Void Function(
                 Uint32 program,
-                Uint32 count,
+                Int32 count,
                 Pointer<Pointer<Int8>> varyings,
                 Uint32 bufferMode,
               )
@@ -46682,8 +46068,8 @@ void glGetTransformFeedbackVaryingExt(
   int program,
   int index,
   int bufSize,
-  Pointer<Uint32> length,
-  Pointer<Uint32> size,
+  Pointer<Int32> length,
+  Pointer<Int32> size,
   Pointer<Uint32> type,
   Pointer<Int8> name,
 ) {
@@ -46694,9 +46080,9 @@ void glGetTransformFeedbackVaryingExt(
               Void Function(
                 Uint32 program,
                 Uint32 index,
-                Uint32 bufSize,
-                Pointer<Uint32> length,
-                Pointer<Uint32> size,
+                Int32 bufSize,
+                Pointer<Int32> length,
+                Pointer<Int32> size,
                 Pointer<Uint32> type,
                 Pointer<Int8> name,
               )
@@ -46707,8 +46093,8 @@ void glGetTransformFeedbackVaryingExt(
               int program,
               int index,
               int bufSize,
-              Pointer<Uint32> length,
-              Pointer<Uint32> size,
+              Pointer<Int32> length,
+              Pointer<Int32> size,
               Pointer<Uint32> type,
               Pointer<Int8> name,
             )
@@ -46750,7 +46136,7 @@ void glColorPointerExt(
   int type,
   int stride,
   int count,
-  Pointer<NativeType> pointer,
+  Pointer<Void> pointer,
 ) {
   final glColorPointerExtAsFunction = _glColorPointerExt
       .cast<
@@ -46758,9 +46144,9 @@ void glColorPointerExt(
           Void Function(
             Int32 size,
             Uint32 type,
-            Uint32 stride,
-            Uint32 count,
-            Pointer<NativeType> pointer,
+            Int32 stride,
+            Int32 count,
+            Pointer<Void> pointer,
           )
         >
       >()
@@ -46770,7 +46156,7 @@ void glColorPointerExt(
           int type,
           int stride,
           int count,
-          Pointer<NativeType> pointer,
+          Pointer<Void> pointer,
         )
       >();
   return glColorPointerExtAsFunction(size, type, stride, count, pointer);
@@ -46786,7 +46172,7 @@ late Pointer<NativeFunction<Void Function()>> _glDrawArraysExt;
 void glDrawArraysExt(int mode, int first, int count) {
   final glDrawArraysExtAsFunction = _glDrawArraysExt
       .cast<
-        NativeFunction<Void Function(Uint32 mode, Int32 first, Uint32 count)>
+        NativeFunction<Void Function(Uint32 mode, Int32 first, Int32 count)>
       >()
       .asFunction<void Function(int mode, int first, int count)>();
   return glDrawArraysExtAsFunction(mode, first, count);
@@ -46799,15 +46185,15 @@ late Pointer<NativeFunction<Void Function()>> _glEdgeFlagPointerExt;
 /// GLAPI void APIENTRY glEdgeFlagPointerEXT (GLsizei stride, GLsizei count, const GLboolean *pointer)
 /// ```
 /// {@category opengl_glext}
-void glEdgeFlagPointerExt(int stride, int count, Pointer<Int32> pointer) {
+void glEdgeFlagPointerExt(int stride, int count, Pointer<Uint8> pointer) {
   final glEdgeFlagPointerExtAsFunction = _glEdgeFlagPointerExt
       .cast<
         NativeFunction<
-          Void Function(Uint32 stride, Uint32 count, Pointer<Int32> pointer)
+          Void Function(Int32 stride, Int32 count, Pointer<Uint8> pointer)
         >
       >()
       .asFunction<
-        void Function(int stride, int count, Pointer<Int32> pointer)
+        void Function(int stride, int count, Pointer<Uint8> pointer)
       >();
   return glEdgeFlagPointerExtAsFunction(stride, count, pointer);
 }
@@ -46819,16 +46205,14 @@ late Pointer<NativeFunction<Void Function()>> _glGetPointervExt;
 /// GLAPI void APIENTRY glGetPointervEXT (GLenum pname, void **params)
 /// ```
 /// {@category opengl_glext}
-void glGetPointervExt(int pname, Pointer<Pointer<NativeType>> params) {
+void glGetPointervExt(int pname, Pointer<Pointer<Void>> params) {
   final glGetPointervExtAsFunction = _glGetPointervExt
       .cast<
         NativeFunction<
-          Void Function(Uint32 pname, Pointer<Pointer<NativeType>> params)
+          Void Function(Uint32 pname, Pointer<Pointer<Void>> params)
         >
       >()
-      .asFunction<
-        void Function(int pname, Pointer<Pointer<NativeType>> params)
-      >();
+      .asFunction<void Function(int pname, Pointer<Pointer<Void>> params)>();
   return glGetPointervExtAsFunction(pname, params);
 }
 
@@ -46839,30 +46223,20 @@ late Pointer<NativeFunction<Void Function()>> _glIndexPointerExt;
 /// GLAPI void APIENTRY glIndexPointerEXT (GLenum type, GLsizei stride, GLsizei count, const void *pointer)
 /// ```
 /// {@category opengl_glext}
-void glIndexPointerExt(
-  int type,
-  int stride,
-  int count,
-  Pointer<NativeType> pointer,
-) {
+void glIndexPointerExt(int type, int stride, int count, Pointer<Void> pointer) {
   final glIndexPointerExtAsFunction = _glIndexPointerExt
       .cast<
         NativeFunction<
           Void Function(
             Uint32 type,
-            Uint32 stride,
-            Uint32 count,
-            Pointer<NativeType> pointer,
+            Int32 stride,
+            Int32 count,
+            Pointer<Void> pointer,
           )
         >
       >()
       .asFunction<
-        void Function(
-          int type,
-          int stride,
-          int count,
-          Pointer<NativeType> pointer,
-        )
+        void Function(int type, int stride, int count, Pointer<Void> pointer)
       >();
   return glIndexPointerExtAsFunction(type, stride, count, pointer);
 }
@@ -46878,26 +46252,21 @@ void glNormalPointerExt(
   int type,
   int stride,
   int count,
-  Pointer<NativeType> pointer,
+  Pointer<Void> pointer,
 ) {
   final glNormalPointerExtAsFunction = _glNormalPointerExt
       .cast<
         NativeFunction<
           Void Function(
             Uint32 type,
-            Uint32 stride,
-            Uint32 count,
-            Pointer<NativeType> pointer,
+            Int32 stride,
+            Int32 count,
+            Pointer<Void> pointer,
           )
         >
       >()
       .asFunction<
-        void Function(
-          int type,
-          int stride,
-          int count,
-          Pointer<NativeType> pointer,
-        )
+        void Function(int type, int stride, int count, Pointer<Void> pointer)
       >();
   return glNormalPointerExtAsFunction(type, stride, count, pointer);
 }
@@ -46914,7 +46283,7 @@ void glTexCoordPointerExt(
   int type,
   int stride,
   int count,
-  Pointer<NativeType> pointer,
+  Pointer<Void> pointer,
 ) {
   final glTexCoordPointerExtAsFunction = _glTexCoordPointerExt
       .cast<
@@ -46922,9 +46291,9 @@ void glTexCoordPointerExt(
           Void Function(
             Int32 size,
             Uint32 type,
-            Uint32 stride,
-            Uint32 count,
-            Pointer<NativeType> pointer,
+            Int32 stride,
+            Int32 count,
+            Pointer<Void> pointer,
           )
         >
       >()
@@ -46934,7 +46303,7 @@ void glTexCoordPointerExt(
           int type,
           int stride,
           int count,
-          Pointer<NativeType> pointer,
+          Pointer<Void> pointer,
         )
       >();
   return glTexCoordPointerExtAsFunction(size, type, stride, count, pointer);
@@ -46952,7 +46321,7 @@ void glVertexPointerExt(
   int type,
   int stride,
   int count,
-  Pointer<NativeType> pointer,
+  Pointer<Void> pointer,
 ) {
   final glVertexPointerExtAsFunction = _glVertexPointerExt
       .cast<
@@ -46960,9 +46329,9 @@ void glVertexPointerExt(
           Void Function(
             Int32 size,
             Uint32 type,
-            Uint32 stride,
-            Uint32 count,
-            Pointer<NativeType> pointer,
+            Int32 stride,
+            Int32 count,
+            Pointer<Void> pointer,
           )
         >
       >()
@@ -46972,7 +46341,7 @@ void glVertexPointerExt(
           int type,
           int stride,
           int count,
-          Pointer<NativeType> pointer,
+          Pointer<Void> pointer,
         )
       >();
   return glVertexPointerExtAsFunction(size, type, stride, count, pointer);
@@ -47112,7 +46481,7 @@ void glVertexAttribLPointerExt(
   int size,
   int type,
   int stride,
-  Pointer<NativeType> pointer,
+  Pointer<Void> pointer,
 ) {
   final glVertexAttribLPointerExtAsFunction = _glVertexAttribLPointerExt
       .cast<
@@ -47121,8 +46490,8 @@ void glVertexAttribLPointerExt(
             Uint32 index,
             Int32 size,
             Uint32 type,
-            Uint32 stride,
-            Pointer<NativeType> pointer,
+            Int32 stride,
+            Pointer<Void> pointer,
           )
         >
       >()
@@ -47132,7 +46501,7 @@ void glVertexAttribLPointerExt(
           int size,
           int type,
           int stride,
-          Pointer<NativeType> pointer,
+          Pointer<Void> pointer,
         )
       >();
   return glVertexAttribLPointerExtAsFunction(
@@ -47406,14 +46775,14 @@ late Pointer<NativeFunction<Void Function()>> _glSetInvariantExt;
 /// GLAPI void APIENTRY glSetInvariantEXT (GLuint id, GLenum type, const void *addr)
 /// ```
 /// {@category opengl_glext}
-void glSetInvariantExt(int id, int type, Pointer<NativeType> addr) {
+void glSetInvariantExt(int id, int type, Pointer<Void> addr) {
   final glSetInvariantExtAsFunction = _glSetInvariantExt
       .cast<
         NativeFunction<
-          Void Function(Uint32 id, Uint32 type, Pointer<NativeType> addr)
+          Void Function(Uint32 id, Uint32 type, Pointer<Void> addr)
         >
       >()
-      .asFunction<void Function(int id, int type, Pointer<NativeType> addr)>();
+      .asFunction<void Function(int id, int type, Pointer<Void> addr)>();
   return glSetInvariantExtAsFunction(id, type, addr);
 }
 
@@ -47424,14 +46793,14 @@ late Pointer<NativeFunction<Void Function()>> _glSetLocalConstantExt;
 /// GLAPI void APIENTRY glSetLocalConstantEXT (GLuint id, GLenum type, const void *addr)
 /// ```
 /// {@category opengl_glext}
-void glSetLocalConstantExt(int id, int type, Pointer<NativeType> addr) {
+void glSetLocalConstantExt(int id, int type, Pointer<Void> addr) {
   final glSetLocalConstantExtAsFunction = _glSetLocalConstantExt
       .cast<
         NativeFunction<
-          Void Function(Uint32 id, Uint32 type, Pointer<NativeType> addr)
+          Void Function(Uint32 id, Uint32 type, Pointer<Void> addr)
         >
       >()
-      .asFunction<void Function(int id, int type, Pointer<NativeType> addr)>();
+      .asFunction<void Function(int id, int type, Pointer<Void> addr)>();
   return glSetLocalConstantExtAsFunction(id, type, addr);
 }
 
@@ -47557,12 +46926,7 @@ late Pointer<NativeFunction<Void Function()>> _glVariantPointerExt;
 /// GLAPI void APIENTRY glVariantPointerEXT (GLuint id, GLenum type, GLuint stride, const void *addr)
 /// ```
 /// {@category opengl_glext}
-void glVariantPointerExt(
-  int id,
-  int type,
-  int stride,
-  Pointer<NativeType> addr,
-) {
+void glVariantPointerExt(int id, int type, int stride, Pointer<Void> addr) {
   final glVariantPointerExtAsFunction = _glVariantPointerExt
       .cast<
         NativeFunction<
@@ -47570,12 +46934,12 @@ void glVariantPointerExt(
             Uint32 id,
             Uint32 type,
             Uint32 stride,
-            Pointer<NativeType> addr,
+            Pointer<Void> addr,
           )
         >
       >()
       .asFunction<
-        void Function(int id, int type, int stride, Pointer<NativeType> addr)
+        void Function(int id, int type, int stride, Pointer<Void> addr)
       >();
   return glVariantPointerExtAsFunction(id, type, stride, addr);
 }
@@ -47690,7 +47054,7 @@ late Pointer<NativeFunction<Void Function()>> _glIsVariantEnabledExt;
 /// {@category opengl_glext}
 int glIsVariantEnabledExt(int id, int cap) {
   final glIsVariantEnabledExtAsFunction = _glIsVariantEnabledExt
-      .cast<NativeFunction<Int32 Function(Uint32 id, Uint32 cap)>>()
+      .cast<NativeFunction<Uint8 Function(Uint32 id, Uint32 cap)>>()
       .asFunction<int Function(int id, int cap)>();
   return glIsVariantEnabledExtAsFunction(id, cap);
 }
@@ -47702,14 +47066,14 @@ late Pointer<NativeFunction<Void Function()>> _glGetVariantBooleanvExt;
 /// GLAPI void APIENTRY glGetVariantBooleanvEXT (GLuint id, GLenum value, GLboolean *data)
 /// ```
 /// {@category opengl_glext}
-void glGetVariantBooleanvExt(int id, int value, Pointer<Int32> data) {
+void glGetVariantBooleanvExt(int id, int value, Pointer<Uint8> data) {
   final glGetVariantBooleanvExtAsFunction = _glGetVariantBooleanvExt
       .cast<
         NativeFunction<
-          Void Function(Uint32 id, Uint32 value, Pointer<Int32> data)
+          Void Function(Uint32 id, Uint32 value, Pointer<Uint8> data)
         >
       >()
-      .asFunction<void Function(int id, int value, Pointer<Int32> data)>();
+      .asFunction<void Function(int id, int value, Pointer<Uint8> data)>();
   return glGetVariantBooleanvExtAsFunction(id, value, data);
 }
 
@@ -47756,23 +47120,15 @@ late Pointer<NativeFunction<Void Function()>> _glGetVariantPointervExt;
 /// GLAPI void APIENTRY glGetVariantPointervEXT (GLuint id, GLenum value, void **data)
 /// ```
 /// {@category opengl_glext}
-void glGetVariantPointervExt(
-  int id,
-  int value,
-  Pointer<Pointer<NativeType>> data,
-) {
+void glGetVariantPointervExt(int id, int value, Pointer<Pointer<Void>> data) {
   final glGetVariantPointervExtAsFunction = _glGetVariantPointervExt
       .cast<
         NativeFunction<
-          Void Function(
-            Uint32 id,
-            Uint32 value,
-            Pointer<Pointer<NativeType>> data,
-          )
+          Void Function(Uint32 id, Uint32 value, Pointer<Pointer<Void>> data)
         >
       >()
       .asFunction<
-        void Function(int id, int value, Pointer<Pointer<NativeType>> data)
+        void Function(int id, int value, Pointer<Pointer<Void>> data)
       >();
   return glGetVariantPointervExtAsFunction(id, value, data);
 }
@@ -47784,14 +47140,14 @@ late Pointer<NativeFunction<Void Function()>> _glGetInvariantBooleanvExt;
 /// GLAPI void APIENTRY glGetInvariantBooleanvEXT (GLuint id, GLenum value, GLboolean *data)
 /// ```
 /// {@category opengl_glext}
-void glGetInvariantBooleanvExt(int id, int value, Pointer<Int32> data) {
+void glGetInvariantBooleanvExt(int id, int value, Pointer<Uint8> data) {
   final glGetInvariantBooleanvExtAsFunction = _glGetInvariantBooleanvExt
       .cast<
         NativeFunction<
-          Void Function(Uint32 id, Uint32 value, Pointer<Int32> data)
+          Void Function(Uint32 id, Uint32 value, Pointer<Uint8> data)
         >
       >()
-      .asFunction<void Function(int id, int value, Pointer<Int32> data)>();
+      .asFunction<void Function(int id, int value, Pointer<Uint8> data)>();
   return glGetInvariantBooleanvExtAsFunction(id, value, data);
 }
 
@@ -47838,14 +47194,14 @@ late Pointer<NativeFunction<Void Function()>> _glGetLocalConstantBooleanvExt;
 /// GLAPI void APIENTRY glGetLocalConstantBooleanvEXT (GLuint id, GLenum value, GLboolean *data)
 /// ```
 /// {@category opengl_glext}
-void glGetLocalConstantBooleanvExt(int id, int value, Pointer<Int32> data) {
+void glGetLocalConstantBooleanvExt(int id, int value, Pointer<Uint8> data) {
   final glGetLocalConstantBooleanvExtAsFunction = _glGetLocalConstantBooleanvExt
       .cast<
         NativeFunction<
-          Void Function(Uint32 id, Uint32 value, Pointer<Int32> data)
+          Void Function(Uint32 id, Uint32 value, Pointer<Uint8> data)
         >
       >()
-      .asFunction<void Function(int id, int value, Pointer<Int32> data)>();
+      .asFunction<void Function(int id, int value, Pointer<Uint8> data)>();
   return glGetLocalConstantBooleanvExtAsFunction(id, value, data);
 }
 
@@ -47924,7 +47280,7 @@ void glVertexWeightPointerExt(
   int size,
   int type,
   int stride,
-  Pointer<NativeType> pointer,
+  Pointer<Void> pointer,
 ) {
   final glVertexWeightPointerExtAsFunction = _glVertexWeightPointerExt
       .cast<
@@ -47932,18 +47288,13 @@ void glVertexWeightPointerExt(
           Void Function(
             Int32 size,
             Uint32 type,
-            Uint32 stride,
-            Pointer<NativeType> pointer,
+            Int32 stride,
+            Pointer<Void> pointer,
           )
         >
       >()
       .asFunction<
-        void Function(
-          int size,
-          int type,
-          int stride,
-          Pointer<NativeType> pointer,
-        )
+        void Function(int size, int type, int stride, Pointer<Void> pointer)
       >();
   return glVertexWeightPointerExtAsFunction(size, type, stride, pointer);
 }
@@ -47959,7 +47310,7 @@ int glAcquireKeyedMutexWin32Ext(int memory, int key, int timeout) {
   final glAcquireKeyedMutexWin32ExtAsFunction = _glAcquireKeyedMutexWin32Ext
       .cast<
         NativeFunction<
-          Int32 Function(Uint32 memory, Uint64 key, Uint32 timeout)
+          Uint8 Function(Uint32 memory, Uint64 key, Uint32 timeout)
         >
       >()
       .asFunction<int Function(int memory, int key, int timeout)>();
@@ -47975,7 +47326,7 @@ late Pointer<NativeFunction<Void Function()>> _glReleaseKeyedMutexWin32Ext;
 /// {@category opengl_glext}
 int glReleaseKeyedMutexWin32Ext(int memory, int key) {
   final glReleaseKeyedMutexWin32ExtAsFunction = _glReleaseKeyedMutexWin32Ext
-      .cast<NativeFunction<Int32 Function(Uint32 memory, Uint64 key)>>()
+      .cast<NativeFunction<Uint8 Function(Uint32 memory, Uint64 key)>>()
       .asFunction<int Function(int memory, int key)>();
   return glReleaseKeyedMutexWin32ExtAsFunction(memory, key);
 }
@@ -47991,7 +47342,7 @@ void glWindowRectanglesExt(int mode, int count, Pointer<Int32> box) {
   final glWindowRectanglesExtAsFunction = _glWindowRectanglesExt
       .cast<
         NativeFunction<
-          Void Function(Uint32 mode, Uint32 count, Pointer<Int32> box)
+          Void Function(Uint32 mode, Int32 count, Pointer<Int32> box)
         >
       >()
       .asFunction<void Function(int mode, int count, Pointer<Int32> box)>();
@@ -48005,25 +47356,25 @@ late Pointer<NativeFunction<Void Function()>> _glImportSyncExt;
 /// GLAPI GLsync APIENTRY glImportSyncEXT (GLenum external_sync_type, GLintptr external_sync, GLbitfield flags)
 /// ```
 /// {@category opengl_glext}
-Pointer<NativeType> glImportSyncExt(
+Pointer<Void> glImportSyncExt(
   int externalSyncType,
-  Pointer<NativeType> externalSync,
+  int externalSync,
   int flags,
 ) {
   final glImportSyncExtAsFunction = _glImportSyncExt
       .cast<
         NativeFunction<
-          Pointer<NativeType> Function(
+          Pointer<Void> Function(
             Uint32 externalSyncType,
-            Pointer<NativeType> externalSync,
+            IntPtr externalSync,
             Uint32 flags,
           )
         >
       >()
       .asFunction<
-        Pointer<NativeType> Function(
+        Pointer<Void> Function(
           int externalSyncType,
-          Pointer<NativeType> externalSync,
+          int externalSync,
           int flags,
         )
       >();
@@ -48051,12 +47402,10 @@ late Pointer<NativeFunction<Void Function()>> _glStringMarkerGremedy;
 /// GLAPI void APIENTRY glStringMarkerGREMEDY (GLsizei len, const void *string)
 /// ```
 /// {@category opengl_glext}
-void glStringMarkerGremedy(int len, Pointer<NativeType> string) {
+void glStringMarkerGremedy(int len, Pointer<Void> string) {
   final glStringMarkerGremedyAsFunction = _glStringMarkerGremedy
-      .cast<
-        NativeFunction<Void Function(Uint32 len, Pointer<NativeType> string)>
-      >()
-      .asFunction<void Function(int len, Pointer<NativeType> string)>();
+      .cast<NativeFunction<Void Function(Int32 len, Pointer<Void> string)>>()
+      .asFunction<void Function(int len, Pointer<Void> string)>();
   return glStringMarkerGremedyAsFunction(len, string);
 }
 
@@ -48200,7 +47549,7 @@ late Pointer<NativeFunction<Void Function()>> _glMultiModeDrawArraysIbm;
 void glMultiModeDrawArraysIbm(
   Pointer<Uint32> mode,
   Pointer<Int32> first,
-  Pointer<Uint32> count,
+  Pointer<Int32> count,
   int primcount,
   int modestride,
 ) {
@@ -48210,8 +47559,8 @@ void glMultiModeDrawArraysIbm(
           Void Function(
             Pointer<Uint32> mode,
             Pointer<Int32> first,
-            Pointer<Uint32> count,
-            Uint32 primcount,
+            Pointer<Int32> count,
+            Int32 primcount,
             Int32 modestride,
           )
         >
@@ -48220,7 +47569,7 @@ void glMultiModeDrawArraysIbm(
         void Function(
           Pointer<Uint32> mode,
           Pointer<Int32> first,
-          Pointer<Uint32> count,
+          Pointer<Int32> count,
           int primcount,
           int modestride,
         )
@@ -48243,9 +47592,9 @@ late Pointer<NativeFunction<Void Function()>> _glMultiModeDrawElementsIbm;
 /// {@category opengl_glext}
 void glMultiModeDrawElementsIbm(
   Pointer<Uint32> mode,
-  Pointer<Uint32> count,
+  Pointer<Int32> count,
   int type,
-  Pointer<Pointer<NativeType>> indices,
+  Pointer<Pointer<Void>> indices,
   int primcount,
   int modestride,
 ) {
@@ -48254,10 +47603,10 @@ void glMultiModeDrawElementsIbm(
         NativeFunction<
           Void Function(
             Pointer<Uint32> mode,
-            Pointer<Uint32> count,
+            Pointer<Int32> count,
             Uint32 type,
-            Pointer<Pointer<NativeType>> indices,
-            Uint32 primcount,
+            Pointer<Pointer<Void>> indices,
+            Int32 primcount,
             Int32 modestride,
           )
         >
@@ -48265,9 +47614,9 @@ void glMultiModeDrawElementsIbm(
       .asFunction<
         void Function(
           Pointer<Uint32> mode,
-          Pointer<Uint32> count,
+          Pointer<Int32> count,
           int type,
-          Pointer<Pointer<NativeType>> indices,
+          Pointer<Pointer<Void>> indices,
           int primcount,
           int modestride,
         )
@@ -48307,7 +47656,7 @@ void glColorPointerListIbm(
   int size,
   int type,
   int stride,
-  Pointer<Pointer<NativeType>> pointer,
+  Pointer<Pointer<Void>> pointer,
   int ptrstride,
 ) {
   final glColorPointerListIbmAsFunction = _glColorPointerListIbm
@@ -48317,7 +47666,7 @@ void glColorPointerListIbm(
             Int32 size,
             Uint32 type,
             Int32 stride,
-            Pointer<Pointer<NativeType>> pointer,
+            Pointer<Pointer<Void>> pointer,
             Int32 ptrstride,
           )
         >
@@ -48327,7 +47676,7 @@ void glColorPointerListIbm(
           int size,
           int type,
           int stride,
-          Pointer<Pointer<NativeType>> pointer,
+          Pointer<Pointer<Void>> pointer,
           int ptrstride,
         )
       >();
@@ -48351,7 +47700,7 @@ void glSecondaryColorPointerListIbm(
   int size,
   int type,
   int stride,
-  Pointer<Pointer<NativeType>> pointer,
+  Pointer<Pointer<Void>> pointer,
   int ptrstride,
 ) {
   final glSecondaryColorPointerListIbmAsFunction =
@@ -48362,7 +47711,7 @@ void glSecondaryColorPointerListIbm(
                 Int32 size,
                 Uint32 type,
                 Int32 stride,
-                Pointer<Pointer<NativeType>> pointer,
+                Pointer<Pointer<Void>> pointer,
                 Int32 ptrstride,
               )
             >
@@ -48372,7 +47721,7 @@ void glSecondaryColorPointerListIbm(
               int size,
               int type,
               int stride,
-              Pointer<Pointer<NativeType>> pointer,
+              Pointer<Pointer<Void>> pointer,
               int ptrstride,
             )
           >();
@@ -48394,7 +47743,7 @@ late Pointer<NativeFunction<Void Function()>> _glEdgeFlagPointerListIbm;
 /// {@category opengl_glext}
 void glEdgeFlagPointerListIbm(
   int stride,
-  Pointer<Pointer<Int32>> pointer,
+  Pointer<Pointer<Uint8>> pointer,
   int ptrstride,
 ) {
   final glEdgeFlagPointerListIbmAsFunction = _glEdgeFlagPointerListIbm
@@ -48402,7 +47751,7 @@ void glEdgeFlagPointerListIbm(
         NativeFunction<
           Void Function(
             Int32 stride,
-            Pointer<Pointer<Int32>> pointer,
+            Pointer<Pointer<Uint8>> pointer,
             Int32 ptrstride,
           )
         >
@@ -48410,7 +47759,7 @@ void glEdgeFlagPointerListIbm(
       .asFunction<
         void Function(
           int stride,
-          Pointer<Pointer<Int32>> pointer,
+          Pointer<Pointer<Uint8>> pointer,
           int ptrstride,
         )
       >();
@@ -48427,7 +47776,7 @@ late Pointer<NativeFunction<Void Function()>> _glFogCoordPointerListIbm;
 void glFogCoordPointerListIbm(
   int type,
   int stride,
-  Pointer<Pointer<NativeType>> pointer,
+  Pointer<Pointer<Void>> pointer,
   int ptrstride,
 ) {
   final glFogCoordPointerListIbmAsFunction = _glFogCoordPointerListIbm
@@ -48436,7 +47785,7 @@ void glFogCoordPointerListIbm(
           Void Function(
             Uint32 type,
             Int32 stride,
-            Pointer<Pointer<NativeType>> pointer,
+            Pointer<Pointer<Void>> pointer,
             Int32 ptrstride,
           )
         >
@@ -48445,7 +47794,7 @@ void glFogCoordPointerListIbm(
         void Function(
           int type,
           int stride,
-          Pointer<Pointer<NativeType>> pointer,
+          Pointer<Pointer<Void>> pointer,
           int ptrstride,
         )
       >();
@@ -48462,7 +47811,7 @@ late Pointer<NativeFunction<Void Function()>> _glIndexPointerListIbm;
 void glIndexPointerListIbm(
   int type,
   int stride,
-  Pointer<Pointer<NativeType>> pointer,
+  Pointer<Pointer<Void>> pointer,
   int ptrstride,
 ) {
   final glIndexPointerListIbmAsFunction = _glIndexPointerListIbm
@@ -48471,7 +47820,7 @@ void glIndexPointerListIbm(
           Void Function(
             Uint32 type,
             Int32 stride,
-            Pointer<Pointer<NativeType>> pointer,
+            Pointer<Pointer<Void>> pointer,
             Int32 ptrstride,
           )
         >
@@ -48480,7 +47829,7 @@ void glIndexPointerListIbm(
         void Function(
           int type,
           int stride,
-          Pointer<Pointer<NativeType>> pointer,
+          Pointer<Pointer<Void>> pointer,
           int ptrstride,
         )
       >();
@@ -48497,7 +47846,7 @@ late Pointer<NativeFunction<Void Function()>> _glNormalPointerListIbm;
 void glNormalPointerListIbm(
   int type,
   int stride,
-  Pointer<Pointer<NativeType>> pointer,
+  Pointer<Pointer<Void>> pointer,
   int ptrstride,
 ) {
   final glNormalPointerListIbmAsFunction = _glNormalPointerListIbm
@@ -48506,7 +47855,7 @@ void glNormalPointerListIbm(
           Void Function(
             Uint32 type,
             Int32 stride,
-            Pointer<Pointer<NativeType>> pointer,
+            Pointer<Pointer<Void>> pointer,
             Int32 ptrstride,
           )
         >
@@ -48515,7 +47864,7 @@ void glNormalPointerListIbm(
         void Function(
           int type,
           int stride,
-          Pointer<Pointer<NativeType>> pointer,
+          Pointer<Pointer<Void>> pointer,
           int ptrstride,
         )
       >();
@@ -48533,7 +47882,7 @@ void glTexCoordPointerListIbm(
   int size,
   int type,
   int stride,
-  Pointer<Pointer<NativeType>> pointer,
+  Pointer<Pointer<Void>> pointer,
   int ptrstride,
 ) {
   final glTexCoordPointerListIbmAsFunction = _glTexCoordPointerListIbm
@@ -48543,7 +47892,7 @@ void glTexCoordPointerListIbm(
             Int32 size,
             Uint32 type,
             Int32 stride,
-            Pointer<Pointer<NativeType>> pointer,
+            Pointer<Pointer<Void>> pointer,
             Int32 ptrstride,
           )
         >
@@ -48553,7 +47902,7 @@ void glTexCoordPointerListIbm(
           int size,
           int type,
           int stride,
-          Pointer<Pointer<NativeType>> pointer,
+          Pointer<Pointer<Void>> pointer,
           int ptrstride,
         )
       >();
@@ -48577,7 +47926,7 @@ void glVertexPointerListIbm(
   int size,
   int type,
   int stride,
-  Pointer<Pointer<NativeType>> pointer,
+  Pointer<Pointer<Void>> pointer,
   int ptrstride,
 ) {
   final glVertexPointerListIbmAsFunction = _glVertexPointerListIbm
@@ -48587,7 +47936,7 @@ void glVertexPointerListIbm(
             Int32 size,
             Uint32 type,
             Int32 stride,
-            Pointer<Pointer<NativeType>> pointer,
+            Pointer<Pointer<Void>> pointer,
             Int32 ptrstride,
           )
         >
@@ -48597,7 +47946,7 @@ void glVertexPointerListIbm(
           int size,
           int type,
           int stride,
-          Pointer<Pointer<NativeType>> pointer,
+          Pointer<Pointer<Void>> pointer,
           int ptrstride,
         )
       >();
@@ -48701,7 +48050,7 @@ late Pointer<NativeFunction<Void Function()>> _glMapTexture2Dintel;
 /// GLAPI void *APIENTRY glMapTexture2DINTEL (GLuint texture, GLint level, GLbitfield access, GLint *stride, GLenum *layout)
 /// ```
 /// {@category opengl_glext}
-Pointer<NativeType> glMapTexture2Dintel(
+Pointer<Void> glMapTexture2Dintel(
   int texture,
   int level,
   int access,
@@ -48711,7 +48060,7 @@ Pointer<NativeType> glMapTexture2Dintel(
   final glMapTexture2DintelAsFunction = _glMapTexture2Dintel
       .cast<
         NativeFunction<
-          Pointer<NativeType> Function(
+          Pointer<Void> Function(
             Uint32 texture,
             Int32 level,
             Uint32 access,
@@ -48721,7 +48070,7 @@ Pointer<NativeType> glMapTexture2Dintel(
         >
       >()
       .asFunction<
-        Pointer<NativeType> Function(
+        Pointer<Void> Function(
           int texture,
           int level,
           int access,
@@ -48739,23 +48088,15 @@ late Pointer<NativeFunction<Void Function()>> _glVertexPointervIntel;
 /// GLAPI void APIENTRY glVertexPointervINTEL (GLint size, GLenum type, const void **pointer)
 /// ```
 /// {@category opengl_glext}
-void glVertexPointervIntel(
-  int size,
-  int type,
-  Pointer<Pointer<NativeType>> pointer,
-) {
+void glVertexPointervIntel(int size, int type, Pointer<Pointer<Void>> pointer) {
   final glVertexPointervIntelAsFunction = _glVertexPointervIntel
       .cast<
         NativeFunction<
-          Void Function(
-            Int32 size,
-            Uint32 type,
-            Pointer<Pointer<NativeType>> pointer,
-          )
+          Void Function(Int32 size, Uint32 type, Pointer<Pointer<Void>> pointer)
         >
       >()
       .asFunction<
-        void Function(int size, int type, Pointer<Pointer<NativeType>> pointer)
+        void Function(int size, int type, Pointer<Pointer<Void>> pointer)
       >();
   return glVertexPointervIntelAsFunction(size, type, pointer);
 }
@@ -48767,16 +48108,14 @@ late Pointer<NativeFunction<Void Function()>> _glNormalPointervIntel;
 /// GLAPI void APIENTRY glNormalPointervINTEL (GLenum type, const void **pointer)
 /// ```
 /// {@category opengl_glext}
-void glNormalPointervIntel(int type, Pointer<Pointer<NativeType>> pointer) {
+void glNormalPointervIntel(int type, Pointer<Pointer<Void>> pointer) {
   final glNormalPointervIntelAsFunction = _glNormalPointervIntel
       .cast<
         NativeFunction<
-          Void Function(Uint32 type, Pointer<Pointer<NativeType>> pointer)
+          Void Function(Uint32 type, Pointer<Pointer<Void>> pointer)
         >
       >()
-      .asFunction<
-        void Function(int type, Pointer<Pointer<NativeType>> pointer)
-      >();
+      .asFunction<void Function(int type, Pointer<Pointer<Void>> pointer)>();
   return glNormalPointervIntelAsFunction(type, pointer);
 }
 
@@ -48787,23 +48126,15 @@ late Pointer<NativeFunction<Void Function()>> _glColorPointervIntel;
 /// GLAPI void APIENTRY glColorPointervINTEL (GLint size, GLenum type, const void **pointer)
 /// ```
 /// {@category opengl_glext}
-void glColorPointervIntel(
-  int size,
-  int type,
-  Pointer<Pointer<NativeType>> pointer,
-) {
+void glColorPointervIntel(int size, int type, Pointer<Pointer<Void>> pointer) {
   final glColorPointervIntelAsFunction = _glColorPointervIntel
       .cast<
         NativeFunction<
-          Void Function(
-            Int32 size,
-            Uint32 type,
-            Pointer<Pointer<NativeType>> pointer,
-          )
+          Void Function(Int32 size, Uint32 type, Pointer<Pointer<Void>> pointer)
         >
       >()
       .asFunction<
-        void Function(int size, int type, Pointer<Pointer<NativeType>> pointer)
+        void Function(int size, int type, Pointer<Pointer<Void>> pointer)
       >();
   return glColorPointervIntelAsFunction(size, type, pointer);
 }
@@ -48818,20 +48149,16 @@ late Pointer<NativeFunction<Void Function()>> _glTexCoordPointervIntel;
 void glTexCoordPointervIntel(
   int size,
   int type,
-  Pointer<Pointer<NativeType>> pointer,
+  Pointer<Pointer<Void>> pointer,
 ) {
   final glTexCoordPointervIntelAsFunction = _glTexCoordPointervIntel
       .cast<
         NativeFunction<
-          Void Function(
-            Int32 size,
-            Uint32 type,
-            Pointer<Pointer<NativeType>> pointer,
-          )
+          Void Function(Int32 size, Uint32 type, Pointer<Pointer<Void>> pointer)
         >
       >()
       .asFunction<
-        void Function(int size, int type, Pointer<Pointer<NativeType>> pointer)
+        void Function(int size, int type, Pointer<Pointer<Void>> pointer)
       >();
   return glTexCoordPointervIntelAsFunction(size, type, pointer);
 }
@@ -49007,7 +48334,7 @@ void glGetPerfQueryDataIntel(
   int queryHandle,
   int flags,
   int dataSize,
-  Pointer<NativeType> data,
+  Pointer<Void> data,
   Pointer<Uint32> bytesWritten,
 ) {
   final glGetPerfQueryDataIntelAsFunction = _glGetPerfQueryDataIntel
@@ -49016,8 +48343,8 @@ void glGetPerfQueryDataIntel(
           Void Function(
             Uint32 queryHandle,
             Uint32 flags,
-            Uint32 dataSize,
-            Pointer<NativeType> data,
+            Int32 dataSize,
+            Pointer<Void> data,
             Pointer<Uint32> bytesWritten,
           )
         >
@@ -49027,7 +48354,7 @@ void glGetPerfQueryDataIntel(
           int queryHandle,
           int flags,
           int dataSize,
-          Pointer<NativeType> data,
+          Pointer<Void> data,
           Pointer<Uint32> bytesWritten,
         )
       >();
@@ -49163,19 +48490,10 @@ late Pointer<NativeFunction<Void Function()>> _glAddClientPointerRangeMesa;
 /// GLAPI void APIENTRY glAddClientPointerRangeMESA (GLvoid *addr, GLsizeiptr size)
 /// ```
 /// {@category opengl_glext}
-void glAddClientPointerRangeMesa(
-  Pointer<NativeType> addr,
-  Pointer<Uint32> size,
-) {
+void glAddClientPointerRangeMesa(Pointer<Void> addr, int size) {
   final glAddClientPointerRangeMesaAsFunction = _glAddClientPointerRangeMesa
-      .cast<
-        NativeFunction<
-          Void Function(Pointer<NativeType> addr, Pointer<Uint32> size)
-        >
-      >()
-      .asFunction<
-        void Function(Pointer<NativeType> addr, Pointer<Uint32> size)
-      >();
+      .cast<NativeFunction<Void Function(Pointer<Void> addr, IntPtr size)>>()
+      .asFunction<void Function(Pointer<Void> addr, int size)>();
   return glAddClientPointerRangeMesaAsFunction(addr, size);
 }
 
@@ -49186,19 +48504,11 @@ late Pointer<NativeFunction<Void Function()>> _glReleaseClientPointerRangeMesa;
 /// GLAPI void* APIENTRY glReleaseClientPointerRangeMESA (GLsizeiptr *size)
 /// ```
 /// {@category opengl_glext}
-Pointer<NativeType> glReleaseClientPointerRangeMesa(
-  Pointer<Pointer<Uint32>> size,
-) {
+Pointer<Void> glReleaseClientPointerRangeMesa(Pointer<IntPtr> size) {
   final glReleaseClientPointerRangeMesaAsFunction =
       _glReleaseClientPointerRangeMesa
-          .cast<
-            NativeFunction<
-              Pointer<NativeType> Function(Pointer<Pointer<Uint32>> size)
-            >
-          >()
-          .asFunction<
-            Pointer<NativeType> Function(Pointer<Pointer<Uint32>> size)
-          >();
+          .cast<NativeFunction<Pointer<Void> Function(Pointer<IntPtr> size)>>()
+          .asFunction<Pointer<Void> Function(Pointer<IntPtr> size)>();
   return glReleaseClientPointerRangeMesaAsFunction(size);
 }
 
@@ -49612,12 +48922,7 @@ void glMulticastViewportArrayvNvx(
   final glMulticastViewportArrayvNvxAsFunction = _glMulticastViewportArrayvNvx
       .cast<
         NativeFunction<
-          Void Function(
-            Uint32 gpu,
-            Uint32 first,
-            Uint32 count,
-            Pointer<Float> v,
-          )
+          Void Function(Uint32 gpu, Uint32 first, Int32 count, Pointer<Float> v)
         >
       >()
       .asFunction<
@@ -49679,12 +48984,7 @@ void glMulticastScissorArrayvNvx(
   final glMulticastScissorArrayvNvxAsFunction = _glMulticastScissorArrayvNvx
       .cast<
         NativeFunction<
-          Void Function(
-            Uint32 gpu,
-            Uint32 first,
-            Uint32 count,
-            Pointer<Int32> v,
-          )
+          Void Function(Uint32 gpu, Uint32 first, Int32 count, Pointer<Int32> v)
         >
       >()
       .asFunction<
@@ -49708,9 +49008,9 @@ int glAsyncCopyBufferSubDataNvx(
   int writeGpuMask,
   int readBuffer,
   int writeBuffer,
-  Pointer<NativeType> readOffset,
-  Pointer<NativeType> writeOffset,
-  Pointer<Uint32> size,
+  int readOffset,
+  int writeOffset,
+  int size,
   int signalSemaphoreCount,
   Pointer<Uint32> signalSemaphoreArray,
   Pointer<Uint64> signalValueArray,
@@ -49719,17 +49019,17 @@ int glAsyncCopyBufferSubDataNvx(
       .cast<
         NativeFunction<
           Uint32 Function(
-            Uint32 waitSemaphoreCount,
+            Int32 waitSemaphoreCount,
             Pointer<Uint32> waitSemaphoreArray,
             Pointer<Uint64> fenceValueArray,
             Uint32 readGpu,
             Uint32 writeGpuMask,
             Uint32 readBuffer,
             Uint32 writeBuffer,
-            Pointer<NativeType> readOffset,
-            Pointer<NativeType> writeOffset,
-            Pointer<Uint32> size,
-            Uint32 signalSemaphoreCount,
+            IntPtr readOffset,
+            IntPtr writeOffset,
+            IntPtr size,
+            Int32 signalSemaphoreCount,
             Pointer<Uint32> signalSemaphoreArray,
             Pointer<Uint64> signalValueArray,
           )
@@ -49744,9 +49044,9 @@ int glAsyncCopyBufferSubDataNvx(
           int writeGpuMask,
           int readBuffer,
           int writeBuffer,
-          Pointer<NativeType> readOffset,
-          Pointer<NativeType> writeOffset,
-          Pointer<Uint32> size,
+          int readOffset,
+          int writeOffset,
+          int size,
           int signalSemaphoreCount,
           Pointer<Uint32> signalSemaphoreArray,
           Pointer<Uint64> signalValueArray,
@@ -49805,7 +49105,7 @@ int glAsyncCopyImageSubDataNvx(
       .cast<
         NativeFunction<
           Uint32 Function(
-            Uint32 waitSemaphoreCount,
+            Int32 waitSemaphoreCount,
             Pointer<Uint32> waitSemaphoreArray,
             Pointer<Uint64> waitValueArray,
             Uint32 srcGpu,
@@ -49822,10 +49122,10 @@ int glAsyncCopyImageSubDataNvx(
             Int32 dstX,
             Int32 dstY,
             Int32 dstZ,
-            Uint32 srcWidth,
-            Uint32 srcHeight,
-            Uint32 srcDepth,
-            Uint32 signalSemaphoreCount,
+            Int32 srcWidth,
+            Int32 srcHeight,
+            Int32 srcDepth,
+            Int32 signalSemaphoreCount,
             Pointer<Uint32> signalSemaphoreArray,
             Pointer<Uint64> signalValueArray,
           )
@@ -49895,9 +49195,9 @@ late Pointer<NativeFunction<Void Function()>> _glLgpuNamedBufferSubDataNvx;
 void glLgpuNamedBufferSubDataNvx(
   int gpuMask,
   int buffer,
-  Pointer<NativeType> offset,
-  Pointer<Uint32> size,
-  Pointer<NativeType> data,
+  int offset,
+  int size,
+  Pointer<Void> data,
 ) {
   final glLgpuNamedBufferSubDataNvxAsFunction = _glLgpuNamedBufferSubDataNvx
       .cast<
@@ -49905,9 +49205,9 @@ void glLgpuNamedBufferSubDataNvx(
           Void Function(
             Uint32 gpuMask,
             Uint32 buffer,
-            Pointer<NativeType> offset,
-            Pointer<Uint32> size,
-            Pointer<NativeType> data,
+            IntPtr offset,
+            IntPtr size,
+            Pointer<Void> data,
           )
         >
       >()
@@ -49915,9 +49215,9 @@ void glLgpuNamedBufferSubDataNvx(
         void Function(
           int gpuMask,
           int buffer,
-          Pointer<NativeType> offset,
-          Pointer<Uint32> size,
-          Pointer<NativeType> data,
+          int offset,
+          int size,
+          Pointer<Void> data,
         )
       >();
   return glLgpuNamedBufferSubDataNvxAsFunction(
@@ -49973,9 +49273,9 @@ void glLgpuCopyImageSubDataNvx(
             Int32 dstX,
             Int32 dstY,
             Int32 dstZ,
-            Uint32 width,
-            Uint32 height,
-            Uint32 depth,
+            Int32 width,
+            Int32 height,
+            Int32 depth,
           )
         >
       >()
@@ -50067,7 +49367,7 @@ void glSignalSemaphoreui64Nvx(
         NativeFunction<
           Void Function(
             Uint32 signalGpu,
-            Uint32 fenceObjectCount,
+            Int32 fenceObjectCount,
             Pointer<Uint32> semaphoreArray,
             Pointer<Uint64> fenceValueArray,
           )
@@ -50107,7 +49407,7 @@ void glWaitSemaphoreui64Nvx(
         NativeFunction<
           Void Function(
             Uint32 waitGpu,
-            Uint32 fenceObjectCount,
+            Int32 fenceObjectCount,
             Pointer<Uint32> semaphoreArray,
             Pointer<Uint64> fenceValueArray,
           )
@@ -50145,7 +49445,7 @@ void glClientWaitSemaphoreui64Nvx(
       .cast<
         NativeFunction<
           Void Function(
-            Uint32 fenceObjectCount,
+            Int32 fenceObjectCount,
             Pointer<Uint32> semaphoreArray,
             Pointer<Uint64> fenceValueArray,
           )
@@ -50190,7 +49490,7 @@ _glMultiDrawArraysIndirectBindlessNv;
 /// {@category opengl_glext}
 void glMultiDrawArraysIndirectBindlessNv(
   int mode,
-  Pointer<NativeType> indirect,
+  Pointer<Void> indirect,
   int drawCount,
   int stride,
   int vertexBufferCount,
@@ -50201,9 +49501,9 @@ void glMultiDrawArraysIndirectBindlessNv(
             NativeFunction<
               Void Function(
                 Uint32 mode,
-                Pointer<NativeType> indirect,
-                Uint32 drawCount,
-                Uint32 stride,
+                Pointer<Void> indirect,
+                Int32 drawCount,
+                Int32 stride,
                 Int32 vertexBufferCount,
               )
             >
@@ -50211,7 +49511,7 @@ void glMultiDrawArraysIndirectBindlessNv(
           .asFunction<
             void Function(
               int mode,
-              Pointer<NativeType> indirect,
+              Pointer<Void> indirect,
               int drawCount,
               int stride,
               int vertexBufferCount,
@@ -50237,7 +49537,7 @@ _glMultiDrawElementsIndirectBindlessNv;
 void glMultiDrawElementsIndirectBindlessNv(
   int mode,
   int type,
-  Pointer<NativeType> indirect,
+  Pointer<Void> indirect,
   int drawCount,
   int stride,
   int vertexBufferCount,
@@ -50249,9 +49549,9 @@ void glMultiDrawElementsIndirectBindlessNv(
               Void Function(
                 Uint32 mode,
                 Uint32 type,
-                Pointer<NativeType> indirect,
-                Uint32 drawCount,
-                Uint32 stride,
+                Pointer<Void> indirect,
+                Int32 drawCount,
+                Int32 stride,
                 Int32 vertexBufferCount,
               )
             >
@@ -50260,7 +49560,7 @@ void glMultiDrawElementsIndirectBindlessNv(
             void Function(
               int mode,
               int type,
-              Pointer<NativeType> indirect,
+              Pointer<Void> indirect,
               int drawCount,
               int stride,
               int vertexBufferCount,
@@ -50286,7 +49586,7 @@ _glMultiDrawArraysIndirectBindlessCountNv;
 /// {@category opengl_glext}
 void glMultiDrawArraysIndirectBindlessCountNv(
   int mode,
-  Pointer<NativeType> indirect,
+  Pointer<Void> indirect,
   int drawCount,
   int maxDrawCount,
   int stride,
@@ -50298,10 +49598,10 @@ void glMultiDrawArraysIndirectBindlessCountNv(
             NativeFunction<
               Void Function(
                 Uint32 mode,
-                Pointer<NativeType> indirect,
-                Uint32 drawCount,
-                Uint32 maxDrawCount,
-                Uint32 stride,
+                Pointer<Void> indirect,
+                Int32 drawCount,
+                Int32 maxDrawCount,
+                Int32 stride,
                 Int32 vertexBufferCount,
               )
             >
@@ -50309,7 +49609,7 @@ void glMultiDrawArraysIndirectBindlessCountNv(
           .asFunction<
             void Function(
               int mode,
-              Pointer<NativeType> indirect,
+              Pointer<Void> indirect,
               int drawCount,
               int maxDrawCount,
               int stride,
@@ -50337,7 +49637,7 @@ _glMultiDrawElementsIndirectBindlessCountNv;
 void glMultiDrawElementsIndirectBindlessCountNv(
   int mode,
   int type,
-  Pointer<NativeType> indirect,
+  Pointer<Void> indirect,
   int drawCount,
   int maxDrawCount,
   int stride,
@@ -50350,10 +49650,10 @@ void glMultiDrawElementsIndirectBindlessCountNv(
               Void Function(
                 Uint32 mode,
                 Uint32 type,
-                Pointer<NativeType> indirect,
-                Uint32 drawCount,
-                Uint32 maxDrawCount,
-                Uint32 stride,
+                Pointer<Void> indirect,
+                Int32 drawCount,
+                Int32 maxDrawCount,
+                Int32 stride,
                 Int32 vertexBufferCount,
               )
             >
@@ -50362,7 +49662,7 @@ void glMultiDrawElementsIndirectBindlessCountNv(
             void Function(
               int mode,
               int type,
-              Pointer<NativeType> indirect,
+              Pointer<Void> indirect,
               int drawCount,
               int maxDrawCount,
               int stride,
@@ -50457,7 +49757,7 @@ int glGetImageHandleNv(
           Uint64 Function(
             Uint32 texture,
             Int32 level,
-            Int32 layered,
+            Uint8 layered,
             Int32 layer,
             Uint32 format,
           )
@@ -50523,7 +49823,7 @@ void glUniformHandleui64vNv(int location, int count, Pointer<Uint64> value) {
   final glUniformHandleui64vNvAsFunction = _glUniformHandleui64vNv
       .cast<
         NativeFunction<
-          Void Function(Int32 location, Uint32 count, Pointer<Uint64> value)
+          Void Function(Int32 location, Int32 count, Pointer<Uint64> value)
         >
       >()
       .asFunction<
@@ -50569,7 +49869,7 @@ void glProgramUniformHandleui64vNv(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 count,
+            Int32 count,
             Pointer<Uint64> values,
           )
         >
@@ -50599,7 +49899,7 @@ late Pointer<NativeFunction<Void Function()>> _glIsTextureHandleResidentNv;
 /// {@category opengl_glext}
 int glIsTextureHandleResidentNv(int handle) {
   final glIsTextureHandleResidentNvAsFunction = _glIsTextureHandleResidentNv
-      .cast<NativeFunction<Int32 Function(Uint64 handle)>>()
+      .cast<NativeFunction<Uint8 Function(Uint64 handle)>>()
       .asFunction<int Function(int handle)>();
   return glIsTextureHandleResidentNvAsFunction(handle);
 }
@@ -50613,7 +49913,7 @@ late Pointer<NativeFunction<Void Function()>> _glIsImageHandleResidentNv;
 /// {@category opengl_glext}
 int glIsImageHandleResidentNv(int handle) {
   final glIsImageHandleResidentNvAsFunction = _glIsImageHandleResidentNv
-      .cast<NativeFunction<Int32 Function(Uint64 handle)>>()
+      .cast<NativeFunction<Uint8 Function(Uint64 handle)>>()
       .asFunction<int Function(int handle)>();
   return glIsImageHandleResidentNvAsFunction(handle);
 }
@@ -50671,7 +49971,7 @@ late Pointer<NativeFunction<Void Function()>> _glCreateStatesNv;
 /// {@category opengl_glext}
 void glCreateStatesNv(int n, Pointer<Uint32> states) {
   final glCreateStatesNvAsFunction = _glCreateStatesNv
-      .cast<NativeFunction<Void Function(Uint32 n, Pointer<Uint32> states)>>()
+      .cast<NativeFunction<Void Function(Int32 n, Pointer<Uint32> states)>>()
       .asFunction<void Function(int n, Pointer<Uint32> states)>();
   return glCreateStatesNvAsFunction(n, states);
 }
@@ -50685,7 +49985,7 @@ late Pointer<NativeFunction<Void Function()>> _glDeleteStatesNv;
 /// {@category opengl_glext}
 void glDeleteStatesNv(int n, Pointer<Uint32> states) {
   final glDeleteStatesNvAsFunction = _glDeleteStatesNv
-      .cast<NativeFunction<Void Function(Uint32 n, Pointer<Uint32> states)>>()
+      .cast<NativeFunction<Void Function(Int32 n, Pointer<Uint32> states)>>()
       .asFunction<void Function(int n, Pointer<Uint32> states)>();
   return glDeleteStatesNvAsFunction(n, states);
 }
@@ -50699,7 +49999,7 @@ late Pointer<NativeFunction<Void Function()>> _glIsStateNv;
 /// {@category opengl_glext}
 int glIsStateNv(int state) {
   final glIsStateNvAsFunction = _glIsStateNv
-      .cast<NativeFunction<Int32 Function(Uint32 state)>>()
+      .cast<NativeFunction<Uint8 Function(Uint32 state)>>()
       .asFunction<int Function(int state)>();
   return glIsStateNvAsFunction(state);
 }
@@ -50756,8 +50056,8 @@ late Pointer<NativeFunction<Void Function()>> _glDrawCommandsNv;
 void glDrawCommandsNv(
   int primitiveMode,
   int buffer,
-  Pointer<Pointer<NativeType>> indirects,
-  Pointer<Uint32> sizes,
+  Pointer<IntPtr> indirects,
+  Pointer<Int32> sizes,
   int count,
 ) {
   final glDrawCommandsNvAsFunction = _glDrawCommandsNv
@@ -50766,8 +50066,8 @@ void glDrawCommandsNv(
           Void Function(
             Uint32 primitiveMode,
             Uint32 buffer,
-            Pointer<Pointer<NativeType>> indirects,
-            Pointer<Uint32> sizes,
+            Pointer<IntPtr> indirects,
+            Pointer<Int32> sizes,
             Uint32 count,
           )
         >
@@ -50776,8 +50076,8 @@ void glDrawCommandsNv(
         void Function(
           int primitiveMode,
           int buffer,
-          Pointer<Pointer<NativeType>> indirects,
-          Pointer<Uint32> sizes,
+          Pointer<IntPtr> indirects,
+          Pointer<Int32> sizes,
           int count,
         )
       >();
@@ -50800,7 +50100,7 @@ late Pointer<NativeFunction<Void Function()>> _glDrawCommandsAddressNv;
 void glDrawCommandsAddressNv(
   int primitiveMode,
   Pointer<Uint64> indirects,
-  Pointer<Uint32> sizes,
+  Pointer<Int32> sizes,
   int count,
 ) {
   final glDrawCommandsAddressNvAsFunction = _glDrawCommandsAddressNv
@@ -50809,7 +50109,7 @@ void glDrawCommandsAddressNv(
           Void Function(
             Uint32 primitiveMode,
             Pointer<Uint64> indirects,
-            Pointer<Uint32> sizes,
+            Pointer<Int32> sizes,
             Uint32 count,
           )
         >
@@ -50818,7 +50118,7 @@ void glDrawCommandsAddressNv(
         void Function(
           int primitiveMode,
           Pointer<Uint64> indirects,
-          Pointer<Uint32> sizes,
+          Pointer<Int32> sizes,
           int count,
         )
       >();
@@ -50839,8 +50139,8 @@ late Pointer<NativeFunction<Void Function()>> _glDrawCommandsStatesNv;
 /// {@category opengl_glext}
 void glDrawCommandsStatesNv(
   int buffer,
-  Pointer<Pointer<NativeType>> indirects,
-  Pointer<Uint32> sizes,
+  Pointer<IntPtr> indirects,
+  Pointer<Int32> sizes,
   Pointer<Uint32> states,
   Pointer<Uint32> fbos,
   int count,
@@ -50850,8 +50150,8 @@ void glDrawCommandsStatesNv(
         NativeFunction<
           Void Function(
             Uint32 buffer,
-            Pointer<Pointer<NativeType>> indirects,
-            Pointer<Uint32> sizes,
+            Pointer<IntPtr> indirects,
+            Pointer<Int32> sizes,
             Pointer<Uint32> states,
             Pointer<Uint32> fbos,
             Uint32 count,
@@ -50861,8 +50161,8 @@ void glDrawCommandsStatesNv(
       .asFunction<
         void Function(
           int buffer,
-          Pointer<Pointer<NativeType>> indirects,
-          Pointer<Uint32> sizes,
+          Pointer<IntPtr> indirects,
+          Pointer<Int32> sizes,
           Pointer<Uint32> states,
           Pointer<Uint32> fbos,
           int count,
@@ -50887,7 +50187,7 @@ late Pointer<NativeFunction<Void Function()>> _glDrawCommandsStatesAddressNv;
 /// {@category opengl_glext}
 void glDrawCommandsStatesAddressNv(
   Pointer<Uint64> indirects,
-  Pointer<Uint32> sizes,
+  Pointer<Int32> sizes,
   Pointer<Uint32> states,
   Pointer<Uint32> fbos,
   int count,
@@ -50897,7 +50197,7 @@ void glDrawCommandsStatesAddressNv(
         NativeFunction<
           Void Function(
             Pointer<Uint64> indirects,
-            Pointer<Uint32> sizes,
+            Pointer<Int32> sizes,
             Pointer<Uint32> states,
             Pointer<Uint32> fbos,
             Uint32 count,
@@ -50907,7 +50207,7 @@ void glDrawCommandsStatesAddressNv(
       .asFunction<
         void Function(
           Pointer<Uint64> indirects,
-          Pointer<Uint32> sizes,
+          Pointer<Int32> sizes,
           Pointer<Uint32> states,
           Pointer<Uint32> fbos,
           int count,
@@ -50931,7 +50231,7 @@ late Pointer<NativeFunction<Void Function()>> _glCreateCommandListsNv;
 /// {@category opengl_glext}
 void glCreateCommandListsNv(int n, Pointer<Uint32> lists) {
   final glCreateCommandListsNvAsFunction = _glCreateCommandListsNv
-      .cast<NativeFunction<Void Function(Uint32 n, Pointer<Uint32> lists)>>()
+      .cast<NativeFunction<Void Function(Int32 n, Pointer<Uint32> lists)>>()
       .asFunction<void Function(int n, Pointer<Uint32> lists)>();
   return glCreateCommandListsNvAsFunction(n, lists);
 }
@@ -50945,7 +50245,7 @@ late Pointer<NativeFunction<Void Function()>> _glDeleteCommandListsNv;
 /// {@category opengl_glext}
 void glDeleteCommandListsNv(int n, Pointer<Uint32> lists) {
   final glDeleteCommandListsNvAsFunction = _glDeleteCommandListsNv
-      .cast<NativeFunction<Void Function(Uint32 n, Pointer<Uint32> lists)>>()
+      .cast<NativeFunction<Void Function(Int32 n, Pointer<Uint32> lists)>>()
       .asFunction<void Function(int n, Pointer<Uint32> lists)>();
   return glDeleteCommandListsNvAsFunction(n, lists);
 }
@@ -50959,7 +50259,7 @@ late Pointer<NativeFunction<Void Function()>> _glIsCommandListNv;
 /// {@category opengl_glext}
 int glIsCommandListNv(int list) {
   final glIsCommandListNvAsFunction = _glIsCommandListNv
-      .cast<NativeFunction<Int32 Function(Uint32 list)>>()
+      .cast<NativeFunction<Uint8 Function(Uint32 list)>>()
       .asFunction<int Function(int list)>();
   return glIsCommandListNvAsFunction(list);
 }
@@ -50974,8 +50274,8 @@ late Pointer<NativeFunction<Void Function()>> _glListDrawCommandsStatesClientNv;
 void glListDrawCommandsStatesClientNv(
   int list,
   int segment,
-  Pointer<Pointer<NativeType>> indirects,
-  Pointer<Uint32> sizes,
+  Pointer<Pointer<Void>> indirects,
+  Pointer<Int32> sizes,
   Pointer<Uint32> states,
   Pointer<Uint32> fbos,
   int count,
@@ -50987,8 +50287,8 @@ void glListDrawCommandsStatesClientNv(
               Void Function(
                 Uint32 list,
                 Uint32 segment,
-                Pointer<Pointer<NativeType>> indirects,
-                Pointer<Uint32> sizes,
+                Pointer<Pointer<Void>> indirects,
+                Pointer<Int32> sizes,
                 Pointer<Uint32> states,
                 Pointer<Uint32> fbos,
                 Uint32 count,
@@ -50999,8 +50299,8 @@ void glListDrawCommandsStatesClientNv(
             void Function(
               int list,
               int segment,
-              Pointer<Pointer<NativeType>> indirects,
-              Pointer<Uint32> sizes,
+              Pointer<Pointer<Void>> indirects,
+              Pointer<Int32> sizes,
               Pointer<Uint32> states,
               Pointer<Uint32> fbos,
               int count,
@@ -51171,9 +50471,9 @@ void glCopyImageSubDataNv(
             Int32 dstX,
             Int32 dstY,
             Int32 dstZ,
-            Uint32 width,
-            Uint32 height,
-            Uint32 depth,
+            Int32 width,
+            Int32 height,
+            Int32 depth,
           )
         >
       >()
@@ -51474,7 +50774,7 @@ void glMapControlPointsNv(
   int uorder,
   int vorder,
   int packed,
-  Pointer<NativeType> points,
+  Pointer<Void> points,
 ) {
   final glMapControlPointsNvAsFunction = _glMapControlPointsNv
       .cast<
@@ -51483,12 +50783,12 @@ void glMapControlPointsNv(
             Uint32 target,
             Uint32 index,
             Uint32 type,
-            Uint32 ustride,
-            Uint32 vstride,
+            Int32 ustride,
+            Int32 vstride,
             Int32 uorder,
             Int32 vorder,
-            Int32 packed,
-            Pointer<NativeType> points,
+            Uint8 packed,
+            Pointer<Void> points,
           )
         >
       >()
@@ -51502,7 +50802,7 @@ void glMapControlPointsNv(
           int uorder,
           int vorder,
           int packed,
-          Pointer<NativeType> points,
+          Pointer<Void> points,
         )
       >();
   return glMapControlPointsNvAsFunction(
@@ -51572,7 +50872,7 @@ void glGetMapControlPointsNv(
   int ustride,
   int vstride,
   int packed,
-  Pointer<NativeType> points,
+  Pointer<Void> points,
 ) {
   final glGetMapControlPointsNvAsFunction = _glGetMapControlPointsNv
       .cast<
@@ -51581,10 +50881,10 @@ void glGetMapControlPointsNv(
             Uint32 target,
             Uint32 index,
             Uint32 type,
-            Uint32 ustride,
-            Uint32 vstride,
-            Int32 packed,
-            Pointer<NativeType> points,
+            Int32 ustride,
+            Int32 vstride,
+            Uint8 packed,
+            Pointer<Void> points,
           )
         >
       >()
@@ -51596,7 +50896,7 @@ void glGetMapControlPointsNv(
           int ustride,
           int vstride,
           int packed,
-          Pointer<NativeType> points,
+          Pointer<Void> points,
         )
       >();
   return glGetMapControlPointsNvAsFunction(
@@ -51779,7 +51079,7 @@ late Pointer<NativeFunction<Void Function()>> _glDeleteFencesNv;
 /// {@category opengl_glext}
 void glDeleteFencesNv(int n, Pointer<Uint32> fences) {
   final glDeleteFencesNvAsFunction = _glDeleteFencesNv
-      .cast<NativeFunction<Void Function(Uint32 n, Pointer<Uint32> fences)>>()
+      .cast<NativeFunction<Void Function(Int32 n, Pointer<Uint32> fences)>>()
       .asFunction<void Function(int n, Pointer<Uint32> fences)>();
   return glDeleteFencesNvAsFunction(n, fences);
 }
@@ -51793,7 +51093,7 @@ late Pointer<NativeFunction<Void Function()>> _glGenFencesNv;
 /// {@category opengl_glext}
 void glGenFencesNv(int n, Pointer<Uint32> fences) {
   final glGenFencesNvAsFunction = _glGenFencesNv
-      .cast<NativeFunction<Void Function(Uint32 n, Pointer<Uint32> fences)>>()
+      .cast<NativeFunction<Void Function(Int32 n, Pointer<Uint32> fences)>>()
       .asFunction<void Function(int n, Pointer<Uint32> fences)>();
   return glGenFencesNvAsFunction(n, fences);
 }
@@ -51807,7 +51107,7 @@ late Pointer<NativeFunction<Void Function()>> _glIsFenceNv;
 /// {@category opengl_glext}
 int glIsFenceNv(int fence) {
   final glIsFenceNvAsFunction = _glIsFenceNv
-      .cast<NativeFunction<Int32 Function(Uint32 fence)>>()
+      .cast<NativeFunction<Uint8 Function(Uint32 fence)>>()
       .asFunction<int Function(int fence)>();
   return glIsFenceNvAsFunction(fence);
 }
@@ -51821,7 +51121,7 @@ late Pointer<NativeFunction<Void Function()>> _glTestFenceNv;
 /// {@category opengl_glext}
 int glTestFenceNv(int fence) {
   final glTestFenceNvAsFunction = _glTestFenceNv
-      .cast<NativeFunction<Int32 Function(Uint32 fence)>>()
+      .cast<NativeFunction<Uint8 Function(Uint32 fence)>>()
       .asFunction<int Function(int fence)>();
   return glTestFenceNvAsFunction(fence);
 }
@@ -51907,7 +51207,7 @@ void glProgramNamedParameter4fNv(
         NativeFunction<
           Void Function(
             Uint32 id,
-            Uint32 len,
+            Int32 len,
             Pointer<Uint8> name,
             Float x,
             Float y,
@@ -51948,7 +51248,7 @@ void glProgramNamedParameter4fvNv(
         NativeFunction<
           Void Function(
             Uint32 id,
-            Uint32 len,
+            Int32 len,
             Pointer<Uint8> name,
             Pointer<Float> v,
           )
@@ -51981,7 +51281,7 @@ void glProgramNamedParameter4dNv(
         NativeFunction<
           Void Function(
             Uint32 id,
-            Uint32 len,
+            Int32 len,
             Pointer<Uint8> name,
             Double x,
             Double y,
@@ -52022,7 +51322,7 @@ void glProgramNamedParameter4dvNv(
         NativeFunction<
           Void Function(
             Uint32 id,
-            Uint32 len,
+            Int32 len,
             Pointer<Uint8> name,
             Pointer<Double> v,
           )
@@ -52053,7 +51353,7 @@ void glGetProgramNamedParameterfvNv(
             NativeFunction<
               Void Function(
                 Uint32 id,
-                Uint32 len,
+                Int32 len,
                 Pointer<Uint8> name,
                 Pointer<Float> params,
               )
@@ -52089,7 +51389,7 @@ void glGetProgramNamedParameterdvNv(
             NativeFunction<
               Void Function(
                 Uint32 id,
-                Uint32 len,
+                Int32 len,
                 Pointer<Uint8> name,
                 Pointer<Double> params,
               )
@@ -52115,7 +51415,7 @@ late Pointer<NativeFunction<Void Function()>> _glCoverageModulationTableNv;
 /// {@category opengl_glext}
 void glCoverageModulationTableNv(int n, Pointer<Float> v) {
   final glCoverageModulationTableNvAsFunction = _glCoverageModulationTableNv
-      .cast<NativeFunction<Void Function(Uint32 n, Pointer<Float> v)>>()
+      .cast<NativeFunction<Void Function(Int32 n, Pointer<Float> v)>>()
       .asFunction<void Function(int n, Pointer<Float> v)>();
   return glCoverageModulationTableNvAsFunction(n, v);
 }
@@ -52131,7 +51431,7 @@ void glGetCoverageModulationTableNv(int bufSize, Pointer<Float> v) {
   final glGetCoverageModulationTableNvAsFunction =
       _glGetCoverageModulationTableNv
           .cast<
-            NativeFunction<Void Function(Uint32 bufSize, Pointer<Float> v)>
+            NativeFunction<Void Function(Int32 bufSize, Pointer<Float> v)>
           >()
           .asFunction<void Function(int bufSize, Pointer<Float> v)>();
   return glGetCoverageModulationTableNvAsFunction(bufSize, v);
@@ -52173,11 +51473,11 @@ void glRenderbufferStorageMultisampleCoverageNv(
             NativeFunction<
               Void Function(
                 Uint32 target,
-                Uint32 coverageSamples,
-                Uint32 colorSamples,
+                Int32 coverageSamples,
+                Int32 colorSamples,
                 Uint32 internalformat,
-                Uint32 width,
-                Uint32 height,
+                Int32 width,
+                Int32 height,
               )
             >
           >()
@@ -52313,9 +51613,9 @@ late Pointer<NativeFunction<Void Function()>> _glMulticastBufferSubDataNv;
 void glMulticastBufferSubDataNv(
   int gpuMask,
   int buffer,
-  Pointer<NativeType> offset,
-  Pointer<Uint32> size,
-  Pointer<NativeType> data,
+  int offset,
+  int size,
+  Pointer<Void> data,
 ) {
   final glMulticastBufferSubDataNvAsFunction = _glMulticastBufferSubDataNv
       .cast<
@@ -52323,9 +51623,9 @@ void glMulticastBufferSubDataNv(
           Void Function(
             Uint32 gpuMask,
             Uint32 buffer,
-            Pointer<NativeType> offset,
-            Pointer<Uint32> size,
-            Pointer<NativeType> data,
+            IntPtr offset,
+            IntPtr size,
+            Pointer<Void> data,
           )
         >
       >()
@@ -52333,9 +51633,9 @@ void glMulticastBufferSubDataNv(
         void Function(
           int gpuMask,
           int buffer,
-          Pointer<NativeType> offset,
-          Pointer<Uint32> size,
-          Pointer<NativeType> data,
+          int offset,
+          int size,
+          Pointer<Void> data,
         )
       >();
   return glMulticastBufferSubDataNvAsFunction(
@@ -52359,9 +51659,9 @@ void glMulticastCopyBufferSubDataNv(
   int writeGpuMask,
   int readBuffer,
   int writeBuffer,
-  Pointer<NativeType> readOffset,
-  Pointer<NativeType> writeOffset,
-  Pointer<Uint32> size,
+  int readOffset,
+  int writeOffset,
+  int size,
 ) {
   final glMulticastCopyBufferSubDataNvAsFunction =
       _glMulticastCopyBufferSubDataNv
@@ -52372,9 +51672,9 @@ void glMulticastCopyBufferSubDataNv(
                 Uint32 writeGpuMask,
                 Uint32 readBuffer,
                 Uint32 writeBuffer,
-                Pointer<NativeType> readOffset,
-                Pointer<NativeType> writeOffset,
-                Pointer<Uint32> size,
+                IntPtr readOffset,
+                IntPtr writeOffset,
+                IntPtr size,
               )
             >
           >()
@@ -52384,9 +51684,9 @@ void glMulticastCopyBufferSubDataNv(
               int writeGpuMask,
               int readBuffer,
               int writeBuffer,
-              Pointer<NativeType> readOffset,
-              Pointer<NativeType> writeOffset,
-              Pointer<Uint32> size,
+              int readOffset,
+              int writeOffset,
+              int size,
             )
           >();
   return glMulticastCopyBufferSubDataNvAsFunction(
@@ -52444,9 +51744,9 @@ void glMulticastCopyImageSubDataNv(
             Int32 dstX,
             Int32 dstY,
             Int32 dstZ,
-            Uint32 srcWidth,
-            Uint32 srcHeight,
-            Uint32 srcDepth,
+            Int32 srcWidth,
+            Int32 srcHeight,
+            Int32 srcDepth,
           )
         >
       >()
@@ -52587,7 +51887,7 @@ void glMulticastFramebufferSampleLocationsfvNv(
                 Uint32 gpu,
                 Uint32 framebuffer,
                 Uint32 start,
-                Uint32 count,
+                Int32 count,
                 Pointer<Float> v,
               )
             >
@@ -52841,7 +52141,7 @@ void glProgramLocalParametersI4ivNv(
               Void Function(
                 Uint32 target,
                 Uint32 index,
-                Uint32 count,
+                Int32 count,
                 Pointer<Int32> params,
               )
             >
@@ -52936,7 +52236,7 @@ void glProgramLocalParametersI4uivNv(
               Void Function(
                 Uint32 target,
                 Uint32 index,
-                Uint32 count,
+                Int32 count,
                 Pointer<Uint32> params,
               )
             >
@@ -53030,7 +52330,7 @@ void glProgramEnvParametersI4ivNv(
           Void Function(
             Uint32 target,
             Uint32 index,
-            Uint32 count,
+            Int32 count,
             Pointer<Int32> params,
           )
         >
@@ -53118,7 +52418,7 @@ void glProgramEnvParametersI4uivNv(
           Void Function(
             Uint32 target,
             Uint32 index,
-            Uint32 count,
+            Int32 count,
             Pointer<Uint32> params,
           )
         >
@@ -53245,7 +52545,7 @@ void glProgramSubroutineParametersuivNv(
       _glProgramSubroutineParametersuivNv
           .cast<
             NativeFunction<
-              Void Function(Uint32 target, Uint32 count, Pointer<Uint32> params)
+              Void Function(Uint32 target, Int32 count, Pointer<Uint32> params)
             >
           >()
           .asFunction<
@@ -53289,7 +52589,7 @@ late Pointer<NativeFunction<Void Function()>> _glVertex2hNv;
 /// {@category opengl_glext}
 void glVertex2hNv(int x, int y) {
   final glVertex2hNvAsFunction = _glVertex2hNv
-      .cast<NativeFunction<Void Function(Uint16 x, Uint16 y)>>()
+      .cast<NativeFunction<Void Function(UnsignedShort x, UnsignedShort y)>>()
       .asFunction<void Function(int x, int y)>();
   return glVertex2hNvAsFunction(x, y);
 }
@@ -53301,10 +52601,10 @@ late Pointer<NativeFunction<Void Function()>> _glVertex2hvNv;
 /// GLAPI void APIENTRY glVertex2hvNV (const GLhalfNV *v)
 /// ```
 /// {@category opengl_glext}
-void glVertex2hvNv(Pointer<Uint16> v) {
+void glVertex2hvNv(Pointer<UnsignedShort> v) {
   final glVertex2hvNvAsFunction = _glVertex2hvNv
-      .cast<NativeFunction<Void Function(Pointer<Uint16> v)>>()
-      .asFunction<void Function(Pointer<Uint16> v)>();
+      .cast<NativeFunction<Void Function(Pointer<UnsignedShort> v)>>()
+      .asFunction<void Function(Pointer<UnsignedShort> v)>();
   return glVertex2hvNvAsFunction(v);
 }
 
@@ -53317,7 +52617,11 @@ late Pointer<NativeFunction<Void Function()>> _glVertex3hNv;
 /// {@category opengl_glext}
 void glVertex3hNv(int x, int y, int z) {
   final glVertex3hNvAsFunction = _glVertex3hNv
-      .cast<NativeFunction<Void Function(Uint16 x, Uint16 y, Uint16 z)>>()
+      .cast<
+        NativeFunction<
+          Void Function(UnsignedShort x, UnsignedShort y, UnsignedShort z)
+        >
+      >()
       .asFunction<void Function(int x, int y, int z)>();
   return glVertex3hNvAsFunction(x, y, z);
 }
@@ -53329,10 +52633,10 @@ late Pointer<NativeFunction<Void Function()>> _glVertex3hvNv;
 /// GLAPI void APIENTRY glVertex3hvNV (const GLhalfNV *v)
 /// ```
 /// {@category opengl_glext}
-void glVertex3hvNv(Pointer<Uint16> v) {
+void glVertex3hvNv(Pointer<UnsignedShort> v) {
   final glVertex3hvNvAsFunction = _glVertex3hvNv
-      .cast<NativeFunction<Void Function(Pointer<Uint16> v)>>()
-      .asFunction<void Function(Pointer<Uint16> v)>();
+      .cast<NativeFunction<Void Function(Pointer<UnsignedShort> v)>>()
+      .asFunction<void Function(Pointer<UnsignedShort> v)>();
   return glVertex3hvNvAsFunction(v);
 }
 
@@ -53346,7 +52650,14 @@ late Pointer<NativeFunction<Void Function()>> _glVertex4hNv;
 void glVertex4hNv(int x, int y, int z, int w) {
   final glVertex4hNvAsFunction = _glVertex4hNv
       .cast<
-        NativeFunction<Void Function(Uint16 x, Uint16 y, Uint16 z, Uint16 w)>
+        NativeFunction<
+          Void Function(
+            UnsignedShort x,
+            UnsignedShort y,
+            UnsignedShort z,
+            UnsignedShort w,
+          )
+        >
       >()
       .asFunction<void Function(int x, int y, int z, int w)>();
   return glVertex4hNvAsFunction(x, y, z, w);
@@ -53359,10 +52670,10 @@ late Pointer<NativeFunction<Void Function()>> _glVertex4hvNv;
 /// GLAPI void APIENTRY glVertex4hvNV (const GLhalfNV *v)
 /// ```
 /// {@category opengl_glext}
-void glVertex4hvNv(Pointer<Uint16> v) {
+void glVertex4hvNv(Pointer<UnsignedShort> v) {
   final glVertex4hvNvAsFunction = _glVertex4hvNv
-      .cast<NativeFunction<Void Function(Pointer<Uint16> v)>>()
-      .asFunction<void Function(Pointer<Uint16> v)>();
+      .cast<NativeFunction<Void Function(Pointer<UnsignedShort> v)>>()
+      .asFunction<void Function(Pointer<UnsignedShort> v)>();
   return glVertex4hvNvAsFunction(v);
 }
 
@@ -53375,7 +52686,11 @@ late Pointer<NativeFunction<Void Function()>> _glNormal3hNv;
 /// {@category opengl_glext}
 void glNormal3hNv(int nx, int ny, int nz) {
   final glNormal3hNvAsFunction = _glNormal3hNv
-      .cast<NativeFunction<Void Function(Uint16 nx, Uint16 ny, Uint16 nz)>>()
+      .cast<
+        NativeFunction<
+          Void Function(UnsignedShort nx, UnsignedShort ny, UnsignedShort nz)
+        >
+      >()
       .asFunction<void Function(int nx, int ny, int nz)>();
   return glNormal3hNvAsFunction(nx, ny, nz);
 }
@@ -53387,10 +52702,10 @@ late Pointer<NativeFunction<Void Function()>> _glNormal3hvNv;
 /// GLAPI void APIENTRY glNormal3hvNV (const GLhalfNV *v)
 /// ```
 /// {@category opengl_glext}
-void glNormal3hvNv(Pointer<Uint16> v) {
+void glNormal3hvNv(Pointer<UnsignedShort> v) {
   final glNormal3hvNvAsFunction = _glNormal3hvNv
-      .cast<NativeFunction<Void Function(Pointer<Uint16> v)>>()
-      .asFunction<void Function(Pointer<Uint16> v)>();
+      .cast<NativeFunction<Void Function(Pointer<UnsignedShort> v)>>()
+      .asFunction<void Function(Pointer<UnsignedShort> v)>();
   return glNormal3hvNvAsFunction(v);
 }
 
@@ -53404,7 +52719,13 @@ late Pointer<NativeFunction<Void Function()>> _glColor3hNv;
 void glColor3hNv(int red, int green, int blue) {
   final glColor3hNvAsFunction = _glColor3hNv
       .cast<
-        NativeFunction<Void Function(Uint16 red, Uint16 green, Uint16 blue)>
+        NativeFunction<
+          Void Function(
+            UnsignedShort red,
+            UnsignedShort green,
+            UnsignedShort blue,
+          )
+        >
       >()
       .asFunction<void Function(int red, int green, int blue)>();
   return glColor3hNvAsFunction(red, green, blue);
@@ -53417,10 +52738,10 @@ late Pointer<NativeFunction<Void Function()>> _glColor3hvNv;
 /// GLAPI void APIENTRY glColor3hvNV (const GLhalfNV *v)
 /// ```
 /// {@category opengl_glext}
-void glColor3hvNv(Pointer<Uint16> v) {
+void glColor3hvNv(Pointer<UnsignedShort> v) {
   final glColor3hvNvAsFunction = _glColor3hvNv
-      .cast<NativeFunction<Void Function(Pointer<Uint16> v)>>()
-      .asFunction<void Function(Pointer<Uint16> v)>();
+      .cast<NativeFunction<Void Function(Pointer<UnsignedShort> v)>>()
+      .asFunction<void Function(Pointer<UnsignedShort> v)>();
   return glColor3hvNvAsFunction(v);
 }
 
@@ -53435,7 +52756,12 @@ void glColor4hNv(int red, int green, int blue, int alpha) {
   final glColor4hNvAsFunction = _glColor4hNv
       .cast<
         NativeFunction<
-          Void Function(Uint16 red, Uint16 green, Uint16 blue, Uint16 alpha)
+          Void Function(
+            UnsignedShort red,
+            UnsignedShort green,
+            UnsignedShort blue,
+            UnsignedShort alpha,
+          )
         >
       >()
       .asFunction<void Function(int red, int green, int blue, int alpha)>();
@@ -53449,10 +52775,10 @@ late Pointer<NativeFunction<Void Function()>> _glColor4hvNv;
 /// GLAPI void APIENTRY glColor4hvNV (const GLhalfNV *v)
 /// ```
 /// {@category opengl_glext}
-void glColor4hvNv(Pointer<Uint16> v) {
+void glColor4hvNv(Pointer<UnsignedShort> v) {
   final glColor4hvNvAsFunction = _glColor4hvNv
-      .cast<NativeFunction<Void Function(Pointer<Uint16> v)>>()
-      .asFunction<void Function(Pointer<Uint16> v)>();
+      .cast<NativeFunction<Void Function(Pointer<UnsignedShort> v)>>()
+      .asFunction<void Function(Pointer<UnsignedShort> v)>();
   return glColor4hvNvAsFunction(v);
 }
 
@@ -53465,7 +52791,7 @@ late Pointer<NativeFunction<Void Function()>> _glTexCoord1hNv;
 /// {@category opengl_glext}
 void glTexCoord1hNv(int s) {
   final glTexCoord1hNvAsFunction = _glTexCoord1hNv
-      .cast<NativeFunction<Void Function(Uint16 s)>>()
+      .cast<NativeFunction<Void Function(UnsignedShort s)>>()
       .asFunction<void Function(int s)>();
   return glTexCoord1hNvAsFunction(s);
 }
@@ -53477,10 +52803,10 @@ late Pointer<NativeFunction<Void Function()>> _glTexCoord1hvNv;
 /// GLAPI void APIENTRY glTexCoord1hvNV (const GLhalfNV *v)
 /// ```
 /// {@category opengl_glext}
-void glTexCoord1hvNv(Pointer<Uint16> v) {
+void glTexCoord1hvNv(Pointer<UnsignedShort> v) {
   final glTexCoord1hvNvAsFunction = _glTexCoord1hvNv
-      .cast<NativeFunction<Void Function(Pointer<Uint16> v)>>()
-      .asFunction<void Function(Pointer<Uint16> v)>();
+      .cast<NativeFunction<Void Function(Pointer<UnsignedShort> v)>>()
+      .asFunction<void Function(Pointer<UnsignedShort> v)>();
   return glTexCoord1hvNvAsFunction(v);
 }
 
@@ -53493,7 +52819,7 @@ late Pointer<NativeFunction<Void Function()>> _glTexCoord2hNv;
 /// {@category opengl_glext}
 void glTexCoord2hNv(int s, int t) {
   final glTexCoord2hNvAsFunction = _glTexCoord2hNv
-      .cast<NativeFunction<Void Function(Uint16 s, Uint16 t)>>()
+      .cast<NativeFunction<Void Function(UnsignedShort s, UnsignedShort t)>>()
       .asFunction<void Function(int s, int t)>();
   return glTexCoord2hNvAsFunction(s, t);
 }
@@ -53505,10 +52831,10 @@ late Pointer<NativeFunction<Void Function()>> _glTexCoord2hvNv;
 /// GLAPI void APIENTRY glTexCoord2hvNV (const GLhalfNV *v)
 /// ```
 /// {@category opengl_glext}
-void glTexCoord2hvNv(Pointer<Uint16> v) {
+void glTexCoord2hvNv(Pointer<UnsignedShort> v) {
   final glTexCoord2hvNvAsFunction = _glTexCoord2hvNv
-      .cast<NativeFunction<Void Function(Pointer<Uint16> v)>>()
-      .asFunction<void Function(Pointer<Uint16> v)>();
+      .cast<NativeFunction<Void Function(Pointer<UnsignedShort> v)>>()
+      .asFunction<void Function(Pointer<UnsignedShort> v)>();
   return glTexCoord2hvNvAsFunction(v);
 }
 
@@ -53521,7 +52847,11 @@ late Pointer<NativeFunction<Void Function()>> _glTexCoord3hNv;
 /// {@category opengl_glext}
 void glTexCoord3hNv(int s, int t, int r) {
   final glTexCoord3hNvAsFunction = _glTexCoord3hNv
-      .cast<NativeFunction<Void Function(Uint16 s, Uint16 t, Uint16 r)>>()
+      .cast<
+        NativeFunction<
+          Void Function(UnsignedShort s, UnsignedShort t, UnsignedShort r)
+        >
+      >()
       .asFunction<void Function(int s, int t, int r)>();
   return glTexCoord3hNvAsFunction(s, t, r);
 }
@@ -53533,10 +52863,10 @@ late Pointer<NativeFunction<Void Function()>> _glTexCoord3hvNv;
 /// GLAPI void APIENTRY glTexCoord3hvNV (const GLhalfNV *v)
 /// ```
 /// {@category opengl_glext}
-void glTexCoord3hvNv(Pointer<Uint16> v) {
+void glTexCoord3hvNv(Pointer<UnsignedShort> v) {
   final glTexCoord3hvNvAsFunction = _glTexCoord3hvNv
-      .cast<NativeFunction<Void Function(Pointer<Uint16> v)>>()
-      .asFunction<void Function(Pointer<Uint16> v)>();
+      .cast<NativeFunction<Void Function(Pointer<UnsignedShort> v)>>()
+      .asFunction<void Function(Pointer<UnsignedShort> v)>();
   return glTexCoord3hvNvAsFunction(v);
 }
 
@@ -53550,7 +52880,14 @@ late Pointer<NativeFunction<Void Function()>> _glTexCoord4hNv;
 void glTexCoord4hNv(int s, int t, int r, int q) {
   final glTexCoord4hNvAsFunction = _glTexCoord4hNv
       .cast<
-        NativeFunction<Void Function(Uint16 s, Uint16 t, Uint16 r, Uint16 q)>
+        NativeFunction<
+          Void Function(
+            UnsignedShort s,
+            UnsignedShort t,
+            UnsignedShort r,
+            UnsignedShort q,
+          )
+        >
       >()
       .asFunction<void Function(int s, int t, int r, int q)>();
   return glTexCoord4hNvAsFunction(s, t, r, q);
@@ -53563,10 +52900,10 @@ late Pointer<NativeFunction<Void Function()>> _glTexCoord4hvNv;
 /// GLAPI void APIENTRY glTexCoord4hvNV (const GLhalfNV *v)
 /// ```
 /// {@category opengl_glext}
-void glTexCoord4hvNv(Pointer<Uint16> v) {
+void glTexCoord4hvNv(Pointer<UnsignedShort> v) {
   final glTexCoord4hvNvAsFunction = _glTexCoord4hvNv
-      .cast<NativeFunction<Void Function(Pointer<Uint16> v)>>()
-      .asFunction<void Function(Pointer<Uint16> v)>();
+      .cast<NativeFunction<Void Function(Pointer<UnsignedShort> v)>>()
+      .asFunction<void Function(Pointer<UnsignedShort> v)>();
   return glTexCoord4hvNvAsFunction(v);
 }
 
@@ -53579,7 +52916,7 @@ late Pointer<NativeFunction<Void Function()>> _glMultiTexCoord1hNv;
 /// {@category opengl_glext}
 void glMultiTexCoord1hNv(int target, int s) {
   final glMultiTexCoord1hNvAsFunction = _glMultiTexCoord1hNv
-      .cast<NativeFunction<Void Function(Uint32 target, Uint16 s)>>()
+      .cast<NativeFunction<Void Function(Uint32 target, UnsignedShort s)>>()
       .asFunction<void Function(int target, int s)>();
   return glMultiTexCoord1hNvAsFunction(target, s);
 }
@@ -53591,10 +52928,12 @@ late Pointer<NativeFunction<Void Function()>> _glMultiTexCoord1hvNv;
 /// GLAPI void APIENTRY glMultiTexCoord1hvNV (GLenum target, const GLhalfNV *v)
 /// ```
 /// {@category opengl_glext}
-void glMultiTexCoord1hvNv(int target, Pointer<Uint16> v) {
+void glMultiTexCoord1hvNv(int target, Pointer<UnsignedShort> v) {
   final glMultiTexCoord1hvNvAsFunction = _glMultiTexCoord1hvNv
-      .cast<NativeFunction<Void Function(Uint32 target, Pointer<Uint16> v)>>()
-      .asFunction<void Function(int target, Pointer<Uint16> v)>();
+      .cast<
+        NativeFunction<Void Function(Uint32 target, Pointer<UnsignedShort> v)>
+      >()
+      .asFunction<void Function(int target, Pointer<UnsignedShort> v)>();
   return glMultiTexCoord1hvNvAsFunction(target, v);
 }
 
@@ -53607,7 +52946,11 @@ late Pointer<NativeFunction<Void Function()>> _glMultiTexCoord2hNv;
 /// {@category opengl_glext}
 void glMultiTexCoord2hNv(int target, int s, int t) {
   final glMultiTexCoord2hNvAsFunction = _glMultiTexCoord2hNv
-      .cast<NativeFunction<Void Function(Uint32 target, Uint16 s, Uint16 t)>>()
+      .cast<
+        NativeFunction<
+          Void Function(Uint32 target, UnsignedShort s, UnsignedShort t)
+        >
+      >()
       .asFunction<void Function(int target, int s, int t)>();
   return glMultiTexCoord2hNvAsFunction(target, s, t);
 }
@@ -53619,10 +52962,12 @@ late Pointer<NativeFunction<Void Function()>> _glMultiTexCoord2hvNv;
 /// GLAPI void APIENTRY glMultiTexCoord2hvNV (GLenum target, const GLhalfNV *v)
 /// ```
 /// {@category opengl_glext}
-void glMultiTexCoord2hvNv(int target, Pointer<Uint16> v) {
+void glMultiTexCoord2hvNv(int target, Pointer<UnsignedShort> v) {
   final glMultiTexCoord2hvNvAsFunction = _glMultiTexCoord2hvNv
-      .cast<NativeFunction<Void Function(Uint32 target, Pointer<Uint16> v)>>()
-      .asFunction<void Function(int target, Pointer<Uint16> v)>();
+      .cast<
+        NativeFunction<Void Function(Uint32 target, Pointer<UnsignedShort> v)>
+      >()
+      .asFunction<void Function(int target, Pointer<UnsignedShort> v)>();
   return glMultiTexCoord2hvNvAsFunction(target, v);
 }
 
@@ -53637,7 +52982,12 @@ void glMultiTexCoord3hNv(int target, int s, int t, int r) {
   final glMultiTexCoord3hNvAsFunction = _glMultiTexCoord3hNv
       .cast<
         NativeFunction<
-          Void Function(Uint32 target, Uint16 s, Uint16 t, Uint16 r)
+          Void Function(
+            Uint32 target,
+            UnsignedShort s,
+            UnsignedShort t,
+            UnsignedShort r,
+          )
         >
       >()
       .asFunction<void Function(int target, int s, int t, int r)>();
@@ -53651,10 +53001,12 @@ late Pointer<NativeFunction<Void Function()>> _glMultiTexCoord3hvNv;
 /// GLAPI void APIENTRY glMultiTexCoord3hvNV (GLenum target, const GLhalfNV *v)
 /// ```
 /// {@category opengl_glext}
-void glMultiTexCoord3hvNv(int target, Pointer<Uint16> v) {
+void glMultiTexCoord3hvNv(int target, Pointer<UnsignedShort> v) {
   final glMultiTexCoord3hvNvAsFunction = _glMultiTexCoord3hvNv
-      .cast<NativeFunction<Void Function(Uint32 target, Pointer<Uint16> v)>>()
-      .asFunction<void Function(int target, Pointer<Uint16> v)>();
+      .cast<
+        NativeFunction<Void Function(Uint32 target, Pointer<UnsignedShort> v)>
+      >()
+      .asFunction<void Function(int target, Pointer<UnsignedShort> v)>();
   return glMultiTexCoord3hvNvAsFunction(target, v);
 }
 
@@ -53669,7 +53021,13 @@ void glMultiTexCoord4hNv(int target, int s, int t, int r, int q) {
   final glMultiTexCoord4hNvAsFunction = _glMultiTexCoord4hNv
       .cast<
         NativeFunction<
-          Void Function(Uint32 target, Uint16 s, Uint16 t, Uint16 r, Uint16 q)
+          Void Function(
+            Uint32 target,
+            UnsignedShort s,
+            UnsignedShort t,
+            UnsignedShort r,
+            UnsignedShort q,
+          )
         >
       >()
       .asFunction<void Function(int target, int s, int t, int r, int q)>();
@@ -53683,10 +53041,12 @@ late Pointer<NativeFunction<Void Function()>> _glMultiTexCoord4hvNv;
 /// GLAPI void APIENTRY glMultiTexCoord4hvNV (GLenum target, const GLhalfNV *v)
 /// ```
 /// {@category opengl_glext}
-void glMultiTexCoord4hvNv(int target, Pointer<Uint16> v) {
+void glMultiTexCoord4hvNv(int target, Pointer<UnsignedShort> v) {
   final glMultiTexCoord4hvNvAsFunction = _glMultiTexCoord4hvNv
-      .cast<NativeFunction<Void Function(Uint32 target, Pointer<Uint16> v)>>()
-      .asFunction<void Function(int target, Pointer<Uint16> v)>();
+      .cast<
+        NativeFunction<Void Function(Uint32 target, Pointer<UnsignedShort> v)>
+      >()
+      .asFunction<void Function(int target, Pointer<UnsignedShort> v)>();
   return glMultiTexCoord4hvNvAsFunction(target, v);
 }
 
@@ -53699,7 +53059,7 @@ late Pointer<NativeFunction<Void Function()>> _glVertexAttrib1hNv;
 /// {@category opengl_glext}
 void glVertexAttrib1hNv(int index, int x) {
   final glVertexAttrib1hNvAsFunction = _glVertexAttrib1hNv
-      .cast<NativeFunction<Void Function(Uint32 index, Uint16 x)>>()
+      .cast<NativeFunction<Void Function(Uint32 index, UnsignedShort x)>>()
       .asFunction<void Function(int index, int x)>();
   return glVertexAttrib1hNvAsFunction(index, x);
 }
@@ -53711,10 +53071,12 @@ late Pointer<NativeFunction<Void Function()>> _glVertexAttrib1hvNv;
 /// GLAPI void APIENTRY glVertexAttrib1hvNV (GLuint index, const GLhalfNV *v)
 /// ```
 /// {@category opengl_glext}
-void glVertexAttrib1hvNv(int index, Pointer<Uint16> v) {
+void glVertexAttrib1hvNv(int index, Pointer<UnsignedShort> v) {
   final glVertexAttrib1hvNvAsFunction = _glVertexAttrib1hvNv
-      .cast<NativeFunction<Void Function(Uint32 index, Pointer<Uint16> v)>>()
-      .asFunction<void Function(int index, Pointer<Uint16> v)>();
+      .cast<
+        NativeFunction<Void Function(Uint32 index, Pointer<UnsignedShort> v)>
+      >()
+      .asFunction<void Function(int index, Pointer<UnsignedShort> v)>();
   return glVertexAttrib1hvNvAsFunction(index, v);
 }
 
@@ -53727,7 +53089,11 @@ late Pointer<NativeFunction<Void Function()>> _glVertexAttrib2hNv;
 /// {@category opengl_glext}
 void glVertexAttrib2hNv(int index, int x, int y) {
   final glVertexAttrib2hNvAsFunction = _glVertexAttrib2hNv
-      .cast<NativeFunction<Void Function(Uint32 index, Uint16 x, Uint16 y)>>()
+      .cast<
+        NativeFunction<
+          Void Function(Uint32 index, UnsignedShort x, UnsignedShort y)
+        >
+      >()
       .asFunction<void Function(int index, int x, int y)>();
   return glVertexAttrib2hNvAsFunction(index, x, y);
 }
@@ -53739,10 +53105,12 @@ late Pointer<NativeFunction<Void Function()>> _glVertexAttrib2hvNv;
 /// GLAPI void APIENTRY glVertexAttrib2hvNV (GLuint index, const GLhalfNV *v)
 /// ```
 /// {@category opengl_glext}
-void glVertexAttrib2hvNv(int index, Pointer<Uint16> v) {
+void glVertexAttrib2hvNv(int index, Pointer<UnsignedShort> v) {
   final glVertexAttrib2hvNvAsFunction = _glVertexAttrib2hvNv
-      .cast<NativeFunction<Void Function(Uint32 index, Pointer<Uint16> v)>>()
-      .asFunction<void Function(int index, Pointer<Uint16> v)>();
+      .cast<
+        NativeFunction<Void Function(Uint32 index, Pointer<UnsignedShort> v)>
+      >()
+      .asFunction<void Function(int index, Pointer<UnsignedShort> v)>();
   return glVertexAttrib2hvNvAsFunction(index, v);
 }
 
@@ -53757,7 +53125,12 @@ void glVertexAttrib3hNv(int index, int x, int y, int z) {
   final glVertexAttrib3hNvAsFunction = _glVertexAttrib3hNv
       .cast<
         NativeFunction<
-          Void Function(Uint32 index, Uint16 x, Uint16 y, Uint16 z)
+          Void Function(
+            Uint32 index,
+            UnsignedShort x,
+            UnsignedShort y,
+            UnsignedShort z,
+          )
         >
       >()
       .asFunction<void Function(int index, int x, int y, int z)>();
@@ -53771,10 +53144,12 @@ late Pointer<NativeFunction<Void Function()>> _glVertexAttrib3hvNv;
 /// GLAPI void APIENTRY glVertexAttrib3hvNV (GLuint index, const GLhalfNV *v)
 /// ```
 /// {@category opengl_glext}
-void glVertexAttrib3hvNv(int index, Pointer<Uint16> v) {
+void glVertexAttrib3hvNv(int index, Pointer<UnsignedShort> v) {
   final glVertexAttrib3hvNvAsFunction = _glVertexAttrib3hvNv
-      .cast<NativeFunction<Void Function(Uint32 index, Pointer<Uint16> v)>>()
-      .asFunction<void Function(int index, Pointer<Uint16> v)>();
+      .cast<
+        NativeFunction<Void Function(Uint32 index, Pointer<UnsignedShort> v)>
+      >()
+      .asFunction<void Function(int index, Pointer<UnsignedShort> v)>();
   return glVertexAttrib3hvNvAsFunction(index, v);
 }
 
@@ -53789,7 +53164,13 @@ void glVertexAttrib4hNv(int index, int x, int y, int z, int w) {
   final glVertexAttrib4hNvAsFunction = _glVertexAttrib4hNv
       .cast<
         NativeFunction<
-          Void Function(Uint32 index, Uint16 x, Uint16 y, Uint16 z, Uint16 w)
+          Void Function(
+            Uint32 index,
+            UnsignedShort x,
+            UnsignedShort y,
+            UnsignedShort z,
+            UnsignedShort w,
+          )
         >
       >()
       .asFunction<void Function(int index, int x, int y, int z, int w)>();
@@ -53803,10 +53184,12 @@ late Pointer<NativeFunction<Void Function()>> _glVertexAttrib4hvNv;
 /// GLAPI void APIENTRY glVertexAttrib4hvNV (GLuint index, const GLhalfNV *v)
 /// ```
 /// {@category opengl_glext}
-void glVertexAttrib4hvNv(int index, Pointer<Uint16> v) {
+void glVertexAttrib4hvNv(int index, Pointer<UnsignedShort> v) {
   final glVertexAttrib4hvNvAsFunction = _glVertexAttrib4hvNv
-      .cast<NativeFunction<Void Function(Uint32 index, Pointer<Uint16> v)>>()
-      .asFunction<void Function(int index, Pointer<Uint16> v)>();
+      .cast<
+        NativeFunction<Void Function(Uint32 index, Pointer<UnsignedShort> v)>
+      >()
+      .asFunction<void Function(int index, Pointer<UnsignedShort> v)>();
   return glVertexAttrib4hvNvAsFunction(index, v);
 }
 
@@ -53817,12 +53200,14 @@ late Pointer<NativeFunction<Void Function()>> _glVertexAttribs1hvNv;
 /// GLAPI void APIENTRY glVertexAttribs1hvNV (GLuint index, GLsizei n, const GLhalfNV *v)
 /// ```
 /// {@category opengl_glext}
-void glVertexAttribs1hvNv(int index, int n, Pointer<Uint16> v) {
+void glVertexAttribs1hvNv(int index, int n, Pointer<UnsignedShort> v) {
   final glVertexAttribs1hvNvAsFunction = _glVertexAttribs1hvNv
       .cast<
-        NativeFunction<Void Function(Uint32 index, Uint32 n, Pointer<Uint16> v)>
+        NativeFunction<
+          Void Function(Uint32 index, Int32 n, Pointer<UnsignedShort> v)
+        >
       >()
-      .asFunction<void Function(int index, int n, Pointer<Uint16> v)>();
+      .asFunction<void Function(int index, int n, Pointer<UnsignedShort> v)>();
   return glVertexAttribs1hvNvAsFunction(index, n, v);
 }
 
@@ -53833,12 +53218,14 @@ late Pointer<NativeFunction<Void Function()>> _glVertexAttribs2hvNv;
 /// GLAPI void APIENTRY glVertexAttribs2hvNV (GLuint index, GLsizei n, const GLhalfNV *v)
 /// ```
 /// {@category opengl_glext}
-void glVertexAttribs2hvNv(int index, int n, Pointer<Uint16> v) {
+void glVertexAttribs2hvNv(int index, int n, Pointer<UnsignedShort> v) {
   final glVertexAttribs2hvNvAsFunction = _glVertexAttribs2hvNv
       .cast<
-        NativeFunction<Void Function(Uint32 index, Uint32 n, Pointer<Uint16> v)>
+        NativeFunction<
+          Void Function(Uint32 index, Int32 n, Pointer<UnsignedShort> v)
+        >
       >()
-      .asFunction<void Function(int index, int n, Pointer<Uint16> v)>();
+      .asFunction<void Function(int index, int n, Pointer<UnsignedShort> v)>();
   return glVertexAttribs2hvNvAsFunction(index, n, v);
 }
 
@@ -53849,12 +53236,14 @@ late Pointer<NativeFunction<Void Function()>> _glVertexAttribs3hvNv;
 /// GLAPI void APIENTRY glVertexAttribs3hvNV (GLuint index, GLsizei n, const GLhalfNV *v)
 /// ```
 /// {@category opengl_glext}
-void glVertexAttribs3hvNv(int index, int n, Pointer<Uint16> v) {
+void glVertexAttribs3hvNv(int index, int n, Pointer<UnsignedShort> v) {
   final glVertexAttribs3hvNvAsFunction = _glVertexAttribs3hvNv
       .cast<
-        NativeFunction<Void Function(Uint32 index, Uint32 n, Pointer<Uint16> v)>
+        NativeFunction<
+          Void Function(Uint32 index, Int32 n, Pointer<UnsignedShort> v)
+        >
       >()
-      .asFunction<void Function(int index, int n, Pointer<Uint16> v)>();
+      .asFunction<void Function(int index, int n, Pointer<UnsignedShort> v)>();
   return glVertexAttribs3hvNvAsFunction(index, n, v);
 }
 
@@ -53865,12 +53254,14 @@ late Pointer<NativeFunction<Void Function()>> _glVertexAttribs4hvNv;
 /// GLAPI void APIENTRY glVertexAttribs4hvNV (GLuint index, GLsizei n, const GLhalfNV *v)
 /// ```
 /// {@category opengl_glext}
-void glVertexAttribs4hvNv(int index, int n, Pointer<Uint16> v) {
+void glVertexAttribs4hvNv(int index, int n, Pointer<UnsignedShort> v) {
   final glVertexAttribs4hvNvAsFunction = _glVertexAttribs4hvNv
       .cast<
-        NativeFunction<Void Function(Uint32 index, Uint32 n, Pointer<Uint16> v)>
+        NativeFunction<
+          Void Function(Uint32 index, Int32 n, Pointer<UnsignedShort> v)
+        >
       >()
-      .asFunction<void Function(int index, int n, Pointer<Uint16> v)>();
+      .asFunction<void Function(int index, int n, Pointer<UnsignedShort> v)>();
   return glVertexAttribs4hvNvAsFunction(index, n, v);
 }
 
@@ -53883,7 +53274,7 @@ late Pointer<NativeFunction<Void Function()>> _glFogCoordhNv;
 /// {@category opengl_glext}
 void glFogCoordhNv(int fog) {
   final glFogCoordhNvAsFunction = _glFogCoordhNv
-      .cast<NativeFunction<Void Function(Uint16 fog)>>()
+      .cast<NativeFunction<Void Function(UnsignedShort fog)>>()
       .asFunction<void Function(int fog)>();
   return glFogCoordhNvAsFunction(fog);
 }
@@ -53895,10 +53286,10 @@ late Pointer<NativeFunction<Void Function()>> _glFogCoordhvNv;
 /// GLAPI void APIENTRY glFogCoordhvNV (const GLhalfNV *fog)
 /// ```
 /// {@category opengl_glext}
-void glFogCoordhvNv(Pointer<Uint16> fog) {
+void glFogCoordhvNv(Pointer<UnsignedShort> fog) {
   final glFogCoordhvNvAsFunction = _glFogCoordhvNv
-      .cast<NativeFunction<Void Function(Pointer<Uint16> fog)>>()
-      .asFunction<void Function(Pointer<Uint16> fog)>();
+      .cast<NativeFunction<Void Function(Pointer<UnsignedShort> fog)>>()
+      .asFunction<void Function(Pointer<UnsignedShort> fog)>();
   return glFogCoordhvNvAsFunction(fog);
 }
 
@@ -53912,7 +53303,13 @@ late Pointer<NativeFunction<Void Function()>> _glSecondaryColor3hNv;
 void glSecondaryColor3hNv(int red, int green, int blue) {
   final glSecondaryColor3hNvAsFunction = _glSecondaryColor3hNv
       .cast<
-        NativeFunction<Void Function(Uint16 red, Uint16 green, Uint16 blue)>
+        NativeFunction<
+          Void Function(
+            UnsignedShort red,
+            UnsignedShort green,
+            UnsignedShort blue,
+          )
+        >
       >()
       .asFunction<void Function(int red, int green, int blue)>();
   return glSecondaryColor3hNvAsFunction(red, green, blue);
@@ -53925,10 +53322,10 @@ late Pointer<NativeFunction<Void Function()>> _glSecondaryColor3hvNv;
 /// GLAPI void APIENTRY glSecondaryColor3hvNV (const GLhalfNV *v)
 /// ```
 /// {@category opengl_glext}
-void glSecondaryColor3hvNv(Pointer<Uint16> v) {
+void glSecondaryColor3hvNv(Pointer<UnsignedShort> v) {
   final glSecondaryColor3hvNvAsFunction = _glSecondaryColor3hvNv
-      .cast<NativeFunction<Void Function(Pointer<Uint16> v)>>()
-      .asFunction<void Function(Pointer<Uint16> v)>();
+      .cast<NativeFunction<Void Function(Pointer<UnsignedShort> v)>>()
+      .asFunction<void Function(Pointer<UnsignedShort> v)>();
   return glSecondaryColor3hvNvAsFunction(v);
 }
 
@@ -53941,7 +53338,7 @@ late Pointer<NativeFunction<Void Function()>> _glVertexWeighthNv;
 /// {@category opengl_glext}
 void glVertexWeighthNv(int weight) {
   final glVertexWeighthNvAsFunction = _glVertexWeighthNv
-      .cast<NativeFunction<Void Function(Uint16 weight)>>()
+      .cast<NativeFunction<Void Function(UnsignedShort weight)>>()
       .asFunction<void Function(int weight)>();
   return glVertexWeighthNvAsFunction(weight);
 }
@@ -53953,10 +53350,10 @@ late Pointer<NativeFunction<Void Function()>> _glVertexWeighthvNv;
 /// GLAPI void APIENTRY glVertexWeighthvNV (const GLhalfNV *weight)
 /// ```
 /// {@category opengl_glext}
-void glVertexWeighthvNv(Pointer<Uint16> weight) {
+void glVertexWeighthvNv(Pointer<UnsignedShort> weight) {
   final glVertexWeighthvNvAsFunction = _glVertexWeighthvNv
-      .cast<NativeFunction<Void Function(Pointer<Uint16> weight)>>()
-      .asFunction<void Function(Pointer<Uint16> weight)>();
+      .cast<NativeFunction<Void Function(Pointer<UnsignedShort> weight)>>()
+      .asFunction<void Function(Pointer<UnsignedShort> weight)>();
   return glVertexWeighthvNvAsFunction(weight);
 }
 
@@ -53981,9 +53378,9 @@ void glGetInternalformatSampleivNv(
           Void Function(
             Uint32 target,
             Uint32 internalformat,
-            Uint32 samples,
+            Int32 samples,
             Uint32 pname,
-            Uint32 count,
+            Int32 count,
             Pointer<Int32> params,
           )
         >
@@ -54031,7 +53428,7 @@ void glGetMemoryObjectDetachedResourcesuivNv(
                 Uint32 memory,
                 Uint32 pname,
                 Int32 first,
-                Uint32 count,
+                Int32 count,
                 Pointer<Uint32> params,
               )
             >
@@ -54150,8 +53547,8 @@ late Pointer<NativeFunction<Void Function()>> _glBufferPageCommitmentMemNv;
 /// {@category opengl_glext}
 void glBufferPageCommitmentMemNv(
   int target,
-  Pointer<NativeType> offset,
-  Pointer<Uint32> size,
+  int offset,
+  int size,
   int memory,
   int memOffset,
   int commit,
@@ -54161,19 +53558,19 @@ void glBufferPageCommitmentMemNv(
         NativeFunction<
           Void Function(
             Uint32 target,
-            Pointer<NativeType> offset,
-            Pointer<Uint32> size,
+            IntPtr offset,
+            IntPtr size,
             Uint32 memory,
             Uint64 memOffset,
-            Int32 commit,
+            Uint8 commit,
           )
         >
       >()
       .asFunction<
         void Function(
           int target,
-          Pointer<NativeType> offset,
-          Pointer<Uint32> size,
+          int offset,
+          int size,
           int memory,
           int memOffset,
           int commit,
@@ -54220,12 +53617,12 @@ void glTexPageCommitmentMemNv(
             Int32 xoffset,
             Int32 yoffset,
             Int32 zoffset,
-            Uint32 width,
-            Uint32 height,
-            Uint32 depth,
+            Int32 width,
+            Int32 height,
+            Int32 depth,
             Uint32 memory,
             Uint64 offset,
-            Int32 commit,
+            Uint8 commit,
           )
         >
       >()
@@ -54270,8 +53667,8 @@ late Pointer<NativeFunction<Void Function()>> _glNamedBufferPageCommitmentMemNv;
 /// {@category opengl_glext}
 void glNamedBufferPageCommitmentMemNv(
   int buffer,
-  Pointer<NativeType> offset,
-  Pointer<Uint32> size,
+  int offset,
+  int size,
   int memory,
   int memOffset,
   int commit,
@@ -54282,19 +53679,19 @@ void glNamedBufferPageCommitmentMemNv(
             NativeFunction<
               Void Function(
                 Uint32 buffer,
-                Pointer<NativeType> offset,
-                Pointer<Uint32> size,
+                IntPtr offset,
+                IntPtr size,
                 Uint32 memory,
                 Uint64 memOffset,
-                Int32 commit,
+                Uint8 commit,
               )
             >
           >()
           .asFunction<
             void Function(
               int buffer,
-              Pointer<NativeType> offset,
-              Pointer<Uint32> size,
+              int offset,
+              int size,
               int memory,
               int memOffset,
               int commit,
@@ -54341,12 +53738,12 @@ void glTexturePageCommitmentMemNv(
             Int32 xoffset,
             Int32 yoffset,
             Int32 zoffset,
-            Uint32 width,
-            Uint32 height,
-            Uint32 depth,
+            Int32 width,
+            Int32 height,
+            Int32 depth,
             Uint32 memory,
             Uint64 offset,
-            Int32 commit,
+            Uint8 commit,
           )
         >
       >()
@@ -54403,10 +53800,10 @@ late Pointer<NativeFunction<Void Function()>> _glDrawMeshTasksIndirectNv;
 /// GLAPI void APIENTRY glDrawMeshTasksIndirectNV (GLintptr indirect)
 /// ```
 /// {@category opengl_glext}
-void glDrawMeshTasksIndirectNv(Pointer<NativeType> indirect) {
+void glDrawMeshTasksIndirectNv(int indirect) {
   final glDrawMeshTasksIndirectNvAsFunction = _glDrawMeshTasksIndirectNv
-      .cast<NativeFunction<Void Function(Pointer<NativeType> indirect)>>()
-      .asFunction<void Function(Pointer<NativeType> indirect)>();
+      .cast<NativeFunction<Void Function(IntPtr indirect)>>()
+      .asFunction<void Function(int indirect)>();
   return glDrawMeshTasksIndirectNvAsFunction(indirect);
 }
 
@@ -54417,29 +53814,15 @@ late Pointer<NativeFunction<Void Function()>> _glMultiDrawMeshTasksIndirectNv;
 /// GLAPI void APIENTRY glMultiDrawMeshTasksIndirectNV (GLintptr indirect, GLsizei drawcount, GLsizei stride)
 /// ```
 /// {@category opengl_glext}
-void glMultiDrawMeshTasksIndirectNv(
-  Pointer<NativeType> indirect,
-  int drawcount,
-  int stride,
-) {
+void glMultiDrawMeshTasksIndirectNv(int indirect, int drawcount, int stride) {
   final glMultiDrawMeshTasksIndirectNvAsFunction =
       _glMultiDrawMeshTasksIndirectNv
           .cast<
             NativeFunction<
-              Void Function(
-                Pointer<NativeType> indirect,
-                Uint32 drawcount,
-                Uint32 stride,
-              )
+              Void Function(IntPtr indirect, Int32 drawcount, Int32 stride)
             >
           >()
-          .asFunction<
-            void Function(
-              Pointer<NativeType> indirect,
-              int drawcount,
-              int stride,
-            )
-          >();
+          .asFunction<void Function(int indirect, int drawcount, int stride)>();
   return glMultiDrawMeshTasksIndirectNvAsFunction(indirect, drawcount, stride);
 }
 
@@ -54452,8 +53835,8 @@ _glMultiDrawMeshTasksIndirectCountNv;
 /// ```
 /// {@category opengl_glext}
 void glMultiDrawMeshTasksIndirectCountNv(
-  Pointer<NativeType> indirect,
-  Pointer<NativeType> drawcount,
+  int indirect,
+  int drawcount,
   int maxdrawcount,
   int stride,
 ) {
@@ -54462,17 +53845,17 @@ void glMultiDrawMeshTasksIndirectCountNv(
           .cast<
             NativeFunction<
               Void Function(
-                Pointer<NativeType> indirect,
-                Pointer<NativeType> drawcount,
-                Uint32 maxdrawcount,
-                Uint32 stride,
+                IntPtr indirect,
+                IntPtr drawcount,
+                Int32 maxdrawcount,
+                Int32 stride,
               )
             >
           >()
           .asFunction<
             void Function(
-              Pointer<NativeType> indirect,
-              Pointer<NativeType> drawcount,
+              int indirect,
+              int drawcount,
               int maxdrawcount,
               int stride,
             )
@@ -54494,7 +53877,7 @@ late Pointer<NativeFunction<Void Function()>> _glGenOcclusionQueriesNv;
 /// {@category opengl_glext}
 void glGenOcclusionQueriesNv(int n, Pointer<Uint32> ids) {
   final glGenOcclusionQueriesNvAsFunction = _glGenOcclusionQueriesNv
-      .cast<NativeFunction<Void Function(Uint32 n, Pointer<Uint32> ids)>>()
+      .cast<NativeFunction<Void Function(Int32 n, Pointer<Uint32> ids)>>()
       .asFunction<void Function(int n, Pointer<Uint32> ids)>();
   return glGenOcclusionQueriesNvAsFunction(n, ids);
 }
@@ -54508,7 +53891,7 @@ late Pointer<NativeFunction<Void Function()>> _glDeleteOcclusionQueriesNv;
 /// {@category opengl_glext}
 void glDeleteOcclusionQueriesNv(int n, Pointer<Uint32> ids) {
   final glDeleteOcclusionQueriesNvAsFunction = _glDeleteOcclusionQueriesNv
-      .cast<NativeFunction<Void Function(Uint32 n, Pointer<Uint32> ids)>>()
+      .cast<NativeFunction<Void Function(Int32 n, Pointer<Uint32> ids)>>()
       .asFunction<void Function(int n, Pointer<Uint32> ids)>();
   return glDeleteOcclusionQueriesNvAsFunction(n, ids);
 }
@@ -54522,7 +53905,7 @@ late Pointer<NativeFunction<Void Function()>> _glIsOcclusionQueryNv;
 /// {@category opengl_glext}
 int glIsOcclusionQueryNv(int id) {
   final glIsOcclusionQueryNvAsFunction = _glIsOcclusionQueryNv
-      .cast<NativeFunction<Int32 Function(Uint32 id)>>()
+      .cast<NativeFunction<Uint8 Function(Uint32 id)>>()
       .asFunction<int Function(int id)>();
   return glIsOcclusionQueryNvAsFunction(id);
 }
@@ -54612,7 +53995,7 @@ void glProgramBufferParametersfvNv(
             Uint32 target,
             Uint32 bindingIndex,
             Uint32 wordIndex,
-            Uint32 count,
+            Int32 count,
             Pointer<Float> params,
           )
         >
@@ -54657,7 +54040,7 @@ void glProgramBufferParametersIivNv(
                 Uint32 target,
                 Uint32 bindingIndex,
                 Uint32 wordIndex,
-                Uint32 count,
+                Int32 count,
                 Pointer<Int32> params,
               )
             >
@@ -54702,7 +54085,7 @@ void glProgramBufferParametersIuivNv(
                 Uint32 target,
                 Uint32 bindingIndex,
                 Uint32 wordIndex,
-                Uint32 count,
+                Int32 count,
                 Pointer<Uint32> params,
               )
             >
@@ -54734,7 +54117,7 @@ late Pointer<NativeFunction<Void Function()>> _glGenPathsNv;
 /// {@category opengl_glext}
 int glGenPathsNv(int range) {
   final glGenPathsNvAsFunction = _glGenPathsNv
-      .cast<NativeFunction<Uint32 Function(Uint32 range)>>()
+      .cast<NativeFunction<Uint32 Function(Int32 range)>>()
       .asFunction<int Function(int range)>();
   return glGenPathsNvAsFunction(range);
 }
@@ -54748,7 +54131,7 @@ late Pointer<NativeFunction<Void Function()>> _glDeletePathsNv;
 /// {@category opengl_glext}
 void glDeletePathsNv(int path, int range) {
   final glDeletePathsNvAsFunction = _glDeletePathsNv
-      .cast<NativeFunction<Void Function(Uint32 path, Uint32 range)>>()
+      .cast<NativeFunction<Void Function(Uint32 path, Int32 range)>>()
       .asFunction<void Function(int path, int range)>();
   return glDeletePathsNvAsFunction(path, range);
 }
@@ -54762,7 +54145,7 @@ late Pointer<NativeFunction<Void Function()>> _glIsPathNv;
 /// {@category opengl_glext}
 int glIsPathNv(int path) {
   final glIsPathNvAsFunction = _glIsPathNv
-      .cast<NativeFunction<Int32 Function(Uint32 path)>>()
+      .cast<NativeFunction<Uint8 Function(Uint32 path)>>()
       .asFunction<int Function(int path)>();
   return glIsPathNvAsFunction(path);
 }
@@ -54780,18 +54163,18 @@ void glPathCommandsNv(
   Pointer<Uint8> commands,
   int numCoords,
   int coordType,
-  Pointer<NativeType> coords,
+  Pointer<Void> coords,
 ) {
   final glPathCommandsNvAsFunction = _glPathCommandsNv
       .cast<
         NativeFunction<
           Void Function(
             Uint32 path,
-            Uint32 numCommands,
+            Int32 numCommands,
             Pointer<Uint8> commands,
-            Uint32 numCoords,
+            Int32 numCoords,
             Uint32 coordType,
-            Pointer<NativeType> coords,
+            Pointer<Void> coords,
           )
         >
       >()
@@ -54802,7 +54185,7 @@ void glPathCommandsNv(
           Pointer<Uint8> commands,
           int numCoords,
           int coordType,
-          Pointer<NativeType> coords,
+          Pointer<Void> coords,
         )
       >();
   return glPathCommandsNvAsFunction(
@@ -54826,16 +54209,16 @@ void glPathCoordsNv(
   int path,
   int numCoords,
   int coordType,
-  Pointer<NativeType> coords,
+  Pointer<Void> coords,
 ) {
   final glPathCoordsNvAsFunction = _glPathCoordsNv
       .cast<
         NativeFunction<
           Void Function(
             Uint32 path,
-            Uint32 numCoords,
+            Int32 numCoords,
             Uint32 coordType,
-            Pointer<NativeType> coords,
+            Pointer<Void> coords,
           )
         >
       >()
@@ -54844,7 +54227,7 @@ void glPathCoordsNv(
           int path,
           int numCoords,
           int coordType,
-          Pointer<NativeType> coords,
+          Pointer<Void> coords,
         )
       >();
   return glPathCoordsNvAsFunction(path, numCoords, coordType, coords);
@@ -54865,20 +54248,20 @@ void glPathSubCommandsNv(
   Pointer<Uint8> commands,
   int numCoords,
   int coordType,
-  Pointer<NativeType> coords,
+  Pointer<Void> coords,
 ) {
   final glPathSubCommandsNvAsFunction = _glPathSubCommandsNv
       .cast<
         NativeFunction<
           Void Function(
             Uint32 path,
-            Uint32 commandStart,
-            Uint32 commandsToDelete,
-            Uint32 numCommands,
+            Int32 commandStart,
+            Int32 commandsToDelete,
+            Int32 numCommands,
             Pointer<Uint8> commands,
-            Uint32 numCoords,
+            Int32 numCoords,
             Uint32 coordType,
-            Pointer<NativeType> coords,
+            Pointer<Void> coords,
           )
         >
       >()
@@ -54891,7 +54274,7 @@ void glPathSubCommandsNv(
           Pointer<Uint8> commands,
           int numCoords,
           int coordType,
-          Pointer<NativeType> coords,
+          Pointer<Void> coords,
         )
       >();
   return glPathSubCommandsNvAsFunction(
@@ -54918,17 +54301,17 @@ void glPathSubCoordsNv(
   int coordStart,
   int numCoords,
   int coordType,
-  Pointer<NativeType> coords,
+  Pointer<Void> coords,
 ) {
   final glPathSubCoordsNvAsFunction = _glPathSubCoordsNv
       .cast<
         NativeFunction<
           Void Function(
             Uint32 path,
-            Uint32 coordStart,
-            Uint32 numCoords,
+            Int32 coordStart,
+            Int32 numCoords,
             Uint32 coordType,
-            Pointer<NativeType> coords,
+            Pointer<Void> coords,
           )
         >
       >()
@@ -54938,7 +54321,7 @@ void glPathSubCoordsNv(
           int coordStart,
           int numCoords,
           int coordType,
-          Pointer<NativeType> coords,
+          Pointer<Void> coords,
         )
       >();
   return glPathSubCoordsNvAsFunction(
@@ -54961,7 +54344,7 @@ void glPathStringNv(
   int path,
   int format,
   int length,
-  Pointer<NativeType> pathString,
+  Pointer<Void> pathString,
 ) {
   final glPathStringNvAsFunction = _glPathStringNv
       .cast<
@@ -54969,8 +54352,8 @@ void glPathStringNv(
           Void Function(
             Uint32 path,
             Uint32 format,
-            Uint32 length,
-            Pointer<NativeType> pathString,
+            Int32 length,
+            Pointer<Void> pathString,
           )
         >
       >()
@@ -54979,7 +54362,7 @@ void glPathStringNv(
           int path,
           int format,
           int length,
-          Pointer<NativeType> pathString,
+          Pointer<Void> pathString,
         )
       >();
   return glPathStringNvAsFunction(path, format, length, pathString);
@@ -54995,11 +54378,11 @@ late Pointer<NativeFunction<Void Function()>> _glPathGlyphsNv;
 void glPathGlyphsNv(
   int firstPathName,
   int fontTarget,
-  Pointer<NativeType> fontName,
+  Pointer<Void> fontName,
   int fontStyle,
   int numGlyphs,
   int type,
-  Pointer<NativeType> charcodes,
+  Pointer<Void> charcodes,
   int handleMissingGlyphs,
   int pathParameterTemplate,
   double emScale,
@@ -55010,11 +54393,11 @@ void glPathGlyphsNv(
           Void Function(
             Uint32 firstPathName,
             Uint32 fontTarget,
-            Pointer<NativeType> fontName,
+            Pointer<Void> fontName,
             Uint32 fontStyle,
-            Uint32 numGlyphs,
+            Int32 numGlyphs,
             Uint32 type,
-            Pointer<NativeType> charcodes,
+            Pointer<Void> charcodes,
             Uint32 handleMissingGlyphs,
             Uint32 pathParameterTemplate,
             Float emScale,
@@ -55025,11 +54408,11 @@ void glPathGlyphsNv(
         void Function(
           int firstPathName,
           int fontTarget,
-          Pointer<NativeType> fontName,
+          Pointer<Void> fontName,
           int fontStyle,
           int numGlyphs,
           int type,
-          Pointer<NativeType> charcodes,
+          Pointer<Void> charcodes,
           int handleMissingGlyphs,
           int pathParameterTemplate,
           double emScale,
@@ -55059,7 +54442,7 @@ late Pointer<NativeFunction<Void Function()>> _glPathGlyphRangeNv;
 void glPathGlyphRangeNv(
   int firstPathName,
   int fontTarget,
-  Pointer<NativeType> fontName,
+  Pointer<Void> fontName,
   int fontStyle,
   int firstGlyph,
   int numGlyphs,
@@ -55073,10 +54456,10 @@ void glPathGlyphRangeNv(
           Void Function(
             Uint32 firstPathName,
             Uint32 fontTarget,
-            Pointer<NativeType> fontName,
+            Pointer<Void> fontName,
             Uint32 fontStyle,
             Uint32 firstGlyph,
-            Uint32 numGlyphs,
+            Int32 numGlyphs,
             Uint32 handleMissingGlyphs,
             Uint32 pathParameterTemplate,
             Float emScale,
@@ -55087,7 +54470,7 @@ void glPathGlyphRangeNv(
         void Function(
           int firstPathName,
           int fontTarget,
-          Pointer<NativeType> fontName,
+          Pointer<Void> fontName,
           int fontStyle,
           int firstGlyph,
           int numGlyphs,
@@ -55127,7 +54510,7 @@ void glWeightPathsNv(
         NativeFunction<
           Void Function(
             Uint32 resultPath,
-            Uint32 numPaths,
+            Int32 numPaths,
             Pointer<Uint32> paths,
             Pointer<Float> weights,
           )
@@ -55302,7 +54685,7 @@ void glPathDashArrayNv(int path, int dashCount, Pointer<Float> dashArray) {
   final glPathDashArrayNvAsFunction = _glPathDashArrayNv
       .cast<
         NativeFunction<
-          Void Function(Uint32 path, Uint32 dashCount, Pointer<Float> dashArray)
+          Void Function(Uint32 path, Int32 dashCount, Pointer<Float> dashArray)
         >
       >()
       .asFunction<
@@ -55383,7 +54766,7 @@ late Pointer<NativeFunction<Void Function()>> _glStencilFillPathInstancedNv;
 void glStencilFillPathInstancedNv(
   int numPaths,
   int pathNameType,
-  Pointer<NativeType> paths,
+  Pointer<Void> paths,
   int pathBase,
   int fillMode,
   int mask,
@@ -55394,9 +54777,9 @@ void glStencilFillPathInstancedNv(
       .cast<
         NativeFunction<
           Void Function(
-            Uint32 numPaths,
+            Int32 numPaths,
             Uint32 pathNameType,
-            Pointer<NativeType> paths,
+            Pointer<Void> paths,
             Uint32 pathBase,
             Uint32 fillMode,
             Uint32 mask,
@@ -55409,7 +54792,7 @@ void glStencilFillPathInstancedNv(
         void Function(
           int numPaths,
           int pathNameType,
-          Pointer<NativeType> paths,
+          Pointer<Void> paths,
           int pathBase,
           int fillMode,
           int mask,
@@ -55439,7 +54822,7 @@ late Pointer<NativeFunction<Void Function()>> _glStencilStrokePathInstancedNv;
 void glStencilStrokePathInstancedNv(
   int numPaths,
   int pathNameType,
-  Pointer<NativeType> paths,
+  Pointer<Void> paths,
   int pathBase,
   int reference,
   int mask,
@@ -55451,9 +54834,9 @@ void glStencilStrokePathInstancedNv(
           .cast<
             NativeFunction<
               Void Function(
-                Uint32 numPaths,
+                Int32 numPaths,
                 Uint32 pathNameType,
-                Pointer<NativeType> paths,
+                Pointer<Void> paths,
                 Uint32 pathBase,
                 Int32 reference,
                 Uint32 mask,
@@ -55466,7 +54849,7 @@ void glStencilStrokePathInstancedNv(
             void Function(
               int numPaths,
               int pathNameType,
-              Pointer<NativeType> paths,
+              Pointer<Void> paths,
               int pathBase,
               int reference,
               int mask,
@@ -55538,7 +54921,7 @@ late Pointer<NativeFunction<Void Function()>> _glCoverFillPathInstancedNv;
 void glCoverFillPathInstancedNv(
   int numPaths,
   int pathNameType,
-  Pointer<NativeType> paths,
+  Pointer<Void> paths,
   int pathBase,
   int coverMode,
   int transformType,
@@ -55548,9 +54931,9 @@ void glCoverFillPathInstancedNv(
       .cast<
         NativeFunction<
           Void Function(
-            Uint32 numPaths,
+            Int32 numPaths,
             Uint32 pathNameType,
-            Pointer<NativeType> paths,
+            Pointer<Void> paths,
             Uint32 pathBase,
             Uint32 coverMode,
             Uint32 transformType,
@@ -55562,7 +54945,7 @@ void glCoverFillPathInstancedNv(
         void Function(
           int numPaths,
           int pathNameType,
-          Pointer<NativeType> paths,
+          Pointer<Void> paths,
           int pathBase,
           int coverMode,
           int transformType,
@@ -55590,7 +54973,7 @@ late Pointer<NativeFunction<Void Function()>> _glCoverStrokePathInstancedNv;
 void glCoverStrokePathInstancedNv(
   int numPaths,
   int pathNameType,
-  Pointer<NativeType> paths,
+  Pointer<Void> paths,
   int pathBase,
   int coverMode,
   int transformType,
@@ -55600,9 +54983,9 @@ void glCoverStrokePathInstancedNv(
       .cast<
         NativeFunction<
           Void Function(
-            Uint32 numPaths,
+            Int32 numPaths,
             Uint32 pathNameType,
-            Pointer<NativeType> paths,
+            Pointer<Void> paths,
             Uint32 pathBase,
             Uint32 coverMode,
             Uint32 transformType,
@@ -55614,7 +54997,7 @@ void glCoverStrokePathInstancedNv(
         void Function(
           int numPaths,
           int pathNameType,
-          Pointer<NativeType> paths,
+          Pointer<Void> paths,
           int pathBase,
           int coverMode,
           int transformType,
@@ -55725,7 +55108,7 @@ void glGetPathMetricsNv(
   int metricQueryMask,
   int numPaths,
   int pathNameType,
-  Pointer<NativeType> paths,
+  Pointer<Void> paths,
   int pathBase,
   int stride,
   Pointer<Float> metrics,
@@ -55735,11 +55118,11 @@ void glGetPathMetricsNv(
         NativeFunction<
           Void Function(
             Uint32 metricQueryMask,
-            Uint32 numPaths,
+            Int32 numPaths,
             Uint32 pathNameType,
-            Pointer<NativeType> paths,
+            Pointer<Void> paths,
             Uint32 pathBase,
-            Uint32 stride,
+            Int32 stride,
             Pointer<Float> metrics,
           )
         >
@@ -55749,7 +55132,7 @@ void glGetPathMetricsNv(
           int metricQueryMask,
           int numPaths,
           int pathNameType,
-          Pointer<NativeType> paths,
+          Pointer<Void> paths,
           int pathBase,
           int stride,
           Pointer<Float> metrics,
@@ -55786,8 +55169,8 @@ void glGetPathMetricRangeNv(
           Void Function(
             Uint32 metricQueryMask,
             Uint32 firstPathName,
-            Uint32 numPaths,
-            Uint32 stride,
+            Int32 numPaths,
+            Int32 stride,
             Pointer<Float> metrics,
           )
         >
@@ -55821,7 +55204,7 @@ void glGetPathSpacingNv(
   int pathListMode,
   int numPaths,
   int pathNameType,
-  Pointer<NativeType> paths,
+  Pointer<Void> paths,
   int pathBase,
   double advanceScale,
   double kerningScale,
@@ -55833,9 +55216,9 @@ void glGetPathSpacingNv(
         NativeFunction<
           Void Function(
             Uint32 pathListMode,
-            Uint32 numPaths,
+            Int32 numPaths,
             Uint32 pathNameType,
-            Pointer<NativeType> paths,
+            Pointer<Void> paths,
             Uint32 pathBase,
             Float advanceScale,
             Float kerningScale,
@@ -55849,7 +55232,7 @@ void glGetPathSpacingNv(
           int pathListMode,
           int numPaths,
           int pathNameType,
-          Pointer<NativeType> paths,
+          Pointer<Void> paths,
           int pathBase,
           double advanceScale,
           double kerningScale,
@@ -55881,7 +55264,7 @@ int glIsPointInFillPathNv(int path, int mask, double x, double y) {
   final glIsPointInFillPathNvAsFunction = _glIsPointInFillPathNv
       .cast<
         NativeFunction<
-          Int32 Function(Uint32 path, Uint32 mask, Float x, Float y)
+          Uint8 Function(Uint32 path, Uint32 mask, Float x, Float y)
         >
       >()
       .asFunction<int Function(int path, int mask, double x, double y)>();
@@ -55897,7 +55280,7 @@ late Pointer<NativeFunction<Void Function()>> _glIsPointInStrokePathNv;
 /// {@category opengl_glext}
 int glIsPointInStrokePathNv(int path, double x, double y) {
   final glIsPointInStrokePathNvAsFunction = _glIsPointInStrokePathNv
-      .cast<NativeFunction<Int32 Function(Uint32 path, Float x, Float y)>>()
+      .cast<NativeFunction<Uint8 Function(Uint32 path, Float x, Float y)>>()
       .asFunction<int Function(int path, double x, double y)>();
   return glIsPointInStrokePathNvAsFunction(path, x, y);
 }
@@ -55913,7 +55296,7 @@ double glGetPathLengthNv(int path, int startSegment, int numSegments) {
   final glGetPathLengthNvAsFunction = _glGetPathLengthNv
       .cast<
         NativeFunction<
-          Float Function(Uint32 path, Uint32 startSegment, Uint32 numSegments)
+          Float Function(Uint32 path, Int32 startSegment, Int32 numSegments)
         >
       >()
       .asFunction<
@@ -55942,10 +55325,10 @@ int glPointAlongPathNv(
   final glPointAlongPathNvAsFunction = _glPointAlongPathNv
       .cast<
         NativeFunction<
-          Int32 Function(
+          Uint8 Function(
             Uint32 path,
-            Uint32 startSegment,
-            Uint32 numSegments,
+            Int32 startSegment,
+            Int32 numSegments,
             Float distance,
             Pointer<Float> x,
             Pointer<Float> y,
@@ -56156,7 +55539,7 @@ _glStencilThenCoverFillPathInstancedNv;
 void glStencilThenCoverFillPathInstancedNv(
   int numPaths,
   int pathNameType,
-  Pointer<NativeType> paths,
+  Pointer<Void> paths,
   int pathBase,
   int fillMode,
   int mask,
@@ -56169,9 +55552,9 @@ void glStencilThenCoverFillPathInstancedNv(
           .cast<
             NativeFunction<
               Void Function(
-                Uint32 numPaths,
+                Int32 numPaths,
                 Uint32 pathNameType,
-                Pointer<NativeType> paths,
+                Pointer<Void> paths,
                 Uint32 pathBase,
                 Uint32 fillMode,
                 Uint32 mask,
@@ -56185,7 +55568,7 @@ void glStencilThenCoverFillPathInstancedNv(
             void Function(
               int numPaths,
               int pathNameType,
-              Pointer<NativeType> paths,
+              Pointer<Void> paths,
               int pathBase,
               int fillMode,
               int mask,
@@ -56218,7 +55601,7 @@ _glStencilThenCoverStrokePathInstancedNv;
 void glStencilThenCoverStrokePathInstancedNv(
   int numPaths,
   int pathNameType,
-  Pointer<NativeType> paths,
+  Pointer<Void> paths,
   int pathBase,
   int reference,
   int mask,
@@ -56231,9 +55614,9 @@ void glStencilThenCoverStrokePathInstancedNv(
           .cast<
             NativeFunction<
               Void Function(
-                Uint32 numPaths,
+                Int32 numPaths,
                 Uint32 pathNameType,
-                Pointer<NativeType> paths,
+                Pointer<Void> paths,
                 Uint32 pathBase,
                 Int32 reference,
                 Uint32 mask,
@@ -56247,7 +55630,7 @@ void glStencilThenCoverStrokePathInstancedNv(
             void Function(
               int numPaths,
               int pathNameType,
-              Pointer<NativeType> paths,
+              Pointer<Void> paths,
               int pathBase,
               int reference,
               int mask,
@@ -56278,7 +55661,7 @@ late Pointer<NativeFunction<Void Function()>> _glPathGlyphIndexRangeNv;
 /// {@category opengl_glext}
 int glPathGlyphIndexRangeNv(
   int fontTarget,
-  Pointer<NativeType> fontName,
+  Pointer<Void> fontName,
   int fontStyle,
   int pathParameterTemplate,
   double emScale,
@@ -56289,7 +55672,7 @@ int glPathGlyphIndexRangeNv(
         NativeFunction<
           Uint32 Function(
             Uint32 fontTarget,
-            Pointer<NativeType> fontName,
+            Pointer<Void> fontName,
             Uint32 fontStyle,
             Uint32 pathParameterTemplate,
             Float emScale,
@@ -56300,7 +55683,7 @@ int glPathGlyphIndexRangeNv(
       .asFunction<
         int Function(
           int fontTarget,
-          Pointer<NativeType> fontName,
+          Pointer<Void> fontName,
           int fontStyle,
           int pathParameterTemplate,
           double emScale,
@@ -56327,7 +55710,7 @@ late Pointer<NativeFunction<Void Function()>> _glPathGlyphIndexArrayNv;
 int glPathGlyphIndexArrayNv(
   int firstPathName,
   int fontTarget,
-  Pointer<NativeType> fontName,
+  Pointer<Void> fontName,
   int fontStyle,
   int firstGlyphIndex,
   int numGlyphs,
@@ -56340,10 +55723,10 @@ int glPathGlyphIndexArrayNv(
           Uint32 Function(
             Uint32 firstPathName,
             Uint32 fontTarget,
-            Pointer<NativeType> fontName,
+            Pointer<Void> fontName,
             Uint32 fontStyle,
             Uint32 firstGlyphIndex,
-            Uint32 numGlyphs,
+            Int32 numGlyphs,
             Uint32 pathParameterTemplate,
             Float emScale,
           )
@@ -56353,7 +55736,7 @@ int glPathGlyphIndexArrayNv(
         int Function(
           int firstPathName,
           int fontTarget,
-          Pointer<NativeType> fontName,
+          Pointer<Void> fontName,
           int fontStyle,
           int firstGlyphIndex,
           int numGlyphs,
@@ -56383,8 +55766,8 @@ late Pointer<NativeFunction<Void Function()>> _glPathMemoryGlyphIndexArrayNv;
 int glPathMemoryGlyphIndexArrayNv(
   int firstPathName,
   int fontTarget,
-  Pointer<Uint32> fontSize,
-  Pointer<NativeType> fontData,
+  int fontSize,
+  Pointer<Void> fontData,
   int faceIndex,
   int firstGlyphIndex,
   int numGlyphs,
@@ -56397,11 +55780,11 @@ int glPathMemoryGlyphIndexArrayNv(
           Uint32 Function(
             Uint32 firstPathName,
             Uint32 fontTarget,
-            Pointer<Uint32> fontSize,
-            Pointer<NativeType> fontData,
-            Uint32 faceIndex,
+            IntPtr fontSize,
+            Pointer<Void> fontData,
+            Int32 faceIndex,
             Uint32 firstGlyphIndex,
-            Uint32 numGlyphs,
+            Int32 numGlyphs,
             Uint32 pathParameterTemplate,
             Float emScale,
           )
@@ -56411,8 +55794,8 @@ int glPathMemoryGlyphIndexArrayNv(
         int Function(
           int firstPathName,
           int fontTarget,
-          Pointer<Uint32> fontSize,
-          Pointer<NativeType> fontData,
+          int fontSize,
+          Pointer<Void> fontData,
           int faceIndex,
           int firstGlyphIndex,
           int numGlyphs,
@@ -56492,7 +55875,7 @@ void glGetProgramResourcefvNv(
   int propCount,
   Pointer<Uint32> props,
   int count,
-  Pointer<Uint32> length,
+  Pointer<Int32> length,
   Pointer<Float> params,
 ) {
   final glGetProgramResourcefvNvAsFunction = _glGetProgramResourcefvNv
@@ -56502,10 +55885,10 @@ void glGetProgramResourcefvNv(
             Uint32 program,
             Uint32 programInterface,
             Uint32 index,
-            Uint32 propCount,
+            Int32 propCount,
             Pointer<Uint32> props,
-            Uint32 count,
-            Pointer<Uint32> length,
+            Int32 count,
+            Pointer<Int32> length,
             Pointer<Float> params,
           )
         >
@@ -56518,7 +55901,7 @@ void glGetProgramResourcefvNv(
           int propCount,
           Pointer<Uint32> props,
           int count,
-          Pointer<Uint32> length,
+          Pointer<Int32> length,
           Pointer<Float> params,
         )
       >();
@@ -56701,19 +56084,15 @@ late Pointer<NativeFunction<Void Function()>> _glPixelDataRangeNv;
 /// GLAPI void APIENTRY glPixelDataRangeNV (GLenum target, GLsizei length, const void *pointer)
 /// ```
 /// {@category opengl_glext}
-void glPixelDataRangeNv(int target, int length, Pointer<NativeType> pointer) {
+void glPixelDataRangeNv(int target, int length, Pointer<Void> pointer) {
   final glPixelDataRangeNvAsFunction = _glPixelDataRangeNv
       .cast<
         NativeFunction<
-          Void Function(
-            Uint32 target,
-            Uint32 length,
-            Pointer<NativeType> pointer,
-          )
+          Void Function(Uint32 target, Int32 length, Pointer<Void> pointer)
         >
       >()
       .asFunction<
-        void Function(int target, int length, Pointer<NativeType> pointer)
+        void Function(int target, int length, Pointer<Void> pointer)
       >();
   return glPixelDataRangeNvAsFunction(target, length, pointer);
 }
@@ -57053,7 +56432,7 @@ late Pointer<NativeFunction<Void Function()>> _glGenQueryResourceTagNv;
 /// {@category opengl_glext}
 void glGenQueryResourceTagNv(int n, Pointer<Int32> tagIds) {
   final glGenQueryResourceTagNvAsFunction = _glGenQueryResourceTagNv
-      .cast<NativeFunction<Void Function(Uint32 n, Pointer<Int32> tagIds)>>()
+      .cast<NativeFunction<Void Function(Int32 n, Pointer<Int32> tagIds)>>()
       .asFunction<void Function(int n, Pointer<Int32> tagIds)>();
   return glGenQueryResourceTagNvAsFunction(n, tagIds);
 }
@@ -57067,7 +56446,7 @@ late Pointer<NativeFunction<Void Function()>> _glDeleteQueryResourceTagNv;
 /// {@category opengl_glext}
 void glDeleteQueryResourceTagNv(int n, Pointer<Int32> tagIds) {
   final glDeleteQueryResourceTagNvAsFunction = _glDeleteQueryResourceTagNv
-      .cast<NativeFunction<Void Function(Uint32 n, Pointer<Int32> tagIds)>>()
+      .cast<NativeFunction<Void Function(Int32 n, Pointer<Int32> tagIds)>>()
       .asFunction<void Function(int n, Pointer<Int32> tagIds)>();
   return glDeleteQueryResourceTagNvAsFunction(n, tagIds);
 }
@@ -57229,9 +56608,9 @@ void glCombinerOutputNv(
             Uint32 sumOutput,
             Uint32 scale,
             Uint32 bias,
-            Int32 abDotProduct,
-            Int32 cdDotProduct,
-            Int32 muxSum,
+            Uint8 abDotProduct,
+            Uint8 cdDotProduct,
+            Uint8 muxSum,
           )
         >
       >()
@@ -57601,7 +56980,7 @@ void glFramebufferSampleLocationsfvNv(
               Void Function(
                 Uint32 target,
                 Uint32 start,
-                Uint32 count,
+                Int32 count,
                 Pointer<Float> v,
               )
             >
@@ -57633,7 +57012,7 @@ void glNamedFramebufferSampleLocationsfvNv(
               Void Function(
                 Uint32 framebuffer,
                 Uint32 start,
-                Uint32 count,
+                Int32 count,
                 Pointer<Float> v,
               )
             >
@@ -57679,7 +57058,7 @@ void glScissorExclusiveNv(int x, int y, int width, int height) {
   final glScissorExclusiveNvAsFunction = _glScissorExclusiveNv
       .cast<
         NativeFunction<
-          Void Function(Int32 x, Int32 y, Uint32 width, Uint32 height)
+          Void Function(Int32 x, Int32 y, Int32 width, Int32 height)
         >
       >()
       .asFunction<void Function(int x, int y, int width, int height)>();
@@ -57697,7 +57076,7 @@ void glScissorExclusiveArrayvNv(int first, int count, Pointer<Int32> v) {
   final glScissorExclusiveArrayvNvAsFunction = _glScissorExclusiveArrayvNv
       .cast<
         NativeFunction<
-          Void Function(Uint32 first, Uint32 count, Pointer<Int32> v)
+          Void Function(Uint32 first, Int32 count, Pointer<Int32> v)
         >
       >()
       .asFunction<void Function(int first, int count, Pointer<Int32> v)>();
@@ -57741,7 +57120,7 @@ late Pointer<NativeFunction<Void Function()>> _glIsBufferResidentNv;
 /// {@category opengl_glext}
 int glIsBufferResidentNv(int target) {
   final glIsBufferResidentNvAsFunction = _glIsBufferResidentNv
-      .cast<NativeFunction<Int32 Function(Uint32 target)>>()
+      .cast<NativeFunction<Uint8 Function(Uint32 target)>>()
       .asFunction<int Function(int target)>();
   return glIsBufferResidentNvAsFunction(target);
 }
@@ -57784,7 +57163,7 @@ late Pointer<NativeFunction<Void Function()>> _glIsNamedBufferResidentNv;
 /// {@category opengl_glext}
 int glIsNamedBufferResidentNv(int buffer) {
   final glIsNamedBufferResidentNvAsFunction = _glIsNamedBufferResidentNv
-      .cast<NativeFunction<Int32 Function(Uint32 buffer)>>()
+      .cast<NativeFunction<Uint8 Function(Uint32 buffer)>>()
       .asFunction<int Function(int buffer)>();
   return glIsNamedBufferResidentNvAsFunction(buffer);
 }
@@ -57879,7 +57258,7 @@ void glUniformui64vNv(int location, int count, Pointer<Uint64> value) {
   final glUniformui64vNvAsFunction = _glUniformui64vNv
       .cast<
         NativeFunction<
-          Void Function(Int32 location, Uint32 count, Pointer<Uint64> value)
+          Void Function(Int32 location, Int32 count, Pointer<Uint64> value)
         >
       >()
       .asFunction<
@@ -57925,7 +57304,7 @@ void glProgramUniformui64vNv(
           Void Function(
             Uint32 program,
             Int32 location,
-            Uint32 count,
+            Int32 count,
             Pointer<Uint64> value,
           )
         >
@@ -58031,7 +57410,7 @@ late Pointer<NativeFunction<Void Function()>> _glShadingRateImageBarrierNv;
 /// {@category opengl_glext}
 void glShadingRateImageBarrierNv(int synchronize) {
   final glShadingRateImageBarrierNvAsFunction = _glShadingRateImageBarrierNv
-      .cast<NativeFunction<Void Function(Int32 synchronize)>>()
+      .cast<NativeFunction<Void Function(Uint8 synchronize)>>()
       .asFunction<void Function(int synchronize)>();
   return glShadingRateImageBarrierNvAsFunction(synchronize);
 }
@@ -58055,7 +57434,7 @@ void glShadingRateImagePaletteNv(
           Void Function(
             Uint32 viewport,
             Uint32 first,
-            Uint32 count,
+            Int32 count,
             Pointer<Uint32> rates,
           )
         >
@@ -58146,12 +57525,12 @@ void glTexImage2DMultisampleCoverageNv(
             NativeFunction<
               Void Function(
                 Uint32 target,
-                Uint32 coverageSamples,
-                Uint32 colorSamples,
+                Int32 coverageSamples,
+                Int32 colorSamples,
                 Int32 internalFormat,
-                Uint32 width,
-                Uint32 height,
-                Int32 fixedSampleLocations,
+                Int32 width,
+                Int32 height,
+                Uint8 fixedSampleLocations,
               )
             >
           >()
@@ -58201,13 +57580,13 @@ void glTexImage3DMultisampleCoverageNv(
             NativeFunction<
               Void Function(
                 Uint32 target,
-                Uint32 coverageSamples,
-                Uint32 colorSamples,
+                Int32 coverageSamples,
+                Int32 colorSamples,
                 Int32 internalFormat,
-                Uint32 width,
-                Uint32 height,
-                Uint32 depth,
-                Int32 fixedSampleLocations,
+                Int32 width,
+                Int32 height,
+                Int32 depth,
+                Uint8 fixedSampleLocations,
               )
             >
           >()
@@ -58257,11 +57636,11 @@ void glTextureImage2DMultisampleNv(
           Void Function(
             Uint32 texture,
             Uint32 target,
-            Uint32 samples,
+            Int32 samples,
             Int32 internalFormat,
-            Uint32 width,
-            Uint32 height,
-            Int32 fixedSampleLocations,
+            Int32 width,
+            Int32 height,
+            Uint8 fixedSampleLocations,
           )
         >
       >()
@@ -58310,12 +57689,12 @@ void glTextureImage3DMultisampleNv(
           Void Function(
             Uint32 texture,
             Uint32 target,
-            Uint32 samples,
+            Int32 samples,
             Int32 internalFormat,
-            Uint32 width,
-            Uint32 height,
-            Uint32 depth,
-            Int32 fixedSampleLocations,
+            Int32 width,
+            Int32 height,
+            Int32 depth,
+            Uint8 fixedSampleLocations,
           )
         >
       >()
@@ -58368,12 +57747,12 @@ void glTextureImage2DMultisampleCoverageNv(
               Void Function(
                 Uint32 texture,
                 Uint32 target,
-                Uint32 coverageSamples,
-                Uint32 colorSamples,
+                Int32 coverageSamples,
+                Int32 colorSamples,
                 Int32 internalFormat,
-                Uint32 width,
-                Uint32 height,
-                Int32 fixedSampleLocations,
+                Int32 width,
+                Int32 height,
+                Uint8 fixedSampleLocations,
               )
             >
           >()
@@ -58427,13 +57806,13 @@ void glTextureImage3DMultisampleCoverageNv(
               Void Function(
                 Uint32 texture,
                 Uint32 target,
-                Uint32 coverageSamples,
-                Uint32 colorSamples,
+                Int32 coverageSamples,
+                Int32 colorSamples,
                 Int32 internalFormat,
-                Uint32 width,
-                Uint32 height,
-                Uint32 depth,
-                Int32 fixedSampleLocations,
+                Int32 width,
+                Int32 height,
+                Int32 depth,
+                Uint8 fixedSampleLocations,
               )
             >
           >()
@@ -58473,7 +57852,7 @@ late Pointer<NativeFunction<Void Function()>> _glCreateSemaphoresNv;
 void glCreateSemaphoresNv(int n, Pointer<Uint32> semaphores) {
   final glCreateSemaphoresNvAsFunction = _glCreateSemaphoresNv
       .cast<
-        NativeFunction<Void Function(Uint32 n, Pointer<Uint32> semaphores)>
+        NativeFunction<Void Function(Int32 n, Pointer<Uint32> semaphores)>
       >()
       .asFunction<void Function(int n, Pointer<Uint32> semaphores)>();
   return glCreateSemaphoresNvAsFunction(n, semaphores);
@@ -58566,7 +57945,7 @@ void glTransformFeedbackAttribsNv(
   final glTransformFeedbackAttribsNvAsFunction = _glTransformFeedbackAttribsNv
       .cast<
         NativeFunction<
-          Void Function(Uint32 count, Pointer<Int32> attribs, Uint32 bufferMode)
+          Void Function(Int32 count, Pointer<Int32> attribs, Uint32 bufferMode)
         >
       >()
       .asFunction<
@@ -58586,8 +57965,8 @@ void glBindBufferRangeNv(
   int target,
   int index,
   int buffer,
-  Pointer<NativeType> offset,
-  Pointer<Uint32> size,
+  int offset,
+  int size,
 ) {
   final glBindBufferRangeNvAsFunction = _glBindBufferRangeNv
       .cast<
@@ -58596,19 +57975,13 @@ void glBindBufferRangeNv(
             Uint32 target,
             Uint32 index,
             Uint32 buffer,
-            Pointer<NativeType> offset,
-            Pointer<Uint32> size,
+            IntPtr offset,
+            IntPtr size,
           )
         >
       >()
       .asFunction<
-        void Function(
-          int target,
-          int index,
-          int buffer,
-          Pointer<NativeType> offset,
-          Pointer<Uint32> size,
-        )
+        void Function(int target, int index, int buffer, int offset, int size)
       >();
   return glBindBufferRangeNvAsFunction(target, index, buffer, offset, size);
 }
@@ -58620,12 +57993,7 @@ late Pointer<NativeFunction<Void Function()>> _glBindBufferOffsetNv;
 /// GLAPI void APIENTRY glBindBufferOffsetNV (GLenum target, GLuint index, GLuint buffer, GLintptr offset)
 /// ```
 /// {@category opengl_glext}
-void glBindBufferOffsetNv(
-  int target,
-  int index,
-  int buffer,
-  Pointer<NativeType> offset,
-) {
+void glBindBufferOffsetNv(int target, int index, int buffer, int offset) {
   final glBindBufferOffsetNvAsFunction = _glBindBufferOffsetNv
       .cast<
         NativeFunction<
@@ -58633,17 +58001,12 @@ void glBindBufferOffsetNv(
             Uint32 target,
             Uint32 index,
             Uint32 buffer,
-            Pointer<NativeType> offset,
+            IntPtr offset,
           )
         >
       >()
       .asFunction<
-        void Function(
-          int target,
-          int index,
-          int buffer,
-          Pointer<NativeType> offset,
-        )
+        void Function(int target, int index, int buffer, int offset)
       >();
   return glBindBufferOffsetNvAsFunction(target, index, buffer, offset);
 }
@@ -58684,7 +58047,7 @@ void glTransformFeedbackVaryingsNv(
         NativeFunction<
           Void Function(
             Uint32 program,
-            Uint32 count,
+            Int32 count,
             Pointer<Int32> locations,
             Uint32 bufferMode,
           )
@@ -58753,8 +58116,8 @@ void glGetActiveVaryingNv(
   int program,
   int index,
   int bufSize,
-  Pointer<Uint32> length,
-  Pointer<Uint32> size,
+  Pointer<Int32> length,
+  Pointer<Int32> size,
   Pointer<Uint32> type,
   Pointer<Int8> name,
 ) {
@@ -58764,9 +58127,9 @@ void glGetActiveVaryingNv(
           Void Function(
             Uint32 program,
             Uint32 index,
-            Uint32 bufSize,
-            Pointer<Uint32> length,
-            Pointer<Uint32> size,
+            Int32 bufSize,
+            Pointer<Int32> length,
+            Pointer<Int32> size,
             Pointer<Uint32> type,
             Pointer<Int8> name,
           )
@@ -58777,8 +58140,8 @@ void glGetActiveVaryingNv(
           int program,
           int index,
           int bufSize,
-          Pointer<Uint32> length,
-          Pointer<Uint32> size,
+          Pointer<Int32> length,
+          Pointer<Int32> size,
           Pointer<Uint32> type,
           Pointer<Int8> name,
         )
@@ -58843,9 +58206,9 @@ void glTransformFeedbackStreamAttribsNv(
           .cast<
             NativeFunction<
               Void Function(
-                Uint32 count,
+                Int32 count,
                 Pointer<Int32> attribs,
-                Uint32 nbuffers,
+                Int32 nbuffers,
                 Pointer<Int32> bufstreams,
                 Uint32 bufferMode,
               )
@@ -58892,7 +58255,7 @@ late Pointer<NativeFunction<Void Function()>> _glDeleteTransformFeedbacksNv;
 /// {@category opengl_glext}
 void glDeleteTransformFeedbacksNv(int n, Pointer<Uint32> ids) {
   final glDeleteTransformFeedbacksNvAsFunction = _glDeleteTransformFeedbacksNv
-      .cast<NativeFunction<Void Function(Uint32 n, Pointer<Uint32> ids)>>()
+      .cast<NativeFunction<Void Function(Int32 n, Pointer<Uint32> ids)>>()
       .asFunction<void Function(int n, Pointer<Uint32> ids)>();
   return glDeleteTransformFeedbacksNvAsFunction(n, ids);
 }
@@ -58906,7 +58269,7 @@ late Pointer<NativeFunction<Void Function()>> _glGenTransformFeedbacksNv;
 /// {@category opengl_glext}
 void glGenTransformFeedbacksNv(int n, Pointer<Uint32> ids) {
   final glGenTransformFeedbacksNvAsFunction = _glGenTransformFeedbacksNv
-      .cast<NativeFunction<Void Function(Uint32 n, Pointer<Uint32> ids)>>()
+      .cast<NativeFunction<Void Function(Int32 n, Pointer<Uint32> ids)>>()
       .asFunction<void Function(int n, Pointer<Uint32> ids)>();
   return glGenTransformFeedbacksNvAsFunction(n, ids);
 }
@@ -58920,7 +58283,7 @@ late Pointer<NativeFunction<Void Function()>> _glIsTransformFeedbackNv;
 /// {@category opengl_glext}
 int glIsTransformFeedbackNv(int id) {
   final glIsTransformFeedbackNvAsFunction = _glIsTransformFeedbackNv
-      .cast<NativeFunction<Int32 Function(Uint32 id)>>()
+      .cast<NativeFunction<Uint8 Function(Uint32 id)>>()
       .asFunction<int Function(int id)>();
   return glIsTransformFeedbackNvAsFunction(id);
 }
@@ -58974,24 +58337,15 @@ late Pointer<NativeFunction<Void Function()>> _glVdpauInitNv;
 /// GLAPI void APIENTRY glVDPAUInitNV (const void *vdpDevice, const void *getProcAddress)
 /// ```
 /// {@category opengl_glext}
-void glVdpauInitNv(
-  Pointer<NativeType> vdpDevice,
-  Pointer<NativeType> getProcAddress,
-) {
+void glVdpauInitNv(Pointer<Void> vdpDevice, Pointer<Void> getProcAddress) {
   final glVdpauInitNvAsFunction = _glVdpauInitNv
       .cast<
         NativeFunction<
-          Void Function(
-            Pointer<NativeType> vdpDevice,
-            Pointer<NativeType> getProcAddress,
-          )
+          Void Function(Pointer<Void> vdpDevice, Pointer<Void> getProcAddress)
         >
       >()
       .asFunction<
-        void Function(
-          Pointer<NativeType> vdpDevice,
-          Pointer<NativeType> getProcAddress,
-        )
+        void Function(Pointer<Void> vdpDevice, Pointer<Void> getProcAddress)
       >();
   return glVdpauInitNvAsFunction(vdpDevice, getProcAddress);
 }
@@ -59017,8 +58371,8 @@ late Pointer<NativeFunction<Void Function()>> _glVdpauRegisterVideoSurfaceNv;
 /// GLAPI GLvdpauSurfaceNV APIENTRY glVDPAURegisterVideoSurfaceNV (const void *vdpSurface, GLenum target, GLsizei numTextureNames, const GLuint *textureNames)
 /// ```
 /// {@category opengl_glext}
-Pointer<NativeType> glVdpauRegisterVideoSurfaceNv(
-  Pointer<NativeType> vdpSurface,
+Pointer<Void> glVdpauRegisterVideoSurfaceNv(
+  Pointer<Void> vdpSurface,
   int target,
   int numTextureNames,
   Pointer<Uint32> textureNames,
@@ -59026,17 +58380,17 @@ Pointer<NativeType> glVdpauRegisterVideoSurfaceNv(
   final glVdpauRegisterVideoSurfaceNvAsFunction = _glVdpauRegisterVideoSurfaceNv
       .cast<
         NativeFunction<
-          Pointer<NativeType> Function(
-            Pointer<NativeType> vdpSurface,
+          Pointer<Void> Function(
+            Pointer<Void> vdpSurface,
             Uint32 target,
-            Uint32 numTextureNames,
+            Int32 numTextureNames,
             Pointer<Uint32> textureNames,
           )
         >
       >()
       .asFunction<
-        Pointer<NativeType> Function(
-          Pointer<NativeType> vdpSurface,
+        Pointer<Void> Function(
+          Pointer<Void> vdpSurface,
           int target,
           int numTextureNames,
           Pointer<Uint32> textureNames,
@@ -59057,8 +58411,8 @@ late Pointer<NativeFunction<Void Function()>> _glVdpauRegisterOutputSurfaceNv;
 /// GLAPI GLvdpauSurfaceNV APIENTRY glVDPAURegisterOutputSurfaceNV (const void *vdpSurface, GLenum target, GLsizei numTextureNames, const GLuint *textureNames)
 /// ```
 /// {@category opengl_glext}
-Pointer<NativeType> glVdpauRegisterOutputSurfaceNv(
-  Pointer<NativeType> vdpSurface,
+Pointer<Void> glVdpauRegisterOutputSurfaceNv(
+  Pointer<Void> vdpSurface,
   int target,
   int numTextureNames,
   Pointer<Uint32> textureNames,
@@ -59067,17 +58421,17 @@ Pointer<NativeType> glVdpauRegisterOutputSurfaceNv(
       _glVdpauRegisterOutputSurfaceNv
           .cast<
             NativeFunction<
-              Pointer<NativeType> Function(
-                Pointer<NativeType> vdpSurface,
+              Pointer<Void> Function(
+                Pointer<Void> vdpSurface,
                 Uint32 target,
-                Uint32 numTextureNames,
+                Int32 numTextureNames,
                 Pointer<Uint32> textureNames,
               )
             >
           >()
           .asFunction<
-            Pointer<NativeType> Function(
-              Pointer<NativeType> vdpSurface,
+            Pointer<Void> Function(
+              Pointer<Void> vdpSurface,
               int target,
               int numTextureNames,
               Pointer<Uint32> textureNames,
@@ -59098,10 +58452,10 @@ late Pointer<NativeFunction<Void Function()>> _glVdpauIsSurfaceNv;
 /// GLAPI GLboolean APIENTRY glVDPAUIsSurfaceNV (GLvdpauSurfaceNV surface)
 /// ```
 /// {@category opengl_glext}
-int glVdpauIsSurfaceNv(Pointer<NativeType> surface) {
+int glVdpauIsSurfaceNv(Pointer<Void> surface) {
   final glVdpauIsSurfaceNvAsFunction = _glVdpauIsSurfaceNv
-      .cast<NativeFunction<Int32 Function(Pointer<NativeType> surface)>>()
-      .asFunction<int Function(Pointer<NativeType> surface)>();
+      .cast<NativeFunction<Uint8 Function(Pointer<Void> surface)>>()
+      .asFunction<int Function(Pointer<Void> surface)>();
   return glVdpauIsSurfaceNvAsFunction(surface);
 }
 
@@ -59112,10 +58466,10 @@ late Pointer<NativeFunction<Void Function()>> _glVdpauUnregisterSurfaceNv;
 /// GLAPI void APIENTRY glVDPAUUnregisterSurfaceNV (GLvdpauSurfaceNV surface)
 /// ```
 /// {@category opengl_glext}
-void glVdpauUnregisterSurfaceNv(Pointer<NativeType> surface) {
+void glVdpauUnregisterSurfaceNv(Pointer<Void> surface) {
   final glVdpauUnregisterSurfaceNvAsFunction = _glVdpauUnregisterSurfaceNv
-      .cast<NativeFunction<Void Function(Pointer<NativeType> surface)>>()
-      .asFunction<void Function(Pointer<NativeType> surface)>();
+      .cast<NativeFunction<Void Function(Pointer<Void> surface)>>()
+      .asFunction<void Function(Pointer<Void> surface)>();
   return glVdpauUnregisterSurfaceNvAsFunction(surface);
 }
 
@@ -59127,30 +58481,30 @@ late Pointer<NativeFunction<Void Function()>> _glVdpauGetSurfaceivNv;
 /// ```
 /// {@category opengl_glext}
 void glVdpauGetSurfaceivNv(
-  Pointer<NativeType> surface,
+  Pointer<Void> surface,
   int pname,
   int count,
-  Pointer<Uint32> length,
+  Pointer<Int32> length,
   Pointer<Int32> values,
 ) {
   final glVdpauGetSurfaceivNvAsFunction = _glVdpauGetSurfaceivNv
       .cast<
         NativeFunction<
           Void Function(
-            Pointer<NativeType> surface,
+            Pointer<Void> surface,
             Uint32 pname,
-            Uint32 count,
-            Pointer<Uint32> length,
+            Int32 count,
+            Pointer<Int32> length,
             Pointer<Int32> values,
           )
         >
       >()
       .asFunction<
         void Function(
-          Pointer<NativeType> surface,
+          Pointer<Void> surface,
           int pname,
           int count,
-          Pointer<Uint32> length,
+          Pointer<Int32> length,
           Pointer<Int32> values,
         )
       >();
@@ -59164,14 +58518,12 @@ late Pointer<NativeFunction<Void Function()>> _glVdpauSurfaceAccessNv;
 /// GLAPI void APIENTRY glVDPAUSurfaceAccessNV (GLvdpauSurfaceNV surface, GLenum access)
 /// ```
 /// {@category opengl_glext}
-void glVdpauSurfaceAccessNv(Pointer<NativeType> surface, int access) {
+void glVdpauSurfaceAccessNv(Pointer<Void> surface, int access) {
   final glVdpauSurfaceAccessNvAsFunction = _glVdpauSurfaceAccessNv
       .cast<
-        NativeFunction<
-          Void Function(Pointer<NativeType> surface, Uint32 access)
-        >
+        NativeFunction<Void Function(Pointer<Void> surface, Uint32 access)>
       >()
-      .asFunction<void Function(Pointer<NativeType> surface, int access)>();
+      .asFunction<void Function(Pointer<Void> surface, int access)>();
   return glVdpauSurfaceAccessNvAsFunction(surface, access);
 }
 
@@ -59182,21 +58534,15 @@ late Pointer<NativeFunction<Void Function()>> _glVdpauMapSurfacesNv;
 /// GLAPI void APIENTRY glVDPAUMapSurfacesNV (GLsizei numSurfaces, const GLvdpauSurfaceNV *surfaces)
 /// ```
 /// {@category opengl_glext}
-void glVdpauMapSurfacesNv(
-  int numSurfaces,
-  Pointer<Pointer<NativeType>> surfaces,
-) {
+void glVdpauMapSurfacesNv(int numSurfaces, Pointer<Pointer<Void>> surfaces) {
   final glVdpauMapSurfacesNvAsFunction = _glVdpauMapSurfacesNv
       .cast<
         NativeFunction<
-          Void Function(
-            Uint32 numSurfaces,
-            Pointer<Pointer<NativeType>> surfaces,
-          )
+          Void Function(Int32 numSurfaces, Pointer<Pointer<Void>> surfaces)
         >
       >()
       .asFunction<
-        void Function(int numSurfaces, Pointer<Pointer<NativeType>> surfaces)
+        void Function(int numSurfaces, Pointer<Pointer<Void>> surfaces)
       >();
   return glVdpauMapSurfacesNvAsFunction(numSurfaces, surfaces);
 }
@@ -59208,21 +58554,15 @@ late Pointer<NativeFunction<Void Function()>> _glVdpauUnmapSurfacesNv;
 /// GLAPI void APIENTRY glVDPAUUnmapSurfacesNV (GLsizei numSurface, const GLvdpauSurfaceNV *surfaces)
 /// ```
 /// {@category opengl_glext}
-void glVdpauUnmapSurfacesNv(
-  int numSurface,
-  Pointer<Pointer<NativeType>> surfaces,
-) {
+void glVdpauUnmapSurfacesNv(int numSurface, Pointer<Pointer<Void>> surfaces) {
   final glVdpauUnmapSurfacesNvAsFunction = _glVdpauUnmapSurfacesNv
       .cast<
         NativeFunction<
-          Void Function(
-            Uint32 numSurface,
-            Pointer<Pointer<NativeType>> surfaces,
-          )
+          Void Function(Int32 numSurface, Pointer<Pointer<Void>> surfaces)
         >
       >()
       .asFunction<
-        void Function(int numSurface, Pointer<Pointer<NativeType>> surfaces)
+        void Function(int numSurface, Pointer<Pointer<Void>> surfaces)
       >();
   return glVdpauUnmapSurfacesNvAsFunction(numSurface, surfaces);
 }
@@ -59235,8 +58575,8 @@ _glVdpauRegisterVideoSurfaceWithPictureStructureNv;
 /// GLAPI GLvdpauSurfaceNV APIENTRY glVDPAURegisterVideoSurfaceWithPictureStructureNV (const void *vdpSurface, GLenum target, GLsizei numTextureNames, const GLuint *textureNames, GLboolean isFrameStructure)
 /// ```
 /// {@category opengl_glext}
-Pointer<NativeType> glVdpauRegisterVideoSurfaceWithPictureStructureNv(
-  Pointer<NativeType> vdpSurface,
+Pointer<Void> glVdpauRegisterVideoSurfaceWithPictureStructureNv(
+  Pointer<Void> vdpSurface,
   int target,
   int numTextureNames,
   Pointer<Uint32> textureNames,
@@ -59246,18 +58586,18 @@ Pointer<NativeType> glVdpauRegisterVideoSurfaceWithPictureStructureNv(
       _glVdpauRegisterVideoSurfaceWithPictureStructureNv
           .cast<
             NativeFunction<
-              Pointer<NativeType> Function(
-                Pointer<NativeType> vdpSurface,
+              Pointer<Void> Function(
+                Pointer<Void> vdpSurface,
                 Uint32 target,
-                Uint32 numTextureNames,
+                Int32 numTextureNames,
                 Pointer<Uint32> textureNames,
-                Int32 isFrameStructure,
+                Uint8 isFrameStructure,
               )
             >
           >()
           .asFunction<
-            Pointer<NativeType> Function(
-              Pointer<NativeType> vdpSurface,
+            Pointer<Void> Function(
+              Pointer<Void> vdpSurface,
               int target,
               int numTextureNames,
               Pointer<Uint32> textureNames,
@@ -59294,14 +58634,12 @@ late Pointer<NativeFunction<Void Function()>> _glVertexArrayRangeNv;
 /// GLAPI void APIENTRY glVertexArrayRangeNV (GLsizei length, const void *pointer)
 /// ```
 /// {@category opengl_glext}
-void glVertexArrayRangeNv(int length, Pointer<NativeType> pointer) {
+void glVertexArrayRangeNv(int length, Pointer<Void> pointer) {
   final glVertexArrayRangeNvAsFunction = _glVertexArrayRangeNv
       .cast<
-        NativeFunction<
-          Void Function(Uint32 length, Pointer<NativeType> pointer)
-        >
+        NativeFunction<Void Function(Int32 length, Pointer<Void> pointer)>
       >()
-      .asFunction<void Function(int length, Pointer<NativeType> pointer)>();
+      .asFunction<void Function(int length, Pointer<Void> pointer)>();
   return glVertexArrayRangeNvAsFunction(length, pointer);
 }
 
@@ -59592,7 +58930,7 @@ void glVertexAttribLFormatNv(int index, int size, int type, int stride) {
   final glVertexAttribLFormatNvAsFunction = _glVertexAttribLFormatNv
       .cast<
         NativeFunction<
-          Void Function(Uint32 index, Int32 size, Uint32 type, Uint32 stride)
+          Void Function(Uint32 index, Int32 size, Uint32 type, Int32 stride)
         >
       >()
       .asFunction<void Function(int index, int size, int type, int stride)>();
@@ -59606,12 +58944,7 @@ late Pointer<NativeFunction<Void Function()>> _glBufferAddressRangeNv;
 /// GLAPI void APIENTRY glBufferAddressRangeNV (GLenum pname, GLuint index, GLuint64EXT address, GLsizeiptr length)
 /// ```
 /// {@category opengl_glext}
-void glBufferAddressRangeNv(
-  int pname,
-  int index,
-  int address,
-  Pointer<Uint32> length,
-) {
+void glBufferAddressRangeNv(int pname, int index, int address, int length) {
   final glBufferAddressRangeNvAsFunction = _glBufferAddressRangeNv
       .cast<
         NativeFunction<
@@ -59619,12 +58952,12 @@ void glBufferAddressRangeNv(
             Uint32 pname,
             Uint32 index,
             Uint64 address,
-            Pointer<Uint32> length,
+            IntPtr length,
           )
         >
       >()
       .asFunction<
-        void Function(int pname, int index, int address, Pointer<Uint32> length)
+        void Function(int pname, int index, int address, int length)
       >();
   return glBufferAddressRangeNvAsFunction(pname, index, address, length);
 }
@@ -59639,7 +58972,7 @@ late Pointer<NativeFunction<Void Function()>> _glVertexFormatNv;
 void glVertexFormatNv(int size, int type, int stride) {
   final glVertexFormatNvAsFunction = _glVertexFormatNv
       .cast<
-        NativeFunction<Void Function(Int32 size, Uint32 type, Uint32 stride)>
+        NativeFunction<Void Function(Int32 size, Uint32 type, Int32 stride)>
       >()
       .asFunction<void Function(int size, int type, int stride)>();
   return glVertexFormatNvAsFunction(size, type, stride);
@@ -59654,7 +58987,7 @@ late Pointer<NativeFunction<Void Function()>> _glNormalFormatNv;
 /// {@category opengl_glext}
 void glNormalFormatNv(int type, int stride) {
   final glNormalFormatNvAsFunction = _glNormalFormatNv
-      .cast<NativeFunction<Void Function(Uint32 type, Uint32 stride)>>()
+      .cast<NativeFunction<Void Function(Uint32 type, Int32 stride)>>()
       .asFunction<void Function(int type, int stride)>();
   return glNormalFormatNvAsFunction(type, stride);
 }
@@ -59669,7 +59002,7 @@ late Pointer<NativeFunction<Void Function()>> _glColorFormatNv;
 void glColorFormatNv(int size, int type, int stride) {
   final glColorFormatNvAsFunction = _glColorFormatNv
       .cast<
-        NativeFunction<Void Function(Int32 size, Uint32 type, Uint32 stride)>
+        NativeFunction<Void Function(Int32 size, Uint32 type, Int32 stride)>
       >()
       .asFunction<void Function(int size, int type, int stride)>();
   return glColorFormatNvAsFunction(size, type, stride);
@@ -59684,7 +59017,7 @@ late Pointer<NativeFunction<Void Function()>> _glIndexFormatNv;
 /// {@category opengl_glext}
 void glIndexFormatNv(int type, int stride) {
   final glIndexFormatNvAsFunction = _glIndexFormatNv
-      .cast<NativeFunction<Void Function(Uint32 type, Uint32 stride)>>()
+      .cast<NativeFunction<Void Function(Uint32 type, Int32 stride)>>()
       .asFunction<void Function(int type, int stride)>();
   return glIndexFormatNvAsFunction(type, stride);
 }
@@ -59699,7 +59032,7 @@ late Pointer<NativeFunction<Void Function()>> _glTexCoordFormatNv;
 void glTexCoordFormatNv(int size, int type, int stride) {
   final glTexCoordFormatNvAsFunction = _glTexCoordFormatNv
       .cast<
-        NativeFunction<Void Function(Int32 size, Uint32 type, Uint32 stride)>
+        NativeFunction<Void Function(Int32 size, Uint32 type, Int32 stride)>
       >()
       .asFunction<void Function(int size, int type, int stride)>();
   return glTexCoordFormatNvAsFunction(size, type, stride);
@@ -59714,7 +59047,7 @@ late Pointer<NativeFunction<Void Function()>> _glEdgeFlagFormatNv;
 /// {@category opengl_glext}
 void glEdgeFlagFormatNv(int stride) {
   final glEdgeFlagFormatNvAsFunction = _glEdgeFlagFormatNv
-      .cast<NativeFunction<Void Function(Uint32 stride)>>()
+      .cast<NativeFunction<Void Function(Int32 stride)>>()
       .asFunction<void Function(int stride)>();
   return glEdgeFlagFormatNvAsFunction(stride);
 }
@@ -59729,7 +59062,7 @@ late Pointer<NativeFunction<Void Function()>> _glSecondaryColorFormatNv;
 void glSecondaryColorFormatNv(int size, int type, int stride) {
   final glSecondaryColorFormatNvAsFunction = _glSecondaryColorFormatNv
       .cast<
-        NativeFunction<Void Function(Int32 size, Uint32 type, Uint32 stride)>
+        NativeFunction<Void Function(Int32 size, Uint32 type, Int32 stride)>
       >()
       .asFunction<void Function(int size, int type, int stride)>();
   return glSecondaryColorFormatNvAsFunction(size, type, stride);
@@ -59744,7 +59077,7 @@ late Pointer<NativeFunction<Void Function()>> _glFogCoordFormatNv;
 /// {@category opengl_glext}
 void glFogCoordFormatNv(int type, int stride) {
   final glFogCoordFormatNvAsFunction = _glFogCoordFormatNv
-      .cast<NativeFunction<Void Function(Uint32 type, Uint32 stride)>>()
+      .cast<NativeFunction<Void Function(Uint32 type, Int32 stride)>>()
       .asFunction<void Function(int type, int stride)>();
   return glFogCoordFormatNvAsFunction(type, stride);
 }
@@ -59770,8 +59103,8 @@ void glVertexAttribFormatNv(
             Uint32 index,
             Int32 size,
             Uint32 type,
-            Int32 normalized,
-            Uint32 stride,
+            Uint8 normalized,
+            Int32 stride,
           )
         >
       >()
@@ -59798,7 +59131,7 @@ void glVertexAttribIFormatNv(int index, int size, int type, int stride) {
   final glVertexAttribIFormatNvAsFunction = _glVertexAttribIFormatNv
       .cast<
         NativeFunction<
-          Void Function(Uint32 index, Int32 size, Uint32 type, Uint32 stride)
+          Void Function(Uint32 index, Int32 size, Uint32 type, Int32 stride)
         >
       >()
       .asFunction<void Function(int index, int size, int type, int stride)>();
@@ -59835,20 +59168,20 @@ late Pointer<NativeFunction<Void Function()>> _glAreProgramsResidentNv;
 int glAreProgramsResidentNv(
   int n,
   Pointer<Uint32> programs,
-  Pointer<Int32> residences,
+  Pointer<Uint8> residences,
 ) {
   final glAreProgramsResidentNvAsFunction = _glAreProgramsResidentNv
       .cast<
         NativeFunction<
-          Int32 Function(
-            Uint32 n,
+          Uint8 Function(
+            Int32 n,
             Pointer<Uint32> programs,
-            Pointer<Int32> residences,
+            Pointer<Uint8> residences,
           )
         >
       >()
       .asFunction<
-        int Function(int n, Pointer<Uint32> programs, Pointer<Int32> residences)
+        int Function(int n, Pointer<Uint32> programs, Pointer<Uint8> residences)
       >();
   return glAreProgramsResidentNvAsFunction(n, programs, residences);
 }
@@ -59876,7 +59209,7 @@ late Pointer<NativeFunction<Void Function()>> _glDeleteProgramsNv;
 /// {@category opengl_glext}
 void glDeleteProgramsNv(int n, Pointer<Uint32> programs) {
   final glDeleteProgramsNvAsFunction = _glDeleteProgramsNv
-      .cast<NativeFunction<Void Function(Uint32 n, Pointer<Uint32> programs)>>()
+      .cast<NativeFunction<Void Function(Int32 n, Pointer<Uint32> programs)>>()
       .asFunction<void Function(int n, Pointer<Uint32> programs)>();
   return glDeleteProgramsNvAsFunction(n, programs);
 }
@@ -59908,7 +59241,7 @@ late Pointer<NativeFunction<Void Function()>> _glGenProgramsNv;
 /// {@category opengl_glext}
 void glGenProgramsNv(int n, Pointer<Uint32> programs) {
   final glGenProgramsNvAsFunction = _glGenProgramsNv
-      .cast<NativeFunction<Void Function(Uint32 n, Pointer<Uint32> programs)>>()
+      .cast<NativeFunction<Void Function(Int32 n, Pointer<Uint32> programs)>>()
       .asFunction<void Function(int n, Pointer<Uint32> programs)>();
   return glGenProgramsNvAsFunction(n, programs);
 }
@@ -60105,7 +59438,7 @@ late Pointer<NativeFunction<Void Function()>> _glGetVertexAttribPointervNv;
 void glGetVertexAttribPointervNv(
   int index,
   int pname,
-  Pointer<Pointer<NativeType>> pointer,
+  Pointer<Pointer<Void>> pointer,
 ) {
   final glGetVertexAttribPointervNvAsFunction = _glGetVertexAttribPointervNv
       .cast<
@@ -60113,16 +59446,12 @@ void glGetVertexAttribPointervNv(
           Void Function(
             Uint32 index,
             Uint32 pname,
-            Pointer<Pointer<NativeType>> pointer,
+            Pointer<Pointer<Void>> pointer,
           )
         >
       >()
       .asFunction<
-        void Function(
-          int index,
-          int pname,
-          Pointer<Pointer<NativeType>> pointer,
-        )
+        void Function(int index, int pname, Pointer<Pointer<Void>> pointer)
       >();
   return glGetVertexAttribPointervNvAsFunction(index, pname, pointer);
 }
@@ -60136,7 +59465,7 @@ late Pointer<NativeFunction<Void Function()>> _glIsProgramNv;
 /// {@category opengl_glext}
 int glIsProgramNv(int id) {
   final glIsProgramNvAsFunction = _glIsProgramNv
-      .cast<NativeFunction<Int32 Function(Uint32 id)>>()
+      .cast<NativeFunction<Uint8 Function(Uint32 id)>>()
       .asFunction<int Function(int id)>();
   return glIsProgramNvAsFunction(id);
 }
@@ -60155,7 +59484,7 @@ void glLoadProgramNv(int target, int id, int len, Pointer<Uint8> program) {
           Void Function(
             Uint32 target,
             Uint32 id,
-            Uint32 len,
+            Int32 len,
             Pointer<Uint8> program,
           )
         >
@@ -60303,7 +59632,7 @@ void glProgramParameters4dvNv(
           Void Function(
             Uint32 target,
             Uint32 index,
-            Uint32 count,
+            Int32 count,
             Pointer<Double> v,
           )
         >
@@ -60333,7 +59662,7 @@ void glProgramParameters4fvNv(
           Void Function(
             Uint32 target,
             Uint32 index,
-            Uint32 count,
+            Int32 count,
             Pointer<Float> v,
           )
         >
@@ -60353,7 +59682,7 @@ late Pointer<NativeFunction<Void Function()>> _glRequestResidentProgramsNv;
 /// {@category opengl_glext}
 void glRequestResidentProgramsNv(int n, Pointer<Uint32> programs) {
   final glRequestResidentProgramsNvAsFunction = _glRequestResidentProgramsNv
-      .cast<NativeFunction<Void Function(Uint32 n, Pointer<Uint32> programs)>>()
+      .cast<NativeFunction<Void Function(Int32 n, Pointer<Uint32> programs)>>()
       .asFunction<void Function(int n, Pointer<Uint32> programs)>();
   return glRequestResidentProgramsNvAsFunction(n, programs);
 }
@@ -60395,7 +59724,7 @@ void glVertexAttribPointerNv(
   int fsize,
   int type,
   int stride,
-  Pointer<NativeType> pointer,
+  Pointer<Void> pointer,
 ) {
   final glVertexAttribPointerNvAsFunction = _glVertexAttribPointerNv
       .cast<
@@ -60404,8 +59733,8 @@ void glVertexAttribPointerNv(
             Uint32 index,
             Int32 fsize,
             Uint32 type,
-            Uint32 stride,
-            Pointer<NativeType> pointer,
+            Int32 stride,
+            Pointer<Void> pointer,
           )
         >
       >()
@@ -60415,7 +59744,7 @@ void glVertexAttribPointerNv(
           int fsize,
           int type,
           int stride,
-          Pointer<NativeType> pointer,
+          Pointer<Void> pointer,
         )
       >();
   return glVertexAttribPointerNvAsFunction(index, fsize, type, stride, pointer);
@@ -60824,7 +60153,7 @@ void glVertexAttribs1dvNv(int index, int count, Pointer<Double> v) {
   final glVertexAttribs1dvNvAsFunction = _glVertexAttribs1dvNv
       .cast<
         NativeFunction<
-          Void Function(Uint32 index, Uint32 count, Pointer<Double> v)
+          Void Function(Uint32 index, Int32 count, Pointer<Double> v)
         >
       >()
       .asFunction<void Function(int index, int count, Pointer<Double> v)>();
@@ -60842,7 +60171,7 @@ void glVertexAttribs1fvNv(int index, int count, Pointer<Float> v) {
   final glVertexAttribs1fvNvAsFunction = _glVertexAttribs1fvNv
       .cast<
         NativeFunction<
-          Void Function(Uint32 index, Uint32 count, Pointer<Float> v)
+          Void Function(Uint32 index, Int32 count, Pointer<Float> v)
         >
       >()
       .asFunction<void Function(int index, int count, Pointer<Float> v)>();
@@ -60860,7 +60189,7 @@ void glVertexAttribs1svNv(int index, int count, Pointer<Int16> v) {
   final glVertexAttribs1svNvAsFunction = _glVertexAttribs1svNv
       .cast<
         NativeFunction<
-          Void Function(Uint32 index, Uint32 count, Pointer<Int16> v)
+          Void Function(Uint32 index, Int32 count, Pointer<Int16> v)
         >
       >()
       .asFunction<void Function(int index, int count, Pointer<Int16> v)>();
@@ -60878,7 +60207,7 @@ void glVertexAttribs2dvNv(int index, int count, Pointer<Double> v) {
   final glVertexAttribs2dvNvAsFunction = _glVertexAttribs2dvNv
       .cast<
         NativeFunction<
-          Void Function(Uint32 index, Uint32 count, Pointer<Double> v)
+          Void Function(Uint32 index, Int32 count, Pointer<Double> v)
         >
       >()
       .asFunction<void Function(int index, int count, Pointer<Double> v)>();
@@ -60896,7 +60225,7 @@ void glVertexAttribs2fvNv(int index, int count, Pointer<Float> v) {
   final glVertexAttribs2fvNvAsFunction = _glVertexAttribs2fvNv
       .cast<
         NativeFunction<
-          Void Function(Uint32 index, Uint32 count, Pointer<Float> v)
+          Void Function(Uint32 index, Int32 count, Pointer<Float> v)
         >
       >()
       .asFunction<void Function(int index, int count, Pointer<Float> v)>();
@@ -60914,7 +60243,7 @@ void glVertexAttribs2svNv(int index, int count, Pointer<Int16> v) {
   final glVertexAttribs2svNvAsFunction = _glVertexAttribs2svNv
       .cast<
         NativeFunction<
-          Void Function(Uint32 index, Uint32 count, Pointer<Int16> v)
+          Void Function(Uint32 index, Int32 count, Pointer<Int16> v)
         >
       >()
       .asFunction<void Function(int index, int count, Pointer<Int16> v)>();
@@ -60932,7 +60261,7 @@ void glVertexAttribs3dvNv(int index, int count, Pointer<Double> v) {
   final glVertexAttribs3dvNvAsFunction = _glVertexAttribs3dvNv
       .cast<
         NativeFunction<
-          Void Function(Uint32 index, Uint32 count, Pointer<Double> v)
+          Void Function(Uint32 index, Int32 count, Pointer<Double> v)
         >
       >()
       .asFunction<void Function(int index, int count, Pointer<Double> v)>();
@@ -60950,7 +60279,7 @@ void glVertexAttribs3fvNv(int index, int count, Pointer<Float> v) {
   final glVertexAttribs3fvNvAsFunction = _glVertexAttribs3fvNv
       .cast<
         NativeFunction<
-          Void Function(Uint32 index, Uint32 count, Pointer<Float> v)
+          Void Function(Uint32 index, Int32 count, Pointer<Float> v)
         >
       >()
       .asFunction<void Function(int index, int count, Pointer<Float> v)>();
@@ -60968,7 +60297,7 @@ void glVertexAttribs3svNv(int index, int count, Pointer<Int16> v) {
   final glVertexAttribs3svNvAsFunction = _glVertexAttribs3svNv
       .cast<
         NativeFunction<
-          Void Function(Uint32 index, Uint32 count, Pointer<Int16> v)
+          Void Function(Uint32 index, Int32 count, Pointer<Int16> v)
         >
       >()
       .asFunction<void Function(int index, int count, Pointer<Int16> v)>();
@@ -60986,7 +60315,7 @@ void glVertexAttribs4dvNv(int index, int count, Pointer<Double> v) {
   final glVertexAttribs4dvNvAsFunction = _glVertexAttribs4dvNv
       .cast<
         NativeFunction<
-          Void Function(Uint32 index, Uint32 count, Pointer<Double> v)
+          Void Function(Uint32 index, Int32 count, Pointer<Double> v)
         >
       >()
       .asFunction<void Function(int index, int count, Pointer<Double> v)>();
@@ -61004,7 +60333,7 @@ void glVertexAttribs4fvNv(int index, int count, Pointer<Float> v) {
   final glVertexAttribs4fvNvAsFunction = _glVertexAttribs4fvNv
       .cast<
         NativeFunction<
-          Void Function(Uint32 index, Uint32 count, Pointer<Float> v)
+          Void Function(Uint32 index, Int32 count, Pointer<Float> v)
         >
       >()
       .asFunction<void Function(int index, int count, Pointer<Float> v)>();
@@ -61022,7 +60351,7 @@ void glVertexAttribs4svNv(int index, int count, Pointer<Int16> v) {
   final glVertexAttribs4svNvAsFunction = _glVertexAttribs4svNv
       .cast<
         NativeFunction<
-          Void Function(Uint32 index, Uint32 count, Pointer<Int16> v)
+          Void Function(Uint32 index, Int32 count, Pointer<Int16> v)
         >
       >()
       .asFunction<void Function(int index, int count, Pointer<Int16> v)>();
@@ -61040,7 +60369,7 @@ void glVertexAttribs4ubvNv(int index, int count, Pointer<Uint8> v) {
   final glVertexAttribs4ubvNvAsFunction = _glVertexAttribs4ubvNv
       .cast<
         NativeFunction<
-          Void Function(Uint32 index, Uint32 count, Pointer<Uint8> v)
+          Void Function(Uint32 index, Int32 count, Pointer<Uint8> v)
         >
       >()
       .asFunction<void Function(int index, int count, Pointer<Uint8> v)>();
@@ -61082,7 +60411,7 @@ void glBindVideoCaptureStreamBufferNv(
                 Uint32 videoCaptureSlot,
                 Uint32 stream,
                 Uint32 frameRegion,
-                Uint64 offset,
+                IntPtr offset,
               )
             >
           >()
@@ -61537,7 +60866,7 @@ void glFramebufferTextureMultiviewOvr(
                 Uint32 texture,
                 Int32 level,
                 Int32 baseViewIndex,
-                Uint32 numViews,
+                Int32 numViews,
               )
             >
           >()
@@ -61587,7 +60916,7 @@ void glNamedFramebufferTextureMultiviewOvr(
                 Uint32 texture,
                 Int32 level,
                 Int32 baseViewIndex,
-                Uint32 numViews,
+                Int32 numViews,
               )
             >
           >()
@@ -61636,7 +60965,7 @@ void glDetailTexFuncSgis(int target, int n, Pointer<Float> points) {
   final glDetailTexFuncSgisAsFunction = _glDetailTexFuncSgis
       .cast<
         NativeFunction<
-          Void Function(Uint32 target, Uint32 n, Pointer<Float> points)
+          Void Function(Uint32 target, Int32 n, Pointer<Float> points)
         >
       >()
       .asFunction<void Function(int target, int n, Pointer<Float> points)>();
@@ -61668,7 +60997,7 @@ late Pointer<NativeFunction<Void Function()>> _glFogFuncSgis;
 /// {@category opengl_glext}
 void glFogFuncSgis(int n, Pointer<Float> points) {
   final glFogFuncSgisAsFunction = _glFogFuncSgis
-      .cast<NativeFunction<Void Function(Uint32 n, Pointer<Float> points)>>()
+      .cast<NativeFunction<Void Function(Int32 n, Pointer<Float> points)>>()
       .asFunction<void Function(int n, Pointer<Float> points)>();
   return glFogFuncSgisAsFunction(n, points);
 }
@@ -61696,7 +61025,7 @@ late Pointer<NativeFunction<Void Function()>> _glSampleMaskSgis;
 /// {@category opengl_glext}
 void glSampleMaskSgis(double value, int invert) {
   final glSampleMaskSgisAsFunction = _glSampleMaskSgis
-      .cast<NativeFunction<Void Function(Float value, Int32 invert)>>()
+      .cast<NativeFunction<Void Function(Float value, Uint8 invert)>>()
       .asFunction<void Function(double value, int invert)>();
   return glSampleMaskSgisAsFunction(value, invert);
 }
@@ -61850,7 +61179,7 @@ void glSharpenTexFuncSgis(int target, int n, Pointer<Float> points) {
   final glSharpenTexFuncSgisAsFunction = _glSharpenTexFuncSgis
       .cast<
         NativeFunction<
-          Void Function(Uint32 target, Uint32 n, Pointer<Float> points)
+          Void Function(Uint32 target, Int32 n, Pointer<Float> points)
         >
       >()
       .asFunction<void Function(int target, int n, Pointer<Float> points)>();
@@ -61891,7 +61220,7 @@ void glTexImage4Dsgis(
   int border,
   int format,
   int type,
-  Pointer<NativeType> pixels,
+  Pointer<Void> pixels,
 ) {
   final glTexImage4DsgisAsFunction = _glTexImage4Dsgis
       .cast<
@@ -61900,14 +61229,14 @@ void glTexImage4Dsgis(
             Uint32 target,
             Int32 level,
             Uint32 internalformat,
-            Uint32 width,
-            Uint32 height,
-            Uint32 depth,
-            Uint32 size4d,
+            Int32 width,
+            Int32 height,
+            Int32 depth,
+            Int32 size4d,
             Int32 border,
             Uint32 format,
             Uint32 type,
-            Pointer<NativeType> pixels,
+            Pointer<Void> pixels,
           )
         >
       >()
@@ -61923,7 +61252,7 @@ void glTexImage4Dsgis(
           int border,
           int format,
           int type,
-          Pointer<NativeType> pixels,
+          Pointer<Void> pixels,
         )
       >();
   return glTexImage4DsgisAsFunction(
@@ -61961,7 +61290,7 @@ void glTexSubImage4Dsgis(
   int size4d,
   int format,
   int type,
-  Pointer<NativeType> pixels,
+  Pointer<Void> pixels,
 ) {
   final glTexSubImage4DsgisAsFunction = _glTexSubImage4Dsgis
       .cast<
@@ -61973,13 +61302,13 @@ void glTexSubImage4Dsgis(
             Int32 yoffset,
             Int32 zoffset,
             Int32 woffset,
-            Uint32 width,
-            Uint32 height,
-            Uint32 depth,
-            Uint32 size4d,
+            Int32 width,
+            Int32 height,
+            Int32 depth,
+            Int32 size4d,
             Uint32 format,
             Uint32 type,
-            Pointer<NativeType> pixels,
+            Pointer<Void> pixels,
           )
         >
       >()
@@ -61997,7 +61326,7 @@ void glTexSubImage4Dsgis(
           int size4d,
           int format,
           int type,
-          Pointer<NativeType> pixels,
+          Pointer<Void> pixels,
         )
       >();
   return glTexSubImage4DsgisAsFunction(
@@ -62028,7 +61357,7 @@ void glTextureColorMaskSgis(int red, int green, int blue, int alpha) {
   final glTextureColorMaskSgisAsFunction = _glTextureColorMaskSgis
       .cast<
         NativeFunction<
-          Void Function(Int32 red, Int32 green, Int32 blue, Int32 alpha)
+          Void Function(Uint8 red, Uint8 green, Uint8 blue, Uint8 alpha)
         >
       >()
       .asFunction<void Function(int red, int green, int blue, int alpha)>();
@@ -62074,7 +61403,7 @@ void glTexFilterFuncSgis(
           Void Function(
             Uint32 target,
             Uint32 filter,
-            Uint32 n,
+            Int32 n,
             Pointer<Float> weights,
           )
         >
@@ -62136,7 +61465,7 @@ late Pointer<NativeFunction<Void Function()>> _glGenAsyncMarkersSgix;
 /// {@category opengl_glext}
 int glGenAsyncMarkersSgix(int range) {
   final glGenAsyncMarkersSgixAsFunction = _glGenAsyncMarkersSgix
-      .cast<NativeFunction<Uint32 Function(Uint32 range)>>()
+      .cast<NativeFunction<Uint32 Function(Int32 range)>>()
       .asFunction<int Function(int range)>();
   return glGenAsyncMarkersSgixAsFunction(range);
 }
@@ -62150,7 +61479,7 @@ late Pointer<NativeFunction<Void Function()>> _glDeleteAsyncMarkersSgix;
 /// {@category opengl_glext}
 void glDeleteAsyncMarkersSgix(int marker, int range) {
   final glDeleteAsyncMarkersSgixAsFunction = _glDeleteAsyncMarkersSgix
-      .cast<NativeFunction<Void Function(Uint32 marker, Uint32 range)>>()
+      .cast<NativeFunction<Void Function(Uint32 marker, Int32 range)>>()
       .asFunction<void Function(int marker, int range)>();
   return glDeleteAsyncMarkersSgixAsFunction(marker, range);
 }
@@ -62164,7 +61493,7 @@ late Pointer<NativeFunction<Void Function()>> _glIsAsyncMarkerSgix;
 /// {@category opengl_glext}
 int glIsAsyncMarkerSgix(int marker) {
   final glIsAsyncMarkerSgixAsFunction = _glIsAsyncMarkerSgix
-      .cast<NativeFunction<Int32 Function(Uint32 marker)>>()
+      .cast<NativeFunction<Uint8 Function(Uint32 marker)>>()
       .asFunction<int Function(int marker)>();
   return glIsAsyncMarkerSgixAsFunction(marker);
 }
@@ -62500,12 +61829,10 @@ late Pointer<NativeFunction<Void Function()>> _glIglooInterfaceSgix;
 /// GLAPI void APIENTRY glIglooInterfaceSGIX (GLenum pname, const void *params)
 /// ```
 /// {@category opengl_glext}
-void glIglooInterfaceSgix(int pname, Pointer<NativeType> params) {
+void glIglooInterfaceSgix(int pname, Pointer<Void> params) {
   final glIglooInterfaceSgixAsFunction = _glIglooInterfaceSgix
-      .cast<
-        NativeFunction<Void Function(Uint32 pname, Pointer<NativeType> params)>
-      >()
-      .asFunction<void Function(int pname, Pointer<NativeType> params)>();
+      .cast<NativeFunction<Void Function(Uint32 pname, Pointer<Void> params)>>()
+      .asFunction<void Function(int pname, Pointer<Void> params)>();
   return glIglooInterfaceSgixAsFunction(pname, params);
 }
 
@@ -62532,7 +61859,7 @@ late Pointer<NativeFunction<Void Function()>> _glInstrumentsBufferSgix;
 /// {@category opengl_glext}
 void glInstrumentsBufferSgix(int size, Pointer<Int32> buffer) {
   final glInstrumentsBufferSgixAsFunction = _glInstrumentsBufferSgix
-      .cast<NativeFunction<Void Function(Uint32 size, Pointer<Int32> buffer)>>()
+      .cast<NativeFunction<Void Function(Int32 size, Pointer<Int32> buffer)>>()
       .asFunction<void Function(int size, Pointer<Int32> buffer)>();
   return glInstrumentsBufferSgixAsFunction(size, buffer);
 }
@@ -63001,7 +62328,7 @@ void glColorTableSgi(
   int width,
   int format,
   int type,
-  Pointer<NativeType> table,
+  Pointer<Void> table,
 ) {
   final glColorTableSgiAsFunction = _glColorTableSgi
       .cast<
@@ -63009,10 +62336,10 @@ void glColorTableSgi(
           Void Function(
             Uint32 target,
             Uint32 internalformat,
-            Uint32 width,
+            Int32 width,
             Uint32 format,
             Uint32 type,
-            Pointer<NativeType> table,
+            Pointer<Void> table,
           )
         >
       >()
@@ -63023,7 +62350,7 @@ void glColorTableSgi(
           int width,
           int format,
           int type,
-          Pointer<NativeType> table,
+          Pointer<Void> table,
         )
       >();
   return glColorTableSgiAsFunction(
@@ -63098,7 +62425,7 @@ void glCopyColorTableSgi(
             Uint32 internalformat,
             Int32 x,
             Int32 y,
-            Uint32 width,
+            Int32 width,
           )
         >
       >()
@@ -63115,12 +62442,7 @@ late Pointer<NativeFunction<Void Function()>> _glGetColorTableSgi;
 /// GLAPI void APIENTRY glGetColorTableSGI (GLenum target, GLenum format, GLenum type, void *table)
 /// ```
 /// {@category opengl_glext}
-void glGetColorTableSgi(
-  int target,
-  int format,
-  int type,
-  Pointer<NativeType> table,
-) {
+void glGetColorTableSgi(int target, int format, int type, Pointer<Void> table) {
   final glGetColorTableSgiAsFunction = _glGetColorTableSgi
       .cast<
         NativeFunction<
@@ -63128,17 +62450,12 @@ void glGetColorTableSgi(
             Uint32 target,
             Uint32 format,
             Uint32 type,
-            Pointer<NativeType> table,
+            Pointer<Void> table,
           )
         >
       >()
       .asFunction<
-        void Function(
-          int target,
-          int format,
-          int type,
-          Pointer<NativeType> table,
-        )
+        void Function(int target, int format, int type, Pointer<Void> table)
       >();
   return glGetColorTableSgiAsFunction(target, format, type, table);
 }
@@ -63328,7 +62645,7 @@ void glDrawMeshArraysSun(int mode, int first, int count, int width) {
   final glDrawMeshArraysSunAsFunction = _glDrawMeshArraysSun
       .cast<
         NativeFunction<
-          Void Function(Uint32 mode, Int32 first, Uint32 count, Uint32 width)
+          Void Function(Uint32 mode, Int32 first, Int32 count, Int32 width)
         >
       >()
       .asFunction<void Function(int mode, int first, int count, int width)>();
@@ -63429,24 +62746,20 @@ late Pointer<NativeFunction<Void Function()>> _glReplacementCodePointerSun;
 void glReplacementCodePointerSun(
   int type,
   int stride,
-  Pointer<Pointer<NativeType>> pointer,
+  Pointer<Pointer<Void>> pointer,
 ) {
   final glReplacementCodePointerSunAsFunction = _glReplacementCodePointerSun
       .cast<
         NativeFunction<
           Void Function(
             Uint32 type,
-            Uint32 stride,
-            Pointer<Pointer<NativeType>> pointer,
+            Int32 stride,
+            Pointer<Pointer<Void>> pointer,
           )
         >
       >()
       .asFunction<
-        void Function(
-          int type,
-          int stride,
-          Pointer<Pointer<NativeType>> pointer,
-        )
+        void Function(int type, int stride, Pointer<Pointer<Void>> pointer)
       >();
   return glReplacementCodePointerSunAsFunction(type, stride, pointer);
 }

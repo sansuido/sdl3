@@ -222,19 +222,19 @@ void sdlDelayPrecise(int ns) {
 int sdlAddTimer(
   int interval,
   Pointer<NativeFunction<SdlTimerCallback>> callback,
-  Pointer<NativeType> userdata,
+  Pointer<Void> userdata,
 ) {
   final sdlAddTimerLookupFunction = _libSdl
       .lookupFunction<
         Uint32 Function(
           Uint32 interval,
           Pointer<NativeFunction<SdlTimerCallback>> callback,
-          Pointer<NativeType> userdata,
+          Pointer<Void> userdata,
         ),
         int Function(
           int interval,
           Pointer<NativeFunction<SdlTimerCallback>> callback,
-          Pointer<NativeType> userdata,
+          Pointer<Void> userdata,
         )
       >('SDL_AddTimer');
   return sdlAddTimerLookupFunction(interval, callback, userdata);
@@ -281,19 +281,19 @@ int sdlAddTimer(
 int sdlAddTimerNs(
   int interval,
   Pointer<NativeFunction<SdlNsTimerCallback>> callback,
-  Pointer<NativeType> userdata,
+  Pointer<Void> userdata,
 ) {
   final sdlAddTimerNsLookupFunction = _libSdl
       .lookupFunction<
         Uint32 Function(
           Uint64 interval,
           Pointer<NativeFunction<SdlNsTimerCallback>> callback,
-          Pointer<NativeType> userdata,
+          Pointer<Void> userdata,
         ),
         int Function(
           int interval,
           Pointer<NativeFunction<SdlNsTimerCallback>> callback,
-          Pointer<NativeType> userdata,
+          Pointer<Void> userdata,
         )
       >('SDL_AddTimerNS');
   return sdlAddTimerNsLookupFunction(interval, callback, userdata);
@@ -318,8 +318,8 @@ int sdlAddTimerNs(
 /// {@category timer}
 bool sdlRemoveTimer(int id) {
   final sdlRemoveTimerLookupFunction = _libSdl
-      .lookupFunction<Uint8 Function(Uint32 id), int Function(int id)>(
+      .lookupFunction<Bool Function(Uint32 id), bool Function(int id)>(
         'SDL_RemoveTimer',
       );
-  return sdlRemoveTimerLookupFunction(id) == 1;
+  return sdlRemoveTimerLookupFunction(id);
 }

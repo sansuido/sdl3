@@ -445,7 +445,7 @@ int? sdlxGetTextureScaleMode(Pointer<SdlTexture> texture) {
 /// {@category render}
 bool sdlxUpdateTexture(
   Pointer<SdlTexture> texture,
-  Pointer<NativeType> pixels,
+  Pointer<Void> pixels,
   int pitch, {
   SdlxRect? rect,
 }) {
