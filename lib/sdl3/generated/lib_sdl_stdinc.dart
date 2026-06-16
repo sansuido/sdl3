@@ -2201,6 +2201,134 @@ int sdlWcstol(Pointer<WChar> str, Pointer<Pointer<WChar>> endp, int base) {
 }
 
 ///
+/// Parse an `unsigned long` from a wide string.
+///
+/// If `str` starts with whitespace, then those whitespace characters are
+/// skipped before attempting to parse the number.
+///
+/// If the parsed number does not fit inside an `unsigned long`, the result is
+/// clamped to the minimum and maximum representable `unsigned long` values.
+///
+/// \param str The null-terminated wide string to read. Must not be NULL.
+/// \param endp If not NULL, the address of the first invalid wide character
+/// (i.e. the next character after the parsed number) will be
+/// written to this pointer.
+/// \param base The base of the integer to read. Supported values are 0 and 2
+/// to 36 inclusive. If 0, the base will be inferred from the
+/// number's prefix (0x for hexadecimal, 0 for octal, decimal
+/// otherwise).
+/// \returns the parsed `unsigned long`, or 0 if no number could be parsed.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.6.0.
+///
+/// \sa SDL_strtoul
+///
+/// ```c
+/// extern SDL_DECLSPEC unsigned long SDLCALL SDL_wcstoul(const wchar_t *str, wchar_t **endp, int base)
+/// ```
+/// {@category stdinc}
+int sdlWcstoul(Pointer<WChar> str, Pointer<Pointer<WChar>> endp, int base) {
+  final sdlWcstoulLookupFunction = _libSdl
+      .lookupFunction<
+        UnsignedLong Function(
+          Pointer<WChar> str,
+          Pointer<Pointer<WChar>> endp,
+          Int32 base,
+        ),
+        int Function(Pointer<WChar> str, Pointer<Pointer<WChar>> endp, int base)
+      >('SDL_wcstoul');
+  return sdlWcstoulLookupFunction(str, endp, base);
+}
+
+///
+/// Parse a `long long` from a wide string.
+///
+/// If `str` starts with whitespace, then those whitespace characters are
+/// skipped before attempting to parse the number.
+///
+/// If the parsed number does not fit inside a `long long`, the result is
+/// clamped to the minimum and maximum representable `long long` values.
+///
+/// \param str The null-terminated wide string to read. Must not be NULL.
+/// \param endp If not NULL, the address of the first invalid wide character
+/// (i.e. the next character after the parsed number) will be
+/// written to this pointer.
+/// \param base The base of the integer to read. Supported values are 0 and 2
+/// to 36 inclusive. If 0, the base will be inferred from the
+/// number's prefix (0x for hexadecimal, 0 for octal, decimal
+/// otherwise).
+/// \returns the parsed `long long`, or 0 if no number could be parsed.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.6.0.
+///
+/// \sa SDL_strtoll
+///
+/// ```c
+/// extern SDL_DECLSPEC long long SDLCALL SDL_wcstoll(const wchar_t *str, wchar_t **endp, int base)
+/// ```
+/// {@category stdinc}
+int sdlWcstoll(Pointer<WChar> str, Pointer<Pointer<WChar>> endp, int base) {
+  final sdlWcstollLookupFunction = _libSdl
+      .lookupFunction<
+        Int64 Function(
+          Pointer<WChar> str,
+          Pointer<Pointer<WChar>> endp,
+          Int32 base,
+        ),
+        int Function(Pointer<WChar> str, Pointer<Pointer<WChar>> endp, int base)
+      >('SDL_wcstoll');
+  return sdlWcstollLookupFunction(str, endp, base);
+}
+
+///
+/// Parse an `unsigned long long` from a wide string.
+///
+/// If `str` starts with whitespace, then those whitespace characters are
+/// skipped before attempting to parse the number.
+///
+/// If the parsed number does not fit inside an `unsigned long long`, the
+/// result is clamped to the minimum and maximum representable `unsigned long
+/// long` values.
+///
+/// \param str The null-terminated wide string to read. Must not be NULL.
+/// \param endp If not NULL, the address of the first invalid wide character
+/// (i.e. the next character after the parsed number) will be
+/// written to this pointer.
+/// \param base The base of the integer to read. Supported values are 0 and 2
+/// to 36 inclusive. If 0, the base will be inferred from the
+/// number's prefix (0x for hexadecimal, 0 for octal, decimal
+/// otherwise).
+/// \returns the parsed `unsigned long long`, or 0 if no number could be
+/// parsed.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.6.0.
+///
+/// \sa SDL_strtoull
+///
+/// ```c
+/// extern SDL_DECLSPEC unsigned long long SDLCALL SDL_wcstoull(const wchar_t *str, wchar_t **endp, int base)
+/// ```
+/// {@category stdinc}
+int sdlWcstoull(Pointer<WChar> str, Pointer<Pointer<WChar>> endp, int base) {
+  final sdlWcstoullLookupFunction = _libSdl
+      .lookupFunction<
+        Uint64 Function(
+          Pointer<WChar> str,
+          Pointer<Pointer<WChar>> endp,
+          Int32 base,
+        ),
+        int Function(Pointer<WChar> str, Pointer<Pointer<WChar>> endp, int base)
+      >('SDL_wcstoull');
+  return sdlWcstoullLookupFunction(str, endp, base);
+}
+
+///
 /// This works exactly like strlen() but doesn't require access to a C runtime.
 ///
 /// Counts the bytes in `str`, excluding the null terminator.

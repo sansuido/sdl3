@@ -2,6 +2,60 @@
 part of '../sdl.dart';
 
 ///
+/// Never call this directly.
+///
+/// Use the SDL_assert macros instead.
+///
+/// \param data assert data structure.
+/// \param func function name.
+/// \param file file name.
+/// \param line line number.
+/// \returns assert state.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.2.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC SDL_AssertState SDLCALL SDL_ReportAssertion(SDL_AssertData *data, const char *func, const char *file, int line)
+/// ```
+/// {@category assert}
+int sdlReportAssertion(
+  Pointer<SdlAssertData> data,
+  String? func,
+  String? file,
+  int line,
+) {
+  final sdlReportAssertionLookupFunction = _libSdl
+      .lookupFunction<
+        Int32 Function(
+          Pointer<SdlAssertData> data,
+          Pointer<Utf8> func,
+          Pointer<Utf8> file,
+          Int32 line,
+        ),
+        int Function(
+          Pointer<SdlAssertData> data,
+          Pointer<Utf8> func,
+          Pointer<Utf8> file,
+          int line,
+        )
+      >('SDL_ReportAssertion');
+  final funcPointer = func != null ? func.toNativeUtf8() : nullptr;
+  final filePointer = file != null ? file.toNativeUtf8() : nullptr;
+  final result = sdlReportAssertionLookupFunction(
+    data,
+    funcPointer,
+    filePointer,
+    line,
+  );
+  calloc
+    ..free(funcPointer)
+    ..free(filePointer);
+  return result;
+}
+
+///
 /// Set an application-defined assertion handler.
 ///
 /// This function allows an application to show its own assertion UI and/or

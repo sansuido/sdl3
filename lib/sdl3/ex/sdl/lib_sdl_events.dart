@@ -208,3 +208,46 @@ SdlxEvent? sdlxWaitEventTimeout(int timeout) {
   calloc.free(pointer);
   return result;
 }
+
+///
+/// Add an event to the event queue.
+///
+/// The event queue can actually be used as a two way communication channel.
+/// Not only can events be read from the queue, but the user can also push
+/// their own events onto it. `event` is a pointer to the event structure you
+/// wish to push onto the queue. The event is copied into the queue, and the
+/// caller may dispose of the memory pointed to after SDL_PushEvent() returns.
+///
+/// Note: Pushing device input events onto the queue doesn't modify the state
+/// of the device within SDL.
+///
+/// Note: Events pushed onto the queue with SDL_PushEvent() get passed through
+/// the event filter but events added with SDL_PeepEvents() do not.
+///
+/// For pushing application-specific events, please use SDL_RegisterEvents() to
+/// get an event type that does not conflict with other code that also wants
+/// its own custom event types.
+///
+/// \param event the SDL_Event to be added to the queue.
+/// \returns true on success, false if the event was filtered or on failure;
+/// call SDL_GetError() for more information. A common reason for
+/// error is the event queue being full.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.2.0.
+///
+/// \sa SDL_PeepEvents
+/// \sa SDL_PollEvent
+/// \sa SDL_RegisterEvents
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL SDL_PushEvent(SDL_Event *event)
+/// ```
+/// {@category events}
+bool sdlxPushEvent(SdlxEvent event) {
+  final eventPointer = event.calloc();
+  final result = sdlPushEvent(eventPointer);
+  eventPointer.callocAllFree();
+  return result;
+}

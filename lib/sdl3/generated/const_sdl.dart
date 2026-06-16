@@ -275,6 +275,7 @@ const SDL_EVENT_CAMERA_DEVICE_ADDED = 0x1400;
 const SDL_EVENT_CAMERA_DEVICE_REMOVED = 0x1400 + 1;
 const SDL_EVENT_CAMERA_DEVICE_APPROVED = 0x1400 + 2;
 const SDL_EVENT_CAMERA_DEVICE_DENIED = 0x1400 + 3;
+const SDL_EVENT_NOTIFICATION_ACTION_INVOKED = 0x1500;
 const SDL_EVENT_RENDER_TARGETS_RESET = 0x2000;
 const SDL_EVENT_RENDER_DEVICE_RESET = 0x2000 + 1;
 const SDL_EVENT_RENDER_DEVICE_LOST = 0x2000 + 2;
@@ -1643,6 +1644,24 @@ const SDL_INIT_STATUS_UNINITIALIZED = 0;
 const SDL_INIT_STATUS_INITIALIZING = 1;
 const SDL_INIT_STATUS_INITIALIZED = 2;
 const SDL_INIT_STATUS_UNINITIALIZING = 3;
+//const SDL_notification_h_ = ;
+const SDL_PROP_GLOBAL_NOTIFICATION_HEADER_ICON_STRING =
+    'SDL.notification.header_icon';
+const SDL_NOTIFICATION_PRIORITY_LOW = -1;
+const SDL_NOTIFICATION_PRIORITY_NORMAL = 0;
+const SDL_NOTIFICATION_PRIORITY_HIGH = 1;
+const SDL_NOTIFICATION_PRIORITY_CRITICAL = 2;
+const SDL_NOTIFICATION_ACTION_TYPE_BUTTON = 1;
+const SDL_PROP_NOTIFICATION_ACTIONS_POINTER = 'SDL.notification.actions';
+const SDL_PROP_NOTIFICATION_ACTION_COUNT_NUMBER =
+    'SDL.notification.action_count';
+const SDL_PROP_NOTIFICATION_IMAGE_POINTER = 'SDL.notification.image';
+const SDL_PROP_NOTIFICATION_MESSAGE_STRING = 'SDL.notification.message';
+const SDL_PROP_NOTIFICATION_PRIORITY_NUMBER = 'SDL.notification.priority';
+const SDL_PROP_NOTIFICATION_REPLACES_NUMBER = 'SDL.notification.replaces';
+const SDL_PROP_NOTIFICATION_SOUND_STRING = 'SDL.notification.sound';
+const SDL_PROP_NOTIFICATION_TRANSIENT_BOOLEAN = 'SDL.notification.transient';
+const SDL_PROP_NOTIFICATION_TITLE_STRING = 'SDL.notification.title';
 //const SDL_openxr_h_ = ;
 const NO_SDL_OPENXR_TYPEDEFS = 1;
 const XR_NULL_HANDLE = 0;
@@ -2152,7 +2171,7 @@ const SDL_RENDERER_VSYNC_ADAPTIVE = -1;
 const SDL_DEBUG_TEXT_FONT_CHARACTER_SIZE = 8;
 //const SDL_revision_h_ = ;
 const SDL_REVISION =
-    'SDL-3.5.0-release-3.4.0-935-gb53f1b064 (" SDL_VENDOR_INFO ")';
+    'SDL-3.5.0-release-3.4.0-984-g7bbd9d5c2 (" SDL_VENDOR_INFO ")';
 //const SDL_scancode_h_ = ;
 const SDL_SCANCODE_UNKNOWN = 0;
 const SDL_SCANCODE_A = 4;
@@ -3086,6 +3105,8 @@ class SdlkEvent {
   static const cameraDeviceRemoved = SDL_EVENT_CAMERA_DEVICE_REMOVED;
   static const cameraDeviceApproved = SDL_EVENT_CAMERA_DEVICE_APPROVED;
   static const cameraDeviceDenied = SDL_EVENT_CAMERA_DEVICE_DENIED;
+  static const notificationActionInvoked =
+      SDL_EVENT_NOTIFICATION_ACTION_INVOKED;
   static const renderTargetsReset = SDL_EVENT_RENDER_TARGETS_RESET;
   static const renderDeviceReset = SDL_EVENT_RENDER_DEVICE_RESET;
   static const renderDeviceLost = SDL_EVENT_RENDER_DEVICE_LOST;

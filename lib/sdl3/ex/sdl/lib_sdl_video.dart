@@ -19,15 +19,16 @@ part of '../../sdl.dart';
 /// extern SDL_DECLSPEC SDL_DisplayID * SDLCALL SDL_GetDisplays(int *count)
 /// ```
 /// {@category video}
-List<int>? sdlxGetDisplays() {
+List<int> sdlxGetDisplays() {
+  final result = <int>[];
   final countPointer = calloc<Int32>();
-  final resultPointer = sdlGetDisplays(countPointer);
-  if (resultPointer == nullptr) {
-    countPointer.callocFree();
-    return null;
+  final displaysPointer = sdlGetDisplays(countPointer);
+  if (displaysPointer != nullptr) {
+    for (var i = 0; i < countPointer.value; i++) {
+      result.add(displaysPointer[i]);
+    }
+    sdlFree(displaysPointer.cast<Void>());
   }
-  final count = countPointer.value;
-  final result = resultPointer.asTypedList(count);
   countPointer.callocFree();
   return result;
 }

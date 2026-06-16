@@ -48,7 +48,7 @@ extension SdlGamepadEx on SdlGamepad {
   /// extern SDL_DECLSPEC int SDLCALL SDL_AddGamepadMapping(const char *mapping)
   /// ```
   /// {@category gamepad}
-  static int addMapping(String? mappingString) =>
+  static int addMapping(String mappingString) =>
       sdlAddGamepadMapping(mappingString);
 
   ///
@@ -132,7 +132,7 @@ extension SdlGamepadEx on SdlGamepad {
   /// extern SDL_DECLSPEC int SDLCALL SDL_AddGamepadMappingsFromFile(const char *file)
   /// ```
   /// {@category gamepad}
-  static int addMappingFromFile(String? file) =>
+  static int addMappingFromFile(String file) =>
       sdlAddGamepadMappingsFromFile(file);
 
   ///
@@ -171,8 +171,7 @@ extension SdlGamepadEx on SdlGamepad {
   /// extern SDL_DECLSPEC char ** SDLCALL SDL_GetGamepadMappings(int *count)
   /// ```
   /// {@category gamepad}
-  static Pointer<Pointer<Int8>> getMappings(Pointer<Int32> count) =>
-      sdlGetGamepadMappings(count);
+  static List<String> getMappings() => sdlxGetGamepadMappings();
 
   ///
   /// Get the gamepad mapping string for a given GUID.
@@ -193,8 +192,8 @@ extension SdlGamepadEx on SdlGamepad {
   /// extern SDL_DECLSPEC char * SDLCALL SDL_GetGamepadMappingForGUID(SDL_GUID guid)
   /// ```
   /// {@category gamepad}
-  static Pointer<Int8> getMappingForGuid(SdlGuid guid) =>
-      sdlGetGamepadMappingForGuid(guid);
+  static String? getMappingForGuid(SdlGuid guid) =>
+      sdlxGetGamepadMappingForGuid(guid);
 
   ///
   /// Set the current mapping of a joystick or gamepad.
@@ -241,7 +240,7 @@ extension SdlGamepadEx on SdlGamepad {
   /// extern SDL_DECLSPEC SDL_JoystickID * SDLCALL SDL_GetGamepads(int *count)
   /// ```
   /// {@category gamepad}
-  static Pointer<Uint32> gets(Pointer<Int32> count) => sdlGetGamepads(count);
+  static List<int> gets() => sdlxGetGamepads();
 
   ///
   /// Check if the given joystick is supported by the gamepad interface.
@@ -491,8 +490,8 @@ extension SdlGamepadEx on SdlGamepad {
   /// extern SDL_DECLSPEC char * SDLCALL SDL_GetGamepadMappingForID(SDL_JoystickID instance_id)
   /// ```
   /// {@category gamepad}
-  static Pointer<Int8> getMappingForId(int instanceId) =>
-      sdlGetGamepadMappingForId(instanceId);
+  static String? getMappingForId(int instanceId) =>
+      sdlxGetGamepadMappingForId(instanceId);
 
   ///
   /// Open a gamepad for use.
@@ -634,7 +633,7 @@ extension SdlGamepadEx on SdlGamepad {
   /// extern SDL_DECLSPEC SDL_GamepadType SDLCALL SDL_GetGamepadTypeFromString(const char *str)
   /// ```
   /// {@category gamepad}
-  static int getTypeFromString(String? str) => sdlGetGamepadTypeFromString(str);
+  static int getTypeFromString(String str) => sdlGetGamepadTypeFromString(str);
 
   ///
   /// Convert from an SDL_GamepadType enum to a string.
@@ -726,7 +725,7 @@ extension SdlGamepadEx on SdlGamepad {
   /// extern SDL_DECLSPEC SDL_GamepadButton SDLCALL SDL_GetGamepadButtonFromString(const char *str)
   /// ```
   /// {@category gamepad}
-  static int getButtonFromString(String? str) =>
+  static int getButtonFromString(String str) =>
       sdlGetGamepadButtonFromString(str);
 
   ///
@@ -797,7 +796,7 @@ extension SdlGamepadPointerEx on Pointer<SdlGamepad> {
   /// extern SDL_DECLSPEC char * SDLCALL SDL_GetGamepadMapping(SDL_Gamepad *gamepad)
   /// ```
   /// {@category gamepad}
-  Pointer<Int8> getMapping() => sdlGetGamepadMapping(this);
+  String? getMapping() => sdlxGetGamepadMapping(this);
 
   ///
   /// Get the properties associated with an opened gamepad.
@@ -1127,8 +1126,7 @@ extension SdlGamepadPointerEx on Pointer<SdlGamepad> {
   /// extern SDL_DECLSPEC SDL_PowerState SDLCALL SDL_GetGamepadPowerInfo(SDL_Gamepad *gamepad, int *percent)
   /// ```
   /// {@category gamepad}
-  int getPowerInfo(Pointer<Int32> percent) =>
-      sdlGetGamepadPowerInfo(this, percent);
+  int getPowerInfo(SdlxPowerInfo info) => sdlxGetGamepadPowerInfo(this, info);
 
   ///
   /// Check if a gamepad has been opened and is currently connected.
@@ -1192,8 +1190,7 @@ extension SdlGamepadPointerEx on Pointer<SdlGamepad> {
   /// extern SDL_DECLSPEC SDL_GamepadBinding ** SDLCALL SDL_GetGamepadBindings(SDL_Gamepad *gamepad, int *count)
   /// ```
   /// {@category gamepad}
-  Pointer<Pointer<SdlGamepadBinding>> getBindings(Pointer<Int32> count) =>
-      sdlGetGamepadBindings(this, count);
+  List<SdlxGamepadBinding> getBindings() => sdlxGetGamepadBindings(this);
 
   ///
   /// Query whether a gamepad has a given axis.
@@ -1380,12 +1377,8 @@ extension SdlGamepadPointerEx on Pointer<SdlGamepad> {
   bool getTouchpadFinger(
     int touchpad,
     int finger,
-    Pointer<Bool> down,
-    Pointer<Float> x,
-    Pointer<Float> y,
-    Pointer<Float> pressure,
-  ) =>
-      sdlGetGamepadTouchpadFinger(this, touchpad, finger, down, x, y, pressure);
+    SdlxGamepadTouchpadFinger info,
+  ) => sdlxGetGamepadTouchpadFinger(this, touchpad, finger, info);
 
   ///
   /// Return whether a gamepad has a particular sensor.
@@ -1488,8 +1481,8 @@ extension SdlGamepadPointerEx on Pointer<SdlGamepad> {
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetGamepadSensorData(SDL_Gamepad *gamepad, SDL_SensorType type, float *data, int num_values)
   /// ```
   /// {@category gamepad}
-  bool getSensorData(int type, Pointer<Float> data, int numValues) =>
-      sdlGetGamepadSensorData(this, type, data, numValues);
+  bool getSensorData(int type, SdlxSensorData data, {int numValues = 3}) =>
+      sdlxGetGamepadSensorData(this, type, data, numValues: numValues);
 
   ///
   /// Start a rumble effect on a gamepad.

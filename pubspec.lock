@@ -2,7 +2,7 @@
 # See https://dart.dev/tools/pub/glossary#lockfile
 packages:
   change_case:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: change_case
       sha256: e41ef3df58521194ef8d7649928954805aeb08061917cf658322305e61568003
@@ -34,4 +34,4 @@ packages:
     source: hosted
     version: "1.18.2"
 sdks:
-  dart: ">=3.12.0 <4.0.0"
+  dart: ">=3.12.1 <4.0.0"

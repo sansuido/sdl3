@@ -1,4 +1,14 @@
 # Changelog
+## [2.9.1] - 2026-06-16
+- SDL3-2026-06-14
+### Changed
+- **Strictly Typed Callbacks**: Upgraded raw anonymous function pointers (`Pointer<Void>`) into proper `Pointer<NativeFunction>` types across structs (e.g., `SdlVirtualJoystickDesc`, `SdlIoStreamInterface`).
+### Added
+- Added support for `SdlNotificationEvent`.
+- Added functions and wrapper classes for the gamepad, guid, joystick, power, properties, sensor, time, touch, tray.
+- Added `sdlxPushEvent` function.
+- Added `example/properties_demo.dart`.
+- Added `example/tray_demo.dart`.
 
 ## [2.9.0] - 2026-06-09
 - SDL3-2026-06-07

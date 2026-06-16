@@ -150,6 +150,116 @@ typedef SdlAppQuitFunc = Void Function(Pointer<Void> appstate, Int32 result);
 typedef SdlMainThreadCallbackDart = void Function(Pointer<Void> userdata);
 typedef SdlMainThreadCallback = Void Function(Pointer<Void> userdata);
 
+// typedef Sint64 (SDLCALL *SDL_IOStreamInterfaceSize)(void *userdata)
+typedef SdlIoStreamInterfaceSizeDart = int Function(Pointer<Void> userdata);
+typedef SdlIoStreamInterfaceSize = Int64 Function(Pointer<Void> userdata);
+
+// typedef Sint64 (SDLCALL *SDL_IOStreamInterfaceSeek)(void *userdata, Sint64 offset, SDL_IOWhence whence)
+typedef SdlIoStreamInterfaceSeekDart =
+    int Function(Pointer<Void> userdata, int offset, int whence);
+typedef SdlIoStreamInterfaceSeek =
+    Int64 Function(Pointer<Void> userdata, Int64 offset, Int32 whence);
+
+// typedef size_t (SDLCALL *SDL_IOStreamInterfaceRead)(void *userdata, void *ptr, size_t size, SDL_IOStatus *status)
+typedef SdlIoStreamInterfaceReadDart =
+    int Function(
+      Pointer<Void> userdata,
+      Pointer<Void> ptr,
+      int size,
+      Pointer<Int32> status,
+    );
+typedef SdlIoStreamInterfaceRead =
+    Size Function(
+      Pointer<Void> userdata,
+      Pointer<Void> ptr,
+      Size size,
+      Pointer<Int32> status,
+    );
+
+// typedef size_t (SDLCALL *SDL_IOStreamInterfaceWrite)(void *userdata, const void *ptr, size_t size, SDL_IOStatus *status)
+typedef SdlIoStreamInterfaceWriteDart =
+    int Function(
+      Pointer<Void> userdata,
+      Pointer<Void> ptr,
+      int size,
+      Pointer<Int32> status,
+    );
+typedef SdlIoStreamInterfaceWrite =
+    Size Function(
+      Pointer<Void> userdata,
+      Pointer<Void> ptr,
+      Size size,
+      Pointer<Int32> status,
+    );
+
+// typedef bool (SDLCALL *SDL_IOStreamInterfaceFlush)(void *userdata, SDL_IOStatus *status)
+typedef SdlIoStreamInterfaceFlushDart =
+    bool Function(Pointer<Void> userdata, Pointer<Int32> status);
+typedef SdlIoStreamInterfaceFlush =
+    Bool Function(Pointer<Void> userdata, Pointer<Int32> status);
+
+// typedef bool (SDLCALL *SDL_IOStreamInterfaceClose)(void *userdata)
+typedef SdlIoStreamInterfaceCloseDart = bool Function(Pointer<Void> userdata);
+typedef SdlIoStreamInterfaceClose = Bool Function(Pointer<Void> userdata);
+
+// typedef void (SDLCALL *SDL_VirtualJoystickDescUpdate)(void *userdata)
+typedef SdlVirtualJoystickDescUpdateDart =
+    void Function(Pointer<Void> userdata);
+typedef SdlVirtualJoystickDescUpdate = Void Function(Pointer<Void> userdata);
+
+// typedef void (SDLCALL *SDL_VirtualJoystickDescSetPlayerIndex)(void *userdata, int player_index)
+typedef SdlVirtualJoystickDescSetPlayerIndexDart =
+    void Function(Pointer<Void> userdata, int playerIndex);
+typedef SdlVirtualJoystickDescSetPlayerIndex =
+    Void Function(Pointer<Void> userdata, Int32 playerIndex);
+
+// typedef bool (SDLCALL *SDL_VirtualJoystickDescRumble)(void *userdata, Uint16 low_frequency_rumble, Uint16 high_frequency_rumble)
+typedef SdlVirtualJoystickDescRumbleDart =
+    bool Function(
+      Pointer<Void> userdata,
+      int lowFrequencyRumble,
+      int highFrequencyRumble,
+    );
+typedef SdlVirtualJoystickDescRumble =
+    Bool Function(
+      Pointer<Void> userdata,
+      Uint16 lowFrequencyRumble,
+      Uint16 highFrequencyRumble,
+    );
+
+// typedef bool (SDLCALL *SDL_VirtualJoystickDescRumbleTriggers)(void *userdata, Uint16 left_rumble, Uint16 right_rumble)
+typedef SdlVirtualJoystickDescRumbleTriggersDart =
+    bool Function(Pointer<Void> userdata, int leftRumble, int rightRumble);
+typedef SdlVirtualJoystickDescRumbleTriggers =
+    Bool Function(
+      Pointer<Void> userdata,
+      Uint16 leftRumble,
+      Uint16 rightRumble,
+    );
+
+// typedef bool (SDLCALL *SDL_VirtualJoystickDescSetLed)(void *userdata, Uint8 red, Uint8 green, Uint8 blue)
+typedef SdlVirtualJoystickDescSetLedDart =
+    bool Function(Pointer<Void> userdata, int red, int green, int blue);
+typedef SdlVirtualJoystickDescSetLed =
+    Bool Function(Pointer<Void> userdata, Uint8 red, Uint8 green, Uint8 blue);
+
+// typedef bool (SDLCALL *SDL_VirtualJoystickDescSendEffect)(void *userdata, const void *data, int size)
+typedef SdlVirtualJoystickDescSendEffectDart =
+    bool Function(Pointer<Void> userdata, Pointer<Void> data, int size);
+typedef SdlVirtualJoystickDescSendEffect =
+    Bool Function(Pointer<Void> userdata, Pointer<Void> data, Int32 size);
+
+// typedef bool (SDLCALL *SDL_VirtualJoystickDescSetSensorsEnabled)(void *userdata, bool enabled)
+typedef SdlVirtualJoystickDescSetSensorsEnabledDart =
+    bool Function(Pointer<Void> userdata, bool enabled);
+typedef SdlVirtualJoystickDescSetSensorsEnabled =
+    Bool Function(Pointer<Void> userdata, Bool enabled);
+
+// typedef void (SDLCALL *SDL_VirtualJoystickDescCleanup)(void *userdata)
+typedef SdlVirtualJoystickDescCleanupDart =
+    void Function(Pointer<Void> userdata);
+typedef SdlVirtualJoystickDescCleanup = Void Function(Pointer<Void> userdata);
+
 // typedef void (SDLCALL *SDL_LogOutputFunction)(void *userdata, int category, SDL_LogPriority priority, const char *message)
 typedef SdlLogOutputFunctionDart =
     void Function(
@@ -232,6 +342,122 @@ typedef SdlCompareCallbackR =
 // typedef void (*SDL_FunctionPointer)(void)
 typedef SdlFunctionPointerDart = void Function();
 typedef SdlFunctionPointer = Void Function();
+
+// typedef bool (SDLCALL *SDL_StorageInterfaceClose)(void *userdata)
+typedef SdlStorageInterfaceCloseDart = bool Function(Pointer<Void> userdata);
+typedef SdlStorageInterfaceClose = Bool Function(Pointer<Void> userdata);
+
+// typedef bool (SDLCALL *SDL_StorageInterfaceReady)(void *userdata)
+typedef SdlStorageInterfaceReadyDart = bool Function(Pointer<Void> userdata);
+typedef SdlStorageInterfaceReady = Bool Function(Pointer<Void> userdata);
+
+// typedef bool (SDLCALL *SDL_StorageInterfaceEnumerate)(void *userdata, const char *path, SDL_EnumerateDirectoryCallback callback, void *callback_userdata)
+typedef SdlStorageInterfaceEnumerateDart =
+    bool Function(
+      Pointer<Void> userdata,
+      Pointer<Utf8> path,
+      Pointer<NativeFunction<SdlEnumerateDirectoryCallback>> callback,
+      Pointer<Void> callbackUserdata,
+    );
+typedef SdlStorageInterfaceEnumerate =
+    Bool Function(
+      Pointer<Void> userdata,
+      Pointer<Utf8> path,
+      Pointer<NativeFunction<SdlEnumerateDirectoryCallback>> callback,
+      Pointer<Void> callbackUserdata,
+    );
+
+// typedef bool (SDLCALL *SDL_StorageInterfaceInfo)(void *userdata, const char *path, SDL_PathInfo *SDL_StorageInterfaceInfo)
+typedef SdlStorageInterfaceInfoDart =
+    bool Function(
+      Pointer<Void> userdata,
+      Pointer<Utf8> path,
+      Pointer<SdlPathInfo> sdlStorageInterfaceInfo,
+    );
+typedef SdlStorageInterfaceInfo =
+    Bool Function(
+      Pointer<Void> userdata,
+      Pointer<Utf8> path,
+      Pointer<SdlPathInfo> sdlStorageInterfaceInfo,
+    );
+
+// typedef bool (SDLCALL *SDL_StorageInterfaceReadFile)(void *userdata, const char *path, void *destination, Uint64 length)
+typedef SdlStorageInterfaceReadFileDart =
+    bool Function(
+      Pointer<Void> userdata,
+      Pointer<Utf8> path,
+      Pointer<Void> destination,
+      int length,
+    );
+typedef SdlStorageInterfaceReadFile =
+    Bool Function(
+      Pointer<Void> userdata,
+      Pointer<Utf8> path,
+      Pointer<Void> destination,
+      Uint64 length,
+    );
+
+// typedef bool (SDLCALL *SDL_StorageInterfaceWriteFile)(void *userdata, const char *path, const void *source, Uint64 length)
+typedef SdlStorageInterfaceWriteFileDart =
+    bool Function(
+      Pointer<Void> userdata,
+      Pointer<Utf8> path,
+      Pointer<Void> source,
+      int length,
+    );
+typedef SdlStorageInterfaceWriteFile =
+    Bool Function(
+      Pointer<Void> userdata,
+      Pointer<Utf8> path,
+      Pointer<Void> source,
+      Uint64 length,
+    );
+
+// typedef bool (SDLCALL *SDL_StorageInterfaceMkdir)(void *userdata, const char *path)
+typedef SdlStorageInterfaceMkdirDart =
+    bool Function(Pointer<Void> userdata, Pointer<Utf8> path);
+typedef SdlStorageInterfaceMkdir =
+    Bool Function(Pointer<Void> userdata, Pointer<Utf8> path);
+
+// typedef bool (SDLCALL *SDL_StorageInterfaceRemove)(void *userdata, const char *path)
+typedef SdlStorageInterfaceRemoveDart =
+    bool Function(Pointer<Void> userdata, Pointer<Utf8> path);
+typedef SdlStorageInterfaceRemove =
+    Bool Function(Pointer<Void> userdata, Pointer<Utf8> path);
+
+// typedef bool (SDLCALL *SDL_StorageInterfaceRename)(void *userdata, const char *oldpath, const char *newpath)
+typedef SdlStorageInterfaceRenameDart =
+    bool Function(
+      Pointer<Void> userdata,
+      Pointer<Utf8> oldpath,
+      Pointer<Utf8> newpath,
+    );
+typedef SdlStorageInterfaceRename =
+    Bool Function(
+      Pointer<Void> userdata,
+      Pointer<Utf8> oldpath,
+      Pointer<Utf8> newpath,
+    );
+
+// typedef bool (SDLCALL *SDL_StorageInterfaceCopy)(void *userdata, const char *oldpath, const char *newpath)
+typedef SdlStorageInterfaceCopyDart =
+    bool Function(
+      Pointer<Void> userdata,
+      Pointer<Utf8> oldpath,
+      Pointer<Utf8> newpath,
+    );
+typedef SdlStorageInterfaceCopy =
+    Bool Function(
+      Pointer<Void> userdata,
+      Pointer<Utf8> oldpath,
+      Pointer<Utf8> newpath,
+    );
+
+// typedef Uint64 (SDLCALL *SDL_StorageInterfaceSpaceRemaining)(void *userdata)
+typedef SdlStorageInterfaceSpaceRemainingDart =
+    int Function(Pointer<Void> userdata);
+typedef SdlStorageInterfaceSpaceRemaining =
+    Uint64 Function(Pointer<Void> userdata);
 
 // typedef bool (SDLCALL *SDL_WindowsMessageHook)(void *userdata, MSG *msg)
 typedef SdlWindowsMessageHookDart =

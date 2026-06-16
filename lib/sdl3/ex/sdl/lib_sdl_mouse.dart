@@ -25,15 +25,16 @@ part of '../../sdl.dart';
 /// extern SDL_DECLSPEC SDL_MouseID * SDLCALL SDL_GetMice(int *count)
 /// ```
 /// {@category mouse}
-List<int>? sdlxGetMice() {
+List<int> sdlxGetMice() {
+  final result = <int>[];
   final countPointer = ffi.calloc<Int32>();
-  final resultPointer = sdlGetMice(countPointer);
-  if (resultPointer == nullptr) {
-    countPointer.callocFree();
-    return null;
+  final micePointer = sdlGetMice(countPointer);
+  if (micePointer != nullptr) {
+    for (var i = 0; i < countPointer.value; i++) {
+      result.add(micePointer[i]);
+    }
+    sdlFree(micePointer.cast<Void>());
   }
-  final count = countPointer.value;
-  final result = resultPointer.asTypedList(count);
   countPointer.callocFree();
   return result;
 }

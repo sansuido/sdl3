@@ -836,6 +836,25 @@ final class SdlCameraDeviceEvent extends Struct {
   external int which;
 }
 
+// SDL_NotificationEvent
+/// {@category events}
+final class SdlNotificationEvent extends Struct {
+  // [0]+(4)
+  @Int32()
+  external int type;
+  // [4]+(4)
+  @Uint32()
+  external int reserved;
+  // [8]+(8)
+  @Uint64()
+  external int timestamp;
+  // [16]+(4)
+  @Uint32()
+  external int which;
+  // [24]+(8)
+  external Pointer<Utf8> actionId;
+}
+
 // SDL_RenderEvent
 /// {@category events}
 final class SdlRenderEvent extends Struct {
@@ -1259,6 +1278,8 @@ final class SdlEvent extends Union {
   external SdlDropEvent drop;
   // [0]+(32)
   external SdlClipboardEvent clipboard;
+  // [0]+(32)
+  external SdlNotificationEvent notification;
   // [0]+(1*128)
   @Array(128)
   external Array<Uint8> padding;
@@ -1288,9 +1309,9 @@ final class SdlPathInfo extends Struct {
 /// {@category gamepad}
 final class SdlGamepad extends Opaque {}
 
-// SDL_GamepadBinding
+// SDL_GamepadBindingInputAxis
 /// {@category gamepad}
-final class SdlGamepadBinding extends Struct {
+final class SdlGamepadBindingInputAxis extends Struct {
   // [0]+(4)
   @Int32()
   external int axis;
@@ -1300,8 +1321,68 @@ final class SdlGamepadBinding extends Struct {
   // [8]+(4)
   @Int32()
   external int axisMax;
-  // [16]+(8)
-  external Pointer<Void> output;
+}
+
+// SDL_GamepadBindingInputHat
+/// {@category gamepad}
+final class SdlGamepadBindingInputHat extends Struct {
+  // [0]+(4)
+  @Int32()
+  external int hat;
+  // [4]+(4)
+  @Int32()
+  external int hatMask;
+}
+
+// SDL_GamepadBindingInput
+/// {@category gamepad}
+final class SdlGamepadBindingInput extends Union {
+  // [0]+(4)
+  @Int32()
+  external int button;
+  // [0]+(12)
+  external SdlGamepadBindingInputAxis axis;
+  // [0]+(8)
+  external SdlGamepadBindingInputHat hat;
+}
+
+// SDL_GamepadBindingOutputAxis
+/// {@category gamepad}
+final class SdlGamepadBindingOutputAxis extends Struct {
+  // [0]+(4)
+  @Int32()
+  external int axis;
+  // [4]+(4)
+  @Int32()
+  external int axisMin;
+  // [8]+(4)
+  @Int32()
+  external int axisMax;
+}
+
+// SDL_GamepadBindingOutput
+/// {@category gamepad}
+final class SdlGamepadBindingOutput extends Union {
+  // [0]+(4)
+  @Int32()
+  external int button;
+  // [0]+(12)
+  external SdlGamepadBindingOutputAxis axis;
+}
+
+// SDL_GamepadBinding
+/// {@category gamepad}
+final class SdlGamepadBinding extends Struct {
+  // [0]+(4)
+  @Int32()
+  external int inputType;
+  // [4]+(12)
+  external SdlGamepadBindingInput input;
+  // [16]+(4)
+  @Int32()
+  external int outputType;
+  // [20]+(12)
+  external SdlGamepadBindingOutput output;
 }
 
 // SDL_GPUDevice
@@ -2522,17 +2603,17 @@ final class SdlIoStreamInterface extends Struct {
   @Uint32()
   external int version;
   // [8]+(8)
-  external Pointer<Void> size;
+  external Pointer<NativeFunction<SdlIoStreamInterfaceSize>> size;
   // [16]+(8)
-  external Pointer<Void> seek;
+  external Pointer<NativeFunction<SdlIoStreamInterfaceSeek>> seek;
   // [24]+(8)
-  external Pointer<Void> read;
+  external Pointer<NativeFunction<SdlIoStreamInterfaceRead>> read;
   // [32]+(8)
-  external Pointer<Void> write;
+  external Pointer<NativeFunction<SdlIoStreamInterfaceWrite>> write;
   // [40]+(8)
-  external Pointer<Void> flush;
+  external Pointer<NativeFunction<SdlIoStreamInterfaceFlush>> flush;
   // [48]+(8)
-  external Pointer<Void> close;
+  external Pointer<NativeFunction<SdlIoStreamInterfaceClose>> close;
 }
 
 // SDL_IOStream
@@ -2619,21 +2700,24 @@ final class SdlVirtualJoystickDesc extends Struct {
   // [64]+(8)
   external Pointer<Void> userdata;
   // [72]+(8)
-  external Pointer<Void> update;
+  external Pointer<NativeFunction<SdlVirtualJoystickDescUpdate>> update;
   // [80]+(8)
-  external Pointer<Void> setPlayerIndex;
+  external Pointer<NativeFunction<SdlVirtualJoystickDescSetPlayerIndex>>
+  setPlayerIndex;
   // [88]+(8)
-  external Pointer<Void> rumble;
+  external Pointer<NativeFunction<SdlVirtualJoystickDescRumble>> rumble;
   // [96]+(8)
-  external Pointer<Void> rumbleTriggers;
+  external Pointer<NativeFunction<SdlVirtualJoystickDescRumbleTriggers>>
+  rumbleTriggers;
   // [104]+(8)
-  external Pointer<Void> setLed;
+  external Pointer<NativeFunction<SdlVirtualJoystickDescSetLed>> setLed;
   // [112]+(8)
-  external Pointer<Void> sendEffect;
+  external Pointer<NativeFunction<SdlVirtualJoystickDescSendEffect>> sendEffect;
   // [120]+(8)
-  external Pointer<Void> setSensorsEnabled;
+  external Pointer<NativeFunction<SdlVirtualJoystickDescSetSensorsEnabled>>
+  setSensorsEnabled;
   // [128]+(8)
-  external Pointer<Void> cleanup;
+  external Pointer<NativeFunction<SdlVirtualJoystickDescCleanup>> cleanup;
 }
 
 // SDL_SharedObject
@@ -2749,6 +2833,31 @@ final class SdlInitState extends Struct {
   external int thread;
   // [16]+(8)
   external Pointer<Void> reserved;
+}
+
+// SDL_NotificationActionButton
+/// {@category notification}
+final class SdlNotificationActionButton extends Struct {
+  // [0]+(4)
+  @Int32()
+  external int type;
+  // [8]+(8)
+  external Pointer<Utf8> actionId;
+  // [16]+(8)
+  external Pointer<Utf8> actionLabel;
+}
+
+// SDL_NotificationAction
+/// {@category notification}
+final class SdlNotificationAction extends Union {
+  // [0]+(4)
+  @Int32()
+  external int type;
+  // [0]+(24)
+  external SdlNotificationActionButton button;
+  // [0]+(1*128)
+  @Array(128)
+  external Array<Uint8> padding;
 }
 
 // XrSessionCreateInfo
@@ -3024,27 +3133,28 @@ final class SdlStorageInterface extends Struct {
   @Uint32()
   external int version;
   // [8]+(8)
-  external Pointer<Void> close;
+  external Pointer<NativeFunction<SdlStorageInterfaceClose>> close;
   // [16]+(8)
-  external Pointer<Void> ready;
+  external Pointer<NativeFunction<SdlStorageInterfaceReady>> ready;
   // [24]+(8)
-  external Pointer<Void> enumerate;
+  external Pointer<NativeFunction<SdlStorageInterfaceEnumerate>> enumerate;
   // [32]+(8)
-  external Pointer<Void> info;
+  external Pointer<NativeFunction<SdlStorageInterfaceInfo>> info;
   // [40]+(8)
-  external Pointer<Void> readFile;
+  external Pointer<NativeFunction<SdlStorageInterfaceReadFile>> readFile;
   // [48]+(8)
-  external Pointer<Void> writeFile;
+  external Pointer<NativeFunction<SdlStorageInterfaceWriteFile>> writeFile;
   // [56]+(8)
-  external Pointer<Void> mkdir;
+  external Pointer<NativeFunction<SdlStorageInterfaceMkdir>> mkdir;
   // [64]+(8)
-  external Pointer<Void> remove;
+  external Pointer<NativeFunction<SdlStorageInterfaceRemove>> remove;
   // [72]+(8)
-  external Pointer<Void> rename;
+  external Pointer<NativeFunction<SdlStorageInterfaceRename>> rename;
   // [80]+(8)
-  external Pointer<Void> copy;
+  external Pointer<NativeFunction<SdlStorageInterfaceCopy>> copy;
   // [88]+(8)
-  external Pointer<Void> spaceRemaining;
+  external Pointer<NativeFunction<SdlStorageInterfaceSpaceRemaining>>
+  spaceRemaining;
 }
 
 // SDL_Storage
