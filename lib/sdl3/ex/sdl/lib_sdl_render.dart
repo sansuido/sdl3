@@ -862,6 +862,57 @@ bool sdlxRenderCoordinatesToWindow(
 }
 
 ///
+/// Convert the coordinates in an event to render coordinates.
+///
+/// This takes into account several states:
+///
+/// - The window dimensions.
+/// - The logical presentation settings (SDL_SetRenderLogicalPresentation)
+/// - The scale (SDL_SetRenderScale)
+/// - The viewport (SDL_SetRenderViewport)
+///
+/// Various event types are converted with this function: mouse, touch, pen,
+/// etc.
+///
+/// Touch coordinates are converted from normalized coordinates in the window
+/// to non-normalized rendering coordinates.
+///
+/// Relative mouse coordinates (xrel and yrel event fields) are _also_
+/// converted. Applications that do not want these fields converted should use
+/// SDL_RenderCoordinatesFromWindow() on the specific event fields instead of
+/// converting the entire event structure.
+///
+/// Once converted, coordinates may be outside the rendering area.
+///
+/// \param renderer the rendering context.
+/// \param event the event to modify.
+/// \returns true if the event is converted or doesn't need conversion, or
+/// false on failure; call SDL_GetError() for more information.
+///
+/// \threadsafety This function should only be called on the main thread.
+///
+/// \since This function is available since SDL 3.2.0.
+///
+/// \sa SDL_RenderCoordinatesFromWindow
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL SDL_ConvertEventToRenderCoordinates(SDL_Renderer *renderer, SDL_Event *event)
+/// ```
+/// {@category render}
+bool sdlxConvertEventToRenderCoordinates(
+  Pointer<SdlRenderer> renderer,
+  SdlxEvent event,
+) {
+  final eventPointer = event.calloc();
+  final result = sdlConvertEventToRenderCoordinates(renderer, eventPointer);
+  if (result) {
+    event.loadFromPointer(eventPointer);
+  }
+  eventPointer.callocAllFree();
+  return result;
+}
+
+///
 /// Set the drawing area for rendering on the current target.
 ///
 /// Drawing will clip to this area (separately from any clipping done with

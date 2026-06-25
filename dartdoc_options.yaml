@@ -79,6 +79,8 @@ dartdoc:
       markdown: doc/mutex.md
     'net':
       markdown: doc/net.md
+    'notification':
+      markdown: doc/notification.md
     'opengl':
       markdown: doc/opengl.md
     'opengl_glext':
@@ -176,10 +178,11 @@ dartdoc:
     'misc',
     'mouse',
     'mutex',
-    'pen',
+    'notification',
     'opengl',
     'opengl_glext',
     'openxr',
+    'pen',
     'pixels',
     'platform',
     'power',

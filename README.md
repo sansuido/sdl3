@@ -104,7 +104,7 @@ yamahara
 - [ ] lib_sdl_atomic.dart
 - [x] [lib_sdl_audio.dart](./lib/sdl3/ex/sdl/lib_sdl_audio.dart)
 - [x] ~~lib_sdl_blendmode.dart~~
-- [ ] lib_sdl_camera.dart
+- [x] [lib_sdl_camera.dart](./lib/sdl3/ex/sdl/lib_sdl_camera.dart)
 - [x] [lib_sdl_clipboard.dart](./lib/sdl3/ex/sdl/lib_sdl_clipboard.dart)
 - [x] ~~lib_sdl_cpuinfo.dart~~
 - [x] [lib_sdl_dialog.dart](./lib/sdl3/ex/sdl/lib_sdl_dialog.dart)

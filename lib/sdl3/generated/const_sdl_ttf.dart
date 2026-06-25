@@ -2,6 +2,10 @@
 // ignore_for_file: constant_identifier_names, specify_nonobvious_property_types
 part of '../sdl_ttf.dart';
 
+//const SDL_TTF_TEXTENGINE_H_ = ;
+const TTF_DRAW_COMMAND_NOOP = 0;
+const TTF_DRAW_COMMAND_FILL = 1;
+const TTF_DRAW_COMMAND_COPY = 2;
 //const SDL_TTF_H_ = ;
 const SDL_TTF_MAJOR_VERSION = 3;
 const SDL_TTF_MINOR_VERSION = 3;
@@ -69,6 +73,11 @@ const TTF_PROP_GPU_TEXT_ENGINE_ATLAS_TEXTURE_SIZE_NUMBER =
 const TTF_GPU_TEXTENGINE_WINDING_INVALID = -1;
 const TTF_GPU_TEXTENGINE_WINDING_CLOCKWISE = -1 + 1;
 const TTF_GPU_TEXTENGINE_WINDING_COUNTER_CLOCKWISE = -1 + 2;
+const TTF_PROP_GL_TEXT_ENGINE_ATLAS_TEXTURE_SIZE_NUMBER =
+    'SDL_ttf.gl_text_engine.create.atlas_texture_size';
+const TTF_GL_TEXTENGINE_WINDING_INVALID = -1;
+const TTF_GL_TEXTENGINE_WINDING_CLOCKWISE = -1 + 1;
+const TTF_GL_TEXTENGINE_WINDING_COUNTER_CLOCKWISE = -1 + 2;
 const TTF_SUBSTRING_DIRECTION_MASK = 0x000000FF;
 const TTF_SUBSTRING_TEXT_START = 0x00000100;
 const TTF_SUBSTRING_LINE_START = 0x00000200;
@@ -185,6 +194,8 @@ class TtfkProp {
       TTF_PROP_GPU_TEXT_ENGINE_DEVICE_POINTER;
   static const gpuTextEngineAtlasTextureSizeNumber =
       TTF_PROP_GPU_TEXT_ENGINE_ATLAS_TEXTURE_SIZE_NUMBER;
+  static const glTextEngineAtlasTextureSizeNumber =
+      TTF_PROP_GL_TEXT_ENGINE_ATLAS_TEXTURE_SIZE_NUMBER;
 }
 
 /// {@category ttf}

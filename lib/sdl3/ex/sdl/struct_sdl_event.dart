@@ -12,6 +12,10 @@ class SdlxEvent {
     return pointer;
   }
 
+  bool isTargetWindow(int targetId, {bool ifNoWindow = true}) => ifNoWindow;
+
+  void loadFromPointer(Pointer<SdlEvent> pointer) {}
+
   static SdlxEvent fromPointer(Pointer<SdlEvent> pointer) {
     if (pointer.ref.type >= SDL_EVENT_DISPLAY_FIRST &&
         pointer.ref.type <= SDL_EVENT_DISPLAY_LAST) {
@@ -149,6 +153,7 @@ class SdlxCommonEvent extends SdlxEvent {
     return pointer;
   }
 
+  @override
   void loadFromPointer(Pointer<SdlEvent> pointer) {
     type = pointer.ref.common.type;
     reserved = pointer.ref.common.reserved;
@@ -185,6 +190,7 @@ class SdlxDisplayEvent extends SdlxEvent {
     return pointer;
   }
 
+  @override
   void loadFromPointer(Pointer<SdlEvent> pointer) {
     type = pointer.ref.display.type;
     reserved = pointer.ref.display.reserved;
@@ -213,6 +219,10 @@ class SdlxWindowEvent extends SdlxEvent {
   int data2;
 
   @override
+  bool isTargetWindow(int targetId, {bool ifNoWindow = true}) =>
+      windowId == targetId;
+
+  @override
   Pointer<SdlEvent> calloc() {
     final pointer = ffi.calloc<SdlEvent>();
     pointer.ref.window.type = type;
@@ -224,6 +234,7 @@ class SdlxWindowEvent extends SdlxEvent {
     return pointer;
   }
 
+  @override
   void loadFromPointer(Pointer<SdlEvent> pointer) {
     type = pointer.ref.window.type;
     reserved = pointer.ref.window.reserved;
@@ -278,6 +289,7 @@ class SdlxKeyboardDeviceEvent extends SdlxEvent {
     return pointer;
   }
 
+  @override
   void loadFromPointer(Pointer<SdlEvent> pointer) {
     type = pointer.ref.kdevice.type;
     reserved = pointer.ref.kdevice.reserved;
@@ -364,6 +376,10 @@ class SdlxKeyboardEvent extends SdlxEvent {
   bool repeat;
 
   @override
+  bool isTargetWindow(int targetId, {bool ifNoWindow = true}) =>
+      windowId == targetId;
+
+  @override
   Pointer<SdlEvent> calloc() {
     final pointer = ffi.calloc<SdlEvent>();
     pointer.ref.key.type = type;
@@ -380,6 +396,7 @@ class SdlxKeyboardEvent extends SdlxEvent {
     return pointer;
   }
 
+  @override
   void loadFromPointer(Pointer<SdlEvent> pointer) {
     type = pointer.ref.key.type;
     reserved = pointer.ref.key.reserved;
@@ -415,6 +432,10 @@ class SdlxTextEditingEvent extends SdlxEvent {
   int length;
 
   @override
+  bool isTargetWindow(int targetId, {bool ifNoWindow = true}) =>
+      windowId == targetId;
+
+  @override
   Pointer<SdlEvent> calloc() {
     final pointer = ffi.calloc<SdlEvent>();
     pointer.ref.edit.type = type;
@@ -429,6 +450,7 @@ class SdlxTextEditingEvent extends SdlxEvent {
     return pointer;
   }
 
+  @override
   void loadFromPointer(Pointer<SdlEvent> pointer) {
     type = pointer.ref.edit.type;
     reserved = pointer.ref.edit.reserved;
@@ -463,6 +485,10 @@ class SdlxTextEditingCandidatesEvent extends SdlxEvent {
   bool horizontal;
 
   @override
+  bool isTargetWindow(int targetId, {bool ifNoWindow = true}) =>
+      windowId == targetId;
+
+  @override
   Pointer<SdlEvent> calloc() {
     final pointer = ffi.calloc<SdlEvent>();
     pointer.ref.editCandidates.type = type;
@@ -482,6 +508,7 @@ class SdlxTextEditingCandidatesEvent extends SdlxEvent {
     return pointer;
   }
 
+  @override
   void loadFromPointer(Pointer<SdlEvent> pointer) {
     type = pointer.ref.editCandidates.type;
     reserved = pointer.ref.editCandidates.reserved;
@@ -516,6 +543,10 @@ class SdlxTextInputEvent extends SdlxEvent {
   String text;
 
   @override
+  bool isTargetWindow(int targetId, {bool ifNoWindow = true}) =>
+      windowId == targetId;
+
+  @override
   Pointer<SdlEvent> calloc() {
     final pointer = ffi.calloc<SdlEvent>();
     pointer.ref.text.type = type;
@@ -528,6 +559,7 @@ class SdlxTextInputEvent extends SdlxEvent {
     return pointer;
   }
 
+  @override
   void loadFromPointer(Pointer<SdlEvent> pointer) {
     type = pointer.ref.text.type;
     reserved = pointer.ref.text.reserved;
@@ -584,6 +616,7 @@ class SdlxMouseDeviceEvent extends SdlxEvent {
     return pointer;
   }
 
+  @override
   void loadFromPointer(Pointer<SdlEvent> pointer) {
     type = pointer.ref.mdevice.type;
     reserved = pointer.ref.mdevice.reserved;
@@ -618,6 +651,10 @@ class SdlxMouseMotionEvent extends SdlxEvent {
   double yrel;
 
   @override
+  bool isTargetWindow(int targetId, {bool ifNoWindow = true}) =>
+      windowId == targetId;
+
+  @override
   Pointer<SdlEvent> calloc() {
     final pointer = ffi.calloc<SdlEvent>();
     pointer.ref.motion.type = type;
@@ -633,6 +670,7 @@ class SdlxMouseMotionEvent extends SdlxEvent {
     return pointer;
   }
 
+  @override
   void loadFromPointer(Pointer<SdlEvent> pointer) {
     type = pointer.ref.motion.type;
     reserved = pointer.ref.motion.reserved;
@@ -719,6 +757,10 @@ class SdlxMouseButtonEvent extends SdlxEvent {
   double y;
 
   @override
+  bool isTargetWindow(int targetId, {bool ifNoWindow = true}) =>
+      windowId == targetId;
+
+  @override
   Pointer<SdlEvent> calloc() {
     final pointer = ffi.calloc<SdlEvent>();
     pointer.ref.button.type = type;
@@ -734,6 +776,7 @@ class SdlxMouseButtonEvent extends SdlxEvent {
     return pointer;
   }
 
+  @override
   void loadFromPointer(Pointer<SdlEvent> pointer) {
     type = pointer.ref.button.type;
     reserved = pointer.ref.button.reserved;
@@ -778,6 +821,10 @@ class SdlxMouseWheelEvent extends SdlxEvent {
   int integerY;
 
   @override
+  bool isTargetWindow(int targetId, {bool ifNoWindow = true}) =>
+      windowId == targetId;
+
+  @override
   Pointer<SdlEvent> calloc() {
     final pointer = ffi.calloc<SdlEvent>();
     pointer.ref.wheel.type = type;
@@ -795,6 +842,7 @@ class SdlxMouseWheelEvent extends SdlxEvent {
     return pointer;
   }
 
+  @override
   void loadFromPointer(Pointer<SdlEvent> pointer) {
     type = pointer.ref.wheel.type;
     reserved = pointer.ref.wheel.reserved;
@@ -840,6 +888,7 @@ class SdlxJoyAxisEvent extends SdlxEvent {
     return pointer;
   }
 
+  @override
   void loadFromPointer(Pointer<SdlEvent> pointer) {
     type = pointer.ref.jaxis.type;
     reserved = pointer.ref.jaxis.reserved;
@@ -882,6 +931,7 @@ class SdlxJoyBallEvent extends SdlxEvent {
     return pointer;
   }
 
+  @override
   void loadFromPointer(Pointer<SdlEvent> pointer) {
     type = pointer.ref.jball.type;
     reserved = pointer.ref.jball.reserved;
@@ -922,6 +972,7 @@ class SdlxJoyHatEvent extends SdlxEvent {
     return pointer;
   }
 
+  @override
   void loadFromPointer(Pointer<SdlEvent> pointer) {
     type = pointer.ref.jhat.type;
     reserved = pointer.ref.jhat.reserved;
@@ -991,6 +1042,7 @@ class SdlxJoyButtonEvent extends SdlxEvent {
     return pointer;
   }
 
+  @override
   void loadFromPointer(Pointer<SdlEvent> pointer) {
     type = pointer.ref.jbutton.type;
     reserved = pointer.ref.jbutton.reserved;
@@ -1057,6 +1109,7 @@ class SdlxJoyDeviceEvent extends SdlxEvent {
     return pointer;
   }
 
+  @override
   void loadFromPointer(Pointer<SdlEvent> pointer) {
     type = pointer.ref.jdevice.type;
     reserved = pointer.ref.jdevice.reserved;
@@ -1094,6 +1147,7 @@ class SdlxJoyBatteryEvent extends SdlxEvent {
     return pointer;
   }
 
+  @override
   void loadFromPointer(Pointer<SdlEvent> pointer) {
     type = pointer.ref.jbattery.type;
     reserved = pointer.ref.jbattery.reserved;
@@ -1133,6 +1187,7 @@ class SdlxGamepadAxisEvent extends SdlxEvent {
     return pointer;
   }
 
+  @override
   void loadFromPointer(Pointer<SdlEvent> pointer) {
     type = pointer.ref.gaxis.type;
     reserved = pointer.ref.gaxis.reserved;
@@ -1202,6 +1257,7 @@ class SdlxGamepadButtonEvent extends SdlxEvent {
     return pointer;
   }
 
+  @override
   void loadFromPointer(Pointer<SdlEvent> pointer) {
     type = pointer.ref.gbutton.type;
     reserved = pointer.ref.gbutton.reserved;
@@ -1290,6 +1346,7 @@ class SdlxGamepadDeviceEvent extends SdlxEvent {
     return pointer;
   }
 
+  @override
   void loadFromPointer(Pointer<SdlEvent> pointer) {
     type = pointer.ref.gdevice.type;
     reserved = pointer.ref.gdevice.reserved;
@@ -1399,6 +1456,7 @@ class SdlxGamepadTouchpadEvent extends SdlxEvent {
     return pointer;
   }
 
+  @override
   void loadFromPointer(Pointer<SdlEvent> pointer) {
     type = pointer.ref.gtouchpad.type;
     reserved = pointer.ref.gtouchpad.reserved;
@@ -1451,6 +1509,7 @@ class SdlxGamepadSensorEvent extends SdlxEvent {
     return pointer;
   }
 
+  @override
   void loadFromPointer(Pointer<SdlEvent> pointer) {
     type = pointer.ref.gsensor.type;
     reserved = pointer.ref.gsensor.reserved;
@@ -1523,6 +1582,7 @@ class SdlxGamepadCapSenseEvent extends SdlxEvent {
     return pointer;
   }
 
+  @override
   void loadFromPointer(Pointer<SdlEvent> pointer) {
     type = pointer.ref.gcapsense.type;
     reserved = pointer.ref.gcapsense.reserved;
@@ -1598,6 +1658,7 @@ class SdlxAudioDeviceEvent extends SdlxEvent {
     return pointer;
   }
 
+  @override
   void loadFromPointer(Pointer<SdlEvent> pointer) {
     type = pointer.ref.adevice.type;
     reserved = pointer.ref.adevice.reserved;
@@ -1674,6 +1735,7 @@ class SdlxCameraDeviceEvent extends SdlxEvent {
     return pointer;
   }
 
+  @override
   void loadFromPointer(Pointer<SdlEvent> pointer) {
     type = pointer.ref.cdevice.type;
     reserved = pointer.ref.cdevice.reserved;
@@ -1709,6 +1771,7 @@ class SdlxNotificationEvent extends SdlxEvent {
     return pointer;
   }
 
+  @override
   void loadFromPointer(Pointer<SdlEvent> pointer) {
     type = pointer.ref.notification.type;
     reserved = pointer.ref.notification.reserved;
@@ -1767,6 +1830,10 @@ class SdlxRenderEvent extends SdlxEvent {
   int windowId;
 
   @override
+  bool isTargetWindow(int targetId, {bool ifNoWindow = true}) =>
+      windowId == targetId;
+
+  @override
   Pointer<SdlEvent> calloc() {
     final pointer = ffi.calloc<SdlEvent>();
     pointer.ref.render.type = type;
@@ -1776,6 +1843,7 @@ class SdlxRenderEvent extends SdlxEvent {
     return pointer;
   }
 
+  @override
   void loadFromPointer(Pointer<SdlEvent> pointer) {
     type = pointer.ref.render.type;
     reserved = pointer.ref.render.reserved;
@@ -1912,6 +1980,10 @@ class SdlxTouchFingerEvent extends SdlxEvent {
   int windowId;
 
   @override
+  bool isTargetWindow(int targetId, {bool ifNoWindow = true}) =>
+      windowId == targetId;
+
+  @override
   Pointer<SdlEvent> calloc() {
     final pointer = ffi.calloc<SdlEvent>();
     pointer.ref.tfinger.type = type;
@@ -1928,6 +2000,7 @@ class SdlxTouchFingerEvent extends SdlxEvent {
     return pointer;
   }
 
+  @override
   void loadFromPointer(Pointer<SdlEvent> pointer) {
     type = pointer.ref.tfinger.type;
     reserved = pointer.ref.tfinger.reserved;
@@ -1998,6 +2071,10 @@ class SdlxPinchFingerEvent extends SdlxEvent {
   int windowId;
 
   @override
+  bool isTargetWindow(int targetId, {bool ifNoWindow = true}) =>
+      windowId == targetId;
+
+  @override
   Pointer<SdlEvent> calloc() {
     final pointer = ffi.calloc<SdlEvent>();
     pointer.ref.pinch.type = type;
@@ -2008,6 +2085,7 @@ class SdlxPinchFingerEvent extends SdlxEvent {
     return pointer;
   }
 
+  @override
   void loadFromPointer(Pointer<SdlEvent> pointer) {
     type = pointer.ref.pinch.type;
     reserved = pointer.ref.pinch.reserved;
@@ -2059,6 +2137,10 @@ class SdlxPenProximityEvent extends SdlxEvent {
   int which;
 
   @override
+  bool isTargetWindow(int targetId, {bool ifNoWindow = true}) =>
+      windowId == targetId;
+
+  @override
   Pointer<SdlEvent> calloc() {
     final pointer = ffi.calloc<SdlEvent>();
     pointer.ref.pproximity.type = type;
@@ -2069,6 +2151,7 @@ class SdlxPenProximityEvent extends SdlxEvent {
     return pointer;
   }
 
+  @override
   void loadFromPointer(Pointer<SdlEvent> pointer) {
     type = pointer.ref.pproximity.type;
     reserved = pointer.ref.pproximity.reserved;
@@ -2099,6 +2182,10 @@ class SdlxPenMotionEvent extends SdlxEvent {
   double y;
 
   @override
+  bool isTargetWindow(int targetId, {bool ifNoWindow = true}) =>
+      windowId == targetId;
+
+  @override
   Pointer<SdlEvent> calloc() {
     final pointer = ffi.calloc<SdlEvent>();
     pointer.ref.pmotion.type = type;
@@ -2112,6 +2199,7 @@ class SdlxPenMotionEvent extends SdlxEvent {
     return pointer;
   }
 
+  @override
   void loadFromPointer(Pointer<SdlEvent> pointer) {
     type = pointer.ref.pmotion.type;
     reserved = pointer.ref.pmotion.reserved;
@@ -2196,6 +2284,10 @@ class SdlxPenTouchEvent extends SdlxEvent {
   bool down;
 
   @override
+  bool isTargetWindow(int targetId, {bool ifNoWindow = true}) =>
+      windowId == targetId;
+
+  @override
   Pointer<SdlEvent> calloc() {
     final pointer = ffi.calloc<SdlEvent>();
     pointer.ref.ptouch.type = type;
@@ -2211,6 +2303,7 @@ class SdlxPenTouchEvent extends SdlxEvent {
     return pointer;
   }
 
+  @override
   void loadFromPointer(Pointer<SdlEvent> pointer) {
     type = pointer.ref.ptouch.type;
     reserved = pointer.ref.ptouch.reserved;
@@ -2297,6 +2390,10 @@ class SdlxPenButtonEvent extends SdlxEvent {
   bool down;
 
   @override
+  bool isTargetWindow(int targetId, {bool ifNoWindow = true}) =>
+      windowId == targetId;
+
+  @override
   Pointer<SdlEvent> calloc() {
     final pointer = ffi.calloc<SdlEvent>();
     pointer.ref.pbutton.type = type;
@@ -2312,6 +2409,7 @@ class SdlxPenButtonEvent extends SdlxEvent {
     return pointer;
   }
 
+  @override
   void loadFromPointer(Pointer<SdlEvent> pointer) {
     type = pointer.ref.pbutton.type;
     reserved = pointer.ref.pbutton.reserved;
@@ -2351,6 +2449,10 @@ class SdlxPenAxisEvent extends SdlxEvent {
   double value;
 
   @override
+  bool isTargetWindow(int targetId, {bool ifNoWindow = true}) =>
+      windowId == targetId;
+
+  @override
   Pointer<SdlEvent> calloc() {
     final pointer = ffi.calloc<SdlEvent>();
     pointer.ref.paxis.type = type;
@@ -2366,6 +2468,7 @@ class SdlxPenAxisEvent extends SdlxEvent {
     return pointer;
   }
 
+  @override
   void loadFromPointer(Pointer<SdlEvent> pointer) {
     type = pointer.ref.paxis.type;
     reserved = pointer.ref.paxis.reserved;
@@ -2497,6 +2600,10 @@ class SdlxDropEvent extends SdlxEvent {
   String data;
 
   @override
+  bool isTargetWindow(int targetId, {bool ifNoWindow = true}) =>
+      windowId == targetId;
+
+  @override
   Pointer<SdlEvent> calloc() {
     final pointer = ffi.calloc<SdlEvent>();
     pointer.ref.drop.type = type;
@@ -2514,6 +2621,7 @@ class SdlxDropEvent extends SdlxEvent {
     return pointer;
   }
 
+  @override
   void loadFromPointer(Pointer<SdlEvent> pointer) {
     type = pointer.ref.drop.type;
     reserved = pointer.ref.drop.reserved;
@@ -2564,6 +2672,7 @@ class SdlxClipboardEvent extends SdlxEvent {
     return pointer;
   }
 
+  @override
   void loadFromPointer(Pointer<SdlEvent> pointer) {
     type = pointer.ref.clipboard.type;
     reserved = pointer.ref.clipboard.reserved;
@@ -2627,6 +2736,7 @@ class SdlxSensorEvent extends SdlxEvent {
     return pointer;
   }
 
+  @override
   void loadFromPointer(Pointer<SdlEvent> pointer) {
     type = pointer.ref.sensor.type;
     reserved = pointer.ref.sensor.reserved;
@@ -2662,6 +2772,7 @@ class SdlxQuitEvent extends SdlxEvent {
     return pointer;
   }
 
+  @override
   void loadFromPointer(Pointer<SdlEvent> pointer) {
     type = pointer.ref.quit.type;
     reserved = pointer.ref.quit.reserved;
@@ -2692,6 +2803,10 @@ class SdlxUserEvent extends SdlxEvent {
   late Pointer<Void> data2;
 
   @override
+  bool isTargetWindow(int targetId, {bool ifNoWindow = true}) =>
+      windowId == targetId;
+
+  @override
   Pointer<SdlEvent> calloc() {
     final pointer = ffi.calloc<SdlEvent>();
     pointer.ref.user.type = type;
@@ -2704,6 +2819,7 @@ class SdlxUserEvent extends SdlxEvent {
     return pointer;
   }
 
+  @override
   void loadFromPointer(Pointer<SdlEvent> pointer) {
     type = pointer.ref.user.type;
     reserved = pointer.ref.user.reserved;

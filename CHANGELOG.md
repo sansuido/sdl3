@@ -1,4 +1,16 @@
 # Changelog
+
+## [2.9.2] - 2026-06-25
+- SDL3-2026-06-21
+### Added
+- Added `sdlxConvertEventToRenderCoordinates` function.
+- Added `isTargetWindow` helper to easily route events to specific windows.
+- Added functions and wrapper classes for the camera.
+- Added functions and wrapper classes for the ttf(TtfEngine, TtfText).
+- Added `example/ttf_text_engine_renderer_demo.dart`.
+### Updated
+- Dart 3.12.2
+
 ## [2.9.1] - 2026-06-16
 - SDL3-2026-06-14
 ### Changed

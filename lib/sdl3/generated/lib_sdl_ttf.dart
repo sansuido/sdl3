@@ -2,6 +2,18 @@
 // ignore_for_file: avoid_positional_boolean_parameters
 part of '../sdl_ttf.dart';
 
+// typedef bool (SDLCALL *TTF_TextEngineCreateText)(void *userdata, TTF_Text *text)
+typedef TtfTextEngineCreateTextDart =
+    bool Function(Pointer<Void> userdata, Pointer<TtfText> text);
+typedef TtfTextEngineCreateText =
+    Bool Function(Pointer<Void> userdata, Pointer<TtfText> text);
+
+// typedef void (SDLCALL *TTF_TextEngineDestroyText)(void *userdata, TTF_Text *text)
+typedef TtfTextEngineDestroyTextDart =
+    void Function(Pointer<Void> userdata, Pointer<TtfText> text);
+typedef TtfTextEngineDestroyText =
+    Void Function(Pointer<Void> userdata, Pointer<TtfText> text);
+
 ///
 /// This function gets the version of the dynamically linked SDL_ttf library.
 ///
@@ -3237,6 +3249,206 @@ int ttfGetGpuTextEngineWinding(Pointer<TtfTextEngine> engine) {
         int Function(Pointer<TtfTextEngine> engine)
       >('TTF_GetGPUTextEngineWinding');
   return ttfGetGpuTextEngineWindingLookupFunction(engine);
+}
+
+///
+/// Create a text engine for drawing text with OpenGL.
+///
+/// The caller is responsible for ensuring the correct OpenGL context is
+/// current when calling this function and when using the resulting text
+/// engine.
+///
+/// The GL text engine and all text created with it become invalid if the
+/// OpenGL context is destroyed. Destroy the engine before destroying the
+/// context.
+///
+/// \returns a TTF_TextEngine object or NULL on failure; call SDL_GetError()
+/// for more information.
+///
+/// \threadsafety This function should be called on the thread that created the
+/// OpenGL context.
+///
+/// \since This function is available since SDL_ttf 3.3.0.
+///
+/// \sa TTF_CreateGLTextEngineWithProperties
+/// \sa TTF_DestroyGLTextEngine
+/// \sa TTF_GetGLTextDrawData
+///
+/// ```c
+/// extern SDL_DECLSPEC TTF_TextEngine * SDLCALL TTF_CreateGLTextEngine(void)
+/// ```
+/// {@category ttf}
+Pointer<TtfTextEngine> ttfCreateGlTextEngine() {
+  final ttfCreateGlTextEngineLookupFunction = _libTtf
+      .lookupFunction<
+        Pointer<TtfTextEngine> Function(),
+        Pointer<TtfTextEngine> Function()
+      >('TTF_CreateGLTextEngine');
+  return ttfCreateGlTextEngineLookupFunction();
+}
+
+///
+/// Create a text engine for drawing text with OpenGL, with extra properties.
+///
+/// The caller is responsible for ensuring the correct OpenGL context is
+/// current when calling this function and when using the resulting text
+/// engine.
+///
+/// The following properties are supported:
+///
+/// - `TTF_PROP_GL_TEXT_ENGINE_ATLAS_TEXTURE_SIZE_NUMBER`: the size of the
+/// texture atlas in pixels, defaults to 1024.
+///
+/// \param props the properties to use.
+/// \returns a TTF_TextEngine object or NULL on failure; call SDL_GetError()
+/// for more information.
+///
+/// \threadsafety This function should be called on the thread that created the
+/// OpenGL context.
+///
+/// \since This function is available since SDL_ttf 3.3.0.
+///
+/// \sa TTF_CreateGLTextEngine
+/// \sa TTF_DestroyGLTextEngine
+/// \sa TTF_GetGLTextDrawData
+///
+/// ```c
+/// extern SDL_DECLSPEC TTF_TextEngine * SDLCALL TTF_CreateGLTextEngineWithProperties(SDL_PropertiesID props)
+/// ```
+/// {@category ttf}
+Pointer<TtfTextEngine> ttfCreateGlTextEngineWithProperties(int props) {
+  final ttfCreateGlTextEngineWithPropertiesLookupFunction = _libTtf
+      .lookupFunction<
+        Pointer<TtfTextEngine> Function(Uint32 props),
+        Pointer<TtfTextEngine> Function(int props)
+      >('TTF_CreateGLTextEngineWithProperties');
+  return ttfCreateGlTextEngineWithPropertiesLookupFunction(props);
+}
+
+///
+/// Get the geometry data needed for drawing the text.
+///
+/// `text` must have been created using a TTF_TextEngine from
+/// TTF_CreateGLTextEngine().
+///
+/// The positive X-axis is taken towards the right and the positive Y-axis is
+/// taken upwards for both the vertex and the texture coordinates, i.e, it
+/// follows the same convention used by the OpenGL API. If you want to use a
+/// different coordinate system you will need to transform the vertices
+/// yourself.
+///
+/// If the text looks blocky use linear filtering.
+///
+/// \param text the text to draw.
+/// \returns a NULL terminated linked list of TTF_GLAtlasDrawSequence objects
+/// or NULL if the passed text is empty or in case of failure; call
+/// SDL_GetError() for more information.
+///
+/// \threadsafety This function should be called on the thread that created the
+/// text.
+///
+/// \since This function is available since SDL_ttf 3.3.0.
+///
+/// \sa TTF_CreateGLTextEngine
+/// \sa TTF_CreateText
+///
+/// ```c
+/// extern SDL_DECLSPEC TTF_GLAtlasDrawSequence * SDLCALL TTF_GetGLTextDrawData(TTF_Text *text)
+/// ```
+/// {@category ttf}
+Pointer<TtfGlAtlasDrawSequence> ttfGetGlTextDrawData(Pointer<TtfText> text) {
+  final ttfGetGlTextDrawDataLookupFunction = _libTtf
+      .lookupFunction<
+        Pointer<TtfGlAtlasDrawSequence> Function(Pointer<TtfText> text),
+        Pointer<TtfGlAtlasDrawSequence> Function(Pointer<TtfText> text)
+      >('TTF_GetGLTextDrawData');
+  return ttfGetGlTextDrawDataLookupFunction(text);
+}
+
+///
+/// Destroy a text engine created for drawing text with OpenGL.
+///
+/// All text created by this engine should be destroyed before calling this
+/// function.
+///
+/// \param engine a TTF_TextEngine object created with
+/// TTF_CreateGLTextEngine().
+///
+/// \threadsafety This function should be called on the thread that created the
+/// engine.
+///
+/// \since This function is available since SDL_ttf 3.3.0.
+///
+/// \sa TTF_CreateGLTextEngine
+///
+/// ```c
+/// extern SDL_DECLSPEC void SDLCALL TTF_DestroyGLTextEngine(TTF_TextEngine *engine)
+/// ```
+/// {@category ttf}
+void ttfDestroyGlTextEngine(Pointer<TtfTextEngine> engine) {
+  final ttfDestroyGlTextEngineLookupFunction = _libTtf
+      .lookupFunction<
+        Void Function(Pointer<TtfTextEngine> engine),
+        void Function(Pointer<TtfTextEngine> engine)
+      >('TTF_DestroyGLTextEngine');
+  return ttfDestroyGlTextEngineLookupFunction(engine);
+}
+
+///
+/// Sets the winding order of the vertices returned by TTF_GetGLTextDrawData
+/// for a particular GL text engine.
+///
+/// \param engine a TTF_TextEngine object created with
+/// TTF_CreateGLTextEngine().
+/// \param winding the new winding order option.
+///
+/// \threadsafety This function should be called on the thread that created the
+/// engine.
+///
+/// \since This function is available since SDL_ttf 3.3.0.
+///
+/// \sa TTF_GetGLTextEngineWinding
+///
+/// ```c
+/// extern SDL_DECLSPEC void SDLCALL TTF_SetGLTextEngineWinding(TTF_TextEngine *engine, TTF_GLTextEngineWinding winding)
+/// ```
+/// {@category ttf}
+void ttfSetGlTextEngineWinding(Pointer<TtfTextEngine> engine, int winding) {
+  final ttfSetGlTextEngineWindingLookupFunction = _libTtf
+      .lookupFunction<
+        Void Function(Pointer<TtfTextEngine> engine, Int32 winding),
+        void Function(Pointer<TtfTextEngine> engine, int winding)
+      >('TTF_SetGLTextEngineWinding');
+  return ttfSetGlTextEngineWindingLookupFunction(engine, winding);
+}
+
+///
+/// Get the winding order of the vertices returned by TTF_GetGLTextDrawData for
+/// a particular GL text engine.
+///
+/// \param engine a TTF_TextEngine object created with
+/// TTF_CreateGLTextEngine().
+/// \returns the winding order used by the GL text engine or
+/// TTF_GL_TEXTENGINE_WINDING_INVALID in case of error.
+///
+/// \threadsafety This function should be called on the thread that created the
+/// engine.
+///
+/// \since This function is available since SDL_ttf 3.3.0.
+///
+/// \sa TTF_SetGLTextEngineWinding
+///
+/// ```c
+/// extern SDL_DECLSPEC TTF_GLTextEngineWinding SDLCALL TTF_GetGLTextEngineWinding(const TTF_TextEngine *engine)
+/// ```
+/// {@category ttf}
+int ttfGetGlTextEngineWinding(Pointer<TtfTextEngine> engine) {
+  final ttfGetGlTextEngineWindingLookupFunction = _libTtf
+      .lookupFunction<
+        Int32 Function(Pointer<TtfTextEngine> engine),
+        int Function(Pointer<TtfTextEngine> engine)
+      >('TTF_GetGLTextEngineWinding');
+  return ttfGetGlTextEngineWindingLookupFunction(engine);
 }
 
 ///

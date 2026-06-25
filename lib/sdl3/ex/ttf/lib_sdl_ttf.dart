@@ -1,6 +1,307 @@
 part of '../../sdl_ttf.dart';
 
 ///
+/// Query the version of the FreeType library in use.
+///
+/// TTF_Init() should be called before calling this function.
+///
+/// \param major to be filled in with the major version number. Can be NULL.
+/// \param minor to be filled in with the minor version number. Can be NULL.
+/// \param patch to be filled in with the param version number. Can be NULL.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL_ttf 3.0.0.
+///
+/// \sa TTF_Init
+///
+/// ```c
+/// extern SDL_DECLSPEC void SDLCALL TTF_GetFreeTypeVersion(int *major, int *minor, int *patch)
+/// ```
+/// {@category ttf}
+({int major, int minor, int patch}) ttfxGetFreeTypeVersion(
+  Pointer<Int32> major,
+  Pointer<Int32> minor,
+  Pointer<Int32> patch,
+) {
+  final majorPointer = ffi.calloc<Int32>();
+  final minorPointer = ffi.calloc<Int32>();
+  final patchPointer = ffi.calloc<Int32>();
+  ttfGetFreeTypeVersion(majorPointer, minorPointer, patchPointer);
+  final major = majorPointer.value;
+  final minor = minorPointer.value;
+  final patch = patchPointer.value;
+  majorPointer.callocFree();
+  minorPointer.callocFree();
+  patchPointer.callocFree();
+  return (major: major, minor: minor, patch: patch);
+}
+
+///
+/// Query the version of the HarfBuzz library in use.
+///
+/// If HarfBuzz is not available, the version reported is 0.0.0.
+///
+/// \param major to be filled in with the major version number. Can be NULL.
+/// \param minor to be filled in with the minor version number. Can be NULL.
+/// \param patch to be filled in with the param version number. Can be NULL.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL_ttf 3.0.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC void SDLCALL TTF_GetHarfBuzzVersion(int *major, int *minor, int *patch)
+/// ```
+/// {@category ttf}
+({int major, int minor, int patch}) ttfxGetHarfBuzzVersion(
+  Pointer<Int32> major,
+  Pointer<Int32> minor,
+  Pointer<Int32> patch,
+) {
+  final majorPointer = ffi.calloc<Int32>();
+  final minorPointer = ffi.calloc<Int32>();
+  final patchPointer = ffi.calloc<Int32>();
+  ttfGetHarfBuzzVersion(majorPointer, minorPointer, patchPointer);
+  final major = majorPointer.value;
+  final minor = minorPointer.value;
+  final patch = patchPointer.value;
+  majorPointer.callocFree();
+  minorPointer.callocFree();
+  patchPointer.callocFree();
+  return (major: major, minor: minor, patch: patch);
+}
+
+///
+/// Get font target resolutions, in dots per inch.
+///
+/// \param font the font to query.
+/// \param hdpi a pointer filled in with the target horizontal DPI.
+/// \param vdpi a pointer filled in with the target vertical DPI.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety This function should be called on the thread that created the
+/// font.
+///
+/// \since This function is available since SDL_ttf 3.0.0.
+///
+/// \sa TTF_SetFontSizeDPI
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL TTF_GetFontDPI(TTF_Font *font, int *hdpi, int *vdpi)
+/// ```
+/// {@category ttf}
+({int hdpi, int vdpi})? ttfxGetFontDpi(
+  Pointer<TtfFont> font,
+  Pointer<Int32> hdpi,
+  Pointer<Int32> vdpi,
+) {
+  late int hdpi;
+  late int vdpi;
+  final hdpiPointer = ffi.calloc<Int32>();
+  final vdpiPointer = ffi.calloc<Int32>();
+  final result = ttfGetFontDpi(font, hdpiPointer, vdpiPointer);
+  if (result) {
+    hdpi = hdpiPointer.value;
+    vdpi = vdpiPointer.value;
+  }
+  hdpiPointer.callocFree();
+  vdpiPointer.callocFree();
+  if (!result) {
+    return null;
+  }
+  return (hdpi: hdpi, vdpi: vdpi);
+}
+
+///
+/// Get the pixel image for a UNICODE codepoint.
+///
+/// \param font the font to query.
+/// \param ch the codepoint to check.
+/// \param image_type a pointer filled in with the glyph image type, may be
+/// NULL.
+/// \returns an SDL_Surface containing the glyph, or NULL on failure; call
+/// SDL_GetError() for more information.
+///
+/// \threadsafety This function should be called on the thread that created the
+/// font.
+///
+/// \since This function is available since SDL_ttf 3.0.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC SDL_Surface * SDLCALL TTF_GetGlyphImage(TTF_Font *font, Uint32 ch, TTF_ImageType *image_type)
+/// ```
+/// {@category ttf}
+({int imageType, Pointer<SdlSurface> surface})? ttfxGetGlyphImage(
+  Pointer<TtfFont> font,
+  int ch,
+  Pointer<Int32> imageType,
+) {
+  late int imageType;
+  final imageTypePointer = ffi.calloc<Int32>();
+  final surface = ttfGetGlyphImage(font, ch, imageTypePointer);
+  if (surface != nullptr) {
+    imageType = imageTypePointer.value;
+  }
+  imageTypePointer.callocFree();
+  if (surface == nullptr) {
+    return null;
+  }
+  return (surface: surface, imageType: imageType);
+}
+
+///
+/// Get the pixel image for a character index.
+///
+/// This is useful for text engine implementations, which can call this with
+/// the `glyph_index` in a TTF_CopyOperation
+///
+/// \param font the font to query.
+/// \param glyph_index the index of the glyph to return.
+/// \param image_type a pointer filled in with the glyph image type, may be
+/// NULL.
+/// \returns an SDL_Surface containing the glyph, or NULL on failure; call
+/// SDL_GetError() for more information.
+///
+/// \threadsafety This function should be called on the thread that created the
+/// font.
+///
+/// \since This function is available since SDL_ttf 3.0.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC SDL_Surface * SDLCALL TTF_GetGlyphImageForIndex(TTF_Font *font, Uint32 glyph_index, TTF_ImageType *image_type)
+/// ```
+/// {@category ttf}
+({int imageType, Pointer<SdlSurface> surface})? ttfxGetGlyphImageForIndex(
+  Pointer<TtfFont> font,
+  int glyphIndex,
+  Pointer<Int32> imageType,
+) {
+  late int imageType;
+  final imageTypePointer = ffi.calloc<Int32>();
+  final surface = ttfGetGlyphImageForIndex(font, glyphIndex, imageTypePointer);
+  if (surface != nullptr) {
+    imageType = imageTypePointer.value;
+  }
+  imageTypePointer.callocFree();
+  if (surface == nullptr) {
+    return null;
+  }
+  return (surface: surface, imageType: imageType);
+}
+
+///
+/// Query the metrics (dimensions) of a font's glyph for a UNICODE codepoint.
+///
+/// To understand what these metrics mean, here is a useful link:
+///
+/// https://freetype.sourceforge.net/freetype2/docs/tutorial/step2.html
+///
+/// \param font the font to query.
+/// \param ch the codepoint to check.
+/// \param minx a pointer filled in with the minimum x coordinate of the glyph
+/// from the left edge of its bounding box. This value may be
+/// negative.
+/// \param maxx a pointer filled in with the maximum x coordinate of the glyph
+/// from the left edge of its bounding box.
+/// \param miny a pointer filled in with the minimum y coordinate of the glyph
+/// from the bottom edge of its bounding box. This value may be
+/// negative.
+/// \param maxy a pointer filled in with the maximum y coordinate of the glyph
+/// from the bottom edge of its bounding box.
+/// \param advance a pointer filled in with the distance to the next glyph from
+/// the left edge of this glyph's bounding box.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety This function should be called on the thread that created the
+/// font.
+///
+/// \since This function is available since SDL_ttf 3.0.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL TTF_GetGlyphMetrics(TTF_Font *font, Uint32 ch, int *minx, int *maxx, int *miny, int *maxy, int *advance)
+/// ```
+/// {@category ttf}
+({int advance, int maxx, int maxy, int minx, int miny})? ttfxGetGlyphMetrics(
+  Pointer<TtfFont> font,
+  int ch,
+  Pointer<Int32> minx,
+  Pointer<Int32> maxx,
+  Pointer<Int32> miny,
+  Pointer<Int32> maxy,
+  Pointer<Int32> advance,
+) {
+  late int minx;
+  late int maxx;
+  late int miny;
+  late int maxy;
+  late int advance;
+  final minxPointer = ffi.calloc<Int32>();
+  final maxxPointer = ffi.calloc<Int32>();
+  final minyPointer = ffi.calloc<Int32>();
+  final maxyPointer = ffi.calloc<Int32>();
+  final advancePointer = ffi.calloc<Int32>();
+  final result = ttfGetGlyphMetrics(
+    font,
+    ch,
+    minxPointer,
+    maxxPointer,
+    minyPointer,
+    maxyPointer,
+    advancePointer,
+  );
+  if (result) {
+    minx = minxPointer.value;
+    maxx = maxxPointer.value;
+    miny = minyPointer.value;
+    maxy = maxyPointer.value;
+    advance = advancePointer.value;
+  }
+  minxPointer.callocFree();
+  maxxPointer.callocFree();
+  minyPointer.callocFree();
+  maxyPointer.callocFree();
+  advancePointer.callocFree();
+  if (!result) {
+    return null;
+  }
+  return (minx: minx, maxx: maxx, miny: miny, maxy: maxy, advance: advance);
+}
+
+///
+/// Query the kerning size between the glyphs of two UNICODE codepoints.
+///
+/// \param font the font to query.
+/// \param previous_ch the previous codepoint.
+/// \param ch the current codepoint.
+/// \param kerning a pointer filled in with the kerning size between the two
+/// glyphs, in pixels, may be NULL.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety This function should be called on the thread that created the
+/// font.
+///
+/// \since This function is available since SDL_ttf 3.0.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL TTF_GetGlyphKerning(TTF_Font *font, Uint32 previous_ch, Uint32 ch, int *kerning)
+/// ```
+/// {@category ttf}
+int? ttfxGetGlyphKerning(Pointer<TtfFont> font, int previousCh, int ch) {
+  int? kerning;
+  final kerningPointer = calloc<Int32>();
+  final bl = ttfGetGlyphKerning(font, previousCh, ch, kerningPointer);
+  if (bl) {
+    kerning = kerningPointer.value;
+  }
+  kerningPointer.callocFree();
+  return kerning;
+}
+
+///
 /// Calculate the dimensions of a rendered string of UTF-8 text.
 ///
 /// This will report the width and height, in pixels, of the space that the
@@ -24,18 +325,22 @@ part of '../../sdl_ttf.dart';
 /// extern SDL_DECLSPEC bool SDLCALL TTF_GetStringSize(TTF_Font *font, const char *text, size_t length, int *w, int *h)
 /// ```
 /// {@category ttf}
-bool ttfxGetStringSize(Pointer<TtfFont> font, String? text, SdlxPoint size) {
+({int w, int h})? ttfxGetStringSize(Pointer<TtfFont> font, String text) {
+  late int w;
+  late int h;
   final wPointer = ffi.calloc<Int32>();
   final hPointer = ffi.calloc<Int32>();
-  final result = ttfGetStringSize(font, text, wPointer, hPointer);
-  if (result) {
-    size
-      ..x = wPointer.value
-      ..y = hPointer.value;
+  final bl = ttfGetStringSize(font, text, wPointer, hPointer);
+  if (bl) {
+    w = wPointer.value;
+    h = hPointer.value;
   }
-  ffi.calloc.free(wPointer);
-  ffi.calloc.free(hPointer);
-  return result;
+  wPointer.callocFree();
+  hPointer.callocFree();
+  if (!bl) {
+    return null;
+  }
+  return (w: w, h: h);
 }
 
 ///
@@ -68,29 +373,26 @@ bool ttfxGetStringSize(Pointer<TtfFont> font, String? text, SdlxPoint size) {
 /// extern SDL_DECLSPEC bool SDLCALL TTF_GetStringSizeWrapped(TTF_Font *font, const char *text, size_t length, int wrap_width, int *w, int *h)
 /// ```
 /// {@category ttf}
-bool ttfxGetStringSizeWrapped(
+({int w, int h})? ttfxGetStringSizeWrapped(
   Pointer<TtfFont> font,
-  String? text,
+  String text,
   int wrapWidth,
-  SdlxPoint size,
 ) {
+  late int w;
+  late int h;
   final wPointer = ffi.calloc<Int32>();
   final hPointer = ffi.calloc<Int32>();
-  final result = ttfGetStringSizeWrapped(
-    font,
-    text,
-    wrapWidth,
-    wPointer,
-    hPointer,
-  );
-  if (result) {
-    size
-      ..x = wPointer.value
-      ..y = hPointer.value;
+  final bl = ttfGetStringSizeWrapped(font, text, wrapWidth, wPointer, hPointer);
+  if (bl) {
+    w = wPointer.value;
+    h = hPointer.value;
   }
-  ffi.calloc.free(wPointer);
-  ffi.calloc.free(hPointer);
-  return result;
+  wPointer.callocFree();
+  hPointer.callocFree();
+  if (!bl) {
+    return null;
+  }
+  return (w: w, h: h);
 }
 
 ///
@@ -123,29 +425,32 @@ bool ttfxGetStringSizeWrapped(
 /// extern SDL_DECLSPEC bool SDLCALL TTF_MeasureString(TTF_Font *font, const char *text, size_t length, int max_width, int *measured_width, size_t *measured_length)
 /// ```
 /// {@category ttf}
-bool ttfxMeasureString(
+({int measuredWidth, int measuredLength})? ttfxMeasureString(
   Pointer<TtfFont> font,
-  String? text,
+  String text,
   int maxWidth,
-  SdlxPoint measured,
 ) {
+  late int measuredWidth;
+  late int measuredLength;
   final measuredWidthPointer = ffi.calloc<Int32>();
   final measuredLengthPointer = ffi.calloc<Size>();
-  final result = ttfMeasureString(
+  final bl = ttfMeasureString(
     font,
     text,
     maxWidth,
     measuredWidthPointer,
     measuredLengthPointer,
   );
-  if (result) {
-    measured
-      ..x = measuredWidthPointer.value
-      ..y = measuredLengthPointer.value;
+  if (bl) {
+    measuredWidth = measuredWidthPointer.value;
+    measuredLength = measuredLengthPointer.value;
   }
-  ffi.calloc.free(measuredWidthPointer);
-  ffi.calloc.free(measuredLengthPointer);
-  return result;
+  measuredWidthPointer.callocFree();
+  measuredLengthPointer.callocFree();
+  if (!bl) {
+    return null;
+  }
+  return (measuredWidth: measuredWidth, measuredLength: measuredLength);
 }
 
 ///
@@ -762,4 +1067,520 @@ Pointer<SdlSurface> ttfxRenderGlyphLcd(
   ffi.calloc.free(fgPointer);
   ffi.calloc.free(bgPointer);
   return surface;
+}
+
+///
+/// Set the color of a text object.
+///
+/// The default text color is white (255, 255, 255, 255).
+///
+/// \param text the TTF_Text to modify.
+/// \param r the red color value in the range of 0-255.
+/// \param g the green color value in the range of 0-255.
+/// \param b the blue color value in the range of 0-255.
+/// \param a the alpha value in the range of 0-255.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety This function should be called on the thread that created the
+/// text.
+///
+/// \since This function is available since SDL_ttf 3.0.0.
+///
+/// \sa TTF_GetTextColor
+/// \sa TTF_SetTextColorFloat
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL TTF_SetTextColor(TTF_Text *text, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
+/// ```
+/// {@category ttf}
+bool ttfxSetTextColor(Pointer<TtfText> text, SdlxColor color) =>
+    ttfSetTextColor(text, color.r, color.g, color.b, color.a);
+
+///
+/// Set the color of a text object.
+///
+/// The default text color is white (1.0f, 1.0f, 1.0f, 1.0f).
+///
+/// \param text the TTF_Text to modify.
+/// \param r the red color value, normally in the range of 0-1.
+/// \param g the green color value, normally in the range of 0-1.
+/// \param b the blue color value, normally in the range of 0-1.
+/// \param a the alpha value in the range of 0-1.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety This function should be called on the thread that created the
+/// text.
+///
+/// \since This function is available since SDL_ttf 3.0.0.
+///
+/// \sa TTF_GetTextColorFloat
+/// \sa TTF_SetTextColor
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL TTF_SetTextColorFloat(TTF_Text *text, float r, float g, float b, float a)
+/// ```
+/// {@category ttf}
+bool ttfxSetTextColorFloat(Pointer<TtfText> text, SdlxFColor color) =>
+    ttfSetTextColorFloat(text, color.r, color.g, color.b, color.a);
+
+///
+/// Get the color of a text object.
+///
+/// \param text the TTF_Text to query.
+/// \param r a pointer filled in with the red color value in the range of
+/// 0-255, may be NULL.
+/// \param g a pointer filled in with the green color value in the range of
+/// 0-255, may be NULL.
+/// \param b a pointer filled in with the blue color value in the range of
+/// 0-255, may be NULL.
+/// \param a a pointer filled in with the alpha value in the range of 0-255,
+/// may be NULL.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety This function should be called on the thread that created the
+/// text.
+///
+/// \since This function is available since SDL_ttf 3.0.0.
+///
+/// \sa TTF_GetTextColorFloat
+/// \sa TTF_SetTextColor
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL TTF_GetTextColor(TTF_Text *text, Uint8 *r, Uint8 *g, Uint8 *b, Uint8 *a)
+/// ```
+/// {@category ttf}
+SdlxColor? ttfxGetTextColor(Pointer<TtfText> text) {
+  SdlxColor? result;
+  final rPointer = ffi.calloc<Uint8>();
+  final gPointer = ffi.calloc<Uint8>();
+  final bPointer = ffi.calloc<Uint8>();
+  final aPointer = ffi.calloc<Uint8>();
+  final bl = ttfGetTextColor(text, rPointer, gPointer, bPointer, aPointer);
+  if (bl) {
+    result = SdlxColor(
+      rPointer.value,
+      gPointer.value,
+      bPointer.value,
+      aPointer.value,
+    );
+  }
+  rPointer.callocFree();
+  gPointer.callocFree();
+  bPointer.callocFree();
+  aPointer.callocFree();
+  return result;
+}
+
+///
+/// Get the color of a text object.
+///
+/// \param text the TTF_Text to query.
+/// \param r a pointer filled in with the red color value, normally in the
+/// range of 0-1, may be NULL.
+/// \param g a pointer filled in with the green color value, normally in the
+/// range of 0-1, may be NULL.
+/// \param b a pointer filled in with the blue color value, normally in the
+/// range of 0-1, may be NULL.
+/// \param a a pointer filled in with the alpha value in the range of 0-1, may
+/// be NULL.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety This function should be called on the thread that created the
+/// text.
+///
+/// \since This function is available since SDL_ttf 3.0.0.
+///
+/// \sa TTF_GetTextColor
+/// \sa TTF_SetTextColorFloat
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL TTF_GetTextColorFloat(TTF_Text *text, float *r, float *g, float *b, float *a)
+/// ```
+/// {@category ttf}
+SdlxFColor? ttfxGetTextColorFloat(Pointer<TtfText> text) {
+  SdlxFColor? result;
+  final rPointer = ffi.calloc<Float>();
+  final gPointer = ffi.calloc<Float>();
+  final bPointer = ffi.calloc<Float>();
+  final aPointer = ffi.calloc<Float>();
+  final bl = ttfGetTextColorFloat(text, rPointer, gPointer, bPointer, aPointer);
+  if (bl) {
+    result = SdlxFColor(
+      rPointer.value,
+      gPointer.value,
+      bPointer.value,
+      aPointer.value,
+    );
+  }
+  rPointer.callocFree();
+  gPointer.callocFree();
+  bPointer.callocFree();
+  aPointer.callocFree();
+  return result;
+}
+
+///
+/// Set the position of a text object.
+///
+/// This can be used to position multiple text objects within a single wrapping
+/// text area.
+///
+/// This function may cause the internal text representation to be rebuilt.
+///
+/// \param text the TTF_Text to modify.
+/// \param x the x offset of the upper left corner of this text in pixels.
+/// \param y the y offset of the upper left corner of this text in pixels.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety This function should be called on the thread that created the
+/// text.
+///
+/// \since This function is available since SDL_ttf 3.0.0.
+///
+/// \sa TTF_GetTextPosition
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL TTF_SetTextPosition(TTF_Text *text, int x, int y)
+/// ```
+/// {@category ttf}
+bool ttfxSetTextPosition(Pointer<TtfText> text, SdlxPoint position) =>
+    ttfSetTextPosition(text, position.x, position.y);
+
+///
+/// Get the position of a text object.
+///
+/// \param text the TTF_Text to query.
+/// \param x a pointer filled in with the x offset of the upper left corner of
+/// this text in pixels, may be NULL.
+/// \param y a pointer filled in with the y offset of the upper left corner of
+/// this text in pixels, may be NULL.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety This function should be called on the thread that created the
+/// text.
+///
+/// \since This function is available since SDL_ttf 3.0.0.
+///
+/// \sa TTF_SetTextPosition
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL TTF_GetTextPosition(TTF_Text *text, int *x, int *y)
+/// ```
+/// {@category ttf}
+SdlxPoint? ttfxGetTextPosition(Pointer<TtfText> text) {
+  SdlxPoint? result;
+  final xPointer = ffi.calloc<Int32>();
+  final yPointer = ffi.calloc<Int32>();
+  final bl = ttfGetTextPosition(text, xPointer, yPointer);
+  if (bl) {
+    result = SdlxPoint(xPointer.value, yPointer.value);
+  }
+  xPointer.callocFree();
+  yPointer.callocFree();
+  return result;
+}
+
+///
+/// Get whether wrapping is enabled on a text object.
+///
+/// \param text the TTF_Text to query.
+/// \param wrap_width a pointer filled in with the maximum width in pixels or 0
+/// if the text is being wrapped on newline characters.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety This function should be called on the thread that created the
+/// text.
+///
+/// \since This function is available since SDL_ttf 3.0.0.
+///
+/// \sa TTF_SetTextWrapWidth
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL TTF_GetTextWrapWidth(TTF_Text *text, int *wrap_width)
+/// ```
+/// {@category ttf}
+int? ttfxGetTextWrapWidth(Pointer<TtfText> text) {
+  int? result;
+  final wrapWidthPointer = ffi.calloc<Int32>();
+  final bl = ttfGetTextWrapWidth(text, wrapWidthPointer);
+  if (bl) {
+    result = wrapWidthPointer.value;
+  }
+  wrapWidthPointer.callocFree();
+  return result;
+}
+
+///
+/// Get the size of a text object.
+///
+/// The size of the text may change when the font or font style and size
+/// change.
+///
+/// \param text the TTF_Text to query.
+/// \param w a pointer filled in with the width of the text, in pixels, may be
+/// NULL.
+/// \param h a pointer filled in with the height of the text, in pixels, may be
+/// NULL.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety This function should be called on the thread that created the
+/// text.
+///
+/// \since This function is available since SDL_ttf 3.0.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL TTF_GetTextSize(TTF_Text *text, int *w, int *h)
+/// ```
+/// {@category ttf}
+SdlxPoint? ttfxGetTextSize(Pointer<TtfText> text) {
+  SdlxPoint? result;
+  final wPointer = ffi.calloc<Int32>();
+  final hPointer = ffi.calloc<Int32>();
+  final bl = ttfGetTextSize(text, wPointer, hPointer);
+  if (bl) {
+    result = SdlxPoint(wPointer.value, hPointer.value);
+  }
+  wPointer.callocFree();
+  hPointer.callocFree();
+  return result;
+}
+
+///
+/// Get the substring of a text object that surrounds a text offset.
+///
+/// If `offset` is less than 0, this will return a zero length substring at the
+/// beginning of the text with the TTF_SUBSTRING_TEXT_START flag set. If
+/// `offset` is greater than or equal to the length of the text string, this
+/// will return a zero length substring at the end of the text with the
+/// TTF_SUBSTRING_TEXT_END flag set.
+///
+/// \param text the TTF_Text to query.
+/// \param offset a byte offset into the text string.
+/// \param substring a pointer filled in with the substring containing the
+/// offset.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety This function should be called on the thread that created the
+/// text.
+///
+/// \since This function is available since SDL_ttf 3.0.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL TTF_GetTextSubString(TTF_Text *text, int offset, TTF_SubString *substring)
+/// ```
+/// {@category ttf}
+TtfxSubString? ttfxGetTextSubString(Pointer<TtfText> text, int offset) {
+  TtfxSubString? result;
+  final subStringPointer = ffi.calloc<TtfSubString>();
+  final bl = ttfGetTextSubString(text, offset, subStringPointer);
+  if (bl) {
+    result = TtfxSubString()..loadFromPointer(subStringPointer);
+  }
+  subStringPointer.callocFree();
+  return result;
+}
+
+///
+/// Get the substring of a text object that contains the given line.
+///
+/// If `line` is less than 0, this will return a zero length substring at the
+/// beginning of the text with the TTF_SUBSTRING_TEXT_START flag set. If `line`
+/// is greater than or equal to `text->num_lines` this will return a zero
+/// length substring at the end of the text with the TTF_SUBSTRING_TEXT_END
+/// flag set.
+///
+/// \param text the TTF_Text to query.
+/// \param line a zero-based line index, in the range [0 .. text->num_lines-1].
+/// \param substring a pointer filled in with the substring containing the
+/// offset.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety This function should be called on the thread that created the
+/// text.
+///
+/// \since This function is available since SDL_ttf 3.0.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL TTF_GetTextSubStringForLine(TTF_Text *text, int line, TTF_SubString *substring)
+/// ```
+/// {@category ttf}
+TtfxSubString? ttfxGetTextSubStringForLine(Pointer<TtfText> text, int line) {
+  TtfxSubString? result;
+  final subStringPointer = ffi.calloc<TtfSubString>();
+  final bl = ttfGetTextSubStringForLine(text, line, subStringPointer);
+  if (bl) {
+    result = TtfxSubString()..loadFromPointer(subStringPointer);
+  }
+  subStringPointer.callocFree();
+  return result;
+}
+
+///
+/// Get the substrings of a text object that contain a range of text.
+///
+/// \param text the TTF_Text to query.
+/// \param offset a byte offset into the text string.
+/// \param length the length of the range being queried, in bytes, or -1 for
+/// the remainder of the string.
+/// \param count a pointer filled in with the number of substrings returned,
+/// may be NULL.
+/// \returns a NULL terminated array of substring pointers or NULL on failure;
+/// call SDL_GetError() for more information. This is a single
+/// allocation that should be freed with SDL_free() when it is no
+/// longer needed.
+///
+/// \threadsafety This function should be called on the thread that created the
+/// text.
+///
+/// \since This function is available since SDL_ttf 3.0.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC TTF_SubString ** SDLCALL TTF_GetTextSubStringsForRange(TTF_Text *text, int offset, int length, int *count)
+/// ```
+/// {@category ttf}
+List<TtfxSubString> ttfxGetTextSubStringsForRange(
+  Pointer<TtfText> text,
+  int offset,
+  int length,
+) {
+  final result = <TtfxSubString>[];
+  final countPointer = ffi.calloc<Int32>();
+  final subStringsPointer = ttfGetTextSubStringsForRange(
+    text,
+    offset,
+    length,
+    countPointer,
+  );
+  if (subStringsPointer != nullptr) {
+    for (var i = 0; i < countPointer.value; i++) {
+      result.add(TtfxSubString()..loadFromPointer(subStringsPointer[i]));
+    }
+    sdlFree(subStringsPointer.cast<Void>());
+  }
+  countPointer.callocFree();
+  return result;
+}
+
+///
+/// Get the portion of a text string that is closest to a point.
+///
+/// This will return the closest substring of text to the given point.
+///
+/// \param text the TTF_Text to query.
+/// \param x the x coordinate relative to the left side of the text, may be
+/// outside the bounds of the text area.
+/// \param y the y coordinate relative to the top side of the text, may be
+/// outside the bounds of the text area.
+/// \param substring a pointer filled in with the closest substring of text to
+/// the given point.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety This function should be called on the thread that created the
+/// text.
+///
+/// \since This function is available since SDL_ttf 3.0.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL TTF_GetTextSubStringForPoint(TTF_Text *text, int x, int y, TTF_SubString *substring)
+/// ```
+/// {@category ttf}
+TtfxSubString? ttfxGetTextSubStringForPoint(
+  Pointer<TtfText> text,
+  int x,
+  int y,
+) {
+  TtfxSubString? result;
+  final subStringPointer = ffi.calloc<TtfSubString>();
+  final bl = ttfGetTextSubStringForPoint(text, x, y, subStringPointer);
+  if (bl) {
+    result = TtfxSubString()..loadFromPointer(subStringPointer);
+  }
+  subStringPointer.callocFree();
+  return result;
+}
+
+///
+/// Get the previous substring in a text object
+///
+/// If called at the start of the text, this will return a zero length
+/// substring with the TTF_SUBSTRING_TEXT_START flag set.
+///
+/// \param text the TTF_Text to query.
+/// \param substring the TTF_SubString to query.
+/// \param previous a pointer filled in with the previous substring in the text
+/// object.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety This function should be called on the thread that created the
+/// text.
+///
+/// \since This function is available since SDL_ttf 3.0.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL TTF_GetPreviousTextSubString(TTF_Text *text, const TTF_SubString *substring, TTF_SubString *previous)
+/// ```
+/// {@category ttf}
+TtfxSubString? ttfxGetPreviousTextSubString(
+  Pointer<TtfText> text,
+  TtfxSubString subString,
+) {
+  TtfxSubString? result;
+  final subStringPointer = subString.calloc();
+  final resultPointer = ffi.calloc<TtfSubString>();
+  final bl = ttfGetPreviousTextSubString(text, subStringPointer, resultPointer);
+  if (bl) {
+    result = TtfxSubString()..loadFromPointer(resultPointer);
+  }
+  subStringPointer.callocFree();
+  resultPointer.callocFree();
+  return result;
+}
+
+///
+/// Get the next substring in a text object
+///
+/// If called at the end of the text, this will return a zero length substring
+/// with the TTF_SUBSTRING_TEXT_END flag set.
+///
+/// \param text the TTF_Text to query.
+/// \param substring the TTF_SubString to query.
+/// \param next a pointer filled in with the next substring.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety This function should be called on the thread that created the
+/// text.
+///
+/// \since This function is available since SDL_ttf 3.0.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL TTF_GetNextTextSubString(TTF_Text *text, const TTF_SubString *substring, TTF_SubString *next)
+/// ```
+/// {@category ttf}
+TtfxSubString? ttfxGetNextTextSubString(
+  Pointer<TtfText> text,
+  TtfxSubString subString,
+) {
+  TtfxSubString? result;
+  final subStringPointer = subString.calloc();
+  final resultPointer = ffi.calloc<TtfSubString>();
+  final bl = ttfGetNextTextSubString(text, subStringPointer, resultPointer);
+  if (bl) {
+    result = TtfxSubString()..loadFromPointer(resultPointer);
+  }
+  subStringPointer.callocFree();
+  resultPointer.callocFree();
+  return result;
 }
