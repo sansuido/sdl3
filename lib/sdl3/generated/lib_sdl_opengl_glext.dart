@@ -48487,7 +48487,7 @@ void glGetFramebufferParameterivMesa(
 late Pointer<NativeFunction<Void Function()>> _glAddClientPointerRangeMesa;
 
 /// ```c
-/// GLAPI void APIENTRY glAddClientPointerRangeMESA (GLvoid *addr, GLsizeiptr size)
+/// GLAPI void APIENTRY glAddClientPointerRangeMESA (void *addr, GLsizeiptr size)
 /// ```
 /// {@category opengl_glext}
 void glAddClientPointerRangeMesa(Pointer<Void> addr, int size) {

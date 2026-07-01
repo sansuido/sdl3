@@ -13,11 +13,11 @@ int main() {
     sdlQuit();
     return -1;
   }
-  final result = SdlxDataResult();
-  if (process.read(result)) {
-    print(utf8.decode(result.data!));
-    print('datasize: ${result.datasize}');
-    print('exitcode: ${result.exitcode}');
+  final rec = process.read();
+  if (rec != null) {
+    print(utf8.decode(rec.data));
+    print('datasize: ${rec.datasize}');
+    print('exitcode: ${rec.exitcode}');
   } else {
     print('error read process, ${sdlGetError()}');
   }

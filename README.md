@@ -100,37 +100,37 @@ yamahara
 # Task List (for 3.0.0)
 - [x] ~~lib_sdl.dart~~
 - [ ] lib_sdl_assert.dart
-- [x] [lib_sdl_asyncio.dart](./lib/sdl3/ex/sdl/lib_sdl_asyncio.dart)
+- [x] [lib_sdl_asyncio.dart](./lib/sdl3/ex/sdl/asyncio/lib_sdl_asyncio.dart)
 - [ ] lib_sdl_atomic.dart
-- [x] [lib_sdl_audio.dart](./lib/sdl3/ex/sdl/lib_sdl_audio.dart)
+- [x] [lib_sdl_audio.dart](./lib/sdl3/ex/sdl/audio/lib_sdl_audio.dart)
 - [x] ~~lib_sdl_blendmode.dart~~
-- [x] [lib_sdl_camera.dart](./lib/sdl3/ex/sdl/lib_sdl_camera.dart)
-- [x] [lib_sdl_clipboard.dart](./lib/sdl3/ex/sdl/lib_sdl_clipboard.dart)
+- [x] [lib_sdl_camera.dart](./lib/sdl3/ex/sdl/camera/lib_sdl_camera.dart)
+- [x] [lib_sdl_clipboard.dart](./lib/sdl3/ex/sdl/clipboard/lib_sdl_clipboard.dart)
 - [x] ~~lib_sdl_cpuinfo.dart~~
-- [x] [lib_sdl_dialog.dart](./lib/sdl3/ex/sdl/lib_sdl_dialog.dart)
+- [x] [lib_sdl_dialog.dart](./lib/sdl3/ex/sdl/dialog/lib_sdl_dialog.dart)
 - [x] ~~lib_sdl_error.dart~~
-- [x] [lib_sdl_events.dart](./lib/sdl3/ex/sdl/lib_sdl_events.dart)
-- [ ] lib_sdl_filesystem.dart
-- [x] [lib_sdl_gamepad.dart](./lib/sdl3/ex/sdl/lib_sdl_gamepad.dart)
-- [x] [lib_sdl_gpu.dart](./lib/sdl3/ex/sdl/lib_sdl_gpu.dart)
-- [x] [lib_sdl_guid.dart](./lib/sdl3/ex/sdl/lib_sdl_guid.dart)
+- [x] [lib_sdl_events.dart](./lib/sdl3/ex/sdl/events/lib_sdl_events.dart)
+- [x] [lib_sdl_filesystem.dart](./lib/sdl3/ex/sdl/filesystem/lib_sdl_filesystem.dart)
+- [x] [lib_sdl_gamepad.dart](./lib/sdl3/ex/sdl/gamepad/lib_sdl_gamepad.dart)
+- [x] [lib_sdl_gpu.dart](./lib/sdl3/ex/sdl/gpu/lib_sdl_gpu.dart)
+- [x] [lib_sdl_guid.dart](./lib/sdl3/ex/sdl/guid/lib_sdl_guid.dart)
 - [ ] lib_sdl_haptic.dart
 - [ ] lib_sdl_hidapi.dart
 - [x] ~~lib_sdl_hints.dart~~
 - [x] [lib_sdl_image.dart](./lib/sdl3/ex/image/lib_sdl_image.dart)
 - [x] ~~lib_sdl_init.dart~~
-- [x] [lib_sdl_iostream.dart](./lib/sdl3/ex/sdl/lib_sdl_iostream.dart)
-- [x] [lib_sdl_joystick.dart](./lib/sdl3/ex/sdl/lib_sdl_joystick.dart)
-- [x] [lib_sdl_keyboard.dart](./lib/sdl3/ex/sdl/lib_sdl_keyboard.dart)
+- [x] [lib_sdl_iostream.dart](./lib/sdl3/ex/sdl/iostream/lib_sdl_iostream.dart)
+- [x] [lib_sdl_joystick.dart](./lib/sdl3/ex/sdl/joystick/lib_sdl_joystick.dart)
+- [x] [lib_sdl_keyboard.dart](./lib/sdl3/ex/sdl/keyboard/lib_sdl_keyboard.dart)
 - [ ] lib_sdl_loadso.dart
-- [x] [lib_sdl_locale.dart](./lib/sdl3/ex/sdl/lib_sdl_locale.dart)
+- [x] [lib_sdl_locale.dart](./lib/sdl3/ex/sdl/locale/lib_sdl_locale.dart)
 - [x] ~~lib_sdl_log.dart~~
 - [ ] lib_sdl_main.dart
-- [x] [lib_sdl_messagebox.dart](./lib/sdl3/ex/sdl/lib_sdl_messagebox.dart)
+- [x] [lib_sdl_messagebox.dart](./lib/sdl3/ex/sdl/messagebox/lib_sdl_messagebox.dart)
 - [x] ~~lib_sdl_metal.dart~~
 - [x] ~~lib_sdl_misc.dart~~
 - [x] [lib_sdl_mixer.dart](./lib/sdl3/ex/mixer/lib_sdl_mixer.dart)
-- [x] [lib_sdl_mouse.dart](./lib/sdl3/ex/sdl/lib_sdl_mouse.dart)
+- [x] [lib_sdl_mouse.dart](./lib/sdl3/ex/sdl/mouse/lib_sdl_mouse.dart)
 - [ ] lib_sdl_mutex.dart
 - [ ] lib_sdl_net.dart
 - [ ] lib_sdl_notification.dart
@@ -138,25 +138,25 @@ yamahara
 - [ ] lib_sdl_opengl_glext.dart
 - [ ] lib_sdl_openxr.dart
 - [x] ~~lib_sdl_pen.dart~~
-- [x] [lib_sdl_pixels.dart](./lib/sdl3/ex/sdl/lib_sdl_pixels.dart)
+- [x] [lib_sdl_pixels.dart](./lib/sdl3/ex/sdl/pixels/lib_sdl_pixels.dart)
 - [x] ~~lib_sdl_platform.dart~~
-- [x] [lib_sdl_power.dart](./lib/sdl3/ex/sdl/lib_sdl_power.dart)
-- [x] [lib_sdl_process.dart](./lib/sdl3/ex/sdl/lib_sdl_process.dart)
-- [x] [lib_sdl_properties.dart](./lib/sdl3/ex/sdl/lib_sdl_properties.dart)
-- [x] [lib_sdl_rect.dart](./lib/sdl3/ex/sdl/lib_sdl_rect.dart)
-- [x] [lib_sdl_render.dart](./lib/sdl3/ex/sdl/lib_sdl_render.dart)
-- [x] [lib_sdl_sensor.dart](./lib/sdl3/ex/sdl/lib_sdl_sensor.dart)
+- [x] [lib_sdl_power.dart](./lib/sdl3/ex/sdl/power/lib_sdl_power.dart)
+- [x] [lib_sdl_process.dart](./lib/sdl3/ex/sdl/process/lib_sdl_process.dart)
+- [x] [lib_sdl_properties.dart](./lib/sdl3/ex/sdl/properties/lib_sdl_properties.dart)
+- [x] [lib_sdl_rect.dart](./lib/sdl3/ex/sdl/rect/lib_sdl_rect.dart)
+- [x] [lib_sdl_render.dart](./lib/sdl3/ex/sdl/render/lib_sdl_render.dart)
+- [x] [lib_sdl_sensor.dart](./lib/sdl3/ex/sdl/sensor/lib_sdl_sensor.dart)
 - [x] [lib_sdl_shadercross.dart](./lib/sdl3/ex/shadercross/lib_sdl_shadercross.dart)
-- [ ] lib_sdl_stdinc.dart
-- [ ] lib_sdl_storage.dart
-- [x] [lib_sdl_surface.dart](./lib/sdl3/ex/sdl/lib_sdl_surface.dart)
-- [ ] lib_sdl_system.dart
+- [x] [lib_sdl_stdinc.dart](./lib/sdl3/ex/sdl/stdinc/lib_sdl_stdinc.dart)
+- [x] [lib_sdl_storage.dart](./lib/sdl3/ex/sdl/storage/lib_sdl_storage.dart)
+- [x] [lib_sdl_surface.dart](./lib/sdl3/ex/sdl/surface/lib_sdl_surface.dart)
+- [x] [lib_sdl_system.dart](./lib/sdl3/ex/sdl/system/lib_sdl_system.dart)
 - [ ] lib_sdl_thread.dart
-- [x] [lib_sdl_time.dart](./lib/sdl3/ex/sdl/lib_sdl_time.dart)
+- [x] [lib_sdl_time.dart](./lib/sdl3/ex/sdl/time/lib_sdl_time.dart)
 - [x] ~~lib_sdl_timer.dart~~
-- [x] [lib_sdl_touch.dart](./lib/sdl3/ex/sdl/lib_sdl_touch.dart)
-- [x] [lib_sdl_tray.dart](./lib/sdl3/ex/sdl/lib_sdl_tray.dart)
+- [x] [lib_sdl_touch.dart](./lib/sdl3/ex/sdl/touch/lib_sdl_touch.dart)
+- [x] [lib_sdl_tray.dart](./lib/sdl3/ex/sdl/tray/lib_sdl_tray.dart)
 - [x] [lib_sdl_ttf.dart](./lib/sdl3/ex/ttf/lib_sdl_ttf.dart)
 - [x] ~~lib_sdl_version.dart~~
-- [x] [lib_sdl_video.dart](./lib/sdl3/ex/sdl/lib_sdl_video.dart)
-- [x] [lib_sdl_vulkan.dart](./lib/sdl3/ex/sdl/lib_sdl_vulkan.dart)
+- [x] [lib_sdl_video.dart](./lib/sdl3/ex/sdl/video/lib_sdl_video.dart)
+- [x] [lib_sdl_vulkan.dart](./lib/sdl3/ex/sdl/vulkan/lib_sdl_vulkan.dart)

@@ -928,6 +928,18 @@ final class SdlPinchFingerEvent extends Struct {
   // [20]+(4)
   @Uint32()
   external int windowId;
+  // [24]+(4)
+  @Float()
+  external double spanX;
+  // [28]+(4)
+  @Float()
+  external double spanY;
+  // [32]+(4)
+  @Float()
+  external double focusX;
+  // [36]+(4)
+  @Float()
+  external double focusY;
 }
 
 // SDL_PenProximityEvent
@@ -1260,7 +1272,7 @@ final class SdlEvent extends Union {
   external SdlUserEvent user;
   // [0]+(56)
   external SdlTouchFingerEvent tfinger;
-  // [0]+(24)
+  // [0]+(40)
   external SdlPinchFingerEvent pinch;
   // [0]+(24)
   external SdlPenProximityEvent pproximity;

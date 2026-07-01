@@ -1,5 +1,15 @@
 # Changelog
 
+## [2.9.3] - 2026-07-01
+- SDL3-2026-06-28
+### Added
+- Added functions and wrapper classes for the filesystem, stdinc, storage, system.
+- Added `example/stdinc_environment_demo.dart`.
+### Fixed
+- Fixed functions and wrapper classes for the ttf.
+- Removed struct `SdlxPowerInfo` and `SdlxDataResult` (use Record).
+- Revised the folder hierarchy in `lib/sdl3/ex/sdl`.
+
 ## [2.9.2] - 2026-06-25
 - SDL3-2026-06-21
 ### Added

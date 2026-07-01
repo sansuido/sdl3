@@ -19,11 +19,7 @@ part of '../../sdl_ttf.dart';
 /// extern SDL_DECLSPEC void SDLCALL TTF_GetFreeTypeVersion(int *major, int *minor, int *patch)
 /// ```
 /// {@category ttf}
-({int major, int minor, int patch}) ttfxGetFreeTypeVersion(
-  Pointer<Int32> major,
-  Pointer<Int32> minor,
-  Pointer<Int32> patch,
-) {
+({int major, int minor, int patch}) ttfxGetFreeTypeVersion() {
   final majorPointer = ffi.calloc<Int32>();
   final minorPointer = ffi.calloc<Int32>();
   final patchPointer = ffi.calloc<Int32>();
@@ -54,11 +50,7 @@ part of '../../sdl_ttf.dart';
 /// extern SDL_DECLSPEC void SDLCALL TTF_GetHarfBuzzVersion(int *major, int *minor, int *patch)
 /// ```
 /// {@category ttf}
-({int major, int minor, int patch}) ttfxGetHarfBuzzVersion(
-  Pointer<Int32> major,
-  Pointer<Int32> minor,
-  Pointer<Int32> patch,
-) {
+({int major, int minor, int patch}) ttfxGetHarfBuzzVersion() {
   final majorPointer = ffi.calloc<Int32>();
   final minorPointer = ffi.calloc<Int32>();
   final patchPointer = ffi.calloc<Int32>();
@@ -92,11 +84,7 @@ part of '../../sdl_ttf.dart';
 /// extern SDL_DECLSPEC bool SDLCALL TTF_GetFontDPI(TTF_Font *font, int *hdpi, int *vdpi)
 /// ```
 /// {@category ttf}
-({int hdpi, int vdpi})? ttfxGetFontDpi(
-  Pointer<TtfFont> font,
-  Pointer<Int32> hdpi,
-  Pointer<Int32> vdpi,
-) {
+({int hdpi, int vdpi})? ttfxGetFontDpi(Pointer<TtfFont> font) {
   late int hdpi;
   late int vdpi;
   final hdpiPointer = ffi.calloc<Int32>();
@@ -136,7 +124,6 @@ part of '../../sdl_ttf.dart';
 ({int imageType, Pointer<SdlSurface> surface})? ttfxGetGlyphImage(
   Pointer<TtfFont> font,
   int ch,
-  Pointer<Int32> imageType,
 ) {
   late int imageType;
   final imageTypePointer = ffi.calloc<Int32>();
@@ -176,7 +163,6 @@ part of '../../sdl_ttf.dart';
 ({int imageType, Pointer<SdlSurface> surface})? ttfxGetGlyphImageForIndex(
   Pointer<TtfFont> font,
   int glyphIndex,
-  Pointer<Int32> imageType,
 ) {
   late int imageType;
   final imageTypePointer = ffi.calloc<Int32>();
@@ -227,11 +213,6 @@ part of '../../sdl_ttf.dart';
 ({int advance, int maxx, int maxy, int minx, int miny})? ttfxGetGlyphMetrics(
   Pointer<TtfFont> font,
   int ch,
-  Pointer<Int32> minx,
-  Pointer<Int32> maxx,
-  Pointer<Int32> miny,
-  Pointer<Int32> maxy,
-  Pointer<Int32> advance,
 ) {
   late int minx;
   late int maxx;

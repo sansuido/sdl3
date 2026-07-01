@@ -787,6 +787,8 @@ bool sdlSendAndroidMessage(int command, int param) {
 ///
 /// \since This function is available since SDL 3.6.0.
 ///
+/// \sa SDL_IsTablet
+///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_IsPhone(void)
 /// ```
@@ -837,6 +839,68 @@ bool sdlIsTv() {
   final sdlIsTvLookupFunction = _libSdl
       .lookupFunction<Bool Function(), bool Function()>('SDL_IsTV');
   return sdlIsTvLookupFunction();
+}
+
+///
+/// Get the form factor of the current device.
+///
+/// This function guesses what the device may be, but may report inaccurate or
+/// outright wrong results. For example, it may report a laptop as a desktop,
+/// or a car device as a phone.
+///
+/// Depending on the usage, there may be different functions better suited for
+/// each purpose. For example, activating touch controls can be done by
+/// detecting the presence of a touchscreen rather than restricting to phones
+/// and tablets.
+///
+/// \returns the best guess for the form factor of the current device.
+///
+/// \since This function is available since SDL 3.6.0.
+///
+/// \sa SDL_FormFactor
+/// \sa SDL_GetDeviceFormFactorName
+///
+/// ```c
+/// extern SDL_DECLSPEC SDL_FormFactor SDLCALL SDL_GetDeviceFormFactor(void)
+/// ```
+/// {@category system}
+int sdlGetDeviceFormFactor() {
+  final sdlGetDeviceFormFactorLookupFunction = _libSdl
+      .lookupFunction<Int32 Function(), int Function()>(
+        'SDL_GetDeviceFormFactor',
+      );
+  return sdlGetDeviceFormFactorLookupFunction();
+}
+
+///
+/// Get a short name for the current device.
+///
+/// The name will be in English.
+///
+/// \param form_factor the form factor to query.
+/// \returns a human-readable name for the given form factor, or
+/// "SDL_FORMFACTOR_UNKNOWN" if the form factor isn't recognized.
+///
+/// \since This function is available since SDL 3.6.0.
+///
+/// \sa SDL_FormFactor
+/// \sa SDL_GetDeviceFormFactor
+///
+/// ```c
+/// extern SDL_DECLSPEC const char* SDLCALL SDL_GetDeviceFormFactorName(SDL_FormFactor form_factor)
+/// ```
+/// {@category system}
+String? sdlGetDeviceFormFactorName(int formFactor) {
+  final sdlGetDeviceFormFactorNameLookupFunction = _libSdl
+      .lookupFunction<
+        Pointer<Utf8> Function(Int32 formFactor),
+        Pointer<Utf8> Function(int formFactor)
+      >('SDL_GetDeviceFormFactorName');
+  final result = sdlGetDeviceFormFactorNameLookupFunction(formFactor);
+  if (result == nullptr) {
+    return null;
+  }
+  return result.toDartString();
 }
 
 ///
@@ -1097,4 +1161,21 @@ bool sdlGetGdkDefaultUser(Pointer<XUserHandle> outUserHandle) {
         bool Function(Pointer<XUserHandle> outUserHandle)
       >('SDL_GetGDKDefaultUser');
   return sdlGetGdkDefaultUserLookupFunction(outUserHandle);
+}
+
+///
+/// Detect whether the current platform is Ubuntu Touch.
+///
+/// \returns true if the platform is Ubuntu Touch; false otherwise.
+///
+/// \since This function is available since SDL 3.6.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL SDL_IsUbuntuTouch(void)
+/// ```
+/// {@category system}
+bool sdlIsUbuntuTouch() {
+  final sdlIsUbuntuTouchLookupFunction = _libSdl
+      .lookupFunction<Bool Function(), bool Function()>('SDL_IsUbuntuTouch');
+  return sdlIsUbuntuTouchLookupFunction();
 }

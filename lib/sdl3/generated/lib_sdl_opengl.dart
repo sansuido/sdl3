@@ -20494,7 +20494,7 @@ typedef PFNGLGETFRAMEBUFFERPARAMETERIVMESAPROCDart =
 typedef PFNGLGETFRAMEBUFFERPARAMETERIVMESAPROC =
     Void Function(Uint32 target, Uint32 pname, Pointer<Int32> params);
 
-// typedef void (APIENTRYP PFNGLADDCLIENTPOINTERRANGEMESAPROC) (GLvoid *addr, GLsizeiptr size)
+// typedef void (APIENTRYP PFNGLADDCLIENTPOINTERRANGEMESAPROC) (void *addr, GLsizeiptr size)
 typedef PFNGLADDCLIENTPOINTERRANGEMESAPROCDart =
     void Function(Pointer<Void> addr, int size);
 typedef PFNGLADDCLIENTPOINTERRANGEMESAPROC =
