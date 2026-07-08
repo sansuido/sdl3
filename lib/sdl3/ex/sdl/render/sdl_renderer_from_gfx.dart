@@ -1,6 +1,6 @@
 part of '../../../sdl.dart';
 
-extension SdlRendererFromGfxPointerEx on Pointer<SdlRenderer> {
+extension SdlRendererPointerFromGfxEx on Pointer<SdlRenderer> {
   // lib_sdl_gfx.dart
 
   bool pixelColor(

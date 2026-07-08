@@ -1206,6 +1206,11 @@ Pointer<SdlWindow> sdlCreatePopupWindow(
 /// application wants an associated `wl_egl_window` object to be created and
 /// attached to the window, even if the window does not have the OpenGL
 /// property or `SDL_WINDOW_OPENGL` flag set.
+/// - `SDL_PROP_WINDOW_CREATE_WAYLAND_WINDOW_ID_STRING` - a string used as a
+/// stable identifier for toplevel windows for the purpose of allowing the
+/// compositor to save/restore their state between runs. This should be human
+/// readable, but not translated, and must be unique for each individual
+/// window.
 /// - `SDL_PROP_WINDOW_CREATE_WAYLAND_WL_SURFACE_POINTER` - the wl_surface
 /// associated with the window, if you want to wrap an existing window. See
 /// [README-wayland](README-wayland) for more information.
@@ -1469,6 +1474,12 @@ Pointer<SdlWindow> sdlGetWindowParent(Pointer<SdlWindow> window) {
 /// with the window
 /// - `SDL_PROP_WINDOW_WAYLAND_EGL_WINDOW_POINTER`: the wl_egl_window
 /// associated with the window
+/// - `SDL_PROP_WINDOW_WAYLAND_WINDOW_ID_STRING`: the window identification
+/// string, initially set with
+/// SDL_PROP_WINDOW_CREATE_WAYLAND_WINDOW_ID_STRING, and used as an
+/// identifier for session management. Setting this to null or an empty
+/// string ("") before hiding or destroying the window will cause any session
+/// information associated with the window to be removed
 /// - `SDL_PROP_WINDOW_WAYLAND_XDG_SURFACE_POINTER`: the xdg_surface associated
 /// with the window
 /// - `SDL_PROP_WINDOW_WAYLAND_XDG_TOPLEVEL_POINTER`: the xdg_toplevel role

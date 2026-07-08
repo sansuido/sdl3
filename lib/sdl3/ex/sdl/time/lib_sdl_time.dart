@@ -23,21 +23,25 @@ part of '../../../sdl.dart';
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetDateTimeLocalePreferences(SDL_DateFormat *dateFormat, SDL_TimeFormat *timeFormat)
 /// ```
 /// {@category time}
-bool sdlxGetDateTimeLocalePreferences(SdlxDateTimeLocale dateTime) {
+({int dateFromat, int timeFormat})? sdlxGetDateTimeLocalePreferences() {
+  int? dateFormat;
+  int? timeFormat;
   final dateFormatPointer = ffi.calloc<Int32>();
   final timeFormatPointer = ffi.calloc<Int32>();
-  final result = sdlGetDateTimeLocalePreferences(
+  final bl = sdlGetDateTimeLocalePreferences(
     dateFormatPointer,
     timeFormatPointer,
   );
-  if (result) {
-    dateTime
-      ..dateFormat = dateFormatPointer.value
-      ..timeFormat = timeFormatPointer.value;
+  if (bl) {
+    dateFormat = dateFormatPointer.value;
+    timeFormat = timeFormatPointer.value;
   }
   dateFormatPointer.callocFree();
   timeFormatPointer.callocFree();
-  return result;
+  if (!bl) {
+    return null;
+  }
+  return (dateFromat: dateFormat!, timeFormat: timeFormat!);
 }
 
 ///
@@ -153,35 +157,15 @@ int? sdlxDateTimeToTime(SdlxDateTime dateTime) {
 /// extern SDL_DECLSPEC void SDLCALL SDL_TimeToWindows(SDL_Time ticks, Uint32 *dwLowDateTime, Uint32 *dwHighDateTime)
 /// ```
 /// {@category time}
-void sdlxTimeToWindows(int ticks, SdlxDateTimeWindows dateTime) {
+({int dwLowDateTime, int dwHighDateTime}) sdlxTimeToWindows(int ticks) {
+  late int dwLowDateTime;
+  late int dwHighDateTime;
   final dwLowDateTimePointer = ffi.calloc<Uint32>();
   final dwHighDateTimePointer = ffi.calloc<Uint32>();
   sdlTimeToWindows(ticks, dwLowDateTimePointer, dwHighDateTimePointer);
-  dateTime
-    ..dwLowDateTime = dwLowDateTimePointer.value
-    ..dwHighDateTime = dwHighDateTimePointer.value;
+  dwLowDateTime = dwLowDateTimePointer.value;
+  dwHighDateTime = dwHighDateTimePointer.value;
   dwLowDateTimePointer.callocFree();
   dwHighDateTimePointer.callocFree();
+  return (dwLowDateTime: dwLowDateTime, dwHighDateTime: dwHighDateTime);
 }
-
-///
-/// Converts a Windows FILETIME (100-nanosecond intervals since January 1,
-/// 1601) to an SDL time.
-///
-/// This function takes the two 32-bit values of the FILETIME structure as
-/// parameters.
-///
-/// \param dwLowDateTime the low portion of the Windows FILETIME value.
-/// \param dwHighDateTime the high portion of the Windows FILETIME value.
-/// \returns the converted SDL time.
-///
-/// \threadsafety It is safe to call this function from any thread.
-///
-/// \since This function is available since SDL 3.2.0.
-///
-/// ```c
-/// extern SDL_DECLSPEC SDL_Time SDLCALL SDL_TimeFromWindows(Uint32 dwLowDateTime, Uint32 dwHighDateTime)
-/// ```
-/// {@category time}
-int sdlxTimeFromWindows(SdlxDateTimeWindows dateTime) =>
-    sdlTimeFromWindows(dateTime.dwLowDateTime, dateTime.dwHighDateTime);

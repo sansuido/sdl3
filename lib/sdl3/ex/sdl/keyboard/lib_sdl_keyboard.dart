@@ -112,9 +112,13 @@ List<bool> sdlxGetKeyboardState() {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetTextInputArea(SDL_Window *window, const SDL_Rect *rect, int cursor)
 /// ```
 /// {@category keyboard}
-bool sdlxSetTextInputArea(Pointer<SdlWindow> window, SdlxTextInputArea area) {
-  final rectPointer = area.rect.calloc();
-  final result = sdlSetTextInputArea(window, rectPointer, area.cursor);
+bool sdlxSetTextInputArea(
+  Pointer<SdlWindow> window,
+  SdlxRect rect,
+  int cursor,
+) {
+  final rectPointer = rect.calloc();
+  final result = sdlSetTextInputArea(window, rectPointer, cursor);
   rectPointer.callocFree();
   return result;
 }
@@ -142,15 +146,20 @@ bool sdlxSetTextInputArea(Pointer<SdlWindow> window, SdlxTextInputArea area) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetTextInputArea(SDL_Window *window, SDL_Rect *rect, int *cursor)
 /// ```
 /// {@category keyboard}
-bool sdlxGetTextInputArea(Pointer<SdlWindow> window, SdlxTextInputArea area) {
-  final rectPointer = area.rect.calloc();
+({int cursor, SdlxRect rect})? sdlxGetTextInputArea(Pointer<SdlWindow> window) {
+  SdlxRect? rect;
+  int? cursor;
+  final rectPointer = ffi.calloc<SdlRect>();
   final cursorPointer = ffi.calloc<Int32>();
-  final result = sdlGetTextInputArea(window, rectPointer, cursorPointer);
-  if (result) {
-    area.rect.loadFromPointer(rectPointer);
-    area.cursor = cursorPointer.value;
+  final bl = sdlGetTextInputArea(window, rectPointer, cursorPointer);
+  if (bl) {
+    rect = SdlxRect()..loadFromPointer(rectPointer);
+    cursor = cursorPointer.value;
   }
   cursorPointer.callocFree();
   rectPointer.callocFree();
-  return result;
+  if (!bl) {
+    return null;
+  }
+  return (cursor: cursor!, rect: rect!);
 }

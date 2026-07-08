@@ -65,16 +65,20 @@ part 'ex/sdl/gpu/struct_sdl_gpu_viewport.dart';
 
 part 'ex/sdl/guid/lib_sdl_guid.dart';
 
+part 'ex/sdl/haptic/lib_sdl_haptic.dart';
+part 'ex/sdl/haptic/sdl_haptic.dart';
+part 'ex/sdl/haptic/struct_sdl_haptic_effect.dart';
+
 part 'ex/sdl/iostream/lib_sdl_iostream.dart';
 part 'ex/sdl/iostream/sdl_iostream.dart';
 
 part 'ex/sdl/joystick/lib_sdl_joystick.dart';
 part 'ex/sdl/joystick/sdl_joystick.dart';
+part 'ex/sdl/joystick/sdl_joystick_from_haptic.dart';
 part 'ex/sdl/joystick/struct_sdl_joystick_guid_info.dart';
 part 'ex/sdl/joystick/struct_sdl_virtual_joystick_desc.dart';
 
 part 'ex/sdl/keyboard/lib_sdl_keyboard.dart';
-part 'ex/sdl/keyboard/struct_sdl_text_input_area.dart';
 
 part 'ex/sdl/locale/lib_sdl_locale.dart';
 part 'ex/sdl/locale/struct_sdl_locale.dart';
@@ -85,6 +89,9 @@ part 'ex/sdl/messagebox/struct_sdl_message_box_data.dart';
 part 'ex/sdl/mouse/lib_sdl_mouse.dart';
 part 'ex/sdl/mouse/sdl_cursor.dart';
 part 'ex/sdl/mouse/struct_sdl_cursor_frame_info.dart';
+
+part 'ex/sdl/notification/lib_sdl_notification.dart';
+part 'ex/sdl/notification/struct_sdl_notification_action.dart';
 
 part 'ex/sdl/pixels/lib_sdl_pixels.dart';
 part 'ex/sdl/pixels/struct_sdl_color.dart';
@@ -130,8 +137,6 @@ part 'ex/sdl/system/lib_sdl_system.dart';
 
 part 'ex/sdl/time/lib_sdl_time.dart';
 part 'ex/sdl/time/struct_sdl_date_time.dart';
-part 'ex/sdl/time/struct_sdl_date_time_locale.dart';
-part 'ex/sdl/time/struct_sdl_date_time_windows.dart';
 
 part 'ex/sdl/touch/lib_sdl_touch.dart';
 

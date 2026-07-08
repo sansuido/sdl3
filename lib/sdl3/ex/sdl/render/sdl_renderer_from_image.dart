@@ -2,7 +2,7 @@
 
 part of '../../../sdl.dart';
 
-extension SdlRendererFromImagePointerEx on Pointer<SdlRenderer> {
+extension SdlRendererPointerFromImageEx on Pointer<SdlRenderer> {
   // lib_sdl_image.dart
 
   ///

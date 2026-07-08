@@ -114,7 +114,7 @@ yamahara
 - [x] [lib_sdl_gamepad.dart](./lib/sdl3/ex/sdl/gamepad/lib_sdl_gamepad.dart)
 - [x] [lib_sdl_gpu.dart](./lib/sdl3/ex/sdl/gpu/lib_sdl_gpu.dart)
 - [x] [lib_sdl_guid.dart](./lib/sdl3/ex/sdl/guid/lib_sdl_guid.dart)
-- [ ] lib_sdl_haptic.dart
+- [x] [lib_sdl_haptic.dart](./lib/sdl3/ex/sdl/haptic/lib_sdl_haptic.dart)
 - [ ] lib_sdl_hidapi.dart
 - [x] ~~lib_sdl_hints.dart~~
 - [x] [lib_sdl_image.dart](./lib/sdl3/ex/image/lib_sdl_image.dart)
@@ -132,8 +132,8 @@ yamahara
 - [x] [lib_sdl_mixer.dart](./lib/sdl3/ex/mixer/lib_sdl_mixer.dart)
 - [x] [lib_sdl_mouse.dart](./lib/sdl3/ex/sdl/mouse/lib_sdl_mouse.dart)
 - [ ] lib_sdl_mutex.dart
-- [ ] lib_sdl_net.dart
-- [ ] lib_sdl_notification.dart
+- [x] [lib_sdl_net.dart](./lib/sdl3/ex/net/lib_sdl_net.dart)
+- [x] [lib_sdl_notification.dart](./lib/sdl3/ex/sdl/notification/lib_sdl_notification.dart)
 - [ ] lib_sdl_opengl.dart
 - [ ] lib_sdl_opengl_glext.dart
 - [ ] lib_sdl_openxr.dart

@@ -2176,7 +2176,7 @@ const SDL_RENDERER_VSYNC_ADAPTIVE = -1;
 const SDL_DEBUG_TEXT_FONT_CHARACTER_SIZE = 8;
 //const SDL_revision_h_ = ;
 const SDL_REVISION =
-    'SDL-3.5.0-release-3.4.0-1061-gf0e99e7c7 (" SDL_VENDOR_INFO ")';
+    'SDL-3.5.0-release-3.4.0-1105-g655c8166a (" SDL_VENDOR_INFO ")';
 //const SDL_scancode_h_ = ;
 const SDL_SCANCODE_UNKNOWN = 0;
 const SDL_SCANCODE_A = 4;
@@ -2678,6 +2678,8 @@ const SDL_MICRO_VERSION = 0;
 //const SDL_video_h_ = ;
 const SDL_PROP_GLOBAL_VIDEO_WAYLAND_WL_DISPLAY_POINTER =
     'SDL.video.wayland.wl_display';
+const SDL_PROP_GLOBAL_VIDEO_WAYLAND_SESSION_ID_STRING =
+    'SDL.video.wayland.session_id';
 const SDL_SYSTEM_THEME_UNKNOWN = 0;
 const SDL_SYSTEM_THEME_LIGHT = 1;
 const SDL_SYSTEM_THEME_DARK = 2;
@@ -2820,6 +2822,8 @@ const SDL_PROP_WINDOW_CREATE_WAYLAND_SURFACE_ROLE_CUSTOM_BOOLEAN =
     'SDL.window.create.wayland.surface_role_custom';
 const SDL_PROP_WINDOW_CREATE_WAYLAND_CREATE_EGL_WINDOW_BOOLEAN =
     'SDL.window.create.wayland.create_egl_window';
+const SDL_PROP_WINDOW_CREATE_WAYLAND_WINDOW_ID_STRING =
+    'SDL.window.create.wayland.window_id';
 const SDL_PROP_WINDOW_CREATE_WAYLAND_WL_SURFACE_POINTER =
     'SDL.window.create.wayland.wl_surface';
 const SDL_PROP_WINDOW_CREATE_WIN32_HWND_POINTER =
@@ -2869,6 +2873,7 @@ const SDL_PROP_WINDOW_WAYLAND_SURFACE_POINTER = 'SDL.window.wayland.surface';
 const SDL_PROP_WINDOW_WAYLAND_VIEWPORT_POINTER = 'SDL.window.wayland.viewport';
 const SDL_PROP_WINDOW_WAYLAND_EGL_WINDOW_POINTER =
     'SDL.window.wayland.egl_window';
+const SDL_PROP_WINDOW_WAYLAND_WINDOW_ID_STRING = 'SDL.window.wayland.window_id';
 const SDL_PROP_WINDOW_WAYLAND_XDG_SURFACE_POINTER =
     'SDL.window.wayland.xdg_surface';
 const SDL_PROP_WINDOW_WAYLAND_XDG_TOPLEVEL_POINTER =
@@ -5734,6 +5739,8 @@ class SdlkPropWindow {
       SDL_PROP_WINDOW_CREATE_WAYLAND_SURFACE_ROLE_CUSTOM_BOOLEAN;
   static const createWaylandCreateEglWindowBoolean =
       SDL_PROP_WINDOW_CREATE_WAYLAND_CREATE_EGL_WINDOW_BOOLEAN;
+  static const createWaylandWindowIdString =
+      SDL_PROP_WINDOW_CREATE_WAYLAND_WINDOW_ID_STRING;
   static const createWaylandWlSurfacePointer =
       SDL_PROP_WINDOW_CREATE_WAYLAND_WL_SURFACE_POINTER;
   static const createWin32HwndPointer =
@@ -5785,6 +5792,7 @@ class SdlkPropWindow {
       SDL_PROP_WINDOW_WAYLAND_VIEWPORT_POINTER;
   static const waylandEglWindowPointer =
       SDL_PROP_WINDOW_WAYLAND_EGL_WINDOW_POINTER;
+  static const waylandWindowIdString = SDL_PROP_WINDOW_WAYLAND_WINDOW_ID_STRING;
   static const waylandXdgSurfacePointer =
       SDL_PROP_WINDOW_WAYLAND_XDG_SURFACE_POINTER;
   static const waylandXdgToplevelPointer =

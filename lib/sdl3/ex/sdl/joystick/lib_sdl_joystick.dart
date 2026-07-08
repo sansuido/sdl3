@@ -152,7 +152,13 @@ bool sdlxSendJoystickVirtualSensorData(
 /// extern SDL_DECLSPEC void SDLCALL SDL_GetJoystickGUIDInfo(SDL_GUID guid, Uint16 *vendor, Uint16 *product, Uint16 *version, Uint16 *crc16)
 /// ```
 /// {@category joystick}
-void sdlxGetJoystickGuidInfo(SdlGuid guid, SdlxJoystickGuidInfo info) {
+({int crc16, int product, int vendor, int version}) sdlxGetJoystickGuidInfo(
+  SdlGuid guid,
+) {
+  late int vendor;
+  late int product;
+  late int version;
+  late int crc16;
   final vendorPointer = ffi.calloc<Uint16>();
   final productPointer = ffi.calloc<Uint16>();
   final versionPointer = ffi.calloc<Uint16>();
@@ -164,15 +170,15 @@ void sdlxGetJoystickGuidInfo(SdlGuid guid, SdlxJoystickGuidInfo info) {
     versionPointer,
     crc16Pointer,
   );
-  info
-    ..vendor = vendorPointer.value
-    ..product = productPointer.value
-    ..version = versionPointer.value
-    ..crc16 = crc16Pointer.value;
+  vendor = vendorPointer.value;
+  product = productPointer.value;
+  version = versionPointer.value;
+  crc16 = crc16Pointer.value;
   vendorPointer.callocFree();
   productPointer.callocFree();
   versionPointer.callocFree();
   crc16Pointer.callocFree();
+  return (vendor: vendor, product: product, version: version, crc16: crc16);
 }
 
 ///

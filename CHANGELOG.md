@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.9.4] - 2026-07-08
+- SDL3-2026-07-05
+### Added
+- Added functions and wrapper classes for the haptic, net, notification.
+### Fixed
+- Removed struct `SdlxJoystickGuidInfo`, `SdlxTextInputArea`, `SdlxDateTimeLocale`, `SdlxDateTimeWindows` (use Record).
+
 ## [2.9.3] - 2026-07-01
 - SDL3-2026-06-28
 ### Added

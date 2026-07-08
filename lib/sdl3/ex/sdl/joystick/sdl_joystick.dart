@@ -439,8 +439,9 @@ extension SdlJoystickEx on SdlJoystick {
   /// extern SDL_DECLSPEC void SDLCALL SDL_GetJoystickGUIDInfo(SDL_GUID guid, Uint16 *vendor, Uint16 *product, Uint16 *version, Uint16 *crc16)
   /// ```
   /// {@category joystick}
-  static void getGuidInfo(SdlGuid guid, SdlxJoystickGuidInfo info) =>
-      sdlxGetJoystickGuidInfo(guid, info);
+  static ({int crc16, int product, int vendor, int version}) getGuidInfo(
+    SdlGuid guid,
+  ) => sdlxGetJoystickGuidInfo(guid);
 
   ///
   /// Set the state of joystick event processing.

@@ -1144,6 +1144,9 @@ void sdlPopGpuDebugGroup(Pointer<SdlGpuCommandBuffer> commandBuffer) {
 ///
 /// You must not reference the texture after calling this function.
 ///
+/// It is safe to pass NULL for `texture`, in that case this function is a
+/// no-op.
+///
 /// \param device a GPU context.
 /// \param texture a texture to be destroyed.
 ///
@@ -1175,6 +1178,9 @@ void sdlReleaseGpuTexture(
 /// Frees the given sampler as soon as it is safe to do so.
 ///
 /// You must not reference the sampler after calling this function.
+///
+/// It is safe to pass NULL for `sampler`, in that case this function is a
+/// no-op.
 ///
 /// \param device a GPU context.
 /// \param sampler a sampler to be destroyed.
@@ -1208,6 +1214,9 @@ void sdlReleaseGpuSampler(
 ///
 /// You must not reference the buffer after calling this function.
 ///
+/// It is safe to pass NULL for `buffer`, in that case this function is a
+/// no-op.
+///
 /// \param device a GPU context.
 /// \param buffer a buffer to be destroyed.
 ///
@@ -1239,6 +1248,9 @@ void sdlReleaseGpuBuffer(
 /// Frees the given transfer buffer as soon as it is safe to do so.
 ///
 /// You must not reference the transfer buffer after calling this function.
+///
+/// It is safe to pass NULL for `transfer_buffer`, in that case this function
+/// is a no-op.
 ///
 /// \param device a GPU context.
 /// \param transfer_buffer a transfer buffer to be destroyed.
@@ -1272,6 +1284,9 @@ void sdlReleaseGpuTransferBuffer(
 ///
 /// You must not reference the compute pipeline after calling this function.
 ///
+/// It is safe to pass NULL for `compute_pipeline`, in that case this function
+/// is a no-op.
+///
 /// \param device a GPU context.
 /// \param compute_pipeline a compute pipeline to be destroyed.
 ///
@@ -1304,6 +1319,9 @@ void sdlReleaseGpuComputePipeline(
 ///
 /// You must not reference the shader after calling this function.
 ///
+/// It is safe to pass NULL for `shader`, in that case this function is a
+/// no-op.
+///
 /// \param device a GPU context.
 /// \param shader a shader to be destroyed.
 ///
@@ -1335,6 +1353,9 @@ void sdlReleaseGpuShader(
 /// Frees the given graphics pipeline as soon as it is safe to do so.
 ///
 /// You must not reference the graphics pipeline after calling this function.
+///
+/// It is safe to pass NULL for `graphics_pipeline`, in that case this function
+/// is a no-op.
 ///
 /// \param device a GPU context.
 /// \param graphics_pipeline a graphics pipeline to be destroyed.
@@ -3954,6 +3975,8 @@ bool sdlQueryGpuFence(
 /// Releases a fence obtained from SDL_SubmitGPUCommandBufferAndAcquireFence.
 ///
 /// You must not reference the fence after calling this function.
+///
+/// It is safe to pass NULL for `fence`, in that case this function is a no-op.
 ///
 /// \param device a GPU context.
 /// \param fence a fence.
