@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_positional_boolean_parameters, comment_references
+// ignore_for_file: comment_references
 part of '../../../sdl.dart';
 
 ///
@@ -538,8 +538,8 @@ void sdlxSetGpuBlendConstants(
 /// ```
 /// {@category gpu}
 void sdlxBindGpuVertexBuffers(
-  Pointer<SdlGpuRenderPass> renderPass, {
-  required List<SdlxGpuBufferBinding> bindings,
+  Pointer<SdlGpuRenderPass> renderPass,
+  List<SdlxGpuBufferBinding> bindings, {
   int firstSlot = 0,
 }) {
   if (bindings.isNotEmpty) {
@@ -603,8 +603,8 @@ void sdlxBindGpuIndexBuffer(
 /// ```
 /// {@category gpu}
 void sdlxBindGpuVertexSamplers(
-  Pointer<SdlGpuRenderPass> renderPass, {
-  required List<SdlxGpuTextureSamplerBinding> bindings,
+  Pointer<SdlGpuRenderPass> renderPass,
+  List<SdlxGpuTextureSamplerBinding> bindings, {
   int firstSlot = 0,
 }) {
   if (bindings.isNotEmpty) {
@@ -642,8 +642,8 @@ void sdlxBindGpuVertexSamplers(
 /// ```
 /// {@category gpu}
 void sdlxBindGpuVertexStorageTextures(
-  Pointer<SdlGpuRenderPass> renderPass, {
-  required List<Pointer<SdlGpuTexture>> storageTextures,
+  Pointer<SdlGpuRenderPass> renderPass,
+  List<Pointer<SdlGpuTexture>> storageTextures, {
   int firstSlot = 0,
 }) {
   final pointer = ffi.calloc<Pointer<SdlGpuTexture>>(storageTextures.length);
@@ -682,8 +682,8 @@ void sdlxBindGpuVertexStorageTextures(
 /// ```
 /// {@category gpu}
 void sdlxBindGpuVertexStorageBuffers(
-  Pointer<SdlGpuRenderPass> renderPass, {
-  required List<Pointer<SdlGpuBuffer>> storageBuffers,
+  Pointer<SdlGpuRenderPass> renderPass,
+  List<Pointer<SdlGpuBuffer>> storageBuffers, {
   int firstSlot = 0,
 }) {
   final pointer = ffi.calloc<Pointer<SdlGpuBuffer>>(storageBuffers.length);
@@ -723,8 +723,8 @@ void sdlxBindGpuVertexStorageBuffers(
 /// ```
 /// {@category gpu}
 void sdlxBindGpuFragmentSamplers(
-  Pointer<SdlGpuRenderPass> renderPass, {
-  required List<SdlxGpuTextureSamplerBinding> bindings,
+  Pointer<SdlGpuRenderPass> renderPass,
+  List<SdlxGpuTextureSamplerBinding> bindings, {
   int firstSlot = 0,
 }) {
   if (bindings.isNotEmpty) {
@@ -762,8 +762,8 @@ void sdlxBindGpuFragmentSamplers(
 /// ```
 /// {@category gpu}
 void sdlxBindGpuFragmentStorageTextures(
-  Pointer<SdlGpuRenderPass> renderPass, {
-  required List<Pointer<SdlGpuTexture>> storageTextures,
+  Pointer<SdlGpuRenderPass> renderPass,
+  List<Pointer<SdlGpuTexture>> storageTextures, {
   int firstSlot = 0,
 }) {
   final pointer = ffi.calloc<Pointer<SdlGpuTexture>>(storageTextures.length);
@@ -802,8 +802,8 @@ void sdlxBindGpuFragmentStorageTextures(
 /// ```
 /// {@category gpu}
 void sdlxBindGpuFragmentStorageBuffers(
-  Pointer<SdlGpuRenderPass> renderPass, {
-  required List<Pointer<SdlGpuBuffer>> storageBuffers,
+  Pointer<SdlGpuRenderPass> renderPass,
+  List<Pointer<SdlGpuBuffer>> storageBuffers, {
   int firstSlot = 0,
 }) {
   final pointer = ffi.calloc<Pointer<SdlGpuBuffer>>(storageBuffers.length);
@@ -920,8 +920,8 @@ Pointer<SdlGpuComputePass> sdlxBeginGpuComputePass(
 /// ```
 /// {@category gpu}
 void sdlxBindGpuComputeSamplers(
-  Pointer<SdlGpuComputePass> computePass, {
-  required List<SdlxGpuTextureSamplerBinding> bindings,
+  Pointer<SdlGpuComputePass> computePass,
+  List<SdlxGpuTextureSamplerBinding> bindings, {
   int firstSlot = 0,
 }) {
   if (bindings.isNotEmpty) {
@@ -959,8 +959,8 @@ void sdlxBindGpuComputeSamplers(
 /// ```
 /// {@category gpu}
 void sdlxBindGpuComputeStorageTextures(
-  Pointer<SdlGpuComputePass> computePass, {
-  required List<Pointer<SdlGpuTexture>> storageTextures,
+  Pointer<SdlGpuComputePass> computePass,
+  List<Pointer<SdlGpuTexture>> storageTextures, {
   int firstSlot = 0,
 }) {
   final pointer = ffi.calloc<Pointer<SdlGpuTexture>>(storageTextures.length);
@@ -999,8 +999,8 @@ void sdlxBindGpuComputeStorageTextures(
 /// ```
 /// {@category gpu}
 void sdlxBindGpuComputeStorageBuffers(
-  Pointer<SdlGpuComputePass> computePass, {
-  required List<Pointer<SdlGpuBuffer>> storageBuffers,
+  Pointer<SdlGpuComputePass> computePass,
+  List<Pointer<SdlGpuBuffer>> storageBuffers, {
   int firstSlot = 0,
 }) {
   final pointer = ffi.calloc<Pointer<SdlGpuBuffer>>(storageBuffers.length);
@@ -1040,9 +1040,9 @@ void sdlxBindGpuComputeStorageBuffers(
 void sdlxUploadToGpuTexture(
   Pointer<SdlGpuCopyPass> copyPass,
   SdlxGpuTextureTransferInfo source,
-  SdlxGpuTextureRegion destination,
-  bool cycle,
-) {
+  SdlxGpuTextureRegion destination, {
+  bool cycle = false,
+}) {
   final sourcePointer = source.calloc();
   final destinationPointer = destination.calloc();
   sdlUploadToGpuTexture(copyPass, sourcePointer, destinationPointer, cycle);
@@ -1071,9 +1071,9 @@ void sdlxUploadToGpuTexture(
 void sdlxUploadToGpuBuffer(
   Pointer<SdlGpuCopyPass> copyPass,
   SdlxGpuTransferBufferLocation source,
-  SdlxGpuBufferRegion destination,
-  bool cycle,
-) {
+  SdlxGpuBufferRegion destination, {
+  bool cycle = false,
+}) {
   final sourcePointer = source.calloc();
   final destinationPointer = destination.calloc();
   sdlUploadToGpuBuffer(copyPass, sourcePointer, destinationPointer, cycle);
@@ -1112,9 +1112,9 @@ void sdlxCopyGpuTextureToTexture(
   SdlxGpuTextureLocation destination,
   int w,
   int h,
-  int d,
-  bool cycle,
-) {
+  int d, {
+  bool cycle = false,
+}) {
   final sourcePointer = source.calloc();
   final destinationPointer = destination.calloc();
   sdlCopyGpuTextureToTexture(
@@ -1153,9 +1153,9 @@ void sdlxCopyGpuBufferToBuffer(
   Pointer<SdlGpuCopyPass> copyPass,
   SdlxGpuBufferLocation source,
   SdlxGpuBufferLocation destination,
-  int size,
-  bool cycle,
-) {
+  int size, {
+  bool cycle = false,
+}) {
   final sourcePointer = source.calloc();
   final destinationPointer = destination.calloc();
   sdlCopyGpuBufferToBuffer(
@@ -1187,7 +1187,7 @@ void sdlxCopyGpuBufferToBuffer(
 /// ```
 /// {@category gpu}
 //void sdlDownloadFromGpuTexture(Pointer<SdlGpuCopyPass> copyPass, Pointer<SdlGpuTextureRegion> source, Pointer<SdlGpuTextureTransferInfo> destination) {
-void sdlxDownloadToGpuTexture(
+void sdlxDownloadFromGpuTexture(
   Pointer<SdlGpuCopyPass> copyPass,
   SdlxGpuTextureRegion source,
   SdlxGpuTextureTransferInfo destination,
@@ -1305,32 +1305,36 @@ void sdlxBlitGpuTexture(
 /// extern SDL_DECLSPEC bool SDLCALL SDL_AcquireGPUSwapchainTexture( SDL_GPUCommandBuffer *command_buffer, SDL_Window *window, SDL_GPUTexture **swapchain_texture, Uint32 *swapchain_texture_width, Uint32 *swapchain_texture_height)
 /// ```
 /// {@category gpu}
-bool sdlxAcquireGpuSwapchainTexture(
+({int height, Pointer<SdlGpuTexture> texture, int width})?
+sdlxAcquireGpuSwapchainTexture(
   Pointer<SdlGpuCommandBuffer> commandBuffer,
   Pointer<SdlWindow> window,
-  SdlxGpuSwapchainTextureInfo info,
 ) {
-  bool result;
-  final swapchainTexture = calloc<Pointer<SdlGpuTexture>>();
-  final swapchainTextureWidth = calloc<Uint32>();
-  final swapchainTextureHeight = calloc<Uint32>();
-  result = sdlAcquireGpuSwapchainTexture(
+  Pointer<SdlGpuTexture> texture = nullptr;
+  var width = 0;
+  var height = 0;
+  final texturePointer = calloc<Pointer<SdlGpuTexture>>();
+  final widthPointer = calloc<Uint32>();
+  final heightPointer = calloc<Uint32>();
+  final bl = sdlAcquireGpuSwapchainTexture(
     commandBuffer,
     window,
-    swapchainTexture,
-    swapchainTextureWidth,
-    swapchainTextureHeight,
+    texturePointer,
+    widthPointer,
+    heightPointer,
   );
-  if (result) {
-    info
-      ..texture = swapchainTexture.value
-      ..w = swapchainTextureWidth.value
-      ..h = swapchainTextureHeight.value;
+  if (bl) {
+    texture = texturePointer.value;
+    width = widthPointer.value;
+    height = heightPointer.value;
   }
-  swapchainTexture.callocFree();
-  swapchainTextureWidth.callocFree();
-  swapchainTextureHeight.callocFree();
-  return result;
+  texturePointer.callocFree();
+  widthPointer.callocFree();
+  heightPointer.callocFree();
+  if (!bl) {
+    return null;
+  }
+  return (texture: texture, width: width, height: height);
 }
 
 ///
@@ -1379,32 +1383,36 @@ bool sdlxAcquireGpuSwapchainTexture(
 /// extern SDL_DECLSPEC bool SDLCALL SDL_WaitAndAcquireGPUSwapchainTexture( SDL_GPUCommandBuffer *command_buffer, SDL_Window *window, SDL_GPUTexture **swapchain_texture, Uint32 *swapchain_texture_width, Uint32 *swapchain_texture_height)
 /// ```
 /// {@category gpu}
-bool sdlxWaitAndAcquireGpuSwapchainTexture(
+({int height, Pointer<SdlGpuTexture> texture, int width})?
+sdlxWaitAndAcquireGpuSwapchainTexture(
   Pointer<SdlGpuCommandBuffer> commandBuffer,
   Pointer<SdlWindow> window,
-  SdlxGpuSwapchainTextureInfo info,
 ) {
-  bool result;
-  final swapchainTexture = calloc<Pointer<SdlGpuTexture>>();
-  final swapchainTextureWidth = calloc<Uint32>();
-  final swapchainTextureHeight = calloc<Uint32>();
-  result = sdlWaitAndAcquireGpuSwapchainTexture(
+  Pointer<SdlGpuTexture> texture = nullptr;
+  var width = 0;
+  var height = 0;
+  final texturePointer = calloc<Pointer<SdlGpuTexture>>();
+  final widthPointer = calloc<Uint32>();
+  final heightPointer = calloc<Uint32>();
+  final bl = sdlWaitAndAcquireGpuSwapchainTexture(
     commandBuffer,
     window,
-    swapchainTexture,
-    swapchainTextureWidth,
-    swapchainTextureHeight,
+    texturePointer,
+    widthPointer,
+    heightPointer,
   );
-  if (result) {
-    info
-      ..texture = swapchainTexture.value
-      ..w = swapchainTextureWidth.value
-      ..h = swapchainTextureHeight.value;
+  if (bl) {
+    texture = texturePointer.value;
+    width = widthPointer.value;
+    height = heightPointer.value;
   }
-  swapchainTexture.callocFree();
-  swapchainTextureWidth.callocFree();
-  swapchainTextureHeight.callocFree();
-  return result;
+  texturePointer.callocFree();
+  widthPointer.callocFree();
+  heightPointer.callocFree();
+  if (!bl) {
+    return null;
+  }
+  return (texture: texture, width: width, height: height);
 }
 
 ///
@@ -1428,8 +1436,8 @@ bool sdlxWaitAndAcquireGpuSwapchainTexture(
 /// ```
 /// {@category gpu}
 bool sdlxWaitForGpuFences(
-  Pointer<SdlGpuDevice> device, {
-  required List<Pointer<SdlGpuFence>> fences,
+  Pointer<SdlGpuDevice> device,
+  List<Pointer<SdlGpuFence>> fences, {
   bool waitAll = true,
 }) {
   bool result;

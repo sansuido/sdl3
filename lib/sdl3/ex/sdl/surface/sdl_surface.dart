@@ -207,8 +207,10 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// extern SDL_DECLSPEC SDL_Surface * SDLCALL SDL_LoadBMP_IO(SDL_IOStream *src, bool closeio)
   /// ```
   /// {@category surface}
-  Pointer<SdlSurface> loadBmpIo(Pointer<SdlIoStream> src, bool freesrc) =>
-      sdlLoadBmpIo(src, freesrc);
+  static Pointer<SdlSurface> loadBmpIo(
+    Pointer<SdlIoStream> src,
+    bool freesrc,
+  ) => sdlLoadBmpIo(src, freesrc);
 
   ///
   /// Save a surface to a seekable SDL data stream in BMP format.

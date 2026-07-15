@@ -1,19 +1,28 @@
 # Changelog
 
+## [2.9.5] - 2026-07-15
+- SDL3-2026-07-12
+### Added
+- Added functions and wrapper classes for hidapi.
+- Added `example/process_input_demo.dart`.
+### Fixed
+- Re-examined functions and wrapper classes for gpu.
+- Removed struct `SdlxGpuSwapchainTextureInfo` (use Record).
+
 ## [2.9.4] - 2026-07-08
 - SDL3-2026-07-05
 ### Added
-- Added functions and wrapper classes for the haptic, net, notification.
+- Added functions and wrapper classes for haptic, net, notification.
 ### Fixed
 - Removed struct `SdlxJoystickGuidInfo`, `SdlxTextInputArea`, `SdlxDateTimeLocale`, `SdlxDateTimeWindows` (use Record).
 
 ## [2.9.3] - 2026-07-01
 - SDL3-2026-06-28
 ### Added
-- Added functions and wrapper classes for the filesystem, stdinc, storage, system.
+- Added functions and wrapper classes for filesystem, stdinc, storage, system.
 - Added `example/stdinc_environment_demo.dart`.
 ### Fixed
-- Fixed functions and wrapper classes for the ttf.
+- Fixed functions and wrapper classes for ttf.
 - Removed struct `SdlxPowerInfo` and `SdlxDataResult` (use Record).
 - Revised the folder hierarchy in `lib/sdl3/ex/sdl`.
 
@@ -22,8 +31,8 @@
 ### Added
 - Added `sdlxConvertEventToRenderCoordinates` function.
 - Added `isTargetWindow` helper to easily route events to specific windows.
-- Added functions and wrapper classes for the camera.
-- Added functions and wrapper classes for the ttf(TtfEngine, TtfText).
+- Added functions and wrapper classes for camera.
+- Added functions and wrapper classes for ttf(TtfEngine, TtfText).
 - Added `example/ttf_text_engine_renderer_demo.dart`.
 ### Updated
 - Dart 3.12.2
@@ -34,7 +43,7 @@
 - **Strictly Typed Callbacks**: Upgraded raw anonymous function pointers (`Pointer<Void>`) into proper `Pointer<NativeFunction>` types across structs (e.g., `SdlVirtualJoystickDesc`, `SdlIoStreamInterface`).
 ### Added
 - Added support for `SdlNotificationEvent`.
-- Added functions and wrapper classes for the gamepad, guid, joystick, power, properties, sensor, time, touch, tray.
+- Added functions and wrapper classes for gamepad, guid, joystick, power, properties, sensor, time, touch, tray.
 - Added `sdlxPushEvent` function.
 - Added `example/properties_demo.dart`.
 - Added `example/tray_demo.dart`.
@@ -46,10 +55,10 @@
 - **Fixed `SDL_Event` layout**: Successfully migrated to a full `Union` structure with correct 128-byte alignment, removing manual pointer casting hacks.
 - Simplified boolean returns by removing manual `== 1` checks.
 ### Added
-- Added functions and wrapper classes for the iostream.
-- Added functions and wrapper classes for the locale.
-- Added functions and wrapper classes for the process.
-- Added functions for the vulkan.
+- Added functions and wrapper classes for iostream.
+- Added functions and wrapper classes for locale.
+- Added functions and wrapper classes for process.
+- Added functions for vulkan.
 - Added `example/hidapi_demo.dart`.
 - Added `example/locale_demo.dart`.
 - Added `example/process_iostream_demo.dart`.
@@ -58,16 +67,16 @@
 ## [2.8.5] - 2026-06-03
 - SDL3-2026-05-31
 ### Added
-- Added functions and wrapper classes for the asyncio.
-- Added functions for the clipboard.
-- Added functions and wrapper classes for the image.
+- Added functions and wrapper classes for asyncio.
+- Added functions for clipboard.
+- Added functions and wrapper classes for image.
 - Added Task List (for 2.9.0) in README.md.
 - Added `example/asyncio_demo.dart`.
 
 ## [2.8.4] - 2026-05-25
 - SDL3-2026-05-24
 ### Added
-- Added functions and wrapper classes for the audio and mixer.
+- Added functions and wrapper classes for audio and mixer.
 - Added `SdlxGamepadCapSenseEvent` (`SDL_EVENT_GAMEPAD_CAPSENSE_TOUCH`, `SDL_EVENT_GAMEPAD_CAPSENSE_RELEASE`).
 - Added `example/dxlib/no029_steep_slope1.dart` and `no029_steep_slope2.dart`.
 - Added `FpsManager.getDeltaTime()`.
@@ -79,7 +88,7 @@
 ## [2.8.3] - 2026-05-20
 - SDL3-2026-05-17
 ### Added
-- Added functions and wrapper classes for the pixels.
+- Added functions and wrapper classes for pixels.
 ### Fixed
 - Removed SdlxPalette.
 ### Updated
@@ -88,9 +97,9 @@
 ## [2.8.2] - 2026-05-12
 - SDL3-2026-05-10
 ### Added
-- Added functions and wrapper classes for the events.
-- Added functions and wrapper classes for the keyboard.
-- Added operator == for the SdlxFPoint.
+- Added functions and wrapper classes for events.
+- Added functions and wrapper classes for keyboard.
+- Added operator == for SdlxFPoint.
 ### Changed
 - **Updated Examples**: All sample code has been migrated to use the new events.
 ### Fixed
@@ -101,7 +110,7 @@
 ## [2.8.1] - 2026-05-04
 - SDL3-2026-05-03
 ### Added
-- Added functions and wrapper classes for the messagebox.
+- Added functions and wrapper classes for messagebox.
 - Added `example/show_message_box.dart`.
 - Added `example/rust/animation_desktop_companion.dart`.
 
@@ -134,7 +143,7 @@
 ## [2.7.2] - 2026-04-05
 - SDL3-2026-04-05
 ### Added
-- Added functions and wrapper classes for the dialog.
+- Added functions and wrapper classes for dialog.
 - Added `example/dialog_demo.dart`.
 
 ## [2.7.1] - 2026-03-29
@@ -147,7 +156,7 @@
 ### Fixed
 - Fixed an issue with memory allocation on the Dart side for some structs.
 ### Added
-- Added functions and wrapper classes for the GPU.
+- Added functions and wrapper classes for GPU.
 - Added the URL for `sdl3_gpu_examples` to the readme file.
 ### Updated
 - Dart 3.11.3
@@ -155,7 +164,7 @@
 ## [2.6.2] - 2026-03-15
 - SDL3-2026-03-15
 ### Added
-- Added functions and wrapper classes for the GPU (first implementation).
+- Added functions and wrapper classes for GPU (first implementation).
 ### Updated
 - Dart 3.11.2
 

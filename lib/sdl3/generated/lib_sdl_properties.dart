@@ -708,6 +708,31 @@ bool sdlClearProperty(int props, String? name) {
 }
 
 ///
+/// Get the current number of items in a group of properties.
+///
+/// For an invalid SDL_PropertiesID, this returns zero and does not set an
+/// error message.
+///
+/// \param props the properties to query.
+/// \returns the number of property items available.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.6.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC int SDLCALL SDL_GetNumProperties(SDL_PropertiesID props)
+/// ```
+/// {@category properties}
+int sdlGetNumProperties(int props) {
+  final sdlGetNumPropertiesLookupFunction = _libSdl
+      .lookupFunction<Int32 Function(Uint32 props), int Function(int props)>(
+        'SDL_GetNumProperties',
+      );
+  return sdlGetNumPropertiesLookupFunction(props);
+}
+
+///
 /// Enumerate the properties contained in a group of properties.
 ///
 /// The callback function is called for each property in the group of

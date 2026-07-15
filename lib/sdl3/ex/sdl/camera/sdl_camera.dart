@@ -128,7 +128,7 @@ extension SdlCameraPointerEx on Pointer<SdlCamera> {
   /// extern SDL_DECLSPEC SDL_PropertiesID SDLCALL SDL_GetCameraProperties(SDL_Camera *camera)
   /// ```
   /// {@category camera}
-  int getProperties(Pointer<SdlCamera> camera) => sdlGetCameraProperties(this);
+  int getProperties() => sdlGetCameraProperties(this);
 
   ///
   /// Get the spec that a camera is using when generating images.

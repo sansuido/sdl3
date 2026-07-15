@@ -40,6 +40,11 @@ part 'ex/sdl/gamepad/struct_sdl_gamepad_binding.dart';
 part 'ex/sdl/gamepad/struct_sdl_gamepad_touchpad_finger.dart';
 
 part 'ex/sdl/gpu/lib_sdl_gpu.dart';
+part 'ex/sdl/gpu/sdl_gpu_command_buffer.dart';
+part 'ex/sdl/gpu/sdl_gpu_compute_pass.dart';
+part 'ex/sdl/gpu/sdl_gpu_copy_pass.dart';
+part 'ex/sdl/gpu/sdl_gpu_device.dart';
+part 'ex/sdl/gpu/sdl_gpu_render_pass.dart';
 part 'ex/sdl/gpu/struct_sdl_gpu_blit_info.dart';
 part 'ex/sdl/gpu/struct_sdl_gpu_color_target_info.dart';
 part 'ex/sdl/gpu/struct_sdl_gpu_transfer_buffer_location.dart';
@@ -54,7 +59,6 @@ part 'ex/sdl/gpu/struct_sdl_gpu_sampler_create_info.dart';
 part 'ex/sdl/gpu/struct_sdl_gpu_shader_create_info.dart';
 part 'ex/sdl/gpu/struct_sdl_gpu_storage_buffer_read_write_binding.dart';
 part 'ex/sdl/gpu/struct_sdl_gpu_storage_texture_read_write_binding.dart';
-part 'ex/sdl/gpu/struct_sdl_gpu_swapchain_texture_info.dart';
 part 'ex/sdl/gpu/struct_sdl_gpu_texture_create_info.dart';
 part 'ex/sdl/gpu/struct_sdl_gpu_texture_location.dart';
 part 'ex/sdl/gpu/struct_sdl_gpu_texture_region.dart';
@@ -68,6 +72,10 @@ part 'ex/sdl/guid/lib_sdl_guid.dart';
 part 'ex/sdl/haptic/lib_sdl_haptic.dart';
 part 'ex/sdl/haptic/sdl_haptic.dart';
 part 'ex/sdl/haptic/struct_sdl_haptic_effect.dart';
+
+part 'ex/sdl/hidapi/lib_sdl_hidapi.dart';
+part 'ex/sdl/hidapi/sdl_hid_device_info.dart';
+part 'ex/sdl/hidapi/sdl_hid_device.dart';
 
 part 'ex/sdl/iostream/lib_sdl_iostream.dart';
 part 'ex/sdl/iostream/sdl_iostream.dart';

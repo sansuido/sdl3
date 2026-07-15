@@ -117,7 +117,7 @@ extension SdlHapticEx on SdlHaptic {
   /// extern SDL_DECLSPEC SDL_Haptic * SDLCALL SDL_OpenHapticFromMouse(void)
   /// ```
   /// {@category haptic}
-  Pointer<SdlHaptic> openFromMouse() => sdlOpenHapticFromMouse();
+  static Pointer<SdlHaptic> openFromMouse() => sdlOpenHapticFromMouse();
 }
 
 extension SdlHapticPointerEx on Pointer<SdlHaptic> {

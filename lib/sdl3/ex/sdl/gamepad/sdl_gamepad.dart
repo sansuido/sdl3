@@ -1126,8 +1126,7 @@ extension SdlGamepadPointerEx on Pointer<SdlGamepad> {
   /// extern SDL_DECLSPEC SDL_PowerState SDLCALL SDL_GetGamepadPowerInfo(SDL_Gamepad *gamepad, int *percent)
   /// ```
   /// {@category gamepad}
-  ({int percent, int state}) getPowerInfo(Pointer<SdlGamepad> gamepad) =>
-      sdlxGetGamepadPowerInfo(this);
+  ({int percent, int state}) getPowerInfo() => sdlxGetGamepadPowerInfo(this);
 
   ///
   /// Check if a gamepad has been opened and is currently connected.

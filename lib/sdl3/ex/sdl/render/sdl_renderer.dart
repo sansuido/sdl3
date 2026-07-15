@@ -1436,7 +1436,6 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```
   /// {@category render}
   bool texture9Grid(
-    Pointer<SdlRenderer> renderer,
     Pointer<SdlTexture> texture, {
     required double leftWidth,
     required double rightWidth,

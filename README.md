@@ -99,9 +99,9 @@ yamahara
 
 # Task List (for 3.0.0)
 - [x] ~~lib_sdl.dart~~
-- [ ] lib_sdl_assert.dart
+- [x] ~~lib_sdl_assert.dart~~ Please use Dart assert.
 - [x] [lib_sdl_asyncio.dart](./lib/sdl3/ex/sdl/asyncio/lib_sdl_asyncio.dart)
-- [ ] lib_sdl_atomic.dart
+- [x] ~~lib_sdl_atomic.dart~~ Not needed. Dart uses an isolate-based concurrency model.
 - [x] [lib_sdl_audio.dart](./lib/sdl3/ex/sdl/audio/lib_sdl_audio.dart)
 - [x] ~~lib_sdl_blendmode.dart~~
 - [x] [lib_sdl_camera.dart](./lib/sdl3/ex/sdl/camera/lib_sdl_camera.dart)
@@ -115,28 +115,28 @@ yamahara
 - [x] [lib_sdl_gpu.dart](./lib/sdl3/ex/sdl/gpu/lib_sdl_gpu.dart)
 - [x] [lib_sdl_guid.dart](./lib/sdl3/ex/sdl/guid/lib_sdl_guid.dart)
 - [x] [lib_sdl_haptic.dart](./lib/sdl3/ex/sdl/haptic/lib_sdl_haptic.dart)
-- [ ] lib_sdl_hidapi.dart
+- [x] [lib_sdl_hidapi.dart](./lib/sdl3/ex/sdl/hidapi/lib_sdl_hidapi.dart)
 - [x] ~~lib_sdl_hints.dart~~
 - [x] [lib_sdl_image.dart](./lib/sdl3/ex/image/lib_sdl_image.dart)
 - [x] ~~lib_sdl_init.dart~~
 - [x] [lib_sdl_iostream.dart](./lib/sdl3/ex/sdl/iostream/lib_sdl_iostream.dart)
 - [x] [lib_sdl_joystick.dart](./lib/sdl3/ex/sdl/joystick/lib_sdl_joystick.dart)
 - [x] [lib_sdl_keyboard.dart](./lib/sdl3/ex/sdl/keyboard/lib_sdl_keyboard.dart)
-- [ ] lib_sdl_loadso.dart
+- [x] ~~lib_sdl_loadso.dart~~ Please use dart:ffi.
 - [x] [lib_sdl_locale.dart](./lib/sdl3/ex/sdl/locale/lib_sdl_locale.dart)
 - [x] ~~lib_sdl_log.dart~~
-- [ ] lib_sdl_main.dart
+- [x] ~~lib_sdl_main.dart~~ Not supported. SDL3 main callbacks (SDL_AppInit) require compiling a C-level entry point.
 - [x] [lib_sdl_messagebox.dart](./lib/sdl3/ex/sdl/messagebox/lib_sdl_messagebox.dart)
 - [x] ~~lib_sdl_metal.dart~~
 - [x] ~~lib_sdl_misc.dart~~
 - [x] [lib_sdl_mixer.dart](./lib/sdl3/ex/mixer/lib_sdl_mixer.dart)
 - [x] [lib_sdl_mouse.dart](./lib/sdl3/ex/sdl/mouse/lib_sdl_mouse.dart)
-- [ ] lib_sdl_mutex.dart
+- [x] ~~lib_sdl_mutex.dart~~ Please use Dart async utilities or Mutex packages.
 - [x] [lib_sdl_net.dart](./lib/sdl3/ex/net/lib_sdl_net.dart)
 - [x] [lib_sdl_notification.dart](./lib/sdl3/ex/sdl/notification/lib_sdl_notification.dart)
-- [ ] lib_sdl_opengl.dart
-- [ ] lib_sdl_opengl_glext.dart
-- [ ] lib_sdl_openxr.dart
+- [x] ~~lib_sdl_opengl.dart~~
+- [x] ~~lib_sdl_opengl_glext.dart~~
+- [x] ~~lib_sdl_openxr.dart~~ Not supported. XR rendering pipelines should be handled directly in native C/C++.
 - [x] ~~lib_sdl_pen.dart~~
 - [x] [lib_sdl_pixels.dart](./lib/sdl3/ex/sdl/pixels/lib_sdl_pixels.dart)
 - [x] ~~lib_sdl_platform.dart~~
@@ -151,7 +151,7 @@ yamahara
 - [x] [lib_sdl_storage.dart](./lib/sdl3/ex/sdl/storage/lib_sdl_storage.dart)
 - [x] [lib_sdl_surface.dart](./lib/sdl3/ex/sdl/surface/lib_sdl_surface.dart)
 - [x] [lib_sdl_system.dart](./lib/sdl3/ex/sdl/system/lib_sdl_system.dart)
-- [ ] lib_sdl_thread.dart
+- [x] ~~lib_sdl_thread.dart~~ Please use Dart Isolates.
 - [x] [lib_sdl_time.dart](./lib/sdl3/ex/sdl/time/lib_sdl_time.dart)
 - [x] ~~lib_sdl_timer.dart~~
 - [x] [lib_sdl_touch.dart](./lib/sdl3/ex/sdl/touch/lib_sdl_touch.dart)
