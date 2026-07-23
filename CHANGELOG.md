@@ -1,5 +1,10 @@
 # Changelog
 
+## [2.9.6] - 2026-07-23
+- SDL3-2026-07-19
+### Fixed
+- Reorganized example folder structure.
+
 ## [2.9.5] - 2026-07-15
 - SDL3-2026-07-12
 ### Added
