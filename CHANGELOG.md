@@ -1,5 +1,10 @@
 # Changelog
 
+## [2.9.7] - 2026-07-30
+- SDL3-2026-07-26
+### Added
+- Key event range constants (e.g., `SDL_EVENT_KEYBOARD_FIRST` and `SDL_EVENT_KEYBOARD_LAST`).
+
 ## [2.9.6] - 2026-07-23
 - SDL3-2026-07-19
 ### Fixed

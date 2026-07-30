@@ -2737,7 +2737,7 @@ int sdlMapSurfaceRgba(Pointer<SdlSurface> surface, int r, int g, int b, int a) {
 }
 
 ///
-/// Retrieves a single pixel from a surface.
+/// Retrieves a single pixel from a surface as RGBA in the sRGB colorspace.
 ///
 /// This function prioritizes correctness over speed: it is suitable for unit
 /// tests, but is not intended for use in a game engine.
@@ -2802,7 +2802,7 @@ bool sdlReadSurfacePixel(
 }
 
 ///
-/// Retrieves a single pixel from a surface.
+/// Retrieves a single pixel from a surface as RGBA in the sRGB colorspace.
 ///
 /// This function prioritizes correctness over speed: it is suitable for unit
 /// tests, but is not intended for use in a game engine.

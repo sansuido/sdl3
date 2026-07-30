@@ -28,6 +28,7 @@ class SdlxEvent {
       return SdlxUserEvent.fromPointer(pointer);
     } else {
       switch (pointer.ref.type) {
+        // SDL_EVENT_KEYBOARD
         case SDL_EVENT_KEYBOARD_ADDED:
         case SDL_EVENT_KEYBOARD_REMOVED:
           return SdlxKeyboardDeviceEvent.fromPointer(pointer);
@@ -40,6 +41,7 @@ class SdlxEvent {
           return SdlxTextEditingCandidatesEvent.fromPointer(pointer);
         case SDL_EVENT_TEXT_INPUT:
           return SdlxTextInputEvent.fromPointer(pointer);
+        // SDL_EVENT_MOUSE
         case SDL_EVENT_MOUSE_ADDED:
         case SDL_EVENT_MOUSE_REMOVED:
           return SdlxMouseDeviceEvent.fromPointer(pointer);
@@ -50,6 +52,7 @@ class SdlxEvent {
           return SdlxMouseButtonEvent.fromPointer(pointer);
         case SDL_EVENT_MOUSE_WHEEL:
           return SdlxMouseWheelEvent.fromPointer(pointer);
+        // SDL_EVENT_JOYSTICK
         case SDL_EVENT_JOYSTICK_AXIS_MOTION:
           return SdlxJoyAxisEvent.fromPointer(pointer);
         case SDL_EVENT_JOYSTICK_BALL_MOTION:
@@ -65,6 +68,7 @@ class SdlxEvent {
           return SdlxJoyDeviceEvent.fromPointer(pointer);
         case SDL_EVENT_JOYSTICK_BATTERY_UPDATED:
           return SdlxJoyBatteryEvent.fromPointer(pointer);
+        // SDL_EVENT_GAMEPAD
         case SDL_EVENT_GAMEPAD_AXIS_MOTION:
           return SdlxGamepadAxisEvent.fromPointer(pointer);
         case SDL_EVENT_GAMEPAD_BUTTON_DOWN:
@@ -85,30 +89,37 @@ class SdlxEvent {
         case SDL_EVENT_GAMEPAD_CAPSENSE_TOUCH:
         case SDL_EVENT_GAMEPAD_CAPSENSE_RELEASE:
           return SdlxGamepadCapSenseEvent.fromPointer(pointer);
+        // SDL_EVENT_AUDIO_DEVICE
         case SDL_EVENT_AUDIO_DEVICE_ADDED:
         case SDL_EVENT_AUDIO_DEVICE_REMOVED:
         case SDL_EVENT_AUDIO_DEVICE_FORMAT_CHANGED:
           return SdlxAudioDeviceEvent.fromPointer(pointer);
+        // SDL_EVENT_CAMERA_DEVICE
         case SDL_EVENT_CAMERA_DEVICE_ADDED:
         case SDL_EVENT_CAMERA_DEVICE_REMOVED:
         case SDL_EVENT_CAMERA_DEVICE_APPROVED:
         case SDL_EVENT_CAMERA_DEVICE_DENIED:
           return SdlxCameraDeviceEvent.fromPointer(pointer);
+        // SDL_EVENT_NOTIFICATION
         case SDL_EVENT_NOTIFICATION_ACTION_INVOKED:
           return SdlxNotificationEvent.fromPointer(pointer);
+        // SDL_EVENT_RENDER
         case SDL_EVENT_RENDER_TARGETS_RESET:
         case SDL_EVENT_RENDER_DEVICE_RESET:
         case SDL_EVENT_RENDER_DEVICE_LOST:
           return SdlxRenderEvent.fromPointer(pointer);
+        // SDL_EVENT_FINGER
         case SDL_EVENT_FINGER_DOWN:
         case SDL_EVENT_FINGER_UP:
         case SDL_EVENT_FINGER_MOTION:
         case SDL_EVENT_FINGER_CANCELED:
           return SdlxTouchFingerEvent.fromPointer(pointer);
+        // SDL_EVENT_PINCH
         case SDL_EVENT_PINCH_BEGIN:
         case SDL_EVENT_PINCH_UPDATE:
         case SDL_EVENT_PINCH_END:
           return SdlxPinchFingerEvent.fromPointer(pointer);
+        // SDL_EVENT_PEN
         case SDL_EVENT_PEN_PROXIMITY_IN:
         case SDL_EVENT_PEN_PROXIMITY_OUT:
           return SdlxPenProximityEvent.fromPointer(pointer);
@@ -122,16 +133,20 @@ class SdlxEvent {
           return SdlxPenButtonEvent.fromPointer(pointer);
         case SDL_EVENT_PEN_AXIS:
           return SdlxPenAxisEvent.fromPointer(pointer);
+        // SDL_EVENT_DROP
         case SDL_EVENT_DROP_BEGIN:
         case SDL_EVENT_DROP_FILE:
         case SDL_EVENT_DROP_TEXT:
         case SDL_EVENT_DROP_COMPLETE:
         case SDL_EVENT_DROP_POSITION:
           return SdlxDropEvent.fromPointer(pointer);
+        // SDL_EVENT_CLIPBOARD
         case SDL_EVENT_CLIPBOARD_UPDATE:
           return SdlxClipboardEvent.fromPointer(pointer);
+        // SDL_EVENT_SENSOR
         case SDL_EVENT_SENSOR_UPDATE:
           return SdlxSensorEvent.fromPointer(pointer);
+        // other
         case SDL_EVENT_QUIT:
           return SdlxQuitEvent.fromPointer(pointer);
         default:
