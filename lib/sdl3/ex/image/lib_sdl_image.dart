@@ -253,10 +253,11 @@ Pointer<SdlGpuTexture> imgxLoadGpuTextureTypedIo(
 /// extern SDL_DECLSPEC bool SDLCALL IMG_GetAnimationDecoderFrame(IMG_AnimationDecoder *decoder, SDL_Surface **frame, Uint64 *duration)
 /// ```
 /// {@category image}
-bool imgxGetAnimationDecoderFrame(
+({Pointer<SdlSurface> frame, int duration})? imgxGetAnimationDecoderFrame(
   Pointer<ImgAnimationDecoder> decoder,
-  ImgxAnimationDecoderFrame frame,
 ) {
+  late Pointer<SdlSurface> frame;
+  late int duration;
   final framePointer = calloc<Pointer<SdlSurface>>();
   final durationPointer = calloc<Uint64>();
   final result = imgGetAnimationDecoderFrame(
@@ -265,11 +266,13 @@ bool imgxGetAnimationDecoderFrame(
     durationPointer,
   );
   if (result) {
-    frame
-      ..frame = framePointer.value
-      ..duration = durationPointer.value;
+    frame = framePointer.value;
+    duration = durationPointer.value;
   }
   framePointer.callocFree();
   durationPointer.callocFree();
-  return result;
+  if (!result) {
+    return null;
+  }
+  return (frame: frame, duration: duration);
 }

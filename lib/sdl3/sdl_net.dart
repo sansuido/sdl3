@@ -12,7 +12,7 @@ part 'ex/net/net_address.dart';
 part 'ex/net/net_datagram_socket.dart';
 part 'ex/net/net_server.dart';
 part 'ex/net/net_stream_socket.dart';
-part 'ex/net/struct_net_datagram.dart';
+part 'ex/net/net_datagram.dart';
 part 'generated/const_sdl_net.dart';
 part 'generated/lib_sdl_net.dart';
 part 'generated/struct_sdl_net.dart';

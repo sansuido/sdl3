@@ -6,7 +6,7 @@ import 'sdl.dart';
 import 'sdl_dart.dart';
 
 part 'ex/shadercross/lib_sdl_shadercross.dart';
-part 'ex/shadercross/struct_sdl_shadercross.dart';
+part 'ex/shadercross/sdl_shadercross.dart';
 part 'generated/const_sdl_shadercross.dart';
 part 'generated/lib_sdl_shadercross.dart';
 part 'generated/struct_sdl_shadercross.dart';

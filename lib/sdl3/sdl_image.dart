@@ -6,7 +6,6 @@ import 'sdl.dart';
 import 'sdl_dart.dart';
 
 part 'ex/image/lib_sdl_image.dart';
-part 'ex/image/struct_img_animation_decoder_frame.dart';
 part 'ex/image/img_animation.dart';
 part 'ex/image/img_animation_decoder.dart';
 part 'ex/image/img_animation_encoder.dart';

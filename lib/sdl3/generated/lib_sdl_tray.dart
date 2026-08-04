@@ -9,6 +9,9 @@ part of '../sdl.dart';
 /// necessary feature. Avoid needlessly creating a tray icon, as the user may
 /// feel like it clutters their interface.
 ///
+/// You should set the SDL_PROP_APP_METADATA_IDENTIFIER_STRING property to
+/// ensure correct behaviour on some platforms like Linux.
+///
 /// Using tray icons require the video subsystem.
 ///
 /// \param icon a surface to be used as icon. May be NULL.
@@ -53,6 +56,9 @@ Pointer<SdlTray> sdlCreateTray(Pointer<SdlSurface> icon, String? tooltip) {
 /// Many platforms advise not using a system tray unless persistence is a
 /// necessary feature. Avoid needlessly creating a tray icon, as the user may
 /// feel like it clutters their interface.
+///
+/// You should set the SDL_PROP_APP_METADATA_IDENTIFIER_STRING property to
+/// ensure correct behaviour on some platforms like Linux.
 ///
 /// Using tray icons require the video subsystem.
 ///

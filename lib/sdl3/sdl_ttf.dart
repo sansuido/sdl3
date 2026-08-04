@@ -6,7 +6,7 @@ import 'sdl.dart';
 import 'sdl_dart.dart';
 
 part 'ex/ttf/lib_sdl_ttf.dart';
-part 'ex/ttf/struct_ttf_sub_string.dart';
+part 'ex/ttf/ttf_sub_string.dart';
 part 'ex/ttf/ttf_text_engine.dart';
 part 'ex/ttf/ttf_font.dart';
 part 'ex/ttf/ttf_text.dart';

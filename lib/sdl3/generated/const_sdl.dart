@@ -2061,6 +2061,10 @@ const SDL_PROP_RENDERER_CREATE_GPU_SHADERS_DXIL_BOOLEAN =
     'SDL.renderer.create.gpu.shaders_dxil';
 const SDL_PROP_RENDERER_CREATE_GPU_SHADERS_MSL_BOOLEAN =
     'SDL.renderer.create.gpu.shaders_msl';
+const SDL_PROP_RENDERER_CREATE_METAL_DEVICE_POINTER =
+    'SDL.renderer.create.metal.device';
+const SDL_PROP_RENDERER_CREATE_METAL_COMMAND_QUEUE_POINTER =
+    'SDL.renderer.create.metal.command_queue';
 const SDL_PROP_RENDERER_CREATE_VULKAN_INSTANCE_POINTER =
     'SDL.renderer.create.vulkan.instance';
 const SDL_PROP_RENDERER_CREATE_VULKAN_SURFACE_NUMBER =
@@ -2097,6 +2101,9 @@ const SDL_PROP_RENDERER_D3D12_SWAPCHAIN_POINTER =
     'SDL.renderer.d3d12.swap_chain';
 const SDL_PROP_RENDERER_D3D12_COMMAND_QUEUE_POINTER =
     'SDL.renderer.d3d12.command_queue';
+const SDL_PROP_RENDERER_METAL_DEVICE_POINTER = 'SDL.renderer.metal.device';
+const SDL_PROP_RENDERER_METAL_COMMAND_QUEUE_POINTER =
+    'SDL.renderer.metal.command_queue';
 const SDL_PROP_RENDERER_VULKAN_INSTANCE_POINTER =
     'SDL.renderer.vulkan.instance';
 const SDL_PROP_RENDERER_VULKAN_SURFACE_NUMBER = 'SDL.renderer.vulkan.surface';
@@ -2135,6 +2142,16 @@ const SDL_PROP_TEXTURE_CREATE_D3D12_TEXTURE_V_POINTER =
     'SDL.texture.create.d3d12.texture_v';
 const SDL_PROP_TEXTURE_CREATE_METAL_PIXELBUFFER_POINTER =
     'SDL.texture.create.metal.pixelbuffer';
+const SDL_PROP_TEXTURE_CREATE_METAL_TEXTURE_POINTER =
+    'SDL.texture.create.metal.texture';
+const SDL_PROP_TEXTURE_CREATE_METAL_TEXTURE_UV_POINTER =
+    'SDL.texture.create.metal.texture_uv';
+const SDL_PROP_TEXTURE_CREATE_METAL_TEXTURE_U_POINTER =
+    'SDL.texture.create.metal.texture_u';
+const SDL_PROP_TEXTURE_CREATE_METAL_TEXTURE_V_POINTER =
+    'SDL.texture.create.metal.texture_v';
+const SDL_PROP_TEXTURE_CREATE_METAL_TEXTURE_USAGE_NUMBER =
+    'SDL.texture.create.metal.texture_usage';
 const SDL_PROP_TEXTURE_CREATE_OPENGL_TEXTURE_NUMBER =
     'SDL.texture.create.opengl.texture';
 const SDL_PROP_TEXTURE_CREATE_OPENGL_TEXTURE_UV_NUMBER =
@@ -2176,6 +2193,11 @@ const SDL_PROP_TEXTURE_D3D11_TEXTURE_V_POINTER = 'SDL.texture.d3d11.texture_v';
 const SDL_PROP_TEXTURE_D3D12_TEXTURE_POINTER = 'SDL.texture.d3d12.texture';
 const SDL_PROP_TEXTURE_D3D12_TEXTURE_U_POINTER = 'SDL.texture.d3d12.texture_u';
 const SDL_PROP_TEXTURE_D3D12_TEXTURE_V_POINTER = 'SDL.texture.d3d12.texture_v';
+const SDL_PROP_TEXTURE_METAL_TEXTURE_POINTER = 'SDL.texture.metal.texture';
+const SDL_PROP_TEXTURE_METAL_TEXTURE_UV_POINTER =
+    'SDL.texture.metal.texture_uv';
+const SDL_PROP_TEXTURE_METAL_TEXTURE_U_POINTER = 'SDL.texture.metal.texture_u';
+const SDL_PROP_TEXTURE_METAL_TEXTURE_V_POINTER = 'SDL.texture.metal.texture_v';
 const SDL_PROP_TEXTURE_OPENGL_TEXTURE_NUMBER = 'SDL.texture.opengl.texture';
 const SDL_PROP_TEXTURE_OPENGL_TEXTURE_UV_NUMBER =
     'SDL.texture.opengl.texture_uv';
@@ -2205,7 +2227,7 @@ const SDL_RENDERER_VSYNC_ADAPTIVE = -1;
 const SDL_DEBUG_TEXT_FONT_CHARACTER_SIZE = 8;
 //const SDL_revision_h_ = ;
 const SDL_REVISION =
-    'SDL-3.5.0-release-3.4.0-1211-g3304ec648 (" SDL_VENDOR_INFO ")';
+    'SDL-3.5.0-release-3.4.0-1240-gfcb5ef8a9 (" SDL_VENDOR_INFO ")';
 //const SDL_scancode_h_ = ;
 const SDL_SCANCODE_UNKNOWN = 0;
 const SDL_SCANCODE_A = 4;
@@ -5101,6 +5123,10 @@ class SdlkPropRenderer {
       SDL_PROP_RENDERER_CREATE_GPU_SHADERS_DXIL_BOOLEAN;
   static const createGpuShadersMslBoolean =
       SDL_PROP_RENDERER_CREATE_GPU_SHADERS_MSL_BOOLEAN;
+  static const createMetalDevicePointer =
+      SDL_PROP_RENDERER_CREATE_METAL_DEVICE_POINTER;
+  static const createMetalCommandQueuePointer =
+      SDL_PROP_RENDERER_CREATE_METAL_COMMAND_QUEUE_POINTER;
   static const createVulkanInstancePointer =
       SDL_PROP_RENDERER_CREATE_VULKAN_INSTANCE_POINTER;
   static const createVulkanSurfaceNumber =
@@ -5136,6 +5162,9 @@ class SdlkPropRenderer {
       SDL_PROP_RENDERER_D3D12_SWAPCHAIN_POINTER;
   static const d3D12CommandQueuePointer =
       SDL_PROP_RENDERER_D3D12_COMMAND_QUEUE_POINTER;
+  static const metalDevicePointer = SDL_PROP_RENDERER_METAL_DEVICE_POINTER;
+  static const metalCommandQueuePointer =
+      SDL_PROP_RENDERER_METAL_COMMAND_QUEUE_POINTER;
   static const vulkanInstancePointer =
       SDL_PROP_RENDERER_VULKAN_INSTANCE_POINTER;
   static const vulkanSurfaceNumber = SDL_PROP_RENDERER_VULKAN_SURFACE_NUMBER;
@@ -5178,6 +5207,16 @@ class SdlkPropTexture {
       SDL_PROP_TEXTURE_CREATE_D3D12_TEXTURE_V_POINTER;
   static const createMetalPixelbufferPointer =
       SDL_PROP_TEXTURE_CREATE_METAL_PIXELBUFFER_POINTER;
+  static const createMetalTexturePointer =
+      SDL_PROP_TEXTURE_CREATE_METAL_TEXTURE_POINTER;
+  static const createMetalTextureUvPointer =
+      SDL_PROP_TEXTURE_CREATE_METAL_TEXTURE_UV_POINTER;
+  static const createMetalTextureUPointer =
+      SDL_PROP_TEXTURE_CREATE_METAL_TEXTURE_U_POINTER;
+  static const createMetalTextureVPointer =
+      SDL_PROP_TEXTURE_CREATE_METAL_TEXTURE_V_POINTER;
+  static const createMetalTextureUsageNumber =
+      SDL_PROP_TEXTURE_CREATE_METAL_TEXTURE_USAGE_NUMBER;
   static const createOpenglTextureNumber =
       SDL_PROP_TEXTURE_CREATE_OPENGL_TEXTURE_NUMBER;
   static const createOpenglTextureUvNumber =
@@ -5219,6 +5258,11 @@ class SdlkPropTexture {
   static const d3D12TexturePointer = SDL_PROP_TEXTURE_D3D12_TEXTURE_POINTER;
   static const d3D12TextureUPointer = SDL_PROP_TEXTURE_D3D12_TEXTURE_U_POINTER;
   static const d3D12TextureVPointer = SDL_PROP_TEXTURE_D3D12_TEXTURE_V_POINTER;
+  static const metalTexturePointer = SDL_PROP_TEXTURE_METAL_TEXTURE_POINTER;
+  static const metalTextureUvPointer =
+      SDL_PROP_TEXTURE_METAL_TEXTURE_UV_POINTER;
+  static const metalTextureUPointer = SDL_PROP_TEXTURE_METAL_TEXTURE_U_POINTER;
+  static const metalTextureVPointer = SDL_PROP_TEXTURE_METAL_TEXTURE_V_POINTER;
   static const openglTextureNumber = SDL_PROP_TEXTURE_OPENGL_TEXTURE_NUMBER;
   static const openglTextureUvNumber =
       SDL_PROP_TEXTURE_OPENGL_TEXTURE_UV_NUMBER;

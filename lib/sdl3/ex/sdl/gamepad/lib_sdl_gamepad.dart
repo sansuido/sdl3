@@ -254,12 +254,16 @@ List<SdlxGamepadBinding> sdlxGetGamepadBindings(Pointer<SdlGamepad> gamepad) {
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetGamepadTouchpadFinger(SDL_Gamepad *gamepad, int touchpad, int finger, bool *down, float *x, float *y, float *pressure)
 /// ```
 /// {@category gamepad}
-bool sdlxGetGamepadTouchpadFinger(
+({bool down, double x, double y, double pressure})?
+sdlxGetGamepadTouchpadFinger(
   Pointer<SdlGamepad> gamepad,
   int touchpad,
   int finger,
-  SdlxGamepadTouchpadFinger info,
 ) {
+  late bool down;
+  late double x;
+  late double y;
+  late double pressure;
   final downPointer = ffi.calloc<Bool>();
   final xPointer = ffi.calloc<Float>();
   final yPointer = ffi.calloc<Float>();
@@ -274,17 +278,19 @@ bool sdlxGetGamepadTouchpadFinger(
     pressurePointer,
   );
   if (result) {
-    info
-      ..down = downPointer.value
-      ..x = xPointer.value
-      ..y = yPointer.value
-      ..pressure = pressurePointer.value;
+    down = downPointer.value;
+    x = xPointer.value;
+    y = yPointer.value;
+    pressure = pressurePointer.value;
   }
   downPointer.callocFree();
   xPointer.callocFree();
   yPointer.callocFree();
   pressurePointer.callocFree();
-  return result;
+  if (!result) {
+    return null;
+  }
+  return (down: down, x: x, y: y, pressure: pressure);
 }
 
 ///

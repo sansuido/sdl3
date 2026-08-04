@@ -189,8 +189,8 @@ extension ImgAnimationDecoderPointerEx on Pointer<ImgAnimationDecoder> {
   /// extern SDL_DECLSPEC bool SDLCALL IMG_GetAnimationDecoderFrame(IMG_AnimationDecoder *decoder, SDL_Surface **frame, Uint64 *duration)
   /// ```
   /// {@category image}
-  bool getFrame(ImgxAnimationDecoderFrame frame) =>
-      imgxGetAnimationDecoderFrame(this, frame);
+  ({Pointer<SdlSurface> frame, int duration})? getFrame() =>
+      imgxGetAnimationDecoderFrame(this);
 
   ///
   /// Get the decoder status indicating the current state of the decoder.

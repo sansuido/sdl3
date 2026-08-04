@@ -97,7 +97,267 @@ https://github.com/sansuido/sdl3_projects/
 
 yamahara
 
-# Task List (for 3.0.0)
+# Tast List (for struct)
+
+## sdl
+### assert
+- [ ] SdlAssertData
+### asyncio
+- [x] [SdlAsyncIo](./lib/sdl3/ex/sdl/asyncio/sdl_async_io.dart)
+- [x] [SdlAsyncIoOutcome](./lib/sdl3/ex/sdl/asyncio/sdl_async_io_outcome.dart)
+- [x] [SdlAsyncIoQueue](./lib/sdl3/ex/sdl/asyncio/sdl_async_io_queue.dart)
+### atomic
+- [ ] SdlAtomicInt
+- [ ] SdlAtomicU32
+### audio
+- [x] [SdlAudioSpec](./lib/sdl3/ex/sdl/audio/sdl_audio_spec.dart)
+- [x] [SdlAudioStream](./lib/sdl3/ex/sdl/audio/sdl_audio_stream.dart)
+### camera
+- [ ] [SdlCamera](./lib/sdl3/ex/sdl/camera/sdl_camera.dart)
+- [x] [SdlCameraSpec](./lib/sdl3/ex/sdl/camera/sdl_camera_spec.dart)
+### dialog
+- [x] [SdlDialogFileFilter](./lib/sdl3/ex/sdl/dialog/sdl_dialog_file_filter.dart)
+### events
+- [ ] SdlCommonEvent
+- [ ] SdlDisplayEvent
+- [ ] SdlWindowEvent
+- [ ] SdlKeyboardDeviceEvent
+- [ ] SdlKeyboardEvent
+- [ ] SdlTextEditingEvent
+- [ ] SdlTextEditingCandidatesEvent
+- [ ] SdlTextInputEvent
+- [ ] SdlMouseDeviceEvent
+- [ ] SdlMouseMotionEvent
+- [ ] SdlMouseButtonEvent
+- [ ] SdlMouseWheelEvent
+- [ ] SdlJoyAxisEvent
+- [ ] SdlJoyBallEvent
+- [ ] SdlJoyHatEvent
+- [ ] SdlJoyButtonEvent
+- [ ] SdlJoyDeviceEvent
+- [ ] SdlJoyBatteryEvent
+- [ ] SdlGamepadAxisEvent
+- [ ] SdlGamepadButtonEvent
+- [ ] SdlGamepadDeviceEvent
+- [ ] SdlGamepadTouchpadEvent
+- [ ] SdlGamepadSensorEvent
+- [ ] SdlGamepadCapSenseEvent
+- [ ] SdlAudioDeviceEvent
+- [ ] SdlCameraDeviceEvent
+- [ ] SdlNotificationEvent
+- [ ] SdlRenderEvent
+- [ ] SdlTouchFingerEvent
+- [ ] SdlPinchFingerEvent
+- [ ] SdlPenProximityEvent
+- [ ] SdlPenMotionEvent
+- [ ] SdlPenTouchEvent
+- [ ] SdlPenButtonEvent
+- [ ] SdlPenAxisEvent
+- [ ] SdlDropEvent
+- [ ] SdlClipboardEvent
+- [ ] SdlSensorEvent
+- [ ] SdlQuitEvent
+- [ ] SdlUserEvent
+- [ ] SdlEvent
+### filesystem
+- [x] [SdlPathInfo](./lib/sdl3/ex/sdl/filesystem/sdl_path_info.dart)
+### gamepad
+- [x] [SdlGamepad](./lib/sdl3/ex/sdl/gamepad/sdl_gamepad.dart)
+- [x] [SdlGamepadBindingInputAxis](./lib/sdl3/ex/sdl/gamepad/sdl_gamepad_binding.dart)
+- [x] [SdlGamepadBindingInputHat](./lib/sdl3/ex/sdl/gamepad/sdl_gamepad_binding.dart)
+- [x] [SdlGamepadBindingInput](./lib/sdl3/ex/sdl/gamepad/sdl_gamepad_binding.dart)
+- [x] [SdlGamepadBindingOutputAxis](./lib/sdl3/ex/sdl/gamepad/sdl_gamepad_binding.dart)
+- [x] [SdlGamepadBindingOutput](./lib/sdl3/ex/sdl/gamepad/sdl_gamepad_binding.dart)
+- [x] [SdlGamepadBinding](./lib/sdl3/ex/sdl/gamepad/sdl_gamepad_binding.dart)
+### gpu
+- [x] [SdlGpuDevice](./lib/sdl3/ex/sdl/gpu/sdl_gpu_device.dart)
+- [ ] SdlGpuBuffer
+- [ ] SdlGpuTransferBuffer
+- [ ] SdlGpuTexture
+- [ ] SdlGpuSampler
+- [ ] SdlGpuShader
+- [ ] SdlGpuComputePipeline
+- [ ] SdlGpuGraphicsPipeline
+- [x] [SdlGpuCommandBuffer](./lib/sdl3/ex/sdl/gpu/sdl_gpu_command_buffer.dart)
+- [x] [SdlGpuRenderPass](./lib/sdl3/ex/sdl/gpu/sdl_gpu_render_pass.dart)
+- [x] [SdlGpuComputePass](./lib/sdl3/ex/sdl/gpu/sdl_gpu_compute_pass.dart)
+- [x] [SdlGpuCopyPass](./lib/sdl3/ex/sdl/gpu/sdl_gpu_copy_pass.dart)
+- [ ] SdlGpuFence
+- [x] [SdlGpuViewport](./lib/sdl3/ex/sdl/gpu/sdl_gpu_viewport.dart)
+- [x] [SdlGpuTextureTransferInfo](./lib/sdl3/ex/sdl/gpu/sdl_gpu_texture_transfer_info.dart)
+- [x] [SdlGpuTransferBufferLocation](./lib/sdl3/ex/sdl/gpu/sdl_gpu_transfer_buffer_location.dart)
+- [x] [SdlGpuTextureLocation](./lib/sdl3/ex/sdl/gpu/sdl_gpu_texture_location.dart)
+- [x] [SdlGpuTextureRegion](./lib/sdl3/ex/sdl/gpu/sdl_gpu_texture_region.dart)
+- [ ] SdlGpuBlitRegion
+- [x] [SdlGpuBufferLocation](./lib/sdl3/ex/sdl/gpu/sdl_gpu_buffer_location.dart)
+- [x] [SdlGpuBufferRegion](./lib/sdl3/ex/sdl/gpu/sdl_gpu_buffer_region.dart)
+- [ ] SdlGpuIndirectDrawCommand
+- [ ] SdlGpuIndexedIndirectDrawCommand
+- [ ] SdlGpuIndirectDispatchCommand
+- [x] [SdlGpuSamplerCreateInfo](./lib/sdl3/ex/sdl/gpu/sdl_gpu_sampler_create_info.dart)
+- [ ] SdlGpuVertexBufferDescription
+- [ ] SdlGpuVertexAttribute
+- [ ] SdlGpuVertexInputState
+- [ ] SdlGpuStencilOpState
+- [ ] SdlGpuColorTargetBlendState
+- [x] [SdlGpuShaderCreateInfo](./lib/sdl3/ex/sdl/gpu/sdl_gpu_shader_create_info.dart)
+- [x] [SdlGpuTextureCreateInfo](./lib/sdl3/ex/sdl/gpu/sdl_gpu_texture_create_info.dart)
+- [x] [SdlGpuBufferCreateInfo](./lib/sdl3/ex/sdl/gpu/sdl_gpu_buffer_create_info.dart)
+- [x] [SdlGpuTransferBufferCreateInfo](./lib/sdl3/ex/sdl/gpu/sdl_gpu_transfer_buffer_create_info.dart)
+- [ ] SdlGpuRasterizerState
+- [ ] SdlGpuMultisampleState
+- [ ] SdlGpuDepthStencilState
+- [ ] SdlGpuColorTargetDescription
+- [ ] SdlGpuGraphicsPipelineTargetInfo
+- [x] [SdlGpuGraphicsPipelineCreateInfo](./lib/sdl3/ex/sdl/gpu/sdl_gpu_graphics_pipeline_create_info.dart)
+- [x] [SdlGpuComputePipelineCreateInfo](./lib/sdl3/ex/sdl/gpu/sdl_gpu_compute_pipeline_create_info.dart)
+- [x] [SdlGpuColorTargetInfo](./lib/sdl3/ex/sdl/gpu/sdl_gpu_color_target_info.dart)
+- [x] [SdlGpuDepthStencilTargetInfo](./lib/sdl3/ex/sdl/gpu/sdl_gpu_depth_stencil_target_info.dart)
+- [x] [SdlGpuBlitInfo](./lib/sdl3/ex/sdl/gpu/sdl_gpu_blit_info.dart)
+- [x] [SdlGpuBufferBinding](./lib/sdl3/ex/sdl/gpu/sdl_gpu_buffer_binding.dart)
+- [x] [SdlGpuTextureSamplerBinding](./lib/sdl3/ex/sdl/gpu/sdl_gpu_texture_sampler_binding.dart)
+- [x] [SdlGpuStorageBufferReadWriteBinding](./lib/sdl3/ex/sdl/gpu/sdl_gpu_storage_buffer_read_write_binding.dart)
+- [x] [SdlGpuStorageTextureReadWriteBinding](./lib/sdl3/ex/sdl/gpu/sdl_gpu_storage_texture_read_write_binding.dart)
+- [ ] SdlGpuVulkanOptions
+### guid
+- [ ] SdlGuid
+### haptic
+- [ ] SdlHaptic
+- [ ] SdlHapticDirection
+- [ ] SdlHapticConstant
+- [ ] SdlHapticPeriodic
+- [ ] SdlHapticCondition
+- [ ] SdlHapticRamp
+- [ ] SdlHapticLeftRight
+- [ ] SdlHapticCustom
+- [ ] SdlHapticEffect
+### hidapi
+- [x] [SdlHidDevice](./lib/sdl3/ex/sdl/hidapi/sdl_hid_device.dart)
+- [x] [SdlHidDeviceInfo](./lib/sdl3/ex/sdl/hidapi/sdl_hid_device_info.dart)
+### iostream
+- [ ] SdlIoStreamInterface
+- [ ] SdlIoStream
+### joystick
+- [ ] SdlJoystick
+- [ ] SdlVirtualJoystickTouchpadDesc
+- [ ] SdlVirtualJoystickSensorDesc
+- [ ] SdlVirtualJoystickDesc
+### loadso
+- [ ] SdlSharedObject
+### locate
+- [x] [SdlLocale](./lib/sdl3/ex/sdl/locale/sdl_locale.dart)
+### main_impl
+- [ ] HINSTANCE
+### messagebox
+- [ ] SdlMessageBoxButtonData
+- [ ] SdlMessageBoxColor
+- [ ] SdlMessageBoxColorScheme
+- [ ] SdlMessageBoxData
+### mouse
+- [x] [SdlCursor](./lib/sdl3/ex/sdl/mouse/sdl_cursor.dart)
+- [x] [SdlCursorFrameInfo](./lib/sdl3/ex/sdl/mouse/sdl_cursor_frame_info.dart)
+### mutex
+- [ ] SdlMutex
+- [ ] SdlRwLock
+- [ ] SdlSemaphore
+- [ ] SdlCondition
+- [ ] SdlInitState
+### notification
+- [x] [SdlNotificationActionButton](./lib/sdl3/ex/sdl/notification/sdl_notification_action_button.dart)
+- [x] [SdlNotificationAction](./lib/sdl3/ex/sdl/notification/sdl_notification_action.dart)
+### openxr
+- [ ] XrSessionCreateInfo
+- [ ] XrSwapchainCreateInfo
+### pixels
+- [ ] SdlColor
+- [ ] SdlFColor
+- [ ] SdlPalette
+- [ ] SdlPixelFormatDetails
+### process
+- [x] [SdlProcess](./lib/sdl3/ex/sdl/process/sdl_process.dart)
+### rect
+- [x] [SdlPoint](./lib/sdl3/ex/sdl/rect/sdl_point.dart)
+- [x] [SdlFPoint](./lib/sdl3/ex/sdl/rect/sdl_fpoint.dart)
+- [x] [SdlRect](./lib/sdl3/ex/sdl/rect/sdl_rect.dart)
+- [x] [SdlFRect](./lib/sdl3/ex/sdl/rect/sdl_frect.dart)
+### render
+- [ ] SdlVertex
+- [ ] SdlRenderer
+- [ ] SdlTexture
+- [ ] SdlGpuRenderStateCreateInfo
+- [ ] SdlGpuRenderState
+### sensor
+- [ ] SdlSensor
+### stdinc
+- [ ] SdlAlignmentTest
+- [ ] SdlEnvironment
+- [ ] SdlIconvT
+### storage
+- [x] [SdlStorageInterface](./lib/sdl3/ex/sdl/storage/sdl_storage_interface.dart)
+- [x] [SdlStorage](./lib/sdl3/ex/sdl/storage/sdl_storage.dart)
+### surface
+- [x] [SdlSurface](./lib/sdl3/ex/sdl/surface/sdl_surface.dart)
+### system
+- [ ] MSG
+- [ ] XEvent
+- [ ] XTaskQueueHandle
+- [ ] XUserHandle
+### thread
+- [ ] SdlThread
+### time
+- [x] [SdlDateTime](./lib/sdl3/ex/sdl/time/sdl_date_time.dart)
+### touch
+- [ ] SdlFinger
+### tray
+- [x] [SdlTray](./lib/sdl3/ex/sdl/tray/sdl_tray.dart)
+- [x] [SdlTrayMenu](./lib/sdl3/ex/sdl/tray/sdl_tray_menu.dart)
+- [x] [SdlTrayEntry](./lib/sdl3/ex/sdl/tray/sdl_tray_entry.dart)
+### video
+- [ ] SdlDisplayModeData
+- [ ] SdlDisplayMode
+- [ ] SdlWindow
+- [ ] SdlGlContext
+## sdl_image
+- [x] [ImgAnimation](./lib/sdl3/ex/image/img_animation.dart)
+- [x] [ImgAnimationEncoder](./lib/sdl3/ex/image/img_animation_encoder.dart)
+- [x] [ImgAnimationDecoder](./lib/sdl3/ex/image/img_animation_decoder.dart)
+## sdl_mixer
+- [x] [MixMixer](./lib/sdl3/ex/mixer/mix_mixer.dart)
+- [x] [MixAudio](./lib/sdl3/ex/mixer/mix_audio.dart)
+- [x] [MixTrack](./lib/sdl3/ex/mixer/mix_track.dart)
+- [x] [MixGroup](./lib/sdl3/ex/mixer/mix_group.dart)
+- [x] [MixStereoGains](./lib/sdl3/ex/mixer/mix_stereo_gains.dart)
+- [x] [MixPoint3D](./lib/sdl3/ex/mixer/mix_point_3d.dart)
+- [x] [MixAudioDecoder](./lib/sdl3/ex/mixer/mix_audio_decoder.dart)
+## sdl_net
+- [x] [NetAddress](./lib/sdl3/ex/net/net_address.dart)
+- [x] [NetStreamSocket](./lib/sdl3/ex/net/net_stream_socket.dart)
+- [x] [NetServer](./lib/sdl3/ex/net/net_server.dart)
+- [x] [NetDatagramSocket](./lib/sdl3/ex/net/net_datagram_socket.dart)
+- [x] [NetDatagram](./lib/sdl3/ex/net/net_datagram.dart)
+## sdl_shadercross
+- [ ] SdlShaderCrossIoVarMetadata
+- [ ] SdlShaderCrossGraphicsShaderResourceInfo
+- [ ] SdlShaderCrossGraphicsShaderMetadata
+- [ ] SdlShaderCrossComputePipelineMetadata
+- [ ] SdlShaderCrossSpirvInfo
+- [ ] SdlShaderCrossHlslDefine
+- [ ] SdlShaderCrossHlslInfo
+## sdl_ttf
+- [ ] TtfFillOperation
+- [ ] TtfCopyOperation
+- [ ] TtfDrawOperation
+- [ ] TtfTextLayout
+- [ ] TtfTextData
+- [ ] TtfTextEngine
+- [ ] TtfFont
+- [ ] TtfText
+- [ ] TtfGpuAtlasDrawSequence
+- [ ] TtfGlAtlasDrawVertex
+- [ ] TtfGlAtlasDrawSequence
+- [ ] TtfSubString
+
+# Task List (for lib)
 - [x] ~~lib_sdl.dart~~
 - [x] ~~lib_sdl_assert.dart~~ Please use Dart assert.
 - [x] [lib_sdl_asyncio.dart](./lib/sdl3/ex/sdl/asyncio/lib_sdl_asyncio.dart)

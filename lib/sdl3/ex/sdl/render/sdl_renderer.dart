@@ -75,6 +75,15 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// - `SDL_PROP_RENDERER_D3D12_COMMAND_QUEUE_POINTER`: the ID3D12CommandQueue
   /// associated with the renderer
   ///
+  /// With the metal renderer:
+  ///
+  /// - `SDL_PROP_RENDERER_METAL_DEVICE_POINTER`: the MTLDevice associated with
+  /// the renderer
+  /// - `SDL_PROP_RENDERER_METAL_COMMAND_QUEUE_POINTER`: the MTLCommandQueue
+  /// associated with the renderer. Work submitted on this queue will be
+  /// ordered relative to other rendering. SDL_FlushRenderer() can be used to
+  /// guarantee the current rendering has been submitted.
+  ///
   /// With the vulkan renderer:
   ///
   /// - `SDL_PROP_RENDERER_VULKAN_INSTANCE_POINTER`: the VkInstance associated
@@ -290,6 +299,19 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// - `SDL_PROP_TEXTURE_CREATE_METAL_PIXELBUFFER_POINTER`: the CVPixelBufferRef
   /// associated with the texture, if you want to create a texture from an
   /// existing pixel buffer.
+  /// - `SDL_PROP_TEXTURE_CREATE_METAL_TEXTURE_POINTER`: the MTLTexture
+  /// associated with the texture, if you want to wrap an existing texture.
+  /// - `SDL_PROP_TEXTURE_CREATE_METAL_TEXTURE_UV_POINTER`: the MTLTexture
+  /// associated with the UV plane of an NV12 texture, if you want to wrap an
+  /// existing texture.
+  /// - `SDL_PROP_TEXTURE_CREATE_METAL_TEXTURE_U_POINTER`: the MTLTexture
+  /// associated with the U plane of a YUV texture, if you want to wrap an
+  /// existing texture.
+  /// - `SDL_PROP_TEXTURE_CREATE_METAL_TEXTURE_V_POINTER`: the MTLTexture
+  /// associated with the V plane of a YUV texture, if you want to wrap an
+  /// existing texture.
+  /// - `SDL_PROP_TEXTURE_CREATE_METAL_TEXTURE_USAGE_NUMBER`: any additional
+  /// MTLTextureUsage that this texture should have, defaults to 0.
   ///
   /// With the opengl renderer:
   ///

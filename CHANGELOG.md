@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.10.1] - 2026-08-04
+- SDL3-2026-08-02
+### Added
+- Added Task List (for struct) in README.md.
+### Changed
+- Standardized file names for consistency.
+### Fixed
+- Removed struct `SdlxGamepadTouchpadFinger` and `ImgxAnimationDecoderFrame` (use Record).
+
 ## [2.9.7] - 2026-07-30
 - SDL3-2026-07-26
 ### Added
