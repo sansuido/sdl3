@@ -48501,15 +48501,21 @@ void glAddClientPointerRangeMesa(Pointer<Void> addr, int size) {
 late Pointer<NativeFunction<Void Function()>> _glReleaseClientPointerRangeMesa;
 
 /// ```c
-/// GLAPI void* APIENTRY glReleaseClientPointerRangeMESA (GLsizeiptr *size)
+/// GLAPI void* APIENTRY glReleaseClientPointerRangeMESA (GLbitfield flags, GLsizeiptr *size)
 /// ```
 /// {@category opengl_glext}
-Pointer<Void> glReleaseClientPointerRangeMesa(Pointer<IntPtr> size) {
+Pointer<Void> glReleaseClientPointerRangeMesa(int flags, Pointer<IntPtr> size) {
   final glReleaseClientPointerRangeMesaAsFunction =
       _glReleaseClientPointerRangeMesa
-          .cast<NativeFunction<Pointer<Void> Function(Pointer<IntPtr> size)>>()
-          .asFunction<Pointer<Void> Function(Pointer<IntPtr> size)>();
-  return glReleaseClientPointerRangeMesaAsFunction(size);
+          .cast<
+            NativeFunction<
+              Pointer<Void> Function(Uint32 flags, Pointer<IntPtr> size)
+            >
+          >()
+          .asFunction<
+            Pointer<Void> Function(int flags, Pointer<IntPtr> size)
+          >();
+  return glReleaseClientPointerRangeMesaAsFunction(flags, size);
 }
 
 /// @nodoc

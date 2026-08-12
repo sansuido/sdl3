@@ -13,7 +13,7 @@ class SdlxVirtualJoystickSensorDesc {
 
 class SdlxVirtualJoystickDesc {
   SdlxVirtualJoystickDesc({
-    this.version = 0,
+    int? version,
     this.type = 0,
     this.vendorId = 0,
     this.productId = 0,
@@ -39,6 +39,7 @@ class SdlxVirtualJoystickDesc {
     setSensorsEnabled,
     Pointer<NativeFunction<SdlVirtualJoystickDescCleanup>>? cleanup,
   }) {
+    this.version = version ?? sizeOf<SdlVirtualJoystickDesc>();
     this.touchpads = touchpads ?? [];
     this.sensors = sensors ?? [];
     this.userdata = userdata ?? nullptr;
@@ -52,7 +53,7 @@ class SdlxVirtualJoystickDesc {
     this.cleanup = cleanup ?? nullptr;
   }
 
-  int version;
+  late int version;
   int type;
   int vendorId;
   int productId;

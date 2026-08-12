@@ -20500,11 +20500,11 @@ typedef PFNGLADDCLIENTPOINTERRANGEMESAPROCDart =
 typedef PFNGLADDCLIENTPOINTERRANGEMESAPROC =
     Void Function(Pointer<Void> addr, IntPtr size);
 
-// typedef void* (APIENTRYP PFNGLRELEASECLIENTPOINTERRANGEMESAPROC) (GLsizeiptr *size)
+// typedef void* (APIENTRYP PFNGLRELEASECLIENTPOINTERRANGEMESAPROC) (GLbitfield flags, GLsizeiptr *size)
 typedef PFNGLRELEASECLIENTPOINTERRANGEMESAPROCDart =
-    Pointer<Void> Function(Pointer<IntPtr> size);
+    Pointer<Void> Function(int flags, Pointer<IntPtr> size);
 typedef PFNGLRELEASECLIENTPOINTERRANGEMESAPROC =
-    Pointer<Void> Function(Pointer<IntPtr> size);
+    Pointer<Void> Function(Uint32 flags, Pointer<IntPtr> size);
 
 // typedef void (APIENTRYP PFNGLRESIZEBUFFERSMESAPROC) (void)
 typedef PFNGLRESIZEBUFFERSMESAPROCDart = void Function();

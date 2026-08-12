@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.10.2] - 2026-08-12
+- SDL3-2026-08-09
+### Added
+- Added suport functions for opengl.
+- Added extensions for `Pointer<SdlGlContext>`.
+- Auto-fill version with the struct size by default (SdlxVirtualJoystickDesc and SdlxStorageInterface).
+- Added `example/joystick/virtual_joystick_key_repeat_demo.dart`.
+
 ## [2.10.1] - 2026-08-04
 - SDL3-2026-08-02
 ### Added

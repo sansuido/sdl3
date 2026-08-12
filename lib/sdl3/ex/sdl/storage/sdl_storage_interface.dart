@@ -2,7 +2,7 @@ part of '../../../sdl.dart';
 
 class SdlxStorageInterface {
   SdlxStorageInterface({
-    this.version = 0,
+    int? version,
     Pointer<NativeFunction<SdlStorageInterfaceClose>>? close,
     Pointer<NativeFunction<SdlStorageInterfaceReady>>? ready,
     Pointer<NativeFunction<SdlStorageInterfaceEnumerate>>? enumerate,
@@ -15,6 +15,7 @@ class SdlxStorageInterface {
     Pointer<NativeFunction<SdlStorageInterfaceCopy>>? copy,
     Pointer<NativeFunction<SdlStorageInterfaceSpaceRemaining>>? spaceRemaining,
   }) {
+    this.version = version ?? sizeOf<SdlStorageInterface>();
     this.close = close ?? nullptr;
     this.ready = ready ?? nullptr;
     this.enumerate = enumerate ?? nullptr;
@@ -28,7 +29,7 @@ class SdlxStorageInterface {
     this.spaceRemaining = spaceRemaining ?? nullptr;
   }
 
-  int version;
+  late int version;
   late Pointer<NativeFunction<SdlStorageInterfaceClose>> close;
   late Pointer<NativeFunction<SdlStorageInterfaceReady>> ready;
   late Pointer<NativeFunction<SdlStorageInterfaceEnumerate>> enumerate;

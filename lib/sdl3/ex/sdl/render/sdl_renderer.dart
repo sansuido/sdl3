@@ -1015,7 +1015,9 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   double? getColorScale() => sdlxGetRenderColorScale(this);
 
   ///
-  /// Set the blend mode used for drawing operations (Fill and Line).
+  /// Set the blend mode used for drawing operations.
+  ///
+  /// This blend mode is used for any drawing that doesn't involve textures.
   ///
   /// If the blend mode is not supported, the closest supported mode is chosen.
   ///
@@ -1029,6 +1031,7 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// \since This function is available since SDL 3.2.0.
   ///
   /// \sa SDL_GetRenderDrawBlendMode
+  /// \sa SDL_SetTextureBlendMode
   ///
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetRenderDrawBlendMode(SDL_Renderer *renderer, SDL_BlendMode blendMode)

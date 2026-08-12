@@ -1331,6 +1331,30 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// {@category video}
   int getDisplayFor() => sdlGetDisplayForWindow(this);
 
+  ///
+  /// Update a window with OpenGL rendering.
+  ///
+  /// This is used with double-buffered OpenGL contexts, which are the default.
+  ///
+  /// On macOS, make sure you bind 0 to the draw framebuffer before swapping the
+  /// window, otherwise nothing will happen. If you aren't using
+  /// glBindFramebuffer(), this is the default and you won't have to do anything
+  /// extra.
+  ///
+  /// \param window the window to change.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
+  ///
+  /// \threadsafety This function should only be called on the main thread.
+  ///
+  /// \since This function is available since SDL 3.2.0.
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_GL_SwapWindow(SDL_Window *window)
+  /// ```
+  /// {@category video}
+  bool glSwap() => sdlGlSwapWindow(this);
+
   // lib_sdl_renderer.dart
 
   ///

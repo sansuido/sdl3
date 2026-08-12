@@ -153,6 +153,7 @@ part 'ex/sdl/tray/sdl_tray_entry.dart';
 part 'ex/sdl/tray/sdl_tray_menu.dart';
 
 part 'ex/sdl/video/lib_sdl_video.dart';
+part 'ex/sdl/video/sdl_gl_context.dart';
 part 'ex/sdl/video/sdl_window.dart';
 part 'ex/sdl/video/sdl_display_mode.dart';
 
