@@ -1,5 +1,18 @@
 # Changelog
 
+## [2.11.0] - 2026-08-20
+- SDL3-2026-08-16
+### Changed
+- Changed `sdlxGetWindowPosition`, `sdlxGetWindowSize` (use Record).
+- Removed `SdlxRenderLogicalPresentation` (use Record).
+### Added
+- Added official SDL3 wiki links to function doc comments.
+- Added extensions for `Pointer<SdlJoystick>`, `Pointer<SdlVertex>`, `Pointer<SdlRenderer>`, `Pointer<SdlTexture>`, `Pointer<SdlWindow>`.
+- Added `example/render/geometry_raw_rectangle.dart`.
+- Added `example/render/geometry_raw_triangle.dart`.
+### Updated
+- Dart 3.13.1
+
 ## [2.10.2] - 2026-08-12
 - SDL3-2026-08-09
 ### Added

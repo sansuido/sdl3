@@ -20,6 +20,10 @@ part of '../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_RequestNotificationPermission(void)
 /// ```
+///
+/// See also:
+/// - [SDL_RequestNotificationPermission - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RequestNotificationPermission)
+///
 /// {@category notification}
 bool sdlRequestNotificationPermission() {
   final sdlRequestNotificationPermissionLookupFunction = _libSdl
@@ -99,6 +103,10 @@ bool sdlRequestNotificationPermission() {
 /// ```c
 /// extern SDL_DECLSPEC SDL_NotificationID SDLCALL SDL_ShowNotificationWithProperties(SDL_PropertiesID props)
 /// ```
+///
+/// See also:
+/// - [SDL_ShowNotificationWithProperties - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ShowNotificationWithProperties)
+///
 /// {@category notification}
 int sdlShowNotificationWithProperties(int props) {
   final sdlShowNotificationWithPropertiesLookupFunction = _libSdl
@@ -129,6 +137,10 @@ int sdlShowNotificationWithProperties(int props) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_NotificationID SDLCALL SDL_ShowNotification(const char *title, const char *message, SDL_Surface *image, SDL_NotificationAction *actions, int num_actions)
 /// ```
+///
+/// See also:
+/// - [SDL_ShowNotification - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ShowNotification)
+///
 /// {@category notification}
 int sdlShowNotification(
   String? title,
@@ -184,6 +196,10 @@ int sdlShowNotification(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_RemoveNotification(SDL_NotificationID notification)
 /// ```
+///
+/// See also:
+/// - [SDL_RemoveNotification - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RemoveNotification)
+///
 /// {@category notification}
 bool sdlRemoveNotification(int notification) {
   final sdlRemoveNotificationLookupFunction = _libSdl

@@ -2,12 +2,15 @@ import 'dart:convert';
 import 'dart:ffi';
 import 'dart:math' as math;
 import 'dart:typed_data';
+
 import 'package:ffi/ffi.dart';
 import 'package:ffi/ffi.dart' as ffi;
+
 import 'dylib.dart' as dylib;
 import 'sdl_dart.dart';
 import 'sdl_gfx.dart' as gfx;
 import 'sdl_image.dart';
+import 'sdl_ttf.dart' as ttf;
 
 part 'ex/sdl/asyncio/lib_sdl_asyncio.dart';
 part 'ex/sdl/asyncio/sdl_async_io.dart';
@@ -81,7 +84,6 @@ part 'ex/sdl/iostream/sdl_iostream.dart';
 part 'ex/sdl/joystick/lib_sdl_joystick.dart';
 part 'ex/sdl/joystick/sdl_joystick.dart';
 part 'ex/sdl/joystick/sdl_joystick_from_haptic.dart';
-part 'ex/sdl/joystick/sdl_joystick_guid_info.dart';
 part 'ex/sdl/joystick/sdl_virtual_joystick_desc.dart';
 
 part 'ex/sdl/keyboard/lib_sdl_keyboard.dart';
@@ -118,12 +120,14 @@ part 'ex/sdl/rect/sdl_frect.dart';
 part 'ex/sdl/rect/sdl_point.dart';
 part 'ex/sdl/rect/sdl_rect.dart';
 
+part 'ex/sdl/render/sdl_gpu_render_state_create_info.dart';
+part 'ex/sdl/render/sdl_gpu_render_state.dart';
 part 'ex/sdl/render/lib_sdl_render.dart';
 part 'ex/sdl/render/sdl_renderer.dart';
 part 'ex/sdl/render/sdl_renderer_from_gfx.dart';
 part 'ex/sdl/render/sdl_renderer_from_image.dart';
+part 'ex/sdl/render/sdl_renderer_from_ttf.dart';
 part 'ex/sdl/render/sdl_texture.dart';
-part 'ex/sdl/render/sdl_render_logical_presentation.dart';
 part 'ex/sdl/render/sdl_vertex.dart';
 
 part 'ex/sdl/sensor/lib_sdl_sensor.dart';
@@ -155,6 +159,12 @@ part 'ex/sdl/tray/sdl_tray_menu.dart';
 part 'ex/sdl/video/lib_sdl_video.dart';
 part 'ex/sdl/video/sdl_gl_context.dart';
 part 'ex/sdl/video/sdl_window.dart';
+part 'ex/sdl/video/sdl_window_from_keyboard.dart';
+part 'ex/sdl/video/sdl_window_from_metal.dart';
+part 'ex/sdl/video/sdl_window_from_mouse.dart';
+part 'ex/sdl/video/sdl_window_from_render.dart';
+part 'ex/sdl/video/sdl_window_from_system.dart';
+part 'ex/sdl/video/sdl_window_from_vulkan.dart';
 part 'ex/sdl/video/sdl_display_mode.dart';
 
 part 'ex/sdl/vulkan/lib_sdl_vulkan.dart';

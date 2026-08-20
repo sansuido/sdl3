@@ -1,6 +1,7 @@
 // https://github.com/ali-bahjati/sdl_gfx_guide/blob/master/wave.c
 import 'dart:ffi';
 import 'dart:math';
+
 import 'package:sdl3/sdl3.dart';
 import 'package:sdl3/sdl3gfx.dart' as gfx;
 

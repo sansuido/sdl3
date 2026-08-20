@@ -24,6 +24,10 @@ part of '../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetDateTimeLocalePreferences(SDL_DateFormat *dateFormat, SDL_TimeFormat *timeFormat)
 /// ```
+///
+/// See also:
+/// - [SDL_GetDateTimeLocalePreferences - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetDateTimeLocalePreferences)
+///
 /// {@category time}
 bool sdlGetDateTimeLocalePreferences(
   Pointer<Int32> dateFormat,
@@ -52,6 +56,10 @@ bool sdlGetDateTimeLocalePreferences(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetCurrentTime(SDL_Time *ticks)
 /// ```
+///
+/// See also:
+/// - [SDL_GetCurrentTime - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetCurrentTime)
+///
 /// {@category time}
 bool sdlGetCurrentTime(Pointer<Int64> ticks) {
   final sdlGetCurrentTimeLookupFunction = _libSdl
@@ -81,6 +89,10 @@ bool sdlGetCurrentTime(Pointer<Int64> ticks) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_TimeToDateTime(SDL_Time ticks, SDL_DateTime *dt, bool localTime)
 /// ```
+///
+/// See also:
+/// - [SDL_TimeToDateTime - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_TimeToDateTime)
+///
 /// {@category time}
 bool sdlTimeToDateTime(int ticks, Pointer<SdlDateTime> dt, bool localTime) {
   final sdlTimeToDateTimeLookupFunction = _libSdl
@@ -109,6 +121,10 @@ bool sdlTimeToDateTime(int ticks, Pointer<SdlDateTime> dt, bool localTime) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_DateTimeToTime(const SDL_DateTime *dt, SDL_Time *ticks)
 /// ```
+///
+/// See also:
+/// - [SDL_DateTimeToTime - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_DateTimeToTime)
+///
 /// {@category time}
 bool sdlDateTimeToTime(Pointer<SdlDateTime> dt, Pointer<Int64> ticks) {
   final sdlDateTimeToTimeLookupFunction = _libSdl
@@ -138,6 +154,10 @@ bool sdlDateTimeToTime(Pointer<SdlDateTime> dt, Pointer<Int64> ticks) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_TimeToWindows(SDL_Time ticks, Uint32 *dwLowDateTime, Uint32 *dwHighDateTime)
 /// ```
+///
+/// See also:
+/// - [SDL_TimeToWindows - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_TimeToWindows)
+///
 /// {@category time}
 void sdlTimeToWindows(
   int ticks,
@@ -178,6 +198,10 @@ void sdlTimeToWindows(
 /// ```c
 /// extern SDL_DECLSPEC SDL_Time SDLCALL SDL_TimeFromWindows(Uint32 dwLowDateTime, Uint32 dwHighDateTime)
 /// ```
+///
+/// See also:
+/// - [SDL_TimeFromWindows - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_TimeFromWindows)
+///
 /// {@category time}
 int sdlTimeFromWindows(int dwLowDateTime, int dwHighDateTime) {
   final sdlTimeFromWindowsLookupFunction = _libSdl
@@ -203,6 +227,10 @@ int sdlTimeFromWindows(int dwLowDateTime, int dwHighDateTime) {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_GetDaysInMonth(int year, int month)
 /// ```
+///
+/// See also:
+/// - [SDL_GetDaysInMonth - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetDaysInMonth)
+///
 /// {@category time}
 int sdlGetDaysInMonth(int year, int month) {
   final sdlGetDaysInMonthLookupFunction = _libSdl
@@ -229,6 +257,10 @@ int sdlGetDaysInMonth(int year, int month) {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_GetDayOfYear(int year, int month, int day)
 /// ```
+///
+/// See also:
+/// - [SDL_GetDayOfYear - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetDayOfYear)
+///
 /// {@category time}
 int sdlGetDayOfYear(int year, int month, int day) {
   final sdlGetDayOfYearLookupFunction = _libSdl
@@ -255,6 +287,10 @@ int sdlGetDayOfYear(int year, int month, int day) {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_GetDayOfWeek(int year, int month, int day)
 /// ```
+///
+/// See also:
+/// - [SDL_GetDayOfWeek - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetDayOfWeek)
+///
 /// {@category time}
 int sdlGetDayOfWeek(int year, int month, int day) {
   final sdlGetDayOfWeekLookupFunction = _libSdl

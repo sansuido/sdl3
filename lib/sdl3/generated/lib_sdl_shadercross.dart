@@ -10,6 +10,10 @@ part of '../sdl_shadercross.dart';
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_ShaderCross_Init(void)
 /// ```
+///
+/// See also:
+/// - [SDL_ShaderCross_Init - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ShaderCross_Init)
+///
 /// {@category shadercross}
 bool sdlShaderCrossInit() {
   final sdlShaderCrossInitLookupFunction = _libShadercross
@@ -25,6 +29,10 @@ bool sdlShaderCrossInit() {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_ShaderCross_Quit(void)
 /// ```
+///
+/// See also:
+/// - [SDL_ShaderCross_Quit - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ShaderCross_Quit)
+///
 /// {@category shadercross}
 void sdlShaderCrossQuit() {
   final sdlShaderCrossQuitLookupFunction = _libShadercross
@@ -41,6 +49,10 @@ void sdlShaderCrossQuit() {
 /// ```c
 /// extern SDL_DECLSPEC SDL_GPUShaderFormat SDLCALL SDL_ShaderCross_GetSPIRVShaderFormats(void)
 /// ```
+///
+/// See also:
+/// - [SDL_ShaderCross_GetSPIRVShaderFormats - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ShaderCross_GetSPIRVShaderFormats)
+///
 /// {@category shadercross}
 int sdlShaderCrossGetSpirvShaderFormats() {
   final sdlShaderCrossGetSpirvShaderFormatsLookupFunction = _libShadercross
@@ -65,6 +77,10 @@ int sdlShaderCrossGetSpirvShaderFormats() {
 /// ```c
 /// extern SDL_DECLSPEC void * SDLCALL SDL_ShaderCross_TranspileMSLFromSPIRV( const SDL_ShaderCross_SPIRV_Info *info)
 /// ```
+///
+/// See also:
+/// - [SDL_ShaderCross_TranspileMSLFromSPIRV - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ShaderCross_TranspileMSLFromSPIRV)
+///
 /// {@category shadercross}
 Pointer<Void> sdlShaderCrossTranspileMslFromSpirv(
   Pointer<SdlShaderCrossSpirvInfo> info,
@@ -92,6 +108,10 @@ Pointer<Void> sdlShaderCrossTranspileMslFromSpirv(
 /// ```c
 /// extern SDL_DECLSPEC void * SDLCALL SDL_ShaderCross_TranspileHLSLFromSPIRV( const SDL_ShaderCross_SPIRV_Info *info)
 /// ```
+///
+/// See also:
+/// - [SDL_ShaderCross_TranspileHLSLFromSPIRV - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ShaderCross_TranspileHLSLFromSPIRV)
+///
 /// {@category shadercross}
 Pointer<Void> sdlShaderCrossTranspileHlslFromSpirv(
   Pointer<SdlShaderCrossSpirvInfo> info,
@@ -116,6 +136,10 @@ Pointer<Void> sdlShaderCrossTranspileHlslFromSpirv(
 /// ```c
 /// extern SDL_DECLSPEC void * SDLCALL SDL_ShaderCross_CompileDXBCFromSPIRV( const SDL_ShaderCross_SPIRV_Info *info, size_t *size)
 /// ```
+///
+/// See also:
+/// - [SDL_ShaderCross_CompileDXBCFromSPIRV - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ShaderCross_CompileDXBCFromSPIRV)
+///
 /// {@category shadercross}
 Pointer<Void> sdlShaderCrossCompileDxbcFromSpirv(
   Pointer<SdlShaderCrossSpirvInfo> info,
@@ -147,6 +171,10 @@ Pointer<Void> sdlShaderCrossCompileDxbcFromSpirv(
 /// ```c
 /// extern SDL_DECLSPEC void * SDLCALL SDL_ShaderCross_CompileDXILFromSPIRV( const SDL_ShaderCross_SPIRV_Info *info, size_t *size)
 /// ```
+///
+/// See also:
+/// - [SDL_ShaderCross_CompileDXILFromSPIRV - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ShaderCross_CompileDXILFromSPIRV)
+///
 /// {@category shadercross}
 Pointer<Void> sdlShaderCrossCompileDxilFromSpirv(
   Pointer<SdlShaderCrossSpirvInfo> info,
@@ -180,6 +208,10 @@ Pointer<Void> sdlShaderCrossCompileDxilFromSpirv(
 /// ```c
 /// extern SDL_DECLSPEC SDL_GPUShader * SDLCALL SDL_ShaderCross_CompileGraphicsShaderFromSPIRV( SDL_GPUDevice *device, const SDL_ShaderCross_SPIRV_Info *info, const SDL_ShaderCross_GraphicsShaderResourceInfo *resource_info, SDL_PropertiesID props)
 /// ```
+///
+/// See also:
+/// - [SDL_ShaderCross_CompileGraphicsShaderFromSPIRV - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ShaderCross_CompileGraphicsShaderFromSPIRV)
+///
 /// {@category shadercross}
 Pointer<SdlGpuShader> sdlShaderCrossCompileGraphicsShaderFromSpirv(
   Pointer<SdlGpuDevice> device,
@@ -224,6 +256,10 @@ Pointer<SdlGpuShader> sdlShaderCrossCompileGraphicsShaderFromSpirv(
 /// ```c
 /// extern SDL_DECLSPEC SDL_GPUComputePipeline * SDLCALL SDL_ShaderCross_CompileComputePipelineFromSPIRV( SDL_GPUDevice *device, const SDL_ShaderCross_SPIRV_Info *info, const SDL_ShaderCross_ComputePipelineMetadata *metadata, SDL_PropertiesID props)
 /// ```
+///
+/// See also:
+/// - [SDL_ShaderCross_CompileComputePipelineFromSPIRV - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ShaderCross_CompileComputePipelineFromSPIRV)
+///
 /// {@category shadercross}
 Pointer<SdlGpuComputePipeline> sdlShaderCrossCompileComputePipelineFromSpirv(
   Pointer<SdlGpuDevice> device,
@@ -267,6 +303,10 @@ Pointer<SdlGpuComputePipeline> sdlShaderCrossCompileComputePipelineFromSpirv(
 /// ```c
 /// extern SDL_DECLSPEC SDL_ShaderCross_GraphicsShaderMetadata * SDLCALL SDL_ShaderCross_ReflectGraphicsSPIRV( const Uint8 *bytecode, size_t bytecode_size, SDL_PropertiesID props)
 /// ```
+///
+/// See also:
+/// - [SDL_ShaderCross_ReflectGraphicsSPIRV - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ShaderCross_ReflectGraphicsSPIRV)
+///
 /// {@category shadercross}
 Pointer<SdlShaderCrossGraphicsShaderMetadata>
 sdlShaderCrossReflectGraphicsSpirv(
@@ -307,6 +347,10 @@ sdlShaderCrossReflectGraphicsSpirv(
 /// ```c
 /// extern SDL_DECLSPEC SDL_ShaderCross_ComputePipelineMetadata * SDLCALL SDL_ShaderCross_ReflectComputeSPIRV( const Uint8 *bytecode, size_t bytecode_size, SDL_PropertiesID props)
 /// ```
+///
+/// See also:
+/// - [SDL_ShaderCross_ReflectComputeSPIRV - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ShaderCross_ReflectComputeSPIRV)
+///
 /// {@category shadercross}
 Pointer<SdlShaderCrossComputePipelineMetadata>
 sdlShaderCrossReflectComputeSpirv(
@@ -344,6 +388,10 @@ sdlShaderCrossReflectComputeSpirv(
 /// ```c
 /// extern SDL_DECLSPEC SDL_GPUShaderFormat SDLCALL SDL_ShaderCross_GetHLSLShaderFormats(void)
 /// ```
+///
+/// See also:
+/// - [SDL_ShaderCross_GetHLSLShaderFormats - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ShaderCross_GetHLSLShaderFormats)
+///
 /// {@category shadercross}
 int sdlShaderCrossGetHlslShaderFormats() {
   final sdlShaderCrossGetHlslShaderFormatsLookupFunction = _libShadercross
@@ -374,6 +422,10 @@ int sdlShaderCrossGetHlslShaderFormats() {
 /// ```c
 /// extern SDL_DECLSPEC void * SDLCALL SDL_ShaderCross_CompileDXBCFromHLSL( const SDL_ShaderCross_HLSL_Info *info, size_t *size)
 /// ```
+///
+/// See also:
+/// - [SDL_ShaderCross_CompileDXBCFromHLSL - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ShaderCross_CompileDXBCFromHLSL)
+///
 /// {@category shadercross}
 Pointer<Void> sdlShaderCrossCompileDxbcFromHlsl(
   Pointer<SdlShaderCrossHlslInfo> info,
@@ -414,6 +466,10 @@ Pointer<Void> sdlShaderCrossCompileDxbcFromHlsl(
 /// ```c
 /// extern SDL_DECLSPEC void * SDLCALL SDL_ShaderCross_CompileDXILFromHLSL( const SDL_ShaderCross_HLSL_Info *info, size_t *size)
 /// ```
+///
+/// See also:
+/// - [SDL_ShaderCross_CompileDXILFromHLSL - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ShaderCross_CompileDXILFromHLSL)
+///
 /// {@category shadercross}
 Pointer<Void> sdlShaderCrossCompileDxilFromHlsl(
   Pointer<SdlShaderCrossHlslInfo> info,
@@ -453,6 +509,10 @@ Pointer<Void> sdlShaderCrossCompileDxilFromHlsl(
 /// ```c
 /// extern SDL_DECLSPEC void * SDLCALL SDL_ShaderCross_CompileSPIRVFromHLSL( const SDL_ShaderCross_HLSL_Info *info, size_t *size)
 /// ```
+///
+/// See also:
+/// - [SDL_ShaderCross_CompileSPIRVFromHLSL - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ShaderCross_CompileSPIRVFromHLSL)
+///
 /// {@category shadercross}
 Pointer<Void> sdlShaderCrossCompileSpirvFromHlsl(
   Pointer<SdlShaderCrossHlslInfo> info,

@@ -28,6 +28,10 @@ extension SdlTrayEntryPointerEx on Pointer<SdlTrayEntry> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_TrayMenu * SDLCALL SDL_CreateTraySubmenu(SDL_TrayEntry *entry)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_CreateTraySubmenu - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CreateTraySubmenu)
+  ///
   /// {@category tray}
   Pointer<SdlTrayMenu> createSubmenu() => sdlCreateTraySubmenu(this);
 
@@ -56,6 +60,10 @@ extension SdlTrayEntryPointerEx on Pointer<SdlTrayEntry> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_TrayMenu * SDLCALL SDL_GetTraySubmenu(SDL_TrayEntry *entry)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetTraySubmenu - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetTraySubmenu)
+  ///
   /// {@category tray}
   Pointer<SdlTrayMenu> getSubmenu() => sdlGetTraySubmenu(this);
 
@@ -75,6 +83,10 @@ extension SdlTrayEntryPointerEx on Pointer<SdlTrayEntry> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_RemoveTrayEntry(SDL_TrayEntry *entry)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_RemoveTrayEntry - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RemoveTrayEntry)
+  ///
   /// {@category tray}
   void remove() => sdlRemoveTrayEntry(this);
 
@@ -101,6 +113,10 @@ extension SdlTrayEntryPointerEx on Pointer<SdlTrayEntry> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_SetTrayEntryLabel(SDL_TrayEntry *entry, const char *label)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_SetTrayEntryLabel - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetTrayEntryLabel)
+  ///
   /// {@category tray}
   void setLabel(String? label) => sdlSetTrayEntryLabel(this, label);
 
@@ -124,6 +140,10 @@ extension SdlTrayEntryPointerEx on Pointer<SdlTrayEntry> {
   /// ```c
   /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetTrayEntryLabel(SDL_TrayEntry *entry)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetTrayEntryLabel - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetTrayEntryLabel)
+  ///
   /// {@category tray}
   String? getLabel() => sdlGetTrayEntryLabel(this);
 
@@ -147,6 +167,10 @@ extension SdlTrayEntryPointerEx on Pointer<SdlTrayEntry> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_SetTrayEntryChecked(SDL_TrayEntry *entry, bool checked)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_SetTrayEntryChecked - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetTrayEntryChecked)
+  ///
   /// {@category tray}
   void setChecked(bool checked) => sdlSetTrayEntryChecked(this, checked);
 
@@ -170,6 +194,10 @@ extension SdlTrayEntryPointerEx on Pointer<SdlTrayEntry> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetTrayEntryChecked(SDL_TrayEntry *entry)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetTrayEntryChecked - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetTrayEntryChecked)
+  ///
   /// {@category tray}
   bool getChecked() => sdlGetTrayEntryChecked(this);
 
@@ -191,6 +219,10 @@ extension SdlTrayEntryPointerEx on Pointer<SdlTrayEntry> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_SetTrayEntryEnabled(SDL_TrayEntry *entry, bool enabled)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_SetTrayEntryEnabled - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetTrayEntryEnabled)
+  ///
   /// {@category tray}
   void setEnabled(bool enabled) => sdlSetTrayEntryEnabled(this, enabled);
 
@@ -212,6 +244,10 @@ extension SdlTrayEntryPointerEx on Pointer<SdlTrayEntry> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetTrayEntryEnabled(SDL_TrayEntry *entry)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetTrayEntryEnabled - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetTrayEntryEnabled)
+  ///
   /// {@category tray}
   bool getEnabled() => sdlGetTrayEntryEnabled(this);
 
@@ -234,6 +270,10 @@ extension SdlTrayEntryPointerEx on Pointer<SdlTrayEntry> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_SetTrayEntryCallback(SDL_TrayEntry *entry, SDL_TrayCallback callback, void *userdata)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_SetTrayEntryCallback - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetTrayEntryCallback)
+  ///
   /// {@category tray}
   void setCallback(
     Pointer<NativeFunction<SdlTrayCallback>> callback,
@@ -253,6 +293,10 @@ extension SdlTrayEntryPointerEx on Pointer<SdlTrayEntry> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_ClickTrayEntry(SDL_TrayEntry *entry)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_ClickTrayEntry - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ClickTrayEntry)
+  ///
   /// {@category tray}
   void click() => sdlClickTrayEntry(this);
 
@@ -272,6 +316,10 @@ extension SdlTrayEntryPointerEx on Pointer<SdlTrayEntry> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_TrayMenu * SDLCALL SDL_GetTrayEntryParent(SDL_TrayEntry *entry)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetTrayEntryParent - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetTrayEntryParent)
+  ///
   /// {@category tray}
   Pointer<SdlTrayMenu> getParent() => sdlGetTrayEntryParent(this);
 }

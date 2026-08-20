@@ -40,6 +40,10 @@ part of '../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_ShowMessageBox(const SDL_MessageBoxData *messageboxdata, int *buttonid)
 /// ```
+///
+/// See also:
+/// - [SDL_ShowMessageBox - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ShowMessageBox)
+///
 /// {@category messagebox}
 bool sdlShowMessageBox(
   Pointer<SdlMessageBoxData> messageboxdata,
@@ -104,6 +108,10 @@ bool sdlShowMessageBox(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_ShowSimpleMessageBox(SDL_MessageBoxFlags flags, const char *title, const char *message, SDL_Window *window)
 /// ```
+///
+/// See also:
+/// - [SDL_ShowSimpleMessageBox - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ShowSimpleMessageBox)
+///
 /// {@category messagebox}
 bool sdlShowSimpleMessageBox(
   int flags,

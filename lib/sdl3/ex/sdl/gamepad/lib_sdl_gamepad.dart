@@ -17,6 +17,10 @@ part of '../../../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC char ** SDLCALL SDL_GetGamepadMappings(int *count)
 /// ```
+///
+/// See also:
+/// - [SDL_GetGamepadMappings - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetGamepadMappings)
+///
 /// {@category gamepad}
 List<String> sdlxGetGamepadMappings() {
   final result = <String>[];
@@ -54,6 +58,10 @@ List<String> sdlxGetGamepadMappings() {
 /// ```c
 /// extern SDL_DECLSPEC char * SDLCALL SDL_GetGamepadMappingForGUID(SDL_GUID guid)
 /// ```
+///
+/// See also:
+/// - [SDL_GetGamepadMappingForGUID - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetGamepadMappingForGUID)
+///
 /// {@category gamepad}
 String? sdlxGetGamepadMappingForGuid(SdlGuid guid) {
   String? result;
@@ -87,6 +95,10 @@ String? sdlxGetGamepadMappingForGuid(SdlGuid guid) {
 /// ```c
 /// extern SDL_DECLSPEC char * SDLCALL SDL_GetGamepadMapping(SDL_Gamepad *gamepad)
 /// ```
+///
+/// See also:
+/// - [SDL_GetGamepadMapping - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetGamepadMapping)
+///
 /// {@category gamepad}
 String? sdlxGetGamepadMapping(Pointer<SdlGamepad> gamepad) {
   String? result;
@@ -117,6 +129,10 @@ String? sdlxGetGamepadMapping(Pointer<SdlGamepad> gamepad) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_JoystickID * SDLCALL SDL_GetGamepads(int *count)
 /// ```
+///
+/// See also:
+/// - [SDL_GetGamepads - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetGamepads)
+///
 /// {@category gamepad}
 List<int> sdlxGetGamepads() {
   final result = <int>[];
@@ -151,6 +167,10 @@ List<int> sdlxGetGamepads() {
 /// ```c
 /// extern SDL_DECLSPEC char * SDLCALL SDL_GetGamepadMappingForID(SDL_JoystickID instance_id)
 /// ```
+///
+/// See also:
+/// - [SDL_GetGamepadMappingForID - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetGamepadMappingForID)
+///
 /// {@category gamepad}
 String? sdlxGetGamepadMappingForId(int instanceId) {
   String? result;
@@ -185,6 +205,10 @@ String? sdlxGetGamepadMappingForId(int instanceId) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_PowerState SDLCALL SDL_GetGamepadPowerInfo(SDL_Gamepad *gamepad, int *percent)
 /// ```
+///
+/// See also:
+/// - [SDL_GetGamepadPowerInfo - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetGamepadPowerInfo)
+///
 /// {@category gamepad}
 ({int percent, int state}) sdlxGetGamepadPowerInfo(
   Pointer<SdlGamepad> gamepad,
@@ -213,6 +237,10 @@ String? sdlxGetGamepadMappingForId(int instanceId) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_GamepadBinding ** SDLCALL SDL_GetGamepadBindings(SDL_Gamepad *gamepad, int *count)
 /// ```
+///
+/// See also:
+/// - [SDL_GetGamepadBindings - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetGamepadBindings)
+///
 /// {@category gamepad}
 List<SdlxGamepadBinding> sdlxGetGamepadBindings(Pointer<SdlGamepad> gamepad) {
   final result = <SdlxGamepadBinding>[];
@@ -253,6 +281,10 @@ List<SdlxGamepadBinding> sdlxGetGamepadBindings(Pointer<SdlGamepad> gamepad) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetGamepadTouchpadFinger(SDL_Gamepad *gamepad, int touchpad, int finger, bool *down, float *x, float *y, float *pressure)
 /// ```
+///
+/// See also:
+/// - [SDL_GetGamepadTouchpadFinger - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetGamepadTouchpadFinger)
+///
 /// {@category gamepad}
 ({bool down, double x, double y, double pressure})?
 sdlxGetGamepadTouchpadFinger(
@@ -313,6 +345,10 @@ sdlxGetGamepadTouchpadFinger(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetGamepadSensorData(SDL_Gamepad *gamepad, SDL_SensorType type, float *data, int num_values)
 /// ```
+///
+/// See also:
+/// - [SDL_GetGamepadSensorData - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetGamepadSensorData)
+///
 /// {@category gamepad}
 bool sdlxGetGamepadSensorData(
   Pointer<SdlGamepad> gamepad,

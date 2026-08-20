@@ -1,6 +1,7 @@
 // https://github.com/libsdl-org/SDL_mixer/blob/main/test/testaudiodecoder.c
 import 'dart:ffi';
 import 'dart:math' as math;
+
 import 'package:ffi/ffi.dart';
 import 'package:sdl3/sdl3.dart';
 

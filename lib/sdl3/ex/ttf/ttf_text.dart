@@ -27,6 +27,10 @@ extension TtfTextPointerEx on Pointer<TtfText> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL TTF_DrawSurfaceText(TTF_Text *text, int x, int y, SDL_Surface *surface)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_DrawSurfaceText - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_DrawSurfaceText)
+  ///
   /// {@category ttf}
   bool drawSurface(int x, int y, Pointer<SdlSurface> surface) =>
       ttfDrawSurfaceText(this, x, y, surface);
@@ -57,6 +61,10 @@ extension TtfTextPointerEx on Pointer<TtfText> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL TTF_DrawRendererText(TTF_Text *text, float x, float y)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_DrawRendererText - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_DrawRendererText)
+  ///
   /// {@category ttf}
   bool drawRenderer(double x, double y) => ttfDrawRendererText(this, x, y);
 
@@ -90,6 +98,10 @@ extension TtfTextPointerEx on Pointer<TtfText> {
   /// ```c
   /// extern SDL_DECLSPEC TTF_GPUAtlasDrawSequence * SDLCALL TTF_GetGPUTextDrawData(TTF_Text *text)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_GetGPUTextDrawData - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetGPUTextDrawData)
+  ///
   /// {@category ttf}
   Pointer<TtfGpuAtlasDrawSequence> getGpuDrawData() =>
       ttfGetGpuTextDrawData(this);
@@ -124,6 +136,10 @@ extension TtfTextPointerEx on Pointer<TtfText> {
   /// ```c
   /// extern SDL_DECLSPEC TTF_GLAtlasDrawSequence * SDLCALL TTF_GetGLTextDrawData(TTF_Text *text)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_GetGLTextDrawData - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetGLTextDrawData)
+  ///
   /// {@category ttf}
   Pointer<TtfGlAtlasDrawSequence> getGlDrawData() => ttfGetGlTextDrawData(this);
 
@@ -142,6 +158,10 @@ extension TtfTextPointerEx on Pointer<TtfText> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_PropertiesID SDLCALL TTF_GetTextProperties(TTF_Text *text)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_GetTextProperties - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetTextProperties)
+  ///
   /// {@category ttf}
   int getProperties() => ttfGetTextProperties(this);
 
@@ -165,6 +185,10 @@ extension TtfTextPointerEx on Pointer<TtfText> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL TTF_SetTextEngine(TTF_Text *text, TTF_TextEngine *engine)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_SetTextEngine - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_SetTextEngine)
+  ///
   /// {@category ttf}
   bool setEngine(Pointer<TtfTextEngine> engine) =>
       ttfSetTextEngine(this, engine);
@@ -186,6 +210,10 @@ extension TtfTextPointerEx on Pointer<TtfText> {
   /// ```c
   /// extern SDL_DECLSPEC TTF_TextEngine * SDLCALL TTF_GetTextEngine(TTF_Text *text)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_GetTextEngine - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetTextEngine)
+  ///
   /// {@category ttf}
   Pointer<TtfTextEngine> getEngine() => ttfGetTextEngine(this);
 
@@ -213,6 +241,10 @@ extension TtfTextPointerEx on Pointer<TtfText> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL TTF_SetTextFont(TTF_Text *text, TTF_Font *font)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_SetTextFont - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_SetTextFont)
+  ///
   /// {@category ttf}
   bool setFont(Pointer<TtfFont> font) => ttfSetTextFont(this, font);
 
@@ -233,6 +265,10 @@ extension TtfTextPointerEx on Pointer<TtfText> {
   /// ```c
   /// extern SDL_DECLSPEC TTF_Font * SDLCALL TTF_GetTextFont(TTF_Text *text)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_GetTextFont - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetTextFont)
+  ///
   /// {@category ttf}
   Pointer<TtfFont> getFont() => ttfGetTextFont(this);
 
@@ -255,6 +291,10 @@ extension TtfTextPointerEx on Pointer<TtfText> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL TTF_SetTextDirection(TTF_Text *text, TTF_Direction direction)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_SetTextDirection - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_SetTextDirection)
+  ///
   /// {@category ttf}
   bool setDirection(int direction) => ttfSetTextDirection(this, direction);
 
@@ -274,6 +314,10 @@ extension TtfTextPointerEx on Pointer<TtfText> {
   /// ```c
   /// extern SDL_DECLSPEC TTF_Direction SDLCALL TTF_GetTextDirection(TTF_Text *text)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_GetTextDirection - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetTextDirection)
+  ///
   /// {@category ttf}
   int getDirection() => ttfGetTextDirection(this);
 
@@ -299,6 +343,10 @@ extension TtfTextPointerEx on Pointer<TtfText> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL TTF_SetTextScript(TTF_Text *text, Uint32 script)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_SetTextScript - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_SetTextScript)
+  ///
   /// {@category ttf}
   bool setScript(int script) => ttfSetTextScript(this, script);
 
@@ -323,6 +371,10 @@ extension TtfTextPointerEx on Pointer<TtfText> {
   /// ```c
   /// extern SDL_DECLSPEC Uint32 SDLCALL TTF_GetTextScript(TTF_Text *text)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_GetTextScript - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetTextScript)
+  ///
   /// {@category ttf}
   int getScript() => ttfGetTextScript(this);
 
@@ -350,6 +402,10 @@ extension TtfTextPointerEx on Pointer<TtfText> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL TTF_SetTextColor(TTF_Text *text, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_SetTextColor - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_SetTextColor)
+  ///
   /// {@category ttf}
   bool setColor(SdlxColor color) => ttfxSetTextColor(this, color);
 
@@ -377,6 +433,10 @@ extension TtfTextPointerEx on Pointer<TtfText> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL TTF_SetTextColorFloat(TTF_Text *text, float r, float g, float b, float a)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_SetTextColorFloat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_SetTextColorFloat)
+  ///
   /// {@category ttf}
   bool setColorFloat(SdlxFColor color) => ttfxSetTextColorFloat(this, color);
 
@@ -406,6 +466,10 @@ extension TtfTextPointerEx on Pointer<TtfText> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL TTF_GetTextColor(TTF_Text *text, Uint8 *r, Uint8 *g, Uint8 *b, Uint8 *a)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_GetTextColor - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetTextColor)
+  ///
   /// {@category ttf}
   SdlxColor? getColor() => ttfxGetTextColor(this);
 
@@ -435,6 +499,10 @@ extension TtfTextPointerEx on Pointer<TtfText> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL TTF_GetTextColorFloat(TTF_Text *text, float *r, float *g, float *b, float *a)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_GetTextColorFloat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetTextColorFloat)
+  ///
   /// {@category ttf}
   SdlxFColor? getColorFloat() => ttfxGetTextColorFloat(this);
 
@@ -462,6 +530,10 @@ extension TtfTextPointerEx on Pointer<TtfText> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL TTF_SetTextPosition(TTF_Text *text, int x, int y)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_SetTextPosition - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_SetTextPosition)
+  ///
   /// {@category ttf}
   bool setPosition(SdlxPoint position) => ttfxSetTextPosition(this, position);
 
@@ -486,6 +558,10 @@ extension TtfTextPointerEx on Pointer<TtfText> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL TTF_GetTextPosition(TTF_Text *text, int *x, int *y)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_GetTextPosition - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetTextPosition)
+  ///
   /// {@category ttf}
   SdlxPoint? getPosition() => ttfxGetTextPosition(this);
 
@@ -510,6 +586,10 @@ extension TtfTextPointerEx on Pointer<TtfText> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL TTF_SetTextWrapWidth(TTF_Text *text, int wrap_width)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_SetTextWrapWidth - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_SetTextWrapWidth)
+  ///
   /// {@category ttf}
   bool setWrapWidth(int wrapWidth) => ttfSetTextWrapWidth(this, wrapWidth);
 
@@ -532,6 +612,10 @@ extension TtfTextPointerEx on Pointer<TtfText> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL TTF_GetTextWrapWidth(TTF_Text *text, int *wrap_width)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_GetTextWrapWidth - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetTextWrapWidth)
+  ///
   /// {@category ttf}
   int? getWrapWidth() => ttfxGetTextWrapWidth(this);
 
@@ -552,6 +636,10 @@ extension TtfTextPointerEx on Pointer<TtfText> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL TTF_TextWrapWhitespaceVisible(TTF_Text *text)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_TextWrapWhitespaceVisible - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_TextWrapWhitespaceVisible)
+  ///
   /// {@category ttf}
   bool wrapWhitespaceVisible() => ttfTextWrapWhitespaceVisible(this);
 
@@ -579,6 +667,10 @@ extension TtfTextPointerEx on Pointer<TtfText> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL TTF_SetTextString(TTF_Text *text, const char *string, size_t length)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_SetTextString - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_SetTextString)
+  ///
   /// {@category ttf}
   bool setString(String string) => ttfSetTextString(this, string);
 
@@ -610,6 +702,10 @@ extension TtfTextPointerEx on Pointer<TtfText> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL TTF_InsertTextString(TTF_Text *text, int offset, const char *string, size_t length)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_InsertTextString - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_InsertTextString)
+  ///
   /// {@category ttf}
   bool insertString(int offset, String string) =>
       ttfInsertTextString(this, offset, string);
@@ -638,6 +734,10 @@ extension TtfTextPointerEx on Pointer<TtfText> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL TTF_AppendTextString(TTF_Text *text, const char *string, size_t length)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_AppendTextString - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_AppendTextString)
+  ///
   /// {@category ttf}
   bool appendString(String string) => ttfAppendTextString(this, string);
 
@@ -668,6 +768,10 @@ extension TtfTextPointerEx on Pointer<TtfText> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL TTF_DeleteTextString(TTF_Text *text, int offset, int length)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_DeleteTextString - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_DeleteTextString)
+  ///
   /// {@category ttf}
   bool deleteString(int offset, int length) =>
       ttfDeleteTextString(this, offset, length);
@@ -694,6 +798,10 @@ extension TtfTextPointerEx on Pointer<TtfText> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL TTF_GetTextSize(TTF_Text *text, int *w, int *h)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_GetTextSize - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetTextSize)
+  ///
   /// {@category ttf}
   SdlxPoint? getSize() => ttfxGetTextSize(this);
 
@@ -721,6 +829,10 @@ extension TtfTextPointerEx on Pointer<TtfText> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL TTF_GetTextSubString(TTF_Text *text, int offset, TTF_SubString *substring)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_GetTextSubString - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetTextSubString)
+  ///
   /// {@category ttf}
   TtfxSubString? getSubString(int offset) => ttfxGetTextSubString(this, offset);
 
@@ -748,6 +860,10 @@ extension TtfTextPointerEx on Pointer<TtfText> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL TTF_GetTextSubStringForLine(TTF_Text *text, int line, TTF_SubString *substring)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_GetTextSubStringForLine - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetTextSubStringForLine)
+  ///
   /// {@category ttf}
   TtfxSubString? getSubStringForLine(int offset) =>
       ttfxGetTextSubStringForLine(this, offset);
@@ -774,6 +890,10 @@ extension TtfTextPointerEx on Pointer<TtfText> {
   /// ```c
   /// extern SDL_DECLSPEC TTF_SubString ** SDLCALL TTF_GetTextSubStringsForRange(TTF_Text *text, int offset, int length, int *count)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_GetTextSubStringsForRange - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetTextSubStringsForRange)
+  ///
   /// {@category ttf}
   List<TtfxSubString> getSubStringsForRange(int offset, int length) =>
       ttfxGetTextSubStringsForRange(this, offset, length);
@@ -801,6 +921,10 @@ extension TtfTextPointerEx on Pointer<TtfText> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL TTF_GetTextSubStringForPoint(TTF_Text *text, int x, int y, TTF_SubString *substring)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_GetTextSubStringForPoint - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetTextSubStringForPoint)
+  ///
   /// {@category ttf}
   TtfxSubString? getSubStringForPoint(int x, int y) =>
       ttfxGetTextSubStringForPoint(this, x, y);
@@ -826,6 +950,10 @@ extension TtfTextPointerEx on Pointer<TtfText> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL TTF_GetPreviousTextSubString(TTF_Text *text, const TTF_SubString *substring, TTF_SubString *previous)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_GetPreviousTextSubString - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetPreviousTextSubString)
+  ///
   /// {@category ttf}
   TtfxSubString? getPreviousSubString(TtfxSubString substring) =>
       ttfxGetPreviousTextSubString(this, substring);
@@ -850,6 +978,10 @@ extension TtfTextPointerEx on Pointer<TtfText> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL TTF_GetNextTextSubString(TTF_Text *text, const TTF_SubString *substring, TTF_SubString *next)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_GetNextTextSubString - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetNextTextSubString)
+  ///
   /// {@category ttf}
   TtfxSubString? getNextSubString(TtfxSubString substring) =>
       ttfxGetNextTextSubString(this, substring);
@@ -873,6 +1005,10 @@ extension TtfTextPointerEx on Pointer<TtfText> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL TTF_UpdateText(TTF_Text *text)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_UpdateText - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_UpdateText)
+  ///
   /// {@category ttf}
   bool update() => ttfUpdateText(this);
 
@@ -891,6 +1027,10 @@ extension TtfTextPointerEx on Pointer<TtfText> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL TTF_DestroyText(TTF_Text *text)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_DestroyText - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_DestroyText)
+  ///
   /// {@category ttf}
   void destroy() => ttfDestroyText(this);
 }

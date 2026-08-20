@@ -45,6 +45,10 @@ part of '../../sdl_net.dart';
 /// ```c
 /// extern SDL_DECLSPEC const void * SDLCALL NET_GetAddressBytes(NET_Address *address, int *num_bytes)
 /// ```
+///
+/// See also:
+/// - [NET_GetAddressBytes - SDL3 Wiki](https://wiki.libsdl.org/SDL3/NET_GetAddressBytes)
+///
 /// {@category net}
 Uint8List? netxGetAddressBytes(Pointer<NetAddress> address) {
   Uint8List? result;
@@ -97,6 +101,10 @@ Uint8List? netxGetAddressBytes(Pointer<NetAddress> address) {
 /// ```c
 /// extern SDL_DECLSPEC NET_Address **SDLCALL NET_GetLocalAddresses(int *num_addresses)
 /// ```
+///
+/// See also:
+/// - [NET_GetLocalAddresses - SDL3 Wiki](https://wiki.libsdl.org/SDL3/NET_GetLocalAddresses)
+///
 /// {@category net}
 List<String> netxGetLocalAddresses() {
   final result = <String>[];
@@ -159,6 +167,10 @@ List<String> netxGetLocalAddresses() {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL NET_AcceptClient(NET_Server *server, NET_StreamSocket **client_stream)
 /// ```
+///
+/// See also:
+/// - [NET_AcceptClient - SDL3 Wiki](https://wiki.libsdl.org/SDL3/NET_AcceptClient)
+///
 /// {@category net}
 Pointer<NetStreamSocket>? netxAcceptClient(Pointer<NetServer> server) {
   Pointer<NetStreamSocket>? result;
@@ -219,6 +231,10 @@ Pointer<NetStreamSocket>? netxAcceptClient(Pointer<NetServer> server) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL NET_WriteToStreamSocket(NET_StreamSocket *sock, const void *buf, int buflen)
 /// ```
+///
+/// See also:
+/// - [NET_WriteToStreamSocket - SDL3 Wiki](https://wiki.libsdl.org/SDL3/NET_WriteToStreamSocket)
+///
 /// {@category net}
 bool netxWriteToStreamSocket(Pointer<NetStreamSocket> sock, Uint8List buf) {
   if (buf.isEmpty) {
@@ -286,6 +302,10 @@ bool netxWriteToStreamSocket(Pointer<NetStreamSocket> sock, Uint8List buf) {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL NET_ReadFromStreamSocket(NET_StreamSocket *sock, void *buf, int buflen)
 /// ```
+///
+/// See also:
+/// - [NET_ReadFromStreamSocket - SDL3 Wiki](https://wiki.libsdl.org/SDL3/NET_ReadFromStreamSocket)
+///
 /// {@category net}
 Uint8List? netxReadFromStreamSocket(Pointer<NetStreamSocket> sock, int buflen) {
   Uint8List? result;
@@ -386,6 +406,10 @@ Uint8List? netxReadFromStreamSocket(Pointer<NetStreamSocket> sock, int buflen) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL NET_SendDatagram(NET_DatagramSocket *sock, NET_Address *address, Uint16 port, const void *buf, int buflen)
 /// ```
+///
+/// See also:
+/// - [NET_SendDatagram - SDL3 Wiki](https://wiki.libsdl.org/SDL3/NET_SendDatagram)
+///
 /// {@category net}
 bool netxSendDatagram(
   Pointer<NetDatagramSocket> sock,
@@ -458,6 +482,10 @@ bool netxSendDatagram(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL NET_ReceiveDatagram(NET_DatagramSocket *sock, NET_Datagram **dgram)
 /// ```
+///
+/// See also:
+/// - [NET_ReceiveDatagram - SDL3 Wiki](https://wiki.libsdl.org/SDL3/NET_ReceiveDatagram)
+///
 /// {@category net}
 NetxDatagram? netxReceiveDatagram(
   Pointer<NetDatagramSocket> sock, {
@@ -528,6 +556,10 @@ NetxDatagram? netxReceiveDatagram(
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL NET_WaitUntilInputAvailable(void **vsockets, int numsockets, Sint32 timeout)
 /// ```
+///
+/// See also:
+/// - [NET_WaitUntilInputAvailable - SDL3 Wiki](https://wiki.libsdl.org/SDL3/NET_WaitUntilInputAvailable)
+///
 /// {@category net}
 int netxWaitUntilInputAvailable(List<Pointer<Void>> vsockets, int timeout) {
   final vsocketsPointer = ffi.calloc<Pointer<Void>>(vsockets.length);

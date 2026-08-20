@@ -20,6 +20,10 @@ extension SdlGpuCommandBufferPointerEx on Pointer<SdlGpuCommandBuffer> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_InsertGPUDebugLabel( SDL_GPUCommandBuffer *command_buffer, const char *text)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_InsertGPUDebugLabel - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_InsertGPUDebugLabel)
+  ///
   /// {@category gpu}
   void insertDebugLabel(String text) => sdlInsertGpuDebugLabel(this, text);
 
@@ -52,6 +56,10 @@ extension SdlGpuCommandBufferPointerEx on Pointer<SdlGpuCommandBuffer> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_PushGPUDebugGroup( SDL_GPUCommandBuffer *command_buffer, const char *name)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_PushGPUDebugGroup - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_PushGPUDebugGroup)
+  ///
   /// {@category gpu}
   void pushDebugGroup(String name) => sdlPushGpuDebugGroup(this, name);
 
@@ -72,6 +80,10 @@ extension SdlGpuCommandBufferPointerEx on Pointer<SdlGpuCommandBuffer> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_PopGPUDebugGroup( SDL_GPUCommandBuffer *command_buffer)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_PopGPUDebugGroup - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_PopGPUDebugGroup)
+  ///
   /// {@category gpu}
   void popDebugGroup() => sdlPopGpuDebugGroup(this);
 
@@ -97,6 +109,10 @@ extension SdlGpuCommandBufferPointerEx on Pointer<SdlGpuCommandBuffer> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_PushGPUVertexUniformData( SDL_GPUCommandBuffer *command_buffer, Uint32 slot_index, const void *data, Uint32 length)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_PushGPUVertexUniformData - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_PushGPUVertexUniformData)
+  ///
   /// {@category gpu}
   void pushVertexUniformData(int slotIndex, Pointer<Void> data, int length) =>
       sdlPushGpuVertexUniformData(this, slotIndex, data, length);
@@ -120,6 +136,10 @@ extension SdlGpuCommandBufferPointerEx on Pointer<SdlGpuCommandBuffer> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_PushGPUFragmentUniformData( SDL_GPUCommandBuffer *command_buffer, Uint32 slot_index, const void *data, Uint32 length)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_PushGPUFragmentUniformData - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_PushGPUFragmentUniformData)
+  ///
   /// {@category gpu}
   void pushFragmentUniformData(int slotIndex, Pointer<Void> data, int length) =>
       sdlPushGpuFragmentUniformData(this, slotIndex, data, length);
@@ -143,6 +163,10 @@ extension SdlGpuCommandBufferPointerEx on Pointer<SdlGpuCommandBuffer> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_PushGPUComputeUniformData( SDL_GPUCommandBuffer *command_buffer, Uint32 slot_index, const void *data, Uint32 length)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_PushGPUComputeUniformData - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_PushGPUComputeUniformData)
+  ///
   /// {@category gpu}
   void pushComputeUniformData(int slotIndex, Pointer<Void> data, int length) =>
       sdlPushGpuComputeUniformData(this, slotIndex, data, length);
@@ -183,6 +207,10 @@ extension SdlGpuCommandBufferPointerEx on Pointer<SdlGpuCommandBuffer> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_GPURenderPass * SDLCALL SDL_BeginGPURenderPass( SDL_GPUCommandBuffer *command_buffer, const SDL_GPUColorTargetInfo *color_target_infos, Uint32 num_color_targets, const SDL_GPUDepthStencilTargetInfo *depth_stencil_target_info)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_BeginGPURenderPass - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_BeginGPURenderPass)
+  ///
   /// {@category gpu}
   Pointer<SdlGpuRenderPass> beginRenderPass(
     List<SdlxGpuColorTargetInfo> colorTargetInfo, {
@@ -233,6 +261,10 @@ extension SdlGpuCommandBufferPointerEx on Pointer<SdlGpuCommandBuffer> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_GPUComputePass * SDLCALL SDL_BeginGPUComputePass( SDL_GPUCommandBuffer *command_buffer, const SDL_GPUStorageTextureReadWriteBinding *storage_texture_bindings, Uint32 num_storage_texture_bindings, const SDL_GPUStorageBufferReadWriteBinding *storage_buffer_bindings, Uint32 num_storage_buffer_bindings)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_BeginGPUComputePass - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_BeginGPUComputePass)
+  ///
   /// {@category gpu}
   Pointer<SdlGpuComputePass> beginComputePass({
     List<SdlxGpuStorageTextureReadWriteBinding>? textures,
@@ -256,6 +288,10 @@ extension SdlGpuCommandBufferPointerEx on Pointer<SdlGpuCommandBuffer> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_GPUCopyPass * SDLCALL SDL_BeginGPUCopyPass( SDL_GPUCommandBuffer *command_buffer)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_BeginGPUCopyPass - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_BeginGPUCopyPass)
+  ///
   /// {@category gpu}
   Pointer<SdlGpuCopyPass> beginCopyPass() => sdlBeginGpuCopyPass(this);
 
@@ -272,6 +308,10 @@ extension SdlGpuCommandBufferPointerEx on Pointer<SdlGpuCommandBuffer> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_GenerateMipmapsForGPUTexture( SDL_GPUCommandBuffer *command_buffer, SDL_GPUTexture *texture)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GenerateMipmapsForGPUTexture - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GenerateMipmapsForGPUTexture)
+  ///
   /// {@category gpu}
   void generateMipmapsForTexture(Pointer<SdlGpuTexture> texture) =>
       sdlGenerateMipmapsForGpuTexture(this, texture);
@@ -289,6 +329,10 @@ extension SdlGpuCommandBufferPointerEx on Pointer<SdlGpuCommandBuffer> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_BlitGPUTexture( SDL_GPUCommandBuffer *command_buffer, const SDL_GPUBlitInfo *info)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_BlitGPUTexture - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_BlitGPUTexture)
+  ///
   /// {@category gpu}
   void blitTexture(SdlxGpuBlitInfo info) => sdlxBlitGpuTexture(this, info);
 
@@ -346,6 +390,10 @@ extension SdlGpuCommandBufferPointerEx on Pointer<SdlGpuCommandBuffer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_AcquireGPUSwapchainTexture( SDL_GPUCommandBuffer *command_buffer, SDL_Window *window, SDL_GPUTexture **swapchain_texture, Uint32 *swapchain_texture_width, Uint32 *swapchain_texture_height)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_AcquireGPUSwapchainTexture - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_AcquireGPUSwapchainTexture)
+  ///
   /// {@category gpu}
   ({int height, Pointer<SdlGpuTexture> texture, int width})?
   acquireSwapchainTexture(Pointer<SdlWindow> window) =>
@@ -396,6 +444,10 @@ extension SdlGpuCommandBufferPointerEx on Pointer<SdlGpuCommandBuffer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_WaitAndAcquireGPUSwapchainTexture( SDL_GPUCommandBuffer *command_buffer, SDL_Window *window, SDL_GPUTexture **swapchain_texture, Uint32 *swapchain_texture_width, Uint32 *swapchain_texture_height)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_WaitAndAcquireGPUSwapchainTexture - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_WaitAndAcquireGPUSwapchainTexture)
+  ///
   /// {@category gpu}
   ({int height, Pointer<SdlGpuTexture> texture, int width})?
   waitAndAcquireSwapchainTexture(Pointer<SdlWindow> window) =>
@@ -425,6 +477,10 @@ extension SdlGpuCommandBufferPointerEx on Pointer<SdlGpuCommandBuffer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SubmitGPUCommandBuffer( SDL_GPUCommandBuffer *command_buffer)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_SubmitGPUCommandBuffer - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SubmitGPUCommandBuffer)
+  ///
   /// {@category gpu}
   bool submit() => sdlSubmitGpuCommandBuffer(this);
 
@@ -455,6 +511,10 @@ extension SdlGpuCommandBufferPointerEx on Pointer<SdlGpuCommandBuffer> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_GPUFence * SDLCALL SDL_SubmitGPUCommandBufferAndAcquireFence( SDL_GPUCommandBuffer *command_buffer)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_SubmitGPUCommandBufferAndAcquireFence - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SubmitGPUCommandBufferAndAcquireFence)
+  ///
   /// {@category gpu}
   Pointer<SdlGpuFence> submitAndAcquireFence() =>
       sdlSubmitGpuCommandBufferAndAcquireFence(this);
@@ -484,6 +544,10 @@ extension SdlGpuCommandBufferPointerEx on Pointer<SdlGpuCommandBuffer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_CancelGPUCommandBuffer( SDL_GPUCommandBuffer *command_buffer)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_CancelGPUCommandBuffer - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CancelGPUCommandBuffer)
+  ///
   /// {@category gpu}
   bool cancel() => sdlCancelGpuCommandBuffer(this);
 }

@@ -27,6 +27,10 @@ extension SdlEnvironmentEx on SdlEnvironment {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Environment * SDLCALL SDL_GetEnvironment(void)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetEnvironment - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetEnvironment)
+  ///
   /// {@category stdinc}
   static Pointer<SdlEnvironment> get() => sdlGetEnvironment();
 
@@ -53,6 +57,10 @@ extension SdlEnvironmentEx on SdlEnvironment {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Environment * SDLCALL SDL_CreateEnvironment(bool populated)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_CreateEnvironment - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CreateEnvironment)
+  ///
   /// {@category stdinc}
   static Pointer<SdlEnvironment> create(bool populated) =>
       sdlCreateEnvironment(populated);
@@ -80,6 +88,10 @@ extension SdlEnvironmentPointerEx on Pointer<SdlEnvironment> {
   /// ```c
   /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetEnvironmentVariable(SDL_Environment *env, const char *name)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetEnvironmentVariable - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetEnvironmentVariable)
+  ///
   /// {@category stdinc}
   String? getVariable(String name) => sdlGetEnvironmentVariable(this, name);
 
@@ -105,6 +117,10 @@ extension SdlEnvironmentPointerEx on Pointer<SdlEnvironment> {
   /// ```c
   /// extern SDL_DECLSPEC char ** SDLCALL SDL_GetEnvironmentVariables(SDL_Environment *env)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetEnvironmentVariables - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetEnvironmentVariables)
+  ///
   /// {@category stdinc}
   List<String> getVariables() => sdlxGetEnvironmentVariables(this);
 
@@ -133,6 +149,10 @@ extension SdlEnvironmentPointerEx on Pointer<SdlEnvironment> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetEnvironmentVariable(SDL_Environment *env, const char *name, const char *value, bool overwrite)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_SetEnvironmentVariable - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetEnvironmentVariable)
+  ///
   /// {@category stdinc}
   bool setVariable(String name, String value, bool overwrite) =>
       sdlSetEnvironmentVariable(this, name, value, overwrite);
@@ -159,6 +179,10 @@ extension SdlEnvironmentPointerEx on Pointer<SdlEnvironment> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_UnsetEnvironmentVariable(SDL_Environment *env, const char *name)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_UnsetEnvironmentVariable - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_UnsetEnvironmentVariable)
+  ///
   /// {@category stdinc}
   bool unsetVariable(String name) => sdlUnsetEnvironmentVariable(this, name);
 
@@ -177,6 +201,10 @@ extension SdlEnvironmentPointerEx on Pointer<SdlEnvironment> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_DestroyEnvironment(SDL_Environment *env)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_DestroyEnvironment - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_DestroyEnvironment)
+  ///
   /// {@category stdinc}
   void destroy() => sdlDestroyEnvironment(this);
 }

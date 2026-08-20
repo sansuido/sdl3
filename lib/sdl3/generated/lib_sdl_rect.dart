@@ -19,6 +19,10 @@ part of '../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_HasRectIntersection(const SDL_Rect *A, const SDL_Rect *B)
 /// ```
+///
+/// See also:
+/// - [SDL_HasRectIntersection - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_HasRectIntersection)
+///
 /// {@category rect}
 bool sdlHasRectIntersection(Pointer<SdlRect> a, Pointer<SdlRect> b) {
   final sdlHasRectIntersectionLookupFunction = _libSdl
@@ -49,6 +53,10 @@ bool sdlHasRectIntersection(Pointer<SdlRect> a, Pointer<SdlRect> b) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRectIntersection(const SDL_Rect *A, const SDL_Rect *B, SDL_Rect *result)
 /// ```
+///
+/// See also:
+/// - [SDL_GetRectIntersection - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRectIntersection)
+///
 /// {@category rect}
 bool sdlGetRectIntersection(
   Pointer<SdlRect> a,
@@ -88,6 +96,10 @@ bool sdlGetRectIntersection(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRectUnion(const SDL_Rect *A, const SDL_Rect *B, SDL_Rect *result)
 /// ```
+///
+/// See also:
+/// - [SDL_GetRectUnion - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRectUnion)
+///
 /// {@category rect}
 bool sdlGetRectUnion(
   Pointer<SdlRect> a,
@@ -132,6 +144,10 @@ bool sdlGetRectUnion(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRectEnclosingPoints(const SDL_Point *points, int count, const SDL_Rect *clip, SDL_Rect *result)
 /// ```
+///
+/// See also:
+/// - [SDL_GetRectEnclosingPoints - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRectEnclosingPoints)
+///
 /// {@category rect}
 bool sdlGetRectEnclosingPoints(
   Pointer<SdlPoint> points,
@@ -180,6 +196,10 @@ bool sdlGetRectEnclosingPoints(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRectAndLineIntersection(const SDL_Rect *rect, int *X1, int *Y1, int *X2, int *Y2)
 /// ```
+///
+/// See also:
+/// - [SDL_GetRectAndLineIntersection - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRectAndLineIntersection)
+///
 /// {@category rect}
 bool sdlGetRectAndLineIntersection(
   Pointer<SdlRect> rect,
@@ -226,6 +246,10 @@ bool sdlGetRectAndLineIntersection(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_HasRectIntersectionFloat(const SDL_FRect *A, const SDL_FRect *B)
 /// ```
+///
+/// See also:
+/// - [SDL_HasRectIntersectionFloat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_HasRectIntersectionFloat)
+///
 /// {@category rect}
 bool sdlHasRectIntersectionFloat(Pointer<SdlFRect> a, Pointer<SdlFRect> b) {
   final sdlHasRectIntersectionFloatLookupFunction = _libSdl
@@ -256,6 +280,10 @@ bool sdlHasRectIntersectionFloat(Pointer<SdlFRect> a, Pointer<SdlFRect> b) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRectIntersectionFloat(const SDL_FRect *A, const SDL_FRect *B, SDL_FRect *result)
 /// ```
+///
+/// See also:
+/// - [SDL_GetRectIntersectionFloat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRectIntersectionFloat)
+///
 /// {@category rect}
 bool sdlGetRectIntersectionFloat(
   Pointer<SdlFRect> a,
@@ -295,6 +323,10 @@ bool sdlGetRectIntersectionFloat(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRectUnionFloat(const SDL_FRect *A, const SDL_FRect *B, SDL_FRect *result)
 /// ```
+///
+/// See also:
+/// - [SDL_GetRectUnionFloat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRectUnionFloat)
+///
 /// {@category rect}
 bool sdlGetRectUnionFloat(
   Pointer<SdlFRect> a,
@@ -340,6 +372,10 @@ bool sdlGetRectUnionFloat(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRectEnclosingPointsFloat(const SDL_FPoint *points, int count, const SDL_FRect *clip, SDL_FRect *result)
 /// ```
+///
+/// See also:
+/// - [SDL_GetRectEnclosingPointsFloat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRectEnclosingPointsFloat)
+///
 /// {@category rect}
 bool sdlGetRectEnclosingPointsFloat(
   Pointer<SdlFPoint> points,
@@ -394,6 +430,10 @@ bool sdlGetRectEnclosingPointsFloat(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRectAndLineIntersectionFloat(const SDL_FRect *rect, float *X1, float *Y1, float *X2, float *Y2)
 /// ```
+///
+/// See also:
+/// - [SDL_GetRectAndLineIntersectionFloat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRectAndLineIntersectionFloat)
+///
 /// {@category rect}
 bool sdlGetRectAndLineIntersectionFloat(
   Pointer<SdlFRect> rect,

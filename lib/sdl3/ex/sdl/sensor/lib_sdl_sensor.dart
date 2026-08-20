@@ -14,6 +14,10 @@ part of '../../../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC SDL_SensorID * SDLCALL SDL_GetSensors(int *count)
 /// ```
+///
+/// See also:
+/// - [SDL_GetSensors - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetSensors)
+///
 /// {@category sensor}
 List<int> sdlxGetSensors() {
   final result = <int>[];
@@ -45,6 +49,10 @@ List<int> sdlxGetSensors() {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetSensorData(SDL_Sensor *sensor, float *data, int num_values)
 /// ```
+///
+/// See also:
+/// - [SDL_GetSensorData - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetSensorData)
+///
 /// {@category sensor}
 bool sdlxGetSensorData(
   Pointer<SdlSensor> sensor,

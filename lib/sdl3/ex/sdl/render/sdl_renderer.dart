@@ -17,6 +17,10 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Window * SDLCALL SDL_GetRenderWindow(SDL_Renderer *renderer)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetRenderWindow - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRenderWindow)
+  ///
   /// {@category render}
   Pointer<SdlWindow> getWindow() => sdlGetRenderWindow(this);
 
@@ -118,6 +122,10 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_PropertiesID SDLCALL SDL_GetRendererProperties(SDL_Renderer *renderer)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetRendererProperties - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRendererProperties)
+  ///
   /// {@category render}
   int getProperties() => sdlGetRendererProperties(this);
 
@@ -145,8 +153,12 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderOutputSize(SDL_Renderer *renderer, int *w, int *h)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetRenderOutputSize - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRenderOutputSize)
+  ///
   /// {@category render}
-  bool getOutputSize(SdlxPoint size) => sdlxGetRenderOutputSize(this, size);
+  ({int w, int h})? getOutputSize() => sdlxGetRenderOutputSize(this);
 
   ///
   /// Get the current output size in pixels of a rendering context.
@@ -172,9 +184,13 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetCurrentRenderOutputSize(SDL_Renderer *renderer, int *w, int *h)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetCurrentRenderOutputSize - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetCurrentRenderOutputSize)
+  ///
   /// {@category render}
-  bool getCurrentOutputSize(SdlxPoint size) =>
-      sdlxGetCurrentRenderOutputSize(this, size);
+  ({int w, int h})? getCurrentOutputSize() =>
+      sdlxGetCurrentRenderOutputSize(this);
 
   ///
   /// Create a texture for a rendering context.
@@ -202,6 +218,10 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Texture * SDLCALL SDL_CreateTexture(SDL_Renderer *renderer, SDL_PixelFormat format, SDL_TextureAccess access, int w, int h)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_CreateTexture - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CreateTexture)
+  ///
   /// {@category render}
   Pointer<SdlTexture> createTexture(int format, int access, int w, int h) =>
       sdlCreateTexture(this, format, access, w, h);
@@ -235,6 +255,10 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Texture * SDLCALL SDL_CreateTextureFromSurface(SDL_Renderer *renderer, SDL_Surface *surface)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_CreateTextureFromSurface - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CreateTextureFromSurface)
+  ///
   /// {@category render}
   Pointer<SdlTexture> createTextureFromSurface(Pointer<SdlSurface> surface) =>
       sdlCreateTextureFromSurface(this, surface);
@@ -381,6 +405,10 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Texture * SDLCALL SDL_CreateTextureWithProperties(SDL_Renderer *renderer, SDL_PropertiesID props)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_CreateTextureWithProperties - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CreateTextureWithProperties)
+  ///
   /// {@category render}
   Pointer<SdlTexture> createTextureWithProperties(int props) =>
       sdlCreateTextureWithProperties(this, props);
@@ -413,6 +441,10 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetRenderTarget(SDL_Renderer *renderer, SDL_Texture *texture)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_SetRenderTarget - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetRenderTarget)
+  ///
   /// {@category render}
   bool setTarget(Pointer<SdlTexture> texture) =>
       sdlSetRenderTarget(this, texture);
@@ -435,6 +467,10 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Texture * SDLCALL SDL_GetRenderTarget(SDL_Renderer *renderer)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetRenderTarget - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRenderTarget)
+  ///
   /// {@category render}
   Pointer<SdlTexture> getTarget() => sdlGetRenderTarget(this);
 
@@ -486,9 +522,13 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetRenderLogicalPresentation(SDL_Renderer *renderer, int w, int h, SDL_RendererLogicalPresentation mode)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_SetRenderLogicalPresentation - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetRenderLogicalPresentation)
+  ///
   /// {@category render}
-  bool setLogicalPresentation(SdlxRenderLogicalPresentation presentation) =>
-      sdlxSetRenderLogicalPresentation(this, presentation);
+  bool setLogicalPresentation(int w, int h, int mode) =>
+      sdlSetRenderLogicalPresentation(this, w, h, mode);
 
   ///
   /// Get device independent resolution and presentation mode for rendering.
@@ -516,9 +556,47 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderLogicalPresentation(SDL_Renderer *renderer, int *w, int *h, SDL_RendererLogicalPresentation *mode)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetRenderLogicalPresentation - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRenderLogicalPresentation)
+  ///
   /// {@category render}
-  bool getLogicalPresentation(SdlxRenderLogicalPresentation presentation) =>
-      sdlxGetRenderLogicalPresentation(this, presentation);
+  ({int w, int h, int mode})? getLogicalPresentation() =>
+      sdlxGetRenderLogicalPresentation(this);
+
+  ///
+  /// Get the final presentation rectangle for rendering.
+  ///
+  /// This function returns the calculated rectangle used for logical
+  /// presentation, based on the presentation mode and output size. If logical
+  /// presentation is disabled, it will fill the rectangle with the output size,
+  /// in pixels.
+  ///
+  /// Each render target has its own logical presentation state. This function
+  /// gets the rectangle for the current render target.
+  ///
+  /// \param renderer the rendering context.
+  /// \param rect a pointer filled in with the final presentation rectangle, may
+  /// be NULL.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
+  ///
+  /// \threadsafety This function should only be called on the main thread.
+  ///
+  /// \since This function is available since SDL 3.2.0.
+  ///
+  /// \sa SDL_SetRenderLogicalPresentation
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderLogicalPresentationRect(SDL_Renderer *renderer, SDL_FRect *rect)
+  /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetRenderLogicalPresentationRect - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRenderLogicalPresentationRect)
+  ///
+  /// {@category render}
+  SdlxFRect? getLogicalPresentationRect() =>
+      sdlxGetRenderLogicalPresentationRect(this);
 
   ///
   /// Get a point in render coordinates when given a point in window coordinates.
@@ -548,15 +626,15 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderCoordinatesFromWindow(SDL_Renderer *renderer, float window_x, float window_y, float *x, float *y)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_RenderCoordinatesFromWindow - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RenderCoordinatesFromWindow)
+  ///
   /// {@category render}
-  bool coordinatesFromWindow({
-    required SdlxFPoint windowPosition,
-    required SdlxFPoint renderPosition,
-  }) => sdlxRenderCoordinatesFromWindow(
-    this,
-    windowPosition: windowPosition,
-    renderPosition: renderPosition,
-  );
+  ({double x, double y})? coordinatesFromWindow(
+    double windowX,
+    double windowY,
+  ) => sdlxRenderCoordinatesFromWindow(this, windowX, windowY);
 
   ///
   /// Get a point in window coordinates when given a point in render coordinates.
@@ -589,15 +667,13 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderCoordinatesToWindow(SDL_Renderer *renderer, float x, float y, float *window_x, float *window_y)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_RenderCoordinatesToWindow - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RenderCoordinatesToWindow)
+  ///
   /// {@category render}
-  bool coordinatesToWindow({
-    required SdlxFPoint renderPosition,
-    required SdlxFPoint windowPosition,
-  }) => sdlxRenderCoordinatesToWindow(
-    this,
-    renderPosition: renderPosition,
-    windowPosition: windowPosition,
-  );
+  ({double windowX, double windowY})? coordinatesToWindow(double x, double y) =>
+      sdlxRenderCoordinatesToWindow(this, x, y);
 
   ///
   /// Convert the coordinates in an event to render coordinates.
@@ -636,6 +712,10 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_ConvertEventToRenderCoordinates(SDL_Renderer *renderer, SDL_Event *event)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_ConvertEventToRenderCoordinates - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ConvertEventToRenderCoordinates)
+  ///
   /// {@category render}
   bool convertEventToCoordinates(Pointer<SdlEvent> event) =>
       sdlConvertEventToRenderCoordinates(this, event);
@@ -668,6 +748,10 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetRenderViewport(SDL_Renderer *renderer, const SDL_Rect *rect)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_SetRenderViewport - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetRenderViewport)
+  ///
   /// {@category render}
   bool setVierport(SdlxRect? rect) => sdlxSetRenderViewport(this, rect);
 
@@ -692,6 +776,10 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderViewport(SDL_Renderer *renderer, SDL_Rect *rect)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetRenderViewport - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRenderViewport)
+  ///
   /// {@category render}
   bool getViewport(SdlxRect rect) => sdlxGetRenderViewport(this, rect);
 
@@ -718,8 +806,12 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderSafeArea(SDL_Renderer *renderer, SDL_Rect *rect)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetRenderSafeArea - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRenderSafeArea)
+  ///
   /// {@category render}
-  bool getSafeArea(SdlxRect rect) => sdlxGetRenderSafeArea(this, rect);
+  SdlxRect? getSafeArea() => sdlxGetRenderSafeArea(this);
 
   ///
   /// Set the clip rectangle for rendering on the specified target.
@@ -743,6 +835,10 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetRenderClipRect(SDL_Renderer *renderer, const SDL_Rect *rect)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_SetRenderClipRect - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetRenderClipRect)
+  ///
   /// {@category render}
   bool setClipRect(SdlxRect? rect) => sdlxSetRenderClipRect(this, rect);
 
@@ -768,8 +864,12 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderClipRect(SDL_Renderer *renderer, SDL_Rect *rect)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetRenderClipRect - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRenderClipRect)
+  ///
   /// {@category render}
-  bool getClipRect(SdlxRect rect) => sdlxGetRenderClipRect(this, rect);
+  SdlxRect? getClipRect() => sdlxGetRenderClipRect(this);
 
   ///
   /// Get whether clipping is enabled on the given render target.
@@ -791,6 +891,10 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderClipEnabled(SDL_Renderer *renderer)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_RenderClipEnabled - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RenderClipEnabled)
+  ///
   /// {@category render}
   bool clipEnabled() => sdlRenderClipEnabled(this);
 
@@ -823,18 +927,31 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetRenderScale(SDL_Renderer *renderer, float scaleX, float scaleY)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_SetRenderScale - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetRenderScale)
+  ///
   /// {@category render}
-  bool setScale(SdlxFPoint scale) => sdlxSetRenderScale(this, scale);
+  bool setScale(double scaleX, double scaleY) =>
+      sdlSetRenderScale(this, scaleX, scaleY);
 
   ///
-  /// Get the drawing scale for the current target.
+  /// Set the drawing scale for rendering on the current target.
   ///
-  /// Each render target has its own scale. This function gets the scale for the
+  /// The drawing coordinates are scaled by the x/y scaling factors before they
+  /// are used by the renderer. This allows resolution independent drawing with a
+  /// single coordinate system.
+  ///
+  /// If this results in scaling or subpixel drawing by the rendering backend, it
+  /// will be handled using the appropriate quality hints. For best results use
+  /// integer scaling factors.
+  ///
+  /// Each render target has its own scale. This function sets the scale for the
   /// current render target.
   ///
   /// \param renderer the rendering context.
-  /// \param scaleX a pointer filled in with the horizontal scaling factor.
-  /// \param scaleY a pointer filled in with the vertical scaling factor.
+  /// \param scaleX the horizontal scaling factor.
+  /// \param scaleY the vertical scaling factor.
   /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
@@ -842,13 +959,17 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   ///
   /// \since This function is available since SDL 3.2.0.
   ///
-  /// \sa SDL_SetRenderScale
+  /// \sa SDL_GetRenderScale
   ///
   /// ```c
-  /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderScale(SDL_Renderer *renderer, float *scaleX, float *scaleY)
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_SetRenderScale(SDL_Renderer *renderer, float scaleX, float scaleY)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_SetRenderScale - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetRenderScale)
+  ///
   /// {@category render}
-  bool getScale(SdlxFPoint scale) => sdlxGetRenderScale(this, scale);
+  ({double scaleX, double scaleY})? getScale() => sdlxGetRenderScale(this);
 
   ///
   /// Set the color used for drawing operations.
@@ -876,6 +997,10 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetRenderDrawColor(SDL_Renderer *renderer, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_SetRenderDrawColor - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetRenderDrawColor)
+  ///
   /// {@category render}
   bool setDrawColor(SdlxColor color) => sdlxSetRenderDrawColor(this, color);
 
@@ -905,6 +1030,10 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetRenderDrawColorFloat(SDL_Renderer *renderer, float r, float g, float b, float a)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_SetRenderDrawColorFloat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetRenderDrawColorFloat)
+  ///
   /// {@category render}
   bool setDrawColorFloat(SdlxFColor color) =>
       sdlxSetRenderDrawColorFloat(this, color);
@@ -934,6 +1063,10 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderDrawColor(SDL_Renderer *renderer, Uint8 *r, Uint8 *g, Uint8 *b, Uint8 *a)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetRenderDrawColor - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRenderDrawColor)
+  ///
   /// {@category render}
   bool getDrawColor(SdlxColor color) => sdlxGetRenderDrawColor(this, color);
 
@@ -962,6 +1095,10 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderDrawColorFloat(SDL_Renderer *renderer, float *r, float *g, float *b, float *a)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetRenderDrawColorFloat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRenderDrawColorFloat)
+  ///
   /// {@category render}
   bool getDrawColorFloat(SdlxFColor color) =>
       sdlxGetRenderDrawColorFloat(this, color);
@@ -991,6 +1128,10 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetRenderColorScale(SDL_Renderer *renderer, float scale)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_SetRenderColorScale - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetRenderColorScale)
+  ///
   /// {@category render}
   bool setColorScale(double scale) => sdlSetRenderColorScale(this, scale);
 
@@ -1011,6 +1152,10 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderColorScale(SDL_Renderer *renderer, float *scale)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetRenderColorScale - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRenderColorScale)
+  ///
   /// {@category render}
   double? getColorScale() => sdlxGetRenderColorScale(this);
 
@@ -1036,6 +1181,10 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetRenderDrawBlendMode(SDL_Renderer *renderer, SDL_BlendMode blendMode)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_SetRenderDrawBlendMode - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetRenderDrawBlendMode)
+  ///
   /// {@category render}
   bool setDrawBlendMode(int blendMode) =>
       sdlSetRenderDrawBlendMode(this, blendMode);
@@ -1057,6 +1206,10 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderDrawBlendMode(SDL_Renderer *renderer, SDL_BlendMode *blendMode)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetRenderDrawBlendMode - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRenderDrawBlendMode)
+  ///
   /// {@category render}
   int? getDrawBlendMode() => sdlxGetRenderDrawBlendMode(this);
 
@@ -1081,6 +1234,10 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderClear(SDL_Renderer *renderer)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_RenderClear - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RenderClear)
+  ///
   /// {@category render}
   bool clear() => sdlRenderClear(this);
 
@@ -1102,6 +1259,10 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderPoint(SDL_Renderer *renderer, float x, float y)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_RenderPoint - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RenderPoint)
+  ///
   /// {@category render}
   bool point(SdlxFPoint point) => sdlxRenderPoint(this, point);
 
@@ -1123,6 +1284,10 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderPoints(SDL_Renderer *renderer, const SDL_FPoint *points, int count)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_RenderPoints - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RenderPoints)
+  ///
   /// {@category render}
   bool points(List<SdlxFPoint> points) => sdlxRenderPoints(this, points);
 
@@ -1146,6 +1311,10 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderLine(SDL_Renderer *renderer, float x1, float y1, float x2, float y2)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_RenderLine - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RenderLine)
+  ///
   /// {@category render}
   bool line(SdlxFPoint p1, SdlxFPoint p2) => sdlxRenderLine(this, p1, p2);
 
@@ -1168,6 +1337,10 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderLines(SDL_Renderer *renderer, const SDL_FPoint *points, int count)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_RenderLines - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RenderLines)
+  ///
   /// {@category render}
 
   bool lines(List<SdlxFPoint> points) => sdlxRenderLines(this, points);
@@ -1190,6 +1363,10 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderRect(SDL_Renderer *renderer, const SDL_FRect *rect)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_RenderRect - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RenderRect)
+  ///
   /// {@category render}
   bool rect(SdlxFRect? rect) => sdlxRenderRect(this, rect);
 
@@ -1212,6 +1389,10 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderRects(SDL_Renderer *renderer, const SDL_FRect *rects, int count)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_RenderRects - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RenderRects)
+  ///
   /// {@category render}
   bool rects(List<SdlxFRect> rects) => sdlxRenderRects(this, rects);
 
@@ -1234,6 +1415,10 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderFillRect(SDL_Renderer *renderer, const SDL_FRect *rect)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_RenderFillRect - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RenderFillRect)
+  ///
   /// {@category render}
   bool fillRect(SdlxFRect? rect) => sdlxRenderFillRect(this, rect);
 
@@ -1256,6 +1441,10 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderFillRects(SDL_Renderer *renderer, const SDL_FRect *rects, int count)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_RenderFillRects - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RenderFillRects)
+  ///
   /// {@category render}
   bool fillRects(List<SdlxFRect> rects) => sdlxRenderFillRects(this, rects);
 
@@ -1282,6 +1471,10 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderTexture(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_FRect *srcrect, const SDL_FRect *dstrect)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_RenderTexture - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RenderTexture)
+  ///
   /// {@category render}
   bool texture(
     Pointer<SdlTexture> texture, {
@@ -1318,6 +1511,10 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderTextureRotated(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_FRect *srcrect, const SDL_FRect *dstrect, double angle, const SDL_FPoint *center, SDL_FlipMode flip)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_RenderTextureRotated - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RenderTextureRotated)
+  ///
   /// {@category render}
   bool textureRotated(
     Pointer<SdlTexture> texture, {
@@ -1365,6 +1562,10 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderTextureAffine(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_FRect *srcrect, const SDL_FPoint *origin, const SDL_FPoint *right, const SDL_FPoint *down)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_RenderTextureAffine - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RenderTextureAffine)
+  ///
   /// {@category render}
   bool textureAffine(
     Pointer<SdlTexture> texture, {
@@ -1409,6 +1610,10 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderTextureTiled(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_FRect *srcrect, float scale, const SDL_FRect *dstrect)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_RenderTextureTiled - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RenderTextureTiled)
+  ///
   /// {@category render}
   bool textureTiled(
     Pointer<SdlTexture> texture, {
@@ -1459,6 +1664,10 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderTexture9Grid(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_FRect *srcrect, float left_width, float right_width, float top_height, float bottom_height, float scale, const SDL_FRect *dstrect)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_RenderTexture9Grid - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RenderTexture9Grid)
+  ///
   /// {@category render}
   bool texture9Grid(
     Pointer<SdlTexture> texture, {
@@ -1509,12 +1718,16 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderGeometry(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_Vertex *vertices, int num_vertices, const int *indices, int num_indices)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_RenderGeometry - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RenderGeometry)
+  ///
   /// {@category render}
   bool geometry(
-    Pointer<SdlTexture> texture, {
-    List<SdlxVertex>? vertices,
+    List<SdlxVertex> vertices, {
+    Pointer<SdlTexture>? texture,
     List<int>? indices,
-  }) => sdlxRenderGeometry(this, texture, vertices: vertices, indices: indices);
+  }) => sdlxRenderGeometry(this, vertices, texture: texture, indices: indices);
 
   ///
   /// Render a list of triangles, optionally using a texture and indices into the
@@ -1549,32 +1762,24 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderGeometryRaw(SDL_Renderer *renderer, SDL_Texture *texture, const float *xy, int xy_stride, const SDL_FColor *color, int color_stride, const float *uv, int uv_stride, int num_vertices, const void *indices, int num_indices, int size_indices)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_RenderGeometryRaw - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RenderGeometryRaw)
+  ///
   /// {@category render}
   bool geometryRaw(
-    Pointer<SdlTexture> texture,
-    Pointer<Float> xy,
-    int xyStride,
-    Pointer<SdlFColor> color,
-    int colorStride,
-    Pointer<Float> uv,
-    int uvStride,
-    int numVertices,
-    Pointer<Void> indices,
-    int numIndices,
-    int sizeIndices,
-  ) => sdlRenderGeometryRaw(
+    List<SdlxFPoint> positions, {
+    Pointer<SdlTexture>? texture,
+    List<SdlxFColor>? colors,
+    List<SdlxFPoint>? texCoords,
+    List<int>? indices,
+  }) => sdlxRenderGeometryRaw(
     this,
-    texture,
-    xy,
-    xyStride,
-    color,
-    colorStride,
-    uv,
-    uvStride,
-    numVertices,
-    indices,
-    numIndices,
-    sizeIndices,
+    positions,
+    texture: texture,
+    colors: colors,
+    texCoords: texCoords,
+    indices: indices,
   );
 
   ///
@@ -1605,6 +1810,10 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Surface * SDLCALL SDL_RenderReadPixels(SDL_Renderer *renderer, const SDL_Rect *rect)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_RenderReadPixels - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RenderReadPixels)
+  ///
   /// {@category render}
   Pointer<SdlSurface> readPixels(SdlxRect? rect) =>
       sdlxRenderReadPixels(this, rect);
@@ -1659,6 +1868,10 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderPresent(SDL_Renderer *renderer)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_RenderPresent - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RenderPresent)
+  ///
   /// {@category render}
   bool present() => sdlRenderPresent(this);
 
@@ -1679,6 +1892,10 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_DestroyRenderer(SDL_Renderer *renderer)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_DestroyRenderer - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_DestroyRenderer)
+  ///
   /// {@category render}
   bool destroy() {
     if (this != nullptr) {
@@ -1722,6 +1939,10 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_FlushRenderer(SDL_Renderer *renderer)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_FlushRenderer - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_FlushRenderer)
+  ///
   /// {@category render}
   bool flush() => sdlFlushRenderer(this);
 
@@ -1744,6 +1965,10 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC void * SDLCALL SDL_GetRenderMetalLayer(SDL_Renderer *renderer)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetRenderMetalLayer - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRenderMetalLayer)
+  ///
   /// {@category render}
   Pointer<Void> getMetalLayer() => sdlGetRenderMetalLayer(this);
 
@@ -1771,6 +1996,10 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC void * SDLCALL SDL_GetRenderMetalCommandEncoder(SDL_Renderer *renderer)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetRenderMetalCommandEncoder - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRenderMetalCommandEncoder)
+  ///
   /// {@category render}
   Pointer<Void> getMetalCommandEncoder() =>
       sdlGetRenderMetalCommandEncoder(this);
@@ -1806,6 +2035,10 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_AddVulkanRenderSemaphores(SDL_Renderer *renderer, Uint32 wait_stage_mask, Sint64 wait_semaphore, Sint64 signal_semaphore)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_AddVulkanRenderSemaphores - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_AddVulkanRenderSemaphores)
+  ///
   /// {@category render}
   bool addVulkanSemaphores(
     int waitStageMask,
@@ -1844,6 +2077,10 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetRenderVSync(SDL_Renderer *renderer, int vsync)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_SetRenderVSync - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetRenderVSync)
+  ///
   /// {@category render}
   bool setVSync(int vsync) => sdlSetRenderVSync(this, vsync);
 
@@ -1865,6 +2102,10 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderVSync(SDL_Renderer *renderer, int *vsync)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetRenderVSync - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRenderVSync)
+  ///
   /// {@category render}
   int getVSync() {
     final vSyncPointer = calloc<Int32>();
@@ -1916,6 +2157,10 @@ extension SdlRendererPointerEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderDebugText(SDL_Renderer *renderer, float x, float y, const char *str)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_RenderDebugText - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RenderDebugText)
+  ///
   /// {@category render}
   bool debugText(double x, double y, String? str) =>
       sdlRenderDebugText(this, x, y, str);

@@ -18,6 +18,10 @@ extension MixGroupPointerEx on Pointer<MixGroup> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL MIX_DestroyGroup(MIX_Group *group)
   /// ```
+  ///
+  /// See also:
+  /// - [MIX_DestroyGroup - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_DestroyGroup)
+  ///
   /// {@category mixer}
   void destroy() => mixDestroyGroup(this);
 
@@ -41,6 +45,10 @@ extension MixGroupPointerEx on Pointer<MixGroup> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_PropertiesID SDLCALL MIX_GetGroupProperties(MIX_Group *group)
   /// ```
+  ///
+  /// See also:
+  /// - [MIX_GetGroupProperties - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_GetGroupProperties)
+  ///
   /// {@category mixer}
   int getProperties() => mixGetGroupProperties(this);
 
@@ -60,6 +68,10 @@ extension MixGroupPointerEx on Pointer<MixGroup> {
   /// ```c
   /// extern SDL_DECLSPEC MIX_Mixer * SDLCALL MIX_GetGroupMixer(MIX_Group *group)
   /// ```
+  ///
+  /// See also:
+  /// - [MIX_GetGroupMixer - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_GetGroupMixer)
+  ///
   /// {@category mixer}
   Pointer<MixMixer> getMixer() => mixGetGroupMixer(this);
 
@@ -93,6 +105,10 @@ extension MixGroupPointerEx on Pointer<MixGroup> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL MIX_SetGroupPostMixCallback(MIX_Group *group, MIX_GroupMixCallback cb, void *userdata)
   /// ```
+  ///
+  /// See also:
+  /// - [MIX_SetGroupPostMixCallback - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_SetGroupPostMixCallback)
+  ///
   /// {@category mixer}
   bool setPostMixCallback(
     Pointer<NativeFunction<MixGroupMixCallback>> cb,

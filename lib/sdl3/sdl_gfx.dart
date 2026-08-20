@@ -1,6 +1,8 @@
 import 'dart:ffi';
 import 'dart:math' as math;
+
 import 'package:ffi/ffi.dart';
+
 import 'sdl.dart';
 
 part 'gfx/const.dart';

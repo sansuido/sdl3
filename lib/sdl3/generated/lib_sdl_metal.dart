@@ -24,6 +24,10 @@ part of '../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC SDL_MetalView SDLCALL SDL_Metal_CreateView(SDL_Window *window)
 /// ```
+///
+/// See also:
+/// - [SDL_Metal_CreateView - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_Metal_CreateView)
+///
 /// {@category metal}
 SdlMetalView sdlMetalCreateView(Pointer<SdlWindow> window) {
   final sdlMetalCreateViewLookupFunction = _libSdl
@@ -51,6 +55,10 @@ SdlMetalView sdlMetalCreateView(Pointer<SdlWindow> window) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_Metal_DestroyView(SDL_MetalView view)
 /// ```
+///
+/// See also:
+/// - [SDL_Metal_DestroyView - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_Metal_DestroyView)
+///
 /// {@category metal}
 void sdlMetalDestroyView(SdlMetalView view) {
   final sdlMetalDestroyViewLookupFunction = _libSdl
@@ -74,6 +82,10 @@ void sdlMetalDestroyView(SdlMetalView view) {
 /// ```c
 /// extern SDL_DECLSPEC void * SDLCALL SDL_Metal_GetLayer(SDL_MetalView view)
 /// ```
+///
+/// See also:
+/// - [SDL_Metal_GetLayer - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_Metal_GetLayer)
+///
 /// {@category metal}
 Pointer<Void> sdlMetalGetLayer(SdlMetalView view) {
   final sdlMetalGetLayerLookupFunction = _libSdl

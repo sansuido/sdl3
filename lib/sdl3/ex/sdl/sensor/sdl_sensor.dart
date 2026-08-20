@@ -15,6 +15,10 @@ extension SdlSensorEx on SdlSensor {
   /// ```c
   /// extern SDL_DECLSPEC SDL_SensorID * SDLCALL SDL_GetSensors(int *count)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetSensors - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetSensors)
+  ///
   /// {@category sensor}
   static List<int> gets() => sdlxGetSensors();
 
@@ -31,6 +35,10 @@ extension SdlSensorEx on SdlSensor {
   /// ```c
   /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetSensorNameForID(SDL_SensorID instance_id)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetSensorNameForID - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetSensorNameForID)
+  ///
   /// {@category sensor}
   static String? getNameForId(int instanceId) =>
       sdlGetSensorNameForId(instanceId);
@@ -49,6 +57,10 @@ extension SdlSensorEx on SdlSensor {
   /// ```c
   /// extern SDL_DECLSPEC SDL_SensorType SDLCALL SDL_GetSensorTypeForID(SDL_SensorID instance_id)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetSensorTypeForID - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetSensorTypeForID)
+  ///
   /// {@category sensor}
   static int getTypeForId(int instanceId) => sdlGetSensorTypeForId(instanceId);
 
@@ -66,6 +78,10 @@ extension SdlSensorEx on SdlSensor {
   /// ```c
   /// extern SDL_DECLSPEC int SDLCALL SDL_GetSensorNonPortableTypeForID(SDL_SensorID instance_id)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetSensorNonPortableTypeForID - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetSensorNonPortableTypeForID)
+  ///
   /// {@category sensor}
   static int getNonPortableTypeForId(int instanceId) =>
       sdlGetSensorNonPortableTypeForId(instanceId);
@@ -82,6 +98,10 @@ extension SdlSensorEx on SdlSensor {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Sensor * SDLCALL SDL_OpenSensor(SDL_SensorID instance_id)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_OpenSensor - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_OpenSensor)
+  ///
   /// {@category sensor}
   static Pointer<SdlSensor> open(int instanceId) => sdlOpenSensor(instanceId);
 
@@ -97,6 +117,10 @@ extension SdlSensorEx on SdlSensor {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Sensor * SDLCALL SDL_GetSensorFromID(SDL_SensorID instance_id)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetSensorFromID - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetSensorFromID)
+  ///
   /// {@category sensor}
   static Pointer<SdlSensor> getFromId(int instanceId) =>
       sdlGetSensorFromId(instanceId);
@@ -115,6 +139,10 @@ extension SdlSensorEx on SdlSensor {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_UpdateSensors(void)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_UpdateSensors - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_UpdateSensors)
+  ///
   /// {@category sensor}
   static void updates() => sdlUpdateSensors();
 }
@@ -132,6 +160,10 @@ extension SdlSensorPointerEx on Pointer<SdlSensor> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_PropertiesID SDLCALL SDL_GetSensorProperties(SDL_Sensor *sensor)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetSensorProperties - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetSensorProperties)
+  ///
   /// {@category sensor}
   int getProperties() => sdlGetSensorProperties(this);
 
@@ -147,6 +179,10 @@ extension SdlSensorPointerEx on Pointer<SdlSensor> {
   /// ```c
   /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetSensorName(SDL_Sensor *sensor)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetSensorName - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetSensorName)
+  ///
   /// {@category sensor}
   String? getName() => sdlGetSensorName(this);
 
@@ -162,6 +198,10 @@ extension SdlSensorPointerEx on Pointer<SdlSensor> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_SensorType SDLCALL SDL_GetSensorType(SDL_Sensor *sensor)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetSensorType - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetSensorType)
+  ///
   /// {@category sensor}
   int getType() => sdlGetSensorType(this);
 
@@ -176,6 +216,10 @@ extension SdlSensorPointerEx on Pointer<SdlSensor> {
   /// ```c
   /// extern SDL_DECLSPEC int SDLCALL SDL_GetSensorNonPortableType(SDL_Sensor *sensor)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetSensorNonPortableType - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetSensorNonPortableType)
+  ///
   /// {@category sensor}
   int getNonPortableType() => sdlGetSensorNonPortableType(this);
 
@@ -191,6 +235,10 @@ extension SdlSensorPointerEx on Pointer<SdlSensor> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_SensorID SDLCALL SDL_GetSensorID(SDL_Sensor *sensor)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetSensorID - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetSensorID)
+  ///
   /// {@category sensor}
   int getId() => sdlGetSensorId(this);
 
@@ -210,6 +258,10 @@ extension SdlSensorPointerEx on Pointer<SdlSensor> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetSensorData(SDL_Sensor *sensor, float *data, int num_values)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetSensorData - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetSensorData)
+  ///
   /// {@category sensor}
   bool sdlGetData(SdlxSensorData data, {int numValues = 6}) =>
       sdlxGetSensorData(this, data, numValues: numValues);
@@ -224,6 +276,10 @@ extension SdlSensorPointerEx on Pointer<SdlSensor> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_CloseSensor(SDL_Sensor *sensor)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_CloseSensor - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CloseSensor)
+  ///
   /// {@category sensor}
   void close() => sdlCloseSensor(this);
 }

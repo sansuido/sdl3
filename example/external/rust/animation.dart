@@ -1,5 +1,6 @@
 // https://github.com/Rust-SDL2/rust-sdl2/blob/master/examples/animation.rs
 import 'dart:ffi';
+
 import 'package:sdl3/sdl3.dart';
 
 class Chara {

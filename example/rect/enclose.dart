@@ -1,4 +1,5 @@
 import 'dart:ffi';
+
 import 'package:sdl3/sdl3.dart';
 import 'package:sdl3/sdl3gfx.dart' as gfx;
 
@@ -59,13 +60,12 @@ int main() {
       }
     }
     const marge = 64;
-    final windowPosition = SdlxPoint(0, 0);
-    window.getSize(windowPosition);
+    final windowSize = window.getSize()!;
     final clip = SdlxFRect(
       x: marge.toDouble(),
       y: marge.toDouble(),
-      w: windowPosition.x - marge * 2,
-      h: windowPosition.y - marge * 2,
+      w: windowSize.w.toDouble() - marge * 2,
+      h: windowSize.h.toDouble() - marge * 2,
     );
     renderer
       ..setDrawColor(SdlxColor(0, 0, 0))

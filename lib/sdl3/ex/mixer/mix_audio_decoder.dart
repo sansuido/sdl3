@@ -41,6 +41,10 @@ extension MixAudioDecoderEx on MixAudioDecoder {
   /// ```c
   /// extern SDL_DECLSPEC MIX_AudioDecoder * SDLCALL MIX_CreateAudioDecoder(const char *path, SDL_PropertiesID props)
   /// ```
+  ///
+  /// See also:
+  /// - [MIX_CreateAudioDecoder - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_CreateAudioDecoder)
+  ///
   /// {@category mixer}
   static Pointer<MixAudioDecoder> create(String path, int props) =>
       mixCreateAudioDecoder(path, props);
@@ -85,6 +89,10 @@ extension MixAudioDecoderEx on MixAudioDecoder {
   /// ```c
   /// extern SDL_DECLSPEC MIX_AudioDecoder * SDLCALL MIX_CreateAudioDecoder_IO(SDL_IOStream *io, bool closeio, SDL_PropertiesID props)
   /// ```
+  ///
+  /// See also:
+  /// - [MIX_CreateAudioDecoder_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_CreateAudioDecoder_IO)
+  ///
   /// {@category mixer}
   static Pointer<MixAudioDecoder> createIo(
     Pointer<SdlIoStream> io,
@@ -108,6 +116,10 @@ extension MixAudioDecoderPointerEx on Pointer<MixAudioDecoder> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL MIX_DestroyAudioDecoder(MIX_AudioDecoder *audiodecoder)
   /// ```
+  ///
+  /// See also:
+  /// - [MIX_DestroyAudioDecoder - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_DestroyAudioDecoder)
+  ///
   /// {@category mixer}
   void destroy() => mixDestroyAudioDecoder(this);
 
@@ -137,6 +149,10 @@ extension MixAudioDecoderPointerEx on Pointer<MixAudioDecoder> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_PropertiesID SDLCALL MIX_GetAudioDecoderProperties(MIX_AudioDecoder *audiodecoder)
   /// ```
+  ///
+  /// See also:
+  /// - [MIX_GetAudioDecoderProperties - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_GetAudioDecoderProperties)
+  ///
   /// {@category mixer}
   int getProperties() => mixGetAudioDecoderProperties(this);
 
@@ -160,6 +176,10 @@ extension MixAudioDecoderPointerEx on Pointer<MixAudioDecoder> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL MIX_GetAudioDecoderFormat(MIX_AudioDecoder *audiodecoder, SDL_AudioSpec *spec)
   /// ```
+  ///
+  /// See also:
+  /// - [MIX_GetAudioDecoderFormat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_GetAudioDecoderFormat)
+  ///
   /// {@category mixer}
   bool getFormat(SdlxAudioSpec spec) => mixxGetAudioDecoderFormat(this, spec);
 
@@ -188,6 +208,10 @@ extension MixAudioDecoderPointerEx on Pointer<MixAudioDecoder> {
   /// ```c
   /// extern SDL_DECLSPEC int SDLCALL MIX_DecodeAudio(MIX_AudioDecoder *audiodecoder, void *buffer, int buflen, const SDL_AudioSpec *spec)
   /// ```
+  ///
+  /// See also:
+  /// - [MIX_DecodeAudio - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_DecodeAudio)
+  ///
   /// {@category mixer}
   int decodeAudio(Uint8List buffer, SdlxAudioSpec spec) =>
       mixxDecodeAudio(this, buffer, spec);

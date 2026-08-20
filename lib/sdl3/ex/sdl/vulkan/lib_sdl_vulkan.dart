@@ -25,6 +25,10 @@ part of '../../../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC char const * const * SDLCALL SDL_Vulkan_GetInstanceExtensions(Uint32 *count)
 /// ```
+///
+/// See also:
+/// - [SDL_Vulkan_GetInstanceExtensions - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_Vulkan_GetInstanceExtensions)
+///
 /// {@category vulkan}
 List<String> sdlxVulkanGetInstanceExtensions() {
   final result = <String>[];

@@ -21,6 +21,10 @@ part of '../../../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC SDL_NotificationID SDLCALL SDL_ShowNotification(const char *title, const char *message, SDL_Surface *image, SDL_NotificationAction *actions, int num_actions)
 /// ```
+///
+/// See also:
+/// - [SDL_ShowNotification - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ShowNotification)
+///
 /// {@category notification}
 int sdlxShowNotification(
   String title,

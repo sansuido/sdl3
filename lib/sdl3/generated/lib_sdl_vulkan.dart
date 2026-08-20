@@ -54,6 +54,10 @@ part of '../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_Vulkan_LoadLibrary(const char *path)
 /// ```
+///
+/// See also:
+/// - [SDL_Vulkan_LoadLibrary - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_Vulkan_LoadLibrary)
+///
 /// {@category vulkan}
 bool sdlVulkanLoadLibrary(String? path) {
   final sdlVulkanLoadLibraryLookupFunction = _libSdl
@@ -89,6 +93,10 @@ bool sdlVulkanLoadLibrary(String? path) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_FunctionPointer SDLCALL SDL_Vulkan_GetVkGetInstanceProcAddr(void)
 /// ```
+///
+/// See also:
+/// - [SDL_Vulkan_GetVkGetInstanceProcAddr - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_Vulkan_GetVkGetInstanceProcAddr)
+///
 /// {@category vulkan}
 Pointer<NativeFunction<SdlFunctionPointer>>
 sdlVulkanGetVkGetInstanceProcAddr() {
@@ -123,6 +131,10 @@ sdlVulkanGetVkGetInstanceProcAddr() {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_Vulkan_UnloadLibrary(void)
 /// ```
+///
+/// See also:
+/// - [SDL_Vulkan_UnloadLibrary - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_Vulkan_UnloadLibrary)
+///
 /// {@category vulkan}
 void sdlVulkanUnloadLibrary() {
   final sdlVulkanUnloadLibraryLookupFunction = _libSdl
@@ -157,6 +169,10 @@ void sdlVulkanUnloadLibrary() {
 /// ```c
 /// extern SDL_DECLSPEC char const * const * SDLCALL SDL_Vulkan_GetInstanceExtensions(Uint32 *count)
 /// ```
+///
+/// See also:
+/// - [SDL_Vulkan_GetInstanceExtensions - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_Vulkan_GetInstanceExtensions)
+///
 /// {@category vulkan}
 Pointer<Pointer<Int8>> sdlVulkanGetInstanceExtensions(Pointer<Uint32> count) {
   final sdlVulkanGetInstanceExtensionsLookupFunction = _libSdl
@@ -194,6 +210,10 @@ Pointer<Pointer<Int8>> sdlVulkanGetInstanceExtensions(Pointer<Uint32> count) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_Vulkan_CreateSurface(SDL_Window *window, VkInstance instance, const struct VkAllocationCallbacks *allocator, VkSurfaceKHR *surface)
 /// ```
+///
+/// See also:
+/// - [SDL_Vulkan_CreateSurface - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_Vulkan_CreateSurface)
+///
 /// {@category vulkan}
 bool sdlVulkanCreateSurface(
   Pointer<SdlWindow> window,
@@ -250,6 +270,10 @@ bool sdlVulkanCreateSurface(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_Vulkan_DestroySurface(VkInstance instance, VkSurfaceKHR surface, const struct VkAllocationCallbacks *allocator)
 /// ```
+///
+/// See also:
+/// - [SDL_Vulkan_DestroySurface - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_Vulkan_DestroySurface)
+///
 /// {@category vulkan}
 void sdlVulkanDestroySurface(
   VkInstance instance,
@@ -292,6 +316,10 @@ void sdlVulkanDestroySurface(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_Vulkan_GetPresentationSupport(VkInstance instance, VkPhysicalDevice physicalDevice, Uint32 queueFamilyIndex)
 /// ```
+///
+/// See also:
+/// - [SDL_Vulkan_GetPresentationSupport - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_Vulkan_GetPresentationSupport)
+///
 /// {@category vulkan}
 bool sdlVulkanGetPresentationSupport(
   VkInstance instance,

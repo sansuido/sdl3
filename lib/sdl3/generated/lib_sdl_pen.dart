@@ -18,6 +18,10 @@ part of '../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC SDL_PenDeviceType SDLCALL SDL_GetPenDeviceType(SDL_PenID instance_id)
 /// ```
+///
+/// See also:
+/// - [SDL_GetPenDeviceType - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetPenDeviceType)
+///
 /// {@category pen}
 int sdlGetPenDeviceType(int instanceId) {
   final sdlGetPenDeviceTypeLookupFunction = _libSdl

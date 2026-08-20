@@ -15,6 +15,10 @@ part of '../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC SDL_PropertiesID SDLCALL SDL_GetGlobalProperties(void)
 /// ```
+///
+/// See also:
+/// - [SDL_GetGlobalProperties - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetGlobalProperties)
+///
 /// {@category properties}
 int sdlGetGlobalProperties() {
   final sdlGetGlobalPropertiesLookupFunction = _libSdl
@@ -41,6 +45,10 @@ int sdlGetGlobalProperties() {
 /// ```c
 /// extern SDL_DECLSPEC SDL_PropertiesID SDLCALL SDL_CreateProperties(void)
 /// ```
+///
+/// See also:
+/// - [SDL_CreateProperties - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CreateProperties)
+///
 /// {@category properties}
 int sdlCreateProperties() {
   final sdlCreatePropertiesLookupFunction = _libSdl
@@ -72,6 +80,10 @@ int sdlCreateProperties() {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_CopyProperties(SDL_PropertiesID src, SDL_PropertiesID dst)
 /// ```
+///
+/// See also:
+/// - [SDL_CopyProperties - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CopyProperties)
+///
 /// {@category properties}
 bool sdlCopyProperties(int src, int dst) {
   final sdlCopyPropertiesLookupFunction = _libSdl
@@ -107,6 +119,10 @@ bool sdlCopyProperties(int src, int dst) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_LockProperties(SDL_PropertiesID props)
 /// ```
+///
+/// See also:
+/// - [SDL_LockProperties - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_LockProperties)
+///
 /// {@category properties}
 bool sdlLockProperties(int props) {
   final sdlLockPropertiesLookupFunction = _libSdl
@@ -130,6 +146,10 @@ bool sdlLockProperties(int props) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_UnlockProperties(SDL_PropertiesID props)
 /// ```
+///
+/// See also:
+/// - [SDL_UnlockProperties - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_UnlockProperties)
+///
 /// {@category properties}
 void sdlUnlockProperties(int props) {
   final sdlUnlockPropertiesLookupFunction = _libSdl
@@ -171,6 +191,10 @@ void sdlUnlockProperties(int props) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetPointerPropertyWithCleanup(SDL_PropertiesID props, const char *name, void *value, SDL_CleanupPropertyCallback cleanup, void *userdata)
 /// ```
+///
+/// See also:
+/// - [SDL_SetPointerPropertyWithCleanup - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetPointerPropertyWithCleanup)
+///
 /// {@category properties}
 bool sdlSetPointerPropertyWithCleanup(
   int props,
@@ -232,6 +256,10 @@ bool sdlSetPointerPropertyWithCleanup(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetPointerProperty(SDL_PropertiesID props, const char *name, void *value)
 /// ```
+///
+/// See also:
+/// - [SDL_SetPointerProperty - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetPointerProperty)
+///
 /// {@category properties}
 bool sdlSetPointerProperty(int props, String? name, Pointer<Void> value) {
   final sdlSetPointerPropertyLookupFunction = _libSdl
@@ -266,6 +294,10 @@ bool sdlSetPointerProperty(int props, String? name, Pointer<Void> value) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetStringProperty(SDL_PropertiesID props, const char *name, const char *value)
 /// ```
+///
+/// See also:
+/// - [SDL_SetStringProperty - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetStringProperty)
+///
 /// {@category properties}
 bool sdlSetStringProperty(int props, String? name, String? value) {
   final sdlSetStringPropertyLookupFunction = _libSdl
@@ -304,6 +336,10 @@ bool sdlSetStringProperty(int props, String? name, String? value) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetNumberProperty(SDL_PropertiesID props, const char *name, Sint64 value)
 /// ```
+///
+/// See also:
+/// - [SDL_SetNumberProperty - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetNumberProperty)
+///
 /// {@category properties}
 bool sdlSetNumberProperty(int props, String? name, int value) {
   final sdlSetNumberPropertyLookupFunction = _libSdl
@@ -335,6 +371,10 @@ bool sdlSetNumberProperty(int props, String? name, int value) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetFloatProperty(SDL_PropertiesID props, const char *name, float value)
 /// ```
+///
+/// See also:
+/// - [SDL_SetFloatProperty - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetFloatProperty)
+///
 /// {@category properties}
 bool sdlSetFloatProperty(int props, String? name, double value) {
   final sdlSetFloatPropertyLookupFunction = _libSdl
@@ -366,6 +406,10 @@ bool sdlSetFloatProperty(int props, String? name, double value) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetBooleanProperty(SDL_PropertiesID props, const char *name, bool value)
 /// ```
+///
+/// See also:
+/// - [SDL_SetBooleanProperty - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetBooleanProperty)
+///
 /// {@category properties}
 bool sdlSetBooleanProperty(int props, String? name, bool value) {
   final sdlSetBooleanPropertyLookupFunction = _libSdl
@@ -395,6 +439,10 @@ bool sdlSetBooleanProperty(int props, String? name, bool value) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_HasProperty(SDL_PropertiesID props, const char *name)
 /// ```
+///
+/// See also:
+/// - [SDL_HasProperty - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_HasProperty)
+///
 /// {@category properties}
 bool sdlHasProperty(int props, String? name) {
   final sdlHasPropertyLookupFunction = _libSdl
@@ -425,6 +473,10 @@ bool sdlHasProperty(int props, String? name) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_PropertyType SDLCALL SDL_GetPropertyType(SDL_PropertiesID props, const char *name)
 /// ```
+///
+/// See also:
+/// - [SDL_GetPropertyType - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetPropertyType)
+///
 /// {@category properties}
 int sdlGetPropertyType(int props, String? name) {
   final sdlGetPropertyTypeLookupFunction = _libSdl
@@ -472,6 +524,10 @@ int sdlGetPropertyType(int props, String? name) {
 /// ```c
 /// extern SDL_DECLSPEC void * SDLCALL SDL_GetPointerProperty(SDL_PropertiesID props, const char *name, void *default_value)
 /// ```
+///
+/// See also:
+/// - [SDL_GetPointerProperty - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetPointerProperty)
+///
 /// {@category properties}
 Pointer<Void> sdlGetPointerProperty(
   int props,
@@ -526,6 +582,10 @@ Pointer<Void> sdlGetPointerProperty(
 /// ```c
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetStringProperty(SDL_PropertiesID props, const char *name, const char *default_value)
 /// ```
+///
+/// See also:
+/// - [SDL_GetStringProperty - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetStringProperty)
+///
 /// {@category properties}
 String? sdlGetStringProperty(int props, String? name, String? defaultValue) {
   final sdlGetStringPropertyLookupFunction = _libSdl
@@ -582,6 +642,10 @@ String? sdlGetStringProperty(int props, String? name, String? defaultValue) {
 /// ```c
 /// extern SDL_DECLSPEC Sint64 SDLCALL SDL_GetNumberProperty(SDL_PropertiesID props, const char *name, Sint64 default_value)
 /// ```
+///
+/// See also:
+/// - [SDL_GetNumberProperty - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetNumberProperty)
+///
 /// {@category properties}
 int sdlGetNumberProperty(int props, String? name, int defaultValue) {
   final sdlGetNumberPropertyLookupFunction = _libSdl
@@ -622,6 +686,10 @@ int sdlGetNumberProperty(int props, String? name, int defaultValue) {
 /// ```c
 /// extern SDL_DECLSPEC float SDLCALL SDL_GetFloatProperty(SDL_PropertiesID props, const char *name, float default_value)
 /// ```
+///
+/// See also:
+/// - [SDL_GetFloatProperty - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetFloatProperty)
+///
 /// {@category properties}
 double sdlGetFloatProperty(int props, String? name, double defaultValue) {
   final sdlGetFloatPropertyLookupFunction = _libSdl
@@ -662,6 +730,10 @@ double sdlGetFloatProperty(int props, String? name, double defaultValue) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetBooleanProperty(SDL_PropertiesID props, const char *name, bool default_value)
 /// ```
+///
+/// See also:
+/// - [SDL_GetBooleanProperty - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetBooleanProperty)
+///
 /// {@category properties}
 bool sdlGetBooleanProperty(int props, String? name, bool defaultValue) {
   final sdlGetBooleanPropertyLookupFunction = _libSdl
@@ -694,6 +766,10 @@ bool sdlGetBooleanProperty(int props, String? name, bool defaultValue) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_ClearProperty(SDL_PropertiesID props, const char *name)
 /// ```
+///
+/// See also:
+/// - [SDL_ClearProperty - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ClearProperty)
+///
 /// {@category properties}
 bool sdlClearProperty(int props, String? name) {
   final sdlClearPropertyLookupFunction = _libSdl
@@ -723,6 +799,10 @@ bool sdlClearProperty(int props, String? name) {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_GetNumProperties(SDL_PropertiesID props)
 /// ```
+///
+/// See also:
+/// - [SDL_GetNumProperties - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetNumProperties)
+///
 /// {@category properties}
 int sdlGetNumProperties(int props) {
   final sdlGetNumPropertiesLookupFunction = _libSdl
@@ -751,6 +831,10 @@ int sdlGetNumProperties(int props) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_EnumerateProperties(SDL_PropertiesID props, SDL_EnumeratePropertiesCallback callback, void *userdata)
 /// ```
+///
+/// See also:
+/// - [SDL_EnumerateProperties - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_EnumerateProperties)
+///
 /// {@category properties}
 bool sdlEnumerateProperties(
   int props,
@@ -792,6 +876,10 @@ bool sdlEnumerateProperties(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_DestroyProperties(SDL_PropertiesID props)
 /// ```
+///
+/// See also:
+/// - [SDL_DestroyProperties - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_DestroyProperties)
+///
 /// {@category properties}
 void sdlDestroyProperties(int props) {
   final sdlDestroyPropertiesLookupFunction = _libSdl

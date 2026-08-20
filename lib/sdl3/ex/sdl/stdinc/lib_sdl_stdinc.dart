@@ -22,6 +22,10 @@ part of '../../../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC char ** SDLCALL SDL_GetEnvironmentVariables(SDL_Environment *env)
 /// ```
+///
+/// See also:
+/// - [SDL_GetEnvironmentVariables - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetEnvironmentVariables)
+///
 /// {@category stdinc}
 List<String> sdlxGetEnvironmentVariables(Pointer<SdlEnvironment> env) {
   final result = <String>[];

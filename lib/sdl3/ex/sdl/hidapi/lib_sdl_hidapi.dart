@@ -19,6 +19,10 @@ part of '../../../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC SDL_hid_device * SDLCALL SDL_hid_open(unsigned short vendor_id, unsigned short product_id, const wchar_t *serial_number)
 /// ```
+///
+/// See also:
+/// - [SDL_hid_open - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_hid_open)
+///
 /// {@category hidapi}
 Pointer<SdlHidDevice> sdlxHidOpen(
   int vendorId,
@@ -59,6 +63,10 @@ Pointer<SdlHidDevice> sdlxHidOpen(
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_hid_write(SDL_hid_device *dev, const unsigned char *data, size_t length)
 /// ```
+///
+/// See also:
+/// - [SDL_hid_write - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_hid_write)
+///
 /// {@category hidapi}
 int sdlxHidWrite(
   Pointer<SdlHidDevice> dev,
@@ -95,6 +103,10 @@ int sdlxHidWrite(
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_hid_read_timeout(SDL_hid_device *dev, unsigned char *data, size_t length, int milliseconds)
 /// ```
+///
+/// See also:
+/// - [SDL_hid_read_timeout - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_hid_read_timeout)
+///
 /// {@category hidapi}
 ({int bytes, Uint8List data, int reportId}) sdlxHidReadTimeout(
   Pointer<SdlHidDevice> dev,
@@ -143,6 +155,10 @@ int sdlxHidWrite(
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_hid_read(SDL_hid_device *dev, unsigned char *data, size_t length)
 /// ```
+///
+/// See also:
+/// - [SDL_hid_read - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_hid_read)
+///
 /// {@category hidapi}
 ({int bytes, Uint8List data, int reportId}) sdlxHidRead(
   Pointer<SdlHidDevice> dev,
@@ -194,6 +210,10 @@ int sdlxHidWrite(
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_hid_send_feature_report(SDL_hid_device *dev, const unsigned char *data, size_t length)
 /// ```
+///
+/// See also:
+/// - [SDL_hid_send_feature_report - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_hid_send_feature_report)
+///
 /// {@category hidapi}
 int sdlxHidSendFeatureReport(
   Pointer<SdlHidDevice> dev,
@@ -232,6 +252,10 @@ int sdlxHidSendFeatureReport(
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_hid_get_feature_report(SDL_hid_device *dev, unsigned char *data, size_t length)
 /// ```
+///
+/// See also:
+/// - [SDL_hid_get_feature_report - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_hid_get_feature_report)
+///
 /// {@category hidapi}
 ({int bytes, Uint8List data, int reportId}) sdlxHidGetFeatureReport(
   Pointer<SdlHidDevice> dev,
@@ -281,6 +305,10 @@ int sdlxHidSendFeatureReport(
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_hid_get_input_report(SDL_hid_device *dev, unsigned char *data, size_t length)
 /// ```
+///
+/// See also:
+/// - [SDL_hid_get_input_report - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_hid_get_input_report)
+///
 /// {@category hidapi}
 ({int bytes, Uint8List data, int reportId}) sdlxHidGetInputReport(
   Pointer<SdlHidDevice> dev,
@@ -320,6 +348,10 @@ int sdlxHidSendFeatureReport(
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_hid_get_manufacturer_string(SDL_hid_device *dev, wchar_t *string, size_t maxlen)
 /// ```
+///
+/// See also:
+/// - [SDL_hid_get_manufacturer_string - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_hid_get_manufacturer_string)
+///
 /// {@category hidapi}
 String? sdlxHidGetManufacturerString(
   Pointer<SdlHidDevice> dev, {
@@ -354,6 +386,10 @@ String? sdlxHidGetManufacturerString(
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_hid_get_product_string(SDL_hid_device *dev, wchar_t *string, size_t maxlen)
 /// ```
+///
+/// See also:
+/// - [SDL_hid_get_product_string - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_hid_get_product_string)
+///
 /// {@category hidapi}
 String? sdlxHidGetProductString(Pointer<SdlHidDevice> dev, {int maxlen = 256}) {
   String? result;
@@ -385,6 +421,10 @@ String? sdlxHidGetProductString(Pointer<SdlHidDevice> dev, {int maxlen = 256}) {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_hid_get_serial_number_string(SDL_hid_device *dev, wchar_t *string, size_t maxlen)
 /// ```
+///
+/// See also:
+/// - [SDL_hid_get_serial_number_string - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_hid_get_serial_number_string)
+///
 /// {@category hidapi}
 String? sdlxHidGetSerialNumberString(
   Pointer<SdlHidDevice> dev, {
@@ -420,6 +460,10 @@ String? sdlxHidGetSerialNumberString(
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_hid_get_indexed_string(SDL_hid_device *dev, int string_index, wchar_t *string, size_t maxlen)
 /// ```
+///
+/// See also:
+/// - [SDL_hid_get_indexed_string - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_hid_get_indexed_string)
+///
 /// {@category hidapi}
 String? sdlxHidGetIndexedString(
   Pointer<SdlHidDevice> dev,
@@ -463,6 +507,10 @@ String? sdlxHidGetIndexedString(
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_hid_get_report_descriptor(SDL_hid_device *dev, unsigned char *buf, size_t buf_size)
 /// ```
+///
+/// See also:
+/// - [SDL_hid_get_report_descriptor - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_hid_get_report_descriptor)
+///
 /// {@category hidapi}
 Uint8List sdlxHidGetReportDescriptor(
   Pointer<SdlHidDevice> dev, {

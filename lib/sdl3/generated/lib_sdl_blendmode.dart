@@ -91,6 +91,10 @@ part of '../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC SDL_BlendMode SDLCALL SDL_ComposeCustomBlendMode(SDL_BlendFactor srcColorFactor, SDL_BlendFactor dstColorFactor, SDL_BlendOperation colorOperation, SDL_BlendFactor srcAlphaFactor, SDL_BlendFactor dstAlphaFactor, SDL_BlendOperation alphaOperation)
 /// ```
+///
+/// See also:
+/// - [SDL_ComposeCustomBlendMode - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ComposeCustomBlendMode)
+///
 /// {@category blendmode}
 int sdlComposeCustomBlendMode(
   int srcColorFactor,

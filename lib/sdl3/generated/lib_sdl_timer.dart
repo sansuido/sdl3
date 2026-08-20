@@ -18,6 +18,10 @@ part of '../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC Uint64 SDLCALL SDL_GetTicks(void)
 /// ```
+///
+/// See also:
+/// - [SDL_GetTicks - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetTicks)
+///
 /// {@category timer}
 int sdlGetTicks() {
   final sdlGetTicksLookupFunction = _libSdl
@@ -38,6 +42,10 @@ int sdlGetTicks() {
 /// ```c
 /// extern SDL_DECLSPEC Uint64 SDLCALL SDL_GetTicksNS(void)
 /// ```
+///
+/// See also:
+/// - [SDL_GetTicksNS - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetTicksNS)
+///
 /// {@category timer}
 int sdlGetTicksNs() {
   final sdlGetTicksNsLookupFunction = _libSdl
@@ -65,6 +73,10 @@ int sdlGetTicksNs() {
 /// ```c
 /// extern SDL_DECLSPEC Uint64 SDLCALL SDL_GetPerformanceCounter(void)
 /// ```
+///
+/// See also:
+/// - [SDL_GetPerformanceCounter - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetPerformanceCounter)
+///
 /// {@category timer}
 int sdlGetPerformanceCounter() {
   final sdlGetPerformanceCounterLookupFunction = _libSdl
@@ -77,7 +89,9 @@ int sdlGetPerformanceCounter() {
 ///
 /// Get the count per second of the high resolution counter.
 ///
-/// \returns a platform-specific count per second.
+/// \returns the frequency at which the result from SDL_GetPerformanceCounter
+/// is adjusted, measured in counts per second. This value is
+/// platform-dependent.
 ///
 /// \threadsafety It is safe to call this function from any thread.
 ///
@@ -88,6 +102,10 @@ int sdlGetPerformanceCounter() {
 /// ```c
 /// extern SDL_DECLSPEC Uint64 SDLCALL SDL_GetPerformanceFrequency(void)
 /// ```
+///
+/// See also:
+/// - [SDL_GetPerformanceFrequency - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetPerformanceFrequency)
+///
 /// {@category timer}
 int sdlGetPerformanceFrequency() {
   final sdlGetPerformanceFrequencyLookupFunction = _libSdl
@@ -116,6 +134,10 @@ int sdlGetPerformanceFrequency() {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_Delay(Uint32 ms)
 /// ```
+///
+/// See also:
+/// - [SDL_Delay - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_Delay)
+///
 /// {@category timer}
 void sdlDelay(int ms) {
   final sdlDelayLookupFunction = _libSdl
@@ -144,6 +166,10 @@ void sdlDelay(int ms) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_DelayNS(Uint64 ns)
 /// ```
+///
+/// See also:
+/// - [SDL_DelayNS - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_DelayNS)
+///
 /// {@category timer}
 void sdlDelayNs(int ns) {
   final sdlDelayNsLookupFunction = _libSdl
@@ -172,6 +198,10 @@ void sdlDelayNs(int ns) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_DelayPrecise(Uint64 ns)
 /// ```
+///
+/// See also:
+/// - [SDL_DelayPrecise - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_DelayPrecise)
+///
 /// {@category timer}
 void sdlDelayPrecise(int ns) {
   final sdlDelayPreciseLookupFunction = _libSdl
@@ -218,6 +248,10 @@ void sdlDelayPrecise(int ns) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_TimerID SDLCALL SDL_AddTimer(Uint32 interval, SDL_TimerCallback callback, void *userdata)
 /// ```
+///
+/// See also:
+/// - [SDL_AddTimer - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_AddTimer)
+///
 /// {@category timer}
 int sdlAddTimer(
   int interval,
@@ -277,6 +311,10 @@ int sdlAddTimer(
 /// ```c
 /// extern SDL_DECLSPEC SDL_TimerID SDLCALL SDL_AddTimerNS(Uint64 interval, SDL_NSTimerCallback callback, void *userdata)
 /// ```
+///
+/// See also:
+/// - [SDL_AddTimerNS - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_AddTimerNS)
+///
 /// {@category timer}
 int sdlAddTimerNs(
   int interval,
@@ -315,6 +353,10 @@ int sdlAddTimerNs(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_RemoveTimer(SDL_TimerID id)
 /// ```
+///
+/// See also:
+/// - [SDL_RemoveTimer - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RemoveTimer)
+///
 /// {@category timer}
 bool sdlRemoveTimer(int id) {
   final sdlRemoveTimerLookupFunction = _libSdl

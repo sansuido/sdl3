@@ -44,6 +44,10 @@ extension NetServerPointerEx on Pointer<NetServer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL NET_AcceptClient(NET_Server *server, NET_StreamSocket **client_stream)
   /// ```
+  ///
+  /// See also:
+  /// - [NET_AcceptClient - SDL3 Wiki](https://wiki.libsdl.org/SDL3/NET_AcceptClient)
+  ///
   /// {@category net}
   Pointer<NetStreamSocket>? acceptClient() => netxAcceptClient(this);
 
@@ -70,6 +74,10 @@ extension NetServerPointerEx on Pointer<NetServer> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL NET_DestroyServer(NET_Server *server)
   /// ```
+  ///
+  /// See also:
+  /// - [NET_DestroyServer - SDL3 Wiki](https://wiki.libsdl.org/SDL3/NET_DestroyServer)
+  ///
   /// {@category net}
   void destroy() => netDestroyServer(this);
 }

@@ -1,4 +1,5 @@
 import 'dart:ffi';
+
 import 'package:sdl3/sdl3.dart';
 
 int main() {
@@ -22,13 +23,12 @@ int main() {
   sdlSetHint(SDL_HINT_RENDER_VSYNC, '1');
   texture = renderer.loadTexture('assets/jap/gate.png');
   if (texture != nullptr) {
-    final size = SdlxFPoint(0, 0);
-    if (texture.getSize(size)) {
+    final size = texture.getSize();
+    if (size != null) {
       renderer.setLogicalPresentation(
-        SdlxRenderLogicalPresentation()
-          ..w = size.x.toInt()
-          ..h = size.y.toInt()
-          ..mode = SdlkLogicalPresentation.letterbox,
+        size.w.toInt(),
+        size.h.toInt(),
+        SdlkLogicalPresentation.letterbox,
       );
     }
   }

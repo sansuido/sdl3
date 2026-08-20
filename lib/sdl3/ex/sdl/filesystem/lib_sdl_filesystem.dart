@@ -64,6 +64,10 @@ part of '../../../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC char * SDLCALL SDL_GetPrefPath(const char *org, const char *app)
 /// ```
+///
+/// See also:
+/// - [SDL_GetPrefPath - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetPrefPath)
+///
 /// {@category filesystem}
 String? sdlxGetPrefPath(String? org, String? app) {
   String? result;
@@ -109,6 +113,10 @@ String? sdlxGetPrefPath(String? org, String? app) {
 /// ```c
 /// extern SDL_DECLSPEC char ** SDLCALL SDL_GlobDirectory(const char *path, const char *pattern, SDL_GlobFlags flags, int *count)
 /// ```
+///
+/// See also:
+/// - [SDL_GlobDirectory - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GlobDirectory)
+///
 /// {@category filesystem}
 List<String> sdlxGlobDirectory(String path, {String? pattern, int flags = 0}) {
   final result = <String>[];

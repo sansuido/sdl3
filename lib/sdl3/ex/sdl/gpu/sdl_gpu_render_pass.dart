@@ -14,6 +14,10 @@ extension SdlGpuRenderPassPointerEx on Pointer<SdlGpuRenderPass> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_BindGPUGraphicsPipeline( SDL_GPURenderPass *render_pass, SDL_GPUGraphicsPipeline *graphics_pipeline)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_BindGPUGraphicsPipeline - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_BindGPUGraphicsPipeline)
+  ///
   /// {@category gpu}
   void bindGraphicsPipeline(Pointer<SdlGpuGraphicsPipeline> graphicsPipeline) =>
       sdlBindGpuGraphicsPipeline(this, graphicsPipeline);
@@ -29,6 +33,10 @@ extension SdlGpuRenderPassPointerEx on Pointer<SdlGpuRenderPass> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_SetGPUViewport( SDL_GPURenderPass *render_pass, const SDL_GPUViewport *viewport)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_SetGPUViewport - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetGPUViewport)
+  ///
   /// {@category gpu}
   void setViewport(SdlxGpuViewport viewport) =>
       sdlxSetGpuViewport(this, viewport);
@@ -44,6 +52,10 @@ extension SdlGpuRenderPassPointerEx on Pointer<SdlGpuRenderPass> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_SetGPUScissor( SDL_GPURenderPass *render_pass, const SDL_Rect *scissor)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_SetGPUScissor - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetGPUScissor)
+  ///
   /// {@category gpu}
   void setScissor(SdlxRect scissor) => sdlxSetGpuScissor(this, scissor);
 
@@ -61,6 +73,10 @@ extension SdlGpuRenderPassPointerEx on Pointer<SdlGpuRenderPass> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_SetGPUBlendConstants( SDL_GPURenderPass *render_pass, SDL_FColor blend_constants)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_SetGPUBlendConstants - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetGPUBlendConstants)
+  ///
   /// {@category gpu}
   void setBlendConstants(SdlxFColor blendConstants) =>
       sdlxSetGpuBlendConstants(this, blendConstants);
@@ -76,6 +92,10 @@ extension SdlGpuRenderPassPointerEx on Pointer<SdlGpuRenderPass> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_SetGPUStencilReference( SDL_GPURenderPass *render_pass, Uint8 reference)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_SetGPUStencilReference - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetGPUStencilReference)
+  ///
   /// {@category gpu}
   void setStencilReference(int reference) =>
       sdlSetGpuStencilReference(this, reference);
@@ -95,6 +115,10 @@ extension SdlGpuRenderPassPointerEx on Pointer<SdlGpuRenderPass> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_BindGPUVertexBuffers( SDL_GPURenderPass *render_pass, Uint32 first_slot, const SDL_GPUBufferBinding *bindings, Uint32 num_bindings)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_BindGPUVertexBuffers - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_BindGPUVertexBuffers)
+  ///
   /// {@category gpu}
   void bindVertexBuffers(
     List<SdlxGpuBufferBinding> bindings, {
@@ -115,6 +139,10 @@ extension SdlGpuRenderPassPointerEx on Pointer<SdlGpuRenderPass> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_BindGPUIndexBuffer( SDL_GPURenderPass *render_pass, const SDL_GPUBufferBinding *binding, SDL_GPUIndexElementSize index_element_size)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_BindGPUIndexBuffer - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_BindGPUIndexBuffer)
+  ///
   /// {@category gpu}
   void bindIndexBuffer(SdlxGpuBufferBinding binding, int indexElementSize) =>
       sdlxBindGpuIndexBuffer(this, binding, indexElementSize);
@@ -141,6 +169,10 @@ extension SdlGpuRenderPassPointerEx on Pointer<SdlGpuRenderPass> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_BindGPUVertexSamplers( SDL_GPURenderPass *render_pass, Uint32 first_slot, const SDL_GPUTextureSamplerBinding *texture_sampler_bindings, Uint32 num_bindings)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_BindGPUVertexSamplers - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_BindGPUVertexSamplers)
+  ///
   /// {@category gpu}
   void bindVertexSamplers(
     List<SdlxGpuTextureSamplerBinding> bindings, {
@@ -168,6 +200,10 @@ extension SdlGpuRenderPassPointerEx on Pointer<SdlGpuRenderPass> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_BindGPUVertexStorageTextures( SDL_GPURenderPass *render_pass, Uint32 first_slot, SDL_GPUTexture *const *storage_textures, Uint32 num_bindings)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_BindGPUVertexStorageTextures - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_BindGPUVertexStorageTextures)
+  ///
   /// {@category gpu}
   void bindVertexStorageTextures(
     List<Pointer<SdlGpuTexture>> storageTextures, {
@@ -199,6 +235,10 @@ extension SdlGpuRenderPassPointerEx on Pointer<SdlGpuRenderPass> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_BindGPUVertexStorageBuffers( SDL_GPURenderPass *render_pass, Uint32 first_slot, SDL_GPUBuffer *const *storage_buffers, Uint32 num_bindings)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_BindGPUVertexStorageBuffers - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_BindGPUVertexStorageBuffers)
+  ///
   /// {@category gpu}
   void bindVertexStorageBuffers(
     List<Pointer<SdlGpuBuffer>> storageBuffers, {
@@ -231,6 +271,10 @@ extension SdlGpuRenderPassPointerEx on Pointer<SdlGpuRenderPass> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_BindGPUFragmentSamplers( SDL_GPURenderPass *render_pass, Uint32 first_slot, const SDL_GPUTextureSamplerBinding *texture_sampler_bindings, Uint32 num_bindings)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_BindGPUFragmentSamplers - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_BindGPUFragmentSamplers)
+  ///
   /// {@category gpu}
   void bindFragmentSamplers(
     List<SdlxGpuTextureSamplerBinding> bindings, {
@@ -258,6 +302,10 @@ extension SdlGpuRenderPassPointerEx on Pointer<SdlGpuRenderPass> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_BindGPUFragmentStorageTextures( SDL_GPURenderPass *render_pass, Uint32 first_slot, SDL_GPUTexture *const *storage_textures, Uint32 num_bindings)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_BindGPUFragmentStorageTextures - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_BindGPUFragmentStorageTextures)
+  ///
   /// {@category gpu}
   void bindFragmentStorageTextures(
     List<Pointer<SdlGpuTexture>> storageTextures, {
@@ -289,6 +337,10 @@ extension SdlGpuRenderPassPointerEx on Pointer<SdlGpuRenderPass> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_BindGPUFragmentStorageBuffers( SDL_GPURenderPass *render_pass, Uint32 first_slot, SDL_GPUBuffer *const *storage_buffers, Uint32 num_bindings)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_BindGPUFragmentStorageBuffers - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_BindGPUFragmentStorageBuffers)
+  ///
   /// {@category gpu}
   void bindFragmentStorageBuffers(
     List<Pointer<SdlGpuBuffer>> storageBuffers, {
@@ -325,6 +377,10 @@ extension SdlGpuRenderPassPointerEx on Pointer<SdlGpuRenderPass> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_DrawGPUIndexedPrimitives( SDL_GPURenderPass *render_pass, Uint32 num_indices, Uint32 num_instances, Uint32 first_index, Sint32 vertex_offset, Uint32 first_instance)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_DrawGPUIndexedPrimitives - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_DrawGPUIndexedPrimitives)
+  ///
   /// {@category gpu}
   void drawIndexedPrimitives(
     int numIndices,
@@ -364,6 +420,10 @@ extension SdlGpuRenderPassPointerEx on Pointer<SdlGpuRenderPass> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_DrawGPUPrimitives( SDL_GPURenderPass *render_pass, Uint32 num_vertices, Uint32 num_instances, Uint32 first_vertex, Uint32 first_instance)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_DrawGPUPrimitives - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_DrawGPUPrimitives)
+  ///
   /// {@category gpu}
   void drawPrimitives(
     int numVertices,
@@ -397,6 +457,10 @@ extension SdlGpuRenderPassPointerEx on Pointer<SdlGpuRenderPass> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_DrawGPUPrimitivesIndirect( SDL_GPURenderPass *render_pass, SDL_GPUBuffer *buffer, Uint32 offset, Uint32 draw_count)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_DrawGPUPrimitivesIndirect - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_DrawGPUPrimitivesIndirect)
+  ///
   /// {@category gpu}
   void drawPrimitivesIndirect(
     Pointer<SdlGpuBuffer> buffer,
@@ -423,6 +487,10 @@ extension SdlGpuRenderPassPointerEx on Pointer<SdlGpuRenderPass> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_DrawGPUIndexedPrimitivesIndirect( SDL_GPURenderPass *render_pass, SDL_GPUBuffer *buffer, Uint32 offset, Uint32 draw_count)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_DrawGPUIndexedPrimitivesIndirect - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_DrawGPUIndexedPrimitivesIndirect)
+  ///
   /// {@category gpu}
   void drawIndexedPrimitivesIndirect(
     Pointer<SdlGpuBuffer> buffer,
@@ -443,6 +511,10 @@ extension SdlGpuRenderPassPointerEx on Pointer<SdlGpuRenderPass> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_EndGPURenderPass( SDL_GPURenderPass *render_pass)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_EndGPURenderPass - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_EndGPURenderPass)
+  ///
   /// {@category gpu}
   void end() => sdlEndGpuRenderPass(this);
 }

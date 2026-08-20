@@ -21,6 +21,10 @@ part of '../../../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC const SDL_TrayEntry ** SDLCALL SDL_GetTrayEntries(SDL_TrayMenu *menu, int *count)
 /// ```
+///
+/// See also:
+/// - [SDL_GetTrayEntries - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetTrayEntries)
+///
 /// {@category tray}
 List<Pointer<SdlTrayEntry>> sdlxGetTrayEntries(Pointer<SdlTrayMenu> menu) {
   final result = <Pointer<SdlTrayEntry>>[];

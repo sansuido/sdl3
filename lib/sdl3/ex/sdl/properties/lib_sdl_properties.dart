@@ -31,6 +31,10 @@ void _sdlxPropertyEnumerateCallback(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_EnumerateProperties(SDL_PropertiesID props, SDL_EnumeratePropertiesCallback callback, void *userdata)
 /// ```
+///
+/// See also:
+/// - [SDL_EnumerateProperties - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_EnumerateProperties)
+///
 /// {@category properties}
 List<String> sdlxGetPropertyNames(int props) {
   _sdlxPropertyEnumCache.clear();

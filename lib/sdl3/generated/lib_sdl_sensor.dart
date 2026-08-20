@@ -15,6 +15,10 @@ part of '../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC SDL_SensorID * SDLCALL SDL_GetSensors(int *count)
 /// ```
+///
+/// See also:
+/// - [SDL_GetSensors - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetSensors)
+///
 /// {@category sensor}
 Pointer<Uint32> sdlGetSensors(Pointer<Int32> count) {
   final sdlGetSensorsLookupFunction = _libSdl
@@ -38,6 +42,10 @@ Pointer<Uint32> sdlGetSensors(Pointer<Int32> count) {
 /// ```c
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetSensorNameForID(SDL_SensorID instance_id)
 /// ```
+///
+/// See also:
+/// - [SDL_GetSensorNameForID - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetSensorNameForID)
+///
 /// {@category sensor}
 String? sdlGetSensorNameForId(int instanceId) {
   final sdlGetSensorNameForIdLookupFunction = _libSdl
@@ -66,6 +74,10 @@ String? sdlGetSensorNameForId(int instanceId) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_SensorType SDLCALL SDL_GetSensorTypeForID(SDL_SensorID instance_id)
 /// ```
+///
+/// See also:
+/// - [SDL_GetSensorTypeForID - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetSensorTypeForID)
+///
 /// {@category sensor}
 int sdlGetSensorTypeForId(int instanceId) {
   final sdlGetSensorTypeForIdLookupFunction = _libSdl
@@ -90,6 +102,10 @@ int sdlGetSensorTypeForId(int instanceId) {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_GetSensorNonPortableTypeForID(SDL_SensorID instance_id)
 /// ```
+///
+/// See also:
+/// - [SDL_GetSensorNonPortableTypeForID - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetSensorNonPortableTypeForID)
+///
 /// {@category sensor}
 int sdlGetSensorNonPortableTypeForId(int instanceId) {
   final sdlGetSensorNonPortableTypeForIdLookupFunction = _libSdl
@@ -112,6 +128,10 @@ int sdlGetSensorNonPortableTypeForId(int instanceId) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Sensor * SDLCALL SDL_OpenSensor(SDL_SensorID instance_id)
 /// ```
+///
+/// See also:
+/// - [SDL_OpenSensor - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_OpenSensor)
+///
 /// {@category sensor}
 Pointer<SdlSensor> sdlOpenSensor(int instanceId) {
   final sdlOpenSensorLookupFunction = _libSdl
@@ -134,6 +154,10 @@ Pointer<SdlSensor> sdlOpenSensor(int instanceId) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Sensor * SDLCALL SDL_GetSensorFromID(SDL_SensorID instance_id)
 /// ```
+///
+/// See also:
+/// - [SDL_GetSensorFromID - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetSensorFromID)
+///
 /// {@category sensor}
 Pointer<SdlSensor> sdlGetSensorFromId(int instanceId) {
   final sdlGetSensorFromIdLookupFunction = _libSdl
@@ -156,6 +180,10 @@ Pointer<SdlSensor> sdlGetSensorFromId(int instanceId) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_PropertiesID SDLCALL SDL_GetSensorProperties(SDL_Sensor *sensor)
 /// ```
+///
+/// See also:
+/// - [SDL_GetSensorProperties - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetSensorProperties)
+///
 /// {@category sensor}
 int sdlGetSensorProperties(Pointer<SdlSensor> sensor) {
   final sdlGetSensorPropertiesLookupFunction = _libSdl
@@ -178,6 +206,10 @@ int sdlGetSensorProperties(Pointer<SdlSensor> sensor) {
 /// ```c
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetSensorName(SDL_Sensor *sensor)
 /// ```
+///
+/// See also:
+/// - [SDL_GetSensorName - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetSensorName)
+///
 /// {@category sensor}
 String? sdlGetSensorName(Pointer<SdlSensor> sensor) {
   final sdlGetSensorNameLookupFunction = _libSdl
@@ -204,6 +236,10 @@ String? sdlGetSensorName(Pointer<SdlSensor> sensor) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_SensorType SDLCALL SDL_GetSensorType(SDL_Sensor *sensor)
 /// ```
+///
+/// See also:
+/// - [SDL_GetSensorType - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetSensorType)
+///
 /// {@category sensor}
 int sdlGetSensorType(Pointer<SdlSensor> sensor) {
   final sdlGetSensorTypeLookupFunction = _libSdl
@@ -225,6 +261,10 @@ int sdlGetSensorType(Pointer<SdlSensor> sensor) {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_GetSensorNonPortableType(SDL_Sensor *sensor)
 /// ```
+///
+/// See also:
+/// - [SDL_GetSensorNonPortableType - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetSensorNonPortableType)
+///
 /// {@category sensor}
 int sdlGetSensorNonPortableType(Pointer<SdlSensor> sensor) {
   final sdlGetSensorNonPortableTypeLookupFunction = _libSdl
@@ -247,6 +287,10 @@ int sdlGetSensorNonPortableType(Pointer<SdlSensor> sensor) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_SensorID SDLCALL SDL_GetSensorID(SDL_Sensor *sensor)
 /// ```
+///
+/// See also:
+/// - [SDL_GetSensorID - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetSensorID)
+///
 /// {@category sensor}
 int sdlGetSensorId(Pointer<SdlSensor> sensor) {
   final sdlGetSensorIdLookupFunction = _libSdl
@@ -273,6 +317,10 @@ int sdlGetSensorId(Pointer<SdlSensor> sensor) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetSensorData(SDL_Sensor *sensor, float *data, int num_values)
 /// ```
+///
+/// See also:
+/// - [SDL_GetSensorData - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetSensorData)
+///
 /// {@category sensor}
 bool sdlGetSensorData(
   Pointer<SdlSensor> sensor,
@@ -305,6 +353,10 @@ bool sdlGetSensorData(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_CloseSensor(SDL_Sensor *sensor)
 /// ```
+///
+/// See also:
+/// - [SDL_CloseSensor - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CloseSensor)
+///
 /// {@category sensor}
 void sdlCloseSensor(Pointer<SdlSensor> sensor) {
   final sdlCloseSensorLookupFunction = _libSdl
@@ -329,6 +381,10 @@ void sdlCloseSensor(Pointer<SdlSensor> sensor) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_UpdateSensors(void)
 /// ```
+///
+/// See also:
+/// - [SDL_UpdateSensors - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_UpdateSensors)
+///
 /// {@category sensor}
 void sdlUpdateSensors() {
   final sdlUpdateSensorsLookupFunction = _libSdl

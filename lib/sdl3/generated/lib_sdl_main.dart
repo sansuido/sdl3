@@ -19,6 +19,10 @@ part of '../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_SetMainReady(void)
 /// ```
+///
+/// See also:
+/// - [SDL_SetMainReady - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetMainReady)
+///
 /// {@category main}
 void sdlSetMainReady() {
   final sdlSetMainReadyLookupFunction = _libSdl
@@ -60,6 +64,10 @@ void sdlSetMainReady() {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_RunApp(int argc, char *argv[], SDL_main_func mainFunction, void *reserved)
 /// ```
+///
+/// See also:
+/// - [SDL_RunApp - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RunApp)
+///
 /// {@category main}
 int sdlRunApp(
   int argc,
@@ -113,6 +121,10 @@ int sdlRunApp(
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_EnterAppMainCallbacks(int argc, char *argv[], SDL_AppInit_func appinit, SDL_AppIterate_func appiter, SDL_AppEvent_func appevent, SDL_AppQuit_func appquit)
 /// ```
+///
+/// See also:
+/// - [SDL_EnterAppMainCallbacks - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_EnterAppMainCallbacks)
+///
 /// {@category main}
 int sdlEnterAppMainCallbacks(
   int argc,
@@ -181,6 +193,10 @@ int sdlEnterAppMainCallbacks(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_RegisterApp(const char *name, Uint32 style, void *hInst)
 /// ```
+///
+/// See also:
+/// - [SDL_RegisterApp - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RegisterApp)
+///
 /// {@category main}
 bool sdlRegisterApp(String? name, int style, Pointer<Void> hInst) {
   final sdlRegisterAppLookupFunction = _libSdl
@@ -214,6 +230,10 @@ bool sdlRegisterApp(String? name, int style, Pointer<Void> hInst) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_UnregisterApp(void)
 /// ```
+///
+/// See also:
+/// - [SDL_UnregisterApp - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_UnregisterApp)
+///
 /// {@category main}
 void sdlUnregisterApp() {
   final sdlUnregisterAppLookupFunction = _libSdl
@@ -250,6 +270,10 @@ void sdlUnregisterApp() {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_GDKSuspendComplete(void)
 /// ```
+///
+/// See also:
+/// - [SDL_GDKSuspendComplete - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GDKSuspendComplete)
+///
 /// {@category main}
 void sdlGdkSuspendComplete() {
   final sdlGdkSuspendCompleteLookupFunction = _libSdl

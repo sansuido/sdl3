@@ -20,6 +20,10 @@ part of '../../../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC char * SDLCALL SDL_GetClipboardText(void)
 /// ```
+///
+/// See also:
+/// - [SDL_GetClipboardText - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetClipboardText)
+///
 /// {@category clipboard}
 String? sdlxGetClipboardText() {
   final result = sdlGetClipboardText();
@@ -51,6 +55,10 @@ String? sdlxGetClipboardText() {
 /// ```c
 /// extern SDL_DECLSPEC char * SDLCALL SDL_GetPrimarySelectionText(void)
 /// ```
+///
+/// See also:
+/// - [SDL_GetPrimarySelectionText - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetPrimarySelectionText)
+///
 /// {@category clipboard}
 String? sdlxGetPrimarySelectionText() {
   final result = sdlGetPrimarySelectionText();
@@ -84,6 +92,10 @@ String? sdlxGetPrimarySelectionText() {
 /// ```c
 /// extern SDL_DECLSPEC void * SDLCALL SDL_GetClipboardData(const char *mime_type, size_t *size)
 /// ```
+///
+/// See also:
+/// - [SDL_GetClipboardData - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetClipboardData)
+///
 /// {@category clipboard}
 String? sdlxGetClipboardData(String mimeType) {
   String? result;
@@ -115,6 +127,10 @@ String? sdlxGetClipboardData(String mimeType) {
 /// ```c
 /// extern SDL_DECLSPEC char ** SDLCALL SDL_GetClipboardMimeTypes(size_t *num_mime_types)
 /// ```
+///
+/// See also:
+/// - [SDL_GetClipboardMimeTypes - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetClipboardMimeTypes)
+///
 /// {@category clipboard}
 List<String> sdlxGetClipboardMimeTypes() {
   final result = <String>[];

@@ -1,5 +1,6 @@
 // https://github.com/Rust-SDL2/rust-sdl2/blob/master/examples/window-properties.rs
 import 'dart:ffi';
+
 import 'package:sdl3/sdl3.dart';
 
 int main() {
@@ -39,11 +40,11 @@ int main() {
         }
       }
     }
-    final position = SdlxPoint(0, 0);
-    final size = SdlxPoint(0, 0);
-    if (window.getPosition(position) && window.getSize(size)) {
+    final position = window.getPosition();
+    final size = window.getSize();
+    if (position != null && size != null) {
       window.setTitle(
-        'Window - pos(${position.x}x${position.y}), size(${size.x}x${size.y}): $tick',
+        'Window - pos(${position.x}x${position.y}), size(${size.w}x${size.h}): $tick',
       );
     }
     tick++;

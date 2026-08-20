@@ -48,6 +48,10 @@ part of '../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetBasePath(void)
 /// ```
+///
+/// See also:
+/// - [SDL_GetBasePath - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetBasePath)
+///
 /// {@category filesystem}
 String? sdlGetBasePath() {
   final sdlGetBasePathLookupFunction = _libSdl
@@ -125,6 +129,10 @@ String? sdlGetBasePath() {
 /// ```c
 /// extern SDL_DECLSPEC char * SDLCALL SDL_GetPrefPath(const char *org, const char *app)
 /// ```
+///
+/// See also:
+/// - [SDL_GetPrefPath - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetPrefPath)
+///
 /// {@category filesystem}
 Pointer<Int8> sdlGetPrefPath(String? org, String? app) {
   final sdlGetPrefPathLookupFunction = _libSdl
@@ -169,6 +177,10 @@ Pointer<Int8> sdlGetPrefPath(String? org, String? app) {
 /// ```c
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetUserFolder(SDL_Folder folder)
 /// ```
+///
+/// See also:
+/// - [SDL_GetUserFolder - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetUserFolder)
+///
 /// {@category filesystem}
 String? sdlGetUserFolder(int folder) {
   final sdlGetUserFolderLookupFunction = _libSdl
@@ -202,6 +214,10 @@ String? sdlGetUserFolder(int folder) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_CreateDirectory(const char *path)
 /// ```
+///
+/// See also:
+/// - [SDL_CreateDirectory - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CreateDirectory)
+///
 /// {@category filesystem}
 bool sdlCreateDirectory(String? path) {
   final sdlCreateDirectoryLookupFunction = _libSdl
@@ -241,6 +257,10 @@ bool sdlCreateDirectory(String? path) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_EnumerateDirectory(const char *path, SDL_EnumerateDirectoryCallback callback, void *userdata)
 /// ```
+///
+/// See also:
+/// - [SDL_EnumerateDirectory - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_EnumerateDirectory)
+///
 /// {@category filesystem}
 bool sdlEnumerateDirectory(
   String? path,
@@ -287,6 +307,10 @@ bool sdlEnumerateDirectory(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_RemovePath(const char *path)
 /// ```
+///
+/// See also:
+/// - [SDL_RemovePath - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RemovePath)
+///
 /// {@category filesystem}
 bool sdlRemovePath(String? path) {
   final sdlRemovePathLookupFunction = _libSdl
@@ -326,6 +350,10 @@ bool sdlRemovePath(String? path) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_RenamePath(const char *oldpath, const char *newpath)
 /// ```
+///
+/// See also:
+/// - [SDL_RenamePath - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RenamePath)
+///
 /// {@category filesystem}
 bool sdlRenamePath(String? oldpath, String? newpath) {
   final sdlRenamePathLookupFunction = _libSdl
@@ -387,6 +415,10 @@ bool sdlRenamePath(String? oldpath, String? newpath) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_CopyFile(const char *oldpath, const char *newpath)
 /// ```
+///
+/// See also:
+/// - [SDL_CopyFile - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CopyFile)
+///
 /// {@category filesystem}
 bool sdlCopyFile(String? oldpath, String? newpath) {
   final sdlCopyFileLookupFunction = _libSdl
@@ -423,6 +455,10 @@ bool sdlCopyFile(String? oldpath, String? newpath) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetPathInfo(const char *path, SDL_PathInfo *info)
 /// ```
+///
+/// See also:
+/// - [SDL_GetPathInfo - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetPathInfo)
+///
 /// {@category filesystem}
 bool sdlGetPathInfo(String? path, Pointer<SdlPathInfo> info) {
   final sdlGetPathInfoLookupFunction = _libSdl
@@ -470,6 +506,10 @@ bool sdlGetPathInfo(String? path, Pointer<SdlPathInfo> info) {
 /// ```c
 /// extern SDL_DECLSPEC char ** SDLCALL SDL_GlobDirectory(const char *path, const char *pattern, SDL_GlobFlags flags, int *count)
 /// ```
+///
+/// See also:
+/// - [SDL_GlobDirectory - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GlobDirectory)
+///
 /// {@category filesystem}
 Pointer<Pointer<Int8>> sdlGlobDirectory(
   String? path,
@@ -530,6 +570,10 @@ Pointer<Pointer<Int8>> sdlGlobDirectory(
 /// ```c
 /// extern SDL_DECLSPEC char * SDLCALL SDL_GetCurrentDirectory(void)
 /// ```
+///
+/// See also:
+/// - [SDL_GetCurrentDirectory - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetCurrentDirectory)
+///
 /// {@category filesystem}
 Pointer<Int8> sdlGetCurrentDirectory() {
   final sdlGetCurrentDirectoryLookupFunction = _libSdl

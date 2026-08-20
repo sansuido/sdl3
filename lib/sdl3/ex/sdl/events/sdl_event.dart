@@ -26,6 +26,10 @@ extension SdlEventEx on SdlEvent {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_PumpEvents(void)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_PumpEvents - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_PumpEvents)
+  ///
   /// {@category events}
   static void pumps() {
     sdlPumpEvents();
@@ -50,6 +54,10 @@ extension SdlEventEx on SdlEvent {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_HasEvent(Uint32 type)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_HasEvent - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_HasEvent)
+  ///
   /// {@category events}
   static bool have(int type) => sdlHasEvent(type);
 
@@ -74,6 +82,10 @@ extension SdlEventEx on SdlEvent {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_HasEvents(Uint32 minType, Uint32 maxType)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_HasEvents - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_HasEvents)
+  ///
   /// {@category events}
   static bool has(int minType, int maxType) => sdlHasEvents(minType, maxType);
 
@@ -106,6 +118,10 @@ extension SdlEventEx on SdlEvent {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_FlushEvent(Uint32 type)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_FlushEvent - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_FlushEvent)
+  ///
   /// {@category events}
   static void flush(int type) {
     sdlFlushEvent(type);
@@ -139,6 +155,10 @@ extension SdlEventEx on SdlEvent {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_FlushEvents(Uint32 minType, Uint32 maxType)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_FlushEvents - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_FlushEvents)
+  ///
   /// {@category events}
   static void flushs(int minType, int maxType) {
     sdlFlushEvents(minType, maxType);
@@ -195,6 +215,10 @@ extension SdlEventPointerEx on Pointer<SdlEvent> {
   /// ```c
   /// extern SDL_DECLSPEC int SDLCALL SDL_PeepEvents(SDL_Event *events, int numevents, SDL_EventAction action, Uint32 minType, Uint32 maxType)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_PeepEvents - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_PeepEvents)
+  ///
   /// {@category events}
   int peeps(int numevents, int action, int minType, int maxType) =>
       sdlPeepEvents(this, numevents, action, minType, maxType);
@@ -251,6 +275,10 @@ extension SdlEventPointerEx on Pointer<SdlEvent> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_PollEvent(SDL_Event *event)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_PollEvent - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_PollEvent)
+  ///
   /// {@category events}
   bool poll() => sdlPollEvent(this);
 
@@ -279,6 +307,10 @@ extension SdlEventPointerEx on Pointer<SdlEvent> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_WaitEvent(SDL_Event *event)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_WaitEvent - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_WaitEvent)
+  ///
   /// {@category events}
   bool wait() => sdlWaitEvent(this);
 
@@ -313,6 +345,10 @@ extension SdlEventPointerEx on Pointer<SdlEvent> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_WaitEventTimeout(SDL_Event *event, Sint32 timeoutMS)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_WaitEventTimeout - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_WaitEventTimeout)
+  ///
   /// {@category events}
   bool waitTimeout(int timeout) => sdlWaitEventTimeout(this, timeout);
 
@@ -351,6 +387,10 @@ extension SdlEventPointerEx on Pointer<SdlEvent> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_PushEvent(SDL_Event *event)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_PushEvent - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_PushEvent)
+  ///
   /// {@category events}
   bool push() => sdlPushEvent(this);
 

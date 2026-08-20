@@ -49,6 +49,10 @@ extension MixAudioPointerEx on Pointer<MixAudio> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_PropertiesID SDLCALL MIX_GetAudioProperties(MIX_Audio *audio)
   /// ```
+  ///
+  /// See also:
+  /// - [MIX_GetAudioProperties - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_GetAudioProperties)
+  ///
   /// {@category mixer}
   int getProperties() => mixGetAudioProperties(this);
 
@@ -87,6 +91,10 @@ extension MixAudioPointerEx on Pointer<MixAudio> {
   /// ```c
   /// extern SDL_DECLSPEC Sint64 SDLCALL MIX_GetAudioDuration(MIX_Audio *audio)
   /// ```
+  ///
+  /// See also:
+  /// - [MIX_GetAudioDuration - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_GetAudioDuration)
+  ///
   /// {@category mixer}
   int getDuration() => mixGetAudioDuration(this);
 
@@ -110,6 +118,10 @@ extension MixAudioPointerEx on Pointer<MixAudio> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL MIX_GetAudioFormat(MIX_Audio *audio, SDL_AudioSpec *spec)
   /// ```
+  ///
+  /// See also:
+  /// - [MIX_GetAudioFormat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_GetAudioFormat)
+  ///
   /// {@category mixer}
   bool getFormat(SdlxAudioSpec spec) => mixxGetAudioFormat(this, spec);
 
@@ -136,6 +148,10 @@ extension MixAudioPointerEx on Pointer<MixAudio> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL MIX_DestroyAudio(MIX_Audio *audio)
   /// ```
+  ///
+  /// See also:
+  /// - [MIX_DestroyAudio - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_DestroyAudio)
+  ///
   /// {@category mixer}
   void destroy() => mixDestroyAudio(this);
 
@@ -161,6 +177,10 @@ extension MixAudioPointerEx on Pointer<MixAudio> {
   /// ```c
   /// extern SDL_DECLSPEC Sint64 SDLCALL MIX_AudioMSToFrames(MIX_Audio *audio, Sint64 ms)
   /// ```
+  ///
+  /// See also:
+  /// - [MIX_AudioMSToFrames - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_AudioMSToFrames)
+  ///
   /// {@category mixer}
   int msToFrames(int ms) => mixAudioMsToFrames(this, ms);
 
@@ -189,6 +209,10 @@ extension MixAudioPointerEx on Pointer<MixAudio> {
   /// ```c
   /// extern SDL_DECLSPEC Sint64 SDLCALL MIX_AudioFramesToMS(MIX_Audio *audio, Sint64 frames)
   /// ```
+  ///
+  /// See also:
+  /// - [MIX_AudioFramesToMS - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_AudioFramesToMS)
+  ///
   /// {@category mixer}
   int framesToMs(int frames) => mixAudioFramesToMs(this, frames);
 }

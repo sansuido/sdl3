@@ -26,6 +26,10 @@ part of '../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetHintWithPriority(const char *name, const char *value, SDL_HintPriority priority)
 /// ```
+///
+/// See also:
+/// - [SDL_SetHintWithPriority - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetHintWithPriority)
+///
 /// {@category hints}
 bool sdlSetHintWithPriority(String? name, String? value, int priority) {
   final sdlSetHintWithPriorityLookupFunction = _libSdl
@@ -69,6 +73,10 @@ bool sdlSetHintWithPriority(String? name, String? value, int priority) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetHint(const char *name, const char *value)
 /// ```
+///
+/// See also:
+/// - [SDL_SetHint - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetHint)
+///
 /// {@category hints}
 bool sdlSetHint(String? name, String? value) {
   final sdlSetHintLookupFunction = _libSdl
@@ -106,6 +114,10 @@ bool sdlSetHint(String? name, String? value) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_ResetHint(const char *name)
 /// ```
+///
+/// See also:
+/// - [SDL_ResetHint - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ResetHint)
+///
 /// {@category hints}
 bool sdlResetHint(String? name) {
   final sdlResetHintLookupFunction = _libSdl
@@ -135,6 +147,10 @@ bool sdlResetHint(String? name) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_ResetHints(void)
 /// ```
+///
+/// See also:
+/// - [SDL_ResetHints - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ResetHints)
+///
 /// {@category hints}
 void sdlResetHints() {
   final sdlResetHintsLookupFunction = _libSdl
@@ -158,6 +174,10 @@ void sdlResetHints() {
 /// ```c
 /// extern SDL_DECLSPEC const char *SDLCALL SDL_GetHint(const char *name)
 /// ```
+///
+/// See also:
+/// - [SDL_GetHint - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetHint)
+///
 /// {@category hints}
 String? sdlGetHint(String? name) {
   final sdlGetHintLookupFunction = _libSdl
@@ -192,6 +212,10 @@ String? sdlGetHint(String? name) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetHintBoolean(const char *name, bool default_value)
 /// ```
+///
+/// See also:
+/// - [SDL_GetHintBoolean - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetHintBoolean)
+///
 /// {@category hints}
 bool sdlGetHintBoolean(String? name, bool defaultValue) {
   final sdlGetHintBooleanLookupFunction = _libSdl
@@ -227,6 +251,10 @@ bool sdlGetHintBoolean(String? name, bool defaultValue) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_AddHintCallback(const char *name, SDL_HintCallback callback, void *userdata)
 /// ```
+///
+/// See also:
+/// - [SDL_AddHintCallback - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_AddHintCallback)
+///
 /// {@category hints}
 bool sdlAddHintCallback(
   String? name,
@@ -273,6 +301,10 @@ bool sdlAddHintCallback(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_RemoveHintCallback(const char *name, SDL_HintCallback callback, void *userdata)
 /// ```
+///
+/// See also:
+/// - [SDL_RemoveHintCallback - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RemoveHintCallback)
+///
 /// {@category hints}
 void sdlRemoveHintCallback(
   String? name,

@@ -34,6 +34,10 @@ part of '../../sdl_image.dart';
 /// ```c
 /// extern SDL_DECLSPEC SDL_GPUTexture * SDLCALL IMG_LoadGPUTexture(SDL_GPUDevice *device, SDL_GPUCopyPass *copy_pass, const char *file, int *width, int *height)
 /// ```
+///
+/// See also:
+/// - [IMG_LoadGPUTexture - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_LoadGPUTexture)
+///
 /// {@category image}
 Pointer<SdlGpuTexture> imgxLoadGpuTexture(
   Pointer<SdlGpuDevice> device,
@@ -105,6 +109,10 @@ Pointer<SdlGpuTexture> imgxLoadGpuTexture(
 /// ```c
 /// extern SDL_DECLSPEC SDL_GPUTexture * SDLCALL IMG_LoadGPUTexture_IO(SDL_GPUDevice *device, SDL_GPUCopyPass *copy_pass, SDL_IOStream *src, bool closeio, int *width, int *height)
 /// ```
+///
+/// See also:
+/// - [IMG_LoadGPUTexture_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_LoadGPUTexture_IO)
+///
 /// {@category image}
 Pointer<SdlGpuTexture> imgxLoadGpuTextureIo(
   Pointer<SdlGpuDevice> device,
@@ -186,6 +194,10 @@ Pointer<SdlGpuTexture> imgxLoadGpuTextureIo(
 /// ```c
 /// extern SDL_DECLSPEC SDL_GPUTexture * SDLCALL IMG_LoadGPUTextureTyped_IO(SDL_GPUDevice *device, SDL_GPUCopyPass *copy_pass, SDL_IOStream *src, bool closeio, const char *type, int *width, int *height)
 /// ```
+///
+/// See also:
+/// - [IMG_LoadGPUTextureTyped_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_LoadGPUTextureTyped_IO)
+///
 /// {@category image}
 Pointer<SdlGpuTexture> imgxLoadGpuTextureTypedIo(
   Pointer<SdlGpuDevice> device,
@@ -221,7 +233,7 @@ Pointer<SdlGpuTexture> imgxLoadGpuTextureTypedIo(
 ///
 /// This function decodes the next frame in the animation decoder, returning it
 /// as an SDL_Surface. The returned surface should be freed with
-/// SDL_FreeSurface() when no longer needed.
+/// SDL_DestroySurface() when no longer needed.
 ///
 /// If the animation decoder has no more frames or an error occurred while
 /// decoding the frame, this function returns false. In that case, please call
@@ -252,6 +264,10 @@ Pointer<SdlGpuTexture> imgxLoadGpuTextureTypedIo(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL IMG_GetAnimationDecoderFrame(IMG_AnimationDecoder *decoder, SDL_Surface **frame, Uint64 *duration)
 /// ```
+///
+/// See also:
+/// - [IMG_GetAnimationDecoderFrame - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_GetAnimationDecoderFrame)
+///
 /// {@category image}
 ({Pointer<SdlSurface> frame, int duration})? imgxGetAnimationDecoderFrame(
   Pointer<ImgAnimationDecoder> decoder,

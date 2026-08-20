@@ -12,6 +12,10 @@ part of '../sdl_image.dart';
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL IMG_Version(void)
 /// ```
+///
+/// See also:
+/// - [IMG_Version - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_Version)
+///
 /// {@category image}
 int imgVersion() {
   final imgVersionLookupFunction = _libImage
@@ -64,6 +68,10 @@ int imgVersion() {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Surface * SDLCALL IMG_Load(const char *file)
 /// ```
+///
+/// See also:
+/// - [IMG_Load - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_Load)
+///
 /// {@category image}
 Pointer<SdlSurface> imgLoad(String? file) {
   final imgLoadLookupFunction = _libImage
@@ -131,6 +139,10 @@ Pointer<SdlSurface> imgLoad(String? file) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Surface * SDLCALL IMG_Load_IO(SDL_IOStream *src, bool closeio)
 /// ```
+///
+/// See also:
+/// - [IMG_Load_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_Load_IO)
+///
 /// {@category image}
 Pointer<SdlSurface> imgLoadIo(Pointer<SdlIoStream> src, bool closeio) {
   final imgLoadIoLookupFunction = _libImage
@@ -203,6 +215,10 @@ Pointer<SdlSurface> imgLoadIo(Pointer<SdlIoStream> src, bool closeio) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Surface * SDLCALL IMG_LoadTyped_IO(SDL_IOStream *src, bool closeio, const char *type)
 /// ```
+///
+/// See also:
+/// - [IMG_LoadTyped_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_LoadTyped_IO)
+///
 /// {@category image}
 Pointer<SdlSurface> imgLoadTypedIo(
   Pointer<SdlIoStream> src,
@@ -264,6 +280,10 @@ Pointer<SdlSurface> imgLoadTypedIo(
 /// ```c
 /// extern SDL_DECLSPEC SDL_Texture * SDLCALL IMG_LoadTexture(SDL_Renderer *renderer, const char *file)
 /// ```
+///
+/// See also:
+/// - [IMG_LoadTexture - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_LoadTexture)
+///
 /// {@category image}
 Pointer<SdlTexture> imgLoadTexture(
   Pointer<SdlRenderer> renderer,
@@ -333,6 +353,10 @@ Pointer<SdlTexture> imgLoadTexture(
 /// ```c
 /// extern SDL_DECLSPEC SDL_Texture * SDLCALL IMG_LoadTexture_IO(SDL_Renderer *renderer, SDL_IOStream *src, bool closeio)
 /// ```
+///
+/// See also:
+/// - [IMG_LoadTexture_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_LoadTexture_IO)
+///
 /// {@category image}
 Pointer<SdlTexture> imgLoadTextureIo(
   Pointer<SdlRenderer> renderer,
@@ -410,6 +434,10 @@ Pointer<SdlTexture> imgLoadTextureIo(
 /// ```c
 /// extern SDL_DECLSPEC SDL_Texture * SDLCALL IMG_LoadTextureTyped_IO(SDL_Renderer *renderer, SDL_IOStream *src, bool closeio, const char *type)
 /// ```
+///
+/// See also:
+/// - [IMG_LoadTextureTyped_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_LoadTextureTyped_IO)
+///
 /// {@category image}
 Pointer<SdlTexture> imgLoadTextureTypedIo(
   Pointer<SdlRenderer> renderer,
@@ -477,6 +505,10 @@ Pointer<SdlTexture> imgLoadTextureTypedIo(
 /// ```c
 /// extern SDL_DECLSPEC SDL_GPUTexture * SDLCALL IMG_LoadGPUTexture(SDL_GPUDevice *device, SDL_GPUCopyPass *copy_pass, const char *file, int *width, int *height)
 /// ```
+///
+/// See also:
+/// - [IMG_LoadGPUTexture - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_LoadGPUTexture)
+///
 /// {@category image}
 Pointer<SdlGpuTexture> imgLoadGpuTexture(
   Pointer<SdlGpuDevice> device,
@@ -559,6 +591,10 @@ Pointer<SdlGpuTexture> imgLoadGpuTexture(
 /// ```c
 /// extern SDL_DECLSPEC SDL_GPUTexture * SDLCALL IMG_LoadGPUTexture_IO(SDL_GPUDevice *device, SDL_GPUCopyPass *copy_pass, SDL_IOStream *src, bool closeio, int *width, int *height)
 /// ```
+///
+/// See also:
+/// - [IMG_LoadGPUTexture_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_LoadGPUTexture_IO)
+///
 /// {@category image}
 Pointer<SdlGpuTexture> imgLoadGpuTextureIo(
   Pointer<SdlGpuDevice> device,
@@ -650,6 +686,10 @@ Pointer<SdlGpuTexture> imgLoadGpuTextureIo(
 /// ```c
 /// extern SDL_DECLSPEC SDL_GPUTexture * SDLCALL IMG_LoadGPUTextureTyped_IO(SDL_GPUDevice *device, SDL_GPUCopyPass *copy_pass, SDL_IOStream *src, bool closeio, const char *type, int *width, int *height)
 /// ```
+///
+/// See also:
+/// - [IMG_LoadGPUTextureTyped_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_LoadGPUTextureTyped_IO)
+///
 /// {@category image}
 Pointer<SdlGpuTexture> imgLoadGpuTextureTypedIo(
   Pointer<SdlGpuDevice> device,
@@ -708,6 +748,10 @@ Pointer<SdlGpuTexture> imgLoadGpuTextureTypedIo(
 /// ```c
 /// extern SDL_DECLSPEC SDL_Surface * SDLCALL IMG_GetClipboardImage(void)
 /// ```
+///
+/// See also:
+/// - [IMG_GetClipboardImage - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_GetClipboardImage)
+///
 /// {@category image}
 Pointer<SdlSurface> imgGetClipboardImage() {
   final imgGetClipboardImageLookupFunction = _libImage
@@ -763,6 +807,10 @@ Pointer<SdlSurface> imgGetClipboardImage() {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL IMG_isANI(SDL_IOStream *src)
 /// ```
+///
+/// See also:
+/// - [IMG_isANI - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_isANI)
+///
 /// {@category image}
 bool imgIsAni(Pointer<SdlIoStream> src) {
   final imgIsAniLookupFunction = _libImage
@@ -818,6 +866,10 @@ bool imgIsAni(Pointer<SdlIoStream> src) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL IMG_isAVIF(SDL_IOStream *src)
 /// ```
+///
+/// See also:
+/// - [IMG_isAVIF - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_isAVIF)
+///
 /// {@category image}
 bool imgIsAvif(Pointer<SdlIoStream> src) {
   final imgIsAvifLookupFunction = _libImage
@@ -873,6 +925,10 @@ bool imgIsAvif(Pointer<SdlIoStream> src) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL IMG_isCUR(SDL_IOStream *src)
 /// ```
+///
+/// See also:
+/// - [IMG_isCUR - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_isCUR)
+///
 /// {@category image}
 bool imgIsCur(Pointer<SdlIoStream> src) {
   final imgIsCurLookupFunction = _libImage
@@ -928,6 +984,10 @@ bool imgIsCur(Pointer<SdlIoStream> src) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL IMG_isBMP(SDL_IOStream *src)
 /// ```
+///
+/// See also:
+/// - [IMG_isBMP - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_isBMP)
+///
 /// {@category image}
 bool imgIsBmp(Pointer<SdlIoStream> src) {
   final imgIsBmpLookupFunction = _libImage
@@ -983,6 +1043,10 @@ bool imgIsBmp(Pointer<SdlIoStream> src) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL IMG_isGIF(SDL_IOStream *src)
 /// ```
+///
+/// See also:
+/// - [IMG_isGIF - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_isGIF)
+///
 /// {@category image}
 bool imgIsGif(Pointer<SdlIoStream> src) {
   final imgIsGifLookupFunction = _libImage
@@ -1038,6 +1102,10 @@ bool imgIsGif(Pointer<SdlIoStream> src) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL IMG_isICO(SDL_IOStream *src)
 /// ```
+///
+/// See also:
+/// - [IMG_isICO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_isICO)
+///
 /// {@category image}
 bool imgIsIco(Pointer<SdlIoStream> src) {
   final imgIsIcoLookupFunction = _libImage
@@ -1093,6 +1161,10 @@ bool imgIsIco(Pointer<SdlIoStream> src) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL IMG_isJPG(SDL_IOStream *src)
 /// ```
+///
+/// See also:
+/// - [IMG_isJPG - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_isJPG)
+///
 /// {@category image}
 bool imgIsJpg(Pointer<SdlIoStream> src) {
   final imgIsJpgLookupFunction = _libImage
@@ -1148,6 +1220,10 @@ bool imgIsJpg(Pointer<SdlIoStream> src) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL IMG_isJXL(SDL_IOStream *src)
 /// ```
+///
+/// See also:
+/// - [IMG_isJXL - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_isJXL)
+///
 /// {@category image}
 bool imgIsJxl(Pointer<SdlIoStream> src) {
   final imgIsJxlLookupFunction = _libImage
@@ -1203,6 +1279,10 @@ bool imgIsJxl(Pointer<SdlIoStream> src) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL IMG_isLBM(SDL_IOStream *src)
 /// ```
+///
+/// See also:
+/// - [IMG_isLBM - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_isLBM)
+///
 /// {@category image}
 bool imgIsLbm(Pointer<SdlIoStream> src) {
   final imgIsLbmLookupFunction = _libImage
@@ -1258,6 +1338,10 @@ bool imgIsLbm(Pointer<SdlIoStream> src) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL IMG_isPCX(SDL_IOStream *src)
 /// ```
+///
+/// See also:
+/// - [IMG_isPCX - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_isPCX)
+///
 /// {@category image}
 bool imgIsPcx(Pointer<SdlIoStream> src) {
   final imgIsPcxLookupFunction = _libImage
@@ -1313,6 +1397,10 @@ bool imgIsPcx(Pointer<SdlIoStream> src) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL IMG_isPNG(SDL_IOStream *src)
 /// ```
+///
+/// See also:
+/// - [IMG_isPNG - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_isPNG)
+///
 /// {@category image}
 bool imgIsPng(Pointer<SdlIoStream> src) {
   final imgIsPngLookupFunction = _libImage
@@ -1368,6 +1456,10 @@ bool imgIsPng(Pointer<SdlIoStream> src) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL IMG_isPNM(SDL_IOStream *src)
 /// ```
+///
+/// See also:
+/// - [IMG_isPNM - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_isPNM)
+///
 /// {@category image}
 bool imgIsPnm(Pointer<SdlIoStream> src) {
   final imgIsPnmLookupFunction = _libImage
@@ -1423,6 +1515,10 @@ bool imgIsPnm(Pointer<SdlIoStream> src) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL IMG_isQOI(SDL_IOStream *src)
 /// ```
+///
+/// See also:
+/// - [IMG_isQOI - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_isQOI)
+///
 /// {@category image}
 bool imgIsQoi(Pointer<SdlIoStream> src) {
   final imgIsQoiLookupFunction = _libImage
@@ -1478,6 +1574,10 @@ bool imgIsQoi(Pointer<SdlIoStream> src) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL IMG_isSVG(SDL_IOStream *src)
 /// ```
+///
+/// See also:
+/// - [IMG_isSVG - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_isSVG)
+///
 /// {@category image}
 bool imgIsSvg(Pointer<SdlIoStream> src) {
   final imgIsSvgLookupFunction = _libImage
@@ -1533,6 +1633,10 @@ bool imgIsSvg(Pointer<SdlIoStream> src) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL IMG_isTIF(SDL_IOStream *src)
 /// ```
+///
+/// See also:
+/// - [IMG_isTIF - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_isTIF)
+///
 /// {@category image}
 bool imgIsTif(Pointer<SdlIoStream> src) {
   final imgIsTifLookupFunction = _libImage
@@ -1588,6 +1692,10 @@ bool imgIsTif(Pointer<SdlIoStream> src) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL IMG_isWEBP(SDL_IOStream *src)
 /// ```
+///
+/// See also:
+/// - [IMG_isWEBP - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_isWEBP)
+///
 /// {@category image}
 bool imgIsWebp(Pointer<SdlIoStream> src) {
   final imgIsWebpLookupFunction = _libImage
@@ -1643,6 +1751,10 @@ bool imgIsWebp(Pointer<SdlIoStream> src) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL IMG_isXCF(SDL_IOStream *src)
 /// ```
+///
+/// See also:
+/// - [IMG_isXCF - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_isXCF)
+///
 /// {@category image}
 bool imgIsXcf(Pointer<SdlIoStream> src) {
   final imgIsXcfLookupFunction = _libImage
@@ -1698,6 +1810,10 @@ bool imgIsXcf(Pointer<SdlIoStream> src) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL IMG_isXPM(SDL_IOStream *src)
 /// ```
+///
+/// See also:
+/// - [IMG_isXPM - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_isXPM)
+///
 /// {@category image}
 bool imgIsXpm(Pointer<SdlIoStream> src) {
   final imgIsXpmLookupFunction = _libImage
@@ -1753,6 +1869,10 @@ bool imgIsXpm(Pointer<SdlIoStream> src) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL IMG_isXV(SDL_IOStream *src)
 /// ```
+///
+/// See also:
+/// - [IMG_isXV - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_isXV)
+///
 /// {@category image}
 bool imgIsXv(Pointer<SdlIoStream> src) {
   final imgIsXvLookupFunction = _libImage
@@ -1798,6 +1918,10 @@ bool imgIsXv(Pointer<SdlIoStream> src) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Surface * SDLCALL IMG_LoadAVIF_IO(SDL_IOStream *src)
 /// ```
+///
+/// See also:
+/// - [IMG_LoadAVIF_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_LoadAVIF_IO)
+///
 /// {@category image}
 Pointer<SdlSurface> imgLoadAvifIo(Pointer<SdlIoStream> src) {
   final imgLoadAvifIoLookupFunction = _libImage
@@ -1843,6 +1967,10 @@ Pointer<SdlSurface> imgLoadAvifIo(Pointer<SdlIoStream> src) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Surface * SDLCALL IMG_LoadBMP_IO(SDL_IOStream *src)
 /// ```
+///
+/// See also:
+/// - [IMG_LoadBMP_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_LoadBMP_IO)
+///
 /// {@category image}
 Pointer<SdlSurface> imgLoadBmpIo(Pointer<SdlIoStream> src) {
   final imgLoadBmpIoLookupFunction = _libImage
@@ -1888,6 +2016,10 @@ Pointer<SdlSurface> imgLoadBmpIo(Pointer<SdlIoStream> src) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Surface * SDLCALL IMG_LoadCUR_IO(SDL_IOStream *src)
 /// ```
+///
+/// See also:
+/// - [IMG_LoadCUR_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_LoadCUR_IO)
+///
 /// {@category image}
 Pointer<SdlSurface> imgLoadCurIo(Pointer<SdlIoStream> src) {
   final imgLoadCurIoLookupFunction = _libImage
@@ -1933,6 +2065,10 @@ Pointer<SdlSurface> imgLoadCurIo(Pointer<SdlIoStream> src) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Surface * SDLCALL IMG_LoadGIF_IO(SDL_IOStream *src)
 /// ```
+///
+/// See also:
+/// - [IMG_LoadGIF_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_LoadGIF_IO)
+///
 /// {@category image}
 Pointer<SdlSurface> imgLoadGifIo(Pointer<SdlIoStream> src) {
   final imgLoadGifIoLookupFunction = _libImage
@@ -1978,6 +2114,10 @@ Pointer<SdlSurface> imgLoadGifIo(Pointer<SdlIoStream> src) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Surface * SDLCALL IMG_LoadICO_IO(SDL_IOStream *src)
 /// ```
+///
+/// See also:
+/// - [IMG_LoadICO_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_LoadICO_IO)
+///
 /// {@category image}
 Pointer<SdlSurface> imgLoadIcoIo(Pointer<SdlIoStream> src) {
   final imgLoadIcoIoLookupFunction = _libImage
@@ -2023,6 +2163,10 @@ Pointer<SdlSurface> imgLoadIcoIo(Pointer<SdlIoStream> src) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Surface * SDLCALL IMG_LoadJPG_IO(SDL_IOStream *src)
 /// ```
+///
+/// See also:
+/// - [IMG_LoadJPG_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_LoadJPG_IO)
+///
 /// {@category image}
 Pointer<SdlSurface> imgLoadJpgIo(Pointer<SdlIoStream> src) {
   final imgLoadJpgIoLookupFunction = _libImage
@@ -2068,6 +2212,10 @@ Pointer<SdlSurface> imgLoadJpgIo(Pointer<SdlIoStream> src) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Surface * SDLCALL IMG_LoadJXL_IO(SDL_IOStream *src)
 /// ```
+///
+/// See also:
+/// - [IMG_LoadJXL_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_LoadJXL_IO)
+///
 /// {@category image}
 Pointer<SdlSurface> imgLoadJxlIo(Pointer<SdlIoStream> src) {
   final imgLoadJxlIoLookupFunction = _libImage
@@ -2113,6 +2261,10 @@ Pointer<SdlSurface> imgLoadJxlIo(Pointer<SdlIoStream> src) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Surface * SDLCALL IMG_LoadLBM_IO(SDL_IOStream *src)
 /// ```
+///
+/// See also:
+/// - [IMG_LoadLBM_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_LoadLBM_IO)
+///
 /// {@category image}
 Pointer<SdlSurface> imgLoadLbmIo(Pointer<SdlIoStream> src) {
   final imgLoadLbmIoLookupFunction = _libImage
@@ -2158,6 +2310,10 @@ Pointer<SdlSurface> imgLoadLbmIo(Pointer<SdlIoStream> src) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Surface * SDLCALL IMG_LoadPCX_IO(SDL_IOStream *src)
 /// ```
+///
+/// See also:
+/// - [IMG_LoadPCX_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_LoadPCX_IO)
+///
 /// {@category image}
 Pointer<SdlSurface> imgLoadPcxIo(Pointer<SdlIoStream> src) {
   final imgLoadPcxIoLookupFunction = _libImage
@@ -2203,6 +2359,10 @@ Pointer<SdlSurface> imgLoadPcxIo(Pointer<SdlIoStream> src) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Surface * SDLCALL IMG_LoadPNG_IO(SDL_IOStream *src)
 /// ```
+///
+/// See also:
+/// - [IMG_LoadPNG_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_LoadPNG_IO)
+///
 /// {@category image}
 Pointer<SdlSurface> imgLoadPngIo(Pointer<SdlIoStream> src) {
   final imgLoadPngIoLookupFunction = _libImage
@@ -2248,6 +2408,10 @@ Pointer<SdlSurface> imgLoadPngIo(Pointer<SdlIoStream> src) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Surface * SDLCALL IMG_LoadPNM_IO(SDL_IOStream *src)
 /// ```
+///
+/// See also:
+/// - [IMG_LoadPNM_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_LoadPNM_IO)
+///
 /// {@category image}
 Pointer<SdlSurface> imgLoadPnmIo(Pointer<SdlIoStream> src) {
   final imgLoadPnmIoLookupFunction = _libImage
@@ -2294,6 +2458,10 @@ Pointer<SdlSurface> imgLoadPnmIo(Pointer<SdlIoStream> src) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Surface * SDLCALL IMG_LoadSVG_IO(SDL_IOStream *src)
 /// ```
+///
+/// See also:
+/// - [IMG_LoadSVG_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_LoadSVG_IO)
+///
 /// {@category image}
 Pointer<SdlSurface> imgLoadSvgIo(Pointer<SdlIoStream> src) {
   final imgLoadSvgIoLookupFunction = _libImage
@@ -2328,6 +2496,10 @@ Pointer<SdlSurface> imgLoadSvgIo(Pointer<SdlIoStream> src) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Surface * SDLCALL IMG_LoadSizedSVG_IO(SDL_IOStream *src, int width, int height)
 /// ```
+///
+/// See also:
+/// - [IMG_LoadSizedSVG_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_LoadSizedSVG_IO)
+///
 /// {@category image}
 Pointer<SdlSurface> imgLoadSizedSvgIo(
   Pointer<SdlIoStream> src,
@@ -2385,6 +2557,10 @@ Pointer<SdlSurface> imgLoadSizedSvgIo(
 /// ```c
 /// extern SDL_DECLSPEC SDL_Surface * SDLCALL IMG_LoadQOI_IO(SDL_IOStream *src)
 /// ```
+///
+/// See also:
+/// - [IMG_LoadQOI_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_LoadQOI_IO)
+///
 /// {@category image}
 Pointer<SdlSurface> imgLoadQoiIo(Pointer<SdlIoStream> src) {
   final imgLoadQoiIoLookupFunction = _libImage
@@ -2430,6 +2606,10 @@ Pointer<SdlSurface> imgLoadQoiIo(Pointer<SdlIoStream> src) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Surface * SDLCALL IMG_LoadTGA_IO(SDL_IOStream *src)
 /// ```
+///
+/// See also:
+/// - [IMG_LoadTGA_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_LoadTGA_IO)
+///
 /// {@category image}
 Pointer<SdlSurface> imgLoadTgaIo(Pointer<SdlIoStream> src) {
   final imgLoadTgaIoLookupFunction = _libImage
@@ -2475,6 +2655,10 @@ Pointer<SdlSurface> imgLoadTgaIo(Pointer<SdlIoStream> src) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Surface * SDLCALL IMG_LoadTIF_IO(SDL_IOStream *src)
 /// ```
+///
+/// See also:
+/// - [IMG_LoadTIF_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_LoadTIF_IO)
+///
 /// {@category image}
 Pointer<SdlSurface> imgLoadTifIo(Pointer<SdlIoStream> src) {
   final imgLoadTifIoLookupFunction = _libImage
@@ -2520,6 +2704,10 @@ Pointer<SdlSurface> imgLoadTifIo(Pointer<SdlIoStream> src) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Surface * SDLCALL IMG_LoadWEBP_IO(SDL_IOStream *src)
 /// ```
+///
+/// See also:
+/// - [IMG_LoadWEBP_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_LoadWEBP_IO)
+///
 /// {@category image}
 Pointer<SdlSurface> imgLoadWebpIo(Pointer<SdlIoStream> src) {
   final imgLoadWebpIoLookupFunction = _libImage
@@ -2565,6 +2753,10 @@ Pointer<SdlSurface> imgLoadWebpIo(Pointer<SdlIoStream> src) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Surface * SDLCALL IMG_LoadXCF_IO(SDL_IOStream *src)
 /// ```
+///
+/// See also:
+/// - [IMG_LoadXCF_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_LoadXCF_IO)
+///
 /// {@category image}
 Pointer<SdlSurface> imgLoadXcfIo(Pointer<SdlIoStream> src) {
   final imgLoadXcfIoLookupFunction = _libImage
@@ -2610,6 +2802,10 @@ Pointer<SdlSurface> imgLoadXcfIo(Pointer<SdlIoStream> src) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Surface * SDLCALL IMG_LoadXPM_IO(SDL_IOStream *src)
 /// ```
+///
+/// See also:
+/// - [IMG_LoadXPM_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_LoadXPM_IO)
+///
 /// {@category image}
 Pointer<SdlSurface> imgLoadXpmIo(Pointer<SdlIoStream> src) {
   final imgLoadXpmIoLookupFunction = _libImage
@@ -2655,6 +2851,10 @@ Pointer<SdlSurface> imgLoadXpmIo(Pointer<SdlIoStream> src) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Surface * SDLCALL IMG_LoadXV_IO(SDL_IOStream *src)
 /// ```
+///
+/// See also:
+/// - [IMG_LoadXV_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_LoadXV_IO)
+///
 /// {@category image}
 Pointer<SdlSurface> imgLoadXvIo(Pointer<SdlIoStream> src) {
   final imgLoadXvIoLookupFunction = _libImage
@@ -2685,6 +2885,10 @@ Pointer<SdlSurface> imgLoadXvIo(Pointer<SdlIoStream> src) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Surface * SDLCALL IMG_ReadXPMFromArray(char **xpm)
 /// ```
+///
+/// See also:
+/// - [IMG_ReadXPMFromArray - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_ReadXPMFromArray)
+///
 /// {@category image}
 Pointer<SdlSurface> imgReadXpmFromArray(Pointer<Pointer<Int8>> xpm) {
   final imgReadXpmFromArrayLookupFunction = _libImage
@@ -2715,6 +2919,10 @@ Pointer<SdlSurface> imgReadXpmFromArray(Pointer<Pointer<Int8>> xpm) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Surface * SDLCALL IMG_ReadXPMFromArrayToRGB888(char **xpm)
 /// ```
+///
+/// See also:
+/// - [IMG_ReadXPMFromArrayToRGB888 - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_ReadXPMFromArrayToRGB888)
+///
 /// {@category image}
 Pointer<SdlSurface> imgReadXpmFromArrayToRgb888(Pointer<Pointer<Int8>> xpm) {
   final imgReadXpmFromArrayToRgb888LookupFunction = _libImage
@@ -2753,6 +2961,10 @@ Pointer<SdlSurface> imgReadXpmFromArrayToRgb888(Pointer<Pointer<Int8>> xpm) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL IMG_Save(SDL_Surface *surface, const char *file)
 /// ```
+///
+/// See also:
+/// - [IMG_Save - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_Save)
+///
 /// {@category image}
 bool imgSave(Pointer<SdlSurface> surface, String? file) {
   final imgSaveLookupFunction = _libImage
@@ -2801,6 +3013,10 @@ bool imgSave(Pointer<SdlSurface> surface, String? file) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL IMG_SaveTyped_IO(SDL_Surface *surface, SDL_IOStream *dst, bool closeio, const char *type)
 /// ```
+///
+/// See also:
+/// - [IMG_SaveTyped_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_SaveTyped_IO)
+///
 /// {@category image}
 bool imgSaveTypedIo(
   Pointer<SdlSurface> surface,
@@ -2853,6 +3069,10 @@ bool imgSaveTypedIo(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL IMG_SaveAVIF(SDL_Surface *surface, const char *file, int quality)
 /// ```
+///
+/// See also:
+/// - [IMG_SaveAVIF - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_SaveAVIF)
+///
 /// {@category image}
 bool imgSaveAvif(Pointer<SdlSurface> surface, String? file, int quality) {
   final imgSaveAvifLookupFunction = _libImage
@@ -2898,6 +3118,10 @@ bool imgSaveAvif(Pointer<SdlSurface> surface, String? file, int quality) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL IMG_SaveAVIF_IO(SDL_Surface *surface, SDL_IOStream *dst, bool closeio, int quality)
 /// ```
+///
+/// See also:
+/// - [IMG_SaveAVIF_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_SaveAVIF_IO)
+///
 /// {@category image}
 bool imgSaveAvifIo(
   Pointer<SdlSurface> surface,
@@ -2940,6 +3164,10 @@ bool imgSaveAvifIo(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL IMG_SaveBMP(SDL_Surface *surface, const char *file)
 /// ```
+///
+/// See also:
+/// - [IMG_SaveBMP - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_SaveBMP)
+///
 /// {@category image}
 bool imgSaveBmp(Pointer<SdlSurface> surface, String? file) {
   final imgSaveBmpLookupFunction = _libImage
@@ -2975,6 +3203,10 @@ bool imgSaveBmp(Pointer<SdlSurface> surface, String? file) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL IMG_SaveBMP_IO(SDL_Surface *surface, SDL_IOStream *dst, bool closeio)
 /// ```
+///
+/// See also:
+/// - [IMG_SaveBMP_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_SaveBMP_IO)
+///
 /// {@category image}
 bool imgSaveBmpIo(
   Pointer<SdlSurface> surface,
@@ -3014,6 +3246,10 @@ bool imgSaveBmpIo(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL IMG_SaveCUR(SDL_Surface *surface, const char *file)
 /// ```
+///
+/// See also:
+/// - [IMG_SaveCUR - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_SaveCUR)
+///
 /// {@category image}
 bool imgSaveCur(Pointer<SdlSurface> surface, String? file) {
   final imgSaveCurLookupFunction = _libImage
@@ -3049,6 +3285,10 @@ bool imgSaveCur(Pointer<SdlSurface> surface, String? file) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL IMG_SaveCUR_IO(SDL_Surface *surface, SDL_IOStream *dst, bool closeio)
 /// ```
+///
+/// See also:
+/// - [IMG_SaveCUR_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_SaveCUR_IO)
+///
 /// {@category image}
 bool imgSaveCurIo(
   Pointer<SdlSurface> surface,
@@ -3088,6 +3328,10 @@ bool imgSaveCurIo(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL IMG_SaveGIF(SDL_Surface *surface, const char *file)
 /// ```
+///
+/// See also:
+/// - [IMG_SaveGIF - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_SaveGIF)
+///
 /// {@category image}
 bool imgSaveGif(Pointer<SdlSurface> surface, String? file) {
   final imgSaveGifLookupFunction = _libImage
@@ -3123,6 +3367,10 @@ bool imgSaveGif(Pointer<SdlSurface> surface, String? file) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL IMG_SaveGIF_IO(SDL_Surface *surface, SDL_IOStream *dst, bool closeio)
 /// ```
+///
+/// See also:
+/// - [IMG_SaveGIF_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_SaveGIF_IO)
+///
 /// {@category image}
 bool imgSaveGifIo(
   Pointer<SdlSurface> surface,
@@ -3162,6 +3410,10 @@ bool imgSaveGifIo(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL IMG_SaveICO(SDL_Surface *surface, const char *file)
 /// ```
+///
+/// See also:
+/// - [IMG_SaveICO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_SaveICO)
+///
 /// {@category image}
 bool imgSaveIco(Pointer<SdlSurface> surface, String? file) {
   final imgSaveIcoLookupFunction = _libImage
@@ -3197,6 +3449,10 @@ bool imgSaveIco(Pointer<SdlSurface> surface, String? file) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL IMG_SaveICO_IO(SDL_Surface *surface, SDL_IOStream *dst, bool closeio)
 /// ```
+///
+/// See also:
+/// - [IMG_SaveICO_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_SaveICO_IO)
+///
 /// {@category image}
 bool imgSaveIcoIo(
   Pointer<SdlSurface> surface,
@@ -3238,6 +3494,10 @@ bool imgSaveIcoIo(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL IMG_SaveJPG(SDL_Surface *surface, const char *file, int quality)
 /// ```
+///
+/// See also:
+/// - [IMG_SaveJPG - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_SaveJPG)
+///
 /// {@category image}
 bool imgSaveJpg(Pointer<SdlSurface> surface, String? file, int quality) {
   final imgSaveJpgLookupFunction = _libImage
@@ -3283,6 +3543,10 @@ bool imgSaveJpg(Pointer<SdlSurface> surface, String? file, int quality) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL IMG_SaveJPG_IO(SDL_Surface *surface, SDL_IOStream *dst, bool closeio, int quality)
 /// ```
+///
+/// See also:
+/// - [IMG_SaveJPG_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_SaveJPG_IO)
+///
 /// {@category image}
 bool imgSaveJpgIo(
   Pointer<SdlSurface> surface,
@@ -3325,6 +3589,10 @@ bool imgSaveJpgIo(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL IMG_SavePNG(SDL_Surface *surface, const char *file)
 /// ```
+///
+/// See also:
+/// - [IMG_SavePNG - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_SavePNG)
+///
 /// {@category image}
 bool imgSavePng(Pointer<SdlSurface> surface, String? file) {
   final imgSavePngLookupFunction = _libImage
@@ -3360,6 +3628,10 @@ bool imgSavePng(Pointer<SdlSurface> surface, String? file) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL IMG_SavePNG_IO(SDL_Surface *surface, SDL_IOStream *dst, bool closeio)
 /// ```
+///
+/// See also:
+/// - [IMG_SavePNG_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_SavePNG_IO)
+///
 /// {@category image}
 bool imgSavePngIo(
   Pointer<SdlSurface> surface,
@@ -3399,6 +3671,10 @@ bool imgSavePngIo(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL IMG_SaveTGA(SDL_Surface *surface, const char *file)
 /// ```
+///
+/// See also:
+/// - [IMG_SaveTGA - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_SaveTGA)
+///
 /// {@category image}
 bool imgSaveTga(Pointer<SdlSurface> surface, String? file) {
   final imgSaveTgaLookupFunction = _libImage
@@ -3434,6 +3710,10 @@ bool imgSaveTga(Pointer<SdlSurface> surface, String? file) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL IMG_SaveTGA_IO(SDL_Surface *surface, SDL_IOStream *dst, bool closeio)
 /// ```
+///
+/// See also:
+/// - [IMG_SaveTGA_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_SaveTGA_IO)
+///
 /// {@category image}
 bool imgSaveTgaIo(
   Pointer<SdlSurface> surface,
@@ -3477,6 +3757,10 @@ bool imgSaveTgaIo(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL IMG_SaveWEBP(SDL_Surface *surface, const char *file, float quality)
 /// ```
+///
+/// See also:
+/// - [IMG_SaveWEBP - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_SaveWEBP)
+///
 /// {@category image}
 bool imgSaveWebp(Pointer<SdlSurface> surface, String? file, double quality) {
   final imgSaveWebpLookupFunction = _libImage
@@ -3524,6 +3808,10 @@ bool imgSaveWebp(Pointer<SdlSurface> surface, String? file, double quality) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL IMG_SaveWEBP_IO(SDL_Surface *surface, SDL_IOStream *dst, bool closeio, float quality)
 /// ```
+///
+/// See also:
+/// - [IMG_SaveWEBP_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_SaveWEBP_IO)
+///
 /// {@category image}
 bool imgSaveWebpIo(
   Pointer<SdlSurface> surface,
@@ -3573,6 +3861,10 @@ bool imgSaveWebpIo(
 /// ```c
 /// extern SDL_DECLSPEC IMG_Animation * SDLCALL IMG_LoadAnimation(const char *file)
 /// ```
+///
+/// See also:
+/// - [IMG_LoadAnimation - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_LoadAnimation)
+///
 /// {@category image}
 Pointer<ImgAnimation> imgLoadAnimation(String? file) {
   final imgLoadAnimationLookupFunction = _libImage
@@ -3616,6 +3908,10 @@ Pointer<ImgAnimation> imgLoadAnimation(String? file) {
 /// ```c
 /// extern SDL_DECLSPEC IMG_Animation * SDLCALL IMG_LoadAnimation_IO(SDL_IOStream *src, bool closeio)
 /// ```
+///
+/// See also:
+/// - [IMG_LoadAnimation_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_LoadAnimation_IO)
+///
 /// {@category image}
 Pointer<ImgAnimation> imgLoadAnimationIo(
   Pointer<SdlIoStream> src,
@@ -3666,6 +3962,10 @@ Pointer<ImgAnimation> imgLoadAnimationIo(
 /// ```c
 /// extern SDL_DECLSPEC IMG_Animation * SDLCALL IMG_LoadAnimationTyped_IO(SDL_IOStream *src, bool closeio, const char *type)
 /// ```
+///
+/// See also:
+/// - [IMG_LoadAnimationTyped_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_LoadAnimationTyped_IO)
+///
 /// {@category image}
 Pointer<ImgAnimation> imgLoadAnimationTypedIo(
   Pointer<SdlIoStream> src,
@@ -3724,6 +4024,10 @@ Pointer<ImgAnimation> imgLoadAnimationTypedIo(
 /// ```c
 /// extern SDL_DECLSPEC IMG_Animation *SDLCALL IMG_LoadANIAnimation_IO(SDL_IOStream *src)
 /// ```
+///
+/// See also:
+/// - [IMG_LoadANIAnimation_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_LoadANIAnimation_IO)
+///
 /// {@category image}
 Pointer<ImgAnimation> imgLoadAniAnimationIo(Pointer<SdlIoStream> src) {
   final imgLoadAniAnimationIoLookupFunction = _libImage
@@ -3763,6 +4067,10 @@ Pointer<ImgAnimation> imgLoadAniAnimationIo(Pointer<SdlIoStream> src) {
 /// ```c
 /// extern SDL_DECLSPEC IMG_Animation *SDLCALL IMG_LoadAPNGAnimation_IO(SDL_IOStream *src)
 /// ```
+///
+/// See also:
+/// - [IMG_LoadAPNGAnimation_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_LoadAPNGAnimation_IO)
+///
 /// {@category image}
 Pointer<ImgAnimation> imgLoadApngAnimationIo(Pointer<SdlIoStream> src) {
   final imgLoadApngAnimationIoLookupFunction = _libImage
@@ -3802,6 +4110,10 @@ Pointer<ImgAnimation> imgLoadApngAnimationIo(Pointer<SdlIoStream> src) {
 /// ```c
 /// extern SDL_DECLSPEC IMG_Animation *SDLCALL IMG_LoadAVIFAnimation_IO(SDL_IOStream *src)
 /// ```
+///
+/// See also:
+/// - [IMG_LoadAVIFAnimation_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_LoadAVIFAnimation_IO)
+///
 /// {@category image}
 Pointer<ImgAnimation> imgLoadAvifAnimationIo(Pointer<SdlIoStream> src) {
   final imgLoadAvifAnimationIoLookupFunction = _libImage
@@ -3838,6 +4150,10 @@ Pointer<ImgAnimation> imgLoadAvifAnimationIo(Pointer<SdlIoStream> src) {
 /// ```c
 /// extern SDL_DECLSPEC IMG_Animation * SDLCALL IMG_LoadGIFAnimation_IO(SDL_IOStream *src)
 /// ```
+///
+/// See also:
+/// - [IMG_LoadGIFAnimation_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_LoadGIFAnimation_IO)
+///
 /// {@category image}
 Pointer<ImgAnimation> imgLoadGifAnimationIo(Pointer<SdlIoStream> src) {
   final imgLoadGifAnimationIoLookupFunction = _libImage
@@ -3874,6 +4190,10 @@ Pointer<ImgAnimation> imgLoadGifAnimationIo(Pointer<SdlIoStream> src) {
 /// ```c
 /// extern SDL_DECLSPEC IMG_Animation * SDLCALL IMG_LoadWEBPAnimation_IO(SDL_IOStream *src)
 /// ```
+///
+/// See also:
+/// - [IMG_LoadWEBPAnimation_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_LoadWEBPAnimation_IO)
+///
 /// {@category image}
 Pointer<ImgAnimation> imgLoadWebpAnimationIo(Pointer<SdlIoStream> src) {
   final imgLoadWebpAnimationIoLookupFunction = _libImage
@@ -3906,6 +4226,10 @@ Pointer<ImgAnimation> imgLoadWebpAnimationIo(Pointer<SdlIoStream> src) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL IMG_SaveAnimation(IMG_Animation *anim, const char *file)
 /// ```
+///
+/// See also:
+/// - [IMG_SaveAnimation - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_SaveAnimation)
+///
 /// {@category image}
 bool imgSaveAnimation(Pointer<ImgAnimation> anim, String? file) {
   final imgSaveAnimationLookupFunction = _libImage
@@ -3950,6 +4274,10 @@ bool imgSaveAnimation(Pointer<ImgAnimation> anim, String? file) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL IMG_SaveAnimationTyped_IO(IMG_Animation *anim, SDL_IOStream *dst, bool closeio, const char *type)
 /// ```
+///
+/// See also:
+/// - [IMG_SaveAnimationTyped_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_SaveAnimationTyped_IO)
+///
 /// {@category image}
 bool imgSaveAnimationTypedIo(
   Pointer<ImgAnimation> anim,
@@ -4008,6 +4336,10 @@ bool imgSaveAnimationTypedIo(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL IMG_SaveANIAnimation_IO(IMG_Animation *anim, SDL_IOStream *dst, bool closeio)
 /// ```
+///
+/// See also:
+/// - [IMG_SaveANIAnimation_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_SaveANIAnimation_IO)
+///
 /// {@category image}
 bool imgSaveAniAnimationIo(
   Pointer<ImgAnimation> anim,
@@ -4055,6 +4387,10 @@ bool imgSaveAniAnimationIo(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL IMG_SaveAPNGAnimation_IO(IMG_Animation *anim, SDL_IOStream *dst, bool closeio)
 /// ```
+///
+/// See also:
+/// - [IMG_SaveAPNGAnimation_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_SaveAPNGAnimation_IO)
+///
 /// {@category image}
 bool imgSaveApngAnimationIo(
   Pointer<ImgAnimation> anim,
@@ -4104,6 +4440,10 @@ bool imgSaveApngAnimationIo(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL IMG_SaveAVIFAnimation_IO(IMG_Animation *anim, SDL_IOStream *dst, bool closeio, int quality)
 /// ```
+///
+/// See also:
+/// - [IMG_SaveAVIFAnimation_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_SaveAVIFAnimation_IO)
+///
 /// {@category image}
 bool imgSaveAvifAnimationIo(
   Pointer<ImgAnimation> anim,
@@ -4154,6 +4494,10 @@ bool imgSaveAvifAnimationIo(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL IMG_SaveGIFAnimation_IO(IMG_Animation *anim, SDL_IOStream *dst, bool closeio)
 /// ```
+///
+/// See also:
+/// - [IMG_SaveGIFAnimation_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_SaveGIFAnimation_IO)
+///
 /// {@category image}
 bool imgSaveGifAnimationIo(
   Pointer<ImgAnimation> anim,
@@ -4205,6 +4549,10 @@ bool imgSaveGifAnimationIo(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL IMG_SaveWEBPAnimation_IO(IMG_Animation *anim, SDL_IOStream *dst, bool closeio, int quality)
 /// ```
+///
+/// See also:
+/// - [IMG_SaveWEBPAnimation_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_SaveWEBPAnimation_IO)
+///
 /// {@category image}
 bool imgSaveWebpAnimationIo(
   Pointer<ImgAnimation> anim,
@@ -4248,6 +4596,10 @@ bool imgSaveWebpAnimationIo(
 /// ```c
 /// extern SDL_DECLSPEC SDL_Cursor * SDLCALL IMG_CreateAnimatedCursor(IMG_Animation *anim, int hot_x, int hot_y)
 /// ```
+///
+/// See also:
+/// - [IMG_CreateAnimatedCursor - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_CreateAnimatedCursor)
+///
 /// {@category image}
 Pointer<SdlCursor> imgCreateAnimatedCursor(
   Pointer<ImgAnimation> anim,
@@ -4291,6 +4643,10 @@ Pointer<SdlCursor> imgCreateAnimatedCursor(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL IMG_FreeAnimation(IMG_Animation *anim)
 /// ```
+///
+/// See also:
+/// - [IMG_FreeAnimation - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_FreeAnimation)
+///
 /// {@category image}
 void imgFreeAnimation(Pointer<ImgAnimation> anim) {
   final imgFreeAnimationLookupFunction = _libImage
@@ -4329,6 +4685,10 @@ void imgFreeAnimation(Pointer<ImgAnimation> anim) {
 /// ```c
 /// extern SDL_DECLSPEC IMG_AnimationEncoder * SDLCALL IMG_CreateAnimationEncoder(const char *file)
 /// ```
+///
+/// See also:
+/// - [IMG_CreateAnimationEncoder - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_CreateAnimationEncoder)
+///
 /// {@category image}
 Pointer<ImgAnimationEncoder> imgCreateAnimationEncoder(String? file) {
   final imgCreateAnimationEncoderLookupFunction = _libImage
@@ -4374,6 +4734,10 @@ Pointer<ImgAnimationEncoder> imgCreateAnimationEncoder(String? file) {
 /// ```c
 /// extern SDL_DECLSPEC IMG_AnimationEncoder * SDLCALL IMG_CreateAnimationEncoder_IO(SDL_IOStream *dst, bool closeio, const char *type)
 /// ```
+///
+/// See also:
+/// - [IMG_CreateAnimationEncoder_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_CreateAnimationEncoder_IO)
+///
 /// {@category image}
 Pointer<ImgAnimationEncoder> imgCreateAnimationEncoderIo(
   Pointer<SdlIoStream> dst,
@@ -4454,6 +4818,10 @@ Pointer<ImgAnimationEncoder> imgCreateAnimationEncoderIo(
 /// ```c
 /// extern SDL_DECLSPEC IMG_AnimationEncoder * SDLCALL IMG_CreateAnimationEncoderWithProperties(SDL_PropertiesID props)
 /// ```
+///
+/// See also:
+/// - [IMG_CreateAnimationEncoderWithProperties - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_CreateAnimationEncoderWithProperties)
+///
 /// {@category image}
 Pointer<ImgAnimationEncoder> imgCreateAnimationEncoderWithProperties(
   int props,
@@ -4488,6 +4856,10 @@ Pointer<ImgAnimationEncoder> imgCreateAnimationEncoderWithProperties(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL IMG_AddAnimationEncoderFrame(IMG_AnimationEncoder *encoder, SDL_Surface *surface, Uint64 duration)
 /// ```
+///
+/// See also:
+/// - [IMG_AddAnimationEncoderFrame - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_AddAnimationEncoderFrame)
+///
 /// {@category image}
 bool imgAddAnimationEncoderFrame(
   Pointer<ImgAnimationEncoder> encoder,
@@ -4529,6 +4901,10 @@ bool imgAddAnimationEncoderFrame(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL IMG_CloseAnimationEncoder(IMG_AnimationEncoder *encoder)
 /// ```
+///
+/// See also:
+/// - [IMG_CloseAnimationEncoder - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_CloseAnimationEncoder)
+///
 /// {@category image}
 bool imgCloseAnimationEncoder(Pointer<ImgAnimationEncoder> encoder) {
   final imgCloseAnimationEncoderLookupFunction = _libImage
@@ -4568,6 +4944,10 @@ bool imgCloseAnimationEncoder(Pointer<ImgAnimationEncoder> encoder) {
 /// ```c
 /// extern SDL_DECLSPEC IMG_AnimationDecoder * SDLCALL IMG_CreateAnimationDecoder(const char *file)
 /// ```
+///
+/// See also:
+/// - [IMG_CreateAnimationDecoder - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_CreateAnimationDecoder)
+///
 /// {@category image}
 Pointer<ImgAnimationDecoder> imgCreateAnimationDecoder(String? file) {
   final imgCreateAnimationDecoderLookupFunction = _libImage
@@ -4614,6 +4994,10 @@ Pointer<ImgAnimationDecoder> imgCreateAnimationDecoder(String? file) {
 /// ```c
 /// extern SDL_DECLSPEC IMG_AnimationDecoder * SDLCALL IMG_CreateAnimationDecoder_IO(SDL_IOStream *src, bool closeio, const char *type)
 /// ```
+///
+/// See also:
+/// - [IMG_CreateAnimationDecoder_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_CreateAnimationDecoder_IO)
+///
 /// {@category image}
 Pointer<ImgAnimationDecoder> imgCreateAnimationDecoderIo(
   Pointer<SdlIoStream> src,
@@ -4685,6 +5069,10 @@ Pointer<ImgAnimationDecoder> imgCreateAnimationDecoderIo(
 /// ```c
 /// extern SDL_DECLSPEC IMG_AnimationDecoder * SDLCALL IMG_CreateAnimationDecoderWithProperties(SDL_PropertiesID props)
 /// ```
+///
+/// See also:
+/// - [IMG_CreateAnimationDecoderWithProperties - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_CreateAnimationDecoderWithProperties)
+///
 /// {@category image}
 Pointer<ImgAnimationDecoder> imgCreateAnimationDecoderWithProperties(
   int props,
@@ -4720,6 +5108,10 @@ Pointer<ImgAnimationDecoder> imgCreateAnimationDecoderWithProperties(
 /// ```c
 /// extern SDL_DECLSPEC SDL_PropertiesID SDLCALL IMG_GetAnimationDecoderProperties(IMG_AnimationDecoder *decoder)
 /// ```
+///
+/// See also:
+/// - [IMG_GetAnimationDecoderProperties - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_GetAnimationDecoderProperties)
+///
 /// {@category image}
 int imgGetAnimationDecoderProperties(Pointer<ImgAnimationDecoder> decoder) {
   final imgGetAnimationDecoderPropertiesLookupFunction = _libImage
@@ -4735,7 +5127,7 @@ int imgGetAnimationDecoderProperties(Pointer<ImgAnimationDecoder> decoder) {
 ///
 /// This function decodes the next frame in the animation decoder, returning it
 /// as an SDL_Surface. The returned surface should be freed with
-/// SDL_FreeSurface() when no longer needed.
+/// SDL_DestroySurface() when no longer needed.
 ///
 /// If the animation decoder has no more frames or an error occurred while
 /// decoding the frame, this function returns false. In that case, please call
@@ -4766,6 +5158,10 @@ int imgGetAnimationDecoderProperties(Pointer<ImgAnimationDecoder> decoder) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL IMG_GetAnimationDecoderFrame(IMG_AnimationDecoder *decoder, SDL_Surface **frame, Uint64 *duration)
 /// ```
+///
+/// See also:
+/// - [IMG_GetAnimationDecoderFrame - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_GetAnimationDecoderFrame)
+///
 /// {@category image}
 bool imgGetAnimationDecoderFrame(
   Pointer<ImgAnimationDecoder> decoder,
@@ -4802,6 +5198,10 @@ bool imgGetAnimationDecoderFrame(
 /// ```c
 /// extern SDL_DECLSPEC IMG_AnimationDecoderStatus SDLCALL IMG_GetAnimationDecoderStatus(IMG_AnimationDecoder *decoder)
 /// ```
+///
+/// See also:
+/// - [IMG_GetAnimationDecoderStatus - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_GetAnimationDecoderStatus)
+///
 /// {@category image}
 int imgGetAnimationDecoderStatus(Pointer<ImgAnimationDecoder> decoder) {
   final imgGetAnimationDecoderStatusLookupFunction = _libImage
@@ -4834,6 +5234,10 @@ int imgGetAnimationDecoderStatus(Pointer<ImgAnimationDecoder> decoder) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL IMG_ResetAnimationDecoder(IMG_AnimationDecoder *decoder)
 /// ```
+///
+/// See also:
+/// - [IMG_ResetAnimationDecoder - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_ResetAnimationDecoder)
+///
 /// {@category image}
 bool imgResetAnimationDecoder(Pointer<ImgAnimationDecoder> decoder) {
   final imgResetAnimationDecoderLookupFunction = _libImage
@@ -4863,6 +5267,10 @@ bool imgResetAnimationDecoder(Pointer<ImgAnimationDecoder> decoder) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL IMG_CloseAnimationDecoder(IMG_AnimationDecoder *decoder)
 /// ```
+///
+/// See also:
+/// - [IMG_CloseAnimationDecoder - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_CloseAnimationDecoder)
+///
 /// {@category image}
 bool imgCloseAnimationDecoder(Pointer<ImgAnimationDecoder> decoder) {
   final imgCloseAnimationDecoderLookupFunction = _libImage

@@ -22,6 +22,10 @@ part of '../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetPlatform(void)
 /// ```
+///
+/// See also:
+/// - [SDL_GetPlatform - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetPlatform)
+///
 /// {@category platform}
 String? sdlGetPlatform() {
   final sdlGetPlatformLookupFunction = _libSdl

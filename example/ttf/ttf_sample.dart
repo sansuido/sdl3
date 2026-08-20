@@ -29,6 +29,7 @@
  *
  */
 import 'dart:ffi';
+
 import 'package:sdl3/sdl3.dart';
 
 // Define screen dimensions

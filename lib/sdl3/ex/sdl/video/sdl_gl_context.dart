@@ -17,6 +17,10 @@ extension SdlGlContextPointerEx on Pointer<SdlGlContext> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GL_DestroyContext(SDL_GLContext context)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GL_DestroyContext - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GL_DestroyContext)
+  ///
   /// {@category video}
   bool destroy() => sdlGlDestroyContext(this);
 }

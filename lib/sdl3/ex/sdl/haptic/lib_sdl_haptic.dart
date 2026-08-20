@@ -16,6 +16,10 @@ part of '../../../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC SDL_HapticID * SDLCALL SDL_GetHaptics(int *count)
 /// ```
+///
+/// See also:
+/// - [SDL_GetHaptics - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetHaptics)
+///
 /// {@category haptic}
 List<int> sdlxGetHaptics() {
   final result = <int>[];
@@ -46,6 +50,10 @@ List<int> sdlxGetHaptics() {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_HapticEffectSupported(SDL_Haptic *haptic, const SDL_HapticEffect *effect)
 /// ```
+///
+/// See also:
+/// - [SDL_HapticEffectSupported - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_HapticEffectSupported)
+///
 /// {@category haptic}
 bool sdlxHapticEffectSupported(
   Pointer<SdlHaptic> haptic,
@@ -75,6 +83,10 @@ bool sdlxHapticEffectSupported(
 /// ```c
 /// extern SDL_DECLSPEC SDL_HapticEffectID SDLCALL SDL_CreateHapticEffect(SDL_Haptic *haptic, const SDL_HapticEffect *effect)
 /// ```
+///
+/// See also:
+/// - [SDL_CreateHapticEffect - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CreateHapticEffect)
+///
 /// {@category haptic}
 int sdlxCreateHapticEffect(Pointer<SdlHaptic> haptic, SdlxHapticEffect effect) {
   final effectPointer = effect.calloc();
@@ -106,6 +118,10 @@ int sdlxCreateHapticEffect(Pointer<SdlHaptic> haptic, SdlxHapticEffect effect) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_UpdateHapticEffect(SDL_Haptic *haptic, SDL_HapticEffectID effect, const SDL_HapticEffect *data)
 /// ```
+///
+/// See also:
+/// - [SDL_UpdateHapticEffect - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_UpdateHapticEffect)
+///
 /// {@category haptic}
 bool sdlxUpdateHapticEffect(
   Pointer<SdlHaptic> haptic,

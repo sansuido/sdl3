@@ -21,6 +21,10 @@ extension SdlGpuCopyPassPointerEx on Pointer<SdlGpuCopyPass> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_UploadToGPUTexture( SDL_GPUCopyPass *copy_pass, const SDL_GPUTextureTransferInfo *source, const SDL_GPUTextureRegion *destination, bool cycle)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_UploadToGPUTexture - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_UploadToGPUTexture)
+  ///
   /// {@category gpu}
   void uploadToTexture(
     SdlxGpuTextureTransferInfo source,
@@ -45,6 +49,10 @@ extension SdlGpuCopyPassPointerEx on Pointer<SdlGpuCopyPass> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_UploadToGPUBuffer( SDL_GPUCopyPass *copy_pass, const SDL_GPUTransferBufferLocation *source, const SDL_GPUBufferRegion *destination, bool cycle)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_UploadToGPUBuffer - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_UploadToGPUBuffer)
+  ///
   /// {@category gpu}
   void uploadToBuffer(
     SdlxGpuTransferBufferLocation source,
@@ -76,6 +84,10 @@ extension SdlGpuCopyPassPointerEx on Pointer<SdlGpuCopyPass> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_CopyGPUTextureToTexture( SDL_GPUCopyPass *copy_pass, const SDL_GPUTextureLocation *source, const SDL_GPUTextureLocation *destination, Uint32 w, Uint32 h, Uint32 d, bool cycle)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_CopyGPUTextureToTexture - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CopyGPUTextureToTexture)
+  ///
   /// {@category gpu}
   void copyTextureToTexture(
     SdlxGpuTextureLocation source,
@@ -112,6 +124,10 @@ extension SdlGpuCopyPassPointerEx on Pointer<SdlGpuCopyPass> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_CopyGPUBufferToBuffer( SDL_GPUCopyPass *copy_pass, const SDL_GPUBufferLocation *source, const SDL_GPUBufferLocation *destination, Uint32 size, bool cycle)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_CopyGPUBufferToBuffer - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CopyGPUBufferToBuffer)
+  ///
   /// {@category gpu}
   void copyBufferToBuffer(
     SdlxGpuBufferLocation source,
@@ -137,6 +153,10 @@ extension SdlGpuCopyPassPointerEx on Pointer<SdlGpuCopyPass> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_DownloadFromGPUTexture( SDL_GPUCopyPass *copy_pass, const SDL_GPUTextureRegion *source, const SDL_GPUTextureTransferInfo *destination)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_DownloadFromGPUTexture - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_DownloadFromGPUTexture)
+  ///
   /// {@category gpu}
   void downloadFromTexture(
     SdlxGpuTextureRegion source,
@@ -158,6 +178,10 @@ extension SdlGpuCopyPassPointerEx on Pointer<SdlGpuCopyPass> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_DownloadFromGPUBuffer( SDL_GPUCopyPass *copy_pass, const SDL_GPUBufferRegion *source, const SDL_GPUTransferBufferLocation *destination)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_DownloadFromGPUBuffer - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_DownloadFromGPUBuffer)
+  ///
   /// {@category gpu}
   void downloadFromBuffer(
     SdlxGpuBufferRegion source,
@@ -174,6 +198,10 @@ extension SdlGpuCopyPassPointerEx on Pointer<SdlGpuCopyPass> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_EndGPUCopyPass( SDL_GPUCopyPass *copy_pass)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_EndGPUCopyPass - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_EndGPUCopyPass)
+  ///
   /// {@category gpu}
   void end() => sdlEndGpuCopyPass(this);
 }

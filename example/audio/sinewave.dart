@@ -2,6 +2,7 @@
 import 'dart:ffi';
 import 'dart:math' as math;
 import 'dart:typed_data';
+
 import 'package:sdl3/sdl3.dart';
 
 void sinewave() {

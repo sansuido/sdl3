@@ -2,6 +2,7 @@
 // 5.シューティング基本
 // 5.Shooting basics
 import 'dart:ffi';
+
 import 'package:sdl3/sdl3.dart';
 
 const gTitle = 'DXLIB Tutorial 05';

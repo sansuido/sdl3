@@ -12,6 +12,10 @@ extension SdlGpuComputePassPointerEx on Pointer<SdlGpuComputePass> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_BindGPUComputePipeline( SDL_GPUComputePass *compute_pass, SDL_GPUComputePipeline *compute_pipeline)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_BindGPUComputePipeline - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_BindGPUComputePipeline)
+  ///
   /// {@category gpu}
   void bindPipeline(Pointer<SdlGpuComputePipeline> computePipeline) =>
       sdlBindGpuComputePipeline(this, computePipeline);
@@ -38,6 +42,10 @@ extension SdlGpuComputePassPointerEx on Pointer<SdlGpuComputePass> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_BindGPUComputeSamplers( SDL_GPUComputePass *compute_pass, Uint32 first_slot, const SDL_GPUTextureSamplerBinding *texture_sampler_bindings, Uint32 num_bindings)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_BindGPUComputeSamplers - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_BindGPUComputeSamplers)
+  ///
   /// {@category gpu}
   void bindSamplers(
     List<SdlxGpuTextureSamplerBinding> bindings, {
@@ -65,6 +73,10 @@ extension SdlGpuComputePassPointerEx on Pointer<SdlGpuComputePass> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_BindGPUComputeStorageTextures( SDL_GPUComputePass *compute_pass, Uint32 first_slot, SDL_GPUTexture *const *storage_textures, Uint32 num_bindings)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_BindGPUComputeStorageTextures - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_BindGPUComputeStorageTextures)
+  ///
   /// {@category gpu}
   void bindStorageTextures(
     List<Pointer<SdlGpuTexture>> storageTextures, {
@@ -96,6 +108,10 @@ extension SdlGpuComputePassPointerEx on Pointer<SdlGpuComputePass> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_BindGPUComputeStorageBuffers( SDL_GPUComputePass *compute_pass, Uint32 first_slot, SDL_GPUBuffer *const *storage_buffers, Uint32 num_bindings)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_BindGPUComputeStorageBuffers - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_BindGPUComputeStorageBuffers)
+  ///
   /// {@category gpu}
   void bindStorageBuffers(
     List<Pointer<SdlGpuBuffer>> storageBuffers, {
@@ -129,6 +145,10 @@ extension SdlGpuComputePassPointerEx on Pointer<SdlGpuComputePass> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_DispatchGPUCompute( SDL_GPUComputePass *compute_pass, Uint32 groupcount_x, Uint32 groupcount_y, Uint32 groupcount_z)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_DispatchGPUCompute - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_DispatchGPUCompute)
+  ///
   /// {@category gpu}
   void dispatch(int groupcountX, int groupcountY, int groupcountZ) =>
       sdlDispatchGpuCompute(this, groupcountX, groupcountY, groupcountZ);
@@ -154,6 +174,10 @@ extension SdlGpuComputePassPointerEx on Pointer<SdlGpuComputePass> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_DispatchGPUComputeIndirect( SDL_GPUComputePass *compute_pass, SDL_GPUBuffer *buffer, Uint32 offset)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_DispatchGPUComputeIndirect - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_DispatchGPUComputeIndirect)
+  ///
   /// {@category gpu}
   void dispatchIndirect(Pointer<SdlGpuBuffer> buffer, int offset) =>
       sdlDispatchGpuComputeIndirect(this, buffer, offset);
@@ -171,6 +195,10 @@ extension SdlGpuComputePassPointerEx on Pointer<SdlGpuComputePass> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_EndGPUComputePass( SDL_GPUComputePass *compute_pass)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_EndGPUComputePass - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_EndGPUComputePass)
+  ///
   /// {@category gpu}
   void end() => sdlEndGpuComputePass(this);
 }

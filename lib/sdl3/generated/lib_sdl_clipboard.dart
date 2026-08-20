@@ -18,6 +18,10 @@ part of '../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetClipboardText(const char *text)
 /// ```
+///
+/// See also:
+/// - [SDL_SetClipboardText - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetClipboardText)
+///
 /// {@category clipboard}
 bool sdlSetClipboardText(String? text) {
   final sdlSetClipboardTextLookupFunction = _libSdl
@@ -51,6 +55,10 @@ bool sdlSetClipboardText(String? text) {
 /// ```c
 /// extern SDL_DECLSPEC char * SDLCALL SDL_GetClipboardText(void)
 /// ```
+///
+/// See also:
+/// - [SDL_GetClipboardText - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetClipboardText)
+///
 /// {@category clipboard}
 Pointer<Int8> sdlGetClipboardText() {
   final sdlGetClipboardTextLookupFunction = _libSdl
@@ -75,6 +83,10 @@ Pointer<Int8> sdlGetClipboardText() {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_HasClipboardText(void)
 /// ```
+///
+/// See also:
+/// - [SDL_HasClipboardText - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_HasClipboardText)
+///
 /// {@category clipboard}
 bool sdlHasClipboardText() {
   final sdlHasClipboardTextLookupFunction = _libSdl
@@ -99,6 +111,10 @@ bool sdlHasClipboardText() {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetPrimarySelectionText(const char *text)
 /// ```
+///
+/// See also:
+/// - [SDL_SetPrimarySelectionText - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetPrimarySelectionText)
+///
 /// {@category clipboard}
 bool sdlSetPrimarySelectionText(String? text) {
   final sdlSetPrimarySelectionTextLookupFunction = _libSdl
@@ -132,6 +148,10 @@ bool sdlSetPrimarySelectionText(String? text) {
 /// ```c
 /// extern SDL_DECLSPEC char * SDLCALL SDL_GetPrimarySelectionText(void)
 /// ```
+///
+/// See also:
+/// - [SDL_GetPrimarySelectionText - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetPrimarySelectionText)
+///
 /// {@category clipboard}
 Pointer<Int8> sdlGetPrimarySelectionText() {
   final sdlGetPrimarySelectionTextLookupFunction = _libSdl
@@ -157,6 +177,10 @@ Pointer<Int8> sdlGetPrimarySelectionText() {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_HasPrimarySelectionText(void)
 /// ```
+///
+/// See also:
+/// - [SDL_HasPrimarySelectionText - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_HasPrimarySelectionText)
+///
 /// {@category clipboard}
 bool sdlHasPrimarySelectionText() {
   final sdlHasPrimarySelectionTextLookupFunction = _libSdl
@@ -200,6 +224,10 @@ bool sdlHasPrimarySelectionText() {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetClipboardData(SDL_ClipboardDataCallback callback, SDL_ClipboardCleanupCallback cleanup, void *userdata, const char *const *mime_types, size_t num_mime_types)
 /// ```
+///
+/// See also:
+/// - [SDL_SetClipboardData - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetClipboardData)
+///
 /// {@category clipboard}
 bool sdlSetClipboardData(
   Pointer<NativeFunction<SdlClipboardDataCallback>> callback,
@@ -249,6 +277,10 @@ bool sdlSetClipboardData(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_ClearClipboardData(void)
 /// ```
+///
+/// See also:
+/// - [SDL_ClearClipboardData - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ClearClipboardData)
+///
 /// {@category clipboard}
 bool sdlClearClipboardData() {
   final sdlClearClipboardDataLookupFunction = _libSdl
@@ -280,6 +312,10 @@ bool sdlClearClipboardData() {
 /// ```c
 /// extern SDL_DECLSPEC void * SDLCALL SDL_GetClipboardData(const char *mime_type, size_t *size)
 /// ```
+///
+/// See also:
+/// - [SDL_GetClipboardData - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetClipboardData)
+///
 /// {@category clipboard}
 Pointer<Void> sdlGetClipboardData(String? mimeType, Pointer<Size> size) {
   final sdlGetClipboardDataLookupFunction = _libSdl
@@ -310,6 +346,10 @@ Pointer<Void> sdlGetClipboardData(String? mimeType, Pointer<Size> size) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_HasClipboardData(const char *mime_type)
 /// ```
+///
+/// See also:
+/// - [SDL_HasClipboardData - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_HasClipboardData)
+///
 /// {@category clipboard}
 bool sdlHasClipboardData(String? mimeType) {
   final sdlHasClipboardDataLookupFunction = _libSdl
@@ -341,6 +381,10 @@ bool sdlHasClipboardData(String? mimeType) {
 /// ```c
 /// extern SDL_DECLSPEC char ** SDLCALL SDL_GetClipboardMimeTypes(size_t *num_mime_types)
 /// ```
+///
+/// See also:
+/// - [SDL_GetClipboardMimeTypes - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetClipboardMimeTypes)
+///
 /// {@category clipboard}
 Pointer<Pointer<Int8>> sdlGetClipboardMimeTypes(Pointer<Size> numMimeTypes) {
   final sdlGetClipboardMimeTypesLookupFunction = _libSdl

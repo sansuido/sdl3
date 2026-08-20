@@ -44,6 +44,10 @@ extension SdlProcessEx on SdlProcess {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Process * SDLCALL SDL_CreateProcess(const char * const *args, bool pipe_stdio)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_CreateProcess - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CreateProcess)
+  ///
   /// {@category process}
   static Pointer<SdlProcess> create(
     List<String> args, {
@@ -125,6 +129,10 @@ extension SdlProcessEx on SdlProcess {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Process * SDLCALL SDL_CreateProcessWithProperties(SDL_PropertiesID props)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_CreateProcessWithProperties - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CreateProcessWithProperties)
+  ///
   /// {@category process}
   static Pointer<SdlProcess> createWithProperties(int props) =>
       sdlCreateProcessWithProperties(props);
@@ -163,6 +171,10 @@ extension SdlProcessPointerEx on Pointer<SdlProcess> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_PropertiesID SDLCALL SDL_GetProcessProperties(SDL_Process *process)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetProcessProperties - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetProcessProperties)
+  ///
   /// {@category process}
   int getProperties() => sdlGetProcessProperties(this);
 
@@ -198,6 +210,10 @@ extension SdlProcessPointerEx on Pointer<SdlProcess> {
   /// ```c
   /// extern SDL_DECLSPEC void * SDLCALL SDL_ReadProcess(SDL_Process *process, size_t *datasize, int *exitcode)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_ReadProcess - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ReadProcess)
+  ///
   /// {@category process}
   ({Uint8List data, int exitcode, int datasize})? read() =>
       sdlxReadProcess(this);
@@ -229,6 +245,10 @@ extension SdlProcessPointerEx on Pointer<SdlProcess> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_IOStream * SDLCALL SDL_GetProcessInput(SDL_Process *process)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetProcessInput - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetProcessInput)
+  ///
   /// {@category process}
   Pointer<SdlIoStream> getInput() => sdlGetProcessInput(this);
 
@@ -257,6 +277,10 @@ extension SdlProcessPointerEx on Pointer<SdlProcess> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_IOStream * SDLCALL SDL_GetProcessOutput(SDL_Process *process)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetProcessOutput - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetProcessOutput)
+  ///
   /// {@category process}
   Pointer<SdlIoStream> getOutput() => sdlGetProcessOutput(this);
 
@@ -284,6 +308,10 @@ extension SdlProcessPointerEx on Pointer<SdlProcess> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_KillProcess(SDL_Process *process, bool force)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_KillProcess - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_KillProcess)
+  ///
   /// {@category process}
   bool kill({bool force = false}) => sdlKillProcess(this, force);
 
@@ -321,6 +349,10 @@ extension SdlProcessPointerEx on Pointer<SdlProcess> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_WaitProcess(SDL_Process *process, bool block, int *exitcode)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_WaitProcess - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_WaitProcess)
+  ///
   /// {@category process}
   int? wait({bool block = false}) => sdlxWaitProcess(this, block: block);
 
@@ -344,6 +376,10 @@ extension SdlProcessPointerEx on Pointer<SdlProcess> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_DestroyProcess(SDL_Process *process)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_DestroyProcess - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_DestroyProcess)
+  ///
   /// {@category process}
   void destroy() {
     sdlDestroyProcess(this);

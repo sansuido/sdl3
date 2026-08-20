@@ -41,6 +41,10 @@ extension SdlRendererPointerFromImageEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Texture * SDLCALL IMG_LoadTexture(SDL_Renderer *renderer, const char *file)
   /// ```
+  ///
+  /// See also:
+  /// - [IMG_LoadTexture - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_LoadTexture)
+  ///
   /// {@category image}
   Pointer<SdlTexture> loadTexture(String file) => imgLoadTexture(this, file);
 
@@ -91,6 +95,10 @@ extension SdlRendererPointerFromImageEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Texture * SDLCALL IMG_LoadTexture_IO(SDL_Renderer *renderer, SDL_IOStream *src, bool closeio)
   /// ```
+  ///
+  /// See also:
+  /// - [IMG_LoadTexture_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_LoadTexture_IO)
+  ///
   /// {@category image}
   Pointer<SdlTexture> loadTextureIo(Pointer<SdlIoStream> src, bool freesrc) =>
       imgLoadTextureIo(this, src, freesrc);
@@ -150,6 +158,10 @@ extension SdlRendererPointerFromImageEx on Pointer<SdlRenderer> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Texture * SDLCALL IMG_LoadTextureTyped_IO(SDL_Renderer *renderer, SDL_IOStream *src, bool closeio, const char *type)
   /// ```
+  ///
+  /// See also:
+  /// - [IMG_LoadTextureTyped_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_LoadTextureTyped_IO)
+  ///
   /// {@category image}
   Pointer<SdlTexture> loadTextureTypedIo(
     Pointer<SdlIoStream> src,

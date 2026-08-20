@@ -13,6 +13,10 @@ part of '../sdl_net.dart';
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL NET_Version(void)
 /// ```
+///
+/// See also:
+/// - [NET_Version - SDL3 Wiki](https://wiki.libsdl.org/SDL3/NET_Version)
+///
 /// {@category net}
 int netVersion() {
   final netVersionLookupFunction = _libNet
@@ -41,6 +45,10 @@ int netVersion() {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL NET_Init(void)
 /// ```
+///
+/// See also:
+/// - [NET_Init - SDL3 Wiki](https://wiki.libsdl.org/SDL3/NET_Init)
+///
 /// {@category net}
 bool netInit() {
   final netInitLookupFunction = _libNet
@@ -70,6 +78,10 @@ bool netInit() {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL NET_Quit(void)
 /// ```
+///
+/// See also:
+/// - [NET_Quit - SDL3 Wiki](https://wiki.libsdl.org/SDL3/NET_Quit)
+///
 /// {@category net}
 void netQuit() {
   final netQuitLookupFunction = _libNet
@@ -117,6 +129,10 @@ void netQuit() {
 /// ```c
 /// extern SDL_DECLSPEC NET_Address * SDLCALL NET_ResolveHostname(const char *host)
 /// ```
+///
+/// See also:
+/// - [NET_ResolveHostname - SDL3 Wiki](https://wiki.libsdl.org/SDL3/NET_ResolveHostname)
+///
 /// {@category net}
 Pointer<NetAddress> netResolveHostname(String? host) {
   final netResolveHostnameLookupFunction = _libNet
@@ -174,6 +190,10 @@ Pointer<NetAddress> netResolveHostname(String? host) {
 /// ```c
 /// extern SDL_DECLSPEC NET_Status SDLCALL NET_WaitUntilResolved(NET_Address *address, Sint32 timeout)
 /// ```
+///
+/// See also:
+/// - [NET_WaitUntilResolved - SDL3 Wiki](https://wiki.libsdl.org/SDL3/NET_WaitUntilResolved)
+///
 /// {@category net}
 int netWaitUntilResolved(Pointer<NetAddress> address, int timeout) {
   final netWaitUntilResolvedLookupFunction = _libNet
@@ -216,6 +236,10 @@ int netWaitUntilResolved(Pointer<NetAddress> address, int timeout) {
 /// ```c
 /// extern SDL_DECLSPEC NET_Status SDLCALL NET_GetAddressStatus(NET_Address *address)
 /// ```
+///
+/// See also:
+/// - [NET_GetAddressStatus - SDL3 Wiki](https://wiki.libsdl.org/SDL3/NET_GetAddressStatus)
+///
 /// {@category net}
 int netGetAddressStatus(Pointer<NetAddress> address) {
   final netGetAddressStatusLookupFunction = _libNet
@@ -256,6 +280,10 @@ int netGetAddressStatus(Pointer<NetAddress> address) {
 /// ```c
 /// extern SDL_DECLSPEC const char * SDLCALL NET_GetAddressString(NET_Address *address)
 /// ```
+///
+/// See also:
+/// - [NET_GetAddressString - SDL3 Wiki](https://wiki.libsdl.org/SDL3/NET_GetAddressString)
+///
 /// {@category net}
 String? netGetAddressString(Pointer<NetAddress> address) {
   final netGetAddressStringLookupFunction = _libNet
@@ -315,6 +343,10 @@ String? netGetAddressString(Pointer<NetAddress> address) {
 /// ```c
 /// extern SDL_DECLSPEC const void * SDLCALL NET_GetAddressBytes(NET_Address *address, int *num_bytes)
 /// ```
+///
+/// See also:
+/// - [NET_GetAddressBytes - SDL3 Wiki](https://wiki.libsdl.org/SDL3/NET_GetAddressBytes)
+///
 /// {@category net}
 Pointer<Void> netGetAddressBytes(
   Pointer<NetAddress> address,
@@ -373,6 +405,10 @@ Pointer<Void> netGetAddressBytes(
 /// ```c
 /// extern SDL_DECLSPEC NET_Address *SDLCALL NET_RefAddress(NET_Address *address)
 /// ```
+///
+/// See also:
+/// - [NET_RefAddress - SDL3 Wiki](https://wiki.libsdl.org/SDL3/NET_RefAddress)
+///
 /// {@category net}
 Pointer<NetAddress> netRefAddress(Pointer<NetAddress> address) {
   final netRefAddressLookupFunction = _libNet
@@ -409,6 +445,10 @@ Pointer<NetAddress> netRefAddress(Pointer<NetAddress> address) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL NET_UnrefAddress(NET_Address *address)
 /// ```
+///
+/// See also:
+/// - [NET_UnrefAddress - SDL3 Wiki](https://wiki.libsdl.org/SDL3/NET_UnrefAddress)
+///
 /// {@category net}
 void netUnrefAddress(Pointer<NetAddress> address) {
   final netUnrefAddressLookupFunction = _libNet
@@ -451,6 +491,10 @@ void netUnrefAddress(Pointer<NetAddress> address) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL NET_SimulateAddressResolutionLoss(int percent_loss)
 /// ```
+///
+/// See also:
+/// - [NET_SimulateAddressResolutionLoss - SDL3 Wiki](https://wiki.libsdl.org/SDL3/NET_SimulateAddressResolutionLoss)
+///
 /// {@category net}
 void netSimulateAddressResolutionLoss(int percentLoss) {
   final netSimulateAddressResolutionLossLookupFunction = _libNet
@@ -479,6 +523,10 @@ void netSimulateAddressResolutionLoss(int percentLoss) {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL NET_CompareAddresses(const NET_Address *a, const NET_Address *b)
 /// ```
+///
+/// See also:
+/// - [NET_CompareAddresses - SDL3 Wiki](https://wiki.libsdl.org/SDL3/NET_CompareAddresses)
+///
 /// {@category net}
 int netCompareAddresses(Pointer<NetAddress> a, Pointer<NetAddress> b) {
   final netCompareAddressesLookupFunction = _libNet
@@ -525,6 +573,10 @@ int netCompareAddresses(Pointer<NetAddress> a, Pointer<NetAddress> b) {
 /// ```c
 /// extern SDL_DECLSPEC NET_Address **SDLCALL NET_GetLocalAddresses(int *num_addresses)
 /// ```
+///
+/// See also:
+/// - [NET_GetLocalAddresses - SDL3 Wiki](https://wiki.libsdl.org/SDL3/NET_GetLocalAddresses)
+///
 /// {@category net}
 Pointer<Pointer<NetAddress>> netGetLocalAddresses(Pointer<Int32> numAddresses) {
   final netGetLocalAddressesLookupFunction = _libNet
@@ -555,6 +607,10 @@ Pointer<Pointer<NetAddress>> netGetLocalAddresses(Pointer<Int32> numAddresses) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL NET_FreeLocalAddresses(NET_Address **addresses)
 /// ```
+///
+/// See also:
+/// - [NET_FreeLocalAddresses - SDL3 Wiki](https://wiki.libsdl.org/SDL3/NET_FreeLocalAddresses)
+///
 /// {@category net}
 void netFreeLocalAddresses(Pointer<Pointer<NetAddress>> addresses) {
   final netFreeLocalAddressesLookupFunction = _libNet
@@ -624,6 +680,10 @@ void netFreeLocalAddresses(Pointer<Pointer<NetAddress>> addresses) {
 /// ```c
 /// extern SDL_DECLSPEC NET_StreamSocket * SDLCALL NET_CreateClient(NET_Address *address, Uint16 port, SDL_PropertiesID props)
 /// ```
+///
+/// See also:
+/// - [NET_CreateClient - SDL3 Wiki](https://wiki.libsdl.org/SDL3/NET_CreateClient)
+///
 /// {@category net}
 Pointer<NetStreamSocket> netCreateClient(
   Pointer<NetAddress> address,
@@ -693,6 +753,10 @@ Pointer<NetStreamSocket> netCreateClient(
 /// ```c
 /// extern SDL_DECLSPEC NET_Status SDLCALL NET_WaitUntilConnected(NET_StreamSocket *sock, Sint32 timeout)
 /// ```
+///
+/// See also:
+/// - [NET_WaitUntilConnected - SDL3 Wiki](https://wiki.libsdl.org/SDL3/NET_WaitUntilConnected)
+///
 /// {@category net}
 int netWaitUntilConnected(Pointer<NetStreamSocket> sock, int timeout) {
   final netWaitUntilConnectedLookupFunction = _libNet
@@ -768,6 +832,10 @@ int netWaitUntilConnected(Pointer<NetStreamSocket> sock, int timeout) {
 /// ```c
 /// extern SDL_DECLSPEC NET_Server * SDLCALL NET_CreateServer(NET_Address *addr, Uint16 port, SDL_PropertiesID props)
 /// ```
+///
+/// See also:
+/// - [NET_CreateServer - SDL3 Wiki](https://wiki.libsdl.org/SDL3/NET_CreateServer)
+///
 /// {@category net}
 Pointer<NetServer> netCreateServer(
   Pointer<NetAddress> addr,
@@ -833,6 +901,10 @@ Pointer<NetServer> netCreateServer(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL NET_AcceptClient(NET_Server *server, NET_StreamSocket **client_stream)
 /// ```
+///
+/// See also:
+/// - [NET_AcceptClient - SDL3 Wiki](https://wiki.libsdl.org/SDL3/NET_AcceptClient)
+///
 /// {@category net}
 bool netAcceptClient(
   Pointer<NetServer> server,
@@ -875,6 +947,10 @@ bool netAcceptClient(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL NET_DestroyServer(NET_Server *server)
 /// ```
+///
+/// See also:
+/// - [NET_DestroyServer - SDL3 Wiki](https://wiki.libsdl.org/SDL3/NET_DestroyServer)
+///
 /// {@category net}
 void netDestroyServer(Pointer<NetServer> server) {
   final netDestroyServerLookupFunction = _libNet
@@ -905,6 +981,10 @@ void netDestroyServer(Pointer<NetServer> server) {
 /// ```c
 /// extern SDL_DECLSPEC NET_Address * SDLCALL NET_GetStreamSocketAddress(NET_StreamSocket *sock)
 /// ```
+///
+/// See also:
+/// - [NET_GetStreamSocketAddress - SDL3 Wiki](https://wiki.libsdl.org/SDL3/NET_GetStreamSocketAddress)
+///
 /// {@category net}
 Pointer<NetAddress> netGetStreamSocketAddress(Pointer<NetStreamSocket> sock) {
   final netGetStreamSocketAddressLookupFunction = _libNet
@@ -954,6 +1034,10 @@ Pointer<NetAddress> netGetStreamSocketAddress(Pointer<NetStreamSocket> sock) {
 /// ```c
 /// extern SDL_DECLSPEC NET_Status SDLCALL NET_GetConnectionStatus(NET_StreamSocket *sock)
 /// ```
+///
+/// See also:
+/// - [NET_GetConnectionStatus - SDL3 Wiki](https://wiki.libsdl.org/SDL3/NET_GetConnectionStatus)
+///
 /// {@category net}
 int netGetConnectionStatus(Pointer<NetStreamSocket> sock) {
   final netGetConnectionStatusLookupFunction = _libNet
@@ -1012,6 +1096,10 @@ int netGetConnectionStatus(Pointer<NetStreamSocket> sock) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL NET_WriteToStreamSocket(NET_StreamSocket *sock, const void *buf, int buflen)
 /// ```
+///
+/// See also:
+/// - [NET_WriteToStreamSocket - SDL3 Wiki](https://wiki.libsdl.org/SDL3/NET_WriteToStreamSocket)
+///
 /// {@category net}
 bool netWriteToStreamSocket(
   Pointer<NetStreamSocket> sock,
@@ -1067,6 +1155,10 @@ bool netWriteToStreamSocket(
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL NET_GetStreamSocketPendingWrites(NET_StreamSocket *sock)
 /// ```
+///
+/// See also:
+/// - [NET_GetStreamSocketPendingWrites - SDL3 Wiki](https://wiki.libsdl.org/SDL3/NET_GetStreamSocketPendingWrites)
+///
 /// {@category net}
 int netGetStreamSocketPendingWrites(Pointer<NetStreamSocket> sock) {
   final netGetStreamSocketPendingWritesLookupFunction = _libNet
@@ -1119,6 +1211,10 @@ int netGetStreamSocketPendingWrites(Pointer<NetStreamSocket> sock) {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL NET_WaitUntilStreamSocketDrained(NET_StreamSocket *sock, Sint32 timeout)
 /// ```
+///
+/// See also:
+/// - [NET_WaitUntilStreamSocketDrained - SDL3 Wiki](https://wiki.libsdl.org/SDL3/NET_WaitUntilStreamSocketDrained)
+///
 /// {@category net}
 int netWaitUntilStreamSocketDrained(
   Pointer<NetStreamSocket> sock,
@@ -1183,6 +1279,10 @@ int netWaitUntilStreamSocketDrained(
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL NET_ReadFromStreamSocket(NET_StreamSocket *sock, void *buf, int buflen)
 /// ```
+///
+/// See also:
+/// - [NET_ReadFromStreamSocket - SDL3 Wiki](https://wiki.libsdl.org/SDL3/NET_ReadFromStreamSocket)
+///
 /// {@category net}
 int netReadFromStreamSocket(
   Pointer<NetStreamSocket> sock,
@@ -1245,6 +1345,10 @@ int netReadFromStreamSocket(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL NET_SimulateStreamPacketLoss(NET_StreamSocket *sock, int percent_loss)
 /// ```
+///
+/// See also:
+/// - [NET_SimulateStreamPacketLoss - SDL3 Wiki](https://wiki.libsdl.org/SDL3/NET_SimulateStreamPacketLoss)
+///
 /// {@category net}
 void netSimulateStreamPacketLoss(
   Pointer<NetStreamSocket> sock,
@@ -1288,6 +1392,10 @@ void netSimulateStreamPacketLoss(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL NET_DestroyStreamSocket(NET_StreamSocket *sock)
 /// ```
+///
+/// See also:
+/// - [NET_DestroyStreamSocket - SDL3 Wiki](https://wiki.libsdl.org/SDL3/NET_DestroyStreamSocket)
+///
 /// {@category net}
 void netDestroyStreamSocket(Pointer<NetStreamSocket> sock) {
   final netDestroyStreamSocketLookupFunction = _libNet
@@ -1386,6 +1494,10 @@ void netDestroyStreamSocket(Pointer<NetStreamSocket> sock) {
 /// ```c
 /// extern SDL_DECLSPEC NET_DatagramSocket * SDLCALL NET_CreateDatagramSocket(NET_Address *addr, Uint16 port, SDL_PropertiesID props)
 /// ```
+///
+/// See also:
+/// - [NET_CreateDatagramSocket - SDL3 Wiki](https://wiki.libsdl.org/SDL3/NET_CreateDatagramSocket)
+///
 /// {@category net}
 Pointer<NetDatagramSocket> netCreateDatagramSocket(
   Pointer<NetAddress> addr,
@@ -1492,6 +1604,10 @@ Pointer<NetDatagramSocket> netCreateDatagramSocket(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL NET_SendDatagram(NET_DatagramSocket *sock, NET_Address *address, Uint16 port, const void *buf, int buflen)
 /// ```
+///
+/// See also:
+/// - [NET_SendDatagram - SDL3 Wiki](https://wiki.libsdl.org/SDL3/NET_SendDatagram)
+///
 /// {@category net}
 bool netSendDatagram(
   Pointer<NetDatagramSocket> sock,
@@ -1569,6 +1685,10 @@ bool netSendDatagram(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL NET_ReceiveDatagram(NET_DatagramSocket *sock, NET_Datagram **dgram)
 /// ```
+///
+/// See also:
+/// - [NET_ReceiveDatagram - SDL3 Wiki](https://wiki.libsdl.org/SDL3/NET_ReceiveDatagram)
+///
 /// {@category net}
 bool netReceiveDatagram(
   Pointer<NetDatagramSocket> sock,
@@ -1611,6 +1731,10 @@ bool netReceiveDatagram(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL NET_DestroyDatagram(NET_Datagram *dgram)
 /// ```
+///
+/// See also:
+/// - [NET_DestroyDatagram - SDL3 Wiki](https://wiki.libsdl.org/SDL3/NET_DestroyDatagram)
+///
 /// {@category net}
 void netDestroyDatagram(Pointer<NetDatagram> dgram) {
   final netDestroyDatagramLookupFunction = _libNet
@@ -1654,6 +1778,10 @@ void netDestroyDatagram(Pointer<NetDatagram> dgram) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL NET_SimulateDatagramPacketLoss(NET_DatagramSocket *sock, int percent_loss)
 /// ```
+///
+/// See also:
+/// - [NET_SimulateDatagramPacketLoss - SDL3 Wiki](https://wiki.libsdl.org/SDL3/NET_SimulateDatagramPacketLoss)
+///
 /// {@category net}
 void netSimulateDatagramPacketLoss(
   Pointer<NetDatagramSocket> sock,
@@ -1695,6 +1823,10 @@ void netSimulateDatagramPacketLoss(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL NET_DestroyDatagramSocket(NET_DatagramSocket *sock)
 /// ```
+///
+/// See also:
+/// - [NET_DestroyDatagramSocket - SDL3 Wiki](https://wiki.libsdl.org/SDL3/NET_DestroyDatagramSocket)
+///
 /// {@category net}
 void netDestroyDatagramSocket(Pointer<NetDatagramSocket> sock) {
   final netDestroyDatagramSocketLookupFunction = _libNet
@@ -1758,6 +1890,10 @@ void netDestroyDatagramSocket(Pointer<NetDatagramSocket> sock) {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL NET_WaitUntilInputAvailable(void **vsockets, int numsockets, Sint32 timeout)
 /// ```
+///
+/// See also:
+/// - [NET_WaitUntilInputAvailable - SDL3 Wiki](https://wiki.libsdl.org/SDL3/NET_WaitUntilInputAvailable)
+///
 /// {@category net}
 int netWaitUntilInputAvailable(
   Pointer<Pointer<Void>> vsockets,

@@ -30,6 +30,10 @@ extension ImgAnimationEncoderEx on ImgAnimationEncoder {
   /// ```c
   /// extern SDL_DECLSPEC IMG_AnimationEncoder * SDLCALL IMG_CreateAnimationEncoder(const char *file)
   /// ```
+  ///
+  /// See also:
+  /// - [IMG_CreateAnimationEncoder - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_CreateAnimationEncoder)
+  ///
   /// {@category image}
   static Pointer<ImgAnimationEncoder> create(String file) =>
       imgCreateAnimationEncoder(file);
@@ -66,6 +70,10 @@ extension ImgAnimationEncoderEx on ImgAnimationEncoder {
   /// ```c
   /// extern SDL_DECLSPEC IMG_AnimationEncoder * SDLCALL IMG_CreateAnimationEncoder_IO(SDL_IOStream *dst, bool closeio, const char *type)
   /// ```
+  ///
+  /// See also:
+  /// - [IMG_CreateAnimationEncoder_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_CreateAnimationEncoder_IO)
+  ///
   /// {@category image}
   static Pointer<ImgAnimationEncoder> createIo(
     Pointer<SdlIoStream> dst,
@@ -124,6 +132,10 @@ extension ImgAnimationEncoderEx on ImgAnimationEncoder {
   /// ```c
   /// extern SDL_DECLSPEC IMG_AnimationEncoder * SDLCALL IMG_CreateAnimationEncoderWithProperties(SDL_PropertiesID props)
   /// ```
+  ///
+  /// See also:
+  /// - [IMG_CreateAnimationEncoderWithProperties - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_CreateAnimationEncoderWithProperties)
+  ///
   /// {@category image}
   static Pointer<ImgAnimationEncoder> createWithProperties(int props) =>
       imgCreateAnimationEncoderWithProperties(props);
@@ -154,6 +166,10 @@ extension ImgAnimationEncoderPointerEx on Pointer<ImgAnimationEncoder> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL IMG_AddAnimationEncoderFrame(IMG_AnimationEncoder *encoder, SDL_Surface *surface, Uint64 duration)
   /// ```
+  ///
+  /// See also:
+  /// - [IMG_AddAnimationEncoderFrame - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_AddAnimationEncoderFrame)
+  ///
   /// {@category image}
   bool addFrame(Pointer<SdlSurface> surface, int duration) =>
       imgAddAnimationEncoderFrame(this, surface, duration);
@@ -177,6 +193,10 @@ extension ImgAnimationEncoderPointerEx on Pointer<ImgAnimationEncoder> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL IMG_CloseAnimationEncoder(IMG_AnimationEncoder *encoder)
   /// ```
+  ///
+  /// See also:
+  /// - [IMG_CloseAnimationEncoder - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_CloseAnimationEncoder)
+  ///
   /// {@category image}
   bool close() => imgCloseAnimationEncoder(this);
 }

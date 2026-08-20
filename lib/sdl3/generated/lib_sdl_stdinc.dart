@@ -31,6 +31,10 @@ part of '../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC SDL_MALLOC void * SDLCALL SDL_malloc(size_t size)
 /// ```
+///
+/// See also:
+/// - [SDL_malloc - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_malloc)
+///
 /// {@category stdinc}
 Pointer<Void> sdlMalloc(int size) {
   final sdlMallocLookupFunction = _libSdl
@@ -62,6 +66,10 @@ Pointer<Void> sdlMalloc(int size) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_free(void *mem)
 /// ```
+///
+/// See also:
+/// - [SDL_free - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_free)
+///
 /// {@category stdinc}
 void sdlFree(Pointer<Void> mem) {
   final sdlFreeLookupFunction = _libSdl
@@ -92,6 +100,10 @@ void sdlFree(Pointer<Void> mem) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_GetOriginalMemoryFunctions(SDL_malloc_func *malloc_func, SDL_calloc_func *calloc_func, SDL_realloc_func *realloc_func, SDL_free_func *free_func)
 /// ```
+///
+/// See also:
+/// - [SDL_GetOriginalMemoryFunctions - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetOriginalMemoryFunctions)
+///
 /// {@category stdinc}
 void sdlGetOriginalMemoryFunctions(
   Pointer<Pointer<NativeFunction<SdlMallocFunc>>> mallocFunc,
@@ -142,6 +154,10 @@ void sdlGetOriginalMemoryFunctions(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_GetMemoryFunctions(SDL_malloc_func *malloc_func, SDL_calloc_func *calloc_func, SDL_realloc_func *realloc_func, SDL_free_func *free_func)
 /// ```
+///
+/// See also:
+/// - [SDL_GetMemoryFunctions - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetMemoryFunctions)
+///
 /// {@category stdinc}
 void sdlGetMemoryFunctions(
   Pointer<Pointer<NativeFunction<SdlMallocFunc>>> mallocFunc,
@@ -207,6 +223,10 @@ void sdlGetMemoryFunctions(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetMemoryFunctions(SDL_malloc_func malloc_func, SDL_calloc_func calloc_func, SDL_realloc_func realloc_func, SDL_free_func free_func)
 /// ```
+///
+/// See also:
+/// - [SDL_SetMemoryFunctions - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetMemoryFunctions)
+///
 /// {@category stdinc}
 bool sdlSetMemoryFunctions(
   Pointer<NativeFunction<SdlMallocFunc>> mallocFunc,
@@ -262,6 +282,10 @@ bool sdlSetMemoryFunctions(
 /// ```c
 /// extern SDL_DECLSPEC SDL_MALLOC void * SDLCALL SDL_aligned_alloc(size_t alignment, size_t size)
 /// ```
+///
+/// See also:
+/// - [SDL_aligned_alloc - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_aligned_alloc)
+///
 /// {@category stdinc}
 Pointer<Void> sdlAlignedAlloc(int alignment, int size) {
   final sdlAlignedAllocLookupFunction = _libSdl
@@ -297,6 +321,10 @@ Pointer<Void> sdlAlignedAlloc(int alignment, int size) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_MALLOC void * SDLCALL SDL_aligned_alloc_zero(size_t alignment, size_t size)
 /// ```
+///
+/// See also:
+/// - [SDL_aligned_alloc_zero - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_aligned_alloc_zero)
+///
 /// {@category stdinc}
 Pointer<Void> sdlAlignedAllocZero(int alignment, int size) {
   final sdlAlignedAllocZeroLookupFunction = _libSdl
@@ -326,6 +354,10 @@ Pointer<Void> sdlAlignedAllocZero(int alignment, int size) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_aligned_free(void *mem)
 /// ```
+///
+/// See also:
+/// - [SDL_aligned_free - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_aligned_free)
+///
 /// {@category stdinc}
 void sdlAlignedFree(Pointer<Void> mem) {
   final sdlAlignedFreeLookupFunction = _libSdl
@@ -349,6 +381,10 @@ void sdlAlignedFree(Pointer<Void> mem) {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_GetNumAllocations(void)
 /// ```
+///
+/// See also:
+/// - [SDL_GetNumAllocations - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetNumAllocations)
+///
 /// {@category stdinc}
 int sdlGetNumAllocations() {
   final sdlGetNumAllocationsLookupFunction = _libSdl
@@ -382,6 +418,10 @@ int sdlGetNumAllocations() {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Environment * SDLCALL SDL_GetEnvironment(void)
 /// ```
+///
+/// See also:
+/// - [SDL_GetEnvironment - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetEnvironment)
+///
 /// {@category stdinc}
 Pointer<SdlEnvironment> sdlGetEnvironment() {
   final sdlGetEnvironmentLookupFunction = _libSdl
@@ -415,6 +455,10 @@ Pointer<SdlEnvironment> sdlGetEnvironment() {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Environment * SDLCALL SDL_CreateEnvironment(bool populated)
 /// ```
+///
+/// See also:
+/// - [SDL_CreateEnvironment - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CreateEnvironment)
+///
 /// {@category stdinc}
 Pointer<SdlEnvironment> sdlCreateEnvironment(bool populated) {
   final sdlCreateEnvironmentLookupFunction = _libSdl
@@ -446,6 +490,10 @@ Pointer<SdlEnvironment> sdlCreateEnvironment(bool populated) {
 /// ```c
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetEnvironmentVariable(SDL_Environment *env, const char *name)
 /// ```
+///
+/// See also:
+/// - [SDL_GetEnvironmentVariable - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetEnvironmentVariable)
+///
 /// {@category stdinc}
 String? sdlGetEnvironmentVariable(Pointer<SdlEnvironment> env, String? name) {
   final sdlGetEnvironmentVariableLookupFunction = _libSdl
@@ -484,6 +532,10 @@ String? sdlGetEnvironmentVariable(Pointer<SdlEnvironment> env, String? name) {
 /// ```c
 /// extern SDL_DECLSPEC char ** SDLCALL SDL_GetEnvironmentVariables(SDL_Environment *env)
 /// ```
+///
+/// See also:
+/// - [SDL_GetEnvironmentVariables - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetEnvironmentVariables)
+///
 /// {@category stdinc}
 Pointer<Pointer<Int8>> sdlGetEnvironmentVariables(Pointer<SdlEnvironment> env) {
   final sdlGetEnvironmentVariablesLookupFunction = _libSdl
@@ -519,6 +571,10 @@ Pointer<Pointer<Int8>> sdlGetEnvironmentVariables(Pointer<SdlEnvironment> env) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetEnvironmentVariable(SDL_Environment *env, const char *name, const char *value, bool overwrite)
 /// ```
+///
+/// See also:
+/// - [SDL_SetEnvironmentVariable - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetEnvironmentVariable)
+///
 /// {@category stdinc}
 bool sdlSetEnvironmentVariable(
   Pointer<SdlEnvironment> env,
@@ -577,6 +633,10 @@ bool sdlSetEnvironmentVariable(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_UnsetEnvironmentVariable(SDL_Environment *env, const char *name)
 /// ```
+///
+/// See also:
+/// - [SDL_UnsetEnvironmentVariable - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_UnsetEnvironmentVariable)
+///
 /// {@category stdinc}
 bool sdlUnsetEnvironmentVariable(Pointer<SdlEnvironment> env, String? name) {
   final sdlUnsetEnvironmentVariableLookupFunction = _libSdl
@@ -605,6 +665,10 @@ bool sdlUnsetEnvironmentVariable(Pointer<SdlEnvironment> env, String? name) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_DestroyEnvironment(SDL_Environment *env)
 /// ```
+///
+/// See also:
+/// - [SDL_DestroyEnvironment - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_DestroyEnvironment)
+///
 /// {@category stdinc}
 void sdlDestroyEnvironment(Pointer<SdlEnvironment> env) {
   final sdlDestroyEnvironmentLookupFunction = _libSdl
@@ -633,6 +697,10 @@ void sdlDestroyEnvironment(Pointer<SdlEnvironment> env) {
 /// ```c
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_getenv(const char *name)
 /// ```
+///
+/// See also:
+/// - [SDL_getenv - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_getenv)
+///
 /// {@category stdinc}
 String? sdlGetenv(String? name) {
   final sdlGetenvLookupFunction = _libSdl
@@ -674,6 +742,10 @@ String? sdlGetenv(String? name) {
 /// ```c
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_getenv_unsafe(const char *name)
 /// ```
+///
+/// See also:
+/// - [SDL_getenv_unsafe - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_getenv_unsafe)
+///
 /// {@category stdinc}
 String? sdlGetenvUnsafe(String? name) {
   final sdlGetenvUnsafeLookupFunction = _libSdl
@@ -709,6 +781,10 @@ String? sdlGetenvUnsafe(String? name) {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_setenv_unsafe(const char *name, const char *value, int overwrite)
 /// ```
+///
+/// See also:
+/// - [SDL_setenv_unsafe - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_setenv_unsafe)
+///
 /// {@category stdinc}
 int sdlSetenvUnsafe(String? name, String? value, int overwrite) {
   final sdlSetenvUnsafeLookupFunction = _libSdl
@@ -749,6 +825,10 @@ int sdlSetenvUnsafe(String? name, String? value, int overwrite) {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_unsetenv_unsafe(const char *name)
 /// ```
+///
+/// See also:
+/// - [SDL_unsetenv_unsafe - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_unsetenv_unsafe)
+///
 /// {@category stdinc}
 int sdlUnsetenvUnsafe(String? name) {
   final sdlUnsetenvUnsafeLookupFunction = _libSdl
@@ -809,6 +889,10 @@ int sdlUnsetenvUnsafe(String? name) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_qsort(void *base, size_t nmemb, size_t size, SDL_CompareCallback compare)
 /// ```
+///
+/// See also:
+/// - [SDL_qsort - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_qsort)
+///
 /// {@category stdinc}
 void sdlQsort(
   Pointer<Void> base,
@@ -885,6 +969,10 @@ void sdlQsort(
 /// ```c
 /// extern SDL_DECLSPEC void * SDLCALL SDL_bsearch(const void *key, const void *base, size_t nmemb, size_t size, SDL_CompareCallback compare)
 /// ```
+///
+/// See also:
+/// - [SDL_bsearch - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_bsearch)
+///
 /// {@category stdinc}
 Pointer<Void> sdlBsearch(
   Pointer<Void> key,
@@ -967,6 +1055,10 @@ Pointer<Void> sdlBsearch(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_qsort_r(void *base, size_t nmemb, size_t size, SDL_CompareCallback_r compare, void *userdata)
 /// ```
+///
+/// See also:
+/// - [SDL_qsort_r - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_qsort_r)
+///
 /// {@category stdinc}
 void sdlQsortR(
   Pointer<Void> base,
@@ -1054,6 +1146,10 @@ void sdlQsortR(
 /// ```c
 /// extern SDL_DECLSPEC void * SDLCALL SDL_bsearch_r(const void *key, const void *base, size_t nmemb, size_t size, SDL_CompareCallback_r compare, void *userdata)
 /// ```
+///
+/// See also:
+/// - [SDL_bsearch_r - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_bsearch_r)
+///
 /// {@category stdinc}
 Pointer<Void> sdlBsearchR(
   Pointer<Void> key,
@@ -1098,6 +1194,10 @@ Pointer<Void> sdlBsearchR(
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_abs(int x)
 /// ```
+///
+/// See also:
+/// - [SDL_abs - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_abs)
+///
 /// {@category stdinc}
 int sdlAbs(int x) {
   final sdlAbsLookupFunction = _libSdl
@@ -1121,6 +1221,10 @@ int sdlAbs(int x) {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_isalpha(int x)
 /// ```
+///
+/// See also:
+/// - [SDL_isalpha - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_isalpha)
+///
 /// {@category stdinc}
 int sdlIsalpha(int x) {
   final sdlIsalphaLookupFunction = _libSdl
@@ -1146,6 +1250,10 @@ int sdlIsalpha(int x) {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_isalnum(int x)
 /// ```
+///
+/// See also:
+/// - [SDL_isalnum - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_isalnum)
+///
 /// {@category stdinc}
 int sdlIsalnum(int x) {
   final sdlIsalnumLookupFunction = _libSdl
@@ -1171,6 +1279,10 @@ int sdlIsalnum(int x) {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_isblank(int x)
 /// ```
+///
+/// See also:
+/// - [SDL_isblank - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_isblank)
+///
 /// {@category stdinc}
 int sdlIsblank(int x) {
   final sdlIsblankLookupFunction = _libSdl
@@ -1196,6 +1308,10 @@ int sdlIsblank(int x) {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_iscntrl(int x)
 /// ```
+///
+/// See also:
+/// - [SDL_iscntrl - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_iscntrl)
+///
 /// {@category stdinc}
 int sdlIscntrl(int x) {
   final sdlIscntrlLookupFunction = _libSdl
@@ -1221,6 +1337,10 @@ int sdlIscntrl(int x) {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_isdigit(int x)
 /// ```
+///
+/// See also:
+/// - [SDL_isdigit - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_isdigit)
+///
 /// {@category stdinc}
 int sdlIsdigit(int x) {
   final sdlIsdigitLookupFunction = _libSdl
@@ -1246,6 +1366,10 @@ int sdlIsdigit(int x) {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_isxdigit(int x)
 /// ```
+///
+/// See also:
+/// - [SDL_isxdigit - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_isxdigit)
+///
 /// {@category stdinc}
 int sdlIsxdigit(int x) {
   final sdlIsxdigitLookupFunction = _libSdl
@@ -1274,6 +1398,10 @@ int sdlIsxdigit(int x) {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_ispunct(int x)
 /// ```
+///
+/// See also:
+/// - [SDL_ispunct - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ispunct)
+///
 /// {@category stdinc}
 int sdlIspunct(int x) {
   final sdlIspunctLookupFunction = _libSdl
@@ -1306,6 +1434,10 @@ int sdlIspunct(int x) {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_isspace(int x)
 /// ```
+///
+/// See also:
+/// - [SDL_isspace - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_isspace)
+///
 /// {@category stdinc}
 int sdlIsspace(int x) {
   final sdlIsspaceLookupFunction = _libSdl
@@ -1331,6 +1463,10 @@ int sdlIsspace(int x) {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_isupper(int x)
 /// ```
+///
+/// See also:
+/// - [SDL_isupper - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_isupper)
+///
 /// {@category stdinc}
 int sdlIsupper(int x) {
   final sdlIsupperLookupFunction = _libSdl
@@ -1356,6 +1492,10 @@ int sdlIsupper(int x) {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_islower(int x)
 /// ```
+///
+/// See also:
+/// - [SDL_islower - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_islower)
+///
 /// {@category stdinc}
 int sdlIslower(int x) {
   final sdlIslowerLookupFunction = _libSdl
@@ -1385,6 +1525,10 @@ int sdlIslower(int x) {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_isprint(int x)
 /// ```
+///
+/// See also:
+/// - [SDL_isprint - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_isprint)
+///
 /// {@category stdinc}
 int sdlIsprint(int x) {
   final sdlIsprintLookupFunction = _libSdl
@@ -1416,6 +1560,10 @@ int sdlIsprint(int x) {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_isgraph(int x)
 /// ```
+///
+/// See also:
+/// - [SDL_isgraph - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_isgraph)
+///
 /// {@category stdinc}
 int sdlIsgraph(int x) {
   final sdlIsgraphLookupFunction = _libSdl
@@ -1444,6 +1592,10 @@ int sdlIsgraph(int x) {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_toupper(int x)
 /// ```
+///
+/// See also:
+/// - [SDL_toupper - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_toupper)
+///
 /// {@category stdinc}
 int sdlToupper(int x) {
   final sdlToupperLookupFunction = _libSdl
@@ -1472,6 +1624,10 @@ int sdlToupper(int x) {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_tolower(int x)
 /// ```
+///
+/// See also:
+/// - [SDL_tolower - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_tolower)
+///
 /// {@category stdinc}
 int sdlTolower(int x) {
   final sdlTolowerLookupFunction = _libSdl
@@ -1503,6 +1659,10 @@ int sdlTolower(int x) {
 /// ```c
 /// extern SDL_DECLSPEC Uint16 SDLCALL SDL_crc16(Uint16 crc, const void *data, size_t len)
 /// ```
+///
+/// See also:
+/// - [SDL_crc16 - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_crc16)
+///
 /// {@category stdinc}
 int sdlCrc16(int crc, Pointer<Void> data, int len) {
   final sdlCrc16LookupFunction = _libSdl
@@ -1535,6 +1695,10 @@ int sdlCrc16(int crc, Pointer<Void> data, int len) {
 /// ```c
 /// extern SDL_DECLSPEC Uint32 SDLCALL SDL_crc32(Uint32 crc, const void *data, size_t len)
 /// ```
+///
+/// See also:
+/// - [SDL_crc32 - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_crc32)
+///
 /// {@category stdinc}
 int sdlCrc32(int crc, Pointer<Void> data, int len) {
   final sdlCrc32LookupFunction = _libSdl
@@ -1572,6 +1736,10 @@ int sdlCrc32(int crc, Pointer<Void> data, int len) {
 /// ```c
 /// extern SDL_DECLSPEC Uint32 SDLCALL SDL_murmur3_32(const void *data, size_t len, Uint32 seed)
 /// ```
+///
+/// See also:
+/// - [SDL_murmur3_32 - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_murmur3_32)
+///
 /// {@category stdinc}
 int sdlMurmur332(Pointer<Void> data, int len, int seed) {
   final sdlMurmur332LookupFunction = _libSdl
@@ -1603,6 +1771,10 @@ int sdlMurmur332(Pointer<Void> data, int len, int seed) {
 /// ```c
 /// extern SDL_DECLSPEC void * SDLCALL SDL_memcpy(SDL_OUT_BYTECAP(len) void *dst, SDL_IN_BYTECAP(len) const void *src, size_t len)
 /// ```
+///
+/// See also:
+/// - [SDL_memcpy - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_memcpy)
+///
 /// {@category stdinc}
 Pointer<Void> sdlMemcpy(Pointer<Void> dst, Pointer<Void> src, int len) {
   final sdlMemcpyLookupFunction = _libSdl
@@ -1633,6 +1805,10 @@ Pointer<Void> sdlMemcpy(Pointer<Void> dst, Pointer<Void> src, int len) {
 /// ```c
 /// extern SDL_DECLSPEC void * SDLCALL SDL_memmove(SDL_OUT_BYTECAP(len) void *dst, SDL_IN_BYTECAP(len) const void *src, size_t len)
 /// ```
+///
+/// See also:
+/// - [SDL_memmove - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_memmove)
+///
 /// {@category stdinc}
 Pointer<Void> sdlMemmove(Pointer<Void> dst, Pointer<Void> src, int len) {
   final sdlMemmoveLookupFunction = _libSdl
@@ -1664,6 +1840,10 @@ Pointer<Void> sdlMemmove(Pointer<Void> dst, Pointer<Void> src, int len) {
 /// ```c
 /// extern SDL_DECLSPEC void * SDLCALL SDL_memset(SDL_OUT_BYTECAP(len) void *dst, int c, size_t len)
 /// ```
+///
+/// See also:
+/// - [SDL_memset - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_memset)
+///
 /// {@category stdinc}
 Pointer<Void> sdlMemset(Pointer<Void> dst, int c, int len) {
   final sdlMemsetLookupFunction = _libSdl
@@ -1695,6 +1875,10 @@ Pointer<Void> sdlMemset(Pointer<Void> dst, int c, int len) {
 /// ```c
 /// extern SDL_DECLSPEC void * SDLCALL SDL_memset4(void *dst, Uint32 val, size_t dwords)
 /// ```
+///
+/// See also:
+/// - [SDL_memset4 - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_memset4)
+///
 /// {@category stdinc}
 Pointer<Void> sdlMemset4(Pointer<Void> dst, int val, int dwords) {
   final sdlMemset4LookupFunction = _libSdl
@@ -1722,6 +1906,10 @@ Pointer<Void> sdlMemset4(Pointer<Void> dst, int val, int dwords) {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_memcmp(const void *s1, const void *s2, size_t len)
 /// ```
+///
+/// See also:
+/// - [SDL_memcmp - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_memcmp)
+///
 /// {@category stdinc}
 int sdlMemcmp(Pointer<Void> s1, Pointer<Void> s2, int len) {
   final sdlMemcmpLookupFunction = _libSdl
@@ -1760,6 +1948,10 @@ int sdlMemcmp(Pointer<Void> s1, Pointer<Void> s2, int len) {
 /// ```c
 /// extern SDL_DECLSPEC size_t SDLCALL SDL_wcslen(const wchar_t *wstr)
 /// ```
+///
+/// See also:
+/// - [SDL_wcslen - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_wcslen)
+///
 /// {@category stdinc}
 int sdlWcslen(Pointer<WChar> wstr) {
   final sdlWcslenLookupFunction = _libSdl
@@ -1802,6 +1994,10 @@ int sdlWcslen(Pointer<WChar> wstr) {
 /// ```c
 /// extern SDL_DECLSPEC size_t SDLCALL SDL_wcsnlen(const wchar_t *wstr, size_t maxlen)
 /// ```
+///
+/// See also:
+/// - [SDL_wcsnlen - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_wcsnlen)
+///
 /// {@category stdinc}
 int sdlWcsnlen(Pointer<WChar> wstr, int maxlen) {
   final sdlWcsnlenLookupFunction = _libSdl
@@ -1840,6 +2036,10 @@ int sdlWcsnlen(Pointer<WChar> wstr, int maxlen) {
 /// ```c
 /// extern SDL_DECLSPEC size_t SDLCALL SDL_wcslcpy(SDL_OUT_Z_CAP(maxlen) wchar_t *dst, const wchar_t *src, size_t maxlen)
 /// ```
+///
+/// See also:
+/// - [SDL_wcslcpy - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_wcslcpy)
+///
 /// {@category stdinc}
 int sdlWcslcpy(Pointer<WChar> dst, Pointer<WChar> src, int maxlen) {
   final sdlWcslcpyLookupFunction = _libSdl
@@ -1880,6 +2080,10 @@ int sdlWcslcpy(Pointer<WChar> dst, Pointer<WChar> src, int maxlen) {
 /// ```c
 /// extern SDL_DECLSPEC size_t SDLCALL SDL_wcslcat(SDL_INOUT_Z_CAP(maxlen) wchar_t *dst, const wchar_t *src, size_t maxlen)
 /// ```
+///
+/// See also:
+/// - [SDL_wcslcat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_wcslcat)
+///
 /// {@category stdinc}
 int sdlWcslcat(Pointer<WChar> dst, Pointer<WChar> src, int maxlen) {
   final sdlWcslcatLookupFunction = _libSdl
@@ -1909,6 +2113,10 @@ int sdlWcslcat(Pointer<WChar> dst, Pointer<WChar> src, int maxlen) {
 /// ```c
 /// extern SDL_DECLSPEC wchar_t * SDLCALL SDL_wcsdup(const wchar_t *wstr)
 /// ```
+///
+/// See also:
+/// - [SDL_wcsdup - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_wcsdup)
+///
 /// {@category stdinc}
 Pointer<WChar> sdlWcsdup(Pointer<WChar> wstr) {
   final sdlWcsdupLookupFunction = _libSdl
@@ -1940,6 +2148,10 @@ Pointer<WChar> sdlWcsdup(Pointer<WChar> wstr) {
 /// ```c
 /// extern SDL_DECLSPEC wchar_t * SDLCALL SDL_wcsstr(const wchar_t *haystack, const wchar_t *needle)
 /// ```
+///
+/// See also:
+/// - [SDL_wcsstr - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_wcsstr)
+///
 /// {@category stdinc}
 Pointer<WChar> sdlWcsstr(Pointer<WChar> haystack, Pointer<WChar> needle) {
   final sdlWcsstrLookupFunction = _libSdl
@@ -1976,6 +2188,10 @@ Pointer<WChar> sdlWcsstr(Pointer<WChar> haystack, Pointer<WChar> needle) {
 /// ```c
 /// extern SDL_DECLSPEC wchar_t * SDLCALL SDL_wcsnstr(const wchar_t *haystack, const wchar_t *needle, size_t maxlen)
 /// ```
+///
+/// See also:
+/// - [SDL_wcsnstr - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_wcsnstr)
+///
 /// {@category stdinc}
 Pointer<WChar> sdlWcsnstr(
   Pointer<WChar> haystack,
@@ -2018,6 +2234,10 @@ Pointer<WChar> sdlWcsnstr(
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_wcscmp(const wchar_t *str1, const wchar_t *str2)
 /// ```
+///
+/// See also:
+/// - [SDL_wcscmp - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_wcscmp)
+///
 /// {@category stdinc}
 int sdlWcscmp(Pointer<WChar> str1, Pointer<WChar> str2) {
   final sdlWcscmpLookupFunction = _libSdl
@@ -2060,6 +2280,10 @@ int sdlWcscmp(Pointer<WChar> str1, Pointer<WChar> str2) {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_wcsncmp(const wchar_t *str1, const wchar_t *str2, size_t maxlen)
 /// ```
+///
+/// See also:
+/// - [SDL_wcsncmp - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_wcsncmp)
+///
 /// {@category stdinc}
 int sdlWcsncmp(Pointer<WChar> str1, Pointer<WChar> str2, int maxlen) {
   final sdlWcsncmpLookupFunction = _libSdl
@@ -2101,6 +2325,10 @@ int sdlWcsncmp(Pointer<WChar> str1, Pointer<WChar> str2, int maxlen) {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_wcscasecmp(const wchar_t *str1, const wchar_t *str2)
 /// ```
+///
+/// See also:
+/// - [SDL_wcscasecmp - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_wcscasecmp)
+///
 /// {@category stdinc}
 int sdlWcscasecmp(Pointer<WChar> str1, Pointer<WChar> str2) {
   final sdlWcscasecmpLookupFunction = _libSdl
@@ -2154,6 +2382,10 @@ int sdlWcscasecmp(Pointer<WChar> str1, Pointer<WChar> str2) {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_wcsncasecmp(const wchar_t *str1, const wchar_t *str2, size_t maxlen)
 /// ```
+///
+/// See also:
+/// - [SDL_wcsncasecmp - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_wcsncasecmp)
+///
 /// {@category stdinc}
 int sdlWcsncasecmp(Pointer<WChar> str1, Pointer<WChar> str2, int maxlen) {
   final sdlWcsncasecmpLookupFunction = _libSdl
@@ -2192,6 +2424,10 @@ int sdlWcsncasecmp(Pointer<WChar> str1, Pointer<WChar> str2, int maxlen) {
 /// ```c
 /// extern SDL_DECLSPEC long SDLCALL SDL_wcstol(const wchar_t *str, wchar_t **endp, int base)
 /// ```
+///
+/// See also:
+/// - [SDL_wcstol - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_wcstol)
+///
 /// {@category stdinc}
 int sdlWcstol(Pointer<WChar> str, Pointer<Pointer<WChar>> endp, int base) {
   final sdlWcstolLookupFunction = _libSdl
@@ -2234,6 +2470,10 @@ int sdlWcstol(Pointer<WChar> str, Pointer<Pointer<WChar>> endp, int base) {
 /// ```c
 /// extern SDL_DECLSPEC unsigned long SDLCALL SDL_wcstoul(const wchar_t *str, wchar_t **endp, int base)
 /// ```
+///
+/// See also:
+/// - [SDL_wcstoul - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_wcstoul)
+///
 /// {@category stdinc}
 int sdlWcstoul(Pointer<WChar> str, Pointer<Pointer<WChar>> endp, int base) {
   final sdlWcstoulLookupFunction = _libSdl
@@ -2276,6 +2516,10 @@ int sdlWcstoul(Pointer<WChar> str, Pointer<Pointer<WChar>> endp, int base) {
 /// ```c
 /// extern SDL_DECLSPEC long long SDLCALL SDL_wcstoll(const wchar_t *str, wchar_t **endp, int base)
 /// ```
+///
+/// See also:
+/// - [SDL_wcstoll - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_wcstoll)
+///
 /// {@category stdinc}
 int sdlWcstoll(Pointer<WChar> str, Pointer<Pointer<WChar>> endp, int base) {
   final sdlWcstollLookupFunction = _libSdl
@@ -2320,6 +2564,10 @@ int sdlWcstoll(Pointer<WChar> str, Pointer<Pointer<WChar>> endp, int base) {
 /// ```c
 /// extern SDL_DECLSPEC unsigned long long SDLCALL SDL_wcstoull(const wchar_t *str, wchar_t **endp, int base)
 /// ```
+///
+/// See also:
+/// - [SDL_wcstoull - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_wcstoull)
+///
 /// {@category stdinc}
 int sdlWcstoull(Pointer<WChar> str, Pointer<Pointer<WChar>> endp, int base) {
   final sdlWcstoullLookupFunction = _libSdl
@@ -2355,6 +2603,10 @@ int sdlWcstoull(Pointer<WChar> str, Pointer<Pointer<WChar>> endp, int base) {
 /// ```c
 /// extern SDL_DECLSPEC size_t SDLCALL SDL_strlen(const char *str)
 /// ```
+///
+/// See also:
+/// - [SDL_strlen - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_strlen)
+///
 /// {@category stdinc}
 int sdlStrlen(String? str) {
   final sdlStrlenLookupFunction = _libSdl
@@ -2393,6 +2645,10 @@ int sdlStrlen(String? str) {
 /// ```c
 /// extern SDL_DECLSPEC size_t SDLCALL SDL_strnlen(const char *str, size_t maxlen)
 /// ```
+///
+/// See also:
+/// - [SDL_strnlen - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_strnlen)
+///
 /// {@category stdinc}
 int sdlStrnlen(String? str, int maxlen) {
   final sdlStrnlenLookupFunction = _libSdl
@@ -2436,6 +2692,10 @@ int sdlStrnlen(String? str, int maxlen) {
 /// ```c
 /// extern SDL_DECLSPEC size_t SDLCALL SDL_strlcpy(SDL_OUT_Z_CAP(maxlen) char *dst, const char *src, size_t maxlen)
 /// ```
+///
+/// See also:
+/// - [SDL_strlcpy - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_strlcpy)
+///
 /// {@category stdinc}
 int sdlStrlcpy(Pointer<Int8> dst, String? src, int maxlen) {
   final sdlStrlcpyLookupFunction = _libSdl
@@ -2478,6 +2738,10 @@ int sdlStrlcpy(Pointer<Int8> dst, String? src, int maxlen) {
 /// ```c
 /// extern SDL_DECLSPEC size_t SDLCALL SDL_utf8strlcpy(SDL_OUT_Z_CAP(dst_bytes) char *dst, const char *src, size_t dst_bytes)
 /// ```
+///
+/// See also:
+/// - [SDL_utf8strlcpy - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_utf8strlcpy)
+///
 /// {@category stdinc}
 int sdlUtf8strlcpy(Pointer<Int8> dst, String? src, int dstBytes) {
   final sdlUtf8strlcpyLookupFunction = _libSdl
@@ -2520,6 +2784,10 @@ int sdlUtf8strlcpy(Pointer<Int8> dst, String? src, int dstBytes) {
 /// ```c
 /// extern SDL_DECLSPEC size_t SDLCALL SDL_strlcat(SDL_INOUT_Z_CAP(maxlen) char *dst, const char *src, size_t maxlen)
 /// ```
+///
+/// See also:
+/// - [SDL_strlcat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_strlcat)
+///
 /// {@category stdinc}
 int sdlStrlcat(Pointer<Int8> dst, String? src, int maxlen) {
   final sdlStrlcatLookupFunction = _libSdl
@@ -2552,6 +2820,10 @@ int sdlStrlcat(Pointer<Int8> dst, String? src, int maxlen) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_MALLOC char * SDLCALL SDL_strdup(const char *str)
 /// ```
+///
+/// See also:
+/// - [SDL_strdup - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_strdup)
+///
 /// {@category stdinc}
 Pointer<Int8> sdlStrdup(String? str) {
   final sdlStrdupLookupFunction = _libSdl
@@ -2591,6 +2863,10 @@ Pointer<Int8> sdlStrdup(String? str) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_MALLOC char * SDLCALL SDL_strndup(const char *str, size_t maxlen)
 /// ```
+///
+/// See also:
+/// - [SDL_strndup - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_strndup)
+///
 /// {@category stdinc}
 Pointer<Int8> sdlStrndup(String? str, int maxlen) {
   final sdlStrndupLookupFunction = _libSdl
@@ -2626,6 +2902,10 @@ Pointer<Int8> sdlStrndup(String? str, int maxlen) {
 /// ```c
 /// extern SDL_DECLSPEC char * SDLCALL SDL_strrev(char *str)
 /// ```
+///
+/// See also:
+/// - [SDL_strrev - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_strrev)
+///
 /// {@category stdinc}
 Pointer<Int8> sdlStrrev(Pointer<Int8> str) {
   final sdlStrrevLookupFunction = _libSdl
@@ -2658,6 +2938,10 @@ Pointer<Int8> sdlStrrev(Pointer<Int8> str) {
 /// ```c
 /// extern SDL_DECLSPEC char * SDLCALL SDL_strupr(char *str)
 /// ```
+///
+/// See also:
+/// - [SDL_strupr - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_strupr)
+///
 /// {@category stdinc}
 Pointer<Int8> sdlStrupr(Pointer<Int8> str) {
   final sdlStruprLookupFunction = _libSdl
@@ -2690,6 +2974,10 @@ Pointer<Int8> sdlStrupr(Pointer<Int8> str) {
 /// ```c
 /// extern SDL_DECLSPEC char * SDLCALL SDL_strlwr(char *str)
 /// ```
+///
+/// See also:
+/// - [SDL_strlwr - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_strlwr)
+///
 /// {@category stdinc}
 Pointer<Int8> sdlStrlwr(Pointer<Int8> str) {
   final sdlStrlwrLookupFunction = _libSdl
@@ -2721,6 +3009,10 @@ Pointer<Int8> sdlStrlwr(Pointer<Int8> str) {
 /// ```c
 /// extern SDL_DECLSPEC char * SDLCALL SDL_strchr(const char *str, int c)
 /// ```
+///
+/// See also:
+/// - [SDL_strchr - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_strchr)
+///
 /// {@category stdinc}
 Pointer<Int8> sdlStrchr(String? str, int c) {
   final sdlStrchrLookupFunction = _libSdl
@@ -2754,6 +3046,10 @@ Pointer<Int8> sdlStrchr(String? str, int c) {
 /// ```c
 /// extern SDL_DECLSPEC char * SDLCALL SDL_strrchr(const char *str, int c)
 /// ```
+///
+/// See also:
+/// - [SDL_strrchr - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_strrchr)
+///
 /// {@category stdinc}
 Pointer<Int8> sdlStrrchr(String? str, int c) {
   final sdlStrrchrLookupFunction = _libSdl
@@ -2788,6 +3084,10 @@ Pointer<Int8> sdlStrrchr(String? str, int c) {
 /// ```c
 /// extern SDL_DECLSPEC char * SDLCALL SDL_strstr(const char *haystack, const char *needle)
 /// ```
+///
+/// See also:
+/// - [SDL_strstr - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_strstr)
+///
 /// {@category stdinc}
 Pointer<Int8> sdlStrstr(String? haystack, String? needle) {
   final sdlStrstrLookupFunction = _libSdl
@@ -2828,6 +3128,10 @@ Pointer<Int8> sdlStrstr(String? haystack, String? needle) {
 /// ```c
 /// extern SDL_DECLSPEC char * SDLCALL SDL_strnstr(const char *haystack, const char *needle, size_t maxlen)
 /// ```
+///
+/// See also:
+/// - [SDL_strnstr - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_strnstr)
+///
 /// {@category stdinc}
 Pointer<Int8> sdlStrnstr(String? haystack, String? needle, int maxlen) {
   final sdlStrnstrLookupFunction = _libSdl
@@ -2885,6 +3189,10 @@ Pointer<Int8> sdlStrnstr(String? haystack, String? needle, int maxlen) {
 /// ```c
 /// extern SDL_DECLSPEC char * SDLCALL SDL_strcasestr(const char *haystack, const char *needle)
 /// ```
+///
+/// See also:
+/// - [SDL_strcasestr - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_strcasestr)
+///
 /// {@category stdinc}
 Pointer<Int8> sdlStrcasestr(String? haystack, String? needle) {
   final sdlStrcasestrLookupFunction = _libSdl
@@ -2931,6 +3239,10 @@ Pointer<Int8> sdlStrcasestr(String? haystack, String? needle) {
 /// ```c
 /// extern SDL_DECLSPEC char * SDLCALL SDL_strtok_r(char *str, const char *delim, char **saveptr)
 /// ```
+///
+/// See also:
+/// - [SDL_strtok_r - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_strtok_r)
+///
 /// {@category stdinc}
 Pointer<Int8> sdlStrtokR(
   Pointer<Int8> str,
@@ -2985,6 +3297,10 @@ Pointer<Int8> sdlStrtokR(
 /// ```c
 /// extern SDL_DECLSPEC size_t SDLCALL SDL_utf8strlen(const char *str)
 /// ```
+///
+/// See also:
+/// - [SDL_utf8strlen - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_utf8strlen)
+///
 /// {@category stdinc}
 int sdlUtf8strlen(String? str) {
   final sdlUtf8strlenLookupFunction = _libSdl
@@ -3032,6 +3348,10 @@ int sdlUtf8strlen(String? str) {
 /// ```c
 /// extern SDL_DECLSPEC size_t SDLCALL SDL_utf8strnlen(const char *str, size_t bytes)
 /// ```
+///
+/// See also:
+/// - [SDL_utf8strnlen - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_utf8strnlen)
+///
 /// {@category stdinc}
 int sdlUtf8strnlen(String? str, int bytes) {
   final sdlUtf8strnlenLookupFunction = _libSdl
@@ -3074,6 +3394,10 @@ int sdlUtf8strnlen(String? str, int bytes) {
 /// ```c
 /// extern SDL_DECLSPEC char * SDLCALL SDL_itoa(int value, char *str, int radix)
 /// ```
+///
+/// See also:
+/// - [SDL_itoa - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_itoa)
+///
 /// {@category stdinc}
 Pointer<Int8> sdlItoa(int value, Pointer<Int8> str, int radix) {
   final sdlItoaLookupFunction = _libSdl
@@ -3113,6 +3437,10 @@ Pointer<Int8> sdlItoa(int value, Pointer<Int8> str, int radix) {
 /// ```c
 /// extern SDL_DECLSPEC char * SDLCALL SDL_uitoa(unsigned int value, char *str, int radix)
 /// ```
+///
+/// See also:
+/// - [SDL_uitoa - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_uitoa)
+///
 /// {@category stdinc}
 Pointer<Int8> sdlUitoa(int value, Pointer<Int8> str, int radix) {
   final sdlUitoaLookupFunction = _libSdl
@@ -3152,6 +3480,10 @@ Pointer<Int8> sdlUitoa(int value, Pointer<Int8> str, int radix) {
 /// ```c
 /// extern SDL_DECLSPEC char * SDLCALL SDL_ltoa(long value, char *str, int radix)
 /// ```
+///
+/// See also:
+/// - [SDL_ltoa - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ltoa)
+///
 /// {@category stdinc}
 Pointer<Int8> sdlLtoa(int value, Pointer<Int8> str, int radix) {
   final sdlLtoaLookupFunction = _libSdl
@@ -3191,6 +3523,10 @@ Pointer<Int8> sdlLtoa(int value, Pointer<Int8> str, int radix) {
 /// ```c
 /// extern SDL_DECLSPEC char * SDLCALL SDL_ultoa(unsigned long value, char *str, int radix)
 /// ```
+///
+/// See also:
+/// - [SDL_ultoa - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ultoa)
+///
 /// {@category stdinc}
 Pointer<Int8> sdlUltoa(int value, Pointer<Int8> str, int radix) {
   final sdlUltoaLookupFunction = _libSdl
@@ -3234,6 +3570,10 @@ Pointer<Int8> sdlUltoa(int value, Pointer<Int8> str, int radix) {
 /// ```c
 /// extern SDL_DECLSPEC char * SDLCALL SDL_lltoa(long long value, char *str, int radix)
 /// ```
+///
+/// See also:
+/// - [SDL_lltoa - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_lltoa)
+///
 /// {@category stdinc}
 Pointer<Int8> sdlLltoa(int value, Pointer<Int8> str, int radix) {
   final sdlLltoaLookupFunction = _libSdl
@@ -3273,6 +3613,10 @@ Pointer<Int8> sdlLltoa(int value, Pointer<Int8> str, int radix) {
 /// ```c
 /// extern SDL_DECLSPEC char * SDLCALL SDL_ulltoa(unsigned long long value, char *str, int radix)
 /// ```
+///
+/// See also:
+/// - [SDL_ulltoa - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ulltoa)
+///
 /// {@category stdinc}
 Pointer<Int8> sdlUlltoa(int value, Pointer<Int8> str, int radix) {
   final sdlUlltoaLookupFunction = _libSdl
@@ -3307,6 +3651,10 @@ Pointer<Int8> sdlUlltoa(int value, Pointer<Int8> str, int radix) {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_atoi(const char *str)
 /// ```
+///
+/// See also:
+/// - [SDL_atoi - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_atoi)
+///
 /// {@category stdinc}
 int sdlAtoi(String? str) {
   final sdlAtoiLookupFunction = _libSdl
@@ -3343,6 +3691,10 @@ int sdlAtoi(String? str) {
 /// ```c
 /// extern SDL_DECLSPEC double SDLCALL SDL_atof(const char *str)
 /// ```
+///
+/// See also:
+/// - [SDL_atof - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_atof)
+///
 /// {@category stdinc}
 double sdlAtof(String? str) {
   final sdlAtofLookupFunction = _libSdl
@@ -3391,6 +3743,10 @@ double sdlAtof(String? str) {
 /// ```c
 /// extern SDL_DECLSPEC long SDLCALL SDL_strtol(const char *str, char **endp, int base)
 /// ```
+///
+/// See also:
+/// - [SDL_strtol - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_strtol)
+///
 /// {@category stdinc}
 int sdlStrtol(String? str, Pointer<Pointer<Int8>> endp, int base) {
   final sdlStrtolLookupFunction = _libSdl
@@ -3442,6 +3798,10 @@ int sdlStrtol(String? str, Pointer<Pointer<Int8>> endp, int base) {
 /// ```c
 /// extern SDL_DECLSPEC unsigned long SDLCALL SDL_strtoul(const char *str, char **endp, int base)
 /// ```
+///
+/// See also:
+/// - [SDL_strtoul - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_strtoul)
+///
 /// {@category stdinc}
 int sdlStrtoul(String? str, Pointer<Pointer<Int8>> endp, int base) {
   final sdlStrtoulLookupFunction = _libSdl
@@ -3493,6 +3853,10 @@ int sdlStrtoul(String? str, Pointer<Pointer<Int8>> endp, int base) {
 /// ```c
 /// extern SDL_DECLSPEC long long SDLCALL SDL_strtoll(const char *str, char **endp, int base)
 /// ```
+///
+/// See also:
+/// - [SDL_strtoll - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_strtoll)
+///
 /// {@category stdinc}
 int sdlStrtoll(String? str, Pointer<Pointer<Int8>> endp, int base) {
   final sdlStrtollLookupFunction = _libSdl
@@ -3545,6 +3909,10 @@ int sdlStrtoll(String? str, Pointer<Pointer<Int8>> endp, int base) {
 /// ```c
 /// extern SDL_DECLSPEC unsigned long long SDLCALL SDL_strtoull(const char *str, char **endp, int base)
 /// ```
+///
+/// See also:
+/// - [SDL_strtoull - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_strtoull)
+///
 /// {@category stdinc}
 int sdlStrtoull(String? str, Pointer<Pointer<Int8>> endp, int base) {
   final sdlStrtoullLookupFunction = _libSdl
@@ -3592,6 +3960,10 @@ int sdlStrtoull(String? str, Pointer<Pointer<Int8>> endp, int base) {
 /// ```c
 /// extern SDL_DECLSPEC double SDLCALL SDL_strtod(const char *str, char **endp)
 /// ```
+///
+/// See also:
+/// - [SDL_strtod - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_strtod)
+///
 /// {@category stdinc}
 double sdlStrtod(String? str, Pointer<Pointer<Int8>> endp) {
   final sdlStrtodLookupFunction = _libSdl
@@ -3626,6 +3998,10 @@ double sdlStrtod(String? str, Pointer<Pointer<Int8>> endp) {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_strcmp(const char *str1, const char *str2)
 /// ```
+///
+/// See also:
+/// - [SDL_strcmp - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_strcmp)
+///
 /// {@category stdinc}
 int sdlStrcmp(String? str1, String? str2) {
   final sdlStrcmpLookupFunction = _libSdl
@@ -3673,6 +4049,10 @@ int sdlStrcmp(String? str1, String? str2) {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_strncmp(const char *str1, const char *str2, size_t maxlen)
 /// ```
+///
+/// See also:
+/// - [SDL_strncmp - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_strncmp)
+///
 /// {@category stdinc}
 int sdlStrncmp(String? str1, String? str2, int maxlen) {
   final sdlStrncmpLookupFunction = _libSdl
@@ -3718,6 +4098,10 @@ int sdlStrncmp(String? str1, String? str2, int maxlen) {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_strcasecmp(const char *str1, const char *str2)
 /// ```
+///
+/// See also:
+/// - [SDL_strcasecmp - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_strcasecmp)
+///
 /// {@category stdinc}
 int sdlStrcasecmp(String? str1, String? str2) {
   final sdlStrcasecmpLookupFunction = _libSdl
@@ -3774,6 +4158,10 @@ int sdlStrcasecmp(String? str1, String? str2) {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_strncasecmp(const char *str1, const char *str2, size_t maxlen)
 /// ```
+///
+/// See also:
+/// - [SDL_strncasecmp - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_strncasecmp)
+///
 /// {@category stdinc}
 int sdlStrncasecmp(String? str1, String? str2, int maxlen) {
   final sdlStrncasecmpLookupFunction = _libSdl
@@ -3809,6 +4197,10 @@ int sdlStrncasecmp(String? str1, String? str2, int maxlen) {
 /// ```c
 /// extern SDL_DECLSPEC char * SDLCALL SDL_strpbrk(const char *str, const char *breakset)
 /// ```
+///
+/// See also:
+/// - [SDL_strpbrk - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_strpbrk)
+///
 /// {@category stdinc}
 Pointer<Int8> sdlStrpbrk(String? str, String? breakset) {
   final sdlStrpbrkLookupFunction = _libSdl
@@ -3871,6 +4263,10 @@ Pointer<Int8> sdlStrpbrk(String? str, String? breakset) {
 /// ```c
 /// extern SDL_DECLSPEC Uint32 SDLCALL SDL_StepUTF8(const char **pstr, size_t *pslen)
 /// ```
+///
+/// See also:
+/// - [SDL_StepUTF8 - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_StepUTF8)
+///
 /// {@category stdinc}
 int sdlStepUtf8(Pointer<Pointer<Int8>> pstr, Pointer<Size> pslen) {
   final sdlStepUtf8LookupFunction = _libSdl
@@ -3913,6 +4309,10 @@ int sdlStepUtf8(Pointer<Pointer<Int8>> pstr, Pointer<Size> pslen) {
 /// ```c
 /// extern SDL_DECLSPEC Uint32 SDLCALL SDL_StepBackUTF8(const char *start, const char **pstr)
 /// ```
+///
+/// See also:
+/// - [SDL_StepBackUTF8 - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_StepBackUTF8)
+///
 /// {@category stdinc}
 int sdlStepBackUtf8(String? start, Pointer<Pointer<Int8>> pstr) {
   final sdlStepBackUtf8LookupFunction = _libSdl
@@ -3956,6 +4356,10 @@ int sdlStepBackUtf8(String? start, Pointer<Pointer<Int8>> pstr) {
 /// ```c
 /// extern SDL_DECLSPEC char * SDLCALL SDL_UCS4ToUTF8(Uint32 codepoint, char *dst)
 /// ```
+///
+/// See also:
+/// - [SDL_UCS4ToUTF8 - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_UCS4ToUTF8)
+///
 /// {@category stdinc}
 Pointer<Int8> sdlUcs4ToUtf8(int codepoint, Pointer<Int8> dst) {
   final sdlUcs4ToUtf8LookupFunction = _libSdl
@@ -3984,6 +4388,10 @@ Pointer<Int8> sdlUcs4ToUtf8(int codepoint, Pointer<Int8> dst) {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_sscanf(const char *text, SDL_SCANF_FORMAT_STRING const char *fmt, ...) SDL_SCANF_VARARG_FUNC(2)
 /// ```
+///
+/// See also:
+/// - [SDL_sscanf - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_sscanf)
+///
 /// {@category stdinc}
 int sdlSscanf(String? text, String? fmt) {
   final sdlSscanfLookupFunction = _libSdl
@@ -4020,6 +4428,10 @@ int sdlSscanf(String? text, String? fmt) {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_vsscanf(const char *text, SDL_SCANF_FORMAT_STRING const char *fmt, va_list ap) SDL_SCANF_VARARG_FUNCV(2)
 /// ```
+///
+/// See also:
+/// - [SDL_vsscanf - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_vsscanf)
+///
 /// {@category stdinc}
 int sdlVsscanf(String? text, String? fmt) {
   final sdlVsscanfLookupFunction = _libSdl
@@ -4070,6 +4482,10 @@ int sdlVsscanf(String? text, String? fmt) {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_snprintf(SDL_OUT_Z_CAP(maxlen) char *text, size_t maxlen, SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(3)
 /// ```
+///
+/// See also:
+/// - [SDL_snprintf - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_snprintf)
+///
 /// {@category stdinc}
 int sdlSnprintf(Pointer<Int8> text, int maxlen, String? fmt) {
   final sdlSnprintfLookupFunction = _libSdl
@@ -4118,6 +4534,10 @@ int sdlSnprintf(Pointer<Int8> text, int maxlen, String? fmt) {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_swprintf(SDL_OUT_Z_CAP(maxlen) wchar_t *text, size_t maxlen, SDL_PRINTF_FORMAT_STRING const wchar_t *fmt, ...) SDL_WPRINTF_VARARG_FUNC(3)
 /// ```
+///
+/// See also:
+/// - [SDL_swprintf - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_swprintf)
+///
 /// {@category stdinc}
 int sdlSwprintf(Pointer<WChar> text, int maxlen, Pointer<WChar> fmt) {
   final sdlSwprintfLookupFunction = _libSdl
@@ -4149,6 +4569,10 @@ int sdlSwprintf(Pointer<WChar> text, int maxlen, Pointer<WChar> fmt) {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_vsnprintf(SDL_OUT_Z_CAP(maxlen) char *text, size_t maxlen, SDL_PRINTF_FORMAT_STRING const char *fmt, va_list ap) SDL_PRINTF_VARARG_FUNCV(3)
 /// ```
+///
+/// See also:
+/// - [SDL_vsnprintf - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_vsnprintf)
+///
 /// {@category stdinc}
 int sdlVsnprintf(Pointer<Int8> text, int maxlen, String? fmt) {
   final sdlVsnprintfLookupFunction = _libSdl
@@ -4184,6 +4608,10 @@ int sdlVsnprintf(Pointer<Int8> text, int maxlen, String? fmt) {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_vswprintf(SDL_OUT_Z_CAP(maxlen) wchar_t *text, size_t maxlen, SDL_PRINTF_FORMAT_STRING const wchar_t *fmt, va_list ap) SDL_WPRINTF_VARARG_FUNCV(3)
 /// ```
+///
+/// See also:
+/// - [SDL_vswprintf - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_vswprintf)
+///
 /// {@category stdinc}
 int sdlVswprintf(Pointer<WChar> text, int maxlen, Pointer<WChar> fmt) {
   final sdlVswprintfLookupFunction = _libSdl
@@ -4224,6 +4652,10 @@ int sdlVswprintf(Pointer<WChar> text, int maxlen, Pointer<WChar> fmt) {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_asprintf(char **strp, SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(2)
 /// ```
+///
+/// See also:
+/// - [SDL_asprintf - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_asprintf)
+///
 /// {@category stdinc}
 int sdlAsprintf(Pointer<Pointer<Int8>> strp, String? fmt) {
   final sdlAsprintfLookupFunction = _libSdl
@@ -4257,6 +4689,10 @@ int sdlAsprintf(Pointer<Pointer<Int8>> strp, String? fmt) {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_vasprintf(char **strp, SDL_PRINTF_FORMAT_STRING const char *fmt, va_list ap) SDL_PRINTF_VARARG_FUNCV(2)
 /// ```
+///
+/// See also:
+/// - [SDL_vasprintf - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_vasprintf)
+///
 /// {@category stdinc}
 int sdlVasprintf(Pointer<Pointer<Int8>> strp, String? fmt) {
   final sdlVasprintfLookupFunction = _libSdl
@@ -4291,6 +4727,10 @@ int sdlVasprintf(Pointer<Pointer<Int8>> strp, String? fmt) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_srand(Uint64 seed)
 /// ```
+///
+/// See also:
+/// - [SDL_srand - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_srand)
+///
 /// {@category stdinc}
 void sdlSrand(int seed) {
   final sdlSrandLookupFunction = _libSdl
@@ -4335,6 +4775,10 @@ void sdlSrand(int seed) {
 /// ```c
 /// extern SDL_DECLSPEC Sint32 SDLCALL SDL_rand(Sint32 n)
 /// ```
+///
+/// See also:
+/// - [SDL_rand - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_rand)
+///
 /// {@category stdinc}
 int sdlRand(int n) {
   final sdlRandLookupFunction = _libSdl
@@ -4366,6 +4810,10 @@ int sdlRand(int n) {
 /// ```c
 /// extern SDL_DECLSPEC float SDLCALL SDL_randf(void)
 /// ```
+///
+/// See also:
+/// - [SDL_randf - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_randf)
+///
 /// {@category stdinc}
 double sdlRandf() {
   final sdlRandfLookupFunction = _libSdl
@@ -4397,6 +4845,10 @@ double sdlRandf() {
 /// ```c
 /// extern SDL_DECLSPEC Uint32 SDLCALL SDL_rand_bits(void)
 /// ```
+///
+/// See also:
+/// - [SDL_rand_bits - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_rand_bits)
+///
 /// {@category stdinc}
 int sdlRandBits() {
   final sdlRandBitsLookupFunction = _libSdl
@@ -4440,6 +4892,10 @@ int sdlRandBits() {
 /// ```c
 /// extern SDL_DECLSPEC Sint32 SDLCALL SDL_rand_r(Uint64 *state, Sint32 n)
 /// ```
+///
+/// See also:
+/// - [SDL_rand_r - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_rand_r)
+///
 /// {@category stdinc}
 int sdlRandR(Pointer<Uint64> state, int n) {
   final sdlRandRLookupFunction = _libSdl
@@ -4475,6 +4931,10 @@ int sdlRandR(Pointer<Uint64> state, int n) {
 /// ```c
 /// extern SDL_DECLSPEC float SDLCALL SDL_randf_r(Uint64 *state)
 /// ```
+///
+/// See also:
+/// - [SDL_randf_r - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_randf_r)
+///
 /// {@category stdinc}
 double sdlRandfR(Pointer<Uint64> state) {
   final sdlRandfRLookupFunction = _libSdl
@@ -4511,6 +4971,10 @@ double sdlRandfR(Pointer<Uint64> state) {
 /// ```c
 /// extern SDL_DECLSPEC Uint32 SDLCALL SDL_rand_bits_r(Uint64 *state)
 /// ```
+///
+/// See also:
+/// - [SDL_rand_bits_r - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_rand_bits_r)
+///
 /// {@category stdinc}
 int sdlRandBitsR(Pointer<Uint64> state) {
   final sdlRandBitsRLookupFunction = _libSdl
@@ -4552,6 +5016,10 @@ int sdlRandBitsR(Pointer<Uint64> state) {
 /// ```c
 /// extern SDL_DECLSPEC double SDLCALL SDL_acos(double x)
 /// ```
+///
+/// See also:
+/// - [SDL_acos - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_acos)
+///
 /// {@category stdinc}
 double sdlAcos(double x) {
   final sdlAcosLookupFunction = _libSdl
@@ -4592,6 +5060,10 @@ double sdlAcos(double x) {
 /// ```c
 /// extern SDL_DECLSPEC float SDLCALL SDL_acosf(float x)
 /// ```
+///
+/// See also:
+/// - [SDL_acosf - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_acosf)
+///
 /// {@category stdinc}
 double sdlAcosf(double x) {
   final sdlAcosfLookupFunction = _libSdl
@@ -4632,6 +5104,10 @@ double sdlAcosf(double x) {
 /// ```c
 /// extern SDL_DECLSPEC double SDLCALL SDL_asin(double x)
 /// ```
+///
+/// See also:
+/// - [SDL_asin - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_asin)
+///
 /// {@category stdinc}
 double sdlAsin(double x) {
   final sdlAsinLookupFunction = _libSdl
@@ -4672,6 +5148,10 @@ double sdlAsin(double x) {
 /// ```c
 /// extern SDL_DECLSPEC float SDLCALL SDL_asinf(float x)
 /// ```
+///
+/// See also:
+/// - [SDL_asinf - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_asinf)
+///
 /// {@category stdinc}
 double sdlAsinf(double x) {
   final sdlAsinfLookupFunction = _libSdl
@@ -4714,6 +5194,10 @@ double sdlAsinf(double x) {
 /// ```c
 /// extern SDL_DECLSPEC double SDLCALL SDL_atan(double x)
 /// ```
+///
+/// See also:
+/// - [SDL_atan - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_atan)
+///
 /// {@category stdinc}
 double sdlAtan(double x) {
   final sdlAtanLookupFunction = _libSdl
@@ -4756,6 +5240,10 @@ double sdlAtan(double x) {
 /// ```c
 /// extern SDL_DECLSPEC float SDLCALL SDL_atanf(float x)
 /// ```
+///
+/// See also:
+/// - [SDL_atanf - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_atanf)
+///
 /// {@category stdinc}
 double sdlAtanf(double x) {
   final sdlAtanfLookupFunction = _libSdl
@@ -4802,6 +5290,10 @@ double sdlAtanf(double x) {
 /// ```c
 /// extern SDL_DECLSPEC double SDLCALL SDL_atan2(double y, double x)
 /// ```
+///
+/// See also:
+/// - [SDL_atan2 - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_atan2)
+///
 /// {@category stdinc}
 double sdlAtan2(double y, double x) {
   final sdlAtan2LookupFunction = _libSdl
@@ -4849,6 +5341,10 @@ double sdlAtan2(double y, double x) {
 /// ```c
 /// extern SDL_DECLSPEC float SDLCALL SDL_atan2f(float y, float x)
 /// ```
+///
+/// See also:
+/// - [SDL_atan2f - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_atan2f)
+///
 /// {@category stdinc}
 double sdlAtan2f(double y, double x) {
   final sdlAtan2fLookupFunction = _libSdl
@@ -4888,6 +5384,10 @@ double sdlAtan2f(double y, double x) {
 /// ```c
 /// extern SDL_DECLSPEC double SDLCALL SDL_ceil(double x)
 /// ```
+///
+/// See also:
+/// - [SDL_ceil - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ceil)
+///
 /// {@category stdinc}
 double sdlCeil(double x) {
   final sdlCeilLookupFunction = _libSdl
@@ -4926,6 +5426,10 @@ double sdlCeil(double x) {
 /// ```c
 /// extern SDL_DECLSPEC float SDLCALL SDL_ceilf(float x)
 /// ```
+///
+/// See also:
+/// - [SDL_ceilf - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ceilf)
+///
 /// {@category stdinc}
 double sdlCeilf(double x) {
   final sdlCeilfLookupFunction = _libSdl
@@ -4962,6 +5466,10 @@ double sdlCeilf(double x) {
 /// ```c
 /// extern SDL_DECLSPEC double SDLCALL SDL_copysign(double x, double y)
 /// ```
+///
+/// See also:
+/// - [SDL_copysign - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_copysign)
+///
 /// {@category stdinc}
 double sdlCopysign(double x, double y) {
   final sdlCopysignLookupFunction = _libSdl
@@ -4999,6 +5507,10 @@ double sdlCopysign(double x, double y) {
 /// ```c
 /// extern SDL_DECLSPEC float SDLCALL SDL_copysignf(float x, float y)
 /// ```
+///
+/// See also:
+/// - [SDL_copysignf - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_copysignf)
+///
 /// {@category stdinc}
 double sdlCopysignf(double x, double y) {
   final sdlCopysignfLookupFunction = _libSdl
@@ -5038,6 +5550,10 @@ double sdlCopysignf(double x, double y) {
 /// ```c
 /// extern SDL_DECLSPEC double SDLCALL SDL_cos(double x)
 /// ```
+///
+/// See also:
+/// - [SDL_cos - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_cos)
+///
 /// {@category stdinc}
 double sdlCos(double x) {
   final sdlCosLookupFunction = _libSdl
@@ -5076,6 +5592,10 @@ double sdlCos(double x) {
 /// ```c
 /// extern SDL_DECLSPEC float SDLCALL SDL_cosf(float x)
 /// ```
+///
+/// See also:
+/// - [SDL_cosf - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_cosf)
+///
 /// {@category stdinc}
 double sdlCosf(double x) {
   final sdlCosfLookupFunction = _libSdl
@@ -5118,6 +5638,10 @@ double sdlCosf(double x) {
 /// ```c
 /// extern SDL_DECLSPEC double SDLCALL SDL_exp(double x)
 /// ```
+///
+/// See also:
+/// - [SDL_exp - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_exp)
+///
 /// {@category stdinc}
 double sdlExp(double x) {
   final sdlExpLookupFunction = _libSdl
@@ -5160,6 +5684,10 @@ double sdlExp(double x) {
 /// ```c
 /// extern SDL_DECLSPEC float SDLCALL SDL_expf(float x)
 /// ```
+///
+/// See also:
+/// - [SDL_expf - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_expf)
+///
 /// {@category stdinc}
 double sdlExpf(double x) {
   final sdlExpfLookupFunction = _libSdl
@@ -5191,6 +5719,10 @@ double sdlExpf(double x) {
 /// ```c
 /// extern SDL_DECLSPEC double SDLCALL SDL_fabs(double x)
 /// ```
+///
+/// See also:
+/// - [SDL_fabs - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_fabs)
+///
 /// {@category stdinc}
 double sdlFabs(double x) {
   final sdlFabsLookupFunction = _libSdl
@@ -5222,6 +5754,10 @@ double sdlFabs(double x) {
 /// ```c
 /// extern SDL_DECLSPEC float SDLCALL SDL_fabsf(float x)
 /// ```
+///
+/// See also:
+/// - [SDL_fabsf - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_fabsf)
+///
 /// {@category stdinc}
 double sdlFabsf(double x) {
   final sdlFabsfLookupFunction = _libSdl
@@ -5260,6 +5796,10 @@ double sdlFabsf(double x) {
 /// ```c
 /// extern SDL_DECLSPEC double SDLCALL SDL_floor(double x)
 /// ```
+///
+/// See also:
+/// - [SDL_floor - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_floor)
+///
 /// {@category stdinc}
 double sdlFloor(double x) {
   final sdlFloorLookupFunction = _libSdl
@@ -5298,6 +5838,10 @@ double sdlFloor(double x) {
 /// ```c
 /// extern SDL_DECLSPEC float SDLCALL SDL_floorf(float x)
 /// ```
+///
+/// See also:
+/// - [SDL_floorf - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_floorf)
+///
 /// {@category stdinc}
 double sdlFloorf(double x) {
   final sdlFloorfLookupFunction = _libSdl
@@ -5337,6 +5881,10 @@ double sdlFloorf(double x) {
 /// ```c
 /// extern SDL_DECLSPEC double SDLCALL SDL_trunc(double x)
 /// ```
+///
+/// See also:
+/// - [SDL_trunc - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_trunc)
+///
 /// {@category stdinc}
 double sdlTrunc(double x) {
   final sdlTruncLookupFunction = _libSdl
@@ -5376,6 +5924,10 @@ double sdlTrunc(double x) {
 /// ```c
 /// extern SDL_DECLSPEC float SDLCALL SDL_truncf(float x)
 /// ```
+///
+/// See also:
+/// - [SDL_truncf - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_truncf)
+///
 /// {@category stdinc}
 double sdlTruncf(double x) {
   final sdlTruncfLookupFunction = _libSdl
@@ -5416,6 +5968,10 @@ double sdlTruncf(double x) {
 /// ```c
 /// extern SDL_DECLSPEC double SDLCALL SDL_fmod(double x, double y)
 /// ```
+///
+/// See also:
+/// - [SDL_fmod - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_fmod)
+///
 /// {@category stdinc}
 double sdlFmod(double x, double y) {
   final sdlFmodLookupFunction = _libSdl
@@ -5457,6 +6013,10 @@ double sdlFmod(double x, double y) {
 /// ```c
 /// extern SDL_DECLSPEC float SDLCALL SDL_fmodf(float x, float y)
 /// ```
+///
+/// See also:
+/// - [SDL_fmodf - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_fmodf)
+///
 /// {@category stdinc}
 double sdlFmodf(double x, double y) {
   final sdlFmodfLookupFunction = _libSdl
@@ -5482,6 +6042,10 @@ double sdlFmodf(double x, double y) {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_isinf(double x)
 /// ```
+///
+/// See also:
+/// - [SDL_isinf - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_isinf)
+///
 /// {@category stdinc}
 int sdlIsinf(double x) {
   final sdlIsinfLookupFunction = _libSdl
@@ -5506,6 +6070,10 @@ int sdlIsinf(double x) {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_isinff(float x)
 /// ```
+///
+/// See also:
+/// - [SDL_isinff - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_isinff)
+///
 /// {@category stdinc}
 int sdlIsinff(double x) {
   final sdlIsinffLookupFunction = _libSdl
@@ -5530,6 +6098,10 @@ int sdlIsinff(double x) {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_isnan(double x)
 /// ```
+///
+/// See also:
+/// - [SDL_isnan - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_isnan)
+///
 /// {@category stdinc}
 int sdlIsnan(double x) {
   final sdlIsnanLookupFunction = _libSdl
@@ -5554,6 +6126,10 @@ int sdlIsnan(double x) {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_isnanf(float x)
 /// ```
+///
+/// See also:
+/// - [SDL_isnanf - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_isnanf)
+///
 /// {@category stdinc}
 int sdlIsnanf(double x) {
   final sdlIsnanfLookupFunction = _libSdl
@@ -5593,6 +6169,10 @@ int sdlIsnanf(double x) {
 /// ```c
 /// extern SDL_DECLSPEC float SDLCALL SDL_logf(float x)
 /// ```
+///
+/// See also:
+/// - [SDL_logf - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_logf)
+///
 /// {@category stdinc}
 double sdlLogf(double x) {
   final sdlLogfLookupFunction = _libSdl
@@ -5633,6 +6213,10 @@ double sdlLogf(double x) {
 /// ```c
 /// extern SDL_DECLSPEC double SDLCALL SDL_log10(double x)
 /// ```
+///
+/// See also:
+/// - [SDL_log10 - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_log10)
+///
 /// {@category stdinc}
 double sdlLog10(double x) {
   final sdlLog10LookupFunction = _libSdl
@@ -5673,6 +6257,10 @@ double sdlLog10(double x) {
 /// ```c
 /// extern SDL_DECLSPEC float SDLCALL SDL_log10f(float x)
 /// ```
+///
+/// See also:
+/// - [SDL_log10f - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_log10f)
+///
 /// {@category stdinc}
 double sdlLog10f(double x) {
   final sdlLog10fLookupFunction = _libSdl
@@ -5703,6 +6291,10 @@ double sdlLog10f(double x) {
 /// ```c
 /// extern SDL_DECLSPEC double SDLCALL SDL_modf(double x, double *y)
 /// ```
+///
+/// See also:
+/// - [SDL_modf - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_modf)
+///
 /// {@category stdinc}
 double sdlModf(double x, Pointer<Double> y) {
   final sdlModfLookupFunction = _libSdl
@@ -5734,6 +6326,10 @@ double sdlModf(double x, Pointer<Double> y) {
 /// ```c
 /// extern SDL_DECLSPEC float SDLCALL SDL_modff(float x, float *y)
 /// ```
+///
+/// See also:
+/// - [SDL_modff - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_modff)
+///
 /// {@category stdinc}
 double sdlModff(double x, Pointer<Float> y) {
   final sdlModffLookupFunction = _libSdl
@@ -5777,6 +6373,10 @@ double sdlModff(double x, Pointer<Float> y) {
 /// ```c
 /// extern SDL_DECLSPEC double SDLCALL SDL_pow(double x, double y)
 /// ```
+///
+/// See also:
+/// - [SDL_pow - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_pow)
+///
 /// {@category stdinc}
 double sdlPow(double x, double y) {
   final sdlPowLookupFunction = _libSdl
@@ -5820,6 +6420,10 @@ double sdlPow(double x, double y) {
 /// ```c
 /// extern SDL_DECLSPEC float SDLCALL SDL_powf(float x, float y)
 /// ```
+///
+/// See also:
+/// - [SDL_powf - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_powf)
+///
 /// {@category stdinc}
 double sdlPowf(double x, double y) {
   final sdlPowfLookupFunction = _libSdl
@@ -5860,6 +6464,10 @@ double sdlPowf(double x, double y) {
 /// ```c
 /// extern SDL_DECLSPEC double SDLCALL SDL_round(double x)
 /// ```
+///
+/// See also:
+/// - [SDL_round - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_round)
+///
 /// {@category stdinc}
 double sdlRound(double x) {
   final sdlRoundLookupFunction = _libSdl
@@ -5899,6 +6507,10 @@ double sdlRound(double x) {
 /// ```c
 /// extern SDL_DECLSPEC float SDLCALL SDL_roundf(float x)
 /// ```
+///
+/// See also:
+/// - [SDL_roundf - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_roundf)
+///
 /// {@category stdinc}
 double sdlRoundf(double x) {
   final sdlRoundfLookupFunction = _libSdl
@@ -5938,6 +6550,10 @@ double sdlRoundf(double x) {
 /// ```c
 /// extern SDL_DECLSPEC long SDLCALL SDL_lround(double x)
 /// ```
+///
+/// See also:
+/// - [SDL_lround - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_lround)
+///
 /// {@category stdinc}
 int sdlLround(double x) {
   final sdlLroundLookupFunction = _libSdl
@@ -5977,6 +6593,10 @@ int sdlLround(double x) {
 /// ```c
 /// extern SDL_DECLSPEC long SDLCALL SDL_lroundf(float x)
 /// ```
+///
+/// See also:
+/// - [SDL_lroundf - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_lroundf)
+///
 /// {@category stdinc}
 int sdlLroundf(double x) {
   final sdlLroundfLookupFunction = _libSdl
@@ -6012,6 +6632,10 @@ int sdlLroundf(double x) {
 /// ```c
 /// extern SDL_DECLSPEC double SDLCALL SDL_scalbn(double x, int n)
 /// ```
+///
+/// See also:
+/// - [SDL_scalbn - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_scalbn)
+///
 /// {@category stdinc}
 double sdlScalbn(double x, int n) {
   final sdlScalbnLookupFunction = _libSdl
@@ -6048,6 +6672,10 @@ double sdlScalbn(double x, int n) {
 /// ```c
 /// extern SDL_DECLSPEC float SDLCALL SDL_scalbnf(float x, int n)
 /// ```
+///
+/// See also:
+/// - [SDL_scalbnf - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_scalbnf)
+///
 /// {@category stdinc}
 double sdlScalbnf(double x, int n) {
   final sdlScalbnfLookupFunction = _libSdl
@@ -6087,6 +6715,10 @@ double sdlScalbnf(double x, int n) {
 /// ```c
 /// extern SDL_DECLSPEC double SDLCALL SDL_sin(double x)
 /// ```
+///
+/// See also:
+/// - [SDL_sin - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_sin)
+///
 /// {@category stdinc}
 double sdlSin(double x) {
   final sdlSinLookupFunction = _libSdl
@@ -6125,6 +6757,10 @@ double sdlSin(double x) {
 /// ```c
 /// extern SDL_DECLSPEC float SDLCALL SDL_sinf(float x)
 /// ```
+///
+/// See also:
+/// - [SDL_sinf - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_sinf)
+///
 /// {@category stdinc}
 double sdlSinf(double x) {
   final sdlSinfLookupFunction = _libSdl
@@ -6161,6 +6797,10 @@ double sdlSinf(double x) {
 /// ```c
 /// extern SDL_DECLSPEC double SDLCALL SDL_sqrt(double x)
 /// ```
+///
+/// See also:
+/// - [SDL_sqrt - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_sqrt)
+///
 /// {@category stdinc}
 double sdlSqrt(double x) {
   final sdlSqrtLookupFunction = _libSdl
@@ -6197,6 +6837,10 @@ double sdlSqrt(double x) {
 /// ```c
 /// extern SDL_DECLSPEC float SDLCALL SDL_sqrtf(float x)
 /// ```
+///
+/// See also:
+/// - [SDL_sqrtf - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_sqrtf)
+///
 /// {@category stdinc}
 double sdlSqrtf(double x) {
   final sdlSqrtfLookupFunction = _libSdl
@@ -6237,6 +6881,10 @@ double sdlSqrtf(double x) {
 /// ```c
 /// extern SDL_DECLSPEC double SDLCALL SDL_tan(double x)
 /// ```
+///
+/// See also:
+/// - [SDL_tan - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_tan)
+///
 /// {@category stdinc}
 double sdlTan(double x) {
   final sdlTanLookupFunction = _libSdl
@@ -6277,6 +6925,10 @@ double sdlTan(double x) {
 /// ```c
 /// extern SDL_DECLSPEC float SDLCALL SDL_tanf(float x)
 /// ```
+///
+/// See also:
+/// - [SDL_tanf - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_tanf)
+///
 /// {@category stdinc}
 double sdlTanf(double x) {
   final sdlTanfLookupFunction = _libSdl
@@ -6306,6 +6958,10 @@ double sdlTanf(double x) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_iconv_t SDLCALL SDL_iconv_open(const char *tocode, const char *fromcode)
 /// ```
+///
+/// See also:
+/// - [SDL_iconv_open - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_iconv_open)
+///
 /// {@category stdinc}
 Pointer<SdlIconvT> sdlIconvOpen(String? tocode, String? fromcode) {
   final sdlIconvOpenLookupFunction = _libSdl
@@ -6345,6 +7001,10 @@ Pointer<SdlIconvT> sdlIconvOpen(String? tocode, String? fromcode) {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_iconv_close(SDL_iconv_t cd)
 /// ```
+///
+/// See also:
+/// - [SDL_iconv_close - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_iconv_close)
+///
 /// {@category stdinc}
 int sdlIconvClose(Pointer<SdlIconvT> cd) {
   final sdlIconvCloseLookupFunction = _libSdl
@@ -6396,6 +7056,10 @@ int sdlIconvClose(Pointer<SdlIconvT> cd) {
 /// ```c
 /// extern SDL_DECLSPEC size_t SDLCALL SDL_iconv(SDL_iconv_t cd, const char **inbuf, size_t *inbytesleft, char **outbuf, size_t *outbytesleft)
 /// ```
+///
+/// See also:
+/// - [SDL_iconv - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_iconv)
+///
 /// {@category stdinc}
 int sdlIconv(
   Pointer<SdlIconvT> cd,
@@ -6454,6 +7118,10 @@ int sdlIconv(
 /// ```c
 /// extern SDL_DECLSPEC char * SDLCALL SDL_iconv_string(const char *tocode, const char *fromcode, const char *inbuf, size_t inbytesleft)
 /// ```
+///
+/// See also:
+/// - [SDL_iconv_string - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_iconv_string)
+///
 /// {@category stdinc}
 Pointer<Int8> sdlIconvString(
   String? tocode,

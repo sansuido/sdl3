@@ -45,6 +45,10 @@ part of '../../../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_PeepEvents(SDL_Event *events, int numevents, SDL_EventAction action, Uint32 minType, Uint32 maxType)
 /// ```
+///
+/// See also:
+/// - [SDL_PeepEvents - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_PeepEvents)
+///
 /// {@category events}
 List<SdlxEvent> sdlxPeepEvents(
   int numevents,
@@ -117,6 +121,10 @@ List<SdlxEvent> sdlxPeepEvents(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_PollEvent(SDL_Event *event)
 /// ```
+///
+/// See also:
+/// - [SDL_PollEvent - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_PollEvent)
+///
 /// {@category events}
 SdlxEvent? sdlxPollEvent() {
   SdlxEvent? result;
@@ -154,6 +162,10 @@ SdlxEvent? sdlxPollEvent() {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_WaitEvent(SDL_Event *event)
 /// ```
+///
+/// See also:
+/// - [SDL_WaitEvent - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_WaitEvent)
+///
 /// {@category events}
 SdlxEvent? sdlxWaitEvent() {
   SdlxEvent? result;
@@ -197,6 +209,10 @@ SdlxEvent? sdlxWaitEvent() {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_WaitEventTimeout(SDL_Event *event, Sint32 timeoutMS)
 /// ```
+///
+/// See also:
+/// - [SDL_WaitEventTimeout - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_WaitEventTimeout)
+///
 /// {@category events}
 SdlxEvent? sdlxWaitEventTimeout(int timeout) {
   SdlxEvent? result;
@@ -244,6 +260,10 @@ SdlxEvent? sdlxWaitEventTimeout(int timeout) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_PushEvent(SDL_Event *event)
 /// ```
+///
+/// See also:
+/// - [SDL_PushEvent - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_PushEvent)
+///
 /// {@category events}
 bool sdlxPushEvent(SdlxEvent event) {
   final eventPointer = event.calloc();

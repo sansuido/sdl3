@@ -16,6 +16,10 @@ extension TtfFontEx on TtfFont {
   /// ```c
   /// extern SDL_DECLSPEC int SDLCALL TTF_Version(void)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_Version - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_Version)
+  ///
   /// {@category ttf}
   static int version() => ttfVersion();
 
@@ -37,6 +41,10 @@ extension TtfFontEx on TtfFont {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL TTF_GetFreeTypeVersion(int *major, int *minor, int *patch)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_GetFreeTypeVersion - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetFreeTypeVersion)
+  ///
   /// {@category ttf}
   static ({int major, int minor, int patch}) getFreeTypeVersion() =>
       ttfxGetFreeTypeVersion();
@@ -57,6 +65,10 @@ extension TtfFontEx on TtfFont {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL TTF_GetHarfBuzzVersion(int *major, int *minor, int *patch)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_GetHarfBuzzVersion - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetHarfBuzzVersion)
+  ///
   /// {@category ttf}
   static ({int major, int minor, int patch}) getHarfBuzzVersion() =>
       ttfxGetHarfBuzzVersion();
@@ -80,6 +92,10 @@ extension TtfFontEx on TtfFont {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL TTF_Init(void)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_Init - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_Init)
+  ///
   /// {@category ttf}
   static bool init() => ttfInit();
 
@@ -106,6 +122,10 @@ extension TtfFontEx on TtfFont {
   /// ```c
   /// extern SDL_DECLSPEC TTF_Font * SDLCALL TTF_OpenFont(const char *file, float ptsize)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_OpenFont - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_OpenFont)
+  ///
   /// {@category ttf}
   static Pointer<TtfFont> open(String file, double ptsize) =>
       ttfOpenFont(file, ptsize);
@@ -138,6 +158,10 @@ extension TtfFontEx on TtfFont {
   /// ```c
   /// extern SDL_DECLSPEC TTF_Font * SDLCALL TTF_OpenFontIO(SDL_IOStream *src, bool closeio, float ptsize)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_OpenFontIO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_OpenFontIO)
+  ///
   /// {@category ttf}
   static Pointer<TtfFont> openIo(
     Pointer<SdlIoStream> src,
@@ -191,6 +215,10 @@ extension TtfFontEx on TtfFont {
   /// ```c
   /// extern SDL_DECLSPEC TTF_Font * SDLCALL TTF_OpenFontWithProperties(SDL_PropertiesID props)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_OpenFontWithProperties - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_OpenFontWithProperties)
+  ///
   /// {@category ttf}
   static Pointer<TtfFont> openWithProperties(int props) =>
       ttfOpenFontWithProperties(props);
@@ -213,6 +241,10 @@ extension TtfFontEx on TtfFont {
   /// ```c
   /// extern SDL_DECLSPEC Uint32 SDLCALL TTF_GetGlyphScript(Uint32 ch)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_GetGlyphScript - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetGlyphScript)
+  ///
   /// {@category ttf}
   static int getGlyphScript(int ch) => ttfGetGlyphScript(ch);
 
@@ -239,6 +271,10 @@ extension TtfFontEx on TtfFont {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL TTF_Quit(void)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_Quit - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_Quit)
+  ///
   /// {@category ttf}
   static void quit() => ttfQuit();
 
@@ -267,6 +303,10 @@ extension TtfFontEx on TtfFont {
   /// ```c
   /// extern SDL_DECLSPEC int SDLCALL TTF_WasInit(void)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_WasInit - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_WasInit)
+  ///
   /// {@category ttf}
   static int wasInit() => ttfWasInit();
 }
@@ -296,6 +336,10 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC TTF_Font * SDLCALL TTF_CopyFont(TTF_Font *existing_font)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_CopyFont - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_CopyFont)
+  ///
   /// {@category ttf}
   Pointer<TtfFont> copy() => ttfCopyFont(this);
 
@@ -324,6 +368,10 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_PropertiesID SDLCALL TTF_GetFontProperties(TTF_Font *font)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_GetFontProperties - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetFontProperties)
+  ///
   /// {@category ttf}
   int getProperties() => ttfGetFontProperties(this);
 
@@ -345,6 +393,10 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC Uint32 SDLCALL TTF_GetFontGeneration(TTF_Font *font)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_GetFontGeneration - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetFontGeneration)
+  ///
   /// {@category ttf}
   int getGeneration() => ttfGetFontGeneration(this);
 
@@ -374,6 +426,10 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL TTF_AddFallbackFont(TTF_Font *font, TTF_Font *fallback)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_AddFallbackFont - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_AddFallbackFont)
+  ///
   /// {@category ttf}
   bool addFallback(Pointer<TtfFont> fallback) =>
       ttfAddFallbackFont(this, fallback);
@@ -397,6 +453,10 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL TTF_RemoveFallbackFont(TTF_Font *font, TTF_Font *fallback)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_RemoveFallbackFont - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_RemoveFallbackFont)
+  ///
   /// {@category ttf}
   void removeFallback(Pointer<TtfFont> fallback) =>
       ttfRemoveFallbackFont(this, fallback);
@@ -419,6 +479,10 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL TTF_ClearFallbackFonts(TTF_Font *font)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_ClearFallbackFonts - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_ClearFallbackFonts)
+  ///
   /// {@category ttf}
   void clearFallbacks() => ttfClearFallbackFonts(this);
 
@@ -443,6 +507,10 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL TTF_SetFontSize(TTF_Font *font, float ptsize)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_SetFontSize - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_SetFontSize)
+  ///
   /// {@category ttf}
   bool setSize(double ptsize) => ttfSetFontSize(this, ptsize);
 
@@ -470,6 +538,10 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL TTF_SetFontSizeDPI(TTF_Font *font, float ptsize, int hdpi, int vdpi)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_SetFontSizeDPI - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_SetFontSizeDPI)
+  ///
   /// {@category ttf}
   bool setSizeDpi(double ptsize, int hdpi, int vdpi) =>
       ttfSetFontSizeDpi(this, ptsize, hdpi, vdpi);
@@ -492,6 +564,10 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC float SDLCALL TTF_GetFontSize(TTF_Font *font)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_GetFontSize - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetFontSize)
+  ///
   /// {@category ttf}
   double getSize() => ttfGetFontSize(this);
 
@@ -514,6 +590,10 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL TTF_GetFontDPI(TTF_Font *font, int *hdpi, int *vdpi)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_GetFontDPI - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetFontDPI)
+  ///
   /// {@category ttf}
   ({int hdpi, int vdpi})? getDpi() => ttfxGetFontDpi(this);
 
@@ -544,6 +624,10 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL TTF_SetFontStyle(TTF_Font *font, TTF_FontStyleFlags style)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_SetFontStyle - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_SetFontStyle)
+  ///
   /// {@category ttf}
   void setStyle(int style) => ttfSetFontStyle(this, style);
 
@@ -570,6 +654,10 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC TTF_FontStyleFlags SDLCALL TTF_GetFontStyle(const TTF_Font *font)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_GetFontStyle - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetFontStyle)
+  ///
   /// {@category ttf}
   int getStyle() => ttfGetFontStyle(this);
 
@@ -598,6 +686,10 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL TTF_SetFontOutline(TTF_Font *font, int outline)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_SetFontOutline - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_SetFontOutline)
+  ///
   /// {@category ttf}
   bool setOutline(int outline) => ttfSetFontOutline(this, outline);
 
@@ -616,6 +708,10 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC int SDLCALL TTF_GetFontOutline(const TTF_Font *font)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_GetFontOutline - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetFontOutline)
+  ///
   /// {@category ttf}
   int getOutline() => ttfGetFontOutline(this);
 
@@ -646,6 +742,10 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL TTF_SetFontHinting(TTF_Font *font, TTF_HintingFlags hinting)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_SetFontHinting - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_SetFontHinting)
+  ///
   /// {@category ttf}
   void setHinting(int hinting) => ttfSetFontHinting(this, hinting);
 
@@ -662,6 +762,10 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC int SDLCALL TTF_GetNumFontFaces(const TTF_Font *font)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_GetNumFontFaces - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetNumFontFaces)
+  ///
   /// {@category ttf}
   int getNumFaces() => ttfGetNumFontFaces(this);
 
@@ -689,6 +793,10 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC TTF_HintingFlags SDLCALL TTF_GetFontHinting(const TTF_Font *font)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_GetFontHinting - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetFontHinting)
+  ///
   /// {@category ttf}
   int getHinting() => ttfGetFontHinting(this);
 
@@ -719,6 +827,10 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL TTF_SetFontSDF(TTF_Font *font, bool enabled)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_SetFontSDF - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_SetFontSDF)
+  ///
   /// {@category ttf}
   bool setSdf(bool enabled) => ttfSetFontSdf(this, enabled);
 
@@ -737,6 +849,10 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL TTF_GetFontSDF(const TTF_Font *font)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_GetFontSDF - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetFontSDF)
+  ///
   /// {@category ttf}
   bool getSdf() => ttfGetFontSdf(this);
 
@@ -754,6 +870,10 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC int SDLCALL TTF_GetFontWeight(const TTF_Font *font)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_GetFontWeight - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetFontWeight)
+  ///
   /// {@category ttf}
   int getWeight() => ttfGetFontWeight(this);
 
@@ -775,6 +895,10 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL TTF_SetFontWrapAlignment(TTF_Font *font, TTF_HorizontalAlignment align)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_SetFontWrapAlignment - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_SetFontWrapAlignment)
+  ///
   /// {@category ttf}
   void setWrapAlignment(int align) => ttfSetFontWrapAlignment(this, align);
 
@@ -793,6 +917,10 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC TTF_HorizontalAlignment SDLCALL TTF_GetFontWrapAlignment(const TTF_Font *font)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_GetFontWrapAlignment - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetFontWrapAlignment)
+  ///
   /// {@category ttf}
   int getWrapAlignment() => ttfGetFontWrapAlignment(this);
 
@@ -811,6 +939,10 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC int SDLCALL TTF_GetFontHeight(const TTF_Font *font)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_GetFontHeight - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetFontHeight)
+  ///
   /// {@category ttf}
   int getHeight() => ttfGetFontHeight(this);
 
@@ -829,6 +961,10 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC int SDLCALL TTF_GetFontAscent(const TTF_Font *font)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_GetFontAscent - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetFontAscent)
+  ///
   /// {@category ttf}
   int getAscent() => ttfGetFontAscent(this);
 
@@ -847,6 +983,10 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC int SDLCALL TTF_GetFontDescent(const TTF_Font *font)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_GetFontDescent - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetFontDescent)
+  ///
   /// {@category ttf}
   int getDescent() => ttfGetFontDescent(this);
 
@@ -868,6 +1008,10 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL TTF_SetFontLineSkip(TTF_Font *font, int lineskip)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_SetFontLineSkip - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_SetFontLineSkip)
+  ///
   /// {@category ttf}
   void setLineSkip(int lineskip) => ttfSetFontLineSkip(this, lineskip);
 
@@ -886,6 +1030,10 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC int SDLCALL TTF_GetFontLineSkip(const TTF_Font *font)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_GetFontLineSkip - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetFontLineSkip)
+  ///
   /// {@category ttf}
   int getLineSkip() => ttfGetFontLineSkip(this);
 
@@ -912,6 +1060,10 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL TTF_SetFontKerning(TTF_Font *font, bool enabled)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_SetFontKerning - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_SetFontKerning)
+  ///
   /// {@category ttf}
   void setKerning(bool allowed) => ttfSetFontKerning(this, allowed);
 
@@ -930,6 +1082,10 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL TTF_GetFontKerning(const TTF_Font *font)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_GetFontKerning - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetFontKerning)
+  ///
   /// {@category ttf}
   bool getKerning() => ttfGetFontKerning(this);
 
@@ -952,6 +1108,10 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL TTF_FontIsFixedWidth(const TTF_Font *font)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_FontIsFixedWidth - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_FontIsFixedWidth)
+  ///
   /// {@category ttf}
   bool isFixedWidth() => ttfFontIsFixedWidth(this);
 
@@ -972,6 +1132,10 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL TTF_FontIsScalable(const TTF_Font *font)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_FontIsScalable - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_FontIsScalable)
+  ///
   /// {@category ttf}
   bool isScalable() => ttfFontIsScalable(this);
 
@@ -994,6 +1158,10 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC const char * SDLCALL TTF_GetFontFamilyName(const TTF_Font *font)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_GetFontFamilyName - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetFontFamilyName)
+  ///
   /// {@category ttf}
   String? getFamilyName() => ttfGetFontFamilyName(this);
 
@@ -1016,6 +1184,10 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC const char * SDLCALL TTF_GetFontStyleName(const TTF_Font *font)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_GetFontStyleName - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetFontStyleName)
+  ///
   /// {@category ttf}
   String? getStyleName() => ttfGetFontStyleName(this);
 
@@ -1040,6 +1212,10 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL TTF_SetFontDirection(TTF_Font *font, TTF_Direction direction)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_SetFontDirection - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_SetFontDirection)
+  ///
   /// {@category ttf}
   bool setDirection(int direction) => ttfSetFontDirection(this, direction);
 
@@ -1059,6 +1235,10 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC TTF_Direction SDLCALL TTF_GetFontDirection(TTF_Font *font)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_GetFontDirection - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetFontDirection)
+  ///
   /// {@category ttf}
   int getDirection() => ttfGetFontDirection(this);
 
@@ -1087,6 +1267,10 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL TTF_SetFontCharSpacing(TTF_Font *font, int spacing)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_SetFontCharSpacing - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_SetFontCharSpacing)
+  ///
   /// {@category ttf}
   bool setCharSpacing(int spacing) => ttfSetFontCharSpacing(this, spacing);
 
@@ -1107,6 +1291,10 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC int SDLCALL TTF_GetFontCharSpacing(TTF_Font *font)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_GetFontCharSpacing - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetFontCharSpacing)
+  ///
   /// {@category ttf}
   int getCharSpacing() => ttfGetFontCharSpacing(this);
 
@@ -1134,6 +1322,10 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL TTF_SetFontScript(TTF_Font *font, Uint32 script)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_SetFontScript - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_SetFontScript)
+  ///
   /// {@category ttf}
   bool setScript(int script) => ttfSetFontScript(this, script);
 
@@ -1155,6 +1347,10 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC Uint32 SDLCALL TTF_GetFontScript(TTF_Font *font)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_GetFontScript - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetFontScript)
+  ///
   /// {@category ttf}
   int getScript() => ttfGetFontScript(this);
 
@@ -1180,6 +1376,10 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL TTF_SetFontLanguage(TTF_Font *font, const char *language_bcp47)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_SetFontLanguage - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_SetFontLanguage)
+  ///
   /// {@category ttf}
   bool setLanguage(String? languageBcp47) =>
       ttfSetFontLanguage(this, languageBcp47);
@@ -1199,6 +1399,10 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL TTF_FontHasGlyph(TTF_Font *font, Uint32 ch)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_FontHasGlyph - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_FontHasGlyph)
+  ///
   /// {@category ttf}
   bool hasGlyph(int ch) => ttfFontHasGlyph(this, ch);
 
@@ -1220,6 +1424,10 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Surface * SDLCALL TTF_GetGlyphImage(TTF_Font *font, Uint32 ch, TTF_ImageType *image_type)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_GetGlyphImage - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetGlyphImage)
+  ///
   /// {@category ttf}
   ({int imageType, Pointer<SdlSurface> surface})? getGlyphImage(int ch) =>
       ttfxGetGlyphImage(this, ch);
@@ -1245,6 +1453,10 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Surface * SDLCALL TTF_GetGlyphImageForIndex(TTF_Font *font, Uint32 glyph_index, TTF_ImageType *image_type)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_GetGlyphImageForIndex - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetGlyphImageForIndex)
+  ///
   /// {@category ttf}
   ({int imageType, Pointer<SdlSurface> surface})? getGlyphImageForIndex(
     int glyphIndex,
@@ -1282,6 +1494,10 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL TTF_GetGlyphMetrics(TTF_Font *font, Uint32 ch, int *minx, int *maxx, int *miny, int *maxy, int *advance)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_GetGlyphMetrics - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetGlyphMetrics)
+  ///
   /// {@category ttf}
   ({int advance, int maxx, int maxy, int minx, int miny})? getGlyphMetrics(
     int ch,
@@ -1306,6 +1522,10 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL TTF_GetGlyphKerning(TTF_Font *font, Uint32 previous_ch, Uint32 ch, int *kerning)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_GetGlyphKerning - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetGlyphKerning)
+  ///
   /// {@category ttf}
   int? getGlyphKerning(int previousCh, int ch) =>
       ttfxGetGlyphKerning(this, previousCh, ch);
@@ -1333,6 +1553,10 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL TTF_GetStringSize(TTF_Font *font, const char *text, size_t length, int *w, int *h)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_GetStringSize - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetStringSize)
+  ///
   /// {@category ttf}
   ({int w, int h})? getStringSize(String text) => ttfxGetStringSize(this, text);
 
@@ -1365,6 +1589,10 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL TTF_GetStringSizeWrapped(TTF_Font *font, const char *text, size_t length, int wrap_width, int *w, int *h)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_GetStringSizeWrapped - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetStringSizeWrapped)
+  ///
   /// {@category ttf}
   ({int w, int h})? getStringSizeWrapped(String text, int wrapWidth) =>
       ttfxGetStringSizeWrapped(this, text, wrapWidth);
@@ -1398,6 +1626,10 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL TTF_MeasureString(TTF_Font *font, const char *text, size_t length, int max_width, int *measured_width, size_t *measured_length)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_MeasureString - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_MeasureString)
+  ///
   /// {@category ttf}
   ({int measuredLength, int measuredWidth})? measureString(
     String text,
@@ -1442,6 +1674,10 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Surface * SDLCALL TTF_RenderText_Solid(TTF_Font *font, const char *text, size_t length, SDL_Color fg)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_RenderText_Solid - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_RenderText_Solid)
+  ///
   /// {@category ttf}
   Pointer<SdlSurface> renderTextSolid(String? text, SdlxColor fg) =>
       ttfxRenderTextSolid(this, text, fg);
@@ -1483,6 +1719,10 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Surface * SDLCALL TTF_RenderText_Solid_Wrapped(TTF_Font *font, const char *text, size_t length, SDL_Color fg, int wrapLength)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_RenderText_Solid_Wrapped - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_RenderText_Solid_Wrapped)
+  ///
   /// {@category ttf}
   Pointer<SdlSurface> renderTextSolidWrapped(
     String? text,
@@ -1520,6 +1760,10 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Surface * SDLCALL TTF_RenderGlyph_Solid(TTF_Font *font, Uint32 ch, SDL_Color fg)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_RenderGlyph_Solid - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_RenderGlyph_Solid)
+  ///
   /// {@category ttf}
   Pointer<SdlSurface> renderGlyphSolid(int ch, SdlxColor fg) =>
       ttfxRenderGlyphSolid(this, ch, fg);
@@ -1563,6 +1807,10 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Surface * SDLCALL TTF_RenderText_Shaded(TTF_Font *font, const char *text, size_t length, SDL_Color fg, SDL_Color bg)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_RenderText_Shaded - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_RenderText_Shaded)
+  ///
   /// {@category ttf}
   Pointer<SdlSurface> renderTextShaded(
     String? text,
@@ -1609,6 +1857,10 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Surface * SDLCALL TTF_RenderText_Shaded(TTF_Font *font, const char *text, size_t length, SDL_Color fg, SDL_Color bg)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_RenderText_Shaded - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_RenderText_Shaded)
+  ///
   /// {@category ttf}
   Pointer<SdlSurface> renderTextShadedWrapped(
     String? text,
@@ -1649,6 +1901,10 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Surface * SDLCALL TTF_RenderGlyph_Shaded(TTF_Font *font, Uint32 ch, SDL_Color fg, SDL_Color bg)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_RenderGlyph_Shaded - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_RenderGlyph_Shaded)
+  ///
   /// {@category ttf}
   Pointer<SdlSurface> renderGlyphShaded(int ch, SdlxColor fg, SdlxColor bg) =>
       ttfxRenderGlyphShaded(this, ch, fg, bg);
@@ -1690,6 +1946,10 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Surface * SDLCALL TTF_RenderText_Blended(TTF_Font *font, const char *text, size_t length, SDL_Color fg)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_RenderText_Blended - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_RenderText_Blended)
+  ///
   /// {@category ttf}
   Pointer<SdlSurface> renderTextBlended(String text, SdlxColor fg) =>
       ttfxRenderTextBlended(this, text, fg);
@@ -1731,6 +1991,10 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Surface * SDLCALL TTF_RenderText_Blended_Wrapped(TTF_Font *font, const char *text, size_t length, SDL_Color fg, int wrap_width)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_RenderText_Blended_Wrapped - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_RenderText_Blended_Wrapped)
+  ///
   /// {@category ttf}
   Pointer<SdlSurface> renderTextBlendedWrapped(
     String? text,
@@ -1768,6 +2032,10 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Surface * SDLCALL TTF_RenderGlyph_Blended(TTF_Font *font, Uint32 ch, SDL_Color fg)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_RenderGlyph_Blended - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_RenderGlyph_Blended)
+  ///
   /// {@category ttf}
   Pointer<SdlSurface> renderGlyphBlended(int ch, SdlxColor fg) =>
       ttfxRenderGlyphBlended(this, ch, fg);
@@ -1810,6 +2078,10 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Surface * SDLCALL TTF_RenderText_LCD(TTF_Font *font, const char *text, size_t length, SDL_Color fg, SDL_Color bg)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_RenderText_LCD - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_RenderText_LCD)
+  ///
   /// {@category ttf}
   Pointer<SdlSurface> renderTextLcd(
     String? text,
@@ -1857,6 +2129,10 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Surface * SDLCALL TTF_RenderText_LCD_Wrapped(TTF_Font *font, const char *text, size_t length, SDL_Color fg, SDL_Color bg, int wrap_width)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_RenderText_LCD_Wrapped - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_RenderText_LCD_Wrapped)
+  ///
   /// {@category ttf}
   Pointer<SdlSurface> renderTextLcdWrapped(
     String? text,
@@ -1898,6 +2174,10 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Surface * SDLCALL TTF_RenderGlyph_LCD(TTF_Font *font, Uint32 ch, SDL_Color fg, SDL_Color bg)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_RenderGlyph_LCD - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_RenderGlyph_LCD)
+  ///
   /// {@category ttf}
   Pointer<SdlSurface> renderGlyphLcd(int ch, SdlxColor fg, SdlxColor bg) =>
       ttfxRenderGlyphLcd(this, ch, fg, bg);
@@ -1927,6 +2207,10 @@ extension TtfFontPointerEx on Pointer<TtfFont> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL TTF_CloseFont(TTF_Font *font)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_CloseFont - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_CloseFont)
+  ///
   /// {@category ttf}
   void close() {
     ttfCloseFont(this);

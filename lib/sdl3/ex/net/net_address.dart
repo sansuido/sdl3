@@ -45,6 +45,10 @@ extension NetAddressPointerEx on Pointer<NetAddress> {
   /// ```c
   /// extern SDL_DECLSPEC NET_Status SDLCALL NET_WaitUntilResolved(NET_Address *address, Sint32 timeout)
   /// ```
+  ///
+  /// See also:
+  /// - [NET_WaitUntilResolved - SDL3 Wiki](https://wiki.libsdl.org/SDL3/NET_WaitUntilResolved)
+  ///
   /// {@category net}
   int waitUntilResolved(int timeout) => netWaitUntilResolved(this, timeout);
 
@@ -80,6 +84,10 @@ extension NetAddressPointerEx on Pointer<NetAddress> {
   /// ```c
   /// extern SDL_DECLSPEC NET_Status SDLCALL NET_GetAddressStatus(NET_Address *address)
   /// ```
+  ///
+  /// See also:
+  /// - [NET_GetAddressStatus - SDL3 Wiki](https://wiki.libsdl.org/SDL3/NET_GetAddressStatus)
+  ///
   /// {@category net}
   int getStatus() => netGetAddressStatus(this);
 
@@ -113,6 +121,10 @@ extension NetAddressPointerEx on Pointer<NetAddress> {
   /// ```c
   /// extern SDL_DECLSPEC const char * SDLCALL NET_GetAddressString(NET_Address *address)
   /// ```
+  ///
+  /// See also:
+  /// - [NET_GetAddressString - SDL3 Wiki](https://wiki.libsdl.org/SDL3/NET_GetAddressString)
+  ///
   /// {@category net}
   String? getString() => netGetAddressString(this);
 
@@ -161,6 +173,10 @@ extension NetAddressPointerEx on Pointer<NetAddress> {
   /// ```c
   /// extern SDL_DECLSPEC const void * SDLCALL NET_GetAddressBytes(NET_Address *address, int *num_bytes)
   /// ```
+  ///
+  /// See also:
+  /// - [NET_GetAddressBytes - SDL3 Wiki](https://wiki.libsdl.org/SDL3/NET_GetAddressBytes)
+  ///
   /// {@category net}
   Uint8List? netGetAddressBytes(Pointer<Int32> numBytes) =>
       netxGetAddressBytes(this);
@@ -204,6 +220,10 @@ extension NetAddressPointerEx on Pointer<NetAddress> {
   /// ```c
   /// extern SDL_DECLSPEC NET_Address *SDLCALL NET_RefAddress(NET_Address *address)
   /// ```
+  ///
+  /// See also:
+  /// - [NET_RefAddress - SDL3 Wiki](https://wiki.libsdl.org/SDL3/NET_RefAddress)
+  ///
   /// {@category net}
   Pointer<NetAddress> ref() => netRefAddress(this);
 
@@ -233,6 +253,10 @@ extension NetAddressPointerEx on Pointer<NetAddress> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL NET_UnrefAddress(NET_Address *address)
   /// ```
+  ///
+  /// See also:
+  /// - [NET_UnrefAddress - SDL3 Wiki](https://wiki.libsdl.org/SDL3/NET_UnrefAddress)
+  ///
   /// {@category net}
   void unref() => netUnrefAddress(this);
 
@@ -254,6 +278,10 @@ extension NetAddressPointerEx on Pointer<NetAddress> {
   /// ```c
   /// extern SDL_DECLSPEC int SDLCALL NET_CompareAddresses(const NET_Address *a, const NET_Address *b)
   /// ```
+  ///
+  /// See also:
+  /// - [NET_CompareAddresses - SDL3 Wiki](https://wiki.libsdl.org/SDL3/NET_CompareAddresses)
+  ///
   /// {@category net}
   int compare(Pointer<NetAddress> b) => netCompareAddresses(this, b);
 
@@ -316,6 +344,10 @@ extension NetAddressPointerEx on Pointer<NetAddress> {
   /// ```c
   /// extern SDL_DECLSPEC NET_StreamSocket * SDLCALL NET_CreateClient(NET_Address *address, Uint16 port, SDL_PropertiesID props)
   /// ```
+  ///
+  /// See also:
+  /// - [NET_CreateClient - SDL3 Wiki](https://wiki.libsdl.org/SDL3/NET_CreateClient)
+  ///
   /// {@category net}
   Pointer<NetStreamSocket> createClient(int port, int props) =>
       netCreateClient(this, port, props);
@@ -385,6 +417,10 @@ extension NetAddressPointerEx on Pointer<NetAddress> {
   /// ```c
   /// extern SDL_DECLSPEC NET_Server * SDLCALL NET_CreateServer(NET_Address *addr, Uint16 port, SDL_PropertiesID props)
   /// ```
+  ///
+  /// See also:
+  /// - [NET_CreateServer - SDL3 Wiki](https://wiki.libsdl.org/SDL3/NET_CreateServer)
+  ///
   /// {@category net}
   Pointer<NetServer> createServer(int port, int props) =>
       netCreateServer(this, port, props);
@@ -477,6 +513,10 @@ extension NetAddressPointerEx on Pointer<NetAddress> {
   /// ```c
   /// extern SDL_DECLSPEC NET_DatagramSocket * SDLCALL NET_CreateDatagramSocket(NET_Address *addr, Uint16 port, SDL_PropertiesID props)
   /// ```
+  ///
+  /// See also:
+  /// - [NET_CreateDatagramSocket - SDL3 Wiki](https://wiki.libsdl.org/SDL3/NET_CreateDatagramSocket)
+  ///
   /// {@category net}
   Pointer<NetDatagramSocket> createDatagramSocket(int port, int props) =>
       netCreateDatagramSocket(this, port, props);

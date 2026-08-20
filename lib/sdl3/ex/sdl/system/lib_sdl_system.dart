@@ -18,6 +18,10 @@ part of '../../../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetDXGIOutputInfo(SDL_DisplayID displayID, int *adapterIndex, int *outputIndex)
 /// ```
+///
+/// See also:
+/// - [SDL_GetDXGIOutputInfo - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetDXGIOutputInfo)
+///
 /// {@category system}
 ({int adapterIndex, int outputIndex})? sdlxGetDxgiOutputInfo(int displayId) {
   var adapterIndex = 0;

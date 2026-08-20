@@ -18,6 +18,10 @@ part of '../../../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC SDL_TouchID * SDLCALL SDL_GetTouchDevices(int *count)
 /// ```
+///
+/// See also:
+/// - [SDL_GetTouchDevices - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetTouchDevices)
+///
 /// {@category touch}
 List<int> sdlxGetTouchDevices() {
   final result = <int>[];
@@ -49,6 +53,10 @@ List<int> sdlxGetTouchDevices() {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Finger ** SDLCALL SDL_GetTouchFingers(SDL_TouchID touchID, int *count)
 /// ```
+///
+/// See also:
+/// - [SDL_GetTouchFingers - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetTouchFingers)
+///
 /// {@category touch}
 List<Pointer<SdlFinger>> sdlxGetTouchFingers(int touchId) {
   final result = <Pointer<SdlFinger>>[];

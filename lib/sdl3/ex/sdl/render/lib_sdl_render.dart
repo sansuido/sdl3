@@ -1,6 +1,65 @@
 part of '../../../sdl.dart';
 
 ///
+/// Create a window and default renderer.
+///
+/// \param title the title of the window, in UTF-8 encoding.
+/// \param width the width of the window.
+/// \param height the height of the window.
+/// \param window_flags the flags used to create the window (see
+/// SDL_CreateWindow()).
+/// \param window a pointer filled with the window, or NULL on error.
+/// \param renderer a pointer filled with the renderer, or NULL on error.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety This function should only be called on the main thread.
+///
+/// \since This function is available since SDL 3.2.0.
+///
+/// \sa SDL_CreateRenderer
+/// \sa SDL_CreateWindow
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL SDL_CreateWindowAndRenderer(const char *title, int width, int height, SDL_WindowFlags window_flags, SDL_Window **window, SDL_Renderer **renderer)
+/// ```
+///
+/// See also:
+/// - [SDL_CreateWindowAndRenderer - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CreateWindowAndRenderer)
+///
+/// {@category render}
+({Pointer<SdlWindow> window, Pointer<SdlRenderer> renderer})?
+sdlxCreateWindowAndRenderer(
+  String title,
+  int width,
+  int height,
+  int windowFlags,
+) {
+  Pointer<SdlWindow> window = nullptr;
+  Pointer<SdlRenderer> renderer = nullptr;
+  final windowPointer = ffi.calloc<Pointer<SdlWindow>>();
+  final rendererPointer = ffi.calloc<Pointer<SdlRenderer>>();
+  final result = sdlCreateWindowAndRenderer(
+    title,
+    width,
+    height,
+    windowFlags,
+    windowPointer,
+    rendererPointer,
+  );
+  if (result) {
+    window = windowPointer.value;
+    renderer = rendererPointer.value;
+  }
+  windowPointer.callocFree();
+  rendererPointer.callocFree();
+  if (!result) {
+    return null;
+  }
+  return (window: window, renderer: renderer);
+}
+
+///
 /// Get the output size in pixels of a rendering context.
 ///
 /// This returns the true output size in pixels, ignoring any render targets or
@@ -24,17 +83,27 @@ part of '../../../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderOutputSize(SDL_Renderer *renderer, int *w, int *h)
 /// ```
+///
+/// See also:
+/// - [SDL_GetRenderOutputSize - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRenderOutputSize)
+///
 /// {@category render}
-bool sdlxGetRenderOutputSize(Pointer<SdlRenderer> renderer, SdlxPoint size) {
+({int w, int h})? sdlxGetRenderOutputSize(Pointer<SdlRenderer> renderer) {
+  var w = 0;
+  var h = 0;
   final wPointer = ffi.calloc<Int32>();
   final hPointer = ffi.calloc<Int32>();
   final result = sdlGetRenderOutputSize(renderer, wPointer, hPointer);
-  size
-    ..x = wPointer.value
-    ..y = hPointer.value;
+  if (result) {
+    w = wPointer.value;
+    h = hPointer.value;
+  }
   wPointer.callocFree();
   hPointer.callocFree();
-  return result;
+  if (!result) {
+    return null;
+  }
+  return (w: w, h: h);
 }
 
 ///
@@ -61,20 +130,29 @@ bool sdlxGetRenderOutputSize(Pointer<SdlRenderer> renderer, SdlxPoint size) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetCurrentRenderOutputSize(SDL_Renderer *renderer, int *w, int *h)
 /// ```
+///
+/// See also:
+/// - [SDL_GetCurrentRenderOutputSize - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetCurrentRenderOutputSize)
+///
 /// {@category render}
-bool sdlxGetCurrentRenderOutputSize(
+({int w, int h})? sdlxGetCurrentRenderOutputSize(
   Pointer<SdlRenderer> renderer,
-  SdlxPoint size,
 ) {
+  var w = 0;
+  var h = 0;
   final wPointer = ffi.calloc<Int32>();
   final hPointer = ffi.calloc<Int32>();
   final result = sdlGetCurrentRenderOutputSize(renderer, wPointer, hPointer);
-  size
-    ..x = wPointer.value
-    ..y = hPointer.value;
+  if (result) {
+    w = wPointer.value;
+    h = hPointer.value;
+  }
   wPointer.callocFree();
   hPointer.callocFree();
-  return result;
+  if (!result) {
+    return null;
+  }
+  return (w: w, h: h);
 }
 
 ///
@@ -95,17 +173,27 @@ bool sdlxGetCurrentRenderOutputSize(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetTextureSize(SDL_Texture *texture, float *w, float *h)
 /// ```
+///
+/// See also:
+/// - [SDL_GetTextureSize - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetTextureSize)
+///
 /// {@category render}
-bool sdlxGetTextureSize(Pointer<SdlTexture> texture, SdlxFPoint size) {
+({double w, double h})? sdlxGetTextureSize(Pointer<SdlTexture> texture) {
+  var w = 0.0;
+  var h = 0.0;
   final wPointer = ffi.calloc<Float>();
   final hPointer = ffi.calloc<Float>();
   final result = sdlGetTextureSize(texture, wPointer, hPointer);
-  size
-    ..x = wPointer.value
-    ..y = hPointer.value;
+  if (result) {
+    w = wPointer.value;
+    h = hPointer.value;
+  }
   wPointer.callocFree();
   hPointer.callocFree();
-  return result;
+  if (!result) {
+    return null;
+  }
+  return (w: w, h: h);
 }
 
 ///
@@ -138,6 +226,10 @@ bool sdlxGetTextureSize(Pointer<SdlTexture> texture, SdlxFPoint size) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetTextureColorMod(SDL_Texture *texture, Uint8 r, Uint8 g, Uint8 b)
 /// ```
+///
+/// See also:
+/// - [SDL_SetTextureColorMod - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetTextureColorMod)
+///
 /// {@category render}
 bool sdlxSetTextureColorMod(Pointer<SdlTexture> texture, SdlxColor color) {
   var result = sdlSetTextureColorMod(texture, color.r, color.g, color.b);
@@ -177,6 +269,10 @@ bool sdlxSetTextureColorMod(Pointer<SdlTexture> texture, SdlxColor color) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetTextureColorModFloat(SDL_Texture *texture, float r, float g, float b)
 /// ```
+///
+/// See also:
+/// - [SDL_SetTextureColorModFloat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetTextureColorModFloat)
+///
 /// {@category render}
 bool sdlxSetTextureColorModFloat(
   Pointer<SdlTexture> texture,
@@ -210,59 +306,31 @@ bool sdlxSetTextureColorModFloat(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetTextureColorMod(SDL_Texture *texture, Uint8 *r, Uint8 *g, Uint8 *b)
 /// ```
+///
+/// See also:
+/// - [SDL_GetTextureColorMod - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetTextureColorMod)
+///
 /// {@category render}
-bool sdlxGetTextureColorMod(Pointer<SdlTexture> texture, SdlxColor color) {
+({int r, int g, int b})? sdlxGetTextureColorMod(Pointer<SdlTexture> texture) {
+  var r = 0;
+  var g = 0;
+  var b = 0;
   final rPointer = ffi.calloc<Uint8>();
   final gPointer = ffi.calloc<Uint8>();
   final bPointer = ffi.calloc<Uint8>();
-  final aPointer = ffi.calloc<Uint8>();
-  var result = sdlGetTextureColorMod(texture, rPointer, gPointer, bPointer);
+  final result = sdlGetTextureColorMod(texture, rPointer, gPointer, bPointer);
   if (result) {
-    color
-      ..r = rPointer.value
-      ..g = gPointer.value
-      ..b = bPointer.value;
-    result = sdlGetTextureAlphaMod(texture, aPointer);
-    if (result) {
-      color.a = aPointer.value;
-    }
+    r = rPointer.value;
+    g = gPointer.value;
+    b = bPointer.value;
   }
   rPointer.callocFree();
   gPointer.callocFree();
   bPointer.callocFree();
-  aPointer.callocFree();
-  return result;
-}
-
-///
-/// Get the additional alpha value multiplied into render copy operations.
-///
-/// \param texture the texture to query.
-/// \param alpha a pointer filled in with the current alpha value.
-/// \returns true on success or false on failure; call SDL_GetError() for more
-/// information.
-///
-/// \threadsafety This function should only be called on the main thread.
-///
-/// \since This function is available since SDL 3.2.0.
-///
-/// \sa SDL_GetTextureAlphaModFloat
-/// \sa SDL_GetTextureColorMod
-/// \sa SDL_SetTextureAlphaMod
-///
-/// ```c
-/// extern SDL_DECLSPEC bool SDLCALL SDL_GetTextureAlphaMod(SDL_Texture *texture, Uint8 *alpha)
-/// ```
-/// {@category render}
-int? sdlxGetTextureAlphaMod(Pointer<SdlTexture> texture) {
-  int? result;
-  final alphaPointer = calloc<Uint8>();
-  final bl = sdlGetTextureAlphaMod(texture, alphaPointer);
-  if (bl) {
-    result = alphaPointer.value;
+  if (!result) {
+    return null;
   }
-  alphaPointer.callocFree();
-  return result;
+  return (r: r, g: g, b: b);
 }
 
 ///
@@ -286,35 +354,72 @@ int? sdlxGetTextureAlphaMod(Pointer<SdlTexture> texture) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetTextureColorModFloat(SDL_Texture *texture, float *r, float *g, float *b)
 /// ```
+///
+/// See also:
+/// - [SDL_GetTextureColorModFloat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetTextureColorModFloat)
+///
 /// {@category render}
-bool sdlxGetTextureColorModFloat(
+({double r, double g, double b})? sdlxGetTextureColorModFloat(
   Pointer<SdlTexture> texture,
-  SdlxFColor color,
 ) {
+  var r = 0.0;
+  var g = 0.0;
+  var b = 0.0;
   final rPointer = ffi.calloc<Float>();
   final gPointer = ffi.calloc<Float>();
   final bPointer = ffi.calloc<Float>();
-  final aPointer = ffi.calloc<Float>();
-  var result = sdlGetTextureColorModFloat(
+  final result = sdlGetTextureColorModFloat(
     texture,
     rPointer,
     gPointer,
     bPointer,
   );
   if (result) {
-    color
-      ..r = rPointer.value
-      ..g = gPointer.value
-      ..b = bPointer.value;
-    result = sdlGetTextureAlphaModFloat(texture, aPointer);
-    if (result) {
-      color.a = aPointer.value;
-    }
+    r = rPointer.value;
+    g = gPointer.value;
+    b = bPointer.value;
   }
   rPointer.callocFree();
   gPointer.callocFree();
   bPointer.callocFree();
-  aPointer.callocFree();
+  if (!result) {
+    return null;
+  }
+  return (r: r, g: g, b: b);
+}
+
+///
+/// Get the additional alpha value multiplied into render copy operations.
+///
+/// \param texture the texture to query.
+/// \param alpha a pointer filled in with the current alpha value.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety This function should only be called on the main thread.
+///
+/// \since This function is available since SDL 3.2.0.
+///
+/// \sa SDL_GetTextureAlphaModFloat
+/// \sa SDL_GetTextureColorMod
+/// \sa SDL_SetTextureAlphaMod
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GetTextureAlphaMod(SDL_Texture *texture, Uint8 *alpha)
+/// ```
+///
+/// See also:
+/// - [SDL_GetTextureAlphaMod - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetTextureAlphaMod)
+///
+/// {@category render}
+int? sdlxGetTextureAlphaMod(Pointer<SdlTexture> texture) {
+  int? result;
+  final alphaPointer = calloc<Uint8>();
+  final bl = sdlGetTextureAlphaMod(texture, alphaPointer);
+  if (bl) {
+    result = alphaPointer.value;
+  }
+  alphaPointer.callocFree();
   return result;
 }
 
@@ -337,6 +442,10 @@ bool sdlxGetTextureColorModFloat(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetTextureAlphaModFloat(SDL_Texture *texture, float *alpha)
 /// ```
+///
+/// See also:
+/// - [SDL_GetTextureAlphaModFloat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetTextureAlphaModFloat)
+///
 /// {@category render}
 double? sdlxGetTextureAlphaModFloat(Pointer<SdlTexture> texture) {
   double? result;
@@ -366,6 +475,10 @@ double? sdlxGetTextureAlphaModFloat(Pointer<SdlTexture> texture) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetTextureBlendMode(SDL_Texture *texture, SDL_BlendMode *blendMode)
 /// ```
+///
+/// See also:
+/// - [SDL_GetTextureBlendMode - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetTextureBlendMode)
+///
 /// {@category render}
 int? sdlxGetTextureBlendMode(Pointer<SdlTexture> texture) {
   int? result;
@@ -395,6 +508,10 @@ int? sdlxGetTextureBlendMode(Pointer<SdlTexture> texture) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetTextureScaleMode(SDL_Texture *texture, SDL_ScaleMode *scaleMode)
 /// ```
+///
+/// See also:
+/// - [SDL_GetTextureScaleMode - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetTextureScaleMode)
+///
 /// {@category render}
 int? sdlxGetTextureScaleMode(Pointer<SdlTexture> texture) {
   int? result;
@@ -442,6 +559,10 @@ int? sdlxGetTextureScaleMode(Pointer<SdlTexture> texture) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_UpdateTexture(SDL_Texture *texture, const SDL_Rect *rect, const void *pixels, int pitch)
 /// ```
+///
+/// See also:
+/// - [SDL_UpdateTexture - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_UpdateTexture)
+///
 /// {@category render}
 bool sdlxUpdateTexture(
   Pointer<SdlTexture> texture,
@@ -493,6 +614,10 @@ bool sdlxUpdateTexture(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_UpdateYUVTexture(SDL_Texture *texture, const SDL_Rect *rect, const Uint8 *Yplane, int Ypitch, const Uint8 *Uplane, int Upitch, const Uint8 *Vplane, int Vpitch)
 /// ```
+///
+/// See also:
+/// - [SDL_UpdateYUVTexture - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_UpdateYUVTexture)
+///
 /// {@category render}
 bool sdlxUpdateYuvTexture(
   Pointer<SdlTexture> texture, {
@@ -586,6 +711,10 @@ bool sdlxUpdateYuvTexture(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_UpdateNVTexture(SDL_Texture *texture, const SDL_Rect *rect, const Uint8 *Yplane, int Ypitch, const Uint8 *UVplane, int UVpitch)
 /// ```
+///
+/// See also:
+/// - [SDL_UpdateNVTexture - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_UpdateNVTexture)
+///
 /// {@category render}
 bool sdlxUpdateNvTexture(
   Pointer<SdlTexture> texture, {
@@ -636,63 +765,72 @@ bool sdlxUpdateNvTexture(
 }
 
 ///
-/// Set a device-independent resolution and presentation mode for rendering.
+/// Lock a portion of the texture for **write-only** pixel access.
 ///
-/// This function sets the width and height of the logical rendering output.
-/// The renderer will act as if the current render target is always the
-/// requested dimensions, scaling to the actual resolution as necessary.
+/// As an optimization, the pixels made available for editing don't necessarily
+/// contain the old texture data. This is a write-only operation, and if you
+/// need to keep a copy of the texture data you should do that at the
+/// application level.
 ///
-/// This can be useful for games that expect a fixed size, but would like to
-/// scale the output to whatever is available, regardless of how a user resizes
-/// a window, or if the display is high DPI.
+/// You must use SDL_UnlockTexture() to unlock the pixels and apply any
+/// changes.
 ///
-/// Logical presentation can be used with both render target textures and the
-/// renderer's window; the state is unique to each render target, and this
-/// function sets the state for the current render target. It might be useful
-/// to draw to a texture that matches the window dimensions with logical
-/// presentation enabled, and then draw that texture across the entire window
-/// with logical presentation disabled. Be careful not to render both with
-/// logical presentation enabled, however, as this could produce
-/// double-letterboxing, etc.
-///
-/// You can disable logical coordinates by setting the mode to
-/// SDL_LOGICAL_PRESENTATION_DISABLED, and in that case you get the full pixel
-/// resolution of the render target; it is safe to toggle logical presentation
-/// during the rendering of a frame: perhaps most of the rendering is done to
-/// specific dimensions but to make fonts look sharp, the app turns off logical
-/// presentation while drawing text, for example.
-///
-/// You can convert coordinates in an event into rendering coordinates using
-/// SDL_ConvertEventToRenderCoordinates().
-///
-/// \param renderer the rendering context.
-/// \param w the width of the logical resolution.
-/// \param h the height of the logical resolution.
-/// \param mode the presentation mode used.
-/// \returns true on success or false on failure; call SDL_GetError() for more
-/// information.
+/// \param texture the texture to lock for access, which was created with
+/// `SDL_TEXTUREACCESS_STREAMING`.
+/// \param rect an SDL_Rect structure representing the area to lock for access;
+/// NULL to lock the entire texture.
+/// \param pixels this is filled in with a pointer to the locked pixels,
+/// appropriately offset by the locked area.
+/// \param pitch this is filled in with the pitch of the locked pixels; the
+/// pitch is the length of one row in bytes.
+/// \returns true on success or false if the texture is not valid or was not
+/// created with `SDL_TEXTUREACCESS_STREAMING`; call SDL_GetError()
+/// for more information.
 ///
 /// \threadsafety This function should only be called on the main thread.
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
-/// \sa SDL_ConvertEventToRenderCoordinates
-/// \sa SDL_GetRenderLogicalPresentation
-/// \sa SDL_GetRenderLogicalPresentationRect
+/// \sa SDL_LockTextureToSurface
+/// \sa SDL_UnlockTexture
 ///
 /// ```c
-/// extern SDL_DECLSPEC bool SDLCALL SDL_SetRenderLogicalPresentation(SDL_Renderer *renderer, int w, int h, SDL_RendererLogicalPresentation mode)
+/// extern SDL_DECLSPEC bool SDLCALL SDL_LockTexture(SDL_Texture *texture, const SDL_Rect *rect, void **pixels, int *pitch)
 /// ```
+///
+/// See also:
+/// - [SDL_LockTexture - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_LockTexture)
+///
 /// {@category render}
-bool sdlxSetRenderLogicalPresentation(
-  Pointer<SdlRenderer> renderer,
-  SdlxRenderLogicalPresentation presentation,
-) => sdlSetRenderLogicalPresentation(
-  renderer,
-  presentation.w,
-  presentation.h,
-  presentation.mode,
-);
+({Pointer<Void> pixels, int pitch})? sdlxLockTexture(
+  Pointer<SdlTexture> texture, {
+  SdlxRect? rect,
+}) {
+  Pointer<Void> pixels = nullptr;
+  var pitch = 0;
+  Pointer<SdlRect> rectPointer = nullptr;
+  final pixelsPointer = ffi.calloc<Pointer<Void>>();
+  final pitchPointer = ffi.calloc<Int32>();
+  if (rect != null) {
+    rectPointer = rect.calloc();
+  }
+  final result = sdlLockTexture(
+    texture,
+    rectPointer,
+    pixelsPointer,
+    pitchPointer,
+  );
+  if (result) {
+    pixels = pixelsPointer.value;
+    pitch = pitchPointer.value;
+  }
+  if (rectPointer != nullptr) {
+    rectPointer.callocFree();
+  }
+  pixelsPointer.callocFree();
+  pitchPointer.callocFree();
+  return (pixels: pixels, pitch: pitch);
+}
 
 ///
 /// Get device independent resolution and presentation mode for rendering.
@@ -720,36 +858,80 @@ bool sdlxSetRenderLogicalPresentation(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderLogicalPresentation(SDL_Renderer *renderer, int *w, int *h, SDL_RendererLogicalPresentation *mode)
 /// ```
+///
+/// See also:
+/// - [SDL_GetRenderLogicalPresentation - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRenderLogicalPresentation)
+///
 /// {@category render}
-bool sdlxGetRenderLogicalPresentation(
+({int w, int h, int mode})? sdlxGetRenderLogicalPresentation(
   Pointer<SdlRenderer> renderer,
-  SdlxRenderLogicalPresentation presentation,
 ) {
+  var w = 0;
+  var h = 0;
+  var mode = 0;
   final wPointer = calloc<Int32>();
   final hPointer = calloc<Int32>();
   final modePointer = calloc<Int32>();
-  final rectPointer = calloc<SdlFRect>();
-  var result = sdlGetRenderLogicalPresentation(
+  final result = sdlGetRenderLogicalPresentation(
     renderer,
     wPointer,
     hPointer,
     modePointer,
   );
   if (result) {
-    presentation
-      ..w = wPointer.value
-      ..h = hPointer.value
-      ..mode = modePointer.value;
-    result = sdlGetRenderLogicalPresentationRect(renderer, rectPointer);
-    if (result) {
-      presentation.rect.loadFromPointer(rectPointer);
-    }
+    w = wPointer.value;
+    h = hPointer.value;
+    mode = modePointer.value;
   }
   wPointer.callocFree();
   hPointer.callocFree();
   modePointer.callocFree();
+  if (!result) {
+    return null;
+  }
+  return (w: w, h: h, mode: mode);
+}
+
+///
+/// Get the final presentation rectangle for rendering.
+///
+/// This function returns the calculated rectangle used for logical
+/// presentation, based on the presentation mode and output size. If logical
+/// presentation is disabled, it will fill the rectangle with the output size,
+/// in pixels.
+///
+/// Each render target has its own logical presentation state. This function
+/// gets the rectangle for the current render target.
+///
+/// \param renderer the rendering context.
+/// \param rect a pointer filled in with the final presentation rectangle, may
+/// be NULL.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety This function should only be called on the main thread.
+///
+/// \since This function is available since SDL 3.2.0.
+///
+/// \sa SDL_SetRenderLogicalPresentation
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderLogicalPresentationRect(SDL_Renderer *renderer, SDL_FRect *rect)
+/// ```
+///
+/// See also:
+/// - [SDL_GetRenderLogicalPresentationRect - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRenderLogicalPresentationRect)
+///
+/// {@category render}
+SdlxFRect? sdlxGetRenderLogicalPresentationRect(Pointer<SdlRenderer> renderer) {
+  SdlxFRect? rect;
+  final rectPointer = ffi.calloc<SdlFRect>();
+  final result = sdlGetRenderLogicalPresentationRect(renderer, rectPointer);
+  if (result) {
+    rect = SdlxFRect()..loadFromPointer(rectPointer);
+  }
   rectPointer.callocFree();
-  return result;
+  return rect;
 }
 
 ///
@@ -780,29 +962,37 @@ bool sdlxGetRenderLogicalPresentation(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderCoordinatesFromWindow(SDL_Renderer *renderer, float window_x, float window_y, float *x, float *y)
 /// ```
+///
+/// See also:
+/// - [SDL_RenderCoordinatesFromWindow - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RenderCoordinatesFromWindow)
+///
 /// {@category render}
-bool sdlxRenderCoordinatesFromWindow(
-  Pointer<SdlRenderer> renderer, {
-  required SdlxFPoint windowPosition,
-  required SdlxFPoint renderPosition,
-}) {
+({double x, double y})? sdlxRenderCoordinatesFromWindow(
+  Pointer<SdlRenderer> renderer,
+  double windowX,
+  double windowY,
+) {
+  var x = 0.0;
+  var y = 0.0;
   final xPointer = calloc<Float>();
   final yPointer = calloc<Float>();
   final result = sdlRenderCoordinatesFromWindow(
     renderer,
-    windowPosition.x,
-    windowPosition.y,
+    windowX,
+    windowY,
     xPointer,
     yPointer,
   );
   if (result) {
-    renderPosition
-      ..x = xPointer.value
-      ..y = yPointer.value;
+    x = xPointer.value;
+    y = yPointer.value;
   }
   xPointer.callocFree();
   yPointer.callocFree();
-  return result;
+  if (!result) {
+    return null;
+  }
+  return (x: x, y: y);
 }
 
 ///
@@ -836,29 +1026,37 @@ bool sdlxRenderCoordinatesFromWindow(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderCoordinatesToWindow(SDL_Renderer *renderer, float x, float y, float *window_x, float *window_y)
 /// ```
+///
+/// See also:
+/// - [SDL_RenderCoordinatesToWindow - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RenderCoordinatesToWindow)
+///
 /// {@category render}
-bool sdlxRenderCoordinatesToWindow(
-  Pointer<SdlRenderer> renderer, {
-  required SdlxFPoint renderPosition,
-  required SdlxFPoint windowPosition,
-}) {
+({double windowX, double windowY})? sdlxRenderCoordinatesToWindow(
+  Pointer<SdlRenderer> renderer,
+  double x,
+  double y,
+) {
+  var windowX = 0.0;
+  var windowY = 0.0;
   final windowXPointer = calloc<Float>();
   final windowYPointer = calloc<Float>();
   final result = sdlRenderCoordinatesToWindow(
     renderer,
-    renderPosition.x,
-    renderPosition.y,
+    x,
+    y,
     windowXPointer,
     windowYPointer,
   );
   if (result) {
-    windowPosition
-      ..x = windowXPointer.value
-      ..y = windowYPointer.value;
+    windowX = windowXPointer.value;
+    windowY = windowYPointer.value;
   }
   windowXPointer.callocFree();
   windowYPointer.callocFree();
-  return result;
+  if (!result) {
+    return null;
+  }
+  return (windowX: windowX, windowY: windowY);
 }
 
 ///
@@ -898,6 +1096,10 @@ bool sdlxRenderCoordinatesToWindow(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_ConvertEventToRenderCoordinates(SDL_Renderer *renderer, SDL_Event *event)
 /// ```
+///
+/// See also:
+/// - [SDL_ConvertEventToRenderCoordinates - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ConvertEventToRenderCoordinates)
+///
 /// {@category render}
 bool sdlxConvertEventToRenderCoordinates(
   Pointer<SdlRenderer> renderer,
@@ -940,6 +1142,10 @@ bool sdlxConvertEventToRenderCoordinates(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetRenderViewport(SDL_Renderer *renderer, const SDL_Rect *rect)
 /// ```
+///
+/// See also:
+/// - [SDL_SetRenderViewport - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetRenderViewport)
+///
 /// {@category render}
 bool sdlxSetRenderViewport(Pointer<SdlRenderer> renderer, SdlxRect? rect) {
   Pointer<SdlRect> rectPointer = nullptr;
@@ -974,6 +1180,10 @@ bool sdlxSetRenderViewport(Pointer<SdlRenderer> renderer, SdlxRect? rect) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderViewport(SDL_Renderer *renderer, SDL_Rect *rect)
 /// ```
+///
+/// See also:
+/// - [SDL_GetRenderViewport - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRenderViewport)
+///
 /// {@category render}
 bool sdlxGetRenderViewport(Pointer<SdlRenderer> renderer, SdlxRect rect) {
   final rectPointer = rect.calloc();
@@ -1008,15 +1218,20 @@ bool sdlxGetRenderViewport(Pointer<SdlRenderer> renderer, SdlxRect rect) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderSafeArea(SDL_Renderer *renderer, SDL_Rect *rect)
 /// ```
+///
+/// See also:
+/// - [SDL_GetRenderSafeArea - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRenderSafeArea)
+///
 /// {@category render}
-bool sdlxGetRenderSafeArea(Pointer<SdlRenderer> renderer, SdlxRect rect) {
-  final rectPointer = rect.calloc();
+SdlxRect? sdlxGetRenderSafeArea(Pointer<SdlRenderer> renderer) {
+  SdlxRect? rect;
+  final rectPointer = ffi.calloc<SdlRect>();
   final result = sdlGetRenderSafeArea(renderer, rectPointer);
   if (result) {
-    rect.loadFromPointer(rectPointer);
+    rect = SdlxRect()..loadFromPointer(rectPointer);
   }
   rectPointer.callocFree();
-  return result;
+  return rect;
 }
 
 ///
@@ -1041,6 +1256,10 @@ bool sdlxGetRenderSafeArea(Pointer<SdlRenderer> renderer, SdlxRect rect) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetRenderClipRect(SDL_Renderer *renderer, const SDL_Rect *rect)
 /// ```
+///
+/// See also:
+/// - [SDL_SetRenderClipRect - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetRenderClipRect)
+///
 /// {@category render}
 bool sdlxSetRenderClipRect(Pointer<SdlRenderer> renderer, SdlxRect? rect) {
   Pointer<SdlRect> rectPointer = nullptr;
@@ -1076,49 +1295,21 @@ bool sdlxSetRenderClipRect(Pointer<SdlRenderer> renderer, SdlxRect? rect) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderClipRect(SDL_Renderer *renderer, SDL_Rect *rect)
 /// ```
+///
+/// See also:
+/// - [SDL_GetRenderClipRect - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRenderClipRect)
+///
 /// {@category render}
-bool sdlxGetRenderClipRect(Pointer<SdlRenderer> renderer, SdlxRect rect) {
-  final rectPointer = rect.calloc();
+SdlxRect? sdlxGetRenderClipRect(Pointer<SdlRenderer> renderer) {
+  SdlxRect? rect;
+  final rectPointer = ffi.calloc<SdlRect>();
   final result = sdlGetRenderClipRect(renderer, rectPointer);
   if (result) {
-    rect.loadFromPointer(rectPointer);
+    rect = SdlxRect()..loadFromPointer(rectPointer);
   }
   rectPointer.callocFree();
-  return result;
+  return rect;
 }
-
-///
-/// Set the drawing scale for rendering on the current target.
-///
-/// The drawing coordinates are scaled by the x/y scaling factors before they
-/// are used by the renderer. This allows resolution independent drawing with a
-/// single coordinate system.
-///
-/// If this results in scaling or subpixel drawing by the rendering backend, it
-/// will be handled using the appropriate quality hints. For best results use
-/// integer scaling factors.
-///
-/// Each render target has its own scale. This function sets the scale for the
-/// current render target.
-///
-/// \param renderer the rendering context.
-/// \param scaleX the horizontal scaling factor.
-/// \param scaleY the vertical scaling factor.
-/// \returns true on success or false on failure; call SDL_GetError() for more
-/// information.
-///
-/// \threadsafety This function should only be called on the main thread.
-///
-/// \since This function is available since SDL 3.2.0.
-///
-/// \sa SDL_GetRenderScale
-///
-/// ```c
-/// extern SDL_DECLSPEC bool SDLCALL SDL_SetRenderScale(SDL_Renderer *renderer, float scaleX, float scaleY)
-/// ```
-/// {@category render}
-bool sdlxSetRenderScale(Pointer<SdlRenderer> renderer, SdlxFPoint scale) =>
-    sdlSetRenderScale(renderer, scale.x, scale.y);
 
 ///
 /// Get the drawing scale for the current target.
@@ -1141,19 +1332,29 @@ bool sdlxSetRenderScale(Pointer<SdlRenderer> renderer, SdlxFPoint scale) =>
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderScale(SDL_Renderer *renderer, float *scaleX, float *scaleY)
 /// ```
+///
+/// See also:
+/// - [SDL_GetRenderScale - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRenderScale)
+///
 /// {@category render}
-bool sdlxGetRenderScale(Pointer<SdlRenderer> renderer, SdlxFPoint scale) {
+({double scaleX, double scaleY})? sdlxGetRenderScale(
+  Pointer<SdlRenderer> renderer,
+) {
+  var scaleX = 0.0;
+  var scaleY = 0.0;
   final scaleXPointer = ffi.calloc<Float>();
   final scaleYPointer = ffi.calloc<Float>();
   final result = sdlGetRenderScale(renderer, scaleXPointer, scaleYPointer);
   if (result) {
-    scale
-      ..x = scaleXPointer.value
-      ..y = scaleYPointer.value;
+    scaleX = scaleXPointer.value;
+    scaleY = scaleYPointer.value;
   }
   scaleXPointer.callocFree();
   scaleYPointer.callocFree();
-  return result;
+  if (!result) {
+    return null;
+  }
+  return (scaleX: scaleX, scaleY: scaleY);
 }
 
 ///
@@ -1182,6 +1383,10 @@ bool sdlxGetRenderScale(Pointer<SdlRenderer> renderer, SdlxFPoint scale) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetRenderDrawColor(SDL_Renderer *renderer, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 /// ```
+///
+/// See also:
+/// - [SDL_SetRenderDrawColor - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetRenderDrawColor)
+///
 /// {@category render}
 bool sdlxSetRenderDrawColor(Pointer<SdlRenderer> renderer, SdlxColor color) =>
     sdlSetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
@@ -1212,6 +1417,10 @@ bool sdlxSetRenderDrawColor(Pointer<SdlRenderer> renderer, SdlxColor color) =>
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetRenderDrawColorFloat(SDL_Renderer *renderer, float r, float g, float b, float a)
 /// ```
+///
+/// See also:
+/// - [SDL_SetRenderDrawColorFloat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetRenderDrawColorFloat)
+///
 /// {@category render}
 bool sdlxSetRenderDrawColorFloat(
   Pointer<SdlRenderer> renderer,
@@ -1243,6 +1452,10 @@ bool sdlxSetRenderDrawColorFloat(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderDrawColor(SDL_Renderer *renderer, Uint8 *r, Uint8 *g, Uint8 *b, Uint8 *a)
 /// ```
+///
+/// See also:
+/// - [SDL_GetRenderDrawColor - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRenderDrawColor)
+///
 /// {@category render}
 bool sdlxGetRenderDrawColor(Pointer<SdlRenderer> renderer, SdlxColor color) {
   final rPointer = calloc<Uint8>();
@@ -1295,6 +1508,10 @@ bool sdlxGetRenderDrawColor(Pointer<SdlRenderer> renderer, SdlxColor color) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderDrawColorFloat(SDL_Renderer *renderer, float *r, float *g, float *b, float *a)
 /// ```
+///
+/// See also:
+/// - [SDL_GetRenderDrawColorFloat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRenderDrawColorFloat)
+///
 /// {@category render}
 bool sdlxGetRenderDrawColorFloat(
   Pointer<SdlRenderer> renderer,
@@ -1342,6 +1559,10 @@ bool sdlxGetRenderDrawColorFloat(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderColorScale(SDL_Renderer *renderer, float *scale)
 /// ```
+///
+/// See also:
+/// - [SDL_GetRenderColorScale - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRenderColorScale)
+///
 /// {@category render}
 double? sdlxGetRenderColorScale(Pointer<SdlRenderer> renderer) {
   double? result;
@@ -1371,6 +1592,10 @@ double? sdlxGetRenderColorScale(Pointer<SdlRenderer> renderer) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderDrawBlendMode(SDL_Renderer *renderer, SDL_BlendMode *blendMode)
 /// ```
+///
+/// See also:
+/// - [SDL_GetRenderDrawBlendMode - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRenderDrawBlendMode)
+///
 /// {@category render}
 int? sdlxGetRenderDrawBlendMode(Pointer<SdlRenderer> renderer) {
   int? result;
@@ -1401,6 +1626,10 @@ int? sdlxGetRenderDrawBlendMode(Pointer<SdlRenderer> renderer) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderPoint(SDL_Renderer *renderer, float x, float y)
 /// ```
+///
+/// See also:
+/// - [SDL_RenderPoint - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RenderPoint)
+///
 /// {@category render}
 bool sdlxRenderPoint(Pointer<SdlRenderer> renderer, SdlxFPoint point) =>
     sdlRenderPoint(renderer, point.x, point.y);
@@ -1423,6 +1652,10 @@ bool sdlxRenderPoint(Pointer<SdlRenderer> renderer, SdlxFPoint point) =>
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderPoints(SDL_Renderer *renderer, const SDL_FPoint *points, int count)
 /// ```
+///
+/// See also:
+/// - [SDL_RenderPoints - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RenderPoints)
+///
 /// {@category render}
 bool sdlxRenderPoints(Pointer<SdlRenderer> renderer, List<SdlxFPoint> points) {
   final pointsPointer = points.calloc();
@@ -1451,6 +1684,10 @@ bool sdlxRenderPoints(Pointer<SdlRenderer> renderer, List<SdlxFPoint> points) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderLine(SDL_Renderer *renderer, float x1, float y1, float x2, float y2)
 /// ```
+///
+/// See also:
+/// - [SDL_RenderLine - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RenderLine)
+///
 /// {@category render}
 bool sdlxRenderLine(
   Pointer<SdlRenderer> renderer,
@@ -1477,6 +1714,10 @@ bool sdlxRenderLine(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderLines(SDL_Renderer *renderer, const SDL_FPoint *points, int count)
 /// ```
+///
+/// See also:
+/// - [SDL_RenderLines - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RenderLines)
+///
 /// {@category render}
 bool sdlxRenderLines(Pointer<SdlRenderer> renderer, List<SdlxFPoint> points) {
   final pointsPointer = points.calloc();
@@ -1503,6 +1744,10 @@ bool sdlxRenderLines(Pointer<SdlRenderer> renderer, List<SdlxFPoint> points) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderRect(SDL_Renderer *renderer, const SDL_FRect *rect)
 /// ```
+///
+/// See also:
+/// - [SDL_RenderRect - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RenderRect)
+///
 /// {@category render}
 bool sdlxRenderRect(Pointer<SdlRenderer> renderer, SdlxFRect? rect) {
   Pointer<SdlFRect> rectPointer = nullptr;
@@ -1535,6 +1780,10 @@ bool sdlxRenderRect(Pointer<SdlRenderer> renderer, SdlxFRect? rect) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderRects(SDL_Renderer *renderer, const SDL_FRect *rects, int count)
 /// ```
+///
+/// See also:
+/// - [SDL_RenderRects - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RenderRects)
+///
 /// {@category render}
 bool sdlxRenderRects(Pointer<SdlRenderer> renderer, List<SdlxFRect> rects) {
   final rectsPointer = rects.calloc();
@@ -1562,6 +1811,10 @@ bool sdlxRenderRects(Pointer<SdlRenderer> renderer, List<SdlxFRect> rects) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderFillRect(SDL_Renderer *renderer, const SDL_FRect *rect)
 /// ```
+///
+/// See also:
+/// - [SDL_RenderFillRect - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RenderFillRect)
+///
 /// {@category render}
 bool sdlxRenderFillRect(Pointer<SdlRenderer> renderer, SdlxFRect? rect) {
   Pointer<SdlFRect> rectPointer = nullptr;
@@ -1594,6 +1847,10 @@ bool sdlxRenderFillRect(Pointer<SdlRenderer> renderer, SdlxFRect? rect) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderFillRects(SDL_Renderer *renderer, const SDL_FRect *rects, int count)
 /// ```
+///
+/// See also:
+/// - [SDL_RenderFillRects - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RenderFillRects)
+///
 /// {@category render}
 bool sdlxRenderFillRects(Pointer<SdlRenderer> renderer, List<SdlxFRect> rects) {
   final rectsPointer = rects.calloc();
@@ -1625,6 +1882,10 @@ bool sdlxRenderFillRects(Pointer<SdlRenderer> renderer, List<SdlxFRect> rects) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderTexture(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_FRect *srcrect, const SDL_FRect *dstrect)
 /// ```
+///
+/// See also:
+/// - [SDL_RenderTexture - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RenderTexture)
+///
 /// {@category render}
 bool sdlxRenderTexture(
   Pointer<SdlRenderer> renderer,
@@ -1684,6 +1945,10 @@ bool sdlxRenderTexture(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderTextureRotated(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_FRect *srcrect, const SDL_FRect *dstrect, double angle, const SDL_FPoint *center, SDL_FlipMode flip)
 /// ```
+///
+/// See also:
+/// - [SDL_RenderTextureRotated - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RenderTextureRotated)
+///
 /// {@category render}
 bool sdlxRenderTextureRotated(
   Pointer<SdlRenderer> renderer,
@@ -1756,6 +2021,10 @@ bool sdlxRenderTextureRotated(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderTextureAffine(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_FRect *srcrect, const SDL_FPoint *origin, const SDL_FPoint *right, const SDL_FPoint *down)
 /// ```
+///
+/// See also:
+/// - [SDL_RenderTextureAffine - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RenderTextureAffine)
+///
 /// {@category render}
 bool sdlxRenderTextureAffine(
   Pointer<SdlRenderer> renderer,
@@ -1832,6 +2101,10 @@ bool sdlxRenderTextureAffine(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderTextureTiled(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_FRect *srcrect, float scale, const SDL_FRect *dstrect)
 /// ```
+///
+/// See also:
+/// - [SDL_RenderTextureTiled - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RenderTextureTiled)
+///
 /// {@category render}
 bool sdlxRenderTextureTiled(
   Pointer<SdlRenderer> renderer,
@@ -1900,6 +2173,10 @@ bool sdlxRenderTextureTiled(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderTexture9Grid(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_FRect *srcrect, float left_width, float right_width, float top_height, float bottom_height, float scale, const SDL_FRect *dstrect)
 /// ```
+///
+/// See also:
+/// - [SDL_RenderTexture9Grid - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RenderTexture9Grid)
+///
 /// {@category render}
 bool sdlxRenderTexture9Grid(
   Pointer<SdlRenderer> renderer,
@@ -2009,21 +2286,26 @@ bool sdlxRenderTexture9GridTiled(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderGeometry(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_Vertex *vertices, int num_vertices, const int *indices, int num_indices)
 /// ```
+///
+/// See also:
+/// - [SDL_RenderGeometry - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RenderGeometry)
+///
 /// {@category render}
 bool sdlxRenderGeometry(
   Pointer<SdlRenderer> renderer,
-  Pointer<SdlTexture> texture, {
-  List<SdlxVertex>? vertices,
+  List<SdlxVertex> vertices, {
+  Pointer<SdlTexture>? texture,
   List<int>? indices,
 }) {
+  if (vertices.isEmpty) {
+    return true;
+  }
   Pointer<SdlVertex> verticesPointer = nullptr;
   var numVertices = 0;
   Pointer<Int32> indicesPointer = nullptr;
   var numIndices = 0;
-  if (vertices != null) {
-    verticesPointer = vertices.calloc();
-    numVertices = vertices.length;
-  }
+  verticesPointer = vertices.calloc();
+  numVertices = vertices.length;
   if (indices != null) {
     indicesPointer = calloc<Int32>(indices.length);
     for (var i = 0; i < indices.length; i++) {
@@ -2033,19 +2315,160 @@ bool sdlxRenderGeometry(
   }
   final result = sdlRenderGeometry(
     renderer,
-    texture,
+    texture ?? nullptr,
     verticesPointer,
     numVertices,
     indicesPointer,
     numIndices,
   );
-  if (verticesPointer != nullptr) {
-    verticesPointer.callocFree();
+  verticesPointer.callocFree();
+  if (indicesPointer != nullptr) {
+    indicesPointer.callocFree();
+  }
+  return result;
+}
+
+///
+/// Render a list of triangles, optionally using a texture and indices into the
+/// vertex arrays.
+///
+/// Color and alpha modulation is done per vertex (SDL_SetTextureColorMod and
+/// SDL_SetTextureAlphaMod are ignored).
+///
+/// \param renderer the rendering context.
+/// \param texture (optional) The SDL texture to use.
+/// \param xy vertex positions.
+/// \param xy_stride byte size to move from one element to the next element.
+/// \param color vertex colors (as SDL_FColor).
+/// \param color_stride byte size to move from one element to the next element.
+/// \param uv vertex normalized texture coordinates.
+/// \param uv_stride byte size to move from one element to the next element.
+/// \param num_vertices number of vertices.
+/// \param indices (optional) An array of indices into the 'vertices' arrays,
+/// if NULL all vertices will be rendered in sequential order.
+/// \param num_indices number of indices.
+/// \param size_indices index size: 1 (byte), 2 (short), 4 (int).
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety This function should only be called on the main thread.
+///
+/// \since This function is available since SDL 3.2.0.
+///
+/// \sa SDL_RenderGeometry
+/// \sa SDL_SetRenderTextureAddressMode
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL SDL_RenderGeometryRaw(SDL_Renderer *renderer, SDL_Texture *texture, const float *xy, int xy_stride, const SDL_FColor *color, int color_stride, const float *uv, int uv_stride, int num_vertices, const void *indices, int num_indices, int size_indices)
+/// ```
+///
+/// See also:
+/// - [SDL_RenderGeometryRaw - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RenderGeometryRaw)
+///
+/// {@category render}
+bool sdlxRenderGeometryRaw(
+  Pointer<SdlRenderer> renderer,
+  List<SdlxFPoint> positions, {
+  Pointer<SdlTexture>? texture,
+  List<SdlxFColor>? colors,
+  List<SdlxFPoint>? texCoords,
+  List<int>? indices,
+}) {
+  if (positions.isEmpty) {
+    return true;
+  }
+  final positionsPointer = positions.callocXy();
+  Pointer<SdlFColor> colorsPointer = nullptr;
+  Pointer<Float> texCoordsPointer = nullptr;
+  Pointer<Int32> indicesPointer = nullptr;
+  var numIndices = 0;
+  if (colors != null) {
+    colorsPointer = colors.calloc();
+  }
+  if (texCoords != null) {
+    texCoordsPointer = texCoords.callocXy();
+  }
+  if (indices != null) {
+    numIndices = indices.length;
+    indicesPointer = ffi.calloc<Int32>(numIndices);
+    indicesPointer.asTypedList(numIndices).setAll(0, indices);
+  }
+  final result = sdlRenderGeometryRaw(
+    renderer,
+    texture ?? nullptr,
+    positionsPointer,
+    sizeOf<Float>() * 2,
+    colorsPointer,
+    sizeOf<SdlFColor>(),
+    texCoordsPointer,
+    sizeOf<Float>() * 2,
+    positions.length,
+    indicesPointer.cast<Void>(),
+    numIndices,
+    sizeOf<Int32>(),
+  );
+  positionsPointer.callocFree();
+  if (colorsPointer != nullptr) {
+    colorsPointer.callocFree();
+  }
+  if (texCoordsPointer != nullptr) {
+    texCoordsPointer.callocFree();
   }
   if (indicesPointer != nullptr) {
     indicesPointer.callocFree();
   }
   return result;
+}
+
+///
+/// Get the texture addressing mode used in SDL_RenderGeometry().
+///
+/// \param renderer the rendering context.
+/// \param u_mode a pointer filled in with the SDL_TextureAddressMode to use
+/// for horizontal texture coordinates in SDL_RenderGeometry(),
+/// may be NULL.
+/// \param v_mode a pointer filled in with the SDL_TextureAddressMode to use
+/// for vertical texture coordinates in SDL_RenderGeometry(), may
+/// be NULL.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety This function should only be called on the main thread.
+///
+/// \since This function is available since SDL 3.4.0.
+///
+/// \sa SDL_SetRenderTextureAddressMode
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderTextureAddressMode(SDL_Renderer *renderer, SDL_TextureAddressMode *u_mode, SDL_TextureAddressMode *v_mode)
+/// ```
+///
+/// See also:
+/// - [SDL_GetRenderTextureAddressMode - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRenderTextureAddressMode)
+///
+/// {@category render}
+({int uMode, int vMode})? sdlxGetRenderTextureAddressMode(
+  Pointer<SdlRenderer> renderer,
+) {
+  var uMode = 0;
+  var vMode = 0;
+  final uModePointer = ffi.calloc<Int32>();
+  final vModePointer = ffi.calloc<Int32>();
+  final result = sdlGetRenderTextureAddressMode(
+    renderer,
+    uModePointer,
+    vModePointer,
+  );
+  if (result) {
+    uMode = uModePointer.value;
+    vMode = vModePointer.value;
+  }
+  uModePointer.callocFree();
+  vModePointer.callocFree();
+  if (!result) {
+    return null;
+  }
+  return (uMode: uMode, vMode: vMode);
 }
 
 ///
@@ -2076,6 +2499,10 @@ bool sdlxRenderGeometry(
 /// ```c
 /// extern SDL_DECLSPEC SDL_Surface * SDLCALL SDL_RenderReadPixels(SDL_Renderer *renderer, const SDL_Rect *rect)
 /// ```
+///
+/// See also:
+/// - [SDL_RenderReadPixels - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RenderReadPixels)
+///
 /// {@category render}
 Pointer<SdlSurface> sdlxRenderReadPixels(
   Pointer<SdlRenderer> renderer,
@@ -2089,6 +2516,116 @@ Pointer<SdlSurface> sdlxRenderReadPixels(
   if (rectPointer != nullptr) {
     rectPointer.callocFree();
   }
+  return result;
+}
+
+///
+/// Get VSync of the given renderer.
+///
+/// \param renderer the renderer to toggle.
+/// \param vsync an int filled with the current vertical refresh sync interval.
+/// See SDL_SetRenderVSync() for the meaning of the value.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety This function should only be called on the main thread.
+///
+/// \since This function is available since SDL 3.2.0.
+///
+/// \sa SDL_SetRenderVSync
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderVSync(SDL_Renderer *renderer, int *vsync)
+/// ```
+///
+/// See also:
+/// - [SDL_GetRenderVSync - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRenderVSync)
+///
+/// {@category render}
+int? sdlxGetRenderVSync(Pointer<SdlRenderer> renderer) {
+  var vsync = 0;
+  final vsyncPointer = ffi.calloc<Int32>();
+  final result = sdlGetRenderVSync(renderer, vsyncPointer);
+  if (result) {
+    vsync = vsyncPointer.value;
+  }
+  vsyncPointer.callocFree();
+  if (!result) {
+    return null;
+  }
+  return vsync;
+}
+
+///
+/// Get default texture scale mode of the given renderer.
+///
+/// \param renderer the renderer to get data from.
+/// \param scale_mode a SDL_ScaleMode filled with current default scale mode.
+/// See SDL_SetDefaultTextureScaleMode() for the meaning of
+/// the value.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety This function should only be called on the main thread.
+///
+/// \since This function is available since SDL 3.4.0.
+///
+/// \sa SDL_SetDefaultTextureScaleMode
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GetDefaultTextureScaleMode(SDL_Renderer *renderer, SDL_ScaleMode *scale_mode)
+/// ```
+///
+/// See also:
+/// - [SDL_GetDefaultTextureScaleMode - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetDefaultTextureScaleMode)
+///
+/// {@category render}
+int? sdlxGetDefaultTextureScaleMode(Pointer<SdlRenderer> renderer) {
+  var scaleMode = 0;
+  final scaleModePointer = ffi.calloc<Int32>();
+  final result = sdlGetDefaultTextureScaleMode(renderer, scaleModePointer);
+  if (result) {
+    scaleMode = scaleModePointer.value;
+  }
+  scaleModePointer.callocFree();
+  if (!result) {
+    return null;
+  }
+  return scaleMode;
+}
+
+///
+/// Create custom GPU render state.
+///
+/// \param renderer the renderer to use.
+/// \param createinfo a struct describing the GPU render state to create.
+/// \returns a custom GPU render state or NULL on failure; call SDL_GetError()
+/// for more information.
+///
+/// \threadsafety This function should be called on the thread that created the
+/// renderer.
+///
+/// \since This function is available since SDL 3.4.0.
+///
+/// \sa SDL_SetGPURenderStateFragmentUniforms
+/// \sa SDL_SetGPURenderState
+/// \sa SDL_DestroyGPURenderState
+///
+/// ```c
+/// extern SDL_DECLSPEC SDL_GPURenderState * SDLCALL SDL_CreateGPURenderState(SDL_Renderer *renderer, const SDL_GPURenderStateCreateInfo *createinfo)
+/// ```
+///
+/// See also:
+/// - [SDL_CreateGPURenderState - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CreateGPURenderState)
+///
+/// {@category render}
+Pointer<SdlGpuRenderState> sdlxCreateGpuRenderState(
+  Pointer<SdlRenderer> renderer,
+  SdlxGpuRenderStateCreateInfo createinfo,
+) {
+  final createInfoPointer = createinfo.calloc();
+  final result = sdlCreateGpuRenderState(renderer, createInfoPointer);
+  createInfoPointer.callocAllFree();
   return result;
 }
 
@@ -2113,20 +2650,118 @@ Pointer<SdlSurface> sdlxRenderReadPixels(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetGPURenderStateSamplerBindings(SDL_GPURenderState *state, int num_sampler_bindings, const SDL_GPUTextureSamplerBinding *sampler_bindings)
 /// ```
+///
+/// See also:
+/// - [SDL_SetGPURenderStateSamplerBindings - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetGPURenderStateSamplerBindings)
+///
 /// {@category render}
 bool sdlxSetGpuRenderStateSamplerBindings(
-  Pointer<SdlGpuRenderState> state, {
-  required List<SdlxGpuTextureSamplerBinding> bindings,
-}) {
+  Pointer<SdlGpuRenderState> state,
+  List<SdlxGpuTextureSamplerBinding> samplerBindings,
+) {
   var result = false;
-  if (bindings.isNotEmpty) {
-    final bindingsPointer = bindings.calloc();
+  if (samplerBindings.isNotEmpty) {
+    final samplerBindingsPointer = samplerBindings.calloc();
     result = sdlSetGpuRenderStateSamplerBindings(
       state,
-      bindings.length,
-      bindingsPointer,
+      samplerBindings.length,
+      samplerBindingsPointer,
     );
-    bindingsPointer.callocFree();
+    samplerBindingsPointer.callocFree();
+  }
+  return result;
+}
+
+///
+/// Set storage textures variables in a custom GPU render state.
+///
+/// The data is copied and will be binded using
+/// SDL_BindGPUFragmentStorageTextures() during draw call execution.
+///
+/// \param state the state to modify.
+/// \param num_storage_textures The number of storage textures to bind.
+/// \param storage_textures Storage textures to bind.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety This function should be called on the thread that created the
+/// renderer.
+///
+/// \since This function is available since SDL 3.6.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetGPURenderStateStorageTextures(SDL_GPURenderState *state, int num_storage_textures, SDL_GPUTexture *const *storage_textures)
+/// ```
+///
+/// See also:
+/// - [SDL_SetGPURenderStateStorageTextures - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetGPURenderStateStorageTextures)
+///
+/// {@category render}
+bool sdlxSetGpuRenderStateStorageTextures(
+  Pointer<SdlGpuRenderState> state,
+  List<Pointer<SdlGpuTexture>> storageTextures,
+) {
+  var result = false;
+  if (storageTextures.isNotEmpty) {
+    final storageTexturesPointer = ffi.calloc<Pointer<SdlGpuTexture>>(
+      storageTextures.length,
+    );
+    for (var i = 0; i < storageTextures.length; i++) {
+      storageTexturesPointer[i] = storageTextures[i];
+    }
+    result = sdlSetGpuRenderStateStorageTextures(
+      state,
+      storageTextures.length,
+      storageTexturesPointer,
+    );
+    storageTexturesPointer.callocFree();
+  }
+  return result;
+}
+
+///
+/// Set storage buffers variables in a custom GPU render state.
+///
+/// The data is copied and will be binded using
+/// SDL_BindGPUFragmentStorageBuffers() during draw call execution.
+///
+/// \param state the state to modify.
+/// \param num_storage_buffers The number of storage buffers to bind.
+/// \param storage_buffers Storage buffers to bind.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety This function should be called on the thread that created the
+/// renderer.
+///
+/// \since This function is available since SDL 3.6.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetGPURenderStateStorageBuffers(SDL_GPURenderState *state, int num_storage_buffers, SDL_GPUBuffer *const *storage_buffers)
+/// ```
+///
+/// See also:
+/// - [SDL_SetGPURenderStateStorageBuffers - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetGPURenderStateStorageBuffers)
+///
+/// {@category render}
+bool sdlxSetGpuRenderStateStorageBuffers(
+  Pointer<SdlGpuRenderState> state,
+  List<Pointer<SdlGpuBuffer>> storageBuffers,
+) {
+  var result = false;
+  if (storageBuffers.isNotEmpty) {
+    final storageBuffersPointer = ffi.calloc<Pointer<SdlGpuBuffer>>(
+      storageBuffers.length,
+    );
+    for (var i = 0; i < storageBuffers.length; i++) {
+      storageBuffersPointer[i] = storageBuffers[i];
+    }
+    result = sdlSetGpuRenderStateStorageBuffers(
+      state,
+      storageBuffers.length,
+      storageBuffersPointer,
+    );
+    storageBuffersPointer.callocFree();
   }
   return result;
 }

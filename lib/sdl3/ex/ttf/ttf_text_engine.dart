@@ -20,6 +20,10 @@ extension TtfTextEnginePointerEx on Pointer<TtfTextEngine> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL TTF_DestroySurfaceTextEngine(TTF_TextEngine *engine)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_DestroySurfaceTextEngine - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_DestroySurfaceTextEngine)
+  ///
   /// {@category ttf}
   void destroySurface() => ttfDestroySurfaceTextEngine(this);
 
@@ -42,6 +46,10 @@ extension TtfTextEnginePointerEx on Pointer<TtfTextEngine> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL TTF_DestroyRendererTextEngine(TTF_TextEngine *engine)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_DestroyRendererTextEngine - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_DestroyRendererTextEngine)
+  ///
   /// {@category ttf}
   void destroyRenderer() => ttfDestroyRendererTextEngine(this);
 
@@ -64,6 +72,10 @@ extension TtfTextEnginePointerEx on Pointer<TtfTextEngine> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL TTF_DestroyGPUTextEngine(TTF_TextEngine *engine)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_DestroyGPUTextEngine - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_DestroyGPUTextEngine)
+  ///
   /// {@category ttf}
   void destroyGpu() => ttfDestroyGpuTextEngine(this);
 
@@ -85,6 +97,10 @@ extension TtfTextEnginePointerEx on Pointer<TtfTextEngine> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL TTF_SetGPUTextEngineWinding(TTF_TextEngine *engine, TTF_GPUTextEngineWinding winding)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_SetGPUTextEngineWinding - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_SetGPUTextEngineWinding)
+  ///
   /// {@category ttf}
   void setGpuWinding(int winding) => ttfSetGpuTextEngineWinding(this, winding);
 
@@ -107,6 +123,10 @@ extension TtfTextEnginePointerEx on Pointer<TtfTextEngine> {
   /// ```c
   /// extern SDL_DECLSPEC TTF_GPUTextEngineWinding SDLCALL TTF_GetGPUTextEngineWinding(const TTF_TextEngine *engine)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_GetGPUTextEngineWinding - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetGPUTextEngineWinding)
+  ///
   /// {@category ttf}
   int getGpuWinding() => ttfGetGpuTextEngineWinding(this);
 
@@ -129,6 +149,10 @@ extension TtfTextEnginePointerEx on Pointer<TtfTextEngine> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL TTF_DestroyGLTextEngine(TTF_TextEngine *engine)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_DestroyGLTextEngine - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_DestroyGLTextEngine)
+  ///
   /// {@category ttf}
   void destroyGl() => ttfDestroyGlTextEngine(this);
 
@@ -150,6 +174,10 @@ extension TtfTextEnginePointerEx on Pointer<TtfTextEngine> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL TTF_SetGLTextEngineWinding(TTF_TextEngine *engine, TTF_GLTextEngineWinding winding)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_SetGLTextEngineWinding - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_SetGLTextEngineWinding)
+  ///
   /// {@category ttf}
   void setGlWinding(int winding) => ttfSetGlTextEngineWinding(this, winding);
 
@@ -172,6 +200,10 @@ extension TtfTextEnginePointerEx on Pointer<TtfTextEngine> {
   /// ```c
   /// extern SDL_DECLSPEC TTF_GLTextEngineWinding SDLCALL TTF_GetGLTextEngineWinding(const TTF_TextEngine *engine)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_GetGLTextEngineWinding - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetGLTextEngineWinding)
+  ///
   /// {@category ttf}
   int getGlWinding() => ttfGetGlTextEngineWinding(this);
 
@@ -197,6 +229,10 @@ extension TtfTextEnginePointerEx on Pointer<TtfTextEngine> {
   /// ```c
   /// extern SDL_DECLSPEC TTF_Text * SDLCALL TTF_CreateText(TTF_TextEngine *engine, TTF_Font *font, const char *text, size_t length)
   /// ```
+  ///
+  /// See also:
+  /// - [TTF_CreateText - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_CreateText)
+  ///
   /// {@category ttf}
   Pointer<TtfText> createText(Pointer<TtfFont> font, String text) =>
       ttfCreateText(this, font, text);

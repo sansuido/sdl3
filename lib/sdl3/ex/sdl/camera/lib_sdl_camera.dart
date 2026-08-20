@@ -18,6 +18,10 @@ part of '../../../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC SDL_CameraID * SDLCALL SDL_GetCameras(int *count)
 /// ```
+///
+/// See also:
+/// - [SDL_GetCameras - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetCameras)
+///
 /// {@category camera}
 List<int> sdlxGetCameras() {
   final result = <int>[];
@@ -73,6 +77,10 @@ List<int> sdlxGetCameras() {
 /// ```c
 /// extern SDL_DECLSPEC SDL_CameraSpec ** SDLCALL SDL_GetCameraSupportedFormats(SDL_CameraID instance_id, int *count)
 /// ```
+///
+/// See also:
+/// - [SDL_GetCameraSupportedFormats - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetCameraSupportedFormats)
+///
 /// {@category camera}
 List<SdlxCameraSpec> sdlxGetCameraSupportedFormats(int instanceId) {
   final result = <SdlxCameraSpec>[];
@@ -136,6 +144,10 @@ List<SdlxCameraSpec> sdlxGetCameraSupportedFormats(int instanceId) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Camera * SDLCALL SDL_OpenCamera(SDL_CameraID instance_id, const SDL_CameraSpec *spec)
 /// ```
+///
+/// See also:
+/// - [SDL_OpenCamera - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_OpenCamera)
+///
 /// {@category camera}
 Pointer<SdlCamera> sdlxOpenCamera(int instanceId, [SdlxCameraSpec? spec]) {
   final specPointer = spec != null ? spec.calloc() : nullptr;
@@ -173,6 +185,10 @@ Pointer<SdlCamera> sdlxOpenCamera(int instanceId, [SdlxCameraSpec? spec]) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetCameraFormat(SDL_Camera *camera, SDL_CameraSpec *spec)
 /// ```
+///
+/// See also:
+/// - [SDL_GetCameraFormat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetCameraFormat)
+///
 /// {@category camera}
 bool sdlxGetCameraFormat(Pointer<SdlCamera> camera, SdlxCameraSpec spec) {
   final specPointer = spec.calloc();
@@ -228,6 +244,10 @@ bool sdlxGetCameraFormat(Pointer<SdlCamera> camera, SdlxCameraSpec spec) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Surface * SDLCALL SDL_AcquireCameraFrame(SDL_Camera *camera, Uint64 *timestampNS)
 /// ```
+///
+/// See also:
+/// - [SDL_AcquireCameraFrame - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_AcquireCameraFrame)
+///
 /// {@category camera}
 ({Pointer<SdlSurface> surface, int timestampNs})? sdlxAcquireCameraFrame(
   Pointer<SdlCamera> camera,

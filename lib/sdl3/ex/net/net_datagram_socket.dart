@@ -85,6 +85,10 @@ extension NetDatagramSocketPointerEx on Pointer<NetDatagramSocket> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL NET_SendDatagram(NET_DatagramSocket *sock, NET_Address *address, Uint16 port, const void *buf, int buflen)
   /// ```
+  ///
+  /// See also:
+  /// - [NET_SendDatagram - SDL3 Wiki](https://wiki.libsdl.org/SDL3/NET_SendDatagram)
+  ///
   /// {@category net}
   bool send(Pointer<NetAddress> address, int port, Uint8List buf) =>
       netxSendDatagram(this, address, port, buf);
@@ -138,6 +142,10 @@ extension NetDatagramSocketPointerEx on Pointer<NetDatagramSocket> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL NET_ReceiveDatagram(NET_DatagramSocket *sock, NET_Datagram **dgram)
   /// ```
+  ///
+  /// See also:
+  /// - [NET_ReceiveDatagram - SDL3 Wiki](https://wiki.libsdl.org/SDL3/NET_ReceiveDatagram)
+  ///
   /// {@category net}
   NetxDatagram? receive({bool refAddress = true}) =>
       netxReceiveDatagram(this, refAddress: refAddress);
@@ -175,6 +183,10 @@ extension NetDatagramSocketPointerEx on Pointer<NetDatagramSocket> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL NET_SimulateDatagramPacketLoss(NET_DatagramSocket *sock, int percent_loss)
   /// ```
+  ///
+  /// See also:
+  /// - [NET_SimulateDatagramPacketLoss - SDL3 Wiki](https://wiki.libsdl.org/SDL3/NET_SimulateDatagramPacketLoss)
+  ///
   /// {@category net}
   void simulatePacketLoss(int percentLoss) =>
       netSimulateDatagramPacketLoss(this, percentLoss);
@@ -207,6 +219,10 @@ extension NetDatagramSocketPointerEx on Pointer<NetDatagramSocket> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL NET_DestroyDatagramSocket(NET_DatagramSocket *sock)
   /// ```
+  ///
+  /// See also:
+  /// - [NET_DestroyDatagramSocket - SDL3 Wiki](https://wiki.libsdl.org/SDL3/NET_DestroyDatagramSocket)
+  ///
   /// {@category net}
   void destroy() => netDestroyDatagramSocket(this);
 }

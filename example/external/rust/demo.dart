@@ -1,5 +1,6 @@
 // https://github.com/Rust-SDL2/rust-sdl2/blob/master/examples/demo.rs
 import 'dart:ffi';
+
 import 'package:sdl3/sdl3.dart';
 
 int main() {

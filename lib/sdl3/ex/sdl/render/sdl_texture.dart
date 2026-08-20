@@ -21,8 +21,12 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetTextureSize(SDL_Texture *texture, float *w, float *h)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetTextureSize - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetTextureSize)
+  ///
   /// {@category render}
-  bool getSize(SdlxFPoint size) => sdlxGetTextureSize(this, size);
+  ({double w, double h})? getSize() => sdlxGetTextureSize(this);
 
   ///
   /// Set an additional color value multiplied into render copy operations.
@@ -54,6 +58,10 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetTextureColorMod(SDL_Texture *texture, Uint8 r, Uint8 g, Uint8 b)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_SetTextureColorMod - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetTextureColorMod)
+  ///
   /// {@category render}
   bool setColorMod(SdlxColor color) => sdlxSetTextureColorMod(this, color);
 
@@ -84,6 +92,10 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetTextureAlphaMod(SDL_Texture *texture, Uint8 alpha)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_SetTextureAlphaMod - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetTextureAlphaMod)
+  ///
   /// {@category render}
   bool setAlphaMod(int alpha) => sdlSetTextureAlphaMod(this, alpha);
 
@@ -108,8 +120,12 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetTextureColorMod(SDL_Texture *texture, Uint8 *r, Uint8 *g, Uint8 *b)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetTextureColorMod - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetTextureColorMod)
+  ///
   /// {@category render}
-  bool getColorMod(SdlxColor color) => sdlxGetTextureColorMod(this, color);
+  ({int r, int g, int b})? getColorMod() => sdlxGetTextureColorMod(this);
 
   ///
   /// Get the additional alpha value multiplied into render copy operations.
@@ -130,6 +146,10 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetTextureAlphaMod(SDL_Texture *texture, Uint8 *alpha)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetTextureAlphaMod - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetTextureAlphaMod)
+  ///
   /// {@category render}
   int? getAlphaMod() => sdlxGetTextureAlphaMod(this);
 
@@ -163,6 +183,10 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetTextureColorModFloat(SDL_Texture *texture, float r, float g, float b)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_SetTextureColorModFloat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetTextureColorModFloat)
+  ///
   /// {@category render}
   bool setColorModFloat(SdlxFColor color) =>
       sdlxSetTextureColorModFloat(this, color);
@@ -194,6 +218,10 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetTextureAlphaModFloat(SDL_Texture *texture, float alpha)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_SetTextureAlphaModFloat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetTextureAlphaModFloat)
+  ///
   /// {@category render}
   bool setAlphaModFloat(double alpha) =>
       sdlSetTextureAlphaModFloat(this, alpha);
@@ -219,9 +247,13 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetTextureColorModFloat(SDL_Texture *texture, float *r, float *g, float *b)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetTextureColorModFloat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetTextureColorModFloat)
+  ///
   /// {@category render}
-  bool getColorModFloat(SdlxFColor color) =>
-      sdlxGetTextureColorModFloat(this, color);
+  ({double r, double g, double b})? getColorModFloat() =>
+      sdlxGetTextureColorModFloat(this);
 
   ///
   /// Get the additional alpha value multiplied into render copy operations.
@@ -242,6 +274,10 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetTextureAlphaModFloat(SDL_Texture *texture, float *alpha)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetTextureAlphaModFloat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetTextureAlphaModFloat)
+  ///
   /// {@category render}
   double? getAlphaModFloat() => sdlxGetTextureAlphaModFloat(this);
 
@@ -268,6 +304,10 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetTextureBlendMode(SDL_Texture *texture, SDL_BlendMode blendMode)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_SetTextureBlendMode - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetTextureBlendMode)
+  ///
   /// {@category render}
   bool setBlendMode(int blendMode) => sdlSetTextureBlendMode(this, blendMode);
 
@@ -288,6 +328,10 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetTextureBlendMode(SDL_Texture *texture, SDL_BlendMode *blendMode)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetTextureBlendMode - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetTextureBlendMode)
+  ///
   /// {@category render}
   int? getBlendMode() => sdlxGetTextureBlendMode(this);
 
@@ -312,6 +356,10 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetTextureScaleMode(SDL_Texture *texture, SDL_ScaleMode scaleMode)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_SetTextureScaleMode - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetTextureScaleMode)
+  ///
   /// {@category render}
   bool setScaleMode(int scaleMode) => sdlSetTextureScaleMode(this, scaleMode);
 
@@ -332,6 +380,10 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetTextureScaleMode(SDL_Texture *texture, SDL_ScaleMode *scaleMode)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetTextureScaleMode - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetTextureScaleMode)
+  ///
   /// {@category render}
   int? getScaleMode() => sdlxGetTextureScaleMode(this);
 
@@ -370,6 +422,10 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_UpdateTexture(SDL_Texture *texture, const SDL_Rect *rect, const void *pixels, int pitch)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_UpdateTexture - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_UpdateTexture)
+  ///
   /// {@category render}
   bool update(Pointer<Void> pixels, int pitch, {SdlxRect? rect}) =>
       sdlxUpdateTexture(this, pixels, pitch, rect: rect);
@@ -407,6 +463,10 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_UpdateYUVTexture(SDL_Texture *texture, const SDL_Rect *rect, const Uint8 *Yplane, int Ypitch, const Uint8 *Uplane, int Upitch, const Uint8 *Vplane, int Vpitch)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_UpdateYUVTexture - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_UpdateYUVTexture)
+  ///
   /// {@category render}
   bool updateYuv({
     SdlxRect? rect,
@@ -450,6 +510,10 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_UpdateNVTexture(SDL_Texture *texture, const SDL_Rect *rect, const Uint8 *Yplane, int Ypitch, const Uint8 *UVplane, int UVpitch)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_UpdateNVTexture - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_UpdateNVTexture)
+  ///
   /// {@category render}
   bool updateNv({SdlxRect? rect, List<int>? yplane, List<int>? uVplane}) =>
       sdlxUpdateNvTexture(this, rect: rect, yplane: yplane, uVplane: uVplane);
@@ -487,12 +551,13 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_LockTexture(SDL_Texture *texture, const SDL_Rect *rect, void **pixels, int *pitch)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_LockTexture - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_LockTexture)
+  ///
   /// {@category render}
-  bool lock(
-    Pointer<SdlRect> rect,
-    Pointer<Pointer<Void>> pixels,
-    Pointer<Int32> pitch,
-  ) => sdlLockTexture(this, rect, pixels, pitch);
+  ({Pointer<Void> pixels, int pitch})? lock({SdlxRect? rect}) =>
+      sdlxLockTexture(this, rect: rect);
 
   ///
   /// Lock a portion of the texture for **write-only** pixel access, and expose
@@ -531,6 +596,10 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_LockTextureToSurface(SDL_Texture *texture, const SDL_Rect *rect, SDL_Surface **surface)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_LockTextureToSurface - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_LockTextureToSurface)
+  ///
   /// {@category render}
   bool lockToSurface(
     Pointer<SdlRect> rect,
@@ -559,6 +628,10 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_UnlockTexture(SDL_Texture *texture)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_UnlockTexture - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_UnlockTexture)
+  ///
   /// {@category render}
   void unlock() {
     sdlUnlockTexture(this);
@@ -582,6 +655,10 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_DestroyTexture(SDL_Texture *texture)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_DestroyTexture - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_DestroyTexture)
+  ///
   /// {@category render}
   bool destroy() {
     if (this != nullptr) {

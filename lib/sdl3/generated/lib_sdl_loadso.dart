@@ -18,6 +18,10 @@ part of '../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC SDL_SharedObject * SDLCALL SDL_LoadObject(const char *sofile)
 /// ```
+///
+/// See also:
+/// - [SDL_LoadObject - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_LoadObject)
+///
 /// {@category loadso}
 Pointer<SdlSharedObject> sdlLoadObject(String? sofile) {
   final sdlLoadObjectLookupFunction = _libSdl
@@ -60,6 +64,10 @@ Pointer<SdlSharedObject> sdlLoadObject(String? sofile) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_FunctionPointer SDLCALL SDL_LoadFunction(SDL_SharedObject *handle, const char *name)
 /// ```
+///
+/// See also:
+/// - [SDL_LoadFunction - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_LoadFunction)
+///
 /// {@category loadso}
 Pointer<NativeFunction<SdlFunctionPointer>> sdlLoadFunction(
   Pointer<SdlSharedObject> handle,
@@ -99,6 +107,10 @@ Pointer<NativeFunction<SdlFunctionPointer>> sdlLoadFunction(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_UnloadObject(SDL_SharedObject *handle)
 /// ```
+///
+/// See also:
+/// - [SDL_UnloadObject - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_UnloadObject)
+///
 /// {@category loadso}
 void sdlUnloadObject(Pointer<SdlSharedObject> handle) {
   final sdlUnloadObjectLookupFunction = _libSdl

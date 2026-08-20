@@ -43,6 +43,10 @@ extension SdlAsyncIoEx on SdlAsyncIo {
   /// ```c
   /// extern SDL_DECLSPEC SDL_AsyncIO * SDLCALL SDL_AsyncIOFromFile(const char *file, const char *mode)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_AsyncIOFromFile - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_AsyncIOFromFile)
+  ///
   /// {@category asyncio}
   static Pointer<SdlAsyncIo> fromFile(String file, String mode) =>
       sdlAsyncIoFromFile(file, mode);
@@ -67,6 +71,10 @@ extension SdlAsyncIoPointerEx on Pointer<SdlAsyncIo> {
   /// ```c
   /// extern SDL_DECLSPEC Sint64 SDLCALL SDL_GetAsyncIOSize(SDL_AsyncIO *asyncio)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetAsyncIOSize - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetAsyncIOSize)
+  ///
   /// {@category asyncio}
   int getSize() => sdlGetAsyncIoSize(this);
 
@@ -109,6 +117,10 @@ extension SdlAsyncIoPointerEx on Pointer<SdlAsyncIo> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_ReadAsyncIO(SDL_AsyncIO *asyncio, void *ptr, Uint64 offset, Uint64 size, SDL_AsyncIOQueue *queue, void *userdata)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_ReadAsyncIO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ReadAsyncIO)
+  ///
   /// {@category asyncio}
   bool read(
     Pointer<Void> ptr,
@@ -156,6 +168,10 @@ extension SdlAsyncIoPointerEx on Pointer<SdlAsyncIo> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_WriteAsyncIO(SDL_AsyncIO *asyncio, void *ptr, Uint64 offset, Uint64 size, SDL_AsyncIOQueue *queue, void *userdata)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_WriteAsyncIO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_WriteAsyncIO)
+  ///
   /// {@category asyncio}
   bool write(
     Pointer<Void> ptr,
@@ -215,6 +231,10 @@ extension SdlAsyncIoPointerEx on Pointer<SdlAsyncIo> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_CloseAsyncIO(SDL_AsyncIO *asyncio, bool flush, SDL_AsyncIOQueue *queue, void *userdata)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_CloseAsyncIO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CloseAsyncIO)
+  ///
   /// {@category asyncio}
   bool close(
     Pointer<SdlAsyncIoQueue> queue,

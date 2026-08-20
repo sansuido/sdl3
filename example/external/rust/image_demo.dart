@@ -1,5 +1,6 @@
 // https://github.com/Rust-SDL2/rust-sdl2/blob/master/examples/image-demo.rs
 import 'dart:ffi';
+
 import 'package:sdl3/sdl3.dart';
 
 int main() {
@@ -49,9 +50,9 @@ int main() {
             texture = nullptr;
           }
           texture = loadTexture;
-          final size = SdlxFPoint(0, 0);
-          if (loadTexture.getSize(size)) {
-            print('X=${size.x} Y=${size.y}');
+          final size = loadTexture.getSize();
+          if (size != null) {
+            print('w=${size.w} h=${size.h}');
           }
         } else {
           sdlShowSimpleMessageBox(0, 'imgGetError', imgGetError(), window);

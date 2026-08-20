@@ -62,6 +62,10 @@ part of '../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_Init(SDL_InitFlags flags)
 /// ```
+///
+/// See also:
+/// - [SDL_Init - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_Init)
+///
 /// {@category init}
 bool sdlInit(int flags) {
   final sdlInitLookupFunction = _libSdl
@@ -91,6 +95,10 @@ bool sdlInit(int flags) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_InitSubSystem(SDL_InitFlags flags)
 /// ```
+///
+/// See also:
+/// - [SDL_InitSubSystem - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_InitSubSystem)
+///
 /// {@category init}
 bool sdlInitSubSystem(int flags) {
   final sdlInitSubSystemLookupFunction = _libSdl
@@ -118,6 +126,10 @@ bool sdlInitSubSystem(int flags) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_QuitSubSystem(SDL_InitFlags flags)
 /// ```
+///
+/// See also:
+/// - [SDL_QuitSubSystem - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_QuitSubSystem)
+///
 /// {@category init}
 void sdlQuitSubSystem(int flags) {
   final sdlQuitSubSystemLookupFunction = _libSdl
@@ -144,6 +156,10 @@ void sdlQuitSubSystem(int flags) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_InitFlags SDLCALL SDL_WasInit(SDL_InitFlags flags)
 /// ```
+///
+/// See also:
+/// - [SDL_WasInit - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_WasInit)
+///
 /// {@category init}
 int sdlWasInit(int flags) {
   final sdlWasInitLookupFunction = _libSdl
@@ -174,6 +190,10 @@ int sdlWasInit(int flags) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_Quit(void)
 /// ```
+///
+/// See also:
+/// - [SDL_Quit - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_Quit)
+///
 /// {@category init}
 void sdlQuit() {
   final sdlQuitLookupFunction = _libSdl
@@ -202,6 +222,10 @@ void sdlQuit() {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_IsMainThread(void)
 /// ```
+///
+/// See also:
+/// - [SDL_IsMainThread - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_IsMainThread)
+///
 /// {@category init}
 bool sdlIsMainThread() {
   final sdlIsMainThreadLookupFunction = _libSdl
@@ -236,6 +260,10 @@ bool sdlIsMainThread() {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_RunOnMainThread(SDL_MainThreadCallback callback, void *userdata, bool wait_complete)
 /// ```
+///
+/// See also:
+/// - [SDL_RunOnMainThread - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RunOnMainThread)
+///
 /// {@category init}
 bool sdlRunOnMainThread(
   Pointer<NativeFunction<SdlMainThreadCallback>> callback,
@@ -297,6 +325,10 @@ bool sdlRunOnMainThread(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetAppMetadata(const char *appname, const char *appversion, const char *appidentifier)
 /// ```
+///
+/// See also:
+/// - [SDL_SetAppMetadata - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetAppMetadata)
+///
 /// {@category init}
 bool sdlSetAppMetadata(
   String? appname,
@@ -399,6 +431,10 @@ bool sdlSetAppMetadata(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetAppMetadataProperty(const char *name, const char *value)
 /// ```
+///
+/// See also:
+/// - [SDL_SetAppMetadataProperty - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetAppMetadataProperty)
+///
 /// {@category init}
 bool sdlSetAppMetadataProperty(String? name, String? value) {
   final sdlSetAppMetadataPropertyLookupFunction = _libSdl
@@ -442,6 +478,10 @@ bool sdlSetAppMetadataProperty(String? name, String? value) {
 /// ```c
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetAppMetadataProperty(const char *name)
 /// ```
+///
+/// See also:
+/// - [SDL_GetAppMetadataProperty - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetAppMetadataProperty)
+///
 /// {@category init}
 String? sdlGetAppMetadataProperty(String? name) {
   final sdlGetAppMetadataPropertyLookupFunction = _libSdl

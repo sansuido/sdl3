@@ -43,6 +43,10 @@ part of '../../../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC SDL_Process * SDLCALL SDL_CreateProcess(const char * const *args, bool pipe_stdio)
 /// ```
+///
+/// See also:
+/// - [SDL_CreateProcess - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CreateProcess)
+///
 /// {@category process}
 Pointer<SdlProcess> sdlxCreateProcess(
   List<String> args, {
@@ -92,6 +96,10 @@ Pointer<SdlProcess> sdlxCreateProcess(
 /// ```c
 /// extern SDL_DECLSPEC void * SDLCALL SDL_ReadProcess(SDL_Process *process, size_t *datasize, int *exitcode)
 /// ```
+///
+/// See also:
+/// - [SDL_ReadProcess - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ReadProcess)
+///
 /// {@category process}
 ({Uint8List data, int datasize, int exitcode})? sdlxReadProcess(
   Pointer<SdlProcess> process,
@@ -149,6 +157,10 @@ Pointer<SdlProcess> sdlxCreateProcess(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_WaitProcess(SDL_Process *process, bool block, int *exitcode)
 /// ```
+///
+/// See also:
+/// - [SDL_WaitProcess - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_WaitProcess)
+///
 /// {@category process}
 int? sdlxWaitProcess(Pointer<SdlProcess> process, {bool block = false}) {
   int? result;

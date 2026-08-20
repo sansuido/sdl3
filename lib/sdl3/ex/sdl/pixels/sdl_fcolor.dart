@@ -91,3 +91,17 @@ class SdlxFColor {
     return pointer;
   }
 }
+
+extension SdlxFColorListExtension on List<SdlxFColor> {
+  Pointer<SdlFColor> calloc() {
+    final buffersPointer = ffi.calloc<SdlFColor>(length);
+    for (var i = 0; i < length; i++) {
+      final bufferPointer = buffersPointer + i;
+      bufferPointer.ref.r = this[i].r;
+      bufferPointer.ref.g = this[i].g;
+      bufferPointer.ref.b = this[i].b;
+      bufferPointer.ref.a = this[i].a;
+    }
+    return buffersPointer;
+  }
+}

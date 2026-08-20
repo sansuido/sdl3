@@ -1,7 +1,7 @@
 // https://gist.github.com/superzazu/f24aaf202248440c6097b85105d0bbae
 import 'dart:ffi';
 import 'dart:typed_data';
-import 'package:ffi/ffi.dart';
+
 import 'package:sdl3/sdl3.dart';
 
 const gWinWidth = 160;
@@ -36,10 +36,9 @@ int main() {
   }
 
   renderer.setLogicalPresentation(
-    SdlxRenderLogicalPresentation()
-      ..w = gWinWidth
-      ..h = gWinHeight
-      ..mode = SDL_LOGICAL_PRESENTATION_STRETCH,
+    gWinWidth,
+    gWinHeight,
+    SDL_LOGICAL_PRESENTATION_STRETCH,
   );
   // create texture
   final texture = renderer.createTexture(
@@ -55,22 +54,19 @@ int main() {
     sdlQuit();
   }
   // array of pixels
-  final texturePixels = calloc<Pointer<Void>>();
-  final texturePitch = calloc<Int32>();
-  texture.lock(nullptr, texturePixels, texturePitch);
-  // update texture with new data
-  texturePixels.value.cast<Uint32>().value = ByteData.view(
-    Uint8List.fromList([255, 0, 0, 255]).buffer,
-  ).getUint32(0);
-  (texturePixels.value.cast<Uint32>() +
-          gWinWidth * gWinHeight ~/ 2 +
-          gWinWidth ~/ 2)
-      .value = ByteData.view(
-    Uint8List.fromList([0, 255, 0, 255]).buffer,
-  ).getUint32(0);
-  (texturePixels.value.cast<Uint32>() + gWinWidth * gWinHeight - 1).value =
-      ByteData.view(Uint8List.fromList([0, 0, 255, 255]).buffer).getUint32(0);
-  texture.unlock();
+  final rec = texture.lock();
+  if (rec != null) {
+    // update texture with new data
+    rec.pixels.cast<Uint32>().value = ByteData.view(
+      Uint8List.fromList([255, 0, 0, 255]).buffer,
+    ).getUint32(0);
+    (rec.pixels.cast<Uint32>() + gWinWidth * gWinHeight ~/ 2 + gWinWidth ~/ 2)
+        .value = ByteData.view(Uint8List.fromList([0, 255, 0, 255]).buffer)
+        .getUint32(0);
+    (rec.pixels.cast<Uint32>() + gWinWidth * gWinHeight - 1).value =
+        ByteData.view(Uint8List.fromList([0, 0, 255, 255]).buffer).getUint32(0);
+    texture.unlock();
+  }
   // main loop
   var running = true;
   while (running) {

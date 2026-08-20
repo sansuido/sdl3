@@ -58,10 +58,19 @@ extension SdlxFPointListExtension on List<SdlxFPoint> {
 
   Pointer<SdlFPoint> calloc() {
     final buffersPointer = ffi.calloc<SdlFPoint>(length);
-    for (var n = 0; n < length; n++) {
-      final bufferPointer = buffersPointer + n;
-      bufferPointer.ref.x = this[n].x;
-      bufferPointer.ref.y = this[n].y;
+    for (var i = 0; i < length; i++) {
+      final bufferPointer = buffersPointer + i;
+      bufferPointer.ref.x = this[i].x;
+      bufferPointer.ref.y = this[i].y;
+    }
+    return buffersPointer;
+  }
+
+  Pointer<Float> callocXy() {
+    final buffersPointer = ffi.calloc<Float>(length * 2);
+    for (var i = 0; i < length; i++) {
+      (buffersPointer + i * 2).value = this[i].x;
+      (buffersPointer + i * 2 + 1).value = this[i].y;
     }
     return buffersPointer;
   }

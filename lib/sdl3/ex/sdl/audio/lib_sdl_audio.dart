@@ -30,6 +30,10 @@ part of '../../../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC SDL_AudioDeviceID * SDLCALL SDL_GetAudioPlaybackDevices(int *count)
 /// ```
+///
+/// See also:
+/// - [SDL_GetAudioPlaybackDevices - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetAudioPlaybackDevices)
+///
 /// {@category audio}
 List<int> sdlxGetAudioPlaybackDevices() {
   final result = <int>[];
@@ -75,6 +79,10 @@ List<int> sdlxGetAudioPlaybackDevices() {
 /// ```c
 /// extern SDL_DECLSPEC SDL_AudioDeviceID * SDLCALL SDL_GetAudioRecordingDevices(int *count)
 /// ```
+///
+/// See also:
+/// - [SDL_GetAudioRecordingDevices - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetAudioRecordingDevices)
+///
 /// {@category audio}
 List<int> sdlxGetAudioRecordingDevices() {
   final result = <int>[];
@@ -126,6 +134,10 @@ List<int> sdlxGetAudioRecordingDevices() {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetAudioDeviceFormat(SDL_AudioDeviceID devid, SDL_AudioSpec *spec, int *sample_frames)
 /// ```
+///
+/// See also:
+/// - [SDL_GetAudioDeviceFormat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetAudioDeviceFormat)
+///
 /// {@category audio}
 bool sdlxGetAudioDeviceFormat(int devid, SdlxAudioSpec spec) {
   final specPointer = spec.calloc();
@@ -169,6 +181,10 @@ bool sdlxGetAudioDeviceFormat(int devid, SdlxAudioSpec spec) {
 /// ```c
 /// extern SDL_DECLSPEC int * SDLCALL SDL_GetAudioDeviceChannelMap(SDL_AudioDeviceID devid, int *count)
 /// ```
+///
+/// See also:
+/// - [SDL_GetAudioDeviceChannelMap - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetAudioDeviceChannelMap)
+///
 /// {@category audio}
 List<int> sdlxGetAudioDeviceChannelMap(int devid) {
   final result = <int>[];
@@ -261,6 +277,10 @@ List<int> sdlxGetAudioDeviceChannelMap(int devid) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_AudioDeviceID SDLCALL SDL_OpenAudioDevice(SDL_AudioDeviceID devid, const SDL_AudioSpec *spec)
 /// ```
+///
+/// See also:
+/// - [SDL_OpenAudioDevice - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_OpenAudioDevice)
+///
 /// {@category audio}
 int sdlxOpenAudioDevice(int devid, SdlxAudioSpec? spec) {
   Pointer<SdlAudioSpec> specPointer = nullptr;
@@ -315,6 +335,10 @@ int sdlxOpenAudioDevice(int devid, SdlxAudioSpec? spec) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_BindAudioStreams(SDL_AudioDeviceID devid, SDL_AudioStream * const *streams, int num_streams)
 /// ```
+///
+/// See also:
+/// - [SDL_BindAudioStreams - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_BindAudioStreams)
+///
 /// {@category audio}
 bool sdlxBindAudioStreams(int devid, List<Pointer<SdlAudioStream>> streams) {
   final streamsPointer = ffi.calloc<Pointer<SdlAudioStream>>(streams.length);
@@ -348,6 +372,10 @@ bool sdlxBindAudioStreams(int devid, List<Pointer<SdlAudioStream>> streams) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_UnbindAudioStreams(SDL_AudioStream * const *streams, int num_streams)
 /// ```
+///
+/// See also:
+/// - [SDL_UnbindAudioStreams - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_UnbindAudioStreams)
+///
 /// {@category audio}
 void sdlxUnbindAudioStreams(List<Pointer<SdlAudioStream>> streams) {
   final streamsPointer = ffi.calloc<Pointer<SdlAudioStream>>(streams.length);
@@ -388,6 +416,10 @@ void sdlxUnbindAudioStreams(List<Pointer<SdlAudioStream>> streams) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_AudioStream * SDLCALL SDL_CreateAudioStream(const SDL_AudioSpec *src_spec, const SDL_AudioSpec *dst_spec)
 /// ```
+///
+/// See also:
+/// - [SDL_CreateAudioStream - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CreateAudioStream)
+///
 /// {@category audio}
 Pointer<SdlAudioStream> sdlxCreateAudioStream(
   SdlxAudioSpec srcSpec,
@@ -425,6 +457,10 @@ Pointer<SdlAudioStream> sdlxCreateAudioStream(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetAudioStreamFormat(SDL_AudioStream *stream, SDL_AudioSpec *src_spec, SDL_AudioSpec *dst_spec)
 /// ```
+///
+/// See also:
+/// - [SDL_GetAudioStreamFormat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetAudioStreamFormat)
+///
 /// {@category audio}
 bool sdlxGetAudioStreamFormat(
   Pointer<SdlAudioStream> stream,
@@ -513,6 +549,10 @@ bool sdlxSetAudioStreamFormat(
 /// ```c
 /// extern SDL_DECLSPEC int * SDLCALL SDL_GetAudioStreamInputChannelMap(SDL_AudioStream *stream, int *count)
 /// ```
+///
+/// See also:
+/// - [SDL_GetAudioStreamInputChannelMap - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetAudioStreamInputChannelMap)
+///
 /// {@category audio}
 List<int> sdlxGetAudioStreamInputChannelMap(Pointer<SdlAudioStream> stream) {
   final result = <int>[];
@@ -556,6 +596,10 @@ List<int> sdlxGetAudioStreamInputChannelMap(Pointer<SdlAudioStream> stream) {
 /// ```c
 /// extern SDL_DECLSPEC int * SDLCALL SDL_GetAudioStreamOutputChannelMap(SDL_AudioStream *stream, int *count)
 /// ```
+///
+/// See also:
+/// - [SDL_GetAudioStreamOutputChannelMap - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetAudioStreamOutputChannelMap)
+///
 /// {@category audio}
 List<int> sdlxGetAudioStreamOutputChannelMap(Pointer<SdlAudioStream> stream) {
   final result = <int>[];
@@ -635,6 +679,10 @@ List<int> sdlxGetAudioStreamOutputChannelMap(Pointer<SdlAudioStream> stream) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetAudioStreamInputChannelMap(SDL_AudioStream *stream, const int *chmap, int count)
 /// ```
+///
+/// See also:
+/// - [SDL_SetAudioStreamInputChannelMap - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetAudioStreamInputChannelMap)
+///
 /// {@category audio}
 bool sdlxSetAudioStreamInputChannelMap(
   Pointer<SdlAudioStream> stream,
@@ -712,6 +760,10 @@ bool sdlxSetAudioStreamInputChannelMap(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetAudioStreamOutputChannelMap(SDL_AudioStream *stream, const int *chmap, int count)
 /// ```
+///
+/// See also:
+/// - [SDL_SetAudioStreamOutputChannelMap - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetAudioStreamOutputChannelMap)
+///
 /// {@category audio}
 bool sdlxSetAudioStreamOutputChannelMap(
   Pointer<SdlAudioStream> stream,
@@ -761,6 +813,10 @@ bool sdlxSetAudioStreamOutputChannelMap(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_PutAudioStreamData(SDL_AudioStream *stream, const void *buf, int len)
 /// ```
+///
+/// See also:
+/// - [SDL_PutAudioStreamData - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_PutAudioStreamData)
+///
 /// {@category audio}
 bool sdlxPutAudioStreamData(Pointer<SdlAudioStream> stream, TypedData buf) {
   final byteView = buf.buffer.asUint8List(buf.offsetInBytes, buf.lengthInBytes);
@@ -823,6 +879,10 @@ bool sdlxPutAudioStreamData(Pointer<SdlAudioStream> stream, TypedData buf) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_PutAudioStreamDataNoCopy(SDL_AudioStream *stream, const void *buf, int len, SDL_AudioStreamDataCompleteCallback callback, void *userdata)
 /// ```
+///
+/// See also:
+/// - [SDL_PutAudioStreamDataNoCopy - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_PutAudioStreamDataNoCopy)
+///
 /// {@category audio}
 bool sdlxPutAudioStreamDataNoCopy(
   Pointer<SdlAudioStream> stream,
@@ -879,6 +939,10 @@ bool sdlxPutAudioStreamDataNoCopy(
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_GetAudioStreamData(SDL_AudioStream *stream, void *buf, int len)
 /// ```
+///
+/// See also:
+/// - [SDL_GetAudioStreamData - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetAudioStreamData)
+///
 /// {@category audio}
 TypedData? sdlxGetAudioStreamData(
   Pointer<SdlAudioStream> stream,
@@ -987,6 +1051,10 @@ TypedData? sdlxGetAudioStreamData(
 /// ```c
 /// extern SDL_DECLSPEC SDL_AudioStream * SDLCALL SDL_OpenAudioDeviceStream(SDL_AudioDeviceID devid, const SDL_AudioSpec *spec, SDL_AudioStreamCallback callback, void *userdata)
 /// ```
+///
+/// See also:
+/// - [SDL_OpenAudioDeviceStream - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_OpenAudioDeviceStream)
+///
 /// {@category audio}
 Pointer<SdlAudioStream> sdlxOpenAudioDeviceStream(
   int devid,
@@ -1091,6 +1159,10 @@ Pointer<SdlAudioStream> sdlxOpenAudioDeviceStream(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_LoadWAV_IO(SDL_IOStream *src, bool closeio, SDL_AudioSpec *spec, Uint8 **audio_buf, Uint32 *audio_len)
 /// ```
+///
+/// See also:
+/// - [SDL_LoadWAV_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_LoadWAV_IO)
+///
 /// {@category audio}
 Uint8List? sdlxLoadWavIo(
   Pointer<SdlIoStream> src,
@@ -1158,6 +1230,10 @@ Uint8List? sdlxLoadWavIo(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_LoadWAV(const char *path, SDL_AudioSpec *spec, Uint8 **audio_buf, Uint32 *audio_len)
 /// ```
+///
+/// See also:
+/// - [SDL_LoadWAV - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_LoadWAV)
+///
 /// {@category audio}
 Uint8List? sdlxLoadWav(String path, SdlxAudioSpec spec) {
   Uint8List? result;

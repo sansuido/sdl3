@@ -1,4 +1,5 @@
 part of '../sdl_gfx.dart';
+
 /*
 
 SDL2_framerate.c: framerate manager

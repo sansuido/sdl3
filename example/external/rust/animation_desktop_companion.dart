@@ -1,15 +1,22 @@
 // https://github.com/Rust-SDL2/rust-sdl2/blob/master/examples/animation.rs
 import 'dart:ffi';
 import 'dart:io';
+
 import 'package:sdl3/sdl3.dart';
 
 typedef GetWindowLongPtrNative = Int64 Function(IntPtr hWnd, Int32 nIndex);
 typedef GetWindowLongPtrDart = int Function(int hWnd, int nIndex);
 
-typedef SetWindowLongPtrNative =
-    Int64 Function(IntPtr hWnd, Int32 nIndex, Int64 dwNewLong);
-typedef SetWindowLongPtrDart =
-    int Function(int hWnd, int nIndex, int dwNewLong);
+typedef SetWindowLongPtrNative = Int64 Function(
+  IntPtr hWnd,
+  Int32 nIndex,
+  Int64 dwNewLong,
+);
+typedef SetWindowLongPtrDart = int Function(
+  int hWnd,
+  int nIndex,
+  int dwNewLong,
+);
 
 void makeWindowClickThrough(int hwnd) {
   final user32 = DynamicLibrary.open('user32.dll');

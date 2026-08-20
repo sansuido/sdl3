@@ -21,6 +21,10 @@ extension SdlAsyncIoQueueEx on SdlAsyncIoQueue {
   /// ```c
   /// extern SDL_DECLSPEC SDL_AsyncIOQueue * SDLCALL SDL_CreateAsyncIOQueue(void)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_CreateAsyncIOQueue - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CreateAsyncIOQueue)
+  ///
   /// {@category asyncio}
   static Pointer<SdlAsyncIoQueue> create() => sdlCreateAsyncIoQueue();
 }
@@ -57,6 +61,10 @@ extension SdlAsyncIoQueuePointerEx on Pointer<SdlAsyncIoQueue> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_DestroyAsyncIOQueue(SDL_AsyncIOQueue *queue)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_DestroyAsyncIOQueue - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_DestroyAsyncIOQueue)
+  ///
   /// {@category asyncio}
   void destroy() => sdlDestroyAsyncIoQueue(this);
 
@@ -87,6 +95,10 @@ extension SdlAsyncIoQueuePointerEx on Pointer<SdlAsyncIoQueue> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetAsyncIOResult(SDL_AsyncIOQueue *queue, SDL_AsyncIOOutcome *outcome)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetAsyncIOResult - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetAsyncIOResult)
+  ///
   /// {@category asyncio}
   bool getResult(SdlxAsyncIoOutcome outcome) =>
       sdlxGetAsyncIoResult(this, outcome);
@@ -136,6 +148,10 @@ extension SdlAsyncIoQueuePointerEx on Pointer<SdlAsyncIoQueue> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_WaitAsyncIOResult(SDL_AsyncIOQueue *queue, SDL_AsyncIOOutcome *outcome, Sint32 timeoutMS)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_WaitAsyncIOResult - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_WaitAsyncIOResult)
+  ///
   /// {@category asyncio}
   bool waitResult(SdlxAsyncIoOutcome outcome, int timeoutMS) =>
       sdlWaitAsyncIoResult(this, outcome.calloc(), timeoutMS);
@@ -165,6 +181,10 @@ extension SdlAsyncIoQueuePointerEx on Pointer<SdlAsyncIoQueue> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_SignalAsyncIOQueue(SDL_AsyncIOQueue *queue)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_SignalAsyncIOQueue - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SignalAsyncIOQueue)
+  ///
   /// {@category asyncio}
   void signal() => sdlSignalAsyncIoQueue(this);
 
@@ -203,6 +223,10 @@ extension SdlAsyncIoQueuePointerEx on Pointer<SdlAsyncIoQueue> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_LoadFileAsync(const char *file, SDL_AsyncIOQueue *queue, void *userdata)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_LoadFileAsync - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_LoadFileAsync)
+  ///
   /// {@category asyncio}
   bool loadFile(String file, Pointer<Void> userdata) =>
       sdlLoadFileAsync(file, this, userdata);

@@ -27,6 +27,10 @@ part of '../../../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetAsyncIOResult(SDL_AsyncIOQueue *queue, SDL_AsyncIOOutcome *outcome)
 /// ```
+///
+/// See also:
+/// - [SDL_GetAsyncIOResult - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetAsyncIOResult)
+///
 /// {@category asyncio}
 bool sdlxGetAsyncIoResult(
   Pointer<SdlAsyncIoQueue> queue,
@@ -86,6 +90,10 @@ bool sdlxGetAsyncIoResult(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_WaitAsyncIOResult(SDL_AsyncIOQueue *queue, SDL_AsyncIOOutcome *outcome, Sint32 timeoutMS)
 /// ```
+///
+/// See also:
+/// - [SDL_WaitAsyncIOResult - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_WaitAsyncIOResult)
+///
 /// {@category asyncio}
 bool sdlxWaitAsyncIoResult(
   Pointer<SdlAsyncIoQueue> queue,

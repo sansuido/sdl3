@@ -30,6 +30,10 @@ part of '../../../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC SDL_Storage * SDLCALL SDL_OpenStorage(const SDL_StorageInterface *iface, void *userdata)
 /// ```
+///
+/// See also:
+/// - [SDL_OpenStorage - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_OpenStorage)
+///
 /// {@category storage}
 Pointer<SdlStorage> sdlxOpenStorage(
   SdlxStorageInterface iface,
@@ -58,6 +62,10 @@ Pointer<SdlStorage> sdlxOpenStorage(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetStorageFileSize(SDL_Storage *storage, const char *path, Uint64 *length)
 /// ```
+///
+/// See also:
+/// - [SDL_GetStorageFileSize - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetStorageFileSize)
+///
 /// {@category storage}
 int? sdlxGetStorageFileSize(Pointer<SdlStorage> storage, String path) {
   int? result;
@@ -94,6 +102,10 @@ int? sdlxGetStorageFileSize(Pointer<SdlStorage> storage, String path) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_ReadStorageFile(SDL_Storage *storage, const char *path, void *destination, Uint64 length)
 /// ```
+///
+/// See also:
+/// - [SDL_ReadStorageFile - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ReadStorageFile)
+///
 /// {@category storage}
 Uint8List? sdlxReadStorageFile(Pointer<SdlStorage> storage, String path) {
   Uint8List? result;
@@ -133,6 +145,10 @@ Uint8List? sdlxReadStorageFile(Pointer<SdlStorage> storage, String path) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_WriteStorageFile(SDL_Storage *storage, const char *path, const void *source, Uint64 length)
 /// ```
+///
+/// See also:
+/// - [SDL_WriteStorageFile - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_WriteStorageFile)
+///
 /// {@category storage}
 bool sdlxWriteStorageFile(
   Pointer<SdlStorage> storage,
@@ -168,6 +184,10 @@ bool sdlxWriteStorageFile(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetStoragePathInfo(SDL_Storage *storage, const char *path, SDL_PathInfo *info)
 /// ```
+///
+/// See also:
+/// - [SDL_GetStoragePathInfo - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetStoragePathInfo)
+///
 /// {@category storage}
 bool sdlxGetStoragePathInfo(
   Pointer<SdlStorage> storage,
@@ -224,6 +244,10 @@ bool sdlxGetStoragePathInfo(
 /// ```c
 /// extern SDL_DECLSPEC char ** SDLCALL SDL_GlobStorageDirectory(SDL_Storage *storage, const char *path, const char *pattern, SDL_GlobFlags flags, int *count)
 /// ```
+///
+/// See also:
+/// - [SDL_GlobStorageDirectory - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GlobStorageDirectory)
+///
 /// {@category storage}
 List<String> sdlxGlobStorageDirectory(
   Pointer<SdlStorage> storage,

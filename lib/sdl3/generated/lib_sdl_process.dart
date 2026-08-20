@@ -45,6 +45,10 @@ part of '../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC SDL_Process * SDLCALL SDL_CreateProcess(const char * const *args, bool pipe_stdio)
 /// ```
+///
+/// See also:
+/// - [SDL_CreateProcess - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CreateProcess)
+///
 /// {@category process}
 Pointer<SdlProcess> sdlCreateProcess(
   Pointer<Pointer<Int8>> args,
@@ -139,6 +143,10 @@ Pointer<SdlProcess> sdlCreateProcess(
 /// ```c
 /// extern SDL_DECLSPEC SDL_Process * SDLCALL SDL_CreateProcessWithProperties(SDL_PropertiesID props)
 /// ```
+///
+/// See also:
+/// - [SDL_CreateProcessWithProperties - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CreateProcessWithProperties)
+///
 /// {@category process}
 Pointer<SdlProcess> sdlCreateProcessWithProperties(int props) {
   final sdlCreateProcessWithPropertiesLookupFunction = _libSdl
@@ -181,6 +189,10 @@ Pointer<SdlProcess> sdlCreateProcessWithProperties(int props) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_PropertiesID SDLCALL SDL_GetProcessProperties(SDL_Process *process)
 /// ```
+///
+/// See also:
+/// - [SDL_GetProcessProperties - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetProcessProperties)
+///
 /// {@category process}
 int sdlGetProcessProperties(Pointer<SdlProcess> process) {
   final sdlGetProcessPropertiesLookupFunction = _libSdl
@@ -223,6 +235,10 @@ int sdlGetProcessProperties(Pointer<SdlProcess> process) {
 /// ```c
 /// extern SDL_DECLSPEC void * SDLCALL SDL_ReadProcess(SDL_Process *process, size_t *datasize, int *exitcode)
 /// ```
+///
+/// See also:
+/// - [SDL_ReadProcess - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ReadProcess)
+///
 /// {@category process}
 Pointer<Void> sdlReadProcess(
   Pointer<SdlProcess> process,
@@ -272,6 +288,10 @@ Pointer<Void> sdlReadProcess(
 /// ```c
 /// extern SDL_DECLSPEC SDL_IOStream * SDLCALL SDL_GetProcessInput(SDL_Process *process)
 /// ```
+///
+/// See also:
+/// - [SDL_GetProcessInput - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetProcessInput)
+///
 /// {@category process}
 Pointer<SdlIoStream> sdlGetProcessInput(Pointer<SdlProcess> process) {
   final sdlGetProcessInputLookupFunction = _libSdl
@@ -307,6 +327,10 @@ Pointer<SdlIoStream> sdlGetProcessInput(Pointer<SdlProcess> process) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_IOStream * SDLCALL SDL_GetProcessOutput(SDL_Process *process)
 /// ```
+///
+/// See also:
+/// - [SDL_GetProcessOutput - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetProcessOutput)
+///
 /// {@category process}
 Pointer<SdlIoStream> sdlGetProcessOutput(Pointer<SdlProcess> process) {
   final sdlGetProcessOutputLookupFunction = _libSdl
@@ -341,6 +365,10 @@ Pointer<SdlIoStream> sdlGetProcessOutput(Pointer<SdlProcess> process) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_KillProcess(SDL_Process *process, bool force)
 /// ```
+///
+/// See also:
+/// - [SDL_KillProcess - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_KillProcess)
+///
 /// {@category process}
 bool sdlKillProcess(Pointer<SdlProcess> process, bool force) {
   final sdlKillProcessLookupFunction = _libSdl
@@ -385,6 +413,10 @@ bool sdlKillProcess(Pointer<SdlProcess> process, bool force) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_WaitProcess(SDL_Process *process, bool block, int *exitcode)
 /// ```
+///
+/// See also:
+/// - [SDL_WaitProcess - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_WaitProcess)
+///
 /// {@category process}
 bool sdlWaitProcess(
   Pointer<SdlProcess> process,
@@ -427,6 +459,10 @@ bool sdlWaitProcess(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_DestroyProcess(SDL_Process *process)
 /// ```
+///
+/// See also:
+/// - [SDL_DestroyProcess - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_DestroyProcess)
+///
 /// {@category process}
 void sdlDestroyProcess(Pointer<SdlProcess> process) {
   final sdlDestroyProcessLookupFunction = _libSdl

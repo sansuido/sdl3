@@ -1,5 +1,6 @@
 // https://github.com/libsdl-org/SDL_mixer/blob/main/test/testspatialization.c
 import 'dart:ffi';
+
 import 'package:sdl3/sdl3.dart';
 
 const gSound = 'assets/waves-at-baltic-sea-shore/waves-at-baltic-sea-shore.wav';

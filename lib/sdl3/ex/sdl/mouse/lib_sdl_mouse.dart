@@ -24,6 +24,10 @@ part of '../../../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC SDL_MouseID * SDLCALL SDL_GetMice(int *count)
 /// ```
+///
+/// See also:
+/// - [SDL_GetMice - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetMice)
+///
 /// {@category mouse}
 List<int> sdlxGetMice() {
   final result = <int>[];
@@ -73,6 +77,10 @@ List<int> sdlxGetMice() {
 /// ```c
 /// extern SDL_DECLSPEC SDL_MouseButtonFlags SDLCALL SDL_GetMouseState(float *x, float *y)
 /// ```
+///
+/// See also:
+/// - [SDL_GetMouseState - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetMouseState)
+///
 /// {@category mouse}
 int sdlxGetMouseState(SdlxFPoint position) {
   final xPointer = ffi.calloc<Float>();
@@ -124,6 +132,10 @@ int sdlxGetMouseState(SdlxFPoint position) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_MouseButtonFlags SDLCALL SDL_GetGlobalMouseState(float *x, float *y)
 /// ```
+///
+/// See also:
+/// - [SDL_GetGlobalMouseState - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetGlobalMouseState)
+///
 /// {@category mouse}
 int sdlxGetGlobalMouseState(SdlxFPoint position) {
   final xPointer = ffi.calloc<Float>();
@@ -173,6 +185,10 @@ int sdlxGetGlobalMouseState(SdlxFPoint position) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_MouseButtonFlags SDLCALL SDL_GetRelativeMouseState(float *x, float *y)
 /// ```
+///
+/// See also:
+/// - [SDL_GetRelativeMouseState - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRelativeMouseState)
+///
 /// {@category mouse}
 int sdlxGetRelativeMouseState(SdlxFPoint position) {
   final xPointer = ffi.calloc<Float>();
@@ -210,6 +226,10 @@ int sdlxGetRelativeMouseState(SdlxFPoint position) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_WarpMouseInWindow(SDL_Window *window, float x, float y)
 /// ```
+///
+/// See also:
+/// - [SDL_WarpMouseInWindow - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_WarpMouseInWindow)
+///
 /// {@category mouse}
 void sdlxWarpMouseInWindow(Pointer<SdlWindow> window, SdlxFPoint position) =>
     sdlWarpMouseInWindow(window, position.x, position.y);
@@ -239,6 +259,10 @@ void sdlxWarpMouseInWindow(Pointer<SdlWindow> window, SdlxFPoint position) =>
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_WarpMouseGlobal(float x, float y)
 /// ```
+///
+/// See also:
+/// - [SDL_WarpMouseGlobal - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_WarpMouseGlobal)
+///
 /// {@category mouse}
 bool sdlxWarpMouseGlobal(SdlxFPoint position) =>
     sdlWarpMouseGlobal(position.x, position.y);
@@ -278,6 +302,10 @@ bool sdlxWarpMouseGlobal(SdlxFPoint position) =>
 /// ```c
 /// extern SDL_DECLSPEC SDL_Cursor * SDLCALL SDL_CreateColorCursor(SDL_Surface *surface, int hot_x, int hot_y)
 /// ```
+///
+/// See also:
+/// - [SDL_CreateColorCursor - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CreateColorCursor)
+///
 /// {@category mouse}
 Pointer<SdlCursor> sdlxCreateColorCursor(
   Pointer<SdlSurface> surface,
@@ -333,6 +361,10 @@ Pointer<SdlCursor> sdlxCreateColorCursor(
 /// ```c
 /// extern SDL_DECLSPEC SDL_Cursor *SDLCALL SDL_CreateAnimatedCursor(SDL_CursorFrameInfo *frames, int frame_count, int hot_x, int hot_y)
 /// ```
+///
+/// See also:
+/// - [SDL_CreateAnimatedCursor - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CreateAnimatedCursor)
+///
 /// {@category mouse}
 Pointer<SdlCursor> sdlxCreateAnimatedCursor(
   List<SdlxCursorFrameInfo> frames,

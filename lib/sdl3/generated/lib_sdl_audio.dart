@@ -26,6 +26,10 @@ part of '../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_GetNumAudioDrivers(void)
 /// ```
+///
+/// See also:
+/// - [SDL_GetNumAudioDrivers - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetNumAudioDrivers)
+///
 /// {@category audio}
 int sdlGetNumAudioDrivers() {
   final sdlGetNumAudioDriversLookupFunction = _libSdl
@@ -60,6 +64,10 @@ int sdlGetNumAudioDrivers() {
 /// ```c
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetAudioDriver(int index)
 /// ```
+///
+/// See also:
+/// - [SDL_GetAudioDriver - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetAudioDriver)
+///
 /// {@category audio}
 String? sdlGetAudioDriver(int index) {
   final sdlGetAudioDriverLookupFunction = _libSdl
@@ -91,6 +99,10 @@ String? sdlGetAudioDriver(int index) {
 /// ```c
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetCurrentAudioDriver(void)
 /// ```
+///
+/// See also:
+/// - [SDL_GetCurrentAudioDriver - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetCurrentAudioDriver)
+///
 /// {@category audio}
 String? sdlGetCurrentAudioDriver() {
   final sdlGetCurrentAudioDriverLookupFunction = _libSdl
@@ -134,6 +146,10 @@ String? sdlGetCurrentAudioDriver() {
 /// ```c
 /// extern SDL_DECLSPEC SDL_AudioDeviceID * SDLCALL SDL_GetAudioPlaybackDevices(int *count)
 /// ```
+///
+/// See also:
+/// - [SDL_GetAudioPlaybackDevices - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetAudioPlaybackDevices)
+///
 /// {@category audio}
 Pointer<Uint32> sdlGetAudioPlaybackDevices(Pointer<Int32> count) {
   final sdlGetAudioPlaybackDevicesLookupFunction = _libSdl
@@ -174,6 +190,10 @@ Pointer<Uint32> sdlGetAudioPlaybackDevices(Pointer<Int32> count) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_AudioDeviceID * SDLCALL SDL_GetAudioRecordingDevices(int *count)
 /// ```
+///
+/// See also:
+/// - [SDL_GetAudioRecordingDevices - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetAudioRecordingDevices)
+///
 /// {@category audio}
 Pointer<Uint32> sdlGetAudioRecordingDevices(Pointer<Int32> count) {
   final sdlGetAudioRecordingDevicesLookupFunction = _libSdl
@@ -210,6 +230,10 @@ Pointer<Uint32> sdlGetAudioRecordingDevices(Pointer<Int32> count) {
 /// ```c
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetAudioDeviceName(SDL_AudioDeviceID devid)
 /// ```
+///
+/// See also:
+/// - [SDL_GetAudioDeviceName - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetAudioDeviceName)
+///
 /// {@category audio}
 String? sdlGetAudioDeviceName(int devid) {
   final sdlGetAudioDeviceNameLookupFunction = _libSdl
@@ -260,6 +284,10 @@ String? sdlGetAudioDeviceName(int devid) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetAudioDeviceFormat(SDL_AudioDeviceID devid, SDL_AudioSpec *spec, int *sample_frames)
 /// ```
+///
+/// See also:
+/// - [SDL_GetAudioDeviceFormat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetAudioDeviceFormat)
+///
 /// {@category audio}
 bool sdlGetAudioDeviceFormat(
   int devid,
@@ -306,6 +334,10 @@ bool sdlGetAudioDeviceFormat(
 /// ```c
 /// extern SDL_DECLSPEC int * SDLCALL SDL_GetAudioDeviceChannelMap(SDL_AudioDeviceID devid, int *count)
 /// ```
+///
+/// See also:
+/// - [SDL_GetAudioDeviceChannelMap - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetAudioDeviceChannelMap)
+///
 /// {@category audio}
 Pointer<Int32> sdlGetAudioDeviceChannelMap(int devid, Pointer<Int32> count) {
   final sdlGetAudioDeviceChannelMapLookupFunction = _libSdl
@@ -393,6 +425,10 @@ Pointer<Int32> sdlGetAudioDeviceChannelMap(int devid, Pointer<Int32> count) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_AudioDeviceID SDLCALL SDL_OpenAudioDevice(SDL_AudioDeviceID devid, const SDL_AudioSpec *spec)
 /// ```
+///
+/// See also:
+/// - [SDL_OpenAudioDevice - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_OpenAudioDevice)
+///
 /// {@category audio}
 int sdlOpenAudioDevice(int devid, Pointer<SdlAudioSpec> spec) {
   final sdlOpenAudioDeviceLookupFunction = _libSdl
@@ -429,6 +465,10 @@ int sdlOpenAudioDevice(int devid, Pointer<SdlAudioSpec> spec) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_IsAudioDevicePhysical(SDL_AudioDeviceID devid)
 /// ```
+///
+/// See also:
+/// - [SDL_IsAudioDevicePhysical - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_IsAudioDevicePhysical)
+///
 /// {@category audio}
 bool sdlIsAudioDevicePhysical(int devid) {
   final sdlIsAudioDevicePhysicalLookupFunction = _libSdl
@@ -453,6 +493,10 @@ bool sdlIsAudioDevicePhysical(int devid) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_IsAudioDevicePlayback(SDL_AudioDeviceID devid)
 /// ```
+///
+/// See also:
+/// - [SDL_IsAudioDevicePlayback - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_IsAudioDevicePlayback)
+///
 /// {@category audio}
 bool sdlIsAudioDevicePlayback(int devid) {
   final sdlIsAudioDevicePlaybackLookupFunction = _libSdl
@@ -494,6 +538,10 @@ bool sdlIsAudioDevicePlayback(int devid) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_PauseAudioDevice(SDL_AudioDeviceID devid)
 /// ```
+///
+/// See also:
+/// - [SDL_PauseAudioDevice - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_PauseAudioDevice)
+///
 /// {@category audio}
 bool sdlPauseAudioDevice(int devid) {
   final sdlPauseAudioDeviceLookupFunction = _libSdl
@@ -532,6 +580,10 @@ bool sdlPauseAudioDevice(int devid) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_ResumeAudioDevice(SDL_AudioDeviceID devid)
 /// ```
+///
+/// See also:
+/// - [SDL_ResumeAudioDevice - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ResumeAudioDevice)
+///
 /// {@category audio}
 bool sdlResumeAudioDevice(int devid) {
   final sdlResumeAudioDeviceLookupFunction = _libSdl
@@ -564,6 +616,10 @@ bool sdlResumeAudioDevice(int devid) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_AudioDevicePaused(SDL_AudioDeviceID devid)
 /// ```
+///
+/// See also:
+/// - [SDL_AudioDevicePaused - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_AudioDevicePaused)
+///
 /// {@category audio}
 bool sdlAudioDevicePaused(int devid) {
   final sdlAudioDevicePausedLookupFunction = _libSdl
@@ -597,6 +653,10 @@ bool sdlAudioDevicePaused(int devid) {
 /// ```c
 /// extern SDL_DECLSPEC float SDLCALL SDL_GetAudioDeviceGain(SDL_AudioDeviceID devid)
 /// ```
+///
+/// See also:
+/// - [SDL_GetAudioDeviceGain - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetAudioDeviceGain)
+///
 /// {@category audio}
 double sdlGetAudioDeviceGain(int devid) {
   final sdlGetAudioDeviceGainLookupFunction = _libSdl
@@ -642,6 +702,10 @@ double sdlGetAudioDeviceGain(int devid) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetAudioDeviceGain(SDL_AudioDeviceID devid, float gain)
 /// ```
+///
+/// See also:
+/// - [SDL_SetAudioDeviceGain - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetAudioDeviceGain)
+///
 /// {@category audio}
 bool sdlSetAudioDeviceGain(int devid, double gain) {
   final sdlSetAudioDeviceGainLookupFunction = _libSdl
@@ -674,6 +738,10 @@ bool sdlSetAudioDeviceGain(int devid, double gain) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_CloseAudioDevice(SDL_AudioDeviceID devid)
 /// ```
+///
+/// See also:
+/// - [SDL_CloseAudioDevice - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CloseAudioDevice)
+///
 /// {@category audio}
 void sdlCloseAudioDevice(int devid) {
   final sdlCloseAudioDeviceLookupFunction = _libSdl
@@ -724,6 +792,10 @@ void sdlCloseAudioDevice(int devid) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_BindAudioStreams(SDL_AudioDeviceID devid, SDL_AudioStream * const *streams, int num_streams)
 /// ```
+///
+/// See also:
+/// - [SDL_BindAudioStreams - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_BindAudioStreams)
+///
 /// {@category audio}
 bool sdlBindAudioStreams(
   int devid,
@@ -768,6 +840,10 @@ bool sdlBindAudioStreams(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_BindAudioStream(SDL_AudioDeviceID devid, SDL_AudioStream *stream)
 /// ```
+///
+/// See also:
+/// - [SDL_BindAudioStream - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_BindAudioStream)
+///
 /// {@category audio}
 bool sdlBindAudioStream(int devid, Pointer<SdlAudioStream> stream) {
   final sdlBindAudioStreamLookupFunction = _libSdl
@@ -800,6 +876,10 @@ bool sdlBindAudioStream(int devid, Pointer<SdlAudioStream> stream) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_UnbindAudioStreams(SDL_AudioStream * const *streams, int num_streams)
 /// ```
+///
+/// See also:
+/// - [SDL_UnbindAudioStreams - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_UnbindAudioStreams)
+///
 /// {@category audio}
 void sdlUnbindAudioStreams(
   Pointer<Pointer<SdlAudioStream>> streams,
@@ -833,6 +913,10 @@ void sdlUnbindAudioStreams(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_UnbindAudioStream(SDL_AudioStream *stream)
 /// ```
+///
+/// See also:
+/// - [SDL_UnbindAudioStream - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_UnbindAudioStream)
+///
 /// {@category audio}
 void sdlUnbindAudioStream(Pointer<SdlAudioStream> stream) {
   final sdlUnbindAudioStreamLookupFunction = _libSdl
@@ -865,6 +949,10 @@ void sdlUnbindAudioStream(Pointer<SdlAudioStream> stream) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_AudioDeviceID SDLCALL SDL_GetAudioStreamDevice(SDL_AudioStream *stream)
 /// ```
+///
+/// See also:
+/// - [SDL_GetAudioStreamDevice - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetAudioStreamDevice)
+///
 /// {@category audio}
 int sdlGetAudioStreamDevice(Pointer<SdlAudioStream> stream) {
   final sdlGetAudioStreamDeviceLookupFunction = _libSdl
@@ -905,6 +993,10 @@ int sdlGetAudioStreamDevice(Pointer<SdlAudioStream> stream) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_AudioStream * SDLCALL SDL_CreateAudioStream(const SDL_AudioSpec *src_spec, const SDL_AudioSpec *dst_spec)
 /// ```
+///
+/// See also:
+/// - [SDL_CreateAudioStream - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CreateAudioStream)
+///
 /// {@category audio}
 Pointer<SdlAudioStream> sdlCreateAudioStream(
   Pointer<SdlAudioSpec> srcSpec,
@@ -949,6 +1041,10 @@ Pointer<SdlAudioStream> sdlCreateAudioStream(
 /// ```c
 /// extern SDL_DECLSPEC SDL_PropertiesID SDLCALL SDL_GetAudioStreamProperties(SDL_AudioStream *stream)
 /// ```
+///
+/// See also:
+/// - [SDL_GetAudioStreamProperties - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetAudioStreamProperties)
+///
 /// {@category audio}
 int sdlGetAudioStreamProperties(Pointer<SdlAudioStream> stream) {
   final sdlGetAudioStreamPropertiesLookupFunction = _libSdl
@@ -978,6 +1074,10 @@ int sdlGetAudioStreamProperties(Pointer<SdlAudioStream> stream) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetAudioStreamFormat(SDL_AudioStream *stream, SDL_AudioSpec *src_spec, SDL_AudioSpec *dst_spec)
 /// ```
+///
+/// See also:
+/// - [SDL_GetAudioStreamFormat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetAudioStreamFormat)
+///
 /// {@category audio}
 bool sdlGetAudioStreamFormat(
   Pointer<SdlAudioStream> stream,
@@ -1041,6 +1141,10 @@ bool sdlGetAudioStreamFormat(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetAudioStreamFormat(SDL_AudioStream *stream, const SDL_AudioSpec *src_spec, const SDL_AudioSpec *dst_spec)
 /// ```
+///
+/// See also:
+/// - [SDL_SetAudioStreamFormat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetAudioStreamFormat)
+///
 /// {@category audio}
 bool sdlSetAudioStreamFormat(
   Pointer<SdlAudioStream> stream,
@@ -1080,6 +1184,10 @@ bool sdlSetAudioStreamFormat(
 /// ```c
 /// extern SDL_DECLSPEC float SDLCALL SDL_GetAudioStreamFrequencyRatio(SDL_AudioStream *stream)
 /// ```
+///
+/// See also:
+/// - [SDL_GetAudioStreamFrequencyRatio - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetAudioStreamFrequencyRatio)
+///
 /// {@category audio}
 double sdlGetAudioStreamFrequencyRatio(Pointer<SdlAudioStream> stream) {
   final sdlGetAudioStreamFrequencyRatioLookupFunction = _libSdl
@@ -1119,6 +1227,10 @@ double sdlGetAudioStreamFrequencyRatio(Pointer<SdlAudioStream> stream) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetAudioStreamFrequencyRatio(SDL_AudioStream *stream, float ratio)
 /// ```
+///
+/// See also:
+/// - [SDL_SetAudioStreamFrequencyRatio - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetAudioStreamFrequencyRatio)
+///
 /// {@category audio}
 bool sdlSetAudioStreamFrequencyRatio(
   Pointer<SdlAudioStream> stream,
@@ -1154,6 +1266,10 @@ bool sdlSetAudioStreamFrequencyRatio(
 /// ```c
 /// extern SDL_DECLSPEC float SDLCALL SDL_GetAudioStreamGain(SDL_AudioStream *stream)
 /// ```
+///
+/// See also:
+/// - [SDL_GetAudioStreamGain - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetAudioStreamGain)
+///
 /// {@category audio}
 double sdlGetAudioStreamGain(Pointer<SdlAudioStream> stream) {
   final sdlGetAudioStreamGainLookupFunction = _libSdl
@@ -1190,6 +1306,10 @@ double sdlGetAudioStreamGain(Pointer<SdlAudioStream> stream) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetAudioStreamGain(SDL_AudioStream *stream, float gain)
 /// ```
+///
+/// See also:
+/// - [SDL_SetAudioStreamGain - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetAudioStreamGain)
+///
 /// {@category audio}
 bool sdlSetAudioStreamGain(Pointer<SdlAudioStream> stream, double gain) {
   final sdlSetAudioStreamGainLookupFunction = _libSdl
@@ -1225,6 +1345,10 @@ bool sdlSetAudioStreamGain(Pointer<SdlAudioStream> stream, double gain) {
 /// ```c
 /// extern SDL_DECLSPEC int * SDLCALL SDL_GetAudioStreamInputChannelMap(SDL_AudioStream *stream, int *count)
 /// ```
+///
+/// See also:
+/// - [SDL_GetAudioStreamInputChannelMap - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetAudioStreamInputChannelMap)
+///
 /// {@category audio}
 Pointer<Int32> sdlGetAudioStreamInputChannelMap(
   Pointer<SdlAudioStream> stream,
@@ -1269,6 +1393,10 @@ Pointer<Int32> sdlGetAudioStreamInputChannelMap(
 /// ```c
 /// extern SDL_DECLSPEC int * SDLCALL SDL_GetAudioStreamOutputChannelMap(SDL_AudioStream *stream, int *count)
 /// ```
+///
+/// See also:
+/// - [SDL_GetAudioStreamOutputChannelMap - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetAudioStreamOutputChannelMap)
+///
 /// {@category audio}
 Pointer<Int32> sdlGetAudioStreamOutputChannelMap(
   Pointer<SdlAudioStream> stream,
@@ -1349,6 +1477,10 @@ Pointer<Int32> sdlGetAudioStreamOutputChannelMap(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetAudioStreamInputChannelMap(SDL_AudioStream *stream, const int *chmap, int count)
 /// ```
+///
+/// See also:
+/// - [SDL_SetAudioStreamInputChannelMap - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetAudioStreamInputChannelMap)
+///
 /// {@category audio}
 bool sdlSetAudioStreamInputChannelMap(
   Pointer<SdlAudioStream> stream,
@@ -1430,6 +1562,10 @@ bool sdlSetAudioStreamInputChannelMap(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetAudioStreamOutputChannelMap(SDL_AudioStream *stream, const int *chmap, int count)
 /// ```
+///
+/// See also:
+/// - [SDL_SetAudioStreamOutputChannelMap - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetAudioStreamOutputChannelMap)
+///
 /// {@category audio}
 bool sdlSetAudioStreamOutputChannelMap(
   Pointer<SdlAudioStream> stream,
@@ -1483,6 +1619,10 @@ bool sdlSetAudioStreamOutputChannelMap(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_PutAudioStreamData(SDL_AudioStream *stream, const void *buf, int len)
 /// ```
+///
+/// See also:
+/// - [SDL_PutAudioStreamData - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_PutAudioStreamData)
+///
 /// {@category audio}
 bool sdlPutAudioStreamData(
   Pointer<SdlAudioStream> stream,
@@ -1553,6 +1693,10 @@ bool sdlPutAudioStreamData(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_PutAudioStreamDataNoCopy(SDL_AudioStream *stream, const void *buf, int len, SDL_AudioStreamDataCompleteCallback callback, void *userdata)
 /// ```
+///
+/// See also:
+/// - [SDL_PutAudioStreamDataNoCopy - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_PutAudioStreamDataNoCopy)
+///
 /// {@category audio}
 bool sdlPutAudioStreamDataNoCopy(
   Pointer<SdlAudioStream> stream,
@@ -1641,6 +1785,10 @@ bool sdlPutAudioStreamDataNoCopy(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_PutAudioStreamPlanarData(SDL_AudioStream *stream, const void * const *channel_buffers, int num_channels, int num_samples)
 /// ```
+///
+/// See also:
+/// - [SDL_PutAudioStreamPlanarData - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_PutAudioStreamPlanarData)
+///
 /// {@category audio}
 bool sdlPutAudioStreamPlanarData(
   Pointer<SdlAudioStream> stream,
@@ -1702,6 +1850,10 @@ bool sdlPutAudioStreamPlanarData(
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_GetAudioStreamData(SDL_AudioStream *stream, void *buf, int len)
 /// ```
+///
+/// See also:
+/// - [SDL_GetAudioStreamData - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetAudioStreamData)
+///
 /// {@category audio}
 int sdlGetAudioStreamData(
   Pointer<SdlAudioStream> stream,
@@ -1747,6 +1899,10 @@ int sdlGetAudioStreamData(
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_GetAudioStreamAvailable(SDL_AudioStream *stream)
 /// ```
+///
+/// See also:
+/// - [SDL_GetAudioStreamAvailable - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetAudioStreamAvailable)
+///
 /// {@category audio}
 int sdlGetAudioStreamAvailable(Pointer<SdlAudioStream> stream) {
   final sdlGetAudioStreamAvailableLookupFunction = _libSdl
@@ -1796,6 +1952,10 @@ int sdlGetAudioStreamAvailable(Pointer<SdlAudioStream> stream) {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_GetAudioStreamQueued(SDL_AudioStream *stream)
 /// ```
+///
+/// See also:
+/// - [SDL_GetAudioStreamQueued - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetAudioStreamQueued)
+///
 /// {@category audio}
 int sdlGetAudioStreamQueued(Pointer<SdlAudioStream> stream) {
   final sdlGetAudioStreamQueuedLookupFunction = _libSdl
@@ -1827,6 +1987,10 @@ int sdlGetAudioStreamQueued(Pointer<SdlAudioStream> stream) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_FlushAudioStream(SDL_AudioStream *stream)
 /// ```
+///
+/// See also:
+/// - [SDL_FlushAudioStream - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_FlushAudioStream)
+///
 /// {@category audio}
 bool sdlFlushAudioStream(Pointer<SdlAudioStream> stream) {
   final sdlFlushAudioStreamLookupFunction = _libSdl
@@ -1859,6 +2023,10 @@ bool sdlFlushAudioStream(Pointer<SdlAudioStream> stream) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_ClearAudioStream(SDL_AudioStream *stream)
 /// ```
+///
+/// See also:
+/// - [SDL_ClearAudioStream - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ClearAudioStream)
+///
 /// {@category audio}
 bool sdlClearAudioStream(Pointer<SdlAudioStream> stream) {
   final sdlClearAudioStreamLookupFunction = _libSdl
@@ -1894,6 +2062,10 @@ bool sdlClearAudioStream(Pointer<SdlAudioStream> stream) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_PauseAudioStreamDevice(SDL_AudioStream *stream)
 /// ```
+///
+/// See also:
+/// - [SDL_PauseAudioStreamDevice - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_PauseAudioStreamDevice)
+///
 /// {@category audio}
 bool sdlPauseAudioStreamDevice(Pointer<SdlAudioStream> stream) {
   final sdlPauseAudioStreamDeviceLookupFunction = _libSdl
@@ -1928,6 +2100,10 @@ bool sdlPauseAudioStreamDevice(Pointer<SdlAudioStream> stream) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_ResumeAudioStreamDevice(SDL_AudioStream *stream)
 /// ```
+///
+/// See also:
+/// - [SDL_ResumeAudioStreamDevice - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ResumeAudioStreamDevice)
+///
 /// {@category audio}
 bool sdlResumeAudioStreamDevice(Pointer<SdlAudioStream> stream) {
   final sdlResumeAudioStreamDeviceLookupFunction = _libSdl
@@ -1958,6 +2134,10 @@ bool sdlResumeAudioStreamDevice(Pointer<SdlAudioStream> stream) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_AudioStreamDevicePaused(SDL_AudioStream *stream)
 /// ```
+///
+/// See also:
+/// - [SDL_AudioStreamDevicePaused - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_AudioStreamDevicePaused)
+///
 /// {@category audio}
 bool sdlAudioStreamDevicePaused(Pointer<SdlAudioStream> stream) {
   final sdlAudioStreamDevicePausedLookupFunction = _libSdl
@@ -1997,6 +2177,10 @@ bool sdlAudioStreamDevicePaused(Pointer<SdlAudioStream> stream) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_LockAudioStream(SDL_AudioStream *stream)
 /// ```
+///
+/// See also:
+/// - [SDL_LockAudioStream - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_LockAudioStream)
+///
 /// {@category audio}
 bool sdlLockAudioStream(Pointer<SdlAudioStream> stream) {
   final sdlLockAudioStreamLookupFunction = _libSdl
@@ -2026,6 +2210,10 @@ bool sdlLockAudioStream(Pointer<SdlAudioStream> stream) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_UnlockAudioStream(SDL_AudioStream *stream)
 /// ```
+///
+/// See also:
+/// - [SDL_UnlockAudioStream - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_UnlockAudioStream)
+///
 /// {@category audio}
 bool sdlUnlockAudioStream(Pointer<SdlAudioStream> stream) {
   final sdlUnlockAudioStreamLookupFunction = _libSdl
@@ -2083,6 +2271,10 @@ bool sdlUnlockAudioStream(Pointer<SdlAudioStream> stream) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetAudioStreamGetCallback(SDL_AudioStream *stream, SDL_AudioStreamCallback callback, void *userdata)
 /// ```
+///
+/// See also:
+/// - [SDL_SetAudioStreamGetCallback - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetAudioStreamGetCallback)
+///
 /// {@category audio}
 bool sdlSetAudioStreamGetCallback(
   Pointer<SdlAudioStream> stream,
@@ -2155,6 +2347,10 @@ bool sdlSetAudioStreamGetCallback(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetAudioStreamPutCallback(SDL_AudioStream *stream, SDL_AudioStreamCallback callback, void *userdata)
 /// ```
+///
+/// See also:
+/// - [SDL_SetAudioStreamPutCallback - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetAudioStreamPutCallback)
+///
 /// {@category audio}
 bool sdlSetAudioStreamPutCallback(
   Pointer<SdlAudioStream> stream,
@@ -2199,6 +2395,10 @@ bool sdlSetAudioStreamPutCallback(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_DestroyAudioStream(SDL_AudioStream *stream)
 /// ```
+///
+/// See also:
+/// - [SDL_DestroyAudioStream - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_DestroyAudioStream)
+///
 /// {@category audio}
 void sdlDestroyAudioStream(Pointer<SdlAudioStream> stream) {
   final sdlDestroyAudioStreamLookupFunction = _libSdl
@@ -2272,6 +2472,10 @@ void sdlDestroyAudioStream(Pointer<SdlAudioStream> stream) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_AudioStream * SDLCALL SDL_OpenAudioDeviceStream(SDL_AudioDeviceID devid, const SDL_AudioSpec *spec, SDL_AudioStreamCallback callback, void *userdata)
 /// ```
+///
+/// See also:
+/// - [SDL_OpenAudioDeviceStream - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_OpenAudioDeviceStream)
+///
 /// {@category audio}
 Pointer<SdlAudioStream> sdlOpenAudioDeviceStream(
   int devid,
@@ -2357,6 +2561,10 @@ Pointer<SdlAudioStream> sdlOpenAudioDeviceStream(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetAudioPostmixCallback(SDL_AudioDeviceID devid, SDL_AudioPostmixCallback callback, void *userdata)
 /// ```
+///
+/// See also:
+/// - [SDL_SetAudioPostmixCallback - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetAudioPostmixCallback)
+///
 /// {@category audio}
 bool sdlSetAudioPostmixCallback(
   int devid,
@@ -2460,6 +2668,10 @@ bool sdlSetAudioPostmixCallback(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_LoadWAV_IO(SDL_IOStream *src, bool closeio, SDL_AudioSpec *spec, Uint8 **audio_buf, Uint32 *audio_len)
 /// ```
+///
+/// See also:
+/// - [SDL_LoadWAV_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_LoadWAV_IO)
+///
 /// {@category audio}
 bool sdlLoadWavIo(
   Pointer<SdlIoStream> src,
@@ -2525,6 +2737,10 @@ bool sdlLoadWavIo(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_LoadWAV(const char *path, SDL_AudioSpec *spec, Uint8 **audio_buf, Uint32 *audio_len)
 /// ```
+///
+/// See also:
+/// - [SDL_LoadWAV - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_LoadWAV)
+///
 /// {@category audio}
 bool sdlLoadWav(
   String? path,
@@ -2595,6 +2811,10 @@ bool sdlLoadWav(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_MixAudio(Uint8 *dst, const Uint8 *src, SDL_AudioFormat format, Uint32 len, float volume)
 /// ```
+///
+/// See also:
+/// - [SDL_MixAudio - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_MixAudio)
+///
 /// {@category audio}
 bool sdlMixAudio(
   Pointer<Uint8> dst,
@@ -2654,6 +2874,10 @@ bool sdlMixAudio(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_ConvertAudioSamples(const SDL_AudioSpec *src_spec, const Uint8 *src_data, int src_len, const SDL_AudioSpec *dst_spec, Uint8 **dst_data, int *dst_len)
 /// ```
+///
+/// See also:
+/// - [SDL_ConvertAudioSamples - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ConvertAudioSamples)
+///
 /// {@category audio}
 bool sdlConvertAudioSamples(
   Pointer<SdlAudioSpec> srcSpec,
@@ -2706,6 +2930,10 @@ bool sdlConvertAudioSamples(
 /// ```c
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetAudioFormatName(SDL_AudioFormat format)
 /// ```
+///
+/// See also:
+/// - [SDL_GetAudioFormatName - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetAudioFormatName)
+///
 /// {@category audio}
 String? sdlGetAudioFormatName(int format) {
   final sdlGetAudioFormatNameLookupFunction = _libSdl
@@ -2737,6 +2965,10 @@ String? sdlGetAudioFormatName(int format) {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_GetSilenceValueForFormat(SDL_AudioFormat format)
 /// ```
+///
+/// See also:
+/// - [SDL_GetSilenceValueForFormat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetSilenceValueForFormat)
+///
 /// {@category audio}
 int sdlGetSilenceValueForFormat(int format) {
   final sdlGetSilenceValueForFormatLookupFunction = _libSdl

@@ -24,6 +24,10 @@ part of '../../../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC SDL_KeyboardID * SDLCALL SDL_GetKeyboards(int *count)
 /// ```
+///
+/// See also:
+/// - [SDL_GetKeyboards - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetKeyboards)
+///
 /// {@category keyboard}
 List<int> sdlxGetKeyboards() {
   final result = <int>[];
@@ -73,6 +77,10 @@ List<int> sdlxGetKeyboards() {
 /// ```c
 /// extern SDL_DECLSPEC const bool * SDLCALL SDL_GetKeyboardState(int *numkeys)
 /// ```
+///
+/// See also:
+/// - [SDL_GetKeyboardState - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetKeyboardState)
+///
 /// {@category keyboard}
 List<bool> sdlxGetKeyboardState() {
   final result = <bool>[];
@@ -111,6 +119,10 @@ List<bool> sdlxGetKeyboardState() {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetTextInputArea(SDL_Window *window, const SDL_Rect *rect, int cursor)
 /// ```
+///
+/// See also:
+/// - [SDL_SetTextInputArea - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetTextInputArea)
+///
 /// {@category keyboard}
 bool sdlxSetTextInputArea(
   Pointer<SdlWindow> window,
@@ -145,6 +157,10 @@ bool sdlxSetTextInputArea(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetTextInputArea(SDL_Window *window, SDL_Rect *rect, int *cursor)
 /// ```
+///
+/// See also:
+/// - [SDL_GetTextInputArea - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetTextInputArea)
+///
 /// {@category keyboard}
 ({int cursor, SdlxRect rect})? sdlxGetTextInputArea(Pointer<SdlWindow> window) {
   SdlxRect? rect;

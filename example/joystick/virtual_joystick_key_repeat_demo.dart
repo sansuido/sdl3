@@ -1,5 +1,6 @@
 // ignore_for_file: avoid_positional_boolean_parameters
 import 'dart:ffi' as ffi;
+
 import 'package:sdl3/sdl3.dart';
 
 // ============================================================================

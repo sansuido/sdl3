@@ -21,6 +21,10 @@ part of '../../sdl_shadercross.dart';
 /// ```c
 /// extern SDL_DECLSPEC void * SDLCALL SDL_ShaderCross_CompileDXBCFromHLSL( const SDL_ShaderCross_HLSL_Info *info, size_t *size)
 /// ```
+///
+/// See also:
+/// - [SDL_ShaderCross_CompileDXBCFromHLSL - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ShaderCross_CompileDXBCFromHLSL)
+///
 /// {@category shadercross}
 Pointer<Uint8> sdlxShaderCrossCompileDxbcFromHlsl(
   SdlxShaderCrossHlslInfo info,
@@ -59,6 +63,10 @@ Pointer<Uint8> sdlxShaderCrossCompileDxbcFromHlsl(
 /// ```c
 /// extern SDL_DECLSPEC void * SDLCALL SDL_ShaderCross_CompileDXILFromHLSL( const SDL_ShaderCross_HLSL_Info *info, size_t *size)
 /// ```
+///
+/// See also:
+/// - [SDL_ShaderCross_CompileDXILFromHLSL - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ShaderCross_CompileDXILFromHLSL)
+///
 /// {@category shadercross}
 Pointer<Uint8> sdlxShaderCrossCompileDxilFromHlsl(
   SdlxShaderCrossHlslInfo info,
@@ -96,6 +104,10 @@ Pointer<Uint8> sdlxShaderCrossCompileDxilFromHlsl(
 /// ```c
 /// extern SDL_DECLSPEC void * SDLCALL SDL_ShaderCross_CompileSPIRVFromHLSL( const SDL_ShaderCross_HLSL_Info *info, size_t *size)
 /// ```
+///
+/// See also:
+/// - [SDL_ShaderCross_CompileSPIRVFromHLSL - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ShaderCross_CompileSPIRVFromHLSL)
+///
 /// {@category shadercross}
 Pointer<Uint8> sdlxShaderCrossCompileSpirvFromHlsl(
   SdlxShaderCrossHlslInfo info,

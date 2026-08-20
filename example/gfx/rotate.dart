@@ -1,5 +1,6 @@
 import 'dart:ffi';
 import 'dart:math' as math;
+
 import 'package:sdl3/sdl3.dart';
 
 class Polygon {

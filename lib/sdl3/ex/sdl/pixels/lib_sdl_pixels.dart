@@ -21,6 +21,10 @@ part of '../../../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetMasksForPixelFormat(SDL_PixelFormat format, int *bpp, Uint32 *Rmask, Uint32 *Gmask, Uint32 *Bmask, Uint32 *Amask)
 /// ```
+///
+/// See also:
+/// - [SDL_GetMasksForPixelFormat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetMasksForPixelFormat)
+///
 /// {@category pixels}
 bool sdlxGetMasksForPixelFormat(int format, SdlxMasks masks) {
   final bppPointer = ffi.calloc<Int32>();
@@ -75,6 +79,10 @@ bool sdlxGetMasksForPixelFormat(int format, SdlxMasks masks) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_PixelFormat SDLCALL SDL_GetPixelFormatForMasks(int bpp, Uint32 Rmask, Uint32 Gmask, Uint32 Bmask, Uint32 Amask)
 /// ```
+///
+/// See also:
+/// - [SDL_GetPixelFormatForMasks - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetPixelFormatForMasks)
+///
 /// {@category pixels}
 int sdlxGetPixelFormatForMasks(SdlxMasks masks) => sdlGetPixelFormatForMasks(
   masks.bpp,
@@ -102,6 +110,10 @@ int sdlxGetPixelFormatForMasks(SdlxMasks masks) => sdlGetPixelFormatForMasks(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetPaletteColors(SDL_Palette *palette, const SDL_Color *colors, int firstcolor, int ncolors)
 /// ```
+///
+/// See also:
+/// - [SDL_SetPaletteColors - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetPaletteColors)
+///
 /// {@category pixels}
 bool sdlxSetPaletteColors(
   Pointer<SdlPalette> palette,
@@ -154,6 +166,10 @@ bool sdlxSetPaletteColors(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_GetRGB(Uint32 pixelvalue, const SDL_PixelFormatDetails *format, const SDL_Palette *palette, Uint8 *r, Uint8 *g, Uint8 *b)
 /// ```
+///
+/// See also:
+/// - [SDL_GetRGB - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRGB)
+///
 /// {@category pixels}
 void sdlxGetRgb(
   int pixelvalue,
@@ -207,6 +223,10 @@ void sdlxGetRgb(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_GetRGBA(Uint32 pixelvalue, const SDL_PixelFormatDetails *format, const SDL_Palette *palette, Uint8 *r, Uint8 *g, Uint8 *b, Uint8 *a)
 /// ```
+///
+/// See also:
+/// - [SDL_GetRGBA - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRGBA)
+///
 /// {@category pixels}
 void sdlxGetRgba(
   int pixelvalue,

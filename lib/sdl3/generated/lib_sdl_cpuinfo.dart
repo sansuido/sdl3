@@ -15,6 +15,10 @@ part of '../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_GetNumLogicalCPUCores(void)
 /// ```
+///
+/// See also:
+/// - [SDL_GetNumLogicalCPUCores - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetNumLogicalCPUCores)
+///
 /// {@category cpuinfo}
 int sdlGetNumLogicalCpuCores() {
   final sdlGetNumLogicalCpuCoresLookupFunction = _libSdl
@@ -39,6 +43,10 @@ int sdlGetNumLogicalCpuCores() {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_GetCPUCacheLineSize(void)
 /// ```
+///
+/// See also:
+/// - [SDL_GetCPUCacheLineSize - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetCPUCacheLineSize)
+///
 /// {@category cpuinfo}
 int sdlGetCpuCacheLineSize() {
   final sdlGetCpuCacheLineSizeLookupFunction = _libSdl
@@ -63,6 +71,10 @@ int sdlGetCpuCacheLineSize() {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_HasAltiVec(void)
 /// ```
+///
+/// See also:
+/// - [SDL_HasAltiVec - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_HasAltiVec)
+///
 /// {@category cpuinfo}
 bool sdlHasAltiVec() {
   final sdlHasAltiVecLookupFunction = _libSdl
@@ -84,6 +96,10 @@ bool sdlHasAltiVec() {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_HasMMX(void)
 /// ```
+///
+/// See also:
+/// - [SDL_HasMMX - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_HasMMX)
+///
 /// {@category cpuinfo}
 bool sdlHasMmx() {
   final sdlHasMmxLookupFunction = _libSdl
@@ -110,6 +126,10 @@ bool sdlHasMmx() {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_HasSSE(void)
 /// ```
+///
+/// See also:
+/// - [SDL_HasSSE - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_HasSSE)
+///
 /// {@category cpuinfo}
 bool sdlHasSse() {
   final sdlHasSseLookupFunction = _libSdl
@@ -136,6 +156,10 @@ bool sdlHasSse() {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_HasSSE2(void)
 /// ```
+///
+/// See also:
+/// - [SDL_HasSSE2 - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_HasSSE2)
+///
 /// {@category cpuinfo}
 bool sdlHasSse2() {
   final sdlHasSse2LookupFunction = _libSdl
@@ -162,6 +186,10 @@ bool sdlHasSse2() {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_HasSSE3(void)
 /// ```
+///
+/// See also:
+/// - [SDL_HasSSE3 - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_HasSSE3)
+///
 /// {@category cpuinfo}
 bool sdlHasSse3() {
   final sdlHasSse3LookupFunction = _libSdl
@@ -188,6 +216,10 @@ bool sdlHasSse3() {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_HasSSE41(void)
 /// ```
+///
+/// See also:
+/// - [SDL_HasSSE41 - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_HasSSE41)
+///
 /// {@category cpuinfo}
 bool sdlHasSse41() {
   final sdlHasSse41LookupFunction = _libSdl
@@ -214,6 +246,10 @@ bool sdlHasSse41() {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_HasSSE42(void)
 /// ```
+///
+/// See also:
+/// - [SDL_HasSSE42 - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_HasSSE42)
+///
 /// {@category cpuinfo}
 bool sdlHasSse42() {
   final sdlHasSse42LookupFunction = _libSdl
@@ -238,6 +274,10 @@ bool sdlHasSse42() {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_HasAVX(void)
 /// ```
+///
+/// See also:
+/// - [SDL_HasAVX - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_HasAVX)
+///
 /// {@category cpuinfo}
 bool sdlHasAvx() {
   final sdlHasAvxLookupFunction = _libSdl
@@ -262,6 +302,10 @@ bool sdlHasAvx() {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_HasAVX2(void)
 /// ```
+///
+/// See also:
+/// - [SDL_HasAVX2 - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_HasAVX2)
+///
 /// {@category cpuinfo}
 bool sdlHasAvx2() {
   final sdlHasAvx2LookupFunction = _libSdl
@@ -286,6 +330,10 @@ bool sdlHasAvx2() {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_HasAVX512F(void)
 /// ```
+///
+/// See also:
+/// - [SDL_HasAVX512F - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_HasAVX512F)
+///
 /// {@category cpuinfo}
 bool sdlHasAvx512F() {
   final sdlHasAvx512FLookupFunction = _libSdl
@@ -311,6 +359,10 @@ bool sdlHasAvx512F() {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_HasARMSIMD(void)
 /// ```
+///
+/// See also:
+/// - [SDL_HasARMSIMD - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_HasARMSIMD)
+///
 /// {@category cpuinfo}
 bool sdlHasArmsimd() {
   final sdlHasArmsimdLookupFunction = _libSdl
@@ -332,6 +384,10 @@ bool sdlHasArmsimd() {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_HasNEON(void)
 /// ```
+///
+/// See also:
+/// - [SDL_HasNEON - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_HasNEON)
+///
 /// {@category cpuinfo}
 bool sdlHasNeon() {
   final sdlHasNeonLookupFunction = _libSdl
@@ -352,6 +408,10 @@ bool sdlHasNeon() {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_HasSVE2(void)
 /// ```
+///
+/// See also:
+/// - [SDL_HasSVE2 - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_HasSVE2)
+///
 /// {@category cpuinfo}
 bool sdlHasSve2() {
   final sdlHasSve2LookupFunction = _libSdl
@@ -374,6 +434,10 @@ bool sdlHasSve2() {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_HasLSX(void)
 /// ```
+///
+/// See also:
+/// - [SDL_HasLSX - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_HasLSX)
+///
 /// {@category cpuinfo}
 bool sdlHasLsx() {
   final sdlHasLsxLookupFunction = _libSdl
@@ -396,6 +460,10 @@ bool sdlHasLsx() {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_HasLASX(void)
 /// ```
+///
+/// See also:
+/// - [SDL_HasLASX - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_HasLASX)
+///
 /// {@category cpuinfo}
 bool sdlHasLasx() {
   final sdlHasLasxLookupFunction = _libSdl
@@ -415,6 +483,10 @@ bool sdlHasLasx() {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_GetSystemRAM(void)
 /// ```
+///
+/// See also:
+/// - [SDL_GetSystemRAM - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetSystemRAM)
+///
 /// {@category cpuinfo}
 int sdlGetSystemRam() {
   final sdlGetSystemRamLookupFunction = _libSdl
@@ -447,6 +519,10 @@ int sdlGetSystemRam() {
 /// ```c
 /// extern SDL_DECLSPEC size_t SDLCALL SDL_GetSIMDAlignment(void)
 /// ```
+///
+/// See also:
+/// - [SDL_GetSIMDAlignment - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetSIMDAlignment)
+///
 /// {@category cpuinfo}
 int sdlGetSimdAlignment() {
   final sdlGetSimdAlignmentLookupFunction = _libSdl
@@ -476,6 +552,10 @@ int sdlGetSimdAlignment() {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_GetSystemPageSize(void)
 /// ```
+///
+/// See also:
+/// - [SDL_GetSystemPageSize - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetSystemPageSize)
+///
 /// {@category cpuinfo}
 int sdlGetSystemPageSize() {
   final sdlGetSystemPageSizeLookupFunction = _libSdl

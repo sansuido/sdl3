@@ -52,6 +52,10 @@ part of '../../../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_ShowOpenFileDialog(SDL_DialogFileCallback callback, void *userdata, SDL_Window *window, const SDL_DialogFileFilter *filters, int nfilters, const char *default_location, bool allow_many)
 /// ```
+///
+/// See also:
+/// - [SDL_ShowOpenFileDialog - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ShowOpenFileDialog)
+///
 /// {@category dialog}
 void sdlxShowOpenFileDialog({
   required Pointer<NativeFunction<SdlDialogFileCallback>>? callback,
@@ -129,6 +133,10 @@ void sdlxShowOpenFileDialog({
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_ShowSaveFileDialog(SDL_DialogFileCallback callback, void *userdata, SDL_Window *window, const SDL_DialogFileFilter *filters, int nfilters, const char *default_location)
 /// ```
+///
+/// See also:
+/// - [SDL_ShowSaveFileDialog - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ShowSaveFileDialog)
+///
 /// {@category dialog}
 void sdlxShowSaveFileDialog({
   required Pointer<NativeFunction<SdlDialogFileCallback>>? callback,
@@ -200,6 +208,10 @@ void sdlxShowSaveFileDialog({
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_ShowOpenFolderDialog(SDL_DialogFileCallback callback, void *userdata, SDL_Window *window, const char *default_location, bool allow_many)
 /// ```
+///
+/// See also:
+/// - [SDL_ShowOpenFolderDialog - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ShowOpenFolderDialog)
+///
 /// {@category dialog}
 void sdlxShowOpenFolderDialog({
   required Pointer<NativeFunction<SdlDialogFileCallback>>? callback,
@@ -267,6 +279,10 @@ void sdlxShowOpenFolderDialog({
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_ShowFileDialogWithProperties(SDL_FileDialogType type, SDL_DialogFileCallback callback, void *userdata, SDL_PropertiesID props)
 /// ```
+///
+/// See also:
+/// - [SDL_ShowFileDialogWithProperties - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ShowFileDialogWithProperties)
+///
 /// {@category dialog}
 void sdlxShowFileDialogWithProperties({
   required int type,

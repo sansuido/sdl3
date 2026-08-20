@@ -2,6 +2,7 @@
 // 5.サウンドのベル基本
 // 5.Sound novel basics
 import 'dart:ffi';
+
 import 'package:sdl3/sdl3.dart';
 
 const gTitle = 'DXLIB Tutorial 06';
@@ -165,14 +166,13 @@ class Game {
         default:
           final texture = charaTextures[chara];
           if (texture != nullptr) {
-            final size = SdlxFPoint(0, 0);
-            if (texture!.getSize(size)) {
-              final windowSize = SdlxPoint(0, 0);
-              final getResult = window.getSize(windowSize);
-              if (getResult &&
+            final size = texture!.getSize();
+            if (size != null) {
+              final windowSize = window.getSize();
+              if (windowSize != null &&
                   chara != '。' &&
                   chara != '、' &&
-                  (drawX + size.x) > windowSize.x) {
+                  (drawX + size.w) > windowSize.w) {
                 drawX = 0;
                 drawY += height;
                 height = 0;
@@ -182,19 +182,19 @@ class Game {
                 dstrect: SdlxFRect(
                   x: drawX.toDouble(),
                   y: drawY.toDouble(),
-                  w: size.x,
-                  h: size.y,
+                  w: size.w,
+                  h: size.h,
                 ),
               );
-              drawX += size.x.toInt();
-              height = size.y.toInt() > height ? size.y.toInt() : height;
+              drawX += size.w.toInt();
+              height = size.h.toInt() > height ? size.w.toInt() : height;
             }
           }
       }
     }
     if (buttonWait) {
-      final size = SdlxFPoint(0, 0);
-      if (pressAnyKeyTexture.getSize(size)) {
+      final size = pressAnyKeyTexture.getSize();
+      if (size != null) {
         drawX = 0;
         drawY += height;
         renderer.texture(
@@ -202,8 +202,8 @@ class Game {
           dstrect: SdlxFRect(
             x: drawX.toDouble(),
             y: drawY.toDouble(),
-            w: size.x,
-            h: size.y,
+            w: size.w,
+            h: size.h,
           ),
         );
       }

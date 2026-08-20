@@ -1937,9 +1937,7 @@ bool arcRgba(
 			and whether to draw in this octant initially
 			*/
       if ((oct % 2) != 0) {
-        drawoct |=
-            1 <<
-            oct; /* this is basically like saying drawoct[oct] = true, if drawoct were a bool array */
+        drawoct |= 1 << oct; /* this is basically like saying drawoct[oct] = true, if drawoct were a bool array */
       } else {
         drawoct &=
             255 -

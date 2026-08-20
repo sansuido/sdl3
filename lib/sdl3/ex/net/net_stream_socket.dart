@@ -48,6 +48,10 @@ extension NetStreamSocketPointerEx on Pointer<NetStreamSocket> {
   /// ```c
   /// extern SDL_DECLSPEC NET_Status SDLCALL NET_WaitUntilConnected(NET_StreamSocket *sock, Sint32 timeout)
   /// ```
+  ///
+  /// See also:
+  /// - [NET_WaitUntilConnected - SDL3 Wiki](https://wiki.libsdl.org/SDL3/NET_WaitUntilConnected)
+  ///
   /// {@category net}
   int waitUntilConnected(int timeout) => netWaitUntilConnected(this, timeout);
 
@@ -71,6 +75,10 @@ extension NetStreamSocketPointerEx on Pointer<NetStreamSocket> {
   /// ```c
   /// extern SDL_DECLSPEC NET_Address * SDLCALL NET_GetStreamSocketAddress(NET_StreamSocket *sock)
   /// ```
+  ///
+  /// See also:
+  /// - [NET_GetStreamSocketAddress - SDL3 Wiki](https://wiki.libsdl.org/SDL3/NET_GetStreamSocketAddress)
+  ///
   /// {@category net}
   Pointer<NetAddress> getAddress() => netGetStreamSocketAddress(this);
 
@@ -113,6 +121,10 @@ extension NetStreamSocketPointerEx on Pointer<NetStreamSocket> {
   /// ```c
   /// extern SDL_DECLSPEC NET_Status SDLCALL NET_GetConnectionStatus(NET_StreamSocket *sock)
   /// ```
+  ///
+  /// See also:
+  /// - [NET_GetConnectionStatus - SDL3 Wiki](https://wiki.libsdl.org/SDL3/NET_GetConnectionStatus)
+  ///
   /// {@category net}
   int getConnectionStatus() => netGetConnectionStatus(this);
 
@@ -164,6 +176,10 @@ extension NetStreamSocketPointerEx on Pointer<NetStreamSocket> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL NET_WriteToStreamSocket(NET_StreamSocket *sock, const void *buf, int buflen)
   /// ```
+  ///
+  /// See also:
+  /// - [NET_WriteToStreamSocket - SDL3 Wiki](https://wiki.libsdl.org/SDL3/NET_WriteToStreamSocket)
+  ///
   /// {@category net}
   bool write(Uint8List buf) => netxWriteToStreamSocket(this, buf);
 
@@ -200,6 +216,10 @@ extension NetStreamSocketPointerEx on Pointer<NetStreamSocket> {
   /// ```c
   /// extern SDL_DECLSPEC int SDLCALL NET_GetStreamSocketPendingWrites(NET_StreamSocket *sock)
   /// ```
+  ///
+  /// See also:
+  /// - [NET_GetStreamSocketPendingWrites - SDL3 Wiki](https://wiki.libsdl.org/SDL3/NET_GetStreamSocketPendingWrites)
+  ///
   /// {@category net}
   int getPendingWrites() => netGetStreamSocketPendingWrites(this);
 
@@ -245,6 +265,10 @@ extension NetStreamSocketPointerEx on Pointer<NetStreamSocket> {
   /// ```c
   /// extern SDL_DECLSPEC int SDLCALL NET_WaitUntilStreamSocketDrained(NET_StreamSocket *sock, Sint32 timeout)
   /// ```
+  ///
+  /// See also:
+  /// - [NET_WaitUntilStreamSocketDrained - SDL3 Wiki](https://wiki.libsdl.org/SDL3/NET_WaitUntilStreamSocketDrained)
+  ///
   /// {@category net}
   int waitUntilDrained(int timeout) =>
       netWaitUntilStreamSocketDrained(this, timeout);
@@ -300,6 +324,10 @@ extension NetStreamSocketPointerEx on Pointer<NetStreamSocket> {
   /// ```c
   /// extern SDL_DECLSPEC int SDLCALL NET_ReadFromStreamSocket(NET_StreamSocket *sock, void *buf, int buflen)
   /// ```
+  ///
+  /// See also:
+  /// - [NET_ReadFromStreamSocket - SDL3 Wiki](https://wiki.libsdl.org/SDL3/NET_ReadFromStreamSocket)
+  ///
   /// {@category net}
   Uint8List? read(int buflen) => netxReadFromStreamSocket(this, buflen);
 
@@ -343,6 +371,10 @@ extension NetStreamSocketPointerEx on Pointer<NetStreamSocket> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL NET_SimulateStreamPacketLoss(NET_StreamSocket *sock, int percent_loss)
   /// ```
+  ///
+  /// See also:
+  /// - [NET_SimulateStreamPacketLoss - SDL3 Wiki](https://wiki.libsdl.org/SDL3/NET_SimulateStreamPacketLoss)
+  ///
   /// {@category net}
   void simulatePacketLoss(int percentLoss) =>
       netSimulateStreamPacketLoss(this, percentLoss);

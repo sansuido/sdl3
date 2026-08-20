@@ -19,6 +19,10 @@ part of '../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC SDL_AssertState SDLCALL SDL_ReportAssertion(SDL_AssertData *data, const char *func, const char *file, int line)
 /// ```
+///
+/// See also:
+/// - [SDL_ReportAssertion - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ReportAssertion)
+///
 /// {@category assert}
 int sdlReportAssertion(
   Pointer<SdlAssertData> data,
@@ -81,6 +85,10 @@ int sdlReportAssertion(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_SetAssertionHandler( SDL_AssertionHandler handler, void *userdata)
 /// ```
+///
+/// See also:
+/// - [SDL_SetAssertionHandler - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetAssertionHandler)
+///
 /// {@category assert}
 void sdlSetAssertionHandler(
   Pointer<NativeFunction<SdlAssertionHandler>> handler,
@@ -120,6 +128,10 @@ void sdlSetAssertionHandler(
 /// ```c
 /// extern SDL_DECLSPEC SDL_AssertionHandler SDLCALL SDL_GetDefaultAssertionHandler(void)
 /// ```
+///
+/// See also:
+/// - [SDL_GetDefaultAssertionHandler - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetDefaultAssertionHandler)
+///
 /// {@category assert}
 Pointer<NativeFunction<SdlAssertionHandler>> sdlGetDefaultAssertionHandler() {
   final sdlGetDefaultAssertionHandlerLookupFunction = _libSdl
@@ -156,6 +168,10 @@ Pointer<NativeFunction<SdlAssertionHandler>> sdlGetDefaultAssertionHandler() {
 /// ```c
 /// extern SDL_DECLSPEC SDL_AssertionHandler SDLCALL SDL_GetAssertionHandler(void **puserdata)
 /// ```
+///
+/// See also:
+/// - [SDL_GetAssertionHandler - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetAssertionHandler)
+///
 /// {@category assert}
 Pointer<NativeFunction<SdlAssertionHandler>> sdlGetAssertionHandler(
   Pointer<Pointer<Void>> puserdata,
@@ -207,6 +223,10 @@ Pointer<NativeFunction<SdlAssertionHandler>> sdlGetAssertionHandler(
 /// ```c
 /// extern SDL_DECLSPEC const SDL_AssertData * SDLCALL SDL_GetAssertionReport(void)
 /// ```
+///
+/// See also:
+/// - [SDL_GetAssertionReport - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetAssertionReport)
+///
 /// {@category assert}
 Pointer<SdlAssertData> sdlGetAssertionReport() {
   final sdlGetAssertionReportLookupFunction = _libSdl
@@ -236,6 +256,10 @@ Pointer<SdlAssertData> sdlGetAssertionReport() {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_ResetAssertionReport(void)
 /// ```
+///
+/// See also:
+/// - [SDL_ResetAssertionReport - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ResetAssertionReport)
+///
 /// {@category assert}
 void sdlResetAssertionReport() {
   final sdlResetAssertionReportLookupFunction = _libSdl

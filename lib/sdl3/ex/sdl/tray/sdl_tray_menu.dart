@@ -30,6 +30,10 @@ extension SdlTrayMenuPointerEx on Pointer<SdlTrayMenu> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_TrayEntry * SDLCALL SDL_InsertTrayEntryAt(SDL_TrayMenu *menu, int pos, const char *label, SDL_TrayEntryFlags flags)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_InsertTrayEntryAt - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_InsertTrayEntryAt)
+  ///
   /// {@category tray}
   Pointer<SdlTrayEntry> insertEntryAt(int pos, String? label, int flags) =>
       sdlInsertTrayEntryAt(this, pos, label, flags);
@@ -55,6 +59,10 @@ extension SdlTrayMenuPointerEx on Pointer<SdlTrayMenu> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_TrayEntry * SDLCALL SDL_GetTrayMenuParentEntry(SDL_TrayMenu *menu)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetTrayMenuParentEntry - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetTrayMenuParentEntry)
+  ///
   /// {@category tray}
   Pointer<SdlTrayEntry> getParentEntry() => sdlGetTrayMenuParentEntry(this);
 
@@ -79,6 +87,10 @@ extension SdlTrayMenuPointerEx on Pointer<SdlTrayMenu> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Tray * SDLCALL SDL_GetTrayMenuParentTray(SDL_TrayMenu *menu)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetTrayMenuParentTray - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetTrayMenuParentTray)
+  ///
   /// {@category tray}
   Pointer<SdlTray> getParentTray() => sdlGetTrayMenuParentTray(this);
 }

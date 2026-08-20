@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:ffi';
+
 import 'package:sdl3/sdl3.dart';
 
 Future<int> main() async {

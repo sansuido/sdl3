@@ -25,6 +25,10 @@ part of '../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_PumpEvents(void)
 /// ```
+///
+/// See also:
+/// - [SDL_PumpEvents - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_PumpEvents)
+///
 /// {@category events}
 void sdlPumpEvents() {
   final sdlPumpEventsLookupFunction = _libSdl
@@ -77,6 +81,10 @@ void sdlPumpEvents() {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_PeepEvents(SDL_Event *events, int numevents, SDL_EventAction action, Uint32 minType, Uint32 maxType)
 /// ```
+///
+/// See also:
+/// - [SDL_PeepEvents - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_PeepEvents)
+///
 /// {@category events}
 int sdlPeepEvents(
   Pointer<SdlEvent> events,
@@ -130,6 +138,10 @@ int sdlPeepEvents(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_HasEvent(Uint32 type)
 /// ```
+///
+/// See also:
+/// - [SDL_HasEvent - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_HasEvent)
+///
 /// {@category events}
 bool sdlHasEvent(int type) {
   final sdlHasEventLookupFunction = _libSdl
@@ -160,6 +172,10 @@ bool sdlHasEvent(int type) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_HasEvents(Uint32 minType, Uint32 maxType)
 /// ```
+///
+/// See also:
+/// - [SDL_HasEvents - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_HasEvents)
+///
 /// {@category events}
 bool sdlHasEvents(int minType, int maxType) {
   final sdlHasEventsLookupFunction = _libSdl
@@ -199,6 +215,10 @@ bool sdlHasEvents(int minType, int maxType) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_FlushEvent(Uint32 type)
 /// ```
+///
+/// See also:
+/// - [SDL_FlushEvent - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_FlushEvent)
+///
 /// {@category events}
 void sdlFlushEvent(int type) {
   final sdlFlushEventLookupFunction = _libSdl
@@ -236,6 +256,10 @@ void sdlFlushEvent(int type) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_FlushEvents(Uint32 minType, Uint32 maxType)
 /// ```
+///
+/// See also:
+/// - [SDL_FlushEvents - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_FlushEvents)
+///
 /// {@category events}
 void sdlFlushEvents(int minType, int maxType) {
   final sdlFlushEventsLookupFunction = _libSdl
@@ -298,6 +322,10 @@ void sdlFlushEvents(int minType, int maxType) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_PollEvent(SDL_Event *event)
 /// ```
+///
+/// See also:
+/// - [SDL_PollEvent - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_PollEvent)
+///
 /// {@category events}
 bool sdlPollEvent(Pointer<SdlEvent> event) {
   final sdlPollEventLookupFunction = _libSdl
@@ -333,6 +361,10 @@ bool sdlPollEvent(Pointer<SdlEvent> event) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_WaitEvent(SDL_Event *event)
 /// ```
+///
+/// See also:
+/// - [SDL_WaitEvent - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_WaitEvent)
+///
 /// {@category events}
 bool sdlWaitEvent(Pointer<SdlEvent> event) {
   final sdlWaitEventLookupFunction = _libSdl
@@ -374,6 +406,10 @@ bool sdlWaitEvent(Pointer<SdlEvent> event) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_WaitEventTimeout(SDL_Event *event, Sint32 timeoutMS)
 /// ```
+///
+/// See also:
+/// - [SDL_WaitEventTimeout - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_WaitEventTimeout)
+///
 /// {@category events}
 bool sdlWaitEventTimeout(Pointer<SdlEvent> event, int timeoutMs) {
   final sdlWaitEventTimeoutLookupFunction = _libSdl
@@ -419,6 +455,10 @@ bool sdlWaitEventTimeout(Pointer<SdlEvent> event, int timeoutMs) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_PushEvent(SDL_Event *event)
 /// ```
+///
+/// See also:
+/// - [SDL_PushEvent - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_PushEvent)
+///
 /// {@category events}
 bool sdlPushEvent(Pointer<SdlEvent> event) {
   final sdlPushEventLookupFunction = _libSdl
@@ -474,6 +514,10 @@ bool sdlPushEvent(Pointer<SdlEvent> event) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_SetEventFilter(SDL_EventFilter filter, void *userdata)
 /// ```
+///
+/// See also:
+/// - [SDL_SetEventFilter - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetEventFilter)
+///
 /// {@category events}
 void sdlSetEventFilter(
   Pointer<NativeFunction<SdlEventFilter>> filter,
@@ -513,6 +557,10 @@ void sdlSetEventFilter(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetEventFilter(SDL_EventFilter *filter, void **userdata)
 /// ```
+///
+/// See also:
+/// - [SDL_GetEventFilter - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetEventFilter)
+///
 /// {@category events}
 bool sdlGetEventFilter(
   Pointer<Pointer<NativeFunction<SdlEventFilter>>> filter,
@@ -565,6 +613,10 @@ bool sdlGetEventFilter(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_AddEventWatch(SDL_EventFilter filter, void *userdata)
 /// ```
+///
+/// See also:
+/// - [SDL_AddEventWatch - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_AddEventWatch)
+///
 /// {@category events}
 bool sdlAddEventWatch(
   Pointer<NativeFunction<SdlEventFilter>> filter,
@@ -602,6 +654,10 @@ bool sdlAddEventWatch(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_RemoveEventWatch(SDL_EventFilter filter, void *userdata)
 /// ```
+///
+/// See also:
+/// - [SDL_RemoveEventWatch - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RemoveEventWatch)
+///
 /// {@category events}
 void sdlRemoveEventWatch(
   Pointer<NativeFunction<SdlEventFilter>> filter,
@@ -642,6 +698,10 @@ void sdlRemoveEventWatch(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_FilterEvents(SDL_EventFilter filter, void *userdata)
 /// ```
+///
+/// See also:
+/// - [SDL_FilterEvents - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_FilterEvents)
+///
 /// {@category events}
 void sdlFilterEvents(
   Pointer<NativeFunction<SdlEventFilter>> filter,
@@ -676,6 +736,10 @@ void sdlFilterEvents(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_SetEventEnabled(Uint32 type, bool enabled)
 /// ```
+///
+/// See also:
+/// - [SDL_SetEventEnabled - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetEventEnabled)
+///
 /// {@category events}
 void sdlSetEventEnabled(int type, bool enabled) {
   final sdlSetEventEnabledLookupFunction = _libSdl
@@ -701,6 +765,10 @@ void sdlSetEventEnabled(int type, bool enabled) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_EventEnabled(Uint32 type)
 /// ```
+///
+/// See also:
+/// - [SDL_EventEnabled - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_EventEnabled)
+///
 /// {@category events}
 bool sdlEventEnabled(int type) {
   final sdlEventEnabledLookupFunction = _libSdl
@@ -727,6 +795,10 @@ bool sdlEventEnabled(int type) {
 /// ```c
 /// extern SDL_DECLSPEC Uint32 SDLCALL SDL_RegisterEvents(int numevents)
 /// ```
+///
+/// See also:
+/// - [SDL_RegisterEvents - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RegisterEvents)
+///
 /// {@category events}
 int sdlRegisterEvents(int numevents) {
   final sdlRegisterEventsLookupFunction = _libSdl
@@ -754,6 +826,10 @@ int sdlRegisterEvents(int numevents) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Window * SDLCALL SDL_GetWindowFromEvent(const SDL_Event *event)
 /// ```
+///
+/// See also:
+/// - [SDL_GetWindowFromEvent - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetWindowFromEvent)
+///
 /// {@category events}
 Pointer<SdlWindow> sdlGetWindowFromEvent(Pointer<SdlEvent> event) {
   final sdlGetWindowFromEventLookupFunction = _libSdl
@@ -797,6 +873,10 @@ Pointer<SdlWindow> sdlGetWindowFromEvent(Pointer<SdlEvent> event) {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_GetEventDescription(const SDL_Event *event, char *buf, int buflen)
 /// ```
+///
+/// See also:
+/// - [SDL_GetEventDescription - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetEventDescription)
+///
 /// {@category events}
 int sdlGetEventDescription(
   Pointer<SdlEvent> event,

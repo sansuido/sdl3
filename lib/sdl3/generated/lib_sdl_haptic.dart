@@ -17,6 +17,10 @@ part of '../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC SDL_HapticID * SDLCALL SDL_GetHaptics(int *count)
 /// ```
+///
+/// See also:
+/// - [SDL_GetHaptics - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetHaptics)
+///
 /// {@category haptic}
 Pointer<Uint32> sdlGetHaptics(Pointer<Int32> count) {
   final sdlGetHapticsLookupFunction = _libSdl
@@ -45,6 +49,10 @@ Pointer<Uint32> sdlGetHaptics(Pointer<Int32> count) {
 /// ```c
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetHapticNameForID(SDL_HapticID instance_id)
 /// ```
+///
+/// See also:
+/// - [SDL_GetHapticNameForID - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetHapticNameForID)
+///
 /// {@category haptic}
 String? sdlGetHapticNameForId(int instanceId) {
   final sdlGetHapticNameForIdLookupFunction = _libSdl
@@ -85,6 +93,10 @@ String? sdlGetHapticNameForId(int instanceId) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Haptic * SDLCALL SDL_OpenHaptic(SDL_HapticID instance_id)
 /// ```
+///
+/// See also:
+/// - [SDL_OpenHaptic - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_OpenHaptic)
+///
 /// {@category haptic}
 Pointer<SdlHaptic> sdlOpenHaptic(int instanceId) {
   final sdlOpenHapticLookupFunction = _libSdl
@@ -107,6 +119,10 @@ Pointer<SdlHaptic> sdlOpenHaptic(int instanceId) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Haptic * SDLCALL SDL_GetHapticFromID(SDL_HapticID instance_id)
 /// ```
+///
+/// See also:
+/// - [SDL_GetHapticFromID - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetHapticFromID)
+///
 /// {@category haptic}
 Pointer<SdlHaptic> sdlGetHapticFromId(int instanceId) {
   final sdlGetHapticFromIdLookupFunction = _libSdl
@@ -129,6 +145,10 @@ Pointer<SdlHaptic> sdlGetHapticFromId(int instanceId) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_HapticID SDLCALL SDL_GetHapticID(SDL_Haptic *haptic)
 /// ```
+///
+/// See also:
+/// - [SDL_GetHapticID - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetHapticID)
+///
 /// {@category haptic}
 int sdlGetHapticId(Pointer<SdlHaptic> haptic) {
   final sdlGetHapticIdLookupFunction = _libSdl
@@ -154,6 +174,10 @@ int sdlGetHapticId(Pointer<SdlHaptic> haptic) {
 /// ```c
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetHapticName(SDL_Haptic *haptic)
 /// ```
+///
+/// See also:
+/// - [SDL_GetHapticName - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetHapticName)
+///
 /// {@category haptic}
 String? sdlGetHapticName(Pointer<SdlHaptic> haptic) {
   final sdlGetHapticNameLookupFunction = _libSdl
@@ -180,6 +204,10 @@ String? sdlGetHapticName(Pointer<SdlHaptic> haptic) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_IsMouseHaptic(void)
 /// ```
+///
+/// See also:
+/// - [SDL_IsMouseHaptic - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_IsMouseHaptic)
+///
 /// {@category haptic}
 bool sdlIsMouseHaptic() {
   final sdlIsMouseHapticLookupFunction = _libSdl
@@ -201,6 +229,10 @@ bool sdlIsMouseHaptic() {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Haptic * SDLCALL SDL_OpenHapticFromMouse(void)
 /// ```
+///
+/// See also:
+/// - [SDL_OpenHapticFromMouse - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_OpenHapticFromMouse)
+///
 /// {@category haptic}
 Pointer<SdlHaptic> sdlOpenHapticFromMouse() {
   final sdlOpenHapticFromMouseLookupFunction = _libSdl
@@ -224,6 +256,10 @@ Pointer<SdlHaptic> sdlOpenHapticFromMouse() {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_IsJoystickHaptic(SDL_Joystick *joystick)
 /// ```
+///
+/// See also:
+/// - [SDL_IsJoystickHaptic - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_IsJoystickHaptic)
+///
 /// {@category haptic}
 bool sdlIsJoystickHaptic(Pointer<SdlJoystick> joystick) {
   final sdlIsJoystickHapticLookupFunction = _libSdl
@@ -257,6 +293,10 @@ bool sdlIsJoystickHaptic(Pointer<SdlJoystick> joystick) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Haptic * SDLCALL SDL_OpenHapticFromJoystick(SDL_Joystick *joystick)
 /// ```
+///
+/// See also:
+/// - [SDL_OpenHapticFromJoystick - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_OpenHapticFromJoystick)
+///
 /// {@category haptic}
 Pointer<SdlHaptic> sdlOpenHapticFromJoystick(Pointer<SdlJoystick> joystick) {
   final sdlOpenHapticFromJoystickLookupFunction = _libSdl
@@ -279,6 +319,10 @@ Pointer<SdlHaptic> sdlOpenHapticFromJoystick(Pointer<SdlJoystick> joystick) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_CloseHaptic(SDL_Haptic *haptic)
 /// ```
+///
+/// See also:
+/// - [SDL_CloseHaptic - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CloseHaptic)
+///
 /// {@category haptic}
 void sdlCloseHaptic(Pointer<SdlHaptic> haptic) {
   final sdlCloseHapticLookupFunction = _libSdl
@@ -308,6 +352,10 @@ void sdlCloseHaptic(Pointer<SdlHaptic> haptic) {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_GetMaxHapticEffects(SDL_Haptic *haptic)
 /// ```
+///
+/// See also:
+/// - [SDL_GetMaxHapticEffects - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetMaxHapticEffects)
+///
 /// {@category haptic}
 int sdlGetMaxHapticEffects(Pointer<SdlHaptic> haptic) {
   final sdlGetMaxHapticEffectsLookupFunction = _libSdl
@@ -335,6 +383,10 @@ int sdlGetMaxHapticEffects(Pointer<SdlHaptic> haptic) {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_GetMaxHapticEffectsPlaying(SDL_Haptic *haptic)
 /// ```
+///
+/// See also:
+/// - [SDL_GetMaxHapticEffectsPlaying - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetMaxHapticEffectsPlaying)
+///
 /// {@category haptic}
 int sdlGetMaxHapticEffectsPlaying(Pointer<SdlHaptic> haptic) {
   final sdlGetMaxHapticEffectsPlayingLookupFunction = _libSdl
@@ -360,6 +412,10 @@ int sdlGetMaxHapticEffectsPlaying(Pointer<SdlHaptic> haptic) {
 /// ```c
 /// extern SDL_DECLSPEC Uint32 SDLCALL SDL_GetHapticFeatures(SDL_Haptic *haptic)
 /// ```
+///
+/// See also:
+/// - [SDL_GetHapticFeatures - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetHapticFeatures)
+///
 /// {@category haptic}
 int sdlGetHapticFeatures(Pointer<SdlHaptic> haptic) {
   final sdlGetHapticFeaturesLookupFunction = _libSdl
@@ -385,6 +441,10 @@ int sdlGetHapticFeatures(Pointer<SdlHaptic> haptic) {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_GetNumHapticAxes(SDL_Haptic *haptic)
 /// ```
+///
+/// See also:
+/// - [SDL_GetNumHapticAxes - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetNumHapticAxes)
+///
 /// {@category haptic}
 int sdlGetNumHapticAxes(Pointer<SdlHaptic> haptic) {
   final sdlGetNumHapticAxesLookupFunction = _libSdl
@@ -410,6 +470,10 @@ int sdlGetNumHapticAxes(Pointer<SdlHaptic> haptic) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_HapticEffectSupported(SDL_Haptic *haptic, const SDL_HapticEffect *effect)
 /// ```
+///
+/// See also:
+/// - [SDL_HapticEffectSupported - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_HapticEffectSupported)
+///
 /// {@category haptic}
 bool sdlHapticEffectSupported(
   Pointer<SdlHaptic> haptic,
@@ -447,6 +511,10 @@ bool sdlHapticEffectSupported(
 /// ```c
 /// extern SDL_DECLSPEC SDL_HapticEffectID SDLCALL SDL_CreateHapticEffect(SDL_Haptic *haptic, const SDL_HapticEffect *effect)
 /// ```
+///
+/// See also:
+/// - [SDL_CreateHapticEffect - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CreateHapticEffect)
+///
 /// {@category haptic}
 int sdlCreateHapticEffect(
   Pointer<SdlHaptic> haptic,
@@ -486,6 +554,10 @@ int sdlCreateHapticEffect(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_UpdateHapticEffect(SDL_Haptic *haptic, SDL_HapticEffectID effect, const SDL_HapticEffect *data)
 /// ```
+///
+/// See also:
+/// - [SDL_UpdateHapticEffect - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_UpdateHapticEffect)
+///
 /// {@category haptic}
 bool sdlUpdateHapticEffect(
   Pointer<SdlHaptic> haptic,
@@ -533,6 +605,10 @@ bool sdlUpdateHapticEffect(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_RunHapticEffect(SDL_Haptic *haptic, SDL_HapticEffectID effect, Uint32 iterations)
 /// ```
+///
+/// See also:
+/// - [SDL_RunHapticEffect - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RunHapticEffect)
+///
 /// {@category haptic}
 bool sdlRunHapticEffect(Pointer<SdlHaptic> haptic, int effect, int iterations) {
   final sdlRunHapticEffectLookupFunction = _libSdl
@@ -563,6 +639,10 @@ bool sdlRunHapticEffect(Pointer<SdlHaptic> haptic, int effect, int iterations) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_StopHapticEffect(SDL_Haptic *haptic, SDL_HapticEffectID effect)
 /// ```
+///
+/// See also:
+/// - [SDL_StopHapticEffect - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_StopHapticEffect)
+///
 /// {@category haptic}
 bool sdlStopHapticEffect(Pointer<SdlHaptic> haptic, int effect) {
   final sdlStopHapticEffectLookupFunction = _libSdl
@@ -589,6 +669,10 @@ bool sdlStopHapticEffect(Pointer<SdlHaptic> haptic, int effect) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_DestroyHapticEffect(SDL_Haptic *haptic, SDL_HapticEffectID effect)
 /// ```
+///
+/// See also:
+/// - [SDL_DestroyHapticEffect - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_DestroyHapticEffect)
+///
 /// {@category haptic}
 void sdlDestroyHapticEffect(Pointer<SdlHaptic> haptic, int effect) {
   final sdlDestroyHapticEffectLookupFunction = _libSdl
@@ -616,6 +700,10 @@ void sdlDestroyHapticEffect(Pointer<SdlHaptic> haptic, int effect) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetHapticEffectStatus(SDL_Haptic *haptic, SDL_HapticEffectID effect)
 /// ```
+///
+/// See also:
+/// - [SDL_GetHapticEffectStatus - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetHapticEffectStatus)
+///
 /// {@category haptic}
 bool sdlGetHapticEffectStatus(Pointer<SdlHaptic> haptic, int effect) {
   final sdlGetHapticEffectStatusLookupFunction = _libSdl
@@ -649,6 +737,10 @@ bool sdlGetHapticEffectStatus(Pointer<SdlHaptic> haptic, int effect) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetHapticGain(SDL_Haptic *haptic, int gain)
 /// ```
+///
+/// See also:
+/// - [SDL_SetHapticGain - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetHapticGain)
+///
 /// {@category haptic}
 bool sdlSetHapticGain(Pointer<SdlHaptic> haptic, int gain) {
   final sdlSetHapticGainLookupFunction = _libSdl
@@ -679,6 +771,10 @@ bool sdlSetHapticGain(Pointer<SdlHaptic> haptic, int gain) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetHapticAutocenter(SDL_Haptic *haptic, int autocenter)
 /// ```
+///
+/// See also:
+/// - [SDL_SetHapticAutocenter - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetHapticAutocenter)
+///
 /// {@category haptic}
 bool sdlSetHapticAutocenter(Pointer<SdlHaptic> haptic, int autocenter) {
   final sdlSetHapticAutocenterLookupFunction = _libSdl
@@ -709,6 +805,10 @@ bool sdlSetHapticAutocenter(Pointer<SdlHaptic> haptic, int autocenter) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_PauseHaptic(SDL_Haptic *haptic)
 /// ```
+///
+/// See also:
+/// - [SDL_PauseHaptic - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_PauseHaptic)
+///
 /// {@category haptic}
 bool sdlPauseHaptic(Pointer<SdlHaptic> haptic) {
   final sdlPauseHapticLookupFunction = _libSdl
@@ -735,6 +835,10 @@ bool sdlPauseHaptic(Pointer<SdlHaptic> haptic) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_ResumeHaptic(SDL_Haptic *haptic)
 /// ```
+///
+/// See also:
+/// - [SDL_ResumeHaptic - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ResumeHaptic)
+///
 /// {@category haptic}
 bool sdlResumeHaptic(Pointer<SdlHaptic> haptic) {
   final sdlResumeHapticLookupFunction = _libSdl
@@ -760,6 +864,10 @@ bool sdlResumeHaptic(Pointer<SdlHaptic> haptic) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_StopHapticEffects(SDL_Haptic *haptic)
 /// ```
+///
+/// See also:
+/// - [SDL_StopHapticEffects - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_StopHapticEffects)
+///
 /// {@category haptic}
 bool sdlStopHapticEffects(Pointer<SdlHaptic> haptic) {
   final sdlStopHapticEffectsLookupFunction = _libSdl
@@ -783,6 +891,10 @@ bool sdlStopHapticEffects(Pointer<SdlHaptic> haptic) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_HapticRumbleSupported(SDL_Haptic *haptic)
 /// ```
+///
+/// See also:
+/// - [SDL_HapticRumbleSupported - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_HapticRumbleSupported)
+///
 /// {@category haptic}
 bool sdlHapticRumbleSupported(Pointer<SdlHaptic> haptic) {
   final sdlHapticRumbleSupportedLookupFunction = _libSdl
@@ -809,6 +921,10 @@ bool sdlHapticRumbleSupported(Pointer<SdlHaptic> haptic) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_InitHapticRumble(SDL_Haptic *haptic)
 /// ```
+///
+/// See also:
+/// - [SDL_InitHapticRumble - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_InitHapticRumble)
+///
 /// {@category haptic}
 bool sdlInitHapticRumble(Pointer<SdlHaptic> haptic) {
   final sdlInitHapticRumbleLookupFunction = _libSdl
@@ -836,6 +952,10 @@ bool sdlInitHapticRumble(Pointer<SdlHaptic> haptic) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_PlayHapticRumble(SDL_Haptic *haptic, float strength, Uint32 length)
 /// ```
+///
+/// See also:
+/// - [SDL_PlayHapticRumble - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_PlayHapticRumble)
+///
 /// {@category haptic}
 bool sdlPlayHapticRumble(
   Pointer<SdlHaptic> haptic,
@@ -864,6 +984,10 @@ bool sdlPlayHapticRumble(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_StopHapticRumble(SDL_Haptic *haptic)
 /// ```
+///
+/// See also:
+/// - [SDL_StopHapticRumble - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_StopHapticRumble)
+///
 /// {@category haptic}
 bool sdlStopHapticRumble(Pointer<SdlHaptic> haptic) {
   final sdlStopHapticRumbleLookupFunction = _libSdl

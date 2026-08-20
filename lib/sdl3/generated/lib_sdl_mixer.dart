@@ -3,64 +3,62 @@
 part of '../sdl_mixer.dart';
 
 // typedef void (SDLCALL *MIX_TrackStoppedCallback)(void *userdata, MIX_Track *track)
-typedef MixTrackStoppedCallbackDart =
-    void Function(Pointer<Void> userdata, Pointer<MixTrack> track);
-typedef MixTrackStoppedCallback =
-    Void Function(Pointer<Void> userdata, Pointer<MixTrack> track);
+typedef MixTrackStoppedCallbackDart = void Function(
+  Pointer<Void> userdata,
+  Pointer<MixTrack> track,
+);
+typedef MixTrackStoppedCallback = Void Function(
+  Pointer<Void> userdata,
+  Pointer<MixTrack> track,
+);
 
 // typedef void (SDLCALL *MIX_TrackMixCallback)(void *userdata, MIX_Track *track, const SDL_AudioSpec *spec, float *pcm, int samples)
-typedef MixTrackMixCallbackDart =
-    void Function(
-      Pointer<Void> userdata,
-      Pointer<MixTrack> track,
-      Pointer<SdlAudioSpec> spec,
-      Pointer<Float> pcm,
-      int samples,
-    );
-typedef MixTrackMixCallback =
-    Void Function(
-      Pointer<Void> userdata,
-      Pointer<MixTrack> track,
-      Pointer<SdlAudioSpec> spec,
-      Pointer<Float> pcm,
-      Int32 samples,
-    );
+typedef MixTrackMixCallbackDart = void Function(
+  Pointer<Void> userdata,
+  Pointer<MixTrack> track,
+  Pointer<SdlAudioSpec> spec,
+  Pointer<Float> pcm,
+  int samples,
+);
+typedef MixTrackMixCallback = Void Function(
+  Pointer<Void> userdata,
+  Pointer<MixTrack> track,
+  Pointer<SdlAudioSpec> spec,
+  Pointer<Float> pcm,
+  Int32 samples,
+);
 
 // typedef void (SDLCALL *MIX_GroupMixCallback)(void *userdata, MIX_Group *group, const SDL_AudioSpec *spec, float *pcm, int samples)
-typedef MixGroupMixCallbackDart =
-    void Function(
-      Pointer<Void> userdata,
-      Pointer<MixGroup> group,
-      Pointer<SdlAudioSpec> spec,
-      Pointer<Float> pcm,
-      int samples,
-    );
-typedef MixGroupMixCallback =
-    Void Function(
-      Pointer<Void> userdata,
-      Pointer<MixGroup> group,
-      Pointer<SdlAudioSpec> spec,
-      Pointer<Float> pcm,
-      Int32 samples,
-    );
+typedef MixGroupMixCallbackDart = void Function(
+  Pointer<Void> userdata,
+  Pointer<MixGroup> group,
+  Pointer<SdlAudioSpec> spec,
+  Pointer<Float> pcm,
+  int samples,
+);
+typedef MixGroupMixCallback = Void Function(
+  Pointer<Void> userdata,
+  Pointer<MixGroup> group,
+  Pointer<SdlAudioSpec> spec,
+  Pointer<Float> pcm,
+  Int32 samples,
+);
 
 // typedef void (SDLCALL *MIX_PostMixCallback)(void *userdata, MIX_Mixer *mixer, const SDL_AudioSpec *spec, float *pcm, int samples)
-typedef MixPostMixCallbackDart =
-    void Function(
-      Pointer<Void> userdata,
-      Pointer<MixMixer> mixer,
-      Pointer<SdlAudioSpec> spec,
-      Pointer<Float> pcm,
-      int samples,
-    );
-typedef MixPostMixCallback =
-    Void Function(
-      Pointer<Void> userdata,
-      Pointer<MixMixer> mixer,
-      Pointer<SdlAudioSpec> spec,
-      Pointer<Float> pcm,
-      Int32 samples,
-    );
+typedef MixPostMixCallbackDart = void Function(
+  Pointer<Void> userdata,
+  Pointer<MixMixer> mixer,
+  Pointer<SdlAudioSpec> spec,
+  Pointer<Float> pcm,
+  int samples,
+);
+typedef MixPostMixCallback = Void Function(
+  Pointer<Void> userdata,
+  Pointer<MixMixer> mixer,
+  Pointer<SdlAudioSpec> spec,
+  Pointer<Float> pcm,
+  Int32 samples,
+);
 
 ///
 /// Get the version of SDL_mixer that is linked against your program.
@@ -81,6 +79,10 @@ typedef MixPostMixCallback =
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL MIX_Version(void)
 /// ```
+///
+/// See also:
+/// - [MIX_Version - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_Version)
+///
 /// {@category mixer}
 int mixVersion() {
   final mixVersionLookupFunction = _libMixer
@@ -109,6 +111,10 @@ int mixVersion() {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL MIX_Init(void)
 /// ```
+///
+/// See also:
+/// - [MIX_Init - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_Init)
+///
 /// {@category mixer}
 bool mixInit() {
   final mixInitLookupFunction = _libMixer
@@ -153,6 +159,10 @@ bool mixInit() {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL MIX_Quit(void)
 /// ```
+///
+/// See also:
+/// - [MIX_Quit - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_Quit)
+///
 /// {@category mixer}
 void mixQuit() {
   final mixQuitLookupFunction = _libMixer
@@ -183,6 +193,10 @@ void mixQuit() {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL MIX_GetNumAudioDecoders(void)
 /// ```
+///
+/// See also:
+/// - [MIX_GetNumAudioDecoders - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_GetNumAudioDecoders)
+///
 /// {@category mixer}
 int mixGetNumAudioDecoders() {
   final mixGetNumAudioDecodersLookupFunction = _libMixer
@@ -224,6 +238,10 @@ int mixGetNumAudioDecoders() {
 /// ```c
 /// extern SDL_DECLSPEC const char * SDLCALL MIX_GetAudioDecoder(int index)
 /// ```
+///
+/// See also:
+/// - [MIX_GetAudioDecoder - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_GetAudioDecoder)
+///
 /// {@category mixer}
 String? mixGetAudioDecoder(int index) {
   final mixGetAudioDecoderLookupFunction = _libMixer
@@ -286,6 +304,10 @@ String? mixGetAudioDecoder(int index) {
 /// ```c
 /// extern SDL_DECLSPEC MIX_Mixer * SDLCALL MIX_CreateMixerDevice(SDL_AudioDeviceID devid, const SDL_AudioSpec *spec)
 /// ```
+///
+/// See also:
+/// - [MIX_CreateMixerDevice - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_CreateMixerDevice)
+///
 /// {@category mixer}
 Pointer<MixMixer> mixCreateMixerDevice(int devid, Pointer<SdlAudioSpec> spec) {
   final mixCreateMixerDeviceLookupFunction = _libMixer
@@ -326,6 +348,10 @@ Pointer<MixMixer> mixCreateMixerDevice(int devid, Pointer<SdlAudioSpec> spec) {
 /// ```c
 /// extern SDL_DECLSPEC MIX_Mixer * SDLCALL MIX_CreateMixer(const SDL_AudioSpec *spec)
 /// ```
+///
+/// See also:
+/// - [MIX_CreateMixer - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_CreateMixer)
+///
 /// {@category mixer}
 Pointer<MixMixer> mixCreateMixer(Pointer<SdlAudioSpec> spec) {
   final mixCreateMixerLookupFunction = _libMixer
@@ -362,6 +388,10 @@ Pointer<MixMixer> mixCreateMixer(Pointer<SdlAudioSpec> spec) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL MIX_DestroyMixer(MIX_Mixer *mixer)
 /// ```
+///
+/// See also:
+/// - [MIX_DestroyMixer - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_DestroyMixer)
+///
 /// {@category mixer}
 void mixDestroyMixer(Pointer<MixMixer> mixer) {
   final mixDestroyMixerLookupFunction = _libMixer
@@ -392,6 +422,10 @@ void mixDestroyMixer(Pointer<MixMixer> mixer) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_PropertiesID SDLCALL MIX_GetMixerProperties(MIX_Mixer *mixer)
 /// ```
+///
+/// See also:
+/// - [MIX_GetMixerProperties - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_GetMixerProperties)
+///
 /// {@category mixer}
 int mixGetMixerProperties(Pointer<MixMixer> mixer) {
   final mixGetMixerPropertiesLookupFunction = _libMixer
@@ -434,6 +468,10 @@ int mixGetMixerProperties(Pointer<MixMixer> mixer) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL MIX_GetMixerFormat(MIX_Mixer *mixer, SDL_AudioSpec *spec)
 /// ```
+///
+/// See also:
+/// - [MIX_GetMixerFormat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_GetMixerFormat)
+///
 /// {@category mixer}
 bool mixGetMixerFormat(Pointer<MixMixer> mixer, Pointer<SdlAudioSpec> spec) {
   final mixGetMixerFormatLookupFunction = _libMixer
@@ -490,6 +528,10 @@ bool mixGetMixerFormat(Pointer<MixMixer> mixer, Pointer<SdlAudioSpec> spec) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL MIX_LockMixer(MIX_Mixer *mixer)
 /// ```
+///
+/// See also:
+/// - [MIX_LockMixer - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_LockMixer)
+///
 /// {@category mixer}
 void mixLockMixer(Pointer<MixMixer> mixer) {
   final mixLockMixerLookupFunction = _libMixer
@@ -525,6 +567,10 @@ void mixLockMixer(Pointer<MixMixer> mixer) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL MIX_UnlockMixer(MIX_Mixer *mixer)
 /// ```
+///
+/// See also:
+/// - [MIX_UnlockMixer - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_UnlockMixer)
+///
 /// {@category mixer}
 void mixUnlockMixer(Pointer<MixMixer> mixer) {
   final mixUnlockMixerLookupFunction = _libMixer
@@ -595,6 +641,10 @@ void mixUnlockMixer(Pointer<MixMixer> mixer) {
 /// ```c
 /// extern SDL_DECLSPEC MIX_Audio * SDLCALL MIX_LoadAudio_IO(MIX_Mixer *mixer, SDL_IOStream *io, bool predecode, bool closeio)
 /// ```
+///
+/// See also:
+/// - [MIX_LoadAudio_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_LoadAudio_IO)
+///
 /// {@category mixer}
 Pointer<MixAudio> mixLoadAudioIo(
   Pointer<MixMixer> mixer,
@@ -651,6 +701,10 @@ Pointer<MixAudio> mixLoadAudioIo(
 /// ```c
 /// extern SDL_DECLSPEC MIX_Audio * SDLCALL MIX_LoadAudio(MIX_Mixer *mixer, const char *path, bool predecode)
 /// ```
+///
+/// See also:
+/// - [MIX_LoadAudio - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_LoadAudio)
+///
 /// {@category mixer}
 Pointer<MixAudio> mixLoadAudio(
   Pointer<MixMixer> mixer,
@@ -736,6 +790,10 @@ Pointer<MixAudio> mixLoadAudio(
 /// ```c
 /// extern SDL_DECLSPEC MIX_Audio * SDLCALL MIX_LoadAudioNoCopy(MIX_Mixer *mixer, const void *data, size_t datalen, bool free_when_done)
 /// ```
+///
+/// See also:
+/// - [MIX_LoadAudioNoCopy - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_LoadAudioNoCopy)
+///
 /// {@category mixer}
 Pointer<MixAudio> mixLoadAudioNoCopy(
   Pointer<MixMixer> mixer,
@@ -814,6 +872,10 @@ Pointer<MixAudio> mixLoadAudioNoCopy(
 /// ```c
 /// extern SDL_DECLSPEC MIX_Audio * SDLCALL MIX_LoadAudioWithProperties(SDL_PropertiesID props)
 /// ```
+///
+/// See also:
+/// - [MIX_LoadAudioWithProperties - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_LoadAudioWithProperties)
+///
 /// {@category mixer}
 Pointer<MixAudio> mixLoadAudioWithProperties(int props) {
   final mixLoadAudioWithPropertiesLookupFunction = _libMixer
@@ -860,6 +922,10 @@ Pointer<MixAudio> mixLoadAudioWithProperties(int props) {
 /// ```c
 /// extern SDL_DECLSPEC MIX_Audio * SDLCALL MIX_LoadRawAudio_IO(MIX_Mixer *mixer, SDL_IOStream *io, const SDL_AudioSpec *spec, bool closeio)
 /// ```
+///
+/// See also:
+/// - [MIX_LoadRawAudio_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_LoadRawAudio_IO)
+///
 /// {@category mixer}
 Pointer<MixAudio> mixLoadRawAudioIo(
   Pointer<MixMixer> mixer,
@@ -922,6 +988,10 @@ Pointer<MixAudio> mixLoadRawAudioIo(
 /// ```c
 /// extern SDL_DECLSPEC MIX_Audio * SDLCALL MIX_LoadRawAudio(MIX_Mixer *mixer, const void *data, size_t datalen, const SDL_AudioSpec *spec)
 /// ```
+///
+/// See also:
+/// - [MIX_LoadRawAudio - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_LoadRawAudio)
+///
 /// {@category mixer}
 Pointer<MixAudio> mixLoadRawAudio(
   Pointer<MixMixer> mixer,
@@ -990,6 +1060,10 @@ Pointer<MixAudio> mixLoadRawAudio(
 /// ```c
 /// extern SDL_DECLSPEC MIX_Audio * SDLCALL MIX_LoadRawAudioNoCopy(MIX_Mixer *mixer, const void *data, size_t datalen, const SDL_AudioSpec *spec, bool free_when_done)
 /// ```
+///
+/// See also:
+/// - [MIX_LoadRawAudioNoCopy - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_LoadRawAudioNoCopy)
+///
 /// {@category mixer}
 Pointer<MixAudio> mixLoadRawAudioNoCopy(
   Pointer<MixMixer> mixer,
@@ -1062,6 +1136,10 @@ Pointer<MixAudio> mixLoadRawAudioNoCopy(
 /// ```c
 /// extern SDL_DECLSPEC MIX_Audio * SDLCALL MIX_CreateSineWaveAudio(MIX_Mixer *mixer, int hz, float amplitude, Sint64 ms)
 /// ```
+///
+/// See also:
+/// - [MIX_CreateSineWaveAudio - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_CreateSineWaveAudio)
+///
 /// {@category mixer}
 Pointer<MixAudio> mixCreateSineWaveAudio(
   Pointer<MixMixer> mixer,
@@ -1135,6 +1213,10 @@ Pointer<MixAudio> mixCreateSineWaveAudio(
 /// ```c
 /// extern SDL_DECLSPEC SDL_PropertiesID SDLCALL MIX_GetAudioProperties(MIX_Audio *audio)
 /// ```
+///
+/// See also:
+/// - [MIX_GetAudioProperties - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_GetAudioProperties)
+///
 /// {@category mixer}
 int mixGetAudioProperties(Pointer<MixAudio> audio) {
   final mixGetAudioPropertiesLookupFunction = _libMixer
@@ -1180,6 +1262,10 @@ int mixGetAudioProperties(Pointer<MixAudio> audio) {
 /// ```c
 /// extern SDL_DECLSPEC Sint64 SDLCALL MIX_GetAudioDuration(MIX_Audio *audio)
 /// ```
+///
+/// See also:
+/// - [MIX_GetAudioDuration - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_GetAudioDuration)
+///
 /// {@category mixer}
 int mixGetAudioDuration(Pointer<MixAudio> audio) {
   final mixGetAudioDurationLookupFunction = _libMixer
@@ -1210,6 +1296,10 @@ int mixGetAudioDuration(Pointer<MixAudio> audio) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL MIX_GetAudioFormat(MIX_Audio *audio, SDL_AudioSpec *spec)
 /// ```
+///
+/// See also:
+/// - [MIX_GetAudioFormat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_GetAudioFormat)
+///
 /// {@category mixer}
 bool mixGetAudioFormat(Pointer<MixAudio> audio, Pointer<SdlAudioSpec> spec) {
   final mixGetAudioFormatLookupFunction = _libMixer
@@ -1243,6 +1333,10 @@ bool mixGetAudioFormat(Pointer<MixAudio> audio, Pointer<SdlAudioSpec> spec) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL MIX_DestroyAudio(MIX_Audio *audio)
 /// ```
+///
+/// See also:
+/// - [MIX_DestroyAudio - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_DestroyAudio)
+///
 /// {@category mixer}
 void mixDestroyAudio(Pointer<MixAudio> audio) {
   final mixDestroyAudioLookupFunction = _libMixer
@@ -1280,6 +1374,10 @@ void mixDestroyAudio(Pointer<MixAudio> audio) {
 /// ```c
 /// extern SDL_DECLSPEC MIX_Track * SDLCALL MIX_CreateTrack(MIX_Mixer *mixer)
 /// ```
+///
+/// See also:
+/// - [MIX_CreateTrack - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_CreateTrack)
+///
 /// {@category mixer}
 Pointer<MixTrack> mixCreateTrack(Pointer<MixMixer> mixer) {
   final mixCreateTrackLookupFunction = _libMixer
@@ -1314,6 +1412,10 @@ Pointer<MixTrack> mixCreateTrack(Pointer<MixMixer> mixer) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL MIX_DestroyTrack(MIX_Track *track)
 /// ```
+///
+/// See also:
+/// - [MIX_DestroyTrack - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_DestroyTrack)
+///
 /// {@category mixer}
 void mixDestroyTrack(Pointer<MixTrack> track) {
   final mixDestroyTrackLookupFunction = _libMixer
@@ -1344,6 +1446,10 @@ void mixDestroyTrack(Pointer<MixTrack> track) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_PropertiesID SDLCALL MIX_GetTrackProperties(MIX_Track *track)
 /// ```
+///
+/// See also:
+/// - [MIX_GetTrackProperties - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_GetTrackProperties)
+///
 /// {@category mixer}
 int mixGetTrackProperties(Pointer<MixTrack> track) {
   final mixGetTrackPropertiesLookupFunction = _libMixer
@@ -1370,6 +1476,10 @@ int mixGetTrackProperties(Pointer<MixTrack> track) {
 /// ```c
 /// extern SDL_DECLSPEC MIX_Mixer * SDLCALL MIX_GetTrackMixer(MIX_Track *track)
 /// ```
+///
+/// See also:
+/// - [MIX_GetTrackMixer - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_GetTrackMixer)
+///
 /// {@category mixer}
 Pointer<MixMixer> mixGetTrackMixer(Pointer<MixTrack> track) {
   final mixGetTrackMixerLookupFunction = _libMixer
@@ -1414,6 +1524,10 @@ Pointer<MixMixer> mixGetTrackMixer(Pointer<MixTrack> track) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL MIX_SetTrackAudio(MIX_Track *track, MIX_Audio *audio)
 /// ```
+///
+/// See also:
+/// - [MIX_SetTrackAudio - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_SetTrackAudio)
+///
 /// {@category mixer}
 bool mixSetTrackAudio(Pointer<MixTrack> track, Pointer<MixAudio> audio) {
   final mixSetTrackAudioLookupFunction = _libMixer
@@ -1467,6 +1581,10 @@ bool mixSetTrackAudio(Pointer<MixTrack> track, Pointer<MixAudio> audio) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL MIX_SetTrackAudioStream(MIX_Track *track, SDL_AudioStream *stream)
 /// ```
+///
+/// See also:
+/// - [MIX_SetTrackAudioStream - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_SetTrackAudioStream)
+///
 /// {@category mixer}
 bool mixSetTrackAudioStream(
   Pointer<MixTrack> track,
@@ -1531,6 +1649,10 @@ bool mixSetTrackAudioStream(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL MIX_SetTrackIOStream(MIX_Track *track, SDL_IOStream *io, bool closeio)
 /// ```
+///
+/// See also:
+/// - [MIX_SetTrackIOStream - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_SetTrackIOStream)
+///
 /// {@category mixer}
 bool mixSetTrackIoStream(
   Pointer<MixTrack> track,
@@ -1604,6 +1726,10 @@ bool mixSetTrackIoStream(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL MIX_SetTrackRawIOStream(MIX_Track *track, SDL_IOStream *io, const SDL_AudioSpec *spec, bool closeio)
 /// ```
+///
+/// See also:
+/// - [MIX_SetTrackRawIOStream - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_SetTrackRawIOStream)
+///
 /// {@category mixer}
 bool mixSetTrackRawIoStream(
   Pointer<MixTrack> track,
@@ -1659,6 +1785,10 @@ bool mixSetTrackRawIoStream(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL MIX_TagTrack(MIX_Track *track, const char *tag)
 /// ```
+///
+/// See also:
+/// - [MIX_TagTrack - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_TagTrack)
+///
 /// {@category mixer}
 bool mixTagTrack(Pointer<MixTrack> track, String? tag) {
   final mixTagTrackLookupFunction = _libMixer
@@ -1698,6 +1828,10 @@ bool mixTagTrack(Pointer<MixTrack> track, String? tag) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL MIX_UntagTrack(MIX_Track *track, const char *tag)
 /// ```
+///
+/// See also:
+/// - [MIX_UntagTrack - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_UntagTrack)
+///
 /// {@category mixer}
 void mixUntagTrack(Pointer<MixTrack> track, String? tag) {
   final mixUntagTrackLookupFunction = _libMixer
@@ -1730,6 +1864,10 @@ void mixUntagTrack(Pointer<MixTrack> track, String? tag) {
 /// ```c
 /// extern SDL_DECLSPEC char ** SDLCALL MIX_GetTrackTags(MIX_Track *track, int *count)
 /// ```
+///
+/// See also:
+/// - [MIX_GetTrackTags - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_GetTrackTags)
+///
 /// {@category mixer}
 Pointer<Pointer<Int8>> mixGetTrackTags(
   Pointer<MixTrack> track,
@@ -1769,6 +1907,10 @@ Pointer<Pointer<Int8>> mixGetTrackTags(
 /// ```c
 /// extern SDL_DECLSPEC MIX_Track ** SDLCALL MIX_GetTaggedTracks(MIX_Mixer *mixer, const char *tag, int *count)
 /// ```
+///
+/// See also:
+/// - [MIX_GetTaggedTracks - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_GetTaggedTracks)
+///
 /// {@category mixer}
 Pointer<Pointer<MixTrack>> mixGetTaggedTracks(
   Pointer<MixMixer> mixer,
@@ -1832,6 +1974,10 @@ Pointer<Pointer<MixTrack>> mixGetTaggedTracks(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL MIX_SetTrackPlaybackPosition(MIX_Track *track, Sint64 frames)
 /// ```
+///
+/// See also:
+/// - [MIX_SetTrackPlaybackPosition - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_SetTrackPlaybackPosition)
+///
 /// {@category mixer}
 bool mixSetTrackPlaybackPosition(Pointer<MixTrack> track, int frames) {
   final mixSetTrackPlaybackPositionLookupFunction = _libMixer
@@ -1870,6 +2016,10 @@ bool mixSetTrackPlaybackPosition(Pointer<MixTrack> track, int frames) {
 /// ```c
 /// extern SDL_DECLSPEC Sint64 SDLCALL MIX_GetTrackPlaybackPosition(MIX_Track *track)
 /// ```
+///
+/// See also:
+/// - [MIX_GetTrackPlaybackPosition - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_GetTrackPlaybackPosition)
+///
 /// {@category mixer}
 int mixGetTrackPlaybackPosition(Pointer<MixTrack> track) {
   final mixGetTrackPlaybackPositionLookupFunction = _libMixer
@@ -1905,6 +2055,10 @@ int mixGetTrackPlaybackPosition(Pointer<MixTrack> track) {
 /// ```c
 /// extern SDL_DECLSPEC Sint64 SDLCALL MIX_GetTrackFadeFrames(MIX_Track *track)
 /// ```
+///
+/// See also:
+/// - [MIX_GetTrackFadeFrames - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_GetTrackFadeFrames)
+///
 /// {@category mixer}
 int mixGetTrackFadeFrames(Pointer<MixTrack> track) {
   final mixGetTrackFadeFramesLookupFunction = _libMixer
@@ -1944,6 +2098,10 @@ int mixGetTrackFadeFrames(Pointer<MixTrack> track) {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL MIX_GetTrackLoops(MIX_Track *track)
 /// ```
+///
+/// See also:
+/// - [MIX_GetTrackLoops - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_GetTrackLoops)
+///
 /// {@category mixer}
 int mixGetTrackLoops(Pointer<MixTrack> track) {
   final mixGetTrackLoopsLookupFunction = _libMixer
@@ -1986,6 +2144,10 @@ int mixGetTrackLoops(Pointer<MixTrack> track) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL MIX_SetTrackLoops(MIX_Track *track, int num_loops)
 /// ```
+///
+/// See also:
+/// - [MIX_SetTrackLoops - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_SetTrackLoops)
+///
 /// {@category mixer}
 bool mixSetTrackLoops(Pointer<MixTrack> track, int numLoops) {
   final mixSetTrackLoopsLookupFunction = _libMixer
@@ -2020,6 +2182,10 @@ bool mixSetTrackLoops(Pointer<MixTrack> track, int numLoops) {
 /// ```c
 /// extern SDL_DECLSPEC MIX_Audio * SDLCALL MIX_GetTrackAudio(MIX_Track *track)
 /// ```
+///
+/// See also:
+/// - [MIX_GetTrackAudio - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_GetTrackAudio)
+///
 /// {@category mixer}
 Pointer<MixAudio> mixGetTrackAudio(Pointer<MixTrack> track) {
   final mixGetTrackAudioLookupFunction = _libMixer
@@ -2054,6 +2220,10 @@ Pointer<MixAudio> mixGetTrackAudio(Pointer<MixTrack> track) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_AudioStream * SDLCALL MIX_GetTrackAudioStream(MIX_Track *track)
 /// ```
+///
+/// See also:
+/// - [MIX_GetTrackAudioStream - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_GetTrackAudioStream)
+///
 /// {@category mixer}
 Pointer<SdlAudioStream> mixGetTrackAudioStream(Pointer<MixTrack> track) {
   final mixGetTrackAudioStreamLookupFunction = _libMixer
@@ -2092,6 +2262,10 @@ Pointer<SdlAudioStream> mixGetTrackAudioStream(Pointer<MixTrack> track) {
 /// ```c
 /// extern SDL_DECLSPEC Sint64 SDLCALL MIX_GetTrackRemaining(MIX_Track *track)
 /// ```
+///
+/// See also:
+/// - [MIX_GetTrackRemaining - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_GetTrackRemaining)
+///
 /// {@category mixer}
 int mixGetTrackRemaining(Pointer<MixTrack> track) {
   final mixGetTrackRemainingLookupFunction = _libMixer
@@ -2128,6 +2302,10 @@ int mixGetTrackRemaining(Pointer<MixTrack> track) {
 /// ```c
 /// extern SDL_DECLSPEC Sint64 SDLCALL MIX_TrackMSToFrames(MIX_Track *track, Sint64 ms)
 /// ```
+///
+/// See also:
+/// - [MIX_TrackMSToFrames - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_TrackMSToFrames)
+///
 /// {@category mixer}
 int mixTrackMsToFrames(Pointer<MixTrack> track, int ms) {
   final mixTrackMsToFramesLookupFunction = _libMixer
@@ -2167,6 +2345,10 @@ int mixTrackMsToFrames(Pointer<MixTrack> track, int ms) {
 /// ```c
 /// extern SDL_DECLSPEC Sint64 SDLCALL MIX_TrackFramesToMS(MIX_Track *track, Sint64 frames)
 /// ```
+///
+/// See also:
+/// - [MIX_TrackFramesToMS - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_TrackFramesToMS)
+///
 /// {@category mixer}
 int mixTrackFramesToMs(Pointer<MixTrack> track, int frames) {
   final mixTrackFramesToMsLookupFunction = _libMixer
@@ -2199,6 +2381,10 @@ int mixTrackFramesToMs(Pointer<MixTrack> track, int frames) {
 /// ```c
 /// extern SDL_DECLSPEC Sint64 SDLCALL MIX_AudioMSToFrames(MIX_Audio *audio, Sint64 ms)
 /// ```
+///
+/// See also:
+/// - [MIX_AudioMSToFrames - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_AudioMSToFrames)
+///
 /// {@category mixer}
 int mixAudioMsToFrames(Pointer<MixAudio> audio, int ms) {
   final mixAudioMsToFramesLookupFunction = _libMixer
@@ -2234,6 +2420,10 @@ int mixAudioMsToFrames(Pointer<MixAudio> audio, int ms) {
 /// ```c
 /// extern SDL_DECLSPEC Sint64 SDLCALL MIX_AudioFramesToMS(MIX_Audio *audio, Sint64 frames)
 /// ```
+///
+/// See also:
+/// - [MIX_AudioFramesToMS - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_AudioFramesToMS)
+///
 /// {@category mixer}
 int mixAudioFramesToMs(Pointer<MixAudio> audio, int frames) {
   final mixAudioFramesToMsLookupFunction = _libMixer
@@ -2263,6 +2453,10 @@ int mixAudioFramesToMs(Pointer<MixAudio> audio, int frames) {
 /// ```c
 /// extern SDL_DECLSPEC Sint64 SDLCALL MIX_MSToFrames(int sample_rate, Sint64 ms)
 /// ```
+///
+/// See also:
+/// - [MIX_MSToFrames - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_MSToFrames)
+///
 /// {@category mixer}
 int mixMsToFrames(int sampleRate, int ms) {
   final mixMsToFramesLookupFunction = _libMixer
@@ -2296,6 +2490,10 @@ int mixMsToFrames(int sampleRate, int ms) {
 /// ```c
 /// extern SDL_DECLSPEC Sint64 SDLCALL MIX_FramesToMS(int sample_rate, Sint64 frames)
 /// ```
+///
+/// See also:
+/// - [MIX_FramesToMS - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_FramesToMS)
+///
 /// {@category mixer}
 int mixFramesToMs(int sampleRate, int frames) {
   final mixFramesToMsLookupFunction = _libMixer
@@ -2431,6 +2629,10 @@ int mixFramesToMs(int sampleRate, int frames) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL MIX_PlayTrack(MIX_Track *track, SDL_PropertiesID options)
 /// ```
+///
+/// See also:
+/// - [MIX_PlayTrack - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_PlayTrack)
+///
 /// {@category mixer}
 bool mixPlayTrack(Pointer<MixTrack> track, int options) {
   final mixPlayTrackLookupFunction = _libMixer
@@ -2479,6 +2681,10 @@ bool mixPlayTrack(Pointer<MixTrack> track, int options) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL MIX_PlayTag(MIX_Mixer *mixer, const char *tag, SDL_PropertiesID options)
 /// ```
+///
+/// See also:
+/// - [MIX_PlayTag - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_PlayTag)
+///
 /// {@category mixer}
 bool mixPlayTag(Pointer<MixMixer> mixer, String? tag, int options) {
   final mixPlayTagLookupFunction = _libMixer
@@ -2529,6 +2735,10 @@ bool mixPlayTag(Pointer<MixMixer> mixer, String? tag, int options) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL MIX_PlayAudio(MIX_Mixer *mixer, MIX_Audio *audio)
 /// ```
+///
+/// See also:
+/// - [MIX_PlayAudio - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_PlayAudio)
+///
 /// {@category mixer}
 bool mixPlayAudio(Pointer<MixMixer> mixer, Pointer<MixAudio> audio) {
   final mixPlayAudioLookupFunction = _libMixer
@@ -2574,6 +2784,10 @@ bool mixPlayAudio(Pointer<MixMixer> mixer, Pointer<MixAudio> audio) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL MIX_StopTrack(MIX_Track *track, Sint64 fade_out_frames)
 /// ```
+///
+/// See also:
+/// - [MIX_StopTrack - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_StopTrack)
+///
 /// {@category mixer}
 bool mixStopTrack(Pointer<MixTrack> track, int fadeOutFrames) {
   final mixStopTrackLookupFunction = _libMixer
@@ -2620,6 +2834,10 @@ bool mixStopTrack(Pointer<MixTrack> track, int fadeOutFrames) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL MIX_StopAllTracks(MIX_Mixer *mixer, Sint64 fade_out_ms)
 /// ```
+///
+/// See also:
+/// - [MIX_StopAllTracks - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_StopAllTracks)
+///
 /// {@category mixer}
 bool mixStopAllTracks(Pointer<MixMixer> mixer, int fadeOutMs) {
   final mixStopAllTracksLookupFunction = _libMixer
@@ -2664,6 +2882,10 @@ bool mixStopAllTracks(Pointer<MixMixer> mixer, int fadeOutMs) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL MIX_StopTag(MIX_Mixer *mixer, const char *tag, Sint64 fade_out_ms)
 /// ```
+///
+/// See also:
+/// - [MIX_StopTag - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_StopTag)
+///
 /// {@category mixer}
 bool mixStopTag(Pointer<MixMixer> mixer, String? tag, int fadeOutMs) {
   final mixStopTagLookupFunction = _libMixer
@@ -2706,6 +2928,10 @@ bool mixStopTag(Pointer<MixMixer> mixer, String? tag, int fadeOutMs) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL MIX_PauseTrack(MIX_Track *track)
 /// ```
+///
+/// See also:
+/// - [MIX_PauseTrack - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_PauseTrack)
+///
 /// {@category mixer}
 bool mixPauseTrack(Pointer<MixTrack> track) {
   final mixPauseTrackLookupFunction = _libMixer
@@ -2739,6 +2965,10 @@ bool mixPauseTrack(Pointer<MixTrack> track) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL MIX_PauseAllTracks(MIX_Mixer *mixer)
 /// ```
+///
+/// See also:
+/// - [MIX_PauseAllTracks - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_PauseAllTracks)
+///
 /// {@category mixer}
 bool mixPauseAllTracks(Pointer<MixMixer> mixer) {
   final mixPauseAllTracksLookupFunction = _libMixer
@@ -2778,6 +3008,10 @@ bool mixPauseAllTracks(Pointer<MixMixer> mixer) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL MIX_PauseTag(MIX_Mixer *mixer, const char *tag)
 /// ```
+///
+/// See also:
+/// - [MIX_PauseTag - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_PauseTag)
+///
 /// {@category mixer}
 bool mixPauseTag(Pointer<MixMixer> mixer, String? tag) {
   final mixPauseTagLookupFunction = _libMixer
@@ -2816,6 +3050,10 @@ bool mixPauseTag(Pointer<MixMixer> mixer, String? tag) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL MIX_ResumeTrack(MIX_Track *track)
 /// ```
+///
+/// See also:
+/// - [MIX_ResumeTrack - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_ResumeTrack)
+///
 /// {@category mixer}
 bool mixResumeTrack(Pointer<MixTrack> track) {
   final mixResumeTrackLookupFunction = _libMixer
@@ -2849,6 +3087,10 @@ bool mixResumeTrack(Pointer<MixTrack> track) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL MIX_ResumeAllTracks(MIX_Mixer *mixer)
 /// ```
+///
+/// See also:
+/// - [MIX_ResumeAllTracks - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_ResumeAllTracks)
+///
 /// {@category mixer}
 bool mixResumeAllTracks(Pointer<MixMixer> mixer) {
   final mixResumeAllTracksLookupFunction = _libMixer
@@ -2888,6 +3130,10 @@ bool mixResumeAllTracks(Pointer<MixMixer> mixer) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL MIX_ResumeTag(MIX_Mixer *mixer, const char *tag)
 /// ```
+///
+/// See also:
+/// - [MIX_ResumeTag - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_ResumeTag)
+///
 /// {@category mixer}
 bool mixResumeTag(Pointer<MixMixer> mixer, String? tag) {
   final mixResumeTagLookupFunction = _libMixer
@@ -2927,6 +3173,10 @@ bool mixResumeTag(Pointer<MixMixer> mixer, String? tag) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL MIX_TrackPlaying(MIX_Track *track)
 /// ```
+///
+/// See also:
+/// - [MIX_TrackPlaying - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_TrackPlaying)
+///
 /// {@category mixer}
 bool mixTrackPlaying(Pointer<MixTrack> track) {
   final mixTrackPlayingLookupFunction = _libMixer
@@ -2964,6 +3214,10 @@ bool mixTrackPlaying(Pointer<MixTrack> track) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL MIX_TrackPaused(MIX_Track *track)
 /// ```
+///
+/// See also:
+/// - [MIX_TrackPaused - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_TrackPaused)
+///
 /// {@category mixer}
 bool mixTrackPaused(Pointer<MixTrack> track) {
   final mixTrackPausedLookupFunction = _libMixer
@@ -3003,6 +3257,10 @@ bool mixTrackPaused(Pointer<MixTrack> track) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL MIX_SetMixerGain(MIX_Mixer *mixer, float gain)
 /// ```
+///
+/// See also:
+/// - [MIX_SetMixerGain - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_SetMixerGain)
+///
 /// {@category mixer}
 bool mixSetMixerGain(Pointer<MixMixer> mixer, double gain) {
   final mixSetMixerGainLookupFunction = _libMixer
@@ -3032,6 +3290,10 @@ bool mixSetMixerGain(Pointer<MixMixer> mixer, double gain) {
 /// ```c
 /// extern SDL_DECLSPEC float SDLCALL MIX_GetMixerGain(MIX_Mixer *mixer)
 /// ```
+///
+/// See also:
+/// - [MIX_GetMixerGain - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_GetMixerGain)
+///
 /// {@category mixer}
 double mixGetMixerGain(Pointer<MixMixer> mixer) {
   final mixGetMixerGainLookupFunction = _libMixer
@@ -3071,6 +3333,10 @@ double mixGetMixerGain(Pointer<MixMixer> mixer) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL MIX_SetTrackGain(MIX_Track *track, float gain)
 /// ```
+///
+/// See also:
+/// - [MIX_SetTrackGain - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_SetTrackGain)
+///
 /// {@category mixer}
 bool mixSetTrackGain(Pointer<MixTrack> track, double gain) {
   final mixSetTrackGainLookupFunction = _libMixer
@@ -3100,6 +3366,10 @@ bool mixSetTrackGain(Pointer<MixTrack> track, double gain) {
 /// ```c
 /// extern SDL_DECLSPEC float SDLCALL MIX_GetTrackGain(MIX_Track *track)
 /// ```
+///
+/// See also:
+/// - [MIX_GetTrackGain - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_GetTrackGain)
+///
 /// {@category mixer}
 double mixGetTrackGain(Pointer<MixTrack> track) {
   final mixGetTrackGainLookupFunction = _libMixer
@@ -3148,6 +3418,10 @@ double mixGetTrackGain(Pointer<MixTrack> track) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL MIX_SetTagGain(MIX_Mixer *mixer, const char *tag, float gain)
 /// ```
+///
+/// See also:
+/// - [MIX_SetTagGain - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_SetTagGain)
+///
 /// {@category mixer}
 bool mixSetTagGain(Pointer<MixMixer> mixer, String? tag, double gain) {
   final mixSetTagGainLookupFunction = _libMixer
@@ -3193,6 +3467,10 @@ bool mixSetTagGain(Pointer<MixMixer> mixer, String? tag, double gain) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL MIX_SetMixerFrequencyRatio(MIX_Mixer *mixer, float ratio)
 /// ```
+///
+/// See also:
+/// - [MIX_SetMixerFrequencyRatio - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_SetMixerFrequencyRatio)
+///
 /// {@category mixer}
 bool mixSetMixerFrequencyRatio(Pointer<MixMixer> mixer, double ratio) {
   final mixSetMixerFrequencyRatioLookupFunction = _libMixer
@@ -3222,6 +3500,10 @@ bool mixSetMixerFrequencyRatio(Pointer<MixMixer> mixer, double ratio) {
 /// ```c
 /// extern SDL_DECLSPEC float SDLCALL MIX_GetMixerFrequencyRatio(MIX_Mixer *mixer)
 /// ```
+///
+/// See also:
+/// - [MIX_GetMixerFrequencyRatio - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_GetMixerFrequencyRatio)
+///
 /// {@category mixer}
 double mixGetMixerFrequencyRatio(Pointer<MixMixer> mixer) {
   final mixGetMixerFrequencyRatioLookupFunction = _libMixer
@@ -3259,6 +3541,10 @@ double mixGetMixerFrequencyRatio(Pointer<MixMixer> mixer) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL MIX_SetTrackFrequencyRatio(MIX_Track *track, float ratio)
 /// ```
+///
+/// See also:
+/// - [MIX_SetTrackFrequencyRatio - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_SetTrackFrequencyRatio)
+///
 /// {@category mixer}
 bool mixSetTrackFrequencyRatio(Pointer<MixTrack> track, double ratio) {
   final mixSetTrackFrequencyRatioLookupFunction = _libMixer
@@ -3292,11 +3578,15 @@ bool mixSetTrackFrequencyRatio(Pointer<MixTrack> track, double ratio) {
 ///
 /// \since This function is available since SDL_mixer 3.0.0.
 ///
-/// \sa MIX_GetTrackFrequencyRatio
+/// \sa MIX_SetTrackFrequencyRatio
 ///
 /// ```c
 /// extern SDL_DECLSPEC float SDLCALL MIX_GetTrackFrequencyRatio(MIX_Track *track)
 /// ```
+///
+/// See also:
+/// - [MIX_GetTrackFrequencyRatio - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_GetTrackFrequencyRatio)
+///
 /// {@category mixer}
 double mixGetTrackFrequencyRatio(Pointer<MixTrack> track) {
   final mixGetTrackFrequencyRatioLookupFunction = _libMixer
@@ -3347,6 +3637,10 @@ double mixGetTrackFrequencyRatio(Pointer<MixTrack> track) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL MIX_SetTrackOutputChannelMap(MIX_Track *track, const int *chmap, int count)
 /// ```
+///
+/// See also:
+/// - [MIX_SetTrackOutputChannelMap - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_SetTrackOutputChannelMap)
+///
 /// {@category mixer}
 bool mixSetTrackOutputChannelMap(
   Pointer<MixTrack> track,
@@ -3399,6 +3693,10 @@ bool mixSetTrackOutputChannelMap(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL MIX_SetTrackStereo(MIX_Track *track, const MIX_StereoGains *gains)
 /// ```
+///
+/// See also:
+/// - [MIX_SetTrackStereo - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_SetTrackStereo)
+///
 /// {@category mixer}
 bool mixSetTrackStereo(Pointer<MixTrack> track, Pointer<MixStereoGains> gains) {
   final mixSetTrackStereoLookupFunction = _libMixer
@@ -3456,6 +3754,10 @@ bool mixSetTrackStereo(Pointer<MixTrack> track, Pointer<MixStereoGains> gains) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL MIX_SetTrack3DPosition(MIX_Track *track, const MIX_Point3D *position)
 /// ```
+///
+/// See also:
+/// - [MIX_SetTrack3DPosition - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_SetTrack3DPosition)
+///
 /// {@category mixer}
 bool mixSetTrack3DPosition(
   Pointer<MixTrack> track,
@@ -3489,6 +3791,10 @@ bool mixSetTrack3DPosition(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL MIX_GetTrack3DPosition(MIX_Track *track, MIX_Point3D *position)
 /// ```
+///
+/// See also:
+/// - [MIX_GetTrack3DPosition - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_GetTrack3DPosition)
+///
 /// {@category mixer}
 bool mixGetTrack3DPosition(
   Pointer<MixTrack> track,
@@ -3535,6 +3841,10 @@ bool mixGetTrack3DPosition(
 /// ```c
 /// extern SDL_DECLSPEC MIX_Group * SDLCALL MIX_CreateGroup(MIX_Mixer *mixer)
 /// ```
+///
+/// See also:
+/// - [MIX_CreateGroup - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_CreateGroup)
+///
 /// {@category mixer}
 Pointer<MixGroup> mixCreateGroup(Pointer<MixMixer> mixer) {
   final mixCreateGroupLookupFunction = _libMixer
@@ -3562,6 +3872,10 @@ Pointer<MixGroup> mixCreateGroup(Pointer<MixMixer> mixer) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL MIX_DestroyGroup(MIX_Group *group)
 /// ```
+///
+/// See also:
+/// - [MIX_DestroyGroup - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_DestroyGroup)
+///
 /// {@category mixer}
 void mixDestroyGroup(Pointer<MixGroup> group) {
   final mixDestroyGroupLookupFunction = _libMixer
@@ -3592,6 +3906,10 @@ void mixDestroyGroup(Pointer<MixGroup> group) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_PropertiesID SDLCALL MIX_GetGroupProperties(MIX_Group *group)
 /// ```
+///
+/// See also:
+/// - [MIX_GetGroupProperties - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_GetGroupProperties)
+///
 /// {@category mixer}
 int mixGetGroupProperties(Pointer<MixGroup> group) {
   final mixGetGroupPropertiesLookupFunction = _libMixer
@@ -3618,6 +3936,10 @@ int mixGetGroupProperties(Pointer<MixGroup> group) {
 /// ```c
 /// extern SDL_DECLSPEC MIX_Mixer * SDLCALL MIX_GetGroupMixer(MIX_Group *group)
 /// ```
+///
+/// See also:
+/// - [MIX_GetGroupMixer - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_GetGroupMixer)
+///
 /// {@category mixer}
 Pointer<MixMixer> mixGetGroupMixer(Pointer<MixGroup> group) {
   final mixGetGroupMixerLookupFunction = _libMixer
@@ -3655,6 +3977,10 @@ Pointer<MixMixer> mixGetGroupMixer(Pointer<MixGroup> group) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL MIX_SetTrackGroup(MIX_Track *track, MIX_Group *group)
 /// ```
+///
+/// See also:
+/// - [MIX_SetTrackGroup - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_SetTrackGroup)
+///
 /// {@category mixer}
 bool mixSetTrackGroup(Pointer<MixTrack> track, Pointer<MixGroup> group) {
   final mixSetTrackGroupLookupFunction = _libMixer
@@ -3698,6 +4024,10 @@ bool mixSetTrackGroup(Pointer<MixTrack> track, Pointer<MixGroup> group) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL MIX_SetTrackStoppedCallback(MIX_Track *track, MIX_TrackStoppedCallback cb, void *userdata)
 /// ```
+///
+/// See also:
+/// - [MIX_SetTrackStoppedCallback - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_SetTrackStoppedCallback)
+///
 /// {@category mixer}
 bool mixSetTrackStoppedCallback(
   Pointer<MixTrack> track,
@@ -3753,6 +4083,10 @@ bool mixSetTrackStoppedCallback(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL MIX_SetTrackRawCallback(MIX_Track *track, MIX_TrackMixCallback cb, void *userdata)
 /// ```
+///
+/// See also:
+/// - [MIX_SetTrackRawCallback - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_SetTrackRawCallback)
+///
 /// {@category mixer}
 bool mixSetTrackRawCallback(
   Pointer<MixTrack> track,
@@ -3811,6 +4145,10 @@ bool mixSetTrackRawCallback(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL MIX_SetTrackCookedCallback(MIX_Track *track, MIX_TrackMixCallback cb, void *userdata)
 /// ```
+///
+/// See also:
+/// - [MIX_SetTrackCookedCallback - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_SetTrackCookedCallback)
+///
 /// {@category mixer}
 bool mixSetTrackCookedCallback(
   Pointer<MixTrack> track,
@@ -3863,6 +4201,10 @@ bool mixSetTrackCookedCallback(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL MIX_SetGroupPostMixCallback(MIX_Group *group, MIX_GroupMixCallback cb, void *userdata)
 /// ```
+///
+/// See also:
+/// - [MIX_SetGroupPostMixCallback - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_SetGroupPostMixCallback)
+///
 /// {@category mixer}
 bool mixSetGroupPostMixCallback(
   Pointer<MixGroup> group,
@@ -3912,6 +4254,10 @@ bool mixSetGroupPostMixCallback(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL MIX_SetPostMixCallback(MIX_Mixer *mixer, MIX_PostMixCallback cb, void *userdata)
 /// ```
+///
+/// See also:
+/// - [MIX_SetPostMixCallback - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_SetPostMixCallback)
+///
 /// {@category mixer}
 bool mixSetPostMixCallback(
   Pointer<MixMixer> mixer,
@@ -3990,6 +4336,10 @@ bool mixSetPostMixCallback(
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL MIX_Generate(MIX_Mixer *mixer, void *buffer, int buflen)
 /// ```
+///
+/// See also:
+/// - [MIX_Generate - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_Generate)
+///
 /// {@category mixer}
 int mixGenerate(Pointer<MixMixer> mixer, Pointer<Void> buffer, int buflen) {
   final mixGenerateLookupFunction = _libMixer
@@ -4042,6 +4392,10 @@ int mixGenerate(Pointer<MixMixer> mixer, Pointer<Void> buffer, int buflen) {
 /// ```c
 /// extern SDL_DECLSPEC MIX_AudioDecoder * SDLCALL MIX_CreateAudioDecoder(const char *path, SDL_PropertiesID props)
 /// ```
+///
+/// See also:
+/// - [MIX_CreateAudioDecoder - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_CreateAudioDecoder)
+///
 /// {@category mixer}
 Pointer<MixAudioDecoder> mixCreateAudioDecoder(String? path, int props) {
   final mixCreateAudioDecoderLookupFunction = _libMixer
@@ -4095,6 +4449,10 @@ Pointer<MixAudioDecoder> mixCreateAudioDecoder(String? path, int props) {
 /// ```c
 /// extern SDL_DECLSPEC MIX_AudioDecoder * SDLCALL MIX_CreateAudioDecoder_IO(SDL_IOStream *io, bool closeio, SDL_PropertiesID props)
 /// ```
+///
+/// See also:
+/// - [MIX_CreateAudioDecoder_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_CreateAudioDecoder_IO)
+///
 /// {@category mixer}
 Pointer<MixAudioDecoder> mixCreateAudioDecoderIo(
   Pointer<SdlIoStream> io,
@@ -4131,6 +4489,10 @@ Pointer<MixAudioDecoder> mixCreateAudioDecoderIo(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL MIX_DestroyAudioDecoder(MIX_AudioDecoder *audiodecoder)
 /// ```
+///
+/// See also:
+/// - [MIX_DestroyAudioDecoder - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_DestroyAudioDecoder)
+///
 /// {@category mixer}
 void mixDestroyAudioDecoder(Pointer<MixAudioDecoder> audiodecoder) {
   final mixDestroyAudioDecoderLookupFunction = _libMixer
@@ -4167,6 +4529,10 @@ void mixDestroyAudioDecoder(Pointer<MixAudioDecoder> audiodecoder) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_PropertiesID SDLCALL MIX_GetAudioDecoderProperties(MIX_AudioDecoder *audiodecoder)
 /// ```
+///
+/// See also:
+/// - [MIX_GetAudioDecoderProperties - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_GetAudioDecoderProperties)
+///
 /// {@category mixer}
 int mixGetAudioDecoderProperties(Pointer<MixAudioDecoder> audiodecoder) {
   final mixGetAudioDecoderPropertiesLookupFunction = _libMixer
@@ -4197,6 +4563,10 @@ int mixGetAudioDecoderProperties(Pointer<MixAudioDecoder> audiodecoder) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL MIX_GetAudioDecoderFormat(MIX_AudioDecoder *audiodecoder, SDL_AudioSpec *spec)
 /// ```
+///
+/// See also:
+/// - [MIX_GetAudioDecoderFormat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_GetAudioDecoderFormat)
+///
 /// {@category mixer}
 bool mixGetAudioDecoderFormat(
   Pointer<MixAudioDecoder> audiodecoder,
@@ -4241,6 +4611,10 @@ bool mixGetAudioDecoderFormat(
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL MIX_DecodeAudio(MIX_AudioDecoder *audiodecoder, void *buffer, int buflen, const SDL_AudioSpec *spec)
 /// ```
+///
+/// See also:
+/// - [MIX_DecodeAudio - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_DecodeAudio)
+///
 /// {@category mixer}
 int mixDecodeAudio(
   Pointer<MixAudioDecoder> audiodecoder,

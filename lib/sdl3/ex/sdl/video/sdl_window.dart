@@ -94,6 +94,10 @@ extension SdlWindowEx on SdlWindow {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Window * SDLCALL SDL_CreateWindow(const char *title, int w, int h, SDL_WindowFlags flags)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_CreateWindow - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CreateWindow)
+  ///
   /// {@category video}
   static Pointer<SdlWindow> create({
     required String title,
@@ -104,9 +108,293 @@ extension SdlWindowEx on SdlWindow {
 }
 
 extension SdlWindowPointerEx on Pointer<SdlWindow> {
-  // lib_sdl_video.dart
+  ///
+  /// Get the display associated with a window.
+  ///
+  /// \param window the window to query.
+  /// \returns the instance ID of the display containing the center of the window
+  /// on success or 0 on failure; call SDL_GetError() for more
+  /// information.
+  ///
+  /// \threadsafety This function should only be called on the main thread.
+  ///
+  /// \since This function is available since SDL 3.2.0.
+  ///
+  /// \sa SDL_GetDisplayBounds
+  /// \sa SDL_GetDisplays
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC SDL_DisplayID SDLCALL SDL_GetDisplayForWindow(SDL_Window *window)
+  /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetDisplayForWindow - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetDisplayForWindow)
+  ///
+  /// {@category video}
+  int getDisplayFor() => sdlGetDisplayForWindow(this);
 
-  // sdlCreateWindowFrom
+  ///
+  /// Get the pixel density of a window.
+  ///
+  /// This is a ratio of pixel size to window size. For example, if the window is
+  /// 1920x1080 and it has a high density back buffer of 3840x2160 pixels, it
+  /// would have a pixel density of 2.0.
+  ///
+  /// \param window the window to query.
+  /// \returns the pixel density or 0.0f on failure; call SDL_GetError() for more
+  /// information.
+  ///
+  /// \threadsafety This function should only be called on the main thread.
+  ///
+  /// \since This function is available since SDL 3.2.0.
+  ///
+  /// \sa SDL_GetWindowDisplayScale
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC float SDLCALL SDL_GetWindowPixelDensity(SDL_Window *window)
+  /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetWindowPixelDensity - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetWindowPixelDensity)
+  ///
+  /// {@category video}
+  double getPixelDensity() => sdlGetWindowPixelDensity(this);
+
+  ///
+  /// Get the content display scale relative to a window's pixel size.
+  ///
+  /// This is a combination of the window pixel density and the display content
+  /// scale, and is the expected scale for displaying content in this window. For
+  /// example, if a 3840x2160 window had a display scale of 2.0, the user expects
+  /// the content to take twice as many pixels and be the same physical size as
+  /// if it were being displayed in a 1920x1080 window with a display scale of
+  /// 1.0.
+  ///
+  /// Conceptually this value corresponds to the scale display setting, and is
+  /// updated when that setting is changed, or the window moves to a display with
+  /// a different scale setting.
+  ///
+  /// \param window the window to query.
+  /// \returns the display scale, or 0.0f on failure; call SDL_GetError() for
+  /// more information.
+  ///
+  /// \threadsafety This function should only be called on the main thread.
+  ///
+  /// \since This function is available since SDL 3.2.0.
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC float SDLCALL SDL_GetWindowDisplayScale(SDL_Window *window)
+  /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetWindowDisplayScale - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetWindowDisplayScale)
+  ///
+  /// {@category video}
+  double getDisplayScale() => sdlGetWindowDisplayScale(this);
+
+  ///
+  /// Set the display mode to use when a window is visible and fullscreen.
+  ///
+  /// This only affects the display mode used when the window is fullscreen. To
+  /// change the window size when the window is not fullscreen, use
+  /// SDL_SetWindowSize().
+  ///
+  /// If the window is currently in the fullscreen state, this request is
+  /// asynchronous on some windowing systems and the new mode dimensions may not
+  /// be applied immediately upon the return of this function. If an immediate
+  /// change is required, call SDL_SyncWindow() to block until the changes have
+  /// taken effect.
+  ///
+  /// When the new mode takes effect, an SDL_EVENT_WINDOW_RESIZED and/or an
+  /// SDL_EVENT_WINDOW_PIXEL_SIZE_CHANGED event will be emitted with the new mode
+  /// dimensions.
+  ///
+  /// \param window the window to affect.
+  /// \param mode a pointer to the display mode to use, which can be NULL for
+  /// borderless fullscreen desktop mode, or one of the fullscreen
+  /// modes returned by SDL_GetFullscreenDisplayModes() to set an
+  /// exclusive fullscreen mode.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
+  ///
+  /// \threadsafety This function should only be called on the main thread.
+  ///
+  /// \since This function is available since SDL 3.2.0.
+  ///
+  /// \sa SDL_GetWindowFullscreenMode
+  /// \sa SDL_SetWindowFullscreen
+  /// \sa SDL_SyncWindow
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowFullscreenMode(SDL_Window *window, const SDL_DisplayMode *mode)
+  /// ```
+  ///
+  /// See also:
+  /// - [SDL_SetWindowFullscreenMode - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetWindowFullscreenMode)
+  ///
+  /// {@category video}
+  bool sdlSetWindowFullscreenMode(SdlxDisplayMode mode) =>
+      sdlxSetWindowFullscreenMode(this, mode);
+
+  ///
+  /// Query the display mode to use when a window is visible at fullscreen.
+  ///
+  /// \param window the window to query.
+  /// \returns a pointer to the exclusive fullscreen mode to use or NULL for
+  /// borderless fullscreen desktop mode.
+  ///
+  /// \threadsafety This function should only be called on the main thread.
+  ///
+  /// \since This function is available since SDL 3.2.0.
+  ///
+  /// \sa SDL_SetWindowFullscreenMode
+  /// \sa SDL_SetWindowFullscreen
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC const SDL_DisplayMode * SDLCALL SDL_GetWindowFullscreenMode(SDL_Window *window)
+  /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetWindowFullscreenMode - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetWindowFullscreenMode)
+  ///
+  /// {@category video}
+  SdlxDisplayMode? getFullscreenMode() => sdlxGetWindowFullscreenMode(this);
+
+  ///
+  /// Get the raw ICC profile data for the screen the window is currently on.
+  ///
+  /// \param window the window to query.
+  /// \param size the size of the ICC profile.
+  /// \returns the raw ICC profile data on success or NULL on failure; call
+  /// SDL_GetError() for more information. This should be freed with
+  /// SDL_free() when it is no longer needed.
+  ///
+  /// \threadsafety This function should only be called on the main thread.
+  ///
+  /// \since This function is available since SDL 3.2.0.
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC void * SDLCALL SDL_GetWindowICCProfile(SDL_Window *window, size_t *size)
+  /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetWindowICCProfile - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetWindowICCProfile)
+  ///
+  /// {@category video}
+  ({Pointer<Void> profile, int size})? getIccProfile() =>
+      sdlxGetWindowIccProfile(this);
+
+  ///
+  /// Get the pixel format associated with the window.
+  ///
+  /// \param window the window to query.
+  /// \returns the pixel format of the window on success or
+  /// SDL_PIXELFORMAT_UNKNOWN on failure; call SDL_GetError() for more
+  /// information.
+  ///
+  /// \threadsafety This function should only be called on the main thread.
+  ///
+  /// \since This function is available since SDL 3.2.0.
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC SDL_PixelFormat SDLCALL SDL_GetWindowPixelFormat(SDL_Window *window)
+  /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetWindowPixelFormat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetWindowPixelFormat)
+  ///
+  /// {@category video}
+  int getPixelFormat() => sdlGetWindowPixelFormat(this);
+
+  ///
+  /// Create a child popup window of the specified parent window.
+  ///
+  /// The window size is a request and may be different than expected based on
+  /// the desktop layout and window manager policies. Your application should be
+  /// prepared to handle a window of any size.
+  ///
+  /// The flags parameter **must** contain at least one of the following:
+  ///
+  /// - `SDL_WINDOW_TOOLTIP`: The popup window is a tooltip and will not pass any
+  /// input events.
+  /// - `SDL_WINDOW_POPUP_MENU`: The popup window is a popup menu. The topmost
+  /// popup menu will implicitly gain the keyboard focus.
+  ///
+  /// The following flags are not relevant to popup window creation and will be
+  /// ignored:
+  ///
+  /// - `SDL_WINDOW_MINIMIZED`
+  /// - `SDL_WINDOW_MAXIMIZED`
+  /// - `SDL_WINDOW_FULLSCREEN`
+  /// - `SDL_WINDOW_BORDERLESS`
+  ///
+  /// The following flags are incompatible with popup window creation and will
+  /// cause it to fail:
+  ///
+  /// - `SDL_WINDOW_UTILITY`
+  /// - `SDL_WINDOW_MODAL`
+  ///
+  /// The parent parameter **must** be non-null and a valid window. The parent of
+  /// a popup window can be either a regular, toplevel window, or another popup
+  /// window.
+  ///
+  /// Popup windows cannot be minimized, maximized, made fullscreen, raised,
+  /// flash, be made a modal window, be the parent of a toplevel window, or grab
+  /// the mouse and/or keyboard. Attempts to do so will fail.
+  ///
+  /// Popup windows implicitly do not have a border/decorations and do not appear
+  /// on the taskbar/dock or in lists of windows such as alt-tab menus.
+  ///
+  /// By default, popup window positions will automatically be constrained to
+  /// keep the entire window within display bounds. This can be overridden with
+  /// the `SDL_PROP_WINDOW_CREATE_CONSTRAIN_POPUP_BOOLEAN` property.
+  ///
+  /// By default, popup menus will automatically grab keyboard focus from the
+  /// parent when shown. This behavior can be overridden by setting the
+  /// `SDL_WINDOW_NOT_FOCUSABLE` flag, setting the
+  /// `SDL_PROP_WINDOW_CREATE_FOCUSABLE_BOOLEAN` property to false, or toggling
+  /// it after creation via the `SDL_SetWindowFocusable()` function.
+  ///
+  /// If a parent window is hidden or destroyed, any child popup windows will be
+  /// recursively hidden or destroyed as well. Child popup windows not explicitly
+  /// hidden will be restored when the parent is shown.
+  ///
+  /// \param parent the parent of the window, must not be NULL.
+  /// \param offset_x the x position of the popup window relative to the origin
+  /// of the parent.
+  /// \param offset_y the y position of the popup window relative to the origin
+  /// of the parent window.
+  /// \param w the width of the window.
+  /// \param h the height of the window.
+  /// \param flags SDL_WINDOW_TOOLTIP or SDL_WINDOW_POPUP_MENU, and zero or more
+  /// additional SDL_WindowFlags OR'd together.
+  /// \returns the window that was created or NULL on failure; call
+  /// SDL_GetError() for more information.
+  ///
+  /// \threadsafety This function should only be called on the main thread.
+  ///
+  /// \since This function is available since SDL 3.2.0.
+  ///
+  /// \sa SDL_CreateWindow
+  /// \sa SDL_CreateWindowWithProperties
+  /// \sa SDL_DestroyWindow
+  /// \sa SDL_GetWindowParent
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC SDL_Window * SDLCALL SDL_CreatePopupWindow(SDL_Window *parent, int offset_x, int offset_y, int w, int h, SDL_WindowFlags flags)
+  /// ```
+  ///
+  /// See also:
+  /// - [SDL_CreatePopupWindow - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CreatePopupWindow)
+  ///
+  /// {@category video}
+  Pointer<SdlWindow> createPopupWindow(
+    int offsetX,
+    int offsetY,
+    int w,
+    int h,
+    int flags,
+  ) => sdlCreatePopupWindow(this, offsetX, offsetY, w, h, flags);
 
   ///
   /// Get the numeric ID of a window.
@@ -127,10 +415,191 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_WindowID SDLCALL SDL_GetWindowID(SDL_Window *window)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetWindowID - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetWindowID)
+  ///
   /// {@category video}
   int getId() => sdlGetWindowId(this);
 
-  // sdlGetWindowFromId
+  ///
+  /// Get parent of a window.
+  ///
+  /// \param window the window to query.
+  /// \returns the parent of the window on success or NULL if the window has no
+  /// parent.
+  ///
+  /// \threadsafety This function should only be called on the main thread.
+  ///
+  /// \since This function is available since SDL 3.2.0.
+  ///
+  /// \sa SDL_CreatePopupWindow
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC SDL_Window * SDLCALL SDL_GetWindowParent(SDL_Window *window)
+  /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetWindowParent - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetWindowParent)
+  ///
+  /// {@category video}
+  Pointer<SdlWindow> getParent() => sdlGetWindowParent(this);
+
+  ///
+  /// Get the properties associated with a window.
+  ///
+  /// The following read-only properties are provided by SDL:
+  ///
+  /// - `SDL_PROP_WINDOW_SHAPE_POINTER`: the surface associated with a shaped
+  /// window
+  /// - `SDL_PROP_WINDOW_HDR_ENABLED_BOOLEAN`: true if the window has HDR
+  /// headroom above the SDR white point. This property can change dynamically
+  /// when SDL_EVENT_WINDOW_HDR_STATE_CHANGED is sent.
+  /// - `SDL_PROP_WINDOW_SDR_WHITE_LEVEL_FLOAT`: the value of SDR white in the
+  /// SDL_COLORSPACE_SRGB_LINEAR colorspace. On Windows this corresponds to the
+  /// SDR white level in scRGB colorspace, and on Apple platforms this is
+  /// always 1.0 for EDR content. This property can change dynamically when
+  /// SDL_EVENT_WINDOW_HDR_STATE_CHANGED is sent.
+  /// - `SDL_PROP_WINDOW_HDR_HEADROOM_FLOAT`: the additional high dynamic range
+  /// that can be displayed, in terms of the SDR white point. When HDR is not
+  /// enabled, this will be 1.0. This property can change dynamically when
+  /// SDL_EVENT_WINDOW_HDR_STATE_CHANGED is sent.
+  ///
+  /// On Android:
+  ///
+  /// - `SDL_PROP_WINDOW_ANDROID_WINDOW_POINTER`: the ANativeWindow associated
+  /// with the window
+  /// - `SDL_PROP_WINDOW_ANDROID_SURFACE_POINTER`: the EGLSurface associated with
+  /// the window
+  ///
+  /// On iOS:
+  ///
+  /// - `SDL_PROP_WINDOW_UIKIT_WINDOW_POINTER`: the `(__unsafe_unretained)`
+  /// UIWindow associated with the window
+  /// - `SDL_PROP_WINDOW_UIKIT_METAL_VIEW_TAG_NUMBER`: the NSInteger tag
+  /// associated with metal views on the window
+  /// - `SDL_PROP_WINDOW_UIKIT_OPENGL_FRAMEBUFFER_NUMBER`: the OpenGL view's
+  /// framebuffer object. It must be bound when rendering to the screen using
+  /// OpenGL.
+  /// - `SDL_PROP_WINDOW_UIKIT_OPENGL_RENDERBUFFER_NUMBER`: the OpenGL view's
+  /// renderbuffer object. It must be bound when SDL_GL_SwapWindow is called.
+  /// - `SDL_PROP_WINDOW_UIKIT_OPENGL_RESOLVE_FRAMEBUFFER_NUMBER`: the OpenGL
+  /// view's resolve framebuffer, when MSAA is used.
+  ///
+  /// On KMS/DRM:
+  ///
+  /// - `SDL_PROP_WINDOW_KMSDRM_DEVICE_INDEX_NUMBER`: the device index associated
+  /// with the window (e.g. the X in /dev/dri/cardX)
+  /// - `SDL_PROP_WINDOW_KMSDRM_DRM_FD_NUMBER`: the DRM FD associated with the
+  /// window
+  /// - `SDL_PROP_WINDOW_KMSDRM_GBM_DEVICE_POINTER`: the GBM device associated
+  /// with the window
+  ///
+  /// On macOS:
+  ///
+  /// - `SDL_PROP_WINDOW_COCOA_WINDOW_POINTER`: the `(__unsafe_unretained)`
+  /// NSWindow associated with the window
+  /// - `SDL_PROP_WINDOW_COCOA_METAL_VIEW_TAG_NUMBER`: the NSInteger tag
+  /// associated with metal views on the window
+  ///
+  /// On OpenVR:
+  ///
+  /// - `SDL_PROP_WINDOW_OPENVR_OVERLAY_ID_NUMBER`: the OpenVR Overlay Handle ID
+  /// for the associated overlay window.
+  ///
+  /// On QNX:
+  ///
+  /// - `SDL_PROP_WINDOW_QNX_WINDOW_POINTER`: the screen_window_t associated with
+  /// the window.
+  /// - `SDL_PROP_WINDOW_QNX_SURFACE_POINTER`: the EGLSurface associated with the
+  /// window
+  ///
+  /// On Vivante:
+  ///
+  /// - `SDL_PROP_WINDOW_VIVANTE_DISPLAY_POINTER`: the EGLNativeDisplayType
+  /// associated with the window
+  /// - `SDL_PROP_WINDOW_VIVANTE_WINDOW_POINTER`: the EGLNativeWindowType
+  /// associated with the window
+  /// - `SDL_PROP_WINDOW_VIVANTE_SURFACE_POINTER`: the EGLSurface associated with
+  /// the window
+  ///
+  /// On Windows:
+  ///
+  /// - `SDL_PROP_WINDOW_WIN32_HWND_POINTER`: the HWND associated with the window
+  /// - `SDL_PROP_WINDOW_WIN32_HDC_POINTER`: the HDC associated with the window
+  /// - `SDL_PROP_WINDOW_WIN32_INSTANCE_POINTER`: the HINSTANCE associated with
+  /// the window
+  ///
+  /// On Wayland:
+  ///
+  /// Note: The `xdg_*` window objects do not internally persist across window
+  /// show/hide calls. They will be null if the window is hidden and must be
+  /// queried each time it is shown.
+  ///
+  /// - `SDL_PROP_WINDOW_WAYLAND_DISPLAY_POINTER`: the wl_display associated with
+  /// the window
+  /// - `SDL_PROP_WINDOW_WAYLAND_SURFACE_POINTER`: the wl_surface associated with
+  /// the window
+  /// - `SDL_PROP_WINDOW_WAYLAND_VIEWPORT_POINTER`: the wp_viewport associated
+  /// with the window
+  /// - `SDL_PROP_WINDOW_WAYLAND_EGL_WINDOW_POINTER`: the wl_egl_window
+  /// associated with the window
+  /// - `SDL_PROP_WINDOW_WAYLAND_WINDOW_ID_STRING`: the window identification
+  /// string, initially set with
+  /// SDL_PROP_WINDOW_CREATE_WAYLAND_WINDOW_ID_STRING, and used as an
+  /// identifier for session management. Setting this to null or an empty
+  /// string ("") before hiding or destroying the window will cause any session
+  /// information associated with the window to be removed
+  /// - `SDL_PROP_WINDOW_WAYLAND_XDG_SURFACE_POINTER`: the xdg_surface associated
+  /// with the window
+  /// - `SDL_PROP_WINDOW_WAYLAND_XDG_TOPLEVEL_POINTER`: the xdg_toplevel role
+  /// associated with the window
+  /// - 'SDL_PROP_WINDOW_WAYLAND_XDG_TOPLEVEL_EXPORT_HANDLE_STRING': the export
+  /// handle associated with the window
+  /// - `SDL_PROP_WINDOW_WAYLAND_XDG_POPUP_POINTER`: the xdg_popup role
+  /// associated with the window
+  /// - `SDL_PROP_WINDOW_WAYLAND_XDG_POSITIONER_POINTER`: the xdg_positioner
+  /// associated with the window, in popup mode
+  ///
+  /// On X11:
+  ///
+  /// - `SDL_PROP_WINDOW_X11_DISPLAY_POINTER`: the X11 Display associated with
+  /// the window
+  /// - `SDL_PROP_WINDOW_X11_SCREEN_NUMBER`: the screen number associated with
+  /// the window
+  /// - `SDL_PROP_WINDOW_X11_WINDOW_NUMBER`: the X11 Window associated with the
+  /// window
+  ///
+  /// On Emscripten:
+  ///
+  /// - `SDL_PROP_WINDOW_EMSCRIPTEN_CANVAS_ID_STRING`: the id the canvas element
+  /// will have
+  /// - `SDL_PROP_WINDOW_EMSCRIPTEN_KEYBOARD_ELEMENT_STRING`: the keyboard
+  /// element that associates keyboard events to this window
+  ///
+  /// On visionOS:
+  ///
+  /// - `SDL_PROP_WINDOW_VISIONOS_SETTINGS_STRING`: the current settings of the
+  /// window in JSON format, or NULL if the window has standard UIKit behavior.
+  /// SDL_EVENT_WINDOW_SETTINGS_CHANGED is sent when this value changes.
+  ///
+  /// \param window the window to query.
+  /// \returns a valid property ID on success or 0 on failure; call
+  /// SDL_GetError() for more information.
+  ///
+  /// \threadsafety This function should only be called on the main thread.
+  ///
+  /// \since This function is available since SDL 3.2.0.
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC SDL_PropertiesID SDLCALL SDL_GetWindowProperties(SDL_Window *window)
+  /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetWindowProperties - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetWindowProperties)
+  ///
+  /// {@category video}
+  int getProperties() => sdlGetWindowProperties(this);
 
   ///
   /// Get the window flags.
@@ -154,6 +623,10 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_WindowFlags SDLCALL SDL_GetWindowFlags(SDL_Window *window)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetWindowFlags - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetWindowFlags)
+  ///
   /// {@category video}
   int getFlags() => sdlGetWindowFlags(this);
 
@@ -176,6 +649,10 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowTitle(SDL_Window *window, const char *title)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_SetWindowTitle - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetWindowTitle)
+  ///
   /// {@category video}
   bool setTitle(String title) => sdlSetWindowTitle(this, title);
 
@@ -195,6 +672,10 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetWindowTitle(SDL_Window *window)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetWindowTitle - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetWindowTitle)
+  ///
   /// {@category video}
   String? getTitle() => sdlGetWindowTitle(this);
 
@@ -226,6 +707,10 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowIcon(SDL_Window *window, SDL_Surface *icon)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_SetWindowIcon - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetWindowIcon)
+  ///
   /// {@category video}
   bool setIcon(Pointer<SdlSurface> icon) => sdlSetWindowIcon(this, icon);
 
@@ -271,6 +756,10 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowPosition(SDL_Window *window, int x, int y)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_SetWindowPosition - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetWindowPosition)
+  ///
   /// {@category video}
   bool setPosition(int x, int y) => sdlSetWindowPosition(this, x, y);
 
@@ -300,8 +789,12 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowPosition(SDL_Window *window, int *x, int *y)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetWindowPosition - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetWindowPosition)
+  ///
   /// {@category video}
-  bool getPosition(SdlxPoint position) => sdlxGetWindowPosition(this, position);
+  ({int x, int y})? getPosition() => sdlxGetWindowPosition(this);
 
   ///
   /// Request that the size of a window's client area be set.
@@ -341,6 +834,10 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowSize(SDL_Window *window, int w, int h)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_SetWindowSize - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetWindowSize)
+  ///
   /// {@category video}
   bool setSize(int w, int h) => sdlSetWindowSize(this, w, h);
 
@@ -369,8 +866,120 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowSize(SDL_Window *window, int *w, int *h)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetWindowSize - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetWindowSize)
+  ///
   /// {@category video}
-  bool getSize(SdlxPoint size) => sdlxGetWindowSize(this, size);
+  ({int w, int h})? getSize() => sdlxGetWindowSize(this);
+
+  ///
+  /// Get the safe area for this window.
+  ///
+  /// Some devices have portions of the screen which are partially obscured or
+  /// not interactive, possibly due to on-screen controls, curved edges, camera
+  /// notches, TV overscan, etc. This function provides the area of the window
+  /// which is safe to have interactable content. You should continue rendering
+  /// into the rest of the window, but it should not contain visually important
+  /// or interactable content.
+  ///
+  /// \param window the window to query.
+  /// \param rect a pointer filled in with the client area that is safe for
+  /// interactive content.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
+  ///
+  /// \threadsafety This function should only be called on the main thread.
+  ///
+  /// \since This function is available since SDL 3.2.0.
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowSafeArea(SDL_Window *window, SDL_Rect *rect)
+  /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetWindowSafeArea - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetWindowSafeArea)
+  ///
+  /// {@category video}
+  SdlxRect? getSafeArea() => sdlxGetWindowSafeArea(this);
+
+  ///
+  /// Request that the aspect ratio of a window's client area be set.
+  ///
+  /// The aspect ratio is the ratio of width divided by height, e.g. 2560x1600
+  /// would be 1.6. Larger aspect ratios are wider and smaller aspect ratios are
+  /// narrower.
+  ///
+  /// If, at the time of this request, the window in a fixed-size state, such as
+  /// maximized or fullscreen, the request will be deferred until the window
+  /// exits this state and becomes resizable again.
+  ///
+  /// On some windowing systems, this request is asynchronous and the new window
+  /// aspect ratio may not have have been applied immediately upon the return of
+  /// this function. If an immediate change is required, call SDL_SyncWindow() to
+  /// block until the changes have taken effect.
+  ///
+  /// When the window size changes, an SDL_EVENT_WINDOW_RESIZED event will be
+  /// emitted with the new window dimensions. Note that the new dimensions may
+  /// not match the exact aspect ratio requested, as some windowing systems can
+  /// restrict the window size in certain scenarios (e.g. constraining the size
+  /// of the content area to remain within the usable desktop bounds).
+  /// Additionally, as this is just a request, it can be denied by the windowing
+  /// system.
+  ///
+  /// \param window the window to change.
+  /// \param min_aspect the minimum aspect ratio of the window, or 0.0f for no
+  /// limit.
+  /// \param max_aspect the maximum aspect ratio of the window, or 0.0f for no
+  /// limit.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
+  ///
+  /// \threadsafety This function should only be called on the main thread.
+  ///
+  /// \since This function is available since SDL 3.2.0.
+  ///
+  /// \sa SDL_GetWindowAspectRatio
+  /// \sa SDL_SyncWindow
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowAspectRatio(SDL_Window *window, float min_aspect, float max_aspect)
+  /// ```
+  ///
+  /// See also:
+  /// - [SDL_SetWindowAspectRatio - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetWindowAspectRatio)
+  ///
+  /// {@category video}
+  bool setAspectRatio(double minAspect, double maxAspect) =>
+      sdlSetWindowAspectRatio(this, minAspect, maxAspect);
+
+  ///
+  /// Get the aspect ratio of a window's client area.
+  ///
+  /// \param window the window to query the width and height from.
+  /// \param min_aspect a pointer filled in with the minimum aspect ratio of the
+  /// window, may be NULL.
+  /// \param max_aspect a pointer filled in with the maximum aspect ratio of the
+  /// window, may be NULL.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
+  ///
+  /// \threadsafety This function should only be called on the main thread.
+  ///
+  /// \since This function is available since SDL 3.2.0.
+  ///
+  /// \sa SDL_SetWindowAspectRatio
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowAspectRatio(SDL_Window *window, float *min_aspect, float *max_aspect)
+  /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetWindowAspectRatio - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetWindowAspectRatio)
+  ///
+  /// {@category video}
+  ({double minAspect, double maxAspect})? getAspectRatio() =>
+      sdlxGetWindowAspectRatio(this);
 
   ///
   /// Get the size of a window's borders (decorations) around the client area.
@@ -410,8 +1019,13 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowBordersSize(SDL_Window *window, int *top, int *left, int *bottom, int *right)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetWindowBordersSize - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetWindowBordersSize)
+  ///
   /// {@category video}
-  bool getBordersSize(SdlxRect rect) => sdlxGetWindowBordersSize(this, rect);
+  ({int top, int left, int bottom, int right})? getBordersSize() =>
+      sdlxGetWindowBordersSize(this);
 
   ///
   /// Get the size of a window's client area, in pixels.
@@ -434,8 +1048,12 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowSizeInPixels(SDL_Window *window, int *w, int *h)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetWindowSizeInPixels - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetWindowSizeInPixels)
+  ///
   /// {@category video}
-  bool getSizeInPixels(SdlxPoint size) => sdlxGetWindowSizeInPixels(this, size);
+  ({int w, int h})? getSizeInPixels() => sdlxGetWindowSizeInPixels(this);
 
   ///
   /// Set the minimum size of a window's client area.
@@ -456,6 +1074,10 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowMinimumSize(SDL_Window *window, int min_w, int min_h)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_SetWindowMinimumSize - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetWindowMinimumSize)
+  ///
   /// {@category video}
   bool setMinimumSize(int w, int h) => sdlSetWindowMinimumSize(this, w, h);
 
@@ -480,9 +1102,12 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowMinimumSize(SDL_Window *window, int *w, int *h)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetWindowMinimumSize - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetWindowMinimumSize)
+  ///
   /// {@category video}
-  bool getMinimumSize(SdlxPoint minSize) =>
-      sdlxGetWindowMinimumSize(this, minSize);
+  ({int w, int h})? getMinimumSize() => sdlxGetWindowMinimumSize(this);
 
   ///
   /// Set the maximum size of a window's client area.
@@ -503,6 +1128,10 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowMaximumSize(SDL_Window *window, int max_w, int max_h)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_SetWindowMaximumSize - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetWindowMaximumSize)
+  ///
   /// {@category video}
   bool setMaximumSize(int w, int h) => sdlSetWindowMaximumSize(this, w, h);
 
@@ -527,9 +1156,12 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowMaximumSize(SDL_Window *window, int *w, int *h)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetWindowMaximumSize - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetWindowMaximumSize)
+  ///
   /// {@category video}
-  bool getMaximumSize(SdlxPoint maxSize) =>
-      sdlxGetWindowMaximumSize(this, maxSize);
+  ({int w, int h})? getMaximumSize() => sdlxGetWindowMaximumSize(this);
 
   ///
   /// Set the border state of a window.
@@ -554,6 +1186,10 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowBordered(SDL_Window *window, bool bordered)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_SetWindowBordered - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetWindowBordered)
+  ///
   /// {@category video}
   bool setBordered(bool bordered) => sdlSetWindowBordered(this, bordered);
 
@@ -580,6 +1216,10 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowResizable(SDL_Window *window, bool resizable)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_SetWindowResizable - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetWindowResizable)
+  ///
   /// {@category video}
   bool setResizable(bool resizable) => sdlSetWindowResizable(this, resizable);
 
@@ -603,8 +1243,51 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowAlwaysOnTop(SDL_Window *window, bool on_top)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_SetWindowAlwaysOnTop - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetWindowAlwaysOnTop)
+  ///
   /// {@category video}
   bool setAlwaysOnTop(bool onTop) => sdlSetWindowAlwaysOnTop(this, onTop);
+
+  ///
+  /// Set the window to fill the current document space (Emscripten only).
+  ///
+  /// This will add or remove the window's `SDL_WINDOW_FILL_DOCUMENT` flag.
+  ///
+  /// Currently this flag only applies to the Emscripten target.
+  ///
+  /// When enabled, the canvas element fills the entire document. Resize events
+  /// will be generated as the browser window is resized, as that will adjust the
+  /// canvas size as well. The canvas will cover anything else on the page,
+  /// including any controls provided by Emscripten in its generated HTML file
+  /// (in fact, any elements on the page that aren't the canvas will be moved
+  /// into a hidden `div` element).
+  ///
+  /// Often times this is desirable for a browser-based game, but it means
+  /// several things that we expect of an SDL window on other platforms might not
+  /// work as expected, such as minimum window sizes and aspect ratios.
+  ///
+  /// \param window the window of which to change the fill-document state.
+  /// \param fill true to set the window to fill the document, false to disable.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
+  ///
+  /// \threadsafety This function should only be called on the main thread.
+  ///
+  /// \since This function is available since SDL 3.4.0.
+  ///
+  /// \sa SDL_GetWindowFlags
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowFillDocument(SDL_Window *window, bool fill)
+  /// ```
+  ///
+  /// See also:
+  /// - [SDL_SetWindowFillDocument - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetWindowFillDocument)
+  ///
+  /// {@category video}
+  bool setFillDocument(bool fill) => sdlSetWindowFillDocument(this, fill);
 
   ///
   /// Show a window.
@@ -623,6 +1306,10 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_ShowWindow(SDL_Window *window)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_ShowWindow - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ShowWindow)
+  ///
   /// {@category video}
   bool show() => sdlShowWindow(this);
 
@@ -643,6 +1330,10 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_HideWindow(SDL_Window *window)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_HideWindow - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_HideWindow)
+  ///
   /// {@category video}
   bool hide() => sdlHideWindow(this);
 
@@ -667,6 +1358,10 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_RaiseWindow(SDL_Window *window)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_RaiseWindow - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RaiseWindow)
+  ///
   /// {@category video}
   bool raise() => sdlRaiseWindow(this);
 
@@ -705,6 +1400,10 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_MaximizeWindow(SDL_Window *window)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_MaximizeWindow - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_MaximizeWindow)
+  ///
   /// {@category video}
   bool maximize() => sdlMaximizeWindow(this);
 
@@ -738,6 +1437,10 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_MinimizeWindow(SDL_Window *window)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_MinimizeWindow - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_MinimizeWindow)
+  ///
   /// {@category video}
   bool minimize() => sdlMinimizeWindow(this);
 
@@ -772,8 +1475,115 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_RestoreWindow(SDL_Window *window)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_RestoreWindow - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RestoreWindow)
+  ///
   /// {@category video}
   bool restore() => sdlRestoreWindow(this);
+
+  ///
+  /// Request that the window's fullscreen state be changed.
+  ///
+  /// By default a window in fullscreen state uses borderless fullscreen desktop
+  /// mode, but a specific exclusive display mode can be set using
+  /// SDL_SetWindowFullscreenMode().
+  ///
+  /// On some windowing systems this request is asynchronous and the new
+  /// fullscreen state may not have have been applied immediately upon the return
+  /// of this function. If an immediate change is required, call SDL_SyncWindow()
+  /// to block until the changes have taken effect.
+  ///
+  /// When the window state changes, an SDL_EVENT_WINDOW_ENTER_FULLSCREEN or
+  /// SDL_EVENT_WINDOW_LEAVE_FULLSCREEN event will be emitted. Note that, as this
+  /// is just a request, it can be denied by the windowing system.
+  ///
+  /// \param window the window to change.
+  /// \param fullscreen true for fullscreen mode, false for windowed mode.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
+  ///
+  /// \threadsafety This function should only be called on the main thread.
+  ///
+  /// \since This function is available since SDL 3.2.0.
+  ///
+  /// \sa SDL_GetWindowFullscreenMode
+  /// \sa SDL_SetWindowFullscreenMode
+  /// \sa SDL_SyncWindow
+  /// \sa SDL_WINDOW_FULLSCREEN
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowFullscreen(SDL_Window *window, bool fullscreen)
+  /// ```
+  ///
+  /// See also:
+  /// - [SDL_SetWindowFullscreen - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetWindowFullscreen)
+  ///
+  /// {@category video}
+  bool setFullscreen(bool fullscreen) =>
+      sdlSetWindowFullscreen(this, fullscreen);
+
+  ///
+  /// Block until any pending window state is finalized.
+  ///
+  /// On asynchronous windowing systems, this acts as a synchronization barrier
+  /// for pending window state. It will attempt to wait until any pending window
+  /// state has been applied and is guaranteed to return within finite time. Note
+  /// that for how long it can potentially block depends on the underlying window
+  /// system, as window state changes may involve somewhat lengthy animations
+  /// that must complete before the window is in its final requested state.
+  ///
+  /// On windowing systems where changes are immediate, this does nothing.
+  ///
+  /// \param window the window for which to wait for the pending state to be
+  /// applied.
+  /// \returns true on success or false if the operation timed out before the
+  /// window was in the requested state.
+  ///
+  /// \threadsafety This function should only be called on the main thread.
+  ///
+  /// \since This function is available since SDL 3.2.0.
+  ///
+  /// \sa SDL_SetWindowSize
+  /// \sa SDL_SetWindowPosition
+  /// \sa SDL_SetWindowFullscreen
+  /// \sa SDL_MinimizeWindow
+  /// \sa SDL_MaximizeWindow
+  /// \sa SDL_RestoreWindow
+  /// \sa SDL_HINT_VIDEO_SYNC_WINDOW_OPERATIONS
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_SyncWindow(SDL_Window *window)
+  /// ```
+  ///
+  /// See also:
+  /// - [SDL_SyncWindow - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SyncWindow)
+  ///
+  /// {@category video}
+  bool sync() => sdlSyncWindow(this);
+
+  ///
+  /// Return whether the window has a surface associated with it.
+  ///
+  /// \param window the window to query.
+  /// \returns true if there is a surface associated with the window, or false
+  /// otherwise.
+  ///
+  /// \threadsafety This function should only be called on the main thread.
+  ///
+  /// \since This function is available since SDL 3.2.0.
+  ///
+  /// \sa SDL_GetWindowSurface
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_WindowHasSurface(SDL_Window *window)
+  /// ```
+  ///
+  /// See also:
+  /// - [SDL_WindowHasSurface - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_WindowHasSurface)
+  ///
+  /// {@category video}
+  bool hasSurface() => sdlWindowHasSurface(this);
 
   ///
   /// Get the SDL surface associated with the window.
@@ -805,8 +1615,71 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Surface * SDLCALL SDL_GetWindowSurface(SDL_Window *window)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetWindowSurface - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetWindowSurface)
+  ///
   /// {@category video}
   Pointer<SdlSurface> getSurface() => sdlGetWindowSurface(this);
+
+  ///
+  /// Toggle VSync for the window surface.
+  ///
+  /// When a window surface is created, vsync defaults to
+  /// SDL_WINDOW_SURFACE_VSYNC_DISABLED.
+  ///
+  /// The `vsync` parameter can be 1 to synchronize present with every vertical
+  /// refresh, 2 to synchronize present with every second vertical refresh, etc.,
+  /// SDL_WINDOW_SURFACE_VSYNC_ADAPTIVE for late swap tearing (adaptive vsync),
+  /// or SDL_WINDOW_SURFACE_VSYNC_DISABLED to disable. Not every value is
+  /// supported by every driver, so you should check the return value to see
+  /// whether the requested setting is supported.
+  ///
+  /// \param window the window.
+  /// \param vsync the vertical refresh sync interval.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
+  ///
+  /// \threadsafety This function should only be called on the main thread.
+  ///
+  /// \since This function is available since SDL 3.2.0.
+  ///
+  /// \sa SDL_GetWindowSurfaceVSync
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowSurfaceVSync(SDL_Window *window, int vsync)
+  /// ```
+  ///
+  /// See also:
+  /// - [SDL_SetWindowSurfaceVSync - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetWindowSurfaceVSync)
+  ///
+  /// {@category video}
+  bool setSurfaceVSync(int vsync) => sdlSetWindowSurfaceVSync(this, vsync);
+
+  ///
+  /// Get VSync for the window surface.
+  ///
+  /// \param window the window to query.
+  /// \param vsync an int filled with the current vertical refresh sync interval.
+  /// See SDL_SetWindowSurfaceVSync() for the meaning of the value.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
+  ///
+  /// \threadsafety This function should only be called on the main thread.
+  ///
+  /// \since This function is available since SDL 3.2.0.
+  ///
+  /// \sa SDL_SetWindowSurfaceVSync
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowSurfaceVSync(SDL_Window *window, int *vsync)
+  /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetWindowSurfaceVSync - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetWindowSurfaceVSync)
+  ///
+  /// {@category video}
+  int? getSurfaceVSync() => sdlxGetWindowSurfaceVSync(this);
 
   ///
   /// Copy the window surface to the screen.
@@ -830,6 +1703,10 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_UpdateWindowSurface(SDL_Window *window)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_UpdateWindowSurface - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_UpdateWindowSurface)
+  ///
   /// {@category video}
   bool updateSurface() => sdlUpdateWindowSurface(this);
 
@@ -863,9 +1740,37 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_UpdateWindowSurfaceRects(SDL_Window *window, const SDL_Rect *rects, int numrects)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_UpdateWindowSurfaceRects - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_UpdateWindowSurfaceRects)
+  ///
   /// {@category video}
   bool updateSurfaceRects(List<SdlxRect> rects) =>
       sdlxUpdateWindowSurfaceRects(this, rects);
+
+  ///
+  /// Destroy the surface associated with the window.
+  ///
+  /// \param window the window to update.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
+  ///
+  /// \threadsafety This function should only be called on the main thread.
+  ///
+  /// \since This function is available since SDL 3.2.0.
+  ///
+  /// \sa SDL_GetWindowSurface
+  /// \sa SDL_WindowHasSurface
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_DestroyWindowSurface(SDL_Window *window)
+  /// ```
+  ///
+  /// See also:
+  /// - [SDL_DestroyWindowSurface - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_DestroyWindowSurface)
+  ///
+  /// {@category video}
+  bool destroySurface() => sdlDestroyWindowSurface(this);
 
   ///
   /// Set a window's keyboard grab mode.
@@ -901,6 +1806,10 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowKeyboardGrab(SDL_Window *window, bool grabbed)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_SetWindowKeyboardGrab - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetWindowKeyboardGrab)
+  ///
   /// {@category video}
   bool setKeyboardGrab(bool grabbed) => sdlSetWindowKeyboardGrab(this, grabbed);
 
@@ -925,6 +1834,10 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowMouseGrab(SDL_Window *window, bool grabbed)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_SetWindowMouseGrab - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetWindowMouseGrab)
+  ///
   /// {@category video}
   bool setMouseGrab(bool grabbed) => sdlSetWindowMouseGrab(this, grabbed);
 
@@ -943,6 +1856,10 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowKeyboardGrab(SDL_Window *window)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetWindowKeyboardGrab - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetWindowKeyboardGrab)
+  ///
   /// {@category video}
   bool getKeyboardGrab() => sdlGetWindowKeyboardGrab(this);
 
@@ -964,6 +1881,10 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowMouseGrab(SDL_Window *window)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetWindowMouseGrab - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetWindowMouseGrab)
+  ///
   /// {@category video}
   bool getMouseGrab() => sdlGetWindowMouseGrab(this);
 
@@ -992,6 +1913,10 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowMouseRect(SDL_Window *window, const SDL_Rect *rect)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_SetWindowMouseRect - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetWindowMouseRect)
+  ///
   /// {@category video}
   bool setMouseRect(SdlxRect rect) => sdlxSetWindowMouseRect(this, rect);
 
@@ -1013,6 +1938,10 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC const SDL_Rect * SDLCALL SDL_GetWindowMouseRect(SDL_Window *window)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetWindowMouseRect - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetWindowMouseRect)
+  ///
   /// {@category video}
   SdlxRect? getMouseRect() => sdlxGetWindowMouseRect(this);
 
@@ -1038,6 +1967,10 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowOpacity(SDL_Window *window, float opacity)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_SetWindowOpacity - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetWindowOpacity)
+  ///
   /// {@category video}
   bool setOpacity(double opacity) => sdlSetWindowOpacity(this, opacity);
 
@@ -1060,6 +1993,10 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC float SDLCALL SDL_GetWindowOpacity(SDL_Window *window)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetWindowOpacity - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetWindowOpacity)
+  ///
   /// {@category video}
   double getOpacity() => sdlGetWindowOpacity(this);
 
@@ -1098,6 +2035,10 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowParent(SDL_Window *window, SDL_Window *parent)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_SetWindowParent - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetWindowParent)
+  ///
   /// {@category video}
   bool setParent(Pointer<SdlWindow> parent) => sdlSetWindowParent(this, parent);
 
@@ -1122,6 +2063,10 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowModal(SDL_Window *window, bool modal)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_SetWindowModal - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetWindowModal)
+  ///
   /// {@category video}
   bool setModal(bool modal) => sdlSetWindowModal(this, modal);
 
@@ -1140,6 +2085,10 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowFocusable(SDL_Window *window, bool focusable)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_SetWindowFocusable - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetWindowFocusable)
+  ///
   /// {@category video}
   bool setFocasable(bool focusable) => sdlSetWindowFocusable(this, focusable);
 
@@ -1169,6 +2118,10 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_ShowWindowSystemMenu(SDL_Window *window, int x, int y)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_ShowWindowSystemMenu - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ShowWindowSystemMenu)
+  ///
   /// {@category video}
   bool showSystemMenu(int x, int y) => sdlShowWindowSystemMenu(this, x, y);
 
@@ -1220,11 +2173,51 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowHitTest(SDL_Window *window, SDL_HitTest callback, void *callback_data)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_SetWindowHitTest - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetWindowHitTest)
+  ///
   /// {@category video}
   bool setHitTest(
     Pointer<NativeFunction<SdlHitTest>> callback,
     Pointer<Void> callbackData,
   ) => sdlSetWindowHitTest(this, callback, callbackData);
+
+  ///
+  /// Set the shape of a transparent window.
+  ///
+  /// This sets the alpha channel of a transparent window and any fully
+  /// transparent areas are also transparent to mouse clicks. If you are using
+  /// something besides the SDL render API, then you are responsible for drawing
+  /// the alpha channel of the window to match the shape alpha channel to get
+  /// consistent cross-platform results.
+  ///
+  /// The shape is copied inside this function, so you can free it afterwards. If
+  /// your shape surface changes, you should call SDL_SetWindowShape() again to
+  /// update the window. This is an expensive operation, so should be done
+  /// sparingly.
+  ///
+  /// The window must have been created with the SDL_WINDOW_TRANSPARENT flag.
+  ///
+  /// \param window the window.
+  /// \param shape the surface representing the shape of the window, or NULL to
+  /// remove any current shape.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
+  ///
+  /// \threadsafety This function should only be called on the main thread.
+  ///
+  /// \since This function is available since SDL 3.2.0.
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowShape(SDL_Window *window, SDL_Surface *shape)
+  /// ```
+  ///
+  /// See also:
+  /// - [SDL_SetWindowShape - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetWindowShape)
+  ///
+  /// {@category video}
+  bool setShape(Pointer<SdlSurface> shape) => sdlSetWindowShape(this, shape);
 
   ///
   /// Request a window to demand attention from the user.
@@ -1241,8 +2234,100 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_FlashWindow(SDL_Window *window, SDL_FlashOperation operation)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_FlashWindow - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_FlashWindow)
+  ///
   /// {@category video}
   bool flash(int operation) => sdlFlashWindow(this, operation);
+
+  ///
+  /// Sets the state of the progress bar for the given windowâs taskbar icon.
+  ///
+  /// \param window the window whose progress state is to be modified.
+  /// \param state the progress state. `SDL_PROGRESS_STATE_NONE` stops displaying
+  /// the progress bar.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
+  ///
+  /// \threadsafety This function should only be called on the main thread.
+  ///
+  /// \since This function is available since SDL 3.4.0.
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowProgressState(SDL_Window *window, SDL_ProgressState state)
+  /// ```
+  ///
+  /// See also:
+  /// - [SDL_SetWindowProgressState - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetWindowProgressState)
+  ///
+  /// {@category video}
+  bool setProgressState(int state) => sdlSetWindowProgressState(this, state);
+
+  ///
+  /// Get the state of the progress bar for the given windowâs taskbar icon.
+  ///
+  /// \param window the window to get the current progress state from.
+  /// \returns the progress state, or `SDL_PROGRESS_STATE_INVALID` on failure;
+  /// call SDL_GetError() for more information.
+  ///
+  /// \threadsafety This function should only be called on the main thread.
+  ///
+  /// \since This function is available since SDL 3.4.0.
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC SDL_ProgressState SDLCALL SDL_GetWindowProgressState(SDL_Window *window)
+  /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetWindowProgressState - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetWindowProgressState)
+  ///
+  /// {@category video}
+  int getProgressState() => sdlGetWindowProgressState(this);
+
+  ///
+  /// Sets the value of the progress bar for the given windowâs taskbar icon.
+  ///
+  /// \param window the window whose progress value is to be modified.
+  /// \param value the progress value in the range of [0.0f - 1.0f]. If the value
+  /// is outside the valid range, it gets clamped.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
+  ///
+  /// \threadsafety This function should only be called on the main thread.
+  ///
+  /// \since This function is available since SDL 3.4.0.
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowProgressValue(SDL_Window *window, float value)
+  /// ```
+  ///
+  /// See also:
+  /// - [SDL_SetWindowProgressValue - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetWindowProgressValue)
+  ///
+  /// {@category video}
+  bool setProgressValue(double value) => sdlSetWindowProgressValue(this, value);
+
+  ///
+  /// Get the value of the progress bar for the given windowâs taskbar icon.
+  ///
+  /// \param window the window to get the current progress value from.
+  /// \returns the progress value in the range of [0.0f - 1.0f], or -1.0f on
+  /// failure; call SDL_GetError() for more information.
+  ///
+  /// \threadsafety This function should only be called on the main thread.
+  ///
+  /// \since This function is available since SDL 3.4.0.
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC float SDLCALL SDL_GetWindowProgressValue(SDL_Window *window)
+  /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetWindowProgressValue - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetWindowProgressValue)
+  ///
+  /// {@category video}
+  double getProgressValue() => sdlGetWindowProgressValue(this);
 
   ///
   /// Destroy a window.
@@ -1267,6 +2352,10 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_DestroyWindow(SDL_Window *window)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_DestroyWindow - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_DestroyWindow)
+  ///
   /// {@category video}
   bool destroy() {
     if (this != nullptr) {
@@ -1307,29 +2396,60 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_GLContext SDLCALL SDL_GL_CreateContext(SDL_Window *window)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GL_CreateContext - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GL_CreateContext)
+  ///
   /// {@category video}
   Pointer<SdlGlContext> glCreateContext() => sdlGlCreateContext(this);
 
   ///
-  /// Get the display associated with a window.
+  /// Set up an OpenGL context for rendering into an OpenGL window.
   ///
-  /// \param window the window to query.
-  /// \returns the instance ID of the display containing the center of the window
-  /// on success or 0 on failure; call SDL_GetError() for more
+  /// The context must have been created with a compatible window.
+  ///
+  /// \param window the window to associate with the context.
+  /// \param context the OpenGL context to associate with the window.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
   /// information.
   ///
   /// \threadsafety This function should only be called on the main thread.
   ///
   /// \since This function is available since SDL 3.2.0.
   ///
-  /// \sa SDL_GetDisplayBounds
-  /// \sa SDL_GetDisplays
+  /// \sa SDL_GL_CreateContext
   ///
   /// ```c
-  /// extern SDL_DECLSPEC SDL_DisplayID SDLCALL SDL_GetDisplayForWindow(SDL_Window *window)
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_GL_MakeCurrent(SDL_Window *window, SDL_GLContext context)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GL_MakeCurrent - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GL_MakeCurrent)
+  ///
   /// {@category video}
-  int getDisplayFor() => sdlGetDisplayForWindow(this);
+  bool glMakeCurrent(Pointer<SdlGlContext> context) =>
+      sdlGlMakeCurrent(this, context);
+
+  ///
+  /// Get the EGL surface associated with the window.
+  ///
+  /// \param window the window to query.
+  /// \returns the EGLSurface pointer associated with the window, or NULL on
+  /// failure.
+  ///
+  /// \threadsafety This function should only be called on the main thread.
+  ///
+  /// \since This function is available since SDL 3.2.0.
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC SDL_EGLSurface SDLCALL SDL_EGL_GetWindowSurface(SDL_Window *window)
+  /// ```
+  ///
+  /// See also:
+  /// - [SDL_EGL_GetWindowSurface - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_EGL_GetWindowSurface)
+  ///
+  /// {@category video}
+  SdlEglSurface eglGetSurface() => sdlEglGetWindowSurface(this);
 
   ///
   /// Update a window with OpenGL rendering.
@@ -1352,65 +2472,10 @@ extension SdlWindowPointerEx on Pointer<SdlWindow> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GL_SwapWindow(SDL_Window *window)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GL_SwapWindow - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GL_SwapWindow)
+  ///
   /// {@category video}
   bool glSwap() => sdlGlSwapWindow(this);
-
-  // lib_sdl_renderer.dart
-
-  ///
-  /// Create a 2D rendering context for a window.
-  ///
-  /// If you want a specific renderer, you can specify its name here. A list of
-  /// available renderers can be obtained by calling SDL_GetRenderDriver()
-  /// multiple times, with indices from 0 to SDL_GetNumRenderDrivers()-1. If you
-  /// don't need a specific renderer, specify NULL and SDL will attempt to choose
-  /// the best option for you, based on what is available on the user's system.
-  ///
-  /// If `name` is a comma-separated list, SDL will try each name, in the order
-  /// listed, until one succeeds or all of them fail.
-  ///
-  /// By default the rendering size matches the window size in pixels, but you
-  /// can call SDL_SetRenderLogicalPresentation() to change the content size and
-  /// scaling options.
-  ///
-  /// \param window the window where rendering is displayed.
-  /// \param name the name of the rendering driver to initialize, or NULL to let
-  /// SDL choose one.
-  /// \returns a valid rendering context or NULL if there was an error; call
-  /// SDL_GetError() for more information.
-  ///
-  /// \threadsafety This function should only be called on the main thread.
-  ///
-  /// \since This function is available since SDL 3.2.0.
-  ///
-  /// \sa SDL_CreateRendererWithProperties
-  /// \sa SDL_CreateSoftwareRenderer
-  /// \sa SDL_DestroyRenderer
-  /// \sa SDL_GetNumRenderDrivers
-  /// \sa SDL_GetRenderDriver
-  /// \sa SDL_GetRendererName
-  ///
-  /// ```c
-  /// extern SDL_DECLSPEC SDL_Renderer * SDLCALL SDL_CreateRenderer(SDL_Window *window, const char *name)
-  /// ```
-  /// {@category render}
-  Pointer<SdlRenderer> createRenderer({String? name}) =>
-      sdlCreateRenderer(this, name);
-
-  ///
-  /// Get the renderer associated with a window.
-  ///
-  /// \param window the window to query.
-  /// \returns the rendering context on success or NULL on failure; call
-  /// SDL_GetError() for more information.
-  ///
-  /// \threadsafety It is safe to call this function from any thread.
-  ///
-  /// \since This function is available since SDL 3.2.0.
-  ///
-  /// ```c
-  /// extern SDL_DECLSPEC SDL_Renderer * SDLCALL SDL_GetRenderer(SDL_Window *window)
-  /// ```
-  /// {@category render}
-  Pointer<SdlRenderer> getRenderer() => sdlGetRenderer(this);
 }

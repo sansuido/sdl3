@@ -1,4 +1,5 @@
 import 'dart:ffi';
+
 import 'package:sdl3/sdl3.dart';
 
 int hitTest(
@@ -12,13 +13,13 @@ int hitTest(
     print('fullscreen');
     return SdlkHittest.normal;
   }
-  final size = SdlxPoint(0, 0);
-  if (!sdlxGetWindowSize(window, size)) {
+  final size = window.getSize();
+  if (size == null) {
     print('Failed to get window size');
     return SdlkHittest.normal;
   }
-  final w = size.x;
-  final h = size.y;
+  final w = size.w;
+  final h = size.h;
   final x = area.ref.x;
   final y = area.ref.y;
   const b = 8;
@@ -73,19 +74,19 @@ Future<void> main() async {
         }
       }
     }
-    final windowSize = SdlxPoint(0, 0);
-    if (sdlxGetWindowSize(window, windowSize)) {
+    final windowSize = window.getSize();
+    if (windowSize != null) {
       sdlSetRenderDrawColor(renderer, 30, 30, 30, 255);
       sdlRenderClear(renderer);
       sdlSetRenderDrawColor(renderer, 60, 60, 65, 255);
       final titleRect = SdlxFRect()
         ..x = 0
         ..y = 0
-        ..w = windowSize.x.toDouble()
+        ..w = windowSize.w.toDouble()
         ..h = 50;
       renderer.fillRect(titleRect);
       sdlSetRenderDrawColor(renderer, 100, 100, 100, 255);
-      sdlRenderLine(renderer, 0, 49, windowSize.x.toDouble(), 49);
+      sdlRenderLine(renderer, 0, 49, windowSize.w.toDouble(), 49);
       sdlRenderPresent(renderer);
     }
     await Future.delayed(const Duration(milliseconds: 16));

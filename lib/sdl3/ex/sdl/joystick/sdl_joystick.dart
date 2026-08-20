@@ -17,6 +17,10 @@ extension SdlJoystickEx on SdlJoystick {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_LockJoysticks(void) SDL_ACQUIRE(SDL_event_lock)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_LockJoysticks - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_LockJoysticks)
+  ///
   /// {@category joystick}
   static void locks() => sdlLockJoysticks();
 
@@ -36,6 +40,10 @@ extension SdlJoystickEx on SdlJoystick {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_TryLockJoysticks(void) SDL_TRY_ACQUIRE(true, SDL_event_lock)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_TryLockJoysticks - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_TryLockJoysticks)
+  ///
   /// {@category joystick}
   static bool tryLocks() => sdlTryLockJoysticks();
 
@@ -50,6 +58,10 @@ extension SdlJoystickEx on SdlJoystick {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_UnlockJoysticks(void) SDL_RELEASE(SDL_event_lock)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_UnlockJoysticks - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_UnlockJoysticks)
+  ///
   /// {@category joystick}
   static void unlocks() => sdlUnlockJoysticks();
 
@@ -67,6 +79,10 @@ extension SdlJoystickEx on SdlJoystick {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_HasJoystick(void)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_HasJoystick - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_HasJoystick)
+  ///
   /// {@category joystick}
   static bool has() => sdlHasJoystick();
 
@@ -89,6 +105,10 @@ extension SdlJoystickEx on SdlJoystick {
   /// ```c
   /// extern SDL_DECLSPEC SDL_JoystickID * SDLCALL SDL_GetJoysticks(int *count)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetJoysticks - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetJoysticks)
+  ///
   /// {@category joystick}
   static List<int> gets() => sdlxGetJoysticks();
 
@@ -111,6 +131,10 @@ extension SdlJoystickEx on SdlJoystick {
   /// ```c
   /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetJoystickNameForID(SDL_JoystickID instance_id)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetJoystickNameForID - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetJoystickNameForID)
+  ///
   /// {@category joystick}
   static String? getNameForId(int instanceId) =>
       sdlGetJoystickNameForId(instanceId);
@@ -134,6 +158,10 @@ extension SdlJoystickEx on SdlJoystick {
   /// ```c
   /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetJoystickPathForID(SDL_JoystickID instance_id)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetJoystickPathForID - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetJoystickPathForID)
+  ///
   /// {@category joystick}
   static String? getPathForId(int instanceId) =>
       sdlGetJoystickPathForId(instanceId);
@@ -156,6 +184,10 @@ extension SdlJoystickEx on SdlJoystick {
   /// ```c
   /// extern SDL_DECLSPEC int SDLCALL SDL_GetJoystickPlayerIndexForID(SDL_JoystickID instance_id)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetJoystickPlayerIndexForID - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetJoystickPlayerIndexForID)
+  ///
   /// {@category joystick}
   static int getPlayerIndexForId(int instanceId) =>
       sdlGetJoystickPlayerIndexForId(instanceId);
@@ -179,6 +211,10 @@ extension SdlJoystickEx on SdlJoystick {
   /// ```c
   /// extern SDL_DECLSPEC SDL_GUID SDLCALL SDL_GetJoystickGUIDForID(SDL_JoystickID instance_id)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetJoystickGUIDForID - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetJoystickGUIDForID)
+  ///
   /// {@category joystick}
   static SdlGuid getGuidForId(int instanceId) =>
       sdlGetJoystickGuidForId(instanceId);
@@ -203,6 +239,10 @@ extension SdlJoystickEx on SdlJoystick {
   /// ```c
   /// extern SDL_DECLSPEC Uint16 SDLCALL SDL_GetJoystickVendorForID(SDL_JoystickID instance_id)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetJoystickVendorForID - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetJoystickVendorForID)
+  ///
   /// {@category joystick}
   static int getVendorForId(int instanceId) =>
       sdlGetJoystickVendorForId(instanceId);
@@ -227,6 +267,10 @@ extension SdlJoystickEx on SdlJoystick {
   /// ```c
   /// extern SDL_DECLSPEC Uint16 SDLCALL SDL_GetJoystickProductForID(SDL_JoystickID instance_id)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetJoystickProductForID - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetJoystickProductForID)
+  ///
   /// {@category joystick}
   static int getPorductForId(int instanceId) =>
       sdlGetJoystickProductForId(instanceId);
@@ -251,6 +295,10 @@ extension SdlJoystickEx on SdlJoystick {
   /// ```c
   /// extern SDL_DECLSPEC Uint16 SDLCALL SDL_GetJoystickProductVersionForID(SDL_JoystickID instance_id)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetJoystickProductVersionForID - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetJoystickProductVersionForID)
+  ///
   /// {@category joystick}
   static int getProductVersionForId(int instanceId) =>
       sdlGetJoystickProductVersionForId(instanceId);
@@ -275,6 +323,10 @@ extension SdlJoystickEx on SdlJoystick {
   /// ```c
   /// extern SDL_DECLSPEC SDL_JoystickType SDLCALL SDL_GetJoystickTypeForID(SDL_JoystickID instance_id)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetJoystickTypeForID - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetJoystickTypeForID)
+  ///
   /// {@category joystick}
   static int getTypeForId(int instanceId) =>
       sdlGetJoystickTypeForId(instanceId);
@@ -298,6 +350,10 @@ extension SdlJoystickEx on SdlJoystick {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Joystick * SDLCALL SDL_OpenJoystick(SDL_JoystickID instance_id)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_OpenJoystick - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_OpenJoystick)
+  ///
   /// {@category joystick}
   static Pointer<SdlJoystick> open(int instanceId) =>
       sdlOpenJoystick(instanceId);
@@ -316,6 +372,10 @@ extension SdlJoystickEx on SdlJoystick {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Joystick * SDLCALL SDL_GetJoystickFromID(SDL_JoystickID instance_id)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetJoystickFromID - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetJoystickFromID)
+  ///
   /// {@category joystick}
   static Pointer<SdlJoystick> getFromId(int instanceId) =>
       sdlGetJoystickFromId(instanceId);
@@ -337,6 +397,10 @@ extension SdlJoystickEx on SdlJoystick {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Joystick * SDLCALL SDL_GetJoystickFromPlayerIndex(int player_index)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetJoystickFromPlayerIndex - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetJoystickFromPlayerIndex)
+  ///
   /// {@category joystick}
   static Pointer<SdlJoystick> getFromPlayerIndex(int playerIndex) =>
       sdlGetJoystickFromPlayerIndex(playerIndex);
@@ -375,6 +439,10 @@ extension SdlJoystickEx on SdlJoystick {
   /// ```c
   /// extern SDL_DECLSPEC SDL_JoystickID SDLCALL SDL_AttachVirtualJoystick(const SDL_VirtualJoystickDesc *desc)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_AttachVirtualJoystick - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_AttachVirtualJoystick)
+  ///
   /// {@category joystick}
   static int attachVirtual(SdlxVirtualJoystickDesc desc) =>
       sdlxAttachVirtualJoystick(desc);
@@ -396,6 +464,10 @@ extension SdlJoystickEx on SdlJoystick {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_DetachVirtualJoystick(SDL_JoystickID instance_id)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_DetachVirtualJoystick - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_DetachVirtualJoystick)
+  ///
   /// {@category joystick}
   static bool detachVirtual(int instanceId) =>
       sdlDetachVirtualJoystick(instanceId);
@@ -413,6 +485,10 @@ extension SdlJoystickEx on SdlJoystick {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_IsJoystickVirtual(SDL_JoystickID instance_id)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_IsJoystickVirtual - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_IsJoystickVirtual)
+  ///
   /// {@category joystick}
   static bool isVirtual(int instanceId) => sdlIsJoystickVirtual(instanceId);
 
@@ -438,6 +514,10 @@ extension SdlJoystickEx on SdlJoystick {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_GetJoystickGUIDInfo(SDL_GUID guid, Uint16 *vendor, Uint16 *product, Uint16 *version, Uint16 *crc16)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetJoystickGUIDInfo - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetJoystickGUIDInfo)
+  ///
   /// {@category joystick}
   static ({int crc16, int product, int vendor, int version}) getGuidInfo(
     SdlGuid guid,
@@ -462,6 +542,10 @@ extension SdlJoystickEx on SdlJoystick {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_SetJoystickEventsEnabled(bool enabled)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_SetJoystickEventsEnabled - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetJoystickEventsEnabled)
+  ///
   /// {@category joystick}
   static void setEventsEnabled(bool enabled) =>
       sdlSetJoystickEventsEnabled(enabled);
@@ -484,6 +568,10 @@ extension SdlJoystickEx on SdlJoystick {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_JoystickEventsEnabled(void)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_JoystickEventsEnabled - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_JoystickEventsEnabled)
+  ///
   /// {@category joystick}
   static bool eventsEnabled() => sdlJoystickEventsEnabled();
 
@@ -500,6 +588,10 @@ extension SdlJoystickEx on SdlJoystick {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_UpdateJoysticks(void)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_UpdateJoysticks - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_UpdateJoysticks)
+  ///
   /// {@category joystick}
   static void updates() => sdlUpdateJoysticks();
 }
@@ -537,6 +629,10 @@ extension SdlJoystickPointerEx on Pointer<SdlJoystick> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetJoystickVirtualAxis(SDL_Joystick *joystick, int axis, Sint16 value)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_SetJoystickVirtualAxis - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetJoystickVirtualAxis)
+  ///
   /// {@category joystick}
   bool setVirtualAxis(int axis, int value) =>
       sdlSetJoystickVirtualAxis(this, axis, value);
@@ -570,6 +666,10 @@ extension SdlJoystickPointerEx on Pointer<SdlJoystick> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetJoystickVirtualBall(SDL_Joystick *joystick, int ball, Sint16 xrel, Sint16 yrel)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_SetJoystickVirtualBall - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetJoystickVirtualBall)
+  ///
   /// {@category joystick}
   bool setVirtualBall(int ball, int xrel, int yrel) =>
       sdlSetJoystickVirtualBall(this, ball, xrel, yrel);
@@ -602,6 +702,10 @@ extension SdlJoystickPointerEx on Pointer<SdlJoystick> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetJoystickVirtualButton(SDL_Joystick *joystick, int button, bool down)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_SetJoystickVirtualButton - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetJoystickVirtualButton)
+  ///
   /// {@category joystick}
   bool setVirtualButton(int button, bool down) =>
       sdlSetJoystickVirtualButton(this, button, down);
@@ -634,6 +738,10 @@ extension SdlJoystickPointerEx on Pointer<SdlJoystick> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetJoystickVirtualHat(SDL_Joystick *joystick, int hat, Uint8 value)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_SetJoystickVirtualHat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetJoystickVirtualHat)
+  ///
   /// {@category joystick}
   bool setVirtualHat(int hat, int value) =>
       sdlSetJoystickVirtualHat(this, hat, value);
@@ -673,6 +781,10 @@ extension SdlJoystickPointerEx on Pointer<SdlJoystick> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetJoystickVirtualTouchpad(SDL_Joystick *joystick, int touchpad, int finger, bool down, float x, float y, float pressure)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_SetJoystickVirtualTouchpad - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetJoystickVirtualTouchpad)
+  ///
   /// {@category joystick}
   bool setVirtualTouchpad(
     int touchpad,
@@ -722,6 +834,10 @@ extension SdlJoystickPointerEx on Pointer<SdlJoystick> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SendJoystickVirtualSensorData(SDL_Joystick *joystick, SDL_SensorType type, Uint64 sensor_timestamp, const float *data, int num_values)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_SendJoystickVirtualSensorData - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SendJoystickVirtualSensorData)
+  ///
   /// {@category joystick}
   bool sendVirtualSensorData(
     int type,
@@ -756,6 +872,10 @@ extension SdlJoystickPointerEx on Pointer<SdlJoystick> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_PropertiesID SDLCALL SDL_GetJoystickProperties(SDL_Joystick *joystick)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetJoystickProperties - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetJoystickProperties)
+  ///
   /// {@category joystick}
   int getProperties() => sdlGetJoystickProperties(this);
 
@@ -775,6 +895,10 @@ extension SdlJoystickPointerEx on Pointer<SdlJoystick> {
   /// ```c
   /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetJoystickName(SDL_Joystick *joystick)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetJoystickName - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetJoystickName)
+  ///
   /// {@category joystick}
   String? getName() => sdlGetJoystickName(this);
 
@@ -794,6 +918,10 @@ extension SdlJoystickPointerEx on Pointer<SdlJoystick> {
   /// ```c
   /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetJoystickPath(SDL_Joystick *joystick)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetJoystickPath - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetJoystickPath)
+  ///
   /// {@category joystick}
   String? getPath() => sdlGetJoystickPath(this);
 
@@ -815,6 +943,10 @@ extension SdlJoystickPointerEx on Pointer<SdlJoystick> {
   /// ```c
   /// extern SDL_DECLSPEC int SDLCALL SDL_GetJoystickPlayerIndex(SDL_Joystick *joystick)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetJoystickPlayerIndex - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetJoystickPlayerIndex)
+  ///
   /// {@category joystick}
   int getPlayerIndex() => sdlGetJoystickPlayerIndex(this);
 
@@ -836,6 +968,10 @@ extension SdlJoystickPointerEx on Pointer<SdlJoystick> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetJoystickPlayerIndex(SDL_Joystick *joystick, int player_index)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_SetJoystickPlayerIndex - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetJoystickPlayerIndex)
+  ///
   /// {@category joystick}
   bool setPlayerIndex(int playerIndex) =>
       sdlSetJoystickPlayerIndex(this, playerIndex);
@@ -860,6 +996,10 @@ extension SdlJoystickPointerEx on Pointer<SdlJoystick> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_GUID SDLCALL SDL_GetJoystickGUID(SDL_Joystick *joystick)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetJoystickGUID - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetJoystickGUID)
+  ///
   /// {@category joystick}
   SdlGuid getGuid() => sdlGetJoystickGuid(this);
 
@@ -880,6 +1020,10 @@ extension SdlJoystickPointerEx on Pointer<SdlJoystick> {
   /// ```c
   /// extern SDL_DECLSPEC Uint16 SDLCALL SDL_GetJoystickVendor(SDL_Joystick *joystick)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetJoystickVendor - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetJoystickVendor)
+  ///
   /// {@category joystick}
   int getVendor() => sdlGetJoystickVendor(this);
 
@@ -900,6 +1044,10 @@ extension SdlJoystickPointerEx on Pointer<SdlJoystick> {
   /// ```c
   /// extern SDL_DECLSPEC Uint16 SDLCALL SDL_GetJoystickProduct(SDL_Joystick *joystick)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetJoystickProduct - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetJoystickProduct)
+  ///
   /// {@category joystick}
   int getProduct() => sdlGetJoystickProduct(this);
 
@@ -920,6 +1068,10 @@ extension SdlJoystickPointerEx on Pointer<SdlJoystick> {
   /// ```c
   /// extern SDL_DECLSPEC Uint16 SDLCALL SDL_GetJoystickProductVersion(SDL_Joystick *joystick)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetJoystickProductVersion - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetJoystickProductVersion)
+  ///
   /// {@category joystick}
   int getProductVersion() => sdlGetJoystickProductVersion(this);
 
@@ -939,6 +1091,10 @@ extension SdlJoystickPointerEx on Pointer<SdlJoystick> {
   /// ```c
   /// extern SDL_DECLSPEC Uint16 SDLCALL SDL_GetJoystickFirmwareVersion(SDL_Joystick *joystick)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetJoystickFirmwareVersion - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetJoystickFirmwareVersion)
+  ///
   /// {@category joystick}
   int getFirmwareVersion() => sdlGetJoystickFirmwareVersion(this);
 
@@ -958,6 +1114,10 @@ extension SdlJoystickPointerEx on Pointer<SdlJoystick> {
   /// ```c
   /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetJoystickSerial(SDL_Joystick *joystick)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetJoystickSerial - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetJoystickSerial)
+  ///
   /// {@category joystick}
   String? getSerial() => sdlGetJoystickSerial(this);
 
@@ -976,6 +1136,10 @@ extension SdlJoystickPointerEx on Pointer<SdlJoystick> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_JoystickType SDLCALL SDL_GetJoystickType(SDL_Joystick *joystick)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetJoystickType - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetJoystickType)
+  ///
   /// {@category joystick}
   int getType() => sdlGetJoystickType(this);
 
@@ -993,6 +1157,10 @@ extension SdlJoystickPointerEx on Pointer<SdlJoystick> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_JoystickConnected(SDL_Joystick *joystick)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_JoystickConnected - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_JoystickConnected)
+  ///
   /// {@category joystick}
   bool connected() => sdlJoystickConnected(this);
 
@@ -1010,6 +1178,10 @@ extension SdlJoystickPointerEx on Pointer<SdlJoystick> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_JoystickID SDLCALL SDL_GetJoystickID(SDL_Joystick *joystick)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetJoystickID - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetJoystickID)
+  ///
   /// {@category joystick}
   int getId() => sdlGetJoystickId(this);
 
@@ -1036,6 +1208,10 @@ extension SdlJoystickPointerEx on Pointer<SdlJoystick> {
   /// ```c
   /// extern SDL_DECLSPEC int SDLCALL SDL_GetNumJoystickAxes(SDL_Joystick *joystick)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetNumJoystickAxes - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetNumJoystickAxes)
+  ///
   /// {@category joystick}
   int getNumJAxes() => sdlGetNumJoystickAxes(this);
 
@@ -1063,6 +1239,10 @@ extension SdlJoystickPointerEx on Pointer<SdlJoystick> {
   /// ```c
   /// extern SDL_DECLSPEC int SDLCALL SDL_GetNumJoystickBalls(SDL_Joystick *joystick)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetNumJoystickBalls - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetNumJoystickBalls)
+  ///
   /// {@category joystick}
   int getNumBalls() => sdlGetNumJoystickBalls(this);
 
@@ -1085,6 +1265,10 @@ extension SdlJoystickPointerEx on Pointer<SdlJoystick> {
   /// ```c
   /// extern SDL_DECLSPEC int SDLCALL SDL_GetNumJoystickHats(SDL_Joystick *joystick)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetNumJoystickHats - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetNumJoystickHats)
+  ///
   /// {@category joystick}
   int getNumHats() => sdlGetNumJoystickHats(this);
 
@@ -1107,6 +1291,10 @@ extension SdlJoystickPointerEx on Pointer<SdlJoystick> {
   /// ```c
   /// extern SDL_DECLSPEC int SDLCALL SDL_GetNumJoystickButtons(SDL_Joystick *joystick)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetNumJoystickButtons - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetNumJoystickButtons)
+  ///
   /// {@category joystick}
   int getNumButtons() => sdlGetNumJoystickButtons(this);
 
@@ -1137,6 +1325,10 @@ extension SdlJoystickPointerEx on Pointer<SdlJoystick> {
   /// ```c
   /// extern SDL_DECLSPEC Sint16 SDLCALL SDL_GetJoystickAxis(SDL_Joystick *joystick, int axis)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetJoystickAxis - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetJoystickAxis)
+  ///
   /// {@category joystick}
   int getAxis(int axis) => sdlGetJoystickAxis(this, axis);
 
@@ -1159,6 +1351,10 @@ extension SdlJoystickPointerEx on Pointer<SdlJoystick> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetJoystickAxisInitialState(SDL_Joystick *joystick, int axis, Sint16 *state)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetJoystickAxisInitialState - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetJoystickAxisInitialState)
+  ///
   /// {@category joystick}
   int? getAxisInitialState(int axis) =>
       sdlxGetJoystickAxisInitialState(this, axis);
@@ -1187,6 +1383,10 @@ extension SdlJoystickPointerEx on Pointer<SdlJoystick> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetJoystickBall(SDL_Joystick *joystick, int ball, int *dx, int *dy)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetJoystickBall - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetJoystickBall)
+  ///
   /// {@category joystick}
   SdlxPoint? getBall(int ball) => sdlxGetJoystickBall(this, ball);
 
@@ -1208,6 +1408,10 @@ extension SdlJoystickPointerEx on Pointer<SdlJoystick> {
   /// ```c
   /// extern SDL_DECLSPEC Uint8 SDLCALL SDL_GetJoystickHat(SDL_Joystick *joystick, int hat)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetJoystickHat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetJoystickHat)
+  ///
   /// {@category joystick}
   int getHat(int hat) => sdlGetJoystickHat(this, hat);
 
@@ -1228,6 +1432,10 @@ extension SdlJoystickPointerEx on Pointer<SdlJoystick> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetJoystickButton(SDL_Joystick *joystick, int button)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetJoystickButton - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetJoystickButton)
+  ///
   /// {@category joystick}
   bool getButton(int button) => sdlGetJoystickButton(this, button);
 
@@ -1255,6 +1463,10 @@ extension SdlJoystickPointerEx on Pointer<SdlJoystick> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_RumbleJoystick(SDL_Joystick *joystick, Uint16 low_frequency_rumble, Uint16 high_frequency_rumble, Uint32 duration_ms)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_RumbleJoystick - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RumbleJoystick)
+  ///
   /// {@category joystick}
   bool rumble(
     int lowFrequencyRumble,
@@ -1299,6 +1511,10 @@ extension SdlJoystickPointerEx on Pointer<SdlJoystick> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_RumbleJoystickTriggers(SDL_Joystick *joystick, Uint16 left_rumble, Uint16 right_rumble, Uint32 duration_ms)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_RumbleJoystickTriggers - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RumbleJoystickTriggers)
+  ///
   /// {@category joystick}
   bool rumbleTriggers(int leftRumble, int rightRumble, int durationMs) =>
       sdlRumbleJoystickTriggers(this, leftRumble, rightRumble, durationMs);
@@ -1326,6 +1542,10 @@ extension SdlJoystickPointerEx on Pointer<SdlJoystick> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetJoystickLED(SDL_Joystick *joystick, Uint8 red, Uint8 green, Uint8 blue)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_SetJoystickLED - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetJoystickLED)
+  ///
   /// {@category joystick}
   bool setLed(int red, int green, int blue) =>
       sdlSetJoystickLed(this, red, green, blue);
@@ -1346,6 +1566,10 @@ extension SdlJoystickPointerEx on Pointer<SdlJoystick> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SendJoystickEffect(SDL_Joystick *joystick, const void *data, int size)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_SendJoystickEffect - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SendJoystickEffect)
+  ///
   /// {@category joystick}
   bool setEffect(Pointer<Void> data, int size) =>
       sdlSendJoystickEffect(this, data, size);
@@ -1364,6 +1588,10 @@ extension SdlJoystickPointerEx on Pointer<SdlJoystick> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_CloseJoystick(SDL_Joystick *joystick)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_CloseJoystick - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CloseJoystick)
+  ///
   /// {@category joystick}
   void close() => sdlCloseJoystick(this);
 
@@ -1382,6 +1610,10 @@ extension SdlJoystickPointerEx on Pointer<SdlJoystick> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_JoystickConnectionState SDLCALL SDL_GetJoystickConnectionState(SDL_Joystick *joystick)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetJoystickConnectionState - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetJoystickConnectionState)
+  ///
   /// {@category joystick}
   int getConnectionState() => sdlGetJoystickConnectionState(this);
 
@@ -1409,6 +1641,10 @@ extension SdlJoystickPointerEx on Pointer<SdlJoystick> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_PowerState SDLCALL SDL_GetJoystickPowerInfo(SDL_Joystick *joystick, int *percent)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetJoystickPowerInfo - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetJoystickPowerInfo)
+  ///
   /// {@category joystick}
   ({int percent, int state}) getPowerInfo() => sdlxGetJoystickPowerInfo(this);
 }

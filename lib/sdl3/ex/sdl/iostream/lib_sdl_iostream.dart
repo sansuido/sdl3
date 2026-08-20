@@ -31,6 +31,10 @@ part of '../../../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC size_t SDLCALL SDL_ReadIO(SDL_IOStream *context, void *ptr, size_t size)
 /// ```
+///
+/// See also:
+/// - [SDL_ReadIO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ReadIO)
+///
 /// {@category iostream}
 Uint8List? sdlxReadUint8List(Pointer<SdlIoStream> context, int size) {
   Uint8List? result;
@@ -74,6 +78,10 @@ Uint8List? sdlxReadUint8List(Pointer<SdlIoStream> context, int size) {
 /// ```c
 /// extern SDL_DECLSPEC size_t SDLCALL SDL_ReadIO(SDL_IOStream *context, void *ptr, size_t size)
 /// ```
+///
+/// See also:
+/// - [SDL_ReadIO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ReadIO)
+///
 /// {@category iostream}
 String? sdlxReadString(Pointer<SdlIoStream> context, int size) {
   final uint8List = sdlxReadUint8List(context, size);
@@ -120,6 +128,10 @@ String? sdlxReadString(Pointer<SdlIoStream> context, int size) {
 /// ```c
 /// extern SDL_DECLSPEC size_t SDLCALL SDL_WriteIO(SDL_IOStream *context, const void *ptr, size_t size)
 /// ```
+///
+/// See also:
+/// - [SDL_WriteIO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_WriteIO)
+///
 /// {@category iostream}
 int sdlxWriteUint8List(Pointer<SdlIoStream> context, Uint8List data) {
   final bufferPointer = ffi.calloc<Uint8>(data.length);
@@ -166,6 +178,10 @@ int sdlxWriteUint8List(Pointer<SdlIoStream> context, Uint8List data) {
 /// ```c
 /// extern SDL_DECLSPEC size_t SDLCALL SDL_WriteIO(SDL_IOStream *context, const void *ptr, size_t size)
 /// ```
+///
+/// See also:
+/// - [SDL_WriteIO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_WriteIO)
+///
 /// {@category iostream}
 int sdlxWriteString(Pointer<SdlIoStream> context, String str) =>
     sdlxWriteUint8List(context, Uint8List.fromList(utf8.encode(str)));
@@ -197,6 +213,10 @@ int sdlxWriteString(Pointer<SdlIoStream> context, String str) =>
 /// ```c
 /// extern SDL_DECLSPEC void * SDLCALL SDL_LoadFile_IO(SDL_IOStream *src, size_t *datasize, bool closeio)
 /// ```
+///
+/// See also:
+/// - [SDL_LoadFile_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_LoadFile_IO)
+///
 /// {@category iostream}
 ({Uint8List data, int datasize})? sdlxLoadFileIo(
   Pointer<SdlIoStream> src, {
@@ -241,6 +261,10 @@ int sdlxWriteString(Pointer<SdlIoStream> context, String str) =>
 /// ```c
 /// extern SDL_DECLSPEC void * SDLCALL SDL_LoadFile(const char *file, size_t *datasize)
 /// ```
+///
+/// See also:
+/// - [SDL_LoadFile - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_LoadFile)
+///
 /// {@category iostream}
 ({Uint8List data, int datasize})? sdlxLoadFile(String file) {
   var datasize = 0;
@@ -280,6 +304,10 @@ int sdlxWriteString(Pointer<SdlIoStream> context, String str) =>
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SaveFile_IO(SDL_IOStream *src, const void *data, size_t datasize, bool closeio)
 /// ```
+///
+/// See also:
+/// - [SDL_SaveFile_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SaveFile_IO)
+///
 /// {@category iostream}
 bool sdlxSaveFileIo(
   Pointer<SdlIoStream> src,
@@ -318,6 +346,10 @@ bool sdlxSaveFileIo(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SaveFile(const char *file, const void *data, size_t datasize)
 /// ```
+///
+/// See also:
+/// - [SDL_SaveFile - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SaveFile)
+///
 /// {@category iostream}
 bool sdlxSaveFile(String file, Uint8List data, {bool closeio = false}) {
   final dataPointer = ffi.calloc<Uint8>(data.length);
@@ -347,6 +379,10 @@ bool sdlxSaveFile(String file, Uint8List data, {bool closeio = false}) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_ReadU8(SDL_IOStream *src, Uint8 *value)
 /// ```
+///
+/// See also:
+/// - [SDL_ReadU8 - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ReadU8)
+///
 /// {@category iostream}
 int? sdlxReadU8(Pointer<SdlIoStream> src) {
   int? result;
@@ -379,6 +415,10 @@ int? sdlxReadU8(Pointer<SdlIoStream> src) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_ReadS8(SDL_IOStream *src, Sint8 *value)
 /// ```
+///
+/// See also:
+/// - [SDL_ReadS8 - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ReadS8)
+///
 /// {@category iostream}
 int? sdlxReadS8(Pointer<SdlIoStream> src) {
   int? result;
@@ -415,6 +455,10 @@ int? sdlxReadS8(Pointer<SdlIoStream> src) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_ReadU16LE(SDL_IOStream *src, Uint16 *value)
 /// ```
+///
+/// See also:
+/// - [SDL_ReadU16LE - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ReadU16LE)
+///
 /// {@category iostream}
 int? sdlxReadU16Le(Pointer<SdlIoStream> src) {
   int? result;
@@ -451,6 +495,10 @@ int? sdlxReadU16Le(Pointer<SdlIoStream> src) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_ReadS16LE(SDL_IOStream *src, Sint16 *value)
 /// ```
+///
+/// See also:
+/// - [SDL_ReadS16LE - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ReadS16LE)
+///
 /// {@category iostream}
 int? sdlxReadS16Le(Pointer<SdlIoStream> src) {
   int? result;
@@ -487,6 +535,10 @@ int? sdlxReadS16Le(Pointer<SdlIoStream> src) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_ReadU16BE(SDL_IOStream *src, Uint16 *value)
 /// ```
+///
+/// See also:
+/// - [SDL_ReadU16BE - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ReadU16BE)
+///
 /// {@category iostream}
 int? sdlxReadU16Be(Pointer<SdlIoStream> src) {
   int? result;
@@ -523,6 +575,10 @@ int? sdlxReadU16Be(Pointer<SdlIoStream> src) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_ReadS16BE(SDL_IOStream *src, Sint16 *value)
 /// ```
+///
+/// See also:
+/// - [SDL_ReadS16BE - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ReadS16BE)
+///
 /// {@category iostream}
 int? sdlxReadS16Be(Pointer<SdlIoStream> src) {
   int? result;
@@ -559,6 +615,10 @@ int? sdlxReadS16Be(Pointer<SdlIoStream> src) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_ReadU32LE(SDL_IOStream *src, Uint32 *value)
 /// ```
+///
+/// See also:
+/// - [SDL_ReadU32LE - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ReadU32LE)
+///
 /// {@category iostream}
 int? sdlxReadU32Le(Pointer<SdlIoStream> src) {
   int? result;
@@ -595,6 +655,10 @@ int? sdlxReadU32Le(Pointer<SdlIoStream> src) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_ReadS32LE(SDL_IOStream *src, Sint32 *value)
 /// ```
+///
+/// See also:
+/// - [SDL_ReadS32LE - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ReadS32LE)
+///
 /// {@category iostream}
 int? sdlxReadS32Le(Pointer<SdlIoStream> src) {
   int? result;
@@ -631,6 +695,10 @@ int? sdlxReadS32Le(Pointer<SdlIoStream> src) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_ReadU32BE(SDL_IOStream *src, Uint32 *value)
 /// ```
+///
+/// See also:
+/// - [SDL_ReadU32BE - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ReadU32BE)
+///
 /// {@category iostream}
 int? sdlxReadU32Be(Pointer<SdlIoStream> src) {
   int? result;
@@ -667,6 +735,10 @@ int? sdlxReadU32Be(Pointer<SdlIoStream> src) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_ReadS32BE(SDL_IOStream *src, Sint32 *value)
 /// ```
+///
+/// See also:
+/// - [SDL_ReadS32BE - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ReadS32BE)
+///
 /// {@category iostream}
 int? sdlxReadS32Be(Pointer<SdlIoStream> src) {
   int? result;
@@ -703,6 +775,10 @@ int? sdlxReadS32Be(Pointer<SdlIoStream> src) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_ReadU64LE(SDL_IOStream *src, Uint64 *value)
 /// ```
+///
+/// See also:
+/// - [SDL_ReadU64LE - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ReadU64LE)
+///
 /// {@category iostream}
 int? sdlxReadU64Le(Pointer<SdlIoStream> src) {
   int? result;
@@ -739,6 +815,10 @@ int? sdlxReadU64Le(Pointer<SdlIoStream> src) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_ReadS64LE(SDL_IOStream *src, Sint64 *value)
 /// ```
+///
+/// See also:
+/// - [SDL_ReadS64LE - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ReadS64LE)
+///
 /// {@category iostream}
 int? sdlxReadS64Le(Pointer<SdlIoStream> src) {
   int? result;
@@ -775,6 +855,10 @@ int? sdlxReadS64Le(Pointer<SdlIoStream> src) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_ReadU64BE(SDL_IOStream *src, Uint64 *value)
 /// ```
+///
+/// See also:
+/// - [SDL_ReadU64BE - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ReadU64BE)
+///
 /// {@category iostream}
 int? sdlxReadU64Be(Pointer<SdlIoStream> src) {
   int? result;
@@ -811,6 +895,10 @@ int? sdlxReadU64Be(Pointer<SdlIoStream> src) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_ReadS64BE(SDL_IOStream *src, Sint64 *value)
 /// ```
+///
+/// See also:
+/// - [SDL_ReadS64BE - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ReadS64BE)
+///
 /// {@category iostream}
 int? sdlxReadS64Be(Pointer<SdlIoStream> src) {
   int? result;

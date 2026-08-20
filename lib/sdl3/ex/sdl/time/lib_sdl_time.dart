@@ -22,6 +22,10 @@ part of '../../../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetDateTimeLocalePreferences(SDL_DateFormat *dateFormat, SDL_TimeFormat *timeFormat)
 /// ```
+///
+/// See also:
+/// - [SDL_GetDateTimeLocalePreferences - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetDateTimeLocalePreferences)
+///
 /// {@category time}
 ({int dateFromat, int timeFormat})? sdlxGetDateTimeLocalePreferences() {
   int? dateFormat;
@@ -59,6 +63,10 @@ part of '../../../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetCurrentTime(SDL_Time *ticks)
 /// ```
+///
+/// See also:
+/// - [SDL_GetCurrentTime - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetCurrentTime)
+///
 /// {@category time}
 int? sdlxGetCurrentTime() {
   int? result;
@@ -90,6 +98,10 @@ int? sdlxGetCurrentTime() {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_TimeToDateTime(SDL_Time ticks, SDL_DateTime *dt, bool localTime)
 /// ```
+///
+/// See also:
+/// - [SDL_TimeToDateTime - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_TimeToDateTime)
+///
 /// {@category time}
 bool sdlxTimeToDateTime(
   int ticks,
@@ -123,6 +135,10 @@ bool sdlxTimeToDateTime(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_DateTimeToTime(const SDL_DateTime *dt, SDL_Time *ticks)
 /// ```
+///
+/// See also:
+/// - [SDL_DateTimeToTime - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_DateTimeToTime)
+///
 /// {@category time}
 int? sdlxDateTimeToTime(SdlxDateTime dateTime) {
   int? result;
@@ -156,6 +172,10 @@ int? sdlxDateTimeToTime(SdlxDateTime dateTime) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_TimeToWindows(SDL_Time ticks, Uint32 *dwLowDateTime, Uint32 *dwHighDateTime)
 /// ```
+///
+/// See also:
+/// - [SDL_TimeToWindows - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_TimeToWindows)
+///
 /// {@category time}
 ({int dwLowDateTime, int dwHighDateTime}) sdlxTimeToWindows(int ticks) {
   late int dwLowDateTime;

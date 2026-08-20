@@ -30,6 +30,10 @@ extension SdlHidDeviceInfoEx on SdlHidDeviceInfo {
   /// ```c
   /// extern SDL_DECLSPEC SDL_hid_device_info * SDLCALL SDL_hid_enumerate(unsigned short vendor_id, unsigned short product_id)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_hid_enumerate - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_hid_enumerate)
+  ///
   /// {@category hidapi}
   static Pointer<SdlHidDeviceInfo> enumerate(int vendorId, int productId) =>
       sdlHidEnumerate(vendorId, productId);
@@ -49,6 +53,10 @@ extension SdlHidDeviceInfoPointerEx on Pointer<SdlHidDeviceInfo> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_hid_free_enumeration(SDL_hid_device_info *devs)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_hid_free_enumeration - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_hid_free_enumeration)
+  ///
   /// {@category hidapi}
   void free() => sdlHidFreeEnumeration(this);
 }

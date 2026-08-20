@@ -16,6 +16,10 @@ part of '../../../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_GUIDToString(SDL_GUID guid, char *pszGUID, int cbGUID)
 /// ```
+///
+/// See also:
+/// - [SDL_GUIDToString - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GUIDToString)
+///
 /// {@category guid}
 String sdlxGuidToString(SdlGuid guid) {
   const bufferSize = 64;

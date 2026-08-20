@@ -22,6 +22,10 @@ part of '../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_GetNumRenderDrivers(void)
 /// ```
+///
+/// See also:
+/// - [SDL_GetNumRenderDrivers - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetNumRenderDrivers)
+///
 /// {@category render}
 int sdlGetNumRenderDrivers() {
   final sdlGetNumRenderDriversLookupFunction = _libSdl
@@ -56,6 +60,10 @@ int sdlGetNumRenderDrivers() {
 /// ```c
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetRenderDriver(int index)
 /// ```
+///
+/// See also:
+/// - [SDL_GetRenderDriver - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRenderDriver)
+///
 /// {@category render}
 String? sdlGetRenderDriver(int index) {
   final sdlGetRenderDriverLookupFunction = _libSdl
@@ -93,6 +101,10 @@ String? sdlGetRenderDriver(int index) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_CreateWindowAndRenderer(const char *title, int width, int height, SDL_WindowFlags window_flags, SDL_Window **window, SDL_Renderer **renderer)
 /// ```
+///
+/// See also:
+/// - [SDL_CreateWindowAndRenderer - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CreateWindowAndRenderer)
+///
 /// {@category render}
 bool sdlCreateWindowAndRenderer(
   String? title,
@@ -170,6 +182,10 @@ bool sdlCreateWindowAndRenderer(
 /// ```c
 /// extern SDL_DECLSPEC SDL_Renderer * SDLCALL SDL_CreateRenderer(SDL_Window *window, const char *name)
 /// ```
+///
+/// See also:
+/// - [SDL_CreateRenderer - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CreateRenderer)
+///
 /// {@category render}
 Pointer<SdlRenderer> sdlCreateRenderer(
   Pointer<SdlWindow> window,
@@ -266,6 +282,10 @@ Pointer<SdlRenderer> sdlCreateRenderer(
 /// ```c
 /// extern SDL_DECLSPEC SDL_Renderer * SDLCALL SDL_CreateRendererWithProperties(SDL_PropertiesID props)
 /// ```
+///
+/// See also:
+/// - [SDL_CreateRendererWithProperties - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CreateRendererWithProperties)
+///
 /// {@category render}
 Pointer<SdlRenderer> sdlCreateRendererWithProperties(int props) {
   final sdlCreateRendererWithPropertiesLookupFunction = _libSdl
@@ -311,6 +331,10 @@ Pointer<SdlRenderer> sdlCreateRendererWithProperties(int props) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Renderer * SDLCALL SDL_CreateGPURenderer(SDL_GPUDevice *device, SDL_Window *window)
 /// ```
+///
+/// See also:
+/// - [SDL_CreateGPURenderer - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CreateGPURenderer)
+///
 /// {@category render}
 Pointer<SdlRenderer> sdlCreateGpuRenderer(
   Pointer<SdlGpuDevice> device,
@@ -344,6 +368,10 @@ Pointer<SdlRenderer> sdlCreateGpuRenderer(
 /// ```c
 /// extern SDL_DECLSPEC SDL_GPUDevice * SDLCALL SDL_GetGPURendererDevice(SDL_Renderer *renderer)
 /// ```
+///
+/// See also:
+/// - [SDL_GetGPURendererDevice - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetGPURendererDevice)
+///
 /// {@category render}
 Pointer<SdlGpuDevice> sdlGetGpuRendererDevice(Pointer<SdlRenderer> renderer) {
   final sdlGetGpuRendererDeviceLookupFunction = _libSdl
@@ -376,6 +404,10 @@ Pointer<SdlGpuDevice> sdlGetGpuRendererDevice(Pointer<SdlRenderer> renderer) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Renderer * SDLCALL SDL_CreateSoftwareRenderer(SDL_Surface *surface)
 /// ```
+///
+/// See also:
+/// - [SDL_CreateSoftwareRenderer - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CreateSoftwareRenderer)
+///
 /// {@category render}
 Pointer<SdlRenderer> sdlCreateSoftwareRenderer(Pointer<SdlSurface> surface) {
   final sdlCreateSoftwareRendererLookupFunction = _libSdl
@@ -400,6 +432,10 @@ Pointer<SdlRenderer> sdlCreateSoftwareRenderer(Pointer<SdlSurface> surface) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Renderer * SDLCALL SDL_GetRenderer(SDL_Window *window)
 /// ```
+///
+/// See also:
+/// - [SDL_GetRenderer - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRenderer)
+///
 /// {@category render}
 Pointer<SdlRenderer> sdlGetRenderer(Pointer<SdlWindow> window) {
   final sdlGetRendererLookupFunction = _libSdl
@@ -424,6 +460,10 @@ Pointer<SdlRenderer> sdlGetRenderer(Pointer<SdlWindow> window) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Window * SDLCALL SDL_GetRenderWindow(SDL_Renderer *renderer)
 /// ```
+///
+/// See also:
+/// - [SDL_GetRenderWindow - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRenderWindow)
+///
 /// {@category render}
 Pointer<SdlWindow> sdlGetRenderWindow(Pointer<SdlRenderer> renderer) {
   final sdlGetRenderWindowLookupFunction = _libSdl
@@ -451,6 +491,10 @@ Pointer<SdlWindow> sdlGetRenderWindow(Pointer<SdlRenderer> renderer) {
 /// ```c
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetRendererName(SDL_Renderer *renderer)
 /// ```
+///
+/// See also:
+/// - [SDL_GetRendererName - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRendererName)
+///
 /// {@category render}
 String? sdlGetRendererName(Pointer<SdlRenderer> renderer) {
   final sdlGetRendererNameLookupFunction = _libSdl
@@ -563,6 +607,10 @@ String? sdlGetRendererName(Pointer<SdlRenderer> renderer) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_PropertiesID SDLCALL SDL_GetRendererProperties(SDL_Renderer *renderer)
 /// ```
+///
+/// See also:
+/// - [SDL_GetRendererProperties - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRendererProperties)
+///
 /// {@category render}
 int sdlGetRendererProperties(Pointer<SdlRenderer> renderer) {
   final sdlGetRendererPropertiesLookupFunction = _libSdl
@@ -597,6 +645,10 @@ int sdlGetRendererProperties(Pointer<SdlRenderer> renderer) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderOutputSize(SDL_Renderer *renderer, int *w, int *h)
 /// ```
+///
+/// See also:
+/// - [SDL_GetRenderOutputSize - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRenderOutputSize)
+///
 /// {@category render}
 bool sdlGetRenderOutputSize(
   Pointer<SdlRenderer> renderer,
@@ -643,6 +695,10 @@ bool sdlGetRenderOutputSize(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetCurrentRenderOutputSize(SDL_Renderer *renderer, int *w, int *h)
 /// ```
+///
+/// See also:
+/// - [SDL_GetCurrentRenderOutputSize - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetCurrentRenderOutputSize)
+///
 /// {@category render}
 bool sdlGetCurrentRenderOutputSize(
   Pointer<SdlRenderer> renderer,
@@ -691,6 +747,10 @@ bool sdlGetCurrentRenderOutputSize(
 /// ```c
 /// extern SDL_DECLSPEC SDL_Texture * SDLCALL SDL_CreateTexture(SDL_Renderer *renderer, SDL_PixelFormat format, SDL_TextureAccess access, int w, int h)
 /// ```
+///
+/// See also:
+/// - [SDL_CreateTexture - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CreateTexture)
+///
 /// {@category render}
 Pointer<SdlTexture> sdlCreateTexture(
   Pointer<SdlRenderer> renderer,
@@ -748,6 +808,10 @@ Pointer<SdlTexture> sdlCreateTexture(
 /// ```c
 /// extern SDL_DECLSPEC SDL_Texture * SDLCALL SDL_CreateTextureFromSurface(SDL_Renderer *renderer, SDL_Surface *surface)
 /// ```
+///
+/// See also:
+/// - [SDL_CreateTextureFromSurface - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CreateTextureFromSurface)
+///
 /// {@category render}
 Pointer<SdlTexture> sdlCreateTextureFromSurface(
   Pointer<SdlRenderer> renderer,
@@ -909,6 +973,10 @@ Pointer<SdlTexture> sdlCreateTextureFromSurface(
 /// ```c
 /// extern SDL_DECLSPEC SDL_Texture * SDLCALL SDL_CreateTextureWithProperties(SDL_Renderer *renderer, SDL_PropertiesID props)
 /// ```
+///
+/// See also:
+/// - [SDL_CreateTextureWithProperties - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CreateTextureWithProperties)
+///
 /// {@category render}
 Pointer<SdlTexture> sdlCreateTextureWithProperties(
   Pointer<SdlRenderer> renderer,
@@ -1036,6 +1104,10 @@ Pointer<SdlTexture> sdlCreateTextureWithProperties(
 /// ```c
 /// extern SDL_DECLSPEC SDL_PropertiesID SDLCALL SDL_GetTextureProperties(SDL_Texture *texture)
 /// ```
+///
+/// See also:
+/// - [SDL_GetTextureProperties - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetTextureProperties)
+///
 /// {@category render}
 int sdlGetTextureProperties(Pointer<SdlTexture> texture) {
   final sdlGetTexturePropertiesLookupFunction = _libSdl
@@ -1060,6 +1132,10 @@ int sdlGetTextureProperties(Pointer<SdlTexture> texture) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Renderer * SDLCALL SDL_GetRendererFromTexture(SDL_Texture *texture)
 /// ```
+///
+/// See also:
+/// - [SDL_GetRendererFromTexture - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRendererFromTexture)
+///
 /// {@category render}
 Pointer<SdlRenderer> sdlGetRendererFromTexture(Pointer<SdlTexture> texture) {
   final sdlGetRendererFromTextureLookupFunction = _libSdl
@@ -1088,6 +1164,10 @@ Pointer<SdlRenderer> sdlGetRendererFromTexture(Pointer<SdlTexture> texture) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetTextureSize(SDL_Texture *texture, float *w, float *h)
 /// ```
+///
+/// See also:
+/// - [SDL_GetTextureSize - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetTextureSize)
+///
 /// {@category render}
 bool sdlGetTextureSize(
   Pointer<SdlTexture> texture,
@@ -1133,6 +1213,10 @@ bool sdlGetTextureSize(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetTexturePalette(SDL_Texture *texture, SDL_Palette *palette)
 /// ```
+///
+/// See also:
+/// - [SDL_SetTexturePalette - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetTexturePalette)
+///
 /// {@category render}
 bool sdlSetTexturePalette(
   Pointer<SdlTexture> texture,
@@ -1162,6 +1246,10 @@ bool sdlSetTexturePalette(
 /// ```c
 /// extern SDL_DECLSPEC SDL_Palette * SDLCALL SDL_GetTexturePalette(SDL_Texture *texture)
 /// ```
+///
+/// See also:
+/// - [SDL_GetTexturePalette - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetTexturePalette)
+///
 /// {@category render}
 Pointer<SdlPalette> sdlGetTexturePalette(Pointer<SdlTexture> texture) {
   final sdlGetTexturePaletteLookupFunction = _libSdl
@@ -1202,6 +1290,10 @@ Pointer<SdlPalette> sdlGetTexturePalette(Pointer<SdlTexture> texture) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetTextureColorMod(SDL_Texture *texture, Uint8 r, Uint8 g, Uint8 b)
 /// ```
+///
+/// See also:
+/// - [SDL_SetTextureColorMod - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetTextureColorMod)
+///
 /// {@category render}
 bool sdlSetTextureColorMod(Pointer<SdlTexture> texture, int r, int g, int b) {
   final sdlSetTextureColorModLookupFunction = _libSdl
@@ -1242,6 +1334,10 @@ bool sdlSetTextureColorMod(Pointer<SdlTexture> texture, int r, int g, int b) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetTextureColorModFloat(SDL_Texture *texture, float r, float g, float b)
 /// ```
+///
+/// See also:
+/// - [SDL_SetTextureColorModFloat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetTextureColorModFloat)
+///
 /// {@category render}
 bool sdlSetTextureColorModFloat(
   Pointer<SdlTexture> texture,
@@ -1278,6 +1374,10 @@ bool sdlSetTextureColorModFloat(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetTextureColorMod(SDL_Texture *texture, Uint8 *r, Uint8 *g, Uint8 *b)
 /// ```
+///
+/// See also:
+/// - [SDL_GetTextureColorMod - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetTextureColorMod)
+///
 /// {@category render}
 bool sdlGetTextureColorMod(
   Pointer<SdlTexture> texture,
@@ -1324,6 +1424,10 @@ bool sdlGetTextureColorMod(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetTextureColorModFloat(SDL_Texture *texture, float *r, float *g, float *b)
 /// ```
+///
+/// See also:
+/// - [SDL_GetTextureColorModFloat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetTextureColorModFloat)
+///
 /// {@category render}
 bool sdlGetTextureColorModFloat(
   Pointer<SdlTexture> texture,
@@ -1376,6 +1480,10 @@ bool sdlGetTextureColorModFloat(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetTextureAlphaMod(SDL_Texture *texture, Uint8 alpha)
 /// ```
+///
+/// See also:
+/// - [SDL_SetTextureAlphaMod - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetTextureAlphaMod)
+///
 /// {@category render}
 bool sdlSetTextureAlphaMod(Pointer<SdlTexture> texture, int alpha) {
   final sdlSetTextureAlphaModLookupFunction = _libSdl
@@ -1413,6 +1521,10 @@ bool sdlSetTextureAlphaMod(Pointer<SdlTexture> texture, int alpha) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetTextureAlphaModFloat(SDL_Texture *texture, float alpha)
 /// ```
+///
+/// See also:
+/// - [SDL_SetTextureAlphaModFloat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetTextureAlphaModFloat)
+///
 /// {@category render}
 bool sdlSetTextureAlphaModFloat(Pointer<SdlTexture> texture, double alpha) {
   final sdlSetTextureAlphaModFloatLookupFunction = _libSdl
@@ -1442,6 +1554,10 @@ bool sdlSetTextureAlphaModFloat(Pointer<SdlTexture> texture, double alpha) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetTextureAlphaMod(SDL_Texture *texture, Uint8 *alpha)
 /// ```
+///
+/// See also:
+/// - [SDL_GetTextureAlphaMod - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetTextureAlphaMod)
+///
 /// {@category render}
 bool sdlGetTextureAlphaMod(Pointer<SdlTexture> texture, Pointer<Uint8> alpha) {
   final sdlGetTextureAlphaModLookupFunction = _libSdl
@@ -1471,6 +1587,10 @@ bool sdlGetTextureAlphaMod(Pointer<SdlTexture> texture, Pointer<Uint8> alpha) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetTextureAlphaModFloat(SDL_Texture *texture, float *alpha)
 /// ```
+///
+/// See also:
+/// - [SDL_GetTextureAlphaModFloat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetTextureAlphaModFloat)
+///
 /// {@category render}
 bool sdlGetTextureAlphaModFloat(
   Pointer<SdlTexture> texture,
@@ -1507,6 +1627,10 @@ bool sdlGetTextureAlphaModFloat(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetTextureBlendMode(SDL_Texture *texture, SDL_BlendMode blendMode)
 /// ```
+///
+/// See also:
+/// - [SDL_SetTextureBlendMode - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetTextureBlendMode)
+///
 /// {@category render}
 bool sdlSetTextureBlendMode(Pointer<SdlTexture> texture, int blendMode) {
   final sdlSetTextureBlendModeLookupFunction = _libSdl
@@ -1534,6 +1658,10 @@ bool sdlSetTextureBlendMode(Pointer<SdlTexture> texture, int blendMode) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetTextureBlendMode(SDL_Texture *texture, SDL_BlendMode *blendMode)
 /// ```
+///
+/// See also:
+/// - [SDL_GetTextureBlendMode - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetTextureBlendMode)
+///
 /// {@category render}
 bool sdlGetTextureBlendMode(
   Pointer<SdlTexture> texture,
@@ -1568,6 +1696,10 @@ bool sdlGetTextureBlendMode(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetTextureScaleMode(SDL_Texture *texture, SDL_ScaleMode scaleMode)
 /// ```
+///
+/// See also:
+/// - [SDL_SetTextureScaleMode - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetTextureScaleMode)
+///
 /// {@category render}
 bool sdlSetTextureScaleMode(Pointer<SdlTexture> texture, int scaleMode) {
   final sdlSetTextureScaleModeLookupFunction = _libSdl
@@ -1595,6 +1727,10 @@ bool sdlSetTextureScaleMode(Pointer<SdlTexture> texture, int scaleMode) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetTextureScaleMode(SDL_Texture *texture, SDL_ScaleMode *scaleMode)
 /// ```
+///
+/// See also:
+/// - [SDL_GetTextureScaleMode - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetTextureScaleMode)
+///
 /// {@category render}
 bool sdlGetTextureScaleMode(
   Pointer<SdlTexture> texture,
@@ -1643,6 +1779,10 @@ bool sdlGetTextureScaleMode(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_UpdateTexture(SDL_Texture *texture, const SDL_Rect *rect, const void *pixels, int pitch)
 /// ```
+///
+/// See also:
+/// - [SDL_UpdateTexture - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_UpdateTexture)
+///
 /// {@category render}
 bool sdlUpdateTexture(
   Pointer<SdlTexture> texture,
@@ -1701,6 +1841,10 @@ bool sdlUpdateTexture(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_UpdateYUVTexture(SDL_Texture *texture, const SDL_Rect *rect, const Uint8 *Yplane, int Ypitch, const Uint8 *Uplane, int Upitch, const Uint8 *Vplane, int Vpitch)
 /// ```
+///
+/// See also:
+/// - [SDL_UpdateYUVTexture - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_UpdateYUVTexture)
+///
 /// {@category render}
 bool sdlUpdateYuvTexture(
   Pointer<SdlTexture> texture,
@@ -1776,6 +1920,10 @@ bool sdlUpdateYuvTexture(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_UpdateNVTexture(SDL_Texture *texture, const SDL_Rect *rect, const Uint8 *Yplane, int Ypitch, const Uint8 *UVplane, int UVpitch)
 /// ```
+///
+/// See also:
+/// - [SDL_UpdateNVTexture - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_UpdateNVTexture)
+///
 /// {@category render}
 bool sdlUpdateNvTexture(
   Pointer<SdlTexture> texture,
@@ -1847,6 +1995,10 @@ bool sdlUpdateNvTexture(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_LockTexture(SDL_Texture *texture, const SDL_Rect *rect, void **pixels, int *pitch)
 /// ```
+///
+/// See also:
+/// - [SDL_LockTexture - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_LockTexture)
+///
 /// {@category render}
 bool sdlLockTexture(
   Pointer<SdlTexture> texture,
@@ -1909,6 +2061,10 @@ bool sdlLockTexture(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_LockTextureToSurface(SDL_Texture *texture, const SDL_Rect *rect, SDL_Surface **surface)
 /// ```
+///
+/// See also:
+/// - [SDL_LockTextureToSurface - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_LockTextureToSurface)
+///
 /// {@category render}
 bool sdlLockTextureToSurface(
   Pointer<SdlTexture> texture,
@@ -1953,6 +2109,10 @@ bool sdlLockTextureToSurface(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_UnlockTexture(SDL_Texture *texture)
 /// ```
+///
+/// See also:
+/// - [SDL_UnlockTexture - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_UnlockTexture)
+///
 /// {@category render}
 void sdlUnlockTexture(Pointer<SdlTexture> texture) {
   final sdlUnlockTextureLookupFunction = _libSdl
@@ -1991,6 +2151,10 @@ void sdlUnlockTexture(Pointer<SdlTexture> texture) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetRenderTarget(SDL_Renderer *renderer, SDL_Texture *texture)
 /// ```
+///
+/// See also:
+/// - [SDL_SetRenderTarget - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetRenderTarget)
+///
 /// {@category render}
 bool sdlSetRenderTarget(
   Pointer<SdlRenderer> renderer,
@@ -2028,6 +2192,10 @@ bool sdlSetRenderTarget(
 /// ```c
 /// extern SDL_DECLSPEC SDL_Texture * SDLCALL SDL_GetRenderTarget(SDL_Renderer *renderer)
 /// ```
+///
+/// See also:
+/// - [SDL_GetRenderTarget - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRenderTarget)
+///
 /// {@category render}
 Pointer<SdlTexture> sdlGetRenderTarget(Pointer<SdlRenderer> renderer) {
   final sdlGetRenderTargetLookupFunction = _libSdl
@@ -2086,6 +2254,10 @@ Pointer<SdlTexture> sdlGetRenderTarget(Pointer<SdlRenderer> renderer) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetRenderLogicalPresentation(SDL_Renderer *renderer, int w, int h, SDL_RendererLogicalPresentation mode)
 /// ```
+///
+/// See also:
+/// - [SDL_SetRenderLogicalPresentation - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetRenderLogicalPresentation)
+///
 /// {@category render}
 bool sdlSetRenderLogicalPresentation(
   Pointer<SdlRenderer> renderer,
@@ -2132,6 +2304,10 @@ bool sdlSetRenderLogicalPresentation(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderLogicalPresentation(SDL_Renderer *renderer, int *w, int *h, SDL_RendererLogicalPresentation *mode)
 /// ```
+///
+/// See also:
+/// - [SDL_GetRenderLogicalPresentation - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRenderLogicalPresentation)
+///
 /// {@category render}
 bool sdlGetRenderLogicalPresentation(
   Pointer<SdlRenderer> renderer,
@@ -2183,6 +2359,10 @@ bool sdlGetRenderLogicalPresentation(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderLogicalPresentationRect(SDL_Renderer *renderer, SDL_FRect *rect)
 /// ```
+///
+/// See also:
+/// - [SDL_GetRenderLogicalPresentationRect - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRenderLogicalPresentationRect)
+///
 /// {@category render}
 bool sdlGetRenderLogicalPresentationRect(
   Pointer<SdlRenderer> renderer,
@@ -2224,6 +2404,10 @@ bool sdlGetRenderLogicalPresentationRect(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderCoordinatesFromWindow(SDL_Renderer *renderer, float window_x, float window_y, float *x, float *y)
 /// ```
+///
+/// See also:
+/// - [SDL_RenderCoordinatesFromWindow - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RenderCoordinatesFromWindow)
+///
 /// {@category render}
 bool sdlRenderCoordinatesFromWindow(
   Pointer<SdlRenderer> renderer,
@@ -2289,6 +2473,10 @@ bool sdlRenderCoordinatesFromWindow(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderCoordinatesToWindow(SDL_Renderer *renderer, float x, float y, float *window_x, float *window_y)
 /// ```
+///
+/// See also:
+/// - [SDL_RenderCoordinatesToWindow - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RenderCoordinatesToWindow)
+///
 /// {@category render}
 bool sdlRenderCoordinatesToWindow(
   Pointer<SdlRenderer> renderer,
@@ -2360,6 +2548,10 @@ bool sdlRenderCoordinatesToWindow(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_ConvertEventToRenderCoordinates(SDL_Renderer *renderer, SDL_Event *event)
 /// ```
+///
+/// See also:
+/// - [SDL_ConvertEventToRenderCoordinates - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ConvertEventToRenderCoordinates)
+///
 /// {@category render}
 bool sdlConvertEventToRenderCoordinates(
   Pointer<SdlRenderer> renderer,
@@ -2401,6 +2593,10 @@ bool sdlConvertEventToRenderCoordinates(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetRenderViewport(SDL_Renderer *renderer, const SDL_Rect *rect)
 /// ```
+///
+/// See also:
+/// - [SDL_SetRenderViewport - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetRenderViewport)
+///
 /// {@category render}
 bool sdlSetRenderViewport(
   Pointer<SdlRenderer> renderer,
@@ -2435,6 +2631,10 @@ bool sdlSetRenderViewport(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderViewport(SDL_Renderer *renderer, SDL_Rect *rect)
 /// ```
+///
+/// See also:
+/// - [SDL_GetRenderViewport - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRenderViewport)
+///
 /// {@category render}
 bool sdlGetRenderViewport(
   Pointer<SdlRenderer> renderer,
@@ -2471,6 +2671,10 @@ bool sdlGetRenderViewport(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderViewportSet(SDL_Renderer *renderer)
 /// ```
+///
+/// See also:
+/// - [SDL_RenderViewportSet - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RenderViewportSet)
+///
 /// {@category render}
 bool sdlRenderViewportSet(Pointer<SdlRenderer> renderer) {
   final sdlRenderViewportSetLookupFunction = _libSdl
@@ -2504,6 +2708,10 @@ bool sdlRenderViewportSet(Pointer<SdlRenderer> renderer) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderSafeArea(SDL_Renderer *renderer, SDL_Rect *rect)
 /// ```
+///
+/// See also:
+/// - [SDL_GetRenderSafeArea - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRenderSafeArea)
+///
 /// {@category render}
 bool sdlGetRenderSafeArea(
   Pointer<SdlRenderer> renderer,
@@ -2539,6 +2747,10 @@ bool sdlGetRenderSafeArea(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetRenderClipRect(SDL_Renderer *renderer, const SDL_Rect *rect)
 /// ```
+///
+/// See also:
+/// - [SDL_SetRenderClipRect - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetRenderClipRect)
+///
 /// {@category render}
 bool sdlSetRenderClipRect(
   Pointer<SdlRenderer> renderer,
@@ -2574,6 +2786,10 @@ bool sdlSetRenderClipRect(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderClipRect(SDL_Renderer *renderer, SDL_Rect *rect)
 /// ```
+///
+/// See also:
+/// - [SDL_GetRenderClipRect - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRenderClipRect)
+///
 /// {@category render}
 bool sdlGetRenderClipRect(
   Pointer<SdlRenderer> renderer,
@@ -2607,6 +2823,10 @@ bool sdlGetRenderClipRect(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderClipEnabled(SDL_Renderer *renderer)
 /// ```
+///
+/// See also:
+/// - [SDL_RenderClipEnabled - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RenderClipEnabled)
+///
 /// {@category render}
 bool sdlRenderClipEnabled(Pointer<SdlRenderer> renderer) {
   final sdlRenderClipEnabledLookupFunction = _libSdl
@@ -2646,6 +2866,10 @@ bool sdlRenderClipEnabled(Pointer<SdlRenderer> renderer) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetRenderScale(SDL_Renderer *renderer, float scaleX, float scaleY)
 /// ```
+///
+/// See also:
+/// - [SDL_SetRenderScale - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetRenderScale)
+///
 /// {@category render}
 bool sdlSetRenderScale(
   Pointer<SdlRenderer> renderer,
@@ -2689,6 +2913,10 @@ bool sdlSetRenderScale(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderScale(SDL_Renderer *renderer, float *scaleX, float *scaleY)
 /// ```
+///
+/// See also:
+/// - [SDL_GetRenderScale - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRenderScale)
+///
 /// {@category render}
 bool sdlGetRenderScale(
   Pointer<SdlRenderer> renderer,
@@ -2737,6 +2965,10 @@ bool sdlGetRenderScale(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetRenderDrawColor(SDL_Renderer *renderer, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 /// ```
+///
+/// See also:
+/// - [SDL_SetRenderDrawColor - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetRenderDrawColor)
+///
 /// {@category render}
 bool sdlSetRenderDrawColor(
   Pointer<SdlRenderer> renderer,
@@ -2785,6 +3017,10 @@ bool sdlSetRenderDrawColor(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetRenderDrawColorFloat(SDL_Renderer *renderer, float r, float g, float b, float a)
 /// ```
+///
+/// See also:
+/// - [SDL_SetRenderDrawColorFloat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetRenderDrawColorFloat)
+///
 /// {@category render}
 bool sdlSetRenderDrawColorFloat(
   Pointer<SdlRenderer> renderer,
@@ -2838,6 +3074,10 @@ bool sdlSetRenderDrawColorFloat(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderDrawColor(SDL_Renderer *renderer, Uint8 *r, Uint8 *g, Uint8 *b, Uint8 *a)
 /// ```
+///
+/// See also:
+/// - [SDL_GetRenderDrawColor - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRenderDrawColor)
+///
 /// {@category render}
 bool sdlGetRenderDrawColor(
   Pointer<SdlRenderer> renderer,
@@ -2891,6 +3131,10 @@ bool sdlGetRenderDrawColor(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderDrawColorFloat(SDL_Renderer *renderer, float *r, float *g, float *b, float *a)
 /// ```
+///
+/// See also:
+/// - [SDL_GetRenderDrawColorFloat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRenderDrawColorFloat)
+///
 /// {@category render}
 bool sdlGetRenderDrawColorFloat(
   Pointer<SdlRenderer> renderer,
@@ -2944,6 +3188,10 @@ bool sdlGetRenderDrawColorFloat(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetRenderColorScale(SDL_Renderer *renderer, float scale)
 /// ```
+///
+/// See also:
+/// - [SDL_SetRenderColorScale - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetRenderColorScale)
+///
 /// {@category render}
 bool sdlSetRenderColorScale(Pointer<SdlRenderer> renderer, double scale) {
   final sdlSetRenderColorScaleLookupFunction = _libSdl
@@ -2971,6 +3219,10 @@ bool sdlSetRenderColorScale(Pointer<SdlRenderer> renderer, double scale) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderColorScale(SDL_Renderer *renderer, float *scale)
 /// ```
+///
+/// See also:
+/// - [SDL_GetRenderColorScale - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRenderColorScale)
+///
 /// {@category render}
 bool sdlGetRenderColorScale(
   Pointer<SdlRenderer> renderer,
@@ -3006,6 +3258,10 @@ bool sdlGetRenderColorScale(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetRenderDrawBlendMode(SDL_Renderer *renderer, SDL_BlendMode blendMode)
 /// ```
+///
+/// See also:
+/// - [SDL_SetRenderDrawBlendMode - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetRenderDrawBlendMode)
+///
 /// {@category render}
 bool sdlSetRenderDrawBlendMode(Pointer<SdlRenderer> renderer, int blendMode) {
   final sdlSetRenderDrawBlendModeLookupFunction = _libSdl
@@ -3033,6 +3289,10 @@ bool sdlSetRenderDrawBlendMode(Pointer<SdlRenderer> renderer, int blendMode) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderDrawBlendMode(SDL_Renderer *renderer, SDL_BlendMode *blendMode)
 /// ```
+///
+/// See also:
+/// - [SDL_GetRenderDrawBlendMode - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRenderDrawBlendMode)
+///
 /// {@category render}
 bool sdlGetRenderDrawBlendMode(
   Pointer<SdlRenderer> renderer,
@@ -3067,6 +3327,10 @@ bool sdlGetRenderDrawBlendMode(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderClear(SDL_Renderer *renderer)
 /// ```
+///
+/// See also:
+/// - [SDL_RenderClear - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RenderClear)
+///
 /// {@category render}
 bool sdlRenderClear(Pointer<SdlRenderer> renderer) {
   final sdlRenderClearLookupFunction = _libSdl
@@ -3095,6 +3359,10 @@ bool sdlRenderClear(Pointer<SdlRenderer> renderer) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderPoint(SDL_Renderer *renderer, float x, float y)
 /// ```
+///
+/// See also:
+/// - [SDL_RenderPoint - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RenderPoint)
+///
 /// {@category render}
 bool sdlRenderPoint(Pointer<SdlRenderer> renderer, double x, double y) {
   final sdlRenderPointLookupFunction = _libSdl
@@ -3123,6 +3391,10 @@ bool sdlRenderPoint(Pointer<SdlRenderer> renderer, double x, double y) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderPoints(SDL_Renderer *renderer, const SDL_FPoint *points, int count)
 /// ```
+///
+/// See also:
+/// - [SDL_RenderPoints - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RenderPoints)
+///
 /// {@category render}
 bool sdlRenderPoints(
   Pointer<SdlRenderer> renderer,
@@ -3165,6 +3437,10 @@ bool sdlRenderPoints(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderLine(SDL_Renderer *renderer, float x1, float y1, float x2, float y2)
 /// ```
+///
+/// See also:
+/// - [SDL_RenderLine - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RenderLine)
+///
 /// {@category render}
 bool sdlRenderLine(
   Pointer<SdlRenderer> renderer,
@@ -3212,6 +3488,10 @@ bool sdlRenderLine(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderLines(SDL_Renderer *renderer, const SDL_FPoint *points, int count)
 /// ```
+///
+/// See also:
+/// - [SDL_RenderLines - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RenderLines)
+///
 /// {@category render}
 bool sdlRenderLines(
   Pointer<SdlRenderer> renderer,
@@ -3252,6 +3532,10 @@ bool sdlRenderLines(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderRect(SDL_Renderer *renderer, const SDL_FRect *rect)
 /// ```
+///
+/// See also:
+/// - [SDL_RenderRect - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RenderRect)
+///
 /// {@category render}
 bool sdlRenderRect(Pointer<SdlRenderer> renderer, Pointer<SdlFRect> rect) {
   final sdlRenderRectLookupFunction = _libSdl
@@ -3281,6 +3565,10 @@ bool sdlRenderRect(Pointer<SdlRenderer> renderer, Pointer<SdlFRect> rect) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderRects(SDL_Renderer *renderer, const SDL_FRect *rects, int count)
 /// ```
+///
+/// See also:
+/// - [SDL_RenderRects - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RenderRects)
+///
 /// {@category render}
 bool sdlRenderRects(
   Pointer<SdlRenderer> renderer,
@@ -3322,6 +3610,10 @@ bool sdlRenderRects(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderFillRect(SDL_Renderer *renderer, const SDL_FRect *rect)
 /// ```
+///
+/// See also:
+/// - [SDL_RenderFillRect - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RenderFillRect)
+///
 /// {@category render}
 bool sdlRenderFillRect(Pointer<SdlRenderer> renderer, Pointer<SdlFRect> rect) {
   final sdlRenderFillRectLookupFunction = _libSdl
@@ -3351,6 +3643,10 @@ bool sdlRenderFillRect(Pointer<SdlRenderer> renderer, Pointer<SdlFRect> rect) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderFillRects(SDL_Renderer *renderer, const SDL_FRect *rects, int count)
 /// ```
+///
+/// See also:
+/// - [SDL_RenderFillRects - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RenderFillRects)
+///
 /// {@category render}
 bool sdlRenderFillRects(
   Pointer<SdlRenderer> renderer,
@@ -3396,6 +3692,10 @@ bool sdlRenderFillRects(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderTexture(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_FRect *srcrect, const SDL_FRect *dstrect)
 /// ```
+///
+/// See also:
+/// - [SDL_RenderTexture - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RenderTexture)
+///
 /// {@category render}
 bool sdlRenderTexture(
   Pointer<SdlRenderer> renderer,
@@ -3450,6 +3750,10 @@ bool sdlRenderTexture(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderTextureRotated(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_FRect *srcrect, const SDL_FRect *dstrect, double angle, const SDL_FPoint *center, SDL_FlipMode flip)
 /// ```
+///
+/// See also:
+/// - [SDL_RenderTextureRotated - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RenderTextureRotated)
+///
 /// {@category render}
 bool sdlRenderTextureRotated(
   Pointer<SdlRenderer> renderer,
@@ -3521,6 +3825,10 @@ bool sdlRenderTextureRotated(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderTextureAffine(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_FRect *srcrect, const SDL_FPoint *origin, const SDL_FPoint *right, const SDL_FPoint *down)
 /// ```
+///
+/// See also:
+/// - [SDL_RenderTextureAffine - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RenderTextureAffine)
+///
 /// {@category render}
 bool sdlRenderTextureAffine(
   Pointer<SdlRenderer> renderer,
@@ -3587,6 +3895,10 @@ bool sdlRenderTextureAffine(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderTextureTiled(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_FRect *srcrect, float scale, const SDL_FRect *dstrect)
 /// ```
+///
+/// See also:
+/// - [SDL_RenderTextureTiled - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RenderTextureTiled)
+///
 /// {@category render}
 bool sdlRenderTextureTiled(
   Pointer<SdlRenderer> renderer,
@@ -3657,6 +3969,10 @@ bool sdlRenderTextureTiled(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderTexture9Grid(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_FRect *srcrect, float left_width, float right_width, float top_height, float bottom_height, float scale, const SDL_FRect *dstrect)
 /// ```
+///
+/// See also:
+/// - [SDL_RenderTexture9Grid - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RenderTexture9Grid)
+///
 /// {@category render}
 bool sdlRenderTexture9Grid(
   Pointer<SdlRenderer> renderer,
@@ -3746,6 +4062,10 @@ bool sdlRenderTexture9Grid(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderTexture9GridTiled(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_FRect *srcrect, float left_width, float right_width, float top_height, float bottom_height, float scale, const SDL_FRect *dstrect, float tileScale)
 /// ```
+///
+/// See also:
+/// - [SDL_RenderTexture9GridTiled - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RenderTexture9GridTiled)
+///
 /// {@category render}
 bool sdlRenderTexture9GridTiled(
   Pointer<SdlRenderer> renderer,
@@ -3828,6 +4148,10 @@ bool sdlRenderTexture9GridTiled(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderGeometry(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_Vertex *vertices, int num_vertices, const int *indices, int num_indices)
 /// ```
+///
+/// See also:
+/// - [SDL_RenderGeometry - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RenderGeometry)
+///
 /// {@category render}
 bool sdlRenderGeometry(
   Pointer<SdlRenderer> renderer,
@@ -3899,6 +4223,10 @@ bool sdlRenderGeometry(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderGeometryRaw(SDL_Renderer *renderer, SDL_Texture *texture, const float *xy, int xy_stride, const SDL_FColor *color, int color_stride, const float *uv, int uv_stride, int num_vertices, const void *indices, int num_indices, int size_indices)
 /// ```
+///
+/// See also:
+/// - [SDL_RenderGeometryRaw - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RenderGeometryRaw)
+///
 /// {@category render}
 bool sdlRenderGeometryRaw(
   Pointer<SdlRenderer> renderer,
@@ -3983,6 +4311,10 @@ bool sdlRenderGeometryRaw(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetRenderTextureAddressMode(SDL_Renderer *renderer, SDL_TextureAddressMode u_mode, SDL_TextureAddressMode v_mode)
 /// ```
+///
+/// See also:
+/// - [SDL_SetRenderTextureAddressMode - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetRenderTextureAddressMode)
+///
 /// {@category render}
 bool sdlSetRenderTextureAddressMode(
   Pointer<SdlRenderer> renderer,
@@ -4019,6 +4351,10 @@ bool sdlSetRenderTextureAddressMode(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderTextureAddressMode(SDL_Renderer *renderer, SDL_TextureAddressMode *u_mode, SDL_TextureAddressMode *v_mode)
 /// ```
+///
+/// See also:
+/// - [SDL_GetRenderTextureAddressMode - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRenderTextureAddressMode)
+///
 /// {@category render}
 bool sdlGetRenderTextureAddressMode(
   Pointer<SdlRenderer> renderer,
@@ -4069,6 +4405,10 @@ bool sdlGetRenderTextureAddressMode(
 /// ```c
 /// extern SDL_DECLSPEC SDL_Surface * SDLCALL SDL_RenderReadPixels(SDL_Renderer *renderer, const SDL_Rect *rect)
 /// ```
+///
+/// See also:
+/// - [SDL_RenderReadPixels - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RenderReadPixels)
+///
 /// {@category render}
 Pointer<SdlSurface> sdlRenderReadPixels(
   Pointer<SdlRenderer> renderer,
@@ -4138,6 +4478,10 @@ Pointer<SdlSurface> sdlRenderReadPixels(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderPresent(SDL_Renderer *renderer)
 /// ```
+///
+/// See also:
+/// - [SDL_RenderPresent - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RenderPresent)
+///
 /// {@category render}
 bool sdlRenderPresent(Pointer<SdlRenderer> renderer) {
   final sdlRenderPresentLookupFunction = _libSdl
@@ -4166,6 +4510,10 @@ bool sdlRenderPresent(Pointer<SdlRenderer> renderer) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_DestroyTexture(SDL_Texture *texture)
 /// ```
+///
+/// See also:
+/// - [SDL_DestroyTexture - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_DestroyTexture)
+///
 /// {@category render}
 void sdlDestroyTexture(Pointer<SdlTexture> texture) {
   final sdlDestroyTextureLookupFunction = _libSdl
@@ -4193,6 +4541,10 @@ void sdlDestroyTexture(Pointer<SdlTexture> texture) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_DestroyRenderer(SDL_Renderer *renderer)
 /// ```
+///
+/// See also:
+/// - [SDL_DestroyRenderer - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_DestroyRenderer)
+///
 /// {@category render}
 void sdlDestroyRenderer(Pointer<SdlRenderer> renderer) {
   final sdlDestroyRendererLookupFunction = _libSdl
@@ -4237,6 +4589,10 @@ void sdlDestroyRenderer(Pointer<SdlRenderer> renderer) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_FlushRenderer(SDL_Renderer *renderer)
 /// ```
+///
+/// See also:
+/// - [SDL_FlushRenderer - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_FlushRenderer)
+///
 /// {@category render}
 bool sdlFlushRenderer(Pointer<SdlRenderer> renderer) {
   final sdlFlushRendererLookupFunction = _libSdl
@@ -4266,6 +4622,10 @@ bool sdlFlushRenderer(Pointer<SdlRenderer> renderer) {
 /// ```c
 /// extern SDL_DECLSPEC void * SDLCALL SDL_GetRenderMetalLayer(SDL_Renderer *renderer)
 /// ```
+///
+/// See also:
+/// - [SDL_GetRenderMetalLayer - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRenderMetalLayer)
+///
 /// {@category render}
 Pointer<Void> sdlGetRenderMetalLayer(Pointer<SdlRenderer> renderer) {
   final sdlGetRenderMetalLayerLookupFunction = _libSdl
@@ -4300,6 +4660,10 @@ Pointer<Void> sdlGetRenderMetalLayer(Pointer<SdlRenderer> renderer) {
 /// ```c
 /// extern SDL_DECLSPEC void * SDLCALL SDL_GetRenderMetalCommandEncoder(SDL_Renderer *renderer)
 /// ```
+///
+/// See also:
+/// - [SDL_GetRenderMetalCommandEncoder - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRenderMetalCommandEncoder)
+///
 /// {@category render}
 Pointer<Void> sdlGetRenderMetalCommandEncoder(Pointer<SdlRenderer> renderer) {
   final sdlGetRenderMetalCommandEncoderLookupFunction = _libSdl
@@ -4341,6 +4705,10 @@ Pointer<Void> sdlGetRenderMetalCommandEncoder(Pointer<SdlRenderer> renderer) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_AddVulkanRenderSemaphores(SDL_Renderer *renderer, Uint32 wait_stage_mask, Sint64 wait_semaphore, Sint64 signal_semaphore)
 /// ```
+///
+/// See also:
+/// - [SDL_AddVulkanRenderSemaphores - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_AddVulkanRenderSemaphores)
+///
 /// {@category render}
 bool sdlAddVulkanRenderSemaphores(
   Pointer<SdlRenderer> renderer,
@@ -4397,6 +4765,10 @@ bool sdlAddVulkanRenderSemaphores(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetRenderVSync(SDL_Renderer *renderer, int vsync)
 /// ```
+///
+/// See also:
+/// - [SDL_SetRenderVSync - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetRenderVSync)
+///
 /// {@category render}
 bool sdlSetRenderVSync(Pointer<SdlRenderer> renderer, int vsync) {
   final sdlSetRenderVSyncLookupFunction = _libSdl
@@ -4425,6 +4797,10 @@ bool sdlSetRenderVSync(Pointer<SdlRenderer> renderer, int vsync) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderVSync(SDL_Renderer *renderer, int *vsync)
 /// ```
+///
+/// See also:
+/// - [SDL_GetRenderVSync - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRenderVSync)
+///
 /// {@category render}
 bool sdlGetRenderVSync(Pointer<SdlRenderer> renderer, Pointer<Int32> vsync) {
   final sdlGetRenderVSyncLookupFunction = _libSdl
@@ -4477,6 +4853,10 @@ bool sdlGetRenderVSync(Pointer<SdlRenderer> renderer, Pointer<Int32> vsync) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderDebugText(SDL_Renderer *renderer, float x, float y, const char *str)
 /// ```
+///
+/// See also:
+/// - [SDL_RenderDebugText - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RenderDebugText)
+///
 /// {@category render}
 bool sdlRenderDebugText(
   Pointer<SdlRenderer> renderer,
@@ -4534,6 +4914,10 @@ bool sdlRenderDebugText(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderDebugTextFormat(SDL_Renderer *renderer, float x, float y, SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(4)
 /// ```
+///
+/// See also:
+/// - [SDL_RenderDebugTextFormat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RenderDebugTextFormat)
+///
 /// {@category render}
 bool sdlRenderDebugTextFormat(
   Pointer<SdlRenderer> renderer,
@@ -4586,6 +4970,10 @@ bool sdlRenderDebugTextFormat(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetDefaultTextureScaleMode(SDL_Renderer *renderer, SDL_ScaleMode scale_mode)
 /// ```
+///
+/// See also:
+/// - [SDL_SetDefaultTextureScaleMode - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetDefaultTextureScaleMode)
+///
 /// {@category render}
 bool sdlSetDefaultTextureScaleMode(
   Pointer<SdlRenderer> renderer,
@@ -4618,6 +5006,10 @@ bool sdlSetDefaultTextureScaleMode(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetDefaultTextureScaleMode(SDL_Renderer *renderer, SDL_ScaleMode *scale_mode)
 /// ```
+///
+/// See also:
+/// - [SDL_GetDefaultTextureScaleMode - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetDefaultTextureScaleMode)
+///
 /// {@category render}
 bool sdlGetDefaultTextureScaleMode(
   Pointer<SdlRenderer> renderer,
@@ -4651,6 +5043,10 @@ bool sdlGetDefaultTextureScaleMode(
 /// ```c
 /// extern SDL_DECLSPEC SDL_GPURenderState * SDLCALL SDL_CreateGPURenderState(SDL_Renderer *renderer, const SDL_GPURenderStateCreateInfo *createinfo)
 /// ```
+///
+/// See also:
+/// - [SDL_CreateGPURenderState - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CreateGPURenderState)
+///
 /// {@category render}
 Pointer<SdlGpuRenderState> sdlCreateGpuRenderState(
   Pointer<SdlRenderer> renderer,
@@ -4691,6 +5087,10 @@ Pointer<SdlGpuRenderState> sdlCreateGpuRenderState(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetGPURenderStateSamplerBindings(SDL_GPURenderState *state, int num_sampler_bindings, const SDL_GPUTextureSamplerBinding *sampler_bindings)
 /// ```
+///
+/// See also:
+/// - [SDL_SetGPURenderStateSamplerBindings - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetGPURenderStateSamplerBindings)
+///
 /// {@category render}
 bool sdlSetGpuRenderStateSamplerBindings(
   Pointer<SdlGpuRenderState> state,
@@ -4737,6 +5137,10 @@ bool sdlSetGpuRenderStateSamplerBindings(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetGPURenderStateStorageTextures(SDL_GPURenderState *state, int num_storage_textures, SDL_GPUTexture *const *storage_textures)
 /// ```
+///
+/// See also:
+/// - [SDL_SetGPURenderStateStorageTextures - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetGPURenderStateStorageTextures)
+///
 /// {@category render}
 bool sdlSetGpuRenderStateStorageTextures(
   Pointer<SdlGpuRenderState> state,
@@ -4783,6 +5187,10 @@ bool sdlSetGpuRenderStateStorageTextures(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetGPURenderStateStorageBuffers(SDL_GPURenderState *state, int num_storage_buffers, SDL_GPUBuffer *const *storage_buffers)
 /// ```
+///
+/// See also:
+/// - [SDL_SetGPURenderStateStorageBuffers - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetGPURenderStateStorageBuffers)
+///
 /// {@category render}
 bool sdlSetGpuRenderStateStorageBuffers(
   Pointer<SdlGpuRenderState> state,
@@ -4830,6 +5238,10 @@ bool sdlSetGpuRenderStateStorageBuffers(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetGPURenderStateFragmentUniforms(SDL_GPURenderState *state, Uint32 slot_index, const void *data, Uint32 length)
 /// ```
+///
+/// See also:
+/// - [SDL_SetGPURenderStateFragmentUniforms - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetGPURenderStateFragmentUniforms)
+///
 /// {@category render}
 bool sdlSetGpuRenderStateFragmentUniforms(
   Pointer<SdlGpuRenderState> state,
@@ -4879,6 +5291,10 @@ bool sdlSetGpuRenderStateFragmentUniforms(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetGPURenderState(SDL_Renderer *renderer, SDL_GPURenderState *state)
 /// ```
+///
+/// See also:
+/// - [SDL_SetGPURenderState - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetGPURenderState)
+///
 /// {@category render}
 bool sdlSetGpuRenderState(
   Pointer<SdlRenderer> renderer,
@@ -4913,6 +5329,10 @@ bool sdlSetGpuRenderState(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_DestroyGPURenderState(SDL_GPURenderState *state)
 /// ```
+///
+/// See also:
+/// - [SDL_DestroyGPURenderState - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_DestroyGPURenderState)
+///
 /// {@category render}
 void sdlDestroyGpuRenderState(Pointer<SdlGpuRenderState> state) {
   final sdlDestroyGpuRenderStateLookupFunction = _libSdl
@@ -4941,6 +5361,10 @@ void sdlDestroyGpuRenderState(Pointer<SdlGpuRenderState> state) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_GDKSuspendRenderer(SDL_Renderer *renderer)
 /// ```
+///
+/// See also:
+/// - [SDL_GDKSuspendRenderer - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GDKSuspendRenderer)
+///
 /// {@category render}
 void sdlGdkSuspendRenderer(Pointer<SdlRenderer> renderer) {
   final sdlGdkSuspendRendererLookupFunction = _libSdl
@@ -4969,6 +5393,10 @@ void sdlGdkSuspendRenderer(Pointer<SdlRenderer> renderer) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_GDKResumeRenderer(SDL_Renderer *renderer)
 /// ```
+///
+/// See also:
+/// - [SDL_GDKResumeRenderer - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GDKResumeRenderer)
+///
 /// {@category render}
 void sdlGdkResumeRenderer(Pointer<SdlRenderer> renderer) {
   final sdlGdkResumeRendererLookupFunction = _libSdl

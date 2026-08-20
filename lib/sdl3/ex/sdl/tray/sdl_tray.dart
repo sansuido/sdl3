@@ -30,6 +30,10 @@ extension SdlTrayEx on SdlTray {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Tray * SDLCALL SDL_CreateTray(SDL_Surface *icon, const char *tooltip)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_CreateTray - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CreateTray)
+  ///
   /// {@category tray}
   static Pointer<SdlTray> create(Pointer<SdlSurface> icon, String? tooltip) =>
       sdlCreateTray(icon, tooltip);
@@ -82,6 +86,10 @@ extension SdlTrayEx on SdlTray {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Tray * SDLCALL SDL_CreateTrayWithProperties(SDL_PropertiesID props)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_CreateTrayWithProperties - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CreateTrayWithProperties)
+  ///
   /// {@category tray}
   static Pointer<SdlTray> createWithProperties(int props) =>
       sdlCreateTrayWithProperties(props);
@@ -104,6 +112,10 @@ extension SdlTrayPointerEx on Pointer<SdlTray> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_SetTrayIcon(SDL_Tray *tray, SDL_Surface *icon)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_SetTrayIcon - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetTrayIcon)
+  ///
   /// {@category tray}
   void setIcon(Pointer<SdlSurface> icon) => sdlSetTrayIcon(this, icon);
 
@@ -123,6 +135,10 @@ extension SdlTrayPointerEx on Pointer<SdlTray> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_SetTrayTooltip(SDL_Tray *tray, const char *tooltip)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_SetTrayTooltip - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetTrayTooltip)
+  ///
   /// {@category tray}
   void setTooltip(String? tooltip) => sdlSetTrayTooltip(this, tooltip);
 
@@ -151,6 +167,10 @@ extension SdlTrayPointerEx on Pointer<SdlTray> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_TrayMenu * SDLCALL SDL_CreateTrayMenu(SDL_Tray *tray)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_CreateTrayMenu - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CreateTrayMenu)
+  ///
   /// {@category tray}
   Pointer<SdlTrayMenu> createMenu() => sdlCreateTrayMenu(this);
 
@@ -179,6 +199,10 @@ extension SdlTrayPointerEx on Pointer<SdlTray> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_TrayMenu * SDLCALL SDL_GetTrayMenu(SDL_Tray *tray)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetTrayMenu - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetTrayMenu)
+  ///
   /// {@category tray}
   Pointer<SdlTrayMenu> getMenu() => sdlGetTrayMenu(this);
 
@@ -199,6 +223,10 @@ extension SdlTrayPointerEx on Pointer<SdlTray> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_DestroyTray(SDL_Tray *tray)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_DestroyTray - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_DestroyTray)
+  ///
   /// {@category tray}
   void destroy() => sdlDestroyTray(this);
 }

@@ -46,6 +46,10 @@ part of '../../../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC SDL_Locale ** SDLCALL SDL_GetPreferredLocales(int *count)
 /// ```
+///
+/// See also:
+/// - [SDL_GetPreferredLocales - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetPreferredLocales)
+///
 /// {@category locale}
 List<SdlxLocale> sdlxGetPreferredLocales() {
   final result = <SdlxLocale>[];

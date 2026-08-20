@@ -44,6 +44,10 @@ part of '../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC SDL_AsyncIO * SDLCALL SDL_AsyncIOFromFile(const char *file, const char *mode)
 /// ```
+///
+/// See also:
+/// - [SDL_AsyncIOFromFile - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_AsyncIOFromFile)
+///
 /// {@category asyncio}
 Pointer<SdlAsyncIo> sdlAsyncIoFromFile(String? file, String? mode) {
   final sdlAsyncIoFromFileLookupFunction = _libSdl
@@ -78,6 +82,10 @@ Pointer<SdlAsyncIo> sdlAsyncIoFromFile(String? file, String? mode) {
 /// ```c
 /// extern SDL_DECLSPEC Sint64 SDLCALL SDL_GetAsyncIOSize(SDL_AsyncIO *asyncio)
 /// ```
+///
+/// See also:
+/// - [SDL_GetAsyncIOSize - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetAsyncIOSize)
+///
 /// {@category asyncio}
 int sdlGetAsyncIoSize(Pointer<SdlAsyncIo> asyncio) {
   final sdlGetAsyncIoSizeLookupFunction = _libSdl
@@ -127,6 +135,10 @@ int sdlGetAsyncIoSize(Pointer<SdlAsyncIo> asyncio) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_ReadAsyncIO(SDL_AsyncIO *asyncio, void *ptr, Uint64 offset, Uint64 size, SDL_AsyncIOQueue *queue, void *userdata)
 /// ```
+///
+/// See also:
+/// - [SDL_ReadAsyncIO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ReadAsyncIO)
+///
 /// {@category asyncio}
 bool sdlReadAsyncIo(
   Pointer<SdlAsyncIo> asyncio,
@@ -203,6 +215,10 @@ bool sdlReadAsyncIo(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_WriteAsyncIO(SDL_AsyncIO *asyncio, void *ptr, Uint64 offset, Uint64 size, SDL_AsyncIOQueue *queue, void *userdata)
 /// ```
+///
+/// See also:
+/// - [SDL_WriteAsyncIO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_WriteAsyncIO)
+///
 /// {@category asyncio}
 bool sdlWriteAsyncIo(
   Pointer<SdlAsyncIo> asyncio,
@@ -291,6 +307,10 @@ bool sdlWriteAsyncIo(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_CloseAsyncIO(SDL_AsyncIO *asyncio, bool flush, SDL_AsyncIOQueue *queue, void *userdata)
 /// ```
+///
+/// See also:
+/// - [SDL_CloseAsyncIO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CloseAsyncIO)
+///
 /// {@category asyncio}
 bool sdlCloseAsyncIo(
   Pointer<SdlAsyncIo> asyncio,
@@ -336,6 +356,10 @@ bool sdlCloseAsyncIo(
 /// ```c
 /// extern SDL_DECLSPEC SDL_AsyncIOQueue * SDLCALL SDL_CreateAsyncIOQueue(void)
 /// ```
+///
+/// See also:
+/// - [SDL_CreateAsyncIOQueue - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CreateAsyncIOQueue)
+///
 /// {@category asyncio}
 Pointer<SdlAsyncIoQueue> sdlCreateAsyncIoQueue() {
   final sdlCreateAsyncIoQueueLookupFunction = _libSdl
@@ -377,6 +401,10 @@ Pointer<SdlAsyncIoQueue> sdlCreateAsyncIoQueue() {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_DestroyAsyncIOQueue(SDL_AsyncIOQueue *queue)
 /// ```
+///
+/// See also:
+/// - [SDL_DestroyAsyncIOQueue - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_DestroyAsyncIOQueue)
+///
 /// {@category asyncio}
 void sdlDestroyAsyncIoQueue(Pointer<SdlAsyncIoQueue> queue) {
   final sdlDestroyAsyncIoQueueLookupFunction = _libSdl
@@ -414,6 +442,10 @@ void sdlDestroyAsyncIoQueue(Pointer<SdlAsyncIoQueue> queue) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetAsyncIOResult(SDL_AsyncIOQueue *queue, SDL_AsyncIOOutcome *outcome)
 /// ```
+///
+/// See also:
+/// - [SDL_GetAsyncIOResult - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetAsyncIOResult)
+///
 /// {@category asyncio}
 bool sdlGetAsyncIoResult(
   Pointer<SdlAsyncIoQueue> queue,
@@ -478,6 +510,10 @@ bool sdlGetAsyncIoResult(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_WaitAsyncIOResult(SDL_AsyncIOQueue *queue, SDL_AsyncIOOutcome *outcome, Sint32 timeoutMS)
 /// ```
+///
+/// See also:
+/// - [SDL_WaitAsyncIOResult - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_WaitAsyncIOResult)
+///
 /// {@category asyncio}
 bool sdlWaitAsyncIoResult(
   Pointer<SdlAsyncIoQueue> queue,
@@ -525,6 +561,10 @@ bool sdlWaitAsyncIoResult(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_SignalAsyncIOQueue(SDL_AsyncIOQueue *queue)
 /// ```
+///
+/// See also:
+/// - [SDL_SignalAsyncIOQueue - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SignalAsyncIOQueue)
+///
 /// {@category asyncio}
 void sdlSignalAsyncIoQueue(Pointer<SdlAsyncIoQueue> queue) {
   final sdlSignalAsyncIoQueueLookupFunction = _libSdl
@@ -570,6 +610,10 @@ void sdlSignalAsyncIoQueue(Pointer<SdlAsyncIoQueue> queue) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_LoadFileAsync(const char *file, SDL_AsyncIOQueue *queue, void *userdata)
 /// ```
+///
+/// See also:
+/// - [SDL_LoadFileAsync - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_LoadFileAsync)
+///
 /// {@category asyncio}
 bool sdlLoadFileAsync(
   String? file,

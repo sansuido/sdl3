@@ -16,6 +16,10 @@ part of '../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_SetLogPriorities(SDL_LogPriority priority)
 /// ```
+///
+/// See also:
+/// - [SDL_SetLogPriorities - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetLogPriorities)
+///
 /// {@category log}
 void sdlSetLogPriorities(int priority) {
   final sdlSetLogPrioritiesLookupFunction = _libSdl
@@ -43,6 +47,10 @@ void sdlSetLogPriorities(int priority) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_SetLogPriority(int category, SDL_LogPriority priority)
 /// ```
+///
+/// See also:
+/// - [SDL_SetLogPriority - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetLogPriority)
+///
 /// {@category log}
 void sdlSetLogPriority(int category, int priority) {
   final sdlSetLogPriorityLookupFunction = _libSdl
@@ -68,6 +76,10 @@ void sdlSetLogPriority(int category, int priority) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_LogPriority SDLCALL SDL_GetLogPriority(int category)
 /// ```
+///
+/// See also:
+/// - [SDL_GetLogPriority - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetLogPriority)
+///
 /// {@category log}
 int sdlGetLogPriority(int category) {
   final sdlGetLogPriorityLookupFunction = _libSdl
@@ -93,6 +105,10 @@ int sdlGetLogPriority(int category) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_ResetLogPriorities(void)
 /// ```
+///
+/// See also:
+/// - [SDL_ResetLogPriorities - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ResetLogPriorities)
+///
 /// {@category log}
 void sdlResetLogPriorities() {
   final sdlResetLogPrioritiesLookupFunction = _libSdl
@@ -128,6 +144,10 @@ void sdlResetLogPriorities() {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetLogPriorityPrefix(SDL_LogPriority priority, const char *prefix)
 /// ```
+///
+/// See also:
+/// - [SDL_SetLogPriorityPrefix - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetLogPriorityPrefix)
+///
 /// {@category log}
 bool sdlSetLogPriorityPrefix(int priority, String? prefix) {
   final sdlSetLogPriorityPrefixLookupFunction = _libSdl
@@ -165,6 +185,10 @@ bool sdlSetLogPriorityPrefix(int priority, String? prefix) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_Log(SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(1)
 /// ```
+///
+/// See also:
+/// - [SDL_Log - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_Log)
+///
 /// {@category log}
 void sdlLog(String? fmt) {
   final sdlLogLookupFunction = _libSdl
@@ -203,6 +227,10 @@ void sdlLog(String? fmt) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_LogTrace(int category, SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(2)
 /// ```
+///
+/// See also:
+/// - [SDL_LogTrace - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_LogTrace)
+///
 /// {@category log}
 void sdlLogTrace(int category, String? fmt) {
   final sdlLogTraceLookupFunction = _libSdl
@@ -240,6 +268,10 @@ void sdlLogTrace(int category, String? fmt) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_LogVerbose(int category, SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(2)
 /// ```
+///
+/// See also:
+/// - [SDL_LogVerbose - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_LogVerbose)
+///
 /// {@category log}
 void sdlLogVerbose(int category, String? fmt) {
   final sdlLogVerboseLookupFunction = _libSdl
@@ -278,6 +310,10 @@ void sdlLogVerbose(int category, String? fmt) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_LogDebug(int category, SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(2)
 /// ```
+///
+/// See also:
+/// - [SDL_LogDebug - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_LogDebug)
+///
 /// {@category log}
 void sdlLogDebug(int category, String? fmt) {
   final sdlLogDebugLookupFunction = _libSdl
@@ -316,6 +352,10 @@ void sdlLogDebug(int category, String? fmt) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_LogInfo(int category, SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(2)
 /// ```
+///
+/// See also:
+/// - [SDL_LogInfo - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_LogInfo)
+///
 /// {@category log}
 void sdlLogInfo(int category, String? fmt) {
   final sdlLogInfoLookupFunction = _libSdl
@@ -354,6 +394,10 @@ void sdlLogInfo(int category, String? fmt) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_LogWarn(int category, SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(2)
 /// ```
+///
+/// See also:
+/// - [SDL_LogWarn - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_LogWarn)
+///
 /// {@category log}
 void sdlLogWarn(int category, String? fmt) {
   final sdlLogWarnLookupFunction = _libSdl
@@ -392,6 +436,10 @@ void sdlLogWarn(int category, String? fmt) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_LogError(int category, SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(2)
 /// ```
+///
+/// See also:
+/// - [SDL_LogError - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_LogError)
+///
 /// {@category log}
 void sdlLogError(int category, String? fmt) {
   final sdlLogErrorLookupFunction = _libSdl
@@ -430,6 +478,10 @@ void sdlLogError(int category, String? fmt) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_LogCritical(int category, SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(2)
 /// ```
+///
+/// See also:
+/// - [SDL_LogCritical - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_LogCritical)
+///
 /// {@category log}
 void sdlLogCritical(int category, String? fmt) {
   final sdlLogCriticalLookupFunction = _libSdl
@@ -469,6 +521,10 @@ void sdlLogCritical(int category, String? fmt) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_LogMessage(int category, SDL_LogPriority priority, SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(3)
 /// ```
+///
+/// See also:
+/// - [SDL_LogMessage - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_LogMessage)
+///
 /// {@category log}
 void sdlLogMessage(int category, int priority, String? fmt) {
   final sdlLogMessageLookupFunction = _libSdl
@@ -507,6 +563,10 @@ void sdlLogMessage(int category, int priority, String? fmt) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_LogMessageV(int category, SDL_LogPriority priority, SDL_PRINTF_FORMAT_STRING const char *fmt, va_list ap) SDL_PRINTF_VARARG_FUNCV(3)
 /// ```
+///
+/// See also:
+/// - [SDL_LogMessageV - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_LogMessageV)
+///
 /// {@category log}
 void sdlLogMessageV(int category, int priority, String? fmt) {
   final sdlLogMessageVLookupFunction = _libSdl
@@ -536,6 +596,10 @@ void sdlLogMessageV(int category, int priority, String? fmt) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_LogOutputFunction SDLCALL SDL_GetDefaultLogOutputFunction(void)
 /// ```
+///
+/// See also:
+/// - [SDL_GetDefaultLogOutputFunction - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetDefaultLogOutputFunction)
+///
 /// {@category log}
 Pointer<NativeFunction<SdlLogOutputFunction>> sdlGetDefaultLogOutputFunction() {
   final sdlGetDefaultLogOutputFunctionLookupFunction = _libSdl
@@ -564,6 +628,10 @@ Pointer<NativeFunction<SdlLogOutputFunction>> sdlGetDefaultLogOutputFunction() {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_GetLogOutputFunction(SDL_LogOutputFunction *callback, void **userdata)
 /// ```
+///
+/// See also:
+/// - [SDL_GetLogOutputFunction - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetLogOutputFunction)
+///
 /// {@category log}
 void sdlGetLogOutputFunction(
   Pointer<Pointer<NativeFunction<SdlLogOutputFunction>>> callback,
@@ -599,6 +667,10 @@ void sdlGetLogOutputFunction(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_SetLogOutputFunction(SDL_LogOutputFunction callback, void *userdata)
 /// ```
+///
+/// See also:
+/// - [SDL_SetLogOutputFunction - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetLogOutputFunction)
+///
 /// {@category log}
 void sdlSetLogOutputFunction(
   Pointer<NativeFunction<SdlLogOutputFunction>> callback,

@@ -16,6 +16,10 @@ part of '../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_HasMouse(void)
 /// ```
+///
+/// See also:
+/// - [SDL_HasMouse - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_HasMouse)
+///
 /// {@category mouse}
 bool sdlHasMouse() {
   final sdlHasMouseLookupFunction = _libSdl
@@ -47,6 +51,10 @@ bool sdlHasMouse() {
 /// ```c
 /// extern SDL_DECLSPEC SDL_MouseID * SDLCALL SDL_GetMice(int *count)
 /// ```
+///
+/// See also:
+/// - [SDL_GetMice - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetMice)
+///
 /// {@category mouse}
 Pointer<Uint32> sdlGetMice(Pointer<Int32> count) {
   final sdlGetMiceLookupFunction = _libSdl
@@ -75,6 +83,10 @@ Pointer<Uint32> sdlGetMice(Pointer<Int32> count) {
 /// ```c
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetMouseNameForID(SDL_MouseID instance_id)
 /// ```
+///
+/// See also:
+/// - [SDL_GetMouseNameForID - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetMouseNameForID)
+///
 /// {@category mouse}
 String? sdlGetMouseNameForId(int instanceId) {
   final sdlGetMouseNameForIdLookupFunction = _libSdl
@@ -101,6 +113,10 @@ String? sdlGetMouseNameForId(int instanceId) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Window * SDLCALL SDL_GetMouseFocus(void)
 /// ```
+///
+/// See also:
+/// - [SDL_GetMouseFocus - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetMouseFocus)
+///
 /// {@category mouse}
 Pointer<SdlWindow> sdlGetMouseFocus() {
   final sdlGetMouseFocusLookupFunction = _libSdl
@@ -145,6 +161,10 @@ Pointer<SdlWindow> sdlGetMouseFocus() {
 /// ```c
 /// extern SDL_DECLSPEC SDL_MouseButtonFlags SDLCALL SDL_GetMouseState(float *x, float *y)
 /// ```
+///
+/// See also:
+/// - [SDL_GetMouseState - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetMouseState)
+///
 /// {@category mouse}
 int sdlGetMouseState(Pointer<Float> x, Pointer<Float> y) {
   final sdlGetMouseStateLookupFunction = _libSdl
@@ -193,6 +213,10 @@ int sdlGetMouseState(Pointer<Float> x, Pointer<Float> y) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_MouseButtonFlags SDLCALL SDL_GetGlobalMouseState(float *x, float *y)
 /// ```
+///
+/// See also:
+/// - [SDL_GetGlobalMouseState - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetGlobalMouseState)
+///
 /// {@category mouse}
 int sdlGetGlobalMouseState(Pointer<Float> x, Pointer<Float> y) {
   final sdlGetGlobalMouseStateLookupFunction = _libSdl
@@ -239,6 +263,10 @@ int sdlGetGlobalMouseState(Pointer<Float> x, Pointer<Float> y) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_MouseButtonFlags SDLCALL SDL_GetRelativeMouseState(float *x, float *y)
 /// ```
+///
+/// See also:
+/// - [SDL_GetRelativeMouseState - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRelativeMouseState)
+///
 /// {@category mouse}
 int sdlGetRelativeMouseState(Pointer<Float> x, Pointer<Float> y) {
   final sdlGetRelativeMouseStateLookupFunction = _libSdl
@@ -273,6 +301,10 @@ int sdlGetRelativeMouseState(Pointer<Float> x, Pointer<Float> y) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_WarpMouseInWindow(SDL_Window *window, float x, float y)
 /// ```
+///
+/// See also:
+/// - [SDL_WarpMouseInWindow - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_WarpMouseInWindow)
+///
 /// {@category mouse}
 void sdlWarpMouseInWindow(Pointer<SdlWindow> window, double x, double y) {
   final sdlWarpMouseInWindowLookupFunction = _libSdl
@@ -308,6 +340,10 @@ void sdlWarpMouseInWindow(Pointer<SdlWindow> window, double x, double y) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_WarpMouseGlobal(float x, float y)
 /// ```
+///
+/// See also:
+/// - [SDL_WarpMouseGlobal - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_WarpMouseGlobal)
+///
 /// {@category mouse}
 bool sdlWarpMouseGlobal(double x, double y) {
   final sdlWarpMouseGlobalLookupFunction = _libSdl
@@ -337,6 +373,10 @@ bool sdlWarpMouseGlobal(double x, double y) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetRelativeMouseTransform(SDL_MouseMotionTransformCallback callback, void *userdata)
 /// ```
+///
+/// See also:
+/// - [SDL_SetRelativeMouseTransform - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetRelativeMouseTransform)
+///
 /// {@category mouse}
 bool sdlSetRelativeMouseTransform(
   Pointer<NativeFunction<SdlMouseMotionTransformCallback>> callback,
@@ -385,6 +425,10 @@ bool sdlSetRelativeMouseTransform(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowRelativeMouseMode(SDL_Window *window, bool enabled)
 /// ```
+///
+/// See also:
+/// - [SDL_SetWindowRelativeMouseMode - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetWindowRelativeMouseMode)
+///
 /// {@category mouse}
 bool sdlSetWindowRelativeMouseMode(Pointer<SdlWindow> window, bool enabled) {
   final sdlSetWindowRelativeMouseModeLookupFunction = _libSdl
@@ -410,6 +454,10 @@ bool sdlSetWindowRelativeMouseMode(Pointer<SdlWindow> window, bool enabled) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowRelativeMouseMode(SDL_Window *window)
 /// ```
+///
+/// See also:
+/// - [SDL_GetWindowRelativeMouseMode - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetWindowRelativeMouseMode)
+///
 /// {@category mouse}
 bool sdlGetWindowRelativeMouseMode(Pointer<SdlWindow> window) {
   final sdlGetWindowRelativeMouseModeLookupFunction = _libSdl
@@ -469,6 +517,10 @@ bool sdlGetWindowRelativeMouseMode(Pointer<SdlWindow> window) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_CaptureMouse(bool enabled)
 /// ```
+///
+/// See also:
+/// - [SDL_CaptureMouse - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CaptureMouse)
+///
 /// {@category mouse}
 bool sdlCaptureMouse(bool enabled) {
   final sdlCaptureMouseLookupFunction = _libSdl
@@ -526,6 +578,10 @@ bool sdlCaptureMouse(bool enabled) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Cursor * SDLCALL SDL_CreateCursor(const Uint8 *data, const Uint8 *mask, int w, int h, int hot_x, int hot_y)
 /// ```
+///
+/// See also:
+/// - [SDL_CreateCursor - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CreateCursor)
+///
 /// {@category mouse}
 Pointer<SdlCursor> sdlCreateCursor(
   Pointer<Uint8> data,
@@ -592,6 +648,10 @@ Pointer<SdlCursor> sdlCreateCursor(
 /// ```c
 /// extern SDL_DECLSPEC SDL_Cursor * SDLCALL SDL_CreateColorCursor(SDL_Surface *surface, int hot_x, int hot_y)
 /// ```
+///
+/// See also:
+/// - [SDL_CreateColorCursor - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CreateColorCursor)
+///
 /// {@category mouse}
 Pointer<SdlCursor> sdlCreateColorCursor(
   Pointer<SdlSurface> surface,
@@ -663,6 +723,10 @@ Pointer<SdlCursor> sdlCreateColorCursor(
 /// ```c
 /// extern SDL_DECLSPEC SDL_Cursor *SDLCALL SDL_CreateAnimatedCursor(SDL_CursorFrameInfo *frames, int frame_count, int hot_x, int hot_y)
 /// ```
+///
+/// See also:
+/// - [SDL_CreateAnimatedCursor - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CreateAnimatedCursor)
+///
 /// {@category mouse}
 Pointer<SdlCursor> sdlCreateAnimatedCursor(
   Pointer<SdlCursorFrameInfo> frames,
@@ -704,6 +768,10 @@ Pointer<SdlCursor> sdlCreateAnimatedCursor(
 /// ```c
 /// extern SDL_DECLSPEC SDL_Cursor * SDLCALL SDL_CreateSystemCursor(SDL_SystemCursor id)
 /// ```
+///
+/// See also:
+/// - [SDL_CreateSystemCursor - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CreateSystemCursor)
+///
 /// {@category mouse}
 Pointer<SdlCursor> sdlCreateSystemCursor(int id) {
   final sdlCreateSystemCursorLookupFunction = _libSdl
@@ -735,6 +803,10 @@ Pointer<SdlCursor> sdlCreateSystemCursor(int id) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetCursor(SDL_Cursor *cursor)
 /// ```
+///
+/// See also:
+/// - [SDL_SetCursor - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetCursor)
+///
 /// {@category mouse}
 bool sdlSetCursor(Pointer<SdlCursor> cursor) {
   final sdlSetCursorLookupFunction = _libSdl
@@ -762,6 +834,10 @@ bool sdlSetCursor(Pointer<SdlCursor> cursor) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Cursor * SDLCALL SDL_GetCursor(void)
 /// ```
+///
+/// See also:
+/// - [SDL_GetCursor - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetCursor)
+///
 /// {@category mouse}
 Pointer<SdlCursor> sdlGetCursor() {
   final sdlGetCursorLookupFunction = _libSdl
@@ -788,6 +864,10 @@ Pointer<SdlCursor> sdlGetCursor() {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Cursor * SDLCALL SDL_GetDefaultCursor(void)
 /// ```
+///
+/// See also:
+/// - [SDL_GetDefaultCursor - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetDefaultCursor)
+///
 /// {@category mouse}
 Pointer<SdlCursor> sdlGetDefaultCursor() {
   final sdlGetDefaultCursorLookupFunction = _libSdl
@@ -818,6 +898,10 @@ Pointer<SdlCursor> sdlGetDefaultCursor() {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_DestroyCursor(SDL_Cursor *cursor)
 /// ```
+///
+/// See also:
+/// - [SDL_DestroyCursor - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_DestroyCursor)
+///
 /// {@category mouse}
 void sdlDestroyCursor(Pointer<SdlCursor> cursor) {
   final sdlDestroyCursorLookupFunction = _libSdl
@@ -844,6 +928,10 @@ void sdlDestroyCursor(Pointer<SdlCursor> cursor) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_ShowCursor(void)
 /// ```
+///
+/// See also:
+/// - [SDL_ShowCursor - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ShowCursor)
+///
 /// {@category mouse}
 bool sdlShowCursor() {
   final sdlShowCursorLookupFunction = _libSdl
@@ -867,6 +955,10 @@ bool sdlShowCursor() {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_HideCursor(void)
 /// ```
+///
+/// See also:
+/// - [SDL_HideCursor - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_HideCursor)
+///
 /// {@category mouse}
 bool sdlHideCursor() {
   final sdlHideCursorLookupFunction = _libSdl
@@ -890,6 +982,10 @@ bool sdlHideCursor() {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_CursorVisible(void)
 /// ```
+///
+/// See also:
+/// - [SDL_CursorVisible - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CursorVisible)
+///
 /// {@category mouse}
 bool sdlCursorVisible() {
   final sdlCursorVisibleLookupFunction = _libSdl

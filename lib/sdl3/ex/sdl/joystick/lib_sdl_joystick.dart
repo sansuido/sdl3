@@ -19,6 +19,10 @@ part of '../../../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC SDL_JoystickID * SDLCALL SDL_GetJoysticks(int *count)
 /// ```
+///
+/// See also:
+/// - [SDL_GetJoysticks - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetJoysticks)
+///
 /// {@category joystick}
 List<int> sdlxGetJoysticks() {
   final result = <int>[];
@@ -68,6 +72,10 @@ List<int> sdlxGetJoysticks() {
 /// ```c
 /// extern SDL_DECLSPEC SDL_JoystickID SDLCALL SDL_AttachVirtualJoystick(const SDL_VirtualJoystickDesc *desc)
 /// ```
+///
+/// See also:
+/// - [SDL_AttachVirtualJoystick - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_AttachVirtualJoystick)
+///
 /// {@category joystick}
 int sdlxAttachVirtualJoystick(SdlxVirtualJoystickDesc desc) {
   final descPointer = desc.calloc();
@@ -107,6 +115,10 @@ int sdlxAttachVirtualJoystick(SdlxVirtualJoystickDesc desc) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SendJoystickVirtualSensorData(SDL_Joystick *joystick, SDL_SensorType type, Uint64 sensor_timestamp, const float *data, int num_values)
 /// ```
+///
+/// See also:
+/// - [SDL_SendJoystickVirtualSensorData - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SendJoystickVirtualSensorData)
+///
 /// {@category joystick}
 bool sdlxSendJoystickVirtualSensorData(
   Pointer<SdlJoystick> joystick,
@@ -151,6 +163,10 @@ bool sdlxSendJoystickVirtualSensorData(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_GetJoystickGUIDInfo(SDL_GUID guid, Uint16 *vendor, Uint16 *product, Uint16 *version, Uint16 *crc16)
 /// ```
+///
+/// See also:
+/// - [SDL_GetJoystickGUIDInfo - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetJoystickGUIDInfo)
+///
 /// {@category joystick}
 ({int crc16, int product, int vendor, int version}) sdlxGetJoystickGuidInfo(
   SdlGuid guid,
@@ -200,6 +216,10 @@ bool sdlxSendJoystickVirtualSensorData(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetJoystickAxisInitialState(SDL_Joystick *joystick, int axis, Sint16 *state)
 /// ```
+///
+/// See also:
+/// - [SDL_GetJoystickAxisInitialState - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetJoystickAxisInitialState)
+///
 /// {@category joystick}
 int? sdlxGetJoystickAxisInitialState(Pointer<SdlJoystick> joystick, int axis) {
   int? result;
@@ -236,6 +256,10 @@ int? sdlxGetJoystickAxisInitialState(Pointer<SdlJoystick> joystick, int axis) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetJoystickBall(SDL_Joystick *joystick, int ball, int *dx, int *dy)
 /// ```
+///
+/// See also:
+/// - [SDL_GetJoystickBall - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetJoystickBall)
+///
 /// {@category joystick}
 SdlxPoint? sdlxGetJoystickBall(Pointer<SdlJoystick> joystick, int ball) {
   SdlxPoint? result;
@@ -274,6 +298,10 @@ SdlxPoint? sdlxGetJoystickBall(Pointer<SdlJoystick> joystick, int ball) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_PowerState SDLCALL SDL_GetJoystickPowerInfo(SDL_Joystick *joystick, int *percent)
 /// ```
+///
+/// See also:
+/// - [SDL_GetJoystickPowerInfo - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetJoystickPowerInfo)
+///
 /// {@category joystick}
 ({int percent, int state}) sdlxGetJoystickPowerInfo(
   Pointer<SdlJoystick> joystick,

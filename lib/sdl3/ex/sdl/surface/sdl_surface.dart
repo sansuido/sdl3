@@ -23,6 +23,10 @@ extension SdlSurfaceEx on SdlSurface {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Surface * SDLCALL SDL_LoadBMP(const char *file)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_LoadBMP - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_LoadBMP)
+  ///
   /// {@category surface}
   static Pointer<SdlSurface> loadBmp(String file) => sdlLoadBmp(file);
 }
@@ -65,6 +69,10 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Cursor * SDLCALL SDL_CreateColorCursor(SDL_Surface *surface, int hot_x, int hot_y)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_CreateColorCursor - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CreateColorCursor)
+  ///
   /// {@category mouse}
   Pointer<SdlCursor> createColorCursor(int hotX, int hotY) =>
       sdlCreateColorCursor(this, hotX, hotY);
@@ -93,6 +101,10 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_DestroySurface(SDL_Surface *surface)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_DestroySurface - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_DestroySurface)
+  ///
   /// {@category surface}
   bool destroy() {
     if (this != nullptr) {
@@ -126,6 +138,10 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetSurfacePalette(SDL_Surface *surface, SDL_Palette *palette)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_SetSurfacePalette - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetSurfacePalette)
+  ///
   /// {@category surface}
   bool setPalette(Pointer<SdlPalette> palette) =>
       sdlSetSurfacePalette(this, palette);
@@ -159,6 +175,10 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_LockSurface(SDL_Surface *surface)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_LockSurface - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_LockSurface)
+  ///
   /// {@category surface}
   bool lock() => sdlLockSurface(this);
 
@@ -178,6 +198,10 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_UnlockSurface(SDL_Surface *surface)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_UnlockSurface - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_UnlockSurface)
+  ///
   /// {@category surface}
   void unlock() {
     sdlUnlockSurface(this);
@@ -206,6 +230,10 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Surface * SDLCALL SDL_LoadBMP_IO(SDL_IOStream *src, bool closeio)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_LoadBMP_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_LoadBMP_IO)
+  ///
   /// {@category surface}
   static Pointer<SdlSurface> loadBmpIo(
     Pointer<SdlIoStream> src,
@@ -239,6 +267,10 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SaveBMP_IO(SDL_Surface *surface, SDL_IOStream *dst, bool closeio)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_SaveBMP_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SaveBMP_IO)
+  ///
   /// {@category surface}
   bool saveBmpIo(Pointer<SdlIoStream> dst, bool freedst) =>
       sdlSaveBmpIo(this, dst, freedst);
@@ -266,6 +298,10 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetSurfaceRLE(SDL_Surface *surface, bool enabled)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_SetSurfaceRLE - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetSurfaceRLE)
+  ///
   /// {@category surface}
   bool setRre(bool enabled) => sdlSetSurfaceRle(this, enabled);
 
@@ -286,6 +322,10 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SurfaceHasRLE(SDL_Surface *surface)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_SurfaceHasRLE - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SurfaceHasRLE)
+  ///
   /// {@category surface}
   bool hasRre() => sdlSurfaceHasRle(this);
 
@@ -317,6 +357,10 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetSurfaceColorKey(SDL_Surface *surface, bool enabled, Uint32 key)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_SetSurfaceColorKey - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetSurfaceColorKey)
+  ///
   /// {@category surface}
   bool setColorKey(bool enabled, int key) =>
       sdlSetSurfaceColorKey(this, enabled, key);
@@ -339,6 +383,10 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SurfaceHasColorKey(SDL_Surface *surface)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_SurfaceHasColorKey - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SurfaceHasColorKey)
+  ///
   /// {@category surface}
   bool hadColorKey() => sdlSurfaceHasColorKey(this);
 
@@ -365,6 +413,10 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetSurfaceColorKey(SDL_Surface *surface, Uint32 *key)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetSurfaceColorKey - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetSurfaceColorKey)
+  ///
   /// {@category surface}
   int? getColorKey() {
     int? result;
@@ -403,6 +455,10 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetSurfaceColorMod(SDL_Surface *surface, Uint8 r, Uint8 g, Uint8 b)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_SetSurfaceColorMod - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetSurfaceColorMod)
+  ///
   /// {@category surface}
   bool setColorMod(int r, int g, int b) => sdlSetSurfaceColorMod(this, r, g, b);
 
@@ -427,6 +483,10 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetSurfaceColorMod(SDL_Surface *surface, Uint8 *r, Uint8 *g, Uint8 *b)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetSurfaceColorMod - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetSurfaceColorMod)
+  ///
   /// {@category surface}
   int? getColorMod() {
     int? result;
@@ -470,6 +530,10 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetSurfaceAlphaMod(SDL_Surface *surface, Uint8 alpha)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_SetSurfaceAlphaMod - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetSurfaceAlphaMod)
+  ///
   /// {@category surface}
   bool setAlphaMod(int alpha) => sdlSetSurfaceAlphaMod(this, alpha);
 
@@ -491,6 +555,10 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetSurfaceAlphaMod(SDL_Surface *surface, Uint8 *alpha)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetSurfaceAlphaMod - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetSurfaceAlphaMod)
+  ///
   /// {@category surface}
   int? getAlphaMod() {
     int? result;
@@ -524,6 +592,10 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetSurfaceBlendMode(SDL_Surface *surface, SDL_BlendMode blendMode)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_SetSurfaceBlendMode - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetSurfaceBlendMode)
+  ///
   /// {@category surface}
   bool setBlendMode(int blendMode) => sdlSetSurfaceBlendMode(this, blendMode);
 
@@ -544,6 +616,10 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetSurfaceBlendMode(SDL_Surface *surface, SDL_BlendMode *blendMode)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetSurfaceBlendMode - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetSurfaceBlendMode)
+  ///
   /// {@category surface}
   int? getBlendMode() {
     int? result;
@@ -580,6 +656,10 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SetSurfaceClipRect(SDL_Surface *surface, const SDL_Rect *rect)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_SetSurfaceClipRect - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetSurfaceClipRect)
+  ///
   /// {@category surface}
   bool setClipRect([SdlxRect? rect]) => sdlxSetSurfaceClipRect(this, rect);
 
@@ -606,6 +686,10 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetSurfaceClipRect(SDL_Surface *surface, SDL_Rect *rect)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetSurfaceClipRect - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetSurfaceClipRect)
+  ///
   /// {@category surface}
   bool getClipRect(SdlxRect rect) => sdlxGetSurfaceClipRect(this, rect);
 
@@ -631,6 +715,10 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Surface * SDLCALL SDL_DuplicateSurface(SDL_Surface *surface)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_DuplicateSurface - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_DuplicateSurface)
+  ///
   /// {@category surface}
   Pointer<SdlSurface> duplicate() => sdlDuplicateSurface(this);
 
@@ -666,6 +754,10 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_FillSurfaceRect(SDL_Surface *dst, const SDL_Rect *rect, Uint32 color)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_FillSurfaceRect - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_FillSurfaceRect)
+  ///
   /// {@category surface}
   bool fillRect(SdlxRect? rect, int color) =>
       sdlxFillSurfaceRect(this, rect, color);
@@ -699,6 +791,10 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_FillSurfaceRects(SDL_Surface *dst, const SDL_Rect *rects, int count, Uint32 color)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_FillSurfaceRects - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_FillSurfaceRects)
+  ///
   /// {@category surface}
   bool fillRects(List<SdlxRect> rects, int color) =>
       sdlxFillSurfaceRects(this, rects, color);
@@ -777,6 +873,10 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_BlitSurface(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, const SDL_Rect *dstrect)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_BlitSurface - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_BlitSurface)
+  ///
   /// {@category surface}
   bool blit(SdlxRect? srcrect, Pointer<SdlSurface> dst, SdlxRect? dstrect) =>
       sdlxBlitSurface(this, srcrect, dst, dstrect);
@@ -806,6 +906,10 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_BlitSurfaceUnchecked(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, const SDL_Rect *dstrect)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_BlitSurfaceUnchecked - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_BlitSurfaceUnchecked)
+  ///
   /// {@category surface}
   bool blitUnchecked(
     SdlxRect srcrect,
@@ -838,6 +942,10 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_BlitSurfaceScaled(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, const SDL_Rect *dstrect, SDL_ScaleMode scaleMode)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_BlitSurfaceScaled - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_BlitSurfaceScaled)
+  ///
   /// {@category surface}
   bool upperBlitScaled(
     SdlxRect? srcrect,
@@ -873,6 +981,10 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_BlitSurfaceUncheckedScaled(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, const SDL_Rect *dstrect, SDL_ScaleMode scaleMode)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_BlitSurfaceUncheckedScaled - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_BlitSurfaceUncheckedScaled)
+  ///
   /// {@category surface}
   bool blitUncheckedScaled(
     SdlxRect srcrect,
@@ -921,6 +1033,10 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_SaveBMP(SDL_Surface *surface, const char *file)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_SaveBMP - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SaveBMP)
+  ///
   /// {@category surface}
   bool saveBmp(String file) => sdlSaveBmp(this, file);
 }

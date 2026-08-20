@@ -32,6 +32,10 @@ extension ImgAnimationDecoderEx on ImgAnimationDecoder {
   /// ```c
   /// extern SDL_DECLSPEC IMG_AnimationDecoder * SDLCALL IMG_CreateAnimationDecoder(const char *file)
   /// ```
+  ///
+  /// See also:
+  /// - [IMG_CreateAnimationDecoder - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_CreateAnimationDecoder)
+  ///
   /// {@category image}
   static Pointer<ImgAnimationDecoder> create(String file) =>
       imgCreateAnimationDecoder(file);
@@ -69,6 +73,10 @@ extension ImgAnimationDecoderEx on ImgAnimationDecoder {
   /// ```c
   /// extern SDL_DECLSPEC IMG_AnimationDecoder * SDLCALL IMG_CreateAnimationDecoder_IO(SDL_IOStream *src, bool closeio, const char *type)
   /// ```
+  ///
+  /// See also:
+  /// - [IMG_CreateAnimationDecoder_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_CreateAnimationDecoder_IO)
+  ///
   /// {@category image}
   static Pointer<ImgAnimationDecoder> createIo(
     Pointer<SdlIoStream> src,
@@ -118,6 +126,10 @@ extension ImgAnimationDecoderEx on ImgAnimationDecoder {
   /// ```c
   /// extern SDL_DECLSPEC IMG_AnimationDecoder * SDLCALL IMG_CreateAnimationDecoderWithProperties(SDL_PropertiesID props)
   /// ```
+  ///
+  /// See also:
+  /// - [IMG_CreateAnimationDecoderWithProperties - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_CreateAnimationDecoderWithProperties)
+  ///
   /// {@category image}
   static Pointer<ImgAnimationDecoder> createWithProperties(int props) =>
       imgCreateAnimationDecoderWithProperties(props);
@@ -149,6 +161,10 @@ extension ImgAnimationDecoderPointerEx on Pointer<ImgAnimationDecoder> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_PropertiesID SDLCALL IMG_GetAnimationDecoderProperties(IMG_AnimationDecoder *decoder)
   /// ```
+  ///
+  /// See also:
+  /// - [IMG_GetAnimationDecoderProperties - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_GetAnimationDecoderProperties)
+  ///
   /// {@category image}
   int getProperties() => imgGetAnimationDecoderProperties(this);
 
@@ -157,7 +173,7 @@ extension ImgAnimationDecoderPointerEx on Pointer<ImgAnimationDecoder> {
   ///
   /// This function decodes the next frame in the animation decoder, returning it
   /// as an SDL_Surface. The returned surface should be freed with
-  /// SDL_FreeSurface() when no longer needed.
+  /// SDL_DestroySurface() when no longer needed.
   ///
   /// If the animation decoder has no more frames or an error occurred while
   /// decoding the frame, this function returns false. In that case, please call
@@ -188,6 +204,10 @@ extension ImgAnimationDecoderPointerEx on Pointer<ImgAnimationDecoder> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL IMG_GetAnimationDecoderFrame(IMG_AnimationDecoder *decoder, SDL_Surface **frame, Uint64 *duration)
   /// ```
+  ///
+  /// See also:
+  /// - [IMG_GetAnimationDecoderFrame - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_GetAnimationDecoderFrame)
+  ///
   /// {@category image}
   ({Pointer<SdlSurface> frame, int duration})? getFrame() =>
       imgxGetAnimationDecoderFrame(this);
@@ -206,6 +226,10 @@ extension ImgAnimationDecoderPointerEx on Pointer<ImgAnimationDecoder> {
   /// ```c
   /// extern SDL_DECLSPEC IMG_AnimationDecoderStatus SDLCALL IMG_GetAnimationDecoderStatus(IMG_AnimationDecoder *decoder)
   /// ```
+  ///
+  /// See also:
+  /// - [IMG_GetAnimationDecoderStatus - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_GetAnimationDecoderStatus)
+  ///
   /// {@category image}
   int getStatus() => imgGetAnimationDecoderStatus(this);
 
@@ -231,6 +255,10 @@ extension ImgAnimationDecoderPointerEx on Pointer<ImgAnimationDecoder> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL IMG_ResetAnimationDecoder(IMG_AnimationDecoder *decoder)
   /// ```
+  ///
+  /// See also:
+  /// - [IMG_ResetAnimationDecoder - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_ResetAnimationDecoder)
+  ///
   /// {@category image}
   bool reset() => imgResetAnimationDecoder(this);
 
@@ -253,6 +281,10 @@ extension ImgAnimationDecoderPointerEx on Pointer<ImgAnimationDecoder> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL IMG_CloseAnimationDecoder(IMG_AnimationDecoder *decoder)
   /// ```
+  ///
+  /// See also:
+  /// - [IMG_CloseAnimationDecoder - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_CloseAnimationDecoder)
+  ///
   /// {@category image}
   bool close() => imgCloseAnimationDecoder(this);
 }

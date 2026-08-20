@@ -238,7 +238,7 @@ yamahara
 - [ ] SdlIoStreamInterface
 - [ ] SdlIoStream
 ### joystick
-- [ ] SdlJoystick
+- [x] [SdlJoystick](./lib/sdl3/ex/sdl/joystick/sdl_joystick.dart) \([haptic](./lib/sdl3/ex/sdl/joystick/sdl_joystick_from_haptic.dart)\)
 - [ ] SdlVirtualJoystickTouchpadDesc
 - [ ] SdlVirtualJoystickSensorDesc
 - [ ] SdlVirtualJoystickDesc
@@ -281,9 +281,9 @@ yamahara
 - [x] [SdlRect](./lib/sdl3/ex/sdl/rect/sdl_rect.dart)
 - [x] [SdlFRect](./lib/sdl3/ex/sdl/rect/sdl_frect.dart)
 ### render
-- [ ] SdlVertex
-- [ ] SdlRenderer
-- [ ] SdlTexture
+- [x] [SdlVertex](./lib/sdl3/ex/sdl/render/sdl_vertex.dart)
+- [x] [SdlRenderer](./lib/sdl3/ex/sdl/render/sdl_renderer.dart) \([gfx](./lib/sdl3/ex/sdl/render/sdl_renderer_from_gfx.dart) / [image](./lib/sdl3/ex/sdl/render/sdl_renderer_from_image.dart) / [ttf](./lib/sdl3/ex/sdl/render/sdl_renderer_from_ttf.dart)\)
+- [x] [SdlTexture](./lib/sdl3/ex/sdl/render/sdl_texture.dart)
 - [ ] SdlGpuRenderStateCreateInfo
 - [ ] SdlGpuRenderState
 ### sensor
@@ -315,7 +315,7 @@ yamahara
 ### video
 - [ ] SdlDisplayModeData
 - [ ] SdlDisplayMode
-- [ ] SdlWindow
+- [x] [SdlWindow](./lib/sdl3/ex/sdl/video/sdl_window.dart) \([keyboard](./lib/sdl3/ex/sdl/video/sdl_window_from_keyboard.dart) / [metal](./lib/sdl3/ex/sdl/video/sdl_window_from_metal.dart) / [mouse](./lib/sdl3/ex/sdl/video/sdl_window_from_mouse.dart) / [render](./lib/sdl3/ex/sdl/video/sdl_window_from_render.dart) / [system](./lib/sdl3/ex/sdl/video/sdl_window_from_system.dart) / [vulkan](./lib/sdl3/ex/sdl/video/sdl_window_from_vulkan.dart)\)
 - [x] [SdlGlContext](./lib/sdl3/ex/sdl/video/sdl_gl_context.dart)
 ## sdl_image
 - [x] [ImgAnimation](./lib/sdl3/ex/image/img_animation.dart)

@@ -51,6 +51,10 @@ extension MixMixerEx on MixMixer {
   /// ```c
   /// extern SDL_DECLSPEC MIX_Mixer * SDLCALL MIX_CreateMixerDevice(SDL_AudioDeviceID devid, const SDL_AudioSpec *spec)
   /// ```
+  ///
+  /// See also:
+  /// - [MIX_CreateMixerDevice - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_CreateMixerDevice)
+  ///
   /// {@category mixer}
   static Pointer<MixMixer> createDevice(int devid, SdlxAudioSpec? spec) =>
       mixxCreateMixerDevice(devid, spec);
@@ -85,6 +89,10 @@ extension MixMixerEx on MixMixer {
   /// ```c
   /// extern SDL_DECLSPEC MIX_Mixer * SDLCALL MIX_CreateMixer(const SDL_AudioSpec *spec)
   /// ```
+  ///
+  /// See also:
+  /// - [MIX_CreateMixer - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_CreateMixer)
+  ///
   /// {@category mixer}
   static Pointer<MixMixer> create(Pointer<SdlAudioSpec> spec) =>
       mixCreateMixer(spec);
@@ -117,6 +125,10 @@ extension MixMixerPointerEx on Pointer<MixMixer> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL MIX_DestroyMixer(MIX_Mixer *mixer)
   /// ```
+  ///
+  /// See also:
+  /// - [MIX_DestroyMixer - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_DestroyMixer)
+  ///
   /// {@category mixer}
   void destroy() => mixDestroyMixer(this);
 
@@ -140,6 +152,10 @@ extension MixMixerPointerEx on Pointer<MixMixer> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_PropertiesID SDLCALL MIX_GetMixerProperties(MIX_Mixer *mixer)
   /// ```
+  ///
+  /// See also:
+  /// - [MIX_GetMixerProperties - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_GetMixerProperties)
+  ///
   /// {@category mixer}
   int getProperties() => mixGetMixerProperties(this);
 
@@ -175,6 +191,10 @@ extension MixMixerPointerEx on Pointer<MixMixer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL MIX_GetMixerFormat(MIX_Mixer *mixer, SDL_AudioSpec *spec)
   /// ```
+  ///
+  /// See also:
+  /// - [MIX_GetMixerFormat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_GetMixerFormat)
+  ///
   /// {@category mixer}
   bool getFormat(SdlxAudioSpec spec) => mixxGetMixerFormat(this, spec);
 
@@ -238,6 +258,10 @@ extension MixMixerPointerEx on Pointer<MixMixer> {
   /// ```c
   /// extern SDL_DECLSPEC MIX_Audio * SDLCALL MIX_LoadAudio_IO(MIX_Mixer *mixer, SDL_IOStream *io, bool predecode, bool closeio)
   /// ```
+  ///
+  /// See also:
+  /// - [MIX_LoadAudio_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_LoadAudio_IO)
+  ///
   /// {@category mixer}
   Pointer<MixAudio> loadAudioIo(
     Pointer<SdlIoStream> io,
@@ -276,6 +300,10 @@ extension MixMixerPointerEx on Pointer<MixMixer> {
   /// ```c
   /// extern SDL_DECLSPEC MIX_Audio * SDLCALL MIX_LoadAudio(MIX_Mixer *mixer, const char *path, bool predecode)
   /// ```
+  ///
+  /// See also:
+  /// - [MIX_LoadAudio - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_LoadAudio)
+  ///
   /// {@category mixer}
   Pointer<MixAudio> loadAudio(
     Pointer<SdlIoStream> io,
@@ -319,6 +347,10 @@ extension MixMixerPointerEx on Pointer<MixMixer> {
   /// ```c
   /// extern SDL_DECLSPEC MIX_Audio * SDLCALL MIX_LoadRawAudio_IO(MIX_Mixer *mixer, SDL_IOStream *io, const SDL_AudioSpec *spec, bool closeio)
   /// ```
+  ///
+  /// See also:
+  /// - [MIX_LoadRawAudio_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_LoadRawAudio_IO)
+  ///
   /// {@category mixer}
   Pointer<MixAudio> loadRawAudioIo(
     Pointer<SdlIoStream> io,
@@ -363,6 +395,10 @@ extension MixMixerPointerEx on Pointer<MixMixer> {
   /// ```c
   /// extern SDL_DECLSPEC MIX_Audio * SDLCALL MIX_LoadRawAudio(MIX_Mixer *mixer, const void *data, size_t datalen, const SDL_AudioSpec *spec)
   /// ```
+  ///
+  /// See also:
+  /// - [MIX_LoadRawAudio - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_LoadRawAudio)
+  ///
   /// {@category mixer}
   Pointer<MixAudio> loadRawAudio(
     Pointer<Void> data,
@@ -413,6 +449,10 @@ extension MixMixerPointerEx on Pointer<MixMixer> {
   /// ```c
   /// extern SDL_DECLSPEC MIX_Audio * SDLCALL MIX_LoadRawAudioNoCopy(MIX_Mixer *mixer, const void *data, size_t datalen, const SDL_AudioSpec *spec, bool free_when_done)
   /// ```
+  ///
+  /// See also:
+  /// - [MIX_LoadRawAudioNoCopy - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_LoadRawAudioNoCopy)
+  ///
   /// {@category mixer}
   Pointer<MixAudio> loadRawAudioNoCopy(
     Pointer<Void> data,
@@ -465,6 +505,10 @@ extension MixMixerPointerEx on Pointer<MixMixer> {
   /// ```c
   /// extern SDL_DECLSPEC MIX_Audio * SDLCALL MIX_CreateSineWaveAudio(MIX_Mixer *mixer, int hz, float amplitude, Sint64 ms)
   /// ```
+  ///
+  /// See also:
+  /// - [MIX_CreateSineWaveAudio - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_CreateSineWaveAudio)
+  ///
   /// {@category mixer}
   Pointer<MixAudio> createSineWaveAudio(int hz, double amplitude, int ms) =>
       mixCreateSineWaveAudio(this, hz, amplitude, ms);
@@ -496,6 +540,10 @@ extension MixMixerPointerEx on Pointer<MixMixer> {
   /// ```c
   /// extern SDL_DECLSPEC MIX_Track * SDLCALL MIX_CreateTrack(MIX_Mixer *mixer)
   /// ```
+  ///
+  /// See also:
+  /// - [MIX_CreateTrack - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_CreateTrack)
+  ///
   /// {@category mixer}
   Pointer<MixTrack> createTrack() => mixCreateTrack(this);
 
@@ -537,6 +585,10 @@ extension MixMixerPointerEx on Pointer<MixMixer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL MIX_PlayTag(MIX_Mixer *mixer, const char *tag, SDL_PropertiesID options)
   /// ```
+  ///
+  /// See also:
+  /// - [MIX_PlayTag - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_PlayTag)
+  ///
   /// {@category mixer}
   bool playTag(String tag, int options) => mixPlayTag(this, tag, options);
 
@@ -573,6 +625,10 @@ extension MixMixerPointerEx on Pointer<MixMixer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL MIX_PlayAudio(MIX_Mixer *mixer, MIX_Audio *audio)
   /// ```
+  ///
+  /// See also:
+  /// - [MIX_PlayAudio - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_PlayAudio)
+  ///
   /// {@category mixer}
   bool playAudio(Pointer<MixAudio> audio) => mixPlayAudio(this, audio);
 
@@ -612,6 +668,10 @@ extension MixMixerPointerEx on Pointer<MixMixer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL MIX_StopAllTracks(MIX_Mixer *mixer, Sint64 fade_out_ms)
   /// ```
+  ///
+  /// See also:
+  /// - [MIX_StopAllTracks - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_StopAllTracks)
+  ///
   /// {@category mixer}
   bool stopAllTracks(int fadeOutMs) => mixStopAllTracks(this, fadeOutMs);
 
@@ -649,6 +709,10 @@ extension MixMixerPointerEx on Pointer<MixMixer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL MIX_StopTag(MIX_Mixer *mixer, const char *tag, Sint64 fade_out_ms)
   /// ```
+  ///
+  /// See also:
+  /// - [MIX_StopTag - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_StopTag)
+  ///
   /// {@category mixer}
   bool stopTag(String tag, int fadeOutMs) => mixStopTag(this, tag, fadeOutMs);
 
@@ -675,6 +739,10 @@ extension MixMixerPointerEx on Pointer<MixMixer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL MIX_PauseAllTracks(MIX_Mixer *mixer)
   /// ```
+  ///
+  /// See also:
+  /// - [MIX_PauseAllTracks - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_PauseAllTracks)
+  ///
   /// {@category mixer}
   bool pauseAllTracks() => mixPauseAllTracks(this);
 
@@ -707,6 +775,10 @@ extension MixMixerPointerEx on Pointer<MixMixer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL MIX_PauseTag(MIX_Mixer *mixer, const char *tag)
   /// ```
+  ///
+  /// See also:
+  /// - [MIX_PauseTag - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_PauseTag)
+  ///
   /// {@category mixer}
   bool pauseTag(String tag) => mixPauseTag(this, tag);
 
@@ -733,6 +805,10 @@ extension MixMixerPointerEx on Pointer<MixMixer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL MIX_ResumeAllTracks(MIX_Mixer *mixer)
   /// ```
+  ///
+  /// See also:
+  /// - [MIX_ResumeAllTracks - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_ResumeAllTracks)
+  ///
   /// {@category mixer}
   bool resumeAllTracks() => mixResumeAllTracks(this);
 
@@ -765,6 +841,10 @@ extension MixMixerPointerEx on Pointer<MixMixer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL MIX_ResumeTag(MIX_Mixer *mixer, const char *tag)
   /// ```
+  ///
+  /// See also:
+  /// - [MIX_ResumeTag - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_ResumeTag)
+  ///
   /// {@category mixer}
   bool resumeTag(String tag) => mixResumeTag(this, tag);
 
@@ -797,6 +877,10 @@ extension MixMixerPointerEx on Pointer<MixMixer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL MIX_SetMixerGain(MIX_Mixer *mixer, float gain)
   /// ```
+  ///
+  /// See also:
+  /// - [MIX_SetMixerGain - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_SetMixerGain)
+  ///
   /// {@category mixer}
   bool setGain(double gain) => mixSetMixerGain(this, gain);
 
@@ -819,6 +903,10 @@ extension MixMixerPointerEx on Pointer<MixMixer> {
   /// ```c
   /// extern SDL_DECLSPEC float SDLCALL MIX_GetMixerGain(MIX_Mixer *mixer)
   /// ```
+  ///
+  /// See also:
+  /// - [MIX_GetMixerGain - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_GetMixerGain)
+  ///
   /// {@category mixer}
   double getGain() => mixGetMixerGain(this);
 
@@ -860,6 +948,10 @@ extension MixMixerPointerEx on Pointer<MixMixer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL MIX_SetTagGain(MIX_Mixer *mixer, const char *tag, float gain)
   /// ```
+  ///
+  /// See also:
+  /// - [MIX_SetTagGain - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_SetTagGain)
+  ///
   /// {@category mixer}
   bool setTagGain(String tag, double gain) => mixSetTagGain(this, tag, gain);
 
@@ -896,6 +988,10 @@ extension MixMixerPointerEx on Pointer<MixMixer> {
   /// ```c
   /// extern SDL_DECLSPEC MIX_Group * SDLCALL MIX_CreateGroup(MIX_Mixer *mixer)
   /// ```
+  ///
+  /// See also:
+  /// - [MIX_CreateGroup - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_CreateGroup)
+  ///
   /// {@category mixer}
   Pointer<MixGroup> createGroup() => mixCreateGroup(this);
 
@@ -931,6 +1027,10 @@ extension MixMixerPointerEx on Pointer<MixMixer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL MIX_SetMixerFrequencyRatio(MIX_Mixer *mixer, float ratio)
   /// ```
+  ///
+  /// See also:
+  /// - [MIX_SetMixerFrequencyRatio - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_SetMixerFrequencyRatio)
+  ///
   /// {@category mixer}
   bool setFrequencyRatio(double ratio) =>
       mixSetMixerFrequencyRatio(this, ratio);
@@ -954,6 +1054,10 @@ extension MixMixerPointerEx on Pointer<MixMixer> {
   /// ```c
   /// extern SDL_DECLSPEC float SDLCALL MIX_GetMixerFrequencyRatio(MIX_Mixer *mixer)
   /// ```
+  ///
+  /// See also:
+  /// - [MIX_GetMixerFrequencyRatio - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_GetMixerFrequencyRatio)
+  ///
   /// {@category mixer}
   double getFrequencyRatio() => mixGetMixerFrequencyRatio(this);
 
@@ -984,6 +1088,10 @@ extension MixMixerPointerEx on Pointer<MixMixer> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL MIX_SetPostMixCallback(MIX_Mixer *mixer, MIX_PostMixCallback cb, void *userdata)
   /// ```
+  ///
+  /// See also:
+  /// - [MIX_SetPostMixCallback - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_SetPostMixCallback)
+  ///
   /// {@category mixer}
   bool setPostMixCallback(
     Pointer<NativeFunction<MixPostMixCallback>> cb,
@@ -1046,6 +1154,10 @@ extension MixMixerPointerEx on Pointer<MixMixer> {
   /// ```c
   /// extern SDL_DECLSPEC int SDLCALL MIX_Generate(MIX_Mixer *mixer, void *buffer, int buflen)
   /// ```
+  ///
+  /// See also:
+  /// - [MIX_Generate - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_Generate)
+  ///
   /// {@category mixer}
   int generate(TypedData buffer) => mixxGenerate(this, buffer);
 }

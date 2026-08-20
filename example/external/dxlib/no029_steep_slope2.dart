@@ -3,6 +3,7 @@
 // 29.Action sample program (steep slope & scroll)
 
 import 'dart:ffi';
+
 import 'package:sdl3/sdl3.dart';
 import 'package:sdl3/sdl3gfx.dart' as gfx;
 
@@ -289,7 +290,7 @@ void drawTriangle(
           ..color = color,
       )
       .toList();
-  sdlxRenderGeometry(renderer, nullptr, vertices: vertices);
+  sdlxRenderGeometry(renderer, vertices);
 }
 
 Future<void> main() async {

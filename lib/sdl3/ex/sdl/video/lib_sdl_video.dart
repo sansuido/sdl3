@@ -18,6 +18,10 @@ part of '../../../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC SDL_DisplayID * SDLCALL SDL_GetDisplays(int *count)
 /// ```
+///
+/// See also:
+/// - [SDL_GetDisplays - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetDisplays)
+///
 /// {@category video}
 List<int> sdlxGetDisplays() {
   final result = <int>[];
@@ -54,6 +58,10 @@ List<int> sdlxGetDisplays() {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetDisplayBounds(SDL_DisplayID displayID, SDL_Rect *rect)
 /// ```
+///
+/// See also:
+/// - [SDL_GetDisplayBounds - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetDisplayBounds)
+///
 /// {@category video}
 bool sdlxGetDisplayBounds(int displayId, SdlxRect rect) {
   final rectPointer = calloc<SdlRect>();
@@ -92,6 +100,10 @@ bool sdlxGetDisplayBounds(int displayId, SdlxRect rect) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetDisplayUsableBounds(SDL_DisplayID displayID, SDL_Rect *rect)
 /// ```
+///
+/// See also:
+/// - [SDL_GetDisplayUsableBounds - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetDisplayUsableBounds)
+///
 /// {@category video}
 bool sdlxGetDisplayUsableBounds(int displayId, SdlxRect rect) {
   final rectPointer = calloc<SdlRect>();
@@ -153,6 +165,10 @@ List<SdlxDisplayMode>? sdlxGetFullscreenDisplayModes(int displayId) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetClosestFullscreenDisplayMode(SDL_DisplayID displayID, int w, int h, float refresh_rate, bool include_high_density_modes, SDL_DisplayMode *closest)
 /// ```
+///
+/// See also:
+/// - [SDL_GetClosestFullscreenDisplayMode - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetClosestFullscreenDisplayMode)
+///
 /// {@category video}
 bool sdlxGetClosestFullscreenDisplayMode(
   int displayId,
@@ -200,6 +216,10 @@ bool sdlxGetClosestFullscreenDisplayMode(
 /// ```c
 /// extern SDL_DECLSPEC const SDL_DisplayMode * SDLCALL SDL_GetDesktopDisplayMode(SDL_DisplayID displayID)
 /// ```
+///
+/// See also:
+/// - [SDL_GetDesktopDisplayMode - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetDesktopDisplayMode)
+///
 /// {@category video}
 SdlxDisplayMode? sdlxGetDesktopDisplayMode(int displayId) {
   final resultPointer = sdlGetDesktopDisplayMode(displayId);
@@ -232,6 +252,10 @@ SdlxDisplayMode? sdlxGetDesktopDisplayMode(int displayId) {
 /// ```c
 /// extern SDL_DECLSPEC const SDL_DisplayMode * SDLCALL SDL_GetCurrentDisplayMode(SDL_DisplayID displayID)
 /// ```
+///
+/// See also:
+/// - [SDL_GetCurrentDisplayMode - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetCurrentDisplayMode)
+///
 /// {@category video}
 SdlxDisplayMode? sdlxGetCurrentDisplayMode(int displayId) {
   final resultPointer = sdlGetCurrentDisplayMode(displayId);
@@ -259,6 +283,10 @@ SdlxDisplayMode? sdlxGetCurrentDisplayMode(int displayId) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_DisplayID SDLCALL SDL_GetDisplayForPoint(const SDL_Point *point)
 /// ```
+///
+/// See also:
+/// - [SDL_GetDisplayForPoint - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetDisplayForPoint)
+///
 /// {@category video}
 int sdlxGetDisplayForPoint(SdlxPoint point) {
   final pointPointer = calloc<SdlPoint>();
@@ -288,6 +316,10 @@ int sdlxGetDisplayForPoint(SdlxPoint point) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_DisplayID SDLCALL SDL_GetDisplayForRect(const SDL_Rect *rect)
 /// ```
+///
+/// See also:
+/// - [SDL_GetDisplayForRect - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetDisplayForRect)
+///
 /// {@category video}
 int sdlxGetDisplayForRect(SdlxRect rect) {
   final rectPointer = calloc<SdlRect>();
@@ -337,6 +369,10 @@ int sdlxGetDisplayForRect(SdlxRect rect) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowFullscreenMode(SDL_Window *window, const SDL_DisplayMode *mode)
 /// ```
+///
+/// See also:
+/// - [SDL_SetWindowFullscreenMode - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetWindowFullscreenMode)
+///
 /// {@category video}
 bool sdlxSetWindowFullscreenMode(
   Pointer<SdlWindow> window,
@@ -365,6 +401,10 @@ bool sdlxSetWindowFullscreenMode(
 /// ```c
 /// extern SDL_DECLSPEC const SDL_DisplayMode * SDLCALL SDL_GetWindowFullscreenMode(SDL_Window *window)
 /// ```
+///
+/// See also:
+/// - [SDL_GetWindowFullscreenMode - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetWindowFullscreenMode)
+///
 /// {@category video}
 SdlxDisplayMode? sdlxGetWindowFullscreenMode(Pointer<SdlWindow> window) {
   final resultPointer = sdlGetWindowFullscreenMode(window);
@@ -373,6 +413,43 @@ SdlxDisplayMode? sdlxGetWindowFullscreenMode(Pointer<SdlWindow> window) {
   }
   final result = SdlxDisplayMode()..loadFromPointer(resultPointer);
   return result;
+}
+
+///
+/// Get the raw ICC profile data for the screen the window is currently on.
+///
+/// \param window the window to query.
+/// \param size the size of the ICC profile.
+/// \returns the raw ICC profile data on success or NULL on failure; call
+/// SDL_GetError() for more information. This should be freed with
+/// SDL_free() when it is no longer needed.
+///
+/// \threadsafety This function should only be called on the main thread.
+///
+/// \since This function is available since SDL 3.2.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC void * SDLCALL SDL_GetWindowICCProfile(SDL_Window *window, size_t *size)
+/// ```
+///
+/// See also:
+/// - [SDL_GetWindowICCProfile - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetWindowICCProfile)
+///
+/// {@category video}
+({Pointer<Void> profile, int size})? sdlxGetWindowIccProfile(
+  Pointer<SdlWindow> window,
+) {
+  var size = 0;
+  final sizePointer = calloc<Size>();
+  final profile = sdlGetWindowIccProfile(window, sizePointer);
+  if (profile != nullptr) {
+    size = sizePointer.value;
+  }
+  sizePointer.callocFree();
+  if (profile == nullptr) {
+    return null;
+  }
+  return (profile: profile, size: size);
 }
 
 ///
@@ -392,6 +469,10 @@ SdlxDisplayMode? sdlxGetWindowFullscreenMode(Pointer<SdlWindow> window) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Window ** SDLCALL SDL_GetWindows(int *count)
 /// ```
+///
+/// See also:
+/// - [SDL_GetWindows - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetWindows)
+///
 /// {@category video}
 List<Pointer<SdlWindow>>? sdlxGetWindows() {
   final countPointer = calloc<Int32>();
@@ -435,18 +516,28 @@ List<Pointer<SdlWindow>>? sdlxGetWindows() {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowPosition(SDL_Window *window, int *x, int *y)
 /// ```
+///
+/// See also:
+/// - [SDL_GetWindowPosition - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetWindowPosition)
+///
 /// {@category video}
-bool sdlxGetWindowPosition(Pointer<SdlWindow> window, SdlxPoint position) {
+({int x, int y})? sdlxGetWindowPosition(Pointer<SdlWindow> window) {
   var result = false;
+  var x = 0;
+  var y = 0;
   final xPointer = calloc<Int32>();
   final yPointer = calloc<Int32>();
   result = sdlGetWindowPosition(window, xPointer, yPointer);
-  position
-    ..x = xPointer.value
-    ..y = yPointer.value;
+  if (result) {
+    x = xPointer.value;
+    y = yPointer.value;
+  }
   xPointer.callocFree();
   yPointer.callocFree();
-  return result;
+  if (!result) {
+    return null;
+  }
+  return (x: x, y: y);
 }
 
 ///
@@ -487,6 +578,10 @@ bool sdlxGetWindowPosition(Pointer<SdlWindow> window, SdlxPoint position) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowSize(SDL_Window *window, int w, int h)
 /// ```
+///
+/// See also:
+/// - [SDL_SetWindowSize - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetWindowSize)
+///
 /// {@category video}
 bool sdlxSetWindowSize(Pointer<SdlWindow> window, SdlxPoint size) =>
     sdlSetWindowSize(window, size.x, size.y);
@@ -516,20 +611,28 @@ bool sdlxSetWindowSize(Pointer<SdlWindow> window, SdlxPoint size) =>
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowSize(SDL_Window *window, int *w, int *h)
 /// ```
+///
+/// See also:
+/// - [SDL_GetWindowSize - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetWindowSize)
+///
 /// {@category video}
-bool sdlxGetWindowSize(Pointer<SdlWindow> window, SdlxPoint size) {
+({int w, int h})? sdlxGetWindowSize(Pointer<SdlWindow> window) {
   var result = false;
+  var w = 0;
+  var h = 0;
   final wPointer = calloc<Int32>();
   final hPointer = calloc<Int32>();
   result = sdlGetWindowSize(window, wPointer, hPointer);
   if (result) {
-    size
-      ..x = wPointer.value
-      ..y = hPointer.value;
+    w = wPointer.value;
+    h = hPointer.value;
   }
   wPointer.callocFree();
   hPointer.callocFree();
-  return result;
+  if (!result) {
+    return null;
+  }
+  return (w: w, h: h);
 }
 
 ///
@@ -555,15 +658,69 @@ bool sdlxGetWindowSize(Pointer<SdlWindow> window, SdlxPoint size) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowSafeArea(SDL_Window *window, SDL_Rect *rect)
 /// ```
+///
+/// See also:
+/// - [SDL_GetWindowSafeArea - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetWindowSafeArea)
+///
 /// {@category video}
-bool sdlxGetWindowSafeArea(Pointer<SdlWindow> window, SdlxRect rect) {
+SdlxRect? sdlxGetWindowSafeArea(Pointer<SdlWindow> window) {
+  SdlxRect? rect;
   final rectPointer = calloc<SdlRect>();
   final result = sdlGetWindowSafeArea(window, rectPointer);
   if (result) {
-    rect.loadFromPointer(rectPointer);
+    rect = SdlxRect()..loadFromPointer(rectPointer);
   }
   rectPointer.callocFree();
-  return result;
+  return rect;
+}
+
+///
+/// Get the aspect ratio of a window's client area.
+///
+/// \param window the window to query the width and height from.
+/// \param min_aspect a pointer filled in with the minimum aspect ratio of the
+/// window, may be NULL.
+/// \param max_aspect a pointer filled in with the maximum aspect ratio of the
+/// window, may be NULL.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety This function should only be called on the main thread.
+///
+/// \since This function is available since SDL 3.2.0.
+///
+/// \sa SDL_SetWindowAspectRatio
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowAspectRatio(SDL_Window *window, float *min_aspect, float *max_aspect)
+/// ```
+///
+/// See also:
+/// - [SDL_GetWindowAspectRatio - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetWindowAspectRatio)
+///
+/// {@category video}
+({double minAspect, double maxAspect})? sdlxGetWindowAspectRatio(
+  Pointer<SdlWindow> window,
+) {
+  var minAspect = 0.0;
+  var maxAspect = 0.0;
+  final minAspectPointer = ffi.calloc<Float>();
+  final maxAspectPointer = ffi.calloc<Float>();
+  final result = sdlGetWindowAspectRatio(
+    window,
+    minAspectPointer,
+    maxAspectPointer,
+  );
+  if (result) {
+    minAspect = minAspectPointer.value;
+    maxAspect = maxAspectPointer.value;
+  }
+  minAspectPointer.callocFree();
+  maxAspectPointer.callocFree();
+  if (!result) {
+    return null;
+  }
+  return (minAspect: minAspect, maxAspect: maxAspect);
 }
 
 ///
@@ -604,9 +761,19 @@ bool sdlxGetWindowSafeArea(Pointer<SdlWindow> window, SdlxRect rect) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowBordersSize(SDL_Window *window, int *top, int *left, int *bottom, int *right)
 /// ```
+///
+/// See also:
+/// - [SDL_GetWindowBordersSize - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetWindowBordersSize)
+///
 /// {@category video}
-bool sdlxGetWindowBordersSize(Pointer<SdlWindow> window, SdlxRect borders) {
+({int top, int left, int bottom, int right})? sdlxGetWindowBordersSize(
+  Pointer<SdlWindow> window,
+) {
   var result = false;
+  var top = 0;
+  var left = 0;
+  var bottom = 0;
+  var right = 0;
   final topPointer = calloc<Int32>();
   final leftPointer = calloc<Int32>();
   final bottomPointer = calloc<Int32>();
@@ -619,17 +786,19 @@ bool sdlxGetWindowBordersSize(Pointer<SdlWindow> window, SdlxRect borders) {
     rightPointer,
   );
   if (result) {
-    borders
-      ..x = leftPointer.value
-      ..y = topPointer.value
-      ..w = rightPointer.value
-      ..h = bottomPointer.value;
+    top = topPointer.value;
+    left = leftPointer.value;
+    right = rightPointer.value;
+    bottom = bottomPointer.value;
   }
   topPointer.callocFree();
   leftPointer.callocFree();
   bottomPointer.callocFree();
   rightPointer.callocFree();
-  return result;
+  if (!result) {
+    return null;
+  }
+  return (top: top, left: left, bottom: bottom, right: right);
 }
 
 ///
@@ -653,20 +822,27 @@ bool sdlxGetWindowBordersSize(Pointer<SdlWindow> window, SdlxRect borders) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowSizeInPixels(SDL_Window *window, int *w, int *h)
 /// ```
+///
+/// See also:
+/// - [SDL_GetWindowSizeInPixels - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetWindowSizeInPixels)
+///
 /// {@category video}
-bool sdlxGetWindowSizeInPixels(Pointer<SdlWindow> window, SdlxPoint size) {
-  var result = false;
+({int w, int h})? sdlxGetWindowSizeInPixels(Pointer<SdlWindow> window) {
+  var w = 0;
+  var h = 0;
   final wPointer = calloc<Int32>();
   final hPointer = calloc<Int32>();
-  result = sdlGetWindowSizeInPixels(window, wPointer, hPointer);
+  final result = sdlGetWindowSizeInPixels(window, wPointer, hPointer);
   if (result) {
-    size
-      ..x = wPointer.value
-      ..y = hPointer.value;
+    w = wPointer.value;
+    h = hPointer.value;
   }
   wPointer.callocFree();
   hPointer.callocFree();
-  return result;
+  if (!result) {
+    return null;
+  }
+  return (w: w, h: h);
 }
 
 ///
@@ -688,6 +864,10 @@ bool sdlxGetWindowSizeInPixels(Pointer<SdlWindow> window, SdlxPoint size) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowMinimumSize(SDL_Window *window, int min_w, int min_h)
 /// ```
+///
+/// See also:
+/// - [SDL_SetWindowMinimumSize - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetWindowMinimumSize)
+///
 /// {@category video}
 bool sdlxSetWindowMinimumSize(Pointer<SdlWindow> window, SdlxPoint minSize) =>
     sdlSetWindowMinimumSize(window, minSize.x, minSize.y);
@@ -713,20 +893,27 @@ bool sdlxSetWindowMinimumSize(Pointer<SdlWindow> window, SdlxPoint minSize) =>
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowMinimumSize(SDL_Window *window, int *w, int *h)
 /// ```
+///
+/// See also:
+/// - [SDL_GetWindowMinimumSize - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetWindowMinimumSize)
+///
 /// {@category video}
-bool sdlxGetWindowMinimumSize(Pointer<SdlWindow> window, SdlxPoint minSize) {
-  var result = false;
+({int w, int h})? sdlxGetWindowMinimumSize(Pointer<SdlWindow> window) {
+  var w = 0;
+  var h = 0;
   final wPointer = calloc<Int32>();
   final hPointer = calloc<Int32>();
-  result = sdlGetWindowMinimumSize(window, wPointer, hPointer);
+  final result = sdlGetWindowMinimumSize(window, wPointer, hPointer);
   if (result) {
-    minSize
-      ..x = wPointer.value
-      ..y = hPointer.value;
+    w = wPointer.value;
+    h = hPointer.value;
   }
   wPointer.callocFree();
   hPointer.callocFree();
-  return result;
+  if (!result) {
+    return null;
+  }
+  return (w: w, h: h);
 }
 
 ///
@@ -748,6 +935,10 @@ bool sdlxGetWindowMinimumSize(Pointer<SdlWindow> window, SdlxPoint minSize) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowMaximumSize(SDL_Window *window, int max_w, int max_h)
 /// ```
+///
+/// See also:
+/// - [SDL_SetWindowMaximumSize - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetWindowMaximumSize)
+///
 /// {@category video}
 bool sdlxSetWindowMaximumSize(Pointer<SdlWindow> window, SdlxPoint maxSize) =>
     sdlSetWindowMaximumSize(window, maxSize.x, maxSize.y);
@@ -773,20 +964,27 @@ bool sdlxSetWindowMaximumSize(Pointer<SdlWindow> window, SdlxPoint maxSize) =>
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowMaximumSize(SDL_Window *window, int *w, int *h)
 /// ```
+///
+/// See also:
+/// - [SDL_GetWindowMaximumSize - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetWindowMaximumSize)
+///
 /// {@category video}
-bool sdlxGetWindowMaximumSize(Pointer<SdlWindow> window, SdlxPoint maxSize) {
-  var result = false;
+({int w, int h})? sdlxGetWindowMaximumSize(Pointer<SdlWindow> window) {
+  var w = 0;
+  var h = 0;
   final wPointer = calloc<Int32>();
   final hPointer = calloc<Int32>();
-  result = sdlGetWindowMaximumSize(window, wPointer, hPointer);
+  final result = sdlGetWindowMaximumSize(window, wPointer, hPointer);
   if (result) {
-    maxSize
-      ..x = wPointer.value
-      ..y = hPointer.value;
+    w = wPointer.value;
+    h = hPointer.value;
   }
   wPointer.callocFree();
   hPointer.callocFree();
-  return result;
+  if (!result) {
+    return null;
+  }
+  return (w: w, h: h);
 }
 
 ///
@@ -807,16 +1005,22 @@ bool sdlxGetWindowMaximumSize(Pointer<SdlWindow> window, SdlxPoint maxSize) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetWindowSurfaceVSync(SDL_Window *window, int *vsync)
 /// ```
+///
+/// See also:
+/// - [SDL_GetWindowSurfaceVSync - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetWindowSurfaceVSync)
+///
 /// {@category video}
 int? sdlxGetWindowSurfaceVSync(Pointer<SdlWindow> window) {
+  var vsync = 0;
   final vsyncPointer = calloc<Int32>();
   final result = sdlGetWindowSurfaceVSync(window, vsyncPointer);
+  if (result) {
+    vsync = vsyncPointer.value;
+  }
+  vsyncPointer.callocFree();
   if (!result) {
-    vsyncPointer.callocFree();
     return null;
   }
-  final vsync = vsyncPointer.value;
-  vsyncPointer.callocFree();
   return vsync;
 }
 
@@ -850,6 +1054,10 @@ int? sdlxGetWindowSurfaceVSync(Pointer<SdlWindow> window) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_UpdateWindowSurfaceRects(SDL_Window *window, const SDL_Rect *rects, int numrects)
 /// ```
+///
+/// See also:
+/// - [SDL_UpdateWindowSurfaceRects - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_UpdateWindowSurfaceRects)
+///
 /// {@category video}
 bool sdlxUpdateWindowSurfaceRects(
   Pointer<SdlWindow> window,
@@ -888,6 +1096,10 @@ bool sdlxUpdateWindowSurfaceRects(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetWindowMouseRect(SDL_Window *window, const SDL_Rect *rect)
 /// ```
+///
+/// See also:
+/// - [SDL_SetWindowMouseRect - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetWindowMouseRect)
+///
 /// {@category video}
 bool sdlxSetWindowMouseRect(Pointer<SdlWindow> window, SdlxRect rect) {
   final rectPointer = rect.calloc();
@@ -914,6 +1126,10 @@ bool sdlxSetWindowMouseRect(Pointer<SdlWindow> window, SdlxRect rect) {
 /// ```c
 /// extern SDL_DECLSPEC const SDL_Rect * SDLCALL SDL_GetWindowMouseRect(SDL_Window *window)
 /// ```
+///
+/// See also:
+/// - [SDL_GetWindowMouseRect - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetWindowMouseRect)
+///
 /// {@category video}
 SdlxRect? sdlxGetWindowMouseRect(Pointer<SdlWindow> window) {
   final resultPointer = sdlGetWindowMouseRect(window);
@@ -950,6 +1166,10 @@ SdlxRect? sdlxGetWindowMouseRect(Pointer<SdlWindow> window) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_ShowWindowSystemMenu(SDL_Window *window, int x, int y)
 /// ```
+///
+/// See also:
+/// - [SDL_ShowWindowSystemMenu - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ShowWindowSystemMenu)
+///
 /// {@category video}
 bool sdlxShowWindowSystemMenu(Pointer<SdlWindow> window, SdlxPoint position) =>
     sdlShowWindowSystemMenu(window, position.x, position.y);
@@ -973,6 +1193,10 @@ bool sdlxShowWindowSystemMenu(Pointer<SdlWindow> window, SdlxPoint position) =>
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GL_GetAttribute(SDL_GLAttr attr, int *value)
 /// ```
+///
+/// See also:
+/// - [SDL_GL_GetAttribute - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GL_GetAttribute)
+///
 /// {@category video}
 int? sdlxGlGetAttribute(int attr) {
   final valuePointer = calloc<Int32>();

@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:ffi';
+
 import 'package:sdl3/sdl3.dart';
 
 int main() {

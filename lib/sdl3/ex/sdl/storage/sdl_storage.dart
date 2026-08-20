@@ -23,6 +23,10 @@ extension SdlStorageEx on SdlStorage {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Storage * SDLCALL SDL_OpenTitleStorage(const char *override, SDL_PropertiesID props)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_OpenTitleStorage - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_OpenTitleStorage)
+  ///
   /// {@category storage}
   static Pointer<SdlStorage> openTitle(String? override, int props) =>
       sdlOpenTitleStorage(override, props);
@@ -54,6 +58,10 @@ extension SdlStorageEx on SdlStorage {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Storage * SDLCALL SDL_OpenUserStorage(const char *org, const char *app, SDL_PropertiesID props)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_OpenUserStorage - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_OpenUserStorage)
+  ///
   /// {@category storage}
   static Pointer<SdlStorage> openUser(String? org, String? app, int props) =>
       sdlOpenUserStorage(org, app, props);
@@ -83,6 +91,10 @@ extension SdlStorageEx on SdlStorage {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Storage * SDLCALL SDL_OpenFileStorage(const char *path)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_OpenFileStorage - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_OpenFileStorage)
+  ///
   /// {@category storage}
   static Pointer<SdlStorage> openFile(String path) => sdlOpenFileStorage(path);
 
@@ -116,6 +128,10 @@ extension SdlStorageEx on SdlStorage {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Storage * SDLCALL SDL_OpenStorage(const SDL_StorageInterface *iface, void *userdata)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_OpenStorage - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_OpenStorage)
+  ///
   /// {@category storage}
   static Pointer<SdlStorage> open(
     SdlxStorageInterface iface,
@@ -143,6 +159,10 @@ extension SdlStoragePointerEx on Pointer<SdlStorage> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_CloseStorage(SDL_Storage *storage)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_CloseStorage - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CloseStorage)
+  ///
   /// {@category storage}
   bool close() => sdlCloseStorage(this);
 
@@ -162,6 +182,10 @@ extension SdlStoragePointerEx on Pointer<SdlStorage> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_StorageReady(SDL_Storage *storage)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_StorageReady - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_StorageReady)
+  ///
   /// {@category storage}
   bool ready() => sdlStorageReady(this);
 
@@ -182,6 +206,10 @@ extension SdlStoragePointerEx on Pointer<SdlStorage> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetStorageFileSize(SDL_Storage *storage, const char *path, Uint64 *length)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetStorageFileSize - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetStorageFileSize)
+  ///
   /// {@category storage}
   int? getFileSize(String path) => sdlxGetStorageFileSize(this, path);
 
@@ -209,6 +237,10 @@ extension SdlStoragePointerEx on Pointer<SdlStorage> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_ReadStorageFile(SDL_Storage *storage, const char *path, void *destination, Uint64 length)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_ReadStorageFile - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ReadStorageFile)
+  ///
   /// {@category storage}
   Uint8List? readFile(String path) => sdlxReadStorageFile(this, path);
 
@@ -231,6 +263,10 @@ extension SdlStoragePointerEx on Pointer<SdlStorage> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_WriteStorageFile(SDL_Storage *storage, const char *path, const void *source, Uint64 length)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_WriteStorageFile - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_WriteStorageFile)
+  ///
   /// {@category storage}
   bool writeFile(String path, Uint8List source) =>
       sdlxWriteStorageFile(this, path, source);
@@ -250,6 +286,10 @@ extension SdlStoragePointerEx on Pointer<SdlStorage> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_CreateStorageDirectory(SDL_Storage *storage, const char *path)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_CreateStorageDirectory - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CreateStorageDirectory)
+  ///
   /// {@category storage}
   bool createDirectory(String path) => sdlCreateStorageDirectory(this, path);
 
@@ -283,6 +323,10 @@ extension SdlStoragePointerEx on Pointer<SdlStorage> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_EnumerateStorageDirectory(SDL_Storage *storage, const char *path, SDL_EnumerateDirectoryCallback callback, void *userdata)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_EnumerateStorageDirectory - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_EnumerateStorageDirectory)
+  ///
   /// {@category storage}
   bool enumerateDirectory(
     String path,
@@ -305,6 +349,10 @@ extension SdlStoragePointerEx on Pointer<SdlStorage> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_RemoveStoragePath(SDL_Storage *storage, const char *path)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_RemoveStoragePath - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RemoveStoragePath)
+  ///
   /// {@category storage}
   bool removePath(String path) => sdlRemoveStoragePath(this, path);
 
@@ -324,6 +372,10 @@ extension SdlStoragePointerEx on Pointer<SdlStorage> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_RenameStoragePath(SDL_Storage *storage, const char *oldpath, const char *newpath)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_RenameStoragePath - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RenameStoragePath)
+  ///
   /// {@category storage}
   bool renamePath(String oldpath, String newpath) =>
       sdlRenameStoragePath(this, oldpath, newpath);
@@ -344,6 +396,10 @@ extension SdlStoragePointerEx on Pointer<SdlStorage> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_CopyStorageFile(SDL_Storage *storage, const char *oldpath, const char *newpath)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_CopyStorageFile - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CopyStorageFile)
+  ///
   /// {@category storage}
   bool copyFile(String oldpath, String newpath) =>
       sdlCopyStorageFile(this, oldpath, newpath);
@@ -365,6 +421,10 @@ extension SdlStoragePointerEx on Pointer<SdlStorage> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetStoragePathInfo(SDL_Storage *storage, const char *path, SDL_PathInfo *info)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetStoragePathInfo - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetStoragePathInfo)
+  ///
   /// {@category storage}
   bool getPathInfo(String path, SdlxPathInfo info) =>
       sdlxGetStoragePathInfo(this, path, info);
@@ -383,6 +443,10 @@ extension SdlStoragePointerEx on Pointer<SdlStorage> {
   /// ```c
   /// extern SDL_DECLSPEC Uint64 SDLCALL SDL_GetStorageSpaceRemaining(SDL_Storage *storage)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetStorageSpaceRemaining - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetStorageSpaceRemaining)
+  ///
   /// {@category storage}
   int getSpaceRemaining() => sdlGetStorageSpaceRemaining(this);
 
@@ -427,6 +491,10 @@ extension SdlStoragePointerEx on Pointer<SdlStorage> {
   /// ```c
   /// extern SDL_DECLSPEC char ** SDLCALL SDL_GlobStorageDirectory(SDL_Storage *storage, const char *path, const char *pattern, SDL_GlobFlags flags, int *count)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GlobStorageDirectory - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GlobStorageDirectory)
+  ///
   /// {@category storage}
   List<String> globDirectory(String path, {String? pattern, int flags = 0}) =>
       sdlxGlobStorageDirectory(this, path, pattern: pattern, flags: flags);

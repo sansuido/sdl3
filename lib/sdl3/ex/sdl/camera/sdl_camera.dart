@@ -49,6 +49,10 @@ extension SdlCameraEx on SdlCamera {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Camera * SDLCALL SDL_OpenCamera(SDL_CameraID instance_id, const SDL_CameraSpec *spec)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_OpenCamera - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_OpenCamera)
+  ///
   /// {@category camera}
   static Pointer<SdlCamera> open(int instanceId, SdlxCameraSpec spec) =>
       sdlxOpenCamera(instanceId, spec);
@@ -91,6 +95,10 @@ extension SdlCameraPointerEx on Pointer<SdlCamera> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_CameraPermissionState SDLCALL SDL_GetCameraPermissionState(SDL_Camera *camera)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetCameraPermissionState - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetCameraPermissionState)
+  ///
   /// {@category camera}
   int getPermissionState() => sdlGetCameraPermissionState(this);
 
@@ -110,6 +118,10 @@ extension SdlCameraPointerEx on Pointer<SdlCamera> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_CameraID SDLCALL SDL_GetCameraID(SDL_Camera *camera)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetCameraID - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetCameraID)
+  ///
   /// {@category camera}
   int getId() => sdlGetCameraId(this);
 
@@ -127,6 +139,10 @@ extension SdlCameraPointerEx on Pointer<SdlCamera> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_PropertiesID SDLCALL SDL_GetCameraProperties(SDL_Camera *camera)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetCameraProperties - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetCameraProperties)
+  ///
   /// {@category camera}
   int getProperties() => sdlGetCameraProperties(this);
 
@@ -157,6 +173,10 @@ extension SdlCameraPointerEx on Pointer<SdlCamera> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_GetCameraFormat(SDL_Camera *camera, SDL_CameraSpec *spec)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetCameraFormat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetCameraFormat)
+  ///
   /// {@category camera}
   bool getFormat(SdlxCameraSpec spec) => sdlxGetCameraFormat(this, spec);
 
@@ -204,6 +224,10 @@ extension SdlCameraPointerEx on Pointer<SdlCamera> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Surface * SDLCALL SDL_AcquireCameraFrame(SDL_Camera *camera, Uint64 *timestampNS)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_AcquireCameraFrame - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_AcquireCameraFrame)
+  ///
   /// {@category camera}
   ({Pointer<SdlSurface> surface, int timestampNs})? acquireFrame() =>
       sdlxAcquireCameraFrame(this);
@@ -237,6 +261,10 @@ extension SdlCameraPointerEx on Pointer<SdlCamera> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_ReleaseCameraFrame(SDL_Camera *camera, SDL_Surface *frame)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_ReleaseCameraFrame - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ReleaseCameraFrame)
+  ///
   /// {@category camera}
   void releaseFrame(Pointer<SdlSurface> frame) =>
       sdlReleaseCameraFrame(this, frame);
@@ -257,6 +285,10 @@ extension SdlCameraPointerEx on Pointer<SdlCamera> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL SDL_CloseCamera(SDL_Camera *camera)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_CloseCamera - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CloseCamera)
+  ///
   /// {@category camera}
   void close() => sdlCloseCamera(this);
 }

@@ -29,6 +29,10 @@ part of '../../../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC SDL_Surface ** SDLCALL SDL_GetSurfaceImages(SDL_Surface *surface, int *count)
 /// ```
+///
+/// See also:
+/// - [SDL_GetSurfaceImages - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetSurfaceImages)
+///
 /// {@category surface}
 List<Pointer<SdlSurface>> sdlxGetSurfaceImages(Pointer<SdlSurface> surface) {
   final countPointer = ffi.calloc<Int32>();
@@ -66,6 +70,10 @@ List<Pointer<SdlSurface>> sdlxGetSurfaceImages(Pointer<SdlSurface> surface) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetSurfaceColorKey(SDL_Surface *surface, Uint32 *key)
 /// ```
+///
+/// See also:
+/// - [SDL_GetSurfaceColorKey - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetSurfaceColorKey)
+///
 /// {@category surface}
 int? sdlxGetSurfaceColorKey(Pointer<SdlSurface> surface) {
   int? result;
@@ -105,6 +113,10 @@ int? sdlxGetSurfaceColorKey(Pointer<SdlSurface> surface) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetSurfaceColorMod(SDL_Surface *surface, Uint8 r, Uint8 g, Uint8 b)
 /// ```
+///
+/// See also:
+/// - [SDL_SetSurfaceColorMod - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetSurfaceColorMod)
+///
 /// {@category surface}
 bool sdlxSetSurfaceColorMod(Pointer<SdlSurface> surface, SdlxColor color) {
   var result = sdlSetSurfaceColorMod(surface, color.r, color.g, color.b);
@@ -135,6 +147,10 @@ bool sdlxSetSurfaceColorMod(Pointer<SdlSurface> surface, SdlxColor color) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetSurfaceColorMod(SDL_Surface *surface, Uint8 *r, Uint8 *g, Uint8 *b)
 /// ```
+///
+/// See also:
+/// - [SDL_GetSurfaceColorMod - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetSurfaceColorMod)
+///
 /// {@category surface}
 bool sdlxGetSurfaceColorMod(Pointer<SdlSurface> surface, SdlxColor color) {
   final rPointer = ffi.calloc<Uint8>();
@@ -176,6 +192,10 @@ bool sdlxGetSurfaceColorMod(Pointer<SdlSurface> surface, SdlxColor color) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetSurfaceBlendMode(SDL_Surface *surface, SDL_BlendMode *blendMode)
 /// ```
+///
+/// See also:
+/// - [SDL_GetSurfaceBlendMode - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetSurfaceBlendMode)
+///
 /// {@category surface}
 int? sdlxGetSurfaceBlendMode(Pointer<SdlSurface> surface) {
   int? result;
@@ -213,6 +233,10 @@ int? sdlxGetSurfaceBlendMode(Pointer<SdlSurface> surface) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetSurfaceClipRect(SDL_Surface *surface, const SDL_Rect *rect)
 /// ```
+///
+/// See also:
+/// - [SDL_SetSurfaceClipRect - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetSurfaceClipRect)
+///
 /// {@category surface}
 bool sdlxSetSurfaceClipRect(Pointer<SdlSurface> surface, SdlxRect? rect) {
   Pointer<SdlRect> rectPointer = nullptr;
@@ -249,6 +273,10 @@ bool sdlxSetSurfaceClipRect(Pointer<SdlSurface> surface, SdlxRect? rect) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetSurfaceClipRect(SDL_Surface *surface, SDL_Rect *rect)
 /// ```
+///
+/// See also:
+/// - [SDL_GetSurfaceClipRect - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetSurfaceClipRect)
+///
 /// {@category surface}
 bool sdlxGetSurfaceClipRect(Pointer<SdlSurface> surface, SdlxRect rect) {
   final rectPointer = rect.calloc();
@@ -284,6 +312,10 @@ bool sdlxGetSurfaceClipRect(Pointer<SdlSurface> surface, SdlxRect rect) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_ClearSurface(SDL_Surface *surface, float r, float g, float b, float a)
 /// ```
+///
+/// See also:
+/// - [SDL_ClearSurface - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ClearSurface)
+///
 /// {@category surface}
 bool sdlxClearSurface(Pointer<SdlSurface> surface, SdlxFColor color) =>
     sdlClearSurface(surface, color.r, color.g, color.b, color.a);
@@ -317,6 +349,10 @@ bool sdlxClearSurface(Pointer<SdlSurface> surface, SdlxFColor color) =>
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_FillSurfaceRect(SDL_Surface *dst, const SDL_Rect *rect, Uint32 color)
 /// ```
+///
+/// See also:
+/// - [SDL_FillSurfaceRect - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_FillSurfaceRect)
+///
 /// {@category surface}
 bool sdlxFillSurfaceRect(Pointer<SdlSurface> dst, SdlxRect? rect, int color) {
   Pointer<SdlRect> rectPointer = nullptr;
@@ -359,6 +395,10 @@ bool sdlxFillSurfaceRect(Pointer<SdlSurface> dst, SdlxRect? rect, int color) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_FillSurfaceRects(SDL_Surface *dst, const SDL_Rect *rects, int count, Uint32 color)
 /// ```
+///
+/// See also:
+/// - [SDL_FillSurfaceRects - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_FillSurfaceRects)
+///
 /// {@category surface}
 bool sdlxFillSurfaceRects(
   Pointer<SdlSurface> dst,
@@ -453,6 +493,10 @@ bool sdlxFillSurfaceRects(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_BlitSurface(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, const SDL_Rect *dstrect)
 /// ```
+///
+/// See also:
+/// - [SDL_BlitSurface - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_BlitSurface)
+///
 /// {@category surface}
 bool sdlxBlitSurface(
   Pointer<SdlSurface> src,
@@ -503,6 +547,10 @@ bool sdlxBlitSurface(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_BlitSurfaceUnchecked(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, const SDL_Rect *dstrect)
 /// ```
+///
+/// See also:
+/// - [SDL_BlitSurfaceUnchecked - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_BlitSurfaceUnchecked)
+///
 /// {@category surface}
 bool sdlxBlitSurfaceUnchecked(
   Pointer<SdlSurface> src,
@@ -548,6 +596,10 @@ bool sdlxBlitSurfaceUnchecked(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_BlitSurfaceScaled(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, const SDL_Rect *dstrect, SDL_ScaleMode scaleMode)
 /// ```
+///
+/// See also:
+/// - [SDL_BlitSurfaceScaled - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_BlitSurfaceScaled)
+///
 /// {@category surface}
 bool sdlxBlitSurfaceScaled(
   Pointer<SdlSurface> src,
@@ -606,6 +658,10 @@ bool sdlxBlitSurfaceScaled(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_BlitSurfaceUncheckedScaled(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, const SDL_Rect *dstrect, SDL_ScaleMode scaleMode)
 /// ```
+///
+/// See also:
+/// - [SDL_BlitSurfaceUncheckedScaled - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_BlitSurfaceUncheckedScaled)
+///
 /// {@category surface}
 bool sdlxBlitSurfaceUncheckedScaled(
   Pointer<SdlSurface> src,
@@ -652,6 +708,10 @@ bool sdlxBlitSurfaceUncheckedScaled(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_StretchSurface(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, const SDL_Rect *dstrect, SDL_ScaleMode scaleMode)
 /// ```
+///
+/// See also:
+/// - [SDL_StretchSurface - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_StretchSurface)
+///
 /// {@category surface}
 bool sdlxStretchSurface(
   Pointer<SdlSurface> src,
@@ -710,6 +770,10 @@ bool sdlxStretchSurface(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_BlitSurfaceTiled(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, const SDL_Rect *dstrect)
 /// ```
+///
+/// See also:
+/// - [SDL_BlitSurfaceTiled - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_BlitSurfaceTiled)
+///
 /// {@category surface}
 bool sdlxBlitSurfaceTiled(
   Pointer<SdlSurface> src,
@@ -765,6 +829,10 @@ bool sdlxBlitSurfaceTiled(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_BlitSurfaceTiledWithScale(SDL_Surface *src, const SDL_Rect *srcrect, float scale, SDL_ScaleMode scaleMode, SDL_Surface *dst, const SDL_Rect *dstrect)
 /// ```
+///
+/// See also:
+/// - [SDL_BlitSurfaceTiledWithScale - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_BlitSurfaceTiledWithScale)
+///
 /// {@category surface}
 bool sdlxBlitSurfaceTiledWithScale(
   Pointer<SdlSurface> src,
@@ -836,6 +904,10 @@ bool sdlxBlitSurfaceTiledWithScale(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_BlitSurface9Grid(SDL_Surface *src, const SDL_Rect *srcrect, int left_width, int right_width, int top_height, int bottom_height, float scale, SDL_ScaleMode scaleMode, SDL_Surface *dst, const SDL_Rect *dstrect)
 /// ```
+///
+/// See also:
+/// - [SDL_BlitSurface9Grid - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_BlitSurface9Grid)
+///
 /// {@category surface}
 bool sdlxBlitSurface9Grid(
   Pointer<SdlSurface> src,
@@ -912,6 +984,10 @@ bool sdlxBlitSurface9Grid(
 /// ```c
 /// extern SDL_DECLSPEC Uint32 SDLCALL SDL_MapSurfaceRGB(SDL_Surface *surface, Uint8 r, Uint8 g, Uint8 b)
 /// ```
+///
+/// See also:
+/// - [SDL_MapSurfaceRGB - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_MapSurfaceRGB)
+///
 /// {@category surface}
 int sdlxMapSurfaceRgb(Pointer<SdlSurface> surface, SdlxColor color) =>
     sdlMapSurfaceRgb(surface, color.r, color.g, color.b);
@@ -951,6 +1027,10 @@ int sdlxMapSurfaceRgb(Pointer<SdlSurface> surface, SdlxColor color) =>
 /// ```c
 /// extern SDL_DECLSPEC Uint32 SDLCALL SDL_MapSurfaceRGBA(SDL_Surface *surface, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 /// ```
+///
+/// See also:
+/// - [SDL_MapSurfaceRGBA - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_MapSurfaceRGBA)
+///
 /// {@category surface}
 int sdlxMapSurfaceRgba(Pointer<SdlSurface> surface, SdlxColor color) =>
     sdlMapSurfaceRgba(surface, color.r, color.g, color.b, color.a);
@@ -986,6 +1066,10 @@ int sdlxMapSurfaceRgba(Pointer<SdlSurface> surface, SdlxColor color) =>
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_ReadSurfacePixel(SDL_Surface *surface, int x, int y, Uint8 *r, Uint8 *g, Uint8 *b, Uint8 *a)
 /// ```
+///
+/// See also:
+/// - [SDL_ReadSurfacePixel - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ReadSurfacePixel)
+///
 /// {@category surface}
 bool sdlxReadSurfacePixel(
   Pointer<SdlSurface> surface,
@@ -1047,6 +1131,10 @@ bool sdlxReadSurfacePixel(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_ReadSurfacePixelFloat(SDL_Surface *surface, int x, int y, float *r, float *g, float *b, float *a)
 /// ```
+///
+/// See also:
+/// - [SDL_ReadSurfacePixelFloat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ReadSurfacePixelFloat)
+///
 /// {@category surface}
 bool sdlxReadSurfacePixelFloat(
   Pointer<SdlSurface> surface,
@@ -1107,6 +1195,10 @@ bool sdlxReadSurfacePixelFloat(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_WriteSurfacePixel(SDL_Surface *surface, int x, int y, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 /// ```
+///
+/// See also:
+/// - [SDL_WriteSurfacePixel - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_WriteSurfacePixel)
+///
 /// {@category surface}
 bool sdlxWriteSurfacePixel(
   Pointer<SdlSurface> surface,
@@ -1146,6 +1238,10 @@ bool sdlxWriteSurfacePixel(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_WriteSurfacePixelFloat(SDL_Surface *surface, int x, int y, float r, float g, float b, float a)
 /// ```
+///
+/// See also:
+/// - [SDL_WriteSurfacePixelFloat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_WriteSurfacePixelFloat)
+///
 /// {@category surface}
 bool sdlxWriteSurfacePixelFloat(
   Pointer<SdlSurface> surface,

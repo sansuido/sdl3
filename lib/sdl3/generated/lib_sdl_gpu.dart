@@ -19,6 +19,10 @@ part of '../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GPUSupportsShaderFormats( SDL_GPUShaderFormat format_flags, const char *name)
 /// ```
+///
+/// See also:
+/// - [SDL_GPUSupportsShaderFormats - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GPUSupportsShaderFormats)
+///
 /// {@category gpu}
 bool sdlGpuSupportsShaderFormats(int formatFlags, String? name) {
   final sdlGpuSupportsShaderFormatsLookupFunction = _libSdl
@@ -48,6 +52,10 @@ bool sdlGpuSupportsShaderFormats(int formatFlags, String? name) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GPUSupportsProperties( SDL_PropertiesID props)
 /// ```
+///
+/// See also:
+/// - [SDL_GPUSupportsProperties - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GPUSupportsProperties)
+///
 /// {@category gpu}
 bool sdlGpuSupportsProperties(int props) {
   final sdlGpuSupportsPropertiesLookupFunction = _libSdl
@@ -86,6 +94,10 @@ bool sdlGpuSupportsProperties(int props) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_GPUDevice * SDLCALL SDL_CreateGPUDevice( SDL_GPUShaderFormat format_flags, bool debug_mode, const char *name)
 /// ```
+///
+/// See also:
+/// - [SDL_CreateGPUDevice - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CreateGPUDevice)
+///
 /// {@category gpu}
 Pointer<SdlGpuDevice> sdlCreateGpuDevice(
   int formatFlags,
@@ -230,6 +242,10 @@ Pointer<SdlGpuDevice> sdlCreateGpuDevice(
 /// ```c
 /// extern SDL_DECLSPEC SDL_GPUDevice * SDLCALL SDL_CreateGPUDeviceWithProperties( SDL_PropertiesID props)
 /// ```
+///
+/// See also:
+/// - [SDL_CreateGPUDeviceWithProperties - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CreateGPUDeviceWithProperties)
+///
 /// {@category gpu}
 Pointer<SdlGpuDevice> sdlCreateGpuDeviceWithProperties(int props) {
   final sdlCreateGpuDeviceWithPropertiesLookupFunction = _libSdl
@@ -252,6 +268,10 @@ Pointer<SdlGpuDevice> sdlCreateGpuDeviceWithProperties(int props) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_DestroyGPUDevice(SDL_GPUDevice *device)
 /// ```
+///
+/// See also:
+/// - [SDL_DestroyGPUDevice - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_DestroyGPUDevice)
+///
 /// {@category gpu}
 void sdlDestroyGpuDevice(Pointer<SdlGpuDevice> device) {
   final sdlDestroyGpuDeviceLookupFunction = _libSdl
@@ -274,6 +294,10 @@ void sdlDestroyGpuDevice(Pointer<SdlGpuDevice> device) {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_GetNumGPUDrivers(void)
 /// ```
+///
+/// See also:
+/// - [SDL_GetNumGPUDrivers - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetNumGPUDrivers)
+///
 /// {@category gpu}
 int sdlGetNumGpuDrivers() {
   final sdlGetNumGpuDriversLookupFunction = _libSdl
@@ -303,6 +327,10 @@ int sdlGetNumGpuDrivers() {
 /// ```c
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetGPUDriver(int index)
 /// ```
+///
+/// See also:
+/// - [SDL_GetGPUDriver - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetGPUDriver)
+///
 /// {@category gpu}
 String? sdlGetGpuDriver(int index) {
   final sdlGetGpuDriverLookupFunction = _libSdl
@@ -328,6 +356,10 @@ String? sdlGetGpuDriver(int index) {
 /// ```c
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetGPUDeviceDriver(SDL_GPUDevice *device)
 /// ```
+///
+/// See also:
+/// - [SDL_GetGPUDeviceDriver - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetGPUDeviceDriver)
+///
 /// {@category gpu}
 String? sdlGetGpuDeviceDriver(Pointer<SdlGpuDevice> device) {
   final sdlGetGpuDeviceDriverLookupFunction = _libSdl
@@ -354,6 +386,10 @@ String? sdlGetGpuDeviceDriver(Pointer<SdlGpuDevice> device) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_GPUShaderFormat SDLCALL SDL_GetGPUShaderFormats(SDL_GPUDevice *device)
 /// ```
+///
+/// See also:
+/// - [SDL_GetGPUShaderFormats - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetGPUShaderFormats)
+///
 /// {@category gpu}
 int sdlGetGpuShaderFormats(Pointer<SdlGpuDevice> device) {
   final sdlGetGpuShaderFormatsLookupFunction = _libSdl
@@ -469,6 +505,10 @@ int sdlGetGpuShaderFormats(Pointer<SdlGpuDevice> device) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_PropertiesID SDLCALL SDL_GetGPUDeviceProperties(SDL_GPUDevice *device)
 /// ```
+///
+/// See also:
+/// - [SDL_GetGPUDeviceProperties - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetGPUDeviceProperties)
+///
 /// {@category gpu}
 int sdlGetGpuDeviceProperties(Pointer<SdlGpuDevice> device) {
   final sdlGetGpuDevicePropertiesLookupFunction = _libSdl
@@ -482,30 +522,198 @@ int sdlGetGpuDeviceProperties(Pointer<SdlGpuDevice> device) {
 ///
 /// Creates a pipeline object to be used in a compute workflow.
 ///
-/// Shader resource bindings must be authored to follow a particular order
-/// depending on the shader format.
+/// Shader resource bindings must be authored to follow a particular convention
+/// depending on the shader format. See below for details.
 ///
-/// For SPIR-V shaders, use the following resource sets:
+/// ---
 ///
-/// - 0: Sampled textures, followed by read-only storage textures, followed by
+/// **SPIR-V**
+///
+/// For compute shaders, use:
+///
+/// - Set 0 for samplers, read-only storage textures, and read-only storage
+/// buffers
+/// - Set 1 for read-write storage textures and read-write storage buffers
+/// - Set 2 for uniform data
+///
+/// The first resource in a given set must have a `binding` of 0. Additional
+/// resources must appear at consecutive bindings (1, 2, etc), leaving no gaps
+/// in the set.
+///
+/// All samplers must come first in the binding order of Set 0, in order of how
+/// they are bound via `SDL_BindGPUComputeSamplers()`.
+///
+/// All read-only storage textures must come after all samplers in the binding
+/// order, in order of how they are bound via
+/// `SDL_BindGPUComputeStorageTextures()`.
+///
+/// All read-only storage buffers must come after all read-only storage
+/// textures in the binding order, in order of how they are bound via
+/// `SDL_BindGPUComputeStorageBuffers()`.
+///
+/// All read-write storage textures must come first in the binding order of Set
+/// 1, in order of how they are bound via `SDL_BeginGPUComputePass()`.
+///
+/// All read-write storage buffers must come after all read-write storage
+/// textures in the binding order, in order of how they are bound via
+/// `SDL_BeginGPUComputePass()`.
+///
+/// **Example**
+///
+/// If a compute shader binds 2 of each resource type, its binding layout
+/// should look like this:
+///
+/// ===glsl
+/// // Any samplers come first in Set 0, in SDL bind slot order
+/// layout(set = 0, binding = 0) sampler2d samplerBoundToSlot0;
+/// layout(set = 0, binding = 1) sampler2d samplerBoundToSlot1;
+/// // Any read-only storage textures come next in Set 0, in SDL bind slot order
+/// layout(set = 0, binding = 2) image2d storageTextureBoundToSlot0;
+/// layout(set = 0, binding = 3) image2d storageTextureBoundToSlot1;
+/// // Any read-only storage buffers come next in Set 0, in SDL bind slot order
+/// layout(set = 0, binding = 4) buffer storageBufferBoundToSlot0;
+/// layout(set = 0, binding = 5) buffer storageBufferBoundToSlot1;
+/// // Any read-write storage textures come first in Set 1, in SDL bind slot order
+/// layout(set = 1, binding = 0) image2d rwStorageTextureBoundToSlot0;
+/// layout(set = 1, binding = 1) image2d rwStorageTextureBoundToSlot1;
+/// // Any read-write storage buffers come next in Set 1, in SDL bind slot order
+/// layout(set = 1, binding = 2) buffer rwStorageBufferBoundToSlot0;
+/// layout(set = 1, binding = 3) buffer rwStorageBufferBoundToSlot1;
+/// // Any uniform buffers are in Set 2, in SDL slot order
+/// layout(set = 2, binding = 0) uniform UniformDataBoundToSlot0 {};
+/// layout(set = 2, binding = 1) uniform UniformDataBoundToSlot1 {};
+/// ===
+///
+/// ---
+///
+/// **DXBC / DXIL (HLSL)**
+///
+/// For compute shaders, use:
+///
+/// - `(t[n], space0)` for sampled textures, read-only storage textures, and
 /// read-only storage buffers
-/// - 1: Read-write storage textures, followed by read-write storage buffers
-/// - 2: Uniform buffers
+/// - `(s[n], space0)` for samplers
+/// - `(u[n], space1)` for read-write storage textures and read-write storage
+/// buffers
+/// - `(b[n], space2)` for uniform data
 ///
-/// For DXBC and DXIL shaders, use the following register order:
+/// The first resource in a given register set must have a register index of
+/// `0`. Additional resources must appear at consecutive indices (1, 2, etc),
+/// leaving no gaps in the register set.
 ///
-/// - (t[n], space0): Sampled textures, followed by read-only storage textures,
-/// followed by read-only storage buffers
-/// - (u[n], space1): Read-write storage textures, followed by read-write
-/// storage buffers
-/// - (b[n], space2): Uniform buffers
+/// All sampled textures must come first in the `t` register set, in order of
+/// how they are bound via `SDL_BindGPUComputeSamplers()`.
 ///
-/// For MSL/metallib, use the following order:
+/// All sampler objects must be in the `s` register set, in the same order as
+/// the textures above.
 ///
-/// - [[buffer]]: Uniform buffers, followed by read-only storage buffers,
-/// followed by read-write storage buffers
-/// - [[texture]]: Sampled textures, followed by read-only storage textures,
-/// followed by read-write storage textures
+/// All read-only storage textures must come after all samplers in the `t`
+/// register set, in order of how they are bound via
+/// `SDL_BindComputeStorageTextures()`.
+///
+/// All read-only storage buffers must come after all storage textures in the
+/// `t` register set, in order of how they are bound via
+/// `SDL_BindComputeStorageBuffers()`.
+///
+/// All read-write storage textures must come first in the `u` register set in
+/// `space1`, in order of how they are bound via `SDL_BeginGPUComputePass()`.
+///
+/// All read-write storage buffers must come after all read-write storage
+/// textures in the `u` register set in `space1`, in order of how they are
+/// bound via `SDL_BeginGPUComputePass()`.
+///
+/// **Example**
+///
+/// If a compute shader binds 2 of each resource type, the layout should look
+/// like this:
+///
+/// ```c
+/// // Any samplers and sampled textures come first in their respective register sets, in SDL bind slot order
+/// SamplerState SamplerBoundToSlot0 : register( s0, space0 );
+/// SamplerState SamplerBoundToSlot1 : register( s1, space0 );
+/// Texture2D SampledTextureBoundToSlot0 : register( t0, space0 );
+/// Texture2D SampledTextureBoundToSlot1 : register( t1, space0 );
+/// // Any read-only storage textures come next in the `t` register set, in SDL bind slot order
+/// Texture2D StorageTextureBoundToSlot0 : register( t2, space0 );
+/// Texture2D StorageTextureBoundToSlot1 : register( t3, space0 );
+/// // Any read-only storage buffers come next in the `t` register set, in SDL bind slot order
+/// ByteAddressBuffer StorageBufferBoundToSlot0 : register( t4, space0 );
+/// ByteAddressBuffer StorageBufferBoundToSlot1 : register( t5, space0 );
+/// // Any read-write storage textures come first in the `u` register set in space1, in SDL bind slot order
+/// RWTexture2D RWStorageTextureBoundToSlot0 : register( u0, space1 );
+/// RWTexture2D RWStorageTextureBoundToSlot1 : register( u1, space1 );
+/// // Any read-write storage buffers come next in the `u` register set in space1, in SDL bind slot order
+/// RWByteAddressBuffer RWStorageTextureBoundToSlot0 : register( u2, space1 );
+/// RWByteAddressBuffer RWStorageTextureBoundToSlot1 : register( u3, space1 );
+/// // Any uniform buffers are in the `b` register set in space2, in SDL slot order
+/// cbuffer UniformDataBoundToSlot0 : register( b0, space2 ) { ... };
+/// cbuffer UniformDataBoundToSlot1 : register( b1, space2 ) { ... };
+/// ```
+///
+/// ---
+///
+/// **MSL / Metallib (Metal Shading Language)**
+///
+/// The first resource in a given argument table must have an index of `0`.
+/// Additional resources must appear at consecutive indices (1, 2, etc),
+/// leaving no gaps in the table.
+///
+/// All sampled textures must come first in the `[[texture]]` argument table,
+/// in order of how they are bound via `SDL_BindGPUComputeSamplers()`.
+///
+/// All sampler objects must be in the `[[sampler]]` argument table, in the
+/// same order as the textures above.
+///
+/// All read-only storage textures must come after all sampled textures in the
+/// `[[texture]]` argument table, in order of how they are bound via
+/// `SDL_BindGPUComputeStorageTextures()`.
+///
+/// All read-write storage textures must come after all read-only storage
+/// textures in the `[[texture]]` argument table, in order of how they are
+/// bound via `SDL_BeginGPUComputePass()`.
+///
+/// All uniform buffers must come first in the `[[buffer]]` argument table, in
+/// order of their slots in `SDL_PushGPUComputeUniformData()`.
+///
+/// All read-only storage buffers must come after all uniform buffers in the
+/// `[[buffer]]` argument table, in order of how they are bound via
+/// `SDL_BindGPUComputeStorageBuffers()`.
+///
+/// All read-write storage buffers must come after all read-only storage
+/// buffers in the `[[buffer]]` argument table, in order of how they are bound
+/// via `SDL_BeginGPUComputePass()`.
+///
+/// **Example**
+///
+/// For a compute shader binding 2 of each resource type, the main function
+/// signature should look like this:
+///
+/// ```c++
+/// kernel void ExampleComputeShader(
+/// // Any samplers go in the `sampler` table, in SDL bind slot order
+/// sampler samplerBoundToSlot0 [[sampler(0)]],
+/// sampler samplerBoundToSlot1 [[sampler(1)]],
+/// // Any sampled textures come first in the `texture` table, in SDL bind slot order
+/// texture2d<float> sampledTextureBoundToSlot0 [[texture(0)]],
+/// texture2d<float> sampledTextureBoundToSlot1 [[texture(1)]],
+/// // Any read-only storage textures come next in the `texture` table, in SDL bind slot order
+/// texture2d<float> storageTextureBoundToSlot0 [[texture(2)]],
+/// texture2d<float> storageTextureBoundToSlot1 [[texture(3)]],
+/// // Any read-write storage textures come next in the `texture` table, in SDL bind slot order
+/// texture2d<float, access::write> rwStorageTextureBoundToSlot0 [[texture(4)]];
+/// texture2d<float, access::write> rwStorageTextureBoundToSlot1 [[texture(5)]];
+/// // Any uniform buffers come first in the `buffer` table, in SDL slot order
+/// constant SomeUniformStruct uniformDataBoundToSlot0 [[buffer(0)]],
+/// constant SomeUniformStruct uniformDataBoundToSlot1 [[buffer(1)]],
+/// // Any read-only storage buffers come next in the `buffer` table, in SDL bind slot order
+/// device SomeBufferStruct& storageBufferBoundToSlot0 [[buffer(2)]],
+/// device SomeBufferStruct& storageBufferBoundToSlot1 [[buffer(3)]]);
+/// // Any read-write storage buffers come next in the `buffer` table, in SDL bind slot order
+/// device SomeBufferStruct& rwStorageBufferBoundToSlot0 [[buffer(4)]];
+/// device SomeBufferStruct& rwStorageBufferBoundToSlot1 [[buffer(5)]]);
+/// ```
+///
+/// ---
 ///
 /// There are optional properties that can be provided through `props`. These
 /// are the supported properties:
@@ -527,6 +735,10 @@ int sdlGetGpuDeviceProperties(Pointer<SdlGpuDevice> device) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_GPUComputePipeline * SDLCALL SDL_CreateGPUComputePipeline( SDL_GPUDevice *device, const SDL_GPUComputePipelineCreateInfo *createinfo)
 /// ```
+///
+/// See also:
+/// - [SDL_CreateGPUComputePipeline - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CreateGPUComputePipeline)
+///
 /// {@category gpu}
 Pointer<SdlGpuComputePipeline> sdlCreateGpuComputePipeline(
   Pointer<SdlGpuDevice> device,
@@ -570,6 +782,10 @@ Pointer<SdlGpuComputePipeline> sdlCreateGpuComputePipeline(
 /// ```c
 /// extern SDL_DECLSPEC SDL_GPUGraphicsPipeline * SDLCALL SDL_CreateGPUGraphicsPipeline( SDL_GPUDevice *device, const SDL_GPUGraphicsPipelineCreateInfo *createinfo)
 /// ```
+///
+/// See also:
+/// - [SDL_CreateGPUGraphicsPipeline - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CreateGPUGraphicsPipeline)
+///
 /// {@category gpu}
 Pointer<SdlGpuGraphicsPipeline> sdlCreateGpuGraphicsPipeline(
   Pointer<SdlGpuDevice> device,
@@ -613,6 +829,10 @@ Pointer<SdlGpuGraphicsPipeline> sdlCreateGpuGraphicsPipeline(
 /// ```c
 /// extern SDL_DECLSPEC SDL_GPUSampler * SDLCALL SDL_CreateGPUSampler( SDL_GPUDevice *device, const SDL_GPUSamplerCreateInfo *createinfo)
 /// ```
+///
+/// See also:
+/// - [SDL_CreateGPUSampler - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CreateGPUSampler)
+///
 /// {@category gpu}
 Pointer<SdlGpuSampler> sdlCreateGpuSampler(
   Pointer<SdlGpuDevice> device,
@@ -635,57 +855,174 @@ Pointer<SdlGpuSampler> sdlCreateGpuSampler(
 ///
 /// Creates a shader to be used when creating a graphics pipeline.
 ///
-/// Shader resource bindings must be authored to follow a particular order
-/// depending on the shader format.
+/// Shader resource bindings must be authored to follow a particular convention
+/// depending on the shader format. See below for details.
 ///
-/// For SPIR-V shaders, use the following resource sets:
+/// ---
 ///
-/// For vertex shaders:
+/// **SPIR-V**
 ///
-/// - 0: Sampled textures, followed by storage textures, followed by storage
-/// buffers
-/// - 1: Uniform buffers
+/// For vertex shaders, use: - Set 0 for samplers, storage textures, and
+/// storage buffers - Set 1 for uniform data
 ///
-/// For fragment shaders:
+/// For fragment shaders, use: - Set 2 for samplers, storage textures, and
+/// storage buffers - Set 3 for uniform data
 ///
-/// - 2: Sampled textures, followed by storage textures, followed by storage
-/// buffers
-/// - 3: Uniform buffers
+/// The first resource in a given set must have a `binding` of 0. Additional
+/// resources must appear at consecutive bindings (1, 2, etc), leaving no gaps
+/// in the set.
 ///
-/// For DXBC and DXIL shaders, use the following register order:
+/// All samplers must come first in the binding order, in order of how they are
+/// bound via `SDL_BindGPU*Samplers()`.
 ///
-/// For vertex shaders:
+/// All storage textures must come after all samplers in the binding order, in
+/// order of how they are bound via `SDL_Bind*StorageTextures()`.
 ///
-/// - (t[n], space0): Sampled textures, followed by storage textures, followed
-/// by storage buffers
-/// - (s[n], space0): Samplers with indices corresponding to the sampled
-/// textures
-/// - (b[n], space1): Uniform buffers
+/// All storage buffers must come after all storage textures in the binding
+/// order, in order of how they are bound via `SDL_Bind*StorageBuffers()`.
 ///
-/// For pixel shaders:
+/// **Example**
 ///
-/// - (t[n], space2): Sampled textures, followed by storage textures, followed
-/// by storage buffers
-/// - (s[n], space2): Samplers with indices corresponding to the sampled
-/// textures
-/// - (b[n], space3): Uniform buffers
+/// If a vertex shader binds 2 samplers, 2 storage textures, 2 storage buffers,
+/// and 2 uniform buffers, its binding layout should look like this:
 ///
-/// For MSL/metallib, use the following order:
+/// ===glsl
+/// // Any samplers come first in the set, in SDL bind slot order
+/// layout(set = 0, binding = 0) sampler2d samplerBoundToSlot0;
+/// layout(set = 0, binding = 1) sampler2d samplerBoundToSlot1;
+/// // Any storage textures come next in the set, in SDL bind slot order
+/// layout(set = 0, binding = 2) texture2d storageTextureBoundToSlot0;
+/// layout(set = 0, binding = 3) texture2d storageTextureBoundToSlot1;
+/// // Any storage buffers come next in the set, in SDL bind slot order
+/// layout(set = 0, binding = 4) buffer storageBufferBoundToSlot0;
+/// layout(set = 0, binding = 5) buffer storageBufferBoundToSlot1;
+/// // Any uniform buffers are in their own set, in SDL slot order
+/// layout(set = 1, binding = 0) uniform UniformDataBoundToSlot0 {};
+/// layout(set = 1, binding = 1) uniform UniformDataBoundToSlot1 {};
+/// ===
 ///
-/// - [[texture]]: Sampled textures, followed by storage textures
-/// - [[sampler]]: Samplers with indices corresponding to the sampled textures
-/// - [[buffer]]: Uniform buffers, followed by storage buffers. Vertex buffer 0
-/// is bound at [[buffer(14)]], vertex buffer 1 at [[buffer(15)]], and so on.
-/// Rather than manually authoring vertex buffer indices, use the
-/// [[stage_in]] attribute which will automatically use the vertex input
-/// information from the SDL_GPUGraphicsPipeline.
+/// ---
 ///
-/// Shader semantics other than system-value semantics do not matter in D3D12
-/// and for ease of use the SDL implementation assumes that non system-value
-/// semantics will all be TEXCOORD. If you are using HLSL as the shader source
-/// language, your vertex semantics should start at TEXCOORD0 and increment
-/// like so: TEXCOORD1, TEXCOORD2, etc. If you wish to change the semantic
-/// prefix to something other than TEXCOORD you can use
+/// **DXBC / DXIL (HLSL)**
+///
+/// For vertex shaders, use: - `(t[n], space0)` for sampled textures, storage
+/// textures, and storage buffers - `(s[n], space0)` for samplers - `(b[n],
+/// space1)` for uniform data
+///
+/// For fragment (aka "pixel") shaders, use: - `(t[n], space2)` for sampled
+/// textures, storage textures, and storage buffers - `(s[n], space2)` for
+/// samplers - `(b[n], space3)` for uniform data
+///
+/// The first resource in a given register set must have a register index of
+/// `0`. Additional resources must appear at consecutive indices (1, 2, etc),
+/// leaving no gaps in the register set.
+///
+/// All sampled textures must come first in the `t` register set, in order of
+/// how they are bound via `SDL_BindGPU*Samplers()`.
+///
+/// All sampler objects must be in the `s` register set, in the same order as
+/// the textures above.
+///
+/// All storage textures must come after all samplers in the `t` register set,
+/// in order of how they are bound via `SDL_Bind*StorageTextures()`.
+///
+/// All storage buffers must come after all storage textures in the `t`
+/// register set, in order of how they are bound via
+/// `SDL_Bind*StorageBuffers()`.
+///
+/// **Example**
+///
+/// If a pixel shader binds 2 samplers, 2 storage textures, 2 storage buffers,
+/// and 2 uniform buffers, its binding layout should look like this:
+///
+/// ```c
+/// // Any samplers and sampled textures come first in their respective register sets, in SDL bind slot order
+/// SamplerState SamplerBoundToSlot0 : register( s0, space2 );
+/// SamplerState SamplerBoundToSlot1 : register( s1, space2 );
+/// Texture2D SampledTextureBoundToSlot0 : register( t0, space2 );
+/// Texture2D SampledTextureBoundToSlot1 : register( t1, space2 );
+/// // Any storage textures come next in the `t` register set, in SDL bind slot order
+/// Texture2D StorageTextureBoundToSlot0 : register( t2, space2 );
+/// Texture2D StorageTextureBoundToSlot1 : register( t3, space2 );
+/// // Any storage buffers come next in the `t` register set, in SDL bind slot order
+/// ByteAddressBuffer StorageBufferBoundToSlot0 : register( t4, space2 );
+/// ByteAddressBuffer StorageBufferBoundToSlot1 : register( t5, space2 );
+/// // Any uniform buffers are in the `b` register set *and* in their own space, in SDL slot order
+/// cbuffer UniformDataBoundToSlot0 : register( b0, space4 ) { ... };
+/// cbuffer UniformDataBoundToSlot1 : register( b1, space4 ) { ... };
+/// ```
+///
+/// ---
+///
+/// **MSL / Metallib (Metal Shading Language)**
+///
+/// The first resource in a given argument table must have an index of `0`.
+/// Additional resources must appear at consecutive indices (1, 2, etc),
+/// leaving no gaps in the table. (_Except_ in the case of vertex buffers,
+/// which are mentioned below.)
+///
+/// All sampled textures must come first in the `[[texture]]` argument table,
+/// in order of how they are bound via `SDL_BindGPU*Samplers()`.
+///
+/// All sampler objects must be in the `[[sampler]]` argument table, in the
+/// same order as the textures above.
+///
+/// All storage textures must come after all sampled textures in the
+/// `[[texture]]` argument table, in order of how they are bound via
+/// `SDL_BindGPU*StorageTextures()`.
+///
+/// All uniform buffers must come first in the `[[buffer]]` argument table, in
+/// order of their slots in `SDL_PushGPU*UniformData()`.
+///
+/// All storage buffers must come after all uniform buffers in the `[[buffer]]`
+/// argument table, in order of how they are bound via
+/// `SDL_BindGPU*StorageBuffers()`.
+///
+/// In Metal, vertex buffers are also included in the `[[buffer]]` argument
+/// table. To work around this, SDL forces the vertex buffer bound to slot 0 to
+/// be bound at `[[buffer(14)]]`. The vertex buffer in slot 1 will be bound to
+/// `[[buffer(15)]]`, and so on. Rather than manually authoring vertex buffer
+/// indices, use the `[[stage_in]]` attribute which will automatically use the
+/// vertex input information from the SDL_GPUGraphicsPipeline.
+///
+/// **Example**
+///
+/// For a vertex shader with 1 vertex buffer, 2 samplers, 2 storage textures, 2
+/// storage buffers, and 2 uniform buffers, the main function signature should
+/// look something like this:
+///
+/// ```c++
+/// vertex VertexOutput ExampleVertexShader(
+/// // Vertex buffers are their own special thing...
+/// SomeVertexInput input [[stage_in]], // alternatively, SomeVertexInput input [[buffer(14)]]
+/// // Any samplers go in the `sampler` table, in SDL bind slot order
+/// sampler samplerBoundToSlot0 [[sampler(0)]],
+/// sampler samplerBoundToSlot1 [[sampler(1)]],
+/// // Any sampled textures come first in the `texture` table, in SDL bind slot order
+/// texture2d<float> sampledTextureBoundToSlot0 [[texture(0)]],
+/// texture2d<float> sampledTextureBoundToSlot1 [[texture(1)]],
+/// // Any storage textures come next in the `texture` table, in SDL bind slot order
+/// texture2d<float> storageTextureBoundToSlot0 [[texture(2)]],
+/// texture2d<float> storageTextureBoundToSlot1 [[texture(3)]],
+/// // Any uniform buffers come first in the `buffer` table, in SDL slot order
+/// constant SomeUniformStruct uniformDataBoundToSlot0 [[buffer(0)]],
+/// constant SomeUniformStruct uniformDataBoundToSlot1 [[buffer(1)]],
+/// // Any storage buffers come next in the `buffer` table, in SDL bind slot order
+/// device SomeBufferStruct& storageBufferBoundToSlot0 [[buffer(2)]],
+/// device SomeBufferStruct& storageBufferBoundToSlot1 [[buffer(3)]]);
+///
+/// ```
+///
+/// ---
+///
+/// Shader semantics other than system-value semantics do not matter in D3D12.
+/// For ease of use, the SDL implementation assumes that non system-value
+/// semantics will all be `TEXCOORD`. If you are using HLSL as the shader
+/// source language, your vertex semantics should start at `TEXCOORD0` and
+/// increment like so: `TEXCOORD1`, `TEXCOORD2`, etc.
+///
+/// If you wish to change the semantic prefix to something other than
+/// `TEXCOORD` you can use
 /// SDL_PROP_GPU_DEVICE_CREATE_D3D12_SEMANTIC_NAME_STRING with
 /// SDL_CreateGPUDeviceWithProperties().
 ///
@@ -708,6 +1045,10 @@ Pointer<SdlGpuSampler> sdlCreateGpuSampler(
 /// ```c
 /// extern SDL_DECLSPEC SDL_GPUShader * SDLCALL SDL_CreateGPUShader( SDL_GPUDevice *device, const SDL_GPUShaderCreateInfo *createinfo)
 /// ```
+///
+/// See also:
+/// - [SDL_CreateGPUShader - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CreateGPUShader)
+///
 /// {@category gpu}
 Pointer<SdlGpuShader> sdlCreateGpuShader(
   Pointer<SdlGpuDevice> device,
@@ -788,6 +1129,10 @@ Pointer<SdlGpuShader> sdlCreateGpuShader(
 /// ```c
 /// extern SDL_DECLSPEC SDL_GPUTexture * SDLCALL SDL_CreateGPUTexture( SDL_GPUDevice *device, const SDL_GPUTextureCreateInfo *createinfo)
 /// ```
+///
+/// See also:
+/// - [SDL_CreateGPUTexture - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CreateGPUTexture)
+///
 /// {@category gpu}
 Pointer<SdlGpuTexture> sdlCreateGpuTexture(
   Pointer<SdlGpuDevice> device,
@@ -854,6 +1199,10 @@ Pointer<SdlGpuTexture> sdlCreateGpuTexture(
 /// ```c
 /// extern SDL_DECLSPEC SDL_GPUBuffer * SDLCALL SDL_CreateGPUBuffer( SDL_GPUDevice *device, const SDL_GPUBufferCreateInfo *createinfo)
 /// ```
+///
+/// See also:
+/// - [SDL_CreateGPUBuffer - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CreateGPUBuffer)
+///
 /// {@category gpu}
 Pointer<SdlGpuBuffer> sdlCreateGpuBuffer(
   Pointer<SdlGpuDevice> device,
@@ -894,6 +1243,8 @@ Pointer<SdlGpuBuffer> sdlCreateGpuBuffer(
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
+/// \sa SDL_MapGPUTransferBuffer
+/// \sa SDL_UnmapGPUTransferBuffer
 /// \sa SDL_UploadToGPUBuffer
 /// \sa SDL_DownloadFromGPUBuffer
 /// \sa SDL_UploadToGPUTexture
@@ -903,6 +1254,10 @@ Pointer<SdlGpuBuffer> sdlCreateGpuBuffer(
 /// ```c
 /// extern SDL_DECLSPEC SDL_GPUTransferBuffer * SDLCALL SDL_CreateGPUTransferBuffer( SDL_GPUDevice *device, const SDL_GPUTransferBufferCreateInfo *createinfo)
 /// ```
+///
+/// See also:
+/// - [SDL_CreateGPUTransferBuffer - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CreateGPUTransferBuffer)
+///
 /// {@category gpu}
 Pointer<SdlGpuTransferBuffer> sdlCreateGpuTransferBuffer(
   Pointer<SdlGpuDevice> device,
@@ -942,6 +1297,10 @@ Pointer<SdlGpuTransferBuffer> sdlCreateGpuTransferBuffer(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_SetGPUBufferName( SDL_GPUDevice *device, SDL_GPUBuffer *buffer, const char *text)
 /// ```
+///
+/// See also:
+/// - [SDL_SetGPUBufferName - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetGPUBufferName)
+///
 /// {@category gpu}
 void sdlSetGpuBufferName(
   Pointer<SdlGpuDevice> device,
@@ -988,6 +1347,10 @@ void sdlSetGpuBufferName(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_SetGPUTextureName( SDL_GPUDevice *device, SDL_GPUTexture *texture, const char *text)
 /// ```
+///
+/// See also:
+/// - [SDL_SetGPUTextureName - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetGPUTextureName)
+///
 /// {@category gpu}
 void sdlSetGpuTextureName(
   Pointer<SdlGpuDevice> device,
@@ -1036,6 +1399,10 @@ void sdlSetGpuTextureName(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_InsertGPUDebugLabel( SDL_GPUCommandBuffer *command_buffer, const char *text)
 /// ```
+///
+/// See also:
+/// - [SDL_InsertGPUDebugLabel - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_InsertGPUDebugLabel)
+///
 /// {@category gpu}
 void sdlInsertGpuDebugLabel(
   Pointer<SdlGpuCommandBuffer> commandBuffer,
@@ -1090,6 +1457,10 @@ void sdlInsertGpuDebugLabel(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_PushGPUDebugGroup( SDL_GPUCommandBuffer *command_buffer, const char *name)
 /// ```
+///
+/// See also:
+/// - [SDL_PushGPUDebugGroup - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_PushGPUDebugGroup)
+///
 /// {@category gpu}
 void sdlPushGpuDebugGroup(
   Pointer<SdlGpuCommandBuffer> commandBuffer,
@@ -1129,6 +1500,10 @@ void sdlPushGpuDebugGroup(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_PopGPUDebugGroup( SDL_GPUCommandBuffer *command_buffer)
 /// ```
+///
+/// See also:
+/// - [SDL_PopGPUDebugGroup - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_PopGPUDebugGroup)
+///
 /// {@category gpu}
 void sdlPopGpuDebugGroup(Pointer<SdlGpuCommandBuffer> commandBuffer) {
   final sdlPopGpuDebugGroupLookupFunction = _libSdl
@@ -1155,6 +1530,10 @@ void sdlPopGpuDebugGroup(Pointer<SdlGpuCommandBuffer> commandBuffer) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_ReleaseGPUTexture( SDL_GPUDevice *device, SDL_GPUTexture *texture)
 /// ```
+///
+/// See also:
+/// - [SDL_ReleaseGPUTexture - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ReleaseGPUTexture)
+///
 /// {@category gpu}
 void sdlReleaseGpuTexture(
   Pointer<SdlGpuDevice> device,
@@ -1190,6 +1569,10 @@ void sdlReleaseGpuTexture(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_ReleaseGPUSampler( SDL_GPUDevice *device, SDL_GPUSampler *sampler)
 /// ```
+///
+/// See also:
+/// - [SDL_ReleaseGPUSampler - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ReleaseGPUSampler)
+///
 /// {@category gpu}
 void sdlReleaseGpuSampler(
   Pointer<SdlGpuDevice> device,
@@ -1225,6 +1608,10 @@ void sdlReleaseGpuSampler(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_ReleaseGPUBuffer( SDL_GPUDevice *device, SDL_GPUBuffer *buffer)
 /// ```
+///
+/// See also:
+/// - [SDL_ReleaseGPUBuffer - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ReleaseGPUBuffer)
+///
 /// {@category gpu}
 void sdlReleaseGpuBuffer(
   Pointer<SdlGpuDevice> device,
@@ -1260,6 +1647,10 @@ void sdlReleaseGpuBuffer(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_ReleaseGPUTransferBuffer( SDL_GPUDevice *device, SDL_GPUTransferBuffer *transfer_buffer)
 /// ```
+///
+/// See also:
+/// - [SDL_ReleaseGPUTransferBuffer - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ReleaseGPUTransferBuffer)
+///
 /// {@category gpu}
 void sdlReleaseGpuTransferBuffer(
   Pointer<SdlGpuDevice> device,
@@ -1295,6 +1686,10 @@ void sdlReleaseGpuTransferBuffer(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_ReleaseGPUComputePipeline( SDL_GPUDevice *device, SDL_GPUComputePipeline *compute_pipeline)
 /// ```
+///
+/// See also:
+/// - [SDL_ReleaseGPUComputePipeline - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ReleaseGPUComputePipeline)
+///
 /// {@category gpu}
 void sdlReleaseGpuComputePipeline(
   Pointer<SdlGpuDevice> device,
@@ -1330,6 +1725,10 @@ void sdlReleaseGpuComputePipeline(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_ReleaseGPUShader( SDL_GPUDevice *device, SDL_GPUShader *shader)
 /// ```
+///
+/// See also:
+/// - [SDL_ReleaseGPUShader - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ReleaseGPUShader)
+///
 /// {@category gpu}
 void sdlReleaseGpuShader(
   Pointer<SdlGpuDevice> device,
@@ -1365,6 +1764,10 @@ void sdlReleaseGpuShader(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_ReleaseGPUGraphicsPipeline( SDL_GPUDevice *device, SDL_GPUGraphicsPipeline *graphics_pipeline)
 /// ```
+///
+/// See also:
+/// - [SDL_ReleaseGPUGraphicsPipeline - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ReleaseGPUGraphicsPipeline)
+///
 /// {@category gpu}
 void sdlReleaseGpuGraphicsPipeline(
   Pointer<SdlGpuDevice> device,
@@ -1411,6 +1814,10 @@ void sdlReleaseGpuGraphicsPipeline(
 /// ```c
 /// extern SDL_DECLSPEC SDL_GPUCommandBuffer * SDLCALL SDL_AcquireGPUCommandBuffer( SDL_GPUDevice *device)
 /// ```
+///
+/// See also:
+/// - [SDL_AcquireGPUCommandBuffer - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_AcquireGPUCommandBuffer)
+///
 /// {@category gpu}
 Pointer<SdlGpuCommandBuffer> sdlAcquireGpuCommandBuffer(
   Pointer<SdlGpuDevice> device,
@@ -1445,6 +1852,10 @@ Pointer<SdlGpuCommandBuffer> sdlAcquireGpuCommandBuffer(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_PushGPUVertexUniformData( SDL_GPUCommandBuffer *command_buffer, Uint32 slot_index, const void *data, Uint32 length)
 /// ```
+///
+/// See also:
+/// - [SDL_PushGPUVertexUniformData - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_PushGPUVertexUniformData)
+///
 /// {@category gpu}
 void sdlPushGpuVertexUniformData(
   Pointer<SdlGpuCommandBuffer> commandBuffer,
@@ -1494,6 +1905,10 @@ void sdlPushGpuVertexUniformData(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_PushGPUFragmentUniformData( SDL_GPUCommandBuffer *command_buffer, Uint32 slot_index, const void *data, Uint32 length)
 /// ```
+///
+/// See also:
+/// - [SDL_PushGPUFragmentUniformData - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_PushGPUFragmentUniformData)
+///
 /// {@category gpu}
 void sdlPushGpuFragmentUniformData(
   Pointer<SdlGpuCommandBuffer> commandBuffer,
@@ -1543,6 +1958,10 @@ void sdlPushGpuFragmentUniformData(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_PushGPUComputeUniformData( SDL_GPUCommandBuffer *command_buffer, Uint32 slot_index, const void *data, Uint32 length)
 /// ```
+///
+/// See also:
+/// - [SDL_PushGPUComputeUniformData - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_PushGPUComputeUniformData)
+///
 /// {@category gpu}
 void sdlPushGpuComputeUniformData(
   Pointer<SdlGpuCommandBuffer> commandBuffer,
@@ -1609,6 +2028,10 @@ void sdlPushGpuComputeUniformData(
 /// ```c
 /// extern SDL_DECLSPEC SDL_GPURenderPass * SDLCALL SDL_BeginGPURenderPass( SDL_GPUCommandBuffer *command_buffer, const SDL_GPUColorTargetInfo *color_target_infos, Uint32 num_color_targets, const SDL_GPUDepthStencilTargetInfo *depth_stencil_target_info)
 /// ```
+///
+/// See also:
+/// - [SDL_BeginGPURenderPass - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_BeginGPURenderPass)
+///
 /// {@category gpu}
 Pointer<SdlGpuRenderPass> sdlBeginGpuRenderPass(
   Pointer<SdlGpuCommandBuffer> commandBuffer,
@@ -1652,6 +2075,10 @@ Pointer<SdlGpuRenderPass> sdlBeginGpuRenderPass(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_BindGPUGraphicsPipeline( SDL_GPURenderPass *render_pass, SDL_GPUGraphicsPipeline *graphics_pipeline)
 /// ```
+///
+/// See also:
+/// - [SDL_BindGPUGraphicsPipeline - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_BindGPUGraphicsPipeline)
+///
 /// {@category gpu}
 void sdlBindGpuGraphicsPipeline(
   Pointer<SdlGpuRenderPass> renderPass,
@@ -1682,6 +2109,10 @@ void sdlBindGpuGraphicsPipeline(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_SetGPUViewport( SDL_GPURenderPass *render_pass, const SDL_GPUViewport *viewport)
 /// ```
+///
+/// See also:
+/// - [SDL_SetGPUViewport - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetGPUViewport)
+///
 /// {@category gpu}
 void sdlSetGpuViewport(
   Pointer<SdlGpuRenderPass> renderPass,
@@ -1712,6 +2143,10 @@ void sdlSetGpuViewport(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_SetGPUScissor( SDL_GPURenderPass *render_pass, const SDL_Rect *scissor)
 /// ```
+///
+/// See also:
+/// - [SDL_SetGPUScissor - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetGPUScissor)
+///
 /// {@category gpu}
 void sdlSetGpuScissor(
   Pointer<SdlGpuRenderPass> renderPass,
@@ -1745,6 +2180,10 @@ void sdlSetGpuScissor(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_SetGPUBlendConstants( SDL_GPURenderPass *render_pass, SDL_FColor blend_constants)
 /// ```
+///
+/// See also:
+/// - [SDL_SetGPUBlendConstants - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetGPUBlendConstants)
+///
 /// {@category gpu}
 void sdlSetGpuBlendConstants(
   Pointer<SdlGpuRenderPass> renderPass,
@@ -1772,6 +2211,10 @@ void sdlSetGpuBlendConstants(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_SetGPUStencilReference( SDL_GPURenderPass *render_pass, Uint8 reference)
 /// ```
+///
+/// See also:
+/// - [SDL_SetGPUStencilReference - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetGPUStencilReference)
+///
 /// {@category gpu}
 void sdlSetGpuStencilReference(
   Pointer<SdlGpuRenderPass> renderPass,
@@ -1800,6 +2243,10 @@ void sdlSetGpuStencilReference(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_BindGPUVertexBuffers( SDL_GPURenderPass *render_pass, Uint32 first_slot, const SDL_GPUBufferBinding *bindings, Uint32 num_bindings)
 /// ```
+///
+/// See also:
+/// - [SDL_BindGPUVertexBuffers - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_BindGPUVertexBuffers)
+///
 /// {@category gpu}
 void sdlBindGpuVertexBuffers(
   Pointer<SdlGpuRenderPass> renderPass,
@@ -1844,6 +2291,10 @@ void sdlBindGpuVertexBuffers(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_BindGPUIndexBuffer( SDL_GPURenderPass *render_pass, const SDL_GPUBufferBinding *binding, SDL_GPUIndexElementSize index_element_size)
 /// ```
+///
+/// See also:
+/// - [SDL_BindGPUIndexBuffer - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_BindGPUIndexBuffer)
+///
 /// {@category gpu}
 void sdlBindGpuIndexBuffer(
   Pointer<SdlGpuRenderPass> renderPass,
@@ -1892,6 +2343,10 @@ void sdlBindGpuIndexBuffer(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_BindGPUVertexSamplers( SDL_GPURenderPass *render_pass, Uint32 first_slot, const SDL_GPUTextureSamplerBinding *texture_sampler_bindings, Uint32 num_bindings)
 /// ```
+///
+/// See also:
+/// - [SDL_BindGPUVertexSamplers - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_BindGPUVertexSamplers)
+///
 /// {@category gpu}
 void sdlBindGpuVertexSamplers(
   Pointer<SdlGpuRenderPass> renderPass,
@@ -1943,6 +2398,10 @@ void sdlBindGpuVertexSamplers(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_BindGPUVertexStorageTextures( SDL_GPURenderPass *render_pass, Uint32 first_slot, SDL_GPUTexture *const *storage_textures, Uint32 num_bindings)
 /// ```
+///
+/// See also:
+/// - [SDL_BindGPUVertexStorageTextures - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_BindGPUVertexStorageTextures)
+///
 /// {@category gpu}
 void sdlBindGpuVertexStorageTextures(
   Pointer<SdlGpuRenderPass> renderPass,
@@ -1994,6 +2453,10 @@ void sdlBindGpuVertexStorageTextures(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_BindGPUVertexStorageBuffers( SDL_GPURenderPass *render_pass, Uint32 first_slot, SDL_GPUBuffer *const *storage_buffers, Uint32 num_bindings)
 /// ```
+///
+/// See also:
+/// - [SDL_BindGPUVertexStorageBuffers - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_BindGPUVertexStorageBuffers)
+///
 /// {@category gpu}
 void sdlBindGpuVertexStorageBuffers(
   Pointer<SdlGpuRenderPass> renderPass,
@@ -2046,6 +2509,10 @@ void sdlBindGpuVertexStorageBuffers(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_BindGPUFragmentSamplers( SDL_GPURenderPass *render_pass, Uint32 first_slot, const SDL_GPUTextureSamplerBinding *texture_sampler_bindings, Uint32 num_bindings)
 /// ```
+///
+/// See also:
+/// - [SDL_BindGPUFragmentSamplers - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_BindGPUFragmentSamplers)
+///
 /// {@category gpu}
 void sdlBindGpuFragmentSamplers(
   Pointer<SdlGpuRenderPass> renderPass,
@@ -2097,6 +2564,10 @@ void sdlBindGpuFragmentSamplers(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_BindGPUFragmentStorageTextures( SDL_GPURenderPass *render_pass, Uint32 first_slot, SDL_GPUTexture *const *storage_textures, Uint32 num_bindings)
 /// ```
+///
+/// See also:
+/// - [SDL_BindGPUFragmentStorageTextures - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_BindGPUFragmentStorageTextures)
+///
 /// {@category gpu}
 void sdlBindGpuFragmentStorageTextures(
   Pointer<SdlGpuRenderPass> renderPass,
@@ -2148,6 +2619,10 @@ void sdlBindGpuFragmentStorageTextures(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_BindGPUFragmentStorageBuffers( SDL_GPURenderPass *render_pass, Uint32 first_slot, SDL_GPUBuffer *const *storage_buffers, Uint32 num_bindings)
 /// ```
+///
+/// See also:
+/// - [SDL_BindGPUFragmentStorageBuffers - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_BindGPUFragmentStorageBuffers)
+///
 /// {@category gpu}
 void sdlBindGpuFragmentStorageBuffers(
   Pointer<SdlGpuRenderPass> renderPass,
@@ -2204,6 +2679,10 @@ void sdlBindGpuFragmentStorageBuffers(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_DrawGPUIndexedPrimitives( SDL_GPURenderPass *render_pass, Uint32 num_indices, Uint32 num_instances, Uint32 first_index, Sint32 vertex_offset, Uint32 first_instance)
 /// ```
+///
+/// See also:
+/// - [SDL_DrawGPUIndexedPrimitives - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_DrawGPUIndexedPrimitives)
+///
 /// {@category gpu}
 void sdlDrawGpuIndexedPrimitives(
   Pointer<SdlGpuRenderPass> renderPass,
@@ -2265,6 +2744,10 @@ void sdlDrawGpuIndexedPrimitives(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_DrawGPUPrimitives( SDL_GPURenderPass *render_pass, Uint32 num_vertices, Uint32 num_instances, Uint32 first_vertex, Uint32 first_instance)
 /// ```
+///
+/// See also:
+/// - [SDL_DrawGPUPrimitives - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_DrawGPUPrimitives)
+///
 /// {@category gpu}
 void sdlDrawGpuPrimitives(
   Pointer<SdlGpuRenderPass> renderPass,
@@ -2318,6 +2801,10 @@ void sdlDrawGpuPrimitives(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_DrawGPUPrimitivesIndirect( SDL_GPURenderPass *render_pass, SDL_GPUBuffer *buffer, Uint32 offset, Uint32 draw_count)
 /// ```
+///
+/// See also:
+/// - [SDL_DrawGPUPrimitivesIndirect - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_DrawGPUPrimitivesIndirect)
+///
 /// {@category gpu}
 void sdlDrawGpuPrimitivesIndirect(
   Pointer<SdlGpuRenderPass> renderPass,
@@ -2367,6 +2854,10 @@ void sdlDrawGpuPrimitivesIndirect(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_DrawGPUIndexedPrimitivesIndirect( SDL_GPURenderPass *render_pass, SDL_GPUBuffer *buffer, Uint32 offset, Uint32 draw_count)
 /// ```
+///
+/// See also:
+/// - [SDL_DrawGPUIndexedPrimitivesIndirect - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_DrawGPUIndexedPrimitivesIndirect)
+///
 /// {@category gpu}
 void sdlDrawGpuIndexedPrimitivesIndirect(
   Pointer<SdlGpuRenderPass> renderPass,
@@ -2410,6 +2901,10 @@ void sdlDrawGpuIndexedPrimitivesIndirect(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_EndGPURenderPass( SDL_GPURenderPass *render_pass)
 /// ```
+///
+/// See also:
+/// - [SDL_EndGPURenderPass - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_EndGPURenderPass)
+///
 /// {@category gpu}
 void sdlEndGpuRenderPass(Pointer<SdlGpuRenderPass> renderPass) {
   final sdlEndGpuRenderPassLookupFunction = _libSdl
@@ -2460,6 +2955,10 @@ void sdlEndGpuRenderPass(Pointer<SdlGpuRenderPass> renderPass) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_GPUComputePass * SDLCALL SDL_BeginGPUComputePass( SDL_GPUCommandBuffer *command_buffer, const SDL_GPUStorageTextureReadWriteBinding *storage_texture_bindings, Uint32 num_storage_texture_bindings, const SDL_GPUStorageBufferReadWriteBinding *storage_buffer_bindings, Uint32 num_storage_buffer_bindings)
 /// ```
+///
+/// See also:
+/// - [SDL_BeginGPUComputePass - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_BeginGPUComputePass)
+///
 /// {@category gpu}
 Pointer<SdlGpuComputePass> sdlBeginGpuComputePass(
   Pointer<SdlGpuCommandBuffer> commandBuffer,
@@ -2505,6 +3004,10 @@ Pointer<SdlGpuComputePass> sdlBeginGpuComputePass(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_BindGPUComputePipeline( SDL_GPUComputePass *compute_pass, SDL_GPUComputePipeline *compute_pipeline)
 /// ```
+///
+/// See also:
+/// - [SDL_BindGPUComputePipeline - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_BindGPUComputePipeline)
+///
 /// {@category gpu}
 void sdlBindGpuComputePipeline(
   Pointer<SdlGpuComputePass> computePass,
@@ -2546,6 +3049,10 @@ void sdlBindGpuComputePipeline(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_BindGPUComputeSamplers( SDL_GPUComputePass *compute_pass, Uint32 first_slot, const SDL_GPUTextureSamplerBinding *texture_sampler_bindings, Uint32 num_bindings)
 /// ```
+///
+/// See also:
+/// - [SDL_BindGPUComputeSamplers - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_BindGPUComputeSamplers)
+///
 /// {@category gpu}
 void sdlBindGpuComputeSamplers(
   Pointer<SdlGpuComputePass> computePass,
@@ -2597,6 +3104,10 @@ void sdlBindGpuComputeSamplers(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_BindGPUComputeStorageTextures( SDL_GPUComputePass *compute_pass, Uint32 first_slot, SDL_GPUTexture *const *storage_textures, Uint32 num_bindings)
 /// ```
+///
+/// See also:
+/// - [SDL_BindGPUComputeStorageTextures - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_BindGPUComputeStorageTextures)
+///
 /// {@category gpu}
 void sdlBindGpuComputeStorageTextures(
   Pointer<SdlGpuComputePass> computePass,
@@ -2648,6 +3159,10 @@ void sdlBindGpuComputeStorageTextures(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_BindGPUComputeStorageBuffers( SDL_GPUComputePass *compute_pass, Uint32 first_slot, SDL_GPUBuffer *const *storage_buffers, Uint32 num_bindings)
 /// ```
+///
+/// See also:
+/// - [SDL_BindGPUComputeStorageBuffers - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_BindGPUComputeStorageBuffers)
+///
 /// {@category gpu}
 void sdlBindGpuComputeStorageBuffers(
   Pointer<SdlGpuComputePass> computePass,
@@ -2701,6 +3216,10 @@ void sdlBindGpuComputeStorageBuffers(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_DispatchGPUCompute( SDL_GPUComputePass *compute_pass, Uint32 groupcount_x, Uint32 groupcount_y, Uint32 groupcount_z)
 /// ```
+///
+/// See also:
+/// - [SDL_DispatchGPUCompute - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_DispatchGPUCompute)
+///
 /// {@category gpu}
 void sdlDispatchGpuCompute(
   Pointer<SdlGpuComputePass> computePass,
@@ -2752,6 +3271,10 @@ void sdlDispatchGpuCompute(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_DispatchGPUComputeIndirect( SDL_GPUComputePass *compute_pass, SDL_GPUBuffer *buffer, Uint32 offset)
 /// ```
+///
+/// See also:
+/// - [SDL_DispatchGPUComputeIndirect - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_DispatchGPUComputeIndirect)
+///
 /// {@category gpu}
 void sdlDispatchGpuComputeIndirect(
   Pointer<SdlGpuComputePass> computePass,
@@ -2791,6 +3314,10 @@ void sdlDispatchGpuComputeIndirect(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_EndGPUComputePass( SDL_GPUComputePass *compute_pass)
 /// ```
+///
+/// See also:
+/// - [SDL_EndGPUComputePass - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_EndGPUComputePass)
+///
 /// {@category gpu}
 void sdlEndGpuComputePass(Pointer<SdlGpuComputePass> computePass) {
   final sdlEndGpuComputePassLookupFunction = _libSdl
@@ -2804,9 +3331,9 @@ void sdlEndGpuComputePass(Pointer<SdlGpuComputePass> computePass) {
 ///
 /// Maps a transfer buffer into application address space.
 ///
-/// You must unmap the transfer buffer before encoding upload commands. The
-/// memory is owned by the graphics driver - do NOT call SDL_free() on the
-/// returned pointer.
+/// You must unmap the transfer buffer before encoding upload commands using
+/// SDL_UnmapGPUTransferBuffer. The memory is owned by the graphics driver - do
+/// NOT call SDL_free() on the returned pointer.
 ///
 /// \param device a GPU context.
 /// \param transfer_buffer a transfer buffer.
@@ -2819,6 +3346,10 @@ void sdlEndGpuComputePass(Pointer<SdlGpuComputePass> computePass) {
 /// ```c
 /// extern SDL_DECLSPEC void * SDLCALL SDL_MapGPUTransferBuffer( SDL_GPUDevice *device, SDL_GPUTransferBuffer *transfer_buffer, bool cycle)
 /// ```
+///
+/// See also:
+/// - [SDL_MapGPUTransferBuffer - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_MapGPUTransferBuffer)
+///
 /// {@category gpu}
 Pointer<Void> sdlMapGpuTransferBuffer(
   Pointer<SdlGpuDevice> device,
@@ -2852,6 +3383,10 @@ Pointer<Void> sdlMapGpuTransferBuffer(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_UnmapGPUTransferBuffer( SDL_GPUDevice *device, SDL_GPUTransferBuffer *transfer_buffer)
 /// ```
+///
+/// See also:
+/// - [SDL_UnmapGPUTransferBuffer - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_UnmapGPUTransferBuffer)
+///
 /// {@category gpu}
 void sdlUnmapGpuTransferBuffer(
   Pointer<SdlGpuDevice> device,
@@ -2888,6 +3423,10 @@ void sdlUnmapGpuTransferBuffer(
 /// ```c
 /// extern SDL_DECLSPEC SDL_GPUCopyPass * SDLCALL SDL_BeginGPUCopyPass( SDL_GPUCommandBuffer *command_buffer)
 /// ```
+///
+/// See also:
+/// - [SDL_BeginGPUCopyPass - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_BeginGPUCopyPass)
+///
 /// {@category gpu}
 Pointer<SdlGpuCopyPass> sdlBeginGpuCopyPass(
   Pointer<SdlGpuCommandBuffer> commandBuffer,
@@ -2924,6 +3463,10 @@ Pointer<SdlGpuCopyPass> sdlBeginGpuCopyPass(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_UploadToGPUTexture( SDL_GPUCopyPass *copy_pass, const SDL_GPUTextureTransferInfo *source, const SDL_GPUTextureRegion *destination, bool cycle)
 /// ```
+///
+/// See also:
+/// - [SDL_UploadToGPUTexture - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_UploadToGPUTexture)
+///
 /// {@category gpu}
 void sdlUploadToGpuTexture(
   Pointer<SdlGpuCopyPass> copyPass,
@@ -2971,6 +3514,10 @@ void sdlUploadToGpuTexture(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_UploadToGPUBuffer( SDL_GPUCopyPass *copy_pass, const SDL_GPUTransferBufferLocation *source, const SDL_GPUBufferRegion *destination, bool cycle)
 /// ```
+///
+/// See also:
+/// - [SDL_UploadToGPUBuffer - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_UploadToGPUBuffer)
+///
 /// {@category gpu}
 void sdlUploadToGpuBuffer(
   Pointer<SdlGpuCopyPass> copyPass,
@@ -3025,6 +3572,10 @@ void sdlUploadToGpuBuffer(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_CopyGPUTextureToTexture( SDL_GPUCopyPass *copy_pass, const SDL_GPUTextureLocation *source, const SDL_GPUTextureLocation *destination, Uint32 w, Uint32 h, Uint32 d, bool cycle)
 /// ```
+///
+/// See also:
+/// - [SDL_CopyGPUTextureToTexture - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CopyGPUTextureToTexture)
+///
 /// {@category gpu}
 void sdlCopyGpuTextureToTexture(
   Pointer<SdlGpuCopyPass> copyPass,
@@ -3085,6 +3636,10 @@ void sdlCopyGpuTextureToTexture(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_CopyGPUBufferToBuffer( SDL_GPUCopyPass *copy_pass, const SDL_GPUBufferLocation *source, const SDL_GPUBufferLocation *destination, Uint32 size, bool cycle)
 /// ```
+///
+/// See also:
+/// - [SDL_CopyGPUBufferToBuffer - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CopyGPUBufferToBuffer)
+///
 /// {@category gpu}
 void sdlCopyGpuBufferToBuffer(
   Pointer<SdlGpuCopyPass> copyPass,
@@ -3135,6 +3690,10 @@ void sdlCopyGpuBufferToBuffer(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_DownloadFromGPUTexture( SDL_GPUCopyPass *copy_pass, const SDL_GPUTextureRegion *source, const SDL_GPUTextureTransferInfo *destination)
 /// ```
+///
+/// See also:
+/// - [SDL_DownloadFromGPUTexture - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_DownloadFromGPUTexture)
+///
 /// {@category gpu}
 void sdlDownloadFromGpuTexture(
   Pointer<SdlGpuCopyPass> copyPass,
@@ -3172,6 +3731,10 @@ void sdlDownloadFromGpuTexture(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_DownloadFromGPUBuffer( SDL_GPUCopyPass *copy_pass, const SDL_GPUBufferRegion *source, const SDL_GPUTransferBufferLocation *destination)
 /// ```
+///
+/// See also:
+/// - [SDL_DownloadFromGPUBuffer - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_DownloadFromGPUBuffer)
+///
 /// {@category gpu}
 void sdlDownloadFromGpuBuffer(
   Pointer<SdlGpuCopyPass> copyPass,
@@ -3204,6 +3767,10 @@ void sdlDownloadFromGpuBuffer(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_EndGPUCopyPass( SDL_GPUCopyPass *copy_pass)
 /// ```
+///
+/// See also:
+/// - [SDL_EndGPUCopyPass - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_EndGPUCopyPass)
+///
 /// {@category gpu}
 void sdlEndGpuCopyPass(Pointer<SdlGpuCopyPass> copyPass) {
   final sdlEndGpuCopyPassLookupFunction = _libSdl
@@ -3227,6 +3794,10 @@ void sdlEndGpuCopyPass(Pointer<SdlGpuCopyPass> copyPass) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_GenerateMipmapsForGPUTexture( SDL_GPUCommandBuffer *command_buffer, SDL_GPUTexture *texture)
 /// ```
+///
+/// See also:
+/// - [SDL_GenerateMipmapsForGPUTexture - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GenerateMipmapsForGPUTexture)
+///
 /// {@category gpu}
 void sdlGenerateMipmapsForGpuTexture(
   Pointer<SdlGpuCommandBuffer> commandBuffer,
@@ -3259,6 +3830,10 @@ void sdlGenerateMipmapsForGpuTexture(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_BlitGPUTexture( SDL_GPUCommandBuffer *command_buffer, const SDL_GPUBlitInfo *info)
 /// ```
+///
+/// See also:
+/// - [SDL_BlitGPUTexture - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_BlitGPUTexture)
+///
 /// {@category gpu}
 void sdlBlitGpuTexture(
   Pointer<SdlGpuCommandBuffer> commandBuffer,
@@ -3295,6 +3870,10 @@ void sdlBlitGpuTexture(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_WindowSupportsGPUSwapchainComposition( SDL_GPUDevice *device, SDL_Window *window, SDL_GPUSwapchainComposition swapchain_composition)
 /// ```
+///
+/// See also:
+/// - [SDL_WindowSupportsGPUSwapchainComposition - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_WindowSupportsGPUSwapchainComposition)
+///
 /// {@category gpu}
 bool sdlWindowSupportsGpuSwapchainComposition(
   Pointer<SdlGpuDevice> device,
@@ -3338,6 +3917,10 @@ bool sdlWindowSupportsGpuSwapchainComposition(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_WindowSupportsGPUPresentMode( SDL_GPUDevice *device, SDL_Window *window, SDL_GPUPresentMode present_mode)
 /// ```
+///
+/// See also:
+/// - [SDL_WindowSupportsGPUPresentMode - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_WindowSupportsGPUPresentMode)
+///
 /// {@category gpu}
 bool sdlWindowSupportsGpuPresentMode(
   Pointer<SdlGpuDevice> device,
@@ -3394,6 +3977,10 @@ bool sdlWindowSupportsGpuPresentMode(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_ClaimWindowForGPUDevice( SDL_GPUDevice *device, SDL_Window *window)
 /// ```
+///
+/// See also:
+/// - [SDL_ClaimWindowForGPUDevice - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ClaimWindowForGPUDevice)
+///
 /// {@category gpu}
 bool sdlClaimWindowForGpuDevice(
   Pointer<SdlGpuDevice> device,
@@ -3420,6 +4007,10 @@ bool sdlClaimWindowForGpuDevice(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_ReleaseWindowFromGPUDevice( SDL_GPUDevice *device, SDL_Window *window)
 /// ```
+///
+/// See also:
+/// - [SDL_ReleaseWindowFromGPUDevice - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ReleaseWindowFromGPUDevice)
+///
 /// {@category gpu}
 void sdlReleaseWindowFromGpuDevice(
   Pointer<SdlGpuDevice> device,
@@ -3459,6 +4050,10 @@ void sdlReleaseWindowFromGpuDevice(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetGPUSwapchainParameters( SDL_GPUDevice *device, SDL_Window *window, SDL_GPUSwapchainComposition swapchain_composition, SDL_GPUPresentMode present_mode)
 /// ```
+///
+/// See also:
+/// - [SDL_SetGPUSwapchainParameters - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetGPUSwapchainParameters)
+///
 /// {@category gpu}
 bool sdlSetGpuSwapchainParameters(
   Pointer<SdlGpuDevice> device,
@@ -3517,6 +4112,10 @@ bool sdlSetGpuSwapchainParameters(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetGPUAllowedFramesInFlight( SDL_GPUDevice *device, Uint32 allowed_frames_in_flight)
 /// ```
+///
+/// See also:
+/// - [SDL_SetGPUAllowedFramesInFlight - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetGPUAllowedFramesInFlight)
+///
 /// {@category gpu}
 bool sdlSetGpuAllowedFramesInFlight(
   Pointer<SdlGpuDevice> device,
@@ -3550,6 +4149,10 @@ bool sdlSetGpuAllowedFramesInFlight(
 /// ```c
 /// extern SDL_DECLSPEC SDL_GPUTextureFormat SDLCALL SDL_GetGPUSwapchainTextureFormat( SDL_GPUDevice *device, SDL_Window *window)
 /// ```
+///
+/// See also:
+/// - [SDL_GetGPUSwapchainTextureFormat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetGPUSwapchainTextureFormat)
+///
 /// {@category gpu}
 int sdlGetGpuSwapchainTextureFormat(
   Pointer<SdlGpuDevice> device,
@@ -3617,6 +4220,10 @@ int sdlGetGpuSwapchainTextureFormat(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_AcquireGPUSwapchainTexture( SDL_GPUCommandBuffer *command_buffer, SDL_Window *window, SDL_GPUTexture **swapchain_texture, Uint32 *swapchain_texture_width, Uint32 *swapchain_texture_height)
 /// ```
+///
+/// See also:
+/// - [SDL_AcquireGPUSwapchainTexture - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_AcquireGPUSwapchainTexture)
+///
 /// {@category gpu}
 bool sdlAcquireGpuSwapchainTexture(
   Pointer<SdlGpuCommandBuffer> commandBuffer,
@@ -3672,6 +4279,10 @@ bool sdlAcquireGpuSwapchainTexture(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_WaitForGPUSwapchain( SDL_GPUDevice *device, SDL_Window *window)
 /// ```
+///
+/// See also:
+/// - [SDL_WaitForGPUSwapchain - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_WaitForGPUSwapchain)
+///
 /// {@category gpu}
 bool sdlWaitForGpuSwapchain(
   Pointer<SdlGpuDevice> device,
@@ -3730,6 +4341,10 @@ bool sdlWaitForGpuSwapchain(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_WaitAndAcquireGPUSwapchainTexture( SDL_GPUCommandBuffer *command_buffer, SDL_Window *window, SDL_GPUTexture **swapchain_texture, Uint32 *swapchain_texture_width, Uint32 *swapchain_texture_height)
 /// ```
+///
+/// See also:
+/// - [SDL_WaitAndAcquireGPUSwapchainTexture - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_WaitAndAcquireGPUSwapchainTexture)
+///
 /// {@category gpu}
 bool sdlWaitAndAcquireGpuSwapchainTexture(
   Pointer<SdlGpuCommandBuffer> commandBuffer,
@@ -3788,6 +4403,10 @@ bool sdlWaitAndAcquireGpuSwapchainTexture(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SubmitGPUCommandBuffer( SDL_GPUCommandBuffer *command_buffer)
 /// ```
+///
+/// See also:
+/// - [SDL_SubmitGPUCommandBuffer - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SubmitGPUCommandBuffer)
+///
 /// {@category gpu}
 bool sdlSubmitGpuCommandBuffer(Pointer<SdlGpuCommandBuffer> commandBuffer) {
   final sdlSubmitGpuCommandBufferLookupFunction = _libSdl
@@ -3825,6 +4444,10 @@ bool sdlSubmitGpuCommandBuffer(Pointer<SdlGpuCommandBuffer> commandBuffer) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_GPUFence * SDLCALL SDL_SubmitGPUCommandBufferAndAcquireFence( SDL_GPUCommandBuffer *command_buffer)
 /// ```
+///
+/// See also:
+/// - [SDL_SubmitGPUCommandBufferAndAcquireFence - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SubmitGPUCommandBufferAndAcquireFence)
+///
 /// {@category gpu}
 Pointer<SdlGpuFence> sdlSubmitGpuCommandBufferAndAcquireFence(
   Pointer<SdlGpuCommandBuffer> commandBuffer,
@@ -3866,6 +4489,10 @@ Pointer<SdlGpuFence> sdlSubmitGpuCommandBufferAndAcquireFence(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_CancelGPUCommandBuffer( SDL_GPUCommandBuffer *command_buffer)
 /// ```
+///
+/// See also:
+/// - [SDL_CancelGPUCommandBuffer - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CancelGPUCommandBuffer)
+///
 /// {@category gpu}
 bool sdlCancelGpuCommandBuffer(Pointer<SdlGpuCommandBuffer> commandBuffer) {
   final sdlCancelGpuCommandBufferLookupFunction = _libSdl
@@ -3890,6 +4517,10 @@ bool sdlCancelGpuCommandBuffer(Pointer<SdlGpuCommandBuffer> commandBuffer) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_WaitForGPUIdle( SDL_GPUDevice *device)
 /// ```
+///
+/// See also:
+/// - [SDL_WaitForGPUIdle - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_WaitForGPUIdle)
+///
 /// {@category gpu}
 bool sdlWaitForGpuIdle(Pointer<SdlGpuDevice> device) {
   final sdlWaitForGpuIdleLookupFunction = _libSdl
@@ -3919,6 +4550,10 @@ bool sdlWaitForGpuIdle(Pointer<SdlGpuDevice> device) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_WaitForGPUFences( SDL_GPUDevice *device, bool wait_all, SDL_GPUFence *const *fences, Uint32 num_fences)
 /// ```
+///
+/// See also:
+/// - [SDL_WaitForGPUFences - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_WaitForGPUFences)
+///
 /// {@category gpu}
 bool sdlWaitForGpuFences(
   Pointer<SdlGpuDevice> device,
@@ -3958,6 +4593,10 @@ bool sdlWaitForGpuFences(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_QueryGPUFence( SDL_GPUDevice *device, SDL_GPUFence *fence)
 /// ```
+///
+/// See also:
+/// - [SDL_QueryGPUFence - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_QueryGPUFence)
+///
 /// {@category gpu}
 bool sdlQueryGpuFence(
   Pointer<SdlGpuDevice> device,
@@ -3988,6 +4627,10 @@ bool sdlQueryGpuFence(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_ReleaseGPUFence( SDL_GPUDevice *device, SDL_GPUFence *fence)
 /// ```
+///
+/// See also:
+/// - [SDL_ReleaseGPUFence - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ReleaseGPUFence)
+///
 /// {@category gpu}
 void sdlReleaseGpuFence(
   Pointer<SdlGpuDevice> device,
@@ -4014,6 +4657,10 @@ void sdlReleaseGpuFence(
 /// ```c
 /// extern SDL_DECLSPEC Uint32 SDLCALL SDL_GPUTextureFormatTexelBlockSize( SDL_GPUTextureFormat format)
 /// ```
+///
+/// See also:
+/// - [SDL_GPUTextureFormatTexelBlockSize - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GPUTextureFormatTexelBlockSize)
+///
 /// {@category gpu}
 int sdlGpuTextureFormatTexelBlockSize(int format) {
   final sdlGpuTextureFormatTexelBlockSizeLookupFunction = _libSdl
@@ -4038,6 +4685,10 @@ int sdlGpuTextureFormatTexelBlockSize(int format) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GPUTextureSupportsFormat( SDL_GPUDevice *device, SDL_GPUTextureFormat format, SDL_GPUTextureType type, SDL_GPUTextureUsageFlags usage)
 /// ```
+///
+/// See also:
+/// - [SDL_GPUTextureSupportsFormat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GPUTextureSupportsFormat)
+///
 /// {@category gpu}
 bool sdlGpuTextureSupportsFormat(
   Pointer<SdlGpuDevice> device,
@@ -4076,6 +4727,10 @@ bool sdlGpuTextureSupportsFormat(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GPUTextureSupportsSampleCount( SDL_GPUDevice *device, SDL_GPUTextureFormat format, SDL_GPUSampleCount sample_count)
 /// ```
+///
+/// See also:
+/// - [SDL_GPUTextureSupportsSampleCount - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GPUTextureSupportsSampleCount)
+///
 /// {@category gpu}
 bool sdlGpuTextureSupportsSampleCount(
   Pointer<SdlGpuDevice> device,
@@ -4112,6 +4767,10 @@ bool sdlGpuTextureSupportsSampleCount(
 /// ```c
 /// extern SDL_DECLSPEC Uint32 SDLCALL SDL_CalculateGPUTextureFormatSize( SDL_GPUTextureFormat format, Uint32 width, Uint32 height, Uint32 depth_or_layer_count)
 /// ```
+///
+/// See also:
+/// - [SDL_CalculateGPUTextureFormatSize - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CalculateGPUTextureFormatSize)
+///
 /// {@category gpu}
 int sdlCalculateGpuTextureFormatSize(
   int format,
@@ -4149,6 +4808,10 @@ int sdlCalculateGpuTextureFormatSize(
 /// ```c
 /// extern SDL_DECLSPEC SDL_PixelFormat SDLCALL SDL_GetPixelFormatFromGPUTextureFormat(SDL_GPUTextureFormat format)
 /// ```
+///
+/// See also:
+/// - [SDL_GetPixelFormatFromGPUTextureFormat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetPixelFormatFromGPUTextureFormat)
+///
 /// {@category gpu}
 int sdlGetPixelFormatFromGpuTextureFormat(int format) {
   final sdlGetPixelFormatFromGpuTextureFormatLookupFunction = _libSdl
@@ -4171,6 +4834,10 @@ int sdlGetPixelFormatFromGpuTextureFormat(int format) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_GPUTextureFormat SDLCALL SDL_GetGPUTextureFormatFromPixelFormat(SDL_PixelFormat format)
 /// ```
+///
+/// See also:
+/// - [SDL_GetGPUTextureFormatFromPixelFormat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetGPUTextureFormatFromPixelFormat)
+///
 /// {@category gpu}
 int sdlGetGpuTextureFormatFromPixelFormat(int format) {
   final sdlGetGpuTextureFormatFromPixelFormatLookupFunction = _libSdl
@@ -4198,6 +4865,10 @@ int sdlGetGpuTextureFormatFromPixelFormat(int format) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_GDKSuspendGPU(SDL_GPUDevice *device)
 /// ```
+///
+/// See also:
+/// - [SDL_GDKSuspendGPU - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GDKSuspendGPU)
+///
 /// {@category gpu}
 void sdlGdkSuspendGpu(Pointer<SdlGpuDevice> device) {
   final sdlGdkSuspendGpuLookupFunction = _libSdl
@@ -4226,6 +4897,10 @@ void sdlGdkSuspendGpu(Pointer<SdlGpuDevice> device) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_GDKResumeGPU(SDL_GPUDevice *device)
 /// ```
+///
+/// See also:
+/// - [SDL_GDKResumeGPU - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GDKResumeGPU)
+///
 /// {@category gpu}
 void sdlGdkResumeGpu(Pointer<SdlGpuDevice> device) {
   final sdlGdkResumeGpuLookupFunction = _libSdl

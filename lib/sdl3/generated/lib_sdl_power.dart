@@ -38,6 +38,10 @@ part of '../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC SDL_PowerState SDLCALL SDL_GetPowerInfo(int *seconds, int *percent)
 /// ```
+///
+/// See also:
+/// - [SDL_GetPowerInfo - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetPowerInfo)
+///
 /// {@category power}
 int sdlGetPowerInfo(Pointer<Int32> seconds, Pointer<Int32> percent) {
   final sdlGetPowerInfoLookupFunction = _libSdl

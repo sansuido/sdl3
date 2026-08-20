@@ -17,6 +17,10 @@ part of '../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_GUIDToString(SDL_GUID guid, char *pszGUID, int cbGUID)
 /// ```
+///
+/// See also:
+/// - [SDL_GUIDToString - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GUIDToString)
+///
 /// {@category guid}
 void sdlGuidToString(SdlGuid guid, Pointer<Int8> pszGuid, int cbGuid) {
   final sdlGuidToStringLookupFunction = _libSdl
@@ -46,6 +50,10 @@ void sdlGuidToString(SdlGuid guid, Pointer<Int8> pszGuid, int cbGuid) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_GUID SDLCALL SDL_StringToGUID(const char *pchGUID)
 /// ```
+///
+/// See also:
+/// - [SDL_StringToGUID - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_StringToGUID)
+///
 /// {@category guid}
 SdlGuid sdlStringToGuid(String? pchGuid) {
   final sdlStringToGuidLookupFunction = _libSdl

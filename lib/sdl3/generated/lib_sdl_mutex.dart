@@ -27,6 +27,10 @@ part of '../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC SDL_Mutex * SDLCALL SDL_CreateMutex(void)
 /// ```
+///
+/// See also:
+/// - [SDL_CreateMutex - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CreateMutex)
+///
 /// {@category mutex}
 Pointer<SdlMutex> sdlCreateMutex() {
   final sdlCreateMutexLookupFunction = _libSdl
@@ -64,6 +68,10 @@ Pointer<SdlMutex> sdlCreateMutex() {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_LockMutex(SDL_Mutex *mutex) SDL_ACQUIRE(mutex)
 /// ```
+///
+/// See also:
+/// - [SDL_LockMutex - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_LockMutex)
+///
 /// {@category mutex}
 void sdlLockMutex(Pointer<SdlMutex> mutex) {
   final sdlLockMutexLookupFunction = _libSdl
@@ -98,6 +106,10 @@ void sdlLockMutex(Pointer<SdlMutex> mutex) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_TryLockMutex(SDL_Mutex *mutex) SDL_TRY_ACQUIRE(true, mutex)
 /// ```
+///
+/// See also:
+/// - [SDL_TryLockMutex - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_TryLockMutex)
+///
 /// {@category mutex}
 bool sdlTryLockMutex(Pointer<SdlMutex> mutex) {
   final sdlTryLockMutexLookupFunction = _libSdl
@@ -131,6 +143,10 @@ bool sdlTryLockMutex(Pointer<SdlMutex> mutex) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_UnlockMutex(SDL_Mutex *mutex) SDL_RELEASE(mutex)
 /// ```
+///
+/// See also:
+/// - [SDL_UnlockMutex - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_UnlockMutex)
+///
 /// {@category mutex}
 void sdlUnlockMutex(Pointer<SdlMutex> mutex) {
   final sdlUnlockMutexLookupFunction = _libSdl
@@ -161,6 +177,10 @@ void sdlUnlockMutex(Pointer<SdlMutex> mutex) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_DestroyMutex(SDL_Mutex *mutex)
 /// ```
+///
+/// See also:
+/// - [SDL_DestroyMutex - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_DestroyMutex)
+///
 /// {@category mutex}
 void sdlDestroyMutex(Pointer<SdlMutex> mutex) {
   final sdlDestroyMutexLookupFunction = _libSdl
@@ -216,6 +236,10 @@ void sdlDestroyMutex(Pointer<SdlMutex> mutex) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_RWLock * SDLCALL SDL_CreateRWLock(void)
 /// ```
+///
+/// See also:
+/// - [SDL_CreateRWLock - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CreateRWLock)
+///
 /// {@category mutex}
 Pointer<SdlRwLock> sdlCreateRwLock() {
   final sdlCreateRwLockLookupFunction = _libSdl
@@ -266,6 +290,10 @@ Pointer<SdlRwLock> sdlCreateRwLock() {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_LockRWLockForReading(SDL_RWLock *rwlock) SDL_ACQUIRE_SHARED(rwlock)
 /// ```
+///
+/// See also:
+/// - [SDL_LockRWLockForReading - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_LockRWLockForReading)
+///
 /// {@category mutex}
 void sdlLockRwLockForReading(Pointer<SdlRwLock> rwlock) {
   final sdlLockRwLockForReadingLookupFunction = _libSdl
@@ -310,6 +338,10 @@ void sdlLockRwLockForReading(Pointer<SdlRwLock> rwlock) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_LockRWLockForWriting(SDL_RWLock *rwlock) SDL_ACQUIRE(rwlock)
 /// ```
+///
+/// See also:
+/// - [SDL_LockRWLockForWriting - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_LockRWLockForWriting)
+///
 /// {@category mutex}
 void sdlLockRwLockForWriting(Pointer<SdlRwLock> rwlock) {
   final sdlLockRwLockForWritingLookupFunction = _libSdl
@@ -348,6 +380,10 @@ void sdlLockRwLockForWriting(Pointer<SdlRwLock> rwlock) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_TryLockRWLockForReading(SDL_RWLock *rwlock) SDL_TRY_ACQUIRE_SHARED(true, rwlock)
 /// ```
+///
+/// See also:
+/// - [SDL_TryLockRWLockForReading - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_TryLockRWLockForReading)
+///
 /// {@category mutex}
 bool sdlTryLockRwLockForReading(Pointer<SdlRwLock> rwlock) {
   final sdlTryLockRwLockForReadingLookupFunction = _libSdl
@@ -391,6 +427,10 @@ bool sdlTryLockRwLockForReading(Pointer<SdlRwLock> rwlock) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_TryLockRWLockForWriting(SDL_RWLock *rwlock) SDL_TRY_ACQUIRE(true, rwlock)
 /// ```
+///
+/// See also:
+/// - [SDL_TryLockRWLockForWriting - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_TryLockRWLockForWriting)
+///
 /// {@category mutex}
 bool sdlTryLockRwLockForWriting(Pointer<SdlRwLock> rwlock) {
   final sdlTryLockRwLockForWritingLookupFunction = _libSdl
@@ -430,6 +470,10 @@ bool sdlTryLockRwLockForWriting(Pointer<SdlRwLock> rwlock) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_UnlockRWLock(SDL_RWLock *rwlock) SDL_RELEASE_GENERIC(rwlock)
 /// ```
+///
+/// See also:
+/// - [SDL_UnlockRWLock - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_UnlockRWLock)
+///
 /// {@category mutex}
 void sdlUnlockRwLock(Pointer<SdlRwLock> rwlock) {
   final sdlUnlockRwLockLookupFunction = _libSdl
@@ -460,6 +504,10 @@ void sdlUnlockRwLock(Pointer<SdlRwLock> rwlock) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_DestroyRWLock(SDL_RWLock *rwlock)
 /// ```
+///
+/// See also:
+/// - [SDL_DestroyRWLock - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_DestroyRWLock)
+///
 /// {@category mutex}
 void sdlDestroyRwLock(Pointer<SdlRwLock> rwlock) {
   final sdlDestroyRwLockLookupFunction = _libSdl
@@ -497,6 +545,10 @@ void sdlDestroyRwLock(Pointer<SdlRwLock> rwlock) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Semaphore * SDLCALL SDL_CreateSemaphore(Uint32 initial_value)
 /// ```
+///
+/// See also:
+/// - [SDL_CreateSemaphore - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CreateSemaphore)
+///
 /// {@category mutex}
 Pointer<SdlSemaphore> sdlCreateSemaphore(int initialValue) {
   final sdlCreateSemaphoreLookupFunction = _libSdl
@@ -524,6 +576,10 @@ Pointer<SdlSemaphore> sdlCreateSemaphore(int initialValue) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_DestroySemaphore(SDL_Semaphore *sem)
 /// ```
+///
+/// See also:
+/// - [SDL_DestroySemaphore - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_DestroySemaphore)
+///
 /// {@category mutex}
 void sdlDestroySemaphore(Pointer<SdlSemaphore> sem) {
   final sdlDestroySemaphoreLookupFunction = _libSdl
@@ -557,6 +613,10 @@ void sdlDestroySemaphore(Pointer<SdlSemaphore> sem) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_WaitSemaphore(SDL_Semaphore *sem)
 /// ```
+///
+/// See also:
+/// - [SDL_WaitSemaphore - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_WaitSemaphore)
+///
 /// {@category mutex}
 void sdlWaitSemaphore(Pointer<SdlSemaphore> sem) {
   final sdlWaitSemaphoreLookupFunction = _libSdl
@@ -589,6 +649,10 @@ void sdlWaitSemaphore(Pointer<SdlSemaphore> sem) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_TryWaitSemaphore(SDL_Semaphore *sem)
 /// ```
+///
+/// See also:
+/// - [SDL_TryWaitSemaphore - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_TryWaitSemaphore)
+///
 /// {@category mutex}
 bool sdlTryWaitSemaphore(Pointer<SdlSemaphore> sem) {
   final sdlTryWaitSemaphoreLookupFunction = _libSdl
@@ -622,6 +686,10 @@ bool sdlTryWaitSemaphore(Pointer<SdlSemaphore> sem) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_WaitSemaphoreTimeout(SDL_Semaphore *sem, Sint32 timeoutMS)
 /// ```
+///
+/// See also:
+/// - [SDL_WaitSemaphoreTimeout - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_WaitSemaphoreTimeout)
+///
 /// {@category mutex}
 bool sdlWaitSemaphoreTimeout(Pointer<SdlSemaphore> sem, int timeoutMs) {
   final sdlWaitSemaphoreTimeoutLookupFunction = _libSdl
@@ -648,6 +716,10 @@ bool sdlWaitSemaphoreTimeout(Pointer<SdlSemaphore> sem, int timeoutMs) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_SignalSemaphore(SDL_Semaphore *sem)
 /// ```
+///
+/// See also:
+/// - [SDL_SignalSemaphore - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SignalSemaphore)
+///
 /// {@category mutex}
 void sdlSignalSemaphore(Pointer<SdlSemaphore> sem) {
   final sdlSignalSemaphoreLookupFunction = _libSdl
@@ -671,6 +743,10 @@ void sdlSignalSemaphore(Pointer<SdlSemaphore> sem) {
 /// ```c
 /// extern SDL_DECLSPEC Uint32 SDLCALL SDL_GetSemaphoreValue(SDL_Semaphore *sem)
 /// ```
+///
+/// See also:
+/// - [SDL_GetSemaphoreValue - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetSemaphoreValue)
+///
 /// {@category mutex}
 int sdlGetSemaphoreValue(Pointer<SdlSemaphore> sem) {
   final sdlGetSemaphoreValueLookupFunction = _libSdl
@@ -700,6 +776,10 @@ int sdlGetSemaphoreValue(Pointer<SdlSemaphore> sem) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Condition * SDLCALL SDL_CreateCondition(void)
 /// ```
+///
+/// See also:
+/// - [SDL_CreateCondition - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CreateCondition)
+///
 /// {@category mutex}
 Pointer<SdlCondition> sdlCreateCondition() {
   final sdlCreateConditionLookupFunction = _libSdl
@@ -724,6 +804,10 @@ Pointer<SdlCondition> sdlCreateCondition() {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_DestroyCondition(SDL_Condition *cond)
 /// ```
+///
+/// See also:
+/// - [SDL_DestroyCondition - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_DestroyCondition)
+///
 /// {@category mutex}
 void sdlDestroyCondition(Pointer<SdlCondition> cond) {
   final sdlDestroyConditionLookupFunction = _libSdl
@@ -750,6 +834,10 @@ void sdlDestroyCondition(Pointer<SdlCondition> cond) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_SignalCondition(SDL_Condition *cond)
 /// ```
+///
+/// See also:
+/// - [SDL_SignalCondition - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SignalCondition)
+///
 /// {@category mutex}
 void sdlSignalCondition(Pointer<SdlCondition> cond) {
   final sdlSignalConditionLookupFunction = _libSdl
@@ -776,6 +864,10 @@ void sdlSignalCondition(Pointer<SdlCondition> cond) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_BroadcastCondition(SDL_Condition *cond)
 /// ```
+///
+/// See also:
+/// - [SDL_BroadcastCondition - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_BroadcastCondition)
+///
 /// {@category mutex}
 void sdlBroadcastCondition(Pointer<SdlCondition> cond) {
   final sdlBroadcastConditionLookupFunction = _libSdl
@@ -815,6 +907,10 @@ void sdlBroadcastCondition(Pointer<SdlCondition> cond) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_WaitCondition(SDL_Condition *cond, SDL_Mutex *mutex)
 /// ```
+///
+/// See also:
+/// - [SDL_WaitCondition - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_WaitCondition)
+///
 /// {@category mutex}
 void sdlWaitCondition(Pointer<SdlCondition> cond, Pointer<SdlMutex> mutex) {
   final sdlWaitConditionLookupFunction = _libSdl
@@ -856,6 +952,10 @@ void sdlWaitCondition(Pointer<SdlCondition> cond, Pointer<SdlMutex> mutex) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_WaitConditionTimeout(SDL_Condition *cond, SDL_Mutex *mutex, Sint32 timeoutMS)
 /// ```
+///
+/// See also:
+/// - [SDL_WaitConditionTimeout - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_WaitConditionTimeout)
+///
 /// {@category mutex}
 bool sdlWaitConditionTimeout(
   Pointer<SdlCondition> cond,
@@ -902,6 +1002,10 @@ bool sdlWaitConditionTimeout(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_ShouldInit(SDL_InitState *state)
 /// ```
+///
+/// See also:
+/// - [SDL_ShouldInit - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ShouldInit)
+///
 /// {@category mutex}
 bool sdlShouldInit(Pointer<SdlInitState> state) {
   final sdlShouldInitLookupFunction = _libSdl
@@ -934,6 +1038,10 @@ bool sdlShouldInit(Pointer<SdlInitState> state) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_ShouldQuit(SDL_InitState *state)
 /// ```
+///
+/// See also:
+/// - [SDL_ShouldQuit - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ShouldQuit)
+///
 /// {@category mutex}
 bool sdlShouldQuit(Pointer<SdlInitState> state) {
   final sdlShouldQuitLookupFunction = _libSdl
@@ -964,6 +1072,10 @@ bool sdlShouldQuit(Pointer<SdlInitState> state) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_SetInitialized(SDL_InitState *state, bool initialized)
 /// ```
+///
+/// See also:
+/// - [SDL_SetInitialized - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetInitialized)
+///
 /// {@category mutex}
 void sdlSetInitialized(Pointer<SdlInitState> state, bool initialized) {
   final sdlSetInitializedLookupFunction = _libSdl

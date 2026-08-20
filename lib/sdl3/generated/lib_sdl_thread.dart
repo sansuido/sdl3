@@ -37,6 +37,10 @@ part of '../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC SDL_Thread * SDLCALL SDL_CreateThread(SDL_ThreadFunction fn, const char *name, void *data)
 /// ```
+///
+/// See also:
+/// - [SDL_CreateThread - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CreateThread)
+///
 /// {@category thread}
 Pointer<SdlThread> sdlCreateThread(
   Pointer<NativeFunction<SdlThreadFunction>> fn,
@@ -131,6 +135,10 @@ Pointer<SdlThread> sdlCreateThread(
 /// ```c
 /// extern SDL_DECLSPEC SDL_Thread * SDLCALL SDL_CreateThreadWithProperties(SDL_PropertiesID props)
 /// ```
+///
+/// See also:
+/// - [SDL_CreateThreadWithProperties - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CreateThreadWithProperties)
+///
 /// {@category thread}
 Pointer<SdlThread> sdlCreateThreadWithProperties(int props) {
   final sdlCreateThreadWithPropertiesLookupFunction = _libSdl
@@ -160,6 +168,10 @@ Pointer<SdlThread> sdlCreateThreadWithProperties(int props) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Thread * SDLCALL SDL_CreateThreadRuntime(SDL_ThreadFunction fn, const char *name, void *data, SDL_FunctionPointer pfnBeginThread, SDL_FunctionPointer pfnEndThread)
 /// ```
+///
+/// See also:
+/// - [SDL_CreateThreadRuntime - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CreateThreadRuntime)
+///
 /// {@category thread}
 Pointer<SdlThread> sdlCreateThreadRuntime(
   Pointer<NativeFunction<SdlThreadFunction>> fn,
@@ -214,6 +226,10 @@ Pointer<SdlThread> sdlCreateThreadRuntime(
 /// ```c
 /// extern SDL_DECLSPEC SDL_Thread * SDLCALL SDL_CreateThreadWithPropertiesRuntime(SDL_PropertiesID props, SDL_FunctionPointer pfnBeginThread, SDL_FunctionPointer pfnEndThread)
 /// ```
+///
+/// See also:
+/// - [SDL_CreateThreadWithPropertiesRuntime - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CreateThreadWithPropertiesRuntime)
+///
 /// {@category thread}
 Pointer<SdlThread> sdlCreateThreadWithPropertiesRuntime(
   int props,
@@ -254,6 +270,10 @@ Pointer<SdlThread> sdlCreateThreadWithPropertiesRuntime(
 /// ```c
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetThreadName(SDL_Thread *thread)
 /// ```
+///
+/// See also:
+/// - [SDL_GetThreadName - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetThreadName)
+///
 /// {@category thread}
 String? sdlGetThreadName(Pointer<SdlThread> thread) {
   final sdlGetThreadNameLookupFunction = _libSdl
@@ -289,6 +309,10 @@ String? sdlGetThreadName(Pointer<SdlThread> thread) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_ThreadID SDLCALL SDL_GetCurrentThreadID(void)
 /// ```
+///
+/// See also:
+/// - [SDL_GetCurrentThreadID - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetCurrentThreadID)
+///
 /// {@category thread}
 int sdlGetCurrentThreadId() {
   final sdlGetCurrentThreadIdLookupFunction = _libSdl
@@ -318,6 +342,10 @@ int sdlGetCurrentThreadId() {
 /// ```c
 /// extern SDL_DECLSPEC SDL_ThreadID SDLCALL SDL_GetThreadID(SDL_Thread *thread)
 /// ```
+///
+/// See also:
+/// - [SDL_GetThreadID - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetThreadID)
+///
 /// {@category thread}
 int sdlGetThreadId(Pointer<SdlThread> thread) {
   final sdlGetThreadIdLookupFunction = _libSdl
@@ -346,6 +374,10 @@ int sdlGetThreadId(Pointer<SdlThread> thread) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetCurrentThreadPriority(SDL_ThreadPriority priority)
 /// ```
+///
+/// See also:
+/// - [SDL_SetCurrentThreadPriority - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetCurrentThreadPriority)
+///
 /// {@category thread}
 bool sdlSetCurrentThreadPriority(int priority) {
   final sdlSetCurrentThreadPriorityLookupFunction = _libSdl
@@ -395,6 +427,10 @@ bool sdlSetCurrentThreadPriority(int priority) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_WaitThread(SDL_Thread *thread, int *status)
 /// ```
+///
+/// See also:
+/// - [SDL_WaitThread - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_WaitThread)
+///
 /// {@category thread}
 void sdlWaitThread(Pointer<SdlThread> thread, Pointer<Int32> status) {
   final sdlWaitThreadLookupFunction = _libSdl
@@ -421,6 +457,10 @@ void sdlWaitThread(Pointer<SdlThread> thread, Pointer<Int32> status) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_ThreadState SDLCALL SDL_GetThreadState(SDL_Thread *thread)
 /// ```
+///
+/// See also:
+/// - [SDL_GetThreadState - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetThreadState)
+///
 /// {@category thread}
 int sdlGetThreadState(Pointer<SdlThread> thread) {
   final sdlGetThreadStateLookupFunction = _libSdl
@@ -470,6 +510,10 @@ int sdlGetThreadState(Pointer<SdlThread> thread) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_DetachThread(SDL_Thread *thread)
 /// ```
+///
+/// See also:
+/// - [SDL_DetachThread - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_DetachThread)
+///
 /// {@category thread}
 void sdlDetachThread(Pointer<SdlThread> thread) {
   final sdlDetachThreadLookupFunction = _libSdl
@@ -496,6 +540,10 @@ void sdlDetachThread(Pointer<SdlThread> thread) {
 /// ```c
 /// extern SDL_DECLSPEC void * SDLCALL SDL_GetTLS(SDL_TLSID *id)
 /// ```
+///
+/// See also:
+/// - [SDL_GetTLS - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetTLS)
+///
 /// {@category thread}
 Pointer<Void> sdlGetTls(Pointer<SdlAtomicInt> id) {
   final sdlGetTlsLookupFunction = _libSdl
@@ -535,6 +583,10 @@ Pointer<Void> sdlGetTls(Pointer<SdlAtomicInt> id) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetTLS(SDL_TLSID *id, const void *value, SDL_TLSDestructorCallback destructor)
 /// ```
+///
+/// See also:
+/// - [SDL_SetTLS - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetTLS)
+///
 /// {@category thread}
 bool sdlSetTls(
   Pointer<SdlAtomicInt> id,
@@ -571,6 +623,10 @@ bool sdlSetTls(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_CleanupTLS(void)
 /// ```
+///
+/// See also:
+/// - [SDL_CleanupTLS - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CleanupTLS)
+///
 /// {@category thread}
 void sdlCleanupTls() {
   final sdlCleanupTlsLookupFunction = _libSdl

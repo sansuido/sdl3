@@ -1,4 +1,5 @@
 import 'dart:ffi';
+
 import 'package:sdl3/sdl3.dart';
 import 'package:sdl3/sdl3gfx.dart' as gfx;
 

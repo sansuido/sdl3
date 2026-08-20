@@ -22,6 +22,10 @@ part of '../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_GetVersion(void)
 /// ```
+///
+/// See also:
+/// - [SDL_GetVersion - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetVersion)
+///
 /// {@category version}
 int sdlGetVersion() {
   final sdlGetVersionLookupFunction = _libSdl
@@ -59,6 +63,10 @@ int sdlGetVersion() {
 /// ```c
 /// extern SDL_DECLSPEC const char * SDLCALL SDL_GetRevision(void)
 /// ```
+///
+/// See also:
+/// - [SDL_GetRevision - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRevision)
+///
 /// {@category version}
 String? sdlGetRevision() {
   final sdlGetRevisionLookupFunction = _libSdl

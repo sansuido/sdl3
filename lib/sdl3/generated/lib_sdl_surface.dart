@@ -23,6 +23,10 @@ part of '../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC SDL_Surface * SDLCALL SDL_CreateSurface(int width, int height, SDL_PixelFormat format)
 /// ```
+///
+/// See also:
+/// - [SDL_CreateSurface - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CreateSurface)
+///
 /// {@category surface}
 Pointer<SdlSurface> sdlCreateSurface(int width, int height, int format) {
   final sdlCreateSurfaceLookupFunction = _libSdl
@@ -64,6 +68,10 @@ Pointer<SdlSurface> sdlCreateSurface(int width, int height, int format) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Surface * SDLCALL SDL_CreateSurfaceFrom(int width, int height, SDL_PixelFormat format, void *pixels, int pitch)
 /// ```
+///
+/// See also:
+/// - [SDL_CreateSurfaceFrom - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CreateSurfaceFrom)
+///
 /// {@category surface}
 Pointer<SdlSurface> sdlCreateSurfaceFrom(
   int width,
@@ -115,6 +123,10 @@ Pointer<SdlSurface> sdlCreateSurfaceFrom(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_DestroySurface(SDL_Surface *surface)
 /// ```
+///
+/// See also:
+/// - [SDL_DestroySurface - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_DestroySurface)
+///
 /// {@category surface}
 void sdlDestroySurface(Pointer<SdlSurface> surface) {
   final sdlDestroySurfaceLookupFunction = _libSdl
@@ -166,6 +178,10 @@ void sdlDestroySurface(Pointer<SdlSurface> surface) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_PropertiesID SDLCALL SDL_GetSurfaceProperties(SDL_Surface *surface)
 /// ```
+///
+/// See also:
+/// - [SDL_GetSurfaceProperties - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetSurfaceProperties)
+///
 /// {@category surface}
 int sdlGetSurfaceProperties(Pointer<SdlSurface> surface) {
   final sdlGetSurfacePropertiesLookupFunction = _libSdl
@@ -198,6 +214,10 @@ int sdlGetSurfaceProperties(Pointer<SdlSurface> surface) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetSurfaceColorspace(SDL_Surface *surface, SDL_Colorspace colorspace)
 /// ```
+///
+/// See also:
+/// - [SDL_SetSurfaceColorspace - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetSurfaceColorspace)
+///
 /// {@category surface}
 bool sdlSetSurfaceColorspace(Pointer<SdlSurface> surface, int colorspace) {
   final sdlSetSurfaceColorspaceLookupFunction = _libSdl
@@ -229,6 +249,10 @@ bool sdlSetSurfaceColorspace(Pointer<SdlSurface> surface, int colorspace) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Colorspace SDLCALL SDL_GetSurfaceColorspace(SDL_Surface *surface)
 /// ```
+///
+/// See also:
+/// - [SDL_GetSurfaceColorspace - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetSurfaceColorspace)
+///
 /// {@category surface}
 int sdlGetSurfaceColorspace(Pointer<SdlSurface> surface) {
   final sdlGetSurfaceColorspaceLookupFunction = _libSdl
@@ -271,6 +295,10 @@ int sdlGetSurfaceColorspace(Pointer<SdlSurface> surface) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Palette * SDLCALL SDL_CreateSurfacePalette(SDL_Surface *surface)
 /// ```
+///
+/// See also:
+/// - [SDL_CreateSurfacePalette - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CreateSurfacePalette)
+///
 /// {@category surface}
 Pointer<SdlPalette> sdlCreateSurfacePalette(Pointer<SdlSurface> surface) {
   final sdlCreateSurfacePaletteLookupFunction = _libSdl
@@ -305,6 +333,10 @@ Pointer<SdlPalette> sdlCreateSurfacePalette(Pointer<SdlSurface> surface) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetSurfacePalette(SDL_Surface *surface, SDL_Palette *palette)
 /// ```
+///
+/// See also:
+/// - [SDL_SetSurfacePalette - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetSurfacePalette)
+///
 /// {@category surface}
 bool sdlSetSurfacePalette(
   Pointer<SdlSurface> surface,
@@ -334,6 +366,10 @@ bool sdlSetSurfacePalette(
 /// ```c
 /// extern SDL_DECLSPEC SDL_Palette * SDLCALL SDL_GetSurfacePalette(SDL_Surface *surface)
 /// ```
+///
+/// See also:
+/// - [SDL_GetSurfacePalette - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetSurfacePalette)
+///
 /// {@category surface}
 Pointer<SdlPalette> sdlGetSurfacePalette(Pointer<SdlSurface> surface) {
   final sdlGetSurfacePaletteLookupFunction = _libSdl
@@ -373,6 +409,10 @@ Pointer<SdlPalette> sdlGetSurfacePalette(Pointer<SdlSurface> surface) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_AddSurfaceAlternateImage(SDL_Surface *surface, SDL_Surface *image)
 /// ```
+///
+/// See also:
+/// - [SDL_AddSurfaceAlternateImage - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_AddSurfaceAlternateImage)
+///
 /// {@category surface}
 bool sdlAddSurfaceAlternateImage(
   Pointer<SdlSurface> surface,
@@ -403,6 +443,10 @@ bool sdlAddSurfaceAlternateImage(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SurfaceHasAlternateImages(SDL_Surface *surface)
 /// ```
+///
+/// See also:
+/// - [SDL_SurfaceHasAlternateImages - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SurfaceHasAlternateImages)
+///
 /// {@category surface}
 bool sdlSurfaceHasAlternateImages(Pointer<SdlSurface> surface) {
   final sdlSurfaceHasAlternateImagesLookupFunction = _libSdl
@@ -442,6 +486,10 @@ bool sdlSurfaceHasAlternateImages(Pointer<SdlSurface> surface) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Surface ** SDLCALL SDL_GetSurfaceImages(SDL_Surface *surface, int *count)
 /// ```
+///
+/// See also:
+/// - [SDL_GetSurfaceImages - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetSurfaceImages)
+///
 /// {@category surface}
 Pointer<Pointer<SdlSurface>> sdlGetSurfaceImages(
   Pointer<SdlSurface> surface,
@@ -481,6 +529,10 @@ Pointer<Pointer<SdlSurface>> sdlGetSurfaceImages(
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_RemoveSurfaceAlternateImages(SDL_Surface *surface)
 /// ```
+///
+/// See also:
+/// - [SDL_RemoveSurfaceAlternateImages - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RemoveSurfaceAlternateImages)
+///
 /// {@category surface}
 void sdlRemoveSurfaceAlternateImages(Pointer<SdlSurface> surface) {
   final sdlRemoveSurfaceAlternateImagesLookupFunction = _libSdl
@@ -520,6 +572,10 @@ void sdlRemoveSurfaceAlternateImages(Pointer<SdlSurface> surface) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_LockSurface(SDL_Surface *surface)
 /// ```
+///
+/// See also:
+/// - [SDL_LockSurface - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_LockSurface)
+///
 /// {@category surface}
 bool sdlLockSurface(Pointer<SdlSurface> surface) {
   final sdlLockSurfaceLookupFunction = _libSdl
@@ -546,6 +602,10 @@ bool sdlLockSurface(Pointer<SdlSurface> surface) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_UnlockSurface(SDL_Surface *surface)
 /// ```
+///
+/// See also:
+/// - [SDL_UnlockSurface - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_UnlockSurface)
+///
 /// {@category surface}
 void sdlUnlockSurface(Pointer<SdlSurface> surface) {
   final sdlUnlockSurfaceLookupFunction = _libSdl
@@ -578,6 +638,10 @@ void sdlUnlockSurface(Pointer<SdlSurface> surface) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Surface * SDLCALL SDL_LoadSurface_IO(SDL_IOStream *src, bool closeio)
 /// ```
+///
+/// See also:
+/// - [SDL_LoadSurface_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_LoadSurface_IO)
+///
 /// {@category surface}
 Pointer<SdlSurface> sdlLoadSurfaceIo(Pointer<SdlIoStream> src, bool closeio) {
   final sdlLoadSurfaceIoLookupFunction = _libSdl
@@ -608,6 +672,10 @@ Pointer<SdlSurface> sdlLoadSurfaceIo(Pointer<SdlIoStream> src, bool closeio) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Surface * SDLCALL SDL_LoadSurface(const char *file)
 /// ```
+///
+/// See also:
+/// - [SDL_LoadSurface - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_LoadSurface)
+///
 /// {@category surface}
 Pointer<SdlSurface> sdlLoadSurface(String? file) {
   final sdlLoadSurfaceLookupFunction = _libSdl
@@ -644,6 +712,10 @@ Pointer<SdlSurface> sdlLoadSurface(String? file) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Surface * SDLCALL SDL_LoadBMP_IO(SDL_IOStream *src, bool closeio)
 /// ```
+///
+/// See also:
+/// - [SDL_LoadBMP_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_LoadBMP_IO)
+///
 /// {@category surface}
 Pointer<SdlSurface> sdlLoadBmpIo(Pointer<SdlIoStream> src, bool closeio) {
   final sdlLoadBmpIoLookupFunction = _libSdl
@@ -675,6 +747,10 @@ Pointer<SdlSurface> sdlLoadBmpIo(Pointer<SdlIoStream> src, bool closeio) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Surface * SDLCALL SDL_LoadBMP(const char *file)
 /// ```
+///
+/// See also:
+/// - [SDL_LoadBMP - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_LoadBMP)
+///
 /// {@category surface}
 Pointer<SdlSurface> sdlLoadBmp(String? file) {
   final sdlLoadBmpLookupFunction = _libSdl
@@ -715,6 +791,10 @@ Pointer<SdlSurface> sdlLoadBmp(String? file) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SaveBMP_IO(SDL_Surface *surface, SDL_IOStream *dst, bool closeio)
 /// ```
+///
+/// See also:
+/// - [SDL_SaveBMP_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SaveBMP_IO)
+///
 /// {@category surface}
 bool sdlSaveBmpIo(
   Pointer<SdlSurface> surface,
@@ -762,6 +842,10 @@ bool sdlSaveBmpIo(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SaveBMP(SDL_Surface *surface, const char *file)
 /// ```
+///
+/// See also:
+/// - [SDL_SaveBMP - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SaveBMP)
+///
 /// {@category surface}
 bool sdlSaveBmp(Pointer<SdlSurface> surface, String? file) {
   final sdlSaveBmpLookupFunction = _libSdl
@@ -802,6 +886,10 @@ bool sdlSaveBmp(Pointer<SdlSurface> surface, String? file) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Surface * SDLCALL SDL_LoadPNG_IO(SDL_IOStream *src, bool closeio)
 /// ```
+///
+/// See also:
+/// - [SDL_LoadPNG_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_LoadPNG_IO)
+///
 /// {@category surface}
 Pointer<SdlSurface> sdlLoadPngIo(Pointer<SdlIoStream> src, bool closeio) {
   final sdlLoadPngIoLookupFunction = _libSdl
@@ -837,6 +925,10 @@ Pointer<SdlSurface> sdlLoadPngIo(Pointer<SdlIoStream> src, bool closeio) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Surface * SDLCALL SDL_LoadPNG(const char *file)
 /// ```
+///
+/// See also:
+/// - [SDL_LoadPNG - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_LoadPNG)
+///
 /// {@category surface}
 Pointer<SdlSurface> sdlLoadPng(String? file) {
   final sdlLoadPngLookupFunction = _libSdl
@@ -871,6 +963,10 @@ Pointer<SdlSurface> sdlLoadPng(String? file) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SavePNG_IO(SDL_Surface *surface, SDL_IOStream *dst, bool closeio)
 /// ```
+///
+/// See also:
+/// - [SDL_SavePNG_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SavePNG_IO)
+///
 /// {@category surface}
 bool sdlSavePngIo(
   Pointer<SdlSurface> surface,
@@ -912,6 +1008,10 @@ bool sdlSavePngIo(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SavePNG(SDL_Surface *surface, const char *file)
 /// ```
+///
+/// See also:
+/// - [SDL_SavePNG - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SavePNG)
+///
 /// {@category surface}
 bool sdlSavePng(Pointer<SdlSurface> surface, String? file) {
   final sdlSavePngLookupFunction = _libSdl
@@ -951,6 +1051,10 @@ bool sdlSavePng(Pointer<SdlSurface> surface, String? file) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Surface * SDLCALL SDL_LoadJPG_IO(SDL_IOStream *src, bool closeio)
 /// ```
+///
+/// See also:
+/// - [SDL_LoadJPG_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_LoadJPG_IO)
+///
 /// {@category surface}
 Pointer<SdlSurface> sdlLoadJpgIo(Pointer<SdlIoStream> src, bool closeio) {
   final sdlLoadJpgIoLookupFunction = _libSdl
@@ -985,6 +1089,10 @@ Pointer<SdlSurface> sdlLoadJpgIo(Pointer<SdlIoStream> src, bool closeio) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Surface * SDLCALL SDL_LoadJPG(const char *file)
 /// ```
+///
+/// See also:
+/// - [SDL_LoadJPG - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_LoadJPG)
+///
 /// {@category surface}
 Pointer<SdlSurface> sdlLoadJpg(String? file) {
   final sdlLoadJpgLookupFunction = _libSdl
@@ -1021,6 +1129,10 @@ Pointer<SdlSurface> sdlLoadJpg(String? file) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetSurfaceRLE(SDL_Surface *surface, bool enabled)
 /// ```
+///
+/// See also:
+/// - [SDL_SetSurfaceRLE - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetSurfaceRLE)
+///
 /// {@category surface}
 bool sdlSetSurfaceRle(Pointer<SdlSurface> surface, bool enabled) {
   final sdlSetSurfaceRleLookupFunction = _libSdl
@@ -1048,6 +1160,10 @@ bool sdlSetSurfaceRle(Pointer<SdlSurface> surface, bool enabled) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SurfaceHasRLE(SDL_Surface *surface)
 /// ```
+///
+/// See also:
+/// - [SDL_SurfaceHasRLE - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SurfaceHasRLE)
+///
 /// {@category surface}
 bool sdlSurfaceHasRle(Pointer<SdlSurface> surface) {
   final sdlSurfaceHasRleLookupFunction = _libSdl
@@ -1086,6 +1202,10 @@ bool sdlSurfaceHasRle(Pointer<SdlSurface> surface) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetSurfaceColorKey(SDL_Surface *surface, bool enabled, Uint32 key)
 /// ```
+///
+/// See also:
+/// - [SDL_SetSurfaceColorKey - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetSurfaceColorKey)
+///
 /// {@category surface}
 bool sdlSetSurfaceColorKey(Pointer<SdlSurface> surface, bool enabled, int key) {
   final sdlSetSurfaceColorKeyLookupFunction = _libSdl
@@ -1114,6 +1234,10 @@ bool sdlSetSurfaceColorKey(Pointer<SdlSurface> surface, bool enabled, int key) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SurfaceHasColorKey(SDL_Surface *surface)
 /// ```
+///
+/// See also:
+/// - [SDL_SurfaceHasColorKey - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SurfaceHasColorKey)
+///
 /// {@category surface}
 bool sdlSurfaceHasColorKey(Pointer<SdlSurface> surface) {
   final sdlSurfaceHasColorKeyLookupFunction = _libSdl
@@ -1147,6 +1271,10 @@ bool sdlSurfaceHasColorKey(Pointer<SdlSurface> surface) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetSurfaceColorKey(SDL_Surface *surface, Uint32 *key)
 /// ```
+///
+/// See also:
+/// - [SDL_GetSurfaceColorKey - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetSurfaceColorKey)
+///
 /// {@category surface}
 bool sdlGetSurfaceColorKey(Pointer<SdlSurface> surface, Pointer<Uint32> key) {
   final sdlGetSurfaceColorKeyLookupFunction = _libSdl
@@ -1184,6 +1312,10 @@ bool sdlGetSurfaceColorKey(Pointer<SdlSurface> surface, Pointer<Uint32> key) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetSurfaceColorMod(SDL_Surface *surface, Uint8 r, Uint8 g, Uint8 b)
 /// ```
+///
+/// See also:
+/// - [SDL_SetSurfaceColorMod - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetSurfaceColorMod)
+///
 /// {@category surface}
 bool sdlSetSurfaceColorMod(Pointer<SdlSurface> surface, int r, int g, int b) {
   final sdlSetSurfaceColorModLookupFunction = _libSdl
@@ -1215,6 +1347,10 @@ bool sdlSetSurfaceColorMod(Pointer<SdlSurface> surface, int r, int g, int b) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetSurfaceColorMod(SDL_Surface *surface, Uint8 *r, Uint8 *g, Uint8 *b)
 /// ```
+///
+/// See also:
+/// - [SDL_GetSurfaceColorMod - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetSurfaceColorMod)
+///
 /// {@category surface}
 bool sdlGetSurfaceColorMod(
   Pointer<SdlSurface> surface,
@@ -1264,6 +1400,10 @@ bool sdlGetSurfaceColorMod(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetSurfaceAlphaMod(SDL_Surface *surface, Uint8 alpha)
 /// ```
+///
+/// See also:
+/// - [SDL_SetSurfaceAlphaMod - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetSurfaceAlphaMod)
+///
 /// {@category surface}
 bool sdlSetSurfaceAlphaMod(Pointer<SdlSurface> surface, int alpha) {
   final sdlSetSurfaceAlphaModLookupFunction = _libSdl
@@ -1292,6 +1432,10 @@ bool sdlSetSurfaceAlphaMod(Pointer<SdlSurface> surface, int alpha) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetSurfaceAlphaMod(SDL_Surface *surface, Uint8 *alpha)
 /// ```
+///
+/// See also:
+/// - [SDL_GetSurfaceAlphaMod - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetSurfaceAlphaMod)
+///
 /// {@category surface}
 bool sdlGetSurfaceAlphaMod(Pointer<SdlSurface> surface, Pointer<Uint8> alpha) {
   final sdlGetSurfaceAlphaModLookupFunction = _libSdl
@@ -1324,6 +1468,10 @@ bool sdlGetSurfaceAlphaMod(Pointer<SdlSurface> surface, Pointer<Uint8> alpha) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetSurfaceBlendMode(SDL_Surface *surface, SDL_BlendMode blendMode)
 /// ```
+///
+/// See also:
+/// - [SDL_SetSurfaceBlendMode - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetSurfaceBlendMode)
+///
 /// {@category surface}
 bool sdlSetSurfaceBlendMode(Pointer<SdlSurface> surface, int blendMode) {
   final sdlSetSurfaceBlendModeLookupFunction = _libSdl
@@ -1351,6 +1499,10 @@ bool sdlSetSurfaceBlendMode(Pointer<SdlSurface> surface, int blendMode) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetSurfaceBlendMode(SDL_Surface *surface, SDL_BlendMode *blendMode)
 /// ```
+///
+/// See also:
+/// - [SDL_GetSurfaceBlendMode - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetSurfaceBlendMode)
+///
 /// {@category surface}
 bool sdlGetSurfaceBlendMode(
   Pointer<SdlSurface> surface,
@@ -1389,6 +1541,10 @@ bool sdlGetSurfaceBlendMode(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetSurfaceClipRect(SDL_Surface *surface, const SDL_Rect *rect)
 /// ```
+///
+/// See also:
+/// - [SDL_SetSurfaceClipRect - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetSurfaceClipRect)
+///
 /// {@category surface}
 bool sdlSetSurfaceClipRect(Pointer<SdlSurface> surface, Pointer<SdlRect> rect) {
   final sdlSetSurfaceClipRectLookupFunction = _libSdl
@@ -1422,6 +1578,10 @@ bool sdlSetSurfaceClipRect(Pointer<SdlSurface> surface, Pointer<SdlRect> rect) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_GetSurfaceClipRect(SDL_Surface *surface, SDL_Rect *rect)
 /// ```
+///
+/// See also:
+/// - [SDL_GetSurfaceClipRect - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetSurfaceClipRect)
+///
 /// {@category surface}
 bool sdlGetSurfaceClipRect(Pointer<SdlSurface> surface, Pointer<SdlRect> rect) {
   final sdlGetSurfaceClipRectLookupFunction = _libSdl
@@ -1448,6 +1608,10 @@ bool sdlGetSurfaceClipRect(Pointer<SdlSurface> surface, Pointer<SdlRect> rect) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_FlipSurface(SDL_Surface *surface, SDL_FlipMode flip)
 /// ```
+///
+/// See also:
+/// - [SDL_FlipSurface - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_FlipSurface)
+///
 /// {@category surface}
 bool sdlFlipSurface(Pointer<SdlSurface> surface, int flip) {
   final sdlFlipSurfaceLookupFunction = _libSdl
@@ -1488,6 +1652,10 @@ bool sdlFlipSurface(Pointer<SdlSurface> surface, int flip) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Surface * SDLCALL SDL_RotateSurface(SDL_Surface *surface, float angle)
 /// ```
+///
+/// See also:
+/// - [SDL_RotateSurface - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RotateSurface)
+///
 /// {@category surface}
 Pointer<SdlSurface> sdlRotateSurface(
   Pointer<SdlSurface> surface,
@@ -1523,6 +1691,10 @@ Pointer<SdlSurface> sdlRotateSurface(
 /// ```c
 /// extern SDL_DECLSPEC SDL_Surface * SDLCALL SDL_DuplicateSurface(SDL_Surface *surface)
 /// ```
+///
+/// See also:
+/// - [SDL_DuplicateSurface - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_DuplicateSurface)
+///
 /// {@category surface}
 Pointer<SdlSurface> sdlDuplicateSurface(Pointer<SdlSurface> surface) {
   final sdlDuplicateSurfaceLookupFunction = _libSdl
@@ -1556,6 +1728,10 @@ Pointer<SdlSurface> sdlDuplicateSurface(Pointer<SdlSurface> surface) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Surface * SDLCALL SDL_ScaleSurface(SDL_Surface *surface, int width, int height, SDL_ScaleMode scaleMode)
 /// ```
+///
+/// See also:
+/// - [SDL_ScaleSurface - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ScaleSurface)
+///
 /// {@category surface}
 Pointer<SdlSurface> sdlScaleSurface(
   Pointer<SdlSurface> surface,
@@ -1611,6 +1787,10 @@ Pointer<SdlSurface> sdlScaleSurface(
 /// ```c
 /// extern SDL_DECLSPEC SDL_Surface * SDLCALL SDL_ConvertSurface(SDL_Surface *surface, SDL_PixelFormat format)
 /// ```
+///
+/// See also:
+/// - [SDL_ConvertSurface - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ConvertSurface)
+///
 /// {@category surface}
 Pointer<SdlSurface> sdlConvertSurface(Pointer<SdlSurface> surface, int format) {
   final sdlConvertSurfaceLookupFunction = _libSdl
@@ -1651,6 +1831,10 @@ Pointer<SdlSurface> sdlConvertSurface(Pointer<SdlSurface> surface, int format) {
 /// ```c
 /// extern SDL_DECLSPEC SDL_Surface * SDLCALL SDL_ConvertSurfaceAndColorspace(SDL_Surface *surface, SDL_PixelFormat format, SDL_Palette *palette, SDL_Colorspace colorspace, SDL_PropertiesID props)
 /// ```
+///
+/// See also:
+/// - [SDL_ConvertSurfaceAndColorspace - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ConvertSurfaceAndColorspace)
+///
 /// {@category surface}
 Pointer<SdlSurface> sdlConvertSurfaceAndColorspace(
   Pointer<SdlSurface> surface,
@@ -1710,6 +1894,10 @@ Pointer<SdlSurface> sdlConvertSurfaceAndColorspace(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_ConvertPixels(int width, int height, SDL_PixelFormat src_format, const void *src, int src_pitch, SDL_PixelFormat dst_format, void *dst, int dst_pitch)
 /// ```
+///
+/// See also:
+/// - [SDL_ConvertPixels - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ConvertPixels)
+///
 /// {@category surface}
 bool sdlConvertPixels(
   int width,
@@ -1790,6 +1978,10 @@ bool sdlConvertPixels(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_ConvertPixelsAndColorspace(int width, int height, SDL_PixelFormat src_format, SDL_Colorspace src_colorspace, SDL_PropertiesID src_properties, const void *src, int src_pitch, SDL_PixelFormat dst_format, SDL_Colorspace dst_colorspace, SDL_PropertiesID dst_properties, void *dst, int dst_pitch)
 /// ```
+///
+/// See also:
+/// - [SDL_ConvertPixelsAndColorspace - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ConvertPixelsAndColorspace)
+///
 /// {@category surface}
 bool sdlConvertPixelsAndColorspace(
   int width,
@@ -1879,6 +2071,10 @@ bool sdlConvertPixelsAndColorspace(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_PremultiplyAlpha(int width, int height, SDL_PixelFormat src_format, const void *src, int src_pitch, SDL_PixelFormat dst_format, void *dst, int dst_pitch, bool linear)
 /// ```
+///
+/// See also:
+/// - [SDL_PremultiplyAlpha - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_PremultiplyAlpha)
+///
 /// {@category surface}
 bool sdlPremultiplyAlpha(
   int width,
@@ -1948,6 +2144,10 @@ bool sdlPremultiplyAlpha(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_PremultiplySurfaceAlpha(SDL_Surface *surface, bool linear)
 /// ```
+///
+/// See also:
+/// - [SDL_PremultiplySurfaceAlpha - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_PremultiplySurfaceAlpha)
+///
 /// {@category surface}
 bool sdlPremultiplySurfaceAlpha(Pointer<SdlSurface> surface, bool linear) {
   final sdlPremultiplySurfaceAlphaLookupFunction = _libSdl
@@ -1982,6 +2182,10 @@ bool sdlPremultiplySurfaceAlpha(Pointer<SdlSurface> surface, bool linear) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_ClearSurface(SDL_Surface *surface, float r, float g, float b, float a)
 /// ```
+///
+/// See also:
+/// - [SDL_ClearSurface - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ClearSurface)
+///
 /// {@category surface}
 bool sdlClearSurface(
   Pointer<SdlSurface> surface,
@@ -2039,6 +2243,10 @@ bool sdlClearSurface(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_FillSurfaceRect(SDL_Surface *dst, const SDL_Rect *rect, Uint32 color)
 /// ```
+///
+/// See also:
+/// - [SDL_FillSurfaceRect - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_FillSurfaceRect)
+///
 /// {@category surface}
 bool sdlFillSurfaceRect(
   Pointer<SdlSurface> dst,
@@ -2086,6 +2294,10 @@ bool sdlFillSurfaceRect(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_FillSurfaceRects(SDL_Surface *dst, const SDL_Rect *rects, int count, Uint32 color)
 /// ```
+///
+/// See also:
+/// - [SDL_FillSurfaceRects - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_FillSurfaceRects)
+///
 /// {@category surface}
 bool sdlFillSurfaceRects(
   Pointer<SdlSurface> dst,
@@ -2185,6 +2397,10 @@ bool sdlFillSurfaceRects(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_BlitSurface(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, const SDL_Rect *dstrect)
 /// ```
+///
+/// See also:
+/// - [SDL_BlitSurface - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_BlitSurface)
+///
 /// {@category surface}
 bool sdlBlitSurface(
   Pointer<SdlSurface> src,
@@ -2235,6 +2451,10 @@ bool sdlBlitSurface(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_BlitSurfaceUnchecked(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, const SDL_Rect *dstrect)
 /// ```
+///
+/// See also:
+/// - [SDL_BlitSurfaceUnchecked - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_BlitSurfaceUnchecked)
+///
 /// {@category surface}
 bool sdlBlitSurfaceUnchecked(
   Pointer<SdlSurface> src,
@@ -2285,6 +2505,10 @@ bool sdlBlitSurfaceUnchecked(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_BlitSurfaceScaled(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, const SDL_Rect *dstrect, SDL_ScaleMode scaleMode)
 /// ```
+///
+/// See also:
+/// - [SDL_BlitSurfaceScaled - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_BlitSurfaceScaled)
+///
 /// {@category surface}
 bool sdlBlitSurfaceScaled(
   Pointer<SdlSurface> src,
@@ -2345,6 +2569,10 @@ bool sdlBlitSurfaceScaled(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_BlitSurfaceUncheckedScaled(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, const SDL_Rect *dstrect, SDL_ScaleMode scaleMode)
 /// ```
+///
+/// See also:
+/// - [SDL_BlitSurfaceUncheckedScaled - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_BlitSurfaceUncheckedScaled)
+///
 /// {@category surface}
 bool sdlBlitSurfaceUncheckedScaled(
   Pointer<SdlSurface> src,
@@ -2403,6 +2631,10 @@ bool sdlBlitSurfaceUncheckedScaled(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_StretchSurface(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, const SDL_Rect *dstrect, SDL_ScaleMode scaleMode)
 /// ```
+///
+/// See also:
+/// - [SDL_StretchSurface - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_StretchSurface)
+///
 /// {@category surface}
 bool sdlStretchSurface(
   Pointer<SdlSurface> src,
@@ -2457,6 +2689,10 @@ bool sdlStretchSurface(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_BlitSurfaceTiled(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, const SDL_Rect *dstrect)
 /// ```
+///
+/// See also:
+/// - [SDL_BlitSurfaceTiled - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_BlitSurfaceTiled)
+///
 /// {@category surface}
 bool sdlBlitSurfaceTiled(
   Pointer<SdlSurface> src,
@@ -2512,6 +2748,10 @@ bool sdlBlitSurfaceTiled(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_BlitSurfaceTiledWithScale(SDL_Surface *src, const SDL_Rect *srcrect, float scale, SDL_ScaleMode scaleMode, SDL_Surface *dst, const SDL_Rect *dstrect)
 /// ```
+///
+/// See also:
+/// - [SDL_BlitSurfaceTiledWithScale - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_BlitSurfaceTiledWithScale)
+///
 /// {@category surface}
 bool sdlBlitSurfaceTiledWithScale(
   Pointer<SdlSurface> src,
@@ -2587,6 +2827,10 @@ bool sdlBlitSurfaceTiledWithScale(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_BlitSurface9Grid(SDL_Surface *src, const SDL_Rect *srcrect, int left_width, int right_width, int top_height, int bottom_height, float scale, SDL_ScaleMode scaleMode, SDL_Surface *dst, const SDL_Rect *dstrect)
 /// ```
+///
+/// See also:
+/// - [SDL_BlitSurface9Grid - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_BlitSurface9Grid)
+///
 /// {@category surface}
 bool sdlBlitSurface9Grid(
   Pointer<SdlSurface> src,
@@ -2675,6 +2919,10 @@ bool sdlBlitSurface9Grid(
 /// ```c
 /// extern SDL_DECLSPEC Uint32 SDLCALL SDL_MapSurfaceRGB(SDL_Surface *surface, Uint8 r, Uint8 g, Uint8 b)
 /// ```
+///
+/// See also:
+/// - [SDL_MapSurfaceRGB - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_MapSurfaceRGB)
+///
 /// {@category surface}
 int sdlMapSurfaceRgb(Pointer<SdlSurface> surface, int r, int g, int b) {
   final sdlMapSurfaceRgbLookupFunction = _libSdl
@@ -2720,6 +2968,10 @@ int sdlMapSurfaceRgb(Pointer<SdlSurface> surface, int r, int g, int b) {
 /// ```c
 /// extern SDL_DECLSPEC Uint32 SDLCALL SDL_MapSurfaceRGBA(SDL_Surface *surface, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 /// ```
+///
+/// See also:
+/// - [SDL_MapSurfaceRGBA - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_MapSurfaceRGBA)
+///
 /// {@category surface}
 int sdlMapSurfaceRgba(Pointer<SdlSurface> surface, int r, int g, int b, int a) {
   final sdlMapSurfaceRgbaLookupFunction = _libSdl
@@ -2767,6 +3019,10 @@ int sdlMapSurfaceRgba(Pointer<SdlSurface> surface, int r, int g, int b, int a) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_ReadSurfacePixel(SDL_Surface *surface, int x, int y, Uint8 *r, Uint8 *g, Uint8 *b, Uint8 *a)
 /// ```
+///
+/// See also:
+/// - [SDL_ReadSurfacePixel - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ReadSurfacePixel)
+///
 /// {@category surface}
 bool sdlReadSurfacePixel(
   Pointer<SdlSurface> surface,
@@ -2829,6 +3085,10 @@ bool sdlReadSurfacePixel(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_ReadSurfacePixelFloat(SDL_Surface *surface, int x, int y, float *r, float *g, float *b, float *a)
 /// ```
+///
+/// See also:
+/// - [SDL_ReadSurfacePixelFloat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_ReadSurfacePixelFloat)
+///
 /// {@category surface}
 bool sdlReadSurfacePixelFloat(
   Pointer<SdlSurface> surface,
@@ -2890,6 +3150,10 @@ bool sdlReadSurfacePixelFloat(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_WriteSurfacePixel(SDL_Surface *surface, int x, int y, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 /// ```
+///
+/// See also:
+/// - [SDL_WriteSurfacePixel - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_WriteSurfacePixel)
+///
 /// {@category surface}
 bool sdlWriteSurfacePixel(
   Pointer<SdlSurface> surface,
@@ -2948,6 +3212,10 @@ bool sdlWriteSurfacePixel(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_WriteSurfacePixelFloat(SDL_Surface *surface, int x, int y, float r, float g, float b, float a)
 /// ```
+///
+/// See also:
+/// - [SDL_WriteSurfacePixelFloat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_WriteSurfacePixelFloat)
+///
 /// {@category surface}
 bool sdlWriteSurfacePixelFloat(
   Pointer<SdlSurface> surface,

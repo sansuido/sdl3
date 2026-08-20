@@ -1,4 +1,5 @@
 import 'dart:ffi';
+
 import 'package:sdl3/sdl3.dart';
 
 int main() {
@@ -48,7 +49,7 @@ int main() {
     renderer
       ..setDrawColor(SdlxColor(0, 0, 0))
       ..clear()
-      ..geometry(nullptr, vertices: vertices)
+      ..geometry(vertices)
       ..present();
   }
   renderer.destroy();

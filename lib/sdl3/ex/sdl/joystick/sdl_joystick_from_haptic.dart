@@ -14,6 +14,10 @@ extension SdlJoystickPointerFromJHapticEx on Pointer<SdlJoystick> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL SDL_IsJoystickHaptic(SDL_Joystick *joystick)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_IsJoystickHaptic - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_IsJoystickHaptic)
+  ///
   /// {@category haptic}
   bool isHaptic() => sdlIsJoystickHaptic(this);
 
@@ -40,6 +44,10 @@ extension SdlJoystickPointerFromJHapticEx on Pointer<SdlJoystick> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Haptic * SDLCALL SDL_OpenHapticFromJoystick(SDL_Joystick *joystick)
   /// ```
+  ///
+  /// See also:
+  /// - [SDL_OpenHapticFromJoystick - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_OpenHapticFromJoystick)
+  ///
   /// {@category haptic}
   Pointer<SdlHaptic> openHaptic() => sdlOpenHapticFromJoystick(this);
 }

@@ -25,6 +25,10 @@ extension ImgAnimationEx on ImgAnimation {
   /// ```c
   /// extern SDL_DECLSPEC IMG_Animation * SDLCALL IMG_LoadAnimation(const char *file)
   /// ```
+  ///
+  /// See also:
+  /// - [IMG_LoadAnimation - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_LoadAnimation)
+  ///
   /// {@category image}
   static Pointer<ImgAnimation> load(String file) => imgLoadAnimation(file);
 
@@ -58,6 +62,10 @@ extension ImgAnimationEx on ImgAnimation {
   /// ```c
   /// extern SDL_DECLSPEC IMG_Animation * SDLCALL IMG_LoadAnimation_IO(SDL_IOStream *src, bool closeio)
   /// ```
+  ///
+  /// See also:
+  /// - [IMG_LoadAnimation_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_LoadAnimation_IO)
+  ///
   /// {@category image}
   static Pointer<ImgAnimation> loadIo(
     Pointer<SdlIoStream> src, {
@@ -101,6 +109,10 @@ extension ImgAnimationEx on ImgAnimation {
   /// ```c
   /// extern SDL_DECLSPEC IMG_Animation * SDLCALL IMG_LoadAnimationTyped_IO(SDL_IOStream *src, bool closeio, const char *type)
   /// ```
+  ///
+  /// See also:
+  /// - [IMG_LoadAnimationTyped_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_LoadAnimationTyped_IO)
+  ///
   /// {@category image}
   static Pointer<ImgAnimation> loadTypeIo(
     Pointer<SdlIoStream> src,
@@ -137,6 +149,10 @@ extension ImgAnimationEx on ImgAnimation {
   /// ```c
   /// extern SDL_DECLSPEC IMG_Animation *SDLCALL IMG_LoadANIAnimation_IO(SDL_IOStream *src)
   /// ```
+  ///
+  /// See also:
+  /// - [IMG_LoadANIAnimation_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_LoadANIAnimation_IO)
+  ///
   /// {@category image}
   static Pointer<ImgAnimation> loadAniIo(Pointer<SdlIoStream> src) =>
       imgLoadAniAnimationIo(src);
@@ -170,6 +186,10 @@ extension ImgAnimationEx on ImgAnimation {
   /// ```c
   /// extern SDL_DECLSPEC IMG_Animation *SDLCALL IMG_LoadAPNGAnimation_IO(SDL_IOStream *src)
   /// ```
+  ///
+  /// See also:
+  /// - [IMG_LoadAPNGAnimation_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_LoadAPNGAnimation_IO)
+  ///
   /// {@category image}
   static Pointer<ImgAnimation> loadApngIo(Pointer<SdlIoStream> src) =>
       imgLoadApngAnimationIo(src);
@@ -203,6 +223,10 @@ extension ImgAnimationEx on ImgAnimation {
   /// ```c
   /// extern SDL_DECLSPEC IMG_Animation *SDLCALL IMG_LoadAVIFAnimation_IO(SDL_IOStream *src)
   /// ```
+  ///
+  /// See also:
+  /// - [IMG_LoadAVIFAnimation_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_LoadAVIFAnimation_IO)
+  ///
   /// {@category image}
   static Pointer<ImgAnimation> loadAvifIo(Pointer<SdlIoStream> src) =>
       imgLoadAvifAnimationIo(src);
@@ -233,6 +257,10 @@ extension ImgAnimationEx on ImgAnimation {
   /// ```c
   /// extern SDL_DECLSPEC IMG_Animation * SDLCALL IMG_LoadGIFAnimation_IO(SDL_IOStream *src)
   /// ```
+  ///
+  /// See also:
+  /// - [IMG_LoadGIFAnimation_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_LoadGIFAnimation_IO)
+  ///
   /// {@category image}
   static Pointer<ImgAnimation> loadGifIo(Pointer<SdlIoStream> src) =>
       imgLoadGifAnimationIo(src);
@@ -263,6 +291,10 @@ extension ImgAnimationEx on ImgAnimation {
   /// ```c
   /// extern SDL_DECLSPEC IMG_Animation * SDLCALL IMG_LoadWEBPAnimation_IO(SDL_IOStream *src)
   /// ```
+  ///
+  /// See also:
+  /// - [IMG_LoadWEBPAnimation_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_LoadWEBPAnimation_IO)
+  ///
   /// {@category image}
   static Pointer<ImgAnimation> loadWebpIo(Pointer<SdlIoStream> src) =>
       imgLoadWebpAnimationIo(src);
@@ -293,6 +325,10 @@ extension ImgAnimationPointerEx on Pointer<ImgAnimation> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL IMG_SaveAnimation(IMG_Animation *anim, const char *file)
   /// ```
+  ///
+  /// See also:
+  /// - [IMG_SaveAnimation - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_SaveAnimation)
+  ///
   /// {@category image}
   bool save(String file) {
     final filePointer = file.toNativeUtf8();
@@ -332,6 +368,10 @@ extension ImgAnimationPointerEx on Pointer<ImgAnimation> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL IMG_SaveAnimationTyped_IO(IMG_Animation *anim, SDL_IOStream *dst, bool closeio, const char *type)
   /// ```
+  ///
+  /// See also:
+  /// - [IMG_SaveAnimationTyped_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_SaveAnimationTyped_IO)
+  ///
   /// {@category image}
   bool saveTypeIo(
     Pointer<SdlIoStream> dst,
@@ -364,6 +404,10 @@ extension ImgAnimationPointerEx on Pointer<ImgAnimation> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL IMG_SaveANIAnimation_IO(IMG_Animation *anim, SDL_IOStream *dst, bool closeio)
   /// ```
+  ///
+  /// See also:
+  /// - [IMG_SaveANIAnimation_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_SaveANIAnimation_IO)
+  ///
   /// {@category image}
   bool saveIo(Pointer<SdlIoStream> dst, {bool closeio = false}) =>
       imgSaveAniAnimationIo(this, dst, closeio);
@@ -393,6 +437,10 @@ extension ImgAnimationPointerEx on Pointer<ImgAnimation> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL IMG_SaveAPNGAnimation_IO(IMG_Animation *anim, SDL_IOStream *dst, bool closeio)
   /// ```
+  ///
+  /// See also:
+  /// - [IMG_SaveAPNGAnimation_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_SaveAPNGAnimation_IO)
+  ///
   /// {@category image}
   bool saveApngIo(Pointer<SdlIoStream> dst, {bool closeio = false}) =>
       imgSaveApngAnimationIo(this, dst, closeio);
@@ -424,6 +472,10 @@ extension ImgAnimationPointerEx on Pointer<ImgAnimation> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL IMG_SaveAVIFAnimation_IO(IMG_Animation *anim, SDL_IOStream *dst, bool closeio, int quality)
   /// ```
+  ///
+  /// See also:
+  /// - [IMG_SaveAVIFAnimation_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_SaveAVIFAnimation_IO)
+  ///
   /// {@category image}
   bool saveAvifIo(
     Pointer<SdlIoStream> dst,
@@ -456,6 +508,10 @@ extension ImgAnimationPointerEx on Pointer<ImgAnimation> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL IMG_SaveGIFAnimation_IO(IMG_Animation *anim, SDL_IOStream *dst, bool closeio)
   /// ```
+  ///
+  /// See also:
+  /// - [IMG_SaveGIFAnimation_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_SaveGIFAnimation_IO)
+  ///
   /// {@category image}
   bool saveGifIo(Pointer<SdlIoStream> dst, {bool closeio = false}) =>
       imgSaveGifAnimationIo(this, dst, closeio);
@@ -489,6 +545,10 @@ extension ImgAnimationPointerEx on Pointer<ImgAnimation> {
   /// ```c
   /// extern SDL_DECLSPEC bool SDLCALL IMG_SaveWEBPAnimation_IO(IMG_Animation *anim, SDL_IOStream *dst, bool closeio, int quality)
   /// ```
+  ///
+  /// See also:
+  /// - [IMG_SaveWEBPAnimation_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_SaveWEBPAnimation_IO)
+  ///
   /// {@category image}
   bool saveWebpIo(
     Pointer<SdlIoStream> dst,
@@ -514,6 +574,10 @@ extension ImgAnimationPointerEx on Pointer<ImgAnimation> {
   /// ```c
   /// extern SDL_DECLSPEC SDL_Cursor * SDLCALL IMG_CreateAnimatedCursor(IMG_Animation *anim, int hot_x, int hot_y)
   /// ```
+  ///
+  /// See also:
+  /// - [IMG_CreateAnimatedCursor - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_CreateAnimatedCursor)
+  ///
   /// {@category image}
   Pointer<SdlCursor> createCursor(int hotX, int hotY) =>
       imgCreateAnimatedCursor(this, hotX, hotY);
@@ -539,6 +603,10 @@ extension ImgAnimationPointerEx on Pointer<ImgAnimation> {
   /// ```c
   /// extern SDL_DECLSPEC void SDLCALL IMG_FreeAnimation(IMG_Animation *anim)
   /// ```
+  ///
+  /// See also:
+  /// - [IMG_FreeAnimation - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_FreeAnimation)
+  ///
   /// {@category image}
   void free() {
     imgFreeAnimation(this);

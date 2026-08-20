@@ -2,6 +2,7 @@
 // 2.ジャンプ処理
 // 2.Jump processing
 import 'dart:ffi';
+
 import 'package:sdl3/sdl3.dart';
 
 const gTitle = 'DXLIB Tutorial 02';

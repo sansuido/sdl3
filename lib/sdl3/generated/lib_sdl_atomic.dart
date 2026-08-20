@@ -20,6 +20,10 @@ part of '../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_TryLockSpinlock(SDL_SpinLock *lock)
 /// ```
+///
+/// See also:
+/// - [SDL_TryLockSpinlock - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_TryLockSpinlock)
+///
 /// {@category atomic}
 bool sdlTryLockSpinlock(Pointer<Int32> lock) {
   final sdlTryLockSpinlockLookupFunction = _libSdl
@@ -48,6 +52,10 @@ bool sdlTryLockSpinlock(Pointer<Int32> lock) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_LockSpinlock(SDL_SpinLock *lock)
 /// ```
+///
+/// See also:
+/// - [SDL_LockSpinlock - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_LockSpinlock)
+///
 /// {@category atomic}
 void sdlLockSpinlock(Pointer<Int32> lock) {
   final sdlLockSpinlockLookupFunction = _libSdl
@@ -78,6 +86,10 @@ void sdlLockSpinlock(Pointer<Int32> lock) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_UnlockSpinlock(SDL_SpinLock *lock)
 /// ```
+///
+/// See also:
+/// - [SDL_UnlockSpinlock - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_UnlockSpinlock)
+///
 /// {@category atomic}
 void sdlUnlockSpinlock(Pointer<Int32> lock) {
   final sdlUnlockSpinlockLookupFunction = _libSdl
@@ -109,6 +121,10 @@ void sdlUnlockSpinlock(Pointer<Int32> lock) {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_MemoryBarrierReleaseFunction(void)
 /// ```
+///
+/// See also:
+/// - [SDL_MemoryBarrierReleaseFunction - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_MemoryBarrierReleaseFunction)
+///
 /// {@category atomic}
 void sdlMemoryBarrierReleaseFunction() {
   final sdlMemoryBarrierReleaseFunctionLookupFunction = _libSdl
@@ -139,6 +155,10 @@ void sdlMemoryBarrierReleaseFunction() {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_MemoryBarrierAcquireFunction(void)
 /// ```
+///
+/// See also:
+/// - [SDL_MemoryBarrierAcquireFunction - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_MemoryBarrierAcquireFunction)
+///
 /// {@category atomic}
 void sdlMemoryBarrierAcquireFunction() {
   final sdlMemoryBarrierAcquireFunctionLookupFunction = _libSdl
@@ -169,6 +189,10 @@ void sdlMemoryBarrierAcquireFunction() {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_CompareAndSwapAtomicInt(SDL_AtomicInt *a, int oldval, int newval)
 /// ```
+///
+/// See also:
+/// - [SDL_CompareAndSwapAtomicInt - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CompareAndSwapAtomicInt)
+///
 /// {@category atomic}
 bool sdlCompareAndSwapAtomicInt(
   Pointer<SdlAtomicInt> a,
@@ -204,6 +228,10 @@ bool sdlCompareAndSwapAtomicInt(
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_SetAtomicInt(SDL_AtomicInt *a, int v)
 /// ```
+///
+/// See also:
+/// - [SDL_SetAtomicInt - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetAtomicInt)
+///
 /// {@category atomic}
 int sdlSetAtomicInt(Pointer<SdlAtomicInt> a, int v) {
   final sdlSetAtomicIntLookupFunction = _libSdl
@@ -232,6 +260,10 @@ int sdlSetAtomicInt(Pointer<SdlAtomicInt> a, int v) {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_GetAtomicInt(SDL_AtomicInt *a)
 /// ```
+///
+/// See also:
+/// - [SDL_GetAtomicInt - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetAtomicInt)
+///
 /// {@category atomic}
 int sdlGetAtomicInt(Pointer<SdlAtomicInt> a) {
   final sdlGetAtomicIntLookupFunction = _libSdl
@@ -264,6 +296,10 @@ int sdlGetAtomicInt(Pointer<SdlAtomicInt> a) {
 /// ```c
 /// extern SDL_DECLSPEC int SDLCALL SDL_AddAtomicInt(SDL_AtomicInt *a, int v)
 /// ```
+///
+/// See also:
+/// - [SDL_AddAtomicInt - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_AddAtomicInt)
+///
 /// {@category atomic}
 int sdlAddAtomicInt(Pointer<SdlAtomicInt> a, int v) {
   final sdlAddAtomicIntLookupFunction = _libSdl
@@ -295,6 +331,10 @@ int sdlAddAtomicInt(Pointer<SdlAtomicInt> a, int v) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_CompareAndSwapAtomicU32(SDL_AtomicU32 *a, Uint32 oldval, Uint32 newval)
 /// ```
+///
+/// See also:
+/// - [SDL_CompareAndSwapAtomicU32 - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CompareAndSwapAtomicU32)
+///
 /// {@category atomic}
 bool sdlCompareAndSwapAtomicU32(
   Pointer<SdlAtomicU32> a,
@@ -330,6 +370,10 @@ bool sdlCompareAndSwapAtomicU32(
 /// ```c
 /// extern SDL_DECLSPEC Uint32 SDLCALL SDL_SetAtomicU32(SDL_AtomicU32 *a, Uint32 v)
 /// ```
+///
+/// See also:
+/// - [SDL_SetAtomicU32 - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetAtomicU32)
+///
 /// {@category atomic}
 int sdlSetAtomicU32(Pointer<SdlAtomicU32> a, int v) {
   final sdlSetAtomicU32LookupFunction = _libSdl
@@ -358,6 +402,10 @@ int sdlSetAtomicU32(Pointer<SdlAtomicU32> a, int v) {
 /// ```c
 /// extern SDL_DECLSPEC Uint32 SDLCALL SDL_GetAtomicU32(SDL_AtomicU32 *a)
 /// ```
+///
+/// See also:
+/// - [SDL_GetAtomicU32 - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetAtomicU32)
+///
 /// {@category atomic}
 int sdlGetAtomicU32(Pointer<SdlAtomicU32> a) {
   final sdlGetAtomicU32LookupFunction = _libSdl
@@ -387,6 +435,10 @@ int sdlGetAtomicU32(Pointer<SdlAtomicU32> a) {
 /// ```c
 /// extern SDL_DECLSPEC Uint32 SDLCALL SDL_AddAtomicU32(SDL_AtomicU32 *a, int v)
 /// ```
+///
+/// See also:
+/// - [SDL_AddAtomicU32 - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_AddAtomicU32)
+///
 /// {@category atomic}
 int sdlAddAtomicU32(Pointer<SdlAtomicU32> a, int v) {
   final sdlAddAtomicU32LookupFunction = _libSdl
@@ -419,6 +471,10 @@ int sdlAddAtomicU32(Pointer<SdlAtomicU32> a, int v) {
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_CompareAndSwapAtomicPointer(void **a, void *oldval, void *newval)
 /// ```
+///
+/// See also:
+/// - [SDL_CompareAndSwapAtomicPointer - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CompareAndSwapAtomicPointer)
+///
 /// {@category atomic}
 bool sdlCompareAndSwapAtomicPointer(
   Pointer<Pointer<Void>> a,
@@ -461,6 +517,10 @@ bool sdlCompareAndSwapAtomicPointer(
 /// ```c
 /// extern SDL_DECLSPEC void * SDLCALL SDL_SetAtomicPointer(void **a, void *v)
 /// ```
+///
+/// See also:
+/// - [SDL_SetAtomicPointer - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetAtomicPointer)
+///
 /// {@category atomic}
 Pointer<Void> sdlSetAtomicPointer(Pointer<Pointer<Void>> a, Pointer<Void> v) {
   final sdlSetAtomicPointerLookupFunction = _libSdl
@@ -490,6 +550,10 @@ Pointer<Void> sdlSetAtomicPointer(Pointer<Pointer<Void>> a, Pointer<Void> v) {
 /// ```c
 /// extern SDL_DECLSPEC void * SDLCALL SDL_GetAtomicPointer(void **a)
 /// ```
+///
+/// See also:
+/// - [SDL_GetAtomicPointer - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetAtomicPointer)
+///
 /// {@category atomic}
 Pointer<Void> sdlGetAtomicPointer(Pointer<Pointer<Void>> a) {
   final sdlGetAtomicPointerLookupFunction = _libSdl

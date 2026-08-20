@@ -20,6 +20,10 @@ part of '../sdl.dart';
 /// ```c
 /// extern SDL_DECLSPEC XrResult SDLCALL SDL_CreateGPUXRSession(SDL_GPUDevice *device, const XrSessionCreateInfo *createinfo, XrSession *session)
 /// ```
+///
+/// See also:
+/// - [SDL_CreateGPUXRSession - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CreateGPUXRSession)
+///
 /// {@category openxr}
 int sdlCreateGpuxrSession(
   Pointer<SdlGpuDevice> device,
@@ -63,6 +67,10 @@ int sdlCreateGpuxrSession(
 /// ```c
 /// extern SDL_DECLSPEC SDL_GPUTextureFormat * SDLCALL SDL_GetGPUXRSwapchainFormats(SDL_GPUDevice *device, XrSession session, int *num_formats)
 /// ```
+///
+/// See also:
+/// - [SDL_GetGPUXRSwapchainFormats - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetGPUXRSwapchainFormats)
+///
 /// {@category openxr}
 Pointer<Int32> sdlGetGpuxrSwapchainFormats(
   Pointer<SdlGpuDevice> device,
@@ -115,6 +123,10 @@ Pointer<Int32> sdlGetGpuxrSwapchainFormats(
 /// ```c
 /// extern SDL_DECLSPEC XrResult SDLCALL SDL_CreateGPUXRSwapchain( SDL_GPUDevice *device, XrSession session, const XrSwapchainCreateInfo *createinfo, SDL_GPUTextureFormat format, XrSwapchain *swapchain, SDL_GPUTexture ***textures)
 /// ```
+///
+/// See also:
+/// - [SDL_CreateGPUXRSwapchain - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_CreateGPUXRSwapchain)
+///
 /// {@category openxr}
 int sdlCreateGpuxrSwapchain(
   Pointer<SdlGpuDevice> device,
@@ -173,6 +185,10 @@ int sdlCreateGpuxrSwapchain(
 /// ```c
 /// extern SDL_DECLSPEC XrResult SDLCALL SDL_DestroyGPUXRSwapchain(SDL_GPUDevice *device, XrSwapchain swapchain, SDL_GPUTexture **swapchainImages)
 /// ```
+///
+/// See also:
+/// - [SDL_DestroyGPUXRSwapchain - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_DestroyGPUXRSwapchain)
+///
 /// {@category openxr}
 int sdlDestroyGpuxrSwapchain(
   Pointer<SdlGpuDevice> device,
@@ -226,6 +242,10 @@ int sdlDestroyGpuxrSwapchain(
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_OpenXR_LoadLibrary(void)
 /// ```
+///
+/// See also:
+/// - [SDL_OpenXR_LoadLibrary - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_OpenXR_LoadLibrary)
+///
 /// {@category openxr}
 bool sdlOpenXrLoadLibrary() {
   final sdlOpenXrLoadLibraryLookupFunction = _libSdl
@@ -249,6 +269,10 @@ bool sdlOpenXrLoadLibrary() {
 /// ```c
 /// extern SDL_DECLSPEC void SDLCALL SDL_OpenXR_UnloadLibrary(void)
 /// ```
+///
+/// See also:
+/// - [SDL_OpenXR_UnloadLibrary - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_OpenXR_UnloadLibrary)
+///
 /// {@category openxr}
 void sdlOpenXrUnloadLibrary() {
   final sdlOpenXrUnloadLibraryLookupFunction = _libSdl
@@ -277,6 +301,10 @@ void sdlOpenXrUnloadLibrary() {
 /// ```c
 /// extern SDL_DECLSPEC PFN_xrGetInstanceProcAddr SDLCALL SDL_OpenXR_GetXrGetInstanceProcAddr(void)
 /// ```
+///
+/// See also:
+/// - [SDL_OpenXR_GetXrGetInstanceProcAddr - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_OpenXR_GetXrGetInstanceProcAddr)
+///
 /// {@category openxr}
 PfnXrGetInstanceProcAddr sdlOpenXrGetXrGetInstanceProcAddr() {
   final sdlOpenXrGetXrGetInstanceProcAddrLookupFunction = _libSdl
