@@ -170,16 +170,16 @@ List<SdlxDisplayMode>? sdlxGetFullscreenDisplayModes(int displayId) {
 /// - [SDL_GetClosestFullscreenDisplayMode - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetClosestFullscreenDisplayMode)
 ///
 /// {@category video}
-bool sdlxGetClosestFullscreenDisplayMode(
+SdlxDisplayMode? sdlxGetClosestFullscreenDisplayMode(
   int displayId,
   int w,
   int h,
   double refreshRate,
   bool includeHighDensityModes,
-  SdlxDisplayMode closest,
 ) {
+  SdlxDisplayMode? result;
   final closestPointer = calloc<SdlDisplayMode>();
-  final result = sdlGetClosestFullscreenDisplayMode(
+  final bl = sdlGetClosestFullscreenDisplayMode(
     displayId,
     w,
     h,
@@ -187,8 +187,8 @@ bool sdlxGetClosestFullscreenDisplayMode(
     includeHighDensityModes,
     closestPointer,
   );
-  if (result) {
-    closest.loadFromPointer(closestPointer);
+  if (bl) {
+    result = SdlxDisplayMode()..loadFromPointer(closestPointer);
   }
   closestPointer.callocFree();
   return result;

@@ -118,46 +118,46 @@ yamahara
 ### dialog
 - [x] [SdlDialogFileFilter](./lib/sdl3/ex/sdl/dialog/sdl_dialog_file_filter.dart)
 ### events
-- [x] [SdlCommonEvent](./lib/sdl3/ex/sdl/events/sdl_event.dart)
-- [x] [SdlDisplayEvent](./lib/sdl3/ex/sdl/events/sdl_event.dart)
-- [x] [SdlWindowEvent](./lib/sdl3/ex/sdl/events/sdl_event.dart)
-- [x] [SdlKeyboardDeviceEvent](./lib/sdl3/ex/sdl/events/sdl_event.dart)
-- [x] [SdlKeyboardEvent](./lib/sdl3/ex/sdl/events/sdl_event.dart)
-- [x] [SdlTextEditingEvent](./lib/sdl3/ex/sdl/events/sdl_event.dart)
-- [x] [SdlTextEditingCandidatesEvent](./lib/sdl3/ex/sdl/events/sdl_event.dart)
-- [x] [SdlTextInputEvent](./lib/sdl3/ex/sdl/events/sdl_event.dart)
-- [x] [SdlMouseDeviceEvent](./lib/sdl3/ex/sdl/events/sdl_event.dart)
-- [x] [SdlMouseMotionEvent](./lib/sdl3/ex/sdl/events/sdl_event.dart)
-- [x] [SdlMouseButtonEvent](./lib/sdl3/ex/sdl/events/sdl_event.dart)
-- [x] [SdlMouseWheelEvent](./lib/sdl3/ex/sdl/events/sdl_event.dart)
-- [x] [SdlJoyAxisEvent](./lib/sdl3/ex/sdl/events/sdl_event.dart)
-- [x] [SdlJoyBallEvent](./lib/sdl3/ex/sdl/events/sdl_event.dart)
-- [x] [SdlJoyHatEvent](./lib/sdl3/ex/sdl/events/sdl_event.dart)
-- [x] [SdlJoyButtonEvent](./lib/sdl3/ex/sdl/events/sdl_event.dart)
-- [x] [SdlJoyDeviceEvent](./lib/sdl3/ex/sdl/events/sdl_event.dart)
-- [x] [SdlJoyBatteryEvent](./lib/sdl3/ex/sdl/events/sdl_event.dart)
-- [x] [SdlGamepadAxisEvent](./lib/sdl3/ex/sdl/events/sdl_event.dart)
-- [x] [SdlGamepadButtonEvent](./lib/sdl3/ex/sdl/events/sdl_event.dart)
-- [x] [SdlGamepadDeviceEvent](./lib/sdl3/ex/sdl/events/sdl_event.dart)
-- [x] [SdlGamepadTouchpadEvent](./lib/sdl3/ex/sdl/events/sdl_event.dart)
-- [x] [SdlGamepadSensorEvent](./lib/sdl3/ex/sdl/events/sdl_event.dart)
-- [x] [SdlGamepadCapSenseEvent](./lib/sdl3/ex/sdl/events/sdl_event.dart)
-- [x] [SdlAudioDeviceEvent](./lib/sdl3/ex/sdl/events/sdl_event.dart)
-- [x] [SdlCameraDeviceEvent](./lib/sdl3/ex/sdl/events/sdl_event.dart)
-- [x] [SdlNotificationEvent](./lib/sdl3/ex/sdl/events/sdl_event.dart)
-- [x] [SdlRenderEvent](./lib/sdl3/ex/sdl/events/sdl_event.dart)
-- [x] [SdlTouchFingerEvent](./lib/sdl3/ex/sdl/events/sdl_event.dart)
-- [x] [SdlPinchFingerEvent](./lib/sdl3/ex/sdl/events/sdl_event.dart)
-- [x] [SdlPenProximityEvent](./lib/sdl3/ex/sdl/events/sdl_event.dart)
-- [x] [SdlPenMotionEvent](./lib/sdl3/ex/sdl/events/sdl_event.dart)
-- [x] [SdlPenTouchEvent](./lib/sdl3/ex/sdl/events/sdl_event.dart)
-- [x] [SdlPenButtonEvent](./lib/sdl3/ex/sdl/events/sdl_event.dart)
-- [x] [SdlPenAxisEvent](./lib/sdl3/ex/sdl/events/sdl_event.dart)
-- [x] [SdlDropEvent](./lib/sdl3/ex/sdl/events/sdl_event.dart)
-- [x] [SdlClipboardEvent](./lib/sdl3/ex/sdl/events/sdl_event.dart)
-- [x] [SdlSensorEvent](./lib/sdl3/ex/sdl/events/sdl_event.dart)
-- [x] [SdlQuitEvent](./lib/sdl3/ex/sdl/events/sdl_event.dart)
-- [x] [SdlUserEvent](./lib/sdl3/ex/sdl/events/sdl_event.dart)
+- [x] [SdlCommonEvent](./lib/sdl3/ex/sdl/events/sdl_00_common_event.dart)
+- [x] [SdlDisplayEvent](./lib/sdl3/ex/sdl/events/sdl_01_display_event.dart)
+- [x] [SdlWindowEvent](./lib/sdl3/ex/sdl/events/sdl_02_window_event.dart)
+- [x] [SdlKeyboardDeviceEvent](./lib/sdl3/ex/sdl/events/sdl_03_keyboard_device_event.dart)
+- [x] [SdlKeyboardEvent](./lib/sdl3/ex/sdl/events/sdl_04_keyboard_event.dart)
+- [x] [SdlTextEditingEvent](./lib/sdl3/ex/sdl/events/sdl_05_text_editing_event.dart)
+- [x] [SdlTextEditingCandidatesEvent](./lib/sdl3/ex/sdl/events/sdl_06_text_editing_candidates_event.dart)
+- [x] [SdlTextInputEvent](./lib/sdl3/ex/sdl/events/sdl_07_text_input_event.dart)
+- [x] [SdlMouseDeviceEvent](./lib/sdl3/ex/sdl/events/sdl_08_mouse_device_event.dart)
+- [x] [SdlMouseMotionEvent](./lib/sdl3/ex/sdl/events/sdl_09_mouse_motion_event.dart)
+- [x] [SdlMouseButtonEvent](./lib/sdl3/ex/sdl/events/sdl_10_mouse_button_event.dart)
+- [x] [SdlMouseWheelEvent](./lib/sdl3/ex/sdl/events/sdl_11_mouse_wheel_event.dart)
+- [x] [SdlJoyDeviceEvent](./lib/sdl3/ex/sdl/events/sdl_12_joy_device_event.dart)
+- [x] [SdlJoyAxisEvent](./lib/sdl3/ex/sdl/events/sdl_13_joy_axis_event.dart)
+- [x] [SdlJoyBallEvent](./lib/sdl3/ex/sdl/events/sdl_14_joy_ball_event.dart)
+- [x] [SdlJoyHatEvent](./lib/sdl3/ex/sdl/events/sdl_15_joy_hat_event.dart)
+- [x] [SdlJoyButtonEvent](./lib/sdl3/ex/sdl/events/sdl_16_joy_button_event.dart)
+- [x] [SdlJoyBatteryEvent](./lib/sdl3/ex/sdl/events/sdl_17_joy_battery_event.dart)
+- [x] [SdlGamepadDeviceEvent](./lib/sdl3/ex/sdl/events/sdl_18_gamepad_device_event.dart)
+- [x] [SdlGamepadAxisEvent](./lib/sdl3/ex/sdl/events/sdl_19_gamepad_axis_event.dart)
+- [x] [SdlGamepadButtonEvent](./lib/sdl3/ex/sdl/events/sdl_20_gamepad_button_event.dart)
+- [x] [SdlGamepadTouchpadEvent](./lib/sdl3/ex/sdl/events/sdl_21_gamepad_touchpad_event.dart)
+- [x] [SdlGamepadSensorEvent](./lib/sdl3/ex/sdl/events/sdl_22_gamepad_sensor_event.dart)
+- [x] [SdlGamepadCapSenseEvent](./lib/sdl3/ex/sdl/events/sdl_23_gamepad_can_sense_event.dart)
+- [x] [SdlAudioDeviceEvent](./lib/sdl3/ex/sdl/events/sdl_24_audio_device_event.dart)
+- [x] [SdlCameraDeviceEvent](./lib/sdl3/ex/sdl/events/sdl_25_camera_device_event.dart)
+- [x] [SdlSensorEvent](./lib/sdl3/ex/sdl/events/sdl_26_sensor_event.dart)
+- [x] [SdlQuitEvent](./lib/sdl3/ex/sdl/events/sdl_27_quit_event.dart)
+- [x] [SdlUserEvent](./lib/sdl3/ex/sdl/events/sdl_28_user_event.dart)
+- [x] [SdlTouchFingerEvent](./lib/sdl3/ex/sdl/events/sdl_29_touch_finger_event.dart)
+- [x] [SdlPinchFingerEvent](./lib/sdl3/ex/sdl/events/sdl_30_pinch_finger_event.dart)
+- [x] [SdlPenProximityEvent](./lib/sdl3/ex/sdl/events/sdl_31_pen_proximity_event.dart)
+- [x] [SdlPenTouchEvent](./lib/sdl3/ex/sdl/events/sdl_32_pen_touch_event.dart)
+- [x] [SdlPenMotionEvent](./lib/sdl3/ex/sdl/events/sdl_33_pen_motion_event.dart)
+- [x] [SdlPenButtonEvent](./lib/sdl3/ex/sdl/events/sdl_34_pen_button_event.dart)
+- [x] [SdlPenAxisEvent](./lib/sdl3/ex/sdl/events/sdl_35_pen_axis_event.dart)
+- [x] [SdlRenderEvent](./lib/sdl3/ex/sdl/events/sdl_36_render_event.dart)
+- [x] [SdlDropEvent](./lib/sdl3/ex/sdl/events/sdl_37_drop_event.dart)
+- [x] [SdlClipboardEvent](./lib/sdl3/ex/sdl/events/sdl_38_clipboard_event.dart)
+- [x] [SdlNotificationEvent](./lib/sdl3/ex/sdl/events/sdl_39_notification_event.dart)
 - [x] [SdlEvent](./lib/sdl3/ex/sdl/events/sdl_event.dart)
 ### filesystem
 - [x] [SdlPathInfo](./lib/sdl3/ex/sdl/filesystem/sdl_path_info.dart)
@@ -239,9 +239,9 @@ yamahara
 - [ ] SdlIoStream
 ### joystick
 - [x] [SdlJoystick](./lib/sdl3/ex/sdl/joystick/sdl_joystick.dart) \([haptic](./lib/sdl3/ex/sdl/joystick/sdl_joystick_from_haptic.dart)\)
-- [ ] SdlVirtualJoystickTouchpadDesc
-- [ ] SdlVirtualJoystickSensorDesc
-- [ ] SdlVirtualJoystickDesc
+- [x] [SdlVirtualJoystickTouchpadDesc](./lib/sdl3/ex/sdl/joystick/sdl_virtual_joystick_desc.dart)
+- [x] [SdlVirtualJoystickSensorDesc](./lib/sdl3/ex/sdl/joystick/sdl_virtual_joystick_desc.dart)
+- [x] [SdlVirtualJoystickDesc](./lib/sdl3/ex/sdl/joystick/sdl_virtual_joystick_desc.dart)
 ### loadso
 - [ ] SdlSharedObject
 ### locate
@@ -249,10 +249,10 @@ yamahara
 ### main_impl
 - [ ] HINSTANCE
 ### messagebox
-- [ ] SdlMessageBoxButtonData
-- [ ] SdlMessageBoxColor
-- [ ] SdlMessageBoxColorScheme
-- [ ] SdlMessageBoxData
+- [x] [SdlMessageBoxButtonData](./lib/sdl3/ex/sdl/messagebox/sdl_message_box_data.dart)
+- [x] [SdlMessageBoxColor](./lib/sdl3/ex/sdl/messagebox/sdl_message_box_data.dart)
+- [x] [SdlMessageBoxColorScheme](./lib/sdl3/ex/sdl/messagebox/sdl_message_box_data.dart)
+- [x] [SdlMessageBoxData](./lib/sdl3/ex/sdl/messagebox/sdl_message_box_data.dart)
 ### mouse
 - [x] [SdlCursor](./lib/sdl3/ex/sdl/mouse/sdl_cursor.dart)
 - [x] [SdlCursorFrameInfo](./lib/sdl3/ex/sdl/mouse/sdl_cursor_frame_info.dart)
@@ -314,7 +314,7 @@ yamahara
 - [x] [SdlTrayEntry](./lib/sdl3/ex/sdl/tray/sdl_tray_entry.dart)
 ### video
 - [ ] SdlDisplayModeData
-- [ ] SdlDisplayMode
+- [x] [SdlDisplayMode](./lib/sdl3/ex/sdl/video/sdl_display_mode.dart)
 - [x] [SdlWindow](./lib/sdl3/ex/sdl/video/sdl_window.dart) \([keyboard](./lib/sdl3/ex/sdl/video/sdl_window_from_keyboard.dart) / [metal](./lib/sdl3/ex/sdl/video/sdl_window_from_metal.dart) / [mouse](./lib/sdl3/ex/sdl/video/sdl_window_from_mouse.dart) / [render](./lib/sdl3/ex/sdl/video/sdl_window_from_render.dart) / [system](./lib/sdl3/ex/sdl/video/sdl_window_from_system.dart) / [vulkan](./lib/sdl3/ex/sdl/video/sdl_window_from_vulkan.dart)\)
 - [x] [SdlGlContext](./lib/sdl3/ex/sdl/video/sdl_gl_context.dart)
 ## sdl_image
@@ -336,13 +336,13 @@ yamahara
 - [x] [NetDatagramSocket](./lib/sdl3/ex/net/net_datagram_socket.dart)
 - [x] [NetDatagram](./lib/sdl3/ex/net/net_datagram.dart)
 ## sdl_shadercross
-- [ ] SdlShaderCrossIoVarMetadata
-- [ ] SdlShaderCrossGraphicsShaderResourceInfo
-- [ ] SdlShaderCrossGraphicsShaderMetadata
-- [ ] SdlShaderCrossComputePipelineMetadata
-- [ ] SdlShaderCrossSpirvInfo
-- [ ] SdlShaderCrossHlslDefine
-- [ ] SdlShaderCrossHlslInfo
+- [x] [SdlShaderCrossIoVarMetadata](./lib/sdl3/ex/shadercross/sdl_shader_cross_graphics_shader_metadata.dart)
+- [x] [SdlShaderCrossGraphicsShaderResourceInfo](./lib/sdl3/ex/shadercross/sdl_shader_cross_graphics_shader_resource_info.dart)
+- [x] [SdlShaderCrossGraphicsShaderMetadata](./lib/sdl3/ex/shadercross/sdl_shader_cross_graphics_shader_metadata.dart)
+- [x] [SdlShaderCrossComputePipelineMetadata](./lib/sdl3/ex/shadercross/sdl_shader_cross_compute_pipeline_metadata.dart)
+- [x] [SdlShaderCrossSpirvInfo](./lib/sdl3/ex/shadercross/sdl_shader_cross_spirv_info.dart)
+- [x] [SdlShaderCrossHlslDefine](./lib/sdl3/ex/shadercross/sdl_shader_cross_hlsl_info.dart)
+- [x] [SdlShaderCrossHlslInfo](./lib/sdl3/ex/shadercross/sdl_shader_cross_hlsl_info.dart)
 ## sdl_ttf
 - [ ] TtfFillOperation
 - [ ] TtfCopyOperation

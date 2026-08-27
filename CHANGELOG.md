@@ -1,5 +1,15 @@
 # Changelog
 
+## [2.11.1] - 2026-08-27
+- SDL3-2026-08-23
+### Changed
+- Changed `sdlxShaderCrossCompileDxbcFromHlsl`, `sdlxShaderCrossCompileDxilFromHlsl`, `sdlxShaderCrossCompileSpirvFromHlsl` (use Record).
+- Refactored `example/shadercross/compile_demo.dart` with major improvements and fixes.
+- Refactored `SdlxEvent` into separate source files.
+### Added
+- Added functions and classes for shadercross (sdlxShaderCrossGraphicsShaderFromHlsl, sdlxShaderCrossComputePipelineFromHlsl, and more).
+- Added `penState` to `SdlxPenProximityEvent`.
+
 ## [2.11.0] - 2026-08-20
 - SDL3-2026-08-16
 ### Changed

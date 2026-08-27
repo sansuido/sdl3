@@ -2,9 +2,8 @@ part of '../../../sdl.dart';
 
 class SdlxGpuComputePipelineCreateInfo {
   SdlxGpuComputePipelineCreateInfo({
-    this.codeSize = 0,
-    Pointer<Uint8>? code,
-    String? entrypoint,
+    Uint8List? code,
+    this.entrypoint = '',
     this.format = 0,
     this.numSamplers = 0,
     this.numReadonlyStorageTextures = 0,
@@ -17,12 +16,10 @@ class SdlxGpuComputePipelineCreateInfo {
     this.threadcountZ = 0,
     this.props = 0,
   }) {
-    this.code = code ?? nullptr;
-    this.entrypoint = entrypoint ?? '';
+    this.code = code ?? Uint8List(0);
   }
-  int codeSize;
-  late Pointer<Uint8> code;
-  late String entrypoint;
+  late Uint8List code;
+  String entrypoint;
   int format;
   int numSamplers;
   int numReadonlyStorageTextures;
@@ -37,9 +34,12 @@ class SdlxGpuComputePipelineCreateInfo {
 
   Pointer<SdlGpuComputePipelineCreateInfo> calloc() {
     final pointer = ffi.calloc<SdlGpuComputePipelineCreateInfo>();
-
-    pointer.ref.codeSize = codeSize;
-    pointer.ref.code = code;
+    if (code.isNotEmpty) {
+      final codePointer = ffi.calloc<Uint8>(code.length)
+        ..asTypedList(code.length).setAll(0, code);
+      pointer.ref.codeSize = code.length;
+      pointer.ref.code = codePointer;
+    }
     if (entrypoint.isNotEmpty) {
       pointer.ref.entrypoint = entrypoint.toNativeUtf8();
     }
@@ -62,6 +62,9 @@ class SdlxGpuComputePipelineCreateInfo {
 extension SdlGpuComputePipelineCreateInfoCallocAllFreeExtension
     on Pointer<SdlGpuComputePipelineCreateInfo> {
   void callocAllFree() {
+    if (ref.code != nullptr) {
+      ref.code.callocFree();
+    }
     if (ref.entrypoint != nullptr) {
       ref.entrypoint.callocFree();
     }

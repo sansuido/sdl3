@@ -1622,6 +1622,9 @@ extension SdlGamepadPointerEx on Pointer<SdlGamepad> {
   ///
   /// Return whether a gamepad has a particular sensor.
   ///
+  /// Sensors are disabled by default and SDL_SetGamepadSensorEnabled() is used
+  /// to enable them.
+  ///
   /// \param gamepad the gamepad to query.
   /// \param type the type of sensor to query.
   /// \returns true if the sensor exists, false otherwise.
@@ -1646,6 +1649,8 @@ extension SdlGamepadPointerEx on Pointer<SdlGamepad> {
 
   ///
   /// Set whether data reporting for a gamepad sensor is enabled.
+  ///
+  /// Sensors are disabled by default and this function is used to enable them.
   ///
   /// \param gamepad the gamepad to update.
   /// \param type the type of sensor to enable/disable.

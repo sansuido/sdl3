@@ -9,7 +9,7 @@ part of '../../../sdl.dart';
 ///
 /// ---
 ///
-/// **SPIR-V**
+/// **SPIR-V (GLSL)**
 ///
 /// For compute shaders, use:
 ///
@@ -47,23 +47,23 @@ part of '../../../sdl.dart';
 ///
 /// ===glsl
 /// // Any samplers come first in Set 0, in SDL bind slot order
-/// layout(set = 0, binding = 0) sampler2d samplerBoundToSlot0;
-/// layout(set = 0, binding = 1) sampler2d samplerBoundToSlot1;
+/// layout(set = 0, binding = 0) uniform sampler2D samplerBoundToSlot0;
+/// layout(set = 0, binding = 1) uniform sampler2D samplerBoundToSlot1;
 /// // Any read-only storage textures come next in Set 0, in SDL bind slot order
-/// layout(set = 0, binding = 2) image2d storageTextureBoundToSlot0;
-/// layout(set = 0, binding = 3) image2d storageTextureBoundToSlot1;
+/// layout(set = 0, binding = 2) uniform image2D storageTextureBoundToSlot0;
+/// layout(set = 0, binding = 3) uniform image2D storageTextureBoundToSlot1;
 /// // Any read-only storage buffers come next in Set 0, in SDL bind slot order
-/// layout(set = 0, binding = 4) buffer storageBufferBoundToSlot0;
-/// layout(set = 0, binding = 5) buffer storageBufferBoundToSlot1;
+/// layout(set = 0, binding = 4) buffer storageBufferBoundToSlot0 { ... };
+/// layout(set = 0, binding = 5) buffer storageBufferBoundToSlot1 { ... };
 /// // Any read-write storage textures come first in Set 1, in SDL bind slot order
-/// layout(set = 1, binding = 0) image2d rwStorageTextureBoundToSlot0;
-/// layout(set = 1, binding = 1) image2d rwStorageTextureBoundToSlot1;
+/// layout(set = 1, binding = 0) uniform image2D rwStorageTextureBoundToSlot0;
+/// layout(set = 1, binding = 1) uniform image2D rwStorageTextureBoundToSlot1;
 /// // Any read-write storage buffers come next in Set 1, in SDL bind slot order
-/// layout(set = 1, binding = 2) buffer rwStorageBufferBoundToSlot0;
-/// layout(set = 1, binding = 3) buffer rwStorageBufferBoundToSlot1;
+/// layout(set = 1, binding = 2) buffer rwStorageBufferBoundToSlot0 { ... };
+/// layout(set = 1, binding = 3) buffer rwStorageBufferBoundToSlot1 { ... };
 /// // Any uniform buffers are in Set 2, in SDL slot order
-/// layout(set = 2, binding = 0) uniform UniformDataBoundToSlot0 {};
-/// layout(set = 2, binding = 1) uniform UniformDataBoundToSlot1 {};
+/// layout(set = 2, binding = 0) uniform UniformDataBoundToSlot0 { ... };
+/// layout(set = 2, binding = 1) uniform UniformDataBoundToSlot1 { ... };
 /// ===
 ///
 /// ---
@@ -321,7 +321,7 @@ Pointer<SdlGpuSampler> sdlxCreateGpuSampler(
 ///
 /// ---
 ///
-/// **SPIR-V**
+/// **SPIR-V (GLSL)**
 ///
 /// For vertex shaders, use: - Set 0 for samplers, storage textures, and
 /// storage buffers - Set 1 for uniform data
@@ -349,17 +349,17 @@ Pointer<SdlGpuSampler> sdlxCreateGpuSampler(
 ///
 /// ===glsl
 /// // Any samplers come first in the set, in SDL bind slot order
-/// layout(set = 0, binding = 0) sampler2d samplerBoundToSlot0;
-/// layout(set = 0, binding = 1) sampler2d samplerBoundToSlot1;
+/// layout(set = 0, binding = 0) uniform sampler2D samplerBoundToSlot0;
+/// layout(set = 0, binding = 1) uniform sampler2D samplerBoundToSlot1;
 /// // Any storage textures come next in the set, in SDL bind slot order
-/// layout(set = 0, binding = 2) texture2d storageTextureBoundToSlot0;
-/// layout(set = 0, binding = 3) texture2d storageTextureBoundToSlot1;
+/// layout(set = 0, binding = 2) uniform image2D storageTextureBoundToSlot0;
+/// layout(set = 0, binding = 3) uniform image2D storageTextureBoundToSlot1;
 /// // Any storage buffers come next in the set, in SDL bind slot order
-/// layout(set = 0, binding = 4) buffer storageBufferBoundToSlot0;
-/// layout(set = 0, binding = 5) buffer storageBufferBoundToSlot1;
+/// layout(set = 0, binding = 4) buffer storageBufferBoundToSlot0 { ... };
+/// layout(set = 0, binding = 5) buffer storageBufferBoundToSlot1 { ... };
 /// // Any uniform buffers are in their own set, in SDL slot order
-/// layout(set = 1, binding = 0) uniform UniformDataBoundToSlot0 {};
-/// layout(set = 1, binding = 1) uniform UniformDataBoundToSlot1 {};
+/// layout(set = 1, binding = 0) uniform UniformDataBoundToSlot0 { ... };
+/// layout(set = 1, binding = 1) uniform UniformDataBoundToSlot1 { ... };
 /// ===
 ///
 /// ---
@@ -409,8 +409,8 @@ Pointer<SdlGpuSampler> sdlxCreateGpuSampler(
 /// ByteAddressBuffer StorageBufferBoundToSlot0 : register( t4, space2 );
 /// ByteAddressBuffer StorageBufferBoundToSlot1 : register( t5, space2 );
 /// // Any uniform buffers are in the `b` register set *and* in their own space, in SDL slot order
-/// cbuffer UniformDataBoundToSlot0 : register( b0, space4 ) { ... };
-/// cbuffer UniformDataBoundToSlot1 : register( b1, space4 ) { ... };
+/// cbuffer UniformDataBoundToSlot0 : register( b0, space3 ) { ... };
+/// cbuffer UniformDataBoundToSlot1 : register( b1, space3 ) { ... };
 /// ```
 ///
 /// ---
@@ -608,7 +608,7 @@ Pointer<SdlGpuTexture> sdlxCreateGpuTexture(
 /// Note that certain combinations of usage flags are invalid. For example, a
 /// buffer cannot have both the VERTEX and INDEX flags.
 ///
-/// If you use a STORAGE flag, the data in the buffer must respect std140
+/// If you use a STORAGE flag, the data in the buffer must respect std430
 /// layout conventions. In practical terms this means you must ensure that vec3
 /// and vec4 fields are 16-byte aligned.
 ///

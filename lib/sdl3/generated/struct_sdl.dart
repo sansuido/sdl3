@@ -960,6 +960,9 @@ final class SdlPenProximityEvent extends Struct {
   // [20]+(4)
   @Uint32()
   external int which;
+  // [24]+(4)
+  @Uint32()
+  external int penState;
 }
 
 // SDL_PenMotionEvent
@@ -1274,7 +1277,7 @@ final class SdlEvent extends Union {
   external SdlTouchFingerEvent tfinger;
   // [0]+(40)
   external SdlPinchFingerEvent pinch;
-  // [0]+(24)
+  // [0]+(32)
   external SdlPenProximityEvent pproximity;
   // [0]+(40)
   external SdlPenTouchEvent ptouch;

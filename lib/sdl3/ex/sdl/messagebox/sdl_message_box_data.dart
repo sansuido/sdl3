@@ -38,33 +38,29 @@ class SdlxMessageBoxColorScheme {
 }
 
 class SdlxMessageBoxButtonData {
-  SdlxMessageBoxButtonData({this.flags = 0, this.buttonId = 0, String? text}) {
-    this.text = text ?? '';
-  }
+  SdlxMessageBoxButtonData({this.flags = 0, this.buttonId = 0, this.text = ''});
   int flags;
   int buttonId;
-  late String text;
+  String text;
 }
 
 class SdlxMessageBoxData {
   SdlxMessageBoxData({
     this.flags = 0,
     Pointer<SdlWindow>? window,
-    String? title,
-    String? message,
+    this.title = '',
+    this.message = '',
     List<SdlxMessageBoxButtonData>? buttons,
     this.colorScheme,
   }) {
     this.window = window ?? nullptr;
-    this.title = title ?? '';
-    this.message = message ?? '';
     this.buttons = buttons ?? [];
     selectedButtonId = 0;
   }
   int flags;
   late Pointer<SdlWindow> window;
-  late String title;
-  late String message;
+  String title;
+  String message;
   late List<SdlxMessageBoxButtonData> buttons;
   SdlxMessageBoxColorScheme? colorScheme;
   late int selectedButtonId;

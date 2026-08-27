@@ -1,35 +1,28 @@
 part of '../../sdl_shadercross.dart';
 
 class SdlxShaderCrossHlslDefine {
-  SdlxShaderCrossHlslDefine({String? name, String? value}) {
-    this.name = name ?? '';
-    this.value = value ?? '';
-  }
-  late String name;
-  late String value;
+  SdlxShaderCrossHlslDefine({this.name = '', this.value = ''});
+  String name;
+  String value;
 }
 
 class SdlxShaderCrossHlslInfo {
   SdlxShaderCrossHlslInfo({
-    String? source,
-    String? entrypoint,
-    String? includeDir,
+    this.source = '',
+    this.entrypoint = '',
+    this.includeDir = '',
     List<SdlxShaderCrossHlslDefine>? defines,
     this.shaderStage = 0,
     this.props = 0,
   }) {
-    this.source = source ?? '';
-    this.entrypoint = entrypoint ?? '';
-    this.includeDir = includeDir ?? '';
     this.defines = defines ?? [];
   }
-  late String source;
-  late String entrypoint;
-  late String includeDir;
+  String source;
+  String entrypoint;
+  String includeDir;
   late List<SdlxShaderCrossHlslDefine> defines;
   int shaderStage;
   int props;
-  var size = 0;
 
   Pointer<SdlShaderCrossHlslInfo> calloc() {
     final pointer = ffi.calloc<SdlShaderCrossHlslInfo>();
