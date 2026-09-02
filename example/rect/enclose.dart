@@ -49,9 +49,8 @@ int main() {
           event.type == SdlkEvent.mouseButtonDown) {
         switch (event.button) {
           case SdlkButton.left:
-            final position = SdlxFPoint(0, 0);
-            sdlxGetMouseState(position);
-            clickPoints.add(position);
+            final mouseState = sdlxGetMouseState();
+            clickPoints.add(SdlxFPoint(mouseState.x, mouseState.y));
           case SdlkButton.right:
             if (clickPoints.isNotEmpty) {
               clickPoints.removeLast();

@@ -284,10 +284,10 @@ yamahara
 - [x] [SdlVertex](./lib/sdl3/ex/sdl/render/sdl_vertex.dart)
 - [x] [SdlRenderer](./lib/sdl3/ex/sdl/render/sdl_renderer.dart) \([gfx](./lib/sdl3/ex/sdl/render/sdl_renderer_from_gfx.dart) / [image](./lib/sdl3/ex/sdl/render/sdl_renderer_from_image.dart) / [ttf](./lib/sdl3/ex/sdl/render/sdl_renderer_from_ttf.dart)\)
 - [x] [SdlTexture](./lib/sdl3/ex/sdl/render/sdl_texture.dart)
-- [ ] SdlGpuRenderStateCreateInfo
-- [ ] SdlGpuRenderState
+- [x] [SdlGpuRenderStateCreateInfo](./lib/sdl3/ex/sdl/render/sdl_gpu_render_state_create_info.dart)
+- [x] [SdlGpuRenderState](./lib/sdl3/ex/sdl/render/sdl_gpu_render_state.dart)
 ### sensor
-- [ ] SdlSensor
+- [x] [SdlSensor](./lib/sdl3/ex/sdl/sensor/sdl_sensor.dart)
 ### stdinc
 - [ ] SdlAlignmentTest
 - [ ] SdlEnvironment
@@ -307,13 +307,13 @@ yamahara
 ### time
 - [x] [SdlDateTime](./lib/sdl3/ex/sdl/time/sdl_date_time.dart)
 ### touch
-- [ ] SdlFinger
+- [x] [SdlFinger](./lib/sdl3/ex/sdl/touch/sdl_finger.dart)
 ### tray
 - [x] [SdlTray](./lib/sdl3/ex/sdl/tray/sdl_tray.dart)
 - [x] [SdlTrayMenu](./lib/sdl3/ex/sdl/tray/sdl_tray_menu.dart)
 - [x] [SdlTrayEntry](./lib/sdl3/ex/sdl/tray/sdl_tray_entry.dart)
 ### video
-- [ ] SdlDisplayModeData
+- [x] ~~SdlDisplayModeData~~ Internal.
 - [x] [SdlDisplayMode](./lib/sdl3/ex/sdl/video/sdl_display_mode.dart)
 - [x] [SdlWindow](./lib/sdl3/ex/sdl/video/sdl_window.dart) \([keyboard](./lib/sdl3/ex/sdl/video/sdl_window_from_keyboard.dart) / [metal](./lib/sdl3/ex/sdl/video/sdl_window_from_metal.dart) / [mouse](./lib/sdl3/ex/sdl/video/sdl_window_from_mouse.dart) / [render](./lib/sdl3/ex/sdl/video/sdl_window_from_render.dart) / [system](./lib/sdl3/ex/sdl/video/sdl_window_from_system.dart) / [vulkan](./lib/sdl3/ex/sdl/video/sdl_window_from_vulkan.dart)\)
 - [x] [SdlGlContext](./lib/sdl3/ex/sdl/video/sdl_gl_context.dart)

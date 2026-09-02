@@ -58,13 +58,14 @@ List<int> sdlxGetTouchDevices() {
 /// - [SDL_GetTouchFingers - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetTouchFingers)
 ///
 /// {@category touch}
-List<Pointer<SdlFinger>> sdlxGetTouchFingers(int touchId) {
-  final result = <Pointer<SdlFinger>>[];
+List<SdlxFinger> sdlxGetTouchFingers(int touchId) {
+  //final result = <Pointer<SdlFinger>>[];
+  final result = <SdlxFinger>[];
   final countPointer = ffi.calloc<Int32>();
   final fingersPointer = sdlGetTouchFingers(touchId, countPointer);
   if (fingersPointer != nullptr) {
     for (var i = 0; i < countPointer.value; i++) {
-      result.add(fingersPointer[i]);
+      result.add(SdlxFinger.fromPointer(fingersPointer[i]));
     }
     sdlFree(fingersPointer.cast<Void>());
   }

@@ -82,16 +82,17 @@ List<int> sdlxGetMice() {
 /// - [SDL_GetMouseState - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetMouseState)
 ///
 /// {@category mouse}
-int sdlxGetMouseState(SdlxFPoint position) {
+({int button, double x, double y}) sdlxGetMouseState() {
+  var x = 0.0;
+  var y = 0.0;
   final xPointer = ffi.calloc<Float>();
   final yPointer = ffi.calloc<Float>();
-  final result = sdlGetMouseState(xPointer, yPointer);
-  position
-    ..x = xPointer.value
-    ..y = yPointer.value;
+  final button = sdlGetMouseState(xPointer, yPointer);
+  x = xPointer.value;
+  y = yPointer.value;
   xPointer.callocFree();
   yPointer.callocFree();
-  return result;
+  return (button: button, x: x, y: y);
 }
 
 ///
@@ -137,16 +138,17 @@ int sdlxGetMouseState(SdlxFPoint position) {
 /// - [SDL_GetGlobalMouseState - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetGlobalMouseState)
 ///
 /// {@category mouse}
-int sdlxGetGlobalMouseState(SdlxFPoint position) {
+({int button, double x, double y}) sdlxGetGlobalMouseState() {
+  var x = 0.0;
+  var y = 0.0;
   final xPointer = ffi.calloc<Float>();
   final yPointer = ffi.calloc<Float>();
-  final result = sdlGetGlobalMouseState(xPointer, yPointer);
-  position
-    ..x = xPointer.value
-    ..y = yPointer.value;
+  final button = sdlGetGlobalMouseState(xPointer, yPointer);
+  x = xPointer.value;
+  y = yPointer.value;
   xPointer.callocFree();
   yPointer.callocFree();
-  return result;
+  return (button: button, x: x, y: y);
 }
 
 ///
@@ -190,16 +192,17 @@ int sdlxGetGlobalMouseState(SdlxFPoint position) {
 /// - [SDL_GetRelativeMouseState - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRelativeMouseState)
 ///
 /// {@category mouse}
-int sdlxGetRelativeMouseState(SdlxFPoint position) {
+({int button, double x, double y}) sdlxGetRelativeMouseState() {
+  var x = 0.0;
+  var y = 0.0;
   final xPointer = ffi.calloc<Float>();
   final yPointer = ffi.calloc<Float>();
-  final result = sdlGetRelativeMouseState(xPointer, yPointer);
-  position
-    ..x = xPointer.value
-    ..y = yPointer.value;
+  final button = sdlGetRelativeMouseState(xPointer, yPointer);
+  x = xPointer.value;
+  y = yPointer.value;
   xPointer.callocFree();
   yPointer.callocFree();
-  return result;
+  return (button: button, x: x, y: y);
 }
 
 ///

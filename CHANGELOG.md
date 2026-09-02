@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.11.2] - 2026-09-02
+- SDL3-2026-08-30
+### Changed
+- Changed `sdlxGetJoystickBall`, `sdlxGetMouseState`, `sdlxGetGlobalMouseState`, `sdlxGetRelativeMouseState` (use Record).
+### Added
+- Added joystick functions (`sdlJoystickHasSensor` and more).
+- Added functions and wrapper classes for touch.
+- Added extensions for `Pointer<SdlGpuRenderState>`.
+### Updated
+- Dart 3.13.2
+
 ## [2.11.1] - 2026-08-27
 - SDL3-2026-08-23
 ### Changed

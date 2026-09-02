@@ -189,6 +189,7 @@ part 'ex/sdl/system/lib_sdl_system.dart';
 part 'ex/sdl/time/lib_sdl_time.dart';
 part 'ex/sdl/time/sdl_date_time.dart';
 
+part 'ex/sdl/touch/sdl_finger.dart';
 part 'ex/sdl/touch/lib_sdl_touch.dart';
 
 part 'ex/sdl/tray/lib_sdl_tray.dart';

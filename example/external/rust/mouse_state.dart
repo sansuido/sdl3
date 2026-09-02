@@ -29,12 +29,14 @@ int main() {
         }
       }
     }
-    final newPoint = SdlxFPoint(0, 0);
-    final newButton = sdlxGetMouseState(newPoint);
-    if (oldPoint != newPoint || oldButton != newButton) {
-      print('X = ${newPoint.x} Y = ${newPoint.y} : $oldButton => $newButton');
-      oldPoint = newPoint;
-      oldButton = newButton;
+    final mouseState = sdlxGetMouseState();
+    if (oldPoint != SdlxFPoint(mouseState.x, mouseState.y) ||
+        oldButton != mouseState.button) {
+      print(
+        'X = ${mouseState.x} Y = ${mouseState.y} : $oldButton => $mouseState.button',
+      );
+      oldPoint = SdlxFPoint(mouseState.x, mouseState.y);
+      oldButton = mouseState.button;
     }
   }
   window.destroy();

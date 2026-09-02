@@ -45,7 +45,7 @@ Pointer<SdlSurface> sdlCreateSurface(int width, int height, int format) {
 /// you must free the surface before you free the pixel data.
 ///
 /// Pitch is the offset in bytes from one row of pixels to the next, e.g.
-/// `width*4` for `SDL_PIXELFORMAT_RGBA8888`.
+/// `(width * 4)` for `SDL_PIXELFORMAT_RGBA8888`.
 ///
 /// You may pass NULL for pixels and 0 for pitch to create a surface that you
 /// will fill in with valid values later.

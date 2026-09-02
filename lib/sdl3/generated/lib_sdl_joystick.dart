@@ -1897,6 +1897,192 @@ bool sdlGetJoystickButton(Pointer<SdlJoystick> joystick, int button) {
 }
 
 ///
+/// Return whether a joystick has a particular sensor.
+///
+/// Sensors are disabled by default and SDL_SetJoystickSensorEnabled() is used
+/// to enable them.
+///
+/// \param joystick the joystick to query.
+/// \param type the type of sensor to query.
+/// \returns true if the sensor exists, false otherwise.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.6.0.
+///
+/// \sa SDL_GetJoystickSensorData
+/// \sa SDL_GetJoystickSensorDataRate
+/// \sa SDL_SetJoystickSensorEnabled
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL SDL_JoystickHasSensor(SDL_Joystick *joystick, SDL_SensorType type)
+/// ```
+///
+/// See also:
+/// - [SDL_JoystickHasSensor - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_JoystickHasSensor)
+///
+/// {@category joystick}
+bool sdlJoystickHasSensor(Pointer<SdlJoystick> joystick, int type) {
+  final sdlJoystickHasSensorLookupFunction = _libSdl
+      .lookupFunction<
+        Bool Function(Pointer<SdlJoystick> joystick, Int32 type),
+        bool Function(Pointer<SdlJoystick> joystick, int type)
+      >('SDL_JoystickHasSensor');
+  return sdlJoystickHasSensorLookupFunction(joystick, type);
+}
+
+///
+/// Set whether data reporting for a joystick sensor is enabled.
+///
+/// Sensors are disabled by default and this function is used to enable them.
+///
+/// \param joystick the joystick to update.
+/// \param type the type of sensor to enable/disable.
+/// \param enabled whether data reporting should be enabled.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.6.0.
+///
+/// \sa SDL_JoystickHasSensor
+/// \sa SDL_JoystickSensorEnabled
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetJoystickSensorEnabled(SDL_Joystick *joystick, SDL_SensorType type, bool enabled)
+/// ```
+///
+/// See also:
+/// - [SDL_SetJoystickSensorEnabled - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetJoystickSensorEnabled)
+///
+/// {@category joystick}
+bool sdlSetJoystickSensorEnabled(
+  Pointer<SdlJoystick> joystick,
+  int type,
+  bool enabled,
+) {
+  final sdlSetJoystickSensorEnabledLookupFunction = _libSdl
+      .lookupFunction<
+        Bool Function(Pointer<SdlJoystick> joystick, Int32 type, Bool enabled),
+        bool Function(Pointer<SdlJoystick> joystick, int type, bool enabled)
+      >('SDL_SetJoystickSensorEnabled');
+  return sdlSetJoystickSensorEnabledLookupFunction(joystick, type, enabled);
+}
+
+///
+/// Query whether sensor data reporting is enabled for a joystick.
+///
+/// \param joystick the joystick to query.
+/// \param type the type of sensor to query.
+/// \returns true if the sensor is enabled, false otherwise.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.6.0.
+///
+/// \sa SDL_SetJoystickSensorEnabled
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL SDL_JoystickSensorEnabled(SDL_Joystick *joystick, SDL_SensorType type)
+/// ```
+///
+/// See also:
+/// - [SDL_JoystickSensorEnabled - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_JoystickSensorEnabled)
+///
+/// {@category joystick}
+bool sdlJoystickSensorEnabled(Pointer<SdlJoystick> joystick, int type) {
+  final sdlJoystickSensorEnabledLookupFunction = _libSdl
+      .lookupFunction<
+        Bool Function(Pointer<SdlJoystick> joystick, Int32 type),
+        bool Function(Pointer<SdlJoystick> joystick, int type)
+      >('SDL_JoystickSensorEnabled');
+  return sdlJoystickSensorEnabledLookupFunction(joystick, type);
+}
+
+///
+/// Get the data rate (number of events per second) of a joystick sensor.
+///
+/// \param joystick the joystick to query.
+/// \param type the type of sensor to query.
+/// \returns the data rate, or 0.0f if the data rate is not available.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.6.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC float SDLCALL SDL_GetJoystickSensorDataRate(SDL_Joystick *joystick, SDL_SensorType type)
+/// ```
+///
+/// See also:
+/// - [SDL_GetJoystickSensorDataRate - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetJoystickSensorDataRate)
+///
+/// {@category joystick}
+double sdlGetJoystickSensorDataRate(Pointer<SdlJoystick> joystick, int type) {
+  final sdlGetJoystickSensorDataRateLookupFunction = _libSdl
+      .lookupFunction<
+        Float Function(Pointer<SdlJoystick> joystick, Int32 type),
+        double Function(Pointer<SdlJoystick> joystick, int type)
+      >('SDL_GetJoystickSensorDataRate');
+  return sdlGetJoystickSensorDataRateLookupFunction(joystick, type);
+}
+
+///
+/// Get the current state of a joystick sensor.
+///
+/// The number of values and interpretation of the data is sensor dependent.
+/// See the remarks in SDL_SensorType for details for each type of sensor.
+///
+/// \param joystick the joystick to query.
+/// \param type the type of sensor to query.
+/// \param data a pointer filled with the current sensor state.
+/// \param num_values the number of values to write to data.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.6.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GetJoystickSensorData(SDL_Joystick *joystick, SDL_SensorType type, float *data, int num_values)
+/// ```
+///
+/// See also:
+/// - [SDL_GetJoystickSensorData - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetJoystickSensorData)
+///
+/// {@category joystick}
+bool sdlGetJoystickSensorData(
+  Pointer<SdlJoystick> joystick,
+  int type,
+  Pointer<Float> data,
+  int numValues,
+) {
+  final sdlGetJoystickSensorDataLookupFunction = _libSdl
+      .lookupFunction<
+        Bool Function(
+          Pointer<SdlJoystick> joystick,
+          Int32 type,
+          Pointer<Float> data,
+          Int32 numValues,
+        ),
+        bool Function(
+          Pointer<SdlJoystick> joystick,
+          int type,
+          Pointer<Float> data,
+          int numValues,
+        )
+      >('SDL_GetJoystickSensorData');
+  return sdlGetJoystickSensorDataLookupFunction(
+    joystick,
+    type,
+    data,
+    numValues,
+  );
+}
+
+///
 /// Start a rumble effect.
 ///
 /// Each call to this function cancels any previous rumble effect, and calling

@@ -77,11 +77,13 @@ int main() {
         ..setDrawColorFloat(SdlxFColor(0, 0, 0))
         ..clear();
       final size = SdlxFPoint(200, 200);
-      final position = SdlxFPoint(0, 0);
-      sdlxGetMouseState(position);
+      final mouseState = sdlxGetMouseState();
       renderer.textureRotated(
         lightTexture,
-        dstrect: SdlxFRect.fromCenter(position, size),
+        dstrect: SdlxFRect.fromCenter(
+          SdlxFPoint(mouseState.x, mouseState.y),
+          size,
+        ),
         angle: angle,
       );
       angle += 0.1;

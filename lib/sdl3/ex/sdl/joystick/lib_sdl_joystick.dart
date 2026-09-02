@@ -261,17 +261,67 @@ int? sdlxGetJoystickAxisInitialState(Pointer<SdlJoystick> joystick, int axis) {
 /// - [SDL_GetJoystickBall - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetJoystickBall)
 ///
 /// {@category joystick}
-SdlxPoint? sdlxGetJoystickBall(Pointer<SdlJoystick> joystick, int ball) {
-  SdlxPoint? result;
+({int dx, int dy})? sdlxGetJoystickBall(
+  Pointer<SdlJoystick> joystick,
+  int ball,
+) {
+  var dx = 0;
+  var dy = 0;
   final dxPointer = ffi.calloc<Int32>();
   final dyPointer = ffi.calloc<Int32>();
   final bl = sdlGetJoystickBall(joystick, ball, dxPointer, dyPointer);
   if (bl) {
-    result = SdlxPoint(dxPointer.value, dyPointer.value);
+    dx = dxPointer.value;
+    dy = dyPointer.value;
   }
   dxPointer.callocFree();
   dyPointer.callocFree();
-  return result;
+  if (!bl) {
+    return null;
+  }
+  return (dx: dx, dy: dy);
+}
+
+///
+/// Get the current state of a joystick sensor.
+///
+/// The number of values and interpretation of the data is sensor dependent.
+/// See the remarks in SDL_SensorType for details for each type of sensor.
+///
+/// \param joystick the joystick to query.
+/// \param type the type of sensor to query.
+/// \param data a pointer filled with the current sensor state.
+/// \param num_values the number of values to write to data.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.6.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GetJoystickSensorData(SDL_Joystick *joystick, SDL_SensorType type, float *data, int num_values)
+/// ```
+///
+/// See also:
+/// - [SDL_GetJoystickSensorData - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetJoystickSensorData)
+///
+/// {@category joystick}
+List<double> sdlxGetJoystickSensorData(
+  Pointer<SdlJoystick> joystick,
+  int type,
+  int numValues,
+) {
+  final data = <double>[];
+  final dataPointer = ffi.calloc<Float>(numValues);
+  final bl = sdlGetJoystickSensorData(joystick, type, dataPointer, numValues);
+  if (bl) {
+    for (var i = 0; i < numValues; i++) {
+      data.add(dataPointer[i]);
+    }
+  }
+  dataPointer.callocFree();
+  return data;
 }
 
 ///
