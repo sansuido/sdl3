@@ -165,9 +165,9 @@ extension TtfFontEx on TtfFont {
   /// {@category ttf}
   static Pointer<TtfFont> openIo(
     Pointer<SdlIoStream> src,
-    bool closeio,
-    double ptsize,
-  ) => ttfOpenFontIo(src, closeio, ptsize);
+    double ptsize, {
+    bool closeio = false,
+  }) => ttfOpenFontIo(src, closeio, ptsize);
 
   ///
   /// Create a font with the specified properties.

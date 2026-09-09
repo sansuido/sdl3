@@ -1,22 +1,13 @@
 // https://wiki.libsdl.org/SDL_RenderDrawLine
-import 'dart:ffi';
-
-import 'package:ffi/ffi.dart';
 import 'package:sdl3/sdl3.dart';
 
 int main() {
   if (sdlInit(SDL_INIT_VIDEO)) {
     sdlSetHint(SDL_HINT_RENDER_VSYNC, '1');
-    final window = calloc<Pointer<SdlWindow>>();
-    final renderer = calloc<Pointer<SdlRenderer>>();
-    if (sdlCreateWindowAndRenderer(
-      'Draw Line',
-      640,
-      480,
-      0,
-      window,
-      renderer,
-    )) {
+    final rec = sdlxCreateWindowAndRenderer('Draw Line', 640, 480, 0);
+    if (rec != null) {
+      final window = rec.window;
+      final renderer = rec.renderer;
       var running = true;
       while (running) {
         SdlxEvent? event;
@@ -30,20 +21,17 @@ int main() {
             }
           }
         }
-        sdlSetRenderDrawColor(renderer.value, 0, 0, 0, SDL_ALPHA_OPAQUE);
-        sdlRenderClear(renderer.value);
-        sdlSetRenderDrawColor(renderer.value, 255, 255, 255, SDL_ALPHA_OPAQUE);
-        sdlRenderLine(renderer.value, 320, 200, 300, 240);
-        sdlRenderLine(renderer.value, 300, 240, 340, 240);
-        sdlRenderLine(renderer.value, 340, 240, 320, 200);
-        sdlRenderPresent(renderer.value);
+        sdlSetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
+        sdlRenderClear(renderer);
+        sdlSetRenderDrawColor(renderer, 255, 255, 255, SDL_ALPHA_OPAQUE);
+        sdlRenderLine(renderer, 320, 200, 300, 240);
+        sdlRenderLine(renderer, 300, 240, 340, 240);
+        sdlRenderLine(renderer, 340, 240, 320, 200);
+        sdlRenderPresent(renderer);
       }
-      sdlDestroyRenderer(renderer.value);
-      sdlDestroyWindow(window.value);
-    } else {}
-    calloc
-      ..free(window)
-      ..free(renderer);
+      sdlDestroyRenderer(renderer);
+      sdlDestroyWindow(window);
+    }
     sdlQuit();
   }
   return 0;

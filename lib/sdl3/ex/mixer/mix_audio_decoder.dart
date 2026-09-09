@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_positional_boolean_parameters
-
 part of '../../sdl_mixer.dart';
 
 extension MixAudioDecoderEx on MixAudioDecoder {
@@ -96,9 +94,9 @@ extension MixAudioDecoderEx on MixAudioDecoder {
   /// {@category mixer}
   static Pointer<MixAudioDecoder> createIo(
     Pointer<SdlIoStream> io,
-    bool closeio,
-    int props,
-  ) => mixCreateAudioDecoderIo(io, closeio, props);
+    int props, {
+    bool closeio = false,
+  }) => mixCreateAudioDecoderIo(io, closeio, props);
 }
 
 extension MixAudioDecoderPointerEx on Pointer<MixAudioDecoder> {

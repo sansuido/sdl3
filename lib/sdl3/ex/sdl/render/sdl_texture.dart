@@ -282,7 +282,7 @@ extension SdlTexturePointerEx on Pointer<SdlTexture> {
   double? getAlphaModFloat() => sdlxGetTextureAlphaModFloat(this);
 
   ///
-  /// Set the blend mode for a texture, used by SDL_RenderTexture().
+  /// Set the blend mode for a texture.
   ///
   /// This blend mode is used for any drawing that involves this texture.
   ///

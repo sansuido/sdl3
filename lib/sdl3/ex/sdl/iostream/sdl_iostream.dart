@@ -1027,4 +1027,214 @@ extension SdlIoStreamPointerEx on Pointer<SdlIoStream> {
     }
     return null;
   }
+
+  ///
+  /// Use this function to write 16 bits in native format to an SDL_IOStream as
+  /// little-endian data.
+  ///
+  /// SDL byteswaps the data only if necessary, so the application always
+  /// specifies native format, and the data written will be in little-endian
+  /// format.
+  ///
+  /// \param dst the stream to which data will be written.
+  /// \param value the data to be written, in native format.
+  /// \returns true on successful write or false on failure; call SDL_GetError()
+  /// for more information.
+  ///
+  /// \threadsafety Do not use the same SDL_IOStream from two threads at once.
+  ///
+  /// \since This function is available since SDL 3.2.0.
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_WriteU16LE(SDL_IOStream *dst, Uint16 value)
+  /// ```
+  ///
+  /// See also:
+  /// - [SDL_WriteU16LE - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_WriteU16LE)
+  ///
+  /// {@category iostream}
+  bool sdlWriteU16(int value, {Endian endian = Endian.big}) {
+    switch (endian) {
+      case Endian.little:
+        return sdlWriteU16Le(this, value);
+      case Endian.big:
+        return sdlWriteU16Be(this, value);
+    }
+    return false;
+  }
+
+  ///
+  /// Use this function to write 16 bits in native format to an SDL_IOStream as
+  /// little-endian data.
+  ///
+  /// SDL byteswaps the data only if necessary, so the application always
+  /// specifies native format, and the data written will be in little-endian
+  /// format.
+  ///
+  /// \param dst the stream to which data will be written.
+  /// \param value the data to be written, in native format.
+  /// \returns true on successful write or false on failure; call SDL_GetError()
+  /// for more information.
+  ///
+  /// \threadsafety Do not use the same SDL_IOStream from two threads at once.
+  ///
+  /// \since This function is available since SDL 3.2.0.
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_WriteS16LE(SDL_IOStream *dst, Sint16 value)
+  /// ```
+  ///
+  /// See also:
+  /// - [SDL_WriteS16LE - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_WriteS16LE)
+  ///
+  /// {@category iostream}
+  bool sdlWriteS16(int value, {Endian endian = Endian.big}) {
+    switch (endian) {
+      case Endian.little:
+        return sdlWriteS16Le(this, value);
+      case Endian.big:
+        return sdlWriteS16Be(this, value);
+    }
+    return false;
+  }
+
+  ///
+  /// Use this function to write 32 bits in native format to an SDL_IOStream as
+  /// little-endian data.
+  ///
+  /// SDL byteswaps the data only if necessary, so the application always
+  /// specifies native format, and the data written will be in little-endian
+  /// format.
+  ///
+  /// \param dst the stream to which data will be written.
+  /// \param value the data to be written, in native format.
+  /// \returns true on successful write or false on failure; call SDL_GetError()
+  /// for more information.
+  ///
+  /// \threadsafety Do not use the same SDL_IOStream from two threads at once.
+  ///
+  /// \since This function is available since SDL 3.2.0.
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_WriteU32LE(SDL_IOStream *dst, Uint32 value)
+  /// ```
+  ///
+  /// See also:
+  /// - [SDL_WriteU32LE - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_WriteU32LE)
+  ///
+  /// {@category iostream}
+  bool sdlWriteU32(int value, {Endian endian = Endian.big}) {
+    switch (endian) {
+      case Endian.little:
+        return sdlWriteU32Le(this, value);
+      case Endian.big:
+        return sdlWriteU32Be(this, value);
+    }
+    return false;
+  }
+
+  ///
+  /// Use this function to write 32 bits in native format to an SDL_IOStream as
+  /// little-endian data.
+  ///
+  /// SDL byteswaps the data only if necessary, so the application always
+  /// specifies native format, and the data written will be in little-endian
+  /// format.
+  ///
+  /// \param dst the stream to which data will be written.
+  /// \param value the data to be written, in native format.
+  /// \returns true on successful write or false on failure; call SDL_GetError()
+  /// for more information.
+  ///
+  /// \threadsafety Do not use the same SDL_IOStream from two threads at once.
+  ///
+  /// \since This function is available since SDL 3.2.0.
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_WriteS32LE(SDL_IOStream *dst, Sint32 value)
+  /// ```
+  ///
+  /// See also:
+  /// - [SDL_WriteS32LE - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_WriteS32LE)
+  ///
+  /// {@category iostream}
+  bool sdlWriteS32(int value, {Endian endian = Endian.big}) {
+    switch (endian) {
+      case Endian.little:
+        return sdlWriteS32Le(this, value);
+      case Endian.big:
+        return sdlWriteS32Be(this, value);
+    }
+    return false;
+  }
+
+  ///
+  /// Use this function to write 64 bits in native format to an SDL_IOStream as
+  /// little-endian data.
+  ///
+  /// SDL byteswaps the data only if necessary, so the application always
+  /// specifies native format, and the data written will be in little-endian
+  /// format.
+  ///
+  /// \param dst the stream to which data will be written.
+  /// \param value the data to be written, in native format.
+  /// \returns true on successful write or false on failure; call SDL_GetError()
+  /// for more information.
+  ///
+  /// \threadsafety Do not use the same SDL_IOStream from two threads at once.
+  ///
+  /// \since This function is available since SDL 3.2.0.
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_WriteU64LE(SDL_IOStream *dst, Uint64 value)
+  /// ```
+  ///
+  /// See also:
+  /// - [SDL_WriteU64LE - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_WriteU64LE)
+  ///
+  /// {@category iostream}
+  bool sdlWriteU64(int value, {Endian endian = Endian.big}) {
+    switch (endian) {
+      case Endian.little:
+        return sdlWriteU64Le(this, value);
+      case Endian.big:
+        return sdlWriteU64Be(this, value);
+    }
+    return false;
+  }
+
+  ///
+  /// Use this function to write 64 bits in native format to an SDL_IOStream as
+  /// little-endian data.
+  ///
+  /// SDL byteswaps the data only if necessary, so the application always
+  /// specifies native format, and the data written will be in little-endian
+  /// format.
+  ///
+  /// \param dst the stream to which data will be written.
+  /// \param value the data to be written, in native format.
+  /// \returns true on successful write or false on failure; call SDL_GetError()
+  /// for more information.
+  ///
+  /// \threadsafety Do not use the same SDL_IOStream from two threads at once.
+  ///
+  /// \since This function is available since SDL 3.2.0.
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_WriteS64LE(SDL_IOStream *dst, Sint64 value)
+  /// ```
+  ///
+  /// See also:
+  /// - [SDL_WriteS64LE - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_WriteS64LE)
+  ///
+  /// {@category iostream}
+  bool sdlWriteS64(int value, {Endian endian = Endian.big}) {
+    switch (endian) {
+      case Endian.little:
+        return sdlWriteS64Le(this, value);
+      case Endian.big:
+        return sdlWriteS64Be(this, value);
+    }
+    return false;
+  }
 }

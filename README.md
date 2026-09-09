@@ -235,8 +235,8 @@ yamahara
 - [x] [SdlHidDevice](./lib/sdl3/ex/sdl/hidapi/sdl_hid_device.dart)
 - [x] [SdlHidDeviceInfo](./lib/sdl3/ex/sdl/hidapi/sdl_hid_device_info.dart)
 ### iostream
-- [ ] SdlIoStreamInterface
-- [ ] SdlIoStream
+- [x] [SdlIoStreamInterface](./lib/sdl3/ex/sdl/iostream/sdl_iostream_interface.dart)
+- [x] [SdlIoStream](./lib/sdl3/ex/sdl/iostream/sdl_iostream.dart)
 ### joystick
 - [x] [SdlJoystick](./lib/sdl3/ex/sdl/joystick/sdl_joystick.dart) \([haptic](./lib/sdl3/ex/sdl/joystick/sdl_joystick_from_haptic.dart)\)
 - [x] [SdlVirtualJoystickTouchpadDesc](./lib/sdl3/ex/sdl/joystick/sdl_virtual_joystick_desc.dart)

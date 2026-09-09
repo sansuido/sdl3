@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_positional_boolean_parameters
-
 part of '../../sdl_mixer.dart';
 
 extension MixTrackPointerEx on Pointer<MixTrack> {
@@ -232,7 +230,7 @@ extension MixTrackPointerEx on Pointer<MixTrack> {
   /// - [MIX_SetTrackIOStream - SDL3 Wiki](https://wiki.libsdl.org/SDL3/MIX_SetTrackIOStream)
   ///
   /// {@category mixer}
-  bool setIoStream(Pointer<SdlIoStream> io, bool closeio) =>
+  bool setIoStream(Pointer<SdlIoStream> io, {bool closeio = false}) =>
       mixSetTrackIoStream(this, io, closeio);
 
   ///

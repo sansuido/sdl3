@@ -265,9 +265,9 @@ extension MixMixerPointerEx on Pointer<MixMixer> {
   /// {@category mixer}
   Pointer<MixAudio> loadAudioIo(
     Pointer<SdlIoStream> io,
-    bool predecode,
-    bool closeio,
-  ) => mixLoadAudioIo(this, io, predecode, closeio);
+    bool predecode, {
+    bool closeio = false,
+  }) => mixLoadAudioIo(this, io, predecode, closeio);
 
   ///
   /// Load audio for playback from a file.

@@ -1,6 +1,51 @@
 part of '../../../sdl.dart';
 
 ///
+/// Create a custom SDL_IOStream.
+///
+/// Applications do not need to use this function unless they are providing
+/// their own SDL_IOStream implementation. If you just need an SDL_IOStream to
+/// read/write a common data source, you should use the built-in
+/// implementations in SDL, like SDL_IOFromFile() or SDL_IOFromMem(), etc.
+///
+/// This function makes a copy of `iface` and the caller does not need to keep
+/// it around after this call.
+///
+/// \param iface the interface that implements this SDL_IOStream, initialized
+/// using SDL_INIT_INTERFACE().
+/// \param userdata the pointer that will be passed to the interface functions.
+/// \returns a pointer to the allocated memory on success or NULL on failure;
+/// call SDL_GetError() for more information.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.2.0.
+///
+/// \sa SDL_CloseIO
+/// \sa SDL_INIT_INTERFACE
+/// \sa SDL_IOFromConstMem
+/// \sa SDL_IOFromFile
+/// \sa SDL_IOFromMem
+///
+/// ```c
+/// extern SDL_DECLSPEC SDL_IOStream * SDLCALL SDL_OpenIO(const SDL_IOStreamInterface *iface, void *userdata)
+/// ```
+///
+/// See also:
+/// - [SDL_OpenIO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_OpenIO)
+///
+/// {@category iostream}
+Pointer<SdlIoStream> sdlxOpenIo(
+  SdlxIoStreamInterface iface,
+  Pointer<Void> userdata,
+) {
+  final ifacePointer = iface.calloc();
+  final result = sdlOpenIo(ifacePointer, userdata);
+  ifacePointer.callocFree();
+  return result;
+}
+
+///
 /// Read from a data source.
 ///
 /// This function reads up `size` bytes from the data source to the area
@@ -351,7 +396,7 @@ bool sdlxSaveFileIo(
 /// - [SDL_SaveFile - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SaveFile)
 ///
 /// {@category iostream}
-bool sdlxSaveFile(String file, Uint8List data, {bool closeio = false}) {
+bool sdlxSaveFile(String file, Uint8List data) {
   final dataPointer = ffi.calloc<Uint8>(data.length);
   dataPointer.asTypedList(data.length).setAll(0, data);
   final result = sdlSaveFile(file, dataPointer.cast<Void>(), data.length);

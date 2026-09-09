@@ -236,9 +236,9 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   ///
   /// {@category surface}
   static Pointer<SdlSurface> loadBmpIo(
-    Pointer<SdlIoStream> src,
-    bool freesrc,
-  ) => sdlLoadBmpIo(src, freesrc);
+    Pointer<SdlIoStream> src, {
+    bool closeio = false,
+  }) => sdlLoadBmpIo(src, closeio);
 
   ///
   /// Save a surface to a seekable SDL data stream in BMP format.
@@ -272,8 +272,8 @@ extension SdlSurfacePointerEx on Pointer<SdlSurface> {
   /// - [SDL_SaveBMP_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SaveBMP_IO)
   ///
   /// {@category surface}
-  bool saveBmpIo(Pointer<SdlIoStream> dst, bool freedst) =>
-      sdlSaveBmpIo(this, dst, freedst);
+  bool saveBmpIo(Pointer<SdlIoStream> dst, {bool closeio = false}) =>
+      sdlSaveBmpIo(this, dst, closeio);
 
   ///
   /// Set the RLE acceleration hint for a surface.

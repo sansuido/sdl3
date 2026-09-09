@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_positional_boolean_parameters
-
 part of '../../../sdl.dart';
 
 extension SdlRendererPointerFromImageEx on Pointer<SdlRenderer> {
@@ -100,8 +98,10 @@ extension SdlRendererPointerFromImageEx on Pointer<SdlRenderer> {
   /// - [IMG_LoadTexture_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/IMG_LoadTexture_IO)
   ///
   /// {@category image}
-  Pointer<SdlTexture> loadTextureIo(Pointer<SdlIoStream> src, bool freesrc) =>
-      imgLoadTextureIo(this, src, freesrc);
+  Pointer<SdlTexture> loadTextureIo(
+    Pointer<SdlIoStream> src, {
+    bool closeio = false,
+  }) => imgLoadTextureIo(this, src, closeio);
 
   ///
   /// Load an image from an SDL data source into a texture.
@@ -165,7 +165,7 @@ extension SdlRendererPointerFromImageEx on Pointer<SdlRenderer> {
   /// {@category image}
   Pointer<SdlTexture> loadTextureTypedIo(
     Pointer<SdlIoStream> src,
-    bool freesrc,
-    String type,
-  ) => imgLoadTextureTypedIo(this, src, freesrc, type);
+    String type, {
+    bool closeio = false,
+  }) => imgLoadTextureTypedIo(this, src, closeio, type);
 }

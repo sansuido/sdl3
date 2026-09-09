@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.11.3] - 2026-09-09
+- SDL3-2026-09-06
+### Changed
+- Made `closeio` default to `false` (optional) across `*_IO` functions to prevent dangling pointers and simplify API calls.
+### Added
+- Added functions and wrapper classes for iostream.
+- Added `example/iostream/interface_demo.dart`.
+- Added `example/render/dot_line_demo.dart`.
+### Updated
+- Dart 3.13.3
+
 ## [2.11.2] - 2026-09-02
 - SDL3-2026-08-30
 ### Changed

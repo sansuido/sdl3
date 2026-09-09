@@ -385,7 +385,7 @@ Pointer<SdlGpuDevice> sdlGetGpuRendererDevice(Pointer<SdlRenderer> renderer) {
 ///
 /// Create a 2D software rendering context for a surface.
 ///
-/// Two other API which can be used to create SDL_Renderer:
+/// Two other APIs which can be used to create SDL_Renderer:
 /// SDL_CreateRenderer() and SDL_CreateWindowAndRenderer(). These can _also_
 /// create a software renderer, but they are intended to be used with an
 /// SDL_Window as the final destination and not an SDL_Surface.
@@ -1605,7 +1605,7 @@ bool sdlGetTextureAlphaModFloat(
 }
 
 ///
-/// Set the blend mode for a texture, used by SDL_RenderTexture().
+/// Set the blend mode for a texture.
 ///
 /// This blend mode is used for any drawing that involves this texture.
 ///

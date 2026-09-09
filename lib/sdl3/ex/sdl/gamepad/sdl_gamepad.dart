@@ -101,8 +101,10 @@ extension SdlGamepadEx on SdlGamepad {
   /// - [SDL_AddGamepadMappingsFromIO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_AddGamepadMappingsFromIO)
   ///
   /// {@category gamepad}
-  static int addMappingsFromIo(Pointer<SdlIoStream> src, bool freerw) =>
-      sdlAddGamepadMappingsFromIo(src, freerw);
+  static int addMappingsFromIo(
+    Pointer<SdlIoStream> src, {
+    bool closeio = false,
+  }) => sdlAddGamepadMappingsFromIo(src, closeio);
 
   ///
   /// Load a set of gamepad mappings from a file.

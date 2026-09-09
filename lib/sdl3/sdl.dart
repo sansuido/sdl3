@@ -120,6 +120,7 @@ part 'ex/sdl/hidapi/sdl_hid_device.dart';
 
 part 'ex/sdl/iostream/lib_sdl_iostream.dart';
 part 'ex/sdl/iostream/sdl_iostream.dart';
+part 'ex/sdl/iostream/sdl_iostream_interface.dart';
 
 part 'ex/sdl/joystick/lib_sdl_joystick.dart';
 part 'ex/sdl/joystick/sdl_joystick.dart';
