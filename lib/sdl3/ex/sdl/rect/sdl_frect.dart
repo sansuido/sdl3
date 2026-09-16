@@ -1,7 +1,7 @@
 part of '../../../sdl.dart';
 
 class SdlxFRect {
-  SdlxFRect({this.x = 0, this.y = 0, this.w = 0, this.h = 0});
+  SdlxFRect([this.x = 0, this.y = 0, this.w = 0, this.h = 0]);
   double x;
   double y;
   double w;
@@ -66,11 +66,14 @@ class SdlxFRect {
     h = size.y;
   }
 
-  SdlxRect toInt() =>
-      SdlxRect(x: x.toInt(), y: y.toInt(), w: w.toInt(), h: h.toInt());
+  SdlxRect toInt() => SdlxRect(x.toInt(), y.toInt(), w.toInt(), h.toInt());
 
-  static SdlxFRect from(double x, double y, double w, double h) =>
-      SdlxFRect(x: x, y: y, w: w, h: h);
+  static SdlxFRect from({
+    double x = 0,
+    double y = 0,
+    double w = 0,
+    double h = 0,
+  }) => SdlxFRect(x, y, w, h);
   static SdlxFRect fromPosition(SdlxFPoint topLeft, SdlxFPoint size) =>
       SdlxFRect()..loadFromPosition(topLeft, size);
   static SdlxFRect fromPoints(SdlxFPoint p1, SdlxFPoint p2) =>
@@ -141,7 +144,7 @@ class SdlxFRect {
       final y0 = math.max(y, other.y);
       final y1 = math.min(y + h, other.y + other.h);
       if (y0 <= y1) {
-        return SdlxFRect(x: x0, y: y0, w: x1 - x0, h: y1 - y0);
+        return SdlxFRect(x0, y0, x1 - x0, y1 - y0);
       }
     }
     return null;

@@ -73,7 +73,7 @@ void render() {
   for (var y = 0; y < gMapData.length; y++) {
     for (var x = 0; x < gMapData[y].length; x++) {
       if (gMapData[y][x] != 0) {
-        rects.add(SdlxFRect(x: x * 64, y: y * 64, w: 64, h: 64));
+        rects.add(SdlxFRect(x * 64, y * 64, 64, 64));
       }
     }
   }

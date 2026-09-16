@@ -61,10 +61,10 @@ int main() {
     const marge = 64;
     final windowSize = window.getSize()!;
     final clip = SdlxFRect(
-      x: marge.toDouble(),
-      y: marge.toDouble(),
-      w: windowSize.w.toDouble() - marge * 2,
-      h: windowSize.h.toDouble() - marge * 2,
+      marge.toDouble(),
+      marge.toDouble(),
+      windowSize.w.toDouble() - marge * 2,
+      windowSize.h.toDouble() - marge * 2,
     );
     renderer
       ..setDrawColor(SdlxColor(0, 0, 0))

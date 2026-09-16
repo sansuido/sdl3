@@ -993,6 +993,7 @@ const SDL_HINT_MAC_CTRL_CLICK_EMULATE_RIGHT_CLICK =
 const SDL_HINT_MAC_OPENGL_ASYNC_DISPATCH = 'SDL_MAC_OPENGL_ASYNC_DISPATCH';
 const SDL_HINT_MAC_OPTION_AS_ALT = 'SDL_MAC_OPTION_AS_ALT';
 const SDL_HINT_MAC_SCROLL_MOMENTUM = 'SDL_MAC_SCROLL_MOMENTUM';
+const SDL_HINT_MAC_USE_GCMOUSE = 'SDL_MAC_USE_GCMOUSE';
 const SDL_HINT_MAC_PRESS_AND_HOLD = 'SDL_MAC_PRESS_AND_HOLD';
 const SDL_HINT_MAIN_CALLBACK_RATE = 'SDL_MAIN_CALLBACK_RATE';
 const SDL_HINT_MOUSE_AUTO_CAPTURE = 'SDL_MOUSE_AUTO_CAPTURE';
@@ -1780,7 +1781,7 @@ const SDL_PACKEDLAYOUT_1010102 = 8;
 //const SDL_PIXELORDER = (format) (((format) >> 20) & 0x0);
 //const SDL_PIXELLAYOUT = (format) (((format) >> 16) & 0x0);
 //const SDL_BITSPERPIXEL = (format) (SDL_ISPIXELFORMAT_FOURCC(format) ? 0 : (((format) >> 8) & 0xFF));
-//const SDL_BYTESPERPIXEL = (format) (SDL_ISPIXELFORMAT_FOURCC(format) ? ((((format) == SDL_PIXELFORMAT_YUY2) || ((format) == SDL_PIXELFORMAT_UYVY) || ((format) == SDL_PIXELFORMAT_YVYU) || ((format) == SDL_PIXELFORMAT_P010) || ((format) == SDL_PIXELFORMAT_P416)) ? 2 : 1) : (((format) >> 0) & 0xFF));
+//const SDL_BYTESPERPIXEL = (format) (SDL_ISPIXELFORMAT_FOURCC(format) ? ((((format) == SDL_PIXELFORMAT_YUY2) || ((format) == SDL_PIXELFORMAT_UYVY) || ((format) == SDL_PIXELFORMAT_YVYU) || ((format) == SDL_PIXELFORMAT_P010) || ((format) == SDL_PIXELFORMAT_I0FL) || ((format) == SDL_PIXELFORMAT_I4FL)) ? 2 : 1) : (((format) >> 0) & 0xFF));
 //const SDL_ISPIXELFORMAT_INDEXED = (format) (!SDL_ISPIXELFORMAT_FOURCC(format) && ((SDL_PIXELTYPE(format) == SDL_PIXELTYPE_INDEX1) || (SDL_PIXELTYPE(format) == SDL_PIXELTYPE_INDEX2) || (SDL_PIXELTYPE(format) == SDL_PIXELTYPE_INDEX4) || (SDL_PIXELTYPE(format) == SDL_PIXELTYPE_INDEX8)));
 //const SDL_ISPIXELFORMAT_PACKED = (format) (!SDL_ISPIXELFORMAT_FOURCC(format) && ((SDL_PIXELTYPE(format) == SDL_PIXELTYPE_PACKED8) || (SDL_PIXELTYPE(format) == SDL_PIXELTYPE_PACKED16) || (SDL_PIXELTYPE(format) == SDL_PIXELTYPE_PACKED32)));
 //const SDL_ISPIXELFORMAT_ARRAY = (format) (!SDL_ISPIXELFORMAT_FOURCC(format) && ((SDL_PIXELTYPE(format) == SDL_PIXELTYPE_ARRAYU8) || (SDL_PIXELTYPE(format) == SDL_PIXELTYPE_ARRAYU16) || (SDL_PIXELTYPE(format) == SDL_PIXELTYPE_ARRAYU32) || (SDL_PIXELTYPE(format) == SDL_PIXELTYPE_ARRAYF16) || (SDL_PIXELTYPE(format) == SDL_PIXELTYPE_ARRAYF32)));
@@ -1850,9 +1851,10 @@ const SDL_PIXELFORMAT_UYVY = 0x59565955;
 const SDL_PIXELFORMAT_YVYU = 0x55595659;
 const SDL_PIXELFORMAT_NV12 = 0x3231564e;
 const SDL_PIXELFORMAT_NV21 = 0x3132564e;
+const SDL_PIXELFORMAT_I444 = 0x34343449;
 const SDL_PIXELFORMAT_P010 = 0x30313050;
-const SDL_PIXELFORMAT_P408 = 0x38303450;
-const SDL_PIXELFORMAT_P416 = 0x36313450;
+const SDL_PIXELFORMAT_I0FL = 0x4c463049;
+const SDL_PIXELFORMAT_I4FL = 0x4c463449;
 const SDL_PIXELFORMAT_EXTERNAL_OES = 0x2053454f;
 const SDL_PIXELFORMAT_MJPG = 0x47504a4d;
 const SDL_COLOR_TYPE_UNKNOWN = 0;
@@ -2171,8 +2173,16 @@ const SDL_PROP_TEXTURE_CREATE_OPENGLES2_TEXTURE_V_NUMBER =
     'SDL.texture.create.opengles2.texture_v';
 const SDL_PROP_TEXTURE_CREATE_VULKAN_TEXTURE_NUMBER =
     'SDL.texture.create.vulkan.texture';
+const SDL_PROP_TEXTURE_CREATE_VULKAN_TEXTURE_U_NUMBER =
+    'SDL.texture.create.vulkan.texture_u';
+const SDL_PROP_TEXTURE_CREATE_VULKAN_TEXTURE_V_NUMBER =
+    'SDL.texture.create.vulkan.texture_v';
 const SDL_PROP_TEXTURE_CREATE_VULKAN_LAYOUT_NUMBER =
     'SDL.texture.create.vulkan.layout';
+const SDL_PROP_TEXTURE_CREATE_VULKAN_USAGE_NUMBER =
+    'SDL.texture.create.vulkan.usage';
+const SDL_PROP_TEXTURE_CREATE_VULKAN_ANDROID_HARDWARE_BUFFER_POINTER =
+    'SDL.texture.create.vulkan.android_hardware_buffer';
 const SDL_PROP_TEXTURE_CREATE_GPU_TEXTURE_POINTER =
     'SDL.texture.create.gpu.texture';
 const SDL_PROP_TEXTURE_CREATE_GPU_TEXTURE_UV_POINTER =
@@ -2219,6 +2229,8 @@ const SDL_PROP_TEXTURE_OPENGLES2_TEXTURE_V_NUMBER =
 const SDL_PROP_TEXTURE_OPENGLES2_TEXTURE_TARGET_NUMBER =
     'SDL.texture.opengles2.target';
 const SDL_PROP_TEXTURE_VULKAN_TEXTURE_NUMBER = 'SDL.texture.vulkan.texture';
+const SDL_PROP_TEXTURE_VULKAN_TEXTURE_U_NUMBER = 'SDL.texture.vulkan.texture_u';
+const SDL_PROP_TEXTURE_VULKAN_TEXTURE_V_NUMBER = 'SDL.texture.vulkan.texture_v';
 const SDL_PROP_TEXTURE_GPU_TEXTURE_POINTER = 'SDL.texture.gpu.texture';
 const SDL_PROP_TEXTURE_GPU_TEXTURE_UV_POINTER = 'SDL.texture.gpu.texture_uv';
 const SDL_PROP_TEXTURE_GPU_TEXTURE_U_POINTER = 'SDL.texture.gpu.texture_u';
@@ -2228,7 +2240,7 @@ const SDL_RENDERER_VSYNC_ADAPTIVE = -1;
 const SDL_DEBUG_TEXT_FONT_CHARACTER_SIZE = 8;
 //const SDL_revision_h_ = ;
 const SDL_REVISION =
-    'SDL-3.5.0-release-3.4.0-1381-gc1ef7793c (" SDL_VENDOR_INFO ")';
+    'SDL-3.5.0-release-3.4.0-1429-g26b37f5d1 (" SDL_VENDOR_INFO ")';
 //const SDL_scancode_h_ = ;
 const SDL_SCANCODE_UNKNOWN = 0;
 const SDL_SCANCODE_A = 4;
@@ -4052,6 +4064,7 @@ class SdlkHint {
   static const macOpenglAsyncDispatch = SDL_HINT_MAC_OPENGL_ASYNC_DISPATCH;
   static const macOptionAsAlt = SDL_HINT_MAC_OPTION_AS_ALT;
   static const macScrollMomentum = SDL_HINT_MAC_SCROLL_MOMENTUM;
+  static const macUseGcmouse = SDL_HINT_MAC_USE_GCMOUSE;
   static const macPressAndHold = SDL_HINT_MAC_PRESS_AND_HOLD;
   static const mainCallbackRate = SDL_HINT_MAIN_CALLBACK_RATE;
   static const mouseAutoCapture = SDL_HINT_MOUSE_AUTO_CAPTURE;
@@ -4925,9 +4938,10 @@ class SdlkPixelformat {
   static const yvyu = SDL_PIXELFORMAT_YVYU;
   static const nv12 = SDL_PIXELFORMAT_NV12;
   static const nv21 = SDL_PIXELFORMAT_NV21;
+  static const i444 = SDL_PIXELFORMAT_I444;
   static const p010 = SDL_PIXELFORMAT_P010;
-  static const p408 = SDL_PIXELFORMAT_P408;
-  static const p416 = SDL_PIXELFORMAT_P416;
+  static const i0Fl = SDL_PIXELFORMAT_I0FL;
+  static const i4Fl = SDL_PIXELFORMAT_I4FL;
   static const externalOes = SDL_PIXELFORMAT_EXTERNAL_OES;
   static const mjpg = SDL_PIXELFORMAT_MJPG;
 }
@@ -5237,8 +5251,16 @@ class SdlkPropTexture {
       SDL_PROP_TEXTURE_CREATE_OPENGLES2_TEXTURE_V_NUMBER;
   static const createVulkanTextureNumber =
       SDL_PROP_TEXTURE_CREATE_VULKAN_TEXTURE_NUMBER;
+  static const createVulkanTextureUNumber =
+      SDL_PROP_TEXTURE_CREATE_VULKAN_TEXTURE_U_NUMBER;
+  static const createVulkanTextureVNumber =
+      SDL_PROP_TEXTURE_CREATE_VULKAN_TEXTURE_V_NUMBER;
   static const createVulkanLayoutNumber =
       SDL_PROP_TEXTURE_CREATE_VULKAN_LAYOUT_NUMBER;
+  static const createVulkanUsageNumber =
+      SDL_PROP_TEXTURE_CREATE_VULKAN_USAGE_NUMBER;
+  static const createVulkanAndroidHardwareBufferPointer =
+      SDL_PROP_TEXTURE_CREATE_VULKAN_ANDROID_HARDWARE_BUFFER_POINTER;
   static const createGpuTexturePointer =
       SDL_PROP_TEXTURE_CREATE_GPU_TEXTURE_POINTER;
   static const createGpuTextureUvPointer =
@@ -5285,6 +5307,8 @@ class SdlkPropTexture {
   static const opengles2TextureTargetNumber =
       SDL_PROP_TEXTURE_OPENGLES2_TEXTURE_TARGET_NUMBER;
   static const vulkanTextureNumber = SDL_PROP_TEXTURE_VULKAN_TEXTURE_NUMBER;
+  static const vulkanTextureUNumber = SDL_PROP_TEXTURE_VULKAN_TEXTURE_U_NUMBER;
+  static const vulkanTextureVNumber = SDL_PROP_TEXTURE_VULKAN_TEXTURE_V_NUMBER;
   static const gpuTexturePointer = SDL_PROP_TEXTURE_GPU_TEXTURE_POINTER;
   static const gpuTextureUvPointer = SDL_PROP_TEXTURE_GPU_TEXTURE_UV_POINTER;
   static const gpuTextureUPointer = SDL_PROP_TEXTURE_GPU_TEXTURE_U_POINTER;

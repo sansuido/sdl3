@@ -1,5 +1,4 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-// ignore_for_file: avoid_positional_boolean_parameters
 part of '../sdl_ttf.dart';
 
 // typedef bool (SDLCALL *TTF_TextEngineCreateText)(void *userdata, TTF_Text *text)

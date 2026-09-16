@@ -101,11 +101,11 @@ void renderer() {
     ..clear()
     // draw player
     ..setDrawColor(SdlxColor(0xff, 0, 0))
-    ..fillRect(SdlxFRect(x: gPlayer.x - 24, y: gPlayer.y - 24, w: 48, h: 48))
+    ..fillRect(SdlxFRect(gPlayer.x - 24, gPlayer.y - 24, 48, 48))
     // shot
     ..setDrawColor(SdlxColor(0xff, 0xff, 0xff));
   for (final shot in gShotList) {
-    gRenderer.fillRect(SdlxFRect(x: shot.x - 8, y: shot.y - 8, w: 16, h: 16));
+    gRenderer.fillRect(SdlxFRect(shot.x - 8, shot.y - 8, 16, 16));
   }
   // term
   gRenderer.present();

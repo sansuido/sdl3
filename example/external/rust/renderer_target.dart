@@ -47,7 +47,7 @@ int main() {
       }
     }
     angle += 0.5;
-    final dstrect = SdlxFRect(w: 400, h: 300);
+    final dstrect = SdlxFRect(0, 0, 400, 300);
     renderer
       ..setTarget(texture)
       ..clear()

@@ -180,10 +180,10 @@ class Game {
               renderer.texture(
                 texture,
                 dstrect: SdlxFRect(
-                  x: drawX.toDouble(),
-                  y: drawY.toDouble(),
-                  w: size.w,
-                  h: size.h,
+                  drawX.toDouble(),
+                  drawY.toDouble(),
+                  size.w,
+                  size.h,
                 ),
               );
               drawX += size.w.toInt();
@@ -200,10 +200,10 @@ class Game {
         renderer.texture(
           pressAnyKeyTexture,
           dstrect: SdlxFRect(
-            x: drawX.toDouble(),
-            y: drawY.toDouble(),
-            w: size.w,
-            h: size.h,
+            drawX.toDouble(),
+            drawY.toDouble(),
+            size.w,
+            size.h,
           ),
         );
       }

@@ -171,44 +171,44 @@ yamahara
 - [x] [SdlGamepadBinding](./lib/sdl3/ex/sdl/gamepad/sdl_gamepad_binding.dart)
 ### gpu
 - [x] [SdlGpuDevice](./lib/sdl3/ex/sdl/gpu/sdl_gpu_device.dart)
-- [ ] SdlGpuBuffer
-- [ ] SdlGpuTransferBuffer
-- [ ] SdlGpuTexture
-- [ ] SdlGpuSampler
-- [ ] SdlGpuShader
-- [ ] SdlGpuComputePipeline
-- [ ] SdlGpuGraphicsPipeline
+- [x] ~~SdlGpuBuffer~~ Opaque.
+- [x] ~~SdlGpuTransferBuffer~~ Opaque.
+- [x] ~~SdlGpuTexture~~ Opaque.
+- [x] ~~SdlGpuSampler~~ Opaque.
+- [x] ~~SdlGpuShader~~ Opaque.
+- [x] ~~SdlGpuComputePipeline~~ Opaque.
+- [x] ~~SdlGpuGraphicsPipeline~~ Opaque.
 - [x] [SdlGpuCommandBuffer](./lib/sdl3/ex/sdl/gpu/sdl_gpu_command_buffer.dart)
 - [x] [SdlGpuRenderPass](./lib/sdl3/ex/sdl/gpu/sdl_gpu_render_pass.dart)
 - [x] [SdlGpuComputePass](./lib/sdl3/ex/sdl/gpu/sdl_gpu_compute_pass.dart)
 - [x] [SdlGpuCopyPass](./lib/sdl3/ex/sdl/gpu/sdl_gpu_copy_pass.dart)
-- [ ] SdlGpuFence
+- [x] ~~SdlGpuFence~~ Opaque.
 - [x] [SdlGpuViewport](./lib/sdl3/ex/sdl/gpu/sdl_gpu_viewport.dart)
 - [x] [SdlGpuTextureTransferInfo](./lib/sdl3/ex/sdl/gpu/sdl_gpu_texture_transfer_info.dart)
 - [x] [SdlGpuTransferBufferLocation](./lib/sdl3/ex/sdl/gpu/sdl_gpu_transfer_buffer_location.dart)
 - [x] [SdlGpuTextureLocation](./lib/sdl3/ex/sdl/gpu/sdl_gpu_texture_location.dart)
 - [x] [SdlGpuTextureRegion](./lib/sdl3/ex/sdl/gpu/sdl_gpu_texture_region.dart)
-- [ ] SdlGpuBlitRegion
+- [x] [SdlGpuBlitRegion](./lib/sdl3/ex/sdl/gpu/sdl_gpu_blit_info.dart)
 - [x] [SdlGpuBufferLocation](./lib/sdl3/ex/sdl/gpu/sdl_gpu_buffer_location.dart)
 - [x] [SdlGpuBufferRegion](./lib/sdl3/ex/sdl/gpu/sdl_gpu_buffer_region.dart)
 - [ ] SdlGpuIndirectDrawCommand
 - [ ] SdlGpuIndexedIndirectDrawCommand
 - [ ] SdlGpuIndirectDispatchCommand
 - [x] [SdlGpuSamplerCreateInfo](./lib/sdl3/ex/sdl/gpu/sdl_gpu_sampler_create_info.dart)
-- [ ] SdlGpuVertexBufferDescription
-- [ ] SdlGpuVertexAttribute
-- [ ] SdlGpuVertexInputState
-- [ ] SdlGpuStencilOpState
-- [ ] SdlGpuColorTargetBlendState
+- [x] [SdlGpuVertexBufferDescription](./lib/sdl3/ex/sdl/gpu/sdl_gpu_graphics_pipeline_create_info.dart)
+- [x] [SdlGpuVertexAttribute](./lib/sdl3/ex/sdl/gpu/sdl_gpu_graphics_pipeline_create_info.dart)
+- [x] [SdlGpuVertexInputState](./lib/sdl3/ex/sdl/gpu/sdl_gpu_graphics_pipeline_create_info.dart)
+- [x] [SdlGpuStencilOpState](./lib/sdl3/ex/sdl/gpu/sdl_gpu_graphics_pipeline_create_info.dart)
+- [x] [SdlGpuColorTargetBlendState](./lib/sdl3/ex/sdl/gpu/sdl_gpu_graphics_pipeline_create_info.dart)
 - [x] [SdlGpuShaderCreateInfo](./lib/sdl3/ex/sdl/gpu/sdl_gpu_shader_create_info.dart)
 - [x] [SdlGpuTextureCreateInfo](./lib/sdl3/ex/sdl/gpu/sdl_gpu_texture_create_info.dart)
 - [x] [SdlGpuBufferCreateInfo](./lib/sdl3/ex/sdl/gpu/sdl_gpu_buffer_create_info.dart)
 - [x] [SdlGpuTransferBufferCreateInfo](./lib/sdl3/ex/sdl/gpu/sdl_gpu_transfer_buffer_create_info.dart)
-- [ ] SdlGpuRasterizerState
-- [ ] SdlGpuMultisampleState
-- [ ] SdlGpuDepthStencilState
-- [ ] SdlGpuColorTargetDescription
-- [ ] SdlGpuGraphicsPipelineTargetInfo
+- [x] [SdlGpuRasterizerState](./lib/sdl3/ex/sdl/gpu/sdl_gpu_graphics_pipeline_create_info.dart)
+- [x] [SdlGpuMultisampleState](./lib/sdl3/ex/sdl/gpu/sdl_gpu_graphics_pipeline_create_info.dart)
+- [x] [SdlGpuDepthStencilState](./lib/sdl3/ex/sdl/gpu/sdl_gpu_graphics_pipeline_create_info.dart)
+- [x] [SdlGpuColorTargetDescription](./lib/sdl3/ex/sdl/gpu/sdl_gpu_graphics_pipeline_create_info.dart)
+- [x] [SdlGpuGraphicsPipelineTargetInfo](./lib/sdl3/ex/sdl/gpu/sdl_gpu_graphics_pipeline_create_info.dart)
 - [x] [SdlGpuGraphicsPipelineCreateInfo](./lib/sdl3/ex/sdl/gpu/sdl_gpu_graphics_pipeline_create_info.dart)
 - [x] [SdlGpuComputePipelineCreateInfo](./lib/sdl3/ex/sdl/gpu/sdl_gpu_compute_pipeline_create_info.dart)
 - [x] [SdlGpuColorTargetInfo](./lib/sdl3/ex/sdl/gpu/sdl_gpu_color_target_info.dart)

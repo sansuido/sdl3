@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_positional_boolean_parameters
-
 part of '../../../sdl.dart';
 
 extension SdlTrayEntryPointerEx on Pointer<SdlTrayEntry> {

@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_positional_boolean_parameters
-
 part of '../../sdl_mixer.dart';
 
 extension MixMixerEx on MixMixer {

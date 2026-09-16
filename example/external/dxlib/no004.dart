@@ -159,10 +159,10 @@ void render() {
       if (gMapData[drawY][drawX] == 0) {
         gRenderer.fillRect(
           SdlxFRect(
-            x: x * gMapSize + gScrollX,
-            y: y * gMapSize + gScrollY,
-            w: gMapSize.toDouble(),
-            h: gMapSize.toDouble(),
+            x * gMapSize + gScrollX,
+            y * gMapSize + gScrollY,
+            gMapSize.toDouble(),
+            gMapSize.toDouble(),
           ),
         );
       }
@@ -173,10 +173,10 @@ void render() {
     ..setDrawColor(SdlxColor(0xff, 0xff, 0xff))
     ..fillRect(
       SdlxFRect(
-        x: (gPlayerX - mapDrawPointX) * gMapSize.toDouble(),
-        y: (gPlayerY - mapDrawPointY) * gMapSize.toDouble(),
-        w: gMapSize.toDouble(),
-        h: gMapSize.toDouble(),
+        (gPlayerX - mapDrawPointX) * gMapSize.toDouble(),
+        (gPlayerY - mapDrawPointY) * gMapSize.toDouble(),
+        gMapSize.toDouble(),
+        gMapSize.toDouble(),
       ),
     )
     // term

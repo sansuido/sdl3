@@ -82,6 +82,16 @@ class SdlxFColor {
     r = _itod(items[0]);
   }
 
+  SdlxFColor moveTowards(SdlxFColor target, double dt, {double speed = 1.0}) {
+    final factor = (dt * speed).clamp(0.0, 1.0);
+    return SdlxFColor(
+      r + (target.r - r) * factor,
+      g + (target.g - g) * factor,
+      b + (target.b - b) * factor,
+      a + (target.a - a) * factor,
+    );
+  }
+
   Pointer<SdlFColor> calloc() {
     final pointer = ffi.calloc<SdlFColor>();
     pointer.ref.r = r;

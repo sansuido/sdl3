@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.11.4] - 2026-09-16
+- SDL3-2026-09-13
+### Changed
+- Refactor: Avoid positional boolean parameters in public/internal APIs to comply with `avoid_positional_boolean_parameters` linter rule.
+- Changed `SdlxFRect` (or `SdlxRect`) constructor to use optional positional parameters instead of named arguments (`SdlxFRect([x, y, w, h])`).
+### Updated
+- Dart 3.13.4
+
 ## [2.11.3] - 2026-09-09
 - SDL3-2026-09-06
 ### Changed

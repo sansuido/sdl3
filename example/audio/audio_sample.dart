@@ -127,16 +127,16 @@ int main() {
     wav.resume();
     final bar = math.min(gScreenWidth, gScreenHeight) / 2;
     final squareRect = SdlxFRect(
-      x: gScreenWidth / 2 - bar / 2,
-      y: gScreenHeight / 2 - bar / 2,
-      w: bar,
-      h: bar,
+      gScreenWidth / 2 - bar / 2,
+      gScreenHeight / 2 - bar / 2,
+      bar,
+      bar,
     );
     final pauseRect1 = SdlxFRect(
-      x: squareRect.x + (squareRect.w - 40 * 3) / 2,
-      y: squareRect.y + squareRect.h / 4,
-      w: 40,
-      h: squareRect.h / 2,
+      squareRect.x + (squareRect.w - 40 * 3) / 2,
+      squareRect.y + squareRect.h / 4,
+      40,
+      squareRect.h / 2,
     );
     final pauseRect2 = SdlxFRect.fromRect(pauseRect1)..x += 40 * 2;
     var running = true;

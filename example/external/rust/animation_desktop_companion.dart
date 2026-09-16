@@ -87,13 +87,13 @@ int main() {
   // King - walk animation
   // Soldier - walk animation
   final charas = <Chara>[
-    Chara(SdlxFRect(w: 32, h: 32), SdlxFRect(w: 32 * 4, h: 32 * 4)),
+    Chara(SdlxFRect(0, 0, 32, 32), SdlxFRect(0, 0, 32 * 4, 32 * 4)),
     Chara(
-      SdlxFRect(y: 32, w: 32, h: 32),
-      SdlxFRect(w: 32 * 4, h: 32 * 4),
+      SdlxFRect(0, 32, 32, 32),
+      SdlxFRect(0, 0, 32 * 4, 32 * 4),
       flip: SDL_FLIP_HORIZONTAL,
     ),
-    Chara(SdlxFRect(y: 64, w: 32, h: 32), SdlxFRect(w: 32 * 4, h: 32 * 4)),
+    Chara(SdlxFRect(0, 64, 32, 32), SdlxFRect(0, 0, 32 * 4, 32 * 4)),
   ];
   charas[0].dstrect.center = SdlxFPoint(-64, 120);
   charas[1].dstrect.center = SdlxFPoint(0, 240);

@@ -1,5 +1,4 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-// ignore_for_file: avoid_positional_boolean_parameters
 part of '../sdl.dart';
 
 // typedef SDL_AssertState (SDLCALL *SDL_AssertionHandler)( const SDL_AssertData *data, void *userdata)

@@ -75,10 +75,10 @@ int main() {
       // Square dimensions: Half of the min(gScreenWidth, gScreenHeight)
       // Square position: In the middle of the screen
       final squareRect = SdlxFRect(
-        x: gScreenWidth / 2 - gScreenHeight / 2 / 2,
-        y: gScreenHeight / 2 - gScreenHeight / 2 / 2,
-        w: gScreenHeight / 2,
-        h: gScreenHeight / 2,
+        gScreenWidth / 2 - gScreenHeight / 2 / 2,
+        gScreenHeight / 2 - gScreenHeight / 2 / 2,
+        gScreenHeight / 2,
+        gScreenHeight / 2,
       );
       Pointer<TtfFont> font = nullptr;
       font = TtfFontEx.open(gFontPath, 40);
@@ -117,10 +117,10 @@ int main() {
         }
         // Get text dimensions
         textRect = SdlxFRect(
-          x: (gScreenWidth - textSurface.ref.w) / 2,
-          y: squareRect.y - textSurface.ref.h - 10,
-          w: textSurface.ref.w.toDouble(),
-          h: textSurface.ref.h.toDouble(),
+          (gScreenWidth - textSurface.ref.w) / 2,
+          squareRect.y - textSurface.ref.h - 10,
+          textSurface.ref.w.toDouble(),
+          textSurface.ref.h.toDouble(),
         );
         textSurface.destroy();
       }

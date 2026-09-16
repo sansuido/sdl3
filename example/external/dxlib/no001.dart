@@ -83,10 +83,10 @@ int main() {
         ..setDrawColor(SdlxColor(0, 255, 0))
         ..fillRect(
           SdlxFRect(
-            x: gPlayerX,
-            y: gPlayerY,
-            w: gPlayerWidth.toDouble(),
-            h: gPlayerHeight.toDouble(),
+            gPlayerX,
+            gPlayerY,
+            gPlayerWidth.toDouble(),
+            gPlayerHeight.toDouble(),
           ),
         )
         ..present();

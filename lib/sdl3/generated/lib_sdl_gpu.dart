@@ -1,5 +1,4 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-// ignore_for_file: avoid_positional_boolean_parameters
 // ignore_for_file: comment_references
 part of '../sdl.dart';
 

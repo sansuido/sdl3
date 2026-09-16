@@ -1,1 +1,4 @@
+analyzer:
+  errors:
+    avoid_positional_boolean_parameters: ignore
 include: package:halildurmus_lints/dart.yaml

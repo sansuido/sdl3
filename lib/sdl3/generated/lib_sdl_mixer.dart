@@ -1,5 +1,4 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-// ignore_for_file: avoid_positional_boolean_parameters
 part of '../sdl_mixer.dart';
 
 // typedef void (SDLCALL *MIX_TrackStoppedCallback)(void *userdata, MIX_Track *track)
@@ -549,9 +548,9 @@ void mixLockMixer(Pointer<MixMixer> mixer) {
 /// internal state another thread. Those other threads will block until the
 /// mixer is unlocked again.
 ///
-/// Under the hood, this function calls SDL_LockMutex(), so all the same rules
-/// apply: the lock can be recursive, it must be unlocked the same number of
-/// times from the same thread that locked it, etc.
+/// Under the hood, this function calls SDL_UnlockMutex(), so all the same
+/// rules apply: the lock can be recursive, it must be unlocked the same number
+/// of times from the same thread that locked it, etc.
 ///
 /// Unlocking a NULL mixer is a safe no-op.
 ///
