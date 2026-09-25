@@ -402,6 +402,12 @@ int sdlGetNumAllocations() {
 /// SDL_setenv_unsafe() or SDL_unsetenv_unsafe() if you want changes to persist
 /// in the C runtime environment after SDL_Quit().
 ///
+/// Note that on Windows, the variable names pulled in from the system at
+/// startup have their ASCII values uppercased, to match what most platforms
+/// expect even though the Windows system environment table is
+/// case-insensitive. Once those uppercased variable names are in an
+/// SDL_Environment, SDL treats them as case-sensitive.
+///
 /// \returns a pointer to the environment for the process or NULL on failure;
 /// call SDL_GetError() for more information.
 ///
@@ -432,7 +438,13 @@ Pointer<SdlEnvironment> sdlGetEnvironment() {
 }
 
 ///
-/// Create a set of environment variables
+/// Create a set of environment variables.
+///
+/// Note that on Windows, the variable names pulled in from the system, if
+/// `populated` is true, have their ASCII values uppercased, to match what most
+/// platforms expect even though the Windows system environment table is
+/// case-insensitive. Once those uppercased variable names are in an
+/// SDL_Environment, SDL treats them as case-sensitive.
 ///
 /// \param populated true to initialize it from the C runtime environment,
 /// false to create an empty environment.

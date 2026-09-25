@@ -860,6 +860,149 @@ bool sdlSendAndroidMessage(int command, int param) {
 }
 
 ///
+/// Query OpenHarmony API level of the current device.
+///
+/// - API level 20: OpenHarmony 6.0.0
+/// - API level 18: OpenHarmony 5.1.0
+/// - API level 16: OpenHarmony 5.0.4
+/// - API level 15: OpenHarmony 5.0.3
+/// - API level 14: OpenHarmony 5.0.2
+/// - API level 13: OpenHarmony 5.0.1
+/// - API level 12: OpenHarmony 5.0.0
+/// - API level 11: OpenHarmony 4.1.0
+/// - API level 10: OpenHarmony 4.0.0
+/// - API level 9: OpenHarmony 3.2.0
+///
+/// \returns the OpenHarmony API level.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.6.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC int SDLCALL SDL_GetOpenHarmonySDKVersion(void)
+/// ```
+///
+/// See also:
+/// - [SDL_GetOpenHarmonySDKVersion - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetOpenHarmonySDKVersion)
+///
+/// {@category system}
+int sdlGetOpenHarmonySdkVersion() {
+  final sdlGetOpenHarmonySdkVersionLookupFunction = _libSdl
+      .lookupFunction<Int32 Function(), int Function()>(
+        'SDL_GetOpenHarmonySDKVersion',
+      );
+  return sdlGetOpenHarmonySdkVersionLookupFunction();
+}
+
+///
+/// Get the path used for internal storage for this OpenHarmony application.
+///
+/// This path is unique to your application and cannot be written to by other
+/// applications.
+///
+/// Your internal storage path is typically: `/data/storage/el2/base/files`.
+///
+/// \returns the path used for internal storage or NULL on failure; call
+/// SDL_GetError() for more information.
+///
+/// \since This function is available since SDL 3.6.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC const char * SDLCALL SDL_GetOpenHarmonyInternalStoragePath(void)
+/// ```
+///
+/// See also:
+/// - [SDL_GetOpenHarmonyInternalStoragePath - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetOpenHarmonyInternalStoragePath)
+///
+/// {@category system}
+String? sdlGetOpenHarmonyInternalStoragePath() {
+  final sdlGetOpenHarmonyInternalStoragePathLookupFunction = _libSdl
+      .lookupFunction<Pointer<Utf8> Function(), Pointer<Utf8> Function()>(
+        'SDL_GetOpenHarmonyInternalStoragePath',
+      );
+  final result = sdlGetOpenHarmonyInternalStoragePathLookupFunction();
+  if (result == nullptr) {
+    return null;
+  }
+  return result.toDartString();
+}
+
+///
+/// Request permissions at runtime, asynchronously.
+///
+/// You do not need to call this for built-in functionality of SDL; recording
+/// from a microphone or reading images from a camera, using standard SDL APIs,
+/// will manage permission requests for you.
+///
+/// This function never blocks. Instead, the app-supplied callback will be
+/// called when a decision has been made. This callback may happen on a
+/// different thread, and possibly much later, as it might wait on a user to
+/// respond to a system dialog. If permission has already been granted for a
+/// specific entitlement, the callback will still fire, probably on the current
+/// thread and before this function returns.
+///
+/// If the request submission fails, this function returns false and the
+/// callback will NOT be called, but this should only happen in catastrophic
+/// conditions, like memory running out. Normally there will be a yes or no to
+/// the request through the callback.
+///
+/// For the `permission` parameter, choose a value from here:
+///
+/// https://developer.huawei.com/consumer/en/doc/harmonyos-guides/app-permissions
+///
+/// Strings should be in the form of "ohos.permission.PERMISSION_NAME".
+///
+/// \param permission the permission to request.
+/// \param cb the callback to trigger when the request has a response.
+/// \param userdata an app-controlled pointer that is passed to the callback.
+/// \returns true if the request was submitted, false if there was an error
+/// submitting. The result of the request is only ever reported
+/// through the callback, not this return value.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.6.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL SDL_RequestOpenHarmonyPermission(const char *permission, SDL_RequestOpenHarmonyPermissionCallback cb, void *userdata)
+/// ```
+///
+/// See also:
+/// - [SDL_RequestOpenHarmonyPermission - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_RequestOpenHarmonyPermission)
+///
+/// {@category system}
+bool sdlRequestOpenHarmonyPermission(
+  String? permission,
+  Pointer<NativeFunction<SdlRequestOpenHarmonyPermissionCallback>> cb,
+  Pointer<Void> userdata,
+) {
+  final sdlRequestOpenHarmonyPermissionLookupFunction = _libSdl
+      .lookupFunction<
+        Bool Function(
+          Pointer<Utf8> permission,
+          Pointer<NativeFunction<SdlRequestOpenHarmonyPermissionCallback>> cb,
+          Pointer<Void> userdata,
+        ),
+        bool Function(
+          Pointer<Utf8> permission,
+          Pointer<NativeFunction<SdlRequestOpenHarmonyPermissionCallback>> cb,
+          Pointer<Void> userdata,
+        )
+      >('SDL_RequestOpenHarmonyPermission');
+  final permissionPointer = permission != null
+      ? permission.toNativeUtf8()
+      : nullptr;
+  final result = sdlRequestOpenHarmonyPermissionLookupFunction(
+    permissionPointer,
+    cb,
+    userdata,
+  );
+  calloc.free(permissionPointer);
+  return result;
+}
+
+///
 /// Query if the current device is a phone.
 ///
 /// If SDL can't determine this, it will return false.

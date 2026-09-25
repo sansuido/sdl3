@@ -947,11 +947,17 @@ Pointer<SdlTexture> sdlCreateTextureFromSurface(
 /// texture.
 /// - `SDL_PROP_TEXTURE_CREATE_VULKAN_LAYOUT_NUMBER`: the VkImageLayout for the
 /// VkImage, defaults to VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL.
-/// - `SDL_PROP_TEXTURE_CREATE_VULKAN_USAGE_NUMBER`: additional VK_IMAGE_USAGE bits that should be used when creating the texture.
-/// VkImage, defaults to VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL.
-/// - `SDL_PROP_TEXTURE_CREATE_VULKAN_ANDROID_HARDWARE_BUFFER_POINTER`: the AHardwareBuffer to sample from, if you want to use an existing Android hardware buffer as the texture. You must use SDL_PIXELFORMAT_EXTERNAL_OES for the texture format.
-/// You can't directly update the texture or use it as a render target. If the Android buffer contents change, you must recreate the texture to pick up the changes.
-/// The texture holds a reference to the buffer, so you can release your own reference once the texture has been created.
+/// - `SDL_PROP_TEXTURE_CREATE_VULKAN_USAGE_NUMBER`: additional VK_IMAGE_USAGE
+/// bits that should be used when creating the texture. VkImage, defaults to
+/// VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL.
+/// - `SDL_PROP_TEXTURE_CREATE_VULKAN_ANDROID_HARDWARE_BUFFER_POINTER`: the
+/// AHardwareBuffer to sample from, if you want to use an existing Android
+/// hardware buffer as the texture. You must use SDL_PIXELFORMAT_EXTERNAL_OES
+/// for the texture format. You can't directly update the texture or use it
+/// as a render target. If the Android buffer contents change, you must
+/// recreate the texture to pick up the changes. The texture holds a
+/// reference to the buffer, so you can release your own reference once the
+/// texture has been created.
 ///
 /// With the GPU renderer:
 ///
@@ -2608,6 +2614,7 @@ bool sdlConvertEventToRenderCoordinates(
 ///
 /// \sa SDL_GetRenderViewport
 /// \sa SDL_RenderViewportSet
+/// \sa SDL_SetRenderViewportFloat
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetRenderViewport(SDL_Renderer *renderer, const SDL_Rect *rect)
@@ -2644,6 +2651,7 @@ bool sdlSetRenderViewport(
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
+/// \sa SDL_GetRenderViewportFloat
 /// \sa SDL_RenderViewportSet
 /// \sa SDL_SetRenderViewport
 ///
@@ -2668,6 +2676,89 @@ bool sdlGetRenderViewport(
 }
 
 ///
+/// Set the drawing area for rendering on the current target.
+///
+/// Drawing will clip to this area (separately from any clipping done with
+/// SDL_SetRenderClipRect), and the top left of the area will become coordinate
+/// (0, 0) for future drawing commands.
+///
+/// The area's width and height must be >= 0.
+///
+/// Each render target has its own viewport. This function sets the viewport
+/// for the current render target.
+///
+/// \param renderer the rendering context.
+/// \param rect the SDL_FRect structure representing the drawing area, or NULL
+/// to set the viewport to the entire target.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety This function should only be called on the main thread.
+///
+/// \since This function is available since SDL 3.6.0.
+///
+/// \sa SDL_GetRenderViewportFloat
+/// \sa SDL_RenderViewportSet
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetRenderViewportFloat(SDL_Renderer *renderer, const SDL_FRect *rect)
+/// ```
+///
+/// See also:
+/// - [SDL_SetRenderViewportFloat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetRenderViewportFloat)
+///
+/// {@category render}
+bool sdlSetRenderViewportFloat(
+  Pointer<SdlRenderer> renderer,
+  Pointer<SdlFRect> rect,
+) {
+  final sdlSetRenderViewportFloatLookupFunction = _libSdl
+      .lookupFunction<
+        Bool Function(Pointer<SdlRenderer> renderer, Pointer<SdlFRect> rect),
+        bool Function(Pointer<SdlRenderer> renderer, Pointer<SdlFRect> rect)
+      >('SDL_SetRenderViewportFloat');
+  return sdlSetRenderViewportFloatLookupFunction(renderer, rect);
+}
+
+///
+/// Get the drawing area for the current target.
+///
+/// Each render target has its own viewport. This function gets the viewport
+/// for the current render target.
+///
+/// \param renderer the rendering context.
+/// \param rect an SDL_FRect structure filled in with the current drawing area.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety This function should only be called on the main thread.
+///
+/// \since This function is available since SDL 3.6.0.
+///
+/// \sa SDL_RenderViewportSet
+/// \sa SDL_SetRenderViewportFloat
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderViewportFloat(SDL_Renderer *renderer, SDL_FRect *rect)
+/// ```
+///
+/// See also:
+/// - [SDL_GetRenderViewportFloat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRenderViewportFloat)
+///
+/// {@category render}
+bool sdlGetRenderViewportFloat(
+  Pointer<SdlRenderer> renderer,
+  Pointer<SdlFRect> rect,
+) {
+  final sdlGetRenderViewportFloatLookupFunction = _libSdl
+      .lookupFunction<
+        Bool Function(Pointer<SdlRenderer> renderer, Pointer<SdlFRect> rect),
+        bool Function(Pointer<SdlRenderer> renderer, Pointer<SdlFRect> rect)
+      >('SDL_GetRenderViewportFloat');
+  return sdlGetRenderViewportFloatLookupFunction(renderer, rect);
+}
+
+///
 /// Return whether an explicit rectangle was set as the viewport.
 ///
 /// This is useful if you're saving and restoring the viewport and want to know
@@ -2685,7 +2776,9 @@ bool sdlGetRenderViewport(
 /// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_GetRenderViewport
+/// \sa SDL_GetRenderViewportFloat
 /// \sa SDL_SetRenderViewport
+/// \sa SDL_SetRenderViewportFloat
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderViewportSet(SDL_Renderer *renderer)
@@ -2762,6 +2855,7 @@ bool sdlGetRenderSafeArea(
 ///
 /// \sa SDL_GetRenderClipRect
 /// \sa SDL_RenderClipEnabled
+/// \sa SDL_SetRenderClipRectFloat
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_SetRenderClipRect(SDL_Renderer *renderer, const SDL_Rect *rect)
@@ -2799,6 +2893,7 @@ bool sdlSetRenderClipRect(
 ///
 /// \since This function is available since SDL 3.2.0.
 ///
+/// \sa SDL_GetRenderClipRectFloat
 /// \sa SDL_RenderClipEnabled
 /// \sa SDL_SetRenderClipRect
 ///
@@ -2823,6 +2918,84 @@ bool sdlGetRenderClipRect(
 }
 
 ///
+/// Set the clip rectangle for rendering on the specified target.
+///
+/// Each render target has its own clip rectangle. This function sets the
+/// cliprect for the current render target.
+///
+/// \param renderer the rendering context.
+/// \param rect an SDL_FRect structure representing the clip area, relative to
+/// the viewport, or NULL to disable clipping.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety This function should only be called on the main thread.
+///
+/// \since This function is available since SDL 3.6.0.
+///
+/// \sa SDL_GetRenderClipRectFloat
+/// \sa SDL_RenderClipEnabled
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL SDL_SetRenderClipRectFloat(SDL_Renderer *renderer, const SDL_FRect *rect)
+/// ```
+///
+/// See also:
+/// - [SDL_SetRenderClipRectFloat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetRenderClipRectFloat)
+///
+/// {@category render}
+bool sdlSetRenderClipRectFloat(
+  Pointer<SdlRenderer> renderer,
+  Pointer<SdlFRect> rect,
+) {
+  final sdlSetRenderClipRectFloatLookupFunction = _libSdl
+      .lookupFunction<
+        Bool Function(Pointer<SdlRenderer> renderer, Pointer<SdlFRect> rect),
+        bool Function(Pointer<SdlRenderer> renderer, Pointer<SdlFRect> rect)
+      >('SDL_SetRenderClipRectFloat');
+  return sdlSetRenderClipRectFloatLookupFunction(renderer, rect);
+}
+
+///
+/// Get the clip rectangle for the current target.
+///
+/// Each render target has its own clip rectangle. This function gets the
+/// cliprect for the current render target.
+///
+/// \param renderer the rendering context.
+/// \param rect an SDL_FRect structure filled in with the current clipping area
+/// or an empty rectangle if clipping is disabled.
+/// \returns true on success or false on failure; call SDL_GetError() for more
+/// information.
+///
+/// \threadsafety This function should only be called on the main thread.
+///
+/// \since This function is available since SDL 3.6.0.
+///
+/// \sa SDL_RenderClipEnabled
+/// \sa SDL_SetRenderClipRectFloat
+///
+/// ```c
+/// extern SDL_DECLSPEC bool SDLCALL SDL_GetRenderClipRectFloat(SDL_Renderer *renderer, SDL_FRect *rect)
+/// ```
+///
+/// See also:
+/// - [SDL_GetRenderClipRectFloat - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetRenderClipRectFloat)
+///
+/// {@category render}
+bool sdlGetRenderClipRectFloat(
+  Pointer<SdlRenderer> renderer,
+  Pointer<SdlFRect> rect,
+) {
+  final sdlGetRenderClipRectFloatLookupFunction = _libSdl
+      .lookupFunction<
+        Bool Function(Pointer<SdlRenderer> renderer, Pointer<SdlFRect> rect),
+        bool Function(Pointer<SdlRenderer> renderer, Pointer<SdlFRect> rect)
+      >('SDL_GetRenderClipRectFloat');
+  return sdlGetRenderClipRectFloatLookupFunction(renderer, rect);
+}
+
+///
 /// Get whether clipping is enabled on the given render target.
 ///
 /// Each render target has its own clip rectangle. This function checks the
@@ -2837,7 +3010,9 @@ bool sdlGetRenderClipRect(
 /// \since This function is available since SDL 3.2.0.
 ///
 /// \sa SDL_GetRenderClipRect
+/// \sa SDL_GetRenderClipRectFloat
 /// \sa SDL_SetRenderClipRect
+/// \sa SDL_SetRenderClipRectFloat
 ///
 /// ```c
 /// extern SDL_DECLSPEC bool SDLCALL SDL_RenderClipEnabled(SDL_Renderer *renderer)

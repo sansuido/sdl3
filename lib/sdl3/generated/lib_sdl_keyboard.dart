@@ -613,6 +613,12 @@ bool sdlStartTextInput(Pointer<SdlWindow> window) {
 /// use, overriding other properties. This is documented at
 /// https://developer.android.com/reference/android/text/InputType
 ///
+/// On HarmonyOS/OpenHarmony you can directly specify the input type:
+///
+/// - `SDL_PROP_TEXTINPUT_OPENHARMONY_INPUTTYPE_NUMBER` - the text input type
+/// to use, overriding other properties. This is documented at
+/// https://developer.android.com/reference/android/text/InputType
+///
 /// \param window the window to enable text input.
 /// \param props the properties to use.
 /// \returns true on success or false on failure; call SDL_GetError() for more

@@ -1201,6 +1201,8 @@ const SDL_PROP_IOSTREAM_WINDOWS_HANDLE_POINTER = 'SDL.iostream.windows.handle';
 const SDL_PROP_IOSTREAM_STDIO_FILE_POINTER = 'SDL.iostream.stdio.file';
 const SDL_PROP_IOSTREAM_FILE_DESCRIPTOR_NUMBER = 'SDL.iostream.file_descriptor';
 const SDL_PROP_IOSTREAM_ANDROID_AASSET_POINTER = 'SDL.iostream.android.aasset';
+const SDL_PROP_IOSTREAM_OPENHARMONY_RAWFILE64_POINTER =
+    'SDL.iostream.openharmony.rawfile64';
 const SDL_PROP_IOSTREAM_MEMORY_POINTER = 'SDL.iostream.memory.base';
 const SDL_PROP_IOSTREAM_MEMORY_SIZE_NUMBER = 'SDL.iostream.memory.size';
 const SDL_PROP_IOSTREAM_MEMORY_FREE_FUNC_POINTER = 'SDL.iostream.memory.free';
@@ -1264,6 +1266,8 @@ const SDL_PROP_TEXTINPUT_DEFAULT_TEXT_STRING = 'SDL.textinput.default_text';
 const SDL_PROP_TEXTINPUT_MAX_LENGTH_NUMBER = 'SDL.textinput.max_length';
 const SDL_PROP_TEXTINPUT_ANDROID_INPUTTYPE_NUMBER =
     'SDL.textinput.android.inputtype';
+const SDL_PROP_TEXTINPUT_OPENHARMONY_INPUTTYPE_NUMBER =
+    'SDL.textinput.openharmony.inputtype';
 //const SDL_keycode_h_ = ;
 const SDLK_EXTENDED_MASK = 1 << 29;
 const SDLK_SCANCODE_MASK = 1 << 30;
@@ -1950,6 +1954,7 @@ const SDL_PLATFORM_HPUX = 1;
 const SDL_PLATFORM_IRIX = 1;
 const SDL_PLATFORM_LINUX = 1;
 const SDL_PLATFORM_ANDROID = 1;
+const SDL_PLATFORM_OPENHARMONY = 1;
 const SDL_PLATFORM_UNIX = 1;
 const SDL_PLATFORM_APPLE = 1;
 //const __has_extension = (x) 0;
@@ -2240,7 +2245,7 @@ const SDL_RENDERER_VSYNC_ADAPTIVE = -1;
 const SDL_DEBUG_TEXT_FONT_CHARACTER_SIZE = 8;
 //const SDL_revision_h_ = ;
 const SDL_REVISION =
-    'SDL-3.5.0-release-3.4.0-1429-g26b37f5d1 (" SDL_VENDOR_INFO ")';
+    'SDL-3.5.0-release-3.4.0-1449-ga6c68172b (" SDL_VENDOR_INFO ")';
 //const SDL_scancode_h_ = ;
 const SDL_SCANCODE_UNKNOWN = 0;
 const SDL_SCANCODE_A = 4;
@@ -2898,6 +2903,8 @@ const SDL_PROP_WINDOW_CREATE_WIN32_HWND_POINTER =
     'SDL.window.create.win32.hwnd';
 const SDL_PROP_WINDOW_CREATE_WIN32_PIXEL_FORMAT_HWND_POINTER =
     'SDL.window.create.win32.pixel_format_hwnd';
+const SDL_PROP_WINDOW_CREATE_WIN32_STYLE_EX_NUMBER =
+    'SDL.window.create.win32.style_ex';
 const SDL_PROP_WINDOW_CREATE_X11_WINDOW_NUMBER = 'SDL.window.create.x11.window';
 const SDL_PROP_WINDOW_CREATE_EMSCRIPTEN_CANVAS_ID_STRING =
     'SDL.window.create.emscripten.canvas_id';
@@ -2911,6 +2918,12 @@ const SDL_PROP_WINDOW_SDR_WHITE_LEVEL_FLOAT = 'SDL.window.SDR_white_level';
 const SDL_PROP_WINDOW_HDR_HEADROOM_FLOAT = 'SDL.window.HDR_headroom';
 const SDL_PROP_WINDOW_ANDROID_WINDOW_POINTER = 'SDL.window.android.window';
 const SDL_PROP_WINDOW_ANDROID_SURFACE_POINTER = 'SDL.window.android.surface';
+const SDL_PROP_WINDOW_OPENHARMONY_XCOMPONENT_POINTER =
+    'SDL.window.openharmony.xcomponent';
+const SDL_PROP_WINDOW_OPENHARMONY_WINDOW_POINTER =
+    'SDL.window.openharmony.window';
+const SDL_PROP_WINDOW_OPENHARMONY_SURFACE_POINTER =
+    'SDL.window.openharmony.surface';
 const SDL_PROP_WINDOW_UIKIT_WINDOW_POINTER = 'SDL.window.uikit.window';
 const SDL_PROP_WINDOW_UIKIT_METAL_VIEW_TAG_NUMBER =
     'SDL.window.uikit.metal_view_tag';
@@ -4269,6 +4282,8 @@ class SdlkPropIostream {
   static const stdioFilePointer = SDL_PROP_IOSTREAM_STDIO_FILE_POINTER;
   static const fileDescriptorNumber = SDL_PROP_IOSTREAM_FILE_DESCRIPTOR_NUMBER;
   static const androidAassetPointer = SDL_PROP_IOSTREAM_ANDROID_AASSET_POINTER;
+  static const openharmonyRawfile64Pointer =
+      SDL_PROP_IOSTREAM_OPENHARMONY_RAWFILE64_POINTER;
   static const memoryPointer = SDL_PROP_IOSTREAM_MEMORY_POINTER;
   static const memorySizeNumber = SDL_PROP_IOSTREAM_MEMORY_SIZE_NUMBER;
   static const memoryFreeFuncPointer =
@@ -4364,6 +4379,8 @@ class SdlkPropTextinput {
   static const maxLengthNumber = SDL_PROP_TEXTINPUT_MAX_LENGTH_NUMBER;
   static const androidInputtypeNumber =
       SDL_PROP_TEXTINPUT_ANDROID_INPUTTYPE_NUMBER;
+  static const openharmonyInputtypeNumber =
+      SDL_PROP_TEXTINPUT_OPENHARMONY_INPUTTYPE_NUMBER;
 }
 
 /// {@category keycode}
@@ -5879,6 +5896,8 @@ class SdlkPropWindow {
       SDL_PROP_WINDOW_CREATE_WIN32_HWND_POINTER;
   static const createWin32PixelFormatHwndPointer =
       SDL_PROP_WINDOW_CREATE_WIN32_PIXEL_FORMAT_HWND_POINTER;
+  static const createWin32StyleExNumber =
+      SDL_PROP_WINDOW_CREATE_WIN32_STYLE_EX_NUMBER;
   static const createX11WindowNumber = SDL_PROP_WINDOW_CREATE_X11_WINDOW_NUMBER;
   static const createEmscriptenCanvasIdString =
       SDL_PROP_WINDOW_CREATE_EMSCRIPTEN_CANVAS_ID_STRING;
@@ -5892,6 +5911,12 @@ class SdlkPropWindow {
   static const hdrHeadroomFloat = SDL_PROP_WINDOW_HDR_HEADROOM_FLOAT;
   static const androidWindowPointer = SDL_PROP_WINDOW_ANDROID_WINDOW_POINTER;
   static const androidSurfacePointer = SDL_PROP_WINDOW_ANDROID_SURFACE_POINTER;
+  static const openharmonyXcomponentPointer =
+      SDL_PROP_WINDOW_OPENHARMONY_XCOMPONENT_POINTER;
+  static const openharmonyWindowPointer =
+      SDL_PROP_WINDOW_OPENHARMONY_WINDOW_POINTER;
+  static const openharmonySurfacePointer =
+      SDL_PROP_WINDOW_OPENHARMONY_SURFACE_POINTER;
   static const uikitWindowPointer = SDL_PROP_WINDOW_UIKIT_WINDOW_POINTER;
   static const uikitMetalViewTagNumber =
       SDL_PROP_WINDOW_UIKIT_METAL_VIEW_TAG_NUMBER;

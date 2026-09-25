@@ -540,6 +540,18 @@ typedef SdlRequestAndroidPermissionCallback = Void Function(
   Bool granted,
 );
 
+// typedef void (SDLCALL *SDL_RequestOpenHarmonyPermissionCallback)(void *userdata, const char *permission, bool granted)
+typedef SdlRequestOpenHarmonyPermissionCallbackDart = void Function(
+  Pointer<Void> userdata,
+  Pointer<Utf8> permission,
+  bool granted,
+);
+typedef SdlRequestOpenHarmonyPermissionCallback = Void Function(
+  Pointer<Void> userdata,
+  Pointer<Utf8> permission,
+  Bool granted,
+);
+
 // typedef int (SDLCALL *SDL_ThreadFunction) (void *data)
 typedef SdlThreadFunctionDart = int Function(Pointer<Void> data);
 typedef SdlThreadFunction = Int32 Function(Pointer<Void> data);

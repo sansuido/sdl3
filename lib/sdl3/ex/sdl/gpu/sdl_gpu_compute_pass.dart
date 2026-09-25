@@ -25,6 +25,9 @@ extension SdlGpuComputePassPointerEx on Pointer<SdlGpuComputePass> {
   ///
   /// The textures must have been created with SDL_GPU_TEXTUREUSAGE_SAMPLER.
   ///
+  /// The textures being bound must have a matching type declared in the shader
+  /// (2D, 3D, etc.). Multisample textures are not allowed.
+  ///
   /// Be sure your shader is set up according to the requirements documented in
   /// SDL_CreateGPUComputePipeline().
   ///
@@ -57,6 +60,9 @@ extension SdlGpuComputePassPointerEx on Pointer<SdlGpuComputePass> {
   ///
   /// These textures must have been created with
   /// SDL_GPU_TEXTUREUSAGE_COMPUTE_STORAGE_READ.
+  ///
+  /// The textures being bound must have a matching type declared in the shader
+  /// (2D, 3D, 2DMS, etc.)
   ///
   /// Be sure your shader is set up according to the requirements documented in
   /// SDL_CreateGPUComputePipeline().

@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.11.5] - 2026-09-25
+- SDL3-2026-09-20
+### Fixed
+- Fixed `sdlxGetRenderViewport`.
+### Added
+- Added render functions. (`sdlSetRenderViewportFloat`, `sdlGetRenderViewportFloat`, `sdlSetRenderClipRectFloat`, `sdlGetRenderClipRectFloat`)
+- Added system functions. (`sdlGetOpenHarmonySdkVersion`, `sdlGetOpenHarmonyInternalStoragePath`, `sdlRequestOpenHarmonyPermission`)
+- Added `example/gamepad/virtual_gamepad_demo.dart`.
+
 ## [2.11.4] - 2026-09-16
 - SDL3-2026-09-13
 ### Changed
