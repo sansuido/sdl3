@@ -1,5 +1,5 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-part of '../sdl.dart';
+part of '../sdl_gamepad.dart';
 
 ///
 /// Add support for gamepads that SDL is unaware of or change the binding of an
@@ -53,12 +53,12 @@ part of '../sdl.dart';
 int sdlAddGamepadMapping(String? mapping) {
   final sdlAddGamepadMappingLookupFunction = _libSdl
       .lookupFunction<
-        Int32 Function(Pointer<Utf8> mapping),
-        int Function(Pointer<Utf8> mapping)
+        Int32 Function(Pointer<ffi.Utf8> mapping),
+        int Function(Pointer<ffi.Utf8> mapping)
       >('SDL_AddGamepadMapping');
   final mappingPointer = mapping != null ? mapping.toNativeUtf8() : nullptr;
   final result = sdlAddGamepadMappingLookupFunction(mappingPointer);
-  calloc.free(mappingPointer);
+  ffi.calloc.free(mappingPointer);
   return result;
 }
 
@@ -160,12 +160,12 @@ int sdlAddGamepadMappingsFromIo(Pointer<SdlIoStream> src, bool closeio) {
 int sdlAddGamepadMappingsFromFile(String? file) {
   final sdlAddGamepadMappingsFromFileLookupFunction = _libSdl
       .lookupFunction<
-        Int32 Function(Pointer<Utf8> file),
-        int Function(Pointer<Utf8> file)
+        Int32 Function(Pointer<ffi.Utf8> file),
+        int Function(Pointer<ffi.Utf8> file)
       >('SDL_AddGamepadMappingsFromFile');
   final filePointer = file != null ? file.toNativeUtf8() : nullptr;
   final result = sdlAddGamepadMappingsFromFileLookupFunction(filePointer);
-  calloc.free(filePointer);
+  ffi.calloc.free(filePointer);
   return result;
 }
 
@@ -325,12 +325,12 @@ Pointer<Int8> sdlGetGamepadMapping(Pointer<SdlGamepad> gamepad) {
 bool sdlSetGamepadMapping(int instanceId, String? mapping) {
   final sdlSetGamepadMappingLookupFunction = _libSdl
       .lookupFunction<
-        Bool Function(Uint32 instanceId, Pointer<Utf8> mapping),
-        bool Function(int instanceId, Pointer<Utf8> mapping)
+        Bool Function(Uint32 instanceId, Pointer<ffi.Utf8> mapping),
+        bool Function(int instanceId, Pointer<ffi.Utf8> mapping)
       >('SDL_SetGamepadMapping');
   final mappingPointer = mapping != null ? mapping.toNativeUtf8() : nullptr;
   final result = sdlSetGamepadMappingLookupFunction(instanceId, mappingPointer);
-  calloc.free(mappingPointer);
+  ffi.calloc.free(mappingPointer);
   return result;
 }
 
@@ -450,8 +450,8 @@ bool sdlIsGamepad(int instanceId) {
 String? sdlGetGamepadNameForId(int instanceId) {
   final sdlGetGamepadNameForIdLookupFunction = _libSdl
       .lookupFunction<
-        Pointer<Utf8> Function(Uint32 instanceId),
-        Pointer<Utf8> Function(int instanceId)
+        Pointer<ffi.Utf8> Function(Uint32 instanceId),
+        Pointer<ffi.Utf8> Function(int instanceId)
       >('SDL_GetGamepadNameForID');
   final result = sdlGetGamepadNameForIdLookupFunction(instanceId);
   if (result == nullptr) {
@@ -487,8 +487,8 @@ String? sdlGetGamepadNameForId(int instanceId) {
 String? sdlGetGamepadPathForId(int instanceId) {
   final sdlGetGamepadPathForIdLookupFunction = _libSdl
       .lookupFunction<
-        Pointer<Utf8> Function(Uint32 instanceId),
-        Pointer<Utf8> Function(int instanceId)
+        Pointer<ffi.Utf8> Function(Uint32 instanceId),
+        Pointer<ffi.Utf8> Function(int instanceId)
       >('SDL_GetGamepadPathForID');
   final result = sdlGetGamepadPathForIdLookupFunction(instanceId);
   if (result == nullptr) {
@@ -951,8 +951,8 @@ int sdlGetGamepadId(Pointer<SdlGamepad> gamepad) {
 String? sdlGetGamepadName(Pointer<SdlGamepad> gamepad) {
   final sdlGetGamepadNameLookupFunction = _libSdl
       .lookupFunction<
-        Pointer<Utf8> Function(Pointer<SdlGamepad> gamepad),
-        Pointer<Utf8> Function(Pointer<SdlGamepad> gamepad)
+        Pointer<ffi.Utf8> Function(Pointer<SdlGamepad> gamepad),
+        Pointer<ffi.Utf8> Function(Pointer<SdlGamepad> gamepad)
       >('SDL_GetGamepadName');
   final result = sdlGetGamepadNameLookupFunction(gamepad);
   if (result == nullptr) {
@@ -986,8 +986,8 @@ String? sdlGetGamepadName(Pointer<SdlGamepad> gamepad) {
 String? sdlGetGamepadPath(Pointer<SdlGamepad> gamepad) {
   final sdlGetGamepadPathLookupFunction = _libSdl
       .lookupFunction<
-        Pointer<Utf8> Function(Pointer<SdlGamepad> gamepad),
-        Pointer<Utf8> Function(Pointer<SdlGamepad> gamepad)
+        Pointer<ffi.Utf8> Function(Pointer<SdlGamepad> gamepad),
+        Pointer<ffi.Utf8> Function(Pointer<SdlGamepad> gamepad)
       >('SDL_GetGamepadPath');
   final result = sdlGetGamepadPathLookupFunction(gamepad);
   if (result == nullptr) {
@@ -1264,8 +1264,8 @@ int sdlGetGamepadFirmwareVersion(Pointer<SdlGamepad> gamepad) {
 String? sdlGetGamepadSerial(Pointer<SdlGamepad> gamepad) {
   final sdlGetGamepadSerialLookupFunction = _libSdl
       .lookupFunction<
-        Pointer<Utf8> Function(Pointer<SdlGamepad> gamepad),
-        Pointer<Utf8> Function(Pointer<SdlGamepad> gamepad)
+        Pointer<ffi.Utf8> Function(Pointer<SdlGamepad> gamepad),
+        Pointer<ffi.Utf8> Function(Pointer<SdlGamepad> gamepad)
       >('SDL_GetGamepadSerial');
   final result = sdlGetGamepadSerialLookupFunction(gamepad);
   if (result == nullptr) {
@@ -1594,12 +1594,12 @@ void sdlUpdateGamepads() {
 int sdlGetGamepadTypeFromString(String? str) {
   final sdlGetGamepadTypeFromStringLookupFunction = _libSdl
       .lookupFunction<
-        Int32 Function(Pointer<Utf8> str),
-        int Function(Pointer<Utf8> str)
+        Int32 Function(Pointer<ffi.Utf8> str),
+        int Function(Pointer<ffi.Utf8> str)
       >('SDL_GetGamepadTypeFromString');
   final strPointer = str != null ? str.toNativeUtf8() : nullptr;
   final result = sdlGetGamepadTypeFromStringLookupFunction(strPointer);
-  calloc.free(strPointer);
+  ffi.calloc.free(strPointer);
   return result;
 }
 
@@ -1628,8 +1628,8 @@ int sdlGetGamepadTypeFromString(String? str) {
 String? sdlGetGamepadStringForType(int type) {
   final sdlGetGamepadStringForTypeLookupFunction = _libSdl
       .lookupFunction<
-        Pointer<Utf8> Function(Int32 type),
-        Pointer<Utf8> Function(int type)
+        Pointer<ffi.Utf8> Function(Int32 type),
+        Pointer<ffi.Utf8> Function(int type)
       >('SDL_GetGamepadStringForType');
   final result = sdlGetGamepadStringForTypeLookupFunction(type);
   if (result == nullptr) {
@@ -1671,12 +1671,12 @@ String? sdlGetGamepadStringForType(int type) {
 int sdlGetGamepadAxisFromString(String? str) {
   final sdlGetGamepadAxisFromStringLookupFunction = _libSdl
       .lookupFunction<
-        Int32 Function(Pointer<Utf8> str),
-        int Function(Pointer<Utf8> str)
+        Int32 Function(Pointer<ffi.Utf8> str),
+        int Function(Pointer<ffi.Utf8> str)
       >('SDL_GetGamepadAxisFromString');
   final strPointer = str != null ? str.toNativeUtf8() : nullptr;
   final result = sdlGetGamepadAxisFromStringLookupFunction(strPointer);
-  calloc.free(strPointer);
+  ffi.calloc.free(strPointer);
   return result;
 }
 
@@ -1705,8 +1705,8 @@ int sdlGetGamepadAxisFromString(String? str) {
 String? sdlGetGamepadStringForAxis(int axis) {
   final sdlGetGamepadStringForAxisLookupFunction = _libSdl
       .lookupFunction<
-        Pointer<Utf8> Function(Int32 axis),
-        Pointer<Utf8> Function(int axis)
+        Pointer<ffi.Utf8> Function(Int32 axis),
+        Pointer<ffi.Utf8> Function(int axis)
       >('SDL_GetGamepadStringForAxis');
   final result = sdlGetGamepadStringForAxisLookupFunction(axis);
   if (result == nullptr) {
@@ -1821,12 +1821,12 @@ int sdlGetGamepadAxis(Pointer<SdlGamepad> gamepad, int axis) {
 int sdlGetGamepadButtonFromString(String? str) {
   final sdlGetGamepadButtonFromStringLookupFunction = _libSdl
       .lookupFunction<
-        Int32 Function(Pointer<Utf8> str),
-        int Function(Pointer<Utf8> str)
+        Int32 Function(Pointer<ffi.Utf8> str),
+        int Function(Pointer<ffi.Utf8> str)
       >('SDL_GetGamepadButtonFromString');
   final strPointer = str != null ? str.toNativeUtf8() : nullptr;
   final result = sdlGetGamepadButtonFromStringLookupFunction(strPointer);
-  calloc.free(strPointer);
+  ffi.calloc.free(strPointer);
   return result;
 }
 
@@ -1855,8 +1855,8 @@ int sdlGetGamepadButtonFromString(String? str) {
 String? sdlGetGamepadStringForButton(int button) {
   final sdlGetGamepadStringForButtonLookupFunction = _libSdl
       .lookupFunction<
-        Pointer<Utf8> Function(Int32 button),
-        Pointer<Utf8> Function(int button)
+        Pointer<ffi.Utf8> Function(Int32 button),
+        Pointer<ffi.Utf8> Function(int button)
       >('SDL_GetGamepadStringForButton');
   final result = sdlGetGamepadStringForButtonLookupFunction(button);
   if (result == nullptr) {
@@ -2628,8 +2628,8 @@ String? sdlGetGamepadAppleSfSymbolsNameForButton(
 ) {
   final sdlGetGamepadAppleSfSymbolsNameForButtonLookupFunction = _libSdl
       .lookupFunction<
-        Pointer<Utf8> Function(Pointer<SdlGamepad> gamepad, Int32 button),
-        Pointer<Utf8> Function(Pointer<SdlGamepad> gamepad, int button)
+        Pointer<ffi.Utf8> Function(Pointer<SdlGamepad> gamepad, Int32 button),
+        Pointer<ffi.Utf8> Function(Pointer<SdlGamepad> gamepad, int button)
       >('SDL_GetGamepadAppleSFSymbolsNameForButton');
   final result = sdlGetGamepadAppleSfSymbolsNameForButtonLookupFunction(
     gamepad,
@@ -2668,8 +2668,8 @@ String? sdlGetGamepadAppleSfSymbolsNameForAxis(
 ) {
   final sdlGetGamepadAppleSfSymbolsNameForAxisLookupFunction = _libSdl
       .lookupFunction<
-        Pointer<Utf8> Function(Pointer<SdlGamepad> gamepad, Int32 axis),
-        Pointer<Utf8> Function(Pointer<SdlGamepad> gamepad, int axis)
+        Pointer<ffi.Utf8> Function(Pointer<SdlGamepad> gamepad, Int32 axis),
+        Pointer<ffi.Utf8> Function(Pointer<SdlGamepad> gamepad, int axis)
       >('SDL_GetGamepadAppleSFSymbolsNameForAxis');
   final result = sdlGetGamepadAppleSfSymbolsNameForAxisLookupFunction(
     gamepad,

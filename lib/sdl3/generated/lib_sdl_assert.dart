@@ -1,5 +1,5 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-part of '../sdl.dart';
+part of '../sdl_assert.dart';
 
 ///
 /// Never call this directly.
@@ -34,14 +34,14 @@ int sdlReportAssertion(
       .lookupFunction<
         Int32 Function(
           Pointer<SdlAssertData> data,
-          Pointer<Utf8> func,
-          Pointer<Utf8> file,
+          Pointer<ffi.Utf8> func,
+          Pointer<ffi.Utf8> file,
           Int32 line,
         ),
         int Function(
           Pointer<SdlAssertData> data,
-          Pointer<Utf8> func,
-          Pointer<Utf8> file,
+          Pointer<ffi.Utf8> func,
+          Pointer<ffi.Utf8> file,
           int line,
         )
       >('SDL_ReportAssertion');
@@ -53,7 +53,7 @@ int sdlReportAssertion(
     filePointer,
     line,
   );
-  calloc
+  ffi.calloc
     ..free(funcPointer)
     ..free(filePointer);
   return result;

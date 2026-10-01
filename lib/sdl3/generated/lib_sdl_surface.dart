@@ -1,5 +1,5 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-part of '../sdl.dart';
+part of '../sdl_surface.dart';
 
 ///
 /// Allocate a new surface with a specific pixel format.
@@ -679,12 +679,12 @@ Pointer<SdlSurface> sdlLoadSurfaceIo(Pointer<SdlIoStream> src, bool closeio) {
 Pointer<SdlSurface> sdlLoadSurface(String? file) {
   final sdlLoadSurfaceLookupFunction = _libSdl
       .lookupFunction<
-        Pointer<SdlSurface> Function(Pointer<Utf8> file),
-        Pointer<SdlSurface> Function(Pointer<Utf8> file)
+        Pointer<SdlSurface> Function(Pointer<ffi.Utf8> file),
+        Pointer<SdlSurface> Function(Pointer<ffi.Utf8> file)
       >('SDL_LoadSurface');
   final filePointer = file != null ? file.toNativeUtf8() : nullptr;
   final result = sdlLoadSurfaceLookupFunction(filePointer);
-  calloc.free(filePointer);
+  ffi.calloc.free(filePointer);
   return result;
 }
 
@@ -754,12 +754,12 @@ Pointer<SdlSurface> sdlLoadBmpIo(Pointer<SdlIoStream> src, bool closeio) {
 Pointer<SdlSurface> sdlLoadBmp(String? file) {
   final sdlLoadBmpLookupFunction = _libSdl
       .lookupFunction<
-        Pointer<SdlSurface> Function(Pointer<Utf8> file),
-        Pointer<SdlSurface> Function(Pointer<Utf8> file)
+        Pointer<SdlSurface> Function(Pointer<ffi.Utf8> file),
+        Pointer<SdlSurface> Function(Pointer<ffi.Utf8> file)
       >('SDL_LoadBMP');
   final filePointer = file != null ? file.toNativeUtf8() : nullptr;
   final result = sdlLoadBmpLookupFunction(filePointer);
-  calloc.free(filePointer);
+  ffi.calloc.free(filePointer);
   return result;
 }
 
@@ -849,12 +849,12 @@ bool sdlSaveBmpIo(
 bool sdlSaveBmp(Pointer<SdlSurface> surface, String? file) {
   final sdlSaveBmpLookupFunction = _libSdl
       .lookupFunction<
-        Bool Function(Pointer<SdlSurface> surface, Pointer<Utf8> file),
-        bool Function(Pointer<SdlSurface> surface, Pointer<Utf8> file)
+        Bool Function(Pointer<SdlSurface> surface, Pointer<ffi.Utf8> file),
+        bool Function(Pointer<SdlSurface> surface, Pointer<ffi.Utf8> file)
       >('SDL_SaveBMP');
   final filePointer = file != null ? file.toNativeUtf8() : nullptr;
   final result = sdlSaveBmpLookupFunction(surface, filePointer);
-  calloc.free(filePointer);
+  ffi.calloc.free(filePointer);
   return result;
 }
 
@@ -932,12 +932,12 @@ Pointer<SdlSurface> sdlLoadPngIo(Pointer<SdlIoStream> src, bool closeio) {
 Pointer<SdlSurface> sdlLoadPng(String? file) {
   final sdlLoadPngLookupFunction = _libSdl
       .lookupFunction<
-        Pointer<SdlSurface> Function(Pointer<Utf8> file),
-        Pointer<SdlSurface> Function(Pointer<Utf8> file)
+        Pointer<SdlSurface> Function(Pointer<ffi.Utf8> file),
+        Pointer<SdlSurface> Function(Pointer<ffi.Utf8> file)
       >('SDL_LoadPNG');
   final filePointer = file != null ? file.toNativeUtf8() : nullptr;
   final result = sdlLoadPngLookupFunction(filePointer);
-  calloc.free(filePointer);
+  ffi.calloc.free(filePointer);
   return result;
 }
 
@@ -1015,12 +1015,12 @@ bool sdlSavePngIo(
 bool sdlSavePng(Pointer<SdlSurface> surface, String? file) {
   final sdlSavePngLookupFunction = _libSdl
       .lookupFunction<
-        Bool Function(Pointer<SdlSurface> surface, Pointer<Utf8> file),
-        bool Function(Pointer<SdlSurface> surface, Pointer<Utf8> file)
+        Bool Function(Pointer<SdlSurface> surface, Pointer<ffi.Utf8> file),
+        bool Function(Pointer<SdlSurface> surface, Pointer<ffi.Utf8> file)
       >('SDL_SavePNG');
   final filePointer = file != null ? file.toNativeUtf8() : nullptr;
   final result = sdlSavePngLookupFunction(surface, filePointer);
-  calloc.free(filePointer);
+  ffi.calloc.free(filePointer);
   return result;
 }
 
@@ -1096,12 +1096,12 @@ Pointer<SdlSurface> sdlLoadJpgIo(Pointer<SdlIoStream> src, bool closeio) {
 Pointer<SdlSurface> sdlLoadJpg(String? file) {
   final sdlLoadJpgLookupFunction = _libSdl
       .lookupFunction<
-        Pointer<SdlSurface> Function(Pointer<Utf8> file),
-        Pointer<SdlSurface> Function(Pointer<Utf8> file)
+        Pointer<SdlSurface> Function(Pointer<ffi.Utf8> file),
+        Pointer<SdlSurface> Function(Pointer<ffi.Utf8> file)
       >('SDL_LoadJPG');
   final filePointer = file != null ? file.toNativeUtf8() : nullptr;
   final result = sdlLoadJpgLookupFunction(filePointer);
-  calloc.free(filePointer);
+  ffi.calloc.free(filePointer);
   return result;
 }
 

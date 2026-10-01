@@ -1,5 +1,5 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-part of '../sdl.dart';
+part of '../sdl_process.dart';
 
 ///
 /// Create a new process.

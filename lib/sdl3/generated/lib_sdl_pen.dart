@@ -1,5 +1,5 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-part of '../sdl.dart';
+part of '../sdl_pen.dart';
 
 ///
 /// Get the device type of the given pen.

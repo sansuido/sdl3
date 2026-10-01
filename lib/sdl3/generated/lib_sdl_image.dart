@@ -75,12 +75,12 @@ int imgVersion() {
 Pointer<SdlSurface> imgLoad(String? file) {
   final imgLoadLookupFunction = _libImage
       .lookupFunction<
-        Pointer<SdlSurface> Function(Pointer<Utf8> file),
-        Pointer<SdlSurface> Function(Pointer<Utf8> file)
+        Pointer<SdlSurface> Function(Pointer<ffi.Utf8> file),
+        Pointer<SdlSurface> Function(Pointer<ffi.Utf8> file)
       >('IMG_Load');
   final filePointer = file != null ? file.toNativeUtf8() : nullptr;
   final result = imgLoadLookupFunction(filePointer);
-  calloc.free(filePointer);
+  ffi.calloc.free(filePointer);
   return result;
 }
 
@@ -229,17 +229,17 @@ Pointer<SdlSurface> imgLoadTypedIo(
         Pointer<SdlSurface> Function(
           Pointer<SdlIoStream> src,
           Bool closeio,
-          Pointer<Utf8> type,
+          Pointer<ffi.Utf8> type,
         ),
         Pointer<SdlSurface> Function(
           Pointer<SdlIoStream> src,
           bool closeio,
-          Pointer<Utf8> type,
+          Pointer<ffi.Utf8> type,
         )
       >('IMG_LoadTyped_IO');
   final typePointer = type != null ? type.toNativeUtf8() : nullptr;
   final result = imgLoadTypedIoLookupFunction(src, closeio, typePointer);
-  calloc.free(typePointer);
+  ffi.calloc.free(typePointer);
   return result;
 }
 
@@ -292,16 +292,16 @@ Pointer<SdlTexture> imgLoadTexture(
       .lookupFunction<
         Pointer<SdlTexture> Function(
           Pointer<SdlRenderer> renderer,
-          Pointer<Utf8> file,
+          Pointer<ffi.Utf8> file,
         ),
         Pointer<SdlTexture> Function(
           Pointer<SdlRenderer> renderer,
-          Pointer<Utf8> file,
+          Pointer<ffi.Utf8> file,
         )
       >('IMG_LoadTexture');
   final filePointer = file != null ? file.toNativeUtf8() : nullptr;
   final result = imgLoadTextureLookupFunction(renderer, filePointer);
-  calloc.free(filePointer);
+  ffi.calloc.free(filePointer);
   return result;
 }
 
@@ -450,13 +450,13 @@ Pointer<SdlTexture> imgLoadTextureTypedIo(
           Pointer<SdlRenderer> renderer,
           Pointer<SdlIoStream> src,
           Bool closeio,
-          Pointer<Utf8> type,
+          Pointer<ffi.Utf8> type,
         ),
         Pointer<SdlTexture> Function(
           Pointer<SdlRenderer> renderer,
           Pointer<SdlIoStream> src,
           bool closeio,
-          Pointer<Utf8> type,
+          Pointer<ffi.Utf8> type,
         )
       >('IMG_LoadTextureTyped_IO');
   final typePointer = type != null ? type.toNativeUtf8() : nullptr;
@@ -466,7 +466,7 @@ Pointer<SdlTexture> imgLoadTextureTypedIo(
     closeio,
     typePointer,
   );
-  calloc.free(typePointer);
+  ffi.calloc.free(typePointer);
   return result;
 }
 
@@ -521,14 +521,14 @@ Pointer<SdlGpuTexture> imgLoadGpuTexture(
         Pointer<SdlGpuTexture> Function(
           Pointer<SdlGpuDevice> device,
           Pointer<SdlGpuCopyPass> copyPass,
-          Pointer<Utf8> file,
+          Pointer<ffi.Utf8> file,
           Pointer<Int32> width,
           Pointer<Int32> height,
         ),
         Pointer<SdlGpuTexture> Function(
           Pointer<SdlGpuDevice> device,
           Pointer<SdlGpuCopyPass> copyPass,
-          Pointer<Utf8> file,
+          Pointer<ffi.Utf8> file,
           Pointer<Int32> width,
           Pointer<Int32> height,
         )
@@ -541,7 +541,7 @@ Pointer<SdlGpuTexture> imgLoadGpuTexture(
     width,
     height,
   );
-  calloc.free(filePointer);
+  ffi.calloc.free(filePointer);
   return result;
 }
 
@@ -706,7 +706,7 @@ Pointer<SdlGpuTexture> imgLoadGpuTextureTypedIo(
           Pointer<SdlGpuCopyPass> copyPass,
           Pointer<SdlIoStream> src,
           Bool closeio,
-          Pointer<Utf8> type,
+          Pointer<ffi.Utf8> type,
           Pointer<Int32> width,
           Pointer<Int32> height,
         ),
@@ -715,7 +715,7 @@ Pointer<SdlGpuTexture> imgLoadGpuTextureTypedIo(
           Pointer<SdlGpuCopyPass> copyPass,
           Pointer<SdlIoStream> src,
           bool closeio,
-          Pointer<Utf8> type,
+          Pointer<ffi.Utf8> type,
           Pointer<Int32> width,
           Pointer<Int32> height,
         )
@@ -730,7 +730,7 @@ Pointer<SdlGpuTexture> imgLoadGpuTextureTypedIo(
     width,
     height,
   );
-  calloc.free(typePointer);
+  ffi.calloc.free(typePointer);
   return result;
 }
 
@@ -2968,12 +2968,12 @@ Pointer<SdlSurface> imgReadXpmFromArrayToRgb888(Pointer<Pointer<Int8>> xpm) {
 bool imgSave(Pointer<SdlSurface> surface, String? file) {
   final imgSaveLookupFunction = _libImage
       .lookupFunction<
-        Bool Function(Pointer<SdlSurface> surface, Pointer<Utf8> file),
-        bool Function(Pointer<SdlSurface> surface, Pointer<Utf8> file)
+        Bool Function(Pointer<SdlSurface> surface, Pointer<ffi.Utf8> file),
+        bool Function(Pointer<SdlSurface> surface, Pointer<ffi.Utf8> file)
       >('IMG_Save');
   final filePointer = file != null ? file.toNativeUtf8() : nullptr;
   final result = imgSaveLookupFunction(surface, filePointer);
-  calloc.free(filePointer);
+  ffi.calloc.free(filePointer);
   return result;
 }
 
@@ -3029,13 +3029,13 @@ bool imgSaveTypedIo(
           Pointer<SdlSurface> surface,
           Pointer<SdlIoStream> dst,
           Bool closeio,
-          Pointer<Utf8> type,
+          Pointer<ffi.Utf8> type,
         ),
         bool Function(
           Pointer<SdlSurface> surface,
           Pointer<SdlIoStream> dst,
           bool closeio,
-          Pointer<Utf8> type,
+          Pointer<ffi.Utf8> type,
         )
       >('IMG_SaveTyped_IO');
   final typePointer = type != null ? type.toNativeUtf8() : nullptr;
@@ -3045,7 +3045,7 @@ bool imgSaveTypedIo(
     closeio,
     typePointer,
   );
-  calloc.free(typePointer);
+  ffi.calloc.free(typePointer);
   return result;
 }
 
@@ -3078,18 +3078,18 @@ bool imgSaveAvif(Pointer<SdlSurface> surface, String? file, int quality) {
       .lookupFunction<
         Bool Function(
           Pointer<SdlSurface> surface,
-          Pointer<Utf8> file,
+          Pointer<ffi.Utf8> file,
           Int32 quality,
         ),
         bool Function(
           Pointer<SdlSurface> surface,
-          Pointer<Utf8> file,
+          Pointer<ffi.Utf8> file,
           int quality,
         )
       >('IMG_SaveAVIF');
   final filePointer = file != null ? file.toNativeUtf8() : nullptr;
   final result = imgSaveAvifLookupFunction(surface, filePointer, quality);
-  calloc.free(filePointer);
+  ffi.calloc.free(filePointer);
   return result;
 }
 
@@ -3171,12 +3171,12 @@ bool imgSaveAvifIo(
 bool imgSaveBmp(Pointer<SdlSurface> surface, String? file) {
   final imgSaveBmpLookupFunction = _libImage
       .lookupFunction<
-        Bool Function(Pointer<SdlSurface> surface, Pointer<Utf8> file),
-        bool Function(Pointer<SdlSurface> surface, Pointer<Utf8> file)
+        Bool Function(Pointer<SdlSurface> surface, Pointer<ffi.Utf8> file),
+        bool Function(Pointer<SdlSurface> surface, Pointer<ffi.Utf8> file)
       >('IMG_SaveBMP');
   final filePointer = file != null ? file.toNativeUtf8() : nullptr;
   final result = imgSaveBmpLookupFunction(surface, filePointer);
-  calloc.free(filePointer);
+  ffi.calloc.free(filePointer);
   return result;
 }
 
@@ -3253,12 +3253,12 @@ bool imgSaveBmpIo(
 bool imgSaveCur(Pointer<SdlSurface> surface, String? file) {
   final imgSaveCurLookupFunction = _libImage
       .lookupFunction<
-        Bool Function(Pointer<SdlSurface> surface, Pointer<Utf8> file),
-        bool Function(Pointer<SdlSurface> surface, Pointer<Utf8> file)
+        Bool Function(Pointer<SdlSurface> surface, Pointer<ffi.Utf8> file),
+        bool Function(Pointer<SdlSurface> surface, Pointer<ffi.Utf8> file)
       >('IMG_SaveCUR');
   final filePointer = file != null ? file.toNativeUtf8() : nullptr;
   final result = imgSaveCurLookupFunction(surface, filePointer);
-  calloc.free(filePointer);
+  ffi.calloc.free(filePointer);
   return result;
 }
 
@@ -3335,12 +3335,12 @@ bool imgSaveCurIo(
 bool imgSaveGif(Pointer<SdlSurface> surface, String? file) {
   final imgSaveGifLookupFunction = _libImage
       .lookupFunction<
-        Bool Function(Pointer<SdlSurface> surface, Pointer<Utf8> file),
-        bool Function(Pointer<SdlSurface> surface, Pointer<Utf8> file)
+        Bool Function(Pointer<SdlSurface> surface, Pointer<ffi.Utf8> file),
+        bool Function(Pointer<SdlSurface> surface, Pointer<ffi.Utf8> file)
       >('IMG_SaveGIF');
   final filePointer = file != null ? file.toNativeUtf8() : nullptr;
   final result = imgSaveGifLookupFunction(surface, filePointer);
-  calloc.free(filePointer);
+  ffi.calloc.free(filePointer);
   return result;
 }
 
@@ -3417,12 +3417,12 @@ bool imgSaveGifIo(
 bool imgSaveIco(Pointer<SdlSurface> surface, String? file) {
   final imgSaveIcoLookupFunction = _libImage
       .lookupFunction<
-        Bool Function(Pointer<SdlSurface> surface, Pointer<Utf8> file),
-        bool Function(Pointer<SdlSurface> surface, Pointer<Utf8> file)
+        Bool Function(Pointer<SdlSurface> surface, Pointer<ffi.Utf8> file),
+        bool Function(Pointer<SdlSurface> surface, Pointer<ffi.Utf8> file)
       >('IMG_SaveICO');
   final filePointer = file != null ? file.toNativeUtf8() : nullptr;
   final result = imgSaveIcoLookupFunction(surface, filePointer);
-  calloc.free(filePointer);
+  ffi.calloc.free(filePointer);
   return result;
 }
 
@@ -3503,18 +3503,18 @@ bool imgSaveJpg(Pointer<SdlSurface> surface, String? file, int quality) {
       .lookupFunction<
         Bool Function(
           Pointer<SdlSurface> surface,
-          Pointer<Utf8> file,
+          Pointer<ffi.Utf8> file,
           Int32 quality,
         ),
         bool Function(
           Pointer<SdlSurface> surface,
-          Pointer<Utf8> file,
+          Pointer<ffi.Utf8> file,
           int quality,
         )
       >('IMG_SaveJPG');
   final filePointer = file != null ? file.toNativeUtf8() : nullptr;
   final result = imgSaveJpgLookupFunction(surface, filePointer, quality);
-  calloc.free(filePointer);
+  ffi.calloc.free(filePointer);
   return result;
 }
 
@@ -3596,12 +3596,12 @@ bool imgSaveJpgIo(
 bool imgSavePng(Pointer<SdlSurface> surface, String? file) {
   final imgSavePngLookupFunction = _libImage
       .lookupFunction<
-        Bool Function(Pointer<SdlSurface> surface, Pointer<Utf8> file),
-        bool Function(Pointer<SdlSurface> surface, Pointer<Utf8> file)
+        Bool Function(Pointer<SdlSurface> surface, Pointer<ffi.Utf8> file),
+        bool Function(Pointer<SdlSurface> surface, Pointer<ffi.Utf8> file)
       >('IMG_SavePNG');
   final filePointer = file != null ? file.toNativeUtf8() : nullptr;
   final result = imgSavePngLookupFunction(surface, filePointer);
-  calloc.free(filePointer);
+  ffi.calloc.free(filePointer);
   return result;
 }
 
@@ -3678,12 +3678,12 @@ bool imgSavePngIo(
 bool imgSaveTga(Pointer<SdlSurface> surface, String? file) {
   final imgSaveTgaLookupFunction = _libImage
       .lookupFunction<
-        Bool Function(Pointer<SdlSurface> surface, Pointer<Utf8> file),
-        bool Function(Pointer<SdlSurface> surface, Pointer<Utf8> file)
+        Bool Function(Pointer<SdlSurface> surface, Pointer<ffi.Utf8> file),
+        bool Function(Pointer<SdlSurface> surface, Pointer<ffi.Utf8> file)
       >('IMG_SaveTGA');
   final filePointer = file != null ? file.toNativeUtf8() : nullptr;
   final result = imgSaveTgaLookupFunction(surface, filePointer);
-  calloc.free(filePointer);
+  ffi.calloc.free(filePointer);
   return result;
 }
 
@@ -3766,18 +3766,18 @@ bool imgSaveWebp(Pointer<SdlSurface> surface, String? file, double quality) {
       .lookupFunction<
         Bool Function(
           Pointer<SdlSurface> surface,
-          Pointer<Utf8> file,
+          Pointer<ffi.Utf8> file,
           Float quality,
         ),
         bool Function(
           Pointer<SdlSurface> surface,
-          Pointer<Utf8> file,
+          Pointer<ffi.Utf8> file,
           double quality,
         )
       >('IMG_SaveWEBP');
   final filePointer = file != null ? file.toNativeUtf8() : nullptr;
   final result = imgSaveWebpLookupFunction(surface, filePointer, quality);
-  calloc.free(filePointer);
+  ffi.calloc.free(filePointer);
   return result;
 }
 
@@ -3868,12 +3868,12 @@ bool imgSaveWebpIo(
 Pointer<ImgAnimation> imgLoadAnimation(String? file) {
   final imgLoadAnimationLookupFunction = _libImage
       .lookupFunction<
-        Pointer<ImgAnimation> Function(Pointer<Utf8> file),
-        Pointer<ImgAnimation> Function(Pointer<Utf8> file)
+        Pointer<ImgAnimation> Function(Pointer<ffi.Utf8> file),
+        Pointer<ImgAnimation> Function(Pointer<ffi.Utf8> file)
       >('IMG_LoadAnimation');
   final filePointer = file != null ? file.toNativeUtf8() : nullptr;
   final result = imgLoadAnimationLookupFunction(filePointer);
-  calloc.free(filePointer);
+  ffi.calloc.free(filePointer);
   return result;
 }
 
@@ -3976,12 +3976,12 @@ Pointer<ImgAnimation> imgLoadAnimationTypedIo(
         Pointer<ImgAnimation> Function(
           Pointer<SdlIoStream> src,
           Bool closeio,
-          Pointer<Utf8> type,
+          Pointer<ffi.Utf8> type,
         ),
         Pointer<ImgAnimation> Function(
           Pointer<SdlIoStream> src,
           bool closeio,
-          Pointer<Utf8> type,
+          Pointer<ffi.Utf8> type,
         )
       >('IMG_LoadAnimationTyped_IO');
   final typePointer = type != null ? type.toNativeUtf8() : nullptr;
@@ -3990,7 +3990,7 @@ Pointer<ImgAnimation> imgLoadAnimationTypedIo(
     closeio,
     typePointer,
   );
-  calloc.free(typePointer);
+  ffi.calloc.free(typePointer);
   return result;
 }
 
@@ -4233,12 +4233,12 @@ Pointer<ImgAnimation> imgLoadWebpAnimationIo(Pointer<SdlIoStream> src) {
 bool imgSaveAnimation(Pointer<ImgAnimation> anim, String? file) {
   final imgSaveAnimationLookupFunction = _libImage
       .lookupFunction<
-        Bool Function(Pointer<ImgAnimation> anim, Pointer<Utf8> file),
-        bool Function(Pointer<ImgAnimation> anim, Pointer<Utf8> file)
+        Bool Function(Pointer<ImgAnimation> anim, Pointer<ffi.Utf8> file),
+        bool Function(Pointer<ImgAnimation> anim, Pointer<ffi.Utf8> file)
       >('IMG_SaveAnimation');
   final filePointer = file != null ? file.toNativeUtf8() : nullptr;
   final result = imgSaveAnimationLookupFunction(anim, filePointer);
-  calloc.free(filePointer);
+  ffi.calloc.free(filePointer);
   return result;
 }
 
@@ -4290,13 +4290,13 @@ bool imgSaveAnimationTypedIo(
           Pointer<ImgAnimation> anim,
           Pointer<SdlIoStream> dst,
           Bool closeio,
-          Pointer<Utf8> type,
+          Pointer<ffi.Utf8> type,
         ),
         bool Function(
           Pointer<ImgAnimation> anim,
           Pointer<SdlIoStream> dst,
           bool closeio,
-          Pointer<Utf8> type,
+          Pointer<ffi.Utf8> type,
         )
       >('IMG_SaveAnimationTyped_IO');
   final typePointer = type != null ? type.toNativeUtf8() : nullptr;
@@ -4306,7 +4306,7 @@ bool imgSaveAnimationTypedIo(
     closeio,
     typePointer,
   );
-  calloc.free(typePointer);
+  ffi.calloc.free(typePointer);
   return result;
 }
 
@@ -4692,12 +4692,12 @@ void imgFreeAnimation(Pointer<ImgAnimation> anim) {
 Pointer<ImgAnimationEncoder> imgCreateAnimationEncoder(String? file) {
   final imgCreateAnimationEncoderLookupFunction = _libImage
       .lookupFunction<
-        Pointer<ImgAnimationEncoder> Function(Pointer<Utf8> file),
-        Pointer<ImgAnimationEncoder> Function(Pointer<Utf8> file)
+        Pointer<ImgAnimationEncoder> Function(Pointer<ffi.Utf8> file),
+        Pointer<ImgAnimationEncoder> Function(Pointer<ffi.Utf8> file)
       >('IMG_CreateAnimationEncoder');
   final filePointer = file != null ? file.toNativeUtf8() : nullptr;
   final result = imgCreateAnimationEncoderLookupFunction(filePointer);
-  calloc.free(filePointer);
+  ffi.calloc.free(filePointer);
   return result;
 }
 
@@ -4748,12 +4748,12 @@ Pointer<ImgAnimationEncoder> imgCreateAnimationEncoderIo(
         Pointer<ImgAnimationEncoder> Function(
           Pointer<SdlIoStream> dst,
           Bool closeio,
-          Pointer<Utf8> type,
+          Pointer<ffi.Utf8> type,
         ),
         Pointer<ImgAnimationEncoder> Function(
           Pointer<SdlIoStream> dst,
           bool closeio,
-          Pointer<Utf8> type,
+          Pointer<ffi.Utf8> type,
         )
       >('IMG_CreateAnimationEncoder_IO');
   final typePointer = type != null ? type.toNativeUtf8() : nullptr;
@@ -4762,7 +4762,7 @@ Pointer<ImgAnimationEncoder> imgCreateAnimationEncoderIo(
     closeio,
     typePointer,
   );
-  calloc.free(typePointer);
+  ffi.calloc.free(typePointer);
   return result;
 }
 
@@ -4951,12 +4951,12 @@ bool imgCloseAnimationEncoder(Pointer<ImgAnimationEncoder> encoder) {
 Pointer<ImgAnimationDecoder> imgCreateAnimationDecoder(String? file) {
   final imgCreateAnimationDecoderLookupFunction = _libImage
       .lookupFunction<
-        Pointer<ImgAnimationDecoder> Function(Pointer<Utf8> file),
-        Pointer<ImgAnimationDecoder> Function(Pointer<Utf8> file)
+        Pointer<ImgAnimationDecoder> Function(Pointer<ffi.Utf8> file),
+        Pointer<ImgAnimationDecoder> Function(Pointer<ffi.Utf8> file)
       >('IMG_CreateAnimationDecoder');
   final filePointer = file != null ? file.toNativeUtf8() : nullptr;
   final result = imgCreateAnimationDecoderLookupFunction(filePointer);
-  calloc.free(filePointer);
+  ffi.calloc.free(filePointer);
   return result;
 }
 
@@ -5008,12 +5008,12 @@ Pointer<ImgAnimationDecoder> imgCreateAnimationDecoderIo(
         Pointer<ImgAnimationDecoder> Function(
           Pointer<SdlIoStream> src,
           Bool closeio,
-          Pointer<Utf8> type,
+          Pointer<ffi.Utf8> type,
         ),
         Pointer<ImgAnimationDecoder> Function(
           Pointer<SdlIoStream> src,
           bool closeio,
-          Pointer<Utf8> type,
+          Pointer<ffi.Utf8> type,
         )
       >('IMG_CreateAnimationDecoder_IO');
   final typePointer = type != null ? type.toNativeUtf8() : nullptr;
@@ -5022,7 +5022,7 @@ Pointer<ImgAnimationDecoder> imgCreateAnimationDecoderIo(
     closeio,
     typePointer,
   );
-  calloc.free(typePointer);
+  ffi.calloc.free(typePointer);
   return result;
 }
 

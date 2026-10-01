@@ -1,5 +1,5 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-part of '../sdl.dart';
+part of '../sdl_mouse.dart';
 
 ///
 /// Return whether a mouse is currently connected.
@@ -90,8 +90,8 @@ Pointer<Uint32> sdlGetMice(Pointer<Int32> count) {
 String? sdlGetMouseNameForId(int instanceId) {
   final sdlGetMouseNameForIdLookupFunction = _libSdl
       .lookupFunction<
-        Pointer<Utf8> Function(Uint32 instanceId),
-        Pointer<Utf8> Function(int instanceId)
+        Pointer<ffi.Utf8> Function(Uint32 instanceId),
+        Pointer<ffi.Utf8> Function(int instanceId)
       >('SDL_GetMouseNameForID');
   final result = sdlGetMouseNameForIdLookupFunction(instanceId);
   if (result == nullptr) {

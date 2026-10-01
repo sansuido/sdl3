@@ -110,8 +110,8 @@ Pointer<SdlSurface> rotateSurface90Degrees(
   bpp = details.ref.bitsPerPixel ~/ 8;
   //  bpp = src.ref.format.ref.bitsPerPixel ~/ 8;
 
-  final srcBuf = calloc<Pointer<Uint8>>();
-  final dstBuf = calloc<Pointer<Uint8>>();
+  final srcBuf = ffi.calloc<Pointer<Uint8>>();
+  final dstBuf = ffi.calloc<Pointer<Uint8>>();
 
   print(normalizedClockwiseTurns);
   switch (normalizedClockwiseTurns) {
@@ -216,7 +216,7 @@ Pointer<SdlSurface> rotateSurface90Degrees(
   //if (SDL_MUSTLOCK(dst)) {
   sdlUnlockSurface(dst);
   //}
-  calloc
+  ffi.calloc
     ..free(srcBuf)
     ..free(dstBuf);
   return dst;

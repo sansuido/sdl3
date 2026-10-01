@@ -58,12 +58,12 @@ typedef SdlAudioPostmixCallback = Void Function(
 // typedef const void *(SDLCALL *SDL_ClipboardDataCallback)(void *userdata, const char *mime_type, size_t *size)
 typedef SdlClipboardDataCallbackDart = Pointer<Void> Function(
   Pointer<Void> userdata,
-  Pointer<Utf8> mimeType,
+  Pointer<ffi.Utf8> mimeType,
   Pointer<Size> size,
 );
 typedef SdlClipboardDataCallback = Pointer<Void> Function(
   Pointer<Void> userdata,
-  Pointer<Utf8> mimeType,
+  Pointer<ffi.Utf8> mimeType,
   Pointer<Size> size,
 );
 
@@ -96,27 +96,27 @@ typedef SdlEventFilter = Bool Function(
 // typedef SDL_EnumerationResult (SDLCALL *SDL_EnumerateDirectoryCallback)(void *userdata, const char *dirname, const char *fname)
 typedef SdlEnumerateDirectoryCallbackDart = int Function(
   Pointer<Void> userdata,
-  Pointer<Utf8> dirname,
-  Pointer<Utf8> fname,
+  Pointer<ffi.Utf8> dirname,
+  Pointer<ffi.Utf8> fname,
 );
 typedef SdlEnumerateDirectoryCallback = Int32 Function(
   Pointer<Void> userdata,
-  Pointer<Utf8> dirname,
-  Pointer<Utf8> fname,
+  Pointer<ffi.Utf8> dirname,
+  Pointer<ffi.Utf8> fname,
 );
 
 // typedef void(SDLCALL *SDL_HintCallback)(void *userdata, const char *name, const char *oldValue, const char *newValue)
 typedef SdlHintCallbackDart = void Function(
   Pointer<Void> userdata,
-  Pointer<Utf8> name,
-  Pointer<Utf8> oldValue,
-  Pointer<Utf8> newValue,
+  Pointer<ffi.Utf8> name,
+  Pointer<ffi.Utf8> oldValue,
+  Pointer<ffi.Utf8> newValue,
 );
 typedef SdlHintCallback = Void Function(
   Pointer<Void> userdata,
-  Pointer<Utf8> name,
-  Pointer<Utf8> oldValue,
-  Pointer<Utf8> newValue,
+  Pointer<ffi.Utf8> name,
+  Pointer<ffi.Utf8> oldValue,
+  Pointer<ffi.Utf8> newValue,
 );
 
 // typedef SDL_AppResult (SDLCALL *SDL_AppInit_func)(void **appstate, int argc, char *argv[])
@@ -298,13 +298,13 @@ typedef SdlLogOutputFunctionDart = void Function(
   Pointer<Void> userdata,
   int category,
   int priority,
-  Pointer<Utf8> message,
+  Pointer<ffi.Utf8> message,
 );
 typedef SdlLogOutputFunction = Void Function(
   Pointer<Void> userdata,
   Int32 category,
   Int32 priority,
-  Pointer<Utf8> message,
+  Pointer<ffi.Utf8> message,
 );
 
 // typedef int (SDLCALL *SDL_main_func)(int argc, char *argv[])
@@ -343,12 +343,12 @@ typedef SdlCleanupPropertyCallback = Void Function(
 typedef SdlEnumeratePropertiesCallbackDart = void Function(
   Pointer<Void> userdata,
   int props,
-  Pointer<Utf8> name,
+  Pointer<ffi.Utf8> name,
 );
 typedef SdlEnumeratePropertiesCallback = Void Function(
   Pointer<Void> userdata,
   Uint32 props,
-  Pointer<Utf8> name,
+  Pointer<ffi.Utf8> name,
 );
 
 // typedef void *(SDLCALL *SDL_malloc_func)(size_t size)
@@ -401,13 +401,13 @@ typedef SdlStorageInterfaceReady = Bool Function(Pointer<Void> userdata);
 // typedef bool (SDLCALL *SDL_StorageInterfaceEnumerate)(void *userdata, const char *path, SDL_EnumerateDirectoryCallback callback, void *callback_userdata)
 typedef SdlStorageInterfaceEnumerateDart = bool Function(
   Pointer<Void> userdata,
-  Pointer<Utf8> path,
+  Pointer<ffi.Utf8> path,
   Pointer<NativeFunction<SdlEnumerateDirectoryCallback>> callback,
   Pointer<Void> callbackUserdata,
 );
 typedef SdlStorageInterfaceEnumerate = Bool Function(
   Pointer<Void> userdata,
-  Pointer<Utf8> path,
+  Pointer<ffi.Utf8> path,
   Pointer<NativeFunction<SdlEnumerateDirectoryCallback>> callback,
   Pointer<Void> callbackUserdata,
 );
@@ -415,25 +415,25 @@ typedef SdlStorageInterfaceEnumerate = Bool Function(
 // typedef bool (SDLCALL *SDL_StorageInterfaceInfo)(void *userdata, const char *path, SDL_PathInfo *SDL_StorageInterfaceInfo)
 typedef SdlStorageInterfaceInfoDart = bool Function(
   Pointer<Void> userdata,
-  Pointer<Utf8> path,
+  Pointer<ffi.Utf8> path,
   Pointer<SdlPathInfo> sdlStorageInterfaceInfo,
 );
 typedef SdlStorageInterfaceInfo = Bool Function(
   Pointer<Void> userdata,
-  Pointer<Utf8> path,
+  Pointer<ffi.Utf8> path,
   Pointer<SdlPathInfo> sdlStorageInterfaceInfo,
 );
 
 // typedef bool (SDLCALL *SDL_StorageInterfaceReadFile)(void *userdata, const char *path, void *destination, Uint64 length)
 typedef SdlStorageInterfaceReadFileDart = bool Function(
   Pointer<Void> userdata,
-  Pointer<Utf8> path,
+  Pointer<ffi.Utf8> path,
   Pointer<Void> destination,
   int length,
 );
 typedef SdlStorageInterfaceReadFile = Bool Function(
   Pointer<Void> userdata,
-  Pointer<Utf8> path,
+  Pointer<ffi.Utf8> path,
   Pointer<Void> destination,
   Uint64 length,
 );
@@ -441,13 +441,13 @@ typedef SdlStorageInterfaceReadFile = Bool Function(
 // typedef bool (SDLCALL *SDL_StorageInterfaceWriteFile)(void *userdata, const char *path, const void *source, Uint64 length)
 typedef SdlStorageInterfaceWriteFileDart = bool Function(
   Pointer<Void> userdata,
-  Pointer<Utf8> path,
+  Pointer<ffi.Utf8> path,
   Pointer<Void> source,
   int length,
 );
 typedef SdlStorageInterfaceWriteFile = Bool Function(
   Pointer<Void> userdata,
-  Pointer<Utf8> path,
+  Pointer<ffi.Utf8> path,
   Pointer<Void> source,
   Uint64 length,
 );
@@ -455,45 +455,45 @@ typedef SdlStorageInterfaceWriteFile = Bool Function(
 // typedef bool (SDLCALL *SDL_StorageInterfaceMkdir)(void *userdata, const char *path)
 typedef SdlStorageInterfaceMkdirDart = bool Function(
   Pointer<Void> userdata,
-  Pointer<Utf8> path,
+  Pointer<ffi.Utf8> path,
 );
 typedef SdlStorageInterfaceMkdir = Bool Function(
   Pointer<Void> userdata,
-  Pointer<Utf8> path,
+  Pointer<ffi.Utf8> path,
 );
 
 // typedef bool (SDLCALL *SDL_StorageInterfaceRemove)(void *userdata, const char *path)
 typedef SdlStorageInterfaceRemoveDart = bool Function(
   Pointer<Void> userdata,
-  Pointer<Utf8> path,
+  Pointer<ffi.Utf8> path,
 );
 typedef SdlStorageInterfaceRemove = Bool Function(
   Pointer<Void> userdata,
-  Pointer<Utf8> path,
+  Pointer<ffi.Utf8> path,
 );
 
 // typedef bool (SDLCALL *SDL_StorageInterfaceRename)(void *userdata, const char *oldpath, const char *newpath)
 typedef SdlStorageInterfaceRenameDart = bool Function(
   Pointer<Void> userdata,
-  Pointer<Utf8> oldpath,
-  Pointer<Utf8> newpath,
+  Pointer<ffi.Utf8> oldpath,
+  Pointer<ffi.Utf8> newpath,
 );
 typedef SdlStorageInterfaceRename = Bool Function(
   Pointer<Void> userdata,
-  Pointer<Utf8> oldpath,
-  Pointer<Utf8> newpath,
+  Pointer<ffi.Utf8> oldpath,
+  Pointer<ffi.Utf8> newpath,
 );
 
 // typedef bool (SDLCALL *SDL_StorageInterfaceCopy)(void *userdata, const char *oldpath, const char *newpath)
 typedef SdlStorageInterfaceCopyDart = bool Function(
   Pointer<Void> userdata,
-  Pointer<Utf8> oldpath,
-  Pointer<Utf8> newpath,
+  Pointer<ffi.Utf8> oldpath,
+  Pointer<ffi.Utf8> newpath,
 );
 typedef SdlStorageInterfaceCopy = Bool Function(
   Pointer<Void> userdata,
-  Pointer<Utf8> oldpath,
-  Pointer<Utf8> newpath,
+  Pointer<ffi.Utf8> oldpath,
+  Pointer<ffi.Utf8> newpath,
 );
 
 // typedef Uint64 (SDLCALL *SDL_StorageInterfaceSpaceRemaining)(void *userdata)
@@ -531,24 +531,24 @@ typedef SdlIOsAnimationCallback = Void Function(Pointer<Void> userdata);
 // typedef void (SDLCALL *SDL_RequestAndroidPermissionCallback)(void *userdata, const char *permission, bool granted)
 typedef SdlRequestAndroidPermissionCallbackDart = void Function(
   Pointer<Void> userdata,
-  Pointer<Utf8> permission,
+  Pointer<ffi.Utf8> permission,
   bool granted,
 );
 typedef SdlRequestAndroidPermissionCallback = Void Function(
   Pointer<Void> userdata,
-  Pointer<Utf8> permission,
+  Pointer<ffi.Utf8> permission,
   Bool granted,
 );
 
 // typedef void (SDLCALL *SDL_RequestOpenHarmonyPermissionCallback)(void *userdata, const char *permission, bool granted)
 typedef SdlRequestOpenHarmonyPermissionCallbackDart = void Function(
   Pointer<Void> userdata,
-  Pointer<Utf8> permission,
+  Pointer<ffi.Utf8> permission,
   bool granted,
 );
 typedef SdlRequestOpenHarmonyPermissionCallback = Void Function(
   Pointer<Void> userdata,
-  Pointer<Utf8> permission,
+  Pointer<ffi.Utf8> permission,
   Bool granted,
 );
 

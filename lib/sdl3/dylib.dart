@@ -5,43 +5,59 @@ class SdlDynamicLibraryService {
   factory SdlDynamicLibraryService() => _instance;
 
   SdlDynamicLibraryService._internal() {
-    String getDefaultSdlFilename(String key) {
-      var header = '';
-      var extension = '';
-      switch (Platform.operatingSystem) {
-        case 'android':
-        case 'fuchsia':
-          header = 'lib';
-          extension = '.so';
-        case 'linux':
-          header = 'lib';
-          extension = '.so.0';
-        case 'ios':
-        case 'macos':
-          header = 'lib';
-          extension = '.dylib';
-        case 'windows':
-          header = '';
-          extension = '.dll';
-      }
-      return header + key + extension;
-    }
-
-    entries = {};
-    entries['sdl'] = getDefaultSdlFilename('SDL3');
-    entries['image'] = getDefaultSdlFilename('SDL3_image');
-    entries['mixer'] = getDefaultSdlFilename('SDL3_mixer');
-    entries['net'] = getDefaultSdlFilename('SDL3_net');
-    entries['ttf'] = getDefaultSdlFilename('SDL3_ttf');
-    entries['shadercross'] = getDefaultSdlFilename('SDL3_shadercross');
+    _filenames['sdl'] = _getDefaultSdlFilename('SDL3');
+    _filenames['image'] = _getDefaultSdlFilename('SDL3_image');
+    _filenames['mixer'] = _getDefaultSdlFilename('SDL3_mixer');
+    _filenames['net'] = _getDefaultSdlFilename('SDL3_net');
+    _filenames['ttf'] = _getDefaultSdlFilename('SDL3_ttf');
+    _filenames['shadercross'] = _getDefaultSdlFilename('SDL3_shadercross');
   }
-  late Map<String, String> entries;
 
   static final _instance = SdlDynamicLibraryService._internal();
 
+  final Map<String, String> _filenames = {};
+
+  final Map<String, DynamicLibrary> _loadedLibraries = {};
+
   void set(String key, String filename) {
-    entries[key] = filename;
+    _filenames[key] = filename;
+    _loadedLibraries.remove(key);
   }
 
-  DynamicLibrary open(String key) => DynamicLibrary.open(entries[key]!);
+  DynamicLibrary open(String key) {
+    if (_loadedLibraries.containsKey(key)) {
+      return _loadedLibraries[key]!;
+    }
+
+    final filename = _filenames[key];
+    if (filename == null) {
+      throw ArgumentError('Unknown library key: $key');
+    }
+    final lib = DynamicLibrary.open(filename);
+    _loadedLibraries[key] = lib;
+
+    return lib;
+  }
+
+  String _getDefaultSdlFilename(String key) {
+    var header = '';
+    var extension = '';
+    switch (Platform.operatingSystem) {
+      case 'android':
+      case 'fuchsia':
+        header = 'lib';
+        extension = '.so';
+      case 'linux':
+        header = 'lib';
+        extension = '.so.0';
+      case 'ios':
+      case 'macos':
+        header = 'lib';
+        extension = '.dylib';
+      case 'windows':
+        header = '';
+        extension = '.dll';
+    }
+    return header + key + extension;
+  }
 }

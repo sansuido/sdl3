@@ -1,5 +1,5 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-part of '../sdl.dart';
+part of '../sdl_error.dart';
 
 ///
 /// Set the SDL error message for the current thread.
@@ -39,12 +39,12 @@ part of '../sdl.dart';
 bool sdlSetError(String? fmt) {
   final sdlSetErrorLookupFunction = _libSdl
       .lookupFunction<
-        Bool Function(Pointer<Utf8> fmt),
-        bool Function(Pointer<Utf8> fmt)
+        Bool Function(Pointer<ffi.Utf8> fmt),
+        bool Function(Pointer<ffi.Utf8> fmt)
       >('SDL_SetError');
   final fmtPointer = fmt != null ? fmt.toNativeUtf8() : nullptr;
   final result = sdlSetErrorLookupFunction(fmtPointer);
-  calloc.free(fmtPointer);
+  ffi.calloc.free(fmtPointer);
   return result;
 }
 
@@ -76,12 +76,12 @@ bool sdlSetError(String? fmt) {
 bool sdlSetErrorV(String? fmt) {
   final sdlSetErrorVLookupFunction = _libSdl
       .lookupFunction<
-        Bool Function(Pointer<Utf8> fmt),
-        bool Function(Pointer<Utf8> fmt)
+        Bool Function(Pointer<ffi.Utf8> fmt),
+        bool Function(Pointer<ffi.Utf8> fmt)
       >('SDL_SetErrorV');
   final fmtPointer = fmt != null ? fmt.toNativeUtf8() : nullptr;
   final result = sdlSetErrorVLookupFunction(fmtPointer);
-  calloc.free(fmtPointer);
+  ffi.calloc.free(fmtPointer);
   return result;
 }
 
@@ -155,9 +155,10 @@ bool sdlOutOfMemory() {
 /// {@category error}
 String? sdlGetError() {
   final sdlGetErrorLookupFunction = _libSdl
-      .lookupFunction<Pointer<Utf8> Function(), Pointer<Utf8> Function()>(
-        'SDL_GetError',
-      );
+      .lookupFunction<
+        Pointer<ffi.Utf8> Function(),
+        Pointer<ffi.Utf8> Function()
+      >('SDL_GetError');
   final result = sdlGetErrorLookupFunction();
   if (result == nullptr) {
     return null;

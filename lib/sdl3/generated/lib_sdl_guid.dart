@@ -1,5 +1,5 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-part of '../sdl.dart';
+part of '../sdl_guid.dart';
 
 ///
 /// Get an ASCII string representation for a given SDL_GUID.
@@ -58,11 +58,11 @@ void sdlGuidToString(SdlGuid guid, Pointer<Int8> pszGuid, int cbGuid) {
 SdlGuid sdlStringToGuid(String? pchGuid) {
   final sdlStringToGuidLookupFunction = _libSdl
       .lookupFunction<
-        SdlGuid Function(Pointer<Utf8> pchGuid),
-        SdlGuid Function(Pointer<Utf8> pchGuid)
+        SdlGuid Function(Pointer<ffi.Utf8> pchGuid),
+        SdlGuid Function(Pointer<ffi.Utf8> pchGuid)
       >('SDL_StringToGUID');
   final pchGuidPointer = pchGuid != null ? pchGuid.toNativeUtf8() : nullptr;
   final result = sdlStringToGuidLookupFunction(pchGuidPointer);
-  calloc.free(pchGuidPointer);
+  ffi.calloc.free(pchGuidPointer);
   return result;
 }

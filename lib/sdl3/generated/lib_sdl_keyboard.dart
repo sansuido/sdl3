@@ -1,5 +1,5 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-part of '../sdl.dart';
+part of '../sdl_keyboard.dart';
 
 ///
 /// Return whether a keyboard is currently connected.
@@ -90,8 +90,8 @@ Pointer<Uint32> sdlGetKeyboards(Pointer<Int32> count) {
 String? sdlGetKeyboardNameForId(int instanceId) {
   final sdlGetKeyboardNameForIdLookupFunction = _libSdl
       .lookupFunction<
-        Pointer<Utf8> Function(Uint32 instanceId),
-        Pointer<Utf8> Function(int instanceId)
+        Pointer<ffi.Utf8> Function(Uint32 instanceId),
+        Pointer<ffi.Utf8> Function(int instanceId)
       >('SDL_GetKeyboardNameForID');
   final result = sdlGetKeyboardNameForIdLookupFunction(instanceId);
   if (result == nullptr) {
@@ -363,12 +363,12 @@ int sdlGetScancodeFromKey(int key, Pointer<Uint16> modstate) {
 bool sdlSetScancodeName(int scancode, String? name) {
   final sdlSetScancodeNameLookupFunction = _libSdl
       .lookupFunction<
-        Bool Function(Int32 scancode, Pointer<Utf8> name),
-        bool Function(int scancode, Pointer<Utf8> name)
+        Bool Function(Int32 scancode, Pointer<ffi.Utf8> name),
+        bool Function(int scancode, Pointer<ffi.Utf8> name)
       >('SDL_SetScancodeName');
   final namePointer = name != null ? name.toNativeUtf8() : nullptr;
   final result = sdlSetScancodeNameLookupFunction(scancode, namePointer);
-  calloc.free(namePointer);
+  ffi.calloc.free(namePointer);
   return result;
 }
 
@@ -407,8 +407,8 @@ bool sdlSetScancodeName(int scancode, String? name) {
 String? sdlGetScancodeName(int scancode) {
   final sdlGetScancodeNameLookupFunction = _libSdl
       .lookupFunction<
-        Pointer<Utf8> Function(Int32 scancode),
-        Pointer<Utf8> Function(int scancode)
+        Pointer<ffi.Utf8> Function(Int32 scancode),
+        Pointer<ffi.Utf8> Function(int scancode)
       >('SDL_GetScancodeName');
   final result = sdlGetScancodeNameLookupFunction(scancode);
   if (result == nullptr) {
@@ -443,12 +443,12 @@ String? sdlGetScancodeName(int scancode) {
 int sdlGetScancodeFromName(String? name) {
   final sdlGetScancodeFromNameLookupFunction = _libSdl
       .lookupFunction<
-        Int32 Function(Pointer<Utf8> name),
-        int Function(Pointer<Utf8> name)
+        Int32 Function(Pointer<ffi.Utf8> name),
+        int Function(Pointer<ffi.Utf8> name)
       >('SDL_GetScancodeFromName');
   final namePointer = name != null ? name.toNativeUtf8() : nullptr;
   final result = sdlGetScancodeFromNameLookupFunction(namePointer);
-  calloc.free(namePointer);
+  ffi.calloc.free(namePointer);
   return result;
 }
 
@@ -481,8 +481,8 @@ int sdlGetScancodeFromName(String? name) {
 String? sdlGetKeyName(int key) {
   final sdlGetKeyNameLookupFunction = _libSdl
       .lookupFunction<
-        Pointer<Utf8> Function(Uint32 key),
-        Pointer<Utf8> Function(int key)
+        Pointer<ffi.Utf8> Function(Uint32 key),
+        Pointer<ffi.Utf8> Function(int key)
       >('SDL_GetKeyName');
   final result = sdlGetKeyNameLookupFunction(key);
   if (result == nullptr) {
@@ -517,12 +517,12 @@ String? sdlGetKeyName(int key) {
 int sdlGetKeyFromName(String? name) {
   final sdlGetKeyFromNameLookupFunction = _libSdl
       .lookupFunction<
-        Uint32 Function(Pointer<Utf8> name),
-        int Function(Pointer<Utf8> name)
+        Uint32 Function(Pointer<ffi.Utf8> name),
+        int Function(Pointer<ffi.Utf8> name)
       >('SDL_GetKeyFromName');
   final namePointer = name != null ? name.toNativeUtf8() : nullptr;
   final result = sdlGetKeyFromNameLookupFunction(namePointer);
-  calloc.free(namePointer);
+  ffi.calloc.free(namePointer);
   return result;
 }
 

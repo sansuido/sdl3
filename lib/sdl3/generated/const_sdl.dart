@@ -64,6 +64,7 @@ const SDL_AUDIO_F32BE = 0x9120;
 //const SDL_AUDIO_DEVICE_DEFAULT_PLAYBACK = ((SDL_AudioDeviceID) 0xFFFFFFFF);
 //const SDL_AUDIO_DEVICE_DEFAULT_RECORDING = ((SDL_AudioDeviceID) 0xFFFFFFFE);
 //const SDL_AUDIO_FRAMESIZE = (x) (SDL_AUDIO_BYTESIZE((x).format) * (x).channels);
+const SDL_PROP_AUDIO_DEVICE_UNIQUE_ID_STRING = 'SDL.audio.device.unique_id';
 const SDL_PROP_AUDIOSTREAM_AUTO_CLEANUP_BOOLEAN =
     'SDL.audiostream.auto_cleanup';
 //const SDL_begin_code_h = ;
@@ -1433,6 +1434,7 @@ const SDLK_OPER = 0x400000a1;
 const SDLK_CLEARAGAIN = 0x400000a2;
 const SDLK_CRSEL = 0x400000a3;
 const SDLK_EXSEL = 0x400000a4;
+const SDLK_FRONT = 0x400000a5;
 const SDLK_KP_00 = 0x400000b0;
 const SDLK_KP_000 = 0x400000b1;
 const SDLK_THOUSANDSSEPARATOR = 0x400000b2;
@@ -2245,7 +2247,7 @@ const SDL_RENDERER_VSYNC_ADAPTIVE = -1;
 const SDL_DEBUG_TEXT_FONT_CHARACTER_SIZE = 8;
 //const SDL_revision_h_ = ;
 const SDL_REVISION =
-    'SDL-3.5.0-release-3.4.0-1449-ga6c68172b (" SDL_VENDOR_INFO ")';
+    'SDL-3.5.0-release-3.4.0-1490-g1ce4c5bc2 (" SDL_VENDOR_INFO ")';
 //const SDL_scancode_h_ = ;
 const SDL_SCANCODE_UNKNOWN = 0;
 const SDL_SCANCODE_A = 4;
@@ -2406,6 +2408,7 @@ const SDL_SCANCODE_OPER = 161;
 const SDL_SCANCODE_CLEARAGAIN = 162;
 const SDL_SCANCODE_CRSEL = 163;
 const SDL_SCANCODE_EXSEL = 164;
+const SDL_SCANCODE_FRONT = 165;
 const SDL_SCANCODE_KP_00 = 176;
 const SDL_SCANCODE_KP_000 = 177;
 const SDL_SCANCODE_THOUSANDSSEPARATOR = 178;
@@ -2899,6 +2902,8 @@ const SDL_PROP_WINDOW_CREATE_WAYLAND_WINDOW_ID_STRING =
     'SDL.window.create.wayland.window_id';
 const SDL_PROP_WINDOW_CREATE_WAYLAND_WL_SURFACE_POINTER =
     'SDL.window.create.wayland.wl_surface';
+const SDL_PROP_WINDOW_CREATE_WAYLAND_ENABLE_INSETS_BOOLEAN =
+    'SDL.window.create.wayland.enable_insets';
 const SDL_PROP_WINDOW_CREATE_WIN32_HWND_POINTER =
     'SDL.window.create.win32.hwnd';
 const SDL_PROP_WINDOW_CREATE_WIN32_PIXEL_FORMAT_HWND_POINTER =
@@ -2965,6 +2970,14 @@ const SDL_PROP_WINDOW_WAYLAND_XDG_POPUP_POINTER =
     'SDL.window.wayland.xdg_popup';
 const SDL_PROP_WINDOW_WAYLAND_XDG_POSITIONER_POINTER =
     'SDL.window.wayland.xdg_positioner';
+const SDL_PROP_WINDOW_WAYLAND_BORDER_INSET_LEFT_NUMBER =
+    'SDL.window.wayland.border_inset_left';
+const SDL_PROP_WINDOW_WAYLAND_BORDER_INSET_TOP_NUMBER =
+    'SDL.window.wayland.border_inset_top';
+const SDL_PROP_WINDOW_WAYLAND_BORDER_INSET_RIGHT_NUMBER =
+    'SDL.window.wayland.border_inset_right';
+const SDL_PROP_WINDOW_WAYLAND_BORDER_INSET_BOTTOM_NUMBER =
+    'SDL.window.wayland.border_inset_bottom';
 const SDL_PROP_WINDOW_X11_DISPLAY_POINTER = 'SDL.window.x11.display';
 const SDL_PROP_WINDOW_X11_SCREEN_NUMBER = 'SDL.window.x11.screen';
 const SDL_PROP_WINDOW_X11_WINDOW_NUMBER = 'SDL.window.x11.window';
@@ -4547,6 +4560,7 @@ class Sdlk {
   static const clearagain = SDLK_CLEARAGAIN;
   static const crsel = SDLK_CRSEL;
   static const exsel = SDLK_EXSEL;
+  static const front = SDLK_FRONT;
   static const kp00 = SDLK_KP_00;
   static const kp000 = SDLK_KP_000;
   static const thousandsseparator = SDLK_THOUSANDSSEPARATOR;
@@ -5499,6 +5513,7 @@ class SdlkScancode {
   static const clearagain = SDL_SCANCODE_CLEARAGAIN;
   static const crsel = SDL_SCANCODE_CRSEL;
   static const exsel = SDL_SCANCODE_EXSEL;
+  static const front = SDL_SCANCODE_FRONT;
   static const kp00 = SDL_SCANCODE_KP_00;
   static const kp000 = SDL_SCANCODE_KP_000;
   static const thousandsseparator = SDL_SCANCODE_THOUSANDSSEPARATOR;
@@ -5892,6 +5907,8 @@ class SdlkPropWindow {
       SDL_PROP_WINDOW_CREATE_WAYLAND_WINDOW_ID_STRING;
   static const createWaylandWlSurfacePointer =
       SDL_PROP_WINDOW_CREATE_WAYLAND_WL_SURFACE_POINTER;
+  static const createWaylandEnableInsetsBoolean =
+      SDL_PROP_WINDOW_CREATE_WAYLAND_ENABLE_INSETS_BOOLEAN;
   static const createWin32HwndPointer =
       SDL_PROP_WINDOW_CREATE_WIN32_HWND_POINTER;
   static const createWin32PixelFormatHwndPointer =
@@ -5960,6 +5977,14 @@ class SdlkPropWindow {
       SDL_PROP_WINDOW_WAYLAND_XDG_POPUP_POINTER;
   static const waylandXdgPositionerPointer =
       SDL_PROP_WINDOW_WAYLAND_XDG_POSITIONER_POINTER;
+  static const waylandBorderInsetLeftNumber =
+      SDL_PROP_WINDOW_WAYLAND_BORDER_INSET_LEFT_NUMBER;
+  static const waylandBorderInsetTopNumber =
+      SDL_PROP_WINDOW_WAYLAND_BORDER_INSET_TOP_NUMBER;
+  static const waylandBorderInsetRightNumber =
+      SDL_PROP_WINDOW_WAYLAND_BORDER_INSET_RIGHT_NUMBER;
+  static const waylandBorderInsetBottomNumber =
+      SDL_PROP_WINDOW_WAYLAND_BORDER_INSET_BOTTOM_NUMBER;
   static const x11DisplayPointer = SDL_PROP_WINDOW_X11_DISPLAY_POINTER;
   static const x11ScreenNumber = SDL_PROP_WINDOW_X11_SCREEN_NUMBER;
   static const x11WindowNumber = SDL_PROP_WINDOW_X11_WINDOW_NUMBER;

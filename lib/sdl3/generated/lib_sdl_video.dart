@@ -1,5 +1,5 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-part of '../sdl.dart';
+part of '../sdl_video.dart';
 
 ///
 /// Get the number of video drivers compiled into SDL.
@@ -59,8 +59,8 @@ int sdlGetNumVideoDrivers() {
 String? sdlGetVideoDriver(int index) {
   final sdlGetVideoDriverLookupFunction = _libSdl
       .lookupFunction<
-        Pointer<Utf8> Function(Int32 index),
-        Pointer<Utf8> Function(int index)
+        Pointer<ffi.Utf8> Function(Int32 index),
+        Pointer<ffi.Utf8> Function(int index)
       >('SDL_GetVideoDriver');
   final result = sdlGetVideoDriverLookupFunction(index);
   if (result == nullptr) {
@@ -96,9 +96,10 @@ String? sdlGetVideoDriver(int index) {
 /// {@category video}
 String? sdlGetCurrentVideoDriver() {
   final sdlGetCurrentVideoDriverLookupFunction = _libSdl
-      .lookupFunction<Pointer<Utf8> Function(), Pointer<Utf8> Function()>(
-        'SDL_GetCurrentVideoDriver',
-      );
+      .lookupFunction<
+        Pointer<ffi.Utf8> Function(),
+        Pointer<ffi.Utf8> Function()
+      >('SDL_GetCurrentVideoDriver');
   final result = sdlGetCurrentVideoDriverLookupFunction();
   if (result == nullptr) {
     return null;
@@ -264,8 +265,8 @@ int sdlGetDisplayProperties(int displayId) {
 String? sdlGetDisplayName(int displayId) {
   final sdlGetDisplayNameLookupFunction = _libSdl
       .lookupFunction<
-        Pointer<Utf8> Function(Uint32 displayId),
-        Pointer<Utf8> Function(int displayId)
+        Pointer<ffi.Utf8> Function(Uint32 displayId),
+        Pointer<ffi.Utf8> Function(int displayId)
       >('SDL_GetDisplayName');
   final result = sdlGetDisplayNameLookupFunction(displayId);
   if (result == nullptr) {
@@ -1094,13 +1095,13 @@ Pointer<SdlWindow> sdlCreateWindow(String? title, int w, int h, int flags) {
   final sdlCreateWindowLookupFunction = _libSdl
       .lookupFunction<
         Pointer<SdlWindow> Function(
-          Pointer<Utf8> title,
+          Pointer<ffi.Utf8> title,
           Int32 w,
           Int32 h,
           Uint64 flags,
         ),
         Pointer<SdlWindow> Function(
-          Pointer<Utf8> title,
+          Pointer<ffi.Utf8> title,
           int w,
           int h,
           int flags,
@@ -1108,7 +1109,7 @@ Pointer<SdlWindow> sdlCreateWindow(String? title, int w, int h, int flags) {
       >('SDL_CreateWindow');
   final titlePointer = title != null ? title.toNativeUtf8() : nullptr;
   final result = sdlCreateWindowLookupFunction(titlePointer, w, h, flags);
-  calloc.free(titlePointer);
+  ffi.calloc.free(titlePointer);
   return result;
 }
 
@@ -1328,6 +1329,9 @@ Pointer<SdlWindow> sdlCreatePopupWindow(
 /// window.
 /// - `SDL_PROP_WINDOW_CREATE_WAYLAND_WL_SURFACE_POINTER` - the wl_surface
 /// associated with the window, if you want to wrap an existing window. See
+/// [README-wayland](README-wayland) for more information.
+/// - `SDL_PROP_WINDOW_CREATE_WAYLAND_ENABLE_INSETS_BOOLEAN` - true if the
+/// application wants to enable custom border inset window properties. See
 /// [README-wayland](README-wayland) for more information.
 ///
 /// These are additional supported properties on Windows:
@@ -1608,6 +1612,10 @@ Pointer<SdlWindow> sdlGetWindowParent(Pointer<SdlWindow> window) {
 /// show/hide calls. They will be null if the window is hidden and must be
 /// queried each time it is shown.
 ///
+/// Note: The `border_inset_*` properties can be set by the application when
+/// client-side decorations such as shadows or invisible resize borders extend
+/// beyond the visible frame (see docs/README-wayland.md for details).
+///
 /// - `SDL_PROP_WINDOW_WAYLAND_DISPLAY_POINTER`: the wl_display associated with
 /// the window
 /// - `SDL_PROP_WINDOW_WAYLAND_SURFACE_POINTER`: the wl_surface associated with
@@ -1632,6 +1640,14 @@ Pointer<SdlWindow> sdlGetWindowParent(Pointer<SdlWindow> window) {
 /// associated with the window
 /// - `SDL_PROP_WINDOW_WAYLAND_XDG_POSITIONER_POINTER`: the xdg_positioner
 /// associated with the window, in popup mode
+/// - `SDL_PROP_WINDOW_WAYLAND_BORDER_INSET_LEFT_NUMBER`: the left border inset
+/// of the visible window
+/// - `SDL_PROP_WINDOW_WAYLAND_BORDER_INSET_TOP_NUMBER`: the top border inset
+/// of the visible window
+/// - `SDL_PROP_WINDOW_WAYLAND_BORDER_INSET_RIGHT_NUMBER`: the right border
+/// inset of the visible window
+/// - `SDL_PROP_WINDOW_WAYLAND_BORDER_INSET_BOTTOM_NUMBER`: the bottom border
+/// inset of the visible window
 ///
 /// On X11:
 ///
@@ -1743,12 +1759,12 @@ int sdlGetWindowFlags(Pointer<SdlWindow> window) {
 bool sdlSetWindowTitle(Pointer<SdlWindow> window, String? title) {
   final sdlSetWindowTitleLookupFunction = _libSdl
       .lookupFunction<
-        Bool Function(Pointer<SdlWindow> window, Pointer<Utf8> title),
-        bool Function(Pointer<SdlWindow> window, Pointer<Utf8> title)
+        Bool Function(Pointer<SdlWindow> window, Pointer<ffi.Utf8> title),
+        bool Function(Pointer<SdlWindow> window, Pointer<ffi.Utf8> title)
       >('SDL_SetWindowTitle');
   final titlePointer = title != null ? title.toNativeUtf8() : nullptr;
   final result = sdlSetWindowTitleLookupFunction(window, titlePointer);
-  calloc.free(titlePointer);
+  ffi.calloc.free(titlePointer);
   return result;
 }
 
@@ -1776,8 +1792,8 @@ bool sdlSetWindowTitle(Pointer<SdlWindow> window, String? title) {
 String? sdlGetWindowTitle(Pointer<SdlWindow> window) {
   final sdlGetWindowTitleLookupFunction = _libSdl
       .lookupFunction<
-        Pointer<Utf8> Function(Pointer<SdlWindow> window),
-        Pointer<Utf8> Function(Pointer<SdlWindow> window)
+        Pointer<ffi.Utf8> Function(Pointer<SdlWindow> window),
+        Pointer<ffi.Utf8> Function(Pointer<SdlWindow> window)
       >('SDL_GetWindowTitle');
   final result = sdlGetWindowTitleLookupFunction(window);
   if (result == nullptr) {
@@ -4114,12 +4130,12 @@ bool sdlDisableScreenSaver() {
 bool sdlGlLoadLibrary(String? path) {
   final sdlGlLoadLibraryLookupFunction = _libSdl
       .lookupFunction<
-        Bool Function(Pointer<Utf8> path),
-        bool Function(Pointer<Utf8> path)
+        Bool Function(Pointer<ffi.Utf8> path),
+        bool Function(Pointer<ffi.Utf8> path)
       >('SDL_GL_LoadLibrary');
   final pathPointer = path != null ? path.toNativeUtf8() : nullptr;
   final result = sdlGlLoadLibraryLookupFunction(pathPointer);
-  calloc.free(pathPointer);
+  ffi.calloc.free(pathPointer);
   return result;
 }
 
@@ -4188,13 +4204,15 @@ Pointer<NativeFunction<SdlFunctionPointer>> sdlGlGetProcAddress(String? proc) {
   final sdlGlGetProcAddressLookupFunction = _libSdl
       .lookupFunction<
         Pointer<NativeFunction<SdlFunctionPointer>> Function(
-          Pointer<Utf8> proc,
+          Pointer<ffi.Utf8> proc,
         ),
-        Pointer<NativeFunction<SdlFunctionPointer>> Function(Pointer<Utf8> proc)
+        Pointer<NativeFunction<SdlFunctionPointer>> Function(
+          Pointer<ffi.Utf8> proc,
+        )
       >('SDL_GL_GetProcAddress');
   final procPointer = proc != null ? proc.toNativeUtf8() : nullptr;
   final result = sdlGlGetProcAddressLookupFunction(procPointer);
-  calloc.free(procPointer);
+  ffi.calloc.free(procPointer);
   return result;
 }
 
@@ -4227,13 +4245,15 @@ Pointer<NativeFunction<SdlFunctionPointer>> sdlEglGetProcAddress(String? proc) {
   final sdlEglGetProcAddressLookupFunction = _libSdl
       .lookupFunction<
         Pointer<NativeFunction<SdlFunctionPointer>> Function(
-          Pointer<Utf8> proc,
+          Pointer<ffi.Utf8> proc,
         ),
-        Pointer<NativeFunction<SdlFunctionPointer>> Function(Pointer<Utf8> proc)
+        Pointer<NativeFunction<SdlFunctionPointer>> Function(
+          Pointer<ffi.Utf8> proc,
+        )
       >('SDL_EGL_GetProcAddress');
   final procPointer = proc != null ? proc.toNativeUtf8() : nullptr;
   final result = sdlEglGetProcAddressLookupFunction(procPointer);
-  calloc.free(procPointer);
+  ffi.calloc.free(procPointer);
   return result;
 }
 
@@ -4292,14 +4312,14 @@ void sdlGlUnloadLibrary() {
 bool sdlGlExtensionSupported(String? extension) {
   final sdlGlExtensionSupportedLookupFunction = _libSdl
       .lookupFunction<
-        Bool Function(Pointer<Utf8> extension),
-        bool Function(Pointer<Utf8> extension)
+        Bool Function(Pointer<ffi.Utf8> extension),
+        bool Function(Pointer<ffi.Utf8> extension)
       >('SDL_GL_ExtensionSupported');
   final extensionPointer = extension != null
       ? extension.toNativeUtf8()
       : nullptr;
   final result = sdlGlExtensionSupportedLookupFunction(extensionPointer);
-  calloc.free(extensionPointer);
+  ffi.calloc.free(extensionPointer);
   return result;
 }
 

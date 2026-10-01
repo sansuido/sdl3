@@ -1,5 +1,5 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-part of '../sdl.dart';
+part of '../sdl_audio.dart';
 
 ///
 /// Use this function to get the number of built-in audio drivers.
@@ -71,8 +71,8 @@ int sdlGetNumAudioDrivers() {
 String? sdlGetAudioDriver(int index) {
   final sdlGetAudioDriverLookupFunction = _libSdl
       .lookupFunction<
-        Pointer<Utf8> Function(Int32 index),
-        Pointer<Utf8> Function(int index)
+        Pointer<ffi.Utf8> Function(Int32 index),
+        Pointer<ffi.Utf8> Function(int index)
       >('SDL_GetAudioDriver');
   final result = sdlGetAudioDriverLookupFunction(index);
   if (result == nullptr) {
@@ -105,9 +105,10 @@ String? sdlGetAudioDriver(int index) {
 /// {@category audio}
 String? sdlGetCurrentAudioDriver() {
   final sdlGetCurrentAudioDriverLookupFunction = _libSdl
-      .lookupFunction<Pointer<Utf8> Function(), Pointer<Utf8> Function()>(
-        'SDL_GetCurrentAudioDriver',
-      );
+      .lookupFunction<
+        Pointer<ffi.Utf8> Function(),
+        Pointer<ffi.Utf8> Function()
+      >('SDL_GetCurrentAudioDriver');
   final result = sdlGetCurrentAudioDriverLookupFunction();
   if (result == nullptr) {
     return null;
@@ -237,8 +238,8 @@ Pointer<Uint32> sdlGetAudioRecordingDevices(Pointer<Int32> count) {
 String? sdlGetAudioDeviceName(int devid) {
   final sdlGetAudioDeviceNameLookupFunction = _libSdl
       .lookupFunction<
-        Pointer<Utf8> Function(Uint32 devid),
-        Pointer<Utf8> Function(int devid)
+        Pointer<ffi.Utf8> Function(Uint32 devid),
+        Pointer<ffi.Utf8> Function(int devid)
       >('SDL_GetAudioDeviceName');
   final result = sdlGetAudioDeviceNameLookupFunction(devid);
   if (result == nullptr) {
@@ -345,6 +346,62 @@ Pointer<Int32> sdlGetAudioDeviceChannelMap(int devid, Pointer<Int32> count) {
         Pointer<Int32> Function(int devid, Pointer<Int32> count)
       >('SDL_GetAudioDeviceChannelMap');
   return sdlGetAudioDeviceChannelMapLookupFunction(devid, count);
+}
+
+///
+/// Get the properties associated with an audio device.
+///
+/// This can be used with both logical and physical devices. Note that while
+/// apps can hang any data they want here, physical device IDs are global; it
+/// would be better to assign data to one's own logical device so it doesn't
+/// interfere with other parts of the program that might be using the same
+/// physical device ID.
+///
+/// Properties provided by SDL for physical devices will also be made available
+/// on their associated logical devices, unless otherwise noted.
+///
+/// The application can hang any data it wants here, but the following
+/// properties are understood by SDL:
+///
+/// - `SDL_PROP_AUDIO_DEVICE_UNIQUE_ID_STRING`: This identifier can be used to
+/// locate a specific device. In optimal conditions, this identifier will not
+/// change between runs of an app, hardware disconnection, and system
+/// reboots. However, depending on the hardware, operating system, and other
+/// circumstances, a device's identifier may change, so if the app cannot
+/// find a device with a previously queried identifier, the user should be
+/// prompted to choose a new device (possibly the same device, now with a new
+/// identifier). Device identifier strings have no specific format, the
+/// format may change in the future without warning, and are likely different
+/// between different operating systems on the same hardware. If the system
+/// cannot reasonably provide a unique identifier, this property will not be
+/// set. Note that property is useful for finding specific hardware again on
+/// a later run of the app, but often times it's better to just open the
+/// default device (SDL_AUDIO_DEVICE_DEFAULT_PLAYBACK or
+/// SDL_AUDIO_DEVICE_DEFAULT_RECORDING), and let the user set this up
+/// globally on their platform.
+///
+/// \param devid the audio device instance id to query.
+/// \returns a valid property ID on success or 0 on failure; call
+/// SDL_GetError() for more information.
+///
+/// \threadsafety It is safe to call this function from any thread.
+///
+/// \since This function is available since SDL 3.6.0.
+///
+/// ```c
+/// extern SDL_DECLSPEC SDL_PropertiesID SDLCALL SDL_GetAudioDeviceProperties(SDL_AudioDeviceID devid)
+/// ```
+///
+/// See also:
+/// - [SDL_GetAudioDeviceProperties - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetAudioDeviceProperties)
+///
+/// {@category audio}
+int sdlGetAudioDeviceProperties(int devid) {
+  final sdlGetAudioDevicePropertiesLookupFunction = _libSdl
+      .lookupFunction<Uint32 Function(Uint32 devid), int Function(int devid)>(
+        'SDL_GetAudioDeviceProperties',
+      );
+  return sdlGetAudioDevicePropertiesLookupFunction(devid);
 }
 
 ///
@@ -2750,13 +2807,13 @@ bool sdlLoadWav(
   final sdlLoadWavLookupFunction = _libSdl
       .lookupFunction<
         Bool Function(
-          Pointer<Utf8> path,
+          Pointer<ffi.Utf8> path,
           Pointer<SdlAudioSpec> spec,
           Pointer<Pointer<Uint8>> audioBuf,
           Pointer<Uint32> audioLen,
         ),
         bool Function(
-          Pointer<Utf8> path,
+          Pointer<ffi.Utf8> path,
           Pointer<SdlAudioSpec> spec,
           Pointer<Pointer<Uint8>> audioBuf,
           Pointer<Uint32> audioLen,
@@ -2769,7 +2826,7 @@ bool sdlLoadWav(
     audioBuf,
     audioLen,
   );
-  calloc.free(pathPointer);
+  ffi.calloc.free(pathPointer);
   return result;
 }
 
@@ -2937,8 +2994,8 @@ bool sdlConvertAudioSamples(
 String? sdlGetAudioFormatName(int format) {
   final sdlGetAudioFormatNameLookupFunction = _libSdl
       .lookupFunction<
-        Pointer<Utf8> Function(Int32 format),
-        Pointer<Utf8> Function(int format)
+        Pointer<ffi.Utf8> Function(Int32 format),
+        Pointer<ffi.Utf8> Function(int format)
       >('SDL_GetAudioFormatName');
   final result = sdlGetAudioFormatNameLookupFunction(format);
   if (result == nullptr) {

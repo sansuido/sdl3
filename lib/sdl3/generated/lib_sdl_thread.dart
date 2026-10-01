@@ -1,5 +1,5 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-part of '../sdl.dart';
+part of '../sdl_thread.dart';
 
 ///
 /// Create a new thread with a default stack size.
@@ -51,18 +51,18 @@ Pointer<SdlThread> sdlCreateThread(
       .lookupFunction<
         Pointer<SdlThread> Function(
           Pointer<NativeFunction<SdlThreadFunction>> fn,
-          Pointer<Utf8> name,
+          Pointer<ffi.Utf8> name,
           Pointer<Void> data,
         ),
         Pointer<SdlThread> Function(
           Pointer<NativeFunction<SdlThreadFunction>> fn,
-          Pointer<Utf8> name,
+          Pointer<ffi.Utf8> name,
           Pointer<Void> data,
         )
       >('SDL_CreateThread');
   final namePointer = name != null ? name.toNativeUtf8() : nullptr;
   final result = sdlCreateThreadLookupFunction(fn, namePointer, data);
-  calloc.free(namePointer);
+  ffi.calloc.free(namePointer);
   return result;
 }
 
@@ -184,14 +184,14 @@ Pointer<SdlThread> sdlCreateThreadRuntime(
       .lookupFunction<
         Pointer<SdlThread> Function(
           Pointer<NativeFunction<SdlThreadFunction>> fn,
-          Pointer<Utf8> name,
+          Pointer<ffi.Utf8> name,
           Pointer<Void> data,
           Pointer<NativeFunction<SdlFunctionPointer>> pfnBeginThread,
           Pointer<NativeFunction<SdlFunctionPointer>> pfnEndThread,
         ),
         Pointer<SdlThread> Function(
           Pointer<NativeFunction<SdlThreadFunction>> fn,
-          Pointer<Utf8> name,
+          Pointer<ffi.Utf8> name,
           Pointer<Void> data,
           Pointer<NativeFunction<SdlFunctionPointer>> pfnBeginThread,
           Pointer<NativeFunction<SdlFunctionPointer>> pfnEndThread,
@@ -205,7 +205,7 @@ Pointer<SdlThread> sdlCreateThreadRuntime(
     pfnBeginThread,
     pfnEndThread,
   );
-  calloc.free(namePointer);
+  ffi.calloc.free(namePointer);
   return result;
 }
 
@@ -278,8 +278,8 @@ Pointer<SdlThread> sdlCreateThreadWithPropertiesRuntime(
 String? sdlGetThreadName(Pointer<SdlThread> thread) {
   final sdlGetThreadNameLookupFunction = _libSdl
       .lookupFunction<
-        Pointer<Utf8> Function(Pointer<SdlThread> thread),
-        Pointer<Utf8> Function(Pointer<SdlThread> thread)
+        Pointer<ffi.Utf8> Function(Pointer<SdlThread> thread),
+        Pointer<ffi.Utf8> Function(Pointer<SdlThread> thread)
       >('SDL_GetThreadName');
   final result = sdlGetThreadNameLookupFunction(thread);
   if (result == nullptr) {

@@ -1,0 +1,2215 @@
+part of '../sdl_ttf.dart';
+
+extension TtfFontEx on TtfFont {
+  ///
+  /// This function gets the version of the dynamically linked SDL_ttf library.
+  ///
+  /// \returns SDL_ttf version.
+  ///
+  /// \threadsafety It is safe to call this function from any thread.
+  ///
+  /// \since This function is available since SDL_ttf 3.0.0.
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC int SDLCALL TTF_Version(void)
+  /// ```
+  ///
+  /// See also:
+  /// - [TTF_Version - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_Version)
+  ///
+  /// {@category ttf}
+  static int version() => ttfVersion();
+
+  ///
+  /// Query the version of the FreeType library in use.
+  ///
+  /// TTF_Init() should be called before calling this function.
+  ///
+  /// \param major to be filled in with the major version number. Can be NULL.
+  /// \param minor to be filled in with the minor version number. Can be NULL.
+  /// \param patch to be filled in with the param version number. Can be NULL.
+  ///
+  /// \threadsafety It is safe to call this function from any thread.
+  ///
+  /// \since This function is available since SDL_ttf 3.0.0.
+  ///
+  /// \sa TTF_Init
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC void SDLCALL TTF_GetFreeTypeVersion(int *major, int *minor, int *patch)
+  /// ```
+  ///
+  /// See also:
+  /// - [TTF_GetFreeTypeVersion - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetFreeTypeVersion)
+  ///
+  /// {@category ttf}
+  static ({int major, int minor, int patch}) getFreeTypeVersion() =>
+      ttfxGetFreeTypeVersion();
+
+  ///
+  /// Query the version of the HarfBuzz library in use.
+  ///
+  /// If HarfBuzz is not available, the version reported is 0.0.0.
+  ///
+  /// \param major to be filled in with the major version number. Can be NULL.
+  /// \param minor to be filled in with the minor version number. Can be NULL.
+  /// \param patch to be filled in with the param version number. Can be NULL.
+  ///
+  /// \threadsafety It is safe to call this function from any thread.
+  ///
+  /// \since This function is available since SDL_ttf 3.0.0.
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC void SDLCALL TTF_GetHarfBuzzVersion(int *major, int *minor, int *patch)
+  /// ```
+  ///
+  /// See also:
+  /// - [TTF_GetHarfBuzzVersion - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetHarfBuzzVersion)
+  ///
+  /// {@category ttf}
+  static ({int major, int minor, int patch}) getHarfBuzzVersion() =>
+      ttfxGetHarfBuzzVersion();
+
+  ///
+  /// Initialize SDL_ttf.
+  ///
+  /// You must successfully call this function before it is safe to call any
+  /// other function in this library.
+  ///
+  /// It is safe to call this more than once, and each successful TTF_Init() call
+  /// should be paired with a matching TTF_Quit() call.
+  ///
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
+  ///
+  /// \since This function is available since SDL_ttf 3.0.0.
+  ///
+  /// \sa TTF_Quit
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC bool SDLCALL TTF_Init(void)
+  /// ```
+  ///
+  /// See also:
+  /// - [TTF_Init - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_Init)
+  ///
+  /// {@category ttf}
+  static bool init() => ttfInit();
+
+  ///
+  /// Create a font from a file, using a specified point size.
+  ///
+  /// Some .fon fonts will have several sizes embedded in the file, so the point
+  /// size becomes the index of choosing which size. If the value is too high,
+  /// the last indexed size will be the default.
+  ///
+  /// When done with the returned TTF_Font, use TTF_CloseFont() to dispose of it.
+  ///
+  /// \param file path to font file.
+  /// \param ptsize point size to use for the newly-opened font.
+  /// \returns a valid TTF_Font, or NULL on failure; call SDL_GetError() for more
+  /// information.
+  ///
+  /// \threadsafety It is safe to call this function from any thread.
+  ///
+  /// \since This function is available since SDL_ttf 3.0.0.
+  ///
+  /// \sa TTF_CloseFont
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC TTF_Font * SDLCALL TTF_OpenFont(const char *file, float ptsize)
+  /// ```
+  ///
+  /// See also:
+  /// - [TTF_OpenFont - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_OpenFont)
+  ///
+  /// {@category ttf}
+  static Pointer<TtfFont> open(String file, double ptsize) =>
+      ttfOpenFont(file, ptsize);
+
+  ///
+  /// Create a font from an SDL_IOStream, using a specified point size.
+  ///
+  /// Some .fon fonts will have several sizes embedded in the file, so the point
+  /// size becomes the index of choosing which size. If the value is too high,
+  /// the last indexed size will be the default.
+  ///
+  /// If `closeio` is true, `src` will be automatically closed once the font is
+  /// closed. Otherwise you should keep `src` open until the font is closed.
+  ///
+  /// When done with the returned TTF_Font, use TTF_CloseFont() to dispose of it.
+  ///
+  /// \param src an SDL_IOStream to provide a font file's data.
+  /// \param closeio true to close `src` when the font is closed, false to leave
+  /// it open.
+  /// \param ptsize point size to use for the newly-opened font.
+  /// \returns a valid TTF_Font, or NULL on failure; call SDL_GetError() for more
+  /// information.
+  ///
+  /// \threadsafety It is safe to call this function from any thread.
+  ///
+  /// \since This function is available since SDL_ttf 3.0.0.
+  ///
+  /// \sa TTF_CloseFont
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC TTF_Font * SDLCALL TTF_OpenFontIO(SDL_IOStream *src, bool closeio, float ptsize)
+  /// ```
+  ///
+  /// See also:
+  /// - [TTF_OpenFontIO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_OpenFontIO)
+  ///
+  /// {@category ttf}
+  static Pointer<TtfFont> openIo(
+    Pointer<SdlIoStream> src,
+    double ptsize, {
+    bool closeio = false,
+  }) => ttfOpenFontIo(src, closeio, ptsize);
+
+  ///
+  /// Create a font with the specified properties.
+  ///
+  /// These are the supported properties:
+  ///
+  /// - `TTF_PROP_FONT_CREATE_FILENAME_STRING`: the font file to open, if an
+  /// SDL_IOStream isn't being used. This is required if
+  /// `TTF_PROP_FONT_CREATE_IOSTREAM_POINTER` and
+  /// `TTF_PROP_FONT_CREATE_EXISTING_FONT_POINTER` aren't set.
+  /// - `TTF_PROP_FONT_CREATE_IOSTREAM_POINTER`: an SDL_IOStream containing the
+  /// font to be opened. This should not be closed until the font is closed.
+  /// This is required if `TTF_PROP_FONT_CREATE_FILENAME_STRING` and
+  /// `TTF_PROP_FONT_CREATE_EXISTING_FONT_POINTER` aren't set.
+  /// - `TTF_PROP_FONT_CREATE_IOSTREAM_OFFSET_NUMBER`: the offset in the iostream
+  /// for the beginning of the font, defaults to 0.
+  /// - `TTF_PROP_FONT_CREATE_IOSTREAM_AUTOCLOSE_BOOLEAN`: true if closing the
+  /// font should also close the associated SDL_IOStream.
+  /// - `TTF_PROP_FONT_CREATE_SIZE_FLOAT`: the point size of the font. Some .fon
+  /// fonts will have several sizes embedded in the file, so the point size
+  /// becomes the index of choosing which size. If the value is too high, the
+  /// last indexed size will be the default.
+  /// - `TTF_PROP_FONT_CREATE_FACE_NUMBER`: the face index of the font, if the
+  /// font contains multiple font faces.
+  /// - `TTF_PROP_FONT_CREATE_HORIZONTAL_DPI_NUMBER`: the horizontal DPI to use
+  /// for font rendering, defaults to
+  /// `TTF_PROP_FONT_CREATE_VERTICAL_DPI_NUMBER` if set, or 72 otherwise.
+  /// - `TTF_PROP_FONT_CREATE_VERTICAL_DPI_NUMBER`: the vertical DPI to use for
+  /// font rendering, defaults to `TTF_PROP_FONT_CREATE_HORIZONTAL_DPI_NUMBER`
+  /// if set, or 72 otherwise.
+  /// - `TTF_PROP_FONT_CREATE_EXISTING_FONT_POINTER`: an optional TTF_Font that,
+  /// if set, will be used as the font data source and the initial size and
+  /// style of the new font.
+  ///
+  /// \param props the properties to use.
+  /// \returns a valid TTF_Font, or NULL on failure; call SDL_GetError() for more
+  /// information.
+  ///
+  /// \threadsafety It is safe to call this function from any thread.
+  ///
+  /// \since This function is available since SDL_ttf 3.0.0.
+  ///
+  /// \sa TTF_CloseFont
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC TTF_Font * SDLCALL TTF_OpenFontWithProperties(SDL_PropertiesID props)
+  /// ```
+  ///
+  /// See also:
+  /// - [TTF_OpenFontWithProperties - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_OpenFontWithProperties)
+  ///
+  /// {@category ttf}
+  static Pointer<TtfFont> openWithProperties(int props) =>
+      ttfOpenFontWithProperties(props);
+
+  ///
+  /// Get the script used by a 32-bit codepoint.
+  ///
+  /// \param ch the character code to check.
+  /// \returns an
+  /// [ISO 15924 code](https://unicode.org/iso15924/iso15924-codes.html)
+  /// on success, or 0 on failure; call SDL_GetError() for more
+  /// information.
+  ///
+  /// \threadsafety This function is thread-safe.
+  ///
+  /// \since This function is available since SDL_ttf 3.0.0.
+  ///
+  /// \sa TTF_TagToString
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC Uint32 SDLCALL TTF_GetGlyphScript(Uint32 ch)
+  /// ```
+  ///
+  /// See also:
+  /// - [TTF_GetGlyphScript - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetGlyphScript)
+  ///
+  /// {@category ttf}
+  static int getGlyphScript(int ch) => ttfGetGlyphScript(ch);
+
+  ///
+  /// Deinitialize SDL_ttf.
+  ///
+  /// You must call this when done with the library, to free internal resources.
+  /// It is safe to call this when the library isn't initialized, as it will just
+  /// return immediately.
+  ///
+  /// Once you have as many quit calls as you have had successful calls to
+  /// TTF_Init, the library will actually deinitialize.
+  ///
+  /// Please note that this does not automatically close any fonts that are still
+  /// open at the time of deinitialization, and it is possibly not safe to close
+  /// them afterwards, as parts of the library will no longer be initialized to
+  /// deal with it. A well-written program should call TTF_CloseFont() on any
+  /// open fonts before calling this function!
+  ///
+  /// \threadsafety It is safe to call this function from any thread.
+  ///
+  /// \since This function is available since SDL_ttf 3.0.0.
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC void SDLCALL TTF_Quit(void)
+  /// ```
+  ///
+  /// See also:
+  /// - [TTF_Quit - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_Quit)
+  ///
+  /// {@category ttf}
+  static void quit() => ttfQuit();
+
+  ///
+  /// Check if SDL_ttf is initialized.
+  ///
+  /// This reports the number of times the library has been initialized by a call
+  /// to TTF_Init(), without a paired deinitialization request from TTF_Quit().
+  ///
+  /// In short: if it's greater than zero, the library is currently initialized
+  /// and ready to work. If zero, it is not initialized.
+  ///
+  /// Despite the return value being a signed integer, this function should not
+  /// return a negative number.
+  ///
+  /// \returns the current number of initialization calls, that need to
+  /// eventually be paired with this many calls to TTF_Quit().
+  ///
+  /// \threadsafety It is safe to call this function from any thread.
+  ///
+  /// \since This function is available since SDL_ttf 3.0.0.
+  ///
+  /// \sa TTF_Init
+  /// \sa TTF_Quit
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC int SDLCALL TTF_WasInit(void)
+  /// ```
+  ///
+  /// See also:
+  /// - [TTF_WasInit - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_WasInit)
+  ///
+  /// {@category ttf}
+  static int wasInit() => ttfWasInit();
+}
+
+extension TtfFontPointerEx on Pointer<TtfFont> {
+  // lib_sdl_ttf.dart
+
+  ///
+  /// Create a copy of an existing font.
+  ///
+  /// The copy will be distinct from the original, but will share the font file
+  /// and have the same size and style as the original.
+  ///
+  /// When done with the returned TTF_Font, use TTF_CloseFont() to dispose of it.
+  ///
+  /// \param existing_font the font to copy.
+  /// \returns a valid TTF_Font, or NULL on failure; call SDL_GetError() for more
+  /// information.
+  ///
+  /// \threadsafety This function should be called on the thread that created the
+  /// original font.
+  ///
+  /// \since This function is available since SDL_ttf 3.0.0.
+  ///
+  /// \sa TTF_CloseFont
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC TTF_Font * SDLCALL TTF_CopyFont(TTF_Font *existing_font)
+  /// ```
+  ///
+  /// See also:
+  /// - [TTF_CopyFont - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_CopyFont)
+  ///
+  /// {@category ttf}
+  Pointer<TtfFont> copy() => ttfCopyFont(this);
+
+  ///
+  /// Get the properties associated with a font.
+  ///
+  /// The following read-write properties are provided by SDL:
+  ///
+  /// - `TTF_PROP_FONT_OUTLINE_LINE_CAP_NUMBER`: The FT_Stroker_LineCap value
+  /// used when setting the font outline, defaults to
+  /// `FT_STROKER_LINECAP_ROUND`.
+  /// - `TTF_PROP_FONT_OUTLINE_LINE_JOIN_NUMBER`: The FT_Stroker_LineJoin value
+  /// used when setting the font outline, defaults to
+  /// `FT_STROKER_LINEJOIN_ROUND`.
+  /// - `TTF_PROP_FONT_OUTLINE_MITER_LIMIT_NUMBER`: The FT_Fixed miter limit used
+  /// when setting the font outline, defaults to 0.
+  ///
+  /// \param font the font to query.
+  /// \returns a valid property ID on success or 0 on failure; call
+  /// SDL_GetError() for more information.
+  ///
+  /// \threadsafety It is safe to call this function from any thread.
+  ///
+  /// \since This function is available since SDL_ttf 3.0.0.
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC SDL_PropertiesID SDLCALL TTF_GetFontProperties(TTF_Font *font)
+  /// ```
+  ///
+  /// See also:
+  /// - [TTF_GetFontProperties - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetFontProperties)
+  ///
+  /// {@category ttf}
+  int getProperties() => ttfGetFontProperties(this);
+
+  ///
+  /// Get the font generation.
+  ///
+  /// The generation is incremented each time font properties change that require
+  /// rebuilding glyphs, such as style, size, etc.
+  ///
+  /// \param font the font to query.
+  /// \returns the font generation or 0 on failure; call SDL_GetError() for more
+  /// information.
+  ///
+  /// \threadsafety This function should be called on the thread that created the
+  /// font.
+  ///
+  /// \since This function is available since SDL_ttf 3.0.0.
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC Uint32 SDLCALL TTF_GetFontGeneration(TTF_Font *font)
+  /// ```
+  ///
+  /// See also:
+  /// - [TTF_GetFontGeneration - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetFontGeneration)
+  ///
+  /// {@category ttf}
+  int getGeneration() => ttfGetFontGeneration(this);
+
+  ///
+  /// Add a fallback font.
+  ///
+  /// Add a font that will be used for glyphs that are not in the current font.
+  /// The fallback font should have the same size and style as the current font.
+  ///
+  /// If there are multiple fallback fonts, they are used in the order added.
+  ///
+  /// This updates any TTF_Text objects using this font.
+  ///
+  /// \param font the font to modify.
+  /// \param fallback the font to add as a fallback.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
+  ///
+  /// \threadsafety This function should be called on the thread that created
+  /// both fonts.
+  ///
+  /// \since This function is available since SDL_ttf 3.0.0.
+  ///
+  /// \sa TTF_ClearFallbackFonts
+  /// \sa TTF_RemoveFallbackFont
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC bool SDLCALL TTF_AddFallbackFont(TTF_Font *font, TTF_Font *fallback)
+  /// ```
+  ///
+  /// See also:
+  /// - [TTF_AddFallbackFont - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_AddFallbackFont)
+  ///
+  /// {@category ttf}
+  bool addFallback(Pointer<TtfFont> fallback) =>
+      ttfAddFallbackFont(this, fallback);
+
+  ///
+  /// Remove a fallback font.
+  ///
+  /// This updates any TTF_Text objects using this font.
+  ///
+  /// \param font the font to modify.
+  /// \param fallback the font to remove as a fallback.
+  ///
+  /// \threadsafety This function should be called on the thread that created
+  /// both fonts.
+  ///
+  /// \since This function is available since SDL_ttf 3.0.0.
+  ///
+  /// \sa TTF_AddFallbackFont
+  /// \sa TTF_ClearFallbackFonts
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC void SDLCALL TTF_RemoveFallbackFont(TTF_Font *font, TTF_Font *fallback)
+  /// ```
+  ///
+  /// See also:
+  /// - [TTF_RemoveFallbackFont - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_RemoveFallbackFont)
+  ///
+  /// {@category ttf}
+  void removeFallback(Pointer<TtfFont> fallback) =>
+      ttfRemoveFallbackFont(this, fallback);
+
+  ///
+  /// Remove all fallback fonts.
+  ///
+  /// This updates any TTF_Text objects using this font.
+  ///
+  /// \param font the font to modify.
+  ///
+  /// \threadsafety This function should be called on the thread that created the
+  /// font.
+  ///
+  /// \since This function is available since SDL_ttf 3.0.0.
+  ///
+  /// \sa TTF_AddFallbackFont
+  /// \sa TTF_RemoveFallbackFont
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC void SDLCALL TTF_ClearFallbackFonts(TTF_Font *font)
+  /// ```
+  ///
+  /// See also:
+  /// - [TTF_ClearFallbackFonts - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_ClearFallbackFonts)
+  ///
+  /// {@category ttf}
+  void clearFallbacks() => ttfClearFallbackFonts(this);
+
+  ///
+  /// Set a font's size dynamically.
+  ///
+  /// This updates any TTF_Text objects using this font, and clears
+  /// already-generated glyphs, if any, from the cache.
+  ///
+  /// \param font the font to resize.
+  /// \param ptsize the new point size.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
+  ///
+  /// \threadsafety This function should be called on the thread that created the
+  /// font.
+  ///
+  /// \since This function is available since SDL_ttf 3.0.0.
+  ///
+  /// \sa TTF_GetFontSize
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC bool SDLCALL TTF_SetFontSize(TTF_Font *font, float ptsize)
+  /// ```
+  ///
+  /// See also:
+  /// - [TTF_SetFontSize - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_SetFontSize)
+  ///
+  /// {@category ttf}
+  bool setSize(double ptsize) => ttfSetFontSize(this, ptsize);
+
+  ///
+  /// Set font size dynamically with target resolutions, in dots per inch.
+  ///
+  /// This updates any TTF_Text objects using this font, and clears
+  /// already-generated glyphs, if any, from the cache.
+  ///
+  /// \param font the font to resize.
+  /// \param ptsize the new point size.
+  /// \param hdpi the target horizontal DPI.
+  /// \param vdpi the target vertical DPI.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
+  ///
+  /// \threadsafety This function should be called on the thread that created the
+  /// font.
+  ///
+  /// \since This function is available since SDL_ttf 3.0.0.
+  ///
+  /// \sa TTF_GetFontSize
+  /// \sa TTF_GetFontSizeDPI
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC bool SDLCALL TTF_SetFontSizeDPI(TTF_Font *font, float ptsize, int hdpi, int vdpi)
+  /// ```
+  ///
+  /// See also:
+  /// - [TTF_SetFontSizeDPI - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_SetFontSizeDPI)
+  ///
+  /// {@category ttf}
+  bool setSizeDpi(double ptsize, int hdpi, int vdpi) =>
+      ttfSetFontSizeDpi(this, ptsize, hdpi, vdpi);
+
+  ///
+  /// Get the size of a font.
+  ///
+  /// \param font the font to query.
+  /// \returns the size of the font, or 0.0f on failure; call SDL_GetError() for
+  /// more information.
+  ///
+  /// \threadsafety This function should be called on the thread that created the
+  /// font.
+  ///
+  /// \since This function is available since SDL_ttf 3.0.0.
+  ///
+  /// \sa TTF_SetFontSize
+  /// \sa TTF_SetFontSizeDPI
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC float SDLCALL TTF_GetFontSize(TTF_Font *font)
+  /// ```
+  ///
+  /// See also:
+  /// - [TTF_GetFontSize - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetFontSize)
+  ///
+  /// {@category ttf}
+  double getSize() => ttfGetFontSize(this);
+
+  ///
+  /// Get font target resolutions, in dots per inch.
+  ///
+  /// \param font the font to query.
+  /// \param hdpi a pointer filled in with the target horizontal DPI.
+  /// \param vdpi a pointer filled in with the target vertical DPI.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
+  ///
+  /// \threadsafety This function should be called on the thread that created the
+  /// font.
+  ///
+  /// \since This function is available since SDL_ttf 3.0.0.
+  ///
+  /// \sa TTF_SetFontSizeDPI
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC bool SDLCALL TTF_GetFontDPI(TTF_Font *font, int *hdpi, int *vdpi)
+  /// ```
+  ///
+  /// See also:
+  /// - [TTF_GetFontDPI - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetFontDPI)
+  ///
+  /// {@category ttf}
+  ({int hdpi, int vdpi})? getDpi() => ttfxGetFontDpi(this);
+
+  ///
+  /// Set a font's current style.
+  ///
+  /// This updates any TTF_Text objects using this font, and clears
+  /// already-generated glyphs, if any, from the cache.
+  ///
+  /// The font styles are a set of bit flags, OR'd together:
+  ///
+  /// - `TTF_STYLE_NORMAL` (is zero)
+  /// - `TTF_STYLE_BOLD`
+  /// - `TTF_STYLE_ITALIC`
+  /// - `TTF_STYLE_UNDERLINE`
+  /// - `TTF_STYLE_STRIKETHROUGH`
+  ///
+  /// \param font the font to set a new style on.
+  /// \param style the new style values to set, OR'd together.
+  ///
+  /// \threadsafety This function should be called on the thread that created the
+  /// font.
+  ///
+  /// \since This function is available since SDL_ttf 3.0.0.
+  ///
+  /// \sa TTF_GetFontStyle
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC void SDLCALL TTF_SetFontStyle(TTF_Font *font, TTF_FontStyleFlags style)
+  /// ```
+  ///
+  /// See also:
+  /// - [TTF_SetFontStyle - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_SetFontStyle)
+  ///
+  /// {@category ttf}
+  void setStyle(int style) => ttfSetFontStyle(this, style);
+
+  ///
+  /// Query a font's current style.
+  ///
+  /// The font styles are a set of bit flags, OR'd together:
+  ///
+  /// - `TTF_STYLE_NORMAL` (is zero)
+  /// - `TTF_STYLE_BOLD`
+  /// - `TTF_STYLE_ITALIC`
+  /// - `TTF_STYLE_UNDERLINE`
+  /// - `TTF_STYLE_STRIKETHROUGH`
+  ///
+  /// \param font the font to query.
+  /// \returns the current font style, as a set of bit flags.
+  ///
+  /// \threadsafety It is safe to call this function from any thread.
+  ///
+  /// \since This function is available since SDL_ttf 3.0.0.
+  ///
+  /// \sa TTF_SetFontStyle
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC TTF_FontStyleFlags SDLCALL TTF_GetFontStyle(const TTF_Font *font)
+  /// ```
+  ///
+  /// See also:
+  /// - [TTF_GetFontStyle - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetFontStyle)
+  ///
+  /// {@category ttf}
+  int getStyle() => ttfGetFontStyle(this);
+
+  ///
+  /// Set a font's current outline.
+  ///
+  /// This uses the font properties `TTF_PROP_FONT_OUTLINE_LINE_CAP_NUMBER`,
+  /// `TTF_PROP_FONT_OUTLINE_LINE_JOIN_NUMBER`, and
+  /// `TTF_PROP_FONT_OUTLINE_MITER_LIMIT_NUMBER` when setting the font outline.
+  ///
+  /// This updates any TTF_Text objects using this font, and clears
+  /// already-generated glyphs, if any, from the cache.
+  ///
+  /// \param font the font to set a new outline on.
+  /// \param outline positive outline value, 0 to default.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
+  ///
+  /// \threadsafety This function should be called on the thread that created the
+  /// font.
+  ///
+  /// \since This function is available since SDL_ttf 3.0.0.
+  ///
+  /// \sa TTF_GetFontOutline
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC bool SDLCALL TTF_SetFontOutline(TTF_Font *font, int outline)
+  /// ```
+  ///
+  /// See also:
+  /// - [TTF_SetFontOutline - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_SetFontOutline)
+  ///
+  /// {@category ttf}
+  bool setOutline(int outline) => ttfSetFontOutline(this, outline);
+
+  ///
+  /// Query a font's current outline.
+  ///
+  /// \param font the font to query.
+  /// \returns the font's current outline value.
+  ///
+  /// \threadsafety It is safe to call this function from any thread.
+  ///
+  /// \since This function is available since SDL_ttf 3.0.0.
+  ///
+  /// \sa TTF_SetFontOutline
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC int SDLCALL TTF_GetFontOutline(const TTF_Font *font)
+  /// ```
+  ///
+  /// See also:
+  /// - [TTF_GetFontOutline - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetFontOutline)
+  ///
+  /// {@category ttf}
+  int getOutline() => ttfGetFontOutline(this);
+
+  ///
+  /// Set a font's current hinter setting.
+  ///
+  /// This updates any TTF_Text objects using this font, and clears
+  /// already-generated glyphs, if any, from the cache.
+  ///
+  /// The hinter setting is a single value:
+  ///
+  /// - `TTF_HINTING_NORMAL`
+  /// - `TTF_HINTING_LIGHT`
+  /// - `TTF_HINTING_MONO`
+  /// - `TTF_HINTING_NONE`
+  /// - `TTF_HINTING_LIGHT_SUBPIXEL` (available in SDL_ttf 3.0.0 and later)
+  ///
+  /// \param font the font to set a new hinter setting on.
+  /// \param hinting the new hinter setting.
+  ///
+  /// \threadsafety This function should be called on the thread that created the
+  /// font.
+  ///
+  /// \since This function is available since SDL_ttf 3.0.0.
+  ///
+  /// \sa TTF_GetFontHinting
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC void SDLCALL TTF_SetFontHinting(TTF_Font *font, TTF_HintingFlags hinting)
+  /// ```
+  ///
+  /// See also:
+  /// - [TTF_SetFontHinting - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_SetFontHinting)
+  ///
+  /// {@category ttf}
+  void setHinting(int hinting) => ttfSetFontHinting(this, hinting);
+
+  ///
+  /// Query the number of faces of a font.
+  ///
+  /// \param font the font to query.
+  /// \returns the number of FreeType font faces.
+  ///
+  /// \threadsafety It is safe to call this function from any thread.
+  ///
+  /// \since This function is available since SDL_ttf 3.0.0.
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC int SDLCALL TTF_GetNumFontFaces(const TTF_Font *font)
+  /// ```
+  ///
+  /// See also:
+  /// - [TTF_GetNumFontFaces - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetNumFontFaces)
+  ///
+  /// {@category ttf}
+  int getNumFaces() => ttfGetNumFontFaces(this);
+
+  ///
+  /// Query a font's current FreeType hinter setting.
+  ///
+  /// The hinter setting is a single value:
+  ///
+  /// - `TTF_HINTING_NORMAL`
+  /// - `TTF_HINTING_LIGHT`
+  /// - `TTF_HINTING_MONO`
+  /// - `TTF_HINTING_NONE`
+  /// - `TTF_HINTING_LIGHT_SUBPIXEL` (available in SDL_ttf 3.0.0 and later)
+  ///
+  /// \param font the font to query.
+  /// \returns the font's current hinter value, or TTF_HINTING_INVALID if the
+  /// font is invalid.
+  ///
+  /// \threadsafety It is safe to call this function from any thread.
+  ///
+  /// \since This function is available since SDL_ttf 3.0.0.
+  ///
+  /// \sa TTF_SetFontHinting
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC TTF_HintingFlags SDLCALL TTF_GetFontHinting(const TTF_Font *font)
+  /// ```
+  ///
+  /// See also:
+  /// - [TTF_GetFontHinting - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetFontHinting)
+  ///
+  /// {@category ttf}
+  int getHinting() => ttfGetFontHinting(this);
+
+  ///
+  /// Enable Signed Distance Field rendering for a font.
+  ///
+  /// SDF is a technique that helps fonts look sharp even when scaling and
+  /// rotating, and requires special shader support for display.
+  ///
+  /// This works with Blended APIs, and generates the raw signed distance values
+  /// in the alpha channel of the resulting texture.
+  ///
+  /// This updates any TTF_Text objects using this font, and clears
+  /// already-generated glyphs, if any, from the cache.
+  ///
+  /// \param font the font to set SDF support on.
+  /// \param enabled true to enable SDF, false to disable.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
+  ///
+  /// \threadsafety This function should be called on the thread that created the
+  /// font.
+  ///
+  /// \since This function is available since SDL_ttf 3.0.0.
+  ///
+  /// \sa TTF_GetFontSDF
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC bool SDLCALL TTF_SetFontSDF(TTF_Font *font, bool enabled)
+  /// ```
+  ///
+  /// See also:
+  /// - [TTF_SetFontSDF - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_SetFontSDF)
+  ///
+  /// {@category ttf}
+  bool setSdf(bool enabled) => ttfSetFontSdf(this, enabled);
+
+  ///
+  /// Query whether Signed Distance Field rendering is enabled for a font.
+  ///
+  /// \param font the font to query.
+  /// \returns true if enabled, false otherwise.
+  ///
+  /// \threadsafety It is safe to call this function from any thread.
+  ///
+  /// \since This function is available since SDL_ttf 3.0.0.
+  ///
+  /// \sa TTF_SetFontSDF
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC bool SDLCALL TTF_GetFontSDF(const TTF_Font *font)
+  /// ```
+  ///
+  /// See also:
+  /// - [TTF_GetFontSDF - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetFontSDF)
+  ///
+  /// {@category ttf}
+  bool getSdf() => ttfGetFontSdf(this);
+
+  ///
+  /// Query a font's weight, in terms of the lightness/heaviness of the strokes.
+  ///
+  /// \param font the font to query.
+  /// \returns the font's current weight.
+  ///
+  /// \threadsafety This function should be called on the thread that created the
+  /// font.
+  ///
+  /// \since This function is available since SDL_ttf 3.2.2.
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC int SDLCALL TTF_GetFontWeight(const TTF_Font *font)
+  /// ```
+  ///
+  /// See also:
+  /// - [TTF_GetFontWeight - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetFontWeight)
+  ///
+  /// {@category ttf}
+  int getWeight() => ttfGetFontWeight(this);
+
+  ///
+  /// Set a font's current wrap alignment option.
+  ///
+  /// This updates any TTF_Text objects using this font.
+  ///
+  /// \param font the font to set a new wrap alignment option on.
+  /// \param align the new wrap alignment option.
+  ///
+  /// \threadsafety This function should be called on the thread that created the
+  /// font.
+  ///
+  /// \since This function is available since SDL_ttf 3.0.0.
+  ///
+  /// \sa TTF_GetFontWrapAlignment
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC void SDLCALL TTF_SetFontWrapAlignment(TTF_Font *font, TTF_HorizontalAlignment align)
+  /// ```
+  ///
+  /// See also:
+  /// - [TTF_SetFontWrapAlignment - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_SetFontWrapAlignment)
+  ///
+  /// {@category ttf}
+  void setWrapAlignment(int align) => ttfSetFontWrapAlignment(this, align);
+
+  ///
+  /// Query a font's current wrap alignment option.
+  ///
+  /// \param font the font to query.
+  /// \returns the font's current wrap alignment option.
+  ///
+  /// \threadsafety It is safe to call this function from any thread.
+  ///
+  /// \since This function is available since SDL_ttf 3.0.0.
+  ///
+  /// \sa TTF_SetFontWrapAlignment
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC TTF_HorizontalAlignment SDLCALL TTF_GetFontWrapAlignment(const TTF_Font *font)
+  /// ```
+  ///
+  /// See also:
+  /// - [TTF_GetFontWrapAlignment - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetFontWrapAlignment)
+  ///
+  /// {@category ttf}
+  int getWrapAlignment() => ttfGetFontWrapAlignment(this);
+
+  ///
+  /// Query the total height of a font.
+  ///
+  /// This is usually equal to point size.
+  ///
+  /// \param font the font to query.
+  /// \returns the font's height.
+  ///
+  /// \threadsafety It is safe to call this function from any thread.
+  ///
+  /// \since This function is available since SDL_ttf 3.0.0.
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC int SDLCALL TTF_GetFontHeight(const TTF_Font *font)
+  /// ```
+  ///
+  /// See also:
+  /// - [TTF_GetFontHeight - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetFontHeight)
+  ///
+  /// {@category ttf}
+  int getHeight() => ttfGetFontHeight(this);
+
+  ///
+  /// Query the offset from the baseline to the top of a font.
+  ///
+  /// This is a positive value, relative to the baseline.
+  ///
+  /// \param font the font to query.
+  /// \returns the font's ascent.
+  ///
+  /// \threadsafety It is safe to call this function from any thread.
+  ///
+  /// \since This function is available since SDL_ttf 3.0.0.
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC int SDLCALL TTF_GetFontAscent(const TTF_Font *font)
+  /// ```
+  ///
+  /// See also:
+  /// - [TTF_GetFontAscent - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetFontAscent)
+  ///
+  /// {@category ttf}
+  int getAscent() => ttfGetFontAscent(this);
+
+  ///
+  /// Query the offset from the baseline to the bottom of a font.
+  ///
+  /// This is a negative value, relative to the baseline.
+  ///
+  /// \param font the font to query.
+  /// \returns the font's descent.
+  ///
+  /// \threadsafety It is safe to call this function from any thread.
+  ///
+  /// \since This function is available since SDL_ttf 3.0.0.
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC int SDLCALL TTF_GetFontDescent(const TTF_Font *font)
+  /// ```
+  ///
+  /// See also:
+  /// - [TTF_GetFontDescent - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetFontDescent)
+  ///
+  /// {@category ttf}
+  int getDescent() => ttfGetFontDescent(this);
+
+  ///
+  /// Set the spacing between lines of text for a font.
+  ///
+  /// This updates any TTF_Text objects using this font.
+  ///
+  /// \param font the font to modify.
+  /// \param lineskip the new line spacing for the font.
+  ///
+  /// \threadsafety This function should be called on the thread that created the
+  /// font.
+  ///
+  /// \since This function is available since SDL_ttf 3.0.0.
+  ///
+  /// \sa TTF_GetFontLineSkip
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC void SDLCALL TTF_SetFontLineSkip(TTF_Font *font, int lineskip)
+  /// ```
+  ///
+  /// See also:
+  /// - [TTF_SetFontLineSkip - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_SetFontLineSkip)
+  ///
+  /// {@category ttf}
+  void setLineSkip(int lineskip) => ttfSetFontLineSkip(this, lineskip);
+
+  ///
+  /// Query the spacing between lines of text for a font.
+  ///
+  /// \param font the font to query.
+  /// \returns the font's recommended spacing.
+  ///
+  /// \threadsafety It is safe to call this function from any thread.
+  ///
+  /// \since This function is available since SDL_ttf 3.0.0.
+  ///
+  /// \sa TTF_SetFontLineSkip
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC int SDLCALL TTF_GetFontLineSkip(const TTF_Font *font)
+  /// ```
+  ///
+  /// See also:
+  /// - [TTF_GetFontLineSkip - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetFontLineSkip)
+  ///
+  /// {@category ttf}
+  int getLineSkip() => ttfGetFontLineSkip(this);
+
+  ///
+  /// Set if kerning is enabled for a font.
+  ///
+  /// Newly-opened fonts default to allowing kerning. This is generally a good
+  /// policy unless you have a strong reason to disable it, as it tends to
+  /// produce better rendering (with kerning disabled, some fonts might render
+  /// the word `kerning` as something that looks like `keming` for example).
+  ///
+  /// This updates any TTF_Text objects using this font.
+  ///
+  /// \param font the font to set kerning on.
+  /// \param enabled true to enable kerning, false to disable.
+  ///
+  /// \threadsafety This function should be called on the thread that created the
+  /// font.
+  ///
+  /// \since This function is available since SDL_ttf 3.0.0.
+  ///
+  /// \sa TTF_GetFontKerning
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC void SDLCALL TTF_SetFontKerning(TTF_Font *font, bool enabled)
+  /// ```
+  ///
+  /// See also:
+  /// - [TTF_SetFontKerning - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_SetFontKerning)
+  ///
+  /// {@category ttf}
+  void setKerning(bool allowed) => ttfSetFontKerning(this, allowed);
+
+  ///
+  /// Query whether or not kerning is enabled for a font.
+  ///
+  /// \param font the font to query.
+  /// \returns true if kerning is enabled, false otherwise.
+  ///
+  /// \threadsafety It is safe to call this function from any thread.
+  ///
+  /// \since This function is available since SDL_ttf 3.0.0.
+  ///
+  /// \sa TTF_SetFontKerning
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC bool SDLCALL TTF_GetFontKerning(const TTF_Font *font)
+  /// ```
+  ///
+  /// See also:
+  /// - [TTF_GetFontKerning - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetFontKerning)
+  ///
+  /// {@category ttf}
+  bool getKerning() => ttfGetFontKerning(this);
+
+  ///
+  /// Query whether a font is fixed-width.
+  ///
+  /// A "fixed-width" font means all glyphs are the same width across; a
+  /// lowercase 'i' will be the same size across as a capital 'W', for example.
+  /// This is common for terminals and text editors, and other apps that treat
+  /// text as a grid. Most other things (WYSIWYG word processors, web pages, etc)
+  /// are more likely to not be fixed-width in most cases.
+  ///
+  /// \param font the font to query.
+  /// \returns true if the font is fixed-width, false otherwise.
+  ///
+  /// \threadsafety It is safe to call this function from any thread.
+  ///
+  /// \since This function is available since SDL_ttf 3.0.0.
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC bool SDLCALL TTF_FontIsFixedWidth(const TTF_Font *font)
+  /// ```
+  ///
+  /// See also:
+  /// - [TTF_FontIsFixedWidth - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_FontIsFixedWidth)
+  ///
+  /// {@category ttf}
+  bool isFixedWidth() => ttfFontIsFixedWidth(this);
+
+  ///
+  /// Query whether a font is scalable or not.
+  ///
+  /// Scalability lets us distinguish between outline and bitmap fonts.
+  ///
+  /// \param font the font to query.
+  /// \returns true if the font is scalable, false otherwise.
+  ///
+  /// \threadsafety It is safe to call this function from any thread.
+  ///
+  /// \since This function is available since SDL_ttf 3.0.0.
+  ///
+  /// \sa TTF_SetFontSDF
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC bool SDLCALL TTF_FontIsScalable(const TTF_Font *font)
+  /// ```
+  ///
+  /// See also:
+  /// - [TTF_FontIsScalable - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_FontIsScalable)
+  ///
+  /// {@category ttf}
+  bool isScalable() => ttfFontIsScalable(this);
+
+  ///
+  /// Query a font's family name.
+  ///
+  /// This string is dictated by the contents of the font file.
+  ///
+  /// Note that the returned string is to internal storage, and should not be
+  /// modified or free'd by the caller. The string becomes invalid, with the rest
+  /// of the font, when `font` is handed to TTF_CloseFont().
+  ///
+  /// \param font the font to query.
+  /// \returns the font's family name.
+  ///
+  /// \threadsafety It is safe to call this function from any thread.
+  ///
+  /// \since This function is available since SDL_ttf 3.0.0.
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC const char * SDLCALL TTF_GetFontFamilyName(const TTF_Font *font)
+  /// ```
+  ///
+  /// See also:
+  /// - [TTF_GetFontFamilyName - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetFontFamilyName)
+  ///
+  /// {@category ttf}
+  String? getFamilyName() => ttfGetFontFamilyName(this);
+
+  ///
+  /// Query a font's style name.
+  ///
+  /// This string is dictated by the contents of the font file.
+  ///
+  /// Note that the returned string is to internal storage, and should not be
+  /// modified or free'd by the caller. The string becomes invalid, with the rest
+  /// of the font, when `font` is handed to TTF_CloseFont().
+  ///
+  /// \param font the font to query.
+  /// \returns the font's style name.
+  ///
+  /// \threadsafety It is safe to call this function from any thread.
+  ///
+  /// \since This function is available since SDL_ttf 3.0.0.
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC const char * SDLCALL TTF_GetFontStyleName(const TTF_Font *font)
+  /// ```
+  ///
+  /// See also:
+  /// - [TTF_GetFontStyleName - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetFontStyleName)
+  ///
+  /// {@category ttf}
+  String? getStyleName() => ttfGetFontStyleName(this);
+
+  ///
+  /// Set the direction to be used for text shaping by a font.
+  ///
+  /// This function only supports left-to-right text shaping if SDL_ttf was not
+  /// built with HarfBuzz support.
+  ///
+  /// This updates any TTF_Text objects using this font.
+  ///
+  /// \param font the font to modify.
+  /// \param direction the new direction for text to flow.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
+  ///
+  /// \threadsafety This function should be called on the thread that created the
+  /// font.
+  ///
+  /// \since This function is available since SDL_ttf 3.0.0.
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC bool SDLCALL TTF_SetFontDirection(TTF_Font *font, TTF_Direction direction)
+  /// ```
+  ///
+  /// See also:
+  /// - [TTF_SetFontDirection - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_SetFontDirection)
+  ///
+  /// {@category ttf}
+  bool setDirection(int direction) => ttfSetFontDirection(this, direction);
+
+  ///
+  /// Get the direction to be used for text shaping by a font.
+  ///
+  /// This defaults to TTF_DIRECTION_INVALID if it hasn't been set.
+  ///
+  /// \param font the font to query.
+  /// \returns the direction to be used for text shaping.
+  ///
+  /// \threadsafety This function should be called on the thread that created the
+  /// font.
+  ///
+  /// \since This function is available since SDL_ttf 3.0.0.
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC TTF_Direction SDLCALL TTF_GetFontDirection(TTF_Font *font)
+  /// ```
+  ///
+  /// See also:
+  /// - [TTF_GetFontDirection - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetFontDirection)
+  ///
+  /// {@category ttf}
+  int getDirection() => ttfGetFontDirection(this);
+
+  ///
+  /// Set additional space in pixels to be applied between any two rendered
+  /// characters.
+  ///
+  /// The spacing value is applied uniformly after each character, in addition to
+  /// the normal glyph's advance.
+  ///
+  /// Spacing may be a negative value, in which case it will reduce the distance
+  /// instead.
+  ///
+  /// This updates any TTF_Text objects using this font.
+  ///
+  /// \param font the font to specify a direction for.
+  /// \param spacing the new additional glyph spacing for the font.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
+  ///
+  /// \threadsafety This function should be called on the thread that created the
+  /// font.
+  ///
+  /// \since This function is available since SDL_ttf 3.4.0.
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC bool SDLCALL TTF_SetFontCharSpacing(TTF_Font *font, int spacing)
+  /// ```
+  ///
+  /// See also:
+  /// - [TTF_SetFontCharSpacing - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_SetFontCharSpacing)
+  ///
+  /// {@category ttf}
+  bool setCharSpacing(int spacing) => ttfSetFontCharSpacing(this, spacing);
+
+  ///
+  /// Get the additional character spacing in pixels to be applied between any
+  /// two rendered characters.
+  ///
+  /// This defaults to 0 if it hasn't been set.
+  ///
+  /// \param font the font to query.
+  /// \returns the character spacing in pixels.
+  ///
+  /// \threadsafety This function should be called on the thread that created the
+  /// font.
+  ///
+  /// \since This function is available since SDL_ttf 3.4.0.
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC int SDLCALL TTF_GetFontCharSpacing(TTF_Font *font)
+  /// ```
+  ///
+  /// See also:
+  /// - [TTF_GetFontCharSpacing - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetFontCharSpacing)
+  ///
+  /// {@category ttf}
+  int getCharSpacing() => ttfGetFontCharSpacing(this);
+
+  ///
+  /// Set the script to be used for text shaping by a font.
+  ///
+  /// This returns false if SDL_ttf isn't built with HarfBuzz support.
+  ///
+  /// This updates any TTF_Text objects using this font.
+  ///
+  /// \param font the font to modify.
+  /// \param script an
+  /// [ISO 15924 code](https://unicode.org/iso15924/iso15924-codes.html)
+  /// .
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
+  ///
+  /// \threadsafety This function should be called on the thread that created the
+  /// font.
+  ///
+  /// \since This function is available since SDL_ttf 3.0.0.
+  ///
+  /// \sa TTF_StringToTag
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC bool SDLCALL TTF_SetFontScript(TTF_Font *font, Uint32 script)
+  /// ```
+  ///
+  /// See also:
+  /// - [TTF_SetFontScript - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_SetFontScript)
+  ///
+  /// {@category ttf}
+  bool setScript(int script) => ttfSetFontScript(this, script);
+
+  ///
+  /// Get the script used for text shaping a font.
+  ///
+  /// \param font the font to query.
+  /// \returns an
+  /// [ISO 15924 code](https://unicode.org/iso15924/iso15924-codes.html)
+  /// or 0 if a script hasn't been set.
+  ///
+  /// \threadsafety This function should be called on the thread that created the
+  /// font.
+  ///
+  /// \since This function is available since SDL_ttf 3.0.0.
+  ///
+  /// \sa TTF_TagToString
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC Uint32 SDLCALL TTF_GetFontScript(TTF_Font *font)
+  /// ```
+  ///
+  /// See also:
+  /// - [TTF_GetFontScript - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetFontScript)
+  ///
+  /// {@category ttf}
+  int getScript() => ttfGetFontScript(this);
+
+  ///
+  /// Set language to be used for text shaping by a font.
+  ///
+  /// If SDL_ttf was not built with HarfBuzz support, this function returns
+  /// false.
+  ///
+  /// This updates any TTF_Text objects using this font.
+  ///
+  /// \param font the font to specify a language for.
+  /// \param language_bcp47 a null-terminated string containing the desired
+  /// language's BCP47 code. Or null to reset the value.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
+  ///
+  /// \threadsafety This function should be called on the thread that created the
+  /// font.
+  ///
+  /// \since This function is available since SDL_ttf 3.0.0.
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC bool SDLCALL TTF_SetFontLanguage(TTF_Font *font, const char *language_bcp47)
+  /// ```
+  ///
+  /// See also:
+  /// - [TTF_SetFontLanguage - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_SetFontLanguage)
+  ///
+  /// {@category ttf}
+  bool setLanguage(String? languageBcp47) =>
+      ttfSetFontLanguage(this, languageBcp47);
+
+  ///
+  /// Check whether a glyph is provided by the font for a UNICODE codepoint.
+  ///
+  /// \param font the font to query.
+  /// \param ch the codepoint to check.
+  /// \returns true if font provides a glyph for this character, false if not.
+  ///
+  /// \threadsafety This function should be called on the thread that created the
+  /// font.
+  ///
+  /// \since This function is available since SDL_ttf 3.0.0.
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC bool SDLCALL TTF_FontHasGlyph(TTF_Font *font, Uint32 ch)
+  /// ```
+  ///
+  /// See also:
+  /// - [TTF_FontHasGlyph - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_FontHasGlyph)
+  ///
+  /// {@category ttf}
+  bool hasGlyph(int ch) => ttfFontHasGlyph(this, ch);
+
+  ///
+  /// Get the pixel image for a UNICODE codepoint.
+  ///
+  /// \param font the font to query.
+  /// \param ch the codepoint to check.
+  /// \param image_type a pointer filled in with the glyph image type, may be
+  /// NULL.
+  /// \returns an SDL_Surface containing the glyph, or NULL on failure; call
+  /// SDL_GetError() for more information.
+  ///
+  /// \threadsafety This function should be called on the thread that created the
+  /// font.
+  ///
+  /// \since This function is available since SDL_ttf 3.0.0.
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC SDL_Surface * SDLCALL TTF_GetGlyphImage(TTF_Font *font, Uint32 ch, TTF_ImageType *image_type)
+  /// ```
+  ///
+  /// See also:
+  /// - [TTF_GetGlyphImage - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetGlyphImage)
+  ///
+  /// {@category ttf}
+  ({int imageType, Pointer<SdlSurface> surface})? getGlyphImage(int ch) =>
+      ttfxGetGlyphImage(this, ch);
+
+  ///
+  /// Get the pixel image for a character index.
+  ///
+  /// This is useful for text engine implementations, which can call this with
+  /// the `glyph_index` in a TTF_CopyOperation
+  ///
+  /// \param font the font to query.
+  /// \param glyph_index the index of the glyph to return.
+  /// \param image_type a pointer filled in with the glyph image type, may be
+  /// NULL.
+  /// \returns an SDL_Surface containing the glyph, or NULL on failure; call
+  /// SDL_GetError() for more information.
+  ///
+  /// \threadsafety This function should be called on the thread that created the
+  /// font.
+  ///
+  /// \since This function is available since SDL_ttf 3.0.0.
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC SDL_Surface * SDLCALL TTF_GetGlyphImageForIndex(TTF_Font *font, Uint32 glyph_index, TTF_ImageType *image_type)
+  /// ```
+  ///
+  /// See also:
+  /// - [TTF_GetGlyphImageForIndex - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetGlyphImageForIndex)
+  ///
+  /// {@category ttf}
+  ({int imageType, Pointer<SdlSurface> surface})? getGlyphImageForIndex(
+    int glyphIndex,
+  ) => ttfxGetGlyphImageForIndex(this, glyphIndex);
+
+  ///
+  /// Query the metrics (dimensions) of a font's glyph for a UNICODE codepoint.
+  ///
+  /// To understand what these metrics mean, here is a useful link:
+  ///
+  /// https://freetype.sourceforge.net/freetype2/docs/tutorial/step2.html
+  ///
+  /// \param font the font to query.
+  /// \param ch the codepoint to check.
+  /// \param minx a pointer filled in with the minimum x coordinate of the glyph
+  /// from the left edge of its bounding box. This value may be
+  /// negative.
+  /// \param maxx a pointer filled in with the maximum x coordinate of the glyph
+  /// from the left edge of its bounding box.
+  /// \param miny a pointer filled in with the minimum y coordinate of the glyph
+  /// from the bottom edge of its bounding box. This value may be
+  /// negative.
+  /// \param maxy a pointer filled in with the maximum y coordinate of the glyph
+  /// from the bottom edge of its bounding box.
+  /// \param advance a pointer filled in with the distance to the next glyph from
+  /// the left edge of this glyph's bounding box.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
+  ///
+  /// \threadsafety This function should be called on the thread that created the
+  /// font.
+  ///
+  /// \since This function is available since SDL_ttf 3.0.0.
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC bool SDLCALL TTF_GetGlyphMetrics(TTF_Font *font, Uint32 ch, int *minx, int *maxx, int *miny, int *maxy, int *advance)
+  /// ```
+  ///
+  /// See also:
+  /// - [TTF_GetGlyphMetrics - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetGlyphMetrics)
+  ///
+  /// {@category ttf}
+  ({int advance, int maxx, int maxy, int minx, int miny})? getGlyphMetrics(
+    int ch,
+  ) => ttfxGetGlyphMetrics(this, ch);
+
+  ///
+  /// Query the kerning size between the glyphs of two UNICODE codepoints.
+  ///
+  /// \param font the font to query.
+  /// \param previous_ch the previous codepoint.
+  /// \param ch the current codepoint.
+  /// \param kerning a pointer filled in with the kerning size between the two
+  /// glyphs, in pixels, may be NULL.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
+  ///
+  /// \threadsafety This function should be called on the thread that created the
+  /// font.
+  ///
+  /// \since This function is available since SDL_ttf 3.0.0.
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC bool SDLCALL TTF_GetGlyphKerning(TTF_Font *font, Uint32 previous_ch, Uint32 ch, int *kerning)
+  /// ```
+  ///
+  /// See also:
+  /// - [TTF_GetGlyphKerning - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetGlyphKerning)
+  ///
+  /// {@category ttf}
+  int? getGlyphKerning(int previousCh, int ch) =>
+      ttfxGetGlyphKerning(this, previousCh, ch);
+
+  ///
+  /// Calculate the dimensions of a rendered string of UTF-8 text.
+  ///
+  /// This will report the width and height, in pixels, of the space that the
+  /// specified string will take to fully render.
+  ///
+  /// \param font the font to query.
+  /// \param text text to calculate, in UTF-8 encoding.
+  /// \param length the length of the text, in bytes, or 0 for null terminated
+  /// text.
+  /// \param w will be filled with width, in pixels, on return.
+  /// \param h will be filled with height, in pixels, on return.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
+  ///
+  /// \threadsafety This function should be called on the thread that created the
+  /// font.
+  ///
+  /// \since This function is available since SDL_ttf 3.0.0.
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC bool SDLCALL TTF_GetStringSize(TTF_Font *font, const char *text, size_t length, int *w, int *h)
+  /// ```
+  ///
+  /// See also:
+  /// - [TTF_GetStringSize - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetStringSize)
+  ///
+  /// {@category ttf}
+  ({int w, int h})? getStringSize(String text) => ttfxGetStringSize(this, text);
+
+  ///
+  /// Calculate the dimensions of a rendered string of UTF-8 text.
+  ///
+  /// This will report the width and height, in pixels, of the space that the
+  /// specified string will take to fully render.
+  ///
+  /// Text is wrapped to multiple lines on line endings and on word boundaries if
+  /// it extends beyond `wrap_width` in pixels.
+  ///
+  /// If wrap_width is 0, this function will only wrap on newline characters.
+  ///
+  /// \param font the font to query.
+  /// \param text text to calculate, in UTF-8 encoding.
+  /// \param length the length of the text, in bytes, or 0 for null terminated
+  /// text.
+  /// \param wrap_width the maximum width or 0 to wrap on newline characters.
+  /// \param w will be filled with width, in pixels, on return.
+  /// \param h will be filled with height, in pixels, on return.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
+  ///
+  /// \threadsafety This function should be called on the thread that created the
+  /// font.
+  ///
+  /// \since This function is available since SDL_ttf 3.0.0.
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC bool SDLCALL TTF_GetStringSizeWrapped(TTF_Font *font, const char *text, size_t length, int wrap_width, int *w, int *h)
+  /// ```
+  ///
+  /// See also:
+  /// - [TTF_GetStringSizeWrapped - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_GetStringSizeWrapped)
+  ///
+  /// {@category ttf}
+  ({int w, int h})? getStringSizeWrapped(String text, int wrapWidth) =>
+      ttfxGetStringSizeWrapped(this, text, wrapWidth);
+
+  ///
+  /// Calculate how much of a UTF-8 string will fit in a given width.
+  ///
+  /// This reports the number of characters that can be rendered before reaching
+  /// `max_width`.
+  ///
+  /// This does not need to render the string to do this calculation.
+  ///
+  /// \param font the font to query.
+  /// \param text text to calculate, in UTF-8 encoding.
+  /// \param length the length of the text, in bytes, or 0 for null terminated
+  /// text.
+  /// \param max_width maximum width, in pixels, available for the string, or 0
+  /// for unbounded width.
+  /// \param measured_width a pointer filled in with the width, in pixels, of the
+  /// string that will fit, may be NULL.
+  /// \param measured_length a pointer filled in with the length, in bytes, of
+  /// the string that will fit, may be NULL.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
+  ///
+  /// \threadsafety This function should be called on the thread that created the
+  /// font.
+  ///
+  /// \since This function is available since SDL_ttf 3.0.0.
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC bool SDLCALL TTF_MeasureString(TTF_Font *font, const char *text, size_t length, int max_width, int *measured_width, size_t *measured_length)
+  /// ```
+  ///
+  /// See also:
+  /// - [TTF_MeasureString - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_MeasureString)
+  ///
+  /// {@category ttf}
+  ({int measuredLength, int measuredWidth})? measureString(
+    String text,
+    int maxWidth,
+  ) => ttfxMeasureString(this, text, maxWidth);
+
+  ///
+  /// Render UTF-8 text at fast quality to a new 8-bit surface.
+  ///
+  /// This function will allocate a new 8-bit, palettized surface. The surface's
+  /// 0 pixel will be the colorkey, giving a transparent background. The 1 pixel
+  /// will be set to the text color.
+  ///
+  /// This will not word-wrap the string; you'll get a surface with a single line
+  /// of text, as long as the string requires. You can use
+  /// TTF_RenderText_Solid_Wrapped() instead if you need to wrap the output to
+  /// multiple lines.
+  ///
+  /// This will not wrap on newline characters.
+  ///
+  /// You can render at other quality levels with TTF_RenderText_Shaded,
+  /// TTF_RenderText_Blended, and TTF_RenderText_LCD.
+  ///
+  /// \param font the font to render with.
+  /// \param text text to render, in UTF-8 encoding.
+  /// \param length the length of the text, in bytes, or 0 for null terminated
+  /// text.
+  /// \param fg the foreground color for the text.
+  /// \returns a new 8-bit, palettized surface, or NULL if there was an error.
+  ///
+  /// \threadsafety This function should be called on the thread that created the
+  /// font.
+  ///
+  /// \since This function is available since SDL_ttf 3.0.0.
+  ///
+  /// \sa TTF_RenderText_Blended
+  /// \sa TTF_RenderText_LCD
+  /// \sa TTF_RenderText_Shaded
+  /// \sa TTF_RenderText_Solid
+  /// \sa TTF_RenderText_Solid_Wrapped
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC SDL_Surface * SDLCALL TTF_RenderText_Solid(TTF_Font *font, const char *text, size_t length, SDL_Color fg)
+  /// ```
+  ///
+  /// See also:
+  /// - [TTF_RenderText_Solid - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_RenderText_Solid)
+  ///
+  /// {@category ttf}
+  Pointer<SdlSurface> renderTextSolid(String? text, SdlxColor fg) =>
+      ttfxRenderTextSolid(this, text, fg);
+
+  ///
+  /// Render word-wrapped UTF-8 text at fast quality to a new 8-bit surface.
+  ///
+  /// This function will allocate a new 8-bit, palettized surface. The surface's
+  /// 0 pixel will be the colorkey, giving a transparent background. The 1 pixel
+  /// will be set to the text color.
+  ///
+  /// Text is wrapped to multiple lines on line endings and on word boundaries if
+  /// it extends beyond `wrapLength` in pixels.
+  ///
+  /// If wrapLength is 0, this function will only wrap on newline characters.
+  ///
+  /// You can render at other quality levels with TTF_RenderText_Shaded_Wrapped,
+  /// TTF_RenderText_Blended_Wrapped, and TTF_RenderText_LCD_Wrapped.
+  ///
+  /// \param font the font to render with.
+  /// \param text text to render, in UTF-8 encoding.
+  /// \param length the length of the text, in bytes, or 0 for null terminated
+  /// text.
+  /// \param fg the foreground color for the text.
+  /// \param wrapLength the maximum width of the text surface or 0 to wrap on
+  /// newline characters.
+  /// \returns a new 8-bit, palettized surface, or NULL if there was an error.
+  ///
+  /// \threadsafety This function should be called on the thread that created the
+  /// font.
+  ///
+  /// \since This function is available since SDL_ttf 3.0.0.
+  ///
+  /// \sa TTF_RenderText_Blended_Wrapped
+  /// \sa TTF_RenderText_LCD_Wrapped
+  /// \sa TTF_RenderText_Shaded_Wrapped
+  /// \sa TTF_RenderText_Solid
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC SDL_Surface * SDLCALL TTF_RenderText_Solid_Wrapped(TTF_Font *font, const char *text, size_t length, SDL_Color fg, int wrapLength)
+  /// ```
+  ///
+  /// See also:
+  /// - [TTF_RenderText_Solid_Wrapped - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_RenderText_Solid_Wrapped)
+  ///
+  /// {@category ttf}
+  Pointer<SdlSurface> renderTextSolidWrapped(
+    String? text,
+    SdlxColor fg,
+    int wrapLength,
+  ) => ttfxRenderTextSolidWrapped(this, text, fg, wrapLength);
+
+  ///
+  /// Render a single 32-bit glyph at fast quality to a new 8-bit surface.
+  ///
+  /// This function will allocate a new 8-bit, palettized surface. The surface's
+  /// 0 pixel will be the colorkey, giving a transparent background. The 1 pixel
+  /// will be set to the text color.
+  ///
+  /// The glyph is rendered without any padding or centering in the X direction,
+  /// and aligned normally in the Y direction.
+  ///
+  /// You can render at other quality levels with TTF_RenderGlyph_Shaded,
+  /// TTF_RenderGlyph_Blended, and TTF_RenderGlyph_LCD.
+  ///
+  /// \param font the font to render with.
+  /// \param ch the character to render.
+  /// \param fg the foreground color for the text.
+  /// \returns a new 8-bit, palettized surface, or NULL if there was an error.
+  ///
+  /// \threadsafety This function should be called on the thread that created the
+  /// font.
+  ///
+  /// \since This function is available since SDL_ttf 3.0.0.
+  ///
+  /// \sa TTF_RenderGlyph_Blended
+  /// \sa TTF_RenderGlyph_LCD
+  /// \sa TTF_RenderGlyph_Shaded
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC SDL_Surface * SDLCALL TTF_RenderGlyph_Solid(TTF_Font *font, Uint32 ch, SDL_Color fg)
+  /// ```
+  ///
+  /// See also:
+  /// - [TTF_RenderGlyph_Solid - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_RenderGlyph_Solid)
+  ///
+  /// {@category ttf}
+  Pointer<SdlSurface> renderGlyphSolid(int ch, SdlxColor fg) =>
+      ttfxRenderGlyphSolid(this, ch, fg);
+
+  ///
+  /// Render UTF-8 text at high quality to a new 8-bit surface.
+  ///
+  /// This function will allocate a new 8-bit, palettized surface. The surface's
+  /// 0 pixel will be the specified background color, while other pixels have
+  /// varying degrees of the foreground color. This function returns the new
+  /// surface, or NULL if there was an error.
+  ///
+  /// This will not word-wrap the string; you'll get a surface with a single line
+  /// of text, as long as the string requires. You can use
+  /// TTF_RenderText_Shaded_Wrapped() instead if you need to wrap the output to
+  /// multiple lines.
+  ///
+  /// This will not wrap on newline characters.
+  ///
+  /// You can render at other quality levels with TTF_RenderText_Solid,
+  /// TTF_RenderText_Blended, and TTF_RenderText_LCD.
+  ///
+  /// \param font the font to render with.
+  /// \param text text to render, in UTF-8 encoding.
+  /// \param length the length of the text, in bytes, or 0 for null terminated
+  /// text.
+  /// \param fg the foreground color for the text.
+  /// \param bg the background color for the text.
+  /// \returns a new 8-bit, palettized surface, or NULL if there was an error.
+  ///
+  /// \threadsafety This function should be called on the thread that created the
+  /// font.
+  ///
+  /// \since This function is available since SDL_ttf 3.0.0.
+  ///
+  /// \sa TTF_RenderText_Blended
+  /// \sa TTF_RenderText_LCD
+  /// \sa TTF_RenderText_Shaded_Wrapped
+  /// \sa TTF_RenderText_Solid
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC SDL_Surface * SDLCALL TTF_RenderText_Shaded(TTF_Font *font, const char *text, size_t length, SDL_Color fg, SDL_Color bg)
+  /// ```
+  ///
+  /// See also:
+  /// - [TTF_RenderText_Shaded - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_RenderText_Shaded)
+  ///
+  /// {@category ttf}
+  Pointer<SdlSurface> renderTextShaded(
+    String? text,
+    SdlxColor fg,
+    SdlxColor bg,
+  ) => ttfxRenderTextShaded(this, text, fg, bg);
+
+  ///
+  /// Render UTF-8 text at high quality to a new 8-bit surface.
+  ///
+  /// This function will allocate a new 8-bit, palettized surface. The surface's
+  /// 0 pixel will be the specified background color, while other pixels have
+  /// varying degrees of the foreground color. This function returns the new
+  /// surface, or NULL if there was an error.
+  ///
+  /// This will not word-wrap the string; you'll get a surface with a single line
+  /// of text, as long as the string requires. You can use
+  /// TTF_RenderText_Shaded_Wrapped() instead if you need to wrap the output to
+  /// multiple lines.
+  ///
+  /// This will not wrap on newline characters.
+  ///
+  /// You can render at other quality levels with TTF_RenderText_Solid,
+  /// TTF_RenderText_Blended, and TTF_RenderText_LCD.
+  ///
+  /// \param font the font to render with.
+  /// \param text text to render, in UTF-8 encoding.
+  /// \param length the length of the text, in bytes, or 0 for null terminated
+  /// text.
+  /// \param fg the foreground color for the text.
+  /// \param bg the background color for the text.
+  /// \returns a new 8-bit, palettized surface, or NULL if there was an error.
+  ///
+  /// \threadsafety This function should be called on the thread that created the
+  /// font.
+  ///
+  /// \since This function is available since SDL_ttf 3.0.0.
+  ///
+  /// \sa TTF_RenderText_Blended
+  /// \sa TTF_RenderText_LCD
+  /// \sa TTF_RenderText_Shaded_Wrapped
+  /// \sa TTF_RenderText_Solid
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC SDL_Surface * SDLCALL TTF_RenderText_Shaded(TTF_Font *font, const char *text, size_t length, SDL_Color fg, SDL_Color bg)
+  /// ```
+  ///
+  /// See also:
+  /// - [TTF_RenderText_Shaded - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_RenderText_Shaded)
+  ///
+  /// {@category ttf}
+  Pointer<SdlSurface> renderTextShadedWrapped(
+    String? text,
+    SdlxColor fg,
+    SdlxColor bg,
+    int wrapLength,
+  ) => ttfxRenderTextShadedWrapped(this, text, fg, bg, wrapLength);
+
+  ///
+  /// Render a single UNICODE codepoint at high quality to a new 8-bit surface.
+  ///
+  /// This function will allocate a new 8-bit, palettized surface. The surface's
+  /// 0 pixel will be the specified background color, while other pixels have
+  /// varying degrees of the foreground color. This function returns the new
+  /// surface, or NULL if there was an error.
+  ///
+  /// The glyph is rendered without any padding or centering in the X direction,
+  /// and aligned normally in the Y direction.
+  ///
+  /// You can render at other quality levels with TTF_RenderGlyph_Solid,
+  /// TTF_RenderGlyph_Blended, and TTF_RenderGlyph_LCD.
+  ///
+  /// \param font the font to render with.
+  /// \param ch the codepoint to render.
+  /// \param fg the foreground color for the text.
+  /// \param bg the background color for the text.
+  /// \returns a new 8-bit, palettized surface, or NULL if there was an error.
+  ///
+  /// \threadsafety This function should be called on the thread that created the
+  /// font.
+  ///
+  /// \since This function is available since SDL_ttf 3.0.0.
+  ///
+  /// \sa TTF_RenderGlyph_Blended
+  /// \sa TTF_RenderGlyph_LCD
+  /// \sa TTF_RenderGlyph_Solid
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC SDL_Surface * SDLCALL TTF_RenderGlyph_Shaded(TTF_Font *font, Uint32 ch, SDL_Color fg, SDL_Color bg)
+  /// ```
+  ///
+  /// See also:
+  /// - [TTF_RenderGlyph_Shaded - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_RenderGlyph_Shaded)
+  ///
+  /// {@category ttf}
+  Pointer<SdlSurface> renderGlyphShaded(int ch, SdlxColor fg, SdlxColor bg) =>
+      ttfxRenderGlyphShaded(this, ch, fg, bg);
+
+  ///
+  /// Render UTF-8 text at high quality to a new ARGB surface.
+  ///
+  /// This function will allocate a new 32-bit, ARGB surface, using alpha
+  /// blending to dither the font with the given color. This function returns the
+  /// new surface, or NULL if there was an error.
+  ///
+  /// This will not word-wrap the string; you'll get a surface with a single line
+  /// of text, as long as the string requires. You can use
+  /// TTF_RenderText_Blended_Wrapped() instead if you need to wrap the output to
+  /// multiple lines.
+  ///
+  /// This will not wrap on newline characters.
+  ///
+  /// You can render at other quality levels with TTF_RenderText_Solid,
+  /// TTF_RenderText_Shaded, and TTF_RenderText_LCD.
+  ///
+  /// \param font the font to render with.
+  /// \param text text to render, in UTF-8 encoding.
+  /// \param length the length of the text, in bytes, or 0 for null terminated
+  /// text.
+  /// \param fg the foreground color for the text.
+  /// \returns a new 32-bit, ARGB surface, or NULL if there was an error.
+  ///
+  /// \threadsafety This function should be called on the thread that created the
+  /// font.
+  ///
+  /// \since This function is available since SDL_ttf 3.0.0.
+  ///
+  /// \sa TTF_RenderText_Blended_Wrapped
+  /// \sa TTF_RenderText_LCD
+  /// \sa TTF_RenderText_Shaded
+  /// \sa TTF_RenderText_Solid
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC SDL_Surface * SDLCALL TTF_RenderText_Blended(TTF_Font *font, const char *text, size_t length, SDL_Color fg)
+  /// ```
+  ///
+  /// See also:
+  /// - [TTF_RenderText_Blended - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_RenderText_Blended)
+  ///
+  /// {@category ttf}
+  Pointer<SdlSurface> renderTextBlended(String text, SdlxColor fg) =>
+      ttfxRenderTextBlended(this, text, fg);
+
+  ///
+  /// Render word-wrapped UTF-8 text at high quality to a new ARGB surface.
+  ///
+  /// This function will allocate a new 32-bit, ARGB surface, using alpha
+  /// blending to dither the font with the given color. This function returns the
+  /// new surface, or NULL if there was an error.
+  ///
+  /// Text is wrapped to multiple lines on line endings and on word boundaries if
+  /// it extends beyond `wrap_width` in pixels.
+  ///
+  /// If wrap_width is 0, this function will only wrap on newline characters.
+  ///
+  /// You can render at other quality levels with TTF_RenderText_Solid_Wrapped,
+  /// TTF_RenderText_Shaded_Wrapped, and TTF_RenderText_LCD_Wrapped.
+  ///
+  /// \param font the font to render with.
+  /// \param text text to render, in UTF-8 encoding.
+  /// \param length the length of the text, in bytes, or 0 for null terminated
+  /// text.
+  /// \param fg the foreground color for the text.
+  /// \param wrap_width the maximum width of the text surface or 0 to wrap on
+  /// newline characters.
+  /// \returns a new 32-bit, ARGB surface, or NULL if there was an error.
+  ///
+  /// \threadsafety This function should be called on the thread that created the
+  /// font.
+  ///
+  /// \since This function is available since SDL_ttf 3.0.0.
+  ///
+  /// \sa TTF_RenderText_Blended
+  /// \sa TTF_RenderText_LCD_Wrapped
+  /// \sa TTF_RenderText_Shaded_Wrapped
+  /// \sa TTF_RenderText_Solid_Wrapped
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC SDL_Surface * SDLCALL TTF_RenderText_Blended_Wrapped(TTF_Font *font, const char *text, size_t length, SDL_Color fg, int wrap_width)
+  /// ```
+  ///
+  /// See also:
+  /// - [TTF_RenderText_Blended_Wrapped - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_RenderText_Blended_Wrapped)
+  ///
+  /// {@category ttf}
+  Pointer<SdlSurface> renderTextBlendedWrapped(
+    String? text,
+    SdlxColor fg,
+    int wrapLength,
+  ) => ttfxRenderTextBlendedWrapped(this, text, fg, wrapLength);
+
+  ///
+  /// Render a single UNICODE codepoint at high quality to a new ARGB surface.
+  ///
+  /// This function will allocate a new 32-bit, ARGB surface, using alpha
+  /// blending to dither the font with the given color. This function returns the
+  /// new surface, or NULL if there was an error.
+  ///
+  /// The glyph is rendered without any padding or centering in the X direction,
+  /// and aligned normally in the Y direction.
+  ///
+  /// You can render at other quality levels with TTF_RenderGlyph_Solid,
+  /// TTF_RenderGlyph_Shaded, and TTF_RenderGlyph_LCD.
+  ///
+  /// \param font the font to render with.
+  /// \param ch the codepoint to render.
+  /// \param fg the foreground color for the text.
+  /// \returns a new 32-bit, ARGB surface, or NULL if there was an error.
+  ///
+  /// \threadsafety This function should be called on the thread that created the
+  /// font.
+  ///
+  /// \since This function is available since SDL_ttf 3.0.0.
+  ///
+  /// \sa TTF_RenderGlyph_LCD
+  /// \sa TTF_RenderGlyph_Shaded
+  /// \sa TTF_RenderGlyph_Solid
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC SDL_Surface * SDLCALL TTF_RenderGlyph_Blended(TTF_Font *font, Uint32 ch, SDL_Color fg)
+  /// ```
+  ///
+  /// See also:
+  /// - [TTF_RenderGlyph_Blended - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_RenderGlyph_Blended)
+  ///
+  /// {@category ttf}
+  Pointer<SdlSurface> renderGlyphBlended(int ch, SdlxColor fg) =>
+      ttfxRenderGlyphBlended(this, ch, fg);
+
+  ///
+  /// Render UTF-8 text at LCD subpixel quality to a new ARGB surface.
+  ///
+  /// This function will allocate a new 32-bit, ARGB surface, and render
+  /// alpha-blended text using FreeType's LCD subpixel rendering. This function
+  /// returns the new surface, or NULL if there was an error.
+  ///
+  /// This will not word-wrap the string; you'll get a surface with a single line
+  /// of text, as long as the string requires. You can use
+  /// TTF_RenderText_LCD_Wrapped() instead if you need to wrap the output to
+  /// multiple lines.
+  ///
+  /// This will not wrap on newline characters.
+  ///
+  /// You can render at other quality levels with TTF_RenderText_Solid,
+  /// TTF_RenderText_Shaded, and TTF_RenderText_Blended.
+  ///
+  /// \param font the font to render with.
+  /// \param text text to render, in UTF-8 encoding.
+  /// \param length the length of the text, in bytes, or 0 for null terminated
+  /// text.
+  /// \param fg the foreground color for the text.
+  /// \param bg the background color for the text.
+  /// \returns a new 32-bit, ARGB surface, or NULL if there was an error.
+  ///
+  /// \threadsafety This function should be called on the thread that created the
+  /// font.
+  ///
+  /// \since This function is available since SDL_ttf 3.0.0.
+  ///
+  /// \sa TTF_RenderText_Blended
+  /// \sa TTF_RenderText_LCD_Wrapped
+  /// \sa TTF_RenderText_Shaded
+  /// \sa TTF_RenderText_Solid
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC SDL_Surface * SDLCALL TTF_RenderText_LCD(TTF_Font *font, const char *text, size_t length, SDL_Color fg, SDL_Color bg)
+  /// ```
+  ///
+  /// See also:
+  /// - [TTF_RenderText_LCD - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_RenderText_LCD)
+  ///
+  /// {@category ttf}
+  Pointer<SdlSurface> renderTextLcd(
+    String? text,
+    int length,
+    SdlxColor fg,
+    SdlxColor bg,
+  ) => ttfxRenderTextLcd(this, text, fg, bg);
+
+  ///
+  /// Render word-wrapped UTF-8 text at LCD subpixel quality to a new ARGB
+  /// surface.
+  ///
+  /// This function will allocate a new 32-bit, ARGB surface, and render
+  /// alpha-blended text using FreeType's LCD subpixel rendering. This function
+  /// returns the new surface, or NULL if there was an error.
+  ///
+  /// Text is wrapped to multiple lines on line endings and on word boundaries if
+  /// it extends beyond `wrap_width` in pixels.
+  ///
+  /// If wrap_width is 0, this function will only wrap on newline characters.
+  ///
+  /// You can render at other quality levels with TTF_RenderText_Solid_Wrapped,
+  /// TTF_RenderText_Shaded_Wrapped, and TTF_RenderText_Blended_Wrapped.
+  ///
+  /// \param font the font to render with.
+  /// \param text text to render, in UTF-8 encoding.
+  /// \param length the length of the text, in bytes, or 0 for null terminated
+  /// text.
+  /// \param fg the foreground color for the text.
+  /// \param bg the background color for the text.
+  /// \param wrap_width the maximum width of the text surface or 0 to wrap on
+  /// newline characters.
+  /// \returns a new 32-bit, ARGB surface, or NULL if there was an error.
+  ///
+  /// \threadsafety This function should be called on the thread that created the
+  /// font.
+  ///
+  /// \since This function is available since SDL_ttf 3.0.0.
+  ///
+  /// \sa TTF_RenderText_Blended_Wrapped
+  /// \sa TTF_RenderText_LCD
+  /// \sa TTF_RenderText_Shaded_Wrapped
+  /// \sa TTF_RenderText_Solid_Wrapped
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC SDL_Surface * SDLCALL TTF_RenderText_LCD_Wrapped(TTF_Font *font, const char *text, size_t length, SDL_Color fg, SDL_Color bg, int wrap_width)
+  /// ```
+  ///
+  /// See also:
+  /// - [TTF_RenderText_LCD_Wrapped - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_RenderText_LCD_Wrapped)
+  ///
+  /// {@category ttf}
+  Pointer<SdlSurface> renderTextLcdWrapped(
+    String? text,
+    int length,
+    SdlxColor fg,
+    SdlxColor bg,
+    int wrapLength,
+  ) => ttfxRenderTextLcdWrapped(this, text, fg, bg, wrapLength);
+
+  ///
+  /// Render a single UNICODE codepoint at LCD subpixel quality to a new ARGB
+  /// surface.
+  ///
+  /// This function will allocate a new 32-bit, ARGB surface, and render
+  /// alpha-blended text using FreeType's LCD subpixel rendering. This function
+  /// returns the new surface, or NULL if there was an error.
+  ///
+  /// The glyph is rendered without any padding or centering in the X direction,
+  /// and aligned normally in the Y direction.
+  ///
+  /// You can render at other quality levels with TTF_RenderGlyph_Solid,
+  /// TTF_RenderGlyph_Shaded, and TTF_RenderGlyph_Blended.
+  ///
+  /// \param font the font to render with.
+  /// \param ch the codepoint to render.
+  /// \param fg the foreground color for the text.
+  /// \param bg the background color for the text.
+  /// \returns a new 32-bit, ARGB surface, or NULL if there was an error.
+  ///
+  /// \threadsafety This function should be called on the thread that created the
+  /// font.
+  ///
+  /// \since This function is available since SDL_ttf 3.0.0.
+  ///
+  /// \sa TTF_RenderGlyph_Blended
+  /// \sa TTF_RenderGlyph_Shaded
+  /// \sa TTF_RenderGlyph_Solid
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC SDL_Surface * SDLCALL TTF_RenderGlyph_LCD(TTF_Font *font, Uint32 ch, SDL_Color fg, SDL_Color bg)
+  /// ```
+  ///
+  /// See also:
+  /// - [TTF_RenderGlyph_LCD - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_RenderGlyph_LCD)
+  ///
+  /// {@category ttf}
+  Pointer<SdlSurface> renderGlyphLcd(int ch, SdlxColor fg, SdlxColor bg) =>
+      ttfxRenderGlyphLcd(this, ch, fg, bg);
+
+  ///
+  /// Dispose of a previously-created font.
+  ///
+  /// Call this when done with a font. This function will free any resources
+  /// associated with it. It is safe to call this function on NULL, for example
+  /// on the result of a failed call to TTF_OpenFont().
+  ///
+  /// The font is not valid after being passed to this function. String pointers
+  /// from functions that return information on this font, such as
+  /// TTF_GetFontFamilyName() and TTF_GetFontStyleName(), are no longer valid
+  /// after this call, as well.
+  ///
+  /// \param font the font to dispose of.
+  ///
+  /// \threadsafety This function should not be called while any other thread is
+  /// using the font.
+  ///
+  /// \since This function is available since SDL_ttf 3.0.0.
+  ///
+  /// \sa TTF_OpenFont
+  /// \sa TTF_OpenFontIO
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC void SDLCALL TTF_CloseFont(TTF_Font *font)
+  /// ```
+  ///
+  /// See also:
+  /// - [TTF_CloseFont - SDL3 Wiki](https://wiki.libsdl.org/SDL3/TTF_CloseFont)
+  ///
+  /// {@category ttf}
+  void close() {
+    ttfCloseFont(this);
+  }
+}

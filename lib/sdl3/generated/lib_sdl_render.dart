@@ -1,5 +1,5 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-part of '../sdl.dart';
+part of '../sdl_render.dart';
 
 ///
 /// Get the number of 2D rendering drivers available for the current display.
@@ -68,8 +68,8 @@ int sdlGetNumRenderDrivers() {
 String? sdlGetRenderDriver(int index) {
   final sdlGetRenderDriverLookupFunction = _libSdl
       .lookupFunction<
-        Pointer<Utf8> Function(Int32 index),
-        Pointer<Utf8> Function(int index)
+        Pointer<ffi.Utf8> Function(Int32 index),
+        Pointer<ffi.Utf8> Function(int index)
       >('SDL_GetRenderDriver');
   final result = sdlGetRenderDriverLookupFunction(index);
   if (result == nullptr) {
@@ -117,7 +117,7 @@ bool sdlCreateWindowAndRenderer(
   final sdlCreateWindowAndRendererLookupFunction = _libSdl
       .lookupFunction<
         Bool Function(
-          Pointer<Utf8> title,
+          Pointer<ffi.Utf8> title,
           Int32 width,
           Int32 height,
           Uint64 windowFlags,
@@ -125,7 +125,7 @@ bool sdlCreateWindowAndRenderer(
           Pointer<Pointer<SdlRenderer>> renderer,
         ),
         bool Function(
-          Pointer<Utf8> title,
+          Pointer<ffi.Utf8> title,
           int width,
           int height,
           int windowFlags,
@@ -142,7 +142,7 @@ bool sdlCreateWindowAndRenderer(
     window,
     renderer,
   );
-  calloc.free(titlePointer);
+  ffi.calloc.free(titlePointer);
   return result;
 }
 
@@ -195,16 +195,16 @@ Pointer<SdlRenderer> sdlCreateRenderer(
       .lookupFunction<
         Pointer<SdlRenderer> Function(
           Pointer<SdlWindow> window,
-          Pointer<Utf8> name,
+          Pointer<ffi.Utf8> name,
         ),
         Pointer<SdlRenderer> Function(
           Pointer<SdlWindow> window,
-          Pointer<Utf8> name,
+          Pointer<ffi.Utf8> name,
         )
       >('SDL_CreateRenderer');
   final namePointer = name != null ? name.toNativeUtf8() : nullptr;
   final result = sdlCreateRendererLookupFunction(window, namePointer);
-  calloc.free(namePointer);
+  ffi.calloc.free(namePointer);
   return result;
 }
 
@@ -499,8 +499,8 @@ Pointer<SdlWindow> sdlGetRenderWindow(Pointer<SdlRenderer> renderer) {
 String? sdlGetRendererName(Pointer<SdlRenderer> renderer) {
   final sdlGetRendererNameLookupFunction = _libSdl
       .lookupFunction<
-        Pointer<Utf8> Function(Pointer<SdlRenderer> renderer),
-        Pointer<Utf8> Function(Pointer<SdlRenderer> renderer)
+        Pointer<ffi.Utf8> Function(Pointer<SdlRenderer> renderer),
+        Pointer<ffi.Utf8> Function(Pointer<SdlRenderer> renderer)
       >('SDL_GetRendererName');
   final result = sdlGetRendererNameLookupFunction(renderer);
   if (result == nullptr) {
@@ -5064,18 +5064,18 @@ bool sdlRenderDebugText(
           Pointer<SdlRenderer> renderer,
           Float x,
           Float y,
-          Pointer<Utf8> str,
+          Pointer<ffi.Utf8> str,
         ),
         bool Function(
           Pointer<SdlRenderer> renderer,
           double x,
           double y,
-          Pointer<Utf8> str,
+          Pointer<ffi.Utf8> str,
         )
       >('SDL_RenderDebugText');
   final strPointer = str != null ? str.toNativeUtf8() : nullptr;
   final result = sdlRenderDebugTextLookupFunction(renderer, x, y, strPointer);
-  calloc.free(strPointer);
+  ffi.calloc.free(strPointer);
   return result;
 }
 
@@ -5125,13 +5125,13 @@ bool sdlRenderDebugTextFormat(
           Pointer<SdlRenderer> renderer,
           Float x,
           Float y,
-          Pointer<Utf8> fmt,
+          Pointer<ffi.Utf8> fmt,
         ),
         bool Function(
           Pointer<SdlRenderer> renderer,
           double x,
           double y,
-          Pointer<Utf8> fmt,
+          Pointer<ffi.Utf8> fmt,
         )
       >('SDL_RenderDebugTextFormat');
   final fmtPointer = fmt != null ? fmt.toNativeUtf8() : nullptr;
@@ -5141,7 +5141,7 @@ bool sdlRenderDebugTextFormat(
     y,
     fmtPointer,
   );
-  calloc.free(fmtPointer);
+  ffi.calloc.free(fmtPointer);
   return result;
 }
 

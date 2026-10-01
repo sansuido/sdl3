@@ -1,5 +1,5 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-part of '../sdl.dart';
+part of '../sdl_platform.dart';
 
 ///
 /// Get the name of the platform.
@@ -29,9 +29,10 @@ part of '../sdl.dart';
 /// {@category platform}
 String? sdlGetPlatform() {
   final sdlGetPlatformLookupFunction = _libSdl
-      .lookupFunction<Pointer<Utf8> Function(), Pointer<Utf8> Function()>(
-        'SDL_GetPlatform',
-      );
+      .lookupFunction<
+        Pointer<ffi.Utf8> Function(),
+        Pointer<ffi.Utf8> Function()
+      >('SDL_GetPlatform');
   final result = sdlGetPlatformLookupFunction();
   if (result == nullptr) {
     return null;

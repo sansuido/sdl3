@@ -1,5 +1,5 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-part of '../sdl.dart';
+part of '../sdl_atomic.dart';
 
 ///
 /// Try to lock a spin lock by setting it to a non-zero value.

@@ -1,5 +1,5 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-part of '../sdl.dart';
+part of '../sdl_asyncio.dart';
 
 ///
 /// Use this function to create a new SDL_AsyncIO object for reading from
@@ -51,13 +51,19 @@ part of '../sdl.dart';
 Pointer<SdlAsyncIo> sdlAsyncIoFromFile(String? file, String? mode) {
   final sdlAsyncIoFromFileLookupFunction = _libSdl
       .lookupFunction<
-        Pointer<SdlAsyncIo> Function(Pointer<Utf8> file, Pointer<Utf8> mode),
-        Pointer<SdlAsyncIo> Function(Pointer<Utf8> file, Pointer<Utf8> mode)
+        Pointer<SdlAsyncIo> Function(
+          Pointer<ffi.Utf8> file,
+          Pointer<ffi.Utf8> mode,
+        ),
+        Pointer<SdlAsyncIo> Function(
+          Pointer<ffi.Utf8> file,
+          Pointer<ffi.Utf8> mode,
+        )
       >('SDL_AsyncIOFromFile');
   final filePointer = file != null ? file.toNativeUtf8() : nullptr;
   final modePointer = mode != null ? mode.toNativeUtf8() : nullptr;
   final result = sdlAsyncIoFromFileLookupFunction(filePointer, modePointer);
-  calloc
+  ffi.calloc
     ..free(filePointer)
     ..free(modePointer);
   return result;
@@ -622,18 +628,18 @@ bool sdlLoadFileAsync(
   final sdlLoadFileAsyncLookupFunction = _libSdl
       .lookupFunction<
         Bool Function(
-          Pointer<Utf8> file,
+          Pointer<ffi.Utf8> file,
           Pointer<SdlAsyncIoQueue> queue,
           Pointer<Void> userdata,
         ),
         bool Function(
-          Pointer<Utf8> file,
+          Pointer<ffi.Utf8> file,
           Pointer<SdlAsyncIoQueue> queue,
           Pointer<Void> userdata,
         )
       >('SDL_LoadFileAsync');
   final filePointer = file != null ? file.toNativeUtf8() : nullptr;
   final result = sdlLoadFileAsyncLookupFunction(filePointer, queue, userdata);
-  calloc.free(filePointer);
+  ffi.calloc.free(filePointer);
   return result;
 }

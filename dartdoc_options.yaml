@@ -1,5 +1,7 @@
 dartdoc:
-  nodoc: ['lib/sdl3*.dart']
+  ignore:
+    - broken-link
+    - missing-from-search-index
   categories:
     'assert':
       markdown: doc/assert.md

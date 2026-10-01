@@ -1,5 +1,5 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-part of '../sdl.dart';
+part of '../sdl_tray.dart';
 
 ///
 /// Create an icon to be placed in the operating system's tray, or equivalent.
@@ -40,16 +40,16 @@ Pointer<SdlTray> sdlCreateTray(Pointer<SdlSurface> icon, String? tooltip) {
       .lookupFunction<
         Pointer<SdlTray> Function(
           Pointer<SdlSurface> icon,
-          Pointer<Utf8> tooltip,
+          Pointer<ffi.Utf8> tooltip,
         ),
         Pointer<SdlTray> Function(
           Pointer<SdlSurface> icon,
-          Pointer<Utf8> tooltip,
+          Pointer<ffi.Utf8> tooltip,
         )
       >('SDL_CreateTray');
   final tooltipPointer = tooltip != null ? tooltip.toNativeUtf8() : nullptr;
   final result = sdlCreateTrayLookupFunction(icon, tooltipPointer);
-  calloc.free(tooltipPointer);
+  ffi.calloc.free(tooltipPointer);
   return result;
 }
 
@@ -169,12 +169,12 @@ void sdlSetTrayIcon(Pointer<SdlTray> tray, Pointer<SdlSurface> icon) {
 void sdlSetTrayTooltip(Pointer<SdlTray> tray, String? tooltip) {
   final sdlSetTrayTooltipLookupFunction = _libSdl
       .lookupFunction<
-        Void Function(Pointer<SdlTray> tray, Pointer<Utf8> tooltip),
-        void Function(Pointer<SdlTray> tray, Pointer<Utf8> tooltip)
+        Void Function(Pointer<SdlTray> tray, Pointer<ffi.Utf8> tooltip),
+        void Function(Pointer<SdlTray> tray, Pointer<ffi.Utf8> tooltip)
       >('SDL_SetTrayTooltip');
   final tooltipPointer = tooltip != null ? tooltip.toNativeUtf8() : nullptr;
   final result = sdlSetTrayTooltipLookupFunction(tray, tooltipPointer);
-  calloc.free(tooltipPointer);
+  ffi.calloc.free(tooltipPointer);
   return result;
 }
 
@@ -453,13 +453,13 @@ Pointer<SdlTrayEntry> sdlInsertTrayEntryAt(
         Pointer<SdlTrayEntry> Function(
           Pointer<SdlTrayMenu> menu,
           Int32 pos,
-          Pointer<Utf8> label,
+          Pointer<ffi.Utf8> label,
           Uint32 flags,
         ),
         Pointer<SdlTrayEntry> Function(
           Pointer<SdlTrayMenu> menu,
           int pos,
-          Pointer<Utf8> label,
+          Pointer<ffi.Utf8> label,
           int flags,
         )
       >('SDL_InsertTrayEntryAt');
@@ -470,7 +470,7 @@ Pointer<SdlTrayEntry> sdlInsertTrayEntryAt(
     labelPointer,
     flags,
   );
-  calloc.free(labelPointer);
+  ffi.calloc.free(labelPointer);
   return result;
 }
 
@@ -505,12 +505,12 @@ Pointer<SdlTrayEntry> sdlInsertTrayEntryAt(
 void sdlSetTrayEntryLabel(Pointer<SdlTrayEntry> entry, String? label) {
   final sdlSetTrayEntryLabelLookupFunction = _libSdl
       .lookupFunction<
-        Void Function(Pointer<SdlTrayEntry> entry, Pointer<Utf8> label),
-        void Function(Pointer<SdlTrayEntry> entry, Pointer<Utf8> label)
+        Void Function(Pointer<SdlTrayEntry> entry, Pointer<ffi.Utf8> label),
+        void Function(Pointer<SdlTrayEntry> entry, Pointer<ffi.Utf8> label)
       >('SDL_SetTrayEntryLabel');
   final labelPointer = label != null ? label.toNativeUtf8() : nullptr;
   final result = sdlSetTrayEntryLabelLookupFunction(entry, labelPointer);
-  calloc.free(labelPointer);
+  ffi.calloc.free(labelPointer);
   return result;
 }
 
@@ -542,8 +542,8 @@ void sdlSetTrayEntryLabel(Pointer<SdlTrayEntry> entry, String? label) {
 String? sdlGetTrayEntryLabel(Pointer<SdlTrayEntry> entry) {
   final sdlGetTrayEntryLabelLookupFunction = _libSdl
       .lookupFunction<
-        Pointer<Utf8> Function(Pointer<SdlTrayEntry> entry),
-        Pointer<Utf8> Function(Pointer<SdlTrayEntry> entry)
+        Pointer<ffi.Utf8> Function(Pointer<SdlTrayEntry> entry),
+        Pointer<ffi.Utf8> Function(Pointer<SdlTrayEntry> entry)
       >('SDL_GetTrayEntryLabel');
   final result = sdlGetTrayEntryLabelLookupFunction(entry);
   if (result == nullptr) {

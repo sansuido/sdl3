@@ -92,7 +92,7 @@ final class SdlShaderCrossSpirvInfo extends Struct {
   @Size()
   external int bytecodeSize;
   // [16]+(8)
-  external Pointer<Utf8> entrypoint;
+  external Pointer<ffi.Utf8> entrypoint;
   // [24]+(4)
   @Int32()
   external int shaderStage;
@@ -114,11 +114,11 @@ final class SdlShaderCrossHlslDefine extends Struct {
 /// {@category shadercross}
 final class SdlShaderCrossHlslInfo extends Struct {
   // [0]+(8)
-  external Pointer<Utf8> source;
+  external Pointer<ffi.Utf8> source;
   // [8]+(8)
-  external Pointer<Utf8> entrypoint;
+  external Pointer<ffi.Utf8> entrypoint;
   // [16]+(8)
-  external Pointer<Utf8> includeDir;
+  external Pointer<ffi.Utf8> includeDir;
   // [24]+(8)
   external Pointer<SdlShaderCrossHlslDefine> defines;
   // [32]+(4)

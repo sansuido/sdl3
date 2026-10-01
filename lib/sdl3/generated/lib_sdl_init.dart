@@ -1,5 +1,5 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-part of '../sdl.dart';
+part of '../sdl_init.dart';
 
 ///
 /// Initialize the SDL library.
@@ -337,14 +337,14 @@ bool sdlSetAppMetadata(
   final sdlSetAppMetadataLookupFunction = _libSdl
       .lookupFunction<
         Bool Function(
-          Pointer<Utf8> appname,
-          Pointer<Utf8> appversion,
-          Pointer<Utf8> appidentifier,
+          Pointer<ffi.Utf8> appname,
+          Pointer<ffi.Utf8> appversion,
+          Pointer<ffi.Utf8> appidentifier,
         ),
         bool Function(
-          Pointer<Utf8> appname,
-          Pointer<Utf8> appversion,
-          Pointer<Utf8> appidentifier,
+          Pointer<ffi.Utf8> appname,
+          Pointer<ffi.Utf8> appversion,
+          Pointer<ffi.Utf8> appidentifier,
         )
       >('SDL_SetAppMetadata');
   final appnamePointer = appname != null ? appname.toNativeUtf8() : nullptr;
@@ -359,7 +359,7 @@ bool sdlSetAppMetadata(
     appversionPointer,
     appidentifierPointer,
   );
-  calloc
+  ffi.calloc
     ..free(appnamePointer)
     ..free(appversionPointer)
     ..free(appidentifierPointer);
@@ -439,8 +439,8 @@ bool sdlSetAppMetadata(
 bool sdlSetAppMetadataProperty(String? name, String? value) {
   final sdlSetAppMetadataPropertyLookupFunction = _libSdl
       .lookupFunction<
-        Bool Function(Pointer<Utf8> name, Pointer<Utf8> value),
-        bool Function(Pointer<Utf8> name, Pointer<Utf8> value)
+        Bool Function(Pointer<ffi.Utf8> name, Pointer<ffi.Utf8> value),
+        bool Function(Pointer<ffi.Utf8> name, Pointer<ffi.Utf8> value)
       >('SDL_SetAppMetadataProperty');
   final namePointer = name != null ? name.toNativeUtf8() : nullptr;
   final valuePointer = value != null ? value.toNativeUtf8() : nullptr;
@@ -448,7 +448,7 @@ bool sdlSetAppMetadataProperty(String? name, String? value) {
     namePointer,
     valuePointer,
   );
-  calloc
+  ffi.calloc
     ..free(namePointer)
     ..free(valuePointer);
   return result;
@@ -486,12 +486,12 @@ bool sdlSetAppMetadataProperty(String? name, String? value) {
 String? sdlGetAppMetadataProperty(String? name) {
   final sdlGetAppMetadataPropertyLookupFunction = _libSdl
       .lookupFunction<
-        Pointer<Utf8> Function(Pointer<Utf8> name),
-        Pointer<Utf8> Function(Pointer<Utf8> name)
+        Pointer<ffi.Utf8> Function(Pointer<ffi.Utf8> name),
+        Pointer<ffi.Utf8> Function(Pointer<ffi.Utf8> name)
       >('SDL_GetAppMetadataProperty');
   final namePointer = name != null ? name.toNativeUtf8() : nullptr;
   final result = sdlGetAppMetadataPropertyLookupFunction(namePointer);
-  calloc.free(namePointer);
+  ffi.calloc.free(namePointer);
   if (result == nullptr) {
     return null;
   }

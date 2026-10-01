@@ -1,5 +1,5 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-part of '../sdl.dart';
+part of '../sdl_loadso.dart';
 
 ///
 /// Dynamically load a shared object.
@@ -26,12 +26,12 @@ part of '../sdl.dart';
 Pointer<SdlSharedObject> sdlLoadObject(String? sofile) {
   final sdlLoadObjectLookupFunction = _libSdl
       .lookupFunction<
-        Pointer<SdlSharedObject> Function(Pointer<Utf8> sofile),
-        Pointer<SdlSharedObject> Function(Pointer<Utf8> sofile)
+        Pointer<SdlSharedObject> Function(Pointer<ffi.Utf8> sofile),
+        Pointer<SdlSharedObject> Function(Pointer<ffi.Utf8> sofile)
       >('SDL_LoadObject');
   final sofilePointer = sofile != null ? sofile.toNativeUtf8() : nullptr;
   final result = sdlLoadObjectLookupFunction(sofilePointer);
-  calloc.free(sofilePointer);
+  ffi.calloc.free(sofilePointer);
   return result;
 }
 
@@ -77,16 +77,16 @@ Pointer<NativeFunction<SdlFunctionPointer>> sdlLoadFunction(
       .lookupFunction<
         Pointer<NativeFunction<SdlFunctionPointer>> Function(
           Pointer<SdlSharedObject> handle,
-          Pointer<Utf8> name,
+          Pointer<ffi.Utf8> name,
         ),
         Pointer<NativeFunction<SdlFunctionPointer>> Function(
           Pointer<SdlSharedObject> handle,
-          Pointer<Utf8> name,
+          Pointer<ffi.Utf8> name,
         )
       >('SDL_LoadFunction');
   final namePointer = name != null ? name.toNativeUtf8() : nullptr;
   final result = sdlLoadFunctionLookupFunction(handle, namePointer);
-  calloc.free(namePointer);
+  ffi.calloc.free(namePointer);
   return result;
 }
 

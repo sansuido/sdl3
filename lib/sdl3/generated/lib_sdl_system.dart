@@ -1,5 +1,5 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-part of '../sdl.dart';
+part of '../sdl_system.dart';
 
 ///
 /// Set a callback for every Windows message, run before TranslateMessage().
@@ -563,9 +563,10 @@ void sdlSendAndroidBackButton() {
 /// {@category system}
 String? sdlGetAndroidInternalStoragePath() {
   final sdlGetAndroidInternalStoragePathLookupFunction = _libSdl
-      .lookupFunction<Pointer<Utf8> Function(), Pointer<Utf8> Function()>(
-        'SDL_GetAndroidInternalStoragePath',
-      );
+      .lookupFunction<
+        Pointer<ffi.Utf8> Function(),
+        Pointer<ffi.Utf8> Function()
+      >('SDL_GetAndroidInternalStoragePath');
   final result = sdlGetAndroidInternalStoragePathLookupFunction();
   if (result == nullptr) {
     return null;
@@ -636,9 +637,10 @@ int sdlGetAndroidExternalStorageState() {
 /// {@category system}
 String? sdlGetAndroidExternalStoragePath() {
   final sdlGetAndroidExternalStoragePathLookupFunction = _libSdl
-      .lookupFunction<Pointer<Utf8> Function(), Pointer<Utf8> Function()>(
-        'SDL_GetAndroidExternalStoragePath',
-      );
+      .lookupFunction<
+        Pointer<ffi.Utf8> Function(),
+        Pointer<ffi.Utf8> Function()
+      >('SDL_GetAndroidExternalStoragePath');
   final result = sdlGetAndroidExternalStoragePathLookupFunction();
   if (result == nullptr) {
     return null;
@@ -676,9 +678,10 @@ String? sdlGetAndroidExternalStoragePath() {
 /// {@category system}
 String? sdlGetAndroidCachePath() {
   final sdlGetAndroidCachePathLookupFunction = _libSdl
-      .lookupFunction<Pointer<Utf8> Function(), Pointer<Utf8> Function()>(
-        'SDL_GetAndroidCachePath',
-      );
+      .lookupFunction<
+        Pointer<ffi.Utf8> Function(),
+        Pointer<ffi.Utf8> Function()
+      >('SDL_GetAndroidCachePath');
   final result = sdlGetAndroidCachePathLookupFunction();
   if (result == nullptr) {
     return null;
@@ -736,12 +739,12 @@ bool sdlRequestAndroidPermission(
   final sdlRequestAndroidPermissionLookupFunction = _libSdl
       .lookupFunction<
         Bool Function(
-          Pointer<Utf8> permission,
+          Pointer<ffi.Utf8> permission,
           Pointer<NativeFunction<SdlRequestAndroidPermissionCallback>> cb,
           Pointer<Void> userdata,
         ),
         bool Function(
-          Pointer<Utf8> permission,
+          Pointer<ffi.Utf8> permission,
           Pointer<NativeFunction<SdlRequestAndroidPermissionCallback>> cb,
           Pointer<Void> userdata,
         )
@@ -754,7 +757,7 @@ bool sdlRequestAndroidPermission(
     cb,
     userdata,
   );
-  calloc.free(permissionPointer);
+  ffi.calloc.free(permissionPointer);
   return result;
 }
 
@@ -802,14 +805,14 @@ bool sdlShowAndroidToast(
   final sdlShowAndroidToastLookupFunction = _libSdl
       .lookupFunction<
         Bool Function(
-          Pointer<Utf8> message,
+          Pointer<ffi.Utf8> message,
           Int32 duration,
           Int32 gravity,
           Int32 xoffset,
           Int32 yoffset,
         ),
         bool Function(
-          Pointer<Utf8> message,
+          Pointer<ffi.Utf8> message,
           int duration,
           int gravity,
           int xoffset,
@@ -824,7 +827,7 @@ bool sdlShowAndroidToast(
     xoffset,
     yoffset,
   );
-  calloc.free(messagePointer);
+  ffi.calloc.free(messagePointer);
   return result;
 }
 
@@ -918,9 +921,10 @@ int sdlGetOpenHarmonySdkVersion() {
 /// {@category system}
 String? sdlGetOpenHarmonyInternalStoragePath() {
   final sdlGetOpenHarmonyInternalStoragePathLookupFunction = _libSdl
-      .lookupFunction<Pointer<Utf8> Function(), Pointer<Utf8> Function()>(
-        'SDL_GetOpenHarmonyInternalStoragePath',
-      );
+      .lookupFunction<
+        Pointer<ffi.Utf8> Function(),
+        Pointer<ffi.Utf8> Function()
+      >('SDL_GetOpenHarmonyInternalStoragePath');
   final result = sdlGetOpenHarmonyInternalStoragePathLookupFunction();
   if (result == nullptr) {
     return null;
@@ -980,12 +984,12 @@ bool sdlRequestOpenHarmonyPermission(
   final sdlRequestOpenHarmonyPermissionLookupFunction = _libSdl
       .lookupFunction<
         Bool Function(
-          Pointer<Utf8> permission,
+          Pointer<ffi.Utf8> permission,
           Pointer<NativeFunction<SdlRequestOpenHarmonyPermissionCallback>> cb,
           Pointer<Void> userdata,
         ),
         bool Function(
-          Pointer<Utf8> permission,
+          Pointer<ffi.Utf8> permission,
           Pointer<NativeFunction<SdlRequestOpenHarmonyPermissionCallback>> cb,
           Pointer<Void> userdata,
         )
@@ -998,7 +1002,7 @@ bool sdlRequestOpenHarmonyPermission(
     cb,
     userdata,
   );
-  calloc.free(permissionPointer);
+  ffi.calloc.free(permissionPointer);
   return result;
 }
 
@@ -1141,8 +1145,8 @@ int sdlGetDeviceFormFactor() {
 String? sdlGetDeviceFormFactorName(int formFactor) {
   final sdlGetDeviceFormFactorNameLookupFunction = _libSdl
       .lookupFunction<
-        Pointer<Utf8> Function(Int32 formFactor),
-        Pointer<Utf8> Function(int formFactor)
+        Pointer<ffi.Utf8> Function(Int32 formFactor),
+        Pointer<ffi.Utf8> Function(int formFactor)
       >('SDL_GetDeviceFormFactorName');
   final result = sdlGetDeviceFormFactorNameLookupFunction(formFactor);
   if (result == nullptr) {

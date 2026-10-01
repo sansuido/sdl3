@@ -1,5 +1,5 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-part of '../sdl.dart';
+part of '../sdl_haptic.dart';
 
 ///
 /// Get a list of currently connected haptic devices.
@@ -57,8 +57,8 @@ Pointer<Uint32> sdlGetHaptics(Pointer<Int32> count) {
 String? sdlGetHapticNameForId(int instanceId) {
   final sdlGetHapticNameForIdLookupFunction = _libSdl
       .lookupFunction<
-        Pointer<Utf8> Function(Uint32 instanceId),
-        Pointer<Utf8> Function(int instanceId)
+        Pointer<ffi.Utf8> Function(Uint32 instanceId),
+        Pointer<ffi.Utf8> Function(int instanceId)
       >('SDL_GetHapticNameForID');
   final result = sdlGetHapticNameForIdLookupFunction(instanceId);
   if (result == nullptr) {
@@ -182,8 +182,8 @@ int sdlGetHapticId(Pointer<SdlHaptic> haptic) {
 String? sdlGetHapticName(Pointer<SdlHaptic> haptic) {
   final sdlGetHapticNameLookupFunction = _libSdl
       .lookupFunction<
-        Pointer<Utf8> Function(Pointer<SdlHaptic> haptic),
-        Pointer<Utf8> Function(Pointer<SdlHaptic> haptic)
+        Pointer<ffi.Utf8> Function(Pointer<SdlHaptic> haptic),
+        Pointer<ffi.Utf8> Function(Pointer<SdlHaptic> haptic)
       >('SDL_GetHapticName');
   final result = sdlGetHapticNameLookupFunction(haptic);
   if (result == nullptr) {

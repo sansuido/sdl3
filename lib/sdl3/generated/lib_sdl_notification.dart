@@ -1,5 +1,5 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-part of '../sdl.dart';
+part of '../sdl_notification.dart';
 
 ///
 /// Requests permission from the system to display notifications.
@@ -152,15 +152,15 @@ int sdlShowNotification(
   final sdlShowNotificationLookupFunction = _libSdl
       .lookupFunction<
         Uint32 Function(
-          Pointer<Utf8> title,
-          Pointer<Utf8> message,
+          Pointer<ffi.Utf8> title,
+          Pointer<ffi.Utf8> message,
           Pointer<SdlSurface> image,
           Pointer<SdlNotificationAction> actions,
           Int32 numActions,
         ),
         int Function(
-          Pointer<Utf8> title,
-          Pointer<Utf8> message,
+          Pointer<ffi.Utf8> title,
+          Pointer<ffi.Utf8> message,
           Pointer<SdlSurface> image,
           Pointer<SdlNotificationAction> actions,
           int numActions,
@@ -175,7 +175,7 @@ int sdlShowNotification(
     actions,
     numActions,
   );
-  calloc
+  ffi.calloc
     ..free(titlePointer)
     ..free(messagePointer);
   return result;

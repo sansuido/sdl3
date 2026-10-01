@@ -1,5 +1,5 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-part of '../sdl.dart';
+part of '../sdl_metal.dart';
 
 ///
 /// Create a CAMetalLayer-backed NSView/UIView and attach it to the specified

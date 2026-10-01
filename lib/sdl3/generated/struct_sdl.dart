@@ -11,14 +11,14 @@ final class SdlAssertData extends Struct {
   @Uint32()
   external int triggerCount;
   // [8]+(8)
-  external Pointer<Utf8> condition;
+  external Pointer<ffi.Utf8> condition;
   // [16]+(8)
-  external Pointer<Utf8> filename;
+  external Pointer<ffi.Utf8> filename;
   // [24]+(4)
   @Int32()
   external int linenum;
   // [32]+(8)
-  external Pointer<Utf8> function;
+  external Pointer<ffi.Utf8> function;
   // [40]+(8)
   external Pointer<SdlAssertData> next;
 }
@@ -122,9 +122,9 @@ final class SdlCameraSpec extends Struct {
 /// {@category dialog}
 final class SdlDialogFileFilter extends Struct {
   // [0]+(8)
-  external Pointer<Utf8> name;
+  external Pointer<ffi.Utf8> name;
   // [8]+(8)
-  external Pointer<Utf8> pattern;
+  external Pointer<ffi.Utf8> pattern;
 }
 
 // SDL_CommonEvent
@@ -258,7 +258,7 @@ final class SdlTextEditingEvent extends Struct {
   @Uint32()
   external int windowId;
   // [24]+(8)
-  external Pointer<Utf8> text;
+  external Pointer<ffi.Utf8> text;
   // [32]+(4)
   @Int32()
   external int start;
@@ -320,7 +320,7 @@ final class SdlTextInputEvent extends Struct {
   @Uint32()
   external int windowId;
   // [24]+(8)
-  external Pointer<Utf8> text;
+  external Pointer<ffi.Utf8> text;
 }
 
 // SDL_MouseDeviceEvent
@@ -852,7 +852,7 @@ final class SdlNotificationEvent extends Struct {
   @Uint32()
   external int which;
   // [24]+(8)
-  external Pointer<Utf8> actionId;
+  external Pointer<ffi.Utf8> actionId;
 }
 
 // SDL_RenderEvent
@@ -1121,9 +1121,9 @@ final class SdlDropEvent extends Struct {
   @Float()
   external double y;
   // [32]+(8)
-  external Pointer<Utf8> source;
+  external Pointer<ffi.Utf8> source;
   // [40]+(8)
-  external Pointer<Utf8> data;
+  external Pointer<ffi.Utf8> data;
 }
 
 // SDL_ClipboardEvent
@@ -1819,7 +1819,7 @@ final class SdlGpuShaderCreateInfo extends Struct {
   // [8]+(8)
   external Pointer<Uint8> code;
   // [16]+(8)
-  external Pointer<Utf8> entrypoint;
+  external Pointer<ffi.Utf8> entrypoint;
   // [24]+(4)
   @Uint32()
   external int format;
@@ -2066,7 +2066,7 @@ final class SdlGpuComputePipelineCreateInfo extends Struct {
   // [8]+(8)
   external Pointer<Uint8> code;
   // [16]+(8)
-  external Pointer<Utf8> entrypoint;
+  external Pointer<ffi.Utf8> entrypoint;
   // [24]+(4)
   @Uint32()
   external int format;
@@ -2707,7 +2707,7 @@ final class SdlVirtualJoystickDesc extends Struct {
   @Uint32()
   external int axisMask;
   // [40]+(8)
-  external Pointer<Utf8> name;
+  external Pointer<ffi.Utf8> name;
   // [48]+(8)
   external Pointer<SdlVirtualJoystickTouchpadDesc> touchpads;
   // [56]+(8)
@@ -2743,9 +2743,9 @@ final class SdlSharedObject extends Opaque {}
 /// {@category locale}
 final class SdlLocale extends Struct {
   // [0]+(8)
-  external Pointer<Utf8> language;
+  external Pointer<ffi.Utf8> language;
   // [8]+(8)
-  external Pointer<Utf8> country;
+  external Pointer<ffi.Utf8> country;
 }
 
 // HINSTANCE
@@ -2762,7 +2762,7 @@ final class SdlMessageBoxButtonData extends Struct {
   @Int32()
   external int buttonId;
   // [8]+(8)
-  external Pointer<Utf8> text;
+  external Pointer<ffi.Utf8> text;
 }
 
 // SDL_MessageBoxColor
@@ -2796,9 +2796,9 @@ final class SdlMessageBoxData extends Struct {
   // [8]+(8)
   external Pointer<SdlWindow> window;
   // [16]+(8)
-  external Pointer<Utf8> title;
+  external Pointer<ffi.Utf8> title;
   // [24]+(8)
-  external Pointer<Utf8> message;
+  external Pointer<ffi.Utf8> message;
   // [32]+(4)
   @Int32()
   external int numbuttons;
@@ -2857,9 +2857,9 @@ final class SdlNotificationActionButton extends Struct {
   @Int32()
   external int type;
   // [8]+(8)
-  external Pointer<Utf8> actionId;
+  external Pointer<ffi.Utf8> actionId;
   // [16]+(8)
-  external Pointer<Utf8> actionLabel;
+  external Pointer<ffi.Utf8> actionLabel;
 }
 
 // SDL_NotificationAction

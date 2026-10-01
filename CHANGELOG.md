@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.12.0] - 2026-10-01
+- SDL3-2026-09-27
+### Changed
+- Refactored library structure and reorganized source files:
+  - Separated sub-modules into dedicated libraries to improve documentation readability.
+  - Renamed internal library namespaces using dot-notation.
+
 ## [2.11.5] - 2026-09-25
 - SDL3-2026-09-20
 ### Fixed

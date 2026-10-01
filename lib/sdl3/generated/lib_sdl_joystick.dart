@@ -1,5 +1,5 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-part of '../sdl.dart';
+part of '../sdl_joystick.dart';
 
 ///
 /// Locking for atomic access to the joystick API.
@@ -160,8 +160,8 @@ Pointer<Uint32> sdlGetJoysticks(Pointer<Int32> count) {
 String? sdlGetJoystickNameForId(int instanceId) {
   final sdlGetJoystickNameForIdLookupFunction = _libSdl
       .lookupFunction<
-        Pointer<Utf8> Function(Uint32 instanceId),
-        Pointer<Utf8> Function(int instanceId)
+        Pointer<ffi.Utf8> Function(Uint32 instanceId),
+        Pointer<ffi.Utf8> Function(int instanceId)
       >('SDL_GetJoystickNameForID');
   final result = sdlGetJoystickNameForIdLookupFunction(instanceId);
   if (result == nullptr) {
@@ -197,8 +197,8 @@ String? sdlGetJoystickNameForId(int instanceId) {
 String? sdlGetJoystickPathForId(int instanceId) {
   final sdlGetJoystickPathForIdLookupFunction = _libSdl
       .lookupFunction<
-        Pointer<Utf8> Function(Uint32 instanceId),
-        Pointer<Utf8> Function(int instanceId)
+        Pointer<ffi.Utf8> Function(Uint32 instanceId),
+        Pointer<ffi.Utf8> Function(int instanceId)
       >('SDL_GetJoystickPathForID');
   final result = sdlGetJoystickPathForIdLookupFunction(instanceId);
   if (result == nullptr) {
@@ -1021,8 +1021,8 @@ int sdlGetJoystickProperties(Pointer<SdlJoystick> joystick) {
 String? sdlGetJoystickName(Pointer<SdlJoystick> joystick) {
   final sdlGetJoystickNameLookupFunction = _libSdl
       .lookupFunction<
-        Pointer<Utf8> Function(Pointer<SdlJoystick> joystick),
-        Pointer<Utf8> Function(Pointer<SdlJoystick> joystick)
+        Pointer<ffi.Utf8> Function(Pointer<SdlJoystick> joystick),
+        Pointer<ffi.Utf8> Function(Pointer<SdlJoystick> joystick)
       >('SDL_GetJoystickName');
   final result = sdlGetJoystickNameLookupFunction(joystick);
   if (result == nullptr) {
@@ -1055,8 +1055,8 @@ String? sdlGetJoystickName(Pointer<SdlJoystick> joystick) {
 String? sdlGetJoystickPath(Pointer<SdlJoystick> joystick) {
   final sdlGetJoystickPathLookupFunction = _libSdl
       .lookupFunction<
-        Pointer<Utf8> Function(Pointer<SdlJoystick> joystick),
-        Pointer<Utf8> Function(Pointer<SdlJoystick> joystick)
+        Pointer<ffi.Utf8> Function(Pointer<SdlJoystick> joystick),
+        Pointer<ffi.Utf8> Function(Pointer<SdlJoystick> joystick)
       >('SDL_GetJoystickPath');
   final result = sdlGetJoystickPathLookupFunction(joystick);
   if (result == nullptr) {
@@ -1310,8 +1310,8 @@ int sdlGetJoystickFirmwareVersion(Pointer<SdlJoystick> joystick) {
 String? sdlGetJoystickSerial(Pointer<SdlJoystick> joystick) {
   final sdlGetJoystickSerialLookupFunction = _libSdl
       .lookupFunction<
-        Pointer<Utf8> Function(Pointer<SdlJoystick> joystick),
-        Pointer<Utf8> Function(Pointer<SdlJoystick> joystick)
+        Pointer<ffi.Utf8> Function(Pointer<SdlJoystick> joystick),
+        Pointer<ffi.Utf8> Function(Pointer<SdlJoystick> joystick)
       >('SDL_GetJoystickSerial');
   final result = sdlGetJoystickSerialLookupFunction(joystick);
   if (result == nullptr) {

@@ -1,5 +1,5 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-part of '../sdl.dart';
+part of '../sdl_dialog.dart';
 
 ///
 /// Displays a dialog that lets the user select a file on their filesystem.
@@ -75,7 +75,7 @@ void sdlShowOpenFileDialog(
           Pointer<SdlWindow> window,
           Pointer<SdlDialogFileFilter> filters,
           Int32 nfilters,
-          Pointer<Utf8> defaultLocation,
+          Pointer<ffi.Utf8> defaultLocation,
           Bool allowMany,
         ),
         void Function(
@@ -84,7 +84,7 @@ void sdlShowOpenFileDialog(
           Pointer<SdlWindow> window,
           Pointer<SdlDialogFileFilter> filters,
           int nfilters,
-          Pointer<Utf8> defaultLocation,
+          Pointer<ffi.Utf8> defaultLocation,
           bool allowMany,
         )
       >('SDL_ShowOpenFileDialog');
@@ -100,7 +100,7 @@ void sdlShowOpenFileDialog(
     defaultLocationPointer,
     allowMany,
   );
-  calloc.free(defaultLocationPointer);
+  ffi.calloc.free(defaultLocationPointer);
   return result;
 }
 
@@ -175,7 +175,7 @@ void sdlShowSaveFileDialog(
           Pointer<SdlWindow> window,
           Pointer<SdlDialogFileFilter> filters,
           Int32 nfilters,
-          Pointer<Utf8> defaultLocation,
+          Pointer<ffi.Utf8> defaultLocation,
         ),
         void Function(
           Pointer<NativeFunction<SdlDialogFileCallback>> callback,
@@ -183,7 +183,7 @@ void sdlShowSaveFileDialog(
           Pointer<SdlWindow> window,
           Pointer<SdlDialogFileFilter> filters,
           int nfilters,
-          Pointer<Utf8> defaultLocation,
+          Pointer<ffi.Utf8> defaultLocation,
         )
       >('SDL_ShowSaveFileDialog');
   final defaultLocationPointer = defaultLocation != null
@@ -197,7 +197,7 @@ void sdlShowSaveFileDialog(
     nfilters,
     defaultLocationPointer,
   );
-  calloc.free(defaultLocationPointer);
+  ffi.calloc.free(defaultLocationPointer);
   return result;
 }
 
@@ -265,14 +265,14 @@ void sdlShowOpenFolderDialog(
           Pointer<NativeFunction<SdlDialogFileCallback>> callback,
           Pointer<Void> userdata,
           Pointer<SdlWindow> window,
-          Pointer<Utf8> defaultLocation,
+          Pointer<ffi.Utf8> defaultLocation,
           Bool allowMany,
         ),
         void Function(
           Pointer<NativeFunction<SdlDialogFileCallback>> callback,
           Pointer<Void> userdata,
           Pointer<SdlWindow> window,
-          Pointer<Utf8> defaultLocation,
+          Pointer<ffi.Utf8> defaultLocation,
           bool allowMany,
         )
       >('SDL_ShowOpenFolderDialog');
@@ -286,7 +286,7 @@ void sdlShowOpenFolderDialog(
     defaultLocationPointer,
     allowMany,
   );
-  calloc.free(defaultLocationPointer);
+  ffi.calloc.free(defaultLocationPointer);
   return result;
 }
 

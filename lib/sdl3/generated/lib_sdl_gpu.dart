@@ -1,6 +1,6 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 // ignore_for_file: comment_references
-part of '../sdl.dart';
+part of '../sdl_gpu.dart';
 
 ///
 /// Checks for GPU runtime support.
@@ -26,15 +26,15 @@ part of '../sdl.dart';
 bool sdlGpuSupportsShaderFormats(int formatFlags, String? name) {
   final sdlGpuSupportsShaderFormatsLookupFunction = _libSdl
       .lookupFunction<
-        Bool Function(Uint32 formatFlags, Pointer<Utf8> name),
-        bool Function(int formatFlags, Pointer<Utf8> name)
+        Bool Function(Uint32 formatFlags, Pointer<ffi.Utf8> name),
+        bool Function(int formatFlags, Pointer<ffi.Utf8> name)
       >('SDL_GPUSupportsShaderFormats');
   final namePointer = name != null ? name.toNativeUtf8() : nullptr;
   final result = sdlGpuSupportsShaderFormatsLookupFunction(
     formatFlags,
     namePointer,
   );
-  calloc.free(namePointer);
+  ffi.calloc.free(namePointer);
   return result;
 }
 
@@ -108,12 +108,12 @@ Pointer<SdlGpuDevice> sdlCreateGpuDevice(
         Pointer<SdlGpuDevice> Function(
           Uint32 formatFlags,
           Bool debugMode,
-          Pointer<Utf8> name,
+          Pointer<ffi.Utf8> name,
         ),
         Pointer<SdlGpuDevice> Function(
           int formatFlags,
           bool debugMode,
-          Pointer<Utf8> name,
+          Pointer<ffi.Utf8> name,
         )
       >('SDL_CreateGPUDevice');
   final namePointer = name != null ? name.toNativeUtf8() : nullptr;
@@ -122,7 +122,7 @@ Pointer<SdlGpuDevice> sdlCreateGpuDevice(
     debugMode,
     namePointer,
   );
-  calloc.free(namePointer);
+  ffi.calloc.free(namePointer);
   return result;
 }
 
@@ -334,8 +334,8 @@ int sdlGetNumGpuDrivers() {
 String? sdlGetGpuDriver(int index) {
   final sdlGetGpuDriverLookupFunction = _libSdl
       .lookupFunction<
-        Pointer<Utf8> Function(Int32 index),
-        Pointer<Utf8> Function(int index)
+        Pointer<ffi.Utf8> Function(Int32 index),
+        Pointer<ffi.Utf8> Function(int index)
       >('SDL_GetGPUDriver');
   final result = sdlGetGpuDriverLookupFunction(index);
   if (result == nullptr) {
@@ -363,8 +363,8 @@ String? sdlGetGpuDriver(int index) {
 String? sdlGetGpuDeviceDriver(Pointer<SdlGpuDevice> device) {
   final sdlGetGpuDeviceDriverLookupFunction = _libSdl
       .lookupFunction<
-        Pointer<Utf8> Function(Pointer<SdlGpuDevice> device),
-        Pointer<Utf8> Function(Pointer<SdlGpuDevice> device)
+        Pointer<ffi.Utf8> Function(Pointer<SdlGpuDevice> device),
+        Pointer<ffi.Utf8> Function(Pointer<SdlGpuDevice> device)
       >('SDL_GetGPUDeviceDriver');
   final result = sdlGetGpuDeviceDriverLookupFunction(device);
   if (result == nullptr) {
@@ -1311,17 +1311,17 @@ void sdlSetGpuBufferName(
         Void Function(
           Pointer<SdlGpuDevice> device,
           Pointer<SdlGpuBuffer> buffer,
-          Pointer<Utf8> text,
+          Pointer<ffi.Utf8> text,
         ),
         void Function(
           Pointer<SdlGpuDevice> device,
           Pointer<SdlGpuBuffer> buffer,
-          Pointer<Utf8> text,
+          Pointer<ffi.Utf8> text,
         )
       >('SDL_SetGPUBufferName');
   final textPointer = text != null ? text.toNativeUtf8() : nullptr;
   final result = sdlSetGpuBufferNameLookupFunction(device, buffer, textPointer);
-  calloc.free(textPointer);
+  ffi.calloc.free(textPointer);
   return result;
 }
 
@@ -1361,12 +1361,12 @@ void sdlSetGpuTextureName(
         Void Function(
           Pointer<SdlGpuDevice> device,
           Pointer<SdlGpuTexture> texture,
-          Pointer<Utf8> text,
+          Pointer<ffi.Utf8> text,
         ),
         void Function(
           Pointer<SdlGpuDevice> device,
           Pointer<SdlGpuTexture> texture,
-          Pointer<Utf8> text,
+          Pointer<ffi.Utf8> text,
         )
       >('SDL_SetGPUTextureName');
   final textPointer = text != null ? text.toNativeUtf8() : nullptr;
@@ -1375,7 +1375,7 @@ void sdlSetGpuTextureName(
     texture,
     textPointer,
   );
-  calloc.free(textPointer);
+  ffi.calloc.free(textPointer);
   return result;
 }
 
@@ -1411,11 +1411,11 @@ void sdlInsertGpuDebugLabel(
       .lookupFunction<
         Void Function(
           Pointer<SdlGpuCommandBuffer> commandBuffer,
-          Pointer<Utf8> text,
+          Pointer<ffi.Utf8> text,
         ),
         void Function(
           Pointer<SdlGpuCommandBuffer> commandBuffer,
-          Pointer<Utf8> text,
+          Pointer<ffi.Utf8> text,
         )
       >('SDL_InsertGPUDebugLabel');
   final textPointer = text != null ? text.toNativeUtf8() : nullptr;
@@ -1423,7 +1423,7 @@ void sdlInsertGpuDebugLabel(
     commandBuffer,
     textPointer,
   );
-  calloc.free(textPointer);
+  ffi.calloc.free(textPointer);
   return result;
 }
 
@@ -1469,16 +1469,16 @@ void sdlPushGpuDebugGroup(
       .lookupFunction<
         Void Function(
           Pointer<SdlGpuCommandBuffer> commandBuffer,
-          Pointer<Utf8> name,
+          Pointer<ffi.Utf8> name,
         ),
         void Function(
           Pointer<SdlGpuCommandBuffer> commandBuffer,
-          Pointer<Utf8> name,
+          Pointer<ffi.Utf8> name,
         )
       >('SDL_PushGPUDebugGroup');
   final namePointer = name != null ? name.toNativeUtf8() : nullptr;
   final result = sdlPushGpuDebugGroupLookupFunction(commandBuffer, namePointer);
-  calloc.free(namePointer);
+  ffi.calloc.free(namePointer);
   return result;
 }
 

@@ -271,11 +271,11 @@ late Pointer<NativeFunction<Void Function()>> _glSecondaryColor3bv;
 /// {@category opengl_glext}
 void glSecondaryColor3bv(String v) {
   final glSecondaryColor3bvAsFunction = _glSecondaryColor3bv
-      .cast<NativeFunction<Void Function(Pointer<Utf8> v)>>()
-      .asFunction<void Function(Pointer<Utf8> v)>();
+      .cast<NativeFunction<Void Function(Pointer<ffi.Utf8> v)>>()
+      .asFunction<void Function(Pointer<ffi.Utf8> v)>();
   final vPointer = v.toNativeUtf8();
   final result = glSecondaryColor3bvAsFunction(vPointer);
-  calloc.free(vPointer);
+  ffi.calloc.free(vPointer);
   return result;
 }
 
@@ -1169,13 +1169,15 @@ void glBindAttribLocation(int program, int index, String name) {
   final glBindAttribLocationAsFunction = _glBindAttribLocation
       .cast<
         NativeFunction<
-          Void Function(Uint32 program, Uint32 index, Pointer<Utf8> name)
+          Void Function(Uint32 program, Uint32 index, Pointer<ffi.Utf8> name)
         >
       >()
-      .asFunction<void Function(int program, int index, Pointer<Utf8> name)>();
+      .asFunction<
+        void Function(int program, int index, Pointer<ffi.Utf8> name)
+      >();
   final namePointer = name.toNativeUtf8();
   final result = glBindAttribLocationAsFunction(program, index, namePointer);
-  calloc.free(namePointer);
+  ffi.calloc.free(namePointer);
   return result;
 }
 
@@ -1440,12 +1442,12 @@ late Pointer<NativeFunction<Void Function()>> _glGetAttribLocation;
 int glGetAttribLocation(int program, String name) {
   final glGetAttribLocationAsFunction = _glGetAttribLocation
       .cast<
-        NativeFunction<Int32 Function(Uint32 program, Pointer<Utf8> name)>
+        NativeFunction<Int32 Function(Uint32 program, Pointer<ffi.Utf8> name)>
       >()
-      .asFunction<int Function(int program, Pointer<Utf8> name)>();
+      .asFunction<int Function(int program, Pointer<ffi.Utf8> name)>();
   final namePointer = name.toNativeUtf8();
   final result = glGetAttribLocationAsFunction(program, namePointer);
-  calloc.free(namePointer);
+  ffi.calloc.free(namePointer);
   return result;
 }
 
@@ -1604,12 +1606,12 @@ late Pointer<NativeFunction<Void Function()>> _glGetUniformLocation;
 int glGetUniformLocation(int program, String name) {
   final glGetUniformLocationAsFunction = _glGetUniformLocation
       .cast<
-        NativeFunction<Int32 Function(Uint32 program, Pointer<Utf8> name)>
+        NativeFunction<Int32 Function(Uint32 program, Pointer<ffi.Utf8> name)>
       >()
-      .asFunction<int Function(int program, Pointer<Utf8> name)>();
+      .asFunction<int Function(int program, Pointer<ffi.Utf8> name)>();
   final namePointer = name.toNativeUtf8();
   final result = glGetUniformLocationAsFunction(program, namePointer);
-  calloc.free(namePointer);
+  ffi.calloc.free(namePointer);
   return result;
 }
 
@@ -2510,11 +2512,11 @@ late Pointer<NativeFunction<Void Function()>> _glVertexAttrib4Nbv;
 /// {@category opengl_glext}
 void glVertexAttrib4Nbv(int index, String v) {
   final glVertexAttrib4NbvAsFunction = _glVertexAttrib4Nbv
-      .cast<NativeFunction<Void Function(Uint32 index, Pointer<Utf8> v)>>()
-      .asFunction<void Function(int index, Pointer<Utf8> v)>();
+      .cast<NativeFunction<Void Function(Uint32 index, Pointer<ffi.Utf8> v)>>()
+      .asFunction<void Function(int index, Pointer<ffi.Utf8> v)>();
   final vPointer = v.toNativeUtf8();
   final result = glVertexAttrib4NbvAsFunction(index, vPointer);
-  calloc.free(vPointer);
+  ffi.calloc.free(vPointer);
   return result;
 }
 
@@ -2615,11 +2617,11 @@ late Pointer<NativeFunction<Void Function()>> _glVertexAttrib4bv;
 /// {@category opengl_glext}
 void glVertexAttrib4bv(int index, String v) {
   final glVertexAttrib4bvAsFunction = _glVertexAttrib4bv
-      .cast<NativeFunction<Void Function(Uint32 index, Pointer<Utf8> v)>>()
-      .asFunction<void Function(int index, Pointer<Utf8> v)>();
+      .cast<NativeFunction<Void Function(Uint32 index, Pointer<ffi.Utf8> v)>>()
+      .asFunction<void Function(int index, Pointer<ffi.Utf8> v)>();
   final vPointer = v.toNativeUtf8();
   final result = glVertexAttrib4bvAsFunction(index, vPointer);
-  calloc.free(vPointer);
+  ffi.calloc.free(vPointer);
   return result;
 }
 
@@ -3668,11 +3670,11 @@ late Pointer<NativeFunction<Void Function()>> _glVertexAttribI4bv;
 /// {@category opengl_glext}
 void glVertexAttribI4bv(int index, String v) {
   final glVertexAttribI4bvAsFunction = _glVertexAttribI4bv
-      .cast<NativeFunction<Void Function(Uint32 index, Pointer<Utf8> v)>>()
-      .asFunction<void Function(int index, Pointer<Utf8> v)>();
+      .cast<NativeFunction<Void Function(Uint32 index, Pointer<ffi.Utf8> v)>>()
+      .asFunction<void Function(int index, Pointer<ffi.Utf8> v)>();
   final vPointer = v.toNativeUtf8();
   final result = glVertexAttribI4bvAsFunction(index, vPointer);
-  calloc.free(vPointer);
+  ffi.calloc.free(vPointer);
   return result;
 }
 
@@ -3749,13 +3751,15 @@ void glBindFragDataLocation(int program, int color, String name) {
   final glBindFragDataLocationAsFunction = _glBindFragDataLocation
       .cast<
         NativeFunction<
-          Void Function(Uint32 program, Uint32 color, Pointer<Utf8> name)
+          Void Function(Uint32 program, Uint32 color, Pointer<ffi.Utf8> name)
         >
       >()
-      .asFunction<void Function(int program, int color, Pointer<Utf8> name)>();
+      .asFunction<
+        void Function(int program, int color, Pointer<ffi.Utf8> name)
+      >();
   final namePointer = name.toNativeUtf8();
   final result = glBindFragDataLocationAsFunction(program, color, namePointer);
-  calloc.free(namePointer);
+  ffi.calloc.free(namePointer);
   return result;
 }
 
@@ -3769,12 +3773,12 @@ late Pointer<NativeFunction<Void Function()>> _glGetFragDataLocation;
 int glGetFragDataLocation(int program, String name) {
   final glGetFragDataLocationAsFunction = _glGetFragDataLocation
       .cast<
-        NativeFunction<Int32 Function(Uint32 program, Pointer<Utf8> name)>
+        NativeFunction<Int32 Function(Uint32 program, Pointer<ffi.Utf8> name)>
       >()
-      .asFunction<int Function(int program, Pointer<Utf8> name)>();
+      .asFunction<int Function(int program, Pointer<ffi.Utf8> name)>();
   final namePointer = name.toNativeUtf8();
   final result = glGetFragDataLocationAsFunction(program, namePointer);
-  calloc.free(namePointer);
+  ffi.calloc.free(namePointer);
   return result;
 }
 
@@ -5069,16 +5073,18 @@ int glGetUniformBlockIndex(int program, String uniformBlockName) {
   final glGetUniformBlockIndexAsFunction = _glGetUniformBlockIndex
       .cast<
         NativeFunction<
-          Uint32 Function(Uint32 program, Pointer<Utf8> uniformBlockName)
+          Uint32 Function(Uint32 program, Pointer<ffi.Utf8> uniformBlockName)
         >
       >()
-      .asFunction<int Function(int program, Pointer<Utf8> uniformBlockName)>();
+      .asFunction<
+        int Function(int program, Pointer<ffi.Utf8> uniformBlockName)
+      >();
   final uniformBlockNamePointer = uniformBlockName.toNativeUtf8();
   final result = glGetUniformBlockIndexAsFunction(
     program,
     uniformBlockNamePointer,
   );
-  calloc.free(uniformBlockNamePointer);
+  ffi.calloc.free(uniformBlockNamePointer);
   return result;
 }
 
@@ -5757,7 +5763,7 @@ void glBindFragDataLocationIndexed(
             Uint32 program,
             Uint32 colorNumber,
             Uint32 index,
-            Pointer<Utf8> name,
+            Pointer<ffi.Utf8> name,
           )
         >
       >()
@@ -5766,7 +5772,7 @@ void glBindFragDataLocationIndexed(
           int program,
           int colorNumber,
           int index,
-          Pointer<Utf8> name,
+          Pointer<ffi.Utf8> name,
         )
       >();
   final namePointer = name.toNativeUtf8();
@@ -5776,7 +5782,7 @@ void glBindFragDataLocationIndexed(
     index,
     namePointer,
   );
-  calloc.free(namePointer);
+  ffi.calloc.free(namePointer);
   return result;
 }
 
@@ -5790,12 +5796,12 @@ late Pointer<NativeFunction<Void Function()>> _glGetFragDataIndex;
 int glGetFragDataIndex(int program, String name) {
   final glGetFragDataIndexAsFunction = _glGetFragDataIndex
       .cast<
-        NativeFunction<Int32 Function(Uint32 program, Pointer<Utf8> name)>
+        NativeFunction<Int32 Function(Uint32 program, Pointer<ffi.Utf8> name)>
       >()
-      .asFunction<int Function(int program, Pointer<Utf8> name)>();
+      .asFunction<int Function(int program, Pointer<ffi.Utf8> name)>();
   final namePointer = name.toNativeUtf8();
   final result = glGetFragDataIndexAsFunction(program, namePointer);
-  calloc.free(namePointer);
+  ffi.calloc.free(namePointer);
   return result;
 }
 
@@ -7459,12 +7465,12 @@ int glGetSubroutineUniformLocation(int program, int shadertype, String name) {
               Int32 Function(
                 Uint32 program,
                 Uint32 shadertype,
-                Pointer<Utf8> name,
+                Pointer<ffi.Utf8> name,
               )
             >
           >()
           .asFunction<
-            int Function(int program, int shadertype, Pointer<Utf8> name)
+            int Function(int program, int shadertype, Pointer<ffi.Utf8> name)
           >();
   final namePointer = name.toNativeUtf8();
   final result = glGetSubroutineUniformLocationAsFunction(
@@ -7472,7 +7478,7 @@ int glGetSubroutineUniformLocation(int program, int shadertype, String name) {
     shadertype,
     namePointer,
   );
-  calloc.free(namePointer);
+  ffi.calloc.free(namePointer);
   return result;
 }
 
@@ -7487,11 +7493,15 @@ int glGetSubroutineIndex(int program, int shadertype, String name) {
   final glGetSubroutineIndexAsFunction = _glGetSubroutineIndex
       .cast<
         NativeFunction<
-          Uint32 Function(Uint32 program, Uint32 shadertype, Pointer<Utf8> name)
+          Uint32 Function(
+            Uint32 program,
+            Uint32 shadertype,
+            Pointer<ffi.Utf8> name,
+          )
         >
       >()
       .asFunction<
-        int Function(int program, int shadertype, Pointer<Utf8> name)
+        int Function(int program, int shadertype, Pointer<ffi.Utf8> name)
       >();
   final namePointer = name.toNativeUtf8();
   final result = glGetSubroutineIndexAsFunction(
@@ -7499,7 +7509,7 @@ int glGetSubroutineIndex(int program, int shadertype, String name) {
     shadertype,
     namePointer,
   );
-  calloc.free(namePointer);
+  ffi.calloc.free(namePointer);
   return result;
 }
 
@@ -11556,12 +11566,12 @@ int glGetProgramResourceIndex(int program, int programInterface, String name) {
           Uint32 Function(
             Uint32 program,
             Uint32 programInterface,
-            Pointer<Utf8> name,
+            Pointer<ffi.Utf8> name,
           )
         >
       >()
       .asFunction<
-        int Function(int program, int programInterface, Pointer<Utf8> name)
+        int Function(int program, int programInterface, Pointer<ffi.Utf8> name)
       >();
   final namePointer = name.toNativeUtf8();
   final result = glGetProgramResourceIndexAsFunction(
@@ -11569,7 +11579,7 @@ int glGetProgramResourceIndex(int program, int programInterface, String name) {
     programInterface,
     namePointer,
   );
-  calloc.free(namePointer);
+  ffi.calloc.free(namePointer);
   return result;
 }
 
@@ -11695,12 +11705,12 @@ int glGetProgramResourceLocation(
           Int32 Function(
             Uint32 program,
             Uint32 programInterface,
-            Pointer<Utf8> name,
+            Pointer<ffi.Utf8> name,
           )
         >
       >()
       .asFunction<
-        int Function(int program, int programInterface, Pointer<Utf8> name)
+        int Function(int program, int programInterface, Pointer<ffi.Utf8> name)
       >();
   final namePointer = name.toNativeUtf8();
   final result = glGetProgramResourceLocationAsFunction(
@@ -11708,7 +11718,7 @@ int glGetProgramResourceLocation(
     programInterface,
     namePointer,
   );
-  calloc.free(namePointer);
+  ffi.calloc.free(namePointer);
   return result;
 }
 
@@ -11732,12 +11742,16 @@ int glGetProgramResourceLocationIndex(
               Int32 Function(
                 Uint32 program,
                 Uint32 programInterface,
-                Pointer<Utf8> name,
+                Pointer<ffi.Utf8> name,
               )
             >
           >()
           .asFunction<
-            int Function(int program, int programInterface, Pointer<Utf8> name)
+            int Function(
+              int program,
+              int programInterface,
+              Pointer<ffi.Utf8> name,
+            )
           >();
   final namePointer = name.toNativeUtf8();
   final result = glGetProgramResourceLocationIndexAsFunction(
@@ -11745,7 +11759,7 @@ int glGetProgramResourceLocationIndex(
     programInterface,
     namePointer,
   );
-  calloc.free(namePointer);
+  ffi.calloc.free(namePointer);
   return result;
 }
 
@@ -12228,7 +12242,7 @@ void glDebugMessageInsert(
             Uint32 id,
             Uint32 severity,
             Int32 length,
-            Pointer<Utf8> buf,
+            Pointer<ffi.Utf8> buf,
           )
         >
       >()
@@ -12239,7 +12253,7 @@ void glDebugMessageInsert(
           int id,
           int severity,
           int length,
-          Pointer<Utf8> buf,
+          Pointer<ffi.Utf8> buf,
         )
       >();
   final bufPointer = buf.toNativeUtf8();
@@ -12251,7 +12265,7 @@ void glDebugMessageInsert(
     length,
     bufPointer,
   );
-  calloc.free(bufPointer);
+  ffi.calloc.free(bufPointer);
   return result;
 }
 
@@ -12355,16 +12369,16 @@ void glPushDebugGroup(int source, int id, int length, String message) {
             Uint32 source,
             Uint32 id,
             Int32 length,
-            Pointer<Utf8> message,
+            Pointer<ffi.Utf8> message,
           )
         >
       >()
       .asFunction<
-        void Function(int source, int id, int length, Pointer<Utf8> message)
+        void Function(int source, int id, int length, Pointer<ffi.Utf8> message)
       >();
   final messagePointer = message.toNativeUtf8();
   final result = glPushDebugGroupAsFunction(source, id, length, messagePointer);
-  calloc.free(messagePointer);
+  ffi.calloc.free(messagePointer);
   return result;
 }
 
@@ -12397,12 +12411,17 @@ void glObjectLabel(int identifier, int name, int length, String label) {
             Uint32 identifier,
             Uint32 name,
             Int32 length,
-            Pointer<Utf8> label,
+            Pointer<ffi.Utf8> label,
           )
         >
       >()
       .asFunction<
-        void Function(int identifier, int name, int length, Pointer<Utf8> label)
+        void Function(
+          int identifier,
+          int name,
+          int length,
+          Pointer<ffi.Utf8> label,
+        )
       >();
   final labelPointer = label.toNativeUtf8();
   final result = glObjectLabelAsFunction(
@@ -12411,7 +12430,7 @@ void glObjectLabel(int identifier, int name, int length, String label) {
     length,
     labelPointer,
   );
-  calloc.free(labelPointer);
+  ffi.calloc.free(labelPointer);
   return result;
 }
 
@@ -12464,15 +12483,19 @@ void glObjectPtrLabel(Pointer<Void> ptr, int length, String label) {
   final glObjectPtrLabelAsFunction = _glObjectPtrLabel
       .cast<
         NativeFunction<
-          Void Function(Pointer<Void> ptr, Int32 length, Pointer<Utf8> label)
+          Void Function(
+            Pointer<Void> ptr,
+            Int32 length,
+            Pointer<ffi.Utf8> label,
+          )
         >
       >()
       .asFunction<
-        void Function(Pointer<Void> ptr, int length, Pointer<Utf8> label)
+        void Function(Pointer<Void> ptr, int length, Pointer<ffi.Utf8> label)
       >();
   final labelPointer = label.toNativeUtf8();
   final result = glObjectPtrLabelAsFunction(ptr, length, labelPointer);
-  calloc.free(labelPointer);
+  ffi.calloc.free(labelPointer);
   return result;
 }
 
@@ -16693,7 +16716,7 @@ void glSpecializeShader(
         NativeFunction<
           Void Function(
             Uint32 shader,
-            Pointer<Utf8> pEntryPoint,
+            Pointer<ffi.Utf8> pEntryPoint,
             Uint32 numSpecializationConstants,
             Pointer<Uint32> pConstantIndex,
             Pointer<Uint32> pConstantValue,
@@ -16703,7 +16726,7 @@ void glSpecializeShader(
       .asFunction<
         void Function(
           int shader,
-          Pointer<Utf8> pEntryPoint,
+          Pointer<ffi.Utf8> pEntryPoint,
           int numSpecializationConstants,
           Pointer<Uint32> pConstantIndex,
           Pointer<Uint32> pConstantValue,
@@ -16717,7 +16740,7 @@ void glSpecializeShader(
     pConstantIndex,
     pConstantValue,
   );
-  calloc.free(pEntryPointPointer);
+  ffi.calloc.free(pEntryPointPointer);
   return result;
 }
 
@@ -17342,7 +17365,7 @@ void glDebugMessageInsertArb(
             Uint32 id,
             Uint32 severity,
             Int32 length,
-            Pointer<Utf8> buf,
+            Pointer<ffi.Utf8> buf,
           )
         >
       >()
@@ -17353,7 +17376,7 @@ void glDebugMessageInsertArb(
           int id,
           int severity,
           int length,
-          Pointer<Utf8> buf,
+          Pointer<ffi.Utf8> buf,
         )
       >();
   final bufPointer = buf.toNativeUtf8();
@@ -17365,7 +17388,7 @@ void glDebugMessageInsertArb(
     length,
     bufPointer,
   );
-  calloc.free(bufPointer);
+  ffi.calloc.free(bufPointer);
   return result;
 }
 
@@ -18248,7 +18271,7 @@ void glSpecializeShaderArb(
         NativeFunction<
           Void Function(
             Uint32 shader,
-            Pointer<Utf8> pEntryPoint,
+            Pointer<ffi.Utf8> pEntryPoint,
             Uint32 numSpecializationConstants,
             Pointer<Uint32> pConstantIndex,
             Pointer<Uint32> pConstantValue,
@@ -18258,7 +18281,7 @@ void glSpecializeShaderArb(
       .asFunction<
         void Function(
           int shader,
-          Pointer<Utf8> pEntryPoint,
+          Pointer<ffi.Utf8> pEntryPoint,
           int numSpecializationConstants,
           Pointer<Uint32> pConstantIndex,
           Pointer<Uint32> pConstantValue,
@@ -18272,7 +18295,7 @@ void glSpecializeShaderArb(
     pConstantIndex,
     pConstantValue,
   );
-  calloc.free(pEntryPointPointer);
+  ffi.calloc.free(pEntryPointPointer);
   return result;
 }
 
@@ -21005,13 +21028,15 @@ int glGetUniformLocationArb(Pointer<Void> programObj, String name) {
   final glGetUniformLocationArbAsFunction = _glGetUniformLocationArb
       .cast<
         NativeFunction<
-          Int32 Function(Pointer<Void> programObj, Pointer<Utf8> name)
+          Int32 Function(Pointer<Void> programObj, Pointer<ffi.Utf8> name)
         >
       >()
-      .asFunction<int Function(Pointer<Void> programObj, Pointer<Utf8> name)>();
+      .asFunction<
+        int Function(Pointer<Void> programObj, Pointer<ffi.Utf8> name)
+      >();
   final namePointer = name.toNativeUtf8();
   final result = glGetUniformLocationArbAsFunction(programObj, namePointer);
-  calloc.free(namePointer);
+  ffi.calloc.free(namePointer);
   return result;
 }
 
@@ -21186,9 +21211,9 @@ void glNamedStringArb(
           Void Function(
             Uint32 type,
             Int32 namelen,
-            Pointer<Utf8> name,
+            Pointer<ffi.Utf8> name,
             Int32 stringlen,
-            Pointer<Utf8> string,
+            Pointer<ffi.Utf8> string,
           )
         >
       >()
@@ -21196,9 +21221,9 @@ void glNamedStringArb(
         void Function(
           int type,
           int namelen,
-          Pointer<Utf8> name,
+          Pointer<ffi.Utf8> name,
           int stringlen,
-          Pointer<Utf8> string,
+          Pointer<ffi.Utf8> string,
         )
       >();
   final namePointer = name.toNativeUtf8();
@@ -21210,7 +21235,7 @@ void glNamedStringArb(
     stringlen,
     stringPointer,
   );
-  calloc
+  ffi.calloc
     ..free(namePointer)
     ..free(stringPointer);
   return result;
@@ -21225,11 +21250,13 @@ late Pointer<NativeFunction<Void Function()>> _glDeleteNamedStringArb;
 /// {@category opengl_glext}
 void glDeleteNamedStringArb(int namelen, String name) {
   final glDeleteNamedStringArbAsFunction = _glDeleteNamedStringArb
-      .cast<NativeFunction<Void Function(Int32 namelen, Pointer<Utf8> name)>>()
-      .asFunction<void Function(int namelen, Pointer<Utf8> name)>();
+      .cast<
+        NativeFunction<Void Function(Int32 namelen, Pointer<ffi.Utf8> name)>
+      >()
+      .asFunction<void Function(int namelen, Pointer<ffi.Utf8> name)>();
   final namePointer = name.toNativeUtf8();
   final result = glDeleteNamedStringArbAsFunction(namelen, namePointer);
-  calloc.free(namePointer);
+  ffi.calloc.free(namePointer);
   return result;
 }
 
@@ -21277,11 +21304,13 @@ late Pointer<NativeFunction<Void Function()>> _glIsNamedStringArb;
 /// {@category opengl_glext}
 int glIsNamedStringArb(int namelen, String name) {
   final glIsNamedStringArbAsFunction = _glIsNamedStringArb
-      .cast<NativeFunction<Uint8 Function(Int32 namelen, Pointer<Utf8> name)>>()
-      .asFunction<int Function(int namelen, Pointer<Utf8> name)>();
+      .cast<
+        NativeFunction<Uint8 Function(Int32 namelen, Pointer<ffi.Utf8> name)>
+      >()
+      .asFunction<int Function(int namelen, Pointer<ffi.Utf8> name)>();
   final namePointer = name.toNativeUtf8();
   final result = glIsNamedStringArbAsFunction(namelen, namePointer);
-  calloc.free(namePointer);
+  ffi.calloc.free(namePointer);
   return result;
 }
 
@@ -21304,7 +21333,7 @@ void glGetNamedStringArb(
         NativeFunction<
           Void Function(
             Int32 namelen,
-            Pointer<Utf8> name,
+            Pointer<ffi.Utf8> name,
             Int32 bufSize,
             Pointer<Int32> stringlen,
             Pointer<Int8> string,
@@ -21314,7 +21343,7 @@ void glGetNamedStringArb(
       .asFunction<
         void Function(
           int namelen,
-          Pointer<Utf8> name,
+          Pointer<ffi.Utf8> name,
           int bufSize,
           Pointer<Int32> stringlen,
           Pointer<Int8> string,
@@ -21328,7 +21357,7 @@ void glGetNamedStringArb(
     stringlen,
     string,
   );
-  calloc.free(namePointer);
+  ffi.calloc.free(namePointer);
   return result;
 }
 
@@ -21350,7 +21379,7 @@ void glGetNamedStringivArb(
         NativeFunction<
           Void Function(
             Int32 namelen,
-            Pointer<Utf8> name,
+            Pointer<ffi.Utf8> name,
             Uint32 pname,
             Pointer<Int32> params,
           )
@@ -21359,7 +21388,7 @@ void glGetNamedStringivArb(
       .asFunction<
         void Function(
           int namelen,
-          Pointer<Utf8> name,
+          Pointer<ffi.Utf8> name,
           int pname,
           Pointer<Int32> params,
         )
@@ -21371,7 +21400,7 @@ void glGetNamedStringivArb(
     pname,
     params,
   );
-  calloc.free(namePointer);
+  ffi.calloc.free(namePointer);
   return result;
 }
 
@@ -21966,11 +21995,13 @@ late Pointer<NativeFunction<Void Function()>> _glWeightbvArb;
 /// {@category opengl_glext}
 void glWeightbvArb(int size, String weights) {
   final glWeightbvArbAsFunction = _glWeightbvArb
-      .cast<NativeFunction<Void Function(Int32 size, Pointer<Utf8> weights)>>()
-      .asFunction<void Function(int size, Pointer<Utf8> weights)>();
+      .cast<
+        NativeFunction<Void Function(Int32 size, Pointer<ffi.Utf8> weights)>
+      >()
+      .asFunction<void Function(int size, Pointer<ffi.Utf8> weights)>();
   final weightsPointer = weights.toNativeUtf8();
   final result = glWeightbvArbAsFunction(size, weightsPointer);
-  calloc.free(weightsPointer);
+  ffi.calloc.free(weightsPointer);
   return result;
 }
 
@@ -22600,11 +22631,11 @@ late Pointer<NativeFunction<Void Function()>> _glVertexAttrib4NbvArb;
 /// {@category opengl_glext}
 void glVertexAttrib4NbvArb(int index, String v) {
   final glVertexAttrib4NbvArbAsFunction = _glVertexAttrib4NbvArb
-      .cast<NativeFunction<Void Function(Uint32 index, Pointer<Utf8> v)>>()
-      .asFunction<void Function(int index, Pointer<Utf8> v)>();
+      .cast<NativeFunction<Void Function(Uint32 index, Pointer<ffi.Utf8> v)>>()
+      .asFunction<void Function(int index, Pointer<ffi.Utf8> v)>();
   final vPointer = v.toNativeUtf8();
   final result = glVertexAttrib4NbvArbAsFunction(index, vPointer);
-  calloc.free(vPointer);
+  ffi.calloc.free(vPointer);
   return result;
 }
 
@@ -22705,11 +22736,11 @@ late Pointer<NativeFunction<Void Function()>> _glVertexAttrib4bvArb;
 /// {@category opengl_glext}
 void glVertexAttrib4bvArb(int index, String v) {
   final glVertexAttrib4bvArbAsFunction = _glVertexAttrib4bvArb
-      .cast<NativeFunction<Void Function(Uint32 index, Pointer<Utf8> v)>>()
-      .asFunction<void Function(int index, Pointer<Utf8> v)>();
+      .cast<NativeFunction<Void Function(Uint32 index, Pointer<ffi.Utf8> v)>>()
+      .asFunction<void Function(int index, Pointer<ffi.Utf8> v)>();
   final vPointer = v.toNativeUtf8();
   final result = glVertexAttrib4bvArbAsFunction(index, vPointer);
-  calloc.free(vPointer);
+  ffi.calloc.free(vPointer);
   return result;
 }
 
@@ -23043,12 +23074,16 @@ void glBindAttribLocationArb(Pointer<Void> programObj, int index, String name) {
           Void Function(
             Pointer<Void> programObj,
             Uint32 index,
-            Pointer<Utf8> name,
+            Pointer<ffi.Utf8> name,
           )
         >
       >()
       .asFunction<
-        void Function(Pointer<Void> programObj, int index, Pointer<Utf8> name)
+        void Function(
+          Pointer<Void> programObj,
+          int index,
+          Pointer<ffi.Utf8> name,
+        )
       >();
   final namePointer = name.toNativeUtf8();
   final result = glBindAttribLocationArbAsFunction(
@@ -23056,7 +23091,7 @@ void glBindAttribLocationArb(Pointer<Void> programObj, int index, String name) {
     index,
     namePointer,
   );
-  calloc.free(namePointer);
+  ffi.calloc.free(namePointer);
   return result;
 }
 
@@ -23123,13 +23158,15 @@ int glGetAttribLocationArb(Pointer<Void> programObj, String name) {
   final glGetAttribLocationArbAsFunction = _glGetAttribLocationArb
       .cast<
         NativeFunction<
-          Int32 Function(Pointer<Void> programObj, Pointer<Utf8> name)
+          Int32 Function(Pointer<Void> programObj, Pointer<ffi.Utf8> name)
         >
       >()
-      .asFunction<int Function(Pointer<Void> programObj, Pointer<Utf8> name)>();
+      .asFunction<
+        int Function(Pointer<Void> programObj, Pointer<ffi.Utf8> name)
+      >();
   final namePointer = name.toNativeUtf8();
   final result = glGetAttribLocationArbAsFunction(programObj, namePointer);
-  calloc.free(namePointer);
+  ffi.calloc.free(namePointer);
   return result;
 }
 
@@ -23441,12 +23478,12 @@ late Pointer<NativeFunction<Void Function()>> _glMultiTexCoord1bvOes;
 void glMultiTexCoord1bvOes(int texture, String coords) {
   final glMultiTexCoord1bvOesAsFunction = _glMultiTexCoord1bvOes
       .cast<
-        NativeFunction<Void Function(Uint32 texture, Pointer<Utf8> coords)>
+        NativeFunction<Void Function(Uint32 texture, Pointer<ffi.Utf8> coords)>
       >()
-      .asFunction<void Function(int texture, Pointer<Utf8> coords)>();
+      .asFunction<void Function(int texture, Pointer<ffi.Utf8> coords)>();
   final coordsPointer = coords.toNativeUtf8();
   final result = glMultiTexCoord1bvOesAsFunction(texture, coordsPointer);
-  calloc.free(coordsPointer);
+  ffi.calloc.free(coordsPointer);
   return result;
 }
 
@@ -23474,12 +23511,12 @@ late Pointer<NativeFunction<Void Function()>> _glMultiTexCoord2bvOes;
 void glMultiTexCoord2bvOes(int texture, String coords) {
   final glMultiTexCoord2bvOesAsFunction = _glMultiTexCoord2bvOes
       .cast<
-        NativeFunction<Void Function(Uint32 texture, Pointer<Utf8> coords)>
+        NativeFunction<Void Function(Uint32 texture, Pointer<ffi.Utf8> coords)>
       >()
-      .asFunction<void Function(int texture, Pointer<Utf8> coords)>();
+      .asFunction<void Function(int texture, Pointer<ffi.Utf8> coords)>();
   final coordsPointer = coords.toNativeUtf8();
   final result = glMultiTexCoord2bvOesAsFunction(texture, coordsPointer);
-  calloc.free(coordsPointer);
+  ffi.calloc.free(coordsPointer);
   return result;
 }
 
@@ -23509,12 +23546,12 @@ late Pointer<NativeFunction<Void Function()>> _glMultiTexCoord3bvOes;
 void glMultiTexCoord3bvOes(int texture, String coords) {
   final glMultiTexCoord3bvOesAsFunction = _glMultiTexCoord3bvOes
       .cast<
-        NativeFunction<Void Function(Uint32 texture, Pointer<Utf8> coords)>
+        NativeFunction<Void Function(Uint32 texture, Pointer<ffi.Utf8> coords)>
       >()
-      .asFunction<void Function(int texture, Pointer<Utf8> coords)>();
+      .asFunction<void Function(int texture, Pointer<ffi.Utf8> coords)>();
   final coordsPointer = coords.toNativeUtf8();
   final result = glMultiTexCoord3bvOesAsFunction(texture, coordsPointer);
-  calloc.free(coordsPointer);
+  ffi.calloc.free(coordsPointer);
   return result;
 }
 
@@ -23546,12 +23583,12 @@ late Pointer<NativeFunction<Void Function()>> _glMultiTexCoord4bvOes;
 void glMultiTexCoord4bvOes(int texture, String coords) {
   final glMultiTexCoord4bvOesAsFunction = _glMultiTexCoord4bvOes
       .cast<
-        NativeFunction<Void Function(Uint32 texture, Pointer<Utf8> coords)>
+        NativeFunction<Void Function(Uint32 texture, Pointer<ffi.Utf8> coords)>
       >()
-      .asFunction<void Function(int texture, Pointer<Utf8> coords)>();
+      .asFunction<void Function(int texture, Pointer<ffi.Utf8> coords)>();
   final coordsPointer = coords.toNativeUtf8();
   final result = glMultiTexCoord4bvOesAsFunction(texture, coordsPointer);
-  calloc.free(coordsPointer);
+  ffi.calloc.free(coordsPointer);
   return result;
 }
 
@@ -23578,11 +23615,11 @@ late Pointer<NativeFunction<Void Function()>> _glTexCoord1bvOes;
 /// {@category opengl_glext}
 void glTexCoord1bvOes(String coords) {
   final glTexCoord1bvOesAsFunction = _glTexCoord1bvOes
-      .cast<NativeFunction<Void Function(Pointer<Utf8> coords)>>()
-      .asFunction<void Function(Pointer<Utf8> coords)>();
+      .cast<NativeFunction<Void Function(Pointer<ffi.Utf8> coords)>>()
+      .asFunction<void Function(Pointer<ffi.Utf8> coords)>();
   final coordsPointer = coords.toNativeUtf8();
   final result = glTexCoord1bvOesAsFunction(coordsPointer);
-  calloc.free(coordsPointer);
+  ffi.calloc.free(coordsPointer);
   return result;
 }
 
@@ -23609,11 +23646,11 @@ late Pointer<NativeFunction<Void Function()>> _glTexCoord2bvOes;
 /// {@category opengl_glext}
 void glTexCoord2bvOes(String coords) {
   final glTexCoord2bvOesAsFunction = _glTexCoord2bvOes
-      .cast<NativeFunction<Void Function(Pointer<Utf8> coords)>>()
-      .asFunction<void Function(Pointer<Utf8> coords)>();
+      .cast<NativeFunction<Void Function(Pointer<ffi.Utf8> coords)>>()
+      .asFunction<void Function(Pointer<ffi.Utf8> coords)>();
   final coordsPointer = coords.toNativeUtf8();
   final result = glTexCoord2bvOesAsFunction(coordsPointer);
-  calloc.free(coordsPointer);
+  ffi.calloc.free(coordsPointer);
   return result;
 }
 
@@ -23640,11 +23677,11 @@ late Pointer<NativeFunction<Void Function()>> _glTexCoord3bvOes;
 /// {@category opengl_glext}
 void glTexCoord3bvOes(String coords) {
   final glTexCoord3bvOesAsFunction = _glTexCoord3bvOes
-      .cast<NativeFunction<Void Function(Pointer<Utf8> coords)>>()
-      .asFunction<void Function(Pointer<Utf8> coords)>();
+      .cast<NativeFunction<Void Function(Pointer<ffi.Utf8> coords)>>()
+      .asFunction<void Function(Pointer<ffi.Utf8> coords)>();
   final coordsPointer = coords.toNativeUtf8();
   final result = glTexCoord3bvOesAsFunction(coordsPointer);
-  calloc.free(coordsPointer);
+  ffi.calloc.free(coordsPointer);
   return result;
 }
 
@@ -23671,11 +23708,11 @@ late Pointer<NativeFunction<Void Function()>> _glTexCoord4bvOes;
 /// {@category opengl_glext}
 void glTexCoord4bvOes(String coords) {
   final glTexCoord4bvOesAsFunction = _glTexCoord4bvOes
-      .cast<NativeFunction<Void Function(Pointer<Utf8> coords)>>()
-      .asFunction<void Function(Pointer<Utf8> coords)>();
+      .cast<NativeFunction<Void Function(Pointer<ffi.Utf8> coords)>>()
+      .asFunction<void Function(Pointer<ffi.Utf8> coords)>();
   final coordsPointer = coords.toNativeUtf8();
   final result = glTexCoord4bvOesAsFunction(coordsPointer);
-  calloc.free(coordsPointer);
+  ffi.calloc.free(coordsPointer);
   return result;
 }
 
@@ -23702,11 +23739,11 @@ late Pointer<NativeFunction<Void Function()>> _glVertex2bvOes;
 /// {@category opengl_glext}
 void glVertex2bvOes(String coords) {
   final glVertex2bvOesAsFunction = _glVertex2bvOes
-      .cast<NativeFunction<Void Function(Pointer<Utf8> coords)>>()
-      .asFunction<void Function(Pointer<Utf8> coords)>();
+      .cast<NativeFunction<Void Function(Pointer<ffi.Utf8> coords)>>()
+      .asFunction<void Function(Pointer<ffi.Utf8> coords)>();
   final coordsPointer = coords.toNativeUtf8();
   final result = glVertex2bvOesAsFunction(coordsPointer);
-  calloc.free(coordsPointer);
+  ffi.calloc.free(coordsPointer);
   return result;
 }
 
@@ -23733,11 +23770,11 @@ late Pointer<NativeFunction<Void Function()>> _glVertex3bvOes;
 /// {@category opengl_glext}
 void glVertex3bvOes(String coords) {
   final glVertex3bvOesAsFunction = _glVertex3bvOes
-      .cast<NativeFunction<Void Function(Pointer<Utf8> coords)>>()
-      .asFunction<void Function(Pointer<Utf8> coords)>();
+      .cast<NativeFunction<Void Function(Pointer<ffi.Utf8> coords)>>()
+      .asFunction<void Function(Pointer<ffi.Utf8> coords)>();
   final coordsPointer = coords.toNativeUtf8();
   final result = glVertex3bvOesAsFunction(coordsPointer);
-  calloc.free(coordsPointer);
+  ffi.calloc.free(coordsPointer);
   return result;
 }
 
@@ -23764,11 +23801,11 @@ late Pointer<NativeFunction<Void Function()>> _glVertex4bvOes;
 /// {@category opengl_glext}
 void glVertex4bvOes(String coords) {
   final glVertex4bvOesAsFunction = _glVertex4bvOes
-      .cast<NativeFunction<Void Function(Pointer<Utf8> coords)>>()
-      .asFunction<void Function(Pointer<Utf8> coords)>();
+      .cast<NativeFunction<Void Function(Pointer<ffi.Utf8> coords)>>()
+      .asFunction<void Function(Pointer<ffi.Utf8> coords)>();
   final coordsPointer = coords.toNativeUtf8();
   final result = glVertex4bvOesAsFunction(coordsPointer);
-  calloc.free(coordsPointer);
+  ffi.calloc.free(coordsPointer);
   return result;
 }
 
@@ -25727,7 +25764,7 @@ void glDebugMessageInsertAmd(
             Uint32 severity,
             Uint32 id,
             Int32 length,
-            Pointer<Utf8> buf,
+            Pointer<ffi.Utf8> buf,
           )
         >
       >()
@@ -25737,7 +25774,7 @@ void glDebugMessageInsertAmd(
           int severity,
           int id,
           int length,
-          Pointer<Utf8> buf,
+          Pointer<ffi.Utf8> buf,
         )
       >();
   final bufPointer = buf.toNativeUtf8();
@@ -25748,7 +25785,7 @@ void glDebugMessageInsertAmd(
     length,
     bufPointer,
   );
-  calloc.free(bufPointer);
+  ffi.calloc.free(bufPointer);
   return result;
 }
 
@@ -30098,12 +30135,12 @@ late Pointer<NativeFunction<Void Function()>> _glNormalStream3bvAti;
 void glNormalStream3bvAti(int stream, String coords) {
   final glNormalStream3bvAtiAsFunction = _glNormalStream3bvAti
       .cast<
-        NativeFunction<Void Function(Uint32 stream, Pointer<Utf8> coords)>
+        NativeFunction<Void Function(Uint32 stream, Pointer<ffi.Utf8> coords)>
       >()
-      .asFunction<void Function(int stream, Pointer<Utf8> coords)>();
+      .asFunction<void Function(int stream, Pointer<ffi.Utf8> coords)>();
   final coordsPointer = coords.toNativeUtf8();
   final result = glNormalStream3bvAtiAsFunction(stream, coordsPointer);
-  calloc.free(coordsPointer);
+  ffi.calloc.free(coordsPointer);
   return result;
 }
 
@@ -31049,11 +31086,11 @@ late Pointer<NativeFunction<Void Function()>> _glTangent3bvExt;
 /// {@category opengl_glext}
 void glTangent3bvExt(String v) {
   final glTangent3bvExtAsFunction = _glTangent3bvExt
-      .cast<NativeFunction<Void Function(Pointer<Utf8> v)>>()
-      .asFunction<void Function(Pointer<Utf8> v)>();
+      .cast<NativeFunction<Void Function(Pointer<ffi.Utf8> v)>>()
+      .asFunction<void Function(Pointer<ffi.Utf8> v)>();
   final vPointer = v.toNativeUtf8();
   final result = glTangent3bvExtAsFunction(vPointer);
-  calloc.free(vPointer);
+  ffi.calloc.free(vPointer);
   return result;
 }
 
@@ -31192,11 +31229,11 @@ late Pointer<NativeFunction<Void Function()>> _glBinormal3bvExt;
 /// {@category opengl_glext}
 void glBinormal3bvExt(String v) {
   final glBinormal3bvExtAsFunction = _glBinormal3bvExt
-      .cast<NativeFunction<Void Function(Pointer<Utf8> v)>>()
-      .asFunction<void Function(Pointer<Utf8> v)>();
+      .cast<NativeFunction<Void Function(Pointer<ffi.Utf8> v)>>()
+      .asFunction<void Function(Pointer<ffi.Utf8> v)>();
   final vPointer = v.toNativeUtf8();
   final result = glBinormal3bvExtAsFunction(vPointer);
-  calloc.free(vPointer);
+  ffi.calloc.free(vPointer);
   return result;
 }
 
@@ -31660,16 +31697,16 @@ void glLabelObjectExt(int type, int object, int length, String label) {
             Uint32 type,
             Uint32 object,
             Int32 length,
-            Pointer<Utf8> label,
+            Pointer<ffi.Utf8> label,
           )
         >
       >()
       .asFunction<
-        void Function(int type, int object, int length, Pointer<Utf8> label)
+        void Function(int type, int object, int length, Pointer<ffi.Utf8> label)
       >();
   final labelPointer = label.toNativeUtf8();
   final result = glLabelObjectExtAsFunction(type, object, length, labelPointer);
-  calloc.free(labelPointer);
+  ffi.calloc.free(labelPointer);
   return result;
 }
 
@@ -31720,11 +31757,13 @@ late Pointer<NativeFunction<Void Function()>> _glInsertEventMarkerExt;
 /// {@category opengl_glext}
 void glInsertEventMarkerExt(int length, String marker) {
   final glInsertEventMarkerExtAsFunction = _glInsertEventMarkerExt
-      .cast<NativeFunction<Void Function(Int32 length, Pointer<Utf8> marker)>>()
-      .asFunction<void Function(int length, Pointer<Utf8> marker)>();
+      .cast<
+        NativeFunction<Void Function(Int32 length, Pointer<ffi.Utf8> marker)>
+      >()
+      .asFunction<void Function(int length, Pointer<ffi.Utf8> marker)>();
   final markerPointer = marker.toNativeUtf8();
   final result = glInsertEventMarkerExtAsFunction(length, markerPointer);
-  calloc.free(markerPointer);
+  ffi.calloc.free(markerPointer);
   return result;
 }
 
@@ -31737,11 +31776,13 @@ late Pointer<NativeFunction<Void Function()>> _glPushGroupMarkerExt;
 /// {@category opengl_glext}
 void glPushGroupMarkerExt(int length, String marker) {
   final glPushGroupMarkerExtAsFunction = _glPushGroupMarkerExt
-      .cast<NativeFunction<Void Function(Int32 length, Pointer<Utf8> marker)>>()
-      .asFunction<void Function(int length, Pointer<Utf8> marker)>();
+      .cast<
+        NativeFunction<Void Function(Int32 length, Pointer<ffi.Utf8> marker)>
+      >()
+      .asFunction<void Function(int length, Pointer<ffi.Utf8> marker)>();
   final markerPointer = marker.toNativeUtf8();
   final result = glPushGroupMarkerExtAsFunction(length, markerPointer);
-  calloc.free(markerPointer);
+  ffi.calloc.free(markerPointer);
   return result;
 }
 
@@ -42271,17 +42312,19 @@ void glBindFragDataLocationExt(int program, int color, String name) {
   final glBindFragDataLocationExtAsFunction = _glBindFragDataLocationExt
       .cast<
         NativeFunction<
-          Void Function(Uint32 program, Uint32 color, Pointer<Utf8> name)
+          Void Function(Uint32 program, Uint32 color, Pointer<ffi.Utf8> name)
         >
       >()
-      .asFunction<void Function(int program, int color, Pointer<Utf8> name)>();
+      .asFunction<
+        void Function(int program, int color, Pointer<ffi.Utf8> name)
+      >();
   final namePointer = name.toNativeUtf8();
   final result = glBindFragDataLocationExtAsFunction(
     program,
     color,
     namePointer,
   );
-  calloc.free(namePointer);
+  ffi.calloc.free(namePointer);
   return result;
 }
 
@@ -42295,12 +42338,12 @@ late Pointer<NativeFunction<Void Function()>> _glGetFragDataLocationExt;
 int glGetFragDataLocationExt(int program, String name) {
   final glGetFragDataLocationExtAsFunction = _glGetFragDataLocationExt
       .cast<
-        NativeFunction<Int32 Function(Uint32 program, Pointer<Utf8> name)>
+        NativeFunction<Int32 Function(Uint32 program, Pointer<ffi.Utf8> name)>
       >()
-      .asFunction<int Function(int program, Pointer<Utf8> name)>();
+      .asFunction<int Function(int program, Pointer<ffi.Utf8> name)>();
   final namePointer = name.toNativeUtf8();
   final result = glGetFragDataLocationExtAsFunction(program, namePointer);
-  calloc.free(namePointer);
+  ffi.calloc.free(namePointer);
   return result;
 }
 
@@ -42705,11 +42748,11 @@ late Pointer<NativeFunction<Void Function()>> _glVertexAttribI4bvExt;
 /// {@category opengl_glext}
 void glVertexAttribI4bvExt(int index, String v) {
   final glVertexAttribI4bvExtAsFunction = _glVertexAttribI4bvExt
-      .cast<NativeFunction<Void Function(Uint32 index, Pointer<Utf8> v)>>()
-      .asFunction<void Function(int index, Pointer<Utf8> v)>();
+      .cast<NativeFunction<Void Function(Uint32 index, Pointer<ffi.Utf8> v)>>()
+      .asFunction<void Function(int index, Pointer<ffi.Utf8> v)>();
   final vPointer = v.toNativeUtf8();
   final result = glVertexAttribI4bvExtAsFunction(index, vPointer);
-  calloc.free(vPointer);
+  ffi.calloc.free(vPointer);
   return result;
 }
 
@@ -44539,11 +44582,11 @@ late Pointer<NativeFunction<Void Function()>> _glSecondaryColor3bvExt;
 /// {@category opengl_glext}
 void glSecondaryColor3bvExt(String v) {
   final glSecondaryColor3bvExtAsFunction = _glSecondaryColor3bvExt
-      .cast<NativeFunction<Void Function(Pointer<Utf8> v)>>()
-      .asFunction<void Function(Pointer<Utf8> v)>();
+      .cast<NativeFunction<Void Function(Pointer<ffi.Utf8> v)>>()
+      .asFunction<void Function(Pointer<ffi.Utf8> v)>();
   final vPointer = v.toNativeUtf8();
   final result = glSecondaryColor3bvExtAsFunction(vPointer);
-  calloc.free(vPointer);
+  ffi.calloc.free(vPointer);
   return result;
 }
 
@@ -45087,12 +45130,12 @@ late Pointer<NativeFunction<Void Function()>> _glCreateShaderProgramExt;
 int glCreateShaderProgramExt(int type, String string) {
   final glCreateShaderProgramExtAsFunction = _glCreateShaderProgramExt
       .cast<
-        NativeFunction<Uint32 Function(Uint32 type, Pointer<Utf8> string)>
+        NativeFunction<Uint32 Function(Uint32 type, Pointer<ffi.Utf8> string)>
       >()
-      .asFunction<int Function(int type, Pointer<Utf8> string)>();
+      .asFunction<int Function(int type, Pointer<ffi.Utf8> string)>();
   final stringPointer = string.toNativeUtf8();
   final result = glCreateShaderProgramExtAsFunction(type, stringPointer);
-  calloc.free(stringPointer);
+  ffi.calloc.free(stringPointer);
   return result;
 }
 
@@ -46813,11 +46856,11 @@ late Pointer<NativeFunction<Void Function()>> _glVariantbvExt;
 /// {@category opengl_glext}
 void glVariantbvExt(int id, String addr) {
   final glVariantbvExtAsFunction = _glVariantbvExt
-      .cast<NativeFunction<Void Function(Uint32 id, Pointer<Utf8> addr)>>()
-      .asFunction<void Function(int id, Pointer<Utf8> addr)>();
+      .cast<NativeFunction<Void Function(Uint32 id, Pointer<ffi.Utf8> addr)>>()
+      .asFunction<void Function(int id, Pointer<ffi.Utf8> addr)>();
   final addrPointer = addr.toNativeUtf8();
   final result = glVariantbvExtAsFunction(id, addrPointer);
-  calloc.free(addrPointer);
+  ffi.calloc.free(addrPointer);
   return result;
 }
 
@@ -50710,15 +50753,17 @@ Pointer<NativeFunction<GLVULKANPROCNV>> glGetVkProcAddrNv(String name) {
   final glGetVkProcAddrNvAsFunction = _glGetVkProcAddrNv
       .cast<
         NativeFunction<
-          Pointer<NativeFunction<GLVULKANPROCNV>> Function(Pointer<Utf8> name)
+          Pointer<NativeFunction<GLVULKANPROCNV>> Function(
+            Pointer<ffi.Utf8> name,
+          )
         >
       >()
       .asFunction<
-        Pointer<NativeFunction<GLVULKANPROCNV>> Function(Pointer<Utf8> name)
+        Pointer<NativeFunction<GLVULKANPROCNV>> Function(Pointer<ffi.Utf8> name)
       >();
   final namePointer = name.toNativeUtf8();
   final result = glGetVkProcAddrNvAsFunction(namePointer);
-  calloc.free(namePointer);
+  ffi.calloc.free(namePointer);
   return result;
 }
 
@@ -56467,12 +56512,12 @@ late Pointer<NativeFunction<Void Function()>> _glQueryResourceTagNv;
 void glQueryResourceTagNv(int tagId, String tagString) {
   final glQueryResourceTagNvAsFunction = _glQueryResourceTagNv
       .cast<
-        NativeFunction<Void Function(Int32 tagId, Pointer<Utf8> tagString)>
+        NativeFunction<Void Function(Int32 tagId, Pointer<ffi.Utf8> tagString)>
       >()
-      .asFunction<void Function(int tagId, Pointer<Utf8> tagString)>();
+      .asFunction<void Function(int tagId, Pointer<ffi.Utf8> tagString)>();
   final tagStringPointer = tagString.toNativeUtf8();
   final result = glQueryResourceTagNvAsFunction(tagId, tagStringPointer);
-  calloc.free(tagStringPointer);
+  ffi.calloc.free(tagStringPointer);
   return result;
 }
 
@@ -58084,11 +58129,13 @@ late Pointer<NativeFunction<Void Function()>> _glActiveVaryingNv;
 /// {@category opengl_glext}
 void glActiveVaryingNv(int program, String name) {
   final glActiveVaryingNvAsFunction = _glActiveVaryingNv
-      .cast<NativeFunction<Void Function(Uint32 program, Pointer<Utf8> name)>>()
-      .asFunction<void Function(int program, Pointer<Utf8> name)>();
+      .cast<
+        NativeFunction<Void Function(Uint32 program, Pointer<ffi.Utf8> name)>
+      >()
+      .asFunction<void Function(int program, Pointer<ffi.Utf8> name)>();
   final namePointer = name.toNativeUtf8();
   final result = glActiveVaryingNvAsFunction(program, namePointer);
-  calloc.free(namePointer);
+  ffi.calloc.free(namePointer);
   return result;
 }
 
@@ -58102,12 +58149,12 @@ late Pointer<NativeFunction<Void Function()>> _glGetVaryingLocationNv;
 int glGetVaryingLocationNv(int program, String name) {
   final glGetVaryingLocationNvAsFunction = _glGetVaryingLocationNv
       .cast<
-        NativeFunction<Int32 Function(Uint32 program, Pointer<Utf8> name)>
+        NativeFunction<Int32 Function(Uint32 program, Pointer<ffi.Utf8> name)>
       >()
-      .asFunction<int Function(int program, Pointer<Utf8> name)>();
+      .asFunction<int Function(int program, Pointer<ffi.Utf8> name)>();
   final namePointer = name.toNativeUtf8();
   final result = glGetVaryingLocationNvAsFunction(program, namePointer);
-  calloc.free(namePointer);
+  ffi.calloc.free(namePointer);
   return result;
 }
 

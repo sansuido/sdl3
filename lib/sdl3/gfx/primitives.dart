@@ -448,7 +448,7 @@ bool rectangleRgba(
   /* 
 	* Create destination rect
 	*/
-  final rect = calloc<SdlFRect>();
+  final rect = ffi.calloc<SdlFRect>();
   rect.ref.x = x10;
   rect.ref.y = y10;
   rect.ref.w = x20 - x10;
@@ -467,7 +467,7 @@ bool rectangleRgba(
   if (result) {
     result = sdlRenderRect(renderer, rect);
   }
-  calloc.free(rect);
+  ffi.calloc.free(rect);
   return result;
 }
 
@@ -1206,7 +1206,7 @@ bool boxRgba(
   /* 
 	* Create destination rect
 	*/
-  final rect = calloc<SdlFRect>();
+  final rect = ffi.calloc<SdlFRect>();
   rect.ref.x = x10;
   rect.ref.y = y10;
   rect.ref.w = x20 - x10 + 1;
@@ -1225,7 +1225,7 @@ bool boxRgba(
   if (result) {
     result = sdlRenderFillRect(renderer, rect);
   }
-  calloc.free(rect);
+  ffi.calloc.free(rect);
   return result;
 }
 
@@ -4220,13 +4220,13 @@ bool _hLineTextured(
   }
 
   /* setup the source rectangle; we are only drawing one horizontal line */
-  final sourceRect = calloc<SdlFRect>();
+  final sourceRect = ffi.calloc<SdlFRect>();
   sourceRect.ref.y = textureYStart;
   sourceRect.ref.x = textureXWalker;
   sourceRect.ref.h = 1;
 
   /* we will draw to the current y */
-  final dstRect = calloc<SdlFRect>();
+  final dstRect = ffi.calloc<SdlFRect>();
   dstRect.ref.y = y;
   dstRect.ref.h = 1;
 
@@ -4267,7 +4267,7 @@ bool _hLineTextured(
       pixelsWritten += writeWidth;
     }
   }
-  calloc
+  ffi.calloc
     ..free(sourceRect)
     ..free(dstRect);
   return result;
@@ -4585,8 +4585,8 @@ bool characterRgba(
   int b,
   int a,
 ) {
-  final srect = calloc<SdlFRect>();
-  final drect = calloc<SdlFRect>();
+  final srect = ffi.calloc<SdlFRect>();
+  final drect = ffi.calloc<SdlFRect>();
   var result = true;
   int ix;
   int iy;
@@ -4680,7 +4680,7 @@ bool characterRgba(
   if (result) {
     result = sdlRenderTexture(renderer, gfxPrimitivesFont[ci], srect, drect);
   }
-  calloc
+  ffi.calloc
     ..free(srect)
     ..free(drect);
   return result;

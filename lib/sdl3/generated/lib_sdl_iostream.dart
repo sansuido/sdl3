@@ -1,5 +1,5 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-part of '../sdl.dart';
+part of '../sdl_iostream.dart';
 
 ///
 /// Use this function to create a new SDL_IOStream structure for reading from
@@ -102,13 +102,19 @@ part of '../sdl.dart';
 Pointer<SdlIoStream> sdlIoFromFile(String? file, String? mode) {
   final sdlIoFromFileLookupFunction = _libSdl
       .lookupFunction<
-        Pointer<SdlIoStream> Function(Pointer<Utf8> file, Pointer<Utf8> mode),
-        Pointer<SdlIoStream> Function(Pointer<Utf8> file, Pointer<Utf8> mode)
+        Pointer<SdlIoStream> Function(
+          Pointer<ffi.Utf8> file,
+          Pointer<ffi.Utf8> mode,
+        ),
+        Pointer<SdlIoStream> Function(
+          Pointer<ffi.Utf8> file,
+          Pointer<ffi.Utf8> mode,
+        )
       >('SDL_IOFromFile');
   final filePointer = file != null ? file.toNativeUtf8() : nullptr;
   final modePointer = mode != null ? mode.toNativeUtf8() : nullptr;
   final result = sdlIoFromFileLookupFunction(filePointer, modePointer);
-  calloc
+  ffi.calloc
     ..free(filePointer)
     ..free(modePointer);
   return result;
@@ -692,12 +698,12 @@ int sdlWriteIo(Pointer<SdlIoStream> context, Pointer<Void> ptr, int size) {
 int sdlIOprintf(Pointer<SdlIoStream> context, String? fmt) {
   final sdlIOprintfLookupFunction = _libSdl
       .lookupFunction<
-        Size Function(Pointer<SdlIoStream> context, Pointer<Utf8> fmt),
-        int Function(Pointer<SdlIoStream> context, Pointer<Utf8> fmt)
+        Size Function(Pointer<SdlIoStream> context, Pointer<ffi.Utf8> fmt),
+        int Function(Pointer<SdlIoStream> context, Pointer<ffi.Utf8> fmt)
       >('SDL_IOprintf');
   final fmtPointer = fmt != null ? fmt.toNativeUtf8() : nullptr;
   final result = sdlIOprintfLookupFunction(context, fmtPointer);
-  calloc.free(fmtPointer);
+  ffi.calloc.free(fmtPointer);
   return result;
 }
 
@@ -730,12 +736,12 @@ int sdlIOprintf(Pointer<SdlIoStream> context, String? fmt) {
 int sdlIOvprintf(Pointer<SdlIoStream> context, String? fmt) {
   final sdlIOvprintfLookupFunction = _libSdl
       .lookupFunction<
-        Size Function(Pointer<SdlIoStream> context, Pointer<Utf8> fmt),
-        int Function(Pointer<SdlIoStream> context, Pointer<Utf8> fmt)
+        Size Function(Pointer<SdlIoStream> context, Pointer<ffi.Utf8> fmt),
+        int Function(Pointer<SdlIoStream> context, Pointer<ffi.Utf8> fmt)
       >('SDL_IOvprintf');
   final fmtPointer = fmt != null ? fmt.toNativeUtf8() : nullptr;
   final result = sdlIOvprintfLookupFunction(context, fmtPointer);
-  calloc.free(fmtPointer);
+  ffi.calloc.free(fmtPointer);
   return result;
 }
 
@@ -859,12 +865,12 @@ Pointer<Void> sdlLoadFileIo(
 Pointer<Void> sdlLoadFile(String? file, Pointer<Size> datasize) {
   final sdlLoadFileLookupFunction = _libSdl
       .lookupFunction<
-        Pointer<Void> Function(Pointer<Utf8> file, Pointer<Size> datasize),
-        Pointer<Void> Function(Pointer<Utf8> file, Pointer<Size> datasize)
+        Pointer<Void> Function(Pointer<ffi.Utf8> file, Pointer<Size> datasize),
+        Pointer<Void> Function(Pointer<ffi.Utf8> file, Pointer<Size> datasize)
       >('SDL_LoadFile');
   final filePointer = file != null ? file.toNativeUtf8() : nullptr;
   final result = sdlLoadFileLookupFunction(filePointer, datasize);
-  calloc.free(filePointer);
+  ffi.calloc.free(filePointer);
   return result;
 }
 
@@ -947,12 +953,16 @@ bool sdlSaveFileIo(
 bool sdlSaveFile(String? file, Pointer<Void> data, int datasize) {
   final sdlSaveFileLookupFunction = _libSdl
       .lookupFunction<
-        Bool Function(Pointer<Utf8> file, Pointer<Void> data, Size datasize),
-        bool Function(Pointer<Utf8> file, Pointer<Void> data, int datasize)
+        Bool Function(
+          Pointer<ffi.Utf8> file,
+          Pointer<Void> data,
+          Size datasize,
+        ),
+        bool Function(Pointer<ffi.Utf8> file, Pointer<Void> data, int datasize)
       >('SDL_SaveFile');
   final filePointer = file != null ? file.toNativeUtf8() : nullptr;
   final result = sdlSaveFileLookupFunction(filePointer, data, datasize);
-  calloc.free(filePointer);
+  ffi.calloc.free(filePointer);
   return result;
 }
 

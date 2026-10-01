@@ -1,5 +1,6 @@
 import 'package:sdl3/sdl3.dart';
-import 'package:sdl3/sdl3gfx.dart';
+
+//import 'package:sdl3/sdl3gfx.dart';
 
 int main() {
   print(sdlGetRevision());

@@ -1,5 +1,5 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-part of '../sdl.dart';
+part of '../sdl_camera.dart';
 
 ///
 /// Use this function to get the number of built-in camera drivers.
@@ -71,8 +71,8 @@ int sdlGetNumCameraDrivers() {
 String? sdlGetCameraDriver(int index) {
   final sdlGetCameraDriverLookupFunction = _libSdl
       .lookupFunction<
-        Pointer<Utf8> Function(Int32 index),
-        Pointer<Utf8> Function(int index)
+        Pointer<ffi.Utf8> Function(Int32 index),
+        Pointer<ffi.Utf8> Function(int index)
       >('SDL_GetCameraDriver');
   final result = sdlGetCameraDriverLookupFunction(index);
   if (result == nullptr) {
@@ -105,9 +105,10 @@ String? sdlGetCameraDriver(int index) {
 /// {@category camera}
 String? sdlGetCurrentCameraDriver() {
   final sdlGetCurrentCameraDriverLookupFunction = _libSdl
-      .lookupFunction<Pointer<Utf8> Function(), Pointer<Utf8> Function()>(
-        'SDL_GetCurrentCameraDriver',
-      );
+      .lookupFunction<
+        Pointer<ffi.Utf8> Function(),
+        Pointer<ffi.Utf8> Function()
+      >('SDL_GetCurrentCameraDriver');
   final result = sdlGetCurrentCameraDriverLookupFunction();
   if (result == nullptr) {
     return null;
@@ -234,8 +235,8 @@ Pointer<Pointer<SdlCameraSpec>> sdlGetCameraSupportedFormats(
 String? sdlGetCameraName(int instanceId) {
   final sdlGetCameraNameLookupFunction = _libSdl
       .lookupFunction<
-        Pointer<Utf8> Function(Uint32 instanceId),
-        Pointer<Utf8> Function(int instanceId)
+        Pointer<ffi.Utf8> Function(Uint32 instanceId),
+        Pointer<ffi.Utf8> Function(int instanceId)
       >('SDL_GetCameraName');
   final result = sdlGetCameraNameLookupFunction(instanceId);
   if (result == nullptr) {

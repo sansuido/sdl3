@@ -1,5 +1,5 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-part of '../sdl.dart';
+part of '../sdl_misc.dart';
 
 ///
 /// Open a URL/URI in the browser or other appropriate external application.
@@ -43,11 +43,11 @@ part of '../sdl.dart';
 bool sdlOpenUrl(String? url) {
   final sdlOpenUrlLookupFunction = _libSdl
       .lookupFunction<
-        Bool Function(Pointer<Utf8> url),
-        bool Function(Pointer<Utf8> url)
+        Bool Function(Pointer<ffi.Utf8> url),
+        bool Function(Pointer<ffi.Utf8> url)
       >('SDL_OpenURL');
   final urlPointer = url != null ? url.toNativeUtf8() : nullptr;
   final result = sdlOpenUrlLookupFunction(urlPointer);
-  calloc.free(urlPointer);
+  ffi.calloc.free(urlPointer);
   return result;
 }

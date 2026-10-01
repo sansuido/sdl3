@@ -1,5 +1,5 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-part of '../sdl.dart';
+part of '../sdl_touch.dart';
 
 ///
 /// Get a list of registered touch devices.
@@ -53,8 +53,8 @@ Pointer<Uint64> sdlGetTouchDevices(Pointer<Int32> count) {
 String? sdlGetTouchDeviceName(int touchId) {
   final sdlGetTouchDeviceNameLookupFunction = _libSdl
       .lookupFunction<
-        Pointer<Utf8> Function(Uint64 touchId),
-        Pointer<Utf8> Function(int touchId)
+        Pointer<ffi.Utf8> Function(Uint64 touchId),
+        Pointer<ffi.Utf8> Function(int touchId)
       >('SDL_GetTouchDeviceName');
   final result = sdlGetTouchDeviceNameLookupFunction(touchId);
   if (result == nullptr) {

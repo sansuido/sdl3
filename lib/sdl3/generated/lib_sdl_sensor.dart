@@ -1,5 +1,5 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-part of '../sdl.dart';
+part of '../sdl_sensor.dart';
 
 ///
 /// Get a list of currently connected sensors.
@@ -50,8 +50,8 @@ Pointer<Uint32> sdlGetSensors(Pointer<Int32> count) {
 String? sdlGetSensorNameForId(int instanceId) {
   final sdlGetSensorNameForIdLookupFunction = _libSdl
       .lookupFunction<
-        Pointer<Utf8> Function(Uint32 instanceId),
-        Pointer<Utf8> Function(int instanceId)
+        Pointer<ffi.Utf8> Function(Uint32 instanceId),
+        Pointer<ffi.Utf8> Function(int instanceId)
       >('SDL_GetSensorNameForID');
   final result = sdlGetSensorNameForIdLookupFunction(instanceId);
   if (result == nullptr) {
@@ -214,8 +214,8 @@ int sdlGetSensorProperties(Pointer<SdlSensor> sensor) {
 String? sdlGetSensorName(Pointer<SdlSensor> sensor) {
   final sdlGetSensorNameLookupFunction = _libSdl
       .lookupFunction<
-        Pointer<Utf8> Function(Pointer<SdlSensor> sensor),
-        Pointer<Utf8> Function(Pointer<SdlSensor> sensor)
+        Pointer<ffi.Utf8> Function(Pointer<SdlSensor> sensor),
+        Pointer<ffi.Utf8> Function(Pointer<SdlSensor> sensor)
       >('SDL_GetSensorName');
   final result = sdlGetSensorNameLookupFunction(sensor);
   if (result == nullptr) {

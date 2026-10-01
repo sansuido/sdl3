@@ -245,8 +245,8 @@ int mixGetNumAudioDecoders() {
 String? mixGetAudioDecoder(int index) {
   final mixGetAudioDecoderLookupFunction = _libMixer
       .lookupFunction<
-        Pointer<Utf8> Function(Int32 index),
-        Pointer<Utf8> Function(int index)
+        Pointer<ffi.Utf8> Function(Int32 index),
+        Pointer<ffi.Utf8> Function(int index)
       >('MIX_GetAudioDecoder');
   final result = mixGetAudioDecoderLookupFunction(index);
   if (result == nullptr) {
@@ -714,18 +714,18 @@ Pointer<MixAudio> mixLoadAudio(
       .lookupFunction<
         Pointer<MixAudio> Function(
           Pointer<MixMixer> mixer,
-          Pointer<Utf8> path,
+          Pointer<ffi.Utf8> path,
           Bool predecode,
         ),
         Pointer<MixAudio> Function(
           Pointer<MixMixer> mixer,
-          Pointer<Utf8> path,
+          Pointer<ffi.Utf8> path,
           bool predecode,
         )
       >('MIX_LoadAudio');
   final pathPointer = path != null ? path.toNativeUtf8() : nullptr;
   final result = mixLoadAudioLookupFunction(mixer, pathPointer, predecode);
-  calloc.free(pathPointer);
+  ffi.calloc.free(pathPointer);
   return result;
 }
 
@@ -1792,12 +1792,12 @@ bool mixSetTrackRawIoStream(
 bool mixTagTrack(Pointer<MixTrack> track, String? tag) {
   final mixTagTrackLookupFunction = _libMixer
       .lookupFunction<
-        Bool Function(Pointer<MixTrack> track, Pointer<Utf8> tag),
-        bool Function(Pointer<MixTrack> track, Pointer<Utf8> tag)
+        Bool Function(Pointer<MixTrack> track, Pointer<ffi.Utf8> tag),
+        bool Function(Pointer<MixTrack> track, Pointer<ffi.Utf8> tag)
       >('MIX_TagTrack');
   final tagPointer = tag != null ? tag.toNativeUtf8() : nullptr;
   final result = mixTagTrackLookupFunction(track, tagPointer);
-  calloc.free(tagPointer);
+  ffi.calloc.free(tagPointer);
   return result;
 }
 
@@ -1835,12 +1835,12 @@ bool mixTagTrack(Pointer<MixTrack> track, String? tag) {
 void mixUntagTrack(Pointer<MixTrack> track, String? tag) {
   final mixUntagTrackLookupFunction = _libMixer
       .lookupFunction<
-        Void Function(Pointer<MixTrack> track, Pointer<Utf8> tag),
-        void Function(Pointer<MixTrack> track, Pointer<Utf8> tag)
+        Void Function(Pointer<MixTrack> track, Pointer<ffi.Utf8> tag),
+        void Function(Pointer<MixTrack> track, Pointer<ffi.Utf8> tag)
       >('MIX_UntagTrack');
   final tagPointer = tag != null ? tag.toNativeUtf8() : nullptr;
   final result = mixUntagTrackLookupFunction(track, tagPointer);
-  calloc.free(tagPointer);
+  ffi.calloc.free(tagPointer);
   return result;
 }
 
@@ -1920,18 +1920,18 @@ Pointer<Pointer<MixTrack>> mixGetTaggedTracks(
       .lookupFunction<
         Pointer<Pointer<MixTrack>> Function(
           Pointer<MixMixer> mixer,
-          Pointer<Utf8> tag,
+          Pointer<ffi.Utf8> tag,
           Pointer<Int32> count,
         ),
         Pointer<Pointer<MixTrack>> Function(
           Pointer<MixMixer> mixer,
-          Pointer<Utf8> tag,
+          Pointer<ffi.Utf8> tag,
           Pointer<Int32> count,
         )
       >('MIX_GetTaggedTracks');
   final tagPointer = tag != null ? tag.toNativeUtf8() : nullptr;
   final result = mixGetTaggedTracksLookupFunction(mixer, tagPointer, count);
-  calloc.free(tagPointer);
+  ffi.calloc.free(tagPointer);
   return result;
 }
 
@@ -2690,14 +2690,18 @@ bool mixPlayTag(Pointer<MixMixer> mixer, String? tag, int options) {
       .lookupFunction<
         Bool Function(
           Pointer<MixMixer> mixer,
-          Pointer<Utf8> tag,
+          Pointer<ffi.Utf8> tag,
           Uint32 options,
         ),
-        bool Function(Pointer<MixMixer> mixer, Pointer<Utf8> tag, int options)
+        bool Function(
+          Pointer<MixMixer> mixer,
+          Pointer<ffi.Utf8> tag,
+          int options,
+        )
       >('MIX_PlayTag');
   final tagPointer = tag != null ? tag.toNativeUtf8() : nullptr;
   final result = mixPlayTagLookupFunction(mixer, tagPointer, options);
-  calloc.free(tagPointer);
+  ffi.calloc.free(tagPointer);
   return result;
 }
 
@@ -2891,14 +2895,18 @@ bool mixStopTag(Pointer<MixMixer> mixer, String? tag, int fadeOutMs) {
       .lookupFunction<
         Bool Function(
           Pointer<MixMixer> mixer,
-          Pointer<Utf8> tag,
+          Pointer<ffi.Utf8> tag,
           Int64 fadeOutMs,
         ),
-        bool Function(Pointer<MixMixer> mixer, Pointer<Utf8> tag, int fadeOutMs)
+        bool Function(
+          Pointer<MixMixer> mixer,
+          Pointer<ffi.Utf8> tag,
+          int fadeOutMs,
+        )
       >('MIX_StopTag');
   final tagPointer = tag != null ? tag.toNativeUtf8() : nullptr;
   final result = mixStopTagLookupFunction(mixer, tagPointer, fadeOutMs);
-  calloc.free(tagPointer);
+  ffi.calloc.free(tagPointer);
   return result;
 }
 
@@ -3015,12 +3023,12 @@ bool mixPauseAllTracks(Pointer<MixMixer> mixer) {
 bool mixPauseTag(Pointer<MixMixer> mixer, String? tag) {
   final mixPauseTagLookupFunction = _libMixer
       .lookupFunction<
-        Bool Function(Pointer<MixMixer> mixer, Pointer<Utf8> tag),
-        bool Function(Pointer<MixMixer> mixer, Pointer<Utf8> tag)
+        Bool Function(Pointer<MixMixer> mixer, Pointer<ffi.Utf8> tag),
+        bool Function(Pointer<MixMixer> mixer, Pointer<ffi.Utf8> tag)
       >('MIX_PauseTag');
   final tagPointer = tag != null ? tag.toNativeUtf8() : nullptr;
   final result = mixPauseTagLookupFunction(mixer, tagPointer);
-  calloc.free(tagPointer);
+  ffi.calloc.free(tagPointer);
   return result;
 }
 
@@ -3137,12 +3145,12 @@ bool mixResumeAllTracks(Pointer<MixMixer> mixer) {
 bool mixResumeTag(Pointer<MixMixer> mixer, String? tag) {
   final mixResumeTagLookupFunction = _libMixer
       .lookupFunction<
-        Bool Function(Pointer<MixMixer> mixer, Pointer<Utf8> tag),
-        bool Function(Pointer<MixMixer> mixer, Pointer<Utf8> tag)
+        Bool Function(Pointer<MixMixer> mixer, Pointer<ffi.Utf8> tag),
+        bool Function(Pointer<MixMixer> mixer, Pointer<ffi.Utf8> tag)
       >('MIX_ResumeTag');
   final tagPointer = tag != null ? tag.toNativeUtf8() : nullptr;
   final result = mixResumeTagLookupFunction(mixer, tagPointer);
-  calloc.free(tagPointer);
+  ffi.calloc.free(tagPointer);
   return result;
 }
 
@@ -3425,12 +3433,20 @@ double mixGetTrackGain(Pointer<MixTrack> track) {
 bool mixSetTagGain(Pointer<MixMixer> mixer, String? tag, double gain) {
   final mixSetTagGainLookupFunction = _libMixer
       .lookupFunction<
-        Bool Function(Pointer<MixMixer> mixer, Pointer<Utf8> tag, Float gain),
-        bool Function(Pointer<MixMixer> mixer, Pointer<Utf8> tag, double gain)
+        Bool Function(
+          Pointer<MixMixer> mixer,
+          Pointer<ffi.Utf8> tag,
+          Float gain,
+        ),
+        bool Function(
+          Pointer<MixMixer> mixer,
+          Pointer<ffi.Utf8> tag,
+          double gain,
+        )
       >('MIX_SetTagGain');
   final tagPointer = tag != null ? tag.toNativeUtf8() : nullptr;
   final result = mixSetTagGainLookupFunction(mixer, tagPointer, gain);
-  calloc.free(tagPointer);
+  ffi.calloc.free(tagPointer);
   return result;
 }
 
@@ -4399,12 +4415,12 @@ int mixGenerate(Pointer<MixMixer> mixer, Pointer<Void> buffer, int buflen) {
 Pointer<MixAudioDecoder> mixCreateAudioDecoder(String? path, int props) {
   final mixCreateAudioDecoderLookupFunction = _libMixer
       .lookupFunction<
-        Pointer<MixAudioDecoder> Function(Pointer<Utf8> path, Uint32 props),
-        Pointer<MixAudioDecoder> Function(Pointer<Utf8> path, int props)
+        Pointer<MixAudioDecoder> Function(Pointer<ffi.Utf8> path, Uint32 props),
+        Pointer<MixAudioDecoder> Function(Pointer<ffi.Utf8> path, int props)
       >('MIX_CreateAudioDecoder');
   final pathPointer = path != null ? path.toNativeUtf8() : nullptr;
   final result = mixCreateAudioDecoderLookupFunction(pathPointer, props);
-  calloc.free(pathPointer);
+  ffi.calloc.free(pathPointer);
   return result;
 }
 

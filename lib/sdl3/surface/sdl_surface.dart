@@ -1,0 +1,989 @@
+part of '../sdl_surface.dart';
+
+extension SdlSurfaceEx on SdlSurface {
+  ///
+  /// Load a BMP image from a file.
+  ///
+  /// The new surface should be freed with SDL_DestroySurface(). Not doing so
+  /// will result in a memory leak.
+  ///
+  /// \param file the BMP file to load.
+  /// \returns a pointer to a new SDL_Surface structure or NULL on failure; call
+  /// SDL_GetError() for more information.
+  ///
+  /// \threadsafety It is safe to call this function from any thread.
+  ///
+  /// \since This function is available since SDL 3.2.0.
+  ///
+  /// \sa SDL_DestroySurface
+  /// \sa SDL_LoadBMP_IO
+  /// \sa SDL_SaveBMP
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC SDL_Surface * SDLCALL SDL_LoadBMP(const char *file)
+  /// ```
+  ///
+  /// See also:
+  /// - [SDL_LoadBMP - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_LoadBMP)
+  ///
+  /// {@category surface}
+  static Pointer<SdlSurface> loadBmp(String file) => sdlLoadBmp(file);
+}
+
+extension SdlSurfacePointerEx on Pointer<SdlSurface> {
+  ///
+  /// Free a surface.
+  ///
+  /// It is safe to pass NULL to this function.
+  ///
+  /// \param surface the SDL_Surface to free.
+  ///
+  /// \threadsafety No other thread should be using the surface when it is freed.
+  ///
+  /// \since This function is available since SDL 3.2.0.
+  ///
+  /// \sa SDL_CreateSurface
+  /// \sa SDL_CreateSurfaceFrom
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC void SDLCALL SDL_DestroySurface(SDL_Surface *surface)
+  /// ```
+  ///
+  /// See also:
+  /// - [SDL_DestroySurface - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_DestroySurface)
+  ///
+  /// {@category surface}
+  bool destroy() {
+    if (this != nullptr) {
+      sdlDestroySurface(this);
+      return true;
+    }
+    return false;
+  }
+
+  ///
+  /// Set the palette used by a surface.
+  ///
+  /// Setting the palette keeps an internal reference to the palette, which can
+  /// be safely destroyed afterwards.
+  ///
+  /// A single palette can be shared with many surfaces.
+  ///
+  /// \param surface the SDL_Surface structure to update.
+  /// \param palette the SDL_Palette structure to use.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
+  ///
+  /// \threadsafety This function can be called on different threads with
+  /// different surfaces.
+  ///
+  /// \since This function is available since SDL 3.2.0.
+  ///
+  /// \sa SDL_CreatePalette
+  /// \sa SDL_GetSurfacePalette
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_SetSurfacePalette(SDL_Surface *surface, SDL_Palette *palette)
+  /// ```
+  ///
+  /// See also:
+  /// - [SDL_SetSurfacePalette - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetSurfacePalette)
+  ///
+  /// {@category surface}
+  bool setPalette(Pointer<SdlPalette> palette) =>
+      sdlSetSurfacePalette(this, palette);
+
+  ///
+  /// Set up a surface for directly accessing the pixels.
+  ///
+  /// Between calls to SDL_LockSurface() / SDL_UnlockSurface(), you can write to
+  /// and read from `surface->pixels`, using the pixel format stored in
+  /// `surface->format`. Once you are done accessing the surface, you should use
+  /// SDL_UnlockSurface() to release it.
+  ///
+  /// Not all surfaces require locking. If `SDL_MUSTLOCK(surface)` evaluates to
+  /// 0, then you can read and write to the surface at any time, and the pixel
+  /// format of the surface will not change.
+  ///
+  /// \param surface the SDL_Surface structure to be locked.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
+  ///
+  /// \threadsafety This function can be called on different threads with
+  /// different surfaces. The locking referred to by this function
+  /// is making the pixels available for direct access, not
+  /// thread-safe locking.
+  ///
+  /// \since This function is available since SDL 3.2.0.
+  ///
+  /// \sa SDL_MUSTLOCK
+  /// \sa SDL_UnlockSurface
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_LockSurface(SDL_Surface *surface)
+  /// ```
+  ///
+  /// See also:
+  /// - [SDL_LockSurface - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_LockSurface)
+  ///
+  /// {@category surface}
+  bool lock() => sdlLockSurface(this);
+
+  ///
+  /// Release a surface after directly accessing the pixels.
+  ///
+  /// \param surface the SDL_Surface structure to be unlocked.
+  ///
+  /// \threadsafety This function is not thread safe. The locking referred to by
+  /// this function is making the pixels available for direct
+  /// access, not thread-safe locking.
+  ///
+  /// \since This function is available since SDL 3.2.0.
+  ///
+  /// \sa SDL_LockSurface
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC void SDLCALL SDL_UnlockSurface(SDL_Surface *surface)
+  /// ```
+  ///
+  /// See also:
+  /// - [SDL_UnlockSurface - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_UnlockSurface)
+  ///
+  /// {@category surface}
+  void unlock() {
+    sdlUnlockSurface(this);
+  }
+
+  ///
+  /// Load a BMP image from a seekable SDL data stream.
+  ///
+  /// The new surface should be freed with SDL_DestroySurface(). Not doing so
+  /// will result in a memory leak.
+  ///
+  /// \param src the data stream for the surface.
+  /// \param closeio if true, calls SDL_CloseIO() on `src` before returning, even
+  /// in the case of an error.
+  /// \returns a pointer to a new SDL_Surface structure or NULL on failure; call
+  /// SDL_GetError() for more information.
+  ///
+  /// \threadsafety It is safe to call this function from any thread.
+  ///
+  /// \since This function is available since SDL 3.2.0.
+  ///
+  /// \sa SDL_DestroySurface
+  /// \sa SDL_LoadBMP
+  /// \sa SDL_SaveBMP_IO
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC SDL_Surface * SDLCALL SDL_LoadBMP_IO(SDL_IOStream *src, bool closeio)
+  /// ```
+  ///
+  /// See also:
+  /// - [SDL_LoadBMP_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_LoadBMP_IO)
+  ///
+  /// {@category surface}
+  static Pointer<SdlSurface> loadBmpIo(
+    Pointer<SdlIoStream> src, {
+    bool closeio = false,
+  }) => sdlLoadBmpIo(src, closeio);
+
+  ///
+  /// Save a surface to a seekable SDL data stream in BMP format.
+  ///
+  /// Surfaces with a 24-bit, 32-bit and paletted 8-bit format get saved in the
+  /// BMP directly. Other RGB formats with 8-bit or higher get converted to a
+  /// 24-bit surface or, if they have an alpha mask or a colorkey, to a 32-bit
+  /// surface before they are saved. YUV and paletted 1-bit and 4-bit formats are
+  /// not supported.
+  ///
+  /// \param surface the SDL_Surface structure containing the image to be saved.
+  /// \param dst a data stream to save to.
+  /// \param closeio if true, calls SDL_CloseIO() on `dst` before returning, even
+  /// in the case of an error.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
+  ///
+  /// \threadsafety This function can be called on different threads with
+  /// different surfaces.
+  ///
+  /// \since This function is available since SDL 3.2.0.
+  ///
+  /// \sa SDL_LoadBMP_IO
+  /// \sa SDL_SaveBMP
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_SaveBMP_IO(SDL_Surface *surface, SDL_IOStream *dst, bool closeio)
+  /// ```
+  ///
+  /// See also:
+  /// - [SDL_SaveBMP_IO - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SaveBMP_IO)
+  ///
+  /// {@category surface}
+  bool saveBmpIo(Pointer<SdlIoStream> dst, {bool closeio = false}) =>
+      sdlSaveBmpIo(this, dst, closeio);
+
+  ///
+  /// Set the RLE acceleration hint for a surface.
+  ///
+  /// If RLE is enabled, color key and alpha blending blits are much faster, but
+  /// the surface must be locked before directly accessing the pixels.
+  ///
+  /// \param surface the SDL_Surface structure to optimize.
+  /// \param enabled true to enable RLE acceleration, false to disable it.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
+  ///
+  /// \threadsafety This function can be called on different threads with
+  /// different surfaces.
+  ///
+  /// \since This function is available since SDL 3.2.0.
+  ///
+  /// \sa SDL_BlitSurface
+  /// \sa SDL_LockSurface
+  /// \sa SDL_UnlockSurface
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_SetSurfaceRLE(SDL_Surface *surface, bool enabled)
+  /// ```
+  ///
+  /// See also:
+  /// - [SDL_SetSurfaceRLE - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetSurfaceRLE)
+  ///
+  /// {@category surface}
+  bool setRre(bool enabled) => sdlSetSurfaceRle(this, enabled);
+
+  ///
+  /// Returns whether the surface is RLE enabled.
+  ///
+  /// It is safe to pass a NULL `surface` here; it will return false.
+  ///
+  /// \param surface the SDL_Surface structure to query.
+  /// \returns true if the surface is RLE enabled, false otherwise.
+  ///
+  /// \threadsafety It is safe to call this function from any thread.
+  ///
+  /// \since This function is available since SDL 3.2.0.
+  ///
+  /// \sa SDL_SetSurfaceRLE
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_SurfaceHasRLE(SDL_Surface *surface)
+  /// ```
+  ///
+  /// See also:
+  /// - [SDL_SurfaceHasRLE - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SurfaceHasRLE)
+  ///
+  /// {@category surface}
+  bool hasRre() => sdlSurfaceHasRle(this);
+
+  ///
+  /// Set the color key (transparent pixel) in a surface.
+  ///
+  /// The color key defines a pixel value that will be treated as transparent in
+  /// a blit. For example, one can use this to specify that cyan pixels should be
+  /// considered transparent, and therefore not rendered.
+  ///
+  /// It is a pixel of the format used by the surface, as generated by
+  /// SDL_MapRGB().
+  ///
+  /// \param surface the SDL_Surface structure to update.
+  /// \param enabled true to enable color key, false to disable color key.
+  /// \param key the transparent pixel.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
+  ///
+  /// \threadsafety This function can be called on different threads with
+  /// different surfaces.
+  ///
+  /// \since This function is available since SDL 3.2.0.
+  ///
+  /// \sa SDL_GetSurfaceColorKey
+  /// \sa SDL_SetSurfaceRLE
+  /// \sa SDL_SurfaceHasColorKey
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_SetSurfaceColorKey(SDL_Surface *surface, bool enabled, Uint32 key)
+  /// ```
+  ///
+  /// See also:
+  /// - [SDL_SetSurfaceColorKey - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetSurfaceColorKey)
+  ///
+  /// {@category surface}
+  bool setColorKey(bool enabled, int key) =>
+      sdlSetSurfaceColorKey(this, enabled, key);
+
+  ///
+  /// Returns whether the surface has a color key.
+  ///
+  /// It is safe to pass a NULL `surface` here; it will return false.
+  ///
+  /// \param surface the SDL_Surface structure to query.
+  /// \returns true if the surface has a color key, false otherwise.
+  ///
+  /// \threadsafety It is safe to call this function from any thread.
+  ///
+  /// \since This function is available since SDL 3.2.0.
+  ///
+  /// \sa SDL_SetSurfaceColorKey
+  /// \sa SDL_GetSurfaceColorKey
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_SurfaceHasColorKey(SDL_Surface *surface)
+  /// ```
+  ///
+  /// See also:
+  /// - [SDL_SurfaceHasColorKey - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SurfaceHasColorKey)
+  ///
+  /// {@category surface}
+  bool hadColorKey() => sdlSurfaceHasColorKey(this);
+
+  ///
+  /// Get the color key (transparent pixel) for a surface.
+  ///
+  /// The color key is a pixel of the format used by the surface, as generated by
+  /// SDL_MapRGB().
+  ///
+  /// If the surface doesn't have color key enabled this function returns false.
+  ///
+  /// \param surface the SDL_Surface structure to query.
+  /// \param key a pointer filled in with the transparent pixel.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
+  ///
+  /// \threadsafety It is safe to call this function from any thread.
+  ///
+  /// \since This function is available since SDL 3.2.0.
+  ///
+  /// \sa SDL_SetSurfaceColorKey
+  /// \sa SDL_SurfaceHasColorKey
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_GetSurfaceColorKey(SDL_Surface *surface, Uint32 *key)
+  /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetSurfaceColorKey - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetSurfaceColorKey)
+  ///
+  /// {@category surface}
+  int? getColorKey() {
+    int? result;
+    final keyPointer = ffi.calloc<Uint32>();
+    if (sdlGetSurfaceColorKey(this, keyPointer)) {
+      result = keyPointer.value;
+    }
+    ffi.calloc.free(keyPointer);
+    return result;
+  }
+
+  ///
+  /// Set an additional color value multiplied into blit operations.
+  ///
+  /// When this surface is blitted, during the blit operation each source color
+  /// channel is modulated by the appropriate color value according to the
+  /// following formula:
+  ///
+  /// `srcC = srcC * (color / 255)`
+  ///
+  /// \param surface the SDL_Surface structure to update.
+  /// \param r the red color value multiplied into blit operations.
+  /// \param g the green color value multiplied into blit operations.
+  /// \param b the blue color value multiplied into blit operations.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
+  ///
+  /// \threadsafety This function can be called on different threads with
+  /// different surfaces.
+  ///
+  /// \since This function is available since SDL 3.2.0.
+  ///
+  /// \sa SDL_GetSurfaceColorMod
+  /// \sa SDL_SetSurfaceAlphaMod
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_SetSurfaceColorMod(SDL_Surface *surface, Uint8 r, Uint8 g, Uint8 b)
+  /// ```
+  ///
+  /// See also:
+  /// - [SDL_SetSurfaceColorMod - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetSurfaceColorMod)
+  ///
+  /// {@category surface}
+  bool setColorMod(int r, int g, int b) => sdlSetSurfaceColorMod(this, r, g, b);
+
+  ///
+  /// Get the additional color value multiplied into blit operations.
+  ///
+  /// \param surface the SDL_Surface structure to query.
+  /// \param r a pointer filled in with the current red color value.
+  /// \param g a pointer filled in with the current green color value.
+  /// \param b a pointer filled in with the current blue color value.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
+  ///
+  /// \threadsafety This function can be called on different threads with
+  /// different surfaces.
+  ///
+  /// \since This function is available since SDL 3.2.0.
+  ///
+  /// \sa SDL_GetSurfaceAlphaMod
+  /// \sa SDL_SetSurfaceColorMod
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_GetSurfaceColorMod(SDL_Surface *surface, Uint8 *r, Uint8 *g, Uint8 *b)
+  /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetSurfaceColorMod - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetSurfaceColorMod)
+  ///
+  /// {@category surface}
+  int? getColorMod() {
+    int? result;
+    final rPointer = ffi.calloc<Uint8>();
+    final gPointer = ffi.calloc<Uint8>();
+    final bPointer = ffi.calloc<Uint8>();
+    if (sdlGetSurfaceColorMod(this, rPointer, gPointer, bPointer)) {
+      result = 0;
+      result += rPointer.value << 16;
+      result += gPointer.value << 8;
+      result += bPointer.value << 0;
+    }
+    ffi.calloc
+      ..free(rPointer)
+      ..free(gPointer)
+      ..free(bPointer);
+    return result;
+  }
+
+  ///
+  /// Set an additional alpha value used in blit operations.
+  ///
+  /// When this surface is blitted, during the blit operation the source alpha
+  /// value is modulated by this alpha value according to the following formula:
+  ///
+  /// `srcA = srcA * (alpha / 255)`
+  ///
+  /// \param surface the SDL_Surface structure to update.
+  /// \param alpha the alpha value multiplied into blit operations.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
+  ///
+  /// \threadsafety This function can be called on different threads with
+  /// different surfaces.
+  ///
+  /// \since This function is available since SDL 3.2.0.
+  ///
+  /// \sa SDL_GetSurfaceAlphaMod
+  /// \sa SDL_SetSurfaceColorMod
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_SetSurfaceAlphaMod(SDL_Surface *surface, Uint8 alpha)
+  /// ```
+  ///
+  /// See also:
+  /// - [SDL_SetSurfaceAlphaMod - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetSurfaceAlphaMod)
+  ///
+  /// {@category surface}
+  bool setAlphaMod(int alpha) => sdlSetSurfaceAlphaMod(this, alpha);
+
+  ///
+  /// Get the additional alpha value used in blit operations.
+  ///
+  /// \param surface the SDL_Surface structure to query.
+  /// \param alpha a pointer filled in with the current alpha value.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
+  ///
+  /// \threadsafety It is safe to call this function from any thread.
+  ///
+  /// \since This function is available since SDL 3.2.0.
+  ///
+  /// \sa SDL_GetSurfaceColorMod
+  /// \sa SDL_SetSurfaceAlphaMod
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_GetSurfaceAlphaMod(SDL_Surface *surface, Uint8 *alpha)
+  /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetSurfaceAlphaMod - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetSurfaceAlphaMod)
+  ///
+  /// {@category surface}
+  int? getAlphaMod() {
+    int? result;
+    final alphaPointer = ffi.calloc<Uint8>();
+    if (sdlGetSurfaceAlphaMod(this, alphaPointer)) {
+      result = alphaPointer.value;
+    }
+    ffi.calloc.free(alphaPointer);
+    return result;
+  }
+
+  ///
+  /// Set the blend mode used for blit operations.
+  ///
+  /// To copy a surface to another surface (or texture) without blending with the
+  /// existing data, the blendmode of the SOURCE surface should be set to
+  /// `SDL_BLENDMODE_NONE`.
+  ///
+  /// \param surface the SDL_Surface structure to update.
+  /// \param blendMode the SDL_BlendMode to use for blit blending.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
+  ///
+  /// \threadsafety This function can be called on different threads with
+  /// different surfaces.
+  ///
+  /// \since This function is available since SDL 3.2.0.
+  ///
+  /// \sa SDL_GetSurfaceBlendMode
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_SetSurfaceBlendMode(SDL_Surface *surface, SDL_BlendMode blendMode)
+  /// ```
+  ///
+  /// See also:
+  /// - [SDL_SetSurfaceBlendMode - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetSurfaceBlendMode)
+  ///
+  /// {@category surface}
+  bool setBlendMode(int blendMode) => sdlSetSurfaceBlendMode(this, blendMode);
+
+  ///
+  /// Get the blend mode used for blit operations.
+  ///
+  /// \param surface the SDL_Surface structure to query.
+  /// \param blendMode a pointer filled in with the current SDL_BlendMode.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
+  ///
+  /// \threadsafety It is safe to call this function from any thread.
+  ///
+  /// \since This function is available since SDL 3.2.0.
+  ///
+  /// \sa SDL_SetSurfaceBlendMode
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_GetSurfaceBlendMode(SDL_Surface *surface, SDL_BlendMode *blendMode)
+  /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetSurfaceBlendMode - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetSurfaceBlendMode)
+  ///
+  /// {@category surface}
+  int? getBlendMode() {
+    int? result;
+    final blendModePointer = ffi.calloc<Uint32>();
+    if (sdlGetSurfaceBlendMode(this, blendModePointer)) {
+      result = blendModePointer.value;
+    }
+    ffi.calloc.free(blendModePointer);
+    return result;
+  }
+
+  ///
+  /// Set the clipping rectangle for a surface.
+  ///
+  /// When `surface` is the destination of a blit, only the area within the clip
+  /// rectangle is drawn into.
+  ///
+  /// Note that blits are automatically clipped to the edges of the source and
+  /// destination surfaces.
+  ///
+  /// \param surface the SDL_Surface structure to be clipped.
+  /// \param rect the SDL_Rect structure representing the clipping rectangle, or
+  /// NULL to disable clipping.
+  /// \returns true if the rectangle intersects the surface, otherwise false and
+  /// blits will be completely clipped.
+  ///
+  /// \threadsafety This function can be called on different threads with
+  /// different surfaces.
+  ///
+  /// \since This function is available since SDL 3.2.0.
+  ///
+  /// \sa SDL_GetSurfaceClipRect
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_SetSurfaceClipRect(SDL_Surface *surface, const SDL_Rect *rect)
+  /// ```
+  ///
+  /// See also:
+  /// - [SDL_SetSurfaceClipRect - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SetSurfaceClipRect)
+  ///
+  /// {@category surface}
+  bool setClipRect([SdlxRect? rect]) => sdlxSetSurfaceClipRect(this, rect);
+
+  ///
+  /// Get the clipping rectangle for a surface.
+  ///
+  /// When `surface` is the destination of a blit, only the area within the clip
+  /// rectangle is drawn into.
+  ///
+  /// \param surface the SDL_Surface structure representing the surface to be
+  /// clipped.
+  /// \param rect an SDL_Rect structure filled in with the clipping rectangle for
+  /// the surface.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
+  ///
+  /// \threadsafety This function can be called on different threads with
+  /// different surfaces.
+  ///
+  /// \since This function is available since SDL 3.2.0.
+  ///
+  /// \sa SDL_SetSurfaceClipRect
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_GetSurfaceClipRect(SDL_Surface *surface, SDL_Rect *rect)
+  /// ```
+  ///
+  /// See also:
+  /// - [SDL_GetSurfaceClipRect - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_GetSurfaceClipRect)
+  ///
+  /// {@category surface}
+  bool getClipRect(SdlxRect rect) => sdlxGetSurfaceClipRect(this, rect);
+
+  ///
+  /// Creates a new surface identical to the existing surface.
+  ///
+  /// If the original surface has alternate images, the new surface will have a
+  /// reference to them as well.
+  ///
+  /// The returned surface should be freed with SDL_DestroySurface().
+  ///
+  /// \param surface the surface to duplicate.
+  /// \returns a copy of the surface or NULL on failure; call SDL_GetError() for
+  /// more information.
+  ///
+  /// \threadsafety This function can be called on different threads with
+  /// different surfaces.
+  ///
+  /// \since This function is available since SDL 3.2.0.
+  ///
+  /// \sa SDL_DestroySurface
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC SDL_Surface * SDLCALL SDL_DuplicateSurface(SDL_Surface *surface)
+  /// ```
+  ///
+  /// See also:
+  /// - [SDL_DuplicateSurface - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_DuplicateSurface)
+  ///
+  /// {@category surface}
+  Pointer<SdlSurface> duplicate() => sdlDuplicateSurface(this);
+
+  // sdlConvertPixels
+  // sdlPremultiplyAlpha
+
+  ///
+  /// Perform a fast fill of a rectangle with a specific color.
+  ///
+  /// `color` should be a pixel of the format used by the surface, and can be
+  /// generated by SDL_MapRGB() or SDL_MapRGBA(). If the color value contains an
+  /// alpha component then the destination is simply filled with that alpha
+  /// information, no blending takes place.
+  ///
+  /// If there is a clip rectangle set on the destination (set via
+  /// SDL_SetSurfaceClipRect()), then this function will fill based on the
+  /// intersection of the clip rectangle and `rect`.
+  ///
+  /// \param dst the SDL_Surface structure that is the drawing target.
+  /// \param rect the SDL_Rect structure representing the rectangle to fill, or
+  /// NULL to fill the entire surface.
+  /// \param color the color to fill with.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
+  ///
+  /// \threadsafety This function can be called on different threads with
+  /// different surfaces.
+  ///
+  /// \since This function is available since SDL 3.2.0.
+  ///
+  /// \sa SDL_FillSurfaceRects
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_FillSurfaceRect(SDL_Surface *dst, const SDL_Rect *rect, Uint32 color)
+  /// ```
+  ///
+  /// See also:
+  /// - [SDL_FillSurfaceRect - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_FillSurfaceRect)
+  ///
+  /// {@category surface}
+  bool fillRect(SdlxRect? rect, int color) =>
+      sdlxFillSurfaceRect(this, rect, color);
+
+  ///
+  /// Perform a fast fill of a set of rectangles with a specific color.
+  ///
+  /// `color` should be a pixel of the format used by the surface, and can be
+  /// generated by SDL_MapRGB() or SDL_MapRGBA(). If the color value contains an
+  /// alpha component then the destination is simply filled with that alpha
+  /// information, no blending takes place.
+  ///
+  /// If there is a clip rectangle set on the destination (set via
+  /// SDL_SetSurfaceClipRect()), then this function will fill based on the
+  /// intersection of the clip rectangle and `rect`.
+  ///
+  /// \param dst the SDL_Surface structure that is the drawing target.
+  /// \param rects an array of SDL_Rects representing the rectangles to fill.
+  /// \param count the number of rectangles in the array.
+  /// \param color the color to fill with.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
+  ///
+  /// \threadsafety This function can be called on different threads with
+  /// different surfaces.
+  ///
+  /// \since This function is available since SDL 3.2.0.
+  ///
+  /// \sa SDL_FillSurfaceRect
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_FillSurfaceRects(SDL_Surface *dst, const SDL_Rect *rects, int count, Uint32 color)
+  /// ```
+  ///
+  /// See also:
+  /// - [SDL_FillSurfaceRects - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_FillSurfaceRects)
+  ///
+  /// {@category surface}
+  bool fillRects(List<SdlxRect> rects, int color) =>
+      sdlxFillSurfaceRects(this, rects, color);
+
+  ///
+  /// Performs a fast blit from the source surface to the destination surface
+  /// with clipping.
+  ///
+  /// If either `srcrect` or `dstrect` are NULL, the entire surface (`src` or
+  /// `dst`) is copied while ensuring clipping to `dst->clip_rect`.
+  ///
+  /// The blit function should not be called on a locked surface.
+  ///
+  /// The blit semantics for surfaces with and without blending and colorkey are
+  /// defined as follows:
+  ///
+  /// ===
+  /// RGBA->RGB:
+  /// Source surface blend mode set to SDL_BLENDMODE_BLEND:
+  /// alpha-blend (using the source alpha-channel and per-surface alpha)
+  /// SDL_SRCCOLORKEY ignored.
+  /// Source surface blend mode set to SDL_BLENDMODE_NONE:
+  /// copy RGB.
+  /// if SDL_SRCCOLORKEY set, only copy the pixels that do not match the
+  /// RGB values of the source color key, ignoring alpha in the
+  /// comparison.
+  ///
+  /// RGB->RGBA:
+  /// Source surface blend mode set to SDL_BLENDMODE_BLEND:
+  /// alpha-blend (using the source per-surface alpha)
+  /// Source surface blend mode set to SDL_BLENDMODE_NONE:
+  /// copy RGB, set destination alpha to source per-surface alpha value.
+  /// both:
+  /// if SDL_SRCCOLORKEY set, only copy the pixels that do not match the
+  /// source color key.
+  ///
+  /// RGBA->RGBA:
+  /// Source surface blend mode set to SDL_BLENDMODE_BLEND:
+  /// alpha-blend (using the source alpha-channel and per-surface alpha)
+  /// SDL_SRCCOLORKEY ignored.
+  /// Source surface blend mode set to SDL_BLENDMODE_NONE:
+  /// copy all of RGBA to the destination.
+  /// if SDL_SRCCOLORKEY set, only copy the pixels that do not match the
+  /// RGB values of the source color key, ignoring alpha in the
+  /// comparison.
+  ///
+  /// RGB->RGB:
+  /// Source surface blend mode set to SDL_BLENDMODE_BLEND:
+  /// alpha-blend (using the source per-surface alpha)
+  /// Source surface blend mode set to SDL_BLENDMODE_NONE:
+  /// copy RGB.
+  /// both:
+  /// if SDL_SRCCOLORKEY set, only copy the pixels that do not match the
+  /// source color key.
+  /// ===
+  ///
+  /// \param src the SDL_Surface structure to be copied from.
+  /// \param srcrect the SDL_Rect structure representing the rectangle to be
+  /// copied, or NULL to copy the entire surface.
+  /// \param dst the SDL_Surface structure that is the blit target.
+  /// \param dstrect the SDL_Rect structure representing the x and y position in
+  /// the destination surface, or NULL for (0,0). The width and
+  /// height are ignored, and are copied from `srcrect`. If you
+  /// want a specific width and height, you should use
+  /// SDL_BlitSurfaceScaled().
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
+  ///
+  /// \threadsafety Only one thread should be using the `src` and `dst` surfaces
+  /// at any given time.
+  ///
+  /// \since This function is available since SDL 3.2.0.
+  ///
+  /// \sa SDL_BlitSurfaceScaled
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_BlitSurface(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, const SDL_Rect *dstrect)
+  /// ```
+  ///
+  /// See also:
+  /// - [SDL_BlitSurface - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_BlitSurface)
+  ///
+  /// {@category surface}
+  bool blit(SdlxRect? srcrect, Pointer<SdlSurface> dst, SdlxRect? dstrect) =>
+      sdlxBlitSurface(this, srcrect, dst, dstrect);
+
+  ///
+  /// Perform low-level surface blitting only.
+  ///
+  /// This is a semi-private blit function and it performs low-level surface
+  /// blitting, assuming the input rectangles have already been clipped.
+  ///
+  /// \param src the SDL_Surface structure to be copied from.
+  /// \param srcrect the SDL_Rect structure representing the rectangle to be
+  /// copied, may not be NULL.
+  /// \param dst the SDL_Surface structure that is the blit target.
+  /// \param dstrect the SDL_Rect structure representing the target rectangle in
+  /// the destination surface, may not be NULL.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
+  ///
+  /// \threadsafety Only one thread should be using the `src` and `dst` surfaces
+  /// at any given time.
+  ///
+  /// \since This function is available since SDL 3.2.0.
+  ///
+  /// \sa SDL_BlitSurface
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_BlitSurfaceUnchecked(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, const SDL_Rect *dstrect)
+  /// ```
+  ///
+  /// See also:
+  /// - [SDL_BlitSurfaceUnchecked - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_BlitSurfaceUnchecked)
+  ///
+  /// {@category surface}
+  bool blitUnchecked(
+    SdlxRect srcrect,
+    Pointer<SdlSurface> dst,
+    SdlxRect dstrect,
+  ) => sdlxBlitSurfaceUnchecked(this, srcrect, dst, dstrect);
+
+  ///
+  /// Perform a scaled blit to a destination surface, which may be of a different
+  /// format.
+  ///
+  /// \param src the SDL_Surface structure to be copied from.
+  /// \param srcrect the SDL_Rect structure representing the rectangle to be
+  /// copied, or NULL to copy the entire surface.
+  /// \param dst the SDL_Surface structure that is the blit target.
+  /// \param dstrect the SDL_Rect structure representing the target rectangle in
+  /// the destination surface, or NULL to fill the entire
+  /// destination surface.
+  /// \param scaleMode the SDL_ScaleMode to be used.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
+  ///
+  /// \threadsafety Only one thread should be using the `src` and `dst` surfaces
+  /// at any given time.
+  ///
+  /// \since This function is available since SDL 3.2.0.
+  ///
+  /// \sa SDL_BlitSurface
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_BlitSurfaceScaled(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, const SDL_Rect *dstrect, SDL_ScaleMode scaleMode)
+  /// ```
+  ///
+  /// See also:
+  /// - [SDL_BlitSurfaceScaled - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_BlitSurfaceScaled)
+  ///
+  /// {@category surface}
+  bool upperBlitScaled(
+    SdlxRect? srcrect,
+    Pointer<SdlSurface> dst,
+    SdlxRect? dstrect, {
+    int scaleMode = SdlkScalemode.invalid,
+  }) =>
+      sdlxBlitSurfaceScaled(this, srcrect, dst, dstrect, scaleMode: scaleMode);
+
+  ///
+  /// Perform low-level surface scaled blitting only.
+  ///
+  /// This is a semi-private function and it performs low-level surface blitting,
+  /// assuming the input rectangles have already been clipped.
+  ///
+  /// \param src the SDL_Surface structure to be copied from.
+  /// \param srcrect the SDL_Rect structure representing the rectangle to be
+  /// copied, may not be NULL.
+  /// \param dst the SDL_Surface structure that is the blit target.
+  /// \param dstrect the SDL_Rect structure representing the target rectangle in
+  /// the destination surface, may not be NULL.
+  /// \param scaleMode the SDL_ScaleMode to be used.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
+  ///
+  /// \threadsafety Only one thread should be using the `src` and `dst` surfaces
+  /// at any given time.
+  ///
+  /// \since This function is available since SDL 3.2.0.
+  ///
+  /// \sa SDL_BlitSurfaceScaled
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_BlitSurfaceUncheckedScaled(SDL_Surface *src, const SDL_Rect *srcrect, SDL_Surface *dst, const SDL_Rect *dstrect, SDL_ScaleMode scaleMode)
+  /// ```
+  ///
+  /// See also:
+  /// - [SDL_BlitSurfaceUncheckedScaled - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_BlitSurfaceUncheckedScaled)
+  ///
+  /// {@category surface}
+  bool blitUncheckedScaled(
+    SdlxRect srcrect,
+    Pointer<SdlSurface> dst,
+    SdlxRect dstrect, {
+    int scaleMode = SdlkScalemode.invalid,
+  }) => sdlxBlitSurfaceUncheckedScaled(
+    this,
+    srcrect,
+    dst,
+    dstrect,
+    scaleMode: scaleMode,
+  );
+
+  // sdlSetYuvConversionMode
+  // sdlGetYuvConversionMode
+  // sdlGetYuvConversionModeForResolution
+
+  // lib_sdl_ex.dart
+  //Pointer<SdlSurface> loadBmp(String file) {
+  //  return sdlLoadBmp(file);
+  //}
+
+  ///
+  /// Save a surface to a file in BMP format.
+  ///
+  /// Surfaces with a 24-bit, 32-bit and paletted 8-bit format get saved in the
+  /// BMP directly. Other RGB formats with 8-bit or higher get converted to a
+  /// 24-bit surface or, if they have an alpha mask or a colorkey, to a 32-bit
+  /// surface before they are saved. YUV and paletted 1-bit and 4-bit formats are
+  /// not supported.
+  ///
+  /// \param surface the SDL_Surface structure containing the image to be saved.
+  /// \param file a file to save to.
+  /// \returns true on success or false on failure; call SDL_GetError() for more
+  /// information.
+  ///
+  /// \threadsafety This function can be called on different threads with
+  /// different surfaces.
+  ///
+  /// \since This function is available since SDL 3.2.0.
+  ///
+  /// \sa SDL_LoadBMP
+  /// \sa SDL_SaveBMP_IO
+  ///
+  /// ```c
+  /// extern SDL_DECLSPEC bool SDLCALL SDL_SaveBMP(SDL_Surface *surface, const char *file)
+  /// ```
+  ///
+  /// See also:
+  /// - [SDL_SaveBMP - SDL3 Wiki](https://wiki.libsdl.org/SDL3/SDL_SaveBMP)
+  ///
+  /// {@category surface}
+  bool saveBmp(String file) => sdlSaveBmp(this, file);
+}

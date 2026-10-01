@@ -1,5 +1,5 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-part of '../sdl.dart';
+part of '../sdl_main.dart';
 
 ///
 /// Circumvent failure of SDL_Init() when not using SDL_main() as an entry
@@ -201,12 +201,16 @@ int sdlEnterAppMainCallbacks(
 bool sdlRegisterApp(String? name, int style, Pointer<Void> hInst) {
   final sdlRegisterAppLookupFunction = _libSdl
       .lookupFunction<
-        Bool Function(Pointer<Utf8> name, Uint32 style, Pointer<Void> hInst),
-        bool Function(Pointer<Utf8> name, int style, Pointer<Void> hInst)
+        Bool Function(
+          Pointer<ffi.Utf8> name,
+          Uint32 style,
+          Pointer<Void> hInst,
+        ),
+        bool Function(Pointer<ffi.Utf8> name, int style, Pointer<Void> hInst)
       >('SDL_RegisterApp');
   final namePointer = name != null ? name.toNativeUtf8() : nullptr;
   final result = sdlRegisterAppLookupFunction(namePointer, style, hInst);
-  calloc.free(namePointer);
+  ffi.calloc.free(namePointer);
   return result;
 }
 

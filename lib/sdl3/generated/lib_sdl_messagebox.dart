@@ -1,5 +1,5 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-part of '../sdl.dart';
+part of '../sdl_messagebox.dart';
 
 ///
 /// Create a modal message box.
@@ -123,14 +123,14 @@ bool sdlShowSimpleMessageBox(
       .lookupFunction<
         Bool Function(
           Uint32 flags,
-          Pointer<Utf8> title,
-          Pointer<Utf8> message,
+          Pointer<ffi.Utf8> title,
+          Pointer<ffi.Utf8> message,
           Pointer<SdlWindow> window,
         ),
         bool Function(
           int flags,
-          Pointer<Utf8> title,
-          Pointer<Utf8> message,
+          Pointer<ffi.Utf8> title,
+          Pointer<ffi.Utf8> message,
           Pointer<SdlWindow> window,
         )
       >('SDL_ShowSimpleMessageBox');
@@ -142,7 +142,7 @@ bool sdlShowSimpleMessageBox(
     messagePointer,
     window,
   );
-  calloc
+  ffi.calloc
     ..free(titlePointer)
     ..free(messagePointer);
   return result;

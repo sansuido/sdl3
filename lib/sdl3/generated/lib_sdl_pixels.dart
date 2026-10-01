@@ -1,5 +1,5 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-part of '../sdl.dart';
+part of '../sdl_pixels.dart';
 
 ///
 /// Get the human readable name of a pixel format.
@@ -23,8 +23,8 @@ part of '../sdl.dart';
 String? sdlGetPixelFormatName(int format) {
   final sdlGetPixelFormatNameLookupFunction = _libSdl
       .lookupFunction<
-        Pointer<Utf8> Function(Int32 format),
-        Pointer<Utf8> Function(int format)
+        Pointer<ffi.Utf8> Function(Int32 format),
+        Pointer<ffi.Utf8> Function(int format)
       >('SDL_GetPixelFormatName');
   final result = sdlGetPixelFormatNameLookupFunction(format);
   if (result == nullptr) {
@@ -185,6 +185,9 @@ Pointer<SdlPixelFormatDetails> sdlGetPixelFormatDetails(int format) {
 
 ///
 /// Create a palette structure with the specified number of color entries.
+///
+/// If `ncolors` is larger than the palette's size - `firstcolor`, it is
+/// truncated to the amount that will fit.
 ///
 /// The palette entries are initialized to white.
 ///

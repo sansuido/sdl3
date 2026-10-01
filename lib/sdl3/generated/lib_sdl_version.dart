@@ -1,5 +1,5 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-part of '../sdl.dart';
+part of '../sdl_version.dart';
 
 ///
 /// Get the version of SDL that is linked against your program.
@@ -70,9 +70,10 @@ int sdlGetVersion() {
 /// {@category version}
 String? sdlGetRevision() {
   final sdlGetRevisionLookupFunction = _libSdl
-      .lookupFunction<Pointer<Utf8> Function(), Pointer<Utf8> Function()>(
-        'SDL_GetRevision',
-      );
+      .lookupFunction<
+        Pointer<ffi.Utf8> Function(),
+        Pointer<ffi.Utf8> Function()
+      >('SDL_GetRevision');
   final result = sdlGetRevisionLookupFunction();
   if (result == nullptr) {
     return null;

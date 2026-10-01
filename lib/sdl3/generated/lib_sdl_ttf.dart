@@ -191,12 +191,12 @@ bool ttfInit() {
 Pointer<TtfFont> ttfOpenFont(String? file, double ptsize) {
   final ttfOpenFontLookupFunction = _libTtf
       .lookupFunction<
-        Pointer<TtfFont> Function(Pointer<Utf8> file, Float ptsize),
-        Pointer<TtfFont> Function(Pointer<Utf8> file, double ptsize)
+        Pointer<TtfFont> Function(Pointer<ffi.Utf8> file, Float ptsize),
+        Pointer<TtfFont> Function(Pointer<ffi.Utf8> file, double ptsize)
       >('TTF_OpenFont');
   final filePointer = file != null ? file.toNativeUtf8() : nullptr;
   final result = ttfOpenFontLookupFunction(filePointer, ptsize);
-  calloc.free(filePointer);
+  ffi.calloc.free(filePointer);
   return result;
 }
 
@@ -1402,8 +1402,8 @@ bool ttfFontIsScalable(Pointer<TtfFont> font) {
 String? ttfGetFontFamilyName(Pointer<TtfFont> font) {
   final ttfGetFontFamilyNameLookupFunction = _libTtf
       .lookupFunction<
-        Pointer<Utf8> Function(Pointer<TtfFont> font),
-        Pointer<Utf8> Function(Pointer<TtfFont> font)
+        Pointer<ffi.Utf8> Function(Pointer<TtfFont> font),
+        Pointer<ffi.Utf8> Function(Pointer<TtfFont> font)
       >('TTF_GetFontFamilyName');
   final result = ttfGetFontFamilyNameLookupFunction(font);
   if (result == nullptr) {
@@ -1439,8 +1439,8 @@ String? ttfGetFontFamilyName(Pointer<TtfFont> font) {
 String? ttfGetFontStyleName(Pointer<TtfFont> font) {
   final ttfGetFontStyleNameLookupFunction = _libTtf
       .lookupFunction<
-        Pointer<Utf8> Function(Pointer<TtfFont> font),
-        Pointer<Utf8> Function(Pointer<TtfFont> font)
+        Pointer<ffi.Utf8> Function(Pointer<TtfFont> font),
+        Pointer<ffi.Utf8> Function(Pointer<TtfFont> font)
       >('TTF_GetFontStyleName');
   final result = ttfGetFontStyleNameLookupFunction(font);
   if (result == nullptr) {
@@ -1607,12 +1607,12 @@ int ttfGetFontCharSpacing(Pointer<TtfFont> font) {
 int ttfStringToTag(String? string) {
   final ttfStringToTagLookupFunction = _libTtf
       .lookupFunction<
-        Uint32 Function(Pointer<Utf8> string),
-        int Function(Pointer<Utf8> string)
+        Uint32 Function(Pointer<ffi.Utf8> string),
+        int Function(Pointer<ffi.Utf8> string)
       >('TTF_StringToTag');
   final stringPointer = string != null ? string.toNativeUtf8() : nullptr;
   final result = ttfStringToTagLookupFunction(stringPointer);
-  calloc.free(stringPointer);
+  ffi.calloc.free(stringPointer);
   return result;
 }
 
@@ -1779,14 +1779,14 @@ int ttfGetGlyphScript(int ch) {
 bool ttfSetFontLanguage(Pointer<TtfFont> font, String? languageBcp47) {
   final ttfSetFontLanguageLookupFunction = _libTtf
       .lookupFunction<
-        Bool Function(Pointer<TtfFont> font, Pointer<Utf8> languageBcp47),
-        bool Function(Pointer<TtfFont> font, Pointer<Utf8> languageBcp47)
+        Bool Function(Pointer<TtfFont> font, Pointer<ffi.Utf8> languageBcp47),
+        bool Function(Pointer<TtfFont> font, Pointer<ffi.Utf8> languageBcp47)
       >('TTF_SetFontLanguage');
   final languageBcp47Pointer = languageBcp47 != null
       ? languageBcp47.toNativeUtf8()
       : nullptr;
   final result = ttfSetFontLanguageLookupFunction(font, languageBcp47Pointer);
-  calloc.free(languageBcp47Pointer);
+  ffi.calloc.free(languageBcp47Pointer);
   return result;
 }
 
@@ -2074,14 +2074,14 @@ bool ttfGetStringSize(
       .lookupFunction<
         Bool Function(
           Pointer<TtfFont> font,
-          Pointer<Utf8> text,
+          Pointer<ffi.Utf8> text,
           Size length,
           Pointer<Int32> w,
           Pointer<Int32> h,
         ),
         bool Function(
           Pointer<TtfFont> font,
-          Pointer<Utf8> text,
+          Pointer<ffi.Utf8> text,
           int length,
           Pointer<Int32> w,
           Pointer<Int32> h,
@@ -2096,7 +2096,7 @@ bool ttfGetStringSize(
     w,
     h,
   );
-  calloc.free(textPointer);
+  ffi.calloc.free(textPointer);
   return result;
 }
 
@@ -2145,7 +2145,7 @@ bool ttfGetStringSizeWrapped(
       .lookupFunction<
         Bool Function(
           Pointer<TtfFont> font,
-          Pointer<Utf8> text,
+          Pointer<ffi.Utf8> text,
           Size length,
           Int32 wrapWidth,
           Pointer<Int32> w,
@@ -2153,7 +2153,7 @@ bool ttfGetStringSizeWrapped(
         ),
         bool Function(
           Pointer<TtfFont> font,
-          Pointer<Utf8> text,
+          Pointer<ffi.Utf8> text,
           int length,
           int wrapWidth,
           Pointer<Int32> w,
@@ -2170,7 +2170,7 @@ bool ttfGetStringSizeWrapped(
     w,
     h,
   );
-  calloc.free(textPointer);
+  ffi.calloc.free(textPointer);
   return result;
 }
 
@@ -2219,7 +2219,7 @@ bool ttfMeasureString(
       .lookupFunction<
         Bool Function(
           Pointer<TtfFont> font,
-          Pointer<Utf8> text,
+          Pointer<ffi.Utf8> text,
           Size length,
           Int32 maxWidth,
           Pointer<Int32> measuredWidth,
@@ -2227,7 +2227,7 @@ bool ttfMeasureString(
         ),
         bool Function(
           Pointer<TtfFont> font,
-          Pointer<Utf8> text,
+          Pointer<ffi.Utf8> text,
           int length,
           int maxWidth,
           Pointer<Int32> measuredWidth,
@@ -2244,7 +2244,7 @@ bool ttfMeasureString(
     measuredWidth,
     measuredLength,
   );
-  calloc.free(textPointer);
+  ffi.calloc.free(textPointer);
   return result;
 }
 
@@ -2300,13 +2300,13 @@ Pointer<SdlSurface> ttfRenderTextSolid(
       .lookupFunction<
         Pointer<SdlSurface> Function(
           Pointer<TtfFont> font,
-          Pointer<Utf8> text,
+          Pointer<ffi.Utf8> text,
           Size length,
           SdlColor fg,
         ),
         Pointer<SdlSurface> Function(
           Pointer<TtfFont> font,
-          Pointer<Utf8> text,
+          Pointer<ffi.Utf8> text,
           int length,
           SdlColor fg,
         )
@@ -2319,7 +2319,7 @@ Pointer<SdlSurface> ttfRenderTextSolid(
     length,
     fg,
   );
-  calloc.free(textPointer);
+  ffi.calloc.free(textPointer);
   return result;
 }
 
@@ -2375,14 +2375,14 @@ Pointer<SdlSurface> ttfRenderTextSolidWrapped(
       .lookupFunction<
         Pointer<SdlSurface> Function(
           Pointer<TtfFont> font,
-          Pointer<Utf8> text,
+          Pointer<ffi.Utf8> text,
           Size length,
           SdlColor fg,
           Int32 wrapLength,
         ),
         Pointer<SdlSurface> Function(
           Pointer<TtfFont> font,
-          Pointer<Utf8> text,
+          Pointer<ffi.Utf8> text,
           int length,
           SdlColor fg,
           int wrapLength,
@@ -2397,7 +2397,7 @@ Pointer<SdlSurface> ttfRenderTextSolidWrapped(
     fg,
     wrapLength,
   );
-  calloc.free(textPointer);
+  ffi.calloc.free(textPointer);
   return result;
 }
 
@@ -2507,14 +2507,14 @@ Pointer<SdlSurface> ttfRenderTextShaded(
       .lookupFunction<
         Pointer<SdlSurface> Function(
           Pointer<TtfFont> font,
-          Pointer<Utf8> text,
+          Pointer<ffi.Utf8> text,
           Size length,
           SdlColor fg,
           SdlColor bg,
         ),
         Pointer<SdlSurface> Function(
           Pointer<TtfFont> font,
-          Pointer<Utf8> text,
+          Pointer<ffi.Utf8> text,
           int length,
           SdlColor fg,
           SdlColor bg,
@@ -2529,7 +2529,7 @@ Pointer<SdlSurface> ttfRenderTextShaded(
     fg,
     bg,
   );
-  calloc.free(textPointer);
+  ffi.calloc.free(textPointer);
   return result;
 }
 
@@ -2588,7 +2588,7 @@ Pointer<SdlSurface> ttfRenderTextShadedWrapped(
       .lookupFunction<
         Pointer<SdlSurface> Function(
           Pointer<TtfFont> font,
-          Pointer<Utf8> text,
+          Pointer<ffi.Utf8> text,
           Size length,
           SdlColor fg,
           SdlColor bg,
@@ -2596,7 +2596,7 @@ Pointer<SdlSurface> ttfRenderTextShadedWrapped(
         ),
         Pointer<SdlSurface> Function(
           Pointer<TtfFont> font,
-          Pointer<Utf8> text,
+          Pointer<ffi.Utf8> text,
           int length,
           SdlColor fg,
           SdlColor bg,
@@ -2613,7 +2613,7 @@ Pointer<SdlSurface> ttfRenderTextShadedWrapped(
     bg,
     wrapWidth,
   );
-  calloc.free(textPointer);
+  ffi.calloc.free(textPointer);
   return result;
 }
 
@@ -2729,13 +2729,13 @@ Pointer<SdlSurface> ttfRenderTextBlended(
       .lookupFunction<
         Pointer<SdlSurface> Function(
           Pointer<TtfFont> font,
-          Pointer<Utf8> text,
+          Pointer<ffi.Utf8> text,
           Size length,
           SdlColor fg,
         ),
         Pointer<SdlSurface> Function(
           Pointer<TtfFont> font,
-          Pointer<Utf8> text,
+          Pointer<ffi.Utf8> text,
           int length,
           SdlColor fg,
         )
@@ -2748,7 +2748,7 @@ Pointer<SdlSurface> ttfRenderTextBlended(
     length,
     fg,
   );
-  calloc.free(textPointer);
+  ffi.calloc.free(textPointer);
   return result;
 }
 
@@ -2804,14 +2804,14 @@ Pointer<SdlSurface> ttfRenderTextBlendedWrapped(
       .lookupFunction<
         Pointer<SdlSurface> Function(
           Pointer<TtfFont> font,
-          Pointer<Utf8> text,
+          Pointer<ffi.Utf8> text,
           Size length,
           SdlColor fg,
           Int32 wrapWidth,
         ),
         Pointer<SdlSurface> Function(
           Pointer<TtfFont> font,
-          Pointer<Utf8> text,
+          Pointer<ffi.Utf8> text,
           int length,
           SdlColor fg,
           int wrapWidth,
@@ -2826,7 +2826,7 @@ Pointer<SdlSurface> ttfRenderTextBlendedWrapped(
     fg,
     wrapWidth,
   );
-  calloc.free(textPointer);
+  ffi.calloc.free(textPointer);
   return result;
 }
 
@@ -2935,14 +2935,14 @@ Pointer<SdlSurface> ttfRenderTextLcd(
       .lookupFunction<
         Pointer<SdlSurface> Function(
           Pointer<TtfFont> font,
-          Pointer<Utf8> text,
+          Pointer<ffi.Utf8> text,
           Size length,
           SdlColor fg,
           SdlColor bg,
         ),
         Pointer<SdlSurface> Function(
           Pointer<TtfFont> font,
-          Pointer<Utf8> text,
+          Pointer<ffi.Utf8> text,
           int length,
           SdlColor fg,
           SdlColor bg,
@@ -2957,7 +2957,7 @@ Pointer<SdlSurface> ttfRenderTextLcd(
     fg,
     bg,
   );
-  calloc.free(textPointer);
+  ffi.calloc.free(textPointer);
   return result;
 }
 
@@ -3016,7 +3016,7 @@ Pointer<SdlSurface> ttfRenderTextLcdWrapped(
       .lookupFunction<
         Pointer<SdlSurface> Function(
           Pointer<TtfFont> font,
-          Pointer<Utf8> text,
+          Pointer<ffi.Utf8> text,
           Size length,
           SdlColor fg,
           SdlColor bg,
@@ -3024,7 +3024,7 @@ Pointer<SdlSurface> ttfRenderTextLcdWrapped(
         ),
         Pointer<SdlSurface> Function(
           Pointer<TtfFont> font,
-          Pointer<Utf8> text,
+          Pointer<ffi.Utf8> text,
           int length,
           SdlColor fg,
           SdlColor bg,
@@ -3041,7 +3041,7 @@ Pointer<SdlSurface> ttfRenderTextLcdWrapped(
     bg,
     wrapWidth,
   );
-  calloc.free(textPointer);
+  ffi.calloc.free(textPointer);
   return result;
 }
 
@@ -3851,20 +3851,20 @@ Pointer<TtfText> ttfCreateText(
         Pointer<TtfText> Function(
           Pointer<TtfTextEngine> engine,
           Pointer<TtfFont> font,
-          Pointer<Utf8> text,
+          Pointer<ffi.Utf8> text,
           Size length,
         ),
         Pointer<TtfText> Function(
           Pointer<TtfTextEngine> engine,
           Pointer<TtfFont> font,
-          Pointer<Utf8> text,
+          Pointer<ffi.Utf8> text,
           int length,
         )
       >('TTF_CreateText');
   final textPointer = text != null ? text.toNativeUtf8() : nullptr;
   final length = textPointer.length;
   final result = ttfCreateTextLookupFunction(engine, font, textPointer, length);
-  calloc.free(textPointer);
+  ffi.calloc.free(textPointer);
   return result;
 }
 
@@ -4633,13 +4633,21 @@ bool ttfTextWrapWhitespaceVisible(Pointer<TtfText> text) {
 bool ttfSetTextString(Pointer<TtfText> text, String? string) {
   final ttfSetTextStringLookupFunction = _libTtf
       .lookupFunction<
-        Bool Function(Pointer<TtfText> text, Pointer<Utf8> string, Size length),
-        bool Function(Pointer<TtfText> text, Pointer<Utf8> string, int length)
+        Bool Function(
+          Pointer<TtfText> text,
+          Pointer<ffi.Utf8> string,
+          Size length,
+        ),
+        bool Function(
+          Pointer<TtfText> text,
+          Pointer<ffi.Utf8> string,
+          int length,
+        )
       >('TTF_SetTextString');
   final stringPointer = string != null ? string.toNativeUtf8() : nullptr;
   final length = stringPointer.length;
   final result = ttfSetTextStringLookupFunction(text, stringPointer, length);
-  calloc.free(stringPointer);
+  ffi.calloc.free(stringPointer);
   return result;
 }
 
@@ -4682,13 +4690,13 @@ bool ttfInsertTextString(Pointer<TtfText> text, int offset, String? string) {
         Bool Function(
           Pointer<TtfText> text,
           Int32 offset,
-          Pointer<Utf8> string,
+          Pointer<ffi.Utf8> string,
           Size length,
         ),
         bool Function(
           Pointer<TtfText> text,
           int offset,
-          Pointer<Utf8> string,
+          Pointer<ffi.Utf8> string,
           int length,
         )
       >('TTF_InsertTextString');
@@ -4700,7 +4708,7 @@ bool ttfInsertTextString(Pointer<TtfText> text, int offset, String? string) {
     stringPointer,
     length,
   );
-  calloc.free(stringPointer);
+  ffi.calloc.free(stringPointer);
   return result;
 }
 
@@ -4736,13 +4744,21 @@ bool ttfInsertTextString(Pointer<TtfText> text, int offset, String? string) {
 bool ttfAppendTextString(Pointer<TtfText> text, String? string) {
   final ttfAppendTextStringLookupFunction = _libTtf
       .lookupFunction<
-        Bool Function(Pointer<TtfText> text, Pointer<Utf8> string, Size length),
-        bool Function(Pointer<TtfText> text, Pointer<Utf8> string, int length)
+        Bool Function(
+          Pointer<TtfText> text,
+          Pointer<ffi.Utf8> string,
+          Size length,
+        ),
+        bool Function(
+          Pointer<TtfText> text,
+          Pointer<ffi.Utf8> string,
+          int length,
+        )
       >('TTF_AppendTextString');
   final stringPointer = string != null ? string.toNativeUtf8() : nullptr;
   final length = stringPointer.length;
   final result = ttfAppendTextStringLookupFunction(text, stringPointer, length);
-  calloc.free(stringPointer);
+  ffi.calloc.free(stringPointer);
   return result;
 }
 

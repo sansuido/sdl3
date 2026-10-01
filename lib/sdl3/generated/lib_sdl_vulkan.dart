@@ -1,5 +1,5 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-part of '../sdl.dart';
+part of '../sdl_vulkan.dart';
 
 ///
 /// Dynamically load the Vulkan loader library.
@@ -62,12 +62,12 @@ part of '../sdl.dart';
 bool sdlVulkanLoadLibrary(String? path) {
   final sdlVulkanLoadLibraryLookupFunction = _libSdl
       .lookupFunction<
-        Bool Function(Pointer<Utf8> path),
-        bool Function(Pointer<Utf8> path)
+        Bool Function(Pointer<ffi.Utf8> path),
+        bool Function(Pointer<ffi.Utf8> path)
       >('SDL_Vulkan_LoadLibrary');
   final pathPointer = path != null ? path.toNativeUtf8() : nullptr;
   final result = sdlVulkanLoadLibraryLookupFunction(pathPointer);
-  calloc.free(pathPointer);
+  ffi.calloc.free(pathPointer);
   return result;
 }
 

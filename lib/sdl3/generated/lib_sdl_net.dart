@@ -137,12 +137,12 @@ void netQuit() {
 Pointer<NetAddress> netResolveHostname(String? host) {
   final netResolveHostnameLookupFunction = _libNet
       .lookupFunction<
-        Pointer<NetAddress> Function(Pointer<Utf8> host),
-        Pointer<NetAddress> Function(Pointer<Utf8> host)
+        Pointer<NetAddress> Function(Pointer<ffi.Utf8> host),
+        Pointer<NetAddress> Function(Pointer<ffi.Utf8> host)
       >('NET_ResolveHostname');
   final hostPointer = host != null ? host.toNativeUtf8() : nullptr;
   final result = netResolveHostnameLookupFunction(hostPointer);
-  calloc.free(hostPointer);
+  ffi.calloc.free(hostPointer);
   return result;
 }
 
@@ -288,8 +288,8 @@ int netGetAddressStatus(Pointer<NetAddress> address) {
 String? netGetAddressString(Pointer<NetAddress> address) {
   final netGetAddressStringLookupFunction = _libNet
       .lookupFunction<
-        Pointer<Utf8> Function(Pointer<NetAddress> address),
-        Pointer<Utf8> Function(Pointer<NetAddress> address)
+        Pointer<ffi.Utf8> Function(Pointer<NetAddress> address),
+        Pointer<ffi.Utf8> Function(Pointer<NetAddress> address)
       >('NET_GetAddressString');
   final result = netGetAddressStringLookupFunction(address);
   if (result == nullptr) {

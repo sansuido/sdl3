@@ -1,5 +1,5 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-part of '../sdl.dart';
+part of '../sdl_hidapi.dart';
 
 ///
 /// Initialize the HIDAPI library.
@@ -236,12 +236,12 @@ Pointer<SdlHidDevice> sdlHidOpen(
 Pointer<SdlHidDevice> sdlHidOpenPath(String? path) {
   final sdlHidOpenPathLookupFunction = _libSdl
       .lookupFunction<
-        Pointer<SdlHidDevice> Function(Pointer<Utf8> path),
-        Pointer<SdlHidDevice> Function(Pointer<Utf8> path)
+        Pointer<SdlHidDevice> Function(Pointer<ffi.Utf8> path),
+        Pointer<SdlHidDevice> Function(Pointer<ffi.Utf8> path)
       >('SDL_hid_open_path');
   final pathPointer = path != null ? path.toNativeUtf8() : nullptr;
   final result = sdlHidOpenPathLookupFunction(pathPointer);
-  calloc.free(pathPointer);
+  ffi.calloc.free(pathPointer);
   return result;
 }
 

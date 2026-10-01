@@ -1,5 +1,5 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-part of '../sdl.dart';
+part of '../sdl_filesystem.dart';
 
 ///
 /// Get the directory where the application was run from.
@@ -55,9 +55,10 @@ part of '../sdl.dart';
 /// {@category filesystem}
 String? sdlGetBasePath() {
   final sdlGetBasePathLookupFunction = _libSdl
-      .lookupFunction<Pointer<Utf8> Function(), Pointer<Utf8> Function()>(
-        'SDL_GetBasePath',
-      );
+      .lookupFunction<
+        Pointer<ffi.Utf8> Function(),
+        Pointer<ffi.Utf8> Function()
+      >('SDL_GetBasePath');
   final result = sdlGetBasePathLookupFunction();
   if (result == nullptr) {
     return null;
@@ -137,13 +138,13 @@ String? sdlGetBasePath() {
 Pointer<Int8> sdlGetPrefPath(String? org, String? app) {
   final sdlGetPrefPathLookupFunction = _libSdl
       .lookupFunction<
-        Pointer<Int8> Function(Pointer<Utf8> org, Pointer<Utf8> app),
-        Pointer<Int8> Function(Pointer<Utf8> org, Pointer<Utf8> app)
+        Pointer<Int8> Function(Pointer<ffi.Utf8> org, Pointer<ffi.Utf8> app),
+        Pointer<Int8> Function(Pointer<ffi.Utf8> org, Pointer<ffi.Utf8> app)
       >('SDL_GetPrefPath');
   final orgPointer = org != null ? org.toNativeUtf8() : nullptr;
   final appPointer = app != null ? app.toNativeUtf8() : nullptr;
   final result = sdlGetPrefPathLookupFunction(orgPointer, appPointer);
-  calloc
+  ffi.calloc
     ..free(orgPointer)
     ..free(appPointer);
   return result;
@@ -185,8 +186,8 @@ Pointer<Int8> sdlGetPrefPath(String? org, String? app) {
 String? sdlGetUserFolder(int folder) {
   final sdlGetUserFolderLookupFunction = _libSdl
       .lookupFunction<
-        Pointer<Utf8> Function(Int32 folder),
-        Pointer<Utf8> Function(int folder)
+        Pointer<ffi.Utf8> Function(Int32 folder),
+        Pointer<ffi.Utf8> Function(int folder)
       >('SDL_GetUserFolder');
   final result = sdlGetUserFolderLookupFunction(folder);
   if (result == nullptr) {
@@ -222,12 +223,12 @@ String? sdlGetUserFolder(int folder) {
 bool sdlCreateDirectory(String? path) {
   final sdlCreateDirectoryLookupFunction = _libSdl
       .lookupFunction<
-        Bool Function(Pointer<Utf8> path),
-        bool Function(Pointer<Utf8> path)
+        Bool Function(Pointer<ffi.Utf8> path),
+        bool Function(Pointer<ffi.Utf8> path)
       >('SDL_CreateDirectory');
   final pathPointer = path != null ? path.toNativeUtf8() : nullptr;
   final result = sdlCreateDirectoryLookupFunction(pathPointer);
-  calloc.free(pathPointer);
+  ffi.calloc.free(pathPointer);
   return result;
 }
 
@@ -270,12 +271,12 @@ bool sdlEnumerateDirectory(
   final sdlEnumerateDirectoryLookupFunction = _libSdl
       .lookupFunction<
         Bool Function(
-          Pointer<Utf8> path,
+          Pointer<ffi.Utf8> path,
           Pointer<NativeFunction<SdlEnumerateDirectoryCallback>> callback,
           Pointer<Void> userdata,
         ),
         bool Function(
-          Pointer<Utf8> path,
+          Pointer<ffi.Utf8> path,
           Pointer<NativeFunction<SdlEnumerateDirectoryCallback>> callback,
           Pointer<Void> userdata,
         )
@@ -286,7 +287,7 @@ bool sdlEnumerateDirectory(
     callback,
     userdata,
   );
-  calloc.free(pathPointer);
+  ffi.calloc.free(pathPointer);
   return result;
 }
 
@@ -315,12 +316,12 @@ bool sdlEnumerateDirectory(
 bool sdlRemovePath(String? path) {
   final sdlRemovePathLookupFunction = _libSdl
       .lookupFunction<
-        Bool Function(Pointer<Utf8> path),
-        bool Function(Pointer<Utf8> path)
+        Bool Function(Pointer<ffi.Utf8> path),
+        bool Function(Pointer<ffi.Utf8> path)
       >('SDL_RemovePath');
   final pathPointer = path != null ? path.toNativeUtf8() : nullptr;
   final result = sdlRemovePathLookupFunction(pathPointer);
-  calloc.free(pathPointer);
+  ffi.calloc.free(pathPointer);
   return result;
 }
 
@@ -358,13 +359,13 @@ bool sdlRemovePath(String? path) {
 bool sdlRenamePath(String? oldpath, String? newpath) {
   final sdlRenamePathLookupFunction = _libSdl
       .lookupFunction<
-        Bool Function(Pointer<Utf8> oldpath, Pointer<Utf8> newpath),
-        bool Function(Pointer<Utf8> oldpath, Pointer<Utf8> newpath)
+        Bool Function(Pointer<ffi.Utf8> oldpath, Pointer<ffi.Utf8> newpath),
+        bool Function(Pointer<ffi.Utf8> oldpath, Pointer<ffi.Utf8> newpath)
       >('SDL_RenamePath');
   final oldpathPointer = oldpath != null ? oldpath.toNativeUtf8() : nullptr;
   final newpathPointer = newpath != null ? newpath.toNativeUtf8() : nullptr;
   final result = sdlRenamePathLookupFunction(oldpathPointer, newpathPointer);
-  calloc
+  ffi.calloc
     ..free(oldpathPointer)
     ..free(newpathPointer);
   return result;
@@ -423,13 +424,13 @@ bool sdlRenamePath(String? oldpath, String? newpath) {
 bool sdlCopyFile(String? oldpath, String? newpath) {
   final sdlCopyFileLookupFunction = _libSdl
       .lookupFunction<
-        Bool Function(Pointer<Utf8> oldpath, Pointer<Utf8> newpath),
-        bool Function(Pointer<Utf8> oldpath, Pointer<Utf8> newpath)
+        Bool Function(Pointer<ffi.Utf8> oldpath, Pointer<ffi.Utf8> newpath),
+        bool Function(Pointer<ffi.Utf8> oldpath, Pointer<ffi.Utf8> newpath)
       >('SDL_CopyFile');
   final oldpathPointer = oldpath != null ? oldpath.toNativeUtf8() : nullptr;
   final newpathPointer = newpath != null ? newpath.toNativeUtf8() : nullptr;
   final result = sdlCopyFileLookupFunction(oldpathPointer, newpathPointer);
-  calloc
+  ffi.calloc
     ..free(oldpathPointer)
     ..free(newpathPointer);
   return result;
@@ -463,12 +464,12 @@ bool sdlCopyFile(String? oldpath, String? newpath) {
 bool sdlGetPathInfo(String? path, Pointer<SdlPathInfo> info) {
   final sdlGetPathInfoLookupFunction = _libSdl
       .lookupFunction<
-        Bool Function(Pointer<Utf8> path, Pointer<SdlPathInfo> info),
-        bool Function(Pointer<Utf8> path, Pointer<SdlPathInfo> info)
+        Bool Function(Pointer<ffi.Utf8> path, Pointer<SdlPathInfo> info),
+        bool Function(Pointer<ffi.Utf8> path, Pointer<SdlPathInfo> info)
       >('SDL_GetPathInfo');
   final pathPointer = path != null ? path.toNativeUtf8() : nullptr;
   final result = sdlGetPathInfoLookupFunction(pathPointer, info);
-  calloc.free(pathPointer);
+  ffi.calloc.free(pathPointer);
   return result;
 }
 
@@ -520,14 +521,14 @@ Pointer<Pointer<Int8>> sdlGlobDirectory(
   final sdlGlobDirectoryLookupFunction = _libSdl
       .lookupFunction<
         Pointer<Pointer<Int8>> Function(
-          Pointer<Utf8> path,
-          Pointer<Utf8> pattern,
+          Pointer<ffi.Utf8> path,
+          Pointer<ffi.Utf8> pattern,
           Uint32 flags,
           Pointer<Int32> count,
         ),
         Pointer<Pointer<Int8>> Function(
-          Pointer<Utf8> path,
-          Pointer<Utf8> pattern,
+          Pointer<ffi.Utf8> path,
+          Pointer<ffi.Utf8> pattern,
           int flags,
           Pointer<Int32> count,
         )
@@ -540,7 +541,7 @@ Pointer<Pointer<Int8>> sdlGlobDirectory(
     flags,
     count,
   );
-  calloc
+  ffi.calloc
     ..free(pathPointer)
     ..free(patternPointer);
   return result;
